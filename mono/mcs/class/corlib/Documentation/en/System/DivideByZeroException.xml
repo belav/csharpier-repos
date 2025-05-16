@@ -36,8 +36,7 @@
     <example>
       <para
         >The following example demonstrates an error that causes
-      a <see
-         cref="T:System.DivideByZeroException" />
+      a <see cref="T:System.DivideByZeroException" />
 
         
 
@@ -67,13 +66,11 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Trying to divide an integer or decimal number by zero throws a <see
-         cref="T:System.DivideByZeroException" />
+        >Trying to divide an integer or decimal number by zero throws a <see cref="T:System.DivideByZeroException" />
 
         
 
-         exception. Dividing a floating-point value by zero doesn't throw an exception; it results in positive infinity, negative infinity, or not a number (NaN), according to the rules of IEEE 754 arithmetic. Because the following example uses floating-point division rather than integer division, the operation does not throw a <see
-         cref="T:System.DivideByZeroException" />
+         exception. Dividing a floating-point value by zero doesn't throw an exception; it results in positive infinity, negative infinity, or not a number (NaN), according to the rules of IEEE 754 arithmetic. Because the following example uses floating-point division rather than integer division, the operation does not throw a <see cref="T:System.DivideByZeroException" />
 
         
 
@@ -81,21 +78,18 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
       >
       <para>code reference: System.DivideByZeroException.Class#2</para>
       <para
-        >For more information, see <see
-         cref="T:System.Single" />
+        >For more information, see <see cref="T:System.Single" />
 
         
 
-         and <see
-         cref="T:System.Double" />
+         and <see cref="T:System.Double" />
 
         
 
         .</para
       >
       <para
-        >The following Microsoft intermediate language (MSIL) instructions throw <see
-         cref="T:System.DivideByZeroException" />
+        >The following Microsoft intermediate language (MSIL) instructions throw <see cref="T:System.DivideByZeroException" />
 
         
 
@@ -123,13 +117,11 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
          uses the HRESULT COR_E_DIVIDEBYZERO, which has the value 0x80020012.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.DivideByZeroException" />
+        >For a list of initial property values for an instance of <see cref="T:System.DivideByZeroException" />
 
         
 
-        , see the <see
-         cref="M:System.DivideByZeroException.#ctor" />
+        , see the <see cref="M:System.DivideByZeroException.#ctor" />
 
         
 
@@ -164,16 +156,14 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Exception.Message" />
+            >This constructor initializes the <see cref="P:System.Exception.Message" />
 
             
 
              property of the new instance to a system-supplied message that describes the error, such as "Attempted to divide by zero." This message takes into account the current system culture.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.DivideByZeroException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.DivideByZeroException" />
 
             
 
@@ -215,8 +205,7 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DivideByZeroException" />
+            >Initializes a new instance of the <see cref="T:System.DivideByZeroException" />
 
             
 
@@ -250,16 +239,14 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The content of <paramref
-             name="message" />
+            >The content of <paramref name="message" />
 
             
 
              is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.DivideByZeroException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.DivideByZeroException" />
 
             
 
@@ -301,8 +288,7 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DivideByZeroException" />
+            >Initializes a new instance of the <see cref="T:System.DivideByZeroException" />
 
             
 
@@ -310,12 +296,15 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -351,8 +340,7 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DivideByZeroException" />
+            >Initializes a new instance of the <see cref="T:System.DivideByZeroException" />
 
             
 
@@ -360,14 +348,22 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -403,26 +399,22 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.DivideByZeroException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.DivideByZeroException" />
 
             
 
@@ -464,8 +456,7 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DivideByZeroException" />
+            >Initializes a new instance of the <see cref="T:System.DivideByZeroException" />
 
             
 
@@ -473,19 +464,26 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 

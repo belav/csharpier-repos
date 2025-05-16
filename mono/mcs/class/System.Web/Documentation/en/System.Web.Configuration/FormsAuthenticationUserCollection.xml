@@ -25,31 +25,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.FormsAuthenticationCredentials" />
+        >The <see cref="T:System.Web.Configuration.FormsAuthenticationCredentials" />
 
         
 
-         uses the <see
-         cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
+         uses the <see cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
 
         
 
          to programmatically access and modify the users element of the credentials section in the forms section of the authorization configuration section. </para
       >
       <para
-        >This type is part of a group that includes the <see
-         cref="T:System.Web.Configuration.FormsAuthenticationConfiguration" />
+        >This type is part of a group that includes the <see cref="T:System.Web.Configuration.FormsAuthenticationConfiguration" />
 
         
 
-        , the <see
-         cref="T:System.Web.Configuration.FormsAuthenticationCredentials" />
+        , the <see cref="T:System.Web.Configuration.FormsAuthenticationCredentials" />
 
         
 
-        , and the <see
-         cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+        , and the <see cref="T:System.Web.Configuration.FormsAuthenticationUser" />
 
         
 
@@ -60,8 +55,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+        >Represents a collection of <see cref="T:System.Web.Configuration.FormsAuthenticationUser" />
 
         
 
@@ -80,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
 
             
 
@@ -110,8 +103,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection must not contain a <see
-             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+            >The collection must not contain a <see cref="T:System.Web.Configuration.FormsAuthenticationUser" />
 
             
 
@@ -121,8 +113,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+            >Adds a <see cref="T:System.Web.Configuration.FormsAuthenticationUser" />
 
             
 
@@ -130,12 +121,15 @@
           >
         </summary>
         <param name="user">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+          The <see cref="T:System.Web.Configuration.FormsAuthenticationUser" />
 
           
 
@@ -158,8 +152,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this method to access the <see
-             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+            >You can use this method to access the <see cref="T:System.Web.Configuration.FormsAuthenticationUser" />
 
             
 
@@ -191,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see
-             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+            >Removes all <see cref="T:System.Web.Configuration.FormsAuthenticationUser" />
 
             
 
@@ -220,8 +212,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type of the <see
-             cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
+            >Gets the type of the <see cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
 
             
 
@@ -287,8 +278,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+            >Gets the <see cref="T:System.Web.Configuration.FormsAuthenticationUser" />
 
             
 
@@ -298,8 +288,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+            >A <see cref="T:System.Web.Configuration.FormsAuthenticationUser" />
 
             
 
@@ -307,7 +296,11 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -336,8 +329,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+            >Gets the <see cref="T:System.Web.Configuration.FormsAuthenticationUser" />
 
             
 
@@ -347,8 +339,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+            >A <see cref="T:System.Web.Configuration.FormsAuthenticationUser" />
 
             
 
@@ -356,7 +347,11 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -405,8 +400,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the key at the specified <see
-             cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
+            >Gets the key at the specified <see cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
 
             
 
@@ -416,8 +410,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The key at the specified index of the <see
-             cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
+            >The key at the specified index of the <see cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
 
             
 
@@ -425,7 +418,11 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -519,8 +516,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+            >Removes a <see cref="T:System.Web.Configuration.FormsAuthenticationUser" />
 
             
 
@@ -528,12 +524,15 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+          The name of the <see cref="T:System.Web.Configuration.FormsAuthenticationUser" />
 
           
 
@@ -562,8 +561,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+            >Removes a <see cref="T:System.Web.Configuration.FormsAuthenticationUser" />
 
             
 
@@ -571,12 +569,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the <see
-           cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+          The index of the <see cref="T:System.Web.Configuration.FormsAuthenticationUser" />
 
           
 
@@ -605,8 +606,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Modifies the specified <see
-             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+            >Modifies the specified <see cref="T:System.Web.Configuration.FormsAuthenticationUser" />
 
             
 
@@ -614,12 +614,15 @@
           >
         </summary>
         <param name="user">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
+          The <see cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
 
           
 

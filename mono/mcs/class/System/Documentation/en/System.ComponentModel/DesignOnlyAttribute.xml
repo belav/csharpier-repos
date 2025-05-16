@@ -31,32 +31,28 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Members marked with the <see
-         cref="T:System.ComponentModel.DesignOnlyAttribute" />
+        >Members marked with the <see cref="T:System.ComponentModel.DesignOnlyAttribute" />
 
         
 
          set to true can be set only at design time. Typically, these properties exist only at design time and do not correspond to a real property on the object at run time.</para
       >
       <para
-        >Members that either have no attribute or are marked with the <see
-         cref="T:System.ComponentModel.DesignOnlyAttribute" />
+        >Members that either have no attribute or are marked with the <see cref="T:System.ComponentModel.DesignOnlyAttribute" />
 
         
 
          set to false can be set during run time. The default is false.</para
       >
       <para
-        >A property with the <see
-         cref="T:System.ComponentModel.DesignOnlyAttribute" />
+        >A property with the <see cref="T:System.ComponentModel.DesignOnlyAttribute" />
 
         
 
          set to true has its value serialized to the .resx file instead of the InitializeComponent method.</para
       >
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -93,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DesignOnlyAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DesignOnlyAttribute" />
 
             
 
@@ -127,13 +122,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the default value for the <see
-             cref="T:System.ComponentModel.DesignOnlyAttribute" />
+            >Specifies the default value for the <see cref="T:System.ComponentModel.DesignOnlyAttribute" />
 
             
 
-            , which is <see
-             cref="F:System.ComponentModel.DesignOnlyAttribute.No" />
+            , which is <see cref="F:System.ComponentModel.DesignOnlyAttribute.No" />
 
             
 
@@ -165,8 +158,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns whether the value of the given object is equal to the current <see
-             cref="T:System.ComponentModel.DesignOnlyAttribute" />
+            >Returns whether the value of the given object is equal to the current <see cref="T:System.ComponentModel.DesignOnlyAttribute" />
 
             
 
@@ -178,7 +170,11 @@
           <para>true if the value of the given object is equal to that of the current; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -280,8 +276,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.ComponentModel.DesignOnlyAttribute.No" />
+            >The <see cref="F:System.ComponentModel.DesignOnlyAttribute.No" />
 
             
 

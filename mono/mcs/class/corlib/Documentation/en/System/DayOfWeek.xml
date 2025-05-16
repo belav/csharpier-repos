@@ -25,54 +25,45 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.DayOfWeek" />
+        >The <see cref="T:System.DayOfWeek" />
 
         
 
-         enumeration represents the day of the week in calendars that have seven days per week. The value of the constants in this enumeration ranges from <see
-         cref="F:System.DayOfWeek.Sunday" />
+         enumeration represents the day of the week in calendars that have seven days per week. The value of the constants in this enumeration ranges from <see cref="F:System.DayOfWeek.Sunday" />
 
         
 
-         to <see
-         cref="F:System.DayOfWeek.Saturday" />
+         to <see cref="F:System.DayOfWeek.Saturday" />
 
         
 
-        . If cast to an integer, its value ranges from zero (which indicates <see
-         cref="F:System.DayOfWeek.Sunday" />
+        . If cast to an integer, its value ranges from zero (which indicates <see cref="F:System.DayOfWeek.Sunday" />
 
         
 
-        ) to six (which indicates <see
-         cref="F:System.DayOfWeek.Saturday" />
+        ) to six (which indicates <see cref="F:System.DayOfWeek.Saturday" />
 
         
 
         ). </para
       >
       <para
-        >This enumeration is useful when it is desirable to have a strongly typed specification of the day of the week. For example, this enumeration is the type of the property value for the <see
-         cref="P:System.DateTime.DayOfWeek" />
+        >This enumeration is useful when it is desirable to have a strongly typed specification of the day of the week. For example, this enumeration is the type of the property value for the <see cref="P:System.DateTime.DayOfWeek" />
 
         
 
          property.</para
       >
       <para
-        >The members of the <see
-         cref="T:System.DayOfWeek" />
+        >The members of the <see cref="T:System.DayOfWeek" />
 
         
 
-         enumeration are not localized. To return the localized name of the day of the week, call the <see
-         cref="M:System.DateTime.ToString(System.String)" />
+         enumeration are not localized. To return the localized name of the day of the week, call the <see cref="M:System.DateTime.ToString(System.String)" />
 
         
 
-         or the <see
-         cref="M:System.DateTime.ToString(System.String,System.IFormatProvider)" />
+         or the <see cref="M:System.DateTime.ToString(System.String,System.IFormatProvider)" />
 
         
 

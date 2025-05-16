@@ -38,48 +38,39 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.BindingList`1" />
+        >The <see cref="T:System.ComponentModel.BindingList`1" />
 
         
 
-         class can be used as a base class to create a two-way data-binding mechanism. <see
-         cref="T:System.ComponentModel.BindingList`1" />
+         class can be used as a base class to create a two-way data-binding mechanism. <see cref="T:System.ComponentModel.BindingList`1" />
 
         
 
-         provides a concrete, generic implementation of the <see
-         cref="T:System.ComponentModel.IBindingList" />
+         provides a concrete, generic implementation of the <see cref="T:System.ComponentModel.IBindingList" />
 
         
 
-         interface. This is an alternative to implementing the complete <see
-         cref="T:System.ComponentModel.IBindingList" />
+         interface. This is an alternative to implementing the complete <see cref="T:System.ComponentModel.IBindingList" />
 
         
 
-         interface, which can be difficult because of the subtle interaction between <see
-         cref="T:System.ComponentModel.IBindingList" />
+         interface, which can be difficult because of the subtle interaction between <see cref="T:System.ComponentModel.IBindingList" />
 
         
 
-        , <see
-         cref="T:System.ComponentModel.IEditableObject" />
+        , <see cref="T:System.ComponentModel.IEditableObject" />
 
         
 
-        , and the associated <see
-         cref="T:System.Windows.Forms.CurrencyManager" />
+        , and the associated <see cref="T:System.Windows.Forms.CurrencyManager" />
 
         
 
-        . However, the typical solutions programmer will use a class that provides data binding functionality, such as <see
-         cref="T:System.Windows.Forms.BindingSource" />
+        . However, the typical solutions programmer will use a class that provides data binding functionality, such as <see cref="T:System.Windows.Forms.BindingSource" />
 
         
 
-        , instead of directly using <see
-         cref="T:System.ComponentModel.BindingList`1" />
+        , instead of directly using <see cref="T:System.ComponentModel.BindingList`1" />
 
         
 
@@ -90,28 +81,23 @@
 
         
 
-         supports factory-created instances through the extensible <see
-         cref="M:System.ComponentModel.BindingList`1.AddNew" />
+         supports factory-created instances through the extensible <see cref="M:System.ComponentModel.BindingList`1.AddNew" />
 
         
 
-         method. (This same type of extensibility is also found in other classes, such as <see
-         cref="T:System.Windows.Forms.BindingSource" />
+         method. (This same type of extensibility is also found in other classes, such as <see cref="T:System.Windows.Forms.BindingSource" />
 
         
 
-        ) In addition, since this class implements the <see
-         cref="T:System.ComponentModel.ICancelAddNew" />
+        ) In addition, since this class implements the <see cref="T:System.ComponentModel.ICancelAddNew" />
 
         
 
-         interface, it enables transactional commits or rollbacks of the new item through the <see
-         cref="M:System.ComponentModel.BindingList`1.EndNew(System.Int32)" />
+         interface, it enables transactional commits or rollbacks of the new item through the <see cref="M:System.ComponentModel.BindingList`1.EndNew(System.Int32)" />
 
         
 
-         and <see
-         cref="M:System.ComponentModel.BindingList`1.CancelNew(System.Int32)" />
+         and <see cref="M:System.ComponentModel.BindingList`1.CancelNew(System.Int32)" />
 
         
 
@@ -140,8 +126,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows initial property values for an instance of <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >The following table shows initial property values for an instance of <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
@@ -203,8 +188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
@@ -257,36 +241,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.ComponentModel.BindingList`1.AddingNew" />
+            >The <see cref="E:System.ComponentModel.BindingList`1.AddingNew" />
 
             
 
-             event occurs before a new object is added to the collection represented by the <see
-             cref="P:System.Collections.ObjectModel.Collection`1.Items" />
+             event occurs before a new object is added to the collection represented by the <see cref="P:System.Collections.ObjectModel.Collection`1.Items" />
 
             
 
-             property. This event is raised after the <see
-             cref="M:System.ComponentModel.BindingList`1.AddNew" />
+             property. This event is raised after the <see cref="M:System.ComponentModel.BindingList`1.AddNew" />
 
             
 
-             method is called, but before the new item is created and added to the internal list. By handling this event, the programmer can provide custom item creation and insertion behavior without being forced to derive from the <see
-             cref="T:System.ComponentModel.BindingList`1" />
+             method is called, but before the new item is created and added to the internal list. By handling this event, the programmer can provide custom item creation and insertion behavior without being forced to derive from the <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
              class. </para
           >
           <para
-            >For more information about supplying custom new item functionality, see the <see
-             cref="M:System.ComponentModel.BindingList`1.AddNew" />
+            >For more information about supplying custom new item functionality, see the <see cref="M:System.ComponentModel.BindingList`1.AddNew" />
 
             
 
-             method. For more information about handling events, see <format
-             type="text/html">
+             method. For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -320,13 +298,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.BindingList`1.AddNew" />
+            >The <see cref="M:System.ComponentModel.BindingList`1.AddNew" />
 
             
 
-             method adds a new item to the collection represented by the <see
-             cref="P:System.Collections.ObjectModel.Collection`1.Items" />
+             method adds a new item to the collection represented by the <see cref="P:System.Collections.ObjectModel.Collection`1.Items" />
 
             
 
@@ -335,21 +311,18 @@
           <list type="ordered">
             <item>
               <para
-                >The <see
-                 cref="E:System.ComponentModel.BindingList`1.AddingNew" />
+                >The <see cref="E:System.ComponentModel.BindingList`1.AddingNew" />
 
                 
 
                  event is automatically raised.</para
               >
               <para
-                >This event can be programmatically handled to construct a new custom item. This is accomplished in the event handler by setting the <see
-                 cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
+                >This event can be programmatically handled to construct a new custom item. This is accomplished in the event handler by setting the <see cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
 
                 
 
-                 property of the <see
-                 cref="T:System.ComponentModel.AddingNewEventArgs" />
+                 property of the <see cref="T:System.ComponentModel.AddingNewEventArgs" />
 
                 
 
@@ -362,8 +335,7 @@
               <list type="bullet">
                 <item>
                   <para
-                    >The item is explicitly committed by a call to <see
-                     cref="M:System.ComponentModel.BindingList`1.EndNew(System.Int32)" />
+                    >The item is explicitly committed by a call to <see cref="M:System.ComponentModel.BindingList`1.EndNew(System.Int32)" />
 
                     
 
@@ -377,16 +349,14 @@
             </item>
           </list>
           <para
-            >In contrast, calling the <see
-             cref="M:System.ComponentModel.BindingList`1.CancelNew(System.Int32)" />
+            >In contrast, calling the <see cref="M:System.ComponentModel.BindingList`1.CancelNew(System.Int32)" />
 
             
 
              method before the item is committed will cause the new item to be discarded.</para
           >
           <para
-            >This method raises the <see
-             cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+            >This method raises the <see cref="E:System.ComponentModel.BindingList`1.ListChanged" />
 
             
 
@@ -422,33 +392,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.BindingList`1.AddNewCore" />
+            >The <see cref="M:System.ComponentModel.BindingList`1.AddNewCore" />
 
             
 
-             method adds a new item to the collection represented by the <see
-             cref="P:System.Collections.ObjectModel.Collection`1.Items" />
+             method adds a new item to the collection represented by the <see cref="P:System.Collections.ObjectModel.Collection`1.Items" />
 
             
 
-             property. <see
-             cref="M:System.ComponentModel.BindingList`1.AddNewCore" />
+             property. <see cref="M:System.ComponentModel.BindingList`1.AddNewCore" />
 
             
 
-             raises the <see
-             cref="E:System.ComponentModel.BindingList`1.AddingNew" />
+             raises the <see cref="E:System.ComponentModel.BindingList`1.AddingNew" />
 
             
 
-             event. This allows you to add a new item by setting the <see
-             cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
+             event. This allows you to add a new item by setting the <see cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
 
             
 
-             property of the <see
-             cref="T:System.ComponentModel.AddingNewEventArgs" />
+             property of the <see cref="T:System.ComponentModel.AddingNewEventArgs" />
 
             
 
@@ -481,23 +445,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.BindingList`1.AllowEdit" />
+            >The <see cref="P:System.ComponentModel.BindingList`1.AllowEdit" />
 
             
 
-             property is typically used by other components to determine if editing of items in the list is allowed. When <see
-             cref="P:System.ComponentModel.BindingList`1.AllowEdit" />
+             property is typically used by other components to determine if editing of items in the list is allowed. When <see cref="P:System.ComponentModel.BindingList`1.AllowEdit" />
 
             
 
-             is set to a new value, a <see
-             cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+             is set to a new value, a <see cref="E:System.ComponentModel.BindingList`1.ListChanged" />
 
             
 
-             event of type <see
-             cref="F:System.ComponentModel.ListChangedType.Reset" />
+             event of type <see cref="F:System.ComponentModel.ListChangedType.Reset" />
 
             
 
@@ -526,66 +486,54 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.BindingList`1.AllowNew" />
+            >The <see cref="P:System.ComponentModel.BindingList`1.AllowNew" />
 
             
 
-             property is typically used by other components to determine if the creation of new items is allowed. <see
-             cref="P:System.ComponentModel.BindingList`1.AllowNew" />
+             property is typically used by other components to determine if the creation of new items is allowed. <see cref="P:System.ComponentModel.BindingList`1.AllowNew" />
 
             
 
-             defaults to true if the type contained in the list has a default constructor or the <see
-             cref="E:System.ComponentModel.BindingList`1.AddingNew" />
+             defaults to true if the type contained in the list has a default constructor or the <see cref="E:System.ComponentModel.BindingList`1.AddingNew" />
 
             
 
-             event is handled. If the <see
-             cref="E:System.ComponentModel.BindingList`1.AddingNew" />
+             event is handled. If the <see cref="E:System.ComponentModel.BindingList`1.AddingNew" />
 
             
 
-             event is not handled or the list type does not have a default constructor, then <see
-             cref="P:System.ComponentModel.BindingList`1.AllowNew" />
+             event is not handled or the list type does not have a default constructor, then <see cref="P:System.ComponentModel.BindingList`1.AllowNew" />
 
             
 
              defaults to false.</para
           >
           <para
-            >If <see
-             cref="P:System.ComponentModel.BindingList`1.AllowNew" />
+            >If <see cref="P:System.ComponentModel.BindingList`1.AllowNew" />
 
             
 
-             is explicitly set, the set value will always be used by bound objects to determine if new items can be added to the list. Whether <see
-             cref="P:System.ComponentModel.BindingList`1.AllowNew" />
+             is explicitly set, the set value will always be used by bound objects to determine if new items can be added to the list. Whether <see cref="P:System.ComponentModel.BindingList`1.AllowNew" />
 
             
 
-             is true or false, new items can be added by explicitly calling <see
-             cref="M:System.ComponentModel.BindingList`1.AddNew" />
+             is true or false, new items can be added by explicitly calling <see cref="M:System.ComponentModel.BindingList`1.AddNew" />
 
             
 
-             if the list type has a default constructor or the <see
-             cref="E:System.ComponentModel.BindingList`1.AddingNew" />
+             if the list type has a default constructor or the <see cref="E:System.ComponentModel.BindingList`1.AddingNew" />
 
             
 
-             event is handled. In addition, setting <see
-             cref="P:System.ComponentModel.BindingList`1.AllowNew" />
+             event is handled. In addition, setting <see cref="P:System.ComponentModel.BindingList`1.AllowNew" />
 
             
 
-             causes a <see
-             cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+             causes a <see cref="E:System.ComponentModel.BindingList`1.ListChanged" />
 
             
 
-             event of type <see
-             cref="F:System.ComponentModel.ListChangedType.Reset" />
+             event of type <see cref="F:System.ComponentModel.ListChangedType.Reset" />
 
             
 
@@ -595,8 +543,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether you can add items to the list using the <see
-             cref="M:System.ComponentModel.BindingList`1.AddNew" />
+            >Gets or sets a value indicating whether you can add items to the list using the <see cref="M:System.ComponentModel.BindingList`1.AddNew" />
 
             
 
@@ -621,26 +568,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.BindingList`1.AllowRemove" />
+            >The <see cref="P:System.ComponentModel.BindingList`1.AllowRemove" />
 
             
 
              property is typically used by other components to determine if the removal of items is allowed.</para
           >
           <para
-            >When <see
-             cref="P:System.ComponentModel.BindingList`1.AllowRemove" />
+            >When <see cref="P:System.ComponentModel.BindingList`1.AllowRemove" />
 
             
 
-             is set to a new value, a <see
-             cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+             is set to a new value, a <see cref="E:System.ComponentModel.BindingList`1.ListChanged" />
 
             
 
-             event of type <see
-             cref="F:System.ComponentModel.ListChangedType.Reset" />
+             event of type <see cref="F:System.ComponentModel.ListChangedType.Reset" />
 
             
 
@@ -678,23 +621,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >The <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             class does not provide a base implementation of sorting, so <see
-             cref="M:System.ComponentModel.BindingList`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
+             class does not provide a base implementation of sorting, so <see cref="M:System.ComponentModel.BindingList`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
 
             
 
-             always throws a <see
-             cref="T:System.NotSupportedException" />
+             always throws a <see cref="T:System.NotSupportedException" />
 
             
 
-             by default. To enable sorting, derive from <see
-             cref="T:System.ComponentModel.BindingList`1" />
+             by default. To enable sorting, derive from <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
@@ -703,13 +642,11 @@
           <list type="bullet">
             <item>
               <para
-                >Override <see
-                 cref="M:System.ComponentModel.BindingList`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
+                >Override <see cref="M:System.ComponentModel.BindingList`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
 
                 
 
-                 and implement sorting, raising the <see
-                 cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+                 and implement sorting, raising the <see cref="E:System.ComponentModel.BindingList`1.ListChanged" />
 
                 
 
@@ -718,8 +655,7 @@
             </item>
             <item>
               <para
-                >Override <see
-                 cref="M:System.ComponentModel.BindingList`1.RemoveSortCore" />
+                >Override <see cref="M:System.ComponentModel.BindingList`1.RemoveSortCore" />
 
                 
 
@@ -728,13 +664,11 @@
             </item>
             <item>
               <para
-                >Override <see
-                 cref="P:System.ComponentModel.BindingList`1.SupportsSortingCore" />
+                >Override <see cref="P:System.ComponentModel.BindingList`1.SupportsSortingCore" />
 
                 
 
-                 and set <see
-                 cref="P:System.ComponentModel.BindingList`1.SupportsSortingCore" />
+                 and set <see cref="P:System.ComponentModel.BindingList`1.SupportsSortingCore" />
 
                 
 
@@ -743,13 +677,11 @@
             </item>
           </list>
           <para
-            >In addition, you may want to implement the supplemental <see
-             cref="P:System.ComponentModel.BindingList`1.SortDirectionCore" />
+            >In addition, you may want to implement the supplemental <see cref="P:System.ComponentModel.BindingList`1.SortDirectionCore" />
 
             
 
-             and <see
-             cref="P:System.ComponentModel.BindingList`1.SortPropertyCore" />
+             and <see cref="P:System.ComponentModel.BindingList`1.SortPropertyCore" />
 
             
 
@@ -759,8 +691,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sorts the items if overridden in a derived class; otherwise, throws a <see
-             cref="T:System.NotSupportedException" />
+            >Sorts the items if overridden in a derived class; otherwise, throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -768,24 +699,30 @@
           >
         </summary>
         <param name="prop">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          A <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
            that specifies the property to sort on.</param
         >
         <param name="direction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.ComponentModel.ListSortDirection" />
+          One of the <see cref="T:System.ComponentModel.ListSortDirection" />
 
           
 
@@ -814,21 +751,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.BindingList`1.CancelNew(System.Int32)" />
+            >The <see cref="M:System.ComponentModel.BindingList`1.CancelNew(System.Int32)" />
 
             
 
-             method rolls back a pending new item that was added through the <see
-             cref="M:System.ComponentModel.BindingList`1.AddNew" />
+             method rolls back a pending new item that was added through the <see cref="M:System.ComponentModel.BindingList`1.AddNew" />
 
             
 
              method, but has not yet been committed.</para
           >
           <para
-            >For more information about adding and committing new items, see the <see
-             cref="M:System.ComponentModel.BindingList`1.AddNew" />
+            >For more information about adding and committing new items, see the <see cref="M:System.ComponentModel.BindingList`1.AddNew" />
 
             
 
@@ -840,7 +774,11 @@
           <para>Discards a pending new item.</para>
         </summary>
         <param name="itemIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -867,13 +805,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.BindingList`1.ClearItems" />
+            >The <see cref="M:System.ComponentModel.BindingList`1.ClearItems" />
 
             
 
-             method removes all the items from the collection represented by the <see
-             cref="P:System.Collections.ObjectModel.Collection`1.Items" />
+             method removes all the items from the collection represented by the <see cref="P:System.Collections.ObjectModel.Collection`1.Items" />
 
             
 
@@ -884,13 +820,11 @@
 
             
 
-             calls the <see
-             cref="M:System.ComponentModel.BindingList`1.EndNew(System.Int32)" />
+             calls the <see cref="M:System.ComponentModel.BindingList`1.EndNew(System.Int32)" />
 
             
 
-             method before clearing out the collection and raises the <see
-             cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+             method before clearing out the collection and raises the <see cref="E:System.ComponentModel.BindingList`1.ListChanged" />
 
             
 
@@ -924,21 +858,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.BindingList`1.EndNew(System.Int32)" />
+            >The <see cref="M:System.ComponentModel.BindingList`1.EndNew(System.Int32)" />
 
             
 
-             method commits a pending new item that was added through the <see
-             cref="M:System.ComponentModel.BindingList`1.AddNew" />
+             method commits a pending new item that was added through the <see cref="M:System.ComponentModel.BindingList`1.AddNew" />
 
             
 
              method. If there is no new item waiting to be committed, then this method does nothing.</para
           >
           <para
-            >For more information about adding and committing new items, see the <see
-             cref="M:System.ComponentModel.BindingList`1.AddNew" />
+            >For more information about adding and committing new items, see the <see cref="M:System.ComponentModel.BindingList`1.AddNew" />
 
             
 
@@ -950,7 +881,11 @@
           <para>Commits a pending new item to the collection.</para>
         </summary>
         <param name="itemIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -983,23 +918,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >The <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             class does not provide a base implementation of searching, and so <see
-             cref="M:System.ComponentModel.BindingList`1.FindCore(System.ComponentModel.PropertyDescriptor,System.Object)" />
+             class does not provide a base implementation of searching, and so <see cref="M:System.ComponentModel.BindingList`1.FindCore(System.ComponentModel.PropertyDescriptor,System.Object)" />
 
             
 
-             always throws a <see
-             cref="T:System.NotSupportedException" />
+             always throws a <see cref="T:System.NotSupportedException" />
 
             
 
-             by default. To enable searching, derive from <see
-             cref="T:System.ComponentModel.BindingList`1" />
+             by default. To enable searching, derive from <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
@@ -1008,13 +939,11 @@
           <list type="bullet">
             <item>
               <para
-                >Override <see
-                 cref="P:System.ComponentModel.BindingList`1.SupportsSearchingCore" />
+                >Override <see cref="P:System.ComponentModel.BindingList`1.SupportsSearchingCore" />
 
                 
 
-                 to set the <see
-                 cref="P:System.ComponentModel.BindingList`1.SupportsSearchingCore" />
+                 to set the <see cref="P:System.ComponentModel.BindingList`1.SupportsSearchingCore" />
 
                 
 
@@ -1023,8 +952,7 @@
             </item>
             <item>
               <para
-                >Override <see
-                 cref="M:System.ComponentModel.BindingList`1.FindCore(System.ComponentModel.PropertyDescriptor,System.Object)" />
+                >Override <see cref="M:System.ComponentModel.BindingList`1.FindCore(System.ComponentModel.PropertyDescriptor,System.Object)" />
 
                 
 
@@ -1036,8 +964,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches for the index of the item that has the specified property descriptor with the specified value, if searching is implemented in a derived class; otherwise, a <see
-             cref="T:System.NotSupportedException" />
+            >Searches for the index of the item that has the specified property descriptor with the specified value, if searching is implemented in a derived class; otherwise, a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -1049,24 +976,30 @@
           <para>The zero-based index of the item that matches the property descriptor and contains the specified value.</para>
         </returns>
         <param name="prop">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
            to search for.</param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value of <paramref
-           name="property" />
+          The value of <paramref name="property" />
 
           
 
@@ -1118,26 +1051,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >The <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             class does not provide a base implementation of sorting, so <see
-             cref="P:System.ComponentModel.BindingList`1.IsSortedCore" />
+             class does not provide a base implementation of sorting, so <see cref="P:System.ComponentModel.BindingList`1.IsSortedCore" />
 
             
 
              always returns false by default. </para
           >
           <para
-            >The <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >The <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             class does not provide a base implementation of sorting. To enable sorting, derive a class from <see
-             cref="T:System.ComponentModel.BindingList`1" />
+             class does not provide a base implementation of sorting. To enable sorting, derive a class from <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
@@ -1146,13 +1075,11 @@
           <list type="bullet">
             <item>
               <para
-                >Override <see
-                 cref="M:System.ComponentModel.BindingList`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
+                >Override <see cref="M:System.ComponentModel.BindingList`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
 
                 
 
-                 and implement sorting raising the <see
-                 cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+                 and implement sorting raising the <see cref="E:System.ComponentModel.BindingList`1.ListChanged" />
 
                 
 
@@ -1161,8 +1088,7 @@
             </item>
             <item>
               <para
-                >Override <see
-                 cref="M:System.ComponentModel.BindingList`1.RemoveSortCore" />
+                >Override <see cref="M:System.ComponentModel.BindingList`1.RemoveSortCore" />
 
                 
 
@@ -1171,13 +1097,11 @@
             </item>
             <item>
               <para
-                >Override <see
-                 cref="P:System.ComponentModel.BindingList`1.SupportsSortingCore" />
+                >Override <see cref="P:System.ComponentModel.BindingList`1.SupportsSortingCore" />
 
                 
 
-                 and set <see
-                 cref="P:System.ComponentModel.BindingList`1.SupportsSortingCore" />
+                 and set <see cref="P:System.ComponentModel.BindingList`1.SupportsSortingCore" />
 
                 
 
@@ -1186,13 +1110,11 @@
             </item>
           </list>
           <para
-            >In addition, you may want to implement the supplemental <see
-             cref="P:System.ComponentModel.BindingList`1.SortDirectionCore" />
+            >In addition, you may want to implement the supplemental <see cref="P:System.ComponentModel.BindingList`1.SortDirectionCore" />
 
             
 
-             and <see
-             cref="P:System.ComponentModel.BindingList`1.SortPropertyCore" />
+             and <see cref="P:System.ComponentModel.BindingList`1.SortPropertyCore" />
 
             
 
@@ -1230,16 +1152,14 @@
 
             
 
-             notifications for item value changes are only raised if the list item type implements the <see
-             cref="T:System.ComponentModel.INotifyPropertyChanged" />
+             notifications for item value changes are only raised if the list item type implements the <see cref="T:System.ComponentModel.INotifyPropertyChanged" />
 
             
 
              interface.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1278,21 +1198,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.ComponentModel.BindingList`1.AddingNew" />
+            >The <see cref="E:System.ComponentModel.BindingList`1.AddingNew" />
 
             
 
-             event and the <see
-             cref="M:System.ComponentModel.BindingList`1.AddNew" />
+             event and the <see cref="M:System.ComponentModel.BindingList`1.AddNew" />
 
             
 
              method allow custom-created items to be added to the list.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1301,8 +1218,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.ComponentModel.BindingList`1.OnAddingNew(System.ComponentModel.AddingNewEventArgs)" />
+            >The <see cref="M:System.ComponentModel.BindingList`1.OnAddingNew(System.ComponentModel.AddingNewEventArgs)" />
 
             
 
@@ -1312,8 +1228,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.ComponentModel.BindingList`1.AddingNew" />
+            >Raises the <see cref="E:System.ComponentModel.BindingList`1.AddingNew" />
 
             
 
@@ -1321,12 +1236,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.AddingNewEventArgs" />
+          An <see cref="T:System.ComponentModel.AddingNewEventArgs" />
 
           
 
@@ -1358,8 +1276,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.BindingList`1.OnListChanged(System.ComponentModel.ListChangedEventArgs)" />
+            >The <see cref="M:System.ComponentModel.BindingList`1.OnListChanged(System.ComponentModel.ListChangedEventArgs)" />
 
             
 
@@ -1369,8 +1286,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+            >Raises the <see cref="E:System.ComponentModel.BindingList`1.ListChanged" />
 
             
 
@@ -1378,12 +1294,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.ListChangedEventArgs" />
+          A <see cref="T:System.ComponentModel.ListChangedEventArgs" />
 
           
 
@@ -1407,13 +1326,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.ComponentModel.BindingList`1.RaiseListChangedEvents" />
+            >Set the <see cref="P:System.ComponentModel.BindingList`1.RaiseListChangedEvents" />
 
             
 
-             property to false if you wish to suppress <see
-             cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+             property to false if you wish to suppress <see cref="E:System.ComponentModel.BindingList`1.ListChanged" />
 
             
 
@@ -1423,8 +1340,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether adding or removing items within the list raises <see
-             cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+            >Gets or sets a value indicating whether adding or removing items within the list raises <see cref="E:System.ComponentModel.BindingList`1.ListChanged" />
 
             
 
@@ -1454,13 +1370,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method raises the <see
-             cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+            >This method raises the <see cref="E:System.ComponentModel.BindingList`1.ListChanged" />
 
             
 
-             event of type <see
-             cref="F:System.ComponentModel.ListChangedType.ItemDeleted" />
+             event of type <see cref="F:System.ComponentModel.ListChangedType.ItemDeleted" />
 
             
 
@@ -1472,7 +1386,11 @@
           <para>Removes the item at the specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1499,23 +1417,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >The <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             class does not provide a base implementation of sorting, so <see
-             cref="M:System.ComponentModel.BindingList`1.RemoveSortCore" />
+             class does not provide a base implementation of sorting, so <see cref="M:System.ComponentModel.BindingList`1.RemoveSortCore" />
 
             
 
-             always throws a <see
-             cref="T:System.NotSupportedException" />
+             always throws a <see cref="T:System.NotSupportedException" />
 
             
 
-             by default. For more information about sorting, see the <see
-             cref="M:System.ComponentModel.BindingList`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
+             by default. For more information about sorting, see the <see cref="M:System.ComponentModel.BindingList`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
 
             
 
@@ -1525,13 +1439,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes any sort applied with <see
-             cref="M:System.ComponentModel.BindingList`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
+            >Removes any sort applied with <see cref="M:System.ComponentModel.BindingList`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
 
             
 
-             if sorting is implemented in a derived class; otherwise, raises <see
-             cref="T:System.NotSupportedException" />
+             if sorting is implemented in a derived class; otherwise, raises <see cref="T:System.NotSupportedException" />
 
             
 
@@ -1559,13 +1471,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >When the <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             is bound to Windows Forms controls, the <see
-             cref="M:System.ComponentModel.BindingList`1.ResetBindings" />
+             is bound to Windows Forms controls, the <see cref="M:System.ComponentModel.BindingList`1.ResetBindings" />
 
             
 
@@ -1575,13 +1485,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises a <see
-             cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+            >Raises a <see cref="E:System.ComponentModel.BindingList`1.ListChanged" />
 
             
 
-             event of type <see
-             cref="F:System.ComponentModel.ListChangedType.Reset" />
+             event of type <see cref="F:System.ComponentModel.ListChangedType.Reset" />
 
             
 
@@ -1611,13 +1519,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >When the <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             is bound to Windows Forms controls, the <see
-             cref="M:System.ComponentModel.BindingList`1.ResetItem(System.Int32)" />
+             is bound to Windows Forms controls, the <see cref="M:System.ComponentModel.BindingList`1.ResetItem(System.Int32)" />
 
             
 
@@ -1627,13 +1533,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises a <see
-             cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+            >Raises a <see cref="E:System.ComponentModel.BindingList`1.ListChanged" />
 
             
 
-             event of type <see
-             cref="F:System.ComponentModel.ListChangedType.ItemChanged" />
+             event of type <see cref="F:System.ComponentModel.ListChangedType.ItemChanged" />
 
             
 
@@ -1641,7 +1545,11 @@
           >
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1696,23 +1604,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >The <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             class does not provide a base implementation of sorting, so <see
-             cref="P:System.ComponentModel.BindingList`1.SortDirectionCore" />
+             class does not provide a base implementation of sorting, so <see cref="P:System.ComponentModel.BindingList`1.SortDirectionCore" />
 
             
 
-             always returns <see
-             cref="F:System.ComponentModel.ListSortDirection.Ascending" />
+             always returns <see cref="F:System.ComponentModel.ListSortDirection.Ascending" />
 
             
 
-             by default. For more information about sorting, see the <see
-             cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
+             by default. For more information about sorting, see the <see cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
 
             
 
@@ -1751,13 +1655,11 @@
 
             
 
-             returns null by default because the <see
-             cref="T:System.ComponentModel.BindingList`1" />
+             returns null by default because the <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             class does not provide a base implementation of sorting. To enable sorting, derive a class from <see
-             cref="T:System.ComponentModel.BindingList`1" />
+             class does not provide a base implementation of sorting. To enable sorting, derive a class from <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
@@ -1766,8 +1668,7 @@
           <list type="bullet">
             <item>
               <para
-                >Override <see
-                 cref="M:System.ComponentModel.BindingList`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
+                >Override <see cref="M:System.ComponentModel.BindingList`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
 
                 
 
@@ -1776,8 +1677,7 @@
             </item>
             <item>
               <para
-                >Override <see
-                 cref="M:System.ComponentModel.BindingList`1.RemoveSortCore" />
+                >Override <see cref="M:System.ComponentModel.BindingList`1.RemoveSortCore" />
 
                 
 
@@ -1786,13 +1686,11 @@
             </item>
             <item>
               <para
-                >Override <see
-                 cref="P:System.ComponentModel.BindingList`1.SupportsSortingCore" />
+                >Override <see cref="P:System.ComponentModel.BindingList`1.SupportsSortingCore" />
 
                 
 
-                 and set <see
-                 cref="P:System.ComponentModel.BindingList`1.SupportsSortingCore" />
+                 and set <see cref="P:System.ComponentModel.BindingList`1.SupportsSortingCore" />
 
                 
 
@@ -1801,13 +1699,11 @@
             </item>
             <item>
               <para
-                >Optionally, override the <see
-                 cref="P:System.ComponentModel.BindingList`1.SortPropertyCore" />
+                >Optionally, override the <see cref="P:System.ComponentModel.BindingList`1.SortPropertyCore" />
 
                 
 
-                 to return the <see
-                 cref="T:System.ComponentModel.PropertyDescriptor" />
+                 to return the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
                 
 
@@ -1848,13 +1744,11 @@
 
             
 
-             provides the implementation for <see
-             cref="P:System.ComponentModel.IBindingList.SupportsChangeNotification" />
+             provides the implementation for <see cref="P:System.ComponentModel.IBindingList.SupportsChangeNotification" />
 
             
 
-            . You can derive a class from <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            . You can derive a class from <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
@@ -1864,8 +1758,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether <see
-             cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+            >Gets a value indicating whether <see cref="E:System.ComponentModel.BindingList`1.ListChanged" />
 
             
 
@@ -1893,18 +1786,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >The <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             class does not provide a base implementation of searching, so <see
-             cref="P:System.ComponentModel.BindingList`1.SupportsSearchingCore" />
+             class does not provide a base implementation of searching, so <see cref="P:System.ComponentModel.BindingList`1.SupportsSearchingCore" />
 
             
 
-             always returns false by default. For more information about implementing searching, see the <see
-             cref="M:System.ComponentModel.BindingList`1.System#ComponentModel#IBindingList#Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
+             always returns false by default. For more information about implementing searching, see the <see cref="M:System.ComponentModel.BindingList`1.System#ComponentModel#IBindingList#Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
 
             
 
@@ -1933,36 +1823,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.BindingList`1.SupportsSortingCore" />
+            >The <see cref="P:System.ComponentModel.BindingList`1.SupportsSortingCore" />
 
             
 
-             property indicates whether the <see
-             cref="T:System.ComponentModel.BindingList`1" />
+             property indicates whether the <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             supports sorting with the <see
-             cref="M:System.ComponentModel.BindingList`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
+             supports sorting with the <see cref="M:System.ComponentModel.BindingList`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
 
             
 
              method.</para
           >
           <para
-            >The <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >The <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             class does not provide a base implementation of sorting, so <see
-             cref="P:System.ComponentModel.BindingList`1.SupportsSortingCore" />
+             class does not provide a base implementation of sorting, so <see cref="P:System.ComponentModel.BindingList`1.SupportsSortingCore" />
 
             
 
-             always returns false by default. For more information about implementing sorting, see the <see
-             cref="M:System.ComponentModel.BindingList`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
+             always returns false by default. For more information about implementing sorting, see the <see cref="M:System.ComponentModel.BindingList`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
 
             
 
@@ -2001,13 +1885,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The base implementation of this method does nothing. If this functionality is desired, a derived class must implement it.</para>
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -2017,8 +1899,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.IBindingList.AddIndex(System.ComponentModel.PropertyDescriptor)" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.IBindingList.AddIndex(System.ComponentModel.PropertyDescriptor)" />
 
             
 
@@ -2046,21 +1927,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
              interface.</para
           >
           <para
-            >This implementation calls <see
-             cref="M:System.ComponentModel.BindingList`1.AddNewCore" />
+            >This implementation calls <see cref="M:System.ComponentModel.BindingList`1.AddNewCore" />
 
             
 
@@ -2070,8 +1948,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a new item to the list. For more information, see <see
-             cref="M:System.ComponentModel.IBindingList.AddNew" />
+            >Adds a new item to the list. For more information, see <see cref="M:System.ComponentModel.IBindingList.AddNew" />
 
             
 
@@ -2106,8 +1983,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.BindingList`1.AllowEdit" />
+            >The <see cref="P:System.ComponentModel.BindingList`1.AllowEdit" />
 
             
 
@@ -2143,8 +2019,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether new items can be added to the list using the <see
-             cref="M:System.ComponentModel.BindingList`1.AddNew" />
+            >Gets a value indicating whether new items can be added to the list using the <see cref="M:System.ComponentModel.BindingList`1.AddNew" />
 
             
 
@@ -2205,13 +2080,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -2221,18 +2094,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sorts the list based on a <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Sorts the list based on a <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
-             and a <see
-             cref="T:System.ComponentModel.ListSortDirection" />
+             and a <see cref="T:System.ComponentModel.ListSortDirection" />
 
             
 
-            . For a complete description of this member, see <see
-             cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
+            . For a complete description of this member, see <see cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
 
             
 
@@ -2240,12 +2110,15 @@
           >
         </summary>
         <param name="direction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.ComponentModel.ListSortDirection" />
+          One of the <see cref="T:System.ComponentModel.ListSortDirection" />
 
           
 
@@ -2279,13 +2152,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -2295,8 +2166,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.IBindingList.Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.IBindingList.Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
 
             
 
@@ -2306,8 +2176,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the row that has the given <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >The index of the row that has the given <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -2315,12 +2184,15 @@
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value of the <paramref
-           name="property" />
+          The value of the <paramref name="property" />
 
           
 
@@ -2350,13 +2222,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -2366,8 +2236,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.ComponentModel.IBindingList.IsSorted" />
+            >For a description of this member, see <see cref="P:System.ComponentModel.IBindingList.IsSorted" />
 
             
 
@@ -2402,13 +2271,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The base implementation of this method does nothing. If this functionality is desired, a derived class must implement it.</para>
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -2418,8 +2285,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.IBindingList.RemoveIndex(System.ComponentModel.PropertyDescriptor)" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.IBindingList.RemoveIndex(System.ComponentModel.PropertyDescriptor)" />
 
             
 
@@ -2447,13 +2313,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -2463,8 +2327,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.IBindingList.RemoveSort" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.IBindingList.RemoveSort" />
           </para>
         </summary>
       </Docs>
@@ -2491,13 +2354,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -2507,8 +2368,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.ComponentModel.IBindingList.SortDirection" />
+            >For a description of this member, see <see cref="P:System.ComponentModel.IBindingList.SortDirection" />
 
             
 
@@ -2539,13 +2399,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -2555,8 +2413,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.ComponentModel.IBindingList.SortProperty" />
+            >For a description of this member, see <see cref="P:System.ComponentModel.IBindingList.SortProperty" />
 
             
 
@@ -2587,13 +2444,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -2603,8 +2458,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.ComponentModel.IBindingList.SupportsChangeNotification" />
+            >For a description of this member, see <see cref="P:System.ComponentModel.IBindingList.SupportsChangeNotification" />
 
             
 
@@ -2635,13 +2489,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -2651,8 +2503,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.ComponentModel.IBindingList.SupportsSearching" />
+            >For a description of this member, see <see cref="P:System.ComponentModel.IBindingList.SupportsSearching" />
 
             
 
@@ -2683,13 +2534,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -2699,8 +2548,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.ComponentModel.IBindingList.SupportsSorting" />
+            >For a description of this member, see <see cref="P:System.ComponentModel.IBindingList.SupportsSorting" />
 
             
 
@@ -2735,18 +2583,15 @@
 
             
 
-             checks the list type to see if it implements the <see
-             cref="T:System.ComponentModel.INotifyPropertyChanged" />
+             checks the list type to see if it implements the <see cref="T:System.ComponentModel.INotifyPropertyChanged" />
 
             
 
-             interface to indicate that it raises <see
-             cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+             interface to indicate that it raises <see cref="E:System.ComponentModel.BindingList`1.ListChanged" />
 
             
 
-             events of <see
-             cref="F:System.ComponentModel.ListChangedType.ItemChanged" />
+             events of <see cref="F:System.ComponentModel.ListChangedType.ItemChanged" />
 
             
 
@@ -2756,13 +2601,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether item property value changes raise <see
-             cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+            >Gets a value indicating whether item property value changes raise <see cref="E:System.ComponentModel.BindingList`1.ListChanged" />
 
             
 
-             events of type <see
-             cref="F:System.ComponentModel.ListChangedType.ItemChanged" />
+             events of type <see cref="F:System.ComponentModel.ListChangedType.ItemChanged" />
 
             
 

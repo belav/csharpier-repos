@@ -21,36 +21,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.Html32TextWriter" />
+        >The <see cref="T:System.Web.UI.Html32TextWriter" />
 
         
 
-         class is an alternative to the <see
-         cref="T:System.Web.UI.HtmlTextWriter" />
+         class is an alternative to the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
         
 
-         class. It converts HTML 4.0 style attributes into the equivalent HTML 3.2 tags and attributes. It standardizes the propagation of attributes, such as colors and fonts, using HTML tables. ASP.NET automatically uses this class for HTML 3.2 and earlier browsers by checking the <see
-         cref="P:System.Web.Configuration.HttpCapabilitiesBase.TagWriter" />
+         class. It converts HTML 4.0 style attributes into the equivalent HTML 3.2 tags and attributes. It standardizes the propagation of attributes, such as colors and fonts, using HTML tables. ASP.NET automatically uses this class for HTML 3.2 and earlier browsers by checking the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.TagWriter" />
 
         
 
-         property of the <see
-         cref="T:System.Web.HttpBrowserCapabilities" />
+         property of the <see cref="T:System.Web.HttpBrowserCapabilities" />
 
         
 
-         class. Unless you create a custom page or control adapter that targets devices that use HTML 3.2 markup, you do not need to create an instance of the <see
-         cref="T:System.Web.UI.Html32TextWriter" />
+         class. Unless you create a custom page or control adapter that targets devices that use HTML 3.2 markup, you do not need to create an instance of the <see cref="T:System.Web.UI.Html32TextWriter" />
 
         
 
          class explicitly.</para
       >
       <para
-        >For more information about customizing page and control rendering, see <format
-         type="text/html">
+        >For more information about customizing page and control rendering, see <format type="text/html">
           <a href="6d90782a-a1a4-45a6-b2d4-cf6362b83b08"
             >Walkthrough: Developing and Using a Custom Server Control</a
           >
@@ -64,8 +58,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Writes a series of HTML 3.2–specific characters and text to the output stream for an ASP.NET server control. The <see
-         cref="T:System.Web.UI.Html32TextWriter" />
+        >Writes a series of HTML 3.2–specific characters and text to the output stream for an ASP.NET server control. The <see cref="T:System.Web.UI.Html32TextWriter" />
 
         
 
@@ -88,13 +81,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Html32TextWriter.#ctor(System.IO.TextWriter)" />
+            >The <see cref="M:System.Web.UI.Html32TextWriter.#ctor(System.IO.TextWriter)" />
 
             
 
-             constructor passes the <see
-             cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" />
+             constructor passes the <see cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" />
 
             
 
@@ -107,8 +98,7 @@
 
                 
 
-                , which takes an instance of the  <see
-                 cref="T:System.IO.TextWriter" />
+                , which takes an instance of the  <see cref="T:System.IO.TextWriter" />
 
                 
 
@@ -129,13 +119,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Html32TextWriter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Html32TextWriter" />
 
             
 
-             class that uses the line indentation that is specified in the <see
-             cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" />
+             class that uses the line indentation that is specified in the <see cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" />
 
             
 
@@ -143,12 +131,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.TextWriter" />
+          The <see cref="T:System.IO.TextWriter" />
 
           
 
@@ -176,8 +167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Html32TextWriter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Html32TextWriter" />
 
             
 
@@ -185,24 +175,30 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.TextWriter" />
+          The <see cref="T:System.IO.TextWriter" />
 
           
 
            that renders the HMTL 3.2 content. </param
         >
         <param name="tabString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that represents the number of spaces defined by the <see
-           cref="P:System.Web.UI.HtmlTextWriter.Indent" />
+          A string that represents the number of spaces defined by the <see cref="P:System.Web.UI.HtmlTextWriter.Indent" />
 
           
 
@@ -252,23 +248,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="F:System.Web.UI.HtmlTextWriterTag.Div" />
+            >If the <see cref="F:System.Web.UI.HtmlTextWriterTag.Div" />
 
             
 
-             field is passed in <paramref
-             name="tagKey" />
+             field is passed in <paramref name="tagKey" />
 
             
 
-             and the <see
-             cref="P:System.Web.UI.Html32TextWriter.ShouldPerformDivTableSubstitution" />
+             and the <see cref="P:System.Web.UI.Html32TextWriter.ShouldPerformDivTableSubstitution" />
 
             
 
-             property is true, the <see
-             cref="M:System.Web.UI.Html32TextWriter.GetTagName(System.Web.UI.HtmlTextWriterTag)" />
+             property is true, the <see cref="M:System.Web.UI.Html32TextWriter.GetTagName(System.Web.UI.HtmlTextWriterTag)" />
 
             
 
@@ -278,8 +270,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the HTML element that is associated with the specified <see
-             cref="T:System.Web.UI.HtmlTextWriterTag" />
+            >Returns the HTML element that is associated with the specified <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
             
 
@@ -291,12 +282,15 @@
           <para>The HTML element.</para>
         </returns>
         <param name="tagKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriterTag" />
+          The <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
           
 
@@ -326,13 +320,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Html32TextWriter.OnStyleAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterStyle)" />
+            >The <see cref="M:System.Web.UI.Html32TextWriter.OnStyleAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterStyle)" />
 
             
 
-             method supports a smaller number of HTML style attributes than the <see
-             cref="M:System.Web.UI.Html32TextWriter.OnStyleAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterStyle)" />
+             method supports a smaller number of HTML style attributes than the <see cref="M:System.Web.UI.Html32TextWriter.OnStyleAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterStyle)" />
 
             
 
@@ -348,26 +340,37 @@
           <para>true if the HTML style attribute and its value will be rendered to the output stream; otherwise, false.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The HTML style attribute to write to the output stream. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value associated with the HTML style attribute. </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriterStyle" />
+          The <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
           
 
@@ -396,13 +399,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Web.UI.Html32TextWriter.ShouldPerformDivTableSubstitution" />
+            >If the <see cref="P:System.Web.UI.Html32TextWriter.ShouldPerformDivTableSubstitution" />
 
             
 
-             property is true, the <see
-             cref="M:System.Web.UI.Html32TextWriter.OnTagRender(System.String,System.Web.UI.HtmlTextWriterTag)" />
+             property is true, the <see cref="M:System.Web.UI.Html32TextWriter.OnTagRender(System.String,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
@@ -418,19 +419,26 @@
           <para>true if the HTML element is written to the output stream; otherwise, false.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The HTML element to write to the output stream. </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriterTag" />
+          The <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
           
 
@@ -550,13 +558,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a div element is specified and the <see
-             cref="P:System.Web.UI.Html32TextWriter.ShouldPerformDivTableSubstitution" />
+            >If a div element is specified and the <see cref="P:System.Web.UI.Html32TextWriter.ShouldPerformDivTableSubstitution" />
 
             
 
-             property value is true, the <see
-             cref="M:System.Web.UI.Html32TextWriter.RenderBeginTag(System.Web.UI.HtmlTextWriterTag)" />
+             property value is true, the <see cref="M:System.Web.UI.Html32TextWriter.RenderBeginTag(System.Web.UI.HtmlTextWriterTag)" />
 
             
 
@@ -568,12 +574,15 @@
           <para>Writes the opening tag of the specified element to the HTML 3.2 output stream.</para>
         </summary>
         <param name="tagKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriterTag" />
+          The <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
           
 
@@ -597,8 +606,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the end tag of an HTML element to the <see
-             cref="T:System.Web.UI.Html32TextWriter" />
+            >Writes the end tag of an HTML element to the <see cref="T:System.Web.UI.Html32TextWriter" />
 
             
 
@@ -647,13 +655,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a Boolean value indicating whether the requesting device supports bold HTML text. Use the <see
-             cref="P:System.Web.UI.Html32TextWriter.SupportsBold" />
+            >Gets or sets a Boolean value indicating whether the requesting device supports bold HTML text. Use the <see cref="P:System.Web.UI.Html32TextWriter.SupportsBold" />
 
             
 
-             property to conditionally render bold text to the <see
-             cref="T:System.Web.UI.Html32TextWriter" />
+             property to conditionally render bold text to the <see cref="T:System.Web.UI.Html32TextWriter" />
 
             
 
@@ -677,13 +683,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a Boolean value indicating whether the requesting device supports italic HTML text. Use the <see
-             cref="P:System.Web.UI.Html32TextWriter.SupportsItalic" />
+            >Gets or sets a Boolean value indicating whether the requesting device supports italic HTML text. Use the <see cref="P:System.Web.UI.Html32TextWriter.SupportsItalic" />
 
             
 
-             property to conditionally render italicized text to the <see
-             cref="T:System.Web.UI.Html32TextWriter" />
+             property to conditionally render italicized text to the <see cref="T:System.Web.UI.Html32TextWriter" />
 
             
 

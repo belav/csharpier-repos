@@ -67,8 +67,7 @@
     </summary>
     <remarks>
       <para
-        >Each element is a key/value pair that can be retrieved as a <see
-         cref="T:System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;" />
+        >Each element is a key/value pair that can be retrieved as a <see cref="T:System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;" />
 
         
 
@@ -79,46 +78,38 @@
 
         
 
-         requires an equality comparer implementation to perform comparisons.  If no equality comparer is provided, the following default equality comparer approach is used: If type <see
-         langword="TKey" />
+         requires an equality comparer implementation to perform comparisons.  If no equality comparer is provided, the following default equality comparer approach is used: If type <see langword="TKey" />
 
         
 
-          implements <see
-         cref="T:System.IEquatable&lt;TKey&gt;" />
+          implements <see cref="T:System.IEquatable&lt;TKey&gt;" />
 
         
 
-        , that implementation is used; otherwise, <see
-         langword="TKey" />
+        , that implementation is used; otherwise, <see langword="TKey" />
 
         
 
-        's implementations of <see
-         cref="T:System.Object.Equals(Object)" />
+        's implementations of <see cref="T:System.Object.Equals(Object)" />
 
         
 
-         and <see
-         cref="T:System.Object.GetHashCode()" />
+         and <see cref="T:System.Object.GetHashCode()" />
 
         
 
-         are used. In any case, you can specify a <see
-         cref="T:System.Collections.Generic.IEqualityComparer&lt;TKey&gt;" />
+         are used. In any case, you can specify a <see cref="T:System.Collections.Generic.IEqualityComparer&lt;TKey&gt;" />
 
         
 
          implementation in a constructor overload that accepts an equality comparer parameter.</para
       >
       <para
-        >After its insertion in a dictionary, changes to the value of a key that affect the equality comparer render the dictionary's behavior unspecified. Every key in a dictionary must be unique according to the equality comparer. A key cannot be <see
-         langword="null" />
+        >After its insertion in a dictionary, changes to the value of a key that affect the equality comparer render the dictionary's behavior unspecified. Every key in a dictionary must be unique according to the equality comparer. A key cannot be <see langword="null" />
 
         
 
-        , but a value can be, if the value type <see
-         langword="TValue" />
+        , but a value can be, if the value type <see langword="TValue" />
 
         
 
@@ -126,23 +117,19 @@
       >
       <para>The capacity of a dictionary is the number of elements that dictionary can hold.  As elements are added to a dictionary, the capacity is automatically increased.</para>
       <para
-        >This type contains a member that is a nested type, called <see
-         langword="Enumerator" />
+        >This type contains a member that is a nested type, called <see langword="Enumerator" />
 
         
 
-        . Although <see
-         langword="Enumerator" />
+        . Although <see langword="Enumerator" />
 
         
 
-         is a member of this type, <see
-         langword="Enumerator" />
+         is a member of this type, <see langword="Enumerator" />
 
         
 
-         is not described here; instead, it is described in its own entry, <see
-         langword="Dictionary&lt;TKey,TValue&gt;.Enumerator" />
+         is not described here; instead, it is described in its own entry, <see langword="Dictionary&lt;TKey,TValue&gt;.Enumerator" />
 
         
 
@@ -201,8 +188,7 @@
         </summary>
         <remarks>
           <para
-            >Every key in a dictionary must be unique according to the default equality comparer; otherwise, a <see
-             cref="T:System.ArgumentException" />
+            >Every key in a dictionary must be unique according to the default equality comparer; otherwise, a <see cref="T:System.ArgumentException" />
 
             
 
@@ -223,8 +209,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -348,8 +333,7 @@
         </summary>
         <remarks>
           <para
-            >Every key in a dictionary must be unique according to the specified; otherwise, a <see
-             cref="T:System.ArgumentException" />
+            >Every key in a dictionary must be unique according to the specified; otherwise, a <see cref="T:System.ArgumentException" />
 
             
 
@@ -370,8 +354,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -482,20 +465,17 @@
         </summary>
         <remarks>
           <para
-            >You can also use the <see
-             cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Item" />
+            >You can also use the <see cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Item" />
             <see langword="(TKey)" />
 
             
 
-             property to add new elements by setting the value of a key that does not exist in the dictionary. However, if the specified key already exists in the dictionary, setting the <see
-             cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Item" />
+             property to add new elements by setting the value of a key that does not exist in the dictionary. However, if the specified key already exists in the dictionary, setting the <see cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Item" />
             <see langword="(TKey)" />
 
             
 
-             property overwrites the old value. In contrast, the <see
-             cref="M:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Add" />
+             property overwrites the old value. In contrast, the <see cref="M:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Add" />
             <see langword="(TKey,TValue)" />
 
             
@@ -503,16 +483,14 @@
              method does not modify existing elements.</para
           >
           <para
-            >If <see
-             cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Count" />
+            >If <see cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Count" />
 
             
 
              already equals the capacity, the capacity of the dictionary is increased.</para
           >
           <para
-            >A key cannot be <see
-             cref="null" />
+            >A key cannot be <see cref="null" />
 
             
 
@@ -529,8 +507,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -562,8 +539,7 @@
           <para>
             <block subset="none" type="note">
               <para
-                >This method is implemented to support the <see
-                 cref="T:System.Collections.IDictionary" />
+                >This method is implemented to support the <see cref="T:System.Collections.IDictionary" />
 
                 
 
@@ -634,13 +610,11 @@
 
             
 
-            , if an element whose key is <paramref
-             name="key" />
+            , if an element whose key is <paramref name="key" />
 
             
 
-             is found in the dictionary; otherwise, <see
-             langword="false" />
+             is found in the dictionary; otherwise, <see langword="false" />
 
             
 
@@ -657,8 +631,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -695,13 +668,11 @@
 
             
 
-            , if an element whose value is <paramref
-             name="value" />
+            , if an element whose value is <paramref name="value" />
 
             
 
-             is found in the dictionary; otherwise, <see
-             langword="false" />
+             is found in the dictionary; otherwise, <see langword="false" />
 
             
 
@@ -710,26 +681,22 @@
         </returns>
         <remarks>
           <para
-            >This method determines equality using the default equality comparer for the value type TValue. If TValue implements <see
-             cref="T:System.IEquatable&lt;TValue&gt;" />
+            >This method determines equality using the default equality comparer for the value type TValue. If TValue implements <see cref="T:System.IEquatable&lt;TValue&gt;" />
 
             
 
-            , that type is used. Otherwise, <see
-             cref="M:System.Object.Equals" />
+            , that type is used. Otherwise, <see cref="M:System.Object.Equals" />
 
             
 
              is used.</para
           >
           <para
-            >This method performs a linear search; therefore, the average execution time is proportional to <see
-             cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Count" />
+            >This method performs a linear search; therefore, the average execution time is proportional to <see cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Count" />
 
             
 
-            . That is, this method is an O(n) operation, where n is <see
-             cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Count" />
+            . That is, this method is an O(n) operation, where n is <see cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Count" />
 
             
 
@@ -792,8 +759,7 @@
         <remarks>
           <para>
             <block subset="none" type="usage"
-              >For a detailed description regarding the use of an enumerator, see <see
-               cref="T:System.Collections.Generic.IEnumerator&lt;TKey&gt;" />
+              >For a detailed description regarding the use of an enumerator, see <see cref="T:System.Collections.Generic.IEnumerator&lt;TKey&gt;" />
 
               
 
@@ -854,8 +820,7 @@
         </summary>
         <value>
           <para
-            >The value associated with the specified key. On a get attempt, if the specified key is not found, a <see
-             cref="T:System.Collections.Generic.KeyNotFoundException" />
+            >The value associated with the specified key. On a get attempt, if the specified key is not found, a <see cref="T:System.Collections.Generic.KeyNotFoundException" />
 
             
 
@@ -864,28 +829,24 @@
         </value>
         <remarks>
           <para
-            >The default value for value types is zero while that for reference types is <see
-             cref="null" />
+            >The default value for value types is zero while that for reference types is <see cref="null" />
 
             
 
             .</para
           >
           <para
-            >You can also use the <see
-             cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Item" />
+            >You can also use the <see cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Item" />
             <see langword="(TKey)" />
 
             
 
-             property to add new elements by setting the value of a key that does not exist in the dictionary. However, if the specified key already exists in the dictionary, setting the <see
-             cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Item" />
+             property to add new elements by setting the value of a key that does not exist in the dictionary. However, if the specified key already exists in the dictionary, setting the <see cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Item" />
             <see langword="(TKey)" />
 
             
 
-             property overwrites the old value. In contrast, the <see
-             cref="M:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Add" />
+             property overwrites the old value. In contrast, the <see cref="M:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Add" />
             <see langword="(TKey,TValue)" />
 
             
@@ -893,8 +854,7 @@
              method does not modify existing elements.</para
           >
           <para
-            >A key cannot be <see
-             cref="null" />
+            >A key cannot be <see cref="null" />
 
             
 
@@ -909,8 +869,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -919,8 +878,7 @@
         </exception>
         <exception cref="T:System.Collections.Generic.KeyNotFoundException">
           <para
-            >During a get attempt, <paramref
-             name="key" />
+            >During a get attempt, <paramref name="key" />
 
             
 
@@ -956,8 +914,7 @@
         <remarks>
           <para>This property is read-only.</para>
           <para
-            >The order of the keys in the key collection is unspecified, but it is the same order as the associated values in the value collection returned by the <see
-             cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Values" />
+            >The order of the keys in the key collection is unspecified, but it is the same order as the associated values in the value collection returned by the <see cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Values" />
 
             
 
@@ -1023,23 +980,19 @@
 
             
 
-             if the element containing <paramref
-             name="key" />
+             if the element containing <paramref name="key" />
 
             
 
-             is successfully removed; otherwise, <see
-             langword="false" />
+             is successfully removed; otherwise, <see langword="false" />
 
             
 
-            . This method also returns <see
-             langword="false" />
+            . This method also returns <see langword="false" />
 
             
 
-             if <paramref
-             name="key" />
+             if <paramref name="key" />
 
             
 
@@ -1057,8 +1010,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -1157,8 +1109,7 @@
         <param name="index">To be added.</param>
         <summary>
           <para
-            >This method is implemented to support the <see
-             cref="T:System.Collections.Generics.ICollection&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt; " />
+            >This method is implemented to support the <see cref="T:System.Collections.Generics.ICollection&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt; " />
 
             
 
@@ -1189,8 +1140,7 @@
       <Docs>
         <summary>
           <para
-            >This read-only property is implemented to support the <see
-             cref="T:System.Collections.Generics.ICollection&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt; " />
+            >This read-only property is implemented to support the <see cref="T:System.Collections.Generics.ICollection&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt; " />
 
             
 
@@ -1252,8 +1202,7 @@
       <Docs>
         <summary>
           <para
-            >This read-only property is implemented to support the <see
-             cref="T:System.Collections.Generic.IDictionary&lt;TKey,TValue&gt;" />
+            >This read-only property is implemented to support the <see cref="T:System.Collections.Generic.IDictionary&lt;TKey,TValue&gt;" />
 
             
 
@@ -1285,8 +1234,7 @@
       <Docs>
         <summary>
           <para
-            >This read-only property is implemented to support the <see
-             cref="T:System.Collections.Generic.IDictionary&lt;TKey,TValue&gt;" />
+            >This read-only property is implemented to support the <see cref="T:System.Collections.Generic.IDictionary&lt;TKey,TValue&gt;" />
 
             
 
@@ -1319,8 +1267,7 @@
       <Docs>
         <summary>
           <para
-            >This method is implemented to support the <see
-             cref="T:System.Collections.Generics.IEnumerable&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt; " />
+            >This method is implemented to support the <see cref="T:System.Collections.Generics.IEnumerable&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt; " />
 
             
 
@@ -1399,8 +1346,7 @@
         <param name="index">To be added.</param>
         <summary>
           <para
-            >This method is implemented to support the <see
-             cref="T:System.Collections.ICollection" />
+            >This method is implemented to support the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1431,8 +1377,7 @@
       <Docs>
         <summary>
           <para
-            >This read-only property is implemented to support the <see
-             cref="T:System.Collections.ICollection" />
+            >This read-only property is implemented to support the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1464,8 +1409,7 @@
       <Docs>
         <summary>
           <para
-            >This read-only property is implemented to support the <see
-             cref="T:System.Collections.ICollection" />
+            >This read-only property is implemented to support the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1500,8 +1444,7 @@
         <param name="value">To be added.</param>
         <summary>
           <para
-            >This method is implemented to support the <see
-             cref="T:System.Collections.IDictionary" />
+            >This method is implemented to support the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1533,8 +1476,7 @@
         <param name="key">To be added.</param>
         <summary>
           <para
-            >This method is implemented to support the <see
-             cref="T:System.Collections.IDictionary" />
+            >This method is implemented to support the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1567,8 +1509,7 @@
       <Docs>
         <summary>
           <para
-            >This method is implemented to support the <see
-             cref="T:System.Collections.IDictionary" />
+            >This method is implemented to support the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1600,8 +1541,7 @@
       <Docs>
         <summary>
           <para
-            >This read-only property is implemented to support the <see
-             cref="T:System.Collections.IDictionary" />
+            >This read-only property is implemented to support the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1633,8 +1573,7 @@
       <Docs>
         <summary>
           <para
-            >This read-only property is implemented to support the <see
-             cref="T:System.Collections.IDictionary" />
+            >This read-only property is implemented to support the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1670,8 +1609,7 @@
         <param name="key">To be added.</param>
         <summary>
           <para
-            >This read-only property is implemented to support the <see
-             cref="T:System.Collections.IDictionary" />
+            >This read-only property is implemented to support the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1703,8 +1641,7 @@
       <Docs>
         <summary>
           <para
-            >This read-only property is implemented to support the <see
-             cref="T:System.Collections.IDictionary" />
+            >This read-only property is implemented to support the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1737,8 +1674,7 @@
         <param name="key">To be added.</param>
         <summary>
           <para
-            >This method is implemented to support the <see
-             cref="T:System.Collections.IDictionary" />
+            >This method is implemented to support the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1769,8 +1705,7 @@
       <Docs>
         <summary>
           <para
-            >This read-only property is implemented to support the <see
-             cref="T:System.Collections.IDictionary" />
+            >This read-only property is implemented to support the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1803,8 +1738,7 @@
       <Docs>
         <summary>
           <para
-            >This method is implemented to support the <see
-             cref="T:System.Collections.IEnumerable" />
+            >This method is implemented to support the <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -1873,8 +1807,7 @@
         <remarks>
           <para>This property is read-only.</para>
           <para
-            >The order of the values in the value collection is unspecified, but it is the same order as the associated values in the key collection returned by the <see
-             cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Keys" />
+            >The order of the values in the value collection is unspecified, but it is the same order as the associated values in the key collection returned by the <see cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Keys" />
 
             
 

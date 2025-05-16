@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains the graphical data that makes up a <see
-         cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+        >Contains the graphical data that makes up a <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
         
 
@@ -38,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.PathData" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.PathData" />
 
             
 
@@ -65,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an array of <see
-             cref="T:System.Drawing.PointF" />
+            >Gets or sets an array of <see cref="T:System.Drawing.PointF" />
 
             
 

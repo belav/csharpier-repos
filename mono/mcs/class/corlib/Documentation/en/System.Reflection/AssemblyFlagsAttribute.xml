@@ -33,54 +33,45 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Reflection.AssemblyNameFlags" />
+        >The <see cref="T:System.Reflection.AssemblyNameFlags" />
 
         
 
          enumeration describes the assembly characteristics that can be set using this attribute.</para
       >
       <para
-        >To access the flags that have been specified for an assembly, use the <see
-         cref="Overload:System.Reflection.Assembly.GetName" />
+        >To access the flags that have been specified for an assembly, use the <see cref="Overload:System.Reflection.Assembly.GetName" />
 
         
 
-         property to obtain an <see
-         cref="T:System.Reflection.AssemblyName" />
+         property to obtain an <see cref="T:System.Reflection.AssemblyName" />
 
         
 
-         object, then use the <see
-         cref="P:System.Reflection.AssemblyName.Flags" />
+         object, then use the <see cref="P:System.Reflection.AssemblyName.Flags" />
 
         
 
-         property to obtain an <see
-         cref="T:System.Reflection.AssemblyNameFlags" />
+         property to obtain an <see cref="T:System.Reflection.AssemblyNameFlags" />
 
         
 
          value.</para
       >
       <para
-        >To specify <see
-         cref="T:System.Reflection.AssemblyNameFlags" />
+        >To specify <see cref="T:System.Reflection.AssemblyNameFlags" />
 
         
 
-         flags for a dynamic assembly, set the <see
-         cref="P:System.Reflection.AssemblyName.Flags" />
+         flags for a dynamic assembly, set the <see cref="P:System.Reflection.AssemblyName.Flags" />
 
         
 
-         property of the <see
-         cref="T:System.Reflection.AssemblyName" />
+         property of the <see cref="T:System.Reflection.AssemblyName" />
 
         
 
-         object that you pass to the <see
-         cref="Overload:System.AppDomain.DefineDynamicAssembly" />
+         object that you pass to the <see cref="Overload:System.AppDomain.DefineDynamicAssembly" />
 
         
 
@@ -90,8 +81,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies a bitwise combination of <see
-         cref="T:System.Reflection.AssemblyNameFlags" />
+        >Specifies a bitwise combination of <see cref="T:System.Reflection.AssemblyNameFlags" />
 
         
 
@@ -128,13 +118,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.AssemblyFlagsAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyFlagsAttribute" />
 
             
 
-             class with the specified combination of <see
-             cref="T:System.Reflection.AssemblyNameFlags" />
+             class with the specified combination of <see cref="T:System.Reflection.AssemblyNameFlags" />
 
             
 
@@ -142,12 +130,15 @@
           >
         </summary>
         <param name="assemblyFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Reflection.AssemblyNameFlags" />
+          A bitwise combination of <see cref="T:System.Reflection.AssemblyNameFlags" />
 
           
 
@@ -178,13 +169,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.AssemblyFlagsAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyFlagsAttribute" />
 
             
 
-             class with the specified combination of <see
-             cref="T:System.Reflection.AssemblyNameFlags" />
+             class with the specified combination of <see cref="T:System.Reflection.AssemblyNameFlags" />
 
             
 
@@ -192,12 +181,15 @@
           >
         </summary>
         <param name="assemblyFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Reflection.AssemblyNameFlags" />
+          A bitwise combination of <see cref="T:System.Reflection.AssemblyNameFlags" />
 
           
 
@@ -237,13 +229,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.AssemblyFlagsAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyFlagsAttribute" />
 
             
 
-             class with the specified combination of <see
-             cref="T:System.Reflection.AssemblyNameFlags" />
+             class with the specified combination of <see cref="T:System.Reflection.AssemblyNameFlags" />
 
             
 
@@ -251,12 +241,15 @@
           >
         </summary>
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Reflection.AssemblyNameFlags" />
+          A bitwise combination of <see cref="T:System.Reflection.AssemblyNameFlags" />
 
           
 
@@ -281,8 +274,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns an integer for backward compatibility. Cast the value to the <see
-             cref="T:System.Reflection.AssemblyNameFlags" />
+            >This property returns an integer for backward compatibility. Cast the value to the <see cref="T:System.Reflection.AssemblyNameFlags" />
 
             
 
@@ -292,8 +284,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an integer value representing the combination of <see
-             cref="T:System.Reflection.AssemblyNameFlags" />
+            >Gets an integer value representing the combination of <see cref="T:System.Reflection.AssemblyNameFlags" />
 
             
 
@@ -327,8 +318,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns an integer for backward compatibility. Cast the value to the <see
-             cref="T:System.Reflection.AssemblyNameFlags" />
+            >This property returns an integer for backward compatibility. Cast the value to the <see cref="T:System.Reflection.AssemblyNameFlags" />
 
             
 
@@ -338,8 +328,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an unsigned integer value representing the combination of <see
-             cref="T:System.Reflection.AssemblyNameFlags" />
+            >Gets an unsigned integer value representing the combination of <see cref="T:System.Reflection.AssemblyNameFlags" />
 
             
 

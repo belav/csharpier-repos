@@ -13,18 +13,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Multiple methods in <see
-         cref="T:System.Windows.Forms.CheckBox" />
+        >Multiple methods in <see cref="T:System.Windows.Forms.CheckBox" />
 
         
 
-        , <see
-         cref="T:System.Windows.Forms.CheckedListBox" />
+        , <see cref="T:System.Windows.Forms.CheckedListBox" />
 
         
 
-        , and <see
-         cref="T:System.Windows.Forms.ItemCheckEventArgs" />
+        , and <see cref="T:System.Windows.Forms.ItemCheckEventArgs" />
 
         
 

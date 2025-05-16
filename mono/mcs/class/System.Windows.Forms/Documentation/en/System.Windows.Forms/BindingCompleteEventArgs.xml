@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
+        >The <see cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
 
         
 
@@ -28,8 +27,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.Binding.BindingComplete" />
+        >Provides data for the <see cref="E:System.Windows.Forms.Binding.BindingComplete" />
 
         
 
@@ -58,8 +56,7 @@
 
             
 
-             indicates whether the binding process was successful or an error or exception occurred. <paramref
-             name="context" />
+             indicates whether the binding process was successful or an error or exception occurred. <paramref name="context" />
 
             
 
@@ -69,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
 
             
 
@@ -78,36 +74,45 @@
           >
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The binding associated with this occurrence of a <see
-           cref="E:System.Windows.Forms.Binding.BindingComplete" />
+          The binding associated with this occurrence of a <see cref="E:System.Windows.Forms.Binding.BindingComplete" />
 
           
 
            event.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.BindingCompleteState" />
+          One of the <see cref="T:System.Windows.Forms.BindingCompleteState" />
 
           
 
            values.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.BindingCompleteContext" />
+          One of the <see cref="T:System.Windows.Forms.BindingCompleteContext" />
 
           
 
@@ -139,8 +144,7 @@
 
             
 
-             indicates whether the binding process was successful or an error or exception occurred. <paramref
-             name="context" />
+             indicates whether the binding process was successful or an error or exception occurred. <paramref name="context" />
 
             
 
@@ -150,8 +154,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
 
             
 
@@ -159,43 +162,56 @@
           >
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The binding associated with this occurrence of a <see
-           cref="E:System.Windows.Forms.Binding.BindingComplete" />
+          The binding associated with this occurrence of a <see cref="E:System.Windows.Forms.Binding.BindingComplete" />
 
           
 
            event.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.BindingCompleteState" />
+          One of the <see cref="T:System.Windows.Forms.BindingCompleteState" />
 
           
 
            values.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.BindingCompleteContext" />
+          One of the <see cref="T:System.Windows.Forms.BindingCompleteContext" />
 
           
 
            values. </param
         >
         <param name="errorText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -228,8 +244,7 @@
 
             
 
-             indicates whether the binding process was successful or an error or exception occurred. <paramref
-             name="context" />
+             indicates whether the binding process was successful or an error or exception occurred. <paramref name="context" />
 
             
 
@@ -239,8 +254,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
 
             
 
@@ -248,55 +262,71 @@
           >
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The binding associated with this occurrence of a <see
-           cref="E:System.Windows.Forms.Binding.BindingComplete" />
+          The binding associated with this occurrence of a <see cref="E:System.Windows.Forms.Binding.BindingComplete" />
 
           
 
            event.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.BindingCompleteState" />
+          One of the <see cref="T:System.Windows.Forms.BindingCompleteState" />
 
           
 
            values.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.BindingCompleteContext" />
+          One of the <see cref="T:System.Windows.Forms.BindingCompleteContext" />
 
           
 
            values. </param
         >
         <param name="errorText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error text or exception message for errors that occurred during the binding.</param
         >
         <param name="exception">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Exception" />
+          The <see cref="T:System.Exception" />
 
           
 
@@ -330,8 +360,7 @@
 
             
 
-             indicates whether the binding process was successful or an error or exception occurred. <paramref
-             name="context" />
+             indicates whether the binding process was successful or an error or exception occurred. <paramref name="context" />
 
             
 
@@ -341,8 +370,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
 
             
 
@@ -350,62 +378,82 @@
           >
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The binding associated with this occurrence of a <see
-           cref="E:System.Windows.Forms.Binding.BindingComplete" />
+          The binding associated with this occurrence of a <see cref="E:System.Windows.Forms.Binding.BindingComplete" />
 
           
 
            event.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.BindingCompleteState" />
+          One of the <see cref="T:System.Windows.Forms.BindingCompleteState" />
 
           
 
            values.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.BindingCompleteContext" />
+          One of the <see cref="T:System.Windows.Forms.BindingCompleteContext" />
 
           
 
            values. </param
         >
         <param name="errorText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error text or exception message for errors that occurred during the binding.</param
         >
         <param name="exception">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Exception" />
+          The <see cref="T:System.Exception" />
 
           
 
            that occurred during the binding.</param
         >
         <param name="cancel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -428,23 +476,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.BindingCompleteEventArgs.Binding" />
+            >The <see cref="P:System.Windows.Forms.BindingCompleteEventArgs.Binding" />
 
             
 
-             might also be associated with the <see
-             cref="E:System.Windows.Forms.BindingSource.BindingComplete" />
+             might also be associated with the <see cref="E:System.Windows.Forms.BindingSource.BindingComplete" />
 
             
 
-             event of a <see
-             cref="T:System.Windows.Forms.BindingSource" />
+             event of a <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
-             or of a class that inherits from <see
-             cref="T:System.Windows.Forms.BindingManagerBase" />
+             or of a class that inherits from <see cref="T:System.Windows.Forms.BindingManagerBase" />
 
             
 
@@ -454,8 +498,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the binding associated with this occurrence of a <see
-             cref="E:System.Windows.Forms.Binding.BindingComplete" />
+            >Gets the binding associated with this occurrence of a <see cref="E:System.Windows.Forms.Binding.BindingComplete" />
 
             
 
@@ -504,8 +547,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.BindingCompleteEventArgs.BindingCompleteState" />
+            >Use the <see cref="P:System.Windows.Forms.BindingCompleteEventArgs.BindingCompleteState" />
 
             
 
@@ -533,8 +575,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns an empty string if no error occurred in the binding operation. It returns the value of the <see
-             cref="P:System.Exception.Message" />
+            >This property returns an empty string if no error occurred in the binding operation. It returns the value of the <see cref="P:System.Exception.Message" />
 
             
 

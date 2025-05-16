@@ -517,8 +517,7 @@
       
 
       "
-      <PropertyComment
-      >
+      <PropertyComment>
         <summary>SyntaxToken representing the kind of the operator of the prefix unary expression.</summary>
       </PropertyComment>
     </Field>
@@ -2022,18 +2021,15 @@
       <Kind Name="InterpolatedMultiLineRawStringStartToken" />
       <PropertyComment>
         <summary
-          >The first part of an interpolated string, <c
-          >$"</c>
+          >The first part of an interpolated string, <c>$"</c>
 
           
 
-           or <c
-          >$@"</c>
+           or <c>$@"</c>
 
           
 
-           or <c
-          >$"""</c>
+           or <c>$"""</c>
         </summary>
       </PropertyComment>
     </Field>
@@ -2249,8 +2245,7 @@
       <Kind Name="OpenBraceToken" />
       <PropertyComment>
         <summary
-          >This could be a single <c
-          >{</c>
+          >This could be a single <c>{</c>
 
           
 
@@ -2264,10 +2259,8 @@
     <Field Name="CloseBraceToken" Type="SyntaxToken">
       <Kind Name="CloseBraceToken" />
       <PropertyComment>
-        <summary
-          >
-          This could be a single <c
-          >}</c>
+        <summary>
+          This could be a single <c>}</c>
 
           
 

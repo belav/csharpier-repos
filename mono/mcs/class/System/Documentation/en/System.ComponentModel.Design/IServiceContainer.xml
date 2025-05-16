@@ -33,21 +33,18 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>A service container is, by definition, a service provider. In addition to providing services, it also provides a mechanism for adding and removing services. Services are a foundation of the .NET Framework design-time architecture. Services provide design-time objects access to specific features and methods implemented by a service object that provides a service or services.</para>
       <para
-        >To obtain a service at design time, call the <see
-         cref="M:System.ComponentModel.Component.GetService(System.Type)" />
+        >To obtain a service at design time, call the <see cref="M:System.ComponentModel.Component.GetService(System.Type)" />
 
         
 
-         method of a component sited in design mode. Designers and other objects can add or remove services at design time through the <see
-         cref="T:System.ComponentModel.Design.IDesignerHost" />
+         method of a component sited in design mode. Designers and other objects can add or remove services at design time through the <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
         
 
          interface.</para
       >
       <para
-        >Service containers can be contained by other service containers, forming a tree of service containers. By default, the <see
-         cref="T:System.ComponentModel.Design.IServiceContainer" />
+        >Service containers can be contained by other service containers, forming a tree of service containers. By default, the <see cref="T:System.ComponentModel.Design.IServiceContainer" />
 
         
 
@@ -89,14 +86,22 @@
           <para>Adds the specified service to the service container.</para>
         </summary>
         <param name="serviceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of service to add. </param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -133,19 +138,26 @@
           <para>Adds the specified service to the service container.</para>
         </summary>
         <param name="serviceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of service to add. </param
         >
         <param name="serviceInstance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the service type to add. This object must implement or inherit from the type indicated by the <paramref
-           name="serviceType" />
+          An instance of the service type to add. This object must implement or inherit from the type indicated by the <paramref name="serviceType" />
 
           
 
@@ -183,21 +195,33 @@
           <para>Adds the specified service to the service container, and optionally promotes the service to parent service containers.</para>
         </summary>
         <param name="serviceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of service to add. </param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A callback object that is used to create the service. This allows a service to be declared as available, but delays the creation of the object until the service is requested. </param
         >
         <param name="promote">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -235,26 +259,37 @@
           <para>Adds the specified service to the service container, and optionally promotes the service to any parent service containers.</para>
         </summary>
         <param name="serviceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of service to add. </param
         >
         <param name="serviceInstance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the service type to add. This object must implement or inherit from the type indicated by the <paramref
-           name="serviceType" />
+          An instance of the service type to add. This object must implement or inherit from the type indicated by the <paramref name="serviceType" />
 
           
 
            parameter. </param
         >
         <param name="promote">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -287,7 +322,11 @@
           <para>Removes the specified service type from the service container.</para>
         </summary>
         <param name="serviceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -324,14 +363,22 @@
           <para>Removes the specified service type from the service container, and optionally promotes the service to parent service containers.</para>
         </summary>
         <param name="serviceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of service to remove. </param
         >
         <param name="promote">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -20,18 +20,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You must call the <see
-         cref="Overload:System.Runtime.InteropServices.SafeBuffer.Initialize" />
+        >You must call the <see cref="Overload:System.Runtime.InteropServices.SafeBuffer.Initialize" />
 
         
 
-         method before you use any instance of <see
-         cref="T:System.Runtime.InteropServices.SafeBuffer" />
+         method before you use any instance of <see cref="T:System.Runtime.InteropServices.SafeBuffer" />
 
         
 
-        . To avoid races when you store an instance of a <see
-         cref="T:System.Runtime.InteropServices.SafeBuffer" />
+        . To avoid races when you store an instance of a <see cref="T:System.Runtime.InteropServices.SafeBuffer" />
 
         
 
@@ -40,8 +37,7 @@
       <list type="bullet">
         <item>
           <para
-            >Create a lock when publishing the <see
-             cref="T:System.Runtime.InteropServices.SafeBuffer" />
+            >Create a lock when publishing the <see cref="T:System.Runtime.InteropServices.SafeBuffer" />
 
             
 
@@ -50,18 +46,15 @@
         </item>
         <item>
           <para
-            >Create a local variable, initialize the <see
-             cref="T:System.Runtime.InteropServices.SafeBuffer" />
+            >Create a local variable, initialize the <see cref="T:System.Runtime.InteropServices.SafeBuffer" />
 
             
 
-            , and then assign the <see
-             cref="T:System.Runtime.InteropServices.SafeBuffer" />
+            , and then assign the <see cref="T:System.Runtime.InteropServices.SafeBuffer" />
 
             
 
-             to the static variable, for example, by using the <see
-             cref="M:System.Threading.Interlocked.CompareExchange``1(``0@,``0,``0)" />
+             to the static variable, for example, by using the <see cref="M:System.Threading.Interlocked.CompareExchange``1(``0@,``0,``0)" />
 
             
 
@@ -97,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Runtime.InteropServices.SafeBuffer" />
+            >Creates a new instance of the <see cref="T:System.Runtime.InteropServices.SafeBuffer" />
 
             
 
@@ -106,7 +98,11 @@
           >
         </summary>
         <param name="ownsHandle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -194,8 +190,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Defines the allocation size of the memory region in bytes. You must call this method before you use the <see
-             cref="T:System.Runtime.InteropServices.SafeBuffer" />
+            >Defines the allocation size of the memory region in bytes. You must call this method before you use the <see cref="T:System.Runtime.InteropServices.SafeBuffer" />
 
             
 
@@ -203,7 +198,11 @@
           >
         </summary>
         <param name="numBytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -244,8 +243,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the allocation size of the memory buffer by using the specified number of elements and element size. You must call this method before you use the <see
-             cref="T:System.Runtime.InteropServices.SafeBuffer" />
+            >Specifies the allocation size of the memory buffer by using the specified number of elements and element size. You must call this method before you use the <see cref="T:System.Runtime.InteropServices.SafeBuffer" />
 
             
 
@@ -253,14 +251,22 @@
           >
         </summary>
         <param name="numElements">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of elements in the buffer.</param
         >
         <param name="sizeOfEachElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -306,8 +312,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Defines the allocation size of the memory region by specifying the number of value types. You must call this method before you use the <see
-             cref="T:System.Runtime.InteropServices.SafeBuffer" />
+            >Defines the allocation size of the memory region by specifying the number of value types. You must call this method before you use the <see cref="T:System.Runtime.InteropServices.SafeBuffer" />
 
             
 
@@ -315,14 +320,22 @@
           >
         </summary>
         <param name="numElements">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of elements of the value type to allocate memory for.</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -377,14 +390,22 @@
           <para>The value type that was read from memory.</para>
         </returns>
         <param name="byteOffset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The location from which to read the value type. You may have to consider alignment issues.</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -468,8 +489,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases a pointer that was obtained by the <see
-             cref="M:System.Runtime.InteropServices.SafeBuffer.AcquirePointer(System.Byte*@)" />
+            >Releases a pointer that was obtained by the <see cref="M:System.Runtime.InteropServices.SafeBuffer.AcquirePointer(System.Byte*@)" />
 
             
 

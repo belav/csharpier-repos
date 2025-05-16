@@ -17,13 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Drawing.Design.UITypeEditor" />
+        >The <see cref="T:System.Drawing.Design.UITypeEditor" />
 
         
 
-         class provides a base class that you can derive from and extend to implement a custom type editor for the design-time environment. Typically, your custom type editor interacts with the <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+         class provides a base class that you can derive from and extend to implement a custom type editor for the design-time environment. Typically, your custom type editor interacts with the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
@@ -34,8 +32,7 @@
       <list type="bullet">
         <item>
           <para
-            >Define a class that derives from <see
-             cref="T:System.Drawing.Design.UITypeEditor" />
+            >Define a class that derives from <see cref="T:System.Drawing.Design.UITypeEditor" />
 
             
 
@@ -44,8 +41,7 @@
         </item>
         <item>
           <para
-            >Override the <see
-             cref="M:System.Drawing.Design.UITypeEditor.EditValue(System.IServiceProvider,System.Object)" />
+            >Override the <see cref="M:System.Drawing.Design.UITypeEditor.EditValue(System.IServiceProvider,System.Object)" />
 
             
 
@@ -54,8 +50,7 @@
         </item>
         <item>
           <para
-            >Override the <see
-             cref="M:System.Drawing.Design.UITypeEditor.GetEditStyle" />
+            >Override the <see cref="M:System.Drawing.Design.UITypeEditor.GetEditStyle" />
 
             
 
@@ -67,8 +62,7 @@
       <list type="bullet">
         <item>
           <para
-            >Override the <see
-             cref="M:System.Drawing.Design.UITypeEditor.GetPaintValueSupported" />
+            >Override the <see cref="M:System.Drawing.Design.UITypeEditor.GetPaintValueSupported" />
 
             
 
@@ -77,8 +71,7 @@
         </item>
         <item>
           <para
-            >Override the <see
-             cref="M:System.Drawing.Design.UITypeEditor.PaintValue(System.Object,System.Drawing.Graphics,System.Drawing.Rectangle)" />
+            >Override the <see cref="M:System.Drawing.Design.UITypeEditor.PaintValue(System.Object,System.Drawing.Graphics,System.Drawing.Rectangle)" />
 
             
 
@@ -87,8 +80,7 @@
         </item>
         <item>
           <para
-            >Override the <see
-             cref="T:System.Drawing.Design.UITypeEditor" />
+            >Override the <see cref="T:System.Drawing.Design.UITypeEditor" />
 
             
 
@@ -98,8 +90,7 @@
       </list>
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Drawing.Design.UITypeEditor" />
+          >The <see cref="T:System.Drawing.Design.UITypeEditor" />
 
           
 
@@ -107,20 +98,17 @@
         >
       </block>
       <para
-        >For more information about enhancing design-time support, see <format
-         type="text/html">
+        >For more information about enhancing design-time support, see <format type="text/html">
           <a href="d6ac8a6a-42fd-4bc8-bf33-b212811297e2">Extending Design-Time Support</a>
         </format>
 
         
 
-        . For more information on implementing a <see
-         cref="T:System.Drawing.Design.UITypeEditor" />
+        . For more information on implementing a <see cref="T:System.Drawing.Design.UITypeEditor" />
 
         
 
-        , see <format
-         type="text/html">
+        , see <format type="text/html">
           <a href="f068b4ea-6e8c-4c0b-aefd-188b337240da">User Interface Type Editors Overview</a>
         </format>
 
@@ -145,8 +133,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Design.UITypeEditor" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Design.UITypeEditor" />
 
             
 
@@ -180,8 +167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Edits the value of the specified object using the editor style indicated by the <see
-             cref="M:System.Drawing.Design.UITypeEditor.GetEditStyle" />
+            >Edits the value of the specified object using the editor style indicated by the <see cref="M:System.Drawing.Design.UITypeEditor.GetEditStyle" />
 
             
 
@@ -193,19 +179,26 @@
           <para>The new value of the object.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IServiceProvider" />
+          An <see cref="T:System.IServiceProvider" />
 
           
 
            that this editor can use to obtain services. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -239,8 +232,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Edits the specified object's value using the editor style indicated by the <see
-             cref="M:System.Drawing.Design.UITypeEditor.GetEditStyle" />
+            >Edits the specified object's value using the editor style indicated by the <see cref="M:System.Drawing.Design.UITypeEditor.GetEditStyle" />
 
             
 
@@ -252,31 +244,41 @@
           <para>The new value of the object. If the value of the object has not changed, this should return the same object it was passed.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that can be used to gain additional context information. </param
         >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IServiceProvider" />
+          An <see cref="T:System.IServiceProvider" />
 
           
 
            that this editor can use to obtain services. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -302,18 +304,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a <see
-             cref="T:System.Drawing.Design.UITypeEditor" />
+            >If a <see cref="T:System.Drawing.Design.UITypeEditor" />
 
             
 
-             does not override and implement this method, <see
-             cref="M:System.Drawing.Design.UITypeEditor.GetEditStyle" />
+             does not override and implement this method, <see cref="M:System.Drawing.Design.UITypeEditor.GetEditStyle" />
 
             
 
-             will return <see
-             cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
+             will return <see cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
 
             
 
@@ -323,8 +322,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the editor style used by the <see
-             cref="M:System.Drawing.Design.UITypeEditor.EditValue(System.IServiceProvider,System.Object)" />
+            >Gets the editor style used by the <see cref="M:System.Drawing.Design.UITypeEditor.EditValue(System.IServiceProvider,System.Object)" />
 
             
 
@@ -334,18 +332,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Design.UITypeEditorEditStyle" />
+            >A <see cref="T:System.Drawing.Design.UITypeEditorEditStyle" />
 
             
 
-             enumeration value that indicates the style of editor used by the current <see
-             cref="T:System.Drawing.Design.UITypeEditor" />
+             enumeration value that indicates the style of editor used by the current <see cref="T:System.Drawing.Design.UITypeEditor" />
 
             
 
-            . By default, this method will return <see
-             cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
+            . By default, this method will return <see cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
 
             
 
@@ -375,8 +370,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the editor style used by the <see
-             cref="M:System.Drawing.Design.UITypeEditor.EditValue(System.IServiceProvider,System.Object)" />
+            >Gets the editor style used by the <see cref="M:System.Drawing.Design.UITypeEditor.EditValue(System.IServiceProvider,System.Object)" />
 
             
 
@@ -386,28 +380,23 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Design.UITypeEditorEditStyle" />
+            >A <see cref="T:System.Drawing.Design.UITypeEditorEditStyle" />
 
             
 
-             value that indicates the style of editor used by the <see
-             cref="M:System.Drawing.Design.UITypeEditor.EditValue(System.IServiceProvider,System.Object)" />
+             value that indicates the style of editor used by the <see cref="M:System.Drawing.Design.UITypeEditor.EditValue(System.IServiceProvider,System.Object)" />
 
             
 
-             method. If the <see
-             cref="T:System.Drawing.Design.UITypeEditor" />
+             method. If the <see cref="T:System.Drawing.Design.UITypeEditor" />
 
             
 
-             does not support this method, then <see
-             cref="M:System.Drawing.Design.UITypeEditor.GetEditStyle" />
+             does not support this method, then <see cref="M:System.Drawing.Design.UITypeEditor.GetEditStyle" />
 
             
 
-             will return <see
-             cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
+             will return <see cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
 
             
 
@@ -415,12 +404,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
@@ -448,8 +440,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <see
-             cref="M:System.Drawing.Design.UITypeEditor.PaintValue(System.Object,System.Drawing.Graphics,System.Drawing.Rectangle)" />
+            >true if <see cref="M:System.Drawing.Design.UITypeEditor.PaintValue(System.Object,System.Drawing.Graphics,System.Drawing.Rectangle)" />
 
             
 
@@ -483,8 +474,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <see
-             cref="M:System.Drawing.Design.UITypeEditor.PaintValue(System.Object,System.Drawing.Graphics,System.Drawing.Rectangle)" />
+            >true if <see cref="M:System.Drawing.Design.UITypeEditor.PaintValue(System.Object,System.Drawing.Graphics,System.Drawing.Rectangle)" />
 
             
 
@@ -492,12 +482,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
@@ -547,8 +540,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Paints a representation of the value of an object using the specified <see
-             cref="T:System.Drawing.Design.PaintValueEventArgs" />
+            >Paints a representation of the value of an object using the specified <see cref="T:System.Drawing.Design.PaintValueEventArgs" />
 
             
 
@@ -556,12 +548,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Design.PaintValueEventArgs" />
+          A <see cref="T:System.Drawing.Design.PaintValueEventArgs" />
 
           
 
@@ -597,26 +592,37 @@
           <para>Paints a representation of the value of the specified object to the specified canvas.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object whose value this type editor will display. </param
         >
         <param name="canvas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A drawing canvas on which to paint the representation of the object's value. </param
         >
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 

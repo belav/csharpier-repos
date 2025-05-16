@@ -109,8 +109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.ChannelPoolSettings" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.ChannelPoolSettings" />
 
             
 
@@ -137,8 +136,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ServiceModel.Channels.ChannelPoolSettings.IdleTimeout" />
+            >The <see cref="P:System.ServiceModel.Channels.ChannelPoolSettings.IdleTimeout" />
 
             
 
@@ -169,8 +167,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ServiceModel.Channels.ChannelPoolSettings.LeaseTimeout" />
+            >The <see cref="P:System.ServiceModel.Channels.ChannelPoolSettings.LeaseTimeout" />
 
             
 
@@ -204,8 +201,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ServiceModel.Channels.ChannelPoolSettings.MaxOutboundChannelsPerEndpoint" />
+            >The <see cref="P:System.ServiceModel.Channels.ChannelPoolSettings.MaxOutboundChannelsPerEndpoint" />
 
             
 

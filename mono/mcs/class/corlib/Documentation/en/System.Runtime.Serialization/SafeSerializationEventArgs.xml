@@ -21,8 +21,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The event occurs when serializing an exception that contains custom data in  security-transparent code. </para>
       <para
-        >For more information and an example, see the <see
-         cref="T:System.Runtime.Serialization.ISafeSerializationData" />
+        >For more information and an example, see the <see cref="T:System.Runtime.Serialization.ISafeSerializationData" />
 
         
 
@@ -32,8 +31,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="T:System.Exception.SerializeObjectState" />
+        >Provides data for the <see cref="T:System.Exception.SerializeObjectState" />
 
         
 
@@ -68,16 +66,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The class or structure that implements the <see
-             cref="T:System.Runtime.Serialization.ISafeSerializationData" />
+            >The class or structure that implements the <see cref="T:System.Runtime.Serialization.ISafeSerializationData" />
 
             
 
              allows you to serialize custom data in security-transparent code. </para
           >
           <para
-            >For more information and an example, see the <see
-             cref="T:System.Runtime.Serialization.ISafeSerializationData" />
+            >For more information and an example, see the <see cref="T:System.Runtime.Serialization.ISafeSerializationData" />
 
             
 
@@ -89,7 +85,11 @@
           <para>Stores the state of the exception.</para>
         </summary>
         <param name="serializedState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -118,8 +118,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information and an example, see the <see
-             cref="T:System.Runtime.Serialization.ISafeSerializationData" />
+            >For more information and an example, see the <see cref="T:System.Runtime.Serialization.ISafeSerializationData" />
 
             
 

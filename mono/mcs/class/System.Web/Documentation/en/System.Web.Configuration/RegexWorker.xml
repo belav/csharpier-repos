@@ -15,13 +15,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Used internally at run time by <see
-         cref="T:System.Web.Configuration.BrowserCapabilitiesFactory" />
+        >Used internally at run time by <see cref="T:System.Web.Configuration.BrowserCapabilitiesFactory" />
 
         
 
-         and <see
-         cref="T:System.Web.Configuration.BrowserCapabilitiesCodeGenerator" />
+         and <see cref="T:System.Web.Configuration.BrowserCapabilitiesCodeGenerator" />
 
         
 
@@ -45,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of <see
-             cref="T:System.Web.Configuration.RegexWorker" />
+            >Creates a new instance of <see cref="T:System.Web.Configuration.RegexWorker" />
 
             
 
@@ -54,12 +51,15 @@
           >
         </summary>
         <param name="browserCaps">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Configuration.HttpCapabilitiesBase" />
+          The <see cref="T:System.Web.Configuration.HttpCapabilitiesBase" />
 
           
 
@@ -115,14 +115,22 @@
           <para>true if the specified request-header value matches any of the capabilities of an internal collection of browsers; otherwise, false. The default is false.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The capabilities value from an internal collection of browsers.</param
         >
         <param name="regexExpression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

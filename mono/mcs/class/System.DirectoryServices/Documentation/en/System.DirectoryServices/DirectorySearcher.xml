@@ -76,8 +76,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values of the <see
-             cref="T:System.DirectoryServices.DirectorySearcher" />
+            >The following table shows the initial property values of the <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
             
 
@@ -122,8 +121,7 @@
               </term>
               <description>
                 <para
-                  >An empty <see
-                   cref="T:System.Collections.Specialized.StringCollection" />
+                  >An empty <see cref="T:System.Collections.Specialized.StringCollection" />
 
                   
 
@@ -148,8 +146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DirectoryServices.DirectorySearcher" />
+            >Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
             
 
@@ -171,8 +168,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values of the <see
-             cref="T:System.DirectoryServices.DirectorySearcher" />
+            >The following table shows the initial property values of the <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
             
 
@@ -207,8 +203,7 @@
               </term>
               <description>
                 <para
-                  >An empty <see
-                   cref="T:System.Collections.Specialized.StringCollection" />
+                  >An empty <see cref="T:System.Collections.Specialized.StringCollection" />
 
                   
 
@@ -233,8 +228,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DirectoryServices.DirectorySearcher" />
+            >Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
             
 
@@ -242,12 +236,15 @@
           >
         </summary>
         <param name="searchRoot">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The node in the Active Directory Domain Services hierarchy where the search starts. The <see
-           cref="P:System.DirectoryServices.DirectorySearcher.SearchRoot" />
+          The node in the Active Directory Domain Services hierarchy where the search starts. The <see cref="P:System.DirectoryServices.DirectorySearcher.SearchRoot" />
 
           
 
@@ -265,8 +262,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values of the <see
-             cref="T:System.DirectoryServices.DirectorySearcher" />
+            >The following table shows the initial property values of the <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
             
 
@@ -301,8 +297,7 @@
               </term>
               <description>
                 <para
-                  >An empty <see
-                   cref="T:System.Collections.Specialized.StringCollection" />
+                  >An empty <see cref="T:System.Collections.Specialized.StringCollection" />
 
                   
 
@@ -327,8 +322,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DirectoryServices.DirectorySearcher" />
+            >Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
             
 
@@ -336,12 +330,15 @@
           >
         </summary>
         <param name="filter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The search filter string in Lightweight Directory Access Protocol (LDAP) format. The <see
-           cref="P:System.DirectoryServices.DirectorySearcher.Filter" />
+          The search filter string in Lightweight Directory Access Protocol (LDAP) format. The <see cref="P:System.DirectoryServices.DirectorySearcher.Filter" />
 
           
 
@@ -363,8 +360,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values of the <see
-             cref="T:System.DirectoryServices.DirectorySearcher" />
+            >The following table shows the initial property values of the <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
             
 
@@ -389,8 +385,7 @@
               </term>
               <description>
                 <para
-                  >An empty <see
-                   cref="T:System.Collections.Specialized.StringCollection" />
+                  >An empty <see cref="T:System.Collections.Specialized.StringCollection" />
 
                   
 
@@ -415,8 +410,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DirectoryServices.DirectorySearcher" />
+            >Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
             
 
@@ -424,24 +418,30 @@
           >
         </summary>
         <param name="searchRoot">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The node in the Active Directory Domain Services hierarchy where the search starts. The <see
-           cref="P:System.DirectoryServices.DirectorySearcher.SearchRoot" />
+          The node in the Active Directory Domain Services hierarchy where the search starts. The <see cref="P:System.DirectoryServices.DirectorySearcher.SearchRoot" />
 
           
 
            property is initialized to this value.</param
         >
         <param name="filter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The search filter string in Lightweight Directory Access Protocol (LDAP) format. The <see
-           cref="P:System.DirectoryServices.DirectorySearcher.Filter" />
+          The search filter string in Lightweight Directory Access Protocol (LDAP) format. The <see cref="P:System.DirectoryServices.DirectorySearcher.Filter" />
 
           
 
@@ -463,8 +463,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values of the <see
-             cref="T:System.DirectoryServices.DirectorySearcher" />
+            >The following table shows the initial property values of the <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
             
 
@@ -508,8 +507,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DirectoryServices.DirectorySearcher" />
+            >Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
             
 
@@ -517,24 +515,30 @@
           >
         </summary>
         <param name="filter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The search filter string in Lightweight Directory Access Protocol (LDAP) format. The  <see
-           cref="P:System.DirectoryServices.DirectorySearcher.Filter" />
+          The search filter string in Lightweight Directory Access Protocol (LDAP) format. The  <see cref="P:System.DirectoryServices.DirectorySearcher.Filter" />
 
           
 
            property is initialized to this value.</param
         >
         <param name="propertiesToLoad">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The set of properties to retrieve during the search. The <see
-           cref="P:System.DirectoryServices.DirectorySearcher.PropertiesToLoad" />
+          The set of properties to retrieve during the search. The <see cref="P:System.DirectoryServices.DirectorySearcher.PropertiesToLoad" />
 
           
 
@@ -557,8 +561,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values of the <see
-             cref="T:System.DirectoryServices.DirectorySearcher" />
+            >The following table shows the initial property values of the <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
             
 
@@ -592,8 +595,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DirectoryServices.DirectorySearcher" />
+            >Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
             
 
@@ -601,36 +603,45 @@
           >
         </summary>
         <param name="searchRoot">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The node in the Active Directory Domain Services hierarchy where the search starts. The <see
-           cref="P:System.DirectoryServices.DirectorySearcher.SearchRoot" />
+          The node in the Active Directory Domain Services hierarchy where the search starts. The <see cref="P:System.DirectoryServices.DirectorySearcher.SearchRoot" />
 
           
 
            property is initialized to this value.</param
         >
         <param name="filter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The search filter string in Lightweight Directory Access Protocol (LDAP) format. The <see
-           cref="P:System.DirectoryServices.DirectorySearcher.Filter" />
+          The search filter string in Lightweight Directory Access Protocol (LDAP) format. The <see cref="P:System.DirectoryServices.DirectorySearcher.Filter" />
 
           
 
            property is initialized to this value.</param
         >
         <param name="propertiesToLoad">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The set of properties that are retrieved during the search. The <see
-           cref="P:System.DirectoryServices.DirectorySearcher.PropertiesToLoad" />
+          The set of properties that are retrieved during the search. The <see cref="P:System.DirectoryServices.DirectorySearcher.PropertiesToLoad" />
 
           
 
@@ -653,8 +664,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values of the <see
-             cref="T:System.DirectoryServices.DirectorySearcher" />
+            >The following table shows the initial property values of the <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
             
 
@@ -686,8 +696,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DirectoryServices.DirectorySearcher" />
+            >Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
             
 
@@ -695,36 +704,45 @@
           >
         </summary>
         <param name="filter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The search filter string in Lightweight Directory Access Protocol (LDAP) format. The <see
-           cref="P:System.DirectoryServices.DirectorySearcher.Filter" />
+          The search filter string in Lightweight Directory Access Protocol (LDAP) format. The <see cref="P:System.DirectoryServices.DirectorySearcher.Filter" />
 
           
 
            property is initialized to this value.</param
         >
         <param name="propertiesToLoad">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The set of properties to retrieve during the search. The <see
-           cref="P:System.DirectoryServices.DirectorySearcher.PropertiesToLoad" />
+          The set of properties to retrieve during the search. The <see cref="P:System.DirectoryServices.DirectorySearcher.PropertiesToLoad" />
 
           
 
            property is initialized to this value.</param
         >
         <param name="scope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The scope of the search that is observed by the server. The <see
-           cref="T:System.DirectoryServices.SearchScope" />
+          The scope of the search that is observed by the server. The <see cref="T:System.DirectoryServices.SearchScope" />
 
           
 
@@ -749,8 +767,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DirectoryServices.DirectorySearcher" />
+            >Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
             
 
@@ -758,48 +775,60 @@
           >
         </summary>
         <param name="searchRoot">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The node in the Active Directory Domain Services hierarchy where the search starts. The <see
-           cref="P:System.DirectoryServices.DirectorySearcher.SearchRoot" />
+          The node in the Active Directory Domain Services hierarchy where the search starts. The <see cref="P:System.DirectoryServices.DirectorySearcher.SearchRoot" />
 
           
 
            property is initialized to this value.</param
         >
         <param name="filter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The search filter string in Lightweight Directory Access Protocol (LDAP) format. The <see
-           cref="P:System.DirectoryServices.DirectorySearcher.Filter" />
+          The search filter string in Lightweight Directory Access Protocol (LDAP) format. The <see cref="P:System.DirectoryServices.DirectorySearcher.Filter" />
 
           
 
            property is initialized to this value.</param
         >
         <param name="propertiesToLoad">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The set of properties to retrieve during the search. The <see
-           cref="P:System.DirectoryServices.DirectorySearcher.PropertiesToLoad" />
+          The set of properties to retrieve during the search. The <see cref="P:System.DirectoryServices.DirectorySearcher.PropertiesToLoad" />
 
           
 
            property is initialized to this value.</param
         >
         <param name="scope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The scope of the search that is observed by the server. The <see
-           cref="T:System.DirectoryServices.SearchScope" />
+          The scope of the search that is observed by the server. The <see cref="T:System.DirectoryServices.SearchScope" />
 
           
 
@@ -829,8 +858,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.DirectoryServices.SearchResult" />
+            >A <see cref="T:System.DirectoryServices.SearchResult" />
 
             
 
@@ -853,18 +881,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Due to implementation restrictions, the <see
-             cref="T:System.DirectoryServices.SearchResultCollection" />
+            >Due to implementation restrictions, the <see cref="T:System.DirectoryServices.SearchResultCollection" />
 
             
 
-             class cannot release all of its unmanaged resources when it is garbage collected. To prevent a memory leak, you must call the <see
-             cref="M:System.DirectoryServices.SearchResultCollection.Dispose" />
+             class cannot release all of its unmanaged resources when it is garbage collected. To prevent a memory leak, you must call the <see cref="M:System.DirectoryServices.SearchResultCollection.Dispose" />
 
             
 
-             method when the <see
-             cref="T:System.DirectoryServices.SearchResultCollection" />
+             method when the <see cref="T:System.DirectoryServices.SearchResultCollection" />
 
             
 
@@ -878,8 +903,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.DirectoryServices.SearchResultCollection" />
+            >A <see cref="T:System.DirectoryServices.SearchResultCollection" />
 
             
 
@@ -907,8 +931,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the search returns a large result set, the search will be more efficient if this property is set to false to avoid the transfer of the result set to the client computer.  If you do so, however, you will not be able to enumerate the results twice, because the <see
-             cref="T:System.DirectoryServices.SearchResultCollection" />
+            >If the search returns a large result set, the search will be more efficient if this property is set to false to avoid the transfer of the result set to the client computer.  If you do so, however, you will not be able to enumerate the results twice, because the <see cref="T:System.DirectoryServices.SearchResultCollection" />
 
             
 
@@ -938,8 +961,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The minimum resolution of this property is one second. Fractions of seconds are ignored.</para>
           <para
-            >If the <see
-             cref="P:System.DirectoryServices.DirectorySearcher.ServerTimeLimit" />
+            >If the <see cref="P:System.DirectoryServices.DirectorySearcher.ServerTimeLimit" />
 
             
 
@@ -992,7 +1014,9 @@
           <para>If you are not in the Coordinated Universal Time time zone, you can add a differential value to the Coordinated Universal Time (instead of specifying Z) to specify a time according to your time zone. The differential is based on the following: differential = Coordinated Universal Time- Local. To specify a differential, use the following format: yyyymmddhhmmss[+/-]hhmm. For example, "8:52:58 P.M. March 23, 1999" New Zealand Standard Time (the differential is 12 hours) is specified as "19990323205258.0+1200".</para>
           <para
             >For more information about the LDAP search string format, see "Search Filter Syntax" in the MSDN Library at <see
-             cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+              cref="http://msdn.microsoft.com/library"
+              >http://msdn.microsoft.com/library</see
+            >
 
             
 
@@ -1024,8 +1048,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After the server has found the number of objects that are specified by the <see
-             cref="P:System.DirectoryServices.DirectorySearcher.PageSize" />
+            >After the server has found the number of objects that are specified by the <see cref="P:System.DirectoryServices.DirectorySearcher.PageSize" />
 
             
 
@@ -1065,7 +1088,9 @@
           <para>To retrieve specific properties, add them to this collection before you begin the search. For example, searcher.PropertiesToLoad.Add("phone"); will add the phone property to the list of properties to retrieve in the search.</para>
           <para
             >The property "ADsPath" is always retrieved during the search. On Win2kFamily and earlier operating systems, the account that performs the search must be a member of the Administrators group to retrieve the ntSecurityDescriptor property. If this is not the case, the property value that is returned for ntSecurityDescriptor will be null. For more information, see the topic "NT-Security-Descriptor" in the MSDN Library at <see
-             cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+              cref="http://msdn.microsoft.com/library"
+              >http://msdn.microsoft.com/library</see
+            >
 
             
 
@@ -1152,8 +1177,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.DirectoryServices.DirectorySearcher.SearchRoot" />
+            >If <see cref="P:System.DirectoryServices.DirectorySearcher.SearchRoot" />
 
             
 
@@ -1167,7 +1191,9 @@
             <item>
               <para
                 >Specify the server name. Use the DsGetDcName function to find the global catalog.  For more information on the DsGetDcName function, see the topic "DsGetDcName" in the MSDN Library at <see
-                 cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+                  cref="http://msdn.microsoft.com/library"
+                  >http://msdn.microsoft.com/library</see
+                >
 
                 
 
@@ -1247,8 +1273,7 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
           <para>When the time limit is reached, the server stops searching and returns the results that have accumulated up to that point, along with a cookie containing the information about where to resume searching.</para>
           <block subset="none" type="note">
             <para
-              >This property only applies to searches where <see
-               cref="P:System.DirectoryServices.DirectorySearcher.PageSize" />
+              >This property only applies to searches where <see cref="P:System.DirectoryServices.DirectorySearcher.PageSize" />
 
               
 
@@ -1279,21 +1304,18 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The minimum resolution of this property is one second. Fractions of seconds are ignored.</para>
           <para
-            >Unlike the <see
-             cref="P:System.DirectoryServices.DirectorySearcher.ServerPageTimeLimit" />
+            >Unlike the <see cref="P:System.DirectoryServices.DirectorySearcher.ServerPageTimeLimit" />
 
             
 
-             property, the <see
-             cref="P:System.DirectoryServices.DirectorySearcher.ServerTimeLimit" />
+             property, the <see cref="P:System.DirectoryServices.DirectorySearcher.ServerTimeLimit" />
 
             
 
              property indicates the total amount of time that the server will spend on a search. When the time limit is reached, the server stops searching and returns the results that have accumulated up to that point.</para
           >
           <para
-            >Set <see
-             cref="P:System.DirectoryServices.DirectorySearcher.ServerTimeLimit" />
+            >Set <see cref="P:System.DirectoryServices.DirectorySearcher.ServerTimeLimit" />
 
             
 
@@ -1301,8 +1323,7 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
           >
           <block subset="none" type="note">
             <para
-              >If you set <see
-               cref="P:System.DirectoryServices.DirectorySearcher.ServerTimeLimit" />
+              >If you set <see cref="P:System.DirectoryServices.DirectorySearcher.ServerTimeLimit" />
 
               
 
@@ -1313,8 +1334,7 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.DirectoryServices.DirectorySearcher.ServerTimeLimit" />
+            >The <see cref="P:System.DirectoryServices.DirectorySearcher.ServerTimeLimit" />
 
             
 
@@ -1344,8 +1364,7 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
           <para>The server stops searching after the size limit is reached and returns the results accumulated up to that point.</para>
           <block subset="none" type="note">
             <para
-              >If you set <see
-               cref="P:System.DirectoryServices.DirectorySearcher.SizeLimit" />
+              >If you set <see cref="P:System.DirectoryServices.DirectorySearcher.SizeLimit" />
 
               
 
@@ -1393,13 +1412,11 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use a <see
-         cref="T:System.DirectoryServices.DirectorySearcher" />
+        >Use a <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
         
 
-         object to search and perform queries against an Active Directory Domain Services hierarchy using Lightweight Directory Access Protocol (LDAP). LDAP is the only system-supplied Active Directory Service Interfaces (ADSI) provider that supports directory searching. An administrator can make, alter, and delete objects that are found in the hierarchy. For more information, see <format
-         type="text/html">
+         object to search and perform queries against an Active Directory Domain Services hierarchy using Lightweight Directory Access Protocol (LDAP). LDAP is the only system-supplied Active Directory Service Interfaces (ADSI) provider that supports directory searching. An administrator can make, alter, and delete objects that are found in the hierarchy. For more information, see <format type="text/html">
           <a href="ffa2f003-3a9a-4e2a-815e-825c8ddd7949">Using System.DirectoryServices</a>
         </format>
 
@@ -1408,13 +1425,11 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
         .</para
       >
       <para
-        >When you create an instance of <see
-         cref="T:System.DirectoryServices.DirectorySearcher" />
+        >When you create an instance of <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
         
 
-        , you specify the root you want to retrieve, and an optional list of properties to retrieve. The <see
-         cref="P:System.DirectoryServices.DirectorySearcher.SearchRoot" />
+        , you specify the root you want to retrieve, and an optional list of properties to retrieve. The <see cref="P:System.DirectoryServices.DirectorySearcher.SearchRoot" />
 
         
 
@@ -1423,13 +1438,11 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
       <list type="bullet">
         <item>
           <para
-            >Cache the search results on the local computer. Set the <see
-             cref="P:System.DirectoryServices.DirectorySearcher.CacheResults" />
+            >Cache the search results on the local computer. Set the <see cref="P:System.DirectoryServices.DirectorySearcher.CacheResults" />
 
             
 
-             property to true to store directory information on the local computer. Updates are made to this local cache and committed to Active Directory Domain Services only when the <see
-             cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+             property to true to store directory information on the local computer. Updates are made to this local cache and committed to Active Directory Domain Services only when the <see cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
 
             
 
@@ -1438,8 +1451,7 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
         </item>
         <item>
           <para
-            >Specify the length of time to search, using the  <see
-             cref="P:System.DirectoryServices.DirectorySearcher.ServerTimeLimit" />
+            >Specify the length of time to search, using the  <see cref="P:System.DirectoryServices.DirectorySearcher.ServerTimeLimit" />
 
             
 
@@ -1448,8 +1460,7 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
         </item>
         <item>
           <para
-            >Retrieve attribute names only. Set the <see
-             cref="P:System.DirectoryServices.DirectorySearcher.PropertyNamesOnly" />
+            >Retrieve attribute names only. Set the <see cref="P:System.DirectoryServices.DirectorySearcher.PropertyNamesOnly" />
 
             
 
@@ -1458,13 +1469,11 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
         </item>
         <item>
           <para
-            >Perform a paged search. Set the <see
-             cref="P:System.DirectoryServices.DirectorySearcher.PageSize" />
+            >Perform a paged search. Set the <see cref="P:System.DirectoryServices.DirectorySearcher.PageSize" />
 
             
 
-             property to specify the maximum number of objects that are returned in a paged search. If you do not want to perform a paged search, set the <see
-             cref="P:System.DirectoryServices.DirectorySearcher.PageSize" />
+             property to specify the maximum number of objects that are returned in a paged search. If you do not want to perform a paged search, set the <see cref="P:System.DirectoryServices.DirectorySearcher.PageSize" />
 
             
 
@@ -1473,13 +1482,11 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
         </item>
         <item>
           <para
-            >Specify the maximum number of entries to return, using the <see
-             cref="P:System.DirectoryServices.DirectorySearcher.SizeLimit" />
+            >Specify the maximum number of entries to return, using the <see cref="P:System.DirectoryServices.DirectorySearcher.SizeLimit" />
 
             
 
-             property. If you set the <see
-             cref="P:System.DirectoryServices.DirectorySearcher.SizeLimit" />
+             property. If you set the <see cref="P:System.DirectoryServices.DirectorySearcher.SizeLimit" />
 
             
 
@@ -1491,13 +1498,11 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
         <para>If the maximum number of returned entries and time limits exceed the limitations that are set on the server, the server settings override the component settings.</para>
       </block>
       <para
-        >For a list of initial property values for an instance of the <see
-         cref="T:System.DirectoryServices.DirectorySearcher" />
+        >For a list of initial property values for an instance of the <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
         
 
-         class, see the <see
-         cref="M:System.DirectoryServices.DirectorySearcher.#ctor" />
+         class, see the <see cref="M:System.DirectoryServices.DirectorySearcher.#ctor" />
 
         
 
@@ -1505,8 +1510,7 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
       >
       <block subset="none" type="note">
         <para
-          >It is assumed that you have a general understanding of Active Directory Domain Services before using this class. For more information, see the <see
-           cref="N:System.DirectoryServices" />
+          >It is assumed that you have a general understanding of Active Directory Domain Services before using this class. For more information, see the <see cref="N:System.DirectoryServices" />
 
           
 

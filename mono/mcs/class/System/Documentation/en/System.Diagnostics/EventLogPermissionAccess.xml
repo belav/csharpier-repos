@@ -27,8 +27,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines access levels used by <see
-         cref="T:System.Diagnostics.EventLog" />
+        >Defines access levels used by <see cref="T:System.Diagnostics.EventLog" />
 
         
 
@@ -55,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Diagnostics.EventLog" />
+            >The <see cref="T:System.Diagnostics.EventLog" />
 
             
 
@@ -91,13 +89,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Diagnostics.EventLog" />
+            >The <see cref="T:System.Diagnostics.EventLog" />
 
             
 
-             can read existing logs, delete event sources or logs, respond to entries, clear an event log, listen to events, and access a collection of all event logs. Note This member is now obsolete, use <see
-             cref="F:System.Diagnostics.EventLogPermissionAccess.Administer" />
+             can read existing logs, delete event sources or logs, respond to entries, clear an event log, listen to events, and access a collection of all event logs. Note This member is now obsolete, use <see cref="F:System.Diagnostics.EventLogPermissionAccess.Administer" />
 
             
 
@@ -132,13 +128,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Diagnostics.EventLog" />
+            >The <see cref="T:System.Diagnostics.EventLog" />
 
             
 
-             can read existing logs. Note This member is now obsolete, use <see
-             cref="F:System.Diagnostics.EventLogPermissionAccess.Administer" />
+             can read existing logs. Note This member is now obsolete, use <see cref="F:System.Diagnostics.EventLogPermissionAccess.Administer" />
 
             
 
@@ -173,13 +167,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Diagnostics.EventLog" />
+            >The <see cref="T:System.Diagnostics.EventLog" />
 
             
 
-             can read or write to existing logs, and create event sources and logs. Note This member is now obsolete, use <see
-             cref="F:System.Diagnostics.EventLogPermissionAccess.Write" />
+             can read or write to existing logs, and create event sources and logs. Note This member is now obsolete, use <see cref="F:System.Diagnostics.EventLogPermissionAccess.Write" />
 
             
 
@@ -209,8 +201,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Diagnostics.EventLog" />
+            >The <see cref="T:System.Diagnostics.EventLog" />
 
             
 
@@ -237,8 +228,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Diagnostics.EventLog" />
+            >The <see cref="T:System.Diagnostics.EventLog" />
 
             
 

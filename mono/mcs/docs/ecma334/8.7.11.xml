@@ -2,8 +2,7 @@
 <clause number="8.7.11" title="Inheritance" informative="true">
   <paragraph>Classes support single inheritance, and the type object is the ultimate base class for all classes. </paragraph>
   <paragraph
-    >The classes shown in earlier examples all implicitly derive from object. The example <code_example
-    >
+    >The classes shown in earlier examples all implicitly derive from object. The example <code_example>
       <![CDATA[
 using System;  
 class A  
@@ -15,8 +14,7 @@ class A
 
     
 
-    shows a class A that implicitly derives from object. The example <code_example
-    >
+    shows a class A that implicitly derives from object. The example <code_example>
       <![CDATA[
 class B: A  
 {  
@@ -41,8 +39,7 @@ class Test
     shows a class B that derives from A. The class B inherits A's F method, and introduces a G method of its own. </paragraph
   >
   <paragraph
-    >Methods, properties, and indexers can be virtual, which means that their implementation can be overridden in derived classes. The example <code_example
-    >
+    >Methods, properties, and indexers can be virtual, which means that their implementation can be overridden in derived classes. The example <code_example>
       <![CDATA[
 using System;  
 class A  
@@ -73,8 +70,7 @@ class Test
     shows a class A with a virtual method F, and a class B that overrides F. The overriding method in B contains a call, base.F(), which calls the overridden method in A. </paragraph
   >
   <paragraph
-    >A class can indicate that it is incomplete, and is intended only as a base class for other classes, by including the modifier abstract. Such a class is called an abstract class. An abstract class can specify abstract members-members that a non-abstract derived class must implement. The example <code_example
-    >
+    >A class can indicate that it is incomplete, and is intended only as a base class for other classes, by including the modifier abstract. Such a class is called an abstract class. An abstract class can specify abstract members-members that a non-abstract derived class must implement. The example <code_example>
       <![CDATA[
 using System;  
 abstract class A  

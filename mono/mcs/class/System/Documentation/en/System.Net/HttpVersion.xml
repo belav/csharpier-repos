@@ -29,18 +29,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.HttpVersion" />
+        >The <see cref="T:System.Net.HttpVersion" />
 
         
 
-         class defines the HTTP versions that are supported by the <see
-         cref="T:System.Net.HttpWebRequest" />
+         class defines the HTTP versions that are supported by the <see cref="T:System.Net.HttpWebRequest" />
 
         
 
-         and <see
-         cref="T:System.Net.HttpWebResponse" />
+         and <see cref="T:System.Net.HttpWebResponse" />
 
         
 
@@ -50,13 +47,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines the HTTP version numbers that are supported by the <see
-         cref="T:System.Net.HttpWebRequest" />
+        >Defines the HTTP version numbers that are supported by the <see cref="T:System.Net.HttpWebRequest" />
 
         
 
-         and <see
-         cref="T:System.Net.HttpWebResponse" />
+         and <see cref="T:System.Net.HttpWebResponse" />
 
         
 
@@ -85,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.HttpVersion" />
+            >Initializes a new instance of the <see cref="T:System.Net.HttpVersion" />
 
             
 
@@ -119,19 +113,16 @@
       <Docs>
         <remarks>
           <para
-            >This field represents a <see
-             cref="T:System.Version" />
+            >This field represents a <see cref="T:System.Version" />
 
             
 
-             with a <see
-             cref="P:System.Version.Major" />
+             with a <see cref="P:System.Version.Major" />
 
             
 
              value
- equal to 1, and a <see
-             cref="P:System.Version.Minor" />
+ equal to 1, and a <see cref="P:System.Version.Minor" />
 
             
 
@@ -141,8 +132,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Defines a <see
-             cref="T:System.Version" />
+            >Defines a <see cref="T:System.Version" />
 
             
 
@@ -175,19 +165,16 @@
       <Docs>
         <remarks>
           <para
-            >This field represents a <see
-             cref="T:System.Version" />
+            >This field represents a <see cref="T:System.Version" />
 
             
 
-             with a <see
-             cref="P:System.Version.Major" />
+             with a <see cref="P:System.Version.Major" />
 
             
 
              value
- equal to 1, and a <see
-             cref="P:System.Version.Minor" />
+ equal to 1, and a <see cref="P:System.Version.Minor" />
 
             
 
@@ -197,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Defines a <see
-             cref="T:System.Version" />
+            >Defines a <see cref="T:System.Version" />
 
             
 

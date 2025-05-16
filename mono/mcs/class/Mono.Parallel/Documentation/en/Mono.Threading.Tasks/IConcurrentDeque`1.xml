@@ -37,24 +37,21 @@
       <Parameters />
       <Docs>
         <summary
-          >Returns an <see
-           cref="T:System.Collections.Generic.IEnumerable&lt;T&gt;" />
+          >Returns an <see cref="T:System.Collections.Generic.IEnumerable&lt;T&gt;" />
 
           
 
            equivalent of the deque to allow enumeration. </summary
         >
         <returns
-          >An <see
-           cref="T:System.Collections.Generic.IEnumerable&lt;T&gt;" />
+          >An <see cref="T:System.Collections.Generic.IEnumerable&lt;T&gt;" />
 
           
 
            representation of the elements in the deque (can be the object itself). </returns
         >
         <remarks
-          >Implementation can return <see
-           langword="null" />
+          >Implementation can return <see langword="null" />
 
           
 

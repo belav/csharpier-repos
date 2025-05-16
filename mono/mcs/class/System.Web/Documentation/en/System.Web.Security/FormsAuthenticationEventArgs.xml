@@ -23,95 +23,79 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Security.FormsAuthenticationEventArgs" />
+        >The <see cref="T:System.Web.Security.FormsAuthenticationEventArgs" />
 
         
 
-         class is used to supply event values to the <system
-        >FormsAuthentication_OnAuthenticate</system>
+         class is used to supply event values to the <system>FormsAuthentication_OnAuthenticate</system>
 
         
 
          event and to enable you to specify a custom identity for the current request.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Security.FormsAuthenticationModule" />
+        >The <see cref="T:System.Web.Security.FormsAuthenticationModule" />
 
         
 
-         constructs a <see
-         cref="T:System.Web.Security.FormsAuthenticationEventArgs" />
+         constructs a <see cref="T:System.Web.Security.FormsAuthenticationEventArgs" />
 
         
 
-         object using the current <see
-         cref="T:System.Web.HttpContext" />
+         object using the current <see cref="T:System.Web.HttpContext" />
 
         
 
-         and passes it to the <system
-        >FormsAuthentication_OnAuthenticate</system>
+         and passes it to the <system>FormsAuthentication_OnAuthenticate</system>
 
         
 
          event.</para
       >
       <para
-        >You can use the <see
-         cref="P:System.Web.Security.FormsAuthenticationEventArgs.User" />
+        >You can use the <see cref="P:System.Web.Security.FormsAuthenticationEventArgs.User" />
 
         
 
-         property to set the <see
-         cref="P:System.Web.HttpContext.User" />
+         property to set the <see cref="P:System.Web.HttpContext.User" />
 
         
 
-         property of the current <see
-         cref="T:System.Web.HttpContext" />
+         property of the current <see cref="T:System.Web.HttpContext" />
 
         
 
-         to a custom <see
-         cref="T:System.Security.Principal.IPrincipal" />
+         to a custom <see cref="T:System.Security.Principal.IPrincipal" />
 
         
 
          object.</para
       >
       <para
-        >If you do not specify a value for the <see
-         cref="P:System.Web.Security.FormsAuthenticationEventArgs.User" />
+        >If you do not specify a value for the <see cref="P:System.Web.Security.FormsAuthenticationEventArgs.User" />
 
         
 
-         property during the <system
-        >FormsAuthentication_OnAuthenticate</system>
+         property during the <system>FormsAuthentication_OnAuthenticate</system>
 
         
 
          event, the identity supplied by the forms authentication ticket in the cookie or URL is used.</para
       >
       <para
-        >The <system
-        >FormsAuthentication_OnAuthenticate</system>
+        >The <system>FormsAuthentication_OnAuthenticate</system>
 
         
 
-         event is only raised when the authentication <see
-         cref="P:System.Web.Configuration.AuthenticationSection.Mode" />
+         event is only raised when the authentication <see cref="P:System.Web.Configuration.AuthenticationSection.Mode" />
 
         
 
-         is set to <see
-         cref="F:System.Web.Configuration.AuthenticationMode.Forms" />
+         is set to <see cref="F:System.Web.Configuration.AuthenticationMode.Forms" />
 
         
 
-         and the <see
-         cref="T:System.Web.Security.FormsAuthenticationModule" />
+         and the <see cref="T:System.Web.Security.FormsAuthenticationModule" />
 
         
 
@@ -121,8 +105,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <system
-        >FormsAuthentication_OnAuthenticate</system>
+        >Provides data for the <system>FormsAuthentication_OnAuthenticate</system>
 
         
 
@@ -145,33 +128,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Security.FormsAuthenticationModule" />
+            >The <see cref="T:System.Web.Security.FormsAuthenticationModule" />
 
             
 
-             constructs a <see
-             cref="T:System.Web.Security.FormsAuthenticationEventArgs" />
+             constructs a <see cref="T:System.Web.Security.FormsAuthenticationEventArgs" />
 
             
 
-             object using the supplied <paramref
-             name="context" />
+             object using the supplied <paramref name="context" />
 
             
 
-             as the value for the <see
-             cref="P:System.Web.Security.FormsAuthenticationEventArgs.Context" />
+             as the value for the <see cref="P:System.Web.Security.FormsAuthenticationEventArgs.Context" />
 
             
 
-             property. It then passes the <see
-             cref="T:System.Web.Security.FormsAuthenticationEventArgs" />
+             property. It then passes the <see cref="T:System.Web.Security.FormsAuthenticationEventArgs" />
 
             
 
-             object to the <system
-            >FormsAuthentication_OnAuthenticate</system>
+             object to the <system>FormsAuthentication_OnAuthenticate</system>
 
             
 
@@ -181,8 +158,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Security.FormsAuthenticationEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.Security.FormsAuthenticationEventArgs" />
 
             
 
@@ -190,7 +166,11 @@
           >
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -210,30 +190,23 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.HttpContext" />
-        </value>
+        <value>a <see cref="T:System.Web.HttpContext" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.HttpContext" />
+            >The <see cref="T:System.Web.HttpContext" />
 
             
 
-             provides access to <see
-             cref="P:System.Web.HttpContext.Request" />
+             provides access to <see cref="P:System.Web.HttpContext.Request" />
 
             
 
-            , <see
-             cref="P:System.Web.HttpContext.Response" />
+            , <see cref="P:System.Web.HttpContext.Response" />
 
             
 
-            , and <see
-             cref="P:System.Web.HttpContext.User" />
+            , and <see cref="P:System.Web.HttpContext.User" />
 
             
 
@@ -243,8 +216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.HttpContext" />
+            >Gets the <see cref="T:System.Web.HttpContext" />
 
             
 
@@ -268,43 +240,34 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Security.Principal.IPrincipal" />
-        </value>
+        <value>a <see cref="T:System.Security.Principal.IPrincipal" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Web.Security.FormsAuthenticationEventArgs.User" />
+            >You can use the <see cref="P:System.Web.Security.FormsAuthenticationEventArgs.User" />
 
             
 
-             property to set the <see
-             cref="P:System.Web.HttpContext.User" />
+             property to set the <see cref="P:System.Web.HttpContext.User" />
 
             
 
-             property of the current <see
-             cref="T:System.Web.HttpContext" />
+             property of the current <see cref="T:System.Web.HttpContext" />
 
             
 
-             to a custom <see
-             cref="T:System.Security.Principal.IPrincipal" />
+             to a custom <see cref="T:System.Security.Principal.IPrincipal" />
 
             
 
              object.</para
           >
           <para
-            >If you do not specify a value for the <see
-             cref="P:System.Web.Security.FormsAuthenticationEventArgs.User" />
+            >If you do not specify a value for the <see cref="P:System.Web.Security.FormsAuthenticationEventArgs.User" />
 
             
 
-             property during the <system
-            >FormsAuthentication_OnAuthenticate</system>
+             property during the <system>FormsAuthentication_OnAuthenticate</system>
 
             
 
@@ -314,8 +277,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Security.Principal.IPrincipal" />
+            >Gets or sets the <see cref="T:System.Security.Principal.IPrincipal" />
 
             
 

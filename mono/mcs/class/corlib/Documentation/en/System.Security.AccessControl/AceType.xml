@@ -22,8 +22,7 @@
 
         
 
-         is the largest currently defined ACE type. Custom ACE types must be defined to have values larger than <see
-         cref="F:System.Security.AccessControl.AceType.MaxDefinedAceType" />
+         is the largest currently defined ACE type. Custom ACE types must be defined to have values larger than <see cref="F:System.Security.AccessControl.AceType.MaxDefinedAceType" />
 
         
 
@@ -55,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Allows access to an object for a specific trustee identified by an <see
-             cref="T:System.Security.Principal.IdentityReference" />
+            >Allows access to an object for a specific trustee identified by an <see cref="T:System.Security.Principal.IdentityReference" />
 
             
 
@@ -84,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Allows access to an object for a specific trustee identified by an <see
-             cref="T:System.Security.Principal.IdentityReference" />
+            >Allows access to an object for a specific trustee identified by an <see cref="T:System.Security.Principal.IdentityReference" />
 
             
 
@@ -113,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Allows access to an object, property set, or property. The ACE contains a set of access rights, a GUID that identifies the type of object, and an <see
-             cref="T:System.Security.Principal.IdentityReference" />
+            >Allows access to an object, property set, or property. The ACE contains a set of access rights, a GUID that identifies the type of object, and an <see cref="T:System.Security.Principal.IdentityReference" />
 
             
 
@@ -164,8 +160,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Allows access to an object, property set, or property. The ACE contains a set of access rights, a GUID that identifies the type of object, and an <see
-             cref="T:System.Security.Principal.IdentityReference" />
+            >Allows access to an object, property set, or property. The ACE contains a set of access rights, a GUID that identifies the type of object, and an <see cref="T:System.Security.Principal.IdentityReference" />
 
             
 
@@ -193,8 +188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Denies access to an object for a specific trustee identified by an <see
-             cref="T:System.Security.Principal.IdentityReference" />
+            >Denies access to an object for a specific trustee identified by an <see cref="T:System.Security.Principal.IdentityReference" />
 
             
 
@@ -222,8 +216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Denies access to an object for a specific trustee identified by an <see
-             cref="T:System.Security.Principal.IdentityReference" />
+            >Denies access to an object for a specific trustee identified by an <see cref="T:System.Security.Principal.IdentityReference" />
 
             
 
@@ -251,8 +244,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Denies access to an object, property set, or property. The ACE contains a set of access rights, a GUID that identifies the type of object, and an <see
-             cref="T:System.Security.Principal.IdentityReference" />
+            >Denies access to an object, property set, or property. The ACE contains a set of access rights, a GUID that identifies the type of object, and an <see cref="T:System.Security.Principal.IdentityReference" />
 
             
 
@@ -280,8 +272,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Denies access to an object, property set, or property. The ACE contains a set of access rights, a GUID that identifies the type of object, and an <see
-             cref="T:System.Security.Principal.IdentityReference" />
+            >Denies access to an object, property set, or property. The ACE contains a set of access rights, a GUID that identifies the type of object, and an <see cref="T:System.Security.Principal.IdentityReference" />
 
             
 
@@ -419,8 +410,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes an audit message to be logged when a specified trustee attempts to gain access to an object. The trustee is identified by an <see
-             cref="T:System.Security.Principal.IdentityReference" />
+            >Causes an audit message to be logged when a specified trustee attempts to gain access to an object. The trustee is identified by an <see cref="T:System.Security.Principal.IdentityReference" />
 
             
 
@@ -448,8 +438,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes an audit message to be logged when a specified trustee attempts to gain access to an object. The trustee is identified by an <see
-             cref="T:System.Security.Principal.IdentityReference" />
+            >Causes an audit message to be logged when a specified trustee attempts to gain access to an object. The trustee is identified by an <see cref="T:System.Security.Principal.IdentityReference" />
 
             
 
@@ -477,8 +466,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes an audit message to be logged when a specified trustee attempts to gain access to an object or subobjects such as property sets or properties. The ACE contains a set of access rights, a GUID that identifies the type of object or subobject, and an <see
-             cref="T:System.Security.Principal.IdentityReference" />
+            >Causes an audit message to be logged when a specified trustee attempts to gain access to an object or subobjects such as property sets or properties. The ACE contains a set of access rights, a GUID that identifies the type of object or subobject, and an <see cref="T:System.Security.Principal.IdentityReference" />
 
             
 
@@ -506,8 +494,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes an audit message to be logged when a specified trustee attempts to gain access to an object or subobjects such as property sets or properties. The ACE contains a set of access rights, a GUID that identifies the type of object or subobject, and an <see
-             cref="T:System.Security.Principal.IdentityReference" />
+            >Causes an audit message to be logged when a specified trustee attempts to gain access to an object or subobjects such as property sets or properties. The ACE contains a set of access rights, a GUID that identifies the type of object or subobject, and an <see cref="T:System.Security.Principal.IdentityReference" />
 
             
 

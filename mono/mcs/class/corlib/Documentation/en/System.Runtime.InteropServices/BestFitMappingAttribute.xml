@@ -39,26 +39,22 @@
 
         
 
-         provides two parameters to control aspects of best-fit mapping. You use the first parameter to toggle best-fit mapping on and off. The default value is true, which enables best-fit mapping on the assembly, interface, and class levels. An attribute applied to an interface or class overrides an assembly-level attribute. You can likewise enable or disable best-fit mapping for platform invoke calls by using the <see
-         cref="F:System.Runtime.InteropServices.DllImportAttribute.BestFitMapping" />
+         provides two parameters to control aspects of best-fit mapping. You use the first parameter to toggle best-fit mapping on and off. The default value is true, which enables best-fit mapping on the assembly, interface, and class levels. An attribute applied to an interface or class overrides an assembly-level attribute. You can likewise enable or disable best-fit mapping for platform invoke calls by using the <see cref="F:System.Runtime.InteropServices.DllImportAttribute.BestFitMapping" />
 
         
 
-         field. A value set by the platform invoke field overrides all levels of <see
-         cref="T:System.Runtime.InteropServices.BestFitMappingAttribute" />
+         field. A value set by the platform invoke field overrides all levels of <see cref="T:System.Runtime.InteropServices.BestFitMappingAttribute" />
 
         
 
         .</para
       >
       <para
-        >You can use the second parameter to control throwing an exception on unmappable characters. The default value for the <see
-         cref="F:System.Runtime.InteropServices.BestFitMappingAttribute.ThrowOnUnmappableChar" />
+        >You can use the second parameter to control throwing an exception on unmappable characters. The default value for the <see cref="F:System.Runtime.InteropServices.BestFitMappingAttribute.ThrowOnUnmappableChar" />
 
         
 
-         field is false, which disables throwing an exception each time the runtime encounters a Unicode character that has to be converted to the '?' ANSI character. Even if best-fit mapping is true, unmappable characters generate an exception when the <see
-         cref="F:System.Runtime.InteropServices.BestFitMappingAttribute.ThrowOnUnmappableChar" />
+         field is false, which disables throwing an exception each time the runtime encounters a Unicode character that has to be converted to the '?' ANSI character. Even if best-fit mapping is true, unmappable characters generate an exception when the <see cref="F:System.Runtime.InteropServices.BestFitMappingAttribute.ThrowOnUnmappableChar" />
 
         
 
@@ -66,8 +62,7 @@
       >
       <block subset="none" type="note">
         <para
-          >You cannot change the default values provided by <see
-           cref="T:System.Runtime.InteropServices.BestFitMappingAttribute" />
+          >You cannot change the default values provided by <see cref="T:System.Runtime.InteropServices.BestFitMappingAttribute" />
 
           
 
@@ -104,13 +99,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.BestFitMappingAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.BestFitMappingAttribute" />
 
             
 
-             class set to the value of the <see
-             cref="P:System.Runtime.InteropServices.BestFitMappingAttribute.BestFitMapping" />
+             class set to the value of the <see cref="P:System.Runtime.InteropServices.BestFitMappingAttribute.BestFitMapping" />
 
             
 
@@ -118,7 +111,11 @@
           >
         </summary>
         <param name="BestFitMapping">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -143,8 +140,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If best-fit mapping is false and <see
-             cref="F:System.Runtime.InteropServices.BestFitMappingAttribute.ThrowOnUnmappableChar" />
+            >If best-fit mapping is false and <see cref="F:System.Runtime.InteropServices.BestFitMappingAttribute.ThrowOnUnmappableChar" />
 
             
 
@@ -176,8 +172,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If false, the <see
-             cref="F:System.Runtime.InteropServices.BestFitMappingAttribute.ThrowOnUnmappableChar" />
+            >If false, the <see cref="F:System.Runtime.InteropServices.BestFitMappingAttribute.ThrowOnUnmappableChar" />
 
             
 

@@ -21,31 +21,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.LicenseManager" />
+        >The <see cref="T:System.ComponentModel.LicenseManager" />
 
         
 
-         and the <see
-         cref="T:System.ComponentModel.LicenseContext" />
+         and the <see cref="T:System.ComponentModel.LicenseContext" />
 
         
 
-         classes use this enumeration. It is used to set a component's <see
-         cref="P:System.ComponentModel.LicenseManager.CurrentContext" />
+         classes use this enumeration. It is used to set a component's <see cref="P:System.ComponentModel.LicenseManager.CurrentContext" />
 
         
 
-        . See the <see
-         cref="T:System.ComponentModel.LicenseManager" />
+        . See the <see cref="T:System.ComponentModel.LicenseManager" />
 
         
 
          class for details.</para
       >
       <para
-        >For more information on licensing, see <format
-         type="text/html">
+        >For more information on licensing, see <format type="text/html">
           <a href="8E66C1ED-A445-4B26-8185-990B6E2BBD57"
             >[&lt;topic://cpconLicensingComponentsControls&gt;]</a
           >
@@ -59,8 +54,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies when the <see
-         cref="T:System.ComponentModel.License" />
+        >Specifies when the <see cref="T:System.ComponentModel.License" />
 
         
 

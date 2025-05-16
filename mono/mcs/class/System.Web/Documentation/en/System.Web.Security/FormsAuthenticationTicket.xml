@@ -20,79 +20,65 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Security.FormsAuthenticationTicket" />
+        >The <see cref="T:System.Web.Security.FormsAuthenticationTicket" />
 
         
 
          class is used to create an object that represents the authentication ticket that is used by forms authentication to identify an authenticated user. The properties and values of a forms-authentication ticket are converted to and from an encrypted string that is stored in a cookie or in the URL.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Security.FormsAuthentication" />
+        >The <see cref="T:System.Web.Security.FormsAuthentication" />
 
         
 
-         class provides an <see
-         cref="M:System.Web.Security.FormsAuthentication.Encrypt(System.Web.Security.FormsAuthenticationTicket)" />
+         class provides an <see cref="M:System.Web.Security.FormsAuthentication.Encrypt(System.Web.Security.FormsAuthenticationTicket)" />
 
         
 
-         method to create a string value that can be stored in a cookie or in the URL from a <see
-         cref="T:System.Web.Security.FormsAuthenticationTicket" />
+         method to create a string value that can be stored in a cookie or in the URL from a <see cref="T:System.Web.Security.FormsAuthenticationTicket" />
 
         
 
-        . The <see
-         cref="T:System.Web.Security.FormsAuthentication" />
+        . The <see cref="T:System.Web.Security.FormsAuthentication" />
 
         
 
-         class also provides a <see
-         cref="M:System.Web.Security.FormsAuthentication.Decrypt(System.String)" />
+         class also provides a <see cref="M:System.Web.Security.FormsAuthentication.Decrypt(System.String)" />
 
         
 
-         method to create a <see
-         cref="T:System.Web.Security.FormsAuthenticationTicket" />
+         method to create a <see cref="T:System.Web.Security.FormsAuthenticationTicket" />
 
         
 
          object from the encrypted authentication ticket retrieved from the forms-authentication cookie or the URL.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Security.FormsAuthenticationTicket" />
+        >The <see cref="T:System.Web.Security.FormsAuthenticationTicket" />
 
         
 
-         for the current authenticated user can be accessed using the <see
-         cref="P:System.Web.Security.FormsIdentity.Ticket" />
+         for the current authenticated user can be accessed using the <see cref="P:System.Web.Security.FormsIdentity.Ticket" />
 
         
 
-         property of the <see
-         cref="T:System.Web.Security.FormsIdentity" />
+         property of the <see cref="T:System.Web.Security.FormsIdentity" />
 
         
 
-         class. You can access the current <see
-         cref="T:System.Web.Security.FormsIdentity" />
+         class. You can access the current <see cref="T:System.Web.Security.FormsIdentity" />
 
         
 
-         object by casting the <see
-         cref="P:System.Security.Principal.IPrincipal.Identity" />
+         object by casting the <see cref="P:System.Security.Principal.IPrincipal.Identity" />
 
         
 
-         property of the current <see
-         cref="P:System.Web.HttpContext.User" />
+         property of the current <see cref="P:System.Web.HttpContext.User" />
 
         
 
-         as type <see
-         cref="T:System.Web.Security.FormsIdentity" />
+         as type <see cref="T:System.Web.Security.FormsIdentity" />
 
         
 
@@ -121,43 +107,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Security.FormsAuthenticationTicket" />
+            >The <see cref="T:System.Web.Security.FormsAuthenticationTicket" />
 
             
 
-             object created by this constructor will have a <see
-             cref="P:System.Web.Security.FormsAuthenticationTicket.CookiePath" />
+             object created by this constructor will have a <see cref="P:System.Web.Security.FormsAuthenticationTicket.CookiePath" />
 
             
 
-             value set to the value of the <see
-             cref="P:System.Web.Security.FormsAuthentication.FormsCookiePath" />
+             value set to the value of the <see cref="P:System.Web.Security.FormsAuthentication.FormsCookiePath" />
 
             
 
-             property, a <see
-             cref="P:System.Web.Security.FormsAuthenticationTicket.Version" />
+             property, a <see cref="P:System.Web.Security.FormsAuthenticationTicket.Version" />
 
             
 
-             value of 2, an <see
-             cref="P:System.Web.Security.FormsAuthenticationTicket.IssueDate" />
+             value of 2, an <see cref="P:System.Web.Security.FormsAuthenticationTicket.IssueDate" />
 
             
 
-             value of the current local date and time, a <see
-             cref="P:System.Web.Security.FormsAuthenticationTicket.UserData" />
+             value of the current local date and time, a <see cref="P:System.Web.Security.FormsAuthenticationTicket.UserData" />
 
             
 
-             value of an empty string (""), and an <see
-             cref="P:System.Web.Security.FormsAuthenticationTicket.Expiration" />
+             value of an empty string (""), and an <see cref="P:System.Web.Security.FormsAuthenticationTicket.Expiration" />
 
             
 
-             value that is set to the current local date and time plus the value of the <paramref
-             name="timeout" />
+             value that is set to the current local date and time plus the value of the <paramref name="timeout" />
 
             
 
@@ -167,8 +145,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Security.FormsAuthenticationTicket" />
+            >Initializes a new instance of the <see cref="T:System.Web.Security.FormsAuthenticationTicket" />
 
             
 
@@ -176,21 +153,33 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The user name associated with the ticket.</param
         >
         <param name="isPersistent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the ticket will be stored in a persistent cookie (saved across browser sessions); otherwise, false. If the ticket is stored in the URL, this value is ignored.</param
         >
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -221,18 +210,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Security.FormsAuthenticationTicket" />
+            >The <see cref="T:System.Web.Security.FormsAuthenticationTicket" />
 
             
 
-             object created by this constructor will have a <see
-             cref="P:System.Web.Security.FormsAuthenticationTicket.CookiePath" />
+             object created by this constructor will have a <see cref="P:System.Web.Security.FormsAuthenticationTicket.CookiePath" />
 
             
 
-             value set to the value of the <see
-             cref="P:System.Web.Security.FormsAuthentication.FormsCookiePath" />
+             value set to the value of the <see cref="P:System.Web.Security.FormsAuthentication.FormsCookiePath" />
 
             
 
@@ -240,8 +226,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The <paramref
-               name="userData" />
+              >The <paramref name="userData" />
 
               
 
@@ -252,8 +237,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Security.FormsAuthenticationTicket" />
+            >Initializes a new instance of the <see cref="T:System.Web.Security.FormsAuthenticationTicket" />
 
             
 
@@ -261,42 +245,66 @@
           >
         </summary>
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The version number of the ticket.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The user name associated with the ticket.</param
         >
         <param name="issueDate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local date and time at which the ticket was issued.</param
         >
         <param name="expiration">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local date and time at which the ticket expires.</param
         >
         <param name="isPersistent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the ticket will be stored in a persistent cookie (saved across browser sessions); otherwise, false. If the ticket is stored in the URL, this value is ignored.</param
         >
         <param name="userData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -329,8 +337,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <paramref
-               name="userData" />
+              >The <paramref name="userData" />
 
               
 
@@ -341,8 +348,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Security.FormsAuthenticationTicket" />
+            >Initializes a new instance of the <see cref="T:System.Web.Security.FormsAuthenticationTicket" />
 
             
 
@@ -350,49 +356,77 @@
           >
         </summary>
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The version number of the ticket. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The user name associated with the ticket. </param
         >
         <param name="issueDate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local date and time at which the ticket was issued. </param
         >
         <param name="expiration">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local date and time at which the ticket expires. </param
         >
         <param name="isPersistent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the ticket will be stored in a persistent cookie (saved across browser sessions); otherwise, false. If the ticket is stored in the URL, this value is ignored.</param
         >
         <param name="userData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The user-specific data to be stored with the ticket. </param
         >
         <param name="cookiePath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -415,28 +449,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Web.Security.FormsAuthenticationTicket" />
+            >If the <see cref="T:System.Web.Security.FormsAuthenticationTicket" />
 
             
 
-             is created using a constructor that does not supply a <paramref
-             name="cookiePath" />
+             is created using a constructor that does not supply a <paramref name="cookiePath" />
 
             
 
-             parameter, the <see
-             cref="P:System.Web.Security.FormsAuthenticationTicket.CookiePath" />
+             parameter, the <see cref="P:System.Web.Security.FormsAuthenticationTicket.CookiePath" />
 
             
 
-             property returns the value of the <see
-             cref="P:System.Web.Security.FormsAuthentication.FormsCookiePath" />
+             property returns the value of the <see cref="P:System.Web.Security.FormsAuthentication.FormsCookiePath" />
 
             
 
-             property; otherwise, the version property returns the value supplied to the <see
-             cref="T:System.Web.Security.FormsAuthenticationTicket" />
+             property; otherwise, the version property returns the value supplied to the <see cref="T:System.Web.Security.FormsAuthenticationTicket" />
 
             
 
@@ -464,46 +493,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Web.Security.FormsAuthenticationTicket" />
+            >If the <see cref="T:System.Web.Security.FormsAuthenticationTicket" />
 
             
 
-             is created using the <see
-             cref="M:System.Web.Security.FormsAuthenticationTicket.#ctor(System.String,System.Boolean,System.Int32)" />
+             is created using the <see cref="M:System.Web.Security.FormsAuthenticationTicket.#ctor(System.String,System.Boolean,System.Int32)" />
 
             
 
-             constructor that does not supply a parameter for an expiration date and time, the <see
-             cref="P:System.Web.Security.FormsAuthenticationTicket.Expiration" />
+             constructor that does not supply a parameter for an expiration date and time, the <see cref="P:System.Web.Security.FormsAuthenticationTicket.Expiration" />
 
             
 
-             property returns a value based on the current local date and time plus the value of the <paramref
-             name="timeout" />
+             property returns a value based on the current local date and time plus the value of the <paramref name="timeout" />
 
             
 
              parameter supplied to the constructor.</para
           >
           <para
-            >If the <see
-             cref="T:System.Web.Security.FormsAuthenticationTicket" />
+            >If the <see cref="T:System.Web.Security.FormsAuthenticationTicket" />
 
             
 
-             was created using a constructor that takes an <paramref
-             name="expiration" />
+             was created using a constructor that takes an <paramref name="expiration" />
 
             
 
-             parameter, the <see
-             cref="P:System.Web.Security.FormsAuthenticationTicket.Expiration" />
+             parameter, the <see cref="P:System.Web.Security.FormsAuthenticationTicket.Expiration" />
 
             
 
-             property returns the value supplied to the <paramref
-             name="expiration" />
+             property returns the value supplied to the <paramref name="expiration" />
 
             
 
@@ -531,18 +552,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Security.FormsAuthenticationTicket.Expired" />
+            >The <see cref="P:System.Web.Security.FormsAuthenticationTicket.Expired" />
 
             
 
-             property returns true if the <see
-             cref="P:System.Web.Security.FormsAuthenticationTicket.Expiration" />
+             property returns true if the <see cref="P:System.Web.Security.FormsAuthenticationTicket.Expiration" />
 
             
 
-             date and time is less than the current local date and time; otherwise, the <see
-             cref="P:System.Web.Security.FormsAuthenticationTicket.Expired" />
+             date and time is less than the current local date and time; otherwise, the <see cref="P:System.Web.Security.FormsAuthenticationTicket.Expired" />
 
             
 
@@ -589,38 +607,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Security.FormsAuthenticationTicket.IssueDate" />
+            >The <see cref="P:System.Web.Security.FormsAuthenticationTicket.IssueDate" />
 
             
 
-             property represents the local date and time when the forms-authentication ticket was issued. The <see
-             cref="M:System.Web.Security.FormsAuthentication.RenewTicketIfOld(System.Web.Security.FormsAuthenticationTicket)" />
+             property represents the local date and time when the forms-authentication ticket was issued. The <see cref="M:System.Web.Security.FormsAuthentication.RenewTicketIfOld(System.Web.Security.FormsAuthenticationTicket)" />
 
             
 
-             method uses the <see
-             cref="P:System.Web.Security.FormsAuthenticationTicket.IssueDate" />
+             method uses the <see cref="P:System.Web.Security.FormsAuthenticationTicket.IssueDate" />
 
             
 
-             property value to determine whether the <see
-             cref="P:System.Web.Security.FormsAuthenticationTicket.Expiration" />
+             property value to determine whether the <see cref="P:System.Web.Security.FormsAuthenticationTicket.Expiration" />
 
             
 
-             date and time of a forms-authentication ticket needs to be renewed and also uses the <see
-             cref="P:System.Web.Security.FormsAuthenticationTicket.IssueDate" />
+             date and time of a forms-authentication ticket needs to be renewed and also uses the <see cref="P:System.Web.Security.FormsAuthenticationTicket.IssueDate" />
 
             
 
-             property value to determine the new <see
-             cref="P:System.Web.Security.FormsAuthenticationTicket.Expiration" />
+             property value to determine the new <see cref="P:System.Web.Security.FormsAuthenticationTicket.Expiration" />
 
             
 
-             date and time. When a ticket is renewed, the <see
-             cref="P:System.Web.Security.FormsAuthenticationTicket.IssueDate" />
+             date and time. When a ticket is renewed, the <see cref="P:System.Web.Security.FormsAuthenticationTicket.IssueDate" />
 
             
 
@@ -667,41 +678,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Web.Security.FormsAuthenticationTicket" />
+            >If the <see cref="T:System.Web.Security.FormsAuthenticationTicket" />
 
             
 
-             is created using a constructor that does not supply a <paramref
-             name="userData" />
+             is created using a constructor that does not supply a <paramref name="userData" />
 
             
 
-             parameter, the <see
-             cref="P:System.Web.Security.FormsAuthenticationTicket.UserData" />
+             parameter, the <see cref="P:System.Web.Security.FormsAuthenticationTicket.UserData" />
 
             
 
-             property returns an empty string (""); otherwise, the version property returns the value supplied to the <see
-             cref="T:System.Web.Security.FormsAuthenticationTicket" />
+             property returns an empty string (""); otherwise, the version property returns the value supplied to the <see cref="T:System.Web.Security.FormsAuthenticationTicket" />
 
             
 
              constructor.</para
           >
           <para
-            >You can use the <see
-             cref="P:System.Web.Security.FormsAuthenticationTicket.UserData" />
+            >You can use the <see cref="P:System.Web.Security.FormsAuthenticationTicket.UserData" />
 
             
 
-             property to store additional user information with the <see
-             cref="T:System.Web.Security.FormsAuthenticationTicket" />
+             property to store additional user information with the <see cref="T:System.Web.Security.FormsAuthenticationTicket" />
 
             
 
-             that is not maintained by the <see
-             cref="T:System.Web.Security.FormsAuthenticationTicket" />
+             that is not maintained by the <see cref="T:System.Web.Security.FormsAuthenticationTicket" />
 
             
 
@@ -709,13 +713,11 @@
           >
           <block subset="none" type="note">
             <para
-              >You should limit the amount of data stored in the <see
-               cref="P:System.Web.Security.FormsAuthenticationTicket.UserData" />
+              >You should limit the amount of data stored in the <see cref="P:System.Web.Security.FormsAuthenticationTicket.UserData" />
 
               
 
-               property. You must ensure that the size of the <see
-               cref="P:System.Web.Security.FormsAuthenticationTicket.UserData" />
+               property. You must ensure that the size of the <see cref="P:System.Web.Security.FormsAuthenticationTicket.UserData" />
 
               
 
@@ -744,23 +746,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Web.Security.FormsAuthenticationTicket" />
+            >If the <see cref="T:System.Web.Security.FormsAuthenticationTicket" />
 
             
 
-             is created using a constructor that does not supply a <paramref
-             name="version" />
+             is created using a constructor that does not supply a <paramref name="version" />
 
             
 
-             parameter, the <see
-             cref="P:System.Web.Security.FormsAuthenticationTicket.Version" />
+             parameter, the <see cref="P:System.Web.Security.FormsAuthenticationTicket.Version" />
 
             
 
-             property returns 2; otherwise, the version property returns the value supplied to the <see
-             cref="T:System.Web.Security.FormsAuthenticationTicket" />
+             property returns 2; otherwise, the version property returns the value supplied to the <see cref="T:System.Web.Security.FormsAuthenticationTicket" />
 
             
 

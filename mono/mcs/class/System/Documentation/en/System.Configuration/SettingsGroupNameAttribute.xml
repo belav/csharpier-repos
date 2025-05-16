@@ -24,21 +24,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A application settings class, derived from <see
-         cref="T:System.Configuration.ApplicationSettingsBase" />
+        >A application settings class, derived from <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
         
 
-        , defines one or more properties that belong to the same application settings property group. By default, the group is assigned the name of the settings class. However, <see
-         cref="T:System.Configuration.SettingsGroupNameAttribute" />
+        , defines one or more properties that belong to the same application settings property group. By default, the group is assigned the name of the settings class. However, <see cref="T:System.Configuration.SettingsGroupNameAttribute" />
 
         
 
          can be used to explicitly specify a name for the property group. This name can be helpful in organizing large sets of properties, for assistance in design-time programming tools and run-time administrative tools, and so on. The associated settings provider may even use this name to organize settings in the data store.</para
       >
       <para
-        >The <see
-         cref="T:System.Configuration.SettingsGroupNameAttribute" />
+        >The <see cref="T:System.Configuration.SettingsGroupNameAttribute" />
 
         
 
@@ -73,13 +70,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although the theoretical maximum length of the <paramref
-             name="groupName" />
+            >Although the theoretical maximum length of the <paramref name="groupName" />
 
             
 
-             parameter is constrained by the upper bounds of an <see
-             cref="T:System.Int32" />
+             parameter is constrained by the upper bounds of an <see cref="T:System.Int32" />
 
             
 
@@ -92,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.SettingsGroupNameAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsGroupNameAttribute" />
 
             
 
@@ -101,12 +95,15 @@
           >
         </summary>
         <param name="groupName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -131,13 +128,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Configuration.SettingsGroupNameAttribute.GroupName" />
+            >The <see cref="P:System.Configuration.SettingsGroupNameAttribute.GroupName" />
 
             
 
-             property value is set by the <see
-             cref="M:System.Configuration.SettingsGroupNameAttribute.#ctor(System.String)" />
+             property value is set by the <see cref="M:System.Configuration.SettingsGroupNameAttribute.#ctor(System.String)" />
 
             
 

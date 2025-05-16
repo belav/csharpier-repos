@@ -25,8 +25,7 @@
       <list type="bullet">
         <item>
           <para
-            >The first 16 bits are the <see
-             cref="P:System.Diagnostics.FileVersionInfo.FileMajorPart" />
+            >The first 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FileMajorPart" />
 
             
 
@@ -35,8 +34,7 @@
         </item>
         <item>
           <para
-            >The next 16 bits are the <see
-             cref="P:System.Diagnostics.FileVersionInfo.FileMinorPart" />
+            >The next 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FileMinorPart" />
 
             
 
@@ -45,8 +43,7 @@
         </item>
         <item>
           <para
-            >The third set of 16 bits are the <see
-             cref="P:System.Diagnostics.FileVersionInfo.FileBuildPart" />
+            >The third set of 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FileBuildPart" />
 
             
 
@@ -55,8 +52,7 @@
         </item>
         <item>
           <para
-            >The last 16 bits are the <see
-             cref="P:System.Diagnostics.FileVersionInfo.FilePrivatePart" />
+            >The last 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FilePrivatePart" />
 
             
 
@@ -65,69 +61,57 @@
         </item>
       </list>
       <para
-        >Use the <see
-         cref="M:System.Diagnostics.FileVersionInfo.GetVersionInfo(System.String)" />
+        >Use the <see cref="M:System.Diagnostics.FileVersionInfo.GetVersionInfo(System.String)" />
 
         
 
-         method of this class to get a <see
-         cref="T:System.Diagnostics.FileVersionInfo" />
+         method of this class to get a <see cref="T:System.Diagnostics.FileVersionInfo" />
 
         
 
-         containing information about a file, then look at the properties for information about the file. The <see
-         cref="P:System.Diagnostics.FileVersionInfo.FileVersion" />
+         containing information about a file, then look at the properties for information about the file. The <see cref="P:System.Diagnostics.FileVersionInfo.FileVersion" />
 
         
 
-         property provides version information about the file. The <see
-         cref="P:System.Diagnostics.FileVersionInfo.ProductMajorPart" />
+         property provides version information about the file. The <see cref="P:System.Diagnostics.FileVersionInfo.ProductMajorPart" />
 
         
 
-        , <see
-         cref="P:System.Diagnostics.FileVersionInfo.ProductMinorPart" />
+        , <see cref="P:System.Diagnostics.FileVersionInfo.ProductMinorPart" />
 
         
 
-        , <see
-         cref="P:System.Diagnostics.FileVersionInfo.ProductBuildPart" />
+        , <see cref="P:System.Diagnostics.FileVersionInfo.ProductBuildPart" />
 
         
 
-        , <see
-         cref="P:System.Diagnostics.FileVersionInfo.ProductPrivatePart" />
+        , <see cref="P:System.Diagnostics.FileVersionInfo.ProductPrivatePart" />
 
         
 
-        , and <see
-         cref="P:System.Diagnostics.FileVersionInfo.ProductVersion" />
+        , and <see cref="P:System.Diagnostics.FileVersionInfo.ProductVersion" />
 
         
 
-         properties provide version information for the product that the specified file is a part of. Call <see
-         cref="M:System.Diagnostics.FileVersionInfo.ToString" />
+         properties provide version information for the product that the specified file is a part of. Call <see cref="M:System.Diagnostics.FileVersionInfo.ToString" />
 
         
 
          to get a partial list of properties and their values for this file.</para
       >
       <para
-        >The <see
-         cref="T:System.Diagnostics.FileVersionInfo" />
+        >The <see cref="T:System.Diagnostics.FileVersionInfo" />
 
         
 
          properties are based on version resource information built into the file. Version resources are often built into binary files such as .exe or .dll files; text files do not have version resource information.</para
       >
       <para
-        >Version resources are typically specified in a Win32 resource file, or in assembly attributes. For example the <see
-         cref="P:System.Diagnostics.FileVersionInfo.IsDebug" />
+        >Version resources are typically specified in a Win32 resource file, or in assembly attributes. For example the <see cref="P:System.Diagnostics.FileVersionInfo.IsDebug" />
 
         
 
-         property reflects the VS_FF_DEBUG flag value in the file's VS_FIXEDFILEINFO block, which is built from the VERSIONINFO resource in a Win32 resource file.  For more information about specifying version resources in a Win32 resource file, see "About Resource Files" and "VERSIONINFO Resource" in the Platform SDK. For more information about specifying version resources in a .NET module, see the <format
-         type="text/html">
+         property reflects the VS_FF_DEBUG flag value in the file's VS_FIXEDFILEINFO block, which is built from the VERSIONINFO resource in a Win32 resource file.  For more information about specifying version resources in a Win32 resource file, see "About Resource Files" and "VERSIONINFO Resource" in the Platform SDK. For more information about specifying version resources in a .NET module, see the <format type="text/html">
           <a href="36a98a81-b5b5-4c19-912a-11f91eff7f4e">Setting Assembly Attributes</a>
         </format>
 
@@ -137,13 +121,11 @@
       >
       <block subset="none" type="note">
         <para
-          >This class makes a link demand at the class level that applies to all members. A <see
-           cref="T:System.Security.SecurityException" />
+          >This class makes a link demand at the class level that applies to all members. A <see cref="T:System.Security.SecurityException" />
 
           
 
-           is thrown when the immediate caller does not have full trust permission. For details about link demands, see <format
-           type="text/html">
+           is thrown when the immediate caller does not have full trust permission. For details about link demands, see <format type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
           </format>
 
@@ -225,8 +207,7 @@
           <list type="bullet">
             <item>
               <para
-                >The first 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.FileMajorPart" />
+                >The first 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FileMajorPart" />
 
                 
 
@@ -235,8 +216,7 @@
             </item>
             <item>
               <para
-                >The next 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.FileMinorPart" />
+                >The next 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FileMinorPart" />
 
                 
 
@@ -245,8 +225,7 @@
             </item>
             <item>
               <para
-                >The third set of 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.FileBuildPart" />
+                >The third set of 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FileBuildPart" />
 
                 
 
@@ -255,8 +234,7 @@
             </item>
             <item>
               <para
-                >The last 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.FilePrivatePart" />
+                >The last 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FilePrivatePart" />
 
                 
 
@@ -313,8 +291,7 @@
           <list type="bullet">
             <item>
               <para
-                >The first 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.FileMajorPart" />
+                >The first 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FileMajorPart" />
 
                 
 
@@ -323,8 +300,7 @@
             </item>
             <item>
               <para
-                >The next 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.FileMinorPart" />
+                >The next 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FileMinorPart" />
 
                 
 
@@ -333,8 +309,7 @@
             </item>
             <item>
               <para
-                >The third set of 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.FileBuildPart" />
+                >The third set of 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FileBuildPart" />
 
                 
 
@@ -343,8 +318,7 @@
             </item>
             <item>
               <para
-                >The last 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.FilePrivatePart" />
+                >The last 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FilePrivatePart" />
 
                 
 
@@ -380,8 +354,7 @@
           <list type="bullet">
             <item>
               <para
-                >The first 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.FileMajorPart" />
+                >The first 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FileMajorPart" />
 
                 
 
@@ -390,8 +363,7 @@
             </item>
             <item>
               <para
-                >The next 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.FileMinorPart" />
+                >The next 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FileMinorPart" />
 
                 
 
@@ -400,8 +372,7 @@
             </item>
             <item>
               <para
-                >The third set of 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.FileBuildPart" />
+                >The third set of 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FileBuildPart" />
 
                 
 
@@ -410,8 +381,7 @@
             </item>
             <item>
               <para
-                >The last 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.FilePrivatePart" />
+                >The last 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FilePrivatePart" />
 
                 
 
@@ -445,8 +415,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the file that this instance of <see
-             cref="T:System.Diagnostics.FileVersionInfo" />
+            >Gets the name of the file that this instance of <see cref="T:System.Diagnostics.FileVersionInfo" />
 
             
 
@@ -475,8 +444,7 @@
           <list type="bullet">
             <item>
               <para
-                >The first 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.FileMajorPart" />
+                >The first 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FileMajorPart" />
 
                 
 
@@ -485,8 +453,7 @@
             </item>
             <item>
               <para
-                >The next 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.FileMinorPart" />
+                >The next 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FileMinorPart" />
 
                 
 
@@ -495,8 +462,7 @@
             </item>
             <item>
               <para
-                >The third set of 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.FileBuildPart" />
+                >The third set of 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FileBuildPart" />
 
                 
 
@@ -505,8 +471,7 @@
             </item>
             <item>
               <para
-                >The last 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.FilePrivatePart" />
+                >The last 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FilePrivatePart" />
 
                 
 
@@ -542,8 +507,7 @@
           <list type="bullet">
             <item>
               <para
-                >The first 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.FileMajorPart" />
+                >The first 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FileMajorPart" />
 
                 
 
@@ -552,8 +516,7 @@
             </item>
             <item>
               <para
-                >The next 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.FileMinorPart" />
+                >The next 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FileMinorPart" />
 
                 
 
@@ -562,8 +525,7 @@
             </item>
             <item>
               <para
-                >The third set of 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.FileBuildPart" />
+                >The third set of 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FileBuildPart" />
 
                 
 
@@ -572,8 +534,7 @@
             </item>
             <item>
               <para
-                >The last 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.FilePrivatePart" />
+                >The last 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.FilePrivatePart" />
 
                 
 
@@ -614,8 +575,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Diagnostics.FileVersionInfo" />
+            >Returns a <see cref="T:System.Diagnostics.FileVersionInfo" />
 
             
 
@@ -625,13 +585,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Diagnostics.FileVersionInfo" />
+            >A <see cref="T:System.Diagnostics.FileVersionInfo" />
 
             
 
-             containing information about the file. If the file did not contain version information, the <see
-             cref="T:System.Diagnostics.FileVersionInfo" />
+             containing information about the file. If the file did not contain version information, the <see cref="T:System.Diagnostics.FileVersionInfo" />
 
             
 
@@ -639,7 +597,11 @@
           >
         </returns>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -685,16 +647,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Diagnostics.FileVersionInfo" />
+            >The <see cref="T:System.Diagnostics.FileVersionInfo" />
 
             
 
              properties are based on version resource information built into the file. Version resources are often built into binary files such as .exe or .dll files; text files do not have version resource information.</para
           >
           <para
-            >Version resources are typically specified in a Win32 resource file, or in assembly attributes. The <see
-             cref="P:System.Diagnostics.FileVersionInfo.IsDebug" />
+            >Version resources are typically specified in a Win32 resource file, or in assembly attributes. The <see cref="P:System.Diagnostics.FileVersionInfo.IsDebug" />
 
             
 
@@ -766,8 +726,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this value is true, <see
-             cref="P:System.Diagnostics.FileVersionInfo.PrivateBuild" />
+            >If this value is true, <see cref="P:System.Diagnostics.FileVersionInfo.PrivateBuild" />
 
             
 
@@ -797,8 +756,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A file that is a special build was built using standard release procedures, but the file differs from a standard file of the same version number. If this value is true, the <see
-             cref="P:System.Diagnostics.FileVersionInfo.SpecialBuild" />
+            >A file that is a special build was built using standard release procedures, but the file differs from a standard file of the same version number. If this value is true, the <see cref="P:System.Diagnostics.FileVersionInfo.SpecialBuild" />
 
             
 
@@ -921,8 +879,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This information is present when <see
-             cref="P:System.Diagnostics.FileVersionInfo.IsPrivateBuild" />
+            >This information is present when <see cref="P:System.Diagnostics.FileVersionInfo.IsPrivateBuild" />
 
             
 
@@ -955,8 +912,7 @@
           <list type="bullet">
             <item>
               <para
-                >The first 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.ProductMajorPart" />
+                >The first 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.ProductMajorPart" />
 
                 
 
@@ -965,8 +921,7 @@
             </item>
             <item>
               <para
-                >The next 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.ProductMinorPart" />
+                >The next 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.ProductMinorPart" />
 
                 
 
@@ -975,8 +930,7 @@
             </item>
             <item>
               <para
-                >The third set of 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.ProductBuildPart" />
+                >The third set of 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.ProductBuildPart" />
 
                 
 
@@ -985,8 +939,7 @@
             </item>
             <item>
               <para
-                >The last 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.ProductPrivatePart" />
+                >The last 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.ProductPrivatePart" />
 
                 
 
@@ -1022,8 +975,7 @@
           <list type="bullet">
             <item>
               <para
-                >The first 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.ProductMajorPart" />
+                >The first 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.ProductMajorPart" />
 
                 
 
@@ -1032,8 +984,7 @@
             </item>
             <item>
               <para
-                >The next 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.ProductMinorPart" />
+                >The next 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.ProductMinorPart" />
 
                 
 
@@ -1042,8 +993,7 @@
             </item>
             <item>
               <para
-                >The third set of 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.ProductBuildPart" />
+                >The third set of 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.ProductBuildPart" />
 
                 
 
@@ -1052,8 +1002,7 @@
             </item>
             <item>
               <para
-                >The last 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.ProductPrivatePart" />
+                >The last 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.ProductPrivatePart" />
 
                 
 
@@ -1089,8 +1038,7 @@
           <list type="bullet">
             <item>
               <para
-                >The first 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.ProductMajorPart" />
+                >The first 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.ProductMajorPart" />
 
                 
 
@@ -1099,8 +1047,7 @@
             </item>
             <item>
               <para
-                >The next 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.ProductMinorPart" />
+                >The next 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.ProductMinorPart" />
 
                 
 
@@ -1109,8 +1056,7 @@
             </item>
             <item>
               <para
-                >The third set of 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.ProductBuildPart" />
+                >The third set of 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.ProductBuildPart" />
 
                 
 
@@ -1119,8 +1065,7 @@
             </item>
             <item>
               <para
-                >The last 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.ProductPrivatePart" />
+                >The last 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.ProductPrivatePart" />
 
                 
 
@@ -1177,8 +1122,7 @@
           <list type="bullet">
             <item>
               <para
-                >The first 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.ProductMajorPart" />
+                >The first 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.ProductMajorPart" />
 
                 
 
@@ -1187,8 +1131,7 @@
             </item>
             <item>
               <para
-                >The next 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.ProductMinorPart" />
+                >The next 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.ProductMinorPart" />
 
                 
 
@@ -1197,8 +1140,7 @@
             </item>
             <item>
               <para
-                >The third set of 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.ProductBuildPart" />
+                >The third set of 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.ProductBuildPart" />
 
                 
 
@@ -1207,8 +1149,7 @@
             </item>
             <item>
               <para
-                >The last 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.ProductPrivatePart" />
+                >The last 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.ProductPrivatePart" />
 
                 
 
@@ -1244,8 +1185,7 @@
           <list type="bullet">
             <item>
               <para
-                >The first 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.ProductMajorPart" />
+                >The first 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.ProductMajorPart" />
 
                 
 
@@ -1254,8 +1194,7 @@
             </item>
             <item>
               <para
-                >The next 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.ProductMinorPart" />
+                >The next 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.ProductMinorPart" />
 
                 
 
@@ -1264,8 +1203,7 @@
             </item>
             <item>
               <para
-                >The third set of 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.ProductBuildPart" />
+                >The third set of 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.ProductBuildPart" />
 
                 
 
@@ -1274,8 +1212,7 @@
             </item>
             <item>
               <para
-                >The last 16 bits are the <see
-                 cref="P:System.Diagnostics.FileVersionInfo.ProductPrivatePart" />
+                >The last 16 bits are the <see cref="P:System.Diagnostics.FileVersionInfo.ProductPrivatePart" />
 
                 
 
@@ -1307,13 +1244,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Diagnostics.FileVersionInfo.IsSpecialBuild" />
+            >If <see cref="P:System.Diagnostics.FileVersionInfo.IsSpecialBuild" />
 
             
 
-             is true, <see
-             cref="P:System.Diagnostics.FileVersionInfo.SpecialBuild" />
+             is true, <see cref="P:System.Diagnostics.FileVersionInfo.SpecialBuild" />
 
             
 
@@ -1347,8 +1282,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a partial list of properties in the <see
-             cref="T:System.Diagnostics.FileVersionInfo" />
+            >Returns a partial list of properties in the <see cref="T:System.Diagnostics.FileVersionInfo" />
 
             
 
@@ -1363,58 +1297,47 @@
 
             
 
-            , <see
-             cref="P:System.Diagnostics.FileVersionInfo.InternalName" />
+            , <see cref="P:System.Diagnostics.FileVersionInfo.InternalName" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.FileVersionInfo.OriginalFilename" />
+            , <see cref="P:System.Diagnostics.FileVersionInfo.OriginalFilename" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.FileVersionInfo.FileVersion" />
+            , <see cref="P:System.Diagnostics.FileVersionInfo.FileVersion" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.FileVersionInfo.FileDescription" />
+            , <see cref="P:System.Diagnostics.FileVersionInfo.FileDescription" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.FileVersionInfo.ProductName" />
+            , <see cref="P:System.Diagnostics.FileVersionInfo.ProductName" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.FileVersionInfo.ProductVersion" />
+            , <see cref="P:System.Diagnostics.FileVersionInfo.ProductVersion" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.FileVersionInfo.IsDebug" />
+            , <see cref="P:System.Diagnostics.FileVersionInfo.IsDebug" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.FileVersionInfo.IsPatched" />
+            , <see cref="P:System.Diagnostics.FileVersionInfo.IsPatched" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.FileVersionInfo.IsPreRelease" />
+            , <see cref="P:System.Diagnostics.FileVersionInfo.IsPreRelease" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.FileVersionInfo.IsPrivateBuild" />
+            , <see cref="P:System.Diagnostics.FileVersionInfo.IsPrivateBuild" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.FileVersionInfo.IsSpecialBuild" />
+            , <see cref="P:System.Diagnostics.FileVersionInfo.IsSpecialBuild" />
 
             
 

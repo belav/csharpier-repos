@@ -25,13 +25,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+        >The <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
         
 
-         class is used by the <format
-         type="text/html">
+         class is used by the <format type="text/html">
           <a href="b9210348-8bc2-4367-8c91-d1a04b403e88"
             >Web Services Description Language Tool (Wsdl.exe)</a
           >
@@ -39,13 +37,11 @@
 
         
 
-         and the <see
-         cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+         and the <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
 
         
 
-         class while generating client proxy classes or abstract server classes from a Web Services Description Language (WSDL) document. The class is also used by the <format
-         type="text/html">
+         class while generating client proxy classes or abstract server classes from a Web Services Description Language (WSDL) document. The class is also used by the <format type="text/html">
           <a href="b9210348-8bc2-4367-8c91-d1a04b403e88"
             >Web Services Description Language Tool (Wsdl.exe)</a
           >
@@ -56,8 +52,7 @@
          while generating classes from XML Schema Definition (XSD) documents. Instead of using this class directly, use Wsdl.exe or Xsd.exe. </para
       >
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+        >The <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
         
 
@@ -102,8 +97,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Use this constructor when a WSDL document specifies that the data is serialized according to a schema (&lt;soap:body use = 'literal' /&gt;).</para>
           <para
-            >Instead of directly creating an instance of the <see
-             cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+            >Instead of directly creating an instance of the <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
             
 
@@ -113,13 +107,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
             
 
-             class, taking a collection of <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+             class, taking a collection of <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -127,12 +119,15 @@
           >
         </summary>
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A collection of <see
-           cref="T:System.Xml.Schema.XmlSchema" />
+          A collection of <see cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
@@ -165,8 +160,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Use this constructor when a WSDL document specifies that the data is serialized according to a schema (&lt;soap:body use = 'literal' /&gt;).</para>
           <para
-            >Instead of directly creating an instance of the <see
-             cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+            >Instead of directly creating an instance of the <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
             
 
@@ -176,13 +170,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
             
 
-             class, taking a collection of <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+             class, taking a collection of <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -190,24 +182,30 @@
           >
         </summary>
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Serialization.XmlSchemas" />
+          An <see cref="T:System.Xml.Serialization.XmlSchemas" />
 
           
 
            object.</param
         >
         <param name="typeIdentifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Serialization.CodeIdentifiers" />
+          A <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
           
 
@@ -240,8 +238,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
             
 
@@ -249,36 +246,45 @@
           >
         </summary>
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A collection of <see
-           cref="T:System.Xml.Schema.XmlSchema" />
+          A collection of <see cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
            objects.</param
         >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+          A <see cref="T:System.Xml.Serialization.CodeGenerationOptions" />
 
           
 
            enumeration that specifies code generation options.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Serialization.ImportContext" />
+          A <see cref="T:System.Xml.Serialization.ImportContext" />
 
           
 
@@ -315,18 +321,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
             
 
-             class, taking a collection of <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+             class, taking a collection of <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
-             objects that represents the XML schemas used by SOAP literal messages, plus classes being generated for bindings defined in a WSDL document, and a <see
-             cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+             objects that represents the XML schemas used by SOAP literal messages, plus classes being generated for bindings defined in a WSDL document, and a <see cref="T:System.Xml.Serialization.CodeGenerationOptions" />
 
             
 
@@ -334,36 +337,45 @@
           >
         </summary>
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A collection of <see
-           cref="T:System.Xml.Schema.XmlSchema" />
+          A collection of <see cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
            objects.</param
         >
         <param name="typeIdentifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Serialization.CodeIdentifiers" />
+          A <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
           
 
            object that specifies a collection of classes being generated for bindings defined in a WSDL document.</param
         >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+          A bitwise combination of the <see cref="T:System.Xml.Serialization.CodeGenerationOptions" />
 
           
 
@@ -397,8 +409,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
             
 
@@ -406,48 +417,60 @@
           >
         </summary>
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A collection of <see
-           cref="T:System.Xml.Schema.XmlSchema" />
+          A collection of <see cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
            objects.</param
         >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+          A bitwise combination of the <see cref="T:System.Xml.Serialization.CodeGenerationOptions" />
 
           
 
            values that specifies the options to use when generating .NET Framework types for a Web service.</param
         >
         <param name="codeProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+          A <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
           
 
            used to generate the serialization code.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Serialization.ImportContext" />
+          A <see cref="T:System.Xml.Serialization.ImportContext" />
 
           
 
@@ -481,21 +504,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Serialization.XmlSchemaImporter.ImportAnyType(System.Xml.XmlQualifiedName,System.String)" />
+            >The <see cref="M:System.Xml.Serialization.XmlSchemaImporter.ImportAnyType(System.Xml.XmlQualifiedName,System.String)" />
 
             
 
              method is used by the Wsdl.exe tool while generating client proxy classes or abstract server classes from a Web Services Description Language (WSDL) document. Instead of calling this method directly, use Wsdl.exe or Xsd.exe.</para
           >
           <para
-            >The <see
-             cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+            >The <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
             
 
-             class is used only when a WSDL document specifies literal use. The <see
-             cref="M:System.Xml.Serialization.XmlSchemaImporter.ImportAnyType(System.Xml.XmlQualifiedName,System.String)" />
+             class is used only when a WSDL document specifies literal use. The <see cref="M:System.Xml.Serialization.XmlSchemaImporter.ImportAnyType(System.Xml.XmlQualifiedName,System.String)" />
 
             
 
@@ -509,8 +529,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Serialization.XmlMembersMapping" />
+            >An <see cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
             
 
@@ -518,19 +537,26 @@
           >
         </returns>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          An <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
            that specifies the name of an element's type for which a .NET Framework type is generated.</param
         >
         <param name="elementName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -564,8 +590,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload of the <see
-             cref="M:System.Xml.Serialization.XmlSchemaImporter.ImportDerivedTypeMapping(System.Xml.XmlQualifiedName,System.Type)" />
+            >This overload of the <see cref="M:System.Xml.Serialization.XmlSchemaImporter.ImportDerivedTypeMapping(System.Xml.XmlQualifiedName,System.Type)" />
 
             
 
@@ -579,8 +604,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Serialization.XmlTypeMapping" />
+            >An <see cref="T:System.Xml.Serialization.XmlTypeMapping" />
 
             
 
@@ -588,19 +612,26 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          An <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
            that specifies the name of an element defined in an XML schema document.</param
         >
         <param name="baseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -635,8 +666,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload of the <see
-             cref="M:System.Xml.Serialization.XmlSchemaImporter.ImportDerivedTypeMapping(System.Xml.XmlQualifiedName,System.Type,System.Boolean)" />
+            >This overload of the <see cref="M:System.Xml.Serialization.XmlSchemaImporter.ImportDerivedTypeMapping(System.Xml.XmlQualifiedName,System.Type,System.Boolean)" />
 
             
 
@@ -652,26 +682,37 @@
           <para>The .NET Framework type mapping information for an XML schema element.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          An <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
            that specifies the name of an element defined in an XML schema document.</param
         >
         <param name="baseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A base type for the .NET Framework type that is generated to correspond to an XSD element's type.</param
         >
         <param name="baseTypeCanBeIndirect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -704,21 +745,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Serialization.XmlSchemaImporter.ImportMembersMapping(System.Xml.XmlQualifiedName)" />
+            >The <see cref="M:System.Xml.Serialization.XmlSchemaImporter.ImportMembersMapping(System.Xml.XmlQualifiedName)" />
 
             
 
-             method of the <see
-             cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+             method of the <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
             
 
              class is used by the Wsdl.exe tool while generating client proxy classes or abstract server classes from a Web Services Description Language (WSDL) document. Instead of calling this method directly, use Wsdl.exe or Xsd.exe.</para
           >
           <para
-            >The <see
-             cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+            >The <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
             
 
@@ -734,12 +772,15 @@
           <para>The .NET Framework type mapping for a WSDL message definition containing a single element part.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          An <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
@@ -772,21 +813,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Serialization.XmlSchemaImporter.ImportMembersMapping(System.Xml.XmlQualifiedName[])" />
+            >The <see cref="M:System.Xml.Serialization.XmlSchemaImporter.ImportMembersMapping(System.Xml.XmlQualifiedName[])" />
 
             
 
              method is used by the Wsdl.exe tool while generating client proxy classes or abstract server classes from a Web Services Description Language (WSDL) document. Instead of calling this method directly, use Wsdl.exe or Xsd.exe.</para
           >
           <para
-            >The <see
-             cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+            >The <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
             
 
-             class is used only when a WSDL document specifies literal use. The value of the <paramref
-             name="names" />
+             class is used only when a WSDL document specifies literal use. The value of the <paramref name="names" />
 
             
 
@@ -801,8 +839,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Serialization.XmlMembersMapping" />
+            >An <see cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
             
 
@@ -810,12 +847,15 @@
           >
         </returns>
         <param name="names">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          An array of type <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
@@ -855,8 +895,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Xml.Serialization.XmlMembersMapping" />
+            >A <see cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
             
 
@@ -864,26 +903,37 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the element for which to generate a mapping.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace of the element for which to generate a mapping.</param
         >
         <param name="members">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Xml.Serialization.SoapSchemaMember" />
+          An array of <see cref="T:System.Xml.Serialization.SoapSchemaMember" />
 
           
 
@@ -918,21 +968,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Serialization.XmlSchemaImporter.ImportMembersMapping(System.Xml.XmlQualifiedName[],System.Type,System.Boolean)" />
+            >The <see cref="M:System.Xml.Serialization.XmlSchemaImporter.ImportMembersMapping(System.Xml.XmlQualifiedName[],System.Type,System.Boolean)" />
 
             
 
              method is used by the Wsdl.exe tool while generating client proxy classes or abstract server classes from a Web Services Description Language (WSDL) document. Instead of calling this method directly, use Wsdl.exe or Xsd.exe.</para
           >
           <para
-            >The <see
-             cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+            >The <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
             
 
-             class is used only when a WSDL document specifies literal use. The value of the <paramref
-             name="names" />
+             class is used only when a WSDL document specifies literal use. The value of the <paramref name="names" />
 
             
 
@@ -949,26 +996,37 @@
           <para>The .NET Framework type mappings for the element parts of a WSDL message definition.</para>
         </returns>
         <param name="names">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          An array of type <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
            that specifies the names of the message parts.</param
         >
         <param name="baseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A base type for all .NET Framework types that are generated to correspond to message parts.</param
         >
         <param name="baseTypeCanBeIndirect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1006,8 +1064,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Xml.Serialization.XmlTypeMapping" />
+            >A <see cref="T:System.Xml.Serialization.XmlTypeMapping" />
 
             
 
@@ -1015,12 +1072,15 @@
           >
         </returns>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          A <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
@@ -1059,8 +1119,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Xml.Serialization.XmlTypeMapping" />
+            >A <see cref="T:System.Xml.Serialization.XmlTypeMapping" />
 
             
 
@@ -1068,24 +1127,30 @@
           >
         </returns>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          A <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
            that specifies an XML element.</param
         >
         <param name="baseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -1125,8 +1190,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Xml.Serialization.XmlTypeMapping" />
+            >A <see cref="T:System.Xml.Serialization.XmlTypeMapping" />
 
             
 
@@ -1134,41 +1198,49 @@
           >
         </returns>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          A <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
            that specifies an XML element.</param
         >
         <param name="baseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
            object that specifies a base type.</param
         >
         <param name="baseTypeCanBeIndirect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Boolean" />
+          A <see cref="T:System.Boolean" />
 
           
 
-           value that specifies whether the generated type can indirectly inherit the <paramref
-           name="baseType" />
+           value that specifies whether the generated type can indirectly inherit the <paramref name="baseType" />
 
           
 
@@ -1201,8 +1273,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Serialization.XmlSchemaImporter.ImportTypeMapping(System.Xml.XmlQualifiedName)" />
+            >The <see cref="M:System.Xml.Serialization.XmlSchemaImporter.ImportTypeMapping(System.Xml.XmlQualifiedName)" />
 
             
 
@@ -1219,12 +1290,15 @@
           <para>The .NET Framework type mapping information for an XML schema element.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          An <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 

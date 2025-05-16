@@ -22,26 +22,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+        >The <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
         
 
          class represents an abstraction of an underlying access control entry (ACE) that specifies a user account, the type of access to provide (read, write, and so on), and whether to allow or deny that right.  This class can also specify how access rules are propagated to child objects.</para
       >
       <para
-        >Use the <see
-         cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+        >Use the <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
         
 
-         class to create a new access rule.  You can persist the rule using the <see
-         cref="T:System.Security.AccessControl.FileSecurity" />
+         class to create a new access rule.  You can persist the rule using the <see cref="T:System.Security.AccessControl.FileSecurity" />
 
         
 
-         or <see
-         cref="T:System.Security.AccessControl.DirectorySecurity" />
+         or <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
         
 
@@ -78,13 +74,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create an access control rule that you can persist using the <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+            >Use this constructor to create an access control rule that you can persist using the <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
-             or <see
-             cref="T:System.Security.AccessControl.DirectorySecurity" />
+             or <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
             
 
@@ -94,8 +88,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
             
 
@@ -103,36 +96,45 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Principal.IdentityReference" />
+          An <see cref="T:System.Security.Principal.IdentityReference" />
 
           
 
            object that encapsulates a reference to a user account.</param
         >
         <param name="fileSystemRights">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.FileSystemRights" />
+          One of the <see cref="T:System.Security.AccessControl.FileSystemRights" />
 
           
 
            values that specifies the type of operation associated with the access rule. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AccessControlType" />
+          One of the <see cref="T:System.Security.AccessControl.AccessControlType" />
 
           
 
@@ -164,36 +166,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create an access control rule that you can persist using the <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+            >Use this constructor to create an access control rule that you can persist using the <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
-             or <see
-             cref="T:System.Security.AccessControl.DirectorySecurity" />
+             or <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
             
 
              class.  Access control rules define user account rights that determine which actions are allowed or disallowed on computers running Microsoft Windows.</para
           >
           <para
-            >The <paramref
-             name="identity" />
+            >The <paramref name="identity" />
 
             
 
-             parameter must identify a valid account on the current computer or domain.  The string takes the following form, where <paramref
-             name="DOMAIN" />
+             parameter must identify a valid account on the current computer or domain.  The string takes the following form, where <paramref name="DOMAIN" />
 
             
 
-             is the name of a valid domain or computer name and <paramref
-             name="account" />
+             is the name of a valid domain or computer name and <paramref name="account" />
 
             
 
-             is the name of a valid user account on a domain or computer: <paramref
-             name="DOMAIN\account" />
+             is the name of a valid user account on a domain or computer: <paramref name="DOMAIN\account" />
 
             
 
@@ -203,8 +199,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
             
 
@@ -212,31 +207,41 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of a user account.</param
         >
         <param name="fileSystemRights">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.FileSystemRights" />
+          One of the <see cref="T:System.Security.AccessControl.FileSystemRights" />
 
           
 
            values that specifies the type of operation associated with the access rule. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AccessControlType" />
+          One of the <see cref="T:System.Security.AccessControl.AccessControlType" />
 
           
 
@@ -270,13 +275,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create an access control rule that you can persist using the <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+            >Use this constructor to create an access control rule that you can persist using the <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
-             or <see
-             cref="T:System.Security.AccessControl.DirectorySecurity" />
+             or <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
             
 
@@ -286,8 +289,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
             
 
@@ -295,60 +297,75 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Principal.IdentityReference" />
+          An <see cref="T:System.Security.Principal.IdentityReference" />
 
           
 
            object that encapsulates a reference to a user account.</param
         >
         <param name="fileSystemRights">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.FileSystemRights" />
+          One of the <see cref="T:System.Security.AccessControl.FileSystemRights" />
 
           
 
            values that specifies the type of operation associated with the access rule.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.InheritanceFlags" />
+          One of the <see cref="T:System.Security.AccessControl.InheritanceFlags" />
 
           
 
            values that specifies how access masks are propagated to child objects.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.PropagationFlags" />
+          One of the <see cref="T:System.Security.AccessControl.PropagationFlags" />
 
           
 
            values that specifies how Access Control Entries (ACEs) are propagated to child objects.</param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AccessControlType" />
+          One of the <see cref="T:System.Security.AccessControl.AccessControlType" />
 
           
 
@@ -382,36 +399,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create an access control rule that you can persist using the <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+            >Use this constructor to create an access control rule that you can persist using the <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
-             or <see
-             cref="T:System.Security.AccessControl.DirectorySecurity" />
+             or <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
             
 
              class.  Access control rules define user account rights that determine which actions are allowed or disallowed on computers running Microsoft Windows.</para
           >
           <para
-            >The <paramref
-             name="identity" />
+            >The <paramref name="identity" />
 
             
 
-             parameter must identify a valid account on the current computer or domain.  The string takes the following form, where <paramref
-             name="DOMAIN" />
+             parameter must identify a valid account on the current computer or domain.  The string takes the following form, where <paramref name="DOMAIN" />
 
             
 
-             is the name of a valid domain or computer name and <paramref
-             name="account" />
+             is the name of a valid domain or computer name and <paramref name="account" />
 
             
 
-             is the name of a valid user account on a domain or computer: <paramref
-             name="DOMAIN\account" />
+             is the name of a valid user account on a domain or computer: <paramref name="DOMAIN\account" />
 
             
 
@@ -421,8 +432,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
             
 
@@ -430,55 +440,71 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of a user account.</param
         >
         <param name="fileSystemRights">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.FileSystemRights" />
+          One of the <see cref="T:System.Security.AccessControl.FileSystemRights" />
 
           
 
            values that specifies the type of operation associated with the access rule.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.InheritanceFlags" />
+          One of the <see cref="T:System.Security.AccessControl.InheritanceFlags" />
 
           
 
            values that specifies how access masks are propagated to child objects.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.PropagationFlags" />
+          One of the <see cref="T:System.Security.AccessControl.PropagationFlags" />
 
           
 
            values that specifies how Access Control Entries (ACEs) are propagated to child objects.</param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AccessControlType" />
+          One of the <see cref="T:System.Security.AccessControl.AccessControlType" />
 
           
 
@@ -510,13 +536,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Security.AccessControl.FileSystemRights" />
+            >Gets the <see cref="T:System.Security.AccessControl.FileSystemRights" />
 
             
 
-             flags associated with the current <see
-             cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+             flags associated with the current <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
             
 

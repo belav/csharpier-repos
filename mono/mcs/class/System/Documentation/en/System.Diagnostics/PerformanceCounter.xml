@@ -35,8 +35,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Diagnostics.PerformanceCounter" />
+        >The <see cref="T:System.Diagnostics.PerformanceCounter" />
 
         
 
@@ -44,13 +43,11 @@
       >
       <block subset="none" type="note">
         <para
-          >In versions 1.0 and 1.1 of the .NET Framework, this class requires immediate callers to be fully trusted. Starting with the .NET Framework version 2.0, this class requires <see
-           cref="T:System.Diagnostics.PerformanceCounterPermission" />
+          >In versions 1.0 and 1.1 of the .NET Framework, this class requires immediate callers to be fully trusted. Starting with the .NET Framework version 2.0, this class requires <see cref="T:System.Diagnostics.PerformanceCounterPermission" />
 
           
 
-           for specific actions. It is strongly recommended that <see
-           cref="T:System.Diagnostics.PerformanceCounterPermission" />
+           for specific actions. It is strongly recommended that <see cref="T:System.Diagnostics.PerformanceCounterPermission" />
 
           
 
@@ -59,18 +56,15 @@
       </block>
       <block subset="none" type="note">
         <para
-          >Passing a <see
-           cref="T:System.Diagnostics.PerformanceCounter" />
+          >Passing a <see cref="T:System.Diagnostics.PerformanceCounter" />
 
           
 
-           object to less-trusted code can create a security issue. Never pass performance counter objects, such as a <see
-           cref="T:System.Diagnostics.PerformanceCounterCategory" />
+           object to less-trusted code can create a security issue. Never pass performance counter objects, such as a <see cref="T:System.Diagnostics.PerformanceCounterCategory" />
 
           
 
-           or <see
-           cref="T:System.Diagnostics.PerformanceCounter" />
+           or <see cref="T:System.Diagnostics.PerformanceCounter" />
 
           
 
@@ -79,12 +73,13 @@
       </block>
       <para
         >The predefined counters are too numerous to mention.  You can get a list of the available pre-existing counters from the Windows Performance Monitor's <see
-         cref="http://go.microsoft.com/fwlink/p/?LinkId=257854">Add Counters dialog box</see>
+          cref="http://go.microsoft.com/fwlink/p/?LinkId=257854"
+          >Add Counters dialog box</see
+        >
 
         
 
-        . To learn about the .NET Framework performance counters, see <format
-         type="text/html">
+        . To learn about the .NET Framework performance counters, see <format type="text/html">
           <a href="06a4ae8c-eeb2-4d5a-817e-b1b95c0653e1"
             >Performance Counters in the .NET Framework</a
           >
@@ -95,86 +90,70 @@
         .</para
       >
       <para
-        >To read from a performance counter, create an instance of the <see
-         cref="T:System.Diagnostics.PerformanceCounter" />
+        >To read from a performance counter, create an instance of the <see cref="T:System.Diagnostics.PerformanceCounter" />
 
         
 
-         class, set the <see
-         cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
+         class, set the <see cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
 
         
 
-        , <see
-         cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+        , <see cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
 
         
 
-        , and, optionally, the <see
-         cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
+        , and, optionally, the <see cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
 
         
 
-         or <see
-         cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
+         or <see cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
 
         
 
-         properties, and then call the <see
-         cref="M:System.Diagnostics.PerformanceCounter.NextValue" />
+         properties, and then call the <see cref="M:System.Diagnostics.PerformanceCounter.NextValue" />
 
         
 
          method to take a performance counter reading.</para
       >
       <para
-        >To publish performance counter data, create one or more custom counters using the <see
-         cref="M:System.Diagnostics.PerformanceCounterCategory.Create(System.String,System.String,System.Diagnostics.CounterCreationDataCollection)" />
+        >To publish performance counter data, create one or more custom counters using the <see cref="M:System.Diagnostics.PerformanceCounterCategory.Create(System.String,System.String,System.Diagnostics.CounterCreationDataCollection)" />
 
         
 
-         method, create an instance of the <see
-         cref="T:System.Diagnostics.PerformanceCounter" />
+         method, create an instance of the <see cref="T:System.Diagnostics.PerformanceCounter" />
 
         
 
-         class, set the <see
-         cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
+         class, set the <see cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
 
         
 
-        , <see
-         cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+        , <see cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
 
         
 
-         and, optionally, <see
-         cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
+         and, optionally, <see cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
 
         
 
-         or <see
-         cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
+         or <see cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
 
         
 
-         properties, and then call the <see
-         cref="M:System.Diagnostics.PerformanceCounter.IncrementBy(System.Int64)" />
+         properties, and then call the <see cref="M:System.Diagnostics.PerformanceCounter.IncrementBy(System.Int64)" />
 
         
 
-        , <see
-         cref="M:System.Diagnostics.PerformanceCounter.Increment" />
+        , <see cref="M:System.Diagnostics.PerformanceCounter.Increment" />
 
         
 
-        , or <see
-         cref="M:System.Diagnostics.PerformanceCounter.Decrement" />
+        , or <see cref="M:System.Diagnostics.PerformanceCounter.Decrement" />
 
         
 
-         methods, or set the <see
-         cref="P:System.Diagnostics.PerformanceCounter.RawValue" />
+         methods, or set the <see cref="P:System.Diagnostics.PerformanceCounter.RawValue" />
 
         
 
@@ -182,23 +161,19 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="M:System.Diagnostics.PerformanceCounter.Increment" />
+          >The <see cref="M:System.Diagnostics.PerformanceCounter.Increment" />
 
           
 
-          , <see
-           cref="M:System.Diagnostics.PerformanceCounter.IncrementBy(System.Int64)" />
+          , <see cref="M:System.Diagnostics.PerformanceCounter.IncrementBy(System.Int64)" />
 
           
 
-          , and <see
-           cref="M:System.Diagnostics.PerformanceCounter.Decrement" />
+          , and <see cref="M:System.Diagnostics.PerformanceCounter.Decrement" />
 
           
 
-           methods use interlocks to update the counter value. This helps keep the counter value accurate in multithreaded or multiprocess scenarios, but also results in a performance penalty. If you do not need the accuracy that interlocked operations provide, you can update the <see
-           cref="P:System.Diagnostics.PerformanceCounter.RawValue" />
+           methods use interlocks to update the counter value. This helps keep the counter value accurate in multithreaded or multiprocess scenarios, but also results in a performance penalty. If you do not need the accuracy that interlocked operations provide, you can update the <see cref="P:System.Diagnostics.PerformanceCounter.RawValue" />
 
           
 
@@ -210,8 +185,7 @@
       <para>The counter information must include the category, or performance object, that the counter measures data for. A computer's categories include physical components, such as processors, disks, and memory. There are also system categories, such as processes and threads. Each category is related to a functional element within the computer and has a set of standard counters assigned to it. These objects are listed in the Performance object drop-down list of the Add Counters dialog box within the Windows 2000 System Monitor, and you must include them in the counter path. Performance data is grouped by the category to which is it related.</para>
       <para>In certain cases, several copies of the same category can exist. For example, several processes and threads run simultaneously, and some computers contain more than one processor. The category copies are called category instances, and each instance has a set of standard counters assigned to it. If a category can have more than one instance, an instance specification must be included in the counter information.</para>
       <para
-        >To obtain performance data for counters that required an initial or previous value for performing the necessary calculation, call the <see
-         cref="M:System.Diagnostics.PerformanceCounter.NextValue" />
+        >To obtain performance data for counters that required an initial or previous value for performing the necessary calculation, call the <see cref="M:System.Diagnostics.PerformanceCounter.NextValue" />
 
         
 
@@ -219,8 +193,7 @@
       >
       <block subset="none" type="note">
         <para
-          >Performance counter categories installed with the dnprdnlong use separate shared memory, with each performance counter category having its own memory. You can specify the size of separate shared memory by creating a DWORD named FileMappingSize in the registry key HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\&lt;category name&gt;\Performance. The FileMappingSize value is set to the shared memory size of the category. The default size is 131072 decimal. If the FileMappingSize value is not present, the fileMappingSize attribute value for the performanceCounters element specified in the Machine.config file is used, causing additional overhead for configuration file processing. You can realize a performance improvement for application startup by setting the file mapping size in the registry. For more information about the file mapping size, see <format
-           type="text/html">
+          >Performance counter categories installed with the dnprdnlong use separate shared memory, with each performance counter category having its own memory. You can specify the size of separate shared memory by creating a DWORD named FileMappingSize in the registry key HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\&lt;category name&gt;\Performance. The FileMappingSize value is set to the shared memory size of the category. The default size is 131072 decimal. If the FileMappingSize value is not present, the fileMappingSize attribute value for the performanceCounters element specified in the Machine.config file is used, causing additional overhead for configuration file processing. You can realize a performance improvement for application startup by setting the file mapping size in the registry. For more information about the file mapping size, see <format type="text/html">
             <a href="a71f605b-c7d9-4501-a5c3-abcbb964a43f">&lt;performanceCounters&gt; Element</a>
           </format>
 
@@ -254,51 +227,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload of the constructor sets the <see
-             cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
+            >This overload of the constructor sets the <see cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+            , <see cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
 
             
 
-            , and <see
-             cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
+            , and <see cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
 
             
 
-             properties to empty strings (""), and sets the <see
-             cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
+             properties to empty strings (""), and sets the <see cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
 
             
 
              property to the local computer, (".").</para
           >
           <para
-            >This constructor does not initialize the performance counter, so it does not associate the instance with an existing counter on the local computer. To point to a specific performance counter, set the <see
-             cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
+            >This constructor does not initialize the performance counter, so it does not associate the instance with an existing counter on the local computer. To point to a specific performance counter, set the <see cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+            , <see cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
 
             
 
-            , and, optionally, the <see
-             cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
+            , and, optionally, the <see cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
 
             
 
-             and <see
-             cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
+             and <see cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
 
             
 
-             properties before reading any other properties or attempting to read from a counter. To write to a performance counter, set the <see
-             cref="P:System.Diagnostics.PerformanceCounter.ReadOnly" />
+             properties before reading any other properties or attempting to read from a counter. To write to a performance counter, set the <see cref="P:System.Diagnostics.PerformanceCounter.ReadOnly" />
 
             
 
@@ -306,38 +270,31 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Security.Permissions.HostProtectionAttribute" />
+              >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
               
 
-               attribute applied to this member has the following <see
-               cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+               attribute applied to this member has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
 
               
 
-               property value: <see
-               cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />
+               property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />
 
               
 
-               | <see
-               cref="F:System.Security.Permissions.HostProtectionResource.SharedState" />
+               | <see cref="F:System.Security.Permissions.HostProtectionResource.SharedState" />
 
               
 
-              . The <see
-               cref="T:System.Security.Permissions.HostProtectionAttribute" />
+              . The <see cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
               
 
-               does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see
-               cref="T:System.Security.Permissions.HostProtectionAttribute" />
+               does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
               
 
-               class or <format
-               type="text/html">
+               class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
@@ -352,8 +309,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new, read-only instance of the <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >Initializes a new, read-only instance of the <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
@@ -387,49 +343,41 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The parameter strings are not case-sensitive.</para>
           <para
-            >Use this overload to access a counter on the local computer that belongs to a category containing a single performance counter category instance. If you attempt to use this constructor to point this <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >Use this overload to access a counter on the local computer that belongs to a category containing a single performance counter category instance. If you attempt to use this constructor to point this <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
-             instance to a category that contains multiple instances, the constructor throws an exception. This overload can access any read-only or read/write counter, but does so in a read-only mode. A <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+             instance to a category that contains multiple instances, the constructor throws an exception. This overload can access any read-only or read/write counter, but does so in a read-only mode. A <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
              instance created using this overload cannot write to the counter, even if the counter itself is read/write.</para
           >
           <para
-            >This overload of the constructor sets the <see
-             cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
+            >This overload of the constructor sets the <see cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
 
             
 
-             and <see
-             cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+             and <see cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
 
             
 
-             properties to the values you pass in, sets the <see
-             cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
+             properties to the values you pass in, sets the <see cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
 
             
 
-             property to the local computer, ".", and sets the <see
-             cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
+             property to the local computer, ".", and sets the <see cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
 
             
 
              property to an empty string ("").</para
           >
           <para
-            >This constructor initializes the performance counter and associates the instance with an existing counter (either a system or a custom counter) on the local computer. The values that you pass in for the <see
-             cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
+            >This constructor initializes the performance counter and associates the instance with an existing counter (either a system or a custom counter) on the local computer. The values that you pass in for the <see cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
 
             
 
-             and <see
-             cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+             and <see cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
 
             
 
@@ -444,8 +392,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new, read-only instance of the <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >Initializes a new, read-only instance of the <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
@@ -453,14 +400,22 @@
           >
         </summary>
         <param name="categoryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the performance counter category (performance object) with which this performance counter is associated. </param
         >
         <param name="counterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -494,49 +449,41 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The parameter strings are not case-sensitive.</para>
           <para
-            >Use this overload to access a read-only or read/write counter on the local computer that belongs to a category containing a single performance counter category instance. If you attempt to use this constructor to point this <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >Use this overload to access a read-only or read/write counter on the local computer that belongs to a category containing a single performance counter category instance. If you attempt to use this constructor to point this <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
              instance to a category that contains multiple instances, the constructor throws an exception.</para
           >
           <para
-            >This overload of the constructor sets the <see
-             cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
+            >This overload of the constructor sets the <see cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+            , <see cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
 
             
 
-            , and <see
-             cref="P:System.Diagnostics.PerformanceCounter.ReadOnly" />
+            , and <see cref="P:System.Diagnostics.PerformanceCounter.ReadOnly" />
 
             
 
-             properties to the values you pass in, sets the <see
-             cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
+             properties to the values you pass in, sets the <see cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
 
             
 
-             property to the local computer, ".", and sets the <see
-             cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
+             property to the local computer, ".", and sets the <see cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
 
             
 
              property to an empty string ("").</para
           >
           <para
-            >This constructor initializes the performance counter and associates the instance with an existing counter (either a system or a custom counter) on the local computer. The values that you pass in for the <see
-             cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
+            >This constructor initializes the performance counter and associates the instance with an existing counter (either a system or a custom counter) on the local computer. The values that you pass in for the <see cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
 
             
 
-             and <see
-             cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+             and <see cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
 
             
 
@@ -544,8 +491,7 @@
           >
           <block subset="none" type="note">
             <para
-              >You can use this overload to connect to a system counter, but you cannot write to a system counter. Therefore, setting <paramref
-               name="readOnly" />
+              >You can use this overload to connect to a system counter, but you cannot write to a system counter. Therefore, setting <paramref name="readOnly" />
 
               
 
@@ -561,8 +507,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new, read-only or read/write instance of the <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >Initializes a new, read-only or read/write instance of the <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
@@ -570,21 +515,33 @@
           >
         </summary>
         <param name="categoryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the performance counter category (performance object) with which this performance counter is associated. </param
         >
         <param name="counterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the performance counter. </param
         >
         <param name="readOnly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -618,67 +575,56 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The parameter strings are not case-sensitive.</para>
           <para
-            >This overload of the constructor sets the <see
-             cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
+            >This overload of the constructor sets the <see cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+            , <see cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
 
             
 
-            , and <see
-             cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
+            , and <see cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
 
             
 
-             properties to the values you pass in, and sets the <see
-             cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
+             properties to the values you pass in, and sets the <see cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
 
             
 
              property to the local computer, ".".</para
           >
           <para
-            >This constructor initializes the performance counter and associates the instance with an existing counter (either a system or a custom counter) on the local computer. The values that you pass in for the <see
-             cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
+            >This constructor initializes the performance counter and associates the instance with an existing counter (either a system or a custom counter) on the local computer. The values that you pass in for the <see cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+            , <see cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
 
             
 
-            , and <see
-             cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
+            , and <see cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
 
             
 
              properties must point to an existing performance counter on the local computer. If the performance counter instance you point to is not valid, calling the constructor throws an exception.</para
           >
           <para
-            >This overload can access any read-only or read/write counter, but does so in a read-only mode. A <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >This overload can access any read-only or read/write counter, but does so in a read-only mode. A <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
              instance created using this overload cannot write to the counter, even if the counter itself is read/write.</para
           >
           <para
-            >To create a performance category instance, specify an <paramref
-             name="instanceName" />
+            >To create a performance category instance, specify an <paramref name="instanceName" />
 
             
 
-             on the <see
-             cref="M:System.Diagnostics.PerformanceCounter.#ctor" />
+             on the <see cref="M:System.Diagnostics.PerformanceCounter.#ctor" />
 
             
 
-             constructor. If the category instance specified by <paramref
-             name="instanceName" />
+             constructor. If the category instance specified by <paramref name="instanceName" />
 
             
 
@@ -694,8 +640,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new, read-only instance of the <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >Initializes a new, read-only instance of the <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
@@ -703,21 +648,33 @@
           >
         </summary>
         <param name="categoryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the performance counter category (performance object) with which this performance counter is associated. </param
         >
         <param name="counterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the performance counter. </param
         >
         <param name="instanceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -753,41 +710,34 @@
           <para>The parameter strings are not case-sensitive.</para>
           <para>Use this overload to access a performance counter in either read-only or read/write mode.</para>
           <para
-            >This overload of the constructor sets the <see
-             cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
+            >This overload of the constructor sets the <see cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+            , <see cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
 
             
 
-            , and <see
-             cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
+            , and <see cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
 
             
 
-             properties to the values you pass in, it and sets the <see
-             cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
+             properties to the values you pass in, it and sets the <see cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
 
             
 
              property to the local computer, ".".</para
           >
           <para
-            >This constructor initializes the performance counter and associates the instance with an existing counter (either a system or a custom counter) on the local computer. The values that you pass in for the <see
-             cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
+            >This constructor initializes the performance counter and associates the instance with an existing counter (either a system or a custom counter) on the local computer. The values that you pass in for the <see cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+            , <see cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
 
             
 
-            , and <see
-             cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
+            , and <see cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
 
             
 
@@ -795,8 +745,7 @@
           >
           <block subset="none" type="note">
             <para
-              >You can use this overload to connect to a system counter, but you cannot write to a system counter. Therefore, setting <paramref
-               name="readOnly" />
+              >You can use this overload to connect to a system counter, but you cannot write to a system counter. Therefore, setting <paramref name="readOnly" />
 
               
 
@@ -804,18 +753,15 @@
             >
           </block>
           <para
-            >To create a performance category instance, specify an <paramref
-             name="instanceName" />
+            >To create a performance category instance, specify an <paramref name="instanceName" />
 
             
 
-             on the <see
-             cref="M:System.Diagnostics.PerformanceCounter.#ctor" />
+             on the <see cref="M:System.Diagnostics.PerformanceCounter.#ctor" />
 
             
 
-             constructor. If the category instance specified by <paramref
-             name="instanceName" />
+             constructor. If the category instance specified by <paramref name="instanceName" />
 
             
 
@@ -830,8 +776,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new, read-only or read/write instance of the <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >Initializes a new, read-only or read/write instance of the <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
@@ -839,28 +784,44 @@
           >
         </summary>
         <param name="categoryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the performance counter category (performance object) with which this performance counter is associated. </param
         >
         <param name="counterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the performance counter. </param
         >
         <param name="instanceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the performance counter category instance, or an empty string (""), if the category contains a single instance. </param
         >
         <param name="readOnly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -895,51 +856,42 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The parameter strings are not case-sensitive.</para>
           <para
-            >This overload of the constructor sets the <see
-             cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
+            >This overload of the constructor sets the <see cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+            , <see cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
+            , <see cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
 
             
 
-            , and <see
-             cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
+            , and <see cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
 
             
 
              properties to the values you pass in.</para
           >
           <para
-            >This constructor initializes the performance counter and associates the instance with an existing counter (either a system or a custom counter) on the specified computer. The values that you pass in for the <see
-             cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
+            >This constructor initializes the performance counter and associates the instance with an existing counter (either a system or a custom counter) on the specified computer. The values that you pass in for the <see cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+            , <see cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
+            , <see cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
 
             
 
-             and <see
-             cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
+             and <see cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
 
             
 
-             properties must point to an existing performance counter. If the performance counter instance you point to is not valid, calling the constructor throws an exception. This overload can access any read-only or read/write counter, but does so in a read-only mode. A <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+             properties must point to an existing performance counter. If the performance counter instance you point to is not valid, calling the constructor throws an exception. This overload can access any read-only or read/write counter, but does so in a read-only mode. A <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
@@ -947,8 +899,7 @@
           >
           <block subset="none" type="note">
             <para
-              >You cannot write to remote performance counters. There is no overload that allows you to specify a read/write instance of the <see
-               cref="T:System.Diagnostics.PerformanceCounter" />
+              >You cannot write to remote performance counters. There is no overload that allows you to specify a read/write instance of the <see cref="T:System.Diagnostics.PerformanceCounter" />
 
               
 
@@ -956,18 +907,15 @@
             >
           </block>
           <para
-            >To create a performance category instance, specify an <paramref
-             name="instanceName" />
+            >To create a performance category instance, specify an <paramref name="instanceName" />
 
             
 
-             on the <see
-             cref="M:System.Diagnostics.PerformanceCounter.#ctor" />
+             on the <see cref="M:System.Diagnostics.PerformanceCounter.#ctor" />
 
             
 
-             constructor. If the category instance specified by <paramref
-             name="instanceName" />
+             constructor. If the category instance specified by <paramref name="instanceName" />
 
             
 
@@ -981,7 +929,7 @@
           <block subset="none" type="note">
             <para
               >In Windows Vista, when the remote computer is a member of a workgroup, you may need to disable UAC so that the local user account is not filtered and can be elevated to an administrator account. For security reasons, disabling UAC should be a last resort. For information on disabling UAC, see <see
-               cref="http://go.microsoft.com/fwlink/?LinkId=91617"
+                cref="http://go.microsoft.com/fwlink/?LinkId=91617"
                 >User Account Control and WMI</see
               >
 
@@ -995,8 +943,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new, read-only instance of the <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >Initializes a new, read-only instance of the <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
@@ -1004,28 +951,44 @@
           >
         </summary>
         <param name="categoryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the performance counter category (performance object) with which this performance counter is associated. </param
         >
         <param name="counterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the performance counter. </param
         >
         <param name="instanceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the performance counter category instance, or an empty string (""), if the category contains a single instance. </param
         >
         <param name="machineName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1053,18 +1016,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The vsprvslong design environment uses this method to start the initialization of a component that is used on a form or by another component. The <see
-             cref="M:System.Diagnostics.PerformanceCounter.EndInit" />
+            >The vsprvslong design environment uses this method to start the initialization of a component that is used on a form or by another component. The <see cref="M:System.Diagnostics.PerformanceCounter.EndInit" />
 
             
 
-             method ends the initialization. Using the <see
-             cref="M:System.Diagnostics.PerformanceCounter.BeginInit" />
+             method ends the initialization. Using the <see cref="M:System.Diagnostics.PerformanceCounter.BeginInit" />
 
             
 
-             and <see
-             cref="M:System.Diagnostics.PerformanceCounter.EndInit" />
+             and <see cref="M:System.Diagnostics.PerformanceCounter.EndInit" />
 
             
 
@@ -1074,8 +1034,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Begins the initialization of a <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >Begins the initialization of a <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
@@ -1116,24 +1075,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
+            >The <see cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
 
             
 
              is displayed in the Performance Object field of Performance Counter Manager MMC snap in's Add Counter dialog box.</para
           >
           <para
-            >A performance counter monitors the behavior of a category, or performance object, on a computer. Categories include physical components (such as processors, disks, and memory) and system objects (such as processes and threads). System counters that are related to the same performance object are grouped into a category that indicates their common focus. When you create an instance of the <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >A performance counter monitors the behavior of a category, or performance object, on a computer. Categories include physical components (such as processors, disks, and memory) and system objects (such as processes and threads). System counters that are related to the same performance object are grouped into a category that indicates their common focus. When you create an instance of the <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
              class, you first indicate the category with which the component will interact, and then you choose a counter from that category.</para
           >
           <para
-            >For example, one Windows counter category is the Memory category. System counters within this category track memory data such as the number of bytes available and the number of bytes cached. If you wanted to work with the bytes cached in your application, you would create an instance of the <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >For example, one Windows counter category is the Memory category. System counters within this category track memory data such as the number of bytes available and the number of bytes cached. If you wanted to work with the bytes cached in your application, you would create an instance of the <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
@@ -1167,13 +1123,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you associate this <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >When you associate this <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
-             instance with a performance counter that resides on the server, the system initializes the instance and allocates memory to contain counter sample information. The <see
-             cref="M:System.Diagnostics.PerformanceCounter.Close" />
+             instance with a performance counter that resides on the server, the system initializes the instance and allocates memory to contain counter sample information. The <see cref="M:System.Diagnostics.PerformanceCounter.Close" />
 
             
 
@@ -1241,16 +1195,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Add Counters dialog box of the Performance Counter Manager MMC snap in displays the <see
-             cref="P:System.Diagnostics.PerformanceCounter.CounterHelp" />
+            >The Add Counters dialog box of the Performance Counter Manager MMC snap in displays the <see cref="P:System.Diagnostics.PerformanceCounter.CounterHelp" />
 
             
 
              text when a user selects a counter from the counters list and clicks the Explain button.</para
           >
           <para
-            >When you create a new counter, use the <see
-             cref="P:System.Diagnostics.PerformanceCounter.CounterHelp" />
+            >When you create a new counter, use the <see cref="P:System.Diagnostics.PerformanceCounter.CounterHelp" />
 
             
 
@@ -1258,28 +1210,23 @@
           >
           <block subset="none" type="note">
             <para
-              >If the value for the <see
-               cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
+              >If the value for the <see cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
-               property is <see
-               cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
+               property is <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
 
               
 
-               and the performance counter category was created with .NET Framework version 1.0 or 1.1, an <see
-               cref="T:System.InvalidOperationException" />
+               and the performance counter category was created with .NET Framework version 1.0 or 1.1, an <see cref="T:System.InvalidOperationException" />
 
               
 
-               is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see
-               cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
+               is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
-               must be <see
-               cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+               must be <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
 
               
 
@@ -1331,7 +1278,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >You can get a list of available pre-existing counters from the Windows Performance Manager’s <see
-             cref="http://go.microsoft.com/fwlink/p/?LinkId=257854">Add Counters dialog box</see>
+              cref="http://go.microsoft.com/fwlink/p/?LinkId=257854"
+              >Add Counters dialog box</see
+            >
 
             
 
@@ -1341,8 +1290,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the performance counter that is associated with this <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >Gets or sets the name of the performance counter that is associated with this <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
@@ -1382,8 +1330,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Diagnostics.PerformanceCounterType" />
+            >The <see cref="T:System.Diagnostics.PerformanceCounterType" />
 
             
 
@@ -1460,13 +1407,11 @@
             </item>
           </list>
           <para
-            >When you create a counter whose type requires the use of a corresponding base counter, you must declare the counter and the base in the <see
-             cref="T:System.Diagnostics.CounterCreationDataCollection" />
+            >When you create a counter whose type requires the use of a corresponding base counter, you must declare the counter and the base in the <see cref="T:System.Diagnostics.CounterCreationDataCollection" />
 
             
 
-             you pass into the <see
-             cref="M:System.Diagnostics.PerformanceCounterCategory.Create(System.String,System.String,System.Diagnostics.CounterCreationDataCollection)" />
+             you pass into the <see cref="M:System.Diagnostics.PerformanceCounterCategory.Create(System.String,System.String,System.Diagnostics.CounterCreationDataCollection)" />
 
             
 
@@ -1474,28 +1419,23 @@
           >
           <block subset="none" type="note">
             <para
-              >If the value for the <see
-               cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
+              >If the value for the <see cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
-               property is <see
-               cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
+               property is <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
 
               
 
-               and the performance counter category was created with .NET Framework version 1.0 or 1.1, an <see
-               cref="T:System.InvalidOperationException" />
+               and the performance counter category was created with .NET Framework version 1.0 or 1.1, an <see cref="T:System.InvalidOperationException" />
 
               
 
-               is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see
-               cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
+               is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
-               must be <see
-               cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+               must be <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
 
               
 
@@ -1536,23 +1476,19 @@
           <para>You can write only to custom counters. All system counters are read-only.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Diagnostics.PerformanceCounter.Increment" />
+              >The <see cref="M:System.Diagnostics.PerformanceCounter.Increment" />
 
               
 
-              , <see
-               cref="M:System.Diagnostics.PerformanceCounter.IncrementBy(System.Int64)" />
+              , <see cref="M:System.Diagnostics.PerformanceCounter.IncrementBy(System.Int64)" />
 
               
 
-              , and <see
-               cref="M:System.Diagnostics.PerformanceCounter.Decrement" />
+              , and <see cref="M:System.Diagnostics.PerformanceCounter.Decrement" />
 
               
 
-               methods use interlocks to update the counter value. This helps keep the counter value accurate in multithreaded or multiprocess scenarios, but also results in a performance penalty. If you do not need the accuracy that interlocked operations provide, you can update the <see
-               cref="P:System.Diagnostics.PerformanceCounter.RawValue" />
+               methods use interlocks to update the counter value. This helps keep the counter value accurate in multithreaded or multiprocess scenarios, but also results in a performance penalty. If you do not need the accuracy that interlocked operations provide, you can update the <see cref="P:System.Diagnostics.PerformanceCounter.RawValue" />
 
               
 
@@ -1561,28 +1497,23 @@
           </block>
           <block subset="none" type="note">
             <para
-              >If the value for the <see
-               cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
+              >If the value for the <see cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
-               property is <see
-               cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
+               property is <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
 
               
 
-               and the performance counter category was created with .NET Framework version 1.0 or 1.1, an <see
-               cref="T:System.InvalidOperationException" />
+               and the performance counter category was created with .NET Framework version 1.0 or 1.1, an <see cref="T:System.InvalidOperationException" />
 
               
 
-               is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see
-               cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
+               is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
-               must be <see
-               cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+               must be <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
 
               
 
@@ -1670,18 +1601,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The vsprvslong design environment uses this method to end the initialization of a component that is used on a form or by another component. The <see
-             cref="M:System.Diagnostics.PerformanceCounter.BeginInit" />
+            >The vsprvslong design environment uses this method to end the initialization of a component that is used on a form or by another component. The <see cref="M:System.Diagnostics.PerformanceCounter.BeginInit" />
 
             
 
-             method starts the initialization. Using the <see
-             cref="M:System.Diagnostics.PerformanceCounter.BeginInit" />
+             method starts the initialization. Using the <see cref="M:System.Diagnostics.PerformanceCounter.BeginInit" />
 
             
 
-             and <see
-             cref="M:System.Diagnostics.PerformanceCounter.EndInit" />
+             and <see cref="M:System.Diagnostics.PerformanceCounter.EndInit" />
 
             
 
@@ -1691,8 +1619,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Ends the initialization of a <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >Ends the initialization of a <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
@@ -1723,23 +1650,19 @@
           <para>You can write only to custom counters. All system counters are read-only.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Diagnostics.PerformanceCounter.Increment" />
+              >The <see cref="M:System.Diagnostics.PerformanceCounter.Increment" />
 
               
 
-              , <see
-               cref="M:System.Diagnostics.PerformanceCounter.IncrementBy(System.Int64)" />
+              , <see cref="M:System.Diagnostics.PerformanceCounter.IncrementBy(System.Int64)" />
 
               
 
-              , and <see
-               cref="M:System.Diagnostics.PerformanceCounter.Decrement" />
+              , and <see cref="M:System.Diagnostics.PerformanceCounter.Decrement" />
 
               
 
-               methods use interlocks to update the counter value. This helps keep the counter value accurate in multithreaded or multiprocess scenarios, but also results in a performance penalty. If you do not need the accuracy that interlocked operations provide, you can update the <see
-               cref="P:System.Diagnostics.PerformanceCounter.RawValue" />
+               methods use interlocks to update the counter value. This helps keep the counter value accurate in multithreaded or multiprocess scenarios, but also results in a performance penalty. If you do not need the accuracy that interlocked operations provide, you can update the <see cref="P:System.Diagnostics.PerformanceCounter.RawValue" />
 
               
 
@@ -1748,28 +1671,23 @@
           </block>
           <block subset="none" type="note">
             <para
-              >If the value for the <see
-               cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
+              >If the value for the <see cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
-               property is <see
-               cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
+               property is <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
 
               
 
-               and the performance counter category was created with .NET Framework version 1.0 or 1.1, an <see
-               cref="T:System.InvalidOperationException" />
+               and the performance counter category was created with .NET Framework version 1.0 or 1.1, an <see cref="T:System.InvalidOperationException" />
 
               
 
-               is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see
-               cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
+               is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
-               must be <see
-               cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+               must be <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
 
               
 
@@ -1817,23 +1735,19 @@
           <para>You can write only to custom counters. All system counters are read-only.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Diagnostics.PerformanceCounter.Increment" />
+              >The <see cref="M:System.Diagnostics.PerformanceCounter.Increment" />
 
               
 
-              , <see
-               cref="M:System.Diagnostics.PerformanceCounter.IncrementBy(System.Int64)" />
+              , <see cref="M:System.Diagnostics.PerformanceCounter.IncrementBy(System.Int64)" />
 
               
 
-              , and <see
-               cref="M:System.Diagnostics.PerformanceCounter.Decrement" />
+              , and <see cref="M:System.Diagnostics.PerformanceCounter.Decrement" />
 
               
 
-               methods use interlocks to update the counter value. This helps keep the counter value accurate in multithreaded or multiprocess scenarios, but also results in a performance penalty. If you do not need the accuracy that interlocked operations provide, you can update the <see
-               cref="P:System.Diagnostics.PerformanceCounter.RawValue" />
+               methods use interlocks to update the counter value. This helps keep the counter value accurate in multithreaded or multiprocess scenarios, but also results in a performance penalty. If you do not need the accuracy that interlocked operations provide, you can update the <see cref="P:System.Diagnostics.PerformanceCounter.RawValue" />
 
               
 
@@ -1842,28 +1756,23 @@
           </block>
           <block subset="none" type="note">
             <para
-              >If the value forthe <see
-               cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
+              >If the value forthe <see cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
-               property is <see
-               cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
+               property is <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
 
               
 
-               and the performance counter category was created with .NET Framework version 1.0 or 1.1, an <see
-               cref="T:System.InvalidOperationException" />
+               and the performance counter category was created with .NET Framework version 1.0 or 1.1, an <see cref="T:System.InvalidOperationException" />
 
               
 
-               is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see
-               cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
+               is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
-               must be <see
-               cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+               must be <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
 
               
 
@@ -1880,7 +1789,11 @@
           <para>The new counter value.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1918,13 +1831,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the performance counter category is created with the .NET Framework version 1.0 or 1.1, it uses global shared memory, and the value for <see
-             cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
+            >If the performance counter category is created with the .NET Framework version 1.0 or 1.1, it uses global shared memory, and the value for <see cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
             
 
-             must be <see
-             cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+             must be <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
 
             
 
@@ -1932,23 +1843,19 @@
           >
           <block subset="none" type="note">
             <para
-              >If the value of the <see
-               cref="P:System.Diagnostics.PerformanceCounter.CounterType" />
+              >If the value of the <see cref="P:System.Diagnostics.PerformanceCounter.CounterType" />
 
               
 
-               property is <see
-               cref="F:System.Diagnostics.PerformanceCounterCategoryType.SingleInstance" />
+               property is <see cref="F:System.Diagnostics.PerformanceCounterCategoryType.SingleInstance" />
 
               
 
-              , the <see
-               cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
+              , the <see cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
-               value for the performance counter must be <see
-               cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+               value for the performance counter must be <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
 
               
 
@@ -1999,26 +1906,22 @@
           <para>In some situations, categories are subdivided into instances, which track data about multiple occurrences of the object that a category relates to. Instances apply to the category as whole, rather than to individual counters. Every counter within a category has each instance defined for the category. For example, the Process category contains instances named Idle and System. Every counter within the Process category thus contains data for each instance, showing information about either idle processes or system processes.</para>
           <para>Many categories do not contain multiple instances, so you can leave this property empty to indicate that no instance is associated with the category.</para>
           <para
-            >If this <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >If this <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
              instance points to a noncustom category, you can choose from only the existing category instances. You can create new category instances only in custom categories, which allow you to define as many counters and category instances as you need.</para
           >
           <para
-            >To create a performance category instance, specify an <paramref
-             name="instanceName" />
+            >To create a performance category instance, specify an <paramref name="instanceName" />
 
             
 
-             on the <see
-             cref="M:System.Diagnostics.PerformanceCounter.#ctor" />
+             on the <see cref="M:System.Diagnostics.PerformanceCounter.#ctor" />
 
             
 
-             constructor. If the category instance specified by <paramref
-             name="instanceName" />
+             constructor. If the category instance specified by <paramref name="instanceName" />
 
             
 
@@ -2026,8 +1929,7 @@
           >
           <block subset="none" type="note">
             <para
-              > Do not use the characters "(", ")", "#", "\", or "/" in the instance name. If any of these characters are used, the Performance Console (see <format
-               type="text/html">
+              > Do not use the characters "(", ")", "#", "\", or "/" in the instance name. If any of these characters are used, the Performance Console (see <format type="text/html">
                 <a href="ccd68284-f3a8-47b8-bc3f-92e5fe3a1640">Runtime Profiling</a>
               </format>
 
@@ -2090,18 +1992,15 @@
             </item>
           </list>
           <para
-            >The <see
-             cref="P:System.AppDomain.FriendlyName" />
+            >The <see cref="P:System.AppDomain.FriendlyName" />
 
             
 
-             property of the <see
-             cref="T:System.AppDomain" />
+             property of the <see cref="T:System.AppDomain" />
 
             
 
-             object obtained from the <see
-             cref="P:System.AppDomain.CurrentDomain" />
+             object obtained from the <see cref="P:System.AppDomain.CurrentDomain" />
 
             
 
@@ -2147,13 +2046,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You can write values only to counters that reside on the local computer. However, you can read counter values from any computer in the enterprise for which you have access privileges.</para>
           <para
-            >When you set the <see
-             cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
+            >When you set the <see cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
 
             
 
-             property to point to a remote computer, the <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+             property to point to a remote computer, the <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
@@ -2191,28 +2088,23 @@
           <para>This method is generally used for counters that contain uncalculated values.</para>
           <block subset="none" type="note">
             <para
-              >If the value for the <see
-               cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
+              >If the value for the <see cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
-               property is <see
-               cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
+               property is <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
 
               
 
-               and the performance counter category was created with .NET Framework version 1.0 or 1.1, an <see
-               cref="T:System.InvalidOperationException" />
+               and the performance counter category was created with .NET Framework version 1.0 or 1.1, an <see cref="T:System.InvalidOperationException" />
 
               
 
-               is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see
-               cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
+               is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
-               must be <see
-               cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+               must be <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
 
               
 
@@ -2232,8 +2124,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Diagnostics.CounterSample" />
+            >A <see cref="T:System.Diagnostics.CounterSample" />
 
             
 
@@ -2263,8 +2154,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >If the calculated value of a counter depends on two counter reads, the first read operation returns 0.0. Resetting the performance counter properties to specify a different counter is equivalent to creating a new performance counter, and the first read operation using the new properties returns 0.0. The recommended delay time between calls to the <see
-               cref="M:System.Diagnostics.PerformanceCounter.NextValue" />
+              >If the calculated value of a counter depends on two counter reads, the first read operation returns 0.0. Resetting the performance counter properties to specify a different counter is equivalent to creating a new performance counter, and the first read operation using the new properties returns 0.0. The recommended delay time between calls to the <see cref="M:System.Diagnostics.PerformanceCounter.NextValue" />
 
               
 
@@ -2314,26 +2204,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the counter type is a 32-bit size and you attempt to set this property to a value that is too large to fit, the property truncates the value to 32 bits. When reading custom counters on the local computer, using the <see
-             cref="P:System.Diagnostics.PerformanceCounter.RawValue" />
+            >If the counter type is a 32-bit size and you attempt to set this property to a value that is too large to fit, the property truncates the value to 32 bits. When reading custom counters on the local computer, using the <see cref="P:System.Diagnostics.PerformanceCounter.RawValue" />
 
             
 
              property rather than a calculated value can produce significantly better performance in scenarios where the raw value is sufficient.</para
           >
           <para
-            >If the counter that you are reading is read-only, getting the <see
-             cref="P:System.Diagnostics.PerformanceCounter.RawValue" />
+            >If the counter that you are reading is read-only, getting the <see cref="P:System.Diagnostics.PerformanceCounter.RawValue" />
 
             
 
-             property samples the counter at the time that the property is called. This action is equivalent to making an initial call to the <see
-             cref="M:System.Diagnostics.PerformanceCounter.NextSample" />
+             property samples the counter at the time that the property is called. This action is equivalent to making an initial call to the <see cref="M:System.Diagnostics.PerformanceCounter.NextSample" />
 
             
 
-             method. If you subsequently call <see
-             cref="M:System.Diagnostics.PerformanceCounter.NextSample" />
+             method. If you subsequently call <see cref="M:System.Diagnostics.PerformanceCounter.NextSample" />
 
             
 
@@ -2342,23 +2228,19 @@
           <para>Because system counters are read-only, you can get but not set their raw values.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Diagnostics.PerformanceCounter.Increment" />
+              >The <see cref="M:System.Diagnostics.PerformanceCounter.Increment" />
 
               
 
-              , <see
-               cref="M:System.Diagnostics.PerformanceCounter.IncrementBy(System.Int64)" />
+              , <see cref="M:System.Diagnostics.PerformanceCounter.IncrementBy(System.Int64)" />
 
               
 
-              , and <see
-               cref="M:System.Diagnostics.PerformanceCounter.Decrement" />
+              , and <see cref="M:System.Diagnostics.PerformanceCounter.Decrement" />
 
               
 
-               methods use interlocks to update the counter value. This helps keep the counter value accurate in multithreaded or multiprocess scenarios, but also results in a performance penalty. If you do not need the accuracy that interlocked operations provide, you can update the <see
-               cref="P:System.Diagnostics.PerformanceCounter.RawValue" />
+               methods use interlocks to update the counter value. This helps keep the counter value accurate in multithreaded or multiprocess scenarios, but also results in a performance penalty. If you do not need the accuracy that interlocked operations provide, you can update the <see cref="P:System.Diagnostics.PerformanceCounter.RawValue" />
 
               
 
@@ -2367,28 +2249,23 @@
           </block>
           <block subset="none" type="note">
             <para
-              >If the value for the <see
-               cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
+              >If the value for the <see cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
-               property is <see
-               cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
+               property is <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
 
               
 
-               and the performance counter category was created with .NET Framework version 1.0 or 1.1, an <see
-               cref="T:System.InvalidOperationException" />
+               and the performance counter category was created with .NET Framework version 1.0 or 1.1, an <see cref="T:System.InvalidOperationException" />
 
               
 
-               is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see
-               cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
+               is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
-               must be <see
-               cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+               must be <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
 
               
 
@@ -2436,8 +2313,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a system counter, <see
-             cref="P:System.Diagnostics.PerformanceCounter.ReadOnly" />
+            >For a system counter, <see cref="P:System.Diagnostics.PerformanceCounter.ReadOnly" />
 
             
 
@@ -2447,8 +2323,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether this <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >Gets or sets a value indicating whether this <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
@@ -2487,13 +2362,11 @@
           <para>You can remove an instance only for a custom counter. All system counters are read-only, so attempting to remove one of them throws an exception.</para>
           <block subset="none" type="note">
             <para
-              >To avoid a possible race condition when the performance counter shared memory is released, it is recommended that the <see
-               cref="M:System.Diagnostics.PerformanceCounter.RemoveInstance" />
+              >To avoid a possible race condition when the performance counter shared memory is released, it is recommended that the <see cref="M:System.Diagnostics.PerformanceCounter.RemoveInstance" />
 
               
 
-               method be called from the <see
-               cref="E:System.AppDomain.DomainUnload" />
+               method be called from the <see cref="E:System.AppDomain.DomainUnload" />
 
               
 
@@ -2501,18 +2374,15 @@
             >
           </block>
           <para
-            >To create a performance category instance, specify an <paramref
-             name="instanceName" />
+            >To create a performance category instance, specify an <paramref name="instanceName" />
 
             
 
-             on the <see
-             cref="M:System.Diagnostics.PerformanceCounter.#ctor" />
+             on the <see cref="M:System.Diagnostics.PerformanceCounter.#ctor" />
 
             
 
-             constructor. If the category instance specified by <paramref
-             name="instanceName" />
+             constructor. If the category instance specified by <paramref name="instanceName" />
 
             
 
@@ -2520,28 +2390,23 @@
           >
           <block subset="none" type="note">
             <para
-              >If the value for the <see
-               cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
+              >If the value for the <see cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
-               property is <see
-               cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
+               property is <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
 
               
 
-               and the performance counter category was created with .NET Framework version 1.0 or 1.1, an <see
-               cref="T:System.InvalidOperationException" />
+               and the performance counter category was created with .NET Framework version 1.0 or 1.1, an <see cref="T:System.InvalidOperationException" />
 
               
 
-               is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see
-               cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
+               is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
-               must be <see
-               cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+               must be <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
 
               
 
@@ -2552,13 +2417,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Deletes the category instance specified by the <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >Deletes the category instance specified by the <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
-             object <see
-             cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
+             object <see cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
 
             
 

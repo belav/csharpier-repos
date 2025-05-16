@@ -22,8 +22,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Occurs when a target and source DataRow have the same primary key value, and the <see
-         cref="P:System.Data.DataSet.EnforceConstraints" />
+        >Occurs when a target and source DataRow have the same primary key value, and the <see cref="P:System.Data.DataSet.EnforceConstraints" />
 
         
 
@@ -48,13 +47,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of a <see
-             cref="T:System.Data.MergeFailedEventArgs" />
+            >Initializes a new instance of a <see cref="T:System.Data.MergeFailedEventArgs" />
 
             
 
-             class with the <see
-             cref="T:System.Data.DataTable" />
+             class with the <see cref="T:System.Data.DataTable" />
 
             
 
@@ -62,19 +59,26 @@
           >
         </summary>
         <param name="table">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataTable" />
+          The <see cref="T:System.Data.DataTable" />
 
           
 
            object. </param
         >
         <param name="conflict">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -117,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Data.DataTable" />
+            >Returns the <see cref="T:System.Data.DataTable" />
 
             
 

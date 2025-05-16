@@ -4,8 +4,7 @@
   <paragraph>If a statement can possibly be reached by execution, the statement is said to be reachable. Conversely, if there is no possibility that a statement will be executed, the statement is said to be unreachable. </paragraph>
   <paragraph>
     <example
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 void F() {  
    Console.WriteLine("reachable");  
@@ -25,8 +24,7 @@ void F() {
   <paragraph>A warning is reported if the compiler determines that a statement is unreachable. It is specifically not an error for a statement to be unreachable. </paragraph>
   <paragraph>
     <note
-      >[Note: To determine whether a particular statement or end point is reachable, the compiler performs flow analysis according to the reachability rules defined for each statement. The flow analysis takes into account the values of constant expressions (<hyperlink
-      >14.15</hyperlink>
+      >[Note: To determine whether a particular statement or end point is reachable, the compiler performs flow analysis according to the reachability rules defined for each statement. The flow analysis takes into account the values of constant expressions (<hyperlink>14.15</hyperlink>
 
       
 
@@ -35,8 +33,7 @@ void F() {
   </paragraph>
   <paragraph>
     <note
-      >In the example <code_example
-      >
+      >In the example <code_example>
         <![CDATA[
 void F() {  
    const int i = 1;  
@@ -47,8 +44,7 @@ void F() {
 
       
 
-      the boolean expression of the if statement is a constant expression because both operands of the == operator are constants. As the constant expression is evaluated at compile-time, producing the value false, the Console.WriteLine invocation is considered unreachable. However, if i is changed to be a local variable <code_example
-      >
+      the boolean expression of the if statement is a constant expression because both operands of the == operator are constants. As the constant expression is evaluated at compile-time, producing the value false, the Console.WriteLine invocation is considered unreachable. However, if i is changed to be a local variable <code_example>
         <![CDATA[
 void F() {  
    int i = 1;  
@@ -65,8 +61,7 @@ void F() {
   <paragraph>The block of a function member is always considered reachable. By successively evaluating the reachability rules of each statement in a block, the reachability of any given statement can be determined. </paragraph>
   <paragraph>
     <example
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 void F(int x) {  
    Console.WriteLine("start");  
@@ -77,37 +72,31 @@ void F(int x) {
 
       
 
-      the reachability of the second Console.WriteLine is determined as follows: <list
-      >
+      the reachability of the second Console.WriteLine is determined as follows: <list>
         <list_item
-          > The first Console.WriteLine expression statement is reachable because the block of the F method is reachable (<hyperlink
-          >15.2</hyperlink>
+          > The first Console.WriteLine expression statement is reachable because the block of the F method is reachable (<hyperlink>15.2</hyperlink>
 
           
 
           ). </list_item
         >
         <list_item
-          > The end point of the first Console.WriteLine expression statement is reachable15.2 because that statement is reachable (<hyperlink
-          >15.6</hyperlink>
+          > The end point of the first Console.WriteLine expression statement is reachable15.2 because that statement is reachable (<hyperlink>15.6</hyperlink>
 
           
 
-           and <hyperlink
-          >15.2</hyperlink>
+           and <hyperlink>15.2</hyperlink>
 
           
 
           ). </list_item
         >
         <list_item
-          > The if statement is reachable because the end point of the first Console.WriteLine expression statement is reachable (<hyperlink
-          >15.6</hyperlink>
+          > The if statement is reachable because the end point of the first Console.WriteLine expression statement is reachable (<hyperlink>15.6</hyperlink>
 
           
 
-           and <hyperlink
-          >15.2</hyperlink>
+           and <hyperlink>15.2</hyperlink>
 
           
 
@@ -118,8 +107,7 @@ void F(int x) {
     </example>
   </paragraph>
   <paragraph
-    >There are two situations in which it is a compile-time error for the end point of a statement to be reachable: <list
-    >
+    >There are two situations in which it is a compile-time error for the end point of a statement to be reachable: <list>
       <list_item> Because the switch statement does not permit a switch section to "fall through" to the next switch section, it is a compile-time error for the end point of the statement list of a switch section to be reachable. If this error occurs, it is typically an indication that a break statement is missing. </list_item>
       <list_item> It is a compile-time error for the end point of the block of a function member that computes a value to be reachable. If this error occurs, it typically is an indication that a return statement is missing. </list_item>
     </list>

@@ -14,23 +14,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This interface provides toolbox support functions to designers. The <see
-         cref="M:System.Drawing.Design.IToolboxUser.GetToolSupported(System.Drawing.Design.ToolboxItem)" />
+        >This interface provides toolbox support functions to designers. The <see cref="M:System.Drawing.Design.IToolboxUser.GetToolSupported(System.Drawing.Design.ToolboxItem)" />
 
         
 
-         method indicates whether the specified <see
-         cref="T:System.Drawing.Design.ToolboxItem" />
+         method indicates whether the specified <see cref="T:System.Drawing.Design.ToolboxItem" />
 
         
 
-         can be used when the current designer is active. The <see
-         cref="M:System.Drawing.Design.IToolboxUser.ToolPicked(System.Drawing.Design.ToolboxItem)" />
+         can be used when the current designer is active. The <see cref="M:System.Drawing.Design.IToolboxUser.ToolPicked(System.Drawing.Design.ToolboxItem)" />
 
         
 
-         method selects the specified <see
-         cref="T:System.Drawing.Design.ToolboxItem" />
+         method selects the specified <see cref="T:System.Drawing.Design.ToolboxItem" />
 
         
 
@@ -59,8 +55,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the specified tool is supported by the designer implementing the <see
-             cref="T:System.Drawing.Design.IToolboxUser" />
+            >If the specified tool is supported by the designer implementing the <see cref="T:System.Drawing.Design.IToolboxUser" />
 
             
 
@@ -76,12 +71,15 @@
           <para>true if the tool is supported by the toolbox and can be enabled; false if the document designer does not know how to use the tool.</para>
         </returns>
         <param name="tool">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+          The <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 
@@ -113,8 +111,7 @@
 
             
 
-             is called when the user double-clicks on a toolbox item. The document designer should create a component for the specified tool. The Visual Studio integrated development environment will only call <see
-             cref="M:System.Drawing.Design.IToolboxUser.ToolPicked(System.Drawing.Design.ToolboxItem)" />
+             is called when the user double-clicks on a toolbox item. The document designer should create a component for the specified tool. The Visual Studio integrated development environment will only call <see cref="M:System.Drawing.Design.IToolboxUser.ToolPicked(System.Drawing.Design.ToolboxItem)" />
 
             
 
@@ -126,12 +123,15 @@
           <para>Selects the specified tool.</para>
         </summary>
         <param name="tool">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+          The <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 

@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.ComponentModel.INotifyDataErrorInfo.ErrorsChanged" />
+        >Provides data for the <see cref="E:System.ComponentModel.INotifyDataErrorInfo.ErrorsChanged" />
 
         
 
@@ -49,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataErrorsChangedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataErrorsChangedEventArgs" />
 
             
 
@@ -58,12 +56,15 @@
           >
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the property that has an error.  null or <see
-           cref="F:System.String.Empty" />
+          The name of the property that has an error.  null or <see cref="F:System.String.Empty" />
 
           
 

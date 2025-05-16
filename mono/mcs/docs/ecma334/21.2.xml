@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <clause number="21.2" title="Enum modifiers">
   <paragraph
-    >An <non_terminal
-     where="21.1">enum-declaration</non_terminal>
+    >An <non_terminal where="21.1"
+      >enum-declaration</non_terminal
+    >
 
     
 
-     may optionally include a sequence of enum modifiers: <grammar_production
-    >
+     may optionally include a sequence of enum modifiers: <grammar_production>
       <name>
         <non_terminal where="21.2">enum-modifier</non_terminal>
 
@@ -18,8 +18,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="21.2">enum-modifier</non_terminal>
       </rhs>
       <rhs>
@@ -34,8 +33,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <keyword>new</keyword>
       </rhs>
       <rhs>
@@ -57,8 +55,7 @@
     It is a compile-time error for the same modifier to appear multiple times in an enum declaration. </paragraph
   >
   <paragraph
-    >The modifiers of an enum declaration have the same meaning as those of a class declaration (<hyperlink
-    >17.1.1</hyperlink>
+    >The modifiers of an enum declaration have the same meaning as those of a class declaration (<hyperlink>17.1.1</hyperlink>
 
     
 

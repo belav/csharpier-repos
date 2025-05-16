@@ -21,56 +21,46 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To create a <see
-         cref="T:System.Data.SqlClient.SqlDataReader" />
+        >To create a <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
         
 
-        , you must call the <see
-         cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
+        , you must call the <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
 
         
 
-         method of the <see
-         cref="T:System.Data.SqlClient.SqlCommand" />
+         method of the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
         
 
          object, instead of directly using a constructor.</para
       >
       <para
-        >While the <see
-         cref="T:System.Data.SqlClient.SqlDataReader" />
+        >While the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
         
 
-         is being used, the associated <see
-         cref="T:System.Data.SqlClient.SqlConnection" />
+         is being used, the associated <see cref="T:System.Data.SqlClient.SqlConnection" />
 
         
 
-         is busy serving the <see
-         cref="T:System.Data.SqlClient.SqlDataReader" />
+         is busy serving the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
         
 
-        , and no other operations can be performed on the <see
-         cref="T:System.Data.SqlClient.SqlConnection" />
+        , and no other operations can be performed on the <see cref="T:System.Data.SqlClient.SqlConnection" />
 
         
 
-         other than closing it. This is the case until the <see
-         cref="M:System.Data.SqlClient.SqlDataReader.Close" />
+         other than closing it. This is the case until the <see cref="M:System.Data.SqlClient.SqlDataReader.Close" />
 
         
 
-         method of the <see
-         cref="T:System.Data.SqlClient.SqlDataReader" />
+         method of the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
         
 
-         is called. For example, you cannot retrieve output parameters until after you call <see
-         cref="M:System.Data.SqlClient.SqlDataReader.Close" />
+         is called. For example, you cannot retrieve output parameters until after you call <see cref="M:System.Data.SqlClient.SqlDataReader.Close" />
 
         
 
@@ -82,51 +72,42 @@
 
         
 
-         and <see
-         cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" />
+         and <see cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" />
 
         
 
-         are the only properties that you can call after the <see
-         cref="T:System.Data.SqlClient.SqlDataReader" />
+         are the only properties that you can call after the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
         
 
-         is closed. Although the <see
-         cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" />
+         is closed. Although the <see cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" />
 
         
 
-         property may be accessed while the <see
-         cref="T:System.Data.SqlClient.SqlDataReader" />
+         property may be accessed while the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
         
 
-         exists, always call <see
-         cref="M:System.Data.SqlClient.SqlDataReader.Close" />
+         exists, always call <see cref="M:System.Data.SqlClient.SqlDataReader.Close" />
 
         
 
-         before returning the value of <see
-         cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" />
+         before returning the value of <see cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" />
 
         
 
          to guarantee an accurate return value.</para
       >
       <para
-        >When using sequential access (<see
-         cref="CommandBehavior.SequentialAccess" />
+        >When using sequential access (<see cref="CommandBehavior.SequentialAccess" />
 
         
 
-        ), an <see
-         cref="T:System.InvalidOperationException" />
+        ), an <see cref="T:System.InvalidOperationException" />
 
         
 
-         will be raised if the <see
-         cref="T:System.Data.SqlClient.SqlDataReader" />
+         will be raised if the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
         
 
@@ -134,18 +115,15 @@
       >
       <block subset="none" type="note">
         <para
-          >For optimal performance, <see
-           cref="T:System.Data.SqlClient.SqlDataReader" />
+          >For optimal performance, <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
           
 
-           avoids creating unnecessary objects or making unnecessary copies of data. Therefore, multiple calls to methods such as <see
-           cref="M:System.Data.SqlClient.SqlDataReader.GetValue(System.Int32)" />
+           avoids creating unnecessary objects or making unnecessary copies of data. Therefore, multiple calls to methods such as <see cref="M:System.Data.SqlClient.SqlDataReader.GetValue(System.Int32)" />
 
           
 
-           return a reference to the same object. Use caution if you are modifying the underlying value of the objects returned by methods such as <see
-           cref="M:System.Data.SqlClient.SqlDataReader.GetValue(System.Int32)" />
+           return a reference to the same object. Use caution if you are modifying the underlying value of the objects returned by methods such as <see cref="M:System.Data.SqlClient.SqlDataReader.GetValue(System.Int32)" />
 
           
 
@@ -170,31 +148,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must explicitly call the <see
-             cref="M:System.Data.SqlClient.SqlDataReader.Close" />
+            >You must explicitly call the <see cref="M:System.Data.SqlClient.SqlDataReader.Close" />
 
             
 
-             method when you are through using the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+             method when you are through using the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
-             to use the associated <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+             to use the associated <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
              for any other purpose.</para
           >
           <para
-            >The Close method fills in the values for output parameters, return values and RecordsAffected, increasing the time that it takes to close a SqlDataReader that was used to process a large or complex query. When the return values and the number of records affected by a query are not significant, the time that it takes to close the SqlDataReader can be reduced by calling the <see
-             cref="M:System.Data.SqlClient.SqlCommand.Cancel" />
+            >The Close method fills in the values for output parameters, return values and RecordsAffected, increasing the time that it takes to close a SqlDataReader that was used to process a large or complex query. When the return values and the number of records affected by a query are not significant, the time that it takes to close the SqlDataReader can be reduced by calling the <see cref="M:System.Data.SqlClient.SqlCommand.Cancel" />
 
             
 
-             method of the associated <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             method of the associated <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
@@ -202,8 +175,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Do not call Close or Dispose on a Connection, a DataReader, or any other managed object in the Finalize method of your class. In a finalizer, you should only release unmanaged resources that your class owns directly. If your class does not own any unmanaged resources, do not include a Finalize method in your class definition. For more information, see <format
-               type="text/html">
+              >Do not call Close or Dispose on a Connection, a DataReader, or any other managed object in the Finalize method of your class. In a finalizer, you should only release unmanaged resources that your class owns directly. If your class does not own any unmanaged resources, do not include a Finalize method in your class definition. For more information, see <format type="text/html">
                 <a href="22B6CB97-0C80-4EEB-A2CF-5ED7655E37F9">Garbage Collection</a>
               </format>
 
@@ -216,8 +188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Closes the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+            >Closes the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -248,13 +219,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+            >Gets the <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
-             associated with the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+             associated with the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -296,18 +265,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executing a query that, by its nature, does not return rows (such as a DELETE query), sets <see
-             cref="P:System.Data.SqlClient.SqlDataReader.FieldCount" />
+            >Executing a query that, by its nature, does not return rows (such as a DELETE query), sets <see cref="P:System.Data.SqlClient.SqlDataReader.FieldCount" />
 
             
 
-             to 0. However. this should not be confused with a query that returns 0 rows (such as SELECT * FROM table WHERE 1 = 2) in which case <see
-             cref="P:System.Data.SqlClient.SqlDataReader.FieldCount" />
+             to 0. However. this should not be confused with a query that returns 0 rows (such as SELECT * FROM table WHERE 1 = 2) in which case <see cref="P:System.Data.SqlClient.SqlDataReader.FieldCount" />
 
             
 
-             returns the number of columns in the table, including hidden fields. Use <see
-             cref="P:System.Data.SqlClient.SqlDataReader.VisibleFieldCount" />
+             returns the number of columns in the table, including hidden fields. Use <see cref="P:System.Data.SqlClient.SqlDataReader.VisibleFieldCount" />
 
             
 
@@ -338,8 +304,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore, the data retrieved must already be a Boolean, or an exception is generated.</para>
           <para
-            >Call <see
-             cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -355,7 +320,11 @@
           <para>The value of the column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -381,8 +350,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore, the data retrieved must already be a byte.</para>
           <para
-            >Call <see
-             cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -398,7 +366,11 @@
           <para>The value of the specified column as a byte.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -434,21 +406,18 @@
 
             
 
-             returns the number of available bytes in the field. Most of the time this is the exact length of the field. However, the number returned may be less than the true length of the field if GetBytes has already been used to obtain bytes from the field. This may be the case, for example, if the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+             returns the number of available bytes in the field. Most of the time this is the exact length of the field. However, the number returned may be less than the true length of the field if GetBytes has already been used to obtain bytes from the field. This may be the case, for example, if the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
-             is reading a large data structure into a buffer. For more information, see the SequentialAccess setting for <see
-             cref="T:System.Data.CommandBehavior" />
+             is reading a large data structure into a buffer. For more information, see the SequentialAccess setting for <see cref="T:System.Data.CommandBehavior" />
 
             
 
             .</para
           >
           <para
-            >If you pass a buffer that is null, <see
-             cref="M:System.Data.SqlClient.SqlDataReader.GetBytes(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)" />
+            >If you pass a buffer that is null, <see cref="M:System.Data.SqlClient.SqlDataReader.GetBytes(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)" />
 
             
 
@@ -465,40 +434,59 @@
           <para>The actual number of bytes read.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based column ordinal. </param
         >
         <param name="dataIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index within the field from which to begin the read operation.</param
         >
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to read the stream of bytes. </param
         >
         <param name="bufferIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index within the <paramref
-           name="buffer" />
+          The index within the <paramref name="buffer" />
 
           
 
            where the write operation is to start. </param
         >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -523,8 +511,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Not supported for <see
-             cref="N:System.Data.SqlClient" />
+            >Not supported for <see cref="N:System.Data.SqlClient" />
 
             
 
@@ -540,7 +527,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -581,21 +572,18 @@
 
             
 
-             returns the number of available characters in the field. Frequently this is the exact length of the field. However, the number returned may be less than the true length of the field if GetChars has already been used to obtain characters from the field. This may be the case, for example, if the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+             returns the number of available characters in the field. Frequently this is the exact length of the field. However, the number returned may be less than the true length of the field if GetChars has already been used to obtain characters from the field. This may be the case, for example, if the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
-             is reading a large data structure into a buffer. For more information, see the SequentialAccess setting for <see
-             cref="T:System.Data.CommandBehavior" />
+             is reading a large data structure into a buffer. For more information, see the SequentialAccess setting for <see cref="T:System.Data.CommandBehavior" />
 
             
 
             .</para
           >
           <para
-            >The actual number of characters read can be less than the requested length, if the end of the field is reached. If you pass a buffer that is null, <see
-             cref="M:System.Data.SqlClient.SqlDataReader.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)" />
+            >The actual number of characters read can be less than the requested length, if the end of the field is reached. If you pass a buffer that is null, <see cref="M:System.Data.SqlClient.SqlDataReader.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)" />
 
             
 
@@ -604,13 +592,11 @@
           <para>No conversions are performed; therefore. the data retrieved must already be a character array.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Data.SqlClient.SqlDataReader.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)" />
+              >The <see cref="M:System.Data.SqlClient.SqlDataReader.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)" />
 
               
 
-               method returns 0 when <paramref
-               name="dataIndex" />
+               method returns 0 when <paramref name="dataIndex" />
 
               
 
@@ -627,40 +613,59 @@
           <para>The actual number of characters read.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based column ordinal. </param
         >
         <param name="dataIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index within the field from which to begin the read operation.</param
         >
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to read the stream of bytes. </param
         >
         <param name="bufferIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index within the <paramref
-           name="buffer" />
+          The index within the <paramref name="buffer" />
 
           
 
            where the write operation is to start. </param
         >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -686,8 +691,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Data.IDataReader" />
+            >Returns an <see cref="T:System.Data.IDataReader" />
 
             
 
@@ -697,8 +701,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Data.IDataReader" />
+            >The <see cref="T:System.Data.IDataReader" />
 
             
 
@@ -706,7 +709,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -746,7 +753,11 @@
           <para>The string representing the data type of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -771,16 +782,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >No conversions are performed; therefore, the data retrieved must already be a <see
-             cref="T:System.DateTime" />
+            >No conversions are performed; therefore, the data retrieved must already be a <see cref="T:System.DateTime" />
 
             
 
              object.</para
           >
           <para
-            >Call <see
-             cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -790,8 +799,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.DateTime" />
+            >Gets the value of the specified column as a <see cref="T:System.DateTime" />
 
             
 
@@ -803,7 +811,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -828,16 +840,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >No conversions are performed; therefore, the data retrieved must already be a <see
-             cref="T:System.Decimal" />
+            >No conversions are performed; therefore, the data retrieved must already be a <see cref="T:System.Decimal" />
 
             
 
              object.</para
           >
           <para
-            >Call <see
-             cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -847,8 +857,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.Decimal" />
+            >Gets the value of the specified column as a <see cref="T:System.Decimal" />
 
             
 
@@ -860,7 +869,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -886,8 +899,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed. Therefore, the data retrieved must already be a double-precision floating point number.</para>
           <para
-            >Call <see
-             cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -903,7 +915,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -936,13 +952,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns an <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             that iterates through the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+             that iterates through the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -952,13 +966,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+             for the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -981,8 +993,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 
@@ -992,8 +1003,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
@@ -1001,7 +1011,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1027,8 +1041,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed. Therefore, the data retrieved must already be a single-precision floating point number.</para>
           <para
-            >Call <see
-             cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -1044,7 +1057,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1070,8 +1087,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore, the data retrieved must already be a GUID.</para>
           <para
-            >Call <see
-             cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -1087,7 +1103,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1113,8 +1133,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore, the data retrieved must already be a 16-bit signed integer.</para>
           <para
-            >Call <see
-             cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -1130,7 +1149,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1156,8 +1179,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore, the data retrieved must already be a 32-bit signed integer.</para>
           <para
-            >Call <see
-             cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -1173,7 +1195,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1199,8 +1225,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore, the data retrieved must already be a 64-bit signed integer.</para>
           <para
-            >Call <see
-             cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -1216,7 +1241,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1248,7 +1277,11 @@
           <para>The name of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1285,7 +1318,11 @@
           <para>The zero-based column ordinal.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1321,8 +1358,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Object" />
+            >Gets an <see cref="T:System.Object" />
 
             
 
@@ -1330,12 +1366,15 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Int32" />
+          An <see cref="T:System.Int32" />
 
           
 
@@ -1367,8 +1406,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -1376,12 +1414,15 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Int32" />
+          An <see cref="T:System.Int32" />
 
           
 
@@ -1415,12 +1456,15 @@
           <para>The array of objects that are a representation of the underlying provider specific values.</para>
         </returns>
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Object" />
+          An array of <see cref="T:System.Object" />
 
           
 
@@ -1442,8 +1486,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the <see
-             cref="M:System.Data.SqlClient.SqlDataReader.GetSchemaTable" />
+            >For the <see cref="M:System.Data.SqlClient.SqlDataReader.GetSchemaTable" />
 
             
 
@@ -1498,8 +1541,7 @@
               </term>
               <description>
                 <para
-                  >The name of the instance of Microsoft SQL Server used by the <see
-                   cref="T:System.Data.SqlClient.SqlDataReader" />
+                  >The name of the instance of Microsoft SQL Server used by the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
                   
 
@@ -1651,8 +1693,7 @@
               </term>
               <description>
                 <para
-                  >The type of the column irrespective of the current Type System Version specified in the connection string. The returned value is from the <see
-                   cref="T:System.Data.SqlDbType" />
+                  >The type of the column irrespective of the current Type System Version specified in the connection string. The returned value is from the <see cref="T:System.Data.SqlDbType" />
 
                   
 
@@ -1698,8 +1739,7 @@
               </term>
               <description>
                 <para
-                  >If the column is a user-defined type (UDT), this is the qualified name of the UDT's assembly as per <see
-                   cref="P:System.Type.AssemblyQualifiedName" />
+                  >If the column is a user-defined type (UDT), this is the qualified name of the UDT's assembly as per <see cref="P:System.Type.AssemblyQualifiedName" />
 
                   
 
@@ -1734,13 +1774,11 @@
           </list>
           <block subset="none" type="note">
             <para
-              >To make sure that metadata columns return the correct information, you must call <see
-               cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
+              >To make sure that metadata columns return the correct information, you must call <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
 
               
 
-               with the <paramref
-               name="behavior" />
+               with the <paramref name="behavior" />
 
               
 
@@ -1751,13 +1789,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Data.DataTable" />
+            >Returns a <see cref="T:System.Data.DataTable" />
 
             
 
-             that describes the column metadata of the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+             that describes the column metadata of the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -1767,8 +1803,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.DataTable" />
+            >A <see cref="T:System.Data.DataTable" />
 
             
 
@@ -1801,8 +1836,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.Data.SqlTypes.SqlBinary" />
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlBinary" />
 
             
 
@@ -1812,8 +1846,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a <see
-             cref="T:System.Data.SqlTypes.SqlBinary" />
+            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlBinary" />
 
             
 
@@ -1821,7 +1854,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1853,8 +1890,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
@@ -1866,7 +1902,11 @@
           <para>The value of the column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1898,8 +1938,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.Data.SqlTypes.SqlByte" />
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlByte" />
 
             
 
@@ -1909,8 +1948,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a  <see
-             cref="T:System.Data.SqlTypes.SqlByte" />
+            >The value of the column expressed as a  <see cref="T:System.Data.SqlTypes.SqlByte" />
 
             
 
@@ -1918,7 +1956,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1950,8 +1992,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as <see
-             cref="T:System.Data.SqlTypes.SqlBytes" />
+            >Gets the value of the specified column as <see cref="T:System.Data.SqlTypes.SqlBytes" />
 
             
 
@@ -1961,8 +2002,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a <see
-             cref="T:System.Data.SqlTypes.SqlBytes" />
+            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlBytes" />
 
             
 
@@ -1970,7 +2010,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1998,8 +2042,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -2009,8 +2052,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a  <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >The value of the column expressed as a  <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -2018,7 +2060,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2050,8 +2096,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.Data.SqlTypes.SqlDecimal" />
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlDecimal" />
 
             
 
@@ -2061,8 +2106,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a <see
-             cref="T:System.Data.SqlTypes.SqlDecimal" />
+            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlDecimal" />
 
             
 
@@ -2070,7 +2114,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2102,8 +2150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.Data.SqlTypes.SqlDouble" />
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlDouble" />
 
             
 
@@ -2113,8 +2160,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a  <see
-             cref="T:System.Data.SqlTypes.SqlDouble" />
+            >The value of the column expressed as a  <see cref="T:System.Data.SqlTypes.SqlDouble" />
 
             
 
@@ -2122,7 +2168,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2154,8 +2204,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.Data.SqlTypes.SqlGuid" />
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlGuid" />
 
             
 
@@ -2165,8 +2214,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a  <see
-             cref="T:System.Data.SqlTypes.SqlGuid" />
+            >The value of the column expressed as a  <see cref="T:System.Data.SqlTypes.SqlGuid" />
 
             
 
@@ -2174,7 +2222,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2206,8 +2258,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.Data.SqlTypes.SqlInt16" />
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlInt16" />
 
             
 
@@ -2217,8 +2268,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a <see
-             cref="T:System.Data.SqlTypes.SqlInt16" />
+            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlInt16" />
 
             
 
@@ -2226,7 +2276,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2258,8 +2312,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.Data.SqlTypes.SqlInt32" />
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlInt32" />
 
             
 
@@ -2269,8 +2322,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a <see
-             cref="T:System.Data.SqlTypes.SqlInt32" />
+            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlInt32" />
 
             
 
@@ -2278,7 +2330,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2310,8 +2366,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -2321,8 +2376,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -2330,7 +2384,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2362,8 +2420,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.Data.SqlTypes.SqlMoney" />
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlMoney" />
 
             
 
@@ -2373,8 +2430,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a <see
-             cref="T:System.Data.SqlTypes.SqlMoney" />
+            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlMoney" />
 
             
 
@@ -2382,7 +2438,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2414,8 +2474,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.Data.SqlTypes.SqlSingle" />
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlSingle" />
 
             
 
@@ -2425,8 +2484,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a <see
-             cref="T:System.Data.SqlTypes.SqlSingle" />
+            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlSingle" />
 
             
 
@@ -2434,7 +2492,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2466,8 +2528,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -2477,8 +2538,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -2486,7 +2546,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2515,8 +2579,7 @@
 
             
 
-             returns data using the native SQL Server types. To retrieve data using the .NET Framework types, see <see
-             cref="M:System.Data.SqlClient.SqlDataReader.GetValue(System.Int32)" />
+             returns data using the native SQL Server types. To retrieve data using the .NET Framework types, see <see cref="M:System.Data.SqlClient.SqlDataReader.GetValue(System.Int32)" />
 
             
 
@@ -2530,8 +2593,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a <see
-             cref="T:System.Data.SqlDbType" />
+            >The value of the column expressed as a <see cref="T:System.Data.SqlDbType" />
 
             
 
@@ -2539,7 +2601,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2564,23 +2630,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the values for all the columns in the record in a single call, using the SQL type system instead of the CLR type system. The length of the <see
-             cref="T:System.Object" />
+            >Returns the values for all the columns in the record in a single call, using the SQL type system instead of the CLR type system. The length of the <see cref="T:System.Object" />
 
             
 
-             array does not need to match the number of columns in the record. You can pass an <see
-             cref="T:System.Object" />
+             array does not need to match the number of columns in the record. You can pass an <see cref="T:System.Object" />
 
             
 
-             array that contains fewer than the number of columns contained in the record. Only the amount of data the <see
-             cref="T:System.Object" />
+             array that contains fewer than the number of columns contained in the record. Only the amount of data the <see cref="T:System.Object" />
 
             
 
-             array holds is copied to the array, starting at the column with ordinal 0. You can also pass an <see
-             cref="T:System.Object" />
+             array holds is copied to the array, starting at the column with ordinal 0. You can also pass an <see cref="T:System.Object" />
 
             
 
@@ -2590,8 +2652,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Fills an array of <see
-             cref="T:System.Object" />
+            >Fills an array of <see cref="T:System.Object" />
 
             
 
@@ -2603,12 +2664,15 @@
           <para>An integer indicating the number of columns copied.</para>
         </returns>
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Object" />
+          An array of <see cref="T:System.Object" />
 
           
 
@@ -2640,8 +2704,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore, the data retrieved must already be an XML value.</para>
           <para
-            >Call <see
-             cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -2655,8 +2718,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlXml" />
+            >A <see cref="T:System.Data.SqlTypes.SqlXml" />
 
             
 
@@ -2664,7 +2726,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2686,8 +2752,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore, the data retrieved must already be a string.</para>
           <para
-            >Call <see
-             cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -2703,7 +2768,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2742,8 +2811,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns <see
-             cref="T:System.DBNull" />
+            >This method returns <see cref="T:System.DBNull" />
 
             
 
@@ -2751,7 +2819,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2777,26 +2849,22 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>For most applications, this method provides an efficient means for retrieving all columns, instead of retrieving each column individually.</para>
           <para
-            >You can pass an <see
-             cref="T:System.Object" />
+            >You can pass an <see cref="T:System.Object" />
 
             
 
-             array that contains fewer than the number of columns contained in the resulting row. Only the amount of data the <see
-             cref="T:System.Object" />
+             array that contains fewer than the number of columns contained in the resulting row. Only the amount of data the <see cref="T:System.Object" />
 
             
 
-             array holds is copied to the array. You can also pass an <see
-             cref="T:System.Object" />
+             array holds is copied to the array. You can also pass an <see cref="T:System.Object" />
 
             
 
              array whose length is more than the number of columns contained in the resulting row.</para
           >
           <para
-            >This method returns <see
-             cref="T:System.DBNull" />
+            >This method returns <see cref="T:System.DBNull" />
 
             
 
@@ -2810,8 +2878,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of instances of <see
-             cref="T:System.Object" />
+            >The number of instances of <see cref="T:System.Object" />
 
             
 
@@ -2819,12 +2886,15 @@
           >
         </returns>
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Object" />
+          An array of <see cref="T:System.Object" />
 
           
 
@@ -2852,8 +2922,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+            >Gets a value that indicates whether the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -2873,8 +2942,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >It is not possible to read from a <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+            >It is not possible to read from a <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -2884,8 +2952,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a Boolean value that indicates whether the specified <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+            >Retrieves a Boolean value that indicates whether the specified <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -2921,13 +2988,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Data.CommandBehavior" />
+            >Determines whether the specified <see cref="T:System.Data.CommandBehavior" />
 
             
 
-             matches that of the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+             matches that of the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -2937,8 +3002,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see
-             cref="T:System.Data.CommandBehavior" />
+            >true if the specified <see cref="T:System.Data.CommandBehavior" />
 
             
 
@@ -2946,12 +3010,15 @@
           >
         </returns>
         <param name="condition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.CommandBehavior" />
+          A <see cref="T:System.Data.CommandBehavior" />
 
           
 
@@ -2972,13 +3039,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method to check for null column values before calling the typed get methods (for example, <see
-             cref="M:System.Data.SqlClient.SqlDataReader.GetByte(System.Int32)" />
+            >Call this method to check for null column values before calling the typed get methods (for example, <see cref="M:System.Data.SqlClient.SqlDataReader.GetByte(System.Int32)" />
 
             
 
-            , <see
-             cref="M:System.Data.SqlClient.SqlDataReader.GetChar(System.Int32)" />
+            , <see cref="M:System.Data.SqlClient.SqlDataReader.GetChar(System.Int32)" />
 
             
 
@@ -2993,8 +3058,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified column value is equivalent to <see
-             cref="T:System.DBNull" />
+            >true if the specified column value is equivalent to <see cref="T:System.DBNull" />
 
             
 
@@ -3002,7 +3066,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3092,26 +3160,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default position of the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+            >The default position of the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
-             is before the first record. Therefore, you must call <see
-             cref="M:System.Data.SqlClient.SqlDataReader.Read" />
+             is before the first record. Therefore, you must call <see cref="M:System.Data.SqlClient.SqlDataReader.Read" />
 
             
 
              to begin accessing any data.</para
           >
           <para
-            >Only one SqlDataReader per associated <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+            >Only one SqlDataReader per associated <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
-             may be open at a time, and any attempt to open another will fail until the first one is closed. Similarly, while the SqlDataReader is being used, the associated SqlConnection is busy serving it until you call <see
-             cref="M:System.Data.SqlClient.SqlDataReader.Close" />
+             may be open at a time, and any attempt to open another will fail until the first one is closed. Similarly, while the SqlDataReader is being used, the associated SqlConnection is busy serving it until you call <see cref="M:System.Data.SqlClient.SqlDataReader.Close" />
 
             
 
@@ -3121,8 +3185,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Advances the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+            >Advances the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -3150,13 +3213,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" />
+            >The <see cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" />
 
             
 
-             property is not set until all rows are read and you close the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+             property is not set until all rows are read and you close the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -3168,13 +3229,11 @@
 
             
 
-             and <see
-             cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" />
+             and <see cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" />
 
             
 
-             are the only properties that you can call after the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+             are the only properties that you can call after the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -3248,8 +3307,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This value is used to determine how many fields in the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+            >This value is used to determine how many fields in the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -3259,8 +3317,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of fields in the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+            >Gets the number of fields in the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 

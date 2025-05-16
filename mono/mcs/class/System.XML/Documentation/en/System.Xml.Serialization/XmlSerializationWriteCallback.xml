@@ -34,21 +34,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >During initialization, the .NET Framework XML serialization infrastructure dynamically generates and compiles a temporary class for serialization derived from the <see
-         cref="T:System.Xml.Serialization.XmlSerializationWriter" />
+        >During initialization, the .NET Framework XML serialization infrastructure dynamically generates and compiles a temporary class for serialization derived from the <see cref="T:System.Xml.Serialization.XmlSerializationWriter" />
 
         
 
-         class. During this process, the .NET Framework generates write methods that implement the <see
-         cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" />
+         class. During this process, the .NET Framework generates write methods that implement the <see cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" />
 
         
 
          class delegate. It does so for certain mappings between .NET Framework types and XML data types that are serialized through SOAP-encoded XML and are not root elements. Then, as necessary, a write method is called during serialization.</para
       >
       <para
-        >You should not directly instantiate <see
-         cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" />
+        >You should not directly instantiate <see cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" />
 
         
 
@@ -59,8 +56,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Delegate that is used by the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >Delegate that is used by the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 

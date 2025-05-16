@@ -21,31 +21,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+        >The <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
         
 
-         contains a collection of XML namespaces, each with an associated prefix. The <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         contains a collection of XML namespaces, each with an associated prefix. The <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         uses an instance of the <see
-         cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+         uses an instance of the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
         
 
          class to create qualified names in an XML document.</para
       >
       <para
-        >XML namespaces contained by the <see
-         cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+        >XML namespaces contained by the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
         
 
-         must conform to the www.w3.org specification named <paramref
-         name="Namespaces in XML" />
+         must conform to the www.w3.org specification named <paramref name="Namespaces in XML" />
 
         
 
@@ -56,8 +51,7 @@
       <list type="ordered">
         <item>
           <para
-            >Create an <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+            >Create an <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
@@ -75,8 +69,7 @@
         </item>
         <item>
           <para
-            >Apply the appropriate.NET attribute to each property or class that the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Apply the appropriate.NET attribute to each property or class that the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -119,8 +112,7 @@
       <list type="ordered">
         <item>
           <para
-            >Set the Namespace property of each attribute to one of the namespace values from the <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+            >Set the Namespace property of each attribute to one of the namespace values from the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
@@ -129,18 +121,15 @@
         </item>
         <item>
           <para
-            >Pass the <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+            >Pass the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
-             to the <see
-             cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" />
+             to the <see cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" />
 
             
 
-             method of the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             method of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -159,8 +148,7 @@ ns.Add("", "")</code>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains the XML namespaces and prefixes that the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >Contains the XML namespaces and prefixes that the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
@@ -188,8 +176,7 @@ ns.Add("", "")</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
@@ -222,8 +209,7 @@ ns.Add("", "")</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
@@ -231,12 +217,15 @@ ns.Add("", "")</code>
           >
         </summary>
         <param name="namespaces">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+          An instance of the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
           
 
@@ -268,8 +257,7 @@ ns.Add("", "")</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
@@ -277,12 +265,15 @@ ns.Add("", "")</code>
           >
         </summary>
         <param name="namespaces">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          An array of <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
@@ -313,26 +304,22 @@ ns.Add("", "")</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you want the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >If you want the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             to qualify the element and attribute names in an XML document, you must <see
-             cref="M:System.Xml.Serialization.XmlSerializerNamespaces.Add(System.String,System.String)" />
+             to qualify the element and attribute names in an XML document, you must <see cref="M:System.Xml.Serialization.XmlSerializerNamespaces.Add(System.String,System.String)" />
 
             
 
-             the prefix and namespace pairs to an <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+             the prefix and namespace pairs to an <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
              object.</para
           >
           <para
-            >Any namespaces that you add must conform to the www.w3.org specification <paramref
-             name="Namespaces in XML" />
+            >Any namespaces that you add must conform to the www.w3.org specification <paramref name="Namespaces in XML" />
 
             
 
@@ -342,8 +329,7 @@ ns.Add("", "")</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a prefix and namespace pair to an <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+            >Adds a prefix and namespace pair to an <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
@@ -351,14 +337,22 @@ ns.Add("", "")</code>
           >
         </summary>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The prefix associated with an XML namespace. </param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -408,8 +402,7 @@ ns.Add("", "")</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the array of prefix and namespace pairs in an <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+            >Gets the array of prefix and namespace pairs in an <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
@@ -419,8 +412,7 @@ ns.Add("", "")</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Xml.XmlQualifiedName" />
+            >An array of <see cref="T:System.Xml.XmlQualifiedName" />
 
             
 

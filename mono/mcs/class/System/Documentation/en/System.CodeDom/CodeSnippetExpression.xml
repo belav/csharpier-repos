@@ -35,8 +35,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>A literal expression stores the code of an expression as a literal code fragment. The CodeDOM does not translate literal code fragments. Literal code fragments are stored and output just as they are. CodeDOM objects that contain literal code are provided so developers can encapsulate code that is already in the target language.</para>
       <para
-        >The <see
-         cref="P:System.CodeDom.CodeSnippetExpression.Value" />
+        >The <see cref="P:System.CodeDom.CodeSnippetExpression.Value" />
 
         
 
@@ -68,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeSnippetExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeSnippetExpression" />
 
             
 
@@ -99,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeSnippetExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeSnippetExpression" />
 
             
 
@@ -108,7 +105,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is intended for future use when the .NET Framework Data Provider for ODBC is enabled for partial trust scenarios. The .NET Framework Data Provider for ODBC currently requires FullTrust permission. Currently, using the OdbcPermissionAttribute class has no effect. For more information, see <format
-         type="text/html">
+        >This class is intended for future use when the .NET Framework Data Provider for ODBC is enabled for partial trust scenarios. The .NET Framework Data Provider for ODBC currently requires FullTrust permission. Currently, using the OdbcPermissionAttribute class has no effect. For more information, see <format type="text/html">
           <a href="93E099EB-DAA1-4F1E-B031-C1E10A996F88">Code Access Security and ADO.NET</a>
         </format>
 
@@ -52,13 +51,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Odbc.OdbcPermissionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Data.Odbc.OdbcPermissionAttribute" />
 
             
 
-             class with one of the <see
-             cref="T:System.Security.Permissions.SecurityAction" />
+             class with one of the <see cref="T:System.Security.Permissions.SecurityAction" />
 
             
 
@@ -68,8 +65,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Data.Odbc.OdbcPermissionAttribute" />
+            >An <see cref="T:System.Data.Odbc.OdbcPermissionAttribute" />
 
             
 
@@ -77,12 +73,15 @@
           >
         </returns>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+          One of the <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -109,8 +108,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Data.Odbc.OdbcPermission" />
+            >Returns an <see cref="T:System.Data.Odbc.OdbcPermission" />
 
             
 
@@ -120,8 +118,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Data.Odbc.OdbcPermission" />
+            >An <see cref="T:System.Data.Odbc.OdbcPermission" />
 
             
 

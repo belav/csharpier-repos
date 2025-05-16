@@ -33,8 +33,7 @@
     <param name="y">The second object to compare.</param>
     <returns>
       <para
-        >A <see
-         cref="T:System.Int32" />
+        >A <see cref="T:System.Int32" />
 
         
 
@@ -52,8 +51,7 @@
 
             
 
-             is less than <paramref
-             name="y" />
+             is less than <paramref name="y" />
 
             
 
@@ -68,8 +66,7 @@
 
             
 
-             equals <paramref
-             name="y" />
+             equals <paramref name="y" />
 
             
 
@@ -83,8 +80,7 @@
 
             
 
-             is greater than <paramref
-             name="y" />
+             is greater than <paramref name="y" />
 
             
 
@@ -95,8 +91,7 @@
     </returns>
     <returns>
       <para
-        >A <see
-         cref="T:System.Int32" />
+        >A <see cref="T:System.Int32" />
 
         
 
@@ -114,8 +109,7 @@
 
             
 
-             is less than <paramref
-             name="y" />
+             is less than <paramref name="y" />
 
             
 
@@ -130,8 +124,7 @@
 
             
 
-             equals <paramref
-             name="y" />
+             equals <paramref name="y" />
 
             
 
@@ -145,8 +138,7 @@
 
             
 
-             is greater than <paramref
-             name="y" />
+             is greater than <paramref name="y" />
 
             
 
@@ -160,23 +152,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This delegate is used by the <see
-         cref="M:System.Array.Sort``1(``0[],System.Comparison{``0})" />
+        >This delegate is used by the <see cref="M:System.Array.Sort``1(``0[],System.Comparison{``0})" />
 
         
 
-         method overload of the <see
-         cref="T:System.Array" />
+         method overload of the <see cref="T:System.Array" />
 
         
 
-         class and the <see
-         cref="M:System.Collections.Generic.List`1.Sort(System.Comparison{`0})" />
+         class and the <see cref="M:System.Collections.Generic.List`1.Sort(System.Comparison{`0})" />
 
         
 
-         method overload of the <see
-         cref="T:System.Collections.Generic.List`1" />
+         method overload of the <see cref="T:System.Collections.Generic.List`1" />
 
         
 

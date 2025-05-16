@@ -38,33 +38,27 @@
 
         
 
-         can be used to represent a statement that assigns the value of an object to another object, or a reference to another reference. Simple assignment statements are usually of the form " <paramref
-         name="value1" />
+         can be used to represent a statement that assigns the value of an object to another object, or a reference to another reference. Simple assignment statements are usually of the form " <paramref name="value1" />
 
         
 
-         = <paramref
-         name="value2" />
+         = <paramref name="value2" />
 
         
 
-         ", where <paramref
-         name="value1" />
+         ", where <paramref name="value1" />
 
         
 
-         is the object being assigned to, and <paramref
-         name="value2" />
+         is the object being assigned to, and <paramref name="value2" />
 
         
 
-         is being assigned. The <see
-         cref="P:System.CodeDom.CodeAssignStatement.Left" />
+         is being assigned. The <see cref="P:System.CodeDom.CodeAssignStatement.Left" />
 
         
 
-         property indicates the object to assign to. The <see
-         cref="P:System.CodeDom.CodeAssignStatement.Right" />
+         property indicates the object to assign to. The <see cref="P:System.CodeDom.CodeAssignStatement.Right" />
 
         
 
@@ -96,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeAssignStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAssignStatement" />
 
             
 
@@ -131,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeAssignStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAssignStatement" />
 
             
 
@@ -140,14 +132,22 @@
           >
         </summary>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The variable to assign to. </param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

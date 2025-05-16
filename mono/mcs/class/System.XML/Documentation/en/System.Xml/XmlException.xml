@@ -56,31 +56,26 @@
       <Docs>
         <remarks>
           <para
-            >This constructor initializes the <see
-             cref="P:System.Xml.XmlException.Message" />
+            >This constructor initializes the <see cref="P:System.Xml.XmlException.Message" />
 
             
 
              property of the new instance to a system-supplied message that describes the error, such as "An XML error has occurred."   This message takes into account the current system culture.</para
           >
           <para
-            >The <see
-             cref="!:System.Xml.XmlException.InnerException" />
+            >The <see cref="!:System.Xml.XmlException.InnerException" />
 
             
 
-             property is initialized to <see
-             langword="null" />
+             property is initialized to <see langword="null" />
 
             
 
-            . The <see
-             cref="P:System.Xml.XmlException.LineNumber" />
+            . The <see cref="P:System.Xml.XmlException.LineNumber" />
 
             
 
-             and <see
-             cref="P:System.Xml.XmlException.LinePosition" />
+             and <see cref="P:System.Xml.XmlException.LinePosition" />
 
             
 
@@ -117,51 +112,42 @@
       <Docs>
         <remarks>
           <para
-            >This constructor initializes the <see
-             cref="P:System.Xml.XmlException.Message" />
+            >This constructor initializes the <see cref="P:System.Xml.XmlException.Message" />
 
             
 
-             property of the new instance using <paramref
-             name="message" />
+             property of the new instance using <paramref name="message" />
 
             
 
-            . If the <paramref
-             name="message" />
+            . If the <paramref name="message" />
 
             
 
-             parameter is <see
-             langword="null" />
+             parameter is <see langword="null" />
 
             
 
-            , the <see
-             cref="P:System.Xml.XmlException.Message" />
+            , the <see cref="P:System.Xml.XmlException.Message" />
 
             
 
              property is initialized to the system-supplied message provided by the constructor that takes no arguments.</para
           >
           <para
-            >The <see
-             cref="!:System.Xml.XmlException.InnerException" />
+            >The <see cref="!:System.Xml.XmlException.InnerException" />
 
             
 
-             property is initialized to <see
-             langword="null" />
+             property is initialized to <see langword="null" />
 
             
 
-            . The <see
-             cref="P:System.Xml.XmlException.LineNumber" />
+            . The <see cref="P:System.Xml.XmlException.LineNumber" />
 
             
 
-             and <see
-             cref="P:System.Xml.XmlException.LinePosition" />
+             and <see cref="P:System.Xml.XmlException.LinePosition" />
 
             
 
@@ -173,7 +159,11 @@
           <para>Initializes a new instance of the XmlException class with a specified error message.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -206,13 +196,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the XmlException class using the information in the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Initializes a new instance of the XmlException class using the information in the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             and <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             and <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -220,14 +208,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The SerializationInfo object containing all the properties of an XmlException. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -262,41 +258,34 @@
       <Docs>
         <remarks>
           <para
-            >This constructor initializes the <see
-             cref="P:System.Xml.XmlException.Message" />
+            >This constructor initializes the <see cref="P:System.Xml.XmlException.Message" />
 
             
 
              property
-   of the new instance using <paramref
-             name="message" />
+   of the new instance using <paramref name="message" />
 
             
 
-             and the <see
-             cref="!:System.Xml.XmlException.InnerException" />
+             and the <see cref="!:System.Xml.XmlException.InnerException" />
 
             
 
              property using
-<paramref
-             name="innerException" />
+<paramref name="innerException" />
 
             
 
-            . If the <paramref
-             name="message" />
+            . If the <paramref name="message" />
 
             
 
              parameter is 
-<see
-             langword="null" />
+<see langword="null" />
 
             
 
-            , the <see
-             cref="P:System.Xml.XmlException.Message" />
+            , the <see cref="P:System.Xml.XmlException.Message" />
 
             
 
@@ -304,13 +293,11 @@
    message provided by the constructor that takes no arguments. </para
           >
           <para
-            >The <see
-             cref="P:System.Xml.XmlException.LineNumber" />
+            >The <see cref="P:System.Xml.XmlException.LineNumber" />
 
             
 
-             and <see
-             cref="P:System.Xml.XmlException.LinePosition" />
+             and <see cref="P:System.Xml.XmlException.LinePosition" />
 
             
 
@@ -319,8 +306,7 @@
           <para>
             <block subset="none" type="note"
               > For more information on inner
-   exceptions, see <see
-               cref="P:System.Exception.InnerException" />
+   exceptions, see <see cref="P:System.Exception.InnerException" />
 
               
 
@@ -329,12 +315,15 @@
           </para>
         </remarks>
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Exception" />
+          The <see cref="T:System.Exception" />
 
           
 
@@ -345,19 +334,26 @@
           <para>Initializes a new instance of the XmlException class.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The description of the error condition. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Exception" />
+          The <see cref="T:System.Exception" />
 
           
 
@@ -395,58 +391,47 @@
       <Docs>
         <remarks>
           <para
-            >This constructor initializes the <see
-             cref="P:System.Xml.XmlException.Message" />
+            >This constructor initializes the <see cref="P:System.Xml.XmlException.Message" />
 
             
 
-             property of the new instance using <paramref
-             name="message" />
+             property of the new instance using <paramref name="message" />
 
             
 
-            , the <see
-             cref="!:System.Xml.XmlException.InnerException" />
+            , the <see cref="!:System.Xml.XmlException.InnerException" />
 
             
 
-             property using <paramref
-             name="innerException" />
+             property using <paramref name="innerException" />
 
             
 
-            , the <see
-             cref="P:System.Xml.XmlException.LineNumber" />
+            , the <see cref="P:System.Xml.XmlException.LineNumber" />
 
             
 
-             property using <paramref
-             name="lineNumber" />
+             property using <paramref name="lineNumber" />
 
             
 
-            , and the <see
-             cref="P:System.Xml.XmlException.LinePosition" />
+            , and the <see cref="P:System.Xml.XmlException.LinePosition" />
 
             
 
-             property using <paramref
-             name="linePosition" />
+             property using <paramref name="linePosition" />
 
             
 
-            . If the <paramref
-             name="message" />
+            . If the <paramref name="message" />
 
             
 
-             parameter is <see
-             langword="null" />
+             parameter is <see langword="null" />
 
             
 
-            , the <see
-             cref="P:System.Xml.XmlException.Message" />
+            , the <see cref="P:System.Xml.XmlException.Message" />
 
             
 
@@ -454,8 +439,7 @@
           >
           <para>
             <block subset="none" type="note"
-              > For information on inner exceptions, see <see
-               cref="P:System.Exception.InnerException" />
+              > For information on inner exceptions, see <see cref="P:System.Exception.InnerException" />
 
               
 
@@ -468,28 +452,44 @@
           <para>Initializes a new instance of the XmlException class with the specified message, inner exception, line number, and line position.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error description. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The exception that is the cause of the current exception. This value can be null. </param
         >
         <param name="lineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The line number indicating where the error occurred. </param
         >
         <param name="linePosition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -525,13 +525,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Streams all the XmlException properties into the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Streams all the XmlException properties into the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             class for the given <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             class for the given <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -539,14 +537,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The SerializationInfo object. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -574,8 +580,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
@@ -613,8 +618,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
@@ -654,8 +658,7 @@
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.String" />
+            > A <see cref="T:System.String" />
 
             
 
@@ -665,19 +668,16 @@
         <remarks>
           <para>This property is read-only.</para>
           <para
-            >If the <see
-             cref="P:System.Xml.XmlException.LineNumber" />
+            >If the <see cref="P:System.Xml.XmlException.LineNumber" />
 
             
 
              property is not equal to zero, the
-   string returned by this property includes the values of the <see
-             cref="P:System.Xml.XmlException.LineNumber" />
+   string returned by this property includes the values of the <see cref="P:System.Xml.XmlException.LineNumber" />
 
             
 
-             and <see
-             cref="P:System.Xml.XmlException.LinePosition" />
+             and <see cref="P:System.Xml.XmlException.LinePosition" />
 
             
 
@@ -685,8 +685,7 @@
           >
           <para>
             <block subset="none" type="note"
-              >This property overrides <see
-               cref="P:System.Exception.Message" />
+              >This property overrides <see cref="P:System.Exception.Message" />
 
               
 

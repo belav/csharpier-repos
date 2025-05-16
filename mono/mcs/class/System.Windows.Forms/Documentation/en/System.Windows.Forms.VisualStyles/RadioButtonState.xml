@@ -13,28 +13,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.VisualStyles.RadioButtonState" />
+        >The <see cref="T:System.Windows.Forms.VisualStyles.RadioButtonState" />
 
         
 
-         values correspond to the states of the <see
-         cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+         values correspond to the states of the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
 
         
 
-         objects exposed by the <see
-         cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.Button.RadioButton" />
+         objects exposed by the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.Button.RadioButton" />
 
         
 
-         class. The <see
-         cref="T:System.Windows.Forms.VisualStyles.RadioButtonState" />
+         class. The <see cref="T:System.Windows.Forms.VisualStyles.RadioButtonState" />
 
         
 
-         values are also used as an argument in the <see
-         cref="Overload:System.Windows.Forms.RadioButtonRenderer.DrawRadioButton" />
+         values are also used as an argument in the <see cref="Overload:System.Windows.Forms.RadioButtonRenderer.DrawRadioButton" />
 
         
 

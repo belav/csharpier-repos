@@ -32,8 +32,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The event model in the dnprdnshort is based on having an event delegate that connects an event with its handler. To raise a <see
-         cref="E:System.ComponentModel.Design.DesignerActionService.DesignerActionListsChanged" />
+        >The event model in the dnprdnshort is based on having an event delegate that connects an event with its handler. To raise a <see cref="E:System.ComponentModel.Design.DesignerActionService.DesignerActionListsChanged" />
 
         
 
@@ -42,13 +41,11 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="T:System.ComponentModel.Design.DesignerActionListsChangedEventArgs" />
+            >The <see cref="T:System.ComponentModel.Design.DesignerActionListsChangedEventArgs" />
 
             
 
-             class, derived from <see
-             cref="T:System.EventArgs" />
+             class, derived from <see cref="T:System.EventArgs" />
 
             
 
@@ -57,8 +54,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.ComponentModel.Design.DesignerActionListsChangedEventHandler" />
+            >The <see cref="T:System.ComponentModel.Design.DesignerActionListsChangedEventHandler" />
 
             
 
@@ -67,13 +63,11 @@
         </item>
       </list>
       <para
-        >When you create a <see
-         cref="T:System.ComponentModel.Design.DesignerActionListsChangedEventHandler" />
+        >When you create a <see cref="T:System.ComponentModel.Design.DesignerActionListsChangedEventHandler" />
 
         
 
-         delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format
-         type="text/html">
+         delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
 
@@ -85,13 +79,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see
-         cref="E:System.ComponentModel.Design.DesignerActionService.DesignerActionListsChanged" />
+        >Represents the method that will handle the <see cref="E:System.ComponentModel.Design.DesignerActionService.DesignerActionListsChanged" />
 
         
 
-         event of a <see
-         cref="T:System.ComponentModel.Design.DesignerActionService" />
+         event of a <see cref="T:System.ComponentModel.Design.DesignerActionService" />
 
         
 

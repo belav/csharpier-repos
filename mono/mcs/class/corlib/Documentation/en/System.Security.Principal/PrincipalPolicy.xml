@@ -26,13 +26,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>For performance reasons, the default principal and identity objects are not created until they are needed. If a principal is explicitly added to the current thread, a default principal is not created and the principal policy setting is ignored.</para>
       <para
-        >A trusted host can override the default principal policy by specifying another of these values using the <see
-         cref="M:System.AppDomain.SetPrincipalPolicy(System.Security.Principal.PrincipalPolicy)" />
+        >A trusted host can override the default principal policy by specifying another of these values using the <see cref="M:System.AppDomain.SetPrincipalPolicy(System.Security.Principal.PrincipalPolicy)" />
 
         
 
-         method of an <see
-         cref="T:System.AppDomain" />
+         method of an <see cref="T:System.AppDomain" />
 
         
 
@@ -90,13 +88,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Principal and identity objects for the unauthenticated entity should be created. An unauthenticated entity has <see
-             cref="P:System.Security.Principal.GenericIdentity.Name" />
+            >Principal and identity objects for the unauthenticated entity should be created. An unauthenticated entity has <see cref="P:System.Security.Principal.GenericIdentity.Name" />
 
             
 
-             set to the empty string ("") and <see
-             cref="P:System.Security.Principal.GenericIdentity.IsAuthenticated" />
+             set to the empty string ("") and <see cref="P:System.Security.Principal.GenericIdentity.IsAuthenticated" />
 
             
 

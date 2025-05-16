@@ -32,8 +32,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Web.UI.Design.DesignTimeResourceProviderFactory" />
+            >Creates a new instance of the <see cref="T:System.Web.UI.Design.DesignTimeResourceProviderFactory" />
 
             
 
@@ -63,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, creates a global resource provider using the provided <see
-             cref="T:System.IServiceProvider" />
+            >When overridden in a derived class, creates a global resource provider using the provided <see cref="T:System.IServiceProvider" />
 
             
 
@@ -74,13 +72,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Either an <see
-             cref="T:System.Web.Compilation.IResourceProvider" />
+            >Either an <see cref="T:System.Web.Compilation.IResourceProvider" />
 
             
 
-             or an <see
-             cref="T:System.Web.UI.Design.IDesignTimeResourceWriter" />
+             or an <see cref="T:System.Web.UI.Design.IDesignTimeResourceWriter" />
 
             
 
@@ -88,14 +84,22 @@
           >
         </returns>
         <param name="serviceProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A reference to the design host.</param
         >
         <param name="classKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -127,13 +131,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Web.Compilation.IResourceProvider" />
+            >An <see cref="T:System.Web.Compilation.IResourceProvider" />
 
             
 
-             or a class derived from <see
-             cref="T:System.Web.Compilation.IResourceProvider" />
+             or a class derived from <see cref="T:System.Web.Compilation.IResourceProvider" />
 
             
 
@@ -141,7 +143,11 @@
           >
         </returns>
         <param name="serviceProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -175,7 +181,11 @@
           <para>A local resource writer for using the provided reference to the design host.</para>
         </returns>
         <param name="serviceProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

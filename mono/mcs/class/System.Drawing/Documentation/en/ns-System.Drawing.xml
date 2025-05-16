@@ -4,23 +4,19 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Drawing" />
+        >The <see cref="N:System.Drawing" />
 
         
 
-         namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the <see
-         cref="N:System.Drawing.Drawing2D" />
+         namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the <see cref="N:System.Drawing.Drawing2D" />
 
         
 
-        , <see
-         cref="N:System.Drawing.Imaging" />
+        , <see cref="N:System.Drawing.Imaging" />
 
         
 
-        , and <see
-         cref="N:System.Drawing.Text" />
+        , and <see cref="N:System.Drawing.Text" />
 
         
 
@@ -30,28 +26,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Drawing.Graphics" />
+        >The <see cref="T:System.Drawing.Graphics" />
 
         
 
-         class provides methods for drawing to the display device. Classes such as <see
-         cref="T:System.Drawing.Rectangle" />
+         class provides methods for drawing to the display device. Classes such as <see cref="T:System.Drawing.Rectangle" />
 
         
 
-         and <see
-         cref="T:System.Drawing.Point" />
+         and <see cref="T:System.Drawing.Point" />
 
         
 
-         encapsulate GDI+ primitives. The <see
-         cref="T:System.Drawing.Pen" />
+         encapsulate GDI+ primitives. The <see cref="T:System.Drawing.Pen" />
 
         
 
-         class is used to draw lines and curves, while classes derived from the abstract class <see
-         cref="T:System.Drawing.Brush" />
+         class is used to draw lines and curves, while classes derived from the abstract class <see cref="T:System.Drawing.Brush" />
 
         
 
@@ -59,8 +50,7 @@
       >
       <block subset="none" type="note">
         <para
-          >Classes within the <see
-           cref="N:System.Drawing" />
+          >Classes within the <see cref="N:System.Drawing" />
 
           
 

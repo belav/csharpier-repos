@@ -22,13 +22,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can specify a default cache policy for your application by using the <see
-         cref="P:System.Net.HttpWebRequest.DefaultCachePolicy" />
+        >You can specify a default cache policy for your application by using the <see cref="P:System.Net.HttpWebRequest.DefaultCachePolicy" />
 
         
 
-         property or the application or machine configuration files. For more information, see <format
-         type="text/html">
+         property or the application or machine configuration files. For more information, see <format type="text/html">
           <a href="9962a2fe-cbda-41a6-9377-571811eaea84"
             >RequestCaching Element (Network Settings)</a
           >
@@ -39,8 +37,7 @@
         .</para
       >
       <para
-        >You can specify the cache policy for an individual request by using the <see
-         cref="P:System.Net.WebRequest.CachePolicy" />
+        >You can specify the cache policy for an individual request by using the <see cref="P:System.Net.WebRequest.CachePolicy" />
 
         
 
@@ -51,8 +48,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines an application's caching requirements for resources obtained by using <see
-         cref="T:System.Net.HttpWebRequest" />
+        >Defines an application's caching requirements for resources obtained by using <see cref="T:System.Net.HttpWebRequest" />
 
         
 
@@ -78,13 +74,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Net.Cache.HttpRequestCachePolicy.Level" />
+            >This constructor initializes the <see cref="P:System.Net.Cache.HttpRequestCachePolicy.Level" />
 
             
 
-             property to <see
-             cref="F:System.Net.Cache.HttpRequestCacheLevel.Default" />
+             property to <see cref="F:System.Net.Cache.HttpRequestCacheLevel.Default" />
 
             
 
@@ -94,8 +88,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Cache.HttpRequestCachePolicy" />
+            >Initializes a new instance of the <see cref="T:System.Net.Cache.HttpRequestCachePolicy" />
 
             
 
@@ -127,23 +120,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The cache synchronization date allows you to specify an absolute date when cached contents must be revalidated. If the cache entry was last revalidated prior to the cache synchronization date, revalidation with the server occurs. If the cache entry was revalidated after the cache synchronization date and there are no server revalidation requirements that make the cached entry invalid, the entry from the cache is used. If the cache synchronization date is set to a future date, the entry is revalidated every time it is requested, until the cache synchronization date passes.</para>
           <para
-            >This constructor initializes the <see
-             cref="P:System.Net.Cache.HttpRequestCachePolicy.Level" />
+            >This constructor initializes the <see cref="P:System.Net.Cache.HttpRequestCachePolicy.Level" />
 
             
 
-             property to <see
-             cref="F:System.Net.Cache.HttpRequestCacheLevel.Default" />
+             property to <see cref="F:System.Net.Cache.HttpRequestCacheLevel.Default" />
 
             
 
-            . The <see
-             cref="P:System.Net.Cache.HttpRequestCachePolicy.CacheSyncDate" />
+            . The <see cref="P:System.Net.Cache.HttpRequestCachePolicy.CacheSyncDate" />
 
             
 
-             property is initialized to <paramref
-             name="cacheSyncDate" />
+             property is initialized to <paramref name="cacheSyncDate" />
 
             
 
@@ -153,8 +142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Cache.HttpRequestCachePolicy" />
+            >Initializes a new instance of the <see cref="T:System.Net.Cache.HttpRequestCachePolicy" />
 
             
 
@@ -162,12 +150,15 @@
           >
         </summary>
         <param name="cacheSyncDate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.DateTime" />
+          A <see cref="T:System.DateTime" />
 
           
 
@@ -197,26 +188,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Net.Cache.HttpRequestCachePolicy.Level" />
+            >This constructor initializes the <see cref="P:System.Net.Cache.HttpRequestCachePolicy.Level" />
 
             
 
-             property to <paramref
-             name="level" />
+             property to <paramref name="level" />
 
             
 
             . </para
           >
           <para
-            >The <see
-             cref="T:System.Net.Cache.HttpRequestCacheLevel" />
+            >The <see cref="T:System.Net.Cache.HttpRequestCacheLevel" />
 
             
 
-             value controls whether caching is enabled, and when the cache can be used. For additional information, see the <see
-             cref="T:System.Net.Cache.HttpRequestCacheLevel" />
+             value controls whether caching is enabled, and when the cache can be used. For additional information, see the <see cref="T:System.Net.Cache.HttpRequestCacheLevel" />
 
             
 
@@ -226,8 +213,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Cache.HttpRequestCachePolicy" />
+            >Initializes a new instance of the <see cref="T:System.Net.Cache.HttpRequestCachePolicy" />
 
             
 
@@ -235,12 +221,15 @@
           >
         </summary>
         <param name="level">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Net.Cache.HttpRequestCacheLevel" />
+          An <see cref="T:System.Net.Cache.HttpRequestCacheLevel" />
 
           
 
@@ -271,41 +260,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="cacheAgeControl" />
+            >The <paramref name="cacheAgeControl" />
 
             
 
-             value defines the meaning of the <paramref
-             name="ageOrFreshOrStale" />
+             value defines the meaning of the <paramref name="ageOrFreshOrStale" />
 
             
 
-             parameter value and is used to set the associated property. For example, when you specify <see
-             cref="F:System.Net.Cache.HttpCacheAgeControl.MaxStale" />
+             parameter value and is used to set the associated property. For example, when you specify <see cref="F:System.Net.Cache.HttpCacheAgeControl.MaxStale" />
 
             
 
-            , the <see
-             cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxStale" />
+            , the <see cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxStale" />
 
             
 
-             property is set to the value of the <paramref
-             name="ageOrFreshOrStale" />
+             property is set to the value of the <paramref name="ageOrFreshOrStale" />
 
             
 
              parameter.</para
           >
           <para
-            >This constructor initializes the <see
-             cref="P:System.Net.Cache.HttpRequestCachePolicy.Level" />
+            >This constructor initializes the <see cref="P:System.Net.Cache.HttpRequestCachePolicy.Level" />
 
             
 
-             property to <see
-             cref="F:System.Net.Cache.HttpRequestCacheLevel.Default" />
+             property to <see cref="F:System.Net.Cache.HttpRequestCacheLevel.Default" />
 
             
 
@@ -315,8 +297,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Cache.HttpRequestCachePolicy" />
+            >Initializes a new instance of the <see cref="T:System.Net.Cache.HttpRequestCachePolicy" />
 
             
 
@@ -324,39 +305,42 @@
           >
         </summary>
         <param name="cacheAgeControl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the following <see
-           cref="T:System.Net.Cache.HttpCacheAgeControl" />
+          One of the following <see cref="T:System.Net.Cache.HttpCacheAgeControl" />
 
           
 
-           enumeration values: <see
-           cref="F:System.Net.Cache.HttpCacheAgeControl.MaxAge" />
+           enumeration values: <see cref="F:System.Net.Cache.HttpCacheAgeControl.MaxAge" />
 
           
 
-          , <see
-           cref="F:System.Net.Cache.HttpCacheAgeControl.MaxStale" />
+          , <see cref="F:System.Net.Cache.HttpCacheAgeControl.MaxStale" />
 
           
 
-          , or <see
-           cref="F:System.Net.Cache.HttpCacheAgeControl.MinFresh" />
+          , or <see cref="F:System.Net.Cache.HttpCacheAgeControl.MinFresh" />
 
           
 
           .</param
         >
         <param name="ageOrFreshOrStale">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.TimeSpan" />
+          A <see cref="T:System.TimeSpan" />
 
           
 
@@ -388,84 +372,69 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="cacheAgeControl" />
+            >The <paramref name="cacheAgeControl" />
 
             
 
-             value is used to interpret the meaning of the <paramref
-             name="freshOrStale" />
+             value is used to interpret the meaning of the <paramref name="freshOrStale" />
 
             
 
-             parameter value and set the associated property. For example, when you specify <see
-             cref="F:System.Net.Cache.HttpCacheAgeControl.MaxStale" />
+             parameter value and set the associated property. For example, when you specify <see cref="F:System.Net.Cache.HttpCacheAgeControl.MaxStale" />
 
             
 
-            , the <see
-             cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxStale" />
+            , the <see cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxStale" />
 
             
 
-             property is set to the value of the <paramref
-             name="freshOrStale" />
+             property is set to the value of the <paramref name="freshOrStale" />
 
             
 
-             parameter. When you specify <see
-             cref="F:System.Net.Cache.HttpCacheAgeControl.MaxAgeAndMaxStale" />
+             parameter. When you specify <see cref="F:System.Net.Cache.HttpCacheAgeControl.MaxAgeAndMaxStale" />
 
             
 
-            , the <see
-             cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxAge" />
+            , the <see cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxAge" />
 
             
 
-             property is set using the value of the <paramref
-             name="maxAge" />
+             property is set using the value of the <paramref name="maxAge" />
 
             
 
-             parameter and the <see
-             cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxStale" />
+             parameter and the <see cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxStale" />
 
             
 
-             property is set using the value of the <paramref
-             name="freshOrStale" />
+             property is set using the value of the <paramref name="freshOrStale" />
 
             
 
              parameter.</para
           >
           <para
-            >Note that unless you specify <see
-             cref="F:System.Net.Cache.HttpCacheAgeControl.MaxAgeAndMaxStale" />
+            >Note that unless you specify <see cref="F:System.Net.Cache.HttpCacheAgeControl.MaxAgeAndMaxStale" />
 
             
 
-             or <see
-             cref="F:System.Net.Cache.HttpCacheAgeControl.MaxAgeAndMinFresh" />
+             or <see cref="F:System.Net.Cache.HttpCacheAgeControl.MaxAgeAndMinFresh" />
 
             
 
-            , the <see
-             cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxAge" />
+            , the <see cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxAge" />
 
             
 
              property is not set.</para
           >
           <para
-            >This constructor initializes the <see
-             cref="P:System.Net.Cache.HttpRequestCachePolicy.Level" />
+            >This constructor initializes the <see cref="P:System.Net.Cache.HttpRequestCachePolicy.Level" />
 
             
 
-             property to <see
-             cref="F:System.Net.Cache.HttpRequestCacheLevel.Default" />
+             property to <see cref="F:System.Net.Cache.HttpRequestCacheLevel.Default" />
 
             
 
@@ -475,8 +444,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Cache.HttpRequestCachePolicy" />
+            >Initializes a new instance of the <see cref="T:System.Net.Cache.HttpRequestCachePolicy" />
 
             
 
@@ -484,36 +452,45 @@
           >
         </summary>
         <param name="cacheAgeControl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Net.Cache.HttpCacheAgeControl" />
+          An <see cref="T:System.Net.Cache.HttpCacheAgeControl" />
 
           
 
            value. </param
         >
         <param name="maxAge">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.TimeSpan" />
+          A <see cref="T:System.TimeSpan" />
 
           
 
            value that specifies the maximum age for resources.</param
         >
         <param name="freshOrStale">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.TimeSpan" />
+          A <see cref="T:System.TimeSpan" />
 
           
 
@@ -546,94 +523,77 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="cacheAgeControl" />
+            >The <paramref name="cacheAgeControl" />
 
             
 
-             value is used to interpret the meaning of the <paramref
-             name="freshOrStale" />
+             value is used to interpret the meaning of the <paramref name="freshOrStale" />
 
             
 
-             parameter value and set the associated property. For example, when you specify <see
-             cref="F:System.Net.Cache.HttpCacheAgeControl.MaxStale" />
+             parameter value and set the associated property. For example, when you specify <see cref="F:System.Net.Cache.HttpCacheAgeControl.MaxStale" />
 
             
 
-            , the <see
-             cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxStale" />
+            , the <see cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxStale" />
 
             
 
-             property is set to the value of the <paramref
-             name="freshOrStale" />
+             property is set to the value of the <paramref name="freshOrStale" />
 
             
 
-             parameter. When you specify <see
-             cref="F:System.Net.Cache.HttpCacheAgeControl.MaxAgeAndMaxStale" />
+             parameter. When you specify <see cref="F:System.Net.Cache.HttpCacheAgeControl.MaxAgeAndMaxStale" />
 
             
 
-            , the <see
-             cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxAge" />
+            , the <see cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxAge" />
 
             
 
-             property is set using the value of the <paramref
-             name="maxAge" />
+             property is set using the value of the <paramref name="maxAge" />
 
             
 
-             parameter and the <see
-             cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxStale" />
+             parameter and the <see cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxStale" />
 
             
 
-             property is set using the value of the <paramref
-             name="freshOrStale" />
+             property is set using the value of the <paramref name="freshOrStale" />
 
             
 
              parameter.</para
           >
           <para
-            >Note that unless you specify <see
-             cref="F:System.Net.Cache.HttpCacheAgeControl.MaxAgeAndMaxStale" />
+            >Note that unless you specify <see cref="F:System.Net.Cache.HttpCacheAgeControl.MaxAgeAndMaxStale" />
 
             
 
-             or <see
-             cref="F:System.Net.Cache.HttpCacheAgeControl.MaxAgeAndMinFresh" />
+             or <see cref="F:System.Net.Cache.HttpCacheAgeControl.MaxAgeAndMinFresh" />
 
             
 
-            , the <see
-             cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxAge" />
+            , the <see cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxAge" />
 
             
 
              property is not set.</para
           >
           <para
-            >This constructor initializes the <see
-             cref="P:System.Net.Cache.HttpRequestCachePolicy.CacheSyncDate" />
+            >This constructor initializes the <see cref="P:System.Net.Cache.HttpRequestCachePolicy.CacheSyncDate" />
 
             
 
-             property to <paramref
-             name="cacheSyncDate" />
+             property to <paramref name="cacheSyncDate" />
 
             
 
-            , and initializes the <see
-             cref="P:System.Net.Cache.HttpRequestCachePolicy.Level" />
+            , and initializes the <see cref="P:System.Net.Cache.HttpRequestCachePolicy.Level" />
 
             
 
-             property to <see
-             cref="F:System.Net.Cache.HttpRequestCacheLevel.Default" />
+             property to <see cref="F:System.Net.Cache.HttpRequestCacheLevel.Default" />
 
             
 
@@ -643,8 +603,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Cache.HttpRequestCachePolicy" />
+            >Initializes a new instance of the <see cref="T:System.Net.Cache.HttpRequestCachePolicy" />
 
             
 
@@ -652,48 +611,60 @@
           >
         </summary>
         <param name="cacheAgeControl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Net.Cache.HttpCacheAgeControl" />
+          An <see cref="T:System.Net.Cache.HttpCacheAgeControl" />
 
           
 
            value. </param
         >
         <param name="maxAge">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.TimeSpan" />
+          A <see cref="T:System.TimeSpan" />
 
           
 
            value that specifies the maximum age for resources.</param
         >
         <param name="freshOrStale">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.TimeSpan" />
+          A <see cref="T:System.TimeSpan" />
 
           
 
            value that specifies an amount of time. See the Remarks section for more information.  </param
         >
         <param name="cacheSyncDate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.DateTime" />
+          A <see cref="T:System.DateTime" />
 
           
 
@@ -751,23 +722,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applications typically use <see
-             cref="F:System.Net.Cache.HttpRequestCacheLevel.Default" />
+            >Applications typically use <see cref="F:System.Net.Cache.HttpRequestCacheLevel.Default" />
 
             
 
-             as their cache policy level. The <see
-             cref="P:System.Net.WebRequest.CachePolicy" />
+             as their cache policy level. The <see cref="P:System.Net.WebRequest.CachePolicy" />
 
             
 
-             property, if not null, determines the cache policy in effect for a request. The default policy for the application domain can be set using the <see
-             cref="P:System.Net.HttpWebRequest.DefaultCachePolicy" />
+             property, if not null, determines the cache policy in effect for a request. The default policy for the application domain can be set using the <see cref="P:System.Net.HttpWebRequest.DefaultCachePolicy" />
 
             
 
-             property or by settings in the machine or application configuration files. For more information, see <format
-             type="text/html">
+             property or by settings in the machine or application configuration files. For more information, see <format type="text/html">
               <a href="9962a2fe-cbda-41a6-9377-571811eaea84"
                 >RequestCaching Element (Network Settings)</a
               >
@@ -781,8 +748,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Net.Cache.HttpRequestCacheLevel" />
+            >Gets the <see cref="T:System.Net.Cache.HttpRequestCacheLevel" />
 
             
 
@@ -905,8 +871,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 

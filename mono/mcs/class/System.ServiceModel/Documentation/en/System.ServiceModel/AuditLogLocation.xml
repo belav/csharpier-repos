@@ -17,31 +17,26 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>When creating a indigo1 application that requires authentication and/or authorization of callers, you can specify that events related to security be recorded for either success, failure, or both. The location of the log is determined by this enumeration.</para>
       <para
-        >The level of the audit log is specified by setting the <see
-         cref="P:System.ServiceModel.Description.ServiceSecurityAuditBehavior.MessageAuthenticationAuditLevel" />
+        >The level of the audit log is specified by setting the <see cref="P:System.ServiceModel.Description.ServiceSecurityAuditBehavior.MessageAuthenticationAuditLevel" />
 
         
 
-         or the <see
-         cref="P:System.ServiceModel.Description.ServiceSecurityAuditBehavior.ServiceAuthorizationAuditLevel" />
+         or the <see cref="P:System.ServiceModel.Description.ServiceSecurityAuditBehavior.ServiceAuthorizationAuditLevel" />
 
         
 
-         property of the <see
-         cref="T:System.ServiceModel.Description.ServiceSecurityAuditBehavior" />
+         property of the <see cref="T:System.ServiceModel.Description.ServiceSecurityAuditBehavior" />
 
         
 
-         class to one of the <see
-         cref="T:System.ServiceModel.AuditLevel" />
+         class to one of the <see cref="T:System.ServiceModel.AuditLevel" />
 
         
 
          values. </para
       >
       <para
-        >You can also specify audit behavior using the <format
-         type="text/html">
+        >You can also specify audit behavior using the <format type="text/html">
           <a href="ba517369-a034-4f8e-a2c4-66517716062b">serviceSecurityAudit element</a>
         </format>
 
@@ -51,23 +46,19 @@
       >
       <block subset="none" type="note">
         <para
-          >If the <see
-           cref="P:System.ServiceModel.Description.ServiceSecurityAuditBehavior.AuditLogLocation" />
+          >If the <see cref="P:System.ServiceModel.Description.ServiceSecurityAuditBehavior.AuditLogLocation" />
 
           
 
-           property is set to <see
-           cref="F:System.ServiceModel.AuditLogLocation.Security" />
+           property is set to <see cref="F:System.ServiceModel.AuditLogLocation.Security" />
 
           
 
-           and <paramref
-           name="Audit Object Access" />
+           and <paramref name="Audit Object Access" />
 
           
 
-           is not set in the <paramref
-           name="Local Security Policy" />
+           is not set in the <paramref name="Local Security Policy" />
 
           
 
@@ -78,13 +69,11 @@
         <h2>Default Dependent on Operating System</h2>
       </format>
       <para
-        >When setting the property to the <see
-         cref="F:System.ServiceModel.AuditLogLocation.Default" />
+        >When setting the property to the <see cref="F:System.ServiceModel.AuditLogLocation.Default" />
 
         
 
-         value, the operating system determines which log will actually be written to. For more information, see <format
-         type="text/html">
+         value, the operating system determines which log will actually be written to. For more information, see <format type="text/html">
           <a href="5633f61c-a3c9-40dd-8070-1c373b66a716">Auditing Security Events</a>
         </format>
 

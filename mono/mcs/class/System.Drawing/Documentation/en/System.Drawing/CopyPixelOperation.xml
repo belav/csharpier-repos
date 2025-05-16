@@ -18,18 +18,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Drawing.CopyPixelOperation" />
+        >The <see cref="T:System.Drawing.CopyPixelOperation" />
 
         
 
-         enumeration is used by the <see
-         cref="Overload:System.Drawing.Graphics.CopyFromScreen" />
+         enumeration is used by the <see cref="Overload:System.Drawing.Graphics.CopyFromScreen" />
 
         
 
-         method of the <see
-         cref="T:System.Drawing.Graphics" />
+         method of the <see cref="T:System.Drawing.Graphics" />
 
         
 

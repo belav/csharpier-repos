@@ -21,18 +21,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A SOAP binding is similar to an interface for XML Web services. It is useful for versioning and when you look for a XML Web service implementing a specific SOAP binding. For instance, a discovery document might contain optional information about SOAP bindings, which specify the SOAP bindings implemented by referenced Web Servcies. SOAP bindings are specified within the XML document containd within a discovery document by adding a SOAP XML element with an XML namespace equal to the <see
-         cref="F:System.Web.Services.Discovery.SoapBinding.Namespace" />
+        >A SOAP binding is similar to an interface for XML Web services. It is useful for versioning and when you look for a XML Web service implementing a specific SOAP binding. For instance, a discovery document might contain optional information about SOAP bindings, which specify the SOAP bindings implemented by referenced Web Servcies. SOAP bindings are specified within the XML document containd within a discovery document by adding a SOAP XML element with an XML namespace equal to the <see cref="F:System.Web.Services.Discovery.SoapBinding.Namespace" />
 
         
 
-         constant. The <see
-         cref="P:System.Web.Services.Discovery.SoapBinding.Address" />
+         constant. The <see cref="P:System.Web.Services.Discovery.SoapBinding.Address" />
 
         
 
-         property specifies the URL of the XML Web service and the <see
-         cref="P:System.Web.Services.Discovery.SoapBinding.Binding" />
+         property specifies the URL of the XML Web service and the <see cref="P:System.Web.Services.Discovery.SoapBinding.Binding" />
 
         
 
@@ -55,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Discovery.SoapBinding" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.SoapBinding" />
 
             
 
@@ -105,10 +101,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Xml.XmlQualifiedName" />
-        </value>
+        <value>a <see cref="T:System.Xml.XmlQualifiedName" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -136,8 +129,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >SOAP bindings within a discovery document reside within a SOAP XML element, which is a member of the XML namespace specifed by the <see
-             cref="F:System.Web.Services.Discovery.SoapBinding.Namespace" />
+            >SOAP bindings within a discovery document reside within a SOAP XML element, which is a member of the XML namespace specifed by the <see cref="F:System.Web.Services.Discovery.SoapBinding.Namespace" />
 
             
 

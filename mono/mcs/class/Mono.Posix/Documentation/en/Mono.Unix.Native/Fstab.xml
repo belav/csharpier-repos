@@ -28,8 +28,7 @@
   <Docs>
     <summary>File system descriptor file entry.</summary>
     <remarks
-      >This class contains the broken-out fields of a line in the file system description file <c
-      >/etc/fstab</c>
+      >This class contains the broken-out fields of a line in the file system description file <c>/etc/fstab</c>
 
       
 

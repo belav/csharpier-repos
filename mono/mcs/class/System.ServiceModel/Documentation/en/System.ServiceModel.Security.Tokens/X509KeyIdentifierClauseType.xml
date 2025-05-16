@@ -44,8 +44,7 @@
 
             
 
-             is used if present in the X.509 certificate, otherwise <see
-             cref="F:System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType.IssuerSerial" />
+             is used if present in the X.509 certificate, otherwise <see cref="F:System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType.IssuerSerial" />
 
             
 

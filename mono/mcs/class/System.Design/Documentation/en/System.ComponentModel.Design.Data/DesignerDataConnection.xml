@@ -16,23 +16,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
+        >The <see cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
 
         
 
-         object represents a connection to a data store in the design tool. Typically a <see
-         cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
+         object represents a connection to a data store in the design tool. Typically a <see cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
 
         
 
-         object is returned as part of the <see
-         cref="P:System.ComponentModel.Design.Data.IDataEnvironment.Connections" />
+         object is returned as part of the <see cref="P:System.ComponentModel.Design.Data.IDataEnvironment.Connections" />
 
         
 
-         property, and is created either by reading the application's configuration file or by calling the <see
-         cref="M:System.ComponentModel.Design.Data.IDataEnvironment.BuildConnection(System.Windows.Forms.IWin32Window,System.ComponentModel.Design.Data.DesignerDataConnection)" />
+         property, and is created either by reading the application's configuration file or by calling the <see cref="M:System.ComponentModel.Design.Data.IDataEnvironment.BuildConnection(System.Windows.Forms.IWin32Window,System.ComponentModel.Design.Data.DesignerDataConnection)" />
 
         
 
@@ -63,13 +59,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create <see
-             cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
+            >Use this constructor to create <see cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
 
             
 
-             objects that are not created from the application's configuration file. When you use this constructor, the <see
-             cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.IsConfigured" />
+             objects that are not created from the application's configuration file. When you use this constructor, the <see cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.IsConfigured" />
 
             
 
@@ -79,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
 
             
 
@@ -88,21 +81,33 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name associated with this connection.</param
         >
         <param name="providerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the provider object used to access the underlying data store</param
         >
         <param name="connectionString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -129,23 +134,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor when you need to specify the value of the <see
-             cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.IsConfigured" />
+            >Use this constructor when you need to specify the value of the <see cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.IsConfigured" />
 
             
 
-             property, such as when you are creating a <see
-             cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
+             property, such as when you are creating a <see cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
 
             
 
-             object from information stored in the application's configuration file. The <see
-             cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.IsConfigured" />
+             object from information stored in the application's configuration file. The <see cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.IsConfigured" />
 
             
 
-             property is set to the value of the <paramref
-             name="isConfigured" />
+             property is set to the value of the <paramref name="isConfigured" />
 
             
 
@@ -155,8 +156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
 
             
 
@@ -164,28 +164,44 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name associated with this connection.</param
         >
         <param name="providerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the provider object used to access the underlying data store.</param
         >
         <param name="connectionString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string that specifies how to connect to the data store.</param
         >
         <param name="isConfigured">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -207,13 +223,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.ConnectionString" />
+            >The <see cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.ConnectionString" />
 
             
 
-             property contains the connection string used by the application for connecting to the data store. You must use the <see
-             cref="M:System.ComponentModel.Design.Data.IDataEnvironment.GetDesignTimeConnection(System.ComponentModel.Design.Data.DesignerDataConnection)" />
+             property contains the connection string used by the application for connecting to the data store. You must use the <see cref="M:System.ComponentModel.Design.Data.IDataEnvironment.GetDesignTimeConnection(System.ComponentModel.Design.Data.DesignerDataConnection)" />
 
             
 
@@ -240,41 +254,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.IsConfigured" />
+            >The <see cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.IsConfigured" />
 
             
 
-             property will be true if the <see
-             cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
+             property will be true if the <see cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
 
             
 
-             object was read from the application's configuration file, or if the <see
-             cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
+             object was read from the application's configuration file, or if the <see cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
 
             
 
-             object was written to the application's configuration file by the <see
-             cref="M:System.ComponentModel.Design.Data.IDataEnvironment.ConfigureConnection(System.Windows.Forms.IWin32Window,System.ComponentModel.Design.Data.DesignerDataConnection,System.String)" />
+             object was written to the application's configuration file by the <see cref="M:System.ComponentModel.Design.Data.IDataEnvironment.ConfigureConnection(System.Windows.Forms.IWin32Window,System.ComponentModel.Design.Data.DesignerDataConnection,System.String)" />
 
             
 
              method.</para
           >
           <para
-            >When the <see
-             cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.IsConfigured" />
+            >When the <see cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.IsConfigured" />
 
             
 
-             is true, the <see
-             cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.Name" />
+             is true, the <see cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.Name" />
 
             
 
-             property is set to the name of the connection as defined in the <format
-             type="text/html">
+             property is set to the name of the connection as defined in the <format type="text/html">
               <a href="b6ffbb2e-a4d1-410e-8f7e-9755e92c65de"
                 >connectionStrings Element (ASP.NET Settings Schema)</a
               >
@@ -305,30 +312,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.Name" />
+            >The <see cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.Name" />
 
             
 
-             property contains the name that identifies a specific connection in an application configuration file or a list of data connections. When the <see
-             cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.IsConfigured" />
+             property contains the name that identifies a specific connection in an application configuration file or a list of data connections. When the <see cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.IsConfigured" />
 
             
 
-             property is true,  <see
-             cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.Name" />
+             property is true,  <see cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.Name" />
 
             
 
-             property is used as the name attribute in the <format
-             type="text/html">
+             property is used as the name attribute in the <format type="text/html">
               <a href="b6ffbb2e-a4d1-410e-8f7e-9755e92c65de">connectionStrings</a>
             </format>
 
             
 
-             configuration element, or is returned from the <see
-             cref="M:System.ComponentModel.Design.Data.IDataEnvironment.ConfigureConnection(System.Windows.Forms.IWin32Window,System.ComponentModel.Design.Data.DesignerDataConnection,System.String)" />
+             configuration element, or is returned from the <see cref="M:System.ComponentModel.Design.Data.IDataEnvironment.ConfigureConnection(System.Windows.Forms.IWin32Window,System.ComponentModel.Design.Data.DesignerDataConnection,System.String)" />
 
             
 

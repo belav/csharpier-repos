@@ -4,13 +4,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Xml.Serialization.Configuration" />
+        >The <see cref="N:System.Xml.Serialization.Configuration" />
 
         
 
-         namespace contains classes used to read the values found in application configuration files under the <format
-         type="text/html">
+         namespace contains classes used to read the values found in application configuration files under the <format type="text/html">
           <a href="3ce45919-388a-418c-8968-6df0372c73ec">system.xml.serialization</a>
         </format>
 
@@ -22,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The classes in this namespace are used by the serialization infrastructure to handle the configuration elements and cannot be used directly. For more information about configuration files, see <format
-         type="text/html">
+        >The classes in this namespace are used by the serialization infrastructure to handle the configuration elements and cannot be used directly. For more information about configuration files, see <format type="text/html">
           <a href="69003d39-dc8a-460c-a6be-e6d93e690b38"
             >Configuration File Schema for the .NET Framework</a
           >
@@ -34,13 +31,11 @@
         .</para
       >
       <para
-        >Instead, to configure the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >Instead, to configure the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         or <see
-         cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+         or <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
         
 

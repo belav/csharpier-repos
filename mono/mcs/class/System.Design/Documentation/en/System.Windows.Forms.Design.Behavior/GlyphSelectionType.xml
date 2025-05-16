@@ -13,8 +13,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Describes the designer selection state of a <see
-         cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+        >Describes the designer selection state of a <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
         
 
@@ -36,8 +35,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+            >The <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
@@ -59,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+            >The <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
@@ -82,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+            >The <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 

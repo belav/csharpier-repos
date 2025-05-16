@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Expands upon the <see
-         cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+        >Expands upon the <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
         
 
@@ -44,8 +43,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Expands upon the <see
-             cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+            >Expands upon the <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
             
 
@@ -55,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Design.TypedDataSetSchemaImporterExtension" />
+            >Initializes a new instance of the <see cref="T:System.Data.Design.TypedDataSetSchemaImporterExtension" />
 
             
 
@@ -114,7 +111,7 @@
           <block subset="none" type="note">
             <para
               >Calling this method with untrusted data is a security risk. Call this method only with trusted data. For more information, see <see
-               cref="http://go.microsoft.com/fwlink/?LinkId=330378"
+                cref="http://go.microsoft.com/fwlink/?LinkId=330378"
                 >Untrusted Data Security Risks</see
               >
 
@@ -124,8 +121,7 @@
             >
           </block>
           <para
-            >Expands upon the <see
-             cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+            >Expands upon the <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
             
 
@@ -139,8 +135,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.String" />
+            >Returns a <see cref="T:System.String" />
 
             
 
@@ -148,86 +143,112 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           XMLSchemaType</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchemaObject" />
+          An <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
           
 
            that represents the root class for the Xml schema object model hierarchy and serves as a base class for classes such as the XmlSchema class.</param
         >
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchema" />
+          An <see cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
            class that represents a collection of XML schemas.</param
         >
         <param name="importer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The base <see
-           cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+          The base <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
           
 
            that generates internal mappings to .NET Framework types for XML schema element declarations, including literal XSD message parts in a WSDL document.</param
         >
         <param name="compileUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeCompileUnit" />
+          The <see cref="T:System.CodeDom.CodeCompileUnit" />
 
           
 
            to contain the generated code.</param
         >
         <param name="mainNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           CodeNamespace</param
         >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+          The <see cref="T:System.Xml.Serialization.CodeGenerationOptions" />
 
           
 
            that specifies various options to use when generating .NET Framework types for use with an XML Web service.</param
         >
         <param name="codeProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The language specific <see
-           cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+          The language specific <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
           
 
@@ -264,7 +285,7 @@
           <block subset="none" type="note">
             <para
               >Calling this method with untrusted data is a security risk. Call this method only with trusted data. For more information, see <see
-               cref="http://go.microsoft.com/fwlink/?LinkId=330378"
+                cref="http://go.microsoft.com/fwlink/?LinkId=330378"
                 >Untrusted Data Security Risks</see
               >
 
@@ -274,8 +295,7 @@
             >
           </block>
           <para
-            >Expands upon the <see
-             cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+            >Expands upon the <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
             
 
@@ -289,8 +309,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.String" />
+            >Returns a <see cref="T:System.String" />
 
             
 
@@ -298,108 +317,135 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            representing the name of the schema to import.</param
         >
         <param name="namespaceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            representing the namespace of the XML schema.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchemaObject" />
+          An <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
           
 
            that represents the root class for the XML schema object model hierarchy and serves as a base class for classes such as the XmlSchema class.</param
         >
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchema" />
+          An <see cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
            class that represents a collection of XML schemas.</param
         >
         <param name="importer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The base <see
-           cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+          The base <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
           
 
            that generates internal mappings to .NET Framework types for XML schema element declarations, including literal XSD message parts in a WSDL document.</param
         >
         <param name="compileUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeCompileUnit" />
+          The <see cref="T:System.CodeDom.CodeCompileUnit" />
 
           
 
            to contain the generated code.</param
         >
         <param name="mainNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeNamespace" />
+          The <see cref="T:System.CodeDom.CodeNamespace" />
 
           
 
            that contains the generated dataset.</param
         >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+          The <see cref="T:System.Xml.Serialization.CodeGenerationOptions" />
 
           
 
            that specifies various options to use when generating .NET Framework types for use with an XML Web service.</param
         >
         <param name="codeProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The language specific <see
-           cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+          The language specific <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
           
 

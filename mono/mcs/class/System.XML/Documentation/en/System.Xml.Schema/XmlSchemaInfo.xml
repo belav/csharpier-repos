@@ -48,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Schema.XmlSchemaInfo" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaInfo" />
 
             
 
@@ -82,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Xml.Schema.XmlSchemaContentType" />
+            >Gets or sets the <see cref="T:System.Xml.Schema.XmlSchemaContentType" />
 
             
 
@@ -109,8 +107,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Schema.XmlSchemaInfo.IsDefault" />
+            >The <see cref="P:System.Xml.Schema.XmlSchemaInfo.IsDefault" />
 
             
 
@@ -170,13 +167,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Schema.XmlSchemaInfo.MemberType" />
+            >The <see cref="P:System.Xml.Schema.XmlSchemaInfo.MemberType" />
 
             
 
-             property is set only if the static type of the XML node is a union type in which case the <see
-             cref="P:System.Xml.Schema.XmlSchemaInfo.MemberType" />
+             property is set only if the static type of the XML node is a union type in which case the <see cref="P:System.Xml.Schema.XmlSchemaInfo.MemberType" />
 
             
 
@@ -213,8 +208,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the compiled <see
-             cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+            >Gets or sets the compiled <see cref="T:System.Xml.Schema.XmlSchemaAttribute" />
 
             
 
@@ -247,8 +241,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the compiled <see
-             cref="T:System.Xml.Schema.XmlSchemaElement" />
+            >Gets or sets the compiled <see cref="T:System.Xml.Schema.XmlSchemaElement" />
 
             
 
@@ -310,23 +303,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The possible <see
-             cref="T:System.Xml.Schema.XmlSchemaValidity" />
+            >The possible <see cref="T:System.Xml.Schema.XmlSchemaValidity" />
 
             
 
-             values for this XML node are <see
-             cref="F:System.Xml.Schema.XmlSchemaValidity.Valid" />
+             values for this XML node are <see cref="F:System.Xml.Schema.XmlSchemaValidity.Valid" />
 
             
 
-            , <see
-             cref="F:System.Xml.Schema.XmlSchemaValidity.Invalid" />
+            , <see cref="F:System.Xml.Schema.XmlSchemaValidity.Invalid" />
 
             
 
-            , and <see
-             cref="F:System.Xml.Schema.XmlSchemaValidity.NotKnown" />
+            , and <see cref="F:System.Xml.Schema.XmlSchemaValidity.NotKnown" />
 
             
 
@@ -336,8 +325,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Xml.Schema.XmlSchemaValidity" />
+            >Gets or sets the <see cref="T:System.Xml.Schema.XmlSchemaValidity" />
 
             
 

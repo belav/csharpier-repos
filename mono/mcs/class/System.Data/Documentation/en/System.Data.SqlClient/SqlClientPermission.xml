@@ -21,23 +21,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="M:System.Data.Common.DBDataPermission.IsUnrestricted" />
+        >The <see cref="M:System.Data.Common.DBDataPermission.IsUnrestricted" />
 
         
 
-         property takes precedence over the <see
-         cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
+         property takes precedence over the <see cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
 
         
 
-         property. Therefore, if you set <see
-         cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
+         property. Therefore, if you set <see cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
 
         
 
-         to false, you must also set <see
-         cref="M:System.Data.Common.DBDataPermission.IsUnrestricted" />
+         to false, you must also set <see cref="M:System.Data.Common.DBDataPermission.IsUnrestricted" />
 
         
 
@@ -63,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlClient.SqlClientPermission" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlClient.SqlClientPermission" />
 
             
 
@@ -97,8 +92,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlClient.SqlClientPermission" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlClient.SqlClientPermission" />
 
             
 
@@ -106,12 +100,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -138,28 +135,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Permissions.PermissionState" />
+            >The <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
-             enumeration takes precedence over the <see
-             cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
+             enumeration takes precedence over the <see cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
 
             
 
-             property. Therefore, if you set <see
-             cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
+             property. Therefore, if you set <see cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
 
             
 
-             to false, you must also set <see
-             cref="T:System.Security.Permissions.PermissionState" />
+             to false, you must also set <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
-             to None to prevent a user from making a connection using a blank password. For an example demonstrating how to use security demands, see <format
-             type="text/html">
+             to None to prevent a user from making a connection using a blank password. For an example demonstrating how to use security demands, see <format type="text/html">
               <a href="93e099eb-daa1-4f1e-b031-c1e10a996f88">Code Access Security and ADO.NET</a>
             </format>
 
@@ -171,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlClient.SqlClientPermission" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlClient.SqlClientPermission" />
 
             
 
@@ -180,19 +171,26 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
            values. </param
         >
         <param name="allowBlankPassword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -243,8 +241,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a new connection string and a set of restricted keywords to the <see
-             cref="T:System.Data.SqlClient.SqlClientPermission" />
+            >Adds a new connection string and a set of restricted keywords to the <see cref="T:System.Data.SqlClient.SqlClientPermission" />
 
             
 
@@ -252,26 +249,37 @@
           >
         </summary>
         <param name="connectionString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The connection string.</param
         >
         <param name="restrictions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key restrictions.</param
         >
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.KeyRestrictionBehavior" />
+          One of the <see cref="T:System.Data.KeyRestrictionBehavior" />
 
           
 
@@ -295,13 +303,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Data.SqlClient.SqlClientPermission" />
+            >Returns the <see cref="T:System.Data.SqlClient.SqlClientPermission" />
 
             
 
-             as an <see
-             cref="T:System.Security.IPermission" />
+             as an <see cref="T:System.Security.IPermission" />
 
             
 

@@ -18,7 +18,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
         >For more information about each enumeration value of this type, see section 4.4 of expr-tree-spec.doc or expr-tree-spec.pdf on the <see
-         cref="http://go.microsoft.com/fwlink/?LinkId=230775"
+          cref="http://go.microsoft.com/fwlink/?LinkId=230775"
           >Microsoft Dynamic Language Runtime</see
         >
 
@@ -893,8 +893,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An operation that creates a new <see
-             cref="T:System.Collections.IEnumerable" />
+            >An operation that creates a new <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -1335,8 +1334,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A reference to a parameter or variable that is defined in the context of the expression. For more information, see <see
-             cref="T:System.Linq.Expressions.ParameterExpression" />
+            >A reference to a parameter or variable that is defined in the context of the expression. For more information, see <see cref="T:System.Linq.Expressions.ParameterExpression" />
 
             
 
@@ -1484,13 +1482,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An expression that has a constant value of type <see
-             cref="T:System.Linq.Expressions.Expression" />
+            >An expression that has a constant value of type <see cref="T:System.Linq.Expressions.Expression" />
 
             
 
-            . A <see
-             cref="F:System.Linq.Expressions.ExpressionType.Quote" />
+            . A <see cref="F:System.Linq.Expressions.ExpressionType.Quote" />
 
             
 
@@ -1557,8 +1553,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A list of run-time variables. For more information, see <see
-             cref="T:System.Linq.Expressions.RuntimeVariablesExpression" />
+            >A list of run-time variables. For more information, see <see cref="T:System.Linq.Expressions.RuntimeVariablesExpression" />
 
             
 

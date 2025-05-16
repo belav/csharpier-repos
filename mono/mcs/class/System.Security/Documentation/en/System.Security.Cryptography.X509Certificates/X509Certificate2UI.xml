@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the methods of the <see
-         cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2UI" />
+        >Use the methods of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2UI" />
 
         
 
@@ -64,8 +63,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2UI.DisplayCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2)" />
+            >The <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2UI.DisplayCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2)" />
 
             
 
@@ -77,7 +75,11 @@
           <para>Displays a dialog box that contains the properties of an X.509 certificate and its associated certificate chain.</para>
         </summary>
         <param name="certificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -114,8 +116,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2UI.DisplayCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2,System.IntPtr)" />
+            >The <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2UI.DisplayCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2,System.IntPtr)" />
 
             
 
@@ -127,14 +128,22 @@
           <para>Displays a dialog box that contains the properties of an X.509 certificate and its associated certificate chain using a handle to a parent window.</para>
         </summary>
         <param name="certificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The X.509 certificate to display.</param
         >
         <param name="hwndParent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -176,13 +185,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2UI.SelectFromCollection(System.Security.Cryptography.X509Certificates.X509Certificate2Collection,System.String,System.String,System.Security.Cryptography.X509Certificates.X509SelectionFlag)" />
+            >Use the <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2UI.SelectFromCollection(System.Security.Cryptography.X509Certificates.X509Certificate2Collection,System.String,System.String,System.Security.Cryptography.X509Certificates.X509SelectionFlag)" />
 
             
 
-             method if you require users to manually select X.509 certificates using a dialog box. If no user interaction is required, use the <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
+             method if you require users to manually select X.509 certificates using a dialog box. If no user interaction is required, use the <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
 
             
 
@@ -196,8 +203,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -205,33 +211,48 @@
           >
         </returns>
         <param name="certificates">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A collection of X.509 certificates to select from.</param
         >
         <param name="title">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The title of the dialog box.</param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A descriptive message to guide the user.  The message is displayed in the dialog box.</param
         >
         <param name="selectionFlag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509SelectionFlag" />
+          One of the <see cref="T:System.Security.Cryptography.X509Certificates.X509SelectionFlag" />
 
           
 
@@ -274,13 +295,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2UI.SelectFromCollection(System.Security.Cryptography.X509Certificates.X509Certificate2Collection,System.String,System.String,System.Security.Cryptography.X509Certificates.X509SelectionFlag,System.IntPtr)" />
+            >Use the <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2UI.SelectFromCollection(System.Security.Cryptography.X509Certificates.X509Certificate2Collection,System.String,System.String,System.Security.Cryptography.X509Certificates.X509SelectionFlag,System.IntPtr)" />
 
             
 
-             method if you require users to manually select X.509 certificates using a dialog box. If no user interaction is required, use the <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
+             method if you require users to manually select X.509 certificates using a dialog box. If no user interaction is required, use the <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
 
             
 
@@ -294,8 +313,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -303,40 +321,59 @@
           >
         </returns>
         <param name="certificates">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A collection of X.509 certificates to select from.</param
         >
         <param name="title">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The title of the dialog box.</param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A descriptive message to guide the user.  The message is displayed in the dialog box.</param
         >
         <param name="selectionFlag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509SelectionFlag" />
+          One of the <see cref="T:System.Security.Cryptography.X509Certificates.X509SelectionFlag" />
 
           
 
            values that specifies whether single or multiple selections are allowed. </param
         >
         <param name="hwndParent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

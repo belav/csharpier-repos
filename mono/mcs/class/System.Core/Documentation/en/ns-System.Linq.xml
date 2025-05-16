@@ -4,8 +4,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Linq" />
+        >The <see cref="N:System.Linq" />
 
         
 
@@ -15,42 +14,36 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Linq" />
+        >The <see cref="N:System.Linq" />
 
         
 
          namespace is in the System.Core assembly (in System.Core.dll).</para
       >
       <para
-        >The <see
-         cref="T:System.Linq.Enumerable" />
+        >The <see cref="T:System.Linq.Enumerable" />
 
         
 
-         class contains vbteclinq standard query operators that operate on objects that implement <see
-         cref="T:System.Collections.Generic.IEnumerable`1" />
-
-        
-
-        .</para
-      >
-      <para
-        >The <see
-         cref="T:System.Linq.Queryable" />
-
-        
-
-         class contains vbteclinq standard query operators that operate on objects that implement <see
-         cref="T:System.Linq.IQueryable`1" />
+         class contains vbteclinq standard query operators that operate on objects that implement <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
         
 
         .</para
       >
       <para
-        >For information about LINQ to SQL, see <format
-         type="text/html">
+        >The <see cref="T:System.Linq.Queryable" />
+
+        
+
+         class contains vbteclinq standard query operators that operate on objects that implement <see cref="T:System.Linq.IQueryable`1" />
+
+        
+
+        .</para
+      >
+      <para
+        >For information about LINQ to SQL, see <format type="text/html">
           <a href="73d13345-eece-471a-af40-4cc7a2f11655">LINQ to SQL</a>
         </format>
 

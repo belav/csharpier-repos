@@ -8,7 +8,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -30,8 +32,7 @@
       <Parameters />
       <Docs>
         <summary
-          >Initializes a new instance of the <see
-           cref="T:Mono.Security.ASN1" />
+          >Initializes a new instance of the <see cref="T:Mono.Security.ASN1" />
 
           
 
@@ -53,16 +54,14 @@
       </Parameters>
       <Docs>
         <param name="tag"
-          >A <see
-           cref="T:System.Byte" />
+          >A <see cref="T:System.Byte" />
 
           
 
            value indicating an ASN.1 tag ID.</param
         >
         <summary
-          >Initializes a new instance of the <see
-           cref="T:Mono.Security.ASN1" />
+          >Initializes a new instance of the <see cref="T:Mono.Security.ASN1" />
 
           
 
@@ -84,16 +83,14 @@
       </Parameters>
       <Docs>
         <param name="data"
-          >A <see
-           cref="T:System.Byte" />
+          >A <see cref="T:System.Byte" />
 
           
 
            array consisting of the ASN.1 content data.</param
         >
         <summary
-          >Initializes a new instance of the <see
-           cref="T:Mono.Security.ASN1" />
+          >Initializes a new instance of the <see cref="T:Mono.Security.ASN1" />
 
           
 
@@ -116,24 +113,21 @@
       </Parameters>
       <Docs>
         <param name="tag"
-          >A <see
-           cref="T:System.Byte" />
+          >A <see cref="T:System.Byte" />
 
           
 
            value indicating an ASN.1 tag ID.</param
         >
         <param name="data"
-          >A <see
-           cref="T:System.Byte" />
+          >A <see cref="T:System.Byte" />
 
           
 
            array consisting of the ASN.1 content data.</param
         >
         <summary
-          >Initializes a new instance of the <see
-           cref="T:Mono.Security.ASN1" />
+          >Initializes a new instance of the <see cref="T:Mono.Security.ASN1" />
 
           
 
@@ -160,8 +154,7 @@
       </Parameters>
       <Docs>
         <param name="asn1"
-          >The <see
-           cref="T:Mono.Security.ASN1" />
+          >The <see cref="T:Mono.Security.ASN1" />
 
           
 
@@ -169,8 +162,7 @@
         >
         <summary>Adds a ASN.1 data representation instance to the children element list.</summary>
         <returns
-          >A reference to the <see
-           cref="T:Mono.Security.ASN1" />
+          >A reference to the <see cref="T:Mono.Security.ASN1" />
 
           
 
@@ -194,24 +186,21 @@
       </Parameters>
       <Docs>
         <param name="value"
-          >A byte array to compare against the current <see
-           cref="T:Mono.Security.ASN1" />
+          >A byte array to compare against the current <see cref="T:Mono.Security.ASN1" />
 
           
 
            instance's content.</param
         >
         <summary
-          >Determines if the current instance content is the same as the specified <see
-           cref="T:System.Byte" />
+          >Determines if the current instance content is the same as the specified <see cref="T:System.Byte" />
 
           
 
            array.</summary
         >
         <returns
-          >A <see
-           cref="T:System.Boolean" />
+          >A <see cref="T:System.Boolean" />
 
           
 
@@ -233,21 +222,18 @@
       <Parameters />
       <Docs>
         <summary
-          >Gets the number of <see
-           cref="T:Mono.Security.ASN1" />
+          >Gets the number of <see cref="T:Mono.Security.ASN1" />
 
           
 
            children elements contained in the current instance.</summary
         >
         <value
-          >A <see
-           cref="T:System.Int32" />
+          >A <see cref="T:System.Int32" />
 
           
 
-           that specifies the number of <see
-           cref="T:Mono.Security.ASN1" />
+           that specifies the number of <see cref="T:Mono.Security.ASN1" />
 
           
 
@@ -276,22 +262,14 @@
       </Parameters>
       <Docs>
         <param name="asn1">a byte array containing the ASN.1 encoded data to decode.</param>
-        <param name="anPos"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="anLength"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="anPos">a <see cref="T:System.Int32" /></param>
+        <param name="anLength">a <see cref="T:System.Int32" /></param>
         <summary
-          >Populate the current <see
-           cref="T:Mono.Security.ASN1" />
+          >Populate the current <see cref="T:Mono.Security.ASN1" />
 
           
 
-           instance by recursively decoding the specified ASN.1 content <see
-           cref="T:System.Byte" />
+           instance by recursively decoding the specified ASN.1 content <see cref="T:System.Byte" />
 
           
 
@@ -321,34 +299,17 @@
         <Parameter Name="content" Type="System.Byte[]&amp;" RefType="out" />
       </Parameters>
       <Docs>
-        <param name="asn1"
-          >a <see
-           cref="T:System.Byte" />
-        </param>
-        <param name="pos"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="tag"
-          >a <see
-           cref="T:System.Byte" />
-        </param>
-        <param name="length"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="content"
-          >a <see
-           cref="T:System.Byte[]" />
-        </param>
+        <param name="asn1">a <see cref="T:System.Byte" /></param>
+        <param name="pos">a <see cref="T:System.Int32" /></param>
+        <param name="tag">a <see cref="T:System.Byte" /></param>
+        <param name="length">a <see cref="T:System.Int32" /></param>
+        <param name="content">a <see cref="T:System.Byte[]" /></param>
         <summary
-          >Populate the current <see
-           cref="T:Mono.Security.ASN1" />
+          >Populate the current <see cref="T:Mono.Security.ASN1" />
 
           
 
-           instance by recursively decoding the specified ASN.1 content <see
-           cref="T:System.Byte" />
+           instance by recursively decoding the specified ASN.1 content <see cref="T:System.Byte" />
 
           
 
@@ -375,26 +336,16 @@
         <Parameter Name="anTag" Type="System.Byte" />
       </Parameters>
       <Docs>
-        <param name="index"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="anTag"
-          >a <see
-           cref="T:System.Byte" />
-        </param>
+        <param name="index">a <see cref="T:System.Int32" /></param>
+        <param name="anTag">a <see cref="T:System.Byte" /></param>
         <summary
-          >Locates the child <see
-           cref="T:Mono.Security.ASN1" />
+          >Locates the child <see cref="T:Mono.Security.ASN1" />
 
           
 
            instance that matches the specified tag.</summary
         >
-        <returns
-          >a <see
-           cref="T:Mono.Security.ASN1" />
-        </returns>
+        <returns>a <see cref="T:Mono.Security.ASN1" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -412,26 +363,19 @@
         <Parameter Name="asn1" Type="System.Byte[]" />
       </Parameters>
       <Docs>
-        <param name="asn1"
-          >a <see
-           cref="T:System.Byte" />
+        <param name="asn1">a <see cref="T:System.Byte" />
 
           
 
-           array.</param
-        >
+           array.</param>
         <summary
-          >Determines if the current ASN.1 representation content, as well as its children's element's content, is equal to the specified <see
-           cref="T:System.Byte" />
+          >Determines if the current ASN.1 representation content, as well as its children's element's content, is equal to the specified <see cref="T:System.Byte" />
 
           
 
            array.</summary
         >
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>The Equal method differs from the CompareValue method as CompareValue only compares the ASN.1 content; where the Equals method also compares its children's element's content.</remarks>
       </Docs>
       <AssemblyInfo>
@@ -448,25 +392,19 @@
       <Parameters />
       <Docs>
         <summary
-          >Recursively gets the ASN.1 content as a <see
-           cref="T:System.Byte" />
+          >Recursively gets the ASN.1 content as a <see cref="T:System.Byte" />
 
           
 
            array.</summary
         >
-        <returns
-          >a <see
-           cref="T:System.Byte[]" />
-        </returns>
+        <returns>a <see cref="T:System.Byte[]" /></returns>
         <remarks>
           <para>
 	The GetBytes funcation returns the content of the current instance's children elements recursively.
 </para>
-          <para
-            >
-	The <see
-             cref="T:System.Byte" />
+          <para>
+	The <see cref="T:System.Byte" />
 
             
 
@@ -491,24 +429,21 @@
       </Parameters>
       <Docs>
         <param name="index"
-          >A <see
-           cref="T:System.Int32" />
+          >A <see cref="T:System.Int32" />
 
           
 
            value that specifies the zero-based index of the element in the current instance to get.</param
         >
         <summary
-          >Gets the <see
-           cref="T:Mono.Security.ASN1" />
+          >Gets the <see cref="T:Mono.Security.ASN1" />
 
           
 
            class instance that is associated with the specified index.</summary
         >
         <value
-          >The <see
-           cref="T:Mono.Security.ASN1" />
+          >The <see cref="T:Mono.Security.ASN1" />
 
           
 
@@ -530,10 +465,7 @@
       <Parameters />
       <Docs>
         <summary>Gets the length (in bytes) of the ASN.1 content in the current instance.</summary>
-        <value
-          >a <see
-           cref="T:System.Int32" />
-        </value>
+        <value>a <see cref="T:System.Int32" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -554,8 +486,7 @@
         <param name="filename">The name of the file to save the current instance as.</param>
         <summary>Saves the ASN.1 object contents to a file.</summary>
         <remarks
-          >The <see
-           cref="T:System.Byte" />
+          >The <see cref="T:System.Byte" />
 
           
 
@@ -576,10 +507,7 @@
       <Parameters />
       <Docs>
         <summary>Gets the ASN.1 content tag (numeric).</summary>
-        <value
-          >a <see
-           cref="T:System.Byte" />
-        </value>
+        <value>a <see cref="T:System.Byte" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -596,16 +524,14 @@
       <Parameters />
       <Docs>
         <summary
-          >Returns the ASN.1 content to its equivalent <see
-           cref="T:System.String" />
+          >Returns the ASN.1 content to its equivalent <see cref="T:System.String" />
 
           
 
            representation.</summary
         >
         <returns
-          >The ASN.1 content in <see
-           cref="T:System.String" />
+          >The ASN.1 content in <see cref="T:System.String" />
 
           
 
@@ -627,10 +553,7 @@
       <Parameters />
       <Docs>
         <summary>Gets of sets the ASN.1 content represented by the current instance.</summary>
-        <value
-          >a <see
-           cref="T:System.Byte[]" />
-        </value>
+        <value>a <see cref="T:System.Byte[]" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>

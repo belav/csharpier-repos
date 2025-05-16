@@ -19,59 +19,49 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When a client makes a request to a Uniform Resource Identifier (URI) handled by an <see
-         cref="T:System.Net.HttpListener" />
+        >When a client makes a request to a Uniform Resource Identifier (URI) handled by an <see cref="T:System.Net.HttpListener" />
 
         
 
-         object, the <see
-         cref="T:System.Net.HttpListener" />
+         object, the <see cref="T:System.Net.HttpListener" />
 
         
 
-         provides a <see
-         cref="T:System.Net.HttpListenerContext" />
+         provides a <see cref="T:System.Net.HttpListenerContext" />
 
         
 
-         object that contains information about the sender, the request, and the response that is sent to the client. The <see
-         cref="P:System.Net.HttpListenerContext.Request" />
+         object that contains information about the sender, the request, and the response that is sent to the client. The <see cref="P:System.Net.HttpListenerContext.Request" />
 
         
 
-         property returns the <see
-         cref="T:System.Net.HttpListenerRequest" />
+         property returns the <see cref="T:System.Net.HttpListenerRequest" />
 
         
 
          object that describes the request. </para
       >
       <para
-        >The <see
-         cref="T:System.Net.HttpListenerRequest" />
+        >The <see cref="T:System.Net.HttpListenerRequest" />
 
         
 
-         object contains information about the request, such as the request <see
-         cref="P:System.Net.HttpListenerRequest.HttpMethod" />
+         object contains information about the request, such as the request <see cref="P:System.Net.HttpListenerRequest.HttpMethod" />
 
         
 
-         string, <see
-         cref="P:System.Net.HttpListenerRequest.UserAgent" />
+         string, <see cref="P:System.Net.HttpListenerRequest.UserAgent" />
 
         
 
-         string, and request body data (see the <see
-         cref="P:System.Net.HttpListenerRequest.InputStream" />
+         string, and request body data (see the <see cref="P:System.Net.HttpListenerRequest.InputStream" />
 
         
 
          property).</para
       >
       <para
-        >To reply to the request, you must get the associated response using the <see
-         cref="P:System.Net.HttpListenerContext.Response" />
+        >To reply to the request, you must get the associated response using the <see cref="P:System.Net.HttpListenerContext.Response" />
 
         
 
@@ -81,8 +71,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Describes an incoming HTTP request to an <see
-         cref="T:System.Net.HttpListener" />
+        >Describes an incoming HTTP request to an <see cref="T:System.Net.HttpListener" />
 
         
 
@@ -109,15 +98,16 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >The Accept header is a string of space-separated Multipurpose Internet Mail Extensions (MIME) type names (for example, image/jpeg), which indicate the MIME types that the client is prepared to accept and process in a response. The */* entry indicates that the client accepts any MIME type. For a detailed description of the Accept header, see RFC 2616, available at <see
-             cref="http://www.rfc-editor.org/">http://www.rfc-editor.org</see>
+              cref="http://www.rfc-editor.org/"
+              >http://www.rfc-editor.org</see
+            >
 
             
 
             .</para
           >
           <para
-            >For a complete list of request headers, see the <see
-             cref="T:System.Net.HttpRequestHeader" />
+            >For a complete list of request headers, see the <see cref="T:System.Net.HttpRequestHeader" />
 
             
 
@@ -161,8 +151,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -170,19 +159,26 @@
           >
         </returns>
         <param name="requestCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when the operation is complete.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -208,7 +204,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >This property contains a Windows error code returned by the Secure Channel (Schannel) Security Support Provider Interface (SSPI), which is used to validate the certificate. For more information about SSPI support for Schannel, see "Creating a Secure Connection Using Schannel" in the Security documentation at <see
-             cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+              cref="http://msdn.microsoft.com/library"
+              >http://msdn.microsoft.com/library</see
+            >
 
             
 
@@ -218,8 +216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an error code that identifies a problem with the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+            >Gets an error code that identifies a problem with the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
             
 
@@ -248,13 +245,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Text.Encoding" />
+            >An <see cref="T:System.Text.Encoding" />
 
             
 
-             object can be used to convert byte sequences into character sets (code pages) and characters into byte sequences. This property uses the charset value from the Content-Type header to determine the encoding. If that information is not available, this property returns <see
-             cref="P:System.Text.Encoding.Default" />
+             object can be used to convert byte sequences into character sets (code pages) and characters into byte sequences. This property uses the charset value from the Content-Type header to determine the encoding. If that information is not available, this property returns <see cref="P:System.Text.Encoding.Default" />
 
             
 
@@ -285,8 +280,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The Content-Length header expresses the length, in bytes, of the body data that accompanies the request.</para>
           <para
-            >For a complete list of request headers, see the <see
-             cref="T:System.Net.HttpRequestHeader" />
+            >For a complete list of request headers, see the <see cref="T:System.Net.HttpRequestHeader" />
 
             
 
@@ -317,21 +311,21 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If a client includes body data in a request, it declares the Multipurpose Internet Mail Extensions (MIME) type of the body data in the Content-Type header. For example, the default MIME type of data returned from a Web form using the POST method is application/x-www-form-urlencoded.</para>
           <para
-            >For a complete list of request headers, see the <see
-             cref="T:System.Net.HttpRequestHeader" />
+            >For a complete list of request headers, see the <see cref="T:System.Net.HttpRequestHeader" />
 
             
 
              enumeration and RFC 2616, available at <see
-             cref="http://www.rfc-editor.org/">http://www.rfc-editor.org</see>
+              cref="http://www.rfc-editor.org/"
+              >http://www.rfc-editor.org</see
+            >
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="P:System.Net.HttpListenerRequest.ContentType" />
+            >The <see cref="P:System.Net.HttpListenerRequest.ContentType" />
 
             
 
@@ -401,8 +395,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IAsyncResult" />
+            >The <see cref="T:System.IAsyncResult" />
 
             
 
@@ -410,7 +403,11 @@
           >
         </returns>
         <param name="asyncResult">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -449,8 +446,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="N:System.Security.Cryptography.X509Certificates" />
+            >A <see cref="N:System.Security.Cryptography.X509Certificates" />
 
             
 
@@ -480,8 +476,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
@@ -496,21 +491,18 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Returns <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
             .</para
           >
           <para
-            >The task object representing the asynchronous operation. The <see
-             cref="P:System.Threading.Tasks.Task`1.Result" />
+            >The task object representing the asynchronous operation. The <see cref="P:System.Threading.Tasks.Task`1.Result" />
 
             
 
-             property on the task object returns a <see
-             cref="N:System.Security.Cryptography.X509Certificates" />
+             property on the task object returns a <see cref="N:System.Security.Cryptography.X509Certificates" />
 
             
 
@@ -540,8 +532,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -574,8 +565,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Request headers contain metadata information. For example, headers can contain the Uniform Resource Identifier (URI) of the resource that referred the client to the server, the identity of the user agent employed by the client, and the acceptable MIME types for data in the response body.</para>
           <para
-            >For a complete list of request headers, see the <see
-             cref="T:System.Net.HttpRequestHeader" />
+            >For a complete list of request headers, see the <see cref="T:System.Net.HttpRequestHeader" />
 
             
 
@@ -634,8 +624,7 @@
           <para>If the client transmits data (for example, using the HTTP POST method), the stream returned by this method contains that data. </para>
           <block subset="none" type="note">
             <para
-              >Closing the request does not close the stream returned by this property. When you no longer need the stream, you should close it by calling the <see
-               cref="M:System.IO.Stream.Close" />
+              >Closing the request does not close the stream returned by this property. When you no longer need the stream, you should close it by calling the <see cref="M:System.IO.Stream.Close" />
 
               
 
@@ -671,21 +660,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Your application requests client authentication using the <see
-             cref="P:System.Net.HttpListener.AuthenticationSchemes" />
+            >Your application requests client authentication using the <see cref="P:System.Net.HttpListener.AuthenticationSchemes" />
 
             
 
-             or <see
-             cref="P:System.Net.HttpListener.AuthenticationSchemeSelectorDelegate" />
+             or <see cref="P:System.Net.HttpListener.AuthenticationSchemeSelectorDelegate" />
 
             
 
              property. </para
           >
           <para
-            >Your application does not receive an <see
-             cref="T:System.Net.HttpListenerContext" />
+            >Your application does not receive an <see cref="T:System.Net.HttpListenerContext" />
 
             
 
@@ -695,8 +681,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -726,8 +711,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -753,18 +737,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To request a secure connection, the client request uses <see
-             cref="F:System.Uri.UriSchemeHttps" />
+            >To request a secure connection, the client request uses <see cref="F:System.Uri.UriSchemeHttps" />
 
             
 
-             instead of <see
-             cref="F:System.Uri.UriSchemeHttp" />
+             instead of <see cref="F:System.Uri.UriSchemeHttp" />
 
             
 
-            . If the connection cannot be established using SSL, the client receives a <see
-             cref="T:System.Net.WebException" />
+            . If the connection cannot be established using SSL, the client receives a <see cref="T:System.Net.WebException" />
 
             
 
@@ -774,8 +755,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -805,8 +785,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -836,8 +815,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -894,7 +872,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >The capabilities of different HTTP versions are specified in the documents available at <see
-             cref="http://www.rfc-editor.org/">http://www.rfc-editor.org</see>
+              cref="http://www.rfc-editor.org/"
+              >http://www.rfc-editor.org</see
+            >
 
             
 
@@ -930,18 +910,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a URL, the query information is separated from the path information by a question mark (?). Name/value pairs are separated by an equals sign (=). To access the query data as a single string, get the <see
-             cref="P:System.Uri.Query" />
+            >In a URL, the query information is separated from the path information by a question mark (?). Name/value pairs are separated by an equals sign (=). To access the query data as a single string, get the <see cref="P:System.Uri.Query" />
 
             
 
-             property value from the <see
-             cref="T:System.Uri" />
+             property value from the <see cref="T:System.Uri" />
 
             
 
-             object returned by <see
-             cref="P:System.Net.HttpListenerRequest.Url" />
+             object returned by <see cref="P:System.Net.HttpListenerRequest.Url" />
 
             
 
@@ -950,14 +927,13 @@
           <block subset="none" type="note">
             <para
               >Queries without an equal sign (example: <see
-               cref="http://www.contoso.com/query.htm?Name"
+                cref="http://www.contoso.com/query.htm?Name"
                 >http://www.contoso.com/query.htm?Name</see
               >
 
               
 
-               ) are added to the null key in the <see
-               cref="T:System.Collections.Specialized.NameValueCollection" />
+               ) are added to the null key in the <see cref="T:System.Collections.Specialized.NameValueCollection" />
 
               
 
@@ -989,8 +965,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The raw URL is defined as the part of the URL following the domain information. In the URL string http://www.contoso.com/articles/recent.aspx, the raw URL is /articles/recent.aspx. The raw URL includes the query string, if present.</para>
           <para
-            >To obtain the host and port information, use the <see
-             cref="P:System.Net.HttpListenerRequest.RemoteEndPoint" />
+            >To obtain the host and port information, use the <see cref="P:System.Net.HttpListenerRequest.RemoteEndPoint" />
 
             
 
@@ -1076,8 +1051,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An application could use the <see
-             cref="P:System.Net.HttpListenerRequest.ServiceName" />
+            >An application could use the <see cref="P:System.Net.HttpListenerRequest.ServiceName" />
 
             
 
@@ -1111,69 +1085,60 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.TransportContext" />
+            >The <see cref="T:System.Net.TransportContext" />
 
             
 
-             property can be used to retrieve the channel binding token (CBT) for an <see
-             cref="T:System.Net.HttpListenerRequest" />
+             property can be used to retrieve the channel binding token (CBT) for an <see cref="T:System.Net.HttpListenerRequest" />
 
             
 
              which was sent using HTTPS. </para
           >
           <para
-            >An application could use the <see
-             cref="T:System.Net.TransportContext" />
+            >An application could use the <see cref="T:System.Net.TransportContext" />
 
             
 
              property to perform custom authentication using calls to the native Win32 <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=147021">AcceptSecurityContext</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=147021"
+              >AcceptSecurityContext</see
+            >
 
             
 
              function. </para
           >
           <para
-            >If an application attempts to retrieve the channel binding token (CBT) from this <see
-             cref="P:System.Net.HttpListenerRequest.TransportContext" />
+            >If an application attempts to retrieve the channel binding token (CBT) from this <see cref="P:System.Net.HttpListenerRequest.TransportContext" />
 
             
 
-             property using the <see
-             cref="M:System.Net.TransportContext.GetChannelBinding(System.Security.Authentication.ExtendedProtection.ChannelBindingKind)" />
+             property using the <see cref="M:System.Net.TransportContext.GetChannelBinding(System.Security.Authentication.ExtendedProtection.ChannelBindingKind)" />
 
             
 
-             method and the <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ChannelBindingKind" />
+             method and the <see cref="T:System.Security.Authentication.ExtendedProtection.ChannelBindingKind" />
 
             
 
-             is not <see
-             cref="F:System.Security.Authentication.ExtendedProtection.ChannelBindingKind.Endpoint" />
+             is not <see cref="F:System.Security.Authentication.ExtendedProtection.ChannelBindingKind.Endpoint" />
 
             
 
-            , then the <see
-             cref="T:System.Net.HttpListenerRequest" />
+            , then the <see cref="T:System.Net.HttpListenerRequest" />
 
             
 
-             will throw <see
-             cref="T:System.NotSupportedException" />
+             will throw <see cref="T:System.NotSupportedException" />
 
             
 
-            . The <see
-             cref="T:System.Net.HttpListenerRequest" />
+            . The <see cref="T:System.Net.HttpListenerRequest" />
 
             
 
-             overrides the <see
-             cref="M:System.Net.TransportContext.GetChannelBinding(System.Security.Authentication.ExtendedProtection.ChannelBindingKind)" />
+             overrides the <see cref="M:System.Net.TransportContext.GetChannelBinding(System.Security.Authentication.ExtendedProtection.ChannelBindingKind)" />
 
             
 
@@ -1183,8 +1148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Net.TransportContext" />
+            >Gets the <see cref="T:System.Net.TransportContext" />
 
             
 
@@ -1210,57 +1174,48 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.HttpListenerRequest.Url" />
+            >The <see cref="P:System.Net.HttpListenerRequest.Url" />
 
             
 
-             property allows you to obtain all the information available from a <see
-             cref="T:System.Uri" />
+             property allows you to obtain all the information available from a <see cref="T:System.Uri" />
 
             
 
-             object. If you need to know only the raw text of the URI request, consider using the <see
-             cref="P:System.Net.HttpListenerRequest.RawUrl" />
+             object. If you need to know only the raw text of the URI request, consider using the <see cref="P:System.Net.HttpListenerRequest.RawUrl" />
 
             
 
              property instead.</para
           >
           <para
-            >The <see
-             cref="P:System.Net.HttpListenerRequest.Url" />
+            >The <see cref="P:System.Net.HttpListenerRequest.Url" />
 
             
 
-             property is null if the <see
-             cref="T:System.Uri" />
+             property is null if the <see cref="T:System.Uri" />
 
             
 
              from the client could not be parsed.</para
           >
           <para
-            >The <see
-             cref="P:System.Net.Configuration.HttpListenerElement.UnescapeRequestUrl" />
+            >The <see cref="P:System.Net.Configuration.HttpListenerElement.UnescapeRequestUrl" />
 
             
 
-             property indicates if <see
-             cref="T:System.Net.HttpListener" />
+             property indicates if <see cref="T:System.Net.HttpListener" />
 
             
 
              uses the raw unescaped URI instead of the converted URI where any percent-encoded values are converted and other normalization steps are taken.</para
           >
           <para
-            >When a <see
-             cref="T:System.Net.HttpListener" />
+            >When a <see cref="T:System.Net.HttpListener" />
 
             
 
-             instance receives a request through the http.sys service, it creates an instance of the URI string provided by http.sys, and exposes it as the <see
-             cref="P:System.Net.HttpListenerRequest.Url" />
+             instance receives a request through the http.sys service, it creates an instance of the URI string provided by http.sys, and exposes it as the <see cref="P:System.Net.HttpListenerRequest.Url" />
 
             
 
@@ -1276,8 +1231,7 @@
             </item>
           </list>
           <para
-            >The raw URI is the <see
-             cref="T:System.Uri" />
+            >The raw URI is the <see cref="T:System.Uri" />
 
             
 
@@ -1289,13 +1243,11 @@
           <para>The http.sys service creates a converted URI from the information provided in the request using the URI provided in the HTTP request line and the Host header to determine the origin server the request should be forwarded to. This is done by comparing the information from the request with a set of registered URI prefixes. In order to be able to compare those values, some normalization to the request needs to be done. For the sample above the converted URI would be as follows:</para>
           <para>http://www.contoso.com/path/</para>
           <para
-            >The http.sys service combines the <see
-             cref="P:System.Uri.Host" />
+            >The http.sys service combines the <see cref="P:System.Uri.Host" />
 
             
 
-             property value and the string in the request line to create a converted URI. In addition, http.sys and the <see
-             cref="T:System.Uri" />
+             property value and the string in the request line to create a converted URI. In addition, http.sys and the <see cref="T:System.Uri" />
 
             
 
@@ -1354,13 +1306,11 @@
             </item>
           </list>
           <para
-            >When <see
-             cref="T:System.Net.HttpListener" />
+            >When <see cref="T:System.Net.HttpListener" />
 
             
 
-             receives a request, it uses the converted URI from http.sys as input to the <see
-             cref="P:System.Net.HttpListenerRequest.Url" />
+             receives a request, it uses the converted URI from http.sys as input to the <see cref="P:System.Net.HttpListenerRequest.Url" />
 
             
 
@@ -1376,18 +1326,15 @@
           <para>3812')</para>
           <para>This is not the intent of the sender of the request.</para>
           <para
-            >If the <see
-             cref="P:System.Net.Configuration.HttpListenerElement.UnescapeRequestUrl" />
+            >If the <see cref="P:System.Net.Configuration.HttpListenerElement.UnescapeRequestUrl" />
 
             
 
-             property is set to false, then when the <see
-             cref="T:System.Net.HttpListener" />
+             property is set to false, then when the <see cref="T:System.Net.HttpListener" />
 
             
 
-             receives a request, it uses the raw URI instead of the converted URI from http.sys as input to the <see
-             cref="P:System.Net.HttpListenerRequest.Url" />
+             receives a request, it uses the raw URI instead of the converted URI from http.sys as input to the <see cref="P:System.Net.HttpListenerRequest.Url" />
 
             
 
@@ -1397,8 +1344,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Uri" />
+            >Gets the <see cref="T:System.Uri" />
 
             
 
@@ -1425,34 +1371,29 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If a client has followed a hyperlink to the requested URI, its request might contain a Referrer header that identifies the URI of the resource that contained the hyperlink.</para>
           <para
-            >Clients can falsify or choose not to present a <see
-             cref="F:System.Net.HttpRequestHeader.Referer" />
+            >Clients can falsify or choose not to present a <see cref="F:System.Net.HttpRequestHeader.Referer" />
 
             
 
-             header. Therefore, while the <see
-             cref="P:System.Net.HttpListenerRequest.UrlReferrer" />
+             header. Therefore, while the <see cref="P:System.Net.HttpListenerRequest.UrlReferrer" />
 
             
 
              property can be useful for identifying basic trends in Web traffic; you should not use it as part of an authorization scheme to control access to data.</para
           >
           <para
-            >For a complete list of request headers, see the <see
-             cref="T:System.Net.HttpRequestHeader" />
+            >For a complete list of request headers, see the <see cref="T:System.Net.HttpRequestHeader" />
 
             
 
              enumeration.</para
           >
           <para
-            >The <see
-             cref="P:System.Net.HttpListenerRequest.UrlReferrer" />
+            >The <see cref="P:System.Net.HttpListenerRequest.UrlReferrer" />
 
             
 
-             is null when there is no Referrer header in the request or when the Referrer header is present in the request but does not parse to a valid <see
-             cref="T:System.Uri" />
+             is null when there is no Referrer header in the request or when the Referrer header is present in the request but does not parse to a valid <see cref="T:System.Uri" />
 
             
 
@@ -1483,16 +1424,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The User-Agent header typically contains text that identifies the name and version number of the software used to generate the request.</para>
           <para
-            >For a complete list of request headers, see the <see
-             cref="T:System.Net.HttpRequestHeader" />
+            >For a complete list of request headers, see the <see cref="T:System.Net.HttpRequestHeader" />
 
             
 
              enumeration.</para
           >
           <para
-            >The <see
-             cref="P:System.Net.HttpListenerRequest.UserAgent" />
+            >The <see cref="P:System.Net.HttpListenerRequest.UserAgent" />
 
             
 
@@ -1522,8 +1461,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The information returned by this property is also available in the <see
-             cref="P:System.Net.HttpListenerRequest.LocalEndPoint" />
+            >The information returned by this property is also available in the <see cref="P:System.Net.HttpListenerRequest.LocalEndPoint" />
 
             
 
@@ -1555,8 +1493,7 @@
           <para>The Host header contains the requested server host name and port number, if specified, separated by a colon (for example, www.contoso.com:8080).</para>
           <para>You can use this property to return different responses depending on the host name specified in the request.</para>
           <para
-            >For a complete list of request headers, see the <see
-             cref="T:System.Net.HttpRequestHeader" />
+            >For a complete list of request headers, see the <see cref="T:System.Net.HttpRequestHeader" />
 
             
 
@@ -1587,15 +1524,16 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >For a detailed description of the Accept-Language header, see RFC 2616 Section 14.4, available at <see
-             cref="http://www.rfc-editor.org/">http://www.rfc-editor.org</see>
+              cref="http://www.rfc-editor.org/"
+              >http://www.rfc-editor.org</see
+            >
 
             
 
             .</para
           >
           <para
-            >For a complete list of request headers, see the <see
-             cref="T:System.Net.HttpRequestHeader" />
+            >For a complete list of request headers, see the <see cref="T:System.Net.HttpRequestHeader" />
 
             
 

@@ -67,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -106,23 +105,19 @@
              accepts null as a valid value and allows duplicate elements.</para
           >
           <para
-            >If <see
-             cref="P:System.Collections.Specialized.StringCollection.Count" />
+            >If <see cref="P:System.Collections.Specialized.StringCollection.Count" />
 
             
 
-             is less than the capacity, this method is an O(1) operation. If the capacity needs to be increased to accommodate the new element, this method becomes an O(<paramref
-             name="n" />
+             is less than the capacity, this method is an O(1) operation. If the capacity needs to be increased to accommodate the new element, this method becomes an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.StringCollection.Count" />
+             is <see cref="P:System.Collections.Specialized.StringCollection.Count" />
 
             
 
@@ -132,8 +127,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a string to the end of the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Adds a string to the end of the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -145,12 +139,15 @@
           <para>The zero-based index at which the new element is inserted.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The string to add to the end of the <see
-           cref="T:System.Collections.Specialized.StringCollection" />
+          The string to add to the end of the <see cref="T:System.Collections.Specialized.StringCollection" />
 
           
 
@@ -187,43 +184,35 @@
              accepts null as a valid value and allows duplicate elements.</para
           >
           <para
-            >If the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >If the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
-             can accommodate the new elements without increasing the capacity, this method is an O(<paramref
-             name="n" />
+             can accommodate the new elements without increasing the capacity, this method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is the number of elements to be added. If the capacity needs to be increased to accommodate the new elements, this method becomes an O(<paramref
-             name="n" />
+             is the number of elements to be added. If the capacity needs to be increased to accommodate the new elements, this method becomes an O(<paramref name="n" />
 
             
 
-             + <paramref
-             name="m" />
+             + <paramref name="m" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is the number of elements to be added and <paramref
-             name="m" />
+             is the number of elements to be added and <paramref name="m" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.StringCollection.Count" />
+             is <see cref="P:System.Collections.Specialized.StringCollection.Count" />
 
             
 
@@ -233,8 +222,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of a string array to the end of the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Copies the elements of a string array to the end of the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -242,12 +230,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of strings to add to the end of the <see
-           cref="T:System.Collections.Specialized.StringCollection" />
+          An array of strings to add to the end of the <see cref="T:System.Collections.Specialized.StringCollection" />
 
           
 
@@ -282,18 +273,15 @@
              is set to zero, and references to other objects from elements of the collection are also released.</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.StringCollection.Count" />
+             is <see cref="P:System.Collections.Specialized.StringCollection.Count" />
 
             
 
@@ -303,8 +291,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all the strings from the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Removes all the strings from the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -335,67 +322,56 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Collections.Specialized.StringCollection.Contains(System.String)" />
+            >The <see cref="M:System.Collections.Specialized.StringCollection.Contains(System.String)" />
 
             
 
              method can confirm the existence of a string before performing further operations.</para
           >
           <para
-            >This method determines equality by calling <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >This method determines equality by calling <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
             . String comparisons are case-sensitive.</para
           >
           <para
-            >This method performs a linear search; therefore, this method is an O(<paramref
-             name="n" />
+            >This method performs a linear search; therefore, this method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.StringCollection.Count" />
+             is <see cref="P:System.Collections.Specialized.StringCollection.Count" />
 
             
 
             .</para
           >
           <para
-            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods on <paramref
-             name="item" />
+             methods on <paramref name="item" />
 
             
 
-             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods of the <paramref
-             name="item" />
+             methods of the <paramref name="item" />
 
             
 
@@ -405,8 +381,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified string is in the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Determines whether the specified string is in the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -416,13 +391,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="value" />
+            >true if <paramref name="value" />
 
             
 
-             is found in the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+             is found in the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -430,12 +403,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The string to locate in the <see
-           cref="T:System.Collections.Specialized.StringCollection" />
+          The string to locate in the <see cref="T:System.Collections.Specialized.StringCollection" />
 
           
 
@@ -467,36 +443,30 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The specified array must be of a compatible type.</para>
           <para
-            >The elements are copied to the <see
-             cref="T:System.Array" />
+            >The elements are copied to the <see cref="T:System.Array" />
 
             
 
-             in the same order in which the enumerator of the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+             in the same order in which the enumerator of the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
-             iterates through the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+             iterates through the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
             .</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.StringCollection.Count" />
+             is <see cref="P:System.Collections.Specialized.StringCollection.Count" />
 
             
 
@@ -506,8 +476,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the entire <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Copies the entire <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -515,29 +484,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional array of strings that is the destination of the elements copied from <see
-           cref="T:System.Collections.Specialized.StringCollection" />
+          The one-dimensional array of strings that is the destination of the elements copied from <see cref="T:System.Collections.Specialized.StringCollection" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -566,8 +540,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of strings contained in the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Gets the number of strings contained in the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -602,23 +575,19 @@
           <para>The foreach statement of the C# language (for each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
           <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
           <para
-            >Initially, the enumerator is positioned before the first element in the collection. <see
-             cref="M:System.Collections.Specialized.StringEnumerator.Reset" />
+            >Initially, the enumerator is positioned before the first element in the collection. <see cref="M:System.Collections.Specialized.StringEnumerator.Reset" />
 
             
 
-             also brings the enumerator back to this position.  At this position, <see
-             cref="P:System.Collections.Specialized.StringEnumerator.Current" />
+             also brings the enumerator back to this position.  At this position, <see cref="P:System.Collections.Specialized.StringEnumerator.Current" />
 
             
 
-             is undefined. Therefore, you must call <see
-             cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
+             is undefined. Therefore, you must call <see cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
 
             
 
-             to advance the enumerator to the first element of the collection before reading the value of <see
-             cref="P:System.Collections.Specialized.StringEnumerator.Current" />
+             to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.Specialized.StringEnumerator.Current" />
 
             
 
@@ -629,66 +598,54 @@
 
             
 
-             returns the same object until either <see
-             cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
+             returns the same object until either <see cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.Specialized.StringEnumerator.Reset" />
+             or <see cref="M:System.Collections.Specialized.StringEnumerator.Reset" />
 
             
 
-             is called. <see
-             cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
+             is called. <see cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
 
             
 
-             sets <see
-             cref="P:System.Collections.Specialized.StringEnumerator.Current" />
+             sets <see cref="P:System.Collections.Specialized.StringEnumerator.Current" />
 
             
 
              to the next element.</para
           >
           <para
-            >If <see
-             cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
+            >If <see cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
 
             
 
-             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-             cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
+             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
 
             
 
-             returns false. When the enumerator is at this position, subsequent calls to <see
-             cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
+             returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
 
             
 
-             also return false. If the last call to <see
-             cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
+             also return false. If the last call to <see cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
 
             
 
-             returned false, <see
-             cref="P:System.Collections.Specialized.StringEnumerator.Current" />
+             returned false, <see cref="P:System.Collections.Specialized.StringEnumerator.Current" />
 
             
 
-             is undefined. To set <see
-             cref="P:System.Collections.Specialized.StringEnumerator.Current" />
+             is undefined. To set <see cref="P:System.Collections.Specialized.StringEnumerator.Current" />
 
             
 
-             to the first element of the collection again, you can call <see
-             cref="M:System.Collections.Specialized.StringEnumerator.Reset" />
+             to the first element of the collection again, you can call <see cref="M:System.Collections.Specialized.StringEnumerator.Reset" />
 
             
 
-             followed by <see
-             cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
+             followed by <see cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
 
             
 
@@ -701,13 +658,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Collections.Specialized.StringEnumerator" />
+            >Returns a <see cref="T:System.Collections.Specialized.StringEnumerator" />
 
             
 
-             that iterates through the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+             that iterates through the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -717,13 +672,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.Specialized.StringEnumerator" />
+            >A <see cref="T:System.Collections.Specialized.StringEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+             for the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -754,59 +707,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method determines equality by calling <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >This method determines equality by calling <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
             . String comparisons are case-sensitive.</para
           >
           <para
-            >This method performs a linear search; therefore, this method is an O(<paramref
-             name="n" />
+            >This method performs a linear search; therefore, this method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.StringCollection.Count" />
+             is <see cref="P:System.Collections.Specialized.StringCollection.Count" />
 
             
 
             .</para
           >
           <para
-            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods on <paramref
-             name="item" />
+             methods on <paramref name="item" />
 
             
 
-             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods of the <paramref
-             name="item" />
+             methods of the <paramref name="item" />
 
             
 
@@ -816,8 +759,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches for the specified string and returns the zero-based index of the first occurrence within the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Searches for the specified string and returns the zero-based index of the first occurrence within the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -827,13 +769,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the first occurrence of <paramref
-             name="value" />
+            >The zero-based index of the first occurrence of <paramref name="value" />
 
             
 
-             in the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+             in the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -841,7 +781,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -872,31 +816,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Duplicate strings are allowed in <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Duplicate strings are allowed in <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
             .</para
           >
           <para
-            >If <paramref
-             name="index" />
+            >If <paramref name="index" />
 
             
 
-             is equal to <see
-             cref="P:System.Collections.Specialized.StringCollection.Count" />
+             is equal to <see cref="P:System.Collections.Specialized.StringCollection.Count" />
 
             
 
-            , <paramref
-             name="value" />
+            , <paramref name="value" />
 
             
 
-             is added to the end of <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+             is added to the end of <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -904,18 +843,15 @@
           >
           <para>In collections of contiguous elements, such as lists, the elements that follow the insertion point move down to accommodate the new element. If the collection is indexed, the indexes of the elements that are moved are also updated. This behavior does not apply to collections where elements are conceptually grouped into buckets, such as a hash table.</para>
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.StringCollection.Count" />
+             is <see cref="P:System.Collections.Specialized.StringCollection.Count" />
 
             
 
@@ -925,8 +861,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a string into the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Inserts a string into the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -934,19 +869,26 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="value" />
+          The zero-based index at which <paramref name="value" />
 
           
 
            is inserted. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -975,13 +917,11 @@
 
             
 
-             implements the <see
-             cref="P:System.Collections.Specialized.StringCollection.IsReadOnly" />
+             implements the <see cref="P:System.Collections.Specialized.StringCollection.IsReadOnly" />
 
             
 
-             property because it is required by the <see
-             cref="T:System.Collections.IList" />
+             property because it is required by the <see cref="T:System.Collections.IList" />
 
             
 
@@ -990,8 +930,7 @@
           <para>A collection that is read-only does not allow the addition, removal, or modification of elements after the collection is created.</para>
           <para>A collection that is read-only is simply a collection with a wrapper that prevents modifying the collection; therefore, if changes are made to the underlying collection, the read-only collection reflects those changes.</para>
           <para
-            >A <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >A <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -1002,8 +941,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Gets a value indicating whether the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -1033,13 +971,11 @@
 
             
 
-             implements the <see
-             cref="P:System.Collections.Specialized.StringCollection.IsSynchronized" />
+             implements the <see cref="P:System.Collections.Specialized.StringCollection.IsSynchronized" />
 
             
 
-             property because it is required by the <see
-             cref="T:System.Collections.ICollection" />
+             property because it is required by the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1047,8 +983,7 @@
           >
           <para>Enumerating through a collection is intrinsically not a thread safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
           <para
-            >The following code example shows how to lock the collection using the <see
-             cref="P:System.Collections.Specialized.StringCollection.SyncRoot" />
+            >The following code example shows how to lock the collection using the <see cref="P:System.Collections.Specialized.StringCollection.SyncRoot" />
 
             
 
@@ -1060,8 +995,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Gets a value indicating whether access to the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -1114,26 +1048,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Duplicate strings are allowed in <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Duplicate strings are allowed in <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
-            . Only the first occurrence is removed. To remove all occurrences of the specified string, use RemoveAt(IndexOf(value)) repeatedly while <see
-             cref="M:System.Collections.Specialized.StringCollection.IndexOf(System.String)" />
+            . Only the first occurrence is removed. To remove all occurrences of the specified string, use RemoveAt(IndexOf(value)) repeatedly while <see cref="M:System.Collections.Specialized.StringCollection.IndexOf(System.String)" />
 
             
 
              does not return -1.</para
           >
           <para
-            >If the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >If the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
-             does not contain the specified object, the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+             does not contain the specified object, the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -1141,26 +1071,22 @@
           >
           <para>In collections of contiguous elements, such as lists, the elements that follow the removed element move up to occupy the vacated spot. If the collection is indexed, the indexes of the elements that are moved are also updated. This behavior does not apply to collections where elements are conceptually grouped into buckets, such as a hash table.</para>
           <para
-            >This method determines equality by calling <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >This method determines equality by calling <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
             . String comparisons are case-sensitive.</para
           >
           <para
-            >This method performs a linear search; therefore, this method is an O(<paramref
-             name="n" />
+            >This method performs a linear search; therefore, this method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.StringCollection.Count" />
+             is <see cref="P:System.Collections.Specialized.StringCollection.Count" />
 
             
 
@@ -1170,8 +1096,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of a specific string from the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Removes the first occurrence of a specific string from the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -1179,12 +1104,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The string to remove from the <see
-           cref="T:System.Collections.Specialized.StringCollection" />
+          The string to remove from the <see cref="T:System.Collections.Specialized.StringCollection" />
 
           
 
@@ -1215,18 +1143,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>In collections of contiguous elements, such as lists, the elements that follow the removed element move up to occupy the vacated spot. If the collection is indexed, the indexes of the elements that are moved are also updated. This behavior does not apply to collections where elements are conceptually grouped into buckets, such as a hash table.</para>
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.StringCollection.Count" />
+             is <see cref="P:System.Collections.Specialized.StringCollection.Count" />
 
             
 
@@ -1236,8 +1161,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the string at the specified index of the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Removes the string at the specified index of the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -1245,7 +1169,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1270,33 +1198,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Derived classes can provide their own synchronized version of the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Derived classes can provide their own synchronized version of the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
-             using the <see
-             cref="P:System.Collections.Specialized.StringCollection.SyncRoot" />
+             using the <see cref="P:System.Collections.Specialized.StringCollection.SyncRoot" />
 
             
 
-             property. The synchronizing code must perform operations on the <see
-             cref="P:System.Collections.Specialized.StringCollection.SyncRoot" />
+             property. The synchronizing code must perform operations on the <see cref="P:System.Collections.Specialized.StringCollection.SyncRoot" />
 
             
 
-             of the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+             of the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
-            , not directly on the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            , not directly on the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
-            . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -1304,8 +1226,7 @@
           >
           <para>Enumerating through a collection is intrinsically not a thread safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
           <para
-            >The following code example shows how to lock the collection using the <see
-             cref="P:System.Collections.Specialized.StringCollection.SyncRoot" />
+            >The following code example shows how to lock the collection using the <see cref="P:System.Collections.Specialized.StringCollection.SyncRoot" />
 
             
 
@@ -1317,8 +1238,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -1351,26 +1271,22 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The specified array must be of a compatible type.</para>
           <para
-            >This method uses <see
-             cref="M:System.Array.Copy(System.Array,System.Array,System.Int32)" />
+            >This method uses <see cref="M:System.Array.Copy(System.Array,System.Array,System.Int32)" />
 
             
 
              to copy the elements.</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.StringCollection.Count" />
+             is <see cref="P:System.Collections.Specialized.StringCollection.Count" />
 
             
 
@@ -1380,13 +1296,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the entire <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Copies the entire <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
-             to a compatible one-dimensional <see
-             cref="T:System.Array" />
+             to a compatible one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -1394,34 +1308,38 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from <see
-           cref="T:System.Collections.Specialized.StringCollection" />
+           that is the destination of the elements copied from <see cref="T:System.Collections.Specialized.StringCollection" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -1455,23 +1373,19 @@
           <para>The foreach statement of the C# language (for each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
           <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
           <para
-            >Initially, the enumerator is positioned before the first element in the collection. <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Initially, the enumerator is positioned before the first element in the collection. <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             also brings the enumerator back to this position. At this position, calling <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             also brings the enumerator back to this position. At this position, calling <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             throws an exception. Therefore, you must call <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             throws an exception. Therefore, you must call <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             to advance the enumerator to the first element of the collection before reading the value of <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -1482,99 +1396,81 @@
 
             
 
-             returns the same object until either <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             is called. <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             sets <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             sets <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              to the next element.</para
           >
           <para
-            >If <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returns false. When the enumerator is at this position, subsequent calls to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             also return false. If the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returned false, calling <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             returned false, calling <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             throws an exception. To set <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             throws an exception. To set <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             to the first element of the collection again, you can call <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             to the first element of the collection again, you can call <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             followed by <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             followed by <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
             .</para
           >
           <para
-            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             throws an <see
-             cref="T:System.InvalidOperationException" />
+             throws an <see cref="T:System.InvalidOperationException" />
 
             
 
-            . If the collection is modified between <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            . If the collection is modified between <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             and <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             and <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-            , <see
-             cref="P:System.Collections.IEnumerator.Current" />
+            , <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -1586,13 +1482,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns a <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             that iterates through the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+             that iterates through the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -1602,13 +1496,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.IEnumerator" />
+            >A <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+             for the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -1646,36 +1538,30 @@
              accepts null as a valid value and allows duplicate elements.</para
           >
           <para
-            >If <see
-             cref="P:System.Collections.Specialized.StringCollection.Count" />
+            >If <see cref="P:System.Collections.Specialized.StringCollection.Count" />
 
             
 
-             already equals the capacity, the capacity of the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+             already equals the capacity, the capacity of the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
              is increased by automatically reallocating the internal array, and the existing elements are copied to the new array before the new element is added.</para
           >
           <para
-            >If <see
-             cref="P:System.Collections.Specialized.StringCollection.Count" />
+            >If <see cref="P:System.Collections.Specialized.StringCollection.Count" />
 
             
 
-             is less than the capacity, this method is an O(1) operation. If the capacity needs to be increased to accommodate the new element, this method becomes an O(<paramref
-             name="n" />
+             is less than the capacity, this method is an O(1) operation. If the capacity needs to be increased to accommodate the new element, this method becomes an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.StringCollection.Count" />
+             is <see cref="P:System.Collections.Specialized.StringCollection.Count" />
 
             
 
@@ -1685,8 +1571,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an object to the end of the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Adds an object to the end of the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -1696,13 +1581,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >The <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
-             index at which the <paramref
-             name="value" />
+             index at which the <paramref name="value" />
 
             
 
@@ -1710,17 +1593,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to be added to the end of the <see
-           cref="T:System.Collections.Specialized.StringCollection" />
+           to be added to the end of the <see cref="T:System.Collections.Specialized.StringCollection" />
 
           
 
@@ -1750,59 +1635,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method determines equality by calling <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >This method determines equality by calling <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
             .</para
           >
           <para
-            >This method performs a linear search; therefore, this method is an O(<paramref
-             name="n" />
+            >This method performs a linear search; therefore, this method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.StringCollection.Count" />
+             is <see cref="P:System.Collections.Specialized.StringCollection.Count" />
 
             
 
             .</para
           >
           <para
-            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods on <paramref
-             name="item" />
+             methods on <paramref name="item" />
 
             
 
-             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods of the <paramref
-             name="item" />
+             methods of the <paramref name="item" />
 
             
 
@@ -1812,8 +1687,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether an element is in the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Determines whether an element is in the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -1823,13 +1697,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="value" />
+            >true if <paramref name="value" />
 
             
 
-             is found in the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+             is found in the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -1837,17 +1709,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to locate in the <see
-           cref="T:System.Collections.Specialized.StringCollection" />
+           to locate in the <see cref="T:System.Collections.Specialized.StringCollection" />
 
           
 
@@ -1877,67 +1751,56 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >The <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
              is searched forward starting at the first element and ending at the last element.</para
           >
           <para
-            >This method determines equality by calling <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >This method determines equality by calling <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
             .</para
           >
           <para
-            >This method performs a linear search; therefore, this method is an O(<paramref
-             name="n" />
+            >This method performs a linear search; therefore, this method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.StringCollection.Count" />
+             is <see cref="P:System.Collections.Specialized.StringCollection.Count" />
 
             
 
             .</para
           >
           <para
-            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods on <paramref
-             name="item" />
+             methods on <paramref name="item" />
 
             
 
-             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods of the <paramref
-             name="item" />
+             methods of the <paramref name="item" />
 
             
 
@@ -1947,13 +1810,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches for the specified <see
-             cref="T:System.Object" />
+            >Searches for the specified <see cref="T:System.Object" />
 
             
 
-             and returns the zero-based index of the first occurrence within the entire <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+             and returns the zero-based index of the first occurrence within the entire <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -1963,13 +1824,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the first occurrence of <paramref
-             name="value" />
+            >The zero-based index of the first occurrence of <paramref name="value" />
 
             
 
-             within the entire <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+             within the entire <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -1977,17 +1836,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to locate in the <see
-           cref="T:System.Collections.Specialized.StringCollection" />
+           to locate in the <see cref="T:System.Collections.Specialized.StringCollection" />
 
           
 
@@ -2018,36 +1879,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Collections.Specialized.StringCollection.Count" />
+            >If <see cref="P:System.Collections.Specialized.StringCollection.Count" />
 
             
 
-             already equals the capacity, the capacity of the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+             already equals the capacity, the capacity of the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
              is increased by automatically reallocating the internal array, and the existing elements are copied to the new array before the new element is added.</para
           >
           <para
-            >If <paramref
-             name="index" />
+            >If <paramref name="index" />
 
             
 
-             is equal to <see
-             cref="P:System.Collections.Specialized.StringCollection.Count" />
+             is equal to <see cref="P:System.Collections.Specialized.StringCollection.Count" />
 
             
 
-            , <paramref
-             name="value" />
+            , <paramref name="value" />
 
             
 
-             is added to the end of <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+             is added to the end of <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -2055,18 +1910,15 @@
           >
           <para>In collections of contiguous elements, such as lists, the elements that follow the insertion point move down to accommodate the new element. If the collection is indexed, the indexes of the elements that are moved are also updated. This behavior does not apply to collections where elements are conceptually grouped into buckets, such as a hash table.</para>
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.StringCollection.Count" />
+             is <see cref="P:System.Collections.Specialized.StringCollection.Count" />
 
             
 
@@ -2076,8 +1928,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts an element into the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Inserts an element into the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -2085,24 +1936,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="value" />
+          The zero-based index at which <paramref name="value" />
 
           
 
            should be inserted. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -2136,8 +1993,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Gets a value indicating whether the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -2172,8 +2028,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Gets a value indicating whether the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -2232,13 +2087,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >If the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
-             does not contain the specified object, the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+             does not contain the specified object, the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -2246,26 +2099,22 @@
           >
           <para>In collections of contiguous elements, such as lists, the elements that follow the removed element move up to occupy the vacated spot. If the collection is indexed, the indexes of the elements that are moved are also updated. This behavior does not apply to collections where elements are conceptually grouped into buckets, such as a hash table.</para>
           <para
-            >This method determines equality by calling <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >This method determines equality by calling <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
             .</para
           >
           <para
-            >This method performs a linear search; therefore, this method is an O(<paramref
-             name="n" />
+            >This method performs a linear search; therefore, this method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.StringCollection.Count" />
+             is <see cref="P:System.Collections.Specialized.StringCollection.Count" />
 
             
 
@@ -2275,8 +2124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of a specific object from the <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -2284,17 +2132,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to remove from the <see
-           cref="T:System.Collections.Specialized.StringCollection" />
+           to remove from the <see cref="T:System.Collections.Specialized.StringCollection" />
 
           
 

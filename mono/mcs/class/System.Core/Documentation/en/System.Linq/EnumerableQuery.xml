@@ -18,13 +18,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an <see
-         cref="T:System.Collections.IEnumerable" />
+        >Represents an <see cref="T:System.Collections.IEnumerable" />
 
         
 
-         as an <see
-         cref="T:System.Linq.EnumerableQuery" />
+         as an <see cref="T:System.Linq.EnumerableQuery" />
 
         
 
@@ -49,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Linq.EnumerableQuery" />
+            >Initializes a new instance of the <see cref="T:System.Linq.EnumerableQuery" />
 
             
 

@@ -28,13 +28,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This interface provides methods for implementing sets, which are collections that have unique elements and specific operations. The <see
-         cref="T:System.Collections.Generic.HashSet`1" />
+        >This interface provides methods for implementing sets, which are collections that have unique elements and specific operations. The <see cref="T:System.Collections.Generic.HashSet`1" />
 
         
 
-         and <see
-         cref="T:System.Collections.Generic.SortedSet`1" />
+         and <see cref="T:System.Collections.Generic.SortedSet`1" />
 
         
 

@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
 <clause number="14.12" title="Conditional operator">
   <paragraph
-    >The ?: operator is called the conditional operator. It is at times also called the ternary operator. <grammar_production
-    >
+    >The ?: operator is called the conditional operator. It is at times also called the ternary operator. <grammar_production>
       <name>
         <non_terminal where="14.12">conditional-expression</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="14.11">conditional-or-expression</non_terminal>
       </rhs>
       <rhs>
@@ -25,28 +23,24 @@
   <paragraph>A conditional expression of the form b ? x : y first evaluates the condition b. Then, if b is true, x is evaluated and becomes the result of the operation. Otherwise, y is evaluated and becomes the result of the operation. A conditional expression never evaluates both x and y. </paragraph>
   <paragraph>The conditional operator is right-associative, meaning that operations are grouped from right to left. For example, an expression of the form a ? b : c ? d : e is evaluated as a ? b : (c ? d : e). </paragraph>
   <paragraph
-    >The first operand of the ?: operator must be an expression of a type that can be implicitly converted to <keyword
-    >bool</keyword>
+    >The first operand of the ?: operator must be an expression of a type that can be implicitly converted to <keyword>bool</keyword>
 
     
 
     , or an expression of a type that implements operator true. If neither of these requirements is satisfied, a compile-time error occurs. </paragraph
   >
   <paragraph
-    >The second and third operands of the ?: operator control the type of the conditional expression. Let X and Y be the types of the second and third operands. Then, <list
-    >
+    >The second and third operands of the ?: operator control the type of the conditional expression. Let X and Y be the types of the second and third operands. Then, <list>
       <list_item> If X and Y are the same type, then this is the type of the conditional expression. </list_item>
       <list_item
-        > Otherwise, if an implicit conversion (<hyperlink
-        >13.1</hyperlink>
+        > Otherwise, if an implicit conversion (<hyperlink>13.1</hyperlink>
 
         
 
         ) exists from X to Y, but not from Y to X, then Y is the type of the conditional expression. </list_item
       >
       <list_item
-        > Otherwise, if an implicit conversion (<hyperlink
-        >13.1</hyperlink>
+        > Otherwise, if an implicit conversion (<hyperlink>13.1</hyperlink>
 
         
 
@@ -56,11 +50,9 @@
     </list>
   </paragraph>
   <paragraph
-    >The run-time processing of a conditional expression of the form b ? x : y consists of the following steps: <list
-    >
+    >The run-time processing of a conditional expression of the form b ? x : y consists of the following steps: <list>
       <list_item
-        > First, b is evaluated, and the <keyword
-        >bool</keyword>
+        > First, b is evaluated, and the <keyword>bool</keyword>
 
         
 
@@ -68,21 +60,18 @@
       >
       <list>
         <list_item
-          > If an implicit conversion from the type of b to <keyword
-          >bool</keyword>
+          > If an implicit conversion from the type of b to <keyword>bool</keyword>
 
           
 
-           exists, then this implicit conversion is performed to produce a <keyword
-          >bool</keyword>
+           exists, then this implicit conversion is performed to produce a <keyword>bool</keyword>
 
           
 
            value. </list_item
         >
         <list_item
-          > Otherwise, the operator true defined by the type of b is invoked to produce a <keyword
-          >bool</keyword>
+          > Otherwise, the operator true defined by the type of b is invoked to produce a <keyword>bool</keyword>
 
           
 
@@ -90,8 +79,7 @@
         >
       </list>
       <list_item
-        > If the <keyword
-        >bool</keyword>
+        > If the <keyword>bool</keyword>
 
         
 

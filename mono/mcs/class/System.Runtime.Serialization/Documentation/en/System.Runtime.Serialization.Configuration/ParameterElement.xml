@@ -23,8 +23,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used to handle the <format
-         type="text/html">
+        >This class is used to handle the <format type="text/html">
           <a href="0fb41e2d-64f7-44ab-993e-05892eac6d82">parameter Element</a>
         </format>
 
@@ -33,8 +32,7 @@
         , specifically, to specify the generic parameter to use when adding a known type to a declared type.</para
       >
       <para
-        >For an example of using configuration to add a type, see <format
-         type="text/html">
+        >For an example of using configuration to add a type, see <format type="text/html">
           <a href="f35184e4-9d9e-4d37-8fb4-d5b58220eb3e">&lt;declaredTypes&gt;</a>
         </format>
 
@@ -46,8 +44,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Handles the XML elements used to configure XML serialization by the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+        >Handles the XML elements used to configure XML serialization by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
@@ -72,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.Configuration.ParameterElement" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.ParameterElement" />
 
             
 
@@ -100,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.Configuration.ParameterElement" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.ParameterElement" />
 
             
 
@@ -109,7 +104,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -135,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.Configuration.ParameterElement" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.ParameterElement" />
 
             
 
@@ -144,7 +142,11 @@
           >
         </summary>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

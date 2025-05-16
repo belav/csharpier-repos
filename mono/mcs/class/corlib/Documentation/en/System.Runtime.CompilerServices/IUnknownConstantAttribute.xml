@@ -38,16 +38,14 @@
       <para>You can apply this attribute to fields or parameters.</para>
       <para>The type library importer uses this attribute to distinguish a default value of type VT_UNKNOWN from null.</para>
       <para
-        >For more information about constant attributes, see the <see
-         cref="T:System.Runtime.CompilerServices.CustomConstantAttribute" />
+        >For more information about constant attributes, see the <see cref="T:System.Runtime.CompilerServices.CustomConstantAttribute" />
 
         
 
          class.</para
       >
       <para
-        >The classes in <see
-         cref="N:System.Runtime.CompilerServices" />
+        >The classes in <see cref="N:System.Runtime.CompilerServices" />
 
         
 
@@ -57,13 +55,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Indicates that the default value for the attributed field or parameter is an instance of <see
-         cref="T:System.Runtime.InteropServices.UnknownWrapper" />
+        >Indicates that the default value for the attributed field or parameter is an instance of <see cref="T:System.Runtime.InteropServices.UnknownWrapper" />
 
         
 
-        , where the <see
-         cref="P:System.Runtime.InteropServices.UnknownWrapper.WrappedObject" />
+        , where the <see cref="P:System.Runtime.InteropServices.UnknownWrapper.WrappedObject" />
 
         
 
@@ -91,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.CompilerServices.IUnknownConstantAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.IUnknownConstantAttribute" />
 
             
 

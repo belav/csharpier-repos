@@ -19,18 +19,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.ICertificatePolicy" />
+        >The <see cref="T:System.Net.ICertificatePolicy" />
 
         
 
-         interface is used to provide custom security certificate validation for an application. The default policy is to allow valid certificates, as well as valid certificates that have expired. To change this policy, implement the <see
-         cref="T:System.Net.ICertificatePolicy" />
+         interface is used to provide custom security certificate validation for an application. The default policy is to allow valid certificates, as well as valid certificates that have expired. To change this policy, implement the <see cref="T:System.Net.ICertificatePolicy" />
 
         
 
-         interface with a different policy, and then assign that policy to <see
-         cref="P:System.Net.ServicePointManager.CertificatePolicy" />
+         interface with a different policy, and then assign that policy to <see cref="P:System.Net.ServicePointManager.CertificatePolicy" />
 
         
 
@@ -81,36 +78,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.ICertificatePolicy.CheckValidationResult(System.Net.ServicePoint,System.Security.Cryptography.X509Certificates.X509Certificate,System.Net.WebRequest,System.Int32)" />
+            >The <see cref="M:System.Net.ICertificatePolicy.CheckValidationResult(System.Net.ServicePoint,System.Security.Cryptography.X509Certificates.X509Certificate,System.Net.WebRequest,System.Int32)" />
 
             
 
-             method implements the application certificate validation policy. The method can examine the <paramref
-             name="srvPoint" />
+             method implements the application certificate validation policy. The method can examine the <paramref name="srvPoint" />
 
             
 
-            , <paramref
-             name="certificate" />
+            , <paramref name="certificate" />
 
             
 
-            , <paramref
-             name="request" />
+            , <paramref name="request" />
 
             
 
-            , and <paramref
-             name="certificateProblem" />
+            , and <paramref name="certificateProblem" />
 
             
 
              parameters to determine whether the certificate should be honored.</para
           >
           <para
-            >The <paramref
-             name="certificateProblem" />
+            >The <paramref name="certificateProblem" />
 
             
 
@@ -126,33 +117,48 @@
           <para>true if the certificate should be honored; otherwise, false.</para>
         </returns>
         <param name="srvPoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.ServicePoint" />
+          The <see cref="T:System.Net.ServicePoint" />
 
           
 
            that will use the certificate. </param
         >
         <param name="certificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The certificate to validate. </param
         >
         <param name="request">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The request that received the certificate. </param
         >
         <param name="certificateProblem">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -23,13 +23,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The following are notes to consider when using <see
-         cref="T:System.Xml.Schema.XmlSchemaValidationFlags" />
+        >The following are notes to consider when using <see cref="T:System.Xml.Schema.XmlSchemaValidationFlags" />
 
         
 
-         values with the <see
-         cref="T:System.Xml.XmlReader" />
+         values with the <see cref="T:System.Xml.XmlReader" />
 
         
 
@@ -42,23 +40,19 @@
 
             
 
-             values define validation options used by a schema validating <see
-             cref="T:System.Xml.XmlReader" />
+             values define validation options used by a schema validating <see cref="T:System.Xml.XmlReader" />
 
             
 
-             to perform XML validation against a schema. <see
-             cref="T:System.Xml.Schema.XmlSchemaValidationFlags" />
+             to perform XML validation against a schema. <see cref="T:System.Xml.Schema.XmlSchemaValidationFlags" />
 
             
 
-             values for a validating <see
-             cref="T:System.Xml.XmlReader" />
+             values for a validating <see cref="T:System.Xml.XmlReader" />
 
             
 
-             are specified using the <see
-             cref="P:System.Xml.XmlReaderSettings.ValidationFlags" />
+             are specified using the <see cref="P:System.Xml.XmlReaderSettings.ValidationFlags" />
 
             
 
@@ -67,8 +61,7 @@
         </item>
       </list>
       <para
-        >The following are notes to consider when using the <see
-         cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+        >The following are notes to consider when using the <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
 
         
 
@@ -80,8 +73,7 @@
           <list type="ordered">
             <item>
               <para
-                >If <see
-                 cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+                >If <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
 
                 
 
@@ -90,8 +82,7 @@
             </item>
             <item>
               <para
-                >If <see
-                 cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+                >If <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
 
                 
 
@@ -105,8 +96,7 @@
           <list type="ordered">
             <item>
               <para
-                >If <see
-                 cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+                >If <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
 
                 
 
@@ -115,8 +105,7 @@
             </item>
             <item>
               <para
-                >If <see
-                 cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+                >If <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
 
                 
 
@@ -125,8 +114,7 @@
             </item>
             <item>
               <para
-                >If <see
-                 cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+                >If <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
 
                 
 
@@ -140,8 +128,7 @@
           <list type="ordered">
             <item>
               <para
-                >If <see
-                 cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+                >If <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
 
                 
 
@@ -150,8 +137,7 @@
             </item>
             <item>
               <para
-                >If <see
-                 cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+                >If <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
 
                 
 
@@ -160,8 +146,7 @@
             </item>
             <item>
               <para
-                >If <see
-                 cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+                >If <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
 
                 
 
@@ -175,8 +160,7 @@
           <list type="ordered">
             <item>
               <para
-                >The following applies when <see
-                 cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+                >The following applies when <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
 
                 
 
@@ -190,8 +174,7 @@
           <list type="ordered">
             <item>
               <para
-                >The following applies when <see
-                 cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+                >The following applies when <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
 
                 
 
@@ -205,8 +188,7 @@
           <list type="ordered">
             <item>
               <para
-                >If an instance document contains an Xml attribute and the schema specifies an attribute wildcard with processContents either omitted or set to "strict", the validation engine will use the Xml namespace schema present in the <see
-                 cref="T:System.Xml.Schema.XmlSchemaSet" />
+                >If an instance document contains an Xml attribute and the schema specifies an attribute wildcard with processContents either omitted or set to "strict", the validation engine will use the Xml namespace schema present in the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
                 
 
@@ -215,8 +197,7 @@
             </item>
             <item>
               <para
-                >If <see
-                 cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+                >If <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
 
                 
 
@@ -225,8 +206,7 @@
             </item>
             <item>
               <para
-                >If <see
-                 cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+                >If <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
 
                 
 
@@ -238,8 +218,7 @@
             </item>
             <item>
               <para
-                >If an instance document contains an Xml attribute and the schema specifies an attribute wildcard with processContents set to "lax", the validation engine will use the Xml namespace schema present in the <see
-                 cref="T:System.Xml.Schema.XmlSchemaSet" />
+                >If an instance document contains an Xml attribute and the schema specifies an attribute wildcard with processContents set to "lax", the validation engine will use the Xml namespace schema present in the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
                 
 
@@ -248,8 +227,7 @@
             </item>
             <item>
               <para
-                >If <see
-                 cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+                >If <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
 
                 
 
@@ -258,8 +236,7 @@
             </item>
             <item>
               <para
-                >If <see
-                 cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+                >If <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
 
                 
 
@@ -273,8 +250,7 @@
           <list type="ordered">
             <item>
               <para
-                >When <see
-                 cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+                >When <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
 
                 
 
@@ -288,13 +264,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies schema validation options used by the <see
-         cref="T:System.Xml.Schema.XmlSchemaValidator" />
+        >Specifies schema validation options used by the <see cref="T:System.Xml.Schema.XmlSchemaValidator" />
 
         
 
-         and <see
-         cref="T:System.Xml.XmlReader" />
+         and <see cref="T:System.Xml.XmlReader" />
 
         
 

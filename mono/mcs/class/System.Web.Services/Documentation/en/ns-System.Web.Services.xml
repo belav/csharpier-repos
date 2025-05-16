@@ -9,8 +9,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Web.Services" />
+        >The <see cref="N:System.Web.Services" />
 
         
 
@@ -20,13 +19,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To get started creating XML Web services using ASP.NET, look at the <see
-         cref="T:System.Web.Services.WebService" />
+        >To get started creating XML Web services using ASP.NET, look at the <see cref="T:System.Web.Services.WebService" />
 
         
 
-         class, which XML Web services can derive from to get access to the ASP.NET intrinsics and the <see
-         cref="T:System.Web.Services.WebMethodAttribute" />
+         class, which XML Web services can derive from to get access to the ASP.NET intrinsics and the <see cref="T:System.Web.Services.WebMethodAttribute" />
 
         
 

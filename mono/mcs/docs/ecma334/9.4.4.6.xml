@@ -8,15 +8,15 @@
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <keyword>null</keyword>
       </rhs>
     </grammar_production>
   </paragraph>
   <paragraph
-    >The type of a <non_terminal
-     where="9.4.4.6">null-literal</non_terminal>
+    >The type of a <non_terminal where="9.4.4.6"
+      >null-literal</non_terminal
+    >
 
     
 

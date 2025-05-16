@@ -20,33 +20,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.WebBrowser.Navigating" />
+        >The <see cref="E:System.Windows.Forms.WebBrowser.Navigating" />
 
         
 
-         event occurs before the <see
-         cref="T:System.Windows.Forms.WebBrowser" />
+         event occurs before the <see cref="T:System.Windows.Forms.WebBrowser" />
 
         
 
-         control navigates to a new document. You can handle this event to cancel navigation before it begins if certain conditions have not been met, for example, when the user has not completely filled out a form. To do this, set the <see
-         cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+         control navigates to a new document. You can handle this event to cancel navigation before it begins if certain conditions have not been met, for example, when the user has not completely filled out a form. To do this, set the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.WebBrowserNavigatingEventArgs" />
+         property of the <see cref="T:System.Windows.Forms.WebBrowserNavigatingEventArgs" />
 
         
 
-         object passed to the event handler to true. You can also use this object to retrieve the location of the new document through the <see
-         cref="P:System.Windows.Forms.WebBrowserNavigatingEventArgs.Url" />
+         object passed to the event handler to true. You can also use this object to retrieve the location of the new document through the <see cref="P:System.Windows.Forms.WebBrowserNavigatingEventArgs.Url" />
 
         
 
-         property. If the new document will be displayed in a Web page frame, you can retrieve the name of the frame through the <see
-         cref="P:System.Windows.Forms.WebBrowserNavigatingEventArgs.TargetFrameName" />
+         property. If the new document will be displayed in a Web page frame, you can retrieve the name of the frame through the <see cref="P:System.Windows.Forms.WebBrowserNavigatingEventArgs.TargetFrameName" />
 
         
 
@@ -56,8 +50,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.WebBrowser.Navigating" />
+        >Provides data for the <see cref="E:System.Windows.Forms.WebBrowser.Navigating" />
 
         
 
@@ -82,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.WebBrowserNavigatingEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.WebBrowserNavigatingEventArgs" />
 
             
 
@@ -91,24 +83,30 @@
           >
         </summary>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Uri" />
+          A <see cref="T:System.Uri" />
 
           
 
-           representing the location of the document to which the <see
-           cref="T:System.Windows.Forms.WebBrowser" />
+           representing the location of the document to which the <see cref="T:System.Windows.Forms.WebBrowser" />
 
           
 
            control is navigating. </param
         >
         <param name="targetFrameName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -151,8 +149,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the location of the document to which the <see
-             cref="T:System.Windows.Forms.WebBrowser" />
+            >Gets the location of the document to which the <see cref="T:System.Windows.Forms.WebBrowser" />
 
             
 

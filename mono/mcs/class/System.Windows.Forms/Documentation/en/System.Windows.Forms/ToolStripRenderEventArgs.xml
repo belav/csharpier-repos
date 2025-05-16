@@ -14,23 +14,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
+        >The <see cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
 
         
 
-         class also provides data for the <see
-         cref="M:System.Windows.Forms.ToolStripRenderer.DrawImageMargin(System.Windows.Forms.ToolStripRenderEventArgs)" />
+         class also provides data for the <see cref="M:System.Windows.Forms.ToolStripRenderer.DrawImageMargin(System.Windows.Forms.ToolStripRenderEventArgs)" />
 
         
 
-        , <see
-         cref="M:System.Windows.Forms.ToolStripRenderer.DrawToolStripBorder(System.Windows.Forms.ToolStripRenderEventArgs)" />
+        , <see cref="M:System.Windows.Forms.ToolStripRenderer.DrawToolStripBorder(System.Windows.Forms.ToolStripRenderEventArgs)" />
 
         
 
-        , and <see
-         cref="M:System.Windows.Forms.ToolStripRenderer.DrawToolStripBackground(System.Windows.Forms.ToolStripRenderEventArgs)" />
+        , and <see cref="M:System.Windows.Forms.ToolStripRenderer.DrawToolStripBackground(System.Windows.Forms.ToolStripRenderEventArgs)" />
 
         
 
@@ -40,18 +36,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderImageMargin(System.Windows.Forms.ToolStripRenderEventArgs)" />
+        >Provides data for the <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderImageMargin(System.Windows.Forms.ToolStripRenderEventArgs)" />
 
         
 
-        , <see
-         cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripBorder(System.Windows.Forms.ToolStripRenderEventArgs)" />
+        , <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripBorder(System.Windows.Forms.ToolStripRenderEventArgs)" />
 
         
 
-        , and <see
-         cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripBackground(System.Windows.Forms.ToolStripRenderEventArgs)" />
+        , and <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripBackground(System.Windows.Forms.ToolStripRenderEventArgs)" />
 
         
 
@@ -76,18 +69,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
 
             
 
-             class for the specified <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             class for the specified <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             and using the specified <see
-             cref="T:System.Drawing.Graphics" />
+             and using the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -95,24 +85,30 @@
           >
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to use for painting.</param
         >
         <param name="toolStrip">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+          The <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
@@ -141,23 +137,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
 
             
 
-             class for the specified <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             class for the specified <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            , using the specified <see
-             cref="T:System.Drawing.Graphics" />
+            , using the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
-             to paint the specified bounds with the specified <see
-             cref="T:System.Drawing.Color" />
+             to paint the specified bounds with the specified <see cref="T:System.Drawing.Color" />
 
             
 
@@ -165,53 +157,64 @@
           >
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to use for painting.</param
         >
         <param name="toolStrip">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+          The <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
            to paint.</param
         >
         <param name="affectedBounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            representing the bounds of the area to be painted.</param
         >
         <param name="backColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
-           that the background of the <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+           that the background of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
@@ -238,8 +241,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Drawing.Rectangle" />
+            >Gets the <see cref="T:System.Drawing.Rectangle" />
 
             
 
@@ -264,13 +266,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Drawing.Color" />
+            >Gets the <see cref="T:System.Drawing.Color" />
 
             
 
-             that the background of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             that the background of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -297,28 +297,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >If the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             is not a <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+             is not a <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
-             or the <see
-             cref="P:System.Windows.Forms.ToolStripDropDown.OwnerItem" />
+             or the <see cref="P:System.Windows.Forms.ToolStripDropDown.OwnerItem" />
 
             
 
-             is null, the <see
-             cref="P:System.Windows.Forms.ToolStripRenderEventArgs.ConnectedArea" />
+             is null, the <see cref="P:System.Windows.Forms.ToolStripRenderEventArgs.ConnectedArea" />
 
             
 
-             property returns an empty <see
-             cref="T:System.Drawing.Rectangle" />
+             property returns an empty <see cref="T:System.Drawing.Rectangle" />
 
             
 
@@ -328,18 +323,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Drawing.Rectangle" />
+            >Gets the <see cref="T:System.Drawing.Rectangle" />
 
             
 
-             representing the overlap area between a <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+             representing the overlap area between a <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
-             and its <see
-             cref="P:System.Windows.Forms.ToolStripDropDown.OwnerItem" />
+             and its <see cref="P:System.Windows.Forms.ToolStripDropDown.OwnerItem" />
 
             
 
@@ -364,8 +356,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Drawing.Graphics" />
+            >Gets the <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -393,8 +384,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 

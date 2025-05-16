@@ -22,71 +22,58 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can use the <see
-         cref="T:System.Web.UI.WebControls.ControlParameter" />
+        >You can use the <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
         
 
-         class to bind the value of a <see
-         cref="T:System.Web.UI.Control" />
+         class to bind the value of a <see cref="T:System.Web.UI.Control" />
 
         
 
-         property, such as <see
-         cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
+         property, such as <see cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
 
         
 
-         or <see
-         cref="P:System.Web.UI.WebControls.ListControl.SelectedIndex" />
+         or <see cref="P:System.Web.UI.WebControls.ListControl.SelectedIndex" />
 
         
 
         , to a parameter that is used in a parameterized SQL query, business object method, or filtering expression.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.ControlParameter" />
+        >The <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
         
 
-         class provides two properties in addition to those inherited from the <see
-         cref="T:System.Web.UI.WebControls.Parameter" />
+         class provides two properties in addition to those inherited from the <see cref="T:System.Web.UI.WebControls.Parameter" />
 
         
 
-         class: <see
-         cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
+         class: <see cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+         and <see cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
 
         
 
-        . The <see
-         cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
+        . The <see cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
 
         
 
-         property identifies which <see
-         cref="T:System.Web.UI.Control" />
+         property identifies which <see cref="T:System.Web.UI.Control" />
 
         
 
-         instance to bind to and the <see
-         cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+         instance to bind to and the <see cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
 
         
 
-         property identifies the public property of the <see
-         cref="T:System.Web.UI.Control" />
+         property identifies the public property of the <see cref="T:System.Web.UI.Control" />
 
         
 
-         from which the <see
-         cref="T:System.Web.UI.WebControls.ControlParameter" />
+         from which the <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
         
 
@@ -96,8 +83,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Binds the value of a property of a <see
-         cref="T:System.Web.UI.Control" />
+        >Binds the value of a property of a <see cref="T:System.Web.UI.Control" />
 
         
 
@@ -115,63 +101,51 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.ControlParameter" />
+            >A <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
             
 
-             object that is created with the <see
-             cref="M:System.Web.UI.WebControls.ControlParameter.#ctor" />
+             object that is created with the <see cref="M:System.Web.UI.WebControls.ControlParameter.#ctor" />
 
             
 
-             constructor is initialized with default values for all its properties. The <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
+             constructor is initialized with default values for all its properties. The <see cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+             and <see cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
 
             
 
-             properties are initialized to <see
-             cref="F:System.String.Empty" />
+             properties are initialized to <see cref="F:System.String.Empty" />
 
             
 
-            . In addition, the <see
-             cref="P:System.Web.UI.WebControls.Parameter.Name" />
+            . In addition, the <see cref="P:System.Web.UI.WebControls.Parameter.Name" />
 
             
 
-             property is initialized to <see
-             cref="F:System.String.Empty" />
+             property is initialized to <see cref="F:System.String.Empty" />
 
             
 
-            , the <see
-             cref="P:System.Web.UI.WebControls.Parameter.Type" />
+            , the <see cref="P:System.Web.UI.WebControls.Parameter.Type" />
 
             
 
-             property is initialized to <see
-             cref="F:System.TypeCode.Object" />
+             property is initialized to <see cref="F:System.TypeCode.Object" />
 
             
 
-            , the <see
-             cref="P:System.Web.UI.WebControls.Parameter.Direction" />
+            , the <see cref="P:System.Web.UI.WebControls.Parameter.Direction" />
 
             
 
-             property is initialized to <see
-             cref="F:System.Data.ParameterDirection.Input" />
+             property is initialized to <see cref="F:System.Data.ParameterDirection.Input" />
 
             
 
-            , and the <see
-             cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+            , and the <see cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
 
             
 
@@ -181,8 +155,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new unnamed instance of the <see
-             cref="T:System.Web.UI.WebControls.ControlParameter" />
+            >Initializes a new unnamed instance of the <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
             
 
@@ -208,38 +181,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ControlParameter.#ctor(System.Web.UI.WebControls.ControlParameter)" />
+            >The <see cref="M:System.Web.UI.WebControls.ControlParameter.#ctor(System.Web.UI.WebControls.ControlParameter)" />
 
             
 
-             constructor is a protected copy constructor that is used to clone a <see
-             cref="T:System.Web.UI.WebControls.ControlParameter" />
+             constructor is a protected copy constructor that is used to clone a <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
             
 
-             instance. The values of the <see
-             cref="T:System.Web.UI.WebControls.ControlParameter" />
+             instance. The values of the <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
             
 
-             object, including the <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
+             object, including the <see cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+            , <see cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.WebControls.Parameter.Name" />
+            , <see cref="P:System.Web.UI.WebControls.Parameter.Name" />
 
             
 
-            , and <see
-             cref="P:System.Web.UI.WebControls.Parameter.Type" />
+            , and <see cref="P:System.Web.UI.WebControls.Parameter.Type" />
 
             
 
@@ -249,8 +215,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.ControlParameter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
             
 
@@ -258,12 +223,15 @@
           >
         </summary>
         <param name="original">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.ControlParameter" />
+          A <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
           
 
@@ -289,38 +257,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.ControlParameter" />
+            >A <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
             
 
-             object that is created with the <see
-             cref="M:System.Web.UI.WebControls.ControlParameter.#ctor(System.String,System.String)" />
+             object that is created with the <see cref="M:System.Web.UI.WebControls.ControlParameter.#ctor(System.String,System.String)" />
 
             
 
-             constructor is initialized with the specified parameter name and <see
-             cref="T:System.Web.UI.Control" />
+             constructor is initialized with the specified parameter name and <see cref="T:System.Web.UI.Control" />
 
             
 
-             name, which identifies the <see
-             cref="T:System.Web.UI.Control" />
+             name, which identifies the <see cref="T:System.Web.UI.Control" />
 
             
 
-             that the parameter binds to. Other properties, including <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+             that the parameter binds to. Other properties, including <see cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.WebControls.Parameter.Type" />
+            , <see cref="P:System.Web.UI.WebControls.Parameter.Type" />
 
             
 
-            , and <see
-             cref="P:System.Web.UI.WebControls.Parameter.Direction" />
+            , and <see cref="P:System.Web.UI.WebControls.Parameter.Direction" />
 
             
 
@@ -330,8 +291,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new named instance of the <see
-             cref="T:System.Web.UI.WebControls.ControlParameter" />
+            >Initializes a new named instance of the <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
             
 
@@ -339,19 +299,26 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter. </param
         >
         <param name="controlID">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the control that the parameter is bound to. The default is <see
-           cref="F:System.String.Empty" />
+          The name of the control that the parameter is bound to. The default is <see cref="F:System.String.Empty" />
 
           
 
@@ -378,43 +345,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.ControlParameter" />
+            >A <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
             
 
-             object that is created with the <see
-             cref="M:System.Web.UI.WebControls.ControlParameter.#ctor(System.String,System.String,System.String)" />
+             object that is created with the <see cref="M:System.Web.UI.WebControls.ControlParameter.#ctor(System.String,System.String,System.String)" />
 
             
 
-             constructor is initialized with the specified parameter name, <see
-             cref="T:System.Web.UI.Control" />
+             constructor is initialized with the specified parameter name, <see cref="T:System.Web.UI.Control" />
 
             
 
-             name, and <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+             name, and <see cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
 
             
 
-             property, which identifies the <see
-             cref="T:System.Web.UI.Control" />
+             property, which identifies the <see cref="T:System.Web.UI.Control" />
 
             
 
-             that the parameter binds to. Other properties, including <see
-             cref="P:System.Web.UI.WebControls.Parameter.Type" />
+             that the parameter binds to. Other properties, including <see cref="P:System.Web.UI.WebControls.Parameter.Type" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.WebControls.Parameter.Direction" />
+            , <see cref="P:System.Web.UI.WebControls.Parameter.Direction" />
 
             
 
-            , and <see
-             cref="P:System.Web.UI.WebControls.Parameter.ConvertEmptyStringToNull" />
+            , and <see cref="P:System.Web.UI.WebControls.Parameter.ConvertEmptyStringToNull" />
 
             
 
@@ -424,8 +383,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new named instance of the <see
-             cref="T:System.Web.UI.WebControls.ControlParameter" />
+            >Initializes a new named instance of the <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
             
 
@@ -433,31 +391,41 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter. </param
         >
         <param name="controlID">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the control that the parameter is bound to. The default is <see
-           cref="F:System.String.Empty" />
+          The name of the control that the parameter is bound to. The default is <see cref="F:System.String.Empty" />
 
           
 
           . </param
         >
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the property on the control that the parameter is bound to. The default is <see
-           cref="F:System.String.Empty" />
+          The name of the property on the control that the parameter is bound to. The default is <see cref="F:System.String.Empty" />
 
           
 
@@ -485,38 +453,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.ControlParameter" />
+            >A <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
             
 
-             object that is created with the <see
-             cref="M:System.Web.UI.WebControls.ControlParameter.#ctor(System.String,System.TypeCode,System.String,System.String)" />
+             object that is created with the <see cref="M:System.Web.UI.WebControls.ControlParameter.#ctor(System.String,System.TypeCode,System.String,System.String)" />
 
             
 
-             constructor is initialized with the specified parameter name, <see
-             cref="P:System.Web.UI.WebControls.Parameter.Type" />
+             constructor is initialized with the specified parameter name, <see cref="P:System.Web.UI.WebControls.Parameter.Type" />
 
             
 
-            , <see
-             cref="T:System.Web.UI.Control" />
+            , <see cref="T:System.Web.UI.Control" />
 
             
 
-             name, and <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+             name, and <see cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
 
             
 
-             property. Only the <see
-             cref="P:System.Web.UI.WebControls.Parameter.Direction" />
+             property. Only the <see cref="P:System.Web.UI.WebControls.Parameter.Direction" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.Parameter.ConvertEmptyStringToNull" />
+             and <see cref="P:System.Web.UI.WebControls.Parameter.ConvertEmptyStringToNull" />
 
             
 
@@ -526,8 +487,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new named and strongly typed instance of the <see
-             cref="T:System.Web.UI.WebControls.ControlParameter" />
+            >Initializes a new named and strongly typed instance of the <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
             
 
@@ -535,43 +495,56 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type that the parameter represents. The default is <see
-           cref="F:System.TypeCode.Object" />
+          The type that the parameter represents. The default is <see cref="F:System.TypeCode.Object" />
 
           
 
           . </param
         >
         <param name="controlID">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the control that the parameter is bound to. The default is <see
-           cref="F:System.String.Empty" />
+          The name of the control that the parameter is bound to. The default is <see cref="F:System.String.Empty" />
 
           
 
           . </param
         >
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the property of the control that the parameter is bound to. The default is <see
-           cref="F:System.String.Empty" />
+          The name of the property of the control that the parameter is bound to. The default is <see cref="F:System.String.Empty" />
 
           
 
@@ -597,18 +570,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ControlParameter.Clone" />
+            >The <see cref="M:System.Web.UI.WebControls.ControlParameter.Clone" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.WebControls.ControlParameter.#ctor(System.Web.UI.WebControls.ControlParameter)" />
+             method calls the <see cref="M:System.Web.UI.WebControls.ControlParameter.#ctor(System.Web.UI.WebControls.ControlParameter)" />
 
             
 
-             copy constructor to initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.ControlParameter" />
+             copy constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
             
 
@@ -618,8 +588,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a duplicate of the current <see
-             cref="T:System.Web.UI.WebControls.ControlParameter" />
+            >Returns a duplicate of the current <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
             
 
@@ -629,8 +598,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.ControlParameter" />
+            >A <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
             
 
@@ -668,51 +636,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
+            >The <see cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
 
             
 
-             property is a required property that identifies the <see
-             cref="T:System.Web.UI.Control" />
+             property is a required property that identifies the <see cref="T:System.Web.UI.Control" />
 
             
 
-             instance that the <see
-             cref="T:System.Web.UI.WebControls.ControlParameter" />
+             instance that the <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
             
 
              object binds to at run time.</para
           >
           <para
-            >Typically, the <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
+            >Typically, the <see cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+             and <see cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
 
             
 
-             properties are set for the <see
-             cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+             properties are set for the <see cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
 
             
 
-             method to correctly bind to a control. If you do not set the <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
+             method to correctly bind to a control. If you do not set the <see cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
 
             
 
-             property, the <see
-             cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+             property, the <see cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
 
             
 
-             method throws an <see
-             cref="T:System.ArgumentException" />
+             method throws an <see cref="T:System.ArgumentException" />
 
             
 
@@ -722,8 +681,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the name of the control that the <see
-             cref="T:System.Web.UI.WebControls.ControlParameter" />
+            >Specifies the name of the control that the <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
             
 
@@ -754,51 +712,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.ControlParameter" />
+            >The <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
             
 
-             object attempts to bind to the <see
-             cref="T:System.Web.UI.Control" />
+             object attempts to bind to the <see cref="T:System.Web.UI.Control" />
 
             
 
-             object and property every time the <see
-             cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+             object and property every time the <see cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
 
             
 
-             method is called. The <see
-             cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+             method is called. The <see cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
 
             
 
-             method returns the value of the control's property that is identified by the combination of the <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
+             method returns the value of the control's property that is identified by the combination of the <see cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+             and <see cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
 
             
 
              properties. </para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.ControlParameter" />
+            >The <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
             
 
-             class never uses the <see
-             cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+             class never uses the <see cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
 
             
 
-             property, which is inherited from <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+             property, which is inherited from <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
@@ -806,13 +755,11 @@
           >
           <block subset="none" type="note">
             <para
-              >In this implementation of the method, the <paramref
-               name="context" />
+              >In this implementation of the method, the <paramref name="context" />
 
               
 
-               parameter is ignored. If the <paramref
-               name="control" />
+               parameter is ignored. If the <paramref name="control" />
 
               
 
@@ -823,8 +770,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates and returns the value of the <see
-             cref="T:System.Web.UI.WebControls.ControlParameter" />
+            >Updates and returns the value of the <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
             
 
@@ -834,8 +780,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -843,12 +788,15 @@
           >
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 
@@ -879,99 +827,81 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+            >The <see cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
 
             
 
-             property identifies the public property of the <see
-             cref="T:System.Web.UI.Control" />
+             property identifies the public property of the <see cref="T:System.Web.UI.Control" />
 
             
 
-             object identified by the <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
+             object identified by the <see cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
 
             
 
-             property that the <see
-             cref="T:System.Web.UI.WebControls.ControlParameter" />
+             property that the <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
             
 
-             object binds to at run time. <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+             object binds to at run time. <see cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
 
             
 
-             can be set to a simple string, such as "SelectedValue", or an expression using <see
-             cref="Overload:System.Web.UI.DataBinder.Eval" />
+             can be set to a simple string, such as "SelectedValue", or an expression using <see cref="Overload:System.Web.UI.DataBinder.Eval" />
 
             
 
              syntax to identify complex control properties.</para
           >
           <para
-            >While the <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+            >While the <see cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
 
             
 
-             property is optional, typically both <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
+             property is optional, typically both <see cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+             and <see cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
 
             
 
-             properties are set for the <see
-             cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+             properties are set for the <see cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
 
             
 
-             method to correctly bind to a control. If you set the <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
+             method to correctly bind to a control. If you set the <see cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
 
             
 
-             property but not the <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+             property but not the <see cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
 
             
 
-             property, the <see
-             cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+             property, the <see cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
 
             
 
-             method attempts to use the <see
-             cref="T:System.Web.UI.ControlValuePropertyAttribute" />
+             method attempts to use the <see cref="T:System.Web.UI.ControlValuePropertyAttribute" />
 
             
 
-             attribute to identify a default <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+             attribute to identify a default <see cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
 
             
 
-             property. (It is the responsibility of control authors to specify this attribute.) If this fails, <see
-             cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+             property. (It is the responsibility of control authors to specify this attribute.) If this fails, <see cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
 
             
 
-             throws an <see
-             cref="T:System.ArgumentException" />
+             throws an <see cref="T:System.ArgumentException" />
 
             
 
              exception.</para
           >
           <para
-            >The following table identifies which ASP.NET controls decorate properties with the <see
-             cref="T:System.Web.UI.ControlValuePropertyAttribute" />
+            >The following table identifies which ASP.NET controls decorate properties with the <see cref="T:System.Web.UI.ControlValuePropertyAttribute" />
 
             
 
@@ -1125,13 +1055,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the property name of the control identified by the <see
-             cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
+            >Gets or sets the property name of the control identified by the <see cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
 
             
 
-             property that the <see
-             cref="T:System.Web.UI.WebControls.ControlParameter" />
+             property that the <see cref="T:System.Web.UI.WebControls.ControlParameter" />
 
             
 

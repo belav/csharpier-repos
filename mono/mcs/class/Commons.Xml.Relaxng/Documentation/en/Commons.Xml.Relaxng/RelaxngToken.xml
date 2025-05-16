@@ -11,7 +11,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -41,25 +43,15 @@
       </Parameters>
       <Docs>
         <summary
-          >Validates the value string. See <see
-           cref="M:Commons.Xml.Relaxng.RelaxngDatatype.IsValid" />
+          >Validates the value string. See <see cref="M:Commons.Xml.Relaxng.RelaxngDatatype.IsValid" />
 
           
 
            for the details of this mehod.</summary
         >
-        <param name="text"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <param name="reader"
-          >a <see
-           cref="T:System.Xml.XmlReader" />
-        </param>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <param name="text">a <see cref="T:System.String" /></param>
+        <param name="reader">a <see cref="T:System.Xml.XmlReader" /></param>
+        <returns>a <see cref="T:System.Boolean" /></returns>
       </Docs>
     </Member>
     <Member MemberName="Parse">
@@ -77,25 +69,15 @@
       </Parameters>
       <Docs>
         <summary
-          >Parses the value string. See <see
-           cref="Commons.Xml.Relaxng.RelaxngDatatype.Parse" />
+          >Parses the value string. See <see cref="Commons.Xml.Relaxng.RelaxngDatatype.Parse" />
 
           
 
            for the details of this method.</summary
         >
-        <param name="text"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <param name="reader"
-          >a <see
-           cref="T:System.Xml.XmlReader" />
-        </param>
-        <returns
-          >a <see
-           cref="T:System.Object" />
-        </returns>
+        <param name="text">a <see cref="T:System.String" /></param>
+        <param name="reader">a <see cref="T:System.Xml.XmlReader" /></param>
+        <returns>a <see cref="T:System.Object" /></returns>
       </Docs>
     </Member>
     <Member MemberName="Compare">
@@ -110,25 +92,15 @@
       </Parameters>
       <Docs>
         <summary
-          >Compares two parameters. See <see
-           cref="M:Commons.Xml.Relaxng.RelaxngDatatype.Compare" />
+          >Compares two parameters. See <see cref="M:Commons.Xml.Relaxng.RelaxngDatatype.Compare" />
 
           
 
            for the details of this method.</summary
         >
-        <param name="o1"
-          >a <see
-           cref="T:System.Object" />
-        </param>
-        <param name="o2"
-          >a <see
-           cref="T:System.Object" />
-        </param>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <param name="o1">a <see cref="T:System.Object" /></param>
+        <param name="o2">a <see cref="T:System.Object" /></param>
+        <returns>a <see cref="T:System.Boolean" /></returns>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -150,10 +122,7 @@
       <Parameters />
       <Docs>
         <summary>The local type name. It returns "token".</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
       </Docs>
     </Member>
     <Member MemberName="NamespaceURI">
@@ -165,10 +134,7 @@
       <Parameters />
       <Docs>
         <summary>The datatype library name. It returns String.Empty.</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
       </Docs>
     </Member>
   </Members>

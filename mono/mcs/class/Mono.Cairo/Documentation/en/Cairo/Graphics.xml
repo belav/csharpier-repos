@@ -22,36 +22,30 @@
       </Parameters>
       <Docs>
         <param name="surface"
-          >The <see
-           cref="T:Cairo.Surface" />
+          >The <see cref="T:Cairo.Surface" />
 
           
 
            on which this Graphics object will render everything.</param
         >
         <summary
-          >Creates a <see
-           cref="T:Cairo.Graphics" />
+          >Creates a <see cref="T:Cairo.Graphics" />
 
           
 
            object using the provided surface.</summary
         >
-        <remarks
-          >
+        <remarks>
 
-Note that the <paramref
-           name="surface" />
+Note that the <paramref name="surface" />
 
           
 
-           can be a <see
-           cref="T:Cairo.Surface" />
+           can be a <see cref="T:Cairo.Surface" />
 
           
 
-           or <see
-           cref="T:Cairo.ImageSurface" />
+           or <see cref="T:Cairo.ImageSurface" />
 
           
 
@@ -72,8 +66,7 @@ Note that the <paramref
       <Docs>
         <param name="state">The raw C object.</param>
         <summary
-          >This constructor accepts a Cairo graphics object coming in from the C API and wraps it into our <see
-           cref="T:Cairo.Graphics" />
+          >This constructor accepts a Cairo graphics object coming in from the C API and wraps it into our <see cref="T:Cairo.Graphics" />
 
           
 
@@ -96,8 +89,7 @@ Note that the <paramref
         <summary>The antialiasing mode of the rasterizer used for drawing shapes.</summary>
         <value>The antialiasing mode</value>
         <remarks
-          >This value is a hint, and a particular backend may or may not support a particular value. At the current time, no backend supports <see
-           cref="F:Cairo.Antialias.Subpixel" />
+          >This value is a hint, and a particular backend may or may not support a particular value. At the current time, no backend supports <see cref="F:Cairo.Antialias.Subpixel" />
 
           
 
@@ -133,8 +125,7 @@ Note that the <paramref
       </ReturnValue>
       <Docs>
         <summary
-          >The current Color in the drawing context (obsolete, use <see
-           cref="P:Cairo.Graphics.Color" />
+          >The current Color in the drawing context (obsolete, use <see cref="P:Cairo.Graphics.Color" />
 
           
 
@@ -177,10 +168,7 @@ Note that the <paramref
       </ReturnValue>
       <Docs>
         <summary>Get or set the fill rule.</summary>
-        <value
-          >See <see
-           cref="T:Cairo.FillRule" />
-        </value>
+        <value>See <see cref="T:Cairo.FillRule" /></value>
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -196,14 +184,11 @@ Note that the <paramref
       </ReturnValue>
       <Docs>
         <summary>The metric information for a font</summary>
-        <value
-          >A <see
-           cref="t:Cairo.FontExtents" />
+        <value>A <see cref="t:Cairo.FontExtents" />
 
           
 
-           structure</value
-        >
+           structure</value>
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -221,8 +206,7 @@ Note that the <paramref
         <summary>The current font matrix</summary>
         <value>a matrix describing a transform to be applied to the current font.</value>
         <remarks
-          >The font matrix gives a transformation from the design space of the font (in this space, the em-square is 1 unit by 1 unit) to user space. Normally, a simple scale is used (see <see
-           cref="M:Cairo.Graphics.SetFontSize()" />
+          >The font matrix gives a transformation from the design space of the font (in this space, the em-square is 1 unit by 1 unit) to user space. Normally, a simple scale is used (see <see cref="M:Cairo.Graphics.SetFontSize()" />
 
           
 
@@ -274,14 +258,11 @@ Note that the <paramref
       </ReturnValue>
       <Docs>
         <summary>Get or set the line cap style.</summary>
-        <value
-          >See <see
-           cref="T:Cairo.LineCap" />
+        <value>See <see cref="T:Cairo.LineCap" />
 
           
 
-          .</value
-        >
+          .</value>
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -297,14 +278,11 @@ Note that the <paramref
       </ReturnValue>
       <Docs>
         <summary>Get or set the line join style.</summary>
-        <value
-          >See <see
-           cref="T:Cairo.LineJoin" />
+        <value>See <see cref="T:Cairo.LineJoin" />
 
           
 
-          .</value
-        >
+          .</value>
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -336,10 +314,7 @@ Note that the <paramref
       </ReturnValue>
       <Docs>
         <summary>Get or set the current transformation matrix (CTM).</summary>
-        <value
-          >The current Transformation Matrix <see
-           cref="t:Cairo.Matrix" />
-        </value>
+        <value>The current Transformation Matrix <see cref="t:Cairo.Matrix" /></value>
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -355,10 +330,7 @@ Note that the <paramref
       </ReturnValue>
       <Docs>
         <summary>Get or set the miter limit (the value beyond which joins are no longer mitered).</summary>
-        <value
-          >the miter limit as <see
-           cref="t:System.Double" />
-        </value>
+        <value>the miter limit as <see cref="t:System.Double" /></value>
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -389,22 +361,16 @@ Note that the <paramref
         <ReturnType>Cairo.Pattern</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >See <see
-           cref="P:Cairo.Graphics.Source" />
+        <summary>See <see cref="P:Cairo.Graphics.Source" />
 
           
 
-          .</summary
-        >
-        <value
-          >See <see
-           cref="P:Cairo.Graphics.Source" />
+          .</summary>
+        <value>See <see cref="P:Cairo.Graphics.Source" />
 
           
 
-          .</value
-        >
+          .</value>
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -420,16 +386,14 @@ Note that the <paramref
       </ReturnValue>
       <Docs>
         <summary
-          >Sets the source pattern within graphics object to <paramref
-           name="source" />
+          >Sets the source pattern within graphics object to <paramref name="source" />
 
           
 
           .</summary
         >
         <value
-          >A <see
-           cref="T:Cairo.Pattern" />
+          >A <see cref="T:Cairo.Pattern" />
 
           
 
@@ -467,8 +431,7 @@ Note that the <paramref
       </ReturnValue>
       <Docs>
         <summary
-          >Gets the target surface for the cairo context as passed to <see
-           cref="C:Cairo.Graphics()" />
+          >Gets the target surface for the cairo context as passed to <see cref="C:Cairo.Graphics()" />
 
           
 

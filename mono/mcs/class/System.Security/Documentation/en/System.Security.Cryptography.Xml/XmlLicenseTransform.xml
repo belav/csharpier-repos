@@ -22,29 +22,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
+        >The <see cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
 
         
 
          class represents the license transform algorithm as defined in the MPEG Rights Extension Language (MPEG REL).</para
       >
       <para
-        >Use the <see
-         cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
+        >Use the <see cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
 
         
 
          class to transform XrML licenses for signatures.</para
       >
       <para
-        >The Uniform Resource Identifier (URI) that describes the <see
-         cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
+        >The Uniform Resource Identifier (URI) that describes the <see cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
 
         
 
-         class is defined by the <see
-         cref="F:System.Security.Cryptography.Xml.SignedXml.XmlLicenseTransformUrl" />
+         class is defined by the <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlLicenseTransformUrl" />
 
         
 
@@ -75,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
 
             
 
@@ -108,13 +103,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
+            >The <see cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
 
             
 
-             object uses an <see
-             cref="T:System.Security.Cryptography.Xml.IRelDecryptor" />
+             object uses an <see cref="T:System.Security.Cryptography.Xml.IRelDecryptor" />
 
             
 
@@ -124,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the decryptor of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
+            >Gets or sets the decryptor of the current <see cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
 
             
 
@@ -158,8 +150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an XML representation of the parameters of an <see
-             cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
+            >Returns an XML representation of the parameters of an <see cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
 
             
 
@@ -169,8 +160,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A list of the XML nodes that represent the transform-specific content needed to describe the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
+            >A list of the XML nodes that represent the transform-specific content needed to describe the current <see cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
 
             
 
@@ -199,8 +189,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type of the returned object must be <see
-             cref="T:System.Xml.XmlDocument" />
+            >The type of the returned object must be <see cref="T:System.Xml.XmlDocument" />
 
             
 
@@ -210,8 +199,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the output of an <see
-             cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
+            >Returns the output of an <see cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
 
             
 
@@ -221,8 +209,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The output of the <see
-             cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
+            >The output of the <see cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
 
             
 
@@ -254,8 +241,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the output of an <see
-             cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
+            >Returns the output of an <see cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
 
             
 
@@ -265,8 +251,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The output of the <see
-             cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
+            >The output of the <see cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
 
             
 
@@ -274,12 +259,15 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of the output to return. <see
-           cref="T:System.Xml.XmlDocument" />
+          The type of the output to return. <see cref="T:System.Xml.XmlDocument" />
 
           
 
@@ -304,13 +292,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The only valid input type to the <see
-             cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
+            >The only valid input type to the <see cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
 
             
 
-             class is <see
-             cref="T:System.Xml.XmlDocument" />
+             class is <see cref="T:System.Xml.XmlDocument" />
 
             
 
@@ -320,13 +306,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of types that are valid inputs to the <see
-             cref="P:System.Security.Cryptography.Xml.XmlLicenseTransform.OutputTypes" />
+            >Gets an array of types that are valid inputs to the <see cref="P:System.Security.Cryptography.Xml.XmlLicenseTransform.OutputTypes" />
 
             
 
-             method of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
+             method of the current <see cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
 
             
 
@@ -361,13 +345,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Parses the specified <see
-             cref="T:System.Xml.XmlNodeList" />
+            >Parses the specified <see cref="T:System.Xml.XmlNodeList" />
 
             
 
-             object as transform-specific content of a &lt;Transform&gt; element; this method is not supported because the <see
-             cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
+             object as transform-specific content of a &lt;Transform&gt; element; this method is not supported because the <see cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
 
             
 
@@ -375,17 +357,19 @@
           >
         </summary>
         <param name="nodeList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlNodeList" />
+          An <see cref="T:System.Xml.XmlNodeList" />
 
           
 
-           object that encapsulates the transform to load into the current <see
-           cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
+           object that encapsulates the transform to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
 
           
 
@@ -416,8 +400,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads the specified input into the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
+            >Loads the specified input into the current <see cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
 
             
 
@@ -425,17 +408,19 @@
           >
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The input to load into the current <see
-           cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
+          The input to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
 
           
 
-           object. The type of the input object must be <see
-           cref="T:System.Xml.XmlDocument" />
+           object. The type of the input object must be <see cref="T:System.Xml.XmlDocument" />
 
           
 
@@ -463,13 +448,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The only valid output type to the <see
-             cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
+            >The only valid output type to the <see cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
 
             
 
-             class is <see
-             cref="T:System.Xml.XmlDocument" />
+             class is <see cref="T:System.Xml.XmlDocument" />
 
             
 
@@ -479,13 +462,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of types that are valid outputs from the <see
-             cref="P:System.Security.Cryptography.Xml.XmlLicenseTransform.OutputTypes" />
+            >Gets an array of types that are valid outputs from the <see cref="P:System.Security.Cryptography.Xml.XmlLicenseTransform.OutputTypes" />
 
             
 
-             method of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
+             method of the current <see cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
 
             
 

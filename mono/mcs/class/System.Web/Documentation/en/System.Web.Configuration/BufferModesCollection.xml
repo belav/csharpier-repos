@@ -22,23 +22,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.BufferModeSettings" />
+        >The <see cref="T:System.Web.Configuration.BufferModeSettings" />
 
         
 
-         object is used to define roles for event providers such as Critical, Notification, Analysis, and Logging. Each role sets buffer mode events differently. For example, a Critical role keeps the <see
-         cref="P:System.Web.Configuration.BufferModeSettings.MaxBufferSize" />
+         object is used to define roles for event providers such as Critical, Notification, Analysis, and Logging. Each role sets buffer mode events differently. For example, a Critical role keeps the <see cref="P:System.Web.Configuration.BufferModeSettings.MaxBufferSize" />
 
         
 
-        , <see
-         cref="P:System.Web.Configuration.BufferModeSettings.MaxFlushSize" />
+        , <see cref="P:System.Web.Configuration.BufferModeSettings.MaxFlushSize" />
 
         
 
-         and <see
-         cref="P:System.Web.Configuration.BufferModeSettings.UrgentFlushInterval" />
+         and <see cref="P:System.Web.Configuration.BufferModeSettings.UrgentFlushInterval" />
 
         
 
@@ -48,8 +44,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A collection of <see
-         cref="T:System.Web.Configuration.BufferModeSettings" />
+        >A collection of <see cref="T:System.Web.Configuration.BufferModeSettings" />
 
         
 
@@ -67,18 +62,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HealthMonitoringSection.BufferModes" />
+            >The <see cref="P:System.Web.Configuration.HealthMonitoringSection.BufferModes" />
 
             
 
-             property of the <see
-             cref="T:System.Web.Configuration.HealthMonitoringSection" />
+             property of the <see cref="T:System.Web.Configuration.HealthMonitoringSection" />
 
             
 
-             class always contains an instance of the <see
-             cref="T:System.Web.Configuration.BufferModesCollection" />
+             class always contains an instance of the <see cref="T:System.Web.Configuration.BufferModesCollection" />
 
             
 
@@ -88,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.BufferModesCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.BufferModesCollection" />
 
             
 
@@ -118,8 +109,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection must not already contain a <see
-             cref="T:System.Web.Configuration.BufferModeSettings" />
+            >The collection must not already contain a <see cref="T:System.Web.Configuration.BufferModeSettings" />
 
             
 
@@ -129,8 +119,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Web.Configuration.BufferModeSettings" />
+            >Adds a <see cref="T:System.Web.Configuration.BufferModeSettings" />
 
             
 
@@ -138,12 +127,15 @@
           >
         </summary>
         <param name="bufferModeSettings">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Configuration.BufferModeSettings" />
+          A <see cref="T:System.Web.Configuration.BufferModeSettings" />
 
           
 
@@ -170,8 +162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see
-             cref="T:System.Web.Configuration.BufferModeSettings" />
+            >Removes all <see cref="T:System.Web.Configuration.BufferModeSettings" />
 
             
 
@@ -200,8 +191,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Configuration.ConfigurationElement" />
+            >Creates a new <see cref="T:System.Configuration.ConfigurationElement" />
 
             
 
@@ -234,12 +224,15 @@
           <para>Gets the key for the specified configuration element.</para>
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.ConfigurationElement" />
+          A <see cref="T:System.Configuration.ConfigurationElement" />
 
           
 
@@ -312,13 +305,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Configuration.ConfigurationPropertyCollection" />
+            >Gets the <see cref="T:System.Configuration.ConfigurationPropertyCollection" />
 
             
 
-             for this <see
-             cref="T:System.Configuration.ConfigurationElement" />
+             for this <see cref="T:System.Configuration.ConfigurationElement" />
 
             
 
@@ -348,8 +339,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Web.Configuration.BufferModeSettings" />
+            >Removes a <see cref="T:System.Web.Configuration.BufferModeSettings" />
 
             
 
@@ -357,12 +347,15 @@
           >
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of a <see
-           cref="T:System.Web.Configuration.BufferModeSettings" />
+          The name of a <see cref="T:System.Web.Configuration.BufferModeSettings" />
 
           
 

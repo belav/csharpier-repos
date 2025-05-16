@@ -45,8 +45,7 @@
 
             
 
-             contains the <see
-             cref="T:System.ComponentModel.TypeConverter" />
+             contains the <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
@@ -154,8 +153,7 @@
         </item>
       </list>
       <para
-        >Typically, the abstract members are implemented through reflection. For more information about reflection, see the topics in <format
-         type="text/html">
+        >Typically, the abstract members are implemented through reflection. For more information about reflection, see the topics in <format type="text/html">
           <a href="d1a58e7f-fb39-4d50-bf84-e3b8f9bf9775">Reflection</a>
         </format>
 
@@ -195,13 +193,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
-             class with the name and attributes in the specified <see
-             cref="T:System.ComponentModel.MemberDescriptor" />
+             class with the name and attributes in the specified <see cref="T:System.ComponentModel.MemberDescriptor" />
 
             
 
@@ -235,13 +231,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor appends the attributes in the <see
-             cref="T:System.Attribute" />
+            >This constructor appends the attributes in the <see cref="T:System.Attribute" />
 
             
 
-             array to the attributes in the <see
-             cref="T:System.ComponentModel.MemberDescriptor" />
+             array to the attributes in the <see cref="T:System.ComponentModel.MemberDescriptor" />
 
             
 
@@ -251,23 +245,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
-             class with the name in the specified <see
-             cref="T:System.ComponentModel.MemberDescriptor" />
+             class with the name in the specified <see cref="T:System.ComponentModel.MemberDescriptor" />
 
             
 
-             and the attributes in both the <see
-             cref="T:System.ComponentModel.MemberDescriptor" />
+             and the attributes in both the <see cref="T:System.ComponentModel.MemberDescriptor" />
 
             
 
-             and the <see
-             cref="T:System.Attribute" />
+             and the <see cref="T:System.Attribute" />
 
             
 
@@ -275,12 +265,15 @@
           >
         </summary>
         <param name="attrs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Attribute" />
+          An <see cref="T:System.Attribute" />
 
           
 
@@ -313,8 +306,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -322,19 +314,26 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the property. </param
         >
         <param name="attrs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Attribute" />
+          An array of type <see cref="T:System.Attribute" />
 
           
 
@@ -371,14 +370,22 @@
           <para>Enables other objects to be notified when this property changes.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component to add the handler for. </param
         >
         <param name="handler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -421,7 +428,11 @@
           <para>true if resetting the component changes its value; otherwise, false.</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -522,12 +533,15 @@
           <para>A new instance of the type.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -564,12 +578,15 @@
           <para>true if the values are equivalent; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to compare to this <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The object to compare to this <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -605,8 +622,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the attributes of the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Adds the attributes of the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -614,12 +630,15 @@
           >
         </summary>
         <param name="attributeList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IList" />
+          An <see cref="T:System.Collections.IList" />
 
           
 
@@ -650,44 +669,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method passes null for both the <paramref
-             name="instance" />
+            >This method passes null for both the <paramref name="instance" />
 
             
 
-             parameter and the <paramref
-             name="filter" />
+             parameter and the <paramref name="filter" />
 
             
 
              parameter.</para
           >
           <para
-            >The properties for the <paramref
-             name="instance" />
+            >The properties for the <paramref name="instance" />
 
             
 
-             parameter can differ from the properties of a class, because the container can add or remove properties if the <paramref
-             name="instance" />
+             parameter can differ from the properties of a class, because the container can add or remove properties if the <paramref name="instance" />
 
             
 
              parameter is sited.</para
           >
           <para
-            >The <paramref
-             name="filter" />
+            >The <paramref name="filter" />
 
             
 
-             parameter can mix <see
-             cref="T:System.Type" />
+             parameter can mix <see cref="T:System.Type" />
 
             
 
-             and <see
-             cref="T:System.Attribute" />
+             and <see cref="T:System.Attribute" />
 
             
 
@@ -696,13 +708,11 @@
           <list type="bullet">
             <item>
               <para
-                >A <see
-                 cref="T:System.Type" />
+                >A <see cref="T:System.Type" />
 
                 
 
-                 object is treated as a wildcard; it matches any property that has the <see
-                 cref="T:System.Type" />
+                 object is treated as a wildcard; it matches any property that has the <see cref="T:System.Type" />
 
                 
 
@@ -711,8 +721,7 @@
             </item>
             <item>
               <para
-                >If a property does not have an <see
-                 cref="T:System.Attribute" />
+                >If a property does not have an <see cref="T:System.Attribute" />
 
                 
 
@@ -721,8 +730,7 @@
             </item>
             <item>
               <para
-                >If the attribute is an instance of <see
-                 cref="T:System.Attribute" />
+                >If the attribute is an instance of <see cref="T:System.Attribute" />
 
                 
 
@@ -731,13 +739,11 @@
             </item>
             <item>
               <para
-                >If you specify an <see
-                 cref="T:System.Attribute" />
+                >If you specify an <see cref="T:System.Attribute" />
 
                 
 
-                 and it is the default property, it will be included in the returned array, even if there is no instance of <see
-                 cref="T:System.Attribute" />
+                 and it is the default property, it will be included in the returned array, even if there is no instance of <see cref="T:System.Attribute" />
 
                 
 
@@ -749,8 +755,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the default <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >Returns the default <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
@@ -788,39 +793,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method passes null for the <paramref
-             name="instance" />
+            >This method passes null for the <paramref name="instance" />
 
             
 
              parameter.</para
           >
           <para
-            >The properties for the <paramref
-             name="instance" />
+            >The properties for the <paramref name="instance" />
 
             
 
-             parameter can differ from the properties of a class, because the site can add or remove properties if the <paramref
-             name="instance" />
+             parameter can differ from the properties of a class, because the site can add or remove properties if the <paramref name="instance" />
 
             
 
              parameter is sited.</para
           >
           <para
-            >The <paramref
-             name="filter" />
+            >The <paramref name="filter" />
 
             
 
-             parameter can mix <see
-             cref="T:System.Type" />
+             parameter can mix <see cref="T:System.Type" />
 
             
 
-             and <see
-             cref="T:System.Attribute" />
+             and <see cref="T:System.Attribute" />
 
             
 
@@ -829,13 +828,11 @@
           <list type="bullet">
             <item>
               <para
-                >A <see
-                 cref="T:System.Type" />
+                >A <see cref="T:System.Type" />
 
                 
 
-                 object is treated as a wildcard; it matches any property that has the <see
-                 cref="T:System.Type" />
+                 object is treated as a wildcard; it matches any property that has the <see cref="T:System.Type" />
 
                 
 
@@ -844,8 +841,7 @@
             </item>
             <item>
               <para
-                >If a property does not have an <see
-                 cref="T:System.Attribute" />
+                >If a property does not have an <see cref="T:System.Attribute" />
 
                 
 
@@ -854,8 +850,7 @@
             </item>
             <item>
               <para
-                >If the attribute is an instance of <see
-                 cref="T:System.Attribute" />
+                >If the attribute is an instance of <see cref="T:System.Attribute" />
 
                 
 
@@ -864,13 +859,11 @@
             </item>
             <item>
               <para
-                >If you specify an <see
-                 cref="T:System.Attribute" />
+                >If you specify an <see cref="T:System.Attribute" />
 
                 
 
-                 instance and it is the default property, it will be included in the returned array even if there is no instance of the <see
-                 cref="T:System.Attribute" />
+                 instance and it is the default property, it will be included in the returned array even if there is no instance of the <see cref="T:System.Attribute" />
 
                 
 
@@ -882,8 +875,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >Returns a <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
@@ -893,8 +885,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
@@ -902,12 +893,15 @@
           >
         </returns>
         <param name="filter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Attribute" />
+          An array of type <see cref="T:System.Attribute" />
 
           
 
@@ -940,39 +934,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method passes null for the <paramref
-             name="filter" />
+            >This method passes null for the <paramref name="filter" />
 
             
 
              parameter.</para
           >
           <para
-            >The properties for the <paramref
-             name="instance" />
+            >The properties for the <paramref name="instance" />
 
             
 
-             parameter can differ from the properties of a class, because the site can add or remove properties if the <paramref
-             name="instance" />
+             parameter can differ from the properties of a class, because the site can add or remove properties if the <paramref name="instance" />
 
             
 
              parameter is sited.</para
           >
           <para
-            >The <paramref
-             name="filter" />
+            >The <paramref name="filter" />
 
             
 
-             parameter can mix <see
-             cref="T:System.Type" />
+             parameter can mix <see cref="T:System.Type" />
 
             
 
-             and <see
-             cref="T:System.Attribute" />
+             and <see cref="T:System.Attribute" />
 
             
 
@@ -981,13 +969,11 @@
           <list type="bullet">
             <item>
               <para
-                >A <see
-                 cref="T:System.Type" />
+                >A <see cref="T:System.Type" />
 
                 
 
-                 object is treated as a wildcard; it matches any property that has the <see
-                 cref="T:System.Type" />
+                 object is treated as a wildcard; it matches any property that has the <see cref="T:System.Type" />
 
                 
 
@@ -996,8 +982,7 @@
             </item>
             <item>
               <para
-                >If a property does not have an <see
-                 cref="T:System.Attribute" />
+                >If a property does not have an <see cref="T:System.Attribute" />
 
                 
 
@@ -1006,8 +991,7 @@
             </item>
             <item>
               <para
-                >If the attribute is an instance of <see
-                 cref="T:System.Attribute" />
+                >If the attribute is an instance of <see cref="T:System.Attribute" />
 
                 
 
@@ -1016,13 +1000,11 @@
             </item>
             <item>
               <para
-                >If you specify an <see
-                 cref="T:System.Attribute" />
+                >If you specify an <see cref="T:System.Attribute" />
 
                 
 
-                 instance and it is the default property, it will be included in the returned array even if there is no instance of the <see
-                 cref="T:System.Attribute" />
+                 instance and it is the default property, it will be included in the returned array even if there is no instance of the <see cref="T:System.Attribute" />
 
                 
 
@@ -1034,8 +1016,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >Returns a <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
@@ -1045,8 +1026,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
@@ -1054,7 +1034,11 @@
           >
         </returns>
         <param name="instance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1088,31 +1072,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The properties for the <paramref
-             name="instance" />
+            >The properties for the <paramref name="instance" />
 
             
 
-             parameter can differ from the properties of a class, because the site can add or remove properties if the <paramref
-             name="instance" />
+             parameter can differ from the properties of a class, because the site can add or remove properties if the <paramref name="instance" />
 
             
 
              parameter is sited.</para
           >
           <para
-            >The <paramref
-             name="filter" />
+            >The <paramref name="filter" />
 
             
 
-             parameter can mix <see
-             cref="T:System.Type" />
+             parameter can mix <see cref="T:System.Type" />
 
             
 
-             and <see
-             cref="T:System.Attribute" />
+             and <see cref="T:System.Attribute" />
 
             
 
@@ -1121,13 +1100,11 @@
           <list type="bullet">
             <item>
               <para
-                >A <see
-                 cref="T:System.Type" />
+                >A <see cref="T:System.Type" />
 
                 
 
-                 object is treated as a wildcard; it matches any property that has the <see
-                 cref="T:System.Type" />
+                 object is treated as a wildcard; it matches any property that has the <see cref="T:System.Type" />
 
                 
 
@@ -1136,8 +1113,7 @@
             </item>
             <item>
               <para
-                >If a property does not have an <see
-                 cref="T:System.Attribute" />
+                >If a property does not have an <see cref="T:System.Attribute" />
 
                 
 
@@ -1146,8 +1122,7 @@
             </item>
             <item>
               <para
-                >If the attribute is an instance of <see
-                 cref="T:System.Attribute" />
+                >If the attribute is an instance of <see cref="T:System.Attribute" />
 
                 
 
@@ -1156,13 +1131,11 @@
             </item>
             <item>
               <para
-                >If you specify an <see
-                 cref="T:System.Attribute" />
+                >If you specify an <see cref="T:System.Attribute" />
 
                 
 
-                 instance and it is the default property, it will be included in the returned array even if there is no instance of the <see
-                 cref="T:System.Attribute" />
+                 instance and it is the default property, it will be included in the returned array even if there is no instance of the <see cref="T:System.Attribute" />
 
                 
 
@@ -1171,13 +1144,11 @@
             </item>
           </list>
           <para
-            >Generally, child properties should be returned by implementing the <see
-             cref="M:System.ComponentModel.TypeConverter.GetProperties(System.Object)" />
+            >Generally, child properties should be returned by implementing the <see cref="M:System.ComponentModel.TypeConverter.GetProperties(System.Object)" />
 
             
 
-             member of the <see
-             cref="T:System.ComponentModel.TypeConverter" />
+             member of the <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
@@ -1187,8 +1158,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >Returns a <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
@@ -1198,8 +1168,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
@@ -1207,19 +1176,26 @@
           >
         </returns>
         <param name="instance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A component to get the properties for. </param
         >
         <param name="filter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Attribute" />
+          An array of type <see cref="T:System.Attribute" />
 
           
 
@@ -1259,7 +1235,11 @@
           <para>An instance of the requested editor type, or null if an editor cannot be found.</para>
         </returns>
         <param name="editorBaseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1320,13 +1300,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, the return value will be the same as the <paramref
-             name="instance" />
+            >Typically, the return value will be the same as the <paramref name="instance" />
 
             
 
-             passed in. If someone associated another object with this instance, or if the instance is a custom type descriptor, the <see
-             cref="M:System.ComponentModel.PropertyDescriptor.GetInvocationTarget(System.Type,System.Object)" />
+             passed in. If someone associated another object with this instance, or if the instance is a custom type descriptor, the <see cref="M:System.ComponentModel.PropertyDescriptor.GetInvocationTarget(System.Type,System.Object)" />
 
             
 
@@ -1340,8 +1318,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Object" />
+            >The <see cref="T:System.Object" />
 
             
 
@@ -1349,19 +1326,26 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            of the invocation target.</param
         >
         <param name="instance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1391,13 +1375,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To find the appropriate type, this method first checks the assembly of the type that this <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >To find the appropriate type, this method first checks the assembly of the type that this <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
-             references. If it does not find the type in the assembly, it calls <see
-             cref="M:System.Type.GetType" />
+             references. If it does not find the type in the assembly, it calls <see cref="M:System.Type.GetType" />
 
             
 
@@ -1411,8 +1393,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Type" />
+            >A <see cref="T:System.Type" />
 
             
 
@@ -1420,7 +1401,11 @@
           >
         </returns>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1451,18 +1436,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Typically, this method is implemented through reflection.</para>
           <para
-            >This method automatically calls the pre-change method, <see
-             cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanging(System.Object,System.ComponentModel.MemberDescriptor)" />
+            >This method automatically calls the pre-change method, <see cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanging(System.Object,System.ComponentModel.MemberDescriptor)" />
 
             
 
-            , and post-change method, <see
-             cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanged(System.Object,System.ComponentModel.MemberDescriptor,System.Object,System.Object)" />
+            , and post-change method, <see cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanged(System.Object,System.ComponentModel.MemberDescriptor,System.Object,System.Object)" />
 
             
 
-            , of the <see
-             cref="T:System.ComponentModel.Design.IComponentChangeService" />
+            , of the <see cref="T:System.ComponentModel.Design.IComponentChangeService" />
 
             
 
@@ -1478,7 +1460,11 @@
           <para>The value of a property for a given component.</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1515,8 +1501,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A combined multicast event handler, or null if no event handlers are currently assigned to <paramref
-             name="component" />
+            >A combined multicast event handler, or null if no event handlers are currently assigned to <paramref name="component" />
 
             
 
@@ -1524,7 +1509,11 @@
           >
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1549,8 +1538,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a property is marked with the <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >When a property is marked with the <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
@@ -1560,8 +1548,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether this property should be localized, as specified in the <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >Gets a value indicating whether this property should be localized, as specified in the <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
@@ -1623,19 +1610,26 @@
           <para>Raises the ValueChanged event that you implemented.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that raises the event. </param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1696,14 +1690,22 @@
           <para>Enables other objects to be notified when this property changes.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component to remove the handler for. </param
         >
         <param name="handler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1740,8 +1742,7 @@
             </item>
             <item>
               <para
-                >There is a <see
-                 cref="T:System.ComponentModel.DefaultValueAttribute" />
+                >There is a <see cref="T:System.ComponentModel.DefaultValueAttribute" />
 
                 
 
@@ -1753,8 +1754,7 @@
             </item>
           </list>
           <para
-            >This method creates a <see
-             cref="T:System.ComponentModel.Design.DesignerTransaction" />
+            >This method creates a <see cref="T:System.ComponentModel.Design.DesignerTransaction" />
 
             
 
@@ -1763,13 +1763,11 @@
           <list type="ordered">
             <item>
               <para
-                >The method calls the <see
-                 cref="M:System.ComponentModel.Design.IDesignerHost.CreateTransaction" />
+                >The method calls the <see cref="M:System.ComponentModel.Design.IDesignerHost.CreateTransaction" />
 
                 
 
-                 method to create a new <see
-                 cref="T:System.ComponentModel.Design.DesignerTransaction" />
+                 method to create a new <see cref="T:System.ComponentModel.Design.DesignerTransaction" />
 
                 
 
@@ -1778,8 +1776,7 @@
             </item>
             <item>
               <para
-                >The method calls the <see
-                 cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanging(System.Object,System.ComponentModel.MemberDescriptor)" />
+                >The method calls the <see cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanging(System.Object,System.ComponentModel.MemberDescriptor)" />
 
                 
 
@@ -1791,8 +1788,7 @@
             </item>
             <item>
               <para
-                >The method calls the <see
-                 cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanged(System.Object,System.ComponentModel.MemberDescriptor,System.Object,System.Object)" />
+                >The method calls the <see cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanged(System.Object,System.ComponentModel.MemberDescriptor,System.Object,System.Object)" />
 
                 
 
@@ -1801,8 +1797,7 @@
             </item>
             <item>
               <para
-                >The method calls <see
-                 cref="M:System.ComponentModel.Design.DesignerTransaction.Commit" />
+                >The method calls <see cref="M:System.ComponentModel.Design.DesignerTransaction.Commit" />
 
                 
 
@@ -1817,7 +1812,11 @@
           <para>When overridden in a derived class, resets the value for this property of the component to the default value.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1849,8 +1848,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether this property should be serialized, as specified in the <see
-             cref="T:System.ComponentModel.DesignerSerializationVisibilityAttribute" />
+            >Gets a value indicating whether this property should be serialized, as specified in the <see cref="T:System.ComponentModel.DesignerSerializationVisibilityAttribute" />
 
             
 
@@ -1886,8 +1884,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Typically, this method is implemented through reflection.</para>
           <para
-            >This method creates a <see
-             cref="T:System.ComponentModel.Design.DesignerTransaction" />
+            >This method creates a <see cref="T:System.ComponentModel.Design.DesignerTransaction" />
 
             
 
@@ -1896,13 +1893,11 @@
           <list type="ordered">
             <item>
               <para
-                >The method calls the <see
-                 cref="M:System.ComponentModel.Design.IDesignerHost.CreateTransaction" />
+                >The method calls the <see cref="M:System.ComponentModel.Design.IDesignerHost.CreateTransaction" />
 
                 
 
-                 method to create a new <see
-                 cref="T:System.ComponentModel.Design.DesignerTransaction" />
+                 method to create a new <see cref="T:System.ComponentModel.Design.DesignerTransaction" />
 
                 
 
@@ -1911,8 +1906,7 @@
             </item>
             <item>
               <para
-                >The method calls the <see
-                 cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanging(System.Object,System.ComponentModel.MemberDescriptor)" />
+                >The method calls the <see cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanging(System.Object,System.ComponentModel.MemberDescriptor)" />
 
                 
 
@@ -1924,8 +1918,7 @@
             </item>
             <item>
               <para
-                >The method calls the <see
-                 cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanged(System.Object,System.ComponentModel.MemberDescriptor,System.Object,System.Object)" />
+                >The method calls the <see cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanged(System.Object,System.ComponentModel.MemberDescriptor,System.Object,System.Object)" />
 
                 
 
@@ -1934,8 +1927,7 @@
             </item>
             <item>
               <para
-                >The method calls <see
-                 cref="M:System.ComponentModel.Design.DesignerTransaction.Commit" />
+                >The method calls <see cref="M:System.ComponentModel.Design.DesignerTransaction.Commit" />
 
                 
 
@@ -1950,14 +1942,22 @@
           <para>When overridden in a derived class, sets the value of the component to a different value.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component with the property value that is to be set. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2000,7 +2000,11 @@
           <para>true if the property should be persisted; otherwise, false.</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2024,23 +2028,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.PropertyDescriptor.SupportsChangeEvents" />
+            >The <see cref="P:System.ComponentModel.PropertyDescriptor.SupportsChangeEvents" />
 
             
 
-             property indicates whether value change notifications for this property may originate from outside the property descriptor, such as from the component itself, or whether notifications will only originate from direct calls made to the <see
-             cref="M:System.ComponentModel.PropertyDescriptor.SetValue(System.Object,System.Object)" />
+             property indicates whether value change notifications for this property may originate from outside the property descriptor, such as from the component itself, or whether notifications will only originate from direct calls made to the <see cref="M:System.ComponentModel.PropertyDescriptor.SetValue(System.Object,System.Object)" />
 
             
 
-             method. For example, the component may implement the <see
-             cref="T:System.ComponentModel.INotifyPropertyChanged" />
+             method. For example, the component may implement the <see cref="T:System.ComponentModel.INotifyPropertyChanged" />
 
             
 
-             interface, or may have an explicit <paramref
-             name="name" />
+             interface, or may have an explicit <paramref name="name" />
 
             
 

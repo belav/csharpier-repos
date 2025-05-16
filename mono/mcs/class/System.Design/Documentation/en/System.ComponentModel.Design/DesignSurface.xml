@@ -20,77 +20,64 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.DesignSurface" />
+        >The <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
         
 
-         class implements what the user perceives as a designer. <see
-         cref="T:System.ComponentModel.Design.DesignSurface" />
+         class implements what the user perceives as a designer. <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
         
 
-         is the user interface the user manipulates to change design-time features. <see
-         cref="T:System.ComponentModel.Design.DesignSurface" />
+         is the user interface the user manipulates to change design-time features. <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
         
 
          provides a completely self-contained design surface.</para
       >
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.DesignSurface" />
+        >The <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
         
 
-         class may be used as a stand-alone designer, or it may be coupled with the <see
-         cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
+         class may be used as a stand-alone designer, or it may be coupled with the <see cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
 
         
 
-         class to provide a common implementation for an application that hosts multiple <see
-         cref="T:System.ComponentModel.Design.DesignSurface" />
+         class to provide a common implementation for an application that hosts multiple <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
         
 
          objects.</para
       >
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.DesignSurface" />
+        >The <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
         
 
          class can be used by itself, or the user can derive a new class from it and augment the behavior.</para
       >
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.DesignSurface" />
+        >The <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
         
 
-         class provides several design-time services automatically. The <see
-         cref="T:System.ComponentModel.Design.DesignSurface" />
+         class provides several design-time services automatically. The <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
         
 
-         class adds all of its services in its constructor. Most of these services can be overridden by replacing them in the protected <see
-         cref="P:System.ComponentModel.Design.DesignSurface.ServiceContainer" />
+         class adds all of its services in its constructor. Most of these services can be overridden by replacing them in the protected <see cref="P:System.ComponentModel.Design.DesignSurface.ServiceContainer" />
 
         
 
-         property. To replace a service, override the constructor, call base, and make any changes through the protected <see
-         cref="P:System.ComponentModel.Design.DesignSurface.ServiceContainer" />
+         property. To replace a service, override the constructor, call base, and make any changes through the protected <see cref="P:System.ComponentModel.Design.DesignSurface.ServiceContainer" />
 
         
 
-         property. All services that are added to the service container and that implement <see
-         cref="T:System.IDisposable" />
+         property. All services that are added to the service container and that implement <see cref="T:System.IDisposable" />
 
         
 
-         are disposed when the design surface is disposed. The default set of replaceable services that the <see
-         cref="T:System.ComponentModel.Design.DesignSurface" />
+         are disposed when the design surface is disposed. The default set of replaceable services that the <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
         
 
@@ -125,8 +112,7 @@
           </term>
           <description>
             <para
-              >Used by <see
-               cref="T:System.ComponentModel.TypeDescriptor" />
+              >Used by <see cref="T:System.ComponentModel.TypeDescriptor" />
 
               
 
@@ -225,8 +211,7 @@
           </term>
           <description>
             <para
-              >Owns the set of components that are being designed. Each designer has an <see
-               cref="T:System.ComponentModel.IContainer" />
+              >Owns the set of components that are being designed. Each designer has an <see cref="T:System.ComponentModel.IContainer" />
 
               
 
@@ -242,8 +227,7 @@
           </term>
           <description>
             <para
-              >Derives from <see
-               cref="T:System.IServiceProvider" />
+              >Derives from <see cref="T:System.IServiceProvider" />
 
               
 
@@ -253,8 +237,7 @@
         </item>
       </list>
       <para
-        >In addition to these services, the <see
-         cref="T:System.ComponentModel.Design.DesignSurface" />
+        >In addition to these services, the <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
         
 
@@ -293,8 +276,7 @@
         </item>
       </list>
       <para
-        >In addition to <see
-         cref="T:System.ComponentModel.ISite" />
+        >In addition to <see cref="T:System.ComponentModel.ISite" />
 
         
 
@@ -322,8 +304,7 @@
           </term>
           <description>
             <para
-              >Provides a way to get to the container of site-specific services. For example, <see
-               cref="T:System.ComponentModel.Design.IDictionaryService" />
+              >Provides a way to get to the container of site-specific services. For example, <see cref="T:System.ComponentModel.Design.IDictionaryService" />
 
               
 
@@ -351,8 +332,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignSurface" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
             
 
@@ -377,8 +357,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <paramref
-             name="parentProvide " />
+            >When <paramref name="parentProvide " />
 
             
 
@@ -388,8 +367,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignSurface" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
             
 
@@ -397,7 +375,11 @@
           >
         </summary>
         <param name="parentProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -418,13 +400,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you use the <see
-             cref="M:System.ComponentModel.Design.DesignSurface.#ctor(System.Type)" />
+            >When you use the <see cref="M:System.ComponentModel.Design.DesignSurface.#ctor(System.Type)" />
 
             
 
-             constructor, it creates a simple designer loader that, in turn, creates a component of the given type and then ends the loading process. This is a straightforward way to create a designer, under the assumption that all saving of state will be done externally. Internally, this calls <see
-             cref="Overload:System.ComponentModel.Design.DesignSurface.BeginLoad" />
+             constructor, it creates a simple designer loader that, in turn, creates a component of the given type and then ends the loading process. This is a straightforward way to create a designer, under the assumption that all saving of state will be done externally. Internally, this calls <see cref="Overload:System.ComponentModel.Design.DesignSurface.BeginLoad" />
 
             
 
@@ -432,43 +412,35 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.ComponentModel.Design.DesignSurface.#ctor(System.Type)" />
+              >The <see cref="M:System.ComponentModel.Design.DesignSurface.#ctor(System.Type)" />
 
               
 
-               overload is not affected by <see
-               cref="T:System.Windows.Forms.Design.DesignerOptions" />
+               overload is not affected by <see cref="T:System.Windows.Forms.Design.DesignerOptions" />
 
               
 
-              . The <see
-               cref="T:System.Windows.Forms.Design.DesignerOptions" />
+              . The <see cref="T:System.Windows.Forms.Design.DesignerOptions" />
 
               
 
-               must be in the service container before the design surface loads. If you need access to <see
-               cref="T:System.Windows.Forms.Design.DesignerOptions" />
+               must be in the service container before the design surface loads. If you need access to <see cref="T:System.Windows.Forms.Design.DesignerOptions" />
 
               
 
-              , call the empty constructor, add the <see
-               cref="T:System.Windows.Forms.Design.DesignerOptions" />
+              , call the empty constructor, add the <see cref="T:System.Windows.Forms.Design.DesignerOptions" />
 
               
 
-               to the <see
-               cref="P:System.ComponentModel.Design.DesignSurface.ServiceContainer" />
+               to the <see cref="P:System.ComponentModel.Design.DesignSurface.ServiceContainer" />
 
               
 
-               and call <see
-               cref="M:System.ComponentModel.Design.DesignSurface.BeginLoad(System.Type)" />
+               and call <see cref="M:System.ComponentModel.Design.DesignSurface.BeginLoad(System.Type)" />
 
               
 
-               with <paramref
-               name="rootComponentType" />
+               with <paramref name="rootComponentType" />
 
               
 
@@ -479,8 +451,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignSurface" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
             
 
@@ -488,7 +459,11 @@
           >
         </summary>
         <param name="rootComponentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -513,13 +488,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Using the <see
-             cref="M:System.ComponentModel.Design.DesignSurface.#ctor(System.IServiceProvider,System.Type)" />
+            >Using the <see cref="M:System.ComponentModel.Design.DesignSurface.#ctor(System.IServiceProvider,System.Type)" />
 
             
 
-             constructor creates a simple designer loader that creates a component of the given type and then ends the loading process. This is a straightforward way to create a designer, under the assumption that all saving of state will be done externally. Internally, this calls <see
-             cref="Overload:System.ComponentModel.Design.DesignSurface.BeginLoad" />
+             constructor creates a simple designer loader that creates a component of the given type and then ends the loading process. This is a straightforward way to create a designer, under the assumption that all saving of state will be done externally. Internally, this calls <see cref="Overload:System.ComponentModel.Design.DesignSurface.BeginLoad" />
 
             
 
@@ -529,8 +502,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignSurface" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
             
 
@@ -538,14 +510,22 @@
           >
         </summary>
         <param name="parentProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The parent service provider, or null if there is no parent used to resolve services.</param
         >
         <param name="rootComponentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -572,16 +552,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Designer loading can be asynchronous, so the loading may continue to progress after this call has returned. Attach an event handler to the <see
-             cref="E:System.ComponentModel.Design.IDesignerHost.LoadComplete" />
+            >Designer loading can be asynchronous, so the loading may continue to progress after this call has returned. Attach an event handler to the <see cref="E:System.ComponentModel.Design.IDesignerHost.LoadComplete" />
 
             
 
              event to be notified when the design surface has completed loading.</para
           >
           <para
-            >After <see
-             cref="Overload:System.ComponentModel.Design.DesignSurface.BeginLoad" />
+            >After <see cref="Overload:System.ComponentModel.Design.DesignSurface.BeginLoad" />
 
             
 
@@ -593,7 +571,11 @@
           <para>Begins the loading process with the given designer loader.</para>
         </summary>
         <param name="loader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -617,26 +599,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <paramref
-             name="rootComponentType" />
+            >When <paramref name="rootComponentType" />
 
             
 
-             is specified, a default designer loader that simply creates an instance of <paramref
-             name="rootComponentType" />
+             is specified, a default designer loader that simply creates an instance of <paramref name="rootComponentType" />
 
             
 
-             will be used. Designer loading can be asynchronous, so the loading may continue to progress after this call has returned. Attach an event handler to the <see
-             cref="E:System.ComponentModel.Design.IDesignerHost.LoadComplete" />
+             will be used. Designer loading can be asynchronous, so the loading may continue to progress after this call has returned. Attach an event handler to the <see cref="E:System.ComponentModel.Design.IDesignerHost.LoadComplete" />
 
             
 
              event to be notified when the design surface has completed loading.</para
           >
           <para
-            >After <see
-             cref="M:System.ComponentModel.Design.DesignSurface.BeginLoad(System.Type)" />
+            >After <see cref="M:System.ComponentModel.Design.DesignSurface.BeginLoad(System.Type)" />
 
             
 
@@ -644,13 +622,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.ComponentModel.Design.DesignSurface.BeginLoad(System.Type)" />
+              >The <see cref="M:System.ComponentModel.Design.DesignSurface.BeginLoad(System.Type)" />
 
               
 
-               method creates an instance of the component type and initializes a designer for this instance. The <see
-               cref="E:System.ComponentModel.Design.DesignSurface.Loaded" />
+               method creates an instance of the component type and initializes a designer for this instance. The <see cref="E:System.ComponentModel.Design.DesignSurface.Loaded" />
 
               
 
@@ -663,7 +639,11 @@
           <para>Begins the loading process.</para>
         </summary>
         <param name="rootComponentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -688,13 +668,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.Design.DesignSurface.ComponentContainer" />
+            >The <see cref="P:System.ComponentModel.Design.DesignSurface.ComponentContainer" />
 
             
 
-             property holds all objects that are currently in design mode. When components are added to <see
-             cref="P:System.ComponentModel.Design.DesignSurface.ComponentContainer" />
+             property holds all objects that are currently in design mode. When components are added to <see cref="P:System.ComponentModel.Design.DesignSurface.ComponentContainer" />
 
             
 
@@ -704,8 +682,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ComponentModel.IContainer" />
+            >Gets the <see cref="T:System.ComponentModel.IContainer" />
 
             
 
@@ -738,13 +715,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.DesignSurface.CreateComponent(System.Type)" />
+            >The <see cref="M:System.ComponentModel.Design.DesignSurface.CreateComponent(System.Type)" />
 
             
 
-             method is called by the design surface’s <see
-             cref="Overload:System.ComponentModel.Design.IDesignerHost.CreateComponent" />
+             method is called by the design surface’s <see cref="Overload:System.ComponentModel.Design.IDesignerHost.CreateComponent" />
 
             
 
@@ -760,7 +735,11 @@
           <para>The newly created component.</para>
         </returns>
         <param name="componentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -788,13 +767,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.DesignSurface.CreateDesigner(System.ComponentModel.IComponent,System.Boolean)" />
+            >The <see cref="M:System.ComponentModel.Design.DesignSurface.CreateDesigner(System.ComponentModel.IComponent,System.Boolean)" />
 
             
 
-             method is called by the design surface’s <see
-             cref="T:System.ComponentModel.IContainer" />
+             method is called by the design surface’s <see cref="T:System.ComponentModel.IContainer" />
 
             
 
@@ -808,18 +785,15 @@
              can create two different types of designers: root designers and normal designers. A root designer is a designer for the root component in the design surface, which by definition is the first component added to the container. Root designers differ from normal designers because they are responsible for the user interface presented to the end user. Root designers typically coordinate with the rest of the designers on a design surface to provide this interface.</para
           >
           <para
-            >The default implementation of this method delegates to <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+            >The default implementation of this method delegates to <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
-            , passing in <see
-             cref="T:System.ComponentModel.Design.IRootDesigner" />
+            , passing in <see cref="T:System.ComponentModel.Design.IRootDesigner" />
 
             
 
-             as the designer type for root designers, or <see
-             cref="T:System.ComponentModel.Design.IDesigner" />
+             as the designer type for root designers, or <see cref="T:System.ComponentModel.Design.IDesigner" />
 
             
 
@@ -835,14 +809,22 @@
           <para>An instance of the requested designer, or null if no matching designer could be found.</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component for which the designer should be created.</param
         >
         <param name="rootDesigner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -866,23 +848,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="type" />
+            >If <paramref name="type" />
 
             
 
-             is an <see
-             cref="T:System.ComponentModel.IComponent" />
+             is an <see cref="T:System.ComponentModel.IComponent" />
 
             
 
-            , <see
-             cref="M:System.ComponentModel.Design.DesignSurface.CreateInstance(System.Type)" />
+            , <see cref="M:System.ComponentModel.Design.DesignSurface.CreateInstance(System.Type)" />
 
             
 
-             searches for a constructor of type <see
-             cref="T:System.ComponentModel.IContainer" />
+             searches for a constructor of type <see cref="T:System.ComponentModel.IContainer" />
 
             
 
@@ -898,7 +876,11 @@
           <para>The newly created object.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -935,7 +917,11 @@
           <para>The nested container.</para>
         </returns>
         <param name="owningComponent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -964,13 +950,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Adding a component to a nested container creates its designer and makes it eligible for all services available from the design surface. Components added to nested containers do not participate in serialization. </para>
           <para
-            >You can provide an additional name for the <see
-             cref="M:System.ComponentModel.Design.DesignSurface.CreateNestedContainer(System.ComponentModel.IComponent,System.String)" />
+            >You can provide an additional name for the <see cref="M:System.ComponentModel.Design.DesignSurface.CreateNestedContainer(System.ComponentModel.IComponent,System.String)" />
 
             
 
-             method by passing a value into <paramref
-             name="containerName" />
+             method by passing a value into <paramref name="containerName" />
 
             
 
@@ -986,14 +970,22 @@
           <para>The nested container.</para>
         </returns>
         <param name="owningComponent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component that manages the nested container.</param
         >
         <param name="containerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1015,18 +1007,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The public <see
-             cref="M:System.ComponentModel.Design.DesignSurface.Dispose" />
+            >The public <see cref="M:System.ComponentModel.Design.DesignSurface.Dispose" />
 
             
 
-             method follows the standard <see
-             cref="T:System.IDisposable" />
+             method follows the standard <see cref="T:System.IDisposable" />
 
             
 
-             pattern. Calling this method destroys the design surface. The protected version of this method is virtual and follows the normal <see
-             cref="T:System.IDisposable" />
+             pattern. Calling this method destroys the design surface. The protected version of this method is virtual and follows the normal <see cref="T:System.IDisposable" />
 
             
 
@@ -1034,18 +1023,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Because <see
-               cref="T:System.ComponentModel.Design.DesignSurface" />
+              >Because <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
               
 
-               does not have any native code to clean up, it does not have a finalizer that calls <see
-               cref="M:System.ComponentModel.Design.DesignSurface.Dispose(System.Boolean)" />
+               does not have any native code to clean up, it does not have a finalizer that calls <see cref="M:System.ComponentModel.Design.DesignSurface.Dispose(System.Boolean)" />
 
               
 
-              . If you need to call <see
-               cref="M:System.ComponentModel.Design.DesignSurface.Dispose(System.Boolean)" />
+              . If you need to call <see cref="M:System.ComponentModel.Design.DesignSurface.Dispose(System.Boolean)" />
 
               
 
@@ -1053,50 +1039,41 @@
             >
           </block>
           <para
-            >Call <see
-             cref="M:System.ComponentModel.Design.DesignSurface.Dispose" />
+            >Call <see cref="M:System.ComponentModel.Design.DesignSurface.Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.ComponentModel.Design.DesignSurface" />
+             when you are finished using the <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
             
 
-            . The <see
-             cref="M:System.ComponentModel.Design.DesignSurface.Dispose" />
+            . The <see cref="M:System.ComponentModel.Design.DesignSurface.Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.ComponentModel.Design.DesignSurface" />
+             method leaves the <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.ComponentModel.Design.DesignSurface.Dispose" />
+             in an unusable state. After calling <see cref="M:System.ComponentModel.Design.DesignSurface.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.ComponentModel.Design.DesignSurface" />
+            , you must release all references to the <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.ComponentModel.Design.DesignSurface" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -1106,18 +1083,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.ComponentModel.Design.DesignSurface.Dispose" />
+              >Always call <see cref="M:System.ComponentModel.Design.DesignSurface.Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.ComponentModel.Design.DesignSurface" />
+               before you release your last reference to the <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.ComponentModel.Design.DesignSurface" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
               
 
@@ -1128,8 +1102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the resources used by the <see
-             cref="T:System.ComponentModel.Design.DesignSurface" />
+            >Releases the resources used by the <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
             
 
@@ -1154,18 +1127,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The public <see
-             cref="M:System.ComponentModel.Design.DesignSurface.Dispose" />
+            >The public <see cref="M:System.ComponentModel.Design.DesignSurface.Dispose" />
 
             
 
-             method follows the standard <see
-             cref="T:System.IDisposable" />
+             method follows the standard <see cref="T:System.IDisposable" />
 
             
 
-             pattern. Calling this method destroys the design surface. The protected version of this method is virtual and follows the normal <see
-             cref="T:System.IDisposable" />
+             pattern. Calling this method destroys the design surface. The protected version of this method is virtual and follows the normal <see cref="T:System.IDisposable" />
 
             
 
@@ -1173,18 +1143,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Because <see
-               cref="T:System.ComponentModel.Design.DesignSurface" />
+              >Because <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
               
 
-               does not have any native code to clean up, it does not have a finalizer that calls <see
-               cref="M:System.ComponentModel.Design.DesignSurface.Dispose(System.Boolean)" />
+               does not have any native code to clean up, it does not have a finalizer that calls <see cref="M:System.ComponentModel.Design.DesignSurface.Dispose(System.Boolean)" />
 
               
 
-              . If you need to call <see
-               cref="M:System.ComponentModel.Design.DesignSurface.Dispose(System.Boolean)" />
+              . If you need to call <see cref="M:System.ComponentModel.Design.DesignSurface.Dispose(System.Boolean)" />
 
               
 
@@ -1192,36 +1159,30 @@
             >
           </block>
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.ComponentModel.Design.DesignSurface" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
             
 
@@ -1231,8 +1192,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the resources used by the <see
-             cref="T:System.ComponentModel.Design.DesignSurface" />
+            >Releases the resources used by the <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
             
 
@@ -1240,7 +1200,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1261,13 +1225,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The surface is only disposed when the public <see
-             cref="M:System.ComponentModel.Design.DesignSurface.Dispose" />
+            >The surface is only disposed when the public <see cref="M:System.ComponentModel.Design.DesignSurface.Dispose" />
 
             
 
-             method on <see
-             cref="T:System.ComponentModel.Design.DesignSurface" />
+             method on <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
             
 
@@ -1294,18 +1256,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.DesignSurface.Flush" />
+            >The <see cref="M:System.ComponentModel.Design.DesignSurface.Flush" />
 
             
 
-             method can be called to push changes made to the design surface down to the serializer. This ensures that the design surface and its serialized state are synchronized. The actual implementation of this method is forwarded to the designer loader associated with design surface. The designer loader may choose to defer changes until <see
-             cref="M:System.ComponentModel.Design.DesignSurface.Flush" />
+             method can be called to push changes made to the design surface down to the serializer. This ensures that the design surface and its serialized state are synchronized. The actual implementation of this method is forwarded to the designer loader associated with design surface. The designer loader may choose to defer changes until <see cref="M:System.ComponentModel.Design.DesignSurface.Flush" />
 
             
 
-             is called, or it may choose to keep the serialized data up to date with all user changes. The <see
-             cref="M:System.ComponentModel.Design.DesignSurface.Flush" />
+             is called, or it may choose to keep the serialized data up to date with all user changes. The <see cref="M:System.ComponentModel.Design.DesignSurface.Flush" />
 
             
 
@@ -1331,8 +1290,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The designer loader is flushed first, and then the <see
-             cref="E:System.ComponentModel.Design.DesignSurface.Flushed" />
+            >The designer loader is flushed first, and then the <see cref="E:System.ComponentModel.Design.DesignSurface.Flushed" />
 
             
 
@@ -1342,13 +1300,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when a call is made to the <see
-             cref="M:System.ComponentModel.Design.DesignSurface.Flush" />
+            >Occurs when a call is made to the <see cref="M:System.ComponentModel.Design.DesignSurface.Flush" />
 
             
 
-             method of <see
-             cref="T:System.ComponentModel.Design.DesignSurface" />
+             method of <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
             
 
@@ -1373,8 +1329,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.DesignSurface.GetService(System.Type)" />
+            >The <see cref="M:System.ComponentModel.Design.DesignSurface.GetService(System.Type)" />
 
             
 
@@ -1388,8 +1343,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that implements, or is a derived class of, <paramref
-             name="serviceType" />
+            >An object that implements, or is a derived class of, <paramref name="serviceType" />
 
             
 
@@ -1397,7 +1351,11 @@
           >
         </returns>
         <param name="serviceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1439,16 +1397,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.ComponentModel.Design.DesignSurface.Loaded" />
+            >The <see cref="E:System.ComponentModel.Design.DesignSurface.Loaded" />
 
             
 
              event is raised for successful loads as well as unsuccessful ones. If code in this event handler throws an exception, the designer is unloaded.</para
           >
           <para
-            >The <see
-             cref="T:System.ComponentModel.Design.LoadedEventArgs" />
+            >The <see cref="T:System.ComponentModel.Design.LoadedEventArgs" />
 
             
 
@@ -1522,8 +1478,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.ComponentModel.Design.DesignSurface.Loaded" />
+            >Raises the <see cref="E:System.ComponentModel.Design.DesignSurface.Loaded" />
 
             
 
@@ -1531,12 +1486,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.Design.LoadedEventArgs" />
+          A <see cref="T:System.ComponentModel.Design.LoadedEventArgs" />
 
           
 
@@ -1561,8 +1519,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.ComponentModel.Design.DesignSurface.Loading" />
+            >Raises the <see cref="E:System.ComponentModel.Design.DesignSurface.Loading" />
 
             
 
@@ -1570,12 +1527,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1600,8 +1560,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.ComponentModel.Design.DesignSurface.Unloaded" />
+            >Raises the <see cref="E:System.ComponentModel.Design.DesignSurface.Unloaded" />
 
             
 
@@ -1609,12 +1568,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1639,8 +1601,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.ComponentModel.Design.DesignSurface.Unloading" />
+            >Raises the <see cref="E:System.ComponentModel.Design.DesignSurface.Unloading" />
 
             
 
@@ -1648,12 +1609,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1678,8 +1642,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.ComponentModel.Design.DesignSurface.ViewActivated" />
+            >Raises the <see cref="E:System.ComponentModel.Design.DesignSurface.ViewActivated" />
 
             
 
@@ -1687,12 +1650,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1717,8 +1683,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >At construction time, <see
-             cref="T:System.ComponentModel.Design.DesignSurface" />
+            >At construction time, <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
             
 
@@ -1782,26 +1747,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="Overload:System.ComponentModel.Design.DesignSurface.BeginLoad" />
+            >The <see cref="Overload:System.ComponentModel.Design.DesignSurface.BeginLoad" />
 
             
 
-             method must be called beforehand to start the loading process. It is possible to return a view before the designer loader finishes loading because the root designer, which supplies the view, is the first object created by the designer loader. If a view is unavailable, <see
-             cref="Overload:System.ComponentModel.Design.DesignSurface.BeginLoad" />
+             method must be called beforehand to start the loading process. It is possible to return a view before the designer loader finishes loading because the root designer, which supplies the view, is the first object created by the designer loader. If a view is unavailable, <see cref="Overload:System.ComponentModel.Design.DesignSurface.BeginLoad" />
 
             
 
              raises an exception. </para
           >
           <para
-            >The notion of a view technology is obsolete. But, it remains in the interfaces for root designers for backward compatibility. Its use is hidden from anyone using <see
-             cref="T:System.ComponentModel.Design.DesignSurface" />
+            >The notion of a view technology is obsolete. But, it remains in the interfaces for root designers for backward compatibility. Its use is hidden from anyone using <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
             
 
-             objects. The <see
-             cref="P:System.ComponentModel.Design.DesignSurface.View" />
+             objects. The <see cref="P:System.ComponentModel.Design.DesignSurface.View" />
 
             
 
@@ -1827,8 +1788,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you want to support the <see
-             cref="M:System.ComponentModel.Design.IDesignerHost.Activate" />
+            >If you want to support the <see cref="M:System.ComponentModel.Design.IDesignerHost.Activate" />
 
             
 
@@ -1838,13 +1798,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="M:System.ComponentModel.Design.IDesignerHost.Activate" />
+            >Occurs when the <see cref="M:System.ComponentModel.Design.IDesignerHost.Activate" />
 
             
 
-             method has been called on <see
-             cref="T:System.ComponentModel.Design.IDesignerHost" />
+             method has been called on <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
             
 

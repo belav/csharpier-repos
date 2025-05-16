@@ -15,13 +15,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.ButtonColumnType" />
+        >The <see cref="T:System.Web.UI.WebControls.ButtonColumnType" />
 
         
 
-         enumeration represents the button styles for the <see
-         cref="T:System.Web.UI.WebControls.ButtonColumn" />
+         enumeration represents the button styles for the <see cref="T:System.Web.UI.WebControls.ButtonColumn" />
 
         
 
@@ -31,8 +29,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the button type for the <see
-         cref="T:System.Web.UI.WebControls.ButtonColumn" />
+        >Specifies the button type for the <see cref="T:System.Web.UI.WebControls.ButtonColumn" />
 
         
 

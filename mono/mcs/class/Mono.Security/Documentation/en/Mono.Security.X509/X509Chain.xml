@@ -8,7 +8,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -48,10 +50,7 @@
         <Parameter Name="chain" Type="Mono.Security.X509.X509CertificateCollection" />
       </Parameters>
       <Docs>
-        <param name="chain"
-          >a <see
-           cref="T:Mono.Security.X509.X509CertificateCollection" />
-        </param>
+        <param name="chain">a <see cref="T:Mono.Security.X509.X509CertificateCollection" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -73,15 +72,9 @@
         <Parameter Name="leaf" Type="Mono.Security.X509.X509Certificate" />
       </Parameters>
       <Docs>
-        <param name="leaf"
-          >a <see
-           cref="T:Mono.Security.X509.X509Certificate" />
-        </param>
+        <param name="leaf">a <see cref="T:Mono.Security.X509.X509Certificate" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -101,10 +94,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:Mono.Security.X509.X509CertificateCollection" />
-        </value>
+        <value>a <see cref="T:Mono.Security.X509.X509CertificateCollection" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -125,15 +115,9 @@
         <Parameter Name="issuerName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="issuerName"
-          >a <see
-           cref="T:System.String" />
-        </param>
+        <param name="issuerName">a <see cref="T:System.String" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Security.X509.X509Certificate" />
-        </returns>
+        <returns>a <see cref="T:Mono.Security.X509.X509Certificate" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -154,10 +138,7 @@
         <Parameter Name="x509" Type="Mono.Security.X509.X509Certificate" />
       </Parameters>
       <Docs>
-        <param name="x509"
-          >a <see
-           cref="T:Mono.Security.X509.X509Certificate" />
-        </param>
+        <param name="x509">a <see cref="T:Mono.Security.X509.X509Certificate" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -180,8 +161,7 @@
       </Parameters>
       <Docs>
         <param name="collection"
-          >a <see
-           cref="T:Mono.Security.X509.X509CertificateCollection" />
+          >a <see cref="T:Mono.Security.X509.X509CertificateCollection" />
         </param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
@@ -219,10 +199,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:Mono.Security.X509.X509Certificate" />
-        </value>
+        <value>a <see cref="T:Mono.Security.X509.X509Certificate" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -242,10 +219,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:Mono.Security.X509.X509ChainStatusFlags" />
-        </value>
+        <value>a <see cref="T:Mono.Security.X509.X509ChainStatusFlags" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -265,10 +239,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:Mono.Security.X509.X509CertificateCollection" />
-        </value>
+        <value>a <see cref="T:Mono.Security.X509.X509CertificateCollection" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>

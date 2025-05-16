@@ -30,8 +30,7 @@
 
         
 
-         defines identifiers for the most common types of binary operators. These operator identifiers are used by <see
-         cref="T:System.CodeDom.CodeBinaryOperatorExpression" />
+         defines identifiers for the most common types of binary operators. These operator identifiers are used by <see cref="T:System.CodeDom.CodeBinaryOperatorExpression" />
 
         
 

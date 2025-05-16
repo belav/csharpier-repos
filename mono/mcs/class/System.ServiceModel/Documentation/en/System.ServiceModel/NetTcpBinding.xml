@@ -24,46 +24,38 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.NetTcpBinding" />
+        >The <see cref="T:System.ServiceModel.NetTcpBinding" />
 
         
 
          generates a run-time communication stack by default, which uses transport security, TCP for message delivery, and a binary message encoding. This binding is an appropriate indigo1 system-provided choice for communicating over an Intranet.</para
       >
       <para
-        >The default configuration for the <see
-         cref="T:System.ServiceModel.NetTcpBinding" />
+        >The default configuration for the <see cref="T:System.ServiceModel.NetTcpBinding" />
 
         
 
-         is faster than the configuration provided by the <see
-         cref="T:System.ServiceModel.WSHttpBinding" />
+         is faster than the configuration provided by the <see cref="T:System.ServiceModel.WSHttpBinding" />
 
         
 
-        , but it is intended only for indigo2-to-indigo2 communication. The security behavior is configurable using the optional <paramref
-         name="securityMode" />
+        , but it is intended only for indigo2-to-indigo2 communication. The security behavior is configurable using the optional <paramref name="securityMode" />
 
         
 
-         parameter in the constructor. The use of WS-ReliableMessaging is configurable using the optional <paramref
-         name="reliableSessionEnabled" />
+         parameter in the constructor. The use of WS-ReliableMessaging is configurable using the optional <paramref name="reliableSessionEnabled" />
 
         
 
-         parameter. But reliable messaging is off by default. More generally, the HTTP system-provided bindings such as <see
-         cref="T:System.ServiceModel.WSHttpBinding" />
+         parameter. But reliable messaging is off by default. More generally, the HTTP system-provided bindings such as <see cref="T:System.ServiceModel.WSHttpBinding" />
 
         
 
-         and <see
-         cref="T:System.ServiceModel.BasicHttpBinding" />
+         and <see cref="T:System.ServiceModel.BasicHttpBinding" />
 
         
 
-         are configured to turn things on by default, whereas the <see
-         cref="T:System.ServiceModel.NetTcpBinding" />
+         are configured to turn things on by default, whereas the <see cref="T:System.ServiceModel.NetTcpBinding" />
 
         
 
@@ -71,8 +63,7 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.ServiceModel.NetTcpBinding" />
+          >The <see cref="T:System.ServiceModel.NetTcpBinding" />
 
           
 
@@ -101,18 +92,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, transport security is used to secure communication (that is, the value of <see
-             cref="T:System.ServiceModel.SecurityMode" />
+            >By default, transport security is used to secure communication (that is, the value of <see cref="T:System.ServiceModel.SecurityMode" />
 
             
 
-             is set to <see
-             cref="F:System.ServiceModel.SecurityMode.Transport" />
+             is set to <see cref="F:System.ServiceModel.SecurityMode.Transport" />
 
             
 
-            ) and reliable sessions are disabled (that is <see
-             cref="P:System.ServiceModel.OptionalReliableSession.Enabled" />
+            ) and reliable sessions are disabled (that is <see cref="P:System.ServiceModel.OptionalReliableSession.Enabled" />
 
             
 
@@ -122,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.NetTcpBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetTcpBinding" />
 
             
 
@@ -152,8 +139,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor when you want to configure the security. If you want to configure security and enable reliable sessions, use <see
-             cref="M:System.ServiceModel.NetTcpBinding.#ctor(System.ServiceModel.SecurityMode,System.Boolean)" />
+            >Use this constructor when you want to configure the security. If you want to configure security and enable reliable sessions, use <see cref="M:System.ServiceModel.NetTcpBinding.#ctor(System.ServiceModel.SecurityMode,System.Boolean)" />
 
             
 
@@ -163,8 +149,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.NetTcpBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetTcpBinding" />
 
             
 
@@ -172,12 +157,15 @@
           >
         </summary>
         <param name="securityMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.SecurityMode" />
+          The <see cref="T:System.ServiceModel.SecurityMode" />
 
           
 
@@ -206,8 +194,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.NetTcpBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetTcpBinding" />
 
             
 
@@ -215,12 +202,15 @@
           >
         </summary>
         <param name="configurationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The binding configuration name for the <see
-           cref="T:System.ServiceModel.NetTcpBinding" />
+          The binding configuration name for the <see cref="T:System.ServiceModel.NetTcpBinding" />
 
           
 
@@ -253,8 +243,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.NetTcpBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetTcpBinding" />
 
             
 
@@ -262,19 +251,26 @@
           >
         </summary>
         <param name="securityMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.SecurityMode" />
+          The <see cref="T:System.ServiceModel.SecurityMode" />
 
           
 
            value that specifies the type of security used with the binding.</param
         >
         <param name="reliableSessionEnabled">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -308,13 +304,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Collections.Generic.ICollection`1" />
+            >The <see cref="T:System.Collections.Generic.ICollection`1" />
 
             
 
-             of type <see
-             cref="T:System.ServiceModel.Channels.BindingElement" />
+             of type <see cref="T:System.ServiceModel.Channels.BindingElement" />
 
             
 
@@ -505,8 +499,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Using this setting requires enabling the indigo1 TCP Port Sharing Service by changing its startup type to Manual or Automatic. </para>
           <para
-            >crabout the TCP Listener and how to start it, see <see
-             cref="T:System.Net.Sockets.TcpListener" />
+            >crabout the TCP Listener and how to start it, see <see cref="T:System.Net.Sockets.TcpListener" />
 
             
 
@@ -662,13 +655,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.NetTcpSecurity" />
+            >The <see cref="T:System.ServiceModel.NetTcpSecurity" />
 
             
 
-             provides the types of security and settings available to the <see
-             cref="T:System.ServiceModel.NetTcpBinding" />
+             provides the types of security and settings available to the <see cref="T:System.ServiceModel.NetTcpBinding" />
 
             
 
@@ -702,8 +693,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This run-time behavior for receiving messages in either a service or client application can be changed using <format
-             type="text/html">
+            >This run-time behavior for receiving messages in either a service or client application can be changed using <format type="text/html">
               <a href="cc070387-3d11-4b02-a952-bc08ad2df05a">&lt;synchronousReceive&gt; element</a>
             </format>
 

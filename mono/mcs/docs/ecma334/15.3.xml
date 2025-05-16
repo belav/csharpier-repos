@@ -1,21 +1,20 @@
 <?xml version="1.0"?>
 <clause number="15.3" title="The empty statement">
   <paragraph
-    >An <non_terminal
-     where="15.3">empty-statement</non_terminal>
+    >An <non_terminal where="15.3"
+      >empty-statement</non_terminal
+    >
 
     
 
-     does nothing. <grammar_production
-    >
+     does nothing. <grammar_production>
       <name>
         <non_terminal where="15.3">empty-statement</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <terminal>;</terminal>
       </rhs>
     </grammar_production>
@@ -24,8 +23,7 @@
   <paragraph>Execution of an empty statement simply transfers control to the end point of the statement. Thus, the end point of an empty statement is reachable if the empty statement is reachable. </paragraph>
   <paragraph>
     <example
-      >[Example: An empty statement can be used when writing a while statement with a null body: <code_example
-      >
+      >[Example: An empty statement can be used when writing a while statement with a null body: <code_example>
         <![CDATA[
 bool ProcessMessage() {...}  
 void ProcessMessages() {  
@@ -38,8 +36,7 @@ void ProcessMessages() {
   </paragraph>
   <paragraph>
     <example
-      >Also, an empty statement can be used to declare a label just before the closing "}" of a block: <code_example
-      >
+      >Also, an empty statement can be used to declare a label just before the closing "}" of a block: <code_example>
         <![CDATA[
 void F() {  
    ...  

@@ -24,81 +24,66 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When the authentication <see
-         cref="P:System.Web.Configuration.AuthenticationSection.Mode" />
+        >When the authentication <see cref="P:System.Web.Configuration.AuthenticationSection.Mode" />
 
         
 
-         is set to <see
-         cref="F:System.Web.Configuration.AuthenticationMode.Windows" />
+         is set to <see cref="F:System.Web.Configuration.AuthenticationMode.Windows" />
 
         
 
-        , the <see
-         cref="T:System.Web.Security.WindowsAuthenticationModule" />
+        , the <see cref="T:System.Web.Security.WindowsAuthenticationModule" />
 
         
 
-         sets the <see
-         cref="P:System.Web.HttpContext.User" />
+         sets the <see cref="P:System.Web.HttpContext.User" />
 
         
 
-         property of the current <see
-         cref="T:System.Web.HttpContext" />
+         property of the current <see cref="T:System.Web.HttpContext" />
 
         
 
-         to an <see
-         cref="T:System.Security.Principal.IPrincipal" />
+         to an <see cref="T:System.Security.Principal.IPrincipal" />
 
         
 
-         object that represents the Windows identity supplied by IIS for the current request. If IIS uses anonymous authentication, then the <see
-         cref="T:System.Web.Security.WindowsAuthenticationModule" />
+         object that represents the Windows identity supplied by IIS for the current request. If IIS uses anonymous authentication, then the <see cref="T:System.Web.Security.WindowsAuthenticationModule" />
 
         
 
-         uses the identity returned by the <see
-         cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
+         uses the identity returned by the <see cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
 
         
 
          method.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Security.WindowsAuthenticationModule" />
+        >The <see cref="T:System.Web.Security.WindowsAuthenticationModule" />
 
         
 
-         exposes an <see
-         cref="E:System.Web.Security.WindowsAuthenticationModule.Authenticate" />
+         exposes an <see cref="E:System.Web.Security.WindowsAuthenticationModule.Authenticate" />
 
         
 
-         event that enables you to provide a custom <see
-         cref="T:System.Security.Principal.IPrincipal" />
+         event that enables you to provide a custom <see cref="T:System.Security.Principal.IPrincipal" />
 
         
 
-         object for the <see
-         cref="P:System.Web.HttpContext.User" />
+         object for the <see cref="P:System.Web.HttpContext.User" />
 
         
 
-         property of the current <see
-         cref="T:System.Web.HttpContext" />
+         property of the current <see cref="T:System.Web.HttpContext" />
 
         
 
-        . The <see
-         cref="E:System.Web.Security.WindowsAuthenticationModule.Authenticate" />
+        . The <see cref="E:System.Web.Security.WindowsAuthenticationModule.Authenticate" />
 
         
 
-         event is accessed by specifying a subroutine named <system
-        >WindowsAuthentication_OnAuthenticate</system>
+         event is accessed by specifying a subroutine named <system>WindowsAuthentication_OnAuthenticate</system>
 
         
 
@@ -106,18 +91,15 @@
       >
       <block subset="none" type="note">
         <para
-          >In IIS 7.0, using the <see
-           cref="T:System.Web.Security.WindowsAuthenticationModule" />
+          >In IIS 7.0, using the <see cref="T:System.Web.Security.WindowsAuthenticationModule" />
 
           
 
-           class with the <see
-           cref="T:System.Web.Security.FormsAuthenticationModule" />
+           class with the <see cref="T:System.Web.Security.FormsAuthenticationModule" />
 
           
 
-           class is not supported. For more information about compatibility issues in Integrated mode, see <format
-           type="text/html">
+           class is not supported. For more information about compatibility issues in Integrated mode, see <format type="text/html">
             <a href="76f9cc78-f978-4837-b1c8-51d642ec4847"
               >Moving an ASP.NET Application from IIS 6.0 to IIS 7.0</a
             >
@@ -145,18 +127,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor is not intended to be called from application code.</para>
           <para
-            >ASP.NET calls this constructor to create an instance of the <see
-             cref="T:System.Web.Security.WindowsAuthenticationModule" />
+            >ASP.NET calls this constructor to create an instance of the <see cref="T:System.Web.Security.WindowsAuthenticationModule" />
 
             
 
-             class. After calling the constructor, it calls the <see
-             cref="M:System.Web.Security.WindowsAuthenticationModule.Init(System.Web.HttpApplication)" />
+             class. After calling the constructor, it calls the <see cref="M:System.Web.Security.WindowsAuthenticationModule.Init(System.Web.HttpApplication)" />
 
             
 
-             method to initialize the new <see
-             cref="T:System.Web.Security.WindowsAuthenticationModule" />
+             method to initialize the new <see cref="T:System.Web.Security.WindowsAuthenticationModule" />
 
             
 
@@ -166,8 +145,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Web.Security.WindowsAuthenticationModule" />
+            >Creates an instance of the <see cref="T:System.Web.Security.WindowsAuthenticationModule" />
 
             
 
@@ -194,107 +172,88 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.Security.WindowsAuthenticationModule.Authenticate" />
+            >The <see cref="E:System.Web.Security.WindowsAuthenticationModule.Authenticate" />
 
             
 
-             event is raised during the <see
-             cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+             event is raised during the <see cref="E:System.Web.HttpApplication.AuthenticateRequest" />
 
             
 
              event.</para
           >
           <para
-            >You can access the <see
-             cref="E:System.Web.Security.WindowsAuthenticationModule.Authenticate" />
+            >You can access the <see cref="E:System.Web.Security.WindowsAuthenticationModule.Authenticate" />
 
             
 
-             event of the <see
-             cref="T:System.Web.Security.WindowsAuthenticationModule" />
+             event of the <see cref="T:System.Web.Security.WindowsAuthenticationModule" />
 
             
 
-             class by specifying a subroutine named <system
-            >WindowsAuthentication_OnAuthenticate</system>
+             class by specifying a subroutine named <system>WindowsAuthentication_OnAuthenticate</system>
 
             
 
              in the Global.asax file for your ASP.NET application. </para
           >
           <para
-            >You can use the <see
-             cref="P:System.Web.Security.WindowsAuthenticationEventArgs.User" />
+            >You can use the <see cref="P:System.Web.Security.WindowsAuthenticationEventArgs.User" />
 
             
 
-             property of the <see
-             cref="T:System.Web.Security.WindowsAuthenticationEventArgs" />
+             property of the <see cref="T:System.Web.Security.WindowsAuthenticationEventArgs" />
 
             
 
-             object supplied to the <system
-            >WindowsAuthentication_OnAuthenticate</system>
+             object supplied to the <system>WindowsAuthentication_OnAuthenticate</system>
 
             
 
-             event to set the <see
-             cref="P:System.Web.HttpContext.User" />
+             event to set the <see cref="P:System.Web.HttpContext.User" />
 
             
 
-             property of the current <see
-             cref="T:System.Web.HttpContext" />
+             property of the current <see cref="T:System.Web.HttpContext" />
 
             
 
-             to a custom <see
-             cref="T:System.Security.Principal.IPrincipal" />
+             to a custom <see cref="T:System.Security.Principal.IPrincipal" />
 
             
 
-             object. If you do not specify a value for the <see
-             cref="P:System.Web.Security.WindowsAuthenticationEventArgs.User" />
+             object. If you do not specify a value for the <see cref="P:System.Web.Security.WindowsAuthenticationEventArgs.User" />
 
             
 
-             property during the <system
-            >WindowsAuthentication_OnAuthenticate</system>
+             property during the <system>WindowsAuthentication_OnAuthenticate</system>
 
             
 
-             event, the Windows identity supplied by IIS is used as the identity for the current request. If IIS uses anonymous authentication, then the <see
-             cref="P:System.Web.Security.WindowsAuthenticationEventArgs.Identity" />
+             event, the Windows identity supplied by IIS is used as the identity for the current request. If IIS uses anonymous authentication, then the <see cref="P:System.Web.Security.WindowsAuthenticationEventArgs.Identity" />
 
             
 
-             property is set to the identity returned by the <see
-             cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
+             property is set to the identity returned by the <see cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
 
             
 
              method.</para
           >
           <para
-            >The <system
-            >WindowsAuthentication_OnAuthenticate</system>
+            >The <system>WindowsAuthentication_OnAuthenticate</system>
 
             
 
-             event is raised only when the authentication <see
-             cref="P:System.Web.Configuration.AuthenticationSection.Mode" />
+             event is raised only when the authentication <see cref="P:System.Web.Configuration.AuthenticationSection.Mode" />
 
             
 
-             is set to <see
-             cref="F:System.Web.Configuration.AuthenticationMode.Windows" />
+             is set to <see cref="F:System.Web.Configuration.AuthenticationMode.Windows" />
 
             
 
-             and the <see
-             cref="T:System.Web.Security.WindowsAuthenticationModule" />
+             and the <see cref="T:System.Web.Security.WindowsAuthenticationModule" />
 
             
 
@@ -302,33 +261,27 @@
           >
           <block subset="none" type="note">
             <para
-              >In IIS 7.0 running in Integrated Mode, the <see
-               cref="E:System.Web.Security.WindowsAuthenticationModule.Authenticate" />
+              >In IIS 7.0 running in Integrated Mode, the <see cref="E:System.Web.Security.WindowsAuthenticationModule.Authenticate" />
 
               
 
-               event of the <see
-               cref="T:System.Web.Security.WindowsAuthenticationModule" />
+               event of the <see cref="T:System.Web.Security.WindowsAuthenticationModule" />
 
               
 
-               is not raised when both the ASP.NET <see
-               cref="T:System.Web.Security.WindowsAuthenticationModule" />
+               is not raised when both the ASP.NET <see cref="T:System.Web.Security.WindowsAuthenticationModule" />
 
               
 
-               and the IIS AnonymousAuthenticationModule modules are enabled. In this scenario, to receive authentication notification, subscribe to the <see
-               cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+               and the IIS AnonymousAuthenticationModule modules are enabled. In this scenario, to receive authentication notification, subscribe to the <see cref="E:System.Web.HttpApplication.AuthenticateRequest" />
 
               
 
-               event of the <see
-               cref="T:System.Web.HttpApplication" />
+               event of the <see cref="T:System.Web.HttpApplication" />
 
               
 
-               instance. For more information about compatibility issues in Integrated modes, see <format
-               type="text/html">
+               instance. For more information about compatibility issues in Integrated modes, see <format type="text/html">
                 <a href="76f9cc78-f978-4837-b1c8-51d642ec4847"
                   >Moving an ASP.NET Application from IIS 6.0 to IIS 7.0</a
                 >
@@ -365,8 +318,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources, other than memory, used by the <see
-             cref="T:System.Web.Security.WindowsAuthenticationModule" />
+            >Releases all resources, other than memory, used by the <see cref="T:System.Web.Security.WindowsAuthenticationModule" />
 
             
 
@@ -393,18 +345,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is not intended to be called from application code.</para>
           <para
-            >The <see
-             cref="M:System.Web.Security.WindowsAuthenticationModule.Init(System.Web.HttpApplication)" />
+            >The <see cref="M:System.Web.Security.WindowsAuthenticationModule.Init(System.Web.HttpApplication)" />
 
             
 
-             method ensures that the <see
-             cref="T:System.Web.Security.WindowsAuthenticationModule" />
+             method ensures that the <see cref="T:System.Web.Security.WindowsAuthenticationModule" />
 
             
 
-             is included in the processing of the <see
-             cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+             is included in the processing of the <see cref="E:System.Web.HttpApplication.AuthenticateRequest" />
 
             
 
@@ -414,8 +363,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the <see
-             cref="T:System.Web.Security.WindowsAuthenticationModule" />
+            >Initializes the <see cref="T:System.Web.Security.WindowsAuthenticationModule" />
 
             
 
@@ -423,12 +371,15 @@
           >
         </summary>
         <param name="app">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The current <see
-           cref="T:System.Web.HttpApplication" />
+          The current <see cref="T:System.Web.HttpApplication" />
 
           
 

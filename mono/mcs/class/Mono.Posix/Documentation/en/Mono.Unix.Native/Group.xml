@@ -28,13 +28,11 @@
   <Docs>
     <summary>Group database entry.</summary>
     <remarks
-      >A Group entry contains an entry from the group database file <c
-      >/etc/group</c>
+      >A Group entry contains an entry from the group database file <c>/etc/group</c>
 
       
 
-      , which is described in <c
-      >group</c>
+      , which is described in <c>group</c>
 
       
 

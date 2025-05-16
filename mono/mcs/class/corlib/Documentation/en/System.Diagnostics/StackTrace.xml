@@ -30,13 +30,11 @@
 
         
 
-         information will be most informative with Debug build configurations. By default, Debug builds include debug symbols, while Release builds do not. The debug symbols contain most of the file, method name, line number, and column information used in constructing <see
-         cref="T:System.Diagnostics.StackFrame" />
+         information will be most informative with Debug build configurations. By default, Debug builds include debug symbols, while Release builds do not. The debug symbols contain most of the file, method name, line number, and column information used in constructing <see cref="T:System.Diagnostics.StackFrame" />
 
         
 
-         and <see
-         cref="T:System.Diagnostics.StackTrace" />
+         and <see cref="T:System.Diagnostics.StackTrace" />
 
         
 
@@ -74,8 +72,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Diagnostics.StackTrace" />
+            >The <see cref="T:System.Diagnostics.StackTrace" />
 
             
 
@@ -86,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.StackTrace" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackTrace" />
 
             
 
@@ -116,8 +112,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Diagnostics.StackTrace" />
+            >The <see cref="T:System.Diagnostics.StackTrace" />
 
             
 
@@ -127,8 +122,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.StackTrace" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackTrace" />
 
             
 
@@ -136,7 +130,11 @@
           >
         </summary>
         <param name="fNeedFileInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -171,8 +169,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.StackTrace" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackTrace" />
 
             
 
@@ -180,12 +177,15 @@
           >
         </summary>
         <param name="frame">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The frame that the <see
-           cref="T:System.Diagnostics.StackTrace" />
+          The frame that the <see cref="T:System.Diagnostics.StackTrace" />
 
           
 
@@ -213,8 +213,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Diagnostics.StackTrace" />
+            >The <see cref="T:System.Diagnostics.StackTrace" />
 
             
 
@@ -225,8 +224,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.StackTrace" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackTrace" />
 
             
 
@@ -234,7 +232,11 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -262,16 +264,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Diagnostics.StackTrace" />
+            >The <see cref="T:System.Diagnostics.StackTrace" />
 
             
 
              is created with the caller's current thread, and does not contain file name, line number, or column information.</para
           >
           <para
-            >If the number of frames to skip is greater than or equal to the total number of frames on the call stack at the time the instance is created, the <see
-             cref="T:System.Diagnostics.StackTrace" />
+            >If the number of frames to skip is greater than or equal to the total number of frames on the call stack at the time the instance is created, the <see cref="T:System.Diagnostics.StackTrace" />
 
             
 
@@ -281,8 +281,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.StackTrace" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackTrace" />
 
             
 
@@ -290,7 +289,11 @@
           >
         </summary>
         <param name="skipFrames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -323,8 +326,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.StackTrace" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackTrace" />
 
             
 
@@ -332,14 +334,22 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The exception object from which to construct the stack trace. </param
         >
         <param name="fNeedFileInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -368,8 +378,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Diagnostics.StackTrace" />
+            >The <see cref="T:System.Diagnostics.StackTrace" />
 
             
 
@@ -377,8 +386,7 @@
           >
           <para>The resulting stack trace describes the stack at the time of the exception.</para>
           <para
-            >If the number of frames to skip is greater than or equal to the total number of frames on the call stack at the time the instance is created, the <see
-             cref="T:System.Diagnostics.StackTrace" />
+            >If the number of frames to skip is greater than or equal to the total number of frames on the call stack at the time the instance is created, the <see cref="T:System.Diagnostics.StackTrace" />
 
             
 
@@ -388,8 +396,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.StackTrace" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackTrace" />
 
             
 
@@ -397,14 +404,22 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The exception object from which to construct the stack trace. </param
         >
         <param name="skipFrames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -436,8 +451,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the number of frames to skip is greater than or equal to the total number of frames on the call stack at the time the instance is created, the <see
-             cref="T:System.Diagnostics.StackTrace" />
+            >If the number of frames to skip is greater than or equal to the total number of frames on the call stack at the time the instance is created, the <see cref="T:System.Diagnostics.StackTrace" />
 
             
 
@@ -447,8 +461,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.StackTrace" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackTrace" />
 
             
 
@@ -456,14 +469,22 @@
           >
         </summary>
         <param name="skipFrames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of frames up the stack from which to start the trace. </param
         >
         <param name="fNeedFileInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -501,13 +522,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Do not use this constructor. It is obsolete, and there is no recommended alternative. When you suspend a thread, you have no way of knowing what code it is executing, and deadlocks can occur very easily. For example, if you suspend a thread while it holds locks during a security permission evaluation, other threads in the <see
-               cref="T:System.AppDomain" />
+              >Do not use this constructor. It is obsolete, and there is no recommended alternative. When you suspend a thread, you have no way of knowing what code it is executing, and deadlocks can occur very easily. For example, if you suspend a thread while it holds locks during a security permission evaluation, other threads in the <see cref="T:System.AppDomain" />
 
               
 
-               might be blocked. If you suspend a thread while it is executing a class constructor, other threads in the <see
-               cref="T:System.AppDomain" />
+               might be blocked. If you suspend a thread while it is executing a class constructor, other threads in the <see cref="T:System.AppDomain" />
 
               
 
@@ -518,8 +537,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.StackTrace" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackTrace" />
 
             
 
@@ -528,14 +546,22 @@
           <para>Do not use this constructor overload.</para>
         </summary>
         <param name="targetThread">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The thread whose stack trace is requested. </param
         >
         <param name="needFileInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -569,8 +595,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The resulting stack trace describes the stack at the time of the exception.</para>
           <para
-            >If the number of frames to skip is greater than or equal to the total number of frames on the call stack at the time the instance is created, the <see
-             cref="T:System.Diagnostics.StackTrace" />
+            >If the number of frames to skip is greater than or equal to the total number of frames on the call stack at the time the instance is created, the <see cref="T:System.Diagnostics.StackTrace" />
 
             
 
@@ -580,8 +605,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.StackTrace" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackTrace" />
 
             
 
@@ -589,21 +613,33 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The exception object from which to construct the stack trace. </param
         >
         <param name="skipFrames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of frames up the stack from which to start the trace. </param
         >
         <param name="fNeedFileInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -667,7 +703,11 @@
           <para>The specified stack frame.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -703,79 +743,65 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the returned <see
-             cref="T:System.Diagnostics.StackFrame" />
+            >Use the returned <see cref="T:System.Diagnostics.StackFrame" />
 
             
 
-             array to enumerate and examine function calls in the <see
-             cref="T:System.Diagnostics.StackTrace" />
+             array to enumerate and examine function calls in the <see cref="T:System.Diagnostics.StackTrace" />
 
             
 
-            . The length of the returned array is equal to the <see
-             cref="P:System.Diagnostics.StackTrace.FrameCount" />
+            . The length of the returned array is equal to the <see cref="P:System.Diagnostics.StackTrace.FrameCount" />
 
             
 
              property value. </para
           >
           <para
-            >The <see
-             cref="T:System.Diagnostics.StackFrame" />
+            >The <see cref="T:System.Diagnostics.StackFrame" />
 
             
 
-             array elements are in reverse chronological order. The <see
-             cref="T:System.Diagnostics.StackFrame" />
+             array elements are in reverse chronological order. The <see cref="T:System.Diagnostics.StackFrame" />
 
             
 
-             at array index 0 represents the most recent function call in the stack trace and the last frame pushed onto the call stack. The <see
-             cref="T:System.Diagnostics.StackFrame" />
+             at array index 0 represents the most recent function call in the stack trace and the last frame pushed onto the call stack. The <see cref="T:System.Diagnostics.StackFrame" />
 
             
 
-             at array index <see
-             cref="P:System.Diagnostics.StackTrace.FrameCount" />
+             at array index <see cref="P:System.Diagnostics.StackTrace.FrameCount" />
 
             
 
              minus 1 represents the oldest function call in the stack trace and the first frame pushed onto the call stack.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Diagnostics.StackTrace.GetFrames" />
+            >Use the <see cref="M:System.Diagnostics.StackTrace.GetFrames" />
 
             
 
-             method to obtain all stack frames in a stack trace; use the <see
-             cref="M:System.Diagnostics.StackTrace.GetFrame(System.Int32)" />
+             method to obtain all stack frames in a stack trace; use the <see cref="M:System.Diagnostics.StackTrace.GetFrame(System.Int32)" />
 
             
 
-             method to obtain a specific stack frame in a stack trace. The <see
-             cref="T:System.Diagnostics.StackFrame" />
+             method to obtain a specific stack frame in a stack trace. The <see cref="T:System.Diagnostics.StackFrame" />
 
             
 
-             indexes are ordered alike by the two methods. For example, the <see
-             cref="T:System.Diagnostics.StackFrame" />
+             indexes are ordered alike by the two methods. For example, the <see cref="T:System.Diagnostics.StackFrame" />
 
             
 
-             at index 0 in the array returned by <see
-             cref="M:System.Diagnostics.StackTrace.GetFrames" />
+             at index 0 in the array returned by <see cref="M:System.Diagnostics.StackTrace.GetFrames" />
 
             
 
-             is equivalent to the <see
-             cref="T:System.Diagnostics.StackFrame" />
+             is equivalent to the <see cref="T:System.Diagnostics.StackFrame" />
 
             
 
-             returned by <see
-             cref="M:System.Diagnostics.StackTrace.GetFrame(System.Int32)" />
+             returned by <see cref="M:System.Diagnostics.StackTrace.GetFrame(System.Int32)" />
 
             
 
@@ -789,8 +815,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of type <see
-             cref="T:System.Diagnostics.StackFrame" />
+            >An array of type <see cref="T:System.Diagnostics.StackFrame" />
 
             
 

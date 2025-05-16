@@ -20,16 +20,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use this interface to provide custom envoy information that is carried along with the <see
-         cref="T:System.Runtime.Remoting.ObjRef" />
+        >Use this interface to provide custom envoy information that is carried along with the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
         
 
          objects.</para
       >
       <para
-        >Classes that implement the current interface hold a serialized chain of message sinks that is regenerated when a proxy is created to represent the object. Such functionality is used for <see
-         cref="T:System.Runtime.Remoting.Contexts.Context" />
+        >Classes that implement the current interface hold a serialized chain of message sinks that is regenerated when a proxy is created to represent the object. Such functionality is used for <see cref="T:System.Runtime.Remoting.Contexts.Context" />
 
         
 

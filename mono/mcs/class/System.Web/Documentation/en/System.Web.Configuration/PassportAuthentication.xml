@@ -17,26 +17,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.PassportAuthentication" />
+        >The <see cref="T:System.Web.Configuration.PassportAuthentication" />
 
         
 
          class allows you to access and configure a node in the Machine.config or Web.config configuration file identified by the passport tag.</para
       >
       <para
-        >This type is part of a group that includes the <see
-         cref="T:System.Web.Configuration.AuthenticationSection" />
+        >This type is part of a group that includes the <see cref="T:System.Web.Configuration.AuthenticationSection" />
 
         
 
-        , <see
-         cref="T:System.Web.Configuration.FormsAuthenticationConfiguration" />
+        , <see cref="T:System.Web.Configuration.FormsAuthenticationConfiguration" />
 
         
 
-        , and <see
-         cref="T:System.Web.Configuration.AuthenticationMode" />
+        , and <see cref="T:System.Web.Configuration.AuthenticationMode" />
 
         
 
@@ -44,8 +40,7 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.Configuration.PassportAuthentication" />
+          >The <see cref="T:System.Web.Configuration.PassportAuthentication" />
 
           
 
@@ -69,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.PassportAuthentication" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.PassportAuthentication" />
 
             
 
@@ -120,8 +114,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the collection of <see
-             cref="T:System.Web.Configuration.PassportAuthentication" />
+            >Specifies the collection of <see cref="T:System.Web.Configuration.PassportAuthentication" />
 
             
 
@@ -153,8 +146,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.PassportAuthentication.RedirectUrl" />
+            >The <see cref="P:System.Web.Configuration.PassportAuthentication.RedirectUrl" />
 
             
 

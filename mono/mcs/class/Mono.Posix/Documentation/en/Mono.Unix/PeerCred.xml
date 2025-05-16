@@ -16,13 +16,11 @@
   <Interfaces />
   <Docs>
     <summary
-      >When using Unix domain sockets (via <see
-       cref="T:Mono.Unix.UnixEndPoint" />
+      >When using Unix domain sockets (via <see cref="T:Mono.Unix.UnixEndPoint" />
 
       
 
-       or <see
-       cref="T:Mono.Unix.UnixClient" />
+       or <see cref="T:Mono.Unix.UnixClient" />
 
       
 
@@ -30,18 +28,15 @@
 </summary
     >
     <remarks
-      >Not all operating systems support this and the values of <see
-       cref="P:Mono.Unix.PeerCred.GroupID" />
+      >Not all operating systems support this and the values of <see cref="P:Mono.Unix.PeerCred.GroupID" />
 
       
 
-      , <see
-       cref="P:Mono.Unix.PeerCred.ProcessID" />
+      , <see cref="P:Mono.Unix.PeerCred.ProcessID" />
 
       
 
-      , and <see
-       cref="P:Mono.Unix.PeerCred.UserID" />
+      , and <see cref="P:Mono.Unix.PeerCred.UserID" />
 
       
 
@@ -66,8 +61,7 @@
       </Parameters>
       <Docs>
         <param name="sock"
-          >A <see
-           cref="T:System.Net.Sockets.Socket" />
+          >A <see cref="T:System.Net.Sockets.Socket" />
 
           
 
@@ -75,13 +69,11 @@
         >
         <summary>Reads the peer credentials from a Unix domain socket.</summary>
         <remarks
-          >If the <see
-           cref="T:System.Net.Sockets.Socket" />
+          >If the <see cref="T:System.Net.Sockets.Socket" />
 
           
 
-           passed in is not a Unix domain socket, <see
-           cref="T:System.ArgumentException" />
+           passed in is not a Unix domain socket, <see cref="T:System.ArgumentException" />
 
           
 

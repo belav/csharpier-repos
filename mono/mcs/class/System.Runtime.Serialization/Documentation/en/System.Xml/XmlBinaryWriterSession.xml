@@ -17,13 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Session objects (this class together with <see
-         cref="T:System.Xml.XmlBinaryReaderSession" />
+        >Session objects (this class together with <see cref="T:System.Xml.XmlBinaryReaderSession" />
 
         
 
-        ) enable dynamic string atomization that can span an entire conversation. These session objects manage dynamic dictionaries. For more information about dynamic dictionaries see <see
-         cref="T:System.Xml.XmlDictionary" />
+        ) enable dynamic string atomization that can span an entire conversation. These session objects manage dynamic dictionaries. For more information about dynamic dictionaries see <see cref="T:System.Xml.XmlDictionary" />
 
         
 

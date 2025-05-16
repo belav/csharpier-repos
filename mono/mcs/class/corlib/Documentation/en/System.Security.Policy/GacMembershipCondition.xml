@@ -62,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Policy.GacMembershipCondition" />
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.GacMembershipCondition" />
 
             
 
@@ -97,8 +96,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This membership condition tests <see
-             cref="T:System.Security.Policy.GacInstalled" />
+            >This membership condition tests <see cref="T:System.Security.Policy.GacInstalled" />
 
             
 
@@ -114,12 +112,15 @@
           <para>true if the specified evidence satisfies the membership condition; otherwise, false.</para>
         </returns>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Policy.Evidence" />
+          The <see cref="T:System.Security.Policy.Evidence" />
 
           
 
@@ -158,8 +159,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Security.Policy.GacMembershipCondition" />
+            >A new <see cref="T:System.Security.Policy.GacMembershipCondition" />
 
             
 
@@ -190,28 +190,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >There are no degrees of global assembly cache membership. An assembly is either in the cache or it is not. If the object identified by <paramref
-             name="o" />
+            >There are no degrees of global assembly cache membership. An assembly is either in the cache or it is not. If the object identified by <paramref name="o" />
 
             
 
-             is a <see
-             cref="T:System.Security.Policy.GacMembershipCondition" />
+             is a <see cref="T:System.Security.Policy.GacMembershipCondition" />
 
             
 
-            , then the objects being compared are equal. This method returns false only if <paramref
-             name="o" />
+            , then the objects being compared are equal. This method returns false only if <paramref name="o" />
 
             
 
-             is null or if <paramref
-             name="o" />
+             is null or if <paramref name="o" />
 
             
 
-             is not a <see
-             cref="T:System.Security.Policy.GacMembershipCondition" />
+             is not a <see cref="T:System.Security.Policy.GacMembershipCondition" />
 
             
 
@@ -225,13 +220,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="o" />
+            >true if <paramref name="o" />
 
             
 
-             is a <see
-             cref="T:System.Security.Policy.GacMembershipCondition" />
+             is a <see cref="T:System.Security.Policy.GacMembershipCondition" />
 
             
 
@@ -239,7 +232,11 @@
           >
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -272,28 +269,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Policy.GacMembershipCondition.FromXml(System.Security.SecurityElement)" />
+            >The <see cref="M:System.Security.Policy.GacMembershipCondition.FromXml(System.Security.SecurityElement)" />
 
             
 
-             method reconstructs a <see
-             cref="T:System.Security.Policy.GacMembershipCondition" />
+             method reconstructs a <see cref="T:System.Security.Policy.GacMembershipCondition" />
 
             
 
-             from an XML encoding defined by the <see
-             cref="T:System.Security.SecurityElement" />
+             from an XML encoding defined by the <see cref="T:System.Security.SecurityElement" />
 
             
 
-             class. Use the <see
-             cref="Overload:System.Security.Policy.GacMembershipCondition.ToXml" />
+             class. Use the <see cref="Overload:System.Security.Policy.GacMembershipCondition.ToXml" />
 
             
 
-             method to XML-encode the <see
-             cref="T:System.Security.Policy.GacMembershipCondition" />
+             method to XML-encode the <see cref="T:System.Security.Policy.GacMembershipCondition" />
 
             
 
@@ -305,12 +297,15 @@
           <para>Uses the specified XML encoding to reconstruct a security object.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.SecurityElement" />
+          The <see cref="T:System.Security.SecurityElement" />
 
           
 
@@ -350,29 +345,34 @@
           <para>Uses the specified XML encoding to reconstruct a security object, using the specified policy level context.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.SecurityElement" />
+          The <see cref="T:System.Security.SecurityElement" />
 
           
 
            that contains the XML encoding to use to reconstruct the security object. </param
         >
         <param name="level">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Policy.PolicyLevel" />
+          The <see cref="T:System.Security.Policy.PolicyLevel" />
 
           
 
-           context for resolving <see
-           cref="T:System.Security.NamedPermissionSet" />
+           context for resolving <see cref="T:System.Security.NamedPermissionSet" />
 
           
 
@@ -400,13 +400,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Policy.GacMembershipCondition.GetHashCode" />
+            >The <see cref="M:System.Security.Policy.GacMembershipCondition.GetHashCode" />
 
             
 
-             method returns 0 (zero) because <see
-             cref="T:System.Security.Policy.GacMembershipCondition" />
+             method returns 0 (zero) because <see cref="T:System.Security.Policy.GacMembershipCondition" />
 
             
 
@@ -443,8 +441,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string representation for <see
-             cref="T:System.Security.Policy.GacMembershipCondition" />
+            >The string representation for <see cref="T:System.Security.Policy.GacMembershipCondition" />
 
             
 
@@ -481,13 +478,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Security.Policy.GacMembershipCondition.FromXml(System.Security.SecurityElement)" />
+            >Use the <see cref="M:System.Security.Policy.GacMembershipCondition.FromXml(System.Security.SecurityElement)" />
 
             
 
-             method to restore the state information from a <see
-             cref="T:System.Security.SecurityElement" />
+             method to restore the state information from a <see cref="T:System.Security.SecurityElement" />
 
             
 
@@ -501,8 +496,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.SecurityElement" />
+            >A <see cref="T:System.Security.SecurityElement" />
 
             
 
@@ -544,8 +538,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.SecurityElement" />
+            >A <see cref="T:System.Security.SecurityElement" />
 
             
 
@@ -553,17 +546,19 @@
           >
         </returns>
         <param name="level">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Policy.PolicyLevel" />
+          The <see cref="T:System.Security.Policy.PolicyLevel" />
 
           
 
-           context for resolving <see
-           cref="T:System.Security.NamedPermissionSet" />
+           context for resolving <see cref="T:System.Security.NamedPermissionSet" />
 
           
 

@@ -19,61 +19,51 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Xsl.XslCompiledTransform" />
+        >The <see cref="T:System.Xml.Xsl.XslCompiledTransform" />
 
         
 
-         class is an XSLT processor that supports the XSLT 1.0 syntax. It is a new implementation and includes performance gains when compared to the obsolete <see
-         cref="T:System.Xml.Xsl.XslTransform" />
+         class is an XSLT processor that supports the XSLT 1.0 syntax. It is a new implementation and includes performance gains when compared to the obsolete <see cref="T:System.Xml.Xsl.XslTransform" />
 
         
 
-         class. The structure of the <see
-         cref="T:System.Xml.Xsl.XslCompiledTransform" />
+         class. The structure of the <see cref="T:System.Xml.Xsl.XslCompiledTransform" />
 
         
 
-         class is very similar to the <see
-         cref="T:System.Xml.Xsl.XslTransform" />
+         class is very similar to the <see cref="T:System.Xml.Xsl.XslTransform" />
 
         
 
-         class. The <see
-         cref="Overload:System.Xml.Xsl.XslCompiledTransform.Load" />
+         class. The <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Load" />
 
         
 
-         method loads and compiles the style sheet, while the <see
-         cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+         method loads and compiles the style sheet, while the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
 
         
 
          method executes the XSLT transform.</para
       >
       <para
-        >Support for the XSLT document() function and embedded script blocks are disabled by default. These features can be enabled by creating an <see
-         cref="T:System.Xml.Xsl.XsltSettings" />
+        >Support for the XSLT document() function and embedded script blocks are disabled by default. These features can be enabled by creating an <see cref="T:System.Xml.Xsl.XsltSettings" />
 
         
 
-         object and passing it to the <see
-         cref="Overload:System.Xml.Xsl.XslCompiledTransform.Load" />
+         object and passing it to the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Load" />
 
         
 
          method.</para
       >
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="f9b074f6-d6f4-49dd-a093-df510bf0cf7b">Using the XsltCompiledTransform Class</a>
         </format>
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="9404d758-679f-4ffb-995d-3d07d817659e">Migrating From the XslTransform Class</a>
         </format>
 
@@ -85,8 +75,7 @@
         <h2>Security Considerations</h2>
       </format>
       <para
-        >When creating an application that uses the <see
-         cref="T:System.Xml.Xsl.XslCompiledTransform" />
+        >When creating an application that uses the <see cref="T:System.Xml.Xsl.XslCompiledTransform" />
 
         
 
@@ -98,13 +87,11 @@
         </item>
         <item>
           <para
-            >The XSLT document() function is disabled by default. If you enable the document() function, restrict the resources that can be accessed by passing an <see
-             cref="T:System.Xml.XmlSecureResolver" />
+            >The XSLT document() function is disabled by default. If you enable the document() function, restrict the resources that can be accessed by passing an <see cref="T:System.Xml.XmlSecureResolver" />
 
             
 
-             object to the <see
-             cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+             object to the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
 
             
 
@@ -113,13 +100,11 @@
         </item>
         <item>
           <para
-            >Extension objects are enabled by default. If an <see
-             cref="T:System.Xml.Xsl.XsltArgumentList" />
+            >Extension objects are enabled by default. If an <see cref="T:System.Xml.Xsl.XsltArgumentList" />
 
             
 
-             object containing extension objects is passed to the <see
-             cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+             object containing extension objects is passed to the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
 
             
 
@@ -131,8 +116,7 @@
         </item>
         <item>
           <para
-            >XSLT applications that run in a mixed trust environment can result in style sheet spoofing. For example, a malicious user can load an object with a harmful style sheet and hand it off to another user who subsequently calls the <see
-             cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+            >XSLT applications that run in a mixed trust environment can result in style sheet spoofing. For example, a malicious user can load an object with a harmful style sheet and hand it off to another user who subsequently calls the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
 
             
 
@@ -141,8 +125,7 @@
         </item>
       </list>
       <para
-        >These security issues can be mitigated by not enabling scripting or the document() function unless the style sheet comes from a trusted source, and by not accepting <see
-         cref="T:System.Xml.Xsl.XslCompiledTransform" />
+        >These security issues can be mitigated by not enabling scripting or the document() function unless the style sheet comes from a trusted source, and by not accepting <see cref="T:System.Xml.Xsl.XslCompiledTransform" />
 
         
 
@@ -173,8 +156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Xsl.XslCompiledTransform" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Xsl.XslCompiledTransform" />
 
             
 
@@ -205,8 +187,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <paramref
-                 name="enableDebug" />
+                >The <paramref name="enableDebug" />
 
                 
 
@@ -215,56 +196,46 @@
             </item>
             <item>
               <para
-                >The style sheet is passed to the <see
-                 cref="Overload:System.Xml.Xsl.XslCompiledTransform.Load" />
+                >The style sheet is passed to the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Load" />
 
                 
 
-                 method either as a URI, or an implementation of the <see
-                 cref="T:System.Xml.XmlReader" />
+                 method either as a URI, or an implementation of the <see cref="T:System.Xml.XmlReader" />
 
                 
 
-                 class that implements the <see
-                 cref="T:System.Xml.IXmlLineInfo" />
+                 class that implements the <see cref="T:System.Xml.IXmlLineInfo" />
 
                 
 
-                 interface. The <see
-                 cref="T:System.Xml.IXmlLineInfo" />
+                 interface. The <see cref="T:System.Xml.IXmlLineInfo" />
 
                 
 
-                 interface is implemented on all text-parsing <see
-                 cref="T:System.Xml.XmlReader" />
+                 interface is implemented on all text-parsing <see cref="T:System.Xml.XmlReader" />
 
                 
 
                  objects.</para
               >
               <para
-                >In other words, if the style sheet is loaded using an <see
-                 cref="T:System.Xml.XPath.IXPathNavigable" />
+                >In other words, if the style sheet is loaded using an <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
                 
 
-                 object, such as an <see
-                 cref="T:System.Xml.XmlDocument" />
+                 object, such as an <see cref="T:System.Xml.XmlDocument" />
 
                 
 
-                 or <see
-                 cref="T:System.Xml.XPath.XPathDocument" />
+                 or <see cref="T:System.Xml.XPath.XPathDocument" />
 
                 
 
-                , or an <see
-                 cref="T:System.Xml.XmlReader" />
+                , or an <see cref="T:System.Xml.XmlReader" />
 
                 
 
-                 implementation that does not implement the <see
-                 cref="T:System.Xml.IXmlLineInfo" />
+                 implementation that does not implement the <see cref="T:System.Xml.IXmlLineInfo" />
 
                 
 
@@ -273,28 +244,23 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="T:System.Xml.XmlResolver" />
+                >The <see cref="T:System.Xml.XmlResolver" />
 
                 
 
-                 used to load the style sheet is a file-based <see
-                 cref="T:System.Xml.XmlResolver" />
+                 used to load the style sheet is a file-based <see cref="T:System.Xml.XmlResolver" />
 
                 
 
-                , such as the <see
-                 cref="T:System.Xml.XmlUrlResolver" />
+                , such as the <see cref="T:System.Xml.XmlUrlResolver" />
 
                 
 
-                 (this is the default <see
-                 cref="T:System.Xml.XmlResolver" />
+                 (this is the default <see cref="T:System.Xml.XmlResolver" />
 
                 
 
-                 used by the <see
-                 cref="T:System.Xml.Xsl.XslCompiledTransform" />
+                 used by the <see cref="T:System.Xml.Xsl.XslCompiledTransform" />
 
                 
 
@@ -309,8 +275,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Xsl.XslCompiledTransform" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Xsl.XslCompiledTransform" />
 
             
 
@@ -318,7 +283,11 @@
           >
         </summary>
         <param name="enableDebug">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -348,8 +317,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Xsl.XslCompiledTransform" />
+            >The <see cref="T:System.Xml.Xsl.XslCompiledTransform" />
 
             
 
@@ -359,8 +327,7 @@
           <list type="bullet">
             <item>
               <para
-                >An <see
-                 cref="T:System.Xml.XmlUrlResolver" />
+                >An <see cref="T:System.Xml.XmlUrlResolver" />
 
                 
 
@@ -369,23 +336,19 @@
             </item>
             <item>
               <para
-                >An <see
-                 cref="T:System.Xml.XmlReader" />
+                >An <see cref="T:System.Xml.XmlReader" />
 
                 
 
-                 with default settings is used to load the style sheet. DTD processing is disabled on the <see
-                 cref="T:System.Xml.XmlReader" />
+                 with default settings is used to load the style sheet. DTD processing is disabled on the <see cref="T:System.Xml.XmlReader" />
 
                 
 
-                . If you require DTD processing, create an <see
-                 cref="T:System.Xml.XmlReader" />
+                . If you require DTD processing, create an <see cref="T:System.Xml.XmlReader" />
 
                 
 
-                 with this feature enabled, and pass it to the <see
-                 cref="Overload:System.Xml.Xsl.XslCompiledTransform.Load" />
+                 with this feature enabled, and pass it to the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Load" />
 
                 
 
@@ -400,13 +363,11 @@
             </item>
           </list>
           <para
-            >You can use the <see
-             cref="M:System.Xml.Xsl.XslCompiledTransform.Load(System.String,System.Xml.Xsl.XsltSettings,System.Xml.XmlResolver)" />
+            >You can use the <see cref="M:System.Xml.Xsl.XslCompiledTransform.Load(System.String,System.Xml.Xsl.XsltSettings,System.Xml.XmlResolver)" />
 
             
 
-             overload to specify an <see
-             cref="T:System.Xml.XmlResolver" />
+             overload to specify an <see cref="T:System.Xml.XmlResolver" />
 
             
 
@@ -418,7 +379,11 @@
           <para>Loads and compiles the style sheet located at the specified URI.</para>
         </summary>
         <param name="stylesheetUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -448,31 +413,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Xsl.XslCompiledTransform" />
+            >The <see cref="T:System.Xml.Xsl.XslCompiledTransform" />
 
             
 
              class supports the XSLT 1.0 syntax. The XSLT style sheet must use the http://www.w3.org/1999/XSL/Transform namespace.</para
           >
           <para
-            >The style sheet loads from the current node of the <see
-             cref="T:System.Xml.XmlReader" />
+            >The style sheet loads from the current node of the <see cref="T:System.Xml.XmlReader" />
 
             
 
-             through all its children. This enables you to use a portion of a document as the style sheet. After the <see
-             cref="M:System.Xml.Xsl.XslCompiledTransform.Load(System.Xml.XmlReader)" />
+             through all its children. This enables you to use a portion of a document as the style sheet. After the <see cref="M:System.Xml.Xsl.XslCompiledTransform.Load(System.Xml.XmlReader)" />
 
             
 
-             method completes, the <see
-             cref="T:System.Xml.XmlReader" />
+             method completes, the <see cref="T:System.Xml.XmlReader" />
 
             
 
-             is positioned on the next node after the end of the style sheet. If the end of the document is reached, the <see
-             cref="T:System.Xml.XmlReader" />
+             is positioned on the next node after the end of the style sheet. If the end of the document is reached, the <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -482,8 +442,7 @@
           <list type="bullet">
             <item>
               <para
-                >An <see
-                 cref="T:System.Xml.XmlUrlResolver" />
+                >An <see cref="T:System.Xml.XmlUrlResolver" />
 
                 
 
@@ -498,13 +457,11 @@
             </item>
           </list>
           <para
-            >You can use the <see
-             cref="M:System.Xml.Xsl.XslCompiledTransform.Load(System.Xml.XmlReader,System.Xml.Xsl.XsltSettings,System.Xml.XmlResolver)" />
+            >You can use the <see cref="M:System.Xml.Xsl.XslCompiledTransform.Load(System.Xml.XmlReader,System.Xml.Xsl.XsltSettings,System.Xml.XmlResolver)" />
 
             
 
-             overload to specify an <see
-             cref="T:System.Xml.XmlResolver" />
+             overload to specify an <see cref="T:System.Xml.XmlResolver" />
 
             
 
@@ -514,8 +471,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compiles the style sheet contained in the <see
-             cref="T:System.Xml.XmlReader" />
+            >Compiles the style sheet contained in the <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -523,12 +479,15 @@
           >
         </summary>
         <param name="stylesheet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlReader" />
+          An <see cref="T:System.Xml.XmlReader" />
 
           
 
@@ -561,8 +520,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Xsl.XslCompiledTransform" />
+            >The <see cref="T:System.Xml.Xsl.XslCompiledTransform" />
 
             
 
@@ -572,8 +530,7 @@
           <list type="bullet">
             <item>
               <para
-                >An <see
-                 cref="T:System.Xml.XmlUrlResolver" />
+                >An <see cref="T:System.Xml.XmlUrlResolver" />
 
                 
 
@@ -588,13 +545,11 @@
             </item>
           </list>
           <para
-            >You can use the <see
-             cref="M:System.Xml.Xsl.XslCompiledTransform.Load(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltSettings,System.Xml.XmlResolver)" />
+            >You can use the <see cref="M:System.Xml.Xsl.XslCompiledTransform.Load(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltSettings,System.Xml.XmlResolver)" />
 
             
 
-             overload to specify an <see
-             cref="T:System.Xml.XmlResolver" />
+             overload to specify an <see cref="T:System.Xml.XmlResolver" />
 
             
 
@@ -604,8 +559,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compiles the style sheet contained in the <see
-             cref="T:System.Xml.XPath.IXPathNavigable" />
+            >Compiles the style sheet contained in the <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
             
 
@@ -613,27 +567,27 @@
           >
         </summary>
         <param name="stylesheet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object implementing the <see
-           cref="T:System.Xml.XPath.IXPathNavigable" />
+          An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
           
 
-           interface. In the Microsoft .NET Framework, this can be either an <see
-           cref="T:System.Xml.XmlNode" />
+           interface. In the Microsoft .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" />
 
           
 
-           (typically an <see
-           cref="T:System.Xml.XmlDocument" />
+           (typically an <see cref="T:System.Xml.XmlDocument" />
 
           
 
-          ), or an <see
-           cref="T:System.Xml.XPath.XPathDocument" />
+          ), or an <see cref="T:System.Xml.XPath.XPathDocument" />
 
           
 
@@ -668,31 +622,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Xsl.XslCompiledTransform" />
+            >The <see cref="T:System.Xml.Xsl.XslCompiledTransform" />
 
             
 
              class supports the XSLT 1.0 syntax. The XSLT style sheet must use the http://www.w3.org/1999/XSL/Transform namespace.</para
           >
           <para
-            >An <see
-             cref="T:System.Xml.XmlReader" />
+            >An <see cref="T:System.Xml.XmlReader" />
 
             
 
-             with default settings is used to load the style sheet. DTD processing is disabled on the <see
-             cref="T:System.Xml.XmlReader" />
+             with default settings is used to load the style sheet. DTD processing is disabled on the <see cref="T:System.Xml.XmlReader" />
 
             
 
-            . If you require DTD processing, create an <see
-             cref="T:System.Xml.XmlReader" />
+            . If you require DTD processing, create an <see cref="T:System.Xml.XmlReader" />
 
             
 
-             with this feature enabled, and pass it to the <see
-             cref="Overload:System.Xml.Xsl.XslCompiledTransform.Load" />
+             with this feature enabled, and pass it to the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Load" />
 
             
 
@@ -702,8 +651,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads and compiles the XSLT style sheet specified by the URI. The <see
-             cref="T:System.Xml.XmlResolver" />
+            >Loads and compiles the XSLT style sheet specified by the URI. The <see cref="T:System.Xml.XmlResolver" />
 
             
 
@@ -711,36 +659,45 @@
           >
         </summary>
         <param name="stylesheetUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The URI of the style sheet.</param
         >
         <param name="settings">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Xsl.XsltSettings" />
+          The <see cref="T:System.Xml.Xsl.XsltSettings" />
 
           
 
-           to apply to the style sheet. If this is null, the <see
-           cref="P:System.Xml.Xsl.XsltSettings.Default" />
+           to apply to the style sheet. If this is null, the <see cref="P:System.Xml.Xsl.XsltSettings.Default" />
 
           
 
            setting is applied.</param
         >
         <param name="stylesheetResolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlResolver" />
+          The <see cref="T:System.Xml.XmlResolver" />
 
           
 
@@ -775,31 +732,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Xsl.XslCompiledTransform" />
+            >The <see cref="T:System.Xml.Xsl.XslCompiledTransform" />
 
             
 
              class supports the XSLT 1.0 syntax. The XSLT style sheet must use the http://www.w3.org/1999/XSL/Transform namespace.</para
           >
           <para
-            >The style sheet loads from the current node of the <see
-             cref="T:System.Xml.XmlReader" />
+            >The style sheet loads from the current node of the <see cref="T:System.Xml.XmlReader" />
 
             
 
-             through all its children. This enables you to use a portion of a document as the style sheet. After the <see
-             cref="M:System.Xml.Xsl.XslCompiledTransform.Load(System.Xml.XmlReader)" />
+             through all its children. This enables you to use a portion of a document as the style sheet. After the <see cref="M:System.Xml.Xsl.XslCompiledTransform.Load(System.Xml.XmlReader)" />
 
             
 
-             method completes, the <see
-             cref="T:System.Xml.XmlReader" />
+             method completes, the <see cref="T:System.Xml.XmlReader" />
 
             
 
-             is positioned on the next node after the end of the style sheet. If the end of the document is reached, the <see
-             cref="T:System.Xml.XmlReader" />
+             is positioned on the next node after the end of the style sheet. If the end of the document is reached, the <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -809,13 +761,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compiles the XSLT style sheet contained in the <see
-             cref="T:System.Xml.XmlReader" />
+            >Compiles the XSLT style sheet contained in the <see cref="T:System.Xml.XmlReader" />
 
             
 
-            . The <see
-             cref="T:System.Xml.XmlResolver" />
+            . The <see cref="T:System.Xml.XmlResolver" />
 
             
 
@@ -823,41 +773,49 @@
           >
         </summary>
         <param name="stylesheet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlReader" />
+          The <see cref="T:System.Xml.XmlReader" />
 
           
 
            containing the style sheet.</param
         >
         <param name="settings">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Xsl.XsltSettings" />
+          The <see cref="T:System.Xml.Xsl.XsltSettings" />
 
           
 
-           to apply to the style sheet. If this is null, the <see
-           cref="P:System.Xml.Xsl.XsltSettings.Default" />
+           to apply to the style sheet. If this is null, the <see cref="P:System.Xml.Xsl.XsltSettings.Default" />
 
           
 
            setting is applied.</param
         >
         <param name="stylesheetResolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlResolver" />
+          The <see cref="T:System.Xml.XmlResolver" />
 
           
 
@@ -892,8 +850,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Xsl.XslCompiledTransform" />
+            >The <see cref="T:System.Xml.Xsl.XslCompiledTransform" />
 
             
 
@@ -903,13 +860,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compiles the XSLT style sheet contained in the <see
-             cref="T:System.Xml.XPath.IXPathNavigable" />
+            >Compiles the XSLT style sheet contained in the <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
             
 
-            . The <see
-             cref="T:System.Xml.XmlResolver" />
+            . The <see cref="T:System.Xml.XmlResolver" />
 
             
 
@@ -917,56 +872,61 @@
           >
         </summary>
         <param name="stylesheet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object implementing the <see
-           cref="T:System.Xml.XPath.IXPathNavigable" />
+          An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
           
 
-           interface. In the Microsoft .NET Framework, this can be either an <see
-           cref="T:System.Xml.XmlNode" />
+           interface. In the Microsoft .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" />
 
           
 
-           (typically an <see
-           cref="T:System.Xml.XmlDocument" />
+           (typically an <see cref="T:System.Xml.XmlDocument" />
 
           
 
-          ), or an <see
-           cref="T:System.Xml.XPath.XPathDocument" />
+          ), or an <see cref="T:System.Xml.XPath.XPathDocument" />
 
           
 
            containing the style sheet.</param
         >
         <param name="settings">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Xsl.XsltSettings" />
+          The <see cref="T:System.Xml.Xsl.XsltSettings" />
 
           
 
-           to apply to the style sheet. If this is null, the <see
-           cref="P:System.Xml.Xsl.XsltSettings.Default" />
+           to apply to the style sheet. If this is null, the <see cref="P:System.Xml.Xsl.XsltSettings.Default" />
 
           
 
            setting is applied.</param
         >
         <param name="stylesheetResolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlResolver" />
+          The <see cref="T:System.Xml.XmlResolver" />
 
           
 
@@ -997,23 +957,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is populated after a successful call to the <see
-             cref="Overload:System.Xml.Xsl.XslCompiledTransform.Load" />
+            >This property is populated after a successful call to the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Load" />
 
             
 
-             method. It contains information derived from the xsl:output element of a compiled style sheet. This <see
-             cref="T:System.Xml.XmlWriterSettings" />
+             method. It contains information derived from the xsl:output element of a compiled style sheet. This <see cref="T:System.Xml.XmlWriterSettings" />
 
             
 
-             object can be passed to the <see
-             cref="Overload:System.Xml.XmlWriter.Create" />
+             object can be passed to the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
             
 
-             method to create the <see
-             cref="T:System.Xml.XmlWriter" />
+             method to create the <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -1023,8 +979,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Xml.XmlWriterSettings" />
+            >Gets an <see cref="T:System.Xml.XmlWriterSettings" />
 
             
 
@@ -1060,13 +1015,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.CodeDom.Compiler.TempFileCollection" />
+            >Gets the <see cref="T:System.CodeDom.Compiler.TempFileCollection" />
 
             
 
-             that contains the temporary files generated on disk after a successful call to the <see
-             cref="Overload:System.Xml.Xsl.XslCompiledTransform.Load" />
+             that contains the temporary files generated on disk after a successful call to the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Load" />
 
             
 
@@ -1101,41 +1054,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses a default <see
-             cref="T:System.Xml.XmlUrlResolver" />
+            >This method uses a default <see cref="T:System.Xml.XmlUrlResolver" />
 
             
 
-             with no user credentials to resolve the input and output documents. If any of these resources are located on a network resource that requires authentication, use the overload that takes an <see
-             cref="T:System.Xml.XmlResolver" />
+             with no user credentials to resolve the input and output documents. If any of these resources are located on a network resource that requires authentication, use the overload that takes an <see cref="T:System.Xml.XmlResolver" />
 
             
 
-             as one of its arguments and specify an <see
-             cref="T:System.Xml.XmlResolver" />
+             as one of its arguments and specify an <see cref="T:System.Xml.XmlResolver" />
 
             
 
              with the necessary credentials.</para
           >
           <para
-            >An <see
-             cref="T:System.Xml.XmlReader" />
+            >An <see cref="T:System.Xml.XmlReader" />
 
             
 
-             with default settings is used to load the input document. DTD processing is disabled on the <see
-             cref="T:System.Xml.XmlReader" />
+             with default settings is used to load the input document. DTD processing is disabled on the <see cref="T:System.Xml.XmlReader" />
 
             
 
-            . If you require DTD processing, create an <see
-             cref="T:System.Xml.XmlReader" />
+            . If you require DTD processing, create an <see cref="T:System.Xml.XmlReader" />
 
             
 
-             with this feature enabled, and pass it to the <see
-             cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+             with this feature enabled, and pass it to the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
 
             
 
@@ -1147,14 +1093,22 @@
           <para>Executes the transform using the input document specified by the URI and outputs the results to a file.</para>
         </summary>
         <param name="inputUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The URI of the input document.</param
         >
         <param name="resultsFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1188,54 +1142,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses a default <see
-             cref="T:System.Xml.XmlUrlResolver" />
+            >This method uses a default <see cref="T:System.Xml.XmlUrlResolver" />
 
             
 
-             with no user credentials to resolve the input document and any instances of the XSLT document() function found in the style sheet. If any of these resources are located on a network resource that requires authentication, use the overload that takes an <see
-             cref="T:System.Xml.XmlResolver" />
+             with no user credentials to resolve the input document and any instances of the XSLT document() function found in the style sheet. If any of these resources are located on a network resource that requires authentication, use the overload that takes an <see cref="T:System.Xml.XmlResolver" />
 
             
 
-             as one of its arguments and specify an <see
-             cref="T:System.Xml.XmlResolver" />
+             as one of its arguments and specify an <see cref="T:System.Xml.XmlResolver" />
 
             
 
              with the necessary credentials.</para
           >
           <para
-            >An <see
-             cref="T:System.Xml.XmlReader" />
+            >An <see cref="T:System.Xml.XmlReader" />
 
             
 
-             with default settings is used to load the input document. DTD processing is disabled on the <see
-             cref="T:System.Xml.XmlReader" />
+             with default settings is used to load the input document. DTD processing is disabled on the <see cref="T:System.Xml.XmlReader" />
 
             
 
-            . If you require DTD processing, create an <see
-             cref="T:System.Xml.XmlReader" />
+            . If you require DTD processing, create an <see cref="T:System.Xml.XmlReader" />
 
             
 
-             with this feature enabled, and pass it to the <see
-             cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+             with this feature enabled, and pass it to the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
 
             
 
              method.</para
           >
           <para
-            >This method does not support the xsl:strip-space element. If your compiled style sheet included the xsl:strip-space element, you must use the <see
-             cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+            >This method does not support the xsl:strip-space element. If your compiled style sheet included the xsl:strip-space element, you must use the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
 
             
 
-             overload which takes an <see
-             cref="T:System.Xml.XmlReader" />
+             overload which takes an <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -1245,8 +1190,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes the transform using the input document specified by the URI and outputs the results to an <see
-             cref="T:System.Xml.XmlWriter" />
+            >Executes the transform using the input document specified by the URI and outputs the results to an <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -1254,19 +1198,26 @@
           >
         </summary>
         <param name="inputUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The URI of the input document.</param
         >
         <param name="results">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
@@ -1300,18 +1251,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the XSLT document() function is enabled, it is resolved using an <see
-             cref="T:System.Xml.XmlUrlResolver" />
+            >If the XSLT document() function is enabled, it is resolved using an <see cref="T:System.Xml.XmlUrlResolver" />
 
             
 
-             with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see
-             cref="T:System.Xml.XmlResolver" />
+             with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see cref="T:System.Xml.XmlResolver" />
 
             
 
-             as one of its arguments and specify an <see
-             cref="T:System.Xml.XmlResolver" />
+             as one of its arguments and specify an <see cref="T:System.Xml.XmlResolver" />
 
             
 
@@ -1321,13 +1269,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes the transform using the input document specified by the <see
-             cref="T:System.Xml.XmlReader" />
+            >Executes the transform using the input document specified by the <see cref="T:System.Xml.XmlReader" />
 
             
 
-             object and outputs the results to an <see
-             cref="T:System.Xml.XmlWriter" />
+             object and outputs the results to an <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -1335,24 +1281,30 @@
           >
         </summary>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlReader" />
+          The <see cref="T:System.Xml.XmlReader" />
 
           
 
            containing the input document.</param
         >
         <param name="results">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
@@ -1386,49 +1338,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the XSLT document() function is enabled, it is resolved using an <see
-             cref="T:System.Xml.XmlUrlResolver" />
+            >If the XSLT document() function is enabled, it is resolved using an <see cref="T:System.Xml.XmlUrlResolver" />
 
             
 
-             with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see
-             cref="T:System.Xml.XmlResolver" />
+             with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see cref="T:System.Xml.XmlResolver" />
 
             
 
-             as one of its arguments and specify an <see
-             cref="T:System.Xml.XmlResolver" />
+             as one of its arguments and specify an <see cref="T:System.Xml.XmlResolver" />
 
             
 
              with the necessary credentials.</para
           >
           <para
-            >This method does not support the xsl:strip-space element. If your compiled style sheet included the xsl:strip-space element, you must use the <see
-             cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+            >This method does not support the xsl:strip-space element. If your compiled style sheet included the xsl:strip-space element, you must use the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
 
             
 
-             overload which takes an <see
-             cref="T:System.Xml.XmlReader" />
+             overload which takes an <see cref="T:System.Xml.XmlReader" />
 
             
 
              as the input argument.</para
           >
           <para
-            >The <see
-             cref="T:System.Xml.XPath.IXPathNavigable" />
+            >The <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
             
 
-             interface is implemented in the <see
-             cref="T:System.Xml.XmlNode" />
+             interface is implemented in the <see cref="T:System.Xml.XmlNode" />
 
             
 
-             and <see
-             cref="T:System.Xml.XPath.XPathDocument" />
+             and <see cref="T:System.Xml.XPath.XPathDocument" />
 
             
 
@@ -1437,8 +1381,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="T:System.Xml.XmlNode" />
+                >The <see cref="T:System.Xml.XmlNode" />
 
                 
 
@@ -1447,18 +1390,15 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="T:System.Xml.XPath.XPathDocument" />
+                >The <see cref="T:System.Xml.XPath.XPathDocument" />
 
                 
 
-                 class is a read-only data store based on the XPath data model. <see
-                 cref="T:System.Xml.XPath.XPathDocument" />
+                 class is a read-only data store based on the XPath data model. <see cref="T:System.Xml.XPath.XPathDocument" />
 
                 
 
-                 is the recommended class for XSLT processing. It provides faster performance when compared to the <see
-                 cref="T:System.Xml.XmlNode" />
+                 is the recommended class for XSLT processing. It provides faster performance when compared to the <see cref="T:System.Xml.XmlNode" />
 
                 
 
@@ -1467,13 +1407,11 @@
             </item>
           </list>
           <para
-            >Transformations apply to the document as a whole. In other words, if you pass in a node other than the document root node, this does not prevent the transformation process from accessing all nodes in the loaded document. To transform a node fragment, you must create an object containing just the node fragment, and pass that object to the <see
-             cref="M:System.Xml.Xsl.XslCompiledTransform.Transform(System.Xml.XPath.IXPathNavigable,System.Xml.XmlWriter)" />
+            >Transformations apply to the document as a whole. In other words, if you pass in a node other than the document root node, this does not prevent the transformation process from accessing all nodes in the loaded document. To transform a node fragment, you must create an object containing just the node fragment, and pass that object to the <see cref="M:System.Xml.Xsl.XslCompiledTransform.Transform(System.Xml.XPath.IXPathNavigable,System.Xml.XmlWriter)" />
 
             
 
-             method. For more information, see <format
-             type="text/html">
+             method. For more information, see <format type="text/html">
               <a href="73a6c582-b9d7-4fa7-9a05-6d931e1f3de8">How To: Transform a Node Fragment</a>
             </format>
 
@@ -1485,13 +1423,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes the transform using the input document specified by the <see
-             cref="T:System.Xml.XPath.IXPathNavigable" />
+            >Executes the transform using the input document specified by the <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
             
 
-             object and outputs the results to an <see
-             cref="T:System.Xml.XmlWriter" />
+             object and outputs the results to an <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -1499,39 +1435,42 @@
           >
         </summary>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object implementing the <see
-           cref="T:System.Xml.XPath.IXPathNavigable" />
+          An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
           
 
-           interface. In the Microsoft .NET Framework, this can be either an <see
-           cref="T:System.Xml.XmlNode" />
+           interface. In the Microsoft .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" />
 
           
 
-           (typically an <see
-           cref="T:System.Xml.XmlDocument" />
+           (typically an <see cref="T:System.Xml.XmlDocument" />
 
           
 
-          ), or an <see
-           cref="T:System.Xml.XPath.XPathDocument" />
+          ), or an <see cref="T:System.Xml.XPath.XPathDocument" />
 
           
 
            containing the data to be transformed.</param
         >
         <param name="results">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
@@ -1566,41 +1505,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses a default <see
-             cref="T:System.Xml.XmlUrlResolver" />
+            >This method uses a default <see cref="T:System.Xml.XmlUrlResolver" />
 
             
 
-             with no user credentials to resolve the input document and any instances of the XSLT document() function found in the style sheet. If any of these resources are located on a network resource that requires authentication, use the overload that takes an <see
-             cref="T:System.Xml.XmlResolver" />
+             with no user credentials to resolve the input document and any instances of the XSLT document() function found in the style sheet. If any of these resources are located on a network resource that requires authentication, use the overload that takes an <see cref="T:System.Xml.XmlResolver" />
 
             
 
-             as one of its arguments and specify an <see
-             cref="T:System.Xml.XmlResolver" />
+             as one of its arguments and specify an <see cref="T:System.Xml.XmlResolver" />
 
             
 
              with the necessary credentials.</para
           >
           <para
-            >An <see
-             cref="T:System.Xml.XmlReader" />
+            >An <see cref="T:System.Xml.XmlReader" />
 
             
 
-             with default settings is used to load the input document. DTD processing is disabled on the <see
-             cref="T:System.Xml.XmlReader" />
+             with default settings is used to load the input document. DTD processing is disabled on the <see cref="T:System.Xml.XmlReader" />
 
             
 
-            . If you require DTD processing, create an <see
-             cref="T:System.Xml.XmlReader" />
+            . If you require DTD processing, create an <see cref="T:System.Xml.XmlReader" />
 
             
 
-             with this feature enabled, and pass it to the <see
-             cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+             with this feature enabled, and pass it to the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
 
             
 
@@ -1610,8 +1542,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes the transform using the input document specified by the URI and outputs the results to stream. The <see
-             cref="T:System.Xml.Xsl.XsltArgumentList" />
+            >Executes the transform using the input document specified by the URI and outputs the results to stream. The <see cref="T:System.Xml.Xsl.XsltArgumentList" />
 
             
 
@@ -1619,26 +1550,37 @@
           >
         </summary>
         <param name="inputUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The URI of the input document.</param
         >
         <param name="arguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Xsl.XsltArgumentList" />
+          An <see cref="T:System.Xml.Xsl.XsltArgumentList" />
 
           
 
            containing the namespace-qualified arguments used as input to the transform. This value can be null.</param
         >
         <param name="results">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1673,41 +1615,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses a default <see
-             cref="T:System.Xml.XmlUrlResolver" />
+            >This method uses a default <see cref="T:System.Xml.XmlUrlResolver" />
 
             
 
-             with no user credentials to resolve the input document and any instances of the XSLT document() function found in the style sheet. If any of these resources are located on a network resource that requires authentication, use the overload that takes an <see
-             cref="T:System.Xml.XmlResolver" />
+             with no user credentials to resolve the input document and any instances of the XSLT document() function found in the style sheet. If any of these resources are located on a network resource that requires authentication, use the overload that takes an <see cref="T:System.Xml.XmlResolver" />
 
             
 
-             as one of its arguments and specify an <see
-             cref="T:System.Xml.XmlResolver" />
+             as one of its arguments and specify an <see cref="T:System.Xml.XmlResolver" />
 
             
 
              with the necessary credentials.</para
           >
           <para
-            >An <see
-             cref="T:System.Xml.XmlReader" />
+            >An <see cref="T:System.Xml.XmlReader" />
 
             
 
-             with default settings is used to load the input document. DTD processing is disabled on the <see
-             cref="T:System.Xml.XmlReader" />
+             with default settings is used to load the input document. DTD processing is disabled on the <see cref="T:System.Xml.XmlReader" />
 
             
 
-            . If you require DTD processing, create an <see
-             cref="T:System.Xml.XmlReader" />
+            . If you require DTD processing, create an <see cref="T:System.Xml.XmlReader" />
 
             
 
-             with this feature enabled, and pass it to the <see
-             cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+             with this feature enabled, and pass it to the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
 
             
 
@@ -1717,8 +1652,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes the transform using the input document specified by the URI and outputs the results to a <see
-             cref="T:System.IO.TextWriter" />
+            >Executes the transform using the input document specified by the URI and outputs the results to a <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -1726,31 +1660,41 @@
           >
         </summary>
         <param name="inputUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The URI of the input document.</param
         >
         <param name="arguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Xsl.XsltArgumentList" />
+          An <see cref="T:System.Xml.Xsl.XsltArgumentList" />
 
           
 
            containing the namespace-qualified arguments used as input to the transform. This value can be null.</param
         >
         <param name="results">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.TextWriter" />
+          The <see cref="T:System.IO.TextWriter" />
 
           
 
@@ -1785,41 +1729,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses a default <see
-             cref="T:System.Xml.XmlUrlResolver" />
+            >This method uses a default <see cref="T:System.Xml.XmlUrlResolver" />
 
             
 
-             with no user credentials to resolve the input document and any instances of the XSLT document() function found in the style sheet. If any of these resources are located on a network resource that requires authentication, use the overload that takes an <see
-             cref="T:System.Xml.XmlResolver" />
+             with no user credentials to resolve the input document and any instances of the XSLT document() function found in the style sheet. If any of these resources are located on a network resource that requires authentication, use the overload that takes an <see cref="T:System.Xml.XmlResolver" />
 
             
 
-             as one of its arguments and specify an <see
-             cref="T:System.Xml.XmlResolver" />
+             as one of its arguments and specify an <see cref="T:System.Xml.XmlResolver" />
 
             
 
              with the necessary credentials.</para
           >
           <para
-            >An <see
-             cref="T:System.Xml.XmlReader" />
+            >An <see cref="T:System.Xml.XmlReader" />
 
             
 
-             with default settings is used to load the input document. DTD processing is disabled on the <see
-             cref="T:System.Xml.XmlReader" />
+             with default settings is used to load the input document. DTD processing is disabled on the <see cref="T:System.Xml.XmlReader" />
 
             
 
-            . If you require DTD processing, create an <see
-             cref="T:System.Xml.XmlReader" />
+            . If you require DTD processing, create an <see cref="T:System.Xml.XmlReader" />
 
             
 
-             with this feature enabled, and pass it to the <see
-             cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+             with this feature enabled, and pass it to the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
 
             
 
@@ -1829,13 +1766,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes the transform using the input document specified by the URI and outputs the results to an <see
-             cref="T:System.Xml.XmlWriter" />
+            >Executes the transform using the input document specified by the URI and outputs the results to an <see cref="T:System.Xml.XmlWriter" />
 
             
 
-            . The <see
-             cref="T:System.Xml.Xsl.XsltArgumentList" />
+            . The <see cref="T:System.Xml.Xsl.XsltArgumentList" />
 
             
 
@@ -1843,31 +1778,41 @@
           >
         </summary>
         <param name="inputUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The URI of the input document.</param
         >
         <param name="arguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Xsl.XsltArgumentList" />
+          An <see cref="T:System.Xml.Xsl.XsltArgumentList" />
 
           
 
            containing the namespace-qualified arguments used as input to the transform. This value can be null.</param
         >
         <param name="results">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
@@ -1902,18 +1847,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the style sheet includes an XSLT document() function, it is resolved using an <see
-             cref="T:System.Xml.XmlUrlResolver" />
+            >If the style sheet includes an XSLT document() function, it is resolved using an <see cref="T:System.Xml.XmlUrlResolver" />
 
             
 
-             with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see
-             cref="T:System.Xml.XmlResolver" />
+             with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see cref="T:System.Xml.XmlResolver" />
 
             
 
-             as one of its arguments and specify an <see
-             cref="T:System.Xml.XmlResolver" />
+             as one of its arguments and specify an <see cref="T:System.Xml.XmlResolver" />
 
             
 
@@ -1923,13 +1865,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes the transform using the input document specified by the <see
-             cref="T:System.Xml.XmlReader" />
+            >Executes the transform using the input document specified by the <see cref="T:System.Xml.XmlReader" />
 
             
 
-             object and outputs the results to a stream. The <see
-             cref="T:System.Xml.Xsl.XsltArgumentList" />
+             object and outputs the results to a stream. The <see cref="T:System.Xml.Xsl.XsltArgumentList" />
 
             
 
@@ -1937,31 +1877,41 @@
           >
         </summary>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlReader" />
+          An <see cref="T:System.Xml.XmlReader" />
 
           
 
            containing the input document.</param
         >
         <param name="arguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Xsl.XsltArgumentList" />
+          An <see cref="T:System.Xml.Xsl.XsltArgumentList" />
 
           
 
            containing the namespace-qualified arguments used as input to the transform. This value can be null.</param
         >
         <param name="results">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1996,18 +1946,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the style sheet includes an XSLT document() function, it is resolved using an <see
-             cref="T:System.Xml.XmlUrlResolver" />
+            >If the style sheet includes an XSLT document() function, it is resolved using an <see cref="T:System.Xml.XmlUrlResolver" />
 
             
 
-             with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see
-             cref="T:System.Xml.XmlResolver" />
+             with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see cref="T:System.Xml.XmlResolver" />
 
             
 
-             as one of its arguments and specify an <see
-             cref="T:System.Xml.XmlResolver" />
+             as one of its arguments and specify an <see cref="T:System.Xml.XmlResolver" />
 
             
 
@@ -2017,18 +1964,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes the transform using the input document specified by the <see
-             cref="T:System.Xml.XmlReader" />
+            >Executes the transform using the input document specified by the <see cref="T:System.Xml.XmlReader" />
 
             
 
-             object and outputs the results to a <see
-             cref="T:System.IO.TextWriter" />
+             object and outputs the results to a <see cref="T:System.IO.TextWriter" />
 
             
 
-            . The <see
-             cref="T:System.Xml.Xsl.XsltArgumentList" />
+            . The <see cref="T:System.Xml.Xsl.XsltArgumentList" />
 
             
 
@@ -2036,36 +1980,45 @@
           >
         </summary>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlReader" />
+          An <see cref="T:System.Xml.XmlReader" />
 
           
 
            containing the input document.</param
         >
         <param name="arguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Xsl.XsltArgumentList" />
+          An <see cref="T:System.Xml.Xsl.XsltArgumentList" />
 
           
 
            containing the namespace-qualified arguments used as input to the transform. This value can be null.</param
         >
         <param name="results">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.TextWriter" />
+          The <see cref="T:System.IO.TextWriter" />
 
           
 
@@ -2100,18 +2053,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the style sheet includes an XSLT document() function, it is resolved using an <see
-             cref="T:System.Xml.XmlUrlResolver" />
+            >If the style sheet includes an XSLT document() function, it is resolved using an <see cref="T:System.Xml.XmlUrlResolver" />
 
             
 
-             with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see
-             cref="T:System.Xml.XmlResolver" />
+             with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see cref="T:System.Xml.XmlResolver" />
 
             
 
-             as one of its arguments and specify an <see
-             cref="T:System.Xml.XmlResolver" />
+             as one of its arguments and specify an <see cref="T:System.Xml.XmlResolver" />
 
             
 
@@ -2121,18 +2071,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes the transform using the input document specified by the <see
-             cref="T:System.Xml.XmlReader" />
+            >Executes the transform using the input document specified by the <see cref="T:System.Xml.XmlReader" />
 
             
 
-             object and outputs the results to an <see
-             cref="T:System.Xml.XmlWriter" />
+             object and outputs the results to an <see cref="T:System.Xml.XmlWriter" />
 
             
 
-            . The <see
-             cref="T:System.Xml.Xsl.XsltArgumentList" />
+            . The <see cref="T:System.Xml.Xsl.XsltArgumentList" />
 
             
 
@@ -2140,36 +2087,45 @@
           >
         </summary>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlReader" />
+          An <see cref="T:System.Xml.XmlReader" />
 
           
 
            containing the input document.</param
         >
         <param name="arguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Xsl.XsltArgumentList" />
+          An <see cref="T:System.Xml.Xsl.XsltArgumentList" />
 
           
 
            containing the namespace-qualified arguments used as input to the transform. This value can be null.</param
         >
         <param name="results">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
@@ -2204,49 +2160,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the XSLT document() function is enabled, it is resolved using an <see
-             cref="T:System.Xml.XmlUrlResolver" />
+            >If the XSLT document() function is enabled, it is resolved using an <see cref="T:System.Xml.XmlUrlResolver" />
 
             
 
-             with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see
-             cref="T:System.Xml.XmlResolver" />
+             with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see cref="T:System.Xml.XmlResolver" />
 
             
 
-             as one of its arguments and specify an <see
-             cref="T:System.Xml.XmlResolver" />
+             as one of its arguments and specify an <see cref="T:System.Xml.XmlResolver" />
 
             
 
              with the necessary credentials.</para
           >
           <para
-            >This method does not support the xsl:strip-space element. If your compiled style sheet included the xsl:strip-space element, you must use the <see
-             cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+            >This method does not support the xsl:strip-space element. If your compiled style sheet included the xsl:strip-space element, you must use the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
 
             
 
-             overload which takes an <see
-             cref="T:System.Xml.XmlReader" />
+             overload which takes an <see cref="T:System.Xml.XmlReader" />
 
             
 
              as the input argument.</para
           >
           <para
-            >The <see
-             cref="T:System.Xml.XPath.IXPathNavigable" />
+            >The <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
             
 
-             interface is implemented in the <see
-             cref="T:System.Xml.XmlNode" />
+             interface is implemented in the <see cref="T:System.Xml.XmlNode" />
 
             
 
-             and <see
-             cref="T:System.Xml.XPath.XPathDocument" />
+             and <see cref="T:System.Xml.XPath.XPathDocument" />
 
             
 
@@ -2255,8 +2203,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="T:System.Xml.XmlNode" />
+                >The <see cref="T:System.Xml.XmlNode" />
 
                 
 
@@ -2265,18 +2212,15 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="T:System.Xml.XPath.XPathDocument" />
+                >The <see cref="T:System.Xml.XPath.XPathDocument" />
 
                 
 
-                 class is a read-only data store based on the XPath data model. <see
-                 cref="T:System.Xml.XPath.XPathDocument" />
+                 class is a read-only data store based on the XPath data model. <see cref="T:System.Xml.XPath.XPathDocument" />
 
                 
 
-                 is the recommended class for XSLT processing. It provides faster performance when compared to the <see
-                 cref="T:System.Xml.XmlNode" />
+                 is the recommended class for XSLT processing. It provides faster performance when compared to the <see cref="T:System.Xml.XmlNode" />
 
                 
 
@@ -2285,13 +2229,11 @@
             </item>
           </list>
           <para
-            >Transformations apply to the document as a whole. In other words, if you pass in a node other than the document root node, this does not prevent the transformation process from accessing all nodes in the loaded document. To transform a node fragment, you must create an object containing just the node fragment, and pass that object to the <see
-             cref="M:System.Xml.Xsl.XslCompiledTransform.Transform(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.Stream)" />
+            >Transformations apply to the document as a whole. In other words, if you pass in a node other than the document root node, this does not prevent the transformation process from accessing all nodes in the loaded document. To transform a node fragment, you must create an object containing just the node fragment, and pass that object to the <see cref="M:System.Xml.Xsl.XslCompiledTransform.Transform(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.Stream)" />
 
             
 
-             method. For more information, see <format
-             type="text/html">
+             method. For more information, see <format type="text/html">
               <a href="73a6c582-b9d7-4fa7-9a05-6d931e1f3de8">How To: Transform a Node Fragment</a>
             </format>
 
@@ -2303,13 +2245,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes the transform using the input document specified by the <see
-             cref="T:System.Xml.XPath.IXPathNavigable" />
+            >Executes the transform using the input document specified by the <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
             
 
-             object and outputs the results to a stream. The <see
-             cref="T:System.Xml.Xsl.XsltArgumentList" />
+             object and outputs the results to a stream. The <see cref="T:System.Xml.Xsl.XsltArgumentList" />
 
             
 
@@ -2317,46 +2257,53 @@
           >
         </summary>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object implementing the <see
-           cref="T:System.Xml.XPath.IXPathNavigable" />
+          An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
           
 
-           interface. In the Microsoft .NET Framework, this can be either an <see
-           cref="T:System.Xml.XmlNode" />
+           interface. In the Microsoft .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" />
 
           
 
-           (typically an <see
-           cref="T:System.Xml.XmlDocument" />
+           (typically an <see cref="T:System.Xml.XmlDocument" />
 
           
 
-          ), or an <see
-           cref="T:System.Xml.XPath.XPathDocument" />
+          ), or an <see cref="T:System.Xml.XPath.XPathDocument" />
 
           
 
            containing the data to be transformed.</param
         >
         <param name="arguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Xsl.XsltArgumentList" />
+          An <see cref="T:System.Xml.Xsl.XsltArgumentList" />
 
           
 
            containing the namespace-qualified arguments used as input to the transform. This value can be null.</param
         >
         <param name="results">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2391,49 +2338,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the XSLT document() function is enabled, it is resolved using an <see
-             cref="T:System.Xml.XmlUrlResolver" />
+            >If the XSLT document() function is enabled, it is resolved using an <see cref="T:System.Xml.XmlUrlResolver" />
 
             
 
-             with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see
-             cref="T:System.Xml.XmlResolver" />
+             with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see cref="T:System.Xml.XmlResolver" />
 
             
 
-             as one of its arguments and specify an <see
-             cref="T:System.Xml.XmlResolver" />
+             as one of its arguments and specify an <see cref="T:System.Xml.XmlResolver" />
 
             
 
              with the necessary credentials.</para
           >
           <para
-            >This method does not support the xsl:strip-space element. If your compiled style sheet included the xsl:strip-space element, you must use the <see
-             cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+            >This method does not support the xsl:strip-space element. If your compiled style sheet included the xsl:strip-space element, you must use the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
 
             
 
-             overload which takes an <see
-             cref="T:System.Xml.XmlReader" />
+             overload which takes an <see cref="T:System.Xml.XmlReader" />
 
             
 
              as the input argument.</para
           >
           <para
-            >The <see
-             cref="T:System.Xml.XPath.IXPathNavigable" />
+            >The <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
             
 
-             interface is implemented in the <see
-             cref="T:System.Xml.XmlNode" />
+             interface is implemented in the <see cref="T:System.Xml.XmlNode" />
 
             
 
-             and <see
-             cref="T:System.Xml.XPath.XPathDocument" />
+             and <see cref="T:System.Xml.XPath.XPathDocument" />
 
             
 
@@ -2442,8 +2381,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="T:System.Xml.XmlNode" />
+                >The <see cref="T:System.Xml.XmlNode" />
 
                 
 
@@ -2452,18 +2390,15 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="T:System.Xml.XPath.XPathDocument" />
+                >The <see cref="T:System.Xml.XPath.XPathDocument" />
 
                 
 
-                 class is a read-only data store based on the XPath data model. <see
-                 cref="T:System.Xml.XPath.XPathDocument" />
+                 class is a read-only data store based on the XPath data model. <see cref="T:System.Xml.XPath.XPathDocument" />
 
                 
 
-                 is the recommended class for XSLT processing. It provides faster performance when compared to the <see
-                 cref="T:System.Xml.XmlNode" />
+                 is the recommended class for XSLT processing. It provides faster performance when compared to the <see cref="T:System.Xml.XmlNode" />
 
                 
 
@@ -2472,13 +2407,11 @@
             </item>
           </list>
           <para
-            >Transformations apply to the document as a whole. In other words, if you pass in a node other than the document root node, this does not prevent the transformation process from accessing all nodes in the loaded document. To transform a node fragment, you must create an object containing just the node fragment, and pass that object to the <see
-             cref="M:System.Xml.Xsl.XslCompiledTransform.Transform(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter)" />
+            >Transformations apply to the document as a whole. In other words, if you pass in a node other than the document root node, this does not prevent the transformation process from accessing all nodes in the loaded document. To transform a node fragment, you must create an object containing just the node fragment, and pass that object to the <see cref="M:System.Xml.Xsl.XslCompiledTransform.Transform(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter)" />
 
             
 
-             method. For more information, see <format
-             type="text/html">
+             method. For more information, see <format type="text/html">
               <a href="73a6c582-b9d7-4fa7-9a05-6d931e1f3de8">How To: Transform a Node Fragment</a>
             </format>
 
@@ -2490,18 +2423,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes the transform using the input document specified by the <see
-             cref="T:System.Xml.XPath.IXPathNavigable" />
+            >Executes the transform using the input document specified by the <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
             
 
-             object and outputs the results to an <see
-             cref="T:System.IO.TextWriter" />
+             object and outputs the results to an <see cref="T:System.IO.TextWriter" />
 
             
 
-            . The <see
-             cref="T:System.Xml.Xsl.XsltArgumentList" />
+            . The <see cref="T:System.Xml.Xsl.XsltArgumentList" />
 
             
 
@@ -2509,51 +2439,57 @@
           >
         </summary>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object implementing the <see
-           cref="T:System.Xml.XPath.IXPathNavigable" />
+          An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
           
 
-           interface. In the Microsoft .NET Framework, this can be either an <see
-           cref="T:System.Xml.XmlNode" />
+           interface. In the Microsoft .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" />
 
           
 
-           (typically an <see
-           cref="T:System.Xml.XmlDocument" />
+           (typically an <see cref="T:System.Xml.XmlDocument" />
 
           
 
-          ), or an <see
-           cref="T:System.Xml.XPath.XPathDocument" />
+          ), or an <see cref="T:System.Xml.XPath.XPathDocument" />
 
           
 
            containing the data to be transformed.</param
         >
         <param name="arguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Xsl.XsltArgumentList" />
+          An <see cref="T:System.Xml.Xsl.XsltArgumentList" />
 
           
 
            containing the namespace-qualified arguments used as input to the transform. This value can be null.</param
         >
         <param name="results">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.TextWriter" />
+          The <see cref="T:System.IO.TextWriter" />
 
           
 
@@ -2588,49 +2524,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the XSLT document() function is enabled, it is resolved using an <see
-             cref="T:System.Xml.XmlUrlResolver" />
+            >If the XSLT document() function is enabled, it is resolved using an <see cref="T:System.Xml.XmlUrlResolver" />
 
             
 
-             with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see
-             cref="T:System.Xml.XmlResolver" />
+             with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see cref="T:System.Xml.XmlResolver" />
 
             
 
-             as one of its arguments and specify an <see
-             cref="T:System.Xml.XmlResolver" />
+             as one of its arguments and specify an <see cref="T:System.Xml.XmlResolver" />
 
             
 
              with the necessary credentials.</para
           >
           <para
-            >This method does not support the xsl:strip-space element. If your compiled style sheet included the xsl:strip-space element, you must use the <see
-             cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+            >This method does not support the xsl:strip-space element. If your compiled style sheet included the xsl:strip-space element, you must use the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
 
             
 
-             overload which takes an <see
-             cref="T:System.Xml.XmlReader" />
+             overload which takes an <see cref="T:System.Xml.XmlReader" />
 
             
 
              as the input argument.</para
           >
           <para
-            >The <see
-             cref="T:System.Xml.XPath.IXPathNavigable" />
+            >The <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
             
 
-             interface is implemented in the <see
-             cref="T:System.Xml.XmlNode" />
+             interface is implemented in the <see cref="T:System.Xml.XmlNode" />
 
             
 
-             and <see
-             cref="T:System.Xml.XPath.XPathDocument" />
+             and <see cref="T:System.Xml.XPath.XPathDocument" />
 
             
 
@@ -2639,8 +2567,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="T:System.Xml.XmlNode" />
+                >The <see cref="T:System.Xml.XmlNode" />
 
                 
 
@@ -2649,18 +2576,15 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="T:System.Xml.XPath.XPathDocument" />
+                >The <see cref="T:System.Xml.XPath.XPathDocument" />
 
                 
 
-                 class is a read-only data store based on the XPath data model. <see
-                 cref="T:System.Xml.XPath.XPathDocument" />
+                 class is a read-only data store based on the XPath data model. <see cref="T:System.Xml.XPath.XPathDocument" />
 
                 
 
-                 is the recommended class for XSLT processing. It provides faster performance when compared to the <see
-                 cref="T:System.Xml.XmlNode" />
+                 is the recommended class for XSLT processing. It provides faster performance when compared to the <see cref="T:System.Xml.XmlNode" />
 
                 
 
@@ -2669,13 +2593,11 @@
             </item>
           </list>
           <para
-            >Transformations apply to the document as a whole. In other words, if you pass in a node other than the document root node, this does not prevent the transformation process from accessing all nodes in the loaded document. To transform a node fragment, you must create an object containing just the node fragment, and pass that object to the <see
-             cref="M:System.Xml.Xsl.XslCompiledTransform.Transform(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter)" />
+            >Transformations apply to the document as a whole. In other words, if you pass in a node other than the document root node, this does not prevent the transformation process from accessing all nodes in the loaded document. To transform a node fragment, you must create an object containing just the node fragment, and pass that object to the <see cref="M:System.Xml.Xsl.XslCompiledTransform.Transform(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter)" />
 
             
 
-             method. For more information, see <format
-             type="text/html">
+             method. For more information, see <format type="text/html">
               <a href="73a6c582-b9d7-4fa7-9a05-6d931e1f3de8">How To: Transform a Node Fragment</a>
             </format>
 
@@ -2687,18 +2609,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes the transform using the input document specified by the <see
-             cref="T:System.Xml.XPath.IXPathNavigable" />
+            >Executes the transform using the input document specified by the <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
             
 
-             object and outputs the results to an <see
-             cref="T:System.Xml.XmlWriter" />
+             object and outputs the results to an <see cref="T:System.Xml.XmlWriter" />
 
             
 
-            . The <see
-             cref="T:System.Xml.Xsl.XsltArgumentList" />
+            . The <see cref="T:System.Xml.Xsl.XsltArgumentList" />
 
             
 
@@ -2706,51 +2625,57 @@
           >
         </summary>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object implementing the <see
-           cref="T:System.Xml.XPath.IXPathNavigable" />
+          An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
           
 
-           interface. In the Microsoft .NET Framework, this can be either an <see
-           cref="T:System.Xml.XmlNode" />
+           interface. In the Microsoft .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" />
 
           
 
-           (typically an <see
-           cref="T:System.Xml.XmlDocument" />
+           (typically an <see cref="T:System.Xml.XmlDocument" />
 
           
 
-          ), or an <see
-           cref="T:System.Xml.XPath.XPathDocument" />
+          ), or an <see cref="T:System.Xml.XPath.XPathDocument" />
 
           
 
            containing the data to be transformed.</param
         >
         <param name="arguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Xsl.XsltArgumentList" />
+          An <see cref="T:System.Xml.Xsl.XsltArgumentList" />
 
           
 
            containing the namespace-qualified arguments used as input to the transform. This value can be null.</param
         >
         <param name="results">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
@@ -2787,18 +2712,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes the transform using the input document specified by the <see
-             cref="T:System.Xml.XmlReader" />
+            >Executes the transform using the input document specified by the <see cref="T:System.Xml.XmlReader" />
 
             
 
-             object and outputs the results to an <see
-             cref="T:System.Xml.XmlWriter" />
+             object and outputs the results to an <see cref="T:System.Xml.XmlWriter" />
 
             
 
-            . The <see
-             cref="T:System.Xml.Xsl.XsltArgumentList" />
+            . The <see cref="T:System.Xml.Xsl.XsltArgumentList" />
 
             
 
@@ -2806,48 +2728,60 @@
           >
         </summary>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlReader" />
+          An <see cref="T:System.Xml.XmlReader" />
 
           
 
            containing the input document.</param
         >
         <param name="arguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Xsl.XsltArgumentList" />
+          An <see cref="T:System.Xml.Xsl.XsltArgumentList" />
 
           
 
            containing the namespace-qualified arguments used as input to the transform. This value can be null.</param
         >
         <param name="results">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
            to which you want to output.</param
         >
         <param name="documentResolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlResolver" />
+          The <see cref="T:System.Xml.XmlResolver" />
 
           
 

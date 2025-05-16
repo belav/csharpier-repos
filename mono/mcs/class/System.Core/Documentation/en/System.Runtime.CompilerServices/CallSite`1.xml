@@ -62,7 +62,11 @@
           <para>The new instance of dynamic call site.</para>
         </returns>
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

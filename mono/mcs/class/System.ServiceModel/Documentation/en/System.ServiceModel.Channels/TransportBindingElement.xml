@@ -67,8 +67,7 @@
       </list>
       <block subset="none" type="note">
         <para
-          >Custom transport binding element developers must inherit from this class, which derives from the <see
-           cref="T:System.ServiceModel.Channels.BindingElement" />
+          >Custom transport binding element developers must inherit from this class, which derives from the <see cref="T:System.ServiceModel.Channels.BindingElement" />
 
           
 
@@ -157,51 +156,42 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method receives a binding context as an input parameter, which represents the stack of binding elements. This method gets the specified object directly, delegates the inquiry to the next lower binding element in the stack, or a combination of the two. It can modify the context if it delegates the inquiry. Each binding element in the stack can repeat this process, if it has been delegated to, until the bottom of the stack is reached. The object returned is usually a collection of properties.</para>
           <para
-            >If the type of <paramref
-             name="T" />
+            >If the type of <paramref name="T" />
 
             
 
-             is <see
-             cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" />
+             is <see cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" />
 
             
 
-            , <see
-             cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+            , <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
             
 
-            , or <see
-             cref="T:System.ServiceModel.Channels.MessageVersion" />
+            , or <see cref="T:System.ServiceModel.Channels.MessageVersion" />
 
             
 
-             then an instance of this class is returned. If the type of <paramref
-             name="T" />
+             then an instance of this class is returned. If the type of <paramref name="T" />
 
             
 
-             matches the type of an instance in <see
-             cref="P:System.ServiceModel.Channels.BindingContext.BindingParameters" />
+             matches the type of an instance in <see cref="P:System.ServiceModel.Channels.BindingContext.BindingParameters" />
 
             
 
             , that instance is returned.</para
           >
           <para
-            >This method is implemented by binding elements as well as by the run-time objects such as <see
-             cref="T:System.ServiceModel.Channels.IChannelFactory" />
+            >This method is implemented by binding elements as well as by the run-time objects such as <see cref="T:System.ServiceModel.Channels.IChannelFactory" />
 
             
 
-            , <see
-             cref="T:System.ServiceModel.Channels.IChannelListener" />
+            , <see cref="T:System.ServiceModel.Channels.IChannelListener" />
 
             
 
-            , and <see
-             cref="T:System.ServiceModel.Channels.IChannel" />
+            , and <see cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
@@ -211,8 +201,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a property from the specified <see
-             cref="T:System.ServiceModel.Channels.BindingContext" />
+            >Gets a property from the specified <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
             
 
@@ -222,8 +211,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The property from the specified <see
-             cref="T:System.ServiceModel.Channels.BindingContext" />
+            >The property from the specified <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
             
 
@@ -231,19 +219,26 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          A <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
           .</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -268,8 +263,7 @@
           <para>This property is usually used in router scenarios, where the application determines which one of several destinations to send a message to. </para>
           <para>If this property is set to true, the channel assumes the message has already been addressed and does not add any additional information.</para>
           <para
-            >If false, the sending channel applies the <see
-             cref="T:System.ServiceModel.EndpointAddress" />
+            >If false, the sending channel applies the <see cref="T:System.ServiceModel.EndpointAddress" />
 
             
 
@@ -298,8 +292,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Many parts of WCF use buffers. Creating and destroying buffers each time they are used is expensive, and garbage collection for buffers is also expensive. </para>
           <para
-            >With buffer pools, you can take a buffer from the pool, use it, and return it to the pool once you are done. Thus the overhead in creating and destroying buffers is avoided. The downside is that there is an increase in memory usage because your buffers are not getting garbage collected. If the <see
-             cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxBufferPoolSize" />
+            >With buffer pools, you can take a buffer from the pool, use it, and return it to the pool once you are done. Thus the overhead in creating and destroying buffers is avoided. The downside is that there is an increase in memory usage because your buffers are not getting garbage collected. If the <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxBufferPoolSize" />
 
             
 

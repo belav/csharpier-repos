@@ -45,26 +45,22 @@
 
         
 
-         contains a collection that can store <see
-         cref="T:System.CodeDom.CodeNamespace" />
+         contains a collection that can store <see cref="T:System.CodeDom.CodeNamespace" />
 
         
 
          objects containing CodeDOM source code graphs, along with a collection of assemblies referenced by the project, and a collection of attributes for the project assembly.</para
       >
       <para
-        >A <see
-         cref="T:System.CodeDom.CodeCompileUnit" />
+        >A <see cref="T:System.CodeDom.CodeCompileUnit" />
 
         
 
-         can be passed to the <see
-         cref="M:System.CodeDom.Compiler.ICodeGenerator.GenerateCodeFromCompileUnit(System.CodeDom.CodeCompileUnit,System.IO.TextWriter,System.CodeDom.Compiler.CodeGeneratorOptions)" />
+         can be passed to the <see cref="M:System.CodeDom.Compiler.ICodeGenerator.GenerateCodeFromCompileUnit(System.CodeDom.CodeCompileUnit,System.IO.TextWriter,System.CodeDom.Compiler.CodeGeneratorOptions)" />
 
         
 
-         method of an <see
-         cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+         method of an <see cref="T:System.CodeDom.Compiler.ICodeGenerator" />
 
         
 
@@ -99,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeCompileUnit" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCompileUnit" />
 
             
 
@@ -132,8 +127,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can add and remove <see
-             cref="T:System.CodeDom.CodeAttributeDeclaration" />
+            >You can add and remove <see cref="T:System.CodeDom.CodeAttributeDeclaration" />
 
             
 
@@ -169,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.CodeDom.CodeDirectiveCollection" />
+            >Gets a <see cref="T:System.CodeDom.CodeDirectiveCollection" />
 
             
 
@@ -202,8 +195,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can add and remove <see
-             cref="T:System.CodeDom.CodeNamespace" />
+            >You can add and remove <see cref="T:System.CodeDom.CodeNamespace" />
 
             
 
@@ -242,7 +234,8 @@
           <example>
             <code lang="C#">
 compileUnit.ReferencedAssemblies.Add("System.Data");
-  </code>
+  </code
+            >
 
             
 
@@ -284,8 +277,7 @@ Adds a reference to the System.Data assembly for the compile unit.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.CodeDom.CodeDirectiveCollection" />
+            >Gets a <see cref="T:System.CodeDom.CodeDirectiveCollection" />
 
             
 

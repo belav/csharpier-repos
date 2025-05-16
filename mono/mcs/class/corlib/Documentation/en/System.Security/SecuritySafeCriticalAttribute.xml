@@ -26,23 +26,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Types or members that are marked with the <see
-         cref="T:System.Security.SecuritySafeCriticalAttribute" />
+        >Types or members that are marked with the <see cref="T:System.Security.SecuritySafeCriticalAttribute" />
 
         
 
-         attribute can be accessed by partially trusted types and members. These partially trusted types and members can be within any assembly that is marked with the <see
-         cref="T:System.Security.SecurityTransparentAttribute" />
+         attribute can be accessed by partially trusted types and members. These partially trusted types and members can be within any assembly that is marked with the <see cref="T:System.Security.SecurityTransparentAttribute" />
 
         
 
-         or <see
-         cref="T:System.Security.AllowPartiallyTrustedCallersAttribute" />
+         or <see cref="T:System.Security.AllowPartiallyTrustedCallersAttribute" />
 
         
 
-         (APTCA) attribute, or they are partially trusted for other reasons, such as being loaded into partial trust. Code that is marked with the <see
-         cref="T:System.Security.SecuritySafeCriticalAttribute" />
+         (APTCA) attribute, or they are partially trusted for other reasons, such as being loaded into partial trust. Code that is marked with the <see cref="T:System.Security.SecuritySafeCriticalAttribute" />
 
         
 
@@ -72,8 +68,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.SecuritySafeCriticalAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Security.SecuritySafeCriticalAttribute" />
 
             
 

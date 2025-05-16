@@ -18,13 +18,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:Microsoft.Win32.SessionSwitchEventArgs" />
+        >The <see cref="T:Microsoft.Win32.SessionSwitchEventArgs" />
 
         
 
-         class uses the <see
-         cref="T:Microsoft.Win32.SessionSwitchReason" />
+         class uses the <see cref="T:Microsoft.Win32.SessionSwitchReason" />
 
         
 

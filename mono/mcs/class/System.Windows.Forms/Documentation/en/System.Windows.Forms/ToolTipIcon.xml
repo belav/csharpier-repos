@@ -13,18 +13,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.ToolTipIcon" />
+        >The <see cref="T:System.Windows.Forms.ToolTipIcon" />
 
         
 
-         enumeration defines a small set of standardized icons that can be displayed as part of a ToolTip. This is accomplished by setting the <see
-         cref="P:System.Windows.Forms.ToolTip.ToolTipIcon" />
+         enumeration defines a small set of standardized icons that can be displayed as part of a ToolTip. This is accomplished by setting the <see cref="P:System.Windows.Forms.ToolTip.ToolTipIcon" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.ToolTip" />
+         property of the <see cref="T:System.Windows.Forms.ToolTip" />
 
         
 

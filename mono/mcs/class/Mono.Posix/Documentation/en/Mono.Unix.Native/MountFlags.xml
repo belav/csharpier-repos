@@ -23,8 +23,7 @@
   </Attributes>
   <Docs>
     <summary
-      >Possible <see
-       cref="F:Mono.Unix.Native.Statvfs.f_flag" />
+      >Possible <see cref="F:Mono.Unix.Native.Statvfs.f_flag" />
 
       
 
@@ -205,14 +204,12 @@
       <Docs>
         <summary
           >The semantics of the 
-        <see
-           cref="F:Mono.Unix.Native.FilePermissions.S_ISUID" />
+        <see cref="F:Mono.Unix.Native.FilePermissions.S_ISUID" />
 
           
 
            and
-        <see
-           cref="F:Mono.Unix.Native.FilePermissions.S_ISGID" />
+        <see cref="F:Mono.Unix.Native.FilePermissions.S_ISGID" />
 
           
 

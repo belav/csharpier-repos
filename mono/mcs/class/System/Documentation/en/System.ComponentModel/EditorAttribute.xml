@@ -32,36 +32,31 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>When editing the property, a visual designer should create a new instance of the specified editor through a dialog box or drop-down window.</para>
       <para
-        >Use the <see
-         cref="P:System.ComponentModel.EditorAttribute.EditorBaseTypeName" />
+        >Use the <see cref="P:System.ComponentModel.EditorAttribute.EditorBaseTypeName" />
 
         
 
-         property to find this editor's base type. The only available base type is <see
-         cref="T:System.Drawing.Design.UITypeEditor" />
+         property to find this editor's base type. The only available base type is <see cref="T:System.Drawing.Design.UITypeEditor" />
 
         
 
         .</para
       >
       <para
-        >Use the <see
-         cref="P:System.ComponentModel.EditorAttribute.EditorTypeName" />
+        >Use the <see cref="P:System.ComponentModel.EditorAttribute.EditorTypeName" />
 
         
 
          property to get the name of the type of editor associated with this attribute.</para
       >
       <para
-        >For general information on using attributes. see <format
-         type="text/html">
+        >For general information on using attributes. see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
         
 
-        . For more information on design-time attributes, see <format
-         type="text/html">
+        . For more information on design-time attributes, see <format type="text/html">
           <a href="7aed9eb4-124b-4a15-a0a3-458f37ac9ef7">Attributes and Design-Time Support</a>
         </format>
 
@@ -95,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.EditorAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.EditorAttribute" />
 
             
 
@@ -129,49 +123,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="typeName" />
+            >The <paramref name="typeName" />
 
             
 
-             parameter must be in the <see
-             cref="P:System.Type.AssemblyQualifiedName" />
+             parameter must be in the <see cref="P:System.Type.AssemblyQualifiedName" />
 
             
 
              format.</para
           >
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
-             represented by the <paramref
-             name="typeName" />
+             represented by the <paramref name="typeName" />
 
             
 
              parameter must either derive from or implement the base class.</para
           >
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
-             represented by the <paramref
-             name="baseTypeName" />
+             represented by the <paramref name="baseTypeName" />
 
             
 
-             parameter is used as a key to find a particular editor, because a data type can have more than one editor associated with it. This can be any class, but is typically <see
-             cref="T:System.Drawing.Design.UITypeEditor" />
+             parameter is used as a key to find a particular editor, because a data type can have more than one editor associated with it. This can be any class, but is typically <see cref="T:System.Drawing.Design.UITypeEditor" />
 
             
 
-             or <see
-             cref="T:System.ComponentModel.ComponentEditor" />
+             or <see cref="T:System.ComponentModel.ComponentEditor" />
 
             
 
@@ -181,8 +167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.EditorAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.EditorAttribute" />
 
             
 
@@ -190,19 +175,26 @@
           >
         </summary>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fully qualified type name of the editor. </param
         >
         <param name="baseTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The fully qualified type name of the base class or interface to use as a lookup key for the editor. This class must be or derive from <see
-           cref="T:System.Drawing.Design.UITypeEditor" />
+          The fully qualified type name of the base class or interface to use as a lookup key for the editor. This class must be or derive from <see cref="T:System.Drawing.Design.UITypeEditor" />
 
           
 
@@ -234,34 +226,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="typeName" />
+            >The <paramref name="typeName" />
 
             
 
-             parameter must be in the <see
-             cref="P:System.Type.AssemblyQualifiedName" />
+             parameter must be in the <see cref="P:System.Type.AssemblyQualifiedName" />
 
             
 
              format.</para
           >
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
-             represented by the <paramref
-             name="typeName" />
+             represented by the <paramref name="typeName" />
 
             
 
              must either derive from or implement the base class.</para
           >
           <para
-            >The <paramref
-             name="baseType" />
+            >The <paramref name="baseType" />
 
             
 
@@ -271,8 +258,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.EditorAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.EditorAttribute" />
 
             
 
@@ -280,24 +266,30 @@
           >
         </summary>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fully qualified type name of the editor. </param
         >
         <param name="baseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
-           of the base class or interface to use as a lookup key for the editor. This class must be or derive from <see
-           cref="T:System.Drawing.Design.UITypeEditor" />
+           of the base class or interface to use as a lookup key for the editor. This class must be or derive from <see cref="T:System.Drawing.Design.UITypeEditor" />
 
           
 
@@ -326,21 +318,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
-             represented by the <paramref
-             name="type" />
+             represented by the <paramref name="type" />
 
             
 
              parameter must either derive from or implement the base class.</para
           >
           <para
-            >The <paramref
-             name="baseType" />
+            >The <paramref name="baseType" />
 
             
 
@@ -350,8 +339,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.EditorAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.EditorAttribute" />
 
             
 
@@ -359,29 +347,34 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
            that represents the type of the editor. </param
         >
         <param name="baseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
-           of the base class or interface to use as a lookup key for the editor. This class must be or derive from <see
-           cref="T:System.Drawing.Design.UITypeEditor" />
+           of the base class or interface to use as a lookup key for the editor. This class must be or derive from <see cref="T:System.Drawing.Design.UITypeEditor" />
 
           
 
@@ -406,18 +399,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.EditorAttribute.EditorBaseTypeName" />
+            >The <see cref="P:System.ComponentModel.EditorAttribute.EditorBaseTypeName" />
 
             
 
-             property is an assembly qualified type name. The dnprdnshort provides both <see
-             cref="T:System.Drawing.Design.UITypeEditor" />
+             property is an assembly qualified type name. The dnprdnshort provides both <see cref="T:System.Drawing.Design.UITypeEditor" />
 
             
 
-             and <see
-             cref="T:System.ComponentModel.ComponentEditor" />
+             and <see cref="T:System.ComponentModel.ComponentEditor" />
 
             
 
@@ -448,8 +438,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the editor class in the <see
-             cref="P:System.Type.AssemblyQualifiedName" />
+            >Gets the name of the editor class in the <see cref="P:System.Type.AssemblyQualifiedName" />
 
             
 
@@ -481,8 +470,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns whether the value of the given object is equal to the current <see
-             cref="T:System.ComponentModel.EditorAttribute" />
+            >Returns whether the value of the given object is equal to the current <see cref="T:System.ComponentModel.EditorAttribute" />
 
             
 
@@ -494,7 +482,11 @@
           <para>true if the value of the given object is equal to that of the current object; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -541,18 +533,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.EditorAttribute.TypeId" />
+            >The <see cref="P:System.ComponentModel.EditorAttribute.TypeId" />
 
             
 
-             property is used by filtering algorithms to identify two attributes that are the same type. For most attributes, this just returns the <see
-             cref="T:System.Type" />
+             property is used by filtering algorithms to identify two attributes that are the same type. For most attributes, this just returns the <see cref="T:System.Type" />
 
             
 
-             instance for the attribute. <see
-             cref="T:System.ComponentModel.EditorAttribute" />
+             instance for the attribute. <see cref="T:System.ComponentModel.EditorAttribute" />
 
             
 

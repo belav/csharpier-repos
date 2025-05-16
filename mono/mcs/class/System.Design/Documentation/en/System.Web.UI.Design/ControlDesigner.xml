@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.ControlDesigner" />
+        >The <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
         
 
@@ -58,13 +57,11 @@
         <h2>Automatic Formatting</h2>
       </format>
       <para
-        >You can create a variety of automatic and pre-defined formats that can simplify the process of page developers who are applying complex style changes to custom Web server controls. For example, the <see
-         cref="T:System.Web.UI.Design.WebControls.TableDesigner" />
+        >You can create a variety of automatic and pre-defined formats that can simplify the process of page developers who are applying complex style changes to custom Web server controls. For example, the <see cref="T:System.Web.UI.Design.WebControls.TableDesigner" />
 
         
 
-         control, which derives from the <see
-         cref="T:System.Web.UI.Design.ControlDesigner" />
+         control, which derives from the <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
         
 
@@ -73,8 +70,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.ControlDesigner.AutoFormats" />
+            >The <see cref="P:System.Web.UI.Design.ControlDesigner.AutoFormats" />
 
             
 
@@ -83,8 +79,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.OnAutoFormatApplied(System.Web.UI.Design.DesignerAutoFormat)" />
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.OnAutoFormatApplied(System.Web.UI.Design.DesignerAutoFormat)" />
 
             
 
@@ -93,8 +88,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+            >The <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
@@ -103,8 +97,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatStyle" />
+            >The <see cref="T:System.Web.UI.Design.DesignerAutoFormatStyle" />
 
             
 
@@ -119,8 +112,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.ControlDesigner.ActionLists" />
+            >The <see cref="P:System.Web.UI.Design.ControlDesigner.ActionLists" />
 
             
 
@@ -129,8 +121,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.ComponentModel.Design.DesignerActionList" />
+            >The <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
             
 
@@ -139,8 +130,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+            >The <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
 
             
 
@@ -149,8 +139,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+            >The <see cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
 
             
 
@@ -159,8 +148,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
+            >The <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
 
             
 
@@ -169,8 +157,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.ComponentModel.Design.DesignerActionPropertyItem" />
+            >The <see cref="T:System.ComponentModel.Design.DesignerActionPropertyItem" />
 
             
 
@@ -185,8 +172,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.OnClick(System.Web.UI.Design.DesignerRegionMouseEventArgs)" />
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.OnClick(System.Web.UI.Design.DesignerRegionMouseEventArgs)" />
 
             
 
@@ -195,8 +181,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.Web.UI.Design.DesignerRegion" />
+            >The <see cref="T:System.Web.UI.Design.DesignerRegion" />
 
             
 
@@ -205,8 +190,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.Web.UI.Design.EditableDesignerRegion" />
+            >The <see cref="T:System.Web.UI.Design.EditableDesignerRegion" />
 
             
 
@@ -215,8 +199,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.GetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion)" />
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.GetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion)" />
 
             
 
@@ -225,8 +208,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.SetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion,System.String)" />
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.SetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion,System.String)" />
 
             
 
@@ -238,8 +220,7 @@
         <h2>Templates</h2>
       </format>
       <para
-        >The model for creating a UI for design-time editing of templated controls, such as the <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+        >The model for creating a UI for design-time editing of templated controls, such as the <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
@@ -248,8 +229,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+            >The <see cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
 
             
 
@@ -258,8 +238,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.ControlDesigner.InTemplateMode" />
+            >The <see cref="P:System.Web.UI.Design.ControlDesigner.InTemplateMode" />
 
             
 
@@ -268,8 +247,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.Web.UI.Design.TemplateGroup" />
+            >The <see cref="T:System.Web.UI.Design.TemplateGroup" />
 
             
 
@@ -281,8 +259,7 @@
         <h2>Design-Time Rendering</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.ControlDesigner" />
+        >The <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
         
 
@@ -291,8 +268,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="Overload:System.Web.UI.Design.ControlDesigner.GetDesignTimeHtml" />
+            >The <see cref="Overload:System.Web.UI.Design.ControlDesigner.GetDesignTimeHtml" />
 
             
 
@@ -301,8 +277,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.GetEmptyDesignTimeHtml" />
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.GetEmptyDesignTimeHtml" />
 
             
 
@@ -311,8 +286,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.GetErrorDesignTimeHtml(System.Exception)" />
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.GetErrorDesignTimeHtml(System.Exception)" />
 
             
 
@@ -321,8 +295,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.UpdateDesignTimeHtml" />
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.UpdateDesignTimeHtml" />
 
             
 
@@ -331,8 +304,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="Overload:System.Web.UI.Design.ControlDesigner.CreatePlaceHolderDesignTimeHtml" />
+            >The <see cref="Overload:System.Web.UI.Design.ControlDesigner.CreatePlaceHolderDesignTimeHtml" />
 
             
 
@@ -356,8 +328,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
@@ -427,28 +398,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A complete Web server control includes not only the control, but also, possibly, a corresponding control designer class that is derived from the <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+            >A complete Web server control includes not only the control, but also, possibly, a corresponding control designer class that is derived from the <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
-             class and a formatting class that is derived from the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+             class and a formatting class that is derived from the <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
-             class. The <see
-             cref="P:System.Web.UI.Design.ControlDesigner.AutoFormats" />
+             class. The <see cref="P:System.Web.UI.Design.ControlDesigner.AutoFormats" />
 
             
 
-             property is a collection of instances of the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+             property is a collection of instances of the <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
-             class. For a working example of automatic formatting in vsprvslong, see <see
-             cref="T:System.Web.UI.WebControls.Calendar" />
+             class. For a working example of automatic formatting in vsprvslong, see <see cref="T:System.Web.UI.WebControls.Calendar" />
 
             
 
@@ -458,8 +424,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of predefined automatic formatting schemes to display in the <ui
-            >Auto Format</ui>
+            >Gets the collection of predefined automatic formatting schemes to display in the <ui>Auto Format</ui>
 
             
 
@@ -487,26 +452,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.CreateErrorDesignTimeHtml(System.String)" />
+            >Use the <see cref="M:System.Web.UI.Design.ControlDesigner.CreateErrorDesignTimeHtml(System.String)" />
 
             
 
-             method to create HTML markup to display an error message for a control at design time. The value for <paramref
-             name="errorMessage" />
+             method to create HTML markup to display an error message for a control at design time. The value for <paramref name="errorMessage" />
 
             
 
              specifies a localized string that is displayed to the user of the control at design time.</para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+            >The <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
-             class implementation of the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.CreateErrorDesignTimeHtml(System.String)" />
+             class implementation of the <see cref="M:System.Web.UI.Design.ControlDesigner.CreateErrorDesignTimeHtml(System.String)" />
 
             
 
@@ -515,13 +476,11 @@
           <list type="bullet">
             <item>
               <para
-                >The first row contains the type name and site name for the <see
-                 cref="P:System.ComponentModel.Design.ComponentDesigner.Component" />
+                >The first row contains the type name and site name for the <see cref="P:System.ComponentModel.Design.ComponentDesigner.Component" />
 
                 
 
-                 property of the <see
-                 cref="T:System.Web.UI.Design.ControlDesigner" />
+                 property of the <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
                 
 
@@ -533,13 +492,11 @@
             </item>
           </list>
           <para
-            >To generate HTML markup for an error message with an associated exception, use the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.CreateErrorDesignTimeHtml(System.String,System.Exception)" />
+            >To generate HTML markup for an error message with an associated exception, use the <see cref="M:System.Web.UI.Design.ControlDesigner.CreateErrorDesignTimeHtml(System.String,System.Exception)" />
 
             
 
-             overload. To generate HTML markup for an exception without specifying a localized error message, use the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.GetErrorDesignTimeHtml(System.Exception)" />
+             overload. To generate HTML markup for an exception without specifying a localized error message, use the <see cref="M:System.Web.UI.Design.ControlDesigner.GetErrorDesignTimeHtml(System.Exception)" />
 
             
 
@@ -555,7 +512,11 @@
           <para>An HTML markup string that contains the specified error message.</para>
         </returns>
         <param name="errorMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -583,26 +544,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.CreateErrorDesignTimeHtml(System.String,System.Exception)" />
+            >Use the <see cref="M:System.Web.UI.Design.ControlDesigner.CreateErrorDesignTimeHtml(System.String,System.Exception)" />
 
             
 
-             method to provide simple HTML markup that can be used to display error and exception details for a control at design time. The value for <paramref
-             name="errorMessage" />
+             method to provide simple HTML markup that can be used to display error and exception details for a control at design time. The value for <paramref name="errorMessage" />
 
             
 
              specifies a localized string that is displayed to the user of the control at design time.</para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+            >The <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
-             class implementation of the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.CreateErrorDesignTimeHtml(System.String,System.Exception)" />
+             class implementation of the <see cref="M:System.Web.UI.Design.ControlDesigner.CreateErrorDesignTimeHtml(System.String,System.Exception)" />
 
             
 
@@ -611,13 +568,11 @@
           <list type="bullet">
             <item>
               <para
-                >The first row contains the type name and site name for the <see
-                 cref="P:System.ComponentModel.Design.ComponentDesigner.Component" />
+                >The first row contains the type name and site name for the <see cref="P:System.ComponentModel.Design.ComponentDesigner.Component" />
 
                 
 
-                 property of the <see
-                 cref="T:System.Web.UI.Design.ControlDesigner" />
+                 property of the <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
                 
 
@@ -626,8 +581,7 @@
             </item>
             <item>
               <para
-                >The second row contains the input error message and the <see
-                 cref="P:System.Exception.Message" />
+                >The second row contains the input error message and the <see cref="P:System.Exception.Message" />
 
                 
 
@@ -636,13 +590,11 @@
             </item>
           </list>
           <para
-            >To generate HTML markup for an error message without specifying an exception, use the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.CreateErrorDesignTimeHtml(System.String)" />
+            >To generate HTML markup for an error message without specifying an exception, use the <see cref="M:System.Web.UI.Design.ControlDesigner.CreateErrorDesignTimeHtml(System.String)" />
 
             
 
-             overload. To generate HTML markup for an exception without specifying a localized error message, use the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.GetErrorDesignTimeHtml(System.Exception)" />
+             overload. To generate HTML markup for an exception without specifying a localized error message, use the <see cref="M:System.Web.UI.Design.ControlDesigner.GetErrorDesignTimeHtml(System.Exception)" />
 
             
 
@@ -656,13 +608,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >HTML markup that contains the specified <paramref
-             name="errorMessage" />
+            >HTML markup that contains the specified <paramref name="errorMessage" />
 
             
 
-             and <paramref
-             name="e" />
+             and <paramref name="e" />
 
             
 
@@ -670,14 +620,22 @@
           >
         </returns>
         <param name="errorMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message to include in the generated HTML string.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -731,7 +689,11 @@
           <para>A string that contains design-time HTML markup providing information about the control.</para>
         </returns>
         <param name="instruction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -803,8 +765,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The values for the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.DesignerState" />
+            >The values for the <see cref="P:System.Web.UI.Design.ControlDesigner.DesignerState" />
 
             
 
@@ -830,8 +791,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.UI.Design.ControlDesigner.DesignTimeElementView" />
+              >The <see cref="P:System.Web.UI.Design.ControlDesigner.DesignTimeElementView" />
 
               
 
@@ -868,8 +828,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation of the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.DesignTimeHtmlRequiresLoadComplete" />
+            >The default implementation of the <see cref="P:System.Web.UI.Design.ControlDesigner.DesignTimeHtmlRequiresLoadComplete" />
 
             
 
@@ -877,13 +836,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.UI.Design.ControlDesigner.DesignTimeHtmlRequiresLoadComplete" />
+              >The <see cref="P:System.Web.UI.Design.ControlDesigner.DesignTimeHtmlRequiresLoadComplete" />
 
               
 
-               property is obsolete. Use the <see
-               cref="M:System.Web.UI.Design.ControlDesigner.SetViewFlags(System.Web.UI.Design.ViewFlags,System.Boolean)" />
+               property is obsolete. Use the <see cref="M:System.Web.UI.Design.ControlDesigner.SetViewFlags(System.Web.UI.Design.ViewFlags,System.Boolean)" />
 
               
 
@@ -894,8 +851,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the design host must finish loading before the <see
-             cref="Overload:System.Web.UI.Design.ControlDesigner.GetDesignTimeHtml" />
+            >Gets a value indicating whether the design host must finish loading before the <see cref="Overload:System.Web.UI.Design.ControlDesigner.GetDesignTimeHtml" />
 
             
 
@@ -932,8 +888,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Rectangle" />
+            >A <see cref="T:System.Drawing.Rectangle" />
 
             
 
@@ -984,26 +939,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The design host calls the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.GetDesignTimeHtml(System.Web.UI.Design.DesignerRegionCollection)" />
+            >The design host calls the <see cref="M:System.Web.UI.Design.ControlDesigner.GetDesignTimeHtml(System.Web.UI.Design.DesignerRegionCollection)" />
 
             
 
              method to get the design-time HTML markup and the current list of control designer regions. Using the DesignerRegionCollection, the design host can then request the markup for each editable control designer region.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.GetDesignTimeHtml(System.Web.UI.Design.DesignerRegionCollection)" />
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.GetDesignTimeHtml(System.Web.UI.Design.DesignerRegionCollection)" />
 
             
 
-             method is provided for a derived control designer, such as the <see
-             cref="T:System.Web.UI.Design.WebControls.GridViewDesigner" />
+             method is provided for a derived control designer, such as the <see cref="T:System.Web.UI.Design.WebControls.GridViewDesigner" />
 
             
 
-             class, that must process the content for the region before calling the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.GetDesignTimeHtml" />
+             class, that must process the content for the region before calling the <see cref="M:System.Web.UI.Design.ControlDesigner.GetDesignTimeHtml" />
 
             
 
@@ -1019,7 +970,11 @@
           <para>The design-time HTML markup for the associated control, including all control designer regions.</para>
         </returns>
         <param name="regions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1046,21 +1001,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A resource provider factory creates resource providers and resource writers, depending on the current settings in the system.web/globalization section of the configuration file (either the Machine.config or Web.config files for both global and local resources). If no globalization settings are found, the <paramref
-             name="serviceProvider" />
+            >A resource provider factory creates resource providers and resource writers, depending on the current settings in the system.web/globalization section of the configuration file (either the Machine.config or Web.config files for both global and local resources). If no globalization settings are found, the <paramref name="serviceProvider" />
 
             
 
-             parameter is used to create a <see
-             cref="T:System.Web.UI.Design.DesignTimeResourceProviderFactory" />
+             parameter is used to create a <see cref="T:System.Web.UI.Design.DesignTimeResourceProviderFactory" />
 
             
 
              object using the default implementation for the design host.</para
           >
           <para
-            >Typically, control developers will not override the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.GetDesignTimeResourceProviderFactory(System.IServiceProvider)" />
+            >Typically, control developers will not override the <see cref="M:System.Web.UI.Design.ControlDesigner.GetDesignTimeResourceProviderFactory(System.IServiceProvider)" />
 
             
 
@@ -1074,8 +1026,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.Design.DesignTimeResourceProviderFactory" />
+            >A <see cref="T:System.Web.UI.Design.DesignTimeResourceProviderFactory" />
 
             
 
@@ -1083,12 +1034,15 @@
           >
         </returns>
         <param name="serviceProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IServiceProvider" />
+          An <see cref="T:System.IServiceProvider" />
 
           
 
@@ -1115,21 +1069,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation of the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.GetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion)" />
+            >The default implementation of the <see cref="M:System.Web.UI.Design.ControlDesigner.GetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion)" />
 
             
 
              method returns an empty string (""). </para
           >
           <para
-            >Classes deriving from the <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+            >Classes deriving from the <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
-             class can support region-based editing on the design surface and override the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.GetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion)" />
+             class can support region-based editing on the design surface and override the <see cref="M:System.Web.UI.Design.ControlDesigner.GetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion)" />
 
             
 
@@ -1145,12 +1096,15 @@
           <para>The persisted content for the region, if the control designer supports editable regions; otherwise, an empty string ("").</para>
         </returns>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Design.EditableDesignerRegion" />
+          The <see cref="T:System.Web.UI.Design.EditableDesignerRegion" />
 
           
 
@@ -1169,18 +1123,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default behavior of the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.GetEmptyDesignTimeHtml" />
+            >The default behavior of the <see cref="M:System.Web.UI.Design.ControlDesigner.GetEmptyDesignTimeHtml" />
 
             
 
-             method is to return a string that contains the name of the component. The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.GetEmptyDesignTimeHtml" />
+             method is to return a string that contains the name of the component. The <see cref="M:System.Web.UI.Design.ControlDesigner.GetEmptyDesignTimeHtml" />
 
             
 
-             method should be called in the implementation of the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.GetDesignTimeHtml" />
+             method should be called in the implementation of the <see cref="M:System.Web.UI.Design.ControlDesigner.GetDesignTimeHtml" />
 
             
 
@@ -1217,13 +1168,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.GetErrorDesignTimeHtml(System.Exception)" />
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.GetErrorDesignTimeHtml(System.Exception)" />
 
             
 
-             method is typically called, if an exception is thrown in the <see
-             cref="Overload:System.Web.UI.Design.ControlDesigner.GetDesignTimeHtml" />
+             method is typically called, if an exception is thrown in the <see cref="Overload:System.Web.UI.Design.ControlDesigner.GetDesignTimeHtml" />
 
             
 
@@ -1239,7 +1188,11 @@
           <para>The design-time HTML markup for the specified exception.</para>
         </returns>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1285,13 +1238,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.UI.Design.ControlDesigner.GetPersistInnerHtml" />
+              >The <see cref="M:System.Web.UI.Design.ControlDesigner.GetPersistInnerHtml" />
 
               
 
-               method is obsolete. Use the <see
-               cref="M:System.Web.UI.Design.ControlDesigner.GetPersistenceContent" />
+               method is obsolete. Use the <see cref="M:System.Web.UI.Design.ControlDesigner.GetPersistenceContent" />
 
               
 
@@ -1340,8 +1291,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.Design.ViewRendering" />
+            >A <see cref="T:System.Web.UI.Design.ViewRendering" />
 
             
 
@@ -1374,8 +1324,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.Design.ViewRendering" />
+            >A <see cref="T:System.Web.UI.Design.ViewRendering" />
 
             
 
@@ -1383,12 +1332,15 @@
           >
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.Control" />
+          A <see cref="T:System.Web.UI.Control" />
 
           
 
@@ -1420,8 +1372,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.Design.ViewRendering" />
+            >A <see cref="T:System.Web.UI.Design.ViewRendering" />
 
             
 
@@ -1429,12 +1380,15 @@
           >
         </returns>
         <param name="designer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A control designer that derives from <see
-           cref="T:System.Web.UI.Design.ControlDesigner" />
+          A control designer that derives from <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
           
 
@@ -1459,13 +1413,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The ID property is never hidden. The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.PreFilterProperties(System.Collections.IDictionary)" />
+            >The ID property is never hidden. The <see cref="M:System.Web.UI.Design.ControlDesigner.PreFilterProperties(System.Collections.IDictionary)" />
 
             
 
-             method uses the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.HidePropertiesInTemplateMode" />
+             method uses the <see cref="P:System.Web.UI.Design.ControlDesigner.HidePropertiesInTemplateMode" />
 
             
 
@@ -1489,18 +1441,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.ControlDesigner.ID" />
+            >The <see cref="P:System.Web.UI.Design.ControlDesigner.ID" />
 
             
 
-             property is used internally within the control designer and for interaction with the Properties window. The <see
-             cref="P:System.Web.UI.Design.ControlDesigner.ID" />
+             property is used internally within the control designer and for interaction with the Properties window. The <see cref="P:System.Web.UI.Design.ControlDesigner.ID" />
 
             
 
-             property shadows the run-time <see
-             cref="P:System.Web.UI.Control.ID" />
+             property shadows the run-time <see cref="P:System.Web.UI.Control.ID" />
 
             
 
@@ -1533,8 +1482,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.Initialize(System.ComponentModel.IComponent)" />
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.Initialize(System.ComponentModel.IComponent)" />
 
             
 
@@ -1546,8 +1494,7 @@
             </item>
             <item>
               <para
-                >Set up the view on the control using the <see
-                 cref="M:System.Web.UI.Design.ControlDesigner.SetViewFlags(System.Web.UI.Design.ViewFlags,System.Boolean)" />
+                >Set up the view on the control using the <see cref="M:System.Web.UI.Design.ControlDesigner.SetViewFlags(System.Web.UI.Design.ViewFlags,System.Boolean)" />
 
                 
 
@@ -1564,7 +1511,11 @@
           <para>Initializes the control designer and loads the specified component.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1591,28 +1542,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A Web server control is in template mode when a read-only template is currently being viewed or an editable template is being edited in a design host such as vsprvslong.</para>
           <para
-            >The <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+            >The <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
-             class supplies a default <see
-             cref="T:System.Web.UI.Design.ViewEventHandler" />
+             class supplies a default <see cref="T:System.Web.UI.Design.ViewEventHandler" />
 
             
 
-             object to update the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.InTemplateMode" />
+             object to update the <see cref="P:System.Web.UI.Design.ControlDesigner.InTemplateMode" />
 
             
 
-             value when the template mode changes for the associated control. Custom designers that are derived from the <see
-             cref="T:System.Web.UI.Design.TemplatedControlDesigner" />
+             value when the template mode changes for the associated control. Custom designers that are derived from the <see cref="T:System.Web.UI.Design.TemplatedControlDesigner" />
 
             
 
-             class can override the <see
-             cref="M:System.Web.UI.Design.TemplatedControlDesigner.OnTemplateModeChanged" />
+             class can override the <see cref="M:System.Web.UI.Design.TemplatedControlDesigner.OnTemplateModeChanged" />
 
             
 
@@ -1622,8 +1568,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the control is in either template viewing or editing mode in the design host. The <see
-             cref="P:System.Web.UI.Design.ControlDesigner.InTemplateMode" />
+            >Gets a value indicating whether the control is in either template viewing or editing mode in the design host. The <see cref="P:System.Web.UI.Design.ControlDesigner.InTemplateMode" />
 
             
 
@@ -1646,26 +1591,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To enable the control designer to handle paint events, use the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.SetViewFlags(System.Web.UI.Design.ViewFlags,System.Boolean)" />
+            >To enable the control designer to handle paint events, use the <see cref="M:System.Web.UI.Design.ControlDesigner.SetViewFlags(System.Web.UI.Design.ViewFlags,System.Boolean)" />
 
             
 
-             method in the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.Initialize(System.ComponentModel.IComponent)" />
+             method in the <see cref="M:System.Web.UI.Design.ControlDesigner.Initialize(System.ComponentModel.IComponent)" />
 
             
 
              method.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.Invalidate" />
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.Invalidate" />
 
             
 
-             method provides the design host with a way to instruct the control designer to redraw the control. Essentially, this is the same as calling <see
-             cref="M:System.Web.UI.Design.ControlDesigner.UpdateDesignTimeHtml" />
+             method provides the design host with a way to instruct the control designer to redraw the control. Essentially, this is the same as calling <see cref="M:System.Web.UI.Design.ControlDesigner.UpdateDesignTimeHtml" />
 
             
 
@@ -1697,21 +1638,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To enable the control designer to handle paint events, use the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.SetViewFlags(System.Web.UI.Design.ViewFlags,System.Boolean)" />
+            >To enable the control designer to handle paint events, use the <see cref="M:System.Web.UI.Design.ControlDesigner.SetViewFlags(System.Web.UI.Design.ViewFlags,System.Boolean)" />
 
             
 
-             method in the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.Initialize(System.ComponentModel.IComponent)" />
+             method in the <see cref="M:System.Web.UI.Design.ControlDesigner.Initialize(System.ComponentModel.IComponent)" />
 
             
 
              method.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.Invalidate(System.Drawing.Rectangle)" />
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.Invalidate(System.Drawing.Rectangle)" />
 
             
 
@@ -1723,12 +1661,15 @@
           <para>Invalidates the specified area of the control that is displayed on the design surface and signals the control designer to redraw the control.</para>
         </summary>
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
@@ -1758,41 +1699,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The implementation of the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.InvokeTransactedChange(System.ComponentModel.IComponent,System.Web.UI.Design.TransactedChangeCallback,System.Object,System.String)" />
+            >The implementation of the <see cref="M:System.Web.UI.Design.ControlDesigner.InvokeTransactedChange(System.ComponentModel.IComponent,System.Web.UI.Design.TransactedChangeCallback,System.Object,System.String)" />
 
             
 
-             method notifies the design host, which is determined by the <see
-             cref="P:System.Web.UI.Control.Site" />
+             method notifies the design host, which is determined by the <see cref="P:System.Web.UI.Control.Site" />
 
             
 
-             property of <paramref
-             name="component" />
+             property of <paramref name="component" />
 
             
 
-            , that a change is occurring in the associated control and, if the change is not canceled by the design host, invokes the specified <paramref
-             name="callback" />
+            , that a change is occurring in the associated control and, if the change is not canceled by the design host, invokes the specified <paramref name="callback" />
 
             
 
-             using the specified <paramref
-             name="context" />
+             using the specified <paramref name="context" />
 
             
 
             , and then notifies the design host that the change has completed.</para
           >
           <para
-            >If the design host or the associated control throws a static Canceled exception field of a <see
-             cref="T:System.ComponentModel.Design.CheckoutException" />
+            >If the design host or the associated control throws a static Canceled exception field of a <see cref="T:System.ComponentModel.Design.CheckoutException" />
 
             
 
-             exception, the transaction is canceled without invoking <paramref
-             name="callback" />
+             exception, the transaction is canceled without invoking <paramref name="callback" />
 
             
 
@@ -1804,33 +1738,48 @@
           <para>Wraps a series of changes into a transaction, using the specified parameters that can be rolled back as a unit with the undo functionality of the design host.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The control associated with the control designer.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.Design.TransactedChangeCallback" />
+          A <see cref="T:System.Web.UI.Design.TransactedChangeCallback" />
 
           
 
            object representing a function to call in the control designer as part of the transaction.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object that contains the argument for callback.</param
         >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1861,46 +1810,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The implementation of the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.InvokeTransactedChange(System.ComponentModel.IComponent,System.Web.UI.Design.TransactedChangeCallback,System.Object,System.String)" />
+            >The implementation of the <see cref="M:System.Web.UI.Design.ControlDesigner.InvokeTransactedChange(System.ComponentModel.IComponent,System.Web.UI.Design.TransactedChangeCallback,System.Object,System.String)" />
 
             
 
-             method notifies the design host, which is determined by the <see
-             cref="P:System.Web.UI.Control.Site" />
+             method notifies the design host, which is determined by the <see cref="P:System.Web.UI.Control.Site" />
 
             
 
-             property of <paramref
-             name="component" />
+             property of <paramref name="component" />
 
             
 
-            , that a change is occurring to the specified <paramref
-             name="member" />
+            , that a change is occurring to the specified <paramref name="member" />
 
             
 
-             (property or method) of the associated control and, if the change is not canceled by the design host, invokes the specified <paramref
-             name="callback" />
+             (property or method) of the associated control and, if the change is not canceled by the design host, invokes the specified <paramref name="callback" />
 
             
 
-             using the specified <paramref
-             name="context" />
+             using the specified <paramref name="context" />
 
             
 
              as the argument, and then notifies the design host that the change has completed.</para
           >
           <para
-            >If the design host or associated control throws a static Canceled exception field of a <see
-             cref="T:System.ComponentModel.Design.CheckoutException" />
+            >If the design host or associated control throws a static Canceled exception field of a <see cref="T:System.ComponentModel.Design.CheckoutException" />
 
             
 
-             exception, the transaction is canceled without invoking <paramref
-             name="callback" />
+             exception, the transaction is canceled without invoking <paramref name="callback" />
 
             
 
@@ -1912,55 +1853,71 @@
           <para>Wraps a series of changes into a transaction, using the specified parameters that can be rolled back as a unit with the undo functionality of the design host.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The control associated with the control designer.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.Design.TransactedChangeCallback" />
+          A <see cref="T:System.Web.UI.Design.TransactedChangeCallback" />
 
           
 
            object representing a function to call in the control designer as part of the transaction.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object that contains the argument for callback.</param
         >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A description of the effect of allowing the transaction to complete, which is used by the design host to give the user an opportunity to cancel the transaction.</param
         >
         <param name="member">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.MemberDescriptor" />
+          A <see cref="T:System.ComponentModel.MemberDescriptor" />
 
           
 
-           object (typically, either an <see
-           cref="T:System.ComponentModel.EventDescriptor" />
+           object (typically, either an <see cref="T:System.ComponentModel.EventDescriptor" />
 
           
 
-           or a <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+           or a <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -1992,41 +1949,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The implementation of the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.InvokeTransactedChange(System.ComponentModel.IComponent,System.Web.UI.Design.TransactedChangeCallback,System.Object,System.String)" />
+            >The implementation of the <see cref="M:System.Web.UI.Design.ControlDesigner.InvokeTransactedChange(System.ComponentModel.IComponent,System.Web.UI.Design.TransactedChangeCallback,System.Object,System.String)" />
 
             
 
-             method notifies the design host, which is represented by <paramref
-             name="serviceProvider" />
+             method notifies the design host, which is represented by <paramref name="serviceProvider" />
 
             
 
-            , that a change is occurring to the specified <paramref
-             name="member" />
+            , that a change is occurring to the specified <paramref name="member" />
 
             
 
-             (property or method) of the associated control and, if the change is not canceled by the design host, invokes the specified <paramref
-             name="callback" />
+             (property or method) of the associated control and, if the change is not canceled by the design host, invokes the specified <paramref name="callback" />
 
             
 
-             using the specified <paramref
-             name="context" />
+             using the specified <paramref name="context" />
 
             
 
              as the argument, and then notifies the design host that the change has completed.</para
           >
           <para
-            >If the design host or the associated control throws a static Canceled exception field of a <see
-             cref="T:System.ComponentModel.Design.CheckoutException" />
+            >If the design host or the associated control throws a static Canceled exception field of a <see cref="T:System.ComponentModel.Design.CheckoutException" />
 
             
 
-             exception, the transaction is canceled without invoking <paramref
-             name="callback" />
+             exception, the transaction is canceled without invoking <paramref name="callback" />
 
             
 
@@ -2038,67 +1988,86 @@
           <para>Wraps a series of changes into a transaction, using the specified parameters that can be rolled back as a unit with the undo functionality of the design host.</para>
         </summary>
         <param name="serviceProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IServiceProvider" />
+          An <see cref="T:System.IServiceProvider" />
 
           
 
            object representing the design host that provides control designer services for the associated control.</param
         >
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The control associated with the control designer.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.Design.TransactedChangeCallback" />
+          A <see cref="T:System.Web.UI.Design.TransactedChangeCallback" />
 
           
 
            object representing a function to call in the control designer as part of the transaction.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object that contains the argument for callback.</param
         >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A description of the effect of allowing the transaction to complete, which is used by the design host to give the user an opportunity to cancel the transaction.</param
         >
         <param name="member">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.MemberDescriptor" />
+          A <see cref="T:System.ComponentModel.MemberDescriptor" />
 
           
 
-           object (typically either an <see
-           cref="T:System.ComponentModel.EventDescriptor" />
+           object (typically either an <see cref="T:System.ComponentModel.EventDescriptor" />
 
           
 
-           or a <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+           or a <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -2118,23 +2087,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.UI.Design.ControlDesigner.IsDirty" />
+              >The <see cref="P:System.Web.UI.Design.ControlDesigner.IsDirty" />
 
               
 
-               property is obsolete. Use the <see
-               cref="P:System.Web.UI.Design.IControlDesignerTag.IsDirty" />
+               property is obsolete. Use the <see cref="P:System.Web.UI.Design.IControlDesignerTag.IsDirty" />
 
               
 
-               property and the <see
-               cref="M:System.Web.UI.Design.IControlDesignerTag.SetDirty(System.Boolean)" />
+               property and the <see cref="M:System.Web.UI.Design.IControlDesignerTag.SetDirty(System.Boolean)" />
 
               
 
-               method on the <see
-               cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
+               method on the <see cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
 
               
 
@@ -2171,18 +2136,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.UI.Design.ControlDesigner.IsPropertyBound(System.String)" />
+              >The <see cref="M:System.Web.UI.Design.ControlDesigner.IsPropertyBound(System.String)" />
 
               
 
-               method is obsolete. Use the <see
-               cref="M:System.Web.UI.DataBindingCollection.Contains(System.String)" />
+               method is obsolete. Use the <see cref="M:System.Web.UI.DataBindingCollection.Contains(System.String)" />
 
               
 
-               method on the <see
-               cref="P:System.Web.UI.Design.HtmlControlDesigner.DataBindings" />
+               method on the <see cref="P:System.Web.UI.Design.HtmlControlDesigner.DataBindings" />
 
               
 
@@ -2199,7 +2161,11 @@
           <para>true, if the property is data-bound; otherwise, false.</para>
         </returns>
         <param name="propName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2235,13 +2201,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.Localize(System.Web.UI.Design.IDesignTimeResourceWriter)" />
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.Localize(System.Web.UI.Design.IDesignTimeResourceWriter)" />
 
             
 
-             method is called by the design host to create resource entries for each property that is marked with a <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+             method is called by the design host to create resource entries for each property that is marked with a <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
@@ -2253,12 +2217,15 @@
           <para>Uses the provided resource writer to persist the localizable properties of the associated control to a resource in the design host.</para>
         </summary>
         <param name="resourceWriter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Web.UI.Design.IDesignTimeResourceWriter" />
+          An object derived from the <see cref="T:System.Web.UI.Design.IDesignTimeResourceWriter" />
 
           
 
@@ -2285,31 +2252,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.OnAutoFormatApplied(System.Web.UI.Design.DesignerAutoFormat)" />
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.OnAutoFormatApplied(System.Web.UI.Design.DesignerAutoFormat)" />
 
             
 
-             method is called after a <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+             method is called after a <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
-             object has applied a predefined format to the associated control. A <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+             object has applied a predefined format to the associated control. A <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
              object defines the automatic formatting scheme name and style settings that are applied to the control.</para
           >
           <para
-            >Classes deriving from the <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+            >Classes deriving from the <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
-             class override the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.OnAutoFormatApplied(System.Web.UI.Design.DesignerAutoFormat)" />
+             class override the <see cref="M:System.Web.UI.Design.ControlDesigner.OnAutoFormatApplied(System.Web.UI.Design.DesignerAutoFormat)" />
 
             
 
@@ -2321,12 +2283,15 @@
           <para>Called when a predefined, automatic formatting scheme has been applied to the associated control.</para>
         </summary>
         <param name="appliedAutoFormat">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+          A <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
           
 
@@ -2346,23 +2311,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.UI.Design.ControlDesigner.OnBehaviorAttached" />
+              >The <see cref="M:System.Web.UI.Design.ControlDesigner.OnBehaviorAttached" />
 
               
 
-               method is obsolete. Use the <see
-               cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" />
+               method is obsolete. Use the <see cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" />
 
               
 
-               and <see
-               cref="M:System.Web.UI.Design.IControlDesignerTag.GetAttribute(System.String)" />
+               and <see cref="M:System.Web.UI.Design.IControlDesignerTag.GetAttribute(System.String)" />
 
               
 
-               methods on the <see
-               cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
+               methods on the <see cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
 
               
 
@@ -2395,8 +2356,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.OnBindingsCollectionChanged(System.String)" />
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.OnBindingsCollectionChanged(System.String)" />
 
             
 
@@ -2404,18 +2364,15 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.UI.Design.ControlDesigner.OnBindingsCollectionChanged(System.String)" />
+              >The <see cref="M:System.Web.UI.Design.ControlDesigner.OnBindingsCollectionChanged(System.String)" />
 
               
 
-               method is obsolete. Use the <see
-               cref="E:System.Web.UI.DataBindingCollection.Changed" />
+               method is obsolete. Use the <see cref="E:System.Web.UI.DataBindingCollection.Changed" />
 
               
 
-               event on the <see
-               cref="P:System.Web.UI.Design.HtmlControlDesigner.DataBindings" />
+               event on the <see cref="P:System.Web.UI.Design.HtmlControlDesigner.DataBindings" />
 
               
 
@@ -2428,7 +2385,11 @@
           <para>Called when the data-binding collection changes.</para>
         </summary>
         <param name="propName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2464,8 +2425,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
+            >The <see cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
 
             
 
@@ -2483,39 +2443,33 @@
             </item>
           </list>
           <para
-            >The <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+            >The <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
-             class supplies a default delegate to handle the <see
-             cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
+             class supplies a default delegate to handle the <see cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
 
             
 
-             event. Classes deriving from <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+             event. Classes deriving from <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
-             override the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.OnClick(System.Web.UI.Design.DesignerRegionMouseEventArgs)" />
+             override the <see cref="M:System.Web.UI.Design.ControlDesigner.OnClick(System.Web.UI.Design.DesignerRegionMouseEventArgs)" />
 
             
 
              method to process events that are raised when the user clicks a control.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.OnClick(System.Web.UI.Design.DesignerRegionMouseEventArgs)" />
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.OnClick(System.Web.UI.Design.DesignerRegionMouseEventArgs)" />
 
             
 
              method allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
           >
           <para
-            >The default implementation of the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.OnClick(System.Web.UI.Design.DesignerRegionMouseEventArgs)" />
+            >The default implementation of the <see cref="M:System.Web.UI.Design.ControlDesigner.OnClick(System.Web.UI.Design.DesignerRegionMouseEventArgs)" />
 
             
 
@@ -2527,12 +2481,15 @@
           <para>Called by the design host when the user clicks the associated control at design time.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.Design.DesignerRegionMouseEventArgs" />
+          A <see cref="T:System.Web.UI.Design.DesignerRegionMouseEventArgs" />
 
           
 
@@ -2557,23 +2514,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.OnComponentChanged(System.Object,System.ComponentModel.Design.ComponentChangedEventArgs)" />
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.OnComponentChanged(System.Object,System.ComponentModel.Design.ComponentChangedEventArgs)" />
 
             
 
-             method is called when a property on the associated control is changed. It allows the implementer to do any processing that might be required after a property change. Calling the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.OnComponentChanged(System.Object,System.ComponentModel.Design.ComponentChangedEventArgs)" />
+             method is called when a property on the associated control is changed. It allows the implementer to do any processing that might be required after a property change. Calling the <see cref="M:System.Web.UI.Design.ControlDesigner.OnComponentChanged(System.Object,System.ComponentModel.Design.ComponentChangedEventArgs)" />
 
             
 
-             method causes the design host to call the <see
-             cref="Overload:System.Web.UI.Design.ControlDesigner.GetDesignTimeHtml" />
+             method causes the design host to call the <see cref="Overload:System.Web.UI.Design.ControlDesigner.GetDesignTimeHtml" />
 
             
 
-             method. The base implementation of the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.OnComponentChanged(System.Object,System.ComponentModel.Design.ComponentChangedEventArgs)" />
+             method. The base implementation of the <see cref="M:System.Web.UI.Design.ControlDesigner.OnComponentChanged(System.Object,System.ComponentModel.Design.ComponentChangedEventArgs)" />
 
             
 
@@ -2585,19 +2538,26 @@
           <para>Called when the associated control changes.</para>
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event. </param
         >
         <param name="ce">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.Design.ComponentChangedEventArgs" />
+          A <see cref="T:System.ComponentModel.Design.ComponentChangedEventArgs" />
 
           
 
@@ -2629,23 +2589,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When either the <see
-             cref="Overload:System.Web.UI.Design.ControlDesigner.InvokeTransactedChange" />
+            >When either the <see cref="Overload:System.Web.UI.Design.ControlDesigner.InvokeTransactedChange" />
 
             
 
-             or <see
-             cref="M:System.Web.UI.Design.ControlDesigner.Localize(System.Web.UI.Design.IDesignTimeResourceWriter)" />
+             or <see cref="M:System.Web.UI.Design.ControlDesigner.Localize(System.Web.UI.Design.IDesignTimeResourceWriter)" />
 
             
 
-             method is called, the <see
-             cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
+             method is called, the <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
 
             
 
-             event occurs before any changes are made to the associated control. After the changes are complete, the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.OnComponentChanged(System.Object,System.ComponentModel.Design.ComponentChangedEventArgs)" />
+             event occurs before any changes are made to the associated control. After the changes are complete, the <see cref="M:System.Web.UI.Design.ControlDesigner.OnComponentChanged(System.Object,System.ComponentModel.Design.ComponentChangedEventArgs)" />
 
             
 
@@ -2655,8 +2611,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the method that will handle the <see
-             cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
+            >Represents the method that will handle the <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
 
             
 
@@ -2664,19 +2619,26 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that is the source of the event.</param
         >
         <param name="ce">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.Design.ComponentChangedEventArgs" />
+          A <see cref="T:System.ComponentModel.Design.ComponentChangedEventArgs" />
 
           
 
@@ -2696,13 +2658,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.UI.Design.ControlDesigner.OnControlResize" />
+              >The <see cref="M:System.Web.UI.Design.ControlDesigner.OnControlResize" />
 
               
 
-               method is obsolete. Use the <see
-               cref="M:System.Web.UI.Design.ControlDesigner.OnComponentChanged(System.Object,System.ComponentModel.Design.ComponentChangedEventArgs)" />
+               method is obsolete. Use the <see cref="M:System.Web.UI.Design.ControlDesigner.OnComponentChanged(System.Object,System.ComponentModel.Design.ComponentChangedEventArgs)" />
 
               
 
@@ -2710,18 +2670,15 @@
             >
           </block>
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.OnControlResize" />
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.OnControlResize" />
 
             
 
-             method typically is called only by the design-time environment when a user action causes the associated Web server control to be resized. The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.OnControlResize" />
+             method typically is called only by the design-time environment when a user action causes the associated Web server control to be resized. The <see cref="M:System.Web.UI.Design.ControlDesigner.OnControlResize" />
 
             
 
-             method might be called several times during a resizing process to display the updated size of the control before the resizing is completed. The width and height properties of the control are updated before the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.OnControlResize" />
+             method might be called several times during a resizing process to display the updated size of the control before the resizing is completed. The width and height properties of the control are updated before the <see cref="M:System.Web.UI.Design.ControlDesigner.OnControlResize" />
 
             
 
@@ -2762,8 +2719,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
+            >The <see cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
 
             
 
@@ -2781,44 +2737,37 @@
             </item>
           </list>
           <para
-            >The <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+            >The <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
-             class supplies a default delegate to handle the <see
-             cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
+             class supplies a default delegate to handle the <see cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
 
             
 
-             event. Classes deriving from <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+             event. Classes deriving from <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
-             should set the <see
-             cref="F:System.Web.UI.Design.ViewFlags.CustomPaint" />
+             should set the <see cref="F:System.Web.UI.Design.ViewFlags.CustomPaint" />
 
             
 
-             value and override the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+             value and override the <see cref="M:System.Web.UI.Design.ControlDesigner.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
              method to process events that are raised when the design host draws the control on the design surface.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
              method allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
           >
           <para
-            >The default implementation of the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+            >The default implementation of the <see cref="M:System.Web.UI.Design.ControlDesigner.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
@@ -2828,8 +2777,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Called when the control designer draws the associated control on the design surface, if the <see
-             cref="F:System.Web.UI.Design.ViewFlags.CustomPaint" />
+            >Called when the control designer draws the associated control on the design surface, if the <see cref="F:System.Web.UI.Design.ViewFlags.CustomPaint" />
 
             
 
@@ -2837,12 +2785,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.PaintEventArgs" />
+          A <see cref="T:System.Windows.Forms.PaintEventArgs" />
 
           
 
@@ -2866,21 +2817,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >With the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.PreFilterProperties(System.Collections.IDictionary)" />
+            >With the <see cref="M:System.Web.UI.Design.ControlDesigner.PreFilterProperties(System.Collections.IDictionary)" />
 
             
 
-             method, you can add items to the dictionary of properties that a control designer exposes through a <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+             method, you can add items to the dictionary of properties that a control designer exposes through a <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
              object.</para
           >
           <para
-            >The keys in the dictionary of properties are the names of the properties. The objects are of type <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >The keys in the dictionary of properties are the names of the properties. The objects are of type <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -2892,7 +2840,11 @@
           <para>Adds properties to or removes properties from the Properties grid in a design host at design time or provides new design-time properties that might correspond to properties on the associated control.</para>
         </summary>
         <param name="properties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2915,8 +2867,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.RaiseResizeEvent" />
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.RaiseResizeEvent" />
 
             
 
@@ -2926,8 +2877,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.OnControlResize" />
+            >Raises the <see cref="M:System.Web.UI.Design.ControlDesigner.OnControlResize" />
 
             
 
@@ -2956,18 +2906,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+            >The <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
-             class is read-only, by nature. Read/write features are provided by adding a <see
-             cref="T:System.Web.UI.Design.DesignerRegion" />
+             class is read-only, by nature. Read/write features are provided by adding a <see cref="T:System.Web.UI.Design.DesignerRegion" />
 
             
 
-             object or using base classes, such as the <see
-             cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+             object or using base classes, such as the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
             
 
@@ -2975,18 +2922,15 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.UI.Design.ControlDesigner.ReadOnly" />
+              >The <see cref="P:System.Web.UI.Design.ControlDesigner.ReadOnly" />
 
               
 
-               property is obsolete. Derive from the <see
-               cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+               property is obsolete. Derive from the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
               
 
-               class to which you can add editable designer regions or from the <see
-               cref="T:System.Web.UI.Design.TemplatedControlDesigner" />
+               class to which you can add editable designer regions or from the <see cref="T:System.Web.UI.Design.TemplatedControlDesigner" />
 
               
 
@@ -3029,8 +2973,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Whenever an item is cloned, there might be some internal data structures, such as meta: attributes, that should be included in the cloned control by the control designer. A page developer might add meta: attributes to the markup of a control and there is no way, nor is there a reason, for the control to distinguish what those tags might be. Therefore, if your control designer provides a way to edit complex properties or formats before applying changes to a page, you would create a clone of the control, pass both the original control and the clone to this <see
-             cref="M:System.Web.UI.Design.ControlDesigner.RegisterClone(System.Object,System.Object)" />
+            >Whenever an item is cloned, there might be some internal data structures, such as meta: attributes, that should be included in the cloned control by the control designer. A page developer might add meta: attributes to the markup of a control and there is no way, nor is there a reason, for the control to distinguish what those tags might be. Therefore, if your control designer provides a way to edit complex properties or formats before applying changes to a page, you would create a clone of the control, pass both the original control and the clone to this <see cref="M:System.Web.UI.Design.ControlDesigner.RegisterClone(System.Object,System.Object)" />
 
             
 
@@ -3042,14 +2985,22 @@
           <para>Registers internal data in a cloned control.</para>
         </summary>
         <param name="original">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The control associated with the control designer.</param
         >
         <param name="clone">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3074,13 +3025,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.ControlDesigner.RootDesigner" />
+            >The <see cref="P:System.Web.UI.Design.ControlDesigner.RootDesigner" />
 
             
 
-             property represents the control designer for the Web Forms page that contains the control. Use the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.RootDesigner" />
+             property represents the control designer for the Web Forms page that contains the control. Use the <see cref="P:System.Web.UI.Design.ControlDesigner.RootDesigner" />
 
             
 
@@ -3113,13 +3062,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Classes deriving from the <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+            >Classes deriving from the <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
-             class can support region-based editing on the design surface and override the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.SetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion,System.String)" />
+             class can support region-based editing on the design surface and override the <see cref="M:System.Web.UI.Design.ControlDesigner.SetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion,System.String)" />
 
             
 
@@ -3131,14 +3078,22 @@
           <para>Specifies the content for an editable region of the control at design time. </para>
         </summary>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An editable design region contained within the control.</param
         >
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3166,31 +3121,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Normally, the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.SetRegionContent(System.Web.UI.Design.EditableDesignerRegion,System.String)" />
+            >Normally, the <see cref="M:System.Web.UI.Design.ControlDesigner.SetRegionContent(System.Web.UI.Design.EditableDesignerRegion,System.String)" />
 
             
 
-             method is not overridden in derived designers. The base class causes the design host to call the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.SetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion,System.String)" />
+             method is not overridden in derived designers. The base class causes the design host to call the <see cref="M:System.Web.UI.Design.ControlDesigner.SetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion,System.String)" />
 
             
 
-             method for the region. Override the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.SetRegionContent(System.Web.UI.Design.EditableDesignerRegion,System.String)" />
+             method for the region. Override the <see cref="M:System.Web.UI.Design.ControlDesigner.SetRegionContent(System.Web.UI.Design.EditableDesignerRegion,System.String)" />
 
             
 
-             method when custom data is required for the control before calling <see
-             cref="M:System.Web.UI.Design.ControlDesigner.SetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion,System.String)" />
+             method when custom data is required for the control before calling <see cref="M:System.Web.UI.Design.ControlDesigner.SetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion,System.String)" />
 
             
 
              method.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.SetRegionContent(System.Web.UI.Design.EditableDesignerRegion,System.String)" />
+            >Use the <see cref="M:System.Web.UI.Design.ControlDesigner.SetRegionContent(System.Web.UI.Design.EditableDesignerRegion,System.String)" />
 
             
 
@@ -3202,14 +3152,22 @@
           <para>Specifies the content for an editable region in the design-time view of the control.</para>
         </summary>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An editable design region contained within the design-time view of the control.</param
         >
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3237,23 +3195,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >There are several flags that can be set. For example, use the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.SetViewFlags(System.Web.UI.Design.ViewFlags,System.Boolean)" />
+            >There are several flags that can be set. For example, use the <see cref="M:System.Web.UI.Design.ControlDesigner.SetViewFlags(System.Web.UI.Design.ViewFlags,System.Boolean)" />
 
             
 
-             method to set the <see
-             cref="F:System.Web.UI.Design.ViewFlags.DesignTimeHtmlRequiresLoadComplete" />
+             method to set the <see cref="F:System.Web.UI.Design.ViewFlags.DesignTimeHtmlRequiresLoadComplete" />
 
             
 
-             value of the current <see
-             cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" />
+             value of the current <see cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" />
 
             
 
-             property for the control designer, instead of the obsolete <see
-             cref="P:System.Web.UI.Design.ControlDesigner.DesignTimeHtmlRequiresLoadComplete" />
+             property for the control designer, instead of the obsolete <see cref="P:System.Web.UI.Design.ControlDesigner.DesignTimeHtmlRequiresLoadComplete" />
 
             
 
@@ -3263,8 +3217,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Assigns the specified bitwise <see
-             cref="T:System.Web.UI.Design.ViewFlags" />
+            >Assigns the specified bitwise <see cref="T:System.Web.UI.Design.ViewFlags" />
 
             
 
@@ -3272,19 +3225,26 @@
           >
         </summary>
         <param name="viewFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.Design.ViewFlags" />
+          A <see cref="T:System.Web.UI.Design.ViewFlags" />
 
           
 
            value.</param
         >
         <param name="setFlag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3309,8 +3269,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
+            >Typically, the <see cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
 
             
 
@@ -3355,13 +3314,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.UpdateDesignTimeHtml" />
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.UpdateDesignTimeHtml" />
 
             
 
-             method is called by the design host to update the display of the associated Web server control at design time, such as when the control has been modified. Also, a control designer can call the <see
-             cref="M:System.Web.UI.Design.ControlDesigner.UpdateDesignTimeHtml" />
+             method is called by the design host to update the display of the associated Web server control at design time, such as when the control has been modified. Also, a control designer can call the <see cref="M:System.Web.UI.Design.ControlDesigner.UpdateDesignTimeHtml" />
 
             
 
@@ -3369,23 +3326,19 @@
           >
           <block subset="none" type="note">
             <para
-              >If you are calling the <see
-               cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+              >If you are calling the <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
 
               
 
-               event, or using the <see
-               cref="T:System.ComponentModel.PropertyDescriptor" />
+               event, or using the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
               
 
-               object to set properties, the <see
-               cref="T:System.ComponentModel.Design.IComponentChangeService" />
+               object to set properties, the <see cref="T:System.ComponentModel.Design.IComponentChangeService" />
 
               
 
-               interface calls the <see
-               cref="M:System.Web.UI.Design.ControlDesigner.UpdateDesignTimeHtml" />
+               interface calls the <see cref="M:System.Web.UI.Design.ControlDesigner.UpdateDesignTimeHtml" />
 
               
 
@@ -3396,8 +3349,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Refreshes the design-time HTML markup for the associated Web server control by calling the <see
-             cref="Overload:System.Web.UI.Design.ControlDesigner.GetDesignTimeHtml" />
+            >Refreshes the design-time HTML markup for the associated Web server control by calling the <see cref="Overload:System.Web.UI.Design.ControlDesigner.GetDesignTimeHtml" />
 
             
 
@@ -3424,79 +3376,65 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.UsePreviewControl" />
+            >If the <see cref="P:System.Web.UI.Design.ControlDesigner.UsePreviewControl" />
 
             
 
-             property is true, the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" />
+             property is true, the <see cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" />
 
             
 
              property returns a temporary copy of the control. Changes to the temporary control are not persisted to the document.</para
           >
           <para
-            >If the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.UsePreviewControl" />
+            >If the <see cref="P:System.Web.UI.Design.ControlDesigner.UsePreviewControl" />
 
             
 
-             property is false, the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" />
+             property is false, the <see cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" />
 
             
 
-             property returns an instance of the <see
-             cref="P:System.ComponentModel.Design.ComponentDesigner.Component" />
+             property returns an instance of the <see cref="P:System.ComponentModel.Design.ComponentDesigner.Component" />
 
             
 
              property for the control. Changes to the instance of the control are persisted.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.SupportsPreviewControlAttribute.SupportsPreviewControl" />
+            >The <see cref="P:System.Web.UI.Design.SupportsPreviewControlAttribute.SupportsPreviewControl" />
 
             
 
-             setting in the <see
-             cref="T:System.Web.UI.Design.SupportsPreviewControlAttribute" />
+             setting in the <see cref="T:System.Web.UI.Design.SupportsPreviewControlAttribute" />
 
             
 
-             object is used to set the value of the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.UsePreviewControl" />
+             object is used to set the value of the <see cref="P:System.Web.UI.Design.ControlDesigner.UsePreviewControl" />
 
             
 
-             property. Therefore, the <see
-             cref="P:System.Web.UI.Design.SupportsPreviewControlAttribute.SupportsPreviewControl" />
+             property. Therefore, the <see cref="P:System.Web.UI.Design.SupportsPreviewControlAttribute.SupportsPreviewControl" />
 
             
 
-             setting determines the type of control that is returned by the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" />
+             setting determines the type of control that is returned by the <see cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" />
 
             
 
-             property in the base <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+             property in the base <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
-             class. If the <see
-             cref="T:System.Web.UI.Design.SupportsPreviewControlAttribute" />
+             class. If the <see cref="T:System.Web.UI.Design.SupportsPreviewControlAttribute" />
 
             
 
-             is not specified in the control designer declaration, the <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+             is not specified in the control designer declaration, the <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
-             object behavior is equivalent to specifying the <see
-             cref="P:System.Web.UI.Design.SupportsPreviewControlAttribute.SupportsPreviewControl" />
+             object behavior is equivalent to specifying the <see cref="P:System.Web.UI.Design.SupportsPreviewControlAttribute.SupportsPreviewControl" />
 
             
 
@@ -3526,92 +3464,76 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" />
+            >The <see cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" />
 
             
 
-             property uses the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.UsePreviewControl" />
+             property uses the <see cref="P:System.Web.UI.Design.ControlDesigner.UsePreviewControl" />
 
             
 
              property to determine its return value.</para
           >
           <para
-            >If the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.UsePreviewControl" />
+            >If the <see cref="P:System.Web.UI.Design.ControlDesigner.UsePreviewControl" />
 
             
 
-             property is true, the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" />
+             property is true, the <see cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" />
 
             
 
              property returns a temporary copy of the control. Changes to the temporary control are not persisted. </para
           >
           <para
-            >If the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.UsePreviewControl" />
+            >If the <see cref="P:System.Web.UI.Design.ControlDesigner.UsePreviewControl" />
 
             
 
-             property is false, the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" />
+             property is false, the <see cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" />
 
             
 
-             property returns an instance of the <see
-             cref="P:System.ComponentModel.Design.ComponentDesigner.Component" />
+             property returns an instance of the <see cref="P:System.ComponentModel.Design.ComponentDesigner.Component" />
 
             
 
              property for the control. Changes to the instance of the control are persisted.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.SupportsPreviewControlAttribute.SupportsPreviewControl" />
+            >The <see cref="P:System.Web.UI.Design.SupportsPreviewControlAttribute.SupportsPreviewControl" />
 
             
 
-             setting in the <see
-             cref="T:System.Web.UI.Design.SupportsPreviewControlAttribute" />
+             setting in the <see cref="T:System.Web.UI.Design.SupportsPreviewControlAttribute" />
 
             
 
-             object is used to set the value of the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.UsePreviewControl" />
+             object is used to set the value of the <see cref="P:System.Web.UI.Design.ControlDesigner.UsePreviewControl" />
 
             
 
-             property. Therefore, the <see
-             cref="P:System.Web.UI.Design.SupportsPreviewControlAttribute.SupportsPreviewControl" />
+             property. Therefore, the <see cref="P:System.Web.UI.Design.SupportsPreviewControlAttribute.SupportsPreviewControl" />
 
             
 
-             setting determines the type of control that is returned by the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" />
+             setting determines the type of control that is returned by the <see cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" />
 
             
 
-             property in the base <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+             property in the base <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
-             class. If the <see
-             cref="T:System.Web.UI.Design.SupportsPreviewControlAttribute" />
+             class. If the <see cref="T:System.Web.UI.Design.SupportsPreviewControlAttribute" />
 
             
 
-             is not specified in the control designer declaration, the <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+             is not specified in the control designer declaration, the <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
-             object behavior is equivalent to specifying the <see
-             cref="P:System.Web.UI.Design.SupportsPreviewControlAttribute.SupportsPreviewControl" />
+             object behavior is equivalent to specifying the <see cref="P:System.Web.UI.Design.SupportsPreviewControlAttribute.SupportsPreviewControl" />
 
             
 

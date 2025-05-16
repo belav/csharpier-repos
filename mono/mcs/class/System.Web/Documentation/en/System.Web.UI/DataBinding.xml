@@ -16,38 +16,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each data-binding expression in a server control is represented at design time by an instance of the <see
-         cref="T:System.Web.UI.DataBinding" />
+        >Each data-binding expression in a server control is represented at design time by an instance of the <see cref="T:System.Web.UI.DataBinding" />
 
         
 
-         class. Any server control that contains one or more data-binding expressions has a <see
-         cref="T:System.Web.UI.DataBindingCollection" />
+         class. Any server control that contains one or more data-binding expressions has a <see cref="T:System.Web.UI.DataBindingCollection" />
 
         
 
-         object that contains the <see
-         cref="T:System.Web.UI.DataBinding" />
+         object that contains the <see cref="T:System.Web.UI.DataBinding" />
 
         
 
-         objects. This collection is accessible through the <see
-         cref="T:System.Web.UI.Control" />
+         objects. This collection is accessible through the <see cref="T:System.Web.UI.Control" />
 
         
 
-         class implementing the <see
-         cref="T:System.Web.UI.IDataBindingsAccessor" />
+         class implementing the <see cref="T:System.Web.UI.IDataBindingsAccessor" />
 
         
 
-         interface. When you create a custom RAD designer, use that implementation to access the collection. Any <see
-         cref="T:System.Web.UI.DataBinding" />
+         interface. When you create a custom RAD designer, use that implementation to access the collection. Any <see cref="T:System.Web.UI.DataBinding" />
 
         
 
-         or <see
-         cref="T:System.Web.UI.DataBindingCollection" />
+         or <see cref="T:System.Web.UI.DataBindingCollection" />
 
         
 
@@ -77,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.DataBinding" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.DataBinding" />
 
             
 
@@ -86,21 +78,33 @@
           >
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The property to bind data to. </param
         >
         <param name="propertyType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The .NET Framework type of the property to bind data to. </param
         >
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -126,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified object is the same instance of the <see
-             cref="T:System.Web.UI.DataBinding" />
+            >Determines whether the specified object is the same instance of the <see cref="T:System.Web.UI.DataBinding" />
 
             
 
@@ -139,12 +142,15 @@
           <para>true if the data-binding property names match; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to compare against the current <see
-           cref="T:System.Web.UI.DataBinding" />
+          The object to compare against the current <see cref="T:System.Web.UI.DataBinding" />
 
           
 
@@ -191,13 +197,11 @@
 
             
 
-             objects are placed in a <see
-             cref="T:System.Web.UI.DataBindingCollection" />
+             objects are placed in a <see cref="T:System.Web.UI.DataBindingCollection" />
 
             
 
-             object, accessible only at design time. The collection is a hash table that represents the bindings on a control. There can only be one binding per property, so the hash code computation matches the <see
-             cref="M:System.Web.UI.DataBinding.Equals(System.Object)" />
+             object, accessible only at design time. The collection is a hash table that represents the bindings on a control. There can only be one binding per property, so the hash code computation matches the <see cref="M:System.Web.UI.DataBinding.Equals(System.Object)" />
 
             
 
@@ -207,8 +211,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the hash code for an instance of the <see
-             cref="T:System.Web.UI.DataBinding" />
+            >Retrieves the hash code for an instance of the <see cref="T:System.Web.UI.DataBinding" />
 
             
 

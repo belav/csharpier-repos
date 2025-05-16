@@ -26,49 +26,41 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An instance of this class is automatically added to the <see
-         cref="P:System.Diagnostics.Debug.Listeners" />
+        >An instance of this class is automatically added to the <see cref="P:System.Diagnostics.Debug.Listeners" />
 
         
 
-         and <see
-         cref="P:System.Diagnostics.Trace.Listeners" />
+         and <see cref="P:System.Diagnostics.Trace.Listeners" />
 
         
 
-         collections. Explicitly adding a second <see
-         cref="T:System.Diagnostics.DefaultTraceListener" />
+         collections. Explicitly adding a second <see cref="T:System.Diagnostics.DefaultTraceListener" />
 
         
 
          causes duplicate messages in the debugger output window and duplicate message boxes for asserts.</para
       >
       <para
-        >By default, the <see
-         cref="M:System.Diagnostics.DefaultTraceListener.Write(System.String)" />
+        >By default, the <see cref="M:System.Diagnostics.DefaultTraceListener.Write(System.String)" />
 
         
 
-         and <see
-         cref="M:System.Diagnostics.DefaultTraceListener.WriteLine(System.String)" />
+         and <see cref="M:System.Diagnostics.DefaultTraceListener.WriteLine(System.String)" />
 
         
 
-         methods emit the message to the Win32 OutputDebugString function and to the <see
-         cref="M:System.Diagnostics.Debugger.Log(System.Int32,System.String,System.String)" />
+         methods emit the message to the Win32 OutputDebugString function and to the <see cref="M:System.Diagnostics.Debugger.Log(System.Int32,System.String,System.String)" />
 
         
 
          method. For information about the OutputDebugString function, see the Platform SDK or MSDN.</para
       >
       <para
-        >The <see
-         cref="M:System.Diagnostics.DefaultTraceListener.Fail(System.String)" />
+        >The <see cref="M:System.Diagnostics.DefaultTraceListener.Fail(System.String)" />
 
         
 
-         method, by default, displays a message box when the application is running in a user interface mode; it also emits the message using <see
-         cref="M:System.Diagnostics.DefaultTraceListener.WriteLine(System.String)" />
+         method, by default, displays a message box when the application is running in a user interface mode; it also emits the message using <see cref="M:System.Diagnostics.DefaultTraceListener.WriteLine(System.String)" />
 
         
 
@@ -76,57 +68,47 @@
       >
       <block subset="none" type="note">
         <para
-          >The display of the message box for <see
-           cref="Overload:System.Diagnostics.Debug.Assert" />
+          >The display of the message box for <see cref="Overload:System.Diagnostics.Debug.Assert" />
 
           
 
-           and <see
-           cref="Overload:System.Diagnostics.Debug.Fail" />
+           and <see cref="Overload:System.Diagnostics.Debug.Fail" />
 
           
 
-           method calls depends on the presence of the <see
-           cref="T:System.Diagnostics.DefaultTraceListener" />
+           method calls depends on the presence of the <see cref="T:System.Diagnostics.DefaultTraceListener" />
 
           
 
-          . If the <see
-           cref="T:System.Diagnostics.DefaultTraceListener" />
+          . If the <see cref="T:System.Diagnostics.DefaultTraceListener" />
 
           
 
-           is not in the <see
-           cref="P:System.Diagnostics.Trace.Listeners" />
+           is not in the <see cref="P:System.Diagnostics.Trace.Listeners" />
 
           
 
-           collection, the message box is not displayed. The <see
-           cref="T:System.Diagnostics.DefaultTraceListener" />
+           collection, the message box is not displayed. The <see cref="T:System.Diagnostics.DefaultTraceListener" />
 
           
 
-           can be removed by the <format
-           type="text/html">
+           can be removed by the <format type="text/html">
             <a href="b44732a8-271f-4a06-ba9e-fe3298d6f192">&lt;clear&gt; element</a>
           </format>
 
           
 
-          , by the <format
-           type="text/html">
+          , by the <format type="text/html">
             <a href="9a5cd1b5-be1a-485f-8f0c-2890ad3ef3e0">&lt;remove&gt; element</a>
           </format>
 
           
 
-          , or by calling the <see
-           cref="M:System.Diagnostics.TraceListenerCollection.Clear" />
+          , or by calling the <see cref="M:System.Diagnostics.TraceListenerCollection.Clear" />
 
           
 
-           method on the <see
-           cref="P:System.Diagnostics.Trace.Listeners" />
+           method on the <see cref="P:System.Diagnostics.Trace.Listeners" />
 
           
 
@@ -176,18 +158,15 @@
       <Parameters />
       <Docs>
         <remarks
-          >Constructs a new instance of the <see
-           cref="T:System.Diagnostics.DefaultTraceListener" />
+          >Constructs a new instance of the <see cref="T:System.Diagnostics.DefaultTraceListener" />
 
           
 
-           class, with a <see
-           cref="P:System.Diagnostics.TraceListener.Name" />
+           class, with a <see cref="P:System.Diagnostics.TraceListener.Name" />
 
           
 
-           value of <c
-          >Default</c>
+           value of <c>Default</c>
 
           
 
@@ -196,13 +175,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.DefaultTraceListener" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.DefaultTraceListener" />
 
             
 
-             class with "Default" as its <see
-             cref="P:System.Diagnostics.TraceListener.Name" />
+             class with "Default" as its <see cref="P:System.Diagnostics.TraceListener.Name" />
 
             
 
@@ -226,8 +203,7 @@
       <Parameters></Parameters>
       <Docs>
         <value
-          >Whether or not a GUI should be used when <see
-           cref="M:System.Diagnostics.TraceListener.Fail" />
+          >Whether or not a GUI should be used when <see cref="M:System.Diagnostics.TraceListener.Fail" />
 
           
 
@@ -235,13 +211,11 @@
         >
         <remarks>
           <para
-            >If <see
-             langword="true" />
+            >If <see langword="true" />
 
             
 
-            , calls to <see
-             cref="M:System.Diagnostics.TraceListener.Fail" />
+            , calls to <see cref="M:System.Diagnostics.TraceListener.Fail" />
 
             
 
@@ -277,13 +251,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, this method sends the <paramref
-             name="message" />
+            >By default, this method sends the <paramref name="message" />
 
             
 
-             parameter and a stack trace to a message box (when the application runs in user-interface mode) and to the <see
-             cref="T:System.Diagnostics.DefaultTraceListener" />
+             parameter and a stack trace to a message box (when the application runs in user-interface mode) and to the <see cref="T:System.Diagnostics.DefaultTraceListener" />
 
             
 
@@ -295,7 +267,11 @@
           <para>Emits or displays a message and a stack trace for an assertion that always fails.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -329,18 +305,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, this method sends the <paramref
-             name="message" />
+            >By default, this method sends the <paramref name="message" />
 
             
 
-             parameter, the <paramref
-             name="detailMessage" />
+             parameter, the <paramref name="detailMessage" />
 
             
 
-             parameter, and a stack trace to a message box (when the application runs in user-interface mode) and to the <see
-             cref="T:System.Diagnostics.DefaultTraceListener" />
+             parameter, and a stack trace to a message box (when the application runs in user-interface mode) and to the <see cref="T:System.Diagnostics.DefaultTraceListener" />
 
             
 
@@ -352,14 +325,22 @@
           <para>Emits or displays detailed messages and a stack trace for an assertion that always fails.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message to emit or display. </param
         >
         <param name="detailMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -420,8 +401,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the output to the OutputDebugString function and to the <see
-             cref="M:System.Diagnostics.Debugger.Log(System.Int32,System.String,System.String)" />
+            >Writes the output to the OutputDebugString function and to the <see cref="M:System.Diagnostics.Debugger.Log(System.Int32,System.String,System.String)" />
 
             
 
@@ -429,12 +409,15 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The message to write to OutputDebugString and <see
-           cref="M:System.Diagnostics.Debugger.Log(System.Int32,System.String,System.String)" />
+          The message to write to OutputDebugString and <see cref="M:System.Diagnostics.Debugger.Log(System.Int32,System.String,System.String)" />
 
           
 
@@ -466,8 +449,7 @@
           <para>The default line terminator is a carriage return followed by a line feed (\r\n).</para>
           <para>For information about the Win32 OutputDebugString debugging function, see the Platform SDK or MSDN.</para>
           <para
-            >This method sets the <see
-             cref="P:System.Diagnostics.TraceListener.NeedIndent" />
+            >This method sets the <see cref="P:System.Diagnostics.TraceListener.NeedIndent" />
 
             
 
@@ -477,8 +459,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the output to the OutputDebugString function and to the <see
-             cref="M:System.Diagnostics.Debugger.Log(System.Int32,System.String,System.String)" />
+            >Writes the output to the OutputDebugString function and to the <see cref="M:System.Diagnostics.Debugger.Log(System.Int32,System.String,System.String)" />
 
             
 
@@ -486,12 +467,15 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The message to write to OutputDebugString and <see
-           cref="M:System.Diagnostics.Debugger.Log(System.Int32,System.String,System.String)" />
+          The message to write to OutputDebugString and <see cref="M:System.Diagnostics.Debugger.Log(System.Int32,System.String,System.String)" />
 
           
 

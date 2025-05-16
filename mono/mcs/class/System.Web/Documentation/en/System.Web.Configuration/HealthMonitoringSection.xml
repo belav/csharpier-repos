@@ -63,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.HealthMonitoringSection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.HealthMonitoringSection" />
 
             
 
@@ -96,16 +95,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is a collection of <see
-             cref="T:System.Web.Configuration.BufferModeSettings" />
+            >This is a collection of <see cref="T:System.Web.Configuration.BufferModeSettings" />
 
             
 
              objects that define the manner in which health-monitoring events can be buffered before they are raised.</para
           >
           <para
-            >This property defaults to an empty <see
-             cref="T:System.Web.Configuration.BufferModesCollection" />
+            >This property defaults to an empty <see cref="T:System.Web.Configuration.BufferModesCollection" />
 
             
 
@@ -166,13 +163,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.Configuration.EventMappingSettingsCollection" />
+            >Gets a <see cref="T:System.Web.Configuration.EventMappingSettingsCollection" />
 
             
 
-             collection of <see
-             cref="T:System.Web.Configuration.EventMappingSettings" />
+             collection of <see cref="T:System.Web.Configuration.EventMappingSettings" />
 
             
 
@@ -207,13 +202,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.TimeSpan" />
+            >If the <see cref="T:System.TimeSpan" />
 
             
 
-             value is zero ticks, no <see
-             cref="T:System.Web.Management.WebHeartbeatEvent" />
+             value is zero ticks, no <see cref="T:System.Web.Management.WebHeartbeatEvent" />
 
             
 
@@ -223,8 +216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the interval used by the application domain when it raises the <see
-             cref="T:System.Web.Management.WebHeartbeatEvent" />
+            >Gets or sets the interval used by the application domain when it raises the <see cref="T:System.Web.Management.WebHeartbeatEvent" />
 
             
 
@@ -257,13 +249,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.Configuration.ProfileSettingsCollection" />
+            >Gets a <see cref="T:System.Web.Configuration.ProfileSettingsCollection" />
 
             
 
-             collection of <see
-             cref="T:System.Web.Configuration.ProfileSettings" />
+             collection of <see cref="T:System.Web.Configuration.ProfileSettings" />
 
             
 
@@ -291,8 +281,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the properties collection for the <see
-             cref="T:System.Web.Configuration.HealthMonitoringSection" />
+            >Gets the properties collection for the <see cref="T:System.Web.Configuration.HealthMonitoringSection" />
 
             
 
@@ -324,13 +313,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" />
+            >The <see cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" />
 
             
 
-             property specifies which provider is used for which of the events defined in the <see
-             cref="P:System.Web.Configuration.HealthMonitoringSection.EventMappings" />
+             property specifies which provider is used for which of the events defined in the <see cref="P:System.Web.Configuration.HealthMonitoringSection.EventMappings" />
 
             
 
@@ -340,13 +327,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Configuration.ProviderSettingsCollection" />
+            >Gets a <see cref="T:System.Configuration.ProviderSettingsCollection" />
 
             
 
-             collection of <see
-             cref="T:System.Configuration.ProviderSettings" />
+             collection of <see cref="T:System.Configuration.ProviderSettings" />
 
             
 
@@ -378,18 +363,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each <see
-             cref="T:System.Web.Configuration.RuleSettings" />
+            >Each <see cref="T:System.Web.Configuration.RuleSettings" />
 
             
 
-             object defines a connection between an event defined in the <see
-             cref="P:System.Web.Configuration.HealthMonitoringSection.EventMappings" />
+             object defines a connection between an event defined in the <see cref="P:System.Web.Configuration.HealthMonitoringSection.EventMappings" />
 
             
 
-             property and an event provider defined in the <see
-             cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" />
+             property and an event provider defined in the <see cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" />
 
             
 
@@ -399,13 +381,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.Configuration.RuleSettingsCollection" />
+            >Gets a <see cref="T:System.Web.Configuration.RuleSettingsCollection" />
 
             
 
-             collection of <see
-             cref="T:System.Web.Configuration.RuleSettings" />
+             collection of <see cref="T:System.Web.Configuration.RuleSettings" />
 
             
 

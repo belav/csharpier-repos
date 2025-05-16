@@ -17,23 +17,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class provides functionalities to convert a typed message to an untyped message, or an untyped message to a typed message. A typed message is an instance of a type that has the <see
-         cref="T:System.ServiceModel.MessageContractAttribute" />
+        >This class provides functionalities to convert a typed message to an untyped message, or an untyped message to a typed message. A typed message is an instance of a type that has the <see cref="T:System.ServiceModel.MessageContractAttribute" />
 
         
 
-         attribute annotated. An untyped message is one that is an instance of the <see
-         cref="T:System.ServiceModel.Channels.Message" />
+         attribute annotated. An untyped message is one that is an instance of the <see cref="T:System.ServiceModel.Channels.Message" />
 
         
 
-         class.  You can annotate a type with the <see
-         cref="T:System.ServiceModel.MessageContractAttribute" />
+         class.  You can annotate a type with the <see cref="T:System.ServiceModel.MessageContractAttribute" />
 
         
 
-         to create a custom message type, and then use the methods provided by this class to convert it to an untyped <see
-         cref="T:System.ServiceModel.Channels.Message" />
+         to create a custom message type, and then use the methods provided by this class to convert it to an untyped <see cref="T:System.ServiceModel.Channels.Message" />
 
         
 
@@ -62,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.TypedMessageConverter" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.TypedMessageConverter" />
 
             
 
@@ -98,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a static method that returns a <see
-             cref="T:System.ServiceModel.Description.TypedMessageConverter" />
+            >Represents a static method that returns a <see cref="T:System.ServiceModel.Description.TypedMessageConverter" />
 
             
 
@@ -109,8 +103,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Description.TypedMessageConverter" />
+            >A <see cref="T:System.ServiceModel.Description.TypedMessageConverter" />
 
             
 
@@ -118,7 +111,11 @@
           >
         </returns>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -156,8 +153,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a static method that returns a <see
-             cref="T:System.ServiceModel.Description.TypedMessageConverter" />
+            >Represents a static method that returns a <see cref="T:System.ServiceModel.Description.TypedMessageConverter" />
 
             
 
@@ -167,8 +163,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Description.TypedMessageConverter" />
+            >A <see cref="T:System.ServiceModel.Description.TypedMessageConverter" />
 
             
 
@@ -176,19 +171,26 @@
           >
         </returns>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An action string.</param
         >
         <param name="formatterAttribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ServiceModel.DataContractFormatAttribute" />
+          A <see cref="T:System.ServiceModel.DataContractFormatAttribute" />
 
           
 
@@ -226,8 +228,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a static method that returns a <see
-             cref="T:System.ServiceModel.Description.TypedMessageConverter" />
+            >Represents a static method that returns a <see cref="T:System.ServiceModel.Description.TypedMessageConverter" />
 
             
 
@@ -237,8 +238,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Description.TypedMessageConverter" />
+            >A <see cref="T:System.ServiceModel.Description.TypedMessageConverter" />
 
             
 
@@ -246,19 +246,26 @@
           >
         </returns>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An action string.</param
         >
         <param name="formatterAttribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ServiceModel.XmlSerializerFormatAttribute" />
+          A <see cref="T:System.ServiceModel.XmlSerializerFormatAttribute" />
 
           
 
@@ -293,8 +300,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a static method that returns a <see
-             cref="T:System.ServiceModel.Description.TypedMessageConverter" />
+            >Represents a static method that returns a <see cref="T:System.ServiceModel.Description.TypedMessageConverter" />
 
             
 
@@ -304,8 +310,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Description.TypedMessageConverter" />
+            >A <see cref="T:System.ServiceModel.Description.TypedMessageConverter" />
 
             
 
@@ -313,14 +318,22 @@
           >
         </returns>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An action string.</param
         >
         <param name="defaultNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -359,8 +372,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a static method that returns a <see
-             cref="T:System.ServiceModel.Description.TypedMessageConverter" />
+            >Represents a static method that returns a <see cref="T:System.ServiceModel.Description.TypedMessageConverter" />
 
             
 
@@ -370,8 +382,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Description.TypedMessageConverter" />
+            >A <see cref="T:System.ServiceModel.Description.TypedMessageConverter" />
 
             
 
@@ -379,26 +390,37 @@
           >
         </returns>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An action string.</param
         >
         <param name="defaultNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A namespace.</param
         >
         <param name="formatterAttribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ServiceModel.DataContractFormatAttribute" />
+          A <see cref="T:System.ServiceModel.DataContractFormatAttribute" />
 
           
 
@@ -437,8 +459,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a static method that returns a <see
-             cref="T:System.ServiceModel.Description.TypedMessageConverter" />
+            >Represents a static method that returns a <see cref="T:System.ServiceModel.Description.TypedMessageConverter" />
 
             
 
@@ -448,8 +469,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Description.TypedMessageConverter" />
+            >A <see cref="T:System.ServiceModel.Description.TypedMessageConverter" />
 
             
 
@@ -457,26 +477,37 @@
           >
         </returns>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An action string.</param
         >
         <param name="defaultNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A namespace.</param
         >
         <param name="formatterAttribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ServiceModel.XmlSerializerFormatAttribute" />
+          A <see cref="T:System.ServiceModel.XmlSerializerFormatAttribute" />
 
           
 
@@ -507,13 +538,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method takes an untyped indigo1 message, that is, an instance of <see
-             cref="T:System.ServiceModel.Channels.Message" />
+            >This method takes an untyped indigo1 message, that is, an instance of <see cref="T:System.ServiceModel.Channels.Message" />
 
             
 
-            , and converts it into a typed message, that is, an instance of a type that is annotated by the <see
-             cref="T:System.ServiceModel.MessageContractAttribute" />
+            , and converts it into a typed message, that is, an instance of a type that is annotated by the <see cref="T:System.ServiceModel.MessageContractAttribute" />
 
             
 
@@ -523,8 +552,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a typed message from the specified <see
-             cref="T:System.ServiceModel.Channels.Message" />
+            >Creates a typed message from the specified <see cref="T:System.ServiceModel.Channels.Message" />
 
             
 
@@ -536,7 +564,11 @@
           <para>An object that is a typed message.</para>
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -568,8 +600,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.ServiceModel.Channels.Message" />
+            >Creates a <see cref="T:System.ServiceModel.Channels.Message" />
 
             
 
@@ -579,8 +610,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Channels.Message" />
+            >A <see cref="T:System.ServiceModel.Channels.Message" />
 
             
 
@@ -588,7 +618,11 @@
           >
         </returns>
         <param name="typedMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -621,8 +655,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.ServiceModel.Channels.Message" />
+            >Creates a <see cref="T:System.ServiceModel.Channels.Message" />
 
             
 
@@ -632,8 +665,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Channels.Message" />
+            >A <see cref="T:System.ServiceModel.Channels.Message" />
 
             
 
@@ -641,19 +673,26 @@
           >
         </returns>
         <param name="typedMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A typed message.</param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ServiceModel.Channels.MessageVersion" />
+          A <see cref="T:System.ServiceModel.Channels.MessageVersion" />
 
           
 

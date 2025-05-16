@@ -31,31 +31,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Many interfaces and classes in the <see
-         cref="N:System.Collections.Generic" />
+        >Many interfaces and classes in the <see cref="N:System.Collections.Generic" />
 
         
 
-         namespace inherit the <see
-         cref="T:System.Collections.Generic.IEnumerable`1" />
+         namespace inherit the <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
         
 
-         interface to implement enumerators. For an example, see the <see
-         cref="T:System.Collections.Generic.ICollection`1" />
+         interface to implement enumerators. For an example, see the <see cref="T:System.Collections.Generic.ICollection`1" />
 
         
 
          interface.</para
       >
       <para
-        >For a sample that demonstrates implementing the <see
-         cref="T:System.Collections.Generic.IEnumerable`1" />
+        >For a sample that demonstrates implementing the <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
         
 
          interface, see <see
-
           cref="http://code.msdn.microsoft.com/Generics-Sample-C-9b41a192/sourcecode?fileId=46476&amp;pathId=1364935593"
           >Generics Sample</see
         >
@@ -96,18 +91,15 @@
           <para>The foreach statement of the C# language (for each in C++, For Each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
           <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
           <para
-            >Initially, the enumerator is positioned before the first element in the collection. At this position, <see
-             cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+            >Initially, the enumerator is positioned before the first element in the collection. At this position, <see cref="P:System.Collections.Generic.IEnumerator`1.Current" />
 
             
 
-             is undefined. Therefore, you must call <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is undefined. Therefore, you must call <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             to advance the enumerator to the first element of the collection before reading the value of <see
-             cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+             to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.Generic.IEnumerator`1.Current" />
 
             
 
@@ -118,51 +110,42 @@
 
             
 
-             returns the same object until <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns the same object until <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             is called. <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             sets <see
-             cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+             sets <see cref="P:System.Collections.Generic.IEnumerator`1.Current" />
 
             
 
              to the next element.</para
           >
           <para
-            >If <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returns false. When the enumerator is at this position, subsequent calls to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             also return false. If the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returned false, <see
-             cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+             returned false, <see cref="P:System.Collections.Generic.IEnumerator`1.Current" />
 
             
 
-             is undefined. You cannot set <see
-             cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+             is undefined. You cannot set <see cref="P:System.Collections.Generic.IEnumerator`1.Current" />
 
             
 
@@ -171,8 +154,7 @@
           <para>An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and its behavior is undefined.</para>
           <para>The enumerator does not have exclusive access to the collection; therefore, enumerating through a collection is intrinsically not a thread-safe procedure. To guarantee thread safety during enumeration, you can lock the collection during the entire enumeration.  To allow the collection to be accessed by multiple threads for reading and writing, you must implement your own synchronization.</para>
           <para
-            >Default implementations of collections in the <see
-             cref="N:System.Collections.Generic" />
+            >Default implementations of collections in the <see cref="N:System.Collections.Generic" />
 
             
 
@@ -186,8 +168,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.Generic.IEnumerator`1" />
+            >A <see cref="T:System.Collections.Generic.IEnumerator`1" />
 
             
 

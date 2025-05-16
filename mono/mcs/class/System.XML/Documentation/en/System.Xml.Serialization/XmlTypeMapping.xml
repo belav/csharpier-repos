@@ -25,38 +25,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.XmlTypeMapping" />
+        >The <see cref="T:System.Xml.Serialization.XmlTypeMapping" />
 
         
 
-         class is used to serialize an object as encoded SOAP XML. The resulting XML conforms to section 5 of the World Wide Web Consortium (www.w3.org) document, "Simple Object Access Protocol (SOAP) 1.1". Create an <see
-         cref="T:System.Xml.Serialization.XmlTypeMapping" />
+         class is used to serialize an object as encoded SOAP XML. The resulting XML conforms to section 5 of the World Wide Web Consortium (www.w3.org) document, "Simple Object Access Protocol (SOAP) 1.1". Create an <see cref="T:System.Xml.Serialization.XmlTypeMapping" />
 
         
 
-         by calling the <see
-         cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportTypeMapping(System.Type)" />
+         by calling the <see cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportTypeMapping(System.Type)" />
 
         
 
-         method of the <see
-         cref="T:System.Xml.Serialization.SoapReflectionImporter" />
+         method of the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" />
 
         
 
-         class. Use the <see
-         cref="T:System.Xml.Serialization.XmlTypeMapping" />
+         class. Use the <see cref="T:System.Xml.Serialization.XmlTypeMapping" />
 
         
 
-         to construct an instance of the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         to construct an instance of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         class. To control the serialization, use one of the attributes listed in <format
-         type="text/html">
+         class. To control the serialization, use one of the attributes listed in <format type="text/html">
           <a href="93EE258C-9C0F-4A08-897C-C10DB7A00F91"
             >[&lt;topic://cpconAttributesThatControlSOAPEncodedSerialization&gt;]</a
           >
@@ -144,8 +137,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The type name is the class name of the mapped object.</para>
           <para
-            >You can also see the fully qualified name by examining the <see
-             cref="P:System.Xml.Serialization.XmlTypeMapping.TypeFullName" />
+            >You can also see the fully qualified name by examining the <see cref="P:System.Xml.Serialization.XmlTypeMapping.TypeFullName" />
 
             
 
@@ -175,13 +167,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To set an alternate element name of an object, apply a <see
-             cref="T:System.Xml.Serialization.SoapTypeAttribute" />
+            >To set an alternate element name of an object, apply a <see cref="T:System.Xml.Serialization.SoapTypeAttribute" />
 
             
 
-             to the class, and set the <see
-             cref="P:System.Xml.Serialization.SoapTypeAttribute.TypeName" />
+             to the class, and set the <see cref="P:System.Xml.Serialization.SoapTypeAttribute.TypeName" />
 
             
 
@@ -211,13 +201,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To set a namespace name of an object, apply a <see
-             cref="T:System.Xml.Serialization.SoapTypeAttribute" />
+            >To set a namespace name of an object, apply a <see cref="T:System.Xml.Serialization.SoapTypeAttribute" />
 
             
 
-             to the class, and set the <see
-             cref="P:System.Xml.Serialization.SoapTypeAttribute.Namespace" />
+             to the class, and set the <see cref="P:System.Xml.Serialization.SoapTypeAttribute.Namespace" />
 
             
 

@@ -41,18 +41,15 @@
          can be used to represent a try/ catch block of code.</para
       >
       <para
-        >The <see
-         cref="P:System.CodeDom.CodeTryCatchFinallyStatement.TryStatements" />
+        >The <see cref="P:System.CodeDom.CodeTryCatchFinallyStatement.TryStatements" />
 
         
 
-         property contains the statements to execute within a try block. The <see
-         cref="P:System.CodeDom.CodeTryCatchFinallyStatement.CatchClauses" />
+         property contains the statements to execute within a try block. The <see cref="P:System.CodeDom.CodeTryCatchFinallyStatement.CatchClauses" />
 
         
 
-         property contains the catch clauses to handle caught exceptions. The <see
-         cref="P:System.CodeDom.CodeTryCatchFinallyStatement.FinallyStatements" />
+         property contains the catch clauses to handle caught exceptions. The <see cref="P:System.CodeDom.CodeTryCatchFinallyStatement.FinallyStatements" />
 
         
 
@@ -60,13 +57,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Not all languages support try/catch blocks. Call the <see
-           cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
+          >Not all languages support try/catch blocks. Call the <see cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
 
           
 
-           method with the <see
-           cref="F:System.CodeDom.Compiler.GeneratorSupport.TryCatchStatements" />
+           method with the <see cref="F:System.CodeDom.Compiler.GeneratorSupport.TryCatchStatements" />
 
           
 
@@ -99,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTryCatchFinallyStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTryCatchFinallyStatement" />
 
             
 
@@ -134,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTryCatchFinallyStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTryCatchFinallyStatement" />
 
             
 
@@ -143,24 +136,30 @@
           >
         </summary>
         <param name="tryStatements">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.CodeDom.CodeStatement" />
+          An array of <see cref="T:System.CodeDom.CodeStatement" />
 
           
 
            objects that indicate the statements to try. </param
         >
         <param name="catchClauses">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.CodeDom.CodeCatchClause" />
+          An array of <see cref="T:System.CodeDom.CodeCatchClause" />
 
           
 
@@ -194,8 +193,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTryCatchFinallyStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTryCatchFinallyStatement" />
 
             
 
@@ -203,36 +201,45 @@
           >
         </summary>
         <param name="tryStatements">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.CodeDom.CodeStatement" />
+          An array of <see cref="T:System.CodeDom.CodeStatement" />
 
           
 
            objects that indicate the statements to try. </param
         >
         <param name="catchClauses">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.CodeDom.CodeCatchClause" />
+          An array of <see cref="T:System.CodeDom.CodeCatchClause" />
 
           
 
            objects that indicate the clauses to catch. </param
         >
         <param name="finallyStatements">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.CodeDom.CodeStatement" />
+          An array of <see cref="T:System.CodeDom.CodeStatement" />
 
           
 

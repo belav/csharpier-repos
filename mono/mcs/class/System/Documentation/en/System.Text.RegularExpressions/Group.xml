@@ -26,43 +26,36 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A capturing group can capture zero, one, or more strings in a single match because of quantifiers. (For more information, see <format
-         type="text/html">
+        >A capturing group can capture zero, one, or more strings in a single match because of quantifiers. (For more information, see <format type="text/html">
           <a href="36b81212-6511-49ed-a8f1-ff080415312f">Quantifiers</a>
         </format>
 
         
 
-        .) All the substrings matched by a single capturing group are available from the <see
-         cref="P:System.Text.RegularExpressions.Group.Captures" />
+        .) All the substrings matched by a single capturing group are available from the <see cref="P:System.Text.RegularExpressions.Group.Captures" />
 
         
 
-         property. Information about the last substring captured can be accessed directly from the Value and Index properties. (That is, the <see
-         cref="T:System.Text.RegularExpressions.Group" />
+         property. Information about the last substring captured can be accessed directly from the Value and Index properties. (That is, the <see cref="T:System.Text.RegularExpressions.Group" />
 
         
 
-         instance is equivalent to the last item of the collection returned by the <see
-         cref="P:System.Text.RegularExpressions.Group.Captures" />
+         instance is equivalent to the last item of the collection returned by the <see cref="P:System.Text.RegularExpressions.Group.Captures" />
 
         
 
          property, which reflects the last capture made by the capturing group.)</para
       >
       <para
-        >An example helps to clarify this relationship between a <see
-         cref="T:System.Text.RegularExpressions.Group" />
+        >An example helps to clarify this relationship between a <see cref="T:System.Text.RegularExpressions.Group" />
 
         
 
-         object and the <see
-         cref="T:System.Text.RegularExpressions.CaptureCollection" />
+         object and the <see cref="T:System.Text.RegularExpressions.CaptureCollection" />
 
         
 
-         that is returned by the <see
-         cref="P:System.Text.RegularExpressions.Group.Captures" />
+         that is returned by the <see cref="P:System.Text.RegularExpressions.Group.Captures" />
 
         
 
@@ -129,28 +122,23 @@
         </item>
       </list>
       <para
-        >In this regular expression pattern, the subpattern (\w+?) is designed to match multiple words within a sentence. However, the value of the <see
-         cref="T:System.Text.RegularExpressions.Group" />
+        >In this regular expression pattern, the subpattern (\w+?) is designed to match multiple words within a sentence. However, the value of the <see cref="T:System.Text.RegularExpressions.Group" />
 
         
 
-         object represents only the last match that (\w+?) captures, whereas the <see
-         cref="P:System.Text.RegularExpressions.Group.Captures" />
+         object represents only the last match that (\w+?) captures, whereas the <see cref="P:System.Text.RegularExpressions.Group.Captures" />
 
         
 
-         property returns a <see
-         cref="T:System.Text.RegularExpressions.CaptureCollection" />
+         property returns a <see cref="T:System.Text.RegularExpressions.CaptureCollection" />
 
         
 
-         that represents all captured text. As the output shows, the <see
-         cref="T:System.Text.RegularExpressions.CaptureCollection" />
+         that represents all captured text. As the output shows, the <see cref="T:System.Text.RegularExpressions.CaptureCollection" />
 
         
 
-         for the second capturing group contains four objects. The last of these corresponds to the <see
-         cref="T:System.Text.RegularExpressions.Group" />
+         for the second capturing group contains four objects. The last of these corresponds to the <see cref="T:System.Text.RegularExpressions.Group" />
 
         
 
@@ -187,28 +175,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a quantifier is not applied to a capturing group, the collection returned by the <see
-             cref="P:System.Text.RegularExpressions.Group.Captures" />
+            >If a quantifier is not applied to a capturing group, the collection returned by the <see cref="P:System.Text.RegularExpressions.Group.Captures" />
 
             
 
-             property contains a single <see
-             cref="T:System.Text.RegularExpressions.Capture" />
+             property contains a single <see cref="T:System.Text.RegularExpressions.Capture" />
 
             
 
-             object that provides information about the same substring as the <see
-             cref="T:System.Text.RegularExpressions.Group" />
+             object that provides information about the same substring as the <see cref="T:System.Text.RegularExpressions.Group" />
 
             
 
-             object. This is illustrated in the following example. It defines a regular expression, \b(\w+)\b, that extracts a single word from a sentence. The <see
-             cref="T:System.Text.RegularExpressions.Group" />
+             object. This is illustrated in the following example. It defines a regular expression, \b(\w+)\b, that extracts a single word from a sentence. The <see cref="T:System.Text.RegularExpressions.Group" />
 
             
 
-             object captures the word "This", and the single object in the <see
-             cref="T:System.Text.RegularExpressions.CaptureCollection" />
+             object captures the word "This", and the single object in the <see cref="T:System.Text.RegularExpressions.CaptureCollection" />
 
             
 
@@ -216,28 +199,23 @@
           >
           <para>code reference: System.Text.RegularExpressions.Group.Captures#1</para>
           <para
-            >The real utility of the <see
-             cref="P:System.Text.RegularExpressions.Group.Captures" />
+            >The real utility of the <see cref="P:System.Text.RegularExpressions.Group.Captures" />
 
             
 
-             property occurs when a quantifier is applied to a capturing group so that the group captures multiple substrings in a single regular expression. In this case, the <see
-             cref="T:System.Text.RegularExpressions.Group" />
+             property occurs when a quantifier is applied to a capturing group so that the group captures multiple substrings in a single regular expression. In this case, the <see cref="T:System.Text.RegularExpressions.Group" />
 
             
 
-             object contains information about the last captured substring, whereas the <see
-             cref="P:System.Text.RegularExpressions.Group.Captures" />
+             object contains information about the last captured substring, whereas the <see cref="P:System.Text.RegularExpressions.Group.Captures" />
 
             
 
-             property contains information about all the substrings captured by the group. In the following example, the regular expression \b(\w+\s*)+\. matches an entire sentence that ends in a period. The group (\w+\s*)+ captures the individual words in the collection. Because the <see
-             cref="T:System.Text.RegularExpressions.Group" />
+             property contains information about all the substrings captured by the group. In the following example, the regular expression \b(\w+\s*)+\. matches an entire sentence that ends in a period. The group (\w+\s*)+ captures the individual words in the collection. Because the <see cref="T:System.Text.RegularExpressions.Group" />
 
             
 
-             collection contains information only about the last captured substring, it captures the last word in the sentence, "sentence". However, each word captured by the group is available from the collection returned by the <see
-             cref="P:System.Text.RegularExpressions.Group.Captures" />
+             collection contains information only about the last captured substring, it captures the last word in the sentence, "sentence". However, each word captured by the group is available from the collection returned by the <see cref="P:System.Text.RegularExpressions.Group.Captures" />
 
             
 
@@ -248,8 +226,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of all the captures matched by the capturing group, in innermost-leftmost-first order (or innermost-rightmost-first order if the regular expression is modified with the <see
-             cref="F:System.Text.RegularExpressions.RegexOptions.RightToLeft" />
+            >Gets a collection of all the captures matched by the capturing group, in innermost-leftmost-first order (or innermost-rightmost-first order if the regular expression is modified with the <see cref="F:System.Text.RegularExpressions.RegexOptions.RightToLeft" />
 
             
 
@@ -319,12 +296,15 @@
           <para>A regular expression Group object. </para>
         </returns>
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The input <see
-           cref="T:System.Text.RegularExpressions.Group" />
+          The input <see cref="T:System.Text.RegularExpressions.Group" />
 
           
 

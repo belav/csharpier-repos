@@ -19,46 +19,38 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.NetworkInformation.Ping" />
+        >The <see cref="T:System.Net.NetworkInformation.Ping" />
 
         
 
-         class throws this exception to indicate that while sending an Internet Control Message Protocol (ICMP) Echo request, a method called by the <see
-         cref="T:System.Net.NetworkInformation.Ping" />
+         class throws this exception to indicate that while sending an Internet Control Message Protocol (ICMP) Echo request, a method called by the <see cref="T:System.Net.NetworkInformation.Ping" />
 
         
 
-         class threw an unhandled exception. Applications should check the inner exception of a <see
-         cref="T:System.Net.NetworkInformation.PingException" />
+         class threw an unhandled exception. Applications should check the inner exception of a <see cref="T:System.Net.NetworkInformation.PingException" />
 
         
 
          object to identify the problem. </para
       >
       <para
-        >The <see
-         cref="T:System.Net.NetworkInformation.Ping" />
+        >The <see cref="T:System.Net.NetworkInformation.Ping" />
 
         
 
-         class does not throw this exception if the ICMP Echo request fails because of network, ICMP, or destination errors. For such errors, the <see
-         cref="T:System.Net.NetworkInformation.Ping" />
+         class does not throw this exception if the ICMP Echo request fails because of network, ICMP, or destination errors. For such errors, the <see cref="T:System.Net.NetworkInformation.Ping" />
 
         
 
-         class returns a <see
-         cref="T:System.Net.NetworkInformation.PingReply" />
+         class returns a <see cref="T:System.Net.NetworkInformation.PingReply" />
 
         
 
-         object with the relevant <see
-         cref="T:System.Net.NetworkInformation.IPStatus" />
+         object with the relevant <see cref="T:System.Net.NetworkInformation.IPStatus" />
 
         
 
-         value set in the <see
-         cref="P:System.Net.NetworkInformation.PingReply.Status" />
+         value set in the <see cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
         
 
@@ -68,13 +60,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The exception that is thrown when a <see
-         cref="Overload:System.Net.NetworkInformation.Ping.Send" />
+        >The exception that is thrown when a <see cref="Overload:System.Net.NetworkInformation.Ping.Send" />
 
         
 
-         or <see
-         cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+         or <see cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
 
         
 
@@ -102,18 +92,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Exception.Message" />
+            >This constructor initializes the <see cref="P:System.Exception.Message" />
 
             
 
-             property with the text in the <paramref
-             name="message" />
+             property with the text in the <paramref name="message" />
 
             
 
-             parameter. The <see
-             cref="P:System.Exception.InnerException" />
+             parameter. The <see cref="P:System.Exception.InnerException" />
 
             
 
@@ -123,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.NetworkInformation.PingException" />
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.PingException" />
 
             
 
@@ -132,12 +118,15 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -168,8 +157,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called during deserialization to reconstitute a previously serialized <see
-             cref="T:System.Net.NetworkInformation.PingException" />
+            >This constructor is called during deserialization to reconstitute a previously serialized <see cref="T:System.Net.NetworkInformation.PingException" />
 
             
 
@@ -179,8 +167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.NetworkInformation.PingException" />
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.PingException" />
 
             
 
@@ -188,19 +175,26 @@
           >
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data. </param
         >
         <param name="streamingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -231,23 +225,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Exception.Message" />
+            >This constructor initializes the <see cref="P:System.Exception.Message" />
 
             
 
-             property with the text in the <paramref
-             name="message" />
+             property with the text in the <paramref name="message" />
 
             
 
-             parameter, and the <see
-             cref="P:System.Exception.InnerException" />
+             parameter, and the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property with the <paramref
-             name="innerException" />
+             property with the <paramref name="innerException" />
 
             
 
@@ -257,8 +247,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.NetworkInformation.PingException" />
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.PingException" />
 
             
 
@@ -266,19 +255,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            that describes the error.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

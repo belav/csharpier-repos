@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To improve the performance of XML serialization, you can generate assemblies before serialization using the <format
-         type="text/html">
+        >To improve the performance of XML serialization, you can generate assemblies before serialization using the <format type="text/html">
           <a href="cc1d1f1c-fb26-4be9-885a-3fe84c81cec6"
             >XML Serializer Generator Tool (Sgen.exe)</a
           >
@@ -31,13 +30,11 @@
 
         
 
-        . When such an assembly is loaded, the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        . When such an assembly is loaded, the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         uses the properties of the <see
-         cref="T:System.Xml.Serialization.XmlSerializerImplementation" />
+         uses the properties of the <see cref="T:System.Xml.Serialization.XmlSerializerImplementation" />
 
         
 
@@ -68,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlSerializerImplementation" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializerImplementation" />
 
             
 
@@ -107,12 +103,15 @@
           <para>true if the type can be serialized; otherwise, false.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -150,8 +149,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of a type derived from the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >An instance of a type derived from the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -159,12 +157,15 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 

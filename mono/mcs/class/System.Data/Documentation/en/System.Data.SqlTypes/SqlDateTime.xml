@@ -32,18 +32,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the date and time data ranging in value from January 1, 1753 to December 31, 9999 to an accuracy of 3.33 milliseconds to be stored in or retrieved from a database. The <see
-         cref="T:System.Data.SqlTypes.SqlDateTime" />
+        >Represents the date and time data ranging in value from January 1, 1753 to December 31, 9999 to an accuracy of 3.33 milliseconds to be stored in or retrieved from a database. The <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
         
 
-         structure has a different underlying data structure from its corresponding .NET Framework type, <see
-         cref="T:System.DateTime" />
+         structure has a different underlying data structure from its corresponding .NET Framework type, <see cref="T:System.DateTime" />
 
         
 
-        , which can represent any time between 12:00:00 AM 1/1/0001 and 11:59:59 PM 12/31/9999, to the accuracy of 100 nanoseconds. <see
-         cref="T:System.Data.SqlTypes.SqlDateTime" />
+        , which can represent any time between 12:00:00 AM 1/1/0001 and 11:59:59 PM 12/31/9999, to the accuracy of 100 nanoseconds. <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
         
 
@@ -64,13 +61,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
-             structure using the specified <see
-             cref="T:System.DateTime" />
+             structure using the specified <see cref="T:System.DateTime" />
 
             
 
@@ -78,7 +73,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -103,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -112,14 +110,22 @@
           >
         </summary>
         <param name="dayTicks">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An integer value that represents the date as ticks. </param
         >
         <param name="timeTicks">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -145,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -154,36 +159,45 @@
           >
         </summary>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer representing the year of the of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An integer representing the year of the of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="month">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value representing the month of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An integer value representing the month of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="day">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value representing the day number of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An integer value representing the day number of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
@@ -215,8 +229,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -224,72 +237,90 @@
           >
         </summary>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value representing the year of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An integer value representing the year of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="month">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value representing the month of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An integer value representing the month of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="day">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value representing the day of the month of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An integer value representing the day of the month of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="hour">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value representing the hour of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An integer value representing the hour of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="minute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value representing the minute of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An integer value representing the minute of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="second">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value representing the second of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An integer value representing the second of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
@@ -322,8 +353,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -331,84 +361,105 @@
           >
         </summary>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value representing the year of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An integer value representing the year of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="month">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value representing the month of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An integer value representing the month of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="day">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value representing the day of the month of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An integer value representing the day of the month of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="hour">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value representing the hour of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An integer value representing the hour of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="minute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value representing the minute of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An integer value representing the minute of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="second">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value representing the second of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An integer value representing the second of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="millisecond">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An double value representing the millisecond of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An double value representing the millisecond of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
@@ -441,8 +492,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -450,84 +500,105 @@
           >
         </summary>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value representing the year of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An integer value representing the year of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="month">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value representing the month of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An integer value representing the month of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="day">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value representing the day of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An integer value representing the day of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="hour">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value representing the hour of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An integer value representing the hour of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="minute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value representing the minute of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An integer value representing the minute of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="second">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value representing the second of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An integer value representing the second of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="bilisecond">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value representing the bilisecond (billionth of a second) of the new <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          An integer value representing the bilisecond (billionth of a second) of the new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
@@ -560,8 +631,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Adds a <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -571,8 +641,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -580,19 +649,26 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            value.</param
         >
         <param name="t">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -620,13 +696,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares this <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Compares this <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
-             structure to the supplied <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+             structure to the supplied <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -653,8 +727,7 @@
               </term>
               <description>
                 <para
-                  >This instance is less than <see
-                   cref="T:System.Data.SqlTypes.SqlDateTime" />
+                  >This instance is less than <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
                   
 
@@ -668,8 +741,7 @@
               </term>
               <description>
                 <para
-                  >This instance is the same as <see
-                   cref="T:System.Data.SqlTypes.SqlDateTime" />
+                  >This instance is the same as <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
                   
 
@@ -683,8 +755,7 @@
               </term>
               <description>
                 <para
-                  >This instance is greater than <see
-                   cref="T:System.Data.SqlTypes.SqlDateTime" />
+                  >This instance is greater than <see cref="T:System.Data.SqlTypes.SqlDateTime" />
                 </para>
                 <para>-or- </para>
                 <para>
@@ -699,12 +770,15 @@
           </list>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          The <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
@@ -726,13 +800,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares this <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Compares this <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
-             structure to the supplied <see
-             cref="T:System.Object" />
+             structure to the supplied <see cref="T:System.Object" />
 
             
 
@@ -782,12 +854,15 @@
           </list>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -811,8 +886,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of ticks representing the date of this <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Gets the number of ticks representing the date of this <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -839,13 +913,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares the supplied object parameter to the <see
-             cref="P:System.Data.SqlTypes.SqlDateTime.Value" />
+            >Compares the supplied object parameter to the <see cref="P:System.Data.SqlTypes.SqlDateTime.Value" />
 
             
 
-             property of the <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+             property of the <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -855,8 +927,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the object is an instance of <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >true if the object is an instance of <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -864,7 +935,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -894,8 +969,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison of two <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Performs a logical comparison of two <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -907,24 +981,30 @@
           <para>true if the two values are equal. Otherwise, false.</para>
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
@@ -979,8 +1059,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the XML Schema definition language (XSD) of the specified <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+            >Returns the XML Schema definition language (XSD) of the specified <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
@@ -990,8 +1069,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string value that indicates the XSD of the specified <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+            >A string value that indicates the XSD of the specified <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
@@ -999,12 +1077,15 @@
           >
         </returns>
         <param name="schemaSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Schema.XmlSchemaSet" />
+          A <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
           
 
@@ -1030,8 +1111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two instances of <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -1041,38 +1121,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is greater than the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is greater than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -1080,24 +1153,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
@@ -1127,8 +1206,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two instances of <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -1138,38 +1216,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is greater than or equal to the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is greater than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -1177,24 +1248,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
@@ -1217,8 +1294,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="f18b288f-b265-4bbe-957f-c6833c0645ef">Handling Null Values (ADO.NET)</a>
             </format>
 
@@ -1230,8 +1306,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether this <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Indicates whether this <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -1262,8 +1337,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two instances of <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -1273,38 +1347,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is less than the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is less than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -1312,24 +1379,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
@@ -1359,8 +1432,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two instances of <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -1370,38 +1442,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is less than or equal to the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is less than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -1409,24 +1474,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
@@ -1452,8 +1523,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The maximum valid date for a <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >The maximum valid date for a <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -1463,8 +1533,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the maximum valid date value for a <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Represents the maximum valid date value for a <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -1491,8 +1560,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The minimum valid date for a <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >The minimum valid date for a <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -1502,8 +1570,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the minimum valid date value for a <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Represents the minimum valid date value for a <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -1534,8 +1601,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison of two instances of <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Performs a logical comparison of two instances of <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -1545,38 +1611,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the two instances are not equal or <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the two instances are not equal or <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-             if the two instances are equal. If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+             if the two instances are equal. If either instance of <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -1584,24 +1643,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
@@ -1627,13 +1692,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Null functions as a constant for the <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Null functions as a constant for the <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
-             structure. For more information, see <format
-             type="text/html">
+             structure. For more information, see <format type="text/html">
               <a href="f18b288f-b265-4bbe-957f-c6833c0645ef">Handling Null Values (ADO.NET)</a>
             </format>
 
@@ -1645,13 +1708,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a <see
-             cref="T:System.DBNull" />
+            >Represents a <see cref="T:System.DBNull" />
 
             
 
-             that can be assigned to this instance of the <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+             that can be assigned to this instance of the <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -1686,18 +1747,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the period of time indicated by the supplied <see
-             cref="T:System.TimeSpan" />
+            >Adds the period of time indicated by the supplied <see cref="T:System.TimeSpan" />
 
             
 
-             parameter, <paramref
-             name="t" />
+             parameter, <paramref name="t" />
 
             
 
-            , to the supplied <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            , to the supplied <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -1707,23 +1765,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
-            . If either argument is <see
-             cref="F:System.Data.SqlTypes.SqlDateTime.Null" />
+            . If either argument is <see cref="F:System.Data.SqlTypes.SqlDateTime.Null" />
 
             
 
-            , the new <see
-             cref="P:System.Data.SqlTypes.SqlDateTime.Value" />
+            , the new <see cref="P:System.Data.SqlTypes.SqlDateTime.Value" />
 
             
 
-             is <see
-             cref="F:System.Data.SqlTypes.SqlDateTime.Null" />
+             is <see cref="F:System.Data.SqlTypes.SqlDateTime.Null" />
 
             
 
@@ -1731,24 +1785,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="t">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.TimeSpan" />
+          A <see cref="T:System.TimeSpan" />
 
           
 
@@ -1778,8 +1838,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison of two <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Performs a logical comparison of two <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -1791,24 +1850,30 @@
           <para>true if the two values are equal. Otherwise, false.</para>
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
@@ -1884,8 +1949,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two instances of <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -1895,38 +1959,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is greater than the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is greater than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -1934,24 +1991,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
@@ -1981,8 +2044,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two instances of <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -1992,38 +2054,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is greater than or equal to the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is greater than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -2031,24 +2086,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
@@ -2101,8 +2162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison of two instances of <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Performs a logical comparison of two instances of <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -2112,38 +2172,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the two instances are not equal or <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the two instances are not equal or <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-             if the two instances are equal. If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+             if the two instances are equal. If either instance of <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -2151,24 +2204,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
@@ -2198,8 +2257,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two instances of <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -2209,38 +2267,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is less than the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is less than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -2248,24 +2299,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
@@ -2295,8 +2352,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two instances of <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -2306,38 +2362,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is less than or equal to the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is less than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -2345,24 +2394,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
@@ -2392,18 +2447,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Subtracts the supplied <see
-             cref="T:System.TimeSpan" />
+            >Subtracts the supplied <see cref="T:System.TimeSpan" />
 
             
 
-             structure, <paramref
-             name="t" />
+             structure, <paramref name="t" />
 
             
 
-            , from the supplied <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            , from the supplied <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -2413,8 +2465,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -2422,24 +2473,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            structure. </param
         >
         <param name="t">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.TimeSpan" />
+          A <see cref="T:System.TimeSpan" />
 
           
 
@@ -2464,13 +2521,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the specified <see
-             cref="T:System.String" />
+            >Converts the specified <see cref="T:System.String" />
 
             
 
-             representation of a date and time to its <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+             representation of a date and time to its <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -2480,8 +2535,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -2489,7 +2543,11 @@
           >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2588,8 +2646,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Subtracts the specified Timespan from this <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Subtracts the specified Timespan from this <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -2599,8 +2656,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -2608,19 +2664,26 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlDateTime" />
+          A <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
           
 
            value.</param
         >
         <param name="t">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2675,7 +2738,11 @@
           <para>This member supports the .NET Framework infrastructure and is not intended to be used directly from your code.</para>
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2705,7 +2772,11 @@
           <para>This member supports the .NET Framework infrastructure and is not intended to be used directly from your code.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2725,8 +2796,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of ticks representing the time of this <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Gets the number of ticks representing the time of this <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -2754,13 +2824,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
-             structure to <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             structure to <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -2770,8 +2838,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A SqlString structure whose value is a string representing the date and time that is contained in this <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >A SqlString structure whose value is a string representing the date and time that is contained in this <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -2796,13 +2863,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
-             structure to a <see
-             cref="T:System.String" />
+             structure to a <see cref="T:System.String" />
 
             
 
@@ -2812,13 +2877,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A String representing the <see
-             cref="P:System.Data.SqlTypes.SqlDateTime.Value" />
+            >A String representing the <see cref="P:System.Data.SqlTypes.SqlDateTime.Value" />
 
             
 
-             property of this <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+             property of this <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -2843,8 +2906,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+            >Gets the value of the <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 

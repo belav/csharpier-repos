@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <clause number="21.3" title="Enum members">
   <paragraph
-    >The body of an enum type declaration defines zero or more enum members, which are the named constants of the enum type. No two enum members can have the same name. <grammar_production
-    >
+    >The body of an enum type declaration defines zero or more enum members, which are the named constants of the enum type. No two enum members can have the same name. <grammar_production>
       <name>
-        <non_terminal where="21.3">enum-member-declaration</non_terminal>
+        <non_terminal where="21.3"
+          >enum-member-declaration</non_terminal
+        >
 
         
 
@@ -13,8 +14,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="21.3">enum-member-declaration</non_terminal>
       </rhs>
       <rhs>
@@ -30,8 +30,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="24.2">attributes</non_terminal>
         <opt />
         <non_terminal where="9.4.2">identifier</non_terminal>
@@ -47,9 +46,7 @@
   </paragraph>
   <paragraph
     >Each enum member has an associated constant value. The type of this value is the underlying type for the containing enum. The constant value for each enum member must be in the range of the underlying type for the enum. <example
-
-      >[Example: The example <code_example
-      >
+      >[Example: The example <code_example>
         <![CDATA[
 enum Color: uint  
 {  
@@ -62,8 +59,7 @@ enum Color: uint
 
       
 
-      results in a compile-time error because the constant values -1, -2, and -3 are not in the range of the underlying integral type <keyword
-      >uint</keyword>
+      results in a compile-time error because the constant values -1, -2, and -3 are not in the range of the underlying integral type <keyword>uint</keyword>
 
       
 
@@ -72,9 +68,7 @@ enum Color: uint
   </paragraph>
   <paragraph
     >Multiple enum members may share the same associated value. <example
-
-      >[Example: The example <code_example
-      >
+      >[Example: The example <code_example>
         <![CDATA[
 enum Color   
 {  
@@ -94,20 +88,20 @@ enum Color
   </paragraph>
   <paragraph
     >The associated value of an enum member is assigned either implicitly or explicitly. If the declaration of the enum member has a <non_terminal
-     where="14.15">constant-expression</non_terminal>
+      where="14.15"
+      >constant-expression</non_terminal
+    >
 
     
 
-     initializer, the value of that constant expression, implicitly converted to the underlying type of the enum, is the associated value of the enum member. If the declaration of the enum member has no initializer, its associated value is set implicitly, as follows: <list
-    >
+     initializer, the value of that constant expression, implicitly converted to the underlying type of the enum, is the associated value of the enum member. If the declaration of the enum member has no initializer, its associated value is set implicitly, as follows: <list>
       <list_item> If the enum member is the first enum member declared in the enum type, its associated value is zero. </list_item>
       <list_item> Otherwise, the associated value of the enum member is obtained by increasing the associated value of the textually preceding enum member by one. This increased value must be within the range of values that can be represented by the underlying type. </list_item>
     </list>
   </paragraph>
   <paragraph>
     <example
-      >[Example: The example <code_example
-      >
+      >[Example: The example <code_example>
         <![CDATA[
 using System;  
 enum Color  
@@ -141,8 +135,7 @@ class Test
 
       
 
-      prints out the enum member names and their associated values. The output is: <code_example
-      >
+      prints out the enum member names and their associated values. The output is: <code_example>
         <![CDATA[
 Red = 0  
 Green = 10  
@@ -152,8 +145,7 @@ Blue = 11
 
       
 
-      for the following reasons: <list
-      >
+      for the following reasons: <list>
         <list_item> the enum member Red is automatically assigned the value zero (since it has no initializer and is the first enum member); </list_item>
         <list_item> the enum member Green is explicitly given the value 10; </list_item>
         <list_item> and the enum member Blue is automatically assigned the value one greater than the member that textually precedes it. end example]</list_item>
@@ -163,8 +155,7 @@ Blue = 11
   <paragraph>The associated value of an enum member may not, directly or indirectly, use the value of its own associated enum member. Other than this circularity restriction, enum member initializers may freely refer to other enum member initializers, regardless of their textual position. Within an enum member initializer, values of other enum members are always treated as having the type of their underlying type, so that casts are not necessary when referring to other enum members. </paragraph>
   <paragraph>
     <example
-      >[Example: The example <code_example
-      >
+      >[Example: The example <code_example>
         <![CDATA[
 enum Circular  
 {  

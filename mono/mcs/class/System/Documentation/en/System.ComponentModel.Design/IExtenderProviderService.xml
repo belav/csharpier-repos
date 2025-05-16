@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Typically, only components that have been added to a container offer extender providers. The <see
-         cref="T:System.ComponentModel.Design.IExtenderProviderService" />
+        >Typically, only components that have been added to a container offer extender providers. The <see cref="T:System.ComponentModel.Design.IExtenderProviderService" />
 
         
 
@@ -71,7 +70,11 @@
           <para>Adds the specified extender provider.</para>
         </summary>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -110,7 +113,11 @@
           <para>Removes the specified extender provider.</para>
         </summary>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

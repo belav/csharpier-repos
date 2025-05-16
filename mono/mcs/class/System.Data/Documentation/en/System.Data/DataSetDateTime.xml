@@ -17,66 +17,54 @@
 
         
 
-         cannot be set on non-<see
-         cref="T:System.DateTime" />
+         cannot be set on non-<see cref="T:System.DateTime" />
 
         
 
-         columns. Setting the <see
-         cref="P:System.Data.DataColumn.DateTimeMode" />
+         columns. Setting the <see cref="P:System.Data.DataColumn.DateTimeMode" />
 
         
 
-         property with the default value <see
-         cref="F:System.Data.DataSetDateTime.UnspecifiedLocal" />
+         property with the default value <see cref="F:System.Data.DataSetDateTime.UnspecifiedLocal" />
 
         
 
-        l on non-<see
-         cref="T:System.DateTime" />
+        l on non-<see cref="T:System.DateTime" />
 
         
 
-         columns is permitted. Modifying the column data type from <see
-         cref="T:System.DateTime" />
+         columns is permitted. Modifying the column data type from <see cref="T:System.DateTime" />
 
         
 
-         to any other type resets the <see
-         cref="P:System.Data.DataColumn.DateTimeMode" />
+         to any other type resets the <see cref="P:System.Data.DataColumn.DateTimeMode" />
 
         
 
-         to the default value <see
-         cref="F:System.Data.DataSetDateTime.UnspecifiedLocal" />
+         to the default value <see cref="F:System.Data.DataSetDateTime.UnspecifiedLocal" />
 
         
 
         .</para
       >
       <para
-        >Checking schema for merging, Relations, and ForeignKeyConstraints can be performed between <see
-         cref="T:System.DateTime" />
+        >Checking schema for merging, Relations, and ForeignKeyConstraints can be performed between <see cref="T:System.DateTime" />
 
         
 
-         columns with matching <see
-         cref="P:System.Data.DataColumn.DateTimeMode" />
+         columns with matching <see cref="P:System.Data.DataColumn.DateTimeMode" />
 
         
 
-         properties. Otherwise the columns should be considered as non-matching on schema. The only exception is between <see
-         cref="F:System.Data.DataSetDateTime.Unspecified" />
+         properties. Otherwise the columns should be considered as non-matching on schema. The only exception is between <see cref="F:System.Data.DataSetDateTime.Unspecified" />
 
         
 
-         and <see
-         cref="F:System.Data.DataSetDateTime.UnspecifiedLocal" />
+         and <see cref="F:System.Data.DataSetDateTime.UnspecifiedLocal" />
 
         
 
-        . It is permitted to have a relation or a ForeignKeyConstraint between two DateTime columns with one in Unspecified and other in UnspecifiedLocal <see
-         cref="P:System.Data.DataColumn.DateTimeMode" />
+        . It is permitted to have a relation or a ForeignKeyConstraint between two DateTime columns with one in Unspecified and other in UnspecifiedLocal <see cref="P:System.Data.DataColumn.DateTimeMode" />
 
         
 
@@ -86,13 +74,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Describes the serialization format for <see
-         cref="T:System.DateTime" />
+        >Describes the serialization format for <see cref="T:System.DateTime" />
 
         
 
-         columns in a <see
-         cref="T:System.Data.DataSet" />
+         columns in a <see cref="T:System.Data.DataSet" />
 
         
 
@@ -112,13 +98,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >DateTime is always stored in Local. If <see
-             cref="F:System.Data.DataSetDateTime.Utc" />
+            >DateTime is always stored in Local. If <see cref="F:System.Data.DataSetDateTime.Utc" />
 
             
 
-             or <see
-             cref="F:System.Data.DataSetDateTime.Unspecified" />
+             or <see cref="F:System.Data.DataSetDateTime.Unspecified" />
 
             
 
@@ -141,18 +125,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >DateTime is always stored in Unspecified. If <see
-             cref="F:System.Data.DataSetDateTime.Local" />
+            >DateTime is always stored in Unspecified. If <see cref="F:System.Data.DataSetDateTime.Local" />
 
             
 
-             or <see
-             cref="F:System.Data.DataSetDateTime.Utc" />
+             or <see cref="F:System.Data.DataSetDateTime.Utc" />
 
             
 
-             is assigned to a column in this mode, it is first converted into <see
-             cref="F:System.Data.DataSetDateTime.Unspecified" />
+             is assigned to a column in this mode, it is first converted into <see cref="F:System.Data.DataSetDateTime.Unspecified" />
 
             
 
@@ -175,23 +156,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >DateTime is stored in Unspecified. If <see
-             cref="F:System.Data.DataSetDateTime.Local" />
+            >DateTime is stored in Unspecified. If <see cref="F:System.Data.DataSetDateTime.Local" />
 
             
 
-             or <see
-             cref="F:System.Data.DataSetDateTime.Utc" />
+             or <see cref="F:System.Data.DataSetDateTime.Utc" />
 
             
 
-             is assigned to a column in this mode, it is first converted into <see
-             cref="F:System.Data.DataSetDateTime.Unspecified" />
+             is assigned to a column in this mode, it is first converted into <see cref="F:System.Data.DataSetDateTime.Unspecified" />
 
             
 
-            . Serialization in this mode causes offset. This is the default behavior and is backward compatible. This option should be thought of as being Unspecified in storage but applying an offset that is similar to <see
-             cref="F:System.Data.DataSetDateTime.Local" />
+            . Serialization in this mode causes offset. This is the default behavior and is backward compatible. This option should be thought of as being Unspecified in storage but applying an offset that is similar to <see cref="F:System.Data.DataSetDateTime.Local" />
 
             
 
@@ -214,13 +191,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >DateTime is stored in Universal Coordinated Time (UTC). If <see
-             cref="F:System.Data.DataSetDateTime.Local" />
+            >DateTime is stored in Universal Coordinated Time (UTC). If <see cref="F:System.Data.DataSetDateTime.Local" />
 
             
 
-             or <see
-             cref="F:System.Data.DataSetDateTime.Unspecified" />
+             or <see cref="F:System.Data.DataSetDateTime.Unspecified" />
 
             
 

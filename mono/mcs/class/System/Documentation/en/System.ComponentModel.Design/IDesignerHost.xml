@@ -123,18 +123,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This <see
-             cref="T:System.ComponentModel.IContainer" />
+            >This <see cref="T:System.ComponentModel.IContainer" />
 
             
 
-             contains the components of the current design mode document. You can list or access any of the components of the current design mode document through the <see
-             cref="P:System.ComponentModel.IContainer.Components" />
+             contains the components of the current design mode document. You can list or access any of the components of the current design mode document through the <see cref="P:System.ComponentModel.IContainer.Components" />
 
             
 
-             member of this <see
-             cref="T:System.ComponentModel.IContainer" />
+             member of this <see cref="T:System.ComponentModel.IContainer" />
 
             
 
@@ -172,8 +169,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the type cannot be resolved into an object that implements <see
-             cref="T:System.ComponentModel.IComponent" />
+            >If the type cannot be resolved into an object that implements <see cref="T:System.ComponentModel.IComponent" />
 
             
 
@@ -190,7 +186,11 @@
           <para>The newly created component.</para>
         </returns>
         <param name="componentClass">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -224,8 +224,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the type cannot be resolved into an object that implements <see
-             cref="T:System.ComponentModel.IComponent" />
+            >If the type cannot be resolved into an object that implements <see cref="T:System.ComponentModel.IComponent" />
 
             
 
@@ -242,14 +241,22 @@
           <para>The newly created component.</para>
         </returns>
         <param name="componentClass">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the component to create. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -280,26 +287,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates a <see
-             cref="T:System.ComponentModel.Design.DesignerTransaction" />
+            >This method creates a <see cref="T:System.ComponentModel.Design.DesignerTransaction" />
 
             
 
              that can be used to encapsulate a series of operations. Designer transactions can improve performance, reduce flicker caused by multiple updates during a process of operations, and enable most operations to be undone.</para
           >
           <para
-            >Lengthy operations that involve multiple components can raise many events. These events can cause side effects, such as flicker or degraded performance. When operating on multiple components at one time, or setting multiple properties on a single component, you can improve performance by performing these changes within a transaction. Some operations handle the <see
-             cref="E:System.ComponentModel.Design.IDesignerHost.TransactionOpening" />
+            >Lengthy operations that involve multiple components can raise many events. These events can cause side effects, such as flicker or degraded performance. When operating on multiple components at one time, or setting multiple properties on a single component, you can improve performance by performing these changes within a transaction. Some operations handle the <see cref="E:System.ComponentModel.Design.IDesignerHost.TransactionOpening" />
 
             
 
-             and <see
-             cref="E:System.ComponentModel.Design.IDesignerHost.TransactionClosed" />
+             and <see cref="E:System.ComponentModel.Design.IDesignerHost.TransactionClosed" />
 
             
 
-             events and perform work only when a transaction is not in progress. For more information on using transactions, see the documentation for <see
-             cref="T:System.ComponentModel.Design.DesignerTransaction" />
+             events and perform work only when a transaction is not in progress. For more information on using transactions, see the documentation for <see cref="T:System.ComponentModel.Design.DesignerTransaction" />
 
             
 
@@ -309,8 +312,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.ComponentModel.Design.DesignerTransaction" />
+            >Creates a <see cref="T:System.ComponentModel.Design.DesignerTransaction" />
 
             
 
@@ -320,13 +322,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of <see
-             cref="T:System.ComponentModel.Design.DesignerTransaction" />
+            >A new instance of <see cref="T:System.ComponentModel.Design.DesignerTransaction" />
 
             
 
-            . When you complete the steps in your transaction, you should call <see
-             cref="M:System.ComponentModel.Design.DesignerTransaction.Commit" />
+            . When you complete the steps in your transaction, you should call <see cref="M:System.ComponentModel.Design.DesignerTransaction.Commit" />
 
             
 
@@ -360,26 +360,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates a <see
-             cref="T:System.ComponentModel.Design.DesignerTransaction" />
+            >This method creates a <see cref="T:System.ComponentModel.Design.DesignerTransaction" />
 
             
 
              that can be used to encapsulate a series of operations. Designer transactions can improve performance, reduce flicker caused by multiple updates during a process of operations, and enable most operations to be undone.</para
           >
           <para
-            >Lengthy operations that involve multiple components can raise many events. These events can cause side effects, such as flicker or degraded performance. When operating on multiple components at one time, or setting multiple properties on a single component, you can improve performance by performing these changes within a transaction. Some operations handle the <see
-             cref="E:System.ComponentModel.Design.IDesignerHost.TransactionOpening" />
+            >Lengthy operations that involve multiple components can raise many events. These events can cause side effects, such as flicker or degraded performance. When operating on multiple components at one time, or setting multiple properties on a single component, you can improve performance by performing these changes within a transaction. Some operations handle the <see cref="E:System.ComponentModel.Design.IDesignerHost.TransactionOpening" />
 
             
 
-             and <see
-             cref="E:System.ComponentModel.Design.IDesignerHost.TransactionClosed" />
+             and <see cref="E:System.ComponentModel.Design.IDesignerHost.TransactionClosed" />
 
             
 
-             events and perform work only when a transaction is not in progress. For more information on using transactions, see the documentation for <see
-             cref="T:System.ComponentModel.Design.DesignerTransaction" />
+             events and perform work only when a transaction is not in progress. For more information on using transactions, see the documentation for <see cref="T:System.ComponentModel.Design.DesignerTransaction" />
 
             
 
@@ -389,8 +385,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.ComponentModel.Design.DesignerTransaction" />
+            >Creates a <see cref="T:System.ComponentModel.Design.DesignerTransaction" />
 
             
 
@@ -400,13 +395,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.ComponentModel.Design.DesignerTransaction" />
+            >A new <see cref="T:System.ComponentModel.Design.DesignerTransaction" />
 
             
 
-            . When you have completed the steps in your transaction, you should call <see
-             cref="M:System.ComponentModel.Design.DesignerTransaction.Commit" />
+            . When you have completed the steps in your transaction, you should call <see cref="M:System.ComponentModel.Design.DesignerTransaction.Commit" />
 
             
 
@@ -414,7 +407,11 @@
           >
         </returns>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -474,7 +471,11 @@
           <para>Destroys the specified component and removes it from the designer container.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -512,8 +513,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ComponentModel.Design.IDesigner" />
+            >An <see cref="T:System.ComponentModel.Design.IDesigner" />
 
             
 
@@ -521,12 +521,15 @@
           >
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IComponent" />
+          The <see cref="T:System.ComponentModel.IComponent" />
 
           
 
@@ -563,7 +566,11 @@
           <para>The type object for the specified type name, or null if the type cannot be found.</para>
         </returns>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -660,13 +667,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This base class is typically a <see
-             cref="T:System.Windows.Forms.Form" />
+            >This base class is typically a <see cref="T:System.Windows.Forms.Form" />
 
             
 
-             or <see
-             cref="T:System.Windows.Forms.UserControl" />
+             or <see cref="T:System.Windows.Forms.UserControl" />
 
             
 
@@ -728,8 +733,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an event handler for the <see
-             cref="E:System.ComponentModel.Design.IDesignerHost.TransactionClosed" />
+            >Adds an event handler for the <see cref="E:System.ComponentModel.Design.IDesignerHost.TransactionClosed" />
 
             
 
@@ -766,8 +770,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an event handler for the <see
-             cref="E:System.ComponentModel.Design.IDesignerHost.TransactionClosing" />
+            >Adds an event handler for the <see cref="E:System.ComponentModel.Design.IDesignerHost.TransactionClosing" />
 
             
 
@@ -793,8 +796,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The description is the last description specified with <see
-             cref="M:System.ComponentModel.Design.IDesignerHost.CreateTransaction" />
+            >The description is the last description specified with <see cref="M:System.ComponentModel.Design.IDesignerHost.CreateTransaction" />
 
             
 
@@ -832,8 +834,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an event handler for the <see
-             cref="E:System.ComponentModel.Design.IDesignerHost.TransactionOpened" />
+            >Adds an event handler for the <see cref="E:System.ComponentModel.Design.IDesignerHost.TransactionOpened" />
 
             
 
@@ -863,8 +864,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This event occurs when a transaction is about to begin.</para>
           <para
-            >This method allows designer host clients to perform operations before other handlers are notified that a transaction has begun. The specified handler is called only when the first call to <see
-             cref="M:System.ComponentModel.Design.IDesignerHost.CreateTransaction" />
+            >This method allows designer host clients to perform operations before other handlers are notified that a transaction has begun. The specified handler is called only when the first call to <see cref="M:System.ComponentModel.Design.IDesignerHost.CreateTransaction" />
 
             
 
@@ -874,8 +874,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an event handler for the <see
-             cref="E:System.ComponentModel.Design.IDesignerHost.TransactionOpening" />
+            >Adds an event handler for the <see cref="E:System.ComponentModel.Design.IDesignerHost.TransactionOpening" />
 
             
 

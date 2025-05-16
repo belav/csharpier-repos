@@ -32,18 +32,15 @@
 
         
 
-         is the base class for <see
-         cref="T:System.Windows.Forms.ContextMenuStrip" />
+         is the base class for <see cref="T:System.Windows.Forms.ContextMenuStrip" />
 
         
 
-        , providing necessary painting and layout properties and methods. The properties of this class that you are most likely to use directly are the <see
-         cref="P:System.Windows.Forms.ToolStripDropDownMenu.ShowCheckMargin" />
+        , providing necessary painting and layout properties and methods. The properties of this class that you are most likely to use directly are the <see cref="P:System.Windows.Forms.ToolStripDropDownMenu.ShowCheckMargin" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.ToolStripDropDownMenu.ShowImageMargin" />
+         and <see cref="P:System.Windows.Forms.ToolStripDropDownMenu.ShowImageMargin" />
 
         
 
@@ -53,28 +50,23 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides basic functionality for the <see
-         cref="T:System.Windows.Forms.ContextMenuStrip" />
+        >Provides basic functionality for the <see cref="T:System.Windows.Forms.ContextMenuStrip" />
 
         
 
-         control. Although <see
-         cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+         control. Although <see cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.ToolStripDropDown" />
+         and <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
         
 
-         replace and add functionality to the <see
-         cref="T:System.Windows.Forms.Menu" />
+         replace and add functionality to the <see cref="T:System.Windows.Forms.Menu" />
 
         
 
-         control of previous versions, <see
-         cref="T:System.Windows.Forms.Menu" />
+         control of previous versions, <see cref="T:System.Windows.Forms.Menu" />
 
         
 
@@ -93,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
 
             
 
@@ -127,18 +118,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Windows.Forms.ToolStripDropDownMenu.CreateDefaultItem(System.String,System.Drawing.Image,System.EventHandler)" />
+            >Use the <see cref="M:System.Windows.Forms.ToolStripDropDownMenu.CreateDefaultItem(System.String,System.Drawing.Image,System.EventHandler)" />
 
             
 
-             method to add a <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+             method to add a <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
-             with commonly used characteristics to a <see
-             cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+             with commonly used characteristics to a <see cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
 
             
 
@@ -148,13 +136,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a default <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+            >Creates a default <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
-             with the specified text, image, and event handler on a new <see
-             cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+             with the specified text, image, and event handler on a new <see cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
 
             
 
@@ -164,18 +150,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+            >A <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
-            , or a <see
-             cref="T:System.Windows.Forms.ToolStripSeparator" />
+            , or a <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
             
 
-             if the <paramref
-             name="text" />
+             if the <paramref name="text" />
 
             
 
@@ -183,56 +166,61 @@
           >
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The text to use for the <see
-           cref="T:System.Windows.Forms.ToolStripMenuItem" />
+          The text to use for the <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
           
 
-          . If the <paramref
-           name="text" />
+          . If the <paramref name="text" />
 
           
 
-           parameter is a hyphen (-), this method creates a <see
-           cref="T:System.Windows.Forms.ToolStripSeparator" />
+           parameter is a hyphen (-), this method creates a <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
           
 
           .</param
         >
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
-           to display on the <see
-           cref="T:System.Windows.Forms.ToolStripMenuItem" />
+           to display on the <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
           
 
           .</param
         >
         <param name="onClick">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An event handler that raises the <see
-           cref="E:System.Windows.Forms.ToolStripItem.Click" />
+          An event handler that raises the <see cref="E:System.Windows.Forms.ToolStripItem.Click" />
 
           
 
-           event when the <see
-           cref="T:System.Windows.Forms.ToolStripMenuItem" />
+           event when the <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
           
 
@@ -278,8 +266,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the rectangle that represents the display area of the <see
-             cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+            >Gets the rectangle that represents the display area of the <see cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
 
             
 
@@ -325,13 +312,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, <see
-             cref="T:System.Windows.Forms.ContextMenuStrip" />
+            >By default, <see cref="T:System.Windows.Forms.ContextMenuStrip" />
 
             
 
-             items flow horizontally or vertically as necessary. See the <see
-             cref="T:System.Windows.Forms.ToolStripLayoutStyle" />
+             items flow horizontally or vertically as necessary. See the <see cref="T:System.Windows.Forms.ToolStripLayoutStyle" />
 
             
 
@@ -341,8 +326,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating how the items of <see
-             cref="T:System.Windows.Forms.ContextMenuStrip" />
+            >Gets or sets a value indicating how the items of <see cref="T:System.Windows.Forms.ContextMenuStrip" />
 
             
 
@@ -377,8 +361,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the maximum height and width, in pixels, of the <see
-             cref="T:System.Windows.Forms.ContextMenuStrip" />
+            >Gets the maximum height and width, in pixels, of the <see cref="T:System.Windows.Forms.ContextMenuStrip" />
 
             
 
@@ -403,8 +386,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -413,8 +395,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripDropDownMenu.OnFontChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripDropDownMenu.OnFontChanged(System.EventArgs)" />
 
             
 
@@ -424,8 +405,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripDropDown.FontChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripDropDown.FontChanged" />
 
             
 
@@ -433,12 +413,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -465,8 +448,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -475,8 +457,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripDropDownMenu.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripDropDownMenu.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
 
             
 
@@ -486,8 +467,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Layout" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Layout" />
 
             
 
@@ -495,12 +475,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.LayoutEventArgs" />
+          A <see cref="T:System.Windows.Forms.LayoutEventArgs" />
 
           
 
@@ -530,12 +513,15 @@
           <para>Paints the background of the control.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.PaintEventArgs" />
+          A <see cref="T:System.Windows.Forms.PaintEventArgs" />
 
           
 
@@ -573,13 +559,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.Windows.Forms.ToolStripDropDownMenu.ShowCheckMargin" />
+            >Set the <see cref="P:System.Windows.Forms.ToolStripDropDownMenu.ShowCheckMargin" />
 
             
 
-             property to true to display a check mark when the user chooses the <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+             property to true to display a check mark when the user chooses the <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
@@ -589,8 +573,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether space for a check mark is shown on the left edge of the <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+            >Gets or sets a value indicating whether space for a check mark is shown on the left edge of the <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
@@ -619,13 +602,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.Windows.Forms.ToolStripDropDownMenu.ShowImageMargin" />
+            >Set the <see cref="P:System.Windows.Forms.ToolStripDropDownMenu.ShowImageMargin" />
 
             
 
-             property to true to display a graphic image with the <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+             property to true to display a graphic image with the <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
@@ -635,8 +616,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether space for an image is shown on the left edge of the <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+            >Gets or sets a value indicating whether space for an image is shown on the left edge of the <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 

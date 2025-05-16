@@ -26,39 +26,33 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="E:System.ComponentModel.IBindingList.ListChanged" />
+        >A <see cref="E:System.ComponentModel.IBindingList.ListChanged" />
 
         
 
-         event is raised when the data in an <see
-         cref="T:System.ComponentModel.IBindingList" />
+         event is raised when the data in an <see cref="T:System.ComponentModel.IBindingList" />
 
         
 
          changes.</para
       >
       <para
-        >The <see
-         cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" />
+        >The <see cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" />
 
         
 
-         property indicates the index of the item that was added, changed, or deleted. If an item was moved, the <see
-         cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" />
+         property indicates the index of the item that was added, changed, or deleted. If an item was moved, the <see cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" />
 
         
 
-         property indicates the new location of the item and the <see
-         cref="P:System.ComponentModel.ListChangedEventArgs.OldIndex" />
+         property indicates the new location of the item and the <see cref="P:System.ComponentModel.ListChangedEventArgs.OldIndex" />
 
         
 
          property indicates the old location.</para
       >
       <para
-        >If only one item is affected by a change, the <see
-         cref="P:System.ComponentModel.ListChangedEventArgs.OldIndex" />
+        >If only one item is affected by a change, the <see cref="P:System.ComponentModel.ListChangedEventArgs.OldIndex" />
 
         
 
@@ -68,8 +62,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.ComponentModel.IBindingList.ListChanged" />
+        >Provides data for the <see cref="E:System.ComponentModel.IBindingList.ListChanged" />
 
         
 
@@ -103,23 +96,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor can be used only if the schema of the object has changed.</para>
           <para
-            >The <paramref
-             name="listChangedType" />
+            >The <paramref name="listChangedType" />
 
             
 
-             parameter should be <see
-             cref="F:System.ComponentModel.ListChangedType.PropertyDescriptorAdded" />
+             parameter should be <see cref="F:System.ComponentModel.ListChangedType.PropertyDescriptorAdded" />
 
             
 
-            , <see
-             cref="F:System.ComponentModel.ListChangedType.PropertyDescriptorChanged" />
+            , <see cref="F:System.ComponentModel.ListChangedType.PropertyDescriptorChanged" />
 
             
 
-            , or <see
-             cref="F:System.ComponentModel.ListChangedType.PropertyDescriptorDeleted" />
+            , or <see cref="F:System.ComponentModel.ListChangedType.PropertyDescriptorDeleted" />
 
             
 
@@ -129,13 +118,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.ListChangedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ListChangedEventArgs" />
 
             
 
-             class given the type of change and the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+             class given the type of change and the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -143,24 +130,30 @@
           >
         </summary>
         <param name="listChangedType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.ListChangedType" />
+          A <see cref="T:System.ComponentModel.ListChangedType" />
 
           
 
            value indicating the type of change.</param
         >
         <param name="propDesc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -192,8 +185,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor if only one item is affected by a change. In this case, the <see
-             cref="P:System.ComponentModel.ListChangedEventArgs.OldIndex" />
+            >Use this constructor if only one item is affected by a change. In this case, the <see cref="P:System.ComponentModel.ListChangedEventArgs.OldIndex" />
 
             
 
@@ -203,8 +195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.ListChangedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ListChangedEventArgs" />
 
             
 
@@ -212,19 +203,26 @@
           >
         </summary>
         <param name="listChangedType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.ListChangedType" />
+          A <see cref="T:System.ComponentModel.ListChangedType" />
 
           
 
            value indicating the type of change.</param
         >
         <param name="newIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -256,13 +254,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.ListChangedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ListChangedEventArgs" />
 
             
 
-             class given the type of change, the index of the affected item, and a <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+             class given the type of change, the index of the affected item, and a <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -270,31 +266,41 @@
           >
         </summary>
         <param name="listChangedType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.ListChangedType" />
+          A <see cref="T:System.ComponentModel.ListChangedType" />
 
           
 
            value indicating the type of change.</param
         >
         <param name="newIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index of the item that was added or changed.</param
         >
         <param name="propDesc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -328,8 +334,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.ListChangedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ListChangedEventArgs" />
 
             
 
@@ -337,26 +342,37 @@
           >
         </summary>
         <param name="listChangedType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.ListChangedType" />
+          A <see cref="T:System.ComponentModel.ListChangedType" />
 
           
 
            value indicating the type of change.</param
         >
         <param name="newIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The new index of the item that was moved.</param
         >
         <param name="oldIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -459,8 +475,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Gets the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 

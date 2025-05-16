@@ -27,31 +27,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.TemplateControl" />
+        >The <see cref="T:System.Web.UI.TemplateControl" />
 
         
 
-         class is an abstract class that provides common properties and methods for the <see
-         cref="T:System.Web.UI.Page" />
+         class is an abstract class that provides common properties and methods for the <see cref="T:System.Web.UI.Page" />
 
         
 
-         class and the <see
-         cref="T:System.Web.UI.UserControl" />
+         class and the <see cref="T:System.Web.UI.UserControl" />
 
         
 
-         class. A new instance of the <see
-         cref="T:System.Web.UI.TemplateControl" />
+         class. A new instance of the <see cref="T:System.Web.UI.TemplateControl" />
 
         
 
          is not created directly.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.TemplateControl" />
+        >The <see cref="T:System.Web.UI.TemplateControl" />
 
         
 
@@ -60,8 +55,7 @@
       <list type="bullet">
         <item>
           <para
-            >Use the <see
-             cref="Overload:System.Web.UI.TemplateControl.Eval" />
+            >Use the <see cref="Overload:System.Web.UI.TemplateControl.Eval" />
 
             
 
@@ -70,8 +64,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="Overload:System.Web.UI.TemplateControl.XPath" />
+            >Use the <see cref="Overload:System.Web.UI.TemplateControl.XPath" />
 
             
 
@@ -80,13 +73,11 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="Overload:System.Web.UI.TemplateControl.XPathSelect" />
+            >Use the <see cref="Overload:System.Web.UI.TemplateControl.XPathSelect" />
 
             
 
-             method for data-binding against an expression containing an XPath select statement. The result is a node collection that implements the <see
-             cref="T:System.Collections.IEnumerable" />
+             method for data-binding against an expression containing an XPath select statement. The result is a node collection that implements the <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -95,15 +86,13 @@
         </item>
       </list>
       <para
-        >For more information on data-binding expression, see <format
-         type="text/html">
+        >For more information on data-binding expression, see <format type="text/html">
           <a href="676beb1d-ddfa-4153-bba8-3c86dcb7ceca">Data Binding Expression Syntax</a>
         </format>
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="ab7b2846-975b-4057-a948-45527497c742">ASP.NET Data Binding</a>
         </format>
 
@@ -115,13 +104,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the <see
-         cref="T:System.Web.UI.Page" />
+        >Provides the <see cref="T:System.Web.UI.Page" />
 
         
 
-         class and the <see
-         cref="T:System.Web.UI.UserControl" />
+         class and the <see cref="T:System.Web.UI.UserControl" />
 
         
 
@@ -139,8 +126,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.TemplateControl.#ctor" />
+            >The <see cref="M:System.Web.UI.TemplateControl.#ctor" />
 
             
 
@@ -150,8 +136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.TemplateControl" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.TemplateControl" />
 
             
 
@@ -197,31 +182,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the file that defines a <see
-             cref="T:System.Web.UI.TemplateControl" />
+            >When the file that defines a <see cref="T:System.Web.UI.TemplateControl" />
 
             
 
-             control resides in a directory other than that of the page processing the request, use the <see
-             cref="P:System.Web.UI.TemplateControl.AppRelativeVirtualPath" />
+             control resides in a directory other than that of the page processing the request, use the <see cref="P:System.Web.UI.TemplateControl.AppRelativeVirtualPath" />
 
             
 
-             property to return the application-relative, virtual path to the <see
-             cref="T:System.Web.UI.TemplateControl" />
+             property to return the application-relative, virtual path to the <see cref="T:System.Web.UI.TemplateControl" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.Control.AppRelativeTemplateSourceDirectory" />
+            >The <see cref="P:System.Web.UI.Control.AppRelativeTemplateSourceDirectory" />
 
             
 
-             property is set based on the virtual path that is set in the <see
-             cref="P:System.Web.UI.TemplateControl.AppRelativeVirtualPath" />
+             property is set based on the virtual path that is set in the <see cref="P:System.Web.UI.TemplateControl.AppRelativeVirtualPath" />
 
             
 
@@ -246,8 +226,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.TemplateControl.AutoHandlers" />
+            >The <see cref="P:System.Web.UI.TemplateControl.AutoHandlers" />
 
             
 
@@ -298,18 +277,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.TemplateControl.Construct" />
+            >The <see cref="M:System.Web.UI.TemplateControl.Construct" />
 
             
 
-             method allows design-time code execution of the <see
-             cref="T:System.Web.UI.Page" />
+             method allows design-time code execution of the <see cref="T:System.Web.UI.Page" />
 
             
 
-             and <see
-             cref="T:System.Web.UI.UserControl" />
+             and <see cref="T:System.Web.UI.UserControl" />
 
             
 
@@ -344,8 +320,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.TemplateControl.CreateResourceBasedLiteralControl(System.Int32,System.Int32,System.Boolean)" />
+            >The <see cref="M:System.Web.UI.TemplateControl.CreateResourceBasedLiteralControl(System.Int32,System.Int32,System.Boolean)" />
 
             
 
@@ -355,8 +330,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Accesses literal strings stored in a resource. The <see
-             cref="M:System.Web.UI.TemplateControl.CreateResourceBasedLiteralControl(System.Int32,System.Int32,System.Boolean)" />
+            >Accesses literal strings stored in a resource. The <see cref="M:System.Web.UI.TemplateControl.CreateResourceBasedLiteralControl(System.Int32,System.Int32,System.Boolean)" />
 
             
 
@@ -366,8 +340,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.LiteralControl" />
+            >A <see cref="T:System.Web.UI.LiteralControl" />
 
             
 
@@ -375,21 +348,33 @@
           >
         </returns>
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The offset of the start of the string in the resource. </param
         >
         <param name="size">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The size of the string in bytes. </param
         >
         <param name="fAsciiOnly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -436,26 +421,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of <paramref
-             name="expression" />
+            >The value of <paramref name="expression" />
 
             
 
              must evaluate to a public property. </para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.TemplateControl.Eval(System.String)" />
+            >The <see cref="M:System.Web.UI.TemplateControl.Eval(System.String)" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.DataBinder.Eval(System.Object,System.String)" />
+             method calls the <see cref="M:System.Web.UI.DataBinder.Eval(System.Object,System.String)" />
 
             
 
-             method using the <see
-             cref="M:System.Web.UI.Page.GetDataItem" />
+             method using the <see cref="M:System.Web.UI.Page.GetDataItem" />
 
             
 
@@ -471,7 +452,11 @@
           <para>An object that results from the evaluation of the data-binding expression.</para>
         </returns>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -499,26 +484,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of <paramref
-             name="expression" />
+            >The value of <paramref name="expression" />
 
             
 
              must evaluate to a public property. </para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.TemplateControl.Eval(System.String)" />
+            >The <see cref="M:System.Web.UI.TemplateControl.Eval(System.String)" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.DataBinder.Eval(System.Object,System.String,System.String)" />
+             method calls the <see cref="M:System.Web.UI.DataBinder.Eval(System.Object,System.String,System.String)" />
 
             
 
-             method using the <see
-             cref="M:System.Web.UI.Page.GetDataItem" />
+             method using the <see cref="M:System.Web.UI.Page.GetDataItem" />
 
             
 
@@ -534,14 +515,22 @@
           <para>A string that results from the evaluation of the data-binding expression and conversion to a string type.</para>
         </returns>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The navigation path from the container to the public property value to place in the bound control property.</param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -560,8 +549,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not override the <see
-             cref="M:System.Web.UI.TemplateControl.FrameworkInitialize" />
+            >Do not override the <see cref="M:System.Web.UI.TemplateControl.FrameworkInitialize" />
 
             
 
@@ -571,8 +559,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the control that is derived from the <see
-             cref="T:System.Web.UI.TemplateControl" />
+            >Initializes the control that is derived from the <see cref="T:System.Web.UI.TemplateControl" />
 
             
 
@@ -610,8 +597,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Application-level resources are stored in the App_GlobalResources folder. For more information, see <format
-             type="text/html">
+            >Application-level resources are stored in the App_GlobalResources folder. For more information, see <format type="text/html">
               <a href="5a29f26b-d94d-48d9-864e-5ee8890dc265">Resources in ASP.NET Applications</a>
             </format>
 
@@ -623,13 +609,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an application-level resource object based on the specified <see
-             cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
+            >Gets an application-level resource object based on the specified <see cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
 
             
 
-             and <see
-             cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+             and <see cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
 
             
 
@@ -641,24 +625,30 @@
           <para>An object representing the requested resource object; otherwise, null.</para>
         </returns>
         <param name="className">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string representing a <see
-           cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
+          A string representing a <see cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
 
           
 
           .</param
         >
         <param name="resourceKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string representing a <see
-           cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+          A string representing a <see cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
 
           
 
@@ -688,8 +678,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Application-level resources are stored in the App_GlobalResources folder. For more information, see <format
-             type="text/html">
+            >Application-level resources are stored in the App_GlobalResources folder. For more information, see <format type="text/html">
               <a href="5a29f26b-d94d-48d9-864e-5ee8890dc265">Resources in ASP.NET Applications</a>
             </format>
 
@@ -701,13 +690,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an application-level resource object based on the specified <see
-             cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
+            >Gets an application-level resource object based on the specified <see cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
 
             
 
-             and <see
-             cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+             and <see cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
 
             
 
@@ -719,38 +706,52 @@
           <para>An object representing the requested resource object; otherwise, null.</para>
         </returns>
         <param name="className">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string representing a <see
-           cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
+          A string representing a <see cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
 
           
 
           . </param
         >
         <param name="resourceKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string representing a <see
-           cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+          A string representing a <see cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
 
           
 
           . </param
         >
         <param name="objType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of object in the resource to get. </param
         >
         <param name="propName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -777,8 +778,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Local resource files are stored in the App_LocalResources directory. For more information, see <format
-             type="text/html">
+            >Local resource files are stored in the App_LocalResources directory. For more information, see <format type="text/html">
               <a href="5a29f26b-d94d-48d9-864e-5ee8890dc265">Resources in ASP.NET Applications</a>
             </format>
           </para>
@@ -786,8 +786,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a page-level resource object based on the specified <see
-             cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+            >Gets a page-level resource object based on the specified <see cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
 
             
 
@@ -799,12 +798,15 @@
           <para>An object representing the requested resource object; otherwise, null.</para>
         </returns>
         <param name="resourceKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string representing a <see
-           cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+          A string representing a <see cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
 
           
 
@@ -833,8 +835,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Local resource files are stored in the App_LocalResources directory. For more information, see <format
-             type="text/html">
+            >Local resource files are stored in the App_LocalResources directory. For more information, see <format type="text/html">
               <a href="5a29f26b-d94d-48d9-864e-5ee8890dc265">Resources in ASP.NET Applications</a>
             </format>
           </para>
@@ -842,8 +843,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a page-level resource object based on the specified <see
-             cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+            >Gets a page-level resource object based on the specified <see cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
 
             
 
@@ -855,26 +855,37 @@
           <para>An object representing the requested resource object; otherwise, null.</para>
         </returns>
         <param name="resourceKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string representing a <see
-           cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+          A string representing a <see cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
 
           
 
           .</param
         >
         <param name="objType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the resource object to get.</param
         >
         <param name="propName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -898,41 +909,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the control supports caching, the object returned from the <see
-             cref="M:System.Web.UI.TemplateControl.LoadControl(System.String)" />
+            >If the control supports caching, the object returned from the <see cref="M:System.Web.UI.TemplateControl.LoadControl(System.String)" />
 
             
 
-             method is not actually a <see
-             cref="T:System.Web.UI.Control" />
+             method is not actually a <see cref="T:System.Web.UI.Control" />
 
             
 
-             object; rather, it is a <see
-             cref="T:System.Web.UI.PartialCachingControl" />
+             object; rather, it is a <see cref="T:System.Web.UI.PartialCachingControl" />
 
             
 
-             object. If the <paramref
-             name="virtualPath" />
+             object. If the <paramref name="virtualPath" />
 
             
 
-             parameter is relative, the path of the loaded control is relative to the path of the <see
-             cref="T:System.Web.UI.TemplateControl" />
+             parameter is relative, the path of the loaded control is relative to the path of the <see cref="T:System.Web.UI.TemplateControl" />
 
             
 
             .</para
           >
           <para
-            >When you load a control into a container control, the container raises all of the added control's events until it has caught up to the current event. However, the added control does not catch up with postback data processing. For an added control to participate in postback data processing, including validation, the control must be added in the <see
-             cref="E:System.Web.UI.Control.Init" />
+            >When you load a control into a container control, the container raises all of the added control's events until it has caught up to the current event. However, the added control does not catch up with postback data processing. For an added control to participate in postback data processing, including validation, the control must be added in the <see cref="E:System.Web.UI.Control.Init" />
 
             
 
-             event rather than in the <see
-             cref="E:System.Web.UI.Control.Load" />
+             event rather than in the <see cref="E:System.Web.UI.Control.Load" />
 
             
 
@@ -942,8 +946,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads a <see
-             cref="T:System.Web.UI.Control" />
+            >Loads a <see cref="T:System.Web.UI.Control" />
 
             
 
@@ -953,8 +956,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the specified <see
-             cref="T:System.Web.UI.Control" />
+            >Returns the specified <see cref="T:System.Web.UI.Control" />
 
             
 
@@ -962,7 +964,11 @@
           >
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -996,31 +1002,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the user control supports caching, the object returned from the <see
-             cref="M:System.Web.UI.TemplateControl.LoadControl(System.Type,System.Object[])" />
+            >If the user control supports caching, the object returned from the <see cref="M:System.Web.UI.TemplateControl.LoadControl(System.Type,System.Object[])" />
 
             
 
-             method is not actually a <see
-             cref="T:System.Web.UI.UserControl" />
+             method is not actually a <see cref="T:System.Web.UI.UserControl" />
 
             
 
-             object; rather, it is a <see
-             cref="T:System.Web.UI.PartialCachingControl" />
+             object; rather, it is a <see cref="T:System.Web.UI.PartialCachingControl" />
 
             
 
              object. </para
           >
           <para
-            >When you load a control into a container control, the container raises all of the added control's events until it has caught up to the current event. However, the added control does not catch up with postback data processing. For an added control to participate in postback data processing, including validation, the control must be added in the <see
-             cref="E:System.Web.UI.Control.Init" />
+            >When you load a control into a container control, the container raises all of the added control's events until it has caught up to the current event. However, the added control does not catch up with postback data processing. For an added control to participate in postback data processing, including validation, the control must be added in the <see cref="E:System.Web.UI.Control.Init" />
 
             
 
-             event rather than in the <see
-             cref="E:System.Web.UI.Control.Load" />
+             event rather than in the <see cref="E:System.Web.UI.Control.Load" />
 
             
 
@@ -1030,8 +1031,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads a <see
-             cref="T:System.Web.UI.Control" />
+            >Loads a <see cref="T:System.Web.UI.Control" />
 
             
 
@@ -1041,8 +1041,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the specified <see
-             cref="T:System.Web.UI.UserControl" />
+            >Returns the specified <see cref="T:System.Web.UI.UserControl" />
 
             
 
@@ -1050,12 +1049,15 @@
           >
         </returns>
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref
-           name="parameters" />
+          An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="parameters" />
 
           
 
@@ -1080,8 +1082,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Obtains an instance of the <see
-             cref="T:System.Web.UI.ITemplate" />
+            >Obtains an instance of the <see cref="T:System.Web.UI.ITemplate" />
 
             
 
@@ -1093,7 +1094,11 @@
           <para>An instance of the specified template.</para>
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1122,8 +1127,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.TemplateControl.AbortTransaction" />
+            >Raises the <see cref="E:System.Web.UI.TemplateControl.AbortTransaction" />
 
             
 
@@ -1131,12 +1135,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1164,8 +1171,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="M:System.Web.UI.TemplateControl.OnCommitTransaction(System.EventArgs)" />
+            >You can use the <see cref="M:System.Web.UI.TemplateControl.OnCommitTransaction(System.EventArgs)" />
 
             
 
@@ -1175,8 +1181,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.TemplateControl.CommitTransaction" />
+            >Raises the <see cref="E:System.Web.UI.TemplateControl.CommitTransaction" />
 
             
 
@@ -1184,12 +1189,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1215,8 +1223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.TemplateControl.Error" />
+            >Raises the <see cref="E:System.Web.UI.TemplateControl.Error" />
 
             
 
@@ -1224,12 +1231,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1257,13 +1267,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="content" />
+            >The <paramref name="content" />
 
             
 
-             parameter contains a user control, such as you would find in an .ascx file. This string cannot contain any code, because the <see
-             cref="M:System.Web.UI.TemplateControl.ParseControl(System.String)" />
+             parameter contains a user control, such as you would find in an .ascx file. This string cannot contain any code, because the <see cref="M:System.Web.UI.TemplateControl.ParseControl(System.String)" />
 
             
 
@@ -1273,8 +1281,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Parses an input string into a <see
-             cref="T:System.Web.UI.Control" />
+            >Parses an input string into a <see cref="T:System.Web.UI.Control" />
 
             
 
@@ -1284,8 +1291,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The parsed <see
-             cref="T:System.Web.UI.Control" />
+            >The parsed <see cref="T:System.Web.UI.Control" />
 
             
 
@@ -1293,7 +1299,11 @@
           >
         </returns>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1325,31 +1335,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="content" />
+            >The <paramref name="content" />
 
             
 
-             parameter contains a user control (the contents of an .ascx file). This string cannot contain any code, because the <see
-             cref="M:System.Web.UI.TemplateControl.ParseControl(System.String)" />
+             parameter contains a user control (the contents of an .ascx file). This string cannot contain any code, because the <see cref="M:System.Web.UI.TemplateControl.ParseControl(System.String)" />
 
             
 
              method never causes compilation.</para
           >
           <para
-            >The <paramref
-             name="ignoreParserFilter" />
+            >The <paramref name="ignoreParserFilter" />
 
             
 
-             parameter allows the <see
-             cref="T:System.Web.UI.PageParserFilter" />
+             parameter allows the <see cref="T:System.Web.UI.PageParserFilter" />
 
             
 
-             class to be ignored. The <see
-             cref="T:System.Web.UI.PageParserFilter" />
+             class to be ignored. The <see cref="T:System.Web.UI.PageParserFilter" />
 
             
 
@@ -1359,8 +1364,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Parses an input string into a <see
-             cref="T:System.Web.UI.Control" />
+            >Parses an input string into a <see cref="T:System.Web.UI.Control" />
 
             
 
@@ -1372,14 +1376,22 @@
           <para>The parsed control.</para>
         </returns>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string that contains a user control.</param
         >
         <param name="ignoreParserFilter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1407,8 +1419,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.TemplateControl.ReadStringResource" />
+            >The <see cref="M:System.Web.UI.TemplateControl.ReadStringResource" />
 
             
 
@@ -1418,8 +1429,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads a string resource. The <see
-             cref="M:System.Web.UI.TemplateControl.ReadStringResource" />
+            >Reads a string resource. The <see cref="M:System.Web.UI.TemplateControl.ReadStringResource" />
 
             
 
@@ -1445,8 +1455,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.TemplateControl.ReadStringResource(System.Type)" />
+            >The <see cref="M:System.Web.UI.TemplateControl.ReadStringResource(System.Type)" />
 
             
 
@@ -1456,8 +1465,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads a string resource. The <see
-             cref="M:System.Web.UI.TemplateControl.ReadStringResource(System.Type)" />
+            >Reads a string resource. The <see cref="M:System.Web.UI.TemplateControl.ReadStringResource(System.Type)" />
 
             
 
@@ -1469,12 +1477,15 @@
           <para>An object representing the resource.</para>
         </returns>
         <param name="t">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -1509,8 +1520,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets a pointer to a string resource. The <see
-             cref="M:System.Web.UI.TemplateControl.SetStringResourcePointer(System.Object,System.Int32)" />
+            >Sets a pointer to a string resource. The <see cref="M:System.Web.UI.TemplateControl.SetStringResourcePointer(System.Object,System.Int32)" />
 
             
 
@@ -1518,14 +1528,22 @@
           >
         </summary>
         <param name="stringResourcePointer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object representing the pointer to the string resource.</param
         >
         <param name="maxResourceOffset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1553,13 +1571,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.TemplateControl.SupportAutoEvents" />
+            >The <see cref="P:System.Web.UI.TemplateControl.SupportAutoEvents" />
 
             
 
-             property indicates whether automatic events are supported. The <see
-             cref="P:System.Web.UI.TemplateControl.SupportAutoEvents" />
+             property indicates whether automatic events are supported. The <see cref="P:System.Web.UI.TemplateControl.SupportAutoEvents" />
 
             
 
@@ -1569,8 +1585,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Web.UI.TemplateControl" />
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.TemplateControl" />
 
             
 
@@ -1608,18 +1623,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.TemplateControl.System.Web.UI.IFilterResolutionService.CompareFilters(System.String,System.String)" />
+            >The <see cref="M:System.Web.UI.TemplateControl.System.Web.UI.IFilterResolutionService.CompareFilters(System.String,System.String)" />
 
             
 
-             method is part of the <see
-             cref="T:System.Web.UI.IFilterResolutionService" />
+             method is part of the <see cref="T:System.Web.UI.IFilterResolutionService" />
 
             
 
-             interface, which is specific to how a control uses device filters in a designer environment. When controls are parsed or persisted in the designer environment outside the context of a browser request, the <see
-             cref="T:System.Web.UI.IFilterResolutionService" />
+             interface, which is specific to how a control uses device filters in a designer environment. When controls are parsed or persisted in the designer environment outside the context of a browser request, the <see cref="T:System.Web.UI.IFilterResolutionService" />
 
             
 
@@ -1633,33 +1645,27 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >1, if <paramref
-             name="filter1" />
+            >1, if <paramref name="filter1" />
 
             
 
-             is a parent of <paramref
-             name="filter2" />
+             is a parent of <paramref name="filter2" />
 
             
 
-            ; -1, if <paramref
-             name="filter2" />
+            ; -1, if <paramref name="filter2" />
 
             
 
-             is a parent of <paramref
-             name="filter1" />
+             is a parent of <paramref name="filter1" />
 
             
 
-            ; otherwise, 0, if there is no parent/child relationship between <paramref
-             name="filter1" />
+            ; otherwise, 0, if there is no parent/child relationship between <paramref name="filter1" />
 
             
 
-             and <paramref
-             name="filter2" />
+             and <paramref name="filter2" />
 
             
 
@@ -1667,14 +1673,22 @@
           >
         </returns>
         <param name="filter1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A device filter name. </param
         >
         <param name="filter2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1701,18 +1715,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.TemplateControl.System.Web.UI.IFilterResolutionService.EvaluateFilter(System.String)" />
+            >The <see cref="M:System.Web.UI.TemplateControl.System.Web.UI.IFilterResolutionService.EvaluateFilter(System.String)" />
 
             
 
-             method is part of the <see
-             cref="T:System.Web.UI.IFilterResolutionService" />
+             method is part of the <see cref="T:System.Web.UI.IFilterResolutionService" />
 
             
 
-             interface, which is specific to how a control uses device filters in a designer environment. When controls are parsed or persisted in the designer environment outside the context of a browser request, the <see
-             cref="T:System.Web.UI.IFilterResolutionService" />
+             interface, which is specific to how a control uses device filters in a designer environment. When controls are parsed or persisted in the designer environment outside the context of a browser request, the <see cref="T:System.Web.UI.IFilterResolutionService" />
 
             
 
@@ -1728,7 +1739,11 @@
           <para>true if the specified filter is a type applicable to the current filter object; otherwise, false.</para>
         </returns>
         <param name="filterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1756,13 +1771,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes a resource string to an <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Writes a resource string to an <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             control. The <see
-             cref="M:System.Web.UI.TemplateControl.WriteUTF8ResourceString(System.Web.UI.HtmlTextWriter,System.Int32,System.Int32,System.Boolean)" />
+             control. The <see cref="M:System.Web.UI.TemplateControl.WriteUTF8ResourceString(System.Web.UI.HtmlTextWriter,System.Int32,System.Int32,System.Boolean)" />
 
             
 
@@ -1770,38 +1783,52 @@
           >
         </summary>
         <param name="output">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The control to write to.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The starting position within <paramref
-           name="value" />
+          The starting position within <paramref name="value" />
 
           
 
           .</param
         >
         <param name="size">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of characters within <paramref
-           name="value" />
+          The number of characters within <paramref name="value" />
 
           
 
            to use.</param
         >
         <param name="fAsciiOnly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1835,23 +1862,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.TemplateControl.XPath(System.String)" />
+            >The <see cref="M:System.Web.UI.TemplateControl.XPath(System.String)" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.XPathBinder.Eval(System.Object,System.String)" />
+             method calls the <see cref="M:System.Web.UI.XPathBinder.Eval(System.Object,System.String)" />
 
             
 
-             method using the <see
-             cref="M:System.Web.UI.Page.GetDataItem" />
+             method using the <see cref="M:System.Web.UI.Page.GetDataItem" />
 
             
 
-             method to resolve the <see
-             cref="T:System.Xml.XPath.IXPathNavigable" />
+             method to resolve the <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
             
 
@@ -1889,23 +1912,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.TemplateControl.XPath(System.String,System.String)" />
+            >The <see cref="M:System.Web.UI.TemplateControl.XPath(System.String,System.String)" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.XPathBinder.Eval(System.Object,System.String,System.String)" />
+             method calls the <see cref="M:System.Web.UI.XPathBinder.Eval(System.Object,System.String,System.String)" />
 
             
 
-             method using the <see
-             cref="M:System.Web.UI.Page.GetDataItem" />
+             method using the <see cref="M:System.Web.UI.Page.GetDataItem" />
 
             
 
-             method to resolve the <see
-             cref="T:System.Xml.XPath.IXPathNavigable" />
+             method to resolve the <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
             
 
@@ -1921,7 +1940,11 @@
           <para>A string that results from the evaluation of the data-binding expression and conversion to a string type.</para>
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1950,23 +1973,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.TemplateControl.XPath(System.String,System.Xml.IXmlNamespaceResolver)" />
+            >The <see cref="M:System.Web.UI.TemplateControl.XPath(System.String,System.Xml.IXmlNamespaceResolver)" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.XPathBinder.Eval(System.Object,System.String,System.Xml.IXmlNamespaceResolver)" />
+             method calls the <see cref="M:System.Web.UI.XPathBinder.Eval(System.Object,System.String,System.Xml.IXmlNamespaceResolver)" />
 
             
 
-             method using the <see
-             cref="M:System.Web.UI.Page.GetDataItem" />
+             method using the <see cref="M:System.Web.UI.Page.GetDataItem" />
 
             
 
-             method to resolve the <see
-             cref="T:System.Xml.XPath.IXPathNavigable" />
+             method to resolve the <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
             
 
@@ -1982,7 +2001,11 @@
           <para>An object that results from the evaluation of the data-binding expression. </para>
         </returns>
         <param name="resolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2012,23 +2035,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.TemplateControl.XPath(System.String,System.String,System.Xml.IXmlNamespaceResolver)" />
+            >The <see cref="M:System.Web.UI.TemplateControl.XPath(System.String,System.String,System.Xml.IXmlNamespaceResolver)" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.XPathBinder.Eval(System.Object,System.String,System.String,System.Xml.IXmlNamespaceResolver)" />
+             method calls the <see cref="M:System.Web.UI.XPathBinder.Eval(System.Object,System.String,System.String,System.Xml.IXmlNamespaceResolver)" />
 
             
 
-             method using the <see
-             cref="M:System.Web.UI.Page.GetDataItem" />
+             method using the <see cref="M:System.Web.UI.Page.GetDataItem" />
 
             
 
-             method to resolve the <see
-             cref="T:System.Xml.XPath.IXPathNavigable" />
+             method to resolve the <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
             
 
@@ -2044,14 +2063,22 @@
           <para>A string that results from the evaluation of the data-binding expression and conversion to a string type.</para>
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A .NET Framework format string to apply to the result. </param
         >
         <param name="resolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2079,23 +2106,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.TemplateControl.XPathSelect(System.String)" />
+            >The <see cref="M:System.Web.UI.TemplateControl.XPathSelect(System.String)" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.XPathBinder.Select(System.Object,System.String)" />
+             method calls the <see cref="M:System.Web.UI.XPathBinder.Select(System.Object,System.String)" />
 
             
 
-             method using the <see
-             cref="M:System.Web.UI.Page.GetDataItem" />
+             method using the <see cref="M:System.Web.UI.Page.GetDataItem" />
 
             
 
-             method to resolve the <see
-             cref="T:System.Xml.XPath.IXPathNavigable" />
+             method to resolve the <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
             
 
@@ -2105,8 +2128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Evaluates an XPath data-binding expression and returns a node collection that implements the <see
-             cref="T:System.Collections.IEnumerable" />
+            >Evaluates an XPath data-binding expression and returns a node collection that implements the <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -2116,8 +2138,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerable" />
+            >An <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -2147,23 +2168,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.TemplateControl.XPathSelect(System.String,System.Xml.IXmlNamespaceResolver)" />
+            >The <see cref="M:System.Web.UI.TemplateControl.XPathSelect(System.String,System.Xml.IXmlNamespaceResolver)" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.XPathBinder.Select(System.Object,System.String,System.Xml.IXmlNamespaceResolver)" />
+             method calls the <see cref="M:System.Web.UI.XPathBinder.Select(System.Object,System.String,System.Xml.IXmlNamespaceResolver)" />
 
             
 
-             method using the <see
-             cref="M:System.Web.UI.Page.GetDataItem" />
+             method using the <see cref="M:System.Web.UI.Page.GetDataItem" />
 
             
 
-             method to resolve the <see
-             cref="T:System.Xml.XPath.IXPathNavigable" />
+             method to resolve the <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
             
 
@@ -2173,8 +2190,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Evaluates an XPath data-binding expression using the specified prefix and namespace mappings for namespace resolution and returns a node collection that implements the <see
-             cref="T:System.Collections.IEnumerable" />
+            >Evaluates an XPath data-binding expression using the specified prefix and namespace mappings for namespace resolution and returns a node collection that implements the <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -2184,8 +2200,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerable" />
+            >An <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -2193,7 +2208,11 @@
           >
         </returns>
         <param name="resolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

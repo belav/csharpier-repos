@@ -30,8 +30,7 @@
     <remarks
       >Not all of the members in this class are part of an actual
     standard; in particular, the only member that is consistently portable and
-    will have a reliable value is <see
-       cref="F:Mono.Unix.Native.Dirent.d_name" />
+    will have a reliable value is <see cref="F:Mono.Unix.Native.Dirent.d_name" />
 
       
 
@@ -57,24 +56,19 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary
-          >Creates a <c
-          >Dirent</c>
+        <summary>Creates a <c>Dirent</c>
 
           
 
-           instance.</summary
-        >
+           instance.</summary>
         <remarks
-          >Creating a <c
-          >Dirent</c>
+          >Creating a <c>Dirent</c>
 
           
 
            has no effect on the filesystem.  To
         create a filesystem entry use 
-        <see
-           cref="M:Mono.Unix.UnixFileSystemInfo.Create" />
+        <see cref="M:Mono.Unix.UnixFileSystemInfo.Create" />
 
           
 

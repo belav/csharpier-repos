@@ -14,43 +14,35 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implement the <see
-         cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
+        >Implement the <see cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
 
         
 
-         interface to control the mapping between WSDL and <see
-         cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+         interface to control the mapping between WSDL and <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
         
 
-         and <see
-         cref="T:System.ServiceModel.Description.ContractDescription" />
+         and <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
         
 
-         objects, especially when reading custom WSDL extensions to modify your contract or endpoint information. Then attach your custom <see
-         cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
+         objects, especially when reading custom WSDL extensions to modify your contract or endpoint information. Then attach your custom <see cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
 
         
 
-         object to a <see
-         cref="T:System.ServiceModel.Description.WsdlImporter" />
+         object to a <see cref="T:System.ServiceModel.Description.WsdlImporter" />
 
         
 
-         either programmatically or by using an application configuration file. You can also attach your custom <see
-         cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
+         either programmatically or by using an application configuration file. You can also attach your custom <see cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
 
         
 
-         object to the internal <see
-         cref="T:System.ServiceModel.Description.WsdlImporter" />
+         object to the internal <see cref="T:System.ServiceModel.Description.WsdlImporter" />
 
         
 
-         used by the <format
-         type="text/html">
+         used by the <format type="text/html">
           <a href="1abf3d9f-b420-46f1-b628-df238751f308"
             >Service Model Metadata Utility Tool (Svcutil.exe)</a
           >
@@ -61,26 +53,22 @@
          using an application configuration file.</para
       >
       <para
-        >The <see
-         cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportContract(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlContractConversionContext)" />
+        >The <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportContract(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlContractConversionContext)" />
 
         
 
          method is called to import a contract. </para
       >
       <para
-        >Use the <see
-         cref="M:System.ServiceModel.Description.IWsdlImportExtension.BeforeImport(System.Web.Services.Description.ServiceDescriptionCollection,System.Xml.Schema.XmlSchemaSet,System.Collections.Generic.ICollection{System.Xml.XmlElement})" />
+        >Use the <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.BeforeImport(System.Web.Services.Description.ServiceDescriptionCollection,System.Xml.Schema.XmlSchemaSet,System.Collections.Generic.ICollection{System.Xml.XmlElement})" />
 
         
 
-         method to modify the metadata that is then imported into <see
-         cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+         method to modify the metadata that is then imported into <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
         
 
-         and <see
-         cref="T:System.ServiceModel.Description.ContractDescription" />
+         and <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
         
 
@@ -90,13 +78,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implement and attach to a <see
-         cref="T:System.ServiceModel.Description.WsdlImporter" />
+        >Implement and attach to a <see cref="T:System.ServiceModel.Description.WsdlImporter" />
 
         
 
-         object to control how the importer maps Web Services Description Language (WSDL) parts to those of a <see
-         cref="T:System.Web.Services.Description.ServiceDescription" />
+         object to control how the importer maps Web Services Description Language (WSDL) parts to those of a <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
         
 
@@ -136,13 +122,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ServiceModel.Description.IWsdlImportExtension.BeforeImport(System.Web.Services.Description.ServiceDescriptionCollection,System.Xml.Schema.XmlSchemaSet,System.Collections.Generic.ICollection{System.Xml.XmlElement})" />
+            >The <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.BeforeImport(System.Web.Services.Description.ServiceDescriptionCollection,System.Xml.Schema.XmlSchemaSet,System.Collections.Generic.ICollection{System.Xml.XmlElement})" />
 
             
 
-             methods of all registered <see
-             cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
+             methods of all registered <see cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
 
             
 
@@ -154,21 +138,33 @@
           <para>Called prior to importing metadata documents.</para>
         </summary>
         <param name="wsdlDocuments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The service descriptions to modify.</param
         >
         <param name="xmlSchemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The schema collection to be used when importing.</param
         >
         <param name="policy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -204,18 +200,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportContract(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlContractConversionContext)" />
+            >The <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportContract(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlContractConversionContext)" />
 
             
 
-             method is called when a contract is being imported. You can modify the contract or insert other exporting behaviors such as <see
-             cref="T:System.ServiceModel.Description.IServiceContractGenerationExtension" />
+             method is called when a contract is being imported. You can modify the contract or insert other exporting behaviors such as <see cref="T:System.ServiceModel.Description.IServiceContractGenerationExtension" />
 
             
 
-             and an <see
-             cref="T:System.ServiceModel.Description.IOperationContractGenerationExtension" />
+             and an <see cref="T:System.ServiceModel.Description.IOperationContractGenerationExtension" />
 
             
 
@@ -227,7 +220,11 @@
           <para>Called when importing a contract.</para>
         </summary>
         <param name="importer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -263,8 +260,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportEndpoint(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" />
+            >The <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportEndpoint(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" />
 
             
 
@@ -276,7 +272,11 @@
           <para>Called when importing an endpoint.</para>
         </summary>
         <param name="importer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -22,13 +22,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies whether to omit duplicate namespaces when loading an <see
-         cref="T:System.Xml.Linq.XDocument" />
+        >Specifies whether to omit duplicate namespaces when loading an <see cref="T:System.Xml.Linq.XDocument" />
 
         
 
-         with an <see
-         cref="T:System.Xml.XmlReader" />
+         with an <see cref="T:System.Xml.XmlReader" />
 
         
 
@@ -74,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Omit duplicate namespaces when loading the <see
-             cref="T:System.Xml.Linq.XDocument" />
+            >Omit duplicate namespaces when loading the <see cref="T:System.Xml.Linq.XDocument" />
 
             
 

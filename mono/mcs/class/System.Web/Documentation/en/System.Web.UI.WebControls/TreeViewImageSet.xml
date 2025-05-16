@@ -13,23 +13,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.TreeViewImageSet" />
+        >The <see cref="T:System.Web.UI.WebControls.TreeViewImageSet" />
 
         
 
-         enumeration is used to represent the different sets of images that can be displayed in the <see
-         cref="T:System.Web.UI.WebControls.TreeView" />
+         enumeration is used to represent the different sets of images that can be displayed in the <see cref="T:System.Web.UI.WebControls.TreeView" />
 
         
 
-         control. You can select from a predefined set of images or create your own custom set by setting the <see
-         cref="P:System.Web.UI.WebControls.TreeView.ImageSet" />
+         control. You can select from a predefined set of images or create your own custom set by setting the <see cref="P:System.Web.UI.WebControls.TreeView.ImageSet" />
 
         
 
-         property to the <see
-         cref="F:System.Web.UI.WebControls.TreeViewImageSet.Custom" />
+         property to the <see cref="F:System.Web.UI.WebControls.TreeViewImageSet.Custom" />
 
         
 
@@ -91,8 +87,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an image set to use in the <see
-         cref="T:System.Web.UI.WebControls.TreeView" />
+        >Represents an image set to use in the <see cref="T:System.Web.UI.WebControls.TreeView" />
 
         
 
@@ -214,8 +209,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A user-defined set of images. This is the default value of the <see
-             cref="P:System.Web.UI.WebControls.TreeView.ImageSet" />
+            >A user-defined set of images. This is the default value of the <see cref="P:System.Web.UI.WebControls.TreeView.ImageSet" />
 
             
 

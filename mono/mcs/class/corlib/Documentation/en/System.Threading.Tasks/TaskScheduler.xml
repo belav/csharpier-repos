@@ -32,8 +32,7 @@
          acts as the extension point for all pluggable scheduling logic. This includes mechanisms such as how to schedule a task for execution, and how scheduled tasks should be exposed to debuggers. </para
       >
       <para
-        >For more information and code examples, see <format
-         type="text/html">
+        >For more information and code examples, see <format type="text/html">
           <a href="638f8ea5-21db-47a2-a934-86e1e961bf65">Task Schedulers</a>
         </format>
 
@@ -43,7 +42,7 @@
       >
       <para
         >Several sample task schedulers are available on Code Gallery: <see
-         cref="http://go.microsoft.com/fwlink/?LinkID=165717"
+          cref="http://go.microsoft.com/fwlink/?LinkID=165717"
           >Samples for Parallel Programming with the .NET Framework 4</see
         >
 
@@ -74,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the <see
-             cref="T:System.Threading.Tasks.TaskScheduler" />
+            >Initializes the <see cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 
@@ -105,21 +103,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When not called from within a task, <see
-             cref="P:System.Threading.Tasks.TaskScheduler.Current" />
+            >When not called from within a task, <see cref="P:System.Threading.Tasks.TaskScheduler.Current" />
 
             
 
-             will return the <see
-             cref="P:System.Threading.Tasks.TaskScheduler.Default" />
+             will return the <see cref="P:System.Threading.Tasks.TaskScheduler.Default" />
 
             
 
              scheduler.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="638f8ea5-21db-47a2-a934-86e1e961bf65">Task Schedulers</a>
             </format>
 
@@ -131,8 +126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Threading.Tasks.TaskScheduler" />
+            >Gets the <see cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 
@@ -162,8 +156,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="638f8ea5-21db-47a2-a934-86e1e961bf65">Task Schedulers</a>
             </format>
 
@@ -175,8 +168,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the default <see
-             cref="T:System.Threading.Tasks.TaskScheduler" />
+            >Gets the default <see cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 
@@ -206,21 +198,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >All <see
-             cref="T:System.Threading.Tasks.Task" />
+            >All <see cref="T:System.Threading.Tasks.Task" />
 
             
 
-             instances queued to the returned scheduler will be executed through a call to the <see
-             cref="M:System.Threading.SynchronizationContext.Post(System.Threading.SendOrPostCallback,System.Object)" />
+             instances queued to the returned scheduler will be executed through a call to the <see cref="M:System.Threading.SynchronizationContext.Post(System.Threading.SendOrPostCallback,System.Object)" />
 
             
 
              method on that context.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="638f8ea5-21db-47a2-a934-86e1e961bf65">Task Schedulers</a>
             </format>
 
@@ -232,13 +221,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Threading.Tasks.TaskScheduler" />
+            >Creates a <see cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 
-             associated with the current <see
-             cref="T:System.Threading.SynchronizationContext" />
+             associated with the current <see cref="T:System.Threading.SynchronizationContext" />
 
             
 
@@ -248,18 +235,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Threading.Tasks.TaskScheduler" />
+            >A <see cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 
-             associated with the current <see
-             cref="T:System.Threading.SynchronizationContext" />
+             associated with the current <see cref="T:System.Threading.SynchronizationContext" />
 
             
 
-            , as determined by <see
-             cref="P:System.Threading.SynchronizationContext.Current" />
+            , as determined by <see cref="P:System.Threading.SynchronizationContext.Current" />
 
             
 
@@ -289,8 +273,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A class derived from <see
-             cref="T:System.Threading.Tasks.TaskScheduler" />
+            >A class derived from <see cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 
@@ -316,8 +299,7 @@
           <para>Additionally, this method and the enumerable returned must not modify any globally visible state.</para>
           <para>The returned enumerable should never be null. If there are currently no queued tasks, an empty enumerable should be returned instead.</para>
           <para
-            >Developers who are implementing custom debuggers shouldn't call this method directly, but should use the internal wrapper method GetScheduledTasksForDebugger instead: internal Task[] GetScheduledTasksForDebugger(). This wrapper method returns an array of tasks instead of an enumerable. To retrieve a list of active schedulers, use the internal method internal static TaskScheduler[] GetTaskSchedulersForDebugger(). This static method returns an array of all active <see
-             cref="T:System.Threading.Tasks.TaskScheduler" />
+            >Developers who are implementing custom debuggers shouldn't call this method directly, but should use the internal wrapper method GetScheduledTasksForDebugger instead: internal Task[] GetScheduledTasksForDebugger(). This wrapper method returns an array of tasks instead of an enumerable. To retrieve a list of active schedulers, use the internal method internal static TaskScheduler[] GetTaskSchedulersForDebugger(). This static method returns an array of all active <see cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 
@@ -327,8 +309,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For debugger support only, generates an enumerable of <see
-             cref="T:System.Threading.Tasks.Task" />
+            >For debugger support only, generates an enumerable of <see cref="T:System.Threading.Tasks.Task" />
 
             
 
@@ -356,8 +337,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="638f8ea5-21db-47a2-a934-86e1e961bf65">Task Schedulers</a>
             </format>
 
@@ -369,8 +349,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the unique ID for this <see
-             cref="T:System.Threading.Tasks.TaskScheduler" />
+            >Gets the unique ID for this <see cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 
@@ -394,8 +373,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="638f8ea5-21db-47a2-a934-86e1e961bf65">Task Schedulers</a>
             </format>
 
@@ -407,8 +385,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates the maximum concurrency level this <see
-             cref="T:System.Threading.Tasks.TaskScheduler" />
+            >Indicates the maximum concurrency level this <see cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 
@@ -440,8 +417,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            > A class derived from <see
-             cref="T:System.Threading.Tasks.TaskScheduler" />
+            > A class derived from <see cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 
@@ -454,8 +430,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Queues a <see
-             cref="T:System.Threading.Tasks.Task" />
+            >Queues a <see cref="T:System.Threading.Tasks.Task" />
 
             
 
@@ -463,12 +438,15 @@
           >
         </summary>
         <param name="task">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.Tasks.Task" />
+          The <see cref="T:System.Threading.Tasks.Task" />
 
           
 
@@ -499,8 +477,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="638f8ea5-21db-47a2-a934-86e1e961bf65">Task Schedulers</a>
             </format>
 
@@ -509,8 +486,7 @@
             .</para
           >
           <para
-            >This method may execute in a finally block; therefore it should return as quickly as possible so that any resources such as <see
-             cref="T:System.Threading.CancellationTokenRegistration" />
+            >This method may execute in a finally block; therefore it should return as quickly as possible so that any resources such as <see cref="T:System.Threading.CancellationTokenRegistration" />
 
             
 
@@ -520,8 +496,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to dequeue a <see
-             cref="T:System.Threading.Tasks.Task" />
+            >Attempts to dequeue a <see cref="T:System.Threading.Tasks.Task" />
 
             
 
@@ -531,8 +506,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A Boolean denoting whether the <paramref
-             name="task" />
+            >A Boolean denoting whether the <paramref name="task" />
 
             
 
@@ -540,12 +514,15 @@
           >
         </returns>
         <param name="task">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.Tasks.Task" />
+          The <see cref="T:System.Threading.Tasks.Task" />
 
           
 
@@ -576,23 +553,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            > Scheduler implementations are provided with <see
-             cref="T:System.Threading.Tasks.Task" />
+            > Scheduler implementations are provided with <see cref="T:System.Threading.Tasks.Task" />
 
             
 
-             instances to be executed through either the <see
-             cref="M:System.Threading.Tasks.TaskScheduler.QueueTask(System.Threading.Tasks.Task)" />
+             instances to be executed through either the <see cref="M:System.Threading.Tasks.TaskScheduler.QueueTask(System.Threading.Tasks.Task)" />
 
             
 
-             method or the <see
-             cref="M:System.Threading.Tasks.TaskScheduler.TryExecuteTaskInline(System.Threading.Tasks.Task,System.Boolean)" />
+             method or the <see cref="M:System.Threading.Tasks.TaskScheduler.TryExecuteTaskInline(System.Threading.Tasks.Task,System.Boolean)" />
 
             
 
-             method. When the scheduler deems it appropriate to run the provided task, <see
-             cref="M:System.Threading.Tasks.TaskScheduler.TryExecuteTask(System.Threading.Tasks.Task)" />
+             method. When the scheduler deems it appropriate to run the provided task, <see cref="M:System.Threading.Tasks.TaskScheduler.TryExecuteTask(System.Threading.Tasks.Task)" />
 
             
 
@@ -610,8 +583,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to execute the provided <see
-             cref="T:System.Threading.Tasks.Task" />
+            >Attempts to execute the provided <see cref="T:System.Threading.Tasks.Task" />
 
             
 
@@ -621,8 +593,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A Boolean that is true if <paramref
-             name="task" />
+            >A Boolean that is true if <paramref name="task" />
 
             
 
@@ -630,12 +601,15 @@
           >
         </returns>
         <param name="task">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Threading.Tasks.Task" />
+          A <see cref="T:System.Threading.Tasks.Task" />
 
           
 
@@ -667,21 +641,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A class derived from <see
-             cref="T:System.Threading.Tasks.TaskScheduler" />
+            >A class derived from <see cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 
              implements this function to support inline execution of a task on a thread that initiates a wait on that task object. Inline execution is optional, and the request may be rejected by returning false. However, the more tasks that can be inlined, the better the scheduler will scale. In fact, a scheduler that inlines too little may be prone to deadlocks. A proper implementation should ensure that a request executing under the policies guaranteed by the scheduler can successfully inline. For example, if a scheduler uses a dedicated thread to execute tasks, any inlining requests from that thread should succeed.</para
           >
           <para
-            >If a scheduler decides to perform the inline execution, it should do so by calling to the base TaskScheduler's <see
-             cref="M:System.Threading.Tasks.TaskScheduler.TryExecuteTask(System.Threading.Tasks.Task)" />
+            >If a scheduler decides to perform the inline execution, it should do so by calling to the base TaskScheduler's <see cref="M:System.Threading.Tasks.TaskScheduler.TryExecuteTask(System.Threading.Tasks.Task)" />
 
             
 
-             method with the provided task object, propagating the return value. It may also be appropriate for the scheduler to remove an inlined task from its internal data structures if it decides to honor the inlining request. Note, however, that under some circumstances a scheduler may be asked to inline a task that was not previously provided to it with the <see
-             cref="M:System.Threading.Tasks.TaskScheduler.QueueTask(System.Threading.Tasks.Task)" />
+             method with the provided task object, propagating the return value. It may also be appropriate for the scheduler to remove an inlined task from its internal data structures if it decides to honor the inlining request. Note, however, that under some circumstances a scheduler may be asked to inline a task that was not previously provided to it with the <see cref="M:System.Threading.Tasks.TaskScheduler.QueueTask(System.Threading.Tasks.Task)" />
 
             
 
@@ -689,8 +660,7 @@
           >
           <para>The derived scheduler is responsible for making sure that the calling thread is suitable for executing the given task as far as its own scheduling and execution policies are concerned.</para>
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="638f8ea5-21db-47a2-a934-86e1e961bf65">Task Schedulers</a>
             </format>
 
@@ -702,8 +672,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the provided <see
-             cref="T:System.Threading.Tasks.Task" />
+            >Determines whether the provided <see cref="T:System.Threading.Tasks.Task" />
 
             
 
@@ -715,19 +684,26 @@
           <para>A Boolean value indicating whether the task was executed inline.</para>
         </returns>
         <param name="task">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.Tasks.Task" />
+          The <see cref="T:System.Threading.Tasks.Task" />
 
           
 
            to be executed.</param
         >
         <param name="taskWasPreviouslyQueued">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -756,13 +732,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This application domain-wide event provides a mechanism to prevent exception escalation policy (which, by default, terminates the process) from triggering. </para>
           <para
-            >To make it easier for developers to write asynchronous code based on tasks, the net_v45 changes the default exception behavior for unobserved exceptions. Although unobserved exceptions still raise the <see
-             cref="E:System.Threading.Tasks.TaskScheduler.UnobservedTaskException" />
+            >To make it easier for developers to write asynchronous code based on tasks, the net_v45 changes the default exception behavior for unobserved exceptions. Although unobserved exceptions still raise the <see cref="E:System.Threading.Tasks.TaskScheduler.UnobservedTaskException" />
 
             
 
-             exception, the process does not terminate by default. Instead, the exception is handled by the runtime after the event is raised, regardless of whether an event handler observes the exception. This behavior can be configured. Starting with the net_v45, you can use the <format
-             type="text/html">
+             exception, the process does not terminate by default. Instead, the exception is handled by the runtime after the event is raised, regardless of whether an event handler observes the exception. This behavior can be configured. Starting with the net_v45, you can use the <format type="text/html">
               <a href="cea7e588-8b8d-48d2-9ad5-8feaf3642c18"
                 >&lt;ThrowUnobservedTaskExceptions&gt;</a
               >

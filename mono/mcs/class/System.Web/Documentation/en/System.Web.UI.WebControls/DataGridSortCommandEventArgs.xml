@@ -23,64 +23,53 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When sorting is enabled by setting the <see
-         cref="P:System.Web.UI.WebControls.DataGrid.AllowSorting" />
+        >When sorting is enabled by setting the <see cref="P:System.Web.UI.WebControls.DataGrid.AllowSorting" />
 
         
 
-         property of the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         property of the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
-         control to true, <see
-         cref="T:System.Web.UI.WebControls.LinkButton" />
+         control to true, <see cref="T:System.Web.UI.WebControls.LinkButton" />
 
         
 
-         controls are rendered in the header of each column that has the <see
-         cref="P:System.Web.UI.WebControls.DataGridColumn.SortExpression" />
+         controls are rendered in the header of each column that has the <see cref="P:System.Web.UI.WebControls.DataGridColumn.SortExpression" />
 
         
 
-         property set. (For automatically generated columns, the <see
-         cref="P:System.Web.UI.WebControls.DataGridColumn.SortExpression" />
+         property set. (For automatically generated columns, the <see cref="P:System.Web.UI.WebControls.DataGridColumn.SortExpression" />
 
         
 
-         property contains the same value as the data field.) These links allow you to sort the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         property contains the same value as the data field.) These links allow you to sort the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
-         control by the selected column. The <see
-         cref="E:System.Web.UI.WebControls.DataGrid.SortCommand" />
+         control by the selected column. The <see cref="E:System.Web.UI.WebControls.DataGrid.SortCommand" />
 
         
 
-         event is raised when a <see
-         cref="T:System.Web.UI.WebControls.LinkButton" />
+         event is raised when a <see cref="T:System.Web.UI.WebControls.LinkButton" />
 
         
 
          control is clicked.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.WebControls.DataGridSortCommandEventArgs" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.DataGridSortCommandEventArgs" />
 
         
 
-        , see the <see
-         cref="M:System.Web.UI.WebControls.DataGridSortCommandEventArgs.#ctor(System.Object,System.Web.UI.WebControls.DataGridCommandEventArgs)" />
+        , see the <see cref="M:System.Web.UI.WebControls.DataGridSortCommandEventArgs.#ctor(System.Object,System.Web.UI.WebControls.DataGridCommandEventArgs)" />
 
         
 
          constructor.</para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
 
@@ -92,13 +81,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Web.UI.WebControls.DataGrid.SortCommand" />
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.DataGrid.SortCommand" />
 
         
 
-         event of the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         event of the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
@@ -124,16 +111,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DataGridSortCommandEventArgs" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.DataGridSortCommandEventArgs" />
 
             
 
              class.</para
           >
           <para
-            >When an instance of <see
-             cref="T:System.Web.UI.WebControls.DataGridSortCommandEventArgs" />
+            >When an instance of <see cref="T:System.Web.UI.WebControls.DataGridSortCommandEventArgs" />
 
             
 
@@ -158,8 +143,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="commandSource" />
+                  >The value of the <paramref name="commandSource" />
 
                   
 
@@ -175,8 +159,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="dce.CommandArgument" />
+                  >The value of the <paramref name="dce.CommandArgument" />
 
                   
 
@@ -189,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DataGridSortCommandEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.DataGridSortCommandEventArgs" />
 
             
 
@@ -214,23 +196,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DataGridSortCommandEventArgs.CommandSource" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DataGridSortCommandEventArgs.CommandSource" />
 
             
 
-             property to get the command source that raises the <see
-             cref="E:System.Web.UI.WebControls.DataGrid.SortCommand" />
+             property to get the command source that raises the <see cref="E:System.Web.UI.WebControls.DataGrid.SortCommand" />
 
             
 
-             event. Because this event is raised only when a link is clicked in the header of the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+             event. Because this event is raised only when a link is clicked in the header of the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
-             control, the returned source is a <see
-             cref="T:System.Web.UI.WebControls.DataGridItem" />
+             control, the returned source is a <see cref="T:System.Web.UI.WebControls.DataGridItem" />
 
             
 
@@ -258,13 +236,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DataGridSortCommandEventArgs.SortExpression" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DataGridSortCommandEventArgs.SortExpression" />
 
             
 
-             property to determine which column the user selected to sort the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+             property to determine which column the user selected to sort the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
@@ -274,8 +250,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the expression used to sort the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+            >Gets the expression used to sort the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 

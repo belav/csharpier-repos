@@ -33,13 +33,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Transports that use a stream-oriented protocol such as TCP and named pipes support stream-based transport upgrades. Specifically, indigo2 provides security upgrades. The configuration of this transport security is encapsulated by this class as well as by <see
-         cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
+        >Transports that use a stream-oriented protocol such as TCP and named pipes support stream-based transport upgrades. Specifically, indigo2 provides security upgrades. The configuration of this transport security is encapsulated by this class as well as by <see cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
 
         
 
-        , which can be configured and added to a custom binding. In addition, a third party can write its own custom StreamSecurityBindingElement. These binding elements extend the <see
-         cref="T:System.ServiceModel.Channels.StreamUpgradeBindingElement" />
+        , which can be configured and added to a custom binding. In addition, a third party can write its own custom StreamSecurityBindingElement. These binding elements extend the <see cref="T:System.ServiceModel.Channels.StreamUpgradeBindingElement" />
 
         
 
@@ -53,8 +51,7 @@
         <steps>
           <step>
             <para
-              >Create a <see
-               cref="T:System.ServiceModel.Channels.BindingElementCollection" />
+              >Create a <see cref="T:System.ServiceModel.Channels.BindingElementCollection" />
 
               
 
@@ -63,13 +60,11 @@
           </step>
           <step>
             <para
-              >Create any required custom binding elements that are above this binding element in the binding stack, such as the optional <see
-               cref="T:System.ServiceModel.Channels.TransactionFlowBindingElement" />
+              >Create any required custom binding elements that are above this binding element in the binding stack, such as the optional <see cref="T:System.ServiceModel.Channels.TransactionFlowBindingElement" />
 
               
 
-               and <see
-               cref="T:System.ServiceModel.Channels.ReliableSessionBindingElement" />
+               and <see cref="T:System.ServiceModel.Channels.ReliableSessionBindingElement" />
 
               
 
@@ -78,13 +73,11 @@
           </step>
           <step>
             <para
-              >Add the created elements in the order described previously to the <see
-               cref="T:System.ServiceModel.Channels.BindingElementCollection" />
+              >Add the created elements in the order described previously to the <see cref="T:System.ServiceModel.Channels.BindingElementCollection" />
 
               
 
-               using the <see
-               cref="M:System.ServiceModel.Channels.BindingElementCollection.InsertItem(System.Int32,System.ServiceModel.Channels.BindingElement)" />
+               using the <see cref="M:System.ServiceModel.Channels.BindingElementCollection.InsertItem(System.Int32,System.ServiceModel.Channels.BindingElement)" />
 
               
 
@@ -93,8 +86,7 @@
           </step>
           <step>
             <para
-              >Create an instance of <see
-               cref="T:System.ServiceModel.Channels.WindowsStreamSecurityBindingElement" />
+              >Create an instance of <see cref="T:System.ServiceModel.Channels.WindowsStreamSecurityBindingElement" />
 
               
 
@@ -103,8 +95,7 @@
           </step>
           <step>
             <para
-              >Add any additional custom binding elements to the collection, such as <see
-               cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" />
+              >Add any additional custom binding elements to the collection, such as <see cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" />
 
               
 
@@ -136,8 +127,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.WindowsStreamSecurityBindingElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.WindowsStreamSecurityBindingElement" />
 
             
 
@@ -171,8 +161,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.WindowsStreamSecurityBindingElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.WindowsStreamSecurityBindingElement" />
 
             
 
@@ -215,13 +204,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a channel factory of the specified type. This method adds this class instance to the <see
-             cref="P:System.ServiceModel.Channels.BindingContext.BindingParameters" />
+            >Returns a channel factory of the specified type. This method adds this class instance to the <see cref="P:System.ServiceModel.Channels.BindingContext.BindingParameters" />
 
             
 
-             and delegates to the build method <see
-             cref="M:System.ServiceModel.Channels.BindingContext.BuildInnerChannelFactory``1" />
+             and delegates to the build method <see cref="M:System.ServiceModel.Channels.BindingContext.BuildInnerChannelFactory``1" />
 
             
 
@@ -237,7 +224,11 @@
            members that describe bindings, behaviors, contracts, and other information required to create the channel factory.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -284,13 +275,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a channel listener of the specified type. This method adds this class instance to the <see
-             cref="P:System.ServiceModel.Channels.BindingContext.BindingParameters" />
+            >Returns a channel listener of the specified type. This method adds this class instance to the <see cref="P:System.ServiceModel.Channels.BindingContext.BindingParameters" />
 
             
 
-             and delegates to the build method <see
-             cref="M:System.ServiceModel.Channels.BindingContext.BuildInnerChannelListener``1" />
+             and delegates to the build method <see cref="M:System.ServiceModel.Channels.BindingContext.BuildInnerChannelListener``1" />
 
             
 
@@ -306,7 +295,11 @@
            members that describe bindings, behaviors, contracts, and other information required to create the channel listener.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -340,8 +333,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A channel factory is used to create a channel that processes outgoing messages for this binding. This method delegates to the <see
-             cref="M:System.ServiceModel.Channels.BindingContext.CanBuildInnerChannelFactory``1" />
+            >A channel factory is used to create a channel that processes outgoing messages for this binding. This method delegates to the <see cref="M:System.ServiceModel.Channels.BindingContext.CanBuildInnerChannelFactory``1" />
 
             
 
@@ -357,14 +349,22 @@
           <para>true if a channel factory can be built; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The binding context.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -403,8 +403,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A channel listener is used to create a channel that processes incoming messages for this binding. This method delegates to the <see
-             cref="M:System.ServiceModel.Channels.BindingContext.CanBuildInnerChannelListener``1" />
+            >A channel listener is used to create a channel that processes incoming messages for this binding. This method delegates to the <see cref="M:System.ServiceModel.Channels.BindingContext.CanBuildInnerChannelListener``1" />
 
             
 
@@ -420,19 +419,26 @@
           <para>true if a channel listener can be built; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
            for the channel.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -506,18 +512,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method receives a binding context as an input parameter, which represents the stack of binding elements. This method gets the specified object directly, delegates the inquiry to the next-lower binding element in the stack, or a combination of the two. It can modify the context if it delegates the inquiry. Each binding element in the stack can repeat this process, if it has been delegated to, until the bottom of the stack is reached. The object returned is usually a collection of properties.</para>
           <para
-            >If the type of <paramref
-             name="T" />
+            >If the type of <paramref name="T" />
 
             
 
-             is <see
-             cref="T:System.ServiceModel.Channels.ISecurityCapabilities" />
+             is <see cref="T:System.ServiceModel.Channels.ISecurityCapabilities" />
 
             
 
-            , then an instance of this class is returned with <see
-             cref="P:System.ServiceModel.Channels.ISecurityCapabilities.SupportsClientAuthentication" />
+            , then an instance of this class is returned with <see cref="P:System.ServiceModel.Channels.ISecurityCapabilities.SupportsClientAuthentication" />
 
             
 
@@ -528,49 +531,41 @@
 
             
 
-            , and <see
-             cref="P:System.ServiceModel.Channels.ISecurityCapabilities.SupportsServerAuthentication" />
+            , and <see cref="P:System.ServiceModel.Channels.ISecurityCapabilities.SupportsServerAuthentication" />
 
             
 
-             all set to true, and <see
-             cref="P:System.ServiceModel.Channels.ISecurityCapabilities.SupportedRequestProtectionLevel" />
+             all set to true, and <see cref="P:System.ServiceModel.Channels.ISecurityCapabilities.SupportedRequestProtectionLevel" />
 
             
 
-             and <see
-             cref="P:System.ServiceModel.Channels.ISecurityCapabilities.SupportedResponseProtectionLevel" />
+             and <see cref="P:System.ServiceModel.Channels.ISecurityCapabilities.SupportedResponseProtectionLevel" />
 
             
 
              set to the current value in this binding.</para
           >
           <para
-            >If the type of <paramref
-             name="T" />
+            >If the type of <paramref name="T" />
 
             
 
-             is <see
-             cref="T:System.ServiceModel.Security.IdentityVerifier" />
+             is <see cref="T:System.ServiceModel.Security.IdentityVerifier" />
 
             
 
             , then a default instance of this class is returned.</para
           >
           <para
-            >This method is implemented by binding elements as well as by the run-time objects such as <see
-             cref="T:System.ServiceModel.Channels.IChannelFactory" />
+            >This method is implemented by binding elements as well as by the run-time objects such as <see cref="T:System.ServiceModel.Channels.IChannelFactory" />
 
             
 
-            , <see
-             cref="T:System.ServiceModel.Channels.IChannelListener" />
+            , <see cref="T:System.ServiceModel.Channels.IChannelListener" />
 
             
 
-            , and <see
-             cref="T:System.ServiceModel.Channels.IChannel" />
+            , and <see cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
@@ -580,8 +575,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a specified object from the <see
-             cref="T:System.ServiceModel.Channels.BindingContext" />
+            >Gets a specified object from the <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
             
 
@@ -591,8 +585,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The specified object from the <see
-             cref="T:System.ServiceModel.Channels.BindingContext" />
+            >The specified object from the <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
             
 
@@ -600,19 +593,26 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          A <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
           .</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -645,8 +645,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.XmlElement" />
+            >Gets the <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -656,8 +655,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlElement" />
+            >An <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -826,54 +824,45 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method writes binding-related statements into the WSDL information exposed by a particular contract and is used by indigo2 to communicate to clients the existence of this custom binding element in the binding stack.</para>
           <para
-            >This method takes two parameters: the <see
-             cref="T:System.ServiceModel.Description.MetadataExporter" />
+            >This method takes two parameters: the <see cref="T:System.ServiceModel.Description.MetadataExporter" />
 
             
 
-             and <see
-             cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+             and <see cref="T:System.ServiceModel.Description.PolicyConversionContext" />
 
             
 
-             objects. Use the <see
-             cref="M:System.ServiceModel.Description.PolicyConversionContext.GetBindingAssertions" />
+             objects. Use the <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetBindingAssertions" />
 
             
 
-            , <see
-             cref="M:System.ServiceModel.Description.PolicyConversionContext.GetMessageBindingAssertions(System.ServiceModel.Description.MessageDescription)" />
+            , <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetMessageBindingAssertions(System.ServiceModel.Description.MessageDescription)" />
 
             
 
-            , and <see
-             cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" />
+            , and <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" />
 
             
 
              methods to obtain collections of policy assertions that have already been exported at various scopes. Then use this method to add your own policy assertions to the appropriate collection.</para
           >
           <para
-            >The <see
-             cref="P:System.ServiceModel.Description.PolicyConversionContext.Contract" />
+            >The <see cref="P:System.ServiceModel.Description.PolicyConversionContext.Contract" />
 
             
 
-             property exposes the <see
-             cref="T:System.ServiceModel.Description.ContractDescription" />
+             property exposes the <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
             
 
-             for the endpoint that is being exported. This enables this method to correctly scope their exported policy assertions. For example, security attributes in code can add behaviors to the <see
-             cref="T:System.ServiceModel.Description.ContractDescription" />
+             for the endpoint that is being exported. This enables this method to correctly scope their exported policy assertions. For example, security attributes in code can add behaviors to the <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
             
 
              that indicate where security policy assertions should be added.</para
           >
           <para
-            >Once custom policy assertions are attached to the WSDL information, clients can detect and import the custom binding assertions by implementing an <see
-             cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
+            >Once custom policy assertions are attached to the WSDL information, clients can detect and import the custom binding assertions by implementing an <see cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
 
             
 
@@ -885,24 +874,30 @@
           <para>Exports a custom policy assertion about Windows stream security.</para>
         </summary>
         <param name="exporter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.MetadataExporter" />
+          The <see cref="T:System.ServiceModel.Description.MetadataExporter" />
 
           
 
            that you can use to modify the exporting process.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+          The <see cref="T:System.ServiceModel.Description.PolicyConversionContext" />
 
           
 

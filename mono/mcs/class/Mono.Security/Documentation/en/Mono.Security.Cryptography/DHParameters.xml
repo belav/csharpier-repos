@@ -8,7 +8,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -32,8 +34,7 @@
       <Parameters></Parameters>
       <Docs>
         <summary
-          >Represents the public <b
-          >G</b>
+          >Represents the public <b>G</b>
 
           
 
@@ -55,8 +56,7 @@
       <Parameters></Parameters>
       <Docs>
         <summary
-          >Represents the public <b
-          >P</b>
+          >Represents the public <b>P</b>
 
           
 
@@ -78,8 +78,7 @@
       <Parameters></Parameters>
       <Docs>
         <summary
-          >Represents the private <b
-          >X</b>
+          >Represents the private <b>X</b>
 
           
 

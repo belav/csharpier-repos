@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This is a temporary helper class used to access internal members of an <see
-         cref="T:System.ActivationContext" />
+        >This is a temporary helper class used to access internal members of an <see cref="T:System.ActivationContext" />
 
         
 
@@ -37,8 +36,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides access to data from an <see
-         cref="T:System.ActivationContext" />
+        >Provides access to data from an <see cref="T:System.ActivationContext" />
 
         
 
@@ -72,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the contents of the application manifest from an <see
-             cref="T:System.ActivationContext" />
+            >Gets the contents of the application manifest from an <see cref="T:System.ActivationContext" />
 
             
 
@@ -83,8 +80,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The application manifest that is contained by the <see
-             cref="T:System.ActivationContext" />
+            >The application manifest that is contained by the <see cref="T:System.ActivationContext" />
 
             
 
@@ -92,7 +88,11 @@
           >
         </returns>
         <param name="appInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -125,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the manifest of the last deployment component in an <see
-             cref="T:System.ActivationContext" />
+            >Gets the manifest of the last deployment component in an <see cref="T:System.ActivationContext" />
 
             
 
@@ -136,8 +135,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The manifest of the last deployment component in the <see
-             cref="T:System.ActivationContext" />
+            >The manifest of the last deployment component in the <see cref="T:System.ActivationContext" />
 
             
 
@@ -145,7 +143,11 @@
           >
         </returns>
         <param name="appInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -184,7 +186,11 @@
           <para>An array containing the application manifest as raw data.</para>
         </returns>
         <param name="appInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -217,8 +223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the manifest of the first deployment component in an <see
-             cref="T:System.ActivationContext" />
+            >Gets the manifest of the first deployment component in an <see cref="T:System.ActivationContext" />
 
             
 
@@ -228,8 +233,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The manifest of the first deployment component in the <see
-             cref="T:System.ActivationContext" />
+            >The manifest of the first deployment component in the <see cref="T:System.ActivationContext" />
 
             
 
@@ -237,7 +241,11 @@
           >
         </returns>
         <param name="appInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -276,7 +284,11 @@
           <para>An array containing the deployment manifest as raw data.</para>
         </returns>
         <param name="appInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -309,8 +321,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether this is the first time this <see
-             cref="T:System.ActivationContext" />
+            >Gets a value indicating whether this is the first time this <see cref="T:System.ActivationContext" />
 
             
 
@@ -320,8 +331,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.ActivationContext" />
+            >true if the <see cref="T:System.ActivationContext" />
 
             
 
@@ -329,7 +339,11 @@
           >
         </returns>
         <param name="appInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -362,8 +376,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Informs an <see
-             cref="T:System.ActivationContext" />
+            >Informs an <see cref="T:System.ActivationContext" />
 
             
 
@@ -371,7 +384,11 @@
           >
         </summary>
         <param name="appInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

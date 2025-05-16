@@ -1,26 +1,22 @@
 <?xml version="1.0"?>
 <clause number="9.5.2" title="Pre-processing expressions">
   <paragraph
-    >Pre-processing expressions can occur in <symbol
-    >#if</symbol>
+    >Pre-processing expressions can occur in <symbol>#if</symbol>
 
     
 
-     and <symbol
-    >#elif</symbol>
+     and <symbol>#elif</symbol>
 
     
 
-     directives. The operators !, ==, !=, &amp;&amp; and || are permitted in pre-processing expressions, and parentheses may be used for grouping. <grammar_production
-    >
+     directives. The operators !, ==, !=, &amp;&amp; and || are permitted in pre-processing expressions, and parentheses may be used for grouping. <grammar_production>
       <name>
         <non_terminal where="9.5.2">pp-expression</non_terminal>
       </name>
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <non_terminal where="9.3.3">whitespace</non_terminal>
         <opt />
         <non_terminal where="9.5.2">pp-or-expression</non_terminal>
@@ -35,8 +31,7 @@
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <non_terminal where="9.5.2">pp-and-expression</non_terminal>
       </rhs>
       <rhs>
@@ -56,8 +51,7 @@
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <non_terminal where="9.5.2">pp-equality-expression</non_terminal>
       </rhs>
       <rhs>
@@ -77,8 +71,7 @@
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <non_terminal where="9.5.2">pp-unary-expression</non_terminal>
       </rhs>
       <rhs>
@@ -107,8 +100,7 @@
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <non_terminal where="9.5.2">pp-primary-expression</non_terminal>
       </rhs>
       <rhs>
@@ -125,8 +117,7 @@
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <keyword>true</keyword>
       </rhs>
       <rhs>
@@ -148,8 +139,7 @@
   </paragraph>
   <paragraph>When referenced in a pre-processing expression, a defined conditional compilation symbol has the boolean value true, and an undefined conditional compilation symbol has the boolean value false. </paragraph>
   <paragraph
-    >Evaluation of a pre-processing expression always yields a boolean value. The rules of evaluation for a  pre-processing expression are the same as those for a constant expression (<hyperlink
-    >14.15</hyperlink>
+    >Evaluation of a pre-processing expression always yields a boolean value. The rules of evaluation for a  pre-processing expression are the same as those for a constant expression (<hyperlink>14.15</hyperlink>
 
     
 

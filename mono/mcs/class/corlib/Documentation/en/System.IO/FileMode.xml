@@ -34,8 +34,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For an example of creating a file and writing text to a file, see <format
-         type="text/html">
+        >For an example of creating a file and writing text to a file, see <format type="text/html">
           <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
             >[&lt;topic://cpconwritingtexttofile&gt;]</a
           >
@@ -43,8 +42,7 @@
 
         
 
-        . For an example of reading text from a file, see <format
-         type="text/html">
+        . For an example of reading text from a file, see <format type="text/html">
           <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
             >[&lt;topic://cpconreadingtextfromfile&gt;]</a
           >
@@ -52,8 +50,7 @@
 
         
 
-        . For an example of reading from and writing to a binary file, see <format
-         type="text/html">
+        . For an example of reading from and writing to a binary file, see <format type="text/html">
           <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
             >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
           >
@@ -64,23 +61,19 @@
         .</para
       >
       <para
-        >A FileMode parameter is specified in many of the constructors for <see
-         cref="T:System.IO.FileStream" />
+        >A FileMode parameter is specified in many of the constructors for <see cref="T:System.IO.FileStream" />
 
         
 
-        , <see
-         cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+        , <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
 
         
 
-        , and in the Open methods of <see
-         cref="T:System.IO.File" />
+        , and in the Open methods of <see cref="T:System.IO.File" />
 
         
 
-         and <see
-         cref="T:System.IO.FileInfo" />
+         and <see cref="T:System.IO.FileInfo" />
 
         
 
@@ -120,18 +113,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens the file if it exists and seeks to the end of the file, or creates a new file. This requires <see
-             cref="F:System.Security.Permissions.FileIOPermissionAccess.Append" />
+            >Opens the file if it exists and seeks to the end of the file, or creates a new file. This requires <see cref="F:System.Security.Permissions.FileIOPermissionAccess.Append" />
 
             
 
-             permission. FileMode.Append can be used only in conjunction with FileAccess.Write. Trying to seek to a position before the end of the file throws an <see
-             cref="T:System.IO.IOException" />
+             permission. FileMode.Append can be used only in conjunction with FileAccess.Write. Trying to seek to a position before the end of the file throws an <see cref="T:System.IO.IOException" />
 
             
 
-             exception, and any attempt to read fails and throws a <see
-             cref="T:System.NotSupportedException" />
+             exception, and any attempt to read fails and throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -167,23 +157,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the operating system should create a new file. If the file already exists, it will be overwritten. This requires <see
-             cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
+            >Specifies that the operating system should create a new file. If the file already exists, it will be overwritten. This requires <see cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
 
             
 
-             permission. FileMode.Create is equivalent to requesting that if the file does not exist, use <see
-             cref="F:System.IO.FileMode.CreateNew" />
+             permission. FileMode.Create is equivalent to requesting that if the file does not exist, use <see cref="F:System.IO.FileMode.CreateNew" />
 
             
 
-            ; otherwise, use <see
-             cref="F:System.IO.FileMode.Truncate" />
+            ; otherwise, use <see cref="F:System.IO.FileMode.Truncate" />
 
             
 
-            . If the file already exists but is a hidden file, an <see
-             cref="T:System.UnauthorizedAccessException" />
+            . If the file already exists but is a hidden file, an <see cref="T:System.UnauthorizedAccessException" />
 
             
 
@@ -219,13 +205,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the operating system should create a new file. This requires <see
-             cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
+            >Specifies that the operating system should create a new file. This requires <see cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
 
             
 
-             permission. If the file already exists, an <see
-             cref="T:System.IO.IOException" />
+             permission. If the file already exists, an <see cref="T:System.IO.IOException" />
 
             
 
@@ -261,13 +245,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the operating system should open an existing file. The ability to open the file is dependent on the value specified by the <see
-             cref="T:System.IO.FileAccess" />
+            >Specifies that the operating system should open an existing file. The ability to open the file is dependent on the value specified by the <see cref="T:System.IO.FileAccess" />
 
             
 
-             enumeration. A <see
-             cref="T:System.IO.FileNotFoundException" />
+             enumeration. A <see cref="T:System.IO.FileNotFoundException" />
 
             
 
@@ -303,23 +285,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the operating system should open a file if it exists; otherwise, a new file should be created. If the file is opened with FileAccess.Read, <see
-             cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
+            >Specifies that the operating system should open a file if it exists; otherwise, a new file should be created. If the file is opened with FileAccess.Read, <see cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
 
             
 
-             permission is required. If the file access is FileAccess.Write, <see
-             cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
+             permission is required. If the file access is FileAccess.Write, <see cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
 
             
 
-             permission is required. If the file is opened with FileAccess.ReadWrite, both <see
-             cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
+             permission is required. If the file is opened with FileAccess.ReadWrite, both <see cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
 
             
 
-             and <see
-             cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
+             and <see cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
 
             
 
@@ -355,13 +333,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the operating system should open an existing file. When the file is opened, it should be truncated so that its size is zero bytes. This requires <see
-             cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
+            >Specifies that the operating system should open an existing file. When the file is opened, it should be truncated so that its size is zero bytes. This requires <see cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
 
             
 
-             permission. Attempts to read from a file opened with FileMode.Truncate cause an <see
-             cref="T:System.ArgumentException" />
+             permission. Attempts to read from a file opened with FileMode.Truncate cause an <see cref="T:System.ArgumentException" />
 
             
 

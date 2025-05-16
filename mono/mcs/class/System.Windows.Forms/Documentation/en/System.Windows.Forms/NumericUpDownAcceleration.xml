@@ -13,13 +13,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
+        >The <see cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
 
         
 
-         object is used by the <see
-         cref="T:System.Windows.Forms.NumericUpDown" />
+         object is used by the <see cref="T:System.Windows.Forms.NumericUpDown" />
 
         
 
@@ -50,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
 
             
 
@@ -59,14 +56,22 @@
           >
         </summary>
         <param name="seconds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of seconds the up or down button is pressed before the acceleration starts. </param
         >
         <param name="increment">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

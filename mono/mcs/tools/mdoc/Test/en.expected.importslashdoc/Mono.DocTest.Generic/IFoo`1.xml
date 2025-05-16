@@ -15,13 +15,11 @@
   <Docs>
     <typeparam name="T">T generic param</typeparam>
     <summary>To be added.</summary>
-    <remarks>
-      <c>T:Mono.DocTest.IFoo`1</c>
+    <remarks><c>T:Mono.DocTest.IFoo`1</c>
 
       
 
-      .</remarks
-    >
+      .</remarks>
   </Docs>
   <Members>
     <Member MemberName="Method&lt;U&gt;">

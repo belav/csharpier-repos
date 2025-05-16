@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.Compiler" />
+        >The <see cref="T:System.Web.Configuration.Compiler" />
 
         
 
@@ -50,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of a <see
-             cref="T:System.Web.Configuration.Compiler" />
+            >Creates an instance of a <see cref="T:System.Web.Configuration.Compiler" />
 
             
 
@@ -59,35 +57,55 @@
           >
         </summary>
         <param name="compilerOptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Lists additional compiler-specific options to pass during compilation.</param
         >
         <param name="extension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Provides a semicolon-separated list of file-name extensions used for dynamic code-behind files. For example, ".cs".</param
         >
         <param name="language">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Provides a semicolon-separated list of languages used in dynamic compilation files. For example, "c#;cs;csharp".</param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Specifies a comma-separated class/assembly combination that indicates the .NET Framework class.</param
         >
         <param name="warningLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

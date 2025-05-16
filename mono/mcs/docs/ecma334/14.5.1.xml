@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <clause number="14.5.1" title="Literals">
   <paragraph
-    >A <non_terminal
-     where="14.5">primary-expression</non_terminal>
+    >A <non_terminal where="14.5"
+      >primary-expression</non_terminal
+    >
 
     
 
-     that consists of a literal (<hyperlink
-    >9.4.4</hyperlink>
+     that consists of a literal (<hyperlink>9.4.4</hyperlink>
 
     
 

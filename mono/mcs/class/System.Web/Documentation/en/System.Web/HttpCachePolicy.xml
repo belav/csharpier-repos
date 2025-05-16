@@ -17,7 +17,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
         >For background information about HTTP headers and controlling caching, see RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1, available on the <see
-         cref="http://go.microsoft.com/fwlink/?linkid=37125"
+          cref="http://go.microsoft.com/fwlink/?linkid=37125"
           >World Wide Web Consortium (W3C) Web site</see
         >
 
@@ -49,8 +49,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.HttpCachePolicy.AddValidationCallback(System.Web.HttpCacheValidateHandler,System.Object)" />
+            >The <see cref="M:System.Web.HttpCachePolicy.AddValidationCallback(System.Web.HttpCacheValidateHandler,System.Object)" />
 
             
 
@@ -62,8 +61,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -78,24 +76,30 @@
           <para>Registers a validation callback for the current response.</para>
         </summary>
         <param name="handler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.HttpCacheValidateHandler" />
+          The <see cref="T:System.Web.HttpCacheValidateHandler" />
 
           
 
            value. </param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The arbitrary user-supplied data that is passed back to the <see
-           cref="M:System.Web.HttpCachePolicy.AddValidationCallback(System.Web.HttpCacheValidateHandler,System.Object)" />
+          The arbitrary user-supplied data that is passed back to the <see cref="M:System.Web.HttpCachePolicy.AddValidationCallback(System.Web.HttpCacheValidateHandler,System.Object)" />
 
           
 
@@ -121,7 +125,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >If the browser does not recognize cache control directives or extensions, the browser must ignore the unrecognized terms. For more information, see RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1, available on the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37125"
+              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web site</see
             >
 
@@ -134,8 +138,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -149,7 +152,11 @@
           <para>Appends the specified text to the Cache-Control HTTP header.</para>
         </summary>
         <param name="extension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -177,56 +184,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <see
-             cref="T:System.Web.HttpCacheability" />
+            >When <see cref="T:System.Web.HttpCacheability" />
 
             
 
-             is set to <see
-             cref="F:System.Web.HttpCacheability.NoCache" />
+             is set to <see cref="F:System.Web.HttpCacheability.NoCache" />
 
             
 
-             or <see
-             cref="F:System.Web.HttpCacheability.ServerAndNoCache" />
+             or <see cref="F:System.Web.HttpCacheability.ServerAndNoCache" />
 
             
 
-             the Expires HTTP header is by default set to -1; this tells the client not to cache responses in the History folder, so that when you use the back/forward buttons the client requests a new version of the response each time. You can override this behavior by calling the <see
-             cref="M:System.Web.HttpCachePolicy.SetAllowResponseInBrowserHistory(System.Boolean)" />
+             the Expires HTTP header is by default set to -1; this tells the client not to cache responses in the History folder, so that when you use the back/forward buttons the client requests a new version of the response each time. You can override this behavior by calling the <see cref="M:System.Web.HttpCachePolicy.SetAllowResponseInBrowserHistory(System.Boolean)" />
 
             
 
-             method with the <paramref
-             name="allow" />
+             method with the <paramref name="allow" />
 
             
 
              parameter set to true.</para
           >
           <para
-            >If <see
-             cref="T:System.Web.HttpCacheability" />
+            >If <see cref="T:System.Web.HttpCacheability" />
 
             
 
-             is set to values other than <see
-             cref="F:System.Web.HttpCacheability.NoCache" />
+             is set to values other than <see cref="F:System.Web.HttpCacheability.NoCache" />
 
             
 
-             or <see
-             cref="F:System.Web.HttpCacheability.ServerAndNoCache" />
+             or <see cref="F:System.Web.HttpCacheability.ServerAndNoCache" />
 
             
 
-            , calling the <see
-             cref="M:System.Web.HttpCachePolicy.SetAllowResponseInBrowserHistory(System.Boolean)" />
+            , calling the <see cref="M:System.Web.HttpCachePolicy.SetAllowResponseInBrowserHistory(System.Boolean)" />
 
             
 
-             method with either value for <paramref
-             name="allow" />
+             method with either value for <paramref name="allow" />
 
             
 
@@ -237,8 +234,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -250,13 +246,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Makes the response is available in the client browser History cache, regardless of the <see
-             cref="T:System.Web.HttpCacheability" />
+            >Makes the response is available in the client browser History cache, regardless of the <see cref="T:System.Web.HttpCacheability" />
 
             
 
-             setting made on the server, when the <paramref
-             name="allow" />
+             setting made on the server, when the <paramref name="allow" />
 
             
 
@@ -264,7 +258,11 @@
           >
         </summary>
         <param name="allow">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -296,8 +294,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -309,8 +306,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the Cache-Control header to one of the values of <see
-             cref="T:System.Web.HttpCacheability" />
+            >Sets the Cache-Control header to one of the values of <see cref="T:System.Web.HttpCacheability" />
 
             
 
@@ -318,12 +314,15 @@
           >
         </summary>
         <param name="cacheability">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.HttpCacheability" />
+          An <see cref="T:System.Web.HttpCacheability" />
 
           
 
@@ -353,7 +352,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >The field name extension is valid only when used with the private or no-cache directives. For more information, see RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1, available on the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37125"
+              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web site</see
             >
 
@@ -367,8 +366,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -380,8 +378,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the Cache-Control header to one of the values of <see
-             cref="T:System.Web.HttpCacheability" />
+            >Sets the Cache-Control header to one of the values of <see cref="T:System.Web.HttpCacheability" />
 
             
 
@@ -389,19 +386,26 @@
           >
         </summary>
         <param name="cacheability">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.HttpCacheability" />
+          The <see cref="T:System.Web.HttpCacheability" />
 
           
 
            enumeration value to set the header to. </param
         >
         <param name="field">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -431,8 +435,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -446,7 +449,11 @@
           <para>Sets the ETag HTTP header to the specified string.</para>
         </summary>
         <param name="etag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -469,8 +476,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.HttpCachePolicy.SetETagFromFileDependencies" />
+            >The <see cref="M:System.Web.HttpCachePolicy.SetETagFromFileDependencies" />
 
             
 
@@ -481,8 +487,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -520,12 +525,15 @@
           <para>Sets the Expires HTTP header to an absolute date and time.</para>
         </summary>
         <param name="date">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The absolute <see
-           cref="T:System.DateTime" />
+          The absolute <see cref="T:System.DateTime" />
 
           
 
@@ -556,8 +564,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -569,8 +576,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the Last-Modified HTTP header to the <see
-             cref="T:System.DateTime" />
+            >Sets the Last-Modified HTTP header to the <see cref="T:System.DateTime" />
 
             
 
@@ -578,12 +584,15 @@
           >
         </summary>
         <param name="date">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new <see
-           cref="T:System.DateTime" />
+          The new <see cref="T:System.DateTime" />
 
           
 
@@ -610,8 +619,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -640,16 +648,12 @@
         <Parameter Name="date" Type="System.TimeSpan" />
       </Parameters>
       <Docs>
-        <param name="date"
-          >a <see
-           cref="T:System.TimeSpan" />
-        </param>
+        <param name="date">a <see cref="T:System.TimeSpan" /></param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Max-age is the maximum absolute time a document is allowed to exist before being considered stale.</para>
           <para
-            >The <see
-             cref="M:System.Web.HttpCachePolicy.SetMaxAge(System.TimeSpan)" />
+            >The <see cref="M:System.Web.HttpCachePolicy.SetMaxAge(System.TimeSpan)" />
 
             
 
@@ -660,8 +664,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -671,8 +674,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="M:System.Web.HttpCachePolicy.SetMaxAge(System.TimeSpan)" />
+              >If the <see cref="M:System.Web.HttpCachePolicy.SetMaxAge(System.TimeSpan)" />
 
               
 
@@ -706,8 +708,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -758,13 +759,11 @@
           <para>The Cache-Control: no-transform HTTP header instructs network caching applications not to modify the document.</para>
           <para>The Cache-Control: no-transform HTTP header prevents downstream proxy servers from changing any header values specified by the Content-Encoding, Content-Range, or Content-Type headers (this includes the entity body). For example, it prevents proxies from converting GIF images to PNG.</para>
           <para
-            >As with other restrictions on caching, once <see
-             cref="M:System.Web.HttpCachePolicy.SetNoTransforms" />
+            >As with other restrictions on caching, once <see cref="M:System.Web.HttpCachePolicy.SetNoTransforms" />
 
             
 
-             is called, the Cache-Control: no-transform HTTP header cannot be disabled through the <see
-             cref="T:System.Web.HttpCachePolicy" />
+             is called, the Cache-Control: no-transform HTTP header cannot be disabled through the <see cref="T:System.Web.HttpCachePolicy" />
 
             
 
@@ -775,8 +774,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -815,18 +813,15 @@
             <para>The use of the vary:* header can disable all client caching.</para>
           </block>
           <para
-            >This is a convenience method to affect the <see
-             cref="P:System.Web.HttpCachePolicy.VaryByHeaders" />
+            >This is a convenience method to affect the <see cref="P:System.Web.HttpCachePolicy.VaryByHeaders" />
 
             
 
-             property. Passing true to the method directs the <see
-             cref="T:System.Web.HttpCachePolicy" />
+             property. Passing true to the method directs the <see cref="T:System.Web.HttpCachePolicy" />
 
             
 
-             to ignore the * value for the <see
-             cref="P:System.Web.HttpCachePolicy.VaryByHeaders" />
+             to ignore the * value for the <see cref="P:System.Web.HttpCachePolicy.VaryByHeaders" />
 
             
 
@@ -837,8 +832,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -852,17 +846,19 @@
           <para>Specifies whether the response should contain the vary:* header when varying by parameters.</para>
         </summary>
         <param name="omit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to direct the <see
-           cref="T:System.Web.HttpCachePolicy" />
+          true to direct the <see cref="T:System.Web.HttpCachePolicy" />
 
           
 
-           to not use the * value for its <see
-           cref="P:System.Web.HttpCachePolicy.VaryByHeaders" />
+           to not use the * value for its <see cref="P:System.Web.HttpCachePolicy.VaryByHeaders" />
 
           
 
@@ -883,8 +879,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.HttpCachePolicy.SetProxyMaxAge(System.TimeSpan)" />
+            >The <see cref="M:System.Web.HttpCachePolicy.SetProxyMaxAge(System.TimeSpan)" />
 
             
 
@@ -895,8 +890,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -910,7 +904,11 @@
           <para>Sets the Cache-Control: s-maxage HTTP header based on the specified time span.</para>
         </summary>
         <param name="delta">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -938,8 +936,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default, which is equivalent to <see
-             cref="F:System.Web.HttpCacheRevalidation.None" />
+            >The default, which is equivalent to <see cref="F:System.Web.HttpCacheRevalidation.None" />
 
             
 
@@ -950,8 +947,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -965,12 +961,15 @@
           <para>Sets the Cache-Control HTTP header to either the must-revalidate or the proxy-revalidate directives based on the supplied enumeration value.</para>
         </summary>
         <param name="revalidation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.HttpCacheRevalidation" />
+          The <see cref="T:System.Web.HttpCacheRevalidation" />
 
           
 
@@ -1001,8 +1000,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -1016,7 +1014,11 @@
           <para>Sets cache expiration to from absolute to sliding.</para>
         </summary>
         <param name="slide">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1044,16 +1046,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.HttpCachePolicy.SetValidUntilExpires(System.Boolean)" />
+            >The <see cref="M:System.Web.HttpCachePolicy.SetValidUntilExpires(System.Boolean)" />
 
             
 
              method is set to true automatically when the high-level &lt;%@ OutputCache … %&gt; page directive is used.</para
           >
           <para
-            >This method is provided because some browsers, when refreshing a page view, send HTTP cache invalidation headers to the Web server and evict the page from the cache. When the <paramref
-             name="validUntilExpires" />
+            >This method is provided because some browsers, when refreshing a page view, send HTTP cache invalidation headers to the Web server and evict the page from the cache. When the <paramref name="validUntilExpires" />
 
             
 
@@ -1064,8 +1064,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -1079,7 +1078,11 @@
           <para>Specifies whether the ASP.NET cache should ignore HTTP Cache-Control headers sent by the client that invalidate the cache.</para>
         </summary>
         <param name="validUntilExpires">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1108,8 +1111,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -1123,7 +1125,11 @@
           <para>Specifies a custom text string to vary cached output responses by.</para>
         </summary>
         <param name="custom">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1152,16 +1158,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.HttpCachePolicy.VaryByContentEncodings" />
+            >The <see cref="P:System.Web.HttpCachePolicy.VaryByContentEncodings" />
 
             
 
              property returns a list of Content-Encoding headers that represent compression schemes to vary the output cache by. Caching dynamically compressed responses means that the cost of compression is incurred only one time, during the first request for the resource.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.HttpCachePolicy.VaryByContentEncodings" />
+            >The <see cref="P:System.Web.HttpCachePolicy.VaryByContentEncodings" />
 
             
 
@@ -1171,8 +1175,7 @@
           <list type="bullet">
             <item>
               <para
-                >If a matching encoding is found in the <see
-                 cref="P:System.Web.HttpCachePolicy.VaryByContentEncodings" />
+                >If a matching encoding is found in the <see cref="P:System.Web.HttpCachePolicy.VaryByContentEncodings" />
 
                 
 
@@ -1181,8 +1184,7 @@
             </item>
             <item>
               <para
-                >If a matching encoding is found in the <see
-                 cref="P:System.Web.HttpCachePolicy.VaryByContentEncodings" />
+                >If a matching encoding is found in the <see cref="P:System.Web.HttpCachePolicy.VaryByContentEncodings" />
 
                 
 
@@ -1191,8 +1193,7 @@
             </item>
             <item>
               <para
-                >If a matching encoding is not found in the <see
-                 cref="P:System.Web.HttpCachePolicy.VaryByContentEncodings" />
+                >If a matching encoding is not found in the <see cref="P:System.Web.HttpCachePolicy.VaryByContentEncodings" />
 
                 
 
@@ -1201,13 +1202,12 @@
             </item>
           </list>
           <para
-            >For more information about the <see
-             cref="P:System.Web.HttpCachePolicy.VaryByContentEncodings" />
+            >For more information about the <see cref="P:System.Web.HttpCachePolicy.VaryByContentEncodings" />
 
             
 
              property, see "RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1," which is available on the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37125"
+              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web site</see
             >
 
@@ -1216,20 +1216,17 @@
             . Information about content encodings is in section 14, "Header Field Definitions."</para
           >
           <para
-            >You can set the <see
-             cref="P:System.Web.HttpCachePolicy.VaryByContentEncodings" />
+            >You can set the <see cref="P:System.Web.HttpCachePolicy.VaryByContentEncodings" />
 
             
 
-             property by using the VaryByContentEncodings attribute of the <format
-             type="text/html">
+             property by using the VaryByContentEncodings attribute of the <format type="text/html">
               <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
             </format>
 
             
 
-             directive. You can also add a cache profile to the <format
-             type="text/html">
+             directive. You can also add a cache profile to the <format type="text/html">
               <a href="6df16c27-207d-4b52-9a6e-b3a541222b3d">outputCacheProfile</a>
             </format>
 
@@ -1242,8 +1239,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -1277,8 +1273,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -1311,8 +1306,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A separate version of the requested document is available from the cache for each named parameter in the <see
-             cref="P:System.Web.HttpCachePolicy.VaryByParams" />
+            >A separate version of the requested document is available from the cache for each named parameter in the <see cref="P:System.Web.HttpCachePolicy.VaryByParams" />
 
             
 
@@ -1323,8 +1317,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 

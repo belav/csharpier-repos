@@ -1,11 +1,9 @@
 <?xml version="1.0"?>
 <clause number="14.2.5" title="Candidate user-defined operators">
   <paragraph
-    >Given a type T and an operation operator op(A), where op is an overloadable operator and A is an argument list, the set of candidate user-defined operators provided by T for operator op(A) is determined as follows: <list
-    >
+    >Given a type T and an operation operator op(A), where op is an overloadable operator and A is an argument list, the set of candidate user-defined operators provided by T for operator op(A) is determined as follows: <list>
       <list_item
-        > For all operator op declarations in T, if at least one operator is applicable (<hyperlink
-        >14.4.2.1</hyperlink>
+        > For all operator op declarations in T, if at least one operator is applicable (<hyperlink>14.4.2.1</hyperlink>
 
         
 

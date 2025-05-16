@@ -13,18 +13,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.TreeViewHitTestInfo" />
+        >The <see cref="T:System.Windows.Forms.TreeViewHitTestInfo" />
 
         
 
-         is returned by the <see
-         cref="T:System.Windows.Forms.TreeView" />
+         is returned by the <see cref="T:System.Windows.Forms.TreeView" />
 
         
 
-         class when the <see
-         cref="Overload:System.Windows.Forms.TreeView.HitTest" />
+         class when the <see cref="Overload:System.Windows.Forms.TreeView.HitTest" />
 
         
 
@@ -34,13 +31,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains information about an area of a <see
-         cref="T:System.Windows.Forms.TreeView" />
+        >Contains information about an area of a <see cref="T:System.Windows.Forms.TreeView" />
 
         
 
-         control or a <see
-         cref="T:System.Windows.Forms.TreeNode" />
+         control or a <see cref="T:System.Windows.Forms.TreeNode" />
 
         
 
@@ -66,8 +61,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="hitNode " />
+            >The <paramref name="hitNode " />
 
             
 
@@ -77,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.TreeViewHitTestInfo" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.TreeViewHitTestInfo" />
 
             
 
@@ -86,19 +79,26 @@
           >
         </summary>
         <param name="hitNode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The tree node located at the position indicated by the hit test.</param
         >
         <param name="hitLocation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.TreeViewHitTestLocations" />
+          One of the <see cref="T:System.Windows.Forms.TreeViewHitTestLocations" />
 
           
 
@@ -124,13 +124,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the location of a hit test on a <see
-             cref="T:System.Windows.Forms.TreeView" />
+            >Gets the location of a hit test on a <see cref="T:System.Windows.Forms.TreeView" />
 
             
 
-             control, in relation to the <see
-             cref="T:System.Windows.Forms.TreeView" />
+             control, in relation to the <see cref="T:System.Windows.Forms.TreeView" />
 
             
 
@@ -153,13 +151,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the hit test location is not on a <see
-             cref="T:System.Windows.Forms.TreeNode" />
+            >If the hit test location is not on a <see cref="T:System.Windows.Forms.TreeNode" />
 
             
 
-            , the <see
-             cref="P:System.Windows.Forms.TreeViewHitTestInfo.Node" />
+            , the <see cref="P:System.Windows.Forms.TreeViewHitTestInfo.Node" />
 
             
 
@@ -169,13 +165,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.TreeNode" />
+            >Gets the <see cref="T:System.Windows.Forms.TreeNode" />
 
             
 
-             at the position indicated by a hit test of a <see
-             cref="T:System.Windows.Forms.TreeView" />
+             at the position indicated by a hit test of a <see cref="T:System.Windows.Forms.TreeView" />
 
             
 

@@ -26,53 +26,44 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.AspNetHostingPermission" />
+        >The <see cref="T:System.Web.AspNetHostingPermission" />
 
         
 
-         class is used in conjunction with code access security to help protect public types in the System.Web namespaces. Code must be assigned at least the <see
-         cref="F:System.Web.AspNetHostingPermissionLevel.Minimal" />
+         class is used in conjunction with code access security to help protect public types in the System.Web namespaces. Code must be assigned at least the <see cref="F:System.Web.AspNetHostingPermissionLevel.Minimal" />
 
         
 
          trust level to access protected ASP.NET classes.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.AspNetHostingPermission" />
+        >The <see cref="T:System.Web.AspNetHostingPermission" />
 
         
 
-         class's <see
-         cref="P:System.Web.AspNetHostingPermission.Level" />
+         class's <see cref="P:System.Web.AspNetHostingPermission.Level" />
 
         
 
-         property is set by configuring the appropriate trust level in the <format
-         type="text/html">
+         property is set by configuring the appropriate trust level in the <format type="text/html">
           <a href="eeed0fd3-5aaa-4196-94af-e6baea70dded">trust</a>
         </format>
 
         
 
-         configuration element. By default, the level attribute of the trust configuration element is set to Full. That is, by default, ASP.NET applications run under the <see
-         cref="F:System.Web.AspNetHostingPermissionLevel.Unrestricted" />
+         configuration element. By default, the level attribute of the trust configuration element is set to Full. That is, by default, ASP.NET applications run under the <see cref="F:System.Web.AspNetHostingPermissionLevel.Unrestricted" />
 
         
 
-         level. When an ASP.NET application domain is created, ASP.NET reads the value specified for the level attribute of the trust configuration element, creates an instance of the <see
-         cref="T:System.Web.AspNetHostingPermission" />
+         level. When an ASP.NET application domain is created, ASP.NET reads the value specified for the level attribute of the trust configuration element, creates an instance of the <see cref="T:System.Web.AspNetHostingPermission" />
 
         
 
-         class with the specified <see
-         cref="P:System.Web.AspNetHostingPermission.Level" />
+         class with the specified <see cref="P:System.Web.AspNetHostingPermission.Level" />
 
         
 
-         attribute, and then adds the class to the permission set for the application domain. For more information, see <format
-         type="text/html">
+         attribute, and then adds the class to the permission set for the application domain. For more information, see <format type="text/html">
           <a href="f897c794-10d3-414c-86b7-59b66564bbf1">ASP.NET Trust Levels and Policy Files</a>
         </format>
 
@@ -82,13 +73,11 @@
       >
       <para>It is recommended that you set the level attribute of the trust configuration element to High for sites that are trusted. For sites that are not trusted, such as a Web server that hosts sites that run code from an external customer, it is recommended that you set the level attribute of the trust configuration element to Medium.</para>
       <para
-        >The permission sets that are defined by default for the .NET Framework (for example, LocalIntranet, Internet, and so on) do not include the <see
-         cref="T:System.Web.AspNetHostingPermission" />
+        >The permission sets that are defined by default for the .NET Framework (for example, LocalIntranet, Internet, and so on) do not include the <see cref="T:System.Web.AspNetHostingPermission" />
 
         
 
-         permission. That is, the <see
-         cref="T:System.Web.AspNetHostingPermission" />
+         permission. That is, the <see cref="T:System.Web.AspNetHostingPermission" />
 
         
 
@@ -124,13 +113,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.AspNetHostingPermission" />
+            >Initializes a new instance of the <see cref="T:System.Web.AspNetHostingPermission" />
 
             
 
-             class with the specified <see
-             cref="T:System.Security.Permissions.PermissionState" />
+             class with the specified <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
@@ -138,12 +125,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          A <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -174,8 +164,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.AspNetHostingPermission" />
+            >Initializes a new instance of the <see cref="T:System.Web.AspNetHostingPermission" />
 
             
 
@@ -183,12 +172,15 @@
           >
         </summary>
         <param name="level">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.AspNetHostingPermissionLevel" />
+          An <see cref="T:System.Web.AspNetHostingPermissionLevel" />
 
           
 
@@ -249,8 +241,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For details about formatting the XML representation of permission object state, see <format
-             type="text/html">
+            >For details about formatting the XML representation of permission object state, see <format type="text/html">
               <a href="e3d0416b-7a3d-4074-9263-c7d6cd815585">Implementing a Custom Permission</a>
             </format>
 
@@ -264,12 +255,15 @@
           <para>Reconstructs a permission object with a specified state from an XML encoding.</para>
         </summary>
         <param name="securityElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.SecurityElement" />
+          The <see cref="T:System.Security.SecurityElement" />
 
           
 
@@ -307,8 +301,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.IPermission" />
+            >An <see cref="T:System.Security.IPermission" />
 
             
 
@@ -316,7 +309,11 @@
           >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -354,13 +351,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the current <see
-             cref="T:System.Security.IPermission" />
+            >true if the current <see cref="T:System.Security.IPermission" />
 
             
 
-             is a subset of the specified <see
-             cref="T:System.Security.IPermission" />
+             is a subset of the specified <see cref="T:System.Security.IPermission" />
 
             
 
@@ -368,17 +363,19 @@
           >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.IPermission" />
+          The <see cref="T:System.Security.IPermission" />
 
           
 
-           to combine with the current permission. It must be of the same type as the current <see
-           cref="T:System.Security.IPermission" />
+           to combine with the current permission. It must be of the same type as the current <see cref="T:System.Security.IPermission" />
 
           
 
@@ -469,8 +466,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.SecurityElement" />
+            >A <see cref="T:System.Security.SecurityElement" />
 
             
 
@@ -509,8 +505,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.IPermission" />
+            >An <see cref="T:System.Security.IPermission" />
 
             
 
@@ -518,7 +513,11 @@
           >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

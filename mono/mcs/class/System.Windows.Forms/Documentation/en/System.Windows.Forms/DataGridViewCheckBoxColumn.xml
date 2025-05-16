@@ -17,69 +17,57 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.DataGridViewCheckBoxColumn" />
+        >The <see cref="T:System.Windows.Forms.DataGridViewCheckBoxColumn" />
 
         
 
-         class is a specialized type of the <see
-         cref="T:System.Windows.Forms.DataGridViewColumn" />
+         class is a specialized type of the <see cref="T:System.Windows.Forms.DataGridViewColumn" />
 
         
 
-         class used to logically host cells that indicate binary state. A <see
-         cref="T:System.Windows.Forms.DataGridViewCheckBoxColumn" />
+         class used to logically host cells that indicate binary state. A <see cref="T:System.Windows.Forms.DataGridViewCheckBoxColumn" />
 
         
 
-         has an associated <see
-         cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+         has an associated <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
 
         
 
-         in every <see
-         cref="T:System.Windows.Forms.DataGridViewRow" />
+         in every <see cref="T:System.Windows.Forms.DataGridViewRow" />
 
         
 
-         that intersects it. Each cell supplies a user interface (UI) that is similar to a <see
-         cref="T:System.Windows.Forms.CheckBox" />
+         that intersects it. Each cell supplies a user interface (UI) that is similar to a <see cref="T:System.Windows.Forms.CheckBox" />
 
         
 
          control.</para
       >
       <para
-        >The default sort mode for this column type is <see
-         cref="F:System.Windows.Forms.DataGridViewColumnSortMode.NotSortable" />
+        >The default sort mode for this column type is <see cref="F:System.Windows.Forms.DataGridViewColumnSortMode.NotSortable" />
 
         
 
         .</para
       >
       <para
-        >Typically, check box cell values are intended either for storage, like any other data, or for performing bulk operations. If you want to respond immediately when users click a check box cell, you can handle the <see
-         cref="E:System.Windows.Forms.DataGridView.CellContentClick" />
+        >Typically, check box cell values are intended either for storage, like any other data, or for performing bulk operations. If you want to respond immediately when users click a check box cell, you can handle the <see cref="E:System.Windows.Forms.DataGridView.CellContentClick" />
 
         
 
-         event, but this event occurs before the cell value is updated. If you need the new value at the time of the click, one option is to calculate what the expected value will be based on the current value. Another approach is to commit the change immediately, and handle the <see
-         cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
+         event, but this event occurs before the cell value is updated. If you need the new value at the time of the click, one option is to calculate what the expected value will be based on the current value. Another approach is to commit the change immediately, and handle the <see cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
 
         
 
-         event to respond to it. To commit the change when the cell is clicked, you must handle the <see
-         cref="E:System.Windows.Forms.DataGridView.CurrentCellDirtyStateChanged" />
+         event to respond to it. To commit the change when the cell is clicked, you must handle the <see cref="E:System.Windows.Forms.DataGridView.CurrentCellDirtyStateChanged" />
 
         
 
-         event. In the handler, if the current cell is a check box cell, call the <see
-         cref="M:System.Windows.Forms.DataGridView.CommitEdit(System.Windows.Forms.DataGridViewDataErrorContexts)" />
+         event. In the handler, if the current cell is a check box cell, call the <see cref="M:System.Windows.Forms.DataGridView.CommitEdit(System.Windows.Forms.DataGridViewDataErrorContexts)" />
 
         
 
-         method and pass in the <see
-         cref="F:System.Windows.Forms.DataGridViewDataErrorContexts.Commit" />
+         method and pass in the <see cref="F:System.Windows.Forms.DataGridViewDataErrorContexts.Commit" />
 
         
 
@@ -89,8 +77,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Hosts a collection of <see
-         cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+        >Hosts a collection of <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
 
         
 
@@ -108,8 +95,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Using this default constructor is equivalent to supplying an argument of false to the <see
-             cref="M:System.Windows.Forms.DataGridViewCheckBoxColumn.#ctor(System.Boolean)" />
+            >Using this default constructor is equivalent to supplying an argument of false to the <see cref="M:System.Windows.Forms.DataGridViewCheckBoxColumn.#ctor(System.Boolean)" />
 
             
 
@@ -119,8 +105,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewCheckBoxColumn" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewCheckBoxColumn" />
 
             
 
@@ -162,18 +147,15 @@
               </term>
               <description>
                 <para
-                  >A new <see
-                   cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+                  >A new <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
 
                   
 
-                   with its <see
-                   cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
+                   with its <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
 
                   
 
-                   property initialized to the <paramref
-                   name="threeState" />
+                   property initialized to the <paramref name="threeState" />
 
                   
 
@@ -189,8 +171,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="threeState" />
+                  >The value of the <paramref name="threeState" />
 
                   
 
@@ -213,18 +194,15 @@
             <item>
               <term>
                 <para
-                  >The <see
-                   cref="P:System.Windows.Forms.DataGridViewCellStyle.Alignment" />
+                  >The <see cref="P:System.Windows.Forms.DataGridViewCellStyle.Alignment" />
 
                   
 
-                   property of the <see
-                   cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+                   property of the <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
                   
 
-                   object returned by the <see
-                   cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.DefaultCellStyle" />
+                   object returned by the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.DefaultCellStyle" />
 
                   
 
@@ -240,18 +218,15 @@
             <item>
               <term>
                 <para
-                  >The <see
-                   cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+                  >The <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
                   
 
-                   property of the <see
-                   cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+                   property of the <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
                   
 
-                   object returned by the <see
-                   cref="P:System.Windows.Forms.DataGridViewColumn.DefaultCellStyle" />
+                   object returned by the <see cref="P:System.Windows.Forms.DataGridViewColumn.DefaultCellStyle" />
 
                   
 
@@ -264,8 +239,7 @@
 
                   
 
-                   if <paramref
-                   name="threeState" />
+                   if <paramref name="threeState" />
 
                   
 
@@ -278,8 +252,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewCheckBoxColumn" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewCheckBoxColumn" />
 
             
 
@@ -287,7 +260,11 @@
           >
         </summary>
         <param name="threeState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -313,13 +290,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The constructors for the <see
-             cref="T:System.Windows.Forms.DataGridViewCheckBoxColumn" />
+            >The constructors for the <see cref="T:System.Windows.Forms.DataGridViewCheckBoxColumn" />
 
             
 
-             class initialize this property to a newly created <see
-             cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+             class initialize this property to a newly created <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
 
             
 
@@ -327,8 +302,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Changing the properties of the cell template will not immediately affect the user interface (UI) of the column's existing cells. These changes are only apparent after the column is regenerated (for example, by sorting the column or through a call to the <see
-               cref="M:System.Windows.Forms.DataGridView.InvalidateColumn(System.Int32)" />
+              >Changing the properties of the cell template will not immediately affect the user interface (UI) of the column's existing cells. These changes are only apparent after the column is regenerated (for example, by sorting the column or through a call to the <see cref="M:System.Windows.Forms.DataGridView.InvalidateColumn(System.Int32)" />
 
               
 
@@ -368,8 +342,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default <see
-             cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+            >The default <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
             
 
@@ -410,8 +383,7 @@
 
                   
 
-                   if the initial <see
-                   cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.ThreeState" />
+                   if the initial <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.ThreeState" />
 
                   
 
@@ -421,18 +393,15 @@
             </item>
           </list>
           <para
-            >These values override the value specified in the <see
-             cref="P:System.Windows.Forms.DataGridView.DefaultCellStyle" />
+            >These values override the value specified in the <see cref="P:System.Windows.Forms.DataGridView.DefaultCellStyle" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+             property of the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
-             control, but may be overridden by other cell style properties. For more information, see <format
-             type="text/html">
+             control, but may be overridden by other cell style properties. For more information, see <format type="text/html">
               <a href="dbb75ed6-8804-4232-8382-f9920c2e380c"
                 >Cell Styles in the Windows Forms DataGridView Control</a
               >
@@ -443,48 +412,39 @@
             .</para
           >
           <para
-            >If the <see
-             cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+            >If the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
             
 
-             property of the object returned by the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.DefaultCellStyle" />
+             property of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.DefaultCellStyle" />
 
             
 
-             property has a value of false, changing the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.ThreeState" />
+             property has a value of false, changing the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.ThreeState" />
 
             
 
-             property value to true automatically sets <see
-             cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+             property value to true automatically sets <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
             
 
-             to <see
-             cref="F:System.Windows.Forms.CheckState.Indeterminate" />
+             to <see cref="F:System.Windows.Forms.CheckState.Indeterminate" />
 
             
 
-            . If <see
-             cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+            . If <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
             
 
-             has a value of <see
-             cref="F:System.Windows.Forms.CheckState.Indeterminate" />
+             has a value of <see cref="F:System.Windows.Forms.CheckState.Indeterminate" />
 
             
 
-            , changing the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.ThreeState" />
+            , changing the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.ThreeState" />
 
             
 
-             property value to false automatically sets <see
-             cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+             property value to false automatically sets <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
             
 
@@ -517,36 +477,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.FalseValue" />
+            >The <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.FalseValue" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.TrueValue" />
+            , <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.TrueValue" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.IndeterminateValue" />
+            , and <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.IndeterminateValue" />
 
             
 
              properties determine the associated values of these states as they occur in the underlying data source.</para
           >
           <para
-            >Getting or setting this property gets or sets the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FalseValue" />
+            >Getting or setting this property gets or sets the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FalseValue" />
 
             
 
-             property of the cell object returned by the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.CellTemplate" />
+             property of the cell object returned by the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.CellTemplate" />
 
             
 
-             property. Setting this property also sets the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FalseValue" />
+             property. Setting this property also sets the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FalseValue" />
 
             
 
@@ -585,36 +539,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To display the check box cells using visual styles, set this property to <see
-             cref="F:System.Windows.Forms.FlatStyle.System" />
+            >To display the check box cells using visual styles, set this property to <see cref="F:System.Windows.Forms.FlatStyle.System" />
 
             
 
-             and call the <see
-             cref="M:System.Windows.Forms.Application.EnableVisualStyles" />
+             and call the <see cref="M:System.Windows.Forms.Application.EnableVisualStyles" />
 
             
 
-             method before <see
-             cref="Overload:System.Windows.Forms.Application.Run" />
+             method before <see cref="Overload:System.Windows.Forms.Application.Run" />
 
             
 
             .</para
           >
           <para
-            >Getting or setting this property gets or sets the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FlatStyle" />
+            >Getting or setting this property gets or sets the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FlatStyle" />
 
             
 
-             property of the cell object returned by the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.CellTemplate" />
+             property of the cell object returned by the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.CellTemplate" />
 
             
 
-             property. Setting this property also sets the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FlatStyle" />
+             property. Setting this property also sets the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FlatStyle" />
 
             
 
@@ -647,36 +595,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.FalseValue" />
+            >The <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.FalseValue" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.TrueValue" />
+            , <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.TrueValue" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.IndeterminateValue" />
+            , and <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.IndeterminateValue" />
 
             
 
              properties determine the associated values of these states as they occur in the underlying data source.</para
           >
           <para
-            >Getting or setting this property gets or sets the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.IndeterminateValue" />
+            >Getting or setting this property gets or sets the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.IndeterminateValue" />
 
             
 
-             property of the cell object returned by the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.CellTemplate" />
+             property of the cell object returned by the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.CellTemplate" />
 
             
 
-             property. Setting this property also sets the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.IndeterminateValue" />
+             property. Setting this property also sets the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.IndeterminateValue" />
 
             
 
@@ -713,66 +655,54 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The indeterminate state can be useful, for example, when you do not want to set a default value in the check box.</para>
           <para
-            >Getting or setting this property gets or sets the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
+            >Getting or setting this property gets or sets the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
 
             
 
-             property of the cell object returned by the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.CellTemplate" />
+             property of the cell object returned by the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.CellTemplate" />
 
             
 
-             property. Setting this property also sets the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
+             property. Setting this property also sets the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
 
             
 
              property of every cell in the column and refreshes the column display. To override the specified value for individual cells, set the cell values after you set the column value.</para
           >
           <para
-            >If the <see
-             cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+            >If the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
             
 
-             property of the object returned by the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.DefaultCellStyle" />
+             property of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.DefaultCellStyle" />
 
             
 
-             property has a value of false, changing the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.ThreeState" />
+             property has a value of false, changing the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.ThreeState" />
 
             
 
-             property value to true automatically sets <see
-             cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+             property value to true automatically sets <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
             
 
-             to <see
-             cref="F:System.Windows.Forms.CheckState.Indeterminate" />
+             to <see cref="F:System.Windows.Forms.CheckState.Indeterminate" />
 
             
 
-            . If <see
-             cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+            . If <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
             
 
-             has a value of <see
-             cref="F:System.Windows.Forms.CheckState.Indeterminate" />
+             has a value of <see cref="F:System.Windows.Forms.CheckState.Indeterminate" />
 
             
 
-            , changing the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.ThreeState" />
+            , changing the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.ThreeState" />
 
             
 
-             property value to false automatically sets <see
-             cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+             property value to false automatically sets <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
             
 
@@ -822,36 +752,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.FalseValue" />
+            >The <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.FalseValue" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.TrueValue" />
+            , <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.TrueValue" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.IndeterminateValue" />
+            , and <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.IndeterminateValue" />
 
             
 
              properties determine the associated values of these states as they occur in the underlying data source.</para
           >
           <para
-            >Getting or setting this property gets or sets the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.TrueValue" />
+            >Getting or setting this property gets or sets the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.TrueValue" />
 
             
 
-             property of the cell object returned by the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.CellTemplate" />
+             property of the cell object returned by the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.CellTemplate" />
 
             
 
-             property. Setting this property also sets the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.TrueValue" />
+             property. Setting this property also sets the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.TrueValue" />
 
             
 

@@ -5,13 +5,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:Microsoft.Build.Utilities" />
+        >The <see cref="N:Microsoft.Build.Utilities" />
 
         
 
-         namespace provides helper classes that you can use to create your own MSBuild loggers and tasks. For information, see <format
-         type="text/html">
+         namespace provides helper classes that you can use to create your own MSBuild loggers and tasks. For information, see <format type="text/html">
           <a href="e39f13f7-1e1d-4435-95ca-0c222bca071c">MSBuild</a>
         </format>
 

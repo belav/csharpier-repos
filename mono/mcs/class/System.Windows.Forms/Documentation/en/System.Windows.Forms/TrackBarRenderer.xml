@@ -14,39 +14,33 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.TrackBarRenderer" />
+        >The <see cref="T:System.Windows.Forms.TrackBarRenderer" />
 
         
 
          class provides a set of static methods that can be used to render each part of a track bar control with the current visual style of the operating system. Rendering a control refers to drawing the user interface of a control. This is useful if you are drawing a custom control that should have the appearance of the current visual style. </para
       >
       <para
-        >If visual styles are enabled in the operating system and visual styles are applied to the client area of application windows, the methods in this class will draw the track bar with the current visual style. Otherwise, the methods in this class will throw an <see
-         cref="T:System.InvalidOperationException" />
+        >If visual styles are enabled in the operating system and visual styles are applied to the client area of application windows, the methods in this class will draw the track bar with the current visual style. Otherwise, the methods in this class will throw an <see cref="T:System.InvalidOperationException" />
 
         
 
-        . To determine whether the members of this class can be used, you can check the value of the <see
-         cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
+        . To determine whether the members of this class can be used, you can check the value of the <see cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
 
         
 
          property.</para
       >
       <para
-        >This class wraps the functionality of a <see
-         cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
+        >This class wraps the functionality of a <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
 
         
 
-         that is set to one of the elements exposed by the <see
-         cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar" />
+         that is set to one of the elements exposed by the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar" />
 
         
 
-         class. For more information, see <format
-         type="text/html">
+         class. For more information, see <format type="text/html">
           <a href="a5b178ba-610e-46c4-a6c0-509c0886a744">Rendering Controls with Visual Styles</a>
         </format>
 
@@ -80,8 +74,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before calling this method, you should verify that the value of the <see
-             cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
+            >Before calling this method, you should verify that the value of the <see cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
 
             
 
@@ -93,36 +86,45 @@
           <para>Draws a downward-pointing track bar slider (also known as the thumb) with visual styles.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to draw the track bar slider.</param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that specifies the bounds of the track bar slider.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" />
 
           
 
@@ -152,8 +154,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before calling this method, you should verify that the value of the <see
-             cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
+            >Before calling this method, you should verify that the value of the <see cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
 
             
 
@@ -165,36 +166,45 @@
           <para>Draws a horizontal track bar slider (also known as the thumb) with visual styles.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to draw the track bar slider.</param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that specifies the bounds of the track bar slider.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" />
 
           
 
@@ -225,21 +235,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before calling this method, you should verify that the value of the <see
-             cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
+            >Before calling this method, you should verify that the value of the <see cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
 
             
 
              property is true.</para
           >
           <para
-            >If width or height of the bounding rectangle or the number of ticks is less than or equal to zero, or <paramref
-             name="g" />
+            >If width or height of the bounding rectangle or the number of ticks is less than or equal to zero, or <paramref name="g" />
 
             
 
-             is null, <see
-             cref="M:System.Windows.Forms.TrackBarRenderer.DrawHorizontalTicks(System.Drawing.Graphics,System.Drawing.Rectangle,System.Int32,System.Windows.Forms.VisualStyles.EdgeStyle)" />
+             is null, <see cref="M:System.Windows.Forms.TrackBarRenderer.DrawHorizontalTicks(System.Drawing.Graphics,System.Drawing.Rectangle,System.Int32,System.Windows.Forms.VisualStyles.EdgeStyle)" />
 
             
 
@@ -251,43 +258,56 @@
           <para>Draws the specified number of horizontal track bar ticks with visual styles.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to draw the ticks.</param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that specifies the bounds of the ticks.</param
         >
         <param name="numTicks">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of ticks to draw.</param
         >
         <param name="edgeStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.EdgeStyle" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.EdgeStyle" />
 
           
 
@@ -316,8 +336,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before calling this method, you should verify that the value of the <see
-             cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
+            >Before calling this method, you should verify that the value of the <see cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
 
             
 
@@ -329,24 +348,30 @@
           <para>Draws the track for a horizontal track bar with visual styles.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to draw the track.</param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
@@ -376,8 +401,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before calling this method, you should verify that the value of the <see
-             cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
+            >Before calling this method, you should verify that the value of the <see cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
 
             
 
@@ -389,36 +413,45 @@
           <para>Draws a left-pointing track bar slider (also known as the thumb) with visual styles.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to draw the track bar slider.</param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that specifies the bounds of the track bar slider.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" />
 
           
 
@@ -448,8 +481,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before calling this method, you should verify that the value of the <see
-             cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
+            >Before calling this method, you should verify that the value of the <see cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
 
             
 
@@ -461,36 +493,45 @@
           <para>Draws a right-pointing track bar slider (also known as the thumb) with visual styles.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to draw the track bar slider.</param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that specifies the bounds of the track bar slider.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" />
 
           
 
@@ -520,8 +561,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before calling this method, you should verify that the value of the <see
-             cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
+            >Before calling this method, you should verify that the value of the <see cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
 
             
 
@@ -533,36 +573,45 @@
           <para>Draws an upward-pointing track bar slider (also known as the thumb) with visual styles.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to draw the track bar slider.</param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that specifies the bounds of the track bar slider.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" />
 
           
 
@@ -592,8 +641,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before calling this method, you should verify that the value of the <see
-             cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
+            >Before calling this method, you should verify that the value of the <see cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
 
             
 
@@ -605,36 +653,45 @@
           <para>Draws a vertical track bar slider (also known as the thumb) with visual styles.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to draw the track bar slider.</param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that specifies the bounds of the track bar slider.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" />
 
           
 
@@ -665,21 +722,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If width or height of the bounding rectangle or the number of ticks is less than or equal to zero, or <paramref
-             name="g" />
+            >If width or height of the bounding rectangle or the number of ticks is less than or equal to zero, or <paramref name="g" />
 
             
 
-             is null, <see
-             cref="M:System.Windows.Forms.TrackBarRenderer.DrawVerticalTicks(System.Drawing.Graphics,System.Drawing.Rectangle,System.Int32,System.Windows.Forms.VisualStyles.EdgeStyle)" />
+             is null, <see cref="M:System.Windows.Forms.TrackBarRenderer.DrawVerticalTicks(System.Drawing.Graphics,System.Drawing.Rectangle,System.Int32,System.Windows.Forms.VisualStyles.EdgeStyle)" />
 
             
 
              returns without rendering.</para
           >
           <para
-            >Before calling this method, you should verify that the value of the <see
-             cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
+            >Before calling this method, you should verify that the value of the <see cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
 
             
 
@@ -691,43 +745,56 @@
           <para>Draws the specified number of vertical track bar ticks with visual styles.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to draw the ticks.</param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that specifies the bounds of the ticks.</param
         >
         <param name="numTicks">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of ticks to draw.</param
         >
         <param name="edgeStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.EdgeStyle" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.EdgeStyle" />
 
           
 
@@ -756,8 +823,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before calling this method, you should verify that the value of the <see
-             cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
+            >Before calling this method, you should verify that the value of the <see cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
 
             
 
@@ -769,24 +835,30 @@
           <para>Draws the track for a vertical track bar with visual styles.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to draw the track.</param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
@@ -816,8 +888,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The size of the slider is determined by the current visual style of the operating system.</para>
           <para
-            >Before calling this method, you should verify that the value of the <see
-             cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
+            >Before calling this method, you should verify that the value of the <see cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
 
             
 
@@ -831,8 +902,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Size" />
+            >A <see cref="T:System.Drawing.Size" />
 
             
 
@@ -840,24 +910,30 @@
           >
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            this operation will use.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" />
 
           
 
@@ -887,8 +963,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The size of the slider is determined by the current visual style of the operating system.</para>
           <para
-            >Before calling this method, you should verify that the value of the <see
-             cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
+            >Before calling this method, you should verify that the value of the <see cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
 
             
 
@@ -902,8 +977,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Size" />
+            >A <see cref="T:System.Drawing.Size" />
 
             
 
@@ -911,24 +985,30 @@
           >
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            this operation will use.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" />
 
           
 
@@ -958,8 +1038,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The size of the slider is determined by the current visual style of the operating system.</para>
           <para
-            >Before calling this method, you should verify that the value of the <see
-             cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
+            >Before calling this method, you should verify that the value of the <see cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
 
             
 
@@ -973,8 +1052,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Size" />
+            >A <see cref="T:System.Drawing.Size" />
 
             
 
@@ -982,24 +1060,30 @@
           >
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            this operation will use.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" />
 
           
 
@@ -1029,8 +1113,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The size of the slider is determined by the current visual style of the operating system.</para>
           <para
-            >Before calling this method, you should verify that the value of the <see
-             cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
+            >Before calling this method, you should verify that the value of the <see cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" />
 
             
 
@@ -1044,8 +1127,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Size" />
+            >A <see cref="T:System.Drawing.Size" />
 
             
 
@@ -1053,24 +1135,30 @@
           >
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            this operation will use.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" />
 
           
 
@@ -1093,8 +1181,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this property is false, the methods of this class will throw an <see
-             cref="T:System.InvalidOperationException" />
+            >If this property is false, the methods of this class will throw an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -1104,8 +1191,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Windows.Forms.TrackBarRenderer" />
+            >Gets a value indicating whether the <see cref="T:System.Windows.Forms.TrackBarRenderer" />
 
             
 

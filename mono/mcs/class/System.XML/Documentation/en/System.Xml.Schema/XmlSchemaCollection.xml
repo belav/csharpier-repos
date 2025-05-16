@@ -34,32 +34,28 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Schemas are loaded using the <see
-         cref="M:System.Xml.Schema.XmlSchemaCollection.Add(System.String,System.String)" />
+        >Schemas are loaded using the <see cref="M:System.Xml.Schema.XmlSchemaCollection.Add(System.String,System.String)" />
 
         
 
          method, at which time the schema is associated with a namespace Uniform Resource Identifier (URI). For XML Schemas, this will typically be the targetNamespace property of the schema.</para
       >
       <para
-        >Although this class stores both XML Schemas and XDR schemas, any method and property that takes or returns an <see
-         cref="T:System.Xml.Schema.XmlSchema" />
+        >Although this class stores both XML Schemas and XDR schemas, any method and property that takes or returns an <see cref="T:System.Xml.Schema.XmlSchema" />
 
         
 
          applies to XML Schemas only.</para
       >
       <para
-        >This version of the product supports the World Wide Web Consortium (W3C) XML Schema recommendation located at http://www.w3.org/TR/xmlschema-1 and http://www.w3.org/TR/xmlschema-2. An XML Schema must reference the W3C Schema namespace http://www.w3.org/2001/XMLSchema in its schema element. See the <see
-         cref="M:System.Xml.Schema.XmlSchemaCollection.Add(System.String,System.String)" />
+        >This version of the product supports the World Wide Web Consortium (W3C) XML Schema recommendation located at http://www.w3.org/TR/xmlschema-1 and http://www.w3.org/TR/xmlschema-2. An XML Schema must reference the W3C Schema namespace http://www.w3.org/2001/XMLSchema in its schema element. See the <see cref="M:System.Xml.Schema.XmlSchemaCollection.Add(System.String,System.String)" />
 
         
 
          method for an example.</para
       >
       <para
-        >XmlSchemaCollection can be used by <see
-         cref="T:System.Xml.XmlValidatingReader" />
+        >XmlSchemaCollection can be used by <see cref="T:System.Xml.XmlValidatingReader" />
 
         
 
@@ -67,13 +63,11 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Xml.Schema.XmlSchemaCollection" />
+          >The <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
           
 
-           class is obsolete in the Microsoft .NET Framework version 2.0 and has been replaced by the <see
-           cref="T:System.Xml.Schema.XmlSchemaSet" />
+           class is obsolete in the Microsoft .NET Framework version 2.0 and has been replaced by the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
           
 
@@ -84,13 +78,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains a cache of XML Schema definition language (XSD) and XML-Data Reduced (XDR) schemas. The <see
-         cref="T:System.Xml.Schema.XmlSchemaCollection" />
+        >Contains a cache of XML Schema definition language (XSD) and XML-Data Reduced (XDR) schemas. The <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
         
 
-         class class is obsolete. Use <see
-         cref="T:System.Xml.Schema.XmlSchemaSet" />
+         class class is obsolete. Use <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
         
 
@@ -118,13 +110,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.Schema.XmlSchemaCollection" />
+              >The <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
               
 
-               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
-               cref="T:System.Xml.Schema.XmlSchemaSet" />
+               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
               
 
@@ -162,8 +152,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the XmlSchemaCollection class with the specified <see
-             cref="T:System.Xml.XmlNameTable" />
+            >Initializes a new instance of the XmlSchemaCollection class with the specified <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -171,7 +160,11 @@
           >
         </summary>
         <param name="nametable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -205,16 +198,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The targetNamespace attribute is used to identify this schema.</para>
           <para
-            >If the schema being added contains references to other namespaces (through include and import elements), the trust level of the application determines how these other namespaces are resolved. (In the .NET Framework version 1.0, a default <see
-             cref="T:System.Xml.XmlUrlResolver" />
+            >If the schema being added contains references to other namespaces (through include and import elements), the trust level of the application determines how these other namespaces are resolved. (In the .NET Framework version 1.0, a default <see cref="T:System.Xml.XmlUrlResolver" />
 
             
 
              was always used).</para
           >
           <para
-            >Fully trusted code: A default XmlUrlResolver with no user credentials is used to resolve any external resources. The schemas for these other namespaces are loaded for validation purposes only. Unlike the original schema, these other schemas are not explicitly added to the schema collection. As a result, they are not accessible using any of the collection methods or properties. If these external resources are located on a network resource that requires authentication, use an overload that takes an <see
-             cref="T:System.Xml.XmlResolver" />
+            >Fully trusted code: A default XmlUrlResolver with no user credentials is used to resolve any external resources. The schemas for these other namespaces are loaded for validation purposes only. Unlike the original schema, these other schemas are not explicitly added to the schema collection. As a result, they are not accessible using any of the collection methods or properties. If these external resources are located on a network resource that requires authentication, use an overload that takes an <see cref="T:System.Xml.XmlResolver" />
 
             
 
@@ -223,13 +214,11 @@
           <para>Semi-trusted code: External references are not resolved.</para>
           <block subset="none" type="note">
             <para
-              >If the XmlSchemaCollection is being accessed using the <see
-               cref="P:System.Xml.XmlValidatingReader.Schemas" />
+              >If the XmlSchemaCollection is being accessed using the <see cref="P:System.Xml.XmlValidatingReader.Schemas" />
 
               
 
-               property, the Add method uses the XmlResolver specified by the <see
-               cref="P:System.Xml.XmlValidatingReader.XmlResolver" />
+               property, the Add method uses the XmlResolver specified by the <see cref="P:System.Xml.XmlValidatingReader.XmlResolver" />
 
               
 
@@ -238,13 +227,11 @@
           </block>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.Schema.XmlSchemaCollection" />
+              >The <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
               
 
-               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
-               cref="T:System.Xml.Schema.XmlSchemaSet" />
+               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
               
 
@@ -255,8 +242,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >Adds the <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -268,7 +254,11 @@
           <para>The XmlSchema object.</para>
         </returns>
         <param name="schema">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -301,16 +291,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the schema being added contains references to other namespaces (through include and import elements or the x-schema attribute), the trust level of the application determines how these other namespaces are resolved. (In the .NET Framework version 1.0, a default <see
-             cref="T:System.Xml.XmlUrlResolver" />
+            >If the schema being added contains references to other namespaces (through include and import elements or the x-schema attribute), the trust level of the application determines how these other namespaces are resolved. (In the .NET Framework version 1.0, a default <see cref="T:System.Xml.XmlUrlResolver" />
 
             
 
              was always used).</para
           >
           <para
-            >Fully trusted code: A default XmlUrlResolver with no user credentials is used to resolve any external resources. The schemas for these other namespaces are loaded for validation purposes only. Unlike the original schema, these other schemas are not explicitly added to the schema collection. As a result, they are not accessible using any of the collection methods or properties. If these external resources are located on a network resource that requires authentication, use an overload that takes an <see
-             cref="T:System.Xml.XmlResolver" />
+            >Fully trusted code: A default XmlUrlResolver with no user credentials is used to resolve any external resources. The schemas for these other namespaces are loaded for validation purposes only. Unlike the original schema, these other schemas are not explicitly added to the schema collection. As a result, they are not accessible using any of the collection methods or properties. If these external resources are located on a network resource that requires authentication, use an overload that takes an <see cref="T:System.Xml.XmlResolver" />
 
             
 
@@ -319,13 +307,11 @@
           <para>Semi-trusted code: External references are not resolved.</para>
           <block subset="none" type="note">
             <para
-              >If the XmlSchemaCollection is being accessed using the <see
-               cref="P:System.Xml.XmlValidatingReader.Schemas" />
+              >If the XmlSchemaCollection is being accessed using the <see cref="P:System.Xml.XmlValidatingReader.Schemas" />
 
               
 
-               property, the Add method uses the XmlResolver specified by the <see
-               cref="P:System.Xml.XmlValidatingReader.XmlResolver" />
+               property, the Add method uses the XmlResolver specified by the <see cref="P:System.Xml.XmlValidatingReader.XmlResolver" />
 
               
 
@@ -334,13 +320,11 @@
           </block>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.Schema.XmlSchemaCollection" />
+              >The <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
               
 
-               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
-               cref="T:System.Xml.Schema.XmlSchemaSet" />
+               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
               
 
@@ -353,7 +337,11 @@
           <para>Adds all the namespaces defined in the given collection (including their associated schemas) to this collection.</para>
         </summary>
         <param name="schema">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -387,8 +375,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="ns" />
+            >If <paramref name="ns" />
 
             
 
@@ -397,21 +384,18 @@
           <code> schemaColl.Add("urn:author", "authors.xsd");
  schemaColl.Add("urn:author", "names.xsd");</code>
           <para
-            >If <paramref
-             name="ns" />
+            >If <paramref name="ns" />
 
             
 
-             is null and the schema being added is an XML Schema, the Add method uses the targetNamespace defined in the XML Schema to identify the schema in the collection. If the schema being added contains references to other namespaces (through include and import elements or the x-schema attribute), the trust level of the application determines how these other namespaces are resolved. (In the .NET Framework version 1.0, a default <see
-             cref="T:System.Xml.XmlUrlResolver" />
+             is null and the schema being added is an XML Schema, the Add method uses the targetNamespace defined in the XML Schema to identify the schema in the collection. If the schema being added contains references to other namespaces (through include and import elements or the x-schema attribute), the trust level of the application determines how these other namespaces are resolved. (In the .NET Framework version 1.0, a default <see cref="T:System.Xml.XmlUrlResolver" />
 
             
 
              was always used).</para
           >
           <para
-            >Fully trusted code: A default XmlUrlResolver with no user credentials is used to resolve any external resources. The schemas for these other namespaces are loaded for validation purposes only. Unlike the original schema, these other schemas are not explicitly added to the schema collection. As a result, they are not accessible using any of the collection methods or properties. If these external resources are located on a network resource that requires authentication, use an overload that takes an <see
-             cref="T:System.Xml.XmlResolver" />
+            >Fully trusted code: A default XmlUrlResolver with no user credentials is used to resolve any external resources. The schemas for these other namespaces are loaded for validation purposes only. Unlike the original schema, these other schemas are not explicitly added to the schema collection. As a result, they are not accessible using any of the collection methods or properties. If these external resources are located on a network resource that requires authentication, use an overload that takes an <see cref="T:System.Xml.XmlResolver" />
 
             
 
@@ -420,13 +404,11 @@
           <para>Semi-trusted code: External references are not resolved.</para>
           <block subset="none" type="note">
             <para
-              >If the XmlSchemaCollection is being accessed using the <see
-               cref="P:System.Xml.XmlValidatingReader.Schemas" />
+              >If the XmlSchemaCollection is being accessed using the <see cref="P:System.Xml.XmlValidatingReader.Schemas" />
 
               
 
-               property, the Add method uses the XmlResolver specified by the <see
-               cref="P:System.Xml.XmlValidatingReader.XmlResolver" />
+               property, the Add method uses the XmlResolver specified by the <see cref="P:System.Xml.XmlValidatingReader.XmlResolver" />
 
               
 
@@ -435,13 +417,11 @@
           </block>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.Schema.XmlSchemaCollection" />
+              >The <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
               
 
-               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
-               cref="T:System.Xml.Schema.XmlSchemaSet" />
+               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
               
 
@@ -456,8 +436,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >The <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -465,14 +444,22 @@
           >
         </returns>
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace URI associated with the schema. For XML Schemas, this will typically be the targetNamespace. </param
         >
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -506,32 +493,28 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="ns" />
+            >If <paramref name="ns" />
 
             
 
              has already been associated with another schema in the collection, the schema being added replaces the original schema in the collection.</para
           >
           <para
-            >If <paramref
-             name="ns" />
+            >If <paramref name="ns" />
 
             
 
              is null and the schema being added is an XML Schema, the Add method uses the targetNamespace defined in the XML Schema to identify the schema in the collection.</para
           >
           <para
-            >If the schema being added contains references to other namespaces (through include and import elements or the x-schema attribute), the trust level of the application determines how these other namespaces are resolved. (In the .NET Framework version 1.0, a default <see
-             cref="T:System.Xml.XmlUrlResolver" />
+            >If the schema being added contains references to other namespaces (through include and import elements or the x-schema attribute), the trust level of the application determines how these other namespaces are resolved. (In the .NET Framework version 1.0, a default <see cref="T:System.Xml.XmlUrlResolver" />
 
             
 
              was always used).</para
           >
           <para
-            >Fully trusted code: A default XmlUrlResolver with no user credentials is used to resolve any external resources. The schemas for these other namespaces are loaded for validation purposes only. Unlike the original schema, these other schemas are not explicitly added to the schema collection. As a result, they are not accessible using any of the collection methods or properties. If these external resources are located on a network resource that requires authentication, use an overload that takes an <see
-             cref="T:System.Xml.XmlResolver" />
+            >Fully trusted code: A default XmlUrlResolver with no user credentials is used to resolve any external resources. The schemas for these other namespaces are loaded for validation purposes only. Unlike the original schema, these other schemas are not explicitly added to the schema collection. As a result, they are not accessible using any of the collection methods or properties. If these external resources are located on a network resource that requires authentication, use an overload that takes an <see cref="T:System.Xml.XmlResolver" />
 
             
 
@@ -540,13 +523,11 @@
           <para>Semi-trusted code: External references are not resolved.</para>
           <block subset="none" type="note">
             <para
-              >If the XmlSchemaCollection is being accessed using the <see
-               cref="P:System.Xml.XmlValidatingReader.Schemas" />
+              >If the XmlSchemaCollection is being accessed using the <see cref="P:System.Xml.XmlValidatingReader.Schemas" />
 
               
 
-               property, the Add method uses the XmlResolver specified by the <see
-               cref="P:System.Xml.XmlValidatingReader.XmlResolver" />
+               property, the Add method uses the XmlResolver specified by the <see cref="P:System.Xml.XmlValidatingReader.XmlResolver" />
 
               
 
@@ -555,13 +536,11 @@
           </block>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.Schema.XmlSchemaCollection" />
+              >The <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
               
 
-               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
-               cref="T:System.Xml.Schema.XmlSchemaSet" />
+               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
               
 
@@ -572,8 +551,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the schema contained in the <see
-             cref="T:System.Xml.XmlReader" />
+            >Adds the schema contained in the <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -583,8 +561,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >The <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -592,7 +569,11 @@
           >
         </returns>
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -637,13 +618,11 @@
           <para>If the schema contains include and import elements that reference other namespaces, the schemas for these other namespaces are loaded for validation purposes only. Unlike the original schema, these other schemas are not explicitly added to the schema collection. As a result, they are not accessible using any of the collection methods or properties.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.Schema.XmlSchemaCollection" />
+              >The <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
               
 
-               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
-               cref="T:System.Xml.Schema.XmlSchemaSet" />
+               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
               
 
@@ -654,13 +633,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >Adds the <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
-             to the collection. The specified <see
-             cref="T:System.Xml.XmlResolver" />
+             to the collection. The specified <see cref="T:System.Xml.XmlResolver" />
 
             
 
@@ -672,19 +649,26 @@
           <para>The XmlSchema added to the schema collection.</para>
         </returns>
         <param name="schema">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XmlSchema to add to the collection. </param
         >
         <param name="resolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlResolver" />
+          The <see cref="T:System.Xml.XmlResolver" />
 
           
 
@@ -719,16 +703,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="ns" />
+            >If <paramref name="ns" />
 
             
 
              has already been associated with another schema in the collection, the schema being added replaces the original schema in the collection.</para
           >
           <para
-            >If <paramref
-             name="ns" />
+            >If <paramref name="ns" />
 
             
 
@@ -737,13 +719,11 @@
           <para>If the schema being added contains references to other namespaces (through include and import elements or the x-schema attribute), the schemas for these other namespaces are loaded for validation purposes only. Unlike the original schema, these other schemas are not explicitly added to the schema collection. As a result, they are not accessible using any of the collection methods or properties.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.Schema.XmlSchemaCollection" />
+              >The <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
               
 
-               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
-               cref="T:System.Xml.Schema.XmlSchemaSet" />
+               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
               
 
@@ -754,13 +734,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the schema contained in the <see
-             cref="T:System.Xml.XmlReader" />
+            >Adds the schema contained in the <see cref="T:System.Xml.XmlReader" />
 
             
 
-             to the schema collection. The specified <see
-             cref="T:System.Xml.XmlResolver" />
+             to the schema collection. The specified <see cref="T:System.Xml.XmlResolver" />
 
             
 
@@ -770,8 +748,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >The <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -779,7 +756,11 @@
           >
         </returns>
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -794,12 +775,15 @@
            containing the schema to add. </param
         >
         <param name="resolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlResolver" />
+          The <see cref="T:System.Xml.XmlResolver" />
 
           
 
@@ -830,13 +814,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.Schema.XmlSchemaCollection" />
+              >The <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
               
 
-               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
-               cref="T:System.Xml.Schema.XmlSchemaSet" />
+               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
               
 
@@ -853,7 +835,11 @@
           <para>true if a schema with the specified namespace is in the collection; otherwise, false.</para>
         </returns>
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -887,13 +873,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.Schema.XmlSchemaCollection" />
+              >The <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
               
 
-               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
-               cref="T:System.Xml.Schema.XmlSchemaSet" />
+               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
               
 
@@ -904,8 +888,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the targetNamespace of the specified <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >Gets a value indicating whether the targetNamespace of the specified <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -917,7 +900,11 @@
           <para>true if there is a schema in the collection with the same targetNamespace; otherwise, false.</para>
         </returns>
         <param name="schema">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -952,13 +939,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.Schema.XmlSchemaCollection" />
+              >The <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
               
 
-               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
-               cref="T:System.Xml.Schema.XmlSchemaSet" />
+               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
               
 
@@ -971,19 +956,26 @@
           <para>Copies all the XmlSchema objects from this collection into the given array starting at the given index.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array to copy the objects to. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index in <paramref
-           name="array" />
+          The index in <paramref name="array" />
 
           
 
@@ -1009,13 +1001,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.Schema.XmlSchemaCollection" />
+              >The <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
               
 
-               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
-               cref="T:System.Xml.Schema.XmlSchemaSet" />
+               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
               
 
@@ -1053,13 +1043,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.Schema.XmlSchemaCollection" />
+              >The <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
               
 
-               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
-               cref="T:System.Xml.Schema.XmlSchemaSet" />
+               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
               
 
@@ -1126,13 +1114,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.Schema.XmlSchemaCollection" />
+              >The <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
               
 
-               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
-               cref="T:System.Xml.Schema.XmlSchemaSet" />
+               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
               
 
@@ -1169,13 +1155,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Xml.Schema.XmlSchemaCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1185,8 +1169,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Xml.Schema.XmlSchemaCollection.CopyTo(System.Xml.Schema.XmlSchema[],System.Int32)" />
+            >For a description of this member, see <see cref="M:System.Xml.Schema.XmlSchemaCollection.CopyTo(System.Xml.Schema.XmlSchema[],System.Int32)" />
 
             
 
@@ -1194,19 +1177,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array to copy the objects to. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index in <paramref
-           name="array" />
+          The index in <paramref name="array" />
 
           
 
@@ -1234,13 +1224,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Xml.Schema.XmlSchemaCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1250,8 +1238,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Xml.Schema.XmlSchemaCollection.Count" />
+            >For a description of this member, see <see cref="P:System.Xml.Schema.XmlSchemaCollection.Count" />
 
             
 
@@ -1283,13 +1270,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Xml.Schema.XmlSchemaCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1299,8 +1284,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Xml.Schema.XmlSchemaCollection.System.Collections.ICollection.IsSynchronized" />
+            >For a description of this member, see <see cref="P:System.Xml.Schema.XmlSchemaCollection.System.Collections.ICollection.IsSynchronized" />
 
             
 
@@ -1332,13 +1316,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Xml.Schema.XmlSchemaCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1348,8 +1330,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Xml.Schema.XmlSchemaCollection.System.Collections.ICollection.SyncRoot" />
+            >For a description of this member, see <see cref="P:System.Xml.Schema.XmlSchemaCollection.System.Collections.ICollection.SyncRoot" />
 
             
 
@@ -1381,13 +1362,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Xml.Schema.XmlSchemaCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IEnumerable" />
+             instance is cast to an <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -1397,8 +1376,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Xml.Schema.XmlSchemaCollection.GetEnumerator" />
+            >For a description of this member, see <see cref="M:System.Xml.Schema.XmlSchemaCollection.GetEnumerator" />
 
             
 
@@ -1408,8 +1386,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns the <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -1441,13 +1418,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >These events occur when the schemas are added to the collection. If an event handler is not provided, an <see
-             cref="T:System.Xml.Schema.XmlSchemaException" />
+            >These events occur when the schemas are added to the collection. If an event handler is not provided, an <see cref="T:System.Xml.Schema.XmlSchemaException" />
 
             
 
-             is thrown on any validation errors where the <see
-             cref="P:System.Xml.Schema.ValidationEventArgs.Severity" />
+             is thrown on any validation errors where the <see cref="P:System.Xml.Schema.ValidationEventArgs.Severity" />
 
             
 
@@ -1455,13 +1430,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.Schema.XmlSchemaCollection" />
+              >The <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
               
 
-               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
-               cref="T:System.Xml.Schema.XmlSchemaSet" />
+               class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
               
 

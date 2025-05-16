@@ -14,21 +14,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.Control.Invalidated" />
+        >The <see cref="E:System.Windows.Forms.Control.Invalidated" />
 
         
 
-         event occurs when a control's display is updated. An <see
-         cref="T:System.Windows.Forms.InvalidateEventArgs" />
+         event occurs when a control's display is updated. An <see cref="T:System.Windows.Forms.InvalidateEventArgs" />
 
         
 
          specifies the rectangle that contains the invalidated window area.</para
       >
       <para
-        >For information about the event model, see <format
-         type="text/html">
+        >For information about the event model, see <format type="text/html">
           <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">[&lt;topic://cpconEventsDelegates&gt;]</a>
         </format>
 
@@ -40,8 +37,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.Control.Invalidated" />
+        >Provides data for the <see cref="E:System.Windows.Forms.Control.Invalidated" />
 
         
 
@@ -64,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.InvalidateEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.InvalidateEventArgs" />
 
             
 
@@ -73,12 +68,15 @@
           >
         </summary>
         <param name="invalidRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
@@ -102,8 +100,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Drawing.Rectangle" />
+            >Gets the <see cref="T:System.Drawing.Rectangle" />
 
             
 

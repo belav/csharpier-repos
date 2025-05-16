@@ -38,8 +38,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Common.DbDataReader" />
+            >Initializes a new instance of the <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
@@ -64,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Closes the <see
-             cref="T:System.Data.Common.DbDataReader" />
+            >Closes the <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
@@ -111,38 +109,32 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call Dispose when you are finished using the <see
-             cref="T:System.Data.Common.DbDataReader" />
+            >Call Dispose when you are finished using the <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
-            . The Dispose method leaves the <see
-             cref="T:System.Data.Common.DbDataReader" />
+            . The Dispose method leaves the <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
-             in an unusable state. After calling Dispose, you must release all references to the <see
-             cref="T:System.Data.Common.DbDataReader" />
+             in an unusable state. After calling Dispose, you must release all references to the <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Data.Common.DbDataReader" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
              was occupying.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -152,13 +144,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call Dispose before you release your last reference to the <see
-               cref="T:System.Data.Common.DbDataReader" />
+              >Always call Dispose before you release your last reference to the <see cref="T:System.Data.Common.DbDataReader" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.Data.Common.DbDataReader" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Data.Common.DbDataReader" />
 
               
 
@@ -169,8 +159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the current instance of the <see
-             cref="T:System.Data.Common.DbDataReader" />
+            >Releases all resources used by the current instance of the <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
@@ -201,8 +190,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method calls <see
-             cref="M:System.Data.SqlClient.SqlDataReader.Close" />
+            >This method calls <see cref="M:System.Data.SqlClient.SqlDataReader.Close" />
 
             
 
@@ -212,8 +200,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the managed resources used by the <see
-             cref="T:System.Data.Common.DbDataReader" />
+            >Releases the managed resources used by the <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
@@ -221,7 +208,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -244,8 +235,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Includes hidden fields. Use <see
-             cref="P:System.Data.Common.DbDataReader.VisibleFieldCount" />
+            >Includes hidden fields. Use <see cref="P:System.Data.Common.DbDataReader.VisibleFieldCount" />
 
             
 
@@ -337,13 +327,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads a stream of bytes from the specified column, starting at location indicated by <paramref
-             name="dataOffset" />
+            >Reads a stream of bytes from the specified column, starting at location indicated by <paramref name="dataOffset" />
 
             
 
-            , into the buffer, starting at the location indicated by <paramref
-             name="bufferOffset" />
+            , into the buffer, starting at the location indicated by <paramref name="bufferOffset" />
 
             
 
@@ -355,21 +343,33 @@
           <para>The actual number of bytes read.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to copy the data.</param
         >
         <param name="bufferOffset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index with the buffer to which the data will be copied.</param
         >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -431,13 +431,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads a stream of characters from the specified column, starting at location indicated by <paramref
-             name="dataOffset" />
+            >Reads a stream of characters from the specified column, starting at location indicated by <paramref name="dataOffset" />
 
             
 
-            , into the buffer, starting at the location indicated by <paramref
-             name="bufferOffset" />
+            , into the buffer, starting at the location indicated by <paramref name="bufferOffset" />
 
             
 
@@ -449,14 +447,22 @@
           <para>The actual number of characters read.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to copy the data.</param
         >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -486,8 +492,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Data.Common.DbDataReader" />
+            >Returns a <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
@@ -497,8 +502,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.Common.DbDataReader" />
+            >A <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
@@ -572,8 +576,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.DateTime" />
+            >Gets the value of the specified column as a <see cref="T:System.DateTime" />
 
             
 
@@ -607,8 +610,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Data.Common.DbDataReader" />
+            >Returns a <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
@@ -618,8 +620,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.Common.DbDataReader" />
+            >A <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
@@ -627,7 +628,11 @@
           >
         </returns>
         <param name="ordinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -654,8 +659,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.Decimal" />
+            >Gets the value of the specified column as a <see cref="T:System.Decimal" />
 
             
 
@@ -713,13 +717,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Although you can use this method to retrieve an explicit constructor, in languages that support an explicit foreach construct, it is simpler to use the looping construct directly in order to iterate through the rows in the data reader.</para>
           <para
-            >If you implement this method, it should return a new instance of <see
-             cref="T:System.Data.Common.DbEnumerator" />
+            >If you implement this method, it should return a new instance of <see cref="T:System.Data.Common.DbEnumerator" />
 
             
 
-             or ensure that your enumerator returns <see
-             cref="T:System.Data.IDataRecord" />
+             or ensure that your enumerator returns <see cref="T:System.Data.IDataRecord" />
 
             
 
@@ -729,8 +731,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns an <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -740,8 +741,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -979,7 +979,11 @@
           <para>The zero-based column ordinal.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1013,8 +1017,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
@@ -1049,8 +1052,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To determine the specific type of the object returned, use <see
-             cref="M:System.Data.Common.DbDataReader.GetProviderSpecificFieldType(System.Int32)" />
+            >To determine the specific type of the object returned, use <see cref="M:System.Data.Common.DbDataReader.GetProviderSpecificFieldType(System.Int32)" />
 
             
 
@@ -1060,8 +1062,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as an instance of <see
-             cref="T:System.Object" />
+            >Gets the value of the specified column as an instance of <see cref="T:System.Object" />
 
             
 
@@ -1104,8 +1105,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of instances of <see
-             cref="T:System.Object" />
+            >The number of instances of <see cref="T:System.Object" />
 
             
 
@@ -1113,12 +1113,15 @@
           >
         </returns>
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Object" />
+          An array of <see cref="T:System.Object" />
 
           
 
@@ -1150,13 +1153,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Data.DataTable" />
+            >Returns a <see cref="T:System.Data.DataTable" />
 
             
 
-             that describes the column metadata of the <see
-             cref="T:System.Data.Common.DbDataReader" />
+             that describes the column metadata of the <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
@@ -1166,8 +1167,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.DataTable" />
+            >A <see cref="T:System.Data.DataTable" />
 
             
 
@@ -1195,8 +1195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as an instance of <see
-             cref="T:System.String" />
+            >Gets the value of the specified column as an instance of <see cref="T:System.String" />
 
             
 
@@ -1228,8 +1227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as an instance of <see
-             cref="T:System.Object" />
+            >Gets the value of the specified column as an instance of <see cref="T:System.Object" />
 
             
 
@@ -1264,8 +1262,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of instances of <see
-             cref="T:System.Object" />
+            >The number of instances of <see cref="T:System.Object" />
 
             
 
@@ -1273,12 +1270,15 @@
           >
         </returns>
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Object" />
+          An array of <see cref="T:System.Object" />
 
           
 
@@ -1302,8 +1302,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether this <see
-             cref="T:System.Data.Common.DbDataReader" />
+            >Gets a value that indicates whether this <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
@@ -1328,8 +1327,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Data.Common.DbDataReader" />
+            >Gets a value indicating whether the <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
@@ -1356,13 +1354,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method to check for null column values before calling the typed get methods (for example, <see
-             cref="M:System.Data.Common.DbDataReader.GetByte(System.Int32)" />
+            >Call this method to check for null column values before calling the typed get methods (for example, <see cref="M:System.Data.Common.DbDataReader.GetByte(System.Int32)" />
 
             
 
-            , <see
-             cref="M:System.Data.Common.DbDataReader.GetChar(System.Int32)" />
+            , <see cref="M:System.Data.Common.DbDataReader.GetChar(System.Int32)" />
 
             
 
@@ -1376,8 +1372,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified column is equivalent to <see
-             cref="T:System.DBNull" />
+            >true if the specified column is equivalent to <see cref="T:System.DBNull" />
 
             
 
@@ -1467,8 +1462,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default position of a data reader is before the first record. Therefore, you must call <see
-             cref="M:System.Data.Common.DbDataReader.Read" />
+            >The default position of a data reader is before the first record. Therefore, you must call <see cref="M:System.Data.Common.DbDataReader.Read" />
 
             
 
@@ -1527,13 +1521,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbDataReader" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Data.IDataRecord" />
+             instance is cast to an <see cref="T:System.Data.IDataRecord" />
 
             
 
@@ -1543,8 +1535,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Data.IDataRecord.GetData(System.Int32)" />
+            >For a description of this member, see <see cref="M:System.Data.IDataRecord.GetData(System.Int32)" />
 
             
 
@@ -1554,8 +1545,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Data.IDataReader" />
+            >An instance of <see cref="T:System.Data.IDataReader" />
 
             
 
@@ -1576,8 +1566,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This value is used to determine how many fields in the <see
-             cref="T:System.Data.Common.DbDataReader" />
+            >This value is used to determine how many fields in the <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
@@ -1587,8 +1576,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of fields in the <see
-             cref="T:System.Data.Common.DbDataReader" />
+            >Gets the number of fields in the <see cref="T:System.Data.Common.DbDataReader" />
 
             
 

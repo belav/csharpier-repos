@@ -30,24 +30,21 @@
       <para>Applications use paths to draw outlines of shapes, fill the interiors of shapes, and create clipping regions. The graphics engine maintains the coordinates of geometric shapes in a path in world coordinate space.</para>
       <para>A path may be composed of any number of figures (subpaths). Each figure is either composed of a sequence of connected lines and curves or a geometric shape primitive. The starting point of a figure is the first point in the sequence of connected lines and curves. The ending point is the last point in the sequence. The starting and ending points of a geometric shape primitive are defined by the primitive specification.</para>
       <para
-        >A figure that consists of a sequence of connected lines and curves (whose starting and ending points may be coincident) is an open figure, unless it is closed explicitly. A figure can be closed explicitly, by using the <see
-         cref="M:System.Drawing.Drawing2D.GraphicsPath.CloseFigure" />
+        >A figure that consists of a sequence of connected lines and curves (whose starting and ending points may be coincident) is an open figure, unless it is closed explicitly. A figure can be closed explicitly, by using the <see cref="M:System.Drawing.Drawing2D.GraphicsPath.CloseFigure" />
 
         
 
          method, which closes the current figure by connecting a line from the ending point to the starting point. A figure that consists of a geometric shape primitive is a closed figure.</para
       >
       <para
-        >For purposes of filling and clipping (for example, if a path is rendered using <see
-         cref="M:System.Drawing.Graphics.FillPath(System.Drawing.Brush,System.Drawing.Drawing2D.GraphicsPath)" />
+        >For purposes of filling and clipping (for example, if a path is rendered using <see cref="M:System.Drawing.Graphics.FillPath(System.Drawing.Brush,System.Drawing.Drawing2D.GraphicsPath)" />
 
         
 
         ), all open figures are closed by adding a line from the figure's first point to its last point.</para
       >
       <para
-        >A new figure is implicitly started when a path is created or when a figure is closed. A new figure is explicitly created when the <see
-         cref="M:System.Drawing.Drawing2D.GraphicsPath.StartFigure" />
+        >A new figure is implicitly started when a path is created or when a figure is closed. A new figure is explicitly created when the <see cref="M:System.Drawing.Drawing2D.GraphicsPath.StartFigure" />
 
         
 
@@ -72,18 +69,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             class with a <see
-             cref="P:System.Drawing.Drawing2D.GraphicsPath.FillMode" />
+             class with a <see cref="P:System.Drawing.Drawing2D.GraphicsPath.FillMode" />
 
             
 
-             value of <see
-             cref="F:System.Drawing.Drawing2D.FillMode.Alternate" />
+             value of <see cref="F:System.Drawing.Drawing2D.FillMode.Alternate" />
 
             
 
@@ -111,13 +105,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             class with the specified <see
-             cref="T:System.Drawing.Drawing2D.FillMode" />
+             class with the specified <see cref="T:System.Drawing.Drawing2D.FillMode" />
 
             
 
@@ -125,17 +117,19 @@
           >
         </summary>
         <param name="fillMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Drawing2D.FillMode" />
+          The <see cref="T:System.Drawing.Drawing2D.FillMode" />
 
           
 
-           enumeration that determines how the interior of this <see
-           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+           enumeration that determines how the interior of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
           
 
@@ -163,18 +157,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             class with the specified <see
-             cref="T:System.Drawing.Drawing2D.PathPointType" />
+             class with the specified <see cref="T:System.Drawing.Drawing2D.PathPointType" />
 
             
 
-             and <see
-             cref="T:System.Drawing.Point" />
+             and <see cref="T:System.Drawing.Point" />
 
             
 
@@ -182,34 +173,38 @@
           >
         </summary>
         <param name="pts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.Point" />
+          An array of <see cref="T:System.Drawing.Point" />
 
           
 
-           structures that defines the coordinates of the points that make up this <see
-           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+           structures that defines the coordinates of the points that make up this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
           
 
           . </param
         >
         <param name="types">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.Drawing2D.PathPointType" />
+          An array of <see cref="T:System.Drawing.Drawing2D.PathPointType" />
 
           
 
-           enumeration elements that specifies the type of each corresponding point in the <paramref
-           name="pts" />
+           enumeration elements that specifies the type of each corresponding point in the <paramref name="pts" />
 
           
 
@@ -237,18 +232,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             array with the specified <see
-             cref="T:System.Drawing.Drawing2D.PathPointType" />
+             array with the specified <see cref="T:System.Drawing.Drawing2D.PathPointType" />
 
             
 
-             and <see
-             cref="T:System.Drawing.PointF" />
+             and <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -256,34 +248,38 @@
           >
         </summary>
         <param name="pts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.PointF" />
+          An array of <see cref="T:System.Drawing.PointF" />
 
           
 
-           structures that defines the coordinates of the points that make up this <see
-           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+           structures that defines the coordinates of the points that make up this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
           
 
           . </param
         >
         <param name="types">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.Drawing2D.PathPointType" />
+          An array of <see cref="T:System.Drawing.Drawing2D.PathPointType" />
 
           
 
-           enumeration elements that specifies the type of each corresponding point in the <paramref
-           name="pts" />
+           enumeration elements that specifies the type of each corresponding point in the <paramref name="pts" />
 
           
 
@@ -312,23 +308,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             class with the specified <see
-             cref="T:System.Drawing.Drawing2D.PathPointType" />
+             class with the specified <see cref="T:System.Drawing.Drawing2D.PathPointType" />
 
             
 
-             and <see
-             cref="T:System.Drawing.Point" />
+             and <see cref="T:System.Drawing.Point" />
 
             
 
-             arrays and with the specified <see
-             cref="T:System.Drawing.Drawing2D.FillMode" />
+             arrays and with the specified <see cref="T:System.Drawing.Drawing2D.FillMode" />
 
             
 
@@ -336,51 +328,57 @@
           >
         </summary>
         <param name="pts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.Point" />
+          An array of <see cref="T:System.Drawing.Point" />
 
           
 
-           structures that defines the coordinates of the points that make up this <see
-           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+           structures that defines the coordinates of the points that make up this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
           
 
           . </param
         >
         <param name="types">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.Drawing2D.PathPointType" />
+          An array of <see cref="T:System.Drawing.Drawing2D.PathPointType" />
 
           
 
-           enumeration elements that specifies the type of each corresponding point in the <paramref
-           name="pts" />
+           enumeration elements that specifies the type of each corresponding point in the <paramref name="pts" />
 
           
 
            array. </param
         >
         <param name="fillMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.FillMode" />
+          A <see cref="T:System.Drawing.Drawing2D.FillMode" />
 
           
 
-           enumeration that specifies how the interiors of shapes in this <see
-           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+           enumeration that specifies how the interiors of shapes in this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
           
 
@@ -409,23 +407,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             array with the specified <see
-             cref="T:System.Drawing.Drawing2D.PathPointType" />
+             array with the specified <see cref="T:System.Drawing.Drawing2D.PathPointType" />
 
             
 
-             and <see
-             cref="T:System.Drawing.PointF" />
+             and <see cref="T:System.Drawing.PointF" />
 
             
 
-             arrays and with the specified <see
-             cref="T:System.Drawing.Drawing2D.FillMode" />
+             arrays and with the specified <see cref="T:System.Drawing.Drawing2D.FillMode" />
 
             
 
@@ -433,51 +427,57 @@
           >
         </summary>
         <param name="pts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.PointF" />
+          An array of <see cref="T:System.Drawing.PointF" />
 
           
 
-           structures that defines the coordinates of the points that make up this <see
-           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+           structures that defines the coordinates of the points that make up this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
           
 
           . </param
         >
         <param name="types">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.Drawing2D.PathPointType" />
+          An array of <see cref="T:System.Drawing.Drawing2D.PathPointType" />
 
           
 
-           enumeration elements that specifies the type of each corresponding point in the <paramref
-           name="pts" />
+           enumeration elements that specifies the type of each corresponding point in the <paramref name="pts" />
 
           
 
            array. </param
         >
         <param name="fillMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.FillMode" />
+          A <see cref="T:System.Drawing.Drawing2D.FillMode" />
 
           
 
-           enumeration that specifies how the interiors of shapes in this <see
-           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+           enumeration that specifies how the interiors of shapes in this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
           
 
@@ -516,12 +516,15 @@
           <para>Appends an elliptical arc to the current figure.</para>
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
@@ -560,12 +563,15 @@
           <para>Appends an elliptical arc to the current figure.</para>
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
@@ -607,28 +613,44 @@
           <para>Appends an elliptical arc to the current figure.</para>
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the upper-left corner of the rectangular region that defines the ellipse from which the arc is drawn. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the upper-left corner of the rectangular region that defines the ellipse from which the arc is drawn. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the rectangular region that defines the ellipse from which the arc is drawn. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -670,28 +692,44 @@
           <para>Appends an elliptical arc to the current figure.</para>
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the upper-left corner of the rectangular region that defines the ellipse from which the arc is drawn. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the upper-left corner of the rectangular region that defines the ellipse from which the arc is drawn. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the rectangular region that defines the ellipse from which the arc is drawn. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -729,48 +767,60 @@
           <para>Adds a cubic Bézier curve to the current figure.</para>
         </summary>
         <param name="pt1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
            that represents the starting point of the curve. </param
         >
         <param name="pt2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
            that represents the first control point for the curve. </param
         >
         <param name="pt3">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
            that represents the second control point for the curve. </param
         >
         <param name="pt4">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
@@ -808,48 +858,60 @@
           <para>Adds a cubic Bézier curve to the current figure.</para>
         </summary>
         <param name="pt1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.PointF" />
+          A <see cref="T:System.Drawing.PointF" />
 
           
 
            that represents the starting point of the curve. </param
         >
         <param name="pt2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.PointF" />
+          A <see cref="T:System.Drawing.PointF" />
 
           
 
            that represents the first control point for the curve. </param
         >
         <param name="pt3">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.PointF" />
+          A <see cref="T:System.Drawing.PointF" />
 
           
 
            that represents the second control point for the curve. </param
         >
         <param name="pt4">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.PointF" />
+          A <see cref="T:System.Drawing.PointF" />
 
           
 
@@ -891,56 +953,88 @@
           <para>Adds a cubic Bézier curve to the current figure.</para>
         </summary>
         <param name="x1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the starting point of the curve. </param
         >
         <param name="y1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the starting point of the curve. </param
         >
         <param name="x2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the first control point for the curve. </param
         >
         <param name="y2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the first control point for the curve. </param
         >
         <param name="x3">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the second control point for the curve. </param
         >
         <param name="y3">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the second control point for the curve. </param
         >
         <param name="x4">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the endpoint of the curve. </param
         >
         <param name="y4">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -982,56 +1076,88 @@
           <para>Adds a cubic Bézier curve to the current figure.</para>
         </summary>
         <param name="x1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the starting point of the curve. </param
         >
         <param name="y1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the starting point of the curve. </param
         >
         <param name="x2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the first control point for the curve. </param
         >
         <param name="y2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the first control point for the curve. </param
         >
         <param name="x3">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the second control point for the curve. </param
         >
         <param name="y3">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the second control point for the curve. </param
         >
         <param name="x4">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the endpoint of the curve. </param
         >
         <param name="y4">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1063,13 +1189,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="points" />
+            >The <paramref name="points" />
 
             
 
-             parameter specifies an array of endpoints and control points of the connected curves. The first curve is constructed from the first point to the fourth point in the <paramref
-             name="points" />
+             parameter specifies an array of endpoints and control points of the connected curves. The first curve is constructed from the first point to the fourth point in the <paramref name="points" />
 
             
 
@@ -1104,13 +1228,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="points" />
+            >The <paramref name="points" />
 
             
 
-             parameter specifies an array of endpoints and control points of the connected curves. The first curve is constructed from the first point to the fourth point in the <paramref
-             name="points" />
+             parameter specifies an array of endpoints and control points of the connected curves. The first curve is constructed from the first point to the fourth point in the <paramref name="points" />
 
             
 
@@ -1144,8 +1266,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The user must keep the original points if they are needed. The original points are converted to cubic Bézier control points internally, therefore there is no mechanism for returning the original points. If the first point and the last point in the <paramref
-             name="points" />
+            >The user must keep the original points if they are needed. The original points are converted to cubic Bézier control points internally, therefore there is no mechanism for returning the original points. If the first point and the last point in the <paramref name="points" />
 
             
 
@@ -1157,12 +1278,15 @@
           <para>Adds a closed curve to this path. A cardinal spline curve is used because the curve travels through each of the points in the array.</para>
         </summary>
         <param name="points">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.Point" />
+          An array of <see cref="T:System.Drawing.Point" />
 
           
 
@@ -1190,8 +1314,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The user must keep the original points if they are needed. The original points are converted to cubic Bézier control points internally, therefore there is no mechanism for returning the original points. If the first point and the last point in the <paramref
-             name="points" />
+            >The user must keep the original points if they are needed. The original points are converted to cubic Bézier control points internally, therefore there is no mechanism for returning the original points. If the first point and the last point in the <paramref name="points" />
 
             
 
@@ -1203,12 +1326,15 @@
           <para>Adds a closed curve to this path. A cardinal spline curve is used because the curve travels through each of the points in the array.</para>
         </summary>
         <param name="points">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.PointF" />
+          An array of <see cref="T:System.Drawing.PointF" />
 
           
 
@@ -1237,8 +1363,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The user must keep the original points if they are needed. The original points are converted to cubic Bézier control points internally, therefore there is no mechanism for returning the original points. If the first point and the last point in the <paramref
-             name="points" />
+            >The user must keep the original points if they are needed. The original points are converted to cubic Bézier control points internally, therefore there is no mechanism for returning the original points. If the first point and the last point in the <paramref name="points" />
 
             
 
@@ -1250,19 +1375,26 @@
           <para>Adds a closed curve to this path. A cardinal spline curve is used because the curve travels through each of the points in the array.</para>
         </summary>
         <param name="points">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.Point" />
+          An array of <see cref="T:System.Drawing.Point" />
 
           
 
            structures that represents the points that define the curve. </param
         >
         <param name="tension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1291,8 +1423,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The user must keep the original points if they are needed. The original points are converted to cubic Bézier control points internally, therefore there is no mechanism for returning the original points. If the first point and the last point in the <paramref
-             name="points" />
+            >The user must keep the original points if they are needed. The original points are converted to cubic Bézier control points internally, therefore there is no mechanism for returning the original points. If the first point and the last point in the <paramref name="points" />
 
             
 
@@ -1304,19 +1435,26 @@
           <para>Adds a closed curve to this path. A cardinal spline curve is used because the curve travels through each of the points in the array.</para>
         </summary>
         <param name="points">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.PointF" />
+          An array of <see cref="T:System.Drawing.PointF" />
 
           
 
            structures that represents the points that define the curve. </param
         >
         <param name="tension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1350,12 +1488,15 @@
           <para>Adds a spline curve to the current figure. A cardinal spline curve is used because the curve travels through each of the points in the array.</para>
         </summary>
         <param name="points">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.Point" />
+          An array of <see cref="T:System.Drawing.Point" />
 
           
 
@@ -1389,12 +1530,15 @@
           <para>Adds a spline curve to the current figure. A cardinal spline curve is used because the curve travels through each of the points in the array.</para>
         </summary>
         <param name="points">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.PointF" />
+          An array of <see cref="T:System.Drawing.PointF" />
 
           
 
@@ -1429,19 +1573,26 @@
           <para>Adds a spline curve to the current figure.</para>
         </summary>
         <param name="points">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.Point" />
+          An array of <see cref="T:System.Drawing.Point" />
 
           
 
            structures that represents the points that define the curve. </param
         >
         <param name="tension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1476,19 +1627,26 @@
           <para>Adds a spline curve to the current figure.</para>
         </summary>
         <param name="points">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.PointF" />
+          An array of <see cref="T:System.Drawing.PointF" />
 
           
 
            structures that represents the points that define the curve. </param
         >
         <param name="tension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1520,13 +1678,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The user must keep the original points if they are needed. The original points are converted to cubic Bézier control points internally, therefore there is no mechanism for returning the original points.</para>
           <para
-            >The curve begins at the point in the array specified by the <paramref
-             name="offset" />
+            >The curve begins at the point in the array specified by the <paramref name="offset" />
 
             
 
-             parameter and includes the number of points (segments) specified by <paramref
-             name="numberOfSegments" />
+             parameter and includes the number of points (segments) specified by <paramref name="numberOfSegments" />
 
             
 
@@ -1538,38 +1694,52 @@
           <para>Adds a spline curve to the current figure.</para>
         </summary>
         <param name="points">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.Point" />
+          An array of <see cref="T:System.Drawing.Point" />
 
           
 
            structures that represents the points that define the curve. </param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the element in the <paramref
-           name="points" />
+          The index of the element in the <paramref name="points" />
 
           
 
            array that is used as the first point in the curve. </param
         >
         <param name="numberOfSegments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A value that specifies the amount that the curve bends between control points. Values greater than 1 produce unpredictable results. </param
         >
         <param name="tension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1601,13 +1771,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The user must keep the original points if they are needed. The original points are converted to cubic Bézier control points internally, therefore there is no mechanism for returning the original points.</para>
           <para
-            >The curve begins at the point in the array specified by <paramref
-             name="offset" />
+            >The curve begins at the point in the array specified by <paramref name="offset" />
 
             
 
-            , and includes the number of points (segments) specified by <paramref
-             name="numberOfSegments" />
+            , and includes the number of points (segments) specified by <paramref name="numberOfSegments" />
 
             
 
@@ -1619,38 +1787,52 @@
           <para>Adds a spline curve to the current figure.</para>
         </summary>
         <param name="points">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.PointF" />
+          An array of <see cref="T:System.Drawing.PointF" />
 
           
 
            structures that represents the points that define the curve. </param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the element in the <paramref
-           name="points" />
+          The index of the element in the <paramref name="points" />
 
           
 
            array that is used as the first point in the curve. </param
         >
         <param name="numberOfSegments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of segments used to draw the curve. A segment can be thought of as a line connecting two points. </param
         >
         <param name="tension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1731,28 +1913,44 @@
           <para>Adds an ellipse to the current path.</para>
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the upper-left corner of the bounding rectangle that defines the ellipse. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the upper-left corner of the bounding rectangle that defines the ellipse. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the bounding rectangle that defines the ellipse. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1786,28 +1984,44 @@
           <para>Adds an ellipse to the current path.</para>
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the upper-left corner of the bounding rectangle that defines the ellipse. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the upper left corner of the bounding rectangle that defines the ellipse. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the bounding rectangle that defines the ellipse. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1838,13 +2052,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method adds the line segment defined by the specified points to the end of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >This method adds the line segment defined by the specified points to the end of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-            . If there are previous lines or curves in the <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            . If there are previous lines or curves in the <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -1854,8 +2066,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends a line segment to this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Appends a line segment to this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -1887,13 +2098,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method adds the line segment defined by the specified points to the end of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >This method adds the line segment defined by the specified points to the end of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-            . If there are previous lines or curves in the <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            . If there are previous lines or curves in the <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -1903,8 +2112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends a line segment to this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Appends a line segment to this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -1936,8 +2144,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method adds the line segment defined by the specified points to the end of the current figure. If there are previous lines or curves in the <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >This method adds the line segment defined by the specified points to the end of the current figure. If there are previous lines or curves in the <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -1949,28 +2156,44 @@
           <para>Appends a line segment to the current figure.</para>
         </summary>
         <param name="x1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the starting point of the line. </param
         >
         <param name="y1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the starting point of the line. </param
         >
         <param name="x2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the endpoint of the line. </param
         >
         <param name="y2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2001,13 +2224,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method adds the line segment defined by the specified points to the end of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >This method adds the line segment defined by the specified points to the end of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-            . If there are previous lines or curves in the <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            . If there are previous lines or curves in the <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -2017,8 +2238,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends a line segment to this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Appends a line segment to this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -2026,28 +2246,44 @@
           >
         </summary>
         <param name="x1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the starting point of the line. </param
         >
         <param name="y1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the starting point of the line. </param
         >
         <param name="x2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the endpoint of the line. </param
         >
         <param name="y2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2075,8 +2311,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If there are previous lines or curves in the figure, a line is added to connect the endpoint of the previous segment the starting point of the line. The <paramref
-             name="points" />
+            >If there are previous lines or curves in the figure, a line is added to connect the endpoint of the previous segment the starting point of the line. The <paramref name="points" />
 
             
 
@@ -2086,8 +2321,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends a series of connected line segments to the end of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Appends a series of connected line segments to the end of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -2095,12 +2329,15 @@
           >
         </summary>
         <param name="points">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.Point" />
+          An array of <see cref="T:System.Drawing.Point" />
 
           
 
@@ -2128,8 +2365,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If there are previous lines or curves in the figure, a line is added to connect the endpoint of the previous segment the starting point of the line. The <paramref
-             name="points" />
+            >If there are previous lines or curves in the figure, a line is added to connect the endpoint of the previous segment the starting point of the line. The <paramref name="points" />
 
             
 
@@ -2139,8 +2375,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends a series of connected line segments to the end of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Appends a series of connected line segments to the end of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -2148,12 +2383,15 @@
           >
         </summary>
         <param name="points">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.PointF" />
+          An array of <see cref="T:System.Drawing.PointF" />
 
           
 
@@ -2183,8 +2421,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends the specified <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Appends the specified <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -2192,19 +2429,26 @@
           >
         </summary>
         <param name="addingPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+          The <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
           
 
            to add. </param
         >
         <param name="connect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2234,18 +2478,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The pie shape is defined by a partial outline of an ellipse and the two radial lines that intersect the endpoints of the partial outline. The partial outline begins at <paramref
-             name="startAngle" />
+            >The pie shape is defined by a partial outline of an ellipse and the two radial lines that intersect the endpoints of the partial outline. The partial outline begins at <paramref name="startAngle" />
 
             
 
-             (measured clockwise from the x-axis) and ends at <paramref
-             name="startAngle" />
+             (measured clockwise from the x-axis) and ends at <paramref name="startAngle" />
 
             
 
-             + <paramref
-             name="sweepAngle" />
+             + <paramref name="sweepAngle" />
 
             
 
@@ -2257,36 +2498,45 @@
           <para>Adds the outline of a pie shape to this path.</para>
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the bounding rectangle that defines the ellipse from which the pie is drawn. </param
         >
         <param name="startAngle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The starting angle for the pie section, measured in degrees clockwise from the x-axis. </param
         >
         <param name="sweepAngle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The angle between <paramref
-           name="startAngle" />
+          The angle between <paramref name="startAngle" />
 
           
 
-           and the end of the pie section, measured in degrees clockwise from <paramref
-           name="startAngle" />
+           and the end of the pie section, measured in degrees clockwise from <paramref name="startAngle" />
 
           
 
@@ -2319,18 +2569,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The pie shape is defined by a partial outline of an ellipse and the two radial lines that intersect the endpoints of the partial outline. The partial outline begins at <paramref
-             name="startAngle" />
+            >The pie shape is defined by a partial outline of an ellipse and the two radial lines that intersect the endpoints of the partial outline. The partial outline begins at <paramref name="startAngle" />
 
             
 
-             (measured clockwise from the x-axis) and ends at <paramref
-             name="startAngle" />
+             (measured clockwise from the x-axis) and ends at <paramref name="startAngle" />
 
             
 
-             + <paramref
-             name="sweepAngle" />
+             + <paramref name="sweepAngle" />
 
             
 
@@ -2342,52 +2589,74 @@
           <para>Adds the outline of a pie shape to this path.</para>
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the upper-left corner of the bounding rectangle that defines the ellipse from which the pie is drawn. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the upper-left corner of the bounding rectangle that defines the ellipse from which the pie is drawn. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the bounding rectangle that defines the ellipse from which the pie is drawn. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The height of the bounding rectangle that defines the ellipse from which the pie is drawn. </param
         >
         <param name="startAngle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The starting angle for the pie section, measured in degrees clockwise from the x-axis. </param
         >
         <param name="sweepAngle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The angle between <paramref
-           name="startAngle" />
+          The angle between <paramref name="startAngle" />
 
           
 
-           and the end of the pie section, measured in degrees clockwise from <paramref
-           name="startAngle" />
+           and the end of the pie section, measured in degrees clockwise from <paramref name="startAngle" />
 
           
 
@@ -2420,18 +2689,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The pie shape is defined by a partial outline of an ellipse and the two radial lines that intersect the endpoints of the partial outline. The partial outline begins at <paramref
-             name="startAngle" />
+            >The pie shape is defined by a partial outline of an ellipse and the two radial lines that intersect the endpoints of the partial outline. The partial outline begins at <paramref name="startAngle" />
 
             
 
-             (measured clockwise from the x-axis) and ends at <paramref
-             name="startAngle" />
+             (measured clockwise from the x-axis) and ends at <paramref name="startAngle" />
 
             
 
-             + <paramref
-             name="sweepAngle" />
+             + <paramref name="sweepAngle" />
 
             
 
@@ -2443,52 +2709,74 @@
           <para>Adds the outline of a pie shape to this path.</para>
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the upper-left corner of the bounding rectangle that defines the ellipse from which the pie is drawn. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the upper-left corner of the bounding rectangle that defines the ellipse from which the pie is drawn. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the bounding rectangle that defines the ellipse from which the pie is drawn. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The height of the bounding rectangle that defines the ellipse from which the pie is drawn. </param
         >
         <param name="startAngle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The starting angle for the pie section, measured in degrees clockwise from the x-axis. </param
         >
         <param name="sweepAngle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The angle between <paramref
-           name="startAngle" />
+          The angle between <paramref name="startAngle" />
 
           
 
-           and the end of the pie section, measured in degrees clockwise from <paramref
-           name="startAngle" />
+           and the end of the pie section, measured in degrees clockwise from <paramref name="startAngle" />
 
           
 
@@ -2516,8 +2804,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The points in the <paramref
-             name="points" />
+            >The points in the <paramref name="points" />
 
             
 
@@ -2529,12 +2816,15 @@
           <para>Adds a polygon to this path.</para>
         </summary>
         <param name="points">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.Point" />
+          An array of <see cref="T:System.Drawing.Point" />
 
           
 
@@ -2562,8 +2852,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The points in the <paramref
-             name="points" />
+            >The points in the <paramref name="points" />
 
             
 
@@ -2575,12 +2864,15 @@
           <para>Adds a polygon to this path.</para>
         </summary>
         <param name="points">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.PointF" />
+          An array of <see cref="T:System.Drawing.PointF" />
 
           
 
@@ -2611,12 +2903,15 @@
           <para>Adds a rectangle to this path.</para>
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
@@ -2647,12 +2942,15 @@
           <para>Adds a rectangle to this path.</para>
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
@@ -2683,12 +2981,15 @@
           <para>Adds a series of rectangles to this path.</para>
         </summary>
         <param name="rects">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.Rectangle" />
+          An array of <see cref="T:System.Drawing.Rectangle" />
 
           
 
@@ -2719,12 +3020,15 @@
           <para>Adds a series of rectangles to this path.</para>
         </summary>
         <param name="rects">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.RectangleF" />
+          An array of <see cref="T:System.Drawing.RectangleF" />
 
           
 
@@ -2760,67 +3064,86 @@
           <para>Adds a text string to this path.</para>
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
            to add. </param
         >
         <param name="family">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.FontFamily" />
+          A <see cref="T:System.Drawing.FontFamily" />
 
           
 
            that represents the name of the font with which the test is drawn. </param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.FontStyle" />
+          A <see cref="T:System.Drawing.FontStyle" />
 
           
 
            enumeration that represents style information about the text (bold, italic, and so on). This must be cast as an integer (see the example code later in this section). </param
         >
         <param name="emSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The height of the em square box that bounds the character. </param
         >
         <param name="origin">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
            that represents the point where the text starts. </param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.StringFormat" />
+          A <see cref="T:System.Drawing.StringFormat" />
 
           
 
@@ -2856,67 +3179,86 @@
           <para>Adds a text string to this path.</para>
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
            to add. </param
         >
         <param name="family">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.FontFamily" />
+          A <see cref="T:System.Drawing.FontFamily" />
 
           
 
            that represents the name of the font with which the test is drawn. </param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.FontStyle" />
+          A <see cref="T:System.Drawing.FontStyle" />
 
           
 
            enumeration that represents style information about the text (bold, italic, and so on). This must be cast as an integer (see the example code later in this section). </param
         >
         <param name="emSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The height of the em square box that bounds the character. </param
         >
         <param name="origin">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.PointF" />
+          A <see cref="T:System.Drawing.PointF" />
 
           
 
            that represents the point where the text starts. </param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.StringFormat" />
+          A <see cref="T:System.Drawing.StringFormat" />
 
           
 
@@ -2952,67 +3294,86 @@
           <para>Adds a text string to this path.</para>
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
            to add. </param
         >
         <param name="family">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.FontFamily" />
+          A <see cref="T:System.Drawing.FontFamily" />
 
           
 
            that represents the name of the font with which the test is drawn. </param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.FontStyle" />
+          A <see cref="T:System.Drawing.FontStyle" />
 
           
 
            enumeration that represents style information about the text (bold, italic, and so on). This must be cast as an integer (see the example code later in this section). </param
         >
         <param name="emSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The height of the em square box that bounds the character. </param
         >
         <param name="layoutRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the rectangle that bounds the text. </param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.StringFormat" />
+          A <see cref="T:System.Drawing.StringFormat" />
 
           
 
@@ -3048,67 +3409,86 @@
           <para>Adds a text string to this path.</para>
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
            to add. </param
         >
         <param name="family">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.FontFamily" />
+          A <see cref="T:System.Drawing.FontFamily" />
 
           
 
            that represents the name of the font with which the test is drawn. </param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.FontStyle" />
+          A <see cref="T:System.Drawing.FontStyle" />
 
           
 
            enumeration that represents style information about the text (bold, italic, and so on). This must be cast as an integer (see the example code later in this section). </param
         >
         <param name="emSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The height of the em square box that bounds the character. </param
         >
         <param name="layoutRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
            that represents the rectangle that bounds the text. </param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.StringFormat" />
+          A <see cref="T:System.Drawing.StringFormat" />
 
           
 
@@ -3131,18 +3511,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Drawing.Drawing2D.GraphicsPath.SetMarkers" />
+            >Use the <see cref="M:System.Drawing.Drawing2D.GraphicsPath.SetMarkers" />
 
             
 
-             method to create a marker at the current location in a <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+             method to create a marker at the current location in a <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-            . Use the <see
-             cref="M:System.Drawing.Drawing2D.GraphicsPathIterator.NextMarker(System.Drawing.Drawing2D.GraphicsPath)" />
+            . Use the <see cref="M:System.Drawing.Drawing2D.GraphicsPathIterator.NextMarker(System.Drawing.Drawing2D.GraphicsPath)" />
 
             
 
@@ -3176,8 +3553,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >The <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -3239,13 +3615,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling <see
-             cref="M:System.Drawing.Drawing2D.GraphicsPath.Dispose" />
+            >Calling <see cref="M:System.Drawing.Drawing2D.GraphicsPath.Dispose" />
 
             
 
-             allows the resources used by this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+             allows the resources used by this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -3255,8 +3629,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Releases all resources used by this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -3289,13 +3662,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Drawing.Drawing2D.FillMode" />
+            >Gets or sets a <see cref="T:System.Drawing.Drawing2D.FillMode" />
 
             
 
-             enumeration that determines how the interiors of shapes in this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+             enumeration that determines how the interiors of shapes in this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -3360,8 +3731,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies the specified transform and then converts each curve in this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Applies the specified transform and then converts each curve in this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -3369,17 +3739,19 @@
           >
         </summary>
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          A <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
-           by which to transform this <see
-           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+           by which to transform this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
           
 
@@ -3409,8 +3781,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts each curve in this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Converts each curve in this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -3418,24 +3789,30 @@
           >
         </summary>
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          A <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
-           by which to transform this <see
-           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+           by which to transform this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
           
 
            before flattening. </param
         >
         <param name="flatness">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3462,8 +3839,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a rectangle that bounds this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Returns a rectangle that bounds this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -3473,13 +3849,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.RectangleF" />
+            >A <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             that represents a rectangle that bounds this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+             that represents a rectangle that bounds this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -3512,13 +3886,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a rectangle that bounds this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Returns a rectangle that bounds this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             when this path is transformed by the specified <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+             when this path is transformed by the specified <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -3528,13 +3900,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.RectangleF" />
+            >A <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             that represents a rectangle that bounds this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+             that represents a rectangle that bounds this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -3542,12 +3912,15 @@
           >
         </returns>
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
@@ -3580,18 +3953,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a rectangle that bounds this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Returns a rectangle that bounds this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             when the current path is transformed by the specified <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+             when the current path is transformed by the specified <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
-             and drawn with the specified <see
-             cref="T:System.Drawing.Pen" />
+             and drawn with the specified <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3601,13 +3971,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.RectangleF" />
+            >A <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             that represents a rectangle that bounds this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+             that represents a rectangle that bounds this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -3615,29 +3983,34 @@
           >
         </returns>
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
            that specifies a transformation to be applied to this path before the bounding rectangle is calculated. This path is not permanently transformed; the transformation is used only during the process of calculating the bounding rectangle. </param
         >
         <param name="pen">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Pen" />
+          The <see cref="T:System.Drawing.Pen" />
 
           
 
-           with which to draw the <see
-           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+           with which to draw the <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
           
 
@@ -3661,13 +4034,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the last point in the <see
-             cref="P:System.Drawing.Drawing2D.GraphicsPath.PathPoints" />
+            >Gets the last point in the <see cref="P:System.Drawing.Drawing2D.GraphicsPath.PathPoints" />
 
             
 
-             array of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+             array of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -3677,13 +4048,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.PointF" />
+            >A <see cref="T:System.Drawing.PointF" />
 
             
 
-             that represents the last point in this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+             that represents the last point in this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -3717,13 +4086,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified point is contained within (under) the outline of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Indicates whether the specified point is contained within (under) the outline of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             when drawn with the specified <see
-             cref="T:System.Drawing.Pen" />
+             when drawn with the specified <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3733,13 +4100,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if the specified point is contained within the outline of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >This method returns true if the specified point is contained within the outline of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             when drawn with the specified <see
-             cref="T:System.Drawing.Pen" />
+             when drawn with the specified <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3747,24 +4112,30 @@
           >
         </returns>
         <param name="point">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
            that specifies the location to test. </param
         >
         <param name="pen">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Pen" />
+          The <see cref="T:System.Drawing.Pen" />
 
           
 
@@ -3797,13 +4168,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified point is contained within (under) the outline of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Indicates whether the specified point is contained within (under) the outline of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             when drawn with the specified <see
-             cref="T:System.Drawing.Pen" />
+             when drawn with the specified <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3813,13 +4182,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if the specified point is contained within the outline of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >This method returns true if the specified point is contained within the outline of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             when drawn with the specified <see
-             cref="T:System.Drawing.Pen" />
+             when drawn with the specified <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3827,24 +4194,30 @@
           >
         </returns>
         <param name="point">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.PointF" />
+          A <see cref="T:System.Drawing.PointF" />
 
           
 
            that specifies the location to test. </param
         >
         <param name="pen">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Pen" />
+          The <see cref="T:System.Drawing.Pen" />
 
           
 
@@ -3874,8 +4247,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method tests to see if the outline of a given path is rendered visible at the specified point. The coordinates of the point to be tested are given in world coordinates. The transform matrix of <paramref
-             name="graphics" />
+            >This method tests to see if the outline of a given path is rendered visible at the specified point. The coordinates of the point to be tested are given in world coordinates. The transform matrix of <paramref name="graphics" />
 
             
 
@@ -3885,18 +4257,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified point is contained within (under) the outline of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Indicates whether the specified point is contained within (under) the outline of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             when drawn with the specified <see
-             cref="T:System.Drawing.Pen" />
+             when drawn with the specified <see cref="T:System.Drawing.Pen" />
 
             
 
-             and using the specified <see
-             cref="T:System.Drawing.Graphics" />
+             and using the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -3906,13 +4275,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if the specified point is contained within the outline of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >This method returns true if the specified point is contained within the outline of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             as drawn with the specified <see
-             cref="T:System.Drawing.Pen" />
+             as drawn with the specified <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3920,36 +4287,45 @@
           >
         </returns>
         <param name="pt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
            that specifies the location to test. </param
         >
         <param name="pen">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Pen" />
+          The <see cref="T:System.Drawing.Pen" />
 
           
 
            to test. </param
         >
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
@@ -3979,8 +4355,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method tests to see if the outline of a given path is rendered visible at the specified point. The coordinates of the point to be tested are given in world coordinates. The transform matrix of <paramref
-             name="graphics" />
+            >This method tests to see if the outline of a given path is rendered visible at the specified point. The coordinates of the point to be tested are given in world coordinates. The transform matrix of <paramref name="graphics" />
 
             
 
@@ -3990,18 +4365,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified point is contained within (under) the outline of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Indicates whether the specified point is contained within (under) the outline of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             when drawn with the specified <see
-             cref="T:System.Drawing.Pen" />
+             when drawn with the specified <see cref="T:System.Drawing.Pen" />
 
             
 
-             and using the specified <see
-             cref="T:System.Drawing.Graphics" />
+             and using the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -4011,13 +4383,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if the specified point is contained within (under) the outline of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >This method returns true if the specified point is contained within (under) the outline of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             as drawn with the specified <see
-             cref="T:System.Drawing.Pen" />
+             as drawn with the specified <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4025,36 +4395,45 @@
           >
         </returns>
         <param name="pt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.PointF" />
+          A <see cref="T:System.Drawing.PointF" />
 
           
 
            that specifies the location to test. </param
         >
         <param name="pen">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Pen" />
+          The <see cref="T:System.Drawing.Pen" />
 
           
 
            to test. </param
         >
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
@@ -4088,13 +4467,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified point is contained within (under) the outline of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Indicates whether the specified point is contained within (under) the outline of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             when drawn with the specified <see
-             cref="T:System.Drawing.Pen" />
+             when drawn with the specified <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4104,13 +4481,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if the specified point is contained within the outline of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >This method returns true if the specified point is contained within the outline of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             when drawn with the specified <see
-             cref="T:System.Drawing.Pen" />
+             when drawn with the specified <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4118,26 +4493,37 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the point to test. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the point to test. </param
         >
         <param name="pen">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Pen" />
+          The <see cref="T:System.Drawing.Pen" />
 
           
 
@@ -4171,13 +4557,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified point is contained within (under) the outline of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Indicates whether the specified point is contained within (under) the outline of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             when drawn with the specified <see
-             cref="T:System.Drawing.Pen" />
+             when drawn with the specified <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4187,13 +4571,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if the specified point is contained within the outline of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >This method returns true if the specified point is contained within the outline of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             when drawn with the specified <see
-             cref="T:System.Drawing.Pen" />
+             when drawn with the specified <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4201,26 +4583,37 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the point to test. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the point to test. </param
         >
         <param name="pen">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Pen" />
+          The <see cref="T:System.Drawing.Pen" />
 
           
 
@@ -4251,8 +4644,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method tests to see if the outline of a given path is rendered visible at the specified point. The coordinates of the point to be tested are given in world coordinates. The transform matrix of <paramref
-             name="graphics" />
+            >This method tests to see if the outline of a given path is rendered visible at the specified point. The coordinates of the point to be tested are given in world coordinates. The transform matrix of <paramref name="graphics" />
 
             
 
@@ -4262,18 +4654,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified point is contained within (under) the outline of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Indicates whether the specified point is contained within (under) the outline of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             when drawn with the specified <see
-             cref="T:System.Drawing.Pen" />
+             when drawn with the specified <see cref="T:System.Drawing.Pen" />
 
             
 
-             and using the specified <see
-             cref="T:System.Drawing.Graphics" />
+             and using the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -4283,13 +4672,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if the specified point is contained within the outline of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >This method returns true if the specified point is contained within the outline of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             as drawn with the specified <see
-             cref="T:System.Drawing.Pen" />
+             as drawn with the specified <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4297,38 +4684,52 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the point to test. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the point to test. </param
         >
         <param name="pen">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Pen" />
+          The <see cref="T:System.Drawing.Pen" />
 
           
 
            to test. </param
         >
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
@@ -4359,8 +4760,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method tests to see if the outline of a given path is rendered visible at the specified point. The coordinates of the point to be tested are given in world coordinates. The transform matrix of the <paramref
-             name="graphics" />
+            >This method tests to see if the outline of a given path is rendered visible at the specified point. The coordinates of the point to be tested are given in world coordinates. The transform matrix of the <paramref name="graphics" />
 
             
 
@@ -4370,18 +4770,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified point is contained within (under) the outline of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Indicates whether the specified point is contained within (under) the outline of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             when drawn with the specified <see
-             cref="T:System.Drawing.Pen" />
+             when drawn with the specified <see cref="T:System.Drawing.Pen" />
 
             
 
-             and using the specified <see
-             cref="T:System.Drawing.Graphics" />
+             and using the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -4391,13 +4788,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if the specified point is contained within (under) the outline of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >This method returns true if the specified point is contained within (under) the outline of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             as drawn with the specified <see
-             cref="T:System.Drawing.Pen" />
+             as drawn with the specified <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4405,38 +4800,52 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the point to test. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the point to test. </param
         >
         <param name="pen">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Pen" />
+          The <see cref="T:System.Drawing.Pen" />
 
           
 
            to test. </param
         >
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
@@ -4462,8 +4871,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified point is contained within this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Indicates whether the specified point is contained within this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -4473,8 +4881,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if the specified point is contained within this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >This method returns true if the specified point is contained within this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -4482,12 +4889,15 @@
           >
         </returns>
         <param name="point">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
@@ -4513,8 +4923,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified point is contained within this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Indicates whether the specified point is contained within this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -4524,8 +4933,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if the specified point is contained within this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >This method returns true if the specified point is contained within this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -4533,12 +4941,15 @@
           >
         </returns>
         <param name="point">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.PointF" />
+          A <see cref="T:System.Drawing.PointF" />
 
           
 
@@ -4567,8 +4978,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The coordinates of the point to be tested are given in world coordinates. The transform matrix of the <paramref
-             name="graphics" />
+            >The coordinates of the point to be tested are given in world coordinates. The transform matrix of the <paramref name="graphics" />
 
             
 
@@ -4578,8 +4988,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified point is contained within this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Indicates whether the specified point is contained within this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -4589,8 +4998,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if the specified point is contained within this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >This method returns true if the specified point is contained within this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -4598,24 +5006,30 @@
           >
         </returns>
         <param name="pt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
            that represents the point to test. </param
         >
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
@@ -4644,8 +5058,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The coordinates of the point to be tested are given in world coordinates. The transform matrix of the <paramref
-             name="graphics" />
+            >The coordinates of the point to be tested are given in world coordinates. The transform matrix of the <paramref name="graphics" />
 
             
 
@@ -4655,8 +5068,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified point is contained within this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Indicates whether the specified point is contained within this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -4668,24 +5080,30 @@
           <para>This method returns true if the specified point is contained within this; otherwise, false.</para>
         </returns>
         <param name="pt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.PointF" />
+          A <see cref="T:System.Drawing.PointF" />
 
           
 
            that represents the point to test. </param
         >
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
@@ -4712,8 +5130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified point is contained within this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Indicates whether the specified point is contained within this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -4723,8 +5140,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if the specified point is contained within this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >This method returns true if the specified point is contained within this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -4732,14 +5148,22 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the point to test. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4766,8 +5190,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified point is contained within this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Indicates whether the specified point is contained within this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -4777,8 +5200,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if the specified point is contained within this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >This method returns true if the specified point is contained within this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -4786,14 +5208,22 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the point to test. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4823,8 +5253,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The coordinates of the point to be tested are given in world coordinates. The transform matrix of <paramref
-             name="graphics" />
+            >The coordinates of the point to be tested are given in world coordinates. The transform matrix of <paramref name="graphics" />
 
             
 
@@ -4834,13 +5263,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified point is contained within this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Indicates whether the specified point is contained within this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-            , using the specified <see
-             cref="T:System.Drawing.Graphics" />
+            , using the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -4850,8 +5277,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if the specified point is contained within this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >This method returns true if the specified point is contained within this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -4859,26 +5285,37 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the point to test. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the point to test. </param
         >
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
@@ -4908,8 +5345,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The coordinates of the point to be tested are given in world coordinates. The transform matrix of the <paramref
-             name="graphics" />
+            >The coordinates of the point to be tested are given in world coordinates. The transform matrix of the <paramref name="graphics" />
 
             
 
@@ -4919,13 +5355,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified point is contained within this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Indicates whether the specified point is contained within this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             in the visible clip region of the specified <see
-             cref="T:System.Drawing.Graphics" />
+             in the visible clip region of the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -4935,8 +5369,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if the specified point is contained within this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >This method returns true if the specified point is contained within this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -4944,26 +5377,37 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the point to test. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the point to test. </param
         >
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
@@ -4990,23 +5434,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Drawing2D.PathData" />
+            >Gets a <see cref="T:System.Drawing.Drawing2D.PathData" />
 
             
 
-             that encapsulates arrays of points (<paramref
-             name="points" />
+             that encapsulates arrays of points (<paramref name="points" />
 
             
 
-            ) and types (<paramref
-             name="types" />
+            ) and types (<paramref name="types" />
 
             
 
-            ) for this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            ) for this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -5049,8 +5489,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The array of bytes returned by the <see
-             cref="P:System.Drawing.Drawing2D.GraphicsPath.PathTypes" />
+            >The array of bytes returned by the <see cref="P:System.Drawing.Drawing2D.GraphicsPath.PathTypes" />
 
             
 
@@ -5120,8 +5559,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the types of the corresponding points in the <see
-             cref="P:System.Drawing.Drawing2D.GraphicsPath.PathPoints" />
+            >Gets the types of the corresponding points in the <see cref="P:System.Drawing.Drawing2D.GraphicsPath.PathPoints" />
 
             
 
@@ -5146,13 +5584,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of elements in the <see
-             cref="P:System.Drawing.Drawing2D.GraphicsPath.PathPoints" />
+            >Gets the number of elements in the <see cref="P:System.Drawing.Drawing2D.GraphicsPath.PathPoints" />
 
             
 
-             or the <see
-             cref="P:System.Drawing.Drawing2D.GraphicsPath.PathTypes" />
+             or the <see cref="P:System.Drawing.Drawing2D.GraphicsPath.PathTypes" />
 
             
 
@@ -5177,23 +5613,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Empties the <see
-             cref="P:System.Drawing.Drawing2D.GraphicsPath.PathPoints" />
+            >Empties the <see cref="P:System.Drawing.Drawing2D.GraphicsPath.PathPoints" />
 
             
 
-             and <see
-             cref="P:System.Drawing.Drawing2D.GraphicsPath.PathTypes" />
+             and <see cref="P:System.Drawing.Drawing2D.GraphicsPath.PathTypes" />
 
             
 
-             arrays and sets the <see
-             cref="T:System.Drawing.Drawing2D.FillMode" />
+             arrays and sets the <see cref="T:System.Drawing.Drawing2D.FillMode" />
 
             
 
-             to <see
-             cref="F:System.Drawing.Drawing2D.FillMode.Alternate" />
+             to <see cref="F:System.Drawing.Drawing2D.FillMode.Alternate" />
 
             
 
@@ -5218,13 +5650,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reverses the order of points in the <see
-             cref="P:System.Drawing.Drawing2D.GraphicsPath.PathPoints" />
+            >Reverses the order of points in the <see cref="P:System.Drawing.Drawing2D.GraphicsPath.PathPoints" />
 
             
 
-             array of this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+             array of this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -5248,8 +5678,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates a marker on the path that can be used to separate sections of the path. You can then use the <see
-             cref="M:System.Drawing.Drawing2D.GraphicsPathIterator.NextMarker(System.Drawing.Drawing2D.GraphicsPath)" />
+            >This method creates a marker on the path that can be used to separate sections of the path. You can then use the <see cref="M:System.Drawing.Drawing2D.GraphicsPathIterator.NextMarker(System.Drawing.Drawing2D.GraphicsPath)" />
 
             
 
@@ -5260,8 +5689,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets a marker on this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Sets a marker on this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -5286,8 +5714,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The user must keep the original points if they are needed. The original points are converted to cubic Bézier control points internally, therefore there is no mechanism for returning the original points.</para>
           <para
-            >This method starts a new subpath in the path. Subpaths allow you to separate a path into sections and use the <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPathIterator" />
+            >This method starts a new subpath in the path. Subpaths allow you to separate a path into sections and use the <see cref="T:System.Drawing.Drawing2D.GraphicsPathIterator" />
 
             
 
@@ -5320,8 +5747,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The transformation can scale, translate, rotate, or skew the <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >The transformation can scale, translate, rotate, or skew the <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -5331,8 +5757,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies a transform matrix to this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Applies a transform matrix to this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -5340,12 +5765,15 @@
           >
         </summary>
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          A <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
@@ -5375,8 +5803,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies a warp transform, defined by a rectangle and a parallelogram, to this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Applies a warp transform, defined by a rectangle and a parallelogram, to this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -5384,34 +5811,38 @@
           >
         </summary>
         <param name="destPoints">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.PointF" />
+          An array of <see cref="T:System.Drawing.PointF" />
 
           
 
-           structures that define a parallelogram to which the rectangle defined by <paramref
-           name="srcRect" />
+           structures that define a parallelogram to which the rectangle defined by <paramref name="srcRect" />
 
           
 
            is transformed. The array can contain either three or four elements. If the array contains three elements, the lower-right corner of the parallelogram is implied by the first three points. </param
         >
         <param name="srcRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           that represents the rectangle that is transformed to the parallelogram defined by <paramref
-           name="destPoints" />
+           that represents the rectangle that is transformed to the parallelogram defined by <paramref name="destPoints" />
 
           
 
@@ -5442,8 +5873,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies a warp transform, defined by a rectangle and a parallelogram, to this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Applies a warp transform, defined by a rectangle and a parallelogram, to this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -5451,46 +5881,53 @@
           >
         </summary>
         <param name="destPoints">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.PointF" />
+          An array of <see cref="T:System.Drawing.PointF" />
 
           
 
-           structures that define a parallelogram to which the rectangle defined by <paramref
-           name="srcRect" />
+           structures that define a parallelogram to which the rectangle defined by <paramref name="srcRect" />
 
           
 
            is transformed. The array can contain either three or four elements. If the array contains three elements, the lower-right corner of the parallelogram is implied by the first three points. </param
         >
         <param name="srcRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           that represents the rectangle that is transformed to the parallelogram defined by <paramref
-           name="destPoints" />
+           that represents the rectangle that is transformed to the parallelogram defined by <paramref name="destPoints" />
 
           
 
           . </param
         >
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          A <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
@@ -5522,8 +5959,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies a warp transform, defined by a rectangle and a parallelogram, to this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Applies a warp transform, defined by a rectangle and a parallelogram, to this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -5531,58 +5967,68 @@
           >
         </summary>
         <param name="destPoints">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.PointF" />
+          An array of <see cref="T:System.Drawing.PointF" />
 
           
 
-           structures that defines a parallelogram to which the rectangle defined by <paramref
-           name="srcRect" />
+           structures that defines a parallelogram to which the rectangle defined by <paramref name="srcRect" />
 
           
 
            is transformed. The array can contain either three or four elements. If the array contains three elements, the lower-right corner of the parallelogram is implied by the first three points. </param
         >
         <param name="srcRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           that represents the rectangle that is transformed to the parallelogram defined by <paramref
-           name="destPoints" />
+           that represents the rectangle that is transformed to the parallelogram defined by <paramref name="destPoints" />
 
           
 
           . </param
         >
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          A <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
            that specifies a geometric transform to apply to the path. </param
         >
         <param name="warpMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.WarpMode" />
+          A <see cref="T:System.Drawing.Drawing2D.WarpMode" />
 
           
 
@@ -5615,8 +6061,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies a warp transform, defined by a rectangle and a parallelogram, to this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Applies a warp transform, defined by a rectangle and a parallelogram, to this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -5624,70 +6069,83 @@
           >
         </summary>
         <param name="destPoints">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.PointF" />
+          An array of <see cref="T:System.Drawing.PointF" />
 
           
 
-           structures that define a parallelogram to which the rectangle defined by <paramref
-           name="srcRect" />
+           structures that define a parallelogram to which the rectangle defined by <paramref name="srcRect" />
 
           
 
            is transformed. The array can contain either three or four elements. If the array contains three elements, the lower-right corner of the parallelogram is implied by the first three points. </param
         >
         <param name="srcRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           that represents the rectangle that is transformed to the parallelogram defined by <paramref
-           name="destPoints" />
+           that represents the rectangle that is transformed to the parallelogram defined by <paramref name="destPoints" />
 
           
 
           . </param
         >
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          A <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
            that specifies a geometric transform to apply to the path. </param
         >
         <param name="warpMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.WarpMode" />
+          A <see cref="T:System.Drawing.Drawing2D.WarpMode" />
 
           
 
            enumeration that specifies whether this warp operation uses perspective or bilinear mode. </param
         >
         <param name="flatness">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A value from 0 through 1 that specifies how flat the resulting path is. For more information, see the <see
-           cref="M:System.Drawing.Drawing2D.GraphicsPath.Flatten" />
+          A value from 0 through 1 that specifies how flat the resulting path is. For more information, see the <see cref="M:System.Drawing.Drawing2D.GraphicsPath.Flatten" />
 
           
 
@@ -5712,28 +6170,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates an outline around the original lines in this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >This method creates an outline around the original lines in this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-            , with a distance between the existing lines and the new outline equal to that of the width of the <see
-             cref="T:System.Drawing.Pen" />
+            , with a distance between the existing lines and the new outline equal to that of the width of the <see cref="T:System.Drawing.Pen" />
 
             
 
-             used in the call to <see
-             cref="M:System.Drawing.Drawing2D.GraphicsPath.Widen(System.Drawing.Pen)" />
+             used in the call to <see cref="M:System.Drawing.Drawing2D.GraphicsPath.Widen(System.Drawing.Pen)" />
 
             
 
-            . If you want to fill the space between the lines you must use the <see
-             cref="M:System.Drawing.Graphics.FillPath(System.Drawing.Brush,System.Drawing.Drawing2D.GraphicsPath)" />
+            . If you want to fill the space between the lines you must use the <see cref="M:System.Drawing.Graphics.FillPath(System.Drawing.Brush,System.Drawing.Drawing2D.GraphicsPath)" />
 
             
 
-             rather then the <see
-             cref="M:System.Drawing.Graphics.DrawPath(System.Drawing.Pen,System.Drawing.Drawing2D.GraphicsPath)" />
+             rather then the <see cref="M:System.Drawing.Graphics.DrawPath(System.Drawing.Pen,System.Drawing.Drawing2D.GraphicsPath)" />
 
             
 
@@ -5745,12 +6198,15 @@
           <para>Adds an additional outline to the path.</para>
         </summary>
         <param name="pen">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Pen" />
+          A <see cref="T:System.Drawing.Pen" />
 
           
 
@@ -5779,28 +6235,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates an outline around the original lines in this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >This method creates an outline around the original lines in this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-            , with a distance between the existing lines and the new outline equal to that of the width of the <see
-             cref="T:System.Drawing.Pen" />
+            , with a distance between the existing lines and the new outline equal to that of the width of the <see cref="T:System.Drawing.Pen" />
 
             
 
-             used in the call to <see
-             cref="M:System.Drawing.Drawing2D.GraphicsPath.Widen(System.Drawing.Pen,System.Drawing.Drawing2D.Matrix)" />
+             used in the call to <see cref="M:System.Drawing.Drawing2D.GraphicsPath.Widen(System.Drawing.Pen,System.Drawing.Drawing2D.Matrix)" />
 
             
 
-            . If you want to fill the space between the lines you must use the <see
-             cref="M:System.Drawing.Graphics.FillPath(System.Drawing.Brush,System.Drawing.Drawing2D.GraphicsPath)" />
+            . If you want to fill the space between the lines you must use the <see cref="M:System.Drawing.Graphics.FillPath(System.Drawing.Brush,System.Drawing.Drawing2D.GraphicsPath)" />
 
             
 
-             rather then the <see
-             cref="M:System.Drawing.Graphics.DrawPath(System.Drawing.Pen,System.Drawing.Drawing2D.GraphicsPath)" />
+             rather then the <see cref="M:System.Drawing.Graphics.DrawPath(System.Drawing.Pen,System.Drawing.Drawing2D.GraphicsPath)" />
 
             
 
@@ -5810,8 +6261,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an additional outline to the <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Adds an additional outline to the <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -5819,24 +6269,30 @@
           >
         </summary>
         <param name="pen">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Pen" />
+          A <see cref="T:System.Drawing.Pen" />
 
           
 
            that specifies the width between the original outline of the path and the new outline this method creates. </param
         >
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          A <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
@@ -5866,28 +6322,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates an outline around the original lines in this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >This method creates an outline around the original lines in this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-            , with a distance between the existing lines and the new outline equal to that of the width of the <see
-             cref="T:System.Drawing.Pen" />
+            , with a distance between the existing lines and the new outline equal to that of the width of the <see cref="T:System.Drawing.Pen" />
 
             
 
-             used in the call to <see
-             cref="M:System.Drawing.Drawing2D.GraphicsPath.Widen(System.Drawing.Pen,System.Drawing.Drawing2D.Matrix,System.Single)" />
+             used in the call to <see cref="M:System.Drawing.Drawing2D.GraphicsPath.Widen(System.Drawing.Pen,System.Drawing.Drawing2D.Matrix,System.Single)" />
 
             
 
-            . If you want to fill the space between the lines you must use the <see
-             cref="M:System.Drawing.Graphics.FillPath(System.Drawing.Brush,System.Drawing.Drawing2D.GraphicsPath)" />
+            . If you want to fill the space between the lines you must use the <see cref="M:System.Drawing.Graphics.FillPath(System.Drawing.Brush,System.Drawing.Drawing2D.GraphicsPath)" />
 
             
 
-             rather then the <see
-             cref="M:System.Drawing.Graphics.DrawPath(System.Drawing.Pen,System.Drawing.Drawing2D.GraphicsPath)" />
+             rather then the <see cref="M:System.Drawing.Graphics.DrawPath(System.Drawing.Pen,System.Drawing.Drawing2D.GraphicsPath)" />
 
             
 
@@ -5897,8 +6348,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Replaces this <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >Replaces this <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -5906,31 +6356,41 @@
           >
         </summary>
         <param name="pen">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Pen" />
+          A <see cref="T:System.Drawing.Pen" />
 
           
 
            that specifies the width between the original outline of the path and the new outline this method creates. </param
         >
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          A <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
            that specifies a transform to apply to the path before widening. </param
         >
         <param name="flatness">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -21,16 +21,13 @@
       allocating memory, and interoperating with the operating system.
     </summary>
     <remarks>
-      <para
-        >
-        The <b
-        >UnixMarshal</b>
+      <para>
+        The <b>UnixMarshal</b>
 
         
 
          class consists of many members to facilitate
-        the <see
-         cref="T:System.Runtime.InteropServices.Marshal" />
+        the <see cref="T:System.Runtime.InteropServices.Marshal" />
 
         
 
@@ -50,34 +47,28 @@
         <item>
           <term>Data Transformation</term>
           <description>
-            <para
-              >
+            <para>
               Managed to unmanaged:
-              <see
-               cref="M:Mono.Unix.UnixMarshal.StringToHeap" />
+              <see cref="M:Mono.Unix.UnixMarshal.StringToHeap" />
 
               
 
               ,
             </para
             >
-            <para
-              >
+            <para>
               Unmanaged to managed:
-              <see
-               cref="M:Mono.Unix.UnixMarshal.PtrToString" />
+              <see cref="M:Mono.Unix.UnixMarshal.PtrToString" />
 
               
 
               ,
-              <see
-               cref="M:Mono.Unix.UnixMarshal.PtrToStringArray" />
+              <see cref="M:Mono.Unix.UnixMarshal.PtrToStringArray" />
 
               
 
               ,
-              <see
-               cref="M:Mono.Unix.UnixMarshal.PtrToStringUnix" />
+              <see cref="M:Mono.Unix.UnixMarshal.PtrToStringUnix" />
             </para>
           </description>
         </item>
@@ -89,32 +80,27 @@
             
 
             ,
-            <see
-             cref="M:Mono.Unix.UnixMarshal.ShouldRetrySyscall" />
+            <see cref="M:Mono.Unix.UnixMarshal.ShouldRetrySyscall" />
 
             
 
             ,
-            <see
-             cref="M:Mono.Unix.UnixMarshal.ThrowExceptionForError" />
+            <see cref="M:Mono.Unix.UnixMarshal.ThrowExceptionForError" />
 
             
 
             ,
-            <see
-             cref="M:Mono.Unix.UnixMarshal.ThrowExceptionForErrorIf" />
+            <see cref="M:Mono.Unix.UnixMarshal.ThrowExceptionForErrorIf" />
 
             
 
             ,
-            <see
-             cref="M:Mono.Unix.UnixMarshal.ThrowExceptionForLastError" />
+            <see cref="M:Mono.Unix.UnixMarshal.ThrowExceptionForLastError" />
 
             
 
             ,
-            <see
-             cref="M:Mono.Unix.UnixMarshal.ThrowExceptionForLastErrorIf" />
+            <see cref="M:Mono.Unix.UnixMarshal.ThrowExceptionForLastErrorIf" />
           </description>
         </item>
         <item>
@@ -125,14 +111,12 @@
             
 
             ,
-            <see
-             cref="M:Mono.Unix.UnixMarshal.ReAllocHeap" />
+            <see cref="M:Mono.Unix.UnixMarshal.ReAllocHeap" />
 
             
 
             ,
-            <see
-             cref="M:Mono.Unix.UnixMarshal.FreeHeap" />
+            <see cref="M:Mono.Unix.UnixMarshal.FreeHeap" />
           </description>
         </item>
       </list>
@@ -158,10 +142,8 @@
         <Parameter Name="size" Type="System.Int64" />
       </Parameters>
       <Docs>
-        <param name="size"
-          >
-          A <see
-           cref="T:System.Int64" />
+        <param name="size">
+          A <see cref="T:System.Int64" />
 
           
 
@@ -170,29 +152,24 @@
         </param
         >
         <summary
-          >Allocates <paramref
-           name="size" />
+          >Allocates <paramref name="size" />
 
           
 
            bytes from the system heap.</summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.IntPtr" />
+        <returns>
+          A <see cref="T:System.IntPtr" />
 
           
 
            containing the address of 
-          <paramref
-           name="size" />
+          <paramref name="size" />
 
           
 
            bytes on the system heap, or
-          <see
-           cref="F:System.IntPtr.Zero" />
+          <see cref="F:System.IntPtr.Zero" />
 
           
 
@@ -201,16 +178,13 @@
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             The "system heap" is where dynamic memory is allocated by the
-            runtime C library, <c
-            >MSVCRT.DLL</c>
+            runtime C library, <c>MSVCRT.DLL</c>
 
             
 
-             on Win32 and <c
-            >libc</c>
+             on Win32 and <c>libc</c>
 
             
 
@@ -218,11 +192,9 @@
             Unix platforms.
           </para
           >
-          <para
-            >
+          <para>
             The memory allocated by this function must be freed via
-            <see
-             cref="M:Mono.Unix.UnixMarshal.FreeHeap" />
+            <see cref="M:Mono.Unix.UnixMarshal.FreeHeap" />
 
             
 
@@ -262,23 +234,19 @@
         <Parameter Name="ptr" Type="System.IntPtr" />
       </Parameters>
       <Docs>
-        <param name="ptr"
-          >
-          A <see
-           cref="T:System.IntPtr" />
+        <param name="ptr">
+          A <see cref="T:System.IntPtr" />
 
           
 
            containing the address of a block
           of memory previously returned by 
-          <see
-           cref="M:Mono.Unix.UnixMarshal.AllocHeap" />
+          <see cref="M:Mono.Unix.UnixMarshal.AllocHeap" />
 
           
 
            or
-          <see
-           cref="M:Mono.Unix.UnixMarshal.ReAllocHeap" />
+          <see cref="M:Mono.Unix.UnixMarshal.ReAllocHeap" />
 
           
 
@@ -286,23 +254,19 @@
         </param
         >
         <summary
-          >Frees the memory referenced by <paramref
-           name="ptr" />
+          >Frees the memory referenced by <paramref name="ptr" />
 
           
 
           .</summary
         >
         <remarks>
-          <para
-            >
-            If <paramref
-             name="ptr" />
+          <para>
+            If <paramref name="ptr" />
 
             
 
-             is <see
-             cref="F:System.IntPtr.Zero" />
+             is <see cref="F:System.IntPtr.Zero" />
 
             
 
@@ -310,16 +274,13 @@
             no action occurs.
           </para
           >
-          <para
-            >
+          <para>
             The "system heap" is where dynamic memory is allocated by the
-            runtime C library, <c
-            >MSVCRT.DLL</c>
+            runtime C library, <c>MSVCRT.DLL</c>
 
             
 
-             on Win32 and <c
-            >libc</c>
+             on Win32 and <c>libc</c>
 
             
 
@@ -360,10 +321,8 @@
         <Parameter Name="errno" Type="Mono.Unix.Native.Errno" />
       </Parameters>
       <Docs>
-        <param name="errno"
-          >
-          A <see
-           cref="T:Mono.Unix.Native.Errno" />
+        <param name="errno">
+          A <see cref="T:Mono.Unix.Native.Errno" />
 
           
 
@@ -372,23 +331,19 @@
         </param
         >
         <summary
-          >Gets a description for the error code <paramref
-           name="errno" />
+          >Gets a description for the error code <paramref name="errno" />
 
           
 
           .</summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.String" />
+        <returns>
+          A <see cref="T:System.String" />
 
           
 
            containing a description of the
-          specified error code <paramref
-           name="errno" />
+          specified error code <paramref name="errno" />
 
           
 
@@ -396,19 +351,15 @@
         </returns
         >
         <remarks>
-          <para
-            >
-            If <paramref
-             name="errno" />
+          <para>
+            If <paramref name="errno" />
 
             
 
              isn't a valid error number or isn't
             supported by the operating system, then the string 
             "<c
-
-              >** Unknown error code: <paramref
-               name="errno" />
+              >** Unknown error code: <paramref name="errno" />
 
               
 
@@ -445,16 +396,13 @@
         <Parameter Name="p" Type="System.IntPtr" />
       </Parameters>
       <Docs>
-        <param name="p"
-          >
-          A <see
-           cref="T:System.IntPtr" />
+        <param name="p">
+          A <see cref="T:System.IntPtr" />
 
           
 
            containing the address of an
-          unmanaged string in the <see
-           cref="T:Mono.Unix.UnixEncoding" />
+          unmanaged string in the <see cref="T:Mono.Unix.UnixEncoding" />
 
           
 
@@ -462,10 +410,8 @@
           encoding.
         </param
         >
-        <summary
-          >
-          Allocates a managed <see
-           cref="T:System.String" />
+        <summary>
+          Allocates a managed <see cref="T:System.String" />
 
           
 
@@ -473,32 +419,26 @@
           unmanaged string into the managed string.
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.String" />
+        <returns>
+          A <see cref="T:System.String" />
 
           
 
            containing a copy of the unmanaged
-          string <paramref
-           name="p" />
+          string <paramref name="p" />
 
           
 
-          , or <see
-           langword="null" />
+          , or <see langword="null" />
 
           
 
            if 
-          <paramref
-           name="p" />
+          <paramref name="p" />
 
           
 
-           is <see
-           cref="F:System.IntPtr.Zero" />
+           is <see cref="F:System.IntPtr.Zero" />
 
           
 
@@ -506,38 +446,31 @@
         </returns
         >
         <remarks>
-          <para
-            >
-            The input string <paramref
-             name="p" />
+          <para>
+            The input string <paramref name="p" />
 
             
 
              must have a terminating
-            null <c
-            >0x00</c>
+            null <c>0x00</c>
 
             
 
              byte.
           </para
           >
-          <para
-            >
+          <para>
             This method is identical to
-            <see
-             cref="M:Mono.Unix.UnixMarshal.PtrToString" />
+            <see cref="M:Mono.Unix.UnixMarshal.PtrToString" />
 
             
 
-            (<paramref
-             name="p" />
+            (<paramref name="p" />
 
             
 
             , 
-            <see
-             cref="F:Mono.Unix.UnixEncoding.Instance" />
+            <see cref="F:Mono.Unix.UnixEncoding.Instance" />
 
             
 
@@ -571,16 +504,13 @@
         <Parameter Name="encoding" Type="System.Text.Encoding" />
       </Parameters>
       <Docs>
-        <param name="p"
-          >
-          A <see
-           cref="T:System.IntPtr" />
+        <param name="p">
+          A <see cref="T:System.IntPtr" />
 
           
 
            containing the address of an
-          unmanaged string in the <paramref
-           name="encoding" />
+          unmanaged string in the <paramref name="encoding" />
 
           
 
@@ -588,26 +518,21 @@
           encoding.
         </param
         >
-        <param name="encoding"
-          >
-          A <see
-           cref="T:System.Text.Encoding" />
+        <param name="encoding">
+          A <see cref="T:System.Text.Encoding" />
 
           
 
            specifying which encoding
-          <paramref
-           name="p" />
+          <paramref name="p" />
 
           
 
            is in.
         </param
         >
-        <summary
-          >
-          Allocates a managed <see
-           cref="T:System.String" />
+        <summary>
+          Allocates a managed <see cref="T:System.String" />
 
           
 
@@ -616,32 +541,26 @@
           encoding.
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.String" />
+        <returns>
+          A <see cref="T:System.String" />
 
           
 
            containing a copy of the unmanaged
-          string <paramref
-           name="p" />
+          string <paramref name="p" />
 
           
 
-          , or <see
-           langword="null" />
+          , or <see langword="null" />
 
           
 
            if 
-          <paramref
-           name="p" />
+          <paramref name="p" />
 
           
 
-           is <see
-           cref="F:System.IntPtr.Zero" />
+           is <see cref="F:System.IntPtr.Zero" />
 
           
 
@@ -649,10 +568,8 @@
         </returns
         >
         <remarks>
-          <para
-            >
-            The input string <paramref
-             name="p" />
+          <para>
+            The input string <paramref name="p" />
 
             
 
@@ -662,92 +579,78 @@
             encoding specified.
           </para
           >
-          <para
-            >
+          <para>
             A terminating null is a single byte containing the value
-            <c
-            >0x00</c>
+            <c>0x00</c>
 
             
 
-             if <paramref
-             name="encoding" />
+             if <paramref name="encoding" />
 
             
 
              is one of the
             following encodings:
-            <see
-             cref="T:System.Text.ASCIIEncoding" />
+            <see cref="T:System.Text.ASCIIEncoding" />
 
             
 
             ,
-            <see
-             cref="T:System.Text.UTF8Encoding" />
+            <see cref="T:System.Text.UTF8Encoding" />
 
             
 
             ,
-            <see
-             cref="T:System.Text.UTF7Encoding" />
+            <see cref="T:System.Text.UTF7Encoding" />
 
             
 
             , or
-            <see
-             cref="T:Mono.Unix.UnixEncoding" />
+            <see cref="T:Mono.Unix.UnixEncoding" />
 
             
 
             .
           </para
           >
-          <para
-            >
-            A terminating null is the <see
-             cref="T:System.Int16" />
+          <para>
+            A terminating null is the <see cref="T:System.Int16" />
 
             
 
              value
-            <c
-            >0x0000</c>
+            <c>0x0000</c>
 
             
 
-             if <paramref
-             name="encoding" />
+             if <paramref name="encoding" />
 
             
 
              is 
-            <see
-             cref="T:System.Text.UnicodeEncoding" />
+            <see cref="T:System.Text.UnicodeEncoding" />
 
             
 
             .
           </para
           >
-          <para
-            >
+          <para>
             Otherwise, the terminating null must consist of a sequence of 
-            <see
-             cref="M:System.Text.Encoding.GetMaxByteCount" />
+            <see cref="M:System.Text.Encoding.GetMaxByteCount" />
 
             
 
             (1) bytes
-            having the value <c
-            >0x00</c>
+            having the value <c>0x00</c>
 
             
 
             .
             <block
-             subset="none" type="note"
-              >
+              subset="none"
+              type="note"
+            >
               This potentially plays havoc with multi-byte encodings, as many
               multi-byte encodings would only use a single byte for the
               terminating null, and not the maximum possible number of bytes
@@ -756,11 +659,9 @@
             </block
             >
           </para>
-          <para
-            >
+          <para>
             Any buffer returned by 
-            <see
-             cref="M:Mono.Unix.UnixMarshal.StringToHeap" />
+            <see cref="M:Mono.Unix.UnixMarshal.StringToHeap" />
 
             
 
@@ -774,8 +675,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -806,16 +706,13 @@
         <Parameter Name="stringArray" Type="System.IntPtr" />
       </Parameters>
       <Docs>
-        <param name="stringArray"
-          >
-          A <see
-           cref="T:System.IntPtr" />
+        <param name="stringArray">
+          A <see cref="T:System.IntPtr" />
 
           
 
            containing a 
-          <c
-          >
+          <c>
             <see cref="T:System.Byte" />
 
             
@@ -826,24 +723,20 @@
           
 
            array
-          which follows the ANSI C rules for the <c
-          >argv</c>
+          which follows the ANSI C rules for the <c>argv</c>
 
           
 
            argument passed
-          to <c
-          >main</c>
+          to <c>main</c>
 
           
 
           .
         </param
         >
-        <summary
-          >
-          Allocates a <see
-           cref="T:System.String" />
+        <summary>
+          Allocates a <see cref="T:System.String" />
 
           
 
@@ -851,22 +744,18 @@
           unmanaged string array into a managed string array.
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.String" />
+        <returns>
+          A <see cref="T:System.String" />
 
           
 
            array containing all the strings in
-          the unmanaged string array.  If <paramref
-           name="stringArray" />
+          the unmanaged string array.  If <paramref name="stringArray" />
 
           
 
            is
-          <see
-           cref="F:System.IntPtr.Zero" />
+          <see cref="F:System.IntPtr.Zero" />
 
           
 
@@ -875,22 +764,18 @@
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             This is identical to calling
-            <see
-             cref="M:Mono.Unix.UnixMarshal.PtrToStringArray" />
+            <see cref="M:Mono.Unix.UnixMarshal.PtrToStringArray" />
 
             
 
-            (<paramref
-             name="stringArray" />
+            (<paramref name="stringArray" />
 
             
 
             , 
-            <see
-             cref="F:Mono.Unix.UnixEncoding.Instance" />
+            <see cref="F:Mono.Unix.UnixEncoding.Instance" />
 
             
 
@@ -923,32 +808,26 @@
         <Parameter Name="stringArray" Type="System.IntPtr" />
       </Parameters>
       <Docs>
-        <param name="count"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="count">
+          A <see cref="T:System.Int32" />
 
           
 
            containing the number of strings in
-          <paramref
-           name="stringArray" />
+          <paramref name="stringArray" />
 
           
 
           .
         </param
         >
-        <param name="stringArray"
-          >
-          A <see
-           cref="T:System.IntPtr" />
+        <param name="stringArray">
+          A <see cref="T:System.IntPtr" />
 
           
 
            containing a 
-          <c
-          >
+          <c>
             <see cref="T:System.Byte" />
 
             
@@ -961,10 +840,8 @@
            array.
         </param
         >
-        <summary
-          >
-          Allocates a <see
-           cref="T:System.String" />
+        <summary>
+          Allocates a <see cref="T:System.String" />
 
           
 
@@ -972,34 +849,28 @@
           unmanaged string array into a managed string array.
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.String" />
+        <returns>
+          A <see cref="T:System.String" />
 
           
 
            array containing 
-          <paramref
-           name="count" />
+          <paramref name="count" />
 
           
 
            strings from the 
-          unmanaged string array <paramref
-           name="stringArray" />
+          unmanaged string array <paramref name="stringArray" />
 
           
 
           .  
-          If <paramref
-           name="stringArray" />
+          If <paramref name="stringArray" />
 
           
 
            is
-          <see
-           cref="F:System.IntPtr.Zero" />
+          <see cref="F:System.IntPtr.Zero" />
 
           
 
@@ -1008,27 +879,22 @@
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             This method is identical to
-            <see
-             cref="M:Mono.Unix.UnixMarshal.PtrToStringArray" />
+            <see cref="M:Mono.Unix.UnixMarshal.PtrToStringArray" />
 
             
 
-             (<paramref
-             name="count" />
+             (<paramref name="count" />
 
             
 
-            , <paramref
-             name="stringArray" />
+            , <paramref name="stringArray" />
 
             
 
             ,
-            <see
-             cref="F:Mono.Unix.UnixEncoding.Instance" />
+            <see cref="F:Mono.Unix.UnixEncoding.Instance" />
 
             
 
@@ -1061,16 +927,13 @@
         <Parameter Name="encoding" Type="System.Text.Encoding" />
       </Parameters>
       <Docs>
-        <param name="stringArray"
-          >
-          A <see
-           cref="T:System.IntPtr" />
+        <param name="stringArray">
+          A <see cref="T:System.IntPtr" />
 
           
 
            containing a 
-          <c
-          >
+          <c>
             <see cref="T:System.Byte" />
 
             
@@ -1081,40 +944,33 @@
           
 
            array
-          which follows the ANSI C rules for the <c
-          >argv</c>
+          which follows the ANSI C rules for the <c>argv</c>
 
           
 
            argument passed
-          to <c
-          >main</c>
+          to <c>main</c>
 
           
 
           .
         </param
         >
-        <param name="encoding"
-          >
-          A <see
-           cref="System.Text.Encoding" />
+        <param name="encoding">
+          A <see cref="System.Text.Encoding" />
 
           
 
            specifying the encoding of the 
-          unmanaged strings within <paramref
-           name="stringArray" />
+          unmanaged strings within <paramref name="stringArray" />
 
           
 
           .
         </param
         >
-        <summary
-          >
-          Allocates a <see
-           cref="T:System.String" />
+        <summary>
+          Allocates a <see cref="T:System.String" />
 
           
 
@@ -1123,22 +979,18 @@
           specified encoding.
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.String" />
+        <returns>
+          A <see cref="T:System.String" />
 
           
 
            array containing all the strings in
-          the unmanaged string array.  If <paramref
-           name="stringArray" />
+          the unmanaged string array.  If <paramref name="stringArray" />
 
           
 
            is
-          <see
-           cref="F:System.IntPtr.Zero" />
+          <see cref="F:System.IntPtr.Zero" />
 
           
 
@@ -1152,27 +1004,23 @@
 
             
 
-             is assumed to be a <c
-            >C</c>
+             is assumed to be a <c>C</c>
             <c>char**</c>
 
             
 
              pointer containing a terminating 
-            <see
-             cref="F:System.IntPtr.Zero" />
+            <see cref="F:System.IntPtr.Zero" />
 
             
 
              pointer to designate the end
-            of the array.  This follows the requirements for <c
-            >argv</c>
+            of the array.  This follows the requirements for <c>argv</c>
 
             
 
              in
-            the ANSI C <c
-            >main</c>
+            the ANSI C <c>main</c>
 
             
 
@@ -1188,11 +1036,9 @@ stringArray[] = {
 };
           </code
           >
-          <para
-            >
+          <para>
             The final null string will not be returned from this method; the
-            above <b
-            >stringArray</b>
+            above <b>stringArray</b>
 
             
 
@@ -1206,8 +1052,7 @@ stringArray[] = {
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1240,32 +1085,26 @@ stringArray[] = {
         <Parameter Name="encoding" Type="System.Text.Encoding" />
       </Parameters>
       <Docs>
-        <param name="count"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="count">
+          A <see cref="T:System.Int32" />
 
           
 
            containing the number of strings in
-          <paramref
-           name="stringArray" />
+          <paramref name="stringArray" />
 
           
 
           .
         </param
         >
-        <param name="stringArray"
-          >
-          A <see
-           cref="T:System.IntPtr" />
+        <param name="stringArray">
+          A <see cref="T:System.IntPtr" />
 
           
 
            containing a 
-          <c
-          >
+          <c>
             <see cref="T:System.Byte" />
 
             
@@ -1278,26 +1117,21 @@ stringArray[] = {
            array.
         </param
         >
-        <param name="encoding"
-          >
-          A <see
-           cref="System.Text.Encoding" />
+        <param name="encoding">
+          A <see cref="System.Text.Encoding" />
 
           
 
            specifying the encoding of the 
-          unmanaged strings within <paramref
-           name="stringArray" />
+          unmanaged strings within <paramref name="stringArray" />
 
           
 
           .
         </param
         >
-        <summary
-          >
-          Allocates a <see
-           cref="T:System.String" />
+        <summary>
+          Allocates a <see cref="T:System.String" />
 
           
 
@@ -1306,34 +1140,28 @@ stringArray[] = {
           specified encoding.
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.String" />
+        <returns>
+          A <see cref="T:System.String" />
 
           
 
            array containing 
-          <paramref
-           name="count" />
+          <paramref name="count" />
 
           
 
            strings from the 
-          unmanaged string array <paramref
-           name="stringArray" />
+          unmanaged string array <paramref name="stringArray" />
 
           
 
           .  
-          If <paramref
-           name="stringArray" />
+          If <paramref name="stringArray" />
 
           
 
            is
-          <see
-           cref="F:System.IntPtr.Zero" />
+          <see cref="F:System.IntPtr.Zero" />
 
           
 
@@ -1342,13 +1170,11 @@ stringArray[] = {
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             No validation is done to ensure that the pointers for embedded
             strings are valid.  This could result in an access violation or
             corrupted strings if you're not careful.  Embedded null pointers 
-            will become <see
-             langword="null" />
+            will become <see langword="null" />
 
             
 
@@ -1356,11 +1182,9 @@ stringArray[] = {
             array.
           </para
           >
-          <para
-            >
+          <para>
             The difference between this method and 
-            <see
-             cref="M:Mono.Unix.UnixMarshal.PtrToStringArray(System.IntPtr,System.Text.Encoding)" />
+            <see cref="M:Mono.Unix.UnixMarshal.PtrToStringArray(System.IntPtr,System.Text.Encoding)" />
 
             
 
@@ -1374,8 +1198,7 @@ stringArray[] = {
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1403,16 +1226,13 @@ stringArray[] = {
         <Parameter Name="p" Type="System.IntPtr" />
       </Parameters>
       <Docs>
-        <param name="p"
-          >
-          A <see
-           cref="T:System.IntPtr" />
+        <param name="p">
+          A <see cref="T:System.IntPtr" />
 
           
 
            containing the address of an
-          unmanaged string in the <see
-           cref="T:Mono.Unix.UnixEncoding" />
+          unmanaged string in the <see cref="T:Mono.Unix.UnixEncoding" />
 
           
 
@@ -1420,49 +1240,40 @@ stringArray[] = {
           encoding.
         </param
         >
-        <summary
-          >
-          Allocates a managed <see
-           cref="T:System.String" />
+        <summary>
+          Allocates a managed <see cref="T:System.String" />
 
           
 
            and marshals the
           unmanaged string into the managed string using the 
-          <see
-           cref="T:Mono.Unix.UnixEncoding" />
+          <see cref="T:Mono.Unix.UnixEncoding" />
 
           
 
            encoding.
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.String" />
+        <returns>
+          A <see cref="T:System.String" />
 
           
 
            containing a copy of the unmanaged
-          string <paramref
-           name="p" />
+          string <paramref name="p" />
 
           
 
-          , or <see
-           langword="null" />
+          , or <see langword="null" />
 
           
 
            if 
-          <paramref
-           name="p" />
+          <paramref name="p" />
 
           
 
-           is <see
-           cref="F:System.IntPtr.Zero" />
+           is <see cref="F:System.IntPtr.Zero" />
 
           
 
@@ -1470,33 +1281,27 @@ stringArray[] = {
         </returns
         >
         <remarks>
-          <para
-            >
-            The input string <paramref
-             name="p" />
+          <para>
+            The input string <paramref name="p" />
 
             
 
              must have a terminating
-            null <c
-            >0x00</c>
+            null <c>0x00</c>
 
             
 
              byte.
           </para
           >
-          <para
-            >
+          <para>
             This is an optimized version of 
-            <see
-             cref="M:Mono.Unix.UnixMarshal.PtrToString(System.IntPtr)" />
+            <see cref="M:Mono.Unix.UnixMarshal.PtrToString(System.IntPtr)" />
 
             
 
             
-            for the <see
-             cref="T:Mono.Unix.UnixEncoding" />
+            for the <see cref="T:Mono.Unix.UnixEncoding" />
 
             
 
@@ -1529,39 +1334,32 @@ stringArray[] = {
         <Parameter Name="size" Type="System.Int64" />
       </Parameters>
       <Docs>
-        <param name="ptr"
-          >
-          A <see
-           cref="T:System.IntPtr" />
+        <param name="ptr">
+          A <see cref="T:System.IntPtr" />
 
           
 
            containing the address of the
           memory block to resize.  This value must either be 
-          <see
-           cref="F:System.IntPtr.Zero" />
+          <see cref="F:System.IntPtr.Zero" />
 
           
 
            or a value previously returned
-          by <see
-           cref="M:Mono.Unix.UnixMarshal.AllocHeap" />
+          by <see cref="M:Mono.Unix.UnixMarshal.AllocHeap" />
 
           
 
            or 
-          <see
-           cref="M:Mono.Unix.UnixMarshal.ReAllocHeap" />
+          <see cref="M:Mono.Unix.UnixMarshal.ReAllocHeap" />
 
           
 
           .
         </param
         >
-        <param name="size"
-          >
-          A <see
-           cref="T:System.Int64" />
+        <param name="size">
+          A <see cref="T:System.Int64" />
 
           
 
@@ -1569,16 +1367,13 @@ stringArray[] = {
           allocate on the system heap.
         </param
         >
-        <summary
-          >
-          Changes the size of the memory block <paramref
-           name="ptr" />
+        <summary>
+          Changes the size of the memory block <paramref name="ptr" />
 
           
 
            to
-          refer to <paramref
-           name="size" />
+          refer to <paramref name="size" />
 
           
 
@@ -1587,22 +1382,18 @@ stringArray[] = {
         </summary
         >
         <returns>
-          <para
-            >
-            A <see
-             cref="T:System.IntPtr" />
+          <para>
+            A <see cref="T:System.IntPtr" />
 
             
 
              containing the address of 
-            <paramref
-             name="size" />
+            <paramref name="size" />
 
             
 
              bytes on the system heap, or
-            <see
-             cref="F:System.IntPtr.Zero" />
+            <see cref="F:System.IntPtr.Zero" />
 
             
 
@@ -1610,16 +1401,13 @@ stringArray[] = {
             allocated.
           </para
           >
-          <block subset="none" type="note"
-            >
-            If <see
-             cref="F:System.IntPtr.Zero" />
+          <block subset="none" type="note">
+            If <see cref="F:System.IntPtr.Zero" />
 
             
 
              is returned, 
-            <paramref
-             name="ptr" />
+            <paramref name="ptr" />
 
             
 
@@ -1629,54 +1417,45 @@ stringArray[] = {
           >
         </returns>
         <remarks>
-          <para
-            >
+          <para>
             This function changes the size of the previously allocated memory
-            referenced by <paramref
-             name="ptr" />
+            referenced by <paramref name="ptr" />
 
             
 
-             to <paramref
-             name="size" />
+             to <paramref name="size" />
 
             
 
             
-            bytes.  <paramref
-             name="ptr" />
+            bytes.  <paramref name="ptr" />
 
             
 
              
             must have been previously allocated via 
-            <see
-             cref="M:Mono.Unix.UnixMarshal.AllocHeap" />
+            <see cref="M:Mono.Unix.UnixMarshal.AllocHeap" />
 
             
 
              or
-            <see
-             cref="M:Mono.Unix.UnixMarshal.ReAllocHeap" />
+            <see cref="M:Mono.Unix.UnixMarshal.ReAllocHeap" />
 
             
 
             , or 
-            <paramref
-             name="ptr" />
+            <paramref name="ptr" />
 
             
 
              must be the
-            value <see
-             cref="F:System.IntPtr.Zero" />
+            value <see cref="F:System.IntPtr.Zero" />
 
             
 
              (in which case this 
             method is identical to 
-            <see
-             cref="M:Mono.Unix.UnixMarshal.AllocHeap" />
+            <see cref="M:Mono.Unix.UnixMarshal.AllocHeap" />
 
             
 
@@ -1686,11 +1465,9 @@ stringArray[] = {
             the newly allocated portion of the memory is undefined.
           </para
           >
-          <para
-            >
+          <para>
             The memory allocated by this function must be freed via
-            <see
-             cref="M:Mono.Unix.UnixMarshal.FreeHeap" />
+            <see cref="M:Mono.Unix.UnixMarshal.FreeHeap" />
 
             
 
@@ -1699,17 +1476,14 @@ stringArray[] = {
           </para
           >
           <block subset="none" type="note">
-            <para
-              >
+            <para>
               If the requested memory cannot be allocated, 
-              <see
-               cref="F:System.IntPtr.Zero" />
+              <see cref="F:System.IntPtr.Zero" />
 
               
 
                is returned and
-              the memory referenced by <paramref
-               name="ptr" />
+              the memory referenced by <paramref name="ptr" />
 
               
 
@@ -1717,18 +1491,15 @@ stringArray[] = {
               unchanged.
             </para
             >
-            <para
-              >
+            <para>
               If memory can be allocated, the memory referenced by 
-              <paramref
-               name="ptr" />
+              <paramref name="ptr" />
 
               
 
                is freed and a pointer to the
               newly allocated memory is returned.  Note that this may be 
-              different from the value passed as <paramref
-               name="ptr" />
+              different from the value passed as <paramref name="ptr" />
 
               
 
@@ -1736,16 +1507,13 @@ stringArray[] = {
             </para
             >
           </block>
-          <para
-            >
+          <para>
             The "system heap" is where dynamic memory is allocated by the
-            runtime C library, <c
-            >MSVCRT.DLL</c>
+            runtime C library, <c>MSVCRT.DLL</c>
 
             
 
-             on Win32 and <c
-            >libc</c>
+             on Win32 and <c>libc</c>
 
             
 
@@ -1785,26 +1553,21 @@ stringArray[] = {
         <Parameter Name="r" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="r"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="r">
+          A <see cref="T:System.Int32" />
 
           
 
            containing the return value of a
-          method from <see
-           cref="T:Mono.Unix.Native.Syscall" />
+          method from <see cref="T:Mono.Unix.Native.Syscall" />
 
           
 
           .
         </param
         >
-        <summary
-          >
-          Returns a <see
-           cref="T:System.Boolean" />
+        <summary>
+          Returns a <see cref="T:System.Boolean" />
 
           
 
@@ -1812,38 +1575,31 @@ stringArray[] = {
           system call should be retried.
         </summary
         >
-        <returns
-          >
-          Returns <see
-           langword="true" />
+        <returns>
+          Returns <see langword="true" />
 
           
 
-           if <paramref
-           name="r" />
+           if <paramref name="r" />
 
           
 
            is
-          <c
-          >-1</c>
+          <c>-1</c>
 
           
 
-           and <see
-           cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+           and <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
 
           
 
           
-          returns <see
-           cref="F:Mono.Unix.Native.Errno.EINTR" />
+          returns <see cref="F:Mono.Unix.Native.Errno.EINTR" />
 
           
 
           .
-          Otherwise, <see
-           langword="false" />
+          Otherwise, <see langword="false" />
 
           
 
@@ -1889,26 +1645,21 @@ stringArray[] = {
         <Parameter Name="errno" Type="Mono.Unix.Native.Errno&amp;" RefType="out" />
       </Parameters>
       <Docs>
-        <param name="r"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="r">
+          A <see cref="T:System.Int32" />
 
           
 
            containing the return value of a
-          method from <see
-           cref="T:Mono.Unix.Native.Syscall" />
+          method from <see cref="T:Mono.Unix.Native.Syscall" />
 
           
 
           .
         </param
         >
-        <param name="errno"
-          >
-          A reference to a <see
-           cref="T:Mono.Unix.Native.Errno" />
+        <param name="errno">
+          A reference to a <see cref="T:Mono.Unix.Native.Errno" />
 
           
 
@@ -1916,10 +1667,8 @@ stringArray[] = {
           which will capture the last error value.
         </param
         >
-        <summary
-          >
-          Returns a <see
-           cref="T:System.Boolean" />
+        <summary>
+          Returns a <see cref="T:System.Boolean" />
 
           
 
@@ -1928,62 +1677,51 @@ stringArray[] = {
           processing.
         </summary
         >
-        <returns
-          >
-          Returns <see
-           langword="true" />
+        <returns>
+          Returns <see langword="true" />
 
           
 
-           if <paramref
-           name="r" />
+           if <paramref name="r" />
 
           
 
            is
-          <c
-          >-1</c>
+          <c>-1</c>
 
           
 
-           and <see
-           cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+           and <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
 
           
 
           
-          returns <see
-           cref="F:Mono.Unix.Native.Errno.EINTR" />
+          returns <see cref="F:Mono.Unix.Native.Errno.EINTR" />
 
           
 
           , in which case
-          <paramref
-           name="errno" />
+          <paramref name="errno" />
 
           
 
            will have the value 
-          <see
-           cref="F:Mono.Unix.Native.Errno.EINTR" />
+          <see cref="F:Mono.Unix.Native.Errno.EINTR" />
 
           
 
           .
-          Otherwise, <see
-           langword="false" />
+          Otherwise, <see langword="false" />
 
           
 
            is returned, and 
-          <paramref
-           name="errno" />
+          <paramref name="errno" />
 
           
 
            will store the value from the call to 
-          <see
-           cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+          <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
 
           
 
@@ -1998,17 +1736,14 @@ stringArray[] = {
             the caller is expected to re-invoke the system call to complete
             the operation.
           </para>
-          <para
-            >
+          <para>
             This method saves the last error value returned from 
-            <see
-             cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+            <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
 
             
 
              into the
-            <paramref
-             name="errno" />
+            <paramref name="errno" />
 
             
 
@@ -2037,53 +1772,43 @@ stringArray[] = {
         <Parameter Name="s" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="s"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="s">
+          A <see cref="T:System.String" />
 
           
 
            to copy into the system heap.
         </param
         >
-        <summary
-          >
-          Allocates a copy of <paramref
-           name="s" />
+        <summary>
+          Allocates a copy of <paramref name="s" />
 
           
 
            on the system heap in the 
-          <see
-           cref="T:Mono.Unix.UnixEncoding" />
+          <see cref="T:Mono.Unix.UnixEncoding" />
 
           
 
            encoding.
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.IntPtr" />
+        <returns>
+          A <see cref="T:System.IntPtr" />
 
           
 
            containing a pointer on the system
-          heap containing the marshaled string.  If <paramref
-           name="s" />
+          heap containing the marshaled string.  If <paramref name="s" />
 
           
 
            is
-          <see
-           langword="null" />
+          <see langword="null" />
 
           
 
-          , then <see
-           cref="F:System.IntPtr.Zero" />
+          , then <see cref="F:System.IntPtr.Zero" />
 
           
 
@@ -2092,11 +1817,9 @@ stringArray[] = {
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             The pointer returned should be freed with 
-            <see
-             cref="M:Mono.Unix.UnixMarshal.FreeHeap" />
+            <see cref="M:Mono.Unix.UnixMarshal.FreeHeap" />
 
             
 
@@ -2104,22 +1827,18 @@ stringArray[] = {
             leak.
           </para
           >
-          <para
-            >
+          <para>
             This is identical to 
-            <see
-             cref="M:Mono.Unix.UnixMarshal.StringToHeap" />
+            <see cref="M:Mono.Unix.UnixMarshal.StringToHeap" />
 
             
 
-            (<paramref
-             name="s" />
+            (<paramref name="s" />
 
             
 
             , 
-            <see
-             cref="F:Mono.Unix.UnixMarshal.Instance" />
+            <see cref="F:Mono.Unix.UnixMarshal.Instance" />
 
             
 
@@ -2127,27 +1846,22 @@ stringArray[] = {
           </para
           >
         </remarks>
-        <exception cref="T:System.NotSupportedException"
-          >
-          There was an error marshaling <paramref
-           name="s" />
+        <exception cref="T:System.NotSupportedException">
+          There was an error marshaling <paramref name="s" />
 
           
 
            into the
-          <see
-           cref="T:Mono.Unix.UnixEncoding" />
+          <see cref="T:Mono.Unix.UnixEncoding" />
 
           
 
            encoding.
         </exception
         >
-        <exception cref="T:Mono.Unix.UnixIOException"
-          >
+        <exception cref="T:Mono.Unix.UnixIOException">
           Unable to allocate enough memory for the marshaled string.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOMEM" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />
 
           
 
@@ -2180,20 +1894,16 @@ stringArray[] = {
         <Parameter Name="encoding" Type="System.Text.Encoding" />
       </Parameters>
       <Docs>
-        <param name="s"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="s">
+          A <see cref="T:System.String" />
 
           
 
            to copy into the system heap.
         </param
         >
-        <param name="encoding"
-          >
-          A <see
-           cref="T:System.Text.Encoding" />
+        <param name="encoding">
+          A <see cref="T:System.Text.Encoding" />
 
           
 
@@ -2201,43 +1911,35 @@ stringArray[] = {
           marshal the string into.
         </param
         >
-        <summary
-          >
-          Allocates a copy of <paramref
-           name="s" />
+        <summary>
+          Allocates a copy of <paramref name="s" />
 
           
 
            on the system heap in the 
-          <paramref
-           name="encoding" />
+          <paramref name="encoding" />
 
           
 
            encoding.
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.IntPtr" />
+        <returns>
+          A <see cref="T:System.IntPtr" />
 
           
 
            containing a pointer on the system
-          heap containing the marshaled string.  If <paramref
-           name="s" />
+          heap containing the marshaled string.  If <paramref name="s" />
 
           
 
            is
-          <see
-           langword="null" />
+          <see langword="null" />
 
           
 
-          , then <see
-           cref="F:System.IntPtr.Zero" />
+          , then <see cref="F:System.IntPtr.Zero" />
 
           
 
@@ -2246,11 +1948,9 @@ stringArray[] = {
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             The pointer returned should be freed with 
-            <see
-             cref="M:Mono.Unix.UnixMarshal.FreeHeap" />
+            <see cref="M:Mono.Unix.UnixMarshal.FreeHeap" />
 
             
 
@@ -2258,27 +1958,22 @@ stringArray[] = {
             leak.
           </para
           >
-          <para
-            >
+          <para>
             This is identical to 
-            <see
-             cref="M:Mono.Unix.UnixMarshal.StringToHeap" />
+            <see cref="M:Mono.Unix.UnixMarshal.StringToHeap" />
 
             
 
-            (<paramref
-             name="s" />
+            (<paramref name="s" />
 
             
 
-            , 0, <i
-            >s.Length</i>
+            , 0, <i>s.Length</i>
 
             
 
             ,
-            <see
-             cref="F:Mono.Unix.UnixMarshal.Instance" />
+            <see cref="F:Mono.Unix.UnixMarshal.Instance" />
 
             
 
@@ -2291,35 +1986,29 @@ stringArray[] = {
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .
         </exception
         >
-        <exception cref="T:System.NotSupportedException"
-          >
-          There was an error marshaling <paramref
-           name="s" />
+        <exception cref="T:System.NotSupportedException">
+          There was an error marshaling <paramref name="s" />
 
           
 
            into the
-          specified encoding <paramref
-           name="encoding" />
+          specified encoding <paramref name="encoding" />
 
           
 
           .
         </exception
         >
-        <exception cref="T:Mono.Unix.UnixIOException"
-          >
+        <exception cref="T:Mono.Unix.UnixIOException">
           Unable to allocate enough memory for the marshaled string.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOMEM" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />
 
           
 
@@ -2353,91 +2042,74 @@ stringArray[] = {
         <Parameter Name="count" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="s"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="s">
+          A <see cref="T:System.String" />
 
           
 
            to copy into the system heap.
         </param
         >
-        <param name="index"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="index">
+          A <see cref="T:System.Int32" />
 
           
 
            containing the start index into
-          <paramref
-           name="s" />
+          <paramref name="s" />
 
           
 
            to start marshaling.
         </param
         >
-        <param name="count"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="count">
+          A <see cref="T:System.Int32" />
 
           
 
            containing the number of characters
-          to marshal from <paramref
-           name="s" />
+          to marshal from <paramref name="s" />
 
           
 
            starting at index 
-          <paramref
-           name="index" />
+          <paramref name="index" />
 
           
 
           .
         </param
         >
-        <summary
-          >
-          Allocates a copy of <paramref
-           name="s" />
+        <summary>
+          Allocates a copy of <paramref name="s" />
 
           
 
            on the system heap in the 
-          <see
-           cref="T:Mono.Unix.UnixEncoding" />
+          <see cref="T:Mono.Unix.UnixEncoding" />
 
           
 
            encoding.
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.IntPtr" />
+        <returns>
+          A <see cref="T:System.IntPtr" />
 
           
 
            containing a pointer on the system
-          heap containing the marshaled string.  If <paramref
-           name="s" />
+          heap containing the marshaled string.  If <paramref name="s" />
 
           
 
            is
-          <see
-           langword="null" />
+          <see langword="null" />
 
           
 
-          , then <see
-           cref="F:System.IntPtr.Zero" />
+          , then <see cref="F:System.IntPtr.Zero" />
 
           
 
@@ -2446,11 +2118,9 @@ stringArray[] = {
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             The pointer returned should be freed with 
-            <see
-             cref="M:Mono.Unix.UnixMarshal.FreeHeap" />
+            <see cref="M:Mono.Unix.UnixMarshal.FreeHeap" />
 
             
 
@@ -2458,33 +2128,27 @@ stringArray[] = {
             leak.
           </para
           >
-          <para
-            >
+          <para>
             This is identical to 
-            <see
-             cref="M:Mono.Unix.UnixMarshal.StringToHeap" />
+            <see cref="M:Mono.Unix.UnixMarshal.StringToHeap" />
 
             
 
-            (<paramref
-             name="s" />
+            (<paramref name="s" />
 
             
 
-            , <paramref
-             name="count" />
+            , <paramref name="count" />
 
             
 
             ,
-            <paramref
-             name="index" />
+            <paramref name="index" />
 
             
 
             ,
-            <see
-             cref="F:Mono.Unix.UnixMarshal.Instance" />
+            <see cref="F:Mono.Unix.UnixMarshal.Instance" />
 
             
 
@@ -2498,8 +2162,7 @@ stringArray[] = {
 
             
 
-             or <paramref
-             name="index" />
+             or <paramref name="index" />
 
             
 
@@ -2513,14 +2176,12 @@ stringArray[] = {
 
             
 
-             plus <paramref
-             name="count" />
+             plus <paramref name="count" />
 
             
 
              is
-            greater than the length of <paramref
-             name="s" />
+            greater than the length of <paramref name="s" />
 
             
 
@@ -2528,27 +2189,22 @@ stringArray[] = {
           </para
           >
         </exception>
-        <exception cref="T:System.NotSupportedException"
-          >
-          There was an error marshaling <paramref
-           name="s" />
+        <exception cref="T:System.NotSupportedException">
+          There was an error marshaling <paramref name="s" />
 
           
 
            into the
-          <see
-           cref="T:Mono.Unix.UnixEncoding" />
+          <see cref="T:Mono.Unix.UnixEncoding" />
 
           
 
            encoding.
         </exception
         >
-        <exception cref="T:Mono.Unix.UnixIOException"
-          >
+        <exception cref="T:Mono.Unix.UnixIOException">
           Unable to allocate enough memory for the marshaled string.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOMEM" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />
 
           
 
@@ -2583,58 +2239,47 @@ stringArray[] = {
         <Parameter Name="encoding" Type="System.Text.Encoding" />
       </Parameters>
       <Docs>
-        <param name="s"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="s">
+          A <see cref="T:System.String" />
 
           
 
            to copy into the system heap.
         </param
         >
-        <param name="index"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="index">
+          A <see cref="T:System.Int32" />
 
           
 
            containing the start index into
-          <paramref
-           name="s" />
+          <paramref name="s" />
 
           
 
            to start marshaling.
         </param
         >
-        <param name="count"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="count">
+          A <see cref="T:System.Int32" />
 
           
 
            containing the number of characters
-          to marshal from <paramref
-           name="s" />
+          to marshal from <paramref name="s" />
 
           
 
            starting at index 
-          <paramref
-           name="index" />
+          <paramref name="index" />
 
           
 
           .
         </param
         >
-        <param name="encoding"
-          >
-          A <see
-           cref="T:System.Text.Encoding" />
+        <param name="encoding">
+          A <see cref="T:System.Text.Encoding" />
 
           
 
@@ -2642,43 +2287,35 @@ stringArray[] = {
           marshal the string into.
         </param
         >
-        <summary
-          >
-          Allocates a copy of <paramref
-           name="s" />
+        <summary>
+          Allocates a copy of <paramref name="s" />
 
           
 
            on the system heap in the 
-          <paramref
-           name="encoding" />
+          <paramref name="encoding" />
 
           
 
            encoding.
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.IntPtr" />
+        <returns>
+          A <see cref="T:System.IntPtr" />
 
           
 
            containing a pointer on the system
-          heap containing the marshaled string.  If <paramref
-           name="s" />
+          heap containing the marshaled string.  If <paramref name="s" />
 
           
 
            is
-          <see
-           langword="null" />
+          <see langword="null" />
 
           
 
-          , then <see
-           cref="F:System.IntPtr.Zero" />
+          , then <see cref="F:System.IntPtr.Zero" />
 
           
 
@@ -2687,11 +2324,9 @@ stringArray[] = {
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             The pointer returned should be freed with 
-            <see
-             cref="M:Mono.Unix.UnixMarshal.FreeHeap" />
+            <see cref="M:Mono.Unix.UnixMarshal.FreeHeap" />
 
             
 
@@ -2705,8 +2340,7 @@ stringArray[] = {
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -2719,8 +2353,7 @@ stringArray[] = {
 
             
 
-             or <paramref
-             name="index" />
+             or <paramref name="index" />
 
             
 
@@ -2734,14 +2367,12 @@ stringArray[] = {
 
             
 
-             plus <paramref
-             name="count" />
+             plus <paramref name="count" />
 
             
 
              is
-            greater than the length of <paramref
-             name="s" />
+            greater than the length of <paramref name="s" />
 
             
 
@@ -2749,27 +2380,22 @@ stringArray[] = {
           </para
           >
         </exception>
-        <exception cref="T:System.NotSupportedException"
-          >
-          There was an error marshaling <paramref
-           name="s" />
+        <exception cref="T:System.NotSupportedException">
+          There was an error marshaling <paramref name="s" />
 
           
 
            into the
-          specified encoding <paramref
-           name="encoding" />
+          specified encoding <paramref name="encoding" />
 
           
 
           .
         </exception
         >
-        <exception cref="T:Mono.Unix.UnixIOException"
-          >
+        <exception cref="T:Mono.Unix.UnixIOException">
           Unable to allocate enough memory for the marshaled string.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOMEM" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />
 
           
 
@@ -2806,10 +2432,8 @@ stringArray[] = {
         <Parameter Name="errno" Type="Mono.Unix.Native.Errno" />
       </Parameters>
       <Docs>
-        <param name="errno"
-          >
-          A <see
-           cref="T:Mono.Unix.Native.Errno" />
+        <param name="errno">
+          A <see cref="T:Mono.Unix.Native.Errno" />
 
           
 
@@ -2817,10 +2441,8 @@ stringArray[] = {
           to throw.
         </param
         >
-        <summary
-          >
-          Throws an exception that best matches <paramref
-           name="errno" />
+        <summary>
+          Throws an exception that best matches <paramref name="errno" />
 
           
 
@@ -2828,10 +2450,8 @@ stringArray[] = {
         </summary
         >
         <remarks>
-          <para
-            >
-            This method translates <paramref
-             name="errno" />
+          <para>
+            This method translates <paramref name="errno" />
 
             
 
@@ -2839,49 +2459,44 @@ stringArray[] = {
             matching exception type, and throws the exception.
           </para
           >
-          <para
-            >
+          <para>
             If the exception thrown is not a 
-            <see
-             cref="T:Mono.Unix.UnixIOException" />
+            <see cref="T:Mono.Unix.UnixIOException" />
 
             
 
             , then the exception's
-            <see
-             cref="P:System.Exception.InnerException" />
+            <see cref="P:System.Exception.InnerException" />
 
             
 
              property will
-            be set to a <see
-             cref="T:Mono.Unix.UnixIOException" />
+            be set to a <see cref="T:Mono.Unix.UnixIOException" />
 
             
 
              instance
-            wrapping <paramref
-             name="errno" />
+            wrapping <paramref name="errno" />
 
             
 
             , if possible.
             <block
-             subset="none" type="note">
+              subset="none"
+              type="note"
+            >
               <see cref="T:System.ArgumentOutOfRangeException" />
 
               
 
                does not
               have its 
-              <see
-               cref="P:System.Exception.InnerException" />
+              <see cref="P:System.Exception.InnerException" />
 
               
 
                property set, as 
-              <see
-               cref="T:System.ArgumentOutOfRangeException" />
+              <see cref="T:System.ArgumentOutOfRangeException" />
 
               
 
@@ -2898,14 +2513,12 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.EBADF" />
+          <see cref="F:Mono.Unix.Native.Errno.EBADF" />
 
           
 
            or
-          <see
-           cref="F:Mono.Unix.Native.Errno.EINVAL" />
+          <see cref="F:Mono.Unix.Native.Errno.EINVAL" />
 
           
 
@@ -2919,8 +2532,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.ERANGE" />
+          <see cref="F:Mono.Unix.Native.Errno.ERANGE" />
 
           
 
@@ -2934,14 +2546,12 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+          <see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
           
 
            or
-          <see
-           cref="F:Mono.Unix.Native.Errno.EPERM" />
+          <see cref="F:Mono.Unix.Native.Errno.EPERM" />
 
           
 
@@ -2955,8 +2565,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENOEXEC" />
+          <see cref="F:Mono.Unix.Native.Errno.ENOEXEC" />
 
           
 
@@ -2970,8 +2579,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.EFAULT" />
+          <see cref="F:Mono.Unix.Native.Errno.EFAULT" />
 
           
 
@@ -2985,8 +2593,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.EOVERFLOW" />
+          <see cref="F:Mono.Unix.Native.Errno.EOVERFLOW" />
 
           
 
@@ -3000,14 +2607,12 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.EACCES" />
+          <see cref="F:Mono.Unix.Native.Errno.EACCES" />
 
           
 
            or
-          <see
-           cref="F:Mono.Unix.Native.Errno.EISDIR" />
+          <see cref="F:Mono.Unix.Native.Errno.EISDIR" />
 
           
 
@@ -3021,8 +2626,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+          <see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -3036,8 +2640,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+          <see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -3051,38 +2654,32 @@ stringArray[] = {
 
           
           is one of:
-          <see
-           cref="F:Mono.Unix.Native.Errno.EIO" />
+          <see cref="F:Mono.Unix.Native.Errno.EIO" />
 
           
 
           ,
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+          <see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
           
 
           ,
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENOTEMPTY" />
+          <see cref="F:Mono.Unix.Native.Errno.ENOTEMPTY" />
 
           
 
           ,
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENXIO" />
+          <see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
           
 
           ,
-          <see
-           cref="F:Mono.Unix.Native.Errno.EROFS" />
+          <see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
           
 
           ,
-          <see
-           cref="F:Mono.Unix.Native.Errno.ESPIPE" />
+          <see cref="F:Mono.Unix.Native.Errno.ESPIPE" />
 
           
 
@@ -3096,8 +2693,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+          <see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -3142,26 +2738,21 @@ stringArray[] = {
         <Parameter Name="errno" Type="Mono.Unix.Native.Errno" />
       </Parameters>
       <Docs>
-        <param name="retval"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="retval">
+          A <see cref="T:System.Int32" />
 
           
 
            containing the return value of a
-          method from <see
-           cref="T:Mono.Unix.Native.Syscall" />
+          method from <see cref="T:Mono.Unix.Native.Syscall" />
 
           
 
           .
         </param
         >
-        <param name="errno"
-          >
-          A <see
-           cref="T:Mono.Unix.Native.Errno" />
+        <param name="errno">
+          A <see cref="T:Mono.Unix.Native.Errno" />
 
           
 
@@ -3169,21 +2760,17 @@ stringArray[] = {
           to throw.
         </param
         >
-        <summary
-          >
-          Throws an exception that best matches <paramref
-           name="errno" />
+        <summary>
+          Throws an exception that best matches <paramref name="errno" />
 
           
 
           
-          if <paramref
-           name="retval" />
+          if <paramref name="retval" />
 
           
 
-           is <c
-          >-1</c>
+           is <c>-1</c>
 
           
 
@@ -3191,27 +2778,22 @@ stringArray[] = {
         </summary
         >
         <remarks>
-          <para
-            >
-            If <paramref
-             name="retval" />
+          <para>
+            If <paramref name="retval" />
 
             
 
-             is <c
-            >-1</c>
+             is <c>-1</c>
 
             
 
             , then this method is
             equivalent to calling 
-            <see
-             cref="M:Mono.Unix.UnixMarshal.ThrowExceptionForError" />
+            <see cref="M:Mono.Unix.UnixMarshal.ThrowExceptionForError" />
 
             
 
-             (<paramref
-             name="errno" />
+             (<paramref name="errno" />
 
             
 
@@ -3219,49 +2801,44 @@ stringArray[] = {
             Otherwise, nothing is done.
           </para
           >
-          <para
-            >
+          <para>
             If the exception thrown is not a 
-            <see
-             cref="T:Mono.Unix.UnixIOException" />
+            <see cref="T:Mono.Unix.UnixIOException" />
 
             
 
             , then the exception's
-            <see
-             cref="P:System.Exception.InnerException" />
+            <see cref="P:System.Exception.InnerException" />
 
             
 
              property will
-            be set to a <see
-             cref="T:Mono.Unix.UnixIOException" />
+            be set to a <see cref="T:Mono.Unix.UnixIOException" />
 
             
 
              instance
-            wrapping <paramref
-             name="errno" />
+            wrapping <paramref name="errno" />
 
             
 
             , if possible.
             <block
-             subset="none" type="note">
+              subset="none"
+              type="note"
+            >
               <see cref="T:System.ArgumentOutOfRangeException" />
 
               
 
                does not
               have its 
-              <see
-               cref="P:System.Exception.InnerException" />
+              <see cref="P:System.Exception.InnerException" />
 
               
 
                property set, as 
-              <see
-               cref="T:System.ArgumentOutOfRangeException" />
+              <see cref="T:System.ArgumentOutOfRangeException" />
 
               
 
@@ -3278,14 +2855,12 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.EBADF" />
+          <see cref="F:Mono.Unix.Native.Errno.EBADF" />
 
           
 
            or
-          <see
-           cref="F:Mono.Unix.Native.Errno.EINVAL" />
+          <see cref="F:Mono.Unix.Native.Errno.EINVAL" />
 
           
 
@@ -3299,8 +2874,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.ERANGE" />
+          <see cref="F:Mono.Unix.Native.Errno.ERANGE" />
 
           
 
@@ -3314,14 +2888,12 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+          <see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
           
 
            or
-          <see
-           cref="F:Mono.Unix.Native.Errno.EPERM" />
+          <see cref="F:Mono.Unix.Native.Errno.EPERM" />
 
           
 
@@ -3335,8 +2907,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENOEXEC" />
+          <see cref="F:Mono.Unix.Native.Errno.ENOEXEC" />
 
           
 
@@ -3350,8 +2921,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.EFAULT" />
+          <see cref="F:Mono.Unix.Native.Errno.EFAULT" />
 
           
 
@@ -3365,8 +2935,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.EOVERFLOW" />
+          <see cref="F:Mono.Unix.Native.Errno.EOVERFLOW" />
 
           
 
@@ -3380,14 +2949,12 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.EACCES" />
+          <see cref="F:Mono.Unix.Native.Errno.EACCES" />
 
           
 
            or
-          <see
-           cref="F:Mono.Unix.Native.Errno.EISDIR" />
+          <see cref="F:Mono.Unix.Native.Errno.EISDIR" />
 
           
 
@@ -3401,8 +2968,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+          <see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -3416,8 +2982,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+          <see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -3431,38 +2996,32 @@ stringArray[] = {
 
           
           is one of:
-          <see
-           cref="F:Mono.Unix.Native.Errno.EIO" />
+          <see cref="F:Mono.Unix.Native.Errno.EIO" />
 
           
 
           ,
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+          <see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
           
 
           ,
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENOTEMPTY" />
+          <see cref="F:Mono.Unix.Native.Errno.ENOTEMPTY" />
 
           
 
           ,
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENXIO" />
+          <see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
           
 
           ,
-          <see
-           cref="F:Mono.Unix.Native.Errno.EROFS" />
+          <see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
           
 
           ,
-          <see
-           cref="F:Mono.Unix.Native.Errno.ESPIPE" />
+          <see cref="F:Mono.Unix.Native.Errno.ESPIPE" />
 
           
 
@@ -3476,8 +3035,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+          <see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -3511,11 +3069,9 @@ stringArray[] = {
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary
-          >
+        <summary>
           Throws an exception that best matches the last error returned
-          from <see
-           cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+          from <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
 
           
 
@@ -3523,65 +3079,57 @@ stringArray[] = {
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
             This is equivalent to calling
-            <see
-             cref="M:Mono.Unix.UnixMarshal.ThrowExceptionForError" />
+            <see cref="M:Mono.Unix.UnixMarshal.ThrowExceptionForError" />
 
             
 
-             (<see
-             cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+             (<see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
 
             
 
              ()).
           </para
           >
-          <para
-            >
+          <para>
             If the exception thrown is not a 
-            <see
-             cref="T:Mono.Unix.UnixIOException" />
+            <see cref="T:Mono.Unix.UnixIOException" />
 
             
 
             , then the exception's
-            <see
-             cref="P:System.Exception.InnerException" />
+            <see cref="P:System.Exception.InnerException" />
 
             
 
              property will
-            be set to a <see
-             cref="T:Mono.Unix.UnixIOException" />
+            be set to a <see cref="T:Mono.Unix.UnixIOException" />
 
             
 
              instance
-            wrapping <paramref
-             name="errno" />
+            wrapping <paramref name="errno" />
 
             
 
             , if possible.
             <block
-             subset="none" type="note">
+              subset="none"
+              type="note"
+            >
               <see cref="T:System.ArgumentOutOfRangeException" />
 
               
 
                does not
               have its 
-              <see
-               cref="P:System.Exception.InnerException" />
+              <see cref="P:System.Exception.InnerException" />
 
               
 
                property set, as 
-              <see
-               cref="T:System.ArgumentOutOfRangeException" />
+              <see cref="T:System.ArgumentOutOfRangeException" />
 
               
 
@@ -3598,14 +3146,12 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.EBADF" />
+          <see cref="F:Mono.Unix.Native.Errno.EBADF" />
 
           
 
            or
-          <see
-           cref="F:Mono.Unix.Native.Errno.EINVAL" />
+          <see cref="F:Mono.Unix.Native.Errno.EINVAL" />
 
           
 
@@ -3619,8 +3165,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.ERANGE" />
+          <see cref="F:Mono.Unix.Native.Errno.ERANGE" />
 
           
 
@@ -3634,14 +3179,12 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+          <see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
           
 
            or
-          <see
-           cref="F:Mono.Unix.Native.Errno.EPERM" />
+          <see cref="F:Mono.Unix.Native.Errno.EPERM" />
 
           
 
@@ -3655,8 +3198,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENOEXEC" />
+          <see cref="F:Mono.Unix.Native.Errno.ENOEXEC" />
 
           
 
@@ -3670,8 +3212,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.EFAULT" />
+          <see cref="F:Mono.Unix.Native.Errno.EFAULT" />
 
           
 
@@ -3685,8 +3226,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.EOVERFLOW" />
+          <see cref="F:Mono.Unix.Native.Errno.EOVERFLOW" />
 
           
 
@@ -3700,14 +3240,12 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.EACCES" />
+          <see cref="F:Mono.Unix.Native.Errno.EACCES" />
 
           
 
            or
-          <see
-           cref="F:Mono.Unix.Native.Errno.EISDIR" />
+          <see cref="F:Mono.Unix.Native.Errno.EISDIR" />
 
           
 
@@ -3721,8 +3259,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+          <see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -3736,8 +3273,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+          <see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -3751,38 +3287,32 @@ stringArray[] = {
 
           
           is one of:
-          <see
-           cref="F:Mono.Unix.Native.Errno.EIO" />
+          <see cref="F:Mono.Unix.Native.Errno.EIO" />
 
           
 
           ,
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+          <see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
           
 
           ,
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENOTEMPTY" />
+          <see cref="F:Mono.Unix.Native.Errno.ENOTEMPTY" />
 
           
 
           ,
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENXIO" />
+          <see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
           
 
           ,
-          <see
-           cref="F:Mono.Unix.Native.Errno.EROFS" />
+          <see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
           
 
           ,
-          <see
-           cref="F:Mono.Unix.Native.Errno.ESPIPE" />
+          <see cref="F:Mono.Unix.Native.Errno.ESPIPE" />
 
           
 
@@ -3796,8 +3326,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+          <see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -3837,38 +3366,31 @@ stringArray[] = {
         <Parameter Name="retval" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="retval"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="retval">
+          A <see cref="T:System.Int32" />
 
           
 
            containing the return value of a
-          method from <see
-           cref="T:Mono.Unix.Native.Syscall" />
+          method from <see cref="T:Mono.Unix.Native.Syscall" />
 
           
 
           .
         </param
         >
-        <summary
-          >
+        <summary>
           Throws an exception that best matches the last error returned
-          from <see
-           cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+          from <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
 
           
 
            if
-          <paramref
-           name="retval" />
+          <paramref name="retval" />
 
           
 
-           is <c
-          >-1</c>
+           is <c>-1</c>
 
           
 
@@ -3876,27 +3398,22 @@ stringArray[] = {
         </summary
         >
         <remarks>
-          <para
-            >
-            If <paramref
-             name="retval" />
+          <para>
+            If <paramref name="retval" />
 
             
 
-             is <c
-            >-1</c>
+             is <c>-1</c>
 
             
 
             , then this method is
             equivalent to calling 
-            <see
-             cref="M:Mono.Unix.UnixMarshal.ThrowExceptionForError" />
+            <see cref="M:Mono.Unix.UnixMarshal.ThrowExceptionForError" />
 
             
 
-             (<see
-             cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+             (<see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
 
             
 
@@ -3904,49 +3421,44 @@ stringArray[] = {
             Otherwise, nothing is done.
           </para
           >
-          <para
-            >
+          <para>
             If the exception thrown is not a 
-            <see
-             cref="T:Mono.Unix.UnixIOException" />
+            <see cref="T:Mono.Unix.UnixIOException" />
 
             
 
             , then the exception's
-            <see
-             cref="P:System.Exception.InnerException" />
+            <see cref="P:System.Exception.InnerException" />
 
             
 
              property will
-            be set to a <see
-             cref="T:Mono.Unix.UnixIOException" />
+            be set to a <see cref="T:Mono.Unix.UnixIOException" />
 
             
 
              instance
-            wrapping <paramref
-             name="errno" />
+            wrapping <paramref name="errno" />
 
             
 
             , if possible.
             <block
-             subset="none" type="note">
+              subset="none"
+              type="note"
+            >
               <see cref="T:System.ArgumentOutOfRangeException" />
 
               
 
                does not
               have its 
-              <see
-               cref="P:System.Exception.InnerException" />
+              <see cref="P:System.Exception.InnerException" />
 
               
 
                property set, as 
-              <see
-               cref="T:System.ArgumentOutOfRangeException" />
+              <see cref="T:System.ArgumentOutOfRangeException" />
 
               
 
@@ -3963,14 +3475,12 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.EBADF" />
+          <see cref="F:Mono.Unix.Native.Errno.EBADF" />
 
           
 
            or
-          <see
-           cref="F:Mono.Unix.Native.Errno.EINVAL" />
+          <see cref="F:Mono.Unix.Native.Errno.EINVAL" />
 
           
 
@@ -3984,8 +3494,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.ERANGE" />
+          <see cref="F:Mono.Unix.Native.Errno.ERANGE" />
 
           
 
@@ -3999,14 +3508,12 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+          <see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
           
 
            or
-          <see
-           cref="F:Mono.Unix.Native.Errno.EPERM" />
+          <see cref="F:Mono.Unix.Native.Errno.EPERM" />
 
           
 
@@ -4020,8 +3527,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENOEXEC" />
+          <see cref="F:Mono.Unix.Native.Errno.ENOEXEC" />
 
           
 
@@ -4035,8 +3541,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.EFAULT" />
+          <see cref="F:Mono.Unix.Native.Errno.EFAULT" />
 
           
 
@@ -4050,8 +3555,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.EOVERFLOW" />
+          <see cref="F:Mono.Unix.Native.Errno.EOVERFLOW" />
 
           
 
@@ -4065,14 +3569,12 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.EACCES" />
+          <see cref="F:Mono.Unix.Native.Errno.EACCES" />
 
           
 
            or
-          <see
-           cref="F:Mono.Unix.Native.Errno.EISDIR" />
+          <see cref="F:Mono.Unix.Native.Errno.EISDIR" />
 
           
 
@@ -4086,8 +3588,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+          <see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -4101,8 +3602,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+          <see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -4116,38 +3616,32 @@ stringArray[] = {
 
           
           is one of:
-          <see
-           cref="F:Mono.Unix.Native.Errno.EIO" />
+          <see cref="F:Mono.Unix.Native.Errno.EIO" />
 
           
 
           ,
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+          <see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
           
 
           ,
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENOTEMPTY" />
+          <see cref="F:Mono.Unix.Native.Errno.ENOTEMPTY" />
 
           
 
           ,
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENXIO" />
+          <see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
           
 
           ,
-          <see
-           cref="F:Mono.Unix.Native.Errno.EROFS" />
+          <see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
           
 
           ,
-          <see
-           cref="F:Mono.Unix.Native.Errno.ESPIPE" />
+          <see cref="F:Mono.Unix.Native.Errno.ESPIPE" />
 
           
 
@@ -4161,8 +3655,7 @@ stringArray[] = {
 
           
           is 
-          <see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+          <see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 

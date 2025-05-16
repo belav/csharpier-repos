@@ -13,8 +13,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by members such as the <see
-         cref="Overload:System.Windows.Forms.TreeViewEventArgs.#ctor" />
+        >This enumeration is used by members such as the <see cref="Overload:System.Windows.Forms.TreeViewEventArgs.#ctor" />
 
         
 
@@ -24,8 +23,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the action that raised a <see
-         cref="T:System.Windows.Forms.TreeViewEventArgs" />
+        >Specifies the action that raised a <see cref="T:System.Windows.Forms.TreeViewEventArgs" />
 
         
 
@@ -78,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The event was caused by the <see
-             cref="T:System.Windows.Forms.TreeNode" />
+            >The event was caused by the <see cref="T:System.Windows.Forms.TreeNode" />
 
             
 
@@ -102,8 +99,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The event was caused by the <see
-             cref="T:System.Windows.Forms.TreeNode" />
+            >The event was caused by the <see cref="T:System.Windows.Forms.TreeNode" />
 
             
 

@@ -41,18 +41,15 @@
          can represent a parameter passed to a method and the reference direction of the parameter.</para
       >
       <para
-        >The <see
-         cref="P:System.CodeDom.CodeDirectionExpression.Expression" />
+        >The <see cref="P:System.CodeDom.CodeDirectionExpression.Expression" />
 
         
 
-         property indicates the expression to qualify with a direction. The <see
-         cref="P:System.CodeDom.CodeDirectionExpression.Direction" />
+         property indicates the expression to qualify with a direction. The <see cref="P:System.CodeDom.CodeDirectionExpression.Direction" />
 
         
 
-         property indicates the direction of the parameter using one of the <see
-         cref="T:System.CodeDom.FieldDirection" />
+         property indicates the direction of the parameter using one of the <see cref="T:System.CodeDom.FieldDirection" />
 
         
 
@@ -93,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeDirectionExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDirectionExpression" />
 
             
 
@@ -128,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeDirectionExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDirectionExpression" />
 
             
 
@@ -137,24 +132,30 @@
           >
         </summary>
         <param name="direction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.FieldDirection" />
+          A <see cref="T:System.CodeDom.FieldDirection" />
 
           
 
            that indicates the field direction of the expression. </param
         >
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeExpression" />
+          A <see cref="T:System.CodeDom.CodeExpression" />
 
           
 

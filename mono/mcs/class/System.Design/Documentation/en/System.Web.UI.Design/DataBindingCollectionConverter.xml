@@ -20,13 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This type converter calls the base <see
-         cref="Overload:System.ComponentModel.TypeConverter.ConvertTo" />
+        >This type converter calls the base <see cref="Overload:System.ComponentModel.TypeConverter.ConvertTo" />
 
         
 
-         method for all destination types except <see
-         cref="T:System.String" />
+         method for all destination types except <see cref="T:System.String" />
 
         
 
@@ -36,8 +34,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a type converter for <see
-         cref="T:System.Web.UI.DataBindingCollection" />
+        >Provides a type converter for <see cref="T:System.Web.UI.DataBindingCollection" />
 
         
 
@@ -55,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Web.UI.Design.DataBindingCollectionConverter" />
+            >Initializes an instance of the <see cref="T:System.Web.UI.Design.DataBindingCollectionConverter" />
 
             
 
@@ -88,23 +84,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns an empty string if the <paramref
-             name="destinationType" />
+            >This method returns an empty string if the <paramref name="destinationType" />
 
             
 
-             parameter is of type <see
-             cref="T:System.String" />
+             parameter is of type <see cref="T:System.String" />
 
             
 
-            . Otherwise this method calls the <see
-             cref="M:System.ComponentModel.TypeConverter.ConvertTo(System.Object,System.Type)" />
+            . Otherwise this method calls the <see cref="M:System.ComponentModel.TypeConverter.ConvertTo(System.Object,System.Type)" />
 
             
 
-             method of the base <see
-             cref="T:System.ComponentModel.TypeConverter" />
+             method of the base <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
@@ -118,13 +110,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object produced by the type conversion. If the <paramref
-             name="destinationType" />
+            >The object produced by the type conversion. If the <paramref name="destinationType" />
 
             
 
-             parameter is of type <see
-             cref="T:System.String" />
+             parameter is of type <see cref="T:System.String" />
 
             
 
@@ -132,38 +122,52 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that indicates the component or control to which the data binding collection belongs. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            that can be used to provide additional culture information. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to convert. </param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

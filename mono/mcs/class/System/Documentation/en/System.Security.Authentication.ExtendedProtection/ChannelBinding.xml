@@ -23,8 +23,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The channel binding token in a <see
-         cref="T:System.Security.Authentication.ExtendedProtection.ChannelBinding" />
+        >The channel binding token in a <see cref="T:System.Security.Authentication.ExtendedProtection.ChannelBinding" />
 
         
 
@@ -34,8 +33,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Authentication.ExtendedProtection.ChannelBinding" />
+        >The <see cref="T:System.Security.Authentication.ExtendedProtection.ChannelBinding" />
 
         
 
@@ -63,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ChannelBinding" />
+            >Initializes a new instance of the <see cref="T:System.Security.Authentication.ExtendedProtection.ChannelBinding" />
 
             
 
@@ -90,8 +87,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Authentication.ExtendedProtection.ChannelBinding.#ctor(System.Boolean)" />
+            >The <see cref="M:System.Security.Authentication.ExtendedProtection.ChannelBinding.#ctor(System.Boolean)" />
 
             
 
@@ -101,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ChannelBinding" />
+            >Initializes a new instance of the <see cref="T:System.Security.Authentication.ExtendedProtection.ChannelBinding" />
 
             
 
@@ -110,7 +105,11 @@
           >
         </summary>
         <param name="ownsHandle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -133,8 +132,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The size of the channel binding token may be used by derived classes when passing the <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ChannelBinding" />
+            >The size of the channel binding token may be used by derived classes when passing the <see cref="T:System.Security.Authentication.ExtendedProtection.ChannelBinding" />
 
             
 
@@ -144,13 +142,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Authentication.ExtendedProtection.ChannelBinding.Size" />
+            >The <see cref="P:System.Security.Authentication.ExtendedProtection.ChannelBinding.Size" />
 
             
 
-             property gets the size, in bytes, of the channel binding token associated with the <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ChannelBinding" />
+             property gets the size, in bytes, of the channel binding token associated with the <see cref="T:System.Security.Authentication.ExtendedProtection.ChannelBinding" />
 
             
 

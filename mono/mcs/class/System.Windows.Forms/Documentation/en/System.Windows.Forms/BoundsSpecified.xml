@@ -18,18 +18,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the members of this enumeration when calling the <see
-         cref="M:System.Windows.Forms.Control.SetBoundsCore(System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Forms.BoundsSpecified)" />
+        >Use the members of this enumeration when calling the <see cref="M:System.Windows.Forms.Control.SetBoundsCore(System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Forms.BoundsSpecified)" />
 
         
 
-         and <see
-         cref="M:System.Windows.Forms.Control.SetBounds(System.Int32,System.Int32,System.Int32,System.Int32)" />
+         and <see cref="M:System.Windows.Forms.Control.SetBounds(System.Int32,System.Int32,System.Int32,System.Int32)" />
 
         
 
-         methods of the <see
-         cref="T:System.Windows.Forms.Control" />
+         methods of the <see cref="T:System.Windows.Forms.Control" />
 
         
 
@@ -52,13 +49,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Both <see
-             cref="P:System.Windows.Forms.Control.Location" />
+            >Both <see cref="P:System.Windows.Forms.Control.Location" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.Control.Size" />
+             and <see cref="P:System.Windows.Forms.Control.Size" />
 
             
 
@@ -132,13 +127,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Both <see
-             cref="P:System.Windows.Forms.Control.Width" />
+            >Both <see cref="P:System.Windows.Forms.Control.Width" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.Control.Height" />
+             and <see cref="P:System.Windows.Forms.Control.Height" />
 
             
 

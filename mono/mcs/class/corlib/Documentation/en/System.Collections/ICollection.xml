@@ -39,105 +39,87 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Collections.ICollection" />
+        >The <see cref="T:System.Collections.ICollection" />
 
         
 
-         interface is the base interface for classes in the <see
-         cref="N:System.Collections" />
+         interface is the base interface for classes in the <see cref="N:System.Collections" />
 
         
 
          namespace.</para
       >
       <para
-        >The <see
-         cref="T:System.Collections.ICollection" />
+        >The <see cref="T:System.Collections.ICollection" />
 
         
 
-         interface extends <see
-         cref="T:System.Collections.IEnumerable" />
+         interface extends <see cref="T:System.Collections.IEnumerable" />
 
         
 
-        ; <see
-         cref="T:System.Collections.IDictionary" />
+        ; <see cref="T:System.Collections.IDictionary" />
 
         
 
-         and <see
-         cref="T:System.Collections.IList" />
+         and <see cref="T:System.Collections.IList" />
 
         
 
-         are more specialized interfaces that extend <see
-         cref="T:System.Collections.ICollection" />
+         are more specialized interfaces that extend <see cref="T:System.Collections.ICollection" />
 
         
 
-        . An <see
-         cref="T:System.Collections.IDictionary" />
+        . An <see cref="T:System.Collections.IDictionary" />
 
         
 
-         implementation is a collection of key/value pairs, like the <see
-         cref="T:System.Collections.Hashtable" />
+         implementation is a collection of key/value pairs, like the <see cref="T:System.Collections.Hashtable" />
 
         
 
-         class. An <see
-         cref="T:System.Collections.IList" />
+         class. An <see cref="T:System.Collections.IList" />
 
         
 
-         implementation is a collection of values and its members can be accessed by index, like the <see
-         cref="T:System.Collections.ArrayList" />
+         implementation is a collection of values and its members can be accessed by index, like the <see cref="T:System.Collections.ArrayList" />
 
         
 
          class.</para
       >
       <para
-        >Some collections that limit access to their elements, such as the <see
-         cref="T:System.Collections.Queue" />
+        >Some collections that limit access to their elements, such as the <see cref="T:System.Collections.Queue" />
 
         
 
-         class and the <see
-         cref="T:System.Collections.Stack" />
+         class and the <see cref="T:System.Collections.Stack" />
 
         
 
-         class, directly implement the <see
-         cref="T:System.Collections.ICollection" />
+         class, directly implement the <see cref="T:System.Collections.ICollection" />
 
         
 
          interface.</para
       >
       <para
-        >If neither the <see
-         cref="T:System.Collections.IDictionary" />
+        >If neither the <see cref="T:System.Collections.IDictionary" />
 
         
 
-         interface nor the <see
-         cref="T:System.Collections.IList" />
+         interface nor the <see cref="T:System.Collections.IList" />
 
         
 
-         interface meet the requirements of the required collection, derive the new collection class from the <see
-         cref="T:System.Collections.ICollection" />
+         interface meet the requirements of the required collection, derive the new collection class from the <see cref="T:System.Collections.ICollection" />
 
         
 
          interface instead for more flexibility.</para
       >
       <para
-        >For the generic version of this interface, see <see
-         cref="T:System.Collections.Generic.ICollection`1" />
+        >For the generic version of this interface, see <see cref="T:System.Collections.Generic.ICollection`1" />
 
         
 
@@ -181,8 +163,7 @@
           <para>
             <block subset="none" type="usage"
               >Use this method to copy from a collection to a
-   <see
-               cref="T:System.Array" />
+   <see cref="T:System.Array" />
 
               
 
@@ -195,8 +176,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -223,8 +203,7 @@
 
             
 
-             is greater than or equal to <paramref
-             name="array" />
+             is greater than or equal to <paramref name="array" />
 
             
 
@@ -232,18 +211,15 @@
           >
           <para>-or-</para>
           <para
-            > The sum of <paramref
-             name="index" />
+            > The sum of <paramref name="index" />
 
             
 
-             and the <see
-             cref="P:System.Collections.ICollection.Count" />
+             and the <see cref="P:System.Collections.ICollection.Count" />
 
             
 
-             of the current instance is greater than <paramref
-             name="array" />
+             of the current instance is greater than <paramref name="array" />
 
             
 
@@ -251,8 +227,7 @@
           >
         </exception>
         <exception cref="T:System.InvalidCastException"
-          >At least one element in the current instance is not assignment-compatible with the type of <paramref
-           name="array" />
+          >At least one element in the current instance is not assignment-compatible with the type of <paramref name="array" />
 
           
 
@@ -261,18 +236,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the <see
-             cref="T:System.Collections.ICollection" />
+            >Copies the elements of the <see cref="T:System.Collections.ICollection" />
 
             
 
-             to an <see
-             cref="T:System.Array" />
+             to an <see cref="T:System.Array" />
 
             
 
-            , starting at a particular <see
-             cref="T:System.Array" />
+            , starting at a particular <see cref="T:System.Array" />
 
             
 
@@ -280,34 +252,38 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from <see
-           cref="T:System.Collections.ICollection" />
+           that is the destination of the elements copied from <see cref="T:System.Collections.ICollection" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -336,8 +312,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
@@ -349,8 +324,7 @@
           <para>This property is read-only.</para>
           <block subset="none" type="behaviors">
             <para
-              >The <see
-               cref="P:System.Collections.ICollection.Count" />
+              >The <see cref="P:System.Collections.ICollection.Count" />
 
               
 
@@ -362,8 +336,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of elements contained in the <see
-             cref="T:System.Collections.ICollection" />
+            >Gets the number of elements contained in the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -398,8 +371,7 @@
             
 
              if access to
-   the current instance is synchronized (thread-safe); otherwise, <see
-             langword="false" />
+   the current instance is synchronized (thread-safe); otherwise, <see langword="false" />
 
             
 
@@ -413,16 +385,14 @@
 
             
 
-             returns an object, which can be used to synchronize access to the <see
-             cref="T:System.Collections.ICollection" />
+             returns an object, which can be used to synchronize access to the <see cref="T:System.Collections.ICollection" />
 
             
 
             .</para
           >
           <para
-            >Most collection classes in the <see
-             cref="N:System.Collections" />
+            >Most collection classes in the <see cref="N:System.Collections" />
 
             
 
@@ -430,8 +400,7 @@
           >
           <para>Enumerating through a collection is intrinsically not a thread-safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
           <para
-            >The following code example shows how to lock the collection using the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+            >The following code example shows how to lock the collection using the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
@@ -442,8 +411,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see
-             cref="T:System.Collections.ICollection" />
+            >Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -473,8 +441,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Object" />
+            >A <see cref="T:System.Object" />
 
             
 
@@ -486,26 +453,22 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>For collections whose underlying store is not publicly available, the expected implementation is to return the current instance. Note that the pointer to the current instance might not be sufficient for collections that wrap other collections; those should return the underlying collection's SyncRoot property.</para>
           <para
-            >Most collection classes in the <see
-             cref="N:System.Collections" />
+            >Most collection classes in the <see cref="N:System.Collections" />
 
             
 
-             namespace also implement a Synchronized method, which provides a synchronized wrapper around the underlying collection. However, derived classes can provide their own synchronized version of the collection using the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             namespace also implement a Synchronized method, which provides a synchronized wrapper around the underlying collection. However, derived classes can provide their own synchronized version of the collection using the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
-             property. The synchronizing code must perform operations on the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             property. The synchronizing code must perform operations on the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
              property of the collection, not directly on the collection. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the collection instance.</para
           >
           <para
-            >In the absence of a Synchronized method on a collection, the expected usage for <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+            >In the absence of a Synchronized method on a collection, the expected usage for <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
@@ -514,8 +477,7 @@
           <para>code reference: System.Collections.ICollection#2</para>
           <para>Enumerating through a collection is intrinsically not a thread-safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
           <para
-            >The following code example shows how to lock the collection using the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+            >The following code example shows how to lock the collection using the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
@@ -526,8 +488,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection" />
 
             
 

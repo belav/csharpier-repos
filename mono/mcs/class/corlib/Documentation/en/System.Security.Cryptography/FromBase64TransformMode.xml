@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >White space includes the space character as well as tab characters, newline characters, and so on. Characters that constitute white space are those identified by the <see
-         cref="M:System.Char.IsWhiteSpace(System.Char)" />
+        >White space includes the space character as well as tab characters, newline characters, and so on. Characters that constitute white space are those identified by the <see cref="M:System.Char.IsWhiteSpace(System.Char)" />
 
         
 

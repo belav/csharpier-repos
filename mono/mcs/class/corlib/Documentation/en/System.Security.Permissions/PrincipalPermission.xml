@@ -40,99 +40,81 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >By passing identity information (user name and role) to the constructor, <see
-         cref="T:System.Security.Permissions.PrincipalPermission" />
+        >By passing identity information (user name and role) to the constructor, <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
         
 
          can be used to demand that the identity of the active principal matches this information.</para
       >
       <para
-        >To match the active <see
-         cref="T:System.Security.Principal.IPrincipal" />
+        >To match the active <see cref="T:System.Security.Principal.IPrincipal" />
 
         
 
-         and associated <see
-         cref="T:System.Security.Principal.IIdentity" />
+         and associated <see cref="T:System.Security.Principal.IIdentity" />
 
         
 
-        , both the specified identity and role must match. If null identity string is used, it is interpreted as a request to match any identity. Use of null role string will match any role. By implication, passing null parameter for <paramref
-         name="name" />
+        , both the specified identity and role must match. If null identity string is used, it is interpreted as a request to match any identity. Use of null role string will match any role. By implication, passing null parameter for <paramref name="name" />
 
         
 
-         or <paramref
-         name="role" />
+         or <paramref name="role" />
 
         
 
-         to <see
-         cref="T:System.Security.Permissions.PrincipalPermission" />
+         to <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
         
 
-         will match the identity and roles in any <see
-         cref="T:System.Security.Principal.IPrincipal" />
+         will match the identity and roles in any <see cref="T:System.Security.Principal.IPrincipal" />
 
         
 
-        . It is also possible to construct a <see
-         cref="T:System.Security.Permissions.PrincipalPermission" />
+        . It is also possible to construct a <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
         
 
-         that only determines whether the <see
-         cref="T:System.Security.Principal.IIdentity" />
+         that only determines whether the <see cref="T:System.Security.Principal.IIdentity" />
 
         
 
-         represents an authenticated or unauthenticated entity. In this case, <paramref
-         name="name" />
+         represents an authenticated or unauthenticated entity. In this case, <paramref name="name" />
 
         
 
-         and <paramref
-         name="role" />
+         and <paramref name="role" />
 
         
 
          are ignored.</para
       >
       <para
-        >Unlike most other permissions, <see
-         cref="T:System.Security.Permissions.PrincipalPermission" />
+        >Unlike most other permissions, <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
         
 
-         does not extend <see
-         cref="T:System.Security.CodeAccessPermission" />
+         does not extend <see cref="T:System.Security.CodeAccessPermission" />
 
         
 
-        . It does, however, implement the <see
-         cref="T:System.Security.IPermission" />
+        . It does, however, implement the <see cref="T:System.Security.IPermission" />
 
         
 
-         interface. This is because <see
-         cref="T:System.Security.Permissions.PrincipalPermission" />
+         interface. This is because <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
         
 
-         is not a code access permission; that is, it is not granted based on the identity of the executing assembly. Instead, it allows code to perform actions (<see
-         cref="M:System.Security.Permissions.PrincipalPermission.Demand" />
+         is not a code access permission; that is, it is not granted based on the identity of the executing assembly. Instead, it allows code to perform actions (<see cref="M:System.Security.Permissions.PrincipalPermission.Demand" />
 
         
 
-        , <see
-         cref="M:System.Security.Permissions.PrincipalPermission.Union(System.Security.IPermission)" />
+        , <see cref="M:System.Security.Permissions.PrincipalPermission.Union(System.Security.IPermission)" />
 
         
 
-        , <see
-         cref="M:System.Security.Permissions.PrincipalPermission.Intersect(System.Security.IPermission)" />
+        , <see cref="M:System.Security.Permissions.PrincipalPermission.Intersect(System.Security.IPermission)" />
 
         
 
@@ -140,18 +122,15 @@
       >
       <block subset="none" type="note">
         <para
-          >Prior to a demand for principal permission it is necessary to set the current application domain's principal policy to the enumeration value <see
-           cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />
+          >Prior to a demand for principal permission it is necessary to set the current application domain's principal policy to the enumeration value <see cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />
 
           
 
-          . By default, the principal policy is set to <see
-           cref="F:System.Security.Principal.PrincipalPolicy.UnauthenticatedPrincipal" />
+          . By default, the principal policy is set to <see cref="F:System.Security.Principal.PrincipalPolicy.UnauthenticatedPrincipal" />
 
           
 
-          . If you do not set the principal policy to <see
-           cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />
+          . If you do not set the principal policy to <see cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />
 
           
 
@@ -163,8 +142,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Allows checks against the active principal (see <see
-         cref="T:System.Security.Principal.IPrincipal" />
+        >Allows checks against the active principal (see <see cref="T:System.Security.Principal.IPrincipal" />
 
         
 
@@ -196,28 +174,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >None matches only the unauthenticated principal (<see
-             cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Name" />
+            >None matches only the unauthenticated principal (<see cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Name" />
 
             
 
-             is the empty string (""), no <see
-             cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Role" />
+             is the empty string (""), no <see cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Role" />
 
             
 
-            , <see
-             cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Authenticated" />
+            , <see cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Authenticated" />
 
             
 
-             is false). Unrestricted matches all principals (<see
-             cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Name" />
+             is false). Unrestricted matches all principals (<see cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Name" />
 
             
 
-             is null, <see
-             cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Role" />
+             is null, <see cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Role" />
 
             
 
@@ -230,13 +203,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.PrincipalPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
             
 
-             class with the specified <see
-             cref="T:System.Security.Permissions.PermissionState" />
+             class with the specified <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
@@ -244,12 +215,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -281,28 +255,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Both the <paramref
-             name="name" />
+            >Both the <paramref name="name" />
 
             
 
-             parameter and the <paramref
-             name="role" />
+             parameter and the <paramref name="role" />
 
             
 
-             parameter must match for this permission to match the active <see
-             cref="T:System.Security.Principal.IPrincipal" />
+             parameter must match for this permission to match the active <see cref="T:System.Security.Principal.IPrincipal" />
 
             
 
-             and associated <see
-             cref="T:System.Security.Principal.IIdentity" />
+             and associated <see cref="T:System.Security.Principal.IIdentity" />
 
             
 
-            . Set <paramref
-             name="name" />
+            . Set <paramref name="name" />
 
             
 
@@ -312,18 +281,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.PrincipalPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
             
 
-             class for the specified <paramref
-             name="name" />
+             class for the specified <paramref name="name" />
 
             
 
-             and <paramref
-             name="role" />
+             and <paramref name="role" />
 
             
 
@@ -331,24 +297,30 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Security.Principal.IPrincipal" />
+          The name of the <see cref="T:System.Security.Principal.IPrincipal" />
 
           
 
            object's user. </param
         >
         <param name="role">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The role of the <see
-           cref="T:System.Security.Principal.IPrincipal" />
+          The role of the <see cref="T:System.Security.Principal.IPrincipal" />
 
           
 
@@ -381,23 +353,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Both the <paramref
-             name="name" />
+            >Both the <paramref name="name" />
 
             
 
-             parameter and the <paramref
-             name="role" />
+             parameter and the <paramref name="role" />
 
             
 
-             parameter must match for this permission to match the active <see
-             cref="T:System.Security.Principal.IPrincipal" />
+             parameter must match for this permission to match the active <see cref="T:System.Security.Principal.IPrincipal" />
 
             
 
-             and associated <see
-             cref="T:System.Security.Principal.IIdentity" />
+             and associated <see cref="T:System.Security.Principal.IIdentity" />
 
             
 
@@ -407,18 +375,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.PrincipalPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
             
 
-             class for the specified <paramref
-             name="name" />
+             class for the specified <paramref name="name" />
 
             
 
-            , <paramref
-             name="role" />
+            , <paramref name="role" />
 
             
 
@@ -426,31 +391,41 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Security.Principal.IPrincipal" />
+          The name of the <see cref="T:System.Security.Principal.IPrincipal" />
 
           
 
            object's user. </param
         >
         <param name="role">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The role of the <see
-           cref="T:System.Security.Principal.IPrincipal" />
+          The role of the <see cref="T:System.Security.Principal.IPrincipal" />
 
           
 
            object's user (for example, Administrator). </param
         >
         <param name="isAuthenticated">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -509,13 +484,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If no <see
-             cref="T:System.Security.SecurityException" />
+            >If no <see cref="T:System.Security.SecurityException" />
 
             
 
-             is raised, <see
-             cref="M:System.Security.Permissions.PrincipalPermission.Demand" />
+             is raised, <see cref="M:System.Security.Permissions.PrincipalPermission.Demand" />
 
             
 
@@ -524,23 +497,19 @@
           <para>This method acts against the principal attached to the calling thread.</para>
           <block subset="none" type="note">
             <para
-              >Prior to calling the <see
-               cref="M:System.Security.Permissions.PrincipalPermission.Demand" />
+              >Prior to calling the <see cref="M:System.Security.Permissions.PrincipalPermission.Demand" />
 
               
 
-               method, it is necessary to set the current application domain's principal policy to the enumeration value <see
-               cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />
+               method, it is necessary to set the current application domain's principal policy to the enumeration value <see cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />
 
               
 
-              . By default the principal policy is set to <see
-               cref="F:System.Security.Principal.PrincipalPolicy.UnauthenticatedPrincipal" />
+              . By default the principal policy is set to <see cref="F:System.Security.Principal.PrincipalPolicy.UnauthenticatedPrincipal" />
 
               
 
-              . If you do not set the principal policy to <see
-               cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />
+              . If you do not set the principal policy to <see cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />
 
               
 
@@ -582,8 +551,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >For more information, see <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -593,13 +561,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Security.Permissions.PrincipalPermission" />
+            >Determines whether the specified <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
             
 
-             object is equal to the current <see
-             cref="T:System.Security.Permissions.PrincipalPermission" />
+             object is equal to the current <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
             
 
@@ -609,13 +575,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see
-             cref="T:System.Security.Permissions.PrincipalPermission" />
+            >true if the specified <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
             
 
-             is equal to the current <see
-             cref="T:System.Security.Permissions.PrincipalPermission" />
+             is equal to the current <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
             
 
@@ -623,17 +587,19 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Permissions.PrincipalPermission" />
+          The <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
           
 
-           object to compare with the current <see
-           cref="T:System.Security.Permissions.PrincipalPermission" />
+           object to compare with the current <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
           
 
@@ -669,7 +635,11 @@
           <para>Reconstructs a permission with a specified state from an XML encoding.</para>
         </summary>
         <param name="elem">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -702,8 +672,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hash code for two instances of the same permission might be different, hence a hash code should not be used to compare two <see
-             cref="T:System.Security.Permissions.PrincipalPermission" />
+            >The hash code for two instances of the same permission might be different, hence a hash code should not be used to compare two <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
             
 
@@ -713,8 +682,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a hash code for the <see
-             cref="T:System.Security.Permissions.PrincipalPermission" />
+            >Gets a hash code for the <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
             
 
@@ -724,8 +692,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.Security.Permissions.PrincipalPermission" />
+            >A hash code for the current <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
             
 
@@ -759,8 +726,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because two users never intersect, this method is not useful for <see
-             cref="T:System.Security.Permissions.PrincipalPermission" />
+            >Because two users never intersect, this method is not useful for <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
             
 
@@ -780,7 +746,11 @@
           <para>A new permission that represents the intersection of the current permission and the specified permission. This new permission will be null if the intersection is empty.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -823,7 +793,11 @@
           <para>true if the current permission is a subset of the specified permission; otherwise, false.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -851,8 +825,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An unrestricted <see
-             cref="T:System.Security.Permissions.PrincipalPermission" />
+            >An unrestricted <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
             
 
@@ -976,8 +949,7 @@
 
             
 
-             creates a permission representing the criteria of a given set of individual <see
-             cref="T:System.Security.Permissions.PrincipalPermission" />
+             creates a permission representing the criteria of a given set of individual <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
             
 
@@ -995,7 +967,11 @@
           <para>A new permission that represents the union of the current permission and the specified permission.</para>
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

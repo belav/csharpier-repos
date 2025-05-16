@@ -30,31 +30,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Diagnostics.EventLogEntryCollection" />
+        >Use the <see cref="T:System.Diagnostics.EventLogEntryCollection" />
 
         
 
-         class when reading the entries associated with an <see
-         cref="T:System.Diagnostics.EventLog" />
+         class when reading the entries associated with an <see cref="T:System.Diagnostics.EventLog" />
 
         
 
-         instance. The <see
-         cref="P:System.Diagnostics.EventLog.Entries" />
+         instance. The <see cref="P:System.Diagnostics.EventLog.Entries" />
 
         
 
-         property of the <see
-         cref="T:System.Diagnostics.EventLog" />
+         property of the <see cref="T:System.Diagnostics.EventLog" />
 
         
 
          class is a collection of all the entries in the event log.</para
       >
       <para
-        >Because new entries are appended to the existing list, stepping through the collection enables you to access the entries that were created after you originally created the <see
-         cref="T:System.Diagnostics.EventLogEntryCollection" />
+        >Because new entries are appended to the existing list, stepping through the collection enables you to access the entries that were created after you originally created the <see cref="T:System.Diagnostics.EventLogEntryCollection" />
 
         
 
@@ -64,8 +59,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines size and enumerators for a collection of <see
-         cref="T:System.Diagnostics.EventLogEntry" />
+        >Defines size and enumerators for a collection of <see cref="T:System.Diagnostics.EventLogEntry" />
 
         
 
@@ -101,18 +95,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because new entries are appended to the existing list, stepping through the collection enables you to access the entries that were created after you originally created the <see
-             cref="T:System.Diagnostics.EventLogEntryCollection" />
+            >Because new entries are appended to the existing list, stepping through the collection enables you to access the entries that were created after you originally created the <see cref="T:System.Diagnostics.EventLogEntryCollection" />
 
             
 
-            . An array of <see
-             cref="T:System.Diagnostics.EventLogEntry" />
+            . An array of <see cref="T:System.Diagnostics.EventLogEntry" />
 
             
 
-             instances is fixed at the time it is instantiated. Therefore, you cannot read new entries by using the array that is returned by the <see
-             cref="M:System.Diagnostics.EventLogEntryCollection.CopyTo(System.Diagnostics.EventLogEntry[],System.Int32)" />
+             instances is fixed at the time it is instantiated. Therefore, you cannot read new entries by using the array that is returned by the <see cref="M:System.Diagnostics.EventLogEntryCollection.CopyTo(System.Diagnostics.EventLogEntry[],System.Int32)" />
 
             
 
@@ -122,13 +113,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the <see
-             cref="T:System.Diagnostics.EventLogEntryCollection" />
+            >Copies the elements of the <see cref="T:System.Diagnostics.EventLogEntryCollection" />
 
             
 
-             to an array of <see
-             cref="T:System.Diagnostics.EventLogEntry" />
+             to an array of <see cref="T:System.Diagnostics.EventLogEntry" />
 
             
 
@@ -136,7 +125,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -161,23 +154,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Diagnostics.EventLogEntryCollection" />
+            >An <see cref="T:System.Diagnostics.EventLogEntryCollection" />
 
             
 
-             represents a dynamic list of all the entries in a log. Therefore, the <see
-             cref="P:System.Diagnostics.EventLogEntryCollection.Count" />
+             represents a dynamic list of all the entries in a log. Therefore, the <see cref="P:System.Diagnostics.EventLogEntryCollection.Count" />
 
             
 
-             property can change during the lifetime of the <see
-             cref="T:System.Diagnostics.EventLogEntryCollection" />
+             property can change during the lifetime of the <see cref="T:System.Diagnostics.EventLogEntryCollection" />
 
             
 
-             instance that you create. It is usually best to work with the <see
-             cref="P:System.Diagnostics.EventLogEntryCollection.Count" />
+             instance that you create. It is usually best to work with the <see cref="P:System.Diagnostics.EventLogEntryCollection.Count" />
 
             
 
@@ -187,8 +176,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of entries in the event log (that is, the number of elements in the <see
-             cref="T:System.Diagnostics.EventLogEntry" />
+            >Gets the number of entries in the event log (that is, the number of elements in the <see cref="T:System.Diagnostics.EventLogEntry" />
 
             
 
@@ -220,18 +208,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object that is returned by the <see
-             cref="M:System.Diagnostics.EventLogEntryCollection.GetEnumerator" />
+            >The object that is returned by the <see cref="M:System.Diagnostics.EventLogEntryCollection.GetEnumerator" />
 
             
 
-             method is a wrapper for the <see
-             cref="T:System.Diagnostics.EventLogEntryCollection" />
+             method is a wrapper for the <see cref="T:System.Diagnostics.EventLogEntryCollection" />
 
             
 
-             class that implements the <see
-             cref="T:System.Collections.IEnumerator" />
+             class that implements the <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -239,8 +224,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If the collection is changed during the iteration, the iteration is terminated. To avoid this possibility, see the <see
-               cref="P:System.Diagnostics.EventLogEntryCollection.Item(System.Int32)" />
+              >If the collection is changed during the iteration, the iteration is terminated. To avoid this possibility, see the <see cref="P:System.Diagnostics.EventLogEntryCollection.Item(System.Int32)" />
 
               
 
@@ -251,8 +235,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Supports a simple iteration over the <see
-             cref="T:System.Diagnostics.EventLogEntryCollection" />
+            >Supports a simple iteration over the <see cref="T:System.Diagnostics.EventLogEntryCollection" />
 
             
 
@@ -316,18 +299,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Diagnostics.EventLogEntryCollection.CopyTo(System.Diagnostics.EventLogEntry[],System.Int32)" />
+            >Use the <see cref="M:System.Diagnostics.EventLogEntryCollection.CopyTo(System.Diagnostics.EventLogEntry[],System.Int32)" />
 
             
 
-             method of the <see
-             cref="T:System.Diagnostics.EventLogEntryCollection" />
+             method of the <see cref="T:System.Diagnostics.EventLogEntryCollection" />
 
             
 
-             class to copy all or part of the collection to an <see
-             cref="T:System.Diagnostics.EventLogEntry" />
+             class to copy all or part of the collection to an <see cref="T:System.Diagnostics.EventLogEntry" />
 
             
 
@@ -337,13 +317,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the collection to an <see
-             cref="T:System.Array" />
+            >Copies the elements of the collection to an <see cref="T:System.Array" />
 
             
 
-            , starting at a particular <see
-             cref="T:System.Array" />
+            , starting at a particular <see cref="T:System.Array" />
 
             
 
@@ -351,29 +329,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements that are copied from the collection. The <see
-           cref="T:System.Array" />
+           that is the destination of the elements that are copied from the collection. The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -404,13 +387,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the <see
-             cref="T:System.Diagnostics.EventLogEntryCollection" />
+            >For the <see cref="T:System.Diagnostics.EventLogEntryCollection" />
 
             
 
-             class, the <see
-             cref="P:System.Diagnostics.EventLogEntryCollection.System#Collections#ICollection#IsSynchronized" />
+             class, the <see cref="P:System.Diagnostics.EventLogEntryCollection.System#Collections#ICollection#IsSynchronized" />
 
             
 
@@ -420,8 +401,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether access to the <see
-             cref="T:System.Diagnostics.EventLogEntryCollection" />
+            >Gets a value that indicates whether access to the <see cref="T:System.Diagnostics.EventLogEntryCollection" />
 
             
 
@@ -453,18 +433,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the <see
-             cref="T:System.Diagnostics.EventLogEntryCollection" />
+            >For the <see cref="T:System.Diagnostics.EventLogEntryCollection" />
 
             
 
-             class, the <see
-             cref="P:System.Diagnostics.EventLogEntryCollection.System#Collections#ICollection#SyncRoot" />
+             class, the <see cref="P:System.Diagnostics.EventLogEntryCollection.System#Collections#ICollection#SyncRoot" />
 
             
 
-             property always returns the current <see
-             cref="T:System.Diagnostics.EventLogEntryCollection" />
+             property always returns the current <see cref="T:System.Diagnostics.EventLogEntryCollection" />
 
             
 
@@ -474,8 +451,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Diagnostics.EventLogEntryCollection" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Diagnostics.EventLogEntryCollection" />
 
             
 

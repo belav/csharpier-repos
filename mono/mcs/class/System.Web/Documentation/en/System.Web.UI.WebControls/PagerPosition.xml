@@ -15,8 +15,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Controls that support pagination often provide a set of controls called the pager that allows the user to navigate the pages within the control. The <see
-         cref="T:System.Web.UI.WebControls.PagerPosition" />
+        >Controls that support pagination often provide a set of controls called the pager that allows the user to navigate the pages within the control. The <see cref="T:System.Web.UI.WebControls.PagerPosition" />
 
         
 

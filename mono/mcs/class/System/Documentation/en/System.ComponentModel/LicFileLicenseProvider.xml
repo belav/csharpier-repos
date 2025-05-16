@@ -26,38 +26,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.LicFileLicenseProvider" />
+        >The <see cref="T:System.ComponentModel.LicFileLicenseProvider" />
 
         
 
-         offers <see
-         cref="M:System.ComponentModel.LicFileLicenseProvider.GetLicense(System.ComponentModel.LicenseContext,System.Type,System.Object,System.Boolean)" />
+         offers <see cref="M:System.ComponentModel.LicFileLicenseProvider.GetLicense(System.ComponentModel.LicenseContext,System.Type,System.Object,System.Boolean)" />
 
         
 
-         and <see
-         cref="M:System.ComponentModel.LicFileLicenseProvider.IsKeyValid(System.String,System.Type)" />
+         and <see cref="M:System.ComponentModel.LicFileLicenseProvider.IsKeyValid(System.String,System.Type)" />
 
         
 
-         methods. The <see
-         cref="M:System.ComponentModel.LicFileLicenseProvider.IsKeyValid(System.String,System.Type)" />
+         methods. The <see cref="M:System.ComponentModel.LicFileLicenseProvider.IsKeyValid(System.String,System.Type)" />
 
         
 
-         method determines whether the <see
-         cref="P:System.ComponentModel.License.LicenseKey" />
+         method determines whether the <see cref="P:System.ComponentModel.License.LicenseKey" />
 
         
 
-         retrieved by the <see
-         cref="M:System.ComponentModel.LicFileLicenseProvider.GetLicense(System.ComponentModel.LicenseContext,System.Type,System.Object,System.Boolean)" />
+         retrieved by the <see cref="M:System.ComponentModel.LicFileLicenseProvider.GetLicense(System.ComponentModel.LicenseContext,System.Type,System.Object,System.Boolean)" />
 
         
 
-         method is valid. When you inherit from this class, you can override the <see
-         cref="M:System.ComponentModel.LicFileLicenseProvider.IsKeyValid(System.String,System.Type)" />
+         method is valid. When you inherit from this class, you can override the <see cref="M:System.ComponentModel.LicFileLicenseProvider.IsKeyValid(System.String,System.Type)" />
 
         
 
@@ -65,8 +58,7 @@
       >
       <para>This class exists to provide similar licensing functionality to COM licensing and uses text license files.</para>
       <para
-        >For more information on licensing, see <format
-         type="text/html">
+        >For more information on licensing, see <format type="text/html">
           <a href="8e66c1ed-a445-4b26-8185-990b6e2bbd57">How to: License Components and Controls</a>
         </format>
 
@@ -78,8 +70,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides an implementation of a <see
-         cref="T:System.ComponentModel.LicenseProvider" />
+        >Provides an implementation of a <see cref="T:System.ComponentModel.LicenseProvider" />
 
         
 
@@ -107,8 +98,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.LicFileLicenseProvider" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.LicFileLicenseProvider" />
 
             
 
@@ -144,8 +134,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A confirmation that the <paramref
-             name="type" />
+            >A confirmation that the <paramref name="type" />
 
             
 
@@ -153,7 +142,11 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -189,26 +182,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >At design time, the <see
-             cref="M:System.ComponentModel.LicFileLicenseProvider.GetLicense(System.ComponentModel.LicenseContext,System.Type,System.Object,System.Boolean)" />
+            >At design time, the <see cref="M:System.ComponentModel.LicFileLicenseProvider.GetLicense(System.ComponentModel.LicenseContext,System.Type,System.Object,System.Boolean)" />
 
             
 
-             method looks for a license file named myClassName.LIC, where myClassName is the <see
-             cref="P:System.Type.FullName" />
+             method looks for a license file named myClassName.LIC, where myClassName is the <see cref="P:System.Type.FullName" />
 
             
 
              of the component to create. This file must be in the same directory as the .dll file that contains the component.</para
           >
           <para
-            >Next, this method checks the first line of the license file against a key specified in the <see
-             cref="M:System.ComponentModel.LicFileLicenseProvider.IsKeyValid(System.String,System.Type)" />
+            >Next, this method checks the first line of the license file against a key specified in the <see cref="M:System.ComponentModel.LicFileLicenseProvider.IsKeyValid(System.String,System.Type)" />
 
             
 
-             method. If the key is valid, this line is used as the <see
-             cref="P:System.ComponentModel.License.LicenseKey" />
+             method. If the key is valid, this line is used as the <see cref="P:System.ComponentModel.License.LicenseKey" />
 
             
 
@@ -222,18 +211,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A valid <see
-             cref="T:System.ComponentModel.License" />
+            >A valid <see cref="T:System.ComponentModel.License" />
 
             
 
-            . If this method cannot find a valid <see
-             cref="T:System.ComponentModel.License" />
+            . If this method cannot find a valid <see cref="T:System.ComponentModel.License" />
 
             
 
-             or a valid <paramref
-             name="context" />
+             or a valid <paramref name="context" />
 
             
 
@@ -241,53 +227,64 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.LicenseContext" />
+          A <see cref="T:System.ComponentModel.LicenseContext" />
 
           
 
            that specifies where you can use the licensed object. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
-           that represents the component requesting the <see
-           cref="T:System.ComponentModel.License" />
+           that represents the component requesting the <see cref="T:System.ComponentModel.License" />
 
           
 
           . </param
         >
         <param name="instance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that requests the <see
-           cref="T:System.ComponentModel.License" />
+          An object that requests the <see cref="T:System.ComponentModel.License" />
 
           
 
           . </param
         >
         <param name="allowExceptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true if a <see
-           cref="T:System.ComponentModel.LicenseException" />
+          true if a <see cref="T:System.ComponentModel.LicenseException" />
 
           
 
@@ -321,8 +318,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method checks the key against the phrase: " myClassName is a licensed component. ", where myClassName is the <see
-             cref="P:System.Type.FullName" />
+            >This method checks the key against the phrase: " myClassName is a licensed component. ", where myClassName is the <see cref="P:System.Type.FullName" />
 
             
 
@@ -332,8 +328,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the key that the <see
-             cref="M:System.ComponentModel.LicFileLicenseProvider.GetLicense(System.ComponentModel.LicenseContext,System.Type,System.Object,System.Boolean)" />
+            >Determines whether the key that the <see cref="M:System.ComponentModel.LicFileLicenseProvider.GetLicense(System.ComponentModel.LicenseContext,System.Type,System.Object,System.Boolean)" />
 
             
 
@@ -343,8 +338,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the key is a valid <see
-             cref="P:System.ComponentModel.License.LicenseKey" />
+            >true if the key is a valid <see cref="P:System.ComponentModel.License.LicenseKey" />
 
             
 
@@ -352,29 +346,34 @@
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.ComponentModel.License.LicenseKey" />
+          The <see cref="P:System.ComponentModel.License.LicenseKey" />
 
           
 
            to check. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
-           that represents the component requesting the <see
-           cref="T:System.ComponentModel.License" />
+           that represents the component requesting the <see cref="T:System.ComponentModel.License" />
 
           
 

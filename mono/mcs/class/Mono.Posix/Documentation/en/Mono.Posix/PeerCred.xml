@@ -24,8 +24,7 @@
     <remarks>
       <para
         >This type is obsolete.  Please use 
-    <see
-         cref="T:Mono.Unix.PeerCred" />
+    <see cref="T:Mono.Unix.PeerCred" />
 
         
 

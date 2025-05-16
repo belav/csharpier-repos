@@ -29,8 +29,7 @@
       <para>Transparent assemblies can be accessed from partially trusted code and cannot expose access to any protected resources or functionality. Code in the assembly is not allowed to suppress code access security checks and cannot cause an elevation of privilege. </para>
       <block subset="none" type="note">
         <para
-          >Transparency is enforced by the just-in-time compiler, not by the security infrastructure code. Applying this attribute to an assembly allows the assembly to access only transparent and security-safe-critical types and members regardless of its permission set, including full trust. Transparent code that accesses a security-critical type or member results in a <see
-           cref="T:System.MethodAccessException" />
+          >Transparency is enforced by the just-in-time compiler, not by the security infrastructure code. Applying this attribute to an assembly allows the assembly to access only transparent and security-safe-critical types and members regardless of its permission set, including full trust. Transparent code that accesses a security-critical type or member results in a <see cref="T:System.MethodAccessException" />
 
           
 
@@ -62,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.SecurityTransparentAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Security.SecurityTransparentAttribute" />
 
             
 

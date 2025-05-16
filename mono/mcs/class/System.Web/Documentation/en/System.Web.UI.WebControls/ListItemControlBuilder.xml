@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used primarily for control developers. To create a custom control builder for a <see
-         cref="T:System.Web.UI.WebControls.ListItem" />
+        >This class is used primarily for control developers. To create a custom control builder for a <see cref="T:System.Web.UI.WebControls.ListItem" />
 
         
 
@@ -31,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Interacts with the parser to build a <see
-         cref="T:System.Web.UI.WebControls.ListItem" />
+        >Interacts with the parser to build a <see cref="T:System.Web.UI.WebControls.ListItem" />
 
         
 
@@ -51,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.ListItemControlBuilder" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.ListItemControlBuilder" />
 
             
 
@@ -76,18 +73,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides the inherited implementation of the <see
-             cref="M:System.Web.UI.ControlBuilder.AllowWhitespaceLiterals" />
+            >This method overrides the inherited implementation of the <see cref="M:System.Web.UI.ControlBuilder.AllowWhitespaceLiterals" />
 
             
 
-             method to always indicate that white spaces in the text associated with the <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             method to always indicate that white spaces in the text associated with the <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             control are not represented by <see
-             cref="T:System.Web.UI.LiteralControl" />
+             control are not represented by <see cref="T:System.Web.UI.LiteralControl" />
 
             
 
@@ -97,13 +91,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether white spaces in the text associated with the <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+            >Determines whether white spaces in the text associated with the <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             are represented by <see
-             cref="T:System.Web.UI.LiteralControl" />
+             are represented by <see cref="T:System.Web.UI.LiteralControl" />
 
             
 
@@ -131,23 +123,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ListItemControlBuilder.HtmlDecodeLiterals" />
+            >The <see cref="M:System.Web.UI.WebControls.ListItemControlBuilder.HtmlDecodeLiterals" />
 
             
 
-             method is used to determine whether HTML entities in the text associated with the <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             method is used to determine whether HTML entities in the text associated with the <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             are converted to their equivalent characters when the text is parsed. This method overrides the inherited implementation of the <see
-             cref="M:System.Web.UI.ControlBuilder.HtmlDecodeLiterals" />
+             are converted to their equivalent characters when the text is parsed. This method overrides the inherited implementation of the <see cref="M:System.Web.UI.ControlBuilder.HtmlDecodeLiterals" />
 
             
 
-             method to always return true. This indicates that HTML entities in the text associated with the <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             method to always return true. This indicates that HTML entities in the text associated with the <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
@@ -155,8 +143,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The text associated with the <see
-               cref="T:System.Web.UI.WebControls.ListItem" />
+              >The text associated with the <see cref="T:System.Web.UI.WebControls.ListItem" />
 
               
 
@@ -167,8 +154,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether HTML entities in the text associated with the <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+            >Determines whether HTML entities in the text associated with the <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 

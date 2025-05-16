@@ -17,16 +17,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implement the <see
-         cref="T:System.ServiceModel.Dispatcher.IClientMessageFormatter" />
+        >Implement the <see cref="T:System.ServiceModel.Dispatcher.IClientMessageFormatter" />
 
         
 
          interface to create a custom client formatter that serializes objects into messages and deserializes messages into objects for a particular operation.</para
       >
       <para
-        >Attach custom indigo1 client formatters to the <see
-         cref="P:System.ServiceModel.Dispatcher.ClientOperation.Formatter" />
+        >Attach custom indigo1 client formatters to the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.Formatter" />
 
         
 
@@ -74,7 +72,11 @@
           <para>The return value of the operation.</para>
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -112,13 +114,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts an <see
-             cref="T:System.Object" />
+            >Converts an <see cref="T:System.Object" />
 
             
 
-             array into an outbound <see
-             cref="T:System.ServiceModel.Channels.Message" />
+             array into an outbound <see cref="T:System.ServiceModel.Channels.Message" />
 
             
 

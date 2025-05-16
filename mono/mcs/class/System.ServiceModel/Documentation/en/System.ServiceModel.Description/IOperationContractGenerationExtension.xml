@@ -17,33 +17,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implement the <see
-         cref="T:System.ServiceModel.Description.IOperationContractGenerationExtension" />
+        >Implement the <see cref="T:System.ServiceModel.Description.IOperationContractGenerationExtension" />
 
         
 
-         interface on an operation behavior (a <see
-         cref="T:System.ServiceModel.Description.IOperationBehavior" />
+         interface on an operation behavior (a <see cref="T:System.ServiceModel.Description.IOperationBehavior" />
 
         
 
-         type) to enable you to modify the code generated when a contract or endpoint is compiled into code. Typically, a custom <see
-         cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
+         type) to enable you to modify the code generated when a contract or endpoint is compiled into code. Typically, a custom <see cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
 
         
 
-         inserts a custom operation behavior into the <see
-         cref="P:System.ServiceModel.Description.OperationDescription.Behaviors" />
+         inserts a custom operation behavior into the <see cref="P:System.ServiceModel.Description.OperationDescription.Behaviors" />
 
         
 
-         collection during the call to <see
-         cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportContract(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlContractConversionContext)" />
+         collection during the call to <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportContract(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlContractConversionContext)" />
 
         
 
-         or <see
-         cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportEndpoint(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" />
+         or <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportEndpoint(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" />
 
         
 
@@ -82,31 +76,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, a custom <see
-             cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
+            >Typically, a custom <see cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
 
             
 
-             inserts a custom operation behavior into the <see
-             cref="P:System.ServiceModel.Description.OperationDescription.Behaviors" />
+             inserts a custom operation behavior into the <see cref="P:System.ServiceModel.Description.OperationDescription.Behaviors" />
 
             
 
-             collection during the call to <see
-             cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportContract(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlContractConversionContext)" />
+             collection during the call to <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportContract(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlContractConversionContext)" />
 
             
 
-             or <see
-             cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportEndpoint(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" />
+             or <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportEndpoint(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="M:System.ServiceModel.Description.IOperationContractGenerationExtension.GenerateOperation(System.ServiceModel.Description.OperationContractGenerationContext)" />
+            >The <see cref="M:System.ServiceModel.Description.IOperationContractGenerationExtension.GenerateOperation(System.ServiceModel.Description.OperationContractGenerationContext)" />
 
             
 
@@ -118,12 +107,15 @@
           <para>Implement to modify the code document object model prior to the contract generation process.</para>
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The working context that contains the <see
-           cref="N:System.CodeDom" />
+          The working context that contains the <see cref="N:System.CodeDom" />
 
           
 

@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The CONNECTDATA structure is the type enumerated through the <see
-         cref="M:System.Runtime.InteropServices.UCOMIEnumConnections.Next(System.Int32,System.Runtime.InteropServices.CONNECTDATA[],System.Int32@)" />
+        >The CONNECTDATA structure is the type enumerated through the <see cref="M:System.Runtime.InteropServices.UCOMIEnumConnections.Next(System.Int32,System.Runtime.InteropServices.CONNECTDATA[],System.Int32@)" />
 
         
 
@@ -38,8 +37,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use <see
-         cref="T:System.Runtime.InteropServices.ComTypes.CONNECTDATA" />
+        >Use <see cref="T:System.Runtime.InteropServices.ComTypes.CONNECTDATA" />
 
         
 
@@ -66,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a connection token that is returned from a call to <see
-             cref="M:System.Runtime.InteropServices.UCOMIConnectionPoint.Advise(System.Object,System.Int32@)" />
+            >Represents a connection token that is returned from a call to <see cref="M:System.Runtime.InteropServices.UCOMIConnectionPoint.Advise(System.Object,System.Int32@)" />
 
             
 

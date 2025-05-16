@@ -38,8 +38,7 @@
 
         
 
-         can be used to represent code expressions that include a binary operator. Some examples of binary operators are equality (==), addition (+), and bitwise (|) operators. The <see
-         cref="T:System.CodeDom.CodeBinaryOperatorType" />
+         can be used to represent code expressions that include a binary operator. Some examples of binary operators are equality (==), addition (+), and bitwise (|) operators. The <see cref="T:System.CodeDom.CodeBinaryOperatorType" />
 
         
 
@@ -71,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeBinaryOperatorExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeBinaryOperatorExpression" />
 
             
 
@@ -107,8 +105,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeBinaryOperatorExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeBinaryOperatorExpression" />
 
             
 
@@ -116,36 +113,45 @@
           >
         </summary>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeExpression" />
+          The <see cref="T:System.CodeDom.CodeExpression" />
 
           
 
            on the left of the operator. </param
         >
         <param name="op">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeBinaryOperatorType" />
+          A <see cref="T:System.CodeDom.CodeBinaryOperatorType" />
 
           
 
            indicating the type of operator. </param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeExpression" />
+          The <see cref="T:System.CodeDom.CodeExpression" />
 
           
 
@@ -205,8 +211,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A binary operator performs an evaluation on two operands. Some examples of binary operators are equality (==), addition (+), and bitwise (|) operators. Many commonly used binary operators can be found in the <see
-             cref="T:System.CodeDom.CodeBinaryOperatorType" />
+            >A binary operator performs an evaluation on two operands. Some examples of binary operators are equality (==), addition (+), and bitwise (|) operators. Many commonly used binary operators can be found in the <see cref="T:System.CodeDom.CodeBinaryOperatorType" />
 
             
 

@@ -14,41 +14,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This interface is implemented by controls, such as <see
-         cref="T:System.Windows.Forms.DataGridViewComboBoxEditingControl" />
+        >This interface is implemented by controls, such as <see cref="T:System.Windows.Forms.DataGridViewComboBoxEditingControl" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.DataGridViewTextBoxEditingControl" />
+         and <see cref="T:System.Windows.Forms.DataGridViewTextBoxEditingControl" />
 
         
 
-        , that are hosted by corresponding <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        , that are hosted by corresponding <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
-         cells, such as <see
-         cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+         cells, such as <see cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
+         and <see cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
 
         
 
         , when they are in edit mode. </para
       >
       <para
-        >Cell types that can host editing controls set their <see
-         cref="P:System.Windows.Forms.DataGridViewCell.EditType" />
+        >Cell types that can host editing controls set their <see cref="P:System.Windows.Forms.DataGridViewCell.EditType" />
 
         
 
-         property to a <see
-         cref="T:System.Type" />
+         property to a <see cref="T:System.Type" />
 
         
 
@@ -57,8 +50,7 @@
       <list type="ordered">
         <item>
           <para
-            >The <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >The <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
@@ -67,13 +59,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >The <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
-             control calls the cell <see
-             cref="M:System.Windows.Forms.DataGridViewCell.InitializeEditingControl(System.Int32,System.Object,System.Windows.Forms.DataGridViewCellStyle)" />
+             control calls the cell <see cref="M:System.Windows.Forms.DataGridViewCell.InitializeEditingControl(System.Int32,System.Object,System.Windows.Forms.DataGridViewCellStyle)" />
 
             
 
@@ -82,13 +72,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >The <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
-             control calls the editing control <see
-             cref="M:System.Windows.Forms.IDataGridViewEditingControl.ApplyCellStyleToEditingControl(System.Windows.Forms.DataGridViewCellStyle)" />
+             control calls the editing control <see cref="M:System.Windows.Forms.IDataGridViewEditingControl.ApplyCellStyleToEditingControl(System.Windows.Forms.DataGridViewCellStyle)" />
 
             
 
@@ -97,13 +85,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >The <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
-             control calls the editing control <see
-             cref="M:System.Windows.Forms.IDataGridViewEditingControl.PrepareEditingControlForEdit(System.Boolean)" />
+             control calls the editing control <see cref="M:System.Windows.Forms.IDataGridViewEditingControl.PrepareEditingControlForEdit(System.Boolean)" />
 
             
 
@@ -112,13 +98,11 @@
         </item>
       </list>
       <para
-        >For more information about implementing <see
-         cref="T:System.Windows.Forms.IDataGridViewEditingControl" />
+        >For more information about implementing <see cref="T:System.Windows.Forms.IDataGridViewEditingControl" />
 
         
 
-        , see <format
-         type="text/html">
+        , see <format type="text/html">
           <a href="e79a9d4e-64ec-41f5-93ec-f5492633cbb2"
             >How to: Host Controls in Windows Forms DataGridView Cells</a
           >
@@ -129,26 +113,22 @@
         .</para
       >
       <para
-        >Cell types such as <see
-         cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+        >Cell types such as <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
 
         
 
-         that provide a user interface (UI) for specifying values without hosting an editing control implement the <see
-         cref="T:System.Windows.Forms.IDataGridViewEditingCell" />
+         that provide a user interface (UI) for specifying values without hosting an editing control implement the <see cref="T:System.Windows.Forms.IDataGridViewEditingCell" />
 
         
 
          interface. The UI in this case is displayed regardless of whether the cell is in edit mode.</para
       >
       <para
-        >Other cell types, such as <see
-         cref="T:System.Windows.Forms.DataGridViewButtonCell" />
+        >Other cell types, such as <see cref="T:System.Windows.Forms.DataGridViewButtonCell" />
 
         
 
-        , provide a UI but do not store user-specified values. In this case, the cell type does not implement <see
-         cref="T:System.Windows.Forms.IDataGridViewEditingCell" />
+        , provide a UI but do not store user-specified values. In this case, the cell type does not implement <see cref="T:System.Windows.Forms.IDataGridViewEditingCell" />
 
         
 
@@ -158,8 +138,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines common functionality for controls that are hosted within cells of a <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >Defines common functionality for controls that are hosted within cells of a <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -185,8 +164,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, an implementation of this method will set UI properties for the editing control, such as font, background color, and foreground color, to the values of corresponding properties in the <paramref
-             name="dataGridViewCellStyle" />
+            >Typically, an implementation of this method will set UI properties for the editing control, such as font, background color, and foreground color, to the values of corresponding properties in the <paramref name="dataGridViewCellStyle" />
 
             
 
@@ -198,12 +176,15 @@
           <para>Changes the control's user interface (UI) to be consistent with the specified cell style.</para>
         </summary>
         <param name="dataGridViewCellStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+          The <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
           
 
@@ -230,8 +211,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >Gets or sets the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
@@ -280,23 +260,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.IDataGridViewEditingControl" />
+            >The <see cref="T:System.Windows.Forms.IDataGridViewEditingControl" />
 
             
 
-             interface does not define a corresponding ColumnIndex property. You can use the <see
-             cref="P:System.Windows.Forms.IDataGridViewEditingControl.EditingControlDataGridView" />
+             interface does not define a corresponding ColumnIndex property. You can use the <see cref="P:System.Windows.Forms.IDataGridViewEditingControl.EditingControlDataGridView" />
 
             
 
-             property to retrieve the parent <see
-             cref="T:System.Windows.Forms.DataGridView" />
+             property to retrieve the parent <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
-             control and use the <see
-             cref="P:System.Windows.Forms.DataGridView.CurrentCellAddress" />
+             control and use the <see cref="P:System.Windows.Forms.DataGridView.CurrentCellAddress" />
 
             
 
@@ -324,8 +300,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.IDataGridViewEditingControl.EditingControlValueChanged" />
+            >The <see cref="P:System.Windows.Forms.IDataGridViewEditingControl.EditingControlValueChanged" />
 
             
 
@@ -359,71 +334,58 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An editing control implements this method to determine which input keys should be processed by the control, and which input keys should be processed by the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >An editing control implements this method to determine which input keys should be processed by the control, and which input keys should be processed by the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
             . </para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.IDataGridViewEditingControl.EditingControlWantsInputKey(System.Windows.Forms.Keys,System.Boolean)" />
+            >The <see cref="M:System.Windows.Forms.IDataGridViewEditingControl.EditingControlWantsInputKey(System.Windows.Forms.Keys,System.Boolean)" />
 
             
 
-             method is called by the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+             method is called by the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
-            . The <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            . The <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
-             will pass in true for <paramref
-             name="dataGridViewWantsInputKey" />
+             will pass in true for <paramref name="dataGridViewWantsInputKey" />
 
             
 
-             when it can process the <paramref
-             name="keyData" />
+             when it can process the <paramref name="keyData" />
 
             
 
-            . If the editing control can let the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            . If the editing control can let the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
-             handle the <paramref
-             name="keyData" />
+             handle the <paramref name="keyData" />
 
             
 
-            , <see
-             cref="M:System.Windows.Forms.IDataGridViewEditingControl.EditingControlWantsInputKey(System.Windows.Forms.Keys,System.Boolean)" />
+            , <see cref="M:System.Windows.Forms.IDataGridViewEditingControl.EditingControlWantsInputKey(System.Windows.Forms.Keys,System.Boolean)" />
 
             
 
-             should return false when <paramref
-             name="dataGridViewWantsInputKey" />
+             should return false when <paramref name="dataGridViewWantsInputKey" />
 
             
 
-             is true. Other implementations of <see
-             cref="M:System.Windows.Forms.IDataGridViewEditingControl.EditingControlWantsInputKey(System.Windows.Forms.Keys,System.Boolean)" />
+             is true. Other implementations of <see cref="M:System.Windows.Forms.IDataGridViewEditingControl.EditingControlWantsInputKey(System.Windows.Forms.Keys,System.Boolean)" />
 
             
 
-             may ignore a <paramref
-             name="dataGridViewWantsInputKey" />
+             may ignore a <paramref name="dataGridViewWantsInputKey" />
 
             
 
-             value of true and handle the <paramref
-             name="keyData" />
+             value of true and handle the <paramref name="keyData" />
 
             
 
@@ -433,8 +395,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified key is a regular input key that the editing control should process or a special key that the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >Determines whether the specified key is a regular input key that the editing control should process or a special key that the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
@@ -446,34 +407,38 @@
           <para>true if the specified key is a regular input key that should be handled by the editing control; otherwise, false.</para>
         </returns>
         <param name="keyData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Keys" />
+          A <see cref="T:System.Windows.Forms.Keys" />
 
           
 
            that represents the key that was pressed.</param
         >
         <param name="dataGridViewWantsInputKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true when the <see
-           cref="T:System.Windows.Forms.DataGridView" />
+          true when the <see cref="T:System.Windows.Forms.DataGridView" />
 
           
 
-           wants to process the <see
-           cref="T:System.Windows.Forms.Keys" />
+           wants to process the <see cref="T:System.Windows.Forms.Keys" />
 
           
 
-           in <paramref
-           name="keyData" />
+           in <paramref name="keyData" />
 
           
 
@@ -499,33 +464,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The editing panel is the <see
-             cref="T:System.Windows.Forms.Panel" />
+            >The editing panel is the <see cref="T:System.Windows.Forms.Panel" />
 
             
 
-             that hosts the editing control when the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+             that hosts the editing control when the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
-             control is in edit mode. The actual editing control may not cover the entire area of the editing panel. In this case, the <see
-             cref="P:System.Windows.Forms.IDataGridViewEditingControl.EditingPanelCursor" />
+             control is in edit mode. The actual editing control may not cover the entire area of the editing panel. In this case, the <see cref="P:System.Windows.Forms.IDataGridViewEditingControl.EditingPanelCursor" />
 
             
 
-             implementation should return the cursor to use when the mouse pointer is over the panel but not over the control. Typically, you will want to return the same cursor that the control uses. If you want to change the cursor that appears when the pointer is over the control, you must set the <see
-             cref="P:System.Windows.Forms.Control.Cursor" />
+             implementation should return the cursor to use when the mouse pointer is over the panel but not over the control. Typically, you will want to return the same cursor that the control uses. If you want to change the cursor that appears when the pointer is over the control, you must set the <see cref="P:System.Windows.Forms.Control.Cursor" />
 
             
 
-             property. You can set this in the constructor of the <see
-             cref="T:System.Windows.Forms.IDataGridViewEditingControl" />
+             property. You can set this in the constructor of the <see cref="T:System.Windows.Forms.IDataGridViewEditingControl" />
 
             
 
-             implementation, or you can set it in the <see
-             cref="M:System.Windows.Forms.IDataGridViewEditingControl.PrepareEditingControlForEdit(System.Boolean)" />
+             implementation, or you can set it in the <see cref="M:System.Windows.Forms.IDataGridViewEditingControl.PrepareEditingControlForEdit(System.Boolean)" />
 
             
 
@@ -535,8 +494,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the cursor used when the mouse pointer is over the <see
-             cref="P:System.Windows.Forms.DataGridView.EditingPanel" />
+            >Gets the cursor used when the mouse pointer is over the <see cref="P:System.Windows.Forms.DataGridView.EditingPanel" />
 
             
 
@@ -566,8 +524,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The formatted value represents the value as it is displayed in the control's user interface. The formatted value may be different in absolute value and even data type from the actual value contained in the control.</para>
           <para
-            >To set the formatted value of the control, use the <see
-             cref="P:System.Windows.Forms.IDataGridViewEditingControl.EditingControlFormattedValue" />
+            >To set the formatted value of the control, use the <see cref="P:System.Windows.Forms.IDataGridViewEditingControl.EditingControlFormattedValue" />
 
             
 
@@ -581,8 +538,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -590,12 +546,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Windows.Forms.DataGridViewDataErrorContexts" />
+          A bitwise combination of <see cref="T:System.Windows.Forms.DataGridViewDataErrorContexts" />
 
           
 
@@ -629,7 +588,11 @@
           <para>Prepares the currently selected cell for editing.</para>
         </summary>
         <param name="selectAll">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

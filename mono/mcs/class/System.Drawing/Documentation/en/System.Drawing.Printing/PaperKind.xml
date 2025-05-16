@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For more information on printing, see the <see
-         cref="N:System.Drawing.Printing" />
+        >For more information on printing, see the <see cref="N:System.Drawing.Printing" />
 
         
 

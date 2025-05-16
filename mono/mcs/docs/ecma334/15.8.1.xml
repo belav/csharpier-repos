@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
 <clause number="15.8.1" title="The while statement">
   <paragraph
-    >The while statement conditionally executes an embedded statement zero or more times. <grammar_production
-    >
+    >The while statement conditionally executes an embedded statement zero or more times. <grammar_production>
       <name>
         <non_terminal where="15.8.1">while-statement</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <keyword>while</keyword>
         <terminal>(</terminal>
         <non_terminal where="15.7.1">boolean-expression</non_terminal>
@@ -20,16 +18,15 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >A while statement is executed as follows: <list
-    >
+    >A while statement is executed as follows: <list>
       <list_item
-        > The <non_terminal
-         where="15.7.1">boolean-expression</non_terminal>
+        > The <non_terminal where="15.7.1"
+          >boolean-expression</non_terminal
+        >
 
         
 
-         (<hyperlink
-        >14.16</hyperlink>
+         (<hyperlink>14.16</hyperlink>
 
         
 
@@ -40,13 +37,11 @@
     </list>
   </paragraph>
   <paragraph
-    >Within the embedded statement of a while statement, a break statement (<hyperlink
-    >15.9.1</hyperlink>
+    >Within the embedded statement of a while statement, a break statement (<hyperlink>15.9.1</hyperlink>
 
     
 
-    ) may be used to transfer control to the end point of the while statement (thus ending iteration of the embedded statement), and a continue statement (<hyperlink
-    >15.9.2</hyperlink>
+    ) may be used to transfer control to the end point of the while statement (thus ending iteration of the embedded statement), and a continue statement (<hyperlink>15.9.2</hyperlink>
 
     
 
@@ -54,8 +49,7 @@
   >
   <paragraph>The embedded statement of a while statement is reachable if the while statement is reachable and the boolean expression does not have the constant value false. </paragraph>
   <paragraph
-    >The end point of a while statement is reachable if at least one of the following is true: <list
-    >
+    >The end point of a while statement is reachable if at least one of the following is true: <list>
       <list_item> The while statement contains a reachable break statement that exits the while statement. </list_item>
       <list_item> The while statement is reachable and the boolean expression does not have the constant value true. </list_item>
     </list>

@@ -30,28 +30,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >In the .NET Framework version 2.0, <see
-         cref="T:System.Threading.ManualResetEvent" />
+        >In the .NET Framework version 2.0, <see cref="T:System.Threading.ManualResetEvent" />
 
         
 
-         derives from the new <see
-         cref="T:System.Threading.EventWaitHandle" />
+         derives from the new <see cref="T:System.Threading.EventWaitHandle" />
 
         
 
-         class. A <see
-         cref="T:System.Threading.ManualResetEvent" />
+         class. A <see cref="T:System.Threading.ManualResetEvent" />
 
         
 
-         is functionally equivalent to an <see
-         cref="T:System.Threading.EventWaitHandle" />
+         is functionally equivalent to an <see cref="T:System.Threading.EventWaitHandle" />
 
         
 
-         created with <see
-         cref="F:System.Threading.EventResetMode.ManualReset" />
+         created with <see cref="F:System.Threading.EventResetMode.ManualReset" />
 
         
 
@@ -59,13 +54,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Unlike the <see
-           cref="T:System.Threading.ManualResetEvent" />
+          >Unlike the <see cref="T:System.Threading.ManualResetEvent" />
 
           
 
-           class, the <see
-           cref="T:System.Threading.EventWaitHandle" />
+           class, the <see cref="T:System.Threading.EventWaitHandle" />
 
           
 
@@ -80,18 +73,15 @@
          allows threads to communicate with each other by signaling. Typically, this communication concerns a task which one thread must complete before other threads can proceed.</para
       >
       <para
-        >When a thread begins an activity that must complete before other threads proceed, it calls <see
-         cref="M:System.Threading.EventWaitHandle.Reset" />
+        >When a thread begins an activity that must complete before other threads proceed, it calls <see cref="M:System.Threading.EventWaitHandle.Reset" />
 
         
 
-         to put ManualResetEvent in the non-signaled state. This thread can be thought of as controlling the ManualResetEvent. Threads that call <see
-         cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+         to put ManualResetEvent in the non-signaled state. This thread can be thought of as controlling the ManualResetEvent. Threads that call <see cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
 
         
 
-         on the ManualResetEvent will block, awaiting the signal. When the controlling thread completes the activity, it calls <see
-         cref="M:System.Threading.EventWaitHandle.Set" />
+         on the ManualResetEvent will block, awaiting the signal. When the controlling thread completes the activity, it calls <see cref="M:System.Threading.EventWaitHandle.Set" />
 
         
 
@@ -100,21 +90,18 @@
       <para>Once it has been signaled, ManualResetEvent remains signaled until it is manually reset. That is, calls to WaitOne return immediately.</para>
       <para>You can control the initial state of a ManualResetEvent by passing a Boolean value to the constructor, true if the initial state is signaled and false otherwise.</para>
       <para
-        >ManualResetEvent can also be used with the static <see
-         cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+        >ManualResetEvent can also be used with the static <see cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
         
 
-         and <see
-         cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+         and <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
         
 
          methods.</para
       >
       <para
-        >For more information about thread synchronization mechanisms, see <format
-         type="text/html">
+        >For more information about thread synchronization mechanisms, see <format type="text/html">
           <a href="465FDCF9-BA24-4D8D-A43F-D983B7CB0CC6">Manual Reset Event</a>
         </format>
 
@@ -150,23 +137,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the initial state of a <see
-             cref="T:System.Threading.ManualResetEvent" />
+            >If the initial state of a <see cref="T:System.Threading.ManualResetEvent" />
 
             
 
-             is signaled (that is, if it is created by passing true for <paramref
-             name="initialState" />
+             is signaled (that is, if it is created by passing true for <paramref name="initialState" />
 
             
 
-            ), threads that wait on the <see
-             cref="T:System.Threading.ManualResetEvent" />
+            ), threads that wait on the <see cref="T:System.Threading.ManualResetEvent" />
 
             
 
-             do not block. If the initial state is nonsignaled, threads block until the <see
-             cref="M:System.Threading.EventWaitHandle.Set" />
+             do not block. If the initial state is nonsignaled, threads block until the <see cref="M:System.Threading.EventWaitHandle.Set" />
 
             
 
@@ -176,8 +159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.ManualResetEvent" />
+            >Initializes a new instance of the <see cref="T:System.Threading.ManualResetEvent" />
 
             
 
@@ -185,7 +167,11 @@
           >
         </summary>
         <param name="initialState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -205,8 +191,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Starting with the dnprdnext and the compact_v35_long, this member is inherited from <see
-               cref="T:System.Threading.EventWaitHandle" />
+              >Starting with the dnprdnext and the compact_v35_long, this member is inherited from <see cref="T:System.Threading.EventWaitHandle" />
 
               
 
@@ -239,13 +224,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Starting with the dnprdnext and the compact_v35_long, this member is inherited from <see
-               cref="T:System.Threading.EventWaitHandle" />
+              >Starting with the dnprdnext and the compact_v35_long, this member is inherited from <see cref="T:System.Threading.EventWaitHandle" />
 
               
 
-              . See <see
-               cref="M:System.Threading.EventWaitHandle.Set" />
+              . See <see cref="M:System.Threading.EventWaitHandle.Set" />
 
               
 
@@ -253,13 +236,11 @@
             >
           </block>
           <para
-            >Calling the <see
-             cref="M:System.Threading.ManualResetEvent.Set" />
+            >Calling the <see cref="M:System.Threading.ManualResetEvent.Set" />
 
             
 
-             method leaves the wait handle in a signaled state until the <see
-             cref="M:System.Threading.ManualResetEvent.Reset" />
+             method leaves the wait handle in a signaled state until the <see cref="M:System.Threading.ManualResetEvent.Reset" />
 
             
 

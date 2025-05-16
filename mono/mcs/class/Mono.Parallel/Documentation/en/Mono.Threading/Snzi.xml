@@ -50,8 +50,7 @@
       <Docs>
         <summary>Decrement the value of the Snzi object.</summary>
         <remarks
-          >To undo the action, a call to <see
-           cref="M:Mono.Threading.Snzi.Increment()" />
+          >To undo the action, a call to <see cref="M:Mono.Threading.Snzi.Increment()" />
 
           
 
@@ -76,8 +75,7 @@
       <Docs>
         <summary>Increment the value of the Snzi object.</summary>
         <remarks
-          >To undo the action, a call to <see
-           cref="M:Mono.Threading.Snzi.Decrement()" />
+          >To undo the action, a call to <see cref="M:Mono.Threading.Snzi.Decrement()" />
 
           
 
@@ -98,8 +96,7 @@
       <Docs>
         <summary>Query if Snzi is has a zero value or not.</summary>
         <value
-          >True if Snzi is zero, <see
-           langword="false" />
+          >True if Snzi is zero, <see langword="false" />
 
           
 

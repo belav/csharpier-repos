@@ -36,8 +36,7 @@
         <h2>Desktop Apps</h2>
       </format>
       <para
-        >In desktop apps, <see
-         cref="T:System.Resources.MissingManifestResourceException" />
+        >In desktop apps, <see cref="T:System.Resources.MissingManifestResourceException" />
 
         
 
@@ -45,8 +44,7 @@
       >
       <block subset="none" type="note">
         <para
-          >For additional information, see the "Handling a MissingManifestResourceException Exception" section in the <see
-           cref="T:System.Resources.ResourceManager" />
+          >For additional information, see the "Handling a MissingManifestResourceException Exception" section in the <see cref="T:System.Resources.ResourceManager" />
 
           
 
@@ -57,43 +55,36 @@
       <list type="bullet">
         <item>
           <para
-            >The resource set is not identified by its fully qualified name. For example, if the <paramref
-             name="baseName" />
+            >The resource set is not identified by its fully qualified name. For example, if the <paramref name="baseName" />
 
             
 
-             parameter in the call to the <see
-             cref="M:System.Resources.ResourceManager.#ctor(System.String,System.Reflection.Assembly)" />
+             parameter in the call to the <see cref="M:System.Resources.ResourceManager.#ctor(System.String,System.Reflection.Assembly)" />
 
             
 
-             method specifies the root name of the resource set without a namespace, but the resource set is assigned a namespace when it is stored in its assembly, the call to the <see
-             cref="M:System.Resources.ResourceManager.GetString(System.String)" />
+             method specifies the root name of the resource set without a namespace, but the resource set is assigned a namespace when it is stored in its assembly, the call to the <see cref="M:System.Resources.ResourceManager.GetString(System.String)" />
 
             
 
              method throws this exception. </para
           >
           <para
-            >If you have embedded the .resources file that contains the default culture's resources in your executable and your app is throwing a <see
-             cref="T:System.Resources.MissingManifestResourceException" />
+            >If you have embedded the .resources file that contains the default culture's resources in your executable and your app is throwing a <see cref="T:System.Resources.MissingManifestResourceException" />
 
             
 
-            , you can use a reflection tool such as <format
-             type="text/html">
+            , you can use a reflection tool such as <format type="text/html">
               <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">ILDasm.exe</a>
             </format>
 
             
 
-             to determine the fully qualified name of the resource. In ILDasm, double click the executable's <ui
-            >MANIFEST</ui>
+             to determine the fully qualified name of the resource. In ILDasm, double click the executable's <ui>MANIFEST</ui>
 
             
 
-             label to open the <ui
-            >MANIFEST</ui>
+             label to open the <ui>MANIFEST</ui>
 
             
 
@@ -103,23 +94,19 @@
         </item>
         <item>
           <para
-            >You identify the resource set by its resource file name (along with its optional namespace) and its file extension rather than by its namespace and root file name alone. For example, this exception is thrown if the neutral culture's resource set is named GlobalResources and you supply a value of <userInput
-            >GlobalResources.resources</userInput>
+            >You identify the resource set by its resource file name (along with its optional namespace) and its file extension rather than by its namespace and root file name alone. For example, this exception is thrown if the neutral culture's resource set is named GlobalResources and you supply a value of <userInput>GlobalResources.resources</userInput>
 
             
 
-             (instead of <userInput
-            >GlobalResources</userInput>
+             (instead of <userInput>GlobalResources</userInput>
 
             
 
-            ) to the <paramref
-             name="baseName" />
+            ) to the <paramref name="baseName" />
 
             
 
-             parameter of the <see
-             cref="M:System.Resources.ResourceManager.#ctor(System.String,System.Reflection.Assembly)" />
+             parameter of the <see cref="M:System.Resources.ResourceManager.#ctor(System.String,System.Reflection.Assembly)" />
 
             
 
@@ -142,21 +129,18 @@
 
         
 
-         uses the default <see
-         cref="M:System.Object.Equals(System.Object)" />
+         uses the default <see cref="M:System.Object.Equals(System.Object)" />
 
         
 
          implementation, which supports reference equality.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Resources.MissingManifestResourceException" />
+        >For a list of initial property values for an instance of <see cref="T:System.Resources.MissingManifestResourceException" />
 
         
 
-        , see the <see
-         cref="M:System.Resources.MissingManifestResourceException.#ctor" />
+        , see the <see cref="M:System.Resources.MissingManifestResourceException.#ctor" />
 
         
 
@@ -169,8 +153,7 @@
         <h2>win8_appname_long Apps</h2>
       </format>
       <para
-        >Unlike desktop apps, which deploy localized resources in satellite assemblies and typically store the resources of the neutral culture in the main assembly, win8_appname_long apps deploy resources for multiple cultures, including the neutral culture, in a single package resource index (.pri) file. As a result, in a win8_appname_long app, if resources for the preferred culture cannot be found, the <see
-         cref="T:System.Resources.MissingManifestResourceException" />
+        >Unlike desktop apps, which deploy localized resources in satellite assemblies and typically store the resources of the neutral culture in the main assembly, win8_appname_long apps deploy resources for multiple cultures, including the neutral culture, in a single package resource index (.pri) file. As a result, in a win8_appname_long app, if resources for the preferred culture cannot be found, the <see cref="T:System.Resources.MissingManifestResourceException" />
 
         
 
@@ -209,8 +192,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Resources.MissingManifestResourceException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Resources.MissingManifestResourceException" />
 
             
 
@@ -245,8 +227,7 @@
               </term>
               <description>
                 <para
-                  >The localized error message for <see
-                   cref="T:System.Resources.MissingManifestResourceException" />
+                  >The localized error message for <see cref="T:System.Resources.MissingManifestResourceException" />
 
                   
 
@@ -259,8 +240,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Resources.MissingManifestResourceException" />
+            >Initializes a new instance of the <see cref="T:System.Resources.MissingManifestResourceException" />
 
             
 
@@ -292,8 +272,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Resources.MissingManifestResourceException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Resources.MissingManifestResourceException" />
 
             
 
@@ -328,8 +307,7 @@
               </term>
               <description>
                 <para
-                  >The <paramref
-                   name="message" />
+                  >The <paramref name="message" />
 
                   
 
@@ -342,8 +320,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Resources.MissingManifestResourceException" />
+            >Initializes a new instance of the <see cref="T:System.Resources.MissingManifestResourceException" />
 
             
 
@@ -351,7 +328,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -387,8 +368,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Resources.MissingManifestResourceException" />
+            >Initializes a new instance of the <see cref="T:System.Resources.MissingManifestResourceException" />
 
             
 
@@ -396,14 +376,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -435,26 +423,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Resources.MissingManifestResourceException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Resources.MissingManifestResourceException" />
 
             
 
@@ -496,8 +480,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Resources.MissingManifestResourceException" />
+            >Initializes a new instance of the <see cref="T:System.Resources.MissingManifestResourceException" />
 
             
 
@@ -505,19 +488,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception. </param
         >
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="inner" />
+          The exception that is the cause of the current exception. If the <paramref name="inner" />
 
           
 

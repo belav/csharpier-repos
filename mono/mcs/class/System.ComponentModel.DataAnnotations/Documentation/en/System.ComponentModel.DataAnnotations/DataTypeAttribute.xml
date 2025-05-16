@@ -25,26 +25,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.DataAnnotations.DataTypeAttribute" />
+        >The <see cref="T:System.ComponentModel.DataAnnotations.DataTypeAttribute" />
 
         
 
-         attribute enables you to mark fields by using a type that is more specific than the database intrinsic type. The type name is selected from the <see
-         cref="T:System.ComponentModel.DataAnnotations.DataType" />
+         attribute enables you to mark fields by using a type that is more specific than the database intrinsic type. The type name is selected from the <see cref="T:System.ComponentModel.DataAnnotations.DataType" />
 
         
 
-         enumeration type. For example, a string data field that contains e-mail addresses can be specified as the <see
-         cref="F:System.ComponentModel.DataAnnotations.DataType.EmailAddress" />
+         enumeration type. For example, a string data field that contains e-mail addresses can be specified as the <see cref="F:System.ComponentModel.DataAnnotations.DataType.EmailAddress" />
 
         
 
          type. This information is then accessed by the field templates to modify how the data field is processed. </para
       >
       <para
-        >You use the <see
-         cref="T:System.ComponentModel.DataAnnotations.DataTypeAttribute" />
+        >You use the <see cref="T:System.ComponentModel.DataAnnotations.DataTypeAttribute" />
 
         
 
@@ -53,13 +49,11 @@
       <list type="bullet">
         <item>
           <para
-            >To provide additional type information for a data field. You do this by applying the <see
-             cref="T:System.ComponentModel.DataAnnotations.DataTypeAttribute" />
+            >To provide additional type information for a data field. You do this by applying the <see cref="T:System.ComponentModel.DataAnnotations.DataTypeAttribute" />
 
             
 
-             attribute to a data field in the data model and by specifying the additional type name from the <see
-             cref="T:System.ComponentModel.DataAnnotations.DataType" />
+             attribute to a data field in the data model and by specifying the additional type name from the <see cref="T:System.ComponentModel.DataAnnotations.DataType" />
 
             
 
@@ -68,8 +62,7 @@
         </item>
         <item>
           <para
-            >To associate a custom field template with a data field. The specified custom field template will then be used to process the data field. This is an alternative to using the <see
-             cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
+            >To associate a custom field template with a data field. The specified custom field template will then be used to process the data field. This is an alternative to using the <see cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
 
             
 
@@ -78,8 +71,7 @@
         </item>
       </list>
       <para
-        >When you apply the <see
-         cref="T:System.ComponentModel.DataAnnotations.DataTypeAttribute" />
+        >When you apply the <see cref="T:System.ComponentModel.DataAnnotations.DataTypeAttribute" />
 
         
 
@@ -97,8 +89,7 @@
         </item>
       </list>
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="c563bbf3-feb9-484e-81d1-a585f1b0e192">ASP.NET Dynamic Data Guidelines</a>
         </format>
 
@@ -108,7 +99,6 @@
       >
       <para
         >See a run-time code example of this feature: <see
-
           cref="http://go.microsoft.com/fwlink/?LinkId=120736&amp;sref=System.ComponentModel.DataAnnotations.DataTypeAttribute"
           >Run</see
         >
@@ -144,8 +134,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name is one of the values that are defined by the <see
-             cref="T:System.ComponentModel.DataAnnotations.DataType" />
+            >The name is one of the values that are defined by the <see cref="T:System.ComponentModel.DataAnnotations.DataType" />
 
             
 
@@ -155,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.DataTypeTypeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.DataTypeTypeAttribute" />
 
             
 
@@ -164,7 +152,11 @@
           >
         </summary>
         <param name="dataType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -189,8 +181,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method provides an alternative to using the <see
-             cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
+            >This method provides an alternative to using the <see cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
 
             
 
@@ -200,8 +191,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.DataTypeTypeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.DataTypeTypeAttribute" />
 
             
 
@@ -209,7 +199,11 @@
           >
         </summary>
         <param name="customDataType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -335,8 +329,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method implements validation logic that is specific to the <see
-             cref="T:System.ComponentModel.DataAnnotations.DataTypeAttribute" />
+            >This method implements validation logic that is specific to the <see cref="T:System.ComponentModel.DataAnnotations.DataTypeAttribute" />
 
             
 
@@ -352,7 +345,11 @@
           <para>true always.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -39,13 +39,11 @@
         >
       </block>
       <para
-        >Different settings providers may have different requirements or limitations on the use of the <see
-         cref="T:System.Configuration.DefaultSettingValueAttribute" />
+        >Different settings providers may have different requirements or limitations on the use of the <see cref="T:System.Configuration.DefaultSettingValueAttribute" />
 
         
 
-        . For example, the <see
-         cref="T:System.Configuration.LocalFileSettingsProvider" />
+        . For example, the <see cref="T:System.Configuration.LocalFileSettingsProvider" />
 
         
 
@@ -56,8 +54,7 @@
 
         
 
-         requires that the default value can be represented as a string. As a result, settings using XML serialization cannot have a default value specified by means of this attribute. Some providers may choose to support multiple serialization schemes which can be specified at compile time using the <see
-         cref="T:System.Configuration.SettingsSerializeAsAttribute" />
+         requires that the default value can be represented as a string. As a result, settings using XML serialization cannot have a default value specified by means of this attribute. Some providers may choose to support multiple serialization schemes which can be specified at compile time using the <see cref="T:System.Configuration.SettingsSerializeAsAttribute" />
 
         
 
@@ -92,13 +89,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The supplied string must be a value that is compatible with the available serialization mechanism associated with the property type. For example, if the property is of type <see
-             cref="T:System.Drawing.Color" />
+            >The supplied string must be a value that is compatible with the available serialization mechanism associated with the property type. For example, if the property is of type <see cref="T:System.Drawing.Color" />
 
             
 
-            , then a <paramref
-             name="value" />
+            , then a <paramref name="value" />
 
             
 
@@ -111,8 +106,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Configuration.DefaultSettingValueAttribute" />
+            >Initializes an instance of the <see cref="T:System.Configuration.DefaultSettingValueAttribute" />
 
             
 
@@ -120,12 +114,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -150,21 +147,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Configuration.DefaultSettingValueAttribute.Value" />
+            >The <see cref="P:System.Configuration.DefaultSettingValueAttribute.Value" />
 
             
 
-             property is set in the <see
-             cref="M:System.Configuration.DefaultSettingValueAttribute.#ctor(System.String)" />
+             property is set in the <see cref="M:System.Configuration.DefaultSettingValueAttribute.#ctor(System.String)" />
 
             
 
              constructor.</para
           >
           <para
-            >Setting providers may support multiple serialization schemes that can be specified with the <see
-             cref="T:System.Configuration.SettingsSerializeAsAttribute" />
+            >Setting providers may support multiple serialization schemes that can be specified with the <see cref="T:System.Configuration.SettingsSerializeAsAttribute" />
 
             
 

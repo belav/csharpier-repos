@@ -21,13 +21,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.TreeViewHitTestLocations" />
+        >The <see cref="T:System.Windows.Forms.TreeViewHitTestLocations" />
 
         
 
-         enumeration is used by the <see
-         cref="T:System.Windows.Forms.TreeViewHitTestInfo" />
+         enumeration is used by the <see cref="T:System.Windows.Forms.TreeViewHitTestInfo" />
 
         
 
@@ -37,13 +35,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines constants that represent areas of a <see
-         cref="T:System.Windows.Forms.TreeView" />
+        >Defines constants that represent areas of a <see cref="T:System.Windows.Forms.TreeView" />
 
         
 
-         or <see
-         cref="T:System.Windows.Forms.TreeNode" />
+         or <see cref="T:System.Windows.Forms.TreeNode" />
 
         
 
@@ -63,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A position above the client portion of a <see
-             cref="T:System.Windows.Forms.TreeView" />
+            >A position above the client portion of a <see cref="T:System.Windows.Forms.TreeView" />
 
             
 
@@ -87,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A position below the client portion of a <see
-             cref="T:System.Windows.Forms.TreeView" />
+            >A position below the client portion of a <see cref="T:System.Windows.Forms.TreeView" />
 
             
 
@@ -111,13 +105,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A position within the bounds of an image contained on a <see
-             cref="T:System.Windows.Forms.TreeView" />
+            >A position within the bounds of an image contained on a <see cref="T:System.Windows.Forms.TreeView" />
 
             
 
-             or <see
-             cref="T:System.Windows.Forms.TreeNode" />
+             or <see cref="T:System.Windows.Forms.TreeNode" />
 
             
 
@@ -140,8 +132,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A position in the indentation area for a <see
-             cref="T:System.Windows.Forms.TreeNode" />
+            >A position in the indentation area for a <see cref="T:System.Windows.Forms.TreeNode" />
 
             
 
@@ -164,8 +155,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A position on the text portion of a <see
-             cref="T:System.Windows.Forms.TreeNode" />
+            >A position on the text portion of a <see cref="T:System.Windows.Forms.TreeNode" />
 
             
 
@@ -188,8 +178,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A position to the left of the client area of a <see
-             cref="T:System.Windows.Forms.TreeView" />
+            >A position to the left of the client area of a <see cref="T:System.Windows.Forms.TreeView" />
 
             
 
@@ -212,8 +201,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A position in the client area of the <see
-             cref="T:System.Windows.Forms.TreeView" />
+            >A position in the client area of the <see cref="T:System.Windows.Forms.TreeView" />
 
             
 
@@ -236,8 +224,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A position on the plus/minus area of a <see
-             cref="T:System.Windows.Forms.TreeNode" />
+            >A position on the plus/minus area of a <see cref="T:System.Windows.Forms.TreeNode" />
 
             
 
@@ -260,8 +247,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A position to the right of the client area of the <see
-             cref="T:System.Windows.Forms.TreeView" />
+            >A position to the right of the client area of the <see cref="T:System.Windows.Forms.TreeView" />
 
             
 
@@ -284,8 +270,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A position to the right of the text area of a <see
-             cref="T:System.Windows.Forms.TreeNode" />
+            >A position to the right of the text area of a <see cref="T:System.Windows.Forms.TreeNode" />
 
             
 
@@ -308,8 +293,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A position within the bounds of a state image for a <see
-             cref="T:System.Windows.Forms.TreeNode" />
+            >A position within the bounds of a state image for a <see cref="T:System.Windows.Forms.TreeNode" />
 
             
 

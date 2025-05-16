@@ -2,19 +2,18 @@
 <clause number="24.4.2" title="The Conditional attribute">
   <paragraph>The attribute Conditional enables the definition of conditional methods. The Conditional attribute indicates a condition by testing a conditional compilation symbol. Calls to a conditional method are either included or omitted depending on whether this symbol is defined at the point of the call. If the symbol is defined, the call is included; otherwise, the call is omitted. </paragraph>
   <paragraph
-    >A conditional method is subject to the following restrictions: <list
-    >
+    >A conditional method is subject to the following restrictions: <list>
       <list_item
-        > The conditional method must be a method in a <non_terminal
-         where="17.1">class-declaration</non_terminal>
+        > The conditional method must be a method in a <non_terminal where="17.1"
+          >class-declaration</non_terminal
+        >
 
         
 
         . A compile-time error occurs if the Conditional attribute is specified on an interface method. </list_item
       >
       <list_item
-        > The conditional method must have a return type of <keyword
-        >void</keyword>
+        > The conditional method must have a return type of <keyword>void</keyword>
 
         
 
@@ -26,7 +25,9 @@
   </paragraph>
   <paragraph
     >In addition, a compile-time error occurs if a conditional method is used in a <non_terminal
-     where="14.5.10.3">delegate-creation-expression</non_terminal>
+      where="14.5.10.3"
+      >delegate-creation-expression</non_terminal
+    >
 
     
 
@@ -34,8 +35,7 @@
   >
   <paragraph>
     <example
-      >[Example: The example <code_example
-      >
+      >[Example: The example <code_example>
         <![CDATA[
 #define DEBUG  
 using System;  
@@ -63,9 +63,7 @@ class Class2
   </paragraph>
   <paragraph
     >It is important to note that the inclusion or exclusion of a call to a conditional method is controlled by the conditional compilation symbols at the point of the call. <example
-
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 // Begin class1.cs  
 using System;  
@@ -109,8 +107,7 @@ class Class3
   <paragraph>The use of conditional methods in an inheritance chain can be confusing. Calls made to a conditional method through base, of the form base.M, are subject to the normal conditional method call rules. </paragraph>
   <paragraph>
     <example
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 // Begin class1.cs  
 using System;  
@@ -153,7 +150,9 @@ class Class3
   <paragraph>
     <example
       >Class2 includes a call to the M defined in its base class. This call is omitted because the base method is conditional based on the presence of the symbol DEBUG, which is undefined. Thus, the method writes to the console "Class2.M executed" only. Judicious use of <non_terminal
-       where="9.5.3">pp-declaration</non_terminal>
+        where="9.5.3"
+        >pp-declaration</non_terminal
+      >
 
       
 

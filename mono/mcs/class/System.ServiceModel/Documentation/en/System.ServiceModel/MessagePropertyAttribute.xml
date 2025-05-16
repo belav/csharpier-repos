@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.MessagePropertyAttribute" />
+        >Use the <see cref="T:System.ServiceModel.MessagePropertyAttribute" />
 
         
 
@@ -52,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.MessagePropertyAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MessagePropertyAttribute" />
 
             
 

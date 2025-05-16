@@ -40,8 +40,7 @@
         </item>
       </list>
       <para
-        >This class can be used by <see
-         cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" />
+        >This class can be used by <see cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" />
 
         
 
@@ -76,8 +75,7 @@
 
                 
 
-                 = <see
-                 cref="F:System.Net.HttpStatusCode.OK" />
+                 = <see cref="F:System.Net.HttpStatusCode.OK" />
 
                 
 
@@ -107,8 +105,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.HttpResponseMessageProperty" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.HttpResponseMessageProperty" />
 
             
 
@@ -158,8 +155,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the message property associated with the <see
-             cref="T:System.ServiceModel.Channels.HttpResponseMessageProperty" />
+            >Gets the name of the message property associated with the <see cref="T:System.ServiceModel.Channels.HttpResponseMessageProperty" />
 
             
 
@@ -189,8 +185,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property has one of the values in the <see
-             cref="T:System.Net.HttpStatusCode" />
+            >This property has one of the values in the <see cref="T:System.Net.HttpStatusCode" />
 
             
 
@@ -240,8 +235,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is used for empty message responses, for example, a service that accepts a POST request and returns a response that contains no message body with StatusCode = 200 and StatusDescription = OK. The <see
-             cref="T:System.ServiceModel.Channels.HttpResponseMessageProperty" />
+            >This property is used for empty message responses, for example, a service that accepts a POST request and returns a response that contains no message body with StatusCode = 200 and StatusDescription = OK. The <see cref="T:System.ServiceModel.Channels.HttpResponseMessageProperty" />
 
             
 
@@ -280,8 +274,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A newly created copy of type <see
-             cref="T:System.ServiceModel.Channels.IMessageProperty" />
+            >A newly created copy of type <see cref="T:System.ServiceModel.Channels.IMessageProperty" />
 
             
 

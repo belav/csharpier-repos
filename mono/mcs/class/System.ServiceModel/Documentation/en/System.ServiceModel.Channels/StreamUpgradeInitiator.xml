@@ -17,21 +17,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An example of a stream upgrade is to build a compression stream directly on top of the transport stream. This class is used with <see
-         cref="T:System.ServiceModel.Channels.StreamUpgradeAcceptor" />
+        >An example of a stream upgrade is to build a compression stream directly on top of the transport stream. This class is used with <see cref="T:System.ServiceModel.Channels.StreamUpgradeAcceptor" />
 
         
 
-         and <see
-         cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+         and <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
 
         
 
          to implement a custom stream upgrade.  </para
       >
       <para
-        >For a detailed description of the upgrade process, see <see
-         cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+        >For a detailed description of the upgrade process, see <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
 
         
 
@@ -60,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeInitiator" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.StreamUpgradeInitiator" />
 
             
 
@@ -95,8 +91,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method calls <see
-             cref="M:System.ServiceModel.Channels.StreamUpgradeInitiator.InitiateUpgrade(System.IO.Stream)" />
+            >This method calls <see cref="M:System.ServiceModel.Channels.StreamUpgradeInitiator.InitiateUpgrade(System.IO.Stream)" />
 
             
 
@@ -110,13 +105,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.IAsyncResult" />
+            >Returns an <see cref="T:System.IAsyncResult" />
 
             
 
-             to be passed into the <see
-             cref="M:System.ServiceModel.Channels.StreamUpgradeInitiator.EndInitiateUpgrade(System.IAsyncResult)" />
+             to be passed into the <see cref="M:System.ServiceModel.Channels.StreamUpgradeInitiator.EndInitiateUpgrade(System.IAsyncResult)" />
 
             
 
@@ -124,26 +117,37 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream to be upgraded.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The method to call when the <see
-           cref="M:System.ServiceModel.Channels.StreamUpgradeInitiator.InitiateUpgrade(System.IO.Stream)" />
+          The method to call when the <see cref="M:System.ServiceModel.Channels.StreamUpgradeInitiator.InitiateUpgrade(System.IO.Stream)" />
 
           
 
            has completed.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -174,8 +178,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about using this method, see the remarks in <see
-             cref="M:System.ServiceModel.Channels.StreamUpgradeInitiator.InitiateUpgrade(System.IO.Stream)" />
+            >For more information about using this method, see the remarks in <see cref="M:System.ServiceModel.Channels.StreamUpgradeInitiator.InitiateUpgrade(System.IO.Stream)" />
 
             
 
@@ -185,8 +188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is the asynchronous callback method that is called after <see
-             cref="M:System.ServiceModel.Channels.StreamUpgradeInitiator.BeginInitiateUpgrade(System.IO.Stream,System.AsyncCallback,System.Object)" />
+            >This method is the asynchronous callback method that is called after <see cref="M:System.ServiceModel.Channels.StreamUpgradeInitiator.BeginInitiateUpgrade(System.IO.Stream,System.AsyncCallback,System.Object)" />
 
             
 
@@ -198,12 +200,15 @@
           <para>Returns the upgraded stream.</para>
         </returns>
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The IAsyncResult returned from the <see
-           cref="M:System.ServiceModel.Channels.StreamUpgradeInitiator.BeginInitiateUpgrade(System.IO.Stream,System.AsyncCallback,System.Object)" />
+          The IAsyncResult returned from the <see cref="M:System.ServiceModel.Channels.StreamUpgradeInitiator.BeginInitiateUpgrade(System.IO.Stream,System.AsyncCallback,System.Object)" />
 
           
 
@@ -273,7 +278,11 @@
           <para>Returns the upgraded stream.</para>
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Security.AccessControl.CustomAce" />
+        >A <see cref="T:System.Security.AccessControl.CustomAce" />
 
         
 
@@ -33,8 +32,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an Access Control Entry (ACE) that is not defined by one of the members of the <see
-         cref="T:System.Security.AccessControl.AceType" />
+        >Represents an Access Control Entry (ACE) that is not defined by one of the members of the <see cref="T:System.Security.AccessControl.AceType" />
 
         
 
@@ -67,8 +65,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="opaque" />
+            >The <paramref name="opaque" />
 
             
 
@@ -78,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.CustomAce" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.CustomAce" />
 
             
 
@@ -87,31 +83,41 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Type of the new Access Control Entry (ACE). This value must be greater than <see
-           cref="F:System.Security.AccessControl.AceType.MaxDefinedAceType" />
+          Type of the new Access Control Entry (ACE). This value must be greater than <see cref="F:System.Security.AccessControl.AceType.MaxDefinedAceType" />
 
           
 
           .</param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Flags that specify information about the inheritance, inheritance propagation, and auditing conditions for the new ACE.</param
         >
         <param name="opaque">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of byte values that contains the data for the new ACE. This value can be null. The length of this array must not be greater than the value of the <see
-           cref="F:System.Security.AccessControl.CustomAce.MaxOpaqueLength" />
+          An array of byte values that contains the data for the new ACE. This value can be null. The length of this array must not be greater than the value of the <see cref="F:System.Security.AccessControl.CustomAce.MaxOpaqueLength" />
 
           
 
@@ -137,13 +143,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the length, in bytes, of the binary representation of the current <see
-             cref="T:System.Security.AccessControl.CustomAce" />
+            >Gets the length, in bytes, of the binary representation of the current <see cref="T:System.Security.AccessControl.CustomAce" />
 
             
 
-             object. This length should be used before marshaling the ACL into a binary array with the <see
-             cref="M:System.Security.AccessControl.CustomAce.GetBinaryForm" />
+             object. This length should be used before marshaling the ACL into a binary array with the <see cref="M:System.Security.AccessControl.CustomAce.GetBinaryForm" />
 
             
 
@@ -179,8 +183,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Marshals the contents of the <see
-             cref="T:System.Security.AccessControl.CustomAce" />
+            >Marshals the contents of the <see cref="T:System.Security.AccessControl.CustomAce" />
 
             
 
@@ -188,19 +191,26 @@
           >
         </summary>
         <param name="binaryForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The byte array into which the contents of the <see
-           cref="T:System.Security.AccessControl.CustomAce" />
+          The byte array into which the contents of the <see cref="T:System.Security.AccessControl.CustomAce" />
 
           
 
            is marshaled.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -229,8 +239,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the opaque data associated with this <see
-             cref="T:System.Security.AccessControl.CustomAce" />
+            >Returns the opaque data associated with this <see cref="T:System.Security.AccessControl.CustomAce" />
 
             
 
@@ -240,8 +249,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of byte values that represents the opaque data associated with this <see
-             cref="T:System.Security.AccessControl.CustomAce" />
+            >An array of byte values that represents the opaque data associated with this <see cref="T:System.Security.AccessControl.CustomAce" />
 
             
 
@@ -271,8 +279,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the maximum allowed length of an opaque data blob for this <see
-             cref="T:System.Security.AccessControl.CustomAce" />
+            >Returns the maximum allowed length of an opaque data blob for this <see cref="T:System.Security.AccessControl.CustomAce" />
 
             
 
@@ -299,8 +306,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the length of the opaque data associated with this <see
-             cref="T:System.Security.AccessControl.CustomAce" />
+            >Gets the length of the opaque data associated with this <see cref="T:System.Security.AccessControl.CustomAce" />
 
             
 
@@ -332,8 +338,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the opaque callback data associated with this <see
-             cref="T:System.Security.AccessControl.CustomAce" />
+            >Sets the opaque callback data associated with this <see cref="T:System.Security.AccessControl.CustomAce" />
 
             
 
@@ -341,12 +346,15 @@
           >
         </summary>
         <param name="opaque">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of byte values that represents the opaque callback data for this <see
-           cref="T:System.Security.AccessControl.CustomAce" />
+          An array of byte values that represents the opaque callback data for this <see cref="T:System.Security.AccessControl.CustomAce" />
 
           
 

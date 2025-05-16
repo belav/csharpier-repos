@@ -22,63 +22,52 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Text.RegularExpressions.Capture" />
+        >A <see cref="T:System.Text.RegularExpressions.Capture" />
 
         
 
-         object is immutable and has no public constructor. Instances are returned through the <see
-         cref="T:System.Text.RegularExpressions.CaptureCollection" />
+         object is immutable and has no public constructor. Instances are returned through the <see cref="T:System.Text.RegularExpressions.CaptureCollection" />
 
         
 
-         object, which is returned by the Match.Captures and <see
-         cref="P:System.Text.RegularExpressions.Group.Captures" />
+         object, which is returned by the Match.Captures and <see cref="P:System.Text.RegularExpressions.Group.Captures" />
 
         
 
-         properties. However, the Match.Captures property provides information about the same match as the <see
-         cref="T:System.Text.RegularExpressions.Match" />
+         properties. However, the Match.Captures property provides information about the same match as the <see cref="T:System.Text.RegularExpressions.Match" />
 
         
 
          object.</para
       >
       <para
-        >If you do not apply a <format
-         type="text/html">
+        >If you do not apply a <format type="text/html">
           <a href="36b81212-6511-49ed-a8f1-ff080415312f">quantifier</a>
         </format>
 
         
 
-         to a capturing group, the <see
-         cref="P:System.Text.RegularExpressions.Group.Captures" />
+         to a capturing group, the <see cref="P:System.Text.RegularExpressions.Group.Captures" />
 
         
 
-         property returns a <see
-         cref="T:System.Text.RegularExpressions.CaptureCollection" />
+         property returns a <see cref="T:System.Text.RegularExpressions.CaptureCollection" />
 
         
 
-         with a single <see
-         cref="T:System.Text.RegularExpressions.Capture" />
+         with a single <see cref="T:System.Text.RegularExpressions.Capture" />
 
         
 
-         object that provides information about the same capture as the <see
-         cref="T:System.Text.RegularExpressions.Group" />
+         object that provides information about the same capture as the <see cref="T:System.Text.RegularExpressions.Group" />
 
         
 
-         object. If you do apply a quantifier to a capturing group, the Group.Index, Group.Length, and Group.Value properties provide information only about the last captured group, whereas the <see
-         cref="T:System.Text.RegularExpressions.Capture" />
+         object. If you do apply a quantifier to a capturing group, the Group.Index, Group.Length, and Group.Value properties provide information only about the last captured group, whereas the <see cref="T:System.Text.RegularExpressions.Capture" />
 
         
 
-         objects in the <see
-         cref="T:System.Text.RegularExpressions.CaptureCollection" />
+         objects in the <see cref="T:System.Text.RegularExpressions.CaptureCollection" />
 
         
 
@@ -153,8 +142,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >ToString is actually an internal call to the <see
-             cref="P:System.Text.RegularExpressions.Capture.Value" />
+            >ToString is actually an internal call to the <see cref="P:System.Text.RegularExpressions.Capture.Value" />
 
             
 
@@ -164,8 +152,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the captured substring from the input string by calling the <see
-             cref="P:System.Text.RegularExpressions.Capture.Value" />
+            >Retrieves the captured substring from the input string by calling the <see cref="P:System.Text.RegularExpressions.Capture.Value" />
 
             
 
@@ -195,23 +182,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a call to the <see
-             cref="M:System.Text.RegularExpressions.Regex.Match(System.String)" />
+            >If a call to the <see cref="M:System.Text.RegularExpressions.Regex.Match(System.String)" />
 
             
 
-             or <see
-             cref="M:System.Text.RegularExpressions.Match.NextMatch" />
+             or <see cref="M:System.Text.RegularExpressions.Match.NextMatch" />
 
             
 
-             method fails to find a match, the value of the returned Match.Value property is <see
-             cref="F:System.String.Empty" />
+             method fails to find a match, the value of the returned Match.Value property is <see cref="F:System.String.Empty" />
 
             
 
-            . If the regular expression engine is unable to match a capturing group. the value of the returned Group.Value property is <see
-             cref="F:System.String.Empty" />
+            . If the regular expression engine is unable to match a capturing group. the value of the returned Group.Value property is <see cref="F:System.String.Empty" />
 
             
 

@@ -16,18 +16,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each point in a <see
-         cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+        >Each point in a <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
         
 
-         object has a type associated with it. The type determines how the point is used to draw the path. Point types that make up shapes include start points, stop points, and Bézier curve points. Types also include markers, which allow easy traversal of a path or a mask to show or hide points. The <see
-         cref="F:System.Drawing.Drawing2D.PathPointType.Line" />
+         object has a type associated with it. The type determines how the point is used to draw the path. Point types that make up shapes include start points, stop points, and Bézier curve points. Types also include markers, which allow easy traversal of a path or a mask to show or hide points. The <see cref="F:System.Drawing.Drawing2D.PathPointType.Line" />
 
         
 
-         type and any of the Bezier types can be combined with <see
-         cref="F:System.Drawing.Drawing2D.PathPointType.CloseSubpath" />
+         type and any of the Bezier types can be combined with <see cref="F:System.Drawing.Drawing2D.PathPointType.CloseSubpath" />
 
         
 
@@ -37,8 +34,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the type of point in a <see
-         cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+        >Specifies the type of point in a <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
         
 
@@ -192,8 +188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The starting point of a <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            >The starting point of a <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 

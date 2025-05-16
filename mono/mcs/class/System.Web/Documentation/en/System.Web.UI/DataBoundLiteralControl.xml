@@ -29,13 +29,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.DataBoundLiteralControl" />
+        >The <see cref="T:System.Web.UI.DataBoundLiteralControl" />
 
         
 
-         class persists the value of its <see
-         cref="P:System.Web.UI.DataBoundLiteralControl.Text" />
+         class persists the value of its <see cref="P:System.Web.UI.DataBoundLiteralControl.Text" />
 
         
 
@@ -64,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.DataBoundLiteralControl" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.DataBoundLiteralControl" />
 
             
 
@@ -73,14 +70,22 @@
           >
         </summary>
         <param name="staticLiteralsCount">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Defines the size of the array to create for storing static literal strings.</param
         >
         <param name="dataBoundLiteralCount">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -104,10 +109,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Web.UI.ControlCollection" />
-        </returns>
+        <returns>a <see cref="T:System.Web.UI.ControlCollection" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -128,10 +130,7 @@
         <Parameter Name="savedState" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="savedState"
-          >a <see
-           cref="T:System.Object" />
-        </param>
+        <param name="savedState">a <see cref="T:System.Object" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -153,10 +152,7 @@
         <Parameter Name="output" Type="System.Web.UI.HtmlTextWriter" />
       </Parameters>
       <Docs>
-        <param name="output"
-          >a <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
-        </param>
+        <param name="output">a <see cref="T:System.Web.UI.HtmlTextWriter" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -174,10 +170,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Object" />
-        </returns>
+        <returns>a <see cref="T:System.Object" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -205,24 +198,30 @@
           <para>Assigns a string value to an array containing data-bound values.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The position in an array at which to retain the <paramref
-           name="s" />
+          The position in an array at which to retain the <paramref name="s" />
 
           
 
            parameter value. </param
         >
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -251,24 +250,30 @@
           <para>Assigns a string value to an array containing static values.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The position in an array at which to retain the <paramref
-           name="s" />
+          The position in an array at which to retain the <paramref name="s" />
 
           
 
            parameter value.</param
         >
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -294,41 +299,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This implementation of the <see
-             cref="T:System.Web.UI.ITextControl" />
+            >This implementation of the <see cref="T:System.Web.UI.ITextControl" />
 
             
 
-             interface returns the value of the <see
-             cref="P:System.Web.UI.DataBoundLiteralControl.Text" />
+             interface returns the value of the <see cref="P:System.Web.UI.DataBoundLiteralControl.Text" />
 
             
 
-             property. The value of the <see
-             cref="P:System.Web.UI.DataBoundLiteralControl.Text" />
+             property. The value of the <see cref="P:System.Web.UI.DataBoundLiteralControl.Text" />
 
             
 
              property is persisted in the view state.</para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.DataBoundLiteralControl" />
+            >The <see cref="T:System.Web.UI.DataBoundLiteralControl" />
 
             
 
-             object implements <see
-             cref="T:System.Web.UI.ITextControl" />
+             object implements <see cref="T:System.Web.UI.ITextControl" />
 
             
 
-             but does not support the set method on the <see
-             cref="P:System.Web.UI.ITextControl.Text" />
+             but does not support the set method on the <see cref="P:System.Web.UI.ITextControl.Text" />
 
             
 
-             property. All attempts to use this method will return a <see
-             cref="T:System.NotSupportedException" />
+             property. All attempts to use this method will return a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -338,8 +336,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the text content of the <see
-             cref="T:System.Web.UI.DataBoundLiteralControl" />
+            >Gets or sets the text content of the <see cref="T:System.Web.UI.DataBoundLiteralControl" />
 
             
 
@@ -359,13 +356,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.DataBoundLiteralControl" />
+            >The <see cref="T:System.Web.UI.DataBoundLiteralControl" />
 
             
 
-             class persists the value of its <see
-             cref="P:System.Web.UI.DataBoundLiteralControl.Text" />
+             class persists the value of its <see cref="P:System.Web.UI.DataBoundLiteralControl.Text" />
 
             
 
@@ -375,8 +370,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the text content of the <see
-             cref="T:System.Web.UI.DataBoundLiteralControl" />
+            >Gets the text content of the <see cref="T:System.Web.UI.DataBoundLiteralControl" />
 
             
 

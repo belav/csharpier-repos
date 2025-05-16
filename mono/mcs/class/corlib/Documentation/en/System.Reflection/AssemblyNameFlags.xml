@@ -29,8 +29,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides information about an <see
-         cref="T:System.Reflection.Assembly" />
+        >Provides information about an <see cref="T:System.Reflection.Assembly" />
 
         
 

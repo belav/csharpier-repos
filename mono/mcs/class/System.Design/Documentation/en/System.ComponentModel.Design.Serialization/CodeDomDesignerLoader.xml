@@ -51,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
 
             
 
@@ -78,33 +77,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The designer loader does not parse or generate code from the returned <see
-             cref="P:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.CodeDomProvider" />
+            >The designer loader does not parse or generate code from the returned <see cref="P:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.CodeDomProvider" />
 
             
 
-            , but it does use the provider to obtain an <see
-             cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+            , but it does use the provider to obtain an <see cref="T:System.CodeDom.Compiler.ICodeGenerator" />
 
             
 
-             that it can use to validate identifiers in the name-creation service. The designer loader will also check the <see
-             cref="P:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.CodeDomProvider" />
+             that it can use to validate identifiers in the name-creation service. The designer loader will also check the <see cref="P:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.CodeDomProvider" />
 
             
 
-             to see if it implements the <see
-             cref="T:System.ComponentModel.Design.Serialization.ICodeDomDesignerReload" />
+             to see if it implements the <see cref="T:System.ComponentModel.Design.Serialization.ICodeDomDesignerReload" />
 
             
 
-             interface. For more information on parsing or generating code, see the <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Parse" />
+             interface. For more information on parsing or generating code, see the <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Parse" />
 
             
 
-             and <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Write(System.CodeDom.CodeCompileUnit)" />
+             and <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Write(System.CodeDom.CodeCompileUnit)" />
 
             
 
@@ -114,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="P:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.CodeDomProvider" />
+            >Gets the <see cref="P:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.CodeDomProvider" />
 
             
 
@@ -138,63 +130,52 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Dispose" />
+            >The <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Dispose" />
 
             
 
-             method removes services added by the <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Initialize" />
+             method removes services added by the <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Initialize" />
 
             
 
              method.</para
           >
           <para
-            >Call <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Dispose" />
+            >Call <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+             when you are finished using the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
 
             
 
-            . The <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Dispose" />
+            . The <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+             method leaves the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Dispose" />
+             in an unusable state. After calling <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+            , you must release all references to the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -204,18 +185,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Dispose" />
+              >Always call <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+               before you release your last reference to the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
 
               
 
@@ -226,8 +204,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the resources used by the <see
-             cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+            >Releases the resources used by the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
 
             
 
@@ -250,8 +227,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table describes the replaceable services that the <see
-             cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+            >The following table describes the replaceable services that the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
 
             
 
@@ -276,8 +252,7 @@
               </term>
               <description>
                 <para
-                  >Provides semantics for creating names of objects. The service uses the CodeDOM provider’s <see
-                   cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+                  >Provides semantics for creating names of objects. The service uses the CodeDOM provider’s <see cref="T:System.CodeDom.Compiler.ICodeGenerator" />
 
                   
 
@@ -293,8 +268,7 @@
               </term>
               <description>
                 <para
-                  >Allows other objects to serialize a group of components into a binary object. This service is most often used by features such as copy and paste or undo and redo. The <see
-                   cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+                  >Allows other objects to serialize a group of components into a binary object. This service is most often used by features such as copy and paste or undo and redo. The <see cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
 
                   
 
@@ -310,8 +284,7 @@
               </term>
               <description>
                 <para
-                  >This service replaces <see
-                   cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationService" />
+                  >This service replaces <see cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationService" />
 
                   
 
@@ -321,8 +294,7 @@
             </item>
           </list>
           <para
-            >For details on replaceable and non-replaceable services, see <see
-             cref="T:System.ComponentModel.Design.Serialization.BasicDesignerLoader" />
+            >For details on replaceable and non-replaceable services, see <see cref="T:System.ComponentModel.Design.Serialization.BasicDesignerLoader" />
 
             
 
@@ -349,23 +321,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.IsReloadNeeded" />
+            >The <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.IsReloadNeeded" />
 
             
 
-             method checks for the presence of the <see
-             cref="T:System.ComponentModel.Design.Serialization.ICodeDomDesignerReload" />
+             method checks for the presence of the <see cref="T:System.ComponentModel.Design.Serialization.ICodeDomDesignerReload" />
 
             
 
-             interface on the <see
-             cref="P:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.CodeDomProvider" />
+             interface on the <see cref="P:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.CodeDomProvider" />
 
             
 
-            . The provider will reparse the CodeDOM tree and pass the resulting parse tree to the <see
-             cref="M:System.ComponentModel.Design.Serialization.ICodeDomDesignerReload.ShouldReloadDesigner(System.CodeDom.CodeCompileUnit)" />
+            . The provider will reparse the CodeDOM tree and pass the resulting parse tree to the <see cref="M:System.ComponentModel.Design.Serialization.ICodeDomDesignerReload.ShouldReloadDesigner(System.CodeDom.CodeCompileUnit)" />
 
             
 
@@ -379,8 +347,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="P:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.CodeDomProvider" />
+            >true if the <see cref="P:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.CodeDomProvider" />
 
             
 
@@ -403,13 +370,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on the <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.OnBeginLoad" />
+            >For more information on the <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.OnBeginLoad" />
 
             
 
-             method, see <see
-             cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.OnBeginLoad" />
+             method, see <see cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.OnBeginLoad" />
 
             
 
@@ -436,13 +401,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on the <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.OnBeginUnload" />
+            >For more information on the <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.OnBeginUnload" />
 
             
 
-             method, see <see
-             cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.OnBeginUnload" />
+             method, see <see cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.OnBeginUnload" />
 
             
 
@@ -477,8 +440,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentRename" />
+            >Raises the <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentRename" />
 
             
 
@@ -486,21 +448,33 @@
           >
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component to rename.</param
         >
         <param name="oldName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The original name of the component.</param
         >
         <param name="newName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -528,13 +502,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on the <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.OnEndLoad(System.Boolean,System.Collections.ICollection)" />
+            >For more information on the <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.OnEndLoad(System.Boolean,System.Collections.ICollection)" />
 
             
 
-             method, see <see
-             cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.OnEndLoad(System.Boolean,System.Collections.ICollection)" />
+             method, see <see cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.OnEndLoad(System.Boolean,System.Collections.ICollection)" />
 
             
 
@@ -546,19 +518,26 @@
           <para>Notifies the designer loader that loading is complete.</para>
         </summary>
         <param name="successful">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to indicate that the load completed successfully; otherwise, false.</param
         >
         <param name="errors">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.ICollection" />
+          An <see cref="T:System.Collections.ICollection" />
 
           
 
@@ -583,13 +562,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Parse" />
+            >The <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Parse" />
 
             
 
-             method is called when the <see
-             cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+             method is called when the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
 
             
 
@@ -599,8 +576,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Parses the text or other persistent storage and returns a <see
-             cref="T:System.CodeDom.CodeCompileUnit" />
+            >Parses the text or other persistent storage and returns a <see cref="T:System.CodeDom.CodeCompileUnit" />
 
             
 
@@ -610,8 +586,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.CodeDom.CodeCompileUnit" />
+            >A <see cref="T:System.CodeDom.CodeCompileUnit" />
 
             
 
@@ -642,51 +617,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.PerformFlush(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
+            >The <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.PerformFlush(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
 
             
 
-             method obtains the root <see
-             cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" />
+             method obtains the root <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" />
 
             
 
-             for the root component of the designer and invokes the serializer to serialize the component. If the result of this operation is a <see
-             cref="T:System.CodeDom.CodeTypeDeclaration" />
+             for the root component of the designer and invokes the serializer to serialize the component. If the result of this operation is a <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
             
 
-            , then <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.PerformFlush(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
+            , then <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.PerformFlush(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
 
             
 
-             integrates the <see
-             cref="T:System.CodeDom.CodeTypeDeclaration" />
+             integrates the <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
             
 
-             with the existing CodeDOM tree. The result is the original CodeDOM tree with matching members and statements replaced. Finally, <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.PerformFlush(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
+             with the existing CodeDOM tree. The result is the original CodeDOM tree with matching members and statements replaced. Finally, <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.PerformFlush(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
 
             
 
-             calls the abstract <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Write(System.CodeDom.CodeCompileUnit)" />
+             calls the abstract <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Write(System.CodeDom.CodeCompileUnit)" />
 
             
 
              method to save this CodeDOM tree.</para
           >
           <para
-            >If the serialization of the root designer component does not result in a <see
-             cref="T:System.CodeDom.CodeTypeDeclaration" />
+            >If the serialization of the root designer component does not result in a <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
             
 
-            , then <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.PerformFlush(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
+            , then <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.PerformFlush(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
 
             
 
@@ -701,12 +667,15 @@
           <para>Requests serialization of the root component of the designer.</para>
         </summary>
         <param name="manager">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+          The <see cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
 
           
 
@@ -736,48 +705,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.PerformLoad(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
+            >The <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.PerformLoad(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
 
             
 
-             method obtains an <see
-             cref="T:System.CodeDom.Compiler.ICodeParser" />
+             method obtains an <see cref="T:System.CodeDom.Compiler.ICodeParser" />
 
             
 
-             from the CodeDOM provider and parses the code. <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.PerformLoad(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
+             from the CodeDOM provider and parses the code. <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.PerformLoad(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
 
             
 
-             locates the first class in the file, obtains a root <see
-             cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" />
+             locates the first class in the file, obtains a root <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" />
 
             
 
-             for the data type, and then invokes the serializer to deserialize the data type. <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.PerformLoad(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
+             for the data type, and then invokes the serializer to deserialize the data type. <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.PerformLoad(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
 
             
 
-             assumes that this process will create all necessary components in the <see
-             cref="T:System.ComponentModel.IContainer" />
+             assumes that this process will create all necessary components in the <see cref="T:System.ComponentModel.IContainer" />
 
             
 
-             of the <see
-             cref="P:System.ComponentModel.Design.Serialization.BasicDesignerLoader.LoaderHost" />
+             of the <see cref="P:System.ComponentModel.Design.Serialization.BasicDesignerLoader.LoaderHost" />
 
             
 
-             property. Finally, <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.PerformLoad(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
+             property. Finally, <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.PerformLoad(System.ComponentModel.Design.Serialization.IDesignerSerializationManager)" />
 
             
 
-             calls the <see
-             cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.SetBaseComponentClassName(System.String)" />
+             calls the <see cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.SetBaseComponentClassName(System.String)" />
 
             
 
@@ -792,12 +752,15 @@
           <para>Parses code from a CodeDOM provider.</para>
         </summary>
         <param name="manager">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+          The <see cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
 
           
 
@@ -829,8 +792,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of objects represented by <paramref
-             name="serializationData" />
+            >A collection of objects represented by <paramref name="serializationData" />
 
             
 
@@ -838,7 +800,11 @@
           >
         </returns>
         <param name="serializationData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -872,7 +838,11 @@
           <para>An object that contains the serialized state of the specified collection of objects.</para>
         </returns>
         <param name="objects">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -907,14 +877,22 @@
           <para>A unique name for the data type.</para>
         </returns>
         <param name="container">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The container where the new object is added.</param
         >
         <param name="dataType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -945,7 +923,11 @@
           <para>true if the name is valid; otherwise, false.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -975,7 +957,11 @@
           <para>Gets a value indicating whether the specified name is valid.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1000,18 +986,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+            >The <see cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
 
             
 
-             automatically adds this <see
-             cref="T:System.ComponentModel.Design.ITypeResolutionService" />
+             automatically adds this <see cref="T:System.ComponentModel.Design.ITypeResolutionService" />
 
             
 
-             to the service container when the <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Initialize" />
+             to the service container when the <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Initialize" />
 
             
 
@@ -1043,43 +1026,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Write(System.CodeDom.CodeCompileUnit)" />
+            >The <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Write(System.CodeDom.CodeCompileUnit)" />
 
             
 
-             method saves a <see
-             cref="T:System.CodeDom.CodeCompileUnit" />
+             method saves a <see cref="T:System.CodeDom.CodeCompileUnit" />
 
             
 
-             to persistent storage. The deriving class is responsible for invoking the <see
-             cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+             to persistent storage. The deriving class is responsible for invoking the <see cref="T:System.CodeDom.Compiler.ICodeGenerator" />
 
             
 
-             on the appropriate text writer to save the code. The <see
-             cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+             on the appropriate text writer to save the code. The <see cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
 
             
 
-             ensures that the CodeDOM objects that are passed to <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Write(System.CodeDom.CodeCompileUnit)" />
+             ensures that the CodeDOM objects that are passed to <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Write(System.CodeDom.CodeCompileUnit)" />
 
             
 
-             are the same instances of objects that were retrieved from <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Parse" />
+             are the same instances of objects that were retrieved from <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Parse" />
 
             
 
-            , except in cases where the serialization process had to make changes to the code. This allows an optimized designer loader to store additional data in the <see
-             cref="P:System.CodeDom.CodeObject.UserData" />
+            , except in cases where the serialization process had to make changes to the code. This allows an optimized designer loader to store additional data in the <see cref="P:System.CodeDom.CodeObject.UserData" />
 
             
 
-             property of code elements. This data will be available during the <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Write(System.CodeDom.CodeCompileUnit)" />
+             property of code elements. This data will be available during the <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Write(System.CodeDom.CodeCompileUnit)" />
 
             
 
@@ -1091,12 +1066,15 @@
           <para>Writes compile-unit changes to persistent storage.</para>
         </summary>
         <param name="unit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeCompileUnit" />
+          The <see cref="T:System.CodeDom.CodeCompileUnit" />
 
           
 

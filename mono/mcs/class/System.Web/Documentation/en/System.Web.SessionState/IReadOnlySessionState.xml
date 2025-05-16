@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implement the <see
-         cref="T:System.Web.SessionState.IReadOnlySessionState" />
+        >Implement the <see cref="T:System.Web.SessionState.IReadOnlySessionState" />
 
         
 

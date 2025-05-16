@@ -19,26 +19,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Schema.XmlSchemaInference" />
+        >The <see cref="T:System.Xml.Schema.XmlSchemaInference" />
 
         
 
-         class in the <see
-         cref="N:System.Xml.Schema" />
+         class in the <see cref="N:System.Xml.Schema" />
 
         
 
-         namespace allows you to infer an XML Schema Definition Language (XSD) schema from the structure of an XML document. The <see
-         cref="T:System.Xml.Schema.XmlSchemaInference" />
+         namespace allows you to infer an XML Schema Definition Language (XSD) schema from the structure of an XML document. The <see cref="T:System.Xml.Schema.XmlSchemaInference" />
 
         
 
          class outputs an XML schema that can validate the XML document.</para
       >
       <para
-        >The <see
-         cref="T:System.Xml.Schema.XmlSchemaInference" />
+        >The <see cref="T:System.Xml.Schema.XmlSchemaInference" />
 
         
 
@@ -48,8 +44,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Infers an XML Schema Definition Language (XSD) schema from an XML document. The <see
-         cref="T:System.Xml.Schema.XmlSchemaInference" />
+        >Infers an XML Schema Definition Language (XSD) schema from an XML document. The <see cref="T:System.Xml.Schema.XmlSchemaInference" />
 
         
 
@@ -76,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Schema.XmlSchemaInference" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaInference" />
 
             
 
@@ -111,21 +105,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Schema.XmlSchemaInference.InferSchema(System.Xml.XmlReader)" />
+            >The <see cref="M:System.Xml.Schema.XmlSchemaInference.InferSchema(System.Xml.XmlReader)" />
 
             
 
-             method infers one or more W3C XML Schema Definition Language (XSD) schemas from the XML instance document contained in the <see
-             cref="T:System.Xml.XmlReader" />
+             method infers one or more W3C XML Schema Definition Language (XSD) schemas from the XML instance document contained in the <see cref="T:System.Xml.XmlReader" />
 
             
 
              object specified. If the XML document contains elements and attributes from multiple namespaces, then multiple schemas are generated: one for each namespace used in the document. The primary schema is the schema that can validate the entire XML document, and its target namespace is the same as the namespace of the document element of the XML document.</para
           >
           <para
-            >The following are important notes to consider when using the <see
-             cref="M:System.Xml.Schema.XmlSchemaInference.InferSchema(System.Xml.XmlReader)" />
+            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaInference.InferSchema(System.Xml.XmlReader)" />
 
             
 
@@ -134,8 +125,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="M:System.Xml.Schema.XmlSchemaInference.InferSchema(System.Xml.XmlReader)" />
+                >The <see cref="M:System.Xml.Schema.XmlSchemaInference.InferSchema(System.Xml.XmlReader)" />
 
                 
 
@@ -144,8 +134,7 @@
             </item>
             <item>
               <para
-                >If the <see
-                 cref="T:System.Xml.XmlReader" />
+                >If the <see cref="T:System.Xml.XmlReader" />
 
                 
 
@@ -154,38 +143,31 @@
             </item>
             <item>
               <para
-                >If the <see
-                 cref="T:System.Xml.XmlReader" />
+                >If the <see cref="T:System.Xml.XmlReader" />
 
                 
 
-                 object is positioned on an element that is not the root element of the XML document, a schema is inferred for only that element. If the <see
-                 cref="T:System.Xml.XmlReader" />
+                 object is positioned on an element that is not the root element of the XML document, a schema is inferred for only that element. If the <see cref="T:System.Xml.XmlReader" />
 
                 
 
-                 object is not positioned on an element, the <see
-                 cref="M:System.Xml.XmlReader.Read" />
+                 object is not positioned on an element, the <see cref="M:System.Xml.XmlReader.Read" />
 
                 
 
-                 method is called on the <see
-                 cref="T:System.Xml.XmlReader" />
+                 method is called on the <see cref="T:System.Xml.XmlReader" />
 
                 
 
-                 parameter until an element is encountered (for example, when <see
-                 cref="P:System.Xml.XmlReader.NodeType" />
+                 parameter until an element is encountered (for example, when <see cref="P:System.Xml.XmlReader.NodeType" />
 
                 
 
-                 is <see
-                 cref="F:System.Xml.XmlNodeType.Element" />
+                 is <see cref="F:System.Xml.XmlNodeType.Element" />
 
                 
 
-                ). At this point, the inference process starts from that element. If no element is encountered until the end of the document, an <see
-                 cref="T:System.ArgumentException" />
+                ). At this point, the inference process starts from that element. If no element is encountered until the end of the document, an <see cref="T:System.ArgumentException" />
 
                 
 
@@ -197,8 +179,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Infers an XML Schema Definition Language (XSD) schema from the XML document contained in the <see
-             cref="T:System.Xml.XmlReader" />
+            >Infers an XML Schema Definition Language (XSD) schema from the XML document contained in the <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -208,8 +189,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+            >An <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
@@ -217,12 +197,15 @@
           >
         </returns>
         <param name="instanceDocument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlReader" />
+          An <see cref="T:System.Xml.XmlReader" />
 
           
 
@@ -256,21 +239,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Schema.XmlSchemaInference.InferSchema(System.Xml.XmlReader,System.Xml.Schema.XmlSchemaSet)" />
+            >The <see cref="M:System.Xml.Schema.XmlSchemaInference.InferSchema(System.Xml.XmlReader,System.Xml.Schema.XmlSchemaSet)" />
 
             
 
-             method infers one or more W3C XML Schema Definition Language (XSD) schemas from the XML instance document contained in the <see
-             cref="T:System.Xml.XmlReader" />
+             method infers one or more W3C XML Schema Definition Language (XSD) schemas from the XML instance document contained in the <see cref="T:System.Xml.XmlReader" />
 
             
 
              object specified. If the XML document contains elements and attributes from multiple namespaces, multiple schemas are generated: one for each namespace used in the document. The primary schema is the schema that can validate the entire XML document, and its target namespace is the same as the namespace of the document element of the XML document.</para
           >
           <para
-            >The following are important notes to consider when using the <see
-             cref="M:System.Xml.Schema.XmlSchemaInference.InferSchema(System.Xml.XmlReader,System.Xml.Schema.XmlSchemaSet)" />
+            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaInference.InferSchema(System.Xml.XmlReader,System.Xml.Schema.XmlSchemaSet)" />
 
             
 
@@ -279,8 +259,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="M:System.Xml.Schema.XmlSchemaInference.InferSchema(System.Xml.XmlReader,System.Xml.Schema.XmlSchemaSet)" />
+                >The <see cref="M:System.Xml.Schema.XmlSchemaInference.InferSchema(System.Xml.XmlReader,System.Xml.Schema.XmlSchemaSet)" />
 
                 
 
@@ -289,8 +268,7 @@
             </item>
             <item>
               <para
-                >If the <see
-                 cref="T:System.Xml.XmlReader" />
+                >If the <see cref="T:System.Xml.XmlReader" />
 
                 
 
@@ -299,38 +277,31 @@
             </item>
             <item>
               <para
-                >If the <see
-                 cref="T:System.Xml.XmlReader" />
+                >If the <see cref="T:System.Xml.XmlReader" />
 
                 
 
-                 object is positioned on an element that is not the root element of the XML document, a schema is inferred for only that element. If the <see
-                 cref="T:System.Xml.XmlReader" />
+                 object is positioned on an element that is not the root element of the XML document, a schema is inferred for only that element. If the <see cref="T:System.Xml.XmlReader" />
 
                 
 
-                 object is not positioned on an element, the <see
-                 cref="M:System.Xml.XmlReader.Read" />
+                 object is not positioned on an element, the <see cref="M:System.Xml.XmlReader.Read" />
 
                 
 
-                 method is called on the <see
-                 cref="T:System.Xml.XmlReader" />
+                 method is called on the <see cref="T:System.Xml.XmlReader" />
 
                 
 
-                 parameter until an element is encountered (for example, when <see
-                 cref="P:System.Xml.XmlReader.NodeType" />
+                 parameter until an element is encountered (for example, when <see cref="P:System.Xml.XmlReader.NodeType" />
 
                 
 
-                 is <see
-                 cref="F:System.Xml.XmlNodeType.Element" />
+                 is <see cref="F:System.Xml.XmlNodeType.Element" />
 
                 
 
-                ). At this point, the inference process starts from that element. If no element is encountered until the end of the document, an <see
-                 cref="T:System.ArgumentException" />
+                ). At this point, the inference process starts from that element. If no element is encountered until the end of the document, an <see cref="T:System.ArgumentException" />
 
                 
 
@@ -339,23 +310,19 @@
             </item>
             <item>
               <para
-                >If an <see
-                 cref="T:System.Xml.Schema.XmlSchemaSet" />
+                >If an <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
                 
 
-                 object is passed as a parameter and the element upon which the <see
-                 cref="T:System.Xml.XmlReader" />
+                 object is passed as a parameter and the element upon which the <see cref="T:System.Xml.XmlReader" />
 
                 
 
-                 object is positioned is defined in one of the schemas in the <see
-                 cref="T:System.Xml.Schema.XmlSchemaSet" />
+                 object is positioned is defined in one of the schemas in the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
                 
 
-                , the inferred schema is used to refine an existing schema in the <see
-                 cref="T:System.Xml.Schema.XmlSchemaSet" />
+                , the inferred schema is used to refine an existing schema in the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
                 
 
@@ -367,13 +334,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Infers an XML Schema Definition Language (XSD) schema from the XML document contained in the <see
-             cref="T:System.Xml.XmlReader" />
+            >Infers an XML Schema Definition Language (XSD) schema from the XML document contained in the <see cref="T:System.Xml.XmlReader" />
 
             
 
-             object specified, and refines the inferred schema using an existing schema in the <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+             object specified, and refines the inferred schema using an existing schema in the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
@@ -383,8 +348,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+            >An <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
@@ -392,24 +356,30 @@
           >
         </returns>
         <param name="instanceDocument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlReader" />
+          An <see cref="T:System.Xml.XmlReader" />
 
           
 
            object containing the XML document to infer a schema from.</param
         >
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchemaSet" />
+          An <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
           
 
@@ -440,39 +410,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Xml.Schema.XmlSchemaInference.Occurrence" />
+            >If the <see cref="P:System.Xml.Schema.XmlSchemaInference.Occurrence" />
 
             
 
-             property is set to <see
-             cref="F:System.Xml.Schema.XmlSchemaInference.InferenceOption.Restricted" />
+             property is set to <see cref="F:System.Xml.Schema.XmlSchemaInference.InferenceOption.Restricted" />
 
             
 
             , the first time elements are encountered in the XML document, the schema declaration is inferred as minOccurs="1". When attributes are encountered, the schema declaration is inferred as use="required". </para
           >
           <para
-            >If the <see
-             cref="P:System.Xml.Schema.XmlSchemaInference.Occurrence" />
+            >If the <see cref="P:System.Xml.Schema.XmlSchemaInference.Occurrence" />
 
             
 
-             property is set to <see
-             cref="F:System.Xml.Schema.XmlSchemaInference.InferenceOption.Relaxed" />
+             property is set to <see cref="F:System.Xml.Schema.XmlSchemaInference.InferenceOption.Relaxed" />
 
             
 
             , element schema declarations are inferred as minOccurs="0", and attribute schema declarations are inferred as use="optional".</para
           >
           <para
-            >The default value of the <see
-             cref="P:System.Xml.Schema.XmlSchemaInference.Occurrence" />
+            >The default value of the <see cref="P:System.Xml.Schema.XmlSchemaInference.Occurrence" />
 
             
 
-             property is <see
-             cref="F:System.Xml.Schema.XmlSchemaInference.InferenceOption.Restricted" />
+             property is <see cref="F:System.Xml.Schema.XmlSchemaInference.InferenceOption.Restricted" />
 
             
 
@@ -482,8 +446,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Xml.Schema.XmlSchemaInference.InferenceOption" />
+            >Gets or sets the <see cref="T:System.Xml.Schema.XmlSchemaInference.InferenceOption" />
 
             
 
@@ -515,36 +478,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Xml.Schema.XmlSchemaInference.TypeInference" />
+            >If the <see cref="P:System.Xml.Schema.XmlSchemaInference.TypeInference" />
 
             
 
-             property is set to <see
-             cref="F:System.Xml.Schema.XmlSchemaInference.InferenceOption.Relaxed" />
+             property is set to <see cref="F:System.Xml.Schema.XmlSchemaInference.InferenceOption.Relaxed" />
 
             
 
-            , the inferred type of elements and attributes in the XML document with simple content is always xs:string. If the <see
-             cref="P:System.Xml.Schema.XmlSchemaInference.TypeInference" />
+            , the inferred type of elements and attributes in the XML document with simple content is always xs:string. If the <see cref="P:System.Xml.Schema.XmlSchemaInference.TypeInference" />
 
             
 
-             property is set to <see
-             cref="F:System.Xml.Schema.XmlSchemaInference.InferenceOption.Restricted" />
+             property is set to <see cref="F:System.Xml.Schema.XmlSchemaInference.InferenceOption.Restricted" />
 
             
 
             , more specific types are inferred, such as xs:date, xs:decimal, xs:unsignedByte, and so on.</para
           >
           <para
-            >The default value of the <see
-             cref="P:System.Xml.Schema.XmlSchemaInference.TypeInference" />
+            >The default value of the <see cref="P:System.Xml.Schema.XmlSchemaInference.TypeInference" />
 
             
 
-             property is <see
-             cref="F:System.Xml.Schema.XmlSchemaInference.InferenceOption.Restricted" />
+             property is <see cref="F:System.Xml.Schema.XmlSchemaInference.InferenceOption.Restricted" />
 
             
 
@@ -554,8 +511,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Xml.Schema.XmlSchemaInference.InferenceOption" />
+            >Gets or sets the <see cref="T:System.Xml.Schema.XmlSchemaInference.InferenceOption" />
 
             
 

@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Override this class to extend the standard mapping between WSDL and a message encoding binding element. Then attach your custom object to a WsdlImporter either programmatically or by using an application configuration file. You can also attach your custom object to the internal WsdlImporter used by the <format
-         type="text/html">
+        >Override this class to extend the standard mapping between WSDL and a message encoding binding element. Then attach your custom object to a WsdlImporter either programmatically or by using an application configuration file. You can also attach your custom object to the internal WsdlImporter used by the <format type="text/html">
           <a href="9027efd3-df8d-47ed-8bcd-f53d55ed803c"
             >Service Model Metadata Utility Tool (Svcutil.exe)</a
           >
@@ -42,8 +41,7 @@
          using an application configuration file.</para
       >
       <para
-        >Use the <see
-         cref="M:System.ServiceModel.Channels.MessageEncodingBindingElementImporter.System.ServiceModel.Description.IWsdlImportExtension.BeforeImport(System.Web.Services.Description.ServiceDescriptionCollection,System.Xml.Schema.XmlSchemaSet,System.Collections.Generic.ICollection{System.Xml.XmlElement})" />
+        >Use the <see cref="M:System.ServiceModel.Channels.MessageEncodingBindingElementImporter.System.ServiceModel.Description.IWsdlImportExtension.BeforeImport(System.Web.Services.Description.ServiceDescriptionCollection,System.Xml.Schema.XmlSchemaSet,System.Collections.Generic.ICollection{System.Xml.XmlElement})" />
 
         
 
@@ -72,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.MessageEncodingBindingElementImporter" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageEncodingBindingElementImporter" />
 
             
 
@@ -109,24 +106,30 @@
           <para>Defines a method that can import custom policy assertions for message encoding and that adds the binding elements that implement the policy.</para>
         </summary>
         <param name="importer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.MetadataImporter" />
+          The <see cref="T:System.ServiceModel.Description.MetadataImporter" />
 
           
 
            that imports the metadata information.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+          The <see cref="T:System.ServiceModel.Description.PolicyConversionContext" />
 
           
 
@@ -165,8 +168,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used to inspect, modify and interpret the policy and WSDL before the <see
-             cref="T:System.ServiceModel.Channels.MessageEncodingBindingElementImporter" />
+            >This method is used to inspect, modify and interpret the policy and WSDL before the <see cref="T:System.ServiceModel.Channels.MessageEncodingBindingElementImporter" />
 
             
 
@@ -178,46 +180,53 @@
           <para>Called prior to importing the metadata documents associated with the encoding.</para>
         </summary>
         <param name="wsdlDocuments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.ServiceDescriptionCollection" />
+          The <see cref="T:System.Web.Services.Description.ServiceDescriptionCollection" />
 
           
 
             that describes the services.</param
         >
         <param name="xmlSchemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Schema.XmlSchemaSet" />
+          The <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
           
 
-           that contains the schema for the <paramref
-           name="wsdlDocuments" />
+           that contains the schema for the <paramref name="wsdlDocuments" />
 
           
 
           .</param
         >
         <param name="policy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.Generic.ICollection`1" />
+          The <see cref="T:System.Collections.Generic.ICollection`1" />
 
           
 
-           of type <see
-           cref="T:System.Xml.XmlElement" />
+           of type <see cref="T:System.Xml.XmlElement" />
 
           
 
@@ -255,14 +264,22 @@
           <para>Called when importing a contract.</para>
         </summary>
         <param name="importer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The contract importer.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -300,24 +317,30 @@
           <para>Maps the custom WSDL extensions for encoding messages to the service description.</para>
         </summary>
         <param name="importer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.WsdlImporter" />
+          The <see cref="T:System.ServiceModel.Description.WsdlImporter" />
 
           
 
            that imports the WSDL extensions.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.WsdlEndpointConversionContext" />
+          The <see cref="T:System.ServiceModel.Description.WsdlEndpointConversionContext" />
 
           
 

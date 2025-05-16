@@ -34,18 +34,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When <see
-         cref="T:System.Runtime.Serialization.Formatters.SoapMessage" />
+        >When <see cref="T:System.Runtime.Serialization.Formatters.SoapMessage" />
 
         
 
-         is the root of a serialization graph, SOAP is produced in RPC (Remote Procedure Call) format and a <see
-         cref="T:System.Runtime.Serialization.Formatters.SoapMessage" />
+         is the root of a serialization graph, SOAP is produced in RPC (Remote Procedure Call) format and a <see cref="T:System.Runtime.Serialization.Formatters.SoapMessage" />
 
         
 
-         object is used to specify the method call parameter types. The <see
-         cref="P:System.Runtime.Serialization.Formatters.Soap.SoapFormatter.TopObject" />
+         object is used to specify the method call parameter types. The <see cref="P:System.Runtime.Serialization.Formatters.Soap.SoapFormatter.TopObject" />
 
         
 
@@ -77,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.Formatters.SoapMessage" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Formatters.SoapMessage" />
 
             
 
@@ -174,13 +170,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is reserved. Use the <see
-             cref="P:System.Runtime.Serialization.Formatters.SoapMessage.ParamNames" />
+            >This property is reserved. Use the <see cref="P:System.Runtime.Serialization.Formatters.SoapMessage.ParamNames" />
 
             
 
-             and/or <see
-             cref="P:System.Runtime.Serialization.Formatters.SoapMessage.ParamValues" />
+             and/or <see cref="P:System.Runtime.Serialization.Formatters.SoapMessage.ParamValues" />
 
             
 

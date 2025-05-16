@@ -15,13 +15,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.TitleFormat" />
+        >The <see cref="T:System.Web.UI.WebControls.TitleFormat" />
 
         
 
-         enumeration represents the different title formats for the <see
-         cref="T:System.Web.UI.WebControls.Calendar" />
+         enumeration represents the different title formats for the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
         
 
@@ -31,8 +29,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the title format for the displayed month in the <see
-         cref="T:System.Web.UI.WebControls.Calendar" />
+        >Specifies the title format for the displayed month in the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
         
 

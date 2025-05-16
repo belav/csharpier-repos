@@ -17,14 +17,11 @@
     <name xmlns="mm">dos</name>
     <bval xmlns="mm">false</bval>
   </part>
-  <ta xsi:type="TB">
-    <xx>1</xx>
+  <ta xsi:type="TB"><xx>1</xx>
 
     
 
-    AABB<yy
-    >2</yy>
-  </ta>
+    AABB<yy>2</yy></ta>
   <parts>
     <UnTestPart>
       <name xmlns="mm">un</name>
@@ -265,13 +262,11 @@
 
   
 
-  aa<xmltext
-  >33</xmltext>
+  aa<xmltext>33</xmltext>
 
   
 
-  bb<xmltext
-  >776</xmltext>
+  bb<xmltext>776</xmltext>
   <special>
     <data>
       <one>1</one>

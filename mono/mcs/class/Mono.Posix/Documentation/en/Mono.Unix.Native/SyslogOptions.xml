@@ -24,8 +24,7 @@
   <Docs>
     <summary>System logging options.</summary>
     <remarks
-      >Possible <see
-       cref="M:Mono.Unix.Native.Syscall.openlog" />
+      >Possible <see cref="M:Mono.Unix.Native.Syscall.openlog" />
       <paramref name="option" />
 
       
@@ -52,14 +51,12 @@
       </ReturnValue>
       <Docs>
         <summary
-          >If <see
-           cref="M:Mono.Unix.Native.Syscall.syslog" />
+          >If <see cref="M:Mono.Unix.Native.Syscall.syslog" />
 
           
 
           
-        cannot pass the message to <c
-          >syslogd</c>
+        cannot pass the message to <c>syslogd</c>
 
           
 
@@ -85,8 +82,7 @@
       </ReturnValue>
       <Docs>
         <summary
-          >Open the connection to <c
-          >syslogd</c>
+          >Open the connection to <c>syslogd</c>
 
           
 
@@ -133,8 +129,7 @@
       </ReturnValue>
       <Docs>
         <summary
-          >Open the connection to <c
-          >syslogd</c>
+          >Open the connection to <c>syslogd</c>
 
           
 

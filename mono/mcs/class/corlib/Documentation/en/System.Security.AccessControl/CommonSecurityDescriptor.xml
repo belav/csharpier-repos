@@ -56,8 +56,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the underlying security descriptor from which the new <see
-             cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+            >If the underlying security descriptor from which the new <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
             
 
@@ -68,13 +67,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
             
 
-             class from the specified <see
-             cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+             class from the specified <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
             
 
@@ -82,31 +79,41 @@
           >
         </summary>
         <param name="isContainer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the new security descriptor is associated with a container object.</param
         >
         <param name="isDS">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the new security descriptor is associated with a directory object.</param
         >
         <param name="rawSecurityDescriptor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+          The <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
           
 
-           object from which to create the new <see
-           cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+           object from which to create the new <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
           
 
@@ -138,8 +145,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the underlying security descriptor from which the new <see
-             cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+            >If the underlying security descriptor from which the new <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
             
 
@@ -150,8 +156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
             
 
@@ -159,26 +164,37 @@
           >
         </summary>
         <param name="isContainer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the new security descriptor is associated with a container object.</param
         >
         <param name="isDS">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the new security descriptor is associated with a directory object.</param
         >
         <param name="sddlForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The SDDL string from which to create the new <see
-           cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+          The SDDL string from which to create the new <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
           
 
@@ -211,8 +227,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the underlying security descriptor from which the new <see
-             cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+            >If the underlying security descriptor from which the new <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
             
 
@@ -223,8 +238,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
             
 
@@ -232,38 +246,52 @@
           >
         </summary>
         <param name="isContainer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the new security descriptor is associated with a container object.</param
         >
         <param name="isDS">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the new security descriptor is associated with a directory object.</param
         >
         <param name="binaryForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array of byte values from which to create the new <see
-           cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+          The array of byte values from which to create the new <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
           
 
            object.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The offset in the <paramref
-           name="binaryForm" />
+          The offset in the <paramref name="binaryForm" />
 
           
 
@@ -299,8 +327,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the underlying security descriptor from which the new <see
-             cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+            >If the underlying security descriptor from which the new <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
             
 
@@ -311,8 +338,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
             
 
@@ -320,74 +346,97 @@
           >
         </summary>
         <param name="isContainer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the new security descriptor is associated with a container object.</param
         >
         <param name="isDS">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the new security descriptor is associated with a directory object.</param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Flags that specify behavior of the new <see
-           cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+          Flags that specify behavior of the new <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
           
 
            object.</param
         >
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The owner for the new <see
-           cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+          The owner for the new <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
           
 
            object.</param
         >
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The primary group for the new <see
-           cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+          The primary group for the new <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
           
 
            object.</param
         >
         <param name="systemAcl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The System Access Control List (SACL) for the new <see
-           cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+          The System Access Control List (SACL) for the new <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
           
 
            object.</param
         >
         <param name="discretionaryAcl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The Discretionary Access Control List (DACL) for the new <see
-           cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+          The Discretionary Access Control List (DACL) for the new <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
           
 
@@ -419,8 +468,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets values that specify behavior of the <see
-             cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+            >Gets values that specify behavior of the <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
             
 
@@ -457,8 +505,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the discretionary access control list (DACL) for this <see
-             cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+            >Gets or sets the discretionary access control list (DACL) for this <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
             
 
@@ -491,8 +538,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the primary group for this <see
-             cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+            >Gets or sets the primary group for this <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
             
 
@@ -519,8 +565,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a Boolean value that specifies whether the object associated with this <see
-             cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+            >Gets a Boolean value that specifies whether the object associated with this <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
             
 
@@ -550,8 +595,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a Boolean value that specifies whether the Discretionary Access Control List (DACL) associated with this <see
-             cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+            >Gets a Boolean value that specifies whether the Discretionary Access Control List (DACL) associated with this <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
             
 
@@ -578,8 +622,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a Boolean value that specifies whether the object associated with this <see
-             cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+            >Gets a Boolean value that specifies whether the object associated with this <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
             
 
@@ -606,8 +649,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a Boolean value that specifies whether the System Access Control List (SACL) associated with this <see
-             cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+            >Gets a Boolean value that specifies whether the System Access Control List (SACL) associated with this <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
             
 
@@ -640,8 +682,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the owner of the object associated with this <see
-             cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+            >Gets or sets the owner of the object associated with this <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
             
 
@@ -679,8 +720,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all access rules for the specified security identifier from the Discretionary Access Control List (DACL) associated with this <see
-             cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+            >Removes all access rules for the specified security identifier from the Discretionary Access Control List (DACL) associated with this <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
             
 
@@ -688,7 +728,11 @@
           >
         </summary>
         <param name="sid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -722,8 +766,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all audit rules for the specified security identifier from the System Access Control List (SACL) associated with this <see
-             cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+            >Removes all audit rules for the specified security identifier from the System Access Control List (SACL) associated with this <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
             
 
@@ -731,7 +774,11 @@
           >
         </summary>
         <param name="sid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -766,8 +813,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the inheritance protection for the Discretionary Access Control List (DACL) associated with this <see
-             cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+            >Sets the inheritance protection for the Discretionary Access Control List (DACL) associated with this <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
             
 
@@ -775,14 +821,22 @@
           >
         </summary>
         <param name="isProtected">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to protect the DACL from inheritance.</param
         >
         <param name="preserveInheritance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -817,8 +871,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the inheritance protection for the System Access Control List (SACL) associated with this <see
-             cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+            >Sets the inheritance protection for the System Access Control List (SACL) associated with this <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
             
 
@@ -826,14 +879,22 @@
           >
         </summary>
         <param name="isProtected">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to protect the SACL from inheritance.</param
         >
         <param name="preserveInheritance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -865,8 +926,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the System Access Control List (SACL) for this <see
-             cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+            >Gets or sets the System Access Control List (SACL) for this <see cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
 
             
 

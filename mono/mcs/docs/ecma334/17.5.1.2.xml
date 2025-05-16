@@ -3,12 +3,13 @@
   <paragraph>A parameter declared with a ref modifier is a reference parameter. Unlike a value parameter, a reference parameter does not create a new storage location. Instead, a reference parameter represents the same storage location as the variable given as the argument in the method invocation. </paragraph>
   <paragraph
     >When a formal parameter is a reference parameter, the corresponding argument in a method invocation must consist of the keyword ref followed by a <non_terminal
-     where="12.4">variable-reference</non_terminal>
+      where="12.4"
+      >variable-reference</non_terminal
+    >
 
     
 
-     (<hyperlink
-    >12.3.3</hyperlink>
+     (<hyperlink>12.3.3</hyperlink>
 
     
 
@@ -17,8 +18,7 @@
   <paragraph>Within a method, a reference parameter is always considered definitely assigned. </paragraph>
   <paragraph>
     <example
-      >[Example: The example <code_example
-      >
+      >[Example: The example <code_example>
         <![CDATA[
 using System;  
 class Test  
@@ -39,8 +39,7 @@ class Test
 
       
 
-      produces the output <code_example
-      >
+      produces the output <code_example>
         <![CDATA[
 i = 2, j = 1  
 ]]>
@@ -52,9 +51,7 @@ i = 2, j = 1
   </paragraph>
   <paragraph
     >In a method that takes reference parameters, it is possible for multiple names to represent the same storage location. <example
-
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 class A  
 {  

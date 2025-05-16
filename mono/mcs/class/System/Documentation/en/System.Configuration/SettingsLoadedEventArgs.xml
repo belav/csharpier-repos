@@ -19,13 +19,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Configuration.SettingsLoadedEventArgs" />
+        >The <see cref="T:System.Configuration.SettingsLoadedEventArgs" />
 
         
 
-         class provides data for the <see
-         cref="E:System.Configuration.ApplicationSettingsBase.SettingsLoaded" />
+         class provides data for the <see cref="E:System.Configuration.ApplicationSettingsBase.SettingsLoaded" />
 
         
 
@@ -35,8 +33,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Configuration.ApplicationSettingsBase.SettingsLoaded" />
+        >Provides data for the <see cref="E:System.Configuration.ApplicationSettingsBase.SettingsLoaded" />
 
         
 
@@ -68,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.SettingsLoadedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsLoadedEventArgs" />
 
             
 
@@ -77,12 +73,15 @@
           >
         </summary>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsProvider" />
+          A <see cref="T:System.Configuration.SettingsProvider" />
 
           
 

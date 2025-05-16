@@ -23,54 +23,45 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+        >Use the <see cref="T:System.ComponentModel.DataObjectFieldAttribute" />
 
         
 
-         attribute to provide information about the schema of the underlying data. Design-time classes such as the <see
-         cref="T:System.Web.UI.Design.WebControls.ObjectDataSourceDesigner" />
+         attribute to provide information about the schema of the underlying data. Design-time classes such as the <see cref="T:System.Web.UI.Design.WebControls.ObjectDataSourceDesigner" />
 
         
 
-         class use the <see
-         cref="T:System.ComponentModel.DataObjectAttribute" />
+         class use the <see cref="T:System.ComponentModel.DataObjectAttribute" />
 
         
 
          attribute to set properties at design-time based on the exposed schema.</para
       >
       <para
-        >You apply the <see
-         cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+        >You apply the <see cref="T:System.ComponentModel.DataObjectFieldAttribute" />
 
         
 
-         attribute to members of the data item objects that are returned by the Select method of an object marked with the <see
-         cref="T:System.ComponentModel.DataObjectAttribute" />
+         attribute to members of the data item objects that are returned by the Select method of an object marked with the <see cref="T:System.ComponentModel.DataObjectAttribute" />
 
         
 
-         attribute. In the following example, the NorthwindData class is marked with the <see
-         cref="T:System.ComponentModel.DataObjectAttribute" />
+         attribute. In the following example, the NorthwindData class is marked with the <see cref="T:System.ComponentModel.DataObjectAttribute" />
 
         
 
-         attribute, and returns an <see
-         cref="T:System.Collections.IEnumerable" />
+         attribute, and returns an <see cref="T:System.Collections.IEnumerable" />
 
         
 
-         object containing NorthwindEmployee objects from the GetAllEmployees method. Fields in the NorthwindEmployee class are marked with the <see
-         cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+         object containing NorthwindEmployee objects from the GetAllEmployees method. Fields in the NorthwindEmployee class are marked with the <see cref="T:System.ComponentModel.DataObjectFieldAttribute" />
 
         
 
          attribute to indicate they represent data fields in the underlying data source.</para
       >
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -104,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataObjectFieldAttribute" />
 
             
 
@@ -113,7 +103,11 @@
           >
         </summary>
         <param name="primaryKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -144,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataObjectFieldAttribute" />
 
             
 
@@ -153,14 +146,22 @@
           >
         </summary>
         <param name="primaryKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to indicate that the field is in the primary key of the data row; otherwise, false.</param
         >
         <param name="isIdentity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -192,8 +193,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataObjectFieldAttribute" />
 
             
 
@@ -201,21 +201,33 @@
           >
         </summary>
         <param name="primaryKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to indicate that the field is in the primary key of the data row; otherwise, false.</param
         >
         <param name="isIdentity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to indicate that the field is an identity field that uniquely identifies the data row; otherwise, false.</param
         >
         <param name="isNullable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -248,8 +260,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataObjectFieldAttribute" />
 
             
 
@@ -257,28 +268,44 @@
           >
         </summary>
         <param name="primaryKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to indicate that the field is in the primary key of the data row; otherwise, false.</param
         >
         <param name="isIdentity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to indicate that the field is an identity field that uniquely identifies the data row; otherwise, false.</param
         >
         <param name="isNullable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to indicate that the field can be null in the data store; otherwise, false.</param
         >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -307,8 +334,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method determines whether this instance of <see
-             cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+            >This method determines whether this instance of <see cref="T:System.ComponentModel.DataObjectFieldAttribute" />
 
             
 
@@ -322,8 +348,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if this instance is the same as the instance specified by the <paramref
-             name="obj" />
+            >true if this instance is the same as the instance specified by the <paramref name="obj" />
 
             
 
@@ -331,12 +356,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object to compare with this instance of <see
-           cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+          An object to compare with this instance of <see cref="T:System.ComponentModel.DataObjectFieldAttribute" />
 
           
 
@@ -387,26 +415,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.ComponentModel.DataObjectFieldAttribute.IsIdentity" />
+            >Set the <see cref="P:System.ComponentModel.DataObjectFieldAttribute.IsIdentity" />
 
             
 
-             property to true when the <see
-             cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+             property to true when the <see cref="T:System.ComponentModel.DataObjectFieldAttribute" />
 
             
 
              attribute is applied to a property that represents an identity field in the underlying data store. Typically an identity field is generated by the data store and uniquely identifies an entity in the data store.</para
           >
           <para
-            >Set the <see
-             cref="P:System.ComponentModel.DataObjectFieldAttribute.IsIdentity" />
+            >Set the <see cref="P:System.ComponentModel.DataObjectFieldAttribute.IsIdentity" />
 
             
 
-             property with one of the <see
-             cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+             property with one of the <see cref="T:System.ComponentModel.DataObjectFieldAttribute" />
 
             
 
@@ -435,26 +459,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.ComponentModel.DataObjectFieldAttribute.IsNullable" />
+            >Set the <see cref="P:System.ComponentModel.DataObjectFieldAttribute.IsNullable" />
 
             
 
-             property to true when then <see
-             cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+             property to true when then <see cref="T:System.ComponentModel.DataObjectFieldAttribute" />
 
             
 
              attribute is applied to a property that represents a field in the underlying data store that can be set to null. The value that represents null in the data store may be different from null in the programming language.</para
           >
           <para
-            >Set the <see
-             cref="P:System.ComponentModel.DataObjectFieldAttribute.IsNullable" />
+            >Set the <see cref="P:System.ComponentModel.DataObjectFieldAttribute.IsNullable" />
 
             
 
-             property with one of the <see
-             cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+             property with one of the <see cref="T:System.ComponentModel.DataObjectFieldAttribute" />
 
             
 
@@ -483,26 +503,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.ComponentModel.DataObjectFieldAttribute.Length" />
+            >Set the <see cref="P:System.ComponentModel.DataObjectFieldAttribute.Length" />
 
             
 
-             property to the length, in bytes, of the data from the underlying data store. If the <see
-             cref="P:System.ComponentModel.DataObjectFieldAttribute.Length" />
+             property to the length, in bytes, of the data from the underlying data store. If the <see cref="P:System.ComponentModel.DataObjectFieldAttribute.Length" />
 
             
 
              property is not set, it will be -1.</para
           >
           <para
-            >Set the <see
-             cref="P:System.ComponentModel.DataObjectFieldAttribute.Length" />
+            >Set the <see cref="P:System.ComponentModel.DataObjectFieldAttribute.Length" />
 
             
 
-             property with one of the <see
-             cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+             property with one of the <see cref="T:System.ComponentModel.DataObjectFieldAttribute" />
 
             
 
@@ -531,26 +547,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.ComponentModel.DataObjectFieldAttribute.PrimaryKey" />
+            >Set the <see cref="P:System.ComponentModel.DataObjectFieldAttribute.PrimaryKey" />
 
             
 
-             property to true when the <see
-             cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+             property to true when the <see cref="T:System.ComponentModel.DataObjectFieldAttribute" />
 
             
 
              attribute is applied to a property that represents the primary key value of the underlying data. The primary key is typically used by the underlying data store to uniquely identify an entity in the data store, and often is, but is not required to be, a data store identity field.</para
           >
           <para
-            >Set the <see
-             cref="P:System.ComponentModel.DataObjectFieldAttribute.PrimaryKey" />
+            >Set the <see cref="P:System.ComponentModel.DataObjectFieldAttribute.PrimaryKey" />
 
             
 
-             property with one of the <see
-             cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+             property with one of the <see cref="T:System.ComponentModel.DataObjectFieldAttribute" />
 
             
 

@@ -21,49 +21,41 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You get a request context from an <see
-         cref="T:System.ServiceModel.Channels.IReplyChannel" />
+        >You get a request context from an <see cref="T:System.ServiceModel.Channels.IReplyChannel" />
 
         
 
-        . Each <see
-         cref="T:System.ServiceModel.Channels.RequestContext" />
+        . Each <see cref="T:System.ServiceModel.Channels.RequestContext" />
 
         
 
          encapsulates the information required to reply to the request, so that you do not have to block on the channel when waiting for each request message to receive a reply.</para
       >
       <para
-        >In the request/reply model, the <see
-         cref="T:System.ServiceModel.Channels.RequestContext" />
+        >In the request/reply model, the <see cref="T:System.ServiceModel.Channels.RequestContext" />
 
         
 
-         object is the link between the request that comes in and the reply that goes out. When the server receives a request, it provides a <see
-         cref="T:System.ServiceModel.Channels.RequestContext" />
+         object is the link between the request that comes in and the reply that goes out. When the server receives a request, it provides a <see cref="T:System.ServiceModel.Channels.RequestContext" />
 
         
 
-         instance that represents the request to the channel. The request context contains the original request message among other useful properties. This request context is then stashed inside the <see
-         cref="T:System.ServiceModel.OperationContext" />
+         instance that represents the request to the channel. The request context contains the original request message among other useful properties. This request context is then stashed inside the <see cref="T:System.ServiceModel.OperationContext" />
 
         
 
-         for retrieval by your service. You typically use the <see
-         cref="P:System.ServiceModel.OperationContext.Current" />
+         for retrieval by your service. You typically use the <see cref="P:System.ServiceModel.OperationContext.Current" />
 
         
 
          property to access the request of the current operation. </para
       >
       <para
-        >The value of the <see
-         cref="T:System.ServiceModel.Channels.RequestContext" />
+        >The value of the <see cref="T:System.ServiceModel.Channels.RequestContext" />
 
         
 
-         can be null. Because the role of the request context is to link requests to replies, it does not make sense to have a request context when you do not have a reply, and so in this case the context is set to null. For a one-way operation on top of the request/reply model, the server receives requests but does not send back a response to the client. So if the <see
-         cref="T:System.ServiceModel.Channels.RequestContext" />
+         can be null. Because the role of the request context is to link requests to replies, it does not make sense to have a request context when you do not have a reply, and so in this case the context is set to null. For a one-way operation on top of the request/reply model, the server receives requests but does not send back a response to the client. So if the <see cref="T:System.ServiceModel.Channels.RequestContext" />
 
         
 
@@ -76,8 +68,7 @@
         </item>
         <item>
           <para
-            >Avoid destructors: they cause the compiler to auto-generate <see
-             cref="T:System.IDisposable" />
+            >Avoid destructors: they cause the compiler to auto-generate <see cref="T:System.IDisposable" />
 
             
 
@@ -86,8 +77,7 @@
         </item>
         <item>
           <para
-            >Avoid non-reference members: they can cause the compiler to auto-generate <see
-             cref="T:System.IDisposable" />
+            >Avoid non-reference members: they can cause the compiler to auto-generate <see cref="T:System.IDisposable" />
 
             
 
@@ -96,13 +86,11 @@
         </item>
         <item>
           <para
-            >Avoid finalizers; but if you include one, you should suppress the build warning and call <see
-             cref="M:System.GC.SuppressFinalize(System.Object)" />
+            >Avoid finalizers; but if you include one, you should suppress the build warning and call <see cref="M:System.GC.SuppressFinalize(System.Object)" />
 
             
 
-             and the finalizer itself from (On)(Begin)Close (and/or OnAbort) to emulate what would have been the auto-generated <see
-             cref="T:System.IDisposable" />
+             and the finalizer itself from (On)(Begin)Close (and/or OnAbort) to emulate what would have been the auto-generated <see cref="T:System.IDisposable" />
 
             
 
@@ -133,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.RequestContext" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.RequestContext" />
 
             
 
@@ -190,13 +177,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the asynchronous <see
-             cref="M:System.ServiceModel.Channels.RequestContext.BeginReply" />
+            >Use the asynchronous <see cref="M:System.ServiceModel.Channels.RequestContext.BeginReply" />
 
             
 
-             method when the application processing must continue without waiting. Use one of the synchronous <see
-             cref="M:System.ServiceModel.Channels.RequestContext.Reply" />
+             method when the application processing must continue without waiting. Use one of the synchronous <see cref="M:System.ServiceModel.Channels.RequestContext.Reply" />
 
             
 
@@ -211,8 +196,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IAsyncResult" />
+            >The <see cref="T:System.IAsyncResult" />
 
             
 
@@ -220,31 +204,41 @@
           >
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The incoming <see
-           cref="T:System.ServiceModel.Channels.Message" />
+          The incoming <see cref="T:System.ServiceModel.Channels.Message" />
 
           
 
            that contains the request.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.AsyncCallback" />
+          The <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that receives the notification of the asynchronous reply operation completion.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -278,16 +272,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the asynchronous <see
-             cref="M:System.ServiceModel.Channels.RequestContext.BeginReply" />
+            >Use the asynchronous <see cref="M:System.ServiceModel.Channels.RequestContext.BeginReply" />
 
             
 
              method to allow the application processing to continue without waiting for the request to complete. </para
           >
           <para
-            >Use one of the synchronous <see
-             cref="M:System.ServiceModel.Channels.RequestContext.Reply" />
+            >Use one of the synchronous <see cref="M:System.ServiceModel.Channels.RequestContext.Reply" />
 
             
 
@@ -301,8 +293,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IAsyncResult" />
+            >The <see cref="T:System.IAsyncResult" />
 
             
 
@@ -310,43 +301,56 @@
           >
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The incoming <see
-           cref="T:System.ServiceModel.Channels.Message" />
+          The incoming <see cref="T:System.ServiceModel.Channels.Message" />
 
           
 
            that contains the request.</param
         >
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Timespan" />
+          The <see cref="T:System.Timespan" />
 
           
 
            that specifies the interval of time to wait for the reply to an available request.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.AsyncCallback" />
+          The <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that receives the notification of the asynchronous reply operation completion.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -399,12 +403,15 @@
           <para>When overridden in a derived class, closes the operation that is replying to the request context associated with the current context within a specified interval of time.</para>
         </summary>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Timespan" />
+          The <see cref="T:System.Timespan" />
 
           
 
@@ -435,7 +442,11 @@
           <para>Releases resources associated with the context.</para>
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -466,17 +477,19 @@
           <para>When overridden in a derived class, completes an asynchronous operation to reply to a request message.</para>
         </summary>
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IAsyncResult" />
+          The <see cref="T:System.IAsyncResult" />
 
           
 
-           returned by a call to one of the <see
-           cref="Overload:System.ServiceModel.Channels.RequestContext.BeginReply" />
+           returned by a call to one of the <see cref="Overload:System.ServiceModel.Channels.RequestContext.BeginReply" />
 
           
 
@@ -507,21 +520,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="M:System.ServiceModel.Channels.RequestContext.Reply" />
+            >Use <see cref="M:System.ServiceModel.Channels.RequestContext.Reply" />
 
             
 
-             when it is acceptable for the current thread to be blocked while it replies to the request message. The thread is blocked up to the specified <paramref
-             name="timeout" />
+             when it is acceptable for the current thread to be blocked while it replies to the request message. The thread is blocked up to the specified <paramref name="timeout" />
 
             
 
             . </para
           >
           <para
-            >If the application processing must continue without waiting for the reply to complete, use the asynchronous <see
-             cref="M:System.ServiceModel.Channels.RequestContext.BeginReply" />
+            >If the application processing must continue without waiting for the reply to complete, use the asynchronous <see cref="M:System.ServiceModel.Channels.RequestContext.BeginReply" />
 
             
 
@@ -533,12 +543,15 @@
           <para>When overridden in a derived class, replies to a request message.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The incoming <see
-           cref="T:System.ServiceModel.Channels.Message" />
+          The incoming <see cref="T:System.ServiceModel.Channels.Message" />
 
           
 
@@ -570,21 +583,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="M:System.ServiceModel.Channels.RequestContext.Reply" />
+            >Use <see cref="M:System.ServiceModel.Channels.RequestContext.Reply" />
 
             
 
-             when it is acceptable for the current thread to be blocked while it replies to the request message. The thread is blocked up to the specified <paramref
-             name="timeout" />
+             when it is acceptable for the current thread to be blocked while it replies to the request message. The thread is blocked up to the specified <paramref name="timeout" />
 
             
 
             . </para
           >
           <para
-            >If the application processing must continue without waiting for the reply to complete, use the asynchronous <see
-             cref="M:System.ServiceModel.Channels.RequestContext.BeginReply" />
+            >If the application processing must continue without waiting for the reply to complete, use the asynchronous <see cref="M:System.ServiceModel.Channels.RequestContext.BeginReply" />
 
             
 
@@ -596,24 +606,30 @@
           <para>When overridden in a derived class, replies to a request message within a specified interval of time.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The incoming <see
-           cref="T:System.ServiceModel.Channels.Message" />
+          The incoming <see cref="T:System.ServiceModel.Channels.Message" />
 
           
 
            that contains the request.</param
         >
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Timespan" />
+          The <see cref="T:System.Timespan" />
 
           
 

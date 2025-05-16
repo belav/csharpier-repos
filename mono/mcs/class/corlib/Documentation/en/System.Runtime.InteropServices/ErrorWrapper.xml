@@ -26,26 +26,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >By default, <see
-         cref="T:System.Object" />
+        >By default, <see cref="T:System.Object" />
 
         
 
          type arguments are marshaled as a VARIANT type, where the object type determines the VARTYPE value of the VARIANT.</para
       >
       <para
-        >The <see
-         cref="T:System.Runtime.InteropServices.ErrorWrapper" />
+        >The <see cref="T:System.Runtime.InteropServices.ErrorWrapper" />
 
         
 
-         type must to be passed as an <see
-         cref="T:System.Object" />
+         type must to be passed as an <see cref="T:System.Object" />
 
         
 
-         type to be marshaled as a VARIANT of type VT_ERROR, otherwise the <see
-         cref="T:System.Runtime.InteropServices.ErrorWrapper" />
+         type to be marshaled as a VARIANT of type VT_ERROR, otherwise the <see cref="T:System.Runtime.InteropServices.ErrorWrapper" />
 
         
 
@@ -150,8 +146,7 @@
         </item>
       </list>
       <para
-        >Note that <see
-         cref="T:System.Runtime.InteropServices.ErrorWrapper" />
+        >Note that <see cref="T:System.Runtime.InteropServices.ErrorWrapper" />
 
         
 
@@ -186,8 +181,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.ErrorWrapper" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.ErrorWrapper" />
 
             
 
@@ -195,7 +189,11 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -224,8 +222,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.ErrorWrapper" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.ErrorWrapper" />
 
             
 
@@ -233,7 +230,11 @@
           >
         </summary>
         <param name="errorCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -262,8 +263,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.ErrorWrapper" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.ErrorWrapper" />
 
             
 
@@ -271,7 +271,11 @@
           >
         </summary>
         <param name="errorCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

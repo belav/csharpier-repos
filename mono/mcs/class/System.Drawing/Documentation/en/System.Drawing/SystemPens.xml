@@ -18,13 +18,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each property of the <see
-         cref="T:System.Drawing.SystemPens" />
+        >Each property of the <see cref="T:System.Drawing.SystemPens" />
 
         
 
-         class is a <see
-         cref="T:System.Drawing.Pen" />
+         class is a <see cref="T:System.Drawing.Pen" />
 
         
 
@@ -51,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -79,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -104,8 +100,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -139,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -164,8 +158,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -195,8 +188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -226,8 +218,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -248,8 +239,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -280,8 +270,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -312,8 +301,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -344,8 +332,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -376,8 +363,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -405,8 +391,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -434,8 +419,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -461,13 +445,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Drawing.Pen" />
+            >Creates a <see cref="T:System.Drawing.Pen" />
 
             
 
-             from the specified <see
-             cref="T:System.Drawing.Color" />
+             from the specified <see cref="T:System.Drawing.Color" />
 
             
 
@@ -477,8 +459,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Pen" />
+            >The <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -486,17 +467,19 @@
           >
         </returns>
         <param name="c">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
-           for the new <see
-           cref="T:System.Drawing.Pen" />
+           for the new <see cref="T:System.Drawing.Pen" />
 
           
 
@@ -526,8 +509,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -554,8 +536,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -579,8 +560,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -608,8 +588,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -640,8 +619,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -669,8 +647,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -697,8 +674,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -725,8 +701,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -750,8 +725,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -779,8 +753,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -801,8 +774,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -830,8 +802,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -855,8 +826,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -883,8 +853,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -905,8 +874,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -934,8 +902,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -959,8 +926,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -984,8 +950,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1010,8 +975,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Pen" />
+            >Gets a <see cref="T:System.Drawing.Pen" />
 
             
 

@@ -35,23 +35,19 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Enumerators allow only reading the data in the collection. Enumerators cannot be used to modify the underlying collection.</para>
       <para
-        >Initially, the enumerator is positioned before the first element in the collection. The <see
-         cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Reset" />
+        >Initially, the enumerator is positioned before the first element in the collection. The <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Reset" />
 
         
 
-         method also brings the enumerator back to this position. At this position, calling the <see
-         cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
+         method also brings the enumerator back to this position. At this position, calling the <see cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
 
         
 
-         property throws an exception. Therefore, you must call the <see
-         cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+         property throws an exception. Therefore, you must call the <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
 
         
 
-         method to advance the enumerator to the first element of the collection before reading the value of the <see
-         cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
+         method to advance the enumerator to the first element of the collection before reading the value of the <see cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
 
         
 
@@ -62,89 +58,73 @@
 
         
 
-         returns the same object until either <see
-         cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+         returns the same object until either <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
 
         
 
-         or <see
-         cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Reset" />
+         or <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Reset" />
 
         
 
-         is called. <see
-         cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+         is called. <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
 
         
 
-         sets <see
-         cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
+         sets <see cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
 
         
 
          to the next element.</para
       >
       <para
-        >After the end of the collection is passed, the enumerator is positioned after the last element in the collection, and calling <see
-         cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+        >After the end of the collection is passed, the enumerator is positioned after the last element in the collection, and calling <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
 
         
 
-         returns false. If the last call to <see
-         cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+         returns false. If the last call to <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
 
         
 
-         returned false, calling <see
-         cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
+         returned false, calling <see cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
 
         
 
-         throws an exception. To reset <see
-         cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
+         throws an exception. To reset <see cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
 
         
 
-         to the first element of the collection, call <see
-         cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Reset" />
+         to the first element of the collection, call <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Reset" />
 
         
 
-         followed by a call to <see
-         cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+         followed by a call to <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
 
         
 
         .</para
       >
       <para
-        >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see
-         cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+        >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
 
         
 
-         or <see
-         cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Reset" />
+         or <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Reset" />
 
         
 
-         throws an <see
-         cref="T:System.InvalidOperationException" />
+         throws an <see cref="T:System.InvalidOperationException" />
 
         
 
-        . If the collection is modified between calling <see
-         cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+        . If the collection is modified between calling <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
 
         
 
-         and <see
-         cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
+         and <see cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
 
         
 
-        , <see
-         cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
+        , <see cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
 
         
 
@@ -155,13 +135,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the enumerator for <see
-         cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+        >Represents the enumerator for <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
 
         
 
-         objects in a <see
-         cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryCollection" />
+         objects in a <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryCollection" />
 
         
 
@@ -193,31 +171,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the enumerator is created, it does not point to an object, so the <see
-             cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
+            >When the enumerator is created, it does not point to an object, so the <see cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
 
             
 
-             property is not valid and will throw an exception if it is accessed. You must first call the <see
-             cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+             property is not valid and will throw an exception if it is accessed. You must first call the <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
 
             
 
              method to position the cursor at the first object in the collection.</para
           >
           <para
-            >Getting the <see
-             cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
+            >Getting the <see cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
 
             
 
-             property multiple times with no intervening calls to <see
-             cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+             property multiple times with no intervening calls to <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
 
             
 
-             will return the same <see
-             cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+             will return the same <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
 
             
 
@@ -250,8 +223,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+            >The <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
 
             
 
@@ -262,26 +234,22 @@
 
             
 
-             returns true until it has reached the end of the collection. It then returns false for each successive call. However, once <see
-             cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+             returns true until it has reached the end of the collection. It then returns false for each successive call. However, once <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
 
             
 
-             has returned false, accessing the <see
-             cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
+             has returned false, accessing the <see cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
 
             
 
              property throws an exception.</para
           >
           <para
-            >Upon creation, an enumerator is positioned before the first <see
-             cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+            >Upon creation, an enumerator is positioned before the first <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
 
             
 
-             object in the collection, and the first call to <see
-             cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+             object in the collection, and the first call to <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
 
             
 
@@ -319,18 +287,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An enumerator moves in a forward-only direction. Use this method to return to the beginning of the collection. </para>
           <para
-            >The <see
-             cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Reset" />
+            >The <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Reset" />
 
             
 
-             method positions the cursor at the first object in the collection. After calling <see
-             cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Reset" />
+             method positions the cursor at the first object in the collection. After calling <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Reset" />
 
             
 
-            , you do not need to call <see
-             cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+            , you do not need to call <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
 
             
 
@@ -366,8 +331,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not call this method; use the <see
-             cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
+            >Do not call this method; use the <see cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
 
             
 

@@ -50,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension" />
 
             
 
@@ -86,8 +85,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor if the information to create an extension is already in an <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >Use this constructor if the information to create an extension is already in an <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -97,13 +95,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension" />
 
             
 
-             class using an <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+             class using an <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -111,14 +107,22 @@
           >
         </summary>
         <param name="encodedBasicConstraints">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The encoded data to use to create the extension.</param
         >
         <param name="critical">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -152,8 +156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension" />
 
             
 
@@ -161,28 +164,44 @@
           >
         </summary>
         <param name="certificateAuthority">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the certificate is a certificate authority (CA) certificate; otherwise, false.</param
         >
         <param name="hasPathLengthConstraint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the certificate has a restriction on the number of path levels it allows; otherwise, false.</param
         >
         <param name="pathLengthConstraint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of levels allowed in a certificate's path.</param
         >
         <param name="critical">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -239,8 +258,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor if the information to create an extension is already in an <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >Use this constructor if the information to create an extension is already in an <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -250,13 +268,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension" />
 
             
 
-             class using an <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+             class using an <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -264,7 +280,11 @@
           >
         </summary>
         <param name="asnEncodedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -289,8 +309,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A certificate issuer can restrict the number of levels in a certificate path. This property indicates whether the certificate has this restriction. If this value is true, you can use the <see
-             cref="P:System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension.PathLengthConstraint" />
+            >A certificate issuer can restrict the number of levels in a certificate path. This property indicates whether the certificate has this restriction. If this value is true, you can use the <see cref="P:System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension.PathLengthConstraint" />
 
             
 

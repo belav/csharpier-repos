@@ -30,26 +30,22 @@
       <para>The .NET Framework does not support direct access to physical disks through paths that are device names, such as "\\.\PHYSICALDRIVE0 ".</para>
       <para>A path is a string that provides the location of a file or directory. A path does not necessarily point to a location on disk; for example, a path might map to a location in memory or on a device. The exact format of a path is determined by the current platform. For example, on some systems, a path can start with a drive or volume letter, while this element is not present in other systems. On some systems, file paths can contain extensions, which indicate the type of information stored in the file. The format of a file name extension is platform-dependent; for example, some systems limit extensions to three characters, and others do not. The current platform also determines the set of characters used to separate the elements of a path, and the set of characters that cannot be used when specifying paths. Because of these differences, the fields of the Path class as well as the exact behavior of some members of the Path class are platform-dependent.</para>
       <para
-        >A path can contain absolute or relative location information. Absolute paths fully specify a location: the file or directory can be uniquely identified regardless of the current location. Relative paths specify a partial location: the current location is used as the starting point when locating a file specified with a relative path. To determine the current directory, call <see
-         cref="M:System.IO.Directory.GetCurrentDirectory" />
+        >A path can contain absolute or relative location information. Absolute paths fully specify a location: the file or directory can be uniquely identified regardless of the current location. Relative paths specify a partial location: the current location is used as the starting point when locating a file specified with a relative path. To determine the current directory, call <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
         
 
         .</para
       >
       <para
-        >Most members of the Path class do not interact with the file system and do not verify the existence of the file specified by a path string. Path class members that modify a path string, such as <see
-         cref="M:System.IO.Path.ChangeExtension(System.String,System.String)" />
+        >Most members of the Path class do not interact with the file system and do not verify the existence of the file specified by a path string. Path class members that modify a path string, such as <see cref="M:System.IO.Path.ChangeExtension(System.String,System.String)" />
 
         
 
-        , have no effect on names of files in the file system. Path members do, however, validate the contents of a specified path string, and throw an <see
-         cref="T:System.ArgumentException" />
+        , have no effect on names of files in the file system. Path members do, however, validate the contents of a specified path string, and throw an <see cref="T:System.ArgumentException" />
 
         
 
-         exception if the string contains characters that are not valid in path strings, as defined in the characters returned from the <see
-         cref="M:System.IO.Path.GetInvalidPathChars" />
+         exception if the string contains characters that are not valid in path strings, as defined in the characters returned from the <see cref="M:System.IO.Path.GetInvalidPathChars" />
 
         
 
@@ -76,16 +72,14 @@
         </item>
       </list>
       <para
-        >Because all these operations are performed on strings, it is impossible to verify that the results are valid in all scenarios. For example, the <see
-         cref="M:System.IO.Path.GetExtension(System.String)" />
+        >Because all these operations are performed on strings, it is impossible to verify that the results are valid in all scenarios. For example, the <see cref="M:System.IO.Path.GetExtension(System.String)" />
 
         
 
          method parses a string that you pass to it and returns the extension from that string. However, this does not mean that a file with that extension exists on the disk.</para
       >
       <para
-        >For a list of common I/O tasks, see <format
-         type="text/html">
+        >For a list of common I/O tasks, see <format type="text/html">
           <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
         </format>
 
@@ -97,8 +91,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Performs operations on <see
-         cref="T:System.String" />
+        >Performs operations on <see cref="T:System.String" />
 
         
 
@@ -134,13 +127,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The character stored in this field cannot be in <see
-             cref="F:System.IO.Path.InvalidPathChars" />
+            >The character stored in this field cannot be in <see cref="F:System.IO.Path.InvalidPathChars" />
 
             
 
-            . This field can be set to the same value as <see
-             cref="F:System.IO.Path.DirectorySeparatorChar" />
+            . This field can be set to the same value as <see cref="F:System.IO.Path.DirectorySeparatorChar" />
 
             
 
@@ -192,124 +183,104 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If neither <paramref
-             name="path" />
+            >If neither <paramref name="path" />
 
             
 
-             nor <paramref
-             name="extension" />
+             nor <paramref name="extension" />
 
             
 
              contains a period (.), ChangeExtension adds the period.</para
           >
           <para
-            >The <paramref
-             name="extension" />
+            >The <paramref name="extension" />
 
             
 
-             parameter can contain multiple periods and any valid path characters, and can be any length. If <paramref
-             name="extension" />
+             parameter can contain multiple periods and any valid path characters, and can be any length. If <paramref name="extension" />
 
             
 
-             is null, the returned string contains the contents of <paramref
-             name="path" />
+             is null, the returned string contains the contents of <paramref name="path" />
 
             
 
              with the last period and all characters following it removed.</para
           >
           <para
-            >If <paramref
-             name="extension" />
+            >If <paramref name="extension" />
 
             
 
-             is an empty string, the returned path string contains the contents of <paramref
-             name="path" />
+             is an empty string, the returned path string contains the contents of <paramref name="path" />
 
             
 
              with any characters following the last period removed.</para
           >
           <para
-            >If <paramref
-             name="path" />
+            >If <paramref name="path" />
 
             
 
-             does not have an extension and <paramref
-             name="extension" />
+             does not have an extension and <paramref name="extension" />
 
             
 
-             is not null, the returned string contains <paramref
-             name="path" />
+             is not null, the returned string contains <paramref name="path" />
 
             
 
-             followed by <paramref
-             name="extension" />
+             followed by <paramref name="extension" />
 
             
 
             .</para
           >
           <para
-            >If <paramref
-             name="extension" />
+            >If <paramref name="extension" />
 
             
 
              is not null and does not contain a leading period, the period is added.</para
           >
           <para
-            >If <paramref
-             name="path" />
+            >If <paramref name="path" />
 
             
 
-             contains a multiple extension separated by multiple periods, the returned string contains the contents of <paramref
-             name="path" />
+             contains a multiple extension separated by multiple periods, the returned string contains the contents of <paramref name="path" />
 
             
 
-             with the last period and all characters following it replaced by <paramref
-             name="extension" />
+             with the last period and all characters following it replaced by <paramref name="extension" />
 
             
 
-            . For example, if <paramref
-             name="path" />
+            . For example, if <paramref name="path" />
 
             
 
-             is "\Dir1\examples\pathtests.csx.txt" and <paramref
-             name="extension" />
+             is "\Dir1\examples\pathtests.csx.txt" and <paramref name="extension" />
 
             
 
              is "cs", the modified path is "\Dir1\examples\pathtests.csx.cs".</para
           >
           <para
-            >It is not possible to verify that the returned results are valid in all scenarios. For example, if <paramref
-             name="path" />
+            >It is not possible to verify that the returned results are valid in all scenarios. For example, if <paramref name="path" />
 
             
 
-             is empty, <paramref
-             name="extension" />
+             is empty, <paramref name="extension" />
 
             
 
              is appended.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -326,33 +297,27 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified path information.</para>
           <para
-            >On Windows-based desktop platforms, if <paramref
-             name="path" />
+            >On Windows-based desktop platforms, if <paramref name="path" />
 
             
 
-             is null or an empty string (""), the path information is returned unmodified. If <paramref
-             name="extension" />
+             is null or an empty string (""), the path information is returned unmodified. If <paramref name="extension" />
 
             
 
-             is null, the returned string contains the specified path with its extension removed. If <paramref
-             name="path" />
+             is null, the returned string contains the specified path with its extension removed. If <paramref name="path" />
 
             
 
-             has no extension, and <paramref
-             name="extension" />
+             has no extension, and <paramref name="extension" />
 
             
 
-             is not null, the returned path string contains <paramref
-             name="extension" />
+             is not null, the returned path string contains <paramref name="extension" />
 
             
 
-             appended to the end of <paramref
-             name="path" />
+             appended to the end of <paramref name="path" />
 
             
 
@@ -360,24 +325,30 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The path information to modify. The path cannot contain any of the characters defined in <see
-           cref="M:System.IO.Path.GetInvalidPathChars" />
+          The path information to modify. The path cannot contain any of the characters defined in <see cref="M:System.IO.Path.GetInvalidPathChars" />
 
           
 
           . </param
         >
         <param name="extension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new extension (with or without a leading period). Specify null to remove an existing extension from <paramref
-           name="path" />
+          The new extension (with or without a leading period). Specify null to remove an existing extension from <paramref name="path" />
 
           
 
@@ -431,7 +402,11 @@
           <para>The combined paths.</para>
         </returns>
         <param name="paths">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -471,13 +446,11 @@
 
           
 
-           or <paramref
-           name="path2" />
+           or <paramref name="path2" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -489,8 +462,7 @@
 
             
 
-             or <paramref
-             name="path2" />
+             or <paramref name="path2" />
 
             
 
@@ -500,8 +472,7 @@
         <example>
           <para
             > The following example demonstrates using the
-   <see
-             langword="Combine" />
+   <see langword="Combine" />
 
             
 
@@ -542,84 +513,69 @@ path2));
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="path1" />
+            >If <paramref name="path1" />
 
             
 
-             is not a drive reference (that is, "C:" or "D:") and does not end with a valid separator character as defined in <see
-             cref="F:System.IO.Path.DirectorySeparatorChar" />
+             is not a drive reference (that is, "C:" or "D:") and does not end with a valid separator character as defined in <see cref="F:System.IO.Path.DirectorySeparatorChar" />
 
             
 
-            , <see
-             cref="F:System.IO.Path.AltDirectorySeparatorChar" />
+            , <see cref="F:System.IO.Path.AltDirectorySeparatorChar" />
 
             
 
-            , or <see
-             cref="F:System.IO.Path.VolumeSeparatorChar" />
+            , or <see cref="F:System.IO.Path.VolumeSeparatorChar" />
 
             
 
-            , <see
-             cref="F:System.IO.Path.DirectorySeparatorChar" />
+            , <see cref="F:System.IO.Path.DirectorySeparatorChar" />
 
             
 
-             is appended to <paramref
-             name="path1" />
+             is appended to <paramref name="path1" />
 
             
 
              before concatenation. </para
           >
           <para
-            >If <paramref
-             name="path2" />
+            >If <paramref name="path2" />
 
             
 
-             does not include a root (for example, if <paramref
-             name="path2" />
+             does not include a root (for example, if <paramref name="path2" />
 
             
 
-             does not start with a separator character or a drive specification), the result is a concatenation of the two paths, with an intervening separator character. If <paramref
-             name="path2" />
+             does not start with a separator character or a drive specification), the result is a concatenation of the two paths, with an intervening separator character. If <paramref name="path2" />
 
             
 
-             includes a root, <paramref
-             name="path2" />
+             includes a root, <paramref name="path2" />
 
             
 
              is returned.</para
           >
           <para
-            >The parameters are not parsed if they have white space. Therefore, if <paramref
-             name="path2" />
+            >The parameters are not parsed if they have white space. Therefore, if <paramref name="path2" />
 
             
 
-             includes white space (for example, " c:\\ "), the <see
-             cref="M:System.IO.Path.Combine(System.String,System.String)" />
+             includes white space (for example, " c:\\ "), the <see cref="M:System.IO.Path.Combine(System.String,System.String)" />
 
             
 
-             method appends <paramref
-             name="path2" />
+             method appends <paramref name="path2" />
 
             
 
-             to <paramref
-             name="path1" />
+             to <paramref name="path1" />
 
             
 
-             instead of returning only <paramref
-             name="path2" />
+             instead of returning only <paramref name="path2" />
 
             
 
@@ -627,8 +583,7 @@ path2));
           >
           <para>Not all invalid characters for directory and file names are interpreted as unacceptable by the Combine method, because you can use these characters for search wildcard characters. For example, while Path.Combine("c:\\", "*.txt") might be invalid if you were to create a file from it, it is valid as a search string. It is therefore successfully interpreted by the Combine method.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -644,13 +599,11 @@ path2));
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The combined paths. If one of the specified paths is a zero-length string, this method returns the other path. If <paramref
-             name="path2" />
+            >The combined paths. If one of the specified paths is a zero-length string, this method returns the other path. If <paramref name="path2" />
 
             
 
-             contains an absolute path, this method returns <paramref
-             name="path2" />
+             contains an absolute path, this method returns <paramref name="path2" />
 
             
 
@@ -658,14 +611,22 @@ path2));
           >
         </returns>
         <param name="path1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first path to combine. </param
         >
         <param name="path2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -703,13 +664,11 @@ path2));
 
             
 
-             should be an absolute path (for example, "d:\archives" or "\\archives\public"). If <paramref
-             name="path2" />
+             should be an absolute path (for example, "d:\archives" or "\\archives\public"). If <paramref name="path2" />
 
             
 
-             or <paramref
-             name="path3" />
+             or <paramref name="path3" />
 
             
 
@@ -717,84 +676,69 @@ path2));
           >
           <para>Zero-length strings are omitted from the combined path. </para>
           <para
-            >If <paramref
-             name="path1" />
+            >If <paramref name="path1" />
 
             
 
-             is not a drive reference (that is, "C:" or "D:") and does not end with a valid separator character as defined in <see
-             cref="F:System.IO.Path.DirectorySeparatorChar" />
+             is not a drive reference (that is, "C:" or "D:") and does not end with a valid separator character as defined in <see cref="F:System.IO.Path.DirectorySeparatorChar" />
 
             
 
-            , <see
-             cref="F:System.IO.Path.AltDirectorySeparatorChar" />
+            , <see cref="F:System.IO.Path.AltDirectorySeparatorChar" />
 
             
 
-            , or <see
-             cref="F:System.IO.Path.VolumeSeparatorChar" />
+            , or <see cref="F:System.IO.Path.VolumeSeparatorChar" />
 
             
 
-            , <see
-             cref="F:System.IO.Path.DirectorySeparatorChar" />
+            , <see cref="F:System.IO.Path.DirectorySeparatorChar" />
 
             
 
-             is appended to <paramref
-             name="path1" />
+             is appended to <paramref name="path1" />
 
             
 
              before concatenation. </para
           >
           <para
-            >If <paramref
-             name="path2" />
+            >If <paramref name="path2" />
 
             
 
-             does not include a root (for example, if <paramref
-             name="path2" />
+             does not include a root (for example, if <paramref name="path2" />
 
             
 
-             does not start with a separator character or a drive specification), the result is a concatenation of the two paths, with an intervening separator character. If <paramref
-             name="path2" />
+             does not start with a separator character or a drive specification), the result is a concatenation of the two paths, with an intervening separator character. If <paramref name="path2" />
 
             
 
-             includes a root, <paramref
-             name="path2" />
+             includes a root, <paramref name="path2" />
 
             
 
              is returned.</para
           >
           <para
-            >The parameters are not parsed if they have white space. Therefore, if <paramref
-             name="path2" />
+            >The parameters are not parsed if they have white space. Therefore, if <paramref name="path2" />
 
             
 
-             includes white space (for example, " c:\\ "), the <see
-             cref="M:System.IO.Path.Combine(System.String,System.String)" />
+             includes white space (for example, " c:\\ "), the <see cref="M:System.IO.Path.Combine(System.String,System.String)" />
 
             
 
-             method appends <paramref
-             name="path2" />
+             method appends <paramref name="path2" />
 
             
 
-             to <paramref
-             name="path1" />
+             to <paramref name="path1" />
 
             
 
-             instead of returning only <paramref
-             name="path2" />
+             instead of returning only <paramref name="path2" />
 
             
 
@@ -811,21 +755,33 @@ path2));
           <para>The combined paths.</para>
         </returns>
         <param name="path1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first path to combine. </param
         >
         <param name="path2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The second path to combine. </param
         >
         <param name="path3">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -867,84 +823,69 @@ path2));
           >
           <para>Zero-length strings are omitted from the combined path.</para>
           <para
-            >If <paramref
-             name="path1" />
+            >If <paramref name="path1" />
 
             
 
-             is not a drive reference (that is, "C:" or "D:") and does not end with a valid separator character as defined in <see
-             cref="F:System.IO.Path.DirectorySeparatorChar" />
+             is not a drive reference (that is, "C:" or "D:") and does not end with a valid separator character as defined in <see cref="F:System.IO.Path.DirectorySeparatorChar" />
 
             
 
-            , <see
-             cref="F:System.IO.Path.AltDirectorySeparatorChar" />
+            , <see cref="F:System.IO.Path.AltDirectorySeparatorChar" />
 
             
 
-            , or <see
-             cref="F:System.IO.Path.VolumeSeparatorChar" />
+            , or <see cref="F:System.IO.Path.VolumeSeparatorChar" />
 
             
 
-            , <see
-             cref="F:System.IO.Path.DirectorySeparatorChar" />
+            , <see cref="F:System.IO.Path.DirectorySeparatorChar" />
 
             
 
-             is appended to <paramref
-             name="path1" />
+             is appended to <paramref name="path1" />
 
             
 
              before concatenation. </para
           >
           <para
-            >If <paramref
-             name="path2" />
+            >If <paramref name="path2" />
 
             
 
-             does not include a root (for example, if <paramref
-             name="path2" />
+             does not include a root (for example, if <paramref name="path2" />
 
             
 
-             does not start with a separator character or a drive specification), the result is a concatenation of the two paths, with an intervening separator character. If <paramref
-             name="path2" />
+             does not start with a separator character or a drive specification), the result is a concatenation of the two paths, with an intervening separator character. If <paramref name="path2" />
 
             
 
-             includes a root, <paramref
-             name="path2" />
+             includes a root, <paramref name="path2" />
 
             
 
              is returned.</para
           >
           <para
-            >The parameters are not parsed if they have white space. Therefore, if <paramref
-             name="path2" />
+            >The parameters are not parsed if they have white space. Therefore, if <paramref name="path2" />
 
             
 
-             includes white space (for example, " c:\\ "), the <see
-             cref="M:System.IO.Path.Combine(System.String,System.String)" />
+             includes white space (for example, " c:\\ "), the <see cref="M:System.IO.Path.Combine(System.String,System.String)" />
 
             
 
-             method appends <paramref
-             name="path2" />
+             method appends <paramref name="path2" />
 
             
 
-             to <paramref
-             name="path1" />
+             to <paramref name="path1" />
 
             
 
-             instead of returning only <paramref
-             name="path2" />
+             instead of returning only <paramref name="path2" />
 
             
 
@@ -961,28 +902,44 @@ path2));
           <para>The combined paths.</para>
         </returns>
         <param name="path1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first path to combine. </param
         >
         <param name="path2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The second path to combine. </param
         >
         <param name="path3">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The third path to combine.</param
         >
         <param name="path4">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1014,13 +971,11 @@ path2));
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The character stored in this field cannot be in <see
-             cref="F:System.IO.Path.InvalidPathChars" />
+            >The character stored in this field cannot be in <see cref="F:System.IO.Path.InvalidPathChars" />
 
             
 
-            . <see
-             cref="F:System.IO.Path.AltDirectorySeparatorChar" />
+            . <see cref="F:System.IO.Path.AltDirectorySeparatorChar" />
 
             
 
@@ -1069,8 +1024,7 @@ path2));
         </exception>
         <example>
           <para
-            >The following example demonstrates using the <see
-             cref="M:System.IO.Path.GetDirectoryName(System.String)" />
+            >The following example demonstrates using the <see cref="M:System.IO.Path.GetDirectoryName(System.String)" />
 
             
 
@@ -1110,46 +1064,38 @@ class GetDirectoryTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In most cases, the string returned by this method consists of all characters in the path up to but not including the last <see
-             cref="F:System.IO.Path.DirectorySeparatorChar" />
+            >In most cases, the string returned by this method consists of all characters in the path up to but not including the last <see cref="F:System.IO.Path.DirectorySeparatorChar" />
 
             
 
-             or <see
-             cref="F:System.IO.Path.AltDirectorySeparatorChar" />
+             or <see cref="F:System.IO.Path.AltDirectorySeparatorChar" />
 
             
 
-            . If the path consists of a root directory, such as "c:\", null is returned. Note that this method does not support paths using "file:". Because the returned path does not include the <see
-             cref="F:System.IO.Path.DirectorySeparatorChar" />
+            . If the path consists of a root directory, such as "c:\", null is returned. Note that this method does not support paths using "file:". Because the returned path does not include the <see cref="F:System.IO.Path.DirectorySeparatorChar" />
 
             
 
-             or <see
-             cref="F:System.IO.Path.AltDirectorySeparatorChar" />
+             or <see cref="F:System.IO.Path.AltDirectorySeparatorChar" />
 
             
 
-            , passing the returned path back into the <see
-             cref="M:System.IO.Path.GetDirectoryName(System.String)" />
+            , passing the returned path back into the <see cref="M:System.IO.Path.GetDirectoryName(System.String)" />
 
             
 
-             method will result in the truncation of one folder level per subsequent call on the result string. For example, passing the path "C:\Directory\SubDirectory\test.txt" into the <see
-             cref="M:System.IO.Path.GetDirectoryName(System.String)" />
+             method will result in the truncation of one folder level per subsequent call on the result string. For example, passing the path "C:\Directory\SubDirectory\test.txt" into the <see cref="M:System.IO.Path.GetDirectoryName(System.String)" />
 
             
 
-             method will return "C:\Directory\SubDirectory". Passing that string, "C:\Directory\SubDirectory", into <see
-             cref="M:System.IO.Path.GetDirectoryName(System.String)" />
+             method will return "C:\Directory\SubDirectory". Passing that string, "C:\Directory\SubDirectory", into <see cref="M:System.IO.Path.GetDirectoryName(System.String)" />
 
             
 
              will result in "C:\Directory".</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1165,23 +1111,19 @@ class GetDirectoryTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Directory information for <paramref
-             name="path" />
+            >Directory information for <paramref name="path" />
 
             
 
-            , or null if <paramref
-             name="path" />
+            , or null if <paramref name="path" />
 
             
 
-             denotes a root directory or is null. Returns <see
-             cref="F:System.String.Empty" />
+             denotes a root directory or is null. Returns <see cref="F:System.String.Empty" />
 
             
 
-             if <paramref
-             name="path" />
+             if <paramref name="path" />
 
             
 
@@ -1189,7 +1131,11 @@ class GetDirectoryTest {
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1232,8 +1178,7 @@ class GetDirectoryTest {
         </exception>
         <example>
           <para
-            >The following example demonstrates using the <see
-             cref="M:System.IO.Path.GetExtension(System.String)" />
+            >The following example demonstrates using the <see cref="M:System.IO.Path.GetExtension(System.String)" />
 
             
 
@@ -1276,36 +1221,30 @@ class GetDirectoryTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The extension of <paramref
-             name="path" />
+            >The extension of <paramref name="path" />
 
             
 
-             is obtained by searching <paramref
-             name="path" />
+             is obtained by searching <paramref name="path" />
 
             
 
-             for a period (.), starting with the last character in path and continuing toward the start of path. If a period is found before a <see
-             cref="F:System.IO.Path.DirectorySeparatorChar" />
+             for a period (.), starting with the last character in path and continuing toward the start of path. If a period is found before a <see cref="F:System.IO.Path.DirectorySeparatorChar" />
 
             
 
-             or <see
-             cref="F:System.IO.Path.AltDirectorySeparatorChar" />
+             or <see cref="F:System.IO.Path.AltDirectorySeparatorChar" />
 
             
 
-             character, the returned string contains the period and the characters after it; otherwise, <see
-             cref="F:System.String.Empty" />
+             character, the returned string contains the period and the characters after it; otherwise, <see cref="F:System.String.Empty" />
 
             
 
              is returned.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1321,33 +1260,27 @@ class GetDirectoryTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The extension of the specified path (including the period "."), or null, or <see
-             cref="F:System.String.Empty" />
+            >The extension of the specified path (including the period "."), or null, or <see cref="F:System.String.Empty" />
 
             
 
-            . If <paramref
-             name="path" />
+            . If <paramref name="path" />
 
             
 
-             is null, <see
-             cref="M:System.IO.Path.GetExtension(System.String)" />
+             is null, <see cref="M:System.IO.Path.GetExtension(System.String)" />
 
             
 
-             returns null. If <paramref
-             name="path" />
+             returns null. If <paramref name="path" />
 
             
 
-             does not have extension information, <see
-             cref="M:System.IO.Path.GetExtension(System.String)" />
+             does not have extension information, <see cref="M:System.IO.Path.GetExtension(System.String)" />
 
             
 
-             returns <see
-             cref="F:System.String.Empty" />
+             returns <see cref="F:System.String.Empty" />
 
             
 
@@ -1355,7 +1288,11 @@ class GetDirectoryTest {
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1397,8 +1334,7 @@ class GetDirectoryTest {
         <example>
           <para
             >The following example demonstrates the behavior of the
-      <see
-             cref="M:System.IO.Path.GetFileName(System.String)" />
+      <see cref="M:System.IO.Path.GetFileName(System.String)" />
 
             
 
@@ -1436,21 +1372,18 @@ class FileNameTest {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The returned value is null if the file path is null.</para>
           <para
-            >The separator characters used to determine the start of the file name are <see
-             cref="F:System.IO.Path.DirectorySeparatorChar" />
+            >The separator characters used to determine the start of the file name are <see cref="F:System.IO.Path.DirectorySeparatorChar" />
 
             
 
-             and <see
-             cref="F:System.IO.Path.AltDirectorySeparatorChar" />
+             and <see cref="F:System.IO.Path.AltDirectorySeparatorChar" />
 
             
 
             .</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1466,23 +1399,19 @@ class FileNameTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The characters after the last directory character in <paramref
-             name="path" />
+            >The characters after the last directory character in <paramref name="path" />
 
             
 
-            . If the last character of <paramref
-             name="path" />
+            . If the last character of <paramref name="path" />
 
             
 
-             is a directory or volume separator character, this method returns <see
-             cref="F:System.String.Empty" />
+             is a directory or volume separator character, this method returns <see cref="F:System.String.Empty" />
 
             
 
-            . If <paramref
-             name="path" />
+            . If <paramref name="path" />
 
             
 
@@ -1490,7 +1419,11 @@ class FileNameTest {
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1536,8 +1469,7 @@ class FileNameTest {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method does not verify that the path or file name exists.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1553,8 +1485,7 @@ class FileNameTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string returned by <see
-             cref="M:System.IO.Path.GetFileName(System.String)" />
+            >The string returned by <see cref="M:System.IO.Path.GetFileName(System.String)" />
 
             
 
@@ -1562,7 +1493,11 @@ class FileNameTest {
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1613,29 +1548,25 @@ class FileNameTest {
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
            .</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref
-           name="path" />
+          >The length of <paramref name="path" />
 
           
 
-           or the absolute path information for <paramref
-           name="path" />
+           or the absolute path information for <paramref name="path" />
 
           
 
            exceeds the system-defined maximum length.</exception
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
-          >Requires permission to access path information. See <see
-           langword="System.Security.Permissions.FileIOPermissionAccess.PathDiscovery" />
+          >Requires permission to access path information. See <see langword="System.Security.Permissions.FileIOPermissionAccess.PathDiscovery" />
 
           
 
@@ -1643,8 +1574,7 @@ class FileNameTest {
         >
         <example>
           <para
-            > The following example demonstrates the <see
-             cref="M:System.IO.Path.GetFullPath(System.String)" />
+            > The following example demonstrates the <see cref="M:System.IO.Path.GetFullPath(System.String)" />
 
             
 
@@ -1685,39 +1615,33 @@ Path.GetFullPath(pathString));
           <para>The .NET Framework does not support direct access to physical disks through paths that are device names, such as "\\.\PHYSICALDRIVE0 ".</para>
           <para>The absolute path includes all information required to locate a file or directory on a system.</para>
           <para
-            >The file or directory specified by <paramref
-             name="path" />
+            >The file or directory specified by <paramref name="path" />
 
             
 
              is not required to exist. For example, if c:\temp\newdir is the current directory, calling GetFullPath on a file name such as test.txt returns c:\temp\newdir\test.txt. The file need not exist.</para
           >
           <para
-            >However, if <paramref
-             name="path" />
+            >However, if <paramref name="path" />
 
             
 
-             does exist, the caller must have permission to obtain path information for <paramref
-             name="path" />
+             does exist, the caller must have permission to obtain path information for <paramref name="path" />
 
             
 
-            . Note that unlike most members of the <see
-             cref="T:System.IO.Path" />
+            . Note that unlike most members of the <see cref="T:System.IO.Path" />
 
             
 
              class, this method accesses the file system.</para
           >
           <para
-            >This method uses current directory and current volume information to fully qualify <paramref
-             name="path" />
+            >This method uses current directory and current volume information to fully qualify <paramref name="path" />
 
             
 
-            . If you specify a file name only in <paramref
-             name="path" />
+            . If you specify a file name only in <paramref name="path" />
 
             
 
@@ -1726,8 +1650,7 @@ Path.GetFullPath(pathString));
           <para>If you pass in a short file name, it is expanded to a long file name.</para>
           <para>If a path contains no significant characters it is invalid unless it contains one or more "." characters followed by any number of spaces, then it will be parsed as either "." or "..".</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1743,8 +1666,7 @@ Path.GetFullPath(pathString));
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The fully qualified location of <paramref
-             name="path" />
+            >The fully qualified location of <paramref name="path" />
 
             
 
@@ -1752,7 +1674,11 @@ Path.GetFullPath(pathString));
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1851,8 +1777,7 @@ Path.GetFullPath(pathString));
 
           
 
-           contains one or more implementation-specific invalid characters or is equal to <see
-           cref="F:System.String.Empty" />
+           contains one or more implementation-specific invalid characters or is equal to <see cref="F:System.String.Empty" />
 
           
 
@@ -1860,8 +1785,7 @@ Path.GetFullPath(pathString));
         >
         <example>
           <para
-            >The following example demonstrates the <see
-             cref="M:System.IO.Path.GetPathRoot(System.String)" />
+            >The following example demonstrates the <see cref="M:System.IO.Path.GetPathRoot(System.String)" />
 
             
 
@@ -1908,8 +1832,7 @@ class GetPathRootTest
           <list type="bullet">
             <item>
               <para
-                >An empty string (<paramref
-                 name="path" />
+                >An empty string (<paramref name="path" />
 
                 
 
@@ -1918,8 +1841,7 @@ class GetPathRootTest
             </item>
             <item>
               <para
-                >"/" (<paramref
-                 name="path" />
+                >"/" (<paramref name="path" />
 
                 
 
@@ -1928,8 +1850,7 @@ class GetPathRootTest
             </item>
             <item>
               <para
-                >"X:" (<paramref
-                 name="path" />
+                >"X:" (<paramref name="path" />
 
                 
 
@@ -1938,8 +1859,7 @@ class GetPathRootTest
             </item>
             <item>
               <para
-                >"X:/" (<paramref
-                 name="path" />
+                >"X:/" (<paramref name="path" />
 
                 
 
@@ -1952,8 +1872,7 @@ class GetPathRootTest
           </list>
           <para>The .NET Framework does not support direct access to physical disks through paths that are device names, such as "\\.\PHYSICALDRIVE0 ".</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1969,18 +1888,15 @@ class GetPathRootTest
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The root directory of <paramref
-             name="path" />
+            >The root directory of <paramref name="path" />
 
             
 
-            , such as "C:\", or null if <paramref
-             name="path" />
+            , such as "C:\", or null if <paramref name="path" />
 
             
 
-             is null, or an empty string if <paramref
-             name="path" />
+             is null, or an empty string if <paramref name="path" />
 
             
 
@@ -1988,7 +1904,11 @@ class GetPathRootTest
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2017,23 +1937,19 @@ class GetPathRootTest
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.Path.GetRandomFileName" />
+            >The <see cref="M:System.IO.Path.GetRandomFileName" />
 
             
 
-             method returns a cryptographically strong, random string that can be used as either a folder name or a file name. Unlike <see
-             cref="M:System.IO.Path.GetTempFileName" />
+             method returns a cryptographically strong, random string that can be used as either a folder name or a file name. Unlike <see cref="M:System.IO.Path.GetTempFileName" />
 
             
 
-            , <see
-             cref="M:System.IO.Path.GetRandomFileName" />
+            , <see cref="M:System.IO.Path.GetRandomFileName" />
 
             
 
-             does not create a file. When the security of your file system is paramount, this method should be used instead of <see
-             cref="M:System.IO.Path.GetTempFileName" />
+             does not create a file. When the security of your file system is paramount, this method should be used instead of <see cref="M:System.IO.Path.GetTempFileName" />
 
             
 
@@ -2074,42 +1990,36 @@ class GetPathRootTest
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates a temporary file with a .TMP file extension. The temporary file is created within the user’s temporary folder, which is the path returned by the <see
-             cref="M:System.IO.Path.GetTempPath" />
+            >This method creates a temporary file with a .TMP file extension. The temporary file is created within the user’s temporary folder, which is the path returned by the <see cref="M:System.IO.Path.GetTempPath" />
 
             
 
              method.</para
           >
           <para
-            >The <see
-             cref="M:System.IO.Path.GetTempFileName" />
+            >The <see cref="M:System.IO.Path.GetTempFileName" />
 
             
 
-             method will raise an <see
-             cref="T:System.IO.IOException" />
+             method will raise an <see cref="T:System.IO.IOException" />
 
             
 
              if it is used to create more than 65535 files without deleting previous temporary files.</para
           >
           <para
-            >The <see
-             cref="M:System.IO.Path.GetTempFileName" />
+            >The <see cref="M:System.IO.Path.GetTempFileName" />
 
             
 
-             method will raise an <see
-             cref="T:System.IO.IOException" />
+             method will raise an <see cref="T:System.IO.IOException" />
 
             
 
              if no unique temporary file name is available. To resolve this error, delete all unneeded temporary files.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -2154,8 +2064,7 @@ class GetPathRootTest
           >The caller does not have the required permission.</exception
         >
         <permission cref="T:System.Security.Permissions.EnvironmentPermission"
-          >Requires unrestricted access to environment variables. See <see
-           cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+          >Requires unrestricted access to environment variables. See <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
 
           
 
@@ -2223,31 +2132,26 @@ class GetPathRootTest
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Starting from the end of <paramref
-             name="path" />
+            >Starting from the end of <paramref name="path" />
 
             
 
-            , this method searches for a period (.) followed by at least one character. If this pattern is found before a <see
-             cref="F:System.IO.Path.DirectorySeparatorChar" />
+            , this method searches for a period (.) followed by at least one character. If this pattern is found before a <see cref="F:System.IO.Path.DirectorySeparatorChar" />
 
             
 
-            , <see
-             cref="F:System.IO.Path.AltDirectorySeparatorChar" />
+            , <see cref="F:System.IO.Path.AltDirectorySeparatorChar" />
 
             
 
-            , or <see
-             cref="F:System.IO.Path.VolumeSeparatorChar" />
+            , or <see cref="F:System.IO.Path.VolumeSeparatorChar" />
 
             
 
              character is encountered, this method returns true.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -2265,7 +2169,11 @@ class GetPathRootTest
           <para>true if the characters that follow the last directory separator (\\ or /) or volume separator (:) in the path include a period (.) followed by one or more characters; otherwise, false.</para>
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2300,18 +2208,15 @@ class GetPathRootTest
           <para>The array returned from this method is not guaranteed to contain the complete set of characters that are invalid in file and directory names. The full set of invalid characters can vary by file system. For example, on Windows-based desktop platforms, invalid path characters might include ASCII/Unicode characters 1 through 31, as well as quote ("), less than (&lt;), greater than (&gt;), pipe (|), backspace (\b), null (\0) and tab (\t).</para>
           <block subset="none" type="note">
             <para
-              >Do not use <see
-               cref="F:System.IO.Path.InvalidPathChars" />
+              >Do not use <see cref="F:System.IO.Path.InvalidPathChars" />
 
               
 
-               if you think your code might execute in the same application domain as untrusted code. <see
-               cref="F:System.IO.Path.InvalidPathChars" />
+               if you think your code might execute in the same application domain as untrusted code. <see cref="F:System.IO.Path.InvalidPathChars" />
 
               
 
-               is an array, so its elements can be overwritten. If untrusted code overwrites elements of <see
-               cref="F:System.IO.Path.InvalidPathChars" />
+               is an array, so its elements can be overwritten. If untrusted code overwrites elements of <see cref="F:System.IO.Path.InvalidPathChars" />
 
               
 
@@ -2322,8 +2227,7 @@ class GetPathRootTest
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides a platform-specific array of characters that cannot be specified in path string arguments passed to members of the <see
-             cref="T:System.IO.Path" />
+            >Provides a platform-specific array of characters that cannot be specified in path string arguments passed to members of the <see cref="T:System.IO.Path" />
 
             
 
@@ -2365,18 +2269,15 @@ class GetPathRootTest
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.Path.IsPathRooted(System.String)" />
+            >The <see cref="M:System.IO.Path.IsPathRooted(System.String)" />
 
             
 
-             method returns true if the first character is a directory separator character such as "\", or if the path starts with a drive letter and colon (:). For example, it returns true for <paramref
-             name="path" />
+             method returns true if the first character is a directory separator character such as "\", or if the path starts with a drive letter and colon (:). For example, it returns true for <paramref name="path" />
 
             
 
-             strings such as "\\MyDir\\MyFile.txt", "C:\\MyDir", or "C:MyDir". It returns false for <paramref
-             name="path" />
+             strings such as "\\MyDir\\MyFile.txt", "C:\\MyDir", or "C:MyDir". It returns false for <paramref name="path" />
 
             
 
@@ -2384,8 +2285,7 @@ class GetPathRootTest
           >
           <para>This method does not verify that the path or file name exists.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -2401,8 +2301,7 @@ class GetPathRootTest
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="path" />
+            >true if <paramref name="path" />
 
             
 
@@ -2410,7 +2309,11 @@ class GetPathRootTest
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -23,8 +23,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a combination of a user's identity, an access mask, and an access control type (allow or deny). An <see
-         cref="T:System.Security.AccessControl.AccessRule" />
+        >Represents a combination of a user's identity, an access mask, and an access control type (allow or deny). An <see cref="T:System.Security.AccessControl.AccessRule" />
 
         
 
@@ -61,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.AccessRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.AccessRule" />
 
             
 
@@ -70,57 +68,78 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The identity to which the access rule applies. This parameter must be an object that can be cast as a <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The identity to which the access rule applies. This parameter must be an object that can be cast as a <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
           .</param
         >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The access mask of this rule. The access mask is a 32-bit collection of anonymous bits, the meaning of which is defined by the individual integrators.</param
         >
         <param name="isInherited">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if this rule is inherited from a parent container.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The inheritance properties of the access rule.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Whether inherited access rules are automatically propagated. The propagation flags are ignored if <paramref
-           name="inheritanceFlags" />
+          Whether inherited access rules are automatically propagated. The propagation flags are ignored if <paramref name="inheritanceFlags" />
 
           
 
-           is set to <see
-           cref="F:System.Security.AccessControl.InheritanceFlags.None" />
+           is set to <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />
 
           
 
           .</param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -152,13 +171,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Security.AccessControl.AccessControlType" />
+            >Gets the <see cref="T:System.Security.AccessControl.AccessControlType" />
 
             
 
-             value associated with this <see
-             cref="T:System.Security.AccessControl.AccessRule" />
+             value associated with this <see cref="T:System.Security.AccessControl.AccessRule" />
 
             
 

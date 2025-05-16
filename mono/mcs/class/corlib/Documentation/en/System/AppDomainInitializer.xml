@@ -30,13 +30,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use an <see
-         cref="T:System.AppDomainInitializer" />
+        >Use an <see cref="T:System.AppDomainInitializer" />
 
         
 
-         delegate to specify the callback method to invoke when an instance of the <see
-         cref="T:System.AppDomain" />
+         delegate to specify the callback method to invoke when an instance of the <see cref="T:System.AppDomain" />
 
         
 

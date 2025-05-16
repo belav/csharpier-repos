@@ -37,26 +37,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The current class is a standard enumerator that parses over the values stored in <see
-         cref="T:System.Runtime.Serialization.SerializationInfo" />
+        >The current class is a standard enumerator that parses over the values stored in <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
         
 
-        . Instead of recording the values, the <see
-         cref="T:System.Runtime.Serialization.SerializationInfoEnumerator" />
+        . Instead of recording the values, the <see cref="T:System.Runtime.Serialization.SerializationInfoEnumerator" />
 
         
 
-         keeps pointers to the member variables of the <see
-         cref="T:System.Runtime.Serialization.SerializationInfo" />
+         keeps pointers to the member variables of the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
         
 
          that created it.</para
       >
       <para
-        >This class follows the <see
-         cref="T:System.Collections.IEnumerator" />
+        >This class follows the <see cref="T:System.Collections.IEnumerator" />
 
         
 
@@ -66,8 +62,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a formatter-friendly mechanism for parsing the data in <see
-         cref="T:System.Runtime.Serialization.SerializationInfo" />
+        >Provides a formatter-friendly mechanism for parsing the data in <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
         
 
@@ -123,8 +118,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To initialize the enumerator, call <see
-             cref="M:System.Runtime.Serialization.SerializationInfoEnumerator.MoveNext" />
+            >To initialize the enumerator, call <see cref="M:System.Runtime.Serialization.SerializationInfoEnumerator.MoveNext" />
 
             
 
@@ -203,8 +197,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After calling this method, the <see
-             cref="P:System.Runtime.Serialization.SerializationInfoEnumerator.Current" />
+            >After calling this method, the <see cref="P:System.Runtime.Serialization.SerializationInfoEnumerator.Current" />
 
             
 

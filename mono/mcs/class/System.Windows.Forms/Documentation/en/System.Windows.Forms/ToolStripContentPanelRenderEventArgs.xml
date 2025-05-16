@@ -21,8 +21,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.ToolStripContentPanel.RendererChanged" />
+        >Provides data for the <see cref="E:System.Windows.Forms.ToolStripContentPanel.RendererChanged" />
 
         
 
@@ -47,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripContentPanelRenderEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripContentPanelRenderEventArgs" />
 
             
 
@@ -56,24 +54,30 @@
           >
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Graphics" />
+          A <see cref="T:System.Drawing.Graphics" />
 
           
 
            representing the GDI+ drawing surface.</param
         >
         <param name="contentPanel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStripContentPanel" />
+          The <see cref="T:System.Windows.Forms.ToolStripContentPanel" />
 
           
 
@@ -138,8 +142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.ToolStripContentPanel" />
+            >Gets the <see cref="T:System.Windows.Forms.ToolStripContentPanel" />
 
             
 

@@ -26,8 +26,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This class specifies the contents of any SOAP error message returned.</para>
       <para
-        >For more information about specifying protocols for XML Web services, see <format
-         type="text/html">
+        >For more information about specifying protocols for XML Web services, see <format type="text/html">
           <a href="01DFC27C-C68E-4910-A0AA-5E4C2A766B0C"
             >[&lt;topic://cpconbuildingaspnetwebservices&gt;]</a
           >
@@ -41,8 +40,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an extensibility element added to a <see
-         cref="T:System.Web.Services.Description.FaultBinding" />
+        >Represents an extensibility element added to a <see cref="T:System.Web.Services.Description.FaultBinding" />
 
         
 
@@ -61,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Web.Services.Description.SoapFaultBinding" />
+            >Initializes an instance of the <see cref="T:System.Web.Services.Description.SoapFaultBinding" />
 
             
 
@@ -87,8 +84,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this property should be set only if the value of the <see
-             cref="P:System.Web.Services.Description.SoapFaultBinding.Use" />
+            >The value of this property should be set only if the value of the <see cref="P:System.Web.Services.Description.SoapFaultBinding.Use" />
 
             
 
@@ -148,8 +144,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property will return an empty string ("") if the property value has not been set. The value should only be set if the value of the <see
-             cref="P:System.Web.Services.Description.SoapFaultBinding.Use" />
+            >This property will return an empty string ("") if the property value has not been set. The value should only be set if the value of the <see cref="P:System.Web.Services.Description.SoapFaultBinding.Use" />
 
             
 
@@ -159,8 +154,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Get or sets the URI representing the location of the specification for encoding of content not specifically defined by the <see
-             cref="P:System.Web.Services.Description.SoapFaultBinding.Encoding" />
+            >Get or sets the URI representing the location of the specification for encoding of content not specifically defined by the <see cref="P:System.Web.Services.Description.SoapFaultBinding.Encoding" />
 
             
 
@@ -194,8 +188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies whether the fault message is encoded using rules specified by the <see
-             cref="P:System.Web.Services.Description.SoapFaultBinding.Encoding" />
+            >Specifies whether the fault message is encoded using rules specified by the <see cref="P:System.Web.Services.Description.SoapFaultBinding.Encoding" />
 
             
 

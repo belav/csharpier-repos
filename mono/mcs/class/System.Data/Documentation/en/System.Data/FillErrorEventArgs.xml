@@ -21,13 +21,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The data is used by the <see
-         cref="M:System.Data.Common.DbDataAdapter.OnFillError" />
+        >The data is used by the <see cref="M:System.Data.Common.DbDataAdapter.OnFillError" />
 
         
 
-         method of the <see
-         cref="T:System.Data.Common.DbDataAdapter" />
+         method of the <see cref="T:System.Data.Common.DbDataAdapter" />
 
         
 
@@ -37,13 +35,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Data.Common.DataAdapter.FillError" />
+        >Provides data for the <see cref="E:System.Data.Common.DataAdapter.FillError" />
 
         
 
-         event of a <see
-         cref="T:System.Data.Common.DbDataAdapter" />
+         event of a <see cref="T:System.Data.Common.DbDataAdapter" />
 
         
 
@@ -68,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.FillErrorEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Data.FillErrorEventArgs" />
 
             
 
@@ -77,19 +72,26 @@
           >
         </summary>
         <param name="dataTable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataTable" />
+          The <see cref="T:System.Data.DataTable" />
 
           
 
            being updated. </param
         >
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -133,8 +135,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.DataTable" />
+            >Gets the <see cref="T:System.Data.DataTable" />
 
             
 

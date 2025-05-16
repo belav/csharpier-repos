@@ -15,23 +15,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.PagerMode" />
+        >The <see cref="T:System.Web.UI.WebControls.PagerMode" />
 
         
 
-         enumeration represents the different display modes for the pager of a <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         enumeration represents the different display modes for the pager of a <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
-         control. <see
-         cref="F:System.Web.UI.WebControls.PagerMode.NextPrev" />
+         control. <see cref="F:System.Web.UI.WebControls.PagerMode.NextPrev" />
 
         
 
-         displays the pager controls using Next and Previous buttons; <see
-         cref="F:System.Web.UI.WebControls.PagerMode.NumericPages" />
+         displays the pager controls using Next and Previous buttons; <see cref="F:System.Web.UI.WebControls.PagerMode.NumericPages" />
 
         
 
@@ -41,8 +37,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the mode of the pager for accessing various pages within the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+        >Represents the mode of the pager for accessing various pages within the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 

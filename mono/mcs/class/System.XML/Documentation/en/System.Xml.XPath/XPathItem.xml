@@ -47,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XPath.XPathItem" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XPath.XPathItem" />
 
             
 
@@ -95,26 +94,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value of the item is not valid according to its specified schema type, the value of the <see
-             cref="P:System.Xml.XPath.XPathItem.TypedValue" />
+            >If the value of the item is not valid according to its specified schema type, the value of the <see cref="P:System.Xml.XPath.XPathItem.TypedValue" />
 
             
 
-             property is equivalent to the value of the <see
-             cref="P:System.Xml.XPath.XPathItem.Value" />
+             property is equivalent to the value of the <see cref="P:System.Xml.XPath.XPathItem.Value" />
 
             
 
              property.</para
           >
           <para
-            >For more information about type support in the <see
-             cref="N:System.Xml" />
+            >For more information about type support in the <see cref="N:System.Xml" />
 
             
 
-             namespace, see <format
-             type="text/html">
+             namespace, see <format type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
@@ -174,8 +169,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, the <see
-             cref="M:System.Xml.XPath.XPathItem.ValueAs(System.Type)" />
+            >When overridden in a derived class, the <see cref="M:System.Xml.XPath.XPathItem.ValueAs(System.Type)" />
 
             
 
@@ -191,7 +185,11 @@
           <para>The value of the item as the type requested.</para>
         </returns>
         <param name="returnType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -225,29 +223,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, the <see
-             cref="M:System.Xml.XPath.XPathItem.ValueAs(System.Type,System.Xml.IXmlNamespaceResolver)" />
+            >When overridden in a derived class, the <see cref="M:System.Xml.XPath.XPathItem.ValueAs(System.Type,System.Xml.IXmlNamespaceResolver)" />
 
             
 
              method attempts to convert the value of the item to the dnprdnext type specified.</para
           >
           <para
-            >The <see
-             cref="T:System.Xml.IXmlNamespaceResolver" />
+            >The <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
             
 
              object is used to resolve namespace prefixes related to type conversions. For example, when converting an xs:QName to an xs:string.</para
           >
           <para
-            >For more information about type support in the <see
-             cref="N:System.Xml" />
+            >For more information about type support in the <see cref="N:System.Xml" />
 
             
 
-             namespace, see <format
-             type="text/html">
+             namespace, see <format type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
@@ -261,8 +255,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, returns the item's value as the type specified using the <see
-             cref="T:System.Xml.IXmlNamespaceResolver" />
+            >When overridden in a derived class, returns the item's value as the type specified using the <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
             
 
@@ -274,19 +267,26 @@
           <para>The value of the item as the type requested.</para>
         </returns>
         <param name="returnType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type to return the item's value as.</param
         >
         <param name="nsResolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.IXmlNamespaceResolver" />
+          The <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
           
 
@@ -311,26 +311,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.XPath.XPathItem.ValueAsDateTime" />
+            >The <see cref="P:System.Xml.XPath.XPathItem.ValueAsDateTime" />
 
             
 
-             property attempts to convert the value of the item to the dnprdnext <see
-             cref="T:System.Boolean" />
+             property attempts to convert the value of the item to the dnprdnext <see cref="T:System.Boolean" />
 
             
 
              type according to the XPath 2.0 rules for casting the item's type.</para
           >
           <para
-            >For more information about type support in the <see
-             cref="N:System.Xml" />
+            >For more information about type support in the <see cref="N:System.Xml" />
 
             
 
-             namespace, see <format
-             type="text/html">
+             namespace, see <format type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
@@ -344,8 +340,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets the item's value as a <see
-             cref="T:System.Boolean" />
+            >When overridden in a derived class, gets the item's value as a <see cref="T:System.Boolean" />
 
             
 
@@ -374,26 +369,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.XPath.XPathItem.ValueAsDateTime" />
+            >The <see cref="P:System.Xml.XPath.XPathItem.ValueAsDateTime" />
 
             
 
-             property attempts to convert the value of the item to the dnprdnext <see
-             cref="T:System.DateTime" />
+             property attempts to convert the value of the item to the dnprdnext <see cref="T:System.DateTime" />
 
             
 
              type according to the XPath 2.0 rules for casting the item's type.</para
           >
           <para
-            >For more information about type support in the <see
-             cref="N:System.Xml" />
+            >For more information about type support in the <see cref="N:System.Xml" />
 
             
 
-             namespace, see <format
-             type="text/html">
+             namespace, see <format type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
@@ -407,8 +398,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets the item's value as a <see
-             cref="T:System.DateTime" />
+            >When overridden in a derived class, gets the item's value as a <see cref="T:System.DateTime" />
 
             
 
@@ -434,26 +424,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.XPath.XPathItem.ValueAsDouble" />
+            >The <see cref="P:System.Xml.XPath.XPathItem.ValueAsDouble" />
 
             
 
-             property attempts to convert the value of the item to the dnprdnext <see
-             cref="T:System.Double" />
+             property attempts to convert the value of the item to the dnprdnext <see cref="T:System.Double" />
 
             
 
              type according to the XPath 2.0 rules for casting the item's type.</para
           >
           <para
-            >For more information about type support in the <see
-             cref="N:System.Xml" />
+            >For more information about type support in the <see cref="N:System.Xml" />
 
             
 
-             namespace, see <format
-             type="text/html">
+             namespace, see <format type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
@@ -467,8 +453,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets the item's value as a <see
-             cref="T:System.Double" />
+            >When overridden in a derived class, gets the item's value as a <see cref="T:System.Double" />
 
             
 
@@ -494,26 +479,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.XPath.XPathItem.ValueAsInt" />
+            >The <see cref="P:System.Xml.XPath.XPathItem.ValueAsInt" />
 
             
 
-             property attempts to convert the value of the item to the dnprdnext <see
-             cref="T:System.Int32" />
+             property attempts to convert the value of the item to the dnprdnext <see cref="T:System.Int32" />
 
             
 
              type according to the XPath 2.0 rules for casting the item's type.</para
           >
           <para
-            >For more information about type support in the <see
-             cref="N:System.Xml" />
+            >For more information about type support in the <see cref="N:System.Xml" />
 
             
 
-             namespace, see <format
-             type="text/html">
+             namespace, see <format type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
@@ -527,8 +508,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets the item's value as an <see
-             cref="T:System.Int32" />
+            >When overridden in a derived class, gets the item's value as an <see cref="T:System.Int32" />
 
             
 
@@ -554,26 +534,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.XPath.XPathItem.ValueAsLong" />
+            >The <see cref="P:System.Xml.XPath.XPathItem.ValueAsLong" />
 
             
 
-             property attempts to convert the value of the item to the dnprdnext <see
-             cref="T:System.Int64" />
+             property attempts to convert the value of the item to the dnprdnext <see cref="T:System.Int64" />
 
             
 
              type according to the XPath 2.0 rules for casting the item's type.</para
           >
           <para
-            >For more information about type support in the <see
-             cref="N:System.Xml" />
+            >For more information about type support in the <see cref="N:System.Xml" />
 
             
 
-             namespace, see <format
-             type="text/html">
+             namespace, see <format type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
@@ -587,8 +563,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets the item's value as an <see
-             cref="T:System.Int64" />
+            >When overridden in a derived class, gets the item's value as an <see cref="T:System.Int64" />
 
             
 
@@ -614,49 +589,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, the <see
-             cref="P:System.Xml.XPath.XPathItem.ValueType" />
+            >When overridden in a derived class, the <see cref="P:System.Xml.XPath.XPathItem.ValueType" />
 
             
 
              property gets the dnprdnshort type of the typed value of the item.</para
           >
           <para
-            >For example, an element of type xs:int would have a <see
-             cref="P:System.Xml.XPath.XPathItem.ValueType" />
+            >For example, an element of type xs:int would have a <see cref="P:System.Xml.XPath.XPathItem.ValueType" />
 
             
 
-             of <see
-             cref="T:System.Int32" />
+             of <see cref="T:System.Int32" />
 
             
 
-             by default. However, the <see
-             cref="P:System.Xml.XPath.XPathItem.ValueType" />
+             by default. However, the <see cref="P:System.Xml.XPath.XPathItem.ValueType" />
 
             
 
-             could be any one of the valid types that can be mapped to xs:int, such as <see
-             cref="T:System.Int16" />
+             could be any one of the valid types that can be mapped to xs:int, such as <see cref="T:System.Int16" />
 
             
 
-             or <see
-             cref="T:System.Double" />
+             or <see cref="T:System.Double" />
 
             
 
             .</para
           >
           <para
-            >For more information about type support in the <see
-             cref="N:System.Xml" />
+            >For more information about type support in the <see cref="N:System.Xml" />
 
             
 
-             namespace, see <format
-             type="text/html">
+             namespace, see <format type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
@@ -696,23 +663,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, the <see
-             cref="P:System.Xml.XPath.XPathItem.XmlType" />
+            >When overridden in a derived class, the <see cref="P:System.Xml.XPath.XPathItem.XmlType" />
 
             
 
-             property gets the <see
-             cref="T:System.Xml.Schema.XmlSchemaType" />
+             property gets the <see cref="T:System.Xml.Schema.XmlSchemaType" />
 
             
 
-             for the item. For example, the <see
-             cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
+             for the item. For example, the <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
 
             
 
-             or <see
-             cref="T:System.Xml.Schema.XmlSchemaComplexType" />
+             or <see cref="T:System.Xml.Schema.XmlSchemaComplexType" />
 
             
 
@@ -722,8 +685,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets the <see
-             cref="T:System.Xml.Schema.XmlSchemaType" />
+            >When overridden in a derived class, gets the <see cref="T:System.Xml.Schema.XmlSchemaType" />
 
             
 

@@ -59,7 +59,11 @@
           <para>Runs when the entire object graph has been deserialized.</para>
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

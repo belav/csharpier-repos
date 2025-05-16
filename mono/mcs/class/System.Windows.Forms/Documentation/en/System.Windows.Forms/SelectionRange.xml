@@ -19,43 +19,35 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.SelectionRange" />
+        >The <see cref="T:System.Windows.Forms.SelectionRange" />
 
         
 
-         is the date or dates selected and highlighted on the <see
-         cref="T:System.Windows.Forms.MonthCalendar" />
+         is the date or dates selected and highlighted on the <see cref="T:System.Windows.Forms.MonthCalendar" />
 
         
 
-         control. If only one date is selected, the <see
-         cref="P:System.Windows.Forms.SelectionRange.Start" />
+         control. If only one date is selected, the <see cref="P:System.Windows.Forms.SelectionRange.Start" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.SelectionRange.End" />
+         and <see cref="P:System.Windows.Forms.SelectionRange.End" />
 
         
 
-         property values will be equal. The <see
-         cref="T:System.Windows.Forms.SelectionRange" />
+         property values will be equal. The <see cref="T:System.Windows.Forms.SelectionRange" />
 
         
 
-         can be changed by the user clicking a date while dragging the mouse pointer across the desired dates, or you can set the range in code. For example, you might want to have the user enter a date range into two <see
-         cref="T:System.Windows.Forms.TextBox" />
+         can be changed by the user clicking a date while dragging the mouse pointer across the desired dates, or you can set the range in code. For example, you might want to have the user enter a date range into two <see cref="T:System.Windows.Forms.TextBox" />
 
         
 
-         controls or two <see
-         cref="T:System.Windows.Forms.DateTimePicker" />
+         controls or two <see cref="T:System.Windows.Forms.DateTimePicker" />
 
         
 
-         controls and set the <see
-         cref="T:System.Windows.Forms.SelectionRange" />
+         controls and set the <see cref="T:System.Windows.Forms.SelectionRange" />
 
         
 
@@ -76,13 +68,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SelectionRange.Start" />
+            >The <see cref="P:System.Windows.Forms.SelectionRange.Start" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.SelectionRange.End" />
+             and <see cref="P:System.Windows.Forms.SelectionRange.End" />
 
             
 
@@ -92,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.SelectionRange" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.SelectionRange" />
 
             
 
@@ -119,28 +108,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SelectionRange.Start" />
+            >The <see cref="P:System.Windows.Forms.SelectionRange.Start" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.SelectionRange.End" />
+             and <see cref="P:System.Windows.Forms.SelectionRange.End" />
 
             
 
-             property values are assigned the <see
-             cref="P:System.Windows.Forms.SelectionRange.Start" />
+             property values are assigned the <see cref="P:System.Windows.Forms.SelectionRange.Start" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.SelectionRange.End" />
+             and <see cref="P:System.Windows.Forms.SelectionRange.End" />
 
             
 
-             property values of the assigned <see
-             cref="T:System.Windows.Forms.SelectionRange" />
+             property values of the assigned <see cref="T:System.Windows.Forms.SelectionRange" />
 
             
 
@@ -150,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.SelectionRange" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.SelectionRange" />
 
             
 
@@ -159,12 +142,15 @@
           >
         </summary>
         <param name="range">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The existing <see
-           cref="T:System.Windows.Forms.SelectionRange" />
+          The existing <see cref="T:System.Windows.Forms.SelectionRange" />
 
           
 
@@ -191,30 +177,25 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >If the <paramref
-               name="lower" />
+              >If the <paramref name="lower" />
               <see cref="T:System.DateTime" />
 
               
 
-               value is greater than the <paramref
-               name="upper" />
+               value is greater than the <paramref name="upper" />
               <see cref="T:System.DateTime" />
 
               
 
-               value, the <paramref
-               name="lower" />
+               value, the <paramref name="lower" />
 
               
 
-               value will be assigned to the <see
-               cref="P:System.Windows.Forms.SelectionRange.End" />
+               value will be assigned to the <see cref="P:System.Windows.Forms.SelectionRange.End" />
 
               
 
-               property instead of the <see
-               cref="P:System.Windows.Forms.SelectionRange.Start" />
+               property instead of the <see cref="P:System.Windows.Forms.SelectionRange.Start" />
 
               
 
@@ -225,8 +206,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.SelectionRange" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.SelectionRange" />
 
             
 
@@ -234,24 +214,30 @@
           >
         </summary>
         <param name="lower">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The starting date in the <see
-           cref="T:System.Windows.Forms.SelectionRange" />
+          The starting date in the <see cref="T:System.Windows.Forms.SelectionRange" />
 
           
 
           . </param
         >
         <param name="upper">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The ending date in the <see
-           cref="T:System.Windows.Forms.SelectionRange" />
+          The ending date in the <see cref="T:System.Windows.Forms.SelectionRange" />
 
           
 
@@ -312,18 +298,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.SelectionRange.ToString" />
+            >The <see cref="M:System.Windows.Forms.SelectionRange.ToString" />
 
             
 
-             method returns a string that includes the values for the <see
-             cref="P:System.Windows.Forms.SelectionRange.Start" />
+             method returns a string that includes the values for the <see cref="P:System.Windows.Forms.SelectionRange.Start" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.SelectionRange.End" />
+             and <see cref="P:System.Windows.Forms.SelectionRange.End" />
 
             
 
@@ -333,8 +316,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the <see
-             cref="T:System.Windows.Forms.SelectionRange" />
+            >Returns a string that represents the <see cref="T:System.Windows.Forms.SelectionRange" />
 
             
 
@@ -344,8 +326,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the current <see
-             cref="T:System.Windows.Forms.SelectionRange" />
+            >A string that represents the current <see cref="T:System.Windows.Forms.SelectionRange" />
 
             
 

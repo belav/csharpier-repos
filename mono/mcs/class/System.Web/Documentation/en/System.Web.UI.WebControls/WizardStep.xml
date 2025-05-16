@@ -28,33 +28,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Web.UI.WebControls.Wizard" />
+        >A <see cref="T:System.Web.UI.WebControls.Wizard" />
 
         
 
-         control is made up of a collection of <see
-         cref="T:System.Web.UI.WebControls.WizardStep" />
+         control is made up of a collection of <see cref="T:System.Web.UI.WebControls.WizardStep" />
 
         
 
-         objects that represent single steps of a wizard. The <see
-         cref="T:System.Web.UI.WebControls.Wizard" />
+         objects that represent single steps of a wizard. The <see cref="T:System.Web.UI.WebControls.Wizard" />
 
         
 
-         control displays a single <see
-         cref="T:System.Web.UI.WebControls.WizardStep" />
+         control displays a single <see cref="T:System.Web.UI.WebControls.WizardStep" />
 
         
 
-         object at a time. You can use a <see
-         cref="T:System.Web.UI.WebControls.Wizard" />
+         object at a time. You can use a <see cref="T:System.Web.UI.WebControls.Wizard" />
 
         
 
-         control and its associated <see
-         cref="T:System.Web.UI.WebControls.WizardStep" />
+         control and its associated <see cref="T:System.Web.UI.WebControls.WizardStep" />
 
         
 
@@ -62,28 +56,23 @@
       >
       <block subset="none" type="note">
         <para
-          >If you embed the <see
-           cref="T:System.Web.UI.WebControls.Login" />
+          >If you embed the <see cref="T:System.Web.UI.WebControls.Login" />
 
           
 
-           control in a <see
-           cref="T:System.Web.UI.WebControls.WizardStep" />
+           control in a <see cref="T:System.Web.UI.WebControls.WizardStep" />
 
           
 
-          , explicitly set the <see
-           cref="P:System.Web.UI.WebControls.Wizard.ActiveStepIndex" />
+          , explicitly set the <see cref="P:System.Web.UI.WebControls.Wizard.ActiveStepIndex" />
 
           
 
-           in a Page_Load event handler if the user is authenticated. The <see
-           cref="T:System.Web.UI.WebControls.Wizard" />
+           in a Page_Load event handler if the user is authenticated. The <see cref="T:System.Web.UI.WebControls.Wizard" />
 
           
 
-           control does not automatically advance to the next <see
-           cref="T:System.Web.UI.WebControls.WizardStep" />
+           control does not automatically advance to the next <see cref="T:System.Web.UI.WebControls.WizardStep" />
 
           
 
@@ -91,13 +80,11 @@
         >
       </block>
       <para
-        >You cannot apply a theme to <see
-         cref="T:System.Web.UI.WebControls.WizardStep" />
+        >You cannot apply a theme to <see cref="T:System.Web.UI.WebControls.WizardStep" />
 
         
 
-         but you can apply a theme to <see
-         cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
+         but you can apply a theme to <see cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
 
         
 
@@ -105,8 +92,7 @@
       >
       <block subset="none" type="note">
         <para
-          >If you programmatically add a <see
-           cref="T:System.Web.UI.WebControls.WizardStep" />
+          >If you programmatically add a <see cref="T:System.Web.UI.WebControls.WizardStep" />
 
           
 
@@ -117,8 +103,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a basic step that is displayed in a <see
-         cref="T:System.Web.UI.WebControls.Wizard" />
+        >Represents a basic step that is displayed in a <see cref="T:System.Web.UI.WebControls.Wizard" />
 
         
 
@@ -137,8 +122,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.WizardStep" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.WizardStep" />
 
             
 

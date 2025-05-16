@@ -14,39 +14,33 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Changes to a control such as resizing, showing or hiding child controls, and adding or removing child controls make it necessary for a control to layout its child controls. A <see
-         cref="T:System.Windows.Forms.LayoutEventArgs" />
+        >Changes to a control such as resizing, showing or hiding child controls, and adding or removing child controls make it necessary for a control to layout its child controls. A <see cref="T:System.Windows.Forms.LayoutEventArgs" />
 
         
 
-         specifies the child control that has been changed and its affected property. For example, if a control has been made visible since the last layout operation, the <see
-         cref="P:System.Windows.Forms.Control.Visible" />
+         specifies the child control that has been changed and its affected property. For example, if a control has been made visible since the last layout operation, the <see cref="P:System.Windows.Forms.Control.Visible" />
 
         
 
          property is affected.</para
       >
       <para
-        >The <see
-         cref="P:System.Windows.Forms.LayoutEventArgs.AffectedControl" />
+        >The <see cref="P:System.Windows.Forms.LayoutEventArgs.AffectedControl" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.LayoutEventArgs.AffectedProperty" />
+         and <see cref="P:System.Windows.Forms.LayoutEventArgs.AffectedProperty" />
 
         
 
-         properties are set to null if no values were provided when the <see
-         cref="M:System.Windows.Forms.Control.PerformLayout" />
+         properties are set to null if no values were provided when the <see cref="M:System.Windows.Forms.Control.PerformLayout" />
 
         
 
          method was called.</para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
         </format>
 
@@ -58,8 +52,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.Control.Layout" />
+        >Provides data for the <see cref="E:System.Windows.Forms.Control.Layout" />
 
         
 
@@ -86,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.LayoutEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.LayoutEventArgs" />
 
             
 
@@ -95,19 +87,26 @@
           >
         </summary>
         <param name="affectedComponent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Component" />
+          The <see cref="T:System.ComponentModel.Component" />
 
           
 
            affected by the layout change. </param
         >
         <param name="affectedProperty">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -130,8 +129,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.LayoutEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.LayoutEventArgs" />
 
             
 
@@ -139,19 +137,26 @@
           >
         </summary>
         <param name="affectedControl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Control" />
+          The <see cref="T:System.Windows.Forms.Control" />
 
           
 
            affected by the layout change.</param
         >
         <param name="affectedProperty">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -181,8 +186,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ComponentModel.Component" />
+            >Gets the <see cref="T:System.ComponentModel.Component" />
 
             
 
@@ -205,13 +209,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.LayoutEventArgs.AffectedControl" />
+            >The <see cref="P:System.Windows.Forms.LayoutEventArgs.AffectedControl" />
 
             
 
-             property is set to null if no value was provided when the <see
-             cref="M:System.Windows.Forms.Control.PerformLayout" />
+             property is set to null if no value was provided when the <see cref="M:System.Windows.Forms.Control.PerformLayout" />
 
             
 
@@ -239,18 +241,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a child control has been made visible since the last layout operation, the <see
-             cref="P:System.Windows.Forms.Control.Visible" />
+            >If a child control has been made visible since the last layout operation, the <see cref="P:System.Windows.Forms.Control.Visible" />
 
             
 
-             property is affected. The <see
-             cref="P:System.Windows.Forms.LayoutEventArgs.AffectedProperty" />
+             property is affected. The <see cref="P:System.Windows.Forms.LayoutEventArgs.AffectedProperty" />
 
             
 
-             property is set to null if no value was provided when the <see
-             cref="M:System.Windows.Forms.Control.PerformLayout" />
+             property is set to null if no value was provided when the <see cref="M:System.Windows.Forms.Control.PerformLayout" />
 
             
 

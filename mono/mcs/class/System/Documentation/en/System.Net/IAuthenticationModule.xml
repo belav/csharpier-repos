@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.IAuthenticationModule" />
+        >The <see cref="T:System.Net.IAuthenticationModule" />
 
         
 
@@ -34,13 +33,11 @@
       >
       <para>Authentication modules conduct the entire authentication process with a server, responding to an authentication challenge as appropriate. This process may consist of requests to an authentication server separate from the resource server, as well as any other activities required to properly authenticate a request for a URI.</para>
       <para
-        >Custom authentication modules should implement the <see
-         cref="T:System.Net.IAuthenticationModule" />
+        >Custom authentication modules should implement the <see cref="T:System.Net.IAuthenticationModule" />
 
         
 
-         interface and then register with the <see
-         cref="M:System.Net.AuthenticationManager.Register(System.Net.IAuthenticationModule)" />
+         interface and then register with the <see cref="M:System.Net.AuthenticationManager.Register(System.Net.IAuthenticationModule)" />
 
         
 
@@ -84,18 +81,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.IAuthenticationModule.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
+            >The <see cref="M:System.Net.IAuthenticationModule.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
 
             
 
-             method conducts the authentication process with the server and returns an <see
-             cref="T:System.Net.Authorization" />
+             method conducts the authentication process with the server and returns an <see cref="T:System.Net.Authorization" />
 
             
 
-             instance to the <see
-             cref="T:System.Net.AuthenticationManager" />
+             instance to the <see cref="T:System.Net.AuthenticationManager" />
 
             
 
@@ -105,8 +99,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an instance of the <see
-             cref="T:System.Net.Authorization" />
+            >Returns an instance of the <see cref="T:System.Net.Authorization" />
 
             
 
@@ -116,8 +109,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.Authorization" />
+            >An <see cref="T:System.Net.Authorization" />
 
             
 
@@ -125,26 +117,37 @@
           >
         </returns>
         <param name="challenge">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The authentication challenge sent by the server. </param
         >
         <param name="request">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.WebRequest" />
+          The <see cref="T:System.Net.WebRequest" />
 
           
 
            instance associated with the challenge. </param
         >
         <param name="credentials">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -173,8 +176,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -185,23 +187,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.IAuthenticationModule.AuthenticationType" />
+            >The <see cref="P:System.Net.IAuthenticationModule.AuthenticationType" />
 
             
 
-             property identifies the authentication type implemented by this authentication module. The <see
-             cref="P:System.Net.IAuthenticationModule.AuthenticationType" />
+             property identifies the authentication type implemented by this authentication module. The <see cref="P:System.Net.IAuthenticationModule.AuthenticationType" />
 
             
 
-             property is used by the <see
-             cref="M:System.Net.AuthenticationManager.Register(System.Net.IAuthenticationModule)" />
+             property is used by the <see cref="M:System.Net.AuthenticationManager.Register(System.Net.IAuthenticationModule)" />
 
             
 
-             method to determine if the authentication module has been registered, and by the <see
-             cref="M:System.Net.AuthenticationManager.Unregister(System.Net.IAuthenticationModule)" />
+             method to determine if the authentication module has been registered, and by the <see cref="M:System.Net.AuthenticationManager.Unregister(System.Net.IAuthenticationModule)" />
 
             
 
@@ -240,8 +238,7 @@
             
 
             if the authentication module supports
-   preauthentication; otherwise <see
-             langword="false" />
+   preauthentication; otherwise <see langword="false" />
 
             
 
@@ -251,18 +248,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.IAuthenticationModule.CanPreAuthenticate" />
+            >The <see cref="P:System.Net.IAuthenticationModule.CanPreAuthenticate" />
 
             
 
-             property is set to true to indicate that the authentication module can respond with a valid <see
-             cref="T:System.Net.Authorization" />
+             property is set to true to indicate that the authentication module can respond with a valid <see cref="T:System.Net.Authorization" />
 
             
 
-             instance when the <see
-             cref="M:System.Net.IAuthenticationModule.PreAuthenticate(System.Net.WebRequest,System.Net.ICredentials)" />
+             instance when the <see cref="M:System.Net.IAuthenticationModule.PreAuthenticate(System.Net.WebRequest,System.Net.ICredentials)" />
 
             
 
@@ -306,18 +300,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Net.IAuthenticationModule.CanPreAuthenticate" />
+            >When the <see cref="P:System.Net.IAuthenticationModule.CanPreAuthenticate" />
 
             
 
-             property is true, the <see
-             cref="M:System.Net.IAuthenticationModule.PreAuthenticate(System.Net.WebRequest,System.Net.ICredentials)" />
+             property is true, the <see cref="M:System.Net.IAuthenticationModule.PreAuthenticate(System.Net.WebRequest,System.Net.ICredentials)" />
 
             
 
-             method will return an instance of the <see
-             cref="T:System.Net.Authorization" />
+             method will return an instance of the <see cref="T:System.Net.Authorization" />
 
             
 
@@ -327,8 +318,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an instance of the <see
-             cref="T:System.Net.Authorization" />
+            >Returns an instance of the <see cref="T:System.Net.Authorization" />
 
             
 
@@ -338,8 +328,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.Authorization" />
+            >An <see cref="T:System.Net.Authorization" />
 
             
 
@@ -347,19 +336,26 @@
           >
         </returns>
         <param name="request">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.WebRequest" />
+          The <see cref="T:System.Net.WebRequest" />
 
           
 
            instance associated with the authentication request. </param
         >
         <param name="credentials">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -3,7 +3,9 @@
   <paragraph>A virtual property declaration specifies that the accessors of the property are virtual. The virtual modifier applies to both accessors of a read-write property-it is not possible for only one accessor of a read-write property to be virtual. </paragraph>
   <paragraph
     >An abstract property declaration specifies that the accessors of the property are virtual, but does not provide an actual implementation of the accessors. Instead, non-abstract derived classes are required to provide their own implementation for the accessors by overriding the property. Because an accessor for an abstract property declaration provides no actual implementation, its <non_terminal
-     where="17.6.2">accessor-body</non_terminal>
+      where="17.6.2"
+      >accessor-body</non_terminal
+    >
 
     
 
@@ -11,8 +13,7 @@
   >
   <paragraph>A property declaration that includes both the abstract and override modifiers specifies that the property is abstract and overrides a base property. The accessors of such a property are also abstract. </paragraph>
   <paragraph
-    >Abstract property declarations are only permitted in abstract classes (<hyperlink
-    >17.1.1.1</hyperlink>
+    >Abstract property declarations are only permitted in abstract classes (<hyperlink>17.1.1.1</hyperlink>
 
     
 
@@ -21,32 +22,26 @@
   <paragraph>An overriding property declaration must specify the exact same accessibility modifiers, type, and name as the inherited property. If the inherited property has only a single accessor (i.e., if the inherited property is read-only or write-only), the overriding property must include only that accessor. If the inherited property includes both accessors (i.e., if the inherited property is read-write), the overriding property can include either a single accessor or both accessors. </paragraph>
   <paragraph>An overriding property declaration may include the sealed modifier. Use of this modifier prevents a derived class from further overriding the property. The accessors of a sealed property are also sealed. </paragraph>
   <paragraph
-    >Except for differences in declaration and invocation syntax, virtual, sealed, override, and abstract accessors behave exactly like virtual, sealed, override and abstract methods. Specifically, the rules described in <hyperlink
-    >17.5.3</hyperlink>
+    >Except for differences in declaration and invocation syntax, virtual, sealed, override, and abstract accessors behave exactly like virtual, sealed, override and abstract methods. Specifically, the rules described in <hyperlink>17.5.3</hyperlink>
 
     
 
-    , <hyperlink
-    >17.5.4</hyperlink>
+    , <hyperlink>17.5.4</hyperlink>
 
     
 
-    , <hyperlink
-    >17.5.5</hyperlink>
+    , <hyperlink>17.5.5</hyperlink>
 
     
 
-    , and <hyperlink
-    >17.5.6</hyperlink>
+    , and <hyperlink>17.5.6</hyperlink>
 
     
 
-     apply as if accessors were methods of a corresponding form: <list
-    >
+     apply as if accessors were methods of a corresponding form: <list>
       <list_item> A get accessor corresponds to a parameterless method with a return value of the property type and the same modifiers as the containing property. </list_item>
       <list_item
-        > A set accessor corresponds to a method with a single value parameter of the property type, a <keyword
-        >void</keyword>
+        > A set accessor corresponds to a method with a single value parameter of the property type, a <keyword>void</keyword>
 
         
 
@@ -56,8 +51,7 @@
   </paragraph>
   <paragraph>
     <example
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 abstract class A  
 {  
@@ -83,8 +77,7 @@ abstract class A
   </paragraph>
   <paragraph>
     <example
-      >A class that derives from A is show below: <code_example
-      >
+      >A class that derives from A is show below: <code_example>
         <![CDATA[
 class B: A  
 {  

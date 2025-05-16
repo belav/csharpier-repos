@@ -42,79 +42,65 @@
         </item>
       </list>
       <para
-        >Override the <see
-         cref="P:System.ServiceModel.Channels.MessageEncoderFactory.Encoder" />
+        >Override the <see cref="P:System.ServiceModel.Channels.MessageEncoderFactory.Encoder" />
 
         
 
-         to return an instance of your custom <see
-         cref="T:System.ServiceModel.Channels.MessageEncoder" />
+         to return an instance of your custom <see cref="T:System.ServiceModel.Channels.MessageEncoder" />
 
         
 
-        . Then wire up your custom <see
-         cref="T:System.ServiceModel.Channels.MessageEncoderFactory" />
+        . Then wire up your custom <see cref="T:System.ServiceModel.Channels.MessageEncoderFactory" />
 
         
 
-         to the binding element stack used to configure the service or client by overriding the <see
-         cref="M:System.ServiceModel.Channels.MessageEncodingBindingElement.CreateMessageEncoderFactory" />
+         to the binding element stack used to configure the service or client by overriding the <see cref="M:System.ServiceModel.Channels.MessageEncodingBindingElement.CreateMessageEncoderFactory" />
 
         
 
          method to return an instance of this factory.</para
       >
       <para
-        >The task of converting between the in-memory representation of a message and an XML Information Set (Infoset) representation that can be written to a stream is encapsulated within the <see
-         cref="T:System.ServiceModel.Channels.MessageEncoder" />
+        >The task of converting between the in-memory representation of a message and an XML Information Set (Infoset) representation that can be written to a stream is encapsulated within the <see cref="T:System.ServiceModel.Channels.MessageEncoder" />
 
         
 
          class, which most commonly serves as a factory for XML readers and XML writers that support specific types of XML encodings. </para
       >
       <para
-        >The key methods on <see
-         cref="T:System.ServiceModel.Channels.MessageEncoder" />
+        >The key methods on <see cref="T:System.ServiceModel.Channels.MessageEncoder" />
 
         
 
-         are <see
-         cref="M:System.ServiceModel.Channels.MessageEncoder.WriteMessage" />
+         are <see cref="M:System.ServiceModel.Channels.MessageEncoder.WriteMessage" />
 
         
 
-         and <see
-         cref="M:System.ServiceModel.Channels.MessageEncoder.ReadMessage" />
+         and <see cref="M:System.ServiceModel.Channels.MessageEncoder.ReadMessage" />
 
         
 
-        . <see
-         cref="M:System.ServiceModel.Channels.MessageEncoder.WriteMessage" />
+        . <see cref="M:System.ServiceModel.Channels.MessageEncoder.WriteMessage" />
 
         
 
-         takes a <see
-         cref="T:System.ServiceModel.Channels.Message" />
+         takes a <see cref="T:System.ServiceModel.Channels.Message" />
 
         
 
-         object and writes it into a <see
-         cref="T:System.IO.Stream" />
+         object and writes it into a <see cref="T:System.IO.Stream" />
 
         
 
-         object. <see
-         cref="M:System.ServiceModel.Channels.MessageEncoder.ReadMessage" />
+         object. <see cref="M:System.ServiceModel.Channels.MessageEncoder.ReadMessage" />
 
         
 
-         takes a <see
-         cref="T:System.IO.Stream" />
+         takes a <see cref="T:System.IO.Stream" />
 
         
 
-         object and a maximum header size and returns a <see
-         cref="T:System.ServiceModel.Channels.Message" />
+         object and a maximum header size and returns a <see cref="T:System.ServiceModel.Channels.Message" />
 
         
 
@@ -143,8 +129,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.MessageEncoder" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageEncoder" />
 
             
 
@@ -170,12 +155,16 @@
           <para>The content type is a Multipurpose Internet Mail Exchange (MIME) header that appears at the beginning of a MIME message as well as within the separate body parts. Content-type headers are used to specify the media type and subtype of data in the body of a message and to fully specify the media type and subtype of data in the body of a message and to specify the character encoding (optional) of the data. An example of a MIME content type that can be supported: “application/soap+xml; charset=’utf8’”.</para>
           <para
             >A grammar that details the syntax of the content-type header is described in <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=95945">RFC 2045</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=95945"
+              >RFC 2045</see
+            >
 
             
 
             , Section 5.1. <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=95944">RFC 2046</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=95944"
+              >RFC 2046</see
+            >
 
             
 
@@ -224,8 +213,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The typed object <paramref
-             name="T " />
+            >The typed object <paramref name="T " />
 
             
 
@@ -233,7 +221,11 @@
           >
         </returns>
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -264,8 +256,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used to determine whether the message encoder can be used to read a particular style of message, based on its content-type. The information in the <see
-             cref="T:System.Net.Mime.ContentType" />
+            >This method is used to determine whether the message encoder can be used to read a particular style of message, based on its content-type. The information in the <see cref="T:System.Net.Mime.ContentType" />
 
             
 
@@ -273,12 +264,16 @@
           >
           <para
             >A grammar that details the syntax of the content-type header is described in <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=95945">RFC 2045</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=95945"
+              >RFC 2045</see
+            >
 
             
 
              Section 5.1. <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=95944">RFC 2046</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=95944"
+              >RFC 2046</see
+            >
 
             
 
@@ -294,7 +289,11 @@
           <para>true if the message-level content-type specified is supported; otherwise false.</para>
         </returns>
         <param name="contentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -345,8 +344,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the versions of SOAP and WS-Addressing associated with a message and its exchange. If SOAP versions are not to be used, this property should be overridden to return <see
-             cref="P:System.ServiceModel.Channels.MessageVersion.None" />
+            >Specifies the versions of SOAP and WS-Addressing associated with a message and its exchange. If SOAP versions are not to be used, this property should be overridden to return <see cref="P:System.ServiceModel.Channels.MessageVersion.None" />
 
             
 
@@ -388,8 +386,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.Message" />
+            >The <see cref="T:System.ServiceModel.Channels.Message" />
 
             
 
@@ -397,29 +394,34 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ArraySegment`1" />
+          A <see cref="T:System.ArraySegment`1" />
 
           
 
-           of type <see
-           cref="T:System.Byte" />
+           of type <see cref="T:System.Byte" />
 
           
 
            that provides the buffer from which the message is deserialized.</param
         >
         <param name="bufferManager">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BufferManager" />
+          The <see cref="T:System.ServiceModel.Channels.BufferManager" />
 
           
 
@@ -456,8 +458,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.Message" />
+            >The <see cref="T:System.ServiceModel.Channels.Message" />
 
             
 
@@ -465,19 +466,26 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.Stream" />
+          The <see cref="T:System.IO.Stream" />
 
           
 
            object from which the message is read.</param
         >
         <param name="maxSizeOfHeaders">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -515,8 +523,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.Message" />
+            >The <see cref="T:System.ServiceModel.Channels.Message" />
 
             
 
@@ -524,36 +531,45 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ArraySegment`1" />
+          A <see cref="T:System.ArraySegment`1" />
 
           
 
-           of type <see
-           cref="T:System.Byte" />
+           of type <see cref="T:System.Byte" />
 
           
 
            that provides the buffer from which the message is deserialized.</param
         >
         <param name="bufferManager">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BufferManager" />
+          The <see cref="T:System.ServiceModel.Channels.BufferManager" />
 
           
 
            that manages the buffer from which the message is deserialized.</param
         >
         <param name="contentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -591,8 +607,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.Message" />
+            >The <see cref="T:System.ServiceModel.Channels.Message" />
 
             
 
@@ -600,26 +615,37 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.Stream" />
+          The <see cref="T:System.IO.Stream" />
 
           
 
            object from which the message is read.</param
         >
         <param name="maxSizeOfHeaders">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The maximum size of the headers that can be read from the message.</param
         >
         <param name="contentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -680,34 +706,38 @@
           <para>When overridden in a derived class, writes a message to a specified stream.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Message" />
+          The <see cref="T:System.ServiceModel.Channels.Message" />
 
           
 
-           to write to the <paramref
-           name="stream" />
+           to write to the <paramref name="stream" />
 
           
 
           .</param
         >
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.Stream" />
+          The <see cref="T:System.IO.Stream" />
 
           
 
-           object to which the <paramref
-           name="message" />
+           object to which the <paramref name="message" />
 
           
 
@@ -740,13 +770,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method calls the abstract method <see
-             cref="M:System.ServiceModel.Channels.MessageEncoder.WriteMessage(System.ServiceModel.Channels.Message,System.Int32,System.ServiceModel.Channels.BufferManager,System.Int32)" />
+            >This method calls the abstract method <see cref="M:System.ServiceModel.Channels.MessageEncoder.WriteMessage(System.ServiceModel.Channels.Message,System.Int32,System.ServiceModel.Channels.BufferManager,System.Int32)" />
 
             
 
-             with <paramref
-             name="messageOffset" />
+             with <paramref name="messageOffset" />
 
             
 
@@ -760,8 +788,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ArraySegment`1" />
+            >A <see cref="T:System.ArraySegment`1" />
 
             
 
@@ -769,31 +796,41 @@
           >
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Message" />
+          The <see cref="T:System.ServiceModel.Channels.Message" />
 
           
 
            to write to the message buffer.</param
         >
         <param name="maxMessageSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The maximum message size that can be written.</param
         >
         <param name="bufferManager">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BufferManager" />
+          The <see cref="T:System.ServiceModel.Channels.BufferManager" />
 
           
 
@@ -827,8 +864,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by <see
-             cref="M:System.ServiceModel.Channels.MessageEncoder.WriteMessage(System.ServiceModel.Channels.Message,System.Int32,System.ServiceModel.Channels.BufferManager,System.Int32)" />
+            >This method is called by <see cref="M:System.ServiceModel.Channels.MessageEncoder.WriteMessage(System.ServiceModel.Channels.Message,System.Int32,System.ServiceModel.Channels.BufferManager,System.Int32)" />
 
             
 
@@ -842,8 +878,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ArraySegment`1" />
+            >A <see cref="T:System.ArraySegment`1" />
 
             
 
@@ -851,38 +886,52 @@
           >
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Message" />
+          The <see cref="T:System.ServiceModel.Channels.Message" />
 
           
 
            to write to the message buffer.</param
         >
         <param name="maxMessageSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The maximum message size that can be written.</param
         >
         <param name="bufferManager">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BufferManager" />
+          The <see cref="T:System.ServiceModel.Channels.BufferManager" />
 
           
 
            that manages the buffer to which the message is written.</param
         >
         <param name="messageOffset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -14,44 +14,37 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implement the <see
-         cref="T:System.ServiceModel.Dispatcher.IInstanceProvider" />
+        >Implement the <see cref="T:System.ServiceModel.Dispatcher.IInstanceProvider" />
 
         
 
-         interface to control the creation and recycling of service objects when one is requested or disposed by an <see
-         cref="T:System.ServiceModel.InstanceContext" />
+         interface to control the creation and recycling of service objects when one is requested or disposed by an <see cref="T:System.ServiceModel.InstanceContext" />
 
         
 
          object. </para
       >
       <para
-        >Once the <see
-         cref="T:System.ServiceModel.Dispatcher.IInstanceProvider" />
+        >Once the <see cref="T:System.ServiceModel.Dispatcher.IInstanceProvider" />
 
         
 
-         interface is implemented, you must assign your custom instance provider object to the <see
-         cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InstanceProvider" />
+         interface is implemented, you must assign your custom instance provider object to the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InstanceProvider" />
 
         
 
-         property using either an endpoint behavior (a <see
-         cref="T:System.ServiceModel.Description.IEndpointBehavior" />
+         property using either an endpoint behavior (a <see cref="T:System.ServiceModel.Description.IEndpointBehavior" />
 
         
 
-         object) or a contract behavior (a <see
-         cref="T:System.ServiceModel.Description.IContractBehavior" />
+         object) or a contract behavior (a <see cref="T:System.ServiceModel.Description.IContractBehavior" />
 
         
 
          object). </para
       >
       <para
-        >If the insertion mechanism is an endpoint behavior you can also implement a <see
-         cref="T:System.ServiceModel.Configuration.BehaviorExtensionElement" />
+        >If the insertion mechanism is an endpoint behavior you can also implement a <see cref="T:System.ServiceModel.Configuration.BehaviorExtensionElement" />
 
         
 
@@ -62,94 +55,77 @@
 
         
 
-         has two methods, <see
-         cref="Overload:System.ServiceModel.Dispatcher.IInstanceProvider.GetInstance" />
+         has two methods, <see cref="Overload:System.ServiceModel.Dispatcher.IInstanceProvider.GetInstance" />
 
         
 
-         and <see
-         cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.ReleaseInstance(System.ServiceModel.InstanceContext,System.Object)" />
+         and <see cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.ReleaseInstance(System.ServiceModel.InstanceContext,System.Object)" />
 
         
 
-        . These methods are typically implemented to create service objects using a non-default constructor or to initialize or dispose of some state related to the lifetime of the object. Service object pooling is one example of custom <see
-         cref="T:System.ServiceModel.Dispatcher.IInstanceProvider" />
+        . These methods are typically implemented to create service objects using a non-default constructor or to initialize or dispose of some state related to the lifetime of the object. Service object pooling is one example of custom <see cref="T:System.ServiceModel.Dispatcher.IInstanceProvider" />
 
         
 
          functionality.</para
       >
       <para
-        >Typically, the <see
-         cref="T:System.ServiceModel.InstanceContext" />
+        >Typically, the <see cref="T:System.ServiceModel.InstanceContext" />
 
         
 
-         invokes the <see
-         cref="Overload:System.ServiceModel.Dispatcher.IInstanceProvider.GetInstance" />
+         invokes the <see cref="Overload:System.ServiceModel.Dispatcher.IInstanceProvider.GetInstance" />
 
         
 
-         when the <see
-         cref="T:System.ServiceModel.InstanceContext" />
+         when the <see cref="T:System.ServiceModel.InstanceContext" />
 
         
 
-         is first created and invokes the <see
-         cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.ReleaseInstance(System.ServiceModel.InstanceContext,System.Object)" />
+         is first created and invokes the <see cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.ReleaseInstance(System.ServiceModel.InstanceContext,System.Object)" />
 
         
 
-         method when the <see
-         cref="T:System.ServiceModel.InstanceContext" />
+         method when the <see cref="T:System.ServiceModel.InstanceContext" />
 
         
 
          is closed.</para
       >
       <para
-        >There are two ways to cause an <see
-         cref="T:System.ServiceModel.InstanceContext" />
+        >There are two ways to cause an <see cref="T:System.ServiceModel.InstanceContext" />
 
         
 
-         object to release a service object before the <see
-         cref="T:System.ServiceModel.InstanceContext" />
+         object to release a service object before the <see cref="T:System.ServiceModel.InstanceContext" />
 
         
 
-         is closed. The first method is to set the <see
-         cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
+         is closed. The first method is to set the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
 
         
 
-         to <see
-         cref="F:System.ServiceModel.ReleaseInstanceMode.AfterCall" />
+         to <see cref="F:System.ServiceModel.ReleaseInstanceMode.AfterCall" />
 
         
 
-         or <see
-         cref="F:System.ServiceModel.ReleaseInstanceMode.BeforeAndAfterCall" />
+         or <see cref="F:System.ServiceModel.ReleaseInstanceMode.BeforeAndAfterCall" />
 
         
 
-        . The second method is to call the <see
-         cref="M:System.ServiceModel.InstanceContext.ReleaseServiceInstance" />
+        . The second method is to call the <see cref="M:System.ServiceModel.InstanceContext.ReleaseServiceInstance" />
 
         
 
-         method. If this is done, the <see
-         cref="T:System.ServiceModel.InstanceContext" />
+         method. If this is done, the <see cref="T:System.ServiceModel.InstanceContext" />
 
         
 
-         calls the <see
-         cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.ReleaseInstance(System.ServiceModel.InstanceContext,System.Object)" />
+         calls the <see cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.ReleaseInstance(System.ServiceModel.InstanceContext,System.Object)" />
 
         
 
-         method on the dispatcher's instance provider. If a new message arrives after the instance has been released, indigo2 creates a new instance using the <see
-         cref="Overload:System.ServiceModel.Dispatcher.IInstanceProvider.GetInstance" />
+         method on the dispatcher's instance provider. If a new message arrives after the instance has been released, indigo2 creates a new instance using the <see cref="Overload:System.ServiceModel.Dispatcher.IInstanceProvider.GetInstance" />
 
         
 
@@ -157,33 +133,27 @@
       >
       <block subset="none" type="note">
         <para
-          >If the <see
-           cref="T:System.ServiceModel.InstanceContextMode" />
+          >If the <see cref="T:System.ServiceModel.InstanceContextMode" />
 
           
 
-           of the service is <see
-           cref="F:System.ServiceModel.InstanceContextMode.Single" />
+           of the service is <see cref="F:System.ServiceModel.InstanceContextMode.Single" />
 
           
 
-          , the system does not call the <see
-           cref="Overload:System.ServiceModel.Dispatcher.IInstanceProvider.GetInstance" />
+          , the system does not call the <see cref="Overload:System.ServiceModel.Dispatcher.IInstanceProvider.GetInstance" />
 
           
 
-           or <see
-           cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.ReleaseInstance(System.ServiceModel.InstanceContext,System.Object)" />
+           or <see cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.ReleaseInstance(System.ServiceModel.InstanceContext,System.Object)" />
 
           
 
-           methods even when the user did not provide a well-known service object unless the user directly calls <see
-           cref="M:System.ServiceModel.InstanceContext.ReleaseServiceInstance" />
+           methods even when the user did not provide a well-known service object unless the user directly calls <see cref="M:System.ServiceModel.InstanceContext.ReleaseServiceInstance" />
 
           
 
-           and then calls <see
-           cref="M:System.ServiceModel.InstanceContext.GetServiceInstance" />
+           and then calls <see cref="M:System.ServiceModel.InstanceContext.GetServiceInstance" />
 
           
 
@@ -221,8 +191,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.GetInstance(System.ServiceModel.InstanceContext)" />
+            >Use the <see cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.GetInstance(System.ServiceModel.InstanceContext)" />
 
             
 
@@ -232,8 +201,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a service object given the specified <see
-             cref="T:System.ServiceModel.InstanceContext" />
+            >Returns a service object given the specified <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
@@ -271,8 +239,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.GetInstance(System.ServiceModel.InstanceContext,System.ServiceModel.Channels.Message)" />
+            >Use the <see cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.GetInstance(System.ServiceModel.InstanceContext,System.ServiceModel.Channels.Message)" />
 
             
 
@@ -282,8 +249,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a service object given the specified <see
-             cref="T:System.ServiceModel.InstanceContext" />
+            >Returns a service object given the specified <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
@@ -295,7 +261,11 @@
           <para>The service object.</para>
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -328,8 +298,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.ReleaseInstance(System.ServiceModel.InstanceContext,System.Object)" />
+            >Use the <see cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.ReleaseInstance(System.ServiceModel.InstanceContext,System.Object)" />
 
             
 
@@ -339,8 +308,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Called when an <see
-             cref="T:System.ServiceModel.InstanceContext" />
+            >Called when an <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
@@ -348,7 +316,11 @@
           >
         </summary>
         <param name="instance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -17,8 +17,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the types of images and colors that will be affected by the color and grayscale adjustment settings of an <see
-         cref="T:System.Drawing.Imaging.ImageAttributes" />
+        >Specifies the types of images and colors that will be affected by the color and grayscale adjustment settings of an <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
         
 

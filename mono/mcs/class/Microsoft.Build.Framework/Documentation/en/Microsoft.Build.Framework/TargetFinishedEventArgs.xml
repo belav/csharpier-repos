@@ -21,8 +21,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Initializes a new instance of the <see
-         cref="T:Microsoft.Build.Framework.TargetFinishedEventArgs" />
+        >Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.TargetFinishedEventArgs" />
 
         
 
@@ -41,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.Framework.TargetFinishedEventArgs" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.TargetFinishedEventArgs" />
 
             
 
@@ -74,33 +72,27 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.Framework.TargetFinishedEventArgs" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.TargetFinishedEventArgs" />
 
             
 
-             class with the specified <see
-             cref="P:Microsoft.Build.Framework.BuildEventArgs.Message" />
+             class with the specified <see cref="P:Microsoft.Build.Framework.BuildEventArgs.Message" />
 
             
 
-            , <see
-             cref="P:Microsoft.Build.Framework.BuildEventArgs.HelpKeyword" />
+            , <see cref="P:Microsoft.Build.Framework.BuildEventArgs.HelpKeyword" />
 
             
 
-            , <see
-             cref="P:Microsoft.Build.Framework.TargetFinishedEventArgs.TargetName" />
+            , <see cref="P:Microsoft.Build.Framework.TargetFinishedEventArgs.TargetName" />
 
             
 
-            , <see
-             cref="P:Microsoft.Build.Framework.TargetFinishedEventArgs.ProjectFile" />
+            , <see cref="P:Microsoft.Build.Framework.TargetFinishedEventArgs.ProjectFile" />
 
             
 
-            , and <see
-             cref="P:Microsoft.Build.Framework.TargetFinishedEventArgs.Succeeded" />
+            , and <see cref="P:Microsoft.Build.Framework.TargetFinishedEventArgs.Succeeded" />
 
             
 
@@ -108,42 +100,66 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text of the event.</param
         >
         <param name="helpKeyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The Help keyword associated with the event.</param
         >
         <param name="targetName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the target associated with the event.</param
         >
         <param name="projectFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the project file associated with the event.</param
         >
         <param name="targetFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the target file.</param
         >
         <param name="succeeded">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -14,21 +14,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >ASP.NET health monitoring allows production and operations staff to manage deployed Web applications. The <see
-         cref="N:System.Web.Management" />
+        >ASP.NET health monitoring allows production and operations staff to manage deployed Web applications. The <see cref="N:System.Web.Management" />
 
         
 
          namespace contains the health-event types responsible for packaging application health-status data and the provider types responsible for processing this data. It also contains supporting types that help during the management of health events.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Management.WebBaseEvent" />
+        >The <see cref="T:System.Web.Management.WebBaseEvent" />
 
         
 
-         class is the root of the inheritance tree for all the ASP.NET health-monitoring event types. It uses the <see
-         cref="T:System.Web.Management.WebApplicationInformation" />
+         class is the root of the inheritance tree for all the ASP.NET health-monitoring event types. It uses the <see cref="T:System.Web.Management.WebApplicationInformation" />
 
         
 
@@ -36,8 +33,7 @@
       >
       <block subset="none" type="note">
         <para
-          >In most cases you will be able to use the ASP.NET health-monitoring types as implemented, and you will control the health-monitoring system by specifying values in the &lt;healthMonitoring&gt; configuration section. You can also derive from the health-monitoring types to create your own custom events and providers. For an example of deriving from the <see
-           cref="T:System.Web.Management.WebBaseEvent" />
+          >In most cases you will be able to use the ASP.NET health-monitoring types as implemented, and you will control the health-monitoring system by specifying values in the &lt;healthMonitoring&gt; configuration section. You can also derive from the health-monitoring types to create your own custom events and providers. For an example of deriving from the <see cref="T:System.Web.Management.WebBaseEvent" />
 
           
 
@@ -69,8 +65,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is used internally by the ASP.NET health-monitoring system. You will never use it to create an instance of the <see
-             cref="T:System.Web.Management.WebBaseEvent" />
+            >This constructor is used internally by the ASP.NET health-monitoring system. You will never use it to create an instance of the <see cref="T:System.Web.Management.WebBaseEvent" />
 
             
 
@@ -80,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Management.WebBaseEvent" />
+            >Initializes a new instance of the <see cref="T:System.Web.Management.WebBaseEvent" />
 
             
 
@@ -89,7 +83,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -120,8 +118,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is used internally by the ASP.NET health-monitoring system. You will never use it to create an instance of the <see
-             cref="T:System.Web.Management.WebBaseEvent" />
+            >This constructor is used internally by the ASP.NET health-monitoring system. You will never use it to create an instance of the <see cref="T:System.Web.Management.WebBaseEvent" />
 
             
 
@@ -131,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Management.WebBaseEvent" />
+            >Initializes a new instance of the <see cref="T:System.Web.Management.WebBaseEvent" />
 
             
 
@@ -140,7 +136,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -167,8 +167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.Management.WebApplicationInformation" />
+            >Gets a <see cref="T:System.Web.Management.WebApplicationInformation" />
 
             
 
@@ -192,8 +191,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >More information about the event is contained in the related <see
-             cref="P:System.Web.Management.WebBaseEvent.Message" />
+            >More information about the event is contained in the related <see cref="P:System.Web.Management.WebBaseEvent.Message" />
 
             
 
@@ -201,13 +199,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If you inherit from the <see
-               cref="T:System.Web.Management.WebBaseEvent" />
+              >If you inherit from the <see cref="T:System.Web.Management.WebBaseEvent" />
 
               
 
-               class, the event code you specify for your custom event must be greater than <see
-               cref="F:System.Web.Management.WebEventCodes.WebExtendedBase" />
+               class, the event code you specify for your custom event must be greater than <see cref="F:System.Web.Management.WebEventCodes.WebExtendedBase" />
 
               
 
@@ -358,13 +354,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Management.WebBaseEvent.FormatCustomEventDetails(System.Web.Management.WebEventFormatter)" />
+            >The <see cref="M:System.Web.Management.WebBaseEvent.FormatCustomEventDetails(System.Web.Management.WebEventFormatter)" />
 
             
 
-             method provides a uniform format for event information, which is useful if the event data must be logged and later presented to the user. It is called internally when the provider invokes one of the <see
-             cref="Overload:System.Web.Management.WebBaseEvent.ToString" />
+             method provides a uniform format for event information, which is useful if the event data must be logged and later presented to the user. It is called internally when the provider invokes one of the <see cref="Overload:System.Web.Management.WebBaseEvent.ToString" />
 
             
 
@@ -372,13 +366,11 @@
           >
           <block subset="none" type="note">
             <para
-              >When you format your custom event information for display, override the <see
-               cref="M:System.Web.Management.WebBaseEvent.FormatCustomEventDetails(System.Web.Management.WebEventFormatter)" />
+              >When you format your custom event information for display, override the <see cref="M:System.Web.Management.WebBaseEvent.FormatCustomEventDetails(System.Web.Management.WebEventFormatter)" />
 
               
 
-               method rather than the <see
-               cref="Overload:System.Web.Management.WebBaseEvent.ToString" />
+               method rather than the <see cref="Overload:System.Web.Management.WebBaseEvent.ToString" />
 
               
 
@@ -391,12 +383,15 @@
           <para>Provides standard formatting of the event information.</para>
         </summary>
         <param name="formatter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Management.WebEventFormatter" />
+          A <see cref="T:System.Web.Management.WebEventFormatter" />
 
           
 
@@ -419,8 +414,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property describes the meaning of the <see
-             cref="T:System.Web.Management.WebEventCodes" />
+            >This property describes the meaning of the <see cref="T:System.Web.Management.WebEventCodes" />
 
             
 
@@ -504,18 +498,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Management.WebBaseEvent.ToString" />
+            >The <see cref="M:System.Web.Management.WebBaseEvent.ToString" />
 
             
 
-             method is generally invoked by the provider that processes the event. The method ensures that the standard <see
-             cref="T:System.Web.Management.WebApplicationInformation" />
+             method is generally invoked by the provider that processes the event. The method ensures that the standard <see cref="T:System.Web.Management.WebApplicationInformation" />
 
             
 
-             object is provided with the event-specific data. It formats event information by calling the event-specific <see
-             cref="M:System.Web.Management.WebBaseEvent.FormatCustomEventDetails(System.Web.Management.WebEventFormatter)" />
+             object is provided with the event-specific data. It formats event information by calling the event-specific <see cref="M:System.Web.Management.WebBaseEvent.FormatCustomEventDetails(System.Web.Management.WebEventFormatter)" />
 
             
 
@@ -523,13 +514,11 @@
           >
           <block subset="none" type="note">
             <para
-              >When you format your custom event information for display, override the <see
-               cref="M:System.Web.Management.WebBaseEvent.FormatCustomEventDetails(System.Web.Management.WebEventFormatter)" />
+              >When you format your custom event information for display, override the <see cref="M:System.Web.Management.WebBaseEvent.FormatCustomEventDetails(System.Web.Management.WebEventFormatter)" />
 
               
 
-               method rather than the <see
-               cref="Overload:System.Web.Management.WebBaseEvent.ToString" />
+               method rather than the <see cref="Overload:System.Web.Management.WebBaseEvent.ToString" />
 
               
 
@@ -570,23 +559,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Management.WebBaseEvent.ToString" />
+            >The <see cref="M:System.Web.Management.WebBaseEvent.ToString" />
 
             
 
-             method is generally invoked by the provider that processes the event. It formats event information by calling the event-specific <see
-             cref="M:System.Web.Management.WebBaseEvent.FormatCustomEventDetails(System.Web.Management.WebEventFormatter)" />
+             method is generally invoked by the provider that processes the event. It formats event information by calling the event-specific <see cref="M:System.Web.Management.WebBaseEvent.FormatCustomEventDetails(System.Web.Management.WebEventFormatter)" />
 
             
 
-             method. If <paramref
-             name="includeAppInfo" />
+             method. If <paramref name="includeAppInfo" />
 
             
 
-             is true, the standard <see
-             cref="T:System.Web.Management.WebApplicationInformation" />
+             is true, the standard <see cref="T:System.Web.Management.WebApplicationInformation" />
 
             
 
@@ -594,13 +579,11 @@
           >
           <block subset="none" type="note">
             <para
-              >When you format your custom event information for display, override the <see
-               cref="M:System.Web.Management.WebBaseEvent.FormatCustomEventDetails(System.Web.Management.WebEventFormatter)" />
+              >When you format your custom event information for display, override the <see cref="M:System.Web.Management.WebBaseEvent.FormatCustomEventDetails(System.Web.Management.WebEventFormatter)" />
 
               
 
-               method rather than the <see
-               cref="Overload:System.Web.Management.WebBaseEvent.ToString" />
+               method rather than the <see cref="Overload:System.Web.Management.WebBaseEvent.ToString" />
 
               
 

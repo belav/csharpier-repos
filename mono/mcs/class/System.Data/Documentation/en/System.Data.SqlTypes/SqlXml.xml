@@ -29,18 +29,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class contains an instance of an <see
-         cref="T:System.Xml.XmlReader" />
+        >This class contains an instance of an <see cref="T:System.Xml.XmlReader" />
 
         
 
-        -derived type, and adds SQL-specific features such as database-style null semantics by implementing the <see
-         cref="T:System.Data.SqlTypes.INullable" />
+        -derived type, and adds SQL-specific features such as database-style null semantics by implementing the <see cref="T:System.Data.SqlTypes.INullable" />
 
         
 
-         interface. When you use SqlXml, the XML value that you assign to the SqlXml instance must be consumable by an <see
-         cref="T:System.Xml.XmlReader" />
+         interface. When you use SqlXml, the XML value that you assign to the SqlXml instance must be consumable by an <see cref="T:System.Xml.XmlReader" />
 
         
 
@@ -63,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Data.SqlTypes.SqlXml" />
+            >Creates a new <see cref="T:System.Data.SqlTypes.SqlXml" />
 
             
 
@@ -90,13 +86,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Data.SqlTypes.SqlXml" />
+            >Creates a new <see cref="T:System.Data.SqlTypes.SqlXml" />
 
             
 
-             instance, supplying the XML value from the supplied <see
-             cref="T:System.IO.Stream" />
+             instance, supplying the XML value from the supplied <see cref="T:System.IO.Stream" />
 
             
 
@@ -104,22 +98,23 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
-          -derived instance (such as <see
-           cref="T:System.IO.FileStream" />
+          -derived instance (such as <see cref="T:System.IO.FileStream" />
 
           
 
-          ) from which to load the <see
-           cref="T:System.Data.SqlTypes.SqlXml" />
+          ) from which to load the <see cref="T:System.Data.SqlTypes.SqlXml" />
 
           
 
@@ -140,8 +135,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this value is null (Nothing in Visual Basic), the instance is set so that <see
-             cref="P:System.Data.SqlTypes.INullable.IsNull" />
+            >If this value is null (Nothing in Visual Basic), the instance is set so that <see cref="P:System.Data.SqlTypes.INullable.IsNull" />
 
             
 
@@ -151,13 +145,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Data.SqlTypes.SqlXml" />
+            >Creates a new <see cref="T:System.Data.SqlTypes.SqlXml" />
 
             
 
-             instance and associates it with the content of the supplied <see
-             cref="T:System.Xml.XmlReader" />
+             instance and associates it with the content of the supplied <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -165,17 +157,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlReader" />
+          An <see cref="T:System.Xml.XmlReader" />
 
           
 
-          -derived class instance to be used as the value of the new <see
-           cref="T:System.Data.SqlTypes.SqlXml" />
+          -derived class instance to be used as the value of the new <see cref="T:System.Data.SqlTypes.SqlXml" />
 
           
 
@@ -197,8 +191,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Data.SqlTypes.SqlXml" />
+            >If the <see cref="T:System.Data.SqlTypes.SqlXml" />
 
             
 
@@ -208,13 +201,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the XML content of this <see
-             cref="T:System.Data.SqlTypes.SqlXml" />
+            >Gets the value of the XML content of this <see cref="T:System.Data.SqlTypes.SqlXml" />
 
             
 
-             as a <see
-             cref="T:System.Xml.XmlReader" />
+             as a <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -224,13 +215,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Xml.XmlReader" />
+            >A <see cref="T:System.Xml.XmlReader" />
 
             
 
-            -derived instance that contains the XML content. The actual type may vary (for example, the return value might be <see
-             cref="T:System.Xml.XmlTextReader" />
+            -derived instance that contains the XML content. The actual type may vary (for example, the return value might be <see cref="T:System.Xml.XmlTextReader" />
 
             
 
@@ -259,8 +248,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the XML Schema definition language (XSD) of the specified <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+            >Returns the XML Schema definition language (XSD) of the specified <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
@@ -270,8 +258,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that indicates the XSD of the specified <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+            >A string that indicates the XSD of the specified <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
@@ -279,12 +266,15 @@
           >
         </returns>
         <param name="schemaSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchemaSet" />
+          An <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
           
 
@@ -307,8 +297,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether this instance represents a null <see
-             cref="T:System.Data.SqlTypes.SqlXml" />
+            >Indicates whether this instance represents a null <see cref="T:System.Data.SqlTypes.SqlXml" />
 
             
 
@@ -335,8 +324,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a null instance of the <see
-             cref="T:System.Data.SqlTypes.SqlXml" />
+            >Represents a null instance of the <see cref="T:System.Data.SqlTypes.SqlXml" />
 
             
 
@@ -362,13 +350,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.SqlTypes.SqlXml" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.SqlTypes.SqlXml" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Xml.Serialization.IXmlSerializable" />
+             instance is cast to an <see cref="T:System.Xml.Serialization.IXmlSerializable" />
 
             
 
@@ -378,8 +364,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Xml.Serialization.IXmlSerializable.GetSchema" />
+            >For a description of this member, see <see cref="M:System.Xml.Serialization.IXmlSerializable.GetSchema" />
 
             
 
@@ -389,18 +374,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >An <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
-             that describes the XML representation of the object that is produced by the <see
-             cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" />
+             that describes the XML representation of the object that is produced by the <see cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" />
 
             
 
-             method and consumed by the <see
-             cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" />
+             method and consumed by the <see cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" />
 
             
 
@@ -428,13 +410,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.SqlTypes.SqlXml" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.SqlTypes.SqlXml" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Xml.Serialization.IXmlSerializable" />
+             instance is cast to an <see cref="T:System.Xml.Serialization.IXmlSerializable" />
 
             
 
@@ -444,8 +424,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" />
+            >For a description of this member, see <see cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" />
 
             
 
@@ -453,7 +432,11 @@
           >
         </summary>
         <param name="r">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -480,13 +463,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.SqlTypes.SqlXml" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.SqlTypes.SqlXml" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Xml.Serialization.IXmlSerializable" />
+             instance is cast to an <see cref="T:System.Xml.Serialization.IXmlSerializable" />
 
             
 
@@ -496,8 +477,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" />
+            >For a description of this member, see <see cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" />
 
             
 
@@ -505,7 +485,11 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -527,13 +511,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To retrieve the content represented as an <see
-             cref="T:System.Xml.XmlReader" />
+            >To retrieve the content represented as an <see cref="T:System.Xml.XmlReader" />
 
             
 
-            , call the <see
-             cref="M:System.Data.SqlTypes.SqlXml.CreateReader" />
+            , call the <see cref="M:System.Data.SqlTypes.SqlXml.CreateReader" />
 
             
 
@@ -543,8 +525,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the string representation of the XML content of this <see
-             cref="T:System.Data.SqlTypes.SqlXml" />
+            >Gets the string representation of the XML content of this <see cref="T:System.Data.SqlTypes.SqlXml" />
 
             
 

@@ -52,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlSchemas" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSchemas" />
 
             
 
@@ -89,8 +88,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index at which the <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >The index at which the <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -98,12 +96,15 @@
           >
         </returns>
         <param name="schema">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Schema.XmlSchema" />
+          The <see cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
@@ -137,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an instance of the <see
-             cref="T:System.Xml.Serialization.XmlSchemas" />
+            >Adds an instance of the <see cref="T:System.Xml.Serialization.XmlSchemas" />
 
             
 
@@ -146,12 +146,15 @@
           >
         </summary>
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.XmlSchemas" />
+          The <see cref="T:System.Xml.Serialization.XmlSchemas" />
 
           
 
@@ -186,8 +189,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >Adds an <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -197,8 +199,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index at which the <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >The index at which the <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -206,24 +207,30 @@
           >
         </returns>
         <param name="schema">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Schema.XmlSchema" />
+          The <see cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
            to add.</param
         >
         <param name="baseUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
@@ -257,8 +264,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >Adds an <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -266,12 +272,15 @@
           >
         </summary>
         <param name="schema">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Schema.XmlSchema" />
+          The <see cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
@@ -305,8 +314,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following list identifies situations in which the <see
-             cref="M:System.Xml.Serialization.XmlSchemas.Compile(System.Xml.Schema.ValidationEventHandler,System.Boolean)" />
+            >The following list identifies situations in which the <see cref="M:System.Xml.Serialization.XmlSchemas.Compile(System.Xml.Schema.ValidationEventHandler,System.Boolean)" />
 
             
 
@@ -315,13 +323,11 @@
           <list type="bullet">
             <item>
               <para
-                >By the <see
-                 cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+                >By the <see cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
 
                 
 
-                 class while creating <see
-                 cref="T:System.Web.Services.Description.ServiceDescription" />
+                 class while creating <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
                 
 
@@ -330,8 +336,7 @@
             </item>
             <item>
               <para
-                >By the Wsdl.exe tool or the <see
-                 cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+                >By the Wsdl.exe tool or the <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
 
                 
 
@@ -343,8 +348,7 @@
             </item>
           </list>
           <para
-            >Instead of calling the <see
-             cref="M:System.Xml.Serialization.XmlSchemas.Compile(System.Xml.Schema.ValidationEventHandler,System.Boolean)" />
+            >Instead of calling the <see cref="M:System.Xml.Serialization.XmlSchemas.Compile(System.Xml.Schema.ValidationEventHandler,System.Boolean)" />
 
             
 
@@ -356,29 +360,34 @@
           <para>Processes the element and attribute names in the XML schemas and, optionally, validates the XML schemas. </para>
         </summary>
         <param name="handler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Schema.ValidationEventHandler" />
+          A <see cref="T:System.Xml.Schema.ValidationEventHandler" />
 
           
 
            that specifies the callback method that handles errors and warnings during XML Schema validation, if the strict parameter is set to true.</param
         >
         <param name="fullCompile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to validate the XML schemas in the collection using the <see
-           cref="M:System.Xml.Serialization.XmlSchemas.Compile(System.Xml.Schema.ValidationEventHandler,System.Boolean)" />
+          true to validate the XML schemas in the collection using the <see cref="M:System.Xml.Serialization.XmlSchemas.Compile(System.Xml.Schema.ValidationEventHandler,System.Boolean)" />
 
           
 
-           method of the <see
-           cref="T:System.Xml.Serialization.XmlSchemas" />
+           method of the <see cref="T:System.Xml.Serialization.XmlSchemas" />
 
           
 
@@ -409,8 +418,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the collection contains an <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >Returns a value that indicates whether the collection contains an <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -422,7 +430,11 @@
           <para>true if the item is found; otherwise, false.</para>
         </returns>
         <param name="targetNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -456,8 +468,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Xml.Serialization.XmlSchemas" />
+            >Determines whether the <see cref="T:System.Xml.Serialization.XmlSchemas" />
 
             
 
@@ -469,12 +480,15 @@
           <para>true, if the collection contains the specified item; otherwise, false.</para>
         </returns>
         <param name="schema">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Schema.XmlSchema" />
+          The <see cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
@@ -509,13 +523,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the entire <see
-             cref="T:System.Xml.Serialization.XmlSchemas" />
+            >Copies the entire <see cref="T:System.Xml.Serialization.XmlSchemas" />
 
             
 
-             to a compatible one-dimensional <see
-             cref="T:System.Array" />
+             to a compatible one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -523,29 +535,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the schemas copied from <see
-           cref="T:System.Xml.Serialization.XmlSchemas" />
+           that is the destination of the schemas copied from <see cref="T:System.Xml.Serialization.XmlSchemas" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -580,8 +597,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Locates in one of the XML schemas an <see
-             cref="T:System.Xml.Schema.XmlSchemaObject" />
+            >Locates in one of the XML schemas an <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
             
 
@@ -591,18 +607,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Schema.XmlSchemaObject" />
+            >An <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
             
 
-             instance, such as an <see
-             cref="T:System.Xml.Schema.XmlSchemaElement" />
+             instance, such as an <see cref="T:System.Xml.Schema.XmlSchemaElement" />
 
             
 
-             or <see
-             cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+             or <see cref="T:System.Xml.Schema.XmlSchemaAttribute" />
 
             
 
@@ -610,54 +623,54 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          An <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
-           that specifies a fully qualified name with a namespace used to locate an <see
-           cref="T:System.Xml.Schema.XmlSchema" />
+           that specifies a fully qualified name with a namespace used to locate an <see cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
            object in the collection.</param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
-           of the object to find. Possible types include: <see
-           cref="T:System.Xml.Schema.XmlSchemaGroup" />
+           of the object to find. Possible types include: <see cref="T:System.Xml.Schema.XmlSchemaGroup" />
 
           
 
-          , <see
-           cref="T:System.Xml.Schema.XmlSchemaAttributeGroup" />
+          , <see cref="T:System.Xml.Schema.XmlSchemaAttributeGroup" />
 
           
 
-          , <see
-           cref="T:System.Xml.Schema.XmlSchemaElement" />
+          , <see cref="T:System.Xml.Schema.XmlSchemaElement" />
 
           
 
-          , <see
-           cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+          , <see cref="T:System.Xml.Schema.XmlSchemaAttribute" />
 
           
 
-          , and <see
-           cref="T:System.Xml.Schema.XmlSchemaNotation" />
+          , and <see cref="T:System.Xml.Schema.XmlSchemaNotation" />
 
           
 
@@ -690,8 +703,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The method returns an <see
-             cref="T:System.Collections.ArrayList" />
+            >The method returns an <see cref="T:System.Collections.ArrayList" />
 
             
 
@@ -705,8 +717,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IList" />
+            >An <see cref="T:System.Collections.IList" />
 
             
 
@@ -714,7 +725,11 @@
           >
         </returns>
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -748,8 +763,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches for the specified schema and returns the zero-based index of the first occurrence within the entire <see
-             cref="T:System.Xml.Serialization.XmlSchemas" />
+            >Searches for the specified schema and returns the zero-based index of the first occurrence within the entire <see cref="T:System.Xml.Serialization.XmlSchemas" />
 
             
 
@@ -759,8 +773,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the first occurrence of the value within the entire <see
-             cref="T:System.Xml.Serialization.XmlSchemas" />
+            >The zero-based index of the first occurrence of the value within the entire <see cref="T:System.Xml.Serialization.XmlSchemas" />
 
             
 
@@ -768,12 +781,15 @@
           >
         </returns>
         <param name="schema">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Schema.XmlSchema" />
+          The <see cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
@@ -808,8 +824,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a schema into the <see
-             cref="T:System.Xml.Serialization.XmlSchemas" />
+            >Inserts a schema into the <see cref="T:System.Xml.Serialization.XmlSchemas" />
 
             
 
@@ -817,24 +832,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="schema" />
+          The zero-based index at which <paramref name="schema" />
 
           
 
            should be inserted. </param
         >
         <param name="schema">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Schema.XmlSchema" />
+          The <see cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
@@ -859,13 +880,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can compile the schemas referenced in a <see
-             cref="T:System.Xml.Serialization.XmlSchemas" />
+            >You can compile the schemas referenced in a <see cref="T:System.Xml.Serialization.XmlSchemas" />
 
             
 
-             object by invoking the <see
-             cref="M:System.Xml.Serialization.XmlSchemas.Compile(System.Xml.Schema.ValidationEventHandler,System.Boolean)" />
+             object by invoking the <see cref="M:System.Xml.Serialization.XmlSchemas.Compile(System.Xml.Schema.ValidationEventHandler,System.Boolean)" />
 
             
 
@@ -904,8 +923,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The IsDataSet attribute comes from the namespace urn:schemas-microsoft-com:xml-msdata.</para>
           <para
-            >The <see
-             cref="M:System.Xml.Serialization.XmlSchemas.IsDataSet(System.Xml.Schema.XmlSchema)" />
+            >The <see cref="M:System.Xml.Serialization.XmlSchemas.IsDataSet(System.Xml.Schema.XmlSchema)" />
 
             
 
@@ -921,7 +939,11 @@
           <para>true if the specified schema exists; otherwise, false.</para>
         </returns>
         <param name="schema">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1006,8 +1028,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes when clearing the contents of the <see
-             cref="T:System.Xml.Serialization.XmlSchemas" />
+            >Performs additional custom processes when clearing the contents of the <see cref="T:System.Xml.Serialization.XmlSchemas" />
 
             
 
@@ -1043,8 +1064,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes before inserting a new element into the <see
-             cref="T:System.Xml.Serialization.XmlSchemas" />
+            >Performs additional custom processes before inserting a new element into the <see cref="T:System.Xml.Serialization.XmlSchemas" />
 
             
 
@@ -1052,24 +1072,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which to insert <paramref
-           name="value" />
+          The zero-based index at which to insert <paramref name="value" />
 
           
 
           . </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new value of the element at <paramref
-           name="index" />
+          The new value of the element at <paramref name="index" />
 
           
 
@@ -1104,8 +1130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes when removing an element from the <see
-             cref="T:System.Xml.Serialization.XmlSchemas" />
+            >Performs additional custom processes when removing an element from the <see cref="T:System.Xml.Serialization.XmlSchemas" />
 
             
 
@@ -1113,24 +1138,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="value" />
+          The zero-based index at which <paramref name="value" />
 
           
 
            can be found. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value of the element to remove at <paramref
-           name="index" />
+          The value of the element to remove at <paramref name="index" />
 
           
 
@@ -1166,8 +1197,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes before setting a value in the <see
-             cref="T:System.Xml.Serialization.XmlSchemas" />
+            >Performs additional custom processes before setting a value in the <see cref="T:System.Xml.Serialization.XmlSchemas" />
 
             
 
@@ -1175,36 +1205,45 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="oldValue" />
+          The zero-based index at which <paramref name="oldValue" />
 
           
 
            can be found. </param
         >
         <param name="oldValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value to replace with <paramref
-           name="newValue" />
+          The value to replace with <paramref name="newValue" />
 
           
 
           . </param
         >
         <param name="newValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new value of the element at <paramref
-           name="index" />
+          The new value of the element at <paramref name="index" />
 
           
 
@@ -1238,8 +1277,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of a specific schema from the <see
-             cref="T:System.Xml.Serialization.XmlSchemas" />
+            >Removes the first occurrence of a specific schema from the <see cref="T:System.Xml.Serialization.XmlSchemas" />
 
             
 
@@ -1247,12 +1285,15 @@
           >
         </summary>
         <param name="schema">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Schema.XmlSchema" />
+          The <see cref="T:System.Xml.Schema.XmlSchema" />
 
           
 

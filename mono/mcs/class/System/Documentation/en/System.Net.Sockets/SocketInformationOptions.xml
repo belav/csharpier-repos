@@ -23,8 +23,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Describes states for a <see
-         cref="T:System.Net.Sockets.Socket" />
+        >Describes states for a <see cref="T:System.Net.Sockets.Socket" />
 
         
 
@@ -51,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.Sockets.Socket" />
+            >The <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -79,8 +77,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.Sockets.Socket" />
+            >The <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -107,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.Sockets.Socket" />
+            >The <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -135,8 +131,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.Sockets.Socket" />
+            >The <see cref="T:System.Net.Sockets.Socket" />
 
             
 

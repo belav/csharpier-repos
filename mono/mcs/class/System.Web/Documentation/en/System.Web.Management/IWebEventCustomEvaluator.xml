@@ -11,8 +11,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >ASP.NET health monitoring allows production and operations staff to manage deployed Web applications. The <see
-         cref="N:System.Web.Management" />
+        >ASP.NET health monitoring allows production and operations staff to manage deployed Web applications. The <see cref="N:System.Web.Management" />
 
         
 
@@ -58,12 +57,15 @@
           <para>true if the event should be raised; otherwise, false.</para>
         </returns>
         <param name="record">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Management.RuleFiringRecord" />
+          The <see cref="T:System.Web.Management.RuleFiringRecord" />
 
           
 

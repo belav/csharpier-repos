@@ -17,8 +17,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Indicates if <see
-         cref="T:System.Net.Http.HttpClient" />
+        >Indicates if <see cref="T:System.Net.Http.HttpClient" />
 
         
 

@@ -38,13 +38,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an <see
-         cref="T:System.Collections.Generic.IEnumerable`1" />
+        >Represents an <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
         
 
-         collection as an <see
-         cref="T:System.Linq.IQueryable`1" />
+         collection as an <see cref="T:System.Linq.IQueryable`1" />
 
         
 
@@ -96,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Linq.EnumerableQuery`1" />
+            >Initializes a new instance of the <see cref="T:System.Linq.EnumerableQuery`1" />
 
             
 
@@ -105,7 +102,11 @@
           >
         </summary>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -158,13 +159,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that can iterate through the associated <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >Returns an enumerator that can iterate through the associated <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             collection, or, if it is null, through the collection that results from rewriting the associated expression tree as a query on an <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+             collection, or, if it is null, through the collection that results from rewriting the associated expression tree as a query on an <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
@@ -273,13 +272,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Constructs a new <see
-             cref="T:System.Linq.EnumerableQuery`1" />
+            >Constructs a new <see cref="T:System.Linq.EnumerableQuery`1" />
 
             
 
-             object and associates it with a specified expression tree that represents an <see
-             cref="T:System.Linq.IQueryable" />
+             object and associates it with a specified expression tree that represents an <see cref="T:System.Linq.IQueryable" />
 
             
 
@@ -289,13 +286,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Linq.EnumerableQuery`1" />
+            >An <see cref="T:System.Linq.EnumerableQuery`1" />
 
             
 
-             object that is associated with <paramref
-             name="expression" />
+             object that is associated with <paramref name="expression" />
 
             
 
@@ -303,12 +298,15 @@
           >
         </returns>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An expression tree that represents an <see
-           cref="T:System.Linq.IQueryable" />
+          An expression tree that represents an <see cref="T:System.Linq.IQueryable" />
 
           
 
@@ -344,13 +342,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Constructs a new <see
-             cref="T:System.Linq.EnumerableQuery`1" />
+            >Constructs a new <see cref="T:System.Linq.EnumerableQuery`1" />
 
             
 
-             object and associates it with a specified expression tree that represents an <see
-             cref="T:System.Linq.IQueryable`1" />
+             object and associates it with a specified expression tree that represents an <see cref="T:System.Linq.IQueryable`1" />
 
             
 
@@ -360,8 +356,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An EnumerableQuery object that is associated with <paramref
-             name="expression" />
+            >An EnumerableQuery object that is associated with <paramref name="expression" />
 
             
 
@@ -369,7 +364,11 @@
           >
         </returns>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -401,18 +400,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes an expression after rewriting it to call <see
-             cref="T:System.Linq.Enumerable" />
+            >Executes an expression after rewriting it to call <see cref="T:System.Linq.Enumerable" />
 
             
 
-             methods instead of <see
-             cref="T:System.Linq.Queryable" />
+             methods instead of <see cref="T:System.Linq.Queryable" />
 
             
 
-             methods on any enumerable data sources that cannot be queried by <see
-             cref="T:System.Linq.Queryable" />
+             methods on any enumerable data sources that cannot be queried by <see cref="T:System.Linq.Queryable" />
 
             
 
@@ -422,8 +418,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value that results from executing <paramref
-             name="expression" />
+            >The value that results from executing <paramref name="expression" />
 
             
 
@@ -431,7 +426,11 @@
           >
         </returns>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -467,18 +466,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes an expression after rewriting it to call <see
-             cref="T:System.Linq.Enumerable" />
+            >Executes an expression after rewriting it to call <see cref="T:System.Linq.Enumerable" />
 
             
 
-             methods instead of <see
-             cref="T:System.Linq.Queryable" />
+             methods instead of <see cref="T:System.Linq.Queryable" />
 
             
 
-             methods on any enumerable data sources that cannot be queried by <see
-             cref="T:System.Linq.Queryable" />
+             methods on any enumerable data sources that cannot be queried by <see cref="T:System.Linq.Queryable" />
 
             
 
@@ -488,8 +484,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value that results from executing <paramref
-             name="expression" />
+            >The value that results from executing <paramref name="expression" />
 
             
 
@@ -497,7 +492,11 @@
           >
         </returns>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

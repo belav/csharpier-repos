@@ -18,36 +18,32 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The values in the <see
-         cref="T:System.Net.Mail.SmtpStatusCode" />
+        >The values in the <see cref="T:System.Net.Mail.SmtpStatusCode" />
 
         
 
-         enumeration specify reply status values sent by a Simple Mail Transfer Protocol (SMTP) server. The <see
-         cref="T:System.Net.Mail.SmtpException" />
+         enumeration specify reply status values sent by a Simple Mail Transfer Protocol (SMTP) server. The <see cref="T:System.Net.Mail.SmtpException" />
 
         
 
-         and <see
-         cref="T:System.Net.Mail.SmtpFailedRecipientsException" />
+         and <see cref="T:System.Net.Mail.SmtpFailedRecipientsException" />
 
         
 
-         classes contain <see
-         cref="P:System.Net.Mail.SmtpException.StatusCode" />
+         classes contain <see cref="P:System.Net.Mail.SmtpException.StatusCode" />
 
         
 
-         properties that return <see
-         cref="T:System.Net.Mail.SmtpStatusCode" />
+         properties that return <see cref="T:System.Net.Mail.SmtpStatusCode" />
 
         
 
          values.</para
       >
       <para
-        >SMTP is defined in RFC 2821 available at <see
-         cref="http://www.ietf.org/">http://www.ietf.org</see>
+        >SMTP is defined in RFC 2821 available at <see cref="http://www.ietf.org/"
+          >http://www.ietf.org</see
+        >
 
         
 
@@ -57,8 +53,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the outcome of sending e-mail by using the <see
-         cref="T:System.Net.Mail.SmtpClient" />
+        >Specifies the outcome of sending e-mail by using the <see cref="T:System.Net.Mail.SmtpClient" />
 
         
 
@@ -109,7 +104,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >The specified user is not local, but the receiving SMTP service accepted the message and attempted to deliver it. This status code is defined in RFC 1123, which is available at <see
-             cref="http://www.ietf.org/">http://www.ietf.org</see>
+              cref="http://www.ietf.org/"
+              >http://www.ietf.org</see
+            >
 
             
 
@@ -314,7 +311,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >The SMTP service cannot complete the request. This error can occur if the client's IP address cannot be resolved (that is, a reverse lookup failed). You can also receive this error if the client domain has been identified as an open relay or source for unsolicited e-mail (spam). For details, see RFC 2505, which is available at <see
-             cref="http://www.ietf.org/">http://www.ietf.org</see>
+              cref="http://www.ietf.org/"
+              >http://www.ietf.org</see
+            >
 
             
 

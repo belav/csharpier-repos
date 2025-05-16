@@ -15,7 +15,8 @@
       <example>
         <code lang="C#">
 gr.Rectangle ( new PointD (0, 0), 1, 1);
-  </code>
+  </code
+        >
       </example>
     </remarks>
   </Docs>
@@ -31,8 +32,7 @@ gr.Rectangle ( new PointD (0, 0), 1, 1);
         <param name="x">To be added.</param>
         <param name="y">To be added.</param>
         <summary
-          >Default constructor accepting a pair of coordinates in <see
-           cref="T:System.Double" />
+          >Default constructor accepting a pair of coordinates in <see cref="T:System.Double" />
 
           
 

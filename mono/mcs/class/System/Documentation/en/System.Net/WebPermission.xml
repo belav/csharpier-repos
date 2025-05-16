@@ -48,26 +48,22 @@
 
         
 
-         provides a set of methods and properties to control access to Internet resources. You can use a <see
-         cref="T:System.Net.WebPermission" />
+         provides a set of methods and properties to control access to Internet resources. You can use a <see cref="T:System.Net.WebPermission" />
 
         
 
-         to provide either restricted or unrestricted access to your resource, based on the <see
-         cref="T:System.Security.Permissions.PermissionState" />
+         to provide either restricted or unrestricted access to your resource, based on the <see cref="T:System.Security.Permissions.PermissionState" />
 
         
 
-         that is set when the <see
-         cref="T:System.Net.WebPermission" />
+         that is set when the <see cref="T:System.Net.WebPermission" />
 
         
 
          is created.</para
       >
       <para
-        >Create a <see
-         cref="T:System.Net.WebPermission" />
+        >Create a <see cref="T:System.Net.WebPermission" />
 
         
 
@@ -76,13 +72,11 @@
       <list type="bullet">
         <item>
           <para
-            >No parameters. The default <see
-             cref="T:System.Security.Permissions.PermissionState" />
+            >No parameters. The default <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
-             is <see
-             cref="F:System.Security.Permissions.PermissionState.None" />
+             is <see cref="F:System.Security.Permissions.PermissionState.None" />
 
             
 
@@ -91,23 +85,19 @@
         </item>
         <item>
           <para
-            >A <see
-             cref="T:System.Security.Permissions.PermissionState" />
+            >A <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
-            . Specify either <see
-             cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+            . Specify either <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
 
             
 
-             to allow any URI to be used in the target class, or <see
-             cref="F:System.Security.Permissions.PermissionState.None" />
+             to allow any URI to be used in the target class, or <see cref="F:System.Security.Permissions.PermissionState.None" />
 
             
 
-             to allow access only to URIs that you specify through the use of the <see
-             cref="M:System.Net.WebPermission.AddPermission(System.Net.NetworkAccess,System.String)" />
+             to allow access only to URIs that you specify through the use of the <see cref="M:System.Net.WebPermission.AddPermission(System.Net.NetworkAccess,System.String)" />
 
             
 
@@ -116,13 +106,11 @@
         </item>
         <item>
           <para
-            >A <see
-             cref="T:System.Net.NetworkAccess" />
+            >A <see cref="T:System.Net.NetworkAccess" />
 
             
 
-             value and a URI string. The specified URI has permissions granted by the <see
-             cref="T:System.Net.NetworkAccess" />
+             value and a URI string. The specified URI has permissions granted by the <see cref="T:System.Net.NetworkAccess" />
 
             
 
@@ -131,8 +119,7 @@
         </item>
         <item>
           <para
-            >A <see
-             cref="T:System.Net.NetworkAccess" />
+            >A <see cref="T:System.Net.NetworkAccess" />
 
             
 
@@ -141,43 +128,35 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="P:System.Net.WebPermission.ConnectList" />
+        >The <see cref="P:System.Net.WebPermission.ConnectList" />
 
         
 
-         and <see
-         cref="P:System.Net.WebPermission.AcceptList" />
+         and <see cref="P:System.Net.WebPermission.AcceptList" />
 
         
 
-         hold the URIs to which you have granted access permission. To add a URI to either of these lists, use <see
-         cref="M:System.Net.WebPermission.AddPermission(System.Net.NetworkAccess,System.String)" />
+         hold the URIs to which you have granted access permission. To add a URI to either of these lists, use <see cref="M:System.Net.WebPermission.AddPermission(System.Net.NetworkAccess,System.String)" />
 
         
 
-        . If you pass <see
-         cref="F:System.Net.NetworkAccess.Accept" />
+        . If you pass <see cref="F:System.Net.NetworkAccess.Accept" />
 
         
 
-         as the <see
-         cref="T:System.Net.NetworkAccess" />
+         as the <see cref="T:System.Net.NetworkAccess" />
 
         
 
-         parameter, the URI will be added to the <see
-         cref="P:System.Net.WebPermission.AcceptList" />
+         parameter, the URI will be added to the <see cref="P:System.Net.WebPermission.AcceptList" />
 
         
 
-        . <see
-         cref="T:System.Net.WebPermission" />
+        . <see cref="T:System.Net.WebPermission" />
 
         
 
-         will allow connections to your target class with URIs matching the <see
-         cref="P:System.Net.WebPermission.AcceptList" />
+         will allow connections to your target class with URIs matching the <see cref="P:System.Net.WebPermission.AcceptList" />
 
         
 
@@ -185,18 +164,15 @@
       >
       <block subset="none" type="note">
         <para
-          >To deny access to an Internet resource, you must deny access to all the possible paths to that resource. This requires calling <see
-           cref="M:System.Net.WebPermission.#ctor(System.Security.Permissions.PermissionState)" />
+          >To deny access to an Internet resource, you must deny access to all the possible paths to that resource. This requires calling <see cref="M:System.Net.WebPermission.#ctor(System.Security.Permissions.PermissionState)" />
 
           
 
-           with state parameter set to <see
-           cref="M:System.Security.CodeAccessPermission.Deny" />
+           with state parameter set to <see cref="M:System.Security.CodeAccessPermission.Deny" />
 
           
 
-          . A better approach is to allow access to the specific resource only. For more information about this subject, refer to the <format
-           type="text/html">
+          . A better approach is to allow access to the specific resource only. For more information about this subject, refer to the <format type="text/html">
             <a href="6B4D2E01-C504-4AC3-B50E-D6F5E7F5DF25">[&lt;topic://cpcondeny&gt;]</a>
           </format>
 
@@ -210,18 +186,15 @@
       </block>
       <block subset="none" type="note">
         <para
-          >User name and default port information is stripped from the <see
-           cref="T:System.Uri" />
+          >User name and default port information is stripped from the <see cref="T:System.Uri" />
 
           
 
-           before the comparison with the regular expression argument that is supplied to the <see
-           cref="M:System.Net.WebPermission.#ctor(System.Net.NetworkAccess,System.Text.RegularExpressions.Regex)" />
+           before the comparison with the regular expression argument that is supplied to the <see cref="M:System.Net.WebPermission.#ctor(System.Net.NetworkAccess,System.Text.RegularExpressions.Regex)" />
 
           
 
-           constructor. If the regular expression contains user information or the default port number, then all incoming <see
-           cref="T:System.Uri" />
+           constructor. If the regular expression contains user information or the default port number, then all incoming <see cref="T:System.Uri" />
 
           
 
@@ -252,8 +225,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Net.WebPermission" />
+            >Creates a new instance of the <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -263,8 +235,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Net.WebPermission" />
+            >Creates a new instance of the <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -300,28 +271,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <paramref
-             name="state" />
+            >The value of the <paramref name="state" />
 
             
 
-             parameter is either <see
-             cref="F:System.Security.Permissions.PermissionState.None" />
+             parameter is either <see cref="F:System.Security.Permissions.PermissionState.None" />
 
             
 
-             or <see
-             cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+             or <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
 
             
 
-            , respectively yielding fully restricted or fully unrestricted access to all security variables. If you specify <see
-             cref="F:System.Security.Permissions.PermissionState.None" />
+            , respectively yielding fully restricted or fully unrestricted access to all security variables. If you specify <see cref="F:System.Security.Permissions.PermissionState.None" />
 
             
 
-            , then you can give access to individual URIs using <see
-             cref="M:System.Net.WebPermission.AddPermission(System.Net.NetworkAccess,System.String)" />
+            , then you can give access to individual URIs using <see cref="M:System.Net.WebPermission.AddPermission(System.Net.NetworkAccess,System.String)" />
 
             
 
@@ -331,8 +297,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Net.WebPermission" />
+            >Creates a new instance of the <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -340,12 +305,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          A <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -384,8 +352,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -394,13 +361,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes a <see
-             cref="T:System.Net.WebPermission" />
+            >This constructor initializes a <see cref="T:System.Net.WebPermission" />
 
             
 
-             and grants its target permission to either make a remote host connection or accept a remote host connection using the URI described by the <paramref
-             name="uriString" />
+             and grants its target permission to either make a remote host connection or accept a remote host connection using the URI described by the <paramref name="uriString" />
 
             
 
@@ -410,8 +375,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.WebPermission" />
+            >Initializes a new instance of the <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -419,24 +383,30 @@
           >
         </summary>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A NetworkAccess value that indicates what kind of access to grant to the specified URI. <see
-           cref="F:System.Net.NetworkAccess.Accept" />
+          A NetworkAccess value that indicates what kind of access to grant to the specified URI. <see cref="F:System.Net.NetworkAccess.Accept" />
 
           
 
-           indicates that the application is allowed to accept connections from the Internet on a local resource. <see
-           cref="F:System.Net.NetworkAccess.Connect" />
+           indicates that the application is allowed to accept connections from the Internet on a local resource. <see cref="F:System.Net.NetworkAccess.Connect" />
 
           
 
            indicates that the application is allowed to connect to specific Internet resources. </param
         >
         <param name="uriString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -468,13 +438,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes a <see
-             cref="T:System.Net.WebPermission" />
+            >This constructor initializes a <see cref="T:System.Net.WebPermission" />
 
             
 
-             and grants its target permission to either make a remote host connection or accept a remote host connection using the URI described by the <paramref
-             name="uriRegex" />
+             and grants its target permission to either make a remote host connection or accept a remote host connection using the URI described by the <paramref name="uriRegex" />
 
             
 
@@ -482,23 +450,19 @@
           >
           <block subset="none" type="note">
             <para
-              >It is recommended that you create <paramref
-               name="uriRegex" />
+              >It is recommended that you create <paramref name="uriRegex" />
 
               
 
-               using the <see
-               cref="F:System.Text.RegularExpressions.RegexOptions.IgnoreCase" />
+               using the <see cref="F:System.Text.RegularExpressions.RegexOptions.IgnoreCase" />
 
               
 
-              , <see
-               cref="F:System.Text.RegularExpressions.RegexOptions.Compiled" />
+              , <see cref="F:System.Text.RegularExpressions.RegexOptions.Compiled" />
 
               
 
-              , and <see
-               cref="F:System.Text.RegularExpressions.RegexOptions.Singleline" />
+              , and <see cref="F:System.Text.RegularExpressions.RegexOptions.Singleline" />
 
               
 
@@ -507,18 +471,15 @@
           </block>
           <block subset="none" type="note">
             <para
-              >A candidate URI string is checked against the list of relevant regular expressions (<see
-               cref="P:System.Net.WebPermission.AcceptList" />
+              >A candidate URI string is checked against the list of relevant regular expressions (<see cref="P:System.Net.WebPermission.AcceptList" />
 
               
 
-               or <see
-               cref="P:System.Net.WebPermission.ConnectList" />
+               or <see cref="P:System.Net.WebPermission.ConnectList" />
 
               
 
-              ) in two ways. First, the candidate URI string is checked against the appropriate list; then, if there is no match, the candidate URI string is converted into a <see
-               cref="T:System.Uri" />
+              ) in two ways. First, the candidate URI string is checked against the appropriate list; then, if there is no match, the candidate URI string is converted into a <see cref="T:System.Uri" />
 
               
 
@@ -529,8 +490,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.WebPermission" />
+            >Initializes a new instance of the <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -538,29 +498,34 @@
           >
         </summary>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Net.NetworkAccess" />
+          A <see cref="T:System.Net.NetworkAccess" />
 
           
 
-           value that indicates what kind of access to grant to the specified URI. <see
-           cref="F:System.Net.NetworkAccess.Accept" />
+           value that indicates what kind of access to grant to the specified URI. <see cref="F:System.Net.NetworkAccess.Accept" />
 
           
 
-           indicates that the application is allowed to accept connections from the Internet on a local resource. <see
-           cref="F:System.Net.NetworkAccess.Connect" />
+           indicates that the application is allowed to accept connections from the Internet on a local resource. <see cref="F:System.Net.NetworkAccess.Connect" />
 
           
 
            indicates that the application is allowed to connect to specific Internet resources. </param
         >
         <param name="uriRegex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -591,13 +556,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property gets a list of local resources permitted by this <see
-             cref="T:System.Net.WebPermission" />
+            >This property gets a list of local resources permitted by this <see cref="T:System.Net.WebPermission" />
 
             
 
-            . The class to which you have applied <see
-             cref="T:System.Net.WebPermission" />
+            . The class to which you have applied <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -605,8 +568,7 @@
           >
           <block subset="none" type="note">
             <para
-              >You can add URIs to this list using <see
-               cref="M:System.Net.WebPermission.AddPermission(System.Net.NetworkAccess,System.String)" />
+              >You can add URIs to this list using <see cref="M:System.Net.WebPermission.AddPermission(System.Net.NetworkAccess,System.String)" />
 
               
 
@@ -615,18 +577,15 @@
           </block>
           <block subset="none" type="note">
             <para
-              >A candidate URI string is checked against the list of relevant regular expressions (<see
-               cref="P:System.Net.WebPermission.AcceptList" />
+              >A candidate URI string is checked against the list of relevant regular expressions (<see cref="P:System.Net.WebPermission.AcceptList" />
 
               
 
-               or <see
-               cref="P:System.Net.WebPermission.ConnectList" />
+               or <see cref="P:System.Net.WebPermission.ConnectList" />
 
               
 
-              ) in two ways. First, the candidate URI string is checked against the appropriate list; then, if there is no match, the candidate URI string is converted into a <see
-               cref="T:System.Uri" />
+              ) in two ways. First, the candidate URI string is checked against the appropriate list; then, if there is no match, the candidate URI string is converted into a <see cref="T:System.Uri" />
 
               
 
@@ -637,18 +596,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns an enumeration of a single accept permissions held by this <see
-             cref="T:System.Net.WebPermission" />
+            >This property returns an enumeration of a single accept permissions held by this <see cref="T:System.Net.WebPermission" />
 
             
 
-            . The possible objects types contained in the returned enumeration are <see
-             cref="T:System.String" />
+            . The possible objects types contained in the returned enumeration are <see cref="T:System.String" />
 
             
 
-             and <see
-             cref="T:System.Text.RegularExpressions.Regex" />
+             and <see cref="T:System.Text.RegularExpressions.Regex" />
 
             
 
@@ -683,48 +639,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you have specified <see
-             cref="F:System.Security.Permissions.PermissionState.None" />
+            >If you have specified <see cref="F:System.Security.Permissions.PermissionState.None" />
 
             
 
-             as the <see
-             cref="T:System.Security.Permissions.PermissionState" />
+             as the <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
-            , use <see
-             cref="M:System.Net.WebPermission.AddPermission(System.Net.NetworkAccess,System.String)" />
+            , use <see cref="M:System.Net.WebPermission.AddPermission(System.Net.NetworkAccess,System.String)" />
 
             
 
-             to permit the use of <paramref
-             name="uriString" />
+             to permit the use of <paramref name="uriString" />
 
             
 
-             in the target class. The way that <paramref
-             name="uriString" />
+             in the target class. The way that <paramref name="uriString" />
 
             
 
-             can be used by the target class is specified by <paramref
-             name="access" />
+             can be used by the target class is specified by <paramref name="access" />
 
             
 
-            . Specify <see
-             cref="F:System.Net.NetworkAccess.Accept" />
+            . Specify <see cref="F:System.Net.NetworkAccess.Accept" />
 
             
 
-             as the access parameter to add the URI specified by the <paramref
-             name="uriString" />
+             as the access parameter to add the URI specified by the <paramref name="uriString" />
 
             
 
-             parameter to the list of URI accept strings, or specify <see
-             cref="F:System.Net.NetworkAccess.Connect" />
+             parameter to the list of URI accept strings, or specify <see cref="F:System.Net.NetworkAccess.Connect" />
 
             
 
@@ -732,13 +679,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Calling <see
-               cref="M:System.Net.WebPermission.AddPermission(System.Net.NetworkAccess,System.String)" />
+              >Calling <see cref="M:System.Net.WebPermission.AddPermission(System.Net.NetworkAccess,System.String)" />
 
               
 
-               on <see
-               cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+               on <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
               <see cref="T:System.Net.WebPermission" />
 
               
@@ -748,18 +693,15 @@
           </block>
           <block subset="none" type="note">
             <para
-              >A candidate URI string is checked against the list of relevant regular expressions (<see
-               cref="P:System.Net.WebPermission.AcceptList" />
+              >A candidate URI string is checked against the list of relevant regular expressions (<see cref="P:System.Net.WebPermission.AcceptList" />
 
               
 
-               or <see
-               cref="P:System.Net.WebPermission.ConnectList" />
+               or <see cref="P:System.Net.WebPermission.ConnectList" />
 
               
 
-              ) in two ways. First, the candidate URI string is checked against the appropriate list; then, if there is no match, the candidate URI string is converted into a <see
-               cref="T:System.Uri" />
+              ) in two ways. First, the candidate URI string is checked against the appropriate list; then, if there is no match, the candidate URI string is converted into a <see cref="T:System.Uri" />
 
               
 
@@ -770,8 +712,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified URI string with the specified access rights to the current <see
-             cref="T:System.Net.WebPermission" />
+            >Adds the specified URI string with the specified access rights to the current <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -779,19 +720,26 @@
           >
         </summary>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Net.NetworkAccess" />
+          A <see cref="T:System.Net.NetworkAccess" />
 
           
 
            that specifies the access rights that are granted to the URI. </param
         >
         <param name="uriString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -825,43 +773,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you have specified <see
-             cref="F:System.Security.Permissions.PermissionState.None" />
+            >If you have specified <see cref="F:System.Security.Permissions.PermissionState.None" />
 
             
 
-             as the <see
-             cref="T:System.Security.Permissions.PermissionState" />
+             as the <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
-            , use <see
-             cref="M:System.Net.WebPermission.AddPermission(System.Net.NetworkAccess,System.String)" />
+            , use <see cref="M:System.Net.WebPermission.AddPermission(System.Net.NetworkAccess,System.String)" />
 
             
 
-             to allow the use of <paramref
-             name="uriRegex" />
+             to allow the use of <paramref name="uriRegex" />
 
             
 
-             in the target class. Specify <see
-             cref="F:System.Net.NetworkAccess.Accept" />
+             in the target class. Specify <see cref="F:System.Net.NetworkAccess.Accept" />
 
             
 
-             as the <paramref
-             name="access" />
+             as the <paramref name="access" />
 
             
 
-             parameter to add the URI specified by the <paramref
-             name="uriRegex" />
+             parameter to add the URI specified by the <paramref name="uriRegex" />
 
             
 
-             parameter to the list of URI accept strings, or specify <see
-             cref="F:System.Net.NetworkAccess.Connect" />
+             parameter to the list of URI accept strings, or specify <see cref="F:System.Net.NetworkAccess.Connect" />
 
             
 
@@ -869,13 +809,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Calling <see
-               cref="M:System.Net.WebPermission.AddPermission(System.Net.NetworkAccess,System.String)" />
+              >Calling <see cref="M:System.Net.WebPermission.AddPermission(System.Net.NetworkAccess,System.String)" />
 
               
 
-               on an <see
-               cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+               on an <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
               <see cref="T:System.Net.WebPermission" />
 
               
@@ -885,23 +823,19 @@
           </block>
           <block subset="none" type="note">
             <para
-              >It is recommended that you create <paramref
-               name="uriRegex" />
+              >It is recommended that you create <paramref name="uriRegex" />
 
               
 
-               using the <see
-               cref="F:System.Text.RegularExpressions.RegexOptions.IgnoreCase" />
+               using the <see cref="F:System.Text.RegularExpressions.RegexOptions.IgnoreCase" />
 
               
 
-              , <see
-               cref="F:System.Text.RegularExpressions.RegexOptions.Compiled" />
+              , <see cref="F:System.Text.RegularExpressions.RegexOptions.Compiled" />
 
               
 
-              , and <see
-               cref="F:System.Text.RegularExpressions.RegexOptions.Singleline" />
+              , and <see cref="F:System.Text.RegularExpressions.RegexOptions.Singleline" />
 
               
 
@@ -910,18 +844,15 @@
           </block>
           <block subset="none" type="note">
             <para
-              >A candidate URI string is checked against the list of relevant regular expressions (<see
-               cref="P:System.Net.WebPermission.AcceptList" />
+              >A candidate URI string is checked against the list of relevant regular expressions (<see cref="P:System.Net.WebPermission.AcceptList" />
 
               
 
-               or <see
-               cref="P:System.Net.WebPermission.ConnectList" />
+               or <see cref="P:System.Net.WebPermission.ConnectList" />
 
               
 
-              ) in two ways. First, the candidate URI string is checked against the appropriate list; then, if there is no match, the candidate URI string is converted into a <see
-               cref="T:System.Uri" />
+              ) in two ways. First, the candidate URI string is checked against the appropriate list; then, if there is no match, the candidate URI string is converted into a <see cref="T:System.Uri" />
 
               
 
@@ -932,8 +863,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified URI with the specified access rights to the current <see
-             cref="T:System.Net.WebPermission" />
+            >Adds the specified URI with the specified access rights to the current <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -941,14 +871,22 @@
           >
         </summary>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A NetworkAccess that specifies the access rights that are granted to the URI. </param
         >
         <param name="uriRegex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -979,13 +917,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property gets a list of remote resources that are permitted by this <see
-             cref="T:System.Net.WebPermission" />
+            >This property gets a list of remote resources that are permitted by this <see cref="T:System.Net.WebPermission" />
 
             
 
-            . The class to which you have applied <see
-             cref="T:System.Net.WebPermission" />
+            . The class to which you have applied <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -993,8 +929,7 @@
           >
           <block subset="none" type="note">
             <para
-              >You can add URIs to this list using <see
-               cref="M:System.Net.WebPermission.AddPermission(System.Net.NetworkAccess,System.String)" />
+              >You can add URIs to this list using <see cref="M:System.Net.WebPermission.AddPermission(System.Net.NetworkAccess,System.String)" />
 
               
 
@@ -1003,18 +938,15 @@
           </block>
           <block subset="none" type="note">
             <para
-              >A candidate URI string is checked against the list of relevant regular expressions (<see
-               cref="P:System.Net.WebPermission.AcceptList" />
+              >A candidate URI string is checked against the list of relevant regular expressions (<see cref="P:System.Net.WebPermission.AcceptList" />
 
               
 
-               or <see
-               cref="P:System.Net.WebPermission.ConnectList" />
+               or <see cref="P:System.Net.WebPermission.ConnectList" />
 
               
 
-              ) in two ways. First, the candidate URI string is checked against the appropriate list; then, if there is no match, the candidate URI string is converted into a <see
-               cref="T:System.Uri" />
+              ) in two ways. First, the candidate URI string is checked against the appropriate list; then, if there is no match, the candidate URI string is converted into a <see cref="T:System.Uri" />
 
               
 
@@ -1025,18 +957,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns an enumeration of a single connect permissions held by this <see
-             cref="T:System.Net.WebPermission" />
+            >This property returns an enumeration of a single connect permissions held by this <see cref="T:System.Net.WebPermission" />
 
             
 
-            . The possible objects types contained in the returned enumeration are <see
-             cref="T:System.String" />
+            . The possible objects types contained in the returned enumeration are <see cref="T:System.String" />
 
             
 
-             and <see
-             cref="T:System.Text.RegularExpressions.Regex" />
+             and <see cref="T:System.Text.RegularExpressions.Regex" />
 
             
 
@@ -1069,23 +998,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.IPermission" />
+            >The <see cref="T:System.Security.IPermission" />
 
             
 
-             returned by this method represents the same access to resources as the original <see
-             cref="T:System.Net.WebPermission" />
+             returned by this method represents the same access to resources as the original <see cref="T:System.Net.WebPermission" />
 
             
 
-            . This method overrides <see
-             cref="M:System.Security.CodeAccessPermission.Copy" />
+            . This method overrides <see cref="M:System.Security.CodeAccessPermission.Copy" />
 
             
 
-             and is implemented to support the <see
-             cref="T:System.Security.IPermission" />
+             and is implemented to support the <see cref="T:System.Security.IPermission" />
 
             
 
@@ -1095,8 +1020,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a copy of a <see
-             cref="T:System.Net.WebPermission" />
+            >Creates a copy of a <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -1106,8 +1030,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of the <see
-             cref="T:System.Net.WebPermission" />
+            >A new instance of the <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -1149,8 +1072,7 @@
 
             
 
-            is <see
-             langword="null" />
+            is <see langword="null" />
 
             
 
@@ -1163,8 +1085,7 @@
 
             
 
-            does not contain the encoding for a <see
-             cref="T:System.Net.WebPermission" />
+            does not contain the encoding for a <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -1174,31 +1095,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.WebPermission.FromXml(System.Security.SecurityElement)" />
+            >The <see cref="M:System.Net.WebPermission.FromXml(System.Security.SecurityElement)" />
 
             
 
-             method reconstructs a <see
-             cref="T:System.Net.WebPermission" />
+             method reconstructs a <see cref="T:System.Net.WebPermission" />
 
             
 
-             from an XML encoding that is defined by the <see
-             cref="T:System.Security.SecurityElement" />
+             from an XML encoding that is defined by the <see cref="T:System.Security.SecurityElement" />
 
             
 
              class.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Net.WebPermission.ToXml" />
+            >Use the <see cref="M:System.Net.WebPermission.ToXml" />
 
             
 
-             method to XML-encode the <see
-             cref="T:System.Net.WebPermission" />
+             method to XML-encode the <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -1208,8 +1124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reconstructs a <see
-             cref="T:System.Net.WebPermission" />
+            >Reconstructs a <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -1217,12 +1132,15 @@
           >
         </summary>
         <param name="securityElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The XML encoding from which to reconstruct the <see
-           cref="T:System.Net.WebPermission" />
+          The XML encoding from which to reconstruct the <see cref="T:System.Net.WebPermission" />
 
           
 
@@ -1262,8 +1180,7 @@
 
           
 
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
@@ -1274,13 +1191,11 @@
 
           
 
-           is not <see
-           langword="null" />
+           is not <see langword="null" />
 
           
 
-           and is not of type <see
-           cref="T:System.Net.WebPermission" />
+           and is not of type <see cref="T:System.Net.WebPermission" />
 
           
 
@@ -1293,26 +1208,22 @@
 
             
 
-             returns a <see
-             cref="T:System.Net.WebPermission" />
+             returns a <see cref="T:System.Net.WebPermission" />
 
             
 
-             that contains those permissions that are common in both <paramref
-             name="target" />
+             that contains those permissions that are common in both <paramref name="target" />
 
             
 
              and the current instance.</para
           >
           <para
-            >This method overrides <see
-             cref="M:System.Security.CodeAccessPermission.Intersect(System.Security.IPermission)" />
+            >This method overrides <see cref="M:System.Security.CodeAccessPermission.Intersect(System.Security.IPermission)" />
 
             
 
-             and is implemented to support the <see
-             cref="T:System.Security.IPermission" />
+             and is implemented to support the <see cref="T:System.Security.IPermission" />
 
             
 
@@ -1322,8 +1233,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the logical intersection of two <see
-             cref="T:System.Net.WebPermission" />
+            >Returns the logical intersection of two <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -1333,13 +1243,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Net.WebPermission" />
+            >A new <see cref="T:System.Net.WebPermission" />
 
             
 
-             that represents the intersection of the current instance and the <paramref
-             name="target" />
+             that represents the intersection of the current instance and the <paramref name="target" />
 
             
 
@@ -1347,12 +1255,15 @@
           >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.WebPermission" />
+          The <see cref="T:System.Net.WebPermission" />
 
           
 
@@ -1393,8 +1304,7 @@
 
             
 
-            is not of type <see
-             cref="T:System.Net.WebPermission" />
+            is not of type <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -1404,33 +1314,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the current <see
-             cref="T:System.Net.WebPermission" />
+            >If the current <see cref="T:System.Net.WebPermission" />
 
             
 
-             specifies a set of associated resources that is wholly contained by the <paramref
-             name="target" />
+             specifies a set of associated resources that is wholly contained by the <paramref name="target" />
 
             
 
-             parameter, then the current <see
-             cref="T:System.Net.WebPermission" />
+             parameter, then the current <see cref="T:System.Net.WebPermission" />
 
             
 
-             is a subset of <paramref
-             name="target" />
+             is a subset of <paramref name="target" />
 
             
 
-            . This method overrides <see
-             cref="M:System.Net.WebPermission.IsSubsetOf(System.Security.IPermission)" />
+            . This method overrides <see cref="M:System.Net.WebPermission.IsSubsetOf(System.Security.IPermission)" />
 
             
 
-             and is implemented to support the <see
-             cref="T:System.Security.IPermission" />
+             and is implemented to support the <see cref="T:System.Security.IPermission" />
 
             
 
@@ -1440,8 +1344,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the current <see
-             cref="T:System.Net.WebPermission" />
+            >Determines whether the current <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -1451,8 +1354,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the current instance is a subset of the <paramref
-             name="target" />
+            >true if the current instance is a subset of the <paramref name="target" />
 
             
 
@@ -1460,17 +1362,19 @@
           >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.WebPermission" />
+          The <see cref="T:System.Net.WebPermission" />
 
           
 
-           to compare to the current <see
-           cref="T:System.Net.WebPermission" />
+           to compare to the current <see cref="T:System.Net.WebPermission" />
 
           
 
@@ -1499,13 +1403,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="T:System.Net.WebPermission" />
+            >If <see cref="T:System.Net.WebPermission" />
 
             
 
-             is <see
-             cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+             is <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
 
             
 
@@ -1513,8 +1415,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Use <see
-               cref="M:System.Net.WebPermission.AddPermission(System.Net.NetworkAccess,System.String)" />
+              >Use <see cref="M:System.Net.WebPermission.AddPermission(System.Net.NetworkAccess,System.String)" />
 
               
 
@@ -1525,8 +1426,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks the overall permission state of the <see
-             cref="T:System.Net.WebPermission" />
+            >Checks the overall permission state of the <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -1536,13 +1436,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Net.WebPermission" />
+            >true if the <see cref="T:System.Net.WebPermission" />
 
             
 
-             was created with the <see
-             cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+             was created with the <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
             <see cref="T:System.Security.Permissions.PermissionState" />
 
             
@@ -1579,13 +1477,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Net.WebPermission.FromXml(System.Security.SecurityElement)" />
+            >Use the <see cref="M:System.Net.WebPermission.FromXml(System.Security.SecurityElement)" />
 
             
 
-             method to restore the state information from a <see
-             cref="T:System.Security.SecurityElement" />
+             method to restore the state information from a <see cref="T:System.Security.SecurityElement" />
 
             
 
@@ -1595,8 +1491,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an XML encoding of a <see
-             cref="T:System.Net.WebPermission" />
+            >Creates an XML encoding of a <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -1606,13 +1501,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.SecurityElement" />
+            >A <see cref="T:System.Security.SecurityElement" />
 
             
 
-             that contains an XML-encoded representation of the <see
-             cref="T:System.Net.WebPermission" />
+             that contains an XML-encoded representation of the <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -1653,8 +1546,7 @@
 
           
 
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
@@ -1665,13 +1557,11 @@
 
           
 
-           is not <see
-           langword="null" />
+           is not <see langword="null" />
 
           
 
-           and is not of type <see
-           cref="T:System.Net.WebPermission" />
+           and is not of type <see cref="T:System.Net.WebPermission" />
 
           
 
@@ -1684,13 +1574,11 @@
 
             
 
-             returns a <see
-             cref="T:System.Net.WebPermission" />
+             returns a <see cref="T:System.Net.WebPermission" />
 
             
 
-             that contains all the permissions in both <paramref
-             name="target" />
+             that contains all the permissions in both <paramref name="target" />
 
             
 
@@ -1700,8 +1588,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the logical union between two instances of the <see
-             cref="T:System.Net.WebPermission" />
+            >Returns the logical union between two instances of the <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -1711,33 +1598,27 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.WebPermission" />
+            >A <see cref="T:System.Net.WebPermission" />
 
             
 
-             that represents the union of the current instance and the <paramref
-             name="target" />
+             that represents the union of the current instance and the <paramref name="target" />
 
             
 
-             parameter. If either WebPermission is <see
-             cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+             parameter. If either WebPermission is <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
 
             
 
-            , the method returns a <see
-             cref="T:System.Net.WebPermission" />
+            , the method returns a <see cref="T:System.Net.WebPermission" />
 
             
 
-             that is <see
-             cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+             that is <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
 
             
 
-            . If the target is null, the method returns a copy of the current <see
-             cref="T:System.Net.WebPermission" />
+            . If the target is null, the method returns a copy of the current <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -1745,17 +1626,19 @@
           >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.WebPermission" />
+          The <see cref="T:System.Net.WebPermission" />
 
           
 
-           to combine with the current <see
-           cref="T:System.Net.WebPermission" />
+           to combine with the current <see cref="T:System.Net.WebPermission" />
 
           
 

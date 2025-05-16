@@ -56,13 +56,11 @@ Contract.EndContractBlock();
 }
 </code>
       <para
-        >In addition to if-then-throw statements, the contract section of contract validator methods may contain calls to other contract validator methods. However, no other contracts (such as <see
-         cref="M:System.Diagnostics.Contracts.Contract.Requires(System.Boolean)" />
+        >In addition to if-then-throw statements, the contract section of contract validator methods may contain calls to other contract validator methods. However, no other contracts (such as <see cref="M:System.Diagnostics.Contracts.Contract.Requires(System.Boolean)" />
 
         
 
-        , or <see
-         cref="M:System.Diagnostics.Contracts.Contract.Ensures(System.Boolean)" />
+        , or <see cref="M:System.Diagnostics.Contracts.Contract.Ensures(System.Boolean)" />
 
         
 
@@ -94,13 +92,11 @@ Contract.Requires&lt;ArgumentOutOfRangeException&gt;(position &gt;= 0);
 Contract.Requires&lt;ArgumentOutOfRangeException&gt;(position &lt; data.Length);
 </code>
       <para
-        >In standard methods, calls to contract validator methods can be freely mixed with other contracts such as <see
-         cref="M:System.Diagnostics.Contracts.Contract.Ensures(System.Boolean)" />
+        >In standard methods, calls to contract validator methods can be freely mixed with other contracts such as <see cref="M:System.Diagnostics.Contracts.Contract.Ensures(System.Boolean)" />
 
         
 
-         or <see
-         cref="M:System.Diagnostics.Contracts.Contract.Requires(System.Boolean)" />
+         or <see cref="M:System.Diagnostics.Contracts.Contract.Requires(System.Boolean)" />
 
         
 
@@ -129,8 +125,7 @@ Contract.Requires&lt;ArgumentOutOfRangeException&gt;(position &lt; data.Length);
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.Contracts.ContractArgumentValidatorAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.Contracts.ContractArgumentValidatorAttribute" />
 
             
 

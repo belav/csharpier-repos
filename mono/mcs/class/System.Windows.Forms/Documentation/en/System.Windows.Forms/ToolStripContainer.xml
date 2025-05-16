@@ -32,68 +32,55 @@
 
         
 
-         is similar to <see
-         cref="T:System.Windows.Forms.SplitContainer" />
+         is similar to <see cref="T:System.Windows.Forms.SplitContainer" />
 
         
 
-        . It uses four docked side panels (instances of <see
-         cref="T:System.Windows.Forms.ToolStripPanel" />
+        . It uses four docked side panels (instances of <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
         
 
-        ) and one central panel (an instance of <see
-         cref="T:System.Windows.Forms.ToolStripContentPanel" />
+        ) and one central panel (an instance of <see cref="T:System.Windows.Forms.ToolStripContentPanel" />
 
         
 
-        ) to create a typical arrangement. You cannot remove the side panels, but you can hide them by setting their respective <see
-         cref="P:System.Windows.Forms.ToolStripContainer.TopToolStripPanelVisible" />
+        ) to create a typical arrangement. You cannot remove the side panels, but you can hide them by setting their respective <see cref="P:System.Windows.Forms.ToolStripContainer.TopToolStripPanelVisible" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.ToolStripContainer.BottomToolStripPanelVisible" />
+        , <see cref="P:System.Windows.Forms.ToolStripContainer.BottomToolStripPanelVisible" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.ToolStripContainer.LeftToolStripPanelVisible" />
+        , <see cref="P:System.Windows.Forms.ToolStripContainer.LeftToolStripPanelVisible" />
 
         
 
-        , and <see
-         cref="P:System.Windows.Forms.ToolStripContainer.RightToolStripPanelVisible" />
+        , and <see cref="P:System.Windows.Forms.ToolStripContainer.RightToolStripPanelVisible" />
 
         
 
-         properties to false. By default, each of these properties is true at design time. Also at design time, the <see
-         cref="T:System.Windows.Forms.ToolStripContainer" />
+         properties to false. By default, each of these properties is true at design time. Also at design time, the <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
         
 
-         appears with its top panel already expanded. You can neither remove nor hide the <see
-         cref="T:System.Windows.Forms.ToolStripContentPanel" />
+         appears with its top panel already expanded. You can neither remove nor hide the <see cref="T:System.Windows.Forms.ToolStripContentPanel" />
 
         
 
-        . You can arrange one or more <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        . You can arrange one or more <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-        , <see
-         cref="T:System.Windows.Forms.MenuStrip" />
+        , <see cref="T:System.Windows.Forms.MenuStrip" />
 
         
 
-        , or <see
-         cref="T:System.Windows.Forms.StatusStrip" />
+        , or <see cref="T:System.Windows.Forms.StatusStrip" />
 
         
 
-         controls in the side panels, and you can use the central panel for other controls. The <see
-         cref="T:System.Windows.Forms.ToolStripContentPanel" />
+         controls in the side panels, and you can use the central panel for other controls. The <see cref="T:System.Windows.Forms.ToolStripContentPanel" />
 
         
 
@@ -104,8 +91,7 @@
 
         
 
-         does not support Multiple Document Interface (MDI) applications. Use <see
-         cref="T:System.Windows.Forms.ToolStripPanel" />
+         does not support Multiple Document Interface (MDI) applications. Use <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
         
 
@@ -128,8 +114,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
@@ -472,28 +457,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStripContainer.BottomToolStripPanel" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStripContainer.BottomToolStripPanel" />
 
             
 
-             property to add <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property to add <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            , <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            , <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
-            , or <see
-             cref="T:System.Windows.Forms.StatusStrip" />
+            , or <see cref="T:System.Windows.Forms.StatusStrip" />
 
             
 
-             controls or move them from another <see
-             cref="T:System.Windows.Forms.ToolStripPanel" />
+             controls or move them from another <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
             
 
@@ -503,8 +483,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the bottom panel of the <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+            >Gets the bottom panel of the <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
@@ -536,13 +515,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.Windows.Forms.ToolStripContainer.BottomToolStripPanelVisible" />
+            >Set the <see cref="P:System.Windows.Forms.ToolStripContainer.BottomToolStripPanelVisible" />
 
             
 
-             property to false to use a <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+             property to false to use a <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
@@ -552,8 +529,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the bottom panel of the <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+            >Gets or sets a value indicating whether the bottom panel of the <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
@@ -617,8 +593,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -630,8 +605,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ToolStripContainer.CausesValidation" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ToolStripContainer.CausesValidation" />
 
             
 
@@ -666,43 +640,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the top, bottom, left, and right panels of the <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+            >You can use the top, bottom, left, and right panels of the <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
-             to hold <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             to hold <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            , <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            , <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
-            , or <see
-             cref="T:System.Windows.Forms.StatusStrip" />
+            , or <see cref="T:System.Windows.Forms.StatusStrip" />
 
             
 
-             controls. Controls other than <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             controls. Controls other than <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            , <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            , <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
-            , or <see
-             cref="T:System.Windows.Forms.StatusStrip" />
+            , or <see cref="T:System.Windows.Forms.StatusStrip" />
 
             
 
-             are automatically added to the <see
-             cref="T:System.Windows.Forms.ToolStripContentPanel" />
+             are automatically added to the <see cref="T:System.Windows.Forms.ToolStripContentPanel" />
 
             
 
@@ -712,8 +678,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the center panel of the <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+            >Gets the center panel of the <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
@@ -779,8 +744,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -792,8 +756,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ToolStripContainer.ContextMenuStrip" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ToolStripContainer.ContextMenuStrip" />
 
             
 
@@ -854,8 +817,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns a <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+            >Creates and returns a <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
@@ -865,8 +827,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A read-only <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+            >A read-only <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
@@ -967,8 +928,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the default size of the <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+            >Gets the default size of the <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
@@ -1068,28 +1028,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStripContainer.LeftToolStripPanel" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStripContainer.LeftToolStripPanel" />
 
             
 
-             property to add <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property to add <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            , <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            , <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
-            , or <see
-             cref="T:System.Windows.Forms.StatusStrip" />
+            , or <see cref="T:System.Windows.Forms.StatusStrip" />
 
             
 
-             controls or move them from another <see
-             cref="T:System.Windows.Forms.ToolStripPanel" />
+             controls or move them from another <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
             
 
@@ -1099,8 +1054,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the left panel of the <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+            >Gets the left panel of the <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
@@ -1129,13 +1083,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.Windows.Forms.ToolStripContainer.LeftToolStripPanelVisible" />
+            >Set the <see cref="P:System.Windows.Forms.ToolStripContainer.LeftToolStripPanelVisible" />
 
             
 
-             property to false to use a <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+             property to false to use a <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
@@ -1145,8 +1097,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the left panel of the <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+            >Gets or sets a value indicating whether the left panel of the <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
@@ -1178,8 +1129,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.RightToLeftChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.RightToLeftChanged" />
 
             
 
@@ -1187,7 +1137,11 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1209,8 +1163,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1219,8 +1172,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripContainer.OnSizeChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripContainer.OnSizeChanged(System.EventArgs)" />
 
             
 
@@ -1230,8 +1182,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.SizeChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.SizeChanged" />
 
             
 
@@ -1239,12 +1190,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1278,28 +1232,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStripContainer.RightToolStripPanel" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStripContainer.RightToolStripPanel" />
 
             
 
-             property to add <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property to add <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            , <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            , <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
-            , or <see
-             cref="T:System.Windows.Forms.StatusStrip" />
+            , or <see cref="T:System.Windows.Forms.StatusStrip" />
 
             
 
-             controls or move them from another <see
-             cref="T:System.Windows.Forms.ToolStripPanel" />
+             controls or move them from another <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
             
 
@@ -1309,8 +1258,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the right panel of the <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+            >Gets the right panel of the <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
@@ -1339,13 +1287,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.Windows.Forms.ToolStripContainer.RightToolStripPanelVisible" />
+            >Set the <see cref="P:System.Windows.Forms.ToolStripContainer.RightToolStripPanelVisible" />
 
             
 
-             property to false to use a <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+             property to false to use a <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
@@ -1355,8 +1301,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the right panel of the <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+            >Gets or sets a value indicating whether the right panel of the <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
@@ -1391,28 +1336,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStripContainer.TopToolStripPanel" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStripContainer.TopToolStripPanel" />
 
             
 
-             property to add <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property to add <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            , <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            , <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
-            , or <see
-             cref="T:System.Windows.Forms.StatusStrip" />
+            , or <see cref="T:System.Windows.Forms.StatusStrip" />
 
             
 
-             controls or move them from another <see
-             cref="T:System.Windows.Forms.ToolStripPanel" />
+             controls or move them from another <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
             
 
@@ -1422,8 +1362,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the top panel of the <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+            >Gets the top panel of the <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
@@ -1452,13 +1391,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.Windows.Forms.ToolStripContainer.TopToolStripPanelVisible" />
+            >Set the <see cref="P:System.Windows.Forms.ToolStripContainer.TopToolStripPanelVisible" />
 
             
 
-             property to false to use a <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+             property to false to use a <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
@@ -1468,8 +1405,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the top panel of the <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+            >Gets or sets a value indicating whether the top panel of the <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 

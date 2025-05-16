@@ -15,8 +15,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the set of arguments passed to the <see
-         cref="T:System.Data.SqlClient.SqlRowsCopiedEventHandler" />
+        >Represents the set of arguments passed to the <see cref="T:System.Data.SqlClient.SqlRowsCopiedEventHandler" />
 
         
 
@@ -36,8 +35,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value in the <paramref
-             name="rowsCopied" />
+            >The value in the <paramref name="rowsCopied" />
 
             
 
@@ -47,8 +45,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Data.SqlClient.SqlRowsCopiedEventArgs" />
+            >Creates a new instance of the <see cref="T:System.Data.SqlClient.SqlRowsCopiedEventArgs" />
 
             
 
@@ -56,12 +53,15 @@
           >
         </summary>
         <param name="rowsCopied">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Int64" />
+          An <see cref="T:System.Int64" />
 
           
 
@@ -84,44 +84,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Data.SqlClient.SqlRowsCopiedEventArgs.Abort" />
+            >Use the <see cref="P:System.Data.SqlClient.SqlRowsCopiedEventArgs.Abort" />
 
             
 
-             property to cancel a bulk copy operation. Set <see
-             cref="P:System.Data.SqlClient.SqlRowsCopiedEventArgs.Abort" />
+             property to cancel a bulk copy operation. Set <see cref="P:System.Data.SqlClient.SqlRowsCopiedEventArgs.Abort" />
 
             
 
              to true to abort the bulk copy operation.</para
           >
           <para
-            >If you call the Close method from <see
-             cref="E:System.Data.SqlClient.SqlBulkCopy.SqlRowsCopied" />
+            >If you call the Close method from <see cref="E:System.Data.SqlClient.SqlBulkCopy.SqlRowsCopied" />
 
             
 
-            , an exception is generated, and the <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+            , an exception is generated, and the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
              object state does not change.</para
           >
           <para
-            >If an application specifically creates a <see
-             cref="T:System.Data.SqlClient.SqlTransaction" />
+            >If an application specifically creates a <see cref="T:System.Data.SqlClient.SqlTransaction" />
 
             
 
-             object in the <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             object in the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
-             constructor, the transaction is not rolled back. The application is responsible for determining whether it is required to rollback the operation, and if so, it must call the <see
-             cref="M:System.Data.SqlClient.SqlTransaction.Rollback" />
+             constructor, the transaction is not rolled back. The application is responsible for determining whether it is required to rollback the operation, and if so, it must call the <see cref="M:System.Data.SqlClient.SqlTransaction.Rollback" />
 
             
 
@@ -149,8 +142,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value in the <see
-             cref="P:System.Data.SqlClient.SqlRowsCopiedEventArgs.RowsCopied" />
+            >The value in the <see cref="P:System.Data.SqlClient.SqlRowsCopiedEventArgs.RowsCopied" />
 
             
 

@@ -20,13 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Clients encode files and transmit them in the content body using multipart MIME format with an HTTP Content-Type header of multipart/form-data. ASP.NET extracts the encoded file(s) from the content body into individual members of an <see
-         cref="T:System.Web.HttpFileCollection" />
+        >Clients encode files and transmit them in the content body using multipart MIME format with an HTTP Content-Type header of multipart/form-data. ASP.NET extracts the encoded file(s) from the content body into individual members of an <see cref="T:System.Web.HttpFileCollection" />
 
         
 
-        . Methods and properties of the <see
-         cref="T:System.Web.HttpPostedFile" />
+        . Methods and properties of the <see cref="T:System.Web.HttpPostedFile" />
 
         
 
@@ -73,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies members of the file collection to an <see
-             cref="T:System.Array" />
+            >Copies members of the file collection to an <see cref="T:System.Array" />
 
             
 
@@ -82,19 +79,26 @@
           >
         </summary>
         <param name="dest">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The destination <see
-           cref="T:System.Array" />
+          The destination <see cref="T:System.Array" />
 
           
 
           . </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -120,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Web.HttpPostedFile" />
+            >Returns the <see cref="T:System.Web.HttpPostedFile" />
 
             
 
@@ -131,8 +134,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Web.HttpPostedFile" />
+            >An <see cref="T:System.Web.HttpPostedFile" />
 
             
 
@@ -140,7 +142,11 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -162,16 +168,12 @@
         <Parameter Name="key" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="key"
-          >a <see
-           cref="T:System.String" />
-        </param>
+        <param name="key">a <see cref="T:System.String" /></param>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Web.HttpPostedFile" />
+            >Returns the <see cref="T:System.Web.HttpPostedFile" />
 
             
 
@@ -181,8 +183,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Web.HttpPostedFile" />
+            >An <see cref="T:System.Web.HttpPostedFile" />
 
             
 
@@ -209,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the name of the <see
-             cref="T:System.Web.HttpFileCollection" />
+            >Returns the name of the <see cref="T:System.Web.HttpFileCollection" />
 
             
 
@@ -220,13 +220,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name of the <see
-             cref="T:System.Web.HttpFileCollection" />
+            >The name of the <see cref="T:System.Web.HttpFileCollection" />
 
             
 
-             member specified by <paramref
-             name="index" />
+             member specified by <paramref name="index" />
 
             
 
@@ -234,7 +232,11 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

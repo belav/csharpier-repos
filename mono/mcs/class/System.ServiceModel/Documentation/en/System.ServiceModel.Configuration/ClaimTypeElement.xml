@@ -40,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.ClaimTypeElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ClaimTypeElement" />
 
             
 
@@ -72,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.ClaimTypeElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ClaimTypeElement" />
 
             
 
@@ -81,19 +79,26 @@
           >
         </summary>
         <param name="claimType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A uniform resource identifier (URI) that specifies the type of claim. Predefined claim types are available as static properties of the <see
-           cref="T:System.IdentityModel.Claims.ClaimTypes" />
+          A uniform resource identifier (URI) that specifies the type of claim. Predefined claim types are available as static properties of the <see cref="T:System.IdentityModel.Claims.ClaimTypes" />
 
           
 
            class. </param
         >
         <param name="isOptional">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -124,8 +129,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Predefined claim types are available as static properties of the <see
-             cref="T:System.IdentityModel.Claims.ClaimTypes" />
+            >Predefined claim types are available as static properties of the <see cref="T:System.IdentityModel.Claims.ClaimTypes" />
 
             
 

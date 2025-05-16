@@ -19,13 +19,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This is an abstract class that cannot be instantiated.  It is inherited by the <see
-         cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" />
+        >This is an abstract class that cannot be instantiated.  It is inherited by the <see cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" />
 
         
 
-         and <see
-         cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
+         and <see cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
 
         
 
@@ -35,23 +33,19 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" />
+        >The <see cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" />
 
         
 
-         class represents information about a CMS/PKCS #7 message recipient. The <see
-         cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" />
+         class represents information about a CMS/PKCS #7 message recipient. The <see cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" />
 
         
 
-         class is an abstract class inherited by the <see
-         cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" />
+         class is an abstract class inherited by the <see cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" />
 
         
 
-         and <see
-         cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
+         and <see cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
 
         
 
@@ -77,13 +71,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is an abstract property overridden by <see
-             cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" />
+            >This is an abstract property overridden by <see cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" />
 
             
 
-             and <see
-             cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
+             and <see cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
 
             
 
@@ -93,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.EncryptedKey" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.EncryptedKey" />
 
             
 
@@ -126,13 +117,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is an abstract property overridden by <see
-             cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" />
+            >This is an abstract property overridden by <see cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" />
 
             
 
-             and <see
-             cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
+             and <see cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
 
             
 
@@ -142,8 +131,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.KeyEncryptionAlgorithm" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.KeyEncryptionAlgorithm" />
 
             
 
@@ -175,13 +163,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is an abstract property overridden by <see
-             cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" />
+            >This is an abstract property overridden by <see cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" />
 
             
 
-             and <see
-             cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
+             and <see cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
 
             
 
@@ -191,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.RecipientIdentifier" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.RecipientIdentifier" />
 
             
 
@@ -225,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.Type" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.Type" />
 
             
 
@@ -252,13 +236,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is an abstract property overridden by <see
-             cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" />
+            >This is an abstract property overridden by <see cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" />
 
             
 
-             and <see
-             cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
+             and <see cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
 
             
 
@@ -269,13 +251,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.Version" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.Version" />
 
             
 
-             abstract property retrieves the version of the recipient information. Derived classes automatically set this property for their objects, and the value indicates whether it is using PKCS #7 or Cryptographic Message Syntax (CMS) to protect messages. The version also implies whether the <see
-             cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" />
+             abstract property retrieves the version of the recipient information. Derived classes automatically set this property for their objects, and the value indicates whether it is using PKCS #7 or Cryptographic Message Syntax (CMS) to protect messages. The version also implies whether the <see cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" />
 
             
 

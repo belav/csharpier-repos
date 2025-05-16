@@ -34,18 +34,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class implements the core features of text manipulation controls, such as <see
-         cref="T:System.Windows.Forms.TextBox" />
+        >This class implements the core features of text manipulation controls, such as <see cref="T:System.Windows.Forms.TextBox" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.RichTextBox" />
+         and <see cref="T:System.Windows.Forms.RichTextBox" />
 
         
 
-        . These include text selection, <ui
-        >Clipboard</ui>
+        . These include text selection, <ui>Clipboard</ui>
 
         
 
@@ -74,16 +71,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
+            >The <see cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
 
             
 
              property must also be true to get a TAB character in the control.</para
           >
           <para
-            >If the <see
-             cref="P:System.Windows.Forms.TextBoxBase.AcceptsTab" />
+            >If the <see cref="P:System.Windows.Forms.TextBoxBase.AcceptsTab" />
 
             
 
@@ -110,8 +105,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -123,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.TextBoxBase.AcceptsTab" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.TextBoxBase.AcceptsTab" />
 
             
 
@@ -150,8 +143,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this method to add text to the existing text in the control instead of using the concatenation operator (+) to concatenate text to the <see
-             cref="P:System.Windows.Forms.TextBoxBase.Text" />
+            >You can use this method to add text to the existing text in the control instead of using the concatenation operator (+) to concatenate text to the <see cref="P:System.Windows.Forms.TextBoxBase.Text" />
 
             
 
@@ -163,7 +155,11 @@
           <para>Appends text to the current text of a text box.</para>
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -203,51 +199,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you set the <see
-             cref="P:System.Windows.Forms.TextBoxBase.AutoSize" />
+            >When you set the <see cref="P:System.Windows.Forms.TextBoxBase.AutoSize" />
 
             
 
-             property to true for a <see
-             cref="T:System.Windows.Forms.TextBox" />
+             property to true for a <see cref="T:System.Windows.Forms.TextBox" />
 
             
 
-            , when the <see
-             cref="P:System.Windows.Forms.Control.Font" />
+            , when the <see cref="P:System.Windows.Forms.Control.Font" />
 
             
 
-             changes, the <see
-             cref="T:System.Windows.Forms.TextBox" />
+             changes, the <see cref="T:System.Windows.Forms.TextBox" />
 
             
 
-             expands or contracts the <see
-             cref="P:System.Windows.Forms.Control.Height" />
+             expands or contracts the <see cref="P:System.Windows.Forms.Control.Height" />
 
             
 
-             to accommodate the larger or smaller text. The <see
-             cref="P:System.Windows.Forms.Control.Width" />
+             to accommodate the larger or smaller text. The <see cref="P:System.Windows.Forms.Control.Width" />
 
             
 
-             of the <see
-             cref="T:System.Windows.Forms.TextBox" />
+             of the <see cref="T:System.Windows.Forms.TextBox" />
 
             
 
              does not change.</para
           >
           <para
-            >If you want to change the size of the control as the user enters text, you can use a <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >If you want to change the size of the control as the user enters text, you can use a <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-             control and use its <see
-             cref="E:System.Windows.Forms.RichTextBox.ContentsResized" />
+             control and use its <see cref="E:System.Windows.Forms.RichTextBox.ContentsResized" />
 
             
 
@@ -312,44 +299,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Windows.Forms.TextBoxBase.BackColor" />
+            >You can use the <see cref="P:System.Windows.Forms.TextBoxBase.BackColor" />
 
             
 
              property to change the background color of the text control to blend into the color scheme of your forms.</para
           >
           <para
-            >To change the color of the text within the control, use the <see
-             cref="P:System.Windows.Forms.TextBoxBase.ForeColor" />
+            >To change the color of the text within the control, use the <see cref="P:System.Windows.Forms.TextBoxBase.ForeColor" />
 
             
 
-             property. When setting the <see
-             cref="P:System.Windows.Forms.TextBoxBase.BackColor" />
+             property. When setting the <see cref="P:System.Windows.Forms.TextBoxBase.BackColor" />
 
             
 
-             property of your text control, ensure that the color you choose does not cause the text of the control to disappear. For example, if the <see
-             cref="P:System.Windows.Forms.TextBoxBase.BackColor" />
+             property of your text control, ensure that the color you choose does not cause the text of the control to disappear. For example, if the <see cref="P:System.Windows.Forms.TextBoxBase.BackColor" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.TextBoxBase.ForeColor" />
+             and <see cref="P:System.Windows.Forms.TextBoxBase.ForeColor" />
 
             
 
              properties are both set to Color.Black, the text within your textbox control will not be visible.</para
           >
           <para
-            >This property might be over ridden if the <see
-             cref="P:System.Windows.Forms.TextBoxBase.ReadOnly" />
+            >This property might be over ridden if the <see cref="P:System.Windows.Forms.TextBoxBase.ReadOnly" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.TextBoxBase" />
+             property of the <see cref="T:System.Windows.Forms.TextBoxBase" />
 
             
 
@@ -421,8 +401,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.TextBoxBase.BackgroundImage" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.TextBoxBase.BackgroundImage" />
 
             
 
@@ -495,8 +474,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.TextBoxBase.BackgroundImageLayout" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.TextBoxBase.BackgroundImageLayout" />
 
             
 
@@ -527,8 +505,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Windows.Forms.TextBoxBase.BorderStyle" />
+            >You can use the <see cref="P:System.Windows.Forms.TextBoxBase.BorderStyle" />
 
             
 
@@ -536,13 +513,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The derived class, <see
-               cref="T:System.Windows.Forms.RichTextBox" />
+              >The derived class, <see cref="T:System.Windows.Forms.RichTextBox" />
 
               
 
-              , does not support the BorderStyle.FixedSingle style. This style will cause the <see
-               cref="T:System.Windows.Forms.BorderStyle" />
+              , does not support the BorderStyle.FixedSingle style. This style will cause the <see cref="T:System.Windows.Forms.BorderStyle" />
 
               
 
@@ -571,8 +546,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -584,8 +558,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.TextBoxBase.BorderStyle" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.TextBoxBase.BorderStyle" />
 
             
 
@@ -613,8 +586,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="P:System.Windows.Forms.Control.ImeMode" />
+            >Gets a value indicating whether the <see cref="P:System.Windows.Forms.Control.ImeMode" />
 
             
 
@@ -642,23 +614,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this method returns true, you can call the <see
-             cref="M:System.Windows.Forms.TextBoxBase.Undo" />
+            >If this method returns true, you can call the <see cref="M:System.Windows.Forms.TextBoxBase.Undo" />
 
             
 
-             method to undo the last operation in a text box. You can use this method in the <see
-             cref="E:System.Windows.Forms.MenuItem.Popup" />
+             method to undo the last operation in a text box. You can use this method in the <see cref="E:System.Windows.Forms.MenuItem.Popup" />
 
             
 
-             event of a <see
-             cref="T:System.Windows.Forms.MenuItem" />
+             event of a <see cref="T:System.Windows.Forms.MenuItem" />
 
             
 
-            , or in code that manages the state of buttons on a <see
-             cref="T:System.Windows.Forms.ToolBar" />
+            , or in code that manages the state of buttons on a <see cref="T:System.Windows.Forms.ToolBar" />
 
             
 
@@ -687,8 +655,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this method to clear the contents of the control instead of assigning the <see
-             cref="P:System.Windows.Forms.TextBoxBase.Text" />
+            >You can use this method to clear the contents of the control instead of assigning the <see cref="P:System.Windows.Forms.TextBoxBase.Text" />
 
             
 
@@ -747,8 +714,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -778,13 +744,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this method, instead of using the <see
-             cref="T:System.Windows.Forms.Clipboard" />
+            >You can use this method, instead of using the <see cref="T:System.Windows.Forms.Clipboard" />
 
             
 
-             class, to copy text in the text box and place it in the <ui
-            >Clipboard</ui>
+             class, to copy text in the text box and place it in the <ui>Clipboard</ui>
 
             
 
@@ -794,8 +758,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the current selection in the text box to the <ui
-            >Clipboard</ui>
+            >Copies the current selection in the text box to the <ui>Clipboard</ui>
 
             
 
@@ -856,13 +819,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method will only cut text from the text box if text is selected in the control. You can use this method, instead of using the <see
-             cref="T:System.Windows.Forms.Clipboard" />
+            >This method will only cut text from the text box if text is selected in the control. You can use this method, instead of using the <see cref="T:System.Windows.Forms.Clipboard" />
 
             
 
-             class, to copy text in the text box and move it to the <ui
-            >Clipboard</ui>
+             class, to copy text in the text box and move it to the <ui>Clipboard</ui>
 
             
 
@@ -872,8 +833,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Moves the current selection in the text box to the <ui
-            >Clipboard</ui>
+            >Moves the current selection in the text box to the <ui>Clipboard</ui>
 
             
 
@@ -903,8 +863,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Override <see
-             cref="P:System.Windows.Forms.TextBoxBase.DefaultCursor" />
+            >Override <see cref="P:System.Windows.Forms.TextBoxBase.DefaultCursor" />
 
             
 
@@ -951,8 +910,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the value of the <see
-             cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
+            >Specifies that the value of the <see cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
 
             
 
@@ -1006,44 +964,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Windows.Forms.TextBoxBase.ForeColor" />
+            >You can use the <see cref="P:System.Windows.Forms.TextBoxBase.ForeColor" />
 
             
 
              property to change the color of the text within the control to match the text of other controls on your form. You can also use this property to highlight a specific text box that contains an invalid value.</para
           >
           <para
-            >To change the background color of the control, use the <see
-             cref="P:System.Windows.Forms.TextBoxBase.BackColor" />
+            >To change the background color of the control, use the <see cref="P:System.Windows.Forms.TextBoxBase.BackColor" />
 
             
 
-             property. When setting the <see
-             cref="P:System.Windows.Forms.TextBoxBase.ForeColor" />
+             property. When setting the <see cref="P:System.Windows.Forms.TextBoxBase.ForeColor" />
 
             
 
-             property of your text control, ensure that the color you choose does not cause the text of the control to disappear. For example, if the <see
-             cref="P:System.Windows.Forms.TextBoxBase.ForeColor" />
+             property of your text control, ensure that the color you choose does not cause the text of the control to disappear. For example, if the <see cref="P:System.Windows.Forms.TextBoxBase.ForeColor" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.TextBoxBase.BackColor" />
+             and <see cref="P:System.Windows.Forms.TextBoxBase.BackColor" />
 
             
 
              properties are both set to Color.Black, the text within your textbox control will not be visible.</para
           >
           <para
-            >This property might be over ridden if the <see
-             cref="P:System.Windows.Forms.TextBoxBase.ReadOnly" />
+            >This property might be over ridden if the <see cref="P:System.Windows.Forms.TextBoxBase.ReadOnly" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.TextBoxBase" />
+             property of the <see cref="T:System.Windows.Forms.TextBoxBase" />
 
             
 
@@ -1079,13 +1030,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the location specified in the <paramref
-             name="pt" />
+            >If the location specified in the <paramref name="pt" />
 
             
 
-             parameter is outside the client area of the control, the first character of the string closest to the point specified in <paramref
-             name="pt" />
+             parameter is outside the client area of the control, the first character of the string closest to the point specified in <paramref name="pt" />
 
             
 
@@ -1093,13 +1042,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If the specified location in the <paramref
-               name="pt" />
+              >If the specified location in the <paramref name="pt" />
 
               
 
-               parameter is located on the right side of the client area of the control, the last character of the string closest to the point specified in <paramref
-               name="pt" />
+               parameter is located on the right side of the client area of the control, the last character of the string closest to the point specified in <paramref name="pt" />
 
               
 
@@ -1116,7 +1063,11 @@
           <para>The character at the specified location.</para>
         </returns>
         <param name="pt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1143,8 +1094,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns the character index that is closest to the position specified in the <paramref
-             name="pt" />
+            >This method returns the character index that is closest to the position specified in the <paramref name="pt" />
 
             
 
@@ -1163,7 +1113,11 @@
           <para>The zero-based character index at the specified location.</para>
         </returns>
         <param name="pt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1190,13 +1144,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Line numbering in the text box starts at zero. If the <paramref
-             name="lineNumber" />
+            >Line numbering in the text box starts at zero. If the <paramref name="lineNumber" />
 
             
 
-             parameter is greater than the last line in the text box, <see
-             cref="M:System.Windows.Forms.TextBoxBase.GetFirstCharIndexFromLine(System.Int32)" />
+             parameter is greater than the last line in the text box, <see cref="M:System.Windows.Forms.TextBoxBase.GetFirstCharIndexFromLine(System.Int32)" />
 
             
 
@@ -1207,18 +1159,15 @@
 
             
 
-             returns the first character index of a physical line. The physical line is the displayed line, not the assigned line. The number of displayed lines can be greater than the number of assigned lines due to word wrap. For example, if you assign two long lines to a <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+             returns the first character index of a physical line. The physical line is the displayed line, not the assigned line. The number of displayed lines can be greater than the number of assigned lines due to word wrap. For example, if you assign two long lines to a <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-             control and set <see
-             cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
+             control and set <see cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.TextBoxBase.WordWrap" />
+             and <see cref="P:System.Windows.Forms.TextBoxBase.WordWrap" />
 
             
 
@@ -1234,7 +1183,11 @@
           <para>The zero-based index of the first character in the specified line.</para>
         </returns>
         <param name="lineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1280,33 +1233,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method enables you to determine the line number based on the character index specified in the <paramref
-             name="index" />
+            >This method enables you to determine the line number based on the character index specified in the <paramref name="index" />
 
             
 
-             parameter of the method. The first line of text in the control returns the value zero. The <see
-             cref="M:System.Windows.Forms.TextBoxBase.GetLineFromCharIndex(System.Int32)" />
+             parameter of the method. The first line of text in the control returns the value zero. The <see cref="M:System.Windows.Forms.TextBoxBase.GetLineFromCharIndex(System.Int32)" />
 
             
 
-             method returns the physical line number where the indexed character is located within the control. For example, if a portion of the first logical line of text in the control wraps to the next line, the <see
-             cref="M:System.Windows.Forms.TextBoxBase.GetLineFromCharIndex(System.Int32)" />
+             method returns the physical line number where the indexed character is located within the control. For example, if a portion of the first logical line of text in the control wraps to the next line, the <see cref="M:System.Windows.Forms.TextBoxBase.GetLineFromCharIndex(System.Int32)" />
 
             
 
-             method returns 1 if the character at the specified character index has wrapped to the second physical line. If <see
-             cref="P:System.Windows.Forms.TextBoxBase.WordWrap" />
+             method returns 1 if the character at the specified character index has wrapped to the second physical line. If <see cref="P:System.Windows.Forms.TextBoxBase.WordWrap" />
 
             
 
-             is set to false, no portion of the line wraps to the next, and the method returns 0 for the specified character index. You can use this method to determine which line a specific character index is located within. For example, after calling the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+             is set to false, no portion of the line wraps to the next, and the method returns 0 for the specified character index. You can use this method to determine which line a specific character index is located within. For example, after calling the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
-             method to search for text, you can obtain the character index to where the search results are found. You can call this method with the character index returned by the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+             method to search for text, you can obtain the character index to where the search results are found. You can call this method with the character index returned by the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
@@ -1314,8 +1261,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If the character index specified in the <paramref
-               name="index" />
+              >If the character index specified in the <paramref name="index" />
 
               
 
@@ -1332,7 +1278,11 @@
           <para>The zero-based line number in which the character index is located.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1359,8 +1309,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method enables you to determine where in the control a specific character index is located. You can use this method for such tasks as displaying shortcut menu items or help information for a word in the control. For example, if you wanted to display a menu of options to the user when the user right clicks on a word in the control, you can use this method to determine the position of the word to properly display a <see
-             cref="T:System.Windows.Forms.ContextMenu" />
+            >This method enables you to determine where in the control a specific character index is located. You can use this method for such tasks as displaying shortcut menu items or help information for a word in the control. For example, if you wanted to display a menu of options to the user when the user right clicks on a word in the control, you can use this method to determine the position of the word to properly display a <see cref="T:System.Windows.Forms.ContextMenu" />
 
             
 
@@ -1376,7 +1325,11 @@
           <para>The location of the specified character within the client rectangle of the control.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1422,8 +1375,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -1435,8 +1387,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.TextBoxBase.HideSelection" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.TextBoxBase.HideSelection" />
 
             
 
@@ -1465,43 +1416,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.TextBoxBase.IsInputKey(System.Windows.Forms.Keys)" />
+            >The <see cref="M:System.Windows.Forms.TextBoxBase.IsInputKey(System.Windows.Forms.Keys)" />
 
             
 
-             method returns true when the <paramref
-             name="keyData" />
+             method returns true when the <paramref name="keyData" />
 
             
 
-             parameter includes the <see
-             cref="F:System.Windows.Forms.Keys.Tab" />
+             parameter includes the <see cref="F:System.Windows.Forms.Keys.Tab" />
 
             
 
-             value and the <see
-             cref="P:System.Windows.Forms.TextBoxBase.AcceptsTab" />
+             value and the <see cref="P:System.Windows.Forms.TextBoxBase.AcceptsTab" />
 
             
 
-             property is true. <see
-             cref="M:System.Windows.Forms.TextBoxBase.IsInputKey(System.Windows.Forms.Keys)" />
+             property is true. <see cref="M:System.Windows.Forms.TextBoxBase.IsInputKey(System.Windows.Forms.Keys)" />
 
             
 
-             returns false if <paramref
-             name="keyData" />
+             returns false if <paramref name="keyData" />
 
             
 
-             contains both <see
-             cref="F:System.Windows.Forms.Keys.Tab" />
+             contains both <see cref="F:System.Windows.Forms.Keys.Tab" />
 
             
 
-             and <see
-             cref="F:System.Windows.Forms.Keys.Control" />
+             and <see cref="F:System.Windows.Forms.Keys.Control" />
 
             
 
@@ -1517,7 +1460,11 @@
           <para>true if the specified key is an input key; otherwise, false.</para>
         </returns>
         <param name="keyData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1554,8 +1501,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each element in the array becomes a line of text in the text box control. If the <see
-             cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
+            >Each element in the array becomes a line of text in the text box control. If the <see cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
 
             
 
@@ -1563,8 +1509,7 @@
           >
           <block subset="none" type="note">
             <para
-              >By default, the collection of lines is a read-only copy of the lines in the <see
-               cref="T:System.Windows.Forms.TextBox" />
+              >By default, the collection of lines is a read-only copy of the lines in the <see cref="T:System.Windows.Forms.TextBox" />
 
               
 
@@ -1604,13 +1549,11 @@
           <para>You can use this property to restrict the length of text entered in the control for values such as postal codes and telephone numbers, or to restrict the length of text entered when the data is to be entered in a database. You can limit the text entered into the control to the maximum length of the corresponding field in the database.</para>
           <block subset="none" type="note">
             <para
-              >In code, you can set the value of the <see
-               cref="P:System.Windows.Forms.TextBoxBase.Text" />
+              >In code, you can set the value of the <see cref="P:System.Windows.Forms.TextBoxBase.Text" />
 
               
 
-               property to a value that has a length greater than the value specified by the <see
-               cref="P:System.Windows.Forms.TextBoxBase.MaxLength" />
+               property to a value that has a length greater than the value specified by the <see cref="P:System.Windows.Forms.TextBoxBase.MaxLength" />
 
               
 
@@ -1649,18 +1592,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You can use this property to determine if the user has modified the contents of the text box control. You can also set this property in code to indicate that changes were made to the text box control by the application. This property can be used by validation and data-saving methods to determine if changes were made in a text box control so the changed contents can be validated or saved.</para>
           <para
-            >If you change the <see
-             cref="P:System.Windows.Forms.TextBoxBase.Text" />
+            >If you change the <see cref="P:System.Windows.Forms.TextBoxBase.Text" />
 
             
 
-             property programmatically, the <see
-             cref="P:System.Windows.Forms.TextBoxBase.Modified" />
+             property programmatically, the <see cref="P:System.Windows.Forms.TextBoxBase.Modified" />
 
             
 
-             property reverts to false. This does not raise the <see
-             cref="E:System.Windows.Forms.TextBoxBase.ModifiedChanged" />
+             property reverts to false. This does not raise the <see cref="E:System.Windows.Forms.TextBoxBase.ModifiedChanged" />
 
             
 
@@ -1687,26 +1627,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you change the <see
-             cref="P:System.Windows.Forms.TextBoxBase.Text" />
+            >If you change the <see cref="P:System.Windows.Forms.TextBoxBase.Text" />
 
             
 
-             property programmatically, the <see
-             cref="P:System.Windows.Forms.TextBoxBase.Modified" />
+             property programmatically, the <see cref="P:System.Windows.Forms.TextBoxBase.Modified" />
 
             
 
-             property reverts to false. This does not raise the <see
-             cref="E:System.Windows.Forms.TextBoxBase.ModifiedChanged" />
+             property reverts to false. This does not raise the <see cref="E:System.Windows.Forms.TextBoxBase.ModifiedChanged" />
 
             
 
              event.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -1718,8 +1654,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.TextBoxBase.Modified" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.TextBoxBase.Modified" />
 
             
 
@@ -1756,26 +1691,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >The <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-             control does not raise a <see
-             cref="E:System.Windows.Forms.TextBoxBase.Click" />
+             control does not raise a <see cref="E:System.Windows.Forms.TextBoxBase.Click" />
 
             
 
-             event for right clicks. The <see
-             cref="E:System.Windows.Forms.TextBoxBase.MouseClick" />
+             event for right clicks. The <see cref="E:System.Windows.Forms.TextBoxBase.MouseClick" />
 
             
 
              event provides the functional equivalent.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1813,13 +1744,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A multiline text box allows you to display more than one line of text in the control. If the <see
-             cref="P:System.Windows.Forms.TextBoxBase.WordWrap" />
+            >A multiline text box allows you to display more than one line of text in the control. If the <see cref="P:System.Windows.Forms.TextBoxBase.WordWrap" />
 
             
 
-             property is set to true, text entered into the multiline text box is wrapped to the next line in the control. If the <see
-             cref="P:System.Windows.Forms.TextBoxBase.WordWrap" />
+             property is set to true, text entered into the multiline text box is wrapped to the next line in the control. If the <see cref="P:System.Windows.Forms.TextBoxBase.WordWrap" />
 
             
 
@@ -1840,8 +1769,7 @@
             </item>
           </list>
           <para
-            >You can add scroll bars to a text box using the <see
-             cref="P:System.Windows.Forms.TextBox.ScrollBars" />
+            >You can add scroll bars to a text box using the <see cref="P:System.Windows.Forms.TextBox.ScrollBars" />
 
             
 
@@ -1849,28 +1777,23 @@
           >
           <block subset="none" type="note">
             <para
-              >Because the default value of the <see
-               cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
+              >Because the default value of the <see cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
 
               
 
-               property is false, the default size of a <see
-               cref="T:System.Windows.Forms.TextBox" />
+               property is false, the default size of a <see cref="T:System.Windows.Forms.TextBox" />
 
               
 
-               will be in accordance with the font size even if you resize the <see
-               cref="T:System.Windows.Forms.TextBox" />
+               will be in accordance with the font size even if you resize the <see cref="T:System.Windows.Forms.TextBox" />
 
               
 
-              . To get a consistent size for your <see
-               cref="T:System.Windows.Forms.TextBox" />
+              . To get a consistent size for your <see cref="T:System.Windows.Forms.TextBox" />
 
               
 
-              , set its <see
-               cref="P:System.Windows.Forms.TextBox.Multiline" />
+              , set its <see cref="P:System.Windows.Forms.TextBox.Multiline" />
 
               
 
@@ -1879,23 +1802,19 @@
           </block>
           <block subset="none" type="note">
             <para
-              >On Japanese operating systems, if the <see
-               cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
+              >On Japanese operating systems, if the <see cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
 
               
 
-               property is set to true, setting the <see
-               cref="P:System.Windows.Forms.TextBox.PasswordChar" />
+               property is set to true, setting the <see cref="P:System.Windows.Forms.TextBox.PasswordChar" />
 
               
 
-               property will display the text of the password, thus compromising system security. Therefore, on Japanese operating systems, set the <see
-               cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
+               property will display the text of the password, thus compromising system security. Therefore, on Japanese operating systems, set the <see cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
 
               
 
-               property to false if you set the <see
-               cref="P:System.Windows.Forms.TextBox.PasswordChar" />
+               property to false if you set the <see cref="P:System.Windows.Forms.TextBox.PasswordChar" />
 
               
 
@@ -1904,8 +1823,7 @@
           </block>
           <block subset="none" type="note">
             <para
-              >This property is set to false by default for all derived classes, with the exception of the <see
-               cref="T:System.Windows.Forms.RichTextBox" />
+              >This property is set to false by default for all derived classes, with the exception of the <see cref="T:System.Windows.Forms.RichTextBox" />
 
               
 
@@ -1913,13 +1831,11 @@
             >
           </block>
           <para
-            >For a <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >For a <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-             control, the <see
-             cref="P:System.Windows.Forms.RichTextBox.Multiline" />
+             control, the <see cref="P:System.Windows.Forms.RichTextBox.Multiline" />
 
             
 
@@ -1928,18 +1844,15 @@
           <list type="bullet">
             <item>
               <para
-                >If <see
-                 cref="P:System.Windows.Forms.RichTextBox.AutoSize" />
+                >If <see cref="P:System.Windows.Forms.RichTextBox.AutoSize" />
 
                 
 
-                 is set to true and <see
-                 cref="P:System.Windows.Forms.RichTextBox.Multiline" />
+                 is set to true and <see cref="P:System.Windows.Forms.RichTextBox.Multiline" />
 
                 
 
-                 is set to true, <see
-                 cref="T:System.Windows.Forms.RichTextBox" />
+                 is set to true, <see cref="T:System.Windows.Forms.RichTextBox" />
 
                 
 
@@ -1948,18 +1861,15 @@
             </item>
             <item>
               <para
-                >If <see
-                 cref="P:System.Windows.Forms.RichTextBox.AutoSize" />
+                >If <see cref="P:System.Windows.Forms.RichTextBox.AutoSize" />
 
                 
 
-                 is set to true and <see
-                 cref="P:System.Windows.Forms.RichTextBox.Multiline" />
+                 is set to true and <see cref="P:System.Windows.Forms.RichTextBox.Multiline" />
 
                 
 
-                 is set to false, <see
-                 cref="T:System.Windows.Forms.RichTextBox" />
+                 is set to false, <see cref="T:System.Windows.Forms.RichTextBox" />
 
                 
 
@@ -1989,8 +1899,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -2002,8 +1911,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
 
             
 
@@ -2032,8 +1940,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -2042,8 +1949,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.TextBoxBase.OnAcceptsTabChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.TextBoxBase.OnAcceptsTabChanged(System.EventArgs)" />
 
             
 
@@ -2053,8 +1959,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.TextBoxBase.AcceptsTabChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.TextBoxBase.AcceptsTabChanged" />
 
             
 
@@ -2062,12 +1967,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2117,8 +2025,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -2127,8 +2034,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.TextBoxBase.OnBorderStyleChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.TextBoxBase.OnBorderStyleChanged(System.EventArgs)" />
 
             
 
@@ -2138,8 +2044,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.TextBoxBase.BorderStyleChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.TextBoxBase.BorderStyleChanged" />
 
             
 
@@ -2147,12 +2052,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2243,8 +2151,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -2253,8 +2160,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.TextBoxBase.OnHideSelectionChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.TextBoxBase.OnHideSelectionChanged(System.EventArgs)" />
 
             
 
@@ -2264,8 +2170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raise the <see
-             cref="E:System.Windows.Forms.TextBoxBase.HideSelectionChanged" />
+            >Raise the <see cref="E:System.Windows.Forms.TextBoxBase.HideSelectionChanged" />
 
             
 
@@ -2273,12 +2178,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2307,8 +2215,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -2317,8 +2224,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.TextBoxBase.OnModifiedChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.TextBoxBase.OnModifiedChanged(System.EventArgs)" />
 
             
 
@@ -2328,8 +2234,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.TextBoxBase.ModifiedChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.TextBoxBase.ModifiedChanged" />
 
             
 
@@ -2337,12 +2242,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2374,8 +2282,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.MouseUp" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.MouseUp" />
 
             
 
@@ -2383,7 +2290,11 @@
           >
         </summary>
         <param name="mevent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2408,8 +2319,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -2418,8 +2328,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.TextBoxBase.OnMultilineChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.TextBoxBase.OnMultilineChanged(System.EventArgs)" />
 
             
 
@@ -2429,8 +2338,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.TextBoxBase.MultilineChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.TextBoxBase.MultilineChanged" />
 
             
 
@@ -2438,12 +2346,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2480,12 +2391,15 @@
           <para>This method is not relevant for this class.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2509,8 +2423,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -2519,8 +2432,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.TextBoxBase.OnReadOnlyChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.TextBoxBase.OnReadOnlyChanged(System.EventArgs)" />
 
             
 
@@ -2530,8 +2442,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.TextBoxBase.ReadOnlyChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.TextBoxBase.ReadOnlyChanged" />
 
             
 
@@ -2539,12 +2450,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2685,13 +2599,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.TextBoxBase.Paste" />
+            >The <see cref="M:System.Windows.Forms.TextBoxBase.Paste" />
 
             
 
-             method will only paste text into the control if text is currently stored in the <ui
-            >Clipboard</ui>
+             method will only paste text into the control if text is currently stored in the <ui>Clipboard</ui>
 
             
 
@@ -2701,8 +2613,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Replaces the current selection in the text box with the contents of the <ui
-            >Clipboard</ui>
+            >Replaces the current selection in the text box with the contents of the <ui>Clipboard</ui>
 
             
 
@@ -2739,13 +2650,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The size returned by this property is based on the font height and border style of the text box. You can use this property to determine the appropriate size of the text box to ensure that text is properly displayed in the control. The value returned by this property is in pixels.</para>
           <para
-            >The value of <see
-             cref="P:System.Windows.Forms.TextBoxBase.PreferredHeight" />
+            >The value of <see cref="P:System.Windows.Forms.TextBoxBase.PreferredHeight" />
 
             
 
-             represents the minimum height the text box must have in order to display a single line of text without clipping the text on the top or bottom. This value is the same whether the <see
-             cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
+             represents the minimum height the text box must have in order to display a single line of text without clipping the text on the top or bottom. This value is the same whether the <see cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
 
             
 
@@ -2832,13 +2741,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When this property is set to true, the contents of the control cannot be changed by the user at runtime. With this property set to true, you can still set the value of the <see
-             cref="P:System.Windows.Forms.TextBoxBase.Text" />
+            >When this property is set to true, the contents of the control cannot be changed by the user at runtime. With this property set to true, you can still set the value of the <see cref="P:System.Windows.Forms.TextBoxBase.Text" />
 
             
 
-             property in code. You can use this feature instead of disabling the control with the <see
-             cref="P:System.Windows.Forms.Control.Enabled" />
+             property in code. You can use this feature instead of disabling the control with the <see cref="P:System.Windows.Forms.Control.Enabled" />
 
             
 
@@ -2865,8 +2772,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -2878,8 +2784,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.TextBoxBase.ReadOnly" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.TextBoxBase.ReadOnly" />
 
             
 
@@ -2903,8 +2808,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method enables you to scroll the contents of the control until the caret is within the visible region of the control. If the caret is positioned below the visible region of the control, the <see
-             cref="M:System.Windows.Forms.TextBoxBase.ScrollToCaret" />
+            >This method enables you to scroll the contents of the control until the caret is within the visible region of the control. If the caret is positioned below the visible region of the control, the <see cref="M:System.Windows.Forms.TextBoxBase.ScrollToCaret" />
 
             
 
@@ -2938,8 +2842,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you want to set the start position to the first character in the control's text, set the <paramref
-             name="start" />
+            >If you want to set the start position to the first character in the control's text, set the <paramref name="start" />
 
             
 
@@ -2947,13 +2850,11 @@
           >
           <block subset="none" type="note">
             <para
-              >You can programmatically move the caret within the text box by setting the <paramref
-               name="start" />
+              >You can programmatically move the caret within the text box by setting the <paramref name="start" />
 
               
 
-               parameter to the position within the text box where you want the caret to move to and set the <paramref
-               name="length" />
+               parameter to the position within the text box where you want the caret to move to and set the <paramref name="length" />
 
               
 
@@ -2962,13 +2863,11 @@
           </block>
           <block subset="none" type="note">
             <para
-              >If this method is called without any parameters, an alternative method is used. This alternative method inherits from the <see
-               cref="T:System.Windows.Forms.Control" />
+              >If this method is called without any parameters, an alternative method is used. This alternative method inherits from the <see cref="T:System.Windows.Forms.Control" />
 
               
 
-               class. When called, it sets the input focus to the control and selects the contents of the control. For more information, see the <see
-               cref="M:System.Windows.Forms.Control.Select" />
+               class. When called, it sets the input focus to the control and selects the contents of the control. For more information, see the <see cref="M:System.Windows.Forms.Control.Select" />
 
               
 
@@ -2981,14 +2880,22 @@
           <para>Selects a range of text in the text box.</para>
         </summary>
         <param name="start">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The position of the first character in the current text selection within the text box. </param
         >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3011,13 +2918,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method enables you to select all text within the control. You can use this method in conjunction with the <see
-             cref="M:System.Windows.Forms.TextBoxBase.Cut" />
+            >This method enables you to select all text within the control. You can use this method in conjunction with the <see cref="M:System.Windows.Forms.TextBoxBase.Cut" />
 
             
 
-             method, which requires text to be selected in the control, to cut the entire contents of the control and paste them into the <ui
-            >Clipboard</ui>
+             method, which requires text to be selected in the control, to cut the entire contents of the control and paste them into the <ui>Clipboard</ui>
 
             
 
@@ -3083,23 +2988,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this property to determine if any characters are currently selected in the text box control before performing operations on the selected text. When the value of the <see
-             cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
+            >You can use this property to determine if any characters are currently selected in the text box control before performing operations on the selected text. When the value of the <see cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
 
             
 
-             property is set to a value that is larger than the number of characters within the text of the control, the value of the <see
-             cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
+             property is set to a value that is larger than the number of characters within the text of the control, the value of the <see cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
 
             
 
-             property is set to the entire length of text within the control minus the value of the <see
-             cref="P:System.Windows.Forms.TextBoxBase.SelectionStart" />
+             property is set to the entire length of text within the control minus the value of the <see cref="P:System.Windows.Forms.TextBoxBase.SelectionStart" />
 
             
 
-             property (if any value is specified for the <see
-             cref="P:System.Windows.Forms.TextBoxBase.SelectionStart" />
+             property (if any value is specified for the <see cref="P:System.Windows.Forms.TextBoxBase.SelectionStart" />
 
             
 
@@ -3107,13 +3008,11 @@
           >
           <block subset="none" type="note">
             <para
-              >You can programmatically move the caret within the text box by setting the <see
-               cref="P:System.Windows.Forms.TextBoxBase.SelectionStart" />
+              >You can programmatically move the caret within the text box by setting the <see cref="P:System.Windows.Forms.TextBoxBase.SelectionStart" />
 
               
 
-               to the position within the text box where you want the caret to move to and set the <see
-               cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
+               to the position within the text box where you want the caret to move to and set the <see cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
 
               
 
@@ -3150,87 +3049,72 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If no text is selected in the control, this property indicates the insertion point, or caret, for new text. If you set this property to a location beyond the length of the text in the control, the selection start position will be placed after the last character. When text is selected in the text box control, changing this property might decrease the value of the <see
-             cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
+            >If no text is selected in the control, this property indicates the insertion point, or caret, for new text. If you set this property to a location beyond the length of the text in the control, the selection start position will be placed after the last character. When text is selected in the text box control, changing this property might decrease the value of the <see cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
 
             
 
-             property. If the remaining text in the control after the position indicated by the <see
-             cref="P:System.Windows.Forms.TextBoxBase.SelectionStart" />
+             property. If the remaining text in the control after the position indicated by the <see cref="P:System.Windows.Forms.TextBoxBase.SelectionStart" />
 
             
 
-             property is less than the value of the <see
-             cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
+             property is less than the value of the <see cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
 
             
 
-             property, the value of the <see
-             cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
+             property, the value of the <see cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
 
             
 
-             property is automatically decreased. The value of the <see
-             cref="P:System.Windows.Forms.TextBoxBase.SelectionStart" />
+             property is automatically decreased. The value of the <see cref="P:System.Windows.Forms.TextBoxBase.SelectionStart" />
 
             
 
-             property never causes an increase in the <see
-             cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
+             property never causes an increase in the <see cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
 
             
 
              property.</para
           >
           <para
-            >You can programmatically move the selection within the text box by setting the <see
-             cref="P:System.Windows.Forms.TextBoxBase.SelectionStart" />
+            >You can programmatically move the selection within the text box by setting the <see cref="P:System.Windows.Forms.TextBoxBase.SelectionStart" />
 
             
 
-             and the <see
-             cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
+             and the <see cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
 
             
 
              properties.</para
           >
           <para
-            >You can programmatically move the caret within the text box by setting the <see
-             cref="P:System.Windows.Forms.TextBoxBase.SelectionStart" />
+            >You can programmatically move the caret within the text box by setting the <see cref="P:System.Windows.Forms.TextBoxBase.SelectionStart" />
 
             
 
-             to the position within the text box where you want the caret to move to and set the <see
-             cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
+             to the position within the text box where you want the caret to move to and set the <see cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
 
             
 
              property to a value of zero (0).</para
           >
           <para
-            >The <see
-             cref="T:System.Windows.Forms.TextBox" />
+            >The <see cref="T:System.Windows.Forms.TextBox" />
 
             
 
-             must have focus in order for the selection or the caret to be moved. You can set the <see
-             cref="P:System.Windows.Forms.TextBoxBase.SelectionStart" />
+             must have focus in order for the selection or the caret to be moved. You can set the <see cref="P:System.Windows.Forms.TextBoxBase.SelectionStart" />
 
             
 
-             property of a <see
-             cref="T:System.Windows.Forms.TextBox" />
+             property of a <see cref="T:System.Windows.Forms.TextBox" />
 
             
 
-             that is <see
-             cref="P:System.Windows.Forms.TextBoxBase.ReadOnly" />
+             that is <see cref="P:System.Windows.Forms.TextBoxBase.ReadOnly" />
 
             
 
-             by giving it the <see
-             cref="M:System.Windows.Forms.Control.Focus" />
+             by giving it the <see cref="M:System.Windows.Forms.Control.Focus" />
 
             
 
@@ -3267,104 +3151,85 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.TextBoxBase" />
+            >The <see cref="T:System.Windows.Forms.TextBoxBase" />
 
             
 
-             control uses the <see
-             cref="P:System.Windows.Forms.TextBoxBase.PreferredHeight" />
+             control uses the <see cref="P:System.Windows.Forms.TextBoxBase.PreferredHeight" />
 
             
 
-             property to set the bounds if the <see
-             cref="P:System.Windows.Forms.TextBoxBase.AutoSize" />
+             property to set the bounds if the <see cref="P:System.Windows.Forms.TextBoxBase.AutoSize" />
 
             
 
-             property is true and the <see
-             cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
+             property is true and the <see cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
 
             
 
              property is false.</para
           >
           <para
-            >Typically, the parameters that correspond to the bounds not included in the <paramref
-             name="specified" />
+            >Typically, the parameters that correspond to the bounds not included in the <paramref name="specified" />
 
             
 
-             parameter are passed in with their current values. For example, the <see
-             cref="P:System.Windows.Forms.Control.Height" />
+             parameter are passed in with their current values. For example, the <see cref="P:System.Windows.Forms.Control.Height" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Control.Width" />
+            , <see cref="P:System.Windows.Forms.Control.Width" />
 
             
 
-            , or the <see
-             cref="P:System.Drawing.Point.X" />
+            , or the <see cref="P:System.Drawing.Point.X" />
 
             
 
-             or <see
-             cref="P:System.Drawing.Point.Y" />
+             or <see cref="P:System.Drawing.Point.Y" />
 
             
 
-             properties of the <see
-             cref="P:System.Windows.Forms.Control.Location" />
+             properties of the <see cref="P:System.Windows.Forms.Control.Location" />
 
             
 
              property can be passed in with a reference to the current instance of the control. However all values passed in are honored and applied to the control.</para
           >
           <para
-            >The <paramref
-             name="specified" />
+            >The <paramref name="specified" />
 
             
 
-             parameter represents the elements of the controls <see
-             cref="P:System.Windows.Forms.Control.Bounds" />
+             parameter represents the elements of the controls <see cref="P:System.Windows.Forms.Control.Bounds" />
 
             
 
-             changed by your application. For example, if you change the <see
-             cref="P:System.Windows.Forms.Control.Size" />
+             changed by your application. For example, if you change the <see cref="P:System.Windows.Forms.Control.Size" />
 
             
 
-             of the control, the <paramref
-             name="specified" />
+             of the control, the <paramref name="specified" />
 
             
 
-             parameter value is the Size value of <see
-             cref="T:System.Windows.Forms.BoundsSpecified" />
+             parameter value is the Size value of <see cref="T:System.Windows.Forms.BoundsSpecified" />
 
             
 
-            . However, if the <see
-             cref="P:System.Windows.Forms.Control.Size" />
+            . However, if the <see cref="P:System.Windows.Forms.Control.Size" />
 
             
 
-             is adjusted in response to the <see
-             cref="P:System.Windows.Forms.Control.Dock" />
+             is adjusted in response to the <see cref="P:System.Windows.Forms.Control.Dock" />
 
             
 
-             property being set, the <paramref
-             name="specified" />
+             property being set, the <paramref name="specified" />
 
             
 
-             parameter value is the None value of <see
-             cref="T:System.Windows.Forms.BoundsSpecified" />
+             parameter value is the None value of <see cref="T:System.Windows.Forms.BoundsSpecified" />
 
             
 
@@ -3374,8 +3239,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the specified bounds of the <see
-             cref="T:System.Windows.Forms.TextBoxBase" />
+            >Sets the specified bounds of the <see cref="T:System.Windows.Forms.TextBoxBase" />
 
             
 
@@ -3383,55 +3247,71 @@
           >
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new <see
-           cref="P:System.Windows.Forms.Control.Left" />
+          The new <see cref="P:System.Windows.Forms.Control.Left" />
 
           
 
            property value of the control.</param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new <see
-           cref="P:System.Windows.Forms.Control.Top" />
+          The new <see cref="P:System.Windows.Forms.Control.Top" />
 
           
 
            property value of the control.</param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new <see
-           cref="P:System.Windows.Forms.Control.Width" />
+          The new <see cref="P:System.Windows.Forms.Control.Width" />
 
           
 
            property value of the control.</param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Not used.</param
         >
         <param name="specified">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.BoundsSpecified" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.BoundsSpecified" />
 
           
 
@@ -3462,8 +3342,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.TextBoxBase.ShortcutsEnabled" />
+            >Use the <see cref="P:System.Windows.Forms.TextBoxBase.ShortcutsEnabled" />
 
             
 
@@ -3513,13 +3392,11 @@
           <para>You can override this property to specify other shortcut keys.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Windows.Forms.TextBox" />
+              >The <see cref="T:System.Windows.Forms.TextBox" />
 
               
 
-               control does not support the CTRL+A shortcut key when the <see
-               cref="P:System.Windows.Forms.TextBox.Multiline" />
+               control does not support the CTRL+A shortcut key when the <see cref="P:System.Windows.Forms.TextBox.Multiline" />
 
               
 
@@ -3552,18 +3429,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To display multiple lines of text in a text box, set the <see
-             cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
+            >To display multiple lines of text in a text box, set the <see cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
 
             
 
-             property to true. To read or set the text of a multiline text box, use the <see
-             cref="P:System.Windows.Forms.TextBoxBase.Lines" />
+             property to true. To read or set the text of a multiline text box, use the <see cref="P:System.Windows.Forms.TextBoxBase.Lines" />
 
             
 
-             property. The amount of text that can be entered in the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+             property. The amount of text that can be entered in the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -3619,8 +3493,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the <see
-             cref="T:System.Windows.Forms.TextBoxBase" />
+            >Returns a string that represents the <see cref="T:System.Windows.Forms.TextBoxBase" />
 
             
 
@@ -3630,13 +3503,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the current <see
-             cref="T:System.Windows.Forms.TextBoxBase" />
+            >A string that represents the current <see cref="T:System.Windows.Forms.TextBoxBase" />
 
             
 
-            . The string includes the type and the <see
-             cref="T:System.Windows.Forms.TextBoxBase" />
+            . The string includes the type and the <see cref="T:System.Windows.Forms.TextBoxBase" />
 
             
 
@@ -3660,13 +3531,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method will undo the last <ui
-            >Clipboard</ui>
+            >This method will undo the last <ui>Clipboard</ui>
 
             
 
-             or text change operation performed in the text box control if the <see
-             cref="P:System.Windows.Forms.TextBoxBase.CanUndo" />
+             or text change operation performed in the text box control if the <see cref="P:System.Windows.Forms.TextBoxBase.CanUndo" />
 
             
 
@@ -3674,18 +3543,15 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Windows.Forms.TextBoxBase.Undo" />
+              >The <see cref="M:System.Windows.Forms.TextBoxBase.Undo" />
 
               
 
-               method does not work with the <see
-               cref="E:System.Windows.Forms.Control.KeyPress" />
+               method does not work with the <see cref="E:System.Windows.Forms.Control.KeyPress" />
 
               
 
-               or <see
-               cref="E:System.Windows.Forms.Control.TextChanged" />
+               or <see cref="E:System.Windows.Forms.Control.TextChanged" />
 
               
 
@@ -3744,8 +3610,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this property is set to true, horizontal scroll bars are not displayed regardless of the <see
-             cref="P:System.Windows.Forms.TextBox.ScrollBars" />
+            >If this property is set to true, horizontal scroll bars are not displayed regardless of the <see cref="P:System.Windows.Forms.TextBox.ScrollBars" />
 
             
 
@@ -3753,13 +3618,11 @@
           >
           <block subset="none" type="note">
             <para
-              >In the derived class, <see
-               cref="T:System.Windows.Forms.TextBox" />
+              >In the derived class, <see cref="T:System.Windows.Forms.TextBox" />
 
               
 
-              , text within the control will always wrap regardless of the property setting of this property unless the <see
-               cref="P:System.Windows.Forms.TextBox.TextAlign" />
+              , text within the control will always wrap regardless of the property setting of this property unless the <see cref="P:System.Windows.Forms.TextBox.TextAlign" />
 
               
 

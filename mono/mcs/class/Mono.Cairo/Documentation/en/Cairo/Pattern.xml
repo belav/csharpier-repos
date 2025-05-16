@@ -17,8 +17,7 @@
     <summary>Patterns allow you to tile or extend images and objects and allow you to draw things like gradients.</summary>
     <remarks>
       <example>
-        <code lang="C#"
-          >
+        <code lang="C#">
 /* example assumes the Graphics object has already been set up  and width and height are initialized*/
 
         static void draw (Cairo.Graphics gr, int width, int height)

@@ -31,29 +31,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The class you use for the design-time services must implement the <see
-         cref="T:System.ComponentModel.Design.IDesigner" />
+        >The class you use for the design-time services must implement the <see cref="T:System.ComponentModel.Design.IDesigner" />
 
         
 
          interface.</para
       >
       <para
-        >Use the <see
-         cref="P:System.ComponentModel.DesignerAttribute.DesignerBaseTypeName" />
+        >Use the <see cref="P:System.ComponentModel.DesignerAttribute.DesignerBaseTypeName" />
 
         
 
-         property to find the designer's base type. Use the <see
-         cref="P:System.ComponentModel.DesignerAttribute.DesignerTypeName" />
+         property to find the designer's base type. Use the <see cref="P:System.ComponentModel.DesignerAttribute.DesignerTypeName" />
 
         
 
          property to get the name of the type of designer associated with this member.</para
       >
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -88,8 +84,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The class you use for the design-time services must implement the <see
-             cref="T:System.ComponentModel.Design.IDesigner" />
+            >The class you use for the design-time services must implement the <see cref="T:System.ComponentModel.Design.IDesigner" />
 
             
 
@@ -99,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DesignerAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DesignerAttribute" />
 
             
 
@@ -108,7 +102,11 @@
           >
         </summary>
         <param name="designerTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -136,8 +134,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The class you use for the design-time services must implement the <see
-             cref="T:System.ComponentModel.Design.IDesigner" />
+            >The class you use for the design-time services must implement the <see cref="T:System.ComponentModel.Design.IDesigner" />
 
             
 
@@ -147,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DesignerAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DesignerAttribute" />
 
             
 
@@ -156,12 +152,15 @@
           >
         </summary>
         <param name="designerType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -193,16 +192,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The class you use for the design-time services must implement the <see
-             cref="T:System.ComponentModel.Design.IDesigner" />
+            >The class you use for the design-time services must implement the <see cref="T:System.ComponentModel.Design.IDesigner" />
 
             
 
              interface.</para
           >
           <para
-            >The <paramref
-             name="designerBaseTypeName" />
+            >The <paramref name="designerBaseTypeName" />
 
             
 
@@ -212,8 +209,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DesignerAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DesignerAttribute" />
 
             
 
@@ -221,14 +217,22 @@
           >
         </summary>
         <param name="designerTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The concatenation of the fully qualified name of the type that provides design-time services for the component this attribute is bound to, and the name of the assembly this type resides in. </param
         >
         <param name="designerBaseTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -260,16 +264,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The class you use for the design-time services must implement the <see
-             cref="T:System.ComponentModel.Design.IDesigner" />
+            >The class you use for the design-time services must implement the <see cref="T:System.ComponentModel.Design.IDesigner" />
 
             
 
              interface.</para
           >
           <para
-            >The <paramref
-             name="designerBaseType" />
+            >The <paramref name="designerBaseType" />
 
             
 
@@ -279,8 +281,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DesignerAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DesignerAttribute" />
 
             
 
@@ -288,24 +289,30 @@
           >
         </summary>
         <param name="designerTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The concatenation of the fully qualified name of the type that provides design-time services for the component this attribute is bound to, and the name of the assembly this type resides in. </param
         >
         <param name="designerBaseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
-           that represents the base class to associate with the <paramref
-           name="designerTypeName" />
+           that represents the base class to associate with the <paramref name="designerTypeName" />
 
           
 
@@ -337,16 +344,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The class you use for the design-time services must implement the <see
-             cref="T:System.ComponentModel.Design.IDesigner" />
+            >The class you use for the design-time services must implement the <see cref="T:System.ComponentModel.Design.IDesigner" />
 
             
 
              interface.</para
           >
           <para
-            >The <paramref
-             name="designerBaseType" />
+            >The <paramref name="designerBaseType" />
 
             
 
@@ -356,8 +361,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DesignerAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DesignerAttribute" />
 
             
 
@@ -365,29 +369,34 @@
           >
         </summary>
         <param name="designerType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
            that represents the class that provides design-time services for the component this attribute is bound to. </param
         >
         <param name="designerBaseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
-           that represents the base class to associate with the <paramref
-           name="designerType" />
+           that represents the base class to associate with the <paramref name="designerType" />
 
           
 
@@ -460,8 +469,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns whether the value of the given object is equal to the current <see
-             cref="T:System.ComponentModel.DesignerAttribute" />
+            >Returns whether the value of the given object is equal to the current <see cref="T:System.ComponentModel.DesignerAttribute" />
 
             
 
@@ -473,7 +481,11 @@
           <para>true if the value of the given object is equal to that of the current; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -520,13 +532,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >It is used by filtering algorithms to identify two attributes that are the same type. For most attributes, this just returns the <see
-             cref="T:System.Type" />
+            >It is used by filtering algorithms to identify two attributes that are the same type. For most attributes, this just returns the <see cref="T:System.Type" />
 
             
 
-             instance for the attribute. <see
-             cref="T:System.ComponentModel.DesignerAttribute" />
+             instance for the attribute. <see cref="T:System.ComponentModel.DesignerAttribute" />
 
             
 

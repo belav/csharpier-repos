@@ -49,13 +49,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >MethodBase is the base class of <see
-         cref="T:System.Reflection.MethodInfo" />
+        >MethodBase is the base class of <see cref="T:System.Reflection.MethodInfo" />
 
         
 
-         and <see
-         cref="T:System.Reflection.ConstructorInfo" />
+         and <see cref="T:System.Reflection.ConstructorInfo" />
 
         
 
@@ -91,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.MethodBase" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -128,8 +125,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Reflection.MethodAttributes" />
+            >A <see cref="T:System.Reflection.MethodAttributes" />
 
             
 
@@ -215,13 +211,11 @@ class MethodAttributesExample
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>All members have a set of attributes, which are defined in relation to the specific type of member.</para>
           <para
-            >To get the <see
-             cref="T:System.Reflection.MethodAttributes" />
+            >To get the <see cref="T:System.Reflection.MethodAttributes" />
 
             
 
-            , first get the type. From the type, get the method. From the method, get the <see
-             cref="T:System.Reflection.MethodAttributes" />
+            , first get the type. From the type, get the method. From the method, get the <see cref="T:System.Reflection.MethodAttributes" />
 
             
 
@@ -283,8 +277,7 @@ class MethodAttributesExample
 
             
 
-             if the current method  contains unassigned generic type parameters; otherwise <see
-             langword="false" />
+             if the current method  contains unassigned generic type parameters; otherwise <see langword="false" />
 
             
 
@@ -295,47 +288,40 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A generic method can be invoked only if there are no generic type definitions or open constructed types in the type arguments of the method itself or in any enclosing types. Because types can be arbitrarily complex, making this recursive determination is difficult. For convenience, and to reduce the chance of error, the <see
-             cref="P:System.Reflection.MethodBase.ContainsGenericParameters" />
+            >A generic method can be invoked only if there are no generic type definitions or open constructed types in the type arguments of the method itself or in any enclosing types. Because types can be arbitrarily complex, making this recursive determination is difficult. For convenience, and to reduce the chance of error, the <see cref="P:System.Reflection.MethodBase.ContainsGenericParameters" />
 
             
 
-             property provides a standard way to distinguish between closed constructed methods, which can be invoked, and open constructed methods, which cannot. If the <see
-             cref="P:System.Reflection.MethodBase.ContainsGenericParameters" />
+             property provides a standard way to distinguish between closed constructed methods, which can be invoked, and open constructed methods, which cannot. If the <see cref="P:System.Reflection.MethodBase.ContainsGenericParameters" />
 
             
 
              property returns true, the method cannot be invoked.</para
           >
           <para
-            >The <see
-             cref="P:System.Reflection.MethodBase.ContainsGenericParameters" />
+            >The <see cref="P:System.Reflection.MethodBase.ContainsGenericParameters" />
 
             
 
-             property searches recursively for type parameters. For example, it returns true for any method in an open type A&lt;T&gt; (A(Of T) in Visual Basic), even though the method itself is not generic. Contrast this with the behavior of the <see
-             cref="P:System.Reflection.MethodBase.IsGenericMethod" />
+             property searches recursively for type parameters. For example, it returns true for any method in an open type A&lt;T&gt; (A(Of T) in Visual Basic), even though the method itself is not generic. Contrast this with the behavior of the <see cref="P:System.Reflection.MethodBase.IsGenericMethod" />
 
             
 
              property, which returns false for such a method. </para
           >
           <para
-            >Similarly, the <see
-             cref="P:System.Reflection.MethodBase.ContainsGenericParameters" />
+            >Similarly, the <see cref="P:System.Reflection.MethodBase.ContainsGenericParameters" />
 
             
 
              property parameter returns true for any constructor in an open type, even though constructors cannot have type parameters of their own.</para
           >
           <para
-            >For a list of the invariant conditions for terms specific to generic methods, see the <see
-             cref="P:System.Reflection.MethodInfo.IsGenericMethod" />
+            >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" />
 
             
 
-             property. For a list of the invariant conditions for other terms used in generic reflection, see the <see
-             cref="P:System.Type.IsGenericType" />
+             property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" />
 
             
 
@@ -373,8 +359,7 @@ class MethodAttributesExample
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
@@ -382,7 +367,11 @@ class MethodAttributesExample
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -413,41 +402,34 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the currently executing method is defined on a generic type, the <see
-             cref="T:System.Reflection.MethodInfo" />
+            >If the currently executing method is defined on a generic type, the <see cref="T:System.Reflection.MethodInfo" />
 
             
 
-             that is returned by <see
-             cref="M:System.Reflection.MethodBase.GetCurrentMethod" />
+             that is returned by <see cref="M:System.Reflection.MethodBase.GetCurrentMethod" />
 
             
 
-             is obtained from the generic type definition (that is, <see
-             cref="P:System.Reflection.MethodInfo.ContainsGenericParameters" />
+             is obtained from the generic type definition (that is, <see cref="P:System.Reflection.MethodInfo.ContainsGenericParameters" />
 
             
 
-             returns true). Therefore, it does not reflect the type arguments that were used when the method was called. For example, if a method M() is defined on a generic type C&lt;T&gt; (C(Of T) in Visual Basic), and <see
-             cref="M:System.Reflection.MethodBase.GetCurrentMethod" />
+             returns true). Therefore, it does not reflect the type arguments that were used when the method was called. For example, if a method M() is defined on a generic type C&lt;T&gt; (C(Of T) in Visual Basic), and <see cref="M:System.Reflection.MethodBase.GetCurrentMethod" />
 
             
 
-             is called from C&lt;string&gt;.M(), then <see
-             cref="M:System.Reflection.MethodBase.GetCurrentMethod" />
+             is called from C&lt;string&gt;.M(), then <see cref="M:System.Reflection.MethodBase.GetCurrentMethod" />
 
             
 
              returns C&lt;T&gt;.M() (C(Of T).M() in Visual Basic).</para
           >
           <para
-            >If the currently executing method is a generic method, <see
-             cref="M:System.Reflection.MethodBase.GetCurrentMethod" />
+            >If the currently executing method is a generic method, <see cref="M:System.Reflection.MethodBase.GetCurrentMethod" />
 
             
 
-             returns the generic method definition. If the generic method is defined on a generic type, the <see
-             cref="T:System.Reflection.MethodInfo" />
+             returns the generic method definition. If the generic method is defined on a generic type, the <see cref="T:System.Reflection.MethodInfo" />
 
             
 
@@ -495,13 +477,11 @@ class MethodAttributesExample
           <list type="bullet">
             <item>
               <para
-                >If the current method is a closed constructed method (that is, the <see
-                 cref="P:System.Reflection.MethodBase.ContainsGenericParameters" />
+                >If the current method is a closed constructed method (that is, the <see cref="P:System.Reflection.MethodBase.ContainsGenericParameters" />
 
                 
 
-                 property returns false), the array returned by the <see
-                 cref="M:System.Reflection.MethodBase.GetGenericArguments" />
+                 property returns false), the array returned by the <see cref="M:System.Reflection.MethodBase.GetGenericArguments" />
 
                 
 
@@ -513,18 +493,15 @@ class MethodAttributesExample
             </item>
             <item>
               <para
-                >If the current method is an open constructed method (that is, the <see
-                 cref="P:System.Reflection.MethodBase.ContainsGenericParameters" />
+                >If the current method is an open constructed method (that is, the <see cref="P:System.Reflection.MethodBase.ContainsGenericParameters" />
 
                 
 
-                 property returns true) in which specific types have been assigned to some type parameters and type parameters of enclosing generic types have been assigned to other type parameters, the array contains both types and type parameters. Use the <see
-                 cref="P:System.Type.IsGenericParameter" />
+                 property returns true) in which specific types have been assigned to some type parameters and type parameters of enclosing generic types have been assigned to other type parameters, the array contains both types and type parameters. Use the <see cref="P:System.Type.IsGenericParameter" />
 
                 
 
-                 property to tell them apart. For a demonstration of this scenario, see the code example provided for the <see
-                 cref="P:System.Reflection.MethodBase.ContainsGenericParameters" />
+                 property to tell them apart. For a demonstration of this scenario, see the code example provided for the <see cref="P:System.Reflection.MethodBase.ContainsGenericParameters" />
 
                 
 
@@ -533,26 +510,22 @@ class MethodAttributesExample
             </item>
           </list>
           <para
-            >Generic constructors are not supported in the .NET Framework version 2.0. This property throws <see
-             cref="T:System.NotSupportedException" />
+            >Generic constructors are not supported in the .NET Framework version 2.0. This property throws <see cref="T:System.NotSupportedException" />
 
             
 
-             if not overridden in a derived class, so an exception is thrown if the current instance is of type <see
-             cref="T:System.Reflection.ConstructorInfo" />
+             if not overridden in a derived class, so an exception is thrown if the current instance is of type <see cref="T:System.Reflection.ConstructorInfo" />
 
             
 
             .</para
           >
           <para
-            >For a list of the invariant conditions for terms specific to generic methods, see the <see
-             cref="P:System.Reflection.MethodInfo.IsGenericMethod" />
+            >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" />
 
             
 
-             property. For a list of the invariant conditions for other terms used in generic reflection, see the <see
-             cref="P:System.Type.IsGenericType" />
+             property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" />
 
             
 
@@ -562,8 +535,7 @@ class MethodAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of <see
-             cref="T:System.Type" />
+            >Returns an array of <see cref="T:System.Type" />
 
             
 
@@ -573,8 +545,7 @@ class MethodAttributesExample
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Type" />
+            >An array of <see cref="T:System.Type" />
 
             
 
@@ -632,38 +603,31 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You do not have to override the <see
-             cref="M:System.Reflection.MethodBase.GetMethodBody" />
+            >You do not have to override the <see cref="M:System.Reflection.MethodBase.GetMethodBody" />
 
             
 
-             in order to use it. You can call the <see
-             cref="M:System.Reflection.MethodBase.GetMethodBody" />
+             in order to use it. You can call the <see cref="M:System.Reflection.MethodBase.GetMethodBody" />
 
             
 
-             method on <see
-             cref="T:System.Reflection.MethodInfo" />
+             method on <see cref="T:System.Reflection.MethodInfo" />
 
             
 
-             and <see
-             cref="T:System.Reflection.ConstructorInfo" />
+             and <see cref="T:System.Reflection.ConstructorInfo" />
 
             
 
-             objects, because the method is overridden in the runtime versions of these classes. For example, the runtime version of the <see
-             cref="T:System.Reflection.MethodInfo" />
+             objects, because the method is overridden in the runtime versions of these classes. For example, the runtime version of the <see cref="T:System.Reflection.MethodInfo" />
 
             
 
-             class derives from the <see
-             cref="T:System.Reflection.MethodInfo" />
+             class derives from the <see cref="T:System.Reflection.MethodInfo" />
 
             
 
-             class, which in turn derives from the <see
-             cref="T:System.Reflection.MethodBase" />
+             class, which in turn derives from the <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -673,8 +637,7 @@ class MethodAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets a <see
-             cref="T:System.Reflection.MethodBody" />
+            >When overridden in a derived class, gets a <see cref="T:System.Reflection.MethodBody" />
 
             
 
@@ -684,8 +647,7 @@ class MethodAttributesExample
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.MethodBody" />
+            >A <see cref="T:System.Reflection.MethodBody" />
 
             
 
@@ -733,7 +695,11 @@ class MethodAttributesExample
           <para>A MethodBase containing information about the method.</para>
         </returns>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -775,23 +741,19 @@ class MethodAttributesExample
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Handles are valid only in the application domain in which they were obtained.</para>
           <para
-            >A <see
-             cref="T:System.RuntimeMethodHandle" />
+            >A <see cref="T:System.RuntimeMethodHandle" />
 
             
 
-             structure for a constructor or method of a generic type can represent different <see
-             cref="T:System.Reflection.MethodBase" />
+             structure for a constructor or method of a generic type can represent different <see cref="T:System.Reflection.MethodBase" />
 
             
 
-             objects, depending on the types specified for the type parameters of the generic type. For example, if class G&lt;T&gt; (class G(Of T) in Visual Basic, generic &lt;T&gt; ref class G in C++) has a method that returns type T, the <see
-             cref="T:System.Reflection.MethodBase" />
+             objects, depending on the types specified for the type parameters of the generic type. For example, if class G&lt;T&gt; (class G(Of T) in Visual Basic, generic &lt;T&gt; ref class G in C++) has a method that returns type T, the <see cref="T:System.Reflection.MethodBase" />
 
             
 
-             object for that method in a constructed class such as G&lt;int&gt; is different from the <see
-             cref="T:System.Reflection.MethodBase" />
+             object for that method in a constructed class such as G&lt;int&gt; is different from the <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -801,8 +763,7 @@ class MethodAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Reflection.MethodBase" />
+            >Gets a <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -812,18 +773,15 @@ class MethodAttributesExample
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.MethodBase" />
+            >A <see cref="T:System.Reflection.MethodBase" />
 
             
 
-             object representing the method or constructor specified by <paramref
-             name="handle" />
+             object representing the method or constructor specified by <paramref name="handle" />
 
             
 
-            , in the generic type specified by <paramref
-             name="declaringType" />
+            , in the generic type specified by <paramref name="declaringType" />
 
             
 
@@ -831,14 +789,22 @@ class MethodAttributesExample
           >
         </returns>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A handle to the internal metadata representation of a constructor or method.</param
         >
         <param name="declaringType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -870,8 +836,7 @@ class MethodAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, returns the <see
-             cref="T:System.Reflection.MethodImplAttributes" />
+            >When overridden in a derived class, returns the <see cref="T:System.Reflection.MethodImplAttributes" />
 
             
 
@@ -973,21 +938,18 @@ class MethodAttributesExample
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentException"
-          >The types of the elements of <paramref
-           name="parameters" />
+          >The types of the elements of <paramref name="parameters" />
 
           
 
            do not match the types of the parameters accepted by the constructor or method reflected by the current instance, under the constraints of  the default binder.</exception
         >
         <exception cref="T:System.Reflection.TargetException"
-          >The constructor or method reflected by the current instance is non-static and <paramref
-           name="obj" />
+          >The constructor or method reflected by the current instance is non-static and <paramref name="obj" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1004,8 +966,7 @@ class MethodAttributesExample
           .Length does not equal the number of parameters required by the contract of the member reflected by the current instance.</exception
         >
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
-          >Requires permission to invoke non-public members of loaded assemblies. See <see
-           cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+          >Requires permission to invoke non-public members of loaded assemblies. See <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
 
           
 
@@ -1015,25 +976,26 @@ class MethodAttributesExample
           >The caller does not have permission to execute the method or constructor.</exception
         >
         <exception cref="T:System.InvalidOperationException"
-          >The type that declares the method is an open generic type. That is, <see
-           cref="P:System.Type.ContainsGenericParameters" />
+          >The type that declares the method is an open generic type. That is, <see cref="P:System.Type.ContainsGenericParameters" />
 
           
 
-           returns <see
-           langword="true" />
+           returns <see langword="true" />
 
           
 
            for the declaring type.</exception
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An argument list for the invoked method or constructor. This is an array of objects with the same number, order, and type as the parameters of the method or constructor to be invoked. If there are no parameters, <paramref
-           name="parameters" />
+          An argument list for the invoked method or constructor. This is an array of objects with the same number, order, and type as the parameters of the method or constructor to be invoked. If there are no parameters, <paramref name="parameters" />
 
           
 
@@ -1042,49 +1004,41 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is a convenience method that calls the <see
-             cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+            >This is a convenience method that calls the <see cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
 
             
 
-             method overload, passing <see
-             cref="F:System.Reflection.BindingFlags.Default" />
+             method overload, passing <see cref="F:System.Reflection.BindingFlags.Default" />
 
             
 
-             for <paramref
-             name="invokeAttr" />
+             for <paramref name="invokeAttr" />
 
             
 
-             and null for <paramref
-             name="binder" />
+             and null for <paramref name="binder" />
 
             
 
-             and <paramref
-             name="culture" />
+             and <paramref name="culture" />
 
             
 
             . </para
           >
           <para
-            >If the invoked method throws an exception, the <see
-             cref="M:System.Exception.GetBaseException" />
+            >If the invoked method throws an exception, the <see cref="M:System.Exception.GetBaseException" />
 
             
 
              method returns the exception.</para
           >
           <para
-            >To invoke a static method using its <see
-             cref="T:System.Reflection.MethodInfo" />
+            >To invoke a static method using its <see cref="T:System.Reflection.MethodInfo" />
 
             
 
-             object, pass null for <paramref
-             name="obj" />
+             object, pass null for <paramref name="obj" />
 
             
 
@@ -1092,8 +1046,7 @@ class MethodAttributesExample
           >
           <block subset="none" type="note">
             <para
-              >If this method overload is used to invoke an instance constructor, the object supplied for <paramref
-               name="obj" />
+              >If this method overload is used to invoke an instance constructor, the object supplied for <paramref name="obj" />
 
               
 
@@ -1102,18 +1055,15 @@ class MethodAttributesExample
           </block>
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this method can be used to access non-public members if the caller has been granted <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this method can be used to access non-public members if the caller has been granted <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
 
               
 
-               flag and if the grant set of the non-public members is restricted to the caller’s grant set, or a subset thereof. (See <format
-               type="text/html">
+               flag and if the grant set of the non-public members is restricted to the caller’s grant set, or a subset thereof. (See <format type="text/html">
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
@@ -1126,8 +1076,7 @@ class MethodAttributesExample
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
           <para
-            >If a parameter of the current method is a value type, and the corresponding argument in <paramref
-             name="parameters" />
+            >If a parameter of the current method is a value type, and the corresponding argument in <paramref name="parameters" />
 
             
 
@@ -1143,8 +1092,7 @@ class MethodAttributesExample
           <para>An object containing the return value of the invoked method, or null in the case of a constructor.</para>
           <block subset="none" type="note">
             <para
-              >Elements of the <paramref
-               name="parameters" />
+              >Elements of the <paramref name="parameters" />
 
               
 
@@ -1153,19 +1101,26 @@ class MethodAttributesExample
           </block>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object on which to invoke the method or constructor. If a method is static, this argument is ignored. If a constructor is static, this argument must be null or an instance of the class that defines the constructor. </param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An argument list for the invoked method or constructor. This is an array of objects with the same number, order, and type as the parameters of the method or constructor to be invoked. If there are no parameters, <paramref
-           name="parameters" />
+          An argument list for the invoked method or constructor. This is an array of objects with the same number, order, and type as the parameters of the method or constructor to be invoked. If there are no parameters, <paramref name="parameters" />
 
           
 
@@ -1205,21 +1160,18 @@ class MethodAttributesExample
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentException"
-          >The types of the elements of <paramref
-           name="parameters" />
+          >The types of the elements of <paramref name="parameters" />
 
           
 
            do not match the types of the parameters accepted by the constructor or method reflected by the current instance, under the constraints of the default binder.</exception
         >
         <exception cref="T:System.Reflection.TargetException"
-          >The constructor or method reflected by the current instance is non-static, and <paramref
-           name="obj" />
+          >The constructor or method reflected by the current instance is non-static, and <paramref name="obj" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1236,8 +1188,7 @@ class MethodAttributesExample
           .Length does not equal the number of parameters required by the contract of the constructor or method reflected by the current instance.</exception
         >
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
-          >Requires permission to invoke non-public members of loaded assemblies. See <see
-           cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+          >Requires permission to invoke non-public members of loaded assemblies. See <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
 
           
 
@@ -1247,61 +1198,71 @@ class MethodAttributesExample
           >The caller does not have permission to execute the method or constructor.</exception
         >
         <exception cref="T:System.InvalidOperationException"
-          >The type that declares the method is an open generic type. That is, <see
-           cref="P:System.Type.ContainsGenericParameters" />
+          >The type that declares the method is an open generic type. That is, <see cref="P:System.Type.ContainsGenericParameters" />
 
           
 
-           returns <see
-           langword="true" />
+           returns <see langword="true" />
 
           
 
            for the declaring type.</exception
         >
         <param name="invokeAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitmask that is a combination of 0 or more bit flags from <see
-           cref="T:System.Reflection.BindingFlags" />
+          A bitmask that is a combination of 0 or more bit flags from <see cref="T:System.Reflection.BindingFlags" />
 
           
 
-          . If <paramref
-           name="binder" />
+          . If <paramref name="binder" />
 
           
 
-           is null, this parameter is assigned the value <see
-           cref="F:System.Reflection.BindingFlags.Default" />
+           is null, this parameter is assigned the value <see cref="F:System.Reflection.BindingFlags.Default" />
 
           
 
           ; thus, whatever you pass in is ignored. </param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects via reflection. If <paramref
-           name="binder" />
+          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects via reflection. If <paramref name="binder" />
 
           
 
            is null, the default binder is used. </param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An argument list for the invoked method or constructor. This is an array of objects with the same number, order, and type as the parameters of the method or constructor to be invoked. If there are no parameters, this should be null.</param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1310,28 +1271,23 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Dynamically invokes the method reflected by this instance on <paramref
-             name="obj" />
+            >Dynamically invokes the method reflected by this instance on <paramref name="obj" />
 
             
 
-            , and passes along the specified parameters. If the method is static, the <paramref
-             name="obj" />
+            , and passes along the specified parameters. If the method is static, the <paramref name="obj" />
 
             
 
-             parameter is ignored. For non-static methods, <paramref
-             name="obj" />
+             parameter is ignored. For non-static methods, <paramref name="obj" />
 
             
 
-             should be an instance of a class that inherits or declares the method and must be the same type as this class. If the method has no parameters, the value of <paramref
-             name="parameters" />
+             should be an instance of a class that inherits or declares the method and must be the same type as this class. If the method has no parameters, the value of <paramref name="parameters" />
 
             
 
-             should be null. Otherwise, the number, type, and order of elements in <paramref
-             name="parameters" />
+             should be null. Otherwise, the number, type, and order of elements in <paramref name="parameters" />
 
             
 
@@ -1340,8 +1296,7 @@ class MethodAttributesExample
           <para>You may not omit optional parameters in calls to Invoke. To invoke a method omitting optional parameters, you should call Type.InvokeMember instead.</para>
           <block subset="none" type="note">
             <para
-              >If this method overload is used to invoke an instance constructor, the object supplied for <paramref
-               name="obj" />
+              >If this method overload is used to invoke an instance constructor, the object supplied for <paramref name="obj" />
 
               
 
@@ -1350,16 +1305,14 @@ class MethodAttributesExample
           </block>
           <para>For pass-by-value primitive parameters, normal widening is performed (Int16 -&gt; Int32, for example). For pass-by-value reference parameters, normal reference widening is allowed (derived class to base class, and base class to interface type). However, for pass-by-reference primitive parameters, the types must match exactly. For pass-by-reference reference parameters, the normal widening still applies.</para>
           <para
-            >For example, if the method reflected by this instance is declared as public boolean Compare(String a, String b), then <paramref
-             name="parameters" />
+            >For example, if the method reflected by this instance is declared as public boolean Compare(String a, String b), then <paramref name="parameters" />
 
             
 
              should be an array of Objects with length 2 such that parameters[0] = new Object("SomeString1") and parameters[1] = new Object("SomeString2").</para
           >
           <para
-            >If a parameter of the current method is a value type, and the corresponding argument in <paramref
-             name="parameters" />
+            >If a parameter of the current method is a value type, and the corresponding argument in <paramref name="parameters" />
 
             
 
@@ -1371,18 +1324,15 @@ class MethodAttributesExample
           <para>If the invoked method throws an exception, TargetInvocationException.GetException returns the exception. This implementation throws a NotSupportedException.</para>
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this method can be used to access non-public members if the caller has been granted <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this method can be used to access non-public members if the caller has been granted <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
 
               
 
-               flag and if the grant set of the non-public members is restricted to the caller’s grant set, or a subset thereof. (See <format
-               type="text/html">
+               flag and if the grant set of the non-public members is restricted to the caller’s grant set, or a subset thereof. (See <format type="text/html">
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
@@ -1404,8 +1354,7 @@ class MethodAttributesExample
           <para>An Object containing the return value of the invoked method, or null in the case of a constructor, or null if the method's return type is void. Before calling the method or constructor, Invoke checks to see if the user has access permission and verifies that the parameters are valid.</para>
           <block subset="none" type="note">
             <para
-              >Elements of the <paramref
-               name="parameters" />
+              >Elements of the <paramref name="parameters" />
 
               
 
@@ -1414,55 +1363,71 @@ class MethodAttributesExample
           </block>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object on which to invoke the method or constructor. If a method is static, this argument is ignored. If a constructor is static, this argument must be null or an instance of the class that defines the constructor.</param
         >
         <param name="invokeAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitmask that is a combination of 0 or more bit flags from <see
-           cref="T:System.Reflection.BindingFlags" />
+          A bitmask that is a combination of 0 or more bit flags from <see cref="T:System.Reflection.BindingFlags" />
 
           
 
-          . If <paramref
-           name="binder" />
+          . If <paramref name="binder" />
 
           
 
-           is null, this parameter is assigned the value <see
-           cref="F:System.Reflection.BindingFlags.Default" />
+           is null, this parameter is assigned the value <see cref="F:System.Reflection.BindingFlags.Default" />
 
           
 
           ; thus, whatever you pass in is ignored. </param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects via reflection. If <paramref
-           name="binder" />
+          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects via reflection. If <paramref name="binder" />
 
           
 
            is null, the default binder is used. </param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An argument list for the invoked method or constructor. This is an array of objects with the same number, order, and type as the parameters of the method or constructor to be invoked. If there are no parameters, this should be null.</param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1489,13 +1454,11 @@ class MethodAttributesExample
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An abstract member is declared on a base class and has no implementation supplied.</para>
           <para
-            >To get the <see
-             cref="T:System.Reflection.MethodBase" />
+            >To get the <see cref="T:System.Reflection.MethodBase" />
 
             
 
-            , first get the type. From the type, get the method. From the method, get the MethodBase. If the MethodBase or constructor is other than public, it is protected and cannot be readily accessed. To access a non-public method, set the <see
-             cref="T:System.Reflection.BindingFlags" />
+            , first get the type. From the type, get the method. From the method, get the MethodBase. If the MethodBase or constructor is other than public, it is protected and cannot be readily accessed. To access a non-public method, set the <see cref="T:System.Reflection.BindingFlags" />
 
             
 
@@ -1525,21 +1488,18 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The actual visibility of a method is limited by the visibility of its type. The <see
-             cref="P:System.Reflection.MethodBase.IsAssembly" />
+            >The actual visibility of a method is limited by the visibility of its type. The <see cref="P:System.Reflection.MethodBase.IsAssembly" />
 
             
 
              property might be true for a method, but if it is a method of a private nested type then the method is not visible outside the containing type.</para
           >
           <para
-            >The visibility of a method or constructor is exactly described by <see
-             cref="F:System.Reflection.MethodAttributes.Assembly" />
+            >The visibility of a method or constructor is exactly described by <see cref="F:System.Reflection.MethodAttributes.Assembly" />
 
             
 
-             if the only visibility modifier is internal (Friend in Visual Basic). This property is false for methods that are protected internal in C# (Protected Friend in Visual Basic, protected public in C++); use the <see
-             cref="P:System.Reflection.MethodBase.IsFamilyOrAssembly" />
+             if the only visibility modifier is internal (Friend in Visual Basic). This property is false for methods that are protected internal in C# (Protected Friend in Visual Basic, protected public in C++); use the <see cref="P:System.Reflection.MethodBase.IsFamilyOrAssembly" />
 
             
 
@@ -1549,8 +1509,7 @@ class MethodAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the potential visibility of this method or constructor is described by <see
-             cref="F:System.Reflection.MethodAttributes.Assembly" />
+            >Gets a value indicating whether the potential visibility of this method or constructor is described by <see cref="F:System.Reflection.MethodAttributes.Assembly" />
 
             
 
@@ -1582,28 +1541,23 @@ class MethodAttributesExample
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Reflection.MethodBase.IsConstructor" />
+              >The <see cref="P:System.Reflection.MethodBase.IsConstructor" />
 
               
 
-               property returns false for a <see
-               cref="T:System.Reflection.Emit.ConstructorBuilder" />
+               property returns false for a <see cref="T:System.Reflection.Emit.ConstructorBuilder" />
 
               
 
-               object in a dynamic type, unless the <see
-               cref="F:System.Reflection.MethodAttributes.RTSpecialName" />
+               object in a dynamic type, unless the <see cref="F:System.Reflection.MethodAttributes.RTSpecialName" />
 
               
 
-               flag was included in the <paramref
-               name="attributes" />
+               flag was included in the <paramref name="attributes" />
 
               
 
-               parameter when the constructor was defined. Omitting the <see
-               cref="F:System.Reflection.MethodAttributes.RTSpecialName" />
+               parameter when the constructor was defined. Omitting the <see cref="F:System.Reflection.MethodAttributes.RTSpecialName" />
 
               
 
@@ -1634,13 +1588,11 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The visibility of a method or constructor is exactly described by <see
-             cref="F:System.Reflection.MethodAttributes.Family" />
+            >The visibility of a method or constructor is exactly described by <see cref="F:System.Reflection.MethodAttributes.Family" />
 
             
 
-             if the only visibility modifier is protected. This property is false for methods that are protected internal in C# (Protected Friend in Visual Basic, protected public in C++); use the <see
-             cref="P:System.Reflection.MethodBase.IsFamilyOrAssembly" />
+             if the only visibility modifier is protected. This property is false for methods that are protected internal in C# (Protected Friend in Visual Basic, protected public in C++); use the <see cref="P:System.Reflection.MethodBase.IsFamilyOrAssembly" />
 
             
 
@@ -1650,8 +1602,7 @@ class MethodAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the visibility of this method or constructor is described by <see
-             cref="F:System.Reflection.MethodAttributes.Family" />
+            >Gets a value indicating whether the visibility of this method or constructor is described by <see cref="F:System.Reflection.MethodAttributes.Family" />
 
             
 
@@ -1677,8 +1628,7 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The visibility of a method or constructor is exactly described by <see
-             cref="F:System.Reflection.MethodAttributes.FamANDAssem" />
+            >The visibility of a method or constructor is exactly described by <see cref="F:System.Reflection.MethodAttributes.FamANDAssem" />
 
             
 
@@ -1688,8 +1638,7 @@ class MethodAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the visibility of this method or constructor is described by <see
-             cref="F:System.Reflection.MethodAttributes.FamANDAssem" />
+            >Gets a value indicating whether the visibility of this method or constructor is described by <see cref="F:System.Reflection.MethodAttributes.FamANDAssem" />
 
             
 
@@ -1715,24 +1664,21 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a type member has <see
-             cref="F:System.Reflection.MethodAttributes.FamORAssem" />
+            >If a type member has <see cref="F:System.Reflection.MethodAttributes.FamORAssem" />
 
             
 
              visibility, it can be called from any member in a derived class or any member in the same assembly, but not from any other type.</para
           >
           <para
-            >The actual visibility of a method is limited by the visibility of its type. The <see
-             cref="P:System.Reflection.MethodBase.IsFamilyOrAssembly" />
+            >The actual visibility of a method is limited by the visibility of its type. The <see cref="P:System.Reflection.MethodBase.IsFamilyOrAssembly" />
 
             
 
              property might be true for a method, but if it is a method of a private nested type then the method is not visible outside the containing type.</para
           >
           <para
-            >The visibility of a method or constructor is exactly described by <see
-             cref="F:System.Reflection.MethodAttributes.FamORAssem" />
+            >The visibility of a method or constructor is exactly described by <see cref="F:System.Reflection.MethodAttributes.FamORAssem" />
 
             
 
@@ -1742,8 +1688,7 @@ class MethodAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the potential visibility of this method or constructor is described by <see
-             cref="F:System.Reflection.MethodAttributes.FamORAssem" />
+            >Gets a value indicating whether the potential visibility of this method or constructor is described by <see cref="F:System.Reflection.MethodAttributes.FamORAssem" />
 
             
 
@@ -1769,8 +1714,7 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To determine if a method is overridable, it is not sufficient to check that <see
-             cref="P:System.Reflection.MethodBase.IsVirtual" />
+            >To determine if a method is overridable, it is not sufficient to check that <see cref="P:System.Reflection.MethodBase.IsVirtual" />
 
             
 
@@ -1803,8 +1747,7 @@ class MethodAttributesExample
 
           
 
-           if the current object is a generic method; otherwise <see
-           langword="false" />
+           if the current object is a generic method; otherwise <see langword="false" />
 
           
 
@@ -1814,23 +1757,19 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Reflection.MethodBase.IsGenericMethod" />
+            >Use the <see cref="P:System.Reflection.MethodBase.IsGenericMethod" />
 
             
 
-             property to determine whether the current <see
-             cref="T:System.Reflection.MethodBase" />
+             property to determine whether the current <see cref="T:System.Reflection.MethodBase" />
 
             
 
-             object represents a generic method. Use the <see
-             cref="P:System.Reflection.MethodBase.ContainsGenericParameters" />
+             object represents a generic method. Use the <see cref="P:System.Reflection.MethodBase.ContainsGenericParameters" />
 
             
 
-             property to determine whether the current <see
-             cref="T:System.Reflection.MethodBase" />
+             property to determine whether the current <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -1838,8 +1777,7 @@ class MethodAttributesExample
           >
           <block subset="none" type="note">
             <para
-              >Generics are not supported by default; this property returns false if not overridden in a derived class. Generic constructors are not supported in the .NET Framework version 2.0, so this property returns false if the current instance is of type <see
-               cref="T:System.Reflection.ConstructorInfo" />
+              >Generics are not supported by default; this property returns false if not overridden in a derived class. Generic constructors are not supported in the .NET Framework version 2.0, so this property returns false if the current instance is of type <see cref="T:System.Reflection.ConstructorInfo" />
 
               
 
@@ -1847,13 +1785,11 @@ class MethodAttributesExample
             >
           </block>
           <para
-            >For a list of the invariant conditions for terms specific to generic methods, see the <see
-             cref="P:System.Reflection.MethodInfo.IsGenericMethod" />
+            >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" />
 
             
 
-             property. For a list of the invariant conditions for other terms used in generic reflection, see the <see
-             cref="P:System.Type.IsGenericType" />
+             property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" />
 
             
 
@@ -1886,13 +1822,11 @@ class MethodAttributesExample
 
           
 
-           if the current <see
-           cref="T:System.Reflection.MethodBase" />
+           if the current <see cref="T:System.Reflection.MethodBase" />
 
           
 
-            object represents the definition of a generic method; otherwise <see
-           langword="false" />
+            object represents the definition of a generic method; otherwise <see langword="false" />
 
           
 
@@ -1902,8 +1836,7 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the current <see
-             cref="T:System.Reflection.MethodBase" />
+            >If the current <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -1912,8 +1845,7 @@ class MethodAttributesExample
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="P:System.Reflection.MethodBase.IsGenericMethodDefinition" />
+                >The <see cref="P:System.Reflection.MethodBase.IsGenericMethodDefinition" />
 
                 
 
@@ -1922,13 +1854,11 @@ class MethodAttributesExample
             </item>
             <item>
               <para
-                >For each <see
-                 cref="T:System.Type" />
+                >For each <see cref="T:System.Type" />
 
                 
 
-                 object in the array returned by the <see
-                 cref="M:System.Reflection.MethodBase.GetGenericArguments" />
+                 object in the array returned by the <see cref="M:System.Reflection.MethodBase.GetGenericArguments" />
 
                 
 
@@ -1937,8 +1867,7 @@ class MethodAttributesExample
               <list type="bullet">
                 <item>
                   <para
-                    >The <see
-                     cref="P:System.Type.IsGenericParameter" />
+                    >The <see cref="P:System.Type.IsGenericParameter" />
 
                     
 
@@ -1947,8 +1876,7 @@ class MethodAttributesExample
                 </item>
                 <item>
                   <para
-                    >The <see
-                     cref="P:System.Type.DeclaringMethod" />
+                    >The <see cref="P:System.Type.DeclaringMethod" />
 
                     
 
@@ -1957,13 +1885,11 @@ class MethodAttributesExample
                 </item>
                 <item>
                   <para
-                    >The <see
-                     cref="P:System.Type.GenericParameterPosition" />
+                    >The <see cref="P:System.Type.GenericParameterPosition" />
 
                     
 
-                     property is the same as the position of the <see
-                     cref="T:System.Type" />
+                     property is the same as the position of the <see cref="T:System.Type" />
 
                     
 
@@ -1975,8 +1901,7 @@ class MethodAttributesExample
           </list>
           <block subset="none" type="note">
             <para
-              >Generics are not supported by default; this property returns false if not overridden in a derived class. Generic constructors are not supported in the .NET Framework version 2.0, so this property returns false if the current instance is of type <see
-               cref="T:System.Reflection.ConstructorInfo" />
+              >Generics are not supported by default; this property returns false if not overridden in a derived class. Generic constructors are not supported in the .NET Framework version 2.0, so this property returns false if the current instance is of type <see cref="T:System.Reflection.ConstructorInfo" />
 
               
 
@@ -1984,13 +1909,11 @@ class MethodAttributesExample
             >
           </block>
           <para
-            >For a list of the invariant conditions for terms specific to generic methods, see the <see
-             cref="P:System.Reflection.MethodInfo.IsGenericMethod" />
+            >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" />
 
             
 
-             property. For a list of the invariant conditions for other terms used in generic reflection, see the <see
-             cref="P:System.Type.IsGenericType" />
+             property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" />
 
             
 
@@ -2020,8 +1943,7 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a member in a derived class is declared with the C# new modifier or the Visual Basic Shadows modifier, it can hide a member of the same name in the base class. C# hides base class members by signature. That is, if the base class member has multiple overloads, the only one that is hidden is the one that has the identical signature. By contrast, Visual Basic hides all the base class overloads. Thus, <see
-             cref="P:System.Reflection.MethodBase.IsHideBySig" />
+            >When a member in a derived class is declared with the C# new modifier or the Visual Basic Shadows modifier, it can hide a member of the same name in the base class. C# hides base class members by signature. That is, if the base class member has multiple overloads, the only one that is hidden is the one that has the identical signature. By contrast, Visual Basic hides all the base class overloads. Thus, <see cref="P:System.Reflection.MethodBase.IsHideBySig" />
 
             
 
@@ -2029,33 +1951,27 @@ class MethodAttributesExample
           >
           <block subset="none" type="note">
             <para
-              >This property does not determine whether a method has the <see
-               cref="F:System.Reflection.MethodAttributes.NewSlot" />
+              >This property does not determine whether a method has the <see cref="F:System.Reflection.MethodAttributes.NewSlot" />
 
               
 
-               attribute. A method that is declared with either the new or the Shadows modifier will have the <see
-               cref="F:System.Reflection.MethodAttributes.NewSlot" />
+               attribute. A method that is declared with either the new or the Shadows modifier will have the <see cref="F:System.Reflection.MethodAttributes.NewSlot" />
 
               
 
-               attribute, but only methods declared with new (that is, only C# methods) will have the <see
-               cref="P:System.Reflection.MethodBase.IsHideBySig" />
+               attribute, but only methods declared with new (that is, only C# methods) will have the <see cref="P:System.Reflection.MethodBase.IsHideBySig" />
 
               
 
-               property set to true.  To determine whether a method has the <see
-               cref="F:System.Reflection.MethodAttributes.NewSlot" />
+               property set to true.  To determine whether a method has the <see cref="F:System.Reflection.MethodAttributes.NewSlot" />
 
               
 
-               attribute, use code similar to the following: if ((myMethodInfo.Attributes &amp; MethodAttributes.VtableLayoutMask) == MethodAttributes.NewSlot) in C# or If (myMethodInfo.Attributes And MethodAttributes.VtableLayoutMask) = MethodAttributes.NewSlot in Visual Basic. Note, however, that although all methods declared with new or Shadows have the <see
-               cref="F:System.Reflection.MethodAttributes.NewSlot" />
+               attribute, use code similar to the following: if ((myMethodInfo.Attributes &amp; MethodAttributes.VtableLayoutMask) == MethodAttributes.NewSlot) in C# or If (myMethodInfo.Attributes And MethodAttributes.VtableLayoutMask) = MethodAttributes.NewSlot in Visual Basic. Note, however, that although all methods declared with new or Shadows have the <see cref="F:System.Reflection.MethodAttributes.NewSlot" />
 
               
 
-               attribute, not all methods that have the <see
-               cref="F:System.Reflection.MethodAttributes.NewSlot" />
+               attribute, not all methods that have the <see cref="F:System.Reflection.MethodAttributes.NewSlot" />
 
               
 
@@ -2110,13 +2026,11 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To get the <see
-             cref="T:System.Reflection.MethodBase" />
+            >To get the <see cref="T:System.Reflection.MethodBase" />
 
             
 
-            , first get the type. From the type, get the method. From the method, get the MethodBase. If the MethodBase or constructor is other than public, it is protected and cannot be readily accessed. To access a non-public method, set the <see
-             cref="T:System.Reflection.BindingFlags" />
+            , first get the type. From the type, get the method. From the method, get the MethodBase. If the MethodBase or constructor is other than public, it is protected and cannot be readily accessed. To access a non-public method, set the <see cref="T:System.Reflection.BindingFlags" />
 
             
 
@@ -2144,18 +2058,15 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Reflection.MethodBase.IsSecurityCritical" />
+            >The <see cref="P:System.Reflection.MethodBase.IsSecurityCritical" />
 
             
 
-            , <see
-             cref="P:System.Reflection.MethodBase.IsSecuritySafeCritical" />
+            , <see cref="P:System.Reflection.MethodBase.IsSecuritySafeCritical" />
 
             
 
-            , and <see
-             cref="P:System.Reflection.MethodBase.IsSecurityTransparent" />
+            , and <see cref="P:System.Reflection.MethodBase.IsSecurityTransparent" />
 
             
 
@@ -2224,13 +2135,11 @@ class MethodAttributesExample
           <para>Using these properties is much simpler than examining the security annotations of an assembly and its types and members, checking the current trust level, and attempting to duplicate the runtime's rules.</para>
           <block subset="none" type="note">
             <para
-              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see
-               cref="P:System.Reflection.Assembly.IsFullyTrusted" />
+              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see cref="P:System.Reflection.Assembly.IsFullyTrusted" />
 
               
 
-               and <see
-               cref="P:System.AppDomain.IsFullyTrusted" />
+               and <see cref="P:System.AppDomain.IsFullyTrusted" />
 
               
 
@@ -2238,8 +2147,7 @@ class MethodAttributesExample
             >
           </block>
           <para
-            >For more information about reflection and transparency, see <format
-             type="text/html">
+            >For more information about reflection and transparency, see <format type="text/html">
               <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                 >Security Considerations for Reflection</a
               >
@@ -2247,8 +2155,7 @@ class MethodAttributesExample
 
             
 
-            . For information about transparency, see <format
-             type="text/html">
+            . For information about transparency, see <format type="text/html">
               <a href="5e87881c-9c13-4b52-8ad1-e34bb46e8aaa"
                 >Security Changes in the .NET Framework Version 4.0</a
               >
@@ -2280,18 +2187,15 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Reflection.MethodBase.IsSecurityCritical" />
+            >The <see cref="P:System.Reflection.MethodBase.IsSecurityCritical" />
 
             
 
-            , <see
-             cref="P:System.Reflection.MethodBase.IsSecuritySafeCritical" />
+            , <see cref="P:System.Reflection.MethodBase.IsSecuritySafeCritical" />
 
             
 
-            , and <see
-             cref="P:System.Reflection.MethodBase.IsSecurityTransparent" />
+            , and <see cref="P:System.Reflection.MethodBase.IsSecurityTransparent" />
 
             
 
@@ -2360,13 +2264,11 @@ class MethodAttributesExample
           <para>Using these properties is much simpler than examining the security annotations of an assembly and its types and members, checking the current trust level, and attempting to duplicate the runtime's rules.</para>
           <block subset="none" type="note">
             <para
-              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see
-               cref="P:System.Reflection.Assembly.IsFullyTrusted" />
+              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see cref="P:System.Reflection.Assembly.IsFullyTrusted" />
 
               
 
-               and <see
-               cref="P:System.AppDomain.IsFullyTrusted" />
+               and <see cref="P:System.AppDomain.IsFullyTrusted" />
 
               
 
@@ -2374,8 +2276,7 @@ class MethodAttributesExample
             >
           </block>
           <para
-            >For more information about reflection and transparency, see <format
-             type="text/html">
+            >For more information about reflection and transparency, see <format type="text/html">
               <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                 >Security Considerations for Reflection</a
               >
@@ -2383,8 +2284,7 @@ class MethodAttributesExample
 
             
 
-            . For information about transparency, see <format
-             type="text/html">
+            . For information about transparency, see <format type="text/html">
               <a href="5e87881c-9c13-4b52-8ad1-e34bb46e8aaa"
                 >Security Changes in the .NET Framework Version 4.0</a
               >
@@ -2416,31 +2316,26 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this property returns true, the <see
-             cref="P:System.Reflection.MethodBase.IsSecurityCritical" />
+            >If this property returns true, the <see cref="P:System.Reflection.MethodBase.IsSecurityCritical" />
 
             
 
-             and <see
-             cref="P:System.Reflection.MethodBase.IsSecuritySafeCritical" />
+             and <see cref="P:System.Reflection.MethodBase.IsSecuritySafeCritical" />
 
             
 
              properties return false.</para
           >
           <para
-            >The <see
-             cref="P:System.Reflection.MethodBase.IsSecurityCritical" />
+            >The <see cref="P:System.Reflection.MethodBase.IsSecurityCritical" />
 
             
 
-            , <see
-             cref="P:System.Reflection.MethodBase.IsSecuritySafeCritical" />
+            , <see cref="P:System.Reflection.MethodBase.IsSecuritySafeCritical" />
 
             
 
-            , and <see
-             cref="P:System.Reflection.MethodBase.IsSecurityTransparent" />
+            , and <see cref="P:System.Reflection.MethodBase.IsSecurityTransparent" />
 
             
 
@@ -2448,13 +2343,11 @@ class MethodAttributesExample
           >
           <block subset="none" type="note">
             <para
-              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see
-               cref="P:System.Reflection.Assembly.IsFullyTrusted" />
+              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see cref="P:System.Reflection.Assembly.IsFullyTrusted" />
 
               
 
-               and <see
-               cref="P:System.AppDomain.IsFullyTrusted" />
+               and <see cref="P:System.AppDomain.IsFullyTrusted" />
 
               
 
@@ -2462,8 +2355,7 @@ class MethodAttributesExample
             >
           </block>
           <para
-            >For more information about reflection and transparency, see <format
-             type="text/html">
+            >For more information about reflection and transparency, see <format type="text/html">
               <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                 >Security Considerations for Reflection</a
               >
@@ -2471,8 +2363,7 @@ class MethodAttributesExample
 
             
 
-            . For information about transparency, see <format
-             type="text/html">
+            . For information about transparency, see <format type="text/html">
               <a href="5e87881c-9c13-4b52-8ad1-e34bb46e8aaa"
                 >Security Changes in the .NET Framework Version 4.0</a
               >
@@ -2506,8 +2397,7 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Reflection.MethodAttributes.SpecialName" />
+            >The <see cref="F:System.Reflection.MethodAttributes.SpecialName" />
 
             
 
@@ -2562,8 +2452,7 @@ class MethodAttributesExample
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A virtual member may reference instance data in a class and must be referenced through an instance of the class.</para>
           <para
-            >To determine if a method is overridable, it is not sufficient to check that IsVirtual is true. For a method to be overridable, IsVirtual must be true and <see
-             cref="P:System.Reflection.MethodBase.IsFinal" />
+            >To determine if a method is overridable, it is not sufficient to check that IsVirtual is true. For a method to be overridable, IsVirtual must be true and <see cref="P:System.Reflection.MethodBase.IsFinal" />
 
             
 
@@ -2630,8 +2519,7 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.Reflection.MethodBase.GetMethodImplementationFlags" />
+            >See the <see cref="M:System.Reflection.MethodBase.GetMethodImplementationFlags" />
 
             
 
@@ -2641,8 +2529,7 @@ class MethodAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Reflection.MethodImplAttributes" />
+            >Gets the <see cref="T:System.Reflection.MethodImplAttributes" />
 
             
 
@@ -2676,8 +2563,7 @@ class MethodAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether two <see
-             cref="T:System.Reflection.MethodBase" />
+            >Indicates whether two <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -2687,13 +2573,11 @@ class MethodAttributesExample
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="left" />
+            >true if <paramref name="left" />
 
             
 
-             is equal to <paramref
-             name="right" />
+             is equal to <paramref name="right" />
 
             
 
@@ -2701,14 +2585,22 @@ class MethodAttributesExample
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first object to compare.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2741,8 +2633,7 @@ class MethodAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether two <see
-             cref="T:System.Reflection.MethodBase" />
+            >Indicates whether two <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -2752,13 +2643,11 @@ class MethodAttributesExample
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="left" />
+            >true if <paramref name="left" />
 
             
 
-             is not equal to <paramref
-             name="right" />
+             is not equal to <paramref name="right" />
 
             
 
@@ -2766,14 +2655,22 @@ class MethodAttributesExample
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first object to compare.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2834,13 +2731,11 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Reflection.MethodBase" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Reflection.MethodBase" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Runtime.InteropServices._MethodBase" />
+             instance is cast to an <see cref="T:System.Runtime.InteropServices._MethodBase" />
 
             
 
@@ -2850,8 +2745,7 @@ class MethodAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Runtime.InteropServices._MethodBase.GetType" />
+            >For a description of this member, see <see cref="M:System.Runtime.InteropServices._MethodBase.GetType" />
 
             
 
@@ -2861,8 +2755,7 @@ class MethodAttributesExample
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Runtime.InteropServices._MethodBase.GetType" />
+            >For a description of this member, see <see cref="M:System.Runtime.InteropServices._MethodBase.GetType" />
 
             
 
@@ -2898,8 +2791,7 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference
-            >IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
+            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
 
             
 
@@ -2911,21 +2803,33 @@ class MethodAttributesExample
           <para>Retrieves the type information for an object, which can then be used to get the type information for an interface.</para>
         </summary>
         <param name="iTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type information to return.</param
         >
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

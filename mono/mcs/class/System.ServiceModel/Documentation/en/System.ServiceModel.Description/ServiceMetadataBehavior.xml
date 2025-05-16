@@ -27,18 +27,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Add a <see
-         cref="T:System.ServiceModel.Description.ServiceMetadataBehavior" />
+        >Add a <see cref="T:System.ServiceModel.Description.ServiceMetadataBehavior" />
 
         
 
-         object to the <see
-         cref="P:System.ServiceModel.Description.ServiceDescription.Behaviors" />
+         object to the <see cref="P:System.ServiceModel.Description.ServiceDescription.Behaviors" />
 
         
 
-         collection (or the <format
-         type="text/html">
+         collection (or the <format type="text/html">
           <a href="2b4c3b4c-31d4-4908-a9b7-5bb411c221f2">&lt;serviceMetadata&gt;</a>
         </format>
 
@@ -49,8 +46,7 @@
       <list type="bullet">
         <item>
           <para
-            >To enable WS-Transfer GET metadata retrieval, you must also add an endpoint to your service in which the contract is IMetadataExchange. For an example, see <format
-             type="text/html">
+            >To enable WS-Transfer GET metadata retrieval, you must also add an endpoint to your service in which the contract is IMetadataExchange. For an example, see <format type="text/html">
               <a href="51407e6d-4d87-42d5-be7c-9887b8652006"
                 >How To: Publish Metadata for a Service Using Code</a
               >
@@ -63,13 +59,11 @@
         </item>
         <item>
           <para
-            >To enable HTTP GET metadata retrieval, set the <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetEnabled" />
+            >To enable HTTP GET metadata retrieval, set the <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetEnabled" />
 
             
 
-             property to true. crabout the address of HTTP GET metadata, see <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetEnabled" />
+             property to true. crabout the address of HTTP GET metadata, see <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetEnabled" />
 
             
 
@@ -78,8 +72,7 @@
         </item>
       </list>
       <para
-        >The address of the IMetadataExchange endpoint follows the normal rules regarding the combination of base addresses and endpoint addresses. crdefault <format
-         type="text/html">
+        >The address of the IMetadataExchange endpoint follows the normal rules regarding the combination of base addresses and endpoint addresses. crdefault <format type="text/html">
           <a href="3a56831a-cabc-45c0-bd02-12e2e9bd7313">Publishing Metadata</a>
         </format>
 
@@ -88,29 +81,25 @@
         . </para
       >
       <para
-        >To enable the publication of metadata using a configuration file, add the <format
-         type="text/html">
+        >To enable the publication of metadata using a configuration file, add the <format type="text/html">
           <a href="2b4c3b4c-31d4-4908-a9b7-5bb411c221f2">&lt;serviceMetadata&gt;</a>
         </format>
 
         
 
-         element to the <format
-         type="text/html">
+         element to the <format type="text/html">
           <a href="5aed9062-cc36-4b72-b9dd-a3018b8ffafc">&lt;serviceBehaviors&gt;</a>
         </format>
 
         
 
-         element and associate the element with the <format
-         type="text/html">
+         element and associate the element with the <format type="text/html">
           <a href="13123dd6-c4a9-4a04-a984-df184b851788">&lt;service&gt;</a>
         </format>
 
         
 
-         element for which you want to publish metadata. For an example, see <format
-         type="text/html">
+         element for which you want to publish metadata. For an example, see <format type="text/html">
           <a href="f061443f-92df-4824-b36a-609c4cd14a17"
             >How to: Publish Metadata for a Service Using a Configuration File</a
           >
@@ -123,8 +112,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetEnabled" />
+            >The <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetEnabled" />
 
             
 
@@ -133,8 +121,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
+            >The <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
 
             
 
@@ -143,8 +130,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetEnabled" />
+            >The <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetEnabled" />
 
             
 
@@ -153,8 +139,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
+            >The <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
 
             
 
@@ -163,8 +148,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.MetadataExporter" />
+            >The <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.MetadataExporter" />
 
             
 
@@ -173,8 +157,7 @@
         </item>
       </list>
       <para
-        >Typically the <see
-         cref="T:System.ServiceModel.Description.ServiceMetadataBehavior" />
+        >Typically the <see cref="T:System.ServiceModel.Description.ServiceMetadataBehavior" />
 
         
 
@@ -202,8 +185,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.ServiceModel.Description.ServiceMetadataBehavior" />
+            >Creates a <see cref="T:System.ServiceModel.Description.ServiceMetadataBehavior" />
 
             
 
@@ -212,8 +194,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetEnabled" />
+                >The <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetEnabled" />
 
                 
 
@@ -222,8 +203,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetEnabled" />
+                >The <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetEnabled" />
 
                 
 
@@ -235,8 +215,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.ServiceMetadataBehavior" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceMetadataBehavior" />
 
             
 
@@ -263,18 +242,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a reference to an external metadata location to clients. The <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.ExternalMetadataLocation" />
+            >Returns a reference to an external metadata location to clients. The <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.ExternalMetadataLocation" />
 
             
 
-             property can be relative or absolute. If relative, the address is resolved by the client relative to the <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
+             property can be relative or absolute. If relative, the address is resolved by the client relative to the <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
 
             
 
-             or <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
+             or <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
 
             
 
@@ -308,13 +284,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In previous versions of WCF, metadata retrieval was accomplished using HTTP GET to access the service help page through a web browser. Only the <see
-             cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" />
+            >In previous versions of WCF, metadata retrieval was accomplished using HTTP GET to access the service help page through a web browser. Only the <see cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" />
 
             
 
-             was  supported.  For metadata retrieval using HTTPS GET, only the <see
-             cref="T:System.ServiceModel.Channels.HttpsTransportBindingElement" />
+             was  supported.  For metadata retrieval using HTTPS GET, only the <see cref="T:System.ServiceModel.Channels.HttpsTransportBindingElement" />
 
             
 
@@ -322,13 +296,11 @@
 The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings for metadata retrieval using HTTP GET (or HTTPS GET) and the bindings used to access service web pages to be configurable, either programmatically or through configuration files. </para
           >
           <para
-            >For more information about retrieving help pages, use the <see
-             cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageBinding" />
+            >For more information about retrieving help pages, use the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageBinding" />
 
             
 
-            and <see
-             cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageBinding" />
+            and <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageBinding" />
 
             
 
@@ -357,37 +329,32 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value of <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
+            >If the value of <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
 
             
 
              is relative, the address at which the metadata is published is the base address and the service address plus a ?wsdl querystring. </para
           >
           <para
-            >If the value of <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
+            >If the value of <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
 
             
 
-             is absolute the address at which the metadata is published is the value of <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
+             is absolute the address at which the metadata is published is the value of <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
 
             
 
              value plus a ?wsdl querystring. </para
           >
           <para
-            >For example, if the service address is http://localhost:8080/CalculatorService and the <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
+            >For example, if the service address is http://localhost:8080/CalculatorService and the <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
 
             
 
              is an empty string, the HTTP/GET metadata address is http://localhost:8080/CalculatorService?wsdl. </para
           >
           <para
-            >If you do not enable this property and do not change <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
+            >If you do not enable this property and do not change <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
 
             
 
@@ -415,24 +382,21 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value of <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
+            >If the value of <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
 
             
 
              is relative, the address at which the metadata is published is the base address and the service address plus a ?wsdl querystring. </para
           >
           <para
-            >If the value of <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
+            >If the value of <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
 
             
 
              is absolute the address at which the metadata is published is this value plus a ?wsdl querystring. </para
           >
           <para
-            >For example, if the service address is http://localhost:8080/CalculatorService and the <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
+            >For example, if the service address is http://localhost:8080/CalculatorService and the <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
 
             
 
@@ -466,13 +430,11 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In previous versions of WCF, metadata retrieval was accomplished using HTTP GET to access the service help page through a web browser. Only the <see
-             cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" />
+            >In previous versions of WCF, metadata retrieval was accomplished using HTTP GET to access the service help page through a web browser. Only the <see cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" />
 
             
 
-             was  supported.  For metadata retrieval using HTTPS GET, only the <see
-             cref="T:System.ServiceModel.Channels.HttpsTransportBindingElement" />
+             was  supported.  For metadata retrieval using HTTPS GET, only the <see cref="T:System.ServiceModel.Channels.HttpsTransportBindingElement" />
 
             
 
@@ -480,13 +442,11 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
 The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings for metadata retrieval using HTTP GET (or HTTPS GET) and the bindings used to access service web pages to be configurable, either programmatically or through configuration files. </para
           >
           <para
-            >For more information about retrieving help pages, use the <see
-             cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageBinding" />
+            >For more information about retrieving help pages, use the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageBinding" />
 
             
 
-            and <see
-             cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageBinding" />
+            and <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageBinding" />
 
             
 
@@ -515,29 +475,25 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value of <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
+            >If the value of <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
 
             
 
              is relative, the address at which the metadata is published is the base address and the service address plus a ?wsdl querystring. </para
           >
           <para
-            >If the value of <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
+            >If the value of <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
 
             
 
-             is absolute the address at which the metadata is published is the value of <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
+             is absolute the address at which the metadata is published is the value of <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
 
             
 
              value plus a ?wsdl querystring. </para
           >
           <para
-            >For example, if the service address is https://localhost:8080/CalculatorService and the <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
+            >For example, if the service address is https://localhost:8080/CalculatorService and the <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
 
             
 
@@ -565,29 +521,25 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value of <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
+            >If the value of <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
 
             
 
              is relative, the address at which the metadata is published is the base address and the service address plus a ?wsdl querystring. </para
           >
           <para
-            >If the value of <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
+            >If the value of <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
 
             
 
-             is absolute the address at which the metadata is published is the value of <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
+             is absolute the address at which the metadata is published is the value of <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
 
             
 
              value plus a ?wsdl querystring. </para
           >
           <para
-            >For example, if the service address is https://localhost:8080/CalculatorService and the <see
-             cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
+            >For example, if the service address is https://localhost:8080/CalculatorService and the <see cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
 
             
 
@@ -621,8 +573,7 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="T:System.ServiceModel.Description.MetadataExporter" />
+            >Use the <see cref="T:System.ServiceModel.Description.MetadataExporter" />
 
             
 
@@ -632,8 +583,7 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the internal <see
-             cref="T:System.ServiceModel.Description.MetadataExporter" />
+            >Gets or sets the internal <see cref="T:System.ServiceModel.Description.MetadataExporter" />
 
             
 
@@ -696,8 +646,7 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implementation of <see
-             cref="T:System.ServiceModel.Description.IServiceBehavior" />
+            >Implementation of <see cref="T:System.ServiceModel.Description.IServiceBehavior" />
 
             
 
@@ -705,28 +654,44 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
           >
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The service description to be configured.</param
         >
         <param name="serviceHostBase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The host of the service.</param
         >
         <param name="endpoints">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The endpoints to be configured.</param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -759,8 +724,7 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implementation of <see
-             cref="T:System.ServiceModel.Description.IServiceBehavior" />
+            >Implementation of <see cref="T:System.ServiceModel.Description.IServiceBehavior" />
 
             
 
@@ -768,14 +732,22 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
           >
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The service description to be modified.</param
         >
         <param name="serviceHostBase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -808,8 +780,7 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implementation of <see
-             cref="T:System.ServiceModel.Description.IServiceBehavior" />
+            >Implementation of <see cref="T:System.ServiceModel.Description.IServiceBehavior" />
 
             
 
@@ -817,14 +788,22 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
           >
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The service description to be validated.</param
         >
         <param name="serviceHostBase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

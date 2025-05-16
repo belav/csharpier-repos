@@ -14,18 +14,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The .NET Framework supplies two specialized classes that derive from <see
-         cref="T:System.Windows.Forms.DataGridViewElement" />
+        >The .NET Framework supplies two specialized classes that derive from <see cref="T:System.Windows.Forms.DataGridViewElement" />
 
         
 
-        : <see
-         cref="T:System.Windows.Forms.DataGridViewCell" />
+        : <see cref="T:System.Windows.Forms.DataGridViewCell" />
 
         
 
-        , which represents individual elements, and <see
-         cref="T:System.Windows.Forms.DataGridViewBand" />
+        , which represents individual elements, and <see cref="T:System.Windows.Forms.DataGridViewBand" />
 
         
 
@@ -35,8 +32,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the base class for elements of a <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >Provides the base class for elements of a <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -54,8 +50,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see
-             cref="P:System.Windows.Forms.DataGridViewElement.DataGridView" />
+            >This constructor sets the <see cref="P:System.Windows.Forms.DataGridViewElement.DataGridView" />
 
             
 
@@ -65,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewElement" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewElement" />
 
             
 
@@ -94,8 +88,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >Gets the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
@@ -128,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Called when the element is associated with a different <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >Called when the element is associated with a different <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
@@ -159,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.DataGridView.CellClick" />
+            >Raises the <see cref="E:System.Windows.Forms.DataGridView.CellClick" />
 
             
 
@@ -168,12 +159,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
+          A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
 
           
 
@@ -202,8 +196,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.DataGridView.CellContentClick" />
+            >Raises the <see cref="E:System.Windows.Forms.DataGridView.CellContentClick" />
 
             
 
@@ -211,12 +204,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
+          A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
 
           
 
@@ -245,8 +241,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.DataGridView.CellContentDoubleClick" />
+            >Raises the <see cref="E:System.Windows.Forms.DataGridView.CellContentDoubleClick" />
 
             
 
@@ -254,12 +249,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
+          A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
 
           
 
@@ -288,8 +286,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
 
             
 
@@ -297,12 +294,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
+          A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
 
           
 
@@ -331,8 +331,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.DataGridView.DataError" />
+            >Raises the <see cref="E:System.Windows.Forms.DataGridView.DataError" />
 
             
 
@@ -340,12 +339,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DataGridViewDataErrorEventArgs" />
+          A <see cref="T:System.Windows.Forms.DataGridViewDataErrorEventArgs" />
 
           
 
@@ -374,8 +376,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.MouseWheel" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.MouseWheel" />
 
             
 
@@ -383,12 +384,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -414,8 +418,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The states specified by the <see
-             cref="T:System.Windows.Forms.DataGridViewElementStates" />
+            >The states specified by the <see cref="T:System.Windows.Forms.DataGridViewElementStates" />
 
             
 

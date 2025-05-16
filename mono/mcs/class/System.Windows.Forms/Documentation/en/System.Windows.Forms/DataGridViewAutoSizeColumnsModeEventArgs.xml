@@ -20,26 +20,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.DataGridView.AutoSizeColumnsModeChanged" />
+        >The <see cref="E:System.Windows.Forms.DataGridView.AutoSizeColumnsModeChanged" />
 
         
 
-         event is raised when the value of the <see
-         cref="P:System.Windows.Forms.DataGridView.AutoSizeColumnsMode" />
+         event is raised when the value of the <see cref="P:System.Windows.Forms.DataGridView.AutoSizeColumnsMode" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         property of the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
          control changes. </para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
 
@@ -51,8 +47,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.DataGridView.AutoSizeColumnsModeChanged" />
+        >Provides data for the <see cref="E:System.Windows.Forms.DataGridView.AutoSizeColumnsModeChanged" />
 
         
 
@@ -79,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewAutoSizeColumnsModeEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewAutoSizeColumnsModeEventArgs" />
 
             
 
@@ -88,17 +82,19 @@
           >
         </summary>
         <param name="previousModes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Windows.Forms.DataGridViewAutoSizeColumnMode" />
+          An array of <see cref="T:System.Windows.Forms.DataGridViewAutoSizeColumnMode" />
 
           
 
-           values representing the previous <see
-           cref="P:System.Windows.Forms.DataGridViewColumn.AutoSizeMode" />
+           values representing the previous <see cref="P:System.Windows.Forms.DataGridViewColumn.AutoSizeMode" />
 
           
 
@@ -125,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of the previous values of the column <see
-             cref="P:System.Windows.Forms.DataGridViewColumn.AutoSizeMode" />
+            >Gets an array of the previous values of the column <see cref="P:System.Windows.Forms.DataGridViewColumn.AutoSizeMode" />
 
             
 

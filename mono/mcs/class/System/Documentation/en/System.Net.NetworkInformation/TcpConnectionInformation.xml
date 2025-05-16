@@ -46,8 +46,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor can be called only by classes that derive from the <see
-             cref="T:System.Net.NetworkInformation.TcpConnectionInformation" />
+            >This constructor can be called only by classes that derive from the <see cref="T:System.Net.NetworkInformation.TcpConnectionInformation" />
 
             
 
@@ -57,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.NetworkInformation.TcpConnectionInformation" />
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.TcpConnectionInformation" />
 
             
 
@@ -117,13 +115,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Net.NetworkInformation.TcpConnectionInformation.State" />
+            >If the <see cref="P:System.Net.NetworkInformation.TcpConnectionInformation.State" />
 
             
 
-             of this connection is <see
-             cref="F:System.Net.NetworkInformation.TcpState.Listen" />
+             of this connection is <see cref="F:System.Net.NetworkInformation.TcpState.Listen" />
 
             
 
@@ -159,8 +155,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The states for TCP connections are described in the <see
-             cref="T:System.Net.NetworkInformation.TcpState" />
+            >The states for TCP connections are described in the <see cref="T:System.Net.NetworkInformation.TcpState" />
 
             
 

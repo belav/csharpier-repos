@@ -32,13 +32,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An <see
-         cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
+        >An <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
 
         
 
-         uses an XPath expression to determine whether an XML document contains specific elements, attributes, text, or other XML syntactic constructs. Typically, an application uses an <see
-         cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
+         uses an XPath expression to determine whether an XML document contains specific elements, attributes, text, or other XML syntactic constructs. Typically, an application uses an <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
 
         
 
@@ -46,7 +44,7 @@
       >
       <para
         >The XML Path Language (XPath) provides a language for addressing parts of an XML document. The primary syntactic construct in XPath is an expression that defines how to traverse the logical structure of an XML document and address or identify an XPath data type. Specifically, XPath implementations evaluate an expression against the structure of an XML document to yield one of the four basic XPath data types: strings, numbers, Booleans, and node sets. They also support functions that convert an XPath data type to a string, number, or Boolean data type. If a method expects one of these three data types, the result of the expression evaluation is implicitly converted. Note that these three data types cannot be converted to a node-set type. The XML Path language is fully described in the <see
-         cref="http://go.microsoft.com/fwlink/?LinkId=96179"
+          cref="http://go.microsoft.com/fwlink/?LinkId=96179"
           >W3C XML Path Language 1.0 specification</see
         >
 
@@ -56,7 +54,7 @@
       >
       <para
         >Numbers in XPath expressions are expressed as double-precision 64-bit values. Therefore XPath expressions that involve testing numbers with many significant digits can return incorrect results due to floating point precision issues. crdefault <see
-         cref="http://go.microsoft.com/fwlink/?LinkId=96180"
+          cref="http://go.microsoft.com/fwlink/?LinkId=96180"
           >XML Path Language (XPath) Version 1.0, section 3.5</see
         >
 
@@ -86,8 +84,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
 
             
 
@@ -97,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
 
             
 
@@ -125,23 +121,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Use this constructor when there are no namespaces to manage. </para>
           <para
-            >This constructor initializes the <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+            >This constructor initializes the <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
-             assigned to the <see
-             cref="P:System.ServiceModel.Dispatcher.XPathMessageFilter.Namespaces" />
+             assigned to the <see cref="P:System.ServiceModel.Dispatcher.XPathMessageFilter.Namespaces" />
 
             
 
-             property by using the default <see
-             cref="T:System.ServiceModel.Dispatcher.XPathMessageContext" />
+             property by using the default <see cref="T:System.ServiceModel.Dispatcher.XPathMessageContext" />
 
             
 
-            , so the XPath expression has access to the function library that the <see
-             cref="T:System.ServiceModel.Dispatcher.XPathMessageContext" />
+            , so the XPath expression has access to the function library that the <see cref="T:System.ServiceModel.Dispatcher.XPathMessageContext" />
 
             
 
@@ -151,8 +143,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
 
             
 
@@ -160,12 +151,15 @@
           >
         </summary>
         <param name="xpath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -194,8 +188,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>It is assumed that the reader is positioned at the start element of the serialized XPathMessageFilter. The name of the element is not validated before reading. When this method returns, the reader is positioned immediately after the serialized XPathMessageFilter. The constructor also automatically initializes the namespace manager by resolving all prefixes in the XPath expression as they were bound in the reader. </para>
           <para
-            >This method can access any XML that can be created by the <see
-             cref="M:System.ServiceModel.Dispatcher.XPathMessageFilter.WriteXPathTo(System.Xml.XmlWriter,System.String,System.String,System.String,System.Boolean)" />
+            >This method can access any XML that can be created by the <see cref="M:System.ServiceModel.Dispatcher.XPathMessageFilter.WriteXPathTo(System.Xml.XmlWriter,System.String,System.String,System.String,System.Boolean)" />
 
             
 
@@ -205,8 +198,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
 
             
 
@@ -214,12 +206,15 @@
           >
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlReader" />
+          The <see cref="T:System.Xml.XmlReader" />
 
           
 
@@ -248,31 +243,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor when XPath uses prefixes not defined in <see
-             cref="T:System.ServiceModel.Dispatcher.XPathMessageContext" />
+            >Use this constructor when XPath uses prefixes not defined in <see cref="T:System.ServiceModel.Dispatcher.XPathMessageContext" />
 
             
 
-            , or when you want to use your own <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+            , or when you want to use your own <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
-            . An instance of <see
-             cref="T:System.ServiceModel.Dispatcher.XPathMessageContext" />
+            . An instance of <see cref="T:System.ServiceModel.Dispatcher.XPathMessageContext" />
 
             
 
              can be created and passed to this method.</para
           >
           <para
-            >If the instances provided to this method are <see
-             cref="T:System.Xml.Xsl.XsltContext" />
+            >If the instances provided to this method are <see cref="T:System.Xml.Xsl.XsltContext" />
 
             
 
-             implementations, it is equivalent to calling the <see
-             cref="M:System.ServiceModel.Dispatcher.XPathMessageFilter.#ctor(System.String,System.Xml.Xsl.XsltContext)" />
+             implementations, it is equivalent to calling the <see cref="M:System.ServiceModel.Dispatcher.XPathMessageFilter.#ctor(System.String,System.Xml.Xsl.XsltContext)" />
 
             
 
@@ -282,8 +272,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
 
             
 
@@ -291,24 +280,30 @@
           >
         </summary>
         <param name="xpath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An XPath 1.0 expression. </param
         >
         <param name="namespaces">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlNamespaceManager" />
+          An <see cref="T:System.Xml.XmlNamespaceManager" />
 
           
 
-           that resolves any namespace prefixes in <paramref
-           name="xpath" />
+           that resolves any namespace prefixes in <paramref name="xpath" />
 
           
 
@@ -339,13 +334,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
 
             
 
-             class using a specified XPath expression and <see
-             cref="T:System.Xml.Xsl.XsltContext" />
+             class using a specified XPath expression and <see cref="T:System.Xml.Xsl.XsltContext" />
 
             
 
@@ -353,7 +346,11 @@
           >
         </summary>
         <param name="xpath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -382,13 +379,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor when you want to use your own <see
-             cref="T:System.Xml.XmlReader" />
+            >Use this constructor when you want to use your own <see cref="T:System.Xml.XmlReader" />
 
             
 
-             and <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+             and <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
@@ -399,8 +394,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
 
             
 
@@ -408,34 +402,38 @@
           >
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlReader" />
+          The <see cref="T:System.Xml.XmlReader" />
 
           
 
            to read the streamed XPath expression. </param
         >
         <param name="namespaces">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlNamespaceManager" />
+          An <see cref="T:System.Xml.XmlNamespaceManager" />
 
           
 
-           that resolves any namespace prefixes in the XPath expression from <paramref
-           name="reader" />
+           that resolves any namespace prefixes in the XPath expression from <paramref name="reader" />
 
           
 
-          . This can also be an <see
-           cref="T:System.Xml.Xsl.XsltContext" />
+          . This can also be an <see cref="T:System.Xml.Xsl.XsltContext" />
 
           
 
@@ -465,13 +463,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor when you want to use your own <see
-             cref="T:System.Xml.XmlReader" />
+            >Use this constructor when you want to use your own <see cref="T:System.Xml.XmlReader" />
 
             
 
-             and <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+             and <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
@@ -482,13 +478,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
 
             
 
-             class by reading a streamed XPath with a specified XML reader and using the <see
-             cref="T:System.Xml.Xsl.XsltContext" />
+             class by reading a streamed XPath with a specified XML reader and using the <see cref="T:System.Xml.Xsl.XsltContext" />
 
             
 
@@ -496,12 +490,15 @@
           >
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlReader" />
+          The <see cref="T:System.Xml.XmlReader" />
 
           
 
@@ -533,13 +530,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by <see
-             cref="T:System.ServiceModel.Dispatcher.MessageFilterTable`1" />
+            >This method is called by <see cref="T:System.ServiceModel.Dispatcher.MessageFilterTable`1" />
 
             
 
-            . Users should create a filter table by calling a constructor for the filter table. This implementation returns an instance of <see
-             cref="T:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1" />
+            . Users should create a filter table by calling a constructor for the filter table. This implementation returns an instance of <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1" />
 
             
 
@@ -549,8 +544,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1" />
+            >Creates an <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1" />
 
             
 
@@ -560,13 +554,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />
+            >An <see cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />
 
             
 
-             object to which filters associated with <paramref
-             name="FilterData" />
+             object to which filters associated with <paramref name="FilterData" />
 
             
 
@@ -574,7 +566,11 @@
           >
         </returns>
         <typeparam name="FilterData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -605,8 +601,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ServiceModel.Dispatcher.XPathMessageFilter.Match(System.ServiceModel.MessageBuffer)" />
+            >Use the <see cref="M:System.ServiceModel.Dispatcher.XPathMessageFilter.Match(System.ServiceModel.MessageBuffer)" />
 
             
 
@@ -620,8 +615,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.ServiceModel.Channels.Message" />
+            >true if the <see cref="T:System.ServiceModel.Channels.Message" />
 
             
 
@@ -629,12 +623,15 @@
           >
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Message" />
+          The <see cref="T:System.ServiceModel.Channels.Message" />
 
           
 
@@ -665,13 +662,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this overload of the <see
-             cref="Overload:System.ServiceModel.Dispatcher.XPathMessageFilter.Match" />
+            >Use this overload of the <see cref="Overload:System.ServiceModel.Dispatcher.XPathMessageFilter.Match" />
 
             
 
-             method when a <see
-             cref="T:System.ServiceModel.Channels.MessageBuffer" />
+             method when a <see cref="T:System.ServiceModel.Channels.MessageBuffer" />
 
             
 
@@ -685,8 +680,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="M:System.ServiceModel.Dispatcher.XPathMessageFilter.Match(System.ServiceModel.MessageBuffer)" />
+            >true if the <see cref="M:System.ServiceModel.Dispatcher.XPathMessageFilter.Match(System.ServiceModel.MessageBuffer)" />
 
             
 
@@ -694,12 +688,15 @@
           >
         </returns>
         <param name="messageBuffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.MessageBuffer" />
+          The <see cref="T:System.ServiceModel.Channels.MessageBuffer" />
 
           
 
@@ -730,13 +727,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Dispatcher.SeekableXPathNavigator" />
+            >The <see cref="T:System.ServiceModel.Dispatcher.SeekableXPathNavigator" />
 
             
 
-             class extends the <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+             class extends the <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
@@ -750,8 +745,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the data from the <see
-             cref="T:System.ServiceModel.Dispatcher.SeekableXPathNavigator" />
+            >true if the data from the <see cref="T:System.ServiceModel.Dispatcher.SeekableXPathNavigator" />
 
             
 
@@ -759,12 +753,15 @@
           >
         </returns>
         <param name="navigator">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Dispatcher.SeekableXPathNavigator" />
+          The <see cref="T:System.ServiceModel.Dispatcher.SeekableXPathNavigator" />
 
           
 
@@ -800,8 +797,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the data from the <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >true if the data from the <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
@@ -809,12 +805,15 @@
           >
         </returns>
         <param name="navigator">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XPath.XPathNavigator" />
+          The <see cref="T:System.Xml.XPath.XPathNavigator" />
 
           
 
@@ -843,13 +842,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ServiceModel.Dispatcher.XPathMessageFilter.Namespaces" />
+            >The <see cref="P:System.ServiceModel.Dispatcher.XPathMessageFilter.Namespaces" />
 
             
 
-             property can also be an <see
-             cref="T:System.Xml.Xsl.XsltContext" />
+             property can also be an <see cref="T:System.Xml.Xsl.XsltContext" />
 
             
 
@@ -879,8 +876,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Some filters can be extremely expensive to evaluate or are very long running. Because filters operate on XML documents, the best way to set computational limits is to specify the maximum number of nodes that should be looked at during a filter evaluation. </para>
           <para
-            >The quota is initially set to <see
-             cref="F:System.Int32.MaxValue" />
+            >The quota is initially set to <see cref="F:System.Int32.MaxValue" />
 
             
 
@@ -919,8 +915,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >The <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -955,12 +950,15 @@
           <para>Reads the current XML node.</para>
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlReader" />
+          The <see cref="T:System.Xml.XmlReader" />
 
           
 
@@ -992,8 +990,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes a node using <paramref
-             name="writer" />
+            >Writes a node using <paramref name="writer" />
 
             
 
@@ -1001,12 +998,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
@@ -1038,8 +1038,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The namespace manager instance can be an <see
-             cref="T:System.Xml.Xsl.XsltContext" />
+            >The namespace manager instance can be an <see cref="T:System.Xml.Xsl.XsltContext" />
 
             
 
@@ -1049,8 +1048,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the current instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
+            >Initializes the current instance of the <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
 
             
 
@@ -1058,24 +1056,30 @@
           >
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlReader" />
+          The <see cref="T:System.Xml.XmlReader" />
 
           
 
            used to deserialize the XPath filter.</param
         >
         <param name="namespaces">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlNamespaceManager" />
+          The <see cref="T:System.Xml.XmlNamespaceManager" />
 
           
 
@@ -1111,8 +1115,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Schema.XmLSchemaType" />
+            >The <see cref="T:System.Xml.Schema.XmLSchemaType" />
 
             
 
@@ -1120,12 +1123,15 @@
           >
         </returns>
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Schema.XmLSchemaSet" />
+          The <see cref="T:System.Xml.Schema.XmLSchemaSet" />
 
           
 
@@ -1159,8 +1165,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >The <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -1195,12 +1200,15 @@
           <para>An explicit interface implementation that reads the current XML node.</para>
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlReader" />
+          The <see cref="T:System.Xml.XmlReader" />
 
           
 
@@ -1232,8 +1240,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An explicit interface implementation that writes an XML node using <paramref
-             name="writer" />
+            >An explicit interface implementation that writes an XML node using <paramref name="writer" />
 
             
 
@@ -1241,12 +1248,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
@@ -1303,13 +1313,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="writer" />
+            >The <paramref name="writer" />
 
             
 
-             must be in the <newTerm
-            >Start</newTerm>
+             must be in the <newTerm>Start</newTerm>
 
             
 
@@ -1319,8 +1327,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serializes the XPath filter to an <see
-             cref="T:System.Xml.XmlWriter" />
+            >Serializes the XPath filter to an <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -1328,24 +1335,30 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
            used to serialize the XPath filter.</param
         >
         <param name="resolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.IXmlNamespaceResolver" />
+          The <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
           
 
@@ -1380,13 +1393,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="writer" />
+            >The <paramref name="writer" />
 
             
 
-             must be in the <newTerm
-            >Start</newTerm>
+             must be in the <newTerm>Start</newTerm>
 
             
 
@@ -1398,45 +1409,63 @@
           <para>Writes the XML XPath element with a specified XML writer.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
-           used to write the <see
-           cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
+           used to write the <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
 
           
 
           . </param
         >
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace prefix of the XPath XML element. </param
         >
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the XPath XML element. </param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace URI to associate with the XML element. </param
         >
         <param name="writeNamespaces">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

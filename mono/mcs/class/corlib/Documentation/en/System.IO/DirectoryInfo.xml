@@ -30,21 +30,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.IO.DirectoryInfo" />
+        >Use the <see cref="T:System.IO.DirectoryInfo" />
 
         
 
          class for typical operations such as copying, moving, renaming, creating, and deleting directories.</para
       >
       <para
-        >If you are going to reuse an object several times, consider using the instance method of <see
-         cref="T:System.IO.DirectoryInfo" />
+        >If you are going to reuse an object several times, consider using the instance method of <see cref="T:System.IO.DirectoryInfo" />
 
         
 
-         instead of the corresponding static methods of the <see
-         cref="T:System.IO.Directory" />
+         instead of the corresponding static methods of the <see cref="T:System.IO.Directory" />
 
         
 
@@ -70,8 +67,7 @@
       </list>
       <para>By default, full read/write access to new directories is granted to all users.</para>
       <para
-        >For a list of common I/O tasks, see <format
-         type="text/html">
+        >For a list of common I/O tasks, see <format type="text/html">
           <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
         </format>
 
@@ -107,8 +103,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor does not check if a directory exists. This constructor is a placeholder for a string that is used to access the disk in subsequent operations.</para>
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
@@ -118,8 +113,7 @@
             <para>When you compile a set of characters with a particular cultural setting and retrieve those same characters with a different cultural setting, the characters might not be interpretable, and could cause an exception to be thrown.</para>
           </block>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -131,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.DirectoryInfo" />
+            >Initializes a new instance of the <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -140,7 +133,11 @@
           >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -169,8 +166,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the directory already exists, this method does nothing.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -215,8 +211,7 @@
           <para>Use this method overload to create a directory with access control, so there is no chance the directory can be accessed before security is applied.</para>
           <para>If the directory already exists, this method does nothing.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -228,8 +223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a directory using a <see
-             cref="T:System.Security.AccessControl.DirectorySecurity" />
+            >Creates a directory using a <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
             
 
@@ -237,7 +231,11 @@
           >
         </summary>
         <param name="directorySecurity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -270,18 +268,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any and all directories specified in <paramref
-             name="path" />
+            >Any and all directories specified in <paramref name="path" />
 
             
 
-             are created, unless some part of <paramref
-             name="path" />
+             are created, unless some part of <paramref name="path" />
 
             
 
-             is invalid. The <paramref
-             name="path" />
+             is invalid. The <paramref name="path" />
 
             
 
@@ -291,8 +286,7 @@
             <para>Path names are limited to 248 characters.</para>
           </block>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -304,8 +298,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a subdirectory or subdirectories on the specified path. The specified path can be relative to this instance of the <see
-             cref="T:System.IO.DirectoryInfo" />
+            >Creates a subdirectory or subdirectories on the specified path. The specified path can be relative to this instance of the <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -315,8 +308,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The last directory specified in <paramref
-             name="path" />
+            >The last directory specified in <paramref name="path" />
 
             
 
@@ -324,7 +316,11 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -361,18 +357,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any and all directories specified in <paramref
-             name="path" />
+            >Any and all directories specified in <paramref name="path" />
 
             
 
-             are created, unless some part of <paramref
-             name="path" />
+             are created, unless some part of <paramref name="path" />
 
             
 
-             is invalid. The <paramref
-             name="path" />
+             is invalid. The <paramref name="path" />
 
             
 
@@ -382,8 +375,7 @@
             <para>Path names are limited to 248 characters.</para>
           </block>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -395,8 +387,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a subdirectory or subdirectories on the specified path with the specified security. The specified path can be relative to this instance of the <see
-             cref="T:System.IO.DirectoryInfo" />
+            >Creates a subdirectory or subdirectories on the specified path with the specified security. The specified path can be relative to this instance of the <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -406,8 +397,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The last directory specified in <paramref
-             name="path" />
+            >The last directory specified in <paramref name="path" />
 
             
 
@@ -415,14 +405,22 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The specified path. This cannot be a different disk volume or Universal Naming Convention (UNC) name.</param
         >
         <param name="directorySecurity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -450,8 +448,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -463,8 +460,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Deletes this <see
-             cref="T:System.IO.DirectoryInfo" />
+            >Deletes this <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -495,26 +491,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the DirectoryInfo has no files or subdirectories, this method deletes the DirectoryInfo even if <paramref
-             name="recursive" />
+            >If the DirectoryInfo has no files or subdirectories, this method deletes the DirectoryInfo even if <paramref name="recursive" />
 
             
 
-             is false. Attempting to delete a DirectoryInfo that is not empty when <paramref
-             name="recursive" />
+             is false. Attempting to delete a DirectoryInfo that is not empty when <paramref name="recursive" />
 
             
 
-             is false throws an <see
-             cref="T:System.IO.IOException" />
+             is false throws an <see cref="T:System.IO.IOException" />
 
             
 
             .</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -526,8 +518,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Deletes this instance of a <see
-             cref="T:System.IO.DirectoryInfo" />
+            >Deletes this instance of a <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -535,7 +526,11 @@
           >
         </summary>
         <param name="recursive">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -564,13 +559,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />
 
             
 
-             and <see
-             cref="M:System.IO.DirectoryInfo.GetDirectories" />
+             and <see cref="M:System.IO.DirectoryInfo.GetDirectories" />
 
             
 
@@ -579,13 +572,11 @@
           <list type="bullet">
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />
 
                 
 
-                , you can start enumerating the collection of <see
-                 cref="T:System.IO.DirectoryInfo" />
+                , you can start enumerating the collection of <see cref="T:System.IO.DirectoryInfo" />
 
                 
 
@@ -594,13 +585,11 @@
             </item>
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.GetDirectories" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetDirectories" />
 
                 
 
-                , you must wait for the whole array of <see
-                 cref="T:System.IO.DirectoryInfo" />
+                , you must wait for the whole array of <see cref="T:System.IO.DirectoryInfo" />
 
                 
 
@@ -609,16 +598,14 @@
             </item>
           </list>
           <para
-            >Therefore, when you are working with many files and directories, <see
-             cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />
+            >Therefore, when you are working with many files and directories, <see cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />
 
             
 
              can be more efficient.</para
           >
           <para
-            >This method pre-populates the values of the following <see
-             cref="T:System.IO.DirectoryInfo" />
+            >This method pre-populates the values of the following <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -662,8 +649,7 @@
             </item>
           </list>
           <para
-            >The returned collection is not cached; each call to the <see
-             cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+            >The returned collection is not cached; each call to the <see cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
 
             
 
@@ -707,8 +693,7 @@
 
             
 
-             can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
-             name="searchPattern" />
+             can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref name="searchPattern" />
 
             
 
@@ -743,26 +728,22 @@
             </item>
           </list>
           <para
-            >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref
-             name="searchPattern" />
+            >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref name="searchPattern" />
 
             
 
-             string "s*" searches for all names in <paramref
-             name="path" />
+             string "s*" searches for all names in <paramref name="path" />
 
             
 
              beginning with the letter "s".</para
           >
           <para
-            >The <see
-             cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />
 
             
 
-             and <see
-             cref="M:System.IO.DirectoryInfo.GetDirectories" />
+             and <see cref="M:System.IO.DirectoryInfo.GetDirectories" />
 
             
 
@@ -771,13 +752,11 @@
           <list type="bullet">
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />
 
                 
 
-                , you can start enumerating the collection of <see
-                 cref="T:System.IO.DirectoryInfo" />
+                , you can start enumerating the collection of <see cref="T:System.IO.DirectoryInfo" />
 
                 
 
@@ -786,13 +765,11 @@
             </item>
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.GetDirectories" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetDirectories" />
 
                 
 
-                , you must wait for the whole array of <see
-                 cref="T:System.IO.DirectoryInfo" />
+                , you must wait for the whole array of <see cref="T:System.IO.DirectoryInfo" />
 
                 
 
@@ -801,16 +778,14 @@
             </item>
           </list>
           <para
-            >Therefore, when you are working with many files and directories, <see
-             cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />
+            >Therefore, when you are working with many files and directories, <see cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />
 
             
 
              can be more efficient.</para
           >
           <para
-            >This method pre-populates the values of the following <see
-             cref="T:System.IO.DirectoryInfo" />
+            >This method pre-populates the values of the following <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -854,8 +829,7 @@
             </item>
           </list>
           <para
-            >The returned collection is not cached; each call to the <see
-             cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+            >The returned collection is not cached; each call to the <see cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
 
             
 
@@ -869,8 +843,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerable collection of directories that matches <paramref
-             name="searchPattern" />
+            >An enumerable collection of directories that matches <paramref name="searchPattern" />
 
             
 
@@ -878,7 +851,11 @@
           >
         </returns>
         <param name="searchPattern">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -914,8 +891,7 @@
 
             
 
-             can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
-             name="searchPattern" />
+             can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref name="searchPattern" />
 
             
 
@@ -950,26 +926,22 @@
             </item>
           </list>
           <para
-            >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref
-             name="searchPattern" />
+            >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref name="searchPattern" />
 
             
 
-             string "s*" searches for all names in <paramref
-             name="path" />
+             string "s*" searches for all names in <paramref name="path" />
 
             
 
              beginning with the letter "s".</para
           >
           <para
-            >The <see
-             cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />
 
             
 
-             and <see
-             cref="M:System.IO.DirectoryInfo.GetDirectories" />
+             and <see cref="M:System.IO.DirectoryInfo.GetDirectories" />
 
             
 
@@ -978,13 +950,11 @@
           <list type="bullet">
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />
 
                 
 
-                , you can start enumerating the collection of <see
-                 cref="T:System.IO.DirectoryInfo" />
+                , you can start enumerating the collection of <see cref="T:System.IO.DirectoryInfo" />
 
                 
 
@@ -993,13 +963,11 @@
             </item>
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.GetDirectories" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetDirectories" />
 
                 
 
-                , you must wait for the whole array of <see
-                 cref="T:System.IO.DirectoryInfo" />
+                , you must wait for the whole array of <see cref="T:System.IO.DirectoryInfo" />
 
                 
 
@@ -1008,16 +976,14 @@
             </item>
           </list>
           <para
-            >Therefore, when you are working with many files and directories, <see
-             cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />
+            >Therefore, when you are working with many files and directories, <see cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />
 
             
 
              can be more efficient.</para
           >
           <para
-            >This method pre-populates the values of the following <see
-             cref="T:System.IO.DirectoryInfo" />
+            >This method pre-populates the values of the following <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -1061,8 +1027,7 @@
             </item>
           </list>
           <para
-            >The returned collection is not cached; each call to the <see
-             cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+            >The returned collection is not cached; each call to the <see cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
 
             
 
@@ -1076,13 +1041,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerable collection of directories that matches <paramref
-             name="searchPattern" />
+            >An enumerable collection of directories that matches <paramref name="searchPattern" />
 
             
 
-             and <paramref
-             name="searchOption" />
+             and <paramref name="searchOption" />
 
             
 
@@ -1090,19 +1053,26 @@
           >
         </returns>
         <param name="searchPattern">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The search string to match against the names of directories.  This parameter can contain a combination of valid literal path and wildcard (* and ?) characters (see Remarks), but doesn't support regular expressions. The default pattern is "*", which returns all files.</param
         >
         <param name="searchOption">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the enumeration values that specifies whether the search operation should include only the current directory or all subdirectories. The default value is <see
-           cref="F:System.IO.SearchOption.TopDirectoryOnly" />
+          One of the enumeration values that specifies whether the search operation should include only the current directory or all subdirectories. The default value is <see cref="F:System.IO.SearchOption.TopDirectoryOnly" />
 
           
 
@@ -1131,13 +1101,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
 
             
 
-             and <see
-             cref="M:System.IO.DirectoryInfo.GetFiles" />
+             and <see cref="M:System.IO.DirectoryInfo.GetFiles" />
 
             
 
@@ -1146,13 +1114,11 @@
           <list type="bullet">
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
 
                 
 
-                , you can start enumerating the collection of <see
-                 cref="T:System.IO.FileInfo" />
+                , you can start enumerating the collection of <see cref="T:System.IO.FileInfo" />
 
                 
 
@@ -1161,13 +1127,11 @@
             </item>
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.GetFiles" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetFiles" />
 
                 
 
-                , you must wait for the whole array of <see
-                 cref="T:System.IO.FileInfo" />
+                , you must wait for the whole array of <see cref="T:System.IO.FileInfo" />
 
                 
 
@@ -1176,16 +1140,14 @@
             </item>
           </list>
           <para
-            >Therefore, when you are working with many files and directories, <see
-             cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
+            >Therefore, when you are working with many files and directories, <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
 
             
 
              can be more efficient.</para
           >
           <para
-            >This method pre-populates the values of the following <see
-             cref="T:System.IO.FileInfo" />
+            >This method pre-populates the values of the following <see cref="T:System.IO.FileInfo" />
 
             
 
@@ -1234,8 +1196,7 @@
             </item>
           </list>
           <para
-            >The returned collection is not cached; each call to the <see
-             cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+            >The returned collection is not cached; each call to the <see cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
 
             
 
@@ -1279,8 +1240,7 @@
 
             
 
-             can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
-             name="searchPattern" />
+             can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref name="searchPattern" />
 
             
 
@@ -1315,26 +1275,22 @@
             </item>
           </list>
           <para
-            >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref
-             name="searchPattern" />
+            >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref name="searchPattern" />
 
             
 
-             string "s*" searches for all names in <paramref
-             name="path" />
+             string "s*" searches for all names in <paramref name="path" />
 
             
 
              beginning with the letter "s".</para
           >
           <para
-            >The <see
-             cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
 
             
 
-             and <see
-             cref="M:System.IO.DirectoryInfo.GetFiles" />
+             and <see cref="M:System.IO.DirectoryInfo.GetFiles" />
 
             
 
@@ -1343,13 +1299,11 @@
           <list type="bullet">
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
 
                 
 
-                , you can start enumerating the collection of <see
-                 cref="T:System.IO.FileInfo" />
+                , you can start enumerating the collection of <see cref="T:System.IO.FileInfo" />
 
                 
 
@@ -1358,13 +1312,11 @@
             </item>
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.GetFiles" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetFiles" />
 
                 
 
-                , you must wait for the whole array of <see
-                 cref="T:System.IO.FileInfo" />
+                , you must wait for the whole array of <see cref="T:System.IO.FileInfo" />
 
                 
 
@@ -1373,16 +1325,14 @@
             </item>
           </list>
           <para
-            >Therefore, when you are working with many files and directories, <see
-             cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
+            >Therefore, when you are working with many files and directories, <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
 
             
 
              can be more efficient.</para
           >
           <para
-            >This method pre-populates the values of the following <see
-             cref="T:System.IO.FileInfo" />
+            >This method pre-populates the values of the following <see cref="T:System.IO.FileInfo" />
 
             
 
@@ -1431,8 +1381,7 @@
             </item>
           </list>
           <para
-            >The returned collection is not cached; each call to the <see
-             cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+            >The returned collection is not cached; each call to the <see cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
 
             
 
@@ -1446,8 +1395,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerable collection of files that matches <paramref
-             name="searchPattern" />
+            >An enumerable collection of files that matches <paramref name="searchPattern" />
 
             
 
@@ -1455,7 +1403,11 @@
           >
         </returns>
         <param name="searchPattern">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1491,8 +1443,7 @@
 
             
 
-             can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
-             name="searchPattern" />
+             can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref name="searchPattern" />
 
             
 
@@ -1527,26 +1478,22 @@
             </item>
           </list>
           <para
-            >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref
-             name="searchPattern" />
+            >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref name="searchPattern" />
 
             
 
-             string "s*" searches for all names in <paramref
-             name="path" />
+             string "s*" searches for all names in <paramref name="path" />
 
             
 
              beginning with the letter "s".</para
           >
           <para
-            >The <see
-             cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
 
             
 
-             and <see
-             cref="M:System.IO.DirectoryInfo.GetFiles" />
+             and <see cref="M:System.IO.DirectoryInfo.GetFiles" />
 
             
 
@@ -1555,13 +1502,11 @@
           <list type="bullet">
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
 
                 
 
-                , you can start enumerating the collection of <see
-                 cref="T:System.IO.FileInfo" />
+                , you can start enumerating the collection of <see cref="T:System.IO.FileInfo" />
 
                 
 
@@ -1570,13 +1515,11 @@
             </item>
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.GetFiles" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetFiles" />
 
                 
 
-                , you must wait for the whole array of <see
-                 cref="T:System.IO.FileInfo" />
+                , you must wait for the whole array of <see cref="T:System.IO.FileInfo" />
 
                 
 
@@ -1585,16 +1528,14 @@
             </item>
           </list>
           <para
-            >Therefore, when you are working with many files and directories, <see
-             cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
+            >Therefore, when you are working with many files and directories, <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
 
             
 
              can be more efficient.</para
           >
           <para
-            >This method pre-populates the values of the following <see
-             cref="T:System.IO.FileInfo" />
+            >This method pre-populates the values of the following <see cref="T:System.IO.FileInfo" />
 
             
 
@@ -1643,8 +1584,7 @@
             </item>
           </list>
           <para
-            >The returned collection is not cached; each call to the <see
-             cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+            >The returned collection is not cached; each call to the <see cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
 
             
 
@@ -1658,13 +1598,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerable collection of files that matches <paramref
-             name="searchPattern" />
+            >An enumerable collection of files that matches <paramref name="searchPattern" />
 
             
 
-             and <paramref
-             name="searchOption" />
+             and <paramref name="searchOption" />
 
             
 
@@ -1672,19 +1610,26 @@
           >
         </returns>
         <param name="searchPattern">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The search string to match against the names of files.  This parameter can contain a combination of valid literal path and wildcard (* and ?) characters (see Remarks), but doesn't support regular expressions. The default pattern is "*", which returns all files.</param
         >
         <param name="searchOption">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the enumeration values that specifies whether the search operation should include only the current directory or all subdirectories. The default value is <see
-           cref="F:System.IO.SearchOption.TopDirectoryOnly" />
+          One of the enumeration values that specifies whether the search operation should include only the current directory or all subdirectories. The default value is <see cref="F:System.IO.SearchOption.TopDirectoryOnly" />
 
           
 
@@ -1713,13 +1658,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />
 
             
 
-             and <see
-             cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" />
+             and <see cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" />
 
             
 
@@ -1728,13 +1671,11 @@
           <list type="bullet">
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />
 
                 
 
-                , you can start enumerating the collection of <see
-                 cref="T:System.IO.FileInfo" />
+                , you can start enumerating the collection of <see cref="T:System.IO.FileInfo" />
 
                 
 
@@ -1743,13 +1684,11 @@
             </item>
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" />
 
                 
 
-                , you must wait for the whole array of <see
-                 cref="T:System.IO.FileSystemInfo" />
+                , you must wait for the whole array of <see cref="T:System.IO.FileSystemInfo" />
 
                 
 
@@ -1758,16 +1697,14 @@
             </item>
           </list>
           <para
-            >Therefore, when you are working with many files and directories, <see
-             cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />
+            >Therefore, when you are working with many files and directories, <see cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />
 
             
 
              can be more efficient.</para
           >
           <para
-            >This method pre-populates the values of the following <see
-             cref="T:System.IO.FileSystemInfo" />
+            >This method pre-populates the values of the following <see cref="T:System.IO.FileSystemInfo" />
 
             
 
@@ -1811,8 +1748,7 @@
             </item>
           </list>
           <para
-            >The returned collection is not cached; each call to the <see
-             cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+            >The returned collection is not cached; each call to the <see cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
 
             
 
@@ -1856,8 +1792,7 @@
 
             
 
-             can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
-             name="searchPattern" />
+             can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref name="searchPattern" />
 
             
 
@@ -1892,26 +1827,22 @@
             </item>
           </list>
           <para
-            >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref
-             name="searchPattern" />
+            >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref name="searchPattern" />
 
             
 
-             string "s*" searches for all names in <paramref
-             name="path" />
+             string "s*" searches for all names in <paramref name="path" />
 
             
 
              beginning with the letter "s".</para
           >
           <para
-            >The <see
-             cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />
 
             
 
-             and <see
-             cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" />
+             and <see cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" />
 
             
 
@@ -1920,13 +1851,11 @@
           <list type="bullet">
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />
 
                 
 
-                , you can start enumerating the collection of <see
-                 cref="T:System.IO.FileInfo" />
+                , you can start enumerating the collection of <see cref="T:System.IO.FileInfo" />
 
                 
 
@@ -1935,13 +1864,11 @@
             </item>
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" />
 
                 
 
-                , you must wait for the whole array of <see
-                 cref="T:System.IO.FileSystemInfo" />
+                , you must wait for the whole array of <see cref="T:System.IO.FileSystemInfo" />
 
                 
 
@@ -1950,16 +1877,14 @@
             </item>
           </list>
           <para
-            >Therefore, when you are working with many files and directories, <see
-             cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />
+            >Therefore, when you are working with many files and directories, <see cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />
 
             
 
              can be more efficient.</para
           >
           <para
-            >This method pre-populates the values of the following <see
-             cref="T:System.IO.FileSystemInfo" />
+            >This method pre-populates the values of the following <see cref="T:System.IO.FileSystemInfo" />
 
             
 
@@ -2003,8 +1928,7 @@
             </item>
           </list>
           <para
-            >The returned collection is not cached; each call to the <see
-             cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+            >The returned collection is not cached; each call to the <see cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
 
             
 
@@ -2018,8 +1942,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerable collection of file system information objects that matches <paramref
-             name="searchPattern" />
+            >An enumerable collection of file system information objects that matches <paramref name="searchPattern" />
 
             
 
@@ -2027,7 +1950,11 @@
           >
         </returns>
         <param name="searchPattern">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2063,8 +1990,7 @@
 
             
 
-             can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
-             name="searchPattern" />
+             can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref name="searchPattern" />
 
             
 
@@ -2099,26 +2025,22 @@
             </item>
           </list>
           <para
-            >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref
-             name="searchPattern" />
+            >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref name="searchPattern" />
 
             
 
-             string "s*" searches for all names in <paramref
-             name="path" />
+             string "s*" searches for all names in <paramref name="path" />
 
             
 
              beginning with the letter "s".</para
           >
           <para
-            >The <see
-             cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />
 
             
 
-             and <see
-             cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" />
+             and <see cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" />
 
             
 
@@ -2127,13 +2049,11 @@
           <list type="bullet">
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />
 
                 
 
-                , you can start enumerating the collection of <see
-                 cref="T:System.IO.FileInfo" />
+                , you can start enumerating the collection of <see cref="T:System.IO.FileInfo" />
 
                 
 
@@ -2142,13 +2062,11 @@
             </item>
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" />
 
                 
 
-                , you must wait for the whole array of <see
-                 cref="T:System.IO.FileSystemInfo" />
+                , you must wait for the whole array of <see cref="T:System.IO.FileSystemInfo" />
 
                 
 
@@ -2157,16 +2075,14 @@
             </item>
           </list>
           <para
-            >Therefore, when you are working with many files and directories, <see
-             cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />
+            >Therefore, when you are working with many files and directories, <see cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />
 
             
 
              can be more efficient.</para
           >
           <para
-            >This method pre-populates the values of the following <see
-             cref="T:System.IO.FileSystemInfo" />
+            >This method pre-populates the values of the following <see cref="T:System.IO.FileSystemInfo" />
 
             
 
@@ -2210,8 +2126,7 @@
             </item>
           </list>
           <para
-            >The returned collection is not cached; each call to the <see
-             cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+            >The returned collection is not cached; each call to the <see cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
 
             
 
@@ -2225,13 +2140,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerable collection of file system information objects that matches <paramref
-             name="searchPattern" />
+            >An enumerable collection of file system information objects that matches <paramref name="searchPattern" />
 
             
 
-             and <paramref
-             name="searchOption" />
+             and <paramref name="searchOption" />
 
             
 
@@ -2239,19 +2152,26 @@
           >
         </returns>
         <param name="searchPattern">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The search string to match against the names of directories.  This parameter can contain a combination of valid literal path and wildcard (* and ?) characters (see Remarks), but doesn't support regular expressions. The default pattern is "*", which returns all files.</param
         >
         <param name="searchOption">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the enumeration values that specifies whether the search operation should include only the current directory or all subdirectories. The default value is <see
-           cref="F:System.IO.SearchOption.TopDirectoryOnly" />
+          One of the enumeration values that specifies whether the search operation should include only the current directory or all subdirectories. The default value is <see cref="F:System.IO.SearchOption.TopDirectoryOnly" />
 
           
 
@@ -2276,8 +2196,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.IO.DirectoryInfo.Exists" />
+            >The <see cref="P:System.IO.DirectoryInfo.Exists" />
 
             
 
@@ -2313,61 +2232,51 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling this method overload is equivalent to calling the <see
-             cref="M:System.IO.Directory.GetAccessControl(System.String,System.Security.AccessControl.AccessControlSections)" />
+            >Calling this method overload is equivalent to calling the <see cref="M:System.IO.Directory.GetAccessControl(System.String,System.Security.AccessControl.AccessControlSections)" />
 
             
 
-             method overload and specifying the access control sections <see
-             cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+             method overload and specifying the access control sections <see cref="F:System.Security.AccessControl.AccessControlSections.Access" />
 
             
 
-             | <see
-             cref="F:System.Security.AccessControl.AccessControlSections.Owner" />
+             | <see cref="F:System.Security.AccessControl.AccessControlSections.Owner" />
 
             
 
-             | <see
-             cref="F:System.Security.AccessControl.AccessControlSections.Group" />
+             | <see cref="F:System.Security.AccessControl.AccessControlSections.Group" />
 
             
 
-             (<see
-             cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+             (<see cref="F:System.Security.AccessControl.AccessControlSections.Access" />
 
             
 
-             Or <see
-             cref="F:System.Security.AccessControl.AccessControlSections.Owner" />
+             Or <see cref="F:System.Security.AccessControl.AccessControlSections.Owner" />
 
             
 
-             Or <see
-             cref="F:System.Security.AccessControl.AccessControlSections.Group" />
+             Or <see cref="F:System.Security.AccessControl.AccessControlSections.Group" />
 
             
 
              in Visual Basic).</para
           >
           <para
-            >Use the <see
-             cref="M:System.IO.DirectoryInfo.GetAccessControl" />
+            >Use the <see cref="M:System.IO.DirectoryInfo.GetAccessControl" />
 
             
 
              method to retrieve the access control list (ACL) entries for the current file.</para
           >
           <para
-            >An ACL describes individuals and/or groups who have, or do not have, rights to specific actions on the given file or directory. For more information, see <format
-             type="text/html">
+            >An ACL describes individuals and/or groups who have, or do not have, rights to specific actions on the given file or directory. For more information, see <format type="text/html">
               <a href="06fbf66d-6f02-4378-b863-b2f12e349045">ACL Technology Overview</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="53758b39-bd9b-4640-bb04-cad5ed8d0abf"
                 >How to: Add or Remove an Access Control List Entry</a
               >
@@ -2381,13 +2290,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Security.AccessControl.DirectorySecurity" />
+            >Gets a <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
             
 
-             object that encapsulates the access control list (ACL) entries for the directory described by the current <see
-             cref="T:System.IO.DirectoryInfo" />
+             object that encapsulates the access control list (ACL) entries for the directory described by the current <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -2397,8 +2304,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.AccessControl.DirectorySecurity" />
+            >A <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
             
 
@@ -2435,23 +2341,20 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.IO.DirectoryInfo.GetAccessControl(System.Security.AccessControl.AccessControlSections)" />
+            >Use the <see cref="M:System.IO.DirectoryInfo.GetAccessControl(System.Security.AccessControl.AccessControlSections)" />
 
             
 
              method to retrieve the access control list (ACL) entries for the current file.</para
           >
           <para
-            >An ACL describes individuals and/or groups who have, or do not have, rights to specific actions on the given file or directory. For more information, see <format
-             type="text/html">
+            >An ACL describes individuals and/or groups who have, or do not have, rights to specific actions on the given file or directory. For more information, see <format type="text/html">
               <a href="06fbf66d-6f02-4378-b863-b2f12e349045">ACL Technology Overview</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="53758b39-bd9b-4640-bb04-cad5ed8d0abf"
                 >How to: Add or Remove an Access Control List Entry</a
               >
@@ -2465,13 +2368,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Security.AccessControl.DirectorySecurity" />
+            >Gets a <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
             
 
-             object that encapsulates the specified type of access control list (ACL) entries for the directory described by the current <see
-             cref="T:System.IO.DirectoryInfo" />
+             object that encapsulates the specified type of access control list (ACL) entries for the directory described by the current <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -2481,13 +2382,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.AccessControl.DirectorySecurity" />
+            >A <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
             
 
-             object that encapsulates the access control rules for the file described by the <paramref
-             name="path" />
+             object that encapsulates the access control rules for the file described by the <paramref name="path" />
 
             
 
@@ -2562,12 +2461,15 @@
           </list>
         </returns>
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AccessControlSections" />
+          One of the <see cref="T:System.Security.AccessControl.AccessControlSections" />
 
           
 
@@ -2596,8 +2498,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If there are no subdirectories, this method returns an empty array. This method is not recursive.</para>
           <para
-            >This method pre-populates the values of the following <see
-             cref="T:System.IO.DirectoryInfo" />
+            >This method pre-populates the values of the following <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -2648,8 +2549,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.IO.DirectoryInfo" />
+            >An array of <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -2687,8 +2587,7 @@
 
             
 
-             can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
-             name="searchPattern" />
+             can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref name="searchPattern" />
 
             
 
@@ -2723,21 +2622,18 @@
             </item>
           </list>
           <para
-            >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref
-             name="searchPattern" />
+            >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref name="searchPattern" />
 
             
 
-             string "s*" searches for all names in <paramref
-             name="path" />
+             string "s*" searches for all names in <paramref name="path" />
 
             
 
              beginning with the letter "s".</para
           >
           <para
-            >This method pre-populates the values of the following <see
-             cref="T:System.IO.DirectoryInfo" />
+            >This method pre-populates the values of the following <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -2784,8 +2680,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of directories in the current <see
-             cref="T:System.IO.DirectoryInfo" />
+            >Returns an array of directories in the current <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -2795,8 +2690,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of type DirectoryInfo matching <paramref
-             name="searchPattern" />
+            >An array of type DirectoryInfo matching <paramref name="searchPattern" />
 
             
 
@@ -2804,7 +2698,11 @@
           >
         </returns>
         <param name="searchPattern">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2842,8 +2740,7 @@
 
             
 
-             can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
-             name="searchPattern" />
+             can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref name="searchPattern" />
 
             
 
@@ -2878,29 +2775,25 @@
             </item>
           </list>
           <para
-            >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref
-             name="searchPattern" />
+            >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref name="searchPattern" />
 
             
 
-             string "s*" searches for all names in <paramref
-             name="path" />
+             string "s*" searches for all names in <paramref name="path" />
 
             
 
              beginning with the letter "s".</para
           >
           <para
-            >If there are no subdirectories, or no subdirectories match the <paramref
-             name="searchPattern" />
+            >If there are no subdirectories, or no subdirectories match the <paramref name="searchPattern" />
 
             
 
              parameter, this method returns an empty array.</para
           >
           <para
-            >This method pre-populates the values of the following <see
-             cref="T:System.IO.DirectoryInfo" />
+            >This method pre-populates the values of the following <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -2947,8 +2840,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of directories in the current <see
-             cref="T:System.IO.DirectoryInfo" />
+            >Returns an array of directories in the current <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -2958,8 +2850,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of type DirectoryInfo matching <paramref
-             name="searchPattern" />
+            >An array of type DirectoryInfo matching <paramref name="searchPattern" />
 
             
 
@@ -2967,14 +2858,22 @@
           >
         </returns>
         <param name="searchPattern">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The search string to match against the names of directories.  This parameter can contain a combination of valid literal path and wildcard (* and ?) characters (see Remarks), but doesn't support regular expressions. The default pattern is "*", which returns all files.</param
         >
         <param name="searchOption">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3002,13 +2901,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
 
             
 
-             and <see
-             cref="M:System.IO.DirectoryInfo.GetFiles" />
+             and <see cref="M:System.IO.DirectoryInfo.GetFiles" />
 
             
 
@@ -3017,13 +2914,11 @@
           <list type="bullet">
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
 
                 
 
-                , you can start enumerating the collection of <see
-                 cref="T:System.IO.FileInfo" />
+                , you can start enumerating the collection of <see cref="T:System.IO.FileInfo" />
 
                 
 
@@ -3032,13 +2927,11 @@
             </item>
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.GetFiles" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetFiles" />
 
                 
 
-                , you must wait for the whole array of <see
-                 cref="T:System.IO.FileInfo" />
+                , you must wait for the whole array of <see cref="T:System.IO.FileInfo" />
 
                 
 
@@ -3047,32 +2940,28 @@
             </item>
           </list>
           <para
-            >Therefore, when you are working with many files and directories, <see
-             cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
+            >Therefore, when you are working with many files and directories, <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
 
             
 
              can be more efficient.</para
           >
           <para
-            >If there are no files in the <see
-             cref="T:System.IO.DirectoryInfo" />
+            >If there are no files in the <see cref="T:System.IO.DirectoryInfo" />
 
             
 
             , this method returns an empty array.</para
           >
           <para
-            >The order of the returned file names is not guaranteed; use the <see
-             cref="Overload:System.Array.Sort" />
+            >The order of the returned file names is not guaranteed; use the <see cref="Overload:System.Array.Sort" />
 
             
 
              method if a specific sort order is required.</para
           >
           <para
-            >This method pre-populates the values of the following <see
-             cref="T:System.IO.FileInfo" />
+            >This method pre-populates the values of the following <see cref="T:System.IO.FileInfo" />
 
             
 
@@ -3128,8 +3017,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of type <see
-             cref="T:System.IO.FileInfo" />
+            >An array of type <see cref="T:System.IO.FileInfo" />
 
             
 
@@ -3167,8 +3055,7 @@
 
             
 
-             can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
-             name="searchPattern" />
+             can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref name="searchPattern" />
 
             
 
@@ -3203,26 +3090,22 @@
             </item>
           </list>
           <para
-            >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". The <paramref
-             name="searchPattern" />
+            >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". The <paramref name="searchPattern" />
 
             
 
-             string "s*" searches for all names in <paramref
-             name="path" />
+             string "s*" searches for all names in <paramref name="path" />
 
             
 
              beginning with the letter "s".</para
           >
           <para
-            >The <see
-             cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
 
             
 
-             and <see
-             cref="M:System.IO.DirectoryInfo.GetFiles" />
+             and <see cref="M:System.IO.DirectoryInfo.GetFiles" />
 
             
 
@@ -3231,13 +3114,11 @@
           <list type="bullet">
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
 
                 
 
-                , you can start enumerating the collection of <see
-                 cref="T:System.IO.FileInfo" />
+                , you can start enumerating the collection of <see cref="T:System.IO.FileInfo" />
 
                 
 
@@ -3246,13 +3127,11 @@
             </item>
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.GetFiles" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetFiles" />
 
                 
 
-                , you must wait for the whole array of <see
-                 cref="T:System.IO.FileInfo" />
+                , you must wait for the whole array of <see cref="T:System.IO.FileInfo" />
 
                 
 
@@ -3261,24 +3140,21 @@
             </item>
           </list>
           <para
-            >Therefore, when you are working with many files and directories, <see
-             cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
+            >Therefore, when you are working with many files and directories, <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
 
             
 
              can be more efficient.</para
           >
           <para
-            >If there are no files in the <see
-             cref="T:System.IO.DirectoryInfo" />
+            >If there are no files in the <see cref="T:System.IO.DirectoryInfo" />
 
             
 
             , this method returns an empty array.</para
           >
           <para
-            >The following wildcard specifiers are permitted in the <paramref
-             name="searchPattern" />
+            >The following wildcard specifiers are permitted in the <paramref name="searchPattern" />
 
             
 
@@ -3313,31 +3189,26 @@
             </item>
           </list>
           <para
-            >The order of the returned file names is not guaranteed; use the <see
-             cref="Overload:System.Array.Sort" />
+            >The order of the returned file names is not guaranteed; use the <see cref="Overload:System.Array.Sort" />
 
             
 
              method if a specific sort order is required.</para
           >
           <para
-            >Wildcards are permitted. For example, the <paramref
-             name="searchPattern" />
+            >Wildcards are permitted. For example, the <paramref name="searchPattern" />
 
             
 
-             string "*.txt" searches for all file names having an extension of "txt". The <paramref
-             name="searchPattern" />
+             string "*.txt" searches for all file names having an extension of "txt". The <paramref name="searchPattern" />
 
             
 
-             string "s*" searches for all file names beginning with the letter "s". If there are no files, or no files that match the <paramref
-             name="searchPattern" />
+             string "s*" searches for all file names beginning with the letter "s". If there are no files, or no files that match the <paramref name="searchPattern" />
 
             
 
-             string in the <see
-             cref="T:System.IO.DirectoryInfo" />
+             string in the <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -3345,28 +3216,23 @@
           >
           <block subset="none" type="note">
             <para
-              >When using the asterisk wildcard character in a <paramref
-               name="searchPattern" />
+              >When using the asterisk wildcard character in a <paramref name="searchPattern" />
 
               
 
-               (for example, "*.txt"), the matching behavior varies depending on the length of the specified file extension. A <paramref
-               name="searchPattern" />
+               (for example, "*.txt"), the matching behavior varies depending on the length of the specified file extension. A <paramref name="searchPattern" />
 
               
 
-               with a file extension of exactly three characters returns files with an extension of three or more characters, where the first three characters match the file extension specified in the <paramref
-               name="searchPattern" />
+               with a file extension of exactly three characters returns files with an extension of three or more characters, where the first three characters match the file extension specified in the <paramref name="searchPattern" />
 
               
 
-              . A <paramref
-               name="searchPattern" />
+              . A <paramref name="searchPattern" />
 
               
 
-               with a file extension of one, two, or more than three characters returns only files with extensions of exactly that length that match the file extension specified in the <paramref
-               name="searchPattern" />
+               with a file extension of one, two, or more than three characters returns only files with extensions of exactly that length that match the file extension specified in the <paramref name="searchPattern" />
 
               
 
@@ -3377,8 +3243,7 @@
             <para>Because this method checks against file names with both the 8.3 file name format and the long file name format, a search pattern similar to "*1*.txt" may return unexpected file names. For example, using a search pattern of "*1*.txt" will return "longfilename.txt" because the equivalent 8.3 file name format would be "longf~1.txt".</para>
           </block>
           <para
-            >This method pre-populates the values of the following <see
-             cref="T:System.IO.FileInfo" />
+            >This method pre-populates the values of the following <see cref="T:System.IO.FileInfo" />
 
             
 
@@ -3434,8 +3299,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of type <see
-             cref="T:System.IO.FileInfo" />
+            >An array of type <see cref="T:System.IO.FileInfo" />
 
             
 
@@ -3443,7 +3307,11 @@
           >
         </returns>
         <param name="searchPattern">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3477,13 +3345,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
 
             
 
-             and <see
-             cref="M:System.IO.DirectoryInfo.GetFiles" />
+             and <see cref="M:System.IO.DirectoryInfo.GetFiles" />
 
             
 
@@ -3492,13 +3358,11 @@
           <list type="bullet">
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
 
                 
 
-                , you can start enumerating the collection of <see
-                 cref="T:System.IO.FileInfo" />
+                , you can start enumerating the collection of <see cref="T:System.IO.FileInfo" />
 
                 
 
@@ -3507,13 +3371,11 @@
             </item>
             <item>
               <para
-                >When you use <see
-                 cref="M:System.IO.DirectoryInfo.GetFiles" />
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetFiles" />
 
                 
 
-                , you must wait for the whole array of <see
-                 cref="T:System.IO.FileInfo" />
+                , you must wait for the whole array of <see cref="T:System.IO.FileInfo" />
 
                 
 
@@ -3522,24 +3384,21 @@
             </item>
           </list>
           <para
-            >Therefore, when you are working with many files and directories, <see
-             cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
+            >Therefore, when you are working with many files and directories, <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />
 
             
 
              can be more efficient.</para
           >
           <para
-            >If there are no files in the <see
-             cref="T:System.IO.DirectoryInfo" />
+            >If there are no files in the <see cref="T:System.IO.DirectoryInfo" />
 
             
 
             , this method returns an empty array.</para
           >
           <para
-            >The following wildcard specifiers are permitted in <paramref
-             name="searchPattern" />
+            >The following wildcard specifiers are permitted in <paramref name="searchPattern" />
 
             
 
@@ -3574,31 +3433,26 @@
             </item>
           </list>
           <para
-            >The order of the returned file names is not guaranteed; use the <see
-             cref="Overload:System.Array.Sort" />
+            >The order of the returned file names is not guaranteed; use the <see cref="Overload:System.Array.Sort" />
 
             
 
              method if a specific sort order is required.</para
           >
           <para
-            >Wildcards are permitted. For example, the <paramref
-             name="searchPattern" />
+            >Wildcards are permitted. For example, the <paramref name="searchPattern" />
 
             
 
-             string "*.txt" searches for all file names having an extension of "txt". The <paramref
-             name="searchPattern" />
+             string "*.txt" searches for all file names having an extension of "txt". The <paramref name="searchPattern" />
 
             
 
-             string "s*" searches for all file names beginning with the letter "s". If there are no files, or no files that match the <paramref
-             name="searchPattern" />
+             string "s*" searches for all file names beginning with the letter "s". If there are no files, or no files that match the <paramref name="searchPattern" />
 
             
 
-             string in the <see
-             cref="T:System.IO.DirectoryInfo" />
+             string in the <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -3606,28 +3460,23 @@
           >
           <block subset="none" type="note">
             <para
-              >When using the asterisk wildcard character in a <paramref
-               name="searchPattern" />
+              >When using the asterisk wildcard character in a <paramref name="searchPattern" />
 
               
 
-               (for example, "*.txt"), the matching behavior varies depending on the length of the specified file extension. A <paramref
-               name="searchPattern" />
+               (for example, "*.txt"), the matching behavior varies depending on the length of the specified file extension. A <paramref name="searchPattern" />
 
               
 
-               with a file extension of exactly three characters returns files with an extension of three or more characters, where the first three characters match the file extension specified in the <paramref
-               name="searchPattern" />
+               with a file extension of exactly three characters returns files with an extension of three or more characters, where the first three characters match the file extension specified in the <paramref name="searchPattern" />
 
               
 
-              . A <paramref
-               name="searchPattern" />
+              . A <paramref name="searchPattern" />
 
               
 
-               with a file extension of one, two, or more than three characters returns only files with extensions of exactly that length that match the file extension specified in the <paramref
-               name="searchPattern" />
+               with a file extension of one, two, or more than three characters returns only files with extensions of exactly that length that match the file extension specified in the <paramref name="searchPattern" />
 
               
 
@@ -3635,8 +3484,7 @@
             >
           </block>
           <para
-            >The following list shows the behavior of different lengths for the <paramref
-             name="searchPattern" />
+            >The following list shows the behavior of different lengths for the <paramref name="searchPattern" />
 
             
 
@@ -3660,8 +3508,7 @@
             <para>Because this method checks against file names with both the 8.3 file name format and the long file name format, a search pattern similar to "*1*.txt" may return unexpected file names. For example, using a search pattern of "*1*.txt" will return "longfilename.txt" because the equivalent 8.3 file name format would be "longf~1.txt".</para>
           </block>
           <para
-            >This method pre-populates the values of the following <see
-             cref="T:System.IO.FileInfo" />
+            >This method pre-populates the values of the following <see cref="T:System.IO.FileInfo" />
 
             
 
@@ -3717,8 +3564,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of type <see
-             cref="T:System.IO.FileInfo" />
+            >An array of type <see cref="T:System.IO.FileInfo" />
 
             
 
@@ -3726,14 +3572,22 @@
           >
         </returns>
         <param name="searchPattern">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The search string to match against the names of files.  This parameter can contain a combination of valid literal path and wildcard (* and ?) characters (see Remarks), but doesn't support regular expressions. The default pattern is "*", which returns all files.</param
         >
         <param name="searchOption">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3764,44 +3618,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If there are no files or directories in the <see
-             cref="T:System.IO.DirectoryInfo" />
+            >If there are no files or directories in the <see cref="T:System.IO.DirectoryInfo" />
 
             
 
             , this method returns an empty array. This method is not recursive.</para
           >
           <para
-            >For subdirectories, the <see
-             cref="T:System.IO.FileSystemInfo" />
+            >For subdirectories, the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
-             objects returned by this method can be cast to the derived class <see
-             cref="T:System.IO.DirectoryInfo" />
+             objects returned by this method can be cast to the derived class <see cref="T:System.IO.DirectoryInfo" />
 
             
 
-            . Use the <see
-             cref="T:System.IO.FileAttributes" />
+            . Use the <see cref="T:System.IO.FileAttributes" />
 
             
 
-             value returned by the <see
-             cref="P:System.IO.FileSystemInfo.Attributes" />
+             value returned by the <see cref="P:System.IO.FileSystemInfo.Attributes" />
 
             
 
-             property to determine whether the <see
-             cref="T:System.IO.FileSystemInfo" />
+             property to determine whether the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
              represents a file or a directory.</para
           >
           <para
-            >This method pre-populates the values of the following <see
-             cref="T:System.IO.FileSystemInfo" />
+            >This method pre-populates the values of the following <see cref="T:System.IO.FileSystemInfo" />
 
             
 
@@ -3848,8 +3695,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of strongly typed <see
-             cref="T:System.IO.FileSystemInfo" />
+            >Returns an array of strongly typed <see cref="T:System.IO.FileSystemInfo" />
 
             
 
@@ -3859,8 +3705,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of strongly typed <see
-             cref="T:System.IO.FileSystemInfo" />
+            >An array of strongly typed <see cref="T:System.IO.FileSystemInfo" />
 
             
 
@@ -3898,8 +3743,7 @@
 
             
 
-             can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
-             name="searchPattern" />
+             can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref name="searchPattern" />
 
             
 
@@ -3934,13 +3778,11 @@
             </item>
           </list>
           <para
-            >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref
-             name="searchPattern" />
+            >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref name="searchPattern" />
 
             
 
-             string "s*" searches for all names in <paramref
-             name="path" />
+             string "s*" searches for all names in <paramref name="path" />
 
             
 
@@ -3948,77 +3790,64 @@
           >
           <para>This method is not recursive.</para>
           <para
-            >For subdirectories, the <see
-             cref="T:System.IO.FileSystemInfo" />
+            >For subdirectories, the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
-             objects returned by this method can be cast to the derived class <see
-             cref="T:System.IO.DirectoryInfo" />
+             objects returned by this method can be cast to the derived class <see cref="T:System.IO.DirectoryInfo" />
 
             
 
-            . Use the <see
-             cref="T:System.IO.FileAttributes" />
+            . Use the <see cref="T:System.IO.FileAttributes" />
 
             
 
-             value returned by the <see
-             cref="P:System.IO.FileSystemInfo.Attributes" />
+             value returned by the <see cref="P:System.IO.FileSystemInfo.Attributes" />
 
             
 
-             property to determine whether the <see
-             cref="T:System.IO.FileSystemInfo" />
+             property to determine whether the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
              represents a file or a directory.</para
           >
           <para
-            >Wild cards are permitted. For example, the <paramref
-             name="searchPattern" />
+            >Wild cards are permitted. For example, the <paramref name="searchPattern" />
 
             
 
-             string "*t" searches for all directory names in <paramref
-             name="path" />
+             string "*t" searches for all directory names in <paramref name="path" />
 
             
 
-             ending with the letter "t". The <paramref
-             name="searchPattern" />
+             ending with the letter "t". The <paramref name="searchPattern" />
 
             
 
-             string "s*" searches for all directory names in <paramref
-             name="path" />
+             string "s*" searches for all directory names in <paramref name="path" />
 
             
 
              beginning with the letter "s".</para
           >
           <para
-            >The string ".." can only be used in <paramref
-             name="searchPattern" />
+            >The string ".." can only be used in <paramref name="searchPattern" />
 
             
 
-             if it is specified as a part of a valid directory name, such as in the directory name "a..b". It cannot be used to move up the directory hierarchy. If there are no files or directories, or no files or directories that match the <paramref
-             name="searchPattern" />
+             if it is specified as a part of a valid directory name, such as in the directory name "a..b". It cannot be used to move up the directory hierarchy. If there are no files or directories, or no files or directories that match the <paramref name="searchPattern" />
 
             
 
-             string in the <see
-             cref="T:System.IO.DirectoryInfo" />
+             string in the <see cref="T:System.IO.DirectoryInfo" />
 
             
 
             , this method returns an empty array.</para
           >
           <para
-            >This method pre-populates the values of the following <see
-             cref="T:System.IO.FileSystemInfo" />
+            >This method pre-populates the values of the following <see cref="T:System.IO.FileSystemInfo" />
 
             
 
@@ -4065,8 +3894,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves an array of strongly typed <see
-             cref="T:System.IO.FileSystemInfo" />
+            >Retrieves an array of strongly typed <see cref="T:System.IO.FileSystemInfo" />
 
             
 
@@ -4078,7 +3906,11 @@
           <para>An array of strongly typed FileSystemInfo objects matching the search criteria.</para>
         </returns>
         <param name="searchPattern">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4114,8 +3946,7 @@
 
             
 
-             can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
-             name="searchPattern" />
+             can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref name="searchPattern" />
 
             
 
@@ -4150,49 +3981,41 @@
             </item>
           </list>
           <para
-            >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref
-             name="searchPattern" />
+            >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref name="searchPattern" />
 
             
 
-             string "s*" searches for all names in <paramref
-             name="path" />
+             string "s*" searches for all names in <paramref name="path" />
 
             
 
              beginning with the letter "s".</para
           >
           <para
-            >For subdirectories, the <see
-             cref="T:System.IO.FileSystemInfo" />
+            >For subdirectories, the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
-             objects returned by this method can be cast to the derived class <see
-             cref="T:System.IO.DirectoryInfo" />
+             objects returned by this method can be cast to the derived class <see cref="T:System.IO.DirectoryInfo" />
 
             
 
-            . Use the <see
-             cref="T:System.IO.FileAttributes" />
+            . Use the <see cref="T:System.IO.FileAttributes" />
 
             
 
-             value returned by the <see
-             cref="P:System.IO.FileSystemInfo.Attributes" />
+             value returned by the <see cref="P:System.IO.FileSystemInfo.Attributes" />
 
             
 
-             property to determine whether the <see
-             cref="T:System.IO.FileSystemInfo" />
+             property to determine whether the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
              represents a file or a directory.</para
           >
           <para
-            >This method pre-populates the values of the following <see
-             cref="T:System.IO.FileSystemInfo" />
+            >This method pre-populates the values of the following <see cref="T:System.IO.FileSystemInfo" />
 
             
 
@@ -4239,8 +4062,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves an array of <see
-             cref="T:System.IO.FileSystemInfo" />
+            >Retrieves an array of <see cref="T:System.IO.FileSystemInfo" />
 
             
 
@@ -4252,19 +4074,26 @@
           <para>An array of file system entries that match the search criteria.</para>
         </returns>
         <param name="searchPattern">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The search string to match against the names of directories and filesa.  This parameter can contain a combination of valid literal path and wildcard (* and ?) characters (see Remarks), but doesn't support regular expressions. The default pattern is "*", which returns all files.</param
         >
         <param name="searchOption">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the enumeration values that specifies whether the search operation should include only the current directory or all subdirectories. The default value is <see
-           cref="F:System.IO.SearchOption.TopDirectoryOnly" />
+          One of the enumeration values that specifies whether the search operation should include only the current directory or all subdirectories. The default value is <see cref="F:System.IO.SearchOption.TopDirectoryOnly" />
 
           
 
@@ -4294,13 +4123,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method throws an <see
-             cref="T:System.IO.IOException" />
+            >This method throws an <see cref="T:System.IO.IOException" />
 
             
 
-             if, for example, you try to move c:\mydir to c:\public, and c:\public already exists. You must specify "c:\\public\\mydir" as the <paramref
-             name="destDirName" />
+             if, for example, you try to move c:\mydir to c:\public, and c:\public already exists. You must specify "c:\\public\\mydir" as the <paramref name="destDirName" />
 
             
 
@@ -4308,8 +4135,7 @@
           >
           <para>This method permits moving a directory to a read-only directory. The read/write attribute of neither directory is affected.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -4321,8 +4147,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Moves a <see
-             cref="T:System.IO.DirectoryInfo" />
+            >Moves a <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -4330,7 +4155,11 @@
           >
         </summary>
         <param name="destDirName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4355,44 +4184,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This <see
-             cref="P:System.IO.DirectoryInfo.Name" />
+            >This <see cref="P:System.IO.DirectoryInfo.Name" />
 
             
 
-             property returns only the name of the directory, such as "Bin". To get the full path, such as "c:\public\Bin", use the <see
-             cref="P:System.IO.FileSystemInfo.FullName" />
+             property returns only the name of the directory, such as "Bin". To get the full path, such as "c:\public\Bin", use the <see cref="P:System.IO.FileSystemInfo.FullName" />
 
             
 
              property.</para
           >
           <para
-            >The <see
-             cref="P:System.IO.DirectoryInfo.Name" />
+            >The <see cref="P:System.IO.DirectoryInfo.Name" />
 
             
 
-             property of a <see
-             cref="T:System.IO.DirectoryInfo" />
+             property of a <see cref="T:System.IO.DirectoryInfo" />
 
             
 
-             requires no permission (beyond the read permission to the directory necessary to construct the <see
-             cref="P:System.IO.DirectoryInfo.Exists" />
+             requires no permission (beyond the read permission to the directory necessary to construct the <see cref="P:System.IO.DirectoryInfo.Exists" />
 
             
 
-            ) but can give out the directory name. If it is necessary to hand out a <see
-             cref="T:System.IO.DirectoryInfo" />
+            ) but can give out the directory name. If it is necessary to hand out a <see cref="T:System.IO.DirectoryInfo" />
 
             
 
              to a protected directory with a cryptographically secure name, create a dummy directory for the untrusted code’s use.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -4404,8 +4226,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of this <see
-             cref="T:System.IO.DirectoryInfo" />
+            >Gets the name of this <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -4434,8 +4255,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -4502,15 +4322,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An access control list (ACL) describes individuals and/or groups who have, or do not have, rights to specific actions on the given file or directory. For more information, see <format
-             type="text/html">
+            >An access control list (ACL) describes individuals and/or groups who have, or do not have, rights to specific actions on the given file or directory. For more information, see <format type="text/html">
               <a href="06fbf66d-6f02-4378-b863-b2f12e349045">ACL Technology Overview</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="53758b39-bd9b-4640-bb04-cad5ed8d0abf"
                 >How to: Add or Remove an Access Control List Entry</a
               >
@@ -4521,8 +4339,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.IO.DirectoryInfo.SetAccessControl(System.Security.AccessControl.DirectorySecurity)" />
+            >The <see cref="M:System.IO.DirectoryInfo.SetAccessControl(System.Security.AccessControl.DirectorySecurity)" />
 
             
 
@@ -4530,13 +4347,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The ACL specified for <paramref
-               name="directorySecurity" />
+              >The ACL specified for <paramref name="directorySecurity" />
 
               
 
-               replaces the existing ACL for the directory. To add permissions for a new user, use the <see
-               cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
+               replaces the existing ACL for the directory. To add permissions for a new user, use the <see cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
 
               
 
@@ -4544,23 +4359,19 @@
             >
           </block>
           <para
-            >The <see
-             cref="M:System.IO.DirectoryInfo.SetAccessControl(System.Security.AccessControl.DirectorySecurity)" />
+            >The <see cref="M:System.IO.DirectoryInfo.SetAccessControl(System.Security.AccessControl.DirectorySecurity)" />
 
             
 
-             method persists only <see
-             cref="T:System.Security.AccessControl.DirectorySecurity" />
+             method persists only <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
             
 
-             objects that have been modified after object creation.  If a <see
-             cref="T:System.Security.AccessControl.DirectorySecurity" />
+             objects that have been modified after object creation.  If a <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
             
 
-             object has not been modified, it will not be persisted to a file.  Therefore, it is not possible to retrieve a <see
-             cref="T:System.Security.AccessControl.DirectorySecurity" />
+             object has not been modified, it will not be persisted to a file.  Therefore, it is not possible to retrieve a <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
             
 
@@ -4570,13 +4381,11 @@
           <list type="ordered">
             <item>
               <para
-                >Use the <see
-                 cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
+                >Use the <see cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
 
                 
 
-                 method to retrieve the <see
-                 cref="T:System.Security.AccessControl.DirectorySecurity" />
+                 method to retrieve the <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
                 
 
@@ -4585,8 +4394,7 @@
             </item>
             <item>
               <para
-                >Create a new <see
-                 cref="T:System.Security.AccessControl.DirectorySecurity" />
+                >Create a new <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
                 
 
@@ -4595,18 +4403,15 @@
             </item>
             <item>
               <para
-                >Use the <see
-                 cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorBinaryForm" />
+                >Use the <see cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorBinaryForm" />
 
                 
 
-                 or <see
-                 cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections)" />
+                 or <see cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections)" />
 
                 
 
-                 method of the source <see
-                 cref="T:System.Security.AccessControl.DirectorySecurity" />
+                 method of the source <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
                 
 
@@ -4615,18 +4420,15 @@
             </item>
             <item>
               <para
-                >Use the <see
-                 cref="M:System.Security.AccessControl.ObjectSecurity.SetSecurityDescriptorBinaryForm(System.Byte[])" />
+                >Use the <see cref="M:System.Security.AccessControl.ObjectSecurity.SetSecurityDescriptorBinaryForm(System.Byte[])" />
 
                 
 
-                 or <see
-                 cref="M:System.Security.AccessControl.ObjectSecurity.SetSecurityDescriptorSddlForm(System.String)" />
+                 or <see cref="M:System.Security.AccessControl.ObjectSecurity.SetSecurityDescriptorSddlForm(System.String)" />
 
                 
 
-                 method to copy the information retrieved in step 3 to the destination <see
-                 cref="T:System.Security.AccessControl.DirectorySecurity" />
+                 method to copy the information retrieved in step 3 to the destination <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
                 
 
@@ -4635,13 +4437,11 @@
             </item>
             <item>
               <para
-                >Set the destination <see
-                 cref="T:System.Security.AccessControl.DirectorySecurity" />
+                >Set the destination <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
                 
 
-                 object to the destination file using the <see
-                 cref="M:System.IO.DirectoryInfo.SetAccessControl(System.Security.AccessControl.DirectorySecurity)" />
+                 object to the destination file using the <see cref="M:System.IO.DirectoryInfo.SetAccessControl(System.Security.AccessControl.DirectorySecurity)" />
 
                 
 
@@ -4653,13 +4453,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies access control list (ACL) entries described by a <see
-             cref="T:System.Security.AccessControl.DirectorySecurity" />
+            >Applies access control list (ACL) entries described by a <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
             
 
-             object to the directory described by the current <see
-             cref="T:System.IO.DirectoryInfo" />
+             object to the directory described by the current <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -4667,12 +4465,15 @@
           >
         </summary>
         <param name="directorySecurity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that describes an ACL entry to apply to the directory described by the <paramref
-           name="path" />
+          An object that describes an ACL entry to apply to the directory described by the <paramref name="path" />
 
           
 

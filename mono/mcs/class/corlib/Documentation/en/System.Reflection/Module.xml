@@ -53,8 +53,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>A module is a portable executable file, such as type.dll or application.exe, consisting of one or more classes and interfaces. There may be multiple namespaces contained in a single module, and a namespace may span multiple modules.</para>
       <para
-        >One or more modules deployed as a unit compose an assembly. For information about creating an assembly with more than one module, see <format
-         type="text/html">
+        >One or more modules deployed as a unit compose an assembly. For information about creating an assembly with more than one module, see <format type="text/html">
           <a href="13509e73-db77-4645-8165-aad8dfaedff6">Multifile Assemblies</a>
         </format>
 
@@ -85,8 +84,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is invoked by derived classes during the construction of <see
-             cref="T:System.Reflection.Module" />
+            >This constructor is invoked by derived classes during the construction of <see cref="T:System.Reflection.Module" />
 
             
 
@@ -96,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.Module" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.Module" />
 
             
 
@@ -132,8 +129,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Reflection.Assembly" />
+            >A <see cref="T:System.Reflection.Assembly" />
 
             
 
@@ -147,13 +143,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the appropriate <see
-             cref="T:System.Reflection.Assembly" />
+            >Gets the appropriate <see cref="T:System.Reflection.Assembly" />
 
             
 
-             for this instance of <see
-             cref="T:System.Reflection.Module" />
+             for this instance of <see cref="T:System.Reflection.Module" />
 
             
 
@@ -214,8 +208,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="o" />
+            >true if <paramref name="o" />
 
             
 
@@ -223,7 +216,11 @@
           >
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -324,28 +321,23 @@
              is a special class load exception. The ReflectionTypeLoadException.Types property contains the array of classes that were defined in the module and were loaded. This array may contain some null values. The ReflectionTypeLoadException.LoaderExceptions property is an array of exceptions that represent the exceptions that were thrown by the class loader. The holes in the class array line up with the exceptions.</para
           >
           <para
-            >The delegate given by <paramref
-             name="filter" />
+            >The delegate given by <paramref name="filter" />
 
             
 
-             is called for each class in the module, passing along the Type object representing the class as well as the given <paramref
-             name="filterCriteria" />
+             is called for each class in the module, passing along the Type object representing the class as well as the given <paramref name="filterCriteria" />
 
             
 
-            . If <paramref
-             name="filter" />
+            . If <paramref name="filter" />
 
             
 
-             returns a particular class, that class will be included in the returned array. If <paramref
-             name="filter" />
+             returns a particular class, that class will be included in the returned array. If <paramref name="filter" />
 
             
 
-             returns null, all classes are returned and <paramref
-             name="filterCriteria" />
+             returns null, all classes are returned and <paramref name="filterCriteria" />
 
             
 
@@ -362,14 +354,22 @@
           <para>An array of type Type containing classes that were accepted by the filter.</para>
         </returns>
         <param name="filter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The delegate used to filter the classes. </param
         >
         <param name="filterCriteria">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -397,16 +397,14 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
              that represents
    the full path of the module reflected by the current instance. If the assembly
    that contains the module reflected by the current instance was loaded from
-   a <see
-             cref="T:System.Byte" />
+   a <see cref="T:System.Byte" />
 
             
 
@@ -418,13 +416,11 @@
         </value>
         <permission cref="T:System.Security.Permissions.FileIOPermission">
           <para
-            >Requires permission to access path information. See <see
-             cref="T:System.Security.Permissions.FileIOPermission" />
+            >Requires permission to access path information. See <see cref="T:System.Security.Permissions.FileIOPermission" />
 
             
 
              and <see
-
               cref="F:System.Security.Permissions.FileIOPermissionAccess.PathDiscovery"
               qualify="true"
             />
@@ -437,8 +433,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To get the name without the path, use <see
-             cref="P:System.Reflection.Module.Name" />
+            >To get the name without the path, use <see cref="P:System.Reflection.Module.Name" />
 
             
 
@@ -488,7 +483,11 @@
           <para>An array of type Object containing all custom attributes.</para>
         </returns>
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -529,14 +528,22 @@
           <para>An array of type Object containing all custom attributes of the specified type.</para>
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of attribute to get. </param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -565,18 +572,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to examine the custom attributes of code in the reflection-only context, in cases where the custom attributes themselves are defined in code that is loaded into the reflection-only context. Methods such as <see
-             cref="Overload:System.Attribute.GetCustomAttributes" />
+            >Use this method to examine the custom attributes of code in the reflection-only context, in cases where the custom attributes themselves are defined in code that is loaded into the reflection-only context. Methods such as <see cref="Overload:System.Attribute.GetCustomAttributes" />
 
             
 
-             and <see
-             cref="Overload:System.Reflection.Module.GetCustomAttributes" />
+             and <see cref="Overload:System.Reflection.Module.GetCustomAttributes" />
 
             
 
-             cannot be used in such cases, because they create instances of the attributes. Code in the reflection-only context cannot be executed. For more information and example code, see the <see
-             cref="T:System.Reflection.CustomAttributeData" />
+             cannot be used in such cases, because they create instances of the attributes. Code in the reflection-only context cannot be executed. For more information and example code, see the <see cref="T:System.Reflection.CustomAttributeData" />
 
             
 
@@ -586,8 +590,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a list of <see
-             cref="T:System.Reflection.CustomAttributeData" />
+            >Returns a list of <see cref="T:System.Reflection.CustomAttributeData" />
 
             
 
@@ -597,8 +600,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A generic list of <see
-             cref="T:System.Reflection.CustomAttributeData" />
+            >A generic list of <see cref="T:System.Reflection.CustomAttributeData" />
 
             
 
@@ -646,8 +648,7 @@
 
           
 
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
@@ -662,7 +663,11 @@
           <para>A FieldInfo object having the specified name, or null if the field does not exist.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -711,8 +716,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -727,14 +731,22 @@
           <para>A FieldInfo object having the specified name and binding attributes, or null if the field does not exist.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The field name. </param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -767,8 +779,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Reflection.Module.GetFields" />
+            >The <see cref="M:System.Reflection.Module.GetFields" />
 
             
 
@@ -782,8 +793,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Reflection.FieldInfo" />
+            >An array of <see cref="T:System.Reflection.FieldInfo" />
 
             
 
@@ -818,8 +828,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Reflection.Module.GetFields" />
+            >The <see cref="M:System.Reflection.Module.GetFields" />
 
             
 
@@ -833,8 +842,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of type <see
-             cref="T:System.Reflection.FieldInfo" />
+            >An array of type <see cref="T:System.Reflection.FieldInfo" />
 
             
 
@@ -842,12 +850,15 @@
           >
         </returns>
         <param name="bindingFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Reflection.BindingFlags" />
+          A bitwise combination of <see cref="T:System.Reflection.BindingFlags" />
 
           
 
@@ -920,8 +931,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -936,7 +946,11 @@
           <para>A MethodInfo object having the specified name, or null if the method does not exist.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -986,8 +1000,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -999,8 +1012,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -1008,13 +1020,11 @@
           >
           <para>-or-</para>
           <para
-            > At least one element of <paramref
-             name="types" />
+            > At least one element of <paramref name="types" />
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -1030,14 +1040,22 @@
           <para>A MethodInfo object in accordance with the specified criteria, or null if the method does not exist.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The method name. </param
         >
         <param name="types">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1083,42 +1101,66 @@
           <para>A MethodInfo object in accordance with the specified criteria, or null if the method does not exist.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The method name. </param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           One of the BindingFlags bit flags used to control the search. </param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object that implements Binder, containing properties related to this method. </param
         >
         <param name="callConvention">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The calling convention for the method. </param
         >
         <param name="types">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The parameter types to search for. </param
         >
         <param name="modifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1163,42 +1205,66 @@
           <para>A MethodInfo object containing implementation information as specified, or null if the method does not exist.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The method name. </param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           One of the BindingFlags bit flags used to control the search. </param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object that implements Binder, containing properties related to this method. </param
         >
         <param name="callConvention">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The calling convention for the method. </param
         >
         <param name="types">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The parameter types to search for. </param
         >
         <param name="modifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1242,8 +1308,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Reflection.MethodInfo" />
+            >An array of <see cref="T:System.Reflection.MethodInfo" />
 
             
 
@@ -1289,8 +1354,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of type <see
-             cref="T:System.Reflection.MethodInfo" />
+            >An array of type <see cref="T:System.Reflection.MethodInfo" />
 
             
 
@@ -1298,12 +1362,15 @@
           >
         </returns>
         <param name="bindingFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Reflection.BindingFlags" />
+          A bitwise combination of <see cref="T:System.Reflection.BindingFlags" />
 
           
 
@@ -1338,8 +1405,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides an <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+            >Provides an <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
@@ -1347,14 +1413,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The information and data needed to serialize or deserialize an object. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1454,8 +1528,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >If the type has been forwarded to another assembly, it is still returned by this method. For information on type forwarding, see <format
-               type="text/html">
+              >If the type has been forwarded to another assembly, it is still returned by this method. For information on type forwarding, see <format type="text/html">
                 <a href="51f8ffa3-c253-4201-a3d3-c4fad85ae097"
                   >Type Forwarding in the Common Language Runtime</a
                 >
@@ -1467,18 +1540,15 @@
             >
           </block>
           <para
-            >A type can be retrieved from a specific module using <see
-             cref="M:System.Reflection.Module.GetType(System.String,System.Boolean)" />
+            >A type can be retrieved from a specific module using <see cref="M:System.Reflection.Module.GetType(System.String,System.Boolean)" />
 
             
 
-            . Calling <see
-             cref="M:System.Reflection.Module.GetType(System.String,System.Boolean)" />
+            . Calling <see cref="M:System.Reflection.Module.GetType(System.String,System.Boolean)" />
 
             
 
-             on the module that contains the manifest will not search the entire assembly. To retrieve a type from an assembly, regardless of which module it is in, you must call <see
-             cref="Overload:System.Reflection.Assembly.GetType" />
+             on the module that contains the manifest will not search the entire assembly. To retrieve a type from an assembly, regardless of which module it is in, you must call <see cref="Overload:System.Reflection.Assembly.GetType" />
 
             
 
@@ -1494,7 +1564,11 @@
           <para>A Type object representing the given type, if the type is in this module; otherwise, null.</para>
         </returns>
         <param name="className">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1534,8 +1608,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >If the type has been forwarded to another assembly, it is still returned by this method. For information on type forwarding, see <format
-               type="text/html">
+              >If the type has been forwarded to another assembly, it is still returned by this method. For information on type forwarding, see <format type="text/html">
                 <a href="51f8ffa3-c253-4201-a3d3-c4fad85ae097"
                   >Type Forwarding in the Common Language Runtime</a
                 >
@@ -1547,18 +1620,15 @@
             >
           </block>
           <para
-            >A type can be retrieved from a specific module using <see
-             cref="M:System.Reflection.Module.GetType(System.String,System.Boolean)" />
+            >A type can be retrieved from a specific module using <see cref="M:System.Reflection.Module.GetType(System.String,System.Boolean)" />
 
             
 
-            . Calling <see
-             cref="M:System.Reflection.Module.GetType(System.String,System.Boolean)" />
+            . Calling <see cref="M:System.Reflection.Module.GetType(System.String,System.Boolean)" />
 
             
 
-             on the module that contains the manifest will not search the entire assembly. To retrieve a type from an assembly, regardless of which module it is in, you must call <see
-             cref="Overload:System.Reflection.Assembly.GetType" />
+             on the module that contains the manifest will not search the entire assembly. To retrieve a type from an assembly, regardless of which module it is in, you must call <see cref="Overload:System.Reflection.Assembly.GetType" />
 
             
 
@@ -1574,14 +1644,22 @@
           <para>A Type object representing the given type, if the type is in this module; otherwise, null.</para>
         </returns>
         <param name="className">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the type to locate. The name must be fully qualified with the namespace. </param
         >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1621,18 +1699,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="throwOnError" />
+            >The <paramref name="throwOnError" />
 
             
 
-             parameter affects only what happens when the type is not found. It does not affect any other exceptions that might be thrown. In particular, if the type is found but cannot be loaded, <see
-             cref="T:System.TypeLoadException" />
+             parameter affects only what happens when the type is not found. It does not affect any other exceptions that might be thrown. In particular, if the type is found but cannot be loaded, <see cref="T:System.TypeLoadException" />
 
             
 
-             can be thrown even if <paramref
-             name="throwOnError" />
+             can be thrown even if <paramref name="throwOnError" />
 
             
 
@@ -1640,8 +1715,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If the type has been forwarded to another assembly, it is still returned by this method. For information on type forwarding, see <format
-               type="text/html">
+              >If the type has been forwarded to another assembly, it is still returned by this method. For information on type forwarding, see <format type="text/html">
                 <a href="51f8ffa3-c253-4201-a3d3-c4fad85ae097"
                   >Type Forwarding in the Common Language Runtime</a
                 >
@@ -1653,18 +1727,15 @@
             >
           </block>
           <para
-            >A type can be retrieved from a specific module using <see
-             cref="M:System.Reflection.Module.GetType(System.String,System.Boolean)" />
+            >A type can be retrieved from a specific module using <see cref="M:System.Reflection.Module.GetType(System.String,System.Boolean)" />
 
             
 
-            . Calling <see
-             cref="M:System.Reflection.Module.GetType(System.String,System.Boolean)" />
+            . Calling <see cref="M:System.Reflection.Module.GetType(System.String,System.Boolean)" />
 
             
 
-             on the module that contains the manifest will not search the entire assembly. To retrieve a type from an assembly, regardless of which module it is in, you must call <see
-             cref="Overload:System.Reflection.Assembly.GetType" />
+             on the module that contains the manifest will not search the entire assembly. To retrieve a type from an assembly, regardless of which module it is in, you must call <see cref="Overload:System.Reflection.Assembly.GetType" />
 
             
 
@@ -1678,8 +1749,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Type" />
+            >A <see cref="T:System.Type" />
 
             
 
@@ -1687,21 +1757,33 @@
           >
         </returns>
         <param name="className">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the type to locate. The name must be fully qualified with the namespace. </param
         >
         <param name="throwOnError">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to throw an exception if the type cannot be found; false to return null. </param
         >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1732,8 +1814,7 @@
           <para>For example, if the class initializers of one of the classes throws an exception while it is being loaded, a TargetInvocationException is stored in the corresponding element of the LoaderExceptions array.</para>
           <block subset="none" type="note">
             <para
-              >If a type has been forwarded to another assembly, it is not included in the returned array. For information on type forwarding, see <format
-               type="text/html">
+              >If a type has been forwarded to another assembly, it is not included in the returned array. For information on type forwarding, see <format type="text/html">
                 <a href="51f8ffa3-c253-4201-a3d3-c4fad85ae097"
                   >Type Forwarding in the Common Language Runtime</a
                 >
@@ -1786,8 +1867,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if one or more instances of <paramref
-             name="attributeType" />
+            >true if one or more instances of <paramref name="attributeType" />
 
             
 
@@ -1795,14 +1875,22 @@
           >
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of custom attribute to test for. </param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1857,14 +1945,14 @@
           <block subset="none" type="note">
             <para
               >For more information on the metadata header, see "Partition II: Metadata Definition and Semantics" in the Common Language Infrastructure (CLI) documentation. The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -1897,8 +1985,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The tokens obtained using this property can be passed to the unmanaged Reflection API. For more information, see <format
-             type="text/html">
+            >The tokens obtained using this property can be passed to the unmanaged Reflection API. For more information, see <format type="text/html">
               <a href="0c5bb9de-0cf6-438d-ba47-134e6c775fb8">The Unmanaged Reflection API</a>
             </format>
 
@@ -1909,14 +1996,14 @@
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -1976,8 +2063,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In unmanaged metadata, the GUID returned by the <see
-             cref="P:System.Reflection.Module.ModuleVersionId" />
+            >In unmanaged metadata, the GUID returned by the <see cref="P:System.Reflection.Module.ModuleVersionId" />
 
             
 
@@ -1986,14 +2072,14 @@
           <block subset="none" type="note">
             <para
               >More information about metadata can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -2029,16 +2115,14 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
              containing the 
    name of the module reflected by the current instance, with the path component
    removed. If the assembly that contains the module reflected by the current
-   instance was loaded from a <see
-             cref="T:System.Byte" />
+   instance was loaded from a <see cref="T:System.Byte" />
 
             
 
@@ -2052,8 +2136,7 @@
           <para>Name is a platform-dependent string.</para>
           <para>If the assembly for this module was loaded from a byte array then the FullyQualifiedName for the module will be: &lt;Unknown&gt;.</para>
           <para
-            >To get the name and the path, use <see
-             cref="P:System.Reflection.Module.FullyQualifiedName" />
+            >To get the name and the path, use <see cref="P:System.Reflection.Module.FullyQualifiedName" />
 
             
 
@@ -2092,8 +2175,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether two <see
-             cref="T:System.Reflection.Module" />
+            >Indicates whether two <see cref="T:System.Reflection.Module" />
 
             
 
@@ -2103,13 +2185,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="left" />
+            >true if <paramref name="left" />
 
             
 
-             is equal to <paramref
-             name="right" />
+             is equal to <paramref name="right" />
 
             
 
@@ -2117,14 +2197,22 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first object to compare. </param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2157,8 +2245,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether two <see
-             cref="T:System.Reflection.Module" />
+            >Indicates whether two <see cref="T:System.Reflection.Module" />
 
             
 
@@ -2168,13 +2255,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="left" />
+            >true if <paramref name="left" />
 
             
 
-             is not equal to <paramref
-             name="right" />
+             is not equal to <paramref name="right" />
 
             
 
@@ -2182,14 +2267,22 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first object to compare.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2222,8 +2315,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To resolve a metadata token that identifies a field whose parent TypeSpec has a signature containing element type ELEMENT_TYPE_VAR or ELEMENT_TYPE_MVAR, use the <see
-             cref="M:System.Reflection.Module.ResolveField(System.Int32,System.Type[],System.Type[])" />
+            >To resolve a metadata token that identifies a field whose parent TypeSpec has a signature containing element type ELEMENT_TYPE_VAR or ELEMENT_TYPE_MVAR, use the <see cref="M:System.Reflection.Module.ResolveField(System.Int32,System.Type[],System.Type[])" />
 
             
 
@@ -2232,14 +2324,14 @@
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -2249,8 +2341,7 @@
             >
           </block>
           <para
-            >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see
-             cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
+            >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
 
             
 
@@ -2264,8 +2355,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.FieldInfo" />
+            >A <see cref="T:System.Reflection.FieldInfo" />
 
             
 
@@ -2273,7 +2363,11 @@
           >
         </returns>
         <param name="metadataToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2307,33 +2401,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Type.GetGenericArguments" />
+            >Use the <see cref="M:System.Type.GetGenericArguments" />
 
             
 
-             method on the type where <paramref
-             name="metadataToken" />
+             method on the type where <paramref name="metadataToken" />
 
             
 
-             is in scope to obtain an array of generic type arguments for <paramref
-             name="genericTypeArguments" />
+             is in scope to obtain an array of generic type arguments for <paramref name="genericTypeArguments" />
 
             
 
-            . Use the <see
-             cref="M:System.Reflection.MethodInfo.GetGenericArguments" />
+            . Use the <see cref="M:System.Reflection.MethodInfo.GetGenericArguments" />
 
             
 
-             method on the method where <paramref
-             name="metadataToken" />
+             method on the method where <paramref name="metadataToken" />
 
             
 
-             is in scope to obtain an array of generic type arguments for <paramref
-             name="genericTypeArguments" />
+             is in scope to obtain an array of generic type arguments for <paramref name="genericTypeArguments" />
 
             
 
@@ -2342,14 +2430,14 @@
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -2359,8 +2447,7 @@
             >
           </block>
           <para
-            >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see
-             cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
+            >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
 
             
 
@@ -2374,8 +2461,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.FieldInfo" />
+            >A <see cref="T:System.Reflection.FieldInfo" />
 
             
 
@@ -2383,31 +2469,41 @@
           >
         </returns>
         <param name="metadataToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A metadata token that identifies a field in the module.</param
         >
         <param name="genericTypeArguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Type" />
+          An array of <see cref="T:System.Type" />
 
           
 
            objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param
         >
         <param name="genericMethodArguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Type" />
+          An array of <see cref="T:System.Type" />
 
           
 
@@ -2440,8 +2536,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To resolve a metadata token for a MethodSpec or TypeSpec whose signature contains element type ELEMENT_TYPE_VAR or ELEMENT_TYPE_MVAR, use the <see
-             cref="M:System.Reflection.Module.ResolveMember(System.Int32,System.Type[],System.Type[])" />
+            >To resolve a metadata token for a MethodSpec or TypeSpec whose signature contains element type ELEMENT_TYPE_VAR or ELEMENT_TYPE_MVAR, use the <see cref="M:System.Reflection.Module.ResolveMember(System.Int32,System.Type[],System.Type[])" />
 
             
 
@@ -2450,14 +2545,14 @@
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -2467,8 +2562,7 @@
             >
           </block>
           <para
-            >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see
-             cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
+            >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
 
             
 
@@ -2482,8 +2576,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.MemberInfo" />
+            >A <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -2491,7 +2584,11 @@
           >
         </returns>
         <param name="metadataToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2525,33 +2622,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Type.GetGenericArguments" />
+            >Use the <see cref="M:System.Type.GetGenericArguments" />
 
             
 
-             method on the type where <paramref
-             name="metadataToken" />
+             method on the type where <paramref name="metadataToken" />
 
             
 
-             is in scope to obtain an array of generic type arguments for <paramref
-             name="genericTypeArguments" />
+             is in scope to obtain an array of generic type arguments for <paramref name="genericTypeArguments" />
 
             
 
-            . Use the <see
-             cref="M:System.Reflection.MethodInfo.GetGenericArguments" />
+            . Use the <see cref="M:System.Reflection.MethodInfo.GetGenericArguments" />
 
             
 
-             method on the method where <paramref
-             name="metadataToken" />
+             method on the method where <paramref name="metadataToken" />
 
             
 
-             is in scope to obtain an array of generic type arguments for <paramref
-             name="genericTypeArguments" />
+             is in scope to obtain an array of generic type arguments for <paramref name="genericTypeArguments" />
 
             
 
@@ -2560,14 +2651,14 @@
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -2577,8 +2668,7 @@
             >
           </block>
           <para
-            >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see
-             cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
+            >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
 
             
 
@@ -2592,8 +2682,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.MemberInfo" />
+            >A <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -2601,31 +2690,41 @@
           >
         </returns>
         <param name="metadataToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A metadata token that identifies a type or member in the module.</param
         >
         <param name="genericTypeArguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Type" />
+          An array of <see cref="T:System.Type" />
 
           
 
            objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param
         >
         <param name="genericMethodArguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Type" />
+          An array of <see cref="T:System.Type" />
 
           
 
@@ -2658,8 +2757,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To resolve a metadata token for a MethodSpec whose signature contains element type ELEMENT_TYPE_VAR or ELEMENT_TYPE_MVAR, use the <see
-             cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
+            >To resolve a metadata token for a MethodSpec whose signature contains element type ELEMENT_TYPE_VAR or ELEMENT_TYPE_MVAR, use the <see cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
 
             
 
@@ -2668,14 +2766,14 @@
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -2692,8 +2790,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.MethodBase" />
+            >A <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -2701,7 +2798,11 @@
           >
         </returns>
         <param name="metadataToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2735,33 +2836,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Type.GetGenericArguments" />
+            >Use the <see cref="M:System.Type.GetGenericArguments" />
 
             
 
-             method on the type where <paramref
-             name="metadataToken" />
+             method on the type where <paramref name="metadataToken" />
 
             
 
-             is in scope to obtain an array of generic type arguments for <paramref
-             name="genericTypeArguments" />
+             is in scope to obtain an array of generic type arguments for <paramref name="genericTypeArguments" />
 
             
 
-            . Use the <see
-             cref="M:System.Reflection.MethodInfo.GetGenericArguments" />
+            . Use the <see cref="M:System.Reflection.MethodInfo.GetGenericArguments" />
 
             
 
-             method on the method where <paramref
-             name="metadataToken" />
+             method on the method where <paramref name="metadataToken" />
 
             
 
-             is in scope to obtain an array of generic type arguments for <paramref
-             name="genericMethodArguments" />
+             is in scope to obtain an array of generic type arguments for <paramref name="genericMethodArguments" />
 
             
 
@@ -2770,14 +2865,14 @@
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -2794,8 +2889,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.MethodBase" />
+            >A <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -2803,31 +2897,41 @@
           >
         </returns>
         <param name="metadataToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A metadata token that identifies a method or constructor in the module.</param
         >
         <param name="genericTypeArguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Type" />
+          An array of <see cref="T:System.Type" />
 
           
 
            objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param
         >
         <param name="genericMethodArguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Type" />
+          An array of <see cref="T:System.Type" />
 
           
 
@@ -2862,14 +2966,14 @@
           <block subset="none" type="note">
             <para
               >Information about metadata tokens and signatures can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -2888,7 +2992,11 @@
           <para>An array of bytes representing the signature blob.</para>
         </returns>
         <param name="metadataToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2923,14 +3031,14 @@
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -2947,8 +3055,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -2956,7 +3063,11 @@
           >
         </returns>
         <param name="metadataToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2986,8 +3097,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To resolve a metadata token for a TypeSpec whose signature contains ELEMENT_TYPE_VAR or ELEMENT_TYPE_MVAR, use the <see
-             cref="M:System.Reflection.Module.ResolveType(System.Int32,System.Type[],System.Type[])" />
+            >To resolve a metadata token for a TypeSpec whose signature contains ELEMENT_TYPE_VAR or ELEMENT_TYPE_MVAR, use the <see cref="M:System.Reflection.Module.ResolveType(System.Int32,System.Type[],System.Type[])" />
 
             
 
@@ -2996,14 +3106,14 @@
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -3020,8 +3130,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Type" />
+            >A <see cref="T:System.Type" />
 
             
 
@@ -3029,7 +3138,11 @@
           >
         </returns>
         <param name="metadataToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3063,33 +3176,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Type.GetGenericArguments" />
+            >Use the <see cref="M:System.Type.GetGenericArguments" />
 
             
 
-             method on the type where <paramref
-             name="metadataToken" />
+             method on the type where <paramref name="metadataToken" />
 
             
 
-             is in scope to obtain an array of generic type arguments for <paramref
-             name="genericTypeArguments" />
+             is in scope to obtain an array of generic type arguments for <paramref name="genericTypeArguments" />
 
             
 
-            . Use the <see
-             cref="M:System.Reflection.MethodInfo.GetGenericArguments" />
+            . Use the <see cref="M:System.Reflection.MethodInfo.GetGenericArguments" />
 
             
 
-             method on the method where <paramref
-             name="metadataToken" />
+             method on the method where <paramref name="metadataToken" />
 
             
 
-             is in scope to obtain an array of generic type arguments for <paramref
-             name="genericTypeArguments" />
+             is in scope to obtain an array of generic type arguments for <paramref name="genericTypeArguments" />
 
             
 
@@ -3098,14 +3205,14 @@
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -3115,8 +3222,7 @@
             >
           </block>
           <para
-            >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see
-             cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
+            >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
 
             
 
@@ -3130,8 +3236,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Type" />
+            >A <see cref="T:System.Type" />
 
             
 
@@ -3139,31 +3244,41 @@
           >
         </returns>
         <param name="metadataToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A metadata token that identifies a type in the module.</param
         >
         <param name="genericTypeArguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Type" />
+          An array of <see cref="T:System.Type" />
 
           
 
            objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param
         >
         <param name="genericMethodArguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Type" />
+          An array of <see cref="T:System.Type" />
 
           
 
@@ -3257,8 +3372,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference
-            >IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
+            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
 
             
 
@@ -3270,21 +3384,33 @@
           <para>Retrieves the type information for an object, which can then be used to get the type information for an interface.</para>
         </summary>
         <param name="iTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type information to return.</param
         >
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3383,7 +3509,9 @@
             <block subset="none" type="note"
               >This method
       overrides <see
-               cref="M:System.Object.ToString" qualify="true" />
+                cref="M:System.Object.ToString"
+                qualify="true"
+              />
 
               
 

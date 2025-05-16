@@ -30,18 +30,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.Contexts.IContextPropertyActivator" />
+        >The <see cref="T:System.Runtime.Remoting.Contexts.IContextPropertyActivator" />
 
         
 
-         interface is exposed on all <see
-         cref="T:System.Runtime.Remoting.Contexts.Context" />
+         interface is exposed on all <see cref="T:System.Runtime.Remoting.Contexts.Context" />
 
         
 
-         properties that are interested in participating in activation and that might have not provided a message sink. Client <see
-         cref="T:System.Runtime.Remoting.Contexts.Context" />
+         properties that are interested in participating in activation and that might have not provided a message sink. Client <see cref="T:System.Runtime.Remoting.Contexts.Context" />
 
         
 
@@ -52,8 +49,7 @@
 
         
 
-         is also used to collect information from the client and server context property and to deliver information from the server context properties to the client context properties when returning to the client <see
-         cref="T:System.Runtime.Remoting.Contexts.Context" />
+         is also used to collect information from the client and server context property and to deliver information from the server context properties to the client context properties when returning to the client <see cref="T:System.Runtime.Remoting.Contexts.Context" />
 
         
 
@@ -91,8 +87,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The context property can examine and manipulate the contents of the <see
-             cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+            >The context property can examine and manipulate the contents of the <see cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
 
             
 
@@ -104,12 +99,15 @@
           <para>Called on each client context property that has this interface, before the construction request leaves the client.</para>
         </summary>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+          An <see cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
 
           
 
@@ -145,8 +143,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The context property can examine and manipulate the contents of the <see
-             cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
+            >The context property can examine and manipulate the contents of the <see cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
 
             
 
@@ -158,12 +155,15 @@
           <para>Called on each server context property that has this interface, before the construction response leaves the server for the client.</para>
         </summary>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
+          An <see cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
 
           
 
@@ -196,13 +196,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current method is called on each server context property that implements the <see
-             cref="T:System.Runtime.Remoting.Contexts.IContextPropertyActivator" />
+            >The current method is called on each server context property that implements the <see cref="T:System.Runtime.Remoting.Contexts.IContextPropertyActivator" />
 
             
 
-             interface when a construction request arrives at a server. This allows the context property to examine the contents of each <see
-             cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+             interface when a construction request arrives at a server. This allows the context property to examine the contents of each <see cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
 
             
 
@@ -218,12 +216,15 @@
           <para>true if successful; otherwise, false.</para>
         </returns>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+          An <see cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
 
           
 
@@ -259,8 +260,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The context property can examine the contents of the <see
-             cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
+            >The context property can examine the contents of the <see cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
 
             
 
@@ -276,12 +276,15 @@
           <para>true if successful; otherwise, false.</para>
         </returns>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
+          An <see cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
 
           
 
@@ -315,8 +318,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether it is all right to activate the object type indicated in the <paramref
-             name="msg" />
+            >Indicates whether it is all right to activate the object type indicated in the <paramref name="msg" />
 
             
 
@@ -328,12 +330,15 @@
           <para>A Boolean value indicating whether the requested type can be activated.</para>
         </returns>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+          An <see cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
 
           
 

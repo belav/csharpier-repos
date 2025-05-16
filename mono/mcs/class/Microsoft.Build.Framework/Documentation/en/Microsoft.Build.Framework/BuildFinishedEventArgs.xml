@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:Microsoft.Build.Framework.IEventSource.BuildFinished" />
+        >Provides data for the <see cref="E:Microsoft.Build.Framework.IEventSource.BuildFinished" />
 
         
 
@@ -38,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.Framework.BuildFinishedEventArgs" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.BuildFinishedEventArgs" />
 
             
 
@@ -68,23 +66,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.Framework.BuildFinishedEventArgs" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.BuildFinishedEventArgs" />
 
             
 
-             class with the specified <see
-             cref="P:Microsoft.Build.Framework.BuildEventArgs.Message" />
+             class with the specified <see cref="P:Microsoft.Build.Framework.BuildEventArgs.Message" />
 
             
 
-            , <see
-             cref="P:Microsoft.Build.Framework.BuildEventArgs.HelpKeyword" />
+            , <see cref="P:Microsoft.Build.Framework.BuildEventArgs.HelpKeyword" />
 
             
 
-            , and <see
-             cref="P:Microsoft.Build.Framework.BuildFinishedEventArgs.Succeeded" />
+            , and <see cref="P:Microsoft.Build.Framework.BuildFinishedEventArgs.Succeeded" />
 
             
 
@@ -92,21 +86,33 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text of the event.</param
         >
         <param name="helpKeyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The Help keyword associated with the event.</param
         >
         <param name="succeeded">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

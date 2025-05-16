@@ -16,46 +16,38 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.Data.DesignerDataStoredProcedure" />
+        >The <see cref="T:System.ComponentModel.Design.Data.DesignerDataStoredProcedure" />
 
         
 
-         class is one of several types that represent the schema of a data store at design-time. These schema items are made available to controls by designers implementing the <see
-         cref="T:System.ComponentModel.Design.Data.IDataEnvironment" />
+         class is one of several types that represent the schema of a data store at design-time. These schema items are made available to controls by designers implementing the <see cref="T:System.ComponentModel.Design.Data.IDataEnvironment" />
 
         
 
-         interface. Controls access schema objects by calling the <see
-         cref="M:System.ComponentModel.Design.Data.IDataEnvironment.GetConnectionSchema(System.ComponentModel.Design.Data.DesignerDataConnection)" />
+         interface. Controls access schema objects by calling the <see cref="M:System.ComponentModel.Design.Data.IDataEnvironment.GetConnectionSchema(System.ComponentModel.Design.Data.DesignerDataConnection)" />
 
         
 
          method of the interface.</para
       >
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.Data.DesignerDataStoredProcedure" />
+        >The <see cref="T:System.ComponentModel.Design.Data.DesignerDataStoredProcedure" />
 
         
 
-         class represents a single table in the data store. A collection of <see
-         cref="T:System.ComponentModel.Design.Data.DesignerDataStoredProcedure" />
+         class represents a single table in the data store. A collection of <see cref="T:System.ComponentModel.Design.Data.DesignerDataStoredProcedure" />
 
         
 
-         objects is returned when you call the <see
-         cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.GetSchemaItems(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" />
+         objects is returned when you call the <see cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.GetSchemaItems(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" />
 
         
 
-         method with the <paramref
-         name="schemaClass" />
+         method with the <paramref name="schemaClass" />
 
         
 
-         parameter set to <see
-         cref="F:System.ComponentModel.Design.Data.DesignerDataSchemaClass.StoredProcedures" />
+         parameter set to <see cref="F:System.ComponentModel.Design.Data.DesignerDataSchemaClass.StoredProcedures" />
 
         
 
@@ -82,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Data.DesignerDataStoredProcedure" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DesignerDataStoredProcedure" />
 
             
 
@@ -91,7 +82,11 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -117,8 +112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Data.DesignerDataStoredProcedure" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DesignerDataStoredProcedure" />
 
             
 
@@ -126,14 +120,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the stored procedure.</param
         >
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -158,13 +160,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.Data.DesignerDataStoredProcedure.CreateParameters" />
+            >The <see cref="M:System.ComponentModel.Design.Data.DesignerDataStoredProcedure.CreateParameters" />
 
             
 
-             method is called the first time the <see
-             cref="P:System.ComponentModel.Design.Data.DesignerDataStoredProcedure.Parameters" />
+             method is called the first time the <see cref="P:System.ComponentModel.Design.Data.DesignerDataStoredProcedure.Parameters" />
 
             
 
@@ -178,8 +178,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of <see
-             cref="T:System.ComponentModel.Design.Data.DesignerDataParameter" />
+            >A collection of <see cref="T:System.ComponentModel.Design.Data.DesignerDataParameter" />
 
             
 
@@ -241,18 +240,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.Design.Data.DesignerDataStoredProcedure.Parameters" />
+            >The <see cref="P:System.ComponentModel.Design.Data.DesignerDataStoredProcedure.Parameters" />
 
             
 
-             property is populated by the <see
-             cref="M:System.ComponentModel.Design.Data.DesignerDataStoredProcedure.CreateParameters" />
+             property is populated by the <see cref="M:System.ComponentModel.Design.Data.DesignerDataStoredProcedure.CreateParameters" />
 
             
 
-             method the first time the <see
-             cref="P:System.ComponentModel.Design.Data.DesignerDataStoredProcedure.Parameters" />
+             method the first time the <see cref="P:System.ComponentModel.Design.Data.DesignerDataStoredProcedure.Parameters" />
 
             
 

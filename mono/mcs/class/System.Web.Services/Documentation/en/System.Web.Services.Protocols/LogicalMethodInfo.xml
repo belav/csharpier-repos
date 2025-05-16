@@ -20,46 +20,38 @@
 
         
 
-         is used primarily by a SOAP extension to interrogate the details of the XML Web service method with which the SOAP extension is configured to run. Depending on how the SOAP extension is configured, it can find out details about the XML Web service method in the <see
-         cref="M:System.Web.Services.Protocols.SoapExtension.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo,System.Web.Services.Protocols.SoapExtensionAttribute)" />
+         is used primarily by a SOAP extension to interrogate the details of the XML Web service method with which the SOAP extension is configured to run. Depending on how the SOAP extension is configured, it can find out details about the XML Web service method in the <see cref="M:System.Web.Services.Protocols.SoapExtension.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo,System.Web.Services.Protocols.SoapExtensionAttribute)" />
 
         
 
-         method of <see
-         cref="T:System.Web.Services.Protocols.SoapExtension" />
+         method of <see cref="T:System.Web.Services.Protocols.SoapExtension" />
 
         
 
-         that takes a <see
-         cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+         that takes a <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
         
 
-        . The <see
-         cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+        . The <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
         
 
-         provides details such as the XML Web service method's parameters by accessing the <see
-         cref="P:System.Web.Services.Protocols.LogicalMethodInfo.Parameters" />
+         provides details such as the XML Web service method's parameters by accessing the <see cref="P:System.Web.Services.Protocols.LogicalMethodInfo.Parameters" />
 
         
 
-         property and any custom attributes applied to the XML Web service method using the <see
-         cref="M:System.Web.Services.Protocols.LogicalMethodInfo.GetCustomAttributes(System.Type)" />
+         property and any custom attributes applied to the XML Web service method using the <see cref="M:System.Web.Services.Protocols.LogicalMethodInfo.GetCustomAttributes(System.Type)" />
 
         
 
          property.</para
       >
       <para
-        >For more details on SOAP extensions see the <see
-         cref="T:System.Web.Services.Protocols.SoapExtension" />
+        >For more details on SOAP extensions see the <see cref="T:System.Web.Services.Protocols.SoapExtension" />
 
         
 
-         class or <format
-         type="text/html">
+         class or <format type="text/html">
           <a href="97D81ACE-95E7-4ACC-AE39-9692A0021E95"
             >[&lt;topic://cpconAlteringSOAPMessageUsingSOAPExtensions&gt;]</a
           >
@@ -87,21 +79,16 @@
         <Parameter Name="method_info" Type="System.Reflection.MethodInfo" />
       </Parameters>
       <Docs>
-        <param name="method_info"
-          >a <see
-           cref="T:System.Reflection.MethodInfo" />
-        </param>
+        <param name="method_info">a <see cref="T:System.Reflection.MethodInfo" /></param>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
             
 
-             class with the <see
-             cref="T:System.Reflection.MethodInfo" />
+             class with the <see cref="T:System.Reflection.MethodInfo" />
 
             
 
@@ -125,23 +112,18 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Reflection.ParameterInfo" />
-        </value>
+        <value>a <see cref="T:System.Reflection.ParameterInfo" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The asynchronous design pattern in the common language runtime involves calling a Begin method to start the asynchronous method invocation and an End method to complete the invocation. The Begin method takes two additional parameters besides the parameters defined by the synchronous version of the method: one to store a delegate and one to store any state information that needs to be passed on to the delegate. This property represents the parameter for the delegate with a parameter name of <paramref
-             name="AsyncCallback" />
+            >The asynchronous design pattern in the common language runtime involves calling a Begin method to start the asynchronous method invocation and an End method to complete the invocation. The Begin method takes two additional parameters besides the parameters defined by the synchronous version of the method: one to store a delegate and one to store any state information that needs to be passed on to the delegate. This property represents the parameter for the delegate with a parameter name of <paramref name="AsyncCallback" />
 
             
 
             .</para
           >
           <para
-            >For more information on invoking XML Web services asynchronously, see <format
-             type="text/html">
+            >For more information on invoking XML Web services asynchronously, see <format type="text/html">
               <a href="F9E26A43-063A-440A-8C73-A02F2CCF3EA0"
                 >[&lt;topic://cpconInvokingWebServicesAsynchronously&gt;]</a
               >
@@ -155,8 +137,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the parameter information for the <paramref
-             name="AsyncCallback" />
+            >Gets the parameter information for the <paramref name="AsyncCallback" />
 
             
 
@@ -180,28 +161,22 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Reflection.ParameterInfo" />
-        </value>
+        <value>a <see cref="T:System.Reflection.ParameterInfo" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The asynchronous design pattern in the common language runtime involves calling a Begin method to start the asynchronous method invocation and an End method to complete the invocation. The Begin method typically returns immediately with an object implementing the <see
-             cref="T:System.IAsyncResult" />
+            >The asynchronous design pattern in the common language runtime involves calling a Begin method to start the asynchronous method invocation and an End method to complete the invocation. The Begin method typically returns immediately with an object implementing the <see cref="T:System.IAsyncResult" />
 
             
 
-             interface, which can then be passed to the End method at a later time to complete the asynchronous method invocation. The returned object implementing the <see
-             cref="T:System.IAsyncResult" />
+             interface, which can then be passed to the End method at a later time to complete the asynchronous method invocation. The returned object implementing the <see cref="T:System.IAsyncResult" />
 
             
 
              interface is represented by this property.</para
           >
           <para
-            >For more information on invoking XML Web services asynchronously, see <format
-             type="text/html">
+            >For more information on invoking XML Web services asynchronously, see <format type="text/html">
               <a href="F9E26A43-063A-440A-8C73-A02F2CCF3EA0"
                 >[&lt;topic://cpconInvokingWebServicesAsynchronously&gt;]</a
               >
@@ -233,16 +208,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Reflection.ParameterInfo" />
-        </value>
+        <value>a <see cref="T:System.Reflection.ParameterInfo" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The asynchronous design pattern in the common language runtime involves calling a Begin method to start the asynchronous method invocation and an End method to complete the invocation. The Begin method takes two additional parameters besides the parameters defined by the synchronous version of the method: one to store a delegate and one to store any state information that needs to be passed on to the delegate. This property represents the state information that needs to be passed into the delegate.</para>
           <para
-            >For more information on invoking XML Web services asynchronously, see <format
-             type="text/html">
+            >For more information on invoking XML Web services asynchronously, see <format type="text/html">
               <a href="F9E26A43-063A-440A-8C73-A02F2CCF3EA0"
                 >[&lt;topic://cpconInvokingWebServicesAsynchronously&gt;]</a
               >
@@ -256,8 +227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the parameter information for the <paramref
-             name="AsyncState" />
+            >Gets the parameter information for the <paramref name="AsyncState" />
 
             
 
@@ -290,8 +260,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Begins an asynchronous invocation of the method represented by this <see
-             cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+            >Begins an asynchronous invocation of the method represented by this <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
             
 
@@ -301,13 +270,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
-             which is passed to <see
-             cref="M:System.Web.Services.Protocols.LogicalMethodInfo.EndInvoke(System.Object,System.IAsyncResult)" />
+             which is passed to <see cref="M:System.Web.Services.Protocols.LogicalMethodInfo.EndInvoke(System.Object,System.IAsyncResult)" />
 
             
 
@@ -315,43 +282,56 @@
           >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The instance of the <see
-           cref="T:System.Object" />
+          The instance of the <see cref="T:System.Object" />
 
           
 
            on which to invoke the method on. </param
         >
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An argument list for the invoked method. This is an array of objects with the same number, order, and type as the parameters of the method. If the method does not require any parameters, <paramref
-           name="values" />
+          An argument list for the invoked method. This is an array of objects with the same number, order, and type as the parameters of the method. If the method does not require any parameters, <paramref name="values" />
 
           
 
            should be null. </param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The delegate to call when the asynchronous invoke is complete. If <paramref
-           name="callback" />
+          The delegate to call when the asynchronous invoke is complete. If <paramref name="callback" />
 
           
 
            is null, the delegate is not called. </param
         >
         <param name="asyncState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -374,10 +354,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Reflection.MethodInfo" />
-        </value>
+        <value>a <see cref="T:System.Reflection.MethodInfo" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -402,21 +379,16 @@
         <Parameter Name="method_infos" Type="System.Reflection.MethodInfo[]" />
       </Parameters>
       <Docs>
-        <param name="method_infos"
-          >a <see
-           cref="T:System.Reflection.MethodInfo[]" />
-        </param>
+        <param name="method_infos">a <see cref="T:System.Reflection.MethodInfo[]" /></param>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Given an array of <see
-             cref="T:System.Reflection.MethodInfo" />
+            >Given an array of <see cref="T:System.Reflection.MethodInfo" />
 
             
 
-             that can contain information about both asynchronous and synchronous methods, creates an array of <see
-             cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+             that can contain information about both asynchronous and synchronous methods, creates an array of <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
             
 
@@ -426,13 +398,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+            >An array of <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
             
 
-            , representing the methods within <paramref
-             name="methodInfos" />
+            , representing the methods within <paramref name="methodInfos" />
 
             
 
@@ -459,26 +429,20 @@
         <Parameter Name="types" Type="System.Web.Services.Protocols.LogicalMethodTypes" />
       </Parameters>
       <Docs>
-        <param name="method_infos"
-          >a <see
-           cref="T:System.Reflection.MethodInfo[]" />
-        </param>
+        <param name="method_infos">a <see cref="T:System.Reflection.MethodInfo[]" /></param>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Given an array of <see
-             cref="T:System.Reflection.MethodInfo" />
+            >Given an array of <see cref="T:System.Reflection.MethodInfo" />
 
             
 
-            , where the returned array of <see
-             cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+            , where the returned array of <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
             
 
-             can be restricted to only asynchronous or synchronous methods, creates an array of <see
-             cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+             can be restricted to only asynchronous or synchronous methods, creates an array of <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
             
 
@@ -488,18 +452,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+            >An array of <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
             
 
-            , representing the methods within <paramref
-             name="methodInfos" />
+            , representing the methods within <paramref name="methodInfos" />
 
             
 
-            , filtered by the value of <paramref
-             name="types" />
+            , filtered by the value of <paramref name="types" />
 
             
 
@@ -507,17 +468,19 @@
           >
         </returns>
         <param name="types">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Web.Services.Protocols.LogicalMethodTypes" />
+          A bitwise combination of the <see cref="T:System.Web.Services.Protocols.LogicalMethodTypes" />
 
           
 
-           values. Determines whether just asynchronous or synchronous methods or both are included in the returned array of <see
-           cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+           values. Determines whether just asynchronous or synchronous methods or both are included in the returned array of <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
           
 
@@ -540,10 +503,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Reflection.ICustomAttributeProvider" />
-        </value>
+        <value>a <see cref="T:System.Reflection.ICustomAttributeProvider" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -566,28 +526,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Services.Protocols.LogicalMethodInfo.DeclaringType" />
+            >The <see cref="P:System.Web.Services.Protocols.LogicalMethodInfo.DeclaringType" />
 
             
 
-             property retrieves a reference to a <see
-             cref="T:System.Type" />
+             property retrieves a reference to a <see cref="T:System.Type" />
 
             
 
-             for the type that declares this member. A member of a class (or interface) is either declared or inherited from a base class (or interface). The returned <see
-             cref="T:System.Type" />
+             for the type that declares this member. A member of a class (or interface) is either declared or inherited from a base class (or interface). The returned <see cref="T:System.Type" />
 
             
 
-             might not be the same as the <see
-             cref="T:System.Type" />
+             might not be the same as the <see cref="T:System.Type" />
 
             
 
-             of the class implementing the XML Web service (if that class derives from a base class and the method represented by this class is declared in that base class then the <see
-             cref="T:System.Type" />
+             of the class implementing the XML Web service (if that class derives from a base class and the method represented by this class is declared in that base class then the <see cref="T:System.Type" />
 
             
 
@@ -597,8 +552,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the class that declares the method represented by the current <see
-             cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+            >Gets the class that declares the method represented by the current <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
             
 
@@ -629,8 +583,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Ends an asynchronous invocation of the method represented by the current <see
-             cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+            >Ends an asynchronous invocation of the method represented by the current <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
             
 
@@ -642,29 +595,34 @@
           <para>An array of objects containing the return value and any by-reference or out parameters of the derived class method.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The instance of the <see
-           cref="T:System.Object" />
+          The instance of the <see cref="T:System.Object" />
 
           
 
            on which to invoke the method. </param
         >
         <param name="asyncResult">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IAsyncResult" />
+          The <see cref="T:System.IAsyncResult" />
 
           
 
-           returned from <see
-           cref="M:System.Web.Services.Protocols.LogicalMethodInfo.BeginInvoke(System.Object,System.Object[],System.AsyncCallback,System.Object)" />
+           returned from <see cref="M:System.Web.Services.Protocols.LogicalMethodInfo.BeginInvoke(System.Object,System.Object[],System.AsyncCallback,System.Object)" />
 
           
 
@@ -687,10 +645,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Reflection.MethodInfo" />
-        </value>
+        <value>a <see cref="T:System.Reflection.MethodInfo" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -720,13 +675,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             containing the first custom attribute applied to the <paramref
-             name="type" />
+             containing the first custom attribute applied to the <paramref name="type" />
 
             
 
@@ -734,12 +687,15 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -769,13 +725,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Object" />
+            >An array of <see cref="T:System.Object" />
 
             
 
-             containing the custom attributes applied to <paramref
-             name="type" />
+             containing the custom attributes applied to <paramref name="type" />
 
             
 
@@ -783,12 +737,15 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -811,15 +768,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Reflection.ParameterInfo[]" />
-        </value>
+        <value>a <see cref="T:System.Reflection.ParameterInfo[]" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use an instance of <see
-             cref="T:System.Reflection.ParameterInfo" />
+            >Use an instance of <see cref="T:System.Reflection.ParameterInfo" />
 
             
 
@@ -830,8 +783,7 @@
 
             
 
-             returns an array of <see
-             cref="T:System.Reflection.ParameterInfo" />
+             returns an array of <see cref="T:System.Reflection.ParameterInfo" />
 
             
 
@@ -841,8 +793,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the parameters passed into the method represented by the instance of <see
-             cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+            >Gets the parameters passed into the method represented by the instance of <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
             
 
@@ -873,8 +824,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Invokes the method represented by the current <see
-             cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+            >Invokes the method represented by the current <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
             
 
@@ -884,8 +834,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of type <see
-             cref="T:System.Object" />
+            >An array of type <see cref="T:System.Object" />
 
             
 
@@ -893,24 +842,30 @@
           >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The instance of the <see
-           cref="T:System.Object" />
+          The instance of the <see cref="T:System.Object" />
 
           
 
            to invoke the method. </param
         >
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An argument list for the invoked method. This is an array of objects with the same number, order, and type as the parameters of the method. If the method does not require any parameters, the <paramref
-           name="values" />
+          An argument list for the invoked method. This is an array of objects with the same number, order, and type as the parameters of the method. If the method does not require any parameters, the <paramref name="values" />
 
           
 
@@ -934,8 +889,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the method represented by the instance of <see
-             cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+            >Gets a value indicating whether the method represented by the instance of <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
             
 
@@ -961,10 +915,7 @@
         <Parameter Name="method_info" Type="System.Reflection.MethodInfo" />
       </Parameters>
       <Docs>
-        <param name="method_info"
-          >a <see
-           cref="T:System.Reflection.MethodInfo" />
-        </param>
+        <param name="method_info">a <see cref="T:System.Reflection.MethodInfo" /></param>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -973,8 +924,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="methodInfo" />
+            >true if the <paramref name="methodInfo" />
 
             
 
@@ -1000,10 +950,7 @@
         <Parameter Name="method_info" Type="System.Reflection.MethodInfo" />
       </Parameters>
       <Docs>
-        <param name="method_info"
-          >a <see
-           cref="T:System.Reflection.MethodInfo" />
-        </param>
+        <param name="method_info">a <see cref="T:System.Reflection.MethodInfo" /></param>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1012,8 +959,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="methodInfo" />
+            >true if the <paramref name="methodInfo" />
 
             
 
@@ -1038,8 +984,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the return type for the method represented by the instance of <see
-             cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+            >Gets a value indicating whether the return type for the method represented by the instance of <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
             
 
@@ -1063,10 +1008,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Reflection.MethodInfo" />
-        </value>
+        <value>a <see cref="T:System.Reflection.MethodInfo" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1090,8 +1032,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the method represented by this <see
-             cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+            >Gets the name of the method represented by this <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
             
 
@@ -1115,15 +1056,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Reflection.ParameterInfo[]" />
-        </value>
+        <value>a <see cref="T:System.Reflection.ParameterInfo[]" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use a <see
-             cref="T:System.Reflection.ParameterInfo" />
+            >Use a <see cref="T:System.Reflection.ParameterInfo" />
 
             
 
@@ -1151,15 +1088,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Reflection.ParameterInfo[]" />
-        </value>
+        <value>a <see cref="T:System.Reflection.ParameterInfo[]" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use a <see
-             cref="T:System.Reflection.ParameterInfo" />
+            >Use a <see cref="T:System.Reflection.ParameterInfo" />
 
             
 
@@ -1170,8 +1103,7 @@
 
             
 
-             returns an array of <see
-             cref="T:System.Reflection.ParameterInfo" />
+             returns an array of <see cref="T:System.Reflection.ParameterInfo" />
 
             
 
@@ -1218,10 +1150,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Reflection.ICustomAttributeProvider" />
-        </value>
+        <value>a <see cref="T:System.Reflection.ICustomAttributeProvider" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1245,8 +1174,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the current <see
-             cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+            >Returns a string that represents the current <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
             
 
@@ -1256,13 +1184,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             that represents the current <see
-             cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+             that represents the current <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
             
 

@@ -41,13 +41,11 @@
          can be used to represent a reference to an event.</para
       >
       <para
-        >The <see
-         cref="P:System.CodeDom.CodeEventReferenceExpression.TargetObject" />
+        >The <see cref="P:System.CodeDom.CodeEventReferenceExpression.TargetObject" />
 
         
 
-         property specifies the object that contains the event. The <see
-         cref="P:System.CodeDom.CodeEventReferenceExpression.EventName" />
+         property specifies the object that contains the event. The <see cref="P:System.CodeDom.CodeEventReferenceExpression.EventName" />
 
         
 
@@ -79,8 +77,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeEventReferenceExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeEventReferenceExpression" />
 
             
 
@@ -114,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeEventReferenceExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeEventReferenceExpression" />
 
             
 
@@ -123,19 +119,26 @@
           >
         </summary>
         <param name="targetObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeExpression" />
+          A <see cref="T:System.CodeDom.CodeExpression" />
 
           
 
            that indicates the object that contains the event. </param
         >
         <param name="eventName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

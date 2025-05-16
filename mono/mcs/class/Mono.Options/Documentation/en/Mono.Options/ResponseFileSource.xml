@@ -27,13 +27,11 @@
         
 
          looks for arguments which start with
-        <c
-        >@</c>
+        <c>@</c>
 
         
 
-        , assumes that what follows the <c
-        >@</c>
+        , assumes that what follows the <c>@</c>
 
         
 
@@ -57,11 +55,9 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary
-          >
+        <summary>
           Constructs and initializes a
-          <see
-           cref="T:Mono.Options.ResponseFileSource" />
+          <see cref="T:Mono.Options.ResponseFileSource" />
 
           
 
@@ -83,11 +79,9 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
+        <summary>
           The description to provide for the argument source within
-          <see
-           cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
+          <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
 
           
 
@@ -131,10 +125,8 @@
         />
       </Parameters>
       <Docs>
-        <param name="value"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="value">
+          A <see cref="T:System.String" />
 
           
 
@@ -142,17 +134,14 @@
           with additional arguments.
         </param
         >
-        <param name="replacement"
-          >
-          A <see
-           cref="T:System.Collections.Generic.IEnumerable{System.String}" />
+        <param name="replacement">
+          A <see cref="T:System.Collections.Generic.IEnumerable{System.String}" />
 
           
 
           
           which will refer to teh replacement arguments if this method returns
-          <see
-           langword="true" />
+          <see langword="true" />
 
           
 
@@ -160,10 +149,8 @@
           callers.
         </param
         >
-        <summary
-          >
-          Replace the argument <paramref
-           name="value" />
+        <summary>
+          Replace the argument <paramref name="value" />
 
           
 
@@ -171,27 +158,22 @@
           the specified file.
         </summary
         >
-        <returns
-          >
-          If <paramref
-           name="value" />
+        <returns>
+          If <paramref name="value" />
 
           
 
-           starts with <c
-          >@</c>
+           starts with <c>@</c>
 
           
 
           , then
-          <paramref
-           name="replacement" />
+          <paramref name="replacement" />
 
           
 
            will contain the parsed contents of
-          the filename resulting from <c
-          >
+          the filename resulting from <c>
             <paramref name="value" />
 
             
@@ -202,14 +184,12 @@
           
 
           
-          and <see
-           langword="true" />
+          and <see langword="true" />
 
           
 
            is returned; otherwise, 
-          <see
-           langword="false" />
+          <see langword="false" />
 
           
 
@@ -222,14 +202,12 @@
 
           
 
-           starts with <c
-          >@</c>
+           starts with <c>@</c>
 
           
 
            and 
-          <c
-          >
+          <c>
             <paramref name="value" />
 
             
@@ -261,27 +239,22 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary
-          >
+        <summary>
           The names to provide for the argument source within 
-          <see
-           cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
+          <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
 
           
 
           .
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.String" />
+        <returns>
+          A <see cref="T:System.String" />
 
           
 
            array containing
-          an element with the value <c
-          >"@file"</c>
+          an element with the value <c>"@file"</c>
 
           
 

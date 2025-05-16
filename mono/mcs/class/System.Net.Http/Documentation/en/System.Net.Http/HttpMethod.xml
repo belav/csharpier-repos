@@ -24,18 +24,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The most common usage of <see
-         cref="T:System.Net.Http.HttpMethod" />
+        >The most common usage of <see cref="T:System.Net.Http.HttpMethod" />
 
         
 
-         is to use one of the static properties on this class.  However, if an app needs a different value for the HTTP method, the <see
-         cref="M:System.Net.Http.HttpMethod.#ctor(System.String)" />
+         is to use one of the static properties on this class.  However, if an app needs a different value for the HTTP method, the <see cref="M:System.Net.Http.HttpMethod.#ctor(System.String)" />
 
         
 
-         constructor initializes a new instance of the <see
-         cref="T:System.Net.Http.HttpMethod" />
+         constructor initializes a new instance of the <see cref="T:System.Net.Http.HttpMethod" />
 
         
 
@@ -65,13 +62,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If an app needs a different value for the HTTP method from one of the static properties, the <see
-             cref="M:System.Net.Http.HttpMethod.#ctor(System.String)" />
+            >If an app needs a different value for the HTTP method from one of the static properties, the <see cref="M:System.Net.Http.HttpMethod.#ctor(System.String)" />
 
             
 
-             constructor initializes a new instance of the <see
-             cref="T:System.Net.Http.HttpMethod" />
+             constructor initializes a new instance of the <see cref="T:System.Net.Http.HttpMethod" />
 
             
 
@@ -81,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Http.HttpMethod" />
+            >Initializes a new instance of the <see cref="T:System.Net.Http.HttpMethod" />
 
             
 
@@ -90,7 +84,11 @@
           >
         </summary>
         <param name="method">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -144,13 +142,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Net.Http.HttpMethod" />
+            >Determines whether the specified <see cref="T:System.Net.Http.HttpMethod" />
 
             
 
-             is equal to the current <see
-             cref="T:System.Object" />
+             is equal to the current <see cref="T:System.Object" />
 
             
 
@@ -159,18 +155,19 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Boolean" />
+          <para>Returns <see cref="T:System.Boolean" />
 
             
 
-            .</para
-          >
+            .</para>
           <para>true if the specified object is equal to the current object; otherwise, false.</para>
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -199,13 +196,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Object" />
+            >Determines whether the specified <see cref="T:System.Object" />
 
             
 
-             is equal to the current <see
-             cref="T:System.Object" />
+             is equal to the current <see cref="T:System.Object" />
 
             
 
@@ -214,18 +209,19 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Boolean" />
+          <para>Returns <see cref="T:System.Boolean" />
 
             
 
-            .</para
-          >
+            .</para>
           <para>true if the specified object is equal to the current object; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -273,8 +269,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code is a numeric value that is used to identify an object during equality testing. It can also serve as an index for an object in a collection.The <see
-             cref="M:System.Net.Http.HttpMethod.GetHashCode" />
+            >A hash code is a numeric value that is used to identify an object during equality testing. It can also serve as an index for an object in a collection.The <see cref="M:System.Net.Http.HttpMethod.GetHashCode" />
 
             
 
@@ -287,17 +282,13 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Int32" />
+          <para>Returns <see cref="T:System.Int32" />
 
             
 
-            .</para
-          >
+            .</para>
           <para
-            >A hash code for the current <see
-             cref="T:System.Object" />
+            >A hash code for the current <see cref="T:System.Object" />
 
             
 
@@ -372,8 +363,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The equality operator for comparing two <see
-             cref="T:System.Net.Http.HttpMethod" />
+            >The equality operator for comparing two <see cref="T:System.Net.Http.HttpMethod" />
 
             
 
@@ -382,22 +372,17 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Boolean" />
+          <para>Returns <see cref="T:System.Boolean" />
 
             
 
-            .</para
-          >
+            .</para>
           <para
-            >true if the specified <paramref
-             name="left" />
+            >true if the specified <paramref name="left" />
 
             
 
-             and <paramref
-             name="right" />
+             and <paramref name="right" />
 
             
 
@@ -405,24 +390,30 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The left <see
-           cref="T:System.Net.Http.HttpMethod" />
+          The left <see cref="T:System.Net.Http.HttpMethod" />
 
           
 
            to an equality operator.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The right  <see
-           cref="T:System.Net.Http.HttpMethod" />
+          The right  <see cref="T:System.Net.Http.HttpMethod" />
 
           
 
@@ -455,8 +446,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The inequality operator for comparing two <see
-             cref="T:System.Net.Http.HttpMethod" />
+            >The inequality operator for comparing two <see cref="T:System.Net.Http.HttpMethod" />
 
             
 
@@ -465,22 +455,17 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Boolean" />
+          <para>Returns <see cref="T:System.Boolean" />
 
             
 
-            .</para
-          >
+            .</para>
           <para
-            >true if the specified <paramref
-             name="left" />
+            >true if the specified <paramref name="left" />
 
             
 
-             and <paramref
-             name="right" />
+             and <paramref name="right" />
 
             
 
@@ -488,24 +473,30 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The left <see
-           cref="T:System.Net.Http.HttpMethod" />
+          The left <see cref="T:System.Net.Http.HttpMethod" />
 
           
 
            to an inequality operator.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The right  <see
-           cref="T:System.Net.Http.HttpMethod" />
+          The right  <see cref="T:System.Net.Http.HttpMethod" />
 
           
 
@@ -604,14 +595,11 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.String" />
+          <para>Returns <see cref="T:System.String" />
 
             
 
-            .</para
-          >
+            .</para>
           <para>A string representing the current object.</para>
         </returns>
       </Docs>

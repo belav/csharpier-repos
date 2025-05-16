@@ -18,23 +18,19 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This class also contains methods to get the post-schema-validation infoset (PSVI) of a validated XML node. </para>
       <para
-        >When you validate an <see
-         cref="T:System.Xml.Linq.XDocument" />
+        >When you validate an <see cref="T:System.Xml.Linq.XDocument" />
 
         
 
-        , <see
-         cref="T:System.Xml.Linq.XElement" />
+        , <see cref="T:System.Xml.Linq.XElement" />
 
         
 
-        , or <see
-         cref="T:System.Xml.Linq.XAttribute" />
+        , or <see cref="T:System.Xml.Linq.XAttribute" />
 
         
 
-        , you can also optionally populate the XML tree with the post-schema-validation infoset. PSVI information is added as an annotation of type <see
-         cref="T:System.Xml.Schema.XmlSchemaInfo" />
+        , you can also optionally populate the XML tree with the post-schema-validation infoset. PSVI information is added as an annotation of type <see cref="T:System.Xml.Schema.XmlSchemaInfo" />
 
         
 
@@ -70,29 +66,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="T:System.Xml.Schema.IXmlSchemaInfo" />
+            >You can use the <see cref="T:System.Xml.Schema.IXmlSchemaInfo" />
 
             
 
              returned by this method to determine certain characteristics of a validated attribute. For example, you can determine if the attribute came from a default attribute value in an XSD.</para
           >
           <para
-            >You use the <see
-             cref="P:System.Xml.Schema.IXmlSchemaInfo.SchemaAttribute" />
+            >You use the <see cref="P:System.Xml.Schema.IXmlSchemaInfo.SchemaAttribute" />
 
             
 
-             property to get a partial validation type (<see
-             cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+             property to get a partial validation type (<see cref="T:System.Xml.Schema.XmlSchemaAttribute" />
 
             
 
             ). You can use it to revalidate an attribute without validating an entire document.</para
           >
           <para
-            >For an example of this property, see <see
-             cref="Overload:System.Xml.Schema.Extensions.Validate" />
+            >For an example of this property, see <see cref="Overload:System.Xml.Schema.Extensions.Validate" />
 
             
 
@@ -106,13 +98,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Xml.Schema.IXmlSchemaInfo" />
+            >A <see cref="T:System.Xml.Schema.IXmlSchemaInfo" />
 
             
 
-             that contains the post-schema-validation infoset for an <see
-             cref="T:System.Xml.Linq.XAttribute" />
+             that contains the post-schema-validation infoset for an <see cref="T:System.Xml.Linq.XAttribute" />
 
             
 
@@ -120,12 +110,15 @@
           >
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Linq.XAttribute" />
+          An <see cref="T:System.Xml.Linq.XAttribute" />
 
           
 
@@ -156,29 +149,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="T:System.Xml.Schema.IXmlSchemaInfo" />
+            >You can use the <see cref="T:System.Xml.Schema.IXmlSchemaInfo" />
 
             
 
              returned by this method to determine certain characteristics of a validated element. For example, you can determine the dynamic schema type of the element.</para
           >
           <para
-            >You use the <see
-             cref="P:System.Xml.Schema.IXmlSchemaInfo.SchemaElement" />
+            >You use the <see cref="P:System.Xml.Schema.IXmlSchemaInfo.SchemaElement" />
 
             
 
-             property to get a partial validation type (<see
-             cref="T:System.Xml.Schema.XmlSchemaElement" />
+             property to get a partial validation type (<see cref="T:System.Xml.Schema.XmlSchemaElement" />
 
             
 
             ). You can use it to revalidate a sub-tree with an element at its root without validating an entire document.</para
           >
           <para
-            >For an example of this property, see <see
-             cref="Overload:System.Xml.Schema.Extensions.Validate" />
+            >For an example of this property, see <see cref="Overload:System.Xml.Schema.Extensions.Validate" />
 
             
 
@@ -192,13 +181,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Xml.Schema.IXmlSchemaInfo" />
+            >A <see cref="T:System.Xml.Schema.IXmlSchemaInfo" />
 
             
 
-             that contains the post-schema-validation infoset (PSVI) for an <see
-             cref="T:System.Xml.Linq.XElement" />
+             that contains the post-schema-validation infoset (PSVI) for an <see cref="T:System.Xml.Linq.XElement" />
 
             
 
@@ -206,12 +193,15 @@
           >
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Linq.XElement" />
+          An <see cref="T:System.Xml.Linq.XElement" />
 
           
 
@@ -244,13 +234,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This extension method validates that the <see
-             cref="T:System.Xml.Linq.XDocument" />
+            >This extension method validates that the <see cref="T:System.Xml.Linq.XDocument" />
 
             
 
-             conforms to the schema content model in <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+             conforms to the schema content model in <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
@@ -260,13 +248,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method validates that an <see
-             cref="T:System.Xml.Linq.XDocument" />
+            >This method validates that an <see cref="T:System.Xml.Linq.XDocument" />
 
             
 
-             conforms to an XSD in an <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+             conforms to an XSD in an <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
@@ -274,36 +260,45 @@
           >
         </summary>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XDocument" />
+          The <see cref="T:System.Xml.Linq.XDocument" />
 
           
 
            to validate.</param
         >
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchemaSet" />
+          An <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
           
 
            to validate against.</param
         >
         <param name="validationEventHandler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Schema.ValidationEventHandler" />
+          A <see cref="T:System.Xml.Schema.ValidationEventHandler" />
 
           
 
@@ -337,24 +332,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this method to validate that an <see
-             cref="T:System.Xml.Linq.XAttribute" />
+            >You can use this method to validate that an <see cref="T:System.Xml.Linq.XAttribute" />
 
             
 
              conforms to a schema. You typically use this method when you have modified an attribute, and you want to make sure that it still conforms to its schema. You could validate the entire document, but it takes less processing time to validate just the attribute.</para
           >
           <para
-            >If you pass null for <paramref
-             name="validationEventHandler" />
+            >If you pass null for <paramref name="validationEventHandler" />
 
             
 
             , this method raises an exception upon validation errors. Validation warnings will not raise an exception.</para
           >
           <para
-            >To validate an attribute, you use an instance of <see
-             cref="T:System.Xml.Schema.XmlSchemaObject" />
+            >To validate an attribute, you use an instance of <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
             
 
@@ -366,8 +358,7 @@
             </item>
             <item>
               <para
-                >Add the post-schema-validation infoset (PSVI) by calling the <see
-                 cref="Overload:System.Xml.Schema.Extensions.Validate" />
+                >Add the post-schema-validation infoset (PSVI) by calling the <see cref="Overload:System.Xml.Schema.Extensions.Validate" />
 
                 
 
@@ -376,18 +367,15 @@
             </item>
             <item>
               <para
-                >Call the <see
-                 cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" />
+                >Call the <see cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" />
 
                 
 
-                 extension method to retrieve an object that implements <see
-                 cref="T:System.Xml.Schema.IXmlSchemaInfo" />
+                 extension method to retrieve an object that implements <see cref="T:System.Xml.Schema.IXmlSchemaInfo" />
 
                 
 
-                . From the retrieved object, you can get an <see
-                 cref="T:System.Xml.Schema.XmlSchemaObject" />
+                . From the retrieved object, you can get an <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
                 
 
@@ -396,18 +384,15 @@
               <list type="bullet">
                 <item>
                   <para
-                    >If you get an <see
-                     cref="T:System.Xml.Schema.XmlSchemaObject" />
+                    >If you get an <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
                     
 
-                     for an <see
-                     cref="T:System.Xml.Linq.XElement" />
+                     for an <see cref="T:System.Xml.Linq.XElement" />
 
                     
 
-                    , the type will be <see
-                     cref="T:System.Xml.Schema.XmlSchemaElement" />
+                    , the type will be <see cref="T:System.Xml.Schema.XmlSchemaElement" />
 
                     
 
@@ -416,18 +401,15 @@
                 </item>
                 <item>
                   <para
-                    >If you get an <see
-                     cref="T:System.Xml.Schema.XmlSchemaObject" />
+                    >If you get an <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
                     
 
-                     for an <see
-                     cref="T:System.Xml.Linq.XAttribute" />
+                     for an <see cref="T:System.Xml.Linq.XAttribute" />
 
                     
 
-                    , the type will be <see
-                     cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+                    , the type will be <see cref="T:System.Xml.Schema.XmlSchemaAttribute" />
 
                     
 
@@ -438,8 +420,7 @@
             </item>
           </list>
           <para
-            >After you have an instance of an <see
-             cref="T:System.Xml.Schema.XmlSchemaObject" />
+            >After you have an instance of an <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
             
 
@@ -449,18 +430,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method validates that an <see
-             cref="T:System.Xml.Linq.XAttribute" />
+            >This method validates that an <see cref="T:System.Xml.Linq.XAttribute" />
 
             
 
-             conforms to a specified <see
-             cref="T:System.Xml.Schema.XmlSchemaObject" />
+             conforms to a specified <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
             
 
-             and an <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+             and an <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
@@ -468,48 +446,60 @@
           >
         </summary>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XAttribute" />
+          The <see cref="T:System.Xml.Linq.XAttribute" />
 
           
 
            to validate.</param
         >
         <param name="partialValidationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchemaObject" />
+          An <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
           
 
            that specifies the sub-tree to validate.</param
         >
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchemaSet" />
+          An <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
           
 
            to validate against.</param
         >
         <param name="validationEventHandler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Schema.ValidationEventHandler" />
+          A <see cref="T:System.Xml.Schema.ValidationEventHandler" />
 
           
 
@@ -543,21 +533,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This extension method validates that the <see
-             cref="T:System.Xml.Linq.XDocument" />
+            >This extension method validates that the <see cref="T:System.Xml.Linq.XDocument" />
 
             
 
-             conforms to the schema content model in <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+             conforms to the schema content model in <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
             .</para
           >
           <para
-            >If <paramref
-             name="addSchemaInfo" />
+            >If <paramref name="addSchemaInfo" />
 
             
 
@@ -567,13 +554,11 @@
           <list type="ordered">
             <item>
               <para
-                >First, an annotation is added to all nodes in the tree to enable you to call <see
-                 cref="M:System.Xml.Schema.Extensions.GetSchemaInfo(System.Xml.Linq.XAttribute)" />
+                >First, an annotation is added to all nodes in the tree to enable you to call <see cref="M:System.Xml.Schema.Extensions.GetSchemaInfo(System.Xml.Linq.XAttribute)" />
 
                 
 
-                 or <see
-                 cref="M:System.Xml.Schema.Extensions.GetSchemaInfo(System.Xml.Linq.XElement)" />
+                 or <see cref="M:System.Xml.Schema.Extensions.GetSchemaInfo(System.Xml.Linq.XElement)" />
 
                 
 
@@ -582,8 +567,7 @@
             </item>
             <item>
               <para
-                >Second, default elements and attributes defined in the XSD are added to the XML tree. By calling one of the <see
-                 cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" />
+                >Second, default elements and attributes defined in the XSD are added to the XML tree. By calling one of the <see cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" />
 
                 
 
@@ -595,13 +579,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates that an <see
-             cref="T:System.Xml.Linq.XDocument" />
+            >Validates that an <see cref="T:System.Xml.Linq.XDocument" />
 
             
 
-             conforms to an XSD in an <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+             conforms to an XSD in an <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
@@ -609,48 +591,60 @@
           >
         </summary>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XDocument" />
+          The <see cref="T:System.Xml.Linq.XDocument" />
 
           
 
            to validate.</param
         >
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchemaSet" />
+          An <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
           
 
            to validate against.</param
         >
         <param name="validationEventHandler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Schema.ValidationEventHandler" />
+          A <see cref="T:System.Xml.Schema.ValidationEventHandler" />
 
           
 
            for an event that occurs when the reader encounters validation errors. If null, throws an exception upon validation errors.</param
         >
         <param name="addSchemaInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Boolean" />
+          A <see cref="T:System.Boolean" />
 
           
 
@@ -684,24 +678,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this method to validate that a sub-tree (with an <see
-             cref="T:System.Xml.Linq.XElement" />
+            >You can use this method to validate that a sub-tree (with an <see cref="T:System.Xml.Linq.XElement" />
 
             
 
              at its root) conforms to a schema. You typically use this method when you have modified a sub-tree, and you want to make sure that it still conforms to its schema. You could validate the entire document, but it takes less processing time to validate a just a sub-tree.</para
           >
           <para
-            >If you pass null for <paramref
-             name="validationEventHandler" />
+            >If you pass null for <paramref name="validationEventHandler" />
 
             
 
             , then this method raises an exception upon validation errors. Validation warnings will not raise an exception.</para
           >
           <para
-            >To validate a sub-tree, you use an instance of <see
-             cref="T:System.Xml.Schema.XmlSchemaObject" />
+            >To validate a sub-tree, you use an instance of <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
             
 
@@ -713,8 +704,7 @@
             </item>
             <item>
               <para
-                >Add the post-schema-validation infoset (PSVI) by calling the <see
-                 cref="Overload:System.Xml.Schema.Extensions.Validate" />
+                >Add the post-schema-validation infoset (PSVI) by calling the <see cref="Overload:System.Xml.Schema.Extensions.Validate" />
 
                 
 
@@ -723,18 +713,15 @@
             </item>
             <item>
               <para
-                >Call the <see
-                 cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" />
+                >Call the <see cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" />
 
                 
 
-                 extension method to retrieve an object that implements <see
-                 cref="T:System.Xml.Schema.IXmlSchemaInfo" />
+                 extension method to retrieve an object that implements <see cref="T:System.Xml.Schema.IXmlSchemaInfo" />
 
                 
 
-                . From the retrieved object, you can get an <see
-                 cref="T:System.Xml.Schema.XmlSchemaObject" />
+                . From the retrieved object, you can get an <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
                 
 
@@ -743,18 +730,15 @@
               <list type="bullet">
                 <item>
                   <para
-                    >If you get an <see
-                     cref="T:System.Xml.Schema.XmlSchemaObject" />
+                    >If you get an <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
                     
 
-                     for an <see
-                     cref="T:System.Xml.Linq.XElement" />
+                     for an <see cref="T:System.Xml.Linq.XElement" />
 
                     
 
-                    , the type will be <see
-                     cref="T:System.Xml.Schema.XmlSchemaElement" />
+                    , the type will be <see cref="T:System.Xml.Schema.XmlSchemaElement" />
 
                     
 
@@ -763,18 +747,15 @@
                 </item>
                 <item>
                   <para
-                    >If you get an <see
-                     cref="T:System.Xml.Schema.XmlSchemaObject" />
+                    >If you get an <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
                     
 
-                     for an <see
-                     cref="T:System.Xml.Linq.XAttribute" />
+                     for an <see cref="T:System.Xml.Linq.XAttribute" />
 
                     
 
-                    , the type will be <see
-                     cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+                    , the type will be <see cref="T:System.Xml.Schema.XmlSchemaAttribute" />
 
                     
 
@@ -785,8 +766,7 @@
             </item>
           </list>
           <para
-            >After you have an instance of an <see
-             cref="T:System.Xml.Schema.XmlSchemaObject" />
+            >After you have an instance of an <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
             
 
@@ -796,18 +776,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method validates that an <see
-             cref="T:System.Xml.Linq.XElement" />
+            >This method validates that an <see cref="T:System.Xml.Linq.XElement" />
 
             
 
-             sub-tree conforms to a specified <see
-             cref="T:System.Xml.Schema.XmlSchemaObject" />
+             sub-tree conforms to a specified <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
             
 
-             and an <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+             and an <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
@@ -815,48 +792,60 @@
           >
         </summary>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XElement" />
+          The <see cref="T:System.Xml.Linq.XElement" />
 
           
 
            to validate.</param
         >
         <param name="partialValidationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchemaObject" />
+          An <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
           
 
            that specifies the sub-tree to validate.</param
         >
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchemaSet" />
+          An <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
           
 
            to validate against.</param
         >
         <param name="validationEventHandler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Schema.ValidationEventHandler" />
+          A <see cref="T:System.Xml.Schema.ValidationEventHandler" />
 
           
 
@@ -891,42 +880,36 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this method to validate that an <see
-             cref="T:System.Xml.Linq.XAttribute" />
+            >You can use this method to validate that an <see cref="T:System.Xml.Linq.XAttribute" />
 
             
 
              conforms to a schema. You typically use this method when you have modified an attribute, and you want to make sure that it still conforms to its schema. You could validate the entire document, but it takes less processing time to validate just the attribute.</para
           >
           <para
-            >If <paramref
-             name="addSchemaInfo" />
+            >If <paramref name="addSchemaInfo" />
 
             
 
-             is true, this method populates the attribute with the post-schema-validation infoset (PSVI). After you have populated the XML tree with the PSVI, you can call <see
-             cref="M:System.Xml.Schema.Extensions.GetSchemaInfo(System.Xml.Linq.XAttribute)" />
+             is true, this method populates the attribute with the post-schema-validation infoset (PSVI). After you have populated the XML tree with the PSVI, you can call <see cref="M:System.Xml.Schema.Extensions.GetSchemaInfo(System.Xml.Linq.XAttribute)" />
 
             
 
-             on the validated attribute. This is useful if you are writing code that relies on data returned by <see
-             cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" />
+             on the validated attribute. This is useful if you are writing code that relies on data returned by <see cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" />
 
             
 
             .</para
           >
           <para
-            >If you pass null for <paramref
-             name="validationEventHandler" />
+            >If you pass null for <paramref name="validationEventHandler" />
 
             
 
             , then this method raises an exception upon validation errors. Validation warnings will not raise an exception.</para
           >
           <para
-            >To validate an attribute, you use an instance of <see
-             cref="T:System.Xml.Schema.XmlSchemaObject" />
+            >To validate an attribute, you use an instance of <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
             
 
@@ -938,8 +921,7 @@
             </item>
             <item>
               <para
-                >Add the post-schema-validation infoset (PSVI) by calling the <see
-                 cref="Overload:System.Xml.Schema.Extensions.Validate" />
+                >Add the post-schema-validation infoset (PSVI) by calling the <see cref="Overload:System.Xml.Schema.Extensions.Validate" />
 
                 
 
@@ -948,18 +930,15 @@
             </item>
             <item>
               <para
-                >Call the <see
-                 cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" />
+                >Call the <see cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" />
 
                 
 
-                 extension method to retrieve an object that implements <see
-                 cref="T:System.Xml.Schema.IXmlSchemaInfo" />
+                 extension method to retrieve an object that implements <see cref="T:System.Xml.Schema.IXmlSchemaInfo" />
 
                 
 
-                . From the retrieved object, you can get an <see
-                 cref="T:System.Xml.Schema.XmlSchemaObject" />
+                . From the retrieved object, you can get an <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
                 
 
@@ -968,18 +947,15 @@
               <list type="bullet">
                 <item>
                   <para
-                    >If you get an <see
-                     cref="T:System.Xml.Schema.XmlSchemaObject" />
+                    >If you get an <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
                     
 
-                     for an <see
-                     cref="T:System.Xml.Linq.XElement" />
+                     for an <see cref="T:System.Xml.Linq.XElement" />
 
                     
 
-                    , the type will be <see
-                     cref="T:System.Xml.Schema.XmlSchemaElement" />
+                    , the type will be <see cref="T:System.Xml.Schema.XmlSchemaElement" />
 
                     
 
@@ -988,18 +964,15 @@
                 </item>
                 <item>
                   <para
-                    >If you get an <see
-                     cref="T:System.Xml.Schema.XmlSchemaObject" />
+                    >If you get an <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
                     
 
-                     for an <see
-                     cref="T:System.Xml.Linq.XAttribute" />
+                     for an <see cref="T:System.Xml.Linq.XAttribute" />
 
                     
 
-                    , the type will be <see
-                     cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+                    , the type will be <see cref="T:System.Xml.Schema.XmlSchemaAttribute" />
 
                     
 
@@ -1010,8 +983,7 @@
             </item>
           </list>
           <para
-            >After you have an instance of an <see
-             cref="T:System.Xml.Schema.XmlSchemaObject" />
+            >After you have an instance of an <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
             
 
@@ -1021,18 +993,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates that an <see
-             cref="T:System.Xml.Linq.XAttribute" />
+            >Validates that an <see cref="T:System.Xml.Linq.XAttribute" />
 
             
 
-             conforms to a specified <see
-             cref="T:System.Xml.Schema.XmlSchemaObject" />
+             conforms to a specified <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
             
 
-             and an <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+             and an <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
@@ -1040,60 +1009,75 @@
           >
         </summary>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XAttribute" />
+          The <see cref="T:System.Xml.Linq.XAttribute" />
 
           
 
            to validate.</param
         >
         <param name="partialValidationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchemaObject" />
+          An <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
           
 
            that specifies the sub-tree to validate.</param
         >
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchemaSet" />
+          An <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
           
 
            to validate against.</param
         >
         <param name="validationEventHandler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Schema.ValidationEventHandler" />
+          A <see cref="T:System.Xml.Schema.ValidationEventHandler" />
 
           
 
            for an event that occurs when the reader encounters validation errors. If null, throws an exception upon validation errors.</param
         >
         <param name="addSchemaInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Boolean" />
+          A <see cref="T:System.Boolean" />
 
           
 
@@ -1128,16 +1112,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this method to validate that a sub-tree (with an <see
-             cref="T:System.Xml.Linq.XElement" />
+            >You can use this method to validate that a sub-tree (with an <see cref="T:System.Xml.Linq.XElement" />
 
             
 
              at the root of the sub-tree) conforms to a schema. You typically use this method when you have modified a sub-tree, and you want to make sure that it still conforms to its schema. You could validate the entire document, but it takes less processing time to validate a just a sub-tree.</para
           >
           <para
-            >If <paramref
-             name="addSchemaInfo" />
+            >If <paramref name="addSchemaInfo" />
 
             
 
@@ -1145,32 +1127,28 @@
           >
           <para>There are two aspects of populating the XML tree with the PSVI.</para>
           <para
-            >First, an annotation is added to all nodes in the tree such that you can now call <see
-             cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" />
+            >First, an annotation is added to all nodes in the tree such that you can now call <see cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" />
 
             
 
              on an element or attribute in the tree.</para
           >
           <para
-            >Second, default elements and attributes defined in the XSD are added to the XML tree. By calling one of the <see
-             cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" />
+            >Second, default elements and attributes defined in the XSD are added to the XML tree. By calling one of the <see cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" />
 
             
 
              methods, you can determine if a specific element or attribute was added from the XSD as a default element or attribute.</para
           >
           <para
-            >If you pass null for <paramref
-             name="validationEventHandler" />
+            >If you pass null for <paramref name="validationEventHandler" />
 
             
 
             , then this method raises an exception upon validation errors. Validation warnings will not raise an exception.</para
           >
           <para
-            >To validate a sub-tree, you use an instance of <see
-             cref="T:System.Xml.Schema.XmlSchemaObject" />
+            >To validate a sub-tree, you use an instance of <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
             
 
@@ -1182,8 +1160,7 @@
             </item>
             <item>
               <para
-                >Add the post-schema-validation infoset (PSVI) by calling the <see
-                 cref="Overload:System.Xml.Schema.Extensions.Validate" />
+                >Add the post-schema-validation infoset (PSVI) by calling the <see cref="Overload:System.Xml.Schema.Extensions.Validate" />
 
                 
 
@@ -1192,18 +1169,15 @@
             </item>
             <item>
               <para
-                >Call the <see
-                 cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" />
+                >Call the <see cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" />
 
                 
 
-                 extension method to retrieve an object that implements <see
-                 cref="T:System.Xml.Schema.IXmlSchemaInfo" />
+                 extension method to retrieve an object that implements <see cref="T:System.Xml.Schema.IXmlSchemaInfo" />
 
                 
 
-                . From the retrieved object, you can get an <see
-                 cref="T:System.Xml.Schema.XmlSchemaObject" />
+                . From the retrieved object, you can get an <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
                 
 
@@ -1212,18 +1186,15 @@
               <list type="bullet">
                 <item>
                   <para
-                    >If you get an <see
-                     cref="T:System.Xml.Schema.XmlSchemaObject" />
+                    >If you get an <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
                     
 
-                     for an <see
-                     cref="T:System.Xml.Linq.XElement" />
+                     for an <see cref="T:System.Xml.Linq.XElement" />
 
                     
 
-                    , the type will be <see
-                     cref="T:System.Xml.Schema.XmlSchemaElement" />
+                    , the type will be <see cref="T:System.Xml.Schema.XmlSchemaElement" />
 
                     
 
@@ -1232,18 +1203,15 @@
                 </item>
                 <item>
                   <para
-                    >If you get an <see
-                     cref="T:System.Xml.Schema.XmlSchemaObject" />
+                    >If you get an <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
                     
 
-                     for an <see
-                     cref="T:System.Xml.Linq.XAttribute" />
+                     for an <see cref="T:System.Xml.Linq.XAttribute" />
 
                     
 
-                    , the type will be <see
-                     cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+                    , the type will be <see cref="T:System.Xml.Schema.XmlSchemaAttribute" />
 
                     
 
@@ -1254,8 +1222,7 @@
             </item>
           </list>
           <para
-            >After you have an instance of an <see
-             cref="T:System.Xml.Schema.XmlSchemaObject" />
+            >After you have an instance of an <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
             
 
@@ -1265,18 +1232,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates that an <see
-             cref="T:System.Xml.Linq.XElement" />
+            >Validates that an <see cref="T:System.Xml.Linq.XElement" />
 
             
 
-             sub-tree conforms to a specified <see
-             cref="T:System.Xml.Schema.XmlSchemaObject" />
+             sub-tree conforms to a specified <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
             
 
-             and an <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+             and an <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
@@ -1284,60 +1248,75 @@
           >
         </summary>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XElement" />
+          The <see cref="T:System.Xml.Linq.XElement" />
 
           
 
            to validate.</param
         >
         <param name="partialValidationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchemaObject" />
+          An <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
           
 
            that specifies the sub-tree to validate.</param
         >
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchemaSet" />
+          An <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
           
 
            to validate against.</param
         >
         <param name="validationEventHandler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Schema.ValidationEventHandler" />
+          A <see cref="T:System.Xml.Schema.ValidationEventHandler" />
 
           
 
            for an event that occurs when the reader encounters validation errors. If null, throws an exception upon validation errors.</param
         >
         <param name="addSchemaInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Boolean" />
+          A <see cref="T:System.Boolean" />
 
           
 

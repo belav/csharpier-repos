@@ -22,49 +22,41 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use <see
-         cref="T:System.Windows.Forms.ToolStripButton" />
+        >Use <see cref="T:System.Windows.Forms.ToolStripButton" />
 
         
 
-         to create a toolbar button that supports both text and images. Use the <see
-         cref="P:System.Windows.Forms.ToolStripItem.ImageAlign" />
+         to create a toolbar button that supports both text and images. Use the <see cref="P:System.Windows.Forms.ToolStripItem.ImageAlign" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.ToolStripItem.TextAlign" />
+         and <see cref="P:System.Windows.Forms.ToolStripItem.TextAlign" />
 
         
 
-         properties to get or set the positioning of <see
-         cref="T:System.Windows.Forms.ToolStripButton" />
+         properties to get or set the positioning of <see cref="T:System.Windows.Forms.ToolStripButton" />
 
         
 
          images and text.</para
       >
       <para
-        >You can display a <see
-         cref="T:System.Windows.Forms.ToolStripButton" />
+        >You can display a <see cref="T:System.Windows.Forms.ToolStripButton" />
 
         
 
          with various border styles, and you can use it to represent and activate operational states. You can also define it to have the focus by default.</para
       >
       <para
-        >Although <see
-         cref="T:System.Windows.Forms.ToolStripButton" />
+        >Although <see cref="T:System.Windows.Forms.ToolStripButton" />
 
         
 
-         replaces and extends the <see
-         cref="T:System.Windows.Forms.ToolBarButton" />
+         replaces and extends the <see cref="T:System.Windows.Forms.ToolBarButton" />
 
         
 
-         control of previous versions, <see
-         cref="T:System.Windows.Forms.ToolBarButton" />
+         control of previous versions, <see cref="T:System.Windows.Forms.ToolBarButton" />
 
         
 
@@ -74,8 +66,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a selectable <see
-         cref="T:System.Windows.Forms.ToolStripItem" />
+        >Represents a selectable <see cref="T:System.Windows.Forms.ToolStripItem" />
 
         
 
@@ -94,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -118,13 +108,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create a <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >Use this constructor to create a <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
-             that displays only an image on the <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+             that displays only an image on the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -134,8 +122,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -143,12 +130,15 @@
           >
         </summary>
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The image to display on the <see
-           cref="T:System.Windows.Forms.ToolStripButton" />
+          The image to display on the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
           
 
@@ -170,13 +160,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create a <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >Use this constructor to create a <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
-             that displays only text on the <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+             that displays only text on the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -186,8 +174,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -195,12 +182,15 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The text to display on the <see
-           cref="T:System.Windows.Forms.ToolStripButton" />
+          The text to display on the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
           
 
@@ -226,8 +216,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create a <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >Use this constructor to create a <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -237,8 +226,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -246,24 +234,30 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The text to display on the <see
-           cref="T:System.Windows.Forms.ToolStripButton" />
+          The text to display on the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
           
 
           .</param
         >
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The image to display on the <see
-           cref="T:System.Windows.Forms.ToolStripButton" />
+          The image to display on the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
           
 
@@ -290,13 +284,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create a <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >Use this constructor to create a <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
-             that displays both an image and text and raises the <see
-             cref="E:System.Windows.Forms.ToolStripItem.Click" />
+             that displays both an image and text and raises the <see cref="E:System.Windows.Forms.ToolStripItem.Click" />
 
             
 
@@ -306,13 +298,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
-             class that displays the specified text and image and that raises the <see
-             cref="E:System.Windows.Forms.ToolStripItem.Click" />
+             class that displays the specified text and image and that raises the <see cref="E:System.Windows.Forms.ToolStripItem.Click" />
 
             
 
@@ -320,36 +310,45 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The text to display on the <see
-           cref="T:System.Windows.Forms.ToolStripButton" />
+          The text to display on the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
           
 
           .</param
         >
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The image to display on the <see
-           cref="T:System.Windows.Forms.ToolStripButton" />
+          The image to display on the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
           
 
           .</param
         >
         <param name="onClick">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An event handler that raises the <see
-           cref="E:System.Windows.Forms.ToolStripItem.Click" />
+          An event handler that raises the <see cref="E:System.Windows.Forms.ToolStripItem.Click" />
 
           
 
@@ -377,13 +376,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create a <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >Use this constructor to create a <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
-             with the specified name that displays both an image and text and raises the <see
-             cref="E:System.Windows.Forms.ToolStripItem.Click" />
+             with the specified name that displays both an image and text and raises the <see cref="E:System.Windows.Forms.ToolStripItem.Click" />
 
             
 
@@ -393,13 +390,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
-             class with the specified name that displays the specified text and image and that raises the <see
-             cref="E:System.Windows.Forms.ToolStripItem.Click" />
+             class with the specified name that displays the specified text and image and that raises the <see cref="E:System.Windows.Forms.ToolStripItem.Click" />
 
             
 
@@ -407,48 +402,60 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The text to display on the <see
-           cref="T:System.Windows.Forms.ToolStripButton" />
+          The text to display on the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
           
 
           .</param
         >
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The image to display on the <see
-           cref="T:System.Windows.Forms.ToolStripButton" />
+          The image to display on the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
           
 
           .</param
         >
         <param name="onClick">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An event handler that raises the <see
-           cref="E:System.Windows.Forms.ToolStripItem.Click" />
+          An event handler that raises the <see cref="E:System.Windows.Forms.ToolStripItem.Click" />
 
           
 
            event.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Windows.Forms.ToolStripButton" />
+          The name of the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
           
 
@@ -476,18 +483,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.Windows.Forms.ToolStripButton.AutoToolTip" />
+            >Set the <see cref="P:System.Windows.Forms.ToolStripButton.AutoToolTip" />
 
             
 
-             property to false to display custom <see
-             cref="P:System.Windows.Forms.ToolStripItem.ToolTipText" />
+             property to false to display custom <see cref="P:System.Windows.Forms.ToolStripItem.ToolTipText" />
 
             
 
-             on a <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             on a <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -497,13 +501,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether default or custom <see
-             cref="T:System.Windows.Forms.ToolTip" />
+            >Gets or sets a value indicating whether default or custom <see cref="T:System.Windows.Forms.ToolTip" />
 
             
 
-             text is displayed on the <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+             text is displayed on the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -528,8 +530,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >Gets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -559,8 +560,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -583,8 +583,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -596,8 +595,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ToolStripButton.Checked" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ToolStripButton.Checked" />
 
             
 
@@ -627,8 +625,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -660,8 +657,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.Windows.Forms.ToolStripButton.CheckState" />
+            >Set the <see cref="P:System.Windows.Forms.ToolStripButton.CheckState" />
 
             
 
@@ -671,8 +667,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -695,8 +690,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -708,8 +702,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ToolStripButton.CheckState" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ToolStripButton.CheckState" />
 
             
 
@@ -736,13 +729,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you do not explicitly call <see
-             cref="M:System.Windows.Forms.ToolStripButton.CreateAccessibilityInstance" />
+            >If you do not explicitly call <see cref="M:System.Windows.Forms.ToolStripButton.CreateAccessibilityInstance" />
 
             
 
-            , it will be called when the <see
-             cref="P:System.Windows.Forms.ToolStripItem.AccessibilityObject" />
+            , it will be called when the <see cref="P:System.Windows.Forms.ToolStripItem.AccessibilityObject" />
 
             
 
@@ -750,8 +741,7 @@
           >
           <block subset="none" type="note">
             <para
-              >To get or set the <see
-               cref="P:System.Windows.Forms.ToolStripItem.AccessibilityObject" />
+              >To get or set the <see cref="P:System.Windows.Forms.ToolStripItem.AccessibilityObject" />
 
               
 
@@ -762,8 +752,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new accessibility object for the <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >Creates a new accessibility object for the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -773,13 +762,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >A new <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             for the <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+             for the <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -833,8 +820,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the size of a rectangular area into which a <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >Retrieves the size of a rectangular area into which a <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -844,8 +830,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An ordered pair of type <see
-             cref="T:System.Drawing.Size" />
+            >An ordered pair of type <see cref="T:System.Drawing.Size" />
 
             
 
@@ -853,12 +838,15 @@
           >
         </returns>
         <param name="constrainingSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The specified area for a <see
-           cref="T:System.Windows.Forms.ToolStripButton" />
+          The specified area for a <see cref="T:System.Windows.Forms.ToolStripButton" />
 
           
 
@@ -886,8 +874,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -896,8 +883,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripButton.OnCheckedChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripButton.OnCheckedChanged(System.EventArgs)" />
 
             
 
@@ -907,8 +893,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripButton.CheckedChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripButton.CheckedChanged" />
 
             
 
@@ -916,12 +901,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -949,8 +937,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -959,8 +946,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripButton.OnCheckStateChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripButton.OnCheckStateChanged(System.EventArgs)" />
 
             
 
@@ -970,8 +956,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripButton.CheckStateChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripButton.CheckStateChanged" />
 
             
 
@@ -979,12 +964,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1009,8 +997,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1019,8 +1006,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripButton.OnClick(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripButton.OnClick(System.EventArgs)" />
 
             
 
@@ -1030,8 +1016,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Click" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Click" />
 
             
 
@@ -1039,12 +1024,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1072,8 +1060,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1082,8 +1069,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripButton.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripButton.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
@@ -1093,8 +1079,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Paint" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Paint" />
 
             
 
@@ -1102,12 +1087,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.PaintEventArgs" />
+          A <see cref="T:System.Windows.Forms.PaintEventArgs" />
 
           
 

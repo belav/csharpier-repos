@@ -21,8 +21,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Converts WSDL-based policies for <see
-         cref="T:System.ServiceModel.Channels.UseManagedPresentationBindingElement" />
+        >Converts WSDL-based policies for <see cref="T:System.ServiceModel.Channels.UseManagedPresentationBindingElement" />
 
         
 
@@ -50,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.UseManagedPresentationBindingElementImporter" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.UseManagedPresentationBindingElementImporter" />
 
             
 

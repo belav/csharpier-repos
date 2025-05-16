@@ -36,8 +36,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can apply this attribute to assemblies, although the <format
-         type="text/html">
+        >You can apply this attribute to assemblies, although the <format type="text/html">
           <a href="EC0A8D63-11B3-4ACD-B398-DA1E37E97382"
             >[&lt;topic://cpgrfTypeLibraryImporterTlbimpexe&gt;]</a
           >
@@ -55,8 +54,7 @@
         </item>
         <item>
           <para
-            >Apply the <see
-             cref="T:System.Runtime.InteropServices.PrimaryInteropAssemblyAttribute" />
+            >Apply the <see cref="T:System.Runtime.InteropServices.PrimaryInteropAssemblyAttribute" />
 
             
 
@@ -65,36 +63,30 @@
         </item>
       </list>
       <para
-        >To specify a primary interop assembly in managed source code, you must apply the <see
-         cref="T:System.Runtime.InteropServices.GuidAttribute" />
+        >To specify a primary interop assembly in managed source code, you must apply the <see cref="T:System.Runtime.InteropServices.GuidAttribute" />
 
         
 
-         and <see
-         cref="T:System.Runtime.InteropServices.PrimaryInteropAssemblyAttribute" />
+         and <see cref="T:System.Runtime.InteropServices.PrimaryInteropAssemblyAttribute" />
 
         
 
-         to the assembly at design time. The <see
-         cref="T:System.Runtime.InteropServices.GuidAttribute" />
+         to the assembly at design time. The <see cref="T:System.Runtime.InteropServices.GuidAttribute" />
 
         
 
-         on the primary interop assembly identifies the LIBID of the type library and the <see
-         cref="T:System.Runtime.InteropServices.PrimaryInteropAssemblyAttribute" />
+         on the primary interop assembly identifies the LIBID of the type library and the <see cref="T:System.Runtime.InteropServices.PrimaryInteropAssemblyAttribute" />
 
         
 
-         identifies the version of the particular type library for which this assembly is the primary interop assembly. The <see
-         cref="T:System.Runtime.InteropServices.PrimaryInteropAssemblyAttribute" />
+         identifies the version of the particular type library for which this assembly is the primary interop assembly. The <see cref="T:System.Runtime.InteropServices.PrimaryInteropAssemblyAttribute" />
 
         
 
          can appear multiple times if the assembly is the primary interop assembly for multiple versions of the same type library.</para
       >
       <para
-        >When using the types defined in a type library, always reference the primary interop assembly for that type library, rather than reimporting or redefining the types themselves. For guidelines and procedures on how to produce or use primary interop assemblies, see <format
-         type="text/html">
+        >When using the types defined in a type library, always reference the primary interop assembly for that type library, rather than reimporting or redefining the types themselves. For guidelines and procedures on how to produce or use primary interop assemblies, see <format type="text/html">
           <a href="B977A8BE-59A0-40A0-A806-B11FFBA5C080"
             >[&lt;topic://cpconprimaryinteropassemblies&gt;]</a
           >
@@ -102,8 +94,7 @@
 
         
 
-        . For a detailed description of the type library importing process, see <format
-         type="text/html">
+        . For a detailed description of the type library importing process, see <format type="text/html">
           <a href="BF3F90C5-4770-4AB8-895C-3BA1055CC958"
             >[&lt;topic://cpcontypelibrarytoassemblyconversionsummary&gt;]</a
           >
@@ -144,8 +135,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Runtime.InteropServices.PrimaryInteropAssemblyAttribute" />
+            >The <see cref="T:System.Runtime.InteropServices.PrimaryInteropAssemblyAttribute" />
 
             
 
@@ -155,8 +145,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.PrimaryInteropAssemblyAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.PrimaryInteropAssemblyAttribute" />
 
             
 
@@ -164,14 +153,22 @@
           >
         </summary>
         <param name="major">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The major version of the type library for which this assembly is the primary interop assembly. </param
         >
         <param name="minor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

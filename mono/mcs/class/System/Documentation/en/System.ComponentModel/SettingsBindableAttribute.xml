@@ -48,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.SettingsBindableAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.SettingsBindableAttribute" />
 
             
 
@@ -57,7 +56,11 @@
           >
         </summary>
         <param name="bindable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -110,8 +113,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether two <see
-             cref="T:System.ComponentModel.SettingsBindableAttribute" />
+            >Determines whether two <see cref="T:System.ComponentModel.SettingsBindableAttribute" />
 
             
 
@@ -119,7 +121,11 @@
           >
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

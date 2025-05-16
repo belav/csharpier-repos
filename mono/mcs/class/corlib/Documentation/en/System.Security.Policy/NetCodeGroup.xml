@@ -35,46 +35,38 @@
 
         
 
-         has the same merge semantics as that of <see
-         cref="T:System.Security.Policy.UnionCodeGroup" />
+         has the same merge semantics as that of <see cref="T:System.Security.Policy.UnionCodeGroup" />
 
         
 
-        ; it forms the union of the <see
-         cref="T:System.Security.Policy.PolicyStatement" />
+        ; it forms the union of the <see cref="T:System.Security.Policy.PolicyStatement" />
 
         
 
-         objects of all matching child code groups and the <see
-         cref="T:System.Security.Policy.PolicyStatement" />
+         objects of all matching child code groups and the <see cref="T:System.Security.Policy.PolicyStatement" />
 
         
 
-         it generates from the input <see
-         cref="T:System.Security.Policy.Url" />
+         it generates from the input <see cref="T:System.Security.Policy.Url" />
 
         
 
-         evidence. However, <see
-         cref="T:System.Security.Policy.NetCodeGroup" />
+         evidence. However, <see cref="T:System.Security.Policy.NetCodeGroup" />
 
         
 
-         returns a permission containing a dynamically calculated <see
-         cref="T:System.Net.WebPermission" />
+         returns a permission containing a dynamically calculated <see cref="T:System.Net.WebPermission" />
 
         
 
-         that grants connect access to the site from which the code is run; <see
-         cref="T:System.Security.Policy.UnionCodeGroup" />
+         that grants connect access to the site from which the code is run; <see cref="T:System.Security.Policy.UnionCodeGroup" />
 
         
 
          simply returns a static permission set.</para
       >
       <para
-        >When a <see
-         cref="T:System.Security.Policy.NetCodeGroup" />
+        >When a <see cref="T:System.Security.Policy.NetCodeGroup" />
 
         
 
@@ -117,33 +109,27 @@
         </item>
       </list>
       <para
-        >You can control the scheme and port that code is permitted to use when connecting back to its site of origin by passing a <see
-         cref="T:System.Security.Policy.CodeConnectAccess" />
+        >You can control the scheme and port that code is permitted to use when connecting back to its site of origin by passing a <see cref="T:System.Security.Policy.CodeConnectAccess" />
 
         
 
-         object with the appropriate <see
-         cref="P:System.Security.Policy.CodeConnectAccess.Scheme" />
+         object with the appropriate <see cref="P:System.Security.Policy.CodeConnectAccess.Scheme" />
 
         
 
-         and <see
-         cref="P:System.Security.Policy.CodeConnectAccess.Port" />
+         and <see cref="P:System.Security.Policy.CodeConnectAccess.Port" />
 
         
 
-         property values to the <see
-         cref="M:System.Security.Policy.NetCodeGroup.AddConnectAccess(System.String,System.Security.Policy.CodeConnectAccess)" />
+         property values to the <see cref="M:System.Security.Policy.NetCodeGroup.AddConnectAccess(System.String,System.Security.Policy.CodeConnectAccess)" />
 
         
 
-         method. You can create a connection access rule that applies when the origin scheme is not present in the evidence or is not recognized by specifying <see
-         cref="F:System.Security.Policy.NetCodeGroup.AbsentOriginScheme" />
+         method. You can create a connection access rule that applies when the origin scheme is not present in the evidence or is not recognized by specifying <see cref="F:System.Security.Policy.NetCodeGroup.AbsentOriginScheme" />
 
         
 
-         ("") as the scheme. You can also create a connection access rule that applies when there is no connection access rule with a matching scheme by specifying <see
-         cref="F:System.Security.Policy.NetCodeGroup.AnyOtherOriginScheme" />
+         ("") as the scheme. You can also create a connection access rule that applies when there is no connection access rule with a matching scheme by specifying <see cref="F:System.Security.Policy.NetCodeGroup.AnyOtherOriginScheme" />
 
         
 
@@ -182,8 +168,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a <see
-             cref="T:System.Security.Policy.NetCodeGroup" />
+            >When a <see cref="T:System.Security.Policy.NetCodeGroup" />
 
             
 
@@ -229,8 +214,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Policy.NetCodeGroup" />
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.NetCodeGroup" />
 
             
 
@@ -238,7 +222,11 @@
           >
         </summary>
         <param name="membershipCondition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -265,59 +253,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When calling the <see
-             cref="M:System.Security.Policy.NetCodeGroup.AddConnectAccess(System.String,System.Security.Policy.CodeConnectAccess)" />
+            >When calling the <see cref="M:System.Security.Policy.NetCodeGroup.AddConnectAccess(System.String,System.Security.Policy.CodeConnectAccess)" />
 
             
 
-             method, you specify a scheme and an associated <see
-             cref="T:System.Security.Policy.CodeConnectAccess" />
+             method, you specify a scheme and an associated <see cref="T:System.Security.Policy.CodeConnectAccess" />
 
             
 
-             object. Any <see
-             cref="T:System.Security.Policy.CodeConnectAccess" />
+             object. Any <see cref="T:System.Security.Policy.CodeConnectAccess" />
 
             
 
-             objects that you add to the <see
-             cref="T:System.Security.Policy.NetCodeGroup" />
+             objects that you add to the <see cref="T:System.Security.Policy.NetCodeGroup" />
 
             
 
-             using <see
-             cref="F:System.Security.Policy.NetCodeGroup.AbsentOriginScheme" />
+             using <see cref="F:System.Security.Policy.NetCodeGroup.AbsentOriginScheme" />
 
             
 
-             as the origin scheme are applied when the code's origin scheme is not present in its evidence, or is not a scheme recognized by the <see
-             cref="T:System.Security.Policy.NetCodeGroup" />
+             as the origin scheme are applied when the code's origin scheme is not present in its evidence, or is not a scheme recognized by the <see cref="T:System.Security.Policy.NetCodeGroup" />
 
             
 
              object.</para
           >
           <para
-            >To specify the <see
-             cref="T:System.Security.Policy.CodeConnectAccess" />
+            >To specify the <see cref="T:System.Security.Policy.CodeConnectAccess" />
 
             
 
-             objects to use when the code's origin scheme does not match any of the schemes contained in the set of origin schemes added to the current <see
-             cref="T:System.Security.Policy.NetCodeGroup" />
+             objects to use when the code's origin scheme does not match any of the schemes contained in the set of origin schemes added to the current <see cref="T:System.Security.Policy.NetCodeGroup" />
 
             
 
-             object, use the <see
-             cref="F:System.Security.Policy.NetCodeGroup.AnyOtherOriginScheme" />
+             object, use the <see cref="F:System.Security.Policy.NetCodeGroup.AnyOtherOriginScheme" />
 
             
 
              value. </para
           >
           <para
-            >The value of the <see
-             cref="F:System.Security.Policy.NetCodeGroup.AbsentOriginScheme" />
+            >The value of the <see cref="F:System.Security.Policy.NetCodeGroup.AbsentOriginScheme" />
 
             
 
@@ -356,43 +334,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can add multiple <see
-             cref="T:System.Security.Policy.CodeConnectAccess" />
+            >You can add multiple <see cref="T:System.Security.Policy.CodeConnectAccess" />
 
             
 
-             objects for the same <paramref
-             name="origin scheme" />
+             objects for the same <paramref name="origin scheme" />
 
             
 
-            . If an <paramref
-             name="origin scheme" />
+            . If an <paramref name="origin scheme" />
 
             
 
-             already has one or more associated <see
-             cref="T:System.Security.Policy.CodeConnectAccess" />
+             already has one or more associated <see cref="T:System.Security.Policy.CodeConnectAccess" />
 
             
 
-             objects, specifying null for <paramref
-             name="connectAccess" />
+             objects, specifying null for <paramref name="connectAccess" />
 
             
 
-             has no effect. If the origin scheme does not have associated <see
-             cref="T:System.Security.Policy.CodeConnectAccess" />
+             has no effect. If the origin scheme does not have associated <see cref="T:System.Security.Policy.CodeConnectAccess" />
 
             
 
-             objects, specifying null for <paramref
-             name="connectAccess" />
+             objects, specifying null for <paramref name="connectAccess" />
 
             
 
-             prevents code with an origin scheme that matches <paramref
-             name="originScheme" />
+             prevents code with an origin scheme that matches <paramref name="originScheme" />
 
             
 
@@ -404,24 +374,30 @@
           <para>Adds the specified connection access to the current code group.</para>
         </summary>
         <param name="originScheme">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            containing the scheme to match against the code's scheme.</param
         >
         <param name="connectAccess">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.Policy.CodeConnectAccess" />
+          A <see cref="T:System.Security.Policy.CodeConnectAccess" />
 
           
 
@@ -448,67 +424,56 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When calling the <see
-             cref="M:System.Security.Policy.NetCodeGroup.AddConnectAccess(System.String,System.Security.Policy.CodeConnectAccess)" />
+            >When calling the <see cref="M:System.Security.Policy.NetCodeGroup.AddConnectAccess(System.String,System.Security.Policy.CodeConnectAccess)" />
 
             
 
-             method, you specify a scheme and an associated <see
-             cref="T:System.Security.Policy.CodeConnectAccess" />
+             method, you specify a scheme and an associated <see cref="T:System.Security.Policy.CodeConnectAccess" />
 
             
 
-             object. You can use the value of the <see
-             cref="F:System.Security.Policy.NetCodeGroup.AnyOtherOriginScheme" />
+             object. You can use the value of the <see cref="F:System.Security.Policy.NetCodeGroup.AnyOtherOriginScheme" />
 
             
 
-             field to specify the <see
-             cref="T:System.Security.Policy.CodeConnectAccess" />
+             field to specify the <see cref="T:System.Security.Policy.CodeConnectAccess" />
 
             
 
-             objects that should be used for any scheme that is not explicitly contained in the set of origin schemes added to the current <see
-             cref="T:System.Security.Policy.NetCodeGroup" />
+             objects that should be used for any scheme that is not explicitly contained in the set of origin schemes added to the current <see cref="T:System.Security.Policy.NetCodeGroup" />
 
             
 
              object. </para
           >
           <para
-            >The <see
-             cref="T:System.Security.Policy.CodeConnectAccess" />
+            >The <see cref="T:System.Security.Policy.CodeConnectAccess" />
 
             
 
-             objects specified with the <see
-             cref="F:System.Security.Policy.NetCodeGroup.AnyOtherOriginScheme" />
+             objects specified with the <see cref="F:System.Security.Policy.NetCodeGroup.AnyOtherOriginScheme" />
 
             
 
-             field are only used if the code's origin scheme does not match any of the schemes contained in the set of origin schemes added to the current <see
-             cref="T:System.Security.Policy.NetCodeGroup" />
+             field are only used if the code's origin scheme does not match any of the schemes contained in the set of origin schemes added to the current <see cref="T:System.Security.Policy.NetCodeGroup" />
 
             
 
              object.</para
           >
           <para
-            >To specify the <see
-             cref="T:System.Security.Policy.CodeConnectAccess" />
+            >To specify the <see cref="T:System.Security.Policy.CodeConnectAccess" />
 
             
 
-             objects to apply when the code's origin scheme is not available in its evidence or is not recognized, use the <see
-             cref="F:System.Security.Policy.NetCodeGroup.AbsentOriginScheme" />
+             objects to apply when the code's origin scheme is not available in its evidence or is not recognized, use the <see cref="F:System.Security.Policy.NetCodeGroup.AbsentOriginScheme" />
 
             
 
              value.</para
           >
           <para
-            >The value of the <see
-             cref="F:System.Security.Policy.NetCodeGroup.AnyOtherOriginScheme" />
+            >The value of the <see cref="F:System.Security.Policy.NetCodeGroup.AnyOtherOriginScheme" />
 
             
 
@@ -627,8 +592,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following data are used to determine the equality of two <see
-             cref="T:System.Security.Policy.NetCodeGroup" />
+            >The following data are used to determine the equality of two <see cref="T:System.Security.Policy.NetCodeGroup" />
 
             
 
@@ -637,13 +601,11 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="P:System.Security.Policy.CodeGroup.Name" />
+                >The <see cref="P:System.Security.Policy.CodeGroup.Name" />
 
                 
 
-                 and <see
-                 cref="P:System.Security.Policy.CodeGroup.Description" />
+                 and <see cref="P:System.Security.Policy.CodeGroup.Description" />
 
                 
 
@@ -652,8 +614,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.Security.Policy.CodeGroup.MembershipCondition" />
+                >The <see cref="P:System.Security.Policy.CodeGroup.MembershipCondition" />
 
                 
 
@@ -662,8 +623,7 @@
             </item>
             <item>
               <para
-                >The set of origin schemes and the associated <see
-                 cref="T:System.Security.Policy.CodeConnectAccess" />
+                >The set of origin schemes and the associated <see cref="T:System.Security.Policy.CodeConnectAccess" />
 
                 
 
@@ -681,12 +641,15 @@
           <para>true if the specified code group is equivalent to the current code group; otherwise, false.</para>
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Policy.NetCodeGroup" />
+          The <see cref="T:System.Security.Policy.NetCodeGroup" />
 
           
 
@@ -717,28 +680,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In each dictionary entry, the <see
-             cref="P:System.Collections.DictionaryEntry.Key" />
+            >In each dictionary entry, the <see cref="P:System.Collections.DictionaryEntry.Key" />
 
             
 
-             property value is the origin scheme, and the <see
-             cref="P:System.Collections.DictionaryEntry.Value" />
+             property value is the origin scheme, and the <see cref="P:System.Collections.DictionaryEntry.Value" />
 
             
 
-             property value is the array of associated <see
-             cref="T:System.Security.Policy.CodeConnectAccess" />
+             property value is the array of associated <see cref="T:System.Security.Policy.CodeConnectAccess" />
 
             
 
-             objects. If there are no associated <see
-             cref="T:System.Security.Policy.CodeConnectAccess" />
+             objects. If there are no associated <see cref="T:System.Security.Policy.CodeConnectAccess" />
 
             
 
-             objects, <see
-             cref="P:System.Collections.DictionaryEntry.Value" />
+             objects, <see cref="P:System.Collections.DictionaryEntry.Value" />
 
             
 
@@ -752,8 +710,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.DictionaryEntry" />
+            >A <see cref="T:System.Collections.DictionaryEntry" />
 
             
 
@@ -852,8 +809,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the <see
-             cref="T:System.Security.NamedPermissionSet" />
+            >Gets the name of the <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
@@ -961,8 +917,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.Policy.PolicyStatement" />
+            >A <see cref="T:System.Security.Policy.PolicyStatement" />
 
             
 
@@ -970,12 +925,15 @@
           >
         </returns>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Policy.Evidence" />
+          The <see cref="T:System.Security.Policy.Evidence" />
 
           
 
@@ -1018,7 +976,11 @@
           <para>The complete set of code groups that were matched by the evidence.</para>
         </returns>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

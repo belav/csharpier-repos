@@ -30,8 +30,7 @@
 
         
 
-         adds the following functionality to the <see
-         cref="T:System.Configuration.SettingsBase" />
+         adds the following functionality to the <see cref="T:System.Configuration.SettingsBase" />
 
         
 
@@ -40,8 +39,7 @@
       <list type="bullet">
         <item>
           <para
-            >The ability to detect attributes on a derived, settings wrapper class. <see
-             cref="T:System.Configuration.ApplicationSettingsBase" />
+            >The ability to detect attributes on a derived, settings wrapper class. <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
             
 
@@ -50,13 +48,11 @@
         </item>
         <item>
           <para
-            >Higher-level <see
-             cref="M:System.Configuration.ApplicationSettingsBase.Save" />
+            >Higher-level <see cref="M:System.Configuration.ApplicationSettingsBase.Save" />
 
             
 
-             and <see
-             cref="M:System.Configuration.ApplicationSettingsBase.Reload" />
+             and <see cref="M:System.Configuration.ApplicationSettingsBase.Reload" />
 
             
 
@@ -68,13 +64,11 @@
         </item>
       </list>
       <para
-        >In the application settings architecture, to access a group of settings properties you need to derive a concrete wrapper class from <see
-         cref="T:System.Configuration.ApplicationSettingsBase" />
+        >In the application settings architecture, to access a group of settings properties you need to derive a concrete wrapper class from <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
         
 
-        . The wrapper class customizes <see
-         cref="T:System.Configuration.ApplicationSettingsBase" />
+        . The wrapper class customizes <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
         
 
@@ -86,18 +80,15 @@
         </item>
         <item>
           <para
-            >Appropriated attributes must be applied to the wrapper class's public properties to indicate characteristics of the settings property, such as the setting's scope (application or user), whether the setting should support roaming, the default value for the setting, the settings provider to be used, and so on. Each property is required to specify its scope, using either <see
-             cref="T:System.Configuration.ApplicationScopedSettingAttribute" />
+            >Appropriated attributes must be applied to the wrapper class's public properties to indicate characteristics of the settings property, such as the setting's scope (application or user), whether the setting should support roaming, the default value for the setting, the settings provider to be used, and so on. Each property is required to specify its scope, using either <see cref="T:System.Configuration.ApplicationScopedSettingAttribute" />
 
             
 
-             or <see
-             cref="T:System.Configuration.UserScopedSettingAttribute" />
+             or <see cref="T:System.Configuration.UserScopedSettingAttribute" />
 
             
 
-            . Application-scoped settings are read-only if the default <see
-             cref="T:System.Configuration.LocalFileSettingsProvider" />
+            . Application-scoped settings are read-only if the default <see cref="T:System.Configuration.LocalFileSettingsProvider" />
 
             
 
@@ -106,16 +97,14 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="T:System.Configuration.ApplicationSettingsBase" />
+        >The <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
         
 
          class uses reflection to detect these attributes at run time. Most of this information gets passed to the settings provider layer, which is responsible for storage, persistence format, and so on. </para
       >
       <para
-        >When an application has multiple settings wrapper classes, each class defines a <newTerm
-        >settings group</newTerm>
+        >When an application has multiple settings wrapper classes, each class defines a <newTerm>settings group</newTerm>
 
         
 
@@ -127,8 +116,7 @@
         </item>
         <item>
           <para
-            >If the group name is not explicitly set by the decorating the wrapper class with a <see
-             cref="T:System.Configuration.SettingsGroupNameAttribute" />
+            >If the group name is not explicitly set by the decorating the wrapper class with a <see cref="T:System.Configuration.SettingsGroupNameAttribute" />
 
             
 
@@ -137,21 +125,18 @@
         </item>
       </list>
       <para
-        >By default, all client-based applications use the <see
-         cref="T:System.Configuration.LocalFileSettingsProvider" />
+        >By default, all client-based applications use the <see cref="T:System.Configuration.LocalFileSettingsProvider" />
 
         
 
-         to provide storage. If an alternate settings provider is desired, then the wrapper class or property must be decorated with a corresponding <see
-         cref="T:System.Configuration.SettingsProviderAttribute" />
+         to provide storage. If an alternate settings provider is desired, then the wrapper class or property must be decorated with a corresponding <see cref="T:System.Configuration.SettingsProviderAttribute" />
 
         
 
         .</para
       >
       <para
-        >For more information about using application settings, see <format
-         type="text/html">
+        >For more information about using application settings, see <format type="text/html">
           <a href="64090a34-8556-4904-8ea0-20efe9f8c886">Application Settings for Windows Forms</a>
         </format>
 
@@ -183,8 +168,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default constructor was designed to work under the assumption that there is no component associated with the current settings wrapper class, which derives from <see
-             cref="T:System.Configuration.ApplicationSettingsBase" />
+            >The default constructor was designed to work under the assumption that there is no component associated with the current settings wrapper class, which derives from <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
             
 
@@ -197,8 +181,7 @@
             </item>
             <item>
               <para
-                >For each property on the wrapper marked with either [UserScopedSettingAttribute] or [ApplicationScopedSettingAttribute], a corresponding <see
-                 cref="T:System.Configuration.SettingsProperty" />
+                >For each property on the wrapper marked with either [UserScopedSettingAttribute] or [ApplicationScopedSettingAttribute], a corresponding <see cref="T:System.Configuration.SettingsProperty" />
 
                 
 
@@ -207,8 +190,7 @@
             </item>
             <item>
               <para
-                >Each <see
-                 cref="T:System.Configuration.SettingsProperty" />
+                >Each <see cref="T:System.Configuration.SettingsProperty" />
 
                 
 
@@ -217,13 +199,11 @@
             </item>
             <item>
               <para
-                >All other attributes are simply put into an attribute bag, the <see
-                 cref="P:System.Configuration.SettingsProperty.Attributes" />
+                >All other attributes are simply put into an attribute bag, the <see cref="P:System.Configuration.SettingsProperty.Attributes" />
 
                 
 
-                 property of the <see
-                 cref="T:System.Configuration.SettingsProperty" />
+                 property of the <see cref="T:System.Configuration.SettingsProperty" />
 
                 
 
@@ -232,28 +212,23 @@
             </item>
             <item>
               <para
-                >All <see
-                 cref="T:System.Configuration.SettingsProperty" />
+                >All <see cref="T:System.Configuration.SettingsProperty" />
 
                 
 
-                 objects are added to a <see
-                 cref="T:System.Configuration.SettingsPropertyCollection" />
+                 objects are added to a <see cref="T:System.Configuration.SettingsPropertyCollection" />
 
                 
 
-                 represented by the <see
-                 cref="P:System.Configuration.ApplicationSettingsBase.Properties" />
+                 represented by the <see cref="P:System.Configuration.ApplicationSettingsBase.Properties" />
 
                 
 
-                 property of the <see
-                 cref="T:System.Configuration.ApplicationSettingsBase" />
+                 property of the <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
                 
 
-                 class. This collection is then passed to the <see
-                 cref="M:System.Configuration.SettingsBase.Initialize(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection,System.Configuration.SettingsProviderCollection)" />
+                 class. This collection is then passed to the <see cref="M:System.Configuration.SettingsBase.Initialize(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection,System.Configuration.SettingsProviderCollection)" />
 
                 
 
@@ -262,23 +237,19 @@
             </item>
           </list>
           <para
-            >As implied by step 3 mentioned previously, <see
-             cref="T:System.Configuration.ApplicationSettingsBase" />
+            >As implied by step 3 mentioned previously, <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
             
 
-             natively works with several property attributes, specifically the following: <see
-             cref="T:System.Configuration.SettingsProviderAttribute" />
+             natively works with several property attributes, specifically the following: <see cref="T:System.Configuration.SettingsProviderAttribute" />
 
             
 
-            , <see
-             cref="T:System.Configuration.DefaultSettingValueAttribute" />
+            , <see cref="T:System.Configuration.DefaultSettingValueAttribute" />
 
             
 
-            , and <see
-             cref="T:System.Configuration.SettingsSerializeAsAttribute" />
+            , and <see cref="T:System.Configuration.SettingsSerializeAsAttribute" />
 
             
 
@@ -288,8 +259,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Configuration.ApplicationSettingsBase" />
+            >Initializes an instance of the <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
             
 
@@ -320,8 +290,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is exactly equivalent to the <see
-             cref="M:System.Configuration.ApplicationSettingsBase.#ctor(System.ComponentModel.IComponent,System.String)" />
+            >This constructor is exactly equivalent to the <see cref="M:System.Configuration.ApplicationSettingsBase.#ctor(System.ComponentModel.IComponent,System.String)" />
 
             
 
@@ -329,8 +298,7 @@
           >
           <para>ApplicationSettingsBase(owner, String.Empty)</para>
           <para
-            >For information about how reflection is used during the instantiation of a wrapper class, see the default <see
-             cref="M:System.Configuration.ApplicationSettingsBase.#ctor" />
+            >For information about how reflection is used during the instantiation of a wrapper class, see the default <see cref="M:System.Configuration.ApplicationSettingsBase.#ctor" />
 
             
 
@@ -340,8 +308,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Configuration.ApplicationSettingsBase" />
+            >Initializes an instance of the <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
             
 
@@ -349,7 +316,11 @@
           >
         </summary>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -379,21 +350,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
+            >This constructor initializes the <see cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
 
             
 
-             property to the value of the <paramref
-             name="settingsKey" />
+             property to the value of the <paramref name="settingsKey" />
 
             
 
              parameter. This property is useful in disambiguating different instances of the settings wrapper class in the same application domain.</para
           >
           <para
-            >For information about how reflection is used during the instantiation of a wrapper class, see the default <see
-             cref="M:System.Configuration.ApplicationSettingsBase.#ctor" />
+            >For information about how reflection is used during the instantiation of a wrapper class, see the default <see cref="M:System.Configuration.ApplicationSettingsBase.#ctor" />
 
             
 
@@ -403,8 +371,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Configuration.ApplicationSettingsBase" />
+            >Initializes an instance of the <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
             
 
@@ -412,12 +379,15 @@
           >
         </summary>
         <param name="settingsKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -448,49 +418,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.IComponent" />
+            >The <see cref="T:System.ComponentModel.IComponent" />
 
             
 
-             object specified by the <paramref
-             name="owner" />
+             object specified by the <paramref name="owner" />
 
             
 
-             parameter acts as the owner of the current instance of this applications settings class. During the initialization of the settings wrapper class derived from <see
-             cref="T:System.Configuration.ApplicationSettingsBase" />
+             parameter acts as the owner of the current instance of this applications settings class. During the initialization of the settings wrapper class derived from <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
             
 
-            , the owner's site is queried for a <see
-             cref="T:System.Configuration.ISettingsProviderService" />
+            , the owner's site is queried for a <see cref="T:System.Configuration.ISettingsProviderService" />
 
             
 
-            . If one exists, it is used in preference to native settings provider for all the properties of the wrapper class, as specified by the <see
-             cref="T:System.Configuration.SettingsProviderAttribute" />
+            . If one exists, it is used in preference to native settings provider for all the properties of the wrapper class, as specified by the <see cref="T:System.Configuration.SettingsProviderAttribute" />
 
             
 
             .</para
           >
           <para
-            >This constructor initializes the <see
-             cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
+            >This constructor initializes the <see cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
 
             
 
-             property to the value of the <paramref
-             name="settingsKey" />
+             property to the value of the <paramref name="settingsKey" />
 
             
 
              parameter. This property is useful in disambiguating different instances of the wrapper class in the same application domain.</para
           >
           <para
-            >For information about how reflection is used during the instantiation of a wrapper class, see the default <see
-             cref="M:System.Configuration.ApplicationSettingsBase.#ctor" />
+            >For information about how reflection is used during the instantiation of a wrapper class, see the default <see cref="M:System.Configuration.ApplicationSettingsBase.#ctor" />
 
             
 
@@ -500,8 +462,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Configuration.ApplicationSettingsBase" />
+            >Initializes an instance of the <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
             
 
@@ -509,19 +470,26 @@
           >
         </summary>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component that will act as the owner of the application settings object.</param
         >
         <param name="settingsKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -557,16 +525,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each settings wrapper class derived from <see
-             cref="T:System.Configuration.ApplicationSettingsBase" />
+            >Each settings wrapper class derived from <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
             
 
              has a context associated with it. The context is passed to the settings provider for each property to identify how the property is used. Context therefore acts as a hint to help the settings provider determine how best to persist the associated application settings values. </para
           >
           <para
-            >In contrast, the <see
-             cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
+            >In contrast, the <see cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
 
             
 
@@ -604,13 +570,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Configuration.ApplicationSettingsBase.GetPreviousVersion(System.String)" />
+            >The <see cref="M:System.Configuration.ApplicationSettingsBase.GetPreviousVersion(System.String)" />
 
             
 
-             method is often used in conjunction with the <see
-             cref="M:System.Configuration.ApplicationSettingsBase.Upgrade" />
+             method is often used in conjunction with the <see cref="M:System.Configuration.ApplicationSettingsBase.Upgrade" />
 
             
 
@@ -624,13 +588,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             containing the value of the specified <see
-             cref="T:System.Configuration.SettingsProperty" />
+             containing the value of the specified <see cref="T:System.Configuration.SettingsProperty" />
 
             
 
@@ -638,12 +600,15 @@
           >
         </returns>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -707,8 +672,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -717,8 +681,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Configuration.ApplicationSettingsBase.OnPropertyChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)" />
+            >The <see cref="M:System.Configuration.ApplicationSettingsBase.OnPropertyChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)" />
 
             
 
@@ -728,8 +691,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Configuration.ApplicationSettingsBase.PropertyChanged" />
+            >Raises the <see cref="E:System.Configuration.ApplicationSettingsBase.PropertyChanged" />
 
             
 
@@ -737,19 +699,26 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.PropertyChangedEventArgs" />
+          A <see cref="T:System.ComponentModel.PropertyChangedEventArgs" />
 
           
 
@@ -783,8 +752,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -793,8 +761,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Configuration.ApplicationSettingsBase.OnSettingChanging(System.Object,System.Configuration.SettingChangingEventArgs)" />
+            >The <see cref="M:System.Configuration.ApplicationSettingsBase.OnSettingChanging(System.Object,System.Configuration.SettingChangingEventArgs)" />
 
             
 
@@ -804,8 +771,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
+            >Raises the <see cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
 
             
 
@@ -813,19 +779,26 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingChangingEventArgs" />
+          A <see cref="T:System.Configuration.SettingChangingEventArgs" />
 
           
 
@@ -859,8 +832,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -869,8 +841,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Configuration.ApplicationSettingsBase.OnSettingsLoaded(System.Object,System.Configuration.SettingsLoadedEventArgs)" />
+            >The <see cref="M:System.Configuration.ApplicationSettingsBase.OnSettingsLoaded(System.Object,System.Configuration.SettingsLoadedEventArgs)" />
 
             
 
@@ -880,8 +851,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Configuration.ApplicationSettingsBase.SettingsLoaded" />
+            >Raises the <see cref="E:System.Configuration.ApplicationSettingsBase.SettingsLoaded" />
 
             
 
@@ -889,19 +859,26 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsLoadedEventArgs" />
+          A <see cref="T:System.Configuration.SettingsLoadedEventArgs" />
 
           
 
@@ -935,8 +912,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -945,8 +921,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Configuration.ApplicationSettingsBase.OnSettingsSaving(System.Object,System.ComponentModel.CancelEventArgs)" />
+            >The <see cref="M:System.Configuration.ApplicationSettingsBase.OnSettingsSaving(System.Object,System.ComponentModel.CancelEventArgs)" />
 
             
 
@@ -956,8 +931,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Configuration.ApplicationSettingsBase.SettingsSaving" />
+            >Raises the <see cref="E:System.Configuration.ApplicationSettingsBase.SettingsSaving" />
 
             
 
@@ -965,19 +939,26 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.CancelEventArgs" />
+          A <see cref="T:System.ComponentModel.CancelEventArgs" />
 
           
 
@@ -1013,26 +994,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The get accessor of the <see
-             cref="P:System.Configuration.ApplicationSettingsBase.Properties" />
+            >The get accessor of the <see cref="P:System.Configuration.ApplicationSettingsBase.Properties" />
 
             
 
-             property reflects over the metadata of the settings wrapper class, which is derived from <see
-             cref="T:System.Configuration.ApplicationSettingsBase" />
+             property reflects over the metadata of the settings wrapper class, which is derived from <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
             
 
             , to dynamically determine the set of available application settings properties.</para
           >
           <para
-            >The <see
-             cref="T:System.Configuration.ApplicationSettingsBase" />
+            >The <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
             
 
-             class natively recognizes certain characteristics of an application setting, such as its name, property type, settings provider, default value, read only status, and a serialization preference. These characteristics are mirrored as properties in the <see
-             cref="T:System.Configuration.SettingsProperty" />
+             class natively recognizes certain characteristics of an application setting, such as its name, property type, settings provider, default value, read only status, and a serialization preference. These characteristics are mirrored as properties in the <see cref="T:System.Configuration.SettingsProperty" />
 
             
 
@@ -1067,31 +1044,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Configuration.ApplicationSettingsBase.PropertyChanged" />
+            >The <see cref="E:System.Configuration.ApplicationSettingsBase.PropertyChanged" />
 
             
 
-             event is raised when a settings property is changed through the set accessor of the <see
-             cref="P:System.Configuration.ApplicationSettingsBase.Item(System.String)" />
+             event is raised when a settings property is changed through the set accessor of the <see cref="P:System.Configuration.ApplicationSettingsBase.Item(System.String)" />
 
             
 
-             method, or for every property that is restored when a call is made to the <see
-             cref="M:System.Configuration.ApplicationSettingsBase.Reload" />
+             method, or for every property that is restored when a call is made to the <see cref="M:System.Configuration.ApplicationSettingsBase.Reload" />
 
             
 
-             or <see
-             cref="M:System.Configuration.ApplicationSettingsBase.Reset" />
+             or <see cref="M:System.Configuration.ApplicationSettingsBase.Reset" />
 
             
 
              methods. </para
           >
           <para
-            >There is no corresponding PropertyChanging event for this class; instead, see the <see
-             cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
+            >There is no corresponding PropertyChanging event for this class; instead, see the <see cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
 
             
 
@@ -1164,13 +1136,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Configuration.SettingsProviderAttribute" />
+            >The <see cref="T:System.Configuration.SettingsProviderAttribute" />
 
             
 
-             determines what setting provider is used by a settings wrapper class or an individual setting property. If this attribute is not specified, a client application will use the <see
-             cref="T:System.Configuration.LocalFileSettingsProvider" />
+             determines what setting provider is used by a settings wrapper class or an individual setting property. If this attribute is not specified, a client application will use the <see cref="T:System.Configuration.LocalFileSettingsProvider" />
 
             
 
@@ -1203,8 +1173,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Configuration.ApplicationSettingsBase.Reload" />
+            >The <see cref="M:System.Configuration.ApplicationSettingsBase.Reload" />
 
             
 
@@ -1213,8 +1182,7 @@
           <list type="bullet">
             <item>
               <para
-                >It clears the currently cached properties by clearing the collection represented by the <see
-                 cref="P:System.Configuration.SettingsBase.PropertyValues" />
+                >It clears the currently cached properties by clearing the collection represented by the <see cref="P:System.Configuration.SettingsBase.PropertyValues" />
 
                 
 
@@ -1223,13 +1191,11 @@
             </item>
             <item>
               <para
-                >It raises the <see
-                 cref="E:System.Configuration.ApplicationSettingsBase.PropertyChanged" />
+                >It raises the <see cref="E:System.Configuration.ApplicationSettingsBase.PropertyChanged" />
 
                 
 
-                 event for every member of the <see
-                 cref="P:System.Configuration.ApplicationSettingsBase.Properties" />
+                 event for every member of the <see cref="P:System.Configuration.ApplicationSettingsBase.Properties" />
 
                 
 
@@ -1242,8 +1208,7 @@
 
             
 
-             contrasts with <see
-             cref="M:System.Configuration.ApplicationSettingsBase.Reset" />
+             contrasts with <see cref="M:System.Configuration.ApplicationSettingsBase.Reset" />
 
             
 
@@ -1276,8 +1241,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Configuration.ApplicationSettingsBase.Reset" />
+            >The <see cref="M:System.Configuration.ApplicationSettingsBase.Reset" />
 
             
 
@@ -1286,8 +1250,7 @@
           <list type="bullet">
             <item>
               <para
-                >It calls the <see
-                 cref="M:System.Configuration.IApplicationSettingsProvider.Reset(System.Configuration.SettingsContext)" />
+                >It calls the <see cref="M:System.Configuration.IApplicationSettingsProvider.Reset(System.Configuration.SettingsContext)" />
 
                 
 
@@ -1296,8 +1259,7 @@
             </item>
             <item>
               <para
-                >It calls the <see
-                 cref="M:System.Configuration.ApplicationSettingsBase.Reload" />
+                >It calls the <see cref="M:System.Configuration.ApplicationSettingsBase.Reload" />
 
                 
 
@@ -1310,8 +1272,7 @@
 
             
 
-             contrasts with <see
-             cref="M:System.Configuration.ApplicationSettingsBase.Reset" />
+             contrasts with <see cref="M:System.Configuration.ApplicationSettingsBase.Reset" />
 
             
 
@@ -1344,39 +1305,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Configuration.ApplicationSettingsBase.Save" />
+            >The <see cref="M:System.Configuration.ApplicationSettingsBase.Save" />
 
             
 
-             method writes the current value of each settings property to its associated data store. For each property, this method calls the <see
-             cref="M:System.Configuration.SettingsProvider.SetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyValueCollection)" />
+             method writes the current value of each settings property to its associated data store. For each property, this method calls the <see cref="M:System.Configuration.SettingsProvider.SetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyValueCollection)" />
 
             
 
              method on the associated settings provider.</para
           >
           <para
-            >This method differs from the base class implementation in that it raises the <see
-             cref="E:System.Configuration.ApplicationSettingsBase.SettingsSaving" />
+            >This method differs from the base class implementation in that it raises the <see cref="E:System.Configuration.ApplicationSettingsBase.SettingsSaving" />
 
             
 
              event before the values are written.</para
           >
           <para
-            >If the only settings defined are application-scoped settings, <see
-             cref="M:System.Configuration.ApplicationSettingsBase.Save" />
+            >If the only settings defined are application-scoped settings, <see cref="M:System.Configuration.ApplicationSettingsBase.Save" />
 
             
 
-             will have no effect and return no error if called with the default <see
-             cref="T:System.Configuration.LocalFileSettingsProvider" />
+             will have no effect and return no error if called with the default <see cref="T:System.Configuration.LocalFileSettingsProvider" />
 
             
 
-            . <see
-             cref="T:System.Configuration.LocalFileSettingsProvider" />
+            . <see cref="T:System.Configuration.LocalFileSettingsProvider" />
 
             
 
@@ -1384,18 +1339,15 @@
           >
           <block subset="none" type="note">
             <para
-              >There is no corresponding Load method because the values of application settings are automatically loaded during wrapper class initialization. In contrast, these values are not automatically saved when an application ends. Therefore, you must explicitly call the <see
-               cref="M:System.Configuration.ApplicationSettingsBase.Save" />
+              >There is no corresponding Load method because the values of application settings are automatically loaded during wrapper class initialization. In contrast, these values are not automatically saved when an application ends. Therefore, you must explicitly call the <see cref="M:System.Configuration.ApplicationSettingsBase.Save" />
 
               
 
-               method to persist the current values of the application settings. This is typically performed in the <see
-               cref="E:System.Windows.Forms.Form.Closing" />
+               method to persist the current values of the application settings. This is typically performed in the <see cref="E:System.Windows.Forms.Form.Closing" />
 
               
 
-               event handler of the primary or containing <see
-               cref="T:System.Windows.Forms.Form" />
+               event handler of the primary or containing <see cref="T:System.Windows.Forms.Form" />
 
               
 
@@ -1431,46 +1383,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
+            >The <see cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
 
             
 
-             event occurs before an application setting value property is changed through the <see
-             cref="P:System.Configuration.ApplicationSettingsBase.Item(System.String)" />
+             event occurs before an application setting value property is changed through the <see cref="P:System.Configuration.ApplicationSettingsBase.Item(System.String)" />
 
             
 
-             method. This event is not raised when the <see
-             cref="M:System.Configuration.ApplicationSettingsBase.Reload" />
+             method. This event is not raised when the <see cref="M:System.Configuration.ApplicationSettingsBase.Reload" />
 
             
 
-             or <see
-             cref="M:System.Configuration.ApplicationSettingsBase.Reset" />
+             or <see cref="M:System.Configuration.ApplicationSettingsBase.Reset" />
 
             
 
-             methods are called. <see
-             cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
+             methods are called. <see cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
 
             
 
-             can be canceled through the <see
-             cref="T:System.Configuration.SettingChangingEventArgs" />
+             can be canceled through the <see cref="T:System.Configuration.SettingChangingEventArgs" />
 
             
 
              event data class.</para
           >
           <para
-            >You typically use the <see
-             cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
+            >You typically use the <see cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
 
             
 
-             event to handle immediate validation of an individual settings property. For more information about validation, see <format
-             type="text/html">
+             event to handle immediate validation of an individual settings property. For more information about validation, see <format type="text/html">
               <a href="9f145ada-4267-436a-aa4c-c4dcffd0afb7"
                 >How to: Validate Application Settings</a
               >
@@ -1481,8 +1425,7 @@
             .</para
           >
           <para
-            >There is no corresponding SettingChanged event for this class; instead, see the <see
-             cref="E:System.Configuration.ApplicationSettingsBase.PropertyChanged" />
+            >There is no corresponding SettingChanged event for this class; instead, see the <see cref="E:System.Configuration.ApplicationSettingsBase.PropertyChanged" />
 
             
 
@@ -1517,16 +1460,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
+            >The <see cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
 
             
 
              property is provided to enable client code, and in particular the settings provider, to disambiguate between multiple instances of the same application settings class.</para
           >
           <para
-            >Unless the settings wrapper class is designed using the singleton pattern, there can be multiple instances of the same application settings class in a single application. The value of <see
-             cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
+            >Unless the settings wrapper class is designed using the singleton pattern, there can be multiple instances of the same application settings class in a single application. The value of <see cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
 
             
 
@@ -1535,13 +1476,11 @@
           <list type="bullet">
             <item>
               <para
-                >If the settings properties of the wrapper are intended to be shared across all instances of the wrapper in the same application, then <see
-                 cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
+                >If the settings properties of the wrapper are intended to be shared across all instances of the wrapper in the same application, then <see cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
 
                 
 
-                 should have the same value in all of the instances. This is the default behavior of the <see
-                 cref="T:System.Configuration.ApplicationSettingsBase" />
+                 should have the same value in all of the instances. This is the default behavior of the <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
                 
 
@@ -1550,18 +1489,15 @@
             </item>
             <item>
               <para
-                >If the settings properties of the wrapper are intended to be per instance, then <see
-                 cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
+                >If the settings properties of the wrapper are intended to be per instance, then <see cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
 
                 
 
-                 should have a unique value for every instance. The <see
-                 cref="M:System.Configuration.ApplicationSettingsBase.#ctor(System.String)" />
+                 should have a unique value for every instance. The <see cref="M:System.Configuration.ApplicationSettingsBase.#ctor(System.String)" />
 
                 
 
-                 version of the constructor enables you to initialize <see
-                 cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
+                 version of the constructor enables you to initialize <see cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
 
                 
 
@@ -1570,26 +1506,22 @@
             </item>
           </list>
           <para
-            >In contrast, the <see
-             cref="P:System.Configuration.ApplicationSettingsBase.Context" />
+            >In contrast, the <see cref="P:System.Configuration.ApplicationSettingsBase.Context" />
 
             
 
              property provides hints to the settings provider to enable it to persist values in an efficient and orderly manner.</para
           >
           <para
-            >The <see
-             cref="T:System.Configuration.SettingChangingEventArgs" />
+            >The <see cref="T:System.Configuration.SettingChangingEventArgs" />
 
             
 
-             class contains a similar <see
-             cref="P:System.Configuration.SettingChangingEventArgs.SettingKey" />
+             class contains a similar <see cref="P:System.Configuration.SettingChangingEventArgs.SettingKey" />
 
             
 
-             property that helps identify the source of the <see
-             cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
+             property that helps identify the source of the <see cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
 
             
 
@@ -1624,23 +1556,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Configuration.ApplicationSettingsBase.SettingsLoaded" />
+            >The <see cref="E:System.Configuration.ApplicationSettingsBase.SettingsLoaded" />
 
             
 
-             event occurs only after the initial get access of the first configuration property used, typically through the <see
-             cref="P:System.Configuration.ApplicationSettingsBase.Item(System.String)" />
+             event occurs only after the initial get access of the first configuration property used, typically through the <see cref="P:System.Configuration.ApplicationSettingsBase.Item(System.String)" />
 
             
 
-             method. Subsequent accesses use values for the settings property that are cached locally. The <see
-             cref="M:System.Configuration.ApplicationSettingsBase.Reset" />
+             method. Subsequent accesses use values for the settings property that are cached locally. The <see cref="M:System.Configuration.ApplicationSettingsBase.Reset" />
 
             
 
-             and <see
-             cref="M:System.Configuration.ApplicationSettingsBase.Reload" />
+             and <see cref="M:System.Configuration.ApplicationSettingsBase.Reload" />
 
             
 
@@ -1675,13 +1603,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Configuration.ApplicationSettingsBase.SettingsSaving" />
+            >The <see cref="E:System.Configuration.ApplicationSettingsBase.SettingsSaving" />
 
             
 
-             event is raised by the <see
-             cref="M:System.Configuration.ApplicationSettingsBase.Save" />
+             event is raised by the <see cref="M:System.Configuration.ApplicationSettingsBase.Save" />
 
             
 
@@ -1714,8 +1640,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Configuration.ApplicationSettingsBase.Upgrade" />
+            >The <see cref="M:System.Configuration.ApplicationSettingsBase.Upgrade" />
 
             
 
@@ -1724,18 +1649,15 @@
           <list type="bullet">
             <item>
               <para
-                >It notifies all of the corresponding settings providers of the existence of the upgraded application through a call to their <see
-                 cref="M:System.Configuration.IApplicationSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
+                >It notifies all of the corresponding settings providers of the existence of the upgraded application through a call to their <see cref="M:System.Configuration.IApplicationSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
 
                 
 
-                 method, assuming they have implemented the <see
-                 cref="T:System.Configuration.IApplicationSettingsProvider" />
+                 method, assuming they have implemented the <see cref="T:System.Configuration.IApplicationSettingsProvider" />
 
                 
 
-                 interface. This action is not performed if the settings wrapper class is marked with <see
-                 cref="T:System.Configuration.NoSettingsVersionUpgradeAttribute" />
+                 interface. This action is not performed if the settings wrapper class is marked with <see cref="T:System.Configuration.NoSettingsVersionUpgradeAttribute" />
 
                 
 
@@ -1747,13 +1669,11 @@
             </item>
           </list>
           <para
-            >You can override the default behavior of <see
-             cref="M:System.Configuration.ApplicationSettingsBase.Upgrade" />
+            >You can override the default behavior of <see cref="M:System.Configuration.ApplicationSettingsBase.Upgrade" />
 
             
 
-             to implement custom upgrading or merging behavior. Use the <see
-             cref="M:System.Configuration.ApplicationSettingsBase.GetPreviousVersion(System.String)" />
+             to implement custom upgrading or merging behavior. Use the <see cref="M:System.Configuration.ApplicationSettingsBase.GetPreviousVersion(System.String)" />
 
             
 

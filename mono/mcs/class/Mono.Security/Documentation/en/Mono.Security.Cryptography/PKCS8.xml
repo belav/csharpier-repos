@@ -8,7 +8,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -36,15 +38,9 @@
         <Parameter Name="data" Type="System.Byte[]" />
       </Parameters>
       <Docs>
-        <param name="data"
-          >a <see
-           cref="T:System.Byte" />
-        </param>
+        <param name="data">a <see cref="T:System.Byte" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Security.Cryptography.PKCS8+KeyInfo" />
-        </returns>
+        <returns>a <see cref="T:Mono.Security.Cryptography.PKCS8+KeyInfo" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>

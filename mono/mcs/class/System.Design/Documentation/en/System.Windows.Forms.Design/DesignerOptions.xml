@@ -29,8 +29,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Design.DesignerOptions" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.DesignerOptions" />
 
             
 
@@ -62,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that enables or disables in-place editing for <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets a value that enables or disables in-place editing for <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -90,8 +88,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Drawing.Size" />
+            >Gets or sets a <see cref="T:System.Drawing.Size" />
 
             
 
@@ -117,8 +114,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A component's smart tag panel is set to automatically open when the <see
-             cref="P:System.ComponentModel.Design.DesignerActionList.AutoShow" />
+            >A component's smart tag panel is set to automatically open when the <see cref="P:System.ComponentModel.Design.DesignerActionList.AutoShow" />
 
             
 
@@ -205,13 +201,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This option is not exposed on the <ui
-            >Options</ui>
+            >This option is not exposed on the <ui>Options</ui>
 
             
 
-             item of the <ui
-            >Tools</ui>
+             item of the <ui>Tools</ui>
 
             
 

@@ -20,33 +20,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.TemplateControlParser" />
+        >The <see cref="T:System.Web.UI.TemplateControlParser" />
 
         
 
-         class provides parser functionality for the <see
-         cref="T:System.Web.UI.TemplateControl" />
+         class provides parser functionality for the <see cref="T:System.Web.UI.TemplateControl" />
 
         
 
-         class.  Classes that inherit from <see
-         cref="T:System.Web.UI.TemplateControl" />
+         class.  Classes that inherit from <see cref="T:System.Web.UI.TemplateControl" />
 
         
 
-         class include the <see
-         cref="T:System.Web.UI.UserControl" />
+         class include the <see cref="T:System.Web.UI.UserControl" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.Page" />
+         and <see cref="T:System.Web.UI.Page" />
 
         
 
-         classes. Because the <see
-         cref="T:System.Web.UI.TemplateControlParser" />
+         classes. Because the <see cref="T:System.Web.UI.TemplateControlParser" />
 
         
 
@@ -69,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.TemplateControlParser" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.TemplateControlParser" />
 
             
 

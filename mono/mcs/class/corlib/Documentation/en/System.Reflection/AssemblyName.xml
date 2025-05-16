@@ -49,8 +49,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Reflection.AssemblyName" />
+        >The <see cref="T:System.Reflection.AssemblyName" />
 
         
 
@@ -113,51 +112,42 @@
       <para></para>
       <para>A "++" becomes "\+\+", and a "\" becomes "\\".</para>
       <para
-        >This qualified name can be persisted and later used to load the <see
-         cref="T:System.Type" />
+        >This qualified name can be persisted and later used to load the <see cref="T:System.Type" />
 
         
 
-        . To search for and load a <see
-         cref="T:System.Type" />
+        . To search for and load a <see cref="T:System.Type" />
 
         
 
-        , use <see
-         cref="M:System.Type.GetType" />
+        , use <see cref="M:System.Type.GetType" />
 
         
 
-         either with the type name only or with the assembly qualified type name. <see
-         cref="M:System.Type.GetType" />
+         either with the type name only or with the assembly qualified type name. <see cref="M:System.Type.GetType" />
 
         
 
-         with the type name only will look for the <see
-         cref="T:System.Type" />
+         with the type name only will look for the <see cref="T:System.Type" />
 
         
 
-         in the caller's assembly and then in the System assembly. <see
-         cref="M:System.Type.GetType" />
+         in the caller's assembly and then in the System assembly. <see cref="M:System.Type.GetType" />
 
         
 
-         with the assembly qualified type name will look for the <see
-         cref="T:System.Type" />
+         with the assembly qualified type name will look for the <see cref="T:System.Type" />
 
         
 
          in any assembly.</para
       >
       <para
-        >A fully specified <see
-         cref="T:System.Reflection.AssemblyName" />
+        >A fully specified <see cref="T:System.Reflection.AssemblyName" />
 
         
 
-         must have the name, culture, public key or public key token, major version, minor version, build number, and revision number parameters. The last four are packaged in the <see
-         cref="T:System.Version" />
+         must have the name, culture, public key or public key token, major version, minor version, build number, and revision number parameters. The last four are packaged in the <see cref="T:System.Version" />
 
         
 
@@ -165,46 +155,38 @@
       >
       <para />
       <para
-        >To create a simple name, create an <see
-         cref="T:System.Reflection.AssemblyName" />
+        >To create a simple name, create an <see cref="T:System.Reflection.AssemblyName" />
 
         
 
-         object using the default constructor and set the <see
-         cref="P:System.Reflection.AssemblyName.Name" />
+         object using the default constructor and set the <see cref="P:System.Reflection.AssemblyName.Name" />
 
         
 
         . The other properties are optional.</para
       >
       <para
-        >To create a full strong name, create an <see
-         cref="T:System.Reflection.AssemblyName" />
+        >To create a full strong name, create an <see cref="T:System.Reflection.AssemblyName" />
 
         
 
-         object using the default constructor and set the <see
-         cref="P:System.Reflection.AssemblyName.Name" />
+         object using the default constructor and set the <see cref="P:System.Reflection.AssemblyName.Name" />
 
         
 
-         and <see
-         cref="P:System.Reflection.AssemblyName.KeyPair" />
+         and <see cref="P:System.Reflection.AssemblyName.KeyPair" />
 
         
 
-        . The other properties are optional. Use <see
-         cref="M:System.Reflection.AssemblyName.SetPublicKey(System.Byte[])" />
+        . The other properties are optional. Use <see cref="M:System.Reflection.AssemblyName.SetPublicKey(System.Byte[])" />
 
         
 
-         and <see
-         cref="M:System.Reflection.AssemblyName.SetPublicKeyToken(System.Byte[])" />
+         and <see cref="M:System.Reflection.AssemblyName.SetPublicKeyToken(System.Byte[])" />
 
         
 
-         to set the public key and the strong name. The strong name signing always uses the <see
-         cref="T:System.Security.Cryptography.SHA1" />
+         to set the public key and the strong name. The strong name signing always uses the <see cref="T:System.Security.Cryptography.SHA1" />
 
         
 
@@ -229,57 +211,48 @@
         </item>
       </list>
       <para
-        >You can also get the name by using the <userInput
-        >/l</userInput>
+        >You can also get the name by using the <userInput>/l</userInput>
 
         
 
-         option with the <format
-         type="text/html">
+         option with the <format type="text/html">
           <a href="4c7be9c8-72ae-481f-a01c-1a4716806e99"
             >Global Assembly Cache Tool (Gacutil.exe)</a
           >
         </format>
       </para>
       <para
-        >For a partially specified strong name, create an <see
-         cref="T:System.Reflection.AssemblyName" />
+        >For a partially specified strong name, create an <see cref="T:System.Reflection.AssemblyName" />
 
         
 
-         object using the default constructor and set the name and public key. An assembly created using such an <see
-         cref="T:System.Reflection.AssemblyName" />
+         object using the default constructor and set the name and public key. An assembly created using such an <see cref="T:System.Reflection.AssemblyName" />
 
         
 
          can be signed later using the Assembly Linker (Al.exe).</para
       >
       <para
-        >It is possible to specify a public key and a <see
-         cref="P:System.Reflection.AssemblyName.KeyPair" />
+        >It is possible to specify a public key and a <see cref="P:System.Reflection.AssemblyName.KeyPair" />
 
         
 
-         with inconsistent values. This can be useful in developer scenarios. In this case, the public key retrieved with <see
-         cref="M:System.Reflection.AssemblyName.GetPublicKey" />
+         with inconsistent values. This can be useful in developer scenarios. In this case, the public key retrieved with <see cref="M:System.Reflection.AssemblyName.GetPublicKey" />
 
         
 
-         specifies the correct public key, while the <see
-         cref="P:System.Reflection.AssemblyName.KeyPair" />
+         specifies the correct public key, while the <see cref="P:System.Reflection.AssemblyName.KeyPair" />
 
         
 
-         specifies the public and private keys used during development. When the runtime detects a mismatch between the <see
-         cref="P:System.Reflection.AssemblyName.KeyPair" />
+         specifies the public and private keys used during development. When the runtime detects a mismatch between the <see cref="P:System.Reflection.AssemblyName.KeyPair" />
 
         
 
          and the public key, it looks up in the registry the correct key that matches the public key.</para
       >
       <para
-        >The format of the display name of an <see
-         cref="T:System.Reflection.AssemblyName" />
+        >The format of the display name of an <see cref="T:System.Reflection.AssemblyName" />
 
         
 
@@ -287,13 +260,11 @@
       >
       <para>Name &lt;,Culture = CultureInfo&gt; &lt;,Version = Major.Minor.Build.Revision&gt; &lt;, StrongName&gt; &lt;,PublicKeyToken&gt; '\0' </para>
       <para
-        >Name is the textual name of the assembly. CultureInfo is the RFC1766-format-defined culture. Major, Minor, Build, and Revision are the major version, minor version, build number, and revision number of the assembly. StrongName is the hexadecimal-encoded low-order 64 bits of the hash value of the public key generated using the SHA-1 hashing algorithm and the public key specified by <see
-         cref="M:System.Reflection.AssemblyName.SetPublicKey(System.Byte[])" />
+        >Name is the textual name of the assembly. CultureInfo is the RFC1766-format-defined culture. Major, Minor, Build, and Revision are the major version, minor version, build number, and revision number of the assembly. StrongName is the hexadecimal-encoded low-order 64 bits of the hash value of the public key generated using the SHA-1 hashing algorithm and the public key specified by <see cref="M:System.Reflection.AssemblyName.SetPublicKey(System.Byte[])" />
 
         
 
-        . PublicKeyToken is the hexadecimal-encoded public key specified by <see
-         cref="M:System.Reflection.AssemblyName.SetPublicKey(System.Byte[])" />
+        . PublicKeyToken is the hexadecimal-encoded public key specified by <see cref="M:System.Reflection.AssemblyName.SetPublicKey(System.Byte[])" />
 
         
 
@@ -302,8 +273,7 @@
       <para>Hexadecimal encoding is defined as the conversion of each byte of a binary object to two hexadecimal characters, progressing from least to most significant byte. Additional display values will be added as deemed necessary.</para>
       <para>If the full public key is known, then PublicKey may be substituted for StrongName.</para>
       <para
-        >Also note that except for Name, which must come first, the lexical order of parameters is unimportant. However, any parameter (Version, Culture, StrongName or PublicKey) not specifically set is considered to be omitted, and the <see
-         cref="T:System.Reflection.AssemblyName" />
+        >Also note that except for Name, which must come first, the lexical order of parameters is unimportant. However, any parameter (Version, Culture, StrongName or PublicKey) not specifically set is considered to be omitted, and the <see cref="T:System.Reflection.AssemblyName" />
 
         
 
@@ -311,8 +281,7 @@
       >
       <para>When supplying a display name, the convention StrongName =null or PublicKey= null indicates that binding and matching against a simply named assembly is required. Additionally, the convention Culture= "" (double quote representing an empty string) indicates matching against the default culture.</para>
       <para
-        >The following example shows an <see
-         cref="T:System.Reflection.AssemblyName" />
+        >The following example shows an <see cref="T:System.Reflection.AssemblyName" />
 
         
 
@@ -347,8 +316,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.AssemblyName" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyName" />
 
             
 
@@ -376,13 +344,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The supplied <paramref
-             name="assemblyName" />
+            >The supplied <paramref name="assemblyName" />
 
             
 
-             is parsed, and the appropriate fields of the new <see
-             cref="T:System.Reflection.AssemblyName" />
+             is parsed, and the appropriate fields of the new <see cref="T:System.Reflection.AssemblyName" />
 
             
 
@@ -392,8 +358,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.AssemblyName" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyName" />
 
             
 
@@ -401,12 +366,15 @@
           >
         </summary>
         <param name="assemblyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The display name of the assembly, as returned by the <see
-           cref="P:System.Reflection.AssemblyName.FullName" />
+          The display name of the assembly, as returned by the <see cref="P:System.Reflection.AssemblyName.FullName" />
 
           
 
@@ -438,8 +406,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Makes a copy of this <see
-             cref="T:System.Reflection.AssemblyName" />
+            >Makes a copy of this <see cref="T:System.Reflection.AssemblyName" />
 
             
 
@@ -449,8 +416,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that is a copy of this <see
-             cref="T:System.Reflection.AssemblyName" />
+            >An object that is a copy of this <see cref="T:System.Reflection.AssemblyName" />
 
             
 
@@ -477,16 +443,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When an assembly is loaded, this value can also be obtained using the <see
-             cref="P:System.Reflection.Assembly.CodeBase" />
+            >When an assembly is loaded, this value can also be obtained using the <see cref="P:System.Reflection.Assembly.CodeBase" />
 
             
 
              property. </para
           >
           <para
-            >If the assembly was loaded as a byte array, this property returns the location of the caller of the <see
-             cref="M:System.Reflection.Assembly.Load(System.Byte[])" />
+            >If the assembly was loaded as a byte array, this property returns the location of the caller of the <see cref="M:System.Reflection.Assembly.Load(System.Byte[])" />
 
             
 
@@ -494,33 +458,27 @@
           >
           <block subset="none" type="note">
             <para
-              >Do not use an <see
-               cref="T:System.Reflection.AssemblyName" />
+              >Do not use an <see cref="T:System.Reflection.AssemblyName" />
 
               
 
-               with only the <see
-               cref="P:System.Reflection.AssemblyName.CodeBase" />
+               with only the <see cref="P:System.Reflection.AssemblyName.CodeBase" />
 
               
 
-               property set. The <see
-               cref="P:System.Reflection.AssemblyName.CodeBase" />
+               property set. The <see cref="P:System.Reflection.AssemblyName.CodeBase" />
 
               
 
-               property does not supply any elements of the assembly identity (such as name or version), so loading does not occur according to load-by-identity rules, as you would expect from the <see
-               cref="M:System.Reflection.Assembly.Load(System.Reflection.AssemblyName)" />
+               property does not supply any elements of the assembly identity (such as name or version), so loading does not occur according to load-by-identity rules, as you would expect from the <see cref="M:System.Reflection.Assembly.Load(System.Reflection.AssemblyName)" />
 
               
 
-               method. Instead, the assembly is loaded using load-from rules. For information about the disadvantages of using the load-from context, see the <see
-               cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+               method. Instead, the assembly is loaded using load-from rules. For information about the disadvantages of using the load-from context, see the <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
               
 
-               method overload or <format
-               type="text/html">
+               method overload or <format type="text/html">
                 <a href="68d1c539-6a47-4614-ab59-4b071c9d4b4c"
                   >Best Practices for Assembly Loading</a
                 >
@@ -683,21 +641,18 @@
           <para>The display name typically consists of the simple name, version number, supported culture, and public key. For example: </para>
           <code>mylib, Version=1.2.1900.0, Culture=neutral, PublicKeyToken=a14f3033def15840</code>
           <para
-            >Writing your own code to parse display names is not recommended. Instead, pass the display name to the <see
-             cref="M:System.Reflection.AssemblyName.#ctor(System.String)" />
+            >Writing your own code to parse display names is not recommended. Instead, pass the display name to the <see cref="M:System.Reflection.AssemblyName.#ctor(System.String)" />
 
             
 
-             constructor, which parses it and populates the appropriate fields of the new <see
-             cref="T:System.Reflection.AssemblyName" />
+             constructor, which parses it and populates the appropriate fields of the new <see cref="T:System.Reflection.AssemblyName" />
 
             
 
             . </para
           >
           <para
-            >When an assembly is loaded, this value can also be obtained using the <see
-             cref="P:System.Reflection.Assembly.FullName" />
+            >When an assembly is loaded, this value can also be obtained using the <see cref="P:System.Reflection.Assembly.FullName" />
 
             
 
@@ -739,8 +694,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Reflection.AssemblyName" />
+            >Gets the <see cref="T:System.Reflection.AssemblyName" />
 
             
 
@@ -752,12 +706,15 @@
           <para>An object that represents the given assembly file.</para>
         </returns>
         <param name="assemblyFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The path for the assembly whose <see
-           cref="T:System.Reflection.AssemblyName" />
+          The path for the assembly whose <see cref="T:System.Reflection.AssemblyName" />
 
           
 
@@ -794,14 +751,22 @@
           <para>Gets serialization information with all the data needed to recreate an instance of this AssemblyName.</para>
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to be populated with serialization information. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -890,38 +855,31 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Starting with the net_v40_long, the <see
-               cref="P:System.Reflection.AssemblyName.HashAlgorithm" />
+              >Starting with the net_v40_long, the <see cref="P:System.Reflection.AssemblyName.HashAlgorithm" />
 
               
 
-               property of an <see
-               cref="T:System.Reflection.AssemblyName" />
+               property of an <see cref="T:System.Reflection.AssemblyName" />
 
               
 
-               object that is returned by the <see
-               cref="M:System.Reflection.Assembly.GetReferencedAssemblies" />
+               object that is returned by the <see cref="M:System.Reflection.Assembly.GetReferencedAssemblies" />
 
               
 
-               method is <see
-               cref="F:System.Configuration.Assemblies.AssemblyHashAlgorithm.None" />
+               method is <see cref="F:System.Configuration.Assemblies.AssemblyHashAlgorithm.None" />
 
               
 
-               if there is no hash algorithm for the referenced assembly, or if the hash algorithm of the referenced assembly is not identified by the <see
-               cref="T:System.Configuration.Assemblies.AssemblyHashAlgorithm" />
+               if there is no hash algorithm for the referenced assembly, or if the hash algorithm of the referenced assembly is not identified by the <see cref="T:System.Configuration.Assemblies.AssemblyHashAlgorithm" />
 
               
 
-               enumeration. In previous versions of the .NET Framework, the <see
-               cref="P:System.Reflection.AssemblyName.HashAlgorithm" />
+               enumeration. In previous versions of the .NET Framework, the <see cref="P:System.Reflection.AssemblyName.HashAlgorithm" />
 
               
 
-               property returned <see
-               cref="F:System.Configuration.Assemblies.AssemblyHashAlgorithm.SHA1" />
+               property returned <see cref="F:System.Configuration.Assemblies.AssemblyHashAlgorithm.SHA1" />
 
               
 
@@ -959,13 +917,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the runtime loads an assembly, it does not set the <see
-             cref="P:System.Reflection.AssemblyName.KeyPair" />
+            >When the runtime loads an assembly, it does not set the <see cref="P:System.Reflection.AssemblyName.KeyPair" />
 
             
 
-             property. The getter for the property is only useful if the user set the property before using the <see
-             cref="T:System.Reflection.AssemblyName" />
+             property. The getter for the property is only useful if the user set the property before using the <see cref="T:System.Reflection.AssemblyName" />
 
             
 
@@ -1027,8 +983,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+            >Implements the <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
@@ -1036,7 +991,11 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1067,8 +1026,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Beginning with the net_v40_long, this property always returns <see
-             cref="F:System.Reflection.ProcessorArchitecture.None" />
+            >Beginning with the net_v40_long, this property always returns <see cref="F:System.Reflection.ProcessorArchitecture.None" />
 
             
 
@@ -1116,14 +1074,22 @@
           <para>true if the simple assembly names are the same; otherwise, false.</para>
         </returns>
         <param name="reference">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The reference assembly name.</param
         >
         <param name="definition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1153,18 +1119,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must also use the <see
-             cref="M:System.Reflection.AssemblyName.SetPublicKeyToken(System.Byte[])" />
+            >You must also use the <see cref="M:System.Reflection.AssemblyName.SetPublicKeyToken(System.Byte[])" />
 
             
 
-             method to provide a public key token. Otherwise, a <see
-             cref="T:System.Security.SecurityException" />
+             method to provide a public key token. Otherwise, a <see cref="T:System.Security.SecurityException" />
 
             
 
-             is thrown when the <see
-             cref="M:System.Reflection.AssemblyName.GetPublicKey" />
+             is thrown when the <see cref="M:System.Reflection.AssemblyName.GetPublicKey" />
 
             
 
@@ -1176,7 +1139,11 @@
           <para>Sets the public key identifying the assembly.</para>
         </summary>
         <param name="publicKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1209,23 +1176,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you set the public key by calling the <see
-             cref="M:System.Reflection.AssemblyName.SetPublicKey(System.Byte[])" />
+            >When you set the public key by calling the <see cref="M:System.Reflection.AssemblyName.SetPublicKey(System.Byte[])" />
 
             
 
-             method, you must also use the <see
-             cref="M:System.Reflection.AssemblyName.SetPublicKeyToken(System.Byte[])" />
+             method, you must also use the <see cref="M:System.Reflection.AssemblyName.SetPublicKeyToken(System.Byte[])" />
 
             
 
-             method to provide a public key token. Otherwise, a <see
-             cref="T:System.Security.SecurityException" />
+             method to provide a public key token. Otherwise, a <see cref="T:System.Security.SecurityException" />
 
             
 
-             is thrown when the <see
-             cref="M:System.Reflection.AssemblyName.GetPublicKey" />
+             is thrown when the <see cref="M:System.Reflection.AssemblyName.GetPublicKey" />
 
             
 
@@ -1237,7 +1200,11 @@
           <para>Sets the public key token, which is the last 8 bytes of the SHA-1 hash of the public key under which the application or assembly is signed.</para>
         </summary>
         <param name="publicKeyToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1307,8 +1274,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference
-            >IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
+            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
 
             
 
@@ -1320,21 +1286,33 @@
           <para>Retrieves the type information for an object, which can then be used to get the type information for an interface.</para>
         </summary>
         <param name="iTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type information to return.</param
         >
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1430,8 +1408,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the description of <see
-             cref="T:System.Reflection.AssemblyName" />
+            >See the description of <see cref="T:System.Reflection.AssemblyName" />
 
             
 
@@ -1466,8 +1443,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >All components of the version must be integers greater than or equal to zero. Metadata restricts the major, minor, build, and revision components for an assembly to a maximum value of <see
-             cref="F:System.UInt16.MaxValue" />
+            >All components of the version must be integers greater than or equal to zero. Metadata restricts the major, minor, build, and revision components for an assembly to a maximum value of <see cref="F:System.UInt16.MaxValue" />
 
             
 
@@ -1511,13 +1487,11 @@
              information indicates, for example, that the assembly cannot execute side-by-side with other versions due to conflicts over a device driver.</para
           >
           <para
-            >Currently, <see
-             cref="P:System.Reflection.AssemblyName.VersionCompatibility" />
+            >Currently, <see cref="P:System.Reflection.AssemblyName.VersionCompatibility" />
 
             
 
-             always returns <see
-             cref="F:System.Configuration.Assemblies.AssemblyVersionCompatibility.SameMachine" />
+             always returns <see cref="F:System.Configuration.Assemblies.AssemblyVersionCompatibility.SameMachine" />
 
             
 

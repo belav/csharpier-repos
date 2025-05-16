@@ -12,7 +12,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -68,8 +70,7 @@
       <Docs>
         <summary>Set the challenge (random numbers) to calculate the response.</summary>
         <value
-          >a <see
-           cref="T:System.Byte[]" />
+          >a <see cref="T:System.Byte[]" />
 
           
 
@@ -111,21 +112,18 @@
       <Docs>
         <summary>The (NetBIOS) domain name of the current computer.</summary>
         <value
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
            representing the domain name of the current computer.</value
         >
         <remarks
-          >Defaults to <see
-           cref="T:System.Environment" />
+          >Defaults to <see cref="T:System.Environment" />
 
           
 
-          .<see
-           cref="P:System.Environment.UserDomainName" />
+          .<see cref="P:System.Environment.UserDomainName" />
 
           
 
@@ -180,21 +178,18 @@
       <Docs>
         <summary>The (NetBIOS) host name of the computer.</summary>
         <value
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
            representing the current (NetBIOS) host name of the computer.</value
         >
         <remarks
-          >Defaults to <see
-           cref="T:System.Environment" />
+          >Defaults to <see cref="T:System.Environment" />
 
           
 
-          .<see
-           cref="P:System.Environment.MachineName" />
+          .<see cref="P:System.Environment.MachineName" />
 
           
 
@@ -216,21 +211,18 @@
       <Docs>
         <summary>Return the LAN Manager (LM) part of the response.</summary>
         <value
-          >a <see
-           cref="T:System.Byte[]" />
+          >a <see cref="T:System.Byte[]" />
 
           
 
            containing the LAN Manager (LM) response.</value
         >
         <remarks
-          >See <see
-           cref="T:Mono.Security.Protocol.Ntlm.ChallengeResponse" />
+          >See <see cref="T:Mono.Security.Protocol.Ntlm.ChallengeResponse" />
 
           
 
-          .<see
-           cref="P:Mono.Security.Protocol.Ntlm.ChallengeResponse.LM" />
+          .<see cref="P:Mono.Security.Protocol.Ntlm.ChallengeResponse.LM" />
 
           
 
@@ -252,21 +244,18 @@
       <Docs>
         <summary>Return the NT part of the response.</summary>
         <value
-          >a <see
-           cref="T:System.Byte[]" />
+          >a <see cref="T:System.Byte[]" />
 
           
 
            containing the NT response.</value
         >
         <remarks
-          >See <see
-           cref="T:Mono.Security.Protocol.Ntlm.ChallengeResponse" />
+          >See <see cref="T:Mono.Security.Protocol.Ntlm.ChallengeResponse" />
 
           
 
-          .<see
-           cref="P:Mono.Security.Protocol.Ntlm.ChallengeResponse.NT" />
+          .<see cref="P:Mono.Security.Protocol.Ntlm.ChallengeResponse.NT" />
 
           
 
@@ -288,8 +277,7 @@
       <Docs>
         <summary>The user's password.</summary>
         <value
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
@@ -312,21 +300,18 @@
       <Docs>
         <summary>The username for which the password is supplied.</summary>
         <value
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
            representing the user name.</value
         >
         <remarks
-          >Defaults to <see
-           cref="T:System.Environment" />
+          >Defaults to <see cref="T:System.Environment" />
 
           
 
-          .<see
-           cref="P:System.Environment.UserName" />
+          .<see cref="P:System.Environment.UserName" />
 
           
 

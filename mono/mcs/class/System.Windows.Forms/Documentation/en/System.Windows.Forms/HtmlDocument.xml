@@ -17,31 +17,26 @@
 
         
 
-         provides a managed wrapper around Internet Explorer's document object, also known as the HTML Document Object Model (DOM). You obtain an instance of <see
-         cref="T:System.Windows.Forms.HtmlDocument" />
+         provides a managed wrapper around Internet Explorer's document object, also known as the HTML Document Object Model (DOM). You obtain an instance of <see cref="T:System.Windows.Forms.HtmlDocument" />
 
         
 
-         through the <see
-         cref="P:System.Windows.Forms.WebBrowser.Document" />
+         through the <see cref="P:System.Windows.Forms.WebBrowser.Document" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.WebBrowser" />
+         property of the <see cref="T:System.Windows.Forms.WebBrowser" />
 
         
 
          control. </para
       >
       <para
-        >HTML tags inside of an HTML document can be nested inside one another. <see
-         cref="T:System.Windows.Forms.HtmlDocument" />
+        >HTML tags inside of an HTML document can be nested inside one another. <see cref="T:System.Windows.Forms.HtmlDocument" />
 
         
 
-         thus represents a document tree, whose children are instances of the <see
-         cref="T:System.Windows.Forms.HtmlElement" />
+         thus represents a document tree, whose children are instances of the <see cref="T:System.Windows.Forms.HtmlElement" />
 
         
 
@@ -57,89 +52,73 @@
     &lt;/BODY&gt;
 &lt;/HTML&gt;</code>
       <para
-        >In this example, <see
-         cref="T:System.Windows.Forms.HtmlDocument" />
+        >In this example, <see cref="T:System.Windows.Forms.HtmlDocument" />
 
         
 
-         represents the entire document inside the HTML tags. The BODY, DIV, FORM and SPAN tags are represented by individual <see
-         cref="T:System.Windows.Forms.HtmlElement" />
+         represents the entire document inside the HTML tags. The BODY, DIV, FORM and SPAN tags are represented by individual <see cref="T:System.Windows.Forms.HtmlElement" />
 
         
 
          objects. </para
       >
       <para
-        >There are several ways you can access the elements in this tree. Use the <see
-         cref="P:System.Windows.Forms.HtmlDocument.Body" />
+        >There are several ways you can access the elements in this tree. Use the <see cref="P:System.Windows.Forms.HtmlDocument.Body" />
 
         
 
-         property to access the BODY tag and all of its children. The <see
-         cref="P:System.Windows.Forms.HtmlDocument.ActiveElement" />
+         property to access the BODY tag and all of its children. The <see cref="P:System.Windows.Forms.HtmlDocument.ActiveElement" />
 
         
 
-         property gives you the <see
-         cref="T:System.Windows.Forms.HtmlElement" />
+         property gives you the <see cref="T:System.Windows.Forms.HtmlElement" />
 
         
 
-         for the element on an HTML page that has user input focus. All elements within an HTML page can have a name; the <see
-         cref="P:System.Windows.Forms.HtmlDocument.All" />
+         for the element on an HTML page that has user input focus. All elements within an HTML page can have a name; the <see cref="P:System.Windows.Forms.HtmlDocument.All" />
 
         
 
-         collection provides access to each <see
-         cref="T:System.Windows.Forms.HtmlElement" />
+         collection provides access to each <see cref="T:System.Windows.Forms.HtmlElement" />
 
         
 
-         using its name as an index. <see
-         cref="M:System.Windows.Forms.HtmlDocument.GetElementsByTagName(System.String)" />
+         using its name as an index. <see cref="M:System.Windows.Forms.HtmlDocument.GetElementsByTagName(System.String)" />
 
         
 
-         will return an <see
-         cref="T:System.Windows.Forms.HtmlElementCollection" />
+         will return an <see cref="T:System.Windows.Forms.HtmlElementCollection" />
 
         
 
-         of all <see
-         cref="T:System.Windows.Forms.HtmlElement" />
+         of all <see cref="T:System.Windows.Forms.HtmlElement" />
 
         
 
-         objects with a given HTML tag name, such as DIV or TABLE. <see
-         cref="M:System.Windows.Forms.HtmlDocument.GetElementById(System.String)" />
+         objects with a given HTML tag name, such as DIV or TABLE. <see cref="M:System.Windows.Forms.HtmlDocument.GetElementById(System.String)" />
 
         
 
-         will return the single <see
-         cref="T:System.Windows.Forms.HtmlElement" />
+         will return the single <see cref="T:System.Windows.Forms.HtmlElement" />
 
         
 
-         corresponding to the unique ID that you supply. <see
-         cref="M:System.Windows.Forms.HtmlDocument.GetElementFromPoint(System.Drawing.Point)" />
+         corresponding to the unique ID that you supply. <see cref="M:System.Windows.Forms.HtmlDocument.GetElementFromPoint(System.Drawing.Point)" />
 
         
 
-         will return the <see
-         cref="T:System.Windows.Forms.HtmlElement" />
+         will return the <see cref="T:System.Windows.Forms.HtmlElement" />
 
         
 
          that can be found on the screen at the supplied mouse pointer coordinates. </para
       >
       <para
-        >You can also use the <see
-         cref="P:System.Windows.Forms.HtmlDocument.Forms" />
+        >You can also use the <see cref="P:System.Windows.Forms.HtmlDocument.Forms" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.HtmlDocument.Images" />
+         and <see cref="P:System.Windows.Forms.HtmlDocument.Images" />
 
         
 
@@ -150,36 +129,30 @@
 
         
 
-         is based on the unmanaged interfaces implemented by Internet Explorer's DHTML DOM: IHTMLDocument, IHTMLDocument2, IHTMLDocument3, and IHTMLDocument4. Only the most frequently used properties and methods on these unmanaged interfaces are exposed by <see
-         cref="T:System.Windows.Forms.HtmlDocument" />
+         is based on the unmanaged interfaces implemented by Internet Explorer's DHTML DOM: IHTMLDocument, IHTMLDocument2, IHTMLDocument3, and IHTMLDocument4. Only the most frequently used properties and methods on these unmanaged interfaces are exposed by <see cref="T:System.Windows.Forms.HtmlDocument" />
 
         
 
-        . You can access all other properties and methods directly using the <see
-         cref="P:System.Windows.Forms.HtmlDocument.DomDocument" />
+        . You can access all other properties and methods directly using the <see cref="P:System.Windows.Forms.HtmlDocument.DomDocument" />
 
         
 
          property, which you can cast to the desired unmanaged interface pointer. </para
       >
       <para
-        >An HTML document may contain frames, which are different windows inside of the <see
-         cref="T:System.Windows.Forms.WebBrowser" />
+        >An HTML document may contain frames, which are different windows inside of the <see cref="T:System.Windows.Forms.WebBrowser" />
 
         
 
-         control. Each frame displays its own HTML page. The <see
-         cref="P:System.Windows.Forms.HtmlWindow.Frames" />
+         control. Each frame displays its own HTML page. The <see cref="P:System.Windows.Forms.HtmlWindow.Frames" />
 
         
 
-         collection is available through the <see
-         cref="P:System.Windows.Forms.HtmlDocument.Window" />
+         collection is available through the <see cref="P:System.Windows.Forms.HtmlDocument.Window" />
 
         
 
-         property. You may also use the <see
-         cref="P:System.Windows.Forms.HtmlDocument.Window" />
+         property. You may also use the <see cref="P:System.Windows.Forms.HtmlDocument.Window" />
 
         
 
@@ -190,16 +163,14 @@
 
         
 
-         exposes the most common events you would expect to handle when hosting HTML pages. For events not exposed directly by the interface, you can add a handler for the event using <see
-         cref="M:System.Windows.Forms.HtmlDocument.AttachEventHandler(System.String,System.EventHandler)" />
+         exposes the most common events you would expect to handle when hosting HTML pages. For events not exposed directly by the interface, you can add a handler for the event using <see cref="M:System.Windows.Forms.HtmlDocument.AttachEventHandler(System.String,System.EventHandler)" />
 
         
 
         .</para
       >
       <para
-        >HTML files may contain SCRIPT tags that encapsulate code written in one of the Active Scripting languages, such as JScript or VBScript. The <see
-         cref="M:System.Windows.Forms.HtmlDocument.InvokeScript(System.String)" />
+        >HTML files may contain SCRIPT tags that encapsulate code written in one of the Active Scripting languages, such as JScript or VBScript. The <see cref="M:System.Windows.Forms.HtmlDocument.InvokeScript(System.String)" />
 
         
 
@@ -207,8 +178,7 @@
       >
       <block subset="none" type="note">
         <para
-          >While most of the properties, methods, and events on <see
-           cref="T:System.Windows.Forms.HtmlDocument" />
+          >While most of the properties, methods, and events on <see cref="T:System.Windows.Forms.HtmlDocument" />
 
           
 
@@ -219,8 +189,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides top-level programmatic access to an HTML document hosted by the <see
-         cref="T:System.Windows.Forms.WebBrowser" />
+        >Provides top-level programmatic access to an HTML document hosted by the <see cref="T:System.Windows.Forms.WebBrowser" />
 
         
 
@@ -246,24 +215,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the document has focus, but no element of the document has been given focus, <see
-             cref="P:System.Windows.Forms.HtmlDocument.ActiveElement" />
+            >When the document has focus, but no element of the document has been given focus, <see cref="P:System.Windows.Forms.HtmlDocument.ActiveElement" />
 
             
 
              returns the element corresponding to the &lt;BODY&gt; tag. </para
           >
           <para
-            >If the document does not have focus, <see
-             cref="P:System.Windows.Forms.HtmlDocument.ActiveElement" />
+            >If the document does not have focus, <see cref="P:System.Windows.Forms.HtmlDocument.ActiveElement" />
 
             
 
              returns null. </para
           >
           <para
-            >If the current element with input focus is a cell (TD) in an HTML TABLE tag, <see
-             cref="P:System.Windows.Forms.HtmlDocument.ActiveElement" />
+            >If the current element with input focus is a cell (TD) in an HTML TABLE tag, <see cref="P:System.Windows.Forms.HtmlDocument.ActiveElement" />
 
             
 
@@ -273,8 +239,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides the <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+            >Provides the <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
@@ -301,8 +266,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A link is active when a user is clicking on it. Change this property to change the color of the link prior to navigation. </para>
           <para
-            >The <see
-             cref="T:System.Drawing.Color" />
+            >The <see cref="T:System.Drawing.Color" />
 
             
 
@@ -312,8 +276,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Drawing.Color" />
+            >Gets or sets the <see cref="T:System.Drawing.Color" />
 
             
 
@@ -339,8 +302,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.HtmlDocument.All" />
+            >The <see cref="P:System.Windows.Forms.HtmlDocument.All" />
 
             
 
@@ -348,23 +310,19 @@
           >
           <para>Some elements, such as HEAD and TITLE, will never have names associated with them. All other elements will have names only if the author of the HTML file assigned them. You can access elements without names by ID or index. </para>
           <para
-            >You cannot add elements directly to the <see
-             cref="P:System.Windows.Forms.HtmlDocument.All" />
+            >You cannot add elements directly to the <see cref="P:System.Windows.Forms.HtmlDocument.All" />
 
             
 
-             collection, because all elements in an HTML file outside of the HTML tag must have a parent element. Use the <see
-             cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
+             collection, because all elements in an HTML file outside of the HTML tag must have a parent element. Use the <see cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
 
             
 
-             method or the <see
-             cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+             method or the <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
 
             
 
-             property on <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+             property on <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
@@ -374,13 +332,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an instance of <see
-             cref="T:System.Windows.Forms.HtmlElementCollection" />
+            >Gets an instance of <see cref="T:System.Windows.Forms.HtmlElementCollection" />
 
             
 
-            , which stores all <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+            , which stores all <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
@@ -409,26 +365,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You should not attach an event to the document or one of its objects until the document has completed loading. The earliest you should call this method is in the <see
-             cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" />
+            >You should not attach an event to the document or one of its objects until the document has completed loading. The earliest you should call this method is in the <see cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" />
 
             
 
-             event of the <see
-             cref="T:System.Windows.Forms.WebBrowser" />
+             event of the <see cref="T:System.Windows.Forms.WebBrowser" />
 
             
 
              control. </para
           >
           <para
-            >This method allows you to attach handlers to unmanaged DOM events not exposed by <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+            >This method allows you to attach handlers to unmanaged DOM events not exposed by <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
-            . For more information about available unmanaged DOM events, see <format
-             type="text/html">
+            . For more information about available unmanaged DOM events, see <format type="text/html">
               <a href="762295bd-2355-4aa7-b43c-5bff997a33e6"
                 >Accessing Unexposed Members on the Managed HTML Document Object Model</a
               >
@@ -437,27 +389,37 @@
             
 
              and the IHTMLDocument interfaces: <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=104882">IHTMLDocument</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=104882"
+              >IHTMLDocument</see
+            >
 
             
 
             , <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=104884">IHTMLDocument2</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=104884"
+              >IHTMLDocument2</see
+            >
 
             
 
             , <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=104886">IHTMLDocument3</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=104886"
+              >IHTMLDocument3</see
+            >
 
             
 
             , <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=104887">IHTMLDocument4</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=104887"
+              >IHTMLDocument4</see
+            >
 
             
 
             , <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=104888">IHTMLDocument5</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=104888"
+              >IHTMLDocument5</see
+            >
 
             
 
@@ -469,14 +431,22 @@
           <para>Adds an event handler for the named HTML DOM event.</para>
         </summary>
         <param name="eventName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the event you want to handle.</param
         >
         <param name="eventHandler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -505,8 +475,7 @@
              will display when no other element occupies that area of the screen.</para
           >
           <para
-            >The <see
-             cref="T:System.Drawing.Color" />
+            >The <see cref="T:System.Drawing.Color" />
 
             
 
@@ -545,13 +514,11 @@
             </item>
           </list>
           <para
-            >There is no equivalent Head property on <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+            >There is no equivalent Head property on <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
-            . To obtain the HEAD element, use <see
-             cref="M:System.Windows.Forms.HtmlDocument.GetElementsByTagName(System.String)" />
+            . To obtain the HEAD element, use <see cref="M:System.Windows.Forms.HtmlDocument.GetElementsByTagName(System.String)" />
 
             
 
@@ -561,8 +528,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+            >Gets the <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
@@ -587,8 +553,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -640,21 +605,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.HtmlDocument.Cookie" />
+            >The <see cref="P:System.Windows.Forms.HtmlDocument.Cookie" />
 
             
 
-             property of <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+             property of <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
              exposes all cookies set for a Web page.</para
           >
           <para
-            >A <newTerm
-            >cookie</newTerm>
+            >A <newTerm>cookie</newTerm>
 
             
 
@@ -675,16 +637,14 @@
             </item>
           </list>
           <para
-            >The <see
-             cref="P:System.Windows.Forms.HtmlDocument.Cookie" />
+            >The <see cref="P:System.Windows.Forms.HtmlDocument.Cookie" />
 
             
 
              property may contain multiple cookies.</para
           >
           <para
-            >You can only use the <see
-             cref="P:System.Windows.Forms.HtmlDocument.Cookie" />
+            >You can only use the <see cref="P:System.Windows.Forms.HtmlDocument.Cookie" />
 
             
 
@@ -727,54 +687,45 @@
 
             
 
-             returns an element unattached to the current document tree. To add the element to the document, use either the <see
-             cref="M:System.Windows.Forms.HtmlElement.InsertAdjacentElement(System.Windows.Forms.HtmlElementInsertionOrientation,System.Windows.Forms.HtmlElement)" />
+             returns an element unattached to the current document tree. To add the element to the document, use either the <see cref="M:System.Windows.Forms.HtmlElement.InsertAdjacentElement(System.Windows.Forms.HtmlElementInsertionOrientation,System.Windows.Forms.HtmlElement)" />
 
             
 
-             or <see
-             cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
+             or <see cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
 
             
 
              methods.</para
           >
           <para
-            >This method will not affect the state of an existing document's source code when you use the <see
-             cref="T:System.Windows.Forms.WebBrowser" />
+            >This method will not affect the state of an existing document's source code when you use the <see cref="T:System.Windows.Forms.WebBrowser" />
 
             
 
-             control's <ui
-            >View Source</ui>
+             control's <ui>View Source</ui>
 
             
 
-             context menu command or the <see
-             cref="P:System.Windows.Forms.WebBrowser.DocumentText" />
+             context menu command or the <see cref="P:System.Windows.Forms.WebBrowser.DocumentText" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.WebBrowser.DocumentStream" />
+             and <see cref="P:System.Windows.Forms.WebBrowser.DocumentStream" />
 
             
 
-             properties of the <see
-             cref="T:System.Windows.Forms.WebBrowser" />
+             properties of the <see cref="T:System.Windows.Forms.WebBrowser" />
 
             
 
              control. </para
           >
           <para
-            >When you create new elements with <see
-             cref="M:System.Windows.Forms.HtmlDocument.CreateElement(System.String)" />
+            >When you create new elements with <see cref="M:System.Windows.Forms.HtmlDocument.CreateElement(System.String)" />
 
             
 
-            , you will not be able to set certain properties, such as Name. In cases where you need to set the Name attribute, assign them as HTML to the <see
-             cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+            , you will not be able to set certain properties, such as Name. In cases where you need to set the Name attribute, assign them as HTML to the <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
 
             
 
@@ -790,7 +741,11 @@
           <para>A new element of the specified tag type. </para>
         </returns>
         <param name="elementTag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -812,8 +767,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default encoding is the encoding the managed HTML Document Object Model (DOM) will attempt to use when the page is initially loaded. This encoding is derived either from Internet Explorer's <ui
-            >Encoding</ui>
+            >The default encoding is the encoding the managed HTML Document Object Model (DOM) will attempt to use when the page is initially loaded. This encoding is derived either from Internet Explorer's <ui>Encoding</ui>
 
             
 
@@ -849,14 +803,22 @@
           <para>Removes an event handler from a named event on the HTML DOM. </para>
         </summary>
         <param name="eventName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the event you want to cease handling.</param
         >
         <param name="eventHandler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -878,39 +840,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, two Web pages in different frames are prevented from accessing each other's content using script; even www.microsoft.com and msdn.microsoft.com are, in this instance, considered different domains. To enable cross-frame scripting for pages from the same top-level domain, you can assign a new value to the <see
-             cref="P:System.Windows.Forms.HtmlDocument.Domain" />
+            >By default, two Web pages in different frames are prevented from accessing each other's content using script; even www.microsoft.com and msdn.microsoft.com are, in this instance, considered different domains. To enable cross-frame scripting for pages from the same top-level domain, you can assign a new value to the <see cref="P:System.Windows.Forms.HtmlDocument.Domain" />
 
             
 
-             property. In the pervious URL example, setting <see
-             cref="P:System.Windows.Forms.HtmlDocument.Domain" />
+             property. In the pervious URL example, setting <see cref="P:System.Windows.Forms.HtmlDocument.Domain" />
 
             
 
              to microsoft.com would allow both pages to communicate with one another.</para
           >
           <para
-            >Strings assigned to the <see
-             cref="P:System.Windows.Forms.HtmlDocument.Domain" />
+            >Strings assigned to the <see cref="P:System.Windows.Forms.HtmlDocument.Domain" />
 
             
 
-             property must be valid top-level domains. In the previous URL example, you can set <see
-             cref="P:System.Windows.Forms.HtmlDocument.Domain" />
+             property must be valid top-level domains. In the previous URL example, you can set <see cref="P:System.Windows.Forms.HtmlDocument.Domain" />
 
             
 
              to microsoft.com, but not to .com, which would enable any page on the Internet to script a page's contents. </para
           >
           <para
-            >You cannot use the <see
-             cref="P:System.Windows.Forms.HtmlDocument.Domain" />
+            >You cannot use the <see cref="P:System.Windows.Forms.HtmlDocument.Domain" />
 
             
 
-             property to enable cross-frame scripting for pages accessed using two different protocols. If one frame in your page comes from a Web server (the http:// protocol) and another comes from the file system (the file://) protocol, they will not be able to communicate with one another regardless of the value of the <see
-             cref="P:System.Windows.Forms.HtmlDocument.Domain" />
+             property to enable cross-frame scripting for pages accessed using two different protocols. If one frame in your page comes from a Web server (the http:// protocol) and another comes from the file system (the file://) protocol, they will not be able to communicate with one another regardless of the value of the <see cref="P:System.Windows.Forms.HtmlDocument.Domain" />
 
             
 
@@ -948,8 +904,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the unmanaged interface pointer for this <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+            >Gets the unmanaged interface pointer for this <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
@@ -999,7 +954,11 @@
           <para>true if the objects are equal; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1032,18 +991,18 @@
 
             
 
-             exposes a large array of commands for which there are no methods exposed on <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+             exposes a large array of commands for which there are no methods exposed on <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
-            . Using <see
-             cref="M:System.Windows.Forms.HtmlDocument.ExecCommand(System.String,System.Boolean,System.Object)" />
+            . Using <see cref="M:System.Windows.Forms.HtmlDocument.ExecCommand(System.String,System.Boolean,System.Object)" />
 
             
 
              you can insert new HTML elements, select and format text, and clear any cached authentication credentials. For a full list of commands, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=198814">Command Identifiers</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=198814"
+              >Command Identifiers</see
+            >
 
             
 
@@ -1051,13 +1010,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Certain commands, such as copy, have return values. In the current implementation of <see
-               cref="M:System.Windows.Forms.HtmlDocument.ExecCommand(System.String,System.Boolean,System.Object)" />
+              >Certain commands, such as copy, have return values. In the current implementation of <see cref="M:System.Windows.Forms.HtmlDocument.ExecCommand(System.String,System.Boolean,System.Object)" />
 
               
 
-              , you cannot obtain a return value from your call. To retrieve return values, use the corresponding unmanaged method on a <see
-               cref="P:System.Windows.Forms.HtmlDocument.DomDocument" />
+              , you cannot obtain a return value from your call. To retrieve return values, use the corresponding unmanaged method on a <see cref="P:System.Windows.Forms.HtmlDocument.DomDocument" />
 
               
 
@@ -1070,21 +1027,33 @@
           <para>Executes the specified command against the document. </para>
         </summary>
         <param name="command">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the command to execute.</param
         >
         <param name="showUI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Whether or not to show command-specific dialog boxes or message boxes to the user. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1106,13 +1075,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling <see
-             cref="M:System.Windows.Forms.HtmlDocument.Focus" />
+            >Calling <see cref="M:System.Windows.Forms.HtmlDocument.Focus" />
 
             
 
-             will set focus on the <see
-             cref="T:System.Windows.Forms.WebBrowser" />
+             will set focus on the <see cref="T:System.Windows.Forms.WebBrowser" />
 
             
 
@@ -1164,8 +1131,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1194,8 +1160,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Color" />
+            >The <see cref="T:System.Drawing.Color" />
             <see cref="T:System.Drawing.Color" />
 
             
@@ -1227,36 +1192,30 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An HTML document may have one or more FORM elements with input fields for submitting data back to a server. </para>
           <para
-            >You can programmatically submit a FORM by obtaining its <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+            >You can programmatically submit a FORM by obtaining its <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
-             and calling its Submit method using the <see
-             cref="Overload:System.Windows.Forms.HtmlElement.InvokeMember" />
+             and calling its Submit method using the <see cref="Overload:System.Windows.Forms.HtmlElement.InvokeMember" />
 
             
 
              method.</para
           >
           <para
-            >To add a new FORM to a document, you can either create a new FORM tag as a string, and assign it to the <see
-             cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+            >To add a new FORM to a document, you can either create a new FORM tag as a string, and assign it to the <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
 
             
 
-             property of an element previously added to the HTML DOM; or you can use the <see
-             cref="M:System.Windows.Forms.HtmlDocument.CreateElement(System.String)" />
+             property of an element previously added to the HTML DOM; or you can use the <see cref="M:System.Windows.Forms.HtmlDocument.CreateElement(System.String)" />
 
             
 
-             method, set its properties using <see
-             cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
+             method, set its properties using <see cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
 
             
 
-            , and add it as a child of an existing element using <see
-             cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
+            , and add it as a child of an existing element using <see cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
 
             
 
@@ -1288,8 +1247,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If there are multiple elements in the document with the same ID value, <see
-             cref="M:System.Windows.Forms.HtmlDocument.GetElementById(System.String)" />
+            >If there are multiple elements in the document with the same ID value, <see cref="M:System.Windows.Forms.HtmlDocument.GetElementById(System.String)" />
 
             
 
@@ -1299,8 +1257,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a single <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+            >Retrieves a single <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
@@ -1310,8 +1267,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the first object with the same ID attribute as the specified value, or null if the <paramref
-             name="id" />
+            >Returns the first object with the same ID attribute as the specified value, or null if the <paramref name="id" />
 
             
 
@@ -1319,7 +1275,11 @@
           >
         </returns>
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1350,8 +1310,7 @@
 
             
 
-             uses client coordinates, in which the upper-left corner of the document is assigned the value (0,0). Client coordinates for the current position of the cursor can be obtained using the <see
-             cref="P:System.Windows.Forms.HtmlWindow.Position" />
+             uses client coordinates, in which the upper-left corner of the document is assigned the value (0,0). Client coordinates for the current position of the cursor can be obtained using the <see cref="P:System.Windows.Forms.HtmlWindow.Position" />
 
             
 
@@ -1365,8 +1324,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+            >The <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
@@ -1374,7 +1332,11 @@
           >
         </returns>
         <param name="point">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1406,8 +1368,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection of elements who tag name is equal to the <paramref
-             name="tagName" />
+            >The collection of elements who tag name is equal to the <paramref name="tagName" />
 
             
 
@@ -1415,12 +1376,15 @@
           >
         </returns>
         <param name="tagName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the HTML tag for the <see
-           cref="T:System.Windows.Forms.HtmlElement" />
+          The name of the HTML tag for the <see cref="T:System.Windows.Forms.HtmlElement" />
 
           
 
@@ -1447,8 +1411,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Int32" />
+            >An <see cref="T:System.Int32" />
 
             
 
@@ -1478,41 +1441,34 @@
 
             
 
-             returns a collection of <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+             returns a collection of <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
-             objects. To access attributes, such as ALT and SRC, that are not directly exposed by <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+             objects. To access attributes, such as ALT and SRC, that are not directly exposed by <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
-            , use the <see
-             cref="M:System.Windows.Forms.HtmlElement.GetAttribute(System.String)" />
+            , use the <see cref="M:System.Windows.Forms.HtmlElement.GetAttribute(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >To add a new image to a document, either create a new IMG tag as a string, and assign it to the <see
-             cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+            >To add a new image to a document, either create a new IMG tag as a string, and assign it to the <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
 
             
 
-             property of an element previously added to the HTML DOM; or use the <see
-             cref="M:System.Windows.Forms.HtmlDocument.CreateElement(System.String)" />
+             property of an element previously added to the HTML DOM; or use the <see cref="M:System.Windows.Forms.HtmlDocument.CreateElement(System.String)" />
 
             
 
-             method, set its properties using <see
-             cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
+             method, set its properties using <see cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
 
             
 
-            , and add it as a child of an existing element using <see
-             cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
+            , and add it as a child of an existing element using <see cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
 
             
 
@@ -1541,18 +1497,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The underlying type of the object returned by <see
-             cref="M:System.Windows.Forms.HtmlDocument.InvokeScript(System.String)" />
+            >The underlying type of the object returned by <see cref="M:System.Windows.Forms.HtmlDocument.InvokeScript(System.String)" />
 
             
 
-             will vary. If the called Active Scripting function returns scalar data, such as a string or an integer, it will be returned as a string. If it returns a script-based object, such as an object created using JScript or VBScript's new operator, it will be of type Object. (You can make calls on such objects by calling <see
-             cref="M:System.Object.GetType" />
+             will vary. If the called Active Scripting function returns scalar data, such as a string or an integer, it will be returned as a string. If it returns a script-based object, such as an object created using JScript or VBScript's new operator, it will be of type Object. (You can make calls on such objects by calling <see cref="M:System.Object.GetType" />
 
             
 
-             and using <see
-             cref="Overload:System.Type.InvokeMember" />
+             and using <see cref="Overload:System.Type.InvokeMember" />
 
             
 
@@ -1560,8 +1513,7 @@
           >
           <para>You may call any function written in any Active Scripting language installed on the user's computer, including JScript and VBScript. </para>
           <para
-            >The <see
-             cref="M:System.Windows.Forms.HtmlDocument.InvokeScript(System.String)" />
+            >The <see cref="M:System.Windows.Forms.HtmlDocument.InvokeScript(System.String)" />
 
             
 
@@ -1577,7 +1529,11 @@
           <para>The object returned by the Active Scripting call. </para>
         </returns>
         <param name="scriptName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1605,18 +1561,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The underlying type of the object returned by <see
-             cref="M:System.Windows.Forms.HtmlDocument.InvokeScript(System.String,System.Object[])" />
+            >The underlying type of the object returned by <see cref="M:System.Windows.Forms.HtmlDocument.InvokeScript(System.String,System.Object[])" />
 
             
 
-             will vary. If the called Active Scripting function returns scalar data, such as a string or an integer, it will be returned as a string. If it returns a script-based object, such as an object created using JScript or VBScript's new operator, it will be of type Object. (You can make calls on such objects by calling <see
-             cref="M:System.Object.GetType" />
+             will vary. If the called Active Scripting function returns scalar data, such as a string or an integer, it will be returned as a string. If it returns a script-based object, such as an object created using JScript or VBScript's new operator, it will be of type Object. (You can make calls on such objects by calling <see cref="M:System.Object.GetType" />
 
             
 
-             and using <see
-             cref="Overload:System.Type.InvokeMember" />
+             and using <see cref="Overload:System.Type.InvokeMember" />
 
             
 
@@ -1634,14 +1587,22 @@
           <para>The object returned by the Active Scripting call. </para>
         </returns>
         <param name="scriptName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the script method to invoke.</param
         >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1663,8 +1624,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Color" />
+            >The <see cref="T:System.Drawing.Color" />
 
             
 
@@ -1695,13 +1655,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This collection will contain all links created using the A, LINK, and AREA tags in HTML. </para>
           <para
-            >The <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+            >The <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
-             objects contained within this collection encapsulate the unmanaged IHTMLLinkElement interface. To access the properties of the underlying interface safely, use the <see
-             cref="M:System.Windows.Forms.HtmlElement.GetAttribute(System.String)" />
+             objects contained within this collection encapsulate the unmanaged IHTMLLinkElement interface. To access the properties of the underlying interface safely, use the <see cref="M:System.Windows.Forms.HtmlElement.GetAttribute(System.String)" />
 
             
 
@@ -1730,8 +1688,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1762,21 +1719,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.HtmlDocument.MouseDown" />
+            >The <see cref="E:System.Windows.Forms.HtmlDocument.MouseDown" />
 
             
 
-             event occurs before the <see
-             cref="E:System.Windows.Forms.HtmlDocument.Click" />
+             event occurs before the <see cref="E:System.Windows.Forms.HtmlDocument.Click" />
 
             
 
              event. </para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1807,8 +1761,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1839,8 +1792,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1871,8 +1823,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, <format
-             type="text/html">
+            >For more information about handling events, <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1903,8 +1854,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1940,8 +1890,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the specified <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+            >Returns a value that indicates whether the specified <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
@@ -1953,14 +1902,22 @@
           <para>true if the specified instances are equal; otherwise, false.</para>
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first instance to compare.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1989,8 +1946,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the specified <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+            >Returns a value that indicates whether the specified <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
@@ -2002,14 +1958,22 @@
           <para>true if the specified instances are not equal; otherwise, false.</para>
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first instance to compare.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2040,8 +2004,7 @@
 
             
 
-             will clear the previous loaded document, including any associated state, such as variables. It will not cause navigation events in <see
-             cref="T:System.Windows.Forms.WebBrowser" />
+             will clear the previous loaded document, including any associated state, such as variables. It will not cause navigation events in <see cref="T:System.Windows.Forms.WebBrowser" />
 
             
 
@@ -2052,13 +2015,11 @@
 
             
 
-             always creates a new document in the current window. To open a document in a new window, use the <see
-             cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" />
+             always creates a new document in the current window. To open a document in a new window, use the <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" />
 
             
 
-             method on the <see
-             cref="T:System.Windows.Forms.HtmlWindow" />
+             method on the <see cref="T:System.Windows.Forms.HtmlWindow" />
 
             
 
@@ -2068,13 +2029,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a new <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+            >Gets a new <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
-             to use with the <see
-             cref="M:System.Windows.Forms.HtmlDocument.Write(System.String)" />
+             to use with the <see cref="M:System.Windows.Forms.HtmlDocument.Write(System.String)" />
 
             
 
@@ -2086,7 +2045,11 @@
           <para>A new document for writing.</para>
         </returns>
         <param name="replaceInHistory">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2115,13 +2078,11 @@
              will not have any value unless it has been set explicitly, either in code or in HTML.</para
           >
           <para
-            >Unlike the <see
-             cref="P:System.Windows.Forms.HtmlDocument.RightToLeft" />
+            >Unlike the <see cref="P:System.Windows.Forms.HtmlDocument.RightToLeft" />
 
             
 
-             property on Windows Forms controls, <see
-             cref="P:System.Windows.Forms.HtmlDocument.RightToLeft" />
+             property on Windows Forms controls, <see cref="P:System.Windows.Forms.HtmlDocument.RightToLeft" />
 
             
 
@@ -2150,26 +2111,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The loading of a Web page will halt if program code calls the <see
-             cref="M:System.Windows.Forms.WebBrowser.Stop" />
+            >The loading of a Web page will halt if program code calls the <see cref="M:System.Windows.Forms.WebBrowser.Stop" />
 
             
 
-             method of the <see
-             cref="T:System.Windows.Forms.WebBrowser" />
+             method of the <see cref="T:System.Windows.Forms.WebBrowser" />
 
             
 
-             control. Navigation failures caused by network outages or malfunctioning Web sites will not cause <see
-             cref="E:System.Windows.Forms.HtmlDocument.Stop" />
+             control. Navigation failures caused by network outages or malfunctioning Web sites will not cause <see cref="E:System.Windows.Forms.HtmlDocument.Stop" />
 
             
 
              to occur. </para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -2198,21 +2155,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.HtmlDocument.Title" />
+            >Use the <see cref="P:System.Windows.Forms.HtmlDocument.Title" />
 
             
 
              property to identify the document by way of a human-readable name.</para
           >
           <para
-            >Changes to this property will also reflect in the <see
-             cref="P:System.Windows.Forms.WebBrowser.DocumentTitle" />
+            >Changes to this property will also reflect in the <see cref="P:System.Windows.Forms.WebBrowser.DocumentTitle" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.WebBrowser" />
+             property of the <see cref="T:System.Windows.Forms.WebBrowser" />
 
             
 
@@ -2239,13 +2193,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is read-only. To navigate to a new document, use the <see
-             cref="P:System.Windows.Forms.WebBrowser.Url" />
+            >This property is read-only. To navigate to a new document, use the <see cref="P:System.Windows.Forms.WebBrowser.Url" />
 
             
 
-             property on the <see
-             cref="T:System.Windows.Forms.WebBrowser" />
+             property on the <see cref="T:System.Windows.Forms.WebBrowser" />
 
             
 
@@ -2299,8 +2251,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >All HTML documents have an HTML DOM object called a window, which can be used to manipulate the screen size of the document and open new windows, as well as access other important objects, such as an <see
-             cref="T:System.Windows.Forms.HtmlHistory" />
+            >All HTML documents have an HTML DOM object called a window, which can be used to manipulate the screen size of the document and open new windows, as well as access other important objects, such as an <see cref="T:System.Windows.Forms.HtmlHistory" />
 
             
 
@@ -2310,8 +2261,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.HtmlWindow" />
+            >Gets the <see cref="T:System.Windows.Forms.HtmlWindow" />
 
             
 
@@ -2336,36 +2286,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >All calls to <see
-             cref="M:System.Windows.Forms.HtmlDocument.Write(System.String)" />
+            >All calls to <see cref="M:System.Windows.Forms.HtmlDocument.Write(System.String)" />
 
             
 
-             should be preceded by a call to <see
-             cref="M:System.Windows.Forms.HtmlDocument.OpenNew(System.Boolean)" />
+             should be preceded by a call to <see cref="M:System.Windows.Forms.HtmlDocument.OpenNew(System.Boolean)" />
 
             
 
-            , which will clear the current document and all of its variables. Your calls to <see
-             cref="M:System.Windows.Forms.HtmlDocument.Write(System.String)" />
+            , which will clear the current document and all of its variables. Your calls to <see cref="M:System.Windows.Forms.HtmlDocument.Write(System.String)" />
 
             
 
-             will create a new HTML document in its place. To change only a specific portion of the document, obtain the appropriate <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+             will create a new HTML document in its place. To change only a specific portion of the document, obtain the appropriate <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
-             and set its <see
-             cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+             and set its <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
 
             
 
              property. </para
           >
           <para
-            >It is recommended that you write an entire valid HTML document using the <see
-             cref="M:System.Windows.Forms.HtmlDocument.Write(System.String)" />
+            >It is recommended that you write an entire valid HTML document using the <see cref="M:System.Windows.Forms.HtmlDocument.Write(System.String)" />
 
             
 
@@ -2377,7 +2321,11 @@
           <para>Writes a new HTML page.</para>
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -14,31 +14,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >In versions previous to.NET Framework 4.0, serialization of custom user data in a security transparent code was accomplished using the <see
-         cref="M:System.Exception.GetObjectData" />
+        >In versions previous to.NET Framework 4.0, serialization of custom user data in a security transparent code was accomplished using the <see cref="M:System.Exception.GetObjectData" />
 
         
 
-         method. Starting with .NET Framework 4.0, that method is marked with the <see
-         cref="T:System.Security.SecurityCriticalAttribute" />
+         method. Starting with .NET Framework 4.0, that method is marked with the <see cref="T:System.Security.SecurityCriticalAttribute" />
 
         
 
-         attribute which prevents execution in security-transparent code. To work around this condition, implement the <see
-         cref="T:System.Runtime.Serialization.ISafeSerializationData interface" />
+         attribute which prevents execution in security-transparent code. To work around this condition, implement the <see cref="T:System.Runtime.Serialization.ISafeSerializationData interface" />
 
         
 
          and add custom data as shown in the example below. </para
       >
       <para
-        >The <see
-         cref="M:System.Runtime.Serialization.ISafeSerializationData.CompleteDeserialization" />
+        >The <see cref="M:System.Runtime.Serialization.ISafeSerializationData.CompleteDeserialization" />
 
         
 
-         method is called after serialization, and uses the <see
-         cref="T:System.Runtime.Serialization.SafeSerializationEventArgs" />
+         method is called after serialization, and uses the <see cref="T:System.Runtime.Serialization.SafeSerializationEventArgs" />
 
         
 
@@ -74,8 +69,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The state object is stored in a private variable defined in the implementation of the <see
-             cref="T:System.Runtime.Serialization.ISafeSerializationData" />
+            >The state object is stored in a private variable defined in the implementation of the <see cref="T:System.Runtime.Serialization.ISafeSerializationData" />
 
             
 
@@ -87,7 +81,11 @@
           <para>This method is called when the instance is deserialized. </para>
         </summary>
         <param name="deserialized">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

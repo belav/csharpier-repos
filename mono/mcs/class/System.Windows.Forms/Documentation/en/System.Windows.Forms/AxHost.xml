@@ -44,13 +44,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You typically do not use the <see
-         cref="T:System.Windows.Forms.AxHost" />
+        >You typically do not use the <see cref="T:System.Windows.Forms.AxHost" />
 
         
 
-         class directly. You can use the <format
-         type="text/html">
+         class directly. You can use the <format type="text/html">
           <a href="482C0D83-7144-4497-B626-87D2351B78D0"
             >Windows Forms ActiveX Control Importer (AxImp.exe) </a
           >
@@ -58,21 +56,18 @@
 
         
 
-         to generate the wrappers that extend <see
-         cref="T:System.Windows.Forms.AxHost" />
+         to generate the wrappers that extend <see cref="T:System.Windows.Forms.AxHost" />
 
         
 
         .</para
       >
       <para
-        >The ActiveX Control Importer generates a class that is derived from the <see
-         cref="T:System.Windows.Forms.AxHost" />
+        >The ActiveX Control Importer generates a class that is derived from the <see cref="T:System.Windows.Forms.AxHost" />
 
         
 
-         class, and compiles it into a library file (DLL) that can be added as a reference to your application. Alternatively, you can use the /source switch with the ActiveX Control Importer and a C# file is generated for your <see
-         cref="T:System.Windows.Forms.AxHost" />
+         class, and compiles it into a library file (DLL) that can be added as a reference to your application. Alternatively, you can use the /source switch with the ActiveX Control Importer and a C# file is generated for your <see cref="T:System.Windows.Forms.AxHost" />
 
         
 
@@ -80,13 +75,11 @@
       >
       <block subset="none" type="note">
         <para
-          >If the name of a member of the ActiveX control matches a name defined in the .NET Framework, then the ActiveX Control Importer will prefix the member name with "Ctl" when it creates the <see
-           cref="T:System.Windows.Forms.AxHost" />
+          >If the name of a member of the ActiveX control matches a name defined in the .NET Framework, then the ActiveX Control Importer will prefix the member name with "Ctl" when it creates the <see cref="T:System.Windows.Forms.AxHost" />
 
           
 
-           derived class. For example, if your ActiveX control has a member named "Layout", it is renamed "CtlLayout" in the <see
-           cref="T:System.Windows.Forms.AxHost" />
+           derived class. For example, if your ActiveX control has a member named "Layout", it is renamed "CtlLayout" in the <see cref="T:System.Windows.Forms.AxHost" />
 
           
 
@@ -94,28 +87,23 @@
         >
       </block>
       <para
-        >Most of the common properties of the <see
-         cref="T:System.Windows.Forms.AxHost" />
+        >Most of the common properties of the <see cref="T:System.Windows.Forms.AxHost" />
 
         
 
-         class are only valid and used if the underlying ActiveX control exposes those properties. A few examples of the common properties are <see
-         cref="P:System.Windows.Forms.Control.BackColor" />
+         class are only valid and used if the underlying ActiveX control exposes those properties. A few examples of the common properties are <see cref="P:System.Windows.Forms.Control.BackColor" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.Control.Cursor" />
+        , <see cref="P:System.Windows.Forms.Control.Cursor" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.Control.Font" />
+        , <see cref="P:System.Windows.Forms.Control.Font" />
 
         
 
-        , and <see
-         cref="P:System.Windows.Forms.Control.Text" />
+        , and <see cref="P:System.Windows.Forms.Control.Text" />
 
         
 
@@ -123,13 +111,11 @@
       >
       <block subset="none" type="note">
         <para
-          >If you are using Visual Studio as your Windows Forms design environment, you can make an ActiveX control available to your application by adding the ActiveX control to your Toolbox. To accomplish this, right-click the <ui
-          >Toolbox</ui>
+          >If you are using Visual Studio as your Windows Forms design environment, you can make an ActiveX control available to your application by adding the ActiveX control to your Toolbox. To accomplish this, right-click the <ui>Toolbox</ui>
 
           
 
-          , select <ui
-          >Customize Toolbox</ui>
+          , select <ui>Customize Toolbox</ui>
 
           
 
@@ -154,8 +140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.AxHost" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -163,7 +148,11 @@
           >
         </summary>
         <param name="clsid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -186,21 +175,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the binary representation of the <paramref
-             name="flags" />
+            >If the binary representation of the <paramref name="flags" />
 
             
 
-             parameter value contains the bit represented by the value 0x1, the shortcut menu for the control will not contain an <ui
-            >Edit</ui>
+             parameter value contains the bit represented by the value 0x1, the shortcut menu for the control will not contain an <ui>Edit</ui>
 
             
 
              option unless the ActiveX control explicitly provides it.</para
           >
           <para
-            >If the binary representation of the <paramref
-             name="flags" />
+            >If the binary representation of the <paramref name="flags" />
 
             
 
@@ -210,13 +196,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.AxHost" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class, wrapping the ActiveX control indicated by the specified CLSID, and using the shortcut-menu behavior indicated by the specified <paramref
-             name="flags" />
+             class, wrapping the ActiveX control indicated by the specified CLSID, and using the shortcut-menu behavior indicated by the specified <paramref name="flags" />
 
             
 
@@ -224,19 +208,26 @@
           >
         </summary>
         <param name="clsid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The CLSID of the ActiveX control to wrap.</param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Int32" />
+          An <see cref="T:System.Int32" />
 
           
 
@@ -315,28 +306,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.BackColorChanged" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.BackColorChanged" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -346,13 +332,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.BackColorChanged" />
+            >The <see cref="E:System.Windows.Forms.AxHost.BackColorChanged" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -416,28 +400,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.BackgroundImageChanged" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.BackgroundImageChanged" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -447,13 +426,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.BackgroundImageChanged" />
+            >The <see cref="E:System.Windows.Forms.AxHost.BackgroundImageChanged" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -537,18 +514,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Design environments typically use this method to start the initialization of a component that is used on a form or used by another component. The <see
-             cref="M:System.Windows.Forms.AxHost.EndInit" />
+            >Design environments typically use this method to start the initialization of a component that is used on a form or used by another component. The <see cref="M:System.Windows.Forms.AxHost.EndInit" />
 
             
 
-             method ends the initialization. Using the <see
-             cref="M:System.Windows.Forms.AxHost.BeginInit" />
+             method ends the initialization. Using the <see cref="M:System.Windows.Forms.AxHost.BeginInit" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.AxHost.EndInit" />
+             and <see cref="M:System.Windows.Forms.AxHost.EndInit" />
 
             
 
@@ -588,28 +562,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.BindingContextChanged" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.BindingContextChanged" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -619,13 +588,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.BindingContextChanged" />
+            >The <see cref="E:System.Windows.Forms.AxHost.BindingContextChanged" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -659,28 +626,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.ChangeUICues" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.ChangeUICues" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -690,13 +652,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.ChangeUICues" />
+            >The <see cref="E:System.Windows.Forms.AxHost.ChangeUICues" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -727,28 +687,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.Click" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.Click" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -758,13 +713,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.Click" />
+            >The <see cref="E:System.Windows.Forms.AxHost.Click" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -802,53 +755,43 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.AxHost.ContainingControl" />
+            >The <see cref="P:System.Windows.Forms.AxHost.ContainingControl" />
 
             
 
-             property value can be different from the <see
-             cref="P:System.Windows.Forms.Control.Parent" />
+             property value can be different from the <see cref="P:System.Windows.Forms.Control.Parent" />
 
             
 
-             property. The <see
-             cref="T:System.Windows.Forms.ContainerControl" />
+             property. The <see cref="T:System.Windows.Forms.ContainerControl" />
 
             
 
-             represented by this property is the ActiveX control's logical container. For example, if an ActiveX control is hosted in a <see
-             cref="T:System.Windows.Forms.GroupBox" />
+             represented by this property is the ActiveX control's logical container. For example, if an ActiveX control is hosted in a <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
-             control, and the <see
-             cref="T:System.Windows.Forms.GroupBox" />
+             control, and the <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
-             is contained on a <see
-             cref="T:System.Windows.Forms.Form" />
+             is contained on a <see cref="T:System.Windows.Forms.Form" />
 
             
 
-            , then the <see
-             cref="P:System.Windows.Forms.AxHost.ContainingControl" />
+            , then the <see cref="P:System.Windows.Forms.AxHost.ContainingControl" />
 
             
 
-             property value of the ActiveX control is the <see
-             cref="T:System.Windows.Forms.Form" />
+             property value of the ActiveX control is the <see cref="T:System.Windows.Forms.Form" />
 
             
 
-            , and the <see
-             cref="P:System.Windows.Forms.Control.Parent" />
+            , and the <see cref="P:System.Windows.Forms.Control.Parent" />
 
             
 
-             property value is the <see
-             cref="T:System.Windows.Forms.GroupBox" />
+             property value is the <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
@@ -913,28 +856,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.ContextMenuChanged" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.ContextMenuChanged" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -944,13 +882,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.ContextMenuChanged" />
+            >The <see cref="E:System.Windows.Forms.AxHost.ContextMenuChanged" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -1004,8 +940,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -1013,7 +948,11 @@
           >
         </returns>
         <param name="clsid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1116,28 +1055,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.CursorChanged" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.CursorChanged" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -1147,13 +1081,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.CursorChanged" />
+            >The <see cref="E:System.Windows.Forms.AxHost.CursorChanged" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -1265,28 +1197,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.DoubleClick" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.DoubleClick" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -1296,13 +1223,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.DoubleClick" />
+            >The <see cref="E:System.Windows.Forms.AxHost.DoubleClick" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -1329,7 +1254,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >This method passes the specified verb to the <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=166076">IOleObject::DoVerb</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=166076"
+              >IOleObject::DoVerb</see
+            >
 
             
 
@@ -1341,7 +1268,11 @@
           <para>Requests that an object perform an action in response to an end-user's action.</para>
         </summary>
         <param name="verb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1374,28 +1305,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.DragDrop" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.DragDrop" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -1405,13 +1331,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.DragDrop" />
+            >The <see cref="E:System.Windows.Forms.AxHost.DragDrop" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -1445,28 +1369,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.DragEnter" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.DragEnter" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -1476,13 +1395,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.DragEnter" />
+            >The <see cref="E:System.Windows.Forms.AxHost.DragEnter" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -1513,28 +1430,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.DragLeave" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.DragLeave" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -1544,13 +1456,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.DragLeave" />
+            >The <see cref="E:System.Windows.Forms.AxHost.DragLeave" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -1584,28 +1494,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.DragOver" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.DragOver" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -1615,13 +1520,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.DragOver" />
+            >The <see cref="E:System.Windows.Forms.AxHost.DragOver" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -1662,24 +1565,30 @@
           <para>This method is not supported by this control.</para>
         </summary>
         <param name="bitmap">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Bitmap" />
+          A <see cref="T:System.Drawing.Bitmap" />
 
           
 
           .</param
         >
         <param name="targetBounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
@@ -1762,28 +1671,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.EnabledChanged" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.EnabledChanged" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -1793,13 +1697,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.EnabledChanged" />
+            >The <see cref="E:System.Windows.Forms.AxHost.EnabledChanged" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -1823,18 +1725,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Design environments typically use this method to finish the initialization of a component that is used on a form or used by another component. The <see
-             cref="M:System.Windows.Forms.AxHost.EndInit" />
+            >Design environments typically use this method to finish the initialization of a component that is used on a form or used by another component. The <see cref="M:System.Windows.Forms.AxHost.EndInit" />
 
             
 
-             method ends the initialization. Using the <see
-             cref="M:System.Windows.Forms.AxHost.BeginInit" />
+             method ends the initialization. Using the <see cref="M:System.Windows.Forms.AxHost.BeginInit" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.AxHost.EndInit" />
+             and <see cref="M:System.Windows.Forms.AxHost.EndInit" />
 
             
 
@@ -1904,28 +1803,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.FontChanged" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.FontChanged" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -1935,13 +1829,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.FontChanged" />
+            >The <see cref="E:System.Windows.Forms.AxHost.FontChanged" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -2002,28 +1894,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.ForeColorChanged" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.ForeColorChanged" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -2033,13 +1920,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.ForeColorChanged" />
+            >The <see cref="E:System.Windows.Forms.AxHost.ForeColorChanged" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -2069,8 +1954,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Drawing.Color" />
+            >Returns a <see cref="T:System.Drawing.Color" />
 
             
 
@@ -2080,8 +1964,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Color" />
+            >The <see cref="T:System.Drawing.Color" />
 
             
 
@@ -2089,7 +1972,11 @@
           >
         </returns>
         <param name="color">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2126,13 +2013,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Drawing.Font" />
+            >Returns a <see cref="T:System.Drawing.Font" />
 
             
 
              created from the specified OLE <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=166075">IFont</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=166075"
+              >IFont</see
+            >
 
             
 
@@ -2142,23 +2030,22 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Font" />
+            >The <see cref="T:System.Drawing.Font" />
 
             
 
              created from the specified <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=166075">IFont</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=166075"
+              >IFont</see
+            >
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Control.DefaultFont" />
+            , <see cref="P:System.Windows.Forms.Control.DefaultFont" />
 
             
 
-             if the font could not be created, or null if <paramref
-             name="font" />
+             if the font could not be created, or null if <paramref name="font" />
 
             
 
@@ -2166,12 +2053,15 @@
           >
         </returns>
         <param name="font">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The IFont to create a <see
-           cref="T:System.Drawing.Font" />
+          The IFont to create a <see cref="T:System.Drawing.Font" />
 
           
 
@@ -2205,13 +2095,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Drawing.Font" />
+            >Returns a <see cref="T:System.Drawing.Font" />
 
             
 
              created from the specified OLE <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=166073">IFontDisp</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=166073"
+              >IFontDisp</see
+            >
 
             
 
@@ -2221,23 +2112,22 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Font" />
+            >The <see cref="T:System.Drawing.Font" />
 
             
 
              created from the specified <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=166073">IFontDisp</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=166073"
+              >IFontDisp</see
+            >
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Control.DefaultFont" />
+            , <see cref="P:System.Windows.Forms.Control.DefaultFont" />
 
             
 
-             if the font could not be created, or null if <paramref
-             name="font" />
+             if the font could not be created, or null if <paramref name="font" />
 
             
 
@@ -2245,12 +2135,15 @@
           >
         </returns>
         <param name="font">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The IFontDisp to create a <see
-           cref="T:System.Drawing.Font" />
+          The IFontDisp to create a <see cref="T:System.Drawing.Font" />
 
           
 
@@ -2284,13 +2177,13 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an OLE <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=166073">IFontDisp</see>
+            >Returns an OLE <see cref="http://go.microsoft.com/fwlink/?LinkId=166073"
+              >IFontDisp</see
+            >
 
             
 
-             object created from the specified <see
-             cref="T:System.Drawing.Font" />
+             object created from the specified <see cref="T:System.Drawing.Font" />
 
             
 
@@ -2300,13 +2193,13 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=166073">IFontDisp</see>
+            >The <see cref="http://go.microsoft.com/fwlink/?LinkId=166073"
+              >IFontDisp</see
+            >
 
             
 
-             object created from the specified font or null if <paramref
-             name="font" />
+             object created from the specified font or null if <paramref name="font" />
 
             
 
@@ -2314,7 +2207,11 @@
           >
         </returns>
         <param name="font">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2348,13 +2245,13 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an OLE <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=166075">IFont</see>
+            >Returns an OLE <see cref="http://go.microsoft.com/fwlink/?LinkId=166075"
+              >IFont</see
+            >
 
             
 
-             object created from the specified <see
-             cref="T:System.Drawing.Font" />
+             object created from the specified <see cref="T:System.Drawing.Font" />
 
             
 
@@ -2364,18 +2261,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=166075">IFont</see>
+            >The <see cref="http://go.microsoft.com/fwlink/?LinkId=166075"
+              >IFont</see
+            >
 
             
 
-             object created from the specified font, or null if <paramref
-             name="font" />
+             object created from the specified font, or null if <paramref name="font" />
 
             
 
              is null or the <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=166075">IFont</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=166075"
+              >IFont</see
+            >
 
             
 
@@ -2383,7 +2282,11 @@
           >
         </returns>
         <param name="font">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2417,8 +2320,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an OLE IPictureDisp object corresponding to the specified <see
-             cref="T:System.Drawing.Image" />
+            >Returns an OLE IPictureDisp object corresponding to the specified <see cref="T:System.Drawing.Image" />
 
             
 
@@ -2428,8 +2330,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -2437,12 +2338,15 @@
           >
         </returns>
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
@@ -2476,8 +2380,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an OLE IPicture object corresponding to the specified <see
-             cref="T:System.Windows.Forms.Cursor" />
+            >Returns an OLE IPicture object corresponding to the specified <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
@@ -2487,8 +2390,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -2527,8 +2429,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an OLE IPicture object corresponding to the specified <see
-             cref="T:System.Drawing.Image" />
+            >Returns an OLE IPicture object corresponding to the specified <see cref="T:System.Drawing.Image" />
 
             
 
@@ -2538,8 +2439,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -2547,12 +2447,15 @@
           >
         </returns>
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
@@ -2586,8 +2489,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An OLE Automation date is implemented as a floating-point number whose value is the number of days from midnight, 30 December 1899. For example, midnight, 31 December 1899 is represented by 1.0; 6 A.M., 1 January 1900 is represented by 2.25; midnight, 29 December 1899 is represented by -1.0; and 6 A.M., 29 December 1899 is represented by -1.25.</para>
           <para
-            >The base OLE Automation Date is midnight, 30 December 1899. The maximum OLE Automation Date is the same as <see
-             cref="F:System.DateTime.MaxValue" />
+            >The base OLE Automation Date is midnight, 30 December 1899. The maximum OLE Automation Date is the same as <see cref="F:System.DateTime.MaxValue" />
 
             
 
@@ -2595,7 +2497,9 @@
           >
           <para
             >For more information about OLE Automation, see the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37118">MSDN Library</see>
+              cref="http://go.microsoft.com/fwlink/?linkid=37118"
+              >MSDN Library</see
+            >
 
             
 
@@ -2605,8 +2509,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an OLE Automation date that corresponds to the specified <see
-             cref="T:System.DateTime" />
+            >Returns an OLE Automation date that corresponds to the specified <see cref="T:System.DateTime" />
 
             
 
@@ -2616,8 +2519,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A double-precision floating-point number that contains an OLE Automation date equivalent to specified <paramref
-             name="time" />
+            >A double-precision floating-point number that contains an OLE Automation date equivalent to specified <paramref name="time" />
 
             
 
@@ -2625,12 +2527,15 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
@@ -2692,8 +2597,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an OLE color value that corresponds to the specified <see
-             cref="T:System.Drawing.Color" />
+            >Returns an OLE color value that corresponds to the specified <see cref="T:System.Drawing.Color" />
 
             
 
@@ -2703,8 +2607,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The OLE color value that represents the translated <see
-             cref="T:System.Drawing.Color" />
+            >The OLE color value that represents the translated <see cref="T:System.Drawing.Color" />
 
             
 
@@ -2712,12 +2615,15 @@
           >
         </returns>
         <param name="color">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
@@ -2753,8 +2659,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this method to convert IPictureDisp objects in addition to IPicture objects. This works because the IPictureDisp OLE interface is a subset of the IPicture interface. Converting IPictureDisp objects with this method is necessary because the <see
-             cref="M:System.Windows.Forms.AxHost.GetPictureFromIPictureDisp(System.Object)" />
+            >You can use this method to convert IPictureDisp objects in addition to IPicture objects. This works because the IPictureDisp OLE interface is a subset of the IPicture interface. Converting IPictureDisp objects with this method is necessary because the <see cref="M:System.Windows.Forms.AxHost.GetPictureFromIPictureDisp(System.Object)" />
 
             
 
@@ -2764,8 +2669,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Drawing.Image" />
+            >Returns an <see cref="T:System.Drawing.Image" />
 
             
 
@@ -2775,8 +2679,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Image" />
+            >An <see cref="T:System.Drawing.Image" />
 
             
 
@@ -2784,7 +2687,11 @@
           >
         </returns>
         <param name="picture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2817,13 +2724,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method does not work correctly. You can use the <see
-             cref="M:System.Windows.Forms.AxHost.GetPictureFromIPicture(System.Object)" />
+            >This method does not work correctly. You can use the <see cref="M:System.Windows.Forms.AxHost.GetPictureFromIPicture(System.Object)" />
 
             
 
-             method to convert an IPictureDisp object into an <see
-             cref="T:System.Drawing.Image" />
+             method to convert an IPictureDisp object into an <see cref="T:System.Drawing.Image" />
 
             
 
@@ -2833,8 +2738,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Drawing.Image" />
+            >Returns an <see cref="T:System.Drawing.Image" />
 
             
 
@@ -2844,8 +2748,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Image" />
+            >An <see cref="T:System.Drawing.Image" />
 
             
 
@@ -2853,7 +2756,11 @@
           >
         </returns>
         <param name="picture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2896,18 +2803,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >ActiveX controls scale themselves, so this method does not perform any special calculations, ignores the <paramref
-             name="factor" />
+            >ActiveX controls scale themselves, so this method does not perform any special calculations, ignores the <paramref name="factor" />
 
             
 
-             and <paramref
-             name="specified" />
+             and <paramref name="specified" />
 
             
 
-             values, and returns the <paramref
-             name="bounds" />
+             values, and returns the <paramref name="bounds" />
 
             
 
@@ -2921,8 +2825,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The unmodified <paramref
-             name="bounds" />
+            >The unmodified <paramref name="bounds" />
 
             
 
@@ -2930,26 +2833,37 @@
           >
         </returns>
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The original bounds of the ActiveX control.</param
         >
         <param name="factor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A scaling factor. </param
         >
         <param name="specified">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.BoundsSpecified" />
+          A <see cref="T:System.Windows.Forms.BoundsSpecified" />
 
           
 
@@ -2973,23 +2887,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="date" />
+            >The <paramref name="date" />
 
             
 
-             parameter is a double-precision floating-point number that represents a date as the number of days before or after the base date, midnight, 30 December 1899. The sign and integral part of <paramref
-             name="date" />
+             parameter is a double-precision floating-point number that represents a date as the number of days before or after the base date, midnight, 30 December 1899. The sign and integral part of <paramref name="date" />
 
             
 
-             encode the date as a positive or negative day displacement from 30 December 1899, and the absolute value of the fractional part of <paramref
-             name="date" />
+             encode the date as a positive or negative day displacement from 30 December 1899, and the absolute value of the fractional part of <paramref name="date" />
 
             
 
-             encodes the time of day as a fraction of a day displacement from midnight. <paramref
-             name="date" />
+             encodes the time of day as a fraction of a day displacement from midnight. <paramref name="date" />
 
             
 
@@ -2998,7 +2908,9 @@
           <para>Note that because of the way dates are encoded, there are two ways of representing any time of day on 30 December 1899. For example, -0.5 and 0.5 both mean noon on 30 December 1899 because a day displacement of plus or minus zero days from the base date is still the base date, and a half day displacement from midnight is noon.</para>
           <para
             >For more information about OLE Automation, see the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37118">MSDN Library</see>
+              cref="http://go.microsoft.com/fwlink/?linkid=37118"
+              >MSDN Library</see
+            >
 
             
 
@@ -3008,8 +2920,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.DateTime" />
+            >Returns a <see cref="T:System.DateTime" />
 
             
 
@@ -3019,13 +2930,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.DateTime" />
+            >A <see cref="T:System.DateTime" />
 
             
 
-             that represents the same date and time as <paramref
-             name="date" />
+             that represents the same date and time as <paramref name="date" />
 
             
 
@@ -3033,7 +2942,11 @@
           >
         </returns>
         <param name="date">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3071,28 +2984,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.GiveFeedback" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.GiveFeedback" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -3102,13 +3010,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.GiveFeedback" />
+            >The <see cref="E:System.Windows.Forms.AxHost.GiveFeedback" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -3143,8 +3049,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <ui
-            >About</ui>
+            >The <ui>About</ui>
 
             
 
@@ -3154,8 +3059,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the ActiveX control has an <ui
-            >About</ui>
+            >Gets a value indicating whether the ActiveX control has an <ui>About</ui>
 
             
 
@@ -3215,28 +3119,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.HelpRequested" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.HelpRequested" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -3246,13 +3145,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.HelpRequested" />
+            >The <see cref="E:System.Windows.Forms.AxHost.HelpRequested" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -3316,28 +3213,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.ImeModeChanged" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.ImeModeChanged" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -3347,13 +3239,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.ImeModeChanged" />
+            >The <see cref="E:System.Windows.Forms.AxHost.ImeModeChanged" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -3403,21 +3293,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.AxHost.IsInputChar(System.Char)" />
+            >The <see cref="M:System.Windows.Forms.AxHost.IsInputChar(System.Char)" />
 
             
 
              method is called during window message preprocessing to determine whether the given input character should be preprocessed or sent directly to the ActiveX control. The preprocessing of a character includes checking whether the character is a mnemonic of another control.</para
           >
           <para
-            >As implemented in the <see
-             cref="T:System.Windows.Forms.AxHost" />
+            >As implemented in the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class, the <see
-             cref="M:System.Windows.Forms.AxHost.IsInputChar(System.Char)" />
+             class, the <see cref="M:System.Windows.Forms.AxHost.IsInputChar(System.Char)" />
 
             
 
@@ -3433,7 +3320,11 @@
           <para>true if the character should be sent directly to the ActiveX control and not preprocessed; otherwise, false.</para>
         </returns>
         <param name="charCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3466,28 +3357,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.KeyDown" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.KeyDown" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -3497,13 +3383,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.KeyDown" />
+            >The <see cref="E:System.Windows.Forms.AxHost.KeyDown" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -3537,28 +3421,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.KeyPress" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.KeyPress" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -3568,13 +3447,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.KeyPress" />
+            >The <see cref="E:System.Windows.Forms.AxHost.KeyPress" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -3608,28 +3485,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.KeyUp" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.KeyUp" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -3639,13 +3511,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.KeyUp" />
+            >The <see cref="E:System.Windows.Forms.AxHost.KeyUp" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -3679,28 +3549,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.Layout" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.Layout" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -3710,13 +3575,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.Layout" />
+            >The <see cref="E:System.Windows.Forms.AxHost.Layout" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -3741,8 +3604,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Announces to the component change service that the <see
-             cref="T:System.Windows.Forms.AxHost" />
+            >Announces to the component change service that the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -3831,28 +3693,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.MouseDown" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.MouseDown" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -3862,13 +3719,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.MouseDown" />
+            >The <see cref="E:System.Windows.Forms.AxHost.MouseDown" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -3899,28 +3754,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.MouseEnter" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.MouseEnter" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -3930,13 +3780,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.MouseEnter" />
+            >The <see cref="E:System.Windows.Forms.AxHost.MouseEnter" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -3967,28 +3815,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.MouseHover" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.MouseHover" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -3998,13 +3841,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.MouseHover" />
+            >The <see cref="E:System.Windows.Forms.AxHost.MouseHover" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -4035,28 +3876,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.MouseLeave" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.MouseLeave" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -4066,13 +3902,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.MouseLeave" />
+            >The <see cref="E:System.Windows.Forms.AxHost.MouseLeave" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -4106,28 +3940,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.MouseMove" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.MouseMove" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -4137,13 +3966,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.MouseMove" />
+            >The <see cref="E:System.Windows.Forms.AxHost.MouseMove" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -4177,28 +4004,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.MouseUp" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.MouseUp" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -4208,13 +4030,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.MouseUp" />
+            >The <see cref="E:System.Windows.Forms.AxHost.MouseUp" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -4248,28 +4068,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.MouseWheel" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.MouseWheel" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -4279,13 +4094,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.MouseWheel" />
+            >The <see cref="E:System.Windows.Forms.AxHost.MouseWheel" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -4326,13 +4139,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="P:System.Windows.Forms.AxHost.OcxState" />
+            >The value of the <see cref="P:System.Windows.Forms.AxHost.OcxState" />
 
             
 
-             property is used after the control is created but before it is shown. The persisted state of the underlying ActiveX control is returned in the <see
-             cref="T:System.Windows.Forms.AxHost.State" />
+             property is used after the control is created but before it is shown. The persisted state of the underlying ActiveX control is returned in the <see cref="T:System.Windows.Forms.AxHost.State" />
 
             
 
@@ -4502,28 +4313,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.Paint" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.Paint" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -4533,13 +4339,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.Paint" />
+            >The <see cref="E:System.Windows.Forms.AxHost.Paint" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -4671,28 +4475,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.QueryAccessibilityHelp" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.QueryAccessibilityHelp" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -4702,13 +4501,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.QueryAccessibilityHelp" />
+            >The <see cref="E:System.Windows.Forms.AxHost.QueryAccessibilityHelp" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -4742,28 +4539,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.QueryContinueDrag" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.QueryContinueDrag" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -4773,13 +4565,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.QueryContinueDrag" />
+            >The <see cref="E:System.Windows.Forms.AxHost.QueryContinueDrag" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -4812,8 +4602,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.AxHost.MouseDown" />
+            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseDown" />
 
             
 
@@ -4821,33 +4610,48 @@
           >
         </summary>
         <param name="button">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.MouseButtons" />
+          One of the <see cref="T:System.Windows.Forms.MouseButtons" />
 
           
 
            values that indicate which mouse button was pressed. </param
         >
         <param name="shift">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Not used.</param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of a mouse click, in pixels.</param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4884,8 +4688,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.AxHost.MouseDown" />
+            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseDown" />
 
             
 
@@ -4893,33 +4696,48 @@
           >
         </summary>
         <param name="button">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.MouseButtons" />
+          One of the <see cref="T:System.Windows.Forms.MouseButtons" />
 
           
 
            values that indicate which mouse button was pressed. </param
         >
         <param name="shift">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Not used.</param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of a mouse click, in pixels.</param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4956,8 +4774,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.AxHost.MouseDown" />
+            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseDown" />
 
             
 
@@ -4965,33 +4782,48 @@
           >
         </summary>
         <param name="o1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.MouseButtons" />
+          One of the <see cref="T:System.Windows.Forms.MouseButtons" />
 
           
 
            values that indicate which mouse button was pressed. </param
         >
         <param name="o2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Not used.</param
         >
         <param name="o3">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of a mouse click, in pixels.</param
         >
         <param name="o4">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5028,8 +4860,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.AxHost.MouseMove" />
+            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseMove" />
 
             
 
@@ -5037,33 +4868,48 @@
           >
         </summary>
         <param name="button">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.MouseButtons" />
+          One of the <see cref="T:System.Windows.Forms.MouseButtons" />
 
           
 
            values that indicate which mouse button was pressed. </param
         >
         <param name="shift">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Not used.</param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of a mouse click, in pixels.</param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5100,8 +4946,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.AxHost.MouseMove" />
+            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseMove" />
 
             
 
@@ -5109,33 +4954,48 @@
           >
         </summary>
         <param name="button">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.MouseButtons" />
+          One of the <see cref="T:System.Windows.Forms.MouseButtons" />
 
           
 
            values that indicate which mouse button was pressed. </param
         >
         <param name="shift">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Not used.</param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of a mouse click, in pixels.</param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5172,8 +5032,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.AxHost.MouseMove" />
+            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseMove" />
 
             
 
@@ -5181,33 +5040,48 @@
           >
         </summary>
         <param name="o1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.MouseButtons" />
+          One of the <see cref="T:System.Windows.Forms.MouseButtons" />
 
           
 
            values that indicate which mouse button was pressed. </param
         >
         <param name="o2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Not used.</param
         >
         <param name="o3">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of a mouse click, in pixels.</param
         >
         <param name="o4">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5244,8 +5118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.AxHost.MouseUp" />
+            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseUp" />
 
             
 
@@ -5253,33 +5126,48 @@
           >
         </summary>
         <param name="button">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.MouseButtons" />
+          One of the <see cref="T:System.Windows.Forms.MouseButtons" />
 
           
 
            values that indicate which mouse button was pressed. </param
         >
         <param name="shift">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Not used.</param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of a mouse click, in pixels.</param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5316,8 +5204,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.AxHost.MouseUp" />
+            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseUp" />
 
             
 
@@ -5325,33 +5212,48 @@
           >
         </summary>
         <param name="button">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.MouseButtons" />
+          One of the <see cref="T:System.Windows.Forms.MouseButtons" />
 
           
 
            values that indicate which mouse button was pressed. </param
         >
         <param name="shift">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Not used.</param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of a mouse click, in pixels.</param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5388,8 +5290,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.AxHost.MouseUp" />
+            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseUp" />
 
             
 
@@ -5397,33 +5298,48 @@
           >
         </summary>
         <param name="o1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.MouseButtons" />
+          One of the <see cref="T:System.Windows.Forms.MouseButtons" />
 
           
 
            values that indicate which mouse button was pressed. </param
         >
         <param name="o2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Not used.</param
         >
         <param name="o3">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of a mouse click, in pixels.</param
         >
         <param name="o4">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5488,28 +5404,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.RightToLeftChanged" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.RightToLeftChanged" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -5519,13 +5430,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.RightToLeftChanged" />
+            >The <see cref="E:System.Windows.Forms.AxHost.RightToLeftChanged" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -5621,13 +5530,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Windows.Forms.AxHost.HasAboutBox" />
+            >If <see cref="P:System.Windows.Forms.AxHost.HasAboutBox" />
 
             
 
-             is false, no <ui
-            >About</ui>
+             is false, no <ui>About</ui>
 
             
 
@@ -5637,8 +5544,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Displays the ActiveX control's <ui
-            >About</ui>
+            >Displays the ActiveX control's <ui>About</ui>
 
             
 
@@ -5662,8 +5568,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="M:System.Windows.Forms.AxHost.HasPropertyPages" />
+            >If <see cref="M:System.Windows.Forms.AxHost.HasPropertyPages" />
 
             
 
@@ -5697,8 +5602,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="M:System.Windows.Forms.AxHost.HasPropertyPages" />
+            >If <see cref="M:System.Windows.Forms.AxHost.HasPropertyPages" />
 
             
 
@@ -5711,12 +5615,15 @@
           <para>Displays the property pages associated with the ActiveX control assigned to the specified parent control.</para>
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The parent <see
-           cref="T:System.Windows.Forms.Control" />
+          The parent <see cref="T:System.Windows.Forms.Control" />
 
           
 
@@ -5766,28 +5673,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.StyleChanged" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.StyleChanged" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -5797,13 +5699,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.StyleChanged" />
+            >The <see cref="E:System.Windows.Forms.AxHost.StyleChanged" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -5840,8 +5740,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a collection of type <see
-             cref="T:System.Attribute" />
+            >Returns a collection of type <see cref="T:System.Attribute" />
 
             
 
@@ -5851,8 +5750,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ComponentModel.AttributeCollection" />
+            >An <see cref="T:System.ComponentModel.AttributeCollection" />
 
             
 
@@ -5881,8 +5779,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the type name instead of the value that the <see
-             cref="M:System.Windows.Forms.AxHost.System#ComponentModel#ICustomTypeDescriptor#GetClassName" />
+            >Use the type name instead of the value that the <see cref="M:System.Windows.Forms.AxHost.System#ComponentModel#ICustomTypeDescriptor#GetClassName" />
 
             
 
@@ -5919,8 +5816,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the default name instead of the value that the <see
-             cref="M:System.Windows.Forms.AxHost.System#ComponentModel#ICustomTypeDescriptor#GetComponentName" />
+            >Use the default name instead of the value that the <see cref="M:System.Windows.Forms.AxHost.System#ComponentModel#ICustomTypeDescriptor#GetComponentName" />
 
             
 
@@ -5960,8 +5856,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the default type converter instead of the value that the <see
-             cref="M:System.Windows.Forms.AxHost.System#ComponentModel#ICustomTypeDescriptor#GetConverter" />
+            >Use the default type converter instead of the value that the <see cref="M:System.Windows.Forms.AxHost.System#ComponentModel#ICustomTypeDescriptor#GetConverter" />
 
             
 
@@ -6006,8 +5901,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ComponentModel.EventDescriptor" />
+            >An <see cref="T:System.ComponentModel.EventDescriptor" />
 
             
 
@@ -6044,8 +5938,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -6086,12 +5979,15 @@
           <para>An object of the specified type that is the editor for the current object, or null if the editor cannot be found.</para>
         </returns>
         <param name="editorBaseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -6127,8 +6023,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ComponentModel.EventDescriptorCollection" />
+            >An <see cref="T:System.ComponentModel.EventDescriptorCollection" />
 
             
 
@@ -6167,13 +6062,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ComponentModel.EventDescriptorCollection" />
+            >An <see cref="T:System.ComponentModel.EventDescriptorCollection" />
 
             
 
-             that represents the events for the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             that represents the events for the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -6181,12 +6074,15 @@
           >
         </returns>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Attribute" />
+          An array of type <see cref="T:System.Attribute" />
 
           
 
@@ -6222,8 +6118,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
@@ -6262,13 +6157,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
-             that represents the events for the current <see
-             cref="T:System.Windows.Forms.AxHost" />
+             that represents the events for the current <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -6276,12 +6169,15 @@
           >
         </returns>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Attribute" />
+          An array of type <see cref="T:System.Attribute" />
 
           
 
@@ -6321,7 +6217,11 @@
           <para>The current object.</para>
         </returns>
         <param name="pd">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6420,28 +6320,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see
-             cref="E:System.Windows.Forms.AxHost.TextChanged" />
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.TextChanged" />
 
             
 
-             event, a <see
-             cref="T:System.NotSupportedException" />
+             event, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. The events derived from the <see
-             cref="T:System.Windows.Forms.Control" />
+             is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class are not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class are not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
-             class. The events exposed by the ActiveX control when the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 
@@ -6451,13 +6346,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.AxHost.TextChanged" />
+            >The <see cref="E:System.Windows.Forms.AxHost.TextChanged" />
 
             
 
-             event is not supported by the <see
-             cref="T:System.Windows.Forms.AxHost" />
+             event is not supported by the <see cref="T:System.Windows.Forms.AxHost" />
 
             
 

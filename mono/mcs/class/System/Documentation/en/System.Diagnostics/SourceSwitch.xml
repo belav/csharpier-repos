@@ -18,64 +18,53 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="P:System.Diagnostics.TraceSource.Switch" />
+        >The <see cref="P:System.Diagnostics.TraceSource.Switch" />
 
         
 
-         property of the <see
-         cref="T:System.Diagnostics.TraceSource" />
+         property of the <see cref="T:System.Diagnostics.TraceSource" />
 
         
 
-         class is a <see
-         cref="T:System.Diagnostics.SourceSwitch" />
+         class is a <see cref="T:System.Diagnostics.SourceSwitch" />
 
         
 
-         object. The <see
-         cref="T:System.Diagnostics.SourceSwitch" />
+         object. The <see cref="T:System.Diagnostics.SourceSwitch" />
 
         
 
-         class provides a <see
-         cref="P:System.Diagnostics.SourceSwitch.Level" />
+         class provides a <see cref="P:System.Diagnostics.SourceSwitch.Level" />
 
         
 
-         property to test the event level of the switch. The <see
-         cref="P:System.Diagnostics.SourceSwitch.Level" />
+         property to test the event level of the switch. The <see cref="P:System.Diagnostics.SourceSwitch.Level" />
 
         
 
-         property gets or sets the switch's <see
-         cref="T:System.Diagnostics.TraceLevel" />
+         property gets or sets the switch's <see cref="T:System.Diagnostics.TraceLevel" />
 
         
 
          value.</para
       >
       <para
-        >You can set the event level of a <see
-         cref="T:System.Diagnostics.SourceSwitch" />
+        >You can set the event level of a <see cref="T:System.Diagnostics.SourceSwitch" />
 
         
 
-         through the application configuration file and then use the configured <see
-         cref="T:System.Diagnostics.SourceSwitch" />
+         through the application configuration file and then use the configured <see cref="T:System.Diagnostics.SourceSwitch" />
 
         
 
-         level in your application. Alternatively, you can create a <see
-         cref="T:System.Diagnostics.SourceSwitch" />
+         level in your application. Alternatively, you can create a <see cref="T:System.Diagnostics.SourceSwitch" />
 
         
 
          in your code and set the level directly, to instrument a specific section of code.</para
       >
       <para
-        >To configure a <see
-         cref="T:System.Diagnostics.SourceSwitch" />
+        >To configure a <see cref="T:System.Diagnostics.SourceSwitch" />
 
         
 
@@ -85,23 +74,19 @@
   &lt;add name="SourceSwitch" value="Verbose"&gt;&lt;/add&gt;
 &lt;/switches&gt;</code>
       <para
-        >The switch is used to check whether a trace should be propagated or ignored. Each <see
-         cref="T:System.Diagnostics.TraceSource" />
+        >The switch is used to check whether a trace should be propagated or ignored. Each <see cref="T:System.Diagnostics.TraceSource" />
 
         
 
-         trace method calls the <see
-         cref="M:System.Diagnostics.SourceSwitch.ShouldTrace(System.Diagnostics.TraceEventType)" />
+         trace method calls the <see cref="M:System.Diagnostics.SourceSwitch.ShouldTrace(System.Diagnostics.TraceEventType)" />
 
         
 
-         method before calling the listeners. If the <see
-         cref="M:System.Diagnostics.SourceSwitch.ShouldTrace(System.Diagnostics.TraceEventType)" />
+         method before calling the listeners. If the <see cref="M:System.Diagnostics.SourceSwitch.ShouldTrace(System.Diagnostics.TraceEventType)" />
 
         
 
-         method returns false, the trace is ignored and the trace method exits. If the <see
-         cref="M:System.Diagnostics.SourceSwitch.ShouldTrace(System.Diagnostics.TraceEventType)" />
+         method returns false, the trace is ignored and the trace method exits. If the <see cref="M:System.Diagnostics.SourceSwitch.ShouldTrace(System.Diagnostics.TraceEventType)" />
 
         
 
@@ -133,21 +118,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="name" />
+            >The <paramref name="name" />
 
             
 
-             parameter is used to set the value of the <see
-             cref="P:System.Diagnostics.Switch.DisplayName" />
+             parameter is used to set the value of the <see cref="P:System.Diagnostics.Switch.DisplayName" />
 
             
 
              property.</para
           >
           <para
-            >To set the level of your <see
-             cref="T:System.Diagnostics.SourceSwitch" />
+            >To set the level of your <see cref="T:System.Diagnostics.SourceSwitch" />
 
             
 
@@ -164,8 +146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.SourceSwitch" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.SourceSwitch" />
 
             
 
@@ -196,23 +177,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="displayName" />
+            >The <paramref name="displayName" />
 
             
 
-             parameter is used to set the value of the <see
-             cref="P:System.Diagnostics.Switch.DisplayName" />
+             parameter is used to set the value of the <see cref="P:System.Diagnostics.Switch.DisplayName" />
 
             
 
-             property; the <paramref
-             name="defaultSwitchValue" />
+             property; the <paramref name="defaultSwitchValue" />
 
             
 
-             parameter is saved as a field and used to initialize the <see
-             cref="P:System.Diagnostics.Switch.Value" />
+             parameter is saved as a field and used to initialize the <see cref="P:System.Diagnostics.Switch.Value" />
 
             
 
@@ -220,8 +197,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If the switch is defined in a configuration file and the value attribute is specified, the configuration file value takes precedence and the <paramref
-               name="defaultSwitchValue" />
+              >If the switch is defined in a configuration file and the value attribute is specified, the configuration file value takes precedence and the <paramref name="defaultSwitchValue" />
 
               
 
@@ -229,8 +205,7 @@
             >
           </block>
           <para
-            >To set the level of your <see
-             cref="T:System.Diagnostics.SourceSwitch" />
+            >To set the level of your <see cref="T:System.Diagnostics.SourceSwitch" />
 
             
 
@@ -247,8 +222,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.SourceSwitch" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.SourceSwitch" />
 
             
 
@@ -256,14 +230,22 @@
           >
         </summary>
         <param name="displayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the source switch. </param
         >
         <param name="defaultSwitchValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -293,13 +275,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property gets its value from the <see
-             cref="P:System.Diagnostics.Switch.SwitchSetting" />
+            >This property gets its value from the <see cref="P:System.Diagnostics.Switch.SwitchSetting" />
 
             
 
-             property. Setting this property also modifies the <see
-             cref="P:System.Diagnostics.Switch.SwitchSetting" />
+             property. Setting this property also modifies the <see cref="P:System.Diagnostics.Switch.SwitchSetting" />
 
             
 
@@ -307,13 +287,11 @@
           >
           <block subset="none" type="note">
             <para
-              >For extensibility, the <see
-               cref="P:System.Diagnostics.SourceSwitch.Level" />
+              >For extensibility, the <see cref="P:System.Diagnostics.SourceSwitch.Level" />
 
               
 
-               property can be set to any integer, rather than being limited to a <see
-               cref="T:System.Diagnostics.SourceLevels" />
+               property can be set to any integer, rather than being limited to a <see cref="T:System.Diagnostics.SourceLevels" />
 
               
 
@@ -346,23 +324,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Diagnostics.SourceSwitch.OnValueChanged" />
+            >The <see cref="M:System.Diagnostics.SourceSwitch.OnValueChanged" />
 
             
 
-             method converts the new value of the <see
-             cref="P:System.Diagnostics.Switch.Value" />
+             method converts the new value of the <see cref="P:System.Diagnostics.Switch.Value" />
 
             
 
-             property to the integer representation of the matching field in the <see
-             cref="T:System.Diagnostics.SourceLevels" />
+             property to the integer representation of the matching field in the <see cref="T:System.Diagnostics.SourceLevels" />
 
             
 
-             enumeration, and then uses this integer to set the <see
-             cref="P:System.Diagnostics.Switch.SwitchSetting" />
+             enumeration, and then uses this integer to set the <see cref="P:System.Diagnostics.Switch.SwitchSetting" />
 
             
 
@@ -372,8 +346,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Invoked when the value of the <see
-             cref="P:System.Diagnostics.Switch.Value" />
+            >Invoked when the value of the <see cref="P:System.Diagnostics.Switch.Value" />
 
             
 
@@ -406,8 +379,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the Trace methods in the <see
-             cref="T:System.Diagnostics.TraceSource" />
+            >This method is called by the Trace methods in the <see cref="T:System.Diagnostics.TraceSource" />
 
             
 
@@ -415,8 +387,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Application code should not call this method; it is intended to be called only by methods in the <see
-               cref="T:System.Diagnostics.TraceSource" />
+              >Application code should not call this method; it is intended to be called only by methods in the <see cref="T:System.Diagnostics.TraceSource" />
 
               
 
@@ -433,12 +404,15 @@
           <para>True if the trace listeners should be called; otherwise, false.</para>
         </returns>
         <param name="eventType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Diagnostics.TraceEventType" />
+          One of the <see cref="T:System.Diagnostics.TraceEventType" />
 
           
 

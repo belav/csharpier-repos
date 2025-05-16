@@ -13,21 +13,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by members such as <see
-         cref="P:System.Windows.Forms.ToolBarButton.Style" />
+        >This enumeration is used by members such as <see cref="P:System.Windows.Forms.ToolBarButton.Style" />
 
         
 
         .</para
       >
       <para
-        >The toolbar button appearance is determined by the <see
-         cref="P:System.Windows.Forms.ToolBar.Appearance" />
+        >The toolbar button appearance is determined by the <see cref="P:System.Windows.Forms.ToolBar.Appearance" />
 
         
 
-         property of the toolbar. Setting the <see
-         cref="P:System.Windows.Forms.ToolBar.Appearance" />
+         property of the toolbar. Setting the <see cref="P:System.Windows.Forms.ToolBar.Appearance" />
 
         
 
@@ -84,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A space or line between toolbar buttons. The appearance depends on the value of the <see
-             cref="P:System.Windows.Forms.ToolBar.Appearance" />
+            >A space or line between toolbar buttons. The appearance depends on the value of the <see cref="P:System.Windows.Forms.ToolBar.Appearance" />
 
             
 

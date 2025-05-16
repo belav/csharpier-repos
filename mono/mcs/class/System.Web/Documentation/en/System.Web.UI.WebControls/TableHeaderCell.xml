@@ -20,54 +20,45 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.TableHeaderCell" />
+        >The <see cref="T:System.Web.UI.WebControls.TableHeaderCell" />
 
         
 
-         class represents a heading cell in a <see
-         cref="T:System.Web.UI.WebControls.Table" />
+         class represents a heading cell in a <see cref="T:System.Web.UI.WebControls.Table" />
 
         
 
-         control. You can use the <see
-         cref="P:System.Web.UI.WebControls.TableCell.Text" />
+         control. You can use the <see cref="P:System.Web.UI.WebControls.TableCell.Text" />
 
         
 
          property to specify or determine the contents of the heading cell.</para
       >
       <para
-        >This class allows you to control how the contents of the heading cell are displayed. The alignment of the contents in the heading cell is specified by setting the <see
-         cref="P:System.Web.UI.WebControls.TableCell.HorizontalAlign" />
+        >This class allows you to control how the contents of the heading cell are displayed. The alignment of the contents in the heading cell is specified by setting the <see cref="P:System.Web.UI.WebControls.TableCell.HorizontalAlign" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.TableCell.VerticalAlign" />
+         and <see cref="P:System.Web.UI.WebControls.TableCell.VerticalAlign" />
 
         
 
-         properties. You can use the <see
-         cref="P:System.Web.UI.WebControls.TableCell.Wrap" />
+         properties. You can use the <see cref="P:System.Web.UI.WebControls.TableCell.Wrap" />
 
         
 
          property to specify whether the contents of the heading cell wrap in the cell.</para
       >
       <para
-        >You can also specify how many rows or columns in the <see
-         cref="T:System.Web.UI.WebControls.Table" />
+        >You can also specify how many rows or columns in the <see cref="T:System.Web.UI.WebControls.Table" />
 
         
 
-         control are occupied by an individual heading cell. The <see
-         cref="P:System.Web.UI.WebControls.TableCell.RowSpan" />
+         control are occupied by an individual heading cell. The <see cref="P:System.Web.UI.WebControls.TableCell.RowSpan" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.TableCell.ColumnSpan" />
+         and <see cref="P:System.Web.UI.WebControls.TableCell.ColumnSpan" />
 
         
 
@@ -77,8 +68,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a heading cell within a <see
-         cref="T:System.Web.UI.WebControls.Table" />
+        >Represents a heading cell within a <see cref="T:System.Web.UI.WebControls.Table" />
 
         
 
@@ -96,8 +86,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.TableHeaderCell" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.TableHeaderCell" />
 
             
 
@@ -107,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.TableHeaderCell" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.TableHeaderCell" />
 
             
 
@@ -140,18 +128,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.TableHeaderCell.AbbreviatedText" />
+            >The <see cref="P:System.Web.UI.WebControls.TableHeaderCell.AbbreviatedText" />
 
             
 
-             property is rendered as the abbr attribute of the HTML th element. The abbr attribute is used by screen readers to read a shortened version of a header for each cell in the table. The <see
-             cref="P:System.Web.UI.WebControls.TableHeaderCell.AbbreviatedText" />
+             property is rendered as the abbr attribute of the HTML th element. The abbr attribute is used by screen readers to read a shortened version of a header for each cell in the table. The <see cref="P:System.Web.UI.WebControls.TableHeaderCell.AbbreviatedText" />
 
             
 
-             property is significant for browsers that render abbreviated text in place of the content for the <see
-             cref="T:System.Web.UI.WebControls.TableHeaderCell" />
+             property is significant for browsers that render abbreviated text in place of the content for the <see cref="T:System.Web.UI.WebControls.TableHeaderCell" />
 
             
 
@@ -162,8 +147,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the abbr attribute of the HTML th element for the <see
-             cref="T:System.Web.UI.WebControls.TableHeaderCell" />
+            >Gets or sets the abbr attribute of the HTML th element for the <see cref="T:System.Web.UI.WebControls.TableHeaderCell" />
 
             
 
@@ -191,23 +175,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.TableHeaderCell.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.WebControls.TableHeaderCell.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method overrides the <see
-             cref="M:System.Web.UI.WebControls.WebControl.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
+             method overrides the <see cref="M:System.Web.UI.WebControls.WebControl.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method for the base class and, in addition to calling the base method, renders the <see
-             cref="P:System.Web.UI.WebControls.TableHeaderCell.Scope" />
+             method for the base class and, in addition to calling the base method, renders the <see cref="P:System.Web.UI.WebControls.TableHeaderCell.Scope" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.TableHeaderCell.AbbreviatedText" />
+             and <see cref="P:System.Web.UI.WebControls.TableHeaderCell.AbbreviatedText" />
 
             
 
@@ -217,8 +197,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies attributes to render to the <see
-             cref="T:System.Web.UI.WebControls.TableHeaderCell" />
+            >Applies attributes to render to the <see cref="T:System.Web.UI.WebControls.TableHeaderCell" />
 
             
 
@@ -226,12 +205,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          An <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -261,8 +243,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The categories can be any string values that are pertinent to the table. The <see
-             cref="P:System.Web.UI.WebControls.TableHeaderCell.CategoryText" />
+            >The categories can be any string values that are pertinent to the table. The <see cref="P:System.Web.UI.WebControls.TableHeaderCell.CategoryText" />
 
             
 
@@ -273,8 +254,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the axis attribute of the HTML th element for the <see
-             cref="T:System.Web.UI.WebControls.TableHeaderCell" />
+            >Gets or sets the axis attribute of the HTML th element for the <see cref="T:System.Web.UI.WebControls.TableHeaderCell" />
 
             
 
@@ -305,36 +285,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TableHeaderCell.Scope" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TableHeaderCell.Scope" />
 
             
 
-             property to get or set the scope of the <see
-             cref="T:System.Web.UI.WebControls.TableHeaderCell" />
+             property to get or set the scope of the <see cref="T:System.Web.UI.WebControls.TableHeaderCell" />
 
             
 
-             control when it is rendered. The scope of the <see
-             cref="T:System.Web.UI.WebControls.TableHeaderCell" />
+             control when it is rendered. The scope of the <see cref="T:System.Web.UI.WebControls.TableHeaderCell" />
 
             
 
-             represents the cells that the header applies to. For complex tables, use the <see
-             cref="P:System.Web.UI.WebControls.TableCell.AssociatedHeaderCellID" />
+             represents the cells that the header applies to. For complex tables, use the <see cref="P:System.Web.UI.WebControls.TableCell.AssociatedHeaderCellID" />
 
             
 
-             property, which provides more control over the specification of the relationship of header cells to data cells. The <see
-             cref="P:System.Web.UI.WebControls.TableHeaderCell.Scope" />
+             property, which provides more control over the specification of the relationship of header cells to data cells. The <see cref="P:System.Web.UI.WebControls.TableHeaderCell.Scope" />
 
             
 
              property is used to make HTML tables more accessible by providing information about relationships between the cells and the headers.</para
           >
           <para
-            >For a list of the available table header scopes, see <see
-             cref="T:System.Web.UI.WebControls.TableHeaderScope" />
+            >For a list of the available table header scopes, see <see cref="T:System.Web.UI.WebControls.TableHeaderScope" />
 
             
 
@@ -345,8 +319,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the scope of the <see
-             cref="T:System.Web.UI.WebControls.TableHeaderCell" />
+            >Gets or sets the scope of the <see cref="T:System.Web.UI.WebControls.TableHeaderCell" />
 
             
 

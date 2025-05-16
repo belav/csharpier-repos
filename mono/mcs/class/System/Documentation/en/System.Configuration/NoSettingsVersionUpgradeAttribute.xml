@@ -30,21 +30,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To create a fully featured application settings provider that supports application versioning, the provider must implement the <see
-         cref="T:System.Configuration.IApplicationSettingsProvider" />
+        >To create a fully featured application settings provider that supports application versioning, the provider must implement the <see cref="T:System.Configuration.IApplicationSettingsProvider" />
 
         
 
-         interface. One of the members in this interface, the <see
-         cref="M:System.Configuration.IApplicationSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
+         interface. One of the members in this interface, the <see cref="M:System.Configuration.IApplicationSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
 
         
 
          method, is called to notify the provider that a new version of the application has been installed. In response, the provider is expected to perform an appropriate action, typically migrating past application settings.</para
       >
       <para
-        >The <see
-         cref="T:System.Configuration.NoSettingsVersionUpgradeAttribute" />
+        >The <see cref="T:System.Configuration.NoSettingsVersionUpgradeAttribute" />
 
         
 
@@ -77,8 +74,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is the compiler-supplied default constructor for the <see
-             cref="T:System.Configuration.NoSettingsVersionUpgradeAttribute" />
+            >This is the compiler-supplied default constructor for the <see cref="T:System.Configuration.NoSettingsVersionUpgradeAttribute" />
 
             
 
@@ -88,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.NoSettingsVersionUpgradeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.NoSettingsVersionUpgradeAttribute" />
 
             
 

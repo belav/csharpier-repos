@@ -26,18 +26,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >With the <see
-         cref="T:System.ComponentModel.IBindingListView" />
+        >With the <see cref="T:System.ComponentModel.IBindingListView" />
 
         
 
-         interface, you implement advanced sorting as a set of property descriptor-direction pairs. You implement filtering as a string to be interpreted by the data source implementation. The <see
-         cref="T:System.ComponentModel.IBindingListView" />
+         interface, you implement advanced sorting as a set of property descriptor-direction pairs. You implement filtering as a string to be interpreted by the data source implementation. The <see cref="T:System.ComponentModel.IBindingListView" />
 
         
 
-         interface is implemented by the <see
-         cref="T:System.Windows.Forms.BindingSource" />
+         interface is implemented by the <see cref="T:System.Windows.Forms.BindingSource" />
 
         
 
@@ -47,8 +44,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Extends the <see
-         cref="T:System.ComponentModel.IBindingList" />
+        >Extends the <see cref="T:System.ComponentModel.IBindingList" />
 
         
 
@@ -82,8 +78,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.ListSortDescriptionCollection" />
+            >The <see cref="T:System.ComponentModel.ListSortDescriptionCollection" />
 
             
 
@@ -93,8 +88,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sorts the data source based on the given <see
-             cref="T:System.ComponentModel.ListSortDescriptionCollection" />
+            >Sorts the data source based on the given <see cref="T:System.ComponentModel.ListSortDescriptionCollection" />
 
             
 
@@ -102,12 +96,15 @@
           >
         </summary>
         <param name="sorts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.ListSortDescriptionCollection" />
+          The <see cref="T:System.ComponentModel.ListSortDescriptionCollection" />
 
           
 
@@ -132,18 +129,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Your implementation of the <see
-             cref="P:System.ComponentModel.IBindingListView.Filter" />
+            >Your implementation of the <see cref="P:System.ComponentModel.IBindingListView.Filter" />
 
             
 
-             property should exhibit the following behavior when the <see
-             cref="P:System.ComponentModel.IBindingListView.Filter" />
+             property should exhibit the following behavior when the <see cref="P:System.ComponentModel.IBindingListView.Filter" />
 
             
 
-             property is set: The data source returns only the items that meet the filter criteria when the list is accessed by item index or when the list is enumerated. The definition of the filter string is dependent on the data-source implementation, but the behavior associated with setting the filter should be modeled on <see
-             cref="P:System.Data.DataColumn.Expression" />
+             property is set: The data source returns only the items that meet the filter criteria when the list is accessed by item index or when the list is enumerated. The definition of the filter string is dependent on the data-source implementation, but the behavior associated with setting the filter should be modeled on <see cref="P:System.Data.DataColumn.Expression" />
 
             
 
@@ -176,8 +170,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >With the <see
-             cref="T:System.ComponentModel.IBindingListView" />
+            >With the <see cref="T:System.ComponentModel.IBindingListView" />
 
             
 
@@ -213,8 +206,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.ListSortDescriptionCollection" />
+            >The <see cref="T:System.ComponentModel.ListSortDescriptionCollection" />
 
             
 
@@ -268,8 +260,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >With the <see
-             cref="P:System.ComponentModel.IBindingListView.SupportsFiltering" />
+            >With the <see cref="P:System.ComponentModel.IBindingListView.SupportsFiltering" />
 
             
 

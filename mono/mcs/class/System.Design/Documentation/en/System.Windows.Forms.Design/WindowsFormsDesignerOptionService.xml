@@ -35,8 +35,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Design.WindowsFormsDesignerOptionService" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.WindowsFormsDesignerOptionService" />
 
             
 
@@ -63,13 +62,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.Design.DesignerOptions" />
+            >Gets the <see cref="T:System.Windows.Forms.Design.DesignerOptions" />
 
             
 
-             exposed by the <see
-             cref="T:System.Windows.Forms.Design.WindowsFormsDesignerOptionService" />
+             exposed by the <see cref="T:System.Windows.Forms.Design.WindowsFormsDesignerOptionService" />
 
             
 

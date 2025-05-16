@@ -45,36 +45,30 @@
 
         
 
-         presents a simple mechanism for indicating to the end user that a control on a form has an error associated with it. If an error description string is specified for the control, an icon appears next to the control. The icon flashes in the manner specified by <see
-         cref="P:System.Windows.Forms.ErrorProvider.BlinkStyle" />
+         presents a simple mechanism for indicating to the end user that a control on a form has an error associated with it. If an error description string is specified for the control, an icon appears next to the control. The icon flashes in the manner specified by <see cref="P:System.Windows.Forms.ErrorProvider.BlinkStyle" />
 
         
 
-        , at the rate specified by <see
-         cref="P:System.Windows.Forms.ErrorProvider.BlinkRate" />
+        , at the rate specified by <see cref="P:System.Windows.Forms.ErrorProvider.BlinkRate" />
 
         
 
         . When the mouse hovers over the icon, a ToolTip appears showing the error description string.</para
       >
       <para
-        >Typically, you use <see
-         cref="T:System.Windows.Forms.ErrorProvider" />
+        >Typically, you use <see cref="T:System.Windows.Forms.ErrorProvider" />
 
         
 
-         in association with data-bound controls. When using <see
-         cref="T:System.Windows.Forms.ErrorProvider" />
+         in association with data-bound controls. When using <see cref="T:System.Windows.Forms.ErrorProvider" />
 
         
 
-         with data-bound controls, you must specify the <see
-         cref="P:System.Windows.Forms.ErrorProvider.ContainerControl" />
+         with data-bound controls, you must specify the <see cref="P:System.Windows.Forms.ErrorProvider.ContainerControl" />
 
         
 
-        , either in the constructor or by setting the <see
-         cref="P:System.Windows.Forms.ErrorProvider.ContainerControl" />
+        , either in the constructor or by setting the <see cref="P:System.Windows.Forms.ErrorProvider.ContainerControl" />
 
         
 
@@ -82,8 +76,7 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Windows.Forms.ErrorProvider" />
+          >The <see cref="T:System.Windows.Forms.ErrorProvider" />
 
           
 
@@ -105,8 +98,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows initial property values for an instance of <see
-             cref="T:System.Windows.Forms.ErrorProvider" />
+            >The following table shows initial property values for an instance of <see cref="T:System.Windows.Forms.ErrorProvider" />
 
             
 
@@ -160,23 +152,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ErrorProvider" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ErrorProvider" />
 
             
 
-             class and initializes the default settings for <see
-             cref="P:System.Windows.Forms.ErrorProvider.BlinkRate" />
+             class and initializes the default settings for <see cref="P:System.Windows.Forms.ErrorProvider.BlinkRate" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ErrorProvider.BlinkStyle" />
+            , <see cref="P:System.Windows.Forms.ErrorProvider.BlinkStyle" />
 
             
 
-            , and the <see
-             cref="P:System.Windows.Forms.ErrorProvider.Icon" />
+            , and the <see cref="P:System.Windows.Forms.ErrorProvider.Icon" />
 
             
 
@@ -205,8 +193,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.IContainer" />
+            >The <see cref="T:System.ComponentModel.IContainer" />
 
             
 
@@ -216,13 +203,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ErrorProvider" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ErrorProvider" />
 
             
 
-             class attached to an <see
-             cref="T:System.ComponentModel.IContainer" />
+             class attached to an <see cref="T:System.ComponentModel.IContainer" />
 
             
 
@@ -230,12 +215,15 @@
           >
         </summary>
         <param name="container">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IContainer" />
+          The <see cref="T:System.ComponentModel.IContainer" />
 
           
 
@@ -256,13 +244,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.Control" />
+            >The <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             specified by <see
-             cref="P:System.Windows.Forms.ErrorProvider.ContainerControl" />
+             specified by <see cref="P:System.Windows.Forms.ErrorProvider.ContainerControl" />
 
             
 
@@ -272,8 +258,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ErrorProvider" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ErrorProvider" />
 
             
 
@@ -281,7 +266,11 @@
           >
         </summary>
         <param name="parentControl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -310,28 +299,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To avoid conflicts at run time that can occur when changing <see
-             cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
+            >To avoid conflicts at run time that can occur when changing <see cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
+             and <see cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
 
             
 
-            , you should use <see
-             cref="M:System.Windows.Forms.ErrorProvider.BindToDataAndErrors(System.Object,System.String)" />
+            , you should use <see cref="M:System.Windows.Forms.ErrorProvider.BindToDataAndErrors(System.Object,System.String)" />
 
             
 
-             instead of setting <see
-             cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
+             instead of setting <see cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
+             and <see cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
 
             
 
@@ -341,13 +325,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides a method to set both the <see
-             cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
+            >Provides a method to set both the <see cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
+             and <see cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
 
             
 
@@ -355,34 +337,38 @@
           >
         </summary>
         <param name="newDataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A data set based on the <see
-           cref="T:System.Collections.IList" />
+          A data set based on the <see cref="T:System.Collections.IList" />
 
           
 
-           interface to be monitored for errors. Typically, this is a <see
-           cref="T:System.Data.DataSet" />
+           interface to be monitored for errors. Typically, this is a <see cref="T:System.Data.DataSet" />
 
           
 
            to be monitored for errors. </param
         >
         <param name="newDataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A collection within the <paramref
-           name="newDataSource" />
+          A collection within the <paramref name="newDataSource" />
 
           
 
-           to monitor for errors. Typically, this will be a <see
-           cref="T:System.Data.DataTable" />
+           to monitor for errors. Typically, this will be a <see cref="T:System.Data.DataTable" />
 
           
 
@@ -413,13 +399,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The error icon flashes at the specified rate. A value of zero sets <see
-             cref="P:System.Windows.Forms.ErrorProvider.BlinkStyle" />
+            >The error icon flashes at the specified rate. A value of zero sets <see cref="P:System.Windows.Forms.ErrorProvider.BlinkStyle" />
 
             
 
-             to <see
-             cref="F:System.Windows.Forms.ErrorBlinkStyle.NeverBlink" />
+             to <see cref="F:System.Windows.Forms.ErrorBlinkStyle.NeverBlink" />
 
             
 
@@ -455,23 +439,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The error icon flashes in the manner specified by the assigned <see
-             cref="T:System.Windows.Forms.ErrorBlinkStyle" />
+            >The error icon flashes in the manner specified by the assigned <see cref="T:System.Windows.Forms.ErrorBlinkStyle" />
 
             
 
-             when an error occurs. Setting the <see
-             cref="P:System.Windows.Forms.ErrorProvider.BlinkRate" />
+             when an error occurs. Setting the <see cref="P:System.Windows.Forms.ErrorProvider.BlinkRate" />
 
             
 
-             to zero sets the <see
-             cref="P:System.Windows.Forms.ErrorProvider.BlinkStyle" />
+             to zero sets the <see cref="P:System.Windows.Forms.ErrorProvider.BlinkStyle" />
 
             
 
-             to <see
-             cref="F:System.Windows.Forms.ErrorBlinkStyle.NeverBlink" />
+             to <see cref="F:System.Windows.Forms.ErrorBlinkStyle.NeverBlink" />
 
             
 
@@ -501,13 +481,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you will use <see
-             cref="M:System.Windows.Forms.ErrorProvider.CanExtend(System.Object)" />
+            >Typically, you will use <see cref="M:System.Windows.Forms.ErrorProvider.CanExtend(System.Object)" />
 
             
 
-             to determine whether you can attach an <see
-             cref="T:System.Windows.Forms.ErrorProvider" />
+             to determine whether you can attach an <see cref="T:System.Windows.Forms.ErrorProvider" />
 
             
 
@@ -522,18 +500,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>true if the control can be extended; otherwise, false.</para>
           <para
-            >This property will be true if the object is a <see
-             cref="T:System.Windows.Forms.Control" />
+            >This property will be true if the object is a <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             and is not a <see
-             cref="T:System.Windows.Forms.Form" />
+             and is not a <see cref="T:System.Windows.Forms.Form" />
 
             
 
-             or <see
-             cref="T:System.Windows.Forms.ToolBar" />
+             or <see cref="T:System.Windows.Forms.ToolBar" />
 
             
 
@@ -541,7 +516,11 @@
           >
         </returns>
         <param name="extendee">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -567,28 +546,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling this method clears all property settings for this <see
-             cref="T:System.Windows.Forms.ErrorProvider" />
+            >Calling this method clears all property settings for this <see cref="T:System.Windows.Forms.ErrorProvider" />
 
             
 
-            , restoring the properties to their default values. To clear the error message, call the <see
-             cref="M:System.Windows.Forms.ErrorProvider.SetError(System.Windows.Forms.Control,System.String)" />
+            , restoring the properties to their default values. To clear the error message, call the <see cref="M:System.Windows.Forms.ErrorProvider.SetError(System.Windows.Forms.Control,System.String)" />
 
             
 
-             method and pass in <see
-             cref="F:System.String.Empty" />
+             method and pass in <see cref="F:System.String.Empty" />
 
             
 
-             for the <see
-             cref="T:System.String" />
+             for the <see cref="T:System.String" />
 
             
 
-             value. This removes the error glyph from the specified <see
-             cref="T:System.Windows.Forms.Control" />
+             value. This removes the error glyph from the specified <see cref="T:System.Windows.Forms.Control" />
 
             
 
@@ -620,8 +594,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, this is the <see
-             cref="T:System.Windows.Forms.Form" />
+            >Typically, this is the <see cref="T:System.Windows.Forms.Form" />
 
             
 
@@ -631,8 +604,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating the parent control for this <see
-             cref="T:System.Windows.Forms.ErrorProvider" />
+            >Gets or sets a value indicating the parent control for this <see cref="T:System.Windows.Forms.ErrorProvider" />
 
             
 
@@ -664,41 +636,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
+            >The <see cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
 
             
 
-             is a navigation string based on <see
-             cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
+             is a navigation string based on <see cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
 
             
 
             .</para
           >
           <para
-            >To avoid conflicts at run time that can occur when changing <see
-             cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
+            >To avoid conflicts at run time that can occur when changing <see cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
+             and <see cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
 
             
 
-            , you should use <see
-             cref="M:System.Windows.Forms.ErrorProvider.BindToDataAndErrors(System.Object,System.String)" />
+            , you should use <see cref="M:System.Windows.Forms.ErrorProvider.BindToDataAndErrors(System.Object,System.String)" />
 
             
 
-             instead of setting <see
-             cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
+             instead of setting <see cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
+             and <see cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
 
             
 
@@ -734,46 +699,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
+            >The <see cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
 
             
 
-             is a data source that you can attach to a control and that you want to monitor for errors. <see
-             cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
+             is a data source that you can attach to a control and that you want to monitor for errors. <see cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
 
             
 
-             can be set to any collection that implements <see
-             cref="T:System.Collections.IList" />
+             can be set to any collection that implements <see cref="T:System.Collections.IList" />
 
             
 
             .</para
           >
           <para
-            >To avoid conflicts at run time that can occur when changing <see
-             cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
+            >To avoid conflicts at run time that can occur when changing <see cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
+             and <see cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
 
             
 
-            , you should use <see
-             cref="M:System.Windows.Forms.ErrorProvider.BindToDataAndErrors(System.Object,System.String)" />
+            , you should use <see cref="M:System.Windows.Forms.ErrorProvider.BindToDataAndErrors(System.Object,System.String)" />
 
             
 
-             instead of setting <see
-             cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
+             instead of setting <see cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
+             and <see cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
 
             
 
@@ -783,8 +740,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the data source that the <see
-             cref="T:System.Windows.Forms.ErrorProvider" />
+            >Gets or sets the data source that the <see cref="T:System.Windows.Forms.ErrorProvider" />
 
             
 
@@ -839,7 +795,11 @@
           <para>The error description string for the specified control.</para>
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -880,13 +840,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.ErrorIconAlignment" />
+            >One of the <see cref="T:System.Windows.Forms.ErrorIconAlignment" />
 
             
 
-             values. The default icon alignment is <see
-             cref="F:System.Windows.Forms.ErrorIconAlignment.MiddleRight" />
+             values. The default icon alignment is <see cref="F:System.Windows.Forms.ErrorIconAlignment.MiddleRight" />
 
             
 
@@ -894,7 +852,11 @@
           >
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -940,7 +902,11 @@
           <para>The number of pixels to leave between the icon and the control. </para>
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -980,8 +946,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Drawing.Icon" />
+            >Gets or sets the <see cref="T:System.Drawing.Icon" />
 
             
 
@@ -1018,8 +983,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1028,8 +992,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ErrorProvider.OnRightToLeftChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ErrorProvider.OnRightToLeftChanged(System.EventArgs)" />
 
             
 
@@ -1039,8 +1002,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ErrorProvider.RightToLeftChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.ErrorProvider.RightToLeftChanged" />
 
             
 
@@ -1048,12 +1010,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.EventArgs" />
+          A <see cref="T:System.EventArgs" />
 
           
 
@@ -1103,8 +1068,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1116,8 +1080,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.ErrorProvider.RightToLeft" />
+            >Occurs when the <see cref="P:System.Windows.Forms.ErrorProvider.RightToLeft" />
 
             
 
@@ -1143,13 +1106,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the length of <paramref
-             name="value" />
+            >If the length of <paramref name="value" />
 
             
 
-             is greater than zero, then the error icon is displayed, and the ToolTip for the error icon is the error description text. If the length is zero or <paramref
-             name="value" />
+             is greater than zero, then the error icon is displayed, and the ToolTip for the error icon is the error description text. If the length is zero or <paramref name="value" />
 
             
 
@@ -1161,19 +1122,26 @@
           <para>Sets the error description string for the specified control.</para>
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The control to set the error description string for. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The error description string, or null or <see
-           cref="F:System.String.Empty" />
+          The error description string, or null or <see cref="F:System.String.Empty" />
 
           
 
@@ -1208,19 +1176,26 @@
           <para>Sets the location where the error icon should be placed in relation to the control.</para>
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The control to set the icon location for. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.ErrorIconAlignment" />
+          One of the <see cref="T:System.Windows.Forms.ErrorIconAlignment" />
 
           
 
@@ -1255,24 +1230,30 @@
           <para>Sets the amount of extra space to leave between the specified control and the error icon.</para>
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <paramref
-           name="control" />
+          The <paramref name="control" />
 
           
 
            to set the padding for. </param
         >
         <param name="padding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of pixels to add between the icon and the <paramref
-           name="control" />
+          The number of pixels to add between the icon and the <paramref name="control" />
 
           
 
@@ -1385,8 +1366,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you call this method after you have called <see
-             cref="M:System.Windows.Forms.ErrorProvider.BindToDataAndErrors(System.Object,System.String)" />
+            >Typically, you call this method after you have called <see cref="M:System.Windows.Forms.ErrorProvider.BindToDataAndErrors(System.Object,System.String)" />
 
             
 
@@ -1396,13 +1376,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides a method to update the bindings of the <see
-             cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
+            >Provides a method to update the bindings of the <see cref="P:System.Windows.Forms.ErrorProvider.DataSource" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
+            , <see cref="P:System.Windows.Forms.ErrorProvider.DataMember" />
 
             
 

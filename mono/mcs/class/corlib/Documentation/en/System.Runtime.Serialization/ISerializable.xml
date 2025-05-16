@@ -23,94 +23,77 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Any class that might be serialized must be marked with the <see
-         cref="T:System.SerializableAttribute" />
+        >Any class that might be serialized must be marked with the <see cref="T:System.SerializableAttribute" />
 
         
 
-        . If a class needs to control its serialization process, it can implement the <see
-         cref="T:System.Runtime.Serialization.ISerializable" />
+        . If a class needs to control its serialization process, it can implement the <see cref="T:System.Runtime.Serialization.ISerializable" />
 
         
 
-         interface. The <see
-         cref="T:System.Runtime.Serialization.Formatter" />
+         interface. The <see cref="T:System.Runtime.Serialization.Formatter" />
 
         
 
-         calls the <see
-         cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+         calls the <see cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
 
         
 
-         at serialization time and populates the supplied <see
-         cref="T:System.Runtime.Serialization.SerializationInfo" />
+         at serialization time and populates the supplied <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
         
 
-         with all the data required to represent the object. The <see
-         cref="T:System.Runtime.Serialization.Formatter" />
+         with all the data required to represent the object. The <see cref="T:System.Runtime.Serialization.Formatter" />
 
         
 
-         creates a <see
-         cref="T:System.Runtime.Serialization.SerializationInfo" />
+         creates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
         
 
-         with the type of the object in the graph. Objects that need to send proxies for themselves can use the <see
-         cref="P:System.Runtime.Serialization.SerializationInfo.FullTypeName" />
+         with the type of the object in the graph. Objects that need to send proxies for themselves can use the <see cref="P:System.Runtime.Serialization.SerializationInfo.FullTypeName" />
 
         
 
-         and <see
-         cref="P:System.Runtime.Serialization.SerializationInfo.AssemblyName" />
+         and <see cref="P:System.Runtime.Serialization.SerializationInfo.AssemblyName" />
 
         
 
-         methods on <see
-         cref="T:System.Runtime.Serialization.SerializationInfo" />
+         methods on <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
         
 
          to change the transmitted information.</para
       >
       <para
-        >In the case of class inheritance, it is possible to serialize a class that derives from a base class that implements <see
-         cref="T:System.Runtime.Serialization.ISerializable" />
+        >In the case of class inheritance, it is possible to serialize a class that derives from a base class that implements <see cref="T:System.Runtime.Serialization.ISerializable" />
 
         
 
-        . In this case, the derived class should call the base class implementation of <see
-         cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+        . In this case, the derived class should call the base class implementation of <see cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
 
         
 
-         inside its implementation of <see
-         cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+         inside its implementation of <see cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
 
         
 
         . Otherwise, the data from the base class will not be serialized.</para
       >
       <para
-        >The <see
-         cref="T:System.Runtime.Serialization.ISerializable" />
+        >The <see cref="T:System.Runtime.Serialization.ISerializable" />
 
         
 
-         interface implies a constructor with the signature constructor (<see
-         cref="T:System.Runtime.Serialization.SerializationInfo" />
+         interface implies a constructor with the signature constructor (<see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
         
 
-         information, <see
-         cref="T:System.Runtime.Serialization.StreamingContext" />
+         information, <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
         
 
-         context). At deserialization time, the current constructor is called only after the data in the <see
-         cref="T:System.Runtime.Serialization.SerializationInfo" />
+         context). At deserialization time, the current constructor is called only after the data in the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
         
 
@@ -118,97 +101,80 @@
       >
       <para>The order in which objects are deserialized cannot be guaranteed. For example, if one type references a type that has not been deserialized yet, an exception will occur. If you are creating types that have such dependencies, you can work around the problem by implementing the IDeserializationCallback interface and the OnDeserialization method.</para>
       <para
-        >The serialization architecture handles object types that extend <see
-         cref="T:System.MarshalByRefObject" />
+        >The serialization architecture handles object types that extend <see cref="T:System.MarshalByRefObject" />
 
         
 
-         the same as types that extend <see
-         cref="T:System.Object" />
+         the same as types that extend <see cref="T:System.Object" />
 
         
 
-        . These types can be marked with the <see
-         cref="T:System.SerializableAttribute" />
+        . These types can be marked with the <see cref="T:System.SerializableAttribute" />
 
         
 
-         and implement the <see
-         cref="T:System.Runtime.Serialization.ISerializable" />
+         and implement the <see cref="T:System.Runtime.Serialization.ISerializable" />
 
         
 
          interface as any other object type. Their object state will be captured and persisted onto the stream.</para
       >
       <para
-        >When these types are being used through <see
-         cref="N:System.Runtime.Remoting" />
+        >When these types are being used through <see cref="N:System.Runtime.Remoting" />
 
         
 
-        , the remoting infrastructure provides a surrogate that preempts typical serialization and instead serializes a proxy to the <see
-         cref="T:System.MarshalByRefObject" />
+        , the remoting infrastructure provides a surrogate that preempts typical serialization and instead serializes a proxy to the <see cref="T:System.MarshalByRefObject" />
 
         
 
-        . A surrogate is a helper that knows how to serialize and deserialize objects of a particular type. The proxy, invisible to the user in most cases, will be of type <see
-         cref="T:System.Runtime.Remoting.ObjRef" />
+        . A surrogate is a helper that knows how to serialize and deserialize objects of a particular type. The proxy, invisible to the user in most cases, will be of type <see cref="T:System.Runtime.Remoting.ObjRef" />
 
         
 
         .</para
       >
       <para
-        >As a general design pattern, it would be unusual for a class to be both marked with the serializable attribute and extend <see
-         cref="T:System.MarshalByRefObject" />
+        >As a general design pattern, it would be unusual for a class to be both marked with the serializable attribute and extend <see cref="T:System.MarshalByRefObject" />
 
         
 
-        . Developers should think carefully about the possible serialization and remoting scenarios when combining these two characteristics. One example where this might be applicable is with a <see
-         cref="T:System.IO.MemoryStream" />
+        . Developers should think carefully about the possible serialization and remoting scenarios when combining these two characteristics. One example where this might be applicable is with a <see cref="T:System.IO.MemoryStream" />
 
         
 
-        . While the base class of <see
-         cref="T:System.IO.MemoryStream" />
+        . While the base class of <see cref="T:System.IO.MemoryStream" />
 
         
 
-         (<see
-         cref="T:System.IO.Stream" />
+         (<see cref="T:System.IO.Stream" />
 
         
 
-        ) extends from <see
-         cref="T:System.MarshalByRefObject" />
+        ) extends from <see cref="T:System.MarshalByRefObject" />
 
         
 
-        , it is possible to capture the state of a <see
-         cref="T:System.IO.MemoryStream" />
+        , it is possible to capture the state of a <see cref="T:System.IO.MemoryStream" />
 
         
 
          and restore it at will. It might, therefore, be meaningful to serialize the state of this stream into a database and restore it at some later point in time. However, when used through remoting, an object of this type would be proxied.</para
       >
       <para
-        >For more information about serialization of classes that extend <see
-         cref="T:System.MarshalByRefObject" />
+        >For more information about serialization of classes that extend <see cref="T:System.MarshalByRefObject" />
 
         
 
-        , see <see
-         cref="T:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector" />
+        , see <see cref="T:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector" />
 
         
 
-        . For more information about implementing <see
-         cref="T:System.Runtime.Serialization.ISerializable" />
+        . For more information about implementing <see cref="T:System.Runtime.Serialization.ISerializable" />
 
         
 
-        , see <format
-         type="text/html">
+        , see <format type="text/html">
           <a href="12ED422D-5280-49B8-9B71-A2ED129C0384"
             >[&lt;topic://cpconCustomSerialization&gt;]</a
           >
@@ -251,26 +217,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any objects that are included in the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Any objects that are included in the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
              are automatically tracked and serialized by the formatter.</para
           >
           <para
-            >Code that calls <see
-             cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+            >Code that calls <see cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
 
             
 
-             requires the <see
-             cref="T:System.Security.Permissions.SecurityPermission" />
+             requires the <see cref="T:System.Security.Permissions.SecurityPermission" />
 
             
 
-             for providing serialization services. Associated enumeration: <see
-             cref="F:System.Security.Permissions.SecurityPermissionFlag.SerializationFormatter" />
+             for providing serialization services. Associated enumeration: <see cref="F:System.Security.Permissions.SecurityPermissionFlag.SerializationFormatter" />
 
             
 
@@ -283,8 +245,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -292,24 +253,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            to populate with data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The destination (see <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The destination (see <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 

@@ -31,32 +31,28 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Encoding is the process of transforming a message into a sequence of bytes. Decoding is the reverse process. indigo1 includes three types of encoding for SOAP messages: Text, Binary and Message Transmission Optimization Mechanism (MTOM). </para>
       <para
-        >The <see
-         cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" />
+        >The <see cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" />
 
         
 
          is the binding element that specified the .NET Binary Format for XML should be used for encoding messages, and has options to specify the character encoding and the SOAP and WS-Addressing version to be used. Binary encoding is most efficient but least interoperable of the encoding options. </para
       >
       <para
-        >crabout the binding element that specifies messages are encoded using a textual representation of XML, see <see
-         cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" />
+        >crabout the binding element that specifies messages are encoded using a textual representation of XML, see <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" />
 
         
 
         . </para
       >
       <para
-        >crabout the binding element that specifies messages are encoded using the MTOM message encoding, see <see
-         cref="T:System.ServiceModel.Channels.MtomMessageEncodingBindingElement" />
+        >crabout the binding element that specifies messages are encoded using the MTOM message encoding, see <see cref="T:System.ServiceModel.Channels.MtomMessageEncodingBindingElement" />
 
         
 
         . </para
       >
       <para
-        >To implement a custom message encoder, use the <see
-         cref="T:System.ServiceModel.Channels.MessageEncodingBindingElement" />
+        >To implement a custom message encoder, use the <see cref="T:System.ServiceModel.Channels.MessageEncodingBindingElement" />
 
         
 
@@ -85,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" />
 
             
 
@@ -126,13 +121,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ServiceModel.Channels.IChannelFactory`1" />
+            >An <see cref="T:System.ServiceModel.Channels.IChannelFactory`1" />
 
             
 
-             of type <paramref
-             name="TChannel" />
+             of type <paramref name="TChannel" />
 
             
 
@@ -140,19 +133,26 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
            for the channel.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -196,13 +196,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ServiceModel.Channels.IChannelListener`1" />
+            >An <see cref="T:System.ServiceModel.Channels.IChannelListener`1" />
 
             
 
-             of type <paramref
-             name="TChannel" />
+             of type <paramref name="TChannel" />
 
             
 
@@ -210,19 +208,26 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
            for the listener.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -268,19 +273,26 @@
           <para>true if the specified channel listener stack can be built on the service; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
            for the listener.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -314,8 +326,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" />
+            >Creates a new <see cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" />
 
             
 
@@ -325,8 +336,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" />
+            >A <see cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" />
 
             
 
@@ -381,8 +391,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.MessageEncoder" />
+            >The <see cref="T:System.ServiceModel.Channels.MessageEncoder" />
 
             
 
@@ -396,8 +405,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.MessageEncoderFactory" />
+            >The <see cref="T:System.ServiceModel.Channels.MessageEncoderFactory" />
 
             
 
@@ -444,8 +452,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The typed object <paramref
-             name="T" />
+            >The typed object <paramref name="T" />
 
             
 
@@ -453,19 +460,26 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
            for the binding element.</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -510,8 +524,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The .NET Binary Format for XML can optimize the transmission of strings when they are used in multiple messages within a session. Once a string is sent in a message, additional messages that contain that string can refer to it using only the string's ID. This requires that the strings and their IDs be stored in memory. This allows the ID to be retransmitted in subsequent messages instead of the entire string. This lookup increases the efficiency of message transmission when using the binary format. The <see
-             cref="P:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement.MaxSessionSize" />
+            >The .NET Binary Format for XML can optimize the transmission of strings when they are used in multiple messages within a session. Once a string is sent in a message, additional messages that contain that string can refer to it using only the string's ID. This requires that the strings and their IDs be stored in memory. This allows the ID to be retransmitted in subsequent messages instead of the entire string. This lookup increases the efficiency of message transmission when using the binary format. The <see cref="P:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement.MaxSessionSize" />
 
             
 
@@ -677,12 +690,15 @@
           <para>Writes a custom binary message encoding elements into the generated metadata for an endpoint.</para>
         </summary>
         <param name="exporter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.MetadataExporter" />
+          The <see cref="T:System.ServiceModel.Description.MetadataExporter" />
 
           
 
@@ -720,24 +736,30 @@
           <para>Writes a custom binary message encoding elements into the generated WSDL for a contract.</para>
         </summary>
         <param name="exporter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.WsdlExporter" />
+          The <see cref="T:System.ServiceModel.Description.WsdlExporter" />
 
           
 
            that exports the contract information.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ServiceModel.Description.WsdlContractConversionContext" />
+          A <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" />
 
           
 
@@ -775,24 +797,30 @@
           <para>Writes a custom binary message encoding elements into the generated WSDL for an endpoint.</para>
         </summary>
         <param name="exporter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.WsdlExporter" />
+          The <see cref="T:System.ServiceModel.Description.WsdlExporter" />
 
           
 
            that exports the contract information.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ServiceModel.Description.WsdlEndpointConversionContext" />
+          A <see cref="T:System.ServiceModel.Description.WsdlEndpointConversionContext" />
 
           
 

@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can add an XML comment as a child node of an element. You can also add an XML comment to an <see
-         cref="T:System.Xml.Linq.XDocument" />
+        >You can add an XML comment as a child node of an element. You can also add an XML comment to an <see cref="T:System.Xml.Linq.XDocument" />
 
         
 
@@ -49,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Linq.XComment" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XComment" />
 
             
 
@@ -58,12 +56,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that contains the contents of the new <see
-           cref="T:System.Xml.Linq.XComment" />
+          A string that contains the contents of the new <see cref="T:System.Xml.Linq.XComment" />
 
           
 
@@ -92,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Linq.XComment" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XComment" />
 
             
 
@@ -101,12 +101,15 @@
           >
         </summary>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XComment" />
+          The <see cref="T:System.Xml.Linq.XComment" />
 
           
 
@@ -135,18 +138,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because all classes that derive from <see
-             cref="T:System.Xml.Linq.XObject" />
+            >Because all classes that derive from <see cref="T:System.Xml.Linq.XObject" />
 
             
 
-             contain a <see
-             cref="P:System.Xml.Linq.XObject.NodeType" />
+             contain a <see cref="P:System.Xml.Linq.XObject.NodeType" />
 
             
 
-             property, you can write code that operates on collections of concrete subclass of <see
-             cref="T:System.Xml.Linq.XObject" />
+             property, you can write code that operates on collections of concrete subclass of <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -174,26 +174,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unlike <see
-             cref="T:System.Xml.Linq.XElement" />
+            >Unlike <see cref="T:System.Xml.Linq.XElement" />
 
             
 
-             and <see
-             cref="T:System.Xml.Linq.XAttribute" />
+             and <see cref="T:System.Xml.Linq.XAttribute" />
 
             
 
             , you cannot retrieve the contents of a comment by casting it to a string. Instead, you must use this property to retrieve the contents. </para
           >
           <para
-            >Setting this property will raise the <see
-             cref="E:System.Xml.Linq.XObject.Changed" />
+            >Setting this property will raise the <see cref="E:System.Xml.Linq.XObject.Changed" />
 
             
 
-             and the <see
-             cref="E:System.Xml.Linq.XObject.Changing" />
+             and the <see cref="E:System.Xml.Linq.XObject.Changing" />
 
             
 
@@ -229,8 +225,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is primarily used internally by the methods that write an XML tree to an <see
-             cref="T:System.Xml.XmlWriter" />
+            >This method is primarily used internally by the methods that write an XML tree to an <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -240,8 +235,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Write this comment to an <see
-             cref="T:System.Xml.XmlWriter" />
+            >Write this comment to an <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -249,12 +243,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlWriter" />
+          An <see cref="T:System.Xml.XmlWriter" />
 
           
 

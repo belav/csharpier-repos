@@ -23,8 +23,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the ability to control access to native objects without direct manipulation of Access Control Lists (ACLs). Native object types are defined by the <see
-         cref="T:System.Security.AccessControl.ResourceType" />
+        >Provides the ability to control access to native objects without direct manipulation of Access Control Lists (ACLs). Native object types are defined by the <see cref="T:System.Security.AccessControl.ResourceType" />
 
         
 
@@ -57,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
@@ -66,24 +64,30 @@
           >
         </summary>
         <param name="isContainer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true if the new <see
-           cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+          true if the new <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
           
 
            object is a container object.</param
         >
         <param name="resourceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of securable object with which the new <see
-           cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+          The type of securable object with which the new <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
           
 
@@ -119,63 +123,51 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When persisting a <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+            >When persisting a <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             object, if the value of the <paramref
-             name="includeSections" />
+             object, if the value of the <paramref name="includeSections" />
 
             
 
-             parameter passed to the <see
-             cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
+             parameter passed to the <see cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
 
             
 
-             method is not identical to the value of the <paramref
-             name="includeSections" />
+             method is not identical to the value of the <paramref name="includeSections" />
 
             
 
-             parameter passed to the constructor used to create that <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+             parameter passed to the constructor used to create that <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             object, sections of the persisted <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+             object, sections of the persisted <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             object can contain unpredictable values. For example, if a constructor is called with an <paramref
-             name="includeSections" />
+             object can contain unpredictable values. For example, if a constructor is called with an <paramref name="includeSections" />
 
             
 
-             value of <see
-             cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+             value of <see cref="F:System.Security.AccessControl.AccessControlSections.Access" />
 
             
 
-            , and later a <see
-             cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
+            , and later a <see cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
 
             
 
-             method is called on that object with an <paramref
-             name="includeSections" />
+             method is called on that object with an <paramref name="includeSections" />
 
             
 
-             value of <see
-             cref="F:System.Security.AccessControl.AccessControlSections.All" />
+             value of <see cref="F:System.Security.AccessControl.AccessControlSections.All" />
 
             
 
-            , the resulting persisted <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+            , the resulting persisted <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
@@ -185,13 +177,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             class with the specified values. We recommend that the values of the <paramref
-             name="includeSections" />
+             class with the specified values. We recommend that the values of the <paramref name="includeSections" />
 
             
 
@@ -199,53 +189,64 @@
           >
         </summary>
         <param name="isContainer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true if the new <see
-           cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+          true if the new <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
           
 
            object is a container object.</param
         >
         <param name="resourceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of securable object with which the new <see
-           cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+          The type of securable object with which the new <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
           
 
            object is associated.</param
         >
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The handle of the securable object with which the new <see
-           cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+          The handle of the securable object with which the new <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
           
 
            object is associated.</param
         >
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AccessControlSections" />
+          One of the <see cref="T:System.Security.AccessControl.AccessControlSections" />
 
           
 
-           enumeration values that specifies the sections of the security descriptor (access rules, audit rules, owner, primary group) of the securable object to include in this <see
-           cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+           enumeration values that specifies the sections of the security descriptor (access rules, audit rules, owner, primary group) of the securable object to include in this <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
           
 
@@ -314,63 +315,51 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When persisting a <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+            >When persisting a <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             object, if the value of the <paramref
-             name="includeSections" />
+             object, if the value of the <paramref name="includeSections" />
 
             
 
-             parameter passed to the <see
-             cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
+             parameter passed to the <see cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
 
             
 
-             method is not identical to the value of the <paramref
-             name="includeSections" />
+             method is not identical to the value of the <paramref name="includeSections" />
 
             
 
-             parameter passed to the constructor used to create that <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+             parameter passed to the constructor used to create that <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             object, sections of the persisted <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+             object, sections of the persisted <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             object can contain unpredictable values. For example, if a constructor is called with an <paramref
-             name="includeSections" />
+             object can contain unpredictable values. For example, if a constructor is called with an <paramref name="includeSections" />
 
             
 
-             value of <see
-             cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+             value of <see cref="F:System.Security.AccessControl.AccessControlSections.Access" />
 
             
 
-            , and later a <see
-             cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
+            , and later a <see cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
 
             
 
-             method is called on that object with an <paramref
-             name="includeSections" />
+             method is called on that object with an <paramref name="includeSections" />
 
             
 
-             value of <see
-             cref="F:System.Security.AccessControl.AccessControlSections.All" />
+             value of <see cref="F:System.Security.AccessControl.AccessControlSections.All" />
 
             
 
-            , the resulting persisted <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+            , the resulting persisted <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
@@ -380,13 +369,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             class with the specified values. We recommend that the values of the <paramref
-             name="includeSections" />
+             class with the specified values. We recommend that the values of the <paramref name="includeSections" />
 
             
 
@@ -394,53 +381,64 @@
           >
         </summary>
         <param name="isContainer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true if the new <see
-           cref="T:System.Security.AccessControl.NativObjectSecurity" />
+          true if the new <see cref="T:System.Security.AccessControl.NativObjectSecurity" />
 
           
 
            object is a container object.</param
         >
         <param name="resourceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of securable object with which the new <see
-           cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+          The type of securable object with which the new <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
           
 
            object is associated.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the securable object with which the new <see
-           cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+          The name of the securable object with which the new <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
           
 
            object is associated.</param
         >
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AccessControlSections" />
+          One of the <see cref="T:System.Security.AccessControl.AccessControlSections" />
 
           
 
-           enumeration values that specifies the sections of the security descriptor (access rules, audit rules, owner, primary group) of the securable object to include in this <see
-           cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+           enumeration values that specifies the sections of the security descriptor (access rules, audit rules, owner, primary group) of the securable object to include in this <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
           
 
@@ -557,63 +555,51 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When persisting a <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+            >When persisting a <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             object, if the value of the <paramref
-             name="includeSections" />
+             object, if the value of the <paramref name="includeSections" />
 
             
 
-             parameter passed to the <see
-             cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
+             parameter passed to the <see cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
 
             
 
-             method is not identical to the value of the <paramref
-             name="includeSections" />
+             method is not identical to the value of the <paramref name="includeSections" />
 
             
 
-             parameter passed to the constructor used to create that <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+             parameter passed to the constructor used to create that <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             object, sections of the persisted <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+             object, sections of the persisted <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             object can contain unpredictable values. For example, if a constructor is called with an <paramref
-             name="includeSections" />
+             object can contain unpredictable values. For example, if a constructor is called with an <paramref name="includeSections" />
 
             
 
-             value of <see
-             cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+             value of <see cref="F:System.Security.AccessControl.AccessControlSections.Access" />
 
             
 
-            , and later a <see
-             cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
+            , and later a <see cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
 
             
 
-             method is called on that object with an <paramref
-             name="includeSections" />
+             method is called on that object with an <paramref name="includeSections" />
 
             
 
-             value of <see
-             cref="F:System.Security.AccessControl.AccessControlSections.All" />
+             value of <see cref="F:System.Security.AccessControl.AccessControlSections.All" />
 
             
 
-            , the resulting persisted <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+            , the resulting persisted <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
@@ -623,13 +609,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the specified sections of the security descriptor associated with this <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+            >Saves the specified sections of the security descriptor associated with this <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             object to permanent storage. We recommend that the values of the <paramref
-             name="includeSections" />
+             object to permanent storage. We recommend that the values of the <paramref name="includeSections" />
 
             
 
@@ -637,24 +621,30 @@
           >
         </summary>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The handle of the securable object with which this <see
-           cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+          The handle of the securable object with which this <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
           
 
            object is associated.</param
         >
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AccessControlSections" />
+          One of the <see cref="T:System.Security.AccessControl.AccessControlSections" />
 
           
 
@@ -691,63 +681,51 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When persisting a <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+            >When persisting a <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             object, if the value of the <paramref
-             name="includeSections" />
+             object, if the value of the <paramref name="includeSections" />
 
             
 
-             parameter passed to the <see
-             cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
+             parameter passed to the <see cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
 
             
 
-             method is not identical to the value of the <paramref
-             name="includeSections" />
+             method is not identical to the value of the <paramref name="includeSections" />
 
             
 
-             parameter passed to the constructor used to create that <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+             parameter passed to the constructor used to create that <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             object, sections of the persisted <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+             object, sections of the persisted <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             object can contain unpredictable values. For example, if a constructor is called with an <paramref
-             name="includeSections" />
+             object can contain unpredictable values. For example, if a constructor is called with an <paramref name="includeSections" />
 
             
 
-             value of <see
-             cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+             value of <see cref="F:System.Security.AccessControl.AccessControlSections.Access" />
 
             
 
-            , and later a <see
-             cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
+            , and later a <see cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
 
             
 
-             method is called on that object with an <paramref
-             name="includeSections" />
+             method is called on that object with an <paramref name="includeSections" />
 
             
 
-             value of <see
-             cref="F:System.Security.AccessControl.AccessControlSections.All" />
+             value of <see cref="F:System.Security.AccessControl.AccessControlSections.All" />
 
             
 
-            , the resulting persisted <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+            , the resulting persisted <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
@@ -757,13 +735,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the specified sections of the security descriptor associated with this <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+            >Saves the specified sections of the security descriptor associated with this <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             object to permanent storage. We recommend that the values of the <paramref
-             name="includeSections" />
+             object to permanent storage. We recommend that the values of the <paramref name="includeSections" />
 
             
 
@@ -771,24 +747,30 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the securable object with which this <see
-           cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+          The name of the securable object with which this <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
           
 
            object is associated.</param
         >
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AccessControlSections" />
+          One of the <see cref="T:System.Security.AccessControl.AccessControlSections" />
 
           
 
@@ -826,63 +808,51 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When persisting a <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+            >When persisting a <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             object, if the value of the <paramref
-             name="includeSections" />
+             object, if the value of the <paramref name="includeSections" />
 
             
 
-             parameter passed to the <see
-             cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
+             parameter passed to the <see cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
 
             
 
-             method is not identical to the value of the <paramref
-             name="includeSections" />
+             method is not identical to the value of the <paramref name="includeSections" />
 
             
 
-             parameter passed to the constructor used to create that <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+             parameter passed to the constructor used to create that <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             object, sections of the persisted <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+             object, sections of the persisted <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             object can contain unpredictable values. For example, if a constructor is called with an <paramref
-             name="includeSections" />
+             object can contain unpredictable values. For example, if a constructor is called with an <paramref name="includeSections" />
 
             
 
-             value of <see
-             cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+             value of <see cref="F:System.Security.AccessControl.AccessControlSections.Access" />
 
             
 
-            , and later a <see
-             cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
+            , and later a <see cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
 
             
 
-             method is called on that object with an <paramref
-             name="includeSections" />
+             method is called on that object with an <paramref name="includeSections" />
 
             
 
-             value of <see
-             cref="F:System.Security.AccessControl.AccessControlSections.All" />
+             value of <see cref="F:System.Security.AccessControl.AccessControlSections.All" />
 
             
 
-            , the resulting persisted <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+            , the resulting persisted <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
@@ -892,13 +862,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the specified sections of the security descriptor associated with this <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+            >Saves the specified sections of the security descriptor associated with this <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             object to permanent storage. We recommend that the values of the <paramref
-             name="includeSections" />
+             object to permanent storage. We recommend that the values of the <paramref name="includeSections" />
 
             
 
@@ -906,31 +874,41 @@
           >
         </summary>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The handle of the securable object with which this <see
-           cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+          The handle of the securable object with which this <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
           
 
            object is associated.</param
         >
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AccessControlSections" />
+          One of the <see cref="T:System.Security.AccessControl.AccessControlSections" />
 
           
 
            enumeration values that specifies the sections of the security descriptor (access rules, audit rules, owner, primary group) of the securable object to save.</param
         >
         <param name="exceptionContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -968,63 +946,51 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When persisting a <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+            >When persisting a <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             object, if the value of the <paramref
-             name="includeSections" />
+             object, if the value of the <paramref name="includeSections" />
 
             
 
-             parameter passed to the <see
-             cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
+             parameter passed to the <see cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
 
             
 
-             method is not identical to the value of the <paramref
-             name="includeSections" />
+             method is not identical to the value of the <paramref name="includeSections" />
 
             
 
-             parameter passed to the constructor used to create that <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+             parameter passed to the constructor used to create that <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             object, sections of the persisted <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+             object, sections of the persisted <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             object can contain unpredictable values. For example, if a constructor is called with an <paramref
-             name="includeSections" />
+             object can contain unpredictable values. For example, if a constructor is called with an <paramref name="includeSections" />
 
             
 
-             value of <see
-             cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+             value of <see cref="F:System.Security.AccessControl.AccessControlSections.Access" />
 
             
 
-            , and later a <see
-             cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
+            , and later a <see cref="M:System.Security.AccessControl.NativeObjectSecurity.Persist" />
 
             
 
-             method is called on that object with an <paramref
-             name="includeSections" />
+             method is called on that object with an <paramref name="includeSections" />
 
             
 
-             value of <see
-             cref="F:System.Security.AccessControl.AccessControlSections.All" />
+             value of <see cref="F:System.Security.AccessControl.AccessControlSections.All" />
 
             
 
-            , the resulting persisted <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+            , the resulting persisted <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
@@ -1034,13 +1000,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the specified sections of the security descriptor associated with this <see
-             cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+            >Saves the specified sections of the security descriptor associated with this <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
             
 
-             object to permanent storage. We recommend that the values of the <paramref
-             name="includeSections" />
+             object to permanent storage. We recommend that the values of the <paramref name="includeSections" />
 
             
 
@@ -1048,31 +1012,41 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the securable object with which this <see
-           cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+          The name of the securable object with which this <see cref="T:System.Security.AccessControl.NativeObjectSecurity" />
 
           
 
            object is associated.</param
         >
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AccessControlSections" />
+          One of the <see cref="T:System.Security.AccessControl.AccessControlSections" />
 
           
 
            enumeration values that specifies the sections of the security descriptor (access rules, audit rules, owner, primary group) of the securable object to save.</param
         >
         <param name="exceptionContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

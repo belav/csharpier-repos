@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.Metadata.SoapOption" />
+        >The <see cref="T:System.Runtime.Remoting.Metadata.SoapOption" />
 
         
 
@@ -39,8 +38,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the SOAP configuration options for use with the <see
-         cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
+        >Specifies the SOAP configuration options for use with the <see cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
 
         
 

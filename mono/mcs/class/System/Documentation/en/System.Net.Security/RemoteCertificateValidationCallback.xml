@@ -41,21 +41,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The delegate's <paramref
-         name="sslPolicyErrors" />
+        >The delegate's <paramref name="sslPolicyErrors" />
 
         
 
-         argument contains any certificate errors returned by SSPI while authenticating the client or server. The <see
-         cref="T:System.Boolean" />
+         argument contains any certificate errors returned by SSPI while authenticating the client or server. The <see cref="T:System.Boolean" />
 
         
 
          value returned by the method invoked by this delegate determines whether the authentication is allowed to succeed.</para
       >
       <para
-        >This delegate is used with the <see
-         cref="T:System.Net.Security.SslStream" />
+        >This delegate is used with the <see cref="T:System.Net.Security.SslStream" />
 
         
 

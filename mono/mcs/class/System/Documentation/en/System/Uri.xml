@@ -39,47 +39,40 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A URI is a compact representation of a resource available to your application on the intranet or Internet. The <see
-         cref="T:System.Uri" />
+        >A URI is a compact representation of a resource available to your application on the intranet or Internet. The <see cref="T:System.Uri" />
 
         
 
-         class defines the properties and methods for handling URIs, including parsing, comparing, and combining. The <see
-         cref="T:System.Uri" />
+         class defines the properties and methods for handling URIs, including parsing, comparing, and combining. The <see cref="T:System.Uri" />
 
         
 
-         class properties are read-only; to create a modifiable object, use the <see
-         cref="T:System.UriBuilder" />
+         class properties are read-only; to create a modifiable object, use the <see cref="T:System.UriBuilder" />
 
         
 
          class.</para
       >
       <para
-        >Relative URIs (for example, "/new/index.htm") must be expanded with respect to a base URI so that they are absolute. The <see
-         cref="M:System.Uri.MakeRelative(System.Uri)" />
+        >Relative URIs (for example, "/new/index.htm") must be expanded with respect to a base URI so that they are absolute. The <see cref="M:System.Uri.MakeRelative(System.Uri)" />
 
         
 
          method is provided to convert absolute URIs to relative URIs when necessary.</para
       >
       <para
-        >The <see
-         cref="T:System.Uri" />
+        >The <see cref="T:System.Uri" />
 
         
 
          constructors do not escape URI strings if the string is a well-formed URI including a scheme identifier.</para
       >
       <para
-        >The <see
-         cref="T:System.Uri" />
+        >The <see cref="T:System.Uri" />
 
         
 
-         properties return a canonical data representation in escaped encoding, with all characters with Unicode values greater than 127 replaced with their hexadecimal equivalents. To put the URI in canonical form, the <see
-         cref="T:System.Uri" />
+         properties return a canonical data representation in escaped encoding, with all characters with Unicode values greater than 127 replaced with their hexadecimal equivalents. To put the URI in canonical form, the <see cref="T:System.Uri" />
 
         
 
@@ -131,36 +124,30 @@ ftp://myUrl/%2E%2E/%2E%2E
 /%2E%2E/%2E%2E
 </code>
       <para
-        >You can transform the contents of the <see
-         cref="T:System.Uri" />
+        >You can transform the contents of the <see cref="T:System.Uri" />
 
         
 
-         class from an escape encoded URI reference to a readable URI reference by using the <see
-         cref="M:System.Uri.ToString" />
+         class from an escape encoded URI reference to a readable URI reference by using the <see cref="M:System.Uri.ToString" />
 
         
 
-         method. Note that some reserved characters might still be escaped in the output of the <see
-         cref="M:System.Uri.ToString" />
+         method. Note that some reserved characters might still be escaped in the output of the <see cref="M:System.Uri.ToString" />
 
         
 
-         method. This is to support unambiguous reconstruction of a URI from the value returned by <see
-         cref="M:System.Uri.ToString" />
+         method. This is to support unambiguous reconstruction of a URI from the value returned by <see cref="M:System.Uri.ToString" />
 
         
 
         .</para
       >
       <para
-        >Some URIs include a fragment identifier or a query or both. A fragment identifier is any text that follows a number sign (#), not including the number sign; the fragment text is stored in the <see
-         cref="P:System.Uri.Fragment" />
+        >Some URIs include a fragment identifier or a query or both. A fragment identifier is any text that follows a number sign (#), not including the number sign; the fragment text is stored in the <see cref="P:System.Uri.Fragment" />
 
         
 
-         property. Query information is any text that follows a question mark (?) in the URI; the query text is stored in the <see
-         cref="P:System.Uri.Query" />
+         property. Query information is any text that follows a question mark (?) in the URI; the query text is stored in the <see cref="P:System.Uri.Query" />
 
         
 
@@ -188,8 +175,7 @@ ftp://myUrl/%2E%2E/%2E%2E
       <para>The specifications for URIs are documented in RFC 2396, RFC 2732, RFC 3986, and RFC 3987 published by the Internet Engineering Task Force (IETF).</para>
       <para>With the growth of the Internet, there is a growing need to identify resources using languages other than English. Identifiers which facilitate this need and allow non-ASCII characters (characters in the Unicode/ISO 10646 character set) are known as International Resource Identifiers (IRIs). The specifications for IRIs are documented in RFC 3987 published by IETF. Using IRIs allows a URL to contain Unicode characters.</para>
       <para
-        >The existing <see
-         cref="T:System.Uri" />
+        >The existing <see cref="T:System.Uri" />
 
         
 
@@ -209,28 +195,23 @@ ftp://myUrl/%2E%2E/%2E%2E
       </list>
       <para>Enabling IDN will convert all Unicode labels in a domain name to their Punycode equivalents. Punycode names contain only ASCII characters and always start with the xn-- prefix. The reason for this is to support existing DNS servers on the Internet, since most DNS servers only support ASCII characters (see RFC 3940).</para>
       <para
-        >Enabling IRI and IDN affects the value of the <see
-         cref="P:System.Uri.DnsSafeHost" />
+        >Enabling IRI and IDN affects the value of the <see cref="P:System.Uri.DnsSafeHost" />
 
         
 
-         property. Enabling IRI and IDN can also change the behavior of the <see
-         cref="M:System.Uri.Equals(System.Object)" />
+         property. Enabling IRI and IDN can also change the behavior of the <see cref="M:System.Uri.Equals(System.Object)" />
 
         
 
-        , <see
-         cref="P:System.Uri.OriginalString" />
+        , <see cref="P:System.Uri.OriginalString" />
 
         
 
-        , <see
-         cref="M:System.Uri.GetComponents(System.UriComponents,System.UriFormat)" />
+        , <see cref="M:System.Uri.GetComponents(System.UriComponents,System.UriFormat)" />
 
         
 
-        , and <see
-         cref="M:System.Uri.IsWellFormedOriginalString" />
+        , and <see cref="M:System.Uri.IsWellFormedOriginalString" />
 
         
 
@@ -253,102 +234,84 @@ ftp://myUrl/%2E%2E/%2E%2E
       </list>
       <para>Enabling IRI parsing (iriParsing enabled = true) will do normalization and character checking according to the latest IRI rules in RFC 3986 and RFC 3987. The default value is false and will do normalization and character checking according to RFC 2396 and RFC 2732 (for IPv6 literals).</para>
       <para
-        >IRI and IDN processing in the <see
-         cref="T:System.Uri" />
+        >IRI and IDN processing in the <see cref="T:System.Uri" />
 
         
 
-         class can also be controlled using the <see
-         cref="T:System.Configuration.IriParsingElement" />
+         class can also be controlled using the <see cref="T:System.Configuration.IriParsingElement" />
 
         
 
-        , <see
-         cref="T:System.Configuration.IdnElement" />
+        , <see cref="T:System.Configuration.IdnElement" />
 
         
 
-        , and <see
-         cref="T:System.Configuration.UriSection" />
+        , and <see cref="T:System.Configuration.UriSection" />
 
         
 
-         configuration setting classes. The <see
-         cref="T:System.Configuration.IriParsingElement" />
+         configuration setting classes. The <see cref="T:System.Configuration.IriParsingElement" />
 
         
 
-         setting enables or disables IRI processing in the <see
-         cref="T:System.Uri" />
+         setting enables or disables IRI processing in the <see cref="T:System.Uri" />
 
         
 
-         class. The <see
-         cref="T:System.Configuration.IdnElement" />
+         class. The <see cref="T:System.Configuration.IdnElement" />
 
         
 
-         setting enables or disables IDN processing in the <see
-         cref="T:System.Uri" />
+         setting enables or disables IDN processing in the <see cref="T:System.Uri" />
 
         
 
-         class. The <see
-         cref="T:System.Configuration.IriParsingElement" />
+         class. The <see cref="T:System.Configuration.IriParsingElement" />
 
         
 
          setting also indirectly controls IDN. IRI processing must be enabled for IDN processing to be possible. If IRI processing is disabled, then IDN processing will be set to the default setting where the .NET Framework 2.0 behavior is used for compatibility and IDN names are not used.</para
       >
       <para
-        >The configuration setting for the <see
-         cref="T:System.Configuration.IriParsingElement" />
+        >The configuration setting for the <see cref="T:System.Configuration.IriParsingElement" />
 
         
 
-         and <see
-         cref="T:System.Configuration.IdnElement" />
+         and <see cref="T:System.Configuration.IdnElement" />
 
         
 
-         will be read once when the first <see
-         cref="T:System.Uri" />
+         will be read once when the first <see cref="T:System.Uri" />
 
         
 
          class is constructed. Changes to configuration settings after that time are ignored.</para
       >
       <para
-        >The <see
-         cref="T:System.GenericUriParser" />
+        >The <see cref="T:System.GenericUriParser" />
 
         
 
-         class has also been extended to allow creating a customizable parser that supports IRI and IDN. The behavior of a <see
-         cref="T:System.GenericUriParser" />
+         class has also been extended to allow creating a customizable parser that supports IRI and IDN. The behavior of a <see cref="T:System.GenericUriParser" />
 
         
 
-         object is specified by passing a bitwise combination of the values available in the <see
-         cref="T:System.GenericUriParserOptions" />
+         object is specified by passing a bitwise combination of the values available in the <see cref="T:System.GenericUriParserOptions" />
 
         
 
-         enumeration to the <see
-         cref="T:System.GenericUriParser" />
+         enumeration to the <see cref="T:System.GenericUriParser" />
 
         
 
-         constructor. The <see
-         cref="F:System.GenericUriParserOptions.IriParsing" />
+         constructor. The <see cref="F:System.GenericUriParserOptions.IriParsing" />
 
         
 
          type indicates the parser supports the parsing rules specified in RFC 3987 for International Resource Identifiers (IRI). Whether IRI is used is dictated by the configuration values previously discussed. </para
       >
       <para
-        >The <see
-         cref="F:System.GenericUriParserOptions.Idn" />
+        >The <see cref="F:System.GenericUriParserOptions.Idn" />
 
         
 
@@ -362,8 +325,7 @@ ftp://myUrl/%2E%2E/%2E%2E
       <para>It is possible to disable IRI-based parsing by setting the MONO_URI_IRIPARSING environment variable to the string "false"</para>
       <para>To help compatibility with third party software that disabled this behavior, we used the same internal field to turn this feature on or off by poking at the Uri internals.</para>
       <example>
-        <code lang="c#"
-          >
+        <code lang="c#">
 FieldInfo iriParsingField = typeof (Uri).GetField ("s_IriParsing",
     BindingFlags.Static | BindingFlags.GetField | BindingFlags.NonPublic);
 if (iriParsingField != null)
@@ -405,8 +367,7 @@ if (iriParsingField != null)
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -433,49 +394,41 @@ if (iriParsingField != null)
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see
-             cref="T:System.Uri" />
+            >This constructor creates a <see cref="T:System.Uri" />
 
             
 
              instance from a URI string. It parses the URI, puts it in canonical format, and makes any required escape encodings.</para
           >
           <para
-            >This constructor does not ensure that the <see
-             cref="T:System.Uri" />
+            >This constructor does not ensure that the <see cref="T:System.Uri" />
 
             
 
              refers to an accessible resource.</para
           >
           <para
-            >This constructor assumes that the <paramref
-             name="string" />
+            >This constructor assumes that the <paramref name="string" />
 
             
 
-             parameter references an absolute URI and is equivalent to calling the <see
-             cref="M:System.Uri.#ctor(System.String,System.UriKind)" />
+             parameter references an absolute URI and is equivalent to calling the <see cref="M:System.Uri.#ctor(System.String,System.UriKind)" />
 
             
 
-             constructor with <see
-             cref="T:System.UriKind" />
+             constructor with <see cref="T:System.UriKind" />
 
             
 
-             set to <see
-             cref="F:System.UriKind.Absolute" />
+             set to <see cref="F:System.UriKind.Absolute" />
 
             
 
-            . If the <paramref
-             name="string" />
+            . If the <paramref name="string" />
 
             
 
-             parameter passed to the constructor is a relative URI, this constructor will throw a <see
-             cref="T:System.UriFormatException" />
+             parameter passed to the constructor is a relative URI, this constructor will throw a <see cref="T:System.UriFormatException" />
 
             
 
@@ -485,8 +438,7 @@ if (iriParsingField != null)
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Uri" />
+            >Initializes a new instance of the <see cref="T:System.Uri" />
 
             
 
@@ -494,7 +446,11 @@ if (iriParsingField != null)
           >
         </summary>
         <param name="uriString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -526,13 +482,11 @@ if (iriParsingField != null)
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor implements the <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+            >This constructor implements the <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
-             interface for the <see
-             cref="T:System.Uri" />
+             interface for the <see cref="T:System.Uri" />
 
             
 
@@ -542,18 +496,15 @@ if (iriParsingField != null)
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Uri" />
+            >Initializes a new instance of the <see cref="T:System.Uri" />
 
             
 
-             class from the specified instances of the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             class from the specified instances of the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             and <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             and <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -561,34 +512,38 @@ if (iriParsingField != null)
           >
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          An instance of the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
-           class containing the information required to serialize the new <see
-           cref="T:System.Uri" />
+           class containing the information required to serialize the new <see cref="T:System.Uri" />
 
           
 
            instance. </param
         >
         <param name="streamingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          An instance of the <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
-           class containing the source of the serialized stream associated with the new <see
-           cref="T:System.Uri" />
+           class containing the source of the serialized stream associated with the new <see cref="T:System.Uri" />
 
           
 
@@ -629,8 +584,7 @@ if (iriParsingField != null)
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -660,21 +614,18 @@ if (iriParsingField != null)
         </exception>
         <example>
           <para
-            >The following example creates a <see
-             cref="T:System.Uri" />
+            >The following example creates a <see cref="T:System.Uri" />
 
             
 
              instance for the URI
    "http://www.contoso.com/Hello%20World.htm". Because the URI contains escaped
-   characters, the third parameter, <paramref
-             name="dontEscape" />
+   characters, the third parameter, <paramref name="dontEscape" />
 
             
 
              , is set to
-<see
-             langword="true" />
+<see langword="true" />
 
             
 
@@ -701,32 +652,28 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see
-             cref="T:System.Uri" />
+            >This constructor creates a <see cref="T:System.Uri" />
 
             
 
              instance from a URI string. It parses the URI and puts it in canonical format.</para
           >
           <para
-            >The <paramref
-             name="dontEscape" />
+            >The <paramref name="dontEscape" />
 
             
 
              parameter controls whether reserved characters are translated into escape sequences. This parameter should be set to true only if you are certain that all reserved characters in the URI have been escaped. Setting the value to true for a URI that has not been completely escaped can cause unexpected behavior. It is strongly recommended that you always set this parameter to false.</para
           >
           <para
-            >If <paramref
-             name="dontEscape" />
+            >If <paramref name="dontEscape" />
 
             
 
              is set to false, the constructor escapes any reserved characters by checking that all occurrences of percent (%) are followed by a valid escape sequence. If the character sequence following a percent is not valid, the percent is replaced by %25.</para
           >
           <para
-            >This constructor does not ensure that the <see
-             cref="T:System.Uri" />
+            >This constructor does not ensure that the <see cref="T:System.Uri" />
 
             
 
@@ -736,8 +683,7 @@ public class UriTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Uri" />
+            >Initializes a new instance of the <see cref="T:System.Uri" />
 
             
 
@@ -745,19 +691,26 @@ public class UriTest {
           >
         </summary>
         <param name="uriString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The URI. </param
         >
         <param name="dontEscape">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true if <paramref
-           name="uriString" />
+          true if <paramref name="uriString" />
 
           
 
@@ -785,18 +738,15 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Relative and absolute URIs have different restrictions on their format. For example, a relative URI does not require a scheme or an authority. The value you specify in <paramref
-             name="uriKind" />
+            >Relative and absolute URIs have different restrictions on their format. For example, a relative URI does not require a scheme or an authority. The value you specify in <paramref name="uriKind" />
 
             
 
-             must match the type of URI passed in <paramref
-             name="uriString" />
+             must match the type of URI passed in <paramref name="uriString" />
 
             
 
-            . However, if <see
-             cref="F:System.UriKind.RelativeOrAbsolute" />
+            . However, if <see cref="F:System.UriKind.RelativeOrAbsolute" />
 
             
 
@@ -806,8 +756,7 @@ public class UriTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Uri" />
+            >Initializes a new instance of the <see cref="T:System.Uri" />
 
             
 
@@ -815,19 +764,26 @@ public class UriTest {
           >
         </summary>
         <param name="uriString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that identifies the resource to be represented by the <see
-           cref="T:System.Uri" />
+          A string that identifies the resource to be represented by the <see cref="T:System.Uri" />
 
           
 
            instance.</param
         >
         <param name="uriKind">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -871,8 +827,7 @@ public class UriTest {
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -881,41 +836,34 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see
-             cref="T:System.Uri" />
+            >This constructor creates a <see cref="T:System.Uri" />
 
             
 
-             instance by combining the <paramref
-             name="baseUri" />
+             instance by combining the <paramref name="baseUri" />
 
             
 
-             and the <paramref
-             name="relativeUri" />
+             and the <paramref name="relativeUri" />
 
             
 
-            . If <paramref
-             name="relativeUri" />
+            . If <paramref name="relativeUri" />
 
             
 
-             is an absolute URI (containing a scheme, host name, and optionally a port number), the <see
-             cref="T:System.Uri" />
+             is an absolute URI (containing a scheme, host name, and optionally a port number), the <see cref="T:System.Uri" />
 
             
 
-             instance is created using only <paramref
-             name="relativeUri" />
+             instance is created using only <paramref name="relativeUri" />
 
             
 
             .</para
           >
           <para
-            >This constructor does not ensure that the <see
-             cref="T:System.Uri" />
+            >This constructor does not ensure that the <see cref="T:System.Uri" />
 
             
 
@@ -925,8 +873,7 @@ public class UriTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Uri" />
+            >Initializes a new instance of the <see cref="T:System.Uri" />
 
             
 
@@ -934,14 +881,22 @@ public class UriTest {
           >
         </summary>
         <param name="baseUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The base URI. </param
         >
         <param name="relativeUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -969,56 +924,46 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a new <see
-             cref="T:System.Uri" />
+            >This constructor creates a new <see cref="T:System.Uri" />
 
             
 
-             instance by combining an absolute <see
-             cref="T:System.Uri" />
+             instance by combining an absolute <see cref="T:System.Uri" />
 
             
 
-             instance, <paramref
-             name="baseUri" />
+             instance, <paramref name="baseUri" />
 
             
 
-            , with a relative <see
-             cref="T:System.Uri" />
+            , with a relative <see cref="T:System.Uri" />
 
             
 
-             instance, <paramref
-             name="relativeUri" />
+             instance, <paramref name="relativeUri" />
 
             
 
-            . If <paramref
-             name="relativeUri" />
+            . If <paramref name="relativeUri" />
 
             
 
-             is an absolute <see
-             cref="T:System.Uri" />
+             is an absolute <see cref="T:System.Uri" />
 
             
 
-             instance (containing a scheme, host name, and optionally a port number), the <see
-             cref="T:System.Uri" />
+             instance (containing a scheme, host name, and optionally a port number), the <see cref="T:System.Uri" />
 
             
 
-             instance is created using only <paramref
-             name="relativeUri" />
+             instance is created using only <paramref name="relativeUri" />
 
             
 
             .</para
           >
           <para
-            >This constructor does not ensure that the <see
-             cref="T:System.Uri" />
+            >This constructor does not ensure that the <see cref="T:System.Uri" />
 
             
 
@@ -1028,18 +973,15 @@ public class UriTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Uri" />
+            >Initializes a new instance of the <see cref="T:System.Uri" />
 
             
 
-             class based on the combination of a specified base <see
-             cref="T:System.Uri" />
+             class based on the combination of a specified base <see cref="T:System.Uri" />
 
             
 
-             instance and a relative <see
-             cref="T:System.Uri" />
+             instance and a relative <see cref="T:System.Uri" />
 
             
 
@@ -1047,34 +989,38 @@ public class UriTest {
           >
         </summary>
         <param name="baseUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An absolute <see
-           cref="T:System.Uri" />
+          An absolute <see cref="T:System.Uri" />
 
           
 
-           that is the base for the new <see
-           cref="T:System.Uri" />
+           that is the base for the new <see cref="T:System.Uri" />
 
           
 
            instance. </param
         >
         <param name="relativeUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A relative <see
-           cref="T:System.Uri" />
+          A relative <see cref="T:System.Uri" />
 
           
 
-           instance that is combined with <paramref
-           name="baseUri" />
+           instance that is combined with <paramref name="baseUri" />
 
           
 
@@ -1127,8 +1073,7 @@ public class UriTest {
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1137,14 +1082,12 @@ public class UriTest {
         <example>
           <para
             > The following example creates new instances of the
-   <see
-             cref="T:System.Uri" />
+   <see cref="T:System.Uri" />
 
             
 
              class by
-      combining a <see
-             cref="T:System.Uri" />
+      combining a <see cref="T:System.Uri" />
 
             
 
@@ -1204,54 +1147,45 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see
-             cref="T:System.Uri" />
+            >This constructor creates a <see cref="T:System.Uri" />
 
             
 
-             instance by combining <paramref
-             name="baseUri" />
+             instance by combining <paramref name="baseUri" />
 
             
 
-             and <paramref
-             name="relativeUri" />
+             and <paramref name="relativeUri" />
 
             
 
-            . If the URI passed in <paramref
-             name="relativeUri" />
+            . If the URI passed in <paramref name="relativeUri" />
 
             
 
-             is an absolute URI (containing a scheme, host name, and optionally a port number), the <see
-             cref="T:System.Uri" />
+             is an absolute URI (containing a scheme, host name, and optionally a port number), the <see cref="T:System.Uri" />
 
             
 
-             instance is created using only <paramref
-             name="relativeUri" />
+             instance is created using only <paramref name="relativeUri" />
 
             
 
             .</para
           >
           <para
-            >The <paramref
-             name="dontEscape" />
+            >The <paramref name="dontEscape" />
 
             
 
-             parameter controls whether reserved characters are translated into escape sequences. This parameter should be set to true only if you are certain that all reserved characters in the URI have been escaped. Setting the value to true for a URI that has not been completely escaped can cause unexpected behavior. It is strongly recommended that you always set this parameter to false. If <paramref
-             name="dontEscape" />
+             parameter controls whether reserved characters are translated into escape sequences. This parameter should be set to true only if you are certain that all reserved characters in the URI have been escaped. Setting the value to true for a URI that has not been completely escaped can cause unexpected behavior. It is strongly recommended that you always set this parameter to false. If <paramref name="dontEscape" />
 
             
 
              is set to false, the constructor escapes any reserved characters by checking that all occurrences of percent (%) are followed by a valid escape sequence. If the character sequence following a percent is not valid, the percent is replaced by %25.</para
           >
           <para
-            >This constructor does not ensure that the <see
-             cref="T:System.Uri" />
+            >This constructor does not ensure that the <see cref="T:System.Uri" />
 
             
 
@@ -1261,8 +1195,7 @@ public class UriTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Uri" />
+            >Initializes a new instance of the <see cref="T:System.Uri" />
 
             
 
@@ -1270,26 +1203,37 @@ public class UriTest {
           >
         </summary>
         <param name="baseUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The base URI. </param
         >
         <param name="relativeUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The relative URI to add to the base URI. </param
         >
         <param name="dontEscape">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true if <paramref
-           name="uriString" />
+          true if <paramref name="uriString" />
 
           
 
@@ -1318,8 +1262,7 @@ public class UriTest {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -1349,8 +1292,7 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Uri.AbsolutePath" />
+            >The <see cref="P:System.Uri.AbsolutePath" />
 
             
 
@@ -1385,8 +1327,7 @@ public class UriTest {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -1397,13 +1338,11 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Uri.AbsoluteUri" />
+            >The <see cref="P:System.Uri.AbsoluteUri" />
 
             
 
-             property includes the entire URI stored in the <see
-             cref="T:System.Uri" />
+             property includes the entire URI stored in the <see cref="T:System.Uri" />
 
             
 
@@ -1437,20 +1376,17 @@ public class UriTest {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
              containing the
  authority component of the current instance. The value returned by this property
- is composed of the values returned by the <see
-             cref="P:System.Uri.Host" />
+ is composed of the values returned by the <see cref="P:System.Uri.Host" />
 
             
 
-             and <see
-             cref="P:System.Uri.Port" />
+             and <see cref="P:System.Uri.Port" />
 
             
 
@@ -1460,13 +1396,11 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Uri.Authority" />
+            >The <see cref="P:System.Uri.Authority" />
 
             
 
-             property is typically a server DNS host name or IP address. This property might include the service port number if it differs from the default port for the URI. If the <see
-             cref="P:System.Uri.Authority" />
+             property is typically a server DNS host name or IP address. This property might include the service port number if it differs from the default port for the URI. If the <see cref="P:System.Uri.Authority" />
 
             
 
@@ -1545,8 +1479,7 @@ public class UriTest {
       <Docs>
         <example>
           <para
-            > The following example demonstrates using the <see
-             cref="M:System.Uri.CheckHostName(System.String)" />
+            > The following example demonstrates using the <see cref="M:System.Uri.CheckHostName(System.String)" />
 
             
 
@@ -1572,8 +1505,7 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Uri.CheckHostName(System.String)" />
+            >The <see cref="M:System.Uri.CheckHostName(System.String)" />
 
             
 
@@ -1587,13 +1519,11 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.UriHostNameType" />
+            >A <see cref="T:System.UriHostNameType" />
 
             
 
-             that indicates the type of the host name. If the type of the host name cannot be determined or if the host name is null or a zero-length string, this method returns <see
-             cref="F:System.UriHostNameType.Unknown" />
+             that indicates the type of the host name. If the type of the host name cannot be determined or if the host name is null or a zero-length string, this method returns <see cref="F:System.UriHostNameType.Unknown" />
 
             
 
@@ -1601,7 +1531,11 @@ public class UriTest {
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1640,8 +1574,7 @@ public class UriTest {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method checks the scheme name for validity according to RFC 2396 by default. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, this method checks the scheme name for validity according to RFC 3986. The scheme name must begin with a letter and must contain only letters, digits, and the characters ".", "+", or "-".</para>
           <para
-            >For more information on IRI support, see the Remarks section for the <see
-             cref="T:System.Uri" />
+            >For more information on IRI support, see the Remarks section for the <see cref="T:System.Uri" />
 
             
 
@@ -1655,8 +1588,7 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Boolean" />
+            >A <see cref="T:System.Boolean" />
 
             
 
@@ -1664,7 +1596,11 @@ public class UriTest {
           >
         </returns>
         <param name="schemeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1721,8 +1657,7 @@ public class UriTest {
           <para>
             <block subset="none" type="overrides"
               >Override this method to provide
-      security checks for types derived from <see
-               cref="T:System.Uri" />
+      security checks for types derived from <see cref="T:System.Uri" />
 
               
 
@@ -1732,8 +1667,7 @@ public class UriTest {
           <para>
             <block subset="none" type="usage"
               >Invoke this method on instances of
-      types derived from <see
-               cref="T:System.Uri" />
+      types derived from <see cref="T:System.Uri" />
 
               
 
@@ -1777,28 +1711,23 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If both <paramref
-             name="uri1" />
+            >If both <paramref name="uri1" />
 
             
 
-             and <paramref
-             name="uri2" />
+             and <paramref name="uri2" />
 
             
 
-             are null, this method returns 0. When comparing URI values, a relative URI is always less than an absolute URI, and a non-null URI is always greater than a null URI. For cases where both <paramref
-             name="uri1" />
+             are null, this method returns 0. When comparing URI values, a relative URI is always less than an absolute URI, and a non-null URI is always greater than a null URI. For cases where both <paramref name="uri1" />
 
             
 
-             and <paramref
-             name="uri2" />
+             and <paramref name="uri2" />
 
             
 
-             are not null and are both relative URIs or both absolute URIs, the <see
-             cref="M:System.String.Compare(System.String,System.String,System.StringComparison)" />
+             are not null and are both relative URIs or both absolute URIs, the <see cref="M:System.String.Compare(System.String,System.String,System.StringComparison)" />
 
             
 
@@ -1812,13 +1741,11 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Int32" />
+            >An <see cref="T:System.Int32" />
 
             
 
-             value that indicates the lexical relationship between the compared <see
-             cref="T:System.Uri" />
+             value that indicates the lexical relationship between the compared <see cref="T:System.Uri" />
 
             
 
@@ -1845,8 +1772,7 @@ public class UriTest {
 
                   
 
-                   is less than <paramref
-                   name="uri2" />
+                   is less than <paramref name="uri2" />
 
                   
 
@@ -1864,8 +1790,7 @@ public class UriTest {
 
                   
 
-                   equals <paramref
-                   name="uri2" />
+                   equals <paramref name="uri2" />
 
                   
 
@@ -1883,8 +1808,7 @@ public class UriTest {
 
                   
 
-                   is greater than <paramref
-                   name="uri2" />
+                   is greater than <paramref name="uri2" />
 
                   
 
@@ -1895,70 +1819,83 @@ public class UriTest {
           </list>
         </returns>
         <param name="uri1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first <see
-           cref="T:System.Uri" />
+          The first <see cref="T:System.Uri" />
 
           
 
           .</param
         >
         <param name="uri2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The second <see
-           cref="T:System.Uri" />
+          The second <see cref="T:System.Uri" />
 
           
 
           .</param
         >
         <param name="partsToCompare">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.UriComponents" />
+          A bitwise combination of the <see cref="T:System.UriComponents" />
 
           
 
-           values that specifies the parts of <paramref
-           name="uri1" />
+           values that specifies the parts of <paramref name="uri1" />
 
           
 
-           and <paramref
-           name="uri2" />
+           and <paramref name="uri2" />
 
           
 
            to compare.</param
         >
         <param name="compareFormat">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.UriFormat" />
+          One of the <see cref="T:System.UriFormat" />
 
           
 
            values that specifies the character escaping used when the URI components are compared.</param
         >
         <param name="comparisonType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.StringComparison" />
+          One of the <see cref="T:System.StringComparison" />
 
           
 
@@ -1982,16 +1919,14 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For IPv6 addresses, the brackets ([]) are removed and the <see
-             cref="P:System.Net.IPAddress.ScopeId" />
+            >For IPv6 addresses, the brackets ([]) are removed and the <see cref="P:System.Net.IPAddress.ScopeId" />
 
             
 
              property is set, if one was specified when this instance was constructed.</para
           >
           <para
-            >The <see
-             cref="P:System.Uri.DnsSafeHost" />
+            >The <see cref="P:System.Uri.DnsSafeHost" />
 
             
 
@@ -2015,8 +1950,7 @@ public class UriTest {
           </list>
           <para>Enabling IDN will convert all Unicode labels in a domain name to their Punycode equivalents. Punycode names contain only ASCII characters and always start with the xn-- prefix. The reason for this is to support existing DNS servers on the Internet, since most DNS servers only support ASCII characters (see RFC 3940).</para>
           <para
-            >Enabling IDN only affects the value of the <see
-             cref="P:System.Uri.DnsSafeHost" />
+            >Enabling IDN only affects the value of the <see cref="P:System.Uri.DnsSafeHost" />
 
             
 
@@ -2039,8 +1973,7 @@ public class UriTest {
           </list>
           <para>Enabling IRI parsing (iriParsing enabled = true) will do normalization and character checking according to the latest IRI rules in RFC 3987. The default value is false and will do normalization and character checking according to RFC 2396 and RFC 2732 (for IPv6 literals).</para>
           <para
-            >For more information on IRI support, see the Remarks section for the <see
-             cref="T:System.Uri" />
+            >For more information on IRI support, see the Remarks section for the <see cref="T:System.Uri" />
 
             
 
@@ -2079,54 +2012,45 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Uri.Equals(System.Object)" />
+            >The <see cref="M:System.Uri.Equals(System.Object)" />
 
             
 
-             method compares the two instances without regard to user information (<see
-             cref="P:System.Uri.UserInfo" />
+             method compares the two instances without regard to user information (<see cref="P:System.Uri.UserInfo" />
 
             
 
-            ) and fragment (<see
-             cref="P:System.Uri.Fragment" />
+            ) and fragment (<see cref="P:System.Uri.Fragment" />
 
             
 
-            ) parts that they might contain. For example, given the URIs http://www.contoso.com/index.htm#search and http://user:password@www.contoso.com/index.htm, the <see
-             cref="M:System.Uri.Equals(System.Object)" />
+            ) parts that they might contain. For example, given the URIs http://www.contoso.com/index.htm#search and http://user:password@www.contoso.com/index.htm, the <see cref="M:System.Uri.Equals(System.Object)" />
 
             
 
              method would return true.</para
           >
           <para
-            >If one <see
-             cref="T:System.Uri" />
+            >If one <see cref="T:System.Uri" />
 
             
 
-             instance is formed with a Unicode host name and <paramref
-             name="comparand" />
+             instance is formed with a Unicode host name and <paramref name="comparand" />
 
             
 
-             parameter contains a <see
-             cref="T:System.Uri" />
+             parameter contains a <see cref="T:System.Uri" />
 
             
 
-             instance or identifier that is formed with a host name that has the equivalent Punycode host name, then <see
-             cref="M:System.Uri.Equals(System.Object)" />
+             instance or identifier that is formed with a host name that has the equivalent Punycode host name, then <see cref="M:System.Uri.Equals(System.Object)" />
 
             
 
              returns true only if International Resource Identifier (IRI) and Internationalized Domain Name (IDN) support are enabled. Punycode names contain only ASCII characters and always start with the xn-- prefix. </para
           >
           <para
-            >For more information on IRI support, see the Remarks section for the <see
-             cref="T:System.Uri" />
+            >For more information on IRI support, see the Remarks section for the <see cref="T:System.Uri" />
 
             
 
@@ -2134,8 +2058,7 @@ public class UriTest {
           >
           <block subset="none" type="note">
             <para
-              >In the .NET Framework versions 1.0 and 1.1, the <see
-               cref="P:System.Uri.Query" />
+              >In the .NET Framework versions 1.0 and 1.1, the <see cref="P:System.Uri.Query" />
 
               
 
@@ -2144,8 +2067,7 @@ public class UriTest {
           </block>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Uri.Equals(System.Object)" />
+              >The <see cref="M:System.Uri.Equals(System.Object)" />
 
               
 
@@ -2156,8 +2078,7 @@ public class UriTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two <see
-             cref="T:System.Uri" />
+            >Compares two <see cref="T:System.Uri" />
 
             
 
@@ -2167,8 +2088,7 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Boolean" />
+            >A <see cref="T:System.Boolean" />
 
             
 
@@ -2176,12 +2096,15 @@ public class UriTest {
           >
         </returns>
         <param name="comparand">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
@@ -2216,8 +2139,7 @@ public class UriTest {
         <remarks>
           <block subset="none" type="behaviors">
             <para
-              >Converts any unsafe or reserved characters in the <see
-               cref="P:System.Uri.AbsolutePath" />
+              >Converts any unsafe or reserved characters in the <see cref="P:System.Uri.AbsolutePath" />
 
               
 
@@ -2227,14 +2149,12 @@ public class UriTest {
       as described by IETF 2396. </para
             >
             <para
-              >If the path component of the current instance is <see
-               langword="null" />
+              >If the path component of the current instance is <see langword="null" />
 
               
 
               , the
-   escaped path is <see
-               cref="F:System.String.Empty" />
+   escaped path is <see cref="F:System.String.Empty" />
 
               
 
@@ -2248,8 +2168,7 @@ public class UriTest {
           <para>
             <block subset="none" type="overrides"
               >Override this
-   method to customize the escaping behavior provided by the <see
-               cref="T:System.Uri" />
+   method to customize the escaping behavior provided by the <see cref="T:System.Uri" />
 
               
 
@@ -2302,21 +2221,18 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see
-             cref="M:System.Uri.EscapeDataString(System.String)" />
+            >By default, the <see cref="M:System.Uri.EscapeDataString(System.String)" />
 
             
 
-             method converts all characters except for RFC 2396 unreserved characters to their hexadecimal representation. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the <see
-             cref="M:System.Uri.EscapeDataString(System.String)" />
+             method converts all characters except for RFC 2396 unreserved characters to their hexadecimal representation. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the <see cref="M:System.Uri.EscapeDataString(System.String)" />
 
             
 
              method converts all characters, except for RFC 3986 unreserved characters, to their hexadecimal representation. All Unicode characters are converted to UTF-8 format before being escaped. </para
           >
           <para
-            >This method assumes that <paramref
-             name="stringToEscape" />
+            >This method assumes that <paramref name="stringToEscape" />
 
             
 
@@ -2324,8 +2240,7 @@ public class UriTest {
           >
           <para>By default, the string is escaped according to RFC 2396. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the string is escaped according to RFC 3986 and RFC 3987. See these RFCs for a definition of reserved and unreserved characters.</para>
           <para
-            >For more information on IRI support, see the Remarks section for the <see
-             cref="T:System.Uri" />
+            >For more information on IRI support, see the Remarks section for the <see cref="T:System.Uri" />
 
             
 
@@ -2339,13 +2254,11 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             that contains the escaped representation of <paramref
-             name="stringToEscape" />
+             that contains the escaped representation of <paramref name="stringToEscape" />
 
             
 
@@ -2353,7 +2266,11 @@ public class UriTest {
           >
         </returns>
         <param name="stringToEscape">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2392,8 +2309,7 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Uri.EscapeString(System.String)" />
+            >The <see cref="M:System.Uri.EscapeString(System.String)" />
 
             
 
@@ -2401,8 +2317,7 @@ public class UriTest {
           >
           <para>By default, the string is escaped according to RFC 2396. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the string is escaped according to RFC 3986 and RFC 3987.</para>
           <para
-            >For more information on IRI support, see the Remarks section for the <see
-             cref="T:System.Uri" />
+            >For more information on IRI support, see the Remarks section for the <see cref="T:System.Uri" />
 
             
 
@@ -2418,7 +2333,11 @@ public class UriTest {
           <para>The escaped representation of the string.</para>
         </returns>
         <param name="str">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2451,34 +2370,29 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Uri.EscapeUriString(System.String)" />
+            >Use the <see cref="M:System.Uri.EscapeUriString(System.String)" />
 
             
 
-             method to prepare an unescaped URI string to be a parameter to the <see
-             cref="M:System.Uri.#ctor(System.String,System.UriKind)" />
+             method to prepare an unescaped URI string to be a parameter to the <see cref="M:System.Uri.#ctor(System.String,System.UriKind)" />
 
             
 
              constructor.</para
           >
           <para
-            >By default, the <see
-             cref="M:System.Uri.EscapeUriString(System.String)" />
+            >By default, the <see cref="M:System.Uri.EscapeUriString(System.String)" />
 
             
 
-             method converts all characters, except RFC 2396 unreserved characters, to their hexadecimal representation. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the <see
-             cref="M:System.Uri.EscapeUriString(System.String)" />
+             method converts all characters, except RFC 2396 unreserved characters, to their hexadecimal representation. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the <see cref="M:System.Uri.EscapeUriString(System.String)" />
 
             
 
              method converts all characters, except for RFC 3986 unreserved characters, to their hexadecimal representation. All Unicode characters are converted to UTF-8 format before being escaped. </para
           >
           <para
-            >This method assumes that <paramref
-             name="stringToEscape" />
+            >This method assumes that <paramref name="stringToEscape" />
 
             
 
@@ -2486,8 +2400,7 @@ public class UriTest {
           >
           <para>By default, the string is escaped according to RFC 2396. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the string is escaped according to RFC 3986 and RFC 3987. See these RFCs for a definition of reserved and unreserved characters.</para>
           <para
-            >For more information on IRI support, see the Remarks section for the <see
-             cref="T:System.Uri" />
+            >For more information on IRI support, see the Remarks section for the <see cref="T:System.Uri" />
 
             
 
@@ -2501,13 +2414,11 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             that contains the escaped representation of <paramref
-             name="stringToEscape" />
+             that contains the escaped representation of <paramref name="stringToEscape" />
 
             
 
@@ -2515,7 +2426,11 @@ public class UriTest {
           >
         </returns>
         <param name="stringToEscape">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2543,8 +2458,7 @@ public class UriTest {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -2555,8 +2469,7 @@ public class UriTest {
         <example>
           <para
             >The following example demonstrates the use of the
-   <see
-             cref="P:System.Uri.Fragment" />
+   <see cref="P:System.Uri.Fragment" />
 
             
 
@@ -2585,26 +2498,22 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Uri.Fragment" />
+            >The <see cref="P:System.Uri.Fragment" />
 
             
 
-             property gets any text following a fragment marker (#) in the URI, including the fragment marker itself. Given the URI http://www.contoso.com/index.htm#main, the <see
-             cref="P:System.Uri.Fragment" />
+             property gets any text following a fragment marker (#) in the URI, including the fragment marker itself. Given the URI http://www.contoso.com/index.htm#main, the <see cref="P:System.Uri.Fragment" />
 
             
 
              property would return #main.</para
           >
           <para
-            >The <see
-             cref="P:System.Uri.Fragment" />
+            >The <see cref="P:System.Uri.Fragment" />
 
             
 
-             property is not considered in any <see
-             cref="M:System.Uri.Equals(System.Object)" />
+             property is not considered in any <see cref="M:System.Uri.Equals(System.Object)" />
 
             
 
@@ -2651,18 +2560,15 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Uri.FromHex(System.Char)" />
+            >The <see cref="M:System.Uri.FromHex(System.Char)" />
 
             
 
-             method converts a character representing a hexadecimal digit (0-9, a-f, A-F) to its decimal value (0 to 15). If <paramref
-             name="digit" />
+             method converts a character representing a hexadecimal digit (0-9, a-f, A-F) to its decimal value (0 to 15). If <paramref name="digit" />
 
             
 
-             is not a valid hexadecimal digit, an <see
-             cref="T:System.ArgumentException" />
+             is not a valid hexadecimal digit, an <see cref="T:System.ArgumentException" />
 
             
 
@@ -2676,8 +2582,7 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Int32" />
+            >An <see cref="T:System.Int32" />
 
             
 
@@ -2685,7 +2590,11 @@ public class UriTest {
           >
         </returns>
         <param name="digit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2719,72 +2628,60 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <see
-             cref="F:System.UriComponents.Query" />
+            >When <see cref="F:System.UriComponents.Query" />
 
             
 
-             or <see
-             cref="F:System.UriComponents.Fragment" />
+             or <see cref="F:System.UriComponents.Fragment" />
 
             
 
-             is specified alone, the return value includes the delimiter. The <see
-             cref="F:System.UriComponents.Scheme" />
+             is specified alone, the return value includes the delimiter. The <see cref="F:System.UriComponents.Scheme" />
 
             
 
-            , <see
-             cref="F:System.UriComponents.UserInfo" />
+            , <see cref="F:System.UriComponents.UserInfo" />
 
             
 
-            , <see
-             cref="F:System.UriComponents.Host" />
+            , <see cref="F:System.UriComponents.Host" />
 
             
 
-            , <see
-             cref="F:System.UriComponents.Port" />
+            , <see cref="F:System.UriComponents.Port" />
 
             
 
-            , and <see
-             cref="F:System.UriComponents.Path" />
+            , and <see cref="F:System.UriComponents.Path" />
 
             
 
-             components do not include the delimiter. For all other <see
-             cref="T:System.UriComponents" />
+             components do not include the delimiter. For all other <see cref="T:System.UriComponents" />
 
             
 
              values, and combinations of values, the delimiters are included in the returned value.</para
           >
           <para
-            >The components are returned in the order that they appear in the URI. For example, if <see
-             cref="F:System.UriComponents.Scheme" />
+            >The components are returned in the order that they appear in the URI. For example, if <see cref="F:System.UriComponents.Scheme" />
 
             
 
              is specified, it appears first.</para
           >
           <para
-            >When International Resource Identifier (IRI) and Internationalized Domain Name (IDN) support are enabled, the number of characters returned in the <see
-             cref="T:System.String" />
+            >When International Resource Identifier (IRI) and Internationalized Domain Name (IDN) support are enabled, the number of characters returned in the <see cref="T:System.String" />
 
             
 
-             increases. Punycode names used to support IRI contain only ASCII characters and always start with the xn-- prefix. When IRI and IDN are enabled, Unicode surrogate characters are handled correctly by the <see
-             cref="M:System.Uri.GetComponents(System.UriComponents,System.UriFormat)" />
+             increases. Punycode names used to support IRI contain only ASCII characters and always start with the xn-- prefix. When IRI and IDN are enabled, Unicode surrogate characters are handled correctly by the <see cref="M:System.Uri.GetComponents(System.UriComponents,System.UriFormat)" />
 
             
 
              method.</para
           >
           <para
-            >For more information on IRI support, see the Remarks section for the <see
-             cref="T:System.Uri" />
+            >For more information on IRI support, see the Remarks section for the <see cref="T:System.Uri" />
 
             
 
@@ -2792,28 +2689,23 @@ public class UriTest {
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="M:System.Uri.GetComponents(System.UriComponents,System.UriFormat)" />
+              >If the <see cref="M:System.Uri.GetComponents(System.UriComponents,System.UriFormat)" />
 
               
 
-               method is called with <paramref
-               name="format" />
+               method is called with <paramref name="format" />
 
               
 
-               set to <see
-               cref="F:System.UriFormat.Unescaped" />
+               set to <see cref="F:System.UriFormat.Unescaped" />
 
               
 
-               , you cannot use the return value as an argument to a <see
-               cref="Overload:System.Uri.#ctor" />
+               , you cannot use the return value as an argument to a <see cref="Overload:System.Uri.#ctor" />
 
               
 
-               constructor to create an equivalent <see
-               cref="T:System.Uri" />
+               constructor to create an equivalent <see cref="T:System.Uri" />
 
               
 
@@ -2828,8 +2720,7 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -2837,24 +2728,30 @@ public class UriTest {
           >
         </returns>
         <param name="components">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.UriComponents" />
+          A bitwise combination of the <see cref="T:System.UriComponents" />
 
           
 
            values that specifies which parts of the current instance to return to the caller.</param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.UriFormat" />
+          One of the <see cref="T:System.UriFormat" />
 
           
 
@@ -2890,10 +2787,8 @@ public class UriTest {
       produce the same hash code.</para>
           <para>The algorithm used to generate the hash code is unspecified.</para>
           <para>
-            <block subset="none" type="note"
-              >
-      This method overrides <see
-               cref="M:System.Object.GetHashCode" />
+            <block subset="none" type="note">
+      This method overrides <see cref="M:System.Object.GetHashCode" />
 
               
 
@@ -2908,8 +2803,7 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Int32" />
+            >An <see cref="T:System.Int32" />
 
             
 
@@ -2943,13 +2837,11 @@ public class UriTest {
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentException"
-          >The <paramref
-           name="part" />
+          >The <paramref name="part" />
 
           
 
-           parameter is not a valid <see
-           cref="T:System.UriPartial" />
+           parameter is not a valid <see cref="T:System.UriPartial" />
 
           
 
@@ -2957,8 +2849,7 @@ public class UriTest {
         >
         <example>
           <para
-            >The following example demonstrates the <see
-             cref="M:System.Uri.GetLeftPart(System.UriPartial)" />
+            >The following example demonstrates the <see cref="M:System.Uri.GetLeftPart(System.UriPartial)" />
 
             
 
@@ -3009,13 +2900,11 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Uri.GetLeftPart(System.UriPartial)" />
+            >The <see cref="M:System.Uri.GetLeftPart(System.UriPartial)" />
 
             
 
-             method returns a string containing the leftmost portion of the URI string, ending with the portion specified by <paramref
-             name="part" />
+             method returns a string containing the leftmost portion of the URI string, ending with the portion specified by <paramref name="part" />
 
             
 
@@ -3062,8 +2951,7 @@ public class UriTest {
 
                 
 
-                 includes the <see
-                 cref="F:System.UriPartial.Path" />
+                 includes the <see cref="F:System.UriPartial.Path" />
 
                 
 
@@ -3072,28 +2960,23 @@ public class UriTest {
             </item>
           </list>
           <para
-            >The following examples show a URI and the results of calling <see
-             cref="M:System.Uri.GetLeftPart(System.UriPartial)" />
+            >The following examples show a URI and the results of calling <see cref="M:System.Uri.GetLeftPart(System.UriPartial)" />
 
             
 
-             with <see
-             cref="F:System.UriPartial.Scheme" />
+             with <see cref="F:System.UriPartial.Scheme" />
 
             
 
-            , <see
-             cref="F:System.UriPartial.Authority" />
+            , <see cref="F:System.UriPartial.Authority" />
 
             
 
-            , <see
-             cref="F:System.UriPartial.Path" />
+            , <see cref="F:System.UriPartial.Path" />
 
             
 
-            , or <see
-             cref="F:System.UriPartial.Query" />
+            , or <see cref="F:System.UriPartial.Query" />
 
             
 
@@ -3226,8 +3109,7 @@ public class UriTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the specified portion of a <see
-             cref="T:System.Uri" />
+            >Gets the specified portion of a <see cref="T:System.Uri" />
 
             
 
@@ -3237,13 +3119,11 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             that contains the specified portion of the <see
-             cref="T:System.Uri" />
+             that contains the specified portion of the <see cref="T:System.Uri" />
 
             
 
@@ -3251,12 +3131,15 @@ public class UriTest {
           >
         </returns>
         <param name="part">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.UriPartial" />
+          One of the <see cref="T:System.UriPartial" />
 
           
 
@@ -3293,34 +3176,38 @@ public class UriTest {
           <para>Returns the data needed to serialize the current instance.</para>
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
-           object containing the information required to serialize the <see
-           cref="T:System.Uri" />
+           object containing the information required to serialize the <see cref="T:System.Uri" />
 
           
 
           .</param
         >
         <param name="streamingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
-           object containing the source and destination of the serialized stream associated with the <see
-           cref="T:System.Uri" />
+           object containing the source and destination of the serialized stream associated with the <see cref="T:System.Uri" />
 
           
 
@@ -3356,8 +3243,7 @@ public class UriTest {
       form "%XX", where X represents a hexadecimal digit (0-9, A-F).</para>
         </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException"
-          >The numerical value of <paramref
-           name="character" />
+          >The numerical value of <paramref name="character" />
 
           
 
@@ -3372,7 +3258,11 @@ public class UriTest {
           <para>The hexadecimal representation of the specified character.</para>
         </returns>
         <param name="character">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3409,21 +3299,18 @@ public class UriTest {
       </Parameters>
       <Docs>
         <param name="pattern"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
            containing the hexadecimal representation of a character. </param
         >
         <param name="index"
-          >A <see
-           cref="T:System.Int32" />
+          >A <see cref="T:System.Int32" />
 
           
 
-           containing the location in <paramref
-           name="pattern" />
+           containing the location in <paramref name="pattern" />
 
           
 
@@ -3435,26 +3322,22 @@ public class UriTest {
         </summary>
         <returns>
           <para
-            > A <see
-             cref="T:System.Char" />
+            > A <see cref="T:System.Char" />
 
             
 
              containing a character. If the character pointed to
-   by <paramref
-             name="index" />
+   by <paramref name="index" />
 
             
 
              is a "%" and there are at least two characters following the
    "%", and the two characters are valid hexadecimal digits, the hexadecimal
-   digits are converted to <see
-             cref="T:System.Char" />
+   digits are converted to <see cref="T:System.Char" />
 
             
 
-            . Otherwise, the character at <paramref
-             name="index" />
+            . Otherwise, the character at <paramref name="index" />
 
             
 
@@ -3464,8 +3347,7 @@ public class UriTest {
    </para
           >
           <para
-            >On return, the value of <paramref
-             name="index " />
+            >On return, the value of <paramref name="index " />
 
             
 
@@ -3479,8 +3361,7 @@ contains the index of the character following the one returned.</para
 
           
 
-          0, or <paramref
-           name="index " />
+          0, or <paramref name="index " />
 
           
 
@@ -3509,15 +3390,13 @@ contains the index of the character following the one returned.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
              containing the DNS host
    name or IP address of the host server. If the host information was not
-   specified to the constructor, the value of this property is <see
-             cref="F:System.String.Empty" />
+   specified to the constructor, the value of this property is <see cref="F:System.String.Empty" />
 
             
 
@@ -3526,8 +3405,7 @@ contains the index of the character following the one returned.</para
         </value>
         <example>
           <para
-            >The following example demonstrates using the <see
-             cref="P:System.Uri.Host" />
+            >The following example demonstrates using the <see cref="P:System.Uri.Host" />
 
             
 
@@ -3556,8 +3434,7 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unlike the <see
-             cref="P:System.Uri.Authority" />
+            >Unlike the <see cref="P:System.Uri.Authority" />
 
             
 
@@ -3594,8 +3471,7 @@ public class UriTest {
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.UriHostNameType" />
+            > A <see cref="T:System.UriHostNameType" />
 
             
 
@@ -3606,19 +3482,16 @@ public class UriTest {
         <remarks>
           <para>This property is read-only.</para>
           <para
-            >If <see
-             cref="P:System.Uri.Host" />
+            >If <see cref="P:System.Uri.Host" />
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
             , the value of this property is
-<see
-             cref="F:System.UriHostNameType.Unknown" />
+<see cref="F:System.UriHostNameType.Unknown" />
 
             
 
@@ -3648,18 +3521,15 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is true if the string or <see
-             cref="T:System.Uri" />
+            >This property is true if the string or <see cref="T:System.Uri" />
 
             
 
-             instance that was passed into the constructor can be parsed as an absolute <see
-             cref="T:System.Uri" />
+             instance that was passed into the constructor can be parsed as an absolute <see cref="T:System.Uri" />
 
             
 
-             instance, which contains a scheme, an authority, and a path. Otherwise, the <see
-             cref="T:System.Uri" />
+             instance, which contains a scheme, an authority, and a path. Otherwise, the <see cref="T:System.Uri" />
 
             
 
@@ -3669,8 +3539,7 @@ public class UriTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets whether the <see
-             cref="T:System.Uri" />
+            >Gets whether the <see cref="T:System.Uri" />
 
             
 
@@ -3721,8 +3590,7 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Boolean" />
+            >A <see cref="T:System.Boolean" />
 
             
 
@@ -3730,12 +3598,15 @@ public class UriTest {
           >
         </returns>
         <param name="character">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Char" />
+          The <see cref="T:System.Char" />
 
           
 
@@ -3769,28 +3640,23 @@ public class UriTest {
 
             
 
-             is used to compare the current <see
-             cref="T:System.Uri" />
+             is used to compare the current <see cref="T:System.Uri" />
 
             
 
-             instance to a specified <see
-             cref="T:System.Uri" />
+             instance to a specified <see cref="T:System.Uri" />
 
             
 
-             to determine whether this URI is a base for the specified <see
-             cref="T:System.Uri" />
+             to determine whether this URI is a base for the specified <see cref="T:System.Uri" />
 
             
 
-            . When comparing two <see
-             cref="T:System.Uri" />
+            . When comparing two <see cref="T:System.Uri" />
 
             
 
-             objects to determine a base relationship, the user information (<see
-             cref="P:System.Uri.UserInfo" />
+             objects to determine a base relationship, the user information (<see cref="P:System.Uri.UserInfo" />
 
             
 
@@ -3908,13 +3774,11 @@ public class UriTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the current <see
-             cref="T:System.Uri" />
+            >Determines whether the current <see cref="T:System.Uri" />
 
             
 
-             instance is a base of the specified <see
-             cref="T:System.Uri" />
+             instance is a base of the specified <see cref="T:System.Uri" />
 
             
 
@@ -3924,13 +3788,11 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the current <see
-             cref="T:System.Uri" />
+            >true if the current <see cref="T:System.Uri" />
 
             
 
-             instance is a base of <paramref
-             name="uri" />
+             instance is a base of <paramref name="uri" />
 
             
 
@@ -3938,12 +3800,15 @@ public class UriTest {
           >
         </returns>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The specified <see
-           cref="T:System.Uri" />
+          The specified <see cref="T:System.Uri" />
 
           
 
@@ -3975,20 +3840,17 @@ public class UriTest {
 
             
 
-            if the value in the <see
-             cref="P:System.Uri.Port" />
+            if the value in the <see cref="P:System.Uri.Port" />
 
             
 
              property is the default
- port for the <see
-             cref="P:System.Uri.Scheme" />
+ port for the <see cref="P:System.Uri.Scheme" />
 
             
 
             
- ; otherwise, <see
-             langword="false" />
+ ; otherwise, <see langword="false" />
 
             
 
@@ -4000,8 +3862,7 @@ public class UriTest {
           <para>
             <block subset="none" type="note"
               >For a list of default
- port values, see the <see
-               cref="P:System.Uri.Port" />
+ port values, see the <see cref="P:System.Uri.Port" />
 
               
 
@@ -4049,8 +3910,7 @@ public class UriTest {
       <Docs>
         <remarks>
           <para
-            >This method returns <see
-             langword="true" />
+            >This method returns <see langword="true" />
 
             
 
@@ -4147,8 +4007,7 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Boolean" />
+            >A <see cref="T:System.Boolean" />
 
             
 
@@ -4156,12 +4015,15 @@ public class UriTest {
           >
         </returns>
         <param name="character">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Char" />
+          The <see cref="T:System.Char" />
 
           
 
@@ -4195,14 +4057,12 @@ public class UriTest {
             
 
             if the 
- resource identified by the current <see
-             cref="T:System.Uri" />
+ resource identified by the current <see cref="T:System.Uri" />
 
             
 
              is a file; otherwise,
-<see
-             langword="false" />
+<see langword="false" />
 
             
 
@@ -4212,18 +4072,15 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Uri.IsFile" />
+            >The <see cref="P:System.Uri.IsFile" />
 
             
 
-             property is true when the <see
-             cref="P:System.Uri.Scheme" />
+             property is true when the <see cref="P:System.Uri.Scheme" />
 
             
 
-             property equals <see
-             cref="F:System.Uri.UriSchemeFile" />
+             property equals <see cref="F:System.Uri.UriSchemeFile" />
 
             
 
@@ -4233,8 +4090,7 @@ public class UriTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the specified <see
-             cref="T:System.Uri" />
+            >Gets a value indicating whether the specified <see cref="T:System.Uri" />
 
             
 
@@ -4278,8 +4134,7 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Boolean" />
+            >A <see cref="T:System.Boolean" />
 
             
 
@@ -4287,7 +4142,11 @@ public class UriTest {
           >
         </returns>
         <param name="character">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4326,8 +4185,7 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Uri.IsHexEncoding(System.String,System.Int32)" />
+            >The <see cref="M:System.Uri.IsHexEncoding(System.String,System.Int32)" />
 
             
 
@@ -4341,13 +4199,11 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Boolean" />
+            >A <see cref="T:System.Boolean" />
 
             
 
-             value that is true if <paramref
-             name="pattern" />
+             value that is true if <paramref name="pattern" />
 
             
 
@@ -4355,19 +4211,26 @@ public class UriTest {
           >
         </returns>
         <param name="pattern">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string to check. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The location in <paramref
-           name="pattern" />
+          The location in <paramref name="pattern" />
 
           
 
@@ -4403,8 +4266,7 @@ public class UriTest {
             if the host of
  the current instance is the reserved hostname "localhost" or the
  loop-back IP address (127.0.0.1); otherwise,
-<see
-             langword="false" />
+<see langword="false" />
 
             
 
@@ -4413,8 +4275,7 @@ public class UriTest {
         </value>
         <example>
           <para
-            >The following example demonstrates the <see
-             cref="P:System.Uri.IsLoopback" />
+            >The following example demonstrates the <see cref="P:System.Uri.IsLoopback" />
 
             
 
@@ -4454,8 +4315,7 @@ public class UriTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets whether the specified <see
-             cref="T:System.Uri" />
+            >Gets whether the specified <see cref="T:System.Uri" />
 
             
 
@@ -4548,8 +4408,7 @@ public class UriTest {
           <para>
             <block subset="none" type="overrides"
               >Override this 
-   method to customize the escaping behavior provided by the <see
-               cref="T:System.Uri" />
+   method to customize the escaping behavior provided by the <see cref="T:System.Uri" />
 
               
 
@@ -4570,8 +4429,7 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Boolean" />
+            >A <see cref="T:System.Boolean" />
 
             
 
@@ -4579,12 +4437,15 @@ public class UriTest {
           >
         </returns>
         <param name="character">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Char" />
+          The <see cref="T:System.Char" />
 
           
 
@@ -4610,13 +4471,11 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Uri.IsUnc" />
+            >The <see cref="P:System.Uri.IsUnc" />
 
             
 
-             property is true if the specified <see
-             cref="T:System.Uri" />
+             property is true if the specified <see cref="T:System.Uri" />
 
             
 
@@ -4626,8 +4485,7 @@ public class UriTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets whether the specified <see
-             cref="T:System.Uri" />
+            >Gets whether the specified <see cref="T:System.Uri" />
 
             
 
@@ -4686,13 +4544,11 @@ public class UriTest {
             <item>
               <term>
                 <para
-                  >The string is an absolute <see
-                   cref="T:System.Uri" />
+                  >The string is an absolute <see cref="T:System.Uri" />
 
                   
 
-                   that represents an implicit file <see
-                   cref="T:System.Uri" />
+                   that represents an implicit file <see cref="T:System.Uri" />
 
                   
 
@@ -4722,8 +4578,7 @@ public class UriTest {
             <item>
               <term>
                 <para
-                  >The string represents a hierarchical absolute <see
-                   cref="T:System.Uri" />
+                  >The string represents a hierarchical absolute <see cref="T:System.Uri" />
 
                   
 
@@ -4737,8 +4592,7 @@ public class UriTest {
             <item>
               <term>
                 <para
-                  >The parser for the <see
-                   cref="P:System.Uri.Scheme" />
+                  >The parser for the <see cref="P:System.Uri.Scheme" />
 
                   
 
@@ -4751,24 +4605,21 @@ public class UriTest {
             </item>
           </list>
           <para
-            >By default, the string used to construct this <see
-             cref="T:System.Uri" />
+            >By default, the string used to construct this <see cref="T:System.Uri" />
 
             
 
              are considered well-formed in accordance with RFC 2396 and RFC 2732.</para
           >
           <para
-            >When International Resource Identifier (IRI) and Internationalized Domain Name (IDN) support are enabled, the string used to construct this <see
-             cref="T:System.Uri" />
+            >When International Resource Identifier (IRI) and Internationalized Domain Name (IDN) support are enabled, the string used to construct this <see cref="T:System.Uri" />
 
             
 
              are considered well-formed in accordance with RFC 3986 and RFC 3987. Punycode names used to support IRI contain only ASCII characters and always start with the xn-- prefix. </para
           >
           <para
-            >For more information on IRI support, see the Remarks section for the <see
-             cref="T:System.Uri" />
+            >For more information on IRI support, see the Remarks section for the <see cref="T:System.Uri" />
 
             
 
@@ -4778,8 +4629,7 @@ public class UriTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the string used to construct this <see
-             cref="T:System.Uri" />
+            >Indicates whether the string used to construct this <see cref="T:System.Uri" />
 
             
 
@@ -4789,8 +4639,7 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Boolean" />
+            >A <see cref="T:System.Boolean" />
 
             
 
@@ -4855,13 +4704,11 @@ public class UriTest {
             <item>
               <term>
                 <para
-                  >The string is an absolute <see
-                   cref="T:System.Uri" />
+                  >The string is an absolute <see cref="T:System.Uri" />
 
                   
 
-                   that represents an implicit file <see
-                   cref="T:System.Uri" />
+                   that represents an implicit file <see cref="T:System.Uri" />
 
                   
 
@@ -4891,8 +4738,7 @@ public class UriTest {
             <item>
               <term>
                 <para
-                  >The string represents a hierarchical absolute <see
-                   cref="T:System.Uri" />
+                  >The string represents a hierarchical absolute <see cref="T:System.Uri" />
 
                   
 
@@ -4906,8 +4752,7 @@ public class UriTest {
             <item>
               <term>
                 <para
-                  >The parser for the <see
-                   cref="P:System.Uri.Scheme" />
+                  >The parser for the <see cref="P:System.Uri.Scheme" />
 
                   
 
@@ -4920,8 +4765,7 @@ public class UriTest {
             </item>
           </list>
           <para
-            >For more information on IRI support, see the Remarks section for the <see
-             cref="T:System.Uri" />
+            >For more information on IRI support, see the Remarks section for the <see cref="T:System.Uri" />
 
             
 
@@ -4935,8 +4779,7 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Boolean" />
+            >A <see cref="T:System.Boolean" />
 
             
 
@@ -4944,29 +4787,34 @@ public class UriTest {
           >
         </returns>
         <param name="uriString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The string used to attempt to construct a <see
-           cref="T:System.Uri" />
+          The string used to attempt to construct a <see cref="T:System.Uri" />
 
           
 
           .</param
         >
         <param name="uriKind">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of the <see
-           cref="T:System.Uri" />
+          The type of the <see cref="T:System.Uri" />
 
           
 
-           in <paramref
-           name="uriString" />
+           in <paramref name="uriString" />
 
           
 
@@ -4994,8 +4842,7 @@ public class UriTest {
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.String" />
+            > A <see cref="T:System.String" />
 
             
 
@@ -5046,8 +4893,7 @@ public class UriTest {
       <Docs>
         <example>
           <para
-            >The following example demonstrates the <see
-             cref="M:System.Uri.MakeRelative(System.Uri)" />
+            >The following example demonstrates the <see cref="M:System.Uri.MakeRelative(System.Uri)" />
 
             
 
@@ -5074,13 +4920,11 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the URI instance, <paramref
-             name="toUri" />
+            >The following table shows the URI instance, <paramref name="toUri" />
 
             
 
-            , and the results of calling <see
-             cref="M:System.Uri.MakeRelative(System.Uri)" />
+            , and the results of calling <see cref="M:System.Uri.MakeRelative(System.Uri)" />
 
             
 
@@ -5152,8 +4996,7 @@ public class UriTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the difference between two <see
-             cref="T:System.Uri" />
+            >Determines the difference between two <see cref="T:System.Uri" />
 
             
 
@@ -5163,31 +5006,26 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the hostname and scheme of this URI instance and <paramref
-             name="toUri" />
+            >If the hostname and scheme of this URI instance and <paramref name="toUri" />
 
             
 
-             are the same, then this method returns a <see
-             cref="T:System.String" />
+             are the same, then this method returns a <see cref="T:System.String" />
 
             
 
-             that represents a relative URI that, when appended to the current URI instance, yields the <paramref
-             name="toUri" />
+             that represents a relative URI that, when appended to the current URI instance, yields the <paramref name="toUri" />
 
             
 
              parameter.</para
           >
           <para
-            >If the hostname or scheme is different, then this method returns a <see
-             cref="T:System.String" />
+            >If the hostname or scheme is different, then this method returns a <see cref="T:System.String" />
 
             
 
-             that represents the <paramref
-             name="toUri" />
+             that represents the <paramref name="toUri" />
 
             
 
@@ -5195,7 +5033,11 @@ public class UriTest {
           >
         </returns>
         <param name="toUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5225,13 +5067,11 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the URI instance, <paramref
-             name="toUri" />
+            >The following table shows the URI instance, <paramref name="toUri" />
 
             
 
-            , and the results of calling <see
-             cref="M:System.Uri.MakeRelativeUri(System.Uri)" />
+            , and the results of calling <see cref="M:System.Uri.MakeRelativeUri(System.Uri)" />
 
             
 
@@ -5303,8 +5143,7 @@ public class UriTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the difference between two <see
-             cref="T:System.Uri" />
+            >Determines the difference between two <see cref="T:System.Uri" />
 
             
 
@@ -5314,31 +5153,26 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the hostname and scheme of this URI instance and <paramref
-             name="uri" />
+            >If the hostname and scheme of this URI instance and <paramref name="uri" />
 
             
 
-             are the same, then this method returns a relative <see
-             cref="T:System.Uri" />
+             are the same, then this method returns a relative <see cref="T:System.Uri" />
 
             
 
-             that, when appended to the current URI instance, yields <paramref
-             name="uri" />
+             that, when appended to the current URI instance, yields <paramref name="uri" />
 
             
 
             .</para
           >
           <para
-            >If the hostname or scheme is different, then this method returns a <see
-             cref="T:System.Uri" />
+            >If the hostname or scheme is different, then this method returns a <see cref="T:System.Uri" />
 
             
 
-              that represents the <paramref
-             name="uri" />
+              that represents the <paramref name="uri" />
 
             
 
@@ -5346,7 +5180,11 @@ public class UriTest {
           >
         </returns>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5376,23 +5214,19 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload uses the <see
-             cref="M:System.Uri.Equals(System.Object)" />
+            >This overload uses the <see cref="M:System.Uri.Equals(System.Object)" />
 
             
 
-             method to determine whether the two <see
-             cref="T:System.Uri" />
+             method to determine whether the two <see cref="T:System.Uri" />
 
             
 
-             instances are equivalent. <see
-             cref="P:System.Uri.UserInfo" />
+             instances are equivalent. <see cref="P:System.Uri.UserInfo" />
 
             
 
-             and <see
-             cref="P:System.Uri.Fragment" />
+             and <see cref="P:System.Uri.Fragment" />
 
             
 
@@ -5402,8 +5236,7 @@ public class UriTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether two <see
-             cref="T:System.Uri" />
+            >Determines whether two <see cref="T:System.Uri" />
 
             
 
@@ -5413,13 +5246,11 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Boolean" />
+            >A <see cref="T:System.Boolean" />
 
             
 
-             value that is true if the <see
-             cref="T:System.Uri" />
+             value that is true if the <see cref="T:System.Uri" />
 
             
 
@@ -5427,34 +5258,38 @@ public class UriTest {
           >
         </returns>
         <param name="uri1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Uri" />
+          A <see cref="T:System.Uri" />
 
           
 
-           instance to compare with <paramref
-           name="uri2" />
+           instance to compare with <paramref name="uri2" />
 
           
 
           . </param
         >
         <param name="uri2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Uri" />
+          A <see cref="T:System.Uri" />
 
           
 
-           instance to compare with <paramref
-           name="uri1" />
+           instance to compare with <paramref name="uri1" />
 
           
 
@@ -5487,23 +5322,19 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload uses the <see
-             cref="M:System.Uri.Equals(System.Object)" />
+            >This overload uses the <see cref="M:System.Uri.Equals(System.Object)" />
 
             
 
-             method to determine whether the two <see
-             cref="T:System.Uri" />
+             method to determine whether the two <see cref="T:System.Uri" />
 
             
 
-             instances are not equivalent. <see
-             cref="P:System.Uri.UserInfo" />
+             instances are not equivalent. <see cref="P:System.Uri.UserInfo" />
 
             
 
-             and <see
-             cref="P:System.Uri.Fragment" />
+             and <see cref="P:System.Uri.Fragment" />
 
             
 
@@ -5513,8 +5344,7 @@ public class UriTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether two <see
-             cref="T:System.Uri" />
+            >Determines whether two <see cref="T:System.Uri" />
 
             
 
@@ -5524,13 +5354,11 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Boolean" />
+            >A <see cref="T:System.Boolean" />
 
             
 
-             value that is true if the two <see
-             cref="T:System.Uri" />
+             value that is true if the two <see cref="T:System.Uri" />
 
             
 
@@ -5538,34 +5366,38 @@ public class UriTest {
           >
         </returns>
         <param name="uri1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Uri" />
+          A <see cref="T:System.Uri" />
 
           
 
-           instance to compare with <paramref
-           name="uri2" />
+           instance to compare with <paramref name="uri2" />
 
           
 
           . </param
         >
         <param name="uri2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Uri" />
+          A <see cref="T:System.Uri" />
 
           
 
-           instance to compare with <paramref
-           name="uri1" />
+           instance to compare with <paramref name="uri1" />
 
           
 
@@ -5590,72 +5422,60 @@ public class UriTest {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the URI specified to the constructor contained leading or trailing spaces, these spaces are preserved.</para>
           <para
-            >The value returned by this property differs from <see
-             cref="M:System.Uri.ToString" />
+            >The value returned by this property differs from <see cref="M:System.Uri.ToString" />
 
             
 
-             and <see
-             cref="P:System.Uri.AbsoluteUri" />
+             and <see cref="P:System.Uri.AbsoluteUri" />
 
             
 
-            . <see
-             cref="M:System.Uri.ToString" />
+            . <see cref="M:System.Uri.ToString" />
 
             
 
-             returns the canonically unescaped form of the URI. <see
-             cref="P:System.Uri.AbsoluteUri" />
+             returns the canonically unescaped form of the URI. <see cref="P:System.Uri.AbsoluteUri" />
 
             
 
              returns the canonically escaped form of the URI.</para
           >
           <para
-            >When International Resource Identifier (IRI) and Internationalized Domain Name (IDN) support are enabled, <see
-             cref="P:System.Uri.OriginalString" />
+            >When International Resource Identifier (IRI) and Internationalized Domain Name (IDN) support are enabled, <see cref="P:System.Uri.OriginalString" />
 
             
 
-             returns the original non normalized string with Punycode host name if one was used to initialize the <see
-             cref="T:System.Uri" />
+             returns the original non normalized string with Punycode host name if one was used to initialize the <see cref="T:System.Uri" />
 
             
 
              instance. Punycode names contain only ASCII characters and always start with the xn-- prefix. </para
           >
           <para
-            >For more information on IRI support, see the Remarks section for the <see
-             cref="T:System.Uri" />
+            >For more information on IRI support, see the Remarks section for the <see cref="T:System.Uri" />
 
             
 
              class.</para
           >
           <para
-            >When a <see
-             cref="T:System.Uri" />
+            >When a <see cref="T:System.Uri" />
 
             
 
-             object is serialized, the <see
-             cref="P:System.Uri.OriginalString" />
+             object is serialized, the <see cref="P:System.Uri.OriginalString" />
 
             
 
-             is not preserved. The serialization process uses the fully escaped and canonicalized <see
-             cref="P:System.Uri.AbsoluteUri" />
+             is not preserved. The serialization process uses the fully escaped and canonicalized <see cref="P:System.Uri.AbsoluteUri" />
 
             
 
-             property when serializing. For a <see
-             cref="T:System.Uri" />
+             property when serializing. For a <see cref="T:System.Uri" />
 
             
 
-             that contains an IPv6 address, the IPv6 address and the scope ID are included in the serialized <see
-             cref="T:System.Uri" />
+             that contains an IPv6 address, the IPv6 address and the scope ID are included in the serialized <see cref="T:System.Uri" />
 
             
 
@@ -5665,8 +5485,7 @@ public class UriTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the original URI string that was passed to the <see
-             cref="T:System.Uri" />
+            >Gets the original URI string that was passed to the <see cref="T:System.Uri" />
 
             
 
@@ -5701,15 +5520,13 @@ public class UriTest {
         <remarks>
           <para>
             <block subset="none" type="behaviors"
-              > This method parses the <see
-               cref="P:System.Uri.AbsolutePath" />
+              > This method parses the <see cref="P:System.Uri.AbsolutePath" />
 
               
 
               
 property, separates it into various URI components, and stores the
-components in the appropriate <see
-               cref="T:System.Uri" />
+components in the appropriate <see cref="T:System.Uri" />
 
               
 
@@ -5725,8 +5542,7 @@ properties.
             >
           </para>
           <para>
-            <block subset="none" type="overrides"
-              >
+            <block subset="none" type="overrides">
    Override this method to provide parsing for URIs in
    formats that are not defined in IETF RFC 2396.
 </block
@@ -5771,19 +5587,16 @@ properties.
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
              that contains the
-   values of the <see
-             cref="P:System.Uri.AbsolutePath" />
+   values of the <see cref="P:System.Uri.AbsolutePath" />
 
             
 
-             and <see
-             cref="P:System.Uri.Query" />
+             and <see cref="P:System.Uri.Query" />
 
             
 
@@ -5792,14 +5605,12 @@ properties.
         </value>
         <example>
           <para
-            > The following example uses the <see
-             cref="P:System.Uri.PathAndQuery" />
+            > The following example uses the <see cref="P:System.Uri.PathAndQuery" />
 
             
 
              property to extract the path and query information 
-   from a <see
-             cref="T:System.Uri" />
+   from a <see cref="T:System.Uri" />
 
             
 
@@ -5828,39 +5639,33 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Uri.PathAndQuery" />
+            >The <see cref="P:System.Uri.PathAndQuery" />
 
             
 
-             property contains the absolute path on the server and the query information sent with the request. It is identical to concatenating the <see
-             cref="P:System.Uri.AbsolutePath" />
+             property contains the absolute path on the server and the query information sent with the request. It is identical to concatenating the <see cref="P:System.Uri.AbsolutePath" />
 
             
 
-             and <see
-             cref="P:System.Uri.Query" />
+             and <see cref="P:System.Uri.Query" />
 
             
 
              properties.</para
           >
           <para
-            >The <see
-             cref="P:System.Uri.PathAndQuery" />
+            >The <see cref="P:System.Uri.PathAndQuery" />
 
             
 
-             property is escaped according to RFC 2396 by default. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the <see
-             cref="P:System.Uri.PathAndQuery" />
+             property is escaped according to RFC 2396 by default. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the <see cref="P:System.Uri.PathAndQuery" />
 
             
 
              property is escaped according to RFC 3986 and RFC 3987.</para
           >
           <para
-            >For more information on IRI support, see the Remarks section for the <see
-             cref="T:System.Uri" />
+            >For more information on IRI support, see the Remarks section for the <see cref="T:System.Uri" />
 
             
 
@@ -5870,13 +5675,11 @@ public class UriTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="P:System.Uri.AbsolutePath" />
+            >Gets the <see cref="P:System.Uri.AbsolutePath" />
 
             
 
-             and <see
-             cref="P:System.Uri.Query" />
+             and <see cref="P:System.Uri.Query" />
 
             
 
@@ -5906,20 +5709,17 @@ public class UriTest {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
              containing the port number, or -1 if no port is used by
-   the URI <see
-             cref="P:System.Uri.Scheme" />
+   the URI <see cref="P:System.Uri.Scheme" />
 
             
 
              . If no port was specified as part of the URI used
-   to construct the current instance, the <see
-             cref="P:System.Uri.Port" />
+   to construct the current instance, the <see cref="P:System.Uri.Port" />
 
             
 
@@ -5929,8 +5729,7 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The port number defines the protocol port used for contacting the server referenced in the URI. If a port is not specified as part of the URI, the <see
-             cref="P:System.Uri.Port" />
+            >The port number defines the protocol port used for contacting the server referenced in the URI. If a port is not specified as part of the URI, the <see cref="P:System.Uri.Port" />
 
             
 
@@ -5964,14 +5763,12 @@ public class UriTest {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
              containing the
-   query information included in the specified URI, or <see
-             cref="F:System.String.Empty" />
+   query information included in the specified URI, or <see cref="F:System.String.Empty" />
 
             
 
@@ -5980,8 +5777,7 @@ public class UriTest {
         </value>
         <example>
           <para
-            > The following example uses the <see
-             cref="P:System.Uri.Query" />
+            > The following example uses the <see cref="P:System.Uri.Query" />
 
             
 
@@ -6011,8 +5807,7 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Uri.Query" />
+            >The <see cref="P:System.Uri.Query" />
 
             
 
@@ -6020,8 +5815,7 @@ public class UriTest {
           >
           <para>The query information is escaped according to RFC 2396 by default. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the query information is escaped according to RFC 3986 and RFC 3987.</para>
           <para
-            >For more information on IRI support, see the Remarks section for the <see
-             cref="T:System.Uri" />
+            >For more information on IRI support, see the Remarks section for the <see cref="T:System.Uri" />
 
             
 
@@ -6055,8 +5849,7 @@ public class UriTest {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -6066,26 +5859,22 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Uri.Scheme" />
+            >The <see cref="P:System.Uri.Scheme" />
 
             
 
-             property returns the scheme used to initialize the <see
-             cref="T:System.Uri" />
+             property returns the scheme used to initialize the <see cref="T:System.Uri" />
 
             
 
-             instance. This property does not indicate that the scheme used to initialize the <see
-             cref="T:System.Uri" />
+             instance. This property does not indicate that the scheme used to initialize the <see cref="T:System.Uri" />
 
             
 
              instance was recognized. </para
           >
           <para
-            >The following table shows examples of some possible values returned by the <see
-             cref="P:System.Uri.Scheme" />
+            >The following table shows examples of some possible values returned by the <see cref="P:System.Uri.Scheme" />
 
             
 
@@ -6263,8 +6052,7 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Uri.Segments" />
+            >The <see cref="P:System.Uri.Segments" />
 
             
 
@@ -6377,18 +6165,15 @@ public class UriTest {
           <para>The string returned by this method does not contain port information when the port is the default port for the scheme.</para>
           <block subset="none" type="note">
             <para
-              >The string returned by the <see
-               cref="M:System.Uri.ToString" />
+              >The string returned by the <see cref="M:System.Uri.ToString" />
 
               
 
-               method may contain control characters, which can corrupt the state of a console application. You can use the <see
-               cref="M:System.Uri.GetComponents(System.UriComponents,System.UriFormat)" />
+               method may contain control characters, which can corrupt the state of a console application. You can use the <see cref="M:System.Uri.GetComponents(System.UriComponents,System.UriFormat)" />
 
               
 
-               method with the <see
-               cref="F:System.UriFormat.SafeUnescaped" />
+               method with the <see cref="F:System.UriFormat.SafeUnescaped" />
 
               
 
@@ -6399,8 +6184,7 @@ public class UriTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a canonical string representation for the specified <see
-             cref="T:System.Uri" />
+            >Gets a canonical string representation for the specified <see cref="T:System.Uri" />
 
             
 
@@ -6410,13 +6194,11 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             instance that contains the unescaped canonical representation of the <see
-             cref="T:System.Uri" />
+             instance that contains the unescaped canonical representation of the <see cref="T:System.Uri" />
 
             
 
@@ -6560,13 +6342,11 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             that contains the unescaped value of the <paramref
-             name="path" />
+             that contains the unescaped value of the <paramref name="path" />
 
             
 
@@ -6574,12 +6354,15 @@ public class UriTest {
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
@@ -6621,13 +6404,11 @@ public class UriTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             that contains the unescaped representation of <paramref
-             name="stringToUnescape" />
+             that contains the unescaped representation of <paramref name="stringToUnescape" />
 
             
 
@@ -6635,7 +6416,11 @@ public class UriTest {
           >
         </returns>
         <param name="stringToUnescape">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6931,8 +6716,7 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The NNTP <see
-             cref="T:System.Uri" />
+            >The NNTP <see cref="T:System.Uri" />
 
             
 
@@ -6971,21 +6755,18 @@ public class UriTest {
             
 
             if
-   the <paramref
-             name="dontEscape " />
+   the <paramref name="dontEscape " />
 
             
 
             parameter of the constructor for
    the current instance was set to
-<see
-             langword="true " />
+<see langword="true " />
 
             
 
              ; otherwise, 
-<see
-             langword="false" />
+<see langword="false" />
 
             
 
@@ -6995,18 +6776,15 @@ public class UriTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Uri.UserEscaped" />
+            >The <see cref="P:System.Uri.UserEscaped" />
 
             
 
-             property is set to true to indicate that the string used to create the <see
-             cref="T:System.Uri" />
+             property is set to true to indicate that the string used to create the <see cref="T:System.Uri" />
 
             
 
-             instance was completely escaped before it was passed to the constructor; that is, the <paramref
-             name="dontEscape" />
+             instance was completely escaped before it was passed to the constructor; that is, the <paramref name="dontEscape" />
 
             
 
@@ -7016,8 +6794,7 @@ public class UriTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the URI string was completely escaped before the <see
-             cref="T:System.Uri" />
+            >Indicates that the URI string was completely escaped before the <see cref="T:System.Uri" />
 
             
 
@@ -7047,15 +6824,13 @@ public class UriTest {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
              containing any 
  user information included in the URI used to construct the current instance, or
-<see
-             cref="F:System.String.Empty" />
+<see cref="F:System.String.Empty" />
 
             
 

@@ -13,18 +13,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.SqlClient.SqlNotificationType" />
+        >The <see cref="T:System.Data.SqlClient.SqlNotificationType" />
 
         
 
-         enumeration is referenced by an instance of the <see
-         cref="T:System.Data.SqlClient.SqlNotificationEventArgs" />
+         enumeration is referenced by an instance of the <see cref="T:System.Data.SqlClient.SqlNotificationEventArgs" />
 
         
 
-         class. This information is provided when a notification event is fired with the <see
-         cref="T:System.Data.SqlClient.SqlDependency" />
+         class. This information is provided when a notification event is fired with the <see cref="T:System.Data.SqlClient.SqlDependency" />
 
         
 
@@ -34,13 +31,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Describes the different notification types that can be received by an <see
-         cref="T:System.Data.SqlClient.OnChangeEventHandler" />
+        >Describes the different notification types that can be received by an <see cref="T:System.Data.SqlClient.OnChangeEventHandler" />
 
         
 
-         event handler through the <see
-         cref="T:System.Data.SqlClient.SqlNotificationEventArgs" />
+         event handler through the <see cref="T:System.Data.SqlClient.SqlNotificationEventArgs" />
 
         
 
@@ -60,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Data on the server being monitored changed. Use the <see
-             cref="T:System.Data.SqlClient.SqlNotificationInfo" />
+            >Data on the server being monitored changed. Use the <see cref="T:System.Data.SqlClient.SqlNotificationInfo" />
 
             
 
@@ -84,13 +78,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >There was a failure to create a notification subscription. Use the <see
-             cref="T:System.Data.SqlClient.SqlNotificationEventArgs" />
+            >There was a failure to create a notification subscription. Use the <see cref="T:System.Data.SqlClient.SqlNotificationEventArgs" />
 
             
 
-             object's <see
-             cref="T:System.Data.SqlClient.SqlNotificationInfo" />
+             object's <see cref="T:System.Data.SqlClient.SqlNotificationInfo" />
 
             
 

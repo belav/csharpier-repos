@@ -49,88 +49,74 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You cannot edit the XML tree by using the <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >You cannot edit the XML tree by using the <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
-             that is returned by this method. The <see
-             cref="P:System.Xml.XPath.XPathNavigator.CanEdit" />
+             that is returned by this method. The <see cref="P:System.Xml.XPath.XPathNavigator.CanEdit" />
 
             
 
              property returns false.</para
           >
           <para
-            >You cannot create an <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >You cannot create an <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
-             for a <see
-             cref="T:System.Xml.Linq.XDocumentType" />
+             for a <see cref="T:System.Xml.Linq.XDocumentType" />
 
             
 
              node. Document types do not participate in the XPath data model.</para
           >
           <para
-            >Namespace declarations are reported from left to right. In contrast, for <see
-             cref="T:System.Xml.XmlDocument" />
+            >Namespace declarations are reported from left to right. In contrast, for <see cref="T:System.Xml.XmlDocument" />
 
             
 
              namespaces are reported from right to left. This is conformant behavior because namespace declarations are not ordered in the XPath data model.</para
           >
           <para
-            >The method <see
-             cref="M:System.Xml.XPath.XPathNavigator.MoveToId(System.String)" />
+            >The method <see cref="M:System.Xml.XPath.XPathNavigator.MoveToId(System.String)" />
 
             
 
              is not supported for navigators that are returned by this method.</para
           >
           <para
-            >You can use this method to perform an XSLT transformation. You can create an XML tree, create an <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >You can use this method to perform an XSLT transformation. You can create an XML tree, create an <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
-             from the XML tree, create a new document, and create a <see
-             cref="T:System.Xml.XmlWriter" />
+             from the XML tree, create a new document, and create a <see cref="T:System.Xml.XmlWriter" />
 
             
 
-             that will write into the new document. Then, you can invoke the XSLT transformation, passing the <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+             that will write into the new document. Then, you can invoke the XSLT transformation, passing the <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
-             and <see
-             cref="T:System.Xml.XmlWriter" />
+             and <see cref="T:System.Xml.XmlWriter" />
 
             
 
              to the transform. After the transformation successfully completes, the new XML tree is populated with the results of the transformation.</para
           >
           <para
-            >To perform an XSLT transformation, you can use either an <see
-             cref="T:System.Xml.XmlReader" />
+            >To perform an XSLT transformation, you can use either an <see cref="T:System.Xml.XmlReader" />
 
             
 
-             or an <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+             or an <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
-            . The two approaches have different performance characteristics. Some transformations will execute faster when using an <see
-             cref="T:System.Xml.XmlReader" />
+            . The two approaches have different performance characteristics. Some transformations will execute faster when using an <see cref="T:System.Xml.XmlReader" />
 
             
 
-            , and others will execute faster when using a <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            , and others will execute faster when using a <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
@@ -140,13 +126,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >Creates an <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
-             for an <see
-             cref="T:System.Xml.Linq.XNode" />
+             for an <see cref="T:System.Xml.Linq.XNode" />
 
             
 
@@ -156,8 +140,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >An <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
@@ -165,12 +148,15 @@
           >
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Linq.XNode" />
+          An <see cref="T:System.Xml.Linq.XNode" />
 
           
 
@@ -202,55 +188,47 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You cannot edit the XML tree using the <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >You cannot edit the XML tree using the <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
-             that is returned by this method. The <see
-             cref="P:System.Xml.XPath.XPathNavigator.CanEdit" />
+             that is returned by this method. The <see cref="P:System.Xml.XPath.XPathNavigator.CanEdit" />
 
             
 
              property returns false.</para
           >
           <para
-            >You cannot create an <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >You cannot create an <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
-             for a <see
-             cref="T:System.Xml.Linq.XDocumentType" />
+             for a <see cref="T:System.Xml.Linq.XDocumentType" />
 
             
 
              node. Document types do not participate in the XPath data model.</para
           >
           <para
-            >Namespace declarations are reported from left to right. In contrast, for <see
-             cref="T:System.Xml.XmlDocument" />
+            >Namespace declarations are reported from left to right. In contrast, for <see cref="T:System.Xml.XmlDocument" />
 
             
 
              namespaces are reported from right to left. This is conformant behavior because namespace declarations are not ordered in the XPath data model.</para
           >
           <para
-            >The method <see
-             cref="M:System.Xml.XPath.XPathNavigator.MoveToId(System.String)" />
+            >The method <see cref="M:System.Xml.XPath.XPathNavigator.MoveToId(System.String)" />
 
             
 
              is not supported for navigators that are returned by this method.</para
           >
           <para
-            >If you use an <see
-             cref="T:System.Xml.XmlNameTable" />
+            >If you use an <see cref="T:System.Xml.XmlNameTable" />
 
             
 
-             with this method to create the <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+             with this method to create the <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
@@ -260,18 +238,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >Creates an <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
-             for an <see
-             cref="T:System.Xml.Linq.XNode" />
+             for an <see cref="T:System.Xml.Linq.XNode" />
 
             
 
-            . The <see
-             cref="T:System.Xml.XmlNameTable" />
+            . The <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -281,8 +256,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >An <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
@@ -290,29 +264,34 @@
           >
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Linq.XNode" />
+          An <see cref="T:System.Xml.Linq.XNode" />
 
           
 
            that can process an XPath query.</param
         >
         <param name="nameTable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.XmlNameTable" />
+          A <see cref="T:System.Xml.XmlNameTable" />
 
           
 
-           to be used by <see
-           cref="T:System.Xml.XPath.XPathNavigator" />
+           to be used by <see cref="T:System.Xml.XPath.XPathNavigator" />
 
           
 
@@ -344,13 +323,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the collection is an enumeration of elements or attributes, you can use the Cast operator to get a collection of <see
-             cref="T:System.Xml.Linq.XElement" />
+            >If the collection is an enumeration of elements or attributes, you can use the Cast operator to get a collection of <see cref="T:System.Xml.Linq.XElement" />
 
             
 
-             or <see
-             cref="T:System.Xml.Linq.XAttribute" />
+             or <see cref="T:System.Xml.Linq.XAttribute" />
 
             
 
@@ -366,8 +343,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that can contain a bool, a double, a string, or an <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An object that can contain a bool, a double, a string, or an <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
@@ -375,24 +351,30 @@
           >
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XNode" />
+          The <see cref="T:System.Xml.Linq.XNode" />
 
           
 
            on which to evaluate the XPath expression.</param
         >
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -431,8 +413,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Evaluates an XPath expression, resolving namespace prefixes using the specified <see
-             cref="T:System.Xml.IXmlNamespaceResolver" />
+            >Evaluates an XPath expression, resolving namespace prefixes using the specified <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
             
 
@@ -442,8 +423,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that contains the result of evaluating the expression. The object can be a bool, a double, a string, or an <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An object that contains the result of evaluating the expression. The object can be a bool, a double, a string, or an <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
@@ -451,36 +431,45 @@
           >
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XNode" />
+          The <see cref="T:System.Xml.Linq.XNode" />
 
           
 
            on which to evaluate the XPath expression.</param
         >
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            that contains an XPath expression.</param
         >
         <param name="resolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.IXmlNamespaceResolver" />
+          A <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
           
 
@@ -513,8 +502,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Selects an <see
-             cref="T:System.Xml.Linq.XElement" />
+            >Selects an <see cref="T:System.Xml.Linq.XElement" />
 
             
 
@@ -524,8 +512,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Linq.XElement" />
+            >An <see cref="T:System.Xml.Linq.XElement" />
 
             
 
@@ -533,24 +520,30 @@
           >
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XNode" />
+          The <see cref="T:System.Xml.Linq.XNode" />
 
           
 
            on which to evaluate the XPath expression.</param
         >
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -587,13 +580,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Selects an <see
-             cref="T:System.Xml.Linq.XElement" />
+            >Selects an <see cref="T:System.Xml.Linq.XElement" />
 
             
 
-             using a XPath expression, resolving namespace prefixes using the specified <see
-             cref="T:System.Xml.IXmlNamespaceResolver" />
+             using a XPath expression, resolving namespace prefixes using the specified <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
             
 
@@ -603,8 +594,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Linq.XElement" />
+            >An <see cref="T:System.Xml.Linq.XElement" />
 
             
 
@@ -612,36 +602,45 @@
           >
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XNode" />
+          The <see cref="T:System.Xml.Linq.XNode" />
 
           
 
            on which to evaluate the XPath expression.</param
         >
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            that contains an XPath expression.</param
         >
         <param name="resolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.IXmlNamespaceResolver" />
+          An <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
           
 
@@ -682,13 +681,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XElement" />
+             of <see cref="T:System.Xml.Linq.XElement" />
 
             
 
@@ -696,24 +693,30 @@
           >
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XNode" />
+          The <see cref="T:System.Xml.Linq.XNode" />
 
           
 
            on which to evaluate the XPath expression.</param
         >
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -752,8 +755,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Selects a collection of elements using an XPath expression, resolving namespace prefixes using the specified <see
-             cref="T:System.Xml.IXmlNamespaceResolver" />
+            >Selects a collection of elements using an XPath expression, resolving namespace prefixes using the specified <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
             
 
@@ -763,13 +765,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XElement" />
+             of <see cref="T:System.Xml.Linq.XElement" />
 
             
 
@@ -777,36 +777,45 @@
           >
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XNode" />
+          The <see cref="T:System.Xml.Linq.XNode" />
 
           
 
            on which to evaluate the XPath expression.</param
         >
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            that contains an XPath expression.</param
         >
         <param name="resolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.IXmlNamespaceResolver" />
+          A <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
           
 

@@ -31,51 +31,42 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.ComponentModel.CategoryAttribute" />
+        >A <see cref="T:System.ComponentModel.CategoryAttribute" />
 
         
 
-         indicates the category to associate the associated property or event with, when listing properties or events in a <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+         indicates the category to associate the associated property or event with, when listing properties or events in a <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
-         control set to <see
-         cref="F:System.Windows.Forms.PropertySort.Categorized" />
+         control set to <see cref="F:System.Windows.Forms.PropertySort.Categorized" />
 
         
 
-         mode. If a <see
-         cref="T:System.ComponentModel.CategoryAttribute" />
+         mode. If a <see cref="T:System.ComponentModel.CategoryAttribute" />
 
         
 
-         has not been applied to a property or event, the <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+         has not been applied to a property or event, the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
-         associates it with the <ui
-        >Misc</ui>
+         associates it with the <ui>Misc</ui>
 
         
 
-         category. A new category can be created for any name by specifying the name of the category in the constructor for the <see
-         cref="T:System.ComponentModel.CategoryAttribute" />
+         category. A new category can be created for any name by specifying the name of the category in the constructor for the <see cref="T:System.ComponentModel.CategoryAttribute" />
 
         
 
         .</para
       >
       <para
-        >The <see
-         cref="P:System.ComponentModel.CategoryAttribute.Category" />
+        >The <see cref="P:System.ComponentModel.CategoryAttribute.Category" />
 
         
 
-         property indicates the name of the category that the attribute represents. The <see
-         cref="P:System.ComponentModel.CategoryAttribute.Category" />
+         property indicates the name of the category that the attribute represents. The <see cref="P:System.ComponentModel.CategoryAttribute.Category" />
 
         
 
@@ -85,8 +76,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the name of the category in which to group the property or event when displayed in a <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+        >Specifies the name of the category in which to group the property or event when displayed in a <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
@@ -114,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.CategoryAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.CategoryAttribute" />
 
             
 
@@ -144,21 +133,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the name you provide for the <paramref
-             name="category" />
+            >If the name you provide for the <paramref name="category" />
 
             
 
-             parameter is one of the predefined category names, the name will be automatically localized by the <see
-             cref="P:System.ComponentModel.CategoryAttribute.Category" />
+             parameter is one of the predefined category names, the name will be automatically localized by the <see cref="P:System.ComponentModel.CategoryAttribute.Category" />
 
             
 
              property.</para
           >
           <para
-            >If the name you provide is not a predefined category name, and you do not override the <see
-             cref="M:System.ComponentModel.CategoryAttribute.GetLocalizedString(System.String)" />
+            >If the name you provide is not a predefined category name, and you do not override the <see cref="M:System.ComponentModel.CategoryAttribute.GetLocalizedString(System.String)" />
 
             
 
@@ -168,8 +154,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.CategoryAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.CategoryAttribute" />
 
             
 
@@ -177,7 +162,11 @@
           >
         </summary>
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -209,8 +198,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.ComponentModel.CategoryAttribute" />
+            >Gets a <see cref="T:System.ComponentModel.CategoryAttribute" />
 
             
 
@@ -243,8 +231,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.ComponentModel.CategoryAttribute" />
+            >Gets a <see cref="T:System.ComponentModel.CategoryAttribute" />
 
             
 
@@ -276,8 +263,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.ComponentModel.CategoryAttribute" />
+            >Gets a <see cref="T:System.ComponentModel.CategoryAttribute" />
 
             
 
@@ -310,8 +296,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.ComponentModel.CategoryAttribute" />
+            >Gets a <see cref="T:System.ComponentModel.CategoryAttribute" />
 
             
 
@@ -337,8 +322,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property calls <see
-             cref="M:System.ComponentModel.CategoryAttribute.GetLocalizedString(System.String)" />
+            >This property calls <see cref="M:System.ComponentModel.CategoryAttribute.GetLocalizedString(System.String)" />
 
             
 
@@ -375,8 +359,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.ComponentModel.CategoryAttribute" />
+            >Gets a <see cref="T:System.ComponentModel.CategoryAttribute" />
 
             
 
@@ -409,8 +392,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.ComponentModel.CategoryAttribute" />
+            >Gets a <see cref="T:System.ComponentModel.CategoryAttribute" />
 
             
 
@@ -443,8 +425,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.ComponentModel.CategoryAttribute" />
+            >Gets a <see cref="T:System.ComponentModel.CategoryAttribute" />
 
             
 
@@ -477,8 +458,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.ComponentModel.CategoryAttribute" />
+            >Gets a <see cref="T:System.ComponentModel.CategoryAttribute" />
 
             
 
@@ -510,8 +490,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns whether the value of the given object is equal to the current <see
-             cref="T:System.ComponentModel.CategoryAttribute" />
+            >Returns whether the value of the given object is equal to the current <see cref="T:System.ComponentModel.CategoryAttribute" />
 
             
 
@@ -523,7 +502,11 @@
           <para>true if the value of the given object is equal to that of the current; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -555,8 +538,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.ComponentModel.CategoryAttribute" />
+            >Gets a <see cref="T:System.ComponentModel.CategoryAttribute" />
 
             
 
@@ -589,8 +571,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.ComponentModel.CategoryAttribute" />
+            >Gets a <see cref="T:System.ComponentModel.CategoryAttribute" />
 
             
 
@@ -652,8 +633,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.CategoryAttribute.Category" />
+            >The <see cref="P:System.ComponentModel.CategoryAttribute.Category" />
 
             
 
@@ -669,7 +649,11 @@
           <para>The localized name of the category, or null if a localized name does not exist.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -729,8 +713,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.ComponentModel.CategoryAttribute" />
+            >Gets a <see cref="T:System.ComponentModel.CategoryAttribute" />
 
             
 
@@ -763,8 +746,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.ComponentModel.CategoryAttribute" />
+            >Gets a <see cref="T:System.ComponentModel.CategoryAttribute" />
 
             
 
@@ -797,8 +779,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.ComponentModel.CategoryAttribute" />
+            >Gets a <see cref="T:System.ComponentModel.CategoryAttribute" />
 
             
 
@@ -831,8 +812,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.ComponentModel.CategoryAttribute" />
+            >Gets a <see cref="T:System.ComponentModel.CategoryAttribute" />
 
             
 

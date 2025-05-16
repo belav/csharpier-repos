@@ -13,21 +13,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.HttpCookieMode" />
+        >The <see cref="T:System.Web.HttpCookieMode" />
 
         
 
          enumeration is used to specify the value of the cookieless attribute in the sessionState configuration section. It is used by all features that support cookieless authentication.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.HttpCookieMode" />
+        >The <see cref="T:System.Web.HttpCookieMode" />
 
         
 
-         enumeration values specify how a cookie should be used to maintain information about the user. When <see
-         cref="F:System.Web.HttpCookieMode.AutoDetect" />
+         enumeration values specify how a cookie should be used to maintain information about the user. When <see cref="F:System.Web.HttpCookieMode.AutoDetect" />
 
         
 
@@ -51,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >ASP.NET determines whether the requesting browser or device supports cookies. If the requesting browser or device supports cookies then <see
-             cref="F:System.Web.HttpCookieMode.AutoDetect" />
+            >ASP.NET determines whether the requesting browser or device supports cookies. If the requesting browser or device supports cookies then <see cref="F:System.Web.HttpCookieMode.AutoDetect" />
 
             
 
@@ -92,8 +88,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >ASP.NET determines whether to use cookies based on <see
-             cref="T:System.Web.HttpBrowserCapabilities" />
+            >ASP.NET determines whether to use cookies based on <see cref="T:System.Web.HttpBrowserCapabilities" />
 
             
 

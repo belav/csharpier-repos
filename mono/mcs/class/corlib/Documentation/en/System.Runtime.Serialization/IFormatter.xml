@@ -20,16 +20,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This interface must be implemented by any class identified as a formatter in the <see
-         cref="N:System.Runtime.Serialization" />
+        >This interface must be implemented by any class identified as a formatter in the <see cref="N:System.Runtime.Serialization" />
 
         
 
          architecture.</para
       >
       <para
-        >Objects controlling their own serialization can do so by implementing the <see
-         cref="T:System.Runtime.Serialization.ISerializable" />
+        >Objects controlling their own serialization can do so by implementing the <see cref="T:System.Runtime.Serialization.ISerializable" />
 
         
 
@@ -65,23 +63,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When trying to resolve a type from information encoded on the stream, the formatter calls the <see
-             cref="M:System.Runtime.Serialization.SerializationBinder.BindToType(System.String,System.String)" />
+            >When trying to resolve a type from information encoded on the stream, the formatter calls the <see cref="M:System.Runtime.Serialization.SerializationBinder.BindToType(System.String,System.String)" />
 
             
 
-             method on the <see
-             cref="T:System.Runtime.Serialization.SerializationBinder" />
+             method on the <see cref="T:System.Runtime.Serialization.SerializationBinder" />
 
             
 
-            . This method resolves these parameters to a <see
-             cref="T:System.Type" />
+            . This method resolves these parameters to a <see cref="T:System.Type" />
 
             
 
-             object. The binder can find a <see
-             cref="T:System.Type" />
+             object. The binder can find a <see cref="T:System.Type" />
 
             
 
@@ -92,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Runtime.Serialization.SerializationBinder" />
+            >Gets or sets the <see cref="T:System.Runtime.Serialization.SerializationBinder" />
 
             
 
@@ -125,28 +118,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this property is passed to any object implementing <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+            >The value of this property is passed to any object implementing <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
-             or <see
-             cref="T:System.Runtime.Serialization.ISerializationSurrogate" />
+             or <see cref="T:System.Runtime.Serialization.ISerializationSurrogate" />
 
             
 
-            . The <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+            . The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
-             indicates the destination (during serialization) or the source (during deserialization) of the data. An object implementing <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+             indicates the destination (during serialization) or the source (during deserialization) of the data. An object implementing <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
-             can alter the data that it transmits depending on value of the <see
-             cref="P:System.Runtime.Serialization.IFormatter.Context" />
+             can alter the data that it transmits depending on value of the <see cref="P:System.Runtime.Serialization.IFormatter.Context" />
 
             
 
@@ -156,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+            >Gets or sets the <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -191,16 +178,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.Serialization.IFormatter.Deserialize(System.IO.Stream)" />
+            >The <see cref="M:System.Runtime.Serialization.IFormatter.Deserialize(System.IO.Stream)" />
 
             
 
              method reads graph information from the stream and reconstructs a clone of the original graph. The topology of the graph is preserved.</para
           >
           <para
-            >The deserialization process allocates an empty object of the appropriate type and repopulates its fields from the data transmitted in the <paramref
-             name="serializationStream" />
+            >The deserialization process allocates an empty object of the appropriate type and repopulates its fields from the data transmitted in the <paramref name="serializationStream" />
 
             
 
@@ -216,7 +201,11 @@
           <para>The top object of the deserialized graph.</para>
         </returns>
         <param name="serializationStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -250,8 +239,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.Serialization.IFormatter.Serialize(System.IO.Stream,System.Object)" />
+            >The <see cref="M:System.Runtime.Serialization.IFormatter.Serialize(System.IO.Stream,System.Object)" />
 
             
 
@@ -264,14 +252,22 @@
           <para>Serializes an object, or graph of objects with the given root to the provided stream.</para>
         </summary>
         <param name="serializationStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream where the formatter puts the serialized data. This stream can reference a variety of backing stores (such as files, network, memory, and so on). </param
         >
         <param name="graph">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -302,13 +298,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Runtime.Serialization.ISerializationSurrogate" />
+            >A <see cref="T:System.Runtime.Serialization.ISerializationSurrogate" />
 
             
 
-             allows the user to specify an object best suited to handle the serialization of a particular object or class of objects. Think of it as an implementation of <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+             allows the user to specify an object best suited to handle the serialization of a particular object or class of objects. Think of it as an implementation of <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
@@ -318,8 +312,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Runtime.Serialization.SurrogateSelector" />
+            >Gets or sets the <see cref="T:System.Runtime.Serialization.SurrogateSelector" />
 
             
 

@@ -3,8 +3,7 @@
   <paragraph>When an instance method declaration includes a sealed modifier, that method is said to be a sealed method. A sealed method overrides an inherited virtual method with the same signature. An override method can also be marked with the sealed modifier. Use of this modifier prevents a derived class from further overriding the method. </paragraph>
   <paragraph>
     <example
-      >[Example: The example <code_example
-      >
+      >[Example: The example <code_example>
         <![CDATA[
 using System;  
 class A  

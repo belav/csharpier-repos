@@ -13,18 +13,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Setting the <see
-         cref="P:System.Data.DataSet.SchemaSerializationMode" />
+        >Setting the <see cref="P:System.Data.DataSet.SchemaSerializationMode" />
 
         
 
-         property of a typed <see
-         cref="T:System.Data.DataSet" />
+         property of a typed <see cref="T:System.Data.DataSet" />
 
         
 
-         to <see
-         cref="F:System.Data.SchemaSerializationMode.ExcludeSchema" />
+         to <see cref="F:System.Data.SchemaSerializationMode.ExcludeSchema" />
 
         
 
@@ -34,8 +31,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Indicates the schema serialization mode for a typed <see
-         cref="T:System.Data.DataSet" />
+        >Indicates the schema serialization mode for a typed <see cref="T:System.Data.DataSet" />
 
         
 
@@ -55,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Skips schema serialization for a typed <see
-             cref="T:System.Data.DataSet" />
+            >Skips schema serialization for a typed <see cref="T:System.Data.DataSet" />
 
             
 
@@ -79,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Includes schema serialization for a typed <see
-             cref="T:System.Data.DataSet" />
+            >Includes schema serialization for a typed <see cref="T:System.Data.DataSet" />
 
             
 

@@ -34,29 +34,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >While deserializing XML documents into .NET Framework objects, the .NET Framework XML serialization infrastructure dynamically instantiates fix-up methods that implement the <see
-         cref="T:System.Xml.Serialization.XmlSerializationFixupCallback" />
+        >While deserializing XML documents into .NET Framework objects, the .NET Framework XML serialization infrastructure dynamically instantiates fix-up methods that implement the <see cref="T:System.Xml.Serialization.XmlSerializationFixupCallback" />
 
         
 
          delegate. The infrastructure does so for SOAP-encoded arrays whose data types map to .NET Framework reference types. Then, as necessary, a fix-up method is called to fill in the objects in the array.</para
       >
       <para
-        >In addition, during initialization, the .NET Framework XML serialization infrastructure dynamically generates and compiles a temporary class for deserialization derived from the <see
-         cref="T:System.Xml.Serialization.XmlSerializationReader" />
+        >In addition, during initialization, the .NET Framework XML serialization infrastructure dynamically generates and compiles a temporary class for deserialization derived from the <see cref="T:System.Xml.Serialization.XmlSerializationReader" />
 
         
 
-         class. During this process, the infrastructure generates <see
-         cref="T:System.Xml.Serialization.XmlSerializationFixupCallback" />
+         class. During this process, the infrastructure generates <see cref="T:System.Xml.Serialization.XmlSerializationFixupCallback" />
 
         
 
          methods for SOAP-encoded, multi-referenced XML data. The methods are then invoked during deserialization.</para
       >
       <para
-        >Do not directly create an instance of the <see
-         cref="T:System.Xml.Serialization.XmlSerializationFixupCallback" />
+        >Do not directly create an instance of the <see cref="T:System.Xml.Serialization.XmlSerializationFixupCallback" />
 
         
 
@@ -67,8 +63,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Delegate used by the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >Delegate used by the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 

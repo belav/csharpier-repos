@@ -73,13 +73,11 @@
       <Parameters />
       <Docs>
         <summary
-          >Destroys a FontOptions object created with <see
-           cref="C:Cairo.FontOptions()" />
+          >Destroys a FontOptions object created with <see cref="C:Cairo.FontOptions()" />
 
           
 
-           or <see
-           cref="M:Cairo.FontOptions.Copy()" />
+           or <see cref="M:Cairo.FontOptions.Copy()" />
         </summary>
         <remarks></remarks>
       </Docs>
@@ -183,8 +181,7 @@
         <summary>The metrics hinting mode for the font options object.</summary>
         <value>the metrics hinting mode</value>
         <remarks
-          >This controls whether metrics are quantized to integer values in device units. See the documentation for <see
-           cref="T:Cairo.HintMetrics" />
+          >This controls whether metrics are quantized to integer values in device units. See the documentation for <see cref="T:Cairo.HintMetrics" />
 
           
 
@@ -206,8 +203,7 @@
         <summary>The hint style for font outlines for the font options object.</summary>
         <value>the hint style</value>
         <remarks
-          >This controls whether to fit font outlines to the pixel grid, and if so, whether to optimize for fidelity or contrast. See the documentation for <see
-           cref="T:Cairo.HintStyle" />
+          >This controls whether to fit font outlines to the pixel grid, and if so, whether to optimize for fidelity or contrast. See the documentation for <see cref="T:Cairo.HintStyle" />
 
           
 
@@ -231,8 +227,7 @@
       <Docs>
         <param name="other">another FontOptions</param>
         <summary
-          >Merges non-default options from <paramref
-           name="other" />
+          >Merges non-default options from <paramref name="other" />
 
           
 
@@ -324,8 +319,7 @@
         <summary>The subpixel order for the font options object.</summary>
         <value>the subpixel order</value>
         <remarks
-          >The subpixel order specifies the order of color elements within each pixel on the display device when rendering with an antialiasing mode of Cairo.Antialias.Subpixel. See the documentation for <see
-           cref="T:Cairo.SubpixelOrder" />
+          >The subpixel order specifies the order of color elements within each pixel on the display device when rendering with an antialiasing mode of Cairo.Antialias.Subpixel. See the documentation for <see cref="T:Cairo.SubpixelOrder" />
 
           
 

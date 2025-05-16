@@ -15,13 +15,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.CalendarSelectionMode" />
+        >The <see cref="T:System.Web.UI.WebControls.CalendarSelectionMode" />
 
         
 
-         enumeration represents the date selection modes of the <see
-         cref="T:System.Web.UI.WebControls.Calendar" />
+         enumeration represents the date selection modes of the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
         
 
@@ -31,8 +29,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the date selection mode of the <see
-         cref="T:System.Web.UI.WebControls.Calendar" />
+        >Specifies the date selection mode of the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
         
 
@@ -53,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A single date can be selected on the <see
-             cref="T:System.Web.UI.WebControls.Calendar" />
+            >A single date can be selected on the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
             
 
@@ -79,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A single date or entire week can be selected on the <see
-             cref="T:System.Web.UI.WebControls.Calendar" />
+            >A single date or entire week can be selected on the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
             
 
@@ -105,8 +100,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A single date, week, or entire month can be selected on the <see
-             cref="T:System.Web.UI.WebControls.Calendar" />
+            >A single date, week, or entire month can be selected on the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
             
 
@@ -131,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >No dates can be selected on the <see
-             cref="T:System.Web.UI.WebControls.Calendar" />
+            >No dates can be selected on the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
             
 

@@ -17,44 +17,37 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+        >The <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         control raises the <see
-         cref="E:System.Web.UI.WebControls.GridView.RowEditing" />
+         control raises the <see cref="E:System.Web.UI.WebControls.GridView.RowEditing" />
 
         
 
-         event when an Edit button (a button with its CommandName property set to "Edit") is clicked, but before the <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         event when an Edit button (a button with its CommandName property set to "Edit") is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
          control enters edit mode. This allows you to provide an event-handling method that performs a custom routine, such as canceling the edit operation, whenever this event occurs.</para
       >
       <para
-        >A <see
-         cref="T:System.Web.UI.WebControls.GridViewEditEventArgs" />
+        >A <see cref="T:System.Web.UI.WebControls.GridViewEditEventArgs" />
 
         
 
-         object is passed to the event-handling method, which allows you to determine the index of the row being edited and to indicate that the edit operation should be canceled. To cancel the edit operation, set the <see
-         cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+         object is passed to the event-handling method, which allows you to determine the index of the row being edited and to indicate that the edit operation should be canceled. To cancel the edit operation, set the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
         
 
-         property of the <see
-         cref="T:System.Web.UI.WebControls.GridViewEditEventArgs" />
+         property of the <see cref="T:System.Web.UI.WebControls.GridViewEditEventArgs" />
 
         
 
          object to true.</para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
 
@@ -63,13 +56,11 @@
         .</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.WebControls.GridViewEditEventArgs" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.GridViewEditEventArgs" />
 
         
 
-        , see the <see
-         cref="M:System.Web.UI.WebControls.GridViewEditEventArgs.#ctor(System.Int32)" />
+        , see the <see cref="M:System.Web.UI.WebControls.GridViewEditEventArgs.#ctor(System.Int32)" />
 
         
 
@@ -79,8 +70,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Web.UI.WebControls.GridView.RowEditing" />
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.GridView.RowEditing" />
 
         
 
@@ -101,16 +91,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.GridViewEditEventArgs" />
+            >Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.GridViewEditEventArgs" />
 
             
 
              class.</para
           >
           <para
-            >The following table shows the initial property value for an instance of <see
-             cref="T:System.Web.UI.WebControls.GridViewEditEventArgs" />
+            >The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.WebControls.GridViewEditEventArgs" />
 
             
 
@@ -135,8 +123,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="newEditIndex" />
+                  >The value of the <paramref name="newEditIndex" />
 
                   
 
@@ -152,8 +139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.GridViewEditEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.GridViewEditEventArgs" />
 
             
 
@@ -177,18 +163,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.GridViewEditEventArgs.NewEditIndex" />
+            >Use the <see cref="P:System.Web.UI.WebControls.GridViewEditEventArgs.NewEditIndex" />
 
             
 
-             property to determine the index of the row being edited. The row index is often used to retrieve this row from the <see
-             cref="P:System.Web.UI.WebControls.GridView.Rows" />
+             property to determine the index of the row being edited. The row index is often used to retrieve this row from the <see cref="P:System.Web.UI.WebControls.GridView.Rows" />
 
             
 
-             collection of the <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             collection of the <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 

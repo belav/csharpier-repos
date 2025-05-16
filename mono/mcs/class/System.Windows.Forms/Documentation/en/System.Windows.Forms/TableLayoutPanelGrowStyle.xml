@@ -13,18 +13,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >If all the cells in the <see
-         cref="T:System.Windows.Forms.TableLayoutPanel" />
+        >If all the cells in the <see cref="T:System.Windows.Forms.TableLayoutPanel" />
 
         
 
-         are filled and the <see
-         cref="P:System.Windows.Forms.TableLayoutPanel.GrowStyle" />
+         are filled and the <see cref="P:System.Windows.Forms.TableLayoutPanel.GrowStyle" />
 
         
 
-         property is set to <see
-         cref="F:System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize" />
+         property is set to <see cref="F:System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize" />
 
         
 
@@ -34,8 +31,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies how a <see
-         cref="T:System.Windows.Forms.TableLayoutPanel" />
+        >Specifies how a <see cref="T:System.Windows.Forms.TableLayoutPanel" />
 
         
 
@@ -55,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.TableLayoutPanel" />
+            >The <see cref="T:System.Windows.Forms.TableLayoutPanel" />
 
             
 
@@ -79,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.TableLayoutPanel" />
+            >The <see cref="T:System.Windows.Forms.TableLayoutPanel" />
 
             
 
@@ -103,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.TableLayoutPanel" />
+            >The <see cref="T:System.Windows.Forms.TableLayoutPanel" />
 
             
 

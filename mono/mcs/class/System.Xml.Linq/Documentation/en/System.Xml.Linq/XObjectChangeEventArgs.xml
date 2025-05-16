@@ -21,13 +21,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Xml.Linq.XObject.Changing" />
+        >Provides data for the <see cref="E:System.Xml.Linq.XObject.Changing" />
 
         
 
-         and <see
-         cref="E:System.Xml.Linq.XObject.Changed" />
+         and <see cref="E:System.Xml.Linq.XObject.Changed" />
 
         
 
@@ -56,23 +54,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The read-only fields <see
-             cref="F:System.Xml.Linq.XObjectChangeEventArgs.Add" />
+            >The read-only fields <see cref="F:System.Xml.Linq.XObjectChangeEventArgs.Add" />
 
             
 
-            , <see
-             cref="F:System.Xml.Linq.XObjectChangeEventArgs.Remove" />
+            , <see cref="F:System.Xml.Linq.XObjectChangeEventArgs.Remove" />
 
             
 
-            , <see
-             cref="F:System.Xml.Linq.XObjectChangeEventArgs.Name" />
+            , <see cref="F:System.Xml.Linq.XObjectChangeEventArgs.Name" />
 
             
 
-            , and <see
-             cref="F:System.Xml.Linq.XObjectChangeEventArgs.Value" />
+            , and <see cref="F:System.Xml.Linq.XObjectChangeEventArgs.Value" />
 
             
 
@@ -82,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Linq.XObjectChangeEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XObjectChangeEventArgs" />
 
             
 
@@ -91,12 +84,15 @@
           >
         </summary>
         <param name="objectChange">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Linq.XObjectChange" />
+          An <see cref="T:System.Xml.Linq.XObjectChange" />
 
           
 
@@ -124,8 +120,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When sqltecxlinq raises an <see
-             cref="F:System.Xml.Linq.XObjectChange.Add" />
+            >When sqltecxlinq raises an <see cref="F:System.Xml.Linq.XObjectChange.Add" />
 
             
 
@@ -135,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Event argument for an <see
-             cref="F:System.Xml.Linq.XObjectChange.Add" />
+            >Event argument for an <see cref="F:System.Xml.Linq.XObjectChange.Add" />
 
             
 
@@ -165,8 +159,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When sqltecxlinq raises an <see
-             cref="F:System.Xml.Linq.XObjectChange.Name" />
+            >When sqltecxlinq raises an <see cref="F:System.Xml.Linq.XObjectChange.Name" />
 
             
 
@@ -176,8 +169,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Event argument for a <see
-             cref="F:System.Xml.Linq.XObjectChange.Name" />
+            >Event argument for a <see cref="F:System.Xml.Linq.XObjectChange.Name" />
 
             
 
@@ -231,8 +223,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When sqltecxlinq raises an <see
-             cref="F:System.Xml.Linq.XObjectChange.Remove" />
+            >When sqltecxlinq raises an <see cref="F:System.Xml.Linq.XObjectChange.Remove" />
 
             
 
@@ -242,8 +233,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Event argument for a <see
-             cref="F:System.Xml.Linq.XObjectChange.Remove" />
+            >Event argument for a <see cref="F:System.Xml.Linq.XObjectChange.Remove" />
 
             
 
@@ -272,8 +262,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When sqltecxlinq raises an <see
-             cref="F:System.Xml.Linq.XObjectChange.Value" />
+            >When sqltecxlinq raises an <see cref="F:System.Xml.Linq.XObjectChange.Value" />
 
             
 
@@ -283,8 +272,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Event argument for a <see
-             cref="F:System.Xml.Linq.XObjectChange.Value" />
+            >Event argument for a <see cref="F:System.Xml.Linq.XObjectChange.Value" />
 
             
 

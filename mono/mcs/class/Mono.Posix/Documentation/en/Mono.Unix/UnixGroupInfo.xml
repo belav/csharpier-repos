@@ -18,23 +18,19 @@
   <Docs>
     <summary>Provides information about a Unix group.</summary>
     <remarks>
-      <para
-        >
-        The <see
-         cref="T:Mono.Unix.UnixGroupInfo" />
+      <para>
+        The <see cref="T:Mono.Unix.UnixGroupInfo" />
 
         
 
          type is a FxDG-compliant
-        wrapper over the <see
-         cref="T:Mono.Unix.Native.Group" />
+        wrapper over the <see cref="T:Mono.Unix.Native.Group" />
 
         
 
          native type.
         It represents a single entry from the local group database, typically
-        <c
-        >/etc/group</c>
+        <c>/etc/group</c>
 
         
 
@@ -44,24 +40,20 @@
       <para>
         Unix Groups are part of the file system access rules.  
       </para>
-      <para
-        >
+      <para>
         Access to file system objects 
-        (as represented by <see
-         cref="T:Mono.Unix.UnixFileSystemInfo" />
+        (as represented by <see cref="T:Mono.Unix.UnixFileSystemInfo" />
 
         
 
         )
         is controlled by the file system access permissions, 
-        <see
-         cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
 
         
 
         .
-        <see
-         cref="T:Mono.Unix.FileAccessPermissions" />
+        <see cref="T:Mono.Unix.FileAccessPermissions" />
 
         
 
@@ -70,21 +62,16 @@
         everyone else (other).
       </para
       >
-      <para
-        >
+      <para>
         Access by the file's owner group is controlled by the bits
-        specified by <c
-
-          >
-        (<see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
+        specified by <c>
+        (<see cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
 
           
 
           
         &amp; 
-        <see
-           cref="F:Mono.Unix.FileAccessPermissions.GroupReadWriteExecute" />
+        <see cref="F:Mono.Unix.FileAccessPermissions.GroupReadWriteExecute" />
 
           
 
@@ -117,10 +104,8 @@
         <Parameter Name="group" Type="Mono.Unix.Native.Group" />
       </Parameters>
       <Docs>
-        <param name="group"
-          >
-          A <see
-           cref="T:Mono.Unix.Native.Group" />
+        <param name="group">
+          A <see cref="T:Mono.Unix.Native.Group" />
 
           
 
@@ -128,34 +113,28 @@
           group to get information about.
         </param
         >
-        <summary
-          >
+        <summary>
           Constructs and initializes a new instance of 
-          <see
-           cref="T:Mono.Unix.UnixGroupInfo" />
+          <see cref="T:Mono.Unix.UnixGroupInfo" />
 
           
 
            by using the specified 
-          <see
-           cref="T:Mono.Unix.Native.Group" />
+          <see cref="T:Mono.Unix.Native.Group" />
 
           
 
            entry.
         </summary
         >
-        <remarks
-          >
-          This constructor wraps <paramref
-           name="group" />
+        <remarks>
+          This constructor wraps <paramref name="group" />
 
           
 
           ,
           providing framework-compliant naming conventions over the native 
-          <see
-           cref="T:Mono.Unix.Native.Group" />
+          <see cref="T:Mono.Unix.Native.Group" />
 
           
 
@@ -180,10 +159,8 @@
         <Parameter Name="group" Type="System.Int64" />
       </Parameters>
       <Docs>
-        <param name="group"
-          >
-          A <see
-           cref="T:System.Int64" />
+        <param name="group">
+          A <see cref="T:System.Int64" />
 
           
 
@@ -191,11 +168,9 @@
           information about.
         </param
         >
-        <summary
-          >
+        <summary>
           Constructs and initializes a new instance of 
-          <see
-           cref="T:Mono.Unix.UnixGroupInfo" />
+          <see cref="T:Mono.Unix.UnixGroupInfo" />
 
           
 
@@ -207,10 +182,8 @@
           This constructor looks up the specified group id in the local
           group database.
         </remarks>
-        <exception cref="T:System.ArgumentException"
-          >
-          The group id <paramref
-           name="group" />
+        <exception cref="T:System.ArgumentException">
+          The group id <paramref name="group" />
 
           
 
@@ -237,10 +210,8 @@
         <Parameter Name="group" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="group"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="group">
+          A <see cref="T:System.String" />
 
           
 
@@ -248,11 +219,9 @@
           information about.
         </param
         >
-        <summary
-          >
+        <summary>
           Constructs and initializes a new instance of 
-          <see
-           cref="T:Mono.Unix.UnixGroupInfo" />
+          <see cref="T:Mono.Unix.UnixGroupInfo" />
 
           
 
@@ -264,10 +233,8 @@
           This constructor looks up the specified group name in the local
           group database.
         </remarks>
-        <exception cref="T:System.ArgumentException"
-          >
-          The group name <paramref
-           name="group" />
+        <exception cref="T:System.ArgumentException">
+          The group name <paramref name="group" />
 
           
 
@@ -346,10 +313,8 @@
       <Parameters />
       <Docs>
         <summary>Gets all groups listed in the local group database.</summary>
-        <returns
-          >
-          A <see
-           cref="T:Mono.Unix.UnixGroupInfo" />
+        <returns>
+          A <see cref="T:Mono.Unix.UnixGroupInfo" />
 
           
 
@@ -361,8 +326,7 @@
         <exception cref="T:System.IO.IOException">
           <para
             >An I/O error occurred.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+          [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -373,8 +337,7 @@
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many file descriptors in use by the process.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EMFILE" />
+          [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />
 
             
 
@@ -384,8 +347,7 @@
           <para>-or-</para>
           <para
             >Too many files are currently open in the system.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ENFILE" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />
 
             
 
@@ -396,8 +358,7 @@
           <para
             >Insufficient memory to allocate the group information
           structure.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ENOMEM" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />
 
             
 
@@ -427,10 +388,8 @@
         <summary>
           Gets the names of all group members.
         </summary>
-        <returns
-          >
-          A <see
-           cref="T:System.String" />
+        <returns>
+          A <see cref="T:System.String" />
 
           
 
@@ -439,12 +398,10 @@
         </returns
         >
         <remarks>
-          <block subset="none" type="note"
-            >
+          <block subset="none" type="note">
             There is no guarantee that the group member names returned are
             valid users on the system, i.e. that 
-            <c
-            >GetMemberNames().Select(m =&gt; new UnixUserInfo(m)).ToArray()</c>
+            <c>GetMemberNames().Select(m =&gt; new UnixUserInfo(m)).ToArray()</c>
 
             
 
@@ -474,10 +431,8 @@
       <Parameters />
       <Docs>
         <summary>Get information about all the group members.</summary>
-        <returns
-          >
-          A <see
-           cref="T:Mono.Unix.UnixUserInfo" />
+        <returns>
+          A <see cref="T:Mono.Unix.UnixUserInfo" />
 
           
 
@@ -485,17 +440,14 @@
           information about all the group members.
         </returns
         >
-        <remarks
-          >
+        <remarks>
           This is equivalent to creating a 
-          <see
-           cref="T:Mono.Unix.UnixUserInfo" />
+          <see cref="T:Mono.Unix.UnixUserInfo" />
 
           
 
            instance over each name
-          returned by <see
-           cref="M:Mono.Unix.UnixGroupInfo.GetMemberNames" />
+          returned by <see cref="M:Mono.Unix.UnixGroupInfo.GetMemberNames" />
 
           
 
@@ -520,10 +472,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the group id.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.Int64" />
+        <value>
+          A <see cref="T:System.Int64" />
 
           
 
@@ -548,10 +498,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the group name.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.String" />
+        <value>
+          A <see cref="T:System.String" />
 
           
 
@@ -576,10 +524,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the group password.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.String" />
+        <value>
+          A <see cref="T:System.String" />
 
           
 
@@ -609,26 +555,21 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary
-          >
-          Converts this <see
-           cref="T:Mono.Unix.UnixGroupInfo" />
+        <summary>
+          Converts this <see cref="T:Mono.Unix.UnixGroupInfo" />
 
           
 
            instance into
-          an equivalent <see
-           cref="T:Mono.Unix.Native.Group" />
+          an equivalent <see cref="T:Mono.Unix.Native.Group" />
 
           
 
            instance.
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:Mono.Unix.Native.Group" />
+        <returns>
+          A <see cref="T:Mono.Unix.Native.Group" />
 
           
 

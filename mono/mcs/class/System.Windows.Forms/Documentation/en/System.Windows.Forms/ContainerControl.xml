@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Windows.Forms.ContainerControl" />
+        >A <see cref="T:System.Windows.Forms.ContainerControl" />
 
         
 
@@ -39,28 +38,23 @@
         <para>The container control does not receive focus; the focus is always set to the first child control in the collection of contained controls.</para>
       </block>
       <para
-        >You do not typically inherit directly from the <see
-         cref="T:System.Windows.Forms.ContainerControl" />
+        >You do not typically inherit directly from the <see cref="T:System.Windows.Forms.ContainerControl" />
 
         
 
-         class. <see
-         cref="T:System.Windows.Forms.Form" />
+         class. <see cref="T:System.Windows.Forms.Form" />
 
         
 
-        , <see
-         cref="T:System.Windows.Forms.UserControl" />
+        , <see cref="T:System.Windows.Forms.UserControl" />
 
         
 
-        , and <see
-         cref="T:System.Windows.Forms.UpDownBase" />
+        , and <see cref="T:System.Windows.Forms.UpDownBase" />
 
         
 
-         classes inherit from <see
-         cref="T:System.Windows.Forms.ContainerControl" />
+         classes inherit from <see cref="T:System.Windows.Forms.ContainerControl" />
 
         
 
@@ -82,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ContainerControl" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ContainerControl" />
 
             
 
@@ -118,16 +111,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ContainerControl.ActiveControl" />
+            >The <see cref="P:System.Windows.Forms.ContainerControl.ActiveControl" />
 
             
 
              property activates or retrieves the active control on the container control.</para
           >
           <para
-            >In order to receive a valid value from this property, the object that calls it must either contain or be contained in the control it is calling. If one form tries to call another form's <see
-             cref="P:System.Windows.Forms.ContainerControl.ActiveControl" />
+            >In order to receive a valid value from this property, the object that calls it must either contain or be contained in the control it is calling. If one form tries to call another form's <see cref="P:System.Windows.Forms.ContainerControl.ActiveControl" />
 
             
 
@@ -186,36 +177,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ContainerControl.AutoScaleDimensions" />
+            >The <see cref="P:System.Windows.Forms.ContainerControl.AutoScaleDimensions" />
 
             
 
-             property represents the DPI or font setting of the screen that the control was scaled to or designed for. Specifically, at design time this property will be set by the Windows Forms designer to the value your monitor is currently using. Then, when the form loads at run time, if the <see
-             cref="P:System.Windows.Forms.ContainerControl.CurrentAutoScaleDimensions" />
+             property represents the DPI or font setting of the screen that the control was scaled to or designed for. Specifically, at design time this property will be set by the Windows Forms designer to the value your monitor is currently using. Then, when the form loads at run time, if the <see cref="P:System.Windows.Forms.ContainerControl.CurrentAutoScaleDimensions" />
 
             
 
-             property is different from the <see
-             cref="P:System.Windows.Forms.ContainerControl.AutoScaleDimensions" />
+             property is different from the <see cref="P:System.Windows.Forms.ContainerControl.AutoScaleDimensions" />
 
             
 
-            , the <see
-             cref="M:System.Windows.Forms.ContainerControl.PerformAutoScale" />
+            , the <see cref="M:System.Windows.Forms.ContainerControl.PerformAutoScale" />
 
             
 
-             method will be called to perform scaling of the control and all of its children. Afterwards, <see
-             cref="P:System.Windows.Forms.ContainerControl.AutoScaleDimensions" />
+             method will be called to perform scaling of the control and all of its children. Afterwards, <see cref="P:System.Windows.Forms.ContainerControl.AutoScaleDimensions" />
 
             
 
              will be updated to reflect the new scaling size.</para
           >
           <para
-            >For more information about automatic scaling, see <format
-             type="text/html">
+            >For more information about automatic scaling, see <format type="text/html">
               <a href="68fad25b-afbc-44bd-8e1b-966fc43507a4">Automatic Scaling in Windows Forms</a>
             </format>
 
@@ -262,41 +247,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ContainerControl.AutoScaleFactor" />
+            >The <see cref="P:System.Windows.Forms.ContainerControl.AutoScaleFactor" />
 
             
 
-             property represents the scaling factor between the <see
-             cref="P:System.Windows.Forms.ContainerControl.CurrentAutoScaleDimensions" />
+             property represents the scaling factor between the <see cref="P:System.Windows.Forms.ContainerControl.CurrentAutoScaleDimensions" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.ContainerControl.AutoScaleDimensions" />
+             and <see cref="P:System.Windows.Forms.ContainerControl.AutoScaleDimensions" />
 
             
 
-             properties. This value is calculated when it is required. For example, if <see
-             cref="P:System.Windows.Forms.ContainerControl.CurrentAutoScaleDimensions" />
+             properties. This value is calculated when it is required. For example, if <see cref="P:System.Windows.Forms.ContainerControl.CurrentAutoScaleDimensions" />
 
             
 
-             is (192, 144) and <see
-             cref="P:System.Windows.Forms.ContainerControl.AutoScaleDimensions" />
+             is (192, 144) and <see cref="P:System.Windows.Forms.ContainerControl.AutoScaleDimensions" />
 
             
 
-             is (96, 96) then the <see
-             cref="P:System.Windows.Forms.ContainerControl.AutoScaleFactor" />
+             is (96, 96) then the <see cref="P:System.Windows.Forms.ContainerControl.AutoScaleFactor" />
 
             
 
              is (2.0, 1.5).</para
           >
           <para
-            >For more information about automatic scaling, see <format
-             type="text/html">
+            >For more information about automatic scaling, see <format type="text/html">
               <a href="68fad25b-afbc-44bd-8e1b-966fc43507a4">Automatic Scaling in Windows Forms</a>
             </format>
 
@@ -340,26 +318,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ContainerControl.AutoScaleMode" />
+            >The <see cref="P:System.Windows.Forms.ContainerControl.AutoScaleMode" />
 
             
 
-             property specifies the current automatic scaling mode of this control. Scaling by <see
-             cref="F:System.Windows.Forms.AutoScaleMode.Font" />
+             property specifies the current automatic scaling mode of this control. Scaling by <see cref="F:System.Windows.Forms.AutoScaleMode.Font" />
 
             
 
-             is useful if you want to have a control or form stretch or shrink according to the size of the fonts in the operating system, and should be used when the absolute size of the control or form does not matter. Scaling by <see
-             cref="F:System.Windows.Forms.AutoScaleMode.Dpi" />
+             is useful if you want to have a control or form stretch or shrink according to the size of the fonts in the operating system, and should be used when the absolute size of the control or form does not matter. Scaling by <see cref="F:System.Windows.Forms.AutoScaleMode.Dpi" />
 
             
 
              is useful when you want to size a control or form relative to the screen. For example, you may want to use dots per inch (DPI) scaling on a control displaying a chart or other graphic so that it always occupies a certain percentage of the screen. </para
           >
           <para
-            >For more information about automatic scaling, see <format
-             type="text/html">
+            >For more information about automatic scaling, see <format type="text/html">
               <a href="68fad25b-afbc-44bd-8e1b-966fc43507a4">Automatic Scaling in Windows Forms</a>
             </format>
 
@@ -405,13 +379,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value for <see
-             cref="P:System.Windows.Forms.ContainerControl.AutoValidate" />
+            >The default value for <see cref="P:System.Windows.Forms.ContainerControl.AutoValidate" />
 
             
 
-             will differ for each control. For more details on implicit validation, see <format
-             type="text/html">
+             will differ for each control. For more details on implicit validation, see <format type="text/html">
               <a href="4ec07681-1dee-4bf9-be5e-718f635a33a1"
                 >User Input Validation in Windows Forms (Windows Forms)</a
               >
@@ -422,8 +394,7 @@
             .</para
           >
           <para
-            >Setting this property to a new value will raise the <see
-             cref="E:System.Windows.Forms.ContainerControl.AutoValidateChanged" />
+            >Setting this property to a new value will raise the <see cref="E:System.Windows.Forms.ContainerControl.AutoValidateChanged" />
 
             
 
@@ -457,8 +428,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -470,8 +440,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.ContainerControl.AutoValidate" />
+            >Occurs when the <see cref="P:System.Windows.Forms.ContainerControl.AutoValidate" />
 
             
 
@@ -519,8 +488,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>In the dnprdnlong and later, IME functionality is handled by the framework and native IME support for individual controls is disabled. </para>
           <para
-            >A user control that derives from the <see
-             cref="T:System.Windows.Forms.ContainerControl" />
+            >A user control that derives from the <see cref="T:System.Windows.Forms.ContainerControl" />
 
             
 
@@ -530,8 +498,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="P:System.Windows.Forms.Control.ImeMode" />
+            >Gets a value indicating whether the <see cref="P:System.Windows.Forms.Control.ImeMode" />
 
             
 
@@ -585,26 +552,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ContainerControl.CurrentAutoScaleDimensions" />
+            >The <see cref="P:System.Windows.Forms.ContainerControl.CurrentAutoScaleDimensions" />
 
             
 
-             property represents the reference dimensions on the current screen. In contrast, the <see
-             cref="P:System.Windows.Forms.ContainerControl.AutoScaleDimensions" />
+             property represents the reference dimensions on the current screen. In contrast, the <see cref="P:System.Windows.Forms.ContainerControl.AutoScaleDimensions" />
 
             
 
-             property represents the design-time reference dimensions of the design environment for the current control, while the <see
-             cref="P:System.Windows.Forms.ContainerControl.AutoScaleFactor" />
+             property represents the design-time reference dimensions of the design environment for the current control, while the <see cref="P:System.Windows.Forms.ContainerControl.AutoScaleFactor" />
 
             
 
              property is the ratio of the two.</para
           >
           <para
-            >The interpretation of the dimension value depends on the <see
-             cref="P:System.Windows.Forms.ContainerControl.AutoScaleMode" />
+            >The interpretation of the dimension value depends on the <see cref="P:System.Windows.Forms.ContainerControl.AutoScaleMode" />
 
             
 
@@ -613,8 +576,7 @@
           <list type="bullet">
             <item>
               <para
-                >If the mode is <see
-                 cref="F:System.Windows.Forms.AutoScaleMode.Dpi" />
+                >If the mode is <see cref="F:System.Windows.Forms.AutoScaleMode.Dpi" />
 
                 
 
@@ -623,8 +585,7 @@
             </item>
             <item>
               <para
-                >If the mode is <see
-                 cref="F:System.Windows.Forms.AutoScaleMode.Font" />
+                >If the mode is <see cref="F:System.Windows.Forms.AutoScaleMode.Font" />
 
                 
 
@@ -633,31 +594,26 @@
             </item>
           </list>
           <para
-            >If the <see
-             cref="P:System.Windows.Forms.ContainerControl.AutoScaleMode" />
+            >If the <see cref="P:System.Windows.Forms.ContainerControl.AutoScaleMode" />
 
             
 
-             property is set to <see
-             cref="F:System.Windows.Forms.AutoScaleMode.None" />
+             property is set to <see cref="F:System.Windows.Forms.AutoScaleMode.None" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ContainerControl.CurrentAutoScaleDimensions" />
+            , <see cref="P:System.Windows.Forms.ContainerControl.CurrentAutoScaleDimensions" />
 
             
 
-             is set equal to <see
-             cref="P:System.Windows.Forms.ContainerControl.AutoScaleDimensions" />
+             is set equal to <see cref="P:System.Windows.Forms.ContainerControl.AutoScaleDimensions" />
 
             
 
             .</para
           >
           <para
-            >For more information about automatic scaling, see <format
-             type="text/html">
+            >For more information about automatic scaling, see <format type="text/html">
               <a href="68fad25b-afbc-44bd-8e1b-966fc43507a4">Automatic Scaling in Windows Forms</a>
             </format>
 
@@ -713,8 +669,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -723,8 +678,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ContainerControl.OnAutoValidateChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ContainerControl.OnAutoValidateChanged(System.EventArgs)" />
 
             
 
@@ -734,8 +688,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ContainerControl.AutoValidateChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.ContainerControl.AutoValidateChanged" />
 
             
 
@@ -743,12 +696,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -786,26 +742,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Changing the font used by a <see
-             cref="T:System.Windows.Forms.ContainerControl" />
+            >Changing the font used by a <see cref="T:System.Windows.Forms.ContainerControl" />
 
             
 
-             will cause the layout to be recalculated and reapplied to the contained controls if the <see
-             cref="P:System.Windows.Forms.ContainerControl.AutoScaleMode" />
+             will cause the layout to be recalculated and reapplied to the contained controls if the <see cref="P:System.Windows.Forms.ContainerControl.AutoScaleMode" />
 
             
 
-             property has a value of <see
-             cref="F:System.Windows.Forms.AutoScaleMode.Font" />
+             property has a value of <see cref="F:System.Windows.Forms.AutoScaleMode.Font" />
 
             
 
             .</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -814,8 +766,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ContainerControl.OnFontChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ContainerControl.OnFontChanged(System.EventArgs)" />
 
             
 
@@ -825,8 +776,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.FontChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.FontChanged" />
 
             
 
@@ -834,12 +784,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -875,8 +828,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Layout" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Layout" />
 
             
 
@@ -884,12 +836,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.LayoutEventArgs" />
+          A <see cref="T:System.Windows.Forms.LayoutEventArgs" />
 
           
 
@@ -960,18 +915,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An explicit call to the <see
-             cref="M:System.Windows.Forms.ContainerControl.PerformAutoScale" />
+            >An explicit call to the <see cref="M:System.Windows.Forms.ContainerControl.PerformAutoScale" />
 
             
 
-             method is typically only required after programmatic changes to the layout during run time. <see
-             cref="M:System.Windows.Forms.ContainerControl.PerformAutoScale" />
+             method is typically only required after programmatic changes to the layout during run time. <see cref="M:System.Windows.Forms.ContainerControl.PerformAutoScale" />
 
             
 
-             is implicitly called from the <see
-             cref="M:System.Windows.Forms.ContainerControl.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
+             is implicitly called from the <see cref="M:System.Windows.Forms.ContainerControl.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
 
             
 
@@ -985,8 +937,7 @@
              is recursive; each child control, if it is a container, will have its version of this method called when the container's version executes. </para
           >
           <para
-            >For more information about automatic scaling, see <format
-             type="text/html">
+            >For more information about automatic scaling, see <format type="text/html">
               <a href="68fad25b-afbc-44bd-8e1b-966fc43507a4">Automatic Scaling in Windows Forms</a>
             </format>
 
@@ -1112,8 +1063,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A control with its <see
-             cref="P:System.Windows.Forms.Control.TabStop" />
+            >A control with its <see cref="P:System.Windows.Forms.Control.TabStop" />
 
             
 
@@ -1129,12 +1079,15 @@
           <para>true if a control is selected; otherwise, false.</para>
         </returns>
         <param name="forward">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to cycle forward through the controls in the <see
-           cref="T:System.Windows.Forms.ContainerControl" />
+          true to cycle forward through the controls in the <see cref="T:System.Windows.Forms.ContainerControl" />
 
           
 
@@ -1190,8 +1143,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="control" />
+            >The <paramref name="control" />
 
             
 
@@ -1207,12 +1159,15 @@
           <para>true if the control is successfully activated; otherwise, false.</para>
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Control" />
+          The <see cref="T:System.Windows.Forms.Control" />
 
           
 
@@ -1231,18 +1186,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ContainerControl" />
+            >The <see cref="T:System.Windows.Forms.ContainerControl" />
 
             
 
-             class does not provide an implementation for the <see
-             cref="M:System.Windows.Forms.ContainerControl.UpdateDefaultButton" />
+             class does not provide an implementation for the <see cref="M:System.Windows.Forms.ContainerControl.UpdateDefaultButton" />
 
             
 
-             method. Classes that inherit this method must implement <see
-             cref="M:System.Windows.Forms.ContainerControl.UpdateDefaultButton" />
+             method. Classes that inherit this method must implement <see cref="M:System.Windows.Forms.ContainerControl.UpdateDefaultButton" />
 
             
 
@@ -1270,13 +1222,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="Overload:System.Windows.Forms.ContainerControl.Validate" />
+            >The <see cref="Overload:System.Windows.Forms.ContainerControl.Validate" />
 
             
 
-             method validates the last child control that is not validated and its ancestors up through, but not including, the current container control. This overloaded version always performs validation, regardless of the value of the <see
-             cref="P:System.Windows.Forms.ContainerControl.AutoValidate" />
+             method validates the last child control that is not validated and its ancestors up through, but not including, the current container control. This overloaded version always performs validation, regardless of the value of the <see cref="P:System.Windows.Forms.ContainerControl.AutoValidate" />
 
             
 
@@ -1286,13 +1236,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Verifies the value of the control losing focus by causing the <see
-             cref="E:System.Windows.Forms.Control.Validating" />
+            >Verifies the value of the control losing focus by causing the <see cref="E:System.Windows.Forms.Control.Validating" />
 
             
 
-             and <see
-             cref="E:System.Windows.Forms.Control.Validated" />
+             and <see cref="E:System.Windows.Forms.Control.Validated" />
 
             
 
@@ -1302,13 +1250,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if validation is successful; otherwise, false. If called from the <see
-             cref="E:System.Windows.Forms.Control.Validating" />
+            >true if validation is successful; otherwise, false. If called from the <see cref="E:System.Windows.Forms.Control.Validating" />
 
             
 
-             or <see
-             cref="E:System.Windows.Forms.Control.Validated" />
+             or <see cref="E:System.Windows.Forms.Control.Validated" />
 
             
 
@@ -1337,8 +1283,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="Overload:System.Windows.Forms.ContainerControl.Validate" />
+            >The <see cref="Overload:System.Windows.Forms.ContainerControl.Validate" />
 
             
 
@@ -1347,8 +1292,7 @@
           <list type="bullet">
             <item>
               <para
-                >If the <paramref
-                 name="checkAutoValidate" />
+                >If the <paramref name="checkAutoValidate" />
 
                 
 
@@ -1357,13 +1301,11 @@
             </item>
             <item>
               <para
-                >If the <paramref
-                 name="checkAutoValidate" />
+                >If the <paramref name="checkAutoValidate" />
 
                 
 
-                 parameter is false, validation occurs only if the <see
-                 cref="P:System.Windows.Forms.ContainerControl.AutoValidate" />
+                 parameter is false, validation occurs only if the <see cref="P:System.Windows.Forms.ContainerControl.AutoValidate" />
 
                 
 
@@ -1379,13 +1321,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if validation is successful; otherwise, false. If called from the <see
-             cref="E:System.Windows.Forms.Control.Validating" />
+            >true if validation is successful; otherwise, false. If called from the <see cref="E:System.Windows.Forms.Control.Validating" />
 
             
 
-             or <see
-             cref="E:System.Windows.Forms.Control.Validated" />
+             or <see cref="E:System.Windows.Forms.Control.Validated" />
 
             
 
@@ -1393,12 +1333,15 @@
           >
         </returns>
         <param name="checkAutoValidate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          If true, the value of the <see
-           cref="P:System.Windows.Forms.ContainerControl.AutoValidate" />
+          If true, the value of the <see cref="P:System.Windows.Forms.ContainerControl.AutoValidate" />
 
           
 
@@ -1432,54 +1375,45 @@
 
             
 
-             will descend a control's hierarchy and examine each control to see if it supports validation. If the control can be selected by the user and its <see
-             cref="P:System.Windows.Forms.Control.CausesValidation" />
+             will descend a control's hierarchy and examine each control to see if it supports validation. If the control can be selected by the user and its <see cref="P:System.Windows.Forms.Control.CausesValidation" />
 
             
 
-             property is true, <see
-             cref="M:System.Windows.Forms.ContainerControl.ValidateChildren" />
+             property is true, <see cref="M:System.Windows.Forms.ContainerControl.ValidateChildren" />
 
             
 
-             will cause the <see
-             cref="E:System.Windows.Forms.Control.Validating" />
+             will cause the <see cref="E:System.Windows.Forms.Control.Validating" />
 
             
 
-             event to occur. If any of the controls cancel the <see
-             cref="E:System.Windows.Forms.Control.Validating" />
+             event to occur. If any of the controls cancel the <see cref="E:System.Windows.Forms.Control.Validating" />
 
             
 
              event, this method will return false; otherwise, it will return true.</para
           >
           <para
-            >If a control is bound to a data source, and the <see
-             cref="E:System.Windows.Forms.Control.Validating" />
+            >If a control is bound to a data source, and the <see cref="E:System.Windows.Forms.Control.Validating" />
 
             
 
              event occurs, it will cause the control to push its current data back to the data source. </para
           >
           <para
-            >Calling <see
-             cref="M:System.Windows.Forms.ContainerControl.ValidateChildren" />
+            >Calling <see cref="M:System.Windows.Forms.ContainerControl.ValidateChildren" />
 
             
 
-             is equivalent to calling <see
-             cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" />
+             is equivalent to calling <see cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" />
 
             
 
-             with a <see
-             cref="T:System.Windows.Forms.ValidationConstraints" />
+             with a <see cref="T:System.Windows.Forms.ValidationConstraints" />
 
             
 
-             of <see
-             cref="F:System.Windows.Forms.ValidationConstraints.None" />
+             of <see cref="F:System.Windows.Forms.ValidationConstraints.None" />
 
             
 
@@ -1493,13 +1427,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if all of the children validated successfully; otherwise, false. If called from the <see
-             cref="E:System.Windows.Forms.Control.Validating" />
+            >true if all of the children validated successfully; otherwise, false. If called from the <see cref="E:System.Windows.Forms.Control.Validating" />
 
             
 
-             or <see
-             cref="E:System.Windows.Forms.Control.Validated" />
+             or <see cref="E:System.Windows.Forms.Control.Validated" />
 
             
 
@@ -1539,80 +1471,67 @@
 
             
 
-             will examine all the children of the current control, causing the <see
-             cref="E:System.Windows.Forms.Control.Validating" />
+             will examine all the children of the current control, causing the <see cref="E:System.Windows.Forms.Control.Validating" />
 
             
 
-             event to occur on a control if it meets the criteria spelled out by <see
-             cref="T:System.Windows.Forms.ValidationConstraints" />
+             event to occur on a control if it meets the criteria spelled out by <see cref="T:System.Windows.Forms.ValidationConstraints" />
 
             
 
             . </para
           >
           <para
-            >You may use several <see
-             cref="T:System.Windows.Forms.ValidationConstraints" />
+            >You may use several <see cref="T:System.Windows.Forms.ValidationConstraints" />
 
             
 
-             parameters at once by combining them with a bitwise OR operator. Combining parameters with a bitwise OR operator will result in a logical AND operation. For example, calling ValidateChildren(ValidationConstraints.ImmediateChildren | ValidationConstraints.Enabled) will only raise the <see
-             cref="E:System.Windows.Forms.Control.Validating" />
+             parameters at once by combining them with a bitwise OR operator. Combining parameters with a bitwise OR operator will result in a logical AND operation. For example, calling ValidateChildren(ValidationConstraints.ImmediateChildren | ValidationConstraints.Enabled) will only raise the <see cref="E:System.Windows.Forms.Control.Validating" />
 
             
 
              event on controls that are both immediate children of the container AND are enabled.</para
           >
           <para
-            >Regardless of which parameters you specify for this method, a control must have its <see
-             cref="P:System.Windows.Forms.Control.CausesValidation" />
+            >Regardless of which parameters you specify for this method, a control must have its <see cref="P:System.Windows.Forms.Control.CausesValidation" />
 
             
 
-             property set to true in order for its <see
-             cref="E:System.Windows.Forms.Control.Validating" />
+             property set to true in order for its <see cref="E:System.Windows.Forms.Control.Validating" />
 
             
 
-             event to occur. You should also set the <see
-             cref="P:System.Windows.Forms.ContainerControl.AutoValidate" />
+             event to occur. You should also set the <see cref="P:System.Windows.Forms.ContainerControl.AutoValidate" />
 
             
 
-             property of the control or of the control's container to false if you want validation to happen only when you call <see
-             cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" />
+             property of the control or of the control's container to false if you want validation to happen only when you call <see cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" />
 
             
 
             , and not when the user shifts focus from the control. </para
           >
           <para
-            >If a control is bound to a data source, and the <see
-             cref="E:System.Windows.Forms.Control.Validating" />
+            >If a control is bound to a data source, and the <see cref="E:System.Windows.Forms.Control.Validating" />
 
             
 
              event occurs, it will cause the control to push its current data back to the data source. </para
           >
           <para
-            >You cannot achieve the opposite effect of a <see
-             cref="T:System.Windows.Forms.ValidationConstraints" />
+            >You cannot achieve the opposite effect of a <see cref="T:System.Windows.Forms.ValidationConstraints" />
 
             
 
-             parameter by applying a bitwise negation operator. For example, if you supply the negative value of the <see
-             cref="F:System.Windows.Forms.ValidationConstraints.Visible" />
+             parameter by applying a bitwise negation operator. For example, if you supply the negative value of the <see cref="F:System.Windows.Forms.ValidationConstraints.Visible" />
 
             
 
-             field to <see
-             cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" />
+             field to <see cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" />
 
             
 
-            , it will not validate all children that are not visible on the container. Supplying any negative parameter to <see
-             cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" />
+            , it will not validate all children that are not visible on the container. Supplying any negative parameter to <see cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" />
 
             
 
@@ -1626,13 +1545,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if all of the children validated successfully; otherwise, false. If called from the <see
-             cref="E:System.Windows.Forms.Control.Validating" />
+            >true if all of the children validated successfully; otherwise, false. If called from the <see cref="E:System.Windows.Forms.Control.Validating" />
 
             
 
-             or <see
-             cref="E:System.Windows.Forms.Control.Validated" />
+             or <see cref="E:System.Windows.Forms.Control.Validated" />
 
             
 
@@ -1640,12 +1557,15 @@
           >
         </returns>
         <param name="validationConstraints">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Places restrictions on which controls have their <see
-           cref="E:System.Windows.Forms.Control.Validating" />
+          Places restrictions on which controls have their <see cref="E:System.Windows.Forms.Control.Validating" />
 
           
 

@@ -36,8 +36,7 @@
     <example>
       <para
         >The following example demonstrates an error that causes
-      a <see
-         cref="T:System.OverflowException" />
+      a <see cref="T:System.OverflowException" />
 
         
 
@@ -68,8 +67,7 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An <see
-         cref="T:System.OverflowException" />
+        >An <see cref="T:System.OverflowException" />
 
         
 
@@ -78,13 +76,11 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
       <list type="bullet">
         <item>
           <para
-            >An arithmetic operation produces a result that is outside the range of the data type returned by the operation. The following example illustrates the <see
-             cref="T:System.OverflowException" />
+            >An arithmetic operation produces a result that is outside the range of the data type returned by the operation. The following example illustrates the <see cref="T:System.OverflowException" />
 
             
 
-             that is thrown by a multiplication operation that overflows the bounds of the <see
-             cref="T:System.Int32" />
+             that is thrown by a multiplication operation that overflows the bounds of the <see cref="T:System.Int32" />
 
             
 
@@ -94,8 +90,7 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
         </item>
         <item>
           <para
-            >A casting or conversion operation attempts to perform a narrowing conversion, and the value of the source data type is outside the range of the target data type. The following example illustrates the <see
-             cref="T:System.OverflowException" />
+            >A casting or conversion operation attempts to perform a narrowing conversion, and the value of the source data type is outside the range of the target data type. The following example illustrates the <see cref="T:System.OverflowException" />
 
             
 
@@ -106,8 +101,7 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
       </list>
       <para>In each case, the result of the operation is a value that is less than the MinValue property or greater than the MaxValue property of the data type that results from the operation. </para>
       <para
-        >For the arithmetic, casting, or conversion operation to throw an <see
-         cref="T:System.OverflowException" />
+        >For the arithmetic, casting, or conversion operation to throw an <see cref="T:System.OverflowException" />
 
         
 
@@ -115,8 +109,7 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
       >
       <para>code reference: System.OverflowException#3</para>
       <para
-        >The following Microsoft intermediate language (MSIL) instructions throw an <see
-         cref="T:System.OverflowException" />
+        >The following Microsoft intermediate language (MSIL) instructions throw an <see cref="T:System.OverflowException" />
 
         
 
@@ -150,13 +143,11 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
          uses the HRESULT COR_E_OVERFLOW, which has the value 0x80131516.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.OverflowException" />
+        >For a list of initial property values for an instance of <see cref="T:System.OverflowException" />
 
         
 
-        , see the <see
-         cref="M:System.OverflowException.#ctor" />
+        , see the <see cref="M:System.OverflowException.#ctor" />
 
         
 
@@ -191,8 +182,7 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.OverflowException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.OverflowException" />
 
             
 
@@ -234,8 +224,7 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.OverflowException" />
+            >Initializes a new instance of the <see cref="T:System.OverflowException" />
 
             
 
@@ -269,16 +258,14 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The content of the <paramref
-             name="message" />
+            >The content of the <paramref name="message" />
 
             
 
              should be understandable to the user. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.OverflowException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.OverflowException" />
 
             
 
@@ -320,8 +307,7 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.OverflowException" />
+            >Initializes a new instance of the <see cref="T:System.OverflowException" />
 
             
 
@@ -329,7 +315,11 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -365,8 +355,7 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.OverflowException" />
+            >Initializes a new instance of the <see cref="T:System.OverflowException" />
 
             
 
@@ -374,14 +363,22 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -417,26 +414,22 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception can include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception can include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.OverflowException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.OverflowException" />
 
             
 
@@ -478,8 +471,7 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.OverflowException" />
+            >Initializes a new instance of the <see cref="T:System.OverflowException" />
 
             
 
@@ -487,19 +479,26 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 

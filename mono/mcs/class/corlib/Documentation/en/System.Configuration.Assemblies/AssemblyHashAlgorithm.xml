@@ -25,34 +25,28 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <paramref
-         name="hash function" />
+        >A <paramref name="hash function" />
         <paramref name="H" />
 
         
 
-         is a transformation that takes an input <paramref
-         name="m" />
+         is a transformation that takes an input <paramref name="m" />
 
         
 
-         and returns a fixed-size string, which is called the hash value <paramref
-         name="h" />
+         and returns a fixed-size string, which is called the hash value <paramref name="h" />
 
         
 
-         (that is, <paramref
-         name="h" />
+         (that is, <paramref name="h" />
 
         
 
-         = <paramref
-         name="H" />
+         = <paramref name="H" />
 
         
 
-         (<paramref
-         name="m" />
+         (<paramref name="m" />
 
         
 
@@ -72,8 +66,7 @@
 
             
 
-             (<paramref
-             name="x)" />
+             (<paramref name="x)" />
 
             
 
@@ -86,8 +79,7 @@
 
             
 
-             (<paramref
-             name="x" />
+             (<paramref name="x" />
 
             
 
@@ -100,8 +92,7 @@
 
             
 
-             (<paramref
-             name="x" />
+             (<paramref name="x" />
 
             
 

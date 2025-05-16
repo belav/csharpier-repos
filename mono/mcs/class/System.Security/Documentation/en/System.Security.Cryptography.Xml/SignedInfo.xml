@@ -18,7 +18,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -36,21 +38,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+        >The <see cref="T:System.Security.Cryptography.Xml.SignedInfo" />
 
         
 
          class represents the &lt;SignedInfo&gt; element of an XML signature defined by the XML digital signature specification. The &lt;SignedInfo&gt; element, which is a subelement of the &lt;Signature&gt; element, contains the canonicalization method used for signing, the algorithm used for signing and validation, and references that describe a digital signature.</para
       >
       <para
-        >For most scenarios, you should use the <see
-         cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+        >For most scenarios, you should use the <see cref="T:System.Security.Cryptography.Xml.SignedInfo" />
 
         
 
-         class available from the <see
-         cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" />
+         class available from the <see cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" />
 
         
 
@@ -83,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.SignedInfo" />
 
             
 
@@ -118,18 +116,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Xml.SignedInfo.AddReference(System.Security.Cryptography.Xml.Reference)" />
+            >The <see cref="M:System.Security.Cryptography.Xml.SignedInfo.AddReference(System.Security.Cryptography.Xml.Reference)" />
 
             
 
-             method adds a <see
-             cref="T:System.Security.Cryptography.Xml.Reference" />
+             method adds a <see cref="T:System.Security.Cryptography.Xml.Reference" />
 
             
 
-             object to a collection that is accessible using the <see
-             cref="P:System.Security.Cryptography.Xml.SignedInfo.References" />
+             object to a collection that is accessible using the <see cref="P:System.Security.Cryptography.Xml.SignedInfo.References" />
 
             
 
@@ -139,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Security.Cryptography.Xml.Reference" />
+            >Adds a <see cref="T:System.Security.Cryptography.Xml.Reference" />
 
             
 
@@ -148,7 +142,11 @@
           >
         </summary>
         <param name="reference">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -170,28 +168,22 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethod" />
+            >The <see cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethod" />
 
             
 
              property uses a string Uniform Resource Identifier (URI) to represent the &lt;Canonicalization&gt; element of an XML digital signature.</para
           >
           <para
-            >Use the <see
-             cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethod" />
+            >Use the <see cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethod" />
 
             
 
-             property to specify the canonicalization algorithm applied to the XML output of the <see
-             cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+             property to specify the canonicalization algorithm applied to the XML output of the <see cref="T:System.Security.Cryptography.Xml.SignedInfo" />
 
             
 
@@ -216,8 +208,7 @@
               <description>
                 <para>http://www.w3.org/TR/2001/REC-xml-c14n-20010315</para>
                 <para
-                  >Also defined in the following static field: <see
-                   cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigCanonicalizationUrl" />
+                  >Also defined in the following static field: <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigCanonicalizationUrl" />
                 </para>
               </description>
             </item>
@@ -228,8 +219,7 @@
               <description>
                 <para>http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments</para>
                 <para
-                  >Also defined in the following static field: <see
-                   cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigCanonicalizationWithCommentsUrl" />
+                  >Also defined in the following static field: <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigCanonicalizationWithCommentsUrl" />
                 </para>
               </description>
             </item>
@@ -240,8 +230,7 @@
               <description>
                 <para>http://www.w3.org/2001/10/xml-exc-c14n#</para>
                 <para
-                  >Also defined in the following static field: <see
-                   cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigExcC14NTransformUrl" />
+                  >Also defined in the following static field: <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigExcC14NTransformUrl" />
                 </para>
               </description>
             </item>
@@ -252,8 +241,7 @@
               <description>
                 <para>http://www.w3.org/2001/10/xml-exc-c14n#WithComments</para>
                 <para
-                  >Also defined in the following static field: <see
-                   cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigExcC14NWithCommentsTransformUrl" />
+                  >Also defined in the following static field: <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigExcC14NWithCommentsTransformUrl" />
                 </para>
               </description>
             </item>
@@ -264,8 +252,7 @@
               <description>
                 <para>http://www.w3.org/2000/09/xmldsig#minimal</para>
                 <para
-                  >Also defined in the following static field: <see
-                   cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigMinimalCanonicalizationUrl" />
+                  >Also defined in the following static field: <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigMinimalCanonicalizationUrl" />
                 </para>
               </description>
             </item>
@@ -275,8 +262,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the canonicalization algorithm that is used before signing for the current <see
-             cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+            >Gets or sets the canonicalization algorithm that is used before signing for the current <see cref="T:System.Security.Cryptography.Xml.SignedInfo" />
 
             
 
@@ -312,36 +298,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethodObject" />
+            >The <see cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethodObject" />
 
             
 
-             property contains the <see
-             cref="T:System.Security.Cryptography.Xml.Transform" />
+             property contains the <see cref="T:System.Security.Cryptography.Xml.Transform" />
 
             
 
-             object used by the <see
-             cref="T:System.Security.Cryptography.Xml.SignedXml" />
+             object used by the <see cref="T:System.Security.Cryptography.Xml.SignedXml" />
 
             
 
              class to canonicalize an XML document before signing or verifying.  </para
           >
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethodObject" />
+            >The <see cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethodObject" />
 
             
 
-             property is read-only. You can modify the <see
-             cref="T:System.Security.Cryptography.Xml.Transform" />
+             property is read-only. You can modify the <see cref="T:System.Security.Cryptography.Xml.Transform" />
 
             
 
-             object within this property by passing the desired transform Uniform Resource Identifier (URI) to the <see
-             cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethod" />
+             object within this property by passing the desired transform Uniform Resource Identifier (URI) to the <see cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethod" />
 
             
 
@@ -351,8 +331,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Security.Cryptography.Xml.Transform" />
+            >Gets a <see cref="T:System.Security.Cryptography.Xml.Transform" />
 
             
 
@@ -385,8 +364,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of this instance into an <see
-             cref="T:System.Array" />
+            >Copies the elements of this instance into an <see cref="T:System.Array" />
 
             
 
@@ -394,19 +372,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Array" />
+          An <see cref="T:System.Array" />
 
           
 
            object that holds the collection's elements. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -428,16 +413,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Int32" />
-        </value>
+        <value>a <see cref="T:System.Int32" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of references in the current <see
-             cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+            >Gets the number of references in the current <see cref="T:System.Security.Cryptography.Xml.SignedInfo" />
 
             
 
@@ -498,8 +479,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the XML representation of the <see
-             cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+            >Returns the XML representation of the <see cref="T:System.Security.Cryptography.Xml.SignedInfo" />
 
             
 
@@ -509,8 +489,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The XML representation of the <see
-             cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+            >The XML representation of the <see cref="T:System.Security.Cryptography.Xml.SignedInfo" />
 
             
 
@@ -533,25 +512,19 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Security.Cryptography.Xml.SignedInfo.Id" />
+            >Use the <see cref="P:System.Security.Cryptography.Xml.SignedInfo.Id" />
 
             
 
-             property to add a string ID to the XML representation of the current <see
-             cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+             property to add a string ID to the XML representation of the current <see cref="T:System.Security.Cryptography.Xml.SignedInfo" />
 
             
 
-             element. The ID is used to reference the <see
-             cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+             element. The ID is used to reference the <see cref="T:System.Security.Cryptography.Xml.SignedInfo" />
 
             
 
@@ -561,8 +534,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the ID of the current <see
-             cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+            >Gets or sets the ID of the current <see cref="T:System.Security.Cryptography.Xml.SignedInfo" />
 
             
 
@@ -585,10 +557,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Boolean" />
-        </value>
+        <value>a <see cref="T:System.Boolean" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -610,10 +579,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Boolean" />
-        </value>
+        <value>a <see cref="T:System.Boolean" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -644,8 +610,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads a <see
-             cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+            >Loads a <see cref="T:System.Security.Cryptography.Xml.SignedInfo" />
 
             
 
@@ -653,12 +618,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The XML element from which to load the <see
-           cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+          The XML element from which to load the <see cref="T:System.Security.Cryptography.Xml.SignedInfo" />
 
           
 
@@ -686,28 +654,22 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.ArrayList" />
-        </value>
+        <value>a <see cref="T:System.Collections.ArrayList" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Xml.SignedInfo.References" />
+            >The <see cref="P:System.Security.Cryptography.Xml.SignedInfo.References" />
 
             
 
-             property uses a list of <see
-             cref="T:System.Security.Cryptography.Xml.Reference" />
+             property uses a list of <see cref="T:System.Security.Cryptography.Xml.Reference" />
 
             
 
              objects to represent the &lt;Reference&gt; elements of an XML digital signature.  </para
           >
           <para
-            >Use the <see
-             cref="P:System.Security.Cryptography.Xml.SignedInfo.References" />
+            >Use the <see cref="P:System.Security.Cryptography.Xml.SignedInfo.References" />
 
             
 
@@ -718,13 +680,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a list of the <see
-             cref="T:System.Security.Cryptography.Xml.Reference" />
+            >Gets a list of the <see cref="T:System.Security.Cryptography.Xml.Reference" />
 
             
 
-             objects of the current <see
-             cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+             objects of the current <see cref="T:System.Security.Cryptography.Xml.SignedInfo" />
 
             
 
@@ -747,16 +707,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the length of the signature for the current <see
-             cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+            >Gets or sets the length of the signature for the current <see cref="T:System.Security.Cryptography.Xml.SignedInfo" />
 
             
 
@@ -779,23 +735,18 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Xml.SignedInfo.SignatureMethod" />
+            >The <see cref="P:System.Security.Cryptography.Xml.SignedInfo.SignatureMethod" />
 
             
 
              property uses a string Uniform Resource Identifier (URI) to represents the &lt;SignatureMethod&gt; element of an XML digital signature.</para
           >
           <para
-            >Use the <see
-             cref="P:System.Security.Cryptography.Xml.SignedInfo.SignatureMethod" />
+            >Use the <see cref="P:System.Security.Cryptography.Xml.SignedInfo.SignatureMethod" />
 
             
 
@@ -820,8 +771,7 @@
               <description>
                 <para>http://www.w3.org/2000/09/xmldsig#hmac-sha1</para>
                 <para
-                  >Also defined in the following static field: <see
-                   cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigHMACSHA1Url" />
+                  >Also defined in the following static field: <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigHMACSHA1Url" />
                 </para>
               </description>
             </item>
@@ -832,8 +782,7 @@
               <description>
                 <para>http://www.w3.org/2000/09/xmldsig#dsa-sha1</para>
                 <para
-                  >Also defined in the following static field: <see
-                   cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigDSAUrl" />
+                  >Also defined in the following static field: <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigDSAUrl" />
                 </para>
               </description>
             </item>
@@ -844,8 +793,7 @@
               <description>
                 <para>http://www.w3.org/PICS/DSig/RSA-SHA1_1_0.html</para>
                 <para
-                  >Also defined in the following static field: <see
-                   cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigRSASHA1Url" />
+                  >Also defined in the following static field: <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigRSASHA1Url" />
                 </para>
               </description>
             </item>
@@ -855,8 +803,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the algorithm used for signature generation and validation for the current <see
-             cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+            >Gets or sets the name of the algorithm used for signature generation and validation for the current <see cref="T:System.Security.Cryptography.Xml.SignedInfo" />
 
             
 
@@ -879,10 +826,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Object" />
-        </value>
+        <value>a <see cref="T:System.Object" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

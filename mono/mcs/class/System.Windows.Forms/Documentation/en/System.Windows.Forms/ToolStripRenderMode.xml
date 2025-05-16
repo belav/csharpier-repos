@@ -13,43 +13,35 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You cannot explicitly set the <see
-         cref="P:System.Windows.Forms.ToolStrip.RenderMode" />
+        >You cannot explicitly set the <see cref="P:System.Windows.Forms.ToolStrip.RenderMode" />
 
         
 
-         to <see
-         cref="F:System.Windows.Forms.ToolStripRenderMode.Custom" />
+         to <see cref="F:System.Windows.Forms.ToolStripRenderMode.Custom" />
 
         
 
-        . However, the <see
-         cref="P:System.Windows.Forms.ToolStrip.RenderMode" />
+        . However, the <see cref="P:System.Windows.Forms.ToolStrip.RenderMode" />
 
         
 
-         returns <see
-         cref="F:System.Windows.Forms.ToolStripRenderMode.Custom" />
+         returns <see cref="F:System.Windows.Forms.ToolStripRenderMode.Custom" />
 
         
 
-         when the <see
-         cref="P:System.Windows.Forms.ToolStrip.Renderer" />
+         when the <see cref="P:System.Windows.Forms.ToolStrip.Renderer" />
 
         
 
-         is set to an extension of the <see
-         cref="T:System.Windows.Forms.ToolStripRenderer" />
+         is set to an extension of the <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
         
 
-         class that is not <see
-         cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
+         class that is not <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
 
         
 
-         or <see
-         cref="T:System.Windows.Forms.ToolStripSystemRenderer" />
+         or <see cref="T:System.Windows.Forms.ToolStripSystemRenderer" />
 
         
 
@@ -59,8 +51,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the painting style applied to one <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        >Specifies the painting style applied to one <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
@@ -80,28 +71,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see
-             cref="P:System.Windows.Forms.ToolStrip.RenderMode" />
+            >Indicates that the <see cref="P:System.Windows.Forms.ToolStrip.RenderMode" />
 
             
 
-             is not determined by the <see
-             cref="T:System.Windows.Forms.ToolStripManager" />
+             is not determined by the <see cref="T:System.Windows.Forms.ToolStripManager" />
 
             
 
-             or the use of a <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             or the use of a <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
-             other than <see
-             cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
+             other than <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
 
             
 
-            , <see
-             cref="T:System.Windows.Forms.ToolStripSystemRenderer" />
+            , <see cref="T:System.Windows.Forms.ToolStripSystemRenderer" />
           </para>
         </summary>
       </Docs>
@@ -125,13 +111,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see
-             cref="P:System.Windows.Forms.ToolStripManager.RenderMode" />
+            >Indicates that the <see cref="P:System.Windows.Forms.ToolStripManager.RenderMode" />
 
             
 
-             or <see
-             cref="P:System.Windows.Forms.ToolStripManager.Renderer" />
+             or <see cref="P:System.Windows.Forms.ToolStripManager.Renderer" />
 
             
 
@@ -154,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates the use of a <see
-             cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
+            >Indicates the use of a <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
 
             
 
@@ -178,8 +161,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates the use of a <see
-             cref="T:System.Windows.Forms.ToolStripSystemRenderer" />
+            >Indicates the use of a <see cref="T:System.Windows.Forms.ToolStripSystemRenderer" />
 
             
 

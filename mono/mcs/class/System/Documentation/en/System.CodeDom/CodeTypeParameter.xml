@@ -27,29 +27,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.CodeDom.CodeTypeParameter" />
+        >The <see cref="T:System.CodeDom.CodeTypeParameter" />
 
         
 
          class represents a type parameter in the declaration of a generic type or method. </para
       >
       <para
-        >A generic type or method declaration contains one or more unspecified types known as type parameters. A type parameter name stands for the type within the body of the generic declaration. For example, the generic declaration for the <see
-         cref="T:System.Collections.Generic.List`1" />
+        >A generic type or method declaration contains one or more unspecified types known as type parameters. A type parameter name stands for the type within the body of the generic declaration. For example, the generic declaration for the <see cref="T:System.Collections.Generic.List`1" />
 
         
 
-         class contains the type parameter <paramref
-         name="T" />
+         class contains the type parameter <paramref name="T" />
 
         
 
         .</para
       >
       <para
-        >For more information on generics, see <format
-         type="text/html">
+        >For more information on generics, see <format type="text/html">
           <a href="afdd5477-6770-4686-8297-f58a4d749daf"
             >Generics in the .NET Framework Class Library</a
           >
@@ -83,8 +79,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you use this constructor, you should set the <see
-             cref="P:System.CodeDom.CodeTypeParameter.Name" />
+            >If you use this constructor, you should set the <see cref="P:System.CodeDom.CodeTypeParameter.Name" />
 
             
 
@@ -94,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTypeParameter" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeParameter" />
 
             
 
@@ -124,8 +118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTypeParameter" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeParameter" />
 
             
 
@@ -133,7 +126,11 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

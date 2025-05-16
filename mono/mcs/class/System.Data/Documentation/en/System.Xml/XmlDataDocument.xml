@@ -21,18 +21,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class extends <see
-         cref="T:System.Xml.XmlDocument" />
+        >This class extends <see cref="T:System.Xml.XmlDocument" />
 
         
 
-        . It enables you to load either relational data or XML data and manipulate that data using the World Wide Web Consortium (W3C) Document Object Model (DOM). The DOM presents data as a hierarchy of node objects. Because XmlDataDocument implements the <see
-         cref="T:System.Xml.XPath.IXPathNavigable" />
+        . It enables you to load either relational data or XML data and manipulate that data using the World Wide Web Consortium (W3C) Document Object Model (DOM). The DOM presents data as a hierarchy of node objects. Because XmlDataDocument implements the <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
         
 
-         interface, it can also be used as the source document for the <see
-         cref="T:System.Xml.Xsl.XslTransform" />
+         interface, it can also be used as the source document for the <see cref="T:System.Xml.Xsl.XslTransform" />
 
         
 
@@ -40,26 +37,22 @@
       >
       <para>XmlDataDocument has a close affiliation with the DataSet class, which provides a relational view of the loaded XML data. Any changes made to the XmlDataDocument are reflected in the DataSet and vice versa.</para>
       <para
-        >To load a DataSet with XML data, use <see
-         cref="M:System.Data.DataSet.ReadXmlSchema(System.Xml.XmlReader)" />
+        >To load a DataSet with XML data, use <see cref="M:System.Data.DataSet.ReadXmlSchema(System.Xml.XmlReader)" />
 
         
 
-         to build a relational mapping. The XML data can then be loaded using <see
-         cref="M:System.Xml.XmlDataDocument.Load(System.String)" />
+         to build a relational mapping. The XML data can then be loaded using <see cref="M:System.Xml.XmlDataDocument.Load(System.String)" />
 
         
 
-         or <see
-         cref="M:System.Xml.XmlDocument.LoadXml(System.String)" />
+         or <see cref="M:System.Xml.XmlDocument.LoadXml(System.String)" />
 
         
 
         .</para
       >
       <para
-        >To load relational data, specify the DataSet containing the relational data as the parameter in the <see
-         cref="M:System.Xml.XmlDataDocument.#ctor" />
+        >To load relational data, specify the DataSet containing the relational data as the parameter in the <see cref="M:System.Xml.XmlDataDocument.#ctor" />
 
         
 
@@ -69,8 +62,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Allows structured data to be stored, retrieved, and manipulated through a relational <see
-         cref="T:System.Data.DataSet" />
+        >Allows structured data to be stored, retrieved, and manipulated through a relational <see cref="T:System.Data.DataSet" />
 
         
 
@@ -88,8 +80,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An empty <see
-             cref="T:System.Data.DataSet" />
+            >An empty <see cref="T:System.Data.DataSet" />
 
             
 
@@ -99,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlDataDocument" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlDataDocument" />
 
             
 
@@ -131,13 +121,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlDataDocument" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlDataDocument" />
 
             
 
-             class with the specified <see
-             cref="T:System.Data.DataSet" />
+             class with the specified <see cref="T:System.Data.DataSet" />
 
             
 
@@ -145,7 +133,11 @@
           >
         </summary>
         <param name="dataset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -173,32 +165,28 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Cloning the XmlDataDocument also clones the <see
-             cref="T:System.Data.DataSet" />
+            >Cloning the XmlDataDocument also clones the <see cref="T:System.Data.DataSet" />
 
             
 
              schema.</para
           >
           <para
-            >If <paramref
-             name="deep" />
+            >If <paramref name="deep" />
 
             
 
              is set to false, the cloned DataSet has no data; that is, no rows.</para
           >
           <para
-            >If <paramref
-             name="deep" />
+            >If <paramref name="deep" />
 
             
 
              is set to true, the cloned DataSet is set with the schema and then populated with the data.</para
           >
           <para
-            >See <see
-             cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />
+            >See <see cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />
 
             
 
@@ -214,7 +202,11 @@
           <para>The cloned node.</para>
         </returns>
         <param name="deep">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -256,18 +248,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an element with the specified <see
-             cref="P:System.Xml.XmlNode.Prefix" />
+            >Creates an element with the specified <see cref="P:System.Xml.XmlNode.Prefix" />
 
             
 
-            , <see
-             cref="P:System.Xml.XmlDocument.LocalName" />
+            , <see cref="P:System.Xml.XmlDocument.LocalName" />
 
             
 
-             , and <see
-             cref="P:System.Xml.XmlNode.NamespaceURI" />
+             , and <see cref="P:System.Xml.XmlNode.NamespaceURI" />
 
             
 
@@ -276,31 +265,40 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >A new <see
-             cref="T:System.Xml.XmlElement" />
+          <para>A new <see cref="T:System.Xml.XmlElement" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The prefix of the new element. If String.Empty or null, there is no prefix. </param
         >
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the new element. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -332,8 +330,7 @@
 
             
 
-             nodes cannot be created for <see
-             cref="T:System.Xml.XmlDataDocument" />
+             nodes cannot be created for <see cref="T:System.Xml.XmlDataDocument" />
 
             
 
@@ -343,8 +340,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlEntityReference" />
+            >Creates an <see cref="T:System.Xml.XmlEntityReference" />
 
             
 
@@ -354,8 +350,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlEntityReference" />
+            >An <see cref="T:System.Xml.XmlEntityReference" />
 
             
 
@@ -363,7 +358,11 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -391,8 +390,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The XPathNavigator provides read-only, random access to data. Because it is optimized for XSLT transformations, it provides performance benefits when used as an input mechanism to the <see
-             cref="M:System.Xml.Xsl.XslTransform.Transform(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlResolver)" />
+            >The XPathNavigator provides read-only, random access to data. Because it is optimized for XSLT transformations, it provides performance benefits when used as an input mechanism to the <see cref="M:System.Xml.Xsl.XslTransform.Transform(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlResolver)" />
 
             
 
@@ -402,13 +400,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >Creates a new <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
-             object for navigating this document. The XPathNavigator is positioned on the node specified in the <paramref
-             name="node" />
+             object for navigating this document. The XPathNavigator is positioned on the node specified in the <paramref name="node" />
 
             
 
@@ -420,12 +416,15 @@
           <para>An XPathNavigator used to navigate the document.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlNode" />
+          The <see cref="T:System.Xml.XmlNode" />
 
           
 
@@ -452,8 +451,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Data.DataSet" />
+            >Gets a <see cref="T:System.Data.DataSet" />
 
             
 
@@ -482,8 +480,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is not supported by the <see
-             cref="T:System.Xml.XmlDataDocument" />
+            >This method is not supported by the <see cref="T:System.Xml.XmlDataDocument" />
 
             
 
@@ -493,13 +490,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.XmlElement" />
+            >Gets the <see cref="T:System.Xml.XmlElement" />
 
             
 
-             with the specified ID. This method is not supported by the <see
-             cref="T:System.Xml.XmlDataDocument" />
+             with the specified ID. This method is not supported by the <see cref="T:System.Xml.XmlDataDocument" />
 
             
 
@@ -509,8 +504,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlElement" />
+            >An <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -518,7 +512,11 @@
           >
         </returns>
         <param name="elemId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -547,13 +545,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the <see
-             cref="T:System.Xml.XmlElement" />
+            >Retrieves the <see cref="T:System.Xml.XmlElement" />
 
             
 
-             associated with the specified <see
-             cref="T:System.Data.DataRow" />
+             associated with the specified <see cref="T:System.Data.DataRow" />
 
             
 
@@ -565,7 +561,11 @@
           <para>The XmlElement containing a representation of the specified DataRow.</para>
         </returns>
         <param name="r">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -594,13 +594,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the <see
-             cref="T:System.Data.DataRow" />
+            >Retrieves the <see cref="T:System.Data.DataRow" />
 
             
 
-             associated with the specified <see
-             cref="T:System.Xml.XmlElement" />
+             associated with the specified <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -612,7 +610,11 @@
           <para>The DataRow containing a representation of the XmlElement; null if there is no DataRow associated with the XmlElement.</para>
         </returns>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -642,8 +644,7 @@
           <para>XmlDataDocument does not support creating entity references. If the data includes entity references, the Load method resolves and expands any entity references.</para>
           <block subset="none" type="note">
             <para
-              >In order to view the XML data relationally, you must first specify a schema to use for data mapping. This can be done either by calling the <see
-               cref="M:System.Data.DataSet.ReadXmlSchema(System.Xml.XmlReader)" />
+              >In order to view the XML data relationally, you must first specify a schema to use for data mapping. This can be done either by calling the <see cref="M:System.Data.DataSet.ReadXmlSchema(System.Xml.XmlReader)" />
 
               
 
@@ -656,7 +657,11 @@
           <para>Loads the XmlDataDocument from the specified stream.</para>
         </summary>
         <param name="inStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -686,8 +691,7 @@
           <para>XmlDataDocument does not support creating entity references. If the data includes entity references, the Load method resolves and expands any entity references.</para>
           <block subset="none" type="note">
             <para
-              >In order to view the XML data relationally, you must first specify a schema to use for data mapping. This can be done either by calling the <see
-               cref="M:System.Data.DataSet.ReadXmlSchema(System.Xml.XmlReader)" />
+              >In order to view the XML data relationally, you must first specify a schema to use for data mapping. This can be done either by calling the <see cref="M:System.Data.DataSet.ReadXmlSchema(System.Xml.XmlReader)" />
 
               
 
@@ -698,8 +702,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads the XmlDataDocument from the specified <see
-             cref="T:System.IO.TextReader" />
+            >Loads the XmlDataDocument from the specified <see cref="T:System.IO.TextReader" />
 
             
 
@@ -707,7 +710,11 @@
           >
         </summary>
         <param name="txtReader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -734,8 +741,7 @@
           <para>XmlDataDocument does not support creating entity references. If the data includes entity references, the Load method resolves and expands any entity references.</para>
           <block subset="none" type="note">
             <para
-              >In order to view the XML data relationally, you must first specify a schema to use for data mapping. This can be done either by calling the <see
-               cref="M:System.Data.DataSet.ReadXmlSchema(System.Xml.XmlReader)" />
+              >In order to view the XML data relationally, you must first specify a schema to use for data mapping. This can be done either by calling the <see cref="M:System.Data.DataSet.ReadXmlSchema(System.Xml.XmlReader)" />
 
               
 
@@ -748,7 +754,11 @@
           <para>Loads the XmlDataDocument using the specified URL.</para>
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -776,21 +786,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >XmlDataDocument does not support creating entity references. If the data source contains entity references, you must create an <see
-             cref="T:System.Xml.XmlValidatingReader" />
+            >XmlDataDocument does not support creating entity references. If the data source contains entity references, you must create an <see cref="T:System.Xml.XmlValidatingReader" />
 
             
 
-             with the <see
-             cref="P:System.Xml.XmlValidatingReader.EntityHandling" />
+             with the <see cref="P:System.Xml.XmlValidatingReader.EntityHandling" />
 
             
 
              property set to EntityHandling.ExpandEntities (this is the default behavior) and pass the XmlValidatingReader to the Load method. If you do not use an XmlValidatingReader, the Load method throws an exception.</para
           >
           <para
-            >The Load method always preserves significant white space. The <see
-             cref="P:System.Xml.XmlDocument.PreserveWhitespace" />
+            >The Load method always preserves significant white space. The <see cref="P:System.Xml.XmlDocument.PreserveWhitespace" />
 
             
 
@@ -804,8 +811,7 @@
           <code>&lt;!--comment--&gt;&lt;?process
     instruction?&gt;&lt;!--comment--&gt;&lt;/endtag&gt;</code>
           <para
-            >Load will succeed; however, you will have an incomplete DOM tree, because there is no root-level element. You have to add a root-level element before you save the document; otherwise, the <see
-             cref="M:System.Xml.XmlDocument.Save(System.String)" />
+            >Load will succeed; however, you will have an incomplete DOM tree, because there is no root-level element. You have to add a root-level element before you save the document; otherwise, the <see cref="M:System.Xml.XmlDocument.Save(System.String)" />
 
             
 
@@ -816,8 +822,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads the XmlDataDocument from the specified <see
-             cref="T:System.Xml.XmlReader" />
+            >Loads the XmlDataDocument from the specified <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -825,7 +830,11 @@
           >
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

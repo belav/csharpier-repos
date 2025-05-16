@@ -19,21 +19,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class provides access to configuration and address information for network interfaces that support IPv4 or IPv6. You do not create instances of this class; they are returned by the <see
-         cref="M:System.Net.NetworkInformation.NetworkInterface.GetIPProperties" />
+        >This class provides access to configuration and address information for network interfaces that support IPv4 or IPv6. You do not create instances of this class; they are returned by the <see cref="M:System.Net.NetworkInformation.NetworkInterface.GetIPProperties" />
 
         
 
          method.</para
       >
       <para
-        >To access IPv4-specific properties, use the object returned by the <see
-         cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv4Properties" />
+        >To access IPv4-specific properties, use the object returned by the <see cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv4Properties" />
 
         
 
-         method. To access IPv6-specific properties, use the object returned by the <see
-         cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv6Properties" />
+         method. To access IPv6-specific properties, use the object returned by the <see cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv6Properties" />
 
         
 
@@ -63,8 +60,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor can be called only from classes that derive from <see
-             cref="T:System.Net.NetworkInformation.IPInterfaceProperties" />
+            >This constructor can be called only from classes that derive from <see cref="T:System.Net.NetworkInformation.IPInterfaceProperties" />
 
             
 
@@ -74,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.NetworkInformation.IPInterfaceProperties" />
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.IPInterfaceProperties" />
 
             
 
@@ -191,8 +186,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The DNS suffix identifies the domain name (for example, "contoso.com") that is appended to an unqualified host name to obtain a fully qualified domain name (FQDN) suitable for a DNS name query. For example, if the local machine has "contoso.com" as its <see
-             cref="P:System.Net.NetworkInformation.IPInterfaceProperties.DnsSuffix" />
+            >The DNS suffix identifies the domain name (for example, "contoso.com") that is appended to an unqualified host name to obtain a fully qualified domain name (FQDN) suitable for a DNS name query. For example, if the local machine has "contoso.com" as its <see cref="P:System.Net.NetworkInformation.IPInterfaceProperties.DnsSuffix" />
 
             
 
@@ -258,21 +252,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns null for <see
-             cref="F:System.Net.NetworkInformation.NetworkInterfaceType.Loopback" />
+            >This property returns null for <see cref="F:System.Net.NetworkInformation.NetworkInterfaceType.Loopback" />
 
             
 
              interfaces.</para
           >
           <para
-            >For a detailed description of the information available for an interface that supports IPv4, see the <see
-             cref="T:System.Net.NetworkInformation.IPv4InterfaceProperties" />
+            >For a detailed description of the information available for an interface that supports IPv4, see the <see cref="T:System.Net.NetworkInformation.IPv4InterfaceProperties" />
 
             
 
-             class documentation. Note that the object returned by the <see
-             cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv4Properties" />
+             class documentation. Note that the object returned by the <see cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv4Properties" />
 
             
 
@@ -286,8 +277,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.NetworkInformation.IPv4InterfaceProperties" />
+            >An <see cref="T:System.Net.NetworkInformation.IPv4InterfaceProperties" />
 
             
 
@@ -319,13 +309,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a detailed description of the information available for an interface that supports IPv6, see the <see
-             cref="T:System.Net.NetworkInformation.IPv6InterfaceProperties" />
+            >For a detailed description of the information available for an interface that supports IPv6, see the <see cref="T:System.Net.NetworkInformation.IPv6InterfaceProperties" />
 
             
 
-             documentation. Note that the object returned by the <see
-             cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv6Properties" />
+             documentation. Note that the object returned by the <see cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv6Properties" />
 
             
 
@@ -339,8 +327,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.NetworkInformation.IPv6InterfaceProperties" />
+            >An <see cref="T:System.Net.NetworkInformation.IPv6InterfaceProperties" />
 
             
 
@@ -370,8 +357,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -401,8 +387,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 

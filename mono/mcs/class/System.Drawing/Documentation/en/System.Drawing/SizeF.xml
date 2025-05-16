@@ -25,23 +25,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The unit for a <see
-         cref="T:System.Drawing.SizeF" />
+        >The unit for a <see cref="T:System.Drawing.SizeF" />
 
         
 
-         structure depends on the <see
-         cref="P:System.Drawing.Graphics.PageUnit" />
+         structure depends on the <see cref="P:System.Drawing.Graphics.PageUnit" />
 
         
 
-         and <see
-         cref="P:System.Drawing.Graphics.PageScale" />
+         and <see cref="P:System.Drawing.Graphics.PageScale" />
 
         
 
-         settings for the <see
-         cref="T:System.Drawing.Graphics" />
+         settings for the <see cref="T:System.Drawing.Graphics" />
 
         
 
@@ -66,13 +62,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.SizeF" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.SizeF" />
 
             
 
-             structure from the specified <see
-             cref="T:System.Drawing.PointF" />
+             structure from the specified <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -80,17 +74,19 @@
           >
         </summary>
         <param name="pt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.PointF" />
+          The <see cref="T:System.Drawing.PointF" />
 
           
 
-           structure from which to initialize this <see
-           cref="T:System.Drawing.SizeF" />
+           structure from which to initialize this <see cref="T:System.Drawing.SizeF" />
 
           
 
@@ -114,13 +110,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.SizeF" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.SizeF" />
 
             
 
-             structure from the specified existing <see
-             cref="T:System.Drawing.SizeF" />
+             structure from the specified existing <see cref="T:System.Drawing.SizeF" />
 
             
 
@@ -128,17 +122,19 @@
           >
         </summary>
         <param name="size">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.SizeF" />
+          The <see cref="T:System.Drawing.SizeF" />
 
           
 
-           structure from which to create the new <see
-           cref="T:System.Drawing.SizeF" />
+           structure from which to create the new <see cref="T:System.Drawing.SizeF" />
 
           
 
@@ -163,8 +159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.SizeF" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.SizeF" />
 
             
 
@@ -172,24 +167,30 @@
           >
         </summary>
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The width component of the new <see
-           cref="T:System.Drawing.SizeF" />
+          The width component of the new <see cref="T:System.Drawing.SizeF" />
 
           
 
            structure. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The height component of the new <see
-           cref="T:System.Drawing.SizeF" />
+          The height component of the new <see cref="T:System.Drawing.SizeF" />
 
           
 
@@ -222,13 +223,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the width and height of one <see
-             cref="T:System.Drawing.SizeF" />
+            >Adds the width and height of one <see cref="T:System.Drawing.SizeF" />
 
             
 
-             structure to the width and height of another <see
-             cref="T:System.Drawing.SizeF" />
+             structure to the width and height of another <see cref="T:System.Drawing.SizeF" />
 
             
 
@@ -238,8 +237,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.SizeF" />
+            >A <see cref="T:System.Drawing.SizeF" />
 
             
 
@@ -247,24 +245,30 @@
           >
         </returns>
         <param name="sz1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first <see
-           cref="T:System.Drawing.SizeF" />
+          The first <see cref="T:System.Drawing.SizeF" />
 
           
 
            structure to add.</param
         >
         <param name="sz2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The second <see
-           cref="T:System.Drawing.SizeF" />
+          The second <see cref="T:System.Drawing.SizeF" />
 
           
 
@@ -284,18 +288,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SizeF" />
+            >Gets a <see cref="T:System.Drawing.SizeF" />
 
             
 
-             structure that has a <see
-             cref="P:System.Drawing.SizeF.Height" />
+             structure that has a <see cref="P:System.Drawing.SizeF.Height" />
 
             
 
-             and <see
-             cref="P:System.Drawing.SizeF.Width" />
+             and <see cref="P:System.Drawing.SizeF.Width" />
 
             
 
@@ -322,13 +323,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests to see whether the specified object is a <see
-             cref="T:System.Drawing.SizeF" />
+            >Tests to see whether the specified object is a <see cref="T:System.Drawing.SizeF" />
 
             
 
-             structure with the same dimensions as this <see
-             cref="T:System.Drawing.SizeF" />
+             structure with the same dimensions as this <see cref="T:System.Drawing.SizeF" />
 
             
 
@@ -338,18 +337,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if <paramref
-             name="obj" />
+            >This method returns true if <paramref name="obj" />
 
             
 
-             is a <see
-             cref="T:System.Drawing.SizeF" />
+             is a <see cref="T:System.Drawing.SizeF" />
 
             
 
-             and has the same width and height as this <see
-             cref="T:System.Drawing.SizeF" />
+             and has the same width and height as this <see cref="T:System.Drawing.SizeF" />
 
             
 
@@ -357,12 +353,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -386,8 +385,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a hash code for this <see
-             cref="T:System.Drawing.Size" />
+            >Returns a hash code for this <see cref="T:System.Drawing.Size" />
 
             
 
@@ -397,8 +395,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer value that specifies a hash value for this <see
-             cref="T:System.Drawing.Size" />
+            >An integer value that specifies a hash value for this <see cref="T:System.Drawing.Size" />
 
             
 
@@ -423,33 +420,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The unit for the <see
-             cref="P:System.Drawing.SizeF.Height" />
+            >The unit for the <see cref="P:System.Drawing.SizeF.Height" />
 
             
 
-             and <see
-             cref="P:System.Drawing.SizeF.Width" />
+             and <see cref="P:System.Drawing.SizeF.Width" />
 
             
 
-             of the <see
-             cref="T:System.Drawing.SizeF" />
+             of the <see cref="T:System.Drawing.SizeF" />
 
             
 
-             structure depend on the <see
-             cref="P:System.Drawing.Graphics.PageUnit" />
+             structure depend on the <see cref="P:System.Drawing.Graphics.PageUnit" />
 
             
 
-             and <see
-             cref="P:System.Drawing.Graphics.PageScale" />
+             and <see cref="P:System.Drawing.Graphics.PageScale" />
 
             
 
-             settings for the <see
-             cref="T:System.Drawing.Graphics" />
+             settings for the <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -459,8 +450,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the vertical component of this <see
-             cref="T:System.Drawing.SizeF" />
+            >Gets or sets the vertical component of this <see cref="T:System.Drawing.SizeF" />
 
             
 
@@ -485,8 +475,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether this <see
-             cref="T:System.Drawing.SizeF" />
+            >Gets a value that indicates whether this <see cref="T:System.Drawing.SizeF" />
 
             
 
@@ -522,13 +511,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the width and height of one <see
-             cref="T:System.Drawing.SizeF" />
+            >Adds the width and height of one <see cref="T:System.Drawing.SizeF" />
 
             
 
-             structure to the width and height of another <see
-             cref="T:System.Drawing.SizeF" />
+             structure to the width and height of another <see cref="T:System.Drawing.SizeF" />
 
             
 
@@ -538,8 +525,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Size" />
+            >A <see cref="T:System.Drawing.Size" />
 
             
 
@@ -547,24 +533,30 @@
           >
         </returns>
         <param name="sz1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first <see
-           cref="T:System.Drawing.SizeF" />
+          The first <see cref="T:System.Drawing.SizeF" />
 
           
 
            structure to add. </param
         >
         <param name="sz2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The second <see
-           cref="T:System.Drawing.SizeF" />
+          The second <see cref="T:System.Drawing.SizeF" />
 
           
 
@@ -594,8 +586,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether two <see
-             cref="T:System.Drawing.SizeF" />
+            >Tests whether two <see cref="T:System.Drawing.SizeF" />
 
             
 
@@ -605,13 +596,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operator returns true if <paramref
-             name="sz1" />
+            >This operator returns true if <paramref name="sz1" />
 
             
 
-             and <paramref
-             name="sz2" />
+             and <paramref name="sz2" />
 
             
 
@@ -619,24 +608,30 @@
           >
         </returns>
         <param name="sz1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.SizeF" />
+          The <see cref="T:System.Drawing.SizeF" />
 
           
 
            structure on the left side of the equality operator. </param
         >
         <param name="sz2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.SizeF" />
+          The <see cref="T:System.Drawing.SizeF" />
 
           
 
@@ -689,8 +684,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether two <see
-             cref="T:System.Drawing.SizeF" />
+            >Tests whether two <see cref="T:System.Drawing.SizeF" />
 
             
 
@@ -700,23 +694,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operator returns true if <paramref
-             name="sz1" />
+            >This operator returns true if <paramref name="sz1" />
 
             
 
-             and <paramref
-             name="sz2" />
+             and <paramref name="sz2" />
 
             
 
-             differ either in width or height; false if <paramref
-             name="sz1" />
+             differ either in width or height; false if <paramref name="sz1" />
 
             
 
-             and <paramref
-             name="sz2" />
+             and <paramref name="sz2" />
 
             
 
@@ -724,24 +714,30 @@
           >
         </returns>
         <param name="sz1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.SizeF" />
+          The <see cref="T:System.Drawing.SizeF" />
 
           
 
            structure on the left of the inequality operator. </param
         >
         <param name="sz2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.SizeF" />
+          The <see cref="T:System.Drawing.SizeF" />
 
           
 
@@ -771,13 +767,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Subtracts the width and height of one <see
-             cref="T:System.Drawing.SizeF" />
+            >Subtracts the width and height of one <see cref="T:System.Drawing.SizeF" />
 
             
 
-             structure from the width and height of another <see
-             cref="T:System.Drawing.SizeF" />
+             structure from the width and height of another <see cref="T:System.Drawing.SizeF" />
 
             
 
@@ -787,8 +781,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.SizeF" />
+            >A <see cref="T:System.Drawing.SizeF" />
 
             
 
@@ -796,24 +789,30 @@
           >
         </returns>
         <param name="sz1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.SizeF" />
+          The <see cref="T:System.Drawing.SizeF" />
 
           
 
            structure on the left side of the subtraction operator. </param
         >
         <param name="sz2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.SizeF" />
+          The <see cref="T:System.Drawing.SizeF" />
 
           
 
@@ -846,13 +845,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Subtracts the width and height of one <see
-             cref="T:System.Drawing.SizeF" />
+            >Subtracts the width and height of one <see cref="T:System.Drawing.SizeF" />
 
             
 
-             structure from the width and height of another <see
-             cref="T:System.Drawing.SizeF" />
+             structure from the width and height of another <see cref="T:System.Drawing.SizeF" />
 
             
 
@@ -862,8 +859,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.SizeF" />
+            >A <see cref="T:System.Drawing.SizeF" />
 
             
 
@@ -871,24 +867,30 @@
           >
         </returns>
         <param name="sz1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.SizeF" />
+          The <see cref="T:System.Drawing.SizeF" />
 
           
 
            structure on the left side of the subtraction operator. </param
         >
         <param name="sz2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.SizeF" />
+          The <see cref="T:System.Drawing.SizeF" />
 
           
 
@@ -908,13 +910,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a <see
-             cref="T:System.Drawing.SizeF" />
+            >Converts a <see cref="T:System.Drawing.SizeF" />
 
             
 
-             structure to a <see
-             cref="T:System.Drawing.PointF" />
+             structure to a <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -924,8 +924,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Drawing.PointF" />
+            >Returns a <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -949,18 +948,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.SizeF" />
+            >The <see cref="T:System.Drawing.SizeF" />
 
             
 
-             structure is converted to a <see
-             cref="T:System.Drawing.Size" />
+             structure is converted to a <see cref="T:System.Drawing.Size" />
 
             
 
-             structure by truncating the values of the <see
-             cref="T:System.Drawing.SizeF" />
+             structure by truncating the values of the <see cref="T:System.Drawing.SizeF" />
 
             
 
@@ -970,13 +966,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a <see
-             cref="T:System.Drawing.SizeF" />
+            >Converts a <see cref="T:System.Drawing.SizeF" />
 
             
 
-             structure to a <see
-             cref="T:System.Drawing.Size" />
+             structure to a <see cref="T:System.Drawing.Size" />
 
             
 
@@ -986,8 +980,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Drawing.Size" />
+            >Returns a <see cref="T:System.Drawing.Size" />
 
             
 
@@ -1012,8 +1005,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a human-readable string that represents this <see
-             cref="T:System.Drawing.SizeF" />
+            >Creates a human-readable string that represents this <see cref="T:System.Drawing.SizeF" />
 
             
 
@@ -1023,8 +1015,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents this <see
-             cref="T:System.Drawing.SizeF" />
+            >A string that represents this <see cref="T:System.Drawing.SizeF" />
 
             
 
@@ -1049,33 +1040,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The unit for the <see
-             cref="P:System.Drawing.SizeF.Height" />
+            >The unit for the <see cref="P:System.Drawing.SizeF.Height" />
 
             
 
-             and <see
-             cref="P:System.Drawing.SizeF.Width" />
+             and <see cref="P:System.Drawing.SizeF.Width" />
 
             
 
-             of the <see
-             cref="T:System.Drawing.SizeF" />
+             of the <see cref="T:System.Drawing.SizeF" />
 
             
 
-             structure depend on the <see
-             cref="P:System.Drawing.Graphics.PageUnit" />
+             structure depend on the <see cref="P:System.Drawing.Graphics.PageUnit" />
 
             
 
-             and <see
-             cref="P:System.Drawing.Graphics.PageScale" />
+             and <see cref="P:System.Drawing.Graphics.PageScale" />
 
             
 
-             settings for the <see
-             cref="T:System.Drawing.Graphics" />
+             settings for the <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -1085,8 +1070,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the horizontal component of this <see
-             cref="T:System.Drawing.SizeF" />
+            >Gets or sets the horizontal component of this <see cref="T:System.Drawing.SizeF" />
 
             
 

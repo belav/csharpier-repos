@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class provides a collection of methods that can be used to invoke a compiler, typically from an <see
-         cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+        >This class provides a collection of methods that can be used to invoke a compiler, typically from an <see cref="T:System.CodeDom.Compiler.ICodeCompiler" />
 
         
 
@@ -31,13 +30,11 @@
       >
       <block subset="none" type="note">
         <para
-          >This class contains a link demand at the class level that applies to all members. A <see
-           cref="T:System.Security.SecurityException" />
+          >This class contains a link demand at the class level that applies to all members. A <see cref="T:System.Security.SecurityException" />
 
           
 
-           is thrown when the immediate caller does not have full-trust permission. For more information, see <format
-           type="text/html">
+           is thrown when the immediate caller does not have full-trust permission. For more information, see <format type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
           </format>
 
@@ -86,19 +83,26 @@
           <para>The return value from the compiler.</para>
         </returns>
         <param name="cmd">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The command to execute. </param
         >
         <param name="tempFiles">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.TempFileCollection" />
+          A <see cref="T:System.CodeDom.Compiler.TempFileCollection" />
 
           
 

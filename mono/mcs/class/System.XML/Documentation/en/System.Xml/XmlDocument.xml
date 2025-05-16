@@ -29,34 +29,29 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class implements the W3C Document Object Model (DOM) Level 1 Core and the Core DOM Level 2. The DOM is an in-memory (cache) tree representation of an XML document and enables the navigation and editing of this document. Because XmlDocument implements the <see
-         cref="T:System.Xml.XPath.IXPathNavigable" />
+        >This class implements the W3C Document Object Model (DOM) Level 1 Core and the Core DOM Level 2. The DOM is an in-memory (cache) tree representation of an XML document and enables the navigation and editing of this document. Because XmlDocument implements the <see cref="T:System.Xml.XPath.IXPathNavigable" />
 
         
 
-         interface it can also be used as the source document for the <see
-         cref="T:System.Xml.Xsl.XslTransform" />
+         interface it can also be used as the source document for the <see cref="T:System.Xml.Xsl.XslTransform" />
 
         
 
          class.</para
       >
       <para
-        >The <see
-         cref="T:System.Xml.XmlDataDocument" />
+        >The <see cref="T:System.Xml.XmlDataDocument" />
 
         
 
-         class extends XmlDocument and allows structured data to be stored, retrieved, and manipulated through a relational <see
-         cref="T:System.Data.DataSet" />
+         class extends XmlDocument and allows structured data to be stored, retrieved, and manipulated through a relational <see cref="T:System.Data.DataSet" />
 
         
 
         . This class allows components to mix XML and relational views of the underlying data.</para
       >
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="B5E52844-4820-47C0-A61D-DE2DA33E9F54"
             >[&lt;topic://cpconXMLDocumentObjectModelDOM&gt;]</a
           >
@@ -68,13 +63,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Exceptions raised as a result of using the <see
-           cref="T:System.Xml.XmlDocument" />
+          >Exceptions raised as a result of using the <see cref="T:System.Xml.XmlDocument" />
 
           
 
-           class, such as the <see
-           cref="T:System.Xml.XmlException" />
+           class, such as the <see cref="T:System.Xml.XmlException" />
 
           
 
@@ -104,15 +97,12 @@
       <Parameters />
       <Docs>
         <remarks>
-          <para
-            >
-	Creates a new document object. It is equivalent to <see
-             cref="M:System.Xml.XmlDocument.ctor(System.Xml.XmlNameTable)" />
+          <para>
+	Creates a new document object. It is equivalent to <see cref="M:System.Xml.XmlDocument.ctor(System.Xml.XmlNameTable)" />
 
             
 
-             with a new <see
-             cref="T:NameTable" />
+             with a new <see cref="T:NameTable" />
 
             
 
@@ -123,8 +113,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlDocument" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlDocument" />
 
             
 
@@ -156,8 +145,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the XmlDocument class with the specified <see
-             cref="T:System.Xml.XmlImplementation" />
+            >Initializes a new instance of the XmlDocument class with the specified <see cref="T:System.Xml.XmlImplementation" />
 
             
 
@@ -165,7 +153,11 @@
           >
         </summary>
         <param name="imp">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -191,15 +183,12 @@
       </Parameters>
       <Docs>
         <remarks>
-          <para
-            >
-	Creates a new document object, using argument <see
-             cref="T:System.Xml.XmlNameTable" />
+          <para>
+	Creates a new document object, using argument <see cref="T:System.Xml.XmlNameTable" />
 
             
 
-             as its <see
-             cref="P:System.Xml.XmlDocument.NameTable" />
+             as its <see cref="P:System.Xml.XmlDocument.NameTable" />
 
             
 
@@ -213,8 +202,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the XmlDocument class with the specified <see
-             cref="T:System.Xml.XmlNameTable" />
+            >Initializes a new instance of the XmlDocument class with the specified <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -222,7 +210,11 @@
           >
         </summary>
         <param name="nt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -248,16 +240,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A networked XML document is comprised of chunks of data aggregated using various W3C standard inclusion mechanisms and therefore contains nodes that come from different places. The BaseURI tells you where these nodes came from.</para>
           <para
-            >For Document nodes, BaseURI returns the location of the XML document. For example, if the XmlDocument was loaded using the following call doc.Load("http://server/mydata.xml"), the BaseURI for the document node is http://server/mydata.xml. However, if the <see
-             cref="M:System.Xml.XmlDocument.Load(System.String)" />
+            >For Document nodes, BaseURI returns the location of the XML document. For example, if the XmlDocument was loaded using the following call doc.Load("http://server/mydata.xml"), the BaseURI for the document node is http://server/mydata.xml. However, if the <see cref="M:System.Xml.XmlDocument.Load(System.String)" />
 
             
 
              method is redirected by server to a different URI, BaseURI returns the original URI passed to the Load method.</para
           >
           <para
-            >This property is a Microsoft extension to the Document Object Model (DOM). For additional information on BaseURI and how it behaves with other node types, see <see
-             cref="P:System.Xml.XmlNode.BaseURI" />
+            >This property is a Microsoft extension to the Document Object Model (DOM). For additional information on BaseURI and how it behaves with other node types, see <see cref="P:System.Xml.XmlNode.BaseURI" />
 
             
 
@@ -295,21 +285,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method serves as a copy constructor for nodes. The cloned node has no parent (<see
-             cref="P:System.Xml.XmlNode.ParentNode" />
+            >This method serves as a copy constructor for nodes. The cloned node has no parent (<see cref="P:System.Xml.XmlNode.ParentNode" />
 
             
 
              returns null).</para
           >
           <para
-            >If <paramref
-             name="deep" />
+            >If <paramref name="deep" />
 
             
 
-             is true, the cloned node includes all the child nodes, otherwise only the XmlDocument node is cloned. See the <see
-             cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />
+             is true, the cloned node includes all the child nodes, otherwise only the XmlDocument node is cloned. See the <see cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />
 
             
 
@@ -325,7 +312,11 @@
           <para>The cloned XmlDocument node.</para>
         </returns>
         <param name="deep">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -358,13 +349,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The XmlAttribute can be added to an <see
-             cref="T:System.Xml.XmlElement" />
+            >The XmlAttribute can be added to an <see cref="T:System.Xml.XmlElement" />
 
             
 
-             using the <see
-             cref="M:System.Xml.XmlElement.SetAttributeNode(System.Xml.XmlAttribute)" />
+             using the <see cref="M:System.Xml.XmlElement.SetAttributeNode(System.Xml.XmlAttribute)" />
 
             
 
@@ -374,13 +363,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlAttribute" />
+            >Creates an <see cref="T:System.Xml.XmlAttribute" />
 
             
 
-             with the specified <see
-             cref="P:System.Xml.XmlDocument.Name" />
+             with the specified <see cref="P:System.Xml.XmlDocument.Name" />
 
             
 
@@ -392,22 +379,23 @@
           <para>The new XmlAttribute.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The qualified name of the attribute. If the name contains a colon, the <see
-           cref="P:System.Xml.XmlNode.Prefix" />
+          The qualified name of the attribute. If the name contains a colon, the <see cref="P:System.Xml.XmlNode.Prefix" />
 
           
 
-           property reflects the part of the name preceding the first colon and the <see
-           cref="P:System.Xml.XmlDocument.LocalName" />
+           property reflects the part of the name preceding the first colon and the <see cref="P:System.Xml.XmlDocument.LocalName" />
 
           
 
-           property reflects the part of the name following the first colon. The <see
-           cref="P:System.Xml.XmlNode.NamespaceURI" />
+           property reflects the part of the name following the first colon. The <see cref="P:System.Xml.XmlNode.NamespaceURI" />
 
           
 
@@ -441,13 +429,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The XmlAttribute can be added to an <see
-             cref="T:System.Xml.XmlElement" />
+            >The XmlAttribute can be added to an <see cref="T:System.Xml.XmlElement" />
 
             
 
-             using the <see
-             cref="M:System.Xml.XmlElement.SetAttributeNode(System.Xml.XmlAttribute)" />
+             using the <see cref="M:System.Xml.XmlElement.SetAttributeNode(System.Xml.XmlAttribute)" />
 
             
 
@@ -457,13 +443,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlAttribute" />
+            >Creates an <see cref="T:System.Xml.XmlAttribute" />
 
             
 
-             with the specified qualified name and <see
-             cref="P:System.Xml.XmlNode.NamespaceURI" />
+             with the specified qualified name and <see cref="P:System.Xml.XmlNode.NamespaceURI" />
 
             
 
@@ -475,24 +459,30 @@
           <para>The new XmlAttribute.</para>
         </returns>
         <param name="qualifiedName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The qualified name of the attribute. If the name contains a colon then the <see
-           cref="P:System.Xml.XmlNode.Prefix" />
+          The qualified name of the attribute. If the name contains a colon then the <see cref="P:System.Xml.XmlNode.Prefix" />
 
           
 
-           property will reflect the part of the name preceding the colon and the <see
-           cref="P:System.Xml.XmlDocument.LocalName" />
+           property will reflect the part of the name preceding the colon and the <see cref="P:System.Xml.XmlDocument.LocalName" />
 
           
 
            property will reflect the part of the name after the colon. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -527,13 +517,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The XmlAttribute can be added to an <see
-             cref="T:System.Xml.XmlElement" />
+            >The XmlAttribute can be added to an <see cref="T:System.Xml.XmlElement" />
 
             
 
-             using the <see
-             cref="M:System.Xml.XmlElement.SetAttributeNode(System.Xml.XmlAttribute)" />
+             using the <see cref="M:System.Xml.XmlElement.SetAttributeNode(System.Xml.XmlAttribute)" />
 
             
 
@@ -544,23 +532,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlAttribute" />
+            >Creates an <see cref="T:System.Xml.XmlAttribute" />
 
             
 
-             with the specified <see
-             cref="P:System.Xml.XmlNode.Prefix" />
+             with the specified <see cref="P:System.Xml.XmlNode.Prefix" />
 
             
 
-            , <see
-             cref="P:System.Xml.XmlDocument.LocalName" />
+            , <see cref="P:System.Xml.XmlDocument.LocalName" />
 
             
 
-            , and <see
-             cref="P:System.Xml.XmlNode.NamespaceURI" />
+            , and <see cref="P:System.Xml.XmlNode.NamespaceURI" />
 
             
 
@@ -572,26 +556,37 @@
           <para>The new XmlAttribute.</para>
         </returns>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The prefix of the attribute (if any). String.Empty and null are equivalent. </param
         >
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the attribute. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The namespace URI of the attribute (if any). String.Empty and null are equivalent. If <paramref
-           name="prefix" />
+          The namespace URI of the attribute (if any). String.Empty and null are equivalent. If <paramref name="prefix" />
 
           
 
@@ -629,8 +624,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlCDataSection" />
+            >Creates an <see cref="T:System.Xml.XmlCDataSection" />
 
             
 
@@ -642,7 +636,11 @@
           <para>The new XmlCDataSection.</para>
         </returns>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -680,8 +678,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlComment" />
+            >Creates an <see cref="T:System.Xml.XmlComment" />
 
             
 
@@ -693,7 +690,11 @@
           <para>The new XmlComment.</para>
         </returns>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -736,8 +737,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.Xml.XmlAttribute" />
+            >The new <see cref="T:System.Xml.XmlAttribute" />
 
             
 
@@ -745,21 +745,33 @@
           >
         </returns>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The prefix of the attribute (if any). </param
         >
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the attribute. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -794,8 +806,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlDocumentFragment" />
+            >Creates an <see cref="T:System.Xml.XmlDocumentFragment" />
 
             
 
@@ -836,13 +847,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The returned node will have parsed <see
-             cref="P:System.Xml.XmlDocumentType.Entities" />
+            >The returned node will have parsed <see cref="P:System.Xml.XmlDocumentType.Entities" />
 
             
 
-             and <see
-             cref="P:System.Xml.XmlDocumentType.Notations" />
+             and <see cref="P:System.Xml.XmlDocumentType.Notations" />
 
             
 
@@ -850,8 +859,7 @@
           >
           <para>Although this method creates the new object in the context of the document, it does not automatically add the new object to the document tree. To add the new object, you must explicitly call one of the node insert methods.</para>
           <para
-            >According to the W3C Extensible Markup Language (XML) 1.0 recommendation (www.w3.org/TR/1998/REC-xml-19980210), DocumentType nodes are only allowed within Document nodes. Each <see
-             cref="T:System.Xml.XmlDocument" />
+            >According to the W3C Extensible Markup Language (XML) 1.0 recommendation (www.w3.org/TR/1998/REC-xml-19980210), DocumentType nodes are only allowed within Document nodes. Each <see cref="T:System.Xml.XmlDocument" />
 
             
 
@@ -862,8 +870,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new <see
-             cref="T:System.Xml.XmlDocumentType" />
+            >Returns a new <see cref="T:System.Xml.XmlDocumentType" />
 
             
 
@@ -875,28 +882,44 @@
           <para>The new XmlDocumentType.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Name of the document type. </param
         >
         <param name="publicId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The public identifier of the document type or null. You can specify a public URI and also a system identifier to identify the location of the external DTD subset.</param
         >
         <param name="systemId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The system identifier of the document type or null. Specifies the URL of the file location for the external DTD subset.</param
         >
         <param name="internalSubset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -941,17 +964,19 @@
           <para>The new XmlElement.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The qualified name of the element. If the name contains a colon then the <see
-           cref="P:System.Xml.XmlNode.Prefix" />
+          The qualified name of the element. If the name contains a colon then the <see cref="P:System.Xml.XmlNode.Prefix" />
 
           
 
-           property reflects the part of the name preceding the colon and the <see
-           cref="P:System.Xml.XmlDocument.LocalName" />
+           property reflects the part of the name preceding the colon and the <see cref="P:System.Xml.XmlDocument.LocalName" />
 
           
 
@@ -996,13 +1021,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlElement" />
+            >Creates an <see cref="T:System.Xml.XmlElement" />
 
             
 
-             with the qualified name and <see
-             cref="P:System.Xml.XmlNode.NamespaceURI" />
+             with the qualified name and <see cref="P:System.Xml.XmlNode.NamespaceURI" />
 
             
 
@@ -1014,24 +1037,30 @@
           <para>The new XmlElement.</para>
         </returns>
         <param name="qualifiedName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The qualified name of the element. If the name contains a colon then the <see
-           cref="P:System.Xml.XmlNode.Prefix" />
+          The qualified name of the element. If the name contains a colon then the <see cref="P:System.Xml.XmlNode.Prefix" />
 
           
 
-           property will reflect the part of the name preceding the colon and the <see
-           cref="P:System.Xml.XmlDocument.LocalName" />
+           property will reflect the part of the name preceding the colon and the <see cref="P:System.Xml.XmlDocument.LocalName" />
 
           
 
            property will reflect the part of the name after the colon. The qualified name cannot include a prefix of'xmlns'. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1077,18 +1106,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an element with the specified <see
-             cref="P:System.Xml.XmlNode.Prefix" />
+            >Creates an element with the specified <see cref="P:System.Xml.XmlNode.Prefix" />
 
             
 
-            , <see
-             cref="P:System.Xml.XmlDocument.LocalName" />
+            , <see cref="P:System.Xml.XmlDocument.LocalName" />
 
             
 
-            , and <see
-             cref="P:System.Xml.XmlNode.NamespaceURI" />
+            , and <see cref="P:System.Xml.XmlNode.NamespaceURI" />
 
             
 
@@ -1098,8 +1124,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.Xml.XmlElement" />
+            >The new <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -1107,21 +1132,33 @@
           >
         </returns>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The prefix of the new element (if any). String.Empty and null are equivalent. </param
         >
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the new element. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1154,8 +1191,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the referenced entity is known, the child list of the XmlEntityReference node is made the same as that of the corresponding <see
-             cref="T:System.Xml.XmlEntity" />
+            >If the referenced entity is known, the child list of the XmlEntityReference node is made the same as that of the corresponding <see cref="T:System.Xml.XmlEntity" />
 
             
 
@@ -1166,13 +1202,11 @@
           <para>If you call CreateEntityReference("a") you get back a single node of type EntityReference with no children. If you append this node as a child of the following node, </para>
           <code>&lt;item xmlns="urn:1"/&gt;</code>
           <para
-            >then, at the time of calling <see
-             cref="M:System.Xml.XmlNode.AppendChild(System.Xml.XmlNode)" />
+            >then, at the time of calling <see cref="M:System.Xml.XmlNode.AppendChild(System.Xml.XmlNode)" />
 
             
 
-            , the parent of the newly created entity reference node is set and the children are expanded in this namespace context. The child element node b will have NamespaceURI equal to urn:1. The child nodes of the entity reference remain the same even if you move the entity reference to a place in the document that has a different default namespace context. This does not happen for existing entity reference nodes when you remove and insert them or for entity references that you clone with <see
-             cref="M:System.Xml.XmlDocument.CloneNode(System.Boolean)" />
+            , the parent of the newly created entity reference node is set and the children are expanded in this namespace context. The child element node b will have NamespaceURI equal to urn:1. The child nodes of the entity reference remain the same even if you move the entity reference to a place in the document that has a different default namespace context. This does not happen for existing entity reference nodes when you remove and insert them or for entity references that you clone with <see cref="M:System.Xml.XmlDocument.CloneNode(System.Boolean)" />
 
             
 
@@ -1186,8 +1220,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlEntityReference" />
+            >Creates an <see cref="T:System.Xml.XmlEntityReference" />
 
             
 
@@ -1199,7 +1232,11 @@
           <para>The new XmlEntityReference.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1234,8 +1271,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >Creates a new <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
@@ -1245,8 +1281,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >An <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
@@ -1284,13 +1319,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >Creates an <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
-             object for navigating this document positioned on the <see
-             cref="T:System.Xml.XmlNode" />
+             object for navigating this document positioned on the <see cref="T:System.Xml.XmlNode" />
 
             
 
@@ -1300,8 +1333,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >An <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
@@ -1309,12 +1341,15 @@
           >
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlNode" />
+          The <see cref="T:System.Xml.XmlNode" />
 
           
 
@@ -1349,8 +1384,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="nodeTypeString" />
+            >The <paramref name="nodeTypeString" />
 
             
 
@@ -1799,18 +1833,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlNode" />
+            >Creates an <see cref="T:System.Xml.XmlNode" />
 
             
 
-             with the specified node type, <see
-             cref="P:System.Xml.XmlDocument.Name" />
+             with the specified node type, <see cref="P:System.Xml.XmlDocument.Name" />
 
             
 
-            , and <see
-             cref="P:System.Xml.XmlNode.NamespaceURI" />
+            , and <see cref="P:System.Xml.XmlNode.NamespaceURI" />
 
             
 
@@ -1822,36 +1853,45 @@
           <para>The new XmlNode.</para>
         </returns>
         <param name="nodeTypeString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          String version of the <see
-           cref="T:System.Xml.XmlNodeType" />
+          String version of the <see cref="T:System.Xml.XmlNodeType" />
 
           
 
            of the new node. This parameter must be one of the values listed in the table below. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The qualified name of the new node. If the name contains a colon, it is parsed into <see
-           cref="P:System.Xml.XmlNode.Prefix" />
+          The qualified name of the new node. If the name contains a colon, it is parsed into <see cref="P:System.Xml.XmlNode.Prefix" />
 
           
 
-           and <see
-           cref="P:System.Xml.XmlDocument.LocalName" />
+           and <see cref="P:System.Xml.XmlDocument.LocalName" />
 
           
 
            components. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2220,23 +2260,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlNode" />
+            >Creates an <see cref="T:System.Xml.XmlNode" />
 
             
 
-             with the specified <see
-             cref="T:System.Xml.XmlNodeType" />
+             with the specified <see cref="T:System.Xml.XmlNodeType" />
 
             
 
-            , <see
-             cref="P:System.Xml.XmlDocument.Name" />
+            , <see cref="P:System.Xml.XmlDocument.Name" />
 
             
 
-            , and <see
-             cref="P:System.Xml.XmlNode.NamespaceURI" />
+            , and <see cref="P:System.Xml.XmlNode.NamespaceURI" />
 
             
 
@@ -2248,31 +2284,41 @@
           <para>The new XmlNode.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XmlNodeType of the new node. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The qualified name of the new node. If the name contains a colon then it is parsed into <see
-           cref="P:System.Xml.XmlNode.Prefix" />
+          The qualified name of the new node. If the name contains a colon then it is parsed into <see cref="P:System.Xml.XmlNode.Prefix" />
 
           
 
-           and <see
-           cref="P:System.Xml.XmlDocument.LocalName" />
+           and <see cref="P:System.Xml.XmlDocument.LocalName" />
 
           
 
            components. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2642,28 +2688,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Xml.XmlNode" />
+            >Creates a <see cref="T:System.Xml.XmlNode" />
 
             
 
-             with the specified <see
-             cref="T:System.Xml.XmlNodeType" />
+             with the specified <see cref="T:System.Xml.XmlNodeType" />
 
             
 
-            , <see
-             cref="P:System.Xml.XmlNode.Prefix" />
+            , <see cref="P:System.Xml.XmlNode.Prefix" />
 
             
 
-            , <see
-             cref="P:System.Xml.XmlDocument.Name" />
+            , <see cref="P:System.Xml.XmlDocument.Name" />
 
             
 
-            , and <see
-             cref="P:System.Xml.XmlNode.NamespaceURI" />
+            , and <see cref="P:System.Xml.XmlNode.NamespaceURI" />
 
             
 
@@ -2675,28 +2716,44 @@
           <para>The new XmlNode.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XmlNodeType of the new node. </param
         >
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The prefix of the new node. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the new node. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2735,8 +2792,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlProcessingInstruction" />
+            >Creates an <see cref="T:System.Xml.XmlProcessingInstruction" />
 
             
 
@@ -2748,14 +2804,22 @@
           <para>The new XmlProcessingInstruction.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the processing instruction. </param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2793,8 +2857,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlSignificantWhitespace" />
+            >Creates an <see cref="T:System.Xml.XmlSignificantWhitespace" />
 
             
 
@@ -2806,7 +2869,11 @@
           <para>A new XmlSignificantWhitespace node.</para>
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2844,8 +2911,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlText" />
+            >Creates an <see cref="T:System.Xml.XmlText" />
 
             
 
@@ -2857,7 +2923,11 @@
           <para>The new XmlText node.</para>
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2895,8 +2965,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlWhitespace" />
+            >Creates an <see cref="T:System.Xml.XmlWhitespace" />
 
             
 
@@ -2908,7 +2977,11 @@
           <para>A new XmlWhitespace node.</para>
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2943,8 +3016,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The attributes are exposed as special properties on the XmlDeclaration node, and not as <see
-             cref="T:System.Xml.XmlAttribute" />
+            >The attributes are exposed as special properties on the XmlDeclaration node, and not as <see cref="T:System.Xml.XmlAttribute" />
 
             
 
@@ -2957,8 +3029,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlDeclaration" />
+            >Creates an <see cref="T:System.Xml.XmlDeclaration" />
 
             
 
@@ -2970,36 +3041,45 @@
           <para>The new XmlDeclaration node.</para>
         </returns>
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The version must be "1.0". </param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value of the encoding attribute. This is the encoding that is used when you save the <see
-           cref="T:System.Xml.XmlDocument" />
+          The value of the encoding attribute. This is the encoding that is used when you save the <see cref="T:System.Xml.XmlDocument" />
 
           
 
-           to a file or a stream; therefore, it must be set to a string supported by the <see
-           cref="T:System.Text.Encoding" />
+           to a file or a stream; therefore, it must be set to a string supported by the <see cref="T:System.Text.Encoding" />
 
           
 
-           class, otherwise <see
-           cref="M:System.Xml.XmlDocument.Save(System.String)" />
+           class, otherwise <see cref="M:System.Xml.XmlDocument.Save(System.String)" />
 
           
 
            fails. If this is null or String.Empty, the Save method does not write an encoding attribute on the XML declaration and therefore the default encoding, UTF-8, is used.</param
         >
         <param name="standalone">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3027,8 +3107,7 @@
       </ReturnValue>
       <Docs>
         <value
-          >an <see
-           cref="T:System.Xml.XmlElement" />
+          >an <see cref="T:System.Xml.XmlElement" />
 
           
 
@@ -3045,8 +3124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the root <see
-             cref="T:System.Xml.XmlElement" />
+            >Gets the root <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -3084,8 +3162,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An XmlDocument can have one and only one child with <see
-             cref="T:System.Xml.XmlNodeType" />
+            >An XmlDocument can have one and only one child with <see cref="T:System.Xml.XmlNodeType" />
 
             
 
@@ -3093,8 +3170,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This property is read-only. To change the DocumentType node, delete the existing node, create a new one using the <see
-               cref="M:System.Xml.XmlDocument.CreateDocumentType(System.String,System.String,System.String,System.String)" />
+              >This property is read-only. To change the DocumentType node, delete the existing node, create a new one using the <see cref="M:System.Xml.XmlDocument.CreateDocumentType(System.String,System.String,System.String,System.String)" />
 
               
 
@@ -3140,8 +3216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.XmlElement" />
+            >Gets the <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -3153,7 +3228,11 @@
           <para>The XmlElement with the matching ID or null if no matching element is found.</para>
         </returns>
         <param name="elementId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3188,18 +3267,15 @@
           <para>The nodes are placed in the order in which they would be encountered in the document.</para>
           <block subset="none" type="note">
             <para
-              >It is recommended that you use the <see
-               cref="Overload:System.Xml.XmlNode.SelectNodes" />
+              >It is recommended that you use the <see cref="Overload:System.Xml.XmlNode.SelectNodes" />
 
               
 
-               or <see
-               cref="Overload:System.Xml.XmlNode.SelectSingleNode" />
+               or <see cref="Overload:System.Xml.XmlNode.SelectSingleNode" />
 
               
 
-               method instead of the <see
-               cref="M:System.Xml.XmlDocument.GetElementsByTagName(System.String)" />
+               method instead of the <see cref="M:System.Xml.XmlDocument.GetElementsByTagName(System.String)" />
 
               
 
@@ -3210,13 +3286,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Xml.XmlNodeList" />
+            >Returns an <see cref="T:System.Xml.XmlNodeList" />
 
             
 
-             containing a list of all descendant elements that match the specified <see
-             cref="P:System.Xml.XmlDocument.Name" />
+             containing a list of all descendant elements that match the specified <see cref="P:System.Xml.XmlDocument.Name" />
 
             
 
@@ -3226,13 +3300,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlNodeList" />
+            >An <see cref="T:System.Xml.XmlNodeList" />
 
             
 
-             containing a list of all matching nodes. If no nodes match <paramref
-             name="name" />
+             containing a list of all matching nodes. If no nodes match <paramref name="name" />
 
             
 
@@ -3240,7 +3312,11 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3276,18 +3352,15 @@
           <para>The nodes are placed in the order in which they would be encountered in the document tree.</para>
           <block subset="none" type="note">
             <para
-              >It is recommended that you use the <see
-               cref="Overload:System.Xml.XmlNode.SelectNodes" />
+              >It is recommended that you use the <see cref="Overload:System.Xml.XmlNode.SelectNodes" />
 
               
 
-               or <see
-               cref="Overload:System.Xml.XmlNode.SelectSingleNode" />
+               or <see cref="Overload:System.Xml.XmlNode.SelectSingleNode" />
 
               
 
-               method instead of the <see
-               cref="M:System.Xml.XmlDocument.GetElementsByTagName(System.String,System.String)" />
+               method instead of the <see cref="M:System.Xml.XmlDocument.GetElementsByTagName(System.String,System.String)" />
 
               
 
@@ -3298,18 +3371,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Xml.XmlNodeList" />
+            >Returns an <see cref="T:System.Xml.XmlNodeList" />
 
             
 
-             containing a list of all descendant elements that match the specified <see
-             cref="P:System.Xml.XmlDocument.LocalName" />
+             containing a list of all descendant elements that match the specified <see cref="P:System.Xml.XmlDocument.LocalName" />
 
             
 
-             and <see
-             cref="P:System.Xml.XmlNode.NamespaceURI" />
+             and <see cref="P:System.Xml.XmlNode.NamespaceURI" />
 
             
 
@@ -3319,18 +3389,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlNodeList" />
+            >An <see cref="T:System.Xml.XmlNodeList" />
 
             
 
-             containing a list of all matching nodes. If no nodes match the specified <paramref
-             name="localName" />
+             containing a list of all matching nodes. If no nodes match the specified <paramref name="localName" />
 
             
 
-             and <paramref
-             name="namespaceURI" />
+             and <paramref name="namespaceURI" />
 
             
 
@@ -3338,14 +3405,22 @@
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The LocalName to match. The special value "*" matches all tags. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3382,16 +3457,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >XmlDocument objects created from the same XmlImplementation share the same <see
-             cref="T:System.Xml.XmlNameTable" />
+            >XmlDocument objects created from the same XmlImplementation share the same <see cref="T:System.Xml.XmlNameTable" />
 
             
 
             . This allows users to compare attribute and element names as objects rather than strings.</para
           >
           <para
-            >Although the XmlDocument objects share the same implementation, to move nodes from one document to another you must use the <see
-             cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" />
+            >Although the XmlDocument objects share the same implementation, to move nodes from one document to another you must use the <see cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" />
 
             
 
@@ -3401,8 +3474,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.XmlImplementation" />
+            >Gets the <see cref="T:System.Xml.XmlImplementation" />
 
             
 
@@ -3438,44 +3510,37 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The returned node has no parent. The source node is not altered or removed from the original document; ImportNode creates a copy of the source node.</para>
           <para
-            >Importing a node creates an XmlNode object owned by the importing document, with <see
-             cref="P:System.Xml.XmlNode.Name" />
+            >Importing a node creates an XmlNode object owned by the importing document, with <see cref="P:System.Xml.XmlNode.Name" />
 
             
 
-             and <see
-             cref="P:System.Xml.XmlNode.NodeType" />
+             and <see cref="P:System.Xml.XmlNode.NodeType" />
 
             
 
-             identical to the source node. The new object also has the attributes related to namespaces (<see
-             cref="P:System.Xml.XmlNode.Prefix" />
+             identical to the source node. The new object also has the attributes related to namespaces (<see cref="P:System.Xml.XmlNode.Prefix" />
 
             
 
-            , <see
-             cref="P:System.Xml.XmlNode.LocalName" />
+            , <see cref="P:System.Xml.XmlNode.LocalName" />
 
             
 
-            , and <see
-             cref="P:System.Xml.XmlNode.NamespaceURI" />
+            , and <see cref="P:System.Xml.XmlNode.NamespaceURI" />
 
             
 
             ).</para
           >
           <para
-            >Depending on the node type of the imported node and the value of the <paramref
-             name="deep" />
+            >Depending on the node type of the imported node and the value of the <paramref name="deep" />
 
             
 
              parameter, additional information is copied as appropriate. This method attempts to mirror the behavior expected if a fragment of XML or HTML source was copied from one document to another (recognizing that, in the XML case, the two documents could have different DTDs).</para
           >
           <para
-            >The following table describes the specific behavior for each <see
-             cref="T:System.Xml.XmlNodeType" />
+            >The following table describes the specific behavior for each <see cref="T:System.Xml.XmlNodeType" />
 
             
 
@@ -3501,13 +3566,11 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="P:System.Xml.XmlAttribute.Specified" />
+                  >The <see cref="P:System.Xml.XmlAttribute.Specified" />
 
                   
 
-                   property is set to true on the generated <see
-                   cref="T:System.Xml.XmlAttribute" />
+                   property is set to true on the generated <see cref="T:System.Xml.XmlAttribute" />
 
                   
 
@@ -3516,8 +3579,7 @@
               </description>
               <description>
                 <para
-                  >The <paramref
-                   name="deep" />
+                  >The <paramref name="deep" />
 
                   
 
@@ -3556,8 +3618,7 @@
               </description>
               <description>
                 <para
-                  >An empty <see
-                   cref="T:System.Xml.XmlDocumentFragment" />
+                  >An empty <see cref="T:System.Xml.XmlDocumentFragment" />
 
                   
 
@@ -3586,8 +3647,7 @@
               </description>
               <description>
                 <para
-                  >Specified attribute nodes of the source element are imported, and the generated XmlAttribute nodes are attached to the generated <see
-                   cref="T:System.Xml.XmlElement" />
+                  >Specified attribute nodes of the source element are imported, and the generated XmlAttribute nodes are attached to the generated <see cref="T:System.Xml.XmlElement" />
 
                   
 
@@ -3602,8 +3662,7 @@
               </term>
               <description>
                 <para
-                  >Because the source and destination documents could have the entities defined differently, this method only copies the <see
-                   cref="T:System.Xml.XmlEntityReference" />
+                  >Because the source and destination documents could have the entities defined differently, this method only copies the <see cref="T:System.Xml.XmlEntityReference" />
 
                   
 
@@ -3612,8 +3671,7 @@
               </description>
               <description>
                 <para
-                  >Because the source and destination documents could have the entities defined differently, this method only copies the <see
-                   cref="T:System.Xml.XmlEntityReference" />
+                  >Because the source and destination documents could have the entities defined differently, this method only copies the <see cref="T:System.Xml.XmlEntityReference" />
 
                   
 
@@ -3697,8 +3755,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The imported <see
-             cref="T:System.Xml.XmlNode" />
+            >The imported <see cref="T:System.Xml.XmlNode" />
 
             
 
@@ -3706,14 +3763,22 @@
           >
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The node being imported. </param
         >
         <param name="deep">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3740,8 +3805,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Throws an <see
-             cref="T:System.InvalidOperationException" />
+            >Throws an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -3872,8 +3936,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The Load method always preserves significant white space. The <see
-               cref="P:System.Xml.XmlDocument.PreserveWhitespace" />
+              >The Load method always preserves significant white space. The <see cref="P:System.Xml.XmlDocument.PreserveWhitespace" />
 
               
 
@@ -3881,23 +3944,19 @@
             >
           </block>
           <para
-            >If you want validation to occur, you can create a validating <see
-             cref="T:System.Xml.XmlReader" />
+            >If you want validation to occur, you can create a validating <see cref="T:System.Xml.XmlReader" />
 
             
 
-             instance by using the <see
-             cref="T:System.Xml.XmlReaderSettings" />
+             instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
             
 
-             class and the <see
-             cref="Overload:System.Xml.XmlReader.Create" />
+             class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
             
 
-             method. For more information, see <format
-             type="text/html">
+             method. For more information, see <format type="text/html">
               <a href="2958dbbd-60ca-4447-9b16-72f41d223486">Validating XML Data with XmlReader</a>
             </format>
 
@@ -3912,7 +3971,11 @@
           <para>Loads the XML document from the specified stream.</para>
         </summary>
         <param name="inStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3946,8 +4009,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The Load method always preserves significant white space. The <see
-               cref="P:System.Xml.XmlDocument.PreserveWhitespace" />
+              >The Load method always preserves significant white space. The <see cref="P:System.Xml.XmlDocument.PreserveWhitespace" />
 
               
 
@@ -3955,23 +4017,19 @@
             >
           </block>
           <para
-            >If you want validation to occur, you can create a validating <see
-             cref="T:System.Xml.XmlReader" />
+            >If you want validation to occur, you can create a validating <see cref="T:System.Xml.XmlReader" />
 
             
 
-             instance by using the <see
-             cref="T:System.Xml.XmlReaderSettings" />
+             instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
             
 
-             class and the <see
-             cref="Overload:System.Xml.XmlReader.Create" />
+             class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
             
 
-             method. For more information, see <format
-             type="text/html">
+             method. For more information, see <format type="text/html">
               <a href="2958dbbd-60ca-4447-9b16-72f41d223486">Validating XML Data with XmlReader</a>
             </format>
 
@@ -3984,8 +4042,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads the XML document from the specified <see
-             cref="T:System.IO.TextReader" />
+            >Loads the XML document from the specified <see cref="T:System.IO.TextReader" />
 
             
 
@@ -3993,7 +4050,11 @@
           >
         </summary>
         <param name="txtReader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4024,8 +4085,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The Load method always preserves significant white space. The <see
-               cref="P:System.Xml.XmlDocument.PreserveWhitespace" />
+              >The Load method always preserves significant white space. The <see cref="P:System.Xml.XmlDocument.PreserveWhitespace" />
 
               
 
@@ -4033,23 +4093,19 @@
             >
           </block>
           <para
-            >If you want validation to occur, you can create a validating <see
-             cref="T:System.Xml.XmlReader" />
+            >If you want validation to occur, you can create a validating <see cref="T:System.Xml.XmlReader" />
 
             
 
-             instance by using the <see
-             cref="T:System.Xml.XmlReaderSettings" />
+             instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
             
 
-             class and the <see
-             cref="Overload:System.Xml.XmlReader.Create" />
+             class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
             
 
-             method. For more information, see <format
-             type="text/html">
+             method. For more information, see <format type="text/html">
               <a href="2958dbbd-60ca-4447-9b16-72f41d223486">Validating XML Data with XmlReader</a>
             </format>
 
@@ -4064,7 +4120,11 @@
           <para>Loads the XML document from the specified URL.</para>
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4098,8 +4158,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The Load method always preserves significant white space. The <see
-               cref="P:System.Xml.XmlDocument.PreserveWhitespace" />
+              >The Load method always preserves significant white space. The <see cref="P:System.Xml.XmlDocument.PreserveWhitespace" />
 
               
 
@@ -4107,8 +4166,7 @@
             >
           </block>
           <para
-            >If the reader is in the initial state (<see
-             cref="P:System.Xml.XmlReader.ReadState" />
+            >If the reader is in the initial state (<see cref="P:System.Xml.XmlReader.ReadState" />
 
             
 
@@ -4120,8 +4178,7 @@
           <para>Load throws an exception because a document cannot have two root level elements. If the current node and its siblings look like the following: </para>
           <code>&lt;!--comment--&gt;&lt;?process instruction?&gt;&lt;!--comment--&gt;&lt;/endtag&gt;</code>
           <para
-            >Load succeeds, but you have an incomplete DOM tree because there is no root level element. Before you save the document, you must add a root level element, otherwise <see
-             cref="M:System.Xml.XmlDocument.Save(System.String)" />
+            >Load succeeds, but you have an incomplete DOM tree because there is no root level element. Before you save the document, you must add a root level element, otherwise <see cref="M:System.Xml.XmlDocument.Save(System.String)" />
 
             
 
@@ -4129,23 +4186,19 @@
           >
           <para>If the reader is positioned on a leaf node that is invalid for the root level of a document, for example a white space or attribute node, the reader continues to read until it is positioned on a node that can be used for the root. The document begins loading at this point.</para>
           <para
-            >If you want validation to occur, you can create a validating <see
-             cref="T:System.Xml.XmlReader" />
+            >If you want validation to occur, you can create a validating <see cref="T:System.Xml.XmlReader" />
 
             
 
-             instance by using the <see
-             cref="T:System.Xml.XmlReaderSettings" />
+             instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
             
 
-             class and the <see
-             cref="Overload:System.Xml.XmlReader.Create" />
+             class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
             
 
-             method. For more information, see <format
-             type="text/html">
+             method. For more information, see <format type="text/html">
               <a href="2958dbbd-60ca-4447-9b16-72f41d223486">Validating XML Data with XmlReader</a>
             </format>
 
@@ -4158,8 +4211,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads the XML document from the specified <see
-             cref="T:System.Xml.XmlReader" />
+            >Loads the XML document from the specified <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -4167,7 +4219,11 @@
           >
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4198,23 +4254,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>By default the LoadXml method does not preserve white space or significant white space.</para>
           <para
-            >This method parses DTDs, but does not do DTD or Schema validation. If you want validation to occur, you can create a validating <see
-             cref="T:System.Xml.XmlReader" />
+            >This method parses DTDs, but does not do DTD or Schema validation. If you want validation to occur, you can create a validating <see cref="T:System.Xml.XmlReader" />
 
             
 
-             instance by using the <see
-             cref="T:System.Xml.XmlReaderSettings" />
+             instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
             
 
-             class and the <see
-             cref="Overload:System.Xml.XmlReader.Create" />
+             class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
             
 
-             method. For more information, see <format
-             type="text/html">
+             method. For more information, see <format type="text/html">
               <a href="2958dbbd-60ca-4447-9b16-72f41d223486">Validating XML Data with XmlReader</a>
             </format>
 
@@ -4223,23 +4275,19 @@
             .</para
           >
           <para
-            >If you want to load from a <see
-             cref="T:System.IO.Stream" />
+            >If you want to load from a <see cref="T:System.IO.Stream" />
 
             
 
-            , <see
-             cref="T:System.String" />
+            , <see cref="T:System.String" />
 
             
 
-            , <see
-             cref="T:System.IO.TextReader" />
+            , <see cref="T:System.IO.TextReader" />
 
             
 
-            , or <see
-             cref="T:System.Xml.XmlReader" />
+            , or <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -4252,7 +4300,11 @@
           <para>Loads the XML document from the specified string.</para>
         </summary>
         <param name="xml">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4277,18 +4329,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The local name returned depends on the <see
-             cref="P:System.Xml.XmlDocument.NodeType" />
+            >The local name returned depends on the <see cref="P:System.Xml.XmlDocument.NodeType" />
 
             
 
-             of the node. To see a table describing the local name returned for each of the node types, see the <see
-             cref="P:System.Xml.XmlNode.LocalName" />
+             of the node. To see a table describing the local name returned for each of the node types, see the <see cref="P:System.Xml.XmlNode.LocalName" />
 
             
 
-             property in the <see
-             cref="T:System.Xml.XmlNode" />
+             property in the <see cref="T:System.Xml.XmlNode" />
 
             
 
@@ -4318,18 +4367,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name returned depends on the <see
-             cref="P:System.Xml.XmlDocument.NodeType" />
+            >The name returned depends on the <see cref="P:System.Xml.XmlDocument.NodeType" />
 
             
 
-             of the node. To see a table describing the name returned for each of the node types, see the <see
-             cref="P:System.Xml.XmlNode.Name" />
+             of the node. To see a table describing the name returned for each of the node types, see the <see cref="P:System.Xml.XmlNode.Name" />
 
             
 
-             property in the <see
-             cref="T:System.Xml.XmlNode" />
+             property in the <see cref="T:System.Xml.XmlNode" />
 
             
 
@@ -4359,8 +4405,7 @@
       </ReturnValue>
       <Docs>
         <value
-          >an <see
-           cref="T:System.Xml.XmlNameTable" />
+          >an <see cref="T:System.Xml.XmlNameTable" />
 
           
 
@@ -4369,16 +4414,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each XmlDocument object has a <see
-             cref="T:System.Xml.NameTable" />
+            >Each XmlDocument object has a <see cref="T:System.Xml.NameTable" />
 
             
 
              object. Element and attribute names are stored in the NameTable as atomized strings. This means that even if a name is referenced in the document multiple times it is stored only once in the NameTable. For example, if the document had multiple elements with the name "Customer", NameTable returns the same object whenever it receives a request for that name. As a result, users can write code using object comparisons on these strings rather than the more expensive string comparisons.</para
           >
           <para
-            >For more information on atomized strings, see <see
-             cref="T:System.Xml.XmlNameTable" />
+            >For more information on atomized strings, see <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -4389,8 +4432,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.XmlNameTable" />
+            >Gets the <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -4427,8 +4469,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Xml.XmlNode.Value" />
+            >Occurs when the <see cref="P:System.Xml.XmlNode.Value" />
 
             
 
@@ -4465,8 +4506,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Xml.XmlNode.Value" />
+            >Occurs when the <see cref="P:System.Xml.XmlNode.Value" />
 
             
 
@@ -4648,8 +4688,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.XmlDocument" />
+            >Gets the <see cref="T:System.Xml.XmlDocument" />
 
             
 
@@ -4705,21 +4744,18 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property determines how white space is handled during the load and save process.</para>
           <para
-            >If PreserveWhitespace is true before <see
-             cref="M:System.Xml.XmlDocument.Load(System.String)" />
+            >If PreserveWhitespace is true before <see cref="M:System.Xml.XmlDocument.Load(System.String)" />
 
             
 
-             or <see
-             cref="M:System.Xml.XmlDocument.LoadXml(System.String)" />
+             or <see cref="M:System.Xml.XmlDocument.LoadXml(System.String)" />
 
             
 
              is called, white space nodes are preserved; otherwise, if this property is false, significant white space is preserved, white space is not.</para
           >
           <para
-            >If PreserveWhitespace is true before <see
-             cref="M:System.Xml.XmlDocument.Save(System.String)" />
+            >If PreserveWhitespace is true before <see cref="M:System.Xml.XmlDocument.Save(System.String)" />
 
             
 
@@ -4758,8 +4794,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads one XmlNode from the given reader and positions the reader on the next node. This method creates the type of XmlNode matching the <see
-             cref="P:System.Xml.XmlNode.NodeType" />
+            >Reads one XmlNode from the given reader and positions the reader on the next node. This method creates the type of XmlNode matching the <see cref="P:System.Xml.XmlNode.NodeType" />
 
             
 
@@ -4774,8 +4809,7 @@
    // Do some more processing.
  }</code>
           <para
-            >ReadNode does consume the attribute value though, which means after calling ReadNode on an attribute, <see
-             cref="M:System.Xml.XmlReader.ReadAttributeValue" />
+            >ReadNode does consume the attribute value though, which means after calling ReadNode on an attribute, <see cref="M:System.Xml.XmlReader.ReadAttributeValue" />
 
             
 
@@ -4785,13 +4819,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlNode" />
+            >Creates an <see cref="T:System.Xml.XmlNode" />
 
             
 
-             object based on the information in the <see
-             cref="T:System.Xml.XmlReader" />
+             object based on the information in the <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -4803,7 +4835,11 @@
           <para>The new XmlNode or null if no more nodes exist.</para>
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4836,16 +4872,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >White space is preserved only if <see
-             cref="P:System.Xml.XmlDocument.PreserveWhitespace" />
+            >White space is preserved only if <see cref="P:System.Xml.XmlDocument.PreserveWhitespace" />
 
             
 
              is set to true.</para
           >
           <para
-            >The XmlDeclaration of the current XmlDocument object determines the encoding attribute in the saved document. The value of the encoding attribute is taken from the <see
-             cref="P:System.Xml.XmlDeclaration.Encoding" />
+            >The XmlDeclaration of the current XmlDocument object determines the encoding attribute in the saved document. The value of the encoding attribute is taken from the <see cref="P:System.Xml.XmlDeclaration.Encoding" />
 
             
 
@@ -4858,13 +4892,11 @@
           <para>generates this xmls attribute &lt;item xmls="urn:1"/&gt;.</para>
           <para>This method is a Microsoft extension to the Document Object Model (DOM).</para>
           <para
-            >Note that only the <see
-             cref="M:System.Xml.XmlDocument.Save(System.String)" />
+            >Note that only the <see cref="M:System.Xml.XmlDocument.Save(System.String)" />
 
             
 
-             method enforces a well-formed XML document. All other <unmanagedCodeEntityReference
-            >Save</unmanagedCodeEntityReference>
+             method enforces a well-formed XML document. All other <unmanagedCodeEntityReference>Save</unmanagedCodeEntityReference>
 
             
 
@@ -4876,7 +4908,11 @@
           <para>Saves the XML document to the specified stream.</para>
         </summary>
         <param name="outStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4911,13 +4947,11 @@
           <para>The encoding on the TextWriter determines the encoding that is written out (The encoding of the XmlDeclaration node is replaced by the encoding of the TextWriter). If there was no encoding specified on the TextWriter, the XmlDocument is saved without an encoding attribute.</para>
           <para>This method is a Microsoft extension to the Document Object Model (DOM).</para>
           <para
-            >Note that only the <see
-             cref="M:System.Xml.XmlDocument.Save(System.String)" />
+            >Note that only the <see cref="M:System.Xml.XmlDocument.Save(System.String)" />
 
             
 
-             method enforces a well-formed XML document. All other <unmanagedCodeEntityReference
-            >Save</unmanagedCodeEntityReference>
+             method enforces a well-formed XML document. All other <unmanagedCodeEntityReference>Save</unmanagedCodeEntityReference>
 
             
 
@@ -4927,8 +4961,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the XML document to the specified <see
-             cref="T:System.IO.TextWriter" />
+            >Saves the XML document to the specified <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -4936,7 +4969,11 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4966,16 +5003,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >White space is preserved in the output file only if <see
-             cref="P:System.Xml.XmlDocument.PreserveWhitespace" />
+            >White space is preserved in the output file only if <see cref="P:System.Xml.XmlDocument.PreserveWhitespace" />
 
             
 
              is set to true.</para
           >
           <para
-            >The XmlDeclaration of the current XmlDocument object determines the encoding attribute in the saved document. The value of the encoding attribute is taken from the <see
-             cref="P:System.Xml.XmlDeclaration.Encoding" />
+            >The XmlDeclaration of the current XmlDocument object determines the encoding attribute in the saved document. The value of the encoding attribute is taken from the <see cref="P:System.Xml.XmlDeclaration.Encoding" />
 
             
 
@@ -4988,13 +5023,11 @@
           <para>generates this xmls attribute &lt;item xmls="urn:1"/&gt;.</para>
           <para>This method is a Microsoft extension to the Document Object Model (DOM).</para>
           <para
-            >Note that only the <see
-             cref="M:System.Xml.XmlDocument.Save(System.String)" />
+            >Note that only the <see cref="M:System.Xml.XmlDocument.Save(System.String)" />
 
             
 
-             method enforces a well-formed XML document. All other <unmanagedCodeEntityReference
-            >Save</unmanagedCodeEntityReference>
+             method enforces a well-formed XML document. All other <unmanagedCodeEntityReference>Save</unmanagedCodeEntityReference>
 
             
 
@@ -5006,7 +5039,11 @@
           <para>Saves the XML document to the specified file.</para>
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5036,8 +5073,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >White space is preserved only if <see
-             cref="P:System.Xml.XmlDocument.PreserveWhitespace" />
+            >White space is preserved only if <see cref="P:System.Xml.XmlDocument.PreserveWhitespace" />
 
             
 
@@ -5053,13 +5089,11 @@
     xmls="urn:1"/&gt;</code>
           <para>This method is a Microsoft extension to the Document Object Model (DOM).</para>
           <para
-            >Note that only the <see
-             cref="M:System.Xml.XmlDocument.Save(System.String)" />
+            >Note that only the <see cref="M:System.Xml.XmlDocument.Save(System.String)" />
 
             
 
-             method enforces a well-formed XML document. All other <unmanagedCodeEntityReference
-            >Save</unmanagedCodeEntityReference>
+             method enforces a well-formed XML document. All other <unmanagedCodeEntityReference>Save</unmanagedCodeEntityReference>
 
             
 
@@ -5069,8 +5103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the XML document to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Saves the XML document to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -5078,7 +5111,11 @@
           >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5140,51 +5177,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The schemas contained in an <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+            >The schemas contained in an <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
-             object associated with an <see
-             cref="T:System.Xml.XmlDocument" />
+             object associated with an <see cref="T:System.Xml.XmlDocument" />
 
             
 
-             object are used for validation when the <see
-             cref="Overload:System.Xml.XmlDocument.Validate" />
+             object are used for validation when the <see cref="Overload:System.Xml.XmlDocument.Validate" />
 
             
 
-             method of an <see
-             cref="T:System.Xml.XmlDocument" />
+             method of an <see cref="T:System.Xml.XmlDocument" />
 
             
 
              is executed.</para
           >
           <para
-            >When an <see
-             cref="T:System.Xml.XmlDocument" />
+            >When an <see cref="T:System.Xml.XmlDocument" />
 
             
 
-             object is initialized with XML data from an <see
-             cref="T:System.Xml.XmlReader" />
+             object is initialized with XML data from an <see cref="T:System.Xml.XmlReader" />
 
             
 
-             object, the <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+             object, the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
-             object is loaded from the <see
-             cref="P:System.Xml.XmlReaderSettings.Schemas" />
+             object is loaded from the <see cref="P:System.Xml.XmlReaderSettings.Schemas" />
 
             
 
-             property of the <see
-             cref="T:System.Xml.XmlReader" />
+             property of the <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -5194,13 +5222,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+            >Gets or sets the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
-             object associated with this <see
-             cref="T:System.Xml.XmlDocument" />
+             object associated with this <see cref="T:System.Xml.XmlDocument" />
 
             
 
@@ -5258,36 +5284,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.XmlDocument.Validate(System.Xml.Schema.ValidationEventHandler)" />
+            >The <see cref="M:System.Xml.XmlDocument.Validate(System.Xml.Schema.ValidationEventHandler)" />
 
             
 
-             method validates the XML data in the <see
-             cref="T:System.Xml.XmlDocument" />
+             method validates the XML data in the <see cref="T:System.Xml.XmlDocument" />
 
             
 
-             against the schemas contained in the <see
-             cref="P:System.Xml.XmlDocument.Schemas" />
+             against the schemas contained in the <see cref="P:System.Xml.XmlDocument.Schemas" />
 
             
 
-             property. The <see
-             cref="M:System.Xml.XmlDocument.Validate(System.Xml.Schema.ValidationEventHandler)" />
+             property. The <see cref="M:System.Xml.XmlDocument.Validate(System.Xml.Schema.ValidationEventHandler)" />
 
             
 
-             method performs infoset augmentation. Specifically, after successful validation, schema defaults are applied, text values are converted to atomic values as necessary, and type information is associated with validated information items. The result is a previously un-typed XML sub-tree in the <see
-             cref="T:System.Xml.XmlDocument" />
+             method performs infoset augmentation. Specifically, after successful validation, schema defaults are applied, text values are converted to atomic values as necessary, and type information is associated with validated information items. The result is a previously un-typed XML sub-tree in the <see cref="T:System.Xml.XmlDocument" />
 
             
 
              replaced with a typed sub-tree.</para
           >
           <para
-            >The following are important notes to consider when using the <see
-             cref="M:System.Xml.XmlDocument.Validate(System.Xml.Schema.ValidationEventHandler)" />
+            >The following are important notes to consider when using the <see cref="M:System.Xml.XmlDocument.Validate(System.Xml.Schema.ValidationEventHandler)" />
 
             
 
@@ -5302,8 +5322,7 @@
             </item>
             <item>
               <para
-                >If schema validation errors occur during validation the <see
-                 cref="T:System.Xml.XmlDocument" />
+                >If schema validation errors occur during validation the <see cref="T:System.Xml.XmlDocument" />
 
                 
 
@@ -5318,13 +5337,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the <see
-             cref="T:System.Xml.XmlDocument" />
+            >Validates the <see cref="T:System.Xml.XmlDocument" />
 
             
 
-             against the XML Schema Definition Language (XSD) schemas contained in the <see
-             cref="P:System.Xml.XmlDocument.Schemas" />
+             against the XML Schema Definition Language (XSD) schemas contained in the <see cref="P:System.Xml.XmlDocument.Schemas" />
 
             
 
@@ -5332,12 +5349,15 @@
           >
         </summary>
         <param name="validationEventHandler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Schema.ValidationEventHandler" />
+          The <see cref="T:System.Xml.Schema.ValidationEventHandler" />
 
           
 
@@ -5371,36 +5391,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.XmlDocument.Validate(System.Xml.Schema.ValidationEventHandler,System.Xml.XmlNode)" />
+            >The <see cref="M:System.Xml.XmlDocument.Validate(System.Xml.Schema.ValidationEventHandler,System.Xml.XmlNode)" />
 
             
 
-             method validates the XML data in the <see
-             cref="T:System.Xml.XmlNode" />
+             method validates the XML data in the <see cref="T:System.Xml.XmlNode" />
 
             
 
-             object against the schemas contained in the <see
-             cref="P:System.Xml.XmlDocument.Schemas" />
+             object against the schemas contained in the <see cref="P:System.Xml.XmlDocument.Schemas" />
 
             
 
-             property. The <see
-             cref="M:System.Xml.XmlDocument.Validate(System.Xml.Schema.ValidationEventHandler,System.Xml.XmlNode)" />
+             property. The <see cref="M:System.Xml.XmlDocument.Validate(System.Xml.Schema.ValidationEventHandler,System.Xml.XmlNode)" />
 
             
 
-             method performs infoset augmentation. Specifically, after successful validation, schema defaults are applied, text values are converted to atomic values as necessary, and type information is associated with validated information items. The result is a previously un-typed XML sub-tree in the <see
-             cref="T:System.Xml.XmlDocument" />
+             method performs infoset augmentation. Specifically, after successful validation, schema defaults are applied, text values are converted to atomic values as necessary, and type information is associated with validated information items. The result is a previously un-typed XML sub-tree in the <see cref="T:System.Xml.XmlDocument" />
 
             
 
              replaced with a typed sub-tree.</para
           >
           <para
-            >The following are important notes to consider when using the <see
-             cref="M:System.Xml.XmlDocument.Validate(System.Xml.Schema.ValidationEventHandler,System.Xml.XmlNode)" />
+            >The following are important notes to consider when using the <see cref="M:System.Xml.XmlDocument.Validate(System.Xml.Schema.ValidationEventHandler,System.Xml.XmlNode)" />
 
             
 
@@ -5415,8 +5429,7 @@
             </item>
             <item>
               <para
-                >If schema validation errors occur during validation the <see
-                 cref="T:System.Xml.XmlDocument" />
+                >If schema validation errors occur during validation the <see cref="T:System.Xml.XmlDocument" />
 
                 
 
@@ -5429,13 +5442,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the <see
-             cref="T:System.Xml.XmlNode" />
+            >Validates the <see cref="T:System.Xml.XmlNode" />
 
             
 
-             object specified against the XML Schema Definition Language (XSD) schemas in the <see
-             cref="P:System.Xml.XmlDocument.Schemas" />
+             object specified against the XML Schema Definition Language (XSD) schemas in the <see cref="P:System.Xml.XmlDocument.Schemas" />
 
             
 
@@ -5443,29 +5454,34 @@
           >
         </summary>
         <param name="validationEventHandler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Schema.ValidationEventHandler" />
+          The <see cref="T:System.Xml.Schema.ValidationEventHandler" />
 
           
 
            object that receives information about schema validation warnings and errors.</param
         >
         <param name="nodeToValidate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlNode" />
+          The <see cref="T:System.Xml.XmlNode" />
 
           
 
-           object created from an <see
-           cref="T:System.Xml.XmlDocument" />
+           object created from an <see cref="T:System.Xml.XmlDocument" />
 
           
 
@@ -5498,16 +5514,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is a Microsoft extension to the Document Object Model (DOM). It is functionally equivalent to the <see
-             cref="P:System.Xml.XmlDocument.InnerXml" />
+            >This method is a Microsoft extension to the Document Object Model (DOM). It is functionally equivalent to the <see cref="P:System.Xml.XmlDocument.InnerXml" />
 
             
 
              property.</para
           >
           <para
-            >The <see
-             cref="P:System.Xml.XmlDeclaration.Encoding" />
+            >The <see cref="P:System.Xml.XmlDeclaration.Encoding" />
 
             
 
@@ -5517,8 +5531,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves all the children of the XmlDocument node to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Saves all the children of the XmlDocument node to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -5526,7 +5539,11 @@
           >
         </summary>
         <param name="xw">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5559,16 +5576,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is a Microsoft extension to the Document Object Model (DOM). It is functionally equivalent to the <see
-             cref="P:System.Xml.XmlNode.OuterXml" />
+            >This method is a Microsoft extension to the Document Object Model (DOM). It is functionally equivalent to the <see cref="P:System.Xml.XmlNode.OuterXml" />
 
             
 
              property.</para
           >
           <para
-            >The <see
-             cref="P:System.Xml.XmlDeclaration.Encoding" />
+            >The <see cref="P:System.Xml.XmlDeclaration.Encoding" />
 
             
 
@@ -5578,8 +5593,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the XmlDocument node to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Saves the XmlDocument node to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -5587,7 +5601,11 @@
           >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5616,8 +5634,7 @@
       <Parameters />
       <Docs>
         <value
-          >An <see
-           cref="T:System.Xml.XmlResolver" />
+          >An <see cref="T:System.Xml.XmlResolver" />
 
           
 
@@ -5626,8 +5643,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The XmlResolver can be used to load DTDs or expand entity references. Using the <see
-             cref="P:System.Xml.XmlResolver.Credentials" />
+            >The XmlResolver can be used to load DTDs or expand entity references. Using the <see cref="P:System.Xml.XmlResolver.Credentials" />
 
             
 
@@ -5636,8 +5652,7 @@
           <list type="bullet">
             <item>
               <para
-                >If the document was not loaded using an <see
-                 cref="T:System.Xml.XmlReader" />
+                >If the document was not loaded using an <see cref="T:System.Xml.XmlReader" />
 
                 
 
@@ -5646,8 +5661,7 @@
             </item>
             <item>
               <para
-                >If the document was loaded with an <see
-                 cref="T:System.Xml.XmlTextReader" />
+                >If the document was loaded with an <see cref="T:System.Xml.XmlTextReader" />
 
                 
 
@@ -5656,8 +5670,7 @@
             </item>
             <item>
               <para
-                >If the document was loaded with an <see
-                 cref="T:System.Xml.XmlValidatingReader" />
+                >If the document was loaded with an <see cref="T:System.Xml.XmlValidatingReader" />
 
                 
 
@@ -5666,8 +5679,7 @@
             </item>
             <item>
               <para
-                >If the document was loaded with a class that extends XmlReader and the XmlReader cannot resolve entities (<see
-                 cref="P:System.Xml.XmlReader.CanResolveEntity" />
+                >If the document was loaded with a class that extends XmlReader and the XmlReader cannot resolve entities (<see cref="P:System.Xml.XmlReader.CanResolveEntity" />
 
                 
 
@@ -5677,13 +5689,11 @@
           </list>
           <block subset="none" type="note">
             <para
-              >If the XmlDocument is loaded using an <see
-               cref="T:System.Xml.XmlReader" />
+              >If the XmlDocument is loaded using an <see cref="T:System.Xml.XmlReader" />
 
               
 
-               which had an XmlResolver set to it, the XmlResolver on the XmlReader is not cached by the XmlDocument after <see
-               cref="M:System.Xml.XmlDocument.Load(System.String)" />
+               which had an XmlResolver set to it, the XmlResolver on the XmlReader is not cached by the XmlDocument after <see cref="M:System.Xml.XmlDocument.Load(System.String)" />
 
               
 
@@ -5692,8 +5702,7 @@
           </block>
           <para>In version 1.1 of the.NET Framework, if this property is not set, the trust level of the application determines the default behavior.</para>
           <para
-            >Fully trusted code: The document uses a default <see
-             cref="T:System.Xml.XmlUrlResolver" />
+            >Fully trusted code: The document uses a default <see cref="T:System.Xml.XmlUrlResolver" />
 
             
 
@@ -5701,8 +5710,7 @@
           >
           <para>Semi-trusted code: The XmlResolver property is set to null. External resources are not resolved.</para>
           <para
-            >For more information on security and the XmlResolver property, see <format
-             type="text/html">
+            >For more information on security and the XmlResolver property, see <format type="text/html">
               <a href="AD3FA320-4B8F-4E5C-B549-01157591007A"
                 >[&lt;topic://cpconresolvingexternalresources&gt;]</a
               >
@@ -5717,8 +5725,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Xml.XmlResolver" />
+            >Sets the <see cref="T:System.Xml.XmlResolver" />
 
             
 

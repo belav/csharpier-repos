@@ -24,46 +24,38 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
+        >The <see cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
 
         
 
-         class serves as the base class for a composite server control that binds to data from a data source. A composite server control is a control that is built from a combination of other server controls. Page developers do not use the <see
-         cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
+         class serves as the base class for a composite server control that binds to data from a data source. A composite server control is a control that is built from a combination of other server controls. Page developers do not use the <see cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
 
         
 
-         class directly; instead, they use controls that derive from this class. Examples of composite data-bound controls include the <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         class directly; instead, they use controls that derive from this class. Examples of composite data-bound controls include the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.WebControls.FormView" />
+        , <see cref="T:System.Web.UI.WebControls.FormView" />
 
         
 
-        , and <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+        , and <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
          controls.</para
       >
       <para
-        >Classes that inherit from the <see
-         cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
+        >Classes that inherit from the <see cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
 
         
 
-         control must override the <see
-         cref="M:System.Web.UI.WebControls.CompositeDataBoundControl.CreateChildControls(System.Collections.IEnumerable,System.Boolean)" />
+         control must override the <see cref="M:System.Web.UI.WebControls.CompositeDataBoundControl.CreateChildControls(System.Collections.IEnumerable,System.Boolean)" />
 
         
 
-         method to create the control hierarchy. To access the child controls of a composite data-bound control, use the <see
-         cref="P:System.Web.UI.WebControls.CompositeDataBoundControl.Controls" />
+         method to create the control hierarchy. To access the child controls of a composite data-bound control, use the <see cref="P:System.Web.UI.WebControls.CompositeDataBoundControl.Controls" />
 
         
 
@@ -85,8 +77,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
+            >The <see cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
 
             
 
@@ -96,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
 
             
 
@@ -124,8 +114,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A composite data-bound control is a combination of one or more server controls. Use the <see
-             cref="P:System.Web.UI.WebControls.CompositeDataBoundControl.Controls" />
+            >A composite data-bound control is a combination of one or more server controls. Use the <see cref="P:System.Web.UI.WebControls.CompositeDataBoundControl.Controls" />
 
             
 
@@ -155,13 +144,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CompositeDataBoundControl.CreateChildControls" />
+            >The <see cref="M:System.Web.UI.WebControls.CompositeDataBoundControl.CreateChildControls" />
 
             
 
-             method is a helper method that is used by classes that derive from the <see
-             cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
+             method is a helper method that is used by classes that derive from the <see cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
 
             
 
@@ -192,28 +179,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CompositeDataBoundControl.CreateChildControls" />
+            >The <see cref="M:System.Web.UI.WebControls.CompositeDataBoundControl.CreateChildControls" />
 
             
 
-             method is a helper method that is used by classes that derive from the <see
-             cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
+             method is a helper method that is used by classes that derive from the <see cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
 
             
 
-             class to create the control hierarchy for a composite data-bound control. When extending the <see
-             cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
+             class to create the control hierarchy for a composite data-bound control. When extending the <see cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
 
             
 
-             class, you must override the <see
-             cref="M:System.Web.UI.WebControls.CompositeDataBoundControl.CreateChildControls" />
+             class, you must override the <see cref="M:System.Web.UI.WebControls.CompositeDataBoundControl.CreateChildControls" />
 
             
 
-             method to create your own control hierarchy. For more information on creating a composite control, see <format
-             type="text/html">
+             method to create your own control hierarchy. For more information on creating a composite control, see <format type="text/html">
               <a href="fbe26c16-cff4-4089-b3dd-877411f0c0ef"
                 >Developing Custom ASP.NET Server Controls</a
               >
@@ -231,8 +213,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of items created by the <see
-             cref="M:System.Web.UI.WebControls.CompositeDataBoundControl.CreateChildControls(System.Collections.IEnumerable,System.Boolean)" />
+            >The number of items created by the <see cref="M:System.Web.UI.WebControls.CompositeDataBoundControl.CreateChildControls(System.Collections.IEnumerable,System.Boolean)" />
 
             
 
@@ -240,24 +221,30 @@
           >
         </returns>
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IEnumerable" />
+          An <see cref="T:System.Collections.IEnumerable" />
 
           
 
            that contains the values to bind to the control.</param
         >
         <param name="dataBinding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to indicate that the <see
-           cref="M:System.Web.UI.WebControls.CompositeDataBoundControl.CreateChildControls(System.Collections.IEnumerable,System.Boolean)" />
+          true to indicate that the <see cref="M:System.Web.UI.WebControls.CompositeDataBoundControl.CreateChildControls(System.Collections.IEnumerable,System.Boolean)" />
 
           
 
@@ -287,13 +274,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" />
+            >The <see cref="M:System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" />
 
             
 
-             method is a helper method that is used by classes that derive from the <see
-             cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
+             method is a helper method that is used by classes that derive from the <see cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
 
             
 
@@ -305,12 +290,15 @@
           <para>Binds the data from the data source to the composite data-bound control.</para>
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IEnumerable" />
+          An <see cref="T:System.Collections.IEnumerable" />
 
           
 

@@ -33,13 +33,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Container" />
+        >The <see cref="T:System.ComponentModel.Container" />
 
         
 
-         class is the default implementation for the <see
-         cref="T:System.ComponentModel.IContainer" />
+         class is the default implementation for the <see cref="T:System.ComponentModel.IContainer" />
 
         
 
@@ -73,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Container" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Container" />
 
             
 
@@ -109,8 +106,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method can be overridden by a derived class.</para>
           <para
-            >The new <see
-             cref="T:System.ComponentModel.Component" />
+            >The new <see cref="T:System.ComponentModel.Component" />
 
             
 
@@ -120,13 +116,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.ComponentModel.Component" />
+            >Adds the specified <see cref="T:System.ComponentModel.Component" />
 
             
 
-             to the <see
-             cref="T:System.ComponentModel.Container" />
+             to the <see cref="T:System.ComponentModel.Container" />
 
             
 
@@ -134,7 +128,11 @@
           >
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -169,8 +167,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method can be overridden by a derived class.</para>
           <para
-            >The new <see
-             cref="T:System.ComponentModel.Component" />
+            >The new <see cref="T:System.ComponentModel.Component" />
 
             
 
@@ -180,13 +177,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.ComponentModel.Component" />
+            >Adds the specified <see cref="T:System.ComponentModel.Component" />
 
             
 
-             to the <see
-             cref="T:System.ComponentModel.Container" />
+             to the <see cref="T:System.ComponentModel.Container" />
 
             
 
@@ -194,14 +189,22 @@
           >
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component to add. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -233,8 +236,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method can be overridden by a derived class.</para>
           <para
-            >The components in the collection are stored in the same order as they were added to the <see
-             cref="T:System.ComponentModel.Container" />
+            >The components in the collection are stored in the same order as they were added to the <see cref="T:System.ComponentModel.Container" />
 
             
 
@@ -244,8 +246,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets all the components in the <see
-             cref="T:System.ComponentModel.Container" />
+            >Gets all the components in the <see cref="T:System.ComponentModel.Container" />
 
             
 
@@ -280,31 +281,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="name" />
+            >If the <paramref name="name" />
 
             
 
-             parameter is null, the <see
-             cref="T:System.ComponentModel.IComponent" />
+             parameter is null, the <see cref="T:System.ComponentModel.IComponent" />
 
             
 
-             is added to the <see
-             cref="T:System.ComponentModel.Container" />
+             is added to the <see cref="T:System.ComponentModel.Container" />
 
             
 
              without an identifying name.</para
           >
           <para
-            >This method can be overridden by a derived class. Implementers that need to override the <see
-             cref="M:System.ComponentModel.Container.CreateSite(System.ComponentModel.IComponent,System.String)" />
+            >This method can be overridden by a derived class. Implementers that need to override the <see cref="M:System.ComponentModel.Container.CreateSite(System.ComponentModel.IComponent,System.String)" />
 
             
 
-             method can provide a custom implementation through a class that implements the <see
-             cref="T:System.ComponentModel.ISite" />
+             method can provide a custom implementation through a class that implements the <see cref="T:System.ComponentModel.ISite" />
 
             
 
@@ -314,13 +310,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a site <see
-             cref="T:System.ComponentModel.ISite" />
+            >Creates a site <see cref="T:System.ComponentModel.ISite" />
 
             
 
-             for the given <see
-             cref="T:System.ComponentModel.IComponent" />
+             for the given <see cref="T:System.ComponentModel.IComponent" />
 
             
 
@@ -332,24 +326,30 @@
           <para>The newly created site.</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IComponent" />
+          The <see cref="T:System.ComponentModel.IComponent" />
 
           
 
            to create a site for. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name to assign to <paramref
-           name="component" />
+          The name to assign to <paramref name="component" />
 
           
 
@@ -377,50 +377,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="Overload:System.ComponentModel.Container.Dispose" />
+            >Call <see cref="Overload:System.ComponentModel.Container.Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.ComponentModel.Container" />
+             when you are finished using the <see cref="T:System.ComponentModel.Container" />
 
             
 
-            . The <see
-             cref="Overload:System.ComponentModel.Container.Dispose" />
+            . The <see cref="Overload:System.ComponentModel.Container.Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.ComponentModel.Container" />
+             method leaves the <see cref="T:System.ComponentModel.Container" />
 
             
 
-             in an unusable state. After calling <see
-             cref="Overload:System.ComponentModel.Container.Dispose" />
+             in an unusable state. After calling <see cref="Overload:System.ComponentModel.Container.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.ComponentModel.Container" />
+            , you must release all references to the <see cref="T:System.ComponentModel.Container" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.ComponentModel.Container" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.ComponentModel.Container" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -430,18 +421,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="Overload:System.ComponentModel.Container.Dispose" />
+              >Always call <see cref="Overload:System.ComponentModel.Container.Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.ComponentModel.Container" />
+               before you release your last reference to the <see cref="T:System.ComponentModel.Container" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.ComponentModel.Container" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.ComponentModel.Container" />
 
               
 
@@ -452,8 +440,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.ComponentModel.Container" />
+            >Releases all resources used by the <see cref="T:System.ComponentModel.Container" />
 
             
 
@@ -484,36 +471,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.ComponentModel.Container" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.ComponentModel.Container" />
 
             
 
@@ -523,8 +504,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.ComponentModel.Container" />
+            >Releases the unmanaged resources used by the <see cref="T:System.ComponentModel.Container" />
 
             
 
@@ -532,7 +512,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -560,35 +544,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.Object.Finalize" />
+            >This method overrides <see cref="M:System.Object.Finalize" />
 
             
 
-            . Application code should not call this method; an object's Finalize method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see
-             cref="M:System.GC.SuppressFinalize(System.Object)" />
+            . Application code should not call this method; an object's Finalize method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see cref="M:System.GC.SuppressFinalize(System.Object)" />
 
             
 
              method. </para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="fd376774-1643-499b-869e-9546a3aeea70">Finalize Methods and Destructors</a>
             </format>
 
             
 
-            , <format
-             type="text/html">
+            , <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-            , and <format
-             type="text/html">
+            , and <format type="text/html">
               <a href="8026cb68-fe93-43fc-96c1-c09ad7d64cd3">Overriding the Finalize Method</a>
             </format>
 
@@ -600,8 +579,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases unmanaged resources and performs other cleanup operations before the <see
-             cref="T:System.ComponentModel.Container" />
+            >Releases unmanaged resources and performs other cleanup operations before the <see cref="T:System.ComponentModel.Container" />
 
             
 
@@ -632,18 +610,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation of this method returns the current instance of the class if <paramref
-             name="service" />
+            >The default implementation of this method returns the current instance of the class if <paramref name="service" />
 
             
 
-             is an <see
-             cref="T:System.ComponentModel.IContainer" />
+             is an <see cref="T:System.ComponentModel.IContainer" />
 
             
 
-            ; otherwise, it returns null. You can override this method to provide a custom implementation to return a service object. For more information, see the <see
-             cref="M:System.IServiceProvider.GetService(System.Type)" />
+            ; otherwise, it returns null. You can override this method to provide a custom implementation to return a service object. For more information, see the <see cref="M:System.IServiceProvider.GetService(System.Type)" />
 
             
 
@@ -657,8 +632,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -666,12 +640,15 @@
           >
         </returns>
         <param name="service">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -708,8 +685,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a component from the <see
-             cref="T:System.ComponentModel.Container" />
+            >Removes a component from the <see cref="T:System.ComponentModel.Container" />
 
             
 
@@ -717,7 +693,11 @@
           >
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -749,13 +729,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Container.RemoveWithoutUnsiting(System.ComponentModel.IComponent)" />
+            >The <see cref="M:System.ComponentModel.Container.RemoveWithoutUnsiting(System.ComponentModel.IComponent)" />
 
             
 
-             method cleans up the site as usual, but it does not set the component's <see
-             cref="P:System.ComponentModel.IComponent.Site" />
+             method cleans up the site as usual, but it does not set the component's <see cref="P:System.ComponentModel.IComponent.Site" />
 
             
 
@@ -765,13 +743,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a component from the <see
-             cref="T:System.ComponentModel.Container" />
+            >Removes a component from the <see cref="T:System.ComponentModel.Container" />
 
             
 
-             without setting <see
-             cref="P:System.ComponentModel.IComponent.Site" />
+             without setting <see cref="P:System.ComponentModel.IComponent.Site" />
 
             
 
@@ -779,7 +755,11 @@
           >
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -812,33 +792,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Container.ValidateName(System.ComponentModel.IComponent,System.String)" />
+            >The <see cref="M:System.ComponentModel.Container.ValidateName(System.ComponentModel.IComponent,System.String)" />
 
             
 
-             method is called by the <see
-             cref="M:System.ComponentModel.Container.Add(System.ComponentModel.IComponent,System.String)" />
+             method is called by the <see cref="M:System.ComponentModel.Container.Add(System.ComponentModel.IComponent,System.String)" />
 
             
 
-             method to determine if the name of the <paramref
-             name="component" />
+             method to determine if the name of the <paramref name="component" />
 
             
 
-             being added is unique for this <see
-             cref="T:System.ComponentModel.Container" />
+             being added is unique for this <see cref="T:System.ComponentModel.Container" />
 
             
 
-            . If the <paramref
-             name="name" />
+            . If the <paramref name="name" />
 
             
 
-             parameter is not null and is not unique, an <see
-             cref="T:System.ArgumentException" />
+             parameter is not null and is not unique, an <see cref="T:System.ArgumentException" />
 
             
 
@@ -850,14 +824,22 @@
           <para>Determines whether the component name is unique for this container.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The named component.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

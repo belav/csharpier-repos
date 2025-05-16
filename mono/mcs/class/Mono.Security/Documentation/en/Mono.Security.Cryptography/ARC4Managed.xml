@@ -12,7 +12,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -59,13 +61,11 @@
         <summary>Specify if the current transform object can be reused.</summary>
         <value>Always false.</value>
         <remarks
-          >See <see
-           cref="T:System.Security.Cryptography.ICryptoTransform" />
+          >See <see cref="T:System.Security.Cryptography.ICryptoTransform" />
 
           
 
-          .<see
-           cref="P:System.Security.Cryptography.ICryptoTransform.CanReuseTransform" />
+          .<see cref="P:System.Security.Cryptography.ICryptoTransform.CanReuseTransform" />
 
           
 
@@ -88,13 +88,11 @@
         <summary>Specify if the current transform object can process multiple blocks in a single call. </summary>
         <value>Always true.</value>
         <remarks
-          >See <see
-           cref="T:System.Security.Cryptography.ICryptoTransform" />
+          >See <see cref="T:System.Security.Cryptography.ICryptoTransform" />
 
           
 
-          .<see
-           cref="P:System.Security.Cryptography.ICryptoTransform.CanTransformMultipleBlocks" />
+          .<see cref="P:System.Security.Cryptography.ICryptoTransform.CanTransformMultipleBlocks" />
 
           
 
@@ -126,8 +124,7 @@
         >
         <summary>Creates a symmetric ARCFOUR decryptor transform.</summary>
         <returns
-          >a <see
-           cref="T:System.Security.Cryptography.ICryptoTransform" />
+          >a <see cref="T:System.Security.Cryptography.ICryptoTransform" />
 
           
 
@@ -160,8 +157,7 @@
         >
         <summary>Creates a symmetric ARCFOUR encryptor transform. </summary>
         <returns
-          >a <see
-           cref="T:System.Security.Cryptography.ICryptoTransform" />
+          >a <see cref="T:System.Security.Cryptography.ICryptoTransform" />
 
           
 
@@ -184,10 +180,7 @@
         <Parameter Name="disposing" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="disposing"
-          >a <see
-           cref="T:System.Boolean" />
-        </param>
+        <param name="disposing">a <see cref="T:System.Boolean" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -238,8 +231,7 @@
       <Docs>
         <summary>Generate a new secret key.</summary>
         <remarks
-          >The new secret key length is based on the <see
-           cref="P:System.Security.Cryptography.SymmetricAlgorithm.KeySize" />
+          >The new secret key length is based on the <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.KeySize" />
 
           
 
@@ -319,39 +311,19 @@
         <Parameter Name="outputOffset" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="inputBuffer"
-          >a <see
-           cref="T:System.Byte" />
-        </param>
-        <param name="inputOffset"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="inputCount"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="outputBuffer"
-          >a <see
-           cref="T:System.Byte" />
-        </param>
-        <param name="outputOffset"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="inputBuffer">a <see cref="T:System.Byte" /></param>
+        <param name="inputOffset">a <see cref="T:System.Int32" /></param>
+        <param name="inputCount">a <see cref="T:System.Int32" /></param>
+        <param name="outputBuffer">a <see cref="T:System.Byte" /></param>
+        <param name="outputOffset">a <see cref="T:System.Int32" /></param>
         <summary>Process a block of data.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks
-          >See <see
-           cref="T:System.Security.Cryptography.ICryptoTransform" />
+          >See <see cref="T:System.Security.Cryptography.ICryptoTransform" />
 
           
 
-          .<see
-           cref="M:System.Security.Cryptography.ICryptoTransform.TransformBlock" />
+          .<see cref="M:System.Security.Cryptography.ICryptoTransform.TransformBlock" />
 
           
 
@@ -378,31 +350,17 @@
         <Parameter Name="inputCount" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="inputBuffer"
-          >a <see
-           cref="T:System.Byte" />
-        </param>
-        <param name="inputOffset"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="inputCount"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="inputBuffer">a <see cref="T:System.Byte" /></param>
+        <param name="inputOffset">a <see cref="T:System.Int32" /></param>
+        <param name="inputCount">a <see cref="T:System.Int32" /></param>
         <summary>Processes the final part of the data. Also finalizes the function if needed.</summary>
-        <returns
-          >a <see
-           cref="T:System.Byte[]" />
-        </returns>
+        <returns>a <see cref="T:System.Byte[]" /></returns>
         <remarks
-          >See <see
-           cref="T:System.Security.Cryptography.ICryptoTransform" />
+          >See <see cref="T:System.Security.Cryptography.ICryptoTransform" />
 
           
 
-          .<see
-           cref="M:System.Security.Cryptography.ICryptoTransform.TransformFinalBlock" />
+          .<see cref="M:System.Security.Cryptography.ICryptoTransform.TransformFinalBlock" />
 
           
 

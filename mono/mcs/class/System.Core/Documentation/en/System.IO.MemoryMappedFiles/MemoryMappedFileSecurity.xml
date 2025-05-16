@@ -28,50 +28,43 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.IO.MemoryMappedFiles.MemoryMappedFileSecurity" />
+        >The <see cref="T:System.IO.MemoryMappedFiles.MemoryMappedFileSecurity" />
 
         
 
          class specifies the access rights for a memory-mapped file and how access attempts are audited.  This class represents access and audit rights as a set of rules. </para
       >
       <para
-        >The <see
-         cref="T:System.IO.MemoryMappedFiles.MemoryMappedFileSecurity" />
+        >The <see cref="T:System.IO.MemoryMappedFiles.MemoryMappedFileSecurity" />
 
         
 
          class is an abstraction of the underlying Microsoft Windows file security system. In this system. It hides many of the details of DACLs and SACLs.</para
       >
       <para
-        >Use the <see
-         cref="T:System.IO.MemoryMappedFiles.MemoryMappedFileSecurity" />
+        >Use the <see cref="T:System.IO.MemoryMappedFiles.MemoryMappedFileSecurity" />
 
         
 
          class to retrieve, add, or change the access rules that represent the DACL and SACL of a pipe.</para
       >
       <para
-        >To apply new or changed access or audit rules to a memory-mapped file, use the <see
-         cref="M:System.IO.MemoryMappedFiles.MemoryMappedFile.SetAccessControl(System.IO.MemoryMappedFiles.MemoryMappedFileSecurity)" />
+        >To apply new or changed access or audit rules to a memory-mapped file, use the <see cref="M:System.IO.MemoryMappedFiles.MemoryMappedFile.SetAccessControl(System.IO.MemoryMappedFiles.MemoryMappedFileSecurity)" />
 
         
 
-         method. To retrieve access or audit rules from an existing file, use the <see
-         cref="M:System.IO.MemoryMappedFiles.MemoryMappedFile.GetAccessControl" />
+         method. To retrieve access or audit rules from an existing file, use the <see cref="M:System.IO.MemoryMappedFiles.MemoryMappedFile.GetAccessControl" />
 
         
 
          method.</para
       >
       <para
-        >The following <see
-         cref="T:System.IO.MemoryMappedFiles.MemoryMappedFile" />
+        >The following <see cref="T:System.IO.MemoryMappedFiles.MemoryMappedFile" />
 
         
 
-         methods take a <see
-         cref="T:System.IO.MemoryMappedFiles.MemoryMappedFileSecurity" />
+         methods take a <see cref="T:System.IO.MemoryMappedFiles.MemoryMappedFileSecurity" />
 
         
 
@@ -122,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.MemoryMappedFiles.MemoryMappedFileSecurity" />
+            >Initializes a new instance of the <see cref="T:System.IO.MemoryMappedFiles.MemoryMappedFileSecurity" />
 
             
 

@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class derives from the <see
-         cref="T:System.Runtime.InteropServices.CriticalHandle" />
+        >This class derives from the <see cref="T:System.Runtime.InteropServices.CriticalHandle" />
 
         
 
@@ -37,8 +36,7 @@
       >
       <block subset="none" type="note">
         <para
-          >See the <see
-           cref="T:System.Runtime.InteropServices.CriticalHandle" />
+          >See the <see cref="T:System.Runtime.InteropServices.CriticalHandle" />
 
           
 
@@ -75,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Win32.SafeHandles.CriticalHandleMinusOneIsInvalid" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Win32.SafeHandles.CriticalHandleMinusOneIsInvalid" />
 
             
 

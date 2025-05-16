@@ -38,16 +38,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.IntPtr" />
+        >The <see cref="T:System.IntPtr" />
 
         
 
          type is designed to be an integer whose size is platform-specific. That is, an instance of this type is expected to be 32-bits on 32-bit hardware and operating systems, and 64-bits on 64-bit hardware and operating systems.</para
       >
       <para
-        >The <see
-         cref="T:System.IntPtr" />
+        >The <see cref="T:System.IntPtr" />
 
         
 
@@ -58,49 +56,41 @@
 
         
 
-         objects can also be used to hold handles. For example, instances of <see
-         cref="T:System.IntPtr" />
+         objects can also be used to hold handles. For example, instances of <see cref="T:System.IntPtr" />
 
         
 
-         are used extensively in the <see
-         cref="T:System.IO.FileStream" />
+         are used extensively in the <see cref="T:System.IO.FileStream" />
 
         
 
          class to hold file handles.</para
       >
       <para
-        >The <see
-         cref="T:System.IntPtr" />
+        >The <see cref="T:System.IntPtr" />
 
         
 
-         type is CLS-compliant, while the <see
-         cref="T:System.UIntPtr" />
+         type is CLS-compliant, while the <see cref="T:System.UIntPtr" />
 
         
 
-         type is not. Only the <see
-         cref="T:System.IntPtr" />
+         type is not. Only the <see cref="T:System.IntPtr" />
 
         
 
-         type is used in the common language runtime. The <see
-         cref="T:System.UIntPtr" />
+         type is used in the common language runtime. The <see cref="T:System.UIntPtr" />
 
         
 
-         type is provided mostly to maintain architectural symmetry with the <see
-         cref="T:System.IntPtr" />
+         type is provided mostly to maintain architectural symmetry with the <see cref="T:System.IntPtr" />
 
         
 
          type.</para
       >
       <para
-        >This type implements the <see
-         cref="T:System.Runtime.Serialization.ISerializable" />
+        >This type implements the <see cref="T:System.Runtime.Serialization.ISerializable" />
 
         
 
@@ -143,8 +133,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.IntPtr" />
+            >Initializes a new instance of <see cref="T:System.IntPtr" />
 
             
 
@@ -152,7 +141,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -188,13 +181,11 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.OverflowException"
-          >The current platform is a 32-bit platform and the value of the current instance is greater than <see
-           cref="F:System.Int32.MaxValue" />
+          >The current platform is a 32-bit platform and the value of the current instance is greater than <see cref="F:System.Int32.MaxValue" />
 
           
 
-           or less than <see
-           cref="F:System.Int32.MinValue" />
+           or less than <see cref="F:System.Int32.MinValue" />
 
           
 
@@ -203,8 +194,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception is only thrown if the value of <paramref
-             name="value" />
+            >An exception is only thrown if the value of <paramref name="value" />
 
             
 
@@ -214,8 +204,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.IntPtr" />
+            >Initializes a new instance of <see cref="T:System.IntPtr" />
 
             
 
@@ -223,7 +212,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -260,8 +253,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.IntPtr" />
+            >Initializes a new instance of <see cref="T:System.IntPtr" />
 
             
 
@@ -269,7 +261,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -306,8 +302,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IntPtr.Add(System.IntPtr,System.Int32)" />
+            >The <see cref="M:System.IntPtr.Add(System.IntPtr,System.Int32)" />
 
             
 
@@ -322,13 +317,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new pointer that reflects the addition of <paramref
-             name="offset" />
+            >A new pointer that reflects the addition of <paramref name="offset" />
 
             
 
-             to <paramref
-             name="pointer" />
+             to <paramref name="pointer" />
 
             
 
@@ -336,14 +329,22 @@
           >
         </returns>
         <param name="pointer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The pointer to add the offset to.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -379,7 +380,9 @@
             <block subset="none" type="note"
               >The method overrides
       <see
-               cref="M:System.Object.Equals(System.Object)" qualify="true" />
+                cref="M:System.Object.Equals(System.Object)"
+                qualify="true"
+              />
 
               
 
@@ -394,13 +397,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
-             is an instance of <see
-             cref="T:System.IntPtr" />
+             is an instance of <see cref="T:System.IntPtr" />
 
             
 
@@ -408,7 +409,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -449,7 +454,9 @@
             <block subset="none" type="note"
               >This method
  overrides <see
-               cref="M:System.Object.GetHashCode" qualify="true" />
+                cref="M:System.Object.GetHashCode"
+                qualify="true"
+              />
 
               
 
@@ -497,13 +504,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IntPtr.op_Addition(System.IntPtr,System.Int32)" />
+            >The <see cref="M:System.IntPtr.op_Addition(System.IntPtr,System.Int32)" />
 
             
 
-             method defines the addition operation for <see
-             cref="T:System.IntPtr" />
+             method defines the addition operation for <see cref="T:System.IntPtr" />
 
             
 
@@ -511,8 +516,7 @@
           >
           <para>code reference: System.IntPtr.op_Addition#1</para>
           <para
-            >Languages that do not support custom operators can call the <see
-             cref="M:System.IntPtr.Add(System.IntPtr,System.Int32)" />
+            >Languages that do not support custom operators can call the <see cref="M:System.IntPtr.Add(System.IntPtr,System.Int32)" />
 
             
 
@@ -527,13 +531,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new pointer that reflects the addition of <paramref
-             name="offset" />
+            >A new pointer that reflects the addition of <paramref name="offset" />
 
             
 
-             to <paramref
-             name="pointer" />
+             to <paramref name="pointer" />
 
             
 
@@ -541,14 +543,22 @@
           >
         </returns>
         <param name="pointer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The pointer to add the offset to.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -593,8 +603,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether two specified instances of <see
-             cref="T:System.IntPtr" />
+            >Determines whether two specified instances of <see cref="T:System.IntPtr" />
 
             
 
@@ -604,13 +613,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="value1" />
+            >true if <paramref name="value1" />
 
             
 
-             equals <paramref
-             name="value2" />
+             equals <paramref name="value2" />
 
             
 
@@ -618,14 +625,22 @@
           >
         </returns>
         <param name="value1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first pointer or handle to compare.</param
         >
         <param name="value2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -844,8 +859,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether two specified instances of <see
-             cref="T:System.IntPtr" />
+            >Determines whether two specified instances of <see cref="T:System.IntPtr" />
 
             
 
@@ -855,13 +869,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="value1" />
+            >true if <paramref name="value1" />
 
             
 
-             does not equal <paramref
-             name="value2" />
+             does not equal <paramref name="value2" />
 
             
 
@@ -869,14 +881,22 @@
           >
         </returns>
         <param name="value1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first pointer or handle to compare. </param
         >
         <param name="value2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -914,13 +934,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IntPtr.op_Subtraction(System.IntPtr,System.Int32)" />
+            >The <see cref="M:System.IntPtr.op_Subtraction(System.IntPtr,System.Int32)" />
 
             
 
-             method defines the subtraction operation for <see
-             cref="T:System.IntPtr" />
+             method defines the subtraction operation for <see cref="T:System.IntPtr" />
 
             
 
@@ -928,8 +946,7 @@
           >
           <para>code reference: System.IntPtr.op_Addition#2</para>
           <para
-            >Languages that do not support custom operators can call the <see
-             cref="M:System.IntPtr.Subtract(System.IntPtr,System.Int32)" />
+            >Languages that do not support custom operators can call the <see cref="M:System.IntPtr.Subtract(System.IntPtr,System.Int32)" />
 
             
 
@@ -944,13 +961,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new pointer that reflects the subtraction of <paramref
-             name="offset" />
+            >A new pointer that reflects the subtraction of <paramref name="offset" />
 
             
 
-             from <paramref
-             name="pointer" />
+             from <paramref name="pointer" />
 
             
 
@@ -958,14 +973,22 @@
           >
         </returns>
         <param name="pointer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The pointer to subtract the offset from.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -999,15 +1022,13 @@
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.Int32" />
+            > A <see cref="T:System.Int32" />
 
             
 
              containing the 
    number of bytes of a pointer or handle for the current implementation. The value
-   of this property is equal to the number of bytes contained by the <see
-             langword="native int" />
+   of this property is equal to the number of bytes contained by the <see langword="native int" />
 
             
 
@@ -1020,8 +1041,7 @@
           <para>This property is read-only.</para>
           <para
             >For more information on the 
-   <see
-             langword="native int" />
+   <see langword="native int" />
 
             
 
@@ -1065,8 +1085,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IntPtr.Subtract(System.IntPtr,System.Int32)" />
+            >The <see cref="M:System.IntPtr.Subtract(System.IntPtr,System.Int32)" />
 
             
 
@@ -1081,13 +1100,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new pointer that reflects the subtraction of <paramref
-             name="offset" />
+            >A new pointer that reflects the subtraction of <paramref name="offset" />
 
             
 
-             from <paramref
-             name="pointer" />
+             from <paramref name="pointer" />
 
             
 
@@ -1095,14 +1112,22 @@
           >
         </returns>
         <param name="pointer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The pointer to subtract the offset from.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1136,13 +1161,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This  method populates the <paramref
-             name="info" />
+            >This  method populates the <paramref name="info" />
 
             
 
-             parameter with the value of the current <see
-             cref="T:System.IntPtr" />
+             parameter with the value of the current <see cref="T:System.IntPtr" />
 
             
 
@@ -1152,13 +1175,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             object with the data needed to serialize the current <see
-             cref="T:System.IntPtr" />
+             object with the data needed to serialize the current <see cref="T:System.IntPtr" />
 
             
 
@@ -1166,19 +1187,26 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            object to populate with data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1211,13 +1239,11 @@
       <Docs>
         <remarks>To be added.</remarks>
         <exception cref="T:System.OverflowException"
-          >The current platform is not a 32-bit platform and the value of the current instance is greater than <see
-           cref="F:System.Int32.MaxValue" />
+          >The current platform is not a 32-bit platform and the value of the current instance is greater than <see cref="F:System.Int32.MaxValue" />
 
           
 
-           or less than <see
-           cref="F:System.Int32.MinValue" />
+           or less than <see cref="F:System.Int32.MinValue" />
 
           
 
@@ -1301,8 +1327,7 @@
         <remarks>
           <para
             >This member is not CLS-compliant. For a CLS-compliant alternative, use 
-   <see
-             cref="M:System.IntPtr.ToInt32" />
+   <see cref="M:System.IntPtr.ToInt32" />
 
             
 
@@ -1310,8 +1335,7 @@
           >
           <para>
             <block subset="none" type="note"
-              >A pointer to <see
-               langword="void" />
+              >A pointer to <see langword="void" />
 
               
 
@@ -1327,8 +1351,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A pointer to <see
-             cref="T:System.Void" />
+            >A pointer to <see cref="T:System.Void" />
 
             
 
@@ -1362,18 +1385,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value of the <see
-             cref="P:System.IntPtr.Size" />
+            >If the value of the <see cref="P:System.IntPtr.Size" />
 
             
 
-             property for this instance is 4, then this method is equivalent to <see
-             cref="M:System.Int32.ToString" />
+             property for this instance is 4, then this method is equivalent to <see cref="M:System.Int32.ToString" />
 
             
 
-            ; otherwise, this method is equivalent to <see
-             cref="M:System.Int64.ToString" />
+            ; otherwise, this method is equivalent to <see cref="M:System.Int64.ToString" />
 
             
 
@@ -1383,8 +1403,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the numeric value of the current <see
-             cref="T:System.IntPtr" />
+            >Converts the numeric value of the current <see cref="T:System.IntPtr" />
 
             
 
@@ -1419,13 +1438,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="format" />
+            >If the <paramref name="format" />
 
             
 
-             parameter is null or an empty string (""), the return value is formatted with the general format specifier ("G"). For more information about numeric format specifiers, see the <format
-             type="text/html">
+             parameter is null or an empty string (""), the return value is formatted with the general format specifier ("G"). For more information about numeric format specifiers, see the <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
             </format>
 
@@ -1438,8 +1455,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the numeric value of the current <see
-             cref="T:System.IntPtr" />
+            >Converts the numeric value of the current <see cref="T:System.IntPtr" />
 
             
 
@@ -1449,8 +1465,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string representation of the value of the current <see
-             cref="T:System.IntPtr" />
+            >The string representation of the value of the current <see cref="T:System.IntPtr" />
 
             
 
@@ -1458,12 +1473,15 @@
           >
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A format specification that governs how the current <see
-           cref="T:System.IntPtr" />
+          A format specification that governs how the current <see cref="T:System.IntPtr" />
 
           
 
@@ -1493,39 +1511,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this field is not equivalent to null. Use this field to efficiently determine whether an instance of <see
-             cref="T:System.IntPtr" />
+            >The value of this field is not equivalent to null. Use this field to efficiently determine whether an instance of <see cref="T:System.IntPtr" />
 
             
 
              has been set to a value other than zero.</para
           >
           <para
-            >For example, assume the variable, ip, is an instance of <see
-             cref="T:System.IntPtr" />
+            >For example, assume the variable, ip, is an instance of <see cref="T:System.IntPtr" />
 
             
 
             . You can determine if it has been set by comparing it to the value returned by a constructor, for example: " if ip != new IntPtr(0)... ". However, invoking a constructor to get an unintialized pointer is inefficient. It is better to code either " if ip != IntPtr.Zero... ", or " if !IntPtr.Zero.Equals(ip)... ".</para
           >
           <para
-            >When calling the Windows API from managed code, you can pass <see
-             cref="F:System.IntPtr.Zero" />
+            >When calling the Windows API from managed code, you can pass <see cref="F:System.IntPtr.Zero" />
 
             
 
-             instead of null if an argument is expected to be either a pointer or a null. For example, the following call to the Windows CreateFile function supplies <see
-             cref="F:System.IntPtr.Zero" />
+             instead of null if an argument is expected to be either a pointer or a null. For example, the following call to the Windows CreateFile function supplies <see cref="F:System.IntPtr.Zero" />
 
             
 
-             for the <paramref
-             name="pSecurityAttributes" />
+             for the <paramref name="pSecurityAttributes" />
 
             
 
-             and <paramref
-             name="hTemplateFile" />
+             and <paramref name="hTemplateFile" />
 
             
 
@@ -1534,13 +1546,11 @@
           <para>code reference: System.IntPtr.Zero#2</para>
           <block subset="none" type="note">
             <para
-              >Although <see
-               cref="F:System.IntPtr.Zero" />
+              >Although <see cref="F:System.IntPtr.Zero" />
 
               
 
-               is equivalent to null for Windows API functions with parameters or return values that can be either pointers or null, <see
-               cref="F:System.IntPtr.Zero" />
+               is equivalent to null for Windows API functions with parameters or return values that can be either pointers or null, <see cref="F:System.IntPtr.Zero" />
 
               
 
@@ -1548,13 +1558,11 @@
             >
           </block>
           <para
-            >You can also test for a null return value from Windows API function calls that return either a pointer or a null by comparing the returned value with <see
-             cref="F:System.IntPtr.Zero" />
+            >You can also test for a null return value from Windows API function calls that return either a pointer or a null by comparing the returned value with <see cref="F:System.IntPtr.Zero" />
 
             
 
-            . For example, the call to the GetWindow function in the following example tries to retrieve the handle of a non-existent window. If it were called from unmanaged code, the function would return null, but when it is called from managed code, it returns <see
-             cref="F:System.IntPtr.Zero" />
+            . For example, the call to the GetWindow function in the following example tries to retrieve the handle of a non-existent window. If it were called from unmanaged code, the function would return null, but when it is called from managed code, it returns <see cref="F:System.IntPtr.Zero" />
 
             
 

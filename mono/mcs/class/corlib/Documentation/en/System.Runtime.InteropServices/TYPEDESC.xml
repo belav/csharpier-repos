@@ -30,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use <see
-         cref="T:System.Runtime.InteropServices.ComTypes.TYPEDESC" />
+        >Use <see cref="T:System.Runtime.InteropServices.ComTypes.TYPEDESC" />
 
         
 
@@ -61,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the variable is VT_SAFEARRAY or VT_PTR, the <see
-             cref="F:System.Runtime.InteropServices.TYPEDESC.lpValue" />
+            >If the variable is VT_SAFEARRAY or VT_PTR, the <see cref="F:System.Runtime.InteropServices.TYPEDESC.lpValue" />
 
             
 

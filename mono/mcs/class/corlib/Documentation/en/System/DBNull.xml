@@ -37,89 +37,73 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.DBNull" />
+        >The <see cref="T:System.DBNull" />
 
         
 
-         class represents a nonexistent value. In a database, for example, a column in a row of a table might not contain any data whatsoever. That is, the column is considered to not exist at all instead of merely not having a value. A <see
-         cref="T:System.DBNull" />
+         class represents a nonexistent value. In a database, for example, a column in a row of a table might not contain any data whatsoever. That is, the column is considered to not exist at all instead of merely not having a value. A <see cref="T:System.DBNull" />
 
         
 
-         object represents the nonexistent column. Additionally, COM interop uses the <see
-         cref="T:System.DBNull" />
+         object represents the nonexistent column. Additionally, COM interop uses the <see cref="T:System.DBNull" />
 
         
 
          class to distinguish between a VT_NULL variant, which indicates a nonexistent value, and a VT_EMPTY variant, which indicates an unspecified value.</para
       >
       <para
-        >The <see
-         cref="T:System.DBNull" />
+        >The <see cref="T:System.DBNull" />
 
         
 
-         type is a singleton class, which means only one <see
-         cref="T:System.DBNull" />
+         type is a singleton class, which means only one <see cref="T:System.DBNull" />
 
         
 
-         object exists. The <see
-         cref="F:System.DBNull.Value" />
+         object exists. The <see cref="F:System.DBNull.Value" />
 
         
 
-         member represents the sole <see
-         cref="T:System.DBNull" />
+         member represents the sole <see cref="T:System.DBNull" />
 
         
 
-         object. <see
-         cref="F:System.DBNull.Value" />
+         object. <see cref="F:System.DBNull.Value" />
 
         
 
-         can be used to explicitly assign a nonexistent value to a database field, although most ADO.NET data providers automatically assign values of <see
-         cref="T:System.DBNull" />
+         can be used to explicitly assign a nonexistent value to a database field, although most ADO.NET data providers automatically assign values of <see cref="T:System.DBNull" />
 
         
 
-         when a field does not have a valid value. You can determine whether a value retrieved from a database field is a <see
-         cref="T:System.DBNull" />
+         when a field does not have a valid value. You can determine whether a value retrieved from a database field is a <see cref="T:System.DBNull" />
 
         
 
-         value by passing the value of that field to the DBNull.Value.Equals method. However, some languages and database objects supply methods that make it easier to determine whether the value of a database field is <see
-         cref="F:System.DBNull.Value" />
+         value by passing the value of that field to the DBNull.Value.Equals method. However, some languages and database objects supply methods that make it easier to determine whether the value of a database field is <see cref="F:System.DBNull.Value" />
 
         
 
-        . These include the Visual Basic IsDBNull function, the <see
-         cref="M:System.Convert.IsDBNull(System.Object)" />
+        . These include the Visual Basic IsDBNull function, the <see cref="M:System.Convert.IsDBNull(System.Object)" />
 
         
 
-         method, the <see
-         cref="M:System.Data.DataTableReader.IsDBNull(System.Int32)" />
+         method, the <see cref="M:System.Data.DataTableReader.IsDBNull(System.Int32)" />
 
         
 
-         method, and the <see
-         cref="M:System.Data.IDataRecord.IsDBNull(System.Int32)" />
+         method, and the <see cref="M:System.Data.IDataRecord.IsDBNull(System.Int32)" />
 
         
 
          method.</para
       >
       <para
-        >Do not confuse the notion of null in an object-oriented programming language with a <see
-         cref="T:System.DBNull" />
+        >Do not confuse the notion of null in an object-oriented programming language with a <see cref="T:System.DBNull" />
 
         
 
-         object. In an object-oriented programming language, null means the absence of a reference to an object. <see
-         cref="T:System.DBNull" />
+         object. In an object-oriented programming language, null means the absence of a reference to an object. <see cref="T:System.DBNull" />
 
         
 
@@ -159,13 +143,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+            >Implements the <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
-             interface and returns the data needed to serialize the <see
-             cref="T:System.DBNull" />
+             interface and returns the data needed to serialize the <see cref="T:System.DBNull" />
 
             
 
@@ -173,34 +155,38 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
-           object containing information required to serialize the <see
-           cref="T:System.DBNull" />
+           object containing information required to serialize the <see cref="T:System.DBNull" />
 
           
 
            object. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
-           object containing the source and destination of the serialized stream associated with the <see
-           cref="T:System.DBNull" />
+           object containing the source and destination of the serialized stream associated with the <see cref="T:System.DBNull" />
 
           
 
@@ -229,13 +215,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.TypeCode" />
+            >Gets the <see cref="T:System.TypeCode" />
 
             
 
-             value for <see
-             cref="T:System.DBNull" />
+             value for <see cref="T:System.DBNull" />
 
             
 
@@ -245,18 +229,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.TypeCode" />
+            >The <see cref="T:System.TypeCode" />
 
             
 
-             value for <see
-             cref="T:System.DBNull" />
+             value for <see cref="T:System.DBNull" />
 
             
 
-            , which is <see
-             cref="F:System.TypeCode.DBNull" />
+            , which is <see cref="F:System.TypeCode.DBNull" />
 
             
 
@@ -291,8 +272,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see
-             cref="T:System.InvalidCastException" />
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />
 
             
 
@@ -304,12 +284,15 @@
           <para>None. The return value for this member is not used.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that implements the <see
-           cref="T:System.IFormatProvider" />
+          An object that implements the <see cref="T:System.IFormatProvider" />
 
           
 
@@ -340,8 +323,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see
-             cref="T:System.InvalidCastException" />
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />
 
             
 
@@ -353,12 +335,15 @@
           <para>None. The return value for this member is not used.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that implements the <see
-           cref="T:System.IFormatProvider" />
+          An object that implements the <see cref="T:System.IFormatProvider" />
 
           
 
@@ -389,8 +374,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see
-             cref="T:System.InvalidCastException" />
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />
 
             
 
@@ -402,12 +386,15 @@
           <para>None. The return value for this member is not used.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that implements the <see
-           cref="T:System.IFormatProvider" />
+          An object that implements the <see cref="T:System.IFormatProvider" />
 
           
 
@@ -441,8 +428,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see
-             cref="T:System.InvalidCastException" />
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />
 
             
 
@@ -454,12 +440,15 @@
           <para>None. The return value for this member is not used.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that implements the <see
-           cref="T:System.IFormatProvider" />
+          An object that implements the <see cref="T:System.IFormatProvider" />
 
           
 
@@ -493,8 +482,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see
-             cref="T:System.InvalidCastException" />
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />
 
             
 
@@ -506,12 +494,15 @@
           <para>None. The return value for this member is not used.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that implements the <see
-           cref="T:System.IFormatProvider" />
+          An object that implements the <see cref="T:System.IFormatProvider" />
 
           
 
@@ -545,8 +536,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see
-             cref="T:System.InvalidCastException" />
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />
 
             
 
@@ -558,12 +548,15 @@
           <para>None. The return value for this member is not used.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that implements the <see
-           cref="T:System.IFormatProvider" />
+          An object that implements the <see cref="T:System.IFormatProvider" />
 
           
 
@@ -597,8 +590,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see
-             cref="T:System.InvalidCastException" />
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />
 
             
 
@@ -610,12 +602,15 @@
           <para>None. The return value for this member is not used.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that implements the <see
-           cref="T:System.IFormatProvider" />
+          An object that implements the <see cref="T:System.IFormatProvider" />
 
           
 
@@ -646,8 +641,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see
-             cref="T:System.InvalidCastException" />
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />
 
             
 
@@ -659,12 +653,15 @@
           <para>None. The return value for this member is not used.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that implements the <see
-           cref="T:System.IFormatProvider" />
+          An object that implements the <see cref="T:System.IFormatProvider" />
 
           
 
@@ -698,8 +695,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see
-             cref="T:System.InvalidCastException" />
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />
 
             
 
@@ -711,12 +707,15 @@
           <para>None. The return value for this member is not used.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that implements the <see
-           cref="T:System.IFormatProvider" />
+          An object that implements the <see cref="T:System.IFormatProvider" />
 
           
 
@@ -750,8 +749,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see
-             cref="T:System.InvalidCastException" />
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />
 
             
 
@@ -763,12 +761,15 @@
           <para>None. The return value for this member is not used.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that implements the <see
-           cref="T:System.IFormatProvider" />
+          An object that implements the <see cref="T:System.IFormatProvider" />
 
           
 
@@ -802,8 +803,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see
-             cref="T:System.InvalidCastException" />
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />
 
             
 
@@ -815,12 +815,15 @@
           <para>None. The return value for this member is not used.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that implements the <see
-           cref="T:System.IFormatProvider" />
+          An object that implements the <see cref="T:System.IFormatProvider" />
 
           
 
@@ -855,38 +858,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Three conversions are supported: If the <paramref
-             name="type" />
+            >Three conversions are supported: If the <paramref name="type" />
 
             
 
-             parameter specifies <see
-             cref="T:System.Object" />
+             parameter specifies <see cref="T:System.Object" />
 
             
 
-             or <see
-             cref="T:System.DBNull" />
+             or <see cref="T:System.DBNull" />
 
             
 
-            , the return value is the current <see
-             cref="T:System.DBNull" />
+            , the return value is the current <see cref="T:System.DBNull" />
 
             
 
-             object itself. If the <paramref
-             name="type" />
+             object itself. If the <paramref name="type" />
 
             
 
-             parameter specifies <see
-             cref="T:System.String" />
+             parameter specifies <see cref="T:System.String" />
 
             
 
-            , the return value is the string returned by the <see
-             cref="M:System.DBNull.ToString" />
+            , the return value is the string returned by the <see cref="M:System.DBNull.ToString" />
 
             
 
@@ -896,8 +892,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the current <see
-             cref="T:System.DBNull" />
+            >Converts the current <see cref="T:System.DBNull" />
 
             
 
@@ -907,8 +902,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The boxed equivalent of the current <see
-             cref="T:System.DBNull" />
+            >The boxed equivalent of the current <see cref="T:System.DBNull" />
 
             
 
@@ -916,12 +910,15 @@
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that implements the <see
-           cref="T:System.IFormatProvider" />
+          An object that implements the <see cref="T:System.IFormatProvider" />
 
           
 
@@ -955,8 +952,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see
-             cref="T:System.InvalidCastException" />
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />
 
             
 
@@ -968,12 +964,15 @@
           <para>None. The return value for this member is not used.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that implements the <see
-           cref="T:System.IFormatProvider" />
+          An object that implements the <see cref="T:System.IFormatProvider" />
 
           
 
@@ -1007,8 +1006,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see
-             cref="T:System.InvalidCastException" />
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />
 
             
 
@@ -1020,12 +1018,15 @@
           <para>None. The return value for this member is not used.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that implements the <see
-           cref="T:System.IFormatProvider" />
+          An object that implements the <see cref="T:System.IFormatProvider" />
 
           
 
@@ -1059,8 +1060,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see
-             cref="T:System.InvalidCastException" />
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />
 
             
 
@@ -1072,12 +1072,15 @@
           <para>None. The return value for this member is not used.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that implements the <see
-           cref="T:System.IFormatProvider" />
+          An object that implements the <see cref="T:System.IFormatProvider" />
 
           
 
@@ -1106,8 +1109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an empty string (<see
-             cref="F:System.String.Empty" />
+            >Returns an empty string (<see cref="F:System.String.Empty" />
 
             
 
@@ -1117,8 +1119,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An empty string (<see
-             cref="F:System.String.Empty" />
+            >An empty string (<see cref="F:System.String.Empty" />
 
             
 
@@ -1150,8 +1151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an empty string using the specified <see
-             cref="T:System.IFormatProvider" />
+            >Returns an empty string using the specified <see cref="T:System.IFormatProvider" />
 
             
 
@@ -1161,8 +1161,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An empty string (<see
-             cref="F:System.String.Empty" />
+            >An empty string (<see cref="F:System.String.Empty" />
 
             
 
@@ -1170,12 +1169,15 @@
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IFormatProvider" />
+          The <see cref="T:System.IFormatProvider" />
 
           
 
@@ -1210,36 +1212,30 @@
              is a singleton class, which means only this instance of this class can exist.</para
           >
           <para
-            >If a database field has missing data, you can use the <see
-             cref="F:System.DBNull.Value" />
+            >If a database field has missing data, you can use the <see cref="F:System.DBNull.Value" />
 
             
 
-             property to explicitly assign a <see
-             cref="T:System.DBNull" />
+             property to explicitly assign a <see cref="T:System.DBNull" />
 
             
 
              object value to the field. However, most data providers do this automatically.</para
           >
           <para
-            >To evaluate database fields to determine whether their values are <see
-             cref="T:System.DBNull" />
+            >To evaluate database fields to determine whether their values are <see cref="T:System.DBNull" />
 
             
 
-            , you can pass the field value to the DBNull.Value.Equals method. However, this method is rarely used because there are a number of other ways to evaluate a database field for missing data. These include the Visual Basic IsDBNull function, the <see
-             cref="M:System.Convert.IsDBNull(System.Object)" />
+            , you can pass the field value to the DBNull.Value.Equals method. However, this method is rarely used because there are a number of other ways to evaluate a database field for missing data. These include the Visual Basic IsDBNull function, the <see cref="M:System.Convert.IsDBNull(System.Object)" />
 
             
 
-             method, the <see
-             cref="M:System.Data.DataTableReader.IsDBNull(System.Int32)" />
+             method, the <see cref="M:System.Data.DataTableReader.IsDBNull(System.Int32)" />
 
             
 
-             method, the <see
-             cref="M:System.Data.IDataRecord.IsDBNull(System.Int32)" />
+             method, the <see cref="M:System.Data.IDataRecord.IsDBNull(System.Int32)" />
 
             
 
@@ -1249,8 +1245,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the sole instance of the <see
-             cref="T:System.DBNull" />
+            >Represents the sole instance of the <see cref="T:System.DBNull" />
 
             
 

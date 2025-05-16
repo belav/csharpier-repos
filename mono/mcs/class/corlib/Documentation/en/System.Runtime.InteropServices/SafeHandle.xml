@@ -26,44 +26,37 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.InteropServices.SafeHandle" />
+        >The <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
         
 
-         class provides critical finalization of handle resources, preventing handles from being reclaimed prematurely by garbage collection and from being recycled by Windows to reference unintended unmanaged objects. Before the .NET Framework version 2.0, all operating system handles could only be encapsulated in the <see
-         cref="T:System.IntPtr" />
+         class provides critical finalization of handle resources, preventing handles from being reclaimed prematurely by garbage collection and from being recycled by Windows to reference unintended unmanaged objects. Before the .NET Framework version 2.0, all operating system handles could only be encapsulated in the <see cref="T:System.IntPtr" />
 
         
 
          managed wrapper object. </para
       >
       <para
-        >The <see
-         cref="T:System.Runtime.InteropServices.SafeHandle" />
+        >The <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
         
 
-         class contains a finalizer that ensures that the handle is closed and is guaranteed to run, even during unexpected <see
-         cref="T:System.AppDomain" />
+         class contains a finalizer that ensures that the handle is closed and is guaranteed to run, even during unexpected <see cref="T:System.AppDomain" />
 
         
 
-         unloads when a host may not trust the consistency of the state of the <see
-         cref="T:System.AppDomain" />
+         unloads when a host may not trust the consistency of the state of the <see cref="T:System.AppDomain" />
 
         
 
         . </para
       >
       <para
-        >For more information about the benefits of using a <see
-         cref="T:System.Runtime.InteropServices.SafeHandle" />
+        >For more information about the benefits of using a <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
         
 
-        , see <format
-         type="text/html">
+        , see <format type="text/html">
           <a href="3c515c3e-6f52-4a6a-883d-82cacad23478">Safe Handles and Critical Finalization</a>
         </format>
 
@@ -72,23 +65,19 @@
         . </para
       >
       <para
-        >This class is abstract because you cannot create a generic handle. To implement <see
-         cref="T:System.Runtime.InteropServices.SafeHandle" />
+        >This class is abstract because you cannot create a generic handle. To implement <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
         
 
-        , you must create a derived class. To create <see
-         cref="T:System.Runtime.InteropServices.SafeHandle" />
+        , you must create a derived class. To create <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
         
 
-         derived classes, you must know how to create and free an operating system handle. This process is different for different handle types because some use CloseHandle, while others use more specific methods such as UnmapViewOfFile or FindClose. For this reason, you must create a derived class of <see
-         cref="T:System.Runtime.InteropServices.SafeHandle" />
+         derived classes, you must know how to create and free an operating system handle. This process is different for different handle types because some use CloseHandle, while others use more specific methods such as UnmapViewOfFile or FindClose. For this reason, you must create a derived class of <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
         
 
-         for each operating system handle type; such as MySafeRegistryHandle, MySafeFileHandle, and MySpecialSafeFileHandle. Some of these derived classes are prewritten and provided for you in the <see
-         cref="N:Microsoft.Win32.SafeHandles" />
+         for each operating system handle type; such as MySafeRegistryHandle, MySafeFileHandle, and MySpecialSafeFileHandle. Some of these derived classes are prewritten and provided for you in the <see cref="N:Microsoft.Win32.SafeHandles" />
 
         
 
@@ -96,18 +85,15 @@
       >
       <block subset="none" type="note">
         <para
-          >Writing your own classes derived from <see
-           cref="T:System.Runtime.InteropServices.SafeHandle" />
+          >Writing your own classes derived from <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
           
 
-           is an advanced programming feature. A set of prewritten classes derived from <see
-           cref="T:System.Runtime.InteropServices.SafeHandle" />
+           is an advanced programming feature. A set of prewritten classes derived from <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
           
 
-           is provided as abstract derivations, and this set is located in the <see
-           cref="N:Microsoft.Win32.SafeHandles" />
+           is provided as abstract derivations, and this set is located in the <see cref="N:Microsoft.Win32.SafeHandles" />
 
           
 
@@ -148,13 +134,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="ownsHandle" />
+            >If the <paramref name="ownsHandle" />
 
             
 
-             parameter is false, <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.ReleaseHandle" />
+             parameter is false, <see cref="M:System.Runtime.InteropServices.SafeHandle.ReleaseHandle" />
 
             
 
@@ -164,8 +148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.SafeHandle" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
             
 
@@ -173,24 +156,30 @@
           >
         </summary>
         <param name="invalidHandleValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value of an invalid handle (usually 0 or -1).  Your implementation of <see
-           cref="P:System.Runtime.InteropServices.SafeHandle.IsInvalid" />
+          The value of an invalid handle (usually 0 or -1).  Your implementation of <see cref="P:System.Runtime.InteropServices.SafeHandle.IsInvalid" />
 
           
 
            should return true for this value.</param
         >
         <param name="ownsHandle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to reliably let <see
-           cref="T:System.Runtime.InteropServices.SafeHandle" />
+          true to reliably let <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
           
 
@@ -222,41 +211,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling the <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.Close" />
+            >Calling the <see cref="M:System.Runtime.InteropServices.SafeHandle.Close" />
 
             
 
-             or <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" />
+             or <see cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" />
 
             
 
-             method allows the resources to be freed. This might not happen immediately if other threads are using the same safe handle object, but will happen as soon as that is no longer the case. Although most classes that use the <see
-             cref="T:System.Runtime.InteropServices.SafeHandle" />
+             method allows the resources to be freed. This might not happen immediately if other threads are using the same safe handle object, but will happen as soon as that is no longer the case. Although most classes that use the <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
             
 
-             class do not need to provide a finalizer, this is sometimes necessary (for example, to flush out file buffers or to write some data back into memory). In this case, the class can provide a finalizer that is guaranteed to run before the <see
-             cref="T:System.Runtime.InteropServices.SafeHandle" />
+             class do not need to provide a finalizer, this is sometimes necessary (for example, to flush out file buffers or to write some data back into memory). In this case, the class can provide a finalizer that is guaranteed to run before the <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
             
 
              critical finalizer runs.</para
           >
           <para
-            >Call the <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.Close" />
+            >Call the <see cref="M:System.Runtime.InteropServices.SafeHandle.Close" />
 
             
 
-             or <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" />
+             or <see cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" />
 
             
 
-             method when you are finished using the <see
-             cref="T:System.Runtime.InteropServices.SafeHandle" />
+             method when you are finished using the <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
             
 
@@ -264,28 +246,23 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.Runtime.InteropServices.SafeHandle.Close" />
+              >Always call <see cref="M:System.Runtime.InteropServices.SafeHandle.Close" />
 
               
 
-               or <see
-               cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" />
+               or <see cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.Runtime.InteropServices.SafeHandle" />
+               before you release your last reference to the <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
               
 
-               object. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.Runtime.InteropServices.SafeHandle" />
+               object. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
               
 
-               object's <see
-               cref="M:System.Runtime.InteropServices.SafeHandle.Finalize" />
+               object's <see cref="M:System.Runtime.InteropServices.SafeHandle.Finalize" />
 
               
 
@@ -351,8 +328,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this method to retrieve the actual handle value from an instance of the <see
-             cref="T:System.Runtime.InteropServices.SafeHandle" />
+            >You can use this method to retrieve the actual handle value from an instance of the <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
             
 
@@ -360,33 +336,27 @@
           >
           <block subset="none" type="note">
             <para
-              >Using the <see
-               cref="M:System.Runtime.InteropServices.SafeHandle.DangerousGetHandle" />
+              >Using the <see cref="M:System.Runtime.InteropServices.SafeHandle.DangerousGetHandle" />
 
               
 
-               method can pose security risks because, if the handle has been marked as invalid with <see
-               cref="M:System.Runtime.InteropServices.SafeHandle.SetHandleAsInvalid" />
+               method can pose security risks because, if the handle has been marked as invalid with <see cref="M:System.Runtime.InteropServices.SafeHandle.SetHandleAsInvalid" />
 
               
 
-              , <see
-               cref="M:System.Runtime.InteropServices.SafeHandle.DangerousGetHandle" />
+              , <see cref="M:System.Runtime.InteropServices.SafeHandle.DangerousGetHandle" />
 
               
 
-               still returns the original, potentially stale handle value. The returned handle can also be recycled at any point. At best, this means the handle might suddenly stop working. At worst, if the handle or the resource that the handle represents is exposed to untrusted code, this can lead to a recycling security attack on the reused or returned handle. For example, an untrusted caller can query data on the handle just returned and receive information for an entirely unrelated resource. See the <see
-               cref="M:System.Runtime.InteropServices.SafeHandle.DangerousAddRef(System.Boolean@)" />
+               still returns the original, potentially stale handle value. The returned handle can also be recycled at any point. At best, this means the handle might suddenly stop working. At worst, if the handle or the resource that the handle represents is exposed to untrusted code, this can lead to a recycling security attack on the reused or returned handle. For example, an untrusted caller can query data on the handle just returned and receive information for an entirely unrelated resource. See the <see cref="M:System.Runtime.InteropServices.SafeHandle.DangerousAddRef(System.Boolean@)" />
 
               
 
-               and the <see
-               cref="M:System.Runtime.InteropServices.SafeHandle.DangerousRelease" />
+               and the <see cref="M:System.Runtime.InteropServices.SafeHandle.DangerousRelease" />
 
               
 
-               methods for more information about using the <see
-               cref="M:System.Runtime.InteropServices.SafeHandle.DangerousGetHandle" />
+               methods for more information about using the <see cref="M:System.Runtime.InteropServices.SafeHandle.DangerousGetHandle" />
 
               
 
@@ -397,8 +367,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the value of the <see
-             cref="F:System.Runtime.InteropServices.SafeHandle.handle" />
+            >Returns the value of the <see cref="F:System.Runtime.InteropServices.SafeHandle.handle" />
 
             
 
@@ -408,13 +377,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An IntPtr representing the value of the <see
-             cref="F:System.Runtime.InteropServices.SafeHandle.handle" />
+            >An IntPtr representing the value of the <see cref="F:System.Runtime.InteropServices.SafeHandle.handle" />
 
             
 
-             field. If the handle has been marked invalid with <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.SetHandleAsInvalid" />
+             field. If the handle has been marked invalid with <see cref="M:System.Runtime.InteropServices.SafeHandle.SetHandleAsInvalid" />
 
             
 
@@ -447,23 +414,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.DangerousRelease" />
+            >The <see cref="M:System.Runtime.InteropServices.SafeHandle.DangerousRelease" />
 
             
 
-             method is the counterpart to <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.DangerousAddRef(System.Boolean@)" />
+             method is the counterpart to <see cref="M:System.Runtime.InteropServices.SafeHandle.DangerousAddRef(System.Boolean@)" />
 
             
 
-            . You should always match a call to the <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.DangerousRelease" />
+            . You should always match a call to the <see cref="M:System.Runtime.InteropServices.SafeHandle.DangerousRelease" />
 
             
 
-             method with a successful call to <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.DangerousAddRef(System.Boolean@)" />
+             method with a successful call to <see cref="M:System.Runtime.InteropServices.SafeHandle.DangerousAddRef(System.Boolean@)" />
 
             
 
@@ -471,23 +434,19 @@
           >
           <block subset="none" type="note">
             <para
-              >This method is intended for advanced users and must always be used carefully. To avoid leaking handle resources, always call this method inside a constrained execution region (CER), where a thread abort cannot interrupt processing. In the same way that unmatched <see
-               cref="M:System.Runtime.InteropServices.SafeHandle.DangerousAddRef(System.Boolean@)" />
+              >This method is intended for advanced users and must always be used carefully. To avoid leaking handle resources, always call this method inside a constrained execution region (CER), where a thread abort cannot interrupt processing. In the same way that unmatched <see cref="M:System.Runtime.InteropServices.SafeHandle.DangerousAddRef(System.Boolean@)" />
 
               
 
-               calls can cause resource leaks, unmatched <see
-               cref="M:System.Runtime.InteropServices.SafeHandle.DangerousRelease" />
+               calls can cause resource leaks, unmatched <see cref="M:System.Runtime.InteropServices.SafeHandle.DangerousRelease" />
 
               
 
-               calls can cause invalid handle states to become visible to other threads. Do not expose <see
-               cref="M:System.Runtime.InteropServices.SafeHandle.DangerousAddRef(System.Boolean@)" />
+               calls can cause invalid handle states to become visible to other threads. Do not expose <see cref="M:System.Runtime.InteropServices.SafeHandle.DangerousAddRef(System.Boolean@)" />
 
               
 
-               or <see
-               cref="M:System.Runtime.InteropServices.SafeHandle.DangerousRelease" />
+               or <see cref="M:System.Runtime.InteropServices.SafeHandle.DangerousRelease" />
 
               
 
@@ -498,8 +457,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Manually decrements the reference counter on a <see
-             cref="T:System.Runtime.InteropServices.SafeHandle" />
+            >Manually decrements the reference counter on a <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
             
 
@@ -532,51 +490,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling the <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.Close" />
+            >Calling the <see cref="M:System.Runtime.InteropServices.SafeHandle.Close" />
 
             
 
-             or <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" />
+             or <see cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" />
 
             
 
-             method allows the resources to be freed. This might not happen immediately if other threads are using the same instance of the safe handle, but will happen as soon as that is no longer the case. Although most classes using <see
-             cref="T:System.Runtime.InteropServices.SafeHandle" />
+             method allows the resources to be freed. This might not happen immediately if other threads are using the same instance of the safe handle, but will happen as soon as that is no longer the case. Although most classes using <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
             
 
-             do not need to provide a finalizer, this is sometimes necessary (for example, to flush out file buffers or to write some data back into memory). In this case, they can provide a finalizer that is guaranteed to run before the <see
-             cref="T:System.Runtime.InteropServices.SafeHandle" />
+             do not need to provide a finalizer, this is sometimes necessary (for example, to flush out file buffers or to write some data back into memory). In this case, they can provide a finalizer that is guaranteed to run before the <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
             
 
              critical finalizer runs.</para
           >
           <para
-            >Call the <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.Close" />
+            >Call the <see cref="M:System.Runtime.InteropServices.SafeHandle.Close" />
 
             
 
-             or <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" />
+             or <see cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" />
 
             
 
-             method when you are finished using the <see
-             cref="T:System.Runtime.InteropServices.SafeHandle" />
+             method when you are finished using the <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
             
 
-             object. The <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.Close" />
+             object. The <see cref="M:System.Runtime.InteropServices.SafeHandle.Close" />
 
             
 
-             method leaves the <see
-             cref="T:System.Runtime.InteropServices.SafeHandle" />
+             method leaves the <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
             
 
@@ -584,28 +533,23 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call the <see
-               cref="M:System.Runtime.InteropServices.SafeHandle.Close" />
+              >Always call the <see cref="M:System.Runtime.InteropServices.SafeHandle.Close" />
 
               
 
-               or <see
-               cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" />
+               or <see cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" />
 
               
 
-               method before you release your last reference to the <see
-               cref="T:System.Runtime.InteropServices.SafeHandle" />
+               method before you release your last reference to the <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
               
 
-               object. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.Runtime.InteropServices.SafeHandle" />
+               object. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
               
 
-               object's <see
-               cref="M:System.Runtime.InteropServices.SafeHandle.Finalize" />
+               object's <see cref="M:System.Runtime.InteropServices.SafeHandle.Finalize" />
 
               
 
@@ -616,8 +560,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.Runtime.InteropServices.SafeHandle" />
+            >Releases all resources used by the <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
             
 
@@ -652,13 +595,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You should never explicitly call the <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.Dispose(System.Boolean)" />
+            >You should never explicitly call the <see cref="M:System.Runtime.InteropServices.SafeHandle.Dispose(System.Boolean)" />
 
             
 
-             method with the <paramref
-             name="disposing" />
+             method with the <paramref name="disposing" />
 
             
 
@@ -668,8 +609,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Runtime.InteropServices.SafeHandle" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
             
 
@@ -677,7 +617,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -705,13 +649,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.Finalize" />
+            >The <see cref="M:System.Runtime.InteropServices.SafeHandle.Finalize" />
 
             
 
-             method is the destructor for the <see
-             cref="T:System.Runtime.InteropServices.SafeHandle" />
+             method is the destructor for the <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
             
 
@@ -767,23 +709,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Runtime.InteropServices.SafeHandle.IsClosed" />
+            >The <see cref="P:System.Runtime.InteropServices.SafeHandle.IsClosed" />
 
             
 
-             method returns a value indicating whether the <see
-             cref="T:System.Runtime.InteropServices.SafeHandle" />
+             method returns a value indicating whether the <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
             
 
-             object's handle is no longer associated with a native resource. This differs from the definition of the <see
-             cref="P:System.Runtime.InteropServices.SafeHandle.IsInvalid" />
+             object's handle is no longer associated with a native resource. This differs from the definition of the <see cref="P:System.Runtime.InteropServices.SafeHandle.IsInvalid" />
 
             
 
-             property, which computes whether a given handle is always considered invalid. The <see
-             cref="P:System.Runtime.InteropServices.SafeHandle.IsClosed" />
+             property, which computes whether a given handle is always considered invalid. The <see cref="P:System.Runtime.InteropServices.SafeHandle.IsClosed" />
 
             
 
@@ -792,8 +730,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="M:System.Runtime.InteropServices.SafeHandle.SetHandleAsInvalid" />
+                >The <see cref="M:System.Runtime.InteropServices.SafeHandle.SetHandleAsInvalid" />
 
                 
 
@@ -802,18 +739,15 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" />
+                >The <see cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" />
 
                 
 
-                 method or <see
-                 cref="M:System.Runtime.InteropServices.SafeHandle.Close" />
+                 method or <see cref="M:System.Runtime.InteropServices.SafeHandle.Close" />
 
                 
 
-                 method was called and there are no references to the <see
-                 cref="T:System.Runtime.InteropServices.SafeHandle" />
+                 method was called and there are no references to the <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
                 
 
@@ -849,31 +783,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Derived classes must implement the <see
-             cref="P:System.Runtime.InteropServices.SafeHandle.IsInvalid" />
+            >Derived classes must implement the <see cref="P:System.Runtime.InteropServices.SafeHandle.IsInvalid" />
 
             
 
              property so that the common language runtime can determine whether critical finalization is required. Derived classes must provide an implementation that suits the general type of handle they support (0 or -1 is invalid). These classes can then be further derived for specific safe handle types.</para
           >
           <para
-            >Unlike the <see
-             cref="P:System.Runtime.InteropServices.SafeHandle.IsClosed" />
+            >Unlike the <see cref="P:System.Runtime.InteropServices.SafeHandle.IsClosed" />
 
             
 
-             property, which reports whether the <see
-             cref="T:System.Runtime.InteropServices.SafeHandle" />
+             property, which reports whether the <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
             
 
-             object has finished using the underlying handle, the <see
-             cref="P:System.Runtime.InteropServices.SafeHandle.IsInvalid" />
+             object has finished using the underlying handle, the <see cref="P:System.Runtime.InteropServices.SafeHandle.IsInvalid" />
 
             
 
-             property calculates whether the given handle value is always considered invalid. Therefore, the <see
-             cref="P:System.Runtime.InteropServices.SafeHandle.IsInvalid" />
+             property calculates whether the given handle value is always considered invalid. Therefore, the <see cref="P:System.Runtime.InteropServices.SafeHandle.IsInvalid" />
 
             
 
@@ -910,48 +839,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.ReleaseHandle" />
+            >The <see cref="M:System.Runtime.InteropServices.SafeHandle.ReleaseHandle" />
 
             
 
-             method is guaranteed to be called only once and only if the handle is valid as defined by the <see
-             cref="P:System.Runtime.InteropServices.SafeHandle.IsInvalid" />
+             method is guaranteed to be called only once and only if the handle is valid as defined by the <see cref="P:System.Runtime.InteropServices.SafeHandle.IsInvalid" />
 
             
 
-             property. Implement this method in your <see
-             cref="T:System.Runtime.InteropServices.SafeHandle" />
+             property. Implement this method in your <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
             
 
-             derived classes to execute any code that is required to free the handle. Because one of the functions of <see
-             cref="T:System.Runtime.InteropServices.SafeHandle" />
+             derived classes to execute any code that is required to free the handle. Because one of the functions of <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
             
 
-             is to guarantee prevention of resource leaks, the code in your implementation of <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.ReleaseHandle" />
+             is to guarantee prevention of resource leaks, the code in your implementation of <see cref="M:System.Runtime.InteropServices.SafeHandle.ReleaseHandle" />
 
             
 
-             must never fail. The garbage collector calls <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.ReleaseHandle" />
+             must never fail. The garbage collector calls <see cref="M:System.Runtime.InteropServices.SafeHandle.ReleaseHandle" />
 
             
 
-             after normal finalizers have been run for objects that were garbage collected at the same time. The garbage collector guarantees the resources to invoke this method and that the method will not be interrupted while it is in progress. This method will be prepared as a constrained execution region (CER) at instance construction time (along with all the methods in its statically determinable call graph). Although this prevents thread abort interrupts, you must still be careful not to introduce any fault paths in your overridden <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.ReleaseHandle" />
+             after normal finalizers have been run for objects that were garbage collected at the same time. The garbage collector guarantees the resources to invoke this method and that the method will not be interrupted while it is in progress. This method will be prepared as a constrained execution region (CER) at instance construction time (along with all the methods in its statically determinable call graph). Although this prevents thread abort interrupts, you must still be careful not to introduce any fault paths in your overridden <see cref="M:System.Runtime.InteropServices.SafeHandle.ReleaseHandle" />
 
             
 
-             method. In particular, apply the <see
-             cref="T:System.Runtime.ConstrainedExecution.ReliabilityContractAttribute" />
+             method. In particular, apply the <see cref="T:System.Runtime.ConstrainedExecution.ReliabilityContractAttribute" />
 
             
 
-             attribute to any methods you call from <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.ReleaseHandle" />
+             attribute to any methods you call from <see cref="M:System.Runtime.InteropServices.SafeHandle.ReleaseHandle" />
 
             
 
@@ -960,13 +880,11 @@
           <para>ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)</para>
           <para>Additionally, for simple cleanup (for example, calling the Win32 API CloseHandle on a file handle) you can check the return value for the single platform invoke call. For complex cleanup, you may have a lot of program logic and many method calls, some of which might fail. You must ensure that your program logic has fallback code for each of those cases.</para>
           <para
-            >If <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.ReleaseHandle" />
+            >If <see cref="M:System.Runtime.InteropServices.SafeHandle.ReleaseHandle" />
 
             
 
-             returns false for any reason, it generates a <format
-             type="text/html">
+             returns false for any reason, it generates a <format type="text/html">
               <a href="44cd98ba-95e5-40a1-874d-e8e163612c51">ReleaseHandleFailed</a>
             </format>
 
@@ -982,8 +900,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the handle is released successfully; otherwise, in the event of a catastrophic failure, false. In this case, it generates a <format
-             type="text/html">
+            >true if the handle is released successfully; otherwise, in the event of a catastrophic failure, false. In this case, it generates a <format type="text/html">
               <a href="44cd98ba-95e5-40a1-874d-e8e163612c51">ReleaseHandleFailed</a>
             </format>
 
@@ -1020,8 +937,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.SetHandle(System.IntPtr)" />
+            >Use the <see cref="M:System.Runtime.InteropServices.SafeHandle.SetHandle(System.IntPtr)" />
 
             
 
@@ -1033,7 +949,11 @@
           <para>Sets the handle to the specified pre-existing handle.</para>
         </summary>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1065,26 +985,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call the <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.SetHandleAsInvalid" />
+            >Call the <see cref="M:System.Runtime.InteropServices.SafeHandle.SetHandleAsInvalid" />
 
             
 
-             method only when you know that your handle no longer references a resource. Doing so does not change the value of the <see
-             cref="F:System.Runtime.InteropServices.SafeHandle.handle" />
+             method only when you know that your handle no longer references a resource. Doing so does not change the value of the <see cref="F:System.Runtime.InteropServices.SafeHandle.handle" />
 
             
 
              field; it only marks the handle as closed. The handle might then contain a potentially stale value. The effect of this call is that no attempt is made to free the resources.</para
           >
           <para
-            >As with the <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.SetHandle(System.IntPtr)" />
+            >As with the <see cref="M:System.Runtime.InteropServices.SafeHandle.SetHandle(System.IntPtr)" />
 
             
 
-             method, use <see
-             cref="M:System.Runtime.InteropServices.SafeHandle.SetHandleAsInvalid" />
+             method, use <see cref="M:System.Runtime.InteropServices.SafeHandle.SetHandleAsInvalid" />
 
             
 

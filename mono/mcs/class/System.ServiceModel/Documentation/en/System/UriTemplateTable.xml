@@ -17,23 +17,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.UriTemplateTable" />
+        >A <see cref="T:System.UriTemplateTable" />
 
         
 
-         is an associative set of <see
-         cref="T:System.UriTemplate" />
+         is an associative set of <see cref="T:System.UriTemplate" />
 
         
 
-         objects bound to an object of the developer's choosing. It allows you to match candidate Uniform Resource Identifiers (URIs) against the templates in the set and retrieve the data associated with the matching templates. The contents of <see
-         cref="T:System.UriTemplateTable" />
+         objects bound to an object of the developer's choosing. It allows you to match candidate Uniform Resource Identifiers (URIs) against the templates in the set and retrieve the data associated with the matching templates. The contents of <see cref="T:System.UriTemplateTable" />
 
         
 
-         can be changed until the <see
-         cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
+         can be changed until the <see cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
 
         
 
@@ -42,18 +38,15 @@
       <list type="bullet">
         <item>
           <para
-            >When <see
-             cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
+            >When <see cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
 
             
 
-             is called passing in false, the <see
-             cref="T:System.UriTemplateTable" />
+             is called passing in false, the <see cref="T:System.UriTemplateTable" />
 
             
 
-             checks to make sure the table contains no multiple structurally-equivalent templates. If it finds such templates, it throws an exception. This type of validation is used in conjunction with <see
-             cref="M:System.UriTemplateTable.MatchSingle(System.Uri)" />
+             checks to make sure the table contains no multiple structurally-equivalent templates. If it finds such templates, it throws an exception. This type of validation is used in conjunction with <see cref="M:System.UriTemplateTable.MatchSingle(System.Uri)" />
 
             
 
@@ -62,18 +55,15 @@
         </item>
         <item>
           <para
-            >When <see
-             cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
+            >When <see cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
 
             
 
-             is called passing in true, multiple structurally-equivalent templates can be contained within a <see
-             cref="T:System.UriTemplateTable" />
+             is called passing in true, multiple structurally-equivalent templates can be contained within a <see cref="T:System.UriTemplateTable" />
 
             
 
-            . However, any query strings in the templates must not be ambiguous; identical query strings are allowed. crabout ambiguous query strings, see <format
-             type="text/html">
+            . However, any query strings in the templates must not be ambiguous; identical query strings are allowed. crabout ambiguous query strings, see <format type="text/html">
               <a href="5cbbe03f-4a9e-4d44-9e02-c5773239cf52">UriTemplate and UriTemplateTable</a>
             </format>
 
@@ -87,8 +77,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A class that represents an associative set of <see
-         cref="T:System.UriTemplate" />
+        >A class that represents an associative set of <see cref="T:System.UriTemplate" />
 
         
 
@@ -113,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.UriTemplateTable" />
+            >Initializes a new instance of the <see cref="T:System.UriTemplateTable" />
 
             
 
@@ -147,8 +135,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.UriTemplateTable" />
+            >Initializes a new instance of the <see cref="T:System.UriTemplateTable" />
 
             
 
@@ -156,7 +143,11 @@
           >
         </summary>
         <param name="keyValuePairs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -182,8 +173,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.UriTemplateTable" />
+            >Initializes a new instance of the <see cref="T:System.UriTemplateTable" />
 
             
 
@@ -191,12 +181,15 @@
           >
         </summary>
         <param name="baseAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Uri" />
+          A <see cref="T:System.Uri" />
 
           
 
@@ -229,8 +222,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.UriTemplateTable" />
+            >Initializes a new instance of the <see cref="T:System.UriTemplateTable" />
 
             
 
@@ -238,19 +230,26 @@
           >
         </summary>
         <param name="baseAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Uri" />
+          A <see cref="T:System.Uri" />
 
           
 
            instance that contains the base address.</param
         >
         <param name="keyValuePairs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -273,28 +272,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.UriTemplateTable.BaseAddress" />
+            >The <see cref="P:System.UriTemplateTable.BaseAddress" />
 
             
 
-             property can only be set prior to calling <see
-             cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
+             property can only be set prior to calling <see cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
 
             
 
-             or <see
-             cref="M:System.UriTemplateTable.Match(System.Uri)" />
+             or <see cref="M:System.UriTemplateTable.Match(System.Uri)" />
 
             
 
-             or <see
-             cref="M:System.UriTemplateTable.MatchSingle(System.Uri)" />
+             or <see cref="M:System.UriTemplateTable.MatchSingle(System.Uri)" />
 
             
 
-             otherwise an <see
-             cref="T:System.InvalidOperationException" />
+             otherwise an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -304,8 +298,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets and sets the base address for the <see
-             cref="T:System.UriTemplateTable" />
+            >Gets and sets the base address for the <see cref="T:System.UriTemplateTable" />
 
             
 
@@ -329,13 +322,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.UriTemplateTable" />
+            >A <see cref="T:System.UriTemplateTable" />
 
             
 
-             is read only after the <see
-             cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
+             is read only after the <see cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
 
             
 
@@ -345,8 +336,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that specifies whether the <see
-             cref="T:System.UriTemplateTable" />
+            >Gets a value that specifies whether the <see cref="T:System.UriTemplateTable" />
 
             
 
@@ -376,48 +366,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each <see
-             cref="T:System.UriTemplate" />
+            >Each <see cref="T:System.UriTemplate" />
 
             
 
-             instance in the table has data associated with it. The <see
-             cref="P:System.UriTemplateTable.KeyValuePairs" />
+             instance in the table has data associated with it. The <see cref="P:System.UriTemplateTable.KeyValuePairs" />
 
             
 
-             property contains a collection of key value pairs where the key is a <see
-             cref="T:System.UriTemplate" />
+             property contains a collection of key value pairs where the key is a <see cref="T:System.UriTemplate" />
 
             
 
-             instance and the value is the data associated with the <see
-             cref="T:System.UriTemplate" />
+             instance and the value is the data associated with the <see cref="T:System.UriTemplate" />
 
             
 
-            . Values can only be added to <see
-             cref="P:System.UriTemplateTable.KeyValuePairs" />
+            . Values can only be added to <see cref="P:System.UriTemplateTable.KeyValuePairs" />
 
             
 
-             property prior to calling <see
-             cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
+             property prior to calling <see cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
 
             
 
-             or <see
-             cref="M:System.UriTemplateTable.Match(System.Uri)" />
+             or <see cref="M:System.UriTemplateTable.Match(System.Uri)" />
 
             
 
-             or <see
-             cref="M:System.UriTemplateTable.MatchSingle(System.Uri)" />
+             or <see cref="M:System.UriTemplateTable.MatchSingle(System.Uri)" />
 
             
 
-             otherwise a <see
-             cref="T:System.NotSupportedException" />
+             otherwise a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -427,8 +408,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of key/value pairs that consist of <see
-             cref="T:System.UriTemplate" />
+            >Gets a collection of key/value pairs that consist of <see cref="T:System.UriTemplate" />
 
             
 
@@ -460,8 +440,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
+            >When the <see cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
 
             
 
@@ -470,18 +449,15 @@
           <list type="bullet">
             <item>
               <para
-                >When <see
-                 cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
+                >When <see cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
 
                 
 
-                 is called passing in false, the <see
-                 cref="T:System.UriTemplateTable" />
+                 is called passing in false, the <see cref="T:System.UriTemplateTable" />
 
                 
 
-                 checks to make sure the table contains no multiple structurally-equivalent templates. If it finds such templates, an exception is thrown. This type of validation is used in conjunction with <see
-                 cref="M:System.UriTemplateTable.MatchSingle(System.Uri)" />
+                 checks to make sure the table contains no multiple structurally-equivalent templates. If it finds such templates, an exception is thrown. This type of validation is used in conjunction with <see cref="M:System.UriTemplateTable.MatchSingle(System.Uri)" />
 
                 
 
@@ -490,18 +466,15 @@
             </item>
             <item>
               <para
-                >When <see
-                 cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
+                >When <see cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
 
                 
 
-                 is called passing in true, multiple structurally-equivalent templates can be contained within a <see
-                 cref="T:System.UriTemplateTable" />
+                 is called passing in true, multiple structurally-equivalent templates can be contained within a <see cref="T:System.UriTemplateTable" />
 
                 
 
-                . However, any query strings in the templates must not be ambiguous; identical query strings are allowed. This type of validation is used in conjunction with <see
-                 cref="M:System.UriTemplateTable.Match(System.Uri)" />
+                . However, any query strings in the templates must not be ambiguous; identical query strings are allowed. This type of validation is used in conjunction with <see cref="M:System.UriTemplateTable.Match(System.Uri)" />
 
                 
 
@@ -510,8 +483,7 @@
             </item>
           </list>
           <para
-            >Only the first call to <see
-             cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
+            >Only the first call to <see cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
 
             
 
@@ -521,8 +493,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Makes the <see
-             cref="T:System.UriTemplateTable" />
+            >Makes the <see cref="T:System.UriTemplateTable" />
 
             
 
@@ -530,17 +501,19 @@
           >
         </summary>
         <param name="allowDuplicateEquivalentUriTemplates">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Specifies whether to allow duplicate equivalent <see
-           cref="T:System.UriTemplate" />
+          Specifies whether to allow duplicate equivalent <see cref="T:System.UriTemplate" />
 
           
 
-           instances in the <see
-           cref="T:System.UriTemplateTable" />
+           instances in the <see cref="T:System.UriTemplateTable" />
 
           
 
@@ -575,13 +548,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to match a candidate <see
-             cref="T:System.Uri" />
+            >Attempts to match a candidate <see cref="T:System.Uri" />
 
             
 
-             to the <see
-             cref="T:System.UriTemplateTable" />
+             to the <see cref="T:System.UriTemplateTable" />
 
             
 
@@ -591,8 +562,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of <see
-             cref="T:System.UriTemplateMatch" />
+            >A collection of <see cref="T:System.UriTemplateMatch" />
 
             
 
@@ -600,7 +570,11 @@
           >
         </returns>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -628,8 +602,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns, at most, one match. If more than one match is found, a <see
-             cref="T:System.UriTemplateMatchException" />
+            >This method returns, at most, one match. If more than one match is found, a <see cref="T:System.UriTemplateMatchException" />
 
             
 
@@ -639,13 +612,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to match a candidate <see
-             cref="T:System.Uri" />
+            >Attempts to match a candidate <see cref="T:System.Uri" />
 
             
 
-             to the <see
-             cref="T:System.UriTemplateTable" />
+             to the <see cref="T:System.UriTemplateTable" />
 
             
 
@@ -655,8 +626,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A single <see
-             cref="T:System.UriTemplateMatch" />
+            >A single <see cref="T:System.UriTemplateMatch" />
 
             
 
@@ -664,7 +634,11 @@
           >
         </returns>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -17,23 +17,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To create a new <see
-         cref="T:System.Windows.Forms.DataGrid" />
+        >To create a new <see cref="T:System.Windows.Forms.DataGrid" />
 
         
 
-         column with special properties, you must first inherit from the <see
-         cref="T:System.Windows.Forms.DataGridColumnStyle" />
+         column with special properties, you must first inherit from the <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
         
 
-         class. The <see
-         cref="T:System.Windows.Forms.IDataGridColumnStyleEditingNotificationService" />
+         class. The <see cref="T:System.Windows.Forms.IDataGridColumnStyleEditingNotificationService" />
 
         
 
-         interface is provided to notify the <see
-         cref="T:System.Windows.Forms.DataGrid" />
+         interface is provided to notify the <see cref="T:System.Windows.Forms.DataGrid" />
 
         
 
@@ -62,13 +58,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When called, the <see
-             cref="M:System.Windows.Forms.IDataGridColumnStyleEditingNotificationService.ColumnStartedEditing(System.Windows.Forms.Control)" />
+            >When called, the <see cref="M:System.Windows.Forms.IDataGridColumnStyleEditingNotificationService.ColumnStartedEditing(System.Windows.Forms.Control)" />
 
             
 
-             method allows the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+             method allows the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
@@ -78,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Informs the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+            >Informs the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
@@ -87,12 +80,15 @@
           >
         </summary>
         <param name="editingControl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Control" />
+          The <see cref="T:System.Windows.Forms.Control" />
 
           
 

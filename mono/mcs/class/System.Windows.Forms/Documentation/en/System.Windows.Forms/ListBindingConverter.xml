@@ -17,44 +17,37 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.ListBindingConverter" />
+        >The <see cref="T:System.Windows.Forms.ListBindingConverter" />
 
         
 
-         is used to evaluate and convert a property of an object into a <see
-         cref="T:System.Windows.Forms.Binding" />
+         is used to evaluate and convert a property of an object into a <see cref="T:System.Windows.Forms.Binding" />
 
         
 
         .</para
       >
       <para
-        >The <see
-         cref="T:System.ComponentModel.TypeConverterAttribute" />
+        >The <see cref="T:System.ComponentModel.TypeConverterAttribute" />
 
         
 
-         is applied to the <see
-         cref="T:System.Windows.Forms.Binding" />
+         is applied to the <see cref="T:System.Windows.Forms.Binding" />
 
         
 
-         class with the type of the <see
-         cref="T:System.Windows.Forms.ListBindingConverter" />
+         class with the type of the <see cref="T:System.Windows.Forms.ListBindingConverter" />
 
         
 
          as an argument.</para
       >
       <para
-        >For more information about type converters, see the <see
-         cref="T:System.ComponentModel.TypeConverter" />
+        >For more information about type converters, see the <see cref="T:System.ComponentModel.TypeConverter" />
 
         
 
-         base class and <format
-         type="text/html">
+         base class and <format type="text/html">
           <a href="90373A3F-D8C8-492D-841C-945D62393C56">How to: Implement a Type Converter</a>
         </format>
 
@@ -64,23 +57,19 @@
       >
       <block subset="none" type="note">
         <para
-          >You should never create an instance of the <see
-           cref="T:System.Windows.Forms.ListBindingConverter" />
+          >You should never create an instance of the <see cref="T:System.Windows.Forms.ListBindingConverter" />
 
           
 
-           class. Instead, call the <see
-           cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+           class. Instead, call the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
 
           
 
-           method of <see
-           cref="T:System.ComponentModel.TypeDescriptor" />
+           method of <see cref="T:System.ComponentModel.TypeDescriptor" />
 
           
 
-          . For more information, see the examples in the <see
-           cref="T:System.ComponentModel.TypeConverter" />
+          . For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" />
 
           
 
@@ -91,8 +80,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a type converter to convert <see
-         cref="T:System.Windows.Forms.Binding" />
+        >Provides a type converter to convert <see cref="T:System.Windows.Forms.Binding" />
 
         
 
@@ -110,8 +98,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListBindingConverter" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListBindingConverter" />
 
             
 

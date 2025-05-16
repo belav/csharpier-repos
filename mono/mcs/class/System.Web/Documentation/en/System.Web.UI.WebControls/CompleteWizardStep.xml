@@ -17,38 +17,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.CompleteWizardStep" />
+        >The <see cref="T:System.Web.UI.WebControls.CompleteWizardStep" />
 
         
 
-         class is derived from <see
-         cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
+         class is derived from <see cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
 
         
 
-         and used by the <see
-         cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+         and used by the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" />
 
         
 
-         control. By default the <see
-         cref="T:System.Web.UI.WebControls.CompleteWizardStep" />
+         control. By default the <see cref="T:System.Web.UI.WebControls.CompleteWizardStep" />
 
         
 
-         step is displayed after the <see
-         cref="T:System.Web.UI.WebControls.CreateUserWizardStep" />
+         step is displayed after the <see cref="T:System.Web.UI.WebControls.CreateUserWizardStep" />
 
         
 
-         step. The <see
-         cref="T:System.Web.UI.WebControls.CompleteWizardStep" />
+         step. The <see cref="T:System.Web.UI.WebControls.CompleteWizardStep" />
 
         
 
-         step is a required step of the <see
-         cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+         step is a required step of the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" />
 
         
 
@@ -58,8 +51,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines the template of the final step for creating a user account with the <see
-         cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+        >Defines the template of the final step for creating a user account with the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" />
 
         
 
@@ -78,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.CompleteWizardStep" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.CompleteWizardStep" />
 
             
 
@@ -111,18 +102,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.CompleteWizardStep.StepType" />
+            >The <see cref="P:System.Web.UI.WebControls.CompleteWizardStep.StepType" />
 
             
 
-             property specifies the type of navigation UI to display for the final user account creation step (the <see
-             cref="T:System.Web.UI.WebControls.CreateUserWizardStep" />
+             property specifies the type of navigation UI to display for the final user account creation step (the <see cref="T:System.Web.UI.WebControls.CreateUserWizardStep" />
 
             
 
-             step) of the <see
-             cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+             step) of the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" />
 
             
 
@@ -130,38 +118,31 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.UI.WebControls.CompleteWizardStep.StepType" />
+              >The <see cref="P:System.Web.UI.WebControls.CompleteWizardStep.StepType" />
 
               
 
-               property overrides the <see
-               cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" />
+               property overrides the <see cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" />
 
               
 
-               property to ensure that <see
-               cref="T:System.Web.UI.WebControls.CompleteWizardStep" />
+               property to ensure that <see cref="T:System.Web.UI.WebControls.CompleteWizardStep" />
 
               
 
-               is always set to the <see
-               cref="F:System.Web.UI.WebControls.WizardStepType.Complete" />
+               is always set to the <see cref="F:System.Web.UI.WebControls.WizardStepType.Complete" />
 
               
 
-               value of the <see
-               cref="T:System.Web.UI.WebControls.WizardStepType" />
+               value of the <see cref="T:System.Web.UI.WebControls.WizardStepType" />
 
               
 
-               enumeration. Attempting to set the <see
-               cref="P:System.Web.UI.WebControls.CompleteWizardStep.StepType" />
+               enumeration. Attempting to set the <see cref="P:System.Web.UI.WebControls.CompleteWizardStep.StepType" />
 
               
 
-               property to a different value will result in an <see
-               cref="T:System.InvalidOperationException" />
+               property to a different value will result in an <see cref="T:System.InvalidOperationException" />
 
               
 
@@ -169,13 +150,11 @@
             >
           </block>
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -187,13 +166,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the type of user interface (UI) to display for the <see
-             cref="T:System.Web.UI.WebControls.CompleteWizardStep" />
+            >Gets or sets the type of user interface (UI) to display for the <see cref="T:System.Web.UI.WebControls.CompleteWizardStep" />
 
             
 
-             page of a <see
-             cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+             page of a <see cref="T:System.Web.UI.WebControls.CreateUserWizard" />
 
             
 
@@ -222,13 +199,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
@@ -242,8 +217,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the title to display for the final user account creation step of the <see
-             cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+            >Gets or sets the title to display for the final user account creation step of the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" />
 
             
 

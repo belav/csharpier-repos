@@ -45,8 +45,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocumentReference" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.DiscoveryDocumentReference" />
 
             
 
@@ -71,18 +70,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocumentReference" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.DiscoveryDocumentReference" />
 
             
 
-             class, setting the <see
-             cref="P:System.Web.Services.Discovery.DiscoveryDocumentReference.Ref" />
+             class, setting the <see cref="P:System.Web.Services.Discovery.DiscoveryDocumentReference.Ref" />
 
             
 
-             property to the value of <paramref
-             name="href" />
+             property to the value of <paramref name="href" />
 
             
 
@@ -90,17 +86,19 @@
           >
         </summary>
         <param name="href">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Reference to a discovery document. The <see
-           cref="P:System.Web.Services.Discovery.DiscoveryDocumentReference.Ref" />
+          Reference to a discovery document. The <see cref="P:System.Web.Services.Discovery.DiscoveryDocumentReference.Ref" />
 
           
 
-           property is set to the value of <paramref
-           name="href" />
+           property is set to the value of <paramref name="href" />
 
           
 
@@ -120,10 +118,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -154,13 +149,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the discovery document has not been downloaded and added to the <see
-             cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Documents" />
+            >If the discovery document has not been downloaded and added to the <see cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Documents" />
 
             
 
-             property of <see
-             cref="P:System.Web.Services.Discovery.DiscoveryReference.ClientProtocol" />
+             property of <see cref="P:System.Web.Services.Discovery.DiscoveryReference.ClientProtocol" />
 
             
 
@@ -170,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the contents of the referenced discovery document as a <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+            >Gets the contents of the referenced discovery document as a <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
             
 
@@ -206,8 +198,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads and returns the discovery document from the passed <see
-             cref="T:System.IO.Stream" />
+            >Reads and returns the discovery document from the passed <see cref="T:System.IO.Stream" />
 
             
 
@@ -217,8 +208,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+            >A <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
             
 
@@ -251,8 +241,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For most references, the <see
-             cref="P:System.Web.Services.Discovery.DiscoveryDocumentReference.Ref" />
+            >For most references, the <see cref="P:System.Web.Services.Discovery.DiscoveryDocumentReference.Ref" />
 
             
 
@@ -295,46 +284,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the MIME type is text/xml and the content of <paramref
-             name="stream" />
+            >If the MIME type is text/xml and the content of <paramref name="stream" />
 
             
 
-             is a discovery document, then the contents of <paramref
-             name="stream" />
+             is a discovery document, then the contents of <paramref name="stream" />
 
             
 
-             are added to the <see
-             cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.References" />
+             are added to the <see cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.References" />
 
             
 
-             and <see
-             cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Documents" />
+             and <see cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Documents" />
 
             
 
-             properties of <see
-             cref="P:System.Web.Services.Discovery.DiscoveryReference.ClientProtocol" />
+             properties of <see cref="P:System.Web.Services.Discovery.DiscoveryReference.ClientProtocol" />
 
             
 
             .</para
           >
           <para
-            >Before invoking the <see
-             cref="M:System.Web.Services.Discovery.DiscoveryDocumentReference.Resolve(System.String,System.IO.Stream)" />
+            >Before invoking the <see cref="M:System.Web.Services.Discovery.DiscoveryDocumentReference.Resolve(System.String,System.IO.Stream)" />
 
             
 
-             method, the <see
-             cref="P:System.Web.Services.Discovery.DiscoveryReference.ClientProtocol" />
+             method, the <see cref="P:System.Web.Services.Discovery.DiscoveryReference.ClientProtocol" />
 
             
 
-             property must be set to a valid instance of <see
-             cref="T:System.Web.Services.Discovery.DiscoveryClientProtocol" />
+             property must be set to a valid instance of <see cref="T:System.Web.Services.Discovery.DiscoveryClientProtocol" />
 
             
 
@@ -346,24 +327,30 @@
           <para>Resolves whether the referenced document is valid.</para>
         </summary>
         <param name="contentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The MIME type of <paramref
-           name="stream" />
+          The MIME type of <paramref name="stream" />
 
           
 
           . </param
         >
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.Stream" />
+          The <see cref="T:System.IO.Stream" />
 
           
 
@@ -382,36 +369,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unless you specifically need to resolve the individual references of a <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocumentReference" />
+            >Unless you specifically need to resolve the individual references of a <see cref="T:System.Web.Services.Discovery.DiscoveryDocumentReference" />
 
             
 
-             object, you should invoke the <see
-             cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveAll" />
+             object, you should invoke the <see cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveAll" />
 
             
 
-             or <see
-             cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveOneLevel" />
+             or <see cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveOneLevel" />
 
             
 
-             methods of <see
-             cref="T:System.Web.Services.Discovery.DiscoveryClientProtocol" />
+             methods of <see cref="T:System.Web.Services.Discovery.DiscoveryClientProtocol" />
 
             
 
             .</para
           >
           <para
-            >This method resolves all references to discovery documents, XSD schemas, and Service Descriptions in the <see
-             cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.References" />
+            >This method resolves all references to discovery documents, XSD schemas, and Service Descriptions in the <see cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.References" />
 
             
 
-             property of <see
-             cref="P:System.Web.Services.Discovery.DiscoveryReference.ClientProtocol" />
+             property of <see cref="P:System.Web.Services.Discovery.DiscoveryReference.ClientProtocol" />
 
             
 
@@ -436,15 +417,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the value of the <see
-             cref="P:System.Web.Services.Discovery.DiscoveryDocumentReference.Ref" />
+            >Returns the value of the <see cref="P:System.Web.Services.Discovery.DiscoveryDocumentReference.Ref" />
 
             
 
@@ -484,13 +461,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the passed <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+            >Writes the passed <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
             
 
-             into the passed <see
-             cref="T:System.IO.Stream" />
+             into the passed <see cref="T:System.IO.Stream" />
 
             
 
@@ -498,29 +473,34 @@
           >
         </summary>
         <param name="document">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+          The <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
           
 
-           to write into <paramref
-           name="stream" />
+           to write into <paramref name="stream" />
 
           
 
           . </param
         >
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.Stream" />
+          The <see cref="T:System.IO.Stream" />
 
           
 

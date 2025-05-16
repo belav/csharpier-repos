@@ -31,39 +31,33 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.GroupBox" />
+        >The <see cref="T:System.Windows.Forms.GroupBox" />
 
         
 
-         displays a frame around a group of controls with or without a caption. Use a <see
-         cref="T:System.Windows.Forms.GroupBox" />
+         displays a frame around a group of controls with or without a caption. Use a <see cref="T:System.Windows.Forms.GroupBox" />
 
         
 
          to logically group a collection of controls on a form. The group box is a container control that can be used to define groups of controls.</para
       >
       <para
-        >The typical use for a group box is to contain a logical group of <see
-         cref="T:System.Windows.Forms.RadioButton" />
+        >The typical use for a group box is to contain a logical group of <see cref="T:System.Windows.Forms.RadioButton" />
 
         
 
          controls. If you have two group boxes, each of which contain several option buttons (also known as radio buttons), each group of buttons is mutually exclusive, setting one option value per group.</para
       >
       <para
-        >You can add controls to the <see
-         cref="T:System.Windows.Forms.GroupBox" />
+        >You can add controls to the <see cref="T:System.Windows.Forms.GroupBox" />
 
         
 
-         by using the <see
-         cref="M:System.Windows.Forms.Control.ControlCollection.Add(System.Windows.Forms.Control)" />
+         by using the <see cref="M:System.Windows.Forms.Control.ControlCollection.Add(System.Windows.Forms.Control)" />
 
         
 
-         method of the <see
-         cref="P:System.Windows.Forms.Control.Controls" />
+         method of the <see cref="P:System.Windows.Forms.Control.Controls" />
 
         
 
@@ -71,58 +65,47 @@
       >
       <block subset="none" type="note">
         <para
-          >Only controls that are contained within the <see
-           cref="T:System.Windows.Forms.GroupBox" />
+          >Only controls that are contained within the <see cref="T:System.Windows.Forms.GroupBox" />
 
           
 
-           control can be selected or receive focus. The complete <see
-           cref="T:System.Windows.Forms.GroupBox" />
+           control can be selected or receive focus. The complete <see cref="T:System.Windows.Forms.GroupBox" />
 
           
 
-           itself cannot be selected or receive focus. For more information about how this control responds to the <see
-           cref="M:System.Windows.Forms.Control.Focus" />
+           itself cannot be selected or receive focus. For more information about how this control responds to the <see cref="M:System.Windows.Forms.Control.Focus" />
 
           
 
-           and <see
-           cref="M:System.Windows.Forms.Control.Select" />
+           and <see cref="M:System.Windows.Forms.Control.Select" />
 
           
 
-           methods, see the following <see
-           cref="T:System.Windows.Forms.Control" />
+           methods, see the following <see cref="T:System.Windows.Forms.Control" />
 
           
 
-           members: <see
-           cref="P:System.Windows.Forms.Control.CanFocus" />
+           members: <see cref="P:System.Windows.Forms.Control.CanFocus" />
 
           
 
-          , <see
-           cref="P:System.Windows.Forms.Control.CanSelect" />
+          , <see cref="P:System.Windows.Forms.Control.CanSelect" />
 
           
 
-          , <see
-           cref="P:System.Windows.Forms.Control.Focused" />
+          , <see cref="P:System.Windows.Forms.Control.Focused" />
 
           
 
-          , <see
-           cref="P:System.Windows.Forms.Control.ContainsFocus" />
+          , <see cref="P:System.Windows.Forms.Control.ContainsFocus" />
 
           
 
-          , <see
-           cref="M:System.Windows.Forms.Control.Focus" />
+          , <see cref="M:System.Windows.Forms.Control.Focus" />
 
           
 
-          , <see
-           cref="M:System.Windows.Forms.Control.Select" />
+          , <see cref="M:System.Windows.Forms.Control.Select" />
 
           
 
@@ -130,18 +113,15 @@
         >
       </block>
       <para
-        >The <see
-         cref="T:System.Windows.Forms.GroupBox" />
+        >The <see cref="T:System.Windows.Forms.GroupBox" />
 
         
 
-         cannot display a scroll bar. If you need a control similar to a <see
-         cref="T:System.Windows.Forms.GroupBox" />
+         cannot display a scroll bar. If you need a control similar to a <see cref="T:System.Windows.Forms.GroupBox" />
 
         
 
-         that can contain a scroll bar, see the <see
-         cref="T:System.Windows.Forms.Panel" />
+         that can contain a scroll bar, see the <see cref="T:System.Windows.Forms.Panel" />
 
         
 
@@ -162,13 +142,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see
-             cref="P:System.Windows.Forms.Control.TabStop" />
+            >By default, the <see cref="P:System.Windows.Forms.Control.TabStop" />
 
             
 
-             property is set to false when a new <see
-             cref="T:System.Windows.Forms.GroupBox" />
+             property is set to false when a new <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
@@ -178,8 +156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.GroupBox" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
@@ -245,8 +222,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether the <see
-             cref="T:System.Windows.Forms.GroupBox" />
+            >Gets or sets a value that indicates whether the <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
@@ -276,8 +252,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -289,8 +264,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.GroupBox.AutoSize" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.GroupBox.AutoSize" />
 
             
 
@@ -328,13 +302,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets how the <see
-             cref="T:System.Windows.Forms.GroupBox" />
+            >Gets or sets how the <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
-             behaves when its <see
-             cref="P:System.Windows.Forms.Control.AutoSize" />
+             behaves when its <see cref="P:System.Windows.Forms.Control.AutoSize" />
 
             
 
@@ -362,8 +334,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user clicks the <see
-             cref="T:System.Windows.Forms.GroupBox" />
+            >Occurs when the user clicks the <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
@@ -393,13 +364,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you do not explicitly call the <see
-             cref="M:System.Windows.Forms.GroupBox.CreateAccessibilityInstance" />
+            >If you do not explicitly call the <see cref="M:System.Windows.Forms.GroupBox.CreateAccessibilityInstance" />
 
             
 
-             method, it will be called when the <see
-             cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+             method, it will be called when the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" />
 
             
 
@@ -409,8 +378,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new accessibility object for the <see
-             cref="T:System.Windows.Forms.GroupBox" />
+            >Creates a new accessibility object for the <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
@@ -420,13 +388,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >A new <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             for the <see
-             cref="T:System.Windows.Forms.GroupBox" />
+             for the <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
@@ -475,13 +441,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.Padding" />
+            >Gets the <see cref="T:System.Windows.Forms.Padding" />
 
             
 
-             structure that contains the default padding settings for a <see
-             cref="T:System.Windows.Forms.GroupBox" />
+             structure that contains the default padding settings for a <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
@@ -524,8 +488,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a rectangle that represents the dimensions of the <see
-             cref="T:System.Windows.Forms.GroupBox" />
+            >Gets a rectangle that represents the dimensions of the <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
@@ -557,8 +520,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user double-clicks the <see
-             cref="T:System.Windows.Forms.GroupBox" />
+            >Occurs when the user double-clicks the <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
@@ -590,18 +552,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.GroupBox" />
+            >A <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
-             with a <see
-             cref="P:System.Windows.Forms.GroupBox.FlatStyle" />
+             with a <see cref="P:System.Windows.Forms.GroupBox.FlatStyle" />
 
             
 
-             value of <see
-             cref="F:System.Windows.Forms.FlatStyle.System" />
+             value of <see cref="F:System.Windows.Forms.FlatStyle.System" />
 
             
 
@@ -639,8 +598,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because a <see
-             cref="T:System.Windows.Forms.GroupBox" />
+            >Because a <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
@@ -650,8 +608,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user presses a key while the <see
-             cref="T:System.Windows.Forms.GroupBox" />
+            >Occurs when the user presses a key while the <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
@@ -685,8 +642,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because a <see
-             cref="T:System.Windows.Forms.GroupBox" />
+            >Because a <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
@@ -696,8 +652,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user presses a key while the <see
-             cref="T:System.Windows.Forms.GroupBox" />
+            >Occurs when the user presses a key while the <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
@@ -731,8 +686,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because a <see
-             cref="T:System.Windows.Forms.GroupBox" />
+            >Because a <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
@@ -742,8 +696,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user releases a key while the <see
-             cref="T:System.Windows.Forms.GroupBox" />
+            >Occurs when the user releases a key while the <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
@@ -781,8 +734,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user clicks the <see
-             cref="T:System.Windows.Forms.GroupBox" />
+            >Occurs when the user clicks the <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
@@ -816,8 +768,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user double-clicks the <see
-             cref="T:System.Windows.Forms.GroupBox" />
+            >Occurs when the user double-clicks the <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
@@ -1049,8 +1000,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the control is top level, this method will not scale the control's location. This method does not scale children or the size of automatically sized controls. You can omit scaling in any direction by changing the value of the <paramref
-             name="specified" />
+            >If the control is top level, this method will not scale the control's location. This method does not scale children or the size of automatically sized controls. You can omit scaling in any direction by changing the value of the <paramref name="specified" />
 
             
 
@@ -1060,8 +1010,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Scales the <see
-             cref="T:System.Windows.Forms.GroupBox" />
+            >Scales the <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
@@ -1069,24 +1018,30 @@
           >
         </summary>
         <param name="factor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.SizeF" />
+          The <see cref="T:System.Drawing.SizeF" />
 
           
 
            that indicates the height and width of the scaled control.</param
         >
         <param name="specified">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.BoundsSpecified" />
+          One of the <see cref="T:System.Windows.Forms.BoundsSpecified" />
 
           
 
@@ -1113,13 +1068,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although you can set the <see
-             cref="P:System.Windows.Forms.GroupBox.TabStop" />
+            >Although you can set the <see cref="P:System.Windows.Forms.GroupBox.TabStop" />
 
             
 
-             property to true, the <see
-             cref="T:System.Windows.Forms.GroupBox" />
+             property to true, the <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
@@ -1129,8 +1082,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether the user can press the TAB key to give the focus to the <see
-             cref="T:System.Windows.Forms.GroupBox" />
+            >Gets or sets a value that indicates whether the user can press the TAB key to give the focus to the <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
@@ -1162,8 +1114,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.GroupBox.TabStop" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.GroupBox.TabStop" />
 
             
 
@@ -1210,8 +1161,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the current <see
-             cref="T:System.Windows.Forms.GroupBox" />
+            >A string that represents the current <see cref="T:System.Windows.Forms.GroupBox" />
 
             
 
@@ -1236,41 +1186,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The UseCompatibleTextRendering property is intended to provide visual compatibility between Windows Forms controls that render text using the <see
-             cref="T:System.Windows.Forms.TextRenderer" />
+            >The UseCompatibleTextRendering property is intended to provide visual compatibility between Windows Forms controls that render text using the <see cref="T:System.Windows.Forms.TextRenderer" />
 
             
 
-             class and net_v10_short and net_v11_short applications that perform custom text rendering using the <see
-             cref="T:System.Drawing.Graphics" />
+             class and net_v10_short and net_v11_short applications that perform custom text rendering using the <see cref="T:System.Drawing.Graphics" />
 
             
 
              class. In most cases, if your application is not being upgraded from net_v10_short or net_v11_short, it is recommended that you leave UseCompatibleTextRendering set to the default value of false.</para
           >
           <para
-            >The ndptecgdi based <see
-             cref="T:System.Windows.Forms.TextRenderer" />
+            >The ndptecgdi based <see cref="T:System.Windows.Forms.TextRenderer" />
 
             
 
-             class was introduced in the dnprdnlong to improve performance, make text look better, and improve support for international fonts. In earlier versions of the dnprdnshort, the ndptecgdiplus based <see
-             cref="T:System.Drawing.Graphics" />
+             class was introduced in the dnprdnlong to improve performance, make text look better, and improve support for international fonts. In earlier versions of the dnprdnshort, the ndptecgdiplus based <see cref="T:System.Drawing.Graphics" />
 
             
 
-             class was used to perform all text rendering. ndptecgdi calculates character spacing and word wrapping differently from ndptecgdiplus. In a Windows Forms application that uses the <see
-             cref="T:System.Drawing.Graphics" />
+             class was used to perform all text rendering. ndptecgdi calculates character spacing and word wrapping differently from ndptecgdiplus. In a Windows Forms application that uses the <see cref="T:System.Drawing.Graphics" />
 
             
 
-             class to render text, this could cause the text for controls that use <see
-             cref="T:System.Windows.Forms.TextRenderer" />
+             class to render text, this could cause the text for controls that use <see cref="T:System.Windows.Forms.TextRenderer" />
 
             
 
-             to appear different from the other text in the application. To resolve this incompatibility, you can set the UseCompatibleTextRendering property to true for a specific control. To set UseCompatibleTextRendering to true for all supported controls in the application, call the <see
-             cref="M:System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(System.Boolean)" />
+             to appear different from the other text in the application. To resolve this incompatibility, you can set the UseCompatibleTextRendering property to true for a specific control. To set UseCompatibleTextRendering to true for all supported controls in the application, call the <see cref="M:System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(System.Boolean)" />
 
             
 
@@ -1280,13 +1223,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that determines whether to use the <see
-             cref="T:System.Drawing.Graphics" />
+            >Gets or sets a value that determines whether to use the <see cref="T:System.Drawing.Graphics" />
 
             
 
-             class (ndptecgdiplus) or the <see
-             cref="T:System.Windows.Forms.TextRenderer" />
+             class (ndptecgdiplus) or the <see cref="T:System.Windows.Forms.TextRenderer" />
 
             
 

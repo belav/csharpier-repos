@@ -24,82 +24,68 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This interface is used with the <see
-         cref="Overload:System.Collections.Generic.List`1.Sort" />
+        >This interface is used with the <see cref="Overload:System.Collections.Generic.List`1.Sort" />
 
         
 
-         and <see
-         cref="Overload:System.Collections.Generic.List`1.BinarySearch" />
+         and <see cref="Overload:System.Collections.Generic.List`1.BinarySearch" />
 
         
 
-         methods. It provides a way to customize the sort order of a collection. Classes that implement this interface include the <see
-         cref="T:System.Collections.Generic.SortedDictionary`2" />
+         methods. It provides a way to customize the sort order of a collection. Classes that implement this interface include the <see cref="T:System.Collections.Generic.SortedDictionary`2" />
 
         
 
-         and <see
-         cref="T:System.Collections.Generic.SortedList`2" />
+         and <see cref="T:System.Collections.Generic.SortedList`2" />
 
         
 
          generic classes.</para
       >
       <para
-        >The default implementation of this interface is the <see
-         cref="T:System.Collections.Generic.Comparer`1" />
+        >The default implementation of this interface is the <see cref="T:System.Collections.Generic.Comparer`1" />
 
         
 
-         class. The <see
-         cref="T:System.StringComparer" />
+         class. The <see cref="T:System.StringComparer" />
 
         
 
-         class implements this interface for type <see
-         cref="T:System.String" />
+         class implements this interface for type <see cref="T:System.String" />
 
         
 
         .</para
       >
       <para
-        >This interface supports ordering comparisons. That is, when the <see
-         cref="M:System.Collections.Generic.Comparer`1.Compare(`0,`0)" />
+        >This interface supports ordering comparisons. That is, when the <see cref="M:System.Collections.Generic.Comparer`1.Compare(`0,`0)" />
 
         
 
-         method returns 0, it means that two objects sort the same. Implementation of exact equality comparisons is provided by the <see
-         cref="T:System.Collections.Generic.IEqualityComparer`1" />
+         method returns 0, it means that two objects sort the same. Implementation of exact equality comparisons is provided by the <see cref="T:System.Collections.Generic.IEqualityComparer`1" />
 
         
 
          generic interface. </para
       >
       <para
-        >We recommend that you derive from the <see
-         cref="T:System.Collections.Generic.Comparer`1" />
+        >We recommend that you derive from the <see cref="T:System.Collections.Generic.Comparer`1" />
 
         
 
-         class instead of implementing the <see
-         cref="T:System.Collections.Generic.IComparer`1" />
+         class instead of implementing the <see cref="T:System.Collections.Generic.IComparer`1" />
 
         
 
-         interface, because the <see
-         cref="T:System.Collections.Generic.Comparer`1" />
+         interface, because the <see cref="T:System.Collections.Generic.Comparer`1" />
 
         
 
-         class provides an explicit interface implementation of the <see
-         cref="M:System.Collections.Generic.Comparer`1.System#Collections#IComparer#Compare(System.Object,System.Object)" />
+         class provides an explicit interface implementation of the <see cref="M:System.Collections.Generic.Comparer`1.System#Collections#IComparer#Compare(System.Object,System.Object)" />
 
         
 
-         method and the <see
-         cref="P:System.Collections.Generic.Comparer`1.Default" />
+         method and the <see cref="P:System.Collections.Generic.Comparer`1.Default" />
 
         
 
@@ -131,26 +117,19 @@
         <Parameter Name="y" Type="T" />
       </Parameters>
       <Docs>
-        <param name="x"
-          >First <see
-           langword="T" />
+        <param name="x">First <see langword="T" />
 
           
 
-           to compare.</param
-        >
-        <param name="y"
-          >Second <see
-           langword="T" />
+           to compare.</param>
+        <param name="y">Second <see langword="T" />
 
           
 
-           to compare.</param
-        >
+           to compare.</param>
         <summary>
           <para
-            > Returns the sort order of two <see
-             langword="T" />
+            > Returns the sort order of two <see langword="T" />
 
             
 
@@ -159,19 +138,16 @@
         </summary>
         <returns>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
              containing a value that reflects the sort order of
-<paramref
-             name="x" />
+<paramref name="x" />
 
             
 
-             as compared to <paramref
-             name="y" />
+             as compared to <paramref name="y" />
 
             
 
@@ -191,8 +167,7 @@
 
                 
 
-                 &lt; <paramref
-                 name="y" />
+                 &lt; <paramref name="y" />
 
                 
 
@@ -206,8 +181,7 @@
 
                 
 
-                 == <paramref
-                 name="y" />
+                 == <paramref name="y" />
 
                 
 
@@ -221,8 +195,7 @@
 
                 
 
-                 &gt; <paramref
-                 name="y" />
+                 &gt; <paramref name="y" />
 
                 
 
@@ -241,31 +214,26 @@
             <para>If Compare(A,B) returns zero and Compare(B,C) returns zero then Compare(A,C) is required to return zero.</para>
             <para>If Compare(A,B) returns a value other than zero then Compare(B,A) is required to return a value of the opposite sign.</para>
             <para
-              >If Compare(A,B) returns a value <paramref
-               name="x" />
+              >If Compare(A,B) returns a value <paramref name="x" />
 
               
 
                not equal 
-      to zero, and Compare(B,C) returns a value <paramref
-               name="y" />
+      to zero, and Compare(B,C) returns a value <paramref name="y" />
 
               
 
                of the same sign as
-   <paramref
-               name="x" />
+   <paramref name="x" />
 
               
 
               , then Compare(A,C) is required to a value of the same sign as 
-   <paramref
-               name="x" />
+   <paramref name="x" />
 
               
 
-               and <paramref
-               name="y" />
+               and <paramref name="y" />
 
               
 

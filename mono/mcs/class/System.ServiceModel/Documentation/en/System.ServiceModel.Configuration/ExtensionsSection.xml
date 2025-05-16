@@ -40,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.ExtensionsSection" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ExtensionsSection" />
 
             
 
@@ -173,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.ServiceModel.Configuration.ExtensionElementCollection" />
+            >Gets an <see cref="T:System.ServiceModel.Configuration.ExtensionElementCollection" />
 
             
 
@@ -227,18 +225,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Configuration.ConfigurationPropertyCollection" />
+            >Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" />
 
             
 
-             instance that contains a collection of <see
-             cref="T:System.Configuration.ConfigurationProperty" />
+             instance that contains a collection of <see cref="T:System.Configuration.ConfigurationProperty" />
 
             
 
-             objects that can be attributes or <see
-             cref="T:System.Configuration.ConfigurationElement" />
+             objects that can be attributes or <see cref="T:System.Configuration.ConfigurationElement" />
 
             
 

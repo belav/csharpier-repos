@@ -47,14 +47,22 @@
           <para>The return code for installutil.exe. A successful installation returns 0. Other values indicate failure.</para>
         </returns>
         <param name="commandLine">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The command line that specifies the installation.</param
         >
         <param name="hInstall">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

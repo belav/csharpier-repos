@@ -14,66 +14,54 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.Design.IWindowsFormsEditorService" />
+        >The <see cref="T:System.Windows.Forms.Design.IWindowsFormsEditorService" />
 
         
 
-         is only available through the <see
-         cref="M:System.IServiceProvider.GetService(System.Type)" />
+         is only available through the <see cref="M:System.IServiceProvider.GetService(System.Type)" />
 
         
 
-         method of the <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+         method of the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
          control.</para
       >
       <para
-        >This service is typically used to display a form from the <see
-         cref="M:System.Drawing.Design.UITypeEditor.EditValue(System.IServiceProvider,System.Object)" />
+        >This service is typically used to display a form from the <see cref="M:System.Drawing.Design.UITypeEditor.EditValue(System.IServiceProvider,System.Object)" />
 
         
 
-         method of a <see
-         cref="T:System.Drawing.Design.UITypeEditor" />
+         method of a <see cref="T:System.Drawing.Design.UITypeEditor" />
 
         
 
-        . When a <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+        . When a <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
-         invokes the <see
-         cref="M:System.Drawing.Design.UITypeEditor.EditValue(System.IServiceProvider,System.Object)" />
+         invokes the <see cref="M:System.Drawing.Design.UITypeEditor.EditValue(System.IServiceProvider,System.Object)" />
 
         
 
-         method of a <see
-         cref="T:System.Drawing.Design.UITypeEditor" />
+         method of a <see cref="T:System.Drawing.Design.UITypeEditor" />
 
         
 
-         to provide a user interface for editing the value of a property, the <see
-         cref="M:System.Drawing.Design.UITypeEditor.EditValue(System.IServiceProvider,System.Object)" />
+         to provide a user interface for editing the value of a property, the <see cref="M:System.Drawing.Design.UITypeEditor.EditValue(System.IServiceProvider,System.Object)" />
 
         
 
-         method is passed a reference to an <see
-         cref="T:System.IServiceProvider" />
+         method is passed a reference to an <see cref="T:System.IServiceProvider" />
 
         
 
-         that can typically provide an instance of the <see
-         cref="T:System.Windows.Forms.Design.IWindowsFormsEditorService" />
+         that can typically provide an instance of the <see cref="T:System.Windows.Forms.Design.IWindowsFormsEditorService" />
 
         
 
-        . The methods of this service can be used to display dialog boxes and forms, or to show a <see
-         cref="T:System.Windows.Forms.Control" />
+        . The methods of this service can be used to display dialog boxes and forms, or to show a <see cref="T:System.Windows.Forms.Control" />
 
         
 
@@ -83,8 +71,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides an interface for a <see
-         cref="T:System.Drawing.Design.UITypeEditor" />
+        >Provides an interface for a <see cref="T:System.Drawing.Design.UITypeEditor" />
 
         
 
@@ -104,8 +91,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method closes the drop down container area for a control that has been shown using the <see
-             cref="M:System.Windows.Forms.Design.IWindowsFormsEditorService.DropDownControl(System.Windows.Forms.Control)" />
+            >This method closes the drop down container area for a control that has been shown using the <see cref="M:System.Windows.Forms.Design.IWindowsFormsEditorService.DropDownControl(System.Windows.Forms.Control)" />
 
             
 
@@ -138,13 +124,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Drawing.Design.UITypeEditor.EditValue(System.IServiceProvider,System.Object)" />
+            >The <see cref="M:System.Drawing.Design.UITypeEditor.EditValue(System.IServiceProvider,System.Object)" />
 
             
 
-             method of a <see
-             cref="T:System.Drawing.Design.UITypeEditor" />
+             method of a <see cref="T:System.Drawing.Design.UITypeEditor" />
 
             
 
@@ -157,12 +141,15 @@
           <para>Displays the specified control in a drop down area below a value field of the property grid that provides this service.</para>
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The drop down list <see
-           cref="T:System.Windows.Forms.Control" />
+          The drop down list <see cref="T:System.Windows.Forms.Control" />
 
           
 
@@ -194,8 +181,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Shows the specified <see
-             cref="T:System.Windows.Forms.Form" />
+            >Shows the specified <see cref="T:System.Windows.Forms.Form" />
 
             
 
@@ -205,13 +191,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.DialogResult" />
+            >A <see cref="T:System.Windows.Forms.DialogResult" />
 
             
 
-             indicating the result code returned by the <see
-             cref="T:System.Windows.Forms.Form" />
+             indicating the result code returned by the <see cref="T:System.Windows.Forms.Form" />
 
             
 
@@ -219,12 +203,15 @@
           >
         </returns>
         <param name="dialog">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Form" />
+          The <see cref="T:System.Windows.Forms.Form" />
 
           
 

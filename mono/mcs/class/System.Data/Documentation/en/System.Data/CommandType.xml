@@ -16,36 +16,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When the <see
-         cref="T:System.Data.CommandType" />
+        >When the <see cref="T:System.Data.CommandType" />
 
         
 
-         property is set to <see
-         cref="F:System.Data.CommandType.StoredProcedure" />
+         property is set to <see cref="F:System.Data.CommandType.StoredProcedure" />
 
         
 
-        , the <see
-         cref="P:System.Data.IDbCommand.CommandText" />
+        , the <see cref="P:System.Data.IDbCommand.CommandText" />
 
         
 
          property should be set to the name of the stored procedure to be accessed. The user may be required to use escape character syntax or include qualifying characters if any of the specified tables named contain any special characters. All rows and columns of the named table or tables will be returned when you call one of the Execute methods of a Command object.</para
       >
       <para
-        >When the <see
-         cref="T:System.Data.CommandType" />
+        >When the <see cref="T:System.Data.CommandType" />
 
         
 
-         property is set to <see
-         cref="F:System.Data.CommandType.TableDirect" />
+         property is set to <see cref="F:System.Data.CommandType.TableDirect" />
 
         
 
-        , the <see
-         cref="P:System.Data.IDbCommand.CommandText" />
+        , the <see cref="P:System.Data.IDbCommand.CommandText" />
 
         
 
@@ -54,8 +48,7 @@
       <para>In order to access multiple tables, use a comma delimited list, without spaces or padding, containing the names of the tables to access. When the CommandText property names multiple tables, a join of the specified tables is returned.</para>
       <block subset="none" type="note">
         <para
-          >TableDirect is only supported by the .NET Framework Data Provider for OLE DB. Multiple table access is not supported when <see
-           cref="T:System.Data.CommandType" />
+          >TableDirect is only supported by the .NET Framework Data Provider for OLE DB. Multiple table access is not supported when <see cref="T:System.Data.CommandType" />
 
           
 

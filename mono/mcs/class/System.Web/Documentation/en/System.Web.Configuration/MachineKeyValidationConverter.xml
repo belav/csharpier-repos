@@ -21,33 +21,27 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Security.Permissions.HostProtectionAttribute" />
+          >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
           
 
-           attribute applied to this class has the following <see
-           cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+           attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
 
           
 
-           property value: <see
-           cref="F:System.Security.Permissions.HostProtectionResource.MayLeakOnAbort" />
+           property value: <see cref="F:System.Security.Permissions.HostProtectionResource.MayLeakOnAbort" />
 
           
 
-          . The <see
-           cref="T:System.Security.Permissions.HostProtectionAttribute" />
+          . The <see cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
           
 
-           does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see
-           cref="T:System.Security.Permissions.HostProtectionAttribute" />
+           does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
           
 
-           class or <format
-           type="text/html">
+           class or <format type="text/html">
             <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
               >SQL Server Programming and Host Protection Attributes</a
             >
@@ -62,8 +56,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides methods for converting <see
-         cref="T:System.Web.Configuration.MachineKeyValidation" />
+        >Provides methods for converting <see cref="T:System.Web.Configuration.MachineKeyValidation" />
 
         
 
@@ -82,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.MachineKeyValidationConverter" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.MachineKeyValidationConverter" />
 
             
 
@@ -114,13 +106,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method will throw an <see
-             cref="T:System.ArgumentException" />
+            >This method will throw an <see cref="T:System.ArgumentException" />
 
             
 
-             exception if the <paramref
-             name="data" />
+             exception if the <paramref name="data" />
 
             
 
@@ -144,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a string to the equivalent <see
-             cref="T:System.Web.Configuration.MachineKeyValidation" />
+            >Converts a string to the equivalent <see cref="T:System.Web.Configuration.MachineKeyValidation" />
 
             
 
@@ -155,8 +144,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The equivalent <see
-             cref="T:System.Web.Configuration.MachineKeyValidation" />
+            >The equivalent <see cref="T:System.Web.Configuration.MachineKeyValidation" />
 
             
 
@@ -164,21 +152,33 @@
           >
         </returns>
         <param name="ctx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           This parameter is not used.</param
         >
         <param name="ci">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           This parameter is not used.</param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -210,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a <see
-             cref="T:System.Web.Configuration.MachineKeyValidation" />
+            >Converts a <see cref="T:System.Web.Configuration.MachineKeyValidation" />
 
             
 
@@ -221,8 +220,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string representing a <see
-             cref="T:System.Web.Configuration.MachineKeyValidation" />
+            >A string representing a <see cref="T:System.Web.Configuration.MachineKeyValidation" />
 
             
 
@@ -230,33 +228,48 @@
           >
         </returns>
         <param name="ctx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           This parameter is not used.</param
         >
         <param name="ci">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           This parameter is not used.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Configuration.MachineKeyValidation" />
+          The <see cref="T:System.Web.Configuration.MachineKeyValidation" />
 
           
 
            to be converted.</param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -28,26 +28,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When you create an instance of the <see
-         cref="T:System.Windows.Forms.PrintPreviewControl" />
+        >When you create an instance of the <see cref="T:System.Windows.Forms.PrintPreviewControl" />
 
         
 
-         class, some of the read/write properties are set to initial values. For a list of these values, see the <see
-         cref="M:System.Windows.Forms.PrintPreviewControl.#ctor" />
+         class, some of the read/write properties are set to initial values. For a list of these values, see the <see cref="M:System.Windows.Forms.PrintPreviewControl.#ctor" />
 
         
 
          constructor.</para
       >
       <para
-        >For more information about printing with Windows Forms, see the <see
-         cref="N:System.Drawing.Printing" />
+        >For more information about printing with Windows Forms, see the <see cref="N:System.Drawing.Printing" />
 
         
 
-         namespace overview. If you wish to print from a Windows Presentation Foundation application, see the <see
-         cref="N:System.Printing" />
+         namespace overview. If you wish to print from a Windows Presentation Foundation application, see the <see cref="N:System.Printing" />
 
         
 
@@ -57,13 +53,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the raw preview part of print previewing from a Windows Forms application, without any dialog boxes or buttons. Most <see
-         cref="T:System.Windows.Forms.PrintPreviewControl" />
+        >Represents the raw preview part of print previewing from a Windows Forms application, without any dialog boxes or buttons. Most <see cref="T:System.Windows.Forms.PrintPreviewControl" />
 
         
 
-         objects are found on <see
-         cref="T:System.Windows.Forms.PrintPreviewDialog" />
+         objects are found on <see cref="T:System.Windows.Forms.PrintPreviewDialog" />
 
         
 
@@ -80,8 +74,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you create an instance of the <see
-             cref="T:System.Windows.Forms.PrintPreviewControl" />
+            >When you create an instance of the <see cref="T:System.Windows.Forms.PrintPreviewControl" />
 
             
 
@@ -154,8 +147,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.PrintPreviewControl" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.PrintPreviewControl" />
 
             
 
@@ -185,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether resizing the control or changing the number of pages shown automatically adjusts the <see
-             cref="P:System.Windows.Forms.PrintPreviewControl.Zoom" />
+            >Gets or sets a value indicating whether resizing the control or changing the number of pages shown automatically adjusts the <see cref="P:System.Windows.Forms.PrintPreviewControl.Zoom" />
 
             
 
@@ -311,8 +302,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see
-             cref="M:System.Windows.Forms.Control.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+            >Overrides the <see cref="M:System.Windows.Forms.Control.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
@@ -320,12 +310,15 @@
           >
         </summary>
         <param name="pevent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.PaintEventArgs" />
+          A <see cref="T:System.Windows.Forms.PaintEventArgs" />
 
           
 
@@ -353,28 +346,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Windows.Forms.PrintPreviewControl.AutoZoom" />
+            >If the <see cref="P:System.Windows.Forms.PrintPreviewControl.AutoZoom" />
 
             
 
-             property is set to true, the <see
-             cref="M:System.Windows.Forms.PrintPreviewControl.OnResize(System.EventArgs)" />
+             property is set to true, the <see cref="M:System.Windows.Forms.PrintPreviewControl.OnResize(System.EventArgs)" />
 
             
 
-             method resizes the page in proportion to the <see
-             cref="T:System.Windows.Forms.PrintPreviewControl" />
+             method resizes the page in proportion to the <see cref="T:System.Windows.Forms.PrintPreviewControl" />
 
             
 
-             control. If <see
-             cref="P:System.Windows.Forms.PrintPreviewControl.AutoZoom" />
+             control. If <see cref="P:System.Windows.Forms.PrintPreviewControl.AutoZoom" />
 
             
 
-             is false, the <see
-             cref="T:System.Windows.Forms.PrintPreviewControl" />
+             is false, the <see cref="T:System.Windows.Forms.PrintPreviewControl" />
 
             
 
@@ -384,8 +372,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Resize" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Resize" />
 
             
 
@@ -393,12 +380,15 @@
           >
         </summary>
         <param name="eventargs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -426,8 +416,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -436,8 +425,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PrintPreviewControl.OnStartPageChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PrintPreviewControl.OnStartPageChanged(System.EventArgs)" />
 
             
 
@@ -447,8 +435,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.PrintPreviewControl.StartPageChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.PrintPreviewControl.StartPageChanged" />
 
             
 
@@ -456,12 +443,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -484,13 +474,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You typically use this method if you are either creating a designer for the <see
-             cref="T:System.Windows.Forms.PrintPreviewControl" />
+            >You typically use this method if you are either creating a designer for the <see cref="T:System.Windows.Forms.PrintPreviewControl" />
 
             
 
-             or creating your own control incorporating the <see
-             cref="T:System.Windows.Forms.PrintPreviewControl" />
+             or creating your own control incorporating the <see cref="T:System.Windows.Forms.PrintPreviewControl" />
 
             
 
@@ -500,13 +488,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets the <see
-             cref="P:System.Windows.Forms.Control.BackColor" />
+            >Resets the <see cref="P:System.Windows.Forms.Control.BackColor" />
 
             
 
-             property to <see
-             cref="P:System.Drawing.SystemColors.AppWorkspace" />
+             property to <see cref="P:System.Drawing.SystemColors.AppWorkspace" />
 
             
 
@@ -535,13 +521,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You typically use this method if you are either creating a designer for the <see
-             cref="T:System.Windows.Forms.PrintPreviewControl" />
+            >You typically use this method if you are either creating a designer for the <see cref="T:System.Windows.Forms.PrintPreviewControl" />
 
             
 
-             or creating your own control incorporating the <see
-             cref="T:System.Windows.Forms.PrintPreviewControl" />
+             or creating your own control incorporating the <see cref="T:System.Windows.Forms.PrintPreviewControl" />
 
             
 
@@ -551,13 +535,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets the foreground color of the <see
-             cref="T:System.Windows.Forms.PrintPreviewControl" />
+            >Resets the foreground color of the <see cref="T:System.Windows.Forms.PrintPreviewControl" />
 
             
 
-             to <see
-             cref="P:System.Drawing.Color.White" />
+             to <see cref="P:System.Drawing.Color.White" />
 
             
 
@@ -660,8 +642,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -732,8 +713,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewControl.Text" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewControl.Text" />
 
             
 

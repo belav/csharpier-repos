@@ -17,18 +17,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Resources.ResXResourceSet" />
+        >The <see cref="T:System.Resources.ResXResourceSet" />
 
         
 
-         class enumerates over an <see
-         cref="T:System.Resources.IResourceReader" />
+         class enumerates over an <see cref="T:System.Resources.IResourceReader" />
 
         
 
-        , loads every name and value, and stores them in a hash table. You can then enumerate the resources in the <see
-         cref="T:System.Resources.ResXResourceSet" />
+        , loads every name and value, and stores them in a hash table. You can then enumerate the resources in the <see cref="T:System.Resources.ResXResourceSet" />
 
         
 
@@ -36,30 +33,25 @@
       >
       <block subset="none" type="note">
         <para
-          >This class contains a <see
-           cref="F:System.Security.Permissions.SecurityAction.LinkDemand" />
+          >This class contains a <see cref="F:System.Security.Permissions.SecurityAction.LinkDemand" />
 
           
 
-           and an <see
-           cref="F:System.Security.Permissions.SecurityAction.InheritanceDemand" />
+           and an <see cref="F:System.Security.Permissions.SecurityAction.InheritanceDemand" />
 
           
 
-           at the class level that applies to all members. A <see
-           cref="T:System.Security.SecurityException" />
+           at the class level that applies to all members. A <see cref="T:System.Security.SecurityException" />
 
           
 
-           exception is thrown when the immediate caller or a derived class does not have full-trust permission. For more information about security demands, see <format
-           type="text/html">
+           exception is thrown when the immediate caller or a derived class does not have full-trust permission. For more information about security demands, see <format type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
           </format>
 
           
 
-           and <format
-           type="text/html">
+           and <format type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
 
@@ -69,18 +61,15 @@
         >
       </block>
       <para
-        >A <see
-         cref="T:System.Resources.ResXResourceSet" />
+        >A <see cref="T:System.Resources.ResXResourceSet" />
 
         
 
-         object provides a convenient way to read all the resources in a .resx file into memory. You can use the <see
-         cref="M:System.Resources.ResourceSet.GetObject(System.String)" />
+         object provides a convenient way to read all the resources in a .resx file into memory. You can use the <see cref="M:System.Resources.ResourceSet.GetObject(System.String)" />
 
         
 
-         method to retrieve a particular resource when the .resx file has been read into a <see
-         cref="T:System.Resources.ResXResourceSet" />
+         method to retrieve a particular resource when the .resx file has been read into a <see cref="T:System.Resources.ResXResourceSet" />
 
         
 
@@ -104,13 +93,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Resources.ResXResourceSet" />
+            >Initializes a new instance of the <see cref="T:System.Resources.ResXResourceSet" />
 
             
 
-             class using the system default <see
-             cref="T:System.Resources.ResXResourceReader" />
+             class using the system default <see cref="T:System.Resources.ResXResourceReader" />
 
             
 
@@ -118,12 +105,15 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.Stream" />
+          The <see cref="T:System.IO.Stream" />
 
           
 
@@ -146,13 +136,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of a <see
-             cref="T:System.Resources.ResXResourceSet" />
+            >Initializes a new instance of a <see cref="T:System.Resources.ResXResourceSet" />
 
             
 
-             class using the system default <see
-             cref="T:System.Resources.ResXResourceReader" />
+             class using the system default <see cref="T:System.Resources.ResXResourceReader" />
 
             
 
@@ -160,7 +148,11 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -184,8 +176,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the preferred resource reader class for this kind of <see
-             cref="T:System.Resources.ResXResourceSet" />
+            >Returns the preferred resource reader class for this kind of <see cref="T:System.Resources.ResXResourceSet" />
 
             
 
@@ -195,13 +186,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
-             of the preferred resource reader for this kind of <see
-             cref="T:System.Resources.ResXResourceSet" />
+             of the preferred resource reader for this kind of <see cref="T:System.Resources.ResXResourceSet" />
 
             
 
@@ -226,8 +215,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the preferred resource writer class for this kind of <see
-             cref="T:System.Resources.ResXResourceSet" />
+            >Returns the preferred resource writer class for this kind of <see cref="T:System.Resources.ResXResourceSet" />
 
             
 
@@ -237,13 +225,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
-             of the preferred resource writer for this kind of <see
-             cref="T:System.Resources.ResXResourceSet" />
+             of the preferred resource writer for this kind of <see cref="T:System.Resources.ResXResourceSet" />
 
             
 

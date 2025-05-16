@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration defines the security modes that the <see
-         cref="T:System.ServiceModel.WsFederationHttpBinding" />
+        >This enumeration defines the security modes that the <see cref="T:System.ServiceModel.WsFederationHttpBinding" />
 
         
 
@@ -30,8 +29,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the different security modes for <see
-         cref="T:System.ServiceModel.WsFederationHttpBinding" />
+        >Specifies the different security modes for <see cref="T:System.ServiceModel.WsFederationHttpBinding" />
 
         
 

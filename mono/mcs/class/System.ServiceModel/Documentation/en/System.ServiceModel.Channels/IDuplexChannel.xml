@@ -24,43 +24,35 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Channels.IDuplexChannel" />
+        >The <see cref="T:System.ServiceModel.Channels.IDuplexChannel" />
 
         
 
-         interface is the union of the <see
-         cref="T:System.ServiceModel.Channels.IInputChannel" />
+         interface is the union of the <see cref="T:System.ServiceModel.Channels.IInputChannel" />
 
         
 
-         and <see
-         cref="T:System.ServiceModel.Channels.IOutputChannel" />
+         and <see cref="T:System.ServiceModel.Channels.IOutputChannel" />
 
         
 
-         interfaces. The <see
-         cref="T:System.ServiceModel.Channels.IDuplexChannel" />
+         interfaces. The <see cref="T:System.ServiceModel.Channels.IDuplexChannel" />
 
         
 
-         interface does not mandate any correlation between the <see
-         cref="T:System.ServiceModel.Channels.IInputChannel" />
+         interface does not mandate any correlation between the <see cref="T:System.ServiceModel.Channels.IInputChannel" />
 
         
 
-         and <see
-         cref="T:System.ServiceModel.Channels.IOutputChannel" />
+         and <see cref="T:System.ServiceModel.Channels.IOutputChannel" />
 
         
 
-         when implemented. This means, in particular, that the contract does not mandate that the sender of messages that are received through the <see
-         cref="T:System.ServiceModel.Channels.IInputChannel" />
+         when implemented. This means, in particular, that the contract does not mandate that the sender of messages that are received through the <see cref="T:System.ServiceModel.Channels.IInputChannel" />
 
         
 
-         is equal to the recipient of messages sent through the <see
-         cref="T:System.ServiceModel.Channels.IOutputChannel" />
+         is equal to the recipient of messages sent through the <see cref="T:System.ServiceModel.Channels.IOutputChannel" />
 
         
 

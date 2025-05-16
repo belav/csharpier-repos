@@ -24,16 +24,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.OperationContext" />
+        >Use the <see cref="T:System.ServiceModel.OperationContext" />
 
         
 
          from within a service operation to access the current operation execution environment. In particular, the operation context is used to access callback channels in duplex services, to store extra state data across portions of the operations, and to access incoming message headers and properties as well as add outgoing message headers and properties.</para
       >
       <para
-        >For more information about using extensions to store state data, see <format
-         type="text/html">
+        >For more information about using extensions to store state data, see <format type="text/html">
           <a href="bc88cefc-31fb-428e-9447-6d20a7d452af">Extensible Objects</a>
         </format>
 
@@ -42,8 +40,7 @@
         .</para
       >
       <para
-        >The <see
-         cref="T:System.ServiceModel.OperationContext" />
+        >The <see cref="T:System.ServiceModel.OperationContext" />
 
         
 
@@ -52,13 +49,11 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.OperationContext.Current" />
+            >The <see cref="P:System.ServiceModel.OperationContext.Current" />
 
             
 
-             property returns the <see
-             cref="T:System.ServiceModel.OperationContext" />
+             property returns the <see cref="T:System.ServiceModel.OperationContext" />
 
             
 
@@ -67,8 +62,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.OperationContext.ServiceSecurityContext" />
+            >The <see cref="P:System.ServiceModel.OperationContext.ServiceSecurityContext" />
 
             
 
@@ -77,28 +71,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.OperationContext.EndpointDispatcher" />
+            >The <see cref="P:System.ServiceModel.OperationContext.EndpointDispatcher" />
 
             
 
-             property gets the operation's <see
-             cref="T:System.ServiceModel.Dispatcher.EndpointDispatcher" />
-
-            
-
-            .</para
-          >
-        </item>
-        <item>
-          <para
-            >The <see
-             cref="P:System.ServiceModel.OperationContext.Extensions" />
-
-            
-
-             property returns an extension collection for the current <see
-             cref="T:System.ServiceModel.OperationContext" />
+             property gets the operation's <see cref="T:System.ServiceModel.Dispatcher.EndpointDispatcher" />
 
             
 
@@ -107,13 +84,24 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.OperationContext.Host" />
+            >The <see cref="P:System.ServiceModel.OperationContext.Extensions" />
 
             
 
-             property returns the <see
-             cref="T:System.ServiceModel.ServiceHostBase" />
+             property returns an extension collection for the current <see cref="T:System.ServiceModel.OperationContext" />
+
+            
+
+            .</para
+          >
+        </item>
+        <item>
+          <para
+            >The <see cref="P:System.ServiceModel.OperationContext.Host" />
+
+            
+
+             property returns the <see cref="T:System.ServiceModel.ServiceHostBase" />
 
             
 
@@ -122,13 +110,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.OperationContext.HasSupportingTokens" />
+            >The <see cref="P:System.ServiceModel.OperationContext.HasSupportingTokens" />
 
             
 
-             property returns a value that indicates whether the method has supporting tokens, if so, the <see
-             cref="P:System.ServiceModel.OperationContext.SupportingTokens" />
+             property returns a value that indicates whether the method has supporting tokens, if so, the <see cref="P:System.ServiceModel.OperationContext.SupportingTokens" />
 
             
 
@@ -137,18 +123,15 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.OperationContext.IncomingMessageHeaders" />
+            >The <see cref="P:System.ServiceModel.OperationContext.IncomingMessageHeaders" />
 
             
 
-            , <see
-             cref="P:System.ServiceModel.OperationContext.IncomingMessageProperties" />
+            , <see cref="P:System.ServiceModel.OperationContext.IncomingMessageProperties" />
 
             
 
-            , and <see
-             cref="P:System.ServiceModel.OperationContext.IncomingMessageVersion" />
+            , and <see cref="P:System.ServiceModel.OperationContext.IncomingMessageVersion" />
 
             
 
@@ -157,8 +140,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="E:System.ServiceModel.OperationContext.OperationCompleted" />
+            >The <see cref="E:System.ServiceModel.OperationContext.OperationCompleted" />
 
             
 
@@ -167,13 +149,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.OperationContext.OutgoingMessageHeaders" />
+            >The <see cref="P:System.ServiceModel.OperationContext.OutgoingMessageHeaders" />
 
             
 
-             and <see
-             cref="P:System.ServiceModel.OperationContext.OutgoingMessageProperties" />
+             and <see cref="P:System.ServiceModel.OperationContext.OutgoingMessageProperties" />
 
             
 
@@ -182,13 +162,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.OperationContext.RequestContext" />
+            >The <see cref="P:System.ServiceModel.OperationContext.RequestContext" />
 
             
 
-             property returns the <see
-             cref="T:System.ServiceModel.Channels.RequestContext" />
+             property returns the <see cref="T:System.ServiceModel.Channels.RequestContext" />
 
             
 
@@ -197,13 +175,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.OperationContext.InstanceContext" />
+            >The <see cref="P:System.ServiceModel.OperationContext.InstanceContext" />
 
             
 
-             property returns the <see
-             cref="T:System.ServiceModel.InstanceContext" />
+             property returns the <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
@@ -212,8 +188,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.OperationContext.SessionId" />
+            >The <see cref="P:System.ServiceModel.OperationContext.SessionId" />
 
             
 
@@ -222,8 +197,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.ServiceModel.OperationContext.GetCallbackChannel``1" />
+            >The <see cref="M:System.ServiceModel.OperationContext.GetCallbackChannel``1" />
 
             
 
@@ -232,8 +206,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.ServiceModel.OperationContext.SetTransactionComplete" />
+            >The <see cref="M:System.ServiceModel.OperationContext.SetTransactionComplete" />
 
             
 
@@ -269,8 +242,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ServiceModel.OperationContext.#ctor(System.ServiceModel.IContextChannel)" />
+            >Use the <see cref="M:System.ServiceModel.OperationContext.#ctor(System.ServiceModel.IContextChannel)" />
 
             
 
@@ -280,13 +252,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.OperationContext" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.OperationContext" />
 
             
 
-             class that uses the specified <see
-             cref="T:System.ServiceModel.IContextChannel" />
+             class that uses the specified <see cref="T:System.ServiceModel.IContextChannel" />
 
             
 
@@ -294,17 +264,19 @@
           >
         </summary>
         <param name="channel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.IContextChannel" />
+          The <see cref="T:System.ServiceModel.IContextChannel" />
 
           
 
-           used to create a new client <see
-           cref="T:System.ServiceModel.OperationContext" />
+           used to create a new client <see cref="T:System.ServiceModel.OperationContext" />
 
           
 
@@ -334,8 +306,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the channel associated with the current <see
-             cref="T:System.ServiceModel.OperationContext" />
+            >Gets the channel associated with the current <see cref="T:System.ServiceModel.OperationContext" />
 
             
 
@@ -365,8 +336,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.OperationContext.Current" />
+            >Use the <see cref="P:System.ServiceModel.OperationContext.Current" />
 
             
 
@@ -425,18 +395,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.OperationContext.Extensions" />
+            >Use the <see cref="P:System.ServiceModel.OperationContext.Extensions" />
 
             
 
-             property to obtain a collection of all extensions of the <see
-             cref="T:System.ServiceModel.OperationContext" />
+             property to obtain a collection of all extensions of the <see cref="T:System.ServiceModel.OperationContext" />
 
             
 
-             used to modify the context or add custom state. For more information about extensions, see <format
-             type="text/html">
+             used to modify the context or add custom state. For more information about extensions, see <format type="text/html">
               <a href="bc88cefc-31fb-428e-9447-6d20a7d452af">Extensible Objects</a>
             </format>
 
@@ -472,8 +439,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call the <see
-             cref="M:System.ServiceModel.OperationContext.GetCallbackChannel``1" />
+            >Call the <see cref="M:System.ServiceModel.OperationContext.GetCallbackChannel``1" />
 
             
 
@@ -487,8 +453,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A channel to the client instance that called the operation of the type specified in the <see
-             cref="P:System.ServiceModel.ServiceContractAttribute.CallbackContract" />
+            >A channel to the client instance that called the operation of the type specified in the <see cref="P:System.ServiceModel.ServiceContractAttribute.CallbackContract" />
 
             
 
@@ -496,7 +461,11 @@
           >
         </returns>
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -545,8 +514,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.ServiceHost" />
+            >Gets the <see cref="T:System.ServiceModel.ServiceHost" />
 
             
 
@@ -580,8 +548,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the incoming message headers for the <see
-             cref="T:System.ServiceModel.OperationContext" />
+            >Gets the incoming message headers for the <see cref="T:System.ServiceModel.OperationContext" />
 
             
 
@@ -615,8 +582,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the message properties for the incoming message in the <see
-             cref="T:System.ServiceModel.OperationContext" />
+            >Gets the message properties for the incoming message in the <see cref="T:System.ServiceModel.OperationContext" />
 
             
 
@@ -650,8 +616,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the incoming SOAP message version for the <see
-             cref="T:System.ServiceModel.OperationContext" />
+            >Gets the incoming SOAP message version for the <see cref="T:System.ServiceModel.OperationContext" />
 
             
 
@@ -681,8 +646,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.OperationContext.InstanceContext" />
+            >Use the <see cref="P:System.ServiceModel.OperationContext.InstanceContext" />
 
             
 
@@ -692,8 +656,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.InstanceContext" />
+            >Gets the <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
@@ -738,23 +701,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="E:System.ServiceModel.OperationContext.OperationCompleted" />
+            >Use the <see cref="E:System.ServiceModel.OperationContext.OperationCompleted" />
 
             
 
-             event to dispose parameters or a return value if you set <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.AutoDisposeParameters" />
+             event to dispose parameters or a return value if you set <see cref="P:System.ServiceModel.OperationBehaviorAttribute.AutoDisposeParameters" />
 
             
 
-             to false. Normally you set <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.AutoDisposeParameters" />
+             to false. Normally you set <see cref="P:System.ServiceModel.OperationBehaviorAttribute.AutoDisposeParameters" />
 
             
 
-             to false to prevent indigo2 from calling <see
-             cref="M:System.IDisposable.Dispose" />
+             to false to prevent indigo2 from calling <see cref="M:System.IDisposable.Dispose" />
 
             
 
@@ -763,18 +722,15 @@
           <para>Also, with duplex bindings, this event can be used to send a request on the callback channel after the reply for the current operation is sent.</para>
           <block subset="none" type="note">
             <para
-              >If a caller is listening for the <see
-               cref="E:System.ServiceModel.OperationContext.OperationCompleted" />
+              >If a caller is listening for the <see cref="E:System.ServiceModel.OperationContext.OperationCompleted" />
 
               
 
-               event for an <see
-               cref="P:System.ServiceModel.OperationContractAttribute.IsTerminating" />
+               event for an <see cref="P:System.ServiceModel.OperationContractAttribute.IsTerminating" />
 
               
 
-               operation, it is possible to block when the response is received. The proper way to handle this is to schedule work on another thread when <see
-               cref="E:System.ServiceModel.OperationContext.OperationCompleted" />
+               operation, it is possible to block when the response is received. The proper way to handle this is to schedule work on another thread when <see cref="E:System.ServiceModel.OperationContext.OperationCompleted" />
 
               
 
@@ -813,8 +769,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the outgoing message headers for the active <see
-             cref="T:System.ServiceModel.OperationContext" />
+            >Gets the outgoing message headers for the active <see cref="T:System.ServiceModel.OperationContext" />
 
             
 
@@ -848,8 +803,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the message properties for the outbound message in the active <see
-             cref="T:System.ServiceModel.OperationContext" />
+            >Gets the message properties for the outbound message in the active <see cref="T:System.ServiceModel.OperationContext" />
 
             
 
@@ -883,8 +837,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.ServiceModel.Channels.RequestContext" />
+            >Gets or sets the <see cref="T:System.ServiceModel.Channels.RequestContext" />
 
             
 
@@ -915,8 +868,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.ServiceModel.ServiceSecurityContext" />
+            >Gets or sets the <see cref="T:System.ServiceModel.ServiceSecurityContext" />
 
             
 
@@ -941,8 +893,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.String" />
+            >Gets the <see cref="T:System.String" />
 
             
 
@@ -969,18 +920,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is only useful in operations that set <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionAutoComplete" />
+            >This is only useful in operations that set <see cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionAutoComplete" />
 
             
 
-             to false. Typically, services do this on some but not all operations. When <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionAutoComplete" />
+             to false. Typically, services do this on some but not all operations. When <see cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionAutoComplete" />
 
             
 
-             is false the transaction completes automatically. Use <see
-             cref="M:System.ServiceModel.OperationContext.SetTransactionComplete" />
+             is false the transaction completes automatically. Use <see cref="M:System.ServiceModel.OperationContext.SetTransactionComplete" />
 
             
 
@@ -1015,13 +963,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Collections.Generic.ICollection`1" />
+            >Gets a <see cref="T:System.Collections.Generic.ICollection`1" />
 
             
 
-             of type <see
-             cref="T:System.IdentityModel.Tokens.SecurityToken" />
+             of type <see cref="T:System.IdentityModel.Tokens.SecurityToken" />
 
             
 

@@ -24,13 +24,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For a list of initial property values for an instance of the <see
-         cref="T:System.Security.Policy.TrustManagerContext" />
+        >For a list of initial property values for an instance of the <see cref="T:System.Security.Policy.TrustManagerContext" />
 
         
 
-         class, see the <see
-         cref="M:System.Security.Policy.TrustManagerContext.#ctor" />
+         class, see the <see cref="M:System.Security.Policy.TrustManagerContext.#ctor" />
 
         
 
@@ -40,8 +38,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the context for the trust manager to consider when making the decision to run an application, and when setting up the security on a new <see
-         cref="T:System.AppDomain" />
+        >Represents the context for the trust manager to consider when making the decision to run an application, and when setting up the security on a new <see cref="T:System.AppDomain" />
 
         
 
@@ -67,8 +64,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for a new instance of the <see
-             cref="T:System.Security.Policy.TrustManagerContext" />
+            >The following table shows the initial property values for a new instance of the <see cref="T:System.Security.Policy.TrustManagerContext" />
 
             
 
@@ -152,8 +148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Policy.TrustManagerContext" />
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.TrustManagerContext" />
 
             
 
@@ -184,8 +179,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the properties to the same settings as the default constructor, with the exception of the <see
-             cref="P:System.Security.Policy.TrustManagerContext.UIContext" />
+            >This constructor initializes the properties to the same settings as the default constructor, with the exception of the <see cref="P:System.Security.Policy.TrustManagerContext.UIContext" />
 
             
 
@@ -195,13 +189,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Policy.TrustManagerContext" />
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.TrustManagerContext" />
 
             
 
-             class using the specified <see
-             cref="T:System.Security.Policy.TrustManagerUIContext" />
+             class using the specified <see cref="T:System.Security.Policy.TrustManagerUIContext" />
 
             
 
@@ -209,12 +201,15 @@
           >
         </summary>
         <param name="uiContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Policy.TrustManagerUIContext" />
+          One of the <see cref="T:System.Security.Policy.TrustManagerUIContext" />
 
           
 
@@ -242,13 +237,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If true, the <see
-             cref="T:System.Security.Policy.ApplicationSecurityManager" />
+            >If true, the <see cref="T:System.Security.Policy.ApplicationSecurityManager" />
 
             
 
-             ignores persisted decisions for the application and calls the trust manager. If false, the <see
-             cref="T:System.Security.Policy.ApplicationSecurityManager" />
+             ignores persisted decisions for the application and calls the trust manager. If false, the <see cref="T:System.Security.Policy.ApplicationSecurityManager" />
 
             
 
@@ -278,13 +271,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This flag is set to true if the host might call the trust manager numerous times for trust decisions for this application. If true, the trust manager should cache any state that might improve the speed of future calls to the <see
-             cref="M:System.Security.Policy.IApplicationTrustManager.DetermineApplicationTrust(System.ActivationContext,System.Security.Policy.TrustManagerContext)" />
+            >This flag is set to true if the host might call the trust manager numerous times for trust decisions for this application. If true, the trust manager should cache any state that might improve the speed of future calls to the <see cref="M:System.Security.Policy.IApplicationTrustManager.DetermineApplicationTrust(System.ActivationContext,System.Security.Policy.TrustManagerContext)" />
 
             
 
-             method. This property is set to false if the host does not expect to call the trust manager again for the current <see
-             cref="T:System.AppDomain" />
+             method. This property is set to false if the host does not expect to call the trust manager again for the current <see cref="T:System.AppDomain" />
 
             
 
@@ -395,8 +386,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Policy.TrustManagerContext.UIContext" />
+            >The <see cref="P:System.Security.Policy.TrustManagerContext.UIContext" />
 
             
 

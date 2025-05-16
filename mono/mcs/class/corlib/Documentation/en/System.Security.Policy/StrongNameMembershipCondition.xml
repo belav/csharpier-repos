@@ -73,48 +73,39 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Strong names are well suited to specifying code assemblies to which you give a rich set of powerful permissions. Since strong names are cryptographically verified, attackers cannot impersonate rightful assemblies and use their permissions.</para>
           <para
-            >The <paramref
-             name="name" />
+            >The <paramref name="name" />
 
             
 
-             and <paramref
-             name="version" />
+             and <paramref name="version" />
 
             
 
-             parameters are optional. For example, you can create a <see
-             cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+             parameters are optional. For example, you can create a <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
             
 
-             that checks for <see
-             cref="P:System.Security.Policy.StrongNameMembershipCondition.PublicKey" />
+             that checks for <see cref="P:System.Security.Policy.StrongNameMembershipCondition.PublicKey" />
 
             
 
-             and <see
-             cref="P:System.Security.Policy.StrongNameMembershipCondition.Name" />
+             and <see cref="P:System.Security.Policy.StrongNameMembershipCondition.Name" />
 
             
 
-             (but not <see
-             cref="P:System.Security.Policy.StrongNameMembershipCondition.Version" />
+             (but not <see cref="P:System.Security.Policy.StrongNameMembershipCondition.Version" />
 
             
 
-            ) by passing null into the <paramref
-             name="version" />
+            ) by passing null into the <paramref name="version" />
 
             
 
-             parameter. If <paramref
-             name="name" />
+             parameter. If <paramref name="name" />
 
             
 
-             is an empty string (""), an <see
-             cref="T:System.ArgumentException" />
+             is an empty string (""), an <see cref="T:System.ArgumentException" />
 
             
 
@@ -124,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
             
 
@@ -133,21 +123,33 @@
           >
         </summary>
         <param name="blob">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The strong name public key blob of the software publisher. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The simple name section of the strong name. </param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -180,26 +182,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This membership condition tests only the <see
-             cref="T:System.Security.Policy.StrongName" />
+            >This membership condition tests only the <see cref="T:System.Security.Policy.StrongName" />
 
             
 
              evidence object.</para
           >
           <para
-            >The membership condition is satisfied if the specified evidence contains a <see
-             cref="T:System.Security.Policy.StrongName" />
+            >The membership condition is satisfied if the specified evidence contains a <see cref="T:System.Security.Policy.StrongName" />
 
             
 
-             with the same <see
-             cref="T:System.Security.Policy.StrongName" />
+             with the same <see cref="T:System.Security.Policy.StrongName" />
 
             
 
-             (public key, name, and version) as specified by the <see
-             cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+             (public key, name, and version) as specified by the <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
             
 
@@ -215,12 +213,15 @@
           <para>true if the specified evidence satisfies the membership condition; otherwise, false.</para>
         </returns>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Policy.Evidence" />
+          The <see cref="T:System.Security.Policy.Evidence" />
 
           
 
@@ -252,8 +253,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an equivalent copy of the current <see
-             cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+            >Creates an equivalent copy of the current <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
             
 
@@ -263,8 +263,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new, identical copy of the current <see
-             cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+            >A new, identical copy of the current <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
           </para>
         </returns>
       </Docs>
@@ -291,8 +290,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For two <see
-             cref="T:System.Security.Policy.StrongName" />
+            >For two <see cref="T:System.Security.Policy.StrongName" />
 
             
 
@@ -302,18 +300,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Security.Policy.StrongName" />
+            >Determines whether the <see cref="T:System.Security.Policy.StrongName" />
 
             
 
-             from the specified object is equivalent to the <see
-             cref="T:System.Security.Policy.StrongName" />
+             from the specified object is equivalent to the <see cref="T:System.Security.Policy.StrongName" />
 
             
 
-             contained in the current <see
-             cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+             contained in the current <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
             
 
@@ -323,18 +318,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Security.Policy.StrongName" />
+            >true if the <see cref="T:System.Security.Policy.StrongName" />
 
             
 
-             from the specified object is equivalent to the <see
-             cref="T:System.Security.Policy.StrongName" />
+             from the specified object is equivalent to the <see cref="T:System.Security.Policy.StrongName" />
 
             
 
-             contained in the current <see
-             cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+             contained in the current <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
             
 
@@ -342,12 +334,15 @@
           >
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to compare to the current <see
-           cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+          The object to compare to the current <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
           
 
@@ -383,7 +378,11 @@
           <para>Reconstructs a security object with a specified state from an XML encoding.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -420,24 +419,30 @@
           <para>Reconstructs a security object with a specified state from an XML encoding.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML encoding to use to reconstruct the security object. </param
         >
         <param name="level">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Policy.PolicyLevel" />
+          The <see cref="T:System.Security.Policy.PolicyLevel" />
 
           
 
-           context, used to resolve <see
-           cref="T:System.Security.NamedPermissionSet" />
+           context, used to resolve <see cref="T:System.Security.NamedPermissionSet" />
 
           
 
@@ -466,8 +471,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the hash code for the current <see
-             cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+            >Returns the hash code for the current <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
             
 
@@ -477,8 +481,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hash code for the current <see
-             cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+            >The hash code for the current <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
             
 
@@ -504,13 +507,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to set the <see
-             cref="P:System.Security.Policy.StrongNameMembershipCondition.Name" />
+            >If you attempt to set the <see cref="P:System.Security.Policy.StrongNameMembershipCondition.Name" />
 
             
 
-             property to an empty string (""), an <see
-             cref="T:System.ArgumentException" />
+             property to an empty string (""), an <see cref="T:System.ArgumentException" />
 
             
 
@@ -520,8 +521,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the simple name of the <see
-             cref="T:System.Security.Policy.StrongName" />
+            >Gets or sets the simple name of the <see cref="T:System.Security.Policy.StrongName" />
 
             
 
@@ -558,13 +558,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Security.Permissions.StrongNamePublicKeyBlob" />
+            >Gets or sets the <see cref="T:System.Security.Permissions.StrongNamePublicKeyBlob" />
 
             
 
-             of the <see
-             cref="T:System.Security.Policy.StrongName" />
+             of the <see cref="T:System.Security.Policy.StrongName" />
 
             
 
@@ -594,8 +592,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns a string representation of the current <see
-             cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+            >Creates and returns a string representation of the current <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
             
 
@@ -605,8 +602,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A representation of the current <see
-             cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+            >A representation of the current <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
             
 
@@ -669,8 +665,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an XML encoding of the security object and its current state with the specified <see
-             cref="T:System.Security.Policy.PolicyLevel" />
+            >Creates an XML encoding of the security object and its current state with the specified <see cref="T:System.Security.Policy.PolicyLevel" />
 
             
 
@@ -682,17 +677,19 @@
           <para>An XML encoding of the security object, including any state information.</para>
         </returns>
         <param name="level">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Policy.PolicyLevel" />
+          The <see cref="T:System.Security.Policy.PolicyLevel" />
 
           
 
-           context, which is used to resolve <see
-           cref="T:System.Security.NamedPermissionSet" />
+           context, which is used to resolve <see cref="T:System.Security.NamedPermissionSet" />
 
           
 
@@ -718,13 +715,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Version" />
+            >Gets or sets the <see cref="T:System.Version" />
 
             
 
-             of the <see
-             cref="T:System.Security.Policy.StrongName" />
+             of the <see cref="T:System.Security.Policy.StrongName" />
 
             
 

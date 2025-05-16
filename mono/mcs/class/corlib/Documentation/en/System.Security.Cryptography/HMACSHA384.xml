@@ -46,8 +46,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Computes a Hash-based Message Authentication Code (HMAC) using the <see
-         cref="T:System.Security.Cryptography.SHA384" />
+        >Computes a Hash-based Message Authentication Code (HMAC) using the <see cref="T:System.Security.Cryptography.SHA384" />
 
         
 
@@ -77,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.HMACSHA384" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.HMACSHA384" />
 
             
 
@@ -107,8 +105,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.HMACSHA384" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.HMACSHA384" />
 
             
 
@@ -116,12 +113,15 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The secret key for <see
-           cref="T:System.Security.Cryptography.HMACSHA384" />
+          The secret key for <see cref="T:System.Security.Cryptography.HMACSHA384" />
 
           
 
@@ -146,13 +146,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The purpose of the <see
-             cref="P:System.Security.Cryptography.HMACSHA384.ProduceLegacyHmacValues" />
+            >The purpose of the <see cref="P:System.Security.Cryptography.HMACSHA384.ProduceLegacyHmacValues" />
 
             
 
-             Boolean property is to enable net_v20SP1_long applications to interact with dnprdnlong applications. When you set this property to true, the <see
-             cref="T:System.Security.Cryptography.HMACSHA384" />
+             Boolean property is to enable net_v20SP1_long applications to interact with dnprdnlong applications. When you set this property to true, the <see cref="T:System.Security.Cryptography.HMACSHA384" />
 
             
 
@@ -171,8 +169,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides a workaround for the dnprdnext implementation of the <see
-             cref="T:System.Security.Cryptography.HMACSHA384" />
+            >Provides a workaround for the dnprdnext implementation of the <see cref="T:System.Security.Cryptography.HMACSHA384" />
 
             
 

@@ -20,21 +20,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The actual creation of response messages is delegated to an inner handler. The <see
-         cref="T:System.Net.Http.MessageProcessingHandler" />
+        >The actual creation of response messages is delegated to an inner handler. The <see cref="T:System.Net.Http.MessageProcessingHandler" />
 
         
 
          is useful if the handler doesn't require asynchronous operations, because operations on request and response messages are fast.</para
       >
       <para
-        >The most common usage is to derive from this class and override the <see
-         cref="M:System.Net.Http.MessageProcessingHandler.ProcessRequest(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)" />
+        >The most common usage is to derive from this class and override the <see cref="M:System.Net.Http.MessageProcessingHandler.ProcessRequest(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)" />
 
         
 
-         and  <see
-         cref="M:System.Net.Http.MessageProcessingHandler.ProcessResponse(System.Net.Http.HttpResponseMessage,System.Threading.CancellationToken)" />
+         and  <see cref="M:System.Net.Http.MessageProcessingHandler.ProcessResponse(System.Net.Http.HttpResponseMessage,System.Threading.CancellationToken)" />
 
         
 
@@ -63,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of a <see
-             cref="T:System.Net.Http.MessageProcessingHandler" />
+            >Creates an instance of a <see cref="T:System.Net.Http.MessageProcessingHandler" />
 
             
 
@@ -94,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of a <see
-             cref="T:System.Net.Http.MessageProcessingHandler" />
+            >Creates an instance of a <see cref="T:System.Net.Http.MessageProcessingHandler" />
 
             
 
@@ -103,7 +98,11 @@
           >
         </summary>
         <param name="innerHandler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -143,8 +142,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Net.Http.HttpRequestMessage" />
+            >Returns <see cref="T:System.Net.Http.HttpRequestMessage" />
 
             
 
@@ -153,14 +151,22 @@
           <para>The HTTP request message that was processed.</para>
         </returns>
         <param name="request">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The HTTP request message to process.</param
         >
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -200,8 +206,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Net.Http.HttpResponseMessage" />
+            >Returns <see cref="T:System.Net.Http.HttpResponseMessage" />
 
             
 
@@ -210,14 +215,22 @@
           <para>The HTTP response message that was processed.</para>
         </returns>
         <param name="response">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The HTTP response message to process.</param
         >
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -257,8 +270,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation does not block. This overridable implementation of <see
-             cref="M:System.Net.Http.MessageProcessingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)" />
+            >This operation does not block. This overridable implementation of <see cref="M:System.Net.Http.MessageProcessingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)" />
 
             
 
@@ -272,8 +284,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Returns <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
@@ -282,14 +293,22 @@
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="request">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The HTTP request message to send to the server.</param
         >
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

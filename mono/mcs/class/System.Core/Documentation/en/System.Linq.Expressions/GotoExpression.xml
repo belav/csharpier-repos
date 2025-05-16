@@ -102,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the node type of this <see
-             cref="T:System.Linq.Expressions.Expression" />
+            >Returns the node type of this <see cref="T:System.Linq.Expressions.Expression" />
 
             
 
@@ -153,8 +152,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the static type of the expression that this <see
-             cref="T:System.Linq.Expressions.Expression" />
+            >Gets the static type of the expression that this <see cref="T:System.Linq.Expressions.Expression" />
 
             
 
@@ -194,24 +192,30 @@
           <para>This expression if no children are changed or an expression with the updated children.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Linq.Expressions.GotoExpression.Target" />
+          The <see cref="P:System.Linq.Expressions.GotoExpression.Target" />
 
           
 
            property of the result. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Linq.Expressions.GotoExpression.Value" />
+          The <see cref="P:System.Linq.Expressions.GotoExpression.Value" />
 
           
 

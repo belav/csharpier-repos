@@ -17,28 +17,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Typically, you do not directly create an instance of an <see
-         cref="T:System.Windows.Forms.OpacityConverter" />
+        >Typically, you do not directly create an instance of an <see cref="T:System.Windows.Forms.OpacityConverter" />
 
         
 
-        . Instead, you call the <see
-         cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+        . Instead, you call the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
 
         
 
-         method of <see
-         cref="T:System.ComponentModel.TypeDescriptor" />
+         method of <see cref="T:System.ComponentModel.TypeDescriptor" />
 
         
 
-         class. For more information about type converters and to view code examples, see the <see
-         cref="T:System.ComponentModel.TypeConverter" />
+         class. For more information about type converters and to view code examples, see the <see cref="T:System.ComponentModel.TypeConverter" />
 
         
 
-         base class and <format
-         type="text/html">
+         base class and <format type="text/html">
           <a href="90373A3F-D8C8-492D-841C-945D62393C56"
             >[&lt;topic://cpconImplementingTypeConverter&gt;]</a
           >
@@ -64,23 +59,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This is the default constructor supplied by the compiler.</para>
           <para
-            >Typically, you do not directly create an instance of an <see
-             cref="T:System.Windows.Forms.OpacityConverter" />
+            >Typically, you do not directly create an instance of an <see cref="T:System.Windows.Forms.OpacityConverter" />
 
             
 
-            . Instead, call the <see
-             cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+            . Instead, call the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
 
             
 
-             method of <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+             method of <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
-             class. For more information, see the code examples in the <see
-             cref="T:System.ComponentModel.TypeConverter" />
+             class. For more information, see the code examples in the <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
@@ -90,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Windows.Forms.OpacityConverter" />
+            >Initializes an instance of the <see cref="T:System.Windows.Forms.OpacityConverter" />
 
             
 
@@ -121,13 +111,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="sourceType" />
+            >The <paramref name="sourceType" />
 
             
 
-             is expected to be a <see
-             cref="T:System.String" />
+             is expected to be a <see cref="T:System.String" />
 
             
 
@@ -143,24 +131,30 @@
           <para>true if this converter can perform the conversion; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          A <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that provides information about the context of a type converter. </param
         >
         <param name="sourceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -190,23 +184,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.OpacityConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
+            >The <see cref="M:System.Windows.Forms.OpacityConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
 
             
 
-             method is specialized to convert <see
-             cref="T:System.String" />
+             method is specialized to convert <see cref="T:System.String" />
 
             
 
-             values that represent percentages or decimal fractions to their corresponding <see
-             cref="T:System.Double" />
+             values that represent percentages or decimal fractions to their corresponding <see cref="T:System.Double" />
 
             
 
-             values, which represent the opacity as a percentage. Types other than <see
-             cref="T:System.String" />
+             values, which represent the opacity as a percentage. Types other than <see cref="T:System.String" />
 
             
 
@@ -220,13 +210,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             that represents the converted <paramref
-             name="value" />
+             that represents the converted <paramref name="value" />
 
             
 
@@ -234,26 +222,37 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          A <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that provides information about the context of a type converter. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The locale information for the conversion. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -284,13 +283,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.OpacityConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)" />
+            >The <see cref="M:System.Windows.Forms.OpacityConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)" />
 
             
 
-             method is specialized to convert integral values to their <see
-             cref="T:System.String" />
+             method is specialized to convert integral values to their <see cref="T:System.String" />
 
             
 
@@ -304,13 +301,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             that represents the converted <paramref
-             name="value" />
+             that represents the converted <paramref name="value" />
 
             
 
@@ -318,33 +313,48 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          A <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that provides information about the context of a type converter. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The locale information for the conversion. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value to convert. </param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

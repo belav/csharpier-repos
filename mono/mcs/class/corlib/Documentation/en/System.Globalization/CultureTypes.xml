@@ -28,39 +28,33 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >These culture type values are returned by the <see
-         cref="P:System.Globalization.CultureInfo.CultureTypes" />
+        >These culture type values are returned by the <see cref="P:System.Globalization.CultureInfo.CultureTypes" />
 
         
 
-         property, and also serve as a filter that limits the cultures returned by the <see
-         cref="M:System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes)" />
+         property, and also serve as a filter that limits the cultures returned by the <see cref="M:System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes)" />
 
         
 
-         method. For more information on cultures, see <see
-         cref="T:System.Globalization.CultureInfo" />
+         method. For more information on cultures, see <see cref="T:System.Globalization.CultureInfo" />
 
         
 
         .</para
       >
       <para
-        >Generally, your application should enumerate all cultures, using the <see
-         cref="F:System.Globalization.CultureTypes.AllCultures" />
+        >Generally, your application should enumerate all cultures, using the <see cref="F:System.Globalization.CultureTypes.AllCultures" />
 
         
 
          value. This allows enumeration of custom cultures, as well as the other culture types.</para
       >
       <para
-        >Note that the <see
-         cref="F:System.Globalization.CultureTypes.FrameworkCultures" />
+        >Note that the <see cref="F:System.Globalization.CultureTypes.FrameworkCultures" />
 
         
 
-         and <see
-         cref="F:System.Globalization.CultureTypes.WindowsOnlyCultures" />
+         and <see cref="F:System.Globalization.CultureTypes.WindowsOnlyCultures" />
 
         
 
@@ -70,8 +64,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines the types of culture lists that can be retrieved using the <see
-         cref="M:System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes)" />
+        >Defines the types of culture lists that can be retrieved using the <see cref="M:System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes)" />
 
         
 
@@ -128,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is deprecated; using this value with <see
-             cref="M:System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes)" />
+            >This member is deprecated; using this value with <see cref="M:System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes)" />
 
             
 
@@ -183,8 +175,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Custom cultures can have any user-specified name, not just a two-letter code.</para>
           <para
-            >The invariant culture is included in the array of cultures returned by the <see
-             cref="M:System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes)" />
+            >The invariant culture is included in the array of cultures returned by the <see cref="M:System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes)" />
 
             
 

@@ -37,13 +37,11 @@
       <para>A key cannot be null, but a value can.</para>
       <para>The key is handled in a case-insensitive manner; it is translated to lowercase before it is used with the string dictionary.</para>
       <para
-        >In .NET Framework version 1.0, this class uses culture-sensitive string comparisons. However, in .NET Framework version 1.1 and later, this class uses <see
-         cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+        >In .NET Framework version 1.0, this class uses culture-sensitive string comparisons. However, in .NET Framework version 1.1 and later, this class uses <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
 
         
 
-         when comparing strings. For more information about how culture affects comparisons and sorting, see <format
-         type="text/html">
+         when comparing strings. For more information about how culture affects comparisons and sorting, see <format type="text/html">
           <a href="a097acf0-0bbe-46ac-8d54-b6f2bfd3fc6a"
             >Comparing and Sorting Data for a Specific Culture</a
           >
@@ -51,8 +49,7 @@
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="579ef891-1f83-4c63-9ebd-2f40406b5b91"
             >Performing Culture-Insensitive String Operations</a
           >
@@ -91,8 +88,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
@@ -129,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an entry with the specified key and value into the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+            >Adds an entry with the specified key and value into the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
@@ -138,14 +133,22 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key of the entry to add. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -173,18 +176,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.StringDictionary.Count" />
+             is <see cref="P:System.Collections.Specialized.StringDictionary.Count" />
 
             
 
@@ -194,8 +194,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all entries from the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+            >Removes all entries from the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
@@ -228,38 +227,31 @@
           <para>The key is handled in a case-insensitive manner; it is translated to lowercase before it is used.</para>
           <para>This method is an O(1) operation.</para>
           <para
-            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods on <paramref
-             name="item" />
+             methods on <paramref name="item" />
 
             
 
-             to determine whether <paramref
-             name="item" />
+             to determine whether <paramref name="item" />
 
             
 
-             exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             exists. In the earlier versions of the .NET Framework, this determination was made by using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods of the <paramref
-             name="item" />
+             methods of the <paramref name="item" />
 
             
 
@@ -269,8 +261,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines if the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+            >Determines if the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
@@ -280,8 +271,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+            >true if the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
@@ -289,12 +279,15 @@
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key to locate in the <see
-           cref="T:System.Collections.Specialized.StringDictionary" />
+          The key to locate in the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
           
 
@@ -324,69 +317,57 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The values of the elements of the StringDictionary are compared to the specified value using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >The values of the elements of the StringDictionary are compared to the specified value using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >This method performs a linear search; therefore, the average execution time is proportional to <see
-             cref="P:System.Collections.Specialized.StringDictionary.Count" />
+            >This method performs a linear search; therefore, the average execution time is proportional to <see cref="P:System.Collections.Specialized.StringDictionary.Count" />
 
             
 
-            . That is, this method is an O(<paramref
-             name="n" />
+            . That is, this method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.StringDictionary.Count" />
+             is <see cref="P:System.Collections.Specialized.StringDictionary.Count" />
 
             
 
             .</para
           >
           <para
-            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods on <paramref
-             name="item" />
+             methods on <paramref name="item" />
 
             
 
-             to determine whether <paramref
-             name="item" />
+             to determine whether <paramref name="item" />
 
             
 
-             exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             exists. In the earlier versions of the .NET Framework, this determination was made by using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods of the <paramref
-             name="item" />
+             methods of the <paramref name="item" />
 
             
 
@@ -396,8 +377,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines if the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+            >Determines if the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
@@ -407,8 +387,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+            >true if the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
@@ -416,12 +395,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value to locate in the <see
-           cref="T:System.Collections.Specialized.StringDictionary" />
+          The value to locate in the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
           
 
@@ -456,44 +438,37 @@
 
             
 
-             copies objects that can be typecast to <see
-             cref="T:System.Collections.DictionaryEntry" />
+             copies objects that can be typecast to <see cref="T:System.Collections.DictionaryEntry" />
 
             
 
-            . <see
-             cref="T:System.Collections.DictionaryEntry" />
+            . <see cref="T:System.Collections.DictionaryEntry" />
 
             
 
              contains both the key and the value.</para
           >
           <para
-            >The elements copied to the <see
-             cref="T:System.Array" />
+            >The elements copied to the <see cref="T:System.Array" />
 
             
 
-             are sorted in the same order that the enumerator iterates through the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+             are sorted in the same order that the enumerator iterates through the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
             .</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.StringDictionary.Count" />
+             is <see cref="P:System.Collections.Specialized.StringDictionary.Count" />
 
             
 
@@ -503,8 +478,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the string dictionary values to a one-dimensional <see
-             cref="T:System.Array" />
+            >Copies the string dictionary values to a one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -512,24 +486,30 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the values copied from the <see
-           cref="T:System.Collections.Specialized.StringDictionary" />
+           that is the destination of the values copied from the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
           
 
           . </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -555,8 +535,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of key/value pairs in the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+            >Gets the number of key/value pairs in the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
@@ -590,23 +569,19 @@
           <para>The foreach statement of the C# language (for each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
           <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
           <para
-            >Initially, the enumerator is positioned before the first element in the collection. <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Initially, the enumerator is positioned before the first element in the collection. <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             also brings the enumerator back to this position.  At this position, <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             also brings the enumerator back to this position.  At this position, <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             is undefined. Therefore, you must call <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is undefined. Therefore, you must call <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             to advance the enumerator to the first element of the collection before reading the value of <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -617,66 +592,54 @@
 
             
 
-             returns the same object until either <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             is called. <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             sets <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             sets <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              to the next element.</para
           >
           <para
-            >If <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returns false. When the enumerator is at this position, subsequent calls to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             also return false. If the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returned false, <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             returned false, <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             is undefined. To set <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             is undefined. To set <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             to the first element of the collection again, you can call <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             to the first element of the collection again, you can call <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             followed by <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             followed by <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
@@ -693,8 +656,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -720,18 +682,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+            >A <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
-             instance is not synchronized. Derived classes can provide a synchronized version of the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+             instance is not synchronized. Derived classes can provide a synchronized version of the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
-             using the <see
-             cref="P:System.Collections.Specialized.StringDictionary.SyncRoot" />
+             using the <see cref="P:System.Collections.Specialized.StringDictionary.SyncRoot" />
 
             
 
@@ -742,8 +701,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+            >Gets a value indicating whether access to the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
@@ -797,46 +755,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The order of the keys in the <see
-             cref="T:System.Collections.ICollection" />
+            >The order of the keys in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             is unspecified, but it is the same order as the associated values in the <see
-             cref="T:System.Collections.ICollection" />
+             is unspecified, but it is the same order as the associated values in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             returned by the <see
-             cref="P:System.Collections.Specialized.StringDictionary.Values" />
+             returned by the <see cref="P:System.Collections.Specialized.StringDictionary.Values" />
 
             
 
              method.</para
           >
           <para
-            >The returned <see
-             cref="T:System.Collections.ICollection" />
+            >The returned <see cref="T:System.Collections.ICollection" />
 
             
 
-             is not a static copy; instead, the <see
-             cref="T:System.Collections.ICollection" />
+             is not a static copy; instead, the <see cref="T:System.Collections.ICollection" />
 
             
 
-             refers back to the keys in the original <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+             refers back to the keys in the original <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
-            . Therefore, changes to the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+            . Therefore, changes to the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
-             continue to be reflected in the <see
-             cref="T:System.Collections.ICollection" />
+             continue to be reflected in the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -847,8 +797,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of keys in the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+            >Gets a collection of keys in the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
@@ -879,13 +828,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+            >If the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
-             does not contain an element with the specified key, the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+             does not contain an element with the specified key, the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
@@ -899,7 +846,11 @@
           <para>Removes the entry with the specified key from the string dictionary.</para>
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -924,33 +875,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Derived classes can provide their own synchronized version of the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+            >Derived classes can provide their own synchronized version of the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
-             using the <see
-             cref="P:System.Collections.Specialized.StringDictionary.SyncRoot" />
+             using the <see cref="P:System.Collections.Specialized.StringDictionary.SyncRoot" />
 
             
 
-             property. The synchronizing code must perform operations on the <see
-             cref="P:System.Collections.Specialized.StringDictionary.SyncRoot" />
+             property. The synchronizing code must perform operations on the <see cref="P:System.Collections.Specialized.StringDictionary.SyncRoot" />
 
             
 
-             of the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+             of the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
-            , not directly on the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+            , not directly on the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
-            . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+            . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
@@ -961,8 +906,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
@@ -994,46 +938,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The order of the values in the <see
-             cref="T:System.Collections.ICollection" />
+            >The order of the values in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             is unspecified, but it is the same order as the associated keys in the <see
-             cref="T:System.Collections.ICollection" />
+             is unspecified, but it is the same order as the associated keys in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             returned by the <see
-             cref="P:System.Collections.Specialized.StringDictionary.Keys" />
+             returned by the <see cref="P:System.Collections.Specialized.StringDictionary.Keys" />
 
             
 
              method.</para
           >
           <para
-            >The returned <see
-             cref="T:System.Collections.ICollection" />
+            >The returned <see cref="T:System.Collections.ICollection" />
 
             
 
-             is not a static copy; instead, the <see
-             cref="T:System.Collections.ICollection" />
+             is not a static copy; instead, the <see cref="T:System.Collections.ICollection" />
 
             
 
-             refers back to the values in the original <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+             refers back to the values in the original <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
-            . Therefore, changes to the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+            . Therefore, changes to the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
-             continue to be reflected in the <see
-             cref="T:System.Collections.ICollection" />
+             continue to be reflected in the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1044,8 +980,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of values in the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+            >Gets a collection of values in the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 

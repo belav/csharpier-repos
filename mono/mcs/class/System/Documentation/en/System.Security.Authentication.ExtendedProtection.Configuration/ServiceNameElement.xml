@@ -24,13 +24,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
+        >The <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
 
         
 
-         class represents a configuration element for a service name used in a <see
-         cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+         class represents a configuration element for a service name used in a <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
 
         
 
@@ -54,36 +52,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When this constructor is used to initialize a new instance of the <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
+            >When this constructor is used to initialize a new instance of the <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
 
             
 
-             class, the <see
-             cref="P:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement.Name" />
+             class, the <see cref="P:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement.Name" />
 
             
 
              property is set to null.</para
           >
           <para
-            >The <see
-             cref="P:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement.Name" />
+            >The <see cref="P:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement.Name" />
 
             
 
-             property should be set to an appropriate value for the application before calling the <see
-             cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection.Add(System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement)" />
+             property should be set to an appropriate value for the application before calling the <see cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection.Add(System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement)" />
 
             
 
-             method to add the <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
+             method to add the <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
 
             
 
-             instance to the <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+             instance to the <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
 
             
 
@@ -93,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
+            >Initializes a new instance of the <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
 
             
 
@@ -124,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the Service Provider Name (SPN) for this <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
+            >Gets or sets the Service Provider Name (SPN) for this <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
 
             
 

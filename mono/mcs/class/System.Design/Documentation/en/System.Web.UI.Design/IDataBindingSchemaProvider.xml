@@ -10,8 +10,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.IDataBindingSchemaProvider" />
+        >The <see cref="T:System.Web.UI.Design.IDataBindingSchemaProvider" />
 
         
 
@@ -58,13 +57,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.IDataBindingSchemaProvider.RefreshSchema(System.Boolean)" />
+            >The <see cref="M:System.Web.UI.Design.IDataBindingSchemaProvider.RefreshSchema(System.Boolean)" />
 
             
 
-             method is called by the design host only if the <see
-             cref="P:System.Web.UI.Design.IDataBindingSchemaProvider.CanRefreshSchema" />
+             method is called by the design host only if the <see cref="P:System.Web.UI.Design.IDataBindingSchemaProvider.CanRefreshSchema" />
 
             
 
@@ -76,7 +73,11 @@
           <para>Refreshes the schema for the data source.</para>
         </summary>
         <param name="preferSilent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

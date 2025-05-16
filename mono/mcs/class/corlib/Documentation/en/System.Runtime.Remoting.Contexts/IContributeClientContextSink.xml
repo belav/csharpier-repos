@@ -30,26 +30,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.Contexts.IContributeClientContextSink" />
+        >The <see cref="T:System.Runtime.Remoting.Contexts.IContributeClientContextSink" />
 
         
 
-         interface is implemented by context properties in a <see
-         cref="T:System.Runtime.Remoting.Contexts.Context" />
+         interface is implemented by context properties in a <see cref="T:System.Runtime.Remoting.Contexts.Context" />
 
         
 
          class that want to contribute an interception sink at the context boundary on the client end of a remoting call.</para
       >
       <para
-        >The client context chain is composed from those properties in the client context that implement <see
-         cref="T:System.Runtime.Remoting.Contexts.IContributeClientContextSink" />
+        >The client context chain is composed from those properties in the client context that implement <see cref="T:System.Runtime.Remoting.Contexts.IContributeClientContextSink" />
 
         
 
-        , which contributes to a sink through the <see
-         cref="M:System.Runtime.Remoting.Contexts.IContributeClientContextSink.GetClientContextSink(System.Runtime.Remoting.Messaging.IMessageSink)" />
+        , which contributes to a sink through the <see cref="M:System.Runtime.Remoting.Contexts.IContributeClientContextSink.GetClientContextSink(System.Runtime.Remoting.Messaging.IMessageSink)" />
 
         
 
@@ -94,7 +90,11 @@
           <para>The composite sink chain.</para>
         </returns>
         <param name="nextSink">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

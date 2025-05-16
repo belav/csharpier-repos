@@ -32,8 +32,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.SkinIDTypeConverter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.SkinIDTypeConverter" />
 
             
 
@@ -63,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether this converter can convert a <see
-             cref="P:System.Web.UI.Control.SkinID" />
+            >Returns a value indicating whether this converter can convert a <see cref="P:System.Web.UI.Control.SkinID" />
 
             
 
@@ -76,19 +74,26 @@
           <para>true, if the conversion can be made; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An T:System.ComponentModel.ITypeDescriptorContext that provides a format context for the control being designed.</param
         >
         <param name="sourceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -117,8 +122,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether this converter can convert a <see
-             cref="P:System.Web.UI.Control.SkinID" />
+            >Returns a value indicating whether this converter can convert a <see cref="P:System.Web.UI.Control.SkinID" />
 
             
 
@@ -130,14 +134,22 @@
           <para>true, if a conversion can be made; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An T:System.ComponentModel.ITypeDescriptorContext that provides a format context for the control being designed.</param
         >
         <param name="destType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -167,8 +179,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the given string to a <see
-             cref="P:System.Web.UI.Control.SkinID" />
+            >Converts the given string to a <see cref="P:System.Web.UI.Control.SkinID" />
 
             
 
@@ -178,8 +189,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that can be cast as a <see
-             cref="P:System.Web.UI.DataSourceControl.SkinID" />
+            >An object that can be cast as a <see cref="P:System.Web.UI.DataSourceControl.SkinID" />
 
             
 
@@ -187,21 +197,33 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An T:System.ComponentModel.ITypeDescriptorContext that provides a format context that represents the control being designed.</param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A T:System.Globalization.CultureInfo. If null is passed, the current culture is assumed.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -232,8 +254,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the given <see
-             cref="P:System.Web.UI.Control.SkinID" />
+            >Converts the given <see cref="P:System.Web.UI.Control.SkinID" />
 
             
 
@@ -245,43 +266,56 @@
           <para>An object that represents the converted value.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An T:System.ComponentModel.ITypeDescriptorContext that provides a format context that represents the control being designed.</param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A T:System.Globalization.CultureInfo. If null, the current culture is assumed. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Web.UI.Control.SkinID" />
+          The <see cref="P:System.Web.UI.Control.SkinID" />
 
           
 
            object to convert.</param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The T:System.Type to convert <paramref
-           name="value" />
+          The T:System.Type to convert <paramref name="value" />
 
           
 
-           to (must be a <see
-           cref="T:System.String" />
+           to (must be a <see cref="T:System.String" />
 
           
 
@@ -309,8 +343,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a set of <see
-             cref="P:System.Web.UI.Control.SkinID" />
+            >Returns a set of <see cref="P:System.Web.UI.Control.SkinID" />
 
             
 
@@ -320,13 +353,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+            >A <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
 
             
 
-             that holds a set of <see
-             cref="P:System.Web.UI.Control.SkinID" />
+             that holds a set of <see cref="P:System.Web.UI.Control.SkinID" />
 
             
 
@@ -334,17 +365,19 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An T:System.ComponentModel.ITypeDescriptorContext that provides a format context that represents the control being designed. <paramref
-           name="context" />
+          An T:System.ComponentModel.ITypeDescriptorContext that provides a format context that represents the control being designed. <paramref name="context" />
 
           
 
-           or properties of <paramref
-           name="context" />
+           or properties of <paramref name="context" />
 
           
 
@@ -372,8 +405,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether the control that is represented by the given context supports a set of <see
-             cref="P:System.Web.UI.Control.SkinID" />
+            >Returns a value indicating whether the control that is represented by the given context supports a set of <see cref="P:System.Web.UI.Control.SkinID" />
 
             
 
@@ -383,8 +415,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true, if <see
-             cref="Overload:System.Web.UI.Design.SkinIDTypeConverter.GetStandardValues" />
+            >true, if <see cref="Overload:System.Web.UI.Design.SkinIDTypeConverter.GetStandardValues" />
 
             
 
@@ -392,12 +423,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 

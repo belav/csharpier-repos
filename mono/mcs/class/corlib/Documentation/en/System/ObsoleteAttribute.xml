@@ -38,16 +38,14 @@
   <Docs>
     <example>
       <para
-        >The following example demonstrates the usage of <see
-         cref="T:System.ObsoleteAttribute" />
+        >The following example demonstrates the usage of <see cref="T:System.ObsoleteAttribute" />
 
         
 
          to
    generate a compile-time warning.</para
       >
-      <code lang="C#"
-        >
+      <code lang="C#">
    
 using System;
 
@@ -83,8 +81,7 @@ public class ObsoleteAttributeExample {
          is applicable to all program elements except assemblies, modules, parameters, and return values. Marking an element as obsolete informs users that the element will be removed in future versions of the product.</para
       >
       <para
-        >The <see
-         cref="T:System.ObsoleteAttribute" />
+        >The <see cref="T:System.ObsoleteAttribute" />
 
         
 
@@ -97,8 +94,7 @@ public class ObsoleteAttributeExample {
 
             
 
-            . The string assigned to the <see
-             cref="P:System.ObsoleteAttribute.Message" />
+            . The string assigned to the <see cref="P:System.ObsoleteAttribute.Message" />
 
             
 
@@ -111,18 +107,15 @@ public class ObsoleteAttributeExample {
 
             
 
-            . This is a Boolean value that indicates to the compiler whether using the <see
-             cref="T:System.ObsoleteAttribute" />
+            . This is a Boolean value that indicates to the compiler whether using the <see cref="T:System.ObsoleteAttribute" />
 
             
 
-             attribute should cause it to emit an error (<see
-             cref="P:System.ObsoleteAttribute.IsError" />
+             attribute should cause it to emit an error (<see cref="P:System.ObsoleteAttribute.IsError" />
 
             
 
-             is true) or a warning (<see
-             cref="P:System.ObsoleteAttribute.IsError" />
+             is true) or a warning (<see cref="P:System.ObsoleteAttribute.IsError" />
 
             
 
@@ -131,8 +124,7 @@ public class ObsoleteAttributeExample {
         </item>
       </list>
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1E00-4602-9EBF-526B271A8B87"
             >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
           >
@@ -146,31 +138,26 @@ public class ObsoleteAttributeExample {
         <h2>win8_appname_long Apps</h2>
       </format>
       <para
-        >When you create a Windows Metadata library (.winmd file), the <see
-         cref="T:System.ObsoleteAttribute" />
+        >When you create a Windows Metadata library (.winmd file), the <see cref="T:System.ObsoleteAttribute" />
 
         
 
-         is exported as both the <see
-         cref="T:System.ObsoleteAttribute" />
+         is exported as both the <see cref="T:System.ObsoleteAttribute" />
 
         
 
          attribute and the <see
-
           cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.metadata.deprecatedattribute.aspx"
           >Windows.Foundation.Metadata.DeprecatedAttribute</see
         >
 
         
 
-         attribute if only the <see
-         cref="T:System.ObsoleteAttribute" />
+         attribute if only the <see cref="T:System.ObsoleteAttribute" />
 
         
 
-         is present in source code. The <see
-         cref="T:System.ObsoleteAttribute" />
+         is present in source code. The <see cref="T:System.ObsoleteAttribute" />
 
         
 
@@ -179,41 +166,34 @@ public class ObsoleteAttributeExample {
       <list type="bullet">
         <item>
           <para
-            >If the <paramref
-             name="message" />
+            >If the <paramref name="message" />
 
             
 
-             and <paramref
-             name="error" />
+             and <paramref name="error" />
 
             
 
-             arguments are both present, <paramref
-             name="message" />
+             arguments are both present, <paramref name="message" />
 
             
 
-             is assigned to the DeprecatedAttribute <paramref
-             name="message" />
+             is assigned to the DeprecatedAttribute <paramref name="message" />
 
             
 
              argument. An error value of true maps to <see
-
               cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.metadata.deprecationtype.aspx"
               >DeprecationType.Remove</see
             >
 
             
 
-            , and an <paramref
-             name="error" />
+            , and an <paramref name="error" />
 
             
 
              value of false maps to <see
-
               cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.metadata.deprecationtype.aspx"
               >DeprecationType.Deprecate</see
             >
@@ -225,13 +205,11 @@ public class ObsoleteAttributeExample {
         </item>
         <item>
           <para
-            >If the <paramref
-             name="message" />
+            >If the <paramref name="message" />
 
             
 
-             argument is not supplied in the <see
-             cref="T:System.ObsoleteAttribute" />
+             argument is not supplied in the <see cref="T:System.ObsoleteAttribute" />
 
             
 
@@ -240,18 +218,15 @@ public class ObsoleteAttributeExample {
         </item>
         <item>
           <para
-            >If the <paramref
-             name="error" />
+            >If the <paramref name="error" />
 
             
 
-             argument is not present in the <see
-             cref="T:System.ObsoleteAttribute" />
+             argument is not present in the <see cref="T:System.ObsoleteAttribute" />
 
             
 
             , its default value in the DeprecatedAttribute is <see
-
               cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.metadata.deprecationtype.aspx"
               >DeprecationType.Deprecate</see
             >
@@ -265,7 +240,6 @@ public class ObsoleteAttributeExample {
       <block subset="none" type="note">
         <para
           >Directly applying the <see
-
             cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.metadata.deprecatedattribute.aspx"
             >Windows.Foundation.Metadata.DeprecatedAttribute</see
           >
@@ -304,8 +278,7 @@ public class ObsoleteAttributeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.ObsoleteAttribute" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.ObsoleteAttribute" />
 
             
 
@@ -347,8 +320,7 @@ public class ObsoleteAttributeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ObsoleteAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ObsoleteAttribute" />
 
             
 
@@ -382,8 +354,7 @@ public class ObsoleteAttributeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.ObsoleteAttribute" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.ObsoleteAttribute" />
 
             
 
@@ -425,8 +396,7 @@ public class ObsoleteAttributeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ObsoleteAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ObsoleteAttribute" />
 
             
 
@@ -434,7 +404,11 @@ public class ObsoleteAttributeExample {
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -471,8 +445,7 @@ public class ObsoleteAttributeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.ObsoleteAttribute" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.ObsoleteAttribute" />
 
             
 
@@ -497,8 +470,7 @@ public class ObsoleteAttributeExample {
               </term>
               <description>
                 <para
-                  >The <paramref
-                   name="error" />
+                  >The <paramref name="error" />
 
                   
 
@@ -521,8 +493,7 @@ public class ObsoleteAttributeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ObsoleteAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ObsoleteAttribute" />
 
             
 
@@ -530,14 +501,22 @@ public class ObsoleteAttributeExample {
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text string that describes alternative workarounds. </param
         >
         <param name="error">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -573,8 +552,7 @@ public class ObsoleteAttributeExample {
              if the 
  compiler treats usage of the target
  of the current instance
- as an error; otherwise, <see
-             langword="false" />
+ as an error; otherwise, <see langword="false" />
 
             
 
@@ -584,8 +562,7 @@ public class ObsoleteAttributeExample {
         <remarks>
           <para>This property is read-only.</para>
           <para
-            >The default value of this property is <see
-             langword="false" />
+            >The default value of this property is <see langword="false" />
 
             
 
@@ -619,8 +596,7 @@ public class ObsoleteAttributeExample {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -635,8 +611,7 @@ public class ObsoleteAttributeExample {
             >The current instance contains a suggested workaround message if and only if
       such a message was specified when the current instance was constructed. If
       no workaround was specified for the current instance, the value of
-      this property is <see
-             langword="null" />
+      this property is <see langword="null" />
 
             
 

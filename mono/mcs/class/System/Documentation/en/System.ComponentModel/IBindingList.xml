@@ -27,92 +27,76 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This interface is implemented by the <see
-         cref="T:System.Data.DataView" />
+        >This interface is implemented by the <see cref="T:System.Data.DataView" />
 
         
 
-         class. Implementation of a method should exhibit the same behavior as the implementation of that method in the <see
-         cref="T:System.Data.DataView" />
+         class. Implementation of a method should exhibit the same behavior as the implementation of that method in the <see cref="T:System.Data.DataView" />
 
         
 
          class.</para
       >
       <para
-        >When you call the <see
-         cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
+        >When you call the <see cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
 
         
 
-         or <see
-         cref="M:System.ComponentModel.IBindingList.RemoveSort" />
+         or <see cref="M:System.ComponentModel.IBindingList.RemoveSort" />
 
         
 
-         methods, you should raise a <see
-         cref="E:System.ComponentModel.IBindingList.ListChanged" />
+         methods, you should raise a <see cref="E:System.ComponentModel.IBindingList.ListChanged" />
 
         
 
-         event with the <see
-         cref="F:System.ComponentModel.ListChangedType.Reset" />
+         event with the <see cref="F:System.ComponentModel.ListChangedType.Reset" />
 
         
 
          enumeration.</para
       >
       <para
-        >When you call the <see
-         cref="M:System.ComponentModel.IBindingList.AddNew" />
+        >When you call the <see cref="M:System.ComponentModel.IBindingList.AddNew" />
 
         
 
-         method, you should raise a <see
-         cref="E:System.ComponentModel.IBindingList.ListChanged" />
+         method, you should raise a <see cref="E:System.ComponentModel.IBindingList.ListChanged" />
 
         
 
-         event with the <see
-         cref="F:System.ComponentModel.ListChangedType.ItemAdded" />
+         event with the <see cref="F:System.ComponentModel.ListChangedType.ItemAdded" />
 
         
 
-         enumeration carrying the appropriate index. The added row is in a state where pressing the ESC on a <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         enumeration carrying the appropriate index. The added row is in a state where pressing the ESC on a <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
-         control can remove the new row. Raising the <see
-         cref="E:System.ComponentModel.IBindingList.ListChanged" />
+         control can remove the new row. Raising the <see cref="E:System.ComponentModel.IBindingList.ListChanged" />
 
         
 
-         event with the <see
-         cref="F:System.ComponentModel.ListChangedType.ItemAdded" />
+         event with the <see cref="F:System.ComponentModel.ListChangedType.ItemAdded" />
 
         
 
          enumeration a second time on this row indicates that the item is now a row not in the "new" state.</para
       >
       <para
-        >When you remove an item or call the <see
-         cref="M:System.ComponentModel.IEditableObject.CancelEdit" />
+        >When you remove an item or call the <see cref="M:System.ComponentModel.IEditableObject.CancelEdit" />
 
         
 
-         method on a new row (if that row implements <see
-         cref="T:System.ComponentModel.IEditableObject" />
+         method on a new row (if that row implements <see cref="T:System.ComponentModel.IEditableObject" />
 
         
 
-        ), you should raise a <see
-         cref="E:System.ComponentModel.IBindingList.ListChanged" />
+        ), you should raise a <see cref="E:System.ComponentModel.IBindingList.ListChanged" />
 
         
 
-         event with the <see
-         cref="F:System.ComponentModel.ListChangedType.ItemDeleted" />
+         event with the <see cref="F:System.ComponentModel.ListChangedType.ItemDeleted" />
 
         
 
@@ -154,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Adds the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -163,12 +146,15 @@
           >
         </summary>
         <param name="property">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -196,26 +182,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is supported only if <see
-             cref="P:System.ComponentModel.IBindingList.AllowNew" />
+            >This method is supported only if <see cref="P:System.ComponentModel.IBindingList.AllowNew" />
 
             
 
-             is true; otherwise, a <see
-             cref="T:System.NotSupportedException" />
+             is true; otherwise, a <see cref="T:System.NotSupportedException" />
 
             
 
              is thrown.</para
           >
           <para
-            >Implementing this method means that the <see
-             cref="T:System.ComponentModel.IBindingList" />
+            >Implementing this method means that the <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
-             list must understand the type of objects to add to the list and must understand how to create a new instance of that type. For example, if you have a collection of myCustomer objects, the <see
-             cref="M:System.ComponentModel.IBindingList.AddNew" />
+             list must understand the type of objects to add to the list and must understand how to create a new instance of that type. For example, if you have a collection of myCustomer objects, the <see cref="M:System.ComponentModel.IBindingList.AddNew" />
 
             
 
@@ -223,23 +205,19 @@
           >
           <block subset="none" type="note">
             <para
-              >If the objects in this list implement the <see
-               cref="T:System.ComponentModel.IEditableObject" />
+              >If the objects in this list implement the <see cref="T:System.ComponentModel.IEditableObject" />
 
               
 
-               interface, calling the <see
-               cref="M:System.ComponentModel.IEditableObject.CancelEdit" />
+               interface, calling the <see cref="M:System.ComponentModel.IEditableObject.CancelEdit" />
 
               
 
-               method should discard an object, not add it to the list, when the object was created using the <see
-               cref="M:System.ComponentModel.IBindingList.AddNew" />
+               method should discard an object, not add it to the list, when the object was created using the <see cref="M:System.ComponentModel.IBindingList.AddNew" />
 
               
 
-               method. The object should only be added to the list when the <see
-               cref="M:System.ComponentModel.IEditableObject.EndEdit" />
+               method. The object should only be added to the list when the <see cref="M:System.ComponentModel.IEditableObject.EndEdit" />
 
               
 
@@ -247,28 +225,23 @@
             >
           </block>
           <para
-            >When this method is called, you should raise a <see
-             cref="E:System.ComponentModel.IBindingList.ListChanged" />
+            >When this method is called, you should raise a <see cref="E:System.ComponentModel.IBindingList.ListChanged" />
 
             
 
-             event with the <see
-             cref="F:System.ComponentModel.ListChangedType.ItemAdded" />
+             event with the <see cref="F:System.ComponentModel.ListChangedType.ItemAdded" />
 
             
 
-             enumeration carrying the appropriate index. The added row is in a state where hitting Esc on a <see
-             cref="T:System.Windows.Forms.DataGridView" />
+             enumeration carrying the appropriate index. The added row is in a state where hitting Esc on a <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
-             control can remove the new row. Raising the <see
-             cref="E:System.ComponentModel.IBindingList.ListChanged" />
+             control can remove the new row. Raising the <see cref="E:System.ComponentModel.IBindingList.ListChanged" />
 
             
 
-             event with the <see
-             cref="F:System.ComponentModel.ListChangedType.ItemAdded" />
+             event with the <see cref="F:System.ComponentModel.ListChangedType.ItemAdded" />
 
             
 
@@ -323,13 +296,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Collections.IList.IsFixedSize" />
+            >If <see cref="P:System.Collections.IList.IsFixedSize" />
 
             
 
-             or <see
-             cref="P:System.Collections.IList.IsReadOnly" />
+             or <see cref="P:System.Collections.IList.IsReadOnly" />
 
             
 
@@ -339,8 +310,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets whether you can add items to the list using <see
-             cref="M:System.ComponentModel.IBindingList.AddNew" />
+            >Gets whether you can add items to the list using <see cref="M:System.ComponentModel.IBindingList.AddNew" />
 
             
 
@@ -366,13 +336,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Collections.IList.IsFixedSize" />
+            >If <see cref="P:System.Collections.IList.IsFixedSize" />
 
             
 
-             or <see
-             cref="P:System.Collections.IList.IsReadOnly" />
+             or <see cref="P:System.Collections.IList.IsReadOnly" />
 
             
 
@@ -380,23 +348,19 @@
           >
           <block subset="none" type="note">
             <para
-              >If <see
-               cref="P:System.ComponentModel.IBindingList.AllowRemove" />
+              >If <see cref="P:System.ComponentModel.IBindingList.AllowRemove" />
 
               
 
-               returns false, <see
-               cref="M:System.Collections.IList.Remove(System.Object)" />
+               returns false, <see cref="M:System.Collections.IList.Remove(System.Object)" />
 
               
 
-               and <see
-               cref="M:System.Collections.IList.RemoveAt(System.Int32)" />
+               and <see cref="M:System.Collections.IList.RemoveAt(System.Int32)" />
 
               
 
-               throw a <see
-               cref="T:System.NotSupportedException" />
+               throw a <see cref="T:System.NotSupportedException" />
 
               
 
@@ -407,13 +371,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets whether you can remove items from the list, using <see
-             cref="M:System.Collections.IList.Remove(System.Object)" />
+            >Gets whether you can remove items from the list, using <see cref="M:System.Collections.IList.Remove(System.Object)" />
 
             
 
-             or <see
-             cref="M:System.Collections.IList.RemoveAt(System.Int32)" />
+             or <see cref="M:System.Collections.IList.RemoveAt(System.Int32)" />
 
             
 
@@ -449,13 +411,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If items are added or removed, these items are placed in the order of the sort.</para>
           <para
-            >This method is supported if <see
-             cref="P:System.ComponentModel.IBindingList.SupportsSorting" />
+            >This method is supported if <see cref="P:System.ComponentModel.IBindingList.SupportsSorting" />
 
             
 
-             is true; otherwise, this method throws a <see
-             cref="T:System.NotSupportedException" />
+             is true; otherwise, this method throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -465,13 +425,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sorts the list based on a <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Sorts the list based on a <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
-             and a <see
-             cref="T:System.ComponentModel.ListSortDirection" />
+             and a <see cref="T:System.ComponentModel.ListSortDirection" />
 
             
 
@@ -479,24 +437,30 @@
           >
         </summary>
         <param name="property">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
            to sort by. </param
         >
         <param name="direction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.ComponentModel.ListSortDirection" />
+          One of the <see cref="T:System.ComponentModel.ListSortDirection" />
 
           
 
@@ -530,26 +494,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method will select the first row where the value of the <paramref
-             name="property" />
+            >This method will select the first row where the value of the <paramref name="property" />
 
             
 
-             parameter equals the value of the <paramref
-             name="key" />
+             parameter equals the value of the <paramref name="key" />
 
             
 
              parameter.</para
           >
           <para
-            >This method is supported if <see
-             cref="P:System.ComponentModel.IBindingList.SupportsSearching" />
+            >This method is supported if <see cref="P:System.ComponentModel.IBindingList.SupportsSearching" />
 
             
 
-             is true, otherwise this method throws a <see
-             cref="T:System.NotSupportedException" />
+             is true, otherwise this method throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -559,8 +519,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the index of the row that has the given <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Returns the index of the row that has the given <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -570,8 +529,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the row that has the given <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >The index of the row that has the given <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -579,24 +537,30 @@
           >
         </returns>
         <param name="property">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
            to search on. </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value of the <paramref
-           name="property" />
+          The value of the <paramref name="property" />
 
           
 
@@ -621,21 +585,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is supported if <see
-             cref="P:System.ComponentModel.IBindingList.SupportsSorting" />
+            >This property is supported if <see cref="P:System.ComponentModel.IBindingList.SupportsSorting" />
 
             
 
-             is true; otherwise, this property throws a <see
-             cref="T:System.NotSupportedException" />
+             is true; otherwise, this property throws a <see cref="T:System.NotSupportedException" />
 
             
 
             .</para
           >
           <para
-            >If <see
-             cref="P:System.ComponentModel.IBindingList.IsSorted" />
+            >If <see cref="P:System.ComponentModel.IBindingList.IsSorted" />
 
             
 
@@ -671,8 +632,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is raised only if the <see
-             cref="P:System.ComponentModel.IBindingList.SupportsChangeNotification" />
+            >This event is raised only if the <see cref="P:System.ComponentModel.IBindingList.SupportsChangeNotification" />
 
             
 
@@ -714,8 +674,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Removes the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -723,12 +682,15 @@
           >
         </summary>
         <param name="property">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -756,26 +718,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is supported if <see
-             cref="P:System.ComponentModel.IBindingList.SupportsSorting" />
+            >This property is supported if <see cref="P:System.ComponentModel.IBindingList.SupportsSorting" />
 
             
 
-             is true; otherwise, this property throws a <see
-             cref="T:System.NotSupportedException" />
+             is true; otherwise, this property throws a <see cref="T:System.NotSupportedException" />
 
             
 
             .</para
           >
           <para
-            >When you call this method, you should raise a <see
-             cref="E:System.ComponentModel.IBindingList.ListChanged" />
+            >When you call this method, you should raise a <see cref="E:System.ComponentModel.IBindingList.ListChanged" />
 
             
 
-             event with the <see
-             cref="F:System.ComponentModel.ListChangedType.Reset" />
+             event with the <see cref="F:System.ComponentModel.ListChangedType.Reset" />
 
             
 
@@ -785,8 +743,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes any sort applied using <see
-             cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
+            >Removes any sort applied using <see cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
 
             
 
@@ -818,13 +775,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is supported if <see
-             cref="P:System.ComponentModel.IBindingList.SupportsSorting" />
+            >This property is supported if <see cref="P:System.ComponentModel.IBindingList.SupportsSorting" />
 
             
 
-             is true; otherwise, this property throws a <see
-             cref="T:System.NotSupportedException" />
+             is true; otherwise, this property throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -860,13 +815,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is supported if <see
-             cref="P:System.ComponentModel.IBindingList.SupportsSorting" />
+            >This property is supported if <see cref="P:System.ComponentModel.IBindingList.SupportsSorting" />
 
             
 
-             is true; otherwise, this property throws a <see
-             cref="T:System.NotSupportedException" />
+             is true; otherwise, this property throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -876,8 +829,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Gets the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -906,8 +858,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Objects in the list must notify the list when they change, so the list can raise a <see
-             cref="E:System.ComponentModel.IBindingList.ListChanged" />
+            >Objects in the list must notify the list when they change, so the list can raise a <see cref="E:System.ComponentModel.IBindingList.ListChanged" />
 
             
 
@@ -917,8 +868,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets whether a <see
-             cref="E:System.ComponentModel.IBindingList.ListChanged" />
+            >Gets whether a <see cref="E:System.ComponentModel.IBindingList.ListChanged" />
 
             
 
@@ -945,8 +895,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets whether the list supports searching using the <see
-             cref="M:System.ComponentModel.IBindingList.Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
+            >Gets whether the list supports searching using the <see cref="M:System.ComponentModel.IBindingList.Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
 
             
 
@@ -972,28 +921,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this property is true, then <see
-             cref="P:System.ComponentModel.IBindingList.IsSorted" />
+            >If this property is true, then <see cref="P:System.ComponentModel.IBindingList.IsSorted" />
 
             
 
-            , <see
-             cref="P:System.ComponentModel.IBindingList.SortProperty" />
+            , <see cref="P:System.ComponentModel.IBindingList.SortProperty" />
 
             
 
-            , <see
-             cref="P:System.ComponentModel.IBindingList.SortDirection" />
+            , <see cref="P:System.ComponentModel.IBindingList.SortDirection" />
 
             
 
-            , <see
-             cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
+            , <see cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
 
             
 
-            , and <see
-             cref="M:System.ComponentModel.IBindingList.RemoveSort" />
+            , and <see cref="M:System.ComponentModel.IBindingList.RemoveSort" />
 
             
 

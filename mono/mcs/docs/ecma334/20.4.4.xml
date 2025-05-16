@@ -3,9 +3,7 @@
   <paragraph>A class that inherits an interface implementation is permitted to re-implement the interface by including it in the base class list. </paragraph>
   <paragraph
     >A re-implementation of an interface follows exactly the same interface mapping rules as an initial implementation of an interface. Thus, the inherited interface mapping has no effect whatsoever on the interface mapping established for the re-implementation of the interface. <example
-
-      >[Example: For example, in the declarations <code_example
-      >
+      >[Example: For example, in the declarations <code_example>
         <![CDATA[
 interface IControl  
 {  
@@ -29,9 +27,7 @@ class MyControl: Control, IControl
   </paragraph>
   <paragraph
     >Inherited public member declarations and inherited explicit interface member declarations participate in the interface mapping process for re-implemented interfaces. <example
-
-      >[Example: For example <code_example
-      >
+      >[Example: For example <code_example>
         <![CDATA[
 interface IMethods  
 {  
@@ -61,9 +57,7 @@ class Derived: Base, IMethods
   </paragraph>
   <paragraph
     >When a class implements an interface, it implicitly also implements all of that interface's base interfaces. Likewise, a re-implementation of an interface is also implicitly a re-implementation of all of the interface's base interfaces. <example
-
-      >[Example: For example <code_example
-      >
+      >[Example: For example <code_example>
         <![CDATA[
 interface IBase  
 {  

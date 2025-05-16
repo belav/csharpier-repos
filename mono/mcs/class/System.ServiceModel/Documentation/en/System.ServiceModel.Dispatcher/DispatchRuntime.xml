@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+        >Use the <see cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
 
         
 
@@ -33,34 +32,29 @@
         </item>
       </list>
       <para
-        >In indigo1, the channel and endpoint dispatchers are the service components responsible for accepting new channels, receiving messages, method dispatch and invocation, and response processing. Each endpoint exposed by a <see
-         cref="T:System.ServiceModel.ServiceHost" />
+        >In indigo1, the channel and endpoint dispatchers are the service components responsible for accepting new channels, receiving messages, method dispatch and invocation, and response processing. Each endpoint exposed by a <see cref="T:System.ServiceModel.ServiceHost" />
 
         
 
          object has one endpoint dispatcher and an associated channel dispatcher; in addition, each client that participates in duplex communication also has an endpoint dispatcher and channel dispatcher for each callback endpoint.</para
       >
       <para
-        >The <see
-         cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+        >The <see cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
 
         
 
-         enables you to intercept and extend the channel or endpoint dispatcher for all messages across a particular contract, even when a message is not recognized. When a message arrives that does not match any messages declared in the contract it is dispatched to the operation that was returned by the <see
-         cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.UnhandledDispatchOperation" />
+         enables you to intercept and extend the channel or endpoint dispatcher for all messages across a particular contract, even when a message is not recognized. When a message arrives that does not match any messages declared in the contract it is dispatched to the operation that was returned by the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.UnhandledDispatchOperation" />
 
         
 
-         property. To intercept or extend across all messages for a particular operation, see the <see
-         cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+         property. To intercept or extend across all messages for a particular operation, see the <see cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
 
         
 
          class.</para
       >
       <para
-        >There are four main areas of dispatcher extensibility exposed by the <see
-         cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+        >There are four main areas of dispatcher extensibility exposed by the <see cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
 
         
 
@@ -69,23 +63,19 @@
       <list type="ordered">
         <item>
           <para
-            >Dispatch components use the properties of the <see
-             cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+            >Dispatch components use the properties of the <see cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
 
             
 
-             and those of the associated channel dispatcher returned by the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.ChannelDispatcher" />
+             and those of the associated channel dispatcher returned by the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.ChannelDispatcher" />
 
             
 
-             property to customize how the channel dispatcher accepts and closes channels. This category includes the <see
-             cref="P:System.ServiceModel.Dispatcher.ChannelDispatcher.ChannelInitializers" />
+             property to customize how the channel dispatcher accepts and closes channels. This category includes the <see cref="P:System.ServiceModel.Dispatcher.ChannelDispatcher.ChannelInitializers" />
 
             
 
-             and <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InputSessionShutdownHandlers" />
+             and <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InputSessionShutdownHandlers" />
 
             
 
@@ -94,23 +84,19 @@
         </item>
         <item>
           <para
-            >Message components are customized for each message processed. This category includes the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.MessageInspectors" />
+            >Message components are customized for each message processed. This category includes the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.MessageInspectors" />
 
             
 
-            , <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.OperationSelector" />
+            , <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.OperationSelector" />
 
             
 
-            , <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.Operations" />
+            , <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.Operations" />
 
             
 
-            , and the <see
-             cref="P:System.ServiceModel.Dispatcher.ChannelDispatcher.ErrorHandlers" />
+            , and the <see cref="P:System.ServiceModel.Dispatcher.ChannelDispatcher.ErrorHandlers" />
 
             
 
@@ -119,18 +105,15 @@
         </item>
         <item>
           <para
-            >Instance components customize the creation, lifetime, and disposal of instances of the service type. For more information about service object lifetimes, see the <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+            >Instance components customize the creation, lifetime, and disposal of instances of the service type. For more information about service object lifetimes, see the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
 
             
 
-             property. This category includes the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InstanceContextInitializers" />
+             property. This category includes the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InstanceContextInitializers" />
 
             
 
-             and the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InstanceProvider" />
+             and the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InstanceProvider" />
 
             
 
@@ -164,8 +147,7 @@
 
                 
 
-                 controls whether successful message authentication events are written to the event log specified by <see
-                 cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.SecurityAuditLogLocation" />
+                 controls whether successful message authentication events are written to the event log specified by <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.SecurityAuditLogLocation" />
 
                 
 
@@ -178,8 +160,7 @@
 
                 
 
-                 controls how the <see
-                 cref="P:System.Threading.Thread.CurrentPrincipal" />
+                 controls how the <see cref="P:System.Threading.Thread.CurrentPrincipal" />
 
                 
 
@@ -208,28 +189,23 @@
         </item>
       </list>
       <para
-        >Typically custom extension objects are assigned to a <see
-         cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+        >Typically custom extension objects are assigned to a <see cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
 
         
 
-         property or inserted into a collection by a service behavior (an object that implements <see
-         cref="T:System.ServiceModel.Description.IServiceBehavior" />
+         property or inserted into a collection by a service behavior (an object that implements <see cref="T:System.ServiceModel.Description.IServiceBehavior" />
 
         
 
-        ), a contract behavior (an object that implements <see
-         cref="T:System.ServiceModel.Description.IContractBehavior" />
+        ), a contract behavior (an object that implements <see cref="T:System.ServiceModel.Description.IContractBehavior" />
 
         
 
-        ), or an endpoint behavior (an object that implements <see
-         cref="T:System.ServiceModel.Description.IEndpointBehavior" />
+        ), or an endpoint behavior (an object that implements <see cref="T:System.ServiceModel.Description.IEndpointBehavior" />
 
         
 
-        ). Then the installing behavior object is added to the appropriate collection of behaviors either programmatically or by implementing a custom <see
-         cref="T:System.ServiceModel.Configuration.BehaviorExtensionElement" />
+        ). Then the installing behavior object is added to the appropriate collection of behaviors either programmatically or by implementing a custom <see cref="T:System.ServiceModel.Configuration.BehaviorExtensionElement" />
 
         
 
@@ -264,21 +240,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you set the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.AutomaticInputSessionShutdown" />
+            >If you set the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.AutomaticInputSessionShutdown" />
 
             
 
-             property to false, the channel must be closed by some other mechanism. In this case, you must add a custom session shutdown handler to the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InputSessionShutdownHandlers" />
+             property to false, the channel must be closed by some other mechanism. In this case, you must add a custom session shutdown handler to the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InputSessionShutdownHandlers" />
 
             
 
              property. </para
           >
           <para
-            >By default when a client closes an output session and the service has finished processing any remaining messages the server closes the session. Setting <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.AutomaticInputSessionShutdown" />
+            >By default when a client closes an output session and the service has finished processing any remaining messages the server closes the session. Setting <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.AutomaticInputSessionShutdown" />
 
             
 
@@ -312,13 +285,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.CallbackClientRuntime" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.CallbackClientRuntime" />
 
             
 
-             to add custom extension objects that view or modify the conversion of parameters to outbound messages and response messages back into return values. For details, see <see
-             cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
+             to add custom extension objects that view or modify the conversion of parameters to outbound messages and response messages back into return values. For details, see <see cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
 
             
 
@@ -328,8 +299,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
+            >Gets the <see cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
 
             
 
@@ -360,8 +330,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.Dispatcher.ChannelDispatcher" />
+            >Gets the <see cref="T:System.ServiceModel.Dispatcher.ChannelDispatcher" />
 
             
 
@@ -419,8 +388,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.EndpointDispatcher" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.EndpointDispatcher" />
 
             
 
@@ -430,8 +398,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.Dispatcher.EndpointDispatcher" />
+            >Gets the <see cref="T:System.ServiceModel.Dispatcher.EndpointDispatcher" />
 
             
 
@@ -461,8 +428,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to add a custom implementation of <see
-             cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
+            >Use this property to add a custom implementation of <see cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
 
             
 
@@ -496,8 +462,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.TransactionMessageProperty" />
+            >The <see cref="T:System.ServiceModel.Channels.TransactionMessageProperty" />
 
             
 
@@ -507,8 +472,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets whether to ignore the <see
-             cref="T:System.ServiceModel.Channels.TransactionMessageProperty" />
+            >Gets or sets whether to ignore the <see cref="T:System.ServiceModel.Channels.TransactionMessageProperty" />
 
             
 
@@ -538,41 +502,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.ImpersonateCallerForAllOperations" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.ImpersonateCallerForAllOperations" />
 
             
 
-             property to control whether impersonation is performed when an operation's <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Impersonation" />
+             property to control whether impersonation is performed when an operation's <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Impersonation" />
 
             
 
-             property value is <see
-             cref="F:System.ServiceModel.ImpersonationOption.Allowed" />
+             property value is <see cref="F:System.ServiceModel.ImpersonationOption.Allowed" />
 
             
 
-            . An exception is thrown if the property is true but an operation's <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Impersonation" />
+            . An exception is thrown if the property is true but an operation's <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Impersonation" />
 
             
 
-             property value is <see
-             cref="F:System.ServiceModel.ImpersonationOption.NotAllowed" />
+             property value is <see cref="F:System.ServiceModel.ImpersonationOption.NotAllowed" />
 
             
 
             .</para
           >
           <para
-            >If an operation's <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Impersonation" />
+            >If an operation's <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Impersonation" />
 
             
 
-             property value is <see
-             cref="F:System.ServiceModel.ImpersonationOption.Required" />
+             property value is <see cref="F:System.ServiceModel.ImpersonationOption.Required" />
 
             
 
@@ -606,38 +563,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Add an <see
-             cref="T:System.ServiceModel.Dispatcher.IInputSessionShutdown" />
+            >Add an <see cref="T:System.ServiceModel.Dispatcher.IInputSessionShutdown" />
 
             
 
-             object to this property to control the manner in which input sessions are closed. When a call to the <see
-             cref="M:System.ServiceModel.Channels.IInputChannel.Receive" />
+             object to this property to control the manner in which input sessions are closed. When a call to the <see cref="M:System.ServiceModel.Channels.IInputChannel.Receive" />
 
             
 
-             method on the <see
-             cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
+             method on the <see cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
 
             
 
-             first returns null, (which indicates that the input session has been closed), the dispatcher invokes each <see
-             cref="T:System.ServiceModel.Dispatcher.IInputSessionShutdown" />
+             first returns null, (which indicates that the input session has been closed), the dispatcher invokes each <see cref="T:System.ServiceModel.Dispatcher.IInputSessionShutdown" />
 
             
 
-             object, passing it an <see
-             cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
+             object, passing it an <see cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
 
             
 
-             object. Custom <see
-             cref="T:System.ServiceModel.Dispatcher.IInputSessionShutdown" />
+             object. Custom <see cref="T:System.ServiceModel.Dispatcher.IInputSessionShutdown" />
 
             
 
-             objects can use this <see
-             cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
+             objects can use this <see cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
 
             
 
@@ -647,8 +597,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of <see
-             cref="T:System.ServiceModel.Dispatcher.IInputSessionShutdown" />
+            >Gets a collection of <see cref="T:System.ServiceModel.Dispatcher.IInputSessionShutdown" />
 
             
 
@@ -678,23 +627,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InstanceContextInitializers" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InstanceContextInitializers" />
 
             
 
-             property to add a custom initializer that can inspect or modify an <see
-             cref="T:System.ServiceModel.InstanceContext" />
+             property to add a custom initializer that can inspect or modify an <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
-             object when it is first created. The frequency with which <see
-             cref="T:System.ServiceModel.InstanceContext" />
+             object when it is first created. The frequency with which <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
-             objects are created is controlled by the <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+             objects are created is controlled by the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
 
             
 
@@ -704,13 +649,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of <see
-             cref="T:System.ServiceModel.Dispatcher.IInstanceContextInitializer" />
+            >Gets a collection of <see cref="T:System.ServiceModel.Dispatcher.IInstanceContextInitializer" />
 
             
 
-             objects that can be used to inspect or modify an <see
-             cref="T:System.ServiceModel.InstanceContext" />
+             objects that can be used to inspect or modify an <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
@@ -741,13 +684,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.ServiceModel.Dispatcher.IInstanceContextProvider" />
+            >Gets or sets the <see cref="T:System.ServiceModel.Dispatcher.IInstanceContextProvider" />
 
             
 
-             to be used by the <see
-             cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+             to be used by the <see cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
 
             
 
@@ -777,69 +718,57 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implement the <see
-             cref="T:System.ServiceModel.Dispatcher.IInstanceProvider" />
+            >Implement the <see cref="T:System.ServiceModel.Dispatcher.IInstanceProvider" />
 
             
 
-             interface and assign the implementation to the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InstanceProvider" />
+             interface and assign the implementation to the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InstanceProvider" />
 
             
 
              property to control instances of the service type using a constructor other than the default constructor, for example, to implement a custom instancing mode such as instance pooling.</para
           >
           <para
-            >Typically the <see
-             cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.GetInstance" />
+            >Typically the <see cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.GetInstance" />
 
             
 
-             method is invoked once, when the <see
-             cref="T:System.ServiceModel.InstanceContext" />
+             method is invoked once, when the <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
-             object is first created. The <see
-             cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.ReleaseInstance(System.ServiceModel.InstanceContext,System.Object)" />
+             object is first created. The <see cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.ReleaseInstance(System.ServiceModel.InstanceContext,System.Object)" />
 
             
 
-             method is also invoked once, when the <see
-             cref="T:System.ServiceModel.InstanceContext" />
+             method is also invoked once, when the <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
              object is closed.</para
           >
           <para
-            >A service can also be configured to release an instance before the <see
-             cref="T:System.ServiceModel.InstanceContext" />
+            >A service can also be configured to release an instance before the <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
-             object is closed. This can be configured by using the <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
+             object is closed. This can be configured by using the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
 
             
 
-             property or by calling the <see
-             cref="M:System.ServiceModel.InstanceContext.ReleaseServiceInstance" />
+             property or by calling the <see cref="M:System.ServiceModel.InstanceContext.ReleaseServiceInstance" />
 
             
 
-             method. If this is done, the <see
-             cref="T:System.ServiceModel.InstanceContext" />
+             method. If this is done, the <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
-             object calls the <see
-             cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.ReleaseInstance(System.ServiceModel.InstanceContext,System.Object)" />
+             object calls the <see cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.ReleaseInstance(System.ServiceModel.InstanceContext,System.Object)" />
 
             
 
-             method. If a new message arrives after the instance has been released, a new instance is created using the <see
-             cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.GetInstance" />
+             method. If a new message arrives after the instance has been released, a new instance is created using the <see cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.GetInstance" />
 
             
 
@@ -849,8 +778,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an <see
-             cref="T:System.ServiceModel.Dispatcher.IInstanceProvider" />
+            >Gets or sets an <see cref="T:System.ServiceModel.Dispatcher.IInstanceProvider" />
 
             
 
@@ -880,8 +808,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.MessageAuthenticationAuditLevel" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.MessageAuthenticationAuditLevel" />
 
             
 
@@ -891,8 +818,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that specifies whether successful message authentication events are written to the event log specified by <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.SecurityAuditLogLocation" />
+            >Gets or sets a value that specifies whether successful message authentication events are written to the event log specified by <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.SecurityAuditLogLocation" />
 
             
 
@@ -922,18 +848,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.MessageInspectors" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.MessageInspectors" />
 
             
 
-             property to attach custom <see
-             cref="T:System.ServiceModel.Dispatcher.IDispatchMessageInspector" />
+             property to attach custom <see cref="T:System.ServiceModel.Dispatcher.IDispatchMessageInspector" />
 
             
 
-             objects that can inspect or transform all messages that flow through the endpoint. Because the <see
-             cref="T:System.ServiceModel.Dispatcher.IDispatchMessageInspector" />
+             objects that can inspect or transform all messages that flow through the endpoint. Because the <see cref="T:System.ServiceModel.Dispatcher.IDispatchMessageInspector" />
 
             
 
@@ -943,8 +866,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of <see
-             cref="T:System.ServiceModel.Dispatcher.IDispatchMessageInspector" />
+            >Gets a collection of <see cref="T:System.ServiceModel.Dispatcher.IDispatchMessageInspector" />
 
             
 
@@ -974,13 +896,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.Operations" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.Operations" />
 
             
 
-             property to inspect or modify parameters, control parameter and return value serialization and deserialization, control operation invocation, and modify other behaviors for a single operation. For details, see <see
-             cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+             property to inspect or modify parameters, control parameter and return value serialization and deserialization, control operation invocation, and modify other behaviors for a single operation. For details, see <see cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
 
             
 
@@ -990,8 +910,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of <see
-             cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+            >Gets a collection of <see cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
 
             
 
@@ -1021,18 +940,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.OperationSelector" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.OperationSelector" />
 
             
 
-             property to decide which operation receives a given message. The default operation selector returns the value of the action header for the message, which is used as the key to locate the correct <see
-             cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+             property to decide which operation receives a given message. The default operation selector returns the value of the action header for the message, which is used as the key to locate the correct <see cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
 
             
 
-            . If no matching operation is found, the invocation is dispatched to the return value from the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.UnhandledDispatchOperation" />
+            . If no matching operation is found, the invocation is dispatched to the return value from the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.UnhandledDispatchOperation" />
 
             
 
@@ -1042,13 +958,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.ServiceModel.Dispatcher.IDispatchOperationSelector" />
+            >Gets or sets the <see cref="T:System.ServiceModel.Dispatcher.IDispatchOperationSelector" />
 
             
 
-             object that controls the selection of a destination <see
-             cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+             object that controls the selection of a destination <see cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
 
             
 
@@ -1078,72 +992,60 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.PrincipalPermissionMode" />
+            >When the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.PrincipalPermissionMode" />
 
             
 
-             is <see
-             cref="F:System.ServiceModel.Description.PrincipalPermissionMode.None" />
+             is <see cref="F:System.ServiceModel.Description.PrincipalPermissionMode.None" />
 
             
 
-            , the <see
-             cref="P:System.Threading.Thread.CurrentPrincipal" />
+            , the <see cref="P:System.Threading.Thread.CurrentPrincipal" />
 
             
 
              property is not set. </para
           >
           <para
-            >When the value is <see
-             cref="F:System.ServiceModel.Description.PrincipalPermissionMode.UseWindowsGroups" />
+            >When the value is <see cref="F:System.ServiceModel.Description.PrincipalPermissionMode.UseWindowsGroups" />
 
             
 
-             the <see
-             cref="P:System.Threading.Thread.CurrentPrincipal" />
+             the <see cref="P:System.Threading.Thread.CurrentPrincipal" />
 
             
 
-             property is populated with a <see
-             cref="T:System.Security.Principal.WindowsPrincipal" />
+             property is populated with a <see cref="T:System.Security.Principal.WindowsPrincipal" />
 
             
 
              based on the user credentials of the incoming message.</para
           >
           <para
-            >When the value is <see
-             cref="F:System.ServiceModel.Description.PrincipalPermissionMode.UseAspNetRoles" />
+            >When the value is <see cref="F:System.ServiceModel.Description.PrincipalPermissionMode.UseAspNetRoles" />
 
             
 
-             the <see
-             cref="P:System.Threading.Thread.CurrentPrincipal" />
+             the <see cref="P:System.Threading.Thread.CurrentPrincipal" />
 
             
 
-             property is populated with an <see
-             cref="T:System.Security.Principal.IPrincipal" />
+             property is populated with an <see cref="T:System.Security.Principal.IPrincipal" />
 
             
 
              object based on vstecasp role information.</para
           >
           <para
-            >When the value is <see
-             cref="F:System.ServiceModel.Description.PrincipalPermissionMode.Custom" />
+            >When the value is <see cref="F:System.ServiceModel.Description.PrincipalPermissionMode.Custom" />
 
             
 
-             the <see
-             cref="P:System.Threading.Thread.CurrentPrincipal" />
+             the <see cref="P:System.Threading.Thread.CurrentPrincipal" />
 
             
 
-             property is populated by a custom <see
-             cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
+             property is populated by a custom <see cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
 
             
 
@@ -1153,8 +1055,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that specifies how the <see
-             cref="P:System.Threading.Thread.CurrentPrincipal" />
+            >Gets or sets a value that specifies how the <see cref="P:System.Threading.Thread.CurrentPrincipal" />
 
             
 
@@ -1184,13 +1085,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.ReleaseServiceInstanceOnTransactionComplete" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.ReleaseServiceInstanceOnTransactionComplete" />
 
             
 
-             to specify that the <see
-             cref="M:System.ServiceModel.InstanceContext.ReleaseServiceInstance" />
+             to specify that the <see cref="M:System.ServiceModel.InstanceContext.ReleaseServiceInstance" />
 
             
 
@@ -1225,13 +1124,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the custom <see
-             cref="T:System.Web.Security.RoleProvider" />
+            >Gets or sets the custom <see cref="T:System.Web.Security.RoleProvider" />
 
             
 
-             that is used by the <see
-             cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+             that is used by the <see cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
 
             
 
@@ -1286,38 +1183,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In the default case, no service authorization events are audited. If the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.ServiceAuthorizationAuditLevel" />
+            >In the default case, no service authorization events are audited. If the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.ServiceAuthorizationAuditLevel" />
 
             
 
-             value is <see
-             cref="F:System.ServiceModel.AuditLevel.Success" />
+             value is <see cref="F:System.ServiceModel.AuditLevel.Success" />
 
             
 
-            , only successful service authorization events are written to the audit log specified by the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.SecurityAuditLogLocation" />
+            , only successful service authorization events are written to the audit log specified by the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.SecurityAuditLogLocation" />
 
             
 
-             property. If this property has a value of <see
-             cref="F:System.ServiceModel.AuditLevel.Failure" />
+             property. If this property has a value of <see cref="F:System.ServiceModel.AuditLevel.Failure" />
 
             
 
-            , only unsuccessful service authorization events are written to the audit log specified by the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.SecurityAuditLogLocation" />
+            , only unsuccessful service authorization events are written to the audit log specified by the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.SecurityAuditLogLocation" />
 
             
 
-             property. If the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.ServiceAuthorizationAuditLevel" />
+             property. If the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.ServiceAuthorizationAuditLevel" />
 
             
 
-             value is <see
-             cref="F:System.ServiceModel.AuditLevel.SuccessOrFailure" />
+             value is <see cref="F:System.ServiceModel.AuditLevel.SuccessOrFailure" />
 
             
 
@@ -1352,13 +1242,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.ServiceAuthorizationManager" />
+            >Gets the <see cref="T:System.ServiceModel.ServiceAuthorizationManager" />
 
             
 
-             that provides authorization checking for the <see
-             cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+             that provides authorization checking for the <see cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
 
             
 
@@ -1389,13 +1277,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the singleton <see
-             cref="T:System.ServiceModel.Dispatcher.IInstanceContextProvider" />
+            >Gets or sets the singleton <see cref="T:System.ServiceModel.Dispatcher.IInstanceContextProvider" />
 
             
 
-             to be used by the <see
-             cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+             to be used by the <see cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
 
             
 
@@ -1419,28 +1305,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.SuppressAuditFailure" />
+            >Set <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.SuppressAuditFailure" />
 
             
 
-             to false if you want exceptions that occur during the course of writing the audit log to be re-thrown to the application. In the default case, only the <see
-             cref="T:System.OutOfMemoryException" />
+             to false if you want exceptions that occur during the course of writing the audit log to be re-thrown to the application. In the default case, only the <see cref="T:System.OutOfMemoryException" />
 
             
 
-            , <see
-             cref="T:System.StackOverflowException" />
+            , <see cref="T:System.StackOverflowException" />
 
             
 
-            , <see
-             cref="T:System.Threading.ThreadAbortException" />
+            , <see cref="T:System.Threading.ThreadAbortException" />
 
             
 
-            , and <see
-             cref="T:System.ArgumentException" />
+            , and <see cref="T:System.ArgumentException" />
 
             
 
@@ -1502,13 +1383,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.TransactionAutoCompleteOnSessionClose" />
+            >If <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.TransactionAutoCompleteOnSessionClose" />
 
             
 
-             is true and there is an active transaction, the transaction is completed when the session closes. If <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.TransactionAutoCompleteOnSessionClose" />
+             is true and there is an active transaction, the transaction is completed when the session closes. If <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.TransactionAutoCompleteOnSessionClose" />
 
             
 
@@ -1561,13 +1440,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The operation return by the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.UnhandledDispatchOperation" />
+            >The operation return by the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.UnhandledDispatchOperation" />
 
             
 
-             is the operation indicated by the use of the "*" (asterisk) in the <see
-             cref="P:System.ServiceModel.OperationContractAttribute.Action" />
+             is the operation indicated by the use of the "*" (asterisk) in the <see cref="P:System.ServiceModel.OperationContractAttribute.Action" />
 
             
 
@@ -1599,8 +1476,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the value of <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.ValidateMustUnderstand" />
+            >Gets or sets the value of <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ValidateMustUnderstand" />
 
             
 

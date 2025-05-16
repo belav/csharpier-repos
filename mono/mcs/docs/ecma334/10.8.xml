@@ -1,26 +1,26 @@
 <?xml version="1.0"?>
 <clause number="10.8" title="Namespace and type names">
   <paragraph
-    >Several contexts in a C# program require a <non_terminal
-     where="10.8">namespace-name</non_terminal>
-
-    
-
-     or a <non_terminal
-     where="10.8">type-name</non_terminal>
-
-    
-
-     to be specified. Either form of name is written as one or more identifiers separated by "." tokens. <grammar_production
+    >Several contexts in a C# program require a <non_terminal where="10.8"
+      >namespace-name</non_terminal
     >
+
+    
+
+     or a <non_terminal where="10.8"
+      >type-name</non_terminal
+    >
+
+    
+
+     to be specified. Either form of name is written as one or more identifiers separated by "." tokens. <grammar_production>
       <name>
         <non_terminal where="10.8">namespace-name</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="10.8">namespace-or-type-name</non_terminal>
       </rhs>
     </grammar_production>
@@ -31,8 +31,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="10.8">namespace-or-type-name</non_terminal>
       </rhs>
     </grammar_production>
@@ -43,8 +42,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="9.4.2">identifier</non_terminal>
       </rhs>
       <rhs>
@@ -55,62 +53,71 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >A <non_terminal
-     where="10.8">type-name</non_terminal>
+    >A <non_terminal where="10.8">type-name</non_terminal>
 
     
 
      is a <non_terminal
-     where="10.8">namespace-or-type-name</non_terminal>
+      where="10.8"
+      >namespace-or-type-name</non_terminal
+    >
 
     
 
      that refers to a type. Following resolution as described below, the <non_terminal
-     where="10.8">namespace-or-type-name</non_terminal>
+      where="10.8"
+      >namespace-or-type-name</non_terminal
+    >
 
     
 
-     of a <non_terminal
-     where="10.8">type-name</non_terminal>
+     of a <non_terminal where="10.8"
+      >type-name</non_terminal
+    >
 
     
 
      must refer to a type, or otherwise a compile-time error occurs. </paragraph
   >
   <paragraph
-    >A <non_terminal
-     where="10.8">namespace-name</non_terminal>
+    >A <non_terminal where="10.8">namespace-name</non_terminal>
 
     
 
      is a <non_terminal
-     where="10.8">namespace-or-type-name</non_terminal>
+      where="10.8"
+      >namespace-or-type-name</non_terminal
+    >
 
     
 
      that refers to a namespace. Following resolution as described below, the <non_terminal
-     where="10.8">namespace-or-type-name</non_terminal>
+      where="10.8"
+      >namespace-or-type-name</non_terminal
+    >
 
     
 
-     of a <non_terminal
-     where="10.8">namespace-name</non_terminal>
+     of a <non_terminal where="10.8"
+      >namespace-name</non_terminal
+    >
 
     
 
      must refer to a namespace, or otherwise a compile-time error occurs. </paragraph
   >
   <paragraph
-    >The meaning of a <non_terminal
-     where="10.8">namespace-or-type-name</non_terminal>
+    >The meaning of a <non_terminal where="10.8"
+      >namespace-or-type-name</non_terminal
+    >
 
     
 
-     is determined as follows: <list
-    >
+     is determined as follows: <list>
       <list_item
-        > If the <non_terminal
-         where="10.8">namespace-or-type-name</non_terminal>
+        > If the <non_terminal where="10.8"
+          >namespace-or-type-name</non_terminal
+        >
 
         
 
@@ -118,26 +125,32 @@
       >
       <list>
         <list_item
-          > If the <non_terminal
-           where="10.8">namespace-or-type-name</non_terminal>
+          > If the <non_terminal where="10.8"
+            >namespace-or-type-name</non_terminal
+          >
 
           
 
            appears within the body of a class or struct declaration, then starting with that class or struct declaration and continuing with each enclosing class or struct declaration (if any), if a member with the given name exists, is accessible, and denotes a type, then the  <non_terminal
-           where="10.8">namespace-or-type-name</non_terminal>
+            where="10.8"
+            >namespace-or-type-name</non_terminal
+          >
 
           
 
            refers to that member. Non-type members (constants, fields, methods, properties, indexers, operators, instance constructors, destructors, and static constructors) are ignored when determining the meaning of a <non_terminal
-           where="10.8">namespace-or-type-name</non_terminal>
+            where="10.8"
+            >namespace-or-type-name</non_terminal
+          >
 
           
 
           . </list_item
         >
         <list_item
-          > Otherwise, starting with the namespace in which the <non_terminal
-           where="10.8">namespace-or-type-name</non_terminal>
+          > Otherwise, starting with the namespace in which the <non_terminal where="10.8"
+            >namespace-or-type-name</non_terminal
+          >
 
           
 
@@ -146,7 +159,9 @@
         <list>
           <list_item
             > If the namespace contains a namespace member with the given name, then the  <non_terminal
-             where="10.8">namespace-or-type-name</non_terminal>
+              where="10.8"
+              >namespace-or-type-name</non_terminal
+            >
 
             
 
@@ -154,7 +169,9 @@
           >
           <list_item
             > Otherwise, if the namespace has a corresponding namespace declaration enclosing the location where the <non_terminal
-             where="10.8">namespace-or-type-name</non_terminal>
+              where="10.8"
+              >namespace-or-type-name</non_terminal
+            >
 
             
 
@@ -162,39 +179,48 @@
           >
           <list>
             <list_item
-              > If the namespace declaration contains a <non_terminal
-               where="16.3.1">using-alias-directive</non_terminal>
+              > If the namespace declaration contains a <non_terminal where="16.3.1"
+                >using-alias-directive</non_terminal
+              >
 
               
 
                that associates the given name with an imported namespace or type, then the <non_terminal
-               where="10.8">namespace-or-type-name</non_terminal>
+                where="10.8"
+                >namespace-or-type-name</non_terminal
+              >
 
               
 
                refers to that namespace or type. </list_item
             >
             <list_item
-              > Otherwise, if the namespaces imported by the <non_terminal
-               where="16.3.2">using-namespace-directive</non_terminal>
+              > Otherwise, if the namespaces imported by the <non_terminal where="16.3.2"
+                >using-namespace-directive</non_terminal
+              >
 
               
 
               s of the namespace declaration contain exactly one type with the given name, then the <non_terminal
-               where="10.8">namespace-or-type-name</non_terminal>
+                where="10.8"
+                >namespace-or-type-name</non_terminal
+              >
 
               
 
                refers to that type. </list_item
             >
             <list_item
-              > Otherwise, if the namespaces imported by the <non_terminal
-               where="16.3.2">using-namespace-directive</non_terminal>
+              > Otherwise, if the namespaces imported by the <non_terminal where="16.3.2"
+                >using-namespace-directive</non_terminal
+              >
 
               
 
               s of the namespace declaration contain more than one type with the given name, then the  <non_terminal
-               where="10.8">namespace-or-type-name</non_terminal>
+                where="10.8"
+                >namespace-or-type-name</non_terminal
+              >
 
               
 
@@ -203,8 +229,9 @@
           </list>
         </list>
         <list_item
-          > Otherwise, the <non_terminal
-           where="10.8">namespace-or-type-name</non_terminal>
+          > Otherwise, the <non_terminal where="10.8"
+            >namespace-or-type-name</non_terminal
+          >
 
           
 
@@ -212,18 +239,22 @@
         >
       </list>
       <list_item
-        > Otherwise, the <non_terminal
-         where="10.8">namespace-or-type-name</non_terminal>
+        > Otherwise, the <non_terminal where="10.8"
+          >namespace-or-type-name</non_terminal
+        >
 
         
 
-         is of the form N.I, where N is a <non_terminal
-         where="10.8">namespace-or-type-name</non_terminal>
+         is of the form N.I, where N is a <non_terminal where="10.8"
+          >namespace-or-type-name</non_terminal
+        >
 
         
 
          consisting of all identifiers but the rightmost one, and I is the rightmost identifier. N is first resolved as a <non_terminal
-         where="10.8">namespace-or-type-name</non_terminal>
+          where="10.8"
+          >namespace-or-type-name</non_terminal
+        >
 
         
 
@@ -233,8 +264,9 @@
         <list_item> If N is a namespace and I is the name of an accessible member of that namespace, then N.I refers to that member and, depending on the member, is classified as a namespace or a type. </list_item>
         <list_item> If N is a class or struct type and I is the name of an accessible type in N, then N.I refers to that type. </list_item>
         <list_item
-          > Otherwise, N.I is an invalid <non_terminal
-           where="10.8">namespace-or-type-name</non_terminal>
+          > Otherwise, N.I is an invalid <non_terminal where="10.8"
+            >namespace-or-type-name</non_terminal
+          >
 
           
 

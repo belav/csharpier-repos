@@ -30,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Allows control of code access permissions for <see
-         cref="T:System.Diagnostics.PerformanceCounter" />
+        >Allows control of code access permissions for <see cref="T:System.Diagnostics.PerformanceCounter" />
 
         
 
@@ -59,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.PerformanceCounterPermission" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.PerformanceCounterPermission" />
 
             
 
@@ -96,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.PerformanceCounterPermission" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.PerformanceCounterPermission" />
 
             
 
@@ -105,17 +102,19 @@
           >
         </summary>
         <param name="permissionAccessEntries">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Diagnostics.PerformanceCounterPermissionEntry" />
+          An array of <see cref="T:System.Diagnostics.PerformanceCounterPermissionEntry" />
 
           
 
-           objects. The <see
-           cref="P:System.Diagnostics.PerformanceCounterPermission.PermissionEntries" />
+           objects. The <see cref="P:System.Diagnostics.PerformanceCounterPermission.PermissionEntries" />
 
           
 
@@ -147,8 +146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.PerformanceCounterPermission" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.PerformanceCounterPermission" />
 
             
 
@@ -156,12 +154,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -198,8 +199,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.PerformanceCounterPermission" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.PerformanceCounterPermission" />
 
             
 
@@ -207,26 +207,37 @@
           >
         </summary>
         <param name="permissionAccess">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Diagnostics.PerformanceCounterPermissionAccess" />
+          One of the <see cref="T:System.Diagnostics.PerformanceCounterPermissionAccess" />
 
           
 
            values. </param
         >
         <param name="machineName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The server on which the performance counter and its associate category reside. </param
         >
         <param name="categoryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

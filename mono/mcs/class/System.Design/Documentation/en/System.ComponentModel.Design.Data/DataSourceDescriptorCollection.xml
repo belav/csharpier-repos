@@ -20,8 +20,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a type-safe collection of <see
-         cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
+        >Provides a type-safe collection of <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
 
         
 
@@ -42,8 +41,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
 
             
 
@@ -72,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
+            >Adds a <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
 
             
 
@@ -83,8 +80,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the <see
-             cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
+            >The index of the <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
 
             
 
@@ -92,12 +88,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
+          A <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
 
           
 
@@ -125,13 +124,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
+            >Gets a value indicating whether the <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
 
             
 
-             contains the specified <see
-             cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
+             contains the specified <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
 
             
 
@@ -141,8 +138,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
+            >true if the <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
 
             
 
@@ -150,12 +146,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
+          The <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
 
           
 
@@ -184,13 +183,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see
-             cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
+            >Copies the <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
 
             
 
-             values to a one-dimensional <see
-             cref="T:System.Array" />
+             values to a one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -198,29 +195,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the values copied from the <see
-           cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
+           that is the destination of the values copied from the <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
 
           
 
           .</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index in the <paramref
-           name="array" />
+          The index in the <paramref name="array" />
 
           
 
@@ -248,13 +250,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the index of a <see
-             cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
+            >Returns the index of a <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
 
             
 
-             in the <see
-             cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
+             in the <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
 
             
 
@@ -264,18 +264,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the <see
-             cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
+            >The index of the <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
 
             
 
-             of <paramref
-             name="value" />
+             of <paramref name="value" />
 
             
 
-             in the <see
-             cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
+             in the <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
 
             
 
@@ -283,12 +280,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
+          The <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
 
           
 
@@ -317,13 +317,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a <see
-             cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
+            >Inserts a <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
 
             
 
-             into the <see
-             cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
+             into the <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
 
             
 
@@ -331,24 +329,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index where <paramref
-           name="value" />
+          The zero-based index where <paramref name="value" />
 
           
 
            should be inserted. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
+          The <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
 
           
 
@@ -398,13 +402,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a specific <see
-             cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
+            >Removes a specific <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
 
             
 
-             from the <see
-             cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
+             from the <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
 
             
 
@@ -412,17 +414,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
+          The <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
 
           
 
-           to remove from the <see
-           cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
+           to remove from the <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
 
           
 

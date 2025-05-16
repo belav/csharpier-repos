@@ -18,8 +18,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Media.SystemSounds" />
+        >The <see cref="T:System.Media.SystemSounds" />
 
         
 
@@ -30,33 +29,27 @@
 
         
 
-         provides static methods to access the sounds associated with the <see
-         cref="P:System.Media.SystemSounds.Asterisk" />
+         provides static methods to access the sounds associated with the <see cref="P:System.Media.SystemSounds.Asterisk" />
 
         
 
-        , <see
-         cref="P:System.Media.SystemSounds.Beep" />
+        , <see cref="P:System.Media.SystemSounds.Beep" />
 
         
 
-        , <see
-         cref="P:System.Media.SystemSounds.Exclamation" />
+        , <see cref="P:System.Media.SystemSounds.Exclamation" />
 
         
 
-        , <see
-         cref="P:System.Media.SystemSounds.Hand" />
+        , <see cref="P:System.Media.SystemSounds.Hand" />
 
         
 
-         and <see
-         cref="P:System.Media.SystemSounds.Question" />
+         and <see cref="P:System.Media.SystemSounds.Question" />
 
         
 
-         sound events. Each property returns a <see
-         cref="T:System.Media.SystemSound" />
+         sound events. Each property returns a <see cref="T:System.Media.SystemSound" />
 
         
 

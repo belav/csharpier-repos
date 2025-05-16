@@ -1,41 +1,34 @@
 <?xml version="1.0"?>
 <clause number="9.4.4.2" title="Integer literals">
   <paragraph
-    >Integer literals are used to write values of types <keyword
-    >int</keyword>
+    >Integer literals are used to write values of types <keyword>int</keyword>
 
     
 
-    , <keyword
-    >uint</keyword>
+    , <keyword>uint</keyword>
 
     
 
-    , <keyword
-    >long</keyword>
+    , <keyword>long</keyword>
 
     
 
-    , and <keyword
-    >ulong</keyword>
+    , and <keyword>ulong</keyword>
 
     
 
-    . Integer literals have two possible forms: <keyword
-    >decimal</keyword>
+    . Integer literals have two possible forms: <keyword>decimal</keyword>
 
     
 
-     and hexadecimal. <grammar_production
-    >
+     and hexadecimal. <grammar_production>
       <name>
         <non_terminal where="9.4.4.2">integer-literal</non_terminal>
       </name>
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <non_terminal where="9.4.4.2">decimal-integer-literal</non_terminal>
       </rhs>
       <rhs>
@@ -49,8 +42,7 @@
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <non_terminal where="9.4.4.2">decimal-digits</non_terminal>
         <non_terminal where="9.4.4.2">integer-type-suffix</non_terminal>
         <opt />
@@ -67,8 +59,7 @@
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <non_terminal where="9.4.4.2">decimal-digit</non_terminal>
       </rhs>
       <rhs>
@@ -83,8 +74,7 @@
 
       
 
-       :: one of <rhs
-      >
+       :: one of <rhs>
         <terminal>0</terminal>
         <terminal>1</terminal>
         <terminal>2</terminal>
@@ -104,8 +94,7 @@
 
       
 
-       :: one of <rhs
-      >
+       :: one of <rhs>
         <terminal>U  u  L  l  UL  Ul  uL  ul  LU  Lu  lU  lu  </terminal>
       </rhs>
     </grammar_production>
@@ -116,8 +105,7 @@
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <terminal>0x</terminal>
         <non_terminal where="9.4.4.2">hex-digits</non_terminal>
         <non_terminal where="9.4.4.2">integer-type-suffix</non_terminal>
@@ -141,8 +129,7 @@
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <non_terminal where="9.4.4.2">hex-digit</non_terminal>
       </rhs>
       <rhs>
@@ -157,8 +144,7 @@
 
       
 
-       :: one of <rhs
-      >
+       :: one of <rhs>
         <terminal>0</terminal>
         <terminal>1</terminal>
         <terminal>2</terminal>
@@ -185,60 +171,50 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >The type of an integer literal is determined as follows: <list
-    >
+    >The type of an integer literal is determined as follows: <list>
       <list_item
-        > If the literal has no suffix, it has the first of these types in which its value can be represented: <keyword
-        >int</keyword>
+        > If the literal has no suffix, it has the first of these types in which its value can be represented: <keyword>int</keyword>
 
         
 
-        , <keyword
-        >uint</keyword>
+        , <keyword>uint</keyword>
 
         
 
-        , <keyword
-        >long</keyword>
+        , <keyword>long</keyword>
 
         
 
-        , <keyword
-        >ulong</keyword>
+        , <keyword>ulong</keyword>
 
         
 
         . </list_item
       >
       <list_item
-        > If the literal is suffixed by U or u, it has the first of these types in which its value can be represented: <keyword
-        >uint</keyword>
+        > If the literal is suffixed by U or u, it has the first of these types in which its value can be represented: <keyword>uint</keyword>
 
         
 
-        , <keyword
-        >ulong</keyword>
-
-        
-
-        . </list_item
-      >
-      <list_item
-        > If the literal is suffixed by L or l, it has the first of these types in which its value can be represented: <keyword
-        >long</keyword>
-
-        
-
-        , <keyword
-        >ulong</keyword>
+        , <keyword>ulong</keyword>
 
         
 
         . </list_item
       >
       <list_item
-        > If the literal is suffixed by UL, Ul, uL, ul, LU, Lu, lU, or lu, it is of type <keyword
-        >ulong</keyword>
+        > If the literal is suffixed by L or l, it has the first of these types in which its value can be represented: <keyword>long</keyword>
+
+        
+
+        , <keyword>ulong</keyword>
+
+        
+
+        . </list_item
+      >
+      <list_item
+        > If the literal is suffixed by UL, Ul, uL, ul, LU, Lu, lU, or lu, it is of type <keyword>ulong</keyword>
 
         
 
@@ -247,8 +223,7 @@
     </list>
   </paragraph>
   <paragraph
-    >If the value represented by an integer literal is outside the range of the <keyword
-    >ulong</keyword>
+    >If the value represented by an integer literal is outside the range of the <keyword>ulong</keyword>
 
     
 
@@ -256,8 +231,7 @@
   >
   <paragraph>
     <note
-      >[Note: As a matter of style, it is suggested that "L" be used instead of "l" when writing literals of type <keyword
-      >long</keyword>
+      >[Note: As a matter of style, it is suggested that "L" be used instead of "l" when writing literals of type <keyword>long</keyword>
 
       
 
@@ -265,129 +239,122 @@
     >
   </paragraph>
   <paragraph
-    >To permit the smallest possible <keyword
-    >int</keyword>
+    >To permit the smallest possible <keyword>int</keyword>
 
     
 
-     and <keyword
-    >long</keyword>
+     and <keyword>long</keyword>
 
     
 
-     values to be written as <keyword
-    >decimal</keyword>
+     values to be written as <keyword>decimal</keyword>
 
     
 
-     integer literals, the following two rules exist: <list
-    >
+     integer literals, the following two rules exist: <list>
       <list_item
-        > When a <non_terminal
-         where="9.4.4.2">decimal-integer-literal</non_terminal>
+        > When a <non_terminal where="9.4.4.2"
+          >decimal-integer-literal</non_terminal
+        >
 
         
 
-         with the value 2147483648 (2<super
-        >31</super>
+         with the value 2147483648 (2<super>31</super>
 
         
 
         ) and no <non_terminal
-         where="9.4.4.2">integer-type-suffix</non_terminal>
+          where="9.4.4.2"
+          >integer-type-suffix</non_terminal
+        >
 
         
 
-         appears as the token immediately following a unary minus operator token (<hyperlink
-        >14.6.2</hyperlink>
+         appears as the token immediately following a unary minus operator token (<hyperlink>14.6.2</hyperlink>
 
         
 
-        ), the result is a constant of type <keyword
-        >int</keyword>
+        ), the result is a constant of type <keyword>int</keyword>
 
         
 
-         with the value <unicode
-        >8722</unicode>
+         with the value <unicode>8722</unicode>
 
         
 
-        2147483648 (<unicode
-        >8722</unicode>
+        2147483648 (<unicode>8722</unicode>
 
         
 
-        2<super
-        >31</super>
+        2<super>31</super>
 
         
 
         ). In all other situations, such a <non_terminal
-         where="9.4.4.2">decimal-integer-literal</non_terminal>
+          where="9.4.4.2"
+          >decimal-integer-literal</non_terminal
+        >
 
         
 
-         is of type <keyword
-        >uint</keyword>
+         is of type <keyword>uint</keyword>
 
         
 
         . </list_item
       >
       <list_item
-        > When a <non_terminal
-         where="9.4.4.2">decimal-integer-literal</non_terminal>
+        > When a <non_terminal where="9.4.4.2"
+          >decimal-integer-literal</non_terminal
+        >
 
         
 
-         with the value 9223372036854775808 (2<super
-        >63</super>
+         with the value 9223372036854775808 (2<super>63</super>
 
         
 
         ) and no <non_terminal
-         where="9.4.4.2">integer-type-suffix</non_terminal>
+          where="9.4.4.2"
+          >integer-type-suffix</non_terminal
+        >
 
         
 
-         or the <non_terminal
-         where="9.4.4.2">integer-type-suffix</non_terminal>
+         or the <non_terminal where="9.4.4.2"
+          >integer-type-suffix</non_terminal
+        >
 
         
 
-         L or l appears as the token immediately following a unary minus operator token (<hyperlink
-        >14.6.2</hyperlink>
+         L or l appears as the token immediately following a unary minus operator token (<hyperlink>14.6.2</hyperlink>
 
         
 
-        ), the result is a constant of type <keyword
-        >long</keyword>
+        ), the result is a constant of type <keyword>long</keyword>
 
         
 
-         with the value <unicode
-        >8722</unicode>
+         with the value <unicode>8722</unicode>
 
         
 
-        9223372036854775808 (<unicode
-        >8722</unicode>
+        9223372036854775808 (<unicode>8722</unicode>
 
         
 
-        2<super
-        >63</super>
+        2<super>63</super>
 
         
 
         ). In all other situations, such a <non_terminal
-         where="9.4.4.2">decimal-integer-literal</non_terminal>
+          where="9.4.4.2"
+          >decimal-integer-literal</non_terminal
+        >
 
         
 
-         is of type <keyword
-        >ulong</keyword>
+         is of type <keyword>ulong</keyword>
 
         
 

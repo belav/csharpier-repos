@@ -11,13 +11,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >All task classes must implement this interface to be recognized by the build engine. Instead of implenting this interface directly, you can also derive your class from the helper class, <see
-         cref="T:Microsoft.Build.Utilities.Task" />
+        >All task classes must implement this interface to be recognized by the build engine. Instead of implenting this interface directly, you can also derive your class from the helper class, <see cref="T:Microsoft.Build.Utilities.Task" />
 
         
 
-        , which provides default implementations of some <see
-         cref="T:Microsoft.Build.Framework.ITask" />
+        , which provides default implementations of some <see cref="T:Microsoft.Build.Framework.ITask" />
 
         
 

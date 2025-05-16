@@ -30,23 +30,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An <see
-         cref="T:System.Net.Sockets.AddressFamily" />
+        >An <see cref="T:System.Net.Sockets.AddressFamily" />
 
         
 
-         member specifies the addressing scheme that a <see
-         cref="T:System.Net.Sockets.Socket" />
+         member specifies the addressing scheme that a <see cref="T:System.Net.Sockets.Socket" />
 
         
 
-         will use to resolve an address. For example, <see
-         cref="F:System.Net.Sockets.AddressFamily.InterNetwork" />
+         will use to resolve an address. For example, <see cref="F:System.Net.Sockets.AddressFamily.InterNetwork" />
 
         
 
-         indicates that an IP version 4 address is expected when a <see
-         cref="T:System.Net.Sockets.Socket" />
+         indicates that an IP version 4 address is expected when a <see cref="T:System.Net.Sockets.Socket" />
 
         
 
@@ -56,8 +52,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the addressing scheme that an instance of the <see
-         cref="T:System.Net.Sockets.Socket" />
+        >Specifies the addressing scheme that an instance of the <see cref="T:System.Net.Sockets.Socket" />
 
         
 

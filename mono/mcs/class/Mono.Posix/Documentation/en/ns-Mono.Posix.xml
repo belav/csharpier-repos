@@ -2,8 +2,7 @@
   <Docs>
     <summary
       >The deprecated Mono.Posix namespace, use 
-      <see
-       cref="N:Mono.Unix" />
+      <see cref="N:Mono.Unix" />
 
       
 
@@ -11,8 +10,7 @@
     </summary
     >
     <remarks
-      >This namespace provides functionality to access Posix/Unix features.  It has been deprecated in favor of the new <see
-       cref="N:Mono.Unix" />
+      >This namespace provides functionality to access Posix/Unix features.  It has been deprecated in favor of the new <see cref="N:Mono.Unix" />
 
       
 

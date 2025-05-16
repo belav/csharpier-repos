@@ -23,26 +23,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A member of the <see
-         cref="T:System.DateTimeKind" />
+        >A member of the <see cref="T:System.DateTimeKind" />
 
         
 
-         enumeration is returned by the <see
-         cref="P:System.DateTime.Kind" />
+         enumeration is returned by the <see cref="P:System.DateTime.Kind" />
 
         
 
          property.</para
       >
       <para
-        >The members of the <see
-         cref="T:System.DateTimeKind" />
+        >The members of the <see cref="T:System.DateTimeKind" />
 
         
 
-         enumeration are used in conversion operations between local time and Coordinated Universal Time (UTC), but not in comparison or arithmetic operations. For more information about time conversions, see <format
-         type="text/html">
+         enumeration are used in conversion operations between local time and Coordinated Universal Time (UTC), but not in comparison or arithmetic operations. For more information about time conversions, see <format type="text/html">
           <a href="a51e1a3b-c983-4320-b31a-1f9fa3cf824a">Converting Times Between Time Zones</a>
         </format>
 
@@ -54,8 +50,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies whether a <see
-         cref="T:System.DateTime" />
+        >Specifies whether a <see cref="T:System.DateTime" />
 
         
 

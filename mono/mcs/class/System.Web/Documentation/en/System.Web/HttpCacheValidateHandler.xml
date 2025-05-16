@@ -23,8 +23,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >If a cached item is invalidated within the scope of the <see
-         cref="T:System.Web.HttpCacheValidateHandler" />
+        >If a cached item is invalidated within the scope of the <see cref="T:System.Web.HttpCacheValidateHandler" />
 
         
 

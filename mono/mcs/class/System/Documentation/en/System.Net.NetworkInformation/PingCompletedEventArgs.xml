@@ -22,23 +22,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Instances of this class are passed to a <see
-         cref="T:System.Net.NetworkInformation.PingCompletedEventHandler" />
+        >Instances of this class are passed to a <see cref="T:System.Net.NetworkInformation.PingCompletedEventHandler" />
 
         
 
-         method that is called when a <see
-         cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+         method that is called when a <see cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
 
         
 
-         call completes. The <see
-         cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+         call completes. The <see cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
 
         
 
-         methods send an Internet Control Message Protocol (ICMP) echo request asynchronously and wait for a corresponding ICMP echo reply message. The <see
-         cref="P:System.Net.NetworkInformation.PingCompletedEventArgs.Reply" />
+         methods send an Internet Control Message Protocol (ICMP) echo request asynchronously and wait for a corresponding ICMP echo reply message. The <see cref="P:System.Net.NetworkInformation.PingCompletedEventArgs.Reply" />
 
         
 
@@ -48,8 +44,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Net.NetworkInformation.Ping.PingCompleted" />
+        >Provides data for the <see cref="E:System.Net.NetworkInformation.Ping.PingCompleted" />
 
         
 
@@ -81,43 +76,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value of <see
-             cref="P:System.Net.NetworkInformation.PingReply.Status" />
+            >If the value of <see cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
             
 
-             is not <see
-             cref="F:System.Net.NetworkInformation.IPStatus.Success" />
+             is not <see cref="F:System.Net.NetworkInformation.IPStatus.Success" />
 
             
 
-            , you should not use the values that are returned by the <see
-             cref="P:System.Net.NetworkInformation.PingReply.RoundTripTime" />
+            , you should not use the values that are returned by the <see cref="P:System.Net.NetworkInformation.PingReply.RoundTripTime" />
 
             
 
-            , <see
-             cref="P:System.Net.NetworkInformation.PingReply.Options" />
+            , <see cref="P:System.Net.NetworkInformation.PingReply.Options" />
 
             
 
-            , and <see
-             cref="P:System.Net.NetworkInformation.PingReply.Buffer" />
+            , and <see cref="P:System.Net.NetworkInformation.PingReply.Buffer" />
 
             
 
-             properties. The <see
-             cref="P:System.Net.NetworkInformation.PingReply.RoundTripTime" />
+             properties. The <see cref="P:System.Net.NetworkInformation.PingReply.RoundTripTime" />
 
             
 
-             and <see
-             cref="P:System.Net.NetworkInformation.PingReply.Buffer" />
+             and <see cref="P:System.Net.NetworkInformation.PingReply.Buffer" />
 
             
 
-             properties will return zero, and the <see
-             cref="P:System.Net.NetworkInformation.PingReply.Options" />
+             properties will return zero, and the <see cref="P:System.Net.NetworkInformation.PingReply.Options" />
 
             
 

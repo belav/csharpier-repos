@@ -18,34 +18,29 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >By default, <see
-         cref="M:System.Windows.Forms.ContainerControl.ValidateChildren" />
+        >By default, <see cref="M:System.Windows.Forms.ContainerControl.ValidateChildren" />
 
         
 
-         will validate all enabled controls in a container, such as a form. Use this enumeration to restrict the types of controls whose <see
-         cref="E:System.Windows.Forms.Control.Validating" />
+         will validate all enabled controls in a container, such as a form. Use this enumeration to restrict the types of controls whose <see cref="E:System.Windows.Forms.Control.Validating" />
 
         
 
          event is raised. </para
       >
       <para
-        >You can combine these enumerated values together with a bitwise OR operation. Combining parameters with a bitwise OR operator will result in a logical AND operation. For example, calling ValidateChildren(ValidationConstraints.ImmediateChildren | ValidationConstraints.Enabled) will only raise the <see
-         cref="E:System.Windows.Forms.Control.Validating" />
+        >You can combine these enumerated values together with a bitwise OR operation. Combining parameters with a bitwise OR operator will result in a logical AND operation. For example, calling ValidateChildren(ValidationConstraints.ImmediateChildren | ValidationConstraints.Enabled) will only raise the <see cref="E:System.Windows.Forms.Control.Validating" />
 
         
 
          event on controls that are both immediate children of the container AND are enabled. </para
       >
       <para
-        >If you do not specify <see
-         cref="F:System.Windows.Forms.ValidationConstraints.ImmediateChildren" />
+        >If you do not specify <see cref="F:System.Windows.Forms.ValidationConstraints.ImmediateChildren" />
 
         
 
-         when you call <see
-         cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" />
+         when you call <see cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" />
 
         
 
@@ -55,8 +50,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines constants that inform <see
-         cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" />
+        >Defines constants that inform <see cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" />
 
         
 
@@ -76,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates child controls whose <see
-             cref="P:System.Windows.Forms.Control.Enabled" />
+            >Validates child controls whose <see cref="P:System.Windows.Forms.Control.Enabled" />
 
             
 
@@ -100,48 +93,39 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates child controls that are directly hosted within the container. Does not validate any of the children of these children. For example, if you have a <see
-             cref="T:System.Windows.Forms.Form" />
+            >Validates child controls that are directly hosted within the container. Does not validate any of the children of these children. For example, if you have a <see cref="T:System.Windows.Forms.Form" />
 
             
 
-             that contains a custom <see
-             cref="T:System.Windows.Forms.UserControl" />
+             that contains a custom <see cref="T:System.Windows.Forms.UserControl" />
 
             
 
-            , and the <see
-             cref="T:System.Windows.Forms.UserControl" />
+            , and the <see cref="T:System.Windows.Forms.UserControl" />
 
             
 
-             contains a <see
-             cref="T:System.Windows.Forms.Button" />
+             contains a <see cref="T:System.Windows.Forms.Button" />
 
             
 
-            , using <see
-             cref="F:System.Windows.Forms.ValidationConstraints.ImmediateChildren" />
+            , using <see cref="F:System.Windows.Forms.ValidationConstraints.ImmediateChildren" />
 
             
 
-             will cause the <see
-             cref="E:System.Windows.Forms.Control.Validating" />
+             will cause the <see cref="E:System.Windows.Forms.Control.Validating" />
 
             
 
-             event of the <see
-             cref="T:System.Windows.Forms.UserControl" />
+             event of the <see cref="T:System.Windows.Forms.UserControl" />
 
             
 
-             to occur, but not the <see
-             cref="E:System.Windows.Forms.Control.Validating" />
+             to occur, but not the <see cref="E:System.Windows.Forms.Control.Validating" />
 
             
 
-             event of the <see
-             cref="T:System.Windows.Forms.Button" />
+             event of the <see cref="T:System.Windows.Forms.Button" />
 
             
 
@@ -198,8 +182,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates child controls that have a <see
-             cref="P:System.Windows.Forms.Control.TabStop" />
+            >Validates child controls that have a <see cref="P:System.Windows.Forms.Control.TabStop" />
 
             
 
@@ -222,8 +205,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates child controls whose <see
-             cref="P:System.Windows.Forms.Control.Visible" />
+            >Validates child controls whose <see cref="P:System.Windows.Forms.Control.Visible" />
 
             
 

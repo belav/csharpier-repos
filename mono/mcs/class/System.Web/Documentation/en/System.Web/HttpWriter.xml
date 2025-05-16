@@ -20,18 +20,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="M:System.Web.HttpResponse.Write(System.String)" />
+        >The <see cref="M:System.Web.HttpResponse.Write(System.String)" />
 
         
 
-         methods of the intrinsic <see
-         cref="T:System.Web.HttpResponse" />
+         methods of the intrinsic <see cref="T:System.Web.HttpResponse" />
 
         
 
-         object make internal calls to an <see
-         cref="T:System.Web.HttpWriter" />
+         object make internal calls to an <see cref="T:System.Web.HttpWriter" />
 
         
 
@@ -41,13 +38,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a <see
-         cref="T:System.IO.TextWriter" />
+        >Provides a <see cref="T:System.IO.TextWriter" />
 
         
 
-         object that is accessed through the intrinsic <see
-         cref="T:System.Web.HttpResponse" />
+         object that is accessed through the intrinsic <see cref="T:System.Web.HttpResponse" />
 
         
 
@@ -86,21 +81,16 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Text.Encoding" />
-        </value>
+        <value>a <see cref="T:System.Text.Encoding" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Text.Encoding" />
+            >Gets an <see cref="T:System.Text.Encoding" />
 
             
 
-             object for the <see
-             cref="T:System.IO.TextWriter" />
+             object for the <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -140,21 +130,16 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.IO.Stream" />
-        </value>
+        <value>a <see cref="T:System.IO.Stream" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.IO.Stream" />
+            >Gets a <see cref="T:System.IO.Stream" />
 
             
 
-             object to enable HTTP output directly from the <see
-             cref="T:System.IO.Stream" />
+             object to enable HTTP output directly from the <see cref="T:System.IO.Stream" />
 
             
 
@@ -183,7 +168,11 @@
           <para>Sends a single character to the HTTP output stream.</para>
         </summary>
         <param name="ch">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -209,8 +198,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sends an <see
-             cref="T:System.Object" />
+            >Sends an <see cref="T:System.Object" />
 
             
 
@@ -218,12 +206,15 @@
           >
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -251,7 +242,11 @@
           <para>Sends a string to the HTTP output stream.</para>
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -284,26 +279,37 @@
           <para>Sends a stream of characters with the specified starting position and number of characters to the HTTP output stream.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The memory buffer containing the characters to send to the HTTP output stream </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer position of the first character to send. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of characters to send beginning at the position specified by <paramref
-           name="index" />
+          The number of characters to send beginning at the position specified by <paramref name="index" />
 
           
 
@@ -336,26 +342,37 @@
           <para>Sends a stream of bytes with the specified starting position and number of bytes to the HTTP output stream.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The memory buffer containing the bytes to send to the HTTP output stream. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer position of the first byte to send. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of bytes to send, beginning at the byte position specified by <paramref
-           name="index" />
+          The number of bytes to send, beginning at the byte position specified by <paramref name="index" />
 
           
 
@@ -407,26 +424,37 @@
           <para>Sends a string with the specified starting position and number of characters to the HTTP output stream.</para>
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string to send to the HTTP output stream. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character position of the first byte to send. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of characters to send, beginning at the character position specified by <paramref
-           name="index" />
+          The number of characters to send, beginning at the character position specified by <paramref name="index" />
 
           
 

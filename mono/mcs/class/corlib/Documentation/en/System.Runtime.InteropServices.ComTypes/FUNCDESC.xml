@@ -20,8 +20,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>For additional information about FUNCDESC, see the MSDN Library.</para>
       <para
-        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format
-         type="text/html">
+        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html">
           <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
         </format>
 
@@ -241,8 +240,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates the size of <see
-             cref="F:System.Runtime.InteropServices.FUNCDESC.cParams" />
+            >Indicates the size of <see cref="F:System.Runtime.InteropServices.FUNCDESC.cParams" />
 
             
 
@@ -317,8 +315,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the offset in the VTBL for <see
-             cref="F:System.Runtime.InteropServices.FUNCKIND.FUNC_VIRTUAL" />
+            >Specifies the offset in the VTBL for <see cref="F:System.Runtime.InteropServices.FUNCKIND.FUNC_VIRTUAL" />
 
             
 
@@ -347,8 +344,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates the <see
-             cref="T:System.Runtime.InteropServices.FUNCFLAGS" />
+            >Indicates the <see cref="T:System.Runtime.InteropServices.FUNCFLAGS" />
 
             
 

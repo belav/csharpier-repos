@@ -14,49 +14,41 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.SendMailErrorEventArgs" />
+        >The <see cref="T:System.Web.UI.WebControls.SendMailErrorEventArgs" />
 
         
 
-         object contains an error message that is raised by the SMTP mail provider when an e-mail message cannot be sent by the <see
-         cref="T:System.Web.UI.WebControls.ChangePassword" />
+         object contains an error message that is raised by the SMTP mail provider when an e-mail message cannot be sent by the <see cref="T:System.Web.UI.WebControls.ChangePassword" />
 
         
 
-         control, or the <see
-         cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+         control, or the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" />
 
         
 
-         control. In such a case, the <see
-         cref="T:System.Web.UI.WebControls.SendMailErrorEventArgs" />
+         control. In such a case, the <see cref="T:System.Web.UI.WebControls.SendMailErrorEventArgs" />
 
         
 
-         object is sent to the <see
-         cref="T:System.Web.UI.WebControls.SendMailErrorEventHandler" />
+         object is sent to the <see cref="T:System.Web.UI.WebControls.SendMailErrorEventHandler" />
 
         
 
         .</para
       >
       <para
-        >Create a <see
-         cref="T:System.Web.UI.WebControls.SendMailErrorEventHandler" />
+        >Create a <see cref="T:System.Web.UI.WebControls.SendMailErrorEventHandler" />
 
         
 
          delegate to handle the event. Handling the event allows your Web application to continue to run even though an exception has occurred. This is useful when it is not critical to send an e-mail message. For example, if the exception occurs when a user is working through a multi-step wizard, it can be advantageous to log the error, display an informative message to the user, and allow the user to complete the wizard. </para
       >
       <para
-        >Examine the <see
-         cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Exception" />
+        >Examine the <see cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Exception" />
 
         
 
-         property to determine the actual cause of the exception. The most common reason for the exception is a configuration error in the <format
-         type="text/html">
+         property to determine the actual cause of the exception. The most common reason for the exception is a configuration error in the <format type="text/html">
           <a href="220b0329-e384-4e0c-86b4-0945ad17efd9">smtp Element (Network Settings)</a>
         </format>
 
@@ -65,52 +57,44 @@
          of the machine configuration file. Although an error like this is typically discovered during the development and debugging of an application, mail servers can fail unexpectedly in a production environment, and you must determine whether you want the entire application to fail in that situation. If not, handling the event allows your application to proceed.</para
       >
       <para
-        >You must set the <see
-         cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Handled" />
+        >You must set the <see cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Handled" />
 
         
 
          property to true to signal that the exception has been handled; otherwise, the exception is rethrown, and will include the original call stack and error message.</para
       >
       <para
-        >If you do not create an event handler for the <see
-         cref="E:System.Web.UI.WebControls.ChangePassword.SendMailError" />
+        >If you do not create an event handler for the <see cref="E:System.Web.UI.WebControls.ChangePassword.SendMailError" />
 
         
 
-         event, or if you create an event handler but leave the <see
-         cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Handled" />
+         event, or if you create an event handler but leave the <see cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Handled" />
 
         
 
          property set to false, your Web application will stop running if an error occurs when sending an e-mail message, and ASP.NET will display an error message.</para
       >
       <para
-        >The <see
-         cref="M:System.Web.UI.WebControls.ChangePassword.OnSendMailError(System.Web.UI.WebControls.SendMailErrorEventArgs)" />
+        >The <see cref="M:System.Web.UI.WebControls.ChangePassword.OnSendMailError(System.Web.UI.WebControls.SendMailErrorEventArgs)" />
 
         
 
-         method also allows derived classes to handle the event, instead of this being done by the <see
-         cref="T:System.Web.UI.WebControls.SendMailErrorEventHandler" />
+         method also allows derived classes to handle the event, instead of this being done by the <see cref="T:System.Web.UI.WebControls.SendMailErrorEventHandler" />
 
         
 
-        . This is the preferred technique for handling the event in a class that is derived from <see
-         cref="T:System.Web.UI.WebControls.ChangePassword" />
+        . This is the preferred technique for handling the event in a class that is derived from <see cref="T:System.Web.UI.WebControls.ChangePassword" />
 
         
 
-         or <see
-         cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+         or <see cref="T:System.Web.UI.WebControls.CreateUserWizard" />
 
         
 
         .</para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="765bfc89-33ee-4d0d-bbe6-3b172c06def9"
             >Server Event Handling in ASP.NET Web Pages</a
           >
@@ -124,18 +108,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the SendMailError event of controls such as the <see
-         cref="T:System.Web.UI.WebControls.ChangePassword" />
+        >Provides data for the SendMailError event of controls such as the <see cref="T:System.Web.UI.WebControls.ChangePassword" />
 
         
 
-         control, the <see
-         cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+         control, the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" />
 
         
 
-         control, and the <see
-         cref="T:System.Web.UI.WebControls.PasswordRecovery" />
+         control, and the <see cref="T:System.Web.UI.WebControls.PasswordRecovery" />
 
         
 
@@ -156,8 +137,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.SendMailErrorEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.SendMailErrorEventArgs" />
 
             
 
@@ -165,12 +145,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Exception" />
+          An <see cref="T:System.Exception" />
 
           
 
@@ -193,23 +176,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Exception" />
+            >The <see cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Exception" />
 
             
 
-             property contains the exception that is thrown by the SMTP mail provider when an e-mail message cannot be sent by the <see
-             cref="T:System.Web.UI.WebControls.ChangePassword" />
+             property contains the exception that is thrown by the SMTP mail provider when an e-mail message cannot be sent by the <see cref="T:System.Web.UI.WebControls.ChangePassword" />
 
             
 
-             control or the <see
-             cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+             control or the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" />
 
             
 
-            . The most common reason for this exception is a configuration error in the <format
-             type="text/html">
+            . The most common reason for this exception is a configuration error in the <format type="text/html">
               <a href="220b0329-e384-4e0c-86b4-0945ad17efd9">smtp Element (Network Settings)</a>
             </format>
 
@@ -218,26 +197,22 @@
              of the machine configuration file, which produces the following exception message: The transport failed to connect to the server.</para
           >
           <para
-            >Exceptions are not thrown if there is an error in the e-mail message when embedding a file using <see
-             cref="P:System.Web.UI.WebControls.MailDefinition.EmbeddedObjects" />
+            >Exceptions are not thrown if there is an error in the e-mail message when embedding a file using <see cref="P:System.Web.UI.WebControls.MailDefinition.EmbeddedObjects" />
 
             
 
             . Instead, the embedded file appears broken when the mail message is viewed.</para
           >
           <para
-            >You must set the <see
-             cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Handled" />
+            >You must set the <see cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Handled" />
 
             
 
-             object, passed as the <paramref
-             name="e" />
+             object, passed as the <paramref name="e" />
 
             
 
-             parameter of <see
-             cref="T:System.Web.UI.WebControls.SendMailErrorEventArgs" />
+             parameter of <see cref="T:System.Web.UI.WebControls.SendMailErrorEventArgs" />
 
             
 
@@ -265,28 +240,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Handled" />
+            >The <see cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Handled" />
 
             
 
-             property indicates if the <see
-             cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Exception" />
+             property indicates if the <see cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Exception" />
 
             
 
-             has been handled. The exception is raised by the SMTP mail provider when an e-mail message cannot be sent by the <see
-             cref="T:System.Web.UI.WebControls.ChangePassword" />
+             has been handled. The exception is raised by the SMTP mail provider when an e-mail message cannot be sent by the <see cref="T:System.Web.UI.WebControls.ChangePassword" />
 
             
 
-             control or the <see
-             cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+             control or the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" />
 
             
 
-            . The most common reason for the exception is a configuration error in the <format
-             type="text/html">
+            . The most common reason for the exception is a configuration error in the <format type="text/html">
               <a href="220b0329-e384-4e0c-86b4-0945ad17efd9">smtp Element (Network Settings)</a>
             </format>
 
@@ -295,13 +265,11 @@
              of the machine configuration file. Although an error like this is typically discovered during the development and debugging of an application, mail servers can fail unexpectedly in a production environment, and you must determine whether you want the entire application to fail in that situation. If not, handling the event allows your application to proceed.</para
           >
           <para
-            >If you do not create an event handler for the <see
-             cref="E:System.Web.UI.WebControls.ChangePassword.SendMailError" />
+            >If you do not create an event handler for the <see cref="E:System.Web.UI.WebControls.ChangePassword.SendMailError" />
 
             
 
-             event, or if you create an event handler but leave the <see
-             cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Handled" />
+             event, or if you create an event handler but leave the <see cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Handled" />
 
             
 
@@ -311,8 +279,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates if the SMTP exception that is contained in the <see
-             cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Exception" />
+            >Indicates if the SMTP exception that is contained in the <see cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Exception" />
 
             
 

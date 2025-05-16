@@ -31,16 +31,14 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The hash is used as a unique value of fixed size representing a large amount of data. Hashes of two sets of data should match if and only if the corresponding data also matches. Small changes to the data result in large unpredictable changes in the hash.</para>
       <para
-        >This is a purely managed implementation of <see
-         cref="T:System.Security.Cryptography.SHA1" />
+        >This is a purely managed implementation of <see cref="T:System.Security.Cryptography.SHA1" />
 
         
 
          that does not wrap CAPI.</para
       >
       <para
-        >The hash size for the <see
-         cref="T:System.Security.Cryptography.SHA1Managed" />
+        >The hash size for the <see cref="T:System.Security.Cryptography.SHA1Managed" />
 
         
 
@@ -50,8 +48,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Computes the <see
-         cref="T:System.Security.Cryptography.SHA1" />
+        >Computes the <see cref="T:System.Security.Cryptography.SHA1" />
 
         
 
@@ -79,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.SHA1Managed" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.SHA1Managed" />
 
             
 
@@ -117,8 +113,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Routes data written to the object into the <see
-             cref="T:System.Security.Cryptography.SHA1Managed" />
+            >Routes data written to the object into the <see cref="T:System.Security.Cryptography.SHA1Managed" />
 
             
 
@@ -126,21 +121,33 @@
           >
         </summary>
         <param name="rgb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The input data. </param
         >
         <param name="ibStart">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The offset into the byte array from which to begin using data. </param
         >
         <param name="cbSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -169,8 +176,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the computed <see
-             cref="T:System.Security.Cryptography.SHA1" />
+            >Returns the computed <see cref="T:System.Security.Cryptography.SHA1" />
 
             
 
@@ -204,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of <see
-             cref="T:System.Security.Cryptography.SHA1Managed" />
+            >Initializes an instance of <see cref="T:System.Security.Cryptography.SHA1Managed" />
 
             
 

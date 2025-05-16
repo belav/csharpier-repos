@@ -29,19 +29,16 @@
     <remarks>
       <block subset="none" type="note">
         <para
-          >This enumeration is used by instances of the <see
-           cref="T:System.Xml.XmlParserContext" />
+          >This enumeration is used by instances of the <see cref="T:System.Xml.XmlParserContext" />
 
           
 
           ,
-   <see
-           cref="T:System.Xml.XmlTextReader" />
+   <see cref="T:System.Xml.XmlTextReader" />
 
           
 
-          , and <see
-           cref="T:System.Xml.XmlTextWriter" />
+          , and <see cref="T:System.Xml.XmlTextWriter" />
 
           
 

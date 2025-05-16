@@ -74,16 +74,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After this event is raised and handled, it is not raised again for the lifetime of the application domain. The list of files that defines the namespace cannot be changed. This event is analogous to the <see
-             cref="E:System.AppDomain.ReflectionOnlyAssemblyResolve" />
+            >After this event is raised and handled, it is not raised again for the lifetime of the application domain. The list of files that defines the namespace cannot be changed. This event is analogous to the <see cref="E:System.AppDomain.ReflectionOnlyAssemblyResolve" />
 
             
 
              event for managed assemblies. </para
           >
           <para
-            >See the <see
-             cref="T:System.Runtime.InteropServices.WindowsRuntime.NamespaceResolveEventArgs" />
+            >See the <see cref="T:System.Runtime.InteropServices.WindowsRuntime.NamespaceResolveEventArgs" />
 
             
 
@@ -126,13 +124,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling this method overload is equivalent to calling the <see
-             cref="M:System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMetadata.ResolveNamespace(System.String,System.String,System.Collections.Generic.IEnumerable{System.String})" />
+            >Calling this method overload is equivalent to calling the <see cref="M:System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMetadata.ResolveNamespace(System.String,System.String,System.Collections.Generic.IEnumerable{System.String})" />
 
             
 
-             method overload and specifying null for the <paramref
-             name="windowsSdkFilePath" />
+             method overload and specifying null for the <paramref name="windowsSdkFilePath" />
 
             
 
@@ -146,8 +142,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerable list of strings that represent the Windows Metadata files that define <paramref
-             name="namespaceName" />
+            >An enumerable list of strings that represent the Windows Metadata files that define <paramref name="namespaceName" />
 
             
 
@@ -155,14 +150,22 @@
           >
         </returns>
         <param name="namespaceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace to resolve. </param
         >
         <param name="packageGraphFilePaths">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -198,8 +201,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The path you specify for <paramref
-             name="windowsSdkFilePath" />
+            >The path you specify for <paramref name="windowsSdkFilePath" />
 
             
 
@@ -213,8 +215,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerable list of strings that represent the Windows Metadata files that define <paramref
-             name="namespaceName" />
+            >An enumerable list of strings that represent the Windows Metadata files that define <paramref name="namespaceName" />
 
             
 
@@ -222,21 +223,33 @@
           >
         </returns>
         <param name="namespaceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace to resolve. </param
         >
         <param name="windowsSdkFilePath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The path to search for Windows Metadata files provided by the SDK, or null to search for Windows Metadata files from the operating system installation. </param
         >
         <param name="packageGraphFilePaths">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

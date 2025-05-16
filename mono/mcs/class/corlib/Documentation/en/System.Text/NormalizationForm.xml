@@ -40,7 +40,7 @@
       <para>Two sets of characters are considered to have canonical equivalence if their full canonical decompositions are identical. Likewise, two sets of characters are considered to have compatibility equivalence if their full compatibility decompositions are identical.</para>
       <para
         >For more information about normalization, decompositions and equivalence, see <see
-         cref="http://unicode.org/reports/tr15/"
+          cref="http://unicode.org/reports/tr15/"
           >Unicode Standard Annex #15: Unicode Normalization Forms</see
         >
 

@@ -26,31 +26,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="Overload:System.Linq.Expressions.Expression.ListInit" />
+        >Use the <see cref="Overload:System.Linq.Expressions.Expression.ListInit" />
 
         
 
-         factory methods to create a <see
-         cref="T:System.Linq.Expressions.ListInitExpression" />
+         factory methods to create a <see cref="T:System.Linq.Expressions.ListInitExpression" />
 
         
 
         .</para
       >
       <para
-        >The value of the <see
-         cref="P:System.Linq.Expressions.Expression.NodeType" />
+        >The value of the <see cref="P:System.Linq.Expressions.Expression.NodeType" />
 
         
 
-         property of a <see
-         cref="T:System.Linq.Expressions.ListInitExpression" />
+         property of a <see cref="T:System.Linq.Expressions.ListInitExpression" />
 
         
 
-         is <see
-         cref="F:System.Linq.Expressions.ExpressionType.ListInit" />
+         is <see cref="F:System.Linq.Expressions.ExpressionType.ListInit" />
 
         
 
@@ -182,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the node type of this <see
-             cref="T:System.Linq.Expressions.Expression" />
+            >Returns the node type of this <see cref="T:System.Linq.Expressions.Expression" />
 
             
 
@@ -241,8 +235,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the static type of the expression that this <see
-             cref="T:System.Linq.Expressions.Expression" />
+            >Gets the static type of the expression that this <see cref="T:System.Linq.Expressions.Expression" />
 
             
 
@@ -285,24 +278,30 @@
           <para>This expression if no children are changed or an expression with the updated children.</para>
         </returns>
         <param name="newExpression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Linq.Expressions.ListInitExpression.NewExpression" />
+          The <see cref="P:System.Linq.Expressions.ListInitExpression.NewExpression" />
 
           
 
            property of the result.</param
         >
         <param name="initializers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Linq.Expressions.ListInitExpression.Initializers" />
+          The <see cref="P:System.Linq.Expressions.ListInitExpression.Initializers" />
 
           
 

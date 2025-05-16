@@ -14,25 +14,21 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
+        >Use the <see cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
 
         
 
-         when using the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+         when using the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
-         if you need to do one of the following: substitute one type or object for another, or to dynamically generate schema variations. For a sample application, see <format
-         type="text/html">
+         if you need to do one of the following: substitute one type or object for another, or to dynamically generate schema variations. For a sample application, see <format type="text/html">
           <a href="b0188f3c-00a9-4cf0-a887-a2284c8fb014">DataContract Surrogate Sample</a>
         </format>
 
         
 
-        . For more information about data contracts, see <format
-         type="text/html">
+        . For more information about data contracts, see <format type="text/html">
           <a href="a3ae7b21-c15c-4c05-abd8-f483bcbf31af">Using Data Contracts</a>
         </format>
 
@@ -41,23 +37,19 @@
         .</para
       >
       <para
-        >At run time, you can find the specific <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+        >At run time, you can find the specific <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
-         for any operation in a service by using the <see
-         cref="T:System.ServiceModel.Description.OperationDescription" />
+         for any operation in a service by using the <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
         
 
-         to find the <see
-         cref="T:System.ServiceModel.Description.DataContractSerializerOperationBehavior" />
+         to find the <see cref="T:System.ServiceModel.Description.DataContractSerializerOperationBehavior" />
 
         
 
-         instance. For more information about implementing the interface to create a surrogate, see <format
-         type="text/html">
+         instance. For more information about implementing the interface to create a surrogate, see <format type="text/html">
           <a href="8c31134c-46c5-4ed7-94af-bab0ac0dfce5">Data Contract Surrogates</a>
         </format>
 
@@ -66,48 +58,39 @@
         .</para
       >
       <para
-        >You can also use the <see
-         cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
+        >You can also use the <see cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
 
         
 
-         to affect the import and export of XML schemas when you are using the <see
-         cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
+         to affect the import and export of XML schemas when you are using the <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
 
         
 
-         and <see
-         cref="T:System.Runtime.Serialization.XsdDataContractImporter" />
+         and <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" />
 
         
 
-         classes. You can do so by assigning the <see
-         cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
+         classes. You can do so by assigning the <see cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
 
         
 
-         to the <see
-         cref="P:System.Runtime.Serialization.ExportOptions.DataContractSurrogate" />
+         to the <see cref="P:System.Runtime.Serialization.ExportOptions.DataContractSurrogate" />
 
         
 
-         property of the <see
-         cref="T:System.Runtime.Serialization.ExportOptions" />
+         property of the <see cref="T:System.Runtime.Serialization.ExportOptions" />
 
         
 
-         class, or to the <see
-         cref="P:System.Runtime.Serialization.ImportOptions.DataContractSurrogate" />
+         class, or to the <see cref="P:System.Runtime.Serialization.ImportOptions.DataContractSurrogate" />
 
         
 
-         property of the <see
-         cref="T:System.Runtime.Serialization.ImportOptions" />
+         property of the <see cref="T:System.Runtime.Serialization.ImportOptions" />
 
         
 
-         class.  For more information, see <format
-         type="text/html">
+         class.  For more information, see <format type="text/html">
           <a href="0da32b50-ccd9-463a-844c-7fe803d3bf44">Schema Import and Export</a>
         </format>
 
@@ -119,8 +102,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the methods needed to substitute one type for another by the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+        >Provides the methods needed to substitute one type for another by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
@@ -160,24 +142,30 @@
           <para>An object that represents the annotation to be inserted into the XML schema definition. </para>
         </returns>
         <param name="memberInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Reflection.MemberInfo" />
+          A <see cref="T:System.Reflection.MemberInfo" />
 
           
 
            that describes the member. </param
         >
         <param name="dataContractType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -216,14 +204,22 @@
           <para>An object that represents the annotation to be inserted into the XML schema definition. </para>
         </returns>
         <param name="clrType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The CLR type to be replaced. </param
         >
         <param name="dataContractType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -256,23 +252,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
-             to substitute for the <paramref
-             name="type" />
+             to substitute for the <paramref name="type" />
 
             
 
-             value. This type must be serializable by the <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+             value. This type must be serializable by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
-            . For example, it must be marked with the <see
-             cref="T:System.Runtime.Serialization.DataContractAttribute" />
+            . For example, it must be marked with the <see cref="T:System.Runtime.Serialization.DataContractAttribute" />
 
             
 
@@ -280,12 +272,15 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The CLR type <see
-           cref="T:System.Type" />
+          The CLR type <see cref="T:System.Type" />
 
           
 
@@ -317,13 +312,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a simple implementation, use an if…then…else control structure to test whether the <paramref
-             name="obj" />
+            >In a simple implementation, use an if…then…else control structure to test whether the <paramref name="obj" />
 
             
 
-             value is of the surrogated type. If so, transform it as necessary and return the substituted object. The substituted object can be a new instance or the same <paramref
-             name="obj" />
+             value is of the surrogated type. If so, transform it as necessary and return the substituted object. The substituted object can be a new instance or the same <paramref name="obj" />
 
             
 
@@ -337,13 +330,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The substituted deserialized object. This object must be of a type that is serializable by the <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+            >The substituted deserialized object. This object must be of a type that is serializable by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
-            . For example, it must be marked with the <see
-             cref="T:System.Runtime.Serialization.DataContractAttribute" />
+            . For example, it must be marked with the <see cref="T:System.Runtime.Serialization.DataContractAttribute" />
 
             
 
@@ -351,19 +342,26 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The deserialized object to be substituted.</param
         >
         <param name="targetType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -397,8 +395,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is required during schema export or schema import only if annotations are inserted into the schema using the <see
-             cref="Overload:System.Runtime.Serialization.IDataContractSurrogate.GetCustomDataToExport" />
+            >This method is required during schema export or schema import only if annotations are inserted into the schema using the <see cref="Overload:System.Runtime.Serialization.IDataContractSurrogate.GetCustomDataToExport" />
 
             
 
@@ -410,17 +407,19 @@
           <para>Sets the collection of known types to use for serialization and deserialization of the custom data objects. </para>
         </summary>
         <param name="customDataTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.ObjectModel.Collection`1" />
+          A <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
           
 
-            of <see
-           cref="T:System.Type" />
+            of <see cref="T:System.Type" />
 
           
 
@@ -452,13 +451,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method must not return null because on deserialization the data will be cast to type <see
-             cref="T:System.Object" />
+            >This method must not return null because on deserialization the data will be cast to type <see cref="T:System.Object" />
 
             
 
-             and an <see
-             cref="T:System.InvalidCastException" />
+             and an <see cref="T:System.InvalidCastException" />
 
             
 
@@ -472,13 +469,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The substituted object that will be serialized. The object must be serializable by the <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+            >The substituted object that will be serialized. The object must be serializable by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
-            . For example, it must be marked with the <see
-             cref="T:System.Runtime.Serialization.DataContractAttribute" />
+            . For example, it must be marked with the <see cref="T:System.Runtime.Serialization.DataContractAttribute" />
 
             
 
@@ -486,19 +481,26 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to substitute. </param
         >
         <param name="targetType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -539,8 +541,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
@@ -548,21 +549,33 @@
           >
         </returns>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the type in schema.</param
         >
         <param name="typeNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace of the type in schema.</param
         >
         <param name="customData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -594,18 +607,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The input <see
-             cref="T:System.CodeDom.CodeTypeDeclaration" />
+            >The input <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
             
 
-             or other information in the <see
-             cref="T:System.CodeDom.CodeCompileUnit" />
+             or other information in the <see cref="T:System.CodeDom.CodeCompileUnit" />
 
             
 
-             can be modified by the user in this method. If null is returned, it will cause the type to not be generated. If a new <see
-             cref="T:System.CodeDom.CodeTypeDeclaration" />
+             can be modified by the user in this method. If null is returned, it will cause the type to not be generated. If a new <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
             
 
@@ -619,8 +629,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.CodeDom.CodeTypeDeclaration" />
+            >A <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
             
 
@@ -628,24 +637,30 @@
           >
         </returns>
         <param name="typeDeclaration">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeTypeDeclaration" />
+          A <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
           
 
            to process that represents the type declaration generated during schema import.</param
         >
         <param name="compileUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeCompileUnit" />
+          The <see cref="T:System.CodeDom.CodeCompileUnit" />
 
           
 

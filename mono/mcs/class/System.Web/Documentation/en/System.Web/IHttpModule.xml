@@ -13,14 +13,11 @@
     <remarks
       >Modules are used to implement extensions to the HTTP application execution pipeline (caching, authentication, state management, hooks, and more).  The default modules loaded are listed in the machine.config and they can be extended by providing a web.config file on the application directory.
 
-<para
-      >
+<para>
    This interface is the base interface required by every module author.   
 </para>
-      <para
-        >
-   Developers typically hook up to one or more events in the HttpApplication in their implementation of the <see
-         cref="M:System.Web.IHttpModule.Init(HttpContext)" />
+      <para>
+   Developers typically hook up to one or more events in the HttpApplication in their implementation of the <see cref="M:System.Web.IHttpModule.Init(HttpContext)" />
 
         
 
@@ -45,8 +42,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.IHttpModule.Dispose" />
+            >The <see cref="M:System.Web.IHttpModule.Dispose" />
 
             
 
@@ -56,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Disposes of the resources (other than memory) used by the module that implements <see
-             cref="T:System.Web.IHttpModule" />
+            >Disposes of the resources (other than memory) used by the module that implements <see cref="T:System.Web.IHttpModule" />
 
             
 
@@ -86,8 +81,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.IHttpModule.Init(System.Web.HttpApplication)" />
+            >Use the <see cref="M:System.Web.IHttpModule.Init(System.Web.HttpApplication)" />
 
             
 
@@ -99,12 +93,15 @@
           <para>Initializes a module and prepares it to handle requests.</para>
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.HttpApplication" />
+          An <see cref="T:System.Web.HttpApplication" />
 
           
 

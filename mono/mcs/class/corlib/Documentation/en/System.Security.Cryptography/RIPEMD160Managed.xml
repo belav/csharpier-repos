@@ -33,23 +33,19 @@
 
           
 
-           has been superseded by the Secure Hash Algorithms SHA-256 and SHA-512 and their derived classes. <see
-           cref="T:System.Security.Cryptography.SHA256Managed" />
+           has been superseded by the Secure Hash Algorithms SHA-256 and SHA-512 and their derived classes. <see cref="T:System.Security.Cryptography.SHA256Managed" />
 
           
 
-           and <see
-           cref="T:System.Security.Cryptography.SHA512Managed" />
+           and <see cref="T:System.Security.Cryptography.SHA512Managed" />
 
           
 
-           offer better security and performance than <see
-           cref="T:System.Security.Cryptography.RIPEMD160Managed" />
+           offer better security and performance than <see cref="T:System.Security.Cryptography.RIPEMD160Managed" />
 
           
 
-          . Use <see
-           cref="T:System.Security.Cryptography.RIPEMD160Managed" />
+          . Use <see cref="T:System.Security.Cryptography.RIPEMD160Managed" />
 
           
 
@@ -60,8 +56,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Computes the <see
-         cref="T:System.Security.Cryptography.RIPEMD160" />
+        >Computes the <see cref="T:System.Security.Cryptography.RIPEMD160" />
 
         
 
@@ -88,8 +83,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The hash is used as a unique value of fixed size representing a large amount of data. Hashes of two sets of data should match if and only if the corresponding data also matches. Small changes to the data result in large unpredictable changes in the hash.</para>
           <para
-            >The hash size for the <see
-             cref="T:System.Security.Cryptography.RIPEMD160" />
+            >The hash size for the <see cref="T:System.Security.Cryptography.RIPEMD160" />
 
             
 
@@ -99,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.RIPEMD160" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RIPEMD160" />
 
             
 
@@ -157,8 +150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, routes data written to the object into the <see
-             cref="T:System.Security.Cryptography.RIPEMD160" />
+            >When overridden in a derived class, routes data written to the object into the <see cref="T:System.Security.Cryptography.RIPEMD160" />
 
             
 
@@ -166,21 +158,33 @@
           >
         </summary>
         <param name="rgb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The input data. </param
         >
         <param name="ibStart">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The offset into the byte array from which to begin using data. </param
         >
         <param name="cbSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -243,8 +247,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Security.Cryptography.RIPEMD160Managed" />
+            >Initializes an instance of the <see cref="T:System.Security.Cryptography.RIPEMD160Managed" />
 
             
 

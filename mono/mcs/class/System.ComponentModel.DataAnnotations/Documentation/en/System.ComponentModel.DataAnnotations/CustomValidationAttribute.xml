@@ -28,39 +28,33 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.DataAnnotations.CustomValidationAttribute" />
+        >The <see cref="T:System.ComponentModel.DataAnnotations.CustomValidationAttribute" />
 
         
 
-         attribute is used to perform custom validation when the  <see
-         cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)" />
+         attribute is used to perform custom validation when the  <see cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)" />
 
         
 
-        method is invoked to perform validation. The <see
-         cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)" />
+        method is invoked to perform validation. The <see cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)" />
 
         
 
-         method then redirects the call to the method that is identified by the <see
-         cref="P:System.ComponentModel.DataAnnotations.CustomValidationAttribute.Method" />
+         method then redirects the call to the method that is identified by the <see cref="P:System.ComponentModel.DataAnnotations.CustomValidationAttribute.Method" />
 
         
 
          property, which in turn performs the actual validation.</para
       >
       <para
-        >The <see
-         cref="T:System.ComponentModel.DataAnnotations.CustomValidationAttribute" />
+        >The <see cref="T:System.ComponentModel.DataAnnotations.CustomValidationAttribute" />
 
         
 
          attribute can be applied to types, properties, fields, methods, and method parameters. When it is applied to a property, the attribute is invoked whenever a value is assigned to that property. When it is applied to a method, the attribute is invoked whenever the program calls that method. When it is applied to a method parameter, the attribute is invoked before the method is called.</para
       >
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -100,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.CustomValidationAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.CustomValidationAttribute" />
 
             
 
@@ -109,14 +102,22 @@
           >
         </summary>
         <param name="validatorType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type that contains the method that performs custom validation.</param
         >
         <param name="method">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -147,8 +148,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The error message is formatted at run time to include the <paramref
-             name="name" />
+            >The error message is formatted at run time to include the <paramref name="name" />
 
             
 
@@ -164,7 +164,11 @@
           <para>An instance of the formatted error message.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -220,41 +224,34 @@
           <para>The custom method specified by this property must be public and static, and it must return a Boolean value. It must also take at least one input parameter that specifies the object to validate. This parameter can be strongly typed. If a process passes a value of a different type, type conversion will be attempted.</para>
           <para>The specified method should return true if a given object is valid. Otherwise it should return false.</para>
           <para
-            >The custom method can also take parameters that specify a <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationContext" />
+            >The custom method can also take parameters that specify a <see cref="T:System.ComponentModel.DataAnnotations.ValidationContext" />
 
             
 
-             input value and a <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
+             input value and a <see cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
 
             
 
-             output value. The <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationContext" />
+             output value. The <see cref="T:System.ComponentModel.DataAnnotations.ValidationContext" />
 
             
 
-             parameter provides additional context information that the method can use to determine the context that it is used in. The <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
+             parameter provides additional context information that the method can use to determine the context that it is used in. The <see cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
 
             
 
              output parameter enables the method to return an error message.</para
           >
           <para
-            >If the method returns null for the <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
+            >If the method returns null for the <see cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
 
             
 
-             parameter or if it returns an empty value for the <see
-             cref="P:System.ComponentModel.DataAnnotations.ValidationResult.ErrorMessage" />
+             parameter or if it returns an empty value for the <see cref="P:System.ComponentModel.DataAnnotations.ValidationResult.ErrorMessage" />
 
             
 
-             property, the default <see
-             cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.FormatErrorMessage(System.String)" />
+             property, the default <see cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.FormatErrorMessage(System.String)" />
 
             
 
@@ -304,8 +301,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns the type that is passed to the ctor <see
-             cref="M:System.ComponentModel.DataAnnotations.CustomValidationAttribute.#ctor(System.Type,System.String)" />
+            >This property returns the type that is passed to the ctor <see cref="M:System.ComponentModel.DataAnnotations.CustomValidationAttribute.#ctor(System.Type,System.String)" />
 
             
 

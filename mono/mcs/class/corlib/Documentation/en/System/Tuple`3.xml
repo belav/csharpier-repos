@@ -41,41 +41,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A tuple is a data structure that has a specific number and sequence of values. The <see
-         cref="T:System.Tuple`3" />
+        >A tuple is a data structure that has a specific number and sequence of values. The <see cref="T:System.Tuple`3" />
 
         
 
          class represents a 3-tuple, or triple, which is a tuple that has three components.</para
       >
       <para
-        >You can instantiate a <see
-         cref="T:System.Tuple`3" />
+        >You can instantiate a <see cref="T:System.Tuple`3" />
 
         
 
-         object by calling either the <see
-         cref="M:System.Tuple`3.#ctor(`0,`1,`2)" />
+         object by calling either the <see cref="M:System.Tuple`3.#ctor(`0,`1,`2)" />
 
         
 
-         constructor or the static <see
-         cref="M:System.Tuple.Create``3(``0,``1,``2)" />
+         constructor or the static <see cref="M:System.Tuple.Create``3(``0,``1,``2)" />
 
         
 
-         method. You can retrieve the values of the tuple's components by using the read-only <see
-         cref="P:System.Tuple`3.Item1" />
+         method. You can retrieve the values of the tuple's components by using the read-only <see cref="P:System.Tuple`3.Item1" />
 
         
 
-        , <see
-         cref="P:System.Tuple`3.Item2" />
+        , <see cref="P:System.Tuple`3.Item2" />
 
         
 
-        , and <see
-         cref="P:System.Tuple`3.Item3" />
+        , and <see cref="P:System.Tuple`3.Item3" />
 
         
 
@@ -88,8 +81,7 @@
         </item>
         <item>
           <para
-            >To provide easy access to, and manipulation of, a data set. The following example defines an array of <see
-             cref="T:System.Tuple`3" />
+            >To provide easy access to, and manipulation of, a data set. The following example defines an array of <see cref="T:System.Tuple`3" />
 
             
 
@@ -99,8 +91,7 @@
         </item>
         <item>
           <para
-            >To return multiple values from a method without the use of out parameters (in C#) or ByRef parameters (in Visual Basic). For example, the previous example returns its summary test score statistics in a <see
-             cref="T:System.Tuple`3" />
+            >To return multiple values from a method without the use of out parameters (in C#) or ByRef parameters (in Visual Basic). For example, the previous example returns its summary test score statistics in a <see cref="T:System.Tuple`3" />
 
             
 
@@ -109,13 +100,11 @@
         </item>
         <item>
           <para
-            >To pass multiple values to a method through a single parameter. For example, the <see
-             cref="M:System.Threading.Thread.Start(System.Object)" />
+            >To pass multiple values to a method through a single parameter. For example, the <see cref="M:System.Threading.Thread.Start(System.Object)" />
 
             
 
-             method has a single parameter that lets you supply one value to the method that the thread executes at startup. If you supply a <see
-             cref="T:System.Tuple`3" />
+             method has a single parameter that lets you supply one value to the method that the thread executes at startup. If you supply a <see cref="T:System.Tuple`3" />
 
             
 
@@ -173,8 +162,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="obj" />
+            >The <paramref name="obj" />
 
             
 
@@ -183,8 +171,7 @@
           <list type="bullet">
             <item>
               <para
-                >It is a <see
-                 cref="T:System.Tuple`3" />
+                >It is a <see cref="T:System.Tuple`3" />
 
                 
 
@@ -202,8 +189,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the current <see
-             cref="T:System.Tuple`3" />
+            >Returns a value that indicates whether the current <see cref="T:System.Tuple`3" />
 
             
 
@@ -215,7 +201,11 @@
           <para>true if the current instance is equal to the specified object; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -242,8 +232,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the hash code for the current <see
-             cref="T:System.Tuple`3" />
+            >Returns the hash code for the current <see cref="T:System.Tuple`3" />
 
             
 
@@ -271,8 +260,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can dynamically determine the type of the <see
-             cref="P:System.Tuple`3.Item1" />
+            >You can dynamically determine the type of the <see cref="P:System.Tuple`3.Item1" />
 
             
 
@@ -281,8 +269,7 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see
-                 cref="P:System.Tuple`3.Item1" />
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`3.Item1" />
 
                 
 
@@ -291,18 +278,15 @@
             </item>
             <item>
               <para
-                >By retrieving the <see
-                 cref="T:System.Type" />
+                >By retrieving the <see cref="T:System.Type" />
 
                 
 
-                 object that represents the <see
-                 cref="T:System.Tuple`3" />
+                 object that represents the <see cref="T:System.Tuple`3" />
 
                 
 
-                 object, and retrieving the first element from the array that is returned by its <see
-                 cref="M:System.Type.GetGenericArguments" />
+                 object, and retrieving the first element from the array that is returned by its <see cref="M:System.Type.GetGenericArguments" />
 
                 
 
@@ -314,8 +298,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the current <see
-             cref="T:System.Tuple`3" />
+            >Gets the value of the current <see cref="T:System.Tuple`3" />
 
             
 
@@ -339,8 +322,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can dynamically determine the type of the <see
-             cref="P:System.Tuple`3.Item2" />
+            >You can dynamically determine the type of the <see cref="P:System.Tuple`3.Item2" />
 
             
 
@@ -349,8 +331,7 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see
-                 cref="P:System.Tuple`3.Item2" />
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`3.Item2" />
 
                 
 
@@ -359,18 +340,15 @@
             </item>
             <item>
               <para
-                >By retrieving the <see
-                 cref="T:System.Type" />
+                >By retrieving the <see cref="T:System.Type" />
 
                 
 
-                 object that represents the <see
-                 cref="T:System.Tuple`3" />
+                 object that represents the <see cref="T:System.Tuple`3" />
 
                 
 
-                 object, and retrieving the second element from the array that is returned by its <see
-                 cref="M:System.Type.GetGenericArguments" />
+                 object, and retrieving the second element from the array that is returned by its <see cref="M:System.Type.GetGenericArguments" />
 
                 
 
@@ -382,8 +360,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the current <see
-             cref="T:System.Tuple`3" />
+            >Gets the value of the current <see cref="T:System.Tuple`3" />
 
             
 
@@ -407,8 +384,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can dynamically determine the type of the <see
-             cref="P:System.Tuple`3.Item3" />
+            >You can dynamically determine the type of the <see cref="P:System.Tuple`3.Item3" />
 
             
 
@@ -417,8 +393,7 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value returned by the <see
-                 cref="P:System.Tuple`3.Item3" />
+                >By calling the GetType method on the value returned by the <see cref="P:System.Tuple`3.Item3" />
 
                 
 
@@ -427,18 +402,15 @@
             </item>
             <item>
               <para
-                >By retrieving the <see
-                 cref="T:System.Type" />
+                >By retrieving the <see cref="T:System.Type" />
 
                 
 
-                 object that represents the <see
-                 cref="T:System.Tuple`3" />
+                 object that represents the <see cref="T:System.Tuple`3" />
 
                 
 
-                 object, and retrieving the third element from the array that is returned by its <see
-                 cref="M:System.Type.GetGenericArguments" />
+                 object, and retrieving the third element from the array that is returned by its <see cref="M:System.Type.GetGenericArguments" />
 
                 
 
@@ -450,8 +422,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the current <see
-             cref="T:System.Tuple`3" />
+            >Gets the value of the current <see cref="T:System.Tuple`3" />
 
             
 
@@ -484,41 +455,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Tuple`3" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Tuple`3" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IStructuralComparable" />
+             instance is cast to an <see cref="T:System.Collections.IStructuralComparable" />
 
             
 
              interface.</para
           >
           <para
-            >Although this method can be called directly, it is most commonly called by collection sorting methods that include <see
-             cref="T:System.Collections.IComparer" />
+            >Although this method can be called directly, it is most commonly called by collection sorting methods that include <see cref="T:System.Collections.IComparer" />
 
             
 
-             parameters to order the members of a collection. For example, it is called by the <see
-             cref="M:System.Array.Sort(System.Array,System.Collections.IComparer)" />
+             parameters to order the members of a collection. For example, it is called by the <see cref="M:System.Array.Sort(System.Array,System.Collections.IComparer)" />
 
             
 
-             method and the <see
-             cref="M:System.Collections.SortedList.Add(System.Object,System.Object)" />
+             method and the <see cref="M:System.Collections.SortedList.Add(System.Object,System.Object)" />
 
             
 
-             method of a <see
-             cref="T:System.Collections.SortedList" />
+             method of a <see cref="T:System.Collections.SortedList" />
 
             
 
-             object that is instantiated by using the <see
-             cref="M:System.Collections.SortedList.#ctor(System.Collections.IComparer)" />
+             object that is instantiated by using the <see cref="M:System.Collections.SortedList.#ctor(System.Collections.IComparer)" />
 
             
 
@@ -526,13 +490,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Tuple`3.System#Collections#IStructuralComparable#CompareTo(System.Object,System.Collections.IComparer)" />
+              >The <see cref="M:System.Tuple`3.System#Collections#IStructuralComparable#CompareTo(System.Object,System.Collections.IComparer)" />
 
               
 
-               method is intended for use in sorting operations. It should not be used when the primary purpose of a comparison is to determine whether two objects are equal. To determine whether two objects are equal, call the <see
-               cref="M:System.Tuple`3.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" />
+               method is intended for use in sorting operations. It should not be used when the primary purpose of a comparison is to determine whether two objects are equal. To determine whether two objects are equal, call the <see cref="M:System.Tuple`3.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" />
 
               
 
@@ -543,8 +505,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares the current <see
-             cref="T:System.Tuple`3" />
+            >Compares the current <see cref="T:System.Tuple`3" />
 
             
 
@@ -554,8 +515,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A signed integer that indicates the relative position of this instance and <paramref
-             name="other" />
+            >A signed integer that indicates the relative position of this instance and <paramref name="other" />
 
             
 
@@ -578,8 +538,7 @@
               </term>
               <description>
                 <para
-                  >This instance precedes <paramref
-                   name="other" />
+                  >This instance precedes <paramref name="other" />
 
                   
 
@@ -593,8 +552,7 @@
               </term>
               <description>
                 <para
-                  >This instance and <paramref
-                   name="other" />
+                  >This instance and <paramref name="other" />
 
                   
 
@@ -608,8 +566,7 @@
               </term>
               <description>
                 <para
-                  >This instance follows <paramref
-                   name="other" />
+                  >This instance follows <paramref name="other" />
 
                   
 
@@ -620,14 +577,22 @@
           </list>
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object to compare with the current instance.</param
         >
         <param name="comparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -659,71 +624,58 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Tuple`3" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Tuple`3" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IStructuralEquatable" />
+             instance is cast to an <see cref="T:System.Collections.IStructuralEquatable" />
 
             
 
              interface.</para
           >
           <para
-            >The <see
-             cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" />
+            >The <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" />
 
             
 
-             implementation is called only if <paramref
-             name="other" />
+             implementation is called only if <paramref name="other" />
 
             
 
-             is not null, and if it can be successfully cast (in C#) or converted (in Visual Basic) to a <see
-             cref="T:System.Tuple`3" />
+             is not null, and if it can be successfully cast (in C#) or converted (in Visual Basic) to a <see cref="T:System.Tuple`3" />
 
             
 
-             object whose components are of the same types as the current instance. The <see
-             cref="M:System.Tuple`3.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" />
+             object whose components are of the same types as the current instance. The <see cref="M:System.Tuple`3.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" />
 
             
 
-             method first passes the <see
-             cref="P:System.Tuple`3.Item1" />
+             method first passes the <see cref="P:System.Tuple`3.Item1" />
 
             
 
-             values of the <see
-             cref="T:System.Tuple`3" />
+             values of the <see cref="T:System.Tuple`3" />
 
             
 
-             objects to be compared to the <see
-             cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" />
+             objects to be compared to the <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" />
 
             
 
-             implementation. If this method call returns true, the method is called again and passed the <see
-             cref="P:System.Tuple`3.Item2" />
+             implementation. If this method call returns true, the method is called again and passed the <see cref="P:System.Tuple`3.Item2" />
 
             
 
-             values of the two <see
-             cref="T:System.Tuple`3" />
+             values of the two <see cref="T:System.Tuple`3" />
 
             
 
-             objects. If this method call returns true again, the method is called a third time and passed the <see
-             cref="P:System.Tuple`3.Item3" />
+             objects. If this method call returns true again, the method is called a third time and passed the <see cref="P:System.Tuple`3.Item3" />
 
             
 
-             values of the two <see
-             cref="T:System.Tuple`3" />
+             values of the two <see cref="T:System.Tuple`3" />
 
             
 
@@ -733,8 +685,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the current <see
-             cref="T:System.Tuple`3" />
+            >Returns a value that indicates whether the current <see cref="T:System.Tuple`3" />
 
             
 
@@ -746,14 +697,22 @@
           <para>true if the current instance is equal to the specified object; otherwise, false.</para>
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to compare with this instance.</param
         >
         <param name="comparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -784,34 +743,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Tuple`3" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Tuple`3" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IStructuralEquatable" />
+             instance is cast to an <see cref="T:System.Collections.IStructuralEquatable" />
 
             
 
              interface.</para
           >
           <para
-            >The method simply wraps a call to the <paramref
-             name="comparer" />
+            >The method simply wraps a call to the <paramref name="comparer" />
 
             
 
-             object's <see
-             cref="M:System.Collections.IEqualityComparer.GetHashCode(System.Object)" />
+             object's <see cref="M:System.Collections.IEqualityComparer.GetHashCode(System.Object)" />
 
             
 
              implementation.</para
           >
           <para
-            >The algorithm used to compute the hash code should return the same hash code for two <see
-             cref="T:System.Tuple`3" />
+            >The algorithm used to compute the hash code should return the same hash code for two <see cref="T:System.Tuple`3" />
 
             
 
@@ -821,8 +775,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calculates the hash code for the current <see
-             cref="T:System.Tuple`3" />
+            >Calculates the hash code for the current <see cref="T:System.Tuple`3" />
 
             
 
@@ -834,17 +787,19 @@
           <para>A 32-bit signed integer hash code.</para>
         </returns>
         <param name="comparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object whose <see
-           cref="M:System.Collections.IEqualityComparer.GetHashCode(System.Object)" />
+          An object whose <see cref="M:System.Collections.IEqualityComparer.GetHashCode(System.Object)" />
 
           
 
-            method calculates the hash code of the current <see
-           cref="T:System.Tuple`3" />
+            method calculates the hash code of the current <see cref="T:System.Tuple`3" />
 
           
 
@@ -872,36 +827,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Tuple`3" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Tuple`3" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IComparable" />
+             instance is cast to an <see cref="T:System.IComparable" />
 
             
 
              interface.</para
           >
           <para
-            >This method provides the <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+            >This method provides the <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             implementation for the <see
-             cref="T:System.Tuple`3" />
+             implementation for the <see cref="T:System.Tuple`3" />
 
             
 
-             class. Although the method can be called directly, it is most commonly called by the default overloads of collection sorting methods, such as <see
-             cref="M:System.Array.Sort(System.Array)" />
+             class. Although the method can be called directly, it is most commonly called by the default overloads of collection sorting methods, such as <see cref="M:System.Array.Sort(System.Array)" />
 
             
 
-             and <see
-             cref="M:System.Collections.SortedList.Add(System.Object,System.Object)" />
+             and <see cref="M:System.Collections.SortedList.Add(System.Object,System.Object)" />
 
             
 
@@ -909,13 +858,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Tuple`3.System#IComparable#CompareTo(System.Object)" />
+              >The <see cref="M:System.Tuple`3.System#IComparable#CompareTo(System.Object)" />
 
               
 
-               method is intended for use in sorting operations. It should not be used when the primary purpose of a comparison is to determine whether two objects are equal. To determine whether two objects are equal, call the <see
-               cref="M:System.Tuple`3.Equals(System.Object)" />
+               method is intended for use in sorting operations. It should not be used when the primary purpose of a comparison is to determine whether two objects are equal. To determine whether two objects are equal, call the <see cref="M:System.Tuple`3.Equals(System.Object)" />
 
               
 
@@ -923,8 +870,7 @@
             >
           </block>
           <para
-            >The <see
-             cref="M:System.Tuple`3.System#IComparable#CompareTo(System.Object)" />
+            >The <see cref="M:System.Tuple`3.System#IComparable#CompareTo(System.Object)" />
 
             
 
@@ -934,8 +880,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares the current <see
-             cref="T:System.Tuple`3" />
+            >Compares the current <see cref="T:System.Tuple`3" />
 
             
 
@@ -945,8 +890,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A signed integer that indicates the relative position of this instance and <paramref
-             name="obj" />
+            >A signed integer that indicates the relative position of this instance and <paramref name="obj" />
 
             
 
@@ -969,8 +913,7 @@
               </term>
               <description>
                 <para
-                  >This instance precedes <paramref
-                   name="obj" />
+                  >This instance precedes <paramref name="obj" />
 
                   
 
@@ -984,8 +927,7 @@
               </term>
               <description>
                 <para
-                  >This instance and <paramref
-                   name="obj" />
+                  >This instance and <paramref name="obj" />
 
                   
 
@@ -999,8 +941,7 @@
               </term>
               <description>
                 <para
-                  >This instance follows <paramref
-                   name="obj" />
+                  >This instance follows <paramref name="obj" />
 
                   
 
@@ -1011,7 +952,11 @@
           </list>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1057,23 +1002,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string returned by this method takes the form (Item1, Item2, Item3), where Item1, Item2, and Item3 represent the values of the <see
-             cref="P:System.Tuple`3.Item1" />
+            >The string returned by this method takes the form (Item1, Item2, Item3), where Item1, Item2, and Item3 represent the values of the <see cref="P:System.Tuple`3.Item1" />
 
             
 
-            , <see
-             cref="P:System.Tuple`3.Item2" />
+            , <see cref="P:System.Tuple`3.Item2" />
 
             
 
-            , and <see
-             cref="P:System.Tuple`3.Item3" />
+            , and <see cref="P:System.Tuple`3.Item3" />
 
             
 
-             properties, respectively. If any of the property values is null, it is represented as <see
-             cref="F:System.String.Empty" />
+             properties, respectively. If any of the property values is null, it is represented as <see cref="F:System.String.Empty" />
 
             
 
@@ -1083,8 +1024,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the value of this <see
-             cref="T:System.Tuple`3" />
+            >Returns a string that represents the value of this <see cref="T:System.Tuple`3" />
 
             
 
@@ -1094,8 +1034,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string representation of this <see
-             cref="T:System.Tuple`3" />
+            >The string representation of this <see cref="T:System.Tuple`3" />
 
             
 

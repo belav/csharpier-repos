@@ -2,32 +2,35 @@
 <clause number="16.3" title="Using directives">
   <paragraph
     >Using-directives facilitate the use of namespaces and types defined in other namespaces. Using-directives impact the name resolution process of <non_terminal
-     where="10.8">namespace-or-type-name</non_terminal>
+      where="10.8"
+      >namespace-or-type-name</non_terminal
+    >
 
     
 
-    s (<hyperlink
-    >10.8</hyperlink>
+    s (<hyperlink>10.8</hyperlink>
 
     
 
     ) and <non_terminal
-     where="14.5.2">simple-name</non_terminal>
+      where="14.5.2"
+      >simple-name</non_terminal
+    >
 
     
 
-    s (<hyperlink
-    >14.5.2</hyperlink>
+    s (<hyperlink>14.5.2</hyperlink>
 
     
 
     ), but unlike declarations, <non_terminal
-     where="16.3">using-directive</non_terminal>
+      where="16.3"
+      >using-directive</non_terminal
+    >
 
     
 
-    s do not contribute new members to the underlying declaration spaces of the compilation units or namespaces within which they are used. <grammar_production
-    >
+    s do not contribute new members to the underlying declaration spaces of the compilation units or namespaces within which they are used. <grammar_production>
       <name>
         <non_terminal where="16.3">using-directive</non_terminal>
 
@@ -38,8 +41,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="16.3">using-directive</non_terminal>
       </rhs>
       <rhs>
@@ -54,8 +56,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="16.3.1">using-alias-directive</non_terminal>
       </rhs>
       <rhs>
@@ -64,54 +65,60 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >A <non_terminal
-     where="16.3.1">using-alias-directive</non_terminal>
+    >A <non_terminal where="16.3.1"
+      >using-alias-directive</non_terminal
+    >
 
     
 
-     (<hyperlink
-    >16.3.1</hyperlink>
+     (<hyperlink>16.3.1</hyperlink>
 
     
 
     ) introduces an alias for a namespace or type. </paragraph
   >
   <paragraph
-    >A <non_terminal
-     where="16.3.2">using-namespace-directive</non_terminal>
+    >A <non_terminal where="16.3.2"
+      >using-namespace-directive</non_terminal
+    >
 
     
 
-     (<hyperlink
-    >16.3.2</hyperlink>
+     (<hyperlink>16.3.2</hyperlink>
 
     
 
     ) imports the type members of a namespace. </paragraph
   >
   <paragraph
-    >The scope of a <non_terminal
-     where="16.3">using-directive</non_terminal>
+    >The scope of a <non_terminal where="16.3"
+      >using-directive</non_terminal
+    >
 
     
 
-     extends over the <non_terminal
-     where="16.4">namespace-member-declaration</non_terminal>
+     extends over the <non_terminal where="16.4"
+      >namespace-member-declaration</non_terminal
+    >
 
     
 
     s of its immediately containing compilation unit or namespace body. The scope of a <non_terminal
-     where="16.3">using-directive</non_terminal>
+      where="16.3"
+      >using-directive</non_terminal
+    >
 
     
 
-     specifically does not include its peer <non_terminal
-     where="16.3">using-directive</non_terminal>
+     specifically does not include its peer <non_terminal where="16.3"
+      >using-directive</non_terminal
+    >
 
     
 
-    s. Thus, peer <non_terminal
-     where="16.3">using-directive</non_terminal>
+    s. Thus, peer <non_terminal where="16.3"
+      >using-directive</non_terminal
+    >
 
     
 

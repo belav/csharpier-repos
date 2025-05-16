@@ -17,8 +17,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the version of the dnprdnshort to use with the methods in <see
-         cref="T:Microsoft.Build.Utilities.ToolLocationHelper" />
+        >Specifies the version of the dnprdnshort to use with the methods in <see cref="T:Microsoft.Build.Utilities.ToolLocationHelper" />
 
         
 

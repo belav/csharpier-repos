@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The trace message is printed during serialization, remoting, and when running <format
-         type="text/html">
+        >The trace message is printed during serialization, remoting, and when running <format type="text/html">
           <a href="40f6f8c8-b80c-4e9f-a920-31bcd0cf45c5">Soapsuds Tool (Soapsuds.exe)</a>
         </format>
 
@@ -60,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.Formatters.InternalRM" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Formatters.InternalRM" />
 
             
 
@@ -106,7 +104,11 @@
           <para>Prints SOAP trace messages.</para>
         </summary>
         <param name="messages">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

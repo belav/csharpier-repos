@@ -22,13 +22,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each property of the <see
-         cref="T:System.Drawing.TextureBrush" />
+        >Each property of the <see cref="T:System.Drawing.TextureBrush" />
 
         
 
-         class is a <see
-         cref="T:System.Drawing.Brush" />
+         class is a <see cref="T:System.Drawing.Brush" />
 
         
 
@@ -49,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.TextureBrush" />
+            >Initializes a new <see cref="T:System.Drawing.TextureBrush" />
 
             
 
@@ -58,17 +55,19 @@
           >
         </summary>
         <param name="bitmap">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
-           object with which this <see
-           cref="T:System.Drawing.TextureBrush" />
+           object with which this <see cref="T:System.Drawing.TextureBrush" />
 
           
 
@@ -96,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.TextureBrush" />
+            >Initializes a new <see cref="T:System.Drawing.TextureBrush" />
 
             
 
@@ -105,34 +103,38 @@
           >
         </summary>
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
-           object with which this <see
-           cref="T:System.Drawing.TextureBrush" />
+           object with which this <see cref="T:System.Drawing.TextureBrush" />
 
           
 
            object fills interiors. </param
         >
         <param name="wrapMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.WrapMode" />
+          A <see cref="T:System.Drawing.Drawing2D.WrapMode" />
 
           
 
-           enumeration that specifies how this <see
-           cref="T:System.Drawing.TextureBrush" />
+           enumeration that specifies how this <see cref="T:System.Drawing.TextureBrush" />
 
           
 
@@ -160,8 +162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.TextureBrush" />
+            >Initializes a new <see cref="T:System.Drawing.TextureBrush" />
 
             
 
@@ -169,34 +170,38 @@
           >
         </summary>
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
-           object with which this <see
-           cref="T:System.Drawing.TextureBrush" />
+           object with which this <see cref="T:System.Drawing.TextureBrush" />
 
           
 
            object fills interiors. </param
         >
         <param name="dstRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           structure that represents the bounding rectangle for this <see
-           cref="T:System.Drawing.TextureBrush" />
+           structure that represents the bounding rectangle for this <see cref="T:System.Drawing.TextureBrush" />
 
           
 
@@ -224,8 +229,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.TextureBrush" />
+            >Initializes a new <see cref="T:System.Drawing.TextureBrush" />
 
             
 
@@ -233,34 +237,38 @@
           >
         </summary>
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
-           object with which this <see
-           cref="T:System.Drawing.TextureBrush" />
+           object with which this <see cref="T:System.Drawing.TextureBrush" />
 
           
 
            object fills interiors. </param
         >
         <param name="dstRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           structure that represents the bounding rectangle for this <see
-           cref="T:System.Drawing.TextureBrush" />
+           structure that represents the bounding rectangle for this <see cref="T:System.Drawing.TextureBrush" />
 
           
 
@@ -289,8 +297,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.TextureBrush" />
+            >Initializes a new <see cref="T:System.Drawing.TextureBrush" />
 
             
 
@@ -298,51 +305,57 @@
           >
         </summary>
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
-           object with which this <see
-           cref="T:System.Drawing.TextureBrush" />
+           object with which this <see cref="T:System.Drawing.TextureBrush" />
 
           
 
            object fills interiors. </param
         >
         <param name="wrapMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.WrapMode" />
+          A <see cref="T:System.Drawing.Drawing2D.WrapMode" />
 
           
 
-           enumeration that specifies how this <see
-           cref="T:System.Drawing.TextureBrush" />
+           enumeration that specifies how this <see cref="T:System.Drawing.TextureBrush" />
 
           
 
            object is tiled. </param
         >
         <param name="dstRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           structure that represents the bounding rectangle for this <see
-           cref="T:System.Drawing.TextureBrush" />
+           structure that represents the bounding rectangle for this <see cref="T:System.Drawing.TextureBrush" />
 
           
 
@@ -371,8 +384,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.TextureBrush" />
+            >Initializes a new <see cref="T:System.Drawing.TextureBrush" />
 
             
 
@@ -380,51 +392,57 @@
           >
         </summary>
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
-           object with which this <see
-           cref="T:System.Drawing.TextureBrush" />
+           object with which this <see cref="T:System.Drawing.TextureBrush" />
 
           
 
            object fills interiors. </param
         >
         <param name="wrapMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.WrapMode" />
+          A <see cref="T:System.Drawing.Drawing2D.WrapMode" />
 
           
 
-           enumeration that specifies how this <see
-           cref="T:System.Drawing.TextureBrush" />
+           enumeration that specifies how this <see cref="T:System.Drawing.TextureBrush" />
 
           
 
            object is tiled. </param
         >
         <param name="dstRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           structure that represents the bounding rectangle for this <see
-           cref="T:System.Drawing.TextureBrush" />
+           structure that represents the bounding rectangle for this <see cref="T:System.Drawing.TextureBrush" />
 
           
 
@@ -453,8 +471,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.TextureBrush" />
+            >Initializes a new <see cref="T:System.Drawing.TextureBrush" />
 
             
 
@@ -462,51 +479,57 @@
           >
         </summary>
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
-           object with which this <see
-           cref="T:System.Drawing.TextureBrush" />
+           object with which this <see cref="T:System.Drawing.TextureBrush" />
 
           
 
            object fills interiors. </param
         >
         <param name="dstRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           structure that represents the bounding rectangle for this <see
-           cref="T:System.Drawing.TextureBrush" />
+           structure that represents the bounding rectangle for this <see cref="T:System.Drawing.TextureBrush" />
 
           
 
            object. </param
         >
         <param name="imageAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.ImageAttributes" />
+          An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
           
 
-           object that contains additional information about the image used by this <see
-           cref="T:System.Drawing.TextureBrush" />
+           object that contains additional information about the image used by this <see cref="T:System.Drawing.TextureBrush" />
 
           
 
@@ -535,8 +558,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.TextureBrush" />
+            >Initializes a new <see cref="T:System.Drawing.TextureBrush" />
 
             
 
@@ -544,51 +566,57 @@
           >
         </summary>
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
-           object with which this <see
-           cref="T:System.Drawing.TextureBrush" />
+           object with which this <see cref="T:System.Drawing.TextureBrush" />
 
           
 
            object fills interiors. </param
         >
         <param name="dstRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           structure that represents the bounding rectangle for this <see
-           cref="T:System.Drawing.TextureBrush" />
+           structure that represents the bounding rectangle for this <see cref="T:System.Drawing.TextureBrush" />
 
           
 
            object. </param
         >
         <param name="imageAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.ImageAttributes" />
+          An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
           
 
-           object that contains additional information about the image used by this <see
-           cref="T:System.Drawing.TextureBrush" />
+           object that contains additional information about the image used by this <see cref="T:System.Drawing.TextureBrush" />
 
           
 
@@ -612,8 +640,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an exact copy of this <see
-             cref="T:System.Drawing.TextureBrush" />
+            >Creates an exact copy of this <see cref="T:System.Drawing.TextureBrush" />
 
             
 
@@ -623,13 +650,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.TextureBrush" />
+            >The <see cref="T:System.Drawing.TextureBrush" />
 
             
 
-             object this method creates, cast as an <see
-             cref="T:System.Object" />
+             object this method creates, cast as an <see cref="T:System.Object" />
 
             
 
@@ -654,13 +679,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Drawing.Image" />
+            >Gets the <see cref="T:System.Drawing.Image" />
 
             
 
-             object associated with this <see
-             cref="T:System.Drawing.TextureBrush" />
+             object associated with this <see cref="T:System.Drawing.TextureBrush" />
 
             
 
@@ -689,8 +712,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The transformation matrix of a <see
-             cref="T:System.Drawing.TextureBrush" />
+            >The transformation matrix of a <see cref="T:System.Drawing.TextureBrush" />
 
             
 
@@ -700,23 +722,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Multiplies the <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Multiplies the <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
-             object that represents the local geometric transformation of this <see
-             cref="T:System.Drawing.TextureBrush" />
+             object that represents the local geometric transformation of this <see cref="T:System.Drawing.TextureBrush" />
 
             
 
-             object by the specified <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+             object by the specified <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
-             object by prepending the specified <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+             object by prepending the specified <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -728,12 +746,15 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
@@ -762,8 +783,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The transformation matrix of a <see
-             cref="T:System.Drawing.TextureBrush" />
+            >The transformation matrix of a <see cref="T:System.Drawing.TextureBrush" />
 
             
 
@@ -773,18 +793,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Multiplies the <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Multiplies the <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
-             object that represents the local geometric transformation of this <see
-             cref="T:System.Drawing.TextureBrush" />
+             object that represents the local geometric transformation of this <see cref="T:System.Drawing.TextureBrush" />
 
             
 
-             object by the specified <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+             object by the specified <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -796,24 +813,30 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
            object by which to multiply the geometric transformation. </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+          A <see cref="T:System.Drawing.Drawing2D.MatrixOrder" />
 
           
 
@@ -837,8 +860,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets the Transform property of this <see
-             cref="T:System.Drawing.TextureBrush" />
+            >Resets the Transform property of this <see cref="T:System.Drawing.TextureBrush" />
 
             
 
@@ -869,8 +891,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Rotates the local geometric transformation of this <see
-             cref="T:System.Drawing.TextureBrush" />
+            >Rotates the local geometric transformation of this <see cref="T:System.Drawing.TextureBrush" />
 
             
 
@@ -882,7 +903,11 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="angle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -912,8 +937,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Rotates the local geometric transformation of this <see
-             cref="T:System.Drawing.TextureBrush" />
+            >Rotates the local geometric transformation of this <see cref="T:System.Drawing.TextureBrush" />
 
             
 
@@ -925,19 +949,26 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="angle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The angle of rotation. </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+          A <see cref="T:System.Drawing.Drawing2D.MatrixOrder" />
 
           
 
@@ -964,8 +995,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Scales the local geometric transformation of this <see
-             cref="T:System.Drawing.TextureBrush" />
+            >Scales the local geometric transformation of this <see cref="T:System.Drawing.TextureBrush" />
 
             
 
@@ -977,14 +1007,22 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="sx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The amount by which to scale the transformation in the x direction. </param
         >
         <param name="sy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1015,8 +1053,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Scales the local geometric transformation of this <see
-             cref="T:System.Drawing.TextureBrush" />
+            >Scales the local geometric transformation of this <see cref="T:System.Drawing.TextureBrush" />
 
             
 
@@ -1028,26 +1065,37 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="sx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The amount by which to scale the transformation in the x direction. </param
         >
         <param name="sy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The amount by which to scale the transformation in the y direction. </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+          A <see cref="T:System.Drawing.Drawing2D.MatrixOrder" />
 
           
 
@@ -1074,8 +1122,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A geometric transformation can be used to translate, scale, rotate, or skew the image that defines the texture of this brush. Because the matrix returned and by the <see
-             cref="P:System.Drawing.TextureBrush.Transform" />
+            >A geometric transformation can be used to translate, scale, rotate, or skew the image that defines the texture of this brush. Because the matrix returned and by the <see cref="P:System.Drawing.TextureBrush.Transform" />
 
             
 
@@ -1085,13 +1132,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a copy of the <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Gets or sets a copy of the <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
-             object that defines a local geometric transformation for the image associated with this <see
-             cref="T:System.Drawing.TextureBrush" />
+             object that defines a local geometric transformation for the image associated with this <see cref="T:System.Drawing.TextureBrush" />
 
             
 
@@ -1119,8 +1164,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Translates the local geometric transformation of this <see
-             cref="T:System.Drawing.TextureBrush" />
+            >Translates the local geometric transformation of this <see cref="T:System.Drawing.TextureBrush" />
 
             
 
@@ -1132,14 +1176,22 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="dx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The dimension by which to translate the transformation in the x direction. </param
         >
         <param name="dy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1170,8 +1222,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Translates the local geometric transformation of this <see
-             cref="T:System.Drawing.TextureBrush" />
+            >Translates the local geometric transformation of this <see cref="T:System.Drawing.TextureBrush" />
 
             
 
@@ -1183,21 +1234,33 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="dx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The dimension by which to translate the transformation in the x direction. </param
         >
         <param name="dy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The dimension by which to translate the transformation in the y direction. </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1225,13 +1288,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Drawing.Drawing2D.WrapMode" />
+            >Gets or sets a <see cref="T:System.Drawing.Drawing2D.WrapMode" />
 
             
 
-             enumeration that indicates the wrap mode for this <see
-             cref="T:System.Drawing.TextureBrush" />
+             enumeration that indicates the wrap mode for this <see cref="T:System.Drawing.TextureBrush" />
 
             
 

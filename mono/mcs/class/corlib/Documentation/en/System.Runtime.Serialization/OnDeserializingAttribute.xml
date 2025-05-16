@@ -30,26 +30,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Runtime.Serialization.OnDeserializingAttribute" />
+        >Use the <see cref="T:System.Runtime.Serialization.OnDeserializingAttribute" />
 
         
 
          to set default values during deserialization. For example, if the type that you are deserializing does not contain a constructor, create a method to set values of any fields in the instance and apply the attribute to the method.</para
       >
       <para
-        >To use the <see
-         cref="T:System.Runtime.Serialization.OnDeserializingAttribute" />
+        >To use the <see cref="T:System.Runtime.Serialization.OnDeserializingAttribute" />
 
         
 
-        , the method must contain a <see
-         cref="T:System.Runtime.Serialization.StreamingContext" />
+        , the method must contain a <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
         
 
-         parameter. The attribute marks the method to be called by the serialization infrastructure and the <see
-         cref="T:System.Runtime.Serialization.StreamingContext" />
+         parameter. The attribute marks the method to be called by the serialization infrastructure and the <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
         
 
@@ -58,8 +54,7 @@
       <para>code reference: System.Runtime.Serialization.OnSerialization#4</para>
       <block subset="none" type="note">
         <para
-          >In your code, you can use the word OnDeserializing instead of the longer <see
-           cref="T:System.Runtime.Serialization.OnDeserializingAttribute" />
+          >In your code, you can use the word OnDeserializing instead of the longer <see cref="T:System.Runtime.Serialization.OnDeserializingAttribute" />
 
           
 
@@ -91,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.OnDeserializingAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.OnDeserializingAttribute" />
 
             
 

@@ -16,18 +16,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Used by interoperable bindings, such as <see
-         cref="T:System.ServiceModel.WsHttpBinding" />
+        >Used by interoperable bindings, such as <see cref="T:System.ServiceModel.WsHttpBinding" />
 
         
 
-         and <see
-         cref="T:System.ServiceModel.WsDualHttpBinding" />
+         and <see cref="T:System.ServiceModel.WsDualHttpBinding" />
 
         
 
-        , and <see
-         cref="T:System.ServiceModel.BasicHttpBinding" />
+        , and <see cref="T:System.ServiceModel.BasicHttpBinding" />
 
         
 
@@ -36,8 +33,7 @@
       <para>The Message-Transmission Optimization Mechanism (MTOM) is a method for efficiently encoding binary XML elements within the context of a SOAP envelope.  </para>
       <para>Text encodings for messages, such as UTF8, are used for interoperability purposes.</para>
       <para
-        >Note that the standard bindings designed for interoperability with Web services do not use binary encodings. For more information about the standard bindings, see <format
-         type="text/html">
+        >Note that the standard bindings designed for interoperability with Web services do not use binary encodings. For more information about the standard bindings, see <format type="text/html">
           <a href="2c243746-45ce-4588-995e-c17126a579a6">System-Provided Bindings</a>
         </format>
 

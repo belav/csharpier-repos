@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An example of a stream upgrade is to build a compression stream directly on top of the transport stream. To add a security upgrade, you additionally implement a class that derives from <see
-         cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />
+        >An example of a stream upgrade is to build a compression stream directly on top of the transport stream. To add a security upgrade, you additionally implement a class that derives from <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />
 
         
 
@@ -31,8 +30,7 @@
       <list type="ordered">
         <item>
           <para
-            >Implement a class that derives from <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+            >Implement a class that derives from <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
 
             
 
@@ -44,8 +42,7 @@
         </item>
         <item>
           <para
-            >The derived class that you implement creates an instance of <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeInitiator" />
+            >The derived class that you implement creates an instance of <see cref="T:System.ServiceModel.Channels.StreamUpgradeInitiator" />
 
             
 
@@ -54,8 +51,7 @@
         </item>
         <item>
           <para
-            >The derived class that you implement creates an instance of <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeAcceptor" />
+            >The derived class that you implement creates an instance of <see cref="T:System.ServiceModel.Channels.StreamUpgradeAcceptor" />
 
             
 
@@ -92,8 +88,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
 
             
 
@@ -127,8 +122,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
 
             
 
@@ -162,8 +156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeAcceptor" />
+            >Creates an instance of <see cref="T:System.ServiceModel.Channels.StreamUpgradeAcceptor" />
 
             
 
@@ -173,8 +166,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an instance of <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeAcceptor" />
+            >Returns an instance of <see cref="T:System.ServiceModel.Channels.StreamUpgradeAcceptor" />
 
             
 
@@ -209,13 +201,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates the associated <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeInitiator" />
+            >This method creates the associated <see cref="T:System.ServiceModel.Channels.StreamUpgradeInitiator" />
 
             
 
-             for this upgrade provider that creates upgrade requests for the matching <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeAcceptor" />
+             for this upgrade provider that creates upgrade requests for the matching <see cref="T:System.ServiceModel.Channels.StreamUpgradeAcceptor" />
 
             
 
@@ -225,8 +215,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeInitiator" />
+            >Creates an instance of <see cref="T:System.ServiceModel.Channels.StreamUpgradeInitiator" />
 
             
 
@@ -236,8 +225,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an instance of <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeInitiator" />
+            >Returns an instance of <see cref="T:System.ServiceModel.Channels.StreamUpgradeInitiator" />
 
             
 

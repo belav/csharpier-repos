@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The dead-letter queue is a queue on the queue manager of the sending application for expired messages that have failed to be delivered. The <see
-         cref="T:System.ServiceModel.DeadLetterQueue" />
+        >The dead-letter queue is a queue on the queue manager of the sending application for expired messages that have failed to be delivered. The <see cref="T:System.ServiceModel.DeadLetterQueue" />
 
         
 
@@ -26,8 +25,7 @@
       <list type="bullet">
         <item>
           <para
-            >None: No dead-letter queue is required. If a message fails delivery, no record of it is maintained in the dead-letter queue. This is the default value when <see
-             cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" />
+            >None: No dead-letter queue is required. If a message fails delivery, no record of it is maintained in the dead-letter queue. This is the default value when <see cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" />
 
             
 
@@ -36,8 +34,7 @@
         </item>
         <item>
           <para
-            >System: The system-wide, dead-letter queue is used to record messages that fail delivery. MSMQ has a transactional, system, dead-letter queue and a non-transactional, system, dead-letter queue to record expired messages that failed delivery from transactional and non-transactional queues, respectively. This is the default value when <see
-             cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" />
+            >System: The system-wide, dead-letter queue is used to record messages that fail delivery. MSMQ has a transactional, system, dead-letter queue and a non-transactional, system, dead-letter queue to record expired messages that failed delivery from transactional and non-transactional queues, respectively. This is the default value when <see cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" />
 
             
 
@@ -46,8 +43,7 @@
         </item>
         <item>
           <para
-            >Custom: The queue specified in the <see
-             cref="P:System.ServiceModel.MsmqBindingBase.CustomDeadLetterQueue" />
+            >Custom: The queue specified in the <see cref="P:System.ServiceModel.MsmqBindingBase.CustomDeadLetterQueue" />
 
             
 
@@ -77,8 +73,9 @@
         </item>
         <item>
           <para
-            >The sender does not have the <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=96167">access rights</see>
+            >The sender does not have the <see cref="http://go.microsoft.com/fwlink/?LinkID=96167"
+              >access rights</see
+            >
 
             
 

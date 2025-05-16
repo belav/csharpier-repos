@@ -40,48 +40,39 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>You can apply this attribute to parameters, fields, or return values.</para>
       <para
-        >This attribute is optional, as each data type has a default marshaling behavior. This attribute is only necessary when a given type can be marshaled to multiple types. For example, you can marshal a string to unmanaged code as either a <see
-         cref="F:System.Runtime.InteropServices.UnmanagedType.LPStr" />
+        >This attribute is optional, as each data type has a default marshaling behavior. This attribute is only necessary when a given type can be marshaled to multiple types. For example, you can marshal a string to unmanaged code as either a <see cref="F:System.Runtime.InteropServices.UnmanagedType.LPStr" />
 
         
 
-        , a <see
-         cref="F:System.Runtime.InteropServices.UnmanagedType.LPWStr" />
+        , a <see cref="F:System.Runtime.InteropServices.UnmanagedType.LPWStr" />
 
         
 
-        , a <see
-         cref="F:System.Runtime.InteropServices.UnmanagedType.LPTStr" />
+        , a <see cref="F:System.Runtime.InteropServices.UnmanagedType.LPTStr" />
 
         
 
-        , or a <see
-         cref="F:System.Runtime.InteropServices.UnmanagedType.BStr" />
+        , or a <see cref="F:System.Runtime.InteropServices.UnmanagedType.BStr" />
 
         
 
-        . By default, the common language runtime marshals a string parameter as a <see
-         cref="F:System.Runtime.InteropServices.UnmanagedType.BStr" />
+        . By default, the common language runtime marshals a string parameter as a <see cref="F:System.Runtime.InteropServices.UnmanagedType.BStr" />
 
         
 
-         to COM methods. You can apply the <see
-         cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+         to COM methods. You can apply the <see cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
 
         
 
-         attribute to an individual field or parameter to cause that particular string to be marshaled as a <see
-         cref="F:System.Runtime.InteropServices.UnmanagedType.LPStr" />
+         attribute to an individual field or parameter to cause that particular string to be marshaled as a <see cref="F:System.Runtime.InteropServices.UnmanagedType.LPStr" />
 
         
 
-         instead of a <see
-         cref="F:System.Runtime.InteropServices.UnmanagedType.BStr" />
+         instead of a <see cref="F:System.Runtime.InteropServices.UnmanagedType.BStr" />
 
         
 
-        . The <format
-         type="text/html">
+        . The <format type="text/html">
           <a href="A487D61B-D166-467B-A7CA-D8B52FBFF42D"
             >[&lt;topic://cpgrfTypeLibraryExporterTlbexpexe&gt;]</a
           >
@@ -92,13 +83,11 @@
          passes your marshaling preferences to the common language runtime.</para
       >
       <para
-        >Some parameters and return values have different default marshaling behavior when used with COM interop or platform invoke. By default, the runtime marshals a string parameter (and fields in a value type) as a <see
-         cref="F:System.Runtime.InteropServices.UnmanagedType.LPStr" />
+        >Some parameters and return values have different default marshaling behavior when used with COM interop or platform invoke. By default, the runtime marshals a string parameter (and fields in a value type) as a <see cref="F:System.Runtime.InteropServices.UnmanagedType.LPStr" />
 
         
 
-         to a platform invoke method or function. For additional information, see <format
-         type="text/html">
+         to a platform invoke method or function. For additional information, see <format type="text/html">
           <a href="C0A9BCDF-3DF8-4DB3-B1B6-ABBDB2AF809A"
             >[&lt;topic://cpcondefaultmarshalingbehavior&gt;]</a
           >
@@ -109,8 +98,7 @@
         .</para
       >
       <para
-        >In most cases, the attribute simply identifies the format of the unmanaged data using the <see
-         cref="T:System.Runtime.InteropServices.UnmanagedType" />
+        >In most cases, the attribute simply identifies the format of the unmanaged data using the <see cref="T:System.Runtime.InteropServices.UnmanagedType" />
 
         
 
@@ -119,23 +107,19 @@
       <code>void
     MyMethod([MarshalAs(LPStr)] String s);</code>
       <para
-        >Some <see
-         cref="T:System.Runtime.InteropServices.UnmanagedType" />
+        >Some <see cref="T:System.Runtime.InteropServices.UnmanagedType" />
 
         
 
-         enumeration members require additional information. For example, additional information is needed when the <see
-         cref="T:System.Runtime.InteropServices.UnmanagedType" />
+         enumeration members require additional information. For example, additional information is needed when the <see cref="T:System.Runtime.InteropServices.UnmanagedType" />
 
         
 
-         is <see
-         cref="F:System.Runtime.InteropServices.UnmanagedType.LPArray" />
+         is <see cref="F:System.Runtime.InteropServices.UnmanagedType.LPArray" />
 
         
 
-        . For a complete description of how to use this attribute with arrays, see <format
-         type="text/html">
+        . For a complete description of how to use this attribute with arrays, see <format type="text/html">
           <a href="8A3CCA8B-DD94-4E3D-AD9A-9EE7590654BC"
             >[&lt;topic://cpcondefaultmarshalingforarrays&gt;]</a
           >
@@ -146,8 +130,7 @@
         .</para
       >
       <para
-        >The <format
-         type="text/html">
+        >The <format type="text/html">
           <a href="EC0A8D63-11B3-4ACD-B398-DA1E37E97382"
             >[&lt;topic://cpgrfTypeLibraryImporterTlbimpexe&gt;]</a
           >
@@ -155,18 +138,15 @@
 
         
 
-         also applies this attribute to parameters, fields, and return values to indicate that the data type in the input type library is not the default type for the corresponding managed data type. Tlbimp.exe always applies the <see
-         cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+         also applies this attribute to parameters, fields, and return values to indicate that the data type in the input type library is not the default type for the corresponding managed data type. Tlbimp.exe always applies the <see cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
 
         
 
-         to <see
-         cref="T:System.String" />
+         to <see cref="T:System.String" />
 
         
 
-         and <see
-         cref="T:System.Object" />
+         and <see cref="T:System.Object" />
 
         
 
@@ -174,8 +154,7 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+          >The <see cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
 
           
 
@@ -213,13 +192,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor takes an underlying 16-bit signed integer that represents each <see
-             cref="T:System.Runtime.InteropServices.UnmanagedType" />
+            >This constructor takes an underlying 16-bit signed integer that represents each <see cref="T:System.Runtime.InteropServices.UnmanagedType" />
 
             
 
-             enumeration member. The <format
-             type="text/html">
+             enumeration member. The <format type="text/html">
               <a href="EC0A8D63-11B3-4ACD-B398-DA1E37E97382"
                 >[&lt;topic://cpgrfTypeLibraryImporterTlbimpexe&gt;]</a
               >
@@ -233,13 +210,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
 
             
 
-             class with the specified <see
-             cref="T:System.Runtime.InteropServices.UnmanagedType" />
+             class with the specified <see cref="T:System.Runtime.InteropServices.UnmanagedType" />
 
             
 
@@ -247,7 +222,11 @@
           >
         </summary>
         <param name="unmanagedType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -287,13 +266,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
 
             
 
-             class with the specified <see
-             cref="T:System.Runtime.InteropServices.UnmanagedType" />
+             class with the specified <see cref="T:System.Runtime.InteropServices.UnmanagedType" />
 
             
 
@@ -301,7 +278,11 @@
           >
         </summary>
         <param name="unmanagedType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -337,18 +318,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can set this parameter to a value from the <see
-             cref="T:System.Runtime.InteropServices.UnmanagedType" />
+            >You can set this parameter to a value from the <see cref="T:System.Runtime.InteropServices.UnmanagedType" />
 
             
 
-             enumeration to specify the type of the array's elements. If a type is not specified, the default unmanaged type corresponding to the managed array's element type is used. For example, the ArraySubType for a LPWStr array in COM is <see
-             cref="F:System.Runtime.InteropServices.UnmanagedType.LPWStr" />
+             enumeration to specify the type of the array's elements. If a type is not specified, the default unmanaged type corresponding to the managed array's element type is used. For example, the ArraySubType for a LPWStr array in COM is <see cref="F:System.Runtime.InteropServices.UnmanagedType.LPWStr" />
 
             
 
-            . For additional information, see <format
-             type="text/html">
+            . For additional information, see <format type="text/html">
               <a href="8A3CCA8B-DD94-4E3D-AD9A-9EE7590654BC"
                 >[&lt;topic://cpcondefaultmarshalingforarrays&gt;]</a
               >
@@ -362,13 +340,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the element type of the unmanaged <see
-             cref="F:System.Runtime.InteropServices.UnmanagedType.LPArray" />
+            >Specifies the element type of the unmanaged <see cref="F:System.Runtime.InteropServices.UnmanagedType.LPArray" />
 
             
 
-             or <see
-             cref="F:System.Runtime.InteropServices.UnmanagedType.ByValArray" />
+             or <see cref="F:System.Runtime.InteropServices.UnmanagedType.ByValArray" />
 
             
 
@@ -448,28 +424,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use either the <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
+            >You can use either the <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
 
             
 
-             or <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
+             or <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
 
             
 
-             field specify a custom marshaler type for the attributed parameter, field, or return type. The <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
+             field specify a custom marshaler type for the attributed parameter, field, or return type. The <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
 
             
 
-             field enables you to specify a string representing the fully qualified name of a custom marshaler. It is useful for late-bound references, but is less preferred than <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
+             field enables you to specify a string representing the fully qualified name of a custom marshaler. It is useful for late-bound references, but is less preferred than <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
 
             
 
-             for specifying a custom marshaler. For additional information about creating and using custom marshalers, see <format
-             type="text/html">
+             for specifying a custom marshaler. For additional information about creating and using custom marshalers, see <format type="text/html">
               <a href="49f9ac47-1619-4d6e-9da6-bf06bba12079">Custom Marshaling</a>
             </format>
 
@@ -508,33 +479,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use either the <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
+            >You can use either the <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
 
             
 
-             or <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
+             or <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
 
             
 
-             field to specify a custom marshaler type for the attributed parameter, field, or return type. The <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
+             field to specify a custom marshaler type for the attributed parameter, field, or return type. The <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
 
             
 
-             field allows easier usage of <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
+             field allows easier usage of <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
 
             
 
-             by shortening the syntax. In the following example, the first line represents syntax using <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
+             by shortening the syntax. In the following example, the first line represents syntax using <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
 
             
 
-             and the second line represents syntax using <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
+             and the second line represents syntax using <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
 
             
 
@@ -543,13 +508,11 @@
           <code>[MarshalAs(UnmanagedType.CustomMarshaler, MarshalType = "Assembly, NameSpace.TypeName")] </code>
           <code>[MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(NameSpace.TypeName)]</code>
           <para
-            >You can set a <see
-             cref="T:System.Type" />
+            >You can set a <see cref="T:System.Type" />
 
             
 
-             object using typeof in C#, GetType in Visual Basic, or typeid in C++. For additional information about creating and using custom marshalers, see <format
-             type="text/html">
+             object using typeof in C#, GetType in Visual Basic, or typeid in C++. For additional information about creating and using custom marshalers, see <format type="text/html">
               <a href="49f9ac47-1619-4d6e-9da6-bf06bba12079">Custom Marshaling</a>
             </format>
 
@@ -561,8 +524,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
+            >Implements <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
 
             
 
@@ -594,18 +556,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can set this field to a value from the <see
-             cref="T:System.Runtime.InteropServices.VarEnum" />
+            >You can set this field to a value from the <see cref="T:System.Runtime.InteropServices.VarEnum" />
 
             
 
-             enumeration to specify the type of the safe array's elements. If a type is not specified, the managed element type's default type (if passed as a VARIANT) is used. For example, the SafeArraySubType for an int array in COM is <see
-             cref="F:System.Runtime.InteropServices.VarEnum.VT_I4" />
+             enumeration to specify the type of the safe array's elements. If a type is not specified, the managed element type's default type (if passed as a VARIANT) is used. For example, the SafeArraySubType for an int array in COM is <see cref="F:System.Runtime.InteropServices.VarEnum.VT_I4" />
 
             
 
-            . For additional information, see <format
-             type="text/html">
+            . For additional information, see <format type="text/html">
               <a href="8A3CCA8B-DD94-4E3D-AD9A-9EE7590654BC"
                 >[&lt;topic://cpcondefaultmarshalingforarrays&gt;]</a
               >
@@ -619,8 +578,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates the element type of the <see
-             cref="F:System.Runtime.InteropServices.UnmanagedType.SafeArray" />
+            >Indicates the element type of the <see cref="F:System.Runtime.InteropServices.UnmanagedType.SafeArray" />
 
             
 
@@ -648,28 +606,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initialize this field with your custom type to enable the elements of the SAFEARRAY to be marshaled successfully. This field is only needed when the <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SafeArraySubType" />
+            >Initialize this field with your custom type to enable the elements of the SAFEARRAY to be marshaled successfully. This field is only needed when the <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SafeArraySubType" />
 
             
 
-             is either <see
-             cref="F:System.Runtime.InteropServices.VarEnum.VT_UNKNOWN" />
+             is either <see cref="F:System.Runtime.InteropServices.VarEnum.VT_UNKNOWN" />
 
             
 
-            , <see
-             cref="F:System.Runtime.InteropServices.VarEnum.VT_DISPATCH" />
+            , <see cref="F:System.Runtime.InteropServices.VarEnum.VT_DISPATCH" />
 
             
 
-            , or <see
-             cref="F:System.Runtime.InteropServices.VarEnum.VT_RECORD" />
+            , or <see cref="F:System.Runtime.InteropServices.VarEnum.VT_RECORD" />
 
             
 
-            . For additional information, see <format
-             type="text/html">
+            . For additional information, see <format type="text/html">
               <a href="8A3CCA8B-DD94-4E3D-AD9A-9EE7590654BC"
                 >[&lt;topic://cpcondefaultmarshalingforarrays&gt;]</a
               >
@@ -683,8 +636,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates the user-defined element type of the <see
-             cref="F:System.Runtime.InteropServices.UnmanagedType.SafeArray" />
+            >Indicates the user-defined element type of the <see cref="F:System.Runtime.InteropServices.UnmanagedType.SafeArray" />
 
             
 
@@ -711,31 +663,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This field is required for the <see
-             cref="F:System.Runtime.InteropServices.UnmanagedType.ByValArray" />
+            >This field is required for the <see cref="F:System.Runtime.InteropServices.UnmanagedType.ByValArray" />
 
             
 
-             and <see
-             cref="F:System.Runtime.InteropServices.UnmanagedType.ByValTStr" />
+             and <see cref="F:System.Runtime.InteropServices.UnmanagedType.ByValTStr" />
 
             
 
-             members of the <see
-             cref="T:System.Runtime.InteropServices.UnmanagedType" />
+             members of the <see cref="T:System.Runtime.InteropServices.UnmanagedType" />
 
             
 
-             enumeration. Because the compressed format of the metadata is limited to 0x1FFFFFFF, the range of allowed values for <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeConst" />
+             enumeration. Because the compressed format of the metadata is limited to 0x1FFFFFFF, the range of allowed values for <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeConst" />
 
             
 
              are (&gt;= 0 and &lt;= 0x1FFFFFFF).</para
           >
           <para
-            >For additional information, see <format
-             type="text/html">
+            >For additional information, see <format type="text/html">
               <a href="8A3CCA8B-DD94-4E3D-AD9A-9EE7590654BC"
                 >[&lt;topic://cpcondefaultmarshalingforarrays&gt;]</a
               >
@@ -771,8 +718,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeParamIndex" />
+            >The <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeParamIndex" />
 
             
 
@@ -789,34 +735,29 @@
             </item>
           </list>
           <para
-            >The zero-based index of the array size parameter is defined by using the <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeParamIndex" />
+            >The zero-based index of the array size parameter is defined by using the <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeParamIndex" />
 
             
 
              field.</para
           >
           <para
-            >If you specify both <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeParamIndex" />
+            >If you specify both <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeParamIndex" />
 
             
 
-             and <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeConst" />
+             and <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeConst" />
 
             
 
-             with a <see
-             cref="F:System.Runtime.InteropServices.UnmanagedType.LPArray" />
+             with a <see cref="F:System.Runtime.InteropServices.UnmanagedType.LPArray" />
 
             
 
              field, the sum of the fields' values produces a size total.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="8A3CCA8B-DD94-4E3D-AD9A-9EE7590654BC"
                 >[&lt;topic://cpcondefaultmarshalingforarrays&gt;]</a
               >
@@ -860,8 +801,7 @@
       <Docs>
         <value>
           <para
-            > The <see
-             cref="T:System.Runtime.InteropServices.UnmanagedType" />
+            > The <see cref="T:System.Runtime.InteropServices.UnmanagedType" />
 
             
 
@@ -872,18 +812,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This value is used with <see
-             cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+            >This value is used with <see cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
 
             
 
-             to indicate how types should be marshaled between managed and unmanaged code. In some cases, you can use this field with certain UnmanagedType enumeration members. For <see
-             cref="F:System.Runtime.InteropServices.UnmanagedType.CustomMarshaler" />
+             to indicate how types should be marshaled between managed and unmanaged code. In some cases, you can use this field with certain UnmanagedType enumeration members. For <see cref="F:System.Runtime.InteropServices.UnmanagedType.CustomMarshaler" />
 
             
 
-             and <see
-             cref="F:System.Runtime.InteropServices.UnmanagedType.ByValArray" />
+             and <see cref="F:System.Runtime.InteropServices.UnmanagedType.ByValArray" />
 
             
 
@@ -893,8 +830,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Runtime.InteropServices.UnmanagedType" />
+            >Gets the <see cref="T:System.Runtime.InteropServices.UnmanagedType" />
 
             
 

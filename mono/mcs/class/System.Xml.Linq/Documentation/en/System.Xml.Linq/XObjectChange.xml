@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enum specifies the event type when an event is raised for an <see
-         cref="T:System.Xml.Linq.XObject" />
+        >This enum specifies the event type when an event is raised for an <see cref="T:System.Xml.Linq.XObject" />
 
         
 
@@ -25,13 +24,11 @@
       >
       <para>All operations that modify the XML tree break down to a series of primitives. There are four types of primitives. Two of the primitives (Add and Remove) act on collections. Two of them (Name and Value) act on instances. There is a corresponding event for each of these primitives. </para>
       <para
-        >You should be careful when modifying an XML tree within one of these events, because doing this might lead to unexpected results. For example, if you receive a <see
-         cref="E:System.Xml.Linq.XObject.Changing" />
+        >You should be careful when modifying an XML tree within one of these events, because doing this might lead to unexpected results. For example, if you receive a <see cref="E:System.Xml.Linq.XObject.Changing" />
 
         
 
-         event, and while the event is being processed you remove the node from the tree, you might not receive the <see
-         cref="E:System.Xml.Linq.XObject.Changed" />
+         event, and while the event is being processed you remove the node from the tree, you might not receive the <see cref="E:System.Xml.Linq.XObject.Changed" />
 
         
 
@@ -41,8 +38,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the event type when an event is raised for an <see
-         cref="T:System.Xml.Linq.XObject" />
+        >Specifies the event type when an event is raised for an <see cref="T:System.Xml.Linq.XObject" />
 
         
 
@@ -68,13 +64,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Linq.XObject" />
+            >An <see cref="T:System.Xml.Linq.XObject" />
 
             
 
-             has been or will be added to an <see
-             cref="T:System.Xml.Linq.XContainer" />
+             has been or will be added to an <see cref="T:System.Xml.Linq.XContainer" />
 
             
 
@@ -100,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Linq.XObject" />
+            >An <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -127,13 +120,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Linq.XObject" />
+            >An <see cref="T:System.Xml.Linq.XObject" />
 
             
 
-             has been or will be removed from an <see
-             cref="T:System.Xml.Linq.XContainer" />
+             has been or will be removed from an <see cref="T:System.Xml.Linq.XContainer" />
 
             
 
@@ -159,8 +150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of an <see
-             cref="T:System.Xml.Linq.XObject" />
+            >The value of an <see cref="T:System.Xml.Linq.XObject" />
 
             
 

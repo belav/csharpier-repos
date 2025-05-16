@@ -53,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.TargetedPatchingOptOutAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.TargetedPatchingOptOutAttribute" />
 
             
 
@@ -62,12 +61,15 @@
           >
         </summary>
         <param name="reason">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The reason why the method to which the <see
-           cref="T:System.Runtime.TargetedPatchingOptOutAttribute" />
+          The reason why the method to which the <see cref="T:System.Runtime.TargetedPatchingOptOutAttribute" />
 
           
 

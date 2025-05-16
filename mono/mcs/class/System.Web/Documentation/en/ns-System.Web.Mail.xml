@@ -12,13 +12,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The classes in this namespace have been deprecated. Use the <see
-         cref="N:System.Net.Mail" />
+        >The classes in this namespace have been deprecated. Use the <see cref="N:System.Net.Mail" />
 
         
 
-         namespace instead. The <see
-         cref="N:System.Web.Mail" />
+         namespace instead. The <see cref="N:System.Web.Mail" />
 
         
 

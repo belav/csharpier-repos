@@ -46,26 +46,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
+        >A <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
 
         
 
          is generated as a result of a method called on a remote object, and is used to return the results of the method call back to the caller. The message includes a return value and out arguments. </para
       >
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
+        >The <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
 
         
 
-         class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
-         cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
+         class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
 
         
 
-         class directly; instead, use the <see
-         cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+         class directly; instead, use the <see cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
 
         
 
@@ -76,8 +72,7 @@
 
         
 
-         contains remoting data at the end of the message sink. A remoting server returns a <see
-         cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
+         contains remoting data at the end of the message sink. A remoting server returns a <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
 
         
 
@@ -87,8 +82,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implements the <see
-         cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+        >Implements the <see cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
 
         
 
@@ -121,18 +115,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
+            >The <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
 
             
 
-             class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
-             cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
+             class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
 
             
 
-             class directly; instead, use the <see
-             cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+             class directly; instead, use the <see cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
 
             
 
@@ -142,8 +133,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
 
             
 
@@ -151,19 +141,26 @@
           >
         </summary>
         <param name="h1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of remoting headers that contains key/value pairs. This array is used to initialize <see
-           cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
+          An array of remoting headers that contains key/value pairs. This array is used to initialize <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
 
           
 
            fields for headers that belong to the namespace "http://schemas.microsoft.com/clr/soap/messageProperties".</param
         >
         <param name="mcm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -269,13 +266,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Runtime.Remoting.Messaging.MethodResponse.ExternalProperties" />
+            >The <see cref="F:System.Runtime.Remoting.Messaging.MethodResponse.ExternalProperties" />
 
             
 
-             field is also accessible through the <see
-             cref="P:System.Runtime.Remoting.Messaging.MethodResponse.Properties" />
+             field is also accessible through the <see cref="P:System.Runtime.Remoting.Messaging.MethodResponse.Properties" />
 
             
 
@@ -285,8 +280,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies an <see
-             cref="T:System.Collections.IDictionary" />
+            >Specifies an <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -327,7 +321,11 @@
           <para>The method argument as an object.</para>
         </returns>
         <param name="argNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -367,7 +365,11 @@
           <para>The name of the method argument.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -401,13 +403,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.Remoting.Messaging.MethodResponse.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+            >The <see cref="M:System.Runtime.Remoting.Messaging.MethodResponse.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
 
             
 
-             method throws a <see
-             cref="T:System.NotSupportedException" />
+             method throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -417,8 +417,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.Remoting.Messaging.MethodResponse.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+            >The <see cref="M:System.Runtime.Remoting.Messaging.MethodResponse.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
 
             
 
@@ -426,14 +425,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Data for serializing or deserializing the remote object.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -473,7 +480,11 @@
           <para>The specified argument marked as a ref parameter or an out parameter.</para>
         </returns>
         <param name="argNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -513,7 +524,11 @@
           <para>The argument name, or null if the current method is not implemented.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -580,12 +595,15 @@
           <para>An internal serialization handler.</para>
         </returns>
         <param name="h">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of remoting headers that contain key/value pairs. This array is used to initialize <see
-           cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
+          An array of remoting headers that contain key/value pairs. This array is used to initialize <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
 
           
 
@@ -617,8 +635,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies an <see
-             cref="T:System.Collections.IDictionary" />
+            >Specifies an <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -654,8 +671,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+            >Gets the <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
             
 
@@ -691,8 +707,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Reflection.MethodBase" />
+            >Gets the <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -820,13 +835,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Runtime.Remoting.Messaging.MethodResponse.Properties" />
+            >The <see cref="P:System.Runtime.Remoting.Messaging.MethodResponse.Properties" />
 
             
 
-             property returns the value of the <see
-             cref="F:System.Runtime.Remoting.Messaging.MethodResponse.ExternalProperties" />
+             property returns the value of the <see cref="F:System.Runtime.Remoting.Messaging.MethodResponse.ExternalProperties" />
 
             
 
@@ -836,8 +849,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.IDictionary" />
+            >Gets an <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -902,14 +914,22 @@
           <para>Sets method information from serialization settings. </para>
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data for serializing or deserializing the remote object.</param
         >
         <param name="ctx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

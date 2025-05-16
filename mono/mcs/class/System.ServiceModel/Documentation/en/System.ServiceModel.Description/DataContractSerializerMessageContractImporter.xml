@@ -27,13 +27,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Description.DataContractSerializerMessageContractImporter" />
+        >The <see cref="T:System.ServiceModel.Description.DataContractSerializerMessageContractImporter" />
 
         
 
-         is invoked by the <see
-         cref="T:System.ServiceModel.Description.WsdlImporter" />
+         is invoked by the <see cref="T:System.ServiceModel.Description.WsdlImporter" />
 
         
 
@@ -65,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.DataContractSerializerMessageContractImporter" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.DataContractSerializerMessageContractImporter" />
 
             
 
@@ -131,36 +128,45 @@
           <para>Specifies a service description and schema set to use when importing a set of WSDL documents.</para>
         </summary>
         <param name="wsdlDocuments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Services.Description.ServiceDescriptionCollection" />
+          A <see cref="T:System.Web.Services.Description.ServiceDescriptionCollection" />
 
           
 
            that represents the WSDL documents to inspect.</param
         >
         <param name="xmlSchemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchemaSet" />
+          An <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
           
 
            that represents the schemas to use when converting messages.</param
         >
         <param name="policy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.Generic.ICollection`1" />
+          A <see cref="T:System.Collections.Generic.ICollection`1" />
 
           
 
@@ -202,12 +208,15 @@
           <para>Imports a message contract from a WSDL document.</para>
         </summary>
         <param name="importer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ServiceModel.Description.WsdlImporter" />
+          A <see cref="T:System.ServiceModel.Description.WsdlImporter" />
 
           
 
@@ -249,12 +258,15 @@
           <para>Converts the WSDL document from a specified endpoint.</para>
         </summary>
         <param name="importer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.WsdlImporter" />
+          The <see cref="T:System.ServiceModel.Description.WsdlImporter" />
 
           
 

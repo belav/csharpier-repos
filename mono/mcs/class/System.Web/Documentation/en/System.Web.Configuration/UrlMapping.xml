@@ -17,36 +17,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.UrlMapping" />
+        >The <see cref="T:System.Web.Configuration.UrlMapping" />
 
         
 
-         class allows you to map a URL that is displayed to users to a URL that exists in your Web application. Adding a <see
-         cref="T:System.Web.Configuration.UrlMapping" />
+         class allows you to map a URL that is displayed to users to a URL that exists in your Web application. Adding a <see cref="T:System.Web.Configuration.UrlMapping" />
 
         
 
-         object to a <see
-         cref="T:System.Web.Configuration.UrlMappingCollection" />
+         object to a <see cref="T:System.Web.Configuration.UrlMappingCollection" />
 
         
 
          is the programmatic equivalent to including an add element in the urlMappings section of a configuration file. </para
       >
       <para
-        >Each <see
-         cref="T:System.Web.Configuration.UrlMapping" />
+        >Each <see cref="T:System.Web.Configuration.UrlMapping" />
 
         
 
-         object contains two properties identifying a URL. One property specifies the URL shown to the user; the other specifies a URL in your Web application. Trailing white-space characters are ignored in both the <see
-         cref="P:System.Web.Configuration.UrlMapping.Url" />
+         object contains two properties identifying a URL. One property specifies the URL shown to the user; the other specifies a URL in your Web application. Trailing white-space characters are ignored in both the <see cref="P:System.Web.Configuration.UrlMapping.Url" />
 
         
 
-         and <see
-         cref="P:System.Web.Configuration.UrlMapping.MappedUrl" />
+         and <see cref="P:System.Web.Configuration.UrlMapping.MappedUrl" />
 
         
 
@@ -54,18 +48,15 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.Configuration.UrlMapping" />
+          >The <see cref="T:System.Web.Configuration.UrlMapping" />
 
           
 
-           property can write information into the related section of the configuration file according to the restrictions defined by the section property <see
-           cref="P:System.Configuration.SectionInformation.AllowDefinition" />
+           property can write information into the related section of the configuration file according to the restrictions defined by the section property <see cref="P:System.Configuration.SectionInformation.AllowDefinition" />
 
           
 
-           whose value is <see
-           cref="F:System.Configuration.ConfigurationAllowDefinition.MachineToApplication" />
+           whose value is <see cref="F:System.Configuration.ConfigurationAllowDefinition.MachineToApplication" />
 
           
 
@@ -91,8 +82,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.UrlMapping.#ctor(System.String,System.String)" />
+            >The <see cref="M:System.Web.Configuration.UrlMapping.#ctor(System.String,System.String)" />
 
             
 
@@ -102,8 +92,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.UrlMapping" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.UrlMapping" />
 
             
 
@@ -111,14 +100,22 @@
           >
         </summary>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The URL to be displayed to the user.</param
         >
         <param name="mappedUrl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -146,8 +143,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.UrlMapping.MappedUrl" />
+            >The <see cref="P:System.Web.Configuration.UrlMapping.MappedUrl" />
 
             
 
@@ -155,8 +151,7 @@
           >
           <block subset="none" type="note">
             <para
-              >When using IIS 5.0, if you use the <see
-               cref="P:System.Web.Configuration.UrlMapping.MappedUrl" />
+              >When using IIS 5.0, if you use the <see cref="P:System.Web.Configuration.UrlMapping.MappedUrl" />
 
               
 
@@ -209,8 +204,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.UrlMapping.Url" />
+            >The <see cref="P:System.Web.Configuration.UrlMapping.Url" />
 
             
 

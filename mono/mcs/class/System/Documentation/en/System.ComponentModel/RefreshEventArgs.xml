@@ -26,54 +26,45 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Typically, component information does not change for the life of a process. During design time, however, you can change the component's properties or events. As a result, the component's information in <see
-         cref="T:System.ComponentModel.TypeDescriptor" />
+        >Typically, component information does not change for the life of a process. During design time, however, you can change the component's properties or events. As a result, the component's information in <see cref="T:System.ComponentModel.TypeDescriptor" />
 
         
 
-         becomes out-of-date, and a <see
-         cref="E:System.ComponentModel.TypeDescriptor.Refreshed" />
+         becomes out-of-date, and a <see cref="E:System.ComponentModel.TypeDescriptor.Refreshed" />
 
         
 
-         event is raised. A <see
-         cref="E:System.ComponentModel.TypeDescriptor.Refreshed" />
+         event is raised. A <see cref="E:System.ComponentModel.TypeDescriptor.Refreshed" />
 
         
 
-         event is also raised when a <see
-         cref="T:System.Type" />
+         event is also raised when a <see cref="T:System.Type" />
 
         
 
          is changed during design time.</para
       >
       <para
-        >A <see
-         cref="T:System.ComponentModel.RefreshEventArgs" />
+        >A <see cref="T:System.ComponentModel.RefreshEventArgs" />
 
         
 
-         object specifies the data associated with the <see
-         cref="E:System.ComponentModel.TypeDescriptor.Refreshed" />
+         object specifies the data associated with the <see cref="E:System.ComponentModel.TypeDescriptor.Refreshed" />
 
         
 
          event; that is, the component and the type of component that changed.</para
       >
       <para
-        >The <see
-         cref="T:System.ComponentModel.RefreshEventArgs" />
+        >The <see cref="T:System.ComponentModel.RefreshEventArgs" />
 
         
 
-         class provides <see
-         cref="P:System.ComponentModel.RefreshEventArgs.ComponentChanged" />
+         class provides <see cref="P:System.ComponentModel.RefreshEventArgs.ComponentChanged" />
 
         
 
-         and <see
-         cref="P:System.ComponentModel.RefreshEventArgs.TypeChanged" />
+         and <see cref="P:System.ComponentModel.RefreshEventArgs.TypeChanged" />
 
         
 
@@ -83,8 +74,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.ComponentModel.TypeDescriptor.Refreshed" />
+        >Provides data for the <see cref="E:System.ComponentModel.TypeDescriptor.Refreshed" />
 
         
 
@@ -114,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.RefreshEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.RefreshEventArgs" />
 
             
 
@@ -123,7 +112,11 @@
           >
         </summary>
         <param name="componentChanged">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -152,8 +145,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.RefreshEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.RefreshEventArgs" />
 
             
 
@@ -161,12 +153,15 @@
           >
         </summary>
         <param name="typeChanged">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -213,8 +208,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 

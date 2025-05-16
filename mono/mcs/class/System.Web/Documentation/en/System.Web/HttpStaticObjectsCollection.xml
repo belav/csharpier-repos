@@ -25,8 +25,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a collection of application-scoped objects for the <see
-         cref="P:System.Web.HttpApplicationState.StaticObjects" />
+        >Provides a collection of application-scoped objects for the <see cref="P:System.Web.HttpApplicationState.StaticObjects" />
 
         
 
@@ -45,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.HttpStaticObjectsCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.HttpStaticObjectsCollection" />
 
             
 
@@ -74,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies members of an <see
-             cref="T:System.Web.HttpStaticObjectsCollection" />
+            >Copies members of an <see cref="T:System.Web.HttpStaticObjectsCollection" />
 
             
 
@@ -83,19 +80,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array to copy the <see
-           cref="T:System.Web.HttpStaticObjectsCollection" />
+          The array to copy the <see cref="T:System.Web.HttpStaticObjectsCollection" />
 
           
 
            into. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -145,28 +149,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.HttpStaticObjectsCollection.Deserialize(System.IO.BinaryReader)" />
+            >The <see cref="M:System.Web.HttpStaticObjectsCollection.Deserialize(System.IO.BinaryReader)" />
 
             
 
-             method is used to read the contents of a <see
-             cref="T:System.Web.HttpStaticObjectsCollection" />
+             method is used to read the contents of a <see cref="T:System.Web.HttpStaticObjectsCollection" />
 
             
 
-             object that is stored in a storage location that is created by the <see
-             cref="M:System.Web.HttpStaticObjectsCollection.Serialize(System.IO.BinaryWriter)" />
+             object that is stored in a storage location that is created by the <see cref="M:System.Web.HttpStaticObjectsCollection.Serialize(System.IO.BinaryWriter)" />
 
             
 
-             method. To serialize an <see
-             cref="T:System.Web.HttpStaticObjectsCollection" />
+             method. To serialize an <see cref="T:System.Web.HttpStaticObjectsCollection" />
 
             
 
-            , use the <see
-             cref="M:System.Web.HttpStaticObjectsCollection.Serialize(System.IO.BinaryWriter)" />
+            , use the <see cref="M:System.Web.HttpStaticObjectsCollection.Serialize(System.IO.BinaryWriter)" />
 
             
 
@@ -176,13 +175,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Web.HttpStaticObjectsCollection" />
+            >Creates an <see cref="T:System.Web.HttpStaticObjectsCollection" />
 
             
 
-             object from a binary file that was written by using the <see
-             cref="M:System.Web.HttpStaticObjectsCollection.Serialize(System.IO.BinaryWriter)" />
+             object from a binary file that was written by using the <see cref="M:System.Web.HttpStaticObjectsCollection.Serialize(System.IO.BinaryWriter)" />
 
             
 
@@ -192,13 +189,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Web.HttpStaticObjectsCollection" />
+            >An <see cref="T:System.Web.HttpStaticObjectsCollection" />
 
             
 
-             populated with the contents from a binary file written using the <see
-             cref="M:System.Web.HttpStaticObjectsCollection.Serialize(System.IO.BinaryWriter)" />
+             populated with the contents from a binary file written using the <see cref="M:System.Web.HttpStaticObjectsCollection.Serialize(System.IO.BinaryWriter)" />
 
             
 
@@ -206,12 +201,15 @@
           >
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.BinaryReader" />
+          The <see cref="T:System.IO.BinaryReader" />
 
           
 
@@ -265,7 +263,11 @@
           <para>An object from the collection.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -372,28 +374,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="M:System.Web.HttpStaticObjectsCollection.Serialize(System.IO.BinaryWriter)" />
+            >You can use the <see cref="M:System.Web.HttpStaticObjectsCollection.Serialize(System.IO.BinaryWriter)" />
 
             
 
-             method to write the contents of a <see
-             cref="T:System.Web.HttpStaticObjectsCollection" />
+             method to write the contents of a <see cref="T:System.Web.HttpStaticObjectsCollection" />
 
             
 
-             object to a <see
-             cref="T:System.IO.BinaryWriter" />
+             object to a <see cref="T:System.IO.BinaryWriter" />
 
             
 
-             object. To retrieve a serialized <see
-             cref="T:System.Web.HttpStaticObjectsCollection" />
+             object. To retrieve a serialized <see cref="T:System.Web.HttpStaticObjectsCollection" />
 
             
 
-             object, use the <see
-             cref="M:System.Web.HttpStaticObjectsCollection.Deserialize(System.IO.BinaryReader)" />
+             object, use the <see cref="M:System.Web.HttpStaticObjectsCollection.Deserialize(System.IO.BinaryReader)" />
 
             
 
@@ -403,8 +400,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the contents of the collection to a <see
-             cref="T:System.IO.BinaryWriter" />
+            >Writes the contents of the collection to a <see cref="T:System.IO.BinaryWriter" />
 
             
 
@@ -412,12 +408,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.BinaryWriter" />
+          The <see cref="T:System.IO.BinaryWriter" />
 
           
 
@@ -436,16 +435,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Program code should generally perform synchronized operations on the <see
-             cref="P:System.Web.HttpStaticObjectsCollection.SyncRoot" />
+            >Program code should generally perform synchronized operations on the <see cref="P:System.Web.HttpStaticObjectsCollection.SyncRoot" />
 
             
 
              of a collection, not directly on the collection itself. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the collection object.</para
           >
           <para
-            >The object returned in this implementation is the <see
-             cref="T:System.Web.HttpStaticObjectsCollection" />
+            >The object returned in this implementation is the <see cref="T:System.Web.HttpStaticObjectsCollection" />
 
             
 

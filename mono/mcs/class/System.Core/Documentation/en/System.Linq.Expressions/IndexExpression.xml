@@ -106,8 +106,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Reflection.PropertyInfo" />
+            >Gets the <see cref="T:System.Reflection.PropertyInfo" />
 
             
 
@@ -138,8 +137,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the node type of this <see
-             cref="T:System.Linq.Expressions.Expression" />
+            >Returns the node type of this <see cref="T:System.Linq.Expressions.Expression" />
 
             
 
@@ -237,8 +235,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the static type of the expression that this <see
-             cref="T:System.Linq.Expressions.Expression" />
+            >Gets the static type of the expression that this <see cref="T:System.Linq.Expressions.Expression" />
 
             
 
@@ -281,24 +278,30 @@
           <para>This expression if no children are changed or an expression with the updated children.</para>
         </returns>
         <param name="object">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Linq.Expressions.IndexExpression.Object" />
+          The <see cref="P:System.Linq.Expressions.IndexExpression.Object" />
 
           
 
            property of the result.</param
         >
         <param name="arguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Linq.Expressions.IndexExpression.Arguments" />
+          The <see cref="P:System.Linq.Expressions.IndexExpression.Arguments" />
 
           
 

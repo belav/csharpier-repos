@@ -1,13 +1,11 @@
 <?xml version="1.0"?>
 <clause number="14.9.3" title="Decimal comparison operators">
   <paragraph
-    >The predefined <keyword
-    >decimal</keyword>
+    >The predefined <keyword>decimal</keyword>
 
     
 
-     comparison operators are: <code_example
-    >
+     comparison operators are: <code_example>
       <![CDATA[
 bool operator ==(decimal x, decimal y);  
 bool operator !=(decimal x, decimal y);  
@@ -19,18 +17,15 @@ bool operator >=(decimal x, decimal y);
     </code_example>
   </paragraph>
   <paragraph
-    >Each of these operators compares the numeric values of the two <keyword
-    >decimal</keyword>
+    >Each of these operators compares the numeric values of the two <keyword>decimal</keyword>
 
     
 
-     operands and returns a <keyword
-    >bool</keyword>
+     operands and returns a <keyword>bool</keyword>
 
     
 
-     value that indicates whether the particular relation is true or false. Each <keyword
-    >decimal</keyword>
+     value that indicates whether the particular relation is true or false. Each <keyword>decimal</keyword>
 
     
 

@@ -44,8 +44,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The method creates a copy of an exiting <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
+            >The method creates a copy of an exiting <see cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
 
             
 
@@ -55,13 +54,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
 
             
 
-             class by using a <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
+             class by using a <see cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
 
             
 
@@ -69,7 +66,11 @@
           >
         </summary>
         <param name="validationResult">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -95,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
 
             
 
@@ -104,7 +104,11 @@
           >
         </summary>
         <param name="errorMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -137,8 +141,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
 
             
 
@@ -146,14 +149,22 @@
           >
         </summary>
         <param name="errorMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message.</param
         >
         <param name="memberNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -176,8 +187,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can set the <see
-             cref="P:System.ComponentModel.DataAnnotations.ValidationResult.ErrorMessage" />
+            >You can set the <see cref="P:System.ComponentModel.DataAnnotations.ValidationResult.ErrorMessage" />
 
             
 

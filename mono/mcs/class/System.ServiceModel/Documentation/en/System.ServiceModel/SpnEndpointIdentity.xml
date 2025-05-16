@@ -21,8 +21,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>An SPN is the name by which a client uniquely identifies an instance of a service. If you install multiple instances of a service on computers throughout a forest, each instance must have its own SPN. A given service instance can have multiple SPNs if there are multiple names that clients might use for authentication.</para>
       <para
-        >When a client wants to connect to a service, it locates an instance of the service, composes an SPN for that instance, and sets the identity to a <see
-         cref="T:System.ServiceModel.SpnEndpointIdentity" />
+        >When a client wants to connect to a service, it locates an instance of the service, composes an SPN for that instance, and sets the identity to a <see cref="T:System.ServiceModel.SpnEndpointIdentity" />
 
         
 
@@ -67,8 +66,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see
-             cref="P:System.ServiceModel.SpnEndpointIdentity.SpnLookupTime" />
+            >This constructor sets the <see cref="P:System.ServiceModel.SpnEndpointIdentity.SpnLookupTime" />
 
             
 
@@ -78,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.ServiceModel.SpnEndpointIdentity" />
+            >Initializes a new instance of <see cref="T:System.ServiceModel.SpnEndpointIdentity" />
 
             
 
@@ -87,7 +84,11 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -113,8 +114,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see
-             cref="P:System.ServiceModel.SpnEndpointIdentity.SpnLookupTime" />
+            >This constructor sets the <see cref="P:System.ServiceModel.SpnEndpointIdentity.SpnLookupTime" />
 
             
 
@@ -124,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.ServiceModel.SpnEndpointIdentity" />
+            >Initializes a new instance of <see cref="T:System.ServiceModel.SpnEndpointIdentity" />
 
             
 

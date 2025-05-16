@@ -24,46 +24,38 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.NetNamedPipeBinding" />
+        >The <see cref="T:System.ServiceModel.NetNamedPipeBinding" />
 
         
 
          generates a run-time communication stack by default, which uses transport security, named pipes for message delivery, and a binary message encoding. This binding is an appropriate indigo1 system-provided choice for on-machine communication. It also supports transactions.</para
       >
       <para
-        >The default configuration for the <see
-         cref="T:System.ServiceModel.NetNamedPipeBinding" />
+        >The default configuration for the <see cref="T:System.ServiceModel.NetNamedPipeBinding" />
 
         
 
-         is similar to the configuration provided by the <see
-         cref="T:System.ServiceModel.NetTcpBinding" />
+         is similar to the configuration provided by the <see cref="T:System.ServiceModel.NetTcpBinding" />
 
         
 
-        , but it is simpler because the indigo2 implementation is only meant for on-machine use and consequently there are fewer exposed features. The most notable difference is that the <see
-         cref="T:System.ServiceModel.SecurityMode" />
+        , but it is simpler because the indigo2 implementation is only meant for on-machine use and consequently there are fewer exposed features. The most notable difference is that the <see cref="T:System.ServiceModel.SecurityMode" />
 
         
 
-         setting only offers the <see
-         cref="F:System.ServiceModel.SecurityMode.None" />
+         setting only offers the <see cref="F:System.ServiceModel.SecurityMode.None" />
 
         
 
-         and <see
-         cref="F:System.ServiceModel.SecurityMode.Transport" />
+         and <see cref="F:System.ServiceModel.SecurityMode.Transport" />
 
         
 
-         options. SOAP security support is not an included option. The security behavior is configurable using the optional <paramref
-         name="securityMode" />
+         options. SOAP security support is not an included option. The security behavior is configurable using the optional <paramref name="securityMode" />
 
         
 
-         parameter in <see
-         cref="M:System.ServiceModel.NetNamedPipeBinding.#ctor(System.ServiceModel.NetNamedPipeSecurityMode)" />
+         parameter in <see cref="M:System.ServiceModel.NetNamedPipeBinding.#ctor(System.ServiceModel.NetNamedPipeSecurityMode)" />
 
         
 
@@ -91,8 +83,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default security mode used is <see
-             cref="F:System.ServiceModel.NetNamedPipeSecurityMode.Transport" />
+            >The default security mode used is <see cref="F:System.ServiceModel.NetNamedPipeSecurityMode.Transport" />
 
             
 
@@ -102,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.NetNamedPipeBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetNamedPipeBinding" />
 
             
 
@@ -132,8 +122,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor when you want to configure the security explicitly. The default is <see
-             cref="F:System.ServiceModel.NetNamedPipeSecurityMode.Transport" />
+            >Use this constructor when you want to configure the security explicitly. The default is <see cref="F:System.ServiceModel.NetNamedPipeSecurityMode.Transport" />
 
             
 
@@ -143,8 +132,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.NetNamedPipeBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetNamedPipeBinding" />
 
             
 
@@ -152,12 +140,15 @@
           >
         </summary>
         <param name="securityMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.NetNamedPipeSecurityMode" />
+          The <see cref="T:System.ServiceModel.NetNamedPipeSecurityMode" />
 
           
 
@@ -189,8 +180,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.NetNamedPipeBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetNamedPipeBinding" />
 
             
 
@@ -198,12 +188,15 @@
           >
         </summary>
         <param name="configurationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The binding configuration name for the <format
-           type="text/html">
+          The binding configuration name for the <format type="text/html">
             <a href="00a8580b-face-47a4-838d-b9fed48e72df">netNamedPipeBinding Element</a>
           </format>
 
@@ -239,13 +232,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Collections.Generic.ICollection`1" />
+            >The <see cref="T:System.Collections.Generic.ICollection`1" />
 
             
 
-             of type <see
-             cref="T:System.ServiceModel.Channels.BindingElement" />
+             of type <see cref="T:System.ServiceModel.Channels.BindingElement" />
 
             
 
@@ -523,13 +514,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.NetNamedPipeSecurity" />
+            >The <see cref="T:System.ServiceModel.NetNamedPipeSecurity" />
 
             
 
-             provides the types of security and settings available to the <see
-             cref="T:System.ServiceModel.NetNamedPipeBinding" />
+             provides the types of security and settings available to the <see cref="T:System.ServiceModel.NetNamedPipeBinding" />
 
             
 
@@ -582,8 +571,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ServiceModel.NetNamedPipeBinding.TransactionFlow" />
+            >The <see cref="P:System.ServiceModel.NetNamedPipeBinding.TransactionFlow" />
 
             
 
@@ -617,8 +605,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The WS-Atomic Transaction protocol can also be used by setting the <see
-             cref="P:System.ServiceModel.TransactionProtocol.WSAtomicTransactionOctober2004" />
+            >The WS-Atomic Transaction protocol can also be used by setting the <see cref="P:System.ServiceModel.TransactionProtocol.WSAtomicTransactionOctober2004" />
 
             
 
@@ -652,13 +639,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >It is possible to stream only the incoming or the outgoing messages by specifying, respectively, <see
-             cref="F:System.ServiceModel.TransferMode.StreamedRequest" />
+            >It is possible to stream only the incoming or the outgoing messages by specifying, respectively, <see cref="F:System.ServiceModel.TransferMode.StreamedRequest" />
 
             
 
-             or <see
-             cref="F:System.ServiceModel.TransferMode.StreamedResponse" />
+             or <see cref="F:System.ServiceModel.TransferMode.StreamedResponse" />
 
             
 

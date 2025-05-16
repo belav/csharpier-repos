@@ -38,8 +38,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.ServiceModel.Configuration.ExtensionElement" />
+        >Represents a collection of <see cref="T:System.ServiceModel.Configuration.ExtensionElement" />
 
         
 
@@ -64,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.ExtensionElementCollection" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ExtensionElementCollection" />
 
             
 
@@ -101,8 +99,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a configuration element to the <see
-             cref="T:System.ServiceModel.Configuration.ExtensionElementCollection" />
+            >Adds a configuration element to the <see cref="T:System.ServiceModel.Configuration.ExtensionElementCollection" />
 
             
 
@@ -110,12 +107,15 @@
           >
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Configuration.ConfigurationElement" />
+          The <see cref="T:System.Configuration.ConfigurationElement" />
 
           
 
@@ -151,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a configuration element to the <see
-             cref="T:System.ServiceModel.Configuration.ExtensionElementCollection" />
+            >Adds a configuration element to the <see cref="T:System.ServiceModel.Configuration.ExtensionElementCollection" />
 
             
 
@@ -160,24 +159,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index location at which to add <paramref
-           name="element" />
+          The index location at which to add <paramref name="element" />
 
           
 
           .</param
         >
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Configuration.ConfigurationElement" />
+          The <see cref="T:System.Configuration.ConfigurationElement" />
 
           
 
@@ -213,8 +218,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -222,12 +226,15 @@
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Configuration.ConfigurationElement" />
+          The <see cref="T:System.Configuration.ConfigurationElement" />
 
           
 
@@ -251,13 +258,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether an attempt to add a duplicate <see
-             cref="T:System.Configuration.ConfigurationElement" />
+            >Gets a value indicating whether an attempt to add a duplicate <see cref="T:System.Configuration.ConfigurationElement" />
 
             
 
-             to the <see
-             cref="T:System.ServiceModel.Configuration.ExtensionElementCollection" />
+             to the <see cref="T:System.ServiceModel.Configuration.ExtensionElementCollection" />
 
             
 

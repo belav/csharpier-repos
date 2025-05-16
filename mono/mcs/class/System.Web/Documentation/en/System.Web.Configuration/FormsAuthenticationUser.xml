@@ -17,13 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+        >The <see cref="T:System.Web.Configuration.FormsAuthenticationUser" />
 
         
 
-         class provides a way to programmatically access and modify the <format
-         type="text/html">
+         class provides a way to programmatically access and modify the <format type="text/html">
           <a href="756094f1-3942-41ec-a9a0-c22af94f6c61">user</a>
         </format>
 
@@ -32,18 +30,15 @@
          section of a configuration file.</para
       >
       <para
-        >This type is part of a group that includes the <see
-         cref="T:System.Web.Configuration.FormsAuthenticationCredentials" />
+        >This type is part of a group that includes the <see cref="T:System.Web.Configuration.FormsAuthenticationCredentials" />
 
         
 
-        , the <see
-         cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
+        , the <see cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
 
         
 
-        , and the <see
-         cref="T:System.Web.Configuration.FormsAuthenticationConfiguration" />
+        , and the <see cref="T:System.Web.Configuration.FormsAuthenticationConfiguration" />
 
         
 
@@ -51,8 +46,7 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+          >The <see cref="T:System.Web.Configuration.FormsAuthenticationUser" />
 
           
 
@@ -81,8 +75,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see
-             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+            >This constructor creates a <see cref="T:System.Web.Configuration.FormsAuthenticationUser" />
 
             
 
@@ -92,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.FormsAuthenticationUser" />
 
             
 
@@ -101,14 +93,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           User's name.</param
         >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -195,8 +195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the collection of <see
-             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+            >Specifies the collection of <see cref="T:System.Web.Configuration.FormsAuthenticationUser" />
 
             
 

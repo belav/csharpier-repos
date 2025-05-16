@@ -15,7 +15,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -54,10 +56,7 @@
         <Parameter Name="disposing" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="disposing"
-          >a <see
-           cref="T:System.Boolean" />
-        </param>
+        <param name="disposing">a <see cref="T:System.Boolean" /></param>
         <summary>Release the unmanaged resources held by the class. </summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -117,10 +116,7 @@
       <Parameters />
       <Docs>
         <summary>This finalizes the hash. Takes the data from the chaining variables and returns it.</summary>
-        <returns
-          >a <see
-           cref="T:System.Byte[]" />
-        </returns>
+        <returns>a <see cref="T:System.Byte[]" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>

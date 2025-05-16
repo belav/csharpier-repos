@@ -17,36 +17,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.Channels.MessageFault" />
+        >Use the <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
         
 
          class any time you need an in-memory SOAP fault that can be modified and used to create a SOAP message that contains the fault information.</para
       >
       <para
-        >Typically, the <see
-         cref="T:System.ServiceModel.Channels.MessageFault" />
+        >Typically, the <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
         
 
-         class is used when implementing the <see
-         cref="T:System.ServiceModel.Dispatcher.IErrorHandler" />
+         class is used when implementing the <see cref="T:System.ServiceModel.Dispatcher.IErrorHandler" />
 
         
 
-         interface. In this case, indigo1 passes the <see
-         cref="T:System.ServiceModel.Channels.MessageFault" />
+         interface. In this case, indigo1 passes the <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
         
 
-         object and you use it for your specific needs (for example, you can customize the <see
-         cref="T:System.ServiceModel.Channels.MessageFault" />
+         object and you use it for your specific needs (for example, you can customize the <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
         
 
-         or to log fault information). However, <see
-         cref="T:System.ServiceModel.Channels.MessageFault" />
+         or to log fault information). However, <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
         
 
@@ -56,8 +50,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an in-memory representation of a SOAP fault that can be passed to <see
-         cref="Overload:System.ServiceModel.Channels.Message.CreateMessage" />
+        >Represents an in-memory representation of a SOAP fault that can be passed to <see cref="Overload:System.ServiceModel.Channels.Message.CreateMessage" />
 
         
 
@@ -82,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When called in a derived class, initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+            >When called in a derived class, initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
@@ -161,13 +153,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+            >Returns a new <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
-             object that uses the specified <see
-             cref="T:System.ServiceModel.Channels.Message" />
+             object that uses the specified <see cref="T:System.ServiceModel.Channels.Message" />
 
             
 
@@ -177,8 +167,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+            >A <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
@@ -186,24 +175,30 @@
           >
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The specified <see
-           cref="T:System.ServiceModel.Channels.Message" />
+          The specified <see cref="T:System.ServiceModel.Channels.Message" />
 
           
 
-           to be used to create the <see
-           cref="T:System.ServiceModel.Channels.MessageFault" />
+           to be used to create the <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
           
 
            object.</param
         >
         <param name="maxBufferSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -236,18 +231,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+            >Returns a new <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
-             object that uses the specified <see
-             cref="T:System.ServiceModel.FaultCode" />
+             object that uses the specified <see cref="T:System.ServiceModel.FaultCode" />
 
             
 
-             and <see
-             cref="T:System.ServiceModel.FaultReason" />
+             and <see cref="T:System.ServiceModel.FaultReason" />
 
             
 
@@ -257,8 +249,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+            >A <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
@@ -266,14 +257,22 @@
           >
         </returns>
         <param name="code">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fault code for the fault message.</param
         >
         <param name="reason">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -306,13 +305,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+            >Returns a new <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
-             object that uses the specified <see
-             cref="T:System.ServiceModel.FaultCode" />
+             object that uses the specified <see cref="T:System.ServiceModel.FaultCode" />
 
             
 
@@ -322,8 +319,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+            >A <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
@@ -331,14 +327,22 @@
           >
         </returns>
         <param name="code">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fault code for the fault message.</param
         >
         <param name="reason">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -372,18 +376,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+            >Returns a new <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
-             object that uses the specified <see
-             cref="T:System.ServiceModel.FaultCode" />
+             object that uses the specified <see cref="T:System.ServiceModel.FaultCode" />
 
             
 
-            , <see
-             cref="T:System.ServiceModel.FaultReason" />
+            , <see cref="T:System.ServiceModel.FaultReason" />
 
             
 
@@ -393,8 +394,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+            >A <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
@@ -402,21 +402,33 @@
           >
         </returns>
         <param name="code">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fault code for the fault message.</param
         >
         <param name="reason">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The reason for the fault.</param
         >
         <param name="detail">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -452,23 +464,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+            >Returns a new <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
-             object that uses the specified <see
-             cref="T:System.ServiceModel.FaultCode" />
+             object that uses the specified <see cref="T:System.ServiceModel.FaultCode" />
 
             
 
-            , <see
-             cref="T:System.ServiceModel.FaultReason" />
+            , <see cref="T:System.ServiceModel.FaultReason" />
 
             
 
-            , detail object, and  <see
-             cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+            , detail object, and  <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
 
             
 
@@ -478,8 +486,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+            >A <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
@@ -487,21 +494,33 @@
           >
         </returns>
         <param name="code">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fault code for the fault message.</param
         >
         <param name="reason">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The reason for the fault.</param
         >
         <param name="detail">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -538,23 +557,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+            >Returns a new <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
-             object that uses the specified <see
-             cref="T:System.ServiceModel.FaultCode" />
+             object that uses the specified <see cref="T:System.ServiceModel.FaultCode" />
 
             
 
-            , <see
-             cref="T:System.ServiceModel.FaultReason" />
+            , <see cref="T:System.ServiceModel.FaultReason" />
 
             
 
-            , detail object, <see
-             cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+            , detail object, <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
 
             
 
@@ -564,8 +579,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+            >A <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
@@ -573,28 +587,44 @@
           >
         </returns>
         <param name="code">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fault code for the fault message.</param
         >
         <param name="reason">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The reason for the fault.</param
         >
         <param name="detail">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fault detail object.</param
         >
         <param name="actor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -632,23 +662,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+            >Returns a new <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
-             object that uses the specified <see
-             cref="T:System.ServiceModel.FaultCode" />
+             object that uses the specified <see cref="T:System.ServiceModel.FaultCode" />
 
             
 
-            , <see
-             cref="T:System.ServiceModel.FaultReason" />
+            , <see cref="T:System.ServiceModel.FaultReason" />
 
             
 
-            , detail object, <see
-             cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+            , detail object, <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
 
             
 
@@ -658,8 +684,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+            >A <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
@@ -667,35 +692,55 @@
           >
         </returns>
         <param name="code">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fault code for the fault message.</param
         >
         <param name="reason">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The reason for the fault.</param
         >
         <param name="detail">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fault detail object.</param
         >
         <param name="actor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value of the actor.</param
         >
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -731,7 +776,11 @@
           <para>The detail object of the message fault.</para>
         </returns>
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -767,8 +816,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the detail object that uses the specified <see
-             cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+            >Returns the detail object that uses the specified <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
 
             
 
@@ -778,8 +826,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The detail object contained in the <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+            >The detail object contained in the <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
@@ -787,7 +834,11 @@
           >
         </returns>
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -817,13 +868,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Returns an <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
-             object that is positioned on the detail object of the <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+             object that is positioned on the detail object of the <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
@@ -833,13 +882,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
-             object that is positioned on the detail object of the <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+             object that is positioned on the detail object of the <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
@@ -864,8 +911,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+            >Gets a value that indicates whether the <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
@@ -915,13 +961,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When called in a derived class, returns an <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >When called in a derived class, returns an <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
-             object that is positioned on the detail object of the <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+             object that is positioned on the detail object of the <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
@@ -931,13 +975,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
-             object that is positioned on the detail object of the <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+             object that is positioned on the detail object of the <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
@@ -970,18 +1012,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Override the <see
-             cref="M:System.ServiceModel.Channels.MessageFault.OnWriteDetail(System.Xml.XmlDictionaryWriter,System.ServiceModel.EnvelopeVersion)" />
+            >Override the <see cref="M:System.ServiceModel.Channels.MessageFault.OnWriteDetail(System.Xml.XmlDictionaryWriter,System.ServiceModel.EnvelopeVersion)" />
 
             
 
-             method to participate in the detail writing process. The default behavior is to call <see
-             cref="M:System.ServiceModel.Channels.MessageFault.OnWriteStartDetail(System.Xml.XmlDictionaryWriter,System.ServiceModel.EnvelopeVersion)" />
+             method to participate in the detail writing process. The default behavior is to call <see cref="M:System.ServiceModel.Channels.MessageFault.OnWriteStartDetail(System.Xml.XmlDictionaryWriter,System.ServiceModel.EnvelopeVersion)" />
 
             
 
-             followed by <see
-             cref="M:System.ServiceModel.Channels.MessageFault.OnWriteDetailContents(System.Xml.XmlDictionaryWriter)" />
+             followed by <see cref="M:System.ServiceModel.Channels.MessageFault.OnWriteDetailContents(System.Xml.XmlDictionaryWriter)" />
 
             
 
@@ -993,19 +1032,26 @@
           <para>Invoked prior to writing the detail contents.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryWriter" />
+          The <see cref="T:System.Xml.XmlDictionaryWriter" />
 
           
 
            used to write the detail element.</param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1036,13 +1082,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ServiceModel.Channels.MessageFault.OnWriteDetailContents(System.Xml.XmlDictionaryWriter)" />
+            >The <see cref="M:System.ServiceModel.Channels.MessageFault.OnWriteDetailContents(System.Xml.XmlDictionaryWriter)" />
 
             
 
-             method is called subsequent to <see
-             cref="M:System.ServiceModel.Channels.MessageFault.OnWriteStartDetail(System.Xml.XmlDictionaryWriter,System.ServiceModel.EnvelopeVersion)" />
+             method is called subsequent to <see cref="M:System.ServiceModel.Channels.MessageFault.OnWriteStartDetail(System.Xml.XmlDictionaryWriter,System.ServiceModel.EnvelopeVersion)" />
 
             
 
@@ -1054,12 +1098,15 @@
           <para>When overridden in a non-abstract derived class, writes the contents of the detail element. </para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryWriter" />
+          The <see cref="T:System.Xml.XmlDictionaryWriter" />
 
           
 
@@ -1092,8 +1139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the start element using the specified <see
-             cref="T:System.Xml.XmlDictionaryWriter" />
+            >Writes the start element using the specified <see cref="T:System.Xml.XmlDictionaryWriter" />
 
             
 
@@ -1101,19 +1147,26 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryWriter" />
+          The <see cref="T:System.Xml.XmlDictionaryWriter" />
 
           
 
            used to write the detail element.</param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1171,8 +1224,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the message fault that uses the specified <see
-             cref="T:System.Xml.XmlDictionaryWriter" />
+            >Writes the message fault that uses the specified <see cref="T:System.Xml.XmlDictionaryWriter" />
 
             
 
@@ -1180,19 +1232,26 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryWriter" />
+          The <see cref="T:System.Xml.XmlDictionaryWriter" />
 
           
 
            used to write the message fault.</param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1225,8 +1284,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the message fault that uses the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Writes the message fault that uses the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -1234,19 +1292,26 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
            used to write the message fault.</param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -15,8 +15,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The .NET Framework uses classes that are derived from the <see
-         cref="T:System.Web.Services.Protocols.ServerProtocol" />
+        >The .NET Framework uses classes that are derived from the <see cref="T:System.Web.Services.Protocols.ServerProtocol" />
 
         
 
@@ -35,8 +34,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The constructor for <see
-             cref="T:System.Web.Services.Protocols.ServerProtocol" />
+            >The constructor for <see cref="T:System.Web.Services.Protocols.ServerProtocol" />
 
             
 
@@ -68,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Stores a <see
-             cref="T:System.Object" />
+            >Stores a <see cref="T:System.Object" />
 
             
 
@@ -77,46 +74,53 @@
           >
         </summary>
         <param name="protocolType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
-           that is used to create the key to store <paramref
-           name="value" />
+           that is used to create the key to store <paramref name="value" />
 
           
 
            in the cache.</param
         >
         <param name="serverType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
-           that is used to create the key to store <paramref
-           name="value" />
+           that is used to create the key to store <paramref name="value" />
 
           
 
            in the cache.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -140,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.HttpContext" />
+            >Gets the <see cref="T:System.Web.HttpContext" />
 
             
 
@@ -172,8 +175,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the <see
-             cref="T:System.Object" />
+            >Retrieves the <see cref="T:System.Object" />
 
             
 
@@ -183,18 +185,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Object" />
+            >The <see cref="T:System.Object" />
 
             
 
-             that is stored in the cache using the key that was created from <paramref
-             name="protocolType" />
+             that is stored in the cache using the key that was created from <paramref name="protocolType" />
 
             
 
-             and <paramref
-             name="serverType" />
+             and <paramref name="serverType" />
 
             
 
@@ -202,34 +201,38 @@
           >
         </returns>
         <param name="protocolType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
-           that is used to create the key to retrieve <paramref
-           name="value" />
+           that is used to create the key to retrieve <paramref name="value" />
 
           
 
            from the cache.</param
         >
         <param name="serverType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
-           that is used to create the key to retrieve <paramref
-           name="value" />
+           that is used to create the key to retrieve <paramref name="value" />
 
           
 
@@ -253,8 +256,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.HttpRequest" />
+            >Gets the <see cref="T:System.Web.HttpRequest" />
 
             
 
@@ -279,8 +281,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.HttpResponse" />
+            >Gets the <see cref="T:System.Web.HttpResponse" />
 
             
 

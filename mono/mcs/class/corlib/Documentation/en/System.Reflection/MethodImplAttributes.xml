@@ -81,8 +81,7 @@
       </list>
       <block subset="none" type="note">
         <para
-          >Locking on the instance or on the type, as with the <see
-           cref="F:System.Reflection.MethodImplAttributes.Synchronized" />
+          >Locking on the instance or on the type, as with the <see cref="F:System.Reflection.MethodImplAttributes.Synchronized" />
 
           
 
@@ -350,8 +349,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the method is not optimized by the just-in-time (JIT) compiler or by native code generation (see <format
-             type="text/html">
+            >Specifies that the method is not optimized by the just-in-time (JIT) compiler or by native code generation (see <format type="text/html">
               <a href="44bf97aa-a9a4-4eba-9a0d-cfaa6fc53a66">Ngen.exe</a>
             </format>
 
@@ -455,15 +453,13 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the method is single-threaded through the body. Static methods (Shared in Visual Basic) lock on the type, whereas instance methods lock on the instance. You can also use the C# <format
-             type="text/html">
+            >Specifies that the method is single-threaded through the body. Static methods (Shared in Visual Basic) lock on the type, whereas instance methods lock on the instance. You can also use the C# <format type="text/html">
               <a href="656DA1A4-707E-4EF6-9C6E-6D13B646AF42">lock statement</a>
             </format>
 
             
 
-             or the Visual Basic <format
-             type="text/html">
+             or the Visual Basic <format type="text/html">
               <a href="14501703-298f-4d43-b139-c4b6366af176">SyncLock statement</a>
             </format>
 

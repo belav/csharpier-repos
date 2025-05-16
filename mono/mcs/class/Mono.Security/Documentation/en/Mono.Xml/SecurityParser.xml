@@ -12,7 +12,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -36,13 +38,11 @@
   </Attributes>
   <Docs>
     <summary
-      >An XML parser used chiefly to construct <see
-       cref="T:System.Security.SecurityElement" />
+      >An XML parser used chiefly to construct <see cref="T:System.Security.SecurityElement" />
 
       
 
-       objects as part of <see
-       cref="T:Mono.Security.Cryptography.KeyPairPersistence." />
+       objects as part of <see cref="T:Mono.Security.Cryptography.KeyPairPersistence." />
     </summary>
     <remarks>This parser is mostly for internal use by the system libraries.</remarks>
   </Docs>
@@ -71,10 +71,7 @@
         <Parameter Name="xml" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="xml"
-          >a <see
-           cref="T:System.String" />
-        </param>
+        <param name="xml">a <see cref="T:System.String" /></param>
         <summary>Loads an XML string into the parser and parses it.</summary>
         <remarks>None.</remarks>
       </Docs>
@@ -93,10 +90,7 @@
         <Parameter Name="ch" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="ch"
-          >a <see
-           cref="T:System.String" />
-        </param>
+        <param name="ch">a <see cref="T:System.String" /></param>
         <summary>This method is invoked on the characters inside a given tag; SecurityParser saves them to the Text member of the current SecurityElement.</summary>
         <remarks>None.</remarks>
       </Docs>
@@ -115,10 +109,7 @@
         <Parameter Name="name" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="name"
-          >a <see
-           cref="T:System.String" />
-        </param>
+        <param name="name">a <see cref="T:System.String" /></param>
         <summary>An overridden method from MiniParser, called at the end of an XML element. It pops a SecurityElement off the internal parser stack, since the parser is no longer inside the corresponding XML element.</summary>
         <remarks>None.</remarks>
       </Docs>
@@ -140,10 +131,7 @@
         <Parameter Name="parser" Type="Mono.Xml.MiniParser" />
       </Parameters>
       <Docs>
-        <param name="parser"
-          >a <see
-           cref="T:Mono.Xml.MiniParser" />
-        </param>
+        <param name="parser">a <see cref="T:Mono.Xml.MiniParser" /></param>
         <summary>An overridden method from MiniParser; currently not used by SecurityParser.</summary>
         <remarks>None</remarks>
       </Docs>
@@ -166,14 +154,8 @@
         <Parameter Name="attrs" Type="Mono.Xml.MiniParser+IAttrList" />
       </Parameters>
       <Docs>
-        <param name="name"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <param name="attrs"
-          >a <see
-           cref="T:Mono.Xml.MiniParser+IAttrList" />
-        </param>
+        <param name="name">a <see cref="T:System.String" /></param>
+        <param name="attrs">a <see cref="T:Mono.Xml.MiniParser+IAttrList" /></param>
         <summary>Overridden method from MiniParser. When the parser sees the beginning of a new element, it creates a SecurityElement to correspond to the XML element.</summary>
         <remarks>None.</remarks>
       </Docs>
@@ -195,10 +177,7 @@
         <Parameter Name="parser" Type="Mono.Xml.MiniParser" />
       </Parameters>
       <Docs>
-        <param name="parser"
-          >a <see
-           cref="T:Mono.Xml.MiniParser" />
-        </param>
+        <param name="parser">a <see cref="T:Mono.Xml.MiniParser" /></param>
         <summary>A handler method, meant to be overridden, called at the start of the parse phase. Currently not used by SecurityParser.</summary>
         <remarks>Part of the IHandler interface implementation.</remarks>
       </Docs>
@@ -216,10 +195,7 @@
       <Parameters />
       <Docs>
         <summary>Returns the next character from the internal xmldoc data member.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>Implements the IReader interface.</remarks>
       </Docs>
       <AssemblyInfo>
@@ -236,10 +212,7 @@
       <Parameters />
       <Docs>
         <summary>Parses an XML string into a SecurityElement. For an example of how it's used, see the source to Mono.Security.Cryptography.KeyPairPersistence.</summary>
-        <returns
-          >a <see
-           cref="T:System.Security.SecurityElement" />
-        </returns>
+        <returns>a <see cref="T:System.Security.SecurityElement" /></returns>
         <remarks>None.</remarks>
       </Docs>
       <AssemblyInfo>

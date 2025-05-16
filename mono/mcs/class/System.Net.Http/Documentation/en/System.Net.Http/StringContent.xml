@@ -41,8 +41,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The media type for the <see
-             cref="T:System.Net.Http.StringContent" />
+            >The media type for the <see cref="T:System.Net.Http.StringContent" />
 
             
 
@@ -52,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Net.Http.StringContent" />
+            >Creates a new instance of the <see cref="T:System.Net.Http.StringContent" />
 
             
 
@@ -61,12 +59,15 @@
           >
         </summary>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The content used to initialize the <see
-           cref="T:System.Net.Http.StringContent" />
+          The content used to initialize the <see cref="T:System.Net.Http.StringContent" />
 
           
 
@@ -95,8 +96,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The media type for the <see
-             cref="T:System.Net.Http.StringContent" />
+            >The media type for the <see cref="T:System.Net.Http.StringContent" />
 
             
 
@@ -106,8 +106,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Net.Http.StringContent" />
+            >Creates a new instance of the <see cref="T:System.Net.Http.StringContent" />
 
             
 
@@ -115,19 +114,26 @@
           >
         </summary>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The content used to initialize the <see
-           cref="T:System.Net.Http.StringContent" />
+          The content used to initialize the <see cref="T:System.Net.Http.StringContent" />
 
           
 
           .</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -158,8 +164,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Net.Http.StringContent" />
+            >Creates a new instance of the <see cref="T:System.Net.Http.StringContent" />
 
             
 
@@ -167,26 +172,37 @@
           >
         </summary>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The content used to initialize the <see
-           cref="T:System.Net.Http.StringContent" />
+          The content used to initialize the <see cref="T:System.Net.Http.StringContent" />
 
           
 
           .</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The encoding to use for the content.</param
         >
         <param name="mediaType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

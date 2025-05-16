@@ -19,36 +19,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ConsoleKeyInfo" />
+        >The <see cref="T:System.ConsoleKeyInfo" />
 
         
 
-         type is not intended to be created by users. Instead, it is returned to the user in response to calling the <see
-         cref="M:System.Console.ReadKey" />
+         type is not intended to be created by users. Instead, it is returned to the user in response to calling the <see cref="M:System.Console.ReadKey" />
 
         
 
          method.</para
       >
       <para
-        >The <see
-         cref="T:System.ConsoleKeyInfo" />
+        >The <see cref="T:System.ConsoleKeyInfo" />
 
         
 
-         object describes the <see
-         cref="T:System.ConsoleKey" />
+         object describes the <see cref="T:System.ConsoleKey" />
 
         
 
-         constant and Unicode character, if any, that correspond to the pressed console key. The <see
-         cref="T:System.ConsoleKeyInfo" />
+         constant and Unicode character, if any, that correspond to the pressed console key. The <see cref="T:System.ConsoleKeyInfo" />
 
         
 
-         object also describes, in a bitwise combination of <see
-         cref="T:System.ConsoleModifiers" />
+         object also describes, in a bitwise combination of <see cref="T:System.ConsoleModifiers" />
 
         
 
@@ -87,16 +81,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This type is not intended to be created by users. Instead, it is returned to the user in response to calling the <see
-             cref="M:System.Console.ReadKey" />
+            >This type is not intended to be created by users. Instead, it is returned to the user in response to calling the <see cref="M:System.Console.ReadKey" />
 
             
 
              method.</para
           >
           <para
-            >The <see
-             cref="T:System.ConsoleKeyInfo" />
+            >The <see cref="T:System.ConsoleKeyInfo" />
 
             
 
@@ -106,8 +98,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ConsoleKeyInfo" />
+            >Initializes a new instance of the <see cref="T:System.ConsoleKeyInfo" />
 
             
 
@@ -115,45 +106,63 @@
           >
         </summary>
         <param name="keyChar">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The Unicode character that corresponds to the <paramref
-           name="key" />
+          The Unicode character that corresponds to the <paramref name="key" />
 
           
 
            parameter. </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The console key that corresponds to the <paramref
-           name="keyChar" />
+          The console key that corresponds to the <paramref name="keyChar" />
 
           
 
            parameter. </param
         >
         <param name="shift">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to indicate that a SHIFT key was pressed; otherwise, false. </param
         >
         <param name="alt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to indicate that an ALT key was pressed; otherwise, false. </param
         >
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -183,41 +192,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Two <see
-             cref="T:System.ConsoleKeyInfo" />
+            >Two <see cref="T:System.ConsoleKeyInfo" />
 
             
 
-             objects are equal if their corresponding <see
-             cref="P:System.ConsoleKeyInfo.KeyChar" />
+             objects are equal if their corresponding <see cref="P:System.ConsoleKeyInfo.KeyChar" />
 
             
 
-            , <see
-             cref="P:System.ConsoleKeyInfo.Key" />
+            , <see cref="P:System.ConsoleKeyInfo.Key" />
 
             
 
-            , and <see
-             cref="P:System.ConsoleKeyInfo.Modifiers" />
+            , and <see cref="P:System.ConsoleKeyInfo.Modifiers" />
 
             
 
              properties are equal.</para
           >
           <para
-            >The <see
-             cref="M:System.ConsoleKeyInfo.Equals(System.ConsoleKeyInfo)" />
+            >The <see cref="M:System.ConsoleKeyInfo.Equals(System.ConsoleKeyInfo)" />
 
             
 
-             method performs slightly better than the <see
-             cref="M:System.ConsoleKeyInfo.Equals(System.Object)" />
+             method performs slightly better than the <see cref="M:System.ConsoleKeyInfo.Equals(System.Object)" />
 
             
 
-             method because it does not have to convert <paramref
-             name="obj" />
+             method because it does not have to convert <paramref name="obj" />
 
             
 
@@ -227,13 +229,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the specified <see
-             cref="T:System.ConsoleKeyInfo" />
+            >Gets a value indicating whether the specified <see cref="T:System.ConsoleKeyInfo" />
 
             
 
-             object is equal to the current <see
-             cref="T:System.ConsoleKeyInfo" />
+             object is equal to the current <see cref="T:System.ConsoleKeyInfo" />
 
             
 
@@ -243,13 +243,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
-             is equal to the current <see
-             cref="T:System.ConsoleKeyInfo" />
+             is equal to the current <see cref="T:System.ConsoleKeyInfo" />
 
             
 
@@ -257,12 +255,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object to compare to the current <see
-           cref="T:System.ConsoleKeyInfo" />
+          An object to compare to the current <see cref="T:System.ConsoleKeyInfo" />
 
           
 
@@ -292,23 +293,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Two <see
-             cref="T:System.ConsoleKeyInfo" />
+            >Two <see cref="T:System.ConsoleKeyInfo" />
 
             
 
-             objects are equal if their corresponding <see
-             cref="P:System.ConsoleKeyInfo.KeyChar" />
+             objects are equal if their corresponding <see cref="P:System.ConsoleKeyInfo.KeyChar" />
 
             
 
-            , <see
-             cref="P:System.ConsoleKeyInfo.Key" />
+            , <see cref="P:System.ConsoleKeyInfo.Key" />
 
             
 
-            , and <see
-             cref="P:System.ConsoleKeyInfo.Modifiers" />
+            , and <see cref="P:System.ConsoleKeyInfo.Modifiers" />
 
             
 
@@ -318,8 +315,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the specified object is equal to the current <see
-             cref="T:System.ConsoleKeyInfo" />
+            >Gets a value indicating whether the specified object is equal to the current <see cref="T:System.ConsoleKeyInfo" />
 
             
 
@@ -329,18 +325,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="value" />
+            >true if <paramref name="value" />
 
             
 
-             is a <see
-             cref="T:System.ConsoleKeyInfo" />
+             is a <see cref="T:System.ConsoleKeyInfo" />
 
             
 
-             object and is equal to the current <see
-             cref="T:System.ConsoleKeyInfo" />
+             object and is equal to the current <see cref="T:System.ConsoleKeyInfo" />
 
             
 
@@ -348,12 +341,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object to compare to the current <see
-           cref="T:System.ConsoleKeyInfo" />
+          An object to compare to the current <see cref="T:System.ConsoleKeyInfo" />
 
           
 
@@ -381,18 +377,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value returned by the <see
-             cref="M:System.ConsoleKeyInfo.GetHashCode" />
+            >The value returned by the <see cref="M:System.ConsoleKeyInfo.GetHashCode" />
 
             
 
-             method is not suitable for distinguishing one <see
-             cref="T:System.ConsoleKeyInfo" />
+             method is not suitable for distinguishing one <see cref="T:System.ConsoleKeyInfo" />
 
             
 
-             object from another. If your application needs a unique hash code, override the <see
-             cref="M:System.ConsoleKeyInfo.GetHashCode" />
+             object from another. If your application needs a unique hash code, override the <see cref="M:System.ConsoleKeyInfo.GetHashCode" />
 
             
 
@@ -402,8 +395,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the hash code for the current <see
-             cref="T:System.ConsoleKeyInfo" />
+            >Returns the hash code for the current <see cref="T:System.ConsoleKeyInfo" />
 
             
 
@@ -437,8 +429,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the console key represented by the current <see
-             cref="T:System.ConsoleKeyInfo" />
+            >Gets the console key represented by the current <see cref="T:System.ConsoleKeyInfo" />
 
             
 
@@ -464,18 +455,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the key pressed does not map to a Unicode character (for example, if the user presses the <ui
-            >F1</ui>
+            >If the key pressed does not map to a Unicode character (for example, if the user presses the <ui>F1</ui>
 
             
 
-             key or the <ui
-            >Home</ui>
+             key or the <ui>Home</ui>
 
             
 
-             key), the value of the <see
-             cref="P:System.ConsoleKeyInfo.KeyChar" />
+             key), the value of the <see cref="P:System.ConsoleKeyInfo.KeyChar" />
 
             
 
@@ -485,8 +473,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the Unicode character represented by the current <see
-             cref="T:System.ConsoleKeyInfo" />
+            >Gets the Unicode character represented by the current <see cref="T:System.ConsoleKeyInfo" />
 
             
 
@@ -516,8 +503,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a bitwise combination of <see
-             cref="T:System.ConsoleModifiers" />
+            >Gets a bitwise combination of <see cref="T:System.ConsoleModifiers" />
 
             
 
@@ -551,23 +537,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Two <see
-             cref="T:System.ConsoleKeyInfo" />
+            >Two <see cref="T:System.ConsoleKeyInfo" />
 
             
 
-             objects are equal if their corresponding <see
-             cref="P:System.ConsoleKeyInfo.KeyChar" />
+             objects are equal if their corresponding <see cref="P:System.ConsoleKeyInfo.KeyChar" />
 
             
 
-            , <see
-             cref="P:System.ConsoleKeyInfo.Key" />
+            , <see cref="P:System.ConsoleKeyInfo.Key" />
 
             
 
-            , and <see
-             cref="P:System.ConsoleKeyInfo.Modifiers" />
+            , and <see cref="P:System.ConsoleKeyInfo.Modifiers" />
 
             
 
@@ -577,8 +559,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified <see
-             cref="T:System.ConsoleKeyInfo" />
+            >Indicates whether the specified <see cref="T:System.ConsoleKeyInfo" />
 
             
 
@@ -588,13 +569,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="a" />
+            >true if <paramref name="a" />
 
             
 
-             is equal to <paramref
-             name="b" />
+             is equal to <paramref name="b" />
 
             
 
@@ -602,14 +581,22 @@
           >
         </returns>
         <param name="a">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first object to compare.</param
         >
         <param name="b">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -642,23 +629,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Two <see
-             cref="T:System.ConsoleKeyInfo" />
+            >Two <see cref="T:System.ConsoleKeyInfo" />
 
             
 
-             objects are equal if their corresponding <see
-             cref="P:System.ConsoleKeyInfo.KeyChar" />
+             objects are equal if their corresponding <see cref="P:System.ConsoleKeyInfo.KeyChar" />
 
             
 
-            , <see
-             cref="P:System.ConsoleKeyInfo.Key" />
+            , <see cref="P:System.ConsoleKeyInfo.Key" />
 
             
 
-            , and <see
-             cref="P:System.ConsoleKeyInfo.Modifiers" />
+            , and <see cref="P:System.ConsoleKeyInfo.Modifiers" />
 
             
 
@@ -668,8 +651,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified <see
-             cref="T:System.ConsoleKeyInfo" />
+            >Indicates whether the specified <see cref="T:System.ConsoleKeyInfo" />
 
             
 
@@ -679,13 +661,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="a" />
+            >true if <paramref name="a" />
 
             
 
-             is not equal to <paramref
-             name="b" />
+             is not equal to <paramref name="b" />
 
             
 
@@ -693,14 +673,22 @@
           >
         </returns>
         <param name="a">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first object to compare.</param
         >
         <param name="b">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

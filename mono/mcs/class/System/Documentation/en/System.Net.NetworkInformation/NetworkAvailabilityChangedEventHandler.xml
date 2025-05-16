@@ -33,26 +33,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This delegate handles <see
-         cref="E:System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged" />
+        >This delegate handles <see cref="E:System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged" />
 
         
 
-         events raised by the <see
-         cref="T:System.Net.NetworkInformation.NetworkChange" />
+         events raised by the <see cref="T:System.Net.NetworkInformation.NetworkChange" />
 
         
 
-         class. For detailed information on receiving notification for network interface address change events, see the <see
-         cref="T:System.Net.NetworkInformation.NetworkChange" />
+         class. For detailed information on receiving notification for network interface address change events, see the <see cref="T:System.Net.NetworkInformation.NetworkChange" />
 
         
 
          class overview documentation. </para
       >
       <para
-        >The <see
-         cref="E:System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged" />
+        >The <see cref="E:System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged" />
 
         
 

@@ -20,18 +20,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.WebControls.RepeaterCommandEventArgs" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.RepeaterCommandEventArgs" />
 
         
 
-        , see the <see
-         cref="M:System.Web.UI.WebControls.RepeaterCommandEventArgs.#ctor(System.Web.UI.WebControls.RepeaterItem,System.Object,System.Web.UI.WebControls.CommandEventArgs)" />
+        , see the <see cref="M:System.Web.UI.WebControls.RepeaterCommandEventArgs.#ctor(System.Web.UI.WebControls.RepeaterItem,System.Object,System.Web.UI.WebControls.CommandEventArgs)" />
 
         
 
-         constructor. For more information about handling events, see <format
-         type="text/html">
+         constructor. For more information about handling events, see <format type="text/html">
           <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">[&lt;topic://cpconEventsOverview&gt;]</a>
         </format>
 
@@ -43,13 +40,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Web.UI.WebControls.Repeater.ItemCommand" />
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.Repeater.ItemCommand" />
 
         
 
-         event of a <see
-         cref="T:System.Web.UI.WebControls.Repeater" />
+         event of a <see cref="T:System.Web.UI.WebControls.Repeater" />
 
         
 
@@ -76,8 +71,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows initial property values for an instance of <see
-             cref="T:System.Web.UI.WebControls.RepeaterCommandEventArgs" />
+            >The following table shows initial property values for an instance of <see cref="T:System.Web.UI.WebControls.RepeaterCommandEventArgs" />
 
             
 
@@ -127,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.RepeaterCommandEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.RepeaterCommandEventArgs" />
 
             
 
@@ -136,22 +129,23 @@
           >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.RepeaterItem" />
+          A <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
           
 
-           that represents an item in the <see
-           cref="T:System.Web.UI.WebControls.Repeater" />
+           that represents an item in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
           
 
-          . The <see
-           cref="P:System.Web.UI.WebControls.RepeaterCommandEventArgs.Item" />
+          . The <see cref="P:System.Web.UI.WebControls.RepeaterCommandEventArgs.Item" />
 
           
 
@@ -199,8 +193,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to access the properties of the <see
-             cref="T:System.Web.UI.WebControls.RepeaterItem" />
+            >Use this property to access the properties of the <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
             
 
@@ -210,8 +203,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.UI.WebControls.RepeaterItem" />
+            >Gets the <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
             
 

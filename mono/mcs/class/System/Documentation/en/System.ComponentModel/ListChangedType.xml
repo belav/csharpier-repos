@@ -21,18 +21,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Used by the <see
-         cref="P:System.ComponentModel.ListChangedEventArgs.ListChangedType" />
+        >Used by the <see cref="P:System.ComponentModel.ListChangedEventArgs.ListChangedType" />
 
         
 
-         property of the <see
-         cref="T:System.ComponentModel.ListChangedEventArgs" />
+         property of the <see cref="T:System.ComponentModel.ListChangedEventArgs" />
 
         
 
-         class to indicate the way an <see
-         cref="T:System.ComponentModel.IBindingList" />
+         class to indicate the way an <see cref="T:System.ComponentModel.IBindingList" />
 
         
 
@@ -66,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An item added to the list. <see
-             cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" />
+            >An item added to the list. <see cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" />
 
             
 
@@ -97,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An item changed in the list. <see
-             cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" />
+            >An item changed in the list. <see cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" />
 
             
 
@@ -128,8 +123,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An item deleted from the list. <see
-             cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" />
+            >An item deleted from the list. <see cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" />
 
             
 
@@ -159,13 +153,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An item moved within the list. <see
-             cref="P:System.ComponentModel.ListChangedEventArgs.OldIndex" />
+            >An item moved within the list. <see cref="P:System.ComponentModel.ListChangedEventArgs.OldIndex" />
 
             
 
-             contains the previous index for the item, whereas <see
-             cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" />
+             contains the previous index for the item, whereas <see cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" />
 
             
 
@@ -195,8 +187,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -226,8 +217,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -257,8 +247,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 

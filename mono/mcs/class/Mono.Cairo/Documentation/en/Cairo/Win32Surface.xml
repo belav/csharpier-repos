@@ -23,8 +23,7 @@
       <Docs>
         <param name="hdc">To be added.</param>
         <summary
-          >Creates a new Win32Surface from a valid <paramref
-           name="hdc" />
+          >Creates a new Win32Surface from a valid <paramref name="hdc" />
 
           
 

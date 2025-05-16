@@ -17,64 +17,53 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To create an <see
-         cref="T:System.Data.Odbc.OdbcDataReader" />
+        >To create an <see cref="T:System.Data.Odbc.OdbcDataReader" />
 
         
 
-        , you must call the <see
-         cref="M:System.Data.Odbc.OdbcCommand.ExecuteReader" />
+        , you must call the <see cref="M:System.Data.Odbc.OdbcCommand.ExecuteReader" />
 
         
 
-         method of the <see
-         cref="T:System.Data.Odbc.OdbcCommand" />
+         method of the <see cref="T:System.Data.Odbc.OdbcCommand" />
 
         
 
          object, instead of directly using a constructor.</para
       >
       <para
-        >While the <see
-         cref="T:System.Data.Odbc.OdbcDataReader" />
+        >While the <see cref="T:System.Data.Odbc.OdbcDataReader" />
 
         
 
-         is being used, the associated <see
-         cref="T:System.Data.Odbc.OdbcConnection" />
+         is being used, the associated <see cref="T:System.Data.Odbc.OdbcConnection" />
 
         
 
-         is busy serving the <see
-         cref="T:System.Data.Odbc.OdbcDataReader" />
+         is busy serving the <see cref="T:System.Data.Odbc.OdbcDataReader" />
 
         
 
-        , and no other operations can be performed on the <see
-         cref="T:System.Data.Odbc.OdbcConnection" />
+        , and no other operations can be performed on the <see cref="T:System.Data.Odbc.OdbcConnection" />
 
         
 
-         other than closing it. This is the case until the <see
-         cref="M:System.Data.Odbc.OdbcDataReader.Close" />
+         other than closing it. This is the case until the <see cref="M:System.Data.Odbc.OdbcDataReader.Close" />
 
         
 
-         method of the <see
-         cref="T:System.Data.Odbc.OdbcDataReader" />
+         method of the <see cref="T:System.Data.Odbc.OdbcDataReader" />
 
         
 
-         is called. For example, you cannot retrieve output parameters until after you call <see
-         cref="M:System.Data.Odbc.OdbcDataReader.Close" />
+         is called. For example, you cannot retrieve output parameters until after you call <see cref="M:System.Data.Odbc.OdbcDataReader.Close" />
 
         
 
         .</para
       >
       <para
-        >Changes made to a result set by another process or thread while data is being read may be visible to the user of the <see
-         cref="T:System.Data.Odbc.OdbcDataReader" />
+        >Changes made to a result set by another process or thread while data is being read may be visible to the user of the <see cref="T:System.Data.Odbc.OdbcDataReader" />
 
         
 
@@ -85,23 +74,19 @@
 
         
 
-         and <see
-         cref="P:System.Data.Odbc.OdbcDataReader.RecordsAffected" />
+         and <see cref="P:System.Data.Odbc.OdbcDataReader.RecordsAffected" />
 
         
 
-         are the only properties that you can call after the <see
-         cref="T:System.Data.Odbc.OdbcDataReader" />
+         are the only properties that you can call after the <see cref="T:System.Data.Odbc.OdbcDataReader" />
 
         
 
-         is closed. Sometimes, you must call <see
-         cref="M:System.Data.Odbc.OdbcDataReader.Close" />
+         is closed. Sometimes, you must call <see cref="M:System.Data.Odbc.OdbcDataReader.Close" />
 
         
 
-         before you can call <see
-         cref="P:System.Data.Odbc.OdbcDataReader.RecordsAffected" />
+         before you can call <see cref="P:System.Data.Odbc.OdbcDataReader.RecordsAffected" />
 
         
 
@@ -125,18 +110,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must explicitly call the <see
-             cref="M:System.Data.Odbc.OdbcDataReader.Close" />
+            >You must explicitly call the <see cref="M:System.Data.Odbc.OdbcDataReader.Close" />
 
             
 
-             method when you are finished using the <see
-             cref="T:System.Data.Odbc.OdbcDataReader" />
+             method when you are finished using the <see cref="T:System.Data.Odbc.OdbcDataReader" />
 
             
 
-             to use the associated <see
-             cref="T:System.Data.Odbc.OdbcConnection" />
+             to use the associated <see cref="T:System.Data.Odbc.OdbcConnection" />
 
             
 
@@ -144,8 +126,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Do not call Close or Dispose on a Connection, a DataReader, or any other managed object in the Finalize method of your class. In a finalizer, you should only release unmanaged resources that your class owns directly. If your class does not own any unmanaged resources, do not include a Finalize method in your class definition. For more information, see <format
-               type="text/html">
+              >Do not call Close or Dispose on a Connection, a DataReader, or any other managed object in the Finalize method of your class. In a finalizer, you should only release unmanaged resources that your class owns directly. If your class does not own any unmanaged resources, do not include a Finalize method in your class definition. For more information, see <format type="text/html">
                 <a href="22B6CB97-0C80-4EEB-A2CF-5ED7655E37F9">Garbage Collection</a>
               </format>
 
@@ -158,8 +139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Closes the <see
-             cref="T:System.Data.Odbc.OdbcDataReader" />
+            >Closes the <see cref="T:System.Data.Odbc.OdbcDataReader" />
 
             
 
@@ -224,16 +204,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Includes hidden fields. Use <see
-             cref="P:System.Data.Common.DbDataReader.VisibleFieldCount" />
+            >Includes hidden fields. Use <see cref="P:System.Data.Common.DbDataReader.VisibleFieldCount" />
 
             
 
              to exclude hidden fields.</para
           >
           <para
-            >After you execute a query that does not return rows, <see
-             cref="P:System.Data.Odbc.OdbcDataReader.FieldCount" />
+            >After you execute a query that does not return rows, <see cref="P:System.Data.Odbc.OdbcDataReader.FieldCount" />
 
             
 
@@ -279,8 +257,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Conversions are performed based on the underlying capabilities of the ODBC driver. If the conversion is not supported then the method call will fail.</para>
           <para
-            >Call <see
-             cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -296,7 +273,11 @@
           <para>A Boolean that is the value of the column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -322,8 +303,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Conversions are performed based on the underlying capabilities of the ODBC driver. If the conversion is not supported, the method call fails.</para>
           <para
-            >Call <see
-             cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -339,7 +319,11 @@
           <para>The value of the specified column as a byte.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -375,26 +359,22 @@
 
             
 
-             returns the number of available bytes in the field. Most of the time this is the exact length of the field. However, the number returned may be less than the true length of the field if <see
-             cref="M:System.Data.Odbc.OdbcDataReader.GetBytes(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)" />
+             returns the number of available bytes in the field. Most of the time this is the exact length of the field. However, the number returned may be less than the true length of the field if <see cref="M:System.Data.Odbc.OdbcDataReader.GetBytes(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             has already been used to obtain bytes from the field. This may be the case, for example, if the <see
-             cref="T:System.Data.Odbc.OdbcDataReader" />
+             has already been used to obtain bytes from the field. This may be the case, for example, if the <see cref="T:System.Data.Odbc.OdbcDataReader" />
 
             
 
-             is reading a large data structure into a buffer. For more information, see the SequentialAccess setting for <see
-             cref="T:System.Data.CommandBehavior" />
+             is reading a large data structure into a buffer. For more information, see the SequentialAccess setting for <see cref="T:System.Data.CommandBehavior" />
 
             
 
             .</para
           >
           <para
-            >If you pass a buffer that is a null value, <see
-             cref="M:System.Data.Odbc.OdbcDataReader.GetBytes(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)" />
+            >If you pass a buffer that is a null value, <see cref="M:System.Data.Odbc.OdbcDataReader.GetBytes(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)" />
 
             
 
@@ -403,8 +383,7 @@
           <para>Conversions are performed based on the underlying capabilities of the ODBC driver. If the conversion is not supported then the method call will fail.</para>
           <block subset="none" type="note">
             <para
-              >No exception will be thrown if the value of <paramref
-               name="bufferIndex" />
+              >No exception will be thrown if the value of <paramref name="bufferIndex" />
 
               
 
@@ -421,40 +400,59 @@
           <para>The actual number of bytes read.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based column ordinal. </param
         >
         <param name="dataIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index within the field where the read operation is to start. </param
         >
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to read the stream of bytes. </param
         >
         <param name="bufferIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index within the <paramref
-           name="buffer" />
+          The index within the <paramref name="buffer" />
 
           
 
            where the write operation is to start. </param
         >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -480,8 +478,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Conversions are performed based on the underlying capabilities of the ODBC driver. If the conversion is not supported, the method call fails.</para>
           <para
-            >Call <see
-             cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -497,7 +494,11 @@
           <para>The value of the specified column as a character.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -533,26 +534,22 @@
 
             
 
-             returns the number of available characters in the field. Most of the time this is the exact length of the field. However, the number returned may be less than the true length of the field if <see
-             cref="M:System.Data.Odbc.OdbcDataReader.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)" />
+             returns the number of available characters in the field. Most of the time this is the exact length of the field. However, the number returned may be less than the true length of the field if <see cref="M:System.Data.Odbc.OdbcDataReader.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)" />
 
             
 
-             has already been used to obtain characters from the field. This may be the case, for example, if the <see
-             cref="T:System.Data.Odbc.OdbcDataReader" />
+             has already been used to obtain characters from the field. This may be the case, for example, if the <see cref="T:System.Data.Odbc.OdbcDataReader" />
 
             
 
-             is reading a large data structure into a buffer. For more information, see the SequentialAccess setting for <see
-             cref="T:System.Data.CommandBehavior" />
+             is reading a large data structure into a buffer. For more information, see the SequentialAccess setting for <see cref="T:System.Data.CommandBehavior" />
 
             
 
             .</para
           >
           <para
-            >If you pass a buffer that is a null value, <see
-             cref="M:System.Data.Odbc.OdbcDataReader.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)" />
+            >If you pass a buffer that is a null value, <see cref="M:System.Data.Odbc.OdbcDataReader.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)" />
 
             
 
@@ -561,8 +558,7 @@
           <para>Conversions are performed based on the underlying capabilities of the ODBC driver. If the conversion is not supported then the method call will fail.</para>
           <block subset="none" type="note">
             <para
-              >No exception will be thrown if the value of <paramref
-               name="bufferIndex" />
+              >No exception will be thrown if the value of <paramref name="bufferIndex" />
 
               
 
@@ -579,40 +575,59 @@
           <para>The actual number of characters read.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based column ordinal. </param
         >
         <param name="dataIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index within the row where the read operation is to start. </param
         >
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to copy data. </param
         >
         <param name="bufferIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index within the <paramref
-           name="buffer" />
+          The index within the <paramref name="buffer" />
 
           
 
            where the write operation is to start. </param
         >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -669,7 +684,11 @@
           <para>The name of the source data type.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -696,8 +715,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.DateTime" />
+            >Gets the value of the specified column as a <see cref="T:System.DateTime" />
 
             
 
@@ -707,8 +725,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the specified column as a <see
-             cref="T:System.DateTime" />
+            >The value of the specified column as a <see cref="T:System.DateTime" />
 
             
 
@@ -716,7 +733,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -742,8 +763,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Conversions are performed based on the underlying capabilities of the ODBC driver. If the conversion is not supported then the method call will fail.</para>
           <para
-            >Call <see
-             cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -753,8 +773,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.DateTime" />
+            >Gets the value of the specified column as a <see cref="T:System.DateTime" />
 
             
 
@@ -764,8 +783,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the specified column as a <see
-             cref="T:System.DateTime" />
+            >The value of the specified column as a <see cref="T:System.DateTime" />
 
             
 
@@ -773,7 +791,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -799,8 +821,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Conversions are performed based on the underlying capabilities of the ODBC driver. If the conversion is not supported then the method call will fail.</para>
           <para
-            >Call <see
-             cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -817,8 +838,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.Decimal" />
+            >Gets the value of the specified column as a <see cref="T:System.Decimal" />
 
             
 
@@ -828,8 +848,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the specified column as a <see
-             cref="T:System.Decimal" />
+            >The value of the specified column as a <see cref="T:System.Decimal" />
 
             
 
@@ -837,7 +856,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -863,8 +886,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Conversions are performed based on the underlying capabilities of the ODBC driver. If the conversion is not supported, the method call fails.</para>
           <para
-            >Call <see
-             cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -880,7 +902,11 @@
           <para>The value of the specified column as a double-precision floating-point number.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -911,8 +937,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns an <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -922,8 +947,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -949,8 +973,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 
@@ -960,8 +983,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
@@ -969,7 +991,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -995,8 +1021,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Conversions are performed based on the underlying capabilities of the ODBC driver. If the conversion is not supported then the method call will fail.</para>
           <para
-            >Call <see
-             cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -1012,7 +1037,11 @@
           <para>The value of the specified column as a single-precision floating-point number.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1038,8 +1067,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Conversions are performed based on the underlying capabilities of the ODBC driver. If the conversion is not supported, the method call fails.</para>
           <para
-            >Call <see
-             cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -1055,7 +1083,11 @@
           <para>The value of the specified column as a GUID.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1081,8 +1113,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Conversions are performed based on the underlying capabilities of the ODBC driver. If the conversion is not supported, the method call fails.</para>
           <para
-            >Call <see
-             cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -1098,7 +1129,11 @@
           <para>The value of the specified column as a 16-bit signed integer.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1124,8 +1159,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Conversions are performed based on the underlying capabilities of the ODBC driver. If the conversion is not supported, the method call fails.</para>
           <para
-            >Call <see
-             cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -1141,7 +1175,11 @@
           <para>The value of the specified column as a 32-bit signed integer.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1167,8 +1205,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Conversions are performed based on the underlying capabilities of the ODBC driver. If the conversion is not supported, the method call fails.</para>
           <para
-            >Call <see
-             cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -1184,7 +1221,11 @@
           <para>The value of the specified column as a 64-bit signed integer.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1216,7 +1257,11 @@
           <para>A string that is the name of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1255,13 +1300,11 @@
              is kana-width insensitive.</para
           >
           <para
-            >Because ordinal-based lookups are more efficient than named lookups, it is inefficient to call <see
-             cref="M:System.Data.Odbc.OdbcDataReader.GetOrdinal(System.String)" />
+            >Because ordinal-based lookups are more efficient than named lookups, it is inefficient to call <see cref="M:System.Data.Odbc.OdbcDataReader.GetOrdinal(System.String)" />
 
             
 
-             within a loop. Instead, call <see
-             cref="M:System.Data.Odbc.OdbcDataReader.GetOrdinal(System.String)" />
+             within a loop. Instead, call <see cref="M:System.Data.Odbc.OdbcDataReader.GetOrdinal(System.String)" />
 
             
 
@@ -1277,7 +1320,11 @@
           <para>The zero-based column ordinal.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1303,8 +1350,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Data.Odbc.OdbcDataReader.GetSchemaTable" />
+            >The <see cref="M:System.Data.Odbc.OdbcDataReader.GetSchemaTable" />
 
             
 
@@ -1351,13 +1397,11 @@
               </term>
               <description>
                 <para
-                  >If <see
-                   cref="T:System.Data.DbType" />
+                  >If <see cref="T:System.Data.DbType" />
 
                   
 
-                   is a numeric data type, this is the maximum precision of the column. The precision depends on the definition of the column. If <see
-                   cref="T:System.Data.DbType" />
+                   is a numeric data type, this is the maximum precision of the column. The precision depends on the definition of the column. If <see cref="T:System.Data.DbType" />
 
                   
 
@@ -1371,13 +1415,11 @@
               </term>
               <description>
                 <para
-                  >If <see
-                   cref="T:System.Data.DbType" />
+                  >If <see cref="T:System.Data.DbType" />
 
                   
 
-                   is <see
-                   cref="F:System.Data.DbType.Decimal" />
+                   is <see cref="F:System.Data.DbType.Decimal" />
 
                   
 
@@ -1391,8 +1433,7 @@
               </term>
               <description>
                 <para
-                  >Maps to the common language runtime type of <see
-                   cref="T:System.Data.DbType" />
+                  >Maps to the common language runtime type of <see cref="T:System.Data.DbType" />
 
                   
 
@@ -1507,16 +1548,14 @@
 
             
 
-             needs the correct identification of the primary keys of the table in order to work correctly. If the BaseTableName is not returned for every column in the query results, the .NET Framework Data Provider for ODBC tries to parse the SQL statement to find the table names involved in the query. This works with UPDATE, INSERT, DELETE and simple SELECT statements, but not with stored procedures or SELECT statements based on joins. If some or all the schema information is missing from this table, the <see
-             cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+             needs the correct identification of the primary keys of the table in order to work correctly. If the BaseTableName is not returned for every column in the query results, the .NET Framework Data Provider for ODBC tries to parse the SQL statement to find the table names involved in the query. This works with UPDATE, INSERT, DELETE and simple SELECT statements, but not with stored procedures or SELECT statements based on joins. If some or all the schema information is missing from this table, the <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
             
 
              will not work correctly, because it has insufficient schema information to automatically generate the correct INSERT, UPDATE, or DELETE statements.</para
           >
           <para
-            >To make sure that metadata columns return the correct information, you must call <see
-             cref="M:System.Data.Odbc.OdbcCommand.ExecuteReader" />
+            >To make sure that metadata columns return the correct information, you must call <see cref="M:System.Data.Odbc.OdbcCommand.ExecuteReader" />
 
             
 
@@ -1530,13 +1569,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Data.DataTable" />
+            >Returns a <see cref="T:System.Data.DataTable" />
 
             
 
-             that describes the column metadata of the <see
-             cref="T:System.Data.Odbc.OdbcDataReader" />
+             that describes the column metadata of the <see cref="T:System.Data.Odbc.OdbcDataReader" />
 
             
 
@@ -1546,8 +1583,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.DataTable" />
+            >A <see cref="T:System.Data.DataTable" />
 
             
 
@@ -1574,8 +1610,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Conversions are performed based on the underlying capabilities of the ODBC driver. If the conversion is not supported, the method call fails.</para>
           <para
-            >Call <see
-             cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.Odbc.OdbcDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -1585,8 +1620,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.String" />
+            >Gets the value of the specified column as a <see cref="T:System.String" />
 
             
 
@@ -1596,8 +1630,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the specified column as a <see
-             cref="T:System.String" />
+            >The value of the specified column as a <see cref="T:System.String" />
 
             
 
@@ -1605,7 +1638,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1631,8 +1668,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.TimeSpan" />
+            >Gets the value of the specified column as a <see cref="T:System.TimeSpan" />
 
             
 
@@ -1642,8 +1678,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the specified column as a <see
-             cref="T:System.TimeSpan" />
+            >The value of the specified column as a <see cref="T:System.TimeSpan" />
 
             
 
@@ -1651,7 +1686,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1676,8 +1715,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns <see
-             cref="T:System.DBNull" />
+            >This method returns <see cref="T:System.DBNull" />
 
             
 
@@ -1693,7 +1731,11 @@
           <para>The value to return.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1718,34 +1760,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For most applications, the <see
-             cref="M:System.Data.Odbc.OdbcDataReader.GetValues" />
+            >For most applications, the <see cref="M:System.Data.Odbc.OdbcDataReader.GetValues" />
 
             
 
              method provides an efficient means for retrieving all columns, instead of retrieving each column individually.</para
           >
           <para
-            >You can pass an <see
-             cref="T:System.Object" />
+            >You can pass an <see cref="T:System.Object" />
 
             
 
-             array that contains fewer than the number of columns that are contained in the resulting row. Only the amount of data the <see
-             cref="T:System.Object" />
+             array that contains fewer than the number of columns that are contained in the resulting row. Only the amount of data the <see cref="T:System.Object" />
 
             
 
-             array holds is copied to the array. You can also pass an <see
-             cref="T:System.Object" />
+             array holds is copied to the array. You can also pass an <see cref="T:System.Object" />
 
             
 
              array whose length is more than the number of columns that are contained in the resulting row.</para
           >
           <para
-            >This method returns <see
-             cref="T:System.DBNull" />
+            >This method returns <see cref="T:System.DBNull" />
 
             
 
@@ -1759,8 +1796,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of instances of <see
-             cref="T:System.Object" />
+            >The number of instances of <see cref="T:System.Object" />
 
             
 
@@ -1768,12 +1804,15 @@
           >
         </returns>
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Object" />
+          An array of type <see cref="T:System.Object" />
 
           
 
@@ -1797,8 +1836,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Data.Odbc.OdbcDataReader" />
+            >Gets a value that indicates whether the <see cref="T:System.Data.Odbc.OdbcDataReader" />
 
             
 
@@ -1826,13 +1864,11 @@
 
             
 
-             and <see
-             cref="P:System.Data.Odbc.OdbcDataReader.RecordsAffected" />
+             and <see cref="P:System.Data.Odbc.OdbcDataReader.RecordsAffected" />
 
             
 
-             are the only properties that you can call after the <see
-             cref="T:System.Data.Odbc.OdbcDataReader" />
+             are the only properties that you can call after the <see cref="T:System.Data.Odbc.OdbcDataReader" />
 
             
 
@@ -1842,8 +1878,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the <see
-             cref="T:System.Data.Odbc.OdbcDataReader" />
+            >Indicates whether the <see cref="T:System.Data.Odbc.OdbcDataReader" />
 
             
 
@@ -1869,13 +1904,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To avoid raising an error, call this method to look for null column values before calling the typed Get methods (for example, <see
-             cref="M:System.Data.Odbc.OdbcDataReader.GetByte(System.Int32)" />
+            >To avoid raising an error, call this method to look for null column values before calling the typed Get methods (for example, <see cref="M:System.Data.Odbc.OdbcDataReader.GetByte(System.Int32)" />
 
             
 
-            , <see
-             cref="M:System.Data.Odbc.OdbcDataReader.GetChar(System.Int32)" />
+            , <see cref="M:System.Data.Odbc.OdbcDataReader.GetChar(System.Int32)" />
 
             
 
@@ -1889,8 +1922,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified column value is equivalent to <see
-             cref="T:System.DBNull" />
+            >true if the specified column value is equivalent to <see cref="T:System.DBNull" />
 
             
 
@@ -1898,7 +1930,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1962,8 +1998,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Used to process multiple results that can be generated by executing batch SQL statements.</para>
           <para
-            >By default, the <see
-             cref="T:System.Data.Odbc.OdbcDataReader" />
+            >By default, the <see cref="T:System.Data.Odbc.OdbcDataReader" />
 
             
 
@@ -1973,8 +2008,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Advances the <see
-             cref="T:System.Data.Odbc.OdbcDataReader" />
+            >Advances the <see cref="T:System.Data.Odbc.OdbcDataReader" />
 
             
 
@@ -2002,31 +2036,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default position of the <see
-             cref="T:System.Data.Odbc.OdbcDataReader" />
+            >The default position of the <see cref="T:System.Data.Odbc.OdbcDataReader" />
 
             
 
-             is before the first record. Therefore, you must call <see
-             cref="M:System.Data.Odbc.OdbcDataReader.Read" />
+             is before the first record. Therefore, you must call <see cref="M:System.Data.Odbc.OdbcDataReader.Read" />
 
             
 
              to start accessing any data.</para
           >
           <para
-            >While the <see
-             cref="T:System.Data.Odbc.OdbcDataReader" />
+            >While the <see cref="T:System.Data.Odbc.OdbcDataReader" />
 
             
 
-             is being used, the associated <see
-             cref="T:System.Data.Odbc.OdbcConnection" />
+             is being used, the associated <see cref="T:System.Data.Odbc.OdbcConnection" />
 
             
 
-             is busy serving it until you call <see
-             cref="M:System.Data.Odbc.OdbcDataReader.Close" />
+             is busy serving it until you call <see cref="M:System.Data.Odbc.OdbcDataReader.Close" />
 
             
 
@@ -2036,8 +2065,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Advances the <see
-             cref="T:System.Data.Odbc.OdbcDataReader" />
+            >Advances the <see cref="T:System.Data.Odbc.OdbcDataReader" />
 
             
 
@@ -2065,21 +2093,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Data.Odbc.OdbcDataReader.RecordsAffected" />
+            >The <see cref="P:System.Data.Odbc.OdbcDataReader.RecordsAffected" />
 
             
 
-             property is not set until all rows are read and you close the <see
-             cref="T:System.Data.Odbc.OdbcDataReader" />
+             property is not set until all rows are read and you close the <see cref="T:System.Data.Odbc.OdbcDataReader" />
 
             
 
             .</para
           >
           <para
-            >The value of this property is cumulative. For example, if two records are inserted in batch mode, the value of <see
-             cref="P:System.Data.Odbc.OdbcDataReader.RecordsAffected" />
+            >The value of this property is cumulative. For example, if two records are inserted in batch mode, the value of <see cref="P:System.Data.Odbc.OdbcDataReader.RecordsAffected" />
 
             
 
@@ -2090,13 +2115,11 @@
 
             
 
-             and <see
-             cref="P:System.Data.Odbc.OdbcDataReader.RecordsAffected" />
+             and <see cref="P:System.Data.Odbc.OdbcDataReader.RecordsAffected" />
 
             
 
-             are the only properties that you can call after the <see
-             cref="T:System.Data.Odbc.OdbcDataReader" />
+             are the only properties that you can call after the <see cref="T:System.Data.Odbc.OdbcDataReader" />
 
             
 

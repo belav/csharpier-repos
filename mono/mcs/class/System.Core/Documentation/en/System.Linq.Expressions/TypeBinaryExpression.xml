@@ -27,31 +27,26 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>A type test is an example of an operation between an expression and a type.</para>
       <para
-        >Use the <see
-         cref="M:System.Linq.Expressions.Expression.TypeIs(System.Linq.Expressions.Expression,System.Type)" />
+        >Use the <see cref="M:System.Linq.Expressions.Expression.TypeIs(System.Linq.Expressions.Expression,System.Type)" />
 
         
 
-         factory method to create a <see
-         cref="T:System.Linq.Expressions.TypeBinaryExpression" />
+         factory method to create a <see cref="T:System.Linq.Expressions.TypeBinaryExpression" />
 
         
 
         .</para
       >
       <para
-        >The value of the <see
-         cref="P:System.Linq.Expressions.Expression.NodeType" />
+        >The value of the <see cref="P:System.Linq.Expressions.Expression.NodeType" />
 
         
 
-         property of a <see
-         cref="T:System.Linq.Expressions.TypeBinaryExpression" />
+         property of a <see cref="T:System.Linq.Expressions.TypeBinaryExpression" />
 
         
 
-         object is <see
-         cref="F:System.Linq.Expressions.ExpressionType.TypeIs" />
+         object is <see cref="F:System.Linq.Expressions.ExpressionType.TypeIs" />
 
         
 
@@ -138,8 +133,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the node type of this Expression. Extension nodes should return <see
-             cref="F:System.Linq.Expressions.ExpressionType.Extension" />
+            >Returns the node type of this Expression. Extension nodes should return <see cref="F:System.Linq.Expressions.ExpressionType.Extension" />
 
             
 
@@ -164,8 +158,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the static type of the expression that this <see
-             cref="P:System.Linq.Expressions.TypeBinaryExpression.Expression" />
+            >Gets the static type of the expression that this <see cref="P:System.Linq.Expressions.TypeBinaryExpression.Expression" />
 
             
 
@@ -224,12 +217,15 @@
           <para>This expression if no children are changed or an expression with the updated children.</para>
         </returns>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Linq.Expressions.TypeBinaryExpression.Expression" />
+          The <see cref="P:System.Linq.Expressions.TypeBinaryExpression.Expression" />
 
           
 

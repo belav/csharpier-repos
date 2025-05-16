@@ -22,21 +22,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.RoleGroupCollection" />
+        >The <see cref="T:System.Web.UI.WebControls.RoleGroupCollection" />
 
         
 
-         class manages the list of role groups associated with a particular <see
-         cref="T:System.Web.UI.WebControls.LoginView" />
+         class manages the list of role groups associated with a particular <see cref="T:System.Web.UI.WebControls.LoginView" />
 
         
 
          template. Each role group defines the content and controls to display to a particular group of users on your Web site. It is possible to assign several role groups to the same template.</para
       >
       <para
-        >To find the role group in the collection that a particular user belongs to, you can use the <see
-         cref="M:System.Web.UI.WebControls.RoleGroupCollection.GetMatchingRoleGroup(System.Security.Principal.IPrincipal)" />
+        >To find the role group in the collection that a particular user belongs to, you can use the <see cref="M:System.Web.UI.WebControls.RoleGroupCollection.GetMatchingRoleGroup(System.Security.Principal.IPrincipal)" />
 
         
 
@@ -44,8 +41,7 @@
       >
       <block subset="none" type="note">
         <para
-          >The order of the roles in the <see
-           cref="T:System.Web.UI.WebControls.RoleGroupCollection" />
+          >The order of the roles in the <see cref="T:System.Web.UI.WebControls.RoleGroupCollection" />
 
           
 
@@ -53,13 +49,11 @@
         >
       </block>
       <para
-        >You must configure role management to use the <see
-         cref="T:System.Web.UI.WebControls.RoleGroupCollection" />
+        >You must configure role management to use the <see cref="T:System.Web.UI.WebControls.RoleGroupCollection" />
 
         
 
-         class to manage a list of role groups. For more information, see <format
-         type="text/html">
+         class to manage a list of role groups. For more information, see <format type="text/html">
           <a href="a0d2f19d-a2a7-496d-88b6-30133f8ea3d6">Understanding Role Management</a>
         </format>
 
@@ -71,8 +65,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains a sequential list of role groups that the <see
-         cref="T:System.Web.UI.WebControls.LoginView" />
+        >Contains a sequential list of role groups that the <see cref="T:System.Web.UI.WebControls.LoginView" />
 
         
 
@@ -91,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.RoleGroupCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.RoleGroupCollection" />
 
             
 
@@ -124,12 +116,15 @@
           <para>Adds a role group to the end of the collection.</para>
         </summary>
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.RoleGroup" />
+          The <see cref="T:System.Web.UI.WebControls.RoleGroup" />
 
           
 
@@ -164,12 +159,15 @@
           <para>true if the specified role group is a member of the collection; otherwise false.</para>
         </returns>
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.RoleGroup" />
+          The <see cref="T:System.Web.UI.WebControls.RoleGroup" />
 
           
 
@@ -198,13 +196,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.RoleGroupCollection.CopyTo(System.Web.UI.WebControls.RoleGroup[],System.Int32)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.RoleGroupCollection.CopyTo(System.Web.UI.WebControls.RoleGroup[],System.Int32)" />
 
             
 
-             method to copy the contents of the collection into the specified zero-based array. Items are copied starting at the specified index of the target array. After the items are in an array, you can use array syntax to access the items in the <see
-             cref="T:System.Web.UI.WebControls.RoleGroupCollection" />
+             method to copy the contents of the collection into the specified zero-based array. Items are copied starting at the specified index of the target array. After the items are in an array, you can use array syntax to access the items in the <see cref="T:System.Web.UI.WebControls.RoleGroupCollection" />
 
             
 
@@ -214,13 +210,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the items from the <see
-             cref="T:System.Web.UI.WebControls.RoleGroupCollection" />
+            >Copies all the items from the <see cref="T:System.Web.UI.WebControls.RoleGroupCollection" />
 
             
 
-             collection to a compatible one-dimensional array of <see
-             cref="T:System.Web.UI.WebControls.RoleGroup" />
+             collection to a compatible one-dimensional array of <see cref="T:System.Web.UI.WebControls.RoleGroup" />
 
             
 
@@ -228,19 +222,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A zero-based array of <see
-           cref="T:System.Web.UI.WebControls.RoleGroup" />
+          A zero-based array of <see cref="T:System.Web.UI.WebControls.RoleGroup" />
 
           
 
            objects that receives the items copied from the collection.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -268,8 +269,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.RoleGroupCollection.GetMatchingRoleGroup(System.Security.Principal.IPrincipal)" />
+            >The <see cref="M:System.Web.UI.WebControls.RoleGroupCollection.GetMatchingRoleGroup(System.Security.Principal.IPrincipal)" />
 
             
 
@@ -277,13 +277,11 @@
           >
           <para>If the specified user account is not part of any of the role groups in the collection, null is returned.</para>
           <para
-            >You must configure role management to use the <see
-             cref="M:System.Web.UI.WebControls.RoleGroupCollection.GetMatchingRoleGroup(System.Security.Principal.IPrincipal)" />
+            >You must configure role management to use the <see cref="M:System.Web.UI.WebControls.RoleGroupCollection.GetMatchingRoleGroup(System.Security.Principal.IPrincipal)" />
 
             
 
-             method. For more information, see <format
-             type="text/html">
+             method. For more information, see <format type="text/html">
               <a href="a0d2f19d-a2a7-496d-88b6-30133f8ea3d6">Understanding Role Management</a>
             </format>
 
@@ -299,8 +297,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.RoleGroup" />
+            >A <see cref="T:System.Web.UI.WebControls.RoleGroup" />
 
             
 
@@ -308,12 +305,15 @@
           >
         </returns>
         <param name="user">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Principal.IPrincipal" />
+          An <see cref="T:System.Security.Principal.IPrincipal" />
 
           
 
@@ -341,8 +341,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.RoleGroupCollection.IndexOf(System.Web.UI.WebControls.RoleGroup)" />
+            >The <see cref="M:System.Web.UI.WebControls.RoleGroupCollection.IndexOf(System.Web.UI.WebControls.RoleGroup)" />
 
             
 
@@ -352,8 +351,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches the collection and returns the zero-based index of the first occurrence of the specified <see
-             cref="T:System.Web.UI.WebControls.RoleGroup" />
+            >Searches the collection and returns the zero-based index of the first occurrence of the specified <see cref="T:System.Web.UI.WebControls.RoleGroup" />
 
             
 
@@ -363,13 +361,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the first occurrence of <paramref
-             name="group" />
+            >The zero-based index of the first occurrence of <paramref name="group" />
 
             
 
-             within the entire <see
-             cref="T:System.Web.UI.WebControls.RoleGroupCollection" />
+             within the entire <see cref="T:System.Web.UI.WebControls.RoleGroupCollection" />
 
             
 
@@ -377,12 +373,15 @@
           >
         </returns>
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.RoleGroup" />
+          The <see cref="T:System.Web.UI.WebControls.RoleGroup" />
 
           
 
@@ -411,13 +410,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.RoleGroupCollection.Insert(System.Int32,System.Web.UI.WebControls.RoleGroup)" />
+            >The <see cref="M:System.Web.UI.WebControls.RoleGroupCollection.Insert(System.Int32,System.Web.UI.WebControls.RoleGroup)" />
 
             
 
-             method inserts the specified <see
-             cref="T:System.Web.UI.WebControls.RoleGroup" />
+             method inserts the specified <see cref="T:System.Web.UI.WebControls.RoleGroup" />
 
             
 
@@ -427,8 +424,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Web.UI.WebControls.RoleGroup" />
+            >Adds a <see cref="T:System.Web.UI.WebControls.RoleGroup" />
 
             
 
@@ -436,14 +432,22 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index at which to insert the role group. </param
         >
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -494,18 +498,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The first instance of the specified <see
-             cref="T:System.Web.UI.WebControls.RoleGroup" />
+            >The first instance of the specified <see cref="T:System.Web.UI.WebControls.RoleGroup" />
 
             
 
-             object is removed from the <see
-             cref="T:System.Web.UI.WebControls.RoleGroupCollection" />
+             object is removed from the <see cref="T:System.Web.UI.WebControls.RoleGroupCollection" />
 
             
 
-             collection. Groups that follow the removed group all move up in the index to fill the vacated spot. If there is more than one instance of the specified <see
-             cref="T:System.Web.UI.WebControls.RoleGroup" />
+             collection. Groups that follow the removed group all move up in the index to fill the vacated spot. If there is more than one instance of the specified <see cref="T:System.Web.UI.WebControls.RoleGroup" />
 
             
 
@@ -517,12 +518,15 @@
           <para>Deletes the first occurrence of the specified role group from the collection.</para>
         </summary>
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.RoleGroup" />
+          The <see cref="T:System.Web.UI.WebControls.RoleGroup" />
 
           
 

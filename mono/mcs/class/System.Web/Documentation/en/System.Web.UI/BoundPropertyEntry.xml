@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When a page is parsed, the page parser retains information about an expression and the property it is bound to in a <see
-         cref="T:System.Web.UI.BoundPropertyEntry" />
+        >When a page is parsed, the page parser retains information about an expression and the property it is bound to in a <see cref="T:System.Web.UI.BoundPropertyEntry" />
 
         
 

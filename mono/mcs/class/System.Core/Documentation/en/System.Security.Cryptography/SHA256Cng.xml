@@ -48,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.SHA256Cng" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.SHA256Cng" />
 
             
 

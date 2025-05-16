@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="eea11fe5-d8b0-4314-bb5d-8a58166fb1c3">Cancellation</a>
         </format>
 
@@ -34,8 +33,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Signals to a <see
-         cref="T:System.Threading.CancellationToken" />
+        >Signals to a <see cref="T:System.Threading.CancellationToken" />
 
         
 
@@ -60,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.CancellationTokenSource" />
+            >Initializes a new instance of the <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
@@ -90,36 +87,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The countdown for the <paramref
-             name="millisecondsDelay" />
+            >The countdown for the <paramref name="millisecondsDelay" />
 
             
 
-             starts during the call to the constructor.  When the <paramref
-             name="millisecondsDelay" />
+             starts during the call to the constructor.  When the <paramref name="millisecondsDelay" />
 
             
 
-             expires, the constructed <see
-             cref="T:System.Threading.CancellationTokenSource" />
+             expires, the constructed <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
              is canceled (if it has not been canceled already).</para
           >
           <para
-            >Subsequent calls to <see
-             cref="M:System.Threading.CancellationTokenSource.CancelAfter(System.Int32)" />
+            >Subsequent calls to <see cref="M:System.Threading.CancellationTokenSource.CancelAfter(System.Int32)" />
 
             
 
-             will reset the <paramref
-             name="millisecondsDelay" />
+             will reset the <paramref name="millisecondsDelay" />
 
             
 
-             for the constructed <see
-             cref="T:System.Threading.CancellationTokenSource" />
+             for the constructed <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
@@ -129,8 +120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.CancellationTokenSource" />
+            >Initializes a new instance of the <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
@@ -138,12 +128,15 @@
           >
         </summary>
         <param name="millisecondsDelay">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The time span to wait before canceling this <see
-           cref="T:System.Threading.CancellationTokenSource" />
+          The time span to wait before canceling this <see cref="T:System.Threading.CancellationTokenSource" />
 
           
 
@@ -168,21 +161,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The countdown for the delay starts during the call to the constructor. When the delay expires, the constructed <see
-             cref="T:System.Threading.CancellationTokenSource" />
+            >The countdown for the delay starts during the call to the constructor. When the delay expires, the constructed <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
              is canceled, if it has not been canceled already.</para
           >
           <para
-            >Subsequent calls to <see
-             cref="M:System.Threading.CancellationTokenSource.CancelAfter(System.TimeSpan)" />
+            >Subsequent calls to <see cref="M:System.Threading.CancellationTokenSource.CancelAfter(System.TimeSpan)" />
 
             
 
-             will reset the delay for the constructed <see
-             cref="T:System.Threading.CancellationTokenSource" />
+             will reset the delay for the constructed <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
@@ -192,8 +182,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.CancellationTokenSource" />
+            >Initializes a new instance of the <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
@@ -201,12 +190,15 @@
           >
         </summary>
         <param name="delay">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The time span to wait before canceling this <see
-           cref="T:System.Threading.CancellationTokenSource" />
+          The time span to wait before canceling this <see cref="T:System.Threading.CancellationTokenSource" />
 
           
 
@@ -232,21 +224,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            > The associated <see
-             cref="T:System.Threading.CancellationToken" />
+            > The associated <see cref="T:System.Threading.CancellationToken" />
 
             
 
-             will be notified of the cancellation and will transition to a state where <see
-             cref="P:System.Threading.CancellationToken.IsCancellationRequested" />
+             will be notified of the cancellation and will transition to a state where <see cref="P:System.Threading.CancellationToken.IsCancellationRequested" />
 
             
 
              returns true. </para
           >
           <para
-            >Any callbacks or cancelable operations registered with the <see
-             cref="T:System.Threading.CancellationToken" />
+            >Any callbacks or cancelable operations registered with the <see cref="T:System.Threading.CancellationToken" />
 
             
 
@@ -254,16 +243,14 @@
           >
           <para>Cancelable operations and callbacks registered with the token should not throw exceptions.</para>
           <para
-            >However, this overload of Cancel will aggregate any exceptions thrown into an <see
-             cref="T:System.AggregateException" />
+            >However, this overload of Cancel will aggregate any exceptions thrown into an <see cref="T:System.AggregateException" />
 
             
 
             , such that one callback throwing an exception will not prevent other registered callbacks from being executed.</para
           >
           <para
-            >The <see
-             cref="T:System.Threading.ExecutionContext" />
+            >The <see cref="T:System.Threading.ExecutionContext" />
 
             
 
@@ -297,21 +284,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            > The associated <see
-             cref="T:System.Threading.CancellationToken" />
+            > The associated <see cref="T:System.Threading.CancellationToken" />
 
             
 
-             will be notified of the cancellation and will transition to a state where <see
-             cref="P:System.Threading.CancellationToken.IsCancellationRequested" />
+             will be notified of the cancellation and will transition to a state where <see cref="P:System.Threading.CancellationToken.IsCancellationRequested" />
 
             
 
              returns true. </para
           >
           <para
-            >Any callbacks or cancelable operations registered with the <see
-             cref="T:System.Threading.CancellationToken" />
+            >Any callbacks or cancelable operations registered with the <see cref="T:System.Threading.CancellationToken" />
 
             
 
@@ -319,34 +303,29 @@
           >
           <para>Cancelable operations and callbacks registered with the token should not throw exceptions. </para>
           <para
-            >If <paramref
-             name="throwOnFirstException" />
+            >If <paramref name="throwOnFirstException" />
 
             
 
-             is true, an exception will immediately propagate out of the call to <see
-             cref="M:System.Threading.CancellationTokenSource.Cancel(System.Boolean)" />
+             is true, an exception will immediately propagate out of the call to <see cref="M:System.Threading.CancellationTokenSource.Cancel(System.Boolean)" />
 
             
 
             , preventing the remaining callbacks and cancelable operations from being processed.</para
           >
           <para
-            > If <paramref
-             name="throwOnFirstException" />
+            > If <paramref name="throwOnFirstException" />
 
             
 
-             is false, this overload will aggregate any exceptions thrown into an <see
-             cref="T:System.AggregateException" />
+             is false, this overload will aggregate any exceptions thrown into an <see cref="T:System.AggregateException" />
 
             
 
             , such that one callback throwing an exception will not prevent other registered callbacks from being executed.</para
           >
           <para
-            >The <see
-             cref="T:System.Threading.ExecutionContext" />
+            >The <see cref="T:System.Threading.ExecutionContext" />
 
             
 
@@ -359,7 +338,11 @@
           <para>Communicates a request for cancellation, and specifies whether remaining callbacks and cancelable operations should be processed.</para>
         </summary>
         <param name="throwOnFirstException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -387,31 +370,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The countdown for the <paramref
-             name="millisecondsDelay" />
+            >The countdown for the <paramref name="millisecondsDelay" />
 
             
 
-             starts during this call. When the <paramref
-             name="millisecondsDelay" />
+             starts during this call. When the <paramref name="millisecondsDelay" />
 
             
 
-             expires, this <see
-             cref="T:System.Threading.CancellationTokenSource" />
+             expires, this <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
              is canceled, if it has not been canceled already.</para
           >
           <para
-            >Subsequent calls to CancelAfter will reset the <paramref
-             name="millisecondsDelay" />
+            >Subsequent calls to CancelAfter will reset the <paramref name="millisecondsDelay" />
 
             
 
-             for this <see
-             cref="T:System.Threading.CancellationTokenSource" />
+             for this <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
@@ -421,8 +399,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Schedules a cancel operation on this <see
-             cref="T:System.Threading.CancellationTokenSource" />
+            >Schedules a cancel operation on this <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
@@ -430,12 +407,15 @@
           >
         </summary>
         <param name="millisecondsDelay">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The time span to wait before canceling this <see
-           cref="T:System.Threading.CancellationTokenSource" />
+          The time span to wait before canceling this <see cref="T:System.Threading.CancellationTokenSource" />
 
           
 
@@ -464,8 +444,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Schedules a cancel operation on this <see
-             cref="T:System.Threading.CancellationTokenSource" />
+            >Schedules a cancel operation on this <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
@@ -473,12 +452,15 @@
           >
         </summary>
         <param name="delay">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The time span to wait before canceling this <see
-           cref="T:System.Threading.CancellationTokenSource" />
+          The time span to wait before canceling this <see cref="T:System.Threading.CancellationTokenSource" />
 
           
 
@@ -516,8 +498,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Threading.CancellationTokenSource" />
+            >Creates a <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
@@ -527,8 +508,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Threading.CancellationTokenSource" />
+            >A <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
@@ -536,7 +516,11 @@
           >
         </returns>
         <param name="tokens">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -569,8 +553,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Threading.CancellationTokenSource" />
+            >Creates a <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
@@ -580,8 +563,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Threading.CancellationTokenSource" />
+            >A <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
@@ -589,14 +571,22 @@
           >
         </returns>
         <param name="token1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first cancellation token to observe.</param
         >
         <param name="token2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -622,38 +612,32 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call Dispose when you are finished using the <see
-             cref="T:System.Threading.CancellationTokenSource" />
+            >Call Dispose when you are finished using the <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
-            . The Dispose method leaves the <see
-             cref="T:System.Threading.CancellationTokenSource" />
+            . The Dispose method leaves the <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
-             in an unusable state. After calling Dispose, you must release all references to the <see
-             cref="T:System.Threading.CancellationTokenSource" />
+             in an unusable state. After calling Dispose, you must release all references to the <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Threading.CancellationTokenSource" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
              was occupying.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -663,13 +647,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call Dispose before you release your last reference to the <see
-               cref="T:System.Threading.CancellationTokenSource" />
+              >Always call Dispose before you release your last reference to the <see cref="T:System.Threading.CancellationTokenSource" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.Threading.CancellationTokenSource" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Threading.CancellationTokenSource" />
 
               
 
@@ -680,8 +662,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the current instance of the <see
-             cref="T:System.Threading.CancellationTokenSource" />
+            >Releases all resources used by the current instance of the <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
@@ -711,8 +692,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Threading.CancellationTokenSource" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
@@ -720,7 +700,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -743,8 +727,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            > This property indicates whether cancellation has been requested for this token source, such as due to a call to its <see
-             cref="M:System.Threading.CancellationTokenSource.Cancel" />
+            > This property indicates whether cancellation has been requested for this token source, such as due to a call to its <see cref="M:System.Threading.CancellationTokenSource.Cancel" />
 
             
 
@@ -756,8 +739,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets whether cancellation has been requested for this <see
-             cref="T:System.Threading.CancellationTokenSource" />
+            >Gets whether cancellation has been requested for this <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
@@ -788,13 +770,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Threading.CancellationToken" />
+            >Gets the <see cref="T:System.Threading.CancellationToken" />
 
             
 
-             associated with this <see
-             cref="T:System.Threading.CancellationTokenSource" />
+             associated with this <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 

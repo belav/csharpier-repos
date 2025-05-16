@@ -42,8 +42,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For the generic version of this collection, see <see
-         cref="T:System.Collections.Generic.Stack`1" />
+        >For the generic version of this collection, see <see cref="T:System.Collections.Generic.Stack`1" />
 
         
 
@@ -57,56 +56,46 @@
          is implemented as a circular buffer.</para
       >
       <para
-        >The capacity of a <see
-         cref="T:System.Collections.Stack" />
+        >The capacity of a <see cref="T:System.Collections.Stack" />
 
         
 
-         is the number of elements the <see
-         cref="T:System.Collections.Stack" />
+         is the number of elements the <see cref="T:System.Collections.Stack" />
 
         
 
-         can hold. As elements are added to a <see
-         cref="T:System.Collections.Stack" />
+         can hold. As elements are added to a <see cref="T:System.Collections.Stack" />
 
         
 
         , the capacity is automatically increased as required through reallocation.</para
       >
       <para
-        >If <see
-         cref="P:System.Collections.Stack.Count" />
+        >If <see cref="P:System.Collections.Stack.Count" />
 
         
 
-         is less than the capacity of the stack, <see
-         cref="M:System.Collections.Stack.Push(System.Object)" />
+         is less than the capacity of the stack, <see cref="M:System.Collections.Stack.Push(System.Object)" />
 
         
 
-         is an O(1) operation. If the capacity needs to be increased to accommodate the new element, <see
-         cref="M:System.Collections.Stack.Push(System.Object)" />
+         is an O(1) operation. If the capacity needs to be increased to accommodate the new element, <see cref="M:System.Collections.Stack.Push(System.Object)" />
 
         
 
-         becomes an O(<paramref
-         name="n" />
+         becomes an O(<paramref name="n" />
 
         
 
-        ) operation, where <paramref
-         name="n" />
+        ) operation, where <paramref name="n" />
 
         
 
-         is <see
-         cref="P:System.Collections.Stack.Count" />
+         is <see cref="P:System.Collections.Stack.Count" />
 
         
 
-        . <see
-         cref="M:System.Collections.Stack.Pop" />
+        . <see cref="M:System.Collections.Stack.Pop" />
 
         
 
@@ -144,26 +133,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The capacity of a <see
-             cref="T:System.Collections.Stack" />
+            >The capacity of a <see cref="T:System.Collections.Stack" />
 
             
 
-             is the number of elements that the <see
-             cref="T:System.Collections.Stack" />
+             is the number of elements that the <see cref="T:System.Collections.Stack" />
 
             
 
-             can hold. As elements are added to a <see
-             cref="T:System.Collections.Stack" />
+             can hold. As elements are added to a <see cref="T:System.Collections.Stack" />
 
             
 
             , the capacity is automatically increased as required by reallocating the internal array.</para
           >
           <para
-            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.Stack" />
+            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -174,8 +159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Stack" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -204,62 +188,52 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The capacity of a <see
-             cref="T:System.Collections.Stack" />
+            >The capacity of a <see cref="T:System.Collections.Stack" />
 
             
 
-             is the number of elements that the <see
-             cref="T:System.Collections.Stack" />
+             is the number of elements that the <see cref="T:System.Collections.Stack" />
 
             
 
-             can hold. As elements are added to a <see
-             cref="T:System.Collections.Stack" />
+             can hold. As elements are added to a <see cref="T:System.Collections.Stack" />
 
             
 
             , the capacity is automatically increased as required by reallocating the internal array.</para
           >
           <para
-            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.Stack" />
+            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.Stack" />
 
             
 
             .</para
           >
           <para
-            >The elements are copied onto the <see
-             cref="T:System.Collections.Stack" />
+            >The elements are copied onto the <see cref="T:System.Collections.Stack" />
 
             
 
-             in the same order they are read by the <see
-             cref="T:System.Collections.IEnumerator" />
+             in the same order they are read by the <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             of the <see
-             cref="T:System.Collections.ICollection" />
+             of the <see cref="T:System.Collections.ICollection" />
 
             
 
             .</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >This constructor is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is the number of elements in <paramref
-             name="col" />
+             is the number of elements in <paramref name="col" />
 
             
 
@@ -269,8 +243,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Stack" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -278,12 +251,15 @@
           >
         </summary>
         <param name="col">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.ICollection" />
+          The <see cref="T:System.Collections.ICollection" />
 
           
 
@@ -311,44 +287,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The capacity of a <see
-             cref="T:System.Collections.Stack" />
+            >The capacity of a <see cref="T:System.Collections.Stack" />
 
             
 
-             is the number of elements that the <see
-             cref="T:System.Collections.Stack" />
+             is the number of elements that the <see cref="T:System.Collections.Stack" />
 
             
 
-             can hold. As elements are added to a <see
-             cref="T:System.Collections.Stack" />
+             can hold. As elements are added to a <see cref="T:System.Collections.Stack" />
 
             
 
             , the capacity is automatically increased as required by reallocating the internal array.</para
           >
           <para
-            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.Stack" />
+            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.Stack" />
 
             
 
             .</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >This constructor is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <paramref
-             name="initialCapacity" />
+             is <paramref name="initialCapacity" />
 
             
 
@@ -358,8 +327,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Stack" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -367,12 +335,15 @@
           >
         </summary>
         <param name="initialCapacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The initial number of elements that the <see
-           cref="T:System.Collections.Stack" />
+          The initial number of elements that the <see cref="T:System.Collections.Stack" />
 
           
 
@@ -407,18 +378,15 @@
              is set to zero, and references to other objects from elements of the collection are also released.</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Stack.Count" />
+             is <see cref="P:System.Collections.Stack.Count" />
 
             
 
@@ -428,8 +396,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all objects from the <see
-             cref="T:System.Collections.Stack" />
+            >Removes all objects from the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -460,18 +427,15 @@
           <para>A shallow copy of a collection copies only the elements of the collection, whether they are reference types or value types, but it does not copy the objects that the references refer to. The references in the new collection point to the same objects that the references in the original collection point to.</para>
           <para>In contrast, a deep copy of a collection copies the elements and everything directly or indirectly referenced by the elements.</para>
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Stack.Count" />
+             is <see cref="P:System.Collections.Stack.Count" />
 
             
 
@@ -481,8 +445,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a shallow copy of the <see
-             cref="T:System.Collections.Stack" />
+            >Creates a shallow copy of the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -492,8 +455,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A shallow copy of the <see
-             cref="T:System.Collections.Stack" />
+            >A shallow copy of the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -524,64 +486,53 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method determines equality by calling <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >This method determines equality by calling <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
             .</para
           >
           <para
-            >This method performs a linear search; therefore, this method is an O(<paramref
-             name="n" />
+            >This method performs a linear search; therefore, this method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Stack.Count" />
+             is <see cref="P:System.Collections.Stack.Count" />
 
             
 
             .</para
           >
           <para
-            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods on <paramref
-             name="obj" />
+             methods on <paramref name="obj" />
 
             
 
-             to determine whether <paramref
-             name="item" />
+             to determine whether <paramref name="item" />
 
             
 
-             exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             exists. In the earlier versions of the .NET Framework, this determination was made by using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods of the <paramref
-             name="obj" />
+             methods of the <paramref name="obj" />
 
             
 
@@ -591,8 +542,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether an element is in the <see
-             cref="T:System.Collections.Stack" />
+            >Determines whether an element is in the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -602,13 +552,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true, if <paramref
-             name="obj" />
+            >true, if <paramref name="obj" />
 
             
 
-             is found in the <see
-             cref="T:System.Collections.Stack" />
+             is found in the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -616,17 +564,19 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to locate in the <see
-           cref="T:System.Collections.Stack" />
+           to locate in the <see cref="T:System.Collections.Stack" />
 
           
 
@@ -657,26 +607,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The elements are copied onto the array in last-in-first-out (LIFO) order, similar to the order of the elements returned by a succession of calls to <see
-             cref="M:System.Collections.Stack.Pop" />
+            >The elements are copied onto the array in last-in-first-out (LIFO) order, similar to the order of the elements returned by a succession of calls to <see cref="M:System.Collections.Stack.Pop" />
 
             
 
             .</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Stack.Count" />
+             is <see cref="P:System.Collections.Stack.Count" />
 
             
 
@@ -686,13 +632,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see
-             cref="T:System.Collections.Stack" />
+            >Copies the <see cref="T:System.Collections.Stack" />
 
             
 
-             to an existing one-dimensional <see
-             cref="T:System.Array" />
+             to an existing one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -700,34 +644,38 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from <see
-           cref="T:System.Collections.Stack" />
+           that is the destination of the elements copied from <see cref="T:System.Collections.Stack" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -752,31 +700,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The capacity is the number of elements that the <see
-             cref="T:System.Collections.Stack" />
+            >The capacity is the number of elements that the <see cref="T:System.Collections.Stack" />
 
             
 
-             can store. <see
-             cref="P:System.Collections.Stack.Count" />
+             can store. <see cref="P:System.Collections.Stack.Count" />
 
             
 
-             is the number of elements that are actually in the <see
-             cref="T:System.Collections.Stack" />
+             is the number of elements that are actually in the <see cref="T:System.Collections.Stack" />
 
             
 
             .</para
           >
           <para
-            >The capacity is always greater than or equal to <see
-             cref="P:System.Collections.Stack.Count" />
+            >The capacity is always greater than or equal to <see cref="P:System.Collections.Stack.Count" />
 
             
 
-            . If <see
-             cref="P:System.Collections.Stack.Count" />
+            . If <see cref="P:System.Collections.Stack.Count" />
 
             
 
@@ -787,8 +730,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of elements contained in the <see
-             cref="T:System.Collections.Stack" />
+            >Gets the number of elements contained in the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -823,23 +765,19 @@
           <para>The foreach statement of the C# language (for each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
           <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
           <para
-            >Initially, the enumerator is positioned before the first element in the collection. <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Initially, the enumerator is positioned before the first element in the collection. <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             also brings the enumerator back to this position.  At this position, <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             also brings the enumerator back to this position.  At this position, <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             is undefined. Therefore, you must call <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is undefined. Therefore, you must call <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             to advance the enumerator to the first element of the collection before reading the value of <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -850,66 +788,54 @@
 
             
 
-             returns the same object until either <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             is called. <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             sets <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             sets <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              to the next element.</para
           >
           <para
-            >If <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returns false. When the enumerator is at this position, subsequent calls to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             also return false. If the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returned false, <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             returned false, <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             is undefined. To set <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             is undefined. To set <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             to the first element of the collection again, you can call <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             to the first element of the collection again, you can call <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             followed by <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             followed by <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
@@ -922,13 +848,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns an <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Collections.Stack" />
+             for the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -938,13 +862,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Collections.Stack" />
+             for the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -970,13 +892,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To guarantee the thread safety of the <see
-             cref="T:System.Collections.Stack" />
+            >To guarantee the thread safety of the <see cref="T:System.Collections.Stack" />
 
             
 
-            , all operations must be done through the wrapper returned by the <see
-             cref="M:System.Collections.Stack.Synchronized(System.Collections.Stack)" />
+            , all operations must be done through the wrapper returned by the <see cref="M:System.Collections.Stack.Synchronized(System.Collections.Stack)" />
 
             
 
@@ -984,8 +904,7 @@
           >
           <para>Enumerating through a collection is intrinsically not a thread-safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
           <para
-            >The following code example shows how to lock the collection using the <see
-             cref="P:System.Collections.Stack.SyncRoot" />
+            >The following code example shows how to lock the collection using the <see cref="P:System.Collections.Stack.SyncRoot" />
 
             
 
@@ -997,8 +916,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see
-             cref="T:System.Collections.Stack" />
+            >Gets a value indicating whether access to the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -1027,41 +945,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is similar to the <see
-             cref="M:System.Collections.Stack.Pop" />
+            >This method is similar to the <see cref="M:System.Collections.Stack.Pop" />
 
             
 
-             method, but <see
-             cref="M:System.Collections.Stack.Peek" />
+             method, but <see cref="M:System.Collections.Stack.Peek" />
 
             
 
-             does not modify the <see
-             cref="T:System.Collections.Stack" />
+             does not modify the <see cref="T:System.Collections.Stack" />
 
             
 
             .</para
           >
           <para
-            >null can be pushed onto the <see
-             cref="T:System.Collections.Stack" />
+            >null can be pushed onto the <see cref="T:System.Collections.Stack" />
 
             
 
-             as a placeholder, if needed. To distinguish between a null value and the end of the stack, check the <see
-             cref="P:System.Collections.Stack.Count" />
+             as a placeholder, if needed. To distinguish between a null value and the end of the stack, check the <see cref="P:System.Collections.Stack.Count" />
 
             
 
-             property or catch the <see
-             cref="T:System.InvalidOperationException" />
+             property or catch the <see cref="T:System.InvalidOperationException" />
 
             
 
-            , which is thrown when the <see
-             cref="T:System.Collections.Stack" />
+            , which is thrown when the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -1072,8 +983,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the object at the top of the <see
-             cref="T:System.Collections.Stack" />
+            >Returns the object at the top of the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -1083,13 +993,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Object" />
+            >The <see cref="T:System.Object" />
 
             
 
-             at the top of the <see
-             cref="T:System.Collections.Stack" />
+             at the top of the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -1118,41 +1026,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is similar to the <see
-             cref="M:System.Collections.Stack.Peek" />
+            >This method is similar to the <see cref="M:System.Collections.Stack.Peek" />
 
             
 
-             method, but <see
-             cref="M:System.Collections.Stack.Peek" />
+             method, but <see cref="M:System.Collections.Stack.Peek" />
 
             
 
-             does not modify the <see
-             cref="T:System.Collections.Stack" />
+             does not modify the <see cref="T:System.Collections.Stack" />
 
             
 
             .</para
           >
           <para
-            >null can be pushed onto the <see
-             cref="T:System.Collections.Stack" />
+            >null can be pushed onto the <see cref="T:System.Collections.Stack" />
 
             
 
-             as a placeholder, if needed. To distinguish between a null value and the end of the stack, check the <see
-             cref="P:System.Collections.Stack.Count" />
+             as a placeholder, if needed. To distinguish between a null value and the end of the stack, check the <see cref="P:System.Collections.Stack.Count" />
 
             
 
-             property or catch the <see
-             cref="T:System.InvalidOperationException" />
+             property or catch the <see cref="T:System.InvalidOperationException" />
 
             
 
-            , which is thrown when the <see
-             cref="T:System.Collections.Stack" />
+            , which is thrown when the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -1169,8 +1070,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes and returns the object at the top of the <see
-             cref="T:System.Collections.Stack" />
+            >Removes and returns the object at the top of the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -1180,13 +1080,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Object" />
+            >The <see cref="T:System.Object" />
 
             
 
-             removed from the top of the <see
-             cref="T:System.Collections.Stack" />
+             removed from the top of the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -1224,54 +1122,45 @@
              is implemented as a circular buffer.</para
           >
           <para
-            >If <see
-             cref="P:System.Collections.Stack.Count" />
+            >If <see cref="P:System.Collections.Stack.Count" />
 
             
 
-             already equals the capacity, the capacity of the <see
-             cref="T:System.Collections.Stack" />
+             already equals the capacity, the capacity of the <see cref="T:System.Collections.Stack" />
 
             
 
              is increased by automatically reallocating the internal array, and the existing elements are copied to the new array before the new element is added.</para
           >
           <para
-            >null can be pushed onto the <see
-             cref="T:System.Collections.Stack" />
+            >null can be pushed onto the <see cref="T:System.Collections.Stack" />
 
             
 
              as a placeholder, if needed. It occupies a slot in the stack and is treated like any object.</para
           >
           <para
-            >If <see
-             cref="P:System.Collections.Stack.Count" />
+            >If <see cref="P:System.Collections.Stack.Count" />
 
             
 
-             is less than the capacity of the stack, <see
-             cref="M:System.Collections.Stack.Push(System.Object)" />
+             is less than the capacity of the stack, <see cref="M:System.Collections.Stack.Push(System.Object)" />
 
             
 
-             is an O(1) operation. If the capacity needs to be increased to accommodate the new element, <see
-             cref="M:System.Collections.Stack.Push(System.Object)" />
+             is an O(1) operation. If the capacity needs to be increased to accommodate the new element, <see cref="M:System.Collections.Stack.Push(System.Object)" />
 
             
 
-             becomes an O(<paramref
-             name="n" />
+             becomes an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Stack.Count" />
+             is <see cref="P:System.Collections.Stack.Count" />
 
             
 
@@ -1281,8 +1170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts an object at the top of the <see
-             cref="T:System.Collections.Stack" />
+            >Inserts an object at the top of the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -1290,17 +1178,19 @@
           >
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to push onto the <see
-           cref="T:System.Collections.Stack" />
+           to push onto the <see cref="T:System.Collections.Stack" />
 
           
 
@@ -1333,8 +1223,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To guarantee the thread safety of the <see
-             cref="T:System.Collections.Stack" />
+            >To guarantee the thread safety of the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -1342,8 +1231,7 @@
           >
           <para>Enumerating through a collection is intrinsically not a thread-safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
           <para
-            >The following code example shows how to lock the collection using the <see
-             cref="P:System.Collections.Stack.SyncRoot" />
+            >The following code example shows how to lock the collection using the <see cref="P:System.Collections.Stack.SyncRoot" />
 
             
 
@@ -1355,8 +1243,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a synchronized (thread safe) wrapper for the <see
-             cref="T:System.Collections.Stack" />
+            >Returns a synchronized (thread safe) wrapper for the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -1366,8 +1253,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A synchronized wrapper around the <see
-             cref="T:System.Collections.Stack" />
+            >A synchronized wrapper around the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -1375,12 +1261,15 @@
           >
         </returns>
         <param name="stack">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.Stack" />
+          The <see cref="T:System.Collections.Stack" />
 
           
 
@@ -1405,43 +1294,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To create a synchronized version of the <see
-             cref="T:System.Collections.Stack" />
+            >To create a synchronized version of the <see cref="T:System.Collections.Stack" />
 
             
 
-            , use the <see
-             cref="M:System.Collections.Stack.Synchronized(System.Collections.Stack)" />
+            , use the <see cref="M:System.Collections.Stack.Synchronized(System.Collections.Stack)" />
 
             
 
-             method. However, derived classes can provide their own synchronized version of the <see
-             cref="T:System.Collections.Stack" />
+             method. However, derived classes can provide their own synchronized version of the <see cref="T:System.Collections.Stack" />
 
             
 
-             using the <see
-             cref="P:System.Collections.Stack.SyncRoot" />
+             using the <see cref="P:System.Collections.Stack.SyncRoot" />
 
             
 
-             property. The synchronizing code must perform operations on the <see
-             cref="P:System.Collections.Stack.SyncRoot" />
+             property. The synchronizing code must perform operations on the <see cref="P:System.Collections.Stack.SyncRoot" />
 
             
 
-             of the <see
-             cref="T:System.Collections.Stack" />
+             of the <see cref="T:System.Collections.Stack" />
 
             
 
-            , not directly on the <see
-             cref="T:System.Collections.Stack" />
+            , not directly on the <see cref="T:System.Collections.Stack" />
 
             
 
-            . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
-             cref="T:System.Collections.Stack" />
+            . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -1449,8 +1330,7 @@
           >
           <para>Enumerating through a collection is intrinsically not a thread-safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
           <para
-            >The following code example shows how to lock the collection using the <see
-             cref="P:System.Collections.Stack.SyncRoot" />
+            >The following code example shows how to lock the collection using the <see cref="P:System.Collections.Stack.SyncRoot" />
 
             
 
@@ -1462,8 +1342,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Collections.Stack" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -1492,26 +1371,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The elements are copied onto the array in last-in-first-out (LIFO) order, similar to the order of the elements returned by a succession of calls to <see
-             cref="M:System.Collections.Stack.Pop" />
+            >The elements are copied onto the array in last-in-first-out (LIFO) order, similar to the order of the elements returned by a succession of calls to <see cref="M:System.Collections.Stack.Pop" />
 
             
 
             .</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Stack.Count" />
+             is <see cref="P:System.Collections.Stack.Count" />
 
             
 
@@ -1521,8 +1396,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see
-             cref="T:System.Collections.Stack" />
+            >Copies the <see cref="T:System.Collections.Stack" />
 
             
 
@@ -1532,8 +1406,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new array containing copies of the elements of the <see
-             cref="T:System.Collections.Stack" />
+            >A new array containing copies of the elements of the <see cref="T:System.Collections.Stack" />
 
             
 

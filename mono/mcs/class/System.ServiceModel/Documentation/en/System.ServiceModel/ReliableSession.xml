@@ -17,33 +17,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The properties contained in the <see
-         cref="T:System.ServiceModel.ReliableSession" />
+        >The properties contained in the <see cref="T:System.ServiceModel.ReliableSession" />
 
         
 
-         class are the subset of those contained in the <see
-         cref="T:System.ServiceModel.Channels.ReliableSessionBindingElement" />
+         class are the subset of those contained in the <see cref="T:System.ServiceModel.Channels.ReliableSessionBindingElement" />
 
         
 
-         that are accessible from a predefined binding. This subset consists of the <see
-         cref="P:System.ServiceModel.ReliableSession.InactivityTimeout" />
+         that are accessible from a predefined binding. This subset consists of the <see cref="P:System.ServiceModel.ReliableSession.InactivityTimeout" />
 
         
 
-         and <see
-         cref="P:System.ServiceModel.ReliableSession.Ordered" />
+         and <see cref="P:System.ServiceModel.ReliableSession.Ordered" />
 
         
 
-         properties. The <see
-         cref="T:System.ServiceModel.ReliableSession" />
+         properties. The <see cref="T:System.ServiceModel.ReliableSession" />
 
         
 
-         class references the same objects as does the <see
-         cref="T:System.ServiceModel.Channels.ReliableSessionBindingElement" />
+         class references the same objects as does the <see cref="T:System.ServiceModel.Channels.ReliableSessionBindingElement" />
 
         
 
@@ -72,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.ReliableSession" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ReliableSession" />
 
             
 
@@ -107,8 +100,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.ReliableSession" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ReliableSession" />
 
             
 
@@ -135,16 +127,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The property gets and sets the value of the <see
-             cref="P:System.ServiceModel.Channels.ReliableSessionBindingElement.InactivityTimeout" />
+            >The property gets and sets the value of the <see cref="P:System.ServiceModel.Channels.ReliableSessionBindingElement.InactivityTimeout" />
 
             
 
              property.</para
           >
           <para
-            >Activity on a channel is defined as receiving an application or infrastructure message. The inactivity timeout property controls the maximum amount of time to keep an inactive session alive. If more than the <see
-             cref="P:System.ServiceModel.ReliableSession.InactivityTimeout" />
+            >Activity on a channel is defined as receiving an application or infrastructure message. The inactivity timeout property controls the maximum amount of time to keep an inactive session alive. If more than the <see cref="P:System.ServiceModel.ReliableSession.InactivityTimeout" />
 
             
 
@@ -156,8 +146,7 @@
           <list type="bullet">
             <item>
               <para
-                >The first inactivity timer is on the reliable session and is called the <see
-                 cref="P:System.ServiceModel.ReliableSession.InactivityTimeout" />
+                >The first inactivity timer is on the reliable session and is called the <see cref="P:System.ServiceModel.ReliableSession.InactivityTimeout" />
 
                 
 
@@ -166,8 +155,7 @@
             </item>
             <item>
               <para
-                >The second inactivity timer is on the service and uses the <see
-                 cref="P:System.ServiceModel.Channels.Binding.ReceiveTimeout" />
+                >The second inactivity timer is on the service and uses the <see cref="P:System.ServiceModel.Channels.Binding.ReceiveTimeout" />
 
                 
 
@@ -176,13 +164,11 @@
             </item>
           </list>
           <para
-            >Since the connection is dropped if either inactivity timer fires, increasing <see
-             cref="P:System.ServiceModel.ReliableSession.InactivityTimeout" />
+            >Since the connection is dropped if either inactivity timer fires, increasing <see cref="P:System.ServiceModel.ReliableSession.InactivityTimeout" />
 
             
 
-             once it is greater than <see
-             cref="P:System.ServiceModel.Channels.Binding.ReceiveTimeout" />
+             once it is greater than <see cref="P:System.ServiceModel.Channels.Binding.ReceiveTimeout" />
 
             
 
@@ -210,8 +196,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The property gets and sets the value of the <see
-             cref="P:System.ServiceModel.Channels.ReliableSessionBindingElement.Ordered" />
+            >The property gets and sets the value of the <see cref="P:System.ServiceModel.Channels.ReliableSessionBindingElement.Ordered" />
 
             
 

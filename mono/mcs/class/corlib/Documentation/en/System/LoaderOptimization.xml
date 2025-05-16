@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The meaning of <see
-         cref="F:System.LoaderOptimization.MultiDomainHost" />
+        >The meaning of <see cref="F:System.LoaderOptimization.MultiDomainHost" />
 
         
 
@@ -34,33 +33,27 @@
       >
       <block subset="none" type="note">
         <para
-          >If custom code access security policy is set for the <see
-           cref="T:System.AppDomain" />
+          >If custom code access security policy is set for the <see cref="T:System.AppDomain" />
 
           
 
-          , by using the <see
-           cref="M:System.AppDomain.SetAppDomainPolicy(System.Security.Policy.PolicyLevel)" />
+          , by using the <see cref="M:System.AppDomain.SetAppDomainPolicy(System.Security.Policy.PolicyLevel)" />
 
           
 
-           property, and the <see
-           cref="T:System.AppDomain" />
+           property, and the <see cref="T:System.AppDomain" />
 
           
 
-           is created using the <see
-           cref="F:System.LoaderOptimization.MultiDomain" />
+           is created using the <see cref="F:System.LoaderOptimization.MultiDomain" />
 
           
 
-           flag, the effect is the same as specifying the <see
-           cref="F:System.LoaderOptimization.MultiDomainHost" />
+           flag, the effect is the same as specifying the <see cref="F:System.LoaderOptimization.MultiDomainHost" />
 
           
 
-           flag; that is, only assemblies in the GAC are shared. When this occurs, the loader does not throw an exception and the application does not experience the performance gains associated with the <see
-           cref="F:System.LoaderOptimization.MultiDomain" />
+           flag; that is, only assemblies in the GAC are shared. When this occurs, the loader does not throw an exception and the application does not experience the performance gains associated with the <see cref="F:System.LoaderOptimization.MultiDomain" />
 
           
 
@@ -68,8 +61,7 @@
         >
       </block>
       <para
-        >For more information on assembly sharing and domain-neutral assembly loading, see <format
-         type="text/html">
+        >For more information on assembly sharing and domain-neutral assembly loading, see <format type="text/html">
           <a href="433b04ae-4ba8-4849-9dbd-79194f240346">Application Domains and Assemblies</a>
         </format>
 
@@ -81,8 +73,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An enumeration used with the <see
-         cref="T:System.LoaderOptimizationAttribute" />
+        >An enumeration used with the <see cref="T:System.LoaderOptimizationAttribute" />
 
         
 
@@ -146,8 +137,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not use. This mask selects the domain-related values, screening out the unused <see
-             cref="F:System.LoaderOptimization.DisallowBindings" />
+            >Do not use. This mask selects the domain-related values, screening out the unused <see cref="F:System.LoaderOptimization.DisallowBindings" />
 
             
 
@@ -225,8 +215,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that no optimizations for sharing internal resources are specified. If the default domain or hosting interface specified an optimization, then the loader uses that; otherwise, the loader uses <see
-             cref="F:System.LoaderOptimization.SingleDomain" />
+            >Indicates that no optimizations for sharing internal resources are specified. If the default domain or hosting interface specified an optimization, then the loader uses that; otherwise, the loader uses <see cref="F:System.LoaderOptimization.SingleDomain" />
 
             
 

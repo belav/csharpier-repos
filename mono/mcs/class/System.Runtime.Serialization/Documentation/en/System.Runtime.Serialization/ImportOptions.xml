@@ -17,28 +17,24 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Serialization.XsdDataContractImporter" />
+        >The <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" />
 
         
 
-         is used to generate code from XML schema using the dnprdnshort CodeDOM. To generate an XML schema from an assembly, use the <see
-         cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
+         is used to generate code from XML schema using the dnprdnshort CodeDOM. To generate an XML schema from an assembly, use the <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
 
         
 
         . </para
       >
       <para
-        >For more information about importing and exporting schemas, see <format
-         type="text/html">
+        >For more information about importing and exporting schemas, see <format type="text/html">
           <a href="0da32b50-ccd9-463a-844c-7fe803d3bf44">Schema Import and Export</a>
         </format>
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="b9170583-8c34-43bd-97bb-6c0c8dddeee0">Importing Schema To Generate Classes</a>
         </format>
 
@@ -50,8 +46,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the options that can be set on an <see
-         cref="T:System.Runtime.Serialization.XsdDataContractImporter" />
+        >Represents the options that can be set on an <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" />
 
         
 
@@ -76,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.ImportOptions" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.ImportOptions" />
 
             
 
@@ -107,18 +101,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To support better code generation for different languages, information about what is supported by the target language needs to be passed to the schema importer. This is done by passing an instance of the <see
-             cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+            >To support better code generation for different languages, information about what is supported by the target language needs to be passed to the schema importer. This is done by passing an instance of the <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
             
 
-             class, which provides a <see
-             cref="M:System.CodeDom.Compiler.CodeDomProvider.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
+             class, which provides a <see cref="M:System.CodeDom.Compiler.CodeDomProvider.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
 
             
 
-             method to check whether it supports particular <see
-             cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" />
+             method to check whether it supports particular <see cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" />
 
             
 
@@ -128,8 +119,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+            >Gets or sets a <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
             
 
@@ -182,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that specifies whether types in generated code should implement the <see
-             cref="T:System.ComponentModel.INotifyPropertyChanged" />
+            >Gets or sets a value that specifies whether types in generated code should implement the <see cref="T:System.ComponentModel.INotifyPropertyChanged" />
 
             
 
@@ -227,13 +216,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that specifies whether generated data contract classes will be marked with the <see
-             cref="T:System.SerializableAttribute" />
+            >Gets or sets a value that specifies whether generated data contract classes will be marked with the <see cref="T:System.SerializableAttribute" />
 
             
 
-             attribute in addition to the <see
-             cref="T:System.Runtime.Serialization.DataContractAttribute" />
+             attribute in addition to the <see cref="T:System.Runtime.Serialization.DataContractAttribute" />
 
             
 
@@ -257,8 +244,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Normally, importing a type that does not conform to a valid data contract schema will fail. However, when this property is set to true, all such types will be imported as types that implement the <see
-             cref="T:System.Xml.Serialization.IXmlSerializable" />
+            >Normally, importing a type that does not conform to a valid data contract schema will fail. However, when this property is set to true, all such types will be imported as types that implement the <see cref="T:System.Xml.Serialization.IXmlSerializable" />
 
             
 
@@ -317,13 +303,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, an array will be generated when importing a collection schema (unless the schema has a special annotation that mentions a different type). However, if there is a matching type in the <see
-             cref="P:System.Runtime.Serialization.ImportOptions.ReferencedCollectionTypes" />
+            >By default, an array will be generated when importing a collection schema (unless the schema has a special annotation that mentions a different type). However, if there is a matching type in the <see cref="P:System.Runtime.Serialization.ImportOptions.ReferencedCollectionTypes" />
 
             
 
-             collection, that type will be used. For example, when importing schema that contains a list of integers, an array of integers will normally be generated. However, if the collection contains the <see
-             cref="T:System.Collections.Generic.LinkedList`1" />
+             collection, that type will be used. For example, when importing schema that contains a list of integers, an array of integers will normally be generated. However, if the collection contains the <see cref="T:System.Collections.Generic.LinkedList`1" />
 
             
 
@@ -358,8 +342,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Collections.Generic.IList`1" />
+            >Gets a <see cref="T:System.Collections.Generic.IList`1" />
 
             
 

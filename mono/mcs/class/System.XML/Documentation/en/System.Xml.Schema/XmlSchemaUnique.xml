@@ -29,8 +29,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the unique element from XML Schema as specified by the <format
-         type="text/html">
+        >Represents the unique element from XML Schema as specified by the <format type="text/html">
           <a href="">World Wide Web Consortium (W3C)</a>
         </format>
 
@@ -60,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Schema.XmlSchemaUnique" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaUnique" />
 
             
 

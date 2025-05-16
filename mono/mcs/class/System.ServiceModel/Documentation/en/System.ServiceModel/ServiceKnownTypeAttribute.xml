@@ -22,18 +22,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.ServiceKnownTypeAttribute" />
+        >The <see cref="T:System.ServiceModel.ServiceKnownTypeAttribute" />
 
         
 
-         is intended for use when creating indigo1 service contracts (interfaces that define the service and its methods). The <newTerm
-        >known types</newTerm>
+         is intended for use when creating indigo1 service contracts (interfaces that define the service and its methods). The <newTerm>known types</newTerm>
 
         
 
-         are types that may be present in an object graph when serialization or deserialization occurs. For more information about known types, see <format
-         type="text/html">
+         are types that may be present in an object graph when serialization or deserialization occurs. For more information about known types, see <format type="text/html">
           <a href="1a0baea1-27b7-470d-9136-5bbad86c4337">Data Contract Known Types</a>
         </format>
 
@@ -42,28 +39,23 @@
         .</para
       >
       <para
-        >To use the <see
-         cref="P:System.ServiceModel.ServiceKnownTypeAttribute.MethodName" />
+        >To use the <see cref="P:System.ServiceModel.ServiceKnownTypeAttribute.MethodName" />
 
         
 
-         property, create a class that contains a method (or methods) that returns an array of types (each being a known type). When applying the attribute, set the <paramref
-         name="methodName" />
+         property, create a class that contains a method (or methods) that returns an array of types (each being a known type). When applying the attribute, set the <paramref name="methodName" />
 
         
 
-         to the name of a method that returns the list of types and set the <paramref
-         name="declaringType" />
+         to the name of a method that returns the list of types and set the <paramref name="declaringType" />
 
         
 
-         to the type that contains the method. The method must return a type that implements the <see
-         cref="T:System.Collections.Generic.IEnumerable`1" />
+         to the type that contains the method. The method must return a type that implements the <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
         
 
-         interface. The method must also include a parameter of type <see
-         cref="T:System.Reflection.ICustomAttributeProvider" />
+         interface. The method must also include a parameter of type <see cref="T:System.Reflection.ICustomAttributeProvider" />
 
         
 
@@ -100,8 +92,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor when applying the <see
-             cref="T:System.ServiceModel.ServiceKnownTypeAttribute" />
+            >Use this constructor when applying the <see cref="T:System.ServiceModel.ServiceKnownTypeAttribute" />
 
             
 
@@ -111,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.ServiceKnownTypeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ServiceKnownTypeAttribute" />
 
             
 
@@ -120,7 +110,11 @@
           >
         </summary>
         <param name="methodName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -145,8 +139,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.ServiceKnownTypeAttribute" />
+            >The <see cref="T:System.ServiceModel.ServiceKnownTypeAttribute" />
 
             
 
@@ -156,8 +149,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.ServiceKnownTypeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ServiceKnownTypeAttribute" />
 
             
 
@@ -165,7 +157,11 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -195,8 +191,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.ServiceKnownTypeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ServiceKnownTypeAttribute" />
 
             
 
@@ -204,14 +199,22 @@
           >
         </summary>
         <param name="methodName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of a method that returns the known types.</param
         >
         <param name="declaringType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -256,13 +259,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ServiceModel.ServiceKnownTypeAttribute.MethodName" />
+            >The <see cref="P:System.ServiceModel.ServiceKnownTypeAttribute.MethodName" />
 
             
 
-             must be the name of a method on the type specified by the <see
-             cref="P:System.ServiceModel.ServiceKnownTypeAttribute.DeclaringType" />
+             must be the name of a method on the type specified by the <see cref="P:System.ServiceModel.ServiceKnownTypeAttribute.DeclaringType" />
 
             
 

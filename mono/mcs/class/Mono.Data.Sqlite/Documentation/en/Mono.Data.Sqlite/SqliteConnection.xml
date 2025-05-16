@@ -21,16 +21,15 @@
   </Interfaces>
   <Docs>
     <summary>SQLite implentation of DbConnection.</summary>
-    <remarks
+    <remarks>
+      The <see cref="P:Mono.Data.Sqlite.SqliteConnection.ConnectionString"
+        >ConnectionString</see
       >
-      The <see
-       cref="P:Mono.Data.Sqlite.SqliteConnection.ConnectionString">ConnectionString</see>
 
       
 
        property of the SqliteConnection class can contain the following parameter(s), delimited with a semi-colon:
-      <list
-       type="table">
+      <list type="table">
         <listheader>
           <term>Parameter</term>
           <term>Values</term>
@@ -66,8 +65,7 @@
 
             
 
-             - Use DateTime.Ticks<br
-             />
+             - Use DateTime.Ticks<br />
             <b>ISO8601</b>
 
             
@@ -84,8 +82,7 @@
 
             
 
-             - Store GUID columns in binary form<br
-             />
+             - Store GUID columns in binary form<br />
             <b>False</b>
 
             
@@ -109,14 +106,12 @@
 
             
 
-             - Normal file flushing behavior<br
-             />
+             - Normal file flushing behavior<br />
             <b>Full</b>
 
             
 
-             - Full flushing after all writes<br
-             />
+             - Full flushing after all writes<br />
             <b>Off</b>
 
             
@@ -146,8 +141,7 @@
 
             
 
-             - Automatically enlist in distributed transactions<br
-             />
+             - Automatically enlist in distributed transactions<br />
             <b>N</b>
 
             
@@ -165,8 +159,7 @@
 
             
 
-             - Use connection pooling<br
-             />
+             - Use connection pooling<br />
             <b>False</b>
 
             
@@ -184,8 +177,7 @@
 
             
 
-             - Don't create the database if it does not exist, throw an error instead<br
-             />
+             - Don't create the database if it does not exist, throw an error instead<br />
             <b>False</b>
 
             
@@ -209,8 +201,7 @@
 
             
 
-             - Use the more compatible legacy 3.x database format<br
-             />
+             - Use the more compatible legacy 3.x database format<br />
             <b>False</b>
 
             
@@ -224,8 +215,7 @@
         <item>
           <description>Default Timeout</description>
           <description
-            >{time in seconds}<br
-             />
+            >{time in seconds}<br />
 
             
 
@@ -241,14 +231,12 @@
 
             
 
-             - Delete the journal file after a commit<br
-             />
+             - Delete the journal file after a commit<br />
             <b>Persist</b>
 
             
 
-             - Zero out and leave the journal file on disk after a commit<br
-             />
+             - Zero out and leave the journal file on disk after a commit<br />
             <b>Off</b>
 
             
@@ -266,8 +254,7 @@
 
             
 
-             - Open the database for read only access<br
-             />
+             - Open the database for read only access<br />
             <b>False</b>
 
             
@@ -819,14 +806,12 @@
 
                 
 
-                 - Use DateTime.Ticks<br
-                 />
+                 - Use DateTime.Ticks<br />
                 <b>ISO8601</b>
 
                 
 
-                 - Use ISO8601 DateTime format<br
-                 />
+                 - Use ISO8601 DateTime format<br />
                 <b>JulianDay</b>
 
                 
@@ -843,8 +828,7 @@
 
                 
 
-                 - Store GUID columns in binary form<br
-                 />
+                 - Store GUID columns in binary form<br />
                 <b>No/Off/0</b>
 
                 
@@ -867,14 +851,12 @@
 
                 
 
-                 - Normal file flushing behavior<br
-                 />
+                 - Normal file flushing behavior<br />
                 <b>Full</b>
 
                 
 
-                 - Full flushing after all writes<br
-                 />
+                 - Full flushing after all writes<br />
                 <b>Off</b>
 
                 
@@ -903,8 +885,7 @@
 
                 
 
-                 - Automatically enlist in distributed transactions<br
-                 />
+                 - Automatically enlist in distributed transactions<br />
                 <b>N</b>
 
                 
@@ -921,8 +902,7 @@
 
                 
 
-                 - Use connection pooling<br
-                 />
+                 - Use connection pooling<br />
                 <b>False</b>
 
                 
@@ -939,8 +919,7 @@
 
                 
 
-                 - Don't create the database if it does not exist, throw an error instead<br
-                 />
+                 - Don't create the database if it does not exist, throw an error instead<br />
                 <b>False</b>
 
                 
@@ -963,8 +942,7 @@
 
                 
 
-                 - Use the more compatible legacy 3.x database format<br
-                 />
+                 - Use the more compatible legacy 3.x database format<br />
                 <b>False</b>
 
                 
@@ -977,8 +955,7 @@
             <item>
               <description>Default Timeout</description>
               <description
-                >{time in seconds}<br
-                 />
+                >{time in seconds}<br />
 
                 
 
@@ -994,14 +971,12 @@
 
                 
 
-                 - Delete the journal file after a commit<br
-                 />
+                 - Delete the journal file after a commit<br />
                 <b>Persist</b>
 
                 
 
-                 - Zero out and leave the journal file on disk after a commit<br
-                 />
+                 - Zero out and leave the journal file on disk after a commit<br />
                 <b>Off</b>
 
                 
@@ -1018,8 +993,7 @@
 
                 
 
-                 - Open the database for read only access<br
-                 />
+                 - Open the database for read only access<br />
                 <b>False</b>
 
                 
@@ -1284,11 +1258,9 @@
             </summary>
         <returns>A DataTable of the MetaDataCollections schema</returns>
         <remarks>To be added.</remarks>
-        <overloads
-          >
+        <overloads>
             The following commands are used to extract schema information out of the database.  Valid schema types are:
-            <list
-           type="bullet">
+            <list type="bullet">
             <item>
               <description>MetaDataCollections</description>
             </item>
@@ -1396,10 +1368,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary
-          >
+        <summary>
             Opens the connection using the parameters found in the <see
-           cref="P:Mono.Data.Sqlite.SqliteConnection.ConnectionString">ConnectionString</see>
+            cref="P:Mono.Data.Sqlite.SqliteConnection.ConnectionString"
+            >ConnectionString</see
+          >
         </summary>
         <remarks>To be added.</remarks>
       </Docs>

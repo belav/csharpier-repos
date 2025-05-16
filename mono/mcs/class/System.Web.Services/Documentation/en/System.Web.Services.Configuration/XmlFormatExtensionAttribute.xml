@@ -32,8 +32,7 @@
       <list type="ordered">
         <item>
           <para
-            >Build a class that derives from <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+            >Build a class that derives from <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
             
 
@@ -42,8 +41,7 @@
         </item>
         <item>
           <para
-            >Apply a <see
-             cref="T:System.Web.Services.Configuration.XmlFormatExtensionAttribute" />
+            >Apply a <see cref="T:System.Web.Services.Configuration.XmlFormatExtensionAttribute" />
 
             
 
@@ -52,8 +50,7 @@
         </item>
         <item>
           <para
-            >Optionally, apply a <see
-             cref="T:System.Web.Services.Configuration.XmlFormatExtensionPointAttribute" />
+            >Optionally, apply a <see cref="T:System.Web.Services.Configuration.XmlFormatExtensionPointAttribute" />
 
             
 
@@ -62,8 +59,7 @@
         </item>
         <item>
           <para
-            >Optionally, apply a <see
-             cref="T:System.Web.Services.Configuration.XmlFormatExtensionPrefixAttribute" />
+            >Optionally, apply a <see cref="T:System.Web.Services.Configuration.XmlFormatExtensionPrefixAttribute" />
 
             
 
@@ -91,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Configuration.XmlFormatExtensionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Configuration.XmlFormatExtensionAttribute" />
 
             
 
@@ -122,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Configuration.XmlFormatExtensionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Configuration.XmlFormatExtensionAttribute" />
 
             
 
@@ -131,21 +125,33 @@
           >
         </summary>
         <param name="elementName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML element added to the service description by the service description format extension.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML namespace for the XML element added to the service description by the service description format extension.</param
         >
         <param name="extensionPoint1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -174,8 +180,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Configuration.XmlFormatExtensionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Configuration.XmlFormatExtensionAttribute" />
 
             
 
@@ -183,21 +188,33 @@
           >
         </summary>
         <param name="elementName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML element added to the service description by the service description format extension. </param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML namespace for the XML element added to the service description by the service description format extension. </param
         >
         <param name="extensionPoints">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -227,8 +244,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Configuration.XmlFormatExtensionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Configuration.XmlFormatExtensionAttribute" />
 
             
 
@@ -236,28 +252,44 @@
           >
         </summary>
         <param name="elementName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML element added to the service description by the service description format extension.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML namespace for the XML element added to the service description by the service description format extension.</param
         >
         <param name="extensionPoint1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An extension point at which to run the service description format extension.</param
         >
         <param name="extensionPoint2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -288,8 +320,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Configuration.XmlFormatExtensionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Configuration.XmlFormatExtensionAttribute" />
 
             
 
@@ -297,35 +328,55 @@
           >
         </summary>
         <param name="elementName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML element added to the service description by the service description format extension.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML namespace for the XML element added to the service description by the service description format extension.</param
         >
         <param name="extensionPoint1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An extension point at which to run the service description format extension.</param
         >
         <param name="extensionPoint2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An extension point at which to run the service description format extension.</param
         >
         <param name="extensionPoint3">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -357,8 +408,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Configuration.XmlFormatExtensionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Configuration.XmlFormatExtensionAttribute" />
 
             
 
@@ -366,42 +416,66 @@
           >
         </summary>
         <param name="elementName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML element added to the service description by the service description format extension.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML namespace for the XML element added to the service description by the service description format extension.</param
         >
         <param name="extensionPoint1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An extension point at which to run the service description format extension.</param
         >
         <param name="extensionPoint2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An extension point at which to run the service description format extension.</param
         >
         <param name="extensionPoint3">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An extension point at which to run the service description format extension.</param
         >
         <param name="extensionPoint4">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

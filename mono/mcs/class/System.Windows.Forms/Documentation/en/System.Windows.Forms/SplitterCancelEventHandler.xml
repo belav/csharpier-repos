@@ -26,13 +26,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see
-         cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
+        >Represents the method that will handle the <see cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
 
         
 
-         event of a <see
-         cref="T:System.Windows.Forms.Splitter" />
+         event of a <see cref="T:System.Windows.Forms.Splitter" />
 
         
 

@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <clause number="23.4" title="Common Exception Classes">
   <paragraph
-    >The following exceptions are thrown by certain C# operations. <table_line
-    >System.ArithmeticException A base class for exceptions that occur during </table_line>
+    >The following exceptions are thrown by certain C# operations. <table_line>System.ArithmeticException A base class for exceptions that occur during </table_line>
     <table_line>arithmetic operations, such as </table_line>
     <table_line>System.DivideByZeroException and </table_line>
     <table_line>System.OverflowException. </table_line>

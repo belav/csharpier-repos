@@ -20,26 +20,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When an object that supports this interface is the root of a serialization graph, SOAP is produced in RPC format. The <see
-         cref="T:System.Runtime.Serialization.Formatters.ISoapMessage" />
+        >When an object that supports this interface is the root of a serialization graph, SOAP is produced in RPC format. The <see cref="T:System.Runtime.Serialization.Formatters.ISoapMessage" />
 
         
 
          interface contains the method call parameter types used during deserialization of a method call.</para
       >
       <para
-        >To support SOAP RPC calls that are based on the <see
-         cref="T:System.Runtime.Serialization.Formatters.ISoapMessage" />
+        >To support SOAP RPC calls that are based on the <see cref="T:System.Runtime.Serialization.Formatters.ISoapMessage" />
 
         
 
-         interface and do not use the <see
-         cref="T:System.Runtime.Remoting.Messaging.IRemotingFormatter" />
+         interface and do not use the <see cref="T:System.Runtime.Remoting.Messaging.IRemotingFormatter" />
 
         
 
-         functionality, set the <see
-         cref="P:System.Runtime.Serialization.Formatters.Soap.SoapFormatter.TopObject" />
+         functionality, set the <see cref="P:System.Runtime.Serialization.Formatters.Soap.SoapFormatter.TopObject" />
 
         
 
@@ -181,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the XML namespace of the SOAP RPC (Remote Procedure Call) <see
-             cref="P:System.Runtime.Serialization.Formatters.ISoapMessage.MethodName" />
+            >Gets or sets the XML namespace of the SOAP RPC (Remote Procedure Call) <see cref="P:System.Runtime.Serialization.Formatters.ISoapMessage.MethodName" />
 
             
 

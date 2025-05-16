@@ -30,34 +30,29 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Channel sinks are connected to a client channel through implementations of the <see
-         cref="T:System.Runtime.Remoting.Channels.IClientChannelSinkProvider" />
+        >Channel sinks are connected to a client channel through implementations of the <see cref="T:System.Runtime.Remoting.Channels.IClientChannelSinkProvider" />
 
         
 
-         interface. All the remoting client channels provide constructors that take a <see
-         cref="T:System.Runtime.Remoting.Channels.IClientChannelSinkProvider" />
+         interface. All the remoting client channels provide constructors that take a <see cref="T:System.Runtime.Remoting.Channels.IClientChannelSinkProvider" />
 
         
 
          as a parameter.</para
       >
       <para
-        >Channel sink providers are stored in a chain, and the user is responsible for chaining all channel sink providers together before passing the outer one to the channel constructor. <see
-         cref="T:System.Runtime.Remoting.Channels.IClientChannelSinkProvider" />
+        >Channel sink providers are stored in a chain, and the user is responsible for chaining all channel sink providers together before passing the outer one to the channel constructor. <see cref="T:System.Runtime.Remoting.Channels.IClientChannelSinkProvider" />
 
         
 
-         provides a property called <see
-         cref="P:System.Runtime.Remoting.Channels.IServerChannelSinkProvider.Next" />
+         provides a property called <see cref="P:System.Runtime.Remoting.Channels.IServerChannelSinkProvider.Next" />
 
         
 
          for this purpose.</para
       >
       <para
-        >When multiple channel sink providers are specified in a configuration file, the remoting infrastructure will chain them together in the order they are found in the configuration file. The channel sink providers will be created when the channel is created during the <see
-         cref="M:System.Runtime.Remoting.RemotingConfiguration.Configure(System.String)" />
+        >When multiple channel sink providers are specified in a configuration file, the remoting infrastructure will chain them together in the order they are found in the configuration file. The channel sink providers will be created when the channel is created during the <see cref="M:System.Runtime.Remoting.RemotingConfiguration.Configure(System.String)" />
 
         
 
@@ -97,13 +92,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="M:System.Runtime.Remoting.Channels.IClientChannelSinkProvider.CreateSink(System.Runtime.Remoting.Channels.IChannelSender,System.String,System.Object)" />
+            >When the <see cref="M:System.Runtime.Remoting.Channels.IClientChannelSinkProvider.CreateSink(System.Runtime.Remoting.Channels.IChannelSender,System.String,System.Object)" />
 
             
 
-             method is called, it creates its own channel sink, forwards the <see
-             cref="M:System.Runtime.Remoting.Channels.IClientChannelSinkProvider.CreateSink(System.Runtime.Remoting.Channels.IChannelSender,System.String,System.Object)" />
+             method is called, it creates its own channel sink, forwards the <see cref="M:System.Runtime.Remoting.Channels.IClientChannelSinkProvider.CreateSink(System.Runtime.Remoting.Channels.IChannelSender,System.String,System.Object)" />
 
             
 
@@ -119,26 +112,37 @@
           <para>The first sink of the newly formed channel sink chain, or null, which indicates that this provider will not or cannot provide a connection for this endpoint.</para>
         </returns>
         <param name="channel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Channel for which the current sink chain is being constructed. </param
         >
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The URL of the object to connect to. This parameter can be null if the connection is based entirely on the information contained in the <paramref
-           name="remoteChannelData" />
+          The URL of the object to connect to. This parameter can be null if the connection is based entirely on the information contained in the <paramref name="remoteChannelData" />
 
           
 
            parameter. </param
         >
         <param name="remoteChannelData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

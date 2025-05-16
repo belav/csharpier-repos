@@ -25,18 +25,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
+        >The <see cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
 
         
 
-         class represents the collection of all the styles used to describe the columns or rows in an associated <see
-         cref="T:System.Windows.Forms.TableLayoutPanel" />
+         class represents the collection of all the styles used to describe the columns or rows in an associated <see cref="T:System.Windows.Forms.TableLayoutPanel" />
 
         
 
-        . Classes derived from <see
-         cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
+        . Classes derived from <see cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
 
         
 
@@ -45,13 +42,11 @@
       <list type="bullet">
         <item>
           <para
-            >A <see
-             cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+            >A <see cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
 
             
 
-             aggregates column styles as a collection of <see
-             cref="T:System.Windows.Forms.ColumnStyle" />
+             aggregates column styles as a collection of <see cref="T:System.Windows.Forms.ColumnStyle" />
 
             
 
@@ -60,13 +55,11 @@
         </item>
         <item>
           <para
-            >A <see
-             cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />
+            >A <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />
 
             
 
-             aggregates row styles as a collection of <see
-             cref="T:System.Windows.Forms.RowStyle" />
+             aggregates row styles as a collection of <see cref="T:System.Windows.Forms.RowStyle" />
 
             
 
@@ -75,13 +68,11 @@
         </item>
       </list>
       <para
-        >Most of the members of <see
-         cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
+        >Most of the members of <see cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
 
         
 
-         are implementations of <see
-         cref="T:System.Collections.IList" />
+         are implementations of <see cref="T:System.Collections.IList" />
 
         
 
@@ -113,13 +104,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.TableLayoutStyleCollection.Add(System.Windows.Forms.TableLayoutStyle)" />
+            >The <see cref="M:System.Windows.Forms.TableLayoutStyleCollection.Add(System.Windows.Forms.TableLayoutStyle)" />
 
             
 
-             method reapplies the table layout to all the controls in the current <see
-             cref="T:System.Windows.Forms.TableLayoutPanel" />
+             method reapplies the table layout to all the controls in the current <see cref="T:System.Windows.Forms.TableLayoutPanel" />
 
             
 
@@ -130,8 +119,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a new <see
-             cref="T:System.Windows.Forms.TableLayoutStyle" />
+            >Adds a new <see cref="T:System.Windows.Forms.TableLayoutStyle" />
 
             
 
@@ -143,17 +131,19 @@
           <para>The position into which the new element was inserted.</para>
         </returns>
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.TableLayoutStyle" />
+          The <see cref="T:System.Windows.Forms.TableLayoutStyle" />
 
           
 
-           to add to the <see
-           cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
+           to add to the <see cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
 
           
 
@@ -176,8 +166,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method cannot be overridden.</para>
           <para
-            >The <see
-             cref="M:System.Windows.Forms.TableLayoutStyleCollection.Clear" />
+            >The <see cref="M:System.Windows.Forms.TableLayoutStyleCollection.Clear" />
 
             
 
@@ -186,13 +175,11 @@
           <list type="bullet">
             <item>
               <para
-                >It disassociates the current <see
-                 cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
+                >It disassociates the current <see cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
 
                 
 
-                 from its <see
-                 cref="T:System.Windows.Forms.TableLayoutPanel" />
+                 from its <see cref="T:System.Windows.Forms.TableLayoutPanel" />
 
                 
 
@@ -201,13 +188,11 @@
             </item>
             <item>
               <para
-                >It empties the collection of all of its <see
-                 cref="T:System.Windows.Forms.TableLayoutStyle" />
+                >It empties the collection of all of its <see cref="T:System.Windows.Forms.TableLayoutStyle" />
 
                 
 
-                 objects. As a result, the <see
-                 cref="P:System.Windows.Forms.TableLayoutStyleCollection.Count" />
+                 objects. As a result, the <see cref="P:System.Windows.Forms.TableLayoutStyleCollection.Count" />
 
                 
 
@@ -219,8 +204,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Disassociates the collection from its associated <see
-             cref="T:System.Windows.Forms.TableLayoutPanel" />
+            >Disassociates the collection from its associated <see cref="T:System.Windows.Forms.TableLayoutPanel" />
 
             
 
@@ -247,8 +231,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of styles actually contained in the <see
-             cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
+            >Gets the number of styles actually contained in the <see cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
 
             
 
@@ -296,13 +279,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method cannot be overridden.</para>
           <para
-            >Before the <see
-             cref="T:System.Windows.Forms.TableLayoutStyle" />
+            >Before the <see cref="T:System.Windows.Forms.TableLayoutStyle" />
 
             
 
-             is removed, it is disassociated from its <see
-             cref="T:System.Windows.Forms.TableLayoutPanel" />
+             is removed, it is disassociated from its <see cref="T:System.Windows.Forms.TableLayoutPanel" />
 
             
 
@@ -314,12 +295,15 @@
           <para>Removes the style at the specified index of the collection.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the <see
-           cref="T:System.Windows.Forms.TableLayoutStyle" />
+          The zero-based index of the <see cref="T:System.Windows.Forms.TableLayoutStyle" />
 
           
 
@@ -347,13 +331,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -363,8 +345,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this method, see the <see
-             cref="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)" />
+            >For a description of this method, see the <see cref="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)" />
 
             
 
@@ -372,34 +353,38 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from <see
-           cref="T:System.Collections.ICollection" />
+           that is the destination of the elements copied from <see cref="T:System.Collections.ICollection" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing.</param
         >
         <param name="startIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -424,13 +409,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -440,8 +423,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this method, see the <see
-             cref="P:System.Collections.ICollection.IsSynchronized" />
+            >For a description of this method, see the <see cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
@@ -467,13 +449,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -483,8 +463,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this method, see the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+            >For a description of this method, see the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
@@ -510,13 +489,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IEnumerable" />
+             instance is cast to an <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -526,8 +503,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this method, see the <see
-             cref="M:System.Collections.IEnumerable.GetEnumerator" />
+            >For a description of this method, see the <see cref="M:System.Collections.IEnumerable.GetEnumerator" />
 
             
 
@@ -537,8 +513,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -563,13 +538,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -579,8 +552,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this method, see the <see
-             cref="M:System.Collections.IList.Add(System.Object)" />
+            >For a description of this method, see the <see cref="M:System.Collections.IList.Add(System.Object)" />
 
             
 
@@ -590,8 +562,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The position into which <paramref
-             name="style" />
+            >The position into which <paramref name="style" />
 
             
 
@@ -599,17 +570,19 @@
           >
         </returns>
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to add to the <see
-           cref="T:System.Collections.IList" />
+           to add to the <see cref="T:System.Collections.IList" />
 
           
 
@@ -633,13 +606,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -649,8 +620,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this method, see the <see
-             cref="M:System.Collections.IList.Contains(System.Object)" />
+            >For a description of this method, see the <see cref="M:System.Collections.IList.Contains(System.Object)" />
 
             
 
@@ -660,13 +630,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="style" />
+            >true if <paramref name="style" />
 
             
 
-             is found in the <see
-             cref="T:System.Collections.IList" />
+             is found in the <see cref="T:System.Collections.IList" />
 
             
 
@@ -674,17 +642,19 @@
           >
         </returns>
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to locate in the <see
-           cref="T:System.Collections.IList" />
+           to locate in the <see cref="T:System.Collections.IList" />
 
           
 
@@ -708,13 +678,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -724,8 +692,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this method, see the <see
-             cref="M:System.Collections.IList.IndexOf(System.Object)" />
+            >For a description of this method, see the <see cref="M:System.Collections.IList.IndexOf(System.Object)" />
 
             
 
@@ -735,8 +702,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of <paramref
-             name="style" />
+            >The index of <paramref name="style" />
 
             
 
@@ -744,17 +710,19 @@
           >
         </returns>
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to locate in the <see
-           cref="T:System.Collections.IList" />
+           to locate in the <see cref="T:System.Collections.IList" />
 
           
 
@@ -779,13 +747,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -795,8 +761,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this method, see the <see
-             cref="M:System.Collections.IList.Insert(System.Int32,System.Object)" />
+            >For a description of this method, see the <see cref="M:System.Collections.IList.Insert(System.Int32,System.Object)" />
 
             
 
@@ -804,29 +769,34 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="style" />
+          The zero-based index at which <paramref name="style" />
 
           
 
            should be inserted.</param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to insert into the <see
-           cref="T:System.Collections.IList" />
+           to insert into the <see cref="T:System.Collections.IList" />
 
           
 
@@ -848,13 +818,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -864,8 +832,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this method, see the <see
-             cref="P:System.Collections.IList.IsFixedSize" />
+            >For a description of this method, see the <see cref="P:System.Collections.IList.IsFixedSize" />
 
             
 
@@ -888,13 +855,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -904,8 +869,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this method, see the <see
-             cref="P:System.Collections.IList.IsReadOnly" />
+            >For a description of this method, see the <see cref="P:System.Collections.IList.IsReadOnly" />
 
             
 
@@ -952,13 +916,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -968,8 +930,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this method, see the <see
-             cref="M:System.Collections.IList.Remove(System.Object)" />
+            >For a description of this method, see the <see cref="M:System.Collections.IList.Remove(System.Object)" />
 
             
 
@@ -977,17 +938,19 @@
           >
         </summary>
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to remove from the <see
-           cref="T:System.Collections.IList" />
+           to remove from the <see cref="T:System.Collections.IList" />
 
           
 

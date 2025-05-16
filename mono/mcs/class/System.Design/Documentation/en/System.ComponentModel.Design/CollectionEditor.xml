@@ -32,8 +32,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.CollectionEditor" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.CollectionEditor" />
 
             
 
@@ -41,7 +40,11 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -99,7 +102,11 @@
           <para>true if it is permissible to remove this value from the collection; otherwise, false. The default implementation always returns true.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -225,8 +232,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CollectionEditor.CollectionForm" />
+            >A <see cref="T:System.ComponentModel.Design.CollectionEditor.CollectionForm" />
 
             
 
@@ -250,8 +256,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can retrieve the data type of the items of the collection from the <see
-             cref="P:System.ComponentModel.Design.CollectionEditor.CollectionItemType" />
+            >You can retrieve the data type of the items of the collection from the <see cref="P:System.ComponentModel.Design.CollectionEditor.CollectionItemType" />
 
             
 
@@ -267,8 +272,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The data type of the items in the collection, or an <see
-             cref="T:System.Object" />
+            >The data type of the items in the collection, or an <see cref="T:System.Object" />
 
             
 
@@ -304,7 +308,11 @@
           <para>A new instance of the specified object.</para>
         </returns>
         <param name="itemType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -327,8 +335,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can retrieve the data type of the items of the collection from the <see
-             cref="P:System.ComponentModel.Design.CollectionEditor.NewItemTypes" />
+            >You can retrieve the data type of the items of the collection from the <see cref="P:System.ComponentModel.Design.CollectionEditor.NewItemTypes" />
 
             
 
@@ -370,7 +377,11 @@
           <para>Destroys the specified instance of the object.</para>
         </summary>
         <param name="instance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -407,26 +418,37 @@
           <para>The new value of the object. If the value of the object has not changed, this should return the same object it was passed.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that can be used to gain additional context information. </param
         >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A service provider object through which editing services can be obtained. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -463,8 +485,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The display text for <paramref
-             name="value" />
+            >The display text for <paramref name="value" />
 
             
 
@@ -472,7 +493,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -497,8 +522,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the edit style used by the <see
-             cref="M:System.ComponentModel.Design.CollectionEditor.EditValue(System.ComponentModel.ITypeDescriptorContext,System.IServiceProvider,System.Object)" />
+            >Gets the edit style used by the <see cref="M:System.ComponentModel.Design.CollectionEditor.EditValue(System.ComponentModel.ITypeDescriptorContext,System.IServiceProvider,System.Object)" />
 
             
 
@@ -508,13 +532,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Design.UITypeEditorEditStyle" />
+            >A <see cref="T:System.Drawing.Design.UITypeEditorEditStyle" />
 
             
 
-             enumeration value indicating the provided editing style. If the method is not supported in the specified context, this method will return the <see
-             cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
+             enumeration value indicating the provided editing style. If the method is not supported in the specified context, this method will return the <see cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
 
             
 
@@ -522,12 +544,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
@@ -560,8 +585,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array containing the collection objects, or an empty object array if the specified collection does not inherit from <see
-             cref="T:System.Collections.ICollection" />
+            >An array containing the collection objects, or an empty object array if the specified collection does not inherit from <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -569,7 +593,11 @@
           >
         </returns>
         <param name="editValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -606,8 +634,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.ArrayList" />
+            >An <see cref="T:System.Collections.ArrayList" />
 
             
 
@@ -615,12 +642,15 @@
           >
         </returns>
         <param name="instance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.ArrayList" />
+          An <see cref="T:System.Collections.ArrayList" />
 
           
 
@@ -648,7 +678,11 @@
           <para>An instance of the service, or null if the service cannot be found.</para>
         </returns>
         <param name="serviceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -693,8 +727,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property indicates the data types that can be added to the collection. By default, this returns a single type of <see
-             cref="P:System.ComponentModel.Design.CollectionEditor.CollectionItemType" />
+            >This property indicates the data types that can be added to the collection. By default, this returns a single type of <see cref="P:System.ComponentModel.Design.CollectionEditor.CollectionItemType" />
 
             
 
@@ -728,8 +761,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If setting requires that a new object be created, the new object is returned. Otherwise, the <paramref
-             name="editValue" />
+            >If setting requires that a new object be created, the new object is returned. Otherwise, the <paramref name="editValue" />
 
             
 
@@ -743,8 +775,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created collection object or, otherwise, the collection indicated by the <paramref
-             name="editValue" />
+            >The newly created collection object or, otherwise, the collection indicated by the <paramref name="editValue" />
 
             
 
@@ -752,14 +783,22 @@
           >
         </returns>
         <param name="editValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The collection to edit. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

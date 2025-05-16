@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The RowUpdated event message is typically raised when an <see
-         cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+        >The RowUpdated event message is typically raised when an <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
         
 
@@ -53,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Common.RowUpdatedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Data.Common.RowUpdatedEventArgs" />
 
             
 
@@ -62,58 +60,68 @@
           >
         </summary>
         <param name="dataRow">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataRow" />
+          The <see cref="T:System.Data.DataRow" />
 
           
 
-           sent through an <see
-           cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+           sent through an <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
           
 
           . </param
         >
         <param name="command">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.IDbCommand" />
+          The <see cref="T:System.Data.IDbCommand" />
 
           
 
-           executed when <see
-           cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+           executed when <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
           
 
            is called. </param
         >
         <param name="statementType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of SQL statement executed. </param
         >
         <param name="tableMapping">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.Common.DataTableMapping" />
+          The <see cref="T:System.Data.Common.DataTableMapping" />
 
           
 
-           sent through an <see
-           cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+           sent through an <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
           
 
@@ -137,13 +145,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.IDbCommand" />
+            >Gets the <see cref="T:System.Data.IDbCommand" />
 
             
 
-             executed when <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+             executed when <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
@@ -179,21 +185,18 @@
 
             
 
-             must be at least <see
-             cref="P:System.Data.Common.RowUpdatedEventArgs.RowCount" />
+             must be at least <see cref="P:System.Data.Common.RowUpdatedEventArgs.RowCount" />
 
             
 
              in length.</para
           >
           <para
-            >Throws an <see
-             cref="T:System.ArgumentNullException" />
+            >Throws an <see cref="T:System.ArgumentNullException" />
 
             
 
-             for a null instance of <see
-             cref="T:System.Data.DataRow" />
+             for a null instance of <see cref="T:System.Data.DataRow" />
 
             
 
@@ -205,12 +208,15 @@
           <para>Copies references to the modified rows into the provided array.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array of <see
-           cref="T:System.Data.DataRow" />
+          The array of <see cref="T:System.Data.DataRow" />
 
           
 
@@ -242,26 +248,22 @@
 
             
 
-             must be at least <see
-             cref="P:System.Data.Common.RowUpdatedEventArgs.RowCount" />
+             must be at least <see cref="P:System.Data.Common.RowUpdatedEventArgs.RowCount" />
 
             
 
-             + <paramref
-             name="arrayIndex" />
+             + <paramref name="arrayIndex" />
 
             
 
              in length.</para
           >
           <para
-            >Throws an <see
-             cref="T:System.ArgumentNullException" />
+            >Throws an <see cref="T:System.ArgumentNullException" />
 
             
 
-             for a null instance of <see
-             cref="T:System.Data.DataRow" />
+             for a null instance of <see cref="T:System.Data.DataRow" />
 
             
 
@@ -273,19 +275,26 @@
           <para>Copies references to the modified rows into the provided array. </para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array of <see
-           cref="T:System.Data.DataRow" />
+          The array of <see cref="T:System.Data.DataRow" />
 
           
 
            to copy into.</param
         >
         <param name="arrayIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -306,8 +315,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets any errors generated by the .NET Framework data provider when the <see
-             cref="P:System.Data.Common.RowUpdatedEventArgs.Command" />
+            >Gets any errors generated by the .NET Framework data provider when the <see cref="P:System.Data.Common.RowUpdatedEventArgs.Command" />
 
             
 
@@ -354,13 +362,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.DataRow" />
+            >Gets the <see cref="T:System.Data.DataRow" />
 
             
 
-             sent through an <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+             sent through an <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
@@ -449,13 +455,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.UpdateStatus" />
+            >Gets the <see cref="T:System.Data.UpdateStatus" />
 
             
 
-             of the <see
-             cref="P:System.Data.Common.RowUpdatedEventArgs.Command" />
+             of the <see cref="P:System.Data.Common.RowUpdatedEventArgs.Command" />
 
             
 
@@ -483,13 +487,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.Common.DataTableMapping" />
+            >Gets the <see cref="T:System.Data.Common.DataTableMapping" />
 
             
 
-             sent through an <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+             sent through an <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 

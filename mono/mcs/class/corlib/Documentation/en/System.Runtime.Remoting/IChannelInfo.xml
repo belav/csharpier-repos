@@ -20,51 +20,42 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This interface is implemented by the <see
-         cref="P:System.Runtime.Remoting.ObjRef.ChannelInfo" />
+        >This interface is implemented by the <see cref="P:System.Runtime.Remoting.ObjRef.ChannelInfo" />
 
         
 
-         property. It provides access to transport specific information contributed by the channels that are able to receive calls in the process or application domain where the object lives. This interface might also be used when building custom <see
-         cref="T:System.Runtime.Remoting.ObjRef" />
+         property. It provides access to transport specific information contributed by the channels that are able to receive calls in the process or application domain where the object lives. This interface might also be used when building custom <see cref="T:System.Runtime.Remoting.ObjRef" />
 
         
 
          classes.</para
       >
       <para
-        >When an existing object instance is marshaled to produce a <see
-         cref="T:System.Runtime.Remoting.ObjRef" />
+        >When an existing object instance is marshaled to produce a <see cref="T:System.Runtime.Remoting.ObjRef" />
 
         
 
-        , the <see
-         cref="P:System.Runtime.Remoting.IChannelInfo.ChannelData" />
+        , the <see cref="P:System.Runtime.Remoting.IChannelInfo.ChannelData" />
 
         
 
-         is copied from the channel (see <see
-         cref="T:System.Runtime.Remoting.Channels.IChannelReceiver" />
+         is copied from the channel (see <see cref="T:System.Runtime.Remoting.Channels.IChannelReceiver" />
 
         
 
-        ) for each registered channel and stored in the <see
-         cref="T:System.Runtime.Remoting.ObjRef" />
+        ) for each registered channel and stored in the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
         
 
-        . When the <see
-         cref="T:System.Runtime.Remoting.ObjRef" />
+        . When the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
         
 
-         is unmarshaled at its destination, the <see
-         cref="P:System.Runtime.Remoting.IChannelInfo.ChannelData" />
+         is unmarshaled at its destination, the <see cref="P:System.Runtime.Remoting.IChannelInfo.ChannelData" />
 
         
 
-         provided through the <see
-         cref="T:System.Runtime.Remoting.IChannelInfo" />
+         provided through the <see cref="T:System.Runtime.Remoting.IChannelInfo" />
 
         
 
@@ -74,8 +65,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides custom channel information that is carried along with the <see
-         cref="T:System.Runtime.Remoting.ObjRef" />
+        >Provides custom channel information that is carried along with the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
         
 

@@ -22,8 +22,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The most common cause of printer settings that are not valid is referencing a printer that does not exist.</para>
       <para
-        >For more information about printing, see the <see
-         cref="N:System.Drawing.Printing" />
+        >For more information about printing, see the <see cref="N:System.Drawing.Printing" />
 
         
 
@@ -51,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Printing.InvalidPrinterException" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Printing.InvalidPrinterException" />
 
             
 
@@ -60,12 +58,15 @@
           >
         </summary>
         <param name="settings">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Printing.PrinterSettings" />
+          A <see cref="T:System.Drawing.Printing.PrinterSettings" />
 
           
 
@@ -96,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Printing.InvalidPrinterException" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Printing.InvalidPrinterException" />
 
             
 
@@ -105,24 +105,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -151,18 +157,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Drawing.Printing.InvalidPrinterException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+            >The <see cref="M:System.Drawing.Printing.InvalidPrinterException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
 
             
 
-             method sets a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             method sets a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             with all the exception object data targeted for serialization. During deserialization, the exception is reconstituted from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             with all the exception object data targeted for serialization. During deserialization, the exception is reconstituted from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -172,8 +175,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overridden. Sets the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Overridden. Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -181,24 +183,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 

@@ -37,66 +37,54 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+        >The <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
         
 
-         class is a version of the <see
-         cref="T:System.Runtime.Remoting.Messaging.CallContext" />
+         class is a version of the <see cref="T:System.Runtime.Remoting.Messaging.CallContext" />
 
         
 
-         class that is used during method calls to remote application domains. The <see
-         cref="T:System.Runtime.Remoting.Messaging.CallContext" />
+         class that is used during method calls to remote application domains. The <see cref="T:System.Runtime.Remoting.Messaging.CallContext" />
 
         
 
-         is a specialized collection object similar to a thread local storage for method calls, and provides data slots that are unique to each logical thread of execution. The slots are not shared across call contexts on other logical threads. Objects can be added to the <see
-         cref="T:System.Runtime.Remoting.Messaging.CallContext" />
+         is a specialized collection object similar to a thread local storage for method calls, and provides data slots that are unique to each logical thread of execution. The slots are not shared across call contexts on other logical threads. Objects can be added to the <see cref="T:System.Runtime.Remoting.Messaging.CallContext" />
 
         
 
          as it travels down and up the execution code path, and examined by various objects along the path.</para
       >
       <para
-        >When a remote method call is made to an object in another <see
-         cref="T:System.AppDomain" />
+        >When a remote method call is made to an object in another <see cref="T:System.AppDomain" />
 
         
 
-        , the <see
-         cref="T:System.Runtime.Remoting.Messaging.CallContext" />
+        , the <see cref="T:System.Runtime.Remoting.Messaging.CallContext" />
 
         
 
-         class generates a <see
-         cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+         class generates a <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
         
 
-         that travels along with the remote call. Only objects that expose the <see
-         cref="T:System.Runtime.Remoting.Messaging.ILogicalThreadAffinative" />
+         that travels along with the remote call. Only objects that expose the <see cref="T:System.Runtime.Remoting.Messaging.ILogicalThreadAffinative" />
 
         
 
-         interface and are stored in the <see
-         cref="T:System.Runtime.Remoting.Messaging.CallContext" />
+         interface and are stored in the <see cref="T:System.Runtime.Remoting.Messaging.CallContext" />
 
         
 
-         are propagated outside the <see
-         cref="T:System.AppDomain" />
+         are propagated outside the <see cref="T:System.AppDomain" />
 
         
 
-         in a <see
-         cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+         in a <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
         
 
-        . Objects that do not support this interface are not transmitted in <see
-         cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+        . Objects that do not support this interface are not transmitted in <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
         
 
@@ -104,8 +92,7 @@
       >
       <block subset="none" type="note">
         <para
-          >This class makes a link demand. A SecurityException is thrown if the immediate caller does not have infrastructure permission. See <format
-           type="text/html">
+          >This class makes a link demand. A SecurityException is thrown if the immediate caller does not have infrastructure permission. See <format type="text/html">
             <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">[&lt;topic://cpconLinkDemands&gt;]</a>
           </format>
 
@@ -141,13 +128,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.Remoting.Messaging.LogicalCallContext.Clone" />
+            >The <see cref="M:System.Runtime.Remoting.Messaging.LogicalCallContext.Clone" />
 
             
 
-             method produces a deep copy of the current <see
-             cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+             method produces a deep copy of the current <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
             
 
@@ -189,7 +174,11 @@
           <para>Empties a data slot with the specified name.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -226,7 +215,11 @@
           <para>The object in the logical call context associated with the specified name.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -260,21 +253,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current method fills the provided <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >The current method fills the provided <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             with all the data needed to recreate the <see
-             cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+             with all the data needed to recreate the <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
             
 
             .</para
           >
           <para
-            >The current method is an implementation of <see
-             cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+            >The current method is an implementation of <see cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
 
             
 
@@ -284,13 +274,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a specified <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a specified <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             with the data needed to serialize the current <see
-             cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+             with the data needed to serialize the current <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
             
 
@@ -298,19 +286,26 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            to populate with data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -336,8 +331,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the current <see
-             cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+            >Gets a value indicating whether the current <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
             
 
@@ -372,14 +366,22 @@
           <para>Stores the specified object in the current instance, and associates it with the specified name.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name with which to associate the new item in the call context. </param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

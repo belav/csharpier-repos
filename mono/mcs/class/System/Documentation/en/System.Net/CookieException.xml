@@ -26,23 +26,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This exception is thrown if an attempt is made to <see
-         cref="M:System.Net.CookieContainer.Add(System.Net.Cookie)" />
+        >This exception is thrown if an attempt is made to <see cref="M:System.Net.CookieContainer.Add(System.Net.Cookie)" />
 
         
 
-         a <see
-         cref="T:System.Net.Cookie" />
+         a <see cref="T:System.Net.Cookie" />
 
         
 
-         with length greater than <see
-         cref="P:System.Net.CookieContainer.MaxCookieSize" />
+         with length greater than <see cref="P:System.Net.CookieContainer.MaxCookieSize" />
 
         
 
-         to a <see
-         cref="T:System.Net.CookieContainer" />
+         to a <see cref="T:System.Net.CookieContainer" />
 
         
 
@@ -52,13 +48,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The exception that is thrown when an error is made adding a <see
-         cref="T:System.Net.Cookie" />
+        >The exception that is thrown when an error is made adding a <see cref="T:System.Net.Cookie" />
 
         
 
-         to a <see
-         cref="T:System.Net.CookieContainer" />
+         to a <see cref="T:System.Net.CookieContainer" />
 
         
 
@@ -85,8 +79,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default constructor for <see
-             cref="T:System.Net.CookieException" />
+            >The default constructor for <see cref="T:System.Net.CookieException" />
 
             
 
@@ -96,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.CookieException" />
+            >Initializes a new instance of the <see cref="T:System.Net.CookieException" />
 
             
 
@@ -134,18 +126,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.CookieException" />
+            >Initializes a new instance of the <see cref="T:System.Net.CookieException" />
 
             
 
-             class with specific values of <paramref
-             name="serializationInfo" />
+             class with specific values of <paramref name="serializationInfo" />
 
             
 
-             and <paramref
-             name="streamingContext" />
+             and <paramref name="streamingContext" />
 
             
 
@@ -153,24 +142,30 @@
           >
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            to be used. </param
         >
         <param name="streamingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -203,15 +198,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format
-             type="text/html">
+            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format type="text/html">
               <a href="832AC524-21BC-419A-A27B-CA8BFC45840F">XML and SOAP Serialization</a>
             </format>
 
             
 
-            . Any objects included in the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            . Any objects included in the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -221,13 +214,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             instance with the data needed to serialize the <see
-             cref="T:System.Net.CookieException" />
+             instance with the data needed to serialize the <see cref="T:System.Net.CookieException" />
 
             
 
@@ -235,24 +226,30 @@
           >
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object that holds the serialized object data. The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The object that holds the serialized object data. The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            to populate with data.</param
         >
         <param name="streamingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The contextual information about the source or destination. A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The contextual information about the source or destination. A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -289,13 +286,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             instance with the data needed to serialize the <see
-             cref="T:System.Net.CookieException" />
+             instance with the data needed to serialize the <see cref="T:System.Net.CookieException" />
 
             
 

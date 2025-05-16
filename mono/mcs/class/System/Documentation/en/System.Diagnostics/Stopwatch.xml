@@ -19,155 +19,127 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Diagnostics.Stopwatch" />
+        >A <see cref="T:System.Diagnostics.Stopwatch" />
 
         
 
-         instance can measure elapsed time for one interval, or the total of elapsed time across multiple intervals. In a typical <see
-         cref="T:System.Diagnostics.Stopwatch" />
+         instance can measure elapsed time for one interval, or the total of elapsed time across multiple intervals. In a typical <see cref="T:System.Diagnostics.Stopwatch" />
 
         
 
-         scenario, you call the <see
-         cref="M:System.Diagnostics.Stopwatch.Start" />
+         scenario, you call the <see cref="M:System.Diagnostics.Stopwatch.Start" />
 
         
 
-         method, then eventually call the <see
-         cref="M:System.Diagnostics.Stopwatch.Stop" />
+         method, then eventually call the <see cref="M:System.Diagnostics.Stopwatch.Stop" />
 
         
 
-         method, and then you check elapsed time using the <see
-         cref="P:System.Diagnostics.Stopwatch.Elapsed" />
+         method, and then you check elapsed time using the <see cref="P:System.Diagnostics.Stopwatch.Elapsed" />
 
         
 
          property.</para
       >
       <para
-        >A <see
-         cref="T:System.Diagnostics.Stopwatch" />
+        >A <see cref="T:System.Diagnostics.Stopwatch" />
 
         
 
-         instance is either running or stopped; use <see
-         cref="P:System.Diagnostics.Stopwatch.IsRunning" />
+         instance is either running or stopped; use <see cref="P:System.Diagnostics.Stopwatch.IsRunning" />
 
         
 
-         to determine the current state of a <see
-         cref="T:System.Diagnostics.Stopwatch" />
+         to determine the current state of a <see cref="T:System.Diagnostics.Stopwatch" />
 
         
 
-        . Use <see
-         cref="M:System.Diagnostics.Stopwatch.Start" />
+        . Use <see cref="M:System.Diagnostics.Stopwatch.Start" />
 
         
 
-         to begin measuring elapsed time; use <see
-         cref="M:System.Diagnostics.Stopwatch.Stop" />
+         to begin measuring elapsed time; use <see cref="M:System.Diagnostics.Stopwatch.Stop" />
 
         
 
-         to stop measuring elapsed time. Query the elapsed time value through the properties <see
-         cref="P:System.Diagnostics.Stopwatch.Elapsed" />
+         to stop measuring elapsed time. Query the elapsed time value through the properties <see cref="P:System.Diagnostics.Stopwatch.Elapsed" />
 
         
 
-        , <see
-         cref="P:System.Diagnostics.Stopwatch.ElapsedMilliseconds" />
+        , <see cref="P:System.Diagnostics.Stopwatch.ElapsedMilliseconds" />
 
         
 
-        , or <see
-         cref="P:System.Diagnostics.Stopwatch.ElapsedTicks" />
+        , or <see cref="P:System.Diagnostics.Stopwatch.ElapsedTicks" />
 
         
 
-        . You can query the elapsed time properties while the instance is running or stopped. The elapsed time properties steadily increase while the <see
-         cref="T:System.Diagnostics.Stopwatch" />
+        . You can query the elapsed time properties while the instance is running or stopped. The elapsed time properties steadily increase while the <see cref="T:System.Diagnostics.Stopwatch" />
 
         
 
          is running; they remain constant when the instance is stopped.</para
       >
       <para
-        >By default, the elapsed time value of a <see
-         cref="T:System.Diagnostics.Stopwatch" />
+        >By default, the elapsed time value of a <see cref="T:System.Diagnostics.Stopwatch" />
 
         
 
-         instance equals the total of all measured time intervals. Each call to <see
-         cref="M:System.Diagnostics.Stopwatch.Start" />
+         instance equals the total of all measured time intervals. Each call to <see cref="M:System.Diagnostics.Stopwatch.Start" />
 
         
 
-         begins counting at the cumulative elapsed time; each call to <see
-         cref="M:System.Diagnostics.Stopwatch.Stop" />
+         begins counting at the cumulative elapsed time; each call to <see cref="M:System.Diagnostics.Stopwatch.Stop" />
 
         
 
-         ends the current interval measurement and freezes the cumulative elapsed time value. Use the <see
-         cref="M:System.Diagnostics.Stopwatch.Reset" />
+         ends the current interval measurement and freezes the cumulative elapsed time value. Use the <see cref="M:System.Diagnostics.Stopwatch.Reset" />
 
         
 
-         method to clear the cumulative elapsed time in an existing <see
-         cref="T:System.Diagnostics.Stopwatch" />
+         method to clear the cumulative elapsed time in an existing <see cref="T:System.Diagnostics.Stopwatch" />
 
         
 
          instance.</para
       >
       <para
-        >The <see
-         cref="T:System.Diagnostics.Stopwatch" />
+        >The <see cref="T:System.Diagnostics.Stopwatch" />
 
         
 
-         measures elapsed time by counting timer ticks in the underlying timer mechanism. If the installed hardware and operating system support a high-resolution performance counter, then the <see
-         cref="T:System.Diagnostics.Stopwatch" />
+         measures elapsed time by counting timer ticks in the underlying timer mechanism. If the installed hardware and operating system support a high-resolution performance counter, then the <see cref="T:System.Diagnostics.Stopwatch" />
 
         
 
-         class uses that counter to measure elapsed time. Otherwise, the <see
-         cref="T:System.Diagnostics.Stopwatch" />
+         class uses that counter to measure elapsed time. Otherwise, the <see cref="T:System.Diagnostics.Stopwatch" />
 
         
 
-         class uses the system timer to measure elapsed time. Use the <see
-         cref="F:System.Diagnostics.Stopwatch.Frequency" />
+         class uses the system timer to measure elapsed time. Use the <see cref="F:System.Diagnostics.Stopwatch.Frequency" />
 
         
 
-         and <see
-         cref="F:System.Diagnostics.Stopwatch.IsHighResolution" />
+         and <see cref="F:System.Diagnostics.Stopwatch.IsHighResolution" />
 
         
 
-         fields to determine the precision and resolution of the <see
-         cref="T:System.Diagnostics.Stopwatch" />
+         fields to determine the precision and resolution of the <see cref="T:System.Diagnostics.Stopwatch" />
 
         
 
          timing implementation.</para
       >
       <para
-        >The <see
-         cref="T:System.Diagnostics.Stopwatch" />
+        >The <see cref="T:System.Diagnostics.Stopwatch" />
 
         
 
-         class assists the manipulation of timing-related performance counters within managed code. Specifically, the <see
-         cref="F:System.Diagnostics.Stopwatch.Frequency" />
+         class assists the manipulation of timing-related performance counters within managed code. Specifically, the <see cref="F:System.Diagnostics.Stopwatch.Frequency" />
 
         
 
-         field and <see
-         cref="M:System.Diagnostics.Stopwatch.GetTimestamp" />
+         field and <see cref="M:System.Diagnostics.Stopwatch.GetTimestamp" />
 
         
 
@@ -175,8 +147,7 @@
       >
       <block subset="none" type="note">
         <para
-          >On a multiprocessor computer, it does not matter which processor the thread runs on. However, because of bugs in the BIOS or the Hardware Abstraction Layer (HAL), you can get different timing results on different processors. To specify processor affinity for a thread, use the <see
-           cref="P:System.Diagnostics.ProcessThread.ProcessorAffinity" />
+          >On a multiprocessor computer, it does not matter which processor the thread runs on. However, because of bugs in the BIOS or the Hardware Abstraction Layer (HAL), you can get different timing results on different processors. To specify processor affinity for a thread, use the <see cref="P:System.Diagnostics.ProcessThread.ProcessorAffinity" />
 
           
 
@@ -207,31 +178,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The returned <see
-             cref="T:System.Diagnostics.Stopwatch" />
+            >The returned <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
              instance is stopped, and the elapsed time property of the instance is zero.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Diagnostics.Stopwatch.Start" />
+            >Use the <see cref="M:System.Diagnostics.Stopwatch.Start" />
 
             
 
-             method to begin measuring elapsed time with the new <see
-             cref="T:System.Diagnostics.Stopwatch" />
+             method to begin measuring elapsed time with the new <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             instance. Use the <see
-             cref="M:System.Diagnostics.Stopwatch.StartNew" />
+             instance. Use the <see cref="M:System.Diagnostics.Stopwatch.StartNew" />
 
             
 
-             method to initialize a new <see
-             cref="T:System.Diagnostics.Stopwatch" />
+             method to initialize a new <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
@@ -241,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.Stopwatch" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
@@ -271,102 +236,84 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a typical <see
-             cref="T:System.Diagnostics.Stopwatch" />
+            >In a typical <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             scenario, you call the <see
-             cref="M:System.Diagnostics.Stopwatch.Start" />
+             scenario, you call the <see cref="M:System.Diagnostics.Stopwatch.Start" />
 
             
 
-             method, then eventually call the <see
-             cref="M:System.Diagnostics.Stopwatch.Stop" />
+             method, then eventually call the <see cref="M:System.Diagnostics.Stopwatch.Stop" />
 
             
 
-             method, and then you check elapsed time using the <see
-             cref="P:System.Diagnostics.Stopwatch.Elapsed" />
+             method, and then you check elapsed time using the <see cref="P:System.Diagnostics.Stopwatch.Elapsed" />
 
             
 
              property.</para
           >
           <para
-            >Use the <see
-             cref="P:System.Diagnostics.Stopwatch.Elapsed" />
+            >Use the <see cref="P:System.Diagnostics.Stopwatch.Elapsed" />
 
             
 
-             property to retrieve the elapsed time value using <see
-             cref="T:System.TimeSpan" />
+             property to retrieve the elapsed time value using <see cref="T:System.TimeSpan" />
 
             
 
-             methods and properties. For example, you can format the returned <see
-             cref="T:System.TimeSpan" />
+             methods and properties. For example, you can format the returned <see cref="T:System.TimeSpan" />
 
             
 
-             instance into a text representation, or pass it to another class that requires a <see
-             cref="T:System.TimeSpan" />
+             instance into a text representation, or pass it to another class that requires a <see cref="T:System.TimeSpan" />
 
             
 
              parameter.</para
           >
           <para
-            >You can query the properties <see
-             cref="P:System.Diagnostics.Stopwatch.Elapsed" />
+            >You can query the properties <see cref="P:System.Diagnostics.Stopwatch.Elapsed" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.Stopwatch.ElapsedMilliseconds" />
+            , <see cref="P:System.Diagnostics.Stopwatch.ElapsedMilliseconds" />
 
             
 
-            , and <see
-             cref="P:System.Diagnostics.Stopwatch.ElapsedTicks" />
+            , and <see cref="P:System.Diagnostics.Stopwatch.ElapsedTicks" />
 
             
 
-             while the <see
-             cref="T:System.Diagnostics.Stopwatch" />
+             while the <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             instance is running or stopped. The elapsed time properties steadily increase while the <see
-             cref="T:System.Diagnostics.Stopwatch" />
+             instance is running or stopped. The elapsed time properties steadily increase while the <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
              is running; they remain constant when the instance is stopped.</para
           >
           <para
-            >By default, the elapsed time value of a <see
-             cref="T:System.Diagnostics.Stopwatch" />
+            >By default, the elapsed time value of a <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             instance equals the total of all measured time intervals. Each call to <see
-             cref="M:System.Diagnostics.Stopwatch.Start" />
+             instance equals the total of all measured time intervals. Each call to <see cref="M:System.Diagnostics.Stopwatch.Start" />
 
             
 
-             begins counting at the cumulative elapsed time; each call to <see
-             cref="M:System.Diagnostics.Stopwatch.Stop" />
+             begins counting at the cumulative elapsed time; each call to <see cref="M:System.Diagnostics.Stopwatch.Stop" />
 
             
 
-             ends the current interval measurement and freezes the cumulative elapsed time value. Use the <see
-             cref="M:System.Diagnostics.Stopwatch.Reset" />
+             ends the current interval measurement and freezes the cumulative elapsed time value. Use the <see cref="M:System.Diagnostics.Stopwatch.Reset" />
 
             
 
-             method to clear the cumulative elapsed time in an existing <see
-             cref="T:System.Diagnostics.Stopwatch" />
+             method to clear the cumulative elapsed time in an existing <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
@@ -396,69 +343,57 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property represents elapsed time rounded down to the nearest whole millisecond value. For higher precision measurements, use the <see
-             cref="P:System.Diagnostics.Stopwatch.Elapsed" />
+            >This property represents elapsed time rounded down to the nearest whole millisecond value. For higher precision measurements, use the <see cref="P:System.Diagnostics.Stopwatch.Elapsed" />
 
             
 
-             or <see
-             cref="P:System.Diagnostics.Stopwatch.ElapsedTicks" />
+             or <see cref="P:System.Diagnostics.Stopwatch.ElapsedTicks" />
 
             
 
              properties.</para
           >
           <para
-            >You can query the properties <see
-             cref="P:System.Diagnostics.Stopwatch.Elapsed" />
+            >You can query the properties <see cref="P:System.Diagnostics.Stopwatch.Elapsed" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.Stopwatch.ElapsedMilliseconds" />
+            , <see cref="P:System.Diagnostics.Stopwatch.ElapsedMilliseconds" />
 
             
 
-            , and <see
-             cref="P:System.Diagnostics.Stopwatch.ElapsedTicks" />
+            , and <see cref="P:System.Diagnostics.Stopwatch.ElapsedTicks" />
 
             
 
-             while the <see
-             cref="T:System.Diagnostics.Stopwatch" />
+             while the <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             instance is running or stopped. The elapsed time properties steadily increase while the <see
-             cref="T:System.Diagnostics.Stopwatch" />
+             instance is running or stopped. The elapsed time properties steadily increase while the <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
              is running; they remain constant when the instance is stopped.</para
           >
           <para
-            >By default, the elapsed time value of a <see
-             cref="T:System.Diagnostics.Stopwatch" />
+            >By default, the elapsed time value of a <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             instance equals the total of all measured time intervals. Each call to <see
-             cref="M:System.Diagnostics.Stopwatch.Start" />
+             instance equals the total of all measured time intervals. Each call to <see cref="M:System.Diagnostics.Stopwatch.Start" />
 
             
 
-             begins counting at the cumulative elapsed time; each call to <see
-             cref="M:System.Diagnostics.Stopwatch.Stop" />
+             begins counting at the cumulative elapsed time; each call to <see cref="M:System.Diagnostics.Stopwatch.Stop" />
 
             
 
-             ends the current interval measurement and freezes the cumulative elapsed time value. Use the <see
-             cref="M:System.Diagnostics.Stopwatch.Reset" />
+             ends the current interval measurement and freezes the cumulative elapsed time value. Use the <see cref="M:System.Diagnostics.Stopwatch.Reset" />
 
             
 
-             method to clear the cumulative elapsed time in an existing <see
-             cref="T:System.Diagnostics.Stopwatch" />
+             method to clear the cumulative elapsed time in an existing <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
@@ -488,74 +423,61 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property represents the number of elapsed ticks in the underlying timer mechanism. A tick is the smallest unit of time that the <see
-             cref="T:System.Diagnostics.Stopwatch" />
+            >This property represents the number of elapsed ticks in the underlying timer mechanism. A tick is the smallest unit of time that the <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             timer can measure. Use the <see
-             cref="F:System.Diagnostics.Stopwatch.Frequency" />
+             timer can measure. Use the <see cref="F:System.Diagnostics.Stopwatch.Frequency" />
 
             
 
-             field to convert the <see
-             cref="P:System.Diagnostics.Stopwatch.ElapsedTicks" />
+             field to convert the <see cref="P:System.Diagnostics.Stopwatch.ElapsedTicks" />
 
             
 
              value into a number of seconds.</para
           >
           <para
-            >You can query the properties <see
-             cref="P:System.Diagnostics.Stopwatch.Elapsed" />
+            >You can query the properties <see cref="P:System.Diagnostics.Stopwatch.Elapsed" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.Stopwatch.ElapsedMilliseconds" />
+            , <see cref="P:System.Diagnostics.Stopwatch.ElapsedMilliseconds" />
 
             
 
-            , and <see
-             cref="P:System.Diagnostics.Stopwatch.ElapsedTicks" />
+            , and <see cref="P:System.Diagnostics.Stopwatch.ElapsedTicks" />
 
             
 
-             while the <see
-             cref="T:System.Diagnostics.Stopwatch" />
+             while the <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             instance is running or stopped. The elapsed time properties steadily increase while the <see
-             cref="T:System.Diagnostics.Stopwatch" />
+             instance is running or stopped. The elapsed time properties steadily increase while the <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
              is running; they remain constant when the instance is stopped.</para
           >
           <para
-            >By default, the elapsed time value of a <see
-             cref="T:System.Diagnostics.Stopwatch" />
+            >By default, the elapsed time value of a <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             instance equals the total of all measured time intervals. Each call to <see
-             cref="M:System.Diagnostics.Stopwatch.Start" />
+             instance equals the total of all measured time intervals. Each call to <see cref="M:System.Diagnostics.Stopwatch.Start" />
 
             
 
-             begins counting at the cumulative elapsed time; each call to <see
-             cref="M:System.Diagnostics.Stopwatch.Stop" />
+             begins counting at the cumulative elapsed time; each call to <see cref="M:System.Diagnostics.Stopwatch.Stop" />
 
             
 
-             ends the current interval measurement and freezes the cumulative elapsed time value. Use the <see
-             cref="M:System.Diagnostics.Stopwatch.Reset" />
+             ends the current interval measurement and freezes the cumulative elapsed time value. Use the <see cref="M:System.Diagnostics.Stopwatch.Reset" />
 
             
 
-             method to clear the cumulative elapsed time in an existing <see
-             cref="T:System.Diagnostics.Stopwatch" />
+             method to clear the cumulative elapsed time in an existing <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
@@ -567,23 +489,19 @@
 
               
 
-               ticks are different from <see
-               cref="P:System.DateTime.Ticks" />
+               ticks are different from <see cref="P:System.DateTime.Ticks" />
 
               
 
-              . Each tick in the <see
-               cref="P:System.DateTime.Ticks" />
+              . Each tick in the <see cref="P:System.DateTime.Ticks" />
 
               
 
-               value represents one 100-nanosecond interval. Each tick in the <see
-               cref="P:System.Diagnostics.Stopwatch.ElapsedTicks" />
+               value represents one 100-nanosecond interval. Each tick in the <see cref="P:System.Diagnostics.Stopwatch.ElapsedTicks" />
 
               
 
-               value represents the time interval equal to 1 second divided by the <see
-               cref="F:System.Diagnostics.Stopwatch.Frequency" />
+               value represents the time interval equal to 1 second divided by the <see cref="F:System.Diagnostics.Stopwatch.Frequency" />
 
               
 
@@ -615,31 +533,26 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The timer frequency indicates the timer precision and resolution. For example, a timer frequency of 2 million ticks per second equals a timer resolution of 500 nanoseconds per tick. In other words, because one second equals 1 billion nanoseconds, a timer frequency of 2 million ticks per second is equivalent to 2 million ticks per 1 billion nanoseconds, which can be further simplified to 1 tick per 500 nanoseconds.</para>
           <para
-            >The <see
-             cref="F:System.Diagnostics.Stopwatch.Frequency" />
+            >The <see cref="F:System.Diagnostics.Stopwatch.Frequency" />
 
             
 
-             value depends on the resolution of the underlying timing mechanism. If the installed hardware and operating system support a high-resolution performance counter, then the <see
-             cref="F:System.Diagnostics.Stopwatch.Frequency" />
+             value depends on the resolution of the underlying timing mechanism. If the installed hardware and operating system support a high-resolution performance counter, then the <see cref="F:System.Diagnostics.Stopwatch.Frequency" />
 
             
 
-             value reflects the frequency of that counter. Otherwise, the <see
-             cref="F:System.Diagnostics.Stopwatch.Frequency" />
+             value reflects the frequency of that counter. Otherwise, the <see cref="F:System.Diagnostics.Stopwatch.Frequency" />
 
             
 
              value is based on the system timer frequency.</para
           >
           <para
-            >Because the <see
-             cref="T:System.Diagnostics.Stopwatch" />
+            >Because the <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             frequency depends on the installed hardware and operating system, the <see
-             cref="F:System.Diagnostics.Stopwatch.Frequency" />
+             frequency depends on the installed hardware and operating system, the <see cref="F:System.Diagnostics.Stopwatch.Frequency" />
 
             
 
@@ -672,33 +585,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Diagnostics.Stopwatch" />
+            >If the <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             class uses a high-resolution performance counter, <see
-             cref="M:System.Diagnostics.Stopwatch.GetTimestamp" />
+             class uses a high-resolution performance counter, <see cref="M:System.Diagnostics.Stopwatch.GetTimestamp" />
 
             
 
-             returns the current value of that counter. If the <see
-             cref="T:System.Diagnostics.Stopwatch" />
+             returns the current value of that counter. If the <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             class uses the system timer, <see
-             cref="M:System.Diagnostics.Stopwatch.GetTimestamp" />
+             class uses the system timer, <see cref="M:System.Diagnostics.Stopwatch.GetTimestamp" />
 
             
 
-             returns the current <see
-             cref="P:System.DateTime.Ticks" />
+             returns the current <see cref="P:System.DateTime.Ticks" />
 
             
 
-             property of the <see
-             cref="P:System.DateTime.Now" />
+             property of the <see cref="P:System.DateTime.Now" />
 
             
 
@@ -734,28 +641,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The timer used by the <see
-             cref="T:System.Diagnostics.Stopwatch" />
+            >The timer used by the <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             class depends on the system hardware and operating system. <see
-             cref="F:System.Diagnostics.Stopwatch.IsHighResolution" />
+             class depends on the system hardware and operating system. <see cref="F:System.Diagnostics.Stopwatch.IsHighResolution" />
 
             
 
-             is true if the <see
-             cref="T:System.Diagnostics.Stopwatch" />
+             is true if the <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             timer is based on a high-resolution performance counter. Otherwise, <see
-             cref="F:System.Diagnostics.Stopwatch.IsHighResolution" />
+             timer is based on a high-resolution performance counter. Otherwise, <see cref="F:System.Diagnostics.Stopwatch.IsHighResolution" />
 
             
 
-             is false, which indicates that the <see
-             cref="T:System.Diagnostics.Stopwatch" />
+             is false, which indicates that the <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
@@ -785,28 +687,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Diagnostics.Stopwatch" />
+            >A <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             instance begins running with a call to <see
-             cref="M:System.Diagnostics.Stopwatch.Start" />
+             instance begins running with a call to <see cref="M:System.Diagnostics.Stopwatch.Start" />
 
             
 
-             or <see
-             cref="M:System.Diagnostics.Stopwatch.StartNew" />
+             or <see cref="M:System.Diagnostics.Stopwatch.StartNew" />
 
             
 
-            . The instance stops running with a call to <see
-             cref="M:System.Diagnostics.Stopwatch.Stop" />
+            . The instance stops running with a call to <see cref="M:System.Diagnostics.Stopwatch.Stop" />
 
             
 
-             or <see
-             cref="M:System.Diagnostics.Stopwatch.Reset" />
+             or <see cref="M:System.Diagnostics.Stopwatch.Reset" />
 
             
 
@@ -816,8 +713,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Diagnostics.Stopwatch" />
+            >Gets a value indicating whether the <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
@@ -846,18 +742,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Diagnostics.Stopwatch" />
+            >A <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             instance calculates and retains the cumulative elapsed time across multiple time intervals, until the instance is reset. Use <see
-             cref="M:System.Diagnostics.Stopwatch.Stop" />
+             instance calculates and retains the cumulative elapsed time across multiple time intervals, until the instance is reset. Use <see cref="M:System.Diagnostics.Stopwatch.Stop" />
 
             
 
-             to stop the current interval measurement and retain the cumulative elapsed time value. Use <see
-             cref="M:System.Diagnostics.Stopwatch.Reset" />
+             to stop the current interval measurement and retain the cumulative elapsed time value. Use <see cref="M:System.Diagnostics.Stopwatch.Reset" />
 
             
 
@@ -888,23 +781,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Diagnostics.Stopwatch" />
+            >A <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             instance calculates and retains the cumulative elapsed time across multiple time intervals, until the instance is reset or restarted. Use <see
-             cref="M:System.Diagnostics.Stopwatch.Stop" />
+             instance calculates and retains the cumulative elapsed time across multiple time intervals, until the instance is reset or restarted. Use <see cref="M:System.Diagnostics.Stopwatch.Stop" />
 
             
 
-             to stop the current interval measurement and retain the cumulative elapsed time value. Use <see
-             cref="M:System.Diagnostics.Stopwatch.Reset" />
+             to stop the current interval measurement and retain the cumulative elapsed time value. Use <see cref="M:System.Diagnostics.Stopwatch.Reset" />
 
             
 
-             to stop any interval measurement in progress and clear the elapsed time value. Use <see
-             cref="M:System.Diagnostics.Stopwatch.Restart" />
+             to stop any interval measurement in progress and clear the elapsed time value. Use <see cref="M:System.Diagnostics.Stopwatch.Restart" />
 
             
 
@@ -937,89 +826,73 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a typical <see
-             cref="T:System.Diagnostics.Stopwatch" />
+            >In a typical <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             scenario, you call the <see
-             cref="M:System.Diagnostics.Stopwatch.Start" />
+             scenario, you call the <see cref="M:System.Diagnostics.Stopwatch.Start" />
 
             
 
-             method, then eventually call the <see
-             cref="M:System.Diagnostics.Stopwatch.Stop" />
+             method, then eventually call the <see cref="M:System.Diagnostics.Stopwatch.Stop" />
 
             
 
-             method, and then you check elapsed time using the <see
-             cref="P:System.Diagnostics.Stopwatch.Elapsed" />
+             method, and then you check elapsed time using the <see cref="P:System.Diagnostics.Stopwatch.Elapsed" />
 
             
 
              property.</para
           >
           <para
-            >Once started, a <see
-             cref="T:System.Diagnostics.Stopwatch" />
+            >Once started, a <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             timer measures the current interval, in elapsed timer ticks, until the instance is stopped or reset. Starting a <see
-             cref="T:System.Diagnostics.Stopwatch" />
+             timer measures the current interval, in elapsed timer ticks, until the instance is stopped or reset. Starting a <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
              that is already running does not change the timer state or reset the elapsed time properties.</para
           >
           <para
-            >When a <see
-             cref="T:System.Diagnostics.Stopwatch" />
+            >When a <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             instance measures more than one interval, the <see
-             cref="M:System.Diagnostics.Stopwatch.Start" />
+             instance measures more than one interval, the <see cref="M:System.Diagnostics.Stopwatch.Start" />
 
             
 
-             method resumes measuring time from the current elapsed time value. A <see
-             cref="T:System.Diagnostics.Stopwatch" />
+             method resumes measuring time from the current elapsed time value. A <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             instance calculates and retains the cumulative elapsed time across multiple time intervals, until the instance is reset. Use the <see
-             cref="M:System.Diagnostics.Stopwatch.Reset" />
+             instance calculates and retains the cumulative elapsed time across multiple time intervals, until the instance is reset. Use the <see cref="M:System.Diagnostics.Stopwatch.Reset" />
 
             
 
-             method before calling <see
-             cref="M:System.Diagnostics.Stopwatch.Start" />
+             method before calling <see cref="M:System.Diagnostics.Stopwatch.Start" />
 
             
 
-             to clear the cumulative elapsed time in a <see
-             cref="T:System.Diagnostics.Stopwatch" />
+             to clear the cumulative elapsed time in a <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             instance. Use the <see
-             cref="M:System.Diagnostics.Stopwatch.Restart" />
+             instance. Use the <see cref="M:System.Diagnostics.Stopwatch.Restart" />
 
             
 
-             method to <see
-             cref="M:System.Diagnostics.Stopwatch.Reset" />
+             method to <see cref="M:System.Diagnostics.Stopwatch.Reset" />
 
             
 
-             and <see
-             cref="M:System.Diagnostics.Stopwatch.Start" />
+             and <see cref="M:System.Diagnostics.Stopwatch.Start" />
 
             
 
-             the <see
-             cref="T:System.Diagnostics.Stopwatch" />
+             the <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
@@ -1055,13 +928,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is equivalent to calling the <see
-             cref="T:System.Diagnostics.Stopwatch" />
+            >This method is equivalent to calling the <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             constructor and then calling <see
-             cref="M:System.Diagnostics.Stopwatch.Start" />
+             constructor and then calling <see cref="M:System.Diagnostics.Stopwatch.Start" />
 
             
 
@@ -1071,8 +942,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Diagnostics.Stopwatch" />
+            >Initializes a new <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
@@ -1082,8 +952,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Diagnostics.Stopwatch" />
+            >A <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
@@ -1112,64 +981,53 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a typical <see
-             cref="T:System.Diagnostics.Stopwatch" />
+            >In a typical <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             scenario, you call the <see
-             cref="M:System.Diagnostics.Stopwatch.Start" />
+             scenario, you call the <see cref="M:System.Diagnostics.Stopwatch.Start" />
 
             
 
-             method, then eventually call the <see
-             cref="M:System.Diagnostics.Stopwatch.Stop" />
+             method, then eventually call the <see cref="M:System.Diagnostics.Stopwatch.Stop" />
 
             
 
-             method, and then you check elapsed time using the <see
-             cref="P:System.Diagnostics.Stopwatch.Elapsed" />
+             method, and then you check elapsed time using the <see cref="P:System.Diagnostics.Stopwatch.Elapsed" />
 
             
 
              property.</para
           >
           <para
-            >The <see
-             cref="M:System.Diagnostics.Stopwatch.Stop" />
+            >The <see cref="M:System.Diagnostics.Stopwatch.Stop" />
 
             
 
-             method ends the current time interval measurement. Stopping a <see
-             cref="T:System.Diagnostics.Stopwatch" />
+             method ends the current time interval measurement. Stopping a <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
              that is not running does not change the timer state or reset the elapsed time properties.</para
           >
           <para
-            >When a <see
-             cref="T:System.Diagnostics.Stopwatch" />
+            >When a <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             instance measures more than one interval, the <see
-             cref="M:System.Diagnostics.Stopwatch.Stop" />
+             instance measures more than one interval, the <see cref="M:System.Diagnostics.Stopwatch.Stop" />
 
             
 
-             method is equivalent to pausing the elapsed time measurement. A subsequent call to <see
-             cref="M:System.Diagnostics.Stopwatch.Start" />
+             method is equivalent to pausing the elapsed time measurement. A subsequent call to <see cref="M:System.Diagnostics.Stopwatch.Start" />
 
             
 
-             resumes measuring time from the current elapsed time value. Use the <see
-             cref="M:System.Diagnostics.Stopwatch.Reset" />
+             resumes measuring time from the current elapsed time value. Use the <see cref="M:System.Diagnostics.Stopwatch.Reset" />
 
             
 
-             method to clear the cumulative elapsed time in a <see
-             cref="T:System.Diagnostics.Stopwatch" />
+             method to clear the cumulative elapsed time in a <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 

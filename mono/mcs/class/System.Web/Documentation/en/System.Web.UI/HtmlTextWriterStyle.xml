@@ -19,8 +19,7 @@
 
         
 
-         and <see
-         cref="T:System.Web.UI.Html32TextWriter" />
+         and <see cref="T:System.Web.UI.Html32TextWriter" />
 
         
 
@@ -30,13 +29,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the HTML styles available to an <see
-         cref="T:System.Web.UI.HtmlTextWriter" />
+        >Specifies the HTML styles available to an <see cref="T:System.Web.UI.HtmlTextWriter" />
 
         
 
-         or <see
-         cref="T:System.Web.UI.Html32TextWriter" />
+         or <see cref="T:System.Web.UI.Html32TextWriter" />
 
         
 

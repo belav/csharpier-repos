@@ -19,31 +19,28 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="http://go.microsoft.com/fwlink/?linkid=37123">Unicode Standard</see>
+        >The <see cref="http://go.microsoft.com/fwlink/?linkid=37123"
+          >Unicode Standard</see
+        >
 
         
 
-         defines a number of Unicode character categories. For example, a character might be categorized as an uppercase letter, a lowercase letter, a decimal digit number, a letter number, a paragraph separator, a math symbol, or a currency symbol. Your application can use the character category to govern string-based operations, such as parsing. The <see
-         cref="T:System.Globalization.UnicodeCategory" />
+         defines a number of Unicode character categories. For example, a character might be categorized as an uppercase letter, a lowercase letter, a decimal digit number, a letter number, a paragraph separator, a math symbol, or a currency symbol. Your application can use the character category to govern string-based operations, such as parsing. The <see cref="T:System.Globalization.UnicodeCategory" />
 
         
 
          enumeration defines the possible character categories. </para
       >
       <para
-        >You use the <see
-         cref="T:System.Globalization.CharUnicodeInfo" />
+        >You use the <see cref="T:System.Globalization.CharUnicodeInfo" />
 
         
 
-         class to obtain the <see
-         cref="T:System.Globalization.UnicodeCategory" />
+         class to obtain the <see cref="T:System.Globalization.UnicodeCategory" />
 
         
 
-         value for a specific character. The <see
-         cref="T:System.Globalization.CharUnicodeInfo" />
+         value for a specific character. The <see cref="T:System.Globalization.CharUnicodeInfo" />
 
         
 
@@ -58,8 +55,7 @@
         </item>
         <item>
           <para
-            >Decimal digit value. Applies only to characters that represent decimal digits in the decimal (base 10) system. A decimal digit can be one of ten digits, from zero through nine. These characters are members of the <see
-             cref="F:System.Globalization.UnicodeCategory.DecimalDigitNumber" />
+            >Decimal digit value. Applies only to characters that represent decimal digits in the decimal (base 10) system. A decimal digit can be one of ten digits, from zero through nine. These characters are members of the <see cref="F:System.Globalization.UnicodeCategory.DecimalDigitNumber" />
 
             
 
@@ -68,8 +64,7 @@
         </item>
       </list>
       <para
-        >When using this class in your applications, keep in mind the following programming considerations for using the <see
-         cref="T:System.Char" />
+        >When using this class in your applications, keep in mind the following programming considerations for using the <see cref="T:System.Char" />
 
         
 
@@ -78,18 +73,15 @@
       <list type="bullet">
         <item>
           <para
-            >A <see
-             cref="T:System.Char" />
+            >A <see cref="T:System.Char" />
 
             
 
-             object does not always correspond to a single character. Although the <see
-             cref="T:System.Char" />
+             object does not always correspond to a single character. Although the <see cref="T:System.Char" />
 
             
 
-             type represents a single 16-bit value, some characters (such as grapheme clusters and surrogate pairs) consist of two or more UTF-16 code units. For more information, see "Char Objects and Unicode Characters" in the <see
-             cref="T:System.String" />
+             type represents a single 16-bit value, some characters (such as grapheme clusters and surrogate pairs) consist of two or more UTF-16 code units. For more information, see "Char Objects and Unicode Characters" in the <see cref="T:System.String" />
 
             
 
@@ -129,8 +121,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method converts characters that represent decimal digits to their equivalent integral values. Decimal digits are characters in the <see
-             cref="F:System.Globalization.UnicodeCategory.DecimalDigitNumber" />
+            >This method converts characters that represent decimal digits to their equivalent integral values. Decimal digits are characters in the <see cref="F:System.Globalization.UnicodeCategory.DecimalDigitNumber" />
 
             
 
@@ -138,7 +129,9 @@
           >
           <para
             >For more information about Unicode characters, see the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37123">Unicode Standard</see>
+              cref="http://go.microsoft.com/fwlink/?linkid=37123"
+              >Unicode Standard</see
+            >
 
             
 
@@ -156,7 +149,11 @@
           <para>-1, if the specified character is not a decimal digit.</para>
         </returns>
         <param name="ch">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -190,8 +187,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method converts characters that represent decimal digits to their equivalent integral values. Decimal digits are characters in the <see
-             cref="F:System.Globalization.UnicodeCategory.DecimalDigitNumber" />
+            >This method converts characters that represent decimal digits to their equivalent integral values. Decimal digits are characters in the <see cref="F:System.Globalization.UnicodeCategory.DecimalDigitNumber" />
 
             
 
@@ -199,7 +195,9 @@
           >
           <para
             >For more information about Unicode characters, see the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37123">Unicode Standard</see>
+              cref="http://go.microsoft.com/fwlink/?linkid=37123"
+              >Unicode Standard</see
+            >
 
             
 
@@ -217,19 +215,26 @@
           <para>-1, if the character at the specified index of the specified string is not a decimal digit.</para>
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
            containing the Unicode character for which to get the decimal digit value. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -261,7 +266,9 @@
           <para>Digit value is a property that applies only to numeric characters that can be used as digits. A digit is a numeric character that can be combined with other digits to represent a whole number in a numbering system.</para>
           <para
             >For more information on Unicode characters, see the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37123">Unicode Standard</see>
+              cref="http://go.microsoft.com/fwlink/?linkid=37123"
+              >Unicode Standard</see
+            >
 
             
 
@@ -279,7 +286,11 @@
           <para>-1, if the specified character is not a digit.</para>
         </returns>
         <param name="ch">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -315,7 +326,9 @@
           <para>Digit value is a property that applies only to numeric characters that can be used as digits. A digit is a numeric character that can be combined with other digits to represent a whole number in a numbering system.</para>
           <para
             >For more information on Unicode characters, see the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37123">Unicode Standard</see>
+              cref="http://go.microsoft.com/fwlink/?linkid=37123"
+              >Unicode Standard</see
+            >
 
             
 
@@ -333,19 +346,26 @@
           <para>-1, if the character at the specified index of the specified string is not a digit.</para>
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
            containing the Unicode character for which to get the digit value. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -376,35 +396,32 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >Numeric value is a Unicode character property that applies only to numeric characters, which include fractions, subscripts, superscripts, Roman numerals, currency numerators, encircled numbers, and script-specific digits. For more information on Unicode characters, see the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37123">Unicode Standard</see>
+              cref="http://go.microsoft.com/fwlink/?linkid=37123"
+              >Unicode Standard</see
+            >
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Globalization.CharUnicodeInfo.GetNumericValue(System.Char)" />
+            >The <see cref="M:System.Globalization.CharUnicodeInfo.GetNumericValue(System.Char)" />
 
             
 
-             method assumes that <paramref
-             name="ch" />
+             method assumes that <paramref name="ch" />
 
             
 
-             corresponds to a single linguistic character and checks whether that character can be converted to a decimal digit. However, some numbers in the Unicode standard are represented by two <see
-             cref="T:System.Char" />
+             corresponds to a single linguistic character and checks whether that character can be converted to a decimal digit. However, some numbers in the Unicode standard are represented by two <see cref="T:System.Char" />
 
             
 
-             objects that form a surrogate pair. For example, the Aegean numbering system consists of code points U+10107 through U+10133. The following example uses the <see
-             cref="M:System.Char.ConvertFromUtf32(System.Int32)" />
+             objects that form a surrogate pair. For example, the Aegean numbering system consists of code points U+10107 through U+10133. The following example uses the <see cref="M:System.Char.ConvertFromUtf32(System.Int32)" />
 
             
 
-             method to instantiate a string that represents AEGEAN NUMBER ONE. As the output from the example shows, the <see
-             cref="M:System.Globalization.CharUnicodeInfo.GetNumericValue(System.Char)" />
+             method to instantiate a string that represents AEGEAN NUMBER ONE. As the output from the example shows, the <see cref="M:System.Globalization.CharUnicodeInfo.GetNumericValue(System.Char)" />
 
             
 
@@ -423,7 +440,11 @@
           <para>-1, if the specified character is not a numeric character.</para>
         </returns>
         <param name="ch">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -458,35 +479,32 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >Numeric value is a Unicode character property that applies only to numeric characters, which include fractions, subscripts, superscripts, Roman numerals, currency numerators, encircled numbers, and script-specific digits. For more information on Unicode characters, see the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37123">Unicode Standard</see>
+              cref="http://go.microsoft.com/fwlink/?linkid=37123"
+              >Unicode Standard</see
+            >
 
             
 
             .</para
           >
           <para
-            >If the <see
-             cref="T:System.Char" />
+            >If the <see cref="T:System.Char" />
 
             
 
-             object at position <paramref
-             name="index" />
+             object at position <paramref name="index" />
 
             
 
-             is the first character of a valid surrogate pair, the <see
-             cref="M:System.Globalization.CharUnicodeInfo.GetNumericValue(System.String,System.Int32)" />
+             is the first character of a valid surrogate pair, the <see cref="M:System.Globalization.CharUnicodeInfo.GetNumericValue(System.String,System.Int32)" />
 
             
 
-             method determines whether the surrogate pair forms a numeric digit, and, if it does, returns its numeric value. For example, the Aegean numbering system consists of code points U+10107 through U+10133. The following example uses the <see
-             cref="M:System.Char.ConvertFromUtf32(System.Int32)" />
+             method determines whether the surrogate pair forms a numeric digit, and, if it does, returns its numeric value. For example, the Aegean numbering system consists of code points U+10107 through U+10133. The following example uses the <see cref="M:System.Char.ConvertFromUtf32(System.Int32)" />
 
             
 
-             method to instantiate a string that represents each Aegean number. As the output from the example shows, the <see
-             cref="M:System.Globalization.CharUnicodeInfo.GetNumericValue(System.String,System.Int32)" />
+             method to instantiate a string that represents each Aegean number. As the output from the example shows, the <see cref="M:System.Globalization.CharUnicodeInfo.GetNumericValue(System.String,System.Int32)" />
 
             
 
@@ -505,19 +523,26 @@
           <para>-1, if the character at the specified index of the specified string is not a numeric character.</para>
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
            containing the Unicode character for which to get the numeric value. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -550,41 +575,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Unicode characters are divided into categories. A character's category is one of its properties. For example, a character might be an uppercase letter, a lowercase letter, a decimal digit number, a letter number, a connector punctuation, a math symbol, or a currency symbol. The <see
-             cref="T:System.Globalization.UnicodeCategory" />
+            >The Unicode characters are divided into categories. A character's category is one of its properties. For example, a character might be an uppercase letter, a lowercase letter, a decimal digit number, a letter number, a connector punctuation, a math symbol, or a currency symbol. The <see cref="T:System.Globalization.UnicodeCategory" />
 
             
 
              class returns the category of a Unicode character. For more information on Unicode characters, see the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37123">Unicode Standard</see>
+              cref="http://go.microsoft.com/fwlink/?linkid=37123"
+              >Unicode Standard</see
+            >
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.Char)" />
+            >The <see cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.Char)" />
 
             
 
-             method assumes that <paramref
-             name="ch" />
+             method assumes that <paramref name="ch" />
 
             
 
-             corresponds to a single linguistic character and returns its category. This means that, for surrogate pairs, it returns <see
-             cref="F:System.Globalization.UnicodeCategory.Surrogate" />
+             corresponds to a single linguistic character and returns its category. This means that, for surrogate pairs, it returns <see cref="F:System.Globalization.UnicodeCategory.Surrogate" />
 
             
 
-             instead of the category to which the surrogate belongs. For example, the Ugaritic alphabet occupies code points U+10380 to U+1039F. The following example uses the <see
-             cref="M:System.Char.ConvertFromUtf32(System.Int32)" />
+             instead of the category to which the surrogate belongs. For example, the Ugaritic alphabet occupies code points U+10380 to U+1039F. The following example uses the <see cref="M:System.Char.ConvertFromUtf32(System.Int32)" />
 
             
 
-             method to instantiate a string that represents UGARITIC LETTER ALPA (U+10380), which is the first letter of the Ugaritic alphabet. As the output from the example shows, the <see
-             cref="M:System.Char.IsNumber(System.Char)" />
+             method to instantiate a string that represents UGARITIC LETTER ALPA (U+10380), which is the first letter of the Ugaritic alphabet. As the output from the example shows, the <see cref="M:System.Char.IsNumber(System.Char)" />
 
             
 
@@ -592,28 +613,23 @@
           >
           <para>code reference: System.Globalization.CharUnicodeInfo.GetUnicodeCategory#1</para>
           <para
-            >Note that <see
-             cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.Char)" />
+            >Note that <see cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.Char)" />
 
             
 
-             does not always return the same <see
-             cref="T:System.Globalization.UnicodeCategory" />
+             does not always return the same <see cref="T:System.Globalization.UnicodeCategory" />
 
             
 
-             value as the <see
-             cref="M:System.Char.GetUnicodeCategory(System.Char)" />
+             value as the <see cref="M:System.Char.GetUnicodeCategory(System.Char)" />
 
             
 
-             method when passed a particular character as a parameter. The <see
-             cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.Char)" />
+             method when passed a particular character as a parameter. The <see cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.Char)" />
 
             
 
-             method is designed to reflect the current version of the Unicode standard. In contrast, although the <see
-             cref="M:System.Char.GetUnicodeCategory(System.Char)" />
+             method is designed to reflect the current version of the Unicode standard. In contrast, although the <see cref="M:System.Char.GetUnicodeCategory(System.Char)" />
 
             
 
@@ -627,8 +643,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Globalization.UnicodeCategory" />
+            >A <see cref="T:System.Globalization.UnicodeCategory" />
 
             
 
@@ -636,7 +651,11 @@
           >
         </returns>
         <param name="ch">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -670,56 +689,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Unicode characters are divided into categories. A character's category is one of its properties. For example, a character might be an uppercase letter, a lowercase letter, a decimal digit number, a letter number, a connector punctuation, a math symbol, or a currency symbol. The <see
-             cref="T:System.Globalization.UnicodeCategory" />
+            >The Unicode characters are divided into categories. A character's category is one of its properties. For example, a character might be an uppercase letter, a lowercase letter, a decimal digit number, a letter number, a connector punctuation, a math symbol, or a currency symbol. The <see cref="T:System.Globalization.UnicodeCategory" />
 
             
 
              class returns the category of a Unicode character. For more information on Unicode characters, see the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37123">Unicode Standard</see>
+              cref="http://go.microsoft.com/fwlink/?linkid=37123"
+              >Unicode Standard</see
+            >
 
             
 
             .</para
           >
           <para
-            >If the <see
-             cref="T:System.Char" />
+            >If the <see cref="T:System.Char" />
 
             
 
-             object at position <paramref
-             name="index" />
+             object at position <paramref name="index" />
 
             
 
-             is the first character of a valid surrogate pair, the <see
-             cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.String,System.Int32)" />
+             is the first character of a valid surrogate pair, the <see cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.String,System.Int32)" />
 
             
 
-             method returns the Unicode category of the surrogate pair instead of returning <see
-             cref="F:System.Globalization.UnicodeCategory.Surrogate" />
+             method returns the Unicode category of the surrogate pair instead of returning <see cref="F:System.Globalization.UnicodeCategory.Surrogate" />
 
             
 
-            . For example, the Ugaritic alphabet occupies code points U+10380 to U+1039F. The following example uses the <see
-             cref="M:System.Char.ConvertFromUtf32(System.Int32)" />
+            . For example, the Ugaritic alphabet occupies code points U+10380 to U+1039F. The following example uses the <see cref="M:System.Char.ConvertFromUtf32(System.Int32)" />
 
             
 
-             method to instantiate a string that represents UGARITIC LETTER ALPA (U+10380), which is the first letter of the Ugaritic alphabet. As the output from the example shows, the <see
-             cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.String,System.Int32)" />
+             method to instantiate a string that represents UGARITIC LETTER ALPA (U+10380), which is the first letter of the Ugaritic alphabet. As the output from the example shows, the <see cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.String,System.Int32)" />
 
             
 
-             method returns <see
-             cref="F:System.Globalization.UnicodeCategory.OtherLetter" />
+             method returns <see cref="F:System.Globalization.UnicodeCategory.OtherLetter" />
 
             
 
-             if it is passed the high surrogate of this character, which indicates that it considers the surrogate pair. However, if it is passed the low surrogate, it considers only the low surrogate in isolation and returns <see
-             cref="F:System.Globalization.UnicodeCategory.Surrogate" />
+             if it is passed the high surrogate of this character, which indicates that it considers the surrogate pair. However, if it is passed the low surrogate, it considers only the low surrogate in isolation and returns <see cref="F:System.Globalization.UnicodeCategory.Surrogate" />
 
             
 
@@ -727,28 +739,23 @@
           >
           <para>code reference: System.Globalization.CharUnicodeInfo.GetUnicodeCategory#2</para>
           <para
-            >Note that <see
-             cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.String,System.Int32)" />
+            >Note that <see cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.String,System.Int32)" />
 
             
 
-             method does not always return the same <see
-             cref="T:System.Globalization.UnicodeCategory" />
+             method does not always return the same <see cref="T:System.Globalization.UnicodeCategory" />
 
             
 
-             value as the <see
-             cref="M:System.Char.GetUnicodeCategory(System.String,System.Int32)" />
+             value as the <see cref="M:System.Char.GetUnicodeCategory(System.String,System.Int32)" />
 
             
 
-             method when passed a particular character as a parameter. The <see
-             cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.String,System.Int32)" />
+             method when passed a particular character as a parameter. The <see cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.String,System.Int32)" />
 
             
 
-             method is designed to reflect the current version of the Unicode standard. In contrast, although the <see
-             cref="M:System.Char.GetUnicodeCategory(System.String,System.Int32)" />
+             method is designed to reflect the current version of the Unicode standard. In contrast, although the <see cref="M:System.Char.GetUnicodeCategory(System.String,System.Int32)" />
 
             
 
@@ -762,8 +769,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Globalization.UnicodeCategory" />
+            >A <see cref="T:System.Globalization.UnicodeCategory" />
 
             
 
@@ -771,19 +777,26 @@
           >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
            containing the Unicode character for which to get the Unicode category. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

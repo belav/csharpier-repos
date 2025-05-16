@@ -22,13 +22,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.IDbCommand" />
+        >The <see cref="T:System.Data.IDbCommand" />
 
         
 
-         interface enables an inheriting class to implement a Command class, which represents an SQL statement that is executed at a data source. For more information about Command classes, see <format
-         type="text/html">
+         interface enables an inheriting class to implement a Command class, which represents an SQL statement that is executed at a data source. For more information about Command classes, see <format type="text/html">
           <a href="40494916-C25A-4CB8-8F7C-FCB8D378464E">[&lt;topic://cpconadonetcommands&gt;]</a>
         </format>
 
@@ -37,41 +35,34 @@
         . </para
       >
       <para
-        >An application does not create an instance of the <see
-         cref="T:System.Data.IDbCommand" />
+        >An application does not create an instance of the <see cref="T:System.Data.IDbCommand" />
 
         
 
-         interface directly, but creates an instance of a class that inherits <see
-         cref="T:System.Data.IDbCommand" />
+         interface directly, but creates an instance of a class that inherits <see cref="T:System.Data.IDbCommand" />
 
         
 
         .</para
       >
       <para
-        >Classes that inherit <see
-         cref="T:System.Data.IDbCommand" />
+        >Classes that inherit <see cref="T:System.Data.IDbCommand" />
 
         
 
-         must implement all inherited members, and typically define additional members to add provider-specific functionality. For example, the <see
-         cref="T:System.Data.IDbCommand" />
+         must implement all inherited members, and typically define additional members to add provider-specific functionality. For example, the <see cref="T:System.Data.IDbCommand" />
 
         
 
-         interface defines the <see
-         cref="M:System.Data.IDbCommand.ExecuteNonQuery" />
+         interface defines the <see cref="M:System.Data.IDbCommand.ExecuteNonQuery" />
 
         
 
-         method. In turn, the <see
-         cref="T:System.Data.SqlClient.SqlCommand" />
+         method. In turn, the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
         
 
-         class inherits this method, and also defines the <see
-         cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
+         class inherits this method, and also defines the <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
 
         
 
@@ -99,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to cancels the execution of an <see
-             cref="T:System.Data.IDbCommand" />
+            >Attempts to cancels the execution of an <see cref="T:System.Data.IDbCommand" />
 
             
 
@@ -125,13 +115,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Data.IDbCommand.CommandType" />
+            >When the <see cref="P:System.Data.IDbCommand.CommandType" />
 
             
 
-             property is set to StoredProcedure, set the <see
-             cref="P:System.Data.IDbCommand.CommandText" />
+             property is set to StoredProcedure, set the <see cref="P:System.Data.IDbCommand.CommandText" />
 
             
 
@@ -183,13 +171,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you set the <see
-             cref="P:System.Data.IDbCommand.CommandType" />
+            >When you set the <see cref="P:System.Data.IDbCommand.CommandType" />
 
             
 
-             property to StoredProcedure, you should set the <see
-             cref="P:System.Data.IDbCommand.CommandText" />
+             property to StoredProcedure, you should set the <see cref="P:System.Data.IDbCommand.CommandText" />
 
             
 
@@ -199,8 +185,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates or specifies how the <see
-             cref="P:System.Data.IDbCommand.CommandText" />
+            >Indicates or specifies how the <see cref="P:System.Data.IDbCommand.CommandText" />
 
             
 
@@ -229,13 +214,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Data.IDbConnection" />
+            >Gets or sets the <see cref="T:System.Data.IDbConnection" />
 
             
 
-             used by this instance of the <see
-             cref="T:System.Data.IDbCommand" />
+             used by this instance of the <see cref="T:System.Data.IDbCommand" />
 
             
 
@@ -262,13 +245,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When inheriting from <see
-             cref="T:System.Data.IDbCommand" />
+            >When inheriting from <see cref="T:System.Data.IDbCommand" />
 
             
 
-            , a .NET Framework data provider implements a strongly-typed version of <see
-             cref="M:System.Data.IDbCommand.CreateParameter" />
+            , a .NET Framework data provider implements a strongly-typed version of <see cref="M:System.Data.IDbCommand.CreateParameter" />
 
             
 
@@ -278,8 +259,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of an <see
-             cref="T:System.Data.IDbDataParameter" />
+            >Creates a new instance of an <see cref="T:System.Data.IDbDataParameter" />
 
             
 
@@ -307,21 +287,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="M:System.Data.IDbCommand.ExecuteNonQuery" />
+            >You can use the <see cref="M:System.Data.IDbCommand.ExecuteNonQuery" />
 
             
 
-             to perform catalog operations (for example, querying the structure of a database or creating database objects such as tables), or to change the data in a database without using a <see
-             cref="T:System.Data.DataSet" />
+             to perform catalog operations (for example, querying the structure of a database or creating database objects such as tables), or to change the data in a database without using a <see cref="T:System.Data.DataSet" />
 
             
 
              by executing UPDATE, INSERT, or DELETE statements.</para
           >
           <para
-            >Although the <see
-             cref="M:System.Data.IDbCommand.ExecuteNonQuery" />
+            >Although the <see cref="M:System.Data.IDbCommand.ExecuteNonQuery" />
 
             
 
@@ -355,18 +332,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes the <see
-             cref="P:System.Data.IDbCommand.CommandText" />
+            >Executes the <see cref="P:System.Data.IDbCommand.CommandText" />
 
             
 
-             against the <see
-             cref="P:System.Data.IDbCommand.Connection" />
+             against the <see cref="P:System.Data.IDbCommand.Connection" />
 
             
 
-             and builds an <see
-             cref="T:System.Data.IDataReader" />
+             and builds an <see cref="T:System.Data.IDataReader" />
 
             
 
@@ -376,8 +350,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Data.IDataReader" />
+            >An <see cref="T:System.Data.IDataReader" />
 
             
 
@@ -406,31 +379,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The caller must call the <see
-             cref="M:System.Data.IDbConnection.Open" />
+            >The caller must call the <see cref="M:System.Data.IDbConnection.Open" />
 
             
 
-             method of the <see
-             cref="P:System.Data.IDbCommand.Connection" />
+             method of the <see cref="P:System.Data.IDbCommand.Connection" />
 
             
 
              property.</para
           >
           <para
-            >When the <see
-             cref="P:System.Data.IDbCommand.CommandType" />
+            >When the <see cref="P:System.Data.IDbCommand.CommandType" />
 
             
 
-             property is set to StoredProcedure, the <see
-             cref="P:System.Data.IDbCommand.CommandText" />
+             property is set to StoredProcedure, the <see cref="P:System.Data.IDbCommand.CommandText" />
 
             
 
-             property should be set to the name of the stored procedure. The command executes this stored procedure when you call <see
-             cref="M:System.Data.IDbCommand.ExecuteReader" />
+             property should be set to the name of the stored procedure. The command executes this stored procedure when you call <see cref="M:System.Data.IDbCommand.ExecuteReader" />
 
             
 
@@ -438,13 +406,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Use <see
-               cref="F:System.Data.CommandBehavior.SequentialAccess" />
+              >Use <see cref="F:System.Data.CommandBehavior.SequentialAccess" />
 
               
 
-               to retrieve large values and binary data. Otherwise, an <see
-               cref="T:System.OutOfMemoryException" />
+               to retrieve large values and binary data. Otherwise, an <see cref="T:System.OutOfMemoryException" />
 
               
 
@@ -452,33 +418,27 @@
             >
           </block>
           <para
-            >While the <see
-             cref="T:System.Data.IDataReader" />
+            >While the <see cref="T:System.Data.IDataReader" />
 
             
 
-             is in use, the associated <see
-             cref="T:System.Data.IDbConnection" />
+             is in use, the associated <see cref="T:System.Data.IDbConnection" />
 
             
 
-             is busy serving the <see
-             cref="T:System.Data.IDataReader" />
+             is busy serving the <see cref="T:System.Data.IDataReader" />
 
             
 
-            . While in this state, no other operations can be performed on the <see
-             cref="T:System.Data.IDbConnection" />
+            . While in this state, no other operations can be performed on the <see cref="T:System.Data.IDbConnection" />
 
             
 
-             other than closing it. This is the case until the <see
-             cref="M:System.Data.IDataReader.Close" />
+             other than closing it. This is the case until the <see cref="M:System.Data.IDataReader.Close" />
 
             
 
-             method of the DataReader is called. If the DataReader is created with <see
-             cref="T:System.Data.CommandBehavior" />
+             method of the DataReader is called. If the DataReader is created with <see cref="T:System.Data.CommandBehavior" />
 
             
 
@@ -488,23 +448,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes the <see
-             cref="P:System.Data.IDbCommand.CommandText" />
+            >Executes the <see cref="P:System.Data.IDbCommand.CommandText" />
 
             
 
-             against the <see
-             cref="P:System.Data.IDbCommand.Connection" />
+             against the <see cref="P:System.Data.IDbCommand.Connection" />
 
             
 
-            , and builds an <see
-             cref="T:System.Data.IDataReader" />
+            , and builds an <see cref="T:System.Data.IDataReader" />
 
             
 
-             using one of the <see
-             cref="T:System.Data.CommandBehavior" />
+             using one of the <see cref="T:System.Data.CommandBehavior" />
 
             
 
@@ -514,8 +470,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Data.IDataReader" />
+            >An <see cref="T:System.Data.IDataReader" />
 
             
 
@@ -523,12 +478,15 @@
           >
         </returns>
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.CommandBehavior" />
+          One of the <see cref="T:System.Data.CommandBehavior" />
 
           
 
@@ -551,26 +509,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Data.IDbCommand.ExecuteScalar" />
+            >Use the <see cref="M:System.Data.IDbCommand.ExecuteScalar" />
 
             
 
-             method to retrieve a single value (for example, an aggregate value) from a database. This requires less code than using the <see
-             cref="M:System.Data.IDbCommand.ExecuteReader" />
+             method to retrieve a single value (for example, an aggregate value) from a database. This requires less code than using the <see cref="M:System.Data.IDbCommand.ExecuteReader" />
 
             
 
-             method, and then performing the operations necessary to generate the single value using the data returned by an <see
-             cref="T:System.Data.IDataReader" />
+             method, and then performing the operations necessary to generate the single value using the data returned by an <see cref="T:System.Data.IDataReader" />
 
             
 
             .</para
           >
           <para
-            >A typical <see
-             cref="M:System.Data.IDbCommand.ExecuteScalar" />
+            >A typical <see cref="M:System.Data.IDbCommand.ExecuteScalar" />
 
             
 
@@ -609,8 +563,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.IDataParameterCollection" />
+            >Gets the <see cref="T:System.Data.IDataParameterCollection" />
 
             
 
@@ -634,23 +587,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Data.IDbCommand.CommandType" />
+            >If the <see cref="P:System.Data.IDbCommand.CommandType" />
 
             
 
-             property is set to TableDirect, <see
-             cref="M:System.Data.IDbCommand.Prepare" />
+             property is set to TableDirect, <see cref="M:System.Data.IDbCommand.Prepare" />
 
             
 
-             does nothing. If <see
-             cref="P:System.Data.IDbCommand.CommandType" />
+             does nothing. If <see cref="P:System.Data.IDbCommand.CommandType" />
 
             
 
-             is set to StoredProcedure, the call to <see
-             cref="M:System.Data.IDbCommand.Prepare" />
+             is set to StoredProcedure, the call to <see cref="M:System.Data.IDbCommand.Prepare" />
 
             
 
@@ -706,18 +655,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets how command results are applied to the <see
-             cref="T:System.Data.DataRow" />
+            >Gets or sets how command results are applied to the <see cref="T:System.Data.DataRow" />
 
             
 
-             when used by the <see
-             cref="M:System.Data.IDataAdapter.Update(System.Data.DataSet)" />
+             when used by the <see cref="M:System.Data.IDataAdapter.Update(System.Data.DataSet)" />
 
             
 
-             method of a <see
-             cref="T:System.Data.Common.DbDataAdapter" />
+             method of a <see cref="T:System.Data.Common.DbDataAdapter" />
 
             
 

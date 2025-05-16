@@ -12,7 +12,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -53,10 +55,7 @@
       <Parameters />
       <Docs>
         <summary>Creates the default derived class.</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Security.Cryptography.MD2" />
-        </returns>
+        <returns>a <see cref="T:Mono.Security.Cryptography.MD2" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -79,10 +78,7 @@
       <Docs>
         <param name="hashName">Specifies which derived class to create. </param>
         <summary>Creates a new derived class.</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Security.Cryptography.MD2" />
-        </returns>
+        <returns>a <see cref="T:Mono.Security.Cryptography.MD2" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>

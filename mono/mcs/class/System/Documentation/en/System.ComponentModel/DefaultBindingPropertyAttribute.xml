@@ -29,16 +29,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
+        >The <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
 
         
 
          is specified at the class level. It can be inherited and does not allow multiple attributes on the same class. </para
       >
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -69,8 +67,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default constructor sets the <see
-             cref="P:System.ComponentModel.DefaultBindingPropertyAttribute.Name" />
+            >The default constructor sets the <see cref="P:System.ComponentModel.DefaultBindingPropertyAttribute.Name" />
 
             
 
@@ -80,8 +77,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
 
             
 
@@ -111,13 +107,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see
-             cref="P:System.ComponentModel.DefaultBindingPropertyAttribute.Name" />
+            >This constructor sets the <see cref="P:System.ComponentModel.DefaultBindingPropertyAttribute.Name" />
 
             
 
-             property to the value of the <paramref
-             name="name" />
+             property to the value of the <paramref name="name" />
 
             
 
@@ -127,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
 
             
 
@@ -136,7 +129,11 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -165,13 +162,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.ComponentModel.DefaultBindingPropertyAttribute.Default" />
+            >The <see cref="F:System.ComponentModel.DefaultBindingPropertyAttribute.Default" />
 
             
 
-             member is a static, read-only field that defines an instance of the <see
-             cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
+             member is a static, read-only field that defines an instance of the <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
 
             
 
@@ -181,8 +176,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the default value for the <see
-             cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
+            >Represents the default value for the <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
 
             
 
@@ -212,23 +206,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.DefaultBindingPropertyAttribute.Equals(System.Object)" />
+            >The <see cref="M:System.ComponentModel.DefaultBindingPropertyAttribute.Equals(System.Object)" />
 
             
 
-             method returns true if the value of the <paramref
-             name="obj" />
+             method returns true if the value of the <paramref name="obj" />
 
             
 
-             parameter is of type <see
-             cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
+             parameter is of type <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
 
             
 
-             and the <see
-             cref="P:System.ComponentModel.DefaultBindingPropertyAttribute.Name" />
+             and the <see cref="P:System.ComponentModel.DefaultBindingPropertyAttribute.Name" />
 
             
 
@@ -238,13 +228,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Object" />
+            >Determines whether the specified <see cref="T:System.Object" />
 
             
 
-             is equal to the current <see
-             cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
+             is equal to the current <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
 
             
 
@@ -256,17 +244,19 @@
           <para>true if the object is equal to the current instance; otherwise, false, indicating they are not equal.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to compare with the current <see
-           cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
+           to compare with the current <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
 
           
 
@@ -311,8 +301,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.DefaultBindingPropertyAttribute.Name" />
+            >The <see cref="P:System.ComponentModel.DefaultBindingPropertyAttribute.Name" />
 
             
 
@@ -322,8 +311,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the default binding property for the component to which the <see
-             cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
+            >Gets the name of the default binding property for the component to which the <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
 
             
 

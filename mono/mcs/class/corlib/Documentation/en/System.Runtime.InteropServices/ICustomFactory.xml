@@ -23,18 +23,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can enable custom activation by providing a proxy class that implements ICustomFactory and attributing the <see
-         cref="T:System.MarshalByRefObject" />
+        >You can enable custom activation by providing a proxy class that implements ICustomFactory and attributing the <see cref="T:System.MarshalByRefObject" />
 
         
 
-         class with the <see
-         cref="T:System.Runtime.Remoting.Proxies.ProxyAttribute" />
+         class with the <see cref="T:System.Runtime.Remoting.Proxies.ProxyAttribute" />
 
         
 
-        . When the class is activated, the proxy's <see
-         cref="M:System.Runtime.InteropServices.ICustomFactory.CreateInstance(System.Type)" />
+        . When the class is activated, the proxy's <see cref="M:System.Runtime.InteropServices.ICustomFactory.CreateInstance(System.Type)" />
 
         
 
@@ -44,8 +41,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Enables users to write activation code for managed objects that extend <see
-         cref="T:System.MarshalByRefObject" />
+        >Enables users to write activation code for managed objects that extend <see cref="T:System.MarshalByRefObject" />
 
         
 
@@ -87,8 +83,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.MarshalByRefObject" />
+            >A <see cref="T:System.MarshalByRefObject" />
 
             
 
@@ -96,7 +91,11 @@
           >
         </returns>
         <param name="serverType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

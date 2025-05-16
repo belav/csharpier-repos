@@ -14,21 +14,19 @@
         <see cref="M:EntryPoint.Destroy(System.Boolean)" />
       </summary>
     </member>
-    <member name="M:EntryPoint.Create(System.Boolean)"
-      >
+    <member name="M:EntryPoint.Create(System.Boolean)">
             dummy comments
         </member
     >
-    <member name="M:EntryPoint.Undefine(System.Boolean)"
-      >
+    <member name="M:EntryPoint.Undefine(System.Boolean)">
             dummy comments
         </member
     >
     <member name="M:EntryPoint.Remove">
             dummy comments
-        </member>
-    <member name="M:EntryPoint.Destroy(System.Boolean)"
-      >
+        </member
+    >
+    <member name="M:EntryPoint.Destroy(System.Boolean)">
             dummy comments
         </member
     >

@@ -75,8 +75,7 @@
 
           
 
-           is not a valid <see
-           cref="T:System.Security.Permissions.PermissionState" />
+           is not a valid <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -85,28 +84,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="state" />
+            >If <paramref name="state" />
 
             
 
-             is <see
-             cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+             is <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
 
             
 
-            , the <see
-             cref="T:System.Net.DnsPermission" />
+            , the <see cref="T:System.Net.DnsPermission" />
 
             
 
-             instance passes all demands. If <paramref
-             name="state" />
+             instance passes all demands. If <paramref name="state" />
 
             
 
-             contains any other value, the <see
-             cref="T:System.Net.DnsPermission" />
+             contains any other value, the <see cref="T:System.Net.DnsPermission" />
 
             
 
@@ -116,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Net.DnsPermission" />
+            >Creates a new instance of the <see cref="T:System.Net.DnsPermission" />
 
             
 
@@ -125,12 +118,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -163,8 +159,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A copy of a <see
-             cref="T:System.Net.DnsPermission" />
+            >A copy of a <see cref="T:System.Net.DnsPermission" />
 
             
 
@@ -178,8 +173,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of the <see
-             cref="T:System.Net.DnsPermission" />
+            >A new instance of the <see cref="T:System.Net.DnsPermission" />
 
             
 
@@ -221,8 +215,7 @@
 
             
 
-            is <see
-             langword="null" />
+            is <see langword="null" />
           </para>
         </exception>
         <exception cref="T:System.ArgumentException">
@@ -231,8 +224,7 @@
 
             
 
-            is not a <see
-             cref="T:System.Net.DnsPermission" />
+            is not a <see cref="T:System.Net.DnsPermission" />
 
             
 
@@ -242,31 +234,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.DnsPermission.FromXml(System.Security.SecurityElement)" />
+            >The <see cref="M:System.Net.DnsPermission.FromXml(System.Security.SecurityElement)" />
 
             
 
-             method reconstructs a <see
-             cref="T:System.Net.DnsPermission" />
+             method reconstructs a <see cref="T:System.Net.DnsPermission" />
 
             
 
-             instance from an XML encoding defined by the <see
-             cref="T:System.Security.SecurityElement" />
+             instance from an XML encoding defined by the <see cref="T:System.Security.SecurityElement" />
 
             
 
              class.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Net.DnsPermission.ToXml" />
+            >Use the <see cref="M:System.Net.DnsPermission.ToXml" />
 
             
 
-             method to XML-encode the <see
-             cref="T:System.Net.DnsPermission" />
+             method to XML-encode the <see cref="T:System.Net.DnsPermission" />
 
             
 
@@ -276,8 +263,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reconstructs a <see
-             cref="T:System.Net.DnsPermission" />
+            >Reconstructs a <see cref="T:System.Net.DnsPermission" />
 
             
 
@@ -285,12 +271,15 @@
           >
         </summary>
         <param name="securityElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The XML encoding to use to reconstruct the <see
-           cref="T:System.Net.DnsPermission" />
+          The XML encoding to use to reconstruct the <see cref="T:System.Net.DnsPermission" />
 
           
 
@@ -330,8 +319,7 @@
 
           
 
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
@@ -340,23 +328,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.DnsPermission.Intersect(System.Security.IPermission)" />
+            >The <see cref="M:System.Net.DnsPermission.Intersect(System.Security.IPermission)" />
 
             
 
-             method returns a <see
-             cref="T:System.Net.DnsPermission" />
+             method returns a <see cref="T:System.Net.DnsPermission" />
 
             
 
-             instance that allows the access defined by both the current <see
-             cref="T:System.Net.DnsPermission" />
+             instance that allows the access defined by both the current <see cref="T:System.Net.DnsPermission" />
 
             
 
-             instance and the specified <see
-             cref="T:System.Net.DnsPermission" />
+             instance and the specified <see cref="T:System.Net.DnsPermission" />
 
             
 
@@ -370,28 +354,23 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.DnsPermission" />
+            >A <see cref="T:System.Net.DnsPermission" />
 
             
 
-             instance that represents the intersection of the current <see
-             cref="T:System.Net.DnsPermission" />
+             instance that represents the intersection of the current <see cref="T:System.Net.DnsPermission" />
 
             
 
-             instance with the specified <see
-             cref="T:System.Net.DnsPermission" />
+             instance with the specified <see cref="T:System.Net.DnsPermission" />
 
             
 
-             instance, or null if the intersection is empty. If both the current instance and <paramref
-             name="target" />
+             instance, or null if the intersection is empty. If both the current instance and <paramref name="target" />
 
             
 
-             are unrestricted, this method returns a new <see
-             cref="T:System.Net.DnsPermission" />
+             are unrestricted, this method returns a new <see cref="T:System.Net.DnsPermission" />
 
             
 
@@ -399,12 +378,15 @@
           >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.DnsPermission" />
+          The <see cref="T:System.Net.DnsPermission" />
 
           
 
@@ -442,41 +424,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current <see
-             cref="T:System.Net.DnsPermission" />
+            >The current <see cref="T:System.Net.DnsPermission" />
 
             
 
-             instance is a subset of the specified <see
-             cref="T:System.Net.DnsPermission" />
+             instance is a subset of the specified <see cref="T:System.Net.DnsPermission" />
 
             
 
-             instance if the current <see
-             cref="T:System.Net.DnsPermission" />
+             instance if the current <see cref="T:System.Net.DnsPermission" />
 
             
 
-             instance specifies a set of operations that is wholly contained by the specified <see
-             cref="T:System.Net.DnsPermission" />
+             instance specifies a set of operations that is wholly contained by the specified <see cref="T:System.Net.DnsPermission" />
 
             
 
              instance.</para
           >
           <para
-            >If the <see
-             cref="M:System.Net.DnsPermission.IsSubsetOf(System.Security.IPermission)" />
+            >If the <see cref="M:System.Net.DnsPermission.IsSubsetOf(System.Security.IPermission)" />
 
             
 
-             method returns true, the current <see
-             cref="T:System.Net.DnsPermission" />
+             method returns true, the current <see cref="T:System.Net.DnsPermission" />
 
             
 
-             instance allows no more access to DNS servers than does the specified <see
-             cref="T:System.Net.DnsPermission" />
+             instance allows no more access to DNS servers than does the specified <see cref="T:System.Net.DnsPermission" />
 
             
 
@@ -490,8 +465,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >false if the current instance is unrestricted and <paramref
-             name="target" />
+            >false if the current instance is unrestricted and <paramref name="target" />
 
             
 
@@ -499,12 +473,15 @@
           >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The second <see
-           cref="T:System.Net.DnsPermission" />
+          The second <see cref="T:System.Net.DnsPermission" />
 
           
 
@@ -538,13 +515,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Net.DnsPermission" />
+            >true if the <see cref="T:System.Net.DnsPermission" />
 
             
 
-             instance was created with <see
-             cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+             instance was created with <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
 
             
 
@@ -580,31 +555,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.DnsPermission.ToXml" />
+            >The <see cref="M:System.Net.DnsPermission.ToXml" />
 
             
 
-             method creates a <see
-             cref="T:System.Security.SecurityElement" />
+             method creates a <see cref="T:System.Security.SecurityElement" />
 
             
 
-             instance to XML-encode a representation of the <see
-             cref="T:System.Net.DnsPermission" />
+             instance to XML-encode a representation of the <see cref="T:System.Net.DnsPermission" />
 
             
 
              instance, including state information.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Net.DnsPermission.FromXml(System.Security.SecurityElement)" />
+            >Use the <see cref="M:System.Net.DnsPermission.FromXml(System.Security.SecurityElement)" />
 
             
 
-             method to restore the state information from a <see
-             cref="T:System.Security.SecurityElement" />
+             method to restore the state information from a <see cref="T:System.Security.SecurityElement" />
 
             
 
@@ -614,8 +584,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an XML encoding of a <see
-             cref="T:System.Net.DnsPermission" />
+            >Creates an XML encoding of a <see cref="T:System.Net.DnsPermission" />
 
             
 
@@ -625,8 +594,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.SecurityElement" />
+            >A <see cref="T:System.Security.SecurityElement" />
 
             
 
@@ -667,8 +635,7 @@
 
           
 
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
@@ -677,23 +644,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.DnsPermission.Union(System.Security.IPermission)" />
+            >The <see cref="M:System.Net.DnsPermission.Union(System.Security.IPermission)" />
 
             
 
-             method returns a <see
-             cref="T:System.Net.DnsPermission" />
+             method returns a <see cref="T:System.Net.DnsPermission" />
 
             
 
-             instance that allows the access defined by either the current <see
-             cref="T:System.Net.DnsPermission" />
+             instance that allows the access defined by either the current <see cref="T:System.Net.DnsPermission" />
 
             
 
-             instance or the specified <see
-             cref="T:System.Net.DnsPermission" />
+             instance or the specified <see cref="T:System.Net.DnsPermission" />
 
             
 
@@ -707,38 +670,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.DnsPermission" />
+            >A <see cref="T:System.Net.DnsPermission" />
 
             
 
-             instance that represents the union of the current <see
-             cref="T:System.Net.DnsPermission" />
+             instance that represents the union of the current <see cref="T:System.Net.DnsPermission" />
 
             
 
-             instance with the specified <see
-             cref="T:System.Net.DnsPermission" />
+             instance with the specified <see cref="T:System.Net.DnsPermission" />
 
             
 
-             instance. If <paramref
-             name="target" />
+             instance. If <paramref name="target" />
 
             
 
-             is null, this method returns a copy of the current instance. If the current instance or <paramref
-             name="target" />
+             is null, this method returns a copy of the current instance. If the current instance or <paramref name="target" />
 
             
 
-             is unrestricted, this method returns a <see
-             cref="T:System.Net.DnsPermission" />
+             is unrestricted, this method returns a <see cref="T:System.Net.DnsPermission" />
 
             
 
-             instance that is unrestricted; otherwise, it returns a <see
-             cref="T:System.Net.DnsPermission" />
+             instance that is unrestricted; otherwise, it returns a <see cref="T:System.Net.DnsPermission" />
 
             
 
@@ -746,12 +702,15 @@
           >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.DnsPermission" />
+          The <see cref="T:System.Net.DnsPermission" />
 
           
 

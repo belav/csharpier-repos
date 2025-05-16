@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
 
@@ -33,13 +32,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.DataGridView.RowHeightInfoNeeded" />
+        >Provides data for the <see cref="E:System.Windows.Forms.DataGridView.RowHeightInfoNeeded" />
 
         
 
-         event of a <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         event of a <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -99,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the row associated with this <see
-             cref="T:System.Windows.Forms.DataGridViewRowHeightInfoNeededEventArgs" />
+            >Gets the index of the row associated with this <see cref="T:System.Windows.Forms.DataGridViewRowHeightInfoNeededEventArgs" />
 
             
 

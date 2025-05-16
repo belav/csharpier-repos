@@ -57,38 +57,52 @@
           <para>Returns a new CSharp binary operation binder.</para>
         </returns>
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The flags with which to initialize the binder.</param
         >
         <param name="operation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The binary operation kind.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            that indicates where this operation is used.</param
         >
         <param name="argumentInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The sequence of <see
-           cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
+          The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
 
           
 
@@ -128,26 +142,37 @@
           <para>Returns a new CSharp convert binder.</para>
         </returns>
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The flags with which to initialize the binder.</param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type to convert to.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -190,31 +215,41 @@
           <para>Returns a new CSharp get index binder.</para>
         </returns>
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The flags with which to initialize the binder.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            that indicates where this operation is used.</param
         >
         <param name="argumentInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The sequence of <see
-           cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
+          The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
 
           
 
@@ -258,38 +293,52 @@
           <para>Returns a new CSharp get member binder.</para>
         </returns>
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The flags with which to initialize the binder.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the member to get.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            that indicates where this operation is used.</param
         >
         <param name="argumentInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The sequence of <see
-           cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
+          The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
 
           
 
@@ -332,31 +381,41 @@
           <para>Returns a new CSharp invoke binder.</para>
         </returns>
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The flags with which to initialize the binder.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            that indicates where this operation is used.</param
         >
         <param name="argumentInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The sequence of <see
-           cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
+          The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
 
           
 
@@ -399,31 +458,41 @@
           <para>Returns a new CSharp invoke constructor binder.</para>
         </returns>
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The flags with which to initialize the binder.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            that indicates where this operation is used.</param
         >
         <param name="argumentInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The sequence of <see
-           cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
+          The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
 
           
 
@@ -471,45 +540,63 @@
           <para>Returns a new CSharp invoke member binder.</para>
         </returns>
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The flags with which to initialize the binder.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the member to invoke.</param
         >
         <param name="typeArguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The list of type arguments specified for this invoke.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            that indicates where this operation is used.</param
         >
         <param name="argumentInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The sequence of <see
-           cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
+          The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
 
           
 
@@ -549,26 +636,37 @@
           <para>Returns a new CSharp is event binder.</para>
         </returns>
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The flags with which to initialize the binder.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the event to look for.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -611,31 +709,41 @@
           <para>Returns a new CSharp set index binder.</para>
         </returns>
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The flags with which to initialize the binder.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            that indicates where this operation is used.</param
         >
         <param name="argumentInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The sequence of <see
-           cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
+          The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
 
           
 
@@ -679,38 +787,52 @@
           <para>Returns a new CSharp set member binder.</para>
         </returns>
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The flags with which to initialize the binder.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the member to set.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            that indicates where this operation is used.</param
         >
         <param name="argumentInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The sequence of <see
-           cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
+          The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
 
           
 
@@ -754,38 +876,52 @@
           <para>Returns a new CSharp unary operation binder.</para>
         </returns>
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The flags with which to initialize the binder.</param
         >
         <param name="operation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The unary operation kind.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            that indicates where this operation is used.</param
         >
         <param name="argumentInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The sequence of <see
-           cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
+          The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />
 
           
 

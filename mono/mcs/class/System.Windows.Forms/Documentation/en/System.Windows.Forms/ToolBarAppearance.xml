@@ -13,16 +13,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by members such as <see
-         cref="P:System.Windows.Forms.ToolBar.Appearance" />
+        >This enumeration is used by members such as <see cref="P:System.Windows.Forms.ToolBar.Appearance" />
 
         
 
         .</para
       >
       <para
-        >Set the <see
-         cref="P:System.Windows.Forms.ToolBar.Appearance" />
+        >Set the <see cref="P:System.Windows.Forms.ToolBar.Appearance" />
 
         
 

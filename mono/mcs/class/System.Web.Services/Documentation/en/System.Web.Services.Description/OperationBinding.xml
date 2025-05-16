@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The OperationBinding class corresponds to the Web Services Description Language (WSDL) &lt;operation&gt; element enclosed by the &lt;binding&gt; element, which in turn corresponds to the <see
-         cref="T:System.Web.Services.Description.Binding" />
+        >The OperationBinding class corresponds to the Web Services Description Language (WSDL) &lt;operation&gt; element enclosed by the &lt;binding&gt; element, which in turn corresponds to the <see cref="T:System.Web.Services.Description.Binding" />
 
         
 
@@ -49,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.OperationBinding" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.OperationBinding" />
 
             
 
@@ -77,13 +75,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current <see
-             cref="T:System.Web.Services.Description.OperationBinding" />
+            >The current <see cref="T:System.Web.Services.Description.OperationBinding" />
 
             
 
-             is a member of the <see
-             cref="P:System.Web.Services.Description.Binding.Operations" />
+             is a member of the <see cref="P:System.Web.Services.Description.Binding.Operations" />
 
             
 
@@ -93,13 +89,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Services.Description.Binding" />
+            >Gets the <see cref="T:System.Web.Services.Description.Binding" />
 
             
 
-             of which the current <see
-             cref="T:System.Web.Services.Description.OperationBinding" />
+             of which the current <see cref="T:System.Web.Services.Description.OperationBinding" />
 
             
 
@@ -130,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of extensibility elements specific to the current <see
-             cref="T:System.Web.Services.Description.OperationBinding" />
+            >Gets the collection of extensibility elements specific to the current <see cref="T:System.Web.Services.Description.OperationBinding" />
 
             
 
@@ -164,13 +157,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Services.Description.FaultBindingCollection" />
+            >Gets the <see cref="T:System.Web.Services.Description.FaultBindingCollection" />
 
             
 
-             associated with the <see
-             cref="T:System.Web.Services.Description.OperationBinding" />
+             associated with the <see cref="T:System.Web.Services.Description.OperationBinding" />
 
             
 
@@ -207,13 +198,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Web.Services.Description.InputBinding" />
+            >Gets or sets the <see cref="T:System.Web.Services.Description.InputBinding" />
 
             
 
-             associated with the <see
-             cref="T:System.Web.Services.Description.OperationBinding" />
+             associated with the <see cref="T:System.Web.Services.Description.OperationBinding" />
 
             
 
@@ -272,13 +261,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Web.Services.Description.OutputBinding" />
+            >Gets or sets the <see cref="T:System.Web.Services.Description.OutputBinding" />
 
             
 
-             associated with the <see
-             cref="T:System.Web.Services.Description.OperationBinding" />
+             associated with the <see cref="T:System.Web.Services.Description.OperationBinding" />
 
             
 

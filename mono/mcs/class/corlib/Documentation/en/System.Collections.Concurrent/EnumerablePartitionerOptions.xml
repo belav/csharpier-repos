@@ -24,13 +24,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Out-of-the-box partitioners are created with a set of default behaviors. For example, by default, some form of buffering and chunking will be used to achieve optimal performance in the common scenario where an <see
-         cref="T:System.Collections.Generic.IEnumerable`1" />
+        >Out-of-the-box partitioners are created with a set of default behaviors. For example, by default, some form of buffering and chunking will be used to achieve optimal performance in the common scenario where an <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
         
 
-         implementation is fast and non-blocking. These behaviors can be overridden by this enumeration by using the <see
-         cref="M:System.Collections.Concurrent.Partitioner.Create``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Concurrent.EnumerablePartitionerOptions)" />
+         implementation is fast and non-blocking. These behaviors can be overridden by this enumeration by using the <see cref="M:System.Collections.Concurrent.Partitioner.Create``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Concurrent.EnumerablePartitionerOptions)" />
 
         
 

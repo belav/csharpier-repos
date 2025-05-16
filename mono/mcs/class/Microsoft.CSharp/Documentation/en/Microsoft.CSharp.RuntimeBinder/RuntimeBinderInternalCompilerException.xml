@@ -23,18 +23,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Exceptions of this kind differ from <see
-         cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" />
+        >Exceptions of this kind differ from <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" />
 
         
 
-         in that <see
-         cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" />
+         in that <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" />
 
         
 
-         represents a failure to bind in the sense of a usual compiler error, whereas <see
-         cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" />
+         represents a failure to bind in the sense of a usual compiler error, whereas <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" />
 
         
 
@@ -62,16 +59,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Exception.Message" />
+            >This constructor initializes the <see cref="P:System.Exception.Message" />
 
             
 
              property of the new instance to a system-supplied message that describes the error, such as "DefaultMessageDisplayedByParameterlessCtorWriterMustSupply" This message takes into account the current system culture.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.InsufficientMemoryException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.InsufficientMemoryException" />
 
             
 
@@ -113,8 +108,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" />
+            >Initializes a new instance of the <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" />
 
             
 
@@ -143,8 +137,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" />
+            >The following table shows the initial property values for an instance of <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" />
 
             
 
@@ -179,8 +172,7 @@
               </term>
               <description>
                 <para
-                  >The error message string specified in <paramref
-                   name="message" />
+                  >The error message string specified in <paramref name="message" />
 
                   
 
@@ -193,8 +185,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" />
+            >Initializes a new instance of the <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" />
 
             
 
@@ -202,7 +193,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -235,8 +230,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" />
+            >Initializes a new instance of the <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" />
 
             
 
@@ -244,24 +238,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -290,26 +290,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" />
+            >The following table shows the initial property values for an instance of <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" />
 
             
 
@@ -344,8 +340,7 @@
               </term>
               <description>
                 <para
-                  >The error message string specified in <paramref
-                   name="message" />
+                  >The error message string specified in <paramref name="message" />
 
                   
 
@@ -358,8 +353,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" />
+            >Initializes a new instance of the <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" />
 
             
 
@@ -367,14 +361,22 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

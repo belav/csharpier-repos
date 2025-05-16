@@ -28,33 +28,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Channels.AddressHeaderCollection" />
+        >The <see cref="T:System.ServiceModel.Channels.AddressHeaderCollection" />
 
         
 
-         can be initialized with an <see
-         cref="T:System.Collections.Generic.IEnumerable`1" />
+         can be initialized with an <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
         
 
-         set of <see
-         cref="T:System.ServiceModel.Channels.AddressHeader" />
+         set of <see cref="T:System.ServiceModel.Channels.AddressHeader" />
 
         
 
-         objects and then searched for a header with a specific qualified name using the <see
-         cref="M:System.ServiceModel.Channels.AddressHeaderCollection.FindHeader(System.String,System.String)" />
+         objects and then searched for a header with a specific qualified name using the <see cref="M:System.ServiceModel.Channels.AddressHeaderCollection.FindHeader(System.String,System.String)" />
 
         
 
-         method. To find all of the headers with a specific qualified name, use the <see
-         cref="M:System.ServiceModel.Channels.AddressHeaderCollection.FindAll(System.String,System.String)" />
+         method. To find all of the headers with a specific qualified name, use the <see cref="M:System.ServiceModel.Channels.AddressHeaderCollection.FindAll(System.String,System.String)" />
 
         
 
-         method. The <see
-         cref="M:System.ServiceModel.Channels.AddressHeaderCollection.AddHeadersTo(System.ServiceModel.Channels.Message)" />
+         method. The <see cref="M:System.ServiceModel.Channels.AddressHeaderCollection.AddHeadersTo(System.ServiceModel.Channels.Message)" />
 
         
 
@@ -83,8 +77,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.AddressHeaderCollection" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeaderCollection" />
 
             
 
@@ -118,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.AddressHeaderCollection" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeaderCollection" />
 
             
 
@@ -151,18 +143,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This inserts the headers from the current collection into the <see
-             cref="T:System.ServiceModel.Channels.MessageHeaders" />
+            >This inserts the headers from the current collection into the <see cref="T:System.ServiceModel.Channels.MessageHeaders" />
 
             
 
-             associated with the <see
-             cref="T:System.ServiceModel.Channels.Message" />
+             associated with the <see cref="T:System.ServiceModel.Channels.Message" />
 
             
 
-             and accessible through the <see
-             cref="P:System.ServiceModel.Channels.Message.Headers" />
+             and accessible through the <see cref="P:System.ServiceModel.Channels.Message.Headers" />
 
             
 
@@ -174,12 +163,15 @@
           <para>Adds the headers in the collection to the headers of a specified message.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Message" />
+          The <see cref="T:System.ServiceModel.Channels.Message" />
 
           
 
@@ -216,13 +208,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Array" />
+            >The <see cref="T:System.Array" />
 
             
 
-             of type <see
-             cref="T:System.ServiceModel.Channels.AddressHeader" />
+             of type <see cref="T:System.ServiceModel.Channels.AddressHeader" />
 
             
 
@@ -230,14 +220,22 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the address header to be found.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -269,8 +267,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you need to find all the address headers in the collection with the specified name and namespace, use the <see
-             cref="M:System.ServiceModel.Channels.AddressHeaderCollection.FindAll(System.String,System.String)" />
+            >If you need to find all the address headers in the collection with the specified name and namespace, use the <see cref="M:System.ServiceModel.Channels.AddressHeaderCollection.FindAll(System.String,System.String)" />
 
             
 
@@ -291,8 +288,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.AddressHeader" />
+            >The <see cref="T:System.ServiceModel.Channels.AddressHeader" />
 
             
 
@@ -300,14 +296,22 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the address header to be found.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

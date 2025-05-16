@@ -2,19 +2,18 @@
 <clause number="17.2.6.4" title="this access">
   <paragraph
     >A nested type and its containing type do not have a special relationship with regard to <non_terminal
-     where="14.5.7">this-access</non_terminal>
+      where="14.5.7"
+      >this-access</non_terminal
+    >
 
     
 
-     (<hyperlink
-    >14.5.7</hyperlink>
+     (<hyperlink>14.5.7</hyperlink>
 
     
 
     ). Specifically, this within a nested type cannot be used to refer to instance members of the containing type. In cases where a nested type needs access to the instance members of its containing type, access can be provided by providing the this for the instance of the containing type as a constructor argument for the nested type. <example
-
-      >[Example: The following example <code_example
-      >
+      >[Example: The following example <code_example>
         <![CDATA[
 using System;  
 class C   

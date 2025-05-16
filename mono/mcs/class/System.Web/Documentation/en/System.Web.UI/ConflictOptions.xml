@@ -15,18 +15,15 @@
       <para>Concurrency control is a technique that data stores use to control how data is read and changed in the store when multiple clients are accessing and manipulating the same data. For example, one client reads data and presents it to a user, while another client reads the same data, and presents it to a different user. If both users update the data and submit it to the data storage, some unexpected result might occur, because the clients might update different values for the same data. This is considered a conflict.</para>
       <para>The ConflictDetection property that is defined for ASP.NET data source controls is used to determine how a control handles data conflicts in the underlying data storage when the underlying data storage is using optimistic concurrency and a delete or update operation is performed. </para>
       <para
-        >By default, the ConflictDetection property is set to <see
-         cref="F:System.Web.UI.ConflictOptions.OverwriteChanges" />
+        >By default, the ConflictDetection property is set to <see cref="F:System.Web.UI.ConflictOptions.OverwriteChanges" />
 
         
 
-        , which means the data source control will overwrite any changes made to a data row between the time the data source control first read data from the row and the time that the row is updated. The primary key is used for locating the data row that will be updated or deleted, but no other comparison of the data is performed. If the data source control is configured to use the <see
-         cref="F:System.Web.UI.ConflictOptions.CompareAllValues" />
+        , which means the data source control will overwrite any changes made to a data row between the time the data source control first read data from the row and the time that the row is updated. The primary key is used for locating the data row that will be updated or deleted, but no other comparison of the data is performed. If the data source control is configured to use the <see cref="F:System.Web.UI.ConflictOptions.CompareAllValues" />
 
         
 
-         option, however, the control passes the original data in the <paramref
-         name="oldValues" />
+         option, however, the control passes the original data in the <paramref name="oldValues" />
 
         
 
@@ -50,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A data source control uses the <paramref
-             name="oldValues" />
+            >A data source control uses the <paramref name="oldValues" />
 
             
 

@@ -14,8 +14,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.ComponentModel.Design.DesignSurfaceManager.DesignSurfaceCreated" />
+        >Provides data for the <see cref="E:System.ComponentModel.Design.DesignSurfaceManager.DesignSurfaceCreated" />
 
         
 
@@ -41,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignSurfaceEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignSurfaceEventArgs" />
 
             
 
@@ -50,7 +48,11 @@
           >
         </summary>
         <param name="surface">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

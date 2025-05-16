@@ -38,8 +38,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.ServiceModel.Configuration.ComContractElement" />
+        >Represents a collection of <see cref="T:System.ServiceModel.Configuration.ComContractElement" />
 
         
 
@@ -64,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.ComContractElementCollection" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ComContractElementCollection" />
 
             
 

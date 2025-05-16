@@ -20,13 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Used by <see
-         cref="P:System.Xml.Schema.XmlSchema.AttributeFormDefault" />
+        >Used by <see cref="P:System.Xml.Schema.XmlSchema.AttributeFormDefault" />
 
         
 
-         and <see
-         cref="P:System.Xml.Schema.XmlSchema.ElementFormDefault" />
+         and <see cref="P:System.Xml.Schema.XmlSchema.ElementFormDefault" />
 
         
 

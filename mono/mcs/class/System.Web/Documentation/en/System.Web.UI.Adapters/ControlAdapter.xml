@@ -14,42 +14,36 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Control adapters are components that override certain <see
-         cref="T:System.Web.UI.Control" />
+        >Control adapters are components that override certain <see cref="T:System.Web.UI.Control" />
 
         
 
-         class methods and events in its execution lifecycle to allow browser or markup-specific handling. The .NET Framework maps a single derived control adapter to a <see
-         cref="T:System.Web.UI.Control" />
+         class methods and events in its execution lifecycle to allow browser or markup-specific handling. The .NET Framework maps a single derived control adapter to a <see cref="T:System.Web.UI.Control" />
 
         
 
          object for each client request. </para
       >
       <para
-        >An adapter modifies a control for a specific browser or class of browsers or acts as an arbitrary filter on some capability. Typically the adapter is defined by the markup language that the browser uses (for example, XHTML or HTML 3.2). Much of the adaptability in rendering behavior can be encapsulated in the specialized classes that derive from the <see
-         cref="T:System.Web.UI.HtmlTextWriter" />
+        >An adapter modifies a control for a specific browser or class of browsers or acts as an arbitrary filter on some capability. Typically the adapter is defined by the markup language that the browser uses (for example, XHTML or HTML 3.2). Much of the adaptability in rendering behavior can be encapsulated in the specialized classes that derive from the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
         
 
-         class. Therefore, it is likely that a single adapter can be used for a number of browser class behaviors or that inclusion of the adaptability in the <see
-         cref="T:System.Web.UI.HtmlTextWriter" />
+         class. Therefore, it is likely that a single adapter can be used for a number of browser class behaviors or that inclusion of the adaptability in the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
         
 
          classes could make the use of a control adapter unnecessary.</para
       >
       <para
-        >An adapter for a control class applies to all controls that inherit from that class, unless more specialized adapters are present. For example, an adapter for the <see
-         cref="T:System.Web.UI.WebControls.BaseValidator" />
+        >An adapter for a control class applies to all controls that inherit from that class, unless more specialized adapters are present. For example, an adapter for the <see cref="T:System.Web.UI.WebControls.BaseValidator" />
 
         
 
          class can be used for all Validator objects. </para
       >
       <para
-        >Adapters typically do not inherit directly from the <see
-         cref="T:System.Web.UI.Adapters.ControlAdapter" />
+        >Adapters typically do not inherit directly from the <see cref="T:System.Web.UI.Adapters.ControlAdapter" />
 
         
 
@@ -57,13 +51,11 @@
       >
       <para>Controls themselves do not necessarily require an adapter. If controls are extended through composition, generally the child control adapters are sufficient.</para>
       <para
-        >Each control has explicit mappings to adapters through the .browser definition files. Thus, any access to the <see
-         cref="P:System.Web.UI.Control.Adapter" />
+        >Each control has explicit mappings to adapters through the .browser definition files. Thus, any access to the <see cref="P:System.Web.UI.Control.Adapter" />
 
         
 
-         property uses the <see
-         cref="T:System.Web.HttpBrowserCapabilities" />
+         property uses the <see cref="T:System.Web.HttpBrowserCapabilities" />
 
         
 
@@ -71,216 +63,177 @@
       >
       <para>During processing, the .NET Framework intercepts calls to the overridable methods of a control that could be target-specific. If a control adapter is attached, the .NET Framework calls the associated adapter methods.</para>
       <para
-        >The adapter performs rendering for the control through the <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
+        >The adapter performs rendering for the control through the <see cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
 
         
 
-         method. If overridden, <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
+         method. If overridden, <see cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
 
         
 
-         potentially should not call the base class implementation because that performs a call back on the <see
-         cref="M:System.Web.UI.Control.Render(System.Web.UI.HtmlTextWriter)" />
+         potentially should not call the base class implementation because that performs a call back on the <see cref="M:System.Web.UI.Control.Render(System.Web.UI.HtmlTextWriter)" />
 
         
 
          method. This might cause the rendering to occur twice, once by the adapter and once by the control. </para
       >
       <para
-        >The <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
+        >The <see cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
 
         
 
-         base method calls back on the <see
-         cref="M:System.Web.UI.Control.Render(System.Web.UI.HtmlTextWriter)" />
+         base method calls back on the <see cref="M:System.Web.UI.Control.Render(System.Web.UI.HtmlTextWriter)" />
 
         
 
-         method of the control. Thus, if you override <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
+         method of the control. Thus, if you override <see cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
 
         
 
-        , you should not call the base class implementation unless the rendering you implement is in addition to that provided by <see
-         cref="M:System.Web.UI.Control.Render(System.Web.UI.HtmlTextWriter)" />
+        , you should not call the base class implementation unless the rendering you implement is in addition to that provided by <see cref="M:System.Web.UI.Control.Render(System.Web.UI.HtmlTextWriter)" />
 
         
 
          of the control.</para
       >
       <para
-        >You must ensure that the .NET Framework performs interception for adapters of the child controls. You can do this by calling the <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.RenderChildren(System.Web.UI.HtmlTextWriter)" />
+        >You must ensure that the .NET Framework performs interception for adapters of the child controls. You can do this by calling the <see cref="M:System.Web.UI.Adapters.ControlAdapter.RenderChildren(System.Web.UI.HtmlTextWriter)" />
 
         
 
-         base method, which calls the <see
-         cref="M:System.Web.UI.Control.RenderChildren(System.Web.UI.HtmlTextWriter)" />
+         base method, which calls the <see cref="M:System.Web.UI.Control.RenderChildren(System.Web.UI.HtmlTextWriter)" />
 
         
 
-         method of the control, from your <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
+         method of the control, from your <see cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
 
         
 
          override. </para
       >
       <para
-        >The <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.BeginRender(System.Web.UI.HtmlTextWriter)" />
+        >The <see cref="M:System.Web.UI.Adapters.ControlAdapter.BeginRender(System.Web.UI.HtmlTextWriter)" />
 
         
 
-         and <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.EndRender(System.Web.UI.HtmlTextWriter)" />
+         and <see cref="M:System.Web.UI.Adapters.ControlAdapter.EndRender(System.Web.UI.HtmlTextWriter)" />
 
         
 
-         methods are called by the control immediately before and after (respectively) the control calls the <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
+         methods are called by the control immediately before and after (respectively) the control calls the <see cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
 
         
 
-         method. If pre- and post-rendering are the only browser-specific processing tasks required, using <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.BeginRender(System.Web.UI.HtmlTextWriter)" />
+         method. If pre- and post-rendering are the only browser-specific processing tasks required, using <see cref="M:System.Web.UI.Adapters.ControlAdapter.BeginRender(System.Web.UI.HtmlTextWriter)" />
 
         
 
-         and <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.EndRender(System.Web.UI.HtmlTextWriter)" />
+         and <see cref="M:System.Web.UI.Adapters.ControlAdapter.EndRender(System.Web.UI.HtmlTextWriter)" />
 
         
 
-         might make it unnecessary to override <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
+         might make it unnecessary to override <see cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
 
         
 
-        . The default behavior of the <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.BeginRender(System.Web.UI.HtmlTextWriter)" />
+        . The default behavior of the <see cref="M:System.Web.UI.Adapters.ControlAdapter.BeginRender(System.Web.UI.HtmlTextWriter)" />
 
         
 
-         and <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.EndRender(System.Web.UI.HtmlTextWriter)" />
+         and <see cref="M:System.Web.UI.Adapters.ControlAdapter.EndRender(System.Web.UI.HtmlTextWriter)" />
 
         
 
-         methods is to call the corresponding methods of the <see
-         cref="T:System.Web.UI.HtmlTextWriter" />
+         methods is to call the corresponding methods of the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
         
 
         .</para
       >
       <para
-        >To maintain its own state information, a control adapter can override the <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterControlState" />
+        >To maintain its own state information, a control adapter can override the <see cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterControlState" />
 
         
 
-        , <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterControlState(System.Object)" />
+        , <see cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterControlState(System.Object)" />
 
         
 
-        , <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterViewState" />
+        , <see cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterViewState" />
 
         
 
-        , and <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterViewState(System.Object)" />
+        , and <see cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterViewState(System.Object)" />
 
         
 
-         methods. <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterControlState" />
+         methods. <see cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterControlState" />
 
         
 
-        , <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterViewState" />
+        , <see cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterViewState" />
 
         
 
-        , <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterControlState(System.Object)" />
+        , <see cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterControlState(System.Object)" />
 
         
 
-        , and <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterViewState(System.Object)" />
+        , and <see cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterViewState(System.Object)" />
 
         
 
          are called when the private control and view states are saved and loaded, respectively.</para
       >
       <para
-        >The <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.OnInit(System.EventArgs)" />
+        >The <see cref="M:System.Web.UI.Adapters.ControlAdapter.OnInit(System.EventArgs)" />
 
         
 
-        , <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.OnLoad(System.EventArgs)" />
+        , <see cref="M:System.Web.UI.Adapters.ControlAdapter.OnLoad(System.EventArgs)" />
 
         
 
-        , <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.OnPreRender(System.EventArgs)" />
+        , <see cref="M:System.Web.UI.Adapters.ControlAdapter.OnPreRender(System.EventArgs)" />
 
         
 
-        , and <see
-         cref="M:System.Web.UI.Adapters.ControlAdapter.OnUnload(System.EventArgs)" />
+        , and <see cref="M:System.Web.UI.Adapters.ControlAdapter.OnUnload(System.EventArgs)" />
 
         
 
-         base methods call back on the corresponding <see
-         cref="T:System.Web.UI.Control" />
+         base methods call back on the corresponding <see cref="T:System.Web.UI.Control" />
 
         
 
-         class methods. Thus, any of these <see
-         cref="T:System.Web.UI.Adapters.ControlAdapter" />
+         class methods. Thus, any of these <see cref="T:System.Web.UI.Adapters.ControlAdapter" />
 
         
 
-         methods that are overridden must call their base methods; otherwise, the event associated with the <see
-         cref="T:System.Web.UI.Control" />
+         methods that are overridden must call their base methods; otherwise, the event associated with the <see cref="T:System.Web.UI.Control" />
 
         
 
          class method will not be raised.</para
       >
       <para
-        >Controls and adapters optionally implement the <see
-         cref="T:System.Web.UI.IPostBackDataHandler" />
+        >Controls and adapters optionally implement the <see cref="T:System.Web.UI.IPostBackDataHandler" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.IPostBackEventHandler" />
+         and <see cref="T:System.Web.UI.IPostBackEventHandler" />
 
         
 
-         interfaces. The .NET Framework determines whether an adapter exists and whether the adapter implements these interfaces. If it does, the adapter should override the <see
-         cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+         interfaces. The .NET Framework determines whether an adapter exists and whether the adapter implements these interfaces. If it does, the adapter should override the <see cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
         
 
-        , <see
-         cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
+        , <see cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
 
         
 
-        , and <see
-         cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />
+        , and <see cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />
 
         
 
@@ -302,8 +255,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The .NET Framework internally constructs this adapter when it creates the corresponding <see
-             cref="T:System.Web.UI.Control" />
+            >The .NET Framework internally constructs this adapter when it creates the corresponding <see cref="T:System.Web.UI.Control" />
 
             
 
@@ -313,8 +265,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Adapters.ControlAdapter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Adapters.ControlAdapter" />
 
             
 
@@ -346,26 +297,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.BeginRender(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.Adapters.ControlAdapter.BeginRender(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method is called just before the <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
+             method is called just before the <see cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
 
             
 
              method, and is used to perform target-specific preprocessing before the rendering of the control.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.BeginRender(System.Web.UI.HtmlTextWriter)" />
+            >Use the <see cref="M:System.Web.UI.Adapters.ControlAdapter.BeginRender(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method in combination with the <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.EndRender(System.Web.UI.HtmlTextWriter)" />
+             method in combination with the <see cref="M:System.Web.UI.Adapters.ControlAdapter.EndRender(System.Web.UI.HtmlTextWriter)" />
 
             
 
@@ -393,28 +340,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.Adapters.ControlAdapter" />
+            >A <see cref="T:System.Web.UI.Adapters.ControlAdapter" />
 
             
 
-             object determines the client browser capabilities from the <see
-             cref="T:System.Web.HttpBrowserCapabilities" />
+             object determines the client browser capabilities from the <see cref="T:System.Web.HttpBrowserCapabilities" />
 
             
 
-             object that is returned by the <see
-             cref="P:System.Web.UI.Adapters.ControlAdapter.Browser" />
+             object that is returned by the <see cref="P:System.Web.UI.Adapters.ControlAdapter.Browser" />
 
             
 
-             property. This enables the <see
-             cref="T:System.Web.UI.Adapters.ControlAdapter" />
+             property. This enables the <see cref="T:System.Web.UI.Adapters.ControlAdapter" />
 
             
 
-             object to render browser-specific markup or otherwise modify the behavior of the <see
-             cref="T:System.Web.UI.Control" />
+             object to render browser-specific markup or otherwise modify the behavior of the <see cref="T:System.Web.UI.Control" />
 
             
 
@@ -477,31 +419,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If there is a derived control adapter attached to a <see
-             cref="T:System.Web.UI.Control" />
+            >If there is a derived control adapter attached to a <see cref="T:System.Web.UI.Control" />
 
             
 
-             object and the <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.CreateChildControls" />
+             object and the <see cref="M:System.Web.UI.Adapters.ControlAdapter.CreateChildControls" />
 
             
 
-             method is overridden, the override is called instead of the <see
-             cref="M:System.Web.UI.Control.CreateChildControls" />
+             method is overridden, the override is called instead of the <see cref="M:System.Web.UI.Control.CreateChildControls" />
 
             
 
-             method. Thus, <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.CreateChildControls" />
+             method. Thus, <see cref="M:System.Web.UI.Adapters.ControlAdapter.CreateChildControls" />
 
             
 
              can be used to create a target-specific child control set.</para
           >
           <para
-            >For more information about combining controls to create a new control, see <format
-             type="text/html">
+            >For more information about combining controls to create a new control, see <format type="text/html">
               <a href="fb174677-d845-467c-8bf3-cc096b2490b0">Composite Controls</a>
             </format>
 
@@ -536,26 +473,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.EndRender(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.Adapters.ControlAdapter.EndRender(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method is called just after the <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
+             method is called just after the <see cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
 
             
 
              method, and is used to perform target-specific postprocessing after the rendering of the control. </para
           >
           <para
-            >Use the <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.EndRender(System.Web.UI.HtmlTextWriter)" />
+            >Use the <see cref="M:System.Web.UI.Adapters.ControlAdapter.EndRender(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method in combination with the <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.BeginRender(System.Web.UI.HtmlTextWriter)" />
+             method in combination with the <see cref="M:System.Web.UI.Adapters.ControlAdapter.BeginRender(System.Web.UI.HtmlTextWriter)" />
 
             
 
@@ -587,34 +520,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Control state is the essential state information needed even if view state is disabled. When an adapter needs to maintain its own control state information, it can override the <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterControlState(System.Object)" />
+            >Control state is the essential state information needed even if view state is disabled. When an adapter needs to maintain its own control state information, it can override the <see cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterControlState(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterControlState" />
+             and <see cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterControlState" />
 
             
 
              methods.</para
           >
           <para
-            >An adapter might need to maintain control state information when there are features that need to have state maintained across requests, independent from the state of the associated control. For example, a composite control consisting of a large textual display and a group of <see
-             cref="T:System.Web.UI.WebControls.RadioButton" />
+            >An adapter might need to maintain control state information when there are features that need to have state maintained across requests, independent from the state of the associated control. For example, a composite control consisting of a large textual display and a group of <see cref="T:System.Web.UI.WebControls.RadioButton" />
 
             
 
              controls might render as a single view on desktop computer browsers. On other browsers, it might split its rendering—one view for the textual display and the other for the radio button group. The adapter would need to maintain its own target-specific information about the currently active view.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterControlState(System.Object)" />
+            >The <see cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterControlState(System.Object)" />
 
             
 
-             method is called immediately after the <see
-             cref="M:System.Web.UI.Control.LoadControlState(System.Object)" />
+             method is called immediately after the <see cref="M:System.Web.UI.Control.LoadControlState(System.Object)" />
 
             
 
@@ -624,8 +552,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads adapter control state information that was saved by <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterControlState" />
+            >Loads adapter control state information that was saved by <see cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterControlState" />
 
             
 
@@ -633,17 +560,19 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
-           that contains the adapter's control state information as a <see
-           cref="T:System.Web.UI.StateBag" />
+           that contains the adapter's control state information as a <see cref="T:System.Web.UI.StateBag" />
 
           
 
@@ -670,13 +599,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When an adapter needs to maintain its own view state information, it can override the <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterViewState(System.Object)" />
+            >When an adapter needs to maintain its own view state information, it can override the <see cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterViewState(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterViewState" />
+             and <see cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterViewState" />
 
             
 
@@ -684,13 +611,11 @@
           >
           <para>An adapter needs to maintain view state information when there is data that must be maintained across requests, independent from the view state of the associated control. For example, a grid control on desktop computer browsers might render as a single view of rows and columns of values. On other browsers, it might split its rendering into multiple separate views, such as a list of rows and details of a single row. The adapter would need to maintain the data for the views that are not currently active in view state.</para>
           <para
-            >The <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterViewState(System.Object)" />
+            >The <see cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterViewState(System.Object)" />
 
             
 
-             method is called immediately before the <see
-             cref="M:System.Web.UI.Control.LoadViewState(System.Object)" />
+             method is called immediately before the <see cref="M:System.Web.UI.Control.LoadViewState(System.Object)" />
 
             
 
@@ -700,8 +625,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads adapter view state information that was saved by <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterViewState" />
+            >Loads adapter view state information that was saved by <see cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterViewState" />
 
             
 
@@ -709,17 +633,19 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
-           that contains the adapter view state information as a <see
-           cref="T:System.Web.UI.StateBag" />
+           that contains the adapter view state information as a <see cref="T:System.Web.UI.StateBag" />
 
           
 
@@ -743,26 +669,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If there is an adapter attached to a <see
-             cref="T:System.Web.UI.Control" />
+            >If there is an adapter attached to a <see cref="T:System.Web.UI.Control" />
 
             
 
-             object and the <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.OnInit(System.EventArgs)" />
+             object and the <see cref="M:System.Web.UI.Adapters.ControlAdapter.OnInit(System.EventArgs)" />
 
             
 
-             method is overridden, the override method is called instead of the <see
-             cref="M:System.Web.UI.Control.OnInit(System.EventArgs)" />
+             method is overridden, the override method is called instead of the <see cref="M:System.Web.UI.Control.OnInit(System.EventArgs)" />
 
             
 
              method. </para
           >
           <para
-            >Override <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.OnInit(System.EventArgs)" />
+            >Override <see cref="M:System.Web.UI.Adapters.ControlAdapter.OnInit(System.EventArgs)" />
 
             
 
@@ -772,8 +694,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see
-             cref="M:System.Web.UI.Control.OnInit(System.EventArgs)" />
+            >Overrides the <see cref="M:System.Web.UI.Control.OnInit(System.EventArgs)" />
 
             
 
@@ -781,12 +702,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -810,26 +734,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If there is an adapter attached to a <see
-             cref="T:System.Web.UI.Control" />
+            >If there is an adapter attached to a <see cref="T:System.Web.UI.Control" />
 
             
 
-             object and the <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.OnLoad(System.EventArgs)" />
+             object and the <see cref="M:System.Web.UI.Adapters.ControlAdapter.OnLoad(System.EventArgs)" />
 
             
 
-             method is overridden, the override method is called instead of the <see
-             cref="M:System.Web.UI.Control.OnLoad(System.EventArgs)" />
+             method is overridden, the override method is called instead of the <see cref="M:System.Web.UI.Control.OnLoad(System.EventArgs)" />
 
             
 
              method. </para
           >
           <para
-            >Override the <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.OnLoad(System.EventArgs)" />
+            >Override the <see cref="M:System.Web.UI.Adapters.ControlAdapter.OnLoad(System.EventArgs)" />
 
             
 
@@ -839,8 +759,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see
-             cref="M:System.Web.UI.Control.OnLoad(System.EventArgs)" />
+            >Overrides the <see cref="M:System.Web.UI.Control.OnLoad(System.EventArgs)" />
 
             
 
@@ -848,12 +767,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -877,26 +799,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If there is an adapter attached to a <see
-             cref="T:System.Web.UI.Control" />
+            >If there is an adapter attached to a <see cref="T:System.Web.UI.Control" />
 
             
 
-             object and the <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.OnPreRender(System.EventArgs)" />
+             object and the <see cref="M:System.Web.UI.Adapters.ControlAdapter.OnPreRender(System.EventArgs)" />
 
             
 
-             method is overridden, the override method is called instead of the <see
-             cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
+             method is overridden, the override method is called instead of the <see cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
 
             
 
              method. </para
           >
           <para
-            >Override the <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.OnPreRender(System.EventArgs)" />
+            >Override the <see cref="M:System.Web.UI.Adapters.ControlAdapter.OnPreRender(System.EventArgs)" />
 
             
 
@@ -906,8 +824,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see
-             cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
+            >Overrides the <see cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
 
             
 
@@ -915,12 +832,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -944,26 +864,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If there is an adapter attached to a <see
-             cref="T:System.Web.UI.Control" />
+            >If there is an adapter attached to a <see cref="T:System.Web.UI.Control" />
 
             
 
-             object and the <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.OnUnload(System.EventArgs)" />
+             object and the <see cref="M:System.Web.UI.Adapters.ControlAdapter.OnUnload(System.EventArgs)" />
 
             
 
-             method is overridden, the override method is called instead of the <see
-             cref="M:System.Web.UI.Control.OnUnload(System.EventArgs)" />
+             method is overridden, the override method is called instead of the <see cref="M:System.Web.UI.Control.OnUnload(System.EventArgs)" />
 
             
 
              method. </para
           >
           <para
-            >Override the <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.OnUnload(System.EventArgs)" />
+            >Override the <see cref="M:System.Web.UI.Adapters.ControlAdapter.OnUnload(System.EventArgs)" />
 
             
 
@@ -973,8 +889,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see
-             cref="M:System.Web.UI.Control.OnUnload(System.EventArgs)" />
+            >Overrides the <see cref="M:System.Web.UI.Control.OnUnload(System.EventArgs)" />
 
             
 
@@ -982,12 +897,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1015,13 +933,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Adapters.ControlAdapter.Page" />
+            >The <see cref="P:System.Web.UI.Adapters.ControlAdapter.Page" />
 
             
 
-             property provides access to the <see
-             cref="T:System.Web.UI.Page" />
+             property provides access to the <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -1060,36 +976,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Adapters.ControlAdapter.PageAdapter" />
+            >The <see cref="P:System.Web.UI.Adapters.ControlAdapter.PageAdapter" />
 
             
 
-             property provides access to the <see
-             cref="T:System.Web.UI.Adapters.PageAdapter" />
+             property provides access to the <see cref="T:System.Web.UI.Adapters.PageAdapter" />
 
             
 
-             object for the <see
-             cref="T:System.Web.UI.Page" />
+             object for the <see cref="T:System.Web.UI.Page" />
 
             
 
-             object where the <see
-             cref="T:System.Web.UI.Control" />
+             object where the <see cref="T:System.Web.UI.Control" />
 
             
 
-             object associated with the current <see
-             cref="T:System.Web.UI.Adapters.ControlAdapter" />
+             object associated with the current <see cref="T:System.Web.UI.Adapters.ControlAdapter" />
 
             
 
              object is situated. </para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.Adapters.ControlAdapter.PageAdapter" />
+            >The <see cref="P:System.Web.UI.Adapters.ControlAdapter.PageAdapter" />
 
             
 
@@ -1125,28 +1035,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Override the <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
+            >Override the <see cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method to generate target-specific markup to send to the client browser. The <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
+             method to generate target-specific markup to send to the client browser. The <see cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method is called in place of the <see
-             cref="M:System.Web.UI.Control.Render(System.Web.UI.HtmlTextWriter)" />
+             method is called in place of the <see cref="M:System.Web.UI.Control.Render(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method if a <see
-             cref="T:System.Web.UI.Adapters.ControlAdapter" />
+             method if a <see cref="T:System.Web.UI.Adapters.ControlAdapter" />
 
             
 
-             object is attached to a <see
-             cref="T:System.Web.UI.Control" />
+             object is attached to a <see cref="T:System.Web.UI.Control" />
 
             
 
@@ -1179,8 +1084,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Override the <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.RenderChildren(System.Web.UI.HtmlTextWriter)" />
+            >Override the <see cref="M:System.Web.UI.Adapters.ControlAdapter.RenderChildren(System.Web.UI.HtmlTextWriter)" />
 
             
 
@@ -1207,34 +1111,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Control state is the essential state information needed even if view state is disabled. When an adapter needs to maintain its own control state information, it can override the <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterControlState" />
+            >Control state is the essential state information needed even if view state is disabled. When an adapter needs to maintain its own control state information, it can override the <see cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterControlState" />
 
             
 
-             and <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterControlState(System.Object)" />
+             and <see cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterControlState(System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >An adapter might need to maintain control state information when there are features that need to have state maintained across requests, independent from the state of the associated control. For example, a composite control consisting of a large textual display and a group of <see
-             cref="T:System.Web.UI.WebControls.RadioButton" />
+            >An adapter might need to maintain control state information when there are features that need to have state maintained across requests, independent from the state of the associated control. For example, a composite control consisting of a large textual display and a group of <see cref="T:System.Web.UI.WebControls.RadioButton" />
 
             
 
              controls might render as a single view on desktop computer browsers. On other browsers, it might split its rendering—one view for the textual display and the other for the radio button group. The adapter would need to maintain its own target-specific information about the currently active view.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterControlState" />
+            >The <see cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterControlState" />
 
             
 
-             method is called immediately after the <see
-             cref="M:System.Web.UI.Control.SaveControlState" />
+             method is called immediately after the <see cref="M:System.Web.UI.Control.SaveControlState" />
 
             
 
@@ -1248,13 +1147,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             that contains the adapter's control state information as a <see
-             cref="T:System.Web.UI.StateBag" />
+             that contains the adapter's control state information as a <see cref="T:System.Web.UI.StateBag" />
 
             
 
@@ -1277,13 +1174,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When an adapter needs to maintain its own view state information, it can override the <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterViewState" />
+            >When an adapter needs to maintain its own view state information, it can override the <see cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterViewState" />
 
             
 
-             and <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterViewState(System.Object)" />
+             and <see cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterViewState(System.Object)" />
 
             
 
@@ -1291,13 +1186,11 @@
           >
           <para>An adapter needs to maintain view state information when there is data that must be maintained across requests, independent from the associated view state of the control. For example, a grid control on desktop computer browsers might render as a single view of rows and columns of values. On other browsers, it might split its rendering into multiple separate views, such as a list of rows and details of a single row. The adapter would need to maintain the data for the views that are not currently active in view state.</para>
           <para
-            >The <see
-             cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterViewState" />
+            >The <see cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterViewState" />
 
             
 
-             method is called immediately before the <see
-             cref="M:System.Web.UI.Control.SaveViewState" />
+             method is called immediately before the <see cref="M:System.Web.UI.Control.SaveViewState" />
 
             
 
@@ -1311,13 +1204,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             that contains the adapter view state information as a <see
-             cref="T:System.Web.UI.StateBag" />
+             that contains the adapter view state information as a <see cref="T:System.Web.UI.StateBag" />
 
             
 

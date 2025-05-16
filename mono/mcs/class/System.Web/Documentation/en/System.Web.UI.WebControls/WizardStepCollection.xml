@@ -21,51 +21,42 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+        >The <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
         
 
-         class is used to store and manage a collection of <see
-         cref="T:System.Web.UI.WebControls.WizardStepBase" />
+         class is used to store and manage a collection of <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
         
 
-        -derived objects in a control that acts as a wizard, such as the <see
-         cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+        -derived objects in a control that acts as a wizard, such as the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" />
 
         
 
-         control or the <see
-         cref="T:System.Web.UI.WebControls.Wizard" />
+         control or the <see cref="T:System.Web.UI.WebControls.Wizard" />
 
         
 
-         control. For example, the <see
-         cref="T:System.Web.UI.WebControls.Wizard" />
+         control. For example, the <see cref="T:System.Web.UI.WebControls.Wizard" />
 
         
 
-         control uses the <see
-         cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+         control uses the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
         
 
-         class for its <see
-         cref="P:System.Web.UI.WebControls.Wizard.WizardSteps" />
+         class for its <see cref="P:System.Web.UI.WebControls.Wizard.WizardSteps" />
 
         
 
          property.</para
       >
       <para
-        >There are multiple ways you can access the <see
-         cref="T:System.Web.UI.WebControls.WizardStepBase" />
+        >There are multiple ways you can access the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
         
 
-        -derived objects in the <see
-         cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+        -derived objects in the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
         
 
@@ -74,13 +65,11 @@
       <list type="bullet">
         <item>
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.WizardStepCollection.Item(System.Int32)" />
+            >Use the <see cref="P:System.Web.UI.WebControls.WizardStepCollection.Item(System.Int32)" />
 
             
 
-             property to directly access a <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+             property to directly access a <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
@@ -89,8 +78,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.WizardStepCollection.GetEnumerator" />
+            >Use the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.GetEnumerator" />
 
             
 
@@ -99,18 +87,15 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.WizardStepCollection.CopyTo(System.Web.UI.WebControls.WizardStepBase[],System.Int32)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.CopyTo(System.Web.UI.WebControls.WizardStepBase[],System.Int32)" />
 
             
 
-             method to copy the contents of the <see
-             cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+             method to copy the contents of the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
-             collection into an <see
-             cref="T:System.Array" />
+             collection into an <see cref="T:System.Array" />
 
             
 
@@ -122,8 +107,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Web.UI.WebControls.WizardStepBase" />
+        >Represents a collection of <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
         
 
@@ -149,28 +133,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.WizardStepCollection.Add(System.Web.UI.WebControls.WizardStepBase)" />
+            >The <see cref="M:System.Web.UI.WebControls.WizardStepCollection.Add(System.Web.UI.WebControls.WizardStepBase)" />
 
             
 
-             method adds the <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+             method adds the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
-            -derived object to the end of the <see
-             cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+            -derived object to the end of the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
-             collection. To add a <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+             collection. To add a <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
-            -derived object to the collection at a specific index location, use the <see
-             cref="M:System.Web.UI.WebControls.WizardStepCollection.AddAt(System.Int32,System.Web.UI.WebControls.WizardStepBase)" />
+            -derived object to the collection at a specific index location, use the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.AddAt(System.Int32,System.Web.UI.WebControls.WizardStepBase)" />
 
             
 
@@ -180,8 +159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends the specified <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+            >Appends the specified <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
@@ -189,17 +167,19 @@
           >
         </summary>
         <param name="wizardStep">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.WizardStepBase" />
+          The <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
           
 
-          -derived object to append to the <see
-           cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+          -derived object to append to the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
           
 
@@ -228,31 +208,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.WizardStepCollection.AddAt(System.Int32,System.Web.UI.WebControls.WizardStepBase)" />
+            >The <see cref="M:System.Web.UI.WebControls.WizardStepCollection.AddAt(System.Int32,System.Web.UI.WebControls.WizardStepBase)" />
 
             
 
-             method adds the <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+             method adds the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
             -derived object to the collection at the specified index location.</para
           >
           <para
-            >To add a <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+            >To add a <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
-            -derived object to the end of the <see
-             cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+            -derived object to the end of the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
-             collection, use the <see
-             cref="M:System.Web.UI.WebControls.WizardStepCollection.Add(System.Web.UI.WebControls.WizardStepBase)" />
+             collection, use the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.Add(System.Web.UI.WebControls.WizardStepBase)" />
 
             
 
@@ -262,8 +237,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+            >Adds the specified <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
@@ -271,29 +245,34 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index location at which to insert <see
-           cref="T:System.Web.UI.WebControls.WizardStepBase" />
+          The index location at which to insert <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
           
 
           -derived object.</param
         >
         <param name="wizardStep">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.WizardStepBase" />
+          The <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
           
 
-          -derived object to append to the <see
-           cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+          -derived object to append to the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
           
 
@@ -316,18 +295,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.WizardStepCollection.Clear" />
+            >Use the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.Clear" />
 
             
 
-             method to remove all the <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+             method to remove all the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
-            -derived objects from the <see
-             cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+            -derived objects from the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
@@ -335,23 +311,19 @@
           >
           <block subset="none" type="note">
             <para
-              >After the <see
-               cref="M:System.Web.UI.WebControls.WizardStepCollection.Clear" />
+              >After the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.Clear" />
 
               
 
-               method removes the <see
-               cref="T:System.Web.UI.WebControls.WizardStepBase" />
+               method removes the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
               
 
-              -derived objects from the collection, the <see
-               cref="P:System.Web.UI.WebControls.WizardStepCollection.Count" />
+              -derived objects from the collection, the <see cref="P:System.Web.UI.WebControls.WizardStepCollection.Count" />
 
               
 
-               property of the <see
-               cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+               property of the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
               
 
@@ -362,8 +334,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+            >Removes all <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
@@ -392,23 +363,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.WizardStepCollection.Contains(System.Web.UI.WebControls.WizardStepBase)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.Contains(System.Web.UI.WebControls.WizardStepBase)" />
 
             
 
-             method to determine whether a <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+             method to determine whether a <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
-            -derived object is contained in the collection. This method is commonly used to test for the existence of a <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+            -derived object is contained in the collection. This method is commonly used to test for the existence of a <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
-            -derived object before performing a task, such as removing a <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+            -derived object before performing a task, such as removing a <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
@@ -418,13 +385,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+            >Determines whether the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
-             collection contains a specific <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+             collection contains a specific <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
@@ -434,13 +399,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+            >true if the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
-            -derived object is found in the <see
-             cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+            -derived object is found in the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
@@ -448,17 +411,19 @@
           >
         </returns>
         <param name="wizardStep">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.WizardStepBase" />
+          The <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
           
 
-          -derived object to find in the <see
-           cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+          -derived object to find in the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
           
 
@@ -487,21 +452,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.WizardStepCollection.CopyTo(System.Web.UI.WebControls.WizardStepBase[],System.Int32)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.CopyTo(System.Web.UI.WebControls.WizardStepBase[],System.Int32)" />
 
             
 
-             method to copy the contents of the collection into the specified zero-based array. Items are copied starting at the specified index of the target array. After the items are in an array, you can use array syntax to access the items in the <see
-             cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+             method to copy the contents of the collection into the specified zero-based array. Items are copied starting at the specified index of the target array. After the items are in an array, you can use array syntax to access the items in the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
              collection.</para
           >
           <para
-            >As an alternative, you can also use the <see
-             cref="M:System.Web.UI.WebControls.WizardStepCollection.GetEnumerator" />
+            >As an alternative, you can also use the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.GetEnumerator" />
 
             
 
@@ -511,13 +473,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the items from a <see
-             cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+            >Copies all the items from a <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
-             collection to a compatible one-dimensional array of <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+             collection to a compatible one-dimensional array of <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
@@ -525,19 +485,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A zero-based array of <see
-           cref="T:System.Web.UI.WebControls.WizardStepBase" />
+          A zero-based array of <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
           
 
            objects that receives the items copied from the collection.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -560,23 +527,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.WizardStepCollection.Count" />
+            >Use the <see cref="P:System.Web.UI.WebControls.WizardStepCollection.Count" />
 
             
 
-             property to determine the number of <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+             property to determine the number of <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
-            -derived objects in the <see
-             cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+            -derived objects in the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
-             collection. The <see
-             cref="P:System.Web.UI.WebControls.WizardStepCollection.Count" />
+             collection. The <see cref="P:System.Web.UI.WebControls.WizardStepCollection.Count" />
 
             
 
@@ -586,18 +549,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+            >Gets the number of <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
-            -derived objects in the <see
-             cref="T:System.Web.UI.WebControls.Wizard" />
+            -derived objects in the <see cref="T:System.Web.UI.WebControls.Wizard" />
 
             
 
-             control's <see
-             cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+             control's <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
@@ -625,13 +585,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns an <see cref="T:System.Collections.IEnumerator" />
 
             
 
-            -implemented object that can be used to iterate through the <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+            -implemented object that can be used to iterate through the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
@@ -641,18 +599,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-            -implemented object that contains all the <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+            -implemented object that contains all the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
-            -derived objects in the <see
-             cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+            -derived objects in the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
@@ -681,23 +636,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.WizardStepCollection.IndexOf(System.Web.UI.WebControls.WizardStepBase)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.IndexOf(System.Web.UI.WebControls.WizardStepBase)" />
 
             
 
-             method to determine the index of the specified <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+             method to determine the index of the specified <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
-            -derived object in the current <see
-             cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+            -derived object in the current <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
-             collection. If the <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+             collection. If the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
@@ -707,8 +658,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the index value that represents the position of the specified <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+            >Determines the index value that represents the position of the specified <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
@@ -718,13 +668,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If found, the zero-based index of the first occurrence of the <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+            >If found, the zero-based index of the first occurrence of the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
-            -derived object passed in within the current <see
-             cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+            -derived object passed in within the current <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
@@ -732,17 +680,19 @@
           >
         </returns>
         <param name="wizardStep">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.WizardStepBase" />
+          The <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
           
 
-          -derived object to search for in the <see
-           cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+          -derived object to search for in the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
           
 
@@ -771,41 +721,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.WizardStepCollection.Insert(System.Int32,System.Web.UI.WebControls.WizardStepBase)" />
+            >The <see cref="M:System.Web.UI.WebControls.WizardStepCollection.Insert(System.Int32,System.Web.UI.WebControls.WizardStepBase)" />
 
             
 
-             method adds the <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+             method adds the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
             -derived object to the collection at the specified index location.</para
           >
           <para
-            >Alternatively, you can use the <see
-             cref="M:System.Web.UI.WebControls.WizardStepCollection.AddAt(System.Int32,System.Web.UI.WebControls.WizardStepBase)" />
+            >Alternatively, you can use the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.AddAt(System.Int32,System.Web.UI.WebControls.WizardStepBase)" />
 
             
 
-             method to add the <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+             method to add the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
-            -derived object to the collection. To add a <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+            -derived object to the collection. To add a <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
-            -derived object to the end of the <see
-             cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+            -derived object to the end of the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
-             collection, use the <see
-             cref="M:System.Web.UI.WebControls.WizardStepCollection.Add(System.Web.UI.WebControls.WizardStepBase)" />
+             collection, use the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.Add(System.Web.UI.WebControls.WizardStepBase)" />
 
             
 
@@ -813,23 +756,19 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.UI.WebControls.WizardStepCollection.Insert(System.Int32,System.Web.UI.WebControls.WizardStepBase)" />
+              >The <see cref="M:System.Web.UI.WebControls.WizardStepCollection.Insert(System.Int32,System.Web.UI.WebControls.WizardStepBase)" />
 
               
 
-               method and the <see
-               cref="M:System.Web.UI.WebControls.WizardStepCollection.AddAt(System.Int32,System.Web.UI.WebControls.WizardStepBase)" />
+               method and the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.AddAt(System.Int32,System.Web.UI.WebControls.WizardStepBase)" />
 
               
 
-               method perform essentially the same function. When the <see
-               cref="M:System.Web.UI.WebControls.WizardStepCollection.Insert(System.Int32,System.Web.UI.WebControls.WizardStepBase)" />
+               method perform essentially the same function. When the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.Insert(System.Int32,System.Web.UI.WebControls.WizardStepBase)" />
 
               
 
-               method is called, it simply passes the wizardStep and index parameters to the <see
-               cref="M:System.Web.UI.WebControls.WizardStepCollection.AddAt(System.Int32,System.Web.UI.WebControls.WizardStepBase)" />
+               method is called, it simply passes the wizardStep and index parameters to the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.AddAt(System.Int32,System.Web.UI.WebControls.WizardStepBase)" />
 
               
 
@@ -840,8 +779,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts the specified <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+            >Inserts the specified <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
@@ -849,29 +787,34 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index location at which to insert the <see
-           cref="T:System.Web.UI.WebControls.WizardStepBase" />
+          The index location at which to insert the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
           
 
           -derived object.</param
         >
         <param name="wizardStep">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.WizardStepBase" />
+          The <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
           
 
-          -derived object to insert into the <see
-           cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+          -derived object to insert into the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
           
 
@@ -895,8 +838,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
@@ -920,26 +862,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is derived from the <see
-             cref="T:System.Collections.ICollection" />
+            >This property is derived from the <see cref="T:System.Collections.ICollection" />
 
             
 
              interface and is overridden to always return false.</para
           >
           <para
-            >For more information on the <see
-             cref="P:System.Web.UI.WebControls.WizardStepCollection.IsSynchronized" />
+            >For more information on the <see cref="P:System.Web.UI.WebControls.WizardStepCollection.IsSynchronized" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.IsSynchronized" />
+             property, see the <see cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -995,33 +933,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.WizardStepCollection.Remove(System.Web.UI.WebControls.WizardStepBase)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.Remove(System.Web.UI.WebControls.WizardStepBase)" />
 
             
 
-             method to remove the <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+             method to remove the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
-            -derived object from the <see
-             cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+            -derived object from the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
-             collection. Alternatively, you can use the <see
-             cref="M:System.Web.UI.WebControls.WizardStepCollection.RemoveAt(System.Int32)" />
+             collection. Alternatively, you can use the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.RemoveAt(System.Int32)" />
 
             
 
-             method to remove a <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+             method to remove a <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
-            -derived object from a specified location in the <see
-             cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+            -derived object from a specified location in the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
@@ -1031,8 +963,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+            >Removes the specified <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
@@ -1040,12 +971,15 @@
           >
         </summary>
         <param name="wizardStep">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.WizardStepBase" />
+          The <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
           
 
@@ -1070,28 +1004,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.WizardStepCollection.RemoveAt(System.Int32)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.RemoveAt(System.Int32)" />
 
             
 
-             method to remove the <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+             method to remove the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
-            -derived object from the <see
-             cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+            -derived object from the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
-             collection at the specified index location. Alternatively, you can remove a specific <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+             collection at the specified index location. Alternatively, you can remove a specific <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
-            -derived object from the collection using the <see
-             cref="M:System.Web.UI.WebControls.WizardStepCollection.Remove(System.Web.UI.WebControls.WizardStepBase)" />
+            -derived object from the collection using the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.Remove(System.Web.UI.WebControls.WizardStepBase)" />
 
             
 
@@ -1101,8 +1030,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+            >Removes the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
@@ -1110,12 +1038,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the <see
-           cref="T:System.Web.UI.WebControls.WizardStepBase" />
+          The index of the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
           
 
@@ -1138,26 +1069,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object returned in this implementation is the <see
-             cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+            >The object returned in this implementation is the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
              object itself.</para
           >
           <para
-            >For more information on the <see
-             cref="P:System.Web.UI.WebControls.WizardStepCollection.SyncRoot" />
+            >For more information on the <see cref="P:System.Web.UI.WebControls.WizardStepCollection.SyncRoot" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             property, see the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1191,8 +1118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the items from a <see
-             cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+            >Copies all the items from a <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
@@ -1200,24 +1126,30 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A zero-based <see
-           cref="T:System.Array" />
+          A zero-based <see cref="T:System.Array" />
 
           
 
-           that receives the items copied from the <see
-           cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+           that receives the items copied from the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
           
 
            collection.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1272,13 +1204,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Object" />
+            >true if the <see cref="T:System.Object" />
 
             
 
-             is found in the <see
-             cref="T:System.Collections.IList" />
+             is found in the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1333,7 +1263,11 @@
           <para>Inserts the specified object in the collection at the specified position.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

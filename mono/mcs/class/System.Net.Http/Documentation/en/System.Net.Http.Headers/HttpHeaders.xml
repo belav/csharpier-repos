@@ -44,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Http.Headers.HttpHeaders" />
+            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.HttpHeaders" />
 
             
 
@@ -81,24 +80,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The header <paramref
-             name="values" />
+            >The header <paramref name="values" />
 
             
 
              will be parsed and validated.</para
           >
           <para
-            >If the specified header does not exist, the <see
-             cref="M:System.Net.Http.Headers.HttpHeaders.Add(System.String,System.Collections.Generic.IEnumerable{System.String})" />
+            >If the specified header does not exist, the <see cref="M:System.Net.Http.Headers.HttpHeaders.Add(System.String,System.Collections.Generic.IEnumerable{System.String})" />
 
             
 
              method inserts a new header into the list of header name/value pairs.</para
           >
           <para
-            >If the specified header is already present, <paramref
-             name="values" />
+            >If the specified header is already present, <paramref name="values" />
 
             
 
@@ -108,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified header and its values into the <see
-             cref="T:System.Net.Http.Headers.HttpHeaders" />
+            >Adds the specified header and its values into the <see cref="T:System.Net.Http.Headers.HttpHeaders" />
 
             
 
@@ -117,14 +112,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The header to add to the collection.</param
         >
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -153,24 +156,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The header <paramref
-             name="value" />
+            >The header <paramref name="value" />
 
             
 
              will be parsed and validated.</para
           >
           <para
-            >If the specified header does not exist, the <see
-             cref="M:System.Net.Http.Headers.HttpHeaders.Add(System.String,System.String)" />
+            >If the specified header does not exist, the <see cref="M:System.Net.Http.Headers.HttpHeaders.Add(System.String,System.String)" />
 
             
 
              method inserts a new header into the list of header name/value pairs.</para
           >
           <para
-            >If the specified header is already present, <paramref
-             name="value" />
+            >If the specified header is already present, <paramref name="value" />
 
             
 
@@ -180,8 +180,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified header and its value into the <see
-             cref="T:System.Net.Http.Headers.HttpHeaders" />
+            >Adds the specified header and its value into the <see cref="T:System.Net.Http.Headers.HttpHeaders" />
 
             
 
@@ -189,14 +188,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The header to add to the collection.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -223,8 +230,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all headers from the <see
-             cref="T:System.Net.Http.Headers.HttpHeaders" />
+            >Removes all headers from the <see cref="T:System.Net.Http.Headers.HttpHeaders" />
 
             
 
@@ -254,8 +260,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns if  a specific header exists in the <see
-             cref="T:System.Net.Http.Headers.HttpHeaders" />
+            >Returns if  a specific header exists in the <see cref="T:System.Net.Http.Headers.HttpHeaders" />
 
             
 
@@ -264,18 +269,19 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Boolean" />
+          <para>Returns <see cref="T:System.Boolean" />
 
             
 
-            .</para
-          >
+            .</para>
           <para>true is the specified header exists in the collection; otherwise false.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -305,8 +311,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that can iterate through the <see
-             cref="T:System.Net.Http.Headers.HttpHeaders" />
+            >Returns an enumerator that can iterate through the <see cref="T:System.Net.Http.Headers.HttpHeaders" />
 
             
 
@@ -316,16 +321,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Collections.Generic.IEnumerator`1" />
+            >Returns <see cref="T:System.Collections.Generic.IEnumerator`1" />
 
             
 
             .</para
           >
           <para
-            >An enumerator for the <see
-             cref="T:System.Net.Http.Headers.HttpHeaders" />
+            >An enumerator for the <see cref="T:System.Net.Http.Headers.HttpHeaders" />
 
             
 
@@ -358,8 +361,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns all header values for a specified header stored in the <see
-             cref="T:System.Net.Http.Headers.HttpHeaders" />
+            >Returns all header values for a specified header stored in the <see cref="T:System.Net.Http.Headers.HttpHeaders" />
 
             
 
@@ -369,8 +371,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >Returns <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
@@ -379,7 +380,11 @@
           <para>An array of header strings.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -408,8 +413,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified header from the <see
-             cref="T:System.Net.Http.Headers.HttpHeaders" />
+            >Removes the specified header from the <see cref="T:System.Net.Http.Headers.HttpHeaders" />
 
             
 
@@ -418,17 +422,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Boolean" />
+          <para>Returns <see cref="T:System.Boolean" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -458,8 +463,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an enumerator that can iterate through a <see
-             cref="T:System.Net.Http.Headers.HttpHeaders" />
+            >Gets an enumerator that can iterate through a <see cref="T:System.Net.Http.Headers.HttpHeaders" />
 
             
 
@@ -469,21 +473,18 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns <see cref="T:System.Collections.IEnumerator" />
 
             
 
             .</para
           >
           <para
-            >An instance of an implementation of an <see
-             cref="T:System.Collections.IEnumerator" />
+            >An instance of an implementation of an <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             that can iterate through a <see
-             cref="T:System.Net.Http.Headers.HttpHeaders" />
+             that can iterate through a <see cref="T:System.Net.Http.Headers.HttpHeaders" />
 
             
 
@@ -511,8 +512,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the current <see
-             cref="T:System.Net.Http.Headers.HttpHeaders" />
+            >Returns a string that represents the current <see cref="T:System.Net.Http.Headers.HttpHeaders" />
 
             
 
@@ -521,14 +521,11 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.String" />
+          <para>Returns <see cref="T:System.String" />
 
             
 
-            .</para
-          >
+            .</para>
           <para>A string that represents the current object.</para>
         </returns>
       </Docs>
@@ -561,8 +558,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the specified header and its values were added to the <see
-             cref="T:System.Net.Http.Headers.HttpHeaders" />
+            >Returns a value that indicates whether the specified header and its values were added to the <see cref="T:System.Net.Http.Headers.HttpHeaders" />
 
             
 
@@ -571,22 +567,17 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Boolean" />
+          <para>Returns <see cref="T:System.Boolean" />
 
             
 
-            .</para
-          >
+            .</para>
           <para
-            >true if the specified header <paramref
-             name="name" />
+            >true if the specified header <paramref name="name" />
 
             
 
-             and <paramref
-             name="values" />
+             and <paramref name="values" />
 
             
 
@@ -594,14 +585,22 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The header to add to the collection.</param
         >
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -634,8 +633,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the specified header and its value were added to the <see
-             cref="T:System.Net.Http.Headers.HttpHeaders" />
+            >Returns a value that indicates whether the specified header and its value were added to the <see cref="T:System.Net.Http.Headers.HttpHeaders" />
 
             
 
@@ -644,22 +642,17 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Boolean" />
+          <para>Returns <see cref="T:System.Boolean" />
 
             
 
-            .</para
-          >
+            .</para>
           <para
-            >true if the specified header <paramref
-             name="name" />
+            >true if the specified header <paramref name="name" />
 
             
 
-             and <paramref
-             name="value" />
+             and <paramref name="value" />
 
             
 
@@ -667,14 +660,22 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The header to add to the collection.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

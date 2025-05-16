@@ -36,8 +36,7 @@
     <example>
       <para
         >The following example demonstrates an error that causes
-      a <see
-         cref="T:System.InvalidOperationException" />
+      a <see cref="T:System.InvalidOperationException" />
 
         
 
@@ -70,8 +69,7 @@ public class InvalidOpExample  {
 
         
 
-         is used in cases when the failure to invoke a method is caused by reasons other than invalid arguments. For example, <see
-         cref="T:System.InvalidOperationException" />
+         is used in cases when the failure to invoke a method is caused by reasons other than invalid arguments. For example, <see cref="T:System.InvalidOperationException" />
 
         
 
@@ -99,18 +97,15 @@ public class InvalidOpExample  {
       </list>
       <para>To determine the precise cause of the exception, consult the exception information for the method call that throws the exception. </para>
       <para
-        >If the method invocation failure is due to invalid arguments, then <see
-         cref="T:System.ArgumentException" />
+        >If the method invocation failure is due to invalid arguments, then <see cref="T:System.ArgumentException" />
 
         
 
-         or one of its derived classes, <see
-         cref="T:System.ArgumentNullException" />
+         or one of its derived classes, <see cref="T:System.ArgumentNullException" />
 
         
 
-         or <see
-         cref="T:System.ArgumentOutOfRangeException" />
+         or <see cref="T:System.ArgumentOutOfRangeException" />
 
         
 
@@ -119,13 +114,11 @@ public class InvalidOpExample  {
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="F:System.Reflection.Emit.OpCodes.Ldflda" />
+            >The <see cref="F:System.Reflection.Emit.OpCodes.Ldflda" />
 
             
 
-             Microsoft intermediate language (MSIL) instruction throws <see
-             cref="T:System.InvalidOperationException" />
+             Microsoft intermediate language (MSIL) instruction throws <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -141,13 +134,11 @@ public class InvalidOpExample  {
          uses the HRESULT COR_E_INVALIDOPERATION, which has the value 0x80131509.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.InvalidOperationException" />
+        >For a list of initial property values for an instance of <see cref="T:System.InvalidOperationException" />
 
         
 
-        , see the <see
-         cref="M:System.InvalidOperationException.#ctor" />
+        , see the <see cref="M:System.InvalidOperationException.#ctor" />
 
         
 
@@ -182,16 +173,14 @@ public class InvalidOpExample  {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Exception.Message" />
+            >This constructor initializes the <see cref="P:System.Exception.Message" />
 
             
 
              property of the new instance to a system-supplied message that describes the error, such as "The requested operation cannot be performed." This message takes into account the current system culture.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.InvalidOperationException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -233,8 +222,7 @@ public class InvalidOpExample  {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.InvalidOperationException" />
+            >Initializes a new instance of the <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -268,26 +256,22 @@ public class InvalidOpExample  {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Exception.Message" />
+            >This constructor initializes the <see cref="P:System.Exception.Message" />
 
             
 
-             property of the new exception using the <paramref
-             name="message" />
+             property of the new exception using the <paramref name="message" />
 
             
 
-             parameter. The content of <paramref
-             name="message" />
+             parameter. The content of <paramref name="message" />
 
             
 
              is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.InvalidOperationException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -329,8 +313,7 @@ public class InvalidOpExample  {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.InvalidOperationException" />
+            >Initializes a new instance of the <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -338,7 +321,11 @@ public class InvalidOpExample  {
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -370,8 +357,7 @@ public class InvalidOpExample  {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format
-             type="text/html">
+            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format type="text/html">
               <a href="832AC524-21BC-419A-A27B-CA8BFC45840F"
                 >[&lt;topic://cpconSerialization&gt;]</a
               >
@@ -385,8 +371,7 @@ public class InvalidOpExample  {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.InvalidOperationException" />
+            >Initializes a new instance of the <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -394,14 +379,22 @@ public class InvalidOpExample  {
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -437,26 +430,22 @@ public class InvalidOpExample  {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.InvalidOperationException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -498,8 +487,7 @@ public class InvalidOpExample  {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.InvalidOperationException" />
+            >Initializes a new instance of the <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -507,19 +495,26 @@ public class InvalidOpExample  {
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 

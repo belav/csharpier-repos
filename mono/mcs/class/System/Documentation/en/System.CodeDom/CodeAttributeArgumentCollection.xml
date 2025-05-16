@@ -37,13 +37,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.CodeDom.CodeAttributeArgumentCollection" />
+        >The <see cref="T:System.CodeDom.CodeAttributeArgumentCollection" />
 
         
 
-         class provides a simple collection object that can be used to store a set of <see
-         cref="T:System.CodeDom.CodeAttributeArgument" />
+         class provides a simple collection object that can be used to store a set of <see cref="T:System.CodeDom.CodeAttributeArgument" />
 
         
 
@@ -53,8 +51,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.CodeDom.CodeAttributeArgument" />
+        >Represents a collection of <see cref="T:System.CodeDom.CodeAttributeArgument" />
 
         
 
@@ -82,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeAttributeArgumentCollection" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeArgumentCollection" />
 
             
 
@@ -116,13 +112,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeAttributeArgumentCollection" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeArgumentCollection" />
 
             
 
-             class containing the specified array of <see
-             cref="T:System.CodeDom.CodeAttributeArgument" />
+             class containing the specified array of <see cref="T:System.CodeDom.CodeAttributeArgument" />
 
             
 
@@ -130,12 +124,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.CodeDom.CodeAttributeArgument" />
+          An array of <see cref="T:System.CodeDom.CodeAttributeArgument" />
 
           
 
@@ -167,8 +164,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeAttributeArgumentCollection" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeArgumentCollection" />
 
             
 
@@ -176,12 +172,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeAttributeArgumentCollection" />
+          A <see cref="T:System.CodeDom.CodeAttributeArgumentCollection" />
 
           
 
@@ -215,8 +214,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.CodeDom.CodeAttributeArgument" />
+            >Adds the specified <see cref="T:System.CodeDom.CodeAttributeArgument" />
 
             
 
@@ -228,12 +226,15 @@
           <para>The index at which the new element was inserted.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeAttributeArgument" />
+          The <see cref="T:System.CodeDom.CodeAttributeArgument" />
 
           
 
@@ -267,8 +268,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the specified <see
-             cref="T:System.CodeDom.CodeAttributeArgument" />
+            >Copies the elements of the specified <see cref="T:System.CodeDom.CodeAttributeArgument" />
 
             
 
@@ -276,12 +276,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.CodeDom.CodeAttributeArgument" />
+          An array of type <see cref="T:System.CodeDom.CodeAttributeArgument" />
 
           
 
@@ -315,8 +318,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the contents of another <see
-             cref="T:System.CodeDom.CodeAttributeArgumentCollection" />
+            >Copies the contents of another <see cref="T:System.CodeDom.CodeAttributeArgumentCollection" />
 
             
 
@@ -324,12 +326,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeAttributeArgumentCollection" />
+          A <see cref="T:System.CodeDom.CodeAttributeArgumentCollection" />
 
           
 
@@ -363,8 +368,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the collection contains the specified <see
-             cref="T:System.CodeDom.CodeAttributeArgument" />
+            >Gets a value that indicates whether the collection contains the specified <see cref="T:System.CodeDom.CodeAttributeArgument" />
 
             
 
@@ -376,12 +380,15 @@
           <para>true if the collection contains the specified object; otherwise, false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeAttributeArgument" />
+          The <see cref="T:System.CodeDom.CodeAttributeArgument" />
 
           
 
@@ -416,8 +423,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the collection objects to a one-dimensional <see
-             cref="T:System.Array" />
+            >Copies the collection objects to a one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -425,19 +431,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
            that is the destination of the values copied from the collection. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -471,8 +484,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the specified <see
-             cref="T:System.CodeDom.CodeAttributeArgument" />
+            >Gets the index of the specified <see cref="T:System.CodeDom.CodeAttributeArgument" />
 
             
 
@@ -484,12 +496,15 @@
           <para>The index of the specified object, if found, in the collection; otherwise, -1.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeAttributeArgument" />
+          The <see cref="T:System.CodeDom.CodeAttributeArgument" />
 
           
 
@@ -524,8 +539,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts the specified <see
-             cref="T:System.CodeDom.CodeAttributeArgument" />
+            >Inserts the specified <see cref="T:System.CodeDom.CodeAttributeArgument" />
 
             
 
@@ -533,19 +547,26 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index where the specified object should be inserted. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeAttributeArgument" />
+          The <see cref="T:System.CodeDom.CodeAttributeArgument" />
 
           
 
@@ -607,8 +628,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.CodeDom.CodeAttributeArgument" />
+            >Removes the specified <see cref="T:System.CodeDom.CodeAttributeArgument" />
 
             
 
@@ -616,12 +636,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeAttributeArgument" />
+          The <see cref="T:System.CodeDom.CodeAttributeArgument" />
 
           
 

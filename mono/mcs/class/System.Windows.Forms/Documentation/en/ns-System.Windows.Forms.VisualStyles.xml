@@ -4,8 +4,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Windows.Forms.VisualStyles" />
+        >The <see cref="N:System.Windows.Forms.VisualStyles" />
 
         
 
@@ -15,8 +14,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Windows.Forms.VisualStyles" />
+        >The <see cref="N:System.Windows.Forms.VisualStyles" />
 
         
 
@@ -29,38 +27,31 @@
 
             
 
-             is a foundation class for identifying any control or UI element supported by visual styles. In addition to <see
-             cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+             is a foundation class for identifying any control or UI element supported by visual styles. In addition to <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
 
             
 
-             itself, the <see
-             cref="N:System.Windows.Forms.VisualStyles" />
+             itself, the <see cref="N:System.Windows.Forms.VisualStyles" />
 
             
 
-             namespace includes many nested classes of <see
-             cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+             namespace includes many nested classes of <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
 
             
 
-             with static properties that return a <see
-             cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+             with static properties that return a <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
 
             
 
-             for every state of a control, control part, or other UI element supported by visual styles. For example, the <see
-             cref="P:System.Windows.Forms.VisualStyles.VisualStyleElement.Button.PushButton.Pressed" />
+             for every state of a control, control part, or other UI element supported by visual styles. For example, the <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleElement.Button.PushButton.Pressed" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.Button.PushButton" />
+             property of the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.Button.PushButton" />
 
             
 
-             class returns a <see
-             cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+             class returns a <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
 
             
 
@@ -73,8 +64,7 @@
 
             
 
-             provides methods that draw and get information about each <see
-             cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+             provides methods that draw and get information about each <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
 
             
 
@@ -92,38 +82,31 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="N:System.Windows.Forms.VisualStyles" />
+        >The <see cref="N:System.Windows.Forms.VisualStyles" />
 
         
 
-         namespace also includes a set of enumerations. Some of these enumerations, such as <see
-         cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
+         namespace also includes a set of enumerations. Some of these enumerations, such as <see cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.VisualStyles.ComboBoxState" />
+         and <see cref="T:System.Windows.Forms.VisualStyles.ComboBoxState" />
 
         
 
-        , provide state definitions for related visual style elements. Most of the other enumerations support <see
-         cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
+        , provide state definitions for related visual style elements. Most of the other enumerations support <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
 
         
 
-         methods that return information about a particular element. For example, the <see
-         cref="T:System.Windows.Forms.VisualStyles.EnumProperty" />
+         methods that return information about a particular element. For example, the <see cref="T:System.Windows.Forms.VisualStyles.EnumProperty" />
 
         
 
-         enumeration provides the possible argument values for the <see
-         cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetEnumValue(System.Windows.Forms.VisualStyles.EnumProperty)" />
+         enumeration provides the possible argument values for the <see cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetEnumValue(System.Windows.Forms.VisualStyles.EnumProperty)" />
 
         
 
-         method. Finally, the <see
-         cref="T:System.Windows.Forms.VisualStyles.VisualStyleState" />
+         method. Finally, the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleState" />
 
         
 

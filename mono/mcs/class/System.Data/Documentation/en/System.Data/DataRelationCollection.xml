@@ -32,82 +32,68 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Data.DataRelationCollection" />
+        >A <see cref="T:System.Data.DataRelationCollection" />
 
         
 
-         object enables navigation between related parent/child <see
-         cref="T:System.Data.DataTable" />
+         object enables navigation between related parent/child <see cref="T:System.Data.DataTable" />
 
         
 
          objects.</para
       >
       <para
-        >You create a <see
-         cref="T:System.Data.DataRelationCollection" />
+        >You create a <see cref="T:System.Data.DataRelationCollection" />
 
         
 
-         object by defining it as a property of either the <see
-         cref="T:System.Data.DataSet" />
+         object by defining it as a property of either the <see cref="T:System.Data.DataSet" />
 
         
 
-         or the <see
-         cref="T:System.Data.DataTable" />
+         or the <see cref="T:System.Data.DataTable" />
 
         
 
-        , instead of by directly using a constructor. (Use the <see
-         cref="P:System.Data.DataSet.Relations" />
+        , instead of by directly using a constructor. (Use the <see cref="P:System.Data.DataSet.Relations" />
 
         
 
-         property of the <see
-         cref="T:System.Data.DataSet" />
+         property of the <see cref="T:System.Data.DataSet" />
 
         
 
-        , or the <see
-         cref="P:System.Data.DataTable.ParentRelations" />
+        , or the <see cref="P:System.Data.DataTable.ParentRelations" />
 
         
 
-         property of the <see
-         cref="T:System.Data.DataTable" />
+         property of the <see cref="T:System.Data.DataTable" />
 
         
 
         .) </para
       >
       <para
-        >To access the collection, use the <see
-         cref="P:System.Data.DataSet.Relations" />
+        >To access the collection, use the <see cref="P:System.Data.DataSet.Relations" />
 
         
 
-         property of the <see
-         cref="T:System.Data.DataSet" />
+         property of the <see cref="T:System.Data.DataSet" />
 
         
 
          object.</para
       >
       <para
-        >As soon as the collection exists you can manage the objects it contains by using methods such as <see
-         cref="M:System.Data.DataRelationCollection.Add(System.Data.DataRelation)" />
+        >As soon as the collection exists you can manage the objects it contains by using methods such as <see cref="M:System.Data.DataRelationCollection.Add(System.Data.DataRelation)" />
 
         
 
-        , <see
-         cref="M:System.Data.DataRelationCollection.Clear" />
+        , <see cref="M:System.Data.DataRelationCollection.Clear" />
 
         
 
-        , and <see
-         cref="M:System.Data.DataRelationCollection.Remove(System.Data.DataRelation)" />
+        , and <see cref="M:System.Data.DataRelationCollection.Remove(System.Data.DataRelation)" />
 
         
 
@@ -117,13 +103,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the collection of <see
-         cref="T:System.Data.DataRelation" />
+        >Represents the collection of <see cref="T:System.Data.DataRelation" />
 
         
 
-         objects for this <see
-         cref="T:System.Data.DataSet" />
+         objects for this <see cref="T:System.Data.DataSet" />
 
         
 
@@ -142,8 +126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.DataRelationCollection" />
+            >Initializes a new instance of the <see cref="T:System.Data.DataRelationCollection" />
 
             
 
@@ -169,26 +152,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the relation is successfully added to the collection, the <see
-             cref="E:System.Data.DataRelationCollection.CollectionChanged" />
+            >If the relation is successfully added to the collection, the <see cref="E:System.Data.DataRelationCollection.CollectionChanged" />
 
             
 
              event occurs.</para
           >
           <para
-            >When a <see
-             cref="T:System.Data.DataRelation" />
+            >When a <see cref="T:System.Data.DataRelation" />
 
             
 
-             object is added to the collection, <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+             object is added to the collection, <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
-             and <see
-             cref="T:System.Data.UniqueConstraint" />
+             and <see cref="T:System.Data.UniqueConstraint" />
 
             
 
@@ -198,13 +177,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Data.DataRelation" />
+            >Adds a <see cref="T:System.Data.DataRelation" />
 
             
 
-             to the <see
-             cref="T:System.Data.DataRelationCollection" />
+             to the <see cref="T:System.Data.DataRelationCollection" />
 
             
 
@@ -212,7 +189,11 @@
           >
         </summary>
         <param name="relation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -241,18 +222,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a <see
-             cref="T:System.Data.DataRelation" />
+            >When a <see cref="T:System.Data.DataRelation" />
 
             
 
-             object is added to the collection, <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+             object is added to the collection, <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
-             and <see
-             cref="T:System.Data.UniqueConstraint" />
+             and <see cref="T:System.Data.UniqueConstraint" />
 
             
 
@@ -262,8 +240,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Data.DataRelation" />
+            >Creates a <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -275,14 +252,22 @@
           <para>The created relation.</para>
         </returns>
         <param name="parentColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The parent column of the relation. </param
         >
         <param name="childColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -311,18 +296,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a <see
-             cref="T:System.Data.DataRelation" />
+            >When a <see cref="T:System.Data.DataRelation" />
 
             
 
-             object is added to the collection, <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+             object is added to the collection, <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
-             and <see
-             cref="T:System.Data.UniqueConstraint" />
+             and <see cref="T:System.Data.UniqueConstraint" />
 
             
 
@@ -332,8 +314,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Data.DataRelation" />
+            >Creates a <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -345,14 +326,22 @@
           <para>The created relation.</para>
         </returns>
         <param name="parentColumns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The parent columns of the relation. </param
         >
         <param name="childColumns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -382,18 +371,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a <see
-             cref="T:System.Data.DataRelation" />
+            >When a <see cref="T:System.Data.DataRelation" />
 
             
 
-             object is added to the collection, <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+             object is added to the collection, <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
-             and <see
-             cref="T:System.Data.UniqueConstraint" />
+             and <see cref="T:System.Data.UniqueConstraint" />
 
             
 
@@ -403,8 +389,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Data.DataRelation" />
+            >Creates a <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -416,21 +401,33 @@
           <para>The created relation.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the relation. </param
         >
         <param name="parentColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The parent column of the relation. </param
         >
         <param name="childColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -460,26 +457,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the relation is successfully added to the collection, the <see
-             cref="E:System.Data.DataRelationCollection.CollectionChanged" />
+            >If the relation is successfully added to the collection, the <see cref="E:System.Data.DataRelationCollection.CollectionChanged" />
 
             
 
              event occurs.</para
           >
           <para
-            >When a <see
-             cref="T:System.Data.DataRelation" />
+            >When a <see cref="T:System.Data.DataRelation" />
 
             
 
-             object is added to the collection, <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+             object is added to the collection, <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
-             and <see
-             cref="T:System.Data.UniqueConstraint" />
+             and <see cref="T:System.Data.UniqueConstraint" />
 
             
 
@@ -489,8 +482,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Data.DataRelation" />
+            >Creates a <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -502,26 +494,37 @@
           <para>The created DataRelation.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the DataRelation to create. </param
         >
         <param name="parentColumns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of parent <see
-           cref="T:System.Data.DataColumn" />
+          An array of parent <see cref="T:System.Data.DataColumn" />
 
           
 
            objects. </param
         >
         <param name="childColumns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -552,23 +555,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a <see
-             cref="T:System.Data.DataRelation" />
+            >When a <see cref="T:System.Data.DataRelation" />
 
             
 
-             object is added to the collection, <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+             object is added to the collection, <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
-             and <see
-             cref="T:System.Data.UniqueConstraint" />
+             and <see cref="T:System.Data.UniqueConstraint" />
 
             
 
-             objects are created by default if they do not already exist. To prevent this, you can set <paramref
-             name="createConstraints" />
+             objects are created by default if they do not already exist. To prevent this, you can set <paramref name="createConstraints" />
 
             
 
@@ -578,13 +577,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Data.DataRelation" />
+            >Creates a <see cref="T:System.Data.DataRelation" />
 
             
 
-             with the specified name, parent and child columns, with optional constraints according to the value of the <paramref
-             name="createConstraints" />
+             with the specified name, parent and child columns, with optional constraints according to the value of the <paramref name="createConstraints" />
 
             
 
@@ -596,28 +593,44 @@
           <para>The created relation.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the relation. </param
         >
         <param name="parentColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The parent column of the relation. </param
         >
         <param name="childColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The child column of the relation. </param
         >
         <param name="createConstraints">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -648,18 +661,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a <see
-             cref="T:System.Data.DataRelation" />
+            >When a <see cref="T:System.Data.DataRelation" />
 
             
 
-             object is added to the collection, <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+             object is added to the collection, <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
-             and <see
-             cref="T:System.Data.UniqueConstraint" />
+             and <see cref="T:System.Data.UniqueConstraint" />
 
             
 
@@ -669,8 +679,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Data.DataRelation" />
+            >Creates a <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -682,33 +691,48 @@
           <para>The created relation.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the DataRelation to create. </param
         >
         <param name="parentColumns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of parent <see
-           cref="T:System.Data.DataColumn" />
+          An array of parent <see cref="T:System.Data.DataColumn" />
 
           
 
            objects. </param
         >
         <param name="childColumns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of child DataColumn objects. </param
         >
         <param name="createConstraints">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -739,7 +763,11 @@
           <para>Performs verification on the table.</para>
         </summary>
         <param name="relation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -767,13 +795,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="M:System.Data.DataSet.BeginInit" />
+            >If <see cref="M:System.Data.DataSet.BeginInit" />
 
             
 
-             has been called, AddRange does not add any objects to the collection until <see
-             cref="M:System.Data.DataSet.EndInit" />
+             has been called, AddRange does not add any objects to the collection until <see cref="M:System.Data.DataSet.EndInit" />
 
             
 
@@ -783,8 +809,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the specified <see
-             cref="T:System.Data.DataRelation" />
+            >Copies the elements of the specified <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -792,12 +817,15 @@
           >
         </summary>
         <param name="relations">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array of <see
-           cref="T:System.Data.DataRelation" />
+          The array of <see cref="T:System.Data.DataRelation" />
 
           
 
@@ -826,8 +854,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Verifies whether the specified <see
-             cref="T:System.Data.DataRelation" />
+            >Verifies whether the specified <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -837,8 +864,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Data.DataRelation" />
+            >true if the <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -846,7 +872,11 @@
           >
         </returns>
         <param name="relation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -913,8 +943,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Verifies whether a <see
-             cref="T:System.Data.DataRelation" />
+            >Verifies whether a <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -926,7 +955,11 @@
           <para>true, if a relation with the specified name exists; otherwise false.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -959,8 +992,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the collection of <see
-             cref="T:System.Data.DataRelation" />
+            >Copies the collection of <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -968,19 +1000,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array of <see
-           cref="T:System.Data.DataRelation" />
+          The array of <see cref="T:System.Data.DataRelation" />
 
           
 
            objects to copy the collection to.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1031,8 +1070,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the specified <see
-             cref="T:System.Data.DataRelation" />
+            >Gets the index of the specified <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -1044,7 +1082,11 @@
           <para>The 0-based index of the relation, or -1 if the relation is not found in the collection.</para>
         </returns>
         <param name="relation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1070,8 +1112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the <see
-             cref="T:System.Data.DataRelation" />
+            >Gets the index of the <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -1083,7 +1124,11 @@
           <para>The zero-based index of the relation with the specified name, or -1 if the relation does not exist in the collection.</para>
         </returns>
         <param name="relationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1157,8 +1202,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For an overview, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For an overview, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1170,8 +1214,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Data.DataRelationCollection.CollectionChanged" />
+            >Raises the <see cref="E:System.Data.DataRelationCollection.CollectionChanged" />
 
             
 
@@ -1179,12 +1222,15 @@
           >
         </summary>
         <param name="ccevent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.CollectionChangeEventArgs" />
+          A <see cref="T:System.ComponentModel.CollectionChangeEventArgs" />
 
           
 
@@ -1216,8 +1262,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For an overview, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For an overview, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1229,8 +1274,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Data.DataRelationCollection.CollectionChanged" />
+            >Raises the <see cref="E:System.Data.DataRelationCollection.CollectionChanged" />
 
             
 
@@ -1238,12 +1282,15 @@
           >
         </summary>
         <param name="ccevent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.CollectionChangeEventArgs" />
+          A <see cref="T:System.ComponentModel.CollectionChangeEventArgs" />
 
           
 
@@ -1267,8 +1314,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Data.DataRelationCollection.CollectionChanged" />
+            >The <see cref="E:System.Data.DataRelationCollection.CollectionChanged" />
 
             
 
@@ -1280,7 +1326,11 @@
           <para>Removes the specified relation from the collection.</para>
         </summary>
         <param name="relation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1305,8 +1355,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Data.DataRelationCollection.CollectionChanged" />
+            >The <see cref="E:System.Data.DataRelationCollection.CollectionChanged" />
 
             
 
@@ -1318,7 +1367,11 @@
           <para>Removes the relation with the specified name from the collection.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1343,8 +1396,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Data.DataRelationCollection.CollectionChanged" />
+            >The <see cref="E:System.Data.DataRelationCollection.CollectionChanged" />
 
             
 
@@ -1356,7 +1408,11 @@
           <para>Removes the relation at the specified index from the collection.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1385,8 +1441,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a verification on the specified <see
-             cref="T:System.Data.DataRelation" />
+            >Performs a verification on the specified <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -1394,7 +1449,11 @@
           >
         </summary>
         <param name="relation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

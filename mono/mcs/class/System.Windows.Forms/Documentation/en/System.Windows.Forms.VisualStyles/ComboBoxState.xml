@@ -13,33 +13,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.VisualStyles.ComboBoxState" />
+        >The <see cref="T:System.Windows.Forms.VisualStyles.ComboBoxState" />
 
         
 
-         values correspond to the states of the <see
-         cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+         values correspond to the states of the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
 
         
 
-         objects exposed by the <see
-         cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.ComboBox.DropDownButton" />
+         objects exposed by the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.ComboBox.DropDownButton" />
 
         
 
-         class. The <see
-         cref="T:System.Windows.Forms.VisualStyles.ComboBoxState" />
+         class. The <see cref="T:System.Windows.Forms.VisualStyles.ComboBoxState" />
 
         
 
-         values are also used as an argument in the <see
-         cref="M:System.Windows.Forms.ComboBoxRenderer.DrawDropDownButton(System.Drawing.Graphics,System.Drawing.Rectangle,System.Windows.Forms.VisualStyles.ComboBoxState)" />
+         values are also used as an argument in the <see cref="M:System.Windows.Forms.ComboBoxRenderer.DrawDropDownButton(System.Drawing.Graphics,System.Drawing.Rectangle,System.Windows.Forms.VisualStyles.ComboBoxState)" />
 
         
 
-         and <see
-         cref="Overload:System.Windows.Forms.ComboBoxRenderer.DrawTextBox" />
+         and <see cref="Overload:System.Windows.Forms.ComboBoxRenderer.DrawTextBox" />
 
         
 

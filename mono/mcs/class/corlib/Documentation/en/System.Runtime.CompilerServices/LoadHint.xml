@@ -18,21 +18,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use this enumeration with the <see
-         cref="T:System.Runtime.CompilerServices.DependencyAttribute" />
+        >Use this enumeration with the <see cref="T:System.Runtime.CompilerServices.DependencyAttribute" />
 
         
 
-         attribute and the <see
-         cref="T:System.Runtime.CompilerServices.DefaultDependencyAttribute" />
+         attribute and the <see cref="T:System.Runtime.CompilerServices.DefaultDependencyAttribute" />
 
         
 
          attribute to specify the preferred default binding for a dependent assembly.</para
       >
       <para
-        >Note that the Default value directs the native generation service to consult the dependent assembly for its preferred default binding, which is specified using the <see
-         cref="T:System.Runtime.CompilerServices.DefaultDependencyAttribute" />
+        >Note that the Default value directs the native generation service to consult the dependent assembly for its preferred default binding, which is specified using the <see cref="T:System.Runtime.CompilerServices.DefaultDependencyAttribute" />
 
         
 

@@ -16,18 +16,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To define a custom <see
-         cref="P:System.Drawing.Pen.DashStyle" />
+        >To define a custom <see cref="P:System.Drawing.Pen.DashStyle" />
 
         
 
-        , set the <see
-         cref="P:System.Drawing.Pen.DashPattern" />
+        , set the <see cref="P:System.Drawing.Pen.DashPattern" />
 
         
 
-         property of the <see
-         cref="T:System.Drawing.Pen" />
+         property of the <see cref="T:System.Drawing.Pen" />
 
         
 
@@ -37,8 +34,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the style of dashed lines drawn with a <see
-         cref="T:System.Drawing.Pen" />
+        >Specifies the style of dashed lines drawn with a <see cref="T:System.Drawing.Pen" />
 
         
 

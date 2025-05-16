@@ -44,8 +44,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The predefined claim types can be found at   <see
-             cref="T:System.IdentityModel.Claims.ClaimTypes" />
+            >The predefined claim types can be found at   <see cref="T:System.IdentityModel.Claims.ClaimTypes" />
 
             
 
@@ -55,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.Tokens.ClaimTypeRequirement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.ClaimTypeRequirement" />
 
             
 
@@ -64,7 +62,11 @@
           >
         </summary>
         <param name="claimType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -94,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.Tokens.ClaimTypeRequirement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.ClaimTypeRequirement" />
 
             
 
@@ -103,14 +104,22 @@
           >
         </summary>
         <param name="claimType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The claim type.</param
         >
         <param name="isOptional">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -44,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
 
             
 
@@ -103,8 +102,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
 
             
 
@@ -138,8 +136,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
 
             
 
@@ -173,8 +170,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
 
             
 
@@ -236,8 +232,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
 
             
 
@@ -271,8 +266,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
 
             
 
@@ -306,8 +300,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
 
             
 
@@ -369,8 +362,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
 
             
 
@@ -404,8 +396,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
 
             
 
@@ -439,8 +430,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
 
             
 
@@ -474,8 +464,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
 
             
 
@@ -509,8 +498,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden, provides a string value that will be used for comparison in the <see
-             cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsAsymmetricKeyWrapAlgorithmSupported(System.String)" />
+            >When overridden, provides a string value that will be used for comparison in the <see cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsAsymmetricKeyWrapAlgorithmSupported(System.String)" />
 
             
 
@@ -544,8 +532,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden, provides a string value that will be used for comparison in the <see
-             cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsAsymmetricSignatureAlgorithmSupported(System.String)" />
+            >When overridden, provides a string value that will be used for comparison in the <see cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsAsymmetricSignatureAlgorithmSupported(System.String)" />
 
             
 
@@ -579,8 +566,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden, provides a string value that will be used for comparison in the method <see
-             cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsCanonicalizationAlgorithmSupported(System.String)" />
+            >When overridden, provides a string value that will be used for comparison in the method <see cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsCanonicalizationAlgorithmSupported(System.String)" />
 
             
 
@@ -611,8 +597,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden, provides a string value that will be used for comparison in the <see
-             cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsDigestAlgorithmSupported(System.String)" />
+            >When overridden, provides a string value that will be used for comparison in the <see cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsDigestAlgorithmSupported(System.String)" />
 
             
 
@@ -646,8 +631,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden, provides a string value that will be used for comparison in the <see
-             cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsEncryptionAlgorithmSupported(System.String)" />
+            >When overridden, provides a string value that will be used for comparison in the <see cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsEncryptionAlgorithmSupported(System.String)" />
 
             
 
@@ -685,8 +669,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the default encryption key derivation length as an <see
-             cref="T:System.Int32" />
+            >Gets the default encryption key derivation length as an <see cref="T:System.Int32" />
 
             
 
@@ -720,8 +703,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the default signature key derivation length as an <see
-             cref="T:System.Int32" />
+            >Gets the default signature key derivation length as an <see cref="T:System.Int32" />
 
             
 
@@ -755,8 +737,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the default symmetric key length as an <see
-             cref="T:System.Int32" />
+            >Gets the default symmetric key length as an <see cref="T:System.Int32" />
 
             
 
@@ -848,7 +829,11 @@
           <para>true if the key length is supported by the asymmetric algorithm; otherwise, false.</para>
         </returns>
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -883,8 +868,7 @@
 
             
 
-             gets compared to the string returned from <see
-             cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultAsymmetricKeyWrapAlgorithm" />
+             gets compared to the string returned from <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultAsymmetricKeyWrapAlgorithm" />
 
             
 
@@ -900,7 +884,11 @@
           <para>true if the asymmetric key wrap algorithm is supported; otherwise, false.</para>
         </returns>
         <param name="algorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -935,8 +923,7 @@
 
             
 
-             gets compared to the string returned from <see
-             cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultAsymmetricSignatureAlgorithm" />
+             gets compared to the string returned from <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultAsymmetricSignatureAlgorithm" />
 
             
 
@@ -952,7 +939,11 @@
           <para>true if the asymmetric signature algorithm is supported; otherwise, false.</para>
         </returns>
         <param name="algorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -987,8 +978,7 @@
 
             
 
-             gets compared to the string returned from <see
-             cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultCanonicalizationAlgorithm" />
+             gets compared to the string returned from <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultCanonicalizationAlgorithm" />
 
             
 
@@ -1004,7 +994,11 @@
           <para>true if the canonicalization algorithm is supported; otherwise, false.</para>
         </returns>
         <param name="algorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1039,8 +1033,7 @@
 
             
 
-             gets compared to the string returned from <see
-             cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultDigestAlgorithm" />
+             gets compared to the string returned from <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultDigestAlgorithm" />
 
             
 
@@ -1056,7 +1049,11 @@
           <para>true if the digest algorithm is supported; otherwise, false.</para>
         </returns>
         <param name="algorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1091,8 +1088,7 @@
 
             
 
-             gets compared to the string returned from <see
-             cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultEncryptionAlgorithm" />
+             gets compared to the string returned from <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultEncryptionAlgorithm" />
 
             
 
@@ -1108,7 +1104,11 @@
           <para>true if the encryption algorithm is supported; otherwise, false.</para>
         </returns>
         <param name="algorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1146,7 +1146,11 @@
           <para>true if the encryption key derivation algorithm is supported; otherwise, false.</para>
         </returns>
         <param name="algorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1184,7 +1188,11 @@
           <para>true if the signature key derivation algorithm is supported; otherwise, false.</para>
         </returns>
         <param name="algorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1215,13 +1223,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="length" />
+            >The <paramref name="length" />
 
             
 
-             is compared to a range of values depending on the subclass. For example, in the TripleDES subclass, this method verifies that <paramref
-             name="length" />
+             is compared to a range of values depending on the subclass. For example, in the TripleDES subclass, this method verifies that <paramref name="length" />
 
             
 
@@ -1237,7 +1243,11 @@
           <para>true if the symmetric key length is supported; otherwise, false.</para>
         </returns>
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1275,7 +1285,11 @@
           <para>true if the symmetric key wrap algorithm is supported; otherwise, false.</para>
         </returns>
         <param name="algorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1313,7 +1327,11 @@
           <para>true if the symmetric signature algorithm is supported; otherwise, false.</para>
         </returns>
         <param name="algorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1342,8 +1360,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
 
             
 
@@ -1377,8 +1394,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
 
             
 
@@ -1412,8 +1428,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
 
             
 
@@ -1447,8 +1462,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
 
             
 

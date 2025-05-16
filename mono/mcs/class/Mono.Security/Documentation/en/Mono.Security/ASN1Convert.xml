@@ -8,7 +8,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -37,8 +39,7 @@
       </Parameters>
       <Docs>
         <param name="dt"
-          >a <see
-           cref="T:System.DateTime" />
+          >a <see cref="T:System.DateTime" />
 
           
 
@@ -46,8 +47,7 @@
         >
         <summary>Convert a DateTime to an ASN.1 object.</summary>
         <returns
-          >an <see
-           cref="T:Mono.Security.ASN1" />
+          >an <see cref="T:Mono.Security.ASN1" />
 
           
 
@@ -56,8 +56,7 @@
         <remarks>
           <para>Dates before 2050 are encoded using ASN.1's UTCTIME ("yyMMddHHmmss") while dates after 2050 are encoded with GENERALIZEDTIME ("yyyyMMddHHmmss"). This logic is implemented for compliance with RFC3280.</para>
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 	DateTime now = DateTime.UtcNow;
 	ASN1 asnNow = ASN1Convert.FromOid (now);
   </code
@@ -84,8 +83,7 @@
       </Parameters>
       <Docs>
         <param name="value"
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
@@ -93,8 +91,7 @@
         >
         <summary>Convert an integer to convert into an ASN.1 object.</summary>
         <returns
-          >an <see
-           cref="T:Mono.Security.ASN1" />
+          >an <see cref="T:Mono.Security.ASN1" />
 
           
 
@@ -106,7 +103,8 @@
             <code lang="C#">
 	int i = 16;
 	ASN1 asnSixteen = ASN1Convert.FromOid (i);
-  </code>
+  </code
+            >
           </example>
         </remarks>
       </Docs>
@@ -131,8 +129,7 @@
         <param name="oid">a OID string in the dotted (RFC) notation.</param>
         <summary>Convert an OID string to an ASN.1 object.</summary>
         <returns
-          >an <see
-           cref="T:Mono.Security.ASN1" />
+          >an <see cref="T:Mono.Security.ASN1" />
 
           
 
@@ -140,21 +137,18 @@
         >
         <remarks>
           <para
-            >The convertion from a string OID to a binary one is done by <see
-             cref="T:System.Security.Cryptography.CryptoConfig" />
+            >The convertion from a string OID to a binary one is done by <see cref="T:System.Security.Cryptography.CryptoConfig" />
 
             
 
-            .<see
-             cref="M:System.Security.Cryptography.CryptoConfig.EncodeOID" />
+            .<see cref="M:System.Security.Cryptography.CryptoConfig.EncodeOID" />
 
             
 
              so the documented limitations applies.</para
           >
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 	string oidSha1 = "1.3.14.3.2.26";
 	ASN1 asnOidSha1 = ASN1Convert.FromOid (oidSha1);
   </code
@@ -183,8 +177,7 @@
         <param name="big">an array of bytes representing a big unsigned integer.</param>
         <summary>Convert an unsigned big integer, represented as an array of bytes, to an ASN.1 object.</summary>
         <returns
-          >an <see
-           cref="T:Mono.Security.ASN1" />
+          >an <see cref="T:Mono.Security.ASN1" />
 
           
 
@@ -211,8 +204,7 @@
       </Parameters>
       <Docs>
         <param name="time"
-          >an <see
-           cref="T:Mono.Security.ASN1" />
+          >an <see cref="T:Mono.Security.ASN1" />
 
           
 
@@ -220,8 +212,7 @@
         >
         <summary>Convert an ASN.1 object to a DateTime.</summary>
         <returns
-          >the <see
-           cref="T:System.DateTime" />
+          >the <see cref="T:System.DateTime" />
 
           
 
@@ -245,8 +236,7 @@
       </Parameters>
       <Docs>
         <param name="asn1"
-          >an <see
-           cref="T:Mono.Security.ASN1" />
+          >an <see cref="T:Mono.Security.ASN1" />
 
           
 
@@ -254,16 +244,14 @@
         >
         <summary>Convert an ASN.1 object to an integer.</summary>
         <returns
-          >an <see
-           cref="T:System.Int32" />
+          >an <see cref="T:System.Int32" />
 
           
 
            decoded from the ASN.1 object.</returns
         >
         <remarks
-          >A <see
-           cref="T:System.FormatException" />
+          >A <see cref="T:System.FormatException" />
 
           
 
@@ -289,8 +277,7 @@
       </Parameters>
       <Docs>
         <param name="asn1"
-          >an <see
-           cref="T:Mono.Security.ASN1" />
+          >an <see cref="T:Mono.Security.ASN1" />
 
           
 

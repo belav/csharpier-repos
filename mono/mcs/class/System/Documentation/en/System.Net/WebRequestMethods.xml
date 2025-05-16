@@ -20,18 +20,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Container class for <see
-         cref="T:System.Net.WebRequestMethods.Ftp" />
+        >Container class for <see cref="T:System.Net.WebRequestMethods.Ftp" />
 
         
 
-        , <see
-         cref="T:System.Net.WebRequestMethods.File" />
+        , <see cref="T:System.Net.WebRequestMethods.File" />
 
         
 
-        , and <see
-         cref="T:System.Net.WebRequestMethods.Http" />
+        , and <see cref="T:System.Net.WebRequestMethods.Http" />
 
         
 

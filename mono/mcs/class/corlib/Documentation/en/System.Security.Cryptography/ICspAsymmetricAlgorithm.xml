@@ -24,18 +24,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Classes that extend the <see
-         cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+        >Classes that extend the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
 
         
 
-         class should implement the <see
-         cref="T:System.Security.Cryptography.ICspAsymmetricAlgorithm" />
+         class should implement the <see cref="T:System.Security.Cryptography.ICspAsymmetricAlgorithm" />
 
         
 
-         interface to enumerate key container information using a <see
-         cref="T:System.Security.Cryptography.CspKeyContainerInfo" />
+         interface to enumerate key container information using a <see cref="T:System.Security.Cryptography.CspKeyContainerInfo" />
 
         
 
@@ -45,8 +42,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines methods that allow an <see
-         cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+        >Defines methods that allow an <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
 
         
 
@@ -78,8 +74,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The returned <see
-             cref="T:System.Security.Cryptography.CspKeyContainerInfo" />
+            >The returned <see cref="T:System.Security.Cryptography.CspKeyContainerInfo" />
 
             
 
@@ -89,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Security.Cryptography.CspKeyContainerInfo" />
+            >Gets a <see cref="T:System.Security.Cryptography.CspKeyContainerInfo" />
 
             
 
@@ -124,8 +118,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.ICspAsymmetricAlgorithm.ExportCspBlob(System.Boolean)" />
+            >The <see cref="M:System.Security.Cryptography.ICspAsymmetricAlgorithm.ExportCspBlob(System.Boolean)" />
 
             
 
@@ -135,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Exports a blob that contains the key information associated with an <see
-             cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+            >Exports a blob that contains the key information associated with an <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
 
             
 
@@ -146,8 +138,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A byte array that contains the key information associated with an <see
-             cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+            >A byte array that contains the key information associated with an <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
 
             
 
@@ -155,7 +146,11 @@
           >
         </returns>
         <param name="includePrivateParameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -185,13 +180,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.ICspAsymmetricAlgorithm.ImportCspBlob(System.Byte[])" />
+            >The <see cref="M:System.Security.Cryptography.ICspAsymmetricAlgorithm.ImportCspBlob(System.Byte[])" />
 
             
 
-             method initializes the key data of an <see
-             cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+             method initializes the key data of an <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
 
             
 
@@ -203,7 +196,11 @@
           <para>Imports a blob that represents asymmetric key information.  </para>
         </summary>
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

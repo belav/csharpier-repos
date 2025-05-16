@@ -19,31 +19,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.DesignerActionPropertyItem" />
+        >The <see cref="T:System.ComponentModel.Design.DesignerActionPropertyItem" />
 
         
 
-         class represents individual items in a smart tag panel. Each item is typically associated with a property in a class that is derived from the <see
-         cref="T:System.ComponentModel.Design.DesignerActionList" />
+         class represents individual items in a smart tag panel. Each item is typically associated with a property in a class that is derived from the <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
         
 
-         class and supplied by the component author. The association is maintained through the name of the property, as stored in the <see
-         cref="P:System.ComponentModel.Design.DesignerActionPropertyItem.MemberName" />
+         class and supplied by the component author. The association is maintained through the name of the property, as stored in the <see cref="P:System.ComponentModel.Design.DesignerActionPropertyItem.MemberName" />
 
         
 
          property. </para
       >
       <para
-        >Individual panel items are associated together to form a panel by a call to the <see
-         cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+        >Individual panel items are associated together to form a panel by a call to the <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
 
         
 
-         method of the <see
-         cref="T:System.ComponentModel.Design.DesignerActionList" />
+         method of the <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
         
 
@@ -64,8 +59,7 @@
         <item>
           <term>
             <para
-              >Has an associated type editor (<see
-               cref="T:System.Drawing.Design.UITypeEditor" />
+              >Has an associated type editor (<see cref="T:System.Drawing.Design.UITypeEditor" />
 
               
 
@@ -79,8 +73,7 @@
         <item>
           <term>
             <para
-              >Has an associated type converter to a known type (<see
-               cref="T:System.ComponentModel.TypeConverter" />
+              >Has an associated type converter to a known type (<see cref="T:System.ComponentModel.TypeConverter" />
 
               
 
@@ -89,13 +82,11 @@
           </term>
           <description>
             <para
-              >The type editor for the known type is displayed for editing the property's value. For example, a type converter to <see
-               cref="T:System.String" />
+              >The type editor for the known type is displayed for editing the property's value. For example, a type converter to <see cref="T:System.String" />
 
               
 
-               will likely display a <see
-               cref="T:System.Windows.Forms.TextBox" />
+               will likely display a <see cref="T:System.Windows.Forms.TextBox" />
 
               
 
@@ -117,8 +108,7 @@
           </term>
           <description>
             <para
-              >The item is displayed as a non-editable text string using the data type's <see
-               cref="M:System.Object.ToString" />
+              >The item is displayed as a non-editable text string using the data type's <see cref="M:System.Object.ToString" />
 
               
 
@@ -128,32 +118,27 @@
         </item>
       </list>
       <para
-        >All fundamental types, such as <see
-         cref="T:System.Boolean" />
+        >All fundamental types, such as <see cref="T:System.Boolean" />
 
         
 
-        , and common dnprdnshort data types, such as <see
-         cref="T:System.String" />
+        , and common dnprdnshort data types, such as <see cref="T:System.String" />
 
         
 
-        , supply standard type converters and editors. For more information about type converters, see <format
-         type="text/html">
+        , supply standard type converters and editors. For more information about type converters, see <format type="text/html">
           <a href="90373a3f-d8c8-492d-841c-945d62393c56">How to: Implement a Type Converter</a>
         </format>
 
         
 
-         or <format
-         type="text/html">
+         or <format type="text/html">
           <a href="49253ae6-7657-4810-82ab-1176a6feeada">Generalized Type Conversion</a>
         </format>
 
         
 
-        . For more information about type editors, see <format
-         type="text/html">
+        . For more information about type editors, see <format type="text/html">
           <a href="ed961fb9-ee02-4666-b511-05f3204bb75c">How to: Implement a UI Type Editor</a>
         </format>
 
@@ -165,8 +150,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a panel item that is associated with a property in a class derived from <see
-         cref="T:System.ComponentModel.Design.DesignerActionList" />
+        >Represents a panel item that is associated with a property in a class derived from <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
         
 
@@ -192,31 +176,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.DesignerActionPropertyItem.#ctor(System.String,System.String)" />
+            >The <see cref="M:System.ComponentModel.Design.DesignerActionPropertyItem.#ctor(System.String,System.String)" />
 
             
 
-             constructor sets the <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.Category" />
+             constructor sets the <see cref="P:System.ComponentModel.Design.DesignerActionItem.Category" />
 
             
 
-             and <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
+             and <see cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
 
             
 
              properties to null.</para
           >
           <para
-            >The <paramref
-             name="memberName" />
+            >The <paramref name="memberName" />
 
             
 
-             parameter refers to the name of the associated property that is a member of the programmer-supplied class derived from the <see
-             cref="T:System.ComponentModel.Design.DesignerActionList" />
+             parameter refers to the name of the associated property that is a member of the programmer-supplied class derived from the <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
             
 
@@ -226,8 +205,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignerActionPropertyItem" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerActionPropertyItem" />
 
             
 
@@ -235,14 +213,22 @@
           >
         </summary>
         <param name="memberName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The case-sensitive name of the property associated with this panel item.</param
         >
         <param name="displayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -268,39 +254,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.DesignerActionPropertyItem.#ctor(System.String,System.String,System.String)" />
+            >The <see cref="M:System.ComponentModel.Design.DesignerActionPropertyItem.#ctor(System.String,System.String,System.String)" />
 
             
 
-             constructor sets the <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
+             constructor sets the <see cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
 
             
 
              property to null.</para
           >
           <para
-            >For more information about how the <paramref
-             name="category" />
+            >For more information about how the <paramref name="category" />
 
             
 
-             parameter is used to group items on a panel, see the <see
-             cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+             parameter is used to group items on a panel, see the <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
 
             
 
              method.</para
           >
           <para
-            >The <paramref
-             name="memberName" />
+            >The <paramref name="memberName" />
 
             
 
-             parameter refers to the name of the associated property that is a member of the programmer-supplied class derived from <see
-             cref="T:System.ComponentModel.Design.DesignerActionList" />
+             parameter refers to the name of the associated property that is a member of the programmer-supplied class derived from <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
             
 
@@ -310,8 +290,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignerActionPropertyItem" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerActionPropertyItem" />
 
             
 
@@ -319,26 +298,37 @@
           >
         </summary>
         <param name="memberName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The case-sensitive name of the property associated with this panel item.</param
         >
         <param name="displayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The panel text for this item.</param
         >
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The case-sensitive <see
-           cref="T:System.String" />
+          The case-sensitive <see cref="T:System.String" />
 
           
 
@@ -365,26 +355,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about how the <paramref
-             name="category" />
+            >For more information about how the <paramref name="category" />
 
             
 
-             parameter is used to group items on a panel, see the <see
-             cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+             parameter is used to group items on a panel, see the <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
 
             
 
              method.</para
           >
           <para
-            >The <paramref
-             name="memberName" />
+            >The <paramref name="memberName" />
 
             
 
-             parameter refers to the name of the associated property that is a member of the programmer-supplied class derived from the <see
-             cref="T:System.ComponentModel.Design.DesignerActionList" />
+             parameter refers to the name of the associated property that is a member of the programmer-supplied class derived from the <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
             
 
@@ -394,8 +380,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignerActionPropertyItem" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerActionPropertyItem" />
 
             
 
@@ -403,33 +388,48 @@
           >
         </summary>
         <param name="memberName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The case-sensitive name of the property associated with this panel item.</param
         >
         <param name="displayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The panel text for this item.</param
         >
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The case-sensitive <see
-           cref="T:System.String" />
+          The case-sensitive <see cref="T:System.String" />
 
           
 
            used to group similar items on the panel.</param
         >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -451,13 +451,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.Design.DesignerActionPropertyItem.MemberName" />
+            >The <see cref="P:System.ComponentModel.Design.DesignerActionPropertyItem.MemberName" />
 
             
 
-             property specifies which property—in the class derived from the <see
-             cref="T:System.ComponentModel.Design.DesignerActionList" />
+             property specifies which property—in the class derived from the <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
             
 
@@ -494,21 +492,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >With the <see
-             cref="P:System.ComponentModel.Design.DesignerActionPropertyItem.RelatedComponent" />
+            >With the <see cref="P:System.ComponentModel.Design.DesignerActionPropertyItem.RelatedComponent" />
 
             
 
-             property, another component can lend its pull-model panel items to the current list. For example, a user control might aggregate the <see
-             cref="T:System.ComponentModel.Design.DesignerActionItem" />
+             property, another component can lend its pull-model panel items to the current list. For example, a user control might aggregate the <see cref="T:System.ComponentModel.Design.DesignerActionItem" />
 
             
 
              objects from one or more of its constituent controls.</para
           >
           <para
-            >This property works in conjunction with the <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.AllowAssociate" />
+            >This property works in conjunction with the <see cref="P:System.ComponentModel.Design.DesignerActionItem.AllowAssociate" />
 
             
 

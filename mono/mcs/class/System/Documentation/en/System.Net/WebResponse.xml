@@ -41,14 +41,12 @@
   <Docs>
     <example>
       <para
-        >The following example creates a <see
-         cref="T:System.Net.WebResponse" />
+        >The following example creates a <see cref="T:System.Net.WebResponse" />
 
         
 
         
-instance from a <see
-         cref="T:System.Net.WebRequest" />
+instance from a <see cref="T:System.Net.WebRequest" />
 
         
 
@@ -82,36 +80,30 @@ public class WebResponseExample {
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.WebResponse" />
+        >The <see cref="T:System.Net.WebResponse" />
 
         
 
-         class is the abstract base class from which protocol-specific response classes are derived. Applications can participate in request and response transactions in a protocol-agnostic manner using instances of the <see
-         cref="T:System.Net.WebResponse" />
+         class is the abstract base class from which protocol-specific response classes are derived. Applications can participate in request and response transactions in a protocol-agnostic manner using instances of the <see cref="T:System.Net.WebResponse" />
 
         
 
-         class while protocol-specific classes derived from <see
-         cref="T:System.Net.WebResponse" />
+         class while protocol-specific classes derived from <see cref="T:System.Net.WebResponse" />
 
         
 
          carry out the details of the request.</para
       >
       <para
-        >Client applications do not create <see
-         cref="T:System.Net.WebResponse" />
+        >Client applications do not create <see cref="T:System.Net.WebResponse" />
 
         
 
-         objects directly; they are created by calling the <see
-         cref="M:System.Net.WebRequest.GetResponse" />
+         objects directly; they are created by calling the <see cref="M:System.Net.WebRequest.GetResponse" />
 
         
 
-         method on a <see
-         cref="T:System.Net.WebRequest" />
+         method on a <see cref="T:System.Net.WebRequest" />
 
         
 
@@ -146,18 +138,15 @@ public class WebResponseExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applications do not call the <see
-             cref="T:System.Net.WebResponse" />
+            >Applications do not call the <see cref="T:System.Net.WebResponse" />
 
             
 
-             constructor directly; use the <see
-             cref="M:System.Net.WebRequest.GetResponse" />
+             constructor directly; use the <see cref="M:System.Net.WebRequest.GetResponse" />
 
             
 
-             method on a <see
-             cref="T:System.Net.WebRequest" />
+             method on a <see cref="T:System.Net.WebRequest" />
 
             
 
@@ -167,8 +156,7 @@ public class WebResponseExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.WebResponse" />
+            >Initializes a new instance of the <see cref="T:System.Net.WebResponse" />
 
             
 
@@ -201,13 +189,11 @@ public class WebResponseExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When implemented by a descendant class, this constructor implements the <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+            >When implemented by a descendant class, this constructor implements the <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
-             interface for the <see
-             cref="T:System.Net.WebResponse" />
+             interface for the <see cref="T:System.Net.WebResponse" />
 
             
 
@@ -217,18 +203,15 @@ public class WebResponseExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.WebResponse" />
+            >Initializes a new instance of the <see cref="T:System.Net.WebResponse" />
 
             
 
-             class from the specified instances of the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             class from the specified instances of the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             and <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             and <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -236,34 +219,38 @@ public class WebResponseExample {
           >
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          An instance of the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
-           class that contains the information required to serialize the new <see
-           cref="T:System.Net.WebRequest" />
+           class that contains the information required to serialize the new <see cref="T:System.Net.WebRequest" />
 
           
 
            instance. </param
         >
         <param name="streamingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          An instance of the <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
-           class that indicates the source of the serialized stream that is associated with the new <see
-           cref="T:System.Net.WebRequest" />
+           class that indicates the source of the serialized stream that is associated with the new <see cref="T:System.Net.WebRequest" />
 
           
 
@@ -295,18 +282,15 @@ public class WebResponseExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.WebResponse.Close" />
+            >The <see cref="M:System.Net.WebResponse.Close" />
 
             
 
-             method cleans up the resources used by a <see
-             cref="T:System.Net.WebResponse" />
+             method cleans up the resources used by a <see cref="T:System.Net.WebResponse" />
 
             
 
-             and closes the underlying stream by calling the <see
-             cref="M:System.IO.Stream.Close" />
+             and closes the underlying stream by calling the <see cref="M:System.IO.Stream.Close" />
 
             
 
@@ -314,13 +298,11 @@ public class WebResponseExample {
           >
           <block subset="none" type="note">
             <para
-              >The response must be closed to avoid running out of system resources. The response stream can be closed by calling <see
-               cref="M:System.IO.Stream.Close" />
+              >The response must be closed to avoid running out of system resources. The response stream can be closed by calling <see cref="M:System.IO.Stream.Close" />
 
               
 
-               or <see
-               cref="M:System.Net.WebResponse.Close" />
+               or <see cref="M:System.Net.WebResponse.Close" />
 
               
 
@@ -329,28 +311,23 @@ public class WebResponseExample {
           </block>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Net.WebResponse" />
+              >The <see cref="T:System.Net.WebResponse" />
 
               
 
-               class is an abstract class. The actual behavior of <see
-               cref="T:System.Net.WebResponse" />
+               class is an abstract class. The actual behavior of <see cref="T:System.Net.WebResponse" />
 
               
 
-               instances at run time is determined by the descendant class returned by <see
-               cref="M:System.Net.WebRequest.GetResponse" />
+               instances at run time is determined by the descendant class returned by <see cref="M:System.Net.WebRequest.GetResponse" />
 
               
 
-              . For more information about default values and exceptions, please see the documentation for the descendant classes, such as <see
-               cref="T:System.Net.HttpWebResponse" />
+              . For more information about default values and exceptions, please see the documentation for the descendant classes, such as <see cref="T:System.Net.HttpWebResponse" />
 
               
 
-               and <see
-               cref="T:System.Net.FileWebResponse" />
+               and <see cref="T:System.Net.FileWebResponse" />
 
               
 
@@ -385,8 +362,7 @@ public class WebResponseExample {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int64" />
+            >A <see cref="T:System.Int64" />
 
             
 
@@ -400,13 +376,11 @@ containing the number of bytes returned from the resource.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.WebResponse.ContentLength" />
+            >The <see cref="P:System.Net.WebResponse.ContentLength" />
 
             
 
-             property contains the length, in bytes, of the response from the Internet resource. For request methods that contain header information, the <see
-             cref="P:System.Net.WebResponse.ContentLength" />
+             property contains the length, in bytes, of the response from the Internet resource. For request methods that contain header information, the <see cref="P:System.Net.WebResponse.ContentLength" />
 
             
 
@@ -414,28 +388,23 @@ containing the number of bytes returned from the resource.</para
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Net.WebResponse" />
+              >The <see cref="T:System.Net.WebResponse" />
 
               
 
-               class is an abstract class. The actual behavior of <see
-               cref="T:System.Net.WebResponse" />
+               class is an abstract class. The actual behavior of <see cref="T:System.Net.WebResponse" />
 
               
 
-               instances at run time is determined by the descendant class returned by <see
-               cref="M:System.Net.WebRequest.GetResponse" />
+               instances at run time is determined by the descendant class returned by <see cref="M:System.Net.WebRequest.GetResponse" />
 
               
 
-              . For more information about default values and exceptions, please see the documentation for the descendant classes, such as <see
-               cref="T:System.Net.HttpWebResponse" />
+              . For more information about default values and exceptions, please see the documentation for the descendant classes, such as <see cref="T:System.Net.HttpWebResponse" />
 
               
 
-               and <see
-               cref="T:System.Net.FileWebResponse" />
+               and <see cref="T:System.Net.FileWebResponse" />
 
               
 
@@ -470,8 +439,7 @@ containing the number of bytes returned from the resource.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -485,8 +453,7 @@ containing the number of bytes returned from the resource.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.WebResponse.ContentType" />
+            >The <see cref="P:System.Net.WebResponse.ContentType" />
 
             
 
@@ -494,28 +461,23 @@ containing the number of bytes returned from the resource.</para
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Net.WebResponse" />
+              >The <see cref="T:System.Net.WebResponse" />
 
               
 
-               class is an abstract class. The actual behavior of <see
-               cref="T:System.Net.WebResponse" />
+               class is an abstract class. The actual behavior of <see cref="T:System.Net.WebResponse" />
 
               
 
-               instances at run time is determined by the descendant class returned by <see
-               cref="M:System.Net.WebRequest.GetResponse" />
+               instances at run time is determined by the descendant class returned by <see cref="M:System.Net.WebRequest.GetResponse" />
 
               
 
-              . For more information about default values and exceptions, please see the documentation for the descendant classes, such as <see
-               cref="T:System.Net.HttpWebResponse" />
+              . For more information about default values and exceptions, please see the documentation for the descendant classes, such as <see cref="T:System.Net.HttpWebResponse" />
 
               
 
-               and <see
-               cref="T:System.Net.FileWebResponse" />
+               and <see cref="T:System.Net.FileWebResponse" />
 
               
 
@@ -549,8 +511,7 @@ containing the number of bytes returned from the resource.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Net.WebResponse" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Net.WebResponse" />
 
             
 
@@ -579,36 +540,30 @@ containing the number of bytes returned from the resource.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Net.WebResponse" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Net.WebResponse" />
 
             
 
@@ -616,8 +571,7 @@ containing the number of bytes returned from the resource.</para
           >
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -632,8 +586,7 @@ containing the number of bytes returned from the resource.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Net.WebResponse" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Net.WebResponse" />
 
             
 
@@ -641,7 +594,11 @@ containing the number of bytes returned from the resource.</para
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -679,8 +636,7 @@ containing the number of bytes returned from the resource.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any objects included in the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Any objects included in the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -690,8 +646,7 @@ containing the number of bytes returned from the resource.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -699,24 +654,30 @@ containing the number of bytes returned from the resource.</para
           >
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            to populate with data. </param
         >
         <param name="streamingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -754,8 +715,7 @@ containing the number of bytes returned from the resource.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.WebResponse.GetResponseStream" />
+            >The <see cref="M:System.Net.WebResponse.GetResponseStream" />
 
             
 
@@ -763,13 +723,11 @@ containing the number of bytes returned from the resource.</para
           >
           <block subset="none" type="note">
             <para
-              >The response stream must be closed to avoid running out of system resources. The response stream can be closed by calling <see
-               cref="M:System.IO.Stream.Close" />
+              >The response stream must be closed to avoid running out of system resources. The response stream can be closed by calling <see cref="M:System.IO.Stream.Close" />
 
               
 
-               or <see
-               cref="M:System.Net.WebResponse.Close" />
+               or <see cref="M:System.Net.WebResponse.Close" />
             </para>
           </block>
         </remarks>
@@ -780,8 +738,7 @@ containing the number of bytes returned from the resource.</para
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.IO.Stream" />
+            >An instance of the <see cref="T:System.IO.Stream" />
 
             
 
@@ -817,8 +774,7 @@ containing the number of bytes returned from the resource.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Net.WebHeaderCollection" />
+            >A <see cref="T:System.Net.WebHeaderCollection" />
 
             
 
@@ -832,8 +788,7 @@ containing the number of bytes returned from the resource.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.WebResponse.Headers" />
+            >The <see cref="P:System.Net.WebResponse.Headers" />
 
             
 
@@ -841,28 +796,23 @@ containing the number of bytes returned from the resource.</para
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Net.WebResponse" />
+              >The <see cref="T:System.Net.WebResponse" />
 
               
 
-               class is an abstract class. The actual behavior of <see
-               cref="T:System.Net.WebResponse" />
+               class is an abstract class. The actual behavior of <see cref="T:System.Net.WebResponse" />
 
               
 
-               instances at run time is determined by the descendant class returned by <see
-               cref="M:System.Net.WebRequest.GetResponse" />
+               instances at run time is determined by the descendant class returned by <see cref="M:System.Net.WebRequest.GetResponse" />
 
               
 
-              . For more information about default values and exceptions, please see the documentation for the descendant classes, such as <see
-               cref="T:System.Net.HttpWebResponse" />
+              . For more information about default values and exceptions, please see the documentation for the descendant classes, such as <see cref="T:System.Net.HttpWebResponse" />
 
               
 
-               and <see
-               cref="T:System.Net.FileWebResponse" />
+               and <see cref="T:System.Net.FileWebResponse" />
 
               
 
@@ -898,13 +848,11 @@ containing the number of bytes returned from the resource.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current cache policy and the presence of the requested resource in the cache determine whether a response can be retrieved from the cache. Using cached responses usually improves application performance, but there is a risk that the response in the cache does not match the response on the server. Use the <see
-             cref="P:System.Net.WebRequest.CachePolicy" />
+            >The current cache policy and the presence of the requested resource in the cache determine whether a response can be retrieved from the cache. Using cached responses usually improves application performance, but there is a risk that the response in the cache does not match the response on the server. Use the <see cref="P:System.Net.WebRequest.CachePolicy" />
 
             
 
-             property to set and the <see
-             cref="T:System.Net.Cache.RequestCachePolicy" />
+             property to set and the <see cref="T:System.Net.Cache.RequestCachePolicy" />
 
             
 
@@ -914,8 +862,7 @@ containing the number of bytes returned from the resource.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -945,33 +892,27 @@ containing the number of bytes returned from the resource.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To request mutual authentication, set the <see
-             cref="P:System.Net.WebRequest.AuthenticationLevel" />
+            >To request mutual authentication, set the <see cref="P:System.Net.WebRequest.AuthenticationLevel" />
 
             
 
-             property using the <see
-             cref="F:System.Net.Security.AuthenticationLevel.MutualAuthRequested" />
+             property using the <see cref="F:System.Net.Security.AuthenticationLevel.MutualAuthRequested" />
 
             
 
-             or <see
-             cref="F:System.Net.Security.AuthenticationLevel.MutualAuthRequired" />
+             or <see cref="F:System.Net.Security.AuthenticationLevel.MutualAuthRequired" />
 
             
 
-             enumeration value. The default value for the <see
-             cref="P:System.Net.WebRequest.AuthenticationLevel" />
+             enumeration value. The default value for the <see cref="P:System.Net.WebRequest.AuthenticationLevel" />
 
             
 
-             property contains <see
-             cref="F:System.Security.Principal.TokenImpersonationLevel.Delegation" />
+             property contains <see cref="F:System.Security.Principal.TokenImpersonationLevel.Delegation" />
 
             
 
-              and <see
-             cref="F:System.Net.Security.AuthenticationLevel.MutualAuthRequested" />
+              and <see cref="F:System.Net.Security.AuthenticationLevel.MutualAuthRequested" />
 
             
 
@@ -981,8 +922,7 @@ containing the number of bytes returned from the resource.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -1011,8 +951,7 @@ containing the number of bytes returned from the resource.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Uri" />
+            >A <see cref="T:System.Uri" />
 
             
 
@@ -1026,8 +965,7 @@ containing the number of bytes returned from the resource.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.WebResponse.ResponseUri" />
+            >The <see cref="P:System.Net.WebResponse.ResponseUri" />
 
             
 
@@ -1035,28 +973,23 @@ containing the number of bytes returned from the resource.</para
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Net.WebResponse" />
+              >The <see cref="T:System.Net.WebResponse" />
 
               
 
-               class is an abstract class. The actual behavior of <see
-               cref="T:System.Net.WebResponse" />
+               class is an abstract class. The actual behavior of <see cref="T:System.Net.WebResponse" />
 
               
 
-               instances at run time is determined by the descendant class returned by <see
-               cref="M:System.Net.WebRequest.GetResponse" />
+               instances at run time is determined by the descendant class returned by <see cref="M:System.Net.WebRequest.GetResponse" />
 
               
 
-              . For more information about default values and exceptions, please see the documentation for the descendant classes, such as <see
-               cref="T:System.Net.HttpWebResponse" />
+              . For more information about default values and exceptions, please see the documentation for the descendant classes, such as <see cref="T:System.Net.HttpWebResponse" />
 
               
 
-               and <see
-               cref="T:System.Net.FileWebResponse" />
+               and <see cref="T:System.Net.FileWebResponse" />
 
               
 
@@ -1113,50 +1046,41 @@ containing the number of bytes returned from the resource.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.Net.WebResponse.System#IDisposable#Dispose" />
+            >Call <see cref="M:System.Net.WebResponse.System#IDisposable#Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.Net.WebResponse" />
+             when you are finished using the <see cref="T:System.Net.WebResponse" />
 
             
 
-            . The <see
-             cref="M:System.Net.WebResponse.System#IDisposable#Dispose" />
+            . The <see cref="M:System.Net.WebResponse.System#IDisposable#Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.Net.WebResponse" />
+             method leaves the <see cref="T:System.Net.WebResponse" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Net.WebResponse.System#IDisposable#Dispose" />
+             in an unusable state. After calling <see cref="M:System.Net.WebResponse.System#IDisposable#Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Net.WebResponse" />
+            , you must release all references to the <see cref="T:System.Net.WebResponse" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Net.WebResponse" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Net.WebResponse" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -1166,18 +1090,15 @@ containing the number of bytes returned from the resource.</para
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.Net.WebResponse.System#IDisposable#Dispose" />
+              >Always call <see cref="M:System.Net.WebResponse.System#IDisposable#Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.Net.WebResponse" />
+               before you release your last reference to the <see cref="T:System.Net.WebResponse" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.Net.WebResponse" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Net.WebResponse" />
 
               
 
@@ -1188,8 +1109,7 @@ containing the number of bytes returned from the resource.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, releases all resources used by the <see
-             cref="T:System.Net.WebResponse" />
+            >When overridden in a derived class, releases all resources used by the <see cref="T:System.Net.WebResponse" />
 
             
 
@@ -1230,13 +1150,11 @@ containing the number of bytes returned from the resource.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             instance with the data that is needed to serialize <see
-             cref="T:System.Net.WebResponse" />
+             instance with the data that is needed to serialize <see cref="T:System.Net.WebResponse" />
 
             
 
@@ -1244,34 +1162,38 @@ containing the number of bytes returned from the resource.</para
           >
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
-           that will hold the serialized data for the <see
-           cref="T:System.Net.WebResponse" />
+           that will hold the serialized data for the <see cref="T:System.Net.WebResponse" />
 
           
 
           . </param
         >
         <param name="streamingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
-           that contains the destination of the serialized stream that is associated with the new <see
-           cref="T:System.Net.WebResponse" />
+           that contains the destination of the serialized stream that is associated with the new <see cref="T:System.Net.WebResponse" />
 
           
 

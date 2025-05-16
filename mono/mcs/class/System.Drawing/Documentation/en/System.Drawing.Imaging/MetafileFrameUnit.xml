@@ -17,8 +17,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the unit of measurement for the rectangle used to size and position a metafile. This is specified during the creation of the <see
-         cref="T:System.Drawing.Imaging.Metafile" />
+        >Specifies the unit of measurement for the rectangle used to size and position a metafile. This is specified during the creation of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
         
 

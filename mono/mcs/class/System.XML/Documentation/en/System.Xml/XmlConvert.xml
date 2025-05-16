@@ -28,13 +28,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.XmlConvert" />
+        >The <see cref="T:System.Xml.XmlConvert" />
 
         
 
-         class is functionally equivalent to the <see
-         cref="T:System.Convert" />
+         class is functionally equivalent to the <see cref="T:System.Convert" />
 
         
 
@@ -45,17 +43,17 @@
       </format>
       <para
         >Element and attribute names or ID values are limited to a range of XML characters according to the W3C <see
-         cref="http://www.w3.org/TR/2006/REC-xml-20060816/">XML 1.0 recommendation</see>
+          cref="http://www.w3.org/TR/2006/REC-xml-20060816/"
+          >XML 1.0 recommendation</see
+        >
 
         
 
-        . When names contain invalid characters, you can use the <see
-         cref="M:System.Xml.XmlConvert.EncodeName(System.String)" />
+        . When names contain invalid characters, you can use the <see cref="M:System.Xml.XmlConvert.EncodeName(System.String)" />
 
         
 
-         and <see
-         cref="M:System.Xml.XmlConvert.DecodeName(System.String)" />
+         and <see cref="M:System.Xml.XmlConvert.DecodeName(System.String)" />
 
         
 
@@ -63,13 +61,11 @@
       >
       <para>For example, if you want to use the column heading "Order Detail" in a database, the database allows the space between the two words. However, in XML, the space between "Order" and "Detail" is considered an invalid XML character. You have to convert it into an escaped hexadecimal encoding and decode it later.</para>
       <para
-        >You can use the <see
-         cref="M:System.Xml.XmlConvert.EncodeName(System.String)" />
+        >You can use the <see cref="M:System.Xml.XmlConvert.EncodeName(System.String)" />
 
         
 
-         method with the <see
-         cref="T:System.Xml.XmlWriter" />
+         method with the <see cref="T:System.Xml.XmlWriter" />
 
         
 
@@ -78,8 +74,7 @@
       <code> writer.WriteElementString(XmlConvert.EncodeName("Order Detail"),"My order");
 </code>
       <para
-        >The following <see
-         cref="T:System.Xml.XmlConvert" />
+        >The following <see cref="T:System.Xml.XmlConvert" />
 
         
 
@@ -105,7 +100,9 @@
           <description>
             <para
               >Takes a name and returns the encoded name along with any invalid character that is replaced by an escape string. This method allows colons in any position, which means that the name may still be invalid according to the W3C <see
-               cref="www.w3.org/TR/REC-xml-names">Namespaces in XML 1.0 recommendation</see>
+                cref="www.w3.org/TR/REC-xml-names"
+                >Namespaces in XML 1.0 recommendation</see
+              >
 
               
 
@@ -131,8 +128,7 @@
           </term>
           <description>
             <para
-              >Same as <see
-               cref="M:System.Xml.XmlConvert.EncodeName(System.String)" />
+              >Same as <see cref="M:System.Xml.XmlConvert.EncodeName(System.String)" />
 
               
 
@@ -155,13 +151,14 @@
         <h2>Name validation</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Xml.XmlConvert" />
+        >The <see cref="T:System.Xml.XmlConvert" />
 
         
 
          class contains two methods that check the characters in an element or attribute name and verify that the name conforms to the rules set by the W3C <see
-         cref="http://www.w3.org/TR/2006/REC-xml-20060816/">XML 1.0 recommendation</see>
+          cref="http://www.w3.org/TR/2006/REC-xml-20060816/"
+          >XML 1.0 recommendation</see
+        >
 
         
 
@@ -188,8 +185,7 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="T:System.Xml.XmlConvert" />
+        >The <see cref="T:System.Xml.XmlConvert" />
 
         
 
@@ -203,23 +199,19 @@
 
         
 
-         also provides methods that enable you to convert data from a string to a strongly typed data type. For example, the <see
-         cref="Overload:System.Xml.XmlConvert.ToDateTime" />
+         also provides methods that enable you to convert data from a string to a strongly typed data type. For example, the <see cref="Overload:System.Xml.XmlConvert.ToDateTime" />
 
         
 
-         method converts a string to its <see
-         cref="T:System.DateTime" />
+         method converts a string to its <see cref="T:System.DateTime" />
 
         
 
-         equivalent. This is useful because most methods in the <see
-         cref="T:System.XmlReader" />
+         equivalent. This is useful because most methods in the <see cref="T:System.XmlReader" />
 
         
 
-         class return data as a string. After the data is read, it can be converted to the proper data type before being used. The <see
-         cref="Overload:System.Xml.XmlConvert.ToString" />
+         class return data as a string. After the data is read, it can be converted to the proper data type before being used. The <see cref="Overload:System.Xml.XmlConvert.ToString" />
 
         
 
@@ -252,8 +244,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlConvert" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlConvert" />
 
             
 
@@ -322,8 +313,7 @@ public class App {
             </item>
             <item>
               <para
-                >Any sequence _x <paramref
-                 name="HHHH_" />
+                >Any sequence _x <paramref name="HHHH_" />
 
                 
 
@@ -341,13 +331,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Decodes a name. This method does the reverse of the <see
-             cref="M:System.Xml.XmlConvert.EncodeName(System.String)" />
+            >Decodes a name. This method does the reverse of the <see cref="M:System.Xml.XmlConvert.EncodeName(System.String)" />
 
             
 
-             and <see
-             cref="M:System.Xml.XmlConvert.EncodeLocalName(System.String)" />
+             and <see cref="M:System.Xml.XmlConvert.EncodeLocalName(System.String)" />
 
             
 
@@ -359,7 +347,11 @@ public class App {
           <para>The decoded name.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -393,18 +385,15 @@ public class App {
       <Docs>
         <example>
           <para
-            >The following example compares the <see
-             cref="M:System.Xml.XmlConvert.EncodeLocalName(System.String)" />
+            >The following example compares the <see cref="M:System.Xml.XmlConvert.EncodeLocalName(System.String)" />
 
             
 
-            , <see
-             cref="M:System.Xml.XmlConvert.EncodeName(System.String)" />
+            , <see cref="M:System.Xml.XmlConvert.EncodeName(System.String)" />
 
             
 
-            , and <see
-             cref="M:System.Xml.XmlConvert.EncodeNmToken(System.String)" />
+            , and <see cref="M:System.Xml.XmlConvert.EncodeNmToken(System.String)" />
 
             
 
@@ -436,8 +425,7 @@ public class App {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is similar to the <see
-             cref="M:System.Xml.XmlConvert.EncodeName(System.String)" />
+            >This method is similar to the <see cref="M:System.Xml.XmlConvert.EncodeName(System.String)" />
 
             
 
@@ -445,8 +433,7 @@ public class App {
           >
           <para>For example, if you passed this method the invalid name a:b, it returns a_x003a_b, which is a valid local name.</para>
           <para
-            >If <paramref
-             name="name" />
+            >If <paramref name="name" />
 
             
 
@@ -462,7 +449,11 @@ public class App {
           <para>The encoded name.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -496,23 +487,19 @@ public class App {
       <Docs>
         <example>
           <para
-            >See the <see
-             cref="M:System.Xml.XmlConvert.EncodeLocalName(System.String)" />
+            >See the <see cref="M:System.Xml.XmlConvert.EncodeLocalName(System.String)" />
 
             
 
-             method for an example comparing the <see
-             cref="M:System.Xml.XmlConvert.EncodeLocalName(System.String)" />
+             method for an example comparing the <see cref="M:System.Xml.XmlConvert.EncodeLocalName(System.String)" />
 
             
 
-            , <see
-             cref="M:System.Xml.XmlConvert.EncodeName(System.String)" />
+            , <see cref="M:System.Xml.XmlConvert.EncodeName(System.String)" />
 
             
 
-            , and <see
-             cref="M:System.Xml.XmlConvert.EncodeNmToken(System.String)" />
+            , and <see cref="M:System.Xml.XmlConvert.EncodeNmToken(System.String)" />
 
             
 
@@ -524,7 +511,7 @@ public class App {
           <para>This method translates invalid characters, such as spaces or half-width Katakana, that need to be mapped to XML names without the support or presence of schemas. The invalid characters are translated into escaped numeric entity encodings.</para>
           <para
             >The escape character is "_". Any XML name character that does not conform to the <see
-             cref="http://www.w3.org/TR/2006/REC-xml-20060816/"
+              cref="http://www.w3.org/TR/2006/REC-xml-20060816/"
               >XML 1.0 spec (fourth edition) recommendation</see
             >
 
@@ -535,12 +522,13 @@ public class App {
           <para>The underscore character does not need to be escaped unless it is followed by a character sequence that together with the underscore can be misinterpreted as an escape sequence when decoding the name. For example, Order_Details is not encoded, but Order_x0020_ is encoded as Order_x005f_x0020_. No shortforms are allowed. For example, the forms _x20_ and __ are not generated.</para>
           <para
             >This method guarantees the name is valid according to the XML specification. It allows colons in any position, which means the name may still be invalid according to the <see
-             cref="www.w3.org/TR/REC-xml-names">W3C Namespace Specification</see>
+              cref="www.w3.org/TR/REC-xml-names"
+              >W3C Namespace Specification</see
+            >
 
             
 
-            . To guarantee it is a valid namespace qualified name use <see
-             cref="M:System.Xml.XmlConvert.EncodeLocalName(System.String)" />
+            . To guarantee it is a valid namespace qualified name use <see cref="M:System.Xml.XmlConvert.EncodeLocalName(System.String)" />
 
             
 
@@ -556,7 +544,11 @@ public class App {
           <para>Returns the name with any invalid characters replaced by an escape string.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -590,24 +582,20 @@ public class App {
       <Docs>
         <example>
           <para
-            >See the <see
-             cref="M:System.Xml.XmlConvert.EncodeLocalName(System.String)" />
+            >See the <see cref="M:System.Xml.XmlConvert.EncodeLocalName(System.String)" />
 
             
 
              method for an example comparing the
-<see
-             cref="M:System.Xml.XmlConvert.EncodeLocalName(System.String)" />
+<see cref="M:System.Xml.XmlConvert.EncodeLocalName(System.String)" />
 
             
 
-            , <see
-             cref="M:System.Xml.XmlConvert.EncodeName(System.String)" />
+            , <see cref="M:System.Xml.XmlConvert.EncodeName(System.String)" />
 
             
 
-            , and <see
-             cref="M:System.Xml.XmlConvert.EncodeNmToken(System.String)" />
+            , and <see cref="M:System.Xml.XmlConvert.EncodeNmToken(System.String)" />
 
             
 
@@ -618,8 +606,7 @@ public class App {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method guarantees that the name is valid according to the XML specification. For example, if you passed this method the invalid name 70+, it returns 70_x002b_ which is a valid XML name.</para>
           <para
-            >If <paramref
-             name="name" />
+            >If <paramref name="name" />
 
             
 
@@ -635,7 +622,11 @@ public class App {
           <para>The encoded name.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -671,7 +662,11 @@ public class App {
           <para>Returns true if the character is a valid non-colon character type; otherwise, false.</para>
         </returns>
         <param name="ch">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -736,7 +731,7 @@ public class App {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >For details about allowed characters, see the <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=147985"
+              cref="http://go.microsoft.com/fwlink/?LinkId=147985"
               >XML 1.0 spec (fourth edition)</see
             >
 
@@ -754,7 +749,11 @@ public class App {
           <para>true if the character is a valid Start Name Character type; otherwise, false. </para>
         </returns>
         <param name="ch">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -783,7 +782,7 @@ public class App {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >For details about allowed characters, see the <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=147985"
+              cref="http://go.microsoft.com/fwlink/?LinkID=147985"
               >XML 1.0 spec (fourth edition)</see
             >
 
@@ -801,7 +800,11 @@ public class App {
           <para>true if the passed in character is a valid XML whitespace character; otherwise false.</para>
         </returns>
         <param name="ch">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -830,7 +833,7 @@ public class App {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >For details about allowed characters, see the <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=147985"
+              cref="http://go.microsoft.com/fwlink/?LinkId=147985"
               >XML 1.0 spec (fourth edition)</see
             >
 
@@ -848,7 +851,11 @@ public class App {
           <para>true if the passed in character is a valid XML character; otherwise false.</para>
         </returns>
         <param name="ch">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -887,14 +894,22 @@ public class App {
           <para>true if the passed in surrogate pair of characters is a valid XML character; otherwise false.</para>
         </returns>
         <param name="lowChar">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The surrogate character to validate.</param
         >
         <param name="highChar">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -937,8 +952,7 @@ public class App {
 
           
 
-           does not represent a <see
-           cref="T:System.Boolean" />
+           does not represent a <see cref="T:System.Boolean" />
 
           
 
@@ -951,13 +965,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.String" />
+            >Converts the <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.Boolean" />
+             to a <see cref="T:System.Boolean" />
 
             
 
@@ -969,7 +981,11 @@ public class App {
           <para>A Boolean value, that is, true or false.</para>
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1003,28 +1019,23 @@ public class App {
       <Docs>
         <remarks>
           <para
-            >This method calls <see
-             cref="M:System.Byte.Parse(System.String)" />
+            >This method calls <see cref="M:System.Byte.Parse(System.String)" />
 
             
 
-            (<paramref
-             name="s" />
+            (<paramref name="s" />
 
             
 
-            , <see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+            , <see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
             
 
-            |<see
-             cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+            |<see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
             
 
-            , <see
-             cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+            , <see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
 
             
 
@@ -1050,13 +1061,11 @@ public class App {
 
           
 
-           represents a number less than <see
-           cref="F:System.Byte.MinValue" />
+           represents a number less than <see cref="F:System.Byte.MinValue" />
 
           
 
-           or greater than <see
-           cref="F:System.Byte.MaxValue" />
+           or greater than <see cref="F:System.Byte.MaxValue" />
 
           
 
@@ -1065,13 +1074,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.String" />
+            >Converts the <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.Byte" />
+             to a <see cref="T:System.Byte" />
 
             
 
@@ -1083,7 +1090,11 @@ public class App {
           <para>A Byte equivalent of the string.</para>
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1117,13 +1128,11 @@ public class App {
       <Docs>
         <remarks>
           <para
-            >This method calls <see
-             cref="M:System.Char.Parse(System.String)" />
+            >This method calls <see cref="M:System.Char.Parse(System.String)" />
 
             
 
-            (<paramref
-             name="s" />
+            (<paramref name="s" />
 
             
 
@@ -1147,13 +1156,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.String" />
+            >Converts the <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.Char" />
+             to a <see cref="T:System.Char" />
 
             
 
@@ -1165,7 +1172,11 @@ public class App {
           <para>A Char representing the single character.</para>
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1215,8 +1226,7 @@ public class App {
 
             
 
-             is <see
-             cref="F:System.String.Empty" />
+             is <see cref="F:System.String.Empty" />
 
             
 
@@ -1227,13 +1237,11 @@ public class App {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Xml.XmlConvert.ToDateTime(System.String)" />
+              >The <see cref="M:System.Xml.XmlConvert.ToDateTime(System.String)" />
 
               
 
-               method is obsolete in the 2.0 version of the .NET Framework and has been replaced by the <see
-               cref="M:System.Xml.XmlConvert.ToDateTime(System.String,System.Xml.XmlDateTimeSerializationMode)" />
+               method is obsolete in the 2.0 version of the .NET Framework and has been replaced by the <see cref="M:System.Xml.XmlConvert.ToDateTime(System.String,System.Xml.XmlDateTimeSerializationMode)" />
 
               
 
@@ -1244,13 +1252,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.String" />
+            >Converts the <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.DateTime" />
+             to a <see cref="T:System.DateTime" />
 
             
 
@@ -1262,7 +1268,11 @@ public class App {
           <para>A DateTime equivalent of the string.</para>
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1300,33 +1310,27 @@ public class App {
       <Docs>
         <remarks>
           <para
-            >This method calls <see
-             cref="M:System.DateTime.ParseExact(System.String,System.String,System.IFormatProvider)" />
+            >This method calls <see cref="M:System.DateTime.ParseExact(System.String,System.String,System.IFormatProvider)" />
 
             
 
-            (<paramref
-             name="s" />
+            (<paramref name="s" />
 
             
 
-            , <paramref
-             name="format" />
+            , <paramref name="format" />
 
             
 
-            , <see
-             cref="P:System.Globalization.DateTimeFormatInfo.InvariantInfo" />
+            , <see cref="P:System.Globalization.DateTimeFormatInfo.InvariantInfo" />
 
             
 
-            , <see
-             cref="F:System.Globalization.DateTimeStyles.AllowLeadingWhite" />
+            , <see cref="F:System.Globalization.DateTimeStyles.AllowLeadingWhite" />
 
             
 
-            |<see
-             cref="F:System.Globalization.DateTimeStyles.AllowTrailingWhite" />
+            |<see cref="F:System.Globalization.DateTimeStyles.AllowTrailingWhite" />
 
             
 
@@ -1347,13 +1351,11 @@ public class App {
 
             
 
-             or <paramref
-             name="format" />
+             or <paramref name="format" />
 
             
 
-             is <see
-             cref="F:System.String.Empty" />
+             is <see cref="F:System.String.Empty" />
 
             
 
@@ -1365,8 +1367,7 @@ public class App {
 
             
 
-             does not contain a date and time that corresponds to <paramref
-             name="format" />
+             does not contain a date and time that corresponds to <paramref name="format" />
 
             
 
@@ -1374,7 +1375,11 @@ public class App {
           >
         </exception>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1383,13 +1388,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.String" />
+            >Converts the <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.DateTime" />
+             to a <see cref="T:System.DateTime" />
 
             
 
@@ -1401,14 +1404,22 @@ public class App {
           <para>A DateTime equivalent of the string.</para>
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string to convert. </param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1457,13 +1468,11 @@ public class App {
 
             
 
-             or an element of <paramref
-             name="formats" />
+             or an element of <paramref name="formats" />
 
             
 
-             is <see
-             cref="F:System.String.Empty" />
+             is <see cref="F:System.String.Empty" />
 
             
 
@@ -1475,8 +1484,7 @@ public class App {
 
             
 
-             does not contain a date and time that corresponds to any of the elements of <paramref
-             name="formats" />
+             does not contain a date and time that corresponds to any of the elements of <paramref name="formats" />
 
             
 
@@ -1485,13 +1493,11 @@ public class App {
         </exception>
         <example>
           <para
-            >The following example converts a <see
-             cref="T:System.String" />
+            >The following example converts a <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.DateTime" />
+             to a <see cref="T:System.DateTime" />
 
             
 
@@ -1520,7 +1526,11 @@ public class App {
           <para>9/18/1966 8:45:11 PM</para>
         </example>
         <param name="formats">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1533,13 +1543,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.String" />
+            >Converts the <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.DateTime" />
+             to a <see cref="T:System.DateTime" />
 
             
 
@@ -1551,14 +1559,22 @@ public class App {
           <para>A DateTime equivalent of the string.</para>
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string to convert. </param
         >
         <param name="formats">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1594,18 +1610,15 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.String" />
+            >Converts the <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.DateTime" />
+             to a <see cref="T:System.DateTime" />
 
             
 
-             using the <see
-             cref="T:System.Xml.XmlDateTimeSerializationMode" />
+             using the <see cref="T:System.Xml.XmlDateTimeSerializationMode" />
 
             
 
@@ -1615,13 +1628,11 @@ public class App {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.DateTime" />
+            >A <see cref="T:System.DateTime" />
 
             
 
-             equivalent of the <see
-             cref="T:System.String" />
+             equivalent of the <see cref="T:System.String" />
 
             
 
@@ -1629,24 +1640,30 @@ public class App {
           >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
            value to convert.</param
         >
         <param name="dateTimeOption">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Xml.XmlDateTimeSerializationMode" />
+          One of the <see cref="T:System.Xml.XmlDateTimeSerializationMode" />
 
           
 
@@ -1682,13 +1699,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the supplied <see
-             cref="T:System.String" />
+            >Converts the supplied <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.DateTimeOffset" />
+             to a <see cref="T:System.DateTimeOffset" />
 
             
 
@@ -1698,8 +1713,7 @@ public class App {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.DateTimeOffset" />
+            >The <see cref="T:System.DateTimeOffset" />
 
             
 
@@ -1707,7 +1721,11 @@ public class App {
           >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1745,13 +1763,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the supplied <see
-             cref="T:System.String" />
+            >Converts the supplied <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.DateTimeOffset" />
+             to a <see cref="T:System.DateTimeOffset" />
 
             
 
@@ -1761,8 +1777,7 @@ public class App {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.DateTimeOffset" />
+            >The <see cref="T:System.DateTimeOffset" />
 
             
 
@@ -1770,24 +1785,30 @@ public class App {
           >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string to convert.</param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The format from which <paramref
-           name="s" />
+          The format from which <paramref name="s" />
 
           
 
-           is converted. The format parameter can be any subset of the W3C Recommendation for the XML dateTime type. (For more information see http://www.w3.org/TR/xmlschema-2/#dateTime.) The string <paramref
-           name="s" />
+           is converted. The format parameter can be any subset of the W3C Recommendation for the XML dateTime type. (For more information see http://www.w3.org/TR/xmlschema-2/#dateTime.) The string <paramref name="s" />
 
           
 
@@ -1825,13 +1846,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the supplied <see
-             cref="T:System.String" />
+            >Converts the supplied <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.DateTimeOffset" />
+             to a <see cref="T:System.DateTimeOffset" />
 
             
 
@@ -1841,8 +1860,7 @@ public class App {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.DateTimeOffset" />
+            >The <see cref="T:System.DateTimeOffset" />
 
             
 
@@ -1850,29 +1868,34 @@ public class App {
           >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string to convert.</param
         >
         <param name="formats">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of formats from which <paramref
-           name="s" />
+          An array of formats from which <paramref name="s" />
 
           
 
-           can be converted. Each format in <paramref
-           name="formats" />
+           can be converted. Each format in <paramref name="formats" />
 
           
 
-           can be any subset of the W3C Recommendation for the XML dateTime type. (For more information see http://www.w3.org/TR/xmlschema-2/#dateTime.) The string <paramref
-           name="s" />
+           can be any subset of the W3C Recommendation for the XML dateTime type. (For more information see http://www.w3.org/TR/xmlschema-2/#dateTime.) The string <paramref name="s" />
 
           
 
@@ -1905,38 +1928,31 @@ public class App {
       <Docs>
         <remarks>
           <para
-            >This method calls <see
-             cref="M:System.Decimal.Parse(System.String)" />
+            >This method calls <see cref="M:System.Decimal.Parse(System.String)" />
 
             
 
-            (<paramref
-             name="s" />
+            (<paramref name="s" />
 
             
 
-            , <see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
+            , <see cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
 
             
 
-            |<see
-             cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+            |<see cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
 
             
 
-            |<see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+            |<see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
             
 
-            |<see
-             cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+            |<see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
             
 
-            , <see
-             cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+            , <see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
 
             
 
@@ -1962,13 +1978,11 @@ public class App {
 
           
 
-           represents a number less than <see
-           cref="F:System.Decimal.MinValue" />
+           represents a number less than <see cref="F:System.Decimal.MinValue" />
 
           
 
-           or greater than <see
-           cref="F:System.Decimal.MaxValue" />
+           or greater than <see cref="F:System.Decimal.MaxValue" />
 
           
 
@@ -1977,13 +1991,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.String" />
+            >Converts the <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.Decimal" />
+             to a <see cref="T:System.Decimal" />
 
             
 
@@ -1995,7 +2007,11 @@ public class App {
           <para>A Decimal equivalent of the string.</para>
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2047,13 +2063,11 @@ public class App {
 
           
 
-           represents a number less than <see
-           cref="F:System.Double.MinValue" />
+           represents a number less than <see cref="F:System.Double.MinValue" />
 
           
 
-           or greater than <see
-           cref="F:System.Double.MaxValue" />
+           or greater than <see cref="F:System.Double.MaxValue" />
 
           
 
@@ -2062,8 +2076,7 @@ public class App {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="s" />
+            >If <paramref name="s" />
 
             
 
@@ -2073,13 +2086,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.String" />
+            >Converts the <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.Double" />
+             to a <see cref="T:System.Double" />
 
             
 
@@ -2091,7 +2102,11 @@ public class App {
           <para>A Double equivalent of the string.</para>
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2124,13 +2139,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.String" />
+            >Converts the <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.Guid" />
+             to a <see cref="T:System.Guid" />
 
             
 
@@ -2142,7 +2155,11 @@ public class App {
           <para>A Guid equivalent of the string.</para>
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2175,33 +2192,27 @@ public class App {
       <Docs>
         <remarks>
           <para
-            >This method calls <see
-             cref="M:System.Int16.Parse(System.String)" />
+            >This method calls <see cref="M:System.Int16.Parse(System.String)" />
 
             
 
-            (<paramref
-             name="s" />
+            (<paramref name="s" />
 
             
 
-            , <see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
+            , <see cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
 
             
 
-            |<see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+            |<see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
             
 
-            |<see
-             cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+            |<see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
             
 
-            , <see
-             cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+            , <see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
 
             
 
@@ -2227,13 +2238,11 @@ public class App {
 
           
 
-           represents a number less than <see
-           cref="F:System.Int16.MinValue" />
+           represents a number less than <see cref="F:System.Int16.MinValue" />
 
           
 
-           or greater than <see
-           cref="F:System.Int16.MaxValue" />
+           or greater than <see cref="F:System.Int16.MaxValue" />
 
           
 
@@ -2242,13 +2251,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.String" />
+            >Converts the <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.Int16" />
+             to a <see cref="T:System.Int16" />
 
             
 
@@ -2260,7 +2267,11 @@ public class App {
           <para>An Int16 equivalent of the string.</para>
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2294,33 +2305,27 @@ public class App {
       <Docs>
         <remarks>
           <para
-            >This method calls <see
-             cref="M:System.Int32.Parse(System.String)" />
+            >This method calls <see cref="M:System.Int32.Parse(System.String)" />
 
             
 
-            (<paramref
-             name="s" />
+            (<paramref name="s" />
 
             
 
-            , <see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
+            , <see cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
 
             
 
-            |<see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+            |<see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
             
 
-            |<see
-             cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+            |<see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
             
 
-            , <see
-             cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+            , <see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
 
             
 
@@ -2346,13 +2351,11 @@ public class App {
 
           
 
-           represents a number less than <see
-           cref="F:System.Int32.MinValue" />
+           represents a number less than <see cref="F:System.Int32.MinValue" />
 
           
 
-           or greater than <see
-           cref="F:System.Int32.MaxValue" />
+           or greater than <see cref="F:System.Int32.MaxValue" />
 
           
 
@@ -2361,13 +2364,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.String" />
+            >Converts the <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.Int32" />
+             to a <see cref="T:System.Int32" />
 
             
 
@@ -2379,7 +2380,11 @@ public class App {
           <para>An Int32 equivalent of the string.</para>
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2413,33 +2418,27 @@ public class App {
       <Docs>
         <remarks>
           <para
-            >This method calls <see
-             cref="M:System.Int64.Parse(System.String)" />
+            >This method calls <see cref="M:System.Int64.Parse(System.String)" />
 
             
 
-            (<paramref
-             name="s" />
+            (<paramref name="s" />
 
             
 
-            , <see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
+            , <see cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
 
             
 
-            |<see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+            |<see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
             
 
-            |<see
-             cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+            |<see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
             
 
-            , <see
-             cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+            , <see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
 
             
 
@@ -2465,13 +2464,11 @@ public class App {
 
           
 
-           represents a number less than <see
-           cref="F:System.Int64.MinValue" />
+           represents a number less than <see cref="F:System.Int64.MinValue" />
 
           
 
-           or greater than <see
-           cref="F:System.Int64.MaxValue" />
+           or greater than <see cref="F:System.Int64.MaxValue" />
 
           
 
@@ -2480,13 +2477,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.String" />
+            >Converts the <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.Int64" />
+             to a <see cref="T:System.Int64" />
 
             
 
@@ -2498,7 +2493,11 @@ public class App {
           <para>An Int64 equivalent of the string.</para>
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2538,46 +2537,38 @@ public class App {
         <remarks>
           <para
             >This member is not CLS-compliant. For a CLS-compliant alternative, use
-   <see
-             cref="M:System.Xml.XmlConvert.ToInt16(System.String)" />
+   <see cref="M:System.Xml.XmlConvert.ToInt16(System.String)" />
 
             
 
-            (<see
-             cref="T:System.String" />
+            (<see cref="T:System.String" />
 
             
 
             ).</para
           >
           <para
-            >This method calls <see
-             cref="M:System.SByte.Parse(System.String)" />
+            >This method calls <see cref="M:System.SByte.Parse(System.String)" />
 
             
 
-            (<paramref
-             name="s" />
+            (<paramref name="s" />
 
             
 
-            , <see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
+            , <see cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
 
             
 
-            |<see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+            |<see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
             
 
-            |<see
-             cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+            |<see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
             
 
-            , <see
-             cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+            , <see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
 
             
 
@@ -2603,13 +2594,11 @@ public class App {
 
           
 
-           represents a number less than <see
-           cref="F:System.SByte.MinValue" />
+           represents a number less than <see cref="F:System.SByte.MinValue" />
 
           
 
-           or greater than <see
-           cref="F:System.SByte.MaxValue" />
+           or greater than <see cref="F:System.SByte.MaxValue" />
 
           
 
@@ -2618,13 +2607,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.String" />
+            >Converts the <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.SByte" />
+             to a <see cref="T:System.SByte" />
 
             
 
@@ -2636,7 +2623,11 @@ public class App {
           <para>An SByte equivalent of the string.</para>
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2687,13 +2678,11 @@ public class App {
 
           
 
-           represents a number less than <see
-           cref="F:System.Single.MinValue" />
+           represents a number less than <see cref="F:System.Single.MinValue" />
 
           
 
-           or greater than <see
-           cref="F:System.Single.MaxValue" />
+           or greater than <see cref="F:System.Single.MaxValue" />
 
           
 
@@ -2702,8 +2691,7 @@ public class App {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="s" />
+            >If <paramref name="s" />
 
             
 
@@ -2713,13 +2701,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.String" />
+            >Converts the <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.Single" />
+             to a <see cref="T:System.Single" />
 
             
 
@@ -2731,7 +2717,11 @@ public class App {
           <para>A Single equivalent of the string.</para>
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2768,13 +2758,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.Boolean" />
+            >Converts the <see cref="T:System.Boolean" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
@@ -2786,7 +2774,11 @@ public class App {
           <para>A string representation of the Boolean, that is, "true" or "false".</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2820,18 +2812,15 @@ public class App {
       <Docs>
         <remarks>
           <para
-            >This method calls <paramref
-             name="value" />
+            >This method calls <paramref name="value" />
 
             
 
-            .ToString(<see
-             langword="null" />
+            .ToString(<see langword="null" />
 
             
 
-            , <see
-             cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+            , <see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
 
             
 
@@ -2841,13 +2830,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.Byte" />
+            >Converts the <see cref="T:System.Byte" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
@@ -2859,7 +2846,11 @@ public class App {
           <para>A string representation of the Byte.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2893,13 +2884,11 @@ public class App {
       <Docs>
         <remarks>
           <para
-            >This method calls <paramref
-             name="value" />
+            >This method calls <paramref name="value" />
 
             
 
-            .ToString(<see
-             langword="null" />
+            .ToString(<see langword="null" />
 
             
 
@@ -2909,13 +2898,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.Char" />
+            >Converts the <see cref="T:System.Char" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
@@ -2927,7 +2914,11 @@ public class App {
           <para>A string representation of the Char.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2968,13 +2959,11 @@ public class App {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Xml.XmlConvert.ToString(System.DateTime)" />
+              >The <see cref="M:System.Xml.XmlConvert.ToString(System.DateTime)" />
 
               
 
-               method is obsolete in the 2.0 version of the .NET Framework and has been replaced with the <see
-               cref="M:System.Xml.XmlConvert.ToString(System.DateTime,System.Xml.XmlDateTimeSerializationMode)" />
+               method is obsolete in the 2.0 version of the .NET Framework and has been replaced with the <see cref="M:System.Xml.XmlConvert.ToString(System.DateTime,System.Xml.XmlDateTimeSerializationMode)" />
 
               
 
@@ -2985,13 +2974,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.DateTime" />
+            >Converts the <see cref="T:System.DateTime" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
@@ -3003,7 +2990,11 @@ public class App {
           <para>A string representation of the DateTime in the format yyyy-MM-ddTHH:mm:ss where 'T' is a constant literal.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3037,13 +3028,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the supplied <see
-             cref="T:System.DateTimeOffset" />
+            >Converts the supplied <see cref="T:System.DateTimeOffset" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
@@ -3053,13 +3042,11 @@ public class App {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             representation of the supplied <see
-             cref="T:System.DateTimeOffset" />
+             representation of the supplied <see cref="T:System.DateTimeOffset" />
 
             
 
@@ -3067,12 +3054,15 @@ public class App {
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTimeOffset" />
+          The <see cref="T:System.DateTimeOffset" />
 
           
 
@@ -3105,18 +3095,15 @@ public class App {
       <Docs>
         <remarks>
           <para
-            >This method calls <paramref
-             name="value" />
+            >This method calls <paramref name="value" />
 
             
 
-            .ToString(<see
-             langword="null" />
+            .ToString(<see langword="null" />
 
             
 
-            , <see
-             cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+            , <see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
 
             
 
@@ -3126,13 +3113,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.Decimal" />
+            >Converts the <see cref="T:System.Decimal" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
@@ -3144,7 +3129,11 @@ public class App {
           <para>A string representation of the Decimal.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3180,8 +3169,7 @@ public class App {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="value" />
+            >If <paramref name="value" />
 
             
 
@@ -3191,13 +3179,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.Double" />
+            >Converts the <see cref="T:System.Double" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
@@ -3209,7 +3195,11 @@ public class App {
           <para>A string representation of the Double.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3242,13 +3232,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.Guid" />
+            >Converts the <see cref="T:System.Guid" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
@@ -3260,7 +3248,11 @@ public class App {
           <para>A string representation of the Guid.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3293,18 +3285,15 @@ public class App {
       <Docs>
         <remarks>
           <para
-            >This method calls <paramref
-             name="value" />
+            >This method calls <paramref name="value" />
 
             
 
-            .ToString(<see
-             langword="null" />
+            .ToString(<see langword="null" />
 
             
 
-            , <see
-             cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+            , <see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
 
             
 
@@ -3314,13 +3303,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.Int16" />
+            >Converts the <see cref="T:System.Int16" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
@@ -3332,7 +3319,11 @@ public class App {
           <para>A string representation of the Int16.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3366,18 +3357,15 @@ public class App {
       <Docs>
         <remarks>
           <para
-            >This method calls <paramref
-             name="value" />
+            >This method calls <paramref name="value" />
 
             
 
-            .ToString(<see
-             langword="null" />
+            .ToString(<see langword="null" />
 
             
 
-            , <see
-             cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+            , <see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
 
             
 
@@ -3387,13 +3375,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.Int32" />
+            >Converts the <see cref="T:System.Int32" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
@@ -3405,7 +3391,11 @@ public class App {
           <para>A string representation of the Int32.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3439,18 +3429,15 @@ public class App {
       <Docs>
         <remarks>
           <para
-            >This method calls <paramref
-             name="value" />
+            >This method calls <paramref name="value" />
 
             
 
-            .ToString(<see
-             langword="null" />
+            .ToString(<see langword="null" />
 
             
 
-            , <see
-             cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+            , <see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
 
             
 
@@ -3460,13 +3447,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.Int64" />
+            >Converts the <see cref="T:System.Int64" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
@@ -3478,7 +3463,11 @@ public class App {
           <para>A string representation of the Int64.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3518,31 +3507,26 @@ public class App {
         <remarks>
           <para
             >This member is not CLS-compliant. For a CLS-compliant alternative, use
-   <see
-             cref="M:System.Xml.XmlConvert.ToString(System.Boolean)" />
+   <see cref="M:System.Xml.XmlConvert.ToString(System.Boolean)" />
 
             
 
-            (<see
-             cref="T:System.Int16" />
+            (<see cref="T:System.Int16" />
 
             
 
             ).</para
           >
           <para
-            >This method calls <paramref
-             name="value" />
+            >This method calls <paramref name="value" />
 
             
 
-            .ToString(<see
-             langword="null" />
+            .ToString(<see langword="null" />
 
             
 
-            , <see
-             cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+            , <see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
 
             
 
@@ -3552,13 +3536,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.SByte" />
+            >Converts the <see cref="T:System.SByte" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
@@ -3570,7 +3552,11 @@ public class App {
           <para>A string representation of the SByte.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3605,8 +3591,7 @@ public class App {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="value" />
+            >If <paramref name="value" />
 
             
 
@@ -3616,13 +3601,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.Single" />
+            >Converts the <see cref="T:System.Single" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
@@ -3634,7 +3617,11 @@ public class App {
           <para>A string representation of the Single.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3670,13 +3657,11 @@ public class App {
         <remarks>To be added.</remarks>
         <example>
           <para
-            > The following example converts a <see
-             cref="T:System.TimeSpan" />
+            > The following example converts a <see cref="T:System.TimeSpan" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
@@ -3704,13 +3689,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.TimeSpan" />
+            >Converts the <see cref="T:System.TimeSpan" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
@@ -3722,7 +3705,11 @@ public class App {
           <para>A string representation of the TimeSpan.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3762,31 +3749,26 @@ public class App {
         <remarks>
           <para
             >This member is not CLS-compliant. For a CLS-compliant
-      alternative, use <see
-             cref="M:System.Xml.XmlConvert.ToString(System.Boolean)" />
+      alternative, use <see cref="M:System.Xml.XmlConvert.ToString(System.Boolean)" />
 
             
 
-            (<see
-             cref="T:System.Int32" />
+            (<see cref="T:System.Int32" />
 
             
 
             ).</para
           >
           <para
-            >This method calls <paramref
-             name="value" />
+            >This method calls <paramref name="value" />
 
             
 
-            .ToString(<see
-             langword="null" />
+            .ToString(<see langword="null" />
 
             
 
-            , <see
-             cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+            , <see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
 
             
 
@@ -3796,13 +3778,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.UInt16" />
+            >Converts the <see cref="T:System.UInt16" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
@@ -3814,7 +3794,11 @@ public class App {
           <para>A string representation of the UInt16.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3854,31 +3838,26 @@ public class App {
         <remarks>
           <para
             >This member is not CLS-compliant. For a CLS-compliant alternative, use
-   <see
-             cref="M:System.Xml.XmlConvert.ToString(System.Boolean)" />
+   <see cref="M:System.Xml.XmlConvert.ToString(System.Boolean)" />
 
             
 
-            (<see
-             cref="T:System.Int64" />
+            (<see cref="T:System.Int64" />
 
             
 
             ).</para
           >
           <para
-            >This method calls <paramref
-             name="value" />
+            >This method calls <paramref name="value" />
 
             
 
-            .ToString(<see
-             langword="null" />
+            .ToString(<see langword="null" />
 
             
 
-            , <see
-             cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+            , <see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
 
             
 
@@ -3888,13 +3867,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.UInt32" />
+            >Converts the <see cref="T:System.UInt32" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
@@ -3906,7 +3883,11 @@ public class App {
           <para>A string representation of the UInt32.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3946,31 +3927,26 @@ public class App {
         <remarks>
           <para
             >This member is not CLS-compliant. For a CLS-compliant alternative, use
-   <see
-             cref="M:System.Xml.XmlConvert.ToString(System.Boolean)" />
+   <see cref="M:System.Xml.XmlConvert.ToString(System.Boolean)" />
 
             
 
-            (<see
-             cref="T:System.Decimal" />
+            (<see cref="T:System.Decimal" />
 
             
 
             ).</para
           >
           <para
-            >This method calls <paramref
-             name="value" />
+            >This method calls <paramref name="value" />
 
             
 
-            .ToString(<see
-             langword="null" />
+            .ToString(<see langword="null" />
 
             
 
-            , <see
-             cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+            , <see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
 
             
 
@@ -3980,13 +3956,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.UInt64" />
+            >Converts the <see cref="T:System.UInt64" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
@@ -3998,7 +3972,11 @@ public class App {
           <para>A string representation of the UInt64.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4036,18 +4014,15 @@ public class App {
       <Docs>
         <remarks>
           <para
-            > This method calls <paramref
-             name="value" />
+            > This method calls <paramref name="value" />
 
             
 
-            .ToString(<paramref
-             name="format" />
+            .ToString(<paramref name="format" />
 
             
 
-            , <see
-             cref="P:System.Globalization.DateTimeFormatInfo.InvariantInfo" />
+            , <see cref="P:System.Globalization.DateTimeFormatInfo.InvariantInfo" />
 
             
 
@@ -4055,7 +4030,11 @@ public class App {
           >
         </remarks>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4064,13 +4043,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.DateTime" />
+            >Converts the <see cref="T:System.DateTime" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
@@ -4082,14 +4059,22 @@ public class App {
           <para>A string representation of the DateTime in the specified format.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value to convert. </param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4125,18 +4110,15 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.DateTime" />
+            >Converts the <see cref="T:System.DateTime" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
-             using the <see
-             cref="T:System.Xml.XmlDateTimeSerializationMode" />
+             using the <see cref="T:System.Xml.XmlDateTimeSerializationMode" />
 
             
 
@@ -4146,13 +4128,11 @@ public class App {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             equivalent of the <see
-             cref="T:System.DateTime" />
+             equivalent of the <see cref="T:System.DateTime" />
 
             
 
@@ -4160,29 +4140,34 @@ public class App {
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
            value to convert.</param
         >
         <param name="dateTimeOption">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Xml.XmlDateTimeSerializationMode" />
+          One of the <see cref="T:System.Xml.XmlDateTimeSerializationMode" />
 
           
 
-           values that specify how to treat the <see
-           cref="T:System.DateTime" />
+           values that specify how to treat the <see cref="T:System.DateTime" />
 
           
 
@@ -4216,13 +4201,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the supplied <see
-             cref="T:System.DateTimeOffset" />
+            >Converts the supplied <see cref="T:System.DateTimeOffset" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
@@ -4232,13 +4215,11 @@ public class App {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             representation in the specified format of the supplied <see
-             cref="T:System.DateTimeOffset" />
+             representation in the specified format of the supplied <see cref="T:System.DateTimeOffset" />
 
             
 
@@ -4246,24 +4227,30 @@ public class App {
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTimeOffset" />
+          The <see cref="T:System.DateTimeOffset" />
 
           
 
            to be converted.</param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The format to which <paramref
-           name="s" />
+          The format to which <paramref name="s" />
 
           
 
@@ -4300,8 +4287,7 @@ public class App {
 
           
 
-           is not in the correct format to represent a <see
-           cref="T:System.TimeSpan" />
+           is not in the correct format to represent a <see cref="T:System.TimeSpan" />
 
           
 
@@ -4310,13 +4296,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.String" />
+            >Converts the <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.TimeSpan" />
+             to a <see cref="T:System.TimeSpan" />
 
             
 
@@ -4328,7 +4312,11 @@ public class App {
           <para>A TimeSpan equivalent of the string.</para>
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4368,46 +4356,38 @@ public class App {
         <remarks>
           <para
             >This member is not CLS-compliant. For a CLS-compliant alternative, use
-   <see
-             cref="M:System.Xml.XmlConvert.ToInt32(System.String)" />
+   <see cref="M:System.Xml.XmlConvert.ToInt32(System.String)" />
 
             
 
-            (<see
-             cref="T:System.String" />
+            (<see cref="T:System.String" />
 
             
 
             ).</para
           >
           <para
-            >This method calls <see
-             cref="M:System.UInt16.Parse(System.String)" />
+            >This method calls <see cref="M:System.UInt16.Parse(System.String)" />
 
             
 
-            (<paramref
-             name="s" />
+            (<paramref name="s" />
 
             
 
-            , <see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
+            , <see cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
 
             
 
-            |<see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+            |<see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
             
 
-            |<see
-             cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+            |<see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
             
 
-            , <see
-             cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+            , <see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
 
             
 
@@ -4433,13 +4413,11 @@ public class App {
 
           
 
-           represents a number less than <see
-           cref="F:System.UInt16.MinValue" />
+           represents a number less than <see cref="F:System.UInt16.MinValue" />
 
           
 
-           or greater than <see
-           cref="F:System.UInt16.MaxValue" />
+           or greater than <see cref="F:System.UInt16.MaxValue" />
 
           
 
@@ -4448,13 +4426,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.String" />
+            >Converts the <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.UInt16" />
+             to a <see cref="T:System.UInt16" />
 
             
 
@@ -4466,7 +4442,11 @@ public class App {
           <para>A UInt16 equivalent of the string.</para>
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4506,46 +4486,38 @@ public class App {
         <remarks>
           <para
             >This member is not CLS-compliant. For a CLS-compliant alternative, use
-   <see
-             cref="M:System.Xml.XmlConvert.ToInt64(System.String)" />
+   <see cref="M:System.Xml.XmlConvert.ToInt64(System.String)" />
 
             
 
-            (<see
-             cref="T:System.String" />
+            (<see cref="T:System.String" />
 
             
 
             ).</para
           >
           <para
-            >This method calls <see
-             cref="M:System.UInt32.Parse(System.String)" />
+            >This method calls <see cref="M:System.UInt32.Parse(System.String)" />
 
             
 
-            (<paramref
-             name="s" />
+            (<paramref name="s" />
 
             
 
-            , <see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
+            , <see cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
 
             
 
-            |<see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+            |<see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
             
 
-            |<see
-             cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+            |<see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
             
 
-            , <see
-             cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+            , <see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
 
             
 
@@ -4571,13 +4543,11 @@ public class App {
 
           
 
-           represents a number less than <see
-           cref="F:System.UInt32.MinValue" />
+           represents a number less than <see cref="F:System.UInt32.MinValue" />
 
           
 
-           or greater than <see
-           cref="F:System.UInt32.MaxValue" />
+           or greater than <see cref="F:System.UInt32.MaxValue" />
 
           
 
@@ -4586,13 +4556,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.String" />
+            >Converts the <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.UInt32" />
+             to a <see cref="T:System.UInt32" />
 
             
 
@@ -4604,7 +4572,11 @@ public class App {
           <para>A UInt32 equivalent of the string.</para>
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4644,46 +4616,38 @@ public class App {
         <remarks>
           <para
             >This member is not CLS-compliant. For a CLS-compliant alternative, use
-   <see
-             cref="M:System.Xml.XmlConvert.ToDecimal(System.String)" />
+   <see cref="M:System.Xml.XmlConvert.ToDecimal(System.String)" />
 
             
 
-            (<see
-             cref="T:System.String" />
+            (<see cref="T:System.String" />
 
             
 
             ).</para
           >
           <para
-            >This method calls <see
-             cref="M:System.UInt64.Parse(System.String)" />
+            >This method calls <see cref="M:System.UInt64.Parse(System.String)" />
 
             
 
-            (<paramref
-             name="s" />
+            (<paramref name="s" />
 
             
 
-            , <see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
+            , <see cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
 
             
 
-            |<see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+            |<see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
             
 
-            |<see
-             cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+            |<see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
             
 
-            , <see
-             cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+            , <see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
 
             
 
@@ -4709,13 +4673,11 @@ public class App {
 
           
 
-           represents a number less than <see
-           cref="F:System.UInt64.MinValue" />
+           represents a number less than <see cref="F:System.UInt64.MinValue" />
 
           
 
-           or greater than <see
-           cref="F:System.UInt64.MaxValue" />
+           or greater than <see cref="F:System.UInt64.MaxValue" />
 
           
 
@@ -4724,13 +4686,11 @@ public class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.String" />
+            >Converts the <see cref="T:System.String" />
 
             
 
-             to a <see
-             cref="T:System.UInt64" />
+             to a <see cref="T:System.UInt64" />
 
             
 
@@ -4742,7 +4702,11 @@ public class App {
           <para>A UInt64 equivalent of the string.</para>
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4779,13 +4743,11 @@ public class App {
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
-           or <see
-           cref="F:System.String.Empty" />
+           or <see cref="F:System.String.Empty" />
 
           
 
@@ -4801,8 +4763,7 @@ public class App {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used with the <see
-             cref="T:System.Xml.XmlWriter" />
+            >This method can be used with the <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -4825,7 +4786,11 @@ public class App {
           <para>The name, if it is a valid XML name.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4859,13 +4824,11 @@ public class App {
       <Docs>
         <remarks>
           <para
-            >If <paramref
-             name="name" />
+            >If <paramref name="name" />
 
             
 
-             contains a colon, <see
-             cref="T:System.Xml.XmlException" />
+             contains a colon, <see cref="T:System.Xml.XmlException" />
 
             
 
@@ -4878,13 +4841,11 @@ public class App {
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
-           or <see
-           cref="F:System.String.Empty" />
+           or <see cref="F:System.String.Empty" />
 
           
 
@@ -4906,7 +4867,11 @@ public class App {
           <para>The name, if it is a valid NCName.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4954,7 +4919,11 @@ catch(Exception e) {
           <para>The name token, if it is a valid NMTOKEN.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4986,8 +4955,7 @@ catch(Exception e) {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No other values than the passed in argument should be returned. The characters valid for public id do not vary between XML editions, so no XmlVersion overload is required. </para>
           <para
-            >See <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=147985"
+            >See <see cref="http://go.microsoft.com/fwlink/?LinkID=147985"
               >XML 1.0 spec (fourth edition)</see
             >
 
@@ -5045,7 +5013,7 @@ catch(Exception e) {
 }</code>
           <para
             >For more information on tokens, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=103183"
+              cref="http://go.microsoft.com/fwlink/?LinkId=103183"
               >http://www.w3.org/TR/2001/REC-xmlschema-2-20010502/#token</see
             >
 
@@ -5063,7 +5031,11 @@ catch(Exception e) {
           <para>The token, if it is a valid token.</para>
         </returns>
         <param name="token">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5095,8 +5067,7 @@ catch(Exception e) {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No other values than the passed in argument should be returned. The characters that are valid for whitespace do not vary between XML editions, so no xml version overload is required.</para>
           <para
-            >See <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=147985"
+            >See <see cref="http://go.microsoft.com/fwlink/?LinkID=147985"
               >XML 1.0 spec (fourth edition)</see
             >
 
@@ -5149,7 +5120,7 @@ catch(Exception e) {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >No other values than the passed in argument should be returned. See <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=147985"
+              cref="http://go.microsoft.com/fwlink/?LinkID=147985"
               >XML 1.0 spec (fourth edition)</see
             >
 

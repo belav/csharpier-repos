@@ -22,59 +22,49 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.IObserver`1" />
+        >The <see cref="T:System.IObserver`1" />
 
         
 
-         and <see
-         cref="T:System.IObservable`1" />
+         and <see cref="T:System.IObservable`1" />
 
         
 
-         interfaces provide a generalized mechanism for push-based notification, also known as the observer design pattern. The <see
-         cref="T:System.IObservable`1" />
+         interfaces provide a generalized mechanism for push-based notification, also known as the observer design pattern. The <see cref="T:System.IObservable`1" />
 
         
 
-         interface represents the class that sends notifications (the provider); the <see
-         cref="T:System.IObserver`1" />
+         interface represents the class that sends notifications (the provider); the <see cref="T:System.IObserver`1" />
 
         
 
-         interface represents the class that receives them (the observer). <paramref
-         name="T" />
+         interface represents the class that receives them (the observer). <paramref name="T" />
 
         
 
          represents the class that provides the notification information.</para
       >
       <para
-        >An <see
-         cref="T:System.IObserver`1" />
+        >An <see cref="T:System.IObserver`1" />
 
         
 
-         implementation arranges to receive notifications from a provider (an <see
-         cref="T:System.IObservable`1" />
+         implementation arranges to receive notifications from a provider (an <see cref="T:System.IObservable`1" />
 
         
 
-         implementation) by passing an instance of itself to the provider's <see
-         cref="M:System.IObservable`1.Subscribe(System.IObserver{`0})" />
+         implementation) by passing an instance of itself to the provider's <see cref="M:System.IObservable`1.Subscribe(System.IObserver{`0})" />
 
         
 
-         method. This method returns an <see
-         cref="T:System.IDisposable" />
+         method. This method returns an <see cref="T:System.IDisposable" />
 
         
 
          object that can be used to unsubscribe the observer before the provider finishes sending notifications.</para
       >
       <para
-        >The <see
-         cref="T:System.IObserver`1" />
+        >The <see cref="T:System.IObserver`1" />
 
         
 
@@ -83,8 +73,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="M:System.IObserver`1.OnNext(`0)" />
+            >The <see cref="M:System.IObserver`1.OnNext(`0)" />
 
             
 
@@ -93,8 +82,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.IObserver`1.OnError(System.Exception)" />
+            >The <see cref="M:System.IObserver`1.OnError(System.Exception)" />
 
             
 
@@ -103,8 +91,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.IObserver`1.OnCompleted" />
+            >The <see cref="M:System.IObserver`1.OnCompleted" />
 
             
 
@@ -137,28 +124,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the observer's <see
-             cref="M:System.IObserver`1.OnCompleted" />
+            >When the observer's <see cref="M:System.IObserver`1.OnCompleted" />
 
             
 
-             implementation is called, the <see
-             cref="M:System.IObserver`1.OnCompleted" />
+             implementation is called, the <see cref="M:System.IObserver`1.OnCompleted" />
 
             
 
-             method can optionally call the <see
-             cref="M:System.IDisposable.Dispose" />
+             method can optionally call the <see cref="M:System.IDisposable.Dispose" />
 
             
 
-             method of the <see
-             cref="T:System.IDisposable" />
+             method of the <see cref="T:System.IDisposable" />
 
             
 
-             object that was returned to the observer when it called the <see
-             cref="M:System.IObservable`1.Subscribe(System.IObserver{`0})" />
+             object that was returned to the observer when it called the <see cref="M:System.IObservable`1.Subscribe(System.IObserver{`0})" />
 
             
 
@@ -191,18 +173,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although <paramref
-             name="error" />
+            >Although <paramref name="error" />
 
             
 
-             is an object that is derived from <see
-             cref="T:System.Exception" />
+             is an object that is derived from <see cref="T:System.Exception" />
 
             
 
-            , it does not necessarily represent an exception that is thrown by the provider. It can also represent a routine or expected error condition, such as data that is missing or unavailable. The <see
-             cref="M:System.IObserver`1.OnError(System.Exception)" />
+            , it does not necessarily represent an exception that is thrown by the provider. It can also represent a routine or expected error condition, such as data that is missing or unavailable. The <see cref="M:System.IObserver`1.OnError(System.Exception)" />
 
             
 
@@ -214,7 +193,11 @@
           <para>Notifies the observer that the provider has experienced an error condition.</para>
         </summary>
         <param name="error">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

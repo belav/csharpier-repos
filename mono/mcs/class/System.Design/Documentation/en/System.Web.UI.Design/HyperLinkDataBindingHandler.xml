@@ -33,8 +33,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Web.UI.Design.HyperLinkDataBindingHandler" />
+            >Initializes an instance of the <see cref="T:System.Web.UI.Design.HyperLinkDataBindingHandler" />
 
             
 
@@ -64,28 +63,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method determines whether the <see
-             cref="P:System.Web.UI.WebControls.HyperLink.Text" />
+            >This method determines whether the <see cref="P:System.Web.UI.WebControls.HyperLink.Text" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.HyperLink.NavigateUrl" />
+             and <see cref="P:System.Web.UI.WebControls.HyperLink.NavigateUrl" />
 
             
 
-             properties of the <see
-             cref="T:System.Web.UI.WebControls.HyperLink" />
+             properties of the <see cref="T:System.Web.UI.WebControls.HyperLink" />
 
             
 
-             control are data-bound. If the <see
-             cref="P:System.Web.UI.WebControls.HyperLink.Text" />
+             control are data-bound. If the <see cref="P:System.Web.UI.WebControls.HyperLink.Text" />
 
             
 
-             property is data-bound, this method sets the value of the property to "DataBound". If the <see
-             cref="P:System.Web.UI.WebControls.HyperLink.NavigateUrl" />
+             property is data-bound, this method sets the value of the property to "DataBound". If the <see cref="P:System.Web.UI.WebControls.HyperLink.NavigateUrl" />
 
             
 
@@ -97,24 +91,30 @@
           <para>Resolves design-time data-binding for the specified control.</para>
         </summary>
         <param name="designerHost">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          The <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 
            for the document that contains the control. </param
         >
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 

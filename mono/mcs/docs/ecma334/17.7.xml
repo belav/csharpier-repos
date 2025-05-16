@@ -2,16 +2,14 @@
 <clause number="17.7" title="Events">
   <paragraph>An event is a member that enables an object or class to provide notifications. Clients can attach executable code for events by supplying event handlers. </paragraph>
   <paragraph
-    >Events are declared using event-declarations: <grammar_production
-    >
+    >Events are declared using event-declarations: <grammar_production>
       <name>
         <non_terminal where="17.7">event-declaration</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="24.2">attributes</non_terminal>
         <opt />
         <non_terminal where="17.7">event-modifiers</non_terminal>
@@ -45,8 +43,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="17.7">event-modifier</non_terminal>
       </rhs>
       <rhs>
@@ -61,8 +58,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <keyword>new</keyword>
       </rhs>
       <rhs>
@@ -103,8 +99,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="17.7">add-accessor-declaration</non_terminal>
         <non_terminal where="17.7">remove-accessor-declaration</non_terminal>
       </rhs>
@@ -120,8 +115,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="24.2">attributes</non_terminal>
         <opt />
         <terminal>add</terminal>
@@ -135,8 +129,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="24.2">attributes</non_terminal>
         <opt />
         <terminal>remove</terminal>
@@ -145,143 +138,139 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >An <non_terminal
-     where="17.7">event-declaration</non_terminal>
+    >An <non_terminal where="17.7"
+      >event-declaration</non_terminal
+    >
 
     
 
-     may include a set of attributes (<hyperlink
-    >24</hyperlink>
+     may include a set of attributes (<hyperlink>24</hyperlink>
 
     
 
-    ) and a valid combination of the four access modifiers (<hyperlink
-    >17.2.3</hyperlink>
+    ) and a valid combination of the four access modifiers (<hyperlink>17.2.3</hyperlink>
 
     
 
-    ), the new (<hyperlink
-    >17.2.2</hyperlink>
+    ), the new (<hyperlink>17.2.2</hyperlink>
 
     
 
-    ), static (<hyperlink
-    >17.5.2</hyperlink>
+    ), static (<hyperlink>17.5.2</hyperlink>
 
     
 
-    , <hyperlink
-    >17.7.3</hyperlink>
+    , <hyperlink>17.7.3</hyperlink>
 
     
 
-    ), virtual (<hyperlink
-    >17.5.3</hyperlink>
+    ), virtual (<hyperlink>17.5.3</hyperlink>
 
     
 
-    , <hyperlink
-    >17.7.4</hyperlink>
+    , <hyperlink>17.7.4</hyperlink>
 
     
 
-    ), override (<hyperlink
-    >17.5.4</hyperlink>
+    ), override (<hyperlink>17.5.4</hyperlink>
 
     
 
-    , <hyperlink
-    >17.7.4</hyperlink>
+    , <hyperlink>17.7.4</hyperlink>
 
     
 
-    ), sealed (<hyperlink
-    >17.5.5</hyperlink>
+    ), sealed (<hyperlink>17.5.5</hyperlink>
 
     
 
-    ), abstract (<hyperlink
-    >17.5.6</hyperlink>
+    ), abstract (<hyperlink>17.5.6</hyperlink>
 
     
 
-    , <hyperlink
-    >17.7.4</hyperlink>
+    , <hyperlink>17.7.4</hyperlink>
 
     
 
     ), and extern modifiers. </paragraph
   >
   <paragraph
-    >Event declarations are subject to the same rules as method declarations (<hyperlink
-    >17.5</hyperlink>
+    >Event declarations are subject to the same rules as method declarations (<hyperlink>17.5</hyperlink>
 
     
 
     ) with regard to valid combinations of modifiers. </paragraph
   >
   <paragraph
-    >The type of an event declaration must be a <non_terminal
-     where="11.2">delegate-type</non_terminal>
+    >The type of an event declaration must be a <non_terminal where="11.2"
+      >delegate-type</non_terminal
+    >
 
     
 
-     (<hyperlink
-    >11.2</hyperlink>
+     (<hyperlink>11.2</hyperlink>
 
     
 
     ), and that <non_terminal
-     where="11.2">delegate-type</non_terminal>
+      where="11.2"
+      >delegate-type</non_terminal
+    >
 
     
 
-     must be at least as accessible as the event itself (<hyperlink
-    >10.5.4</hyperlink>
+     must be at least as accessible as the event itself (<hyperlink>10.5.4</hyperlink>
 
     
 
     ). </paragraph
   >
   <paragraph
-    >An event declaration may include <non_terminal
-     where="17.7">event-accessor-declarations</non_terminal>
+    >An event declaration may include <non_terminal where="17.7"
+      >event-accessor-declarations</non_terminal
+    >
 
     
 
-    . However, if it does not, for non-extern,  non-abstract events, the compiler shall supply them automatically (<hyperlink
-    >17.7.1</hyperlink>
+    . However, if it does not, for non-extern,  non-abstract events, the compiler shall supply them automatically (<hyperlink>17.7.1</hyperlink>
 
     
 
     ); for extern events, the accessors are provided externally. </paragraph
   >
   <paragraph
-    >An event declaration that omits <non_terminal
-     where="17.7">event-accessor-declarations</non_terminal>
+    >An event declaration that omits <non_terminal where="17.7"
+      >event-accessor-declarations</non_terminal
+    >
 
     
 
-     defines one or more events-one for each of the <non_terminal
-     where="17.4">variable-declarator</non_terminal>
+     defines one or more events-one for each of the <non_terminal where="17.4"
+      >variable-declarator</non_terminal
+    >
 
     
 
     s. The attributes and modifiers apply to all of the members declared by such an  <non_terminal
-     where="17.7">event-declaration</non_terminal>
+      where="17.7"
+      >event-declaration</non_terminal
+    >
 
     
 
     . </paragraph
   >
   <paragraph
-    >It is a compile-time error for an <non_terminal
-     where="17.7">event-declaration</non_terminal>
+    >It is a compile-time error for an <non_terminal where="17.7"
+      >event-declaration</non_terminal
+    >
 
     
 
      to include both the abstract modifier and  brace-delimited <non_terminal
-     where="17.7">event-accessor-declarations</non_terminal>
+      where="17.7"
+      >event-accessor-declarations</non_terminal
+    >
 
     
 
@@ -289,15 +278,16 @@
   >
   <paragraph
     >When an event declaration includes an extern modifier, the event is said to be an external event. Because an external event declaration provides no actual implementation, it is an error for it to include both the extern modifier and <non_terminal
-     where="17.7">event-accessor-declarations</non_terminal>
+      where="17.7"
+      >event-accessor-declarations</non_terminal
+    >
 
     
 
     . </paragraph
   >
   <paragraph
-    >An event can be used as the left-hand operand of the += and -= operators (<hyperlink
-    >14.13.3</hyperlink>
+    >An event can be used as the left-hand operand of the += and -= operators (<hyperlink>14.13.3</hyperlink>
 
     
 
@@ -305,8 +295,7 @@
   >
   <paragraph>Since += and -= are the only operations that are permitted on an event outside the type that declares the event, external code can add and remove handlers for an event, but cannot in any other way obtain or modify the underlying list of event handlers. </paragraph>
   <paragraph
-    >In an operation of the form x += y or x -= y, when x is an event and the reference takes place outside the type that contains the declaration of x, the result of the operation has type <keyword
-    >void</keyword>
+    >In an operation of the form x += y or x -= y, when x is an event and the reference takes place outside the type that contains the declaration of x, the result of the operation has type <keyword>void</keyword>
 
     
 
@@ -314,8 +303,7 @@
   >
   <paragraph>
     <example
-      >[Example: The following example shows how event handlers are attached to instances of the Button class: <code_example
-      >
+      >[Example: The following example shows how event handlers are attached to instances of the Button class: <code_example>
         <![CDATA[
 public delegate void EventHandler(object sender, EventArgs e);  
 public class Button: Control  

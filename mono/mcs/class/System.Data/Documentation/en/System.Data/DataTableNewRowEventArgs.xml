@@ -15,8 +15,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="M:System.Data.DataTable.NewRow" />
+        >Provides data for the <see cref="M:System.Data.DataTable.NewRow" />
 
         
 
@@ -41,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.Data.DataTableNewRowEventArgs" />
+            >Initializes a new instance of <see cref="T:System.Data.DataTableNewRowEventArgs" />
 
             
 

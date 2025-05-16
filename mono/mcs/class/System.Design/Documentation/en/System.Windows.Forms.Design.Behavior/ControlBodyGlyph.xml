@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+        >The <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
         
 
@@ -27,8 +26,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Associates a <see
-         cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+        >Associates a <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
         
 
@@ -57,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.ControlBodyGlyph" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.ControlBodyGlyph" />
 
             
 
@@ -66,63 +63,72 @@
           >
         </summary>
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           that represents the bounds of the <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+           that represents the bounds of the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
           .</param
         >
         <param name="cursor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Cursor" />
+          A <see cref="T:System.Windows.Forms.Cursor" />
 
           
 
-           that represents the cursor to display when the mouse pointer is over the <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+           that represents the cursor to display when the mouse pointer is over the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
           .</param
         >
         <param name="relatedComponent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The component with which the <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+          The component with which the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
            is associated.</param
         >
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+          The <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
           
 
-           with which the <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+           with which the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
@@ -150,8 +156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.ControlBodyGlyph" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.ControlBodyGlyph" />
 
             
 
@@ -159,63 +164,72 @@
           >
         </summary>
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           that represents the bounds of the <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+           that represents the bounds of the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
           .</param
         >
         <param name="cursor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Cursor" />
+          A <see cref="T:System.Windows.Forms.Cursor" />
 
           
 
-           that represents the cursor to display when the mouse pointer is over the <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+           that represents the cursor to display when the mouse pointer is over the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
           .</param
         >
         <param name="relatedComponent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The component with which the <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+          The component with which the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
            is associated.</param
         >
         <param name="designer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Design.ControlDesigner" />
+          A <see cref="T:System.Windows.Forms.Design.ControlDesigner" />
 
           
 
-           with which the <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+           with which the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
@@ -241,8 +255,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the bounds of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+            >Gets the bounds of the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
@@ -271,8 +284,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether a mouse click at the specified point should be handled by the <see
-             cref="T:System.Windows.Forms.Design.Behavior.ControlBodyGlyph" />
+            >Indicates whether a mouse click at the specified point should be handled by the <see cref="T:System.Windows.Forms.Design.Behavior.ControlBodyGlyph" />
 
             
 
@@ -282,18 +294,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.Cursor" />
+            >A <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
-             if the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+             if the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
-             is associated with <paramref
-             name="p" />
+             is associated with <paramref name="p" />
 
             
 
@@ -301,7 +310,11 @@
           >
         </returns>
         <param name="p">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

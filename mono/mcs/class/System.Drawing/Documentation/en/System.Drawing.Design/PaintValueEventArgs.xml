@@ -25,18 +25,15 @@
 
         
 
-         provides all the information needed for a <see
-         cref="T:System.Drawing.Design.UITypeEditor" />
+         provides all the information needed for a <see cref="T:System.Drawing.Design.UITypeEditor" />
 
         
 
-         to paint within an area based on the value of the specified object, including the <see
-         cref="T:System.Drawing.Rectangle" />
+         to paint within an area based on the value of the specified object, including the <see cref="T:System.Drawing.Rectangle" />
 
         
 
-         in which the drawing should be done and the <see
-         cref="T:System.Drawing.Graphics" />
+         in which the drawing should be done and the <see cref="T:System.Drawing.Graphics" />
 
         
 
@@ -46,8 +43,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="M:System.Drawing.Design.UITypeEditor.PaintValue(System.Object,System.Drawing.Graphics,System.Drawing.Rectangle)" />
+        >Provides data for the <see cref="M:System.Drawing.Design.UITypeEditor.PaintValue(System.Object,System.Drawing.Graphics,System.Drawing.Rectangle)" />
 
         
 
@@ -74,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Design.PaintValueEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Design.PaintValueEventArgs" />
 
             
 
@@ -83,38 +78,52 @@
           >
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The context in which the value appears. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value to paint. </param
         >
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            object with which drawing is to be done. </param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
@@ -160,8 +169,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ComponentModel.ITypeDescriptorContext" />
+            >Gets the <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
             
 
@@ -186,8 +194,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Drawing.Graphics" />
+            >Gets the <see cref="T:System.Drawing.Graphics" />
 
             
 

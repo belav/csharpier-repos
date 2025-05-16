@@ -17,8 +17,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Drawing.Drawing2D.InterpolationMode" />
+        >The <see cref="T:System.Drawing.Drawing2D.InterpolationMode" />
 
         
 
@@ -153,13 +152,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to the <see
-             cref="F:System.Drawing.Drawing2D.QualityMode.Invalid" />
+            >Equivalent to the <see cref="F:System.Drawing.Drawing2D.QualityMode.Invalid" />
 
             
 
-             element of the <see
-             cref="T:System.Drawing.Drawing2D.QualityMode" />
+             element of the <see cref="T:System.Drawing.Drawing2D.QualityMode" />
 
             
 

@@ -41,46 +41,38 @@
          can be used to represent a single line comment.</para
       >
       <para
-        >A <see
-         cref="T:System.CodeDom.CodeCommentStatement" />
+        >A <see cref="T:System.CodeDom.CodeCommentStatement" />
 
         
 
-         can contain a <see
-         cref="T:System.CodeDom.CodeComment" />
+         can contain a <see cref="T:System.CodeDom.CodeComment" />
 
         
 
-         and allows it to be treated as a statement and generated as code within a collection of statements. Multi-line comments can be represented with multiple <see
-         cref="T:System.CodeDom.CodeCommentStatement" />
+         and allows it to be treated as a statement and generated as code within a collection of statements. Multi-line comments can be represented with multiple <see cref="T:System.CodeDom.CodeCommentStatement" />
 
         
 
          objects.</para
       >
       <para
-        >To include a comment in a CodeDOM graph that can be generated to source code, add a <see
-         cref="T:System.CodeDom.CodeComment" />
+        >To include a comment in a CodeDOM graph that can be generated to source code, add a <see cref="T:System.CodeDom.CodeComment" />
 
         
 
-         to a <see
-         cref="T:System.CodeDom.CodeCommentStatement" />
+         to a <see cref="T:System.CodeDom.CodeCommentStatement" />
 
         
 
-        , and add this to the statements collection of a <see
-         cref="T:System.CodeDom.CodeMemberMethod" />
+        , and add this to the statements collection of a <see cref="T:System.CodeDom.CodeMemberMethod" />
 
         
 
-         or to the comments collection of a <see
-         cref="T:System.CodeDom.CodeNamespace" />
+         or to the comments collection of a <see cref="T:System.CodeDom.CodeNamespace" />
 
         
 
-         or any object that derives from <see
-         cref="T:System.CodeDom.CodeTypeMember" />
+         or any object that derives from <see cref="T:System.CodeDom.CodeTypeMember" />
 
         
 
@@ -112,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeComment" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeComment" />
 
             
 
@@ -143,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeComment" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeComment" />
 
             
 
@@ -152,7 +142,11 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -182,8 +176,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeComment" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeComment" />
 
             
 
@@ -191,14 +184,22 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The contents of the comment. </param
         >
         <param name="docComment">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -249,8 +250,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text of this property should not contain line breaks. If multiple lines are required, multiple <see
-             cref="T:System.CodeDom.CodeComment" />
+            >The text of this property should not contain line breaks. If multiple lines are required, multiple <see cref="T:System.CodeDom.CodeComment" />
 
             
 

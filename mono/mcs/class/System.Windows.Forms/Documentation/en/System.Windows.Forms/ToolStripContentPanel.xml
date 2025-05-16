@@ -40,28 +40,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can use the top, bottom, left, and right panels of the <see
-         cref="T:System.Windows.Forms.ToolStripContainer" />
+        >You can use the top, bottom, left, and right panels of the <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
         
 
-         to hold <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+         to hold <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-        , <see
-         cref="T:System.Windows.Forms.MenuStrip" />
+        , <see cref="T:System.Windows.Forms.MenuStrip" />
 
         
 
-        , or <see
-         cref="T:System.Windows.Forms.StatusStrip" />
+        , or <see cref="T:System.Windows.Forms.StatusStrip" />
 
         
 
-         controls. Use the <see
-         cref="T:System.Windows.Forms.ToolStripContentPanel" />
+         controls. Use the <see cref="T:System.Windows.Forms.ToolStripContentPanel" />
 
         
 
@@ -71,8 +66,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the center panel of a <see
-         cref="T:System.Windows.Forms.ToolStripContainer" />
+        >Represents the center panel of a <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
         
 
@@ -91,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripContentPanel" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripContentPanel" />
 
             
 
@@ -361,13 +354,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overridden to ensure that the background color of the <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+            >Overridden to ensure that the background color of the <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
-             reflects the background color of the <see
-             cref="T:System.Windows.Forms.ToolStripContentPanel" />
+             reflects the background color of the <see cref="T:System.Windows.Forms.ToolStripContentPanel" />
 
             
 
@@ -520,8 +511,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -745,8 +735,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -755,8 +744,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripContentPanel.OnLoad(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripContentPanel.OnLoad(System.EventArgs)" />
 
             
 
@@ -766,8 +754,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Form.Load" />
+            >Raises the <see cref="E:System.Windows.Forms.Form.Load" />
 
             
 
@@ -775,12 +762,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.EventArgs" />
+          A <see cref="T:System.EventArgs" />
 
           
 
@@ -813,21 +803,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method calls <see
-             cref="T:System.Windows.Forms.ToolStripContentPanelRenderEventArgs" />
+            >This method calls <see cref="T:System.Windows.Forms.ToolStripContentPanelRenderEventArgs" />
 
             
 
-            , which contains all the information necessary to render the <see
-             cref="T:System.Windows.Forms.ToolStripContentPanel" />
+            , which contains all the information necessary to render the <see cref="T:System.Windows.Forms.ToolStripContentPanel" />
 
             
 
             .</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -836,8 +823,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripContentPanel.OnPaintBackground(System.Windows.Forms.PaintEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripContentPanel.OnPaintBackground(System.Windows.Forms.PaintEventArgs)" />
 
             
 
@@ -847,8 +833,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the <see
-             cref="T:System.Windows.Forms.ToolStripContentPanel" />
+            >Renders the <see cref="T:System.Windows.Forms.ToolStripContentPanel" />
 
             
 
@@ -856,12 +841,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.PaintEventArgs" />
+          A <see cref="T:System.Windows.Forms.PaintEventArgs" />
 
           
 
@@ -894,8 +882,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -904,8 +891,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripContentPanel.OnRendererChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripContentPanel.OnRendererChanged(System.EventArgs)" />
 
             
 
@@ -915,8 +901,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripContentPanel.RendererChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripContentPanel.RendererChanged" />
 
             
 
@@ -924,12 +909,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -964,13 +952,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+            >Gets or sets a <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
-             used to customize the appearance of a <see
-             cref="T:System.Windows.Forms.ToolStripContentPanel" />
+             used to customize the appearance of a <see cref="T:System.Windows.Forms.ToolStripContentPanel" />
 
             
 
@@ -993,8 +979,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1006,8 +991,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ToolStripContentPanel.Renderer" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ToolStripContentPanel.Renderer" />
 
             
 
@@ -1035,8 +1019,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the painting styles to be applied to the <see
-             cref="T:System.Windows.Forms.ToolStripContentPanel" />
+            >Gets or sets the painting styles to be applied to the <see cref="T:System.Windows.Forms.ToolStripContentPanel" />
 
             
 

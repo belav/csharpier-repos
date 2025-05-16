@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class provides programmatic access to information that can be stored in configuration files that are used by classes that support SMTP in the <see
-         cref="N:System.Net.Mail" />
+        >This class provides programmatic access to information that can be stored in configuration files that are used by classes that support SMTP in the <see cref="N:System.Net.Mail" />
 
         
 
@@ -54,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Configuration.SmtpSection" />
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.SmtpSection" />
 
             
 
@@ -92,18 +90,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Valid values for this property are <see
-             cref="F:System.Net.Mail.SmtpDeliveryMethod.Network" />
+            >Valid values for this property are <see cref="F:System.Net.Mail.SmtpDeliveryMethod.Network" />
 
             
 
-            , <see
-             cref="F:System.Net.Mail.SmtpDeliveryMethod.PickupDirectoryFromIis" />
+            , <see cref="F:System.Net.Mail.SmtpDeliveryMethod.PickupDirectoryFromIis" />
 
             
 
-            , and <see
-             cref="F:System.Net.Mail.SmtpDeliveryMethod.SpecifiedPickupDirectory" />
+            , and <see cref="F:System.Net.Mail.SmtpDeliveryMethod.SpecifiedPickupDirectory" />
 
             
 
@@ -113,8 +108,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the Simple Mail Transport Protocol (SMTP) delivery method. The default delivery method is <see
-             cref="F:System.Net.Mail.SmtpDeliveryMethod.Network" />
+            >Gets or sets the Simple Mail Transport Protocol (SMTP) delivery method. The default delivery method is <see cref="F:System.Net.Mail.SmtpDeliveryMethod.Network" />
 
             
 
@@ -178,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the configuration element that controls the network settings used by the Simple Mail Transport Protocol (SMTP). file.<see
-             cref="T:System.Net.Configuration.SmtpNetworkElement" />
+            >Gets the configuration element that controls the network settings used by the Simple Mail Transport Protocol (SMTP). file.<see cref="T:System.Net.Configuration.SmtpNetworkElement" />
 
             
 
@@ -239,13 +232,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that directory specified by <see
-             cref="P:System.Net.Mail.SmtpClient.PickupDirectoryLocation" />
+            >Indicates that directory specified by <see cref="P:System.Net.Mail.SmtpClient.PickupDirectoryLocation" />
 
             
 
-             will be used as the SMTP pickup directory. If the SMTP client is unable to write to the pickup directory location an I/O exception is thrown by <see
-             cref="Overload:System.Net.Mail.SmtpClient.Send" />
+             will be used as the SMTP pickup directory. If the SMTP client is unable to write to the pickup directory location an I/O exception is thrown by <see cref="Overload:System.Net.Mail.SmtpClient.Send" />
 
             
 

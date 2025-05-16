@@ -17,26 +17,22 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>All printers support high, medium, low, and draft resolutions, although they can generate the same output.</para>
       <para
-        >This enumeration is used by the <see
-         cref="T:System.Drawing.Printing.PrinterResolution" />
+        >This enumeration is used by the <see cref="T:System.Drawing.Printing.PrinterResolution" />
 
         
 
-        , <see
-         cref="T:System.Drawing.Printing.PrinterSettings" />
+        , <see cref="T:System.Drawing.Printing.PrinterSettings" />
 
         
 
-        , and <see
-         cref="T:System.Drawing.Printing.PageSettings" />
+        , and <see cref="T:System.Drawing.Printing.PageSettings" />
 
         
 
          classes.</para
       >
       <para
-        >For more information on printing, see the <see
-         cref="N:System.Drawing.Printing" />
+        >For more information on printing, see the <see cref="N:System.Drawing.Printing" />
 
         
 

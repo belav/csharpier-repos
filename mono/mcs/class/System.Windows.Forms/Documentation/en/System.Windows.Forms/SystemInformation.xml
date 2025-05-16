@@ -14,8 +14,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.SystemInformation" />
+        >The <see cref="T:System.Windows.Forms.SystemInformation" />
 
         
 
@@ -23,7 +22,9 @@
       >
       <para
         >For more information about system-wide parameters, see "SystemParametersInfo" in the Platform SDK documentation at <see
-         cref="">http://msdn.microsoft.com</see>
+          cref=""
+          >http://msdn.microsoft.com</see
+        >
 
         
 
@@ -68,8 +69,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ArrangeDirection" />
+            >The <see cref="T:System.Windows.Forms.ArrangeDirection" />
 
             
 
@@ -100,8 +100,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ArrangeStartingPosition" />
+            >The <see cref="T:System.Windows.Forms.ArrangeStartingPosition" />
 
             
 
@@ -111,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Windows.Forms.ArrangeStartingPosition" />
+            >Gets an <see cref="T:System.Windows.Forms.ArrangeStartingPosition" />
 
             
 
@@ -139,8 +137,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.BootMode" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.BootMode" />
 
             
 
@@ -150,8 +147,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Windows.Forms.BootMode" />
+            >Gets a <see cref="T:System.Windows.Forms.BootMode" />
 
             
 
@@ -178,39 +174,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.Border3DSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.Border3DSize" />
 
             
 
              property indicates the thickness, in pixels, of a three-dimensional (3-D) style system control border.</para
           >
           <para
-            >The <see
-             cref="P:System.Drawing.Size.Width" />
+            >The <see cref="P:System.Drawing.Size.Width" />
 
             
 
-             property of the <see
-             cref="P:System.Windows.Forms.SystemInformation.Border3DSize" />
+             property of the <see cref="P:System.Windows.Forms.SystemInformation.Border3DSize" />
 
             
 
-              property indicates the width of a vertical 3-D border. The <see
-             cref="P:System.Drawing.Size.Height" />
+              property indicates the width of a vertical 3-D border. The <see cref="P:System.Drawing.Size.Height" />
 
             
 
-             property of the <see
-             cref="P:System.Windows.Forms.SystemInformation.Border3DSize" />
+             property of the <see cref="P:System.Windows.Forms.SystemInformation.Border3DSize" />
 
             
 
              property indicates the height of a horizontal 3-D border.</para
           >
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.BorderSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.BorderSize" />
 
             
 
@@ -259,44 +249,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.BorderSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.BorderSize" />
 
             
 
              property indicates the thickness of a flat-style system control border in pixels.</para
           >
           <para
-            >The <see
-             cref="P:System.Drawing.Size.Width" />
+            >The <see cref="P:System.Drawing.Size.Width" />
 
             
 
-             property of the <see
-             cref="P:System.Windows.Forms.SystemInformation.BorderSize" />
+             property of the <see cref="P:System.Windows.Forms.SystemInformation.BorderSize" />
 
             
 
-             property indicates the width of a vertical flat-style border. The <see
-             cref="P:System.Drawing.Size.Height" />
+             property indicates the width of a vertical flat-style border. The <see cref="P:System.Drawing.Size.Height" />
 
             
 
-             property of the <see
-             cref="P:System.Windows.Forms.SystemInformation.BorderSize" />
+             property of the <see cref="P:System.Windows.Forms.SystemInformation.BorderSize" />
 
             
 
              property indicates the height of a horizontal flat-style border.</para
           >
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.Border3DSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.Border3DSize" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.SystemInformation" />
+             property of the <see cref="T:System.Windows.Forms.SystemInformation" />
 
             
 
@@ -327,8 +310,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.CaptionButtonSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.CaptionButtonSize" />
 
             
 
@@ -357,8 +339,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.CaptionHeight" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.CaptionHeight" />
 
             
 
@@ -428,21 +409,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.ComputerName" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.ComputerName" />
 
             
 
-             property retrieves the NetBIOS name of the local computer. This is accomplished with a call into the native System Information function GetComputerName. This name is established at system startup, when the system reads it from the registry. If the local computer is a node in a cluster, <see
-             cref="P:System.Windows.Forms.SystemInformation.ComputerName" />
+             property retrieves the NetBIOS name of the local computer. This is accomplished with a call into the native System Information function GetComputerName. This name is established at system startup, when the system reads it from the registry. If the local computer is a node in a cluster, <see cref="P:System.Windows.Forms.SystemInformation.ComputerName" />
 
             
 
              returns the name of the cluster virtual server.</para
           >
           <para
-            >You can use the <see
-             cref="P:System.Windows.Forms.SystemInformation.ComputerName" />
+            >You can use the <see cref="P:System.Windows.Forms.SystemInformation.ComputerName" />
 
             
 
@@ -495,8 +473,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.DbcsEnabled" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.DbcsEnabled" />
 
             
 
@@ -546,16 +523,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.DoubleClickSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.DoubleClickSize" />
 
             
 
              property indicates the size of a rectangular area centered around the point at which the last click occurred. To cause a double-click, a second click must occur within the area of the rectangle before the double-click time elapses.</para
           >
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.DoubleClickTime" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.DoubleClickTime" />
 
             
 
@@ -584,8 +559,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A double-click is a series of two clicks of the mouse button, the second occurring within a specified length of time after, and within a specified distance from, the first. The double-click time is the maximum number of milliseconds that can elapse between the first and second click of a double-click.</para>
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.DoubleClickSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.DoubleClickSize" />
 
             
 
@@ -635,8 +609,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.DragSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.DragSize" />
 
             
 
@@ -668,31 +641,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.FixedFrameBorderSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.FixedFrameBorderSize" />
 
             
 
              property indicates the thickness of the frame, in pixels, around the perimeter of a window that has a caption but is not sizable.</para
           >
           <para
-            >The <see
-             cref="P:System.Drawing.Size.Width" />
+            >The <see cref="P:System.Drawing.Size.Width" />
 
             
 
-             property of <see
-             cref="P:System.Windows.Forms.SystemInformation.FixedFrameBorderSize" />
+             property of <see cref="P:System.Windows.Forms.SystemInformation.FixedFrameBorderSize" />
 
             
 
-             is the height of the horizontal border and the <see
-             cref="P:System.Drawing.Size.Height" />
+             is the height of the horizontal border and the <see cref="P:System.Drawing.Size.Height" />
 
             
 
-             property of <see
-             cref="P:System.Windows.Forms.SystemInformation.FixedFrameBorderSize" />
+             property of <see cref="P:System.Windows.Forms.SystemInformation.FixedFrameBorderSize" />
 
             
 
@@ -747,8 +715,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.FontSmoothingType" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.FontSmoothingType" />
 
             
 
@@ -815,21 +782,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.FrameBorderSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.FrameBorderSize" />
 
             
 
              property indicates the width and height of the resizing border for a window.</para
           >
           <para
-            >The <see
-             cref="P:System.Drawing.Size.Width" />
+            >The <see cref="P:System.Drawing.Size.Width" />
 
             
 
-             value of this property is the width of a vertical resizing border. The <see
-             cref="P:System.Drawing.Size.Height" />
+             value of this property is the width of a vertical resizing border. The <see cref="P:System.Drawing.Size.Height" />
 
             
 
@@ -886,8 +850,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.HorizontalFocusThickness" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.HorizontalFocusThickness" />
 
             
 
@@ -920,8 +883,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.HorizontalResizeBorderThickness" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.HorizontalResizeBorderThickness" />
 
             
 
@@ -989,8 +951,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.HorizontalScrollBarThumbWidth" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.HorizontalScrollBarThumbWidth" />
 
             
 
@@ -1021,8 +982,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.IconHorizontalSpacing" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.IconHorizontalSpacing" />
 
             
 
@@ -1068,13 +1028,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.IconSpacingSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.IconSpacingSize" />
 
             
 
-             property indicates the size of the grid rectangle that each icon fits into when the system arranges them in a large-icon view. This value is always greater than or equal to <see
-             cref="P:System.Windows.Forms.SystemInformation.IconSize" />
+             property indicates the size of the grid rectangle that each icon fits into when the system arranges them in a large-icon view. This value is always greater than or equal to <see cref="P:System.Windows.Forms.SystemInformation.IconSize" />
 
             
 
@@ -1105,8 +1063,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.IconVerticalSpacing" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.IconVerticalSpacing" />
 
             
 
@@ -1136,8 +1093,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.IsActiveWindowTrackingEnabled" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.IsActiveWindowTrackingEnabled" />
 
             
 
@@ -1170,8 +1126,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.IsComboBoxAnimationEnabled" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.IsComboBoxAnimationEnabled" />
 
             
 
@@ -1264,8 +1219,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.IsHotTrackingEnabled" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.IsHotTrackingEnabled" />
 
             
 
@@ -1316,8 +1270,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.IsKeyboardPreferred" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.IsKeyboardPreferred" />
 
             
 
@@ -1350,8 +1303,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.IsListBoxSmoothScrollingEnabled" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.IsListBoxSmoothScrollingEnabled" />
 
             
 
@@ -1381,16 +1333,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.IsMenuAnimationEnabled" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.IsMenuAnimationEnabled" />
 
             
 
              property indicates whether either of the fade or slide animation features of system control menus is enabled.</para
           >
           <para
-            >If the value of this property is true, the <see
-             cref="P:System.Windows.Forms.SystemInformation.IsMenuFadeEnabled" />
+            >If the value of this property is true, the <see cref="P:System.Windows.Forms.SystemInformation.IsMenuFadeEnabled" />
 
             
 
@@ -1420,13 +1370,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.IsMenuFadeEnabled" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.IsMenuFadeEnabled" />
 
             
 
-             property indicates whether a menu uses fade animation, if menu animation is enabled. The <see
-             cref="P:System.Windows.Forms.SystemInformation.IsMenuAnimationEnabled" />
+             property indicates whether a menu uses fade animation, if menu animation is enabled. The <see cref="P:System.Windows.Forms.SystemInformation.IsMenuAnimationEnabled" />
 
             
 
@@ -1435,8 +1383,7 @@
           <para>If menu animation is enabled and the value of this property is true, menus use fade animation. If menu animation is enabled and the value of this property is false, menus use slide animation. If menu animation is disabled, the value of this property is meaningless.</para>
           <block subset="none" type="note">
             <para
-              >If the value of the <see
-               cref="P:System.Windows.Forms.SystemInformation.IsMenuAnimationEnabled" />
+              >If the value of the <see cref="P:System.Windows.Forms.SystemInformation.IsMenuAnimationEnabled" />
 
               
 
@@ -1470,8 +1417,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.IsMinimizeRestoreAnimationEnabled" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.IsMinimizeRestoreAnimationEnabled" />
 
             
 
@@ -1498,8 +1444,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.IsSelectionFadeEnabled" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.IsSelectionFadeEnabled" />
 
             
 
@@ -1529,18 +1474,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.IsSnapToDefaultEnabled" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.IsSnapToDefaultEnabled" />
 
             
 
-             property indicates whether the snap-to-default-button feature is enabled. If the feature is enabled, the mouse cursor automatically moves to the default button, such as <ui
-            >OK</ui>
+             property indicates whether the snap-to-default-button feature is enabled. If the feature is enabled, the mouse cursor automatically moves to the default button, such as <ui>OK</ui>
 
             
 
-             or <ui
-            >Apply</ui>
+             or <ui>Apply</ui>
 
             
 
@@ -1570,8 +1512,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.IsTitleBarGradientEnabled" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.IsTitleBarGradientEnabled" />
 
             
 
@@ -1604,8 +1545,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.IsToolTipAnimationEnabled" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.IsToolTipAnimationEnabled" />
 
             
 
@@ -1618,8 +1558,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether <see
-             cref="T:System.Windows.Forms.ToolTip" />
+            >Gets a value indicating whether <see cref="T:System.Windows.Forms.ToolTip" />
 
             
 
@@ -1639,13 +1578,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.KanjiWindowHeight" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.KanjiWindowHeight" />
 
             
 
-             property indicates the height of the Kanji window on operating systems that support DBCS. The <see
-             cref="P:System.Windows.Forms.SystemInformation.DbcsEnabled" />
+             property indicates the height of the Kanji window on operating systems that support DBCS. The <see cref="P:System.Windows.Forms.SystemInformation.DbcsEnabled" />
 
             
 
@@ -1677,8 +1614,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property indicates the amount of time that elapses after a key is pressed and held down until keystroke repeat messages are sent by the operating system. This value is in the range from 0 (approximately 250 millisecond delay) through 3 (approximately 1 second delay). The actual delay associated with each value may vary depending on the hardware.</para>
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.KeyboardSpeed" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.KeyboardSpeed" />
 
             
 
@@ -1706,8 +1642,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property indicates the time between each keystroke repeat message that is sent when a user presses and holds a key down. This is a value in the range from 0 (approximately 2.5 repetitions per second) through 31 (approximately 30 repetitions per second). The actual repeat rates are hardware-dependent and may vary from a linear scale by as much as 20%.</para>
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.KeyboardDelay" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.KeyboardDelay" />
 
             
 
@@ -1734,13 +1669,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.MaxWindowTrackSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.MaxWindowTrackSize" />
 
             
 
-             property indicates the maximum dimensions to which a user can drag resize a window. The value returned by <see
-             cref="P:System.Windows.Forms.SystemInformation.MaxWindowTrackSize" />
+             property indicates the maximum dimensions to which a user can drag resize a window. The value returned by <see cref="P:System.Windows.Forms.SystemInformation.MaxWindowTrackSize" />
 
             
 
@@ -1771,8 +1704,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.MenuAccessKeysUnderlined" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.MenuAccessKeysUnderlined" />
 
             
 
@@ -1805,13 +1737,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Drawing.Size.Width" />
+            >The <see cref="P:System.Drawing.Size.Width" />
 
             
 
-             value of this property indicates the default width for a button on a menu-bar, in pixels. The <see
-             cref="P:System.Drawing.Size.Height" />
+             value of this property indicates the default width for a button on a menu-bar, in pixels. The <see cref="P:System.Drawing.Size.Height" />
 
             
 
@@ -1863,8 +1793,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.MenuCheckSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.MenuCheckSize" />
 
             
 
@@ -1892,8 +1821,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.MenuFont" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.MenuFont" />
 
             
 
@@ -1921,8 +1849,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.MenuHeight" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.MenuHeight" />
 
             
 
@@ -1953,8 +1880,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.MenuShowDelay" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.MenuShowDelay" />
 
             
 
@@ -1978,8 +1904,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.MidEastEnabled" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.MidEastEnabled" />
 
             
 
@@ -2010,8 +1935,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.MinimizedWindowSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.MinimizedWindowSize" />
 
             
 
@@ -2042,16 +1966,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.MinimizedWindowSpacingSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.MinimizedWindowSpacingSize" />
 
             
 
              property indicates the size, in pixels, of an arrangement grid cell for a minimized window. Each minimized window fits into a rectangle this size when arranged.</para
           >
           <para
-            >The value of this property is always greater than or equal to the value of the <see
-             cref="P:System.Windows.Forms.SystemInformation.MinimumWindowSize" />
+            >The value of this property is always greater than or equal to the value of the <see cref="P:System.Windows.Forms.SystemInformation.MinimumWindowSize" />
 
             
 
@@ -2082,8 +2004,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.MinimumWindowSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.MinimumWindowSize" />
 
             
 
@@ -2117,21 +2038,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.MinWindowTrackSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.MinWindowTrackSize" />
 
             
 
              property indicates the default smallest window size that can be produced by using the borders to size the window.</para
           >
           <para
-            >The user cannot drag the window frame to a size smaller than these dimensions. A <see
-             cref="T:System.Windows.Forms.Form" />
+            >The user cannot drag the window frame to a size smaller than these dimensions. A <see cref="T:System.Windows.Forms.Form" />
 
             
 
-             can override these values by setting the <see
-             cref="P:System.Windows.Forms.Form.MinimumSize" />
+             can override these values by setting the <see cref="P:System.Windows.Forms.Form.MinimumSize" />
 
             
 
@@ -2159,8 +2077,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.MonitorCount" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.MonitorCount" />
 
             
 
@@ -2194,16 +2111,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.MonitorsSameDisplayFormat" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.MonitorsSameDisplayFormat" />
 
             
 
              indicates whether all monitors currently recognized by the operating system are using the same pixel color format.</para
           >
           <para
-            >Pixel formats define the data structure used to encode pixel color and luminosity information. The <see
-             cref="T:System.Drawing.Imaging.PixelFormat" />
+            >Pixel formats define the data structure used to encode pixel color and luminosity information. The <see cref="T:System.Drawing.Imaging.PixelFormat" />
 
             
 
@@ -2237,16 +2152,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.MouseButtons" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.MouseButtons" />
 
             
 
              property indicates the number of mouse buttons recognized on the currently installed mouse.</para
           >
           <para
-            >You can use <see
-             cref="P:System.Windows.Forms.SystemInformation.MouseButtons" />
+            >You can use <see cref="P:System.Windows.Forms.SystemInformation.MouseButtons" />
 
             
 
@@ -2297,21 +2210,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.MouseHoverSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.MouseHoverSize" />
 
             
 
              property indicates the size of the rectangle within which the mouse pointer has to stay for the mouse hover time before a mouse hover message is generated.</para
           >
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.MouseHoverTime" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.MouseHoverTime" />
 
             
 
-             property indicates the time, in milliseconds, that a mouse pointer must remain within an area the size of the <see
-             cref="P:System.Windows.Forms.SystemInformation.MouseHoverSize" />
+             property indicates the time, in milliseconds, that a mouse pointer must remain within an area the size of the <see cref="P:System.Windows.Forms.SystemInformation.MouseHoverSize" />
 
             
 
@@ -2339,21 +2249,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.MouseHoverTime" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.MouseHoverTime" />
 
             
 
-             property indicates the amount of time, in milliseconds, that a mouse pointer must remain within an area the size of the <see
-             cref="P:System.Windows.Forms.SystemInformation.MouseHoverSize" />
+             property indicates the amount of time, in milliseconds, that a mouse pointer must remain within an area the size of the <see cref="P:System.Windows.Forms.SystemInformation.MouseHoverSize" />
 
             
 
              property in order to generate a mouse hover message.</para
           >
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.MouseHoverSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.MouseHoverSize" />
 
             
 
@@ -2380,13 +2287,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.MousePresent" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.MousePresent" />
 
             
 
-             property indicates whether a pointing device is present or installed on the system. This is usually the case, so <see
-             cref="P:System.Windows.Forms.SystemInformation.MousePresent" />
+             property indicates whether a pointing device is present or installed on the system. This is usually the case, so <see cref="P:System.Windows.Forms.SystemInformation.MousePresent" />
 
             
 
@@ -2443,8 +2348,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.MouseWheelPresent" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.MouseWheelPresent" />
 
             
 
@@ -2496,13 +2400,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.MouseWheelScrollLines" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.MouseWheelScrollLines" />
 
             
 
              property indicates how many lines to scroll, by default, in a multi-line control that has a scroll bar. The corresponding Platform SDK system-wide parameters are SPI_GETWHEELSCROLLLINES and SPI_SETWHEELSCROLLLINES. For more information about system-wide parameters, see "SystemParametersInfo" in the Platform SDK documentation at <see
-             cref="http://msdn.microsoft.com/">http://msdn.microsoft.com</see>
+              cref="http://msdn.microsoft.com/"
+              >http://msdn.microsoft.com</see
+            >
 
             
 
@@ -2510,8 +2415,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Be sure to handle the special case that occurs if the "One screen at a time" mouse option is selected. In this case, the <see
-               cref="P:System.Windows.Forms.SystemInformation.MouseWheelScrollLines" />
+              >Be sure to handle the special case that occurs if the "One screen at a time" mouse option is selected. In this case, the <see cref="P:System.Windows.Forms.SystemInformation.MouseWheelScrollLines" />
 
               
 
@@ -2540,8 +2444,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Mouse wheel operations that occur through a <see
-             cref="T:System.Windows.Forms.Control" />
+            >Mouse wheel operations that occur through a <see cref="T:System.Windows.Forms.Control" />
 
             
 
@@ -2572,8 +2475,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.Network" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.Network" />
 
             
 
@@ -2581,8 +2483,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This property always returns true on all Windows platforms supported by the .NET Framework. Use the <see
-               cref="N:System.Net.NetworkInformation" />
+              >This property always returns true on all Windows platforms supported by the .NET Framework. Use the <see cref="N:System.Net.NetworkInformation" />
 
               
 
@@ -2611,8 +2512,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.PenWindows" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.PenWindows" />
 
             
 
@@ -2707,8 +2607,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.PrimaryMonitorSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.PrimaryMonitorSize" />
 
             
 
@@ -2776,8 +2675,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.Secure" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.Secure" />
 
             
 
@@ -2805,8 +2703,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.ShowSounds" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.ShowSounds" />
 
             
 
@@ -2859,8 +2756,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.SmallCaptionButtonSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.SmallCaptionButtonSize" />
 
             
 
@@ -2887,8 +2783,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.SmallIconSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.SmallIconSize" />
 
             
 
@@ -2919,8 +2814,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.TerminalServerSession" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.TerminalServerSession" />
 
             
 
@@ -2950,8 +2844,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.ToolWindowCaptionButtonSize" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.ToolWindowCaptionButtonSize" />
 
             
 
@@ -3140,8 +3033,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Windows.Forms.SystemInformation.UserInteractive" />
+            >When the <see cref="P:System.Windows.Forms.SystemInformation.UserInteractive" />
 
             
 
@@ -3200,8 +3092,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.VerticalFocusThickness" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.VerticalFocusThickness" />
 
             
 
@@ -3234,8 +3125,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.VerticalResizeBorderThickness" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.VerticalResizeBorderThickness" />
 
             
 
@@ -3262,8 +3152,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.VerticalScrollBarArrowHeight" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.VerticalScrollBarArrowHeight" />
 
             
 
@@ -3294,8 +3183,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.VerticalScrollBarThumbHeight" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.VerticalScrollBarThumbHeight" />
 
             
 
@@ -3345,8 +3233,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.VirtualScreen" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.VirtualScreen" />
 
             
 
@@ -3355,13 +3242,11 @@
           <para>The position coordinates of the rectangle indicate the position offset, in pixels, of the upper left corner of the virtual screen area relative to the upper left corner of the onscreen area of the primary display. The size values of the rectangle indicate the size of the virtual screen area.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Drawing.Rectangle.X" />
+              >The <see cref="P:System.Drawing.Rectangle.X" />
 
               
 
-               position coordinate of the rectangle is negative when the virtual screen starts to the left of the left edge of the primary display. The <see
-               cref="P:System.Drawing.Rectangle.Y" />
+               position coordinate of the rectangle is negative when the virtual screen starts to the left of the left edge of the primary display. The <see cref="P:System.Drawing.Rectangle.Y" />
 
               
 
@@ -3396,8 +3281,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.SystemInformation.WorkingArea" />
+            >The <see cref="P:System.Windows.Forms.SystemInformation.WorkingArea" />
 
             
 
@@ -3408,8 +3292,7 @@
 
             
 
-             always returns the work area of the primary monitor. If you need the work area of a monitor in a multiple display environment, you can call one of the overloads of <see
-             cref="M:System.Windows.Forms.Screen.GetWorkingArea(System.Windows.Forms.Control)" />
+             always returns the work area of the primary monitor. If you need the work area of a monitor in a multiple display environment, you can call one of the overloads of <see cref="M:System.Windows.Forms.Screen.GetWorkingArea(System.Windows.Forms.Control)" />
 
             
 

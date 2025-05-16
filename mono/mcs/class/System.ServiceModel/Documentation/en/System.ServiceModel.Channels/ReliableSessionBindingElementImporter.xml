@@ -28,13 +28,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>indigo1 uses this class to import reliable session binding elements to binding policy assertions in metadata. This class takes the reliable session binding elements and writes custom policy assertions into the WSDL file when on the service. On the client, it looks for those assertions and inserts a corresponding binding element back into the client binding. Note that the presence of a reliable session in a binding is rendered as the reliable message assertion described in the WS-Reliable Messaging Policy specification.</para>
       <para
-        >crabout exchanging policy assertions between bindings to WSDL information see the <see
-         cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
+        >crabout exchanging policy assertions between bindings to WSDL information see the <see cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
 
         
 
-         and <see
-         cref="T:System.ServiceModel.Description.IPolicyExportExtension" />
+         and <see cref="T:System.ServiceModel.Description.IPolicyExportExtension" />
 
         
 
@@ -43,8 +41,7 @@
       <list type="bullet">
         <item>
           <para
-            >Implement the <see
-             cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
+            >Implement the <see cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
 
             
 
@@ -53,13 +50,11 @@
         </item>
         <item>
           <para
-            >Implement the <see
-             cref="T:System.ServiceModel.Description.IPolicyExportExtension" />
+            >Implement the <see cref="T:System.ServiceModel.Description.IPolicyExportExtension" />
 
             
 
-             interface on a <see
-             cref="T:System.ServiceModel.Channels.BindingElement" />
+             interface on a <see cref="T:System.ServiceModel.Channels.BindingElement" />
 
             
 
@@ -90,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.ReliableSessionBindingElementImporter" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.ReliableSessionBindingElementImporter" />
 
             
 
@@ -124,8 +118,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="M:System.ServiceModel.Description.IPolicyImportExtension.ImportPolicy(System.ServiceModel.Description.MetadataImporter,System.ServiceModel.Description.PolicyConversionContext)" />
+            >Implements the <see cref="M:System.ServiceModel.Description.IPolicyImportExtension.ImportPolicy(System.ServiceModel.Description.MetadataImporter,System.ServiceModel.Description.PolicyConversionContext)" />
 
             
 
@@ -137,24 +130,30 @@
           <para>Converts WS-Reliable Message policy assertions into the reliable session binding elements in a binding on the client.</para>
         </summary>
         <param name="importer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.MetadataImporter" />
+          The <see cref="T:System.ServiceModel.Description.MetadataImporter" />
 
           
 
            that imports the WSDL metadata into the binding element.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+          The <see cref="T:System.ServiceModel.Description.PolicyConversionContext" />
 
           
 

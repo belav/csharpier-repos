@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Anonymous pipes do not support the <see
-         cref="F:System.IO.Pipes.PipeTransmissionMode.Message" />
+        >Anonymous pipes do not support the <see cref="F:System.IO.Pipes.PipeTransmissionMode.Message" />
 
         
 

@@ -11,7 +11,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -52,10 +54,7 @@
       </Parameters>
       <Docs>
         <summary>Writes the whole element to the argument XmlWriter.</summary>
-        <param name="writer"
-          >a <see
-           cref="T:System.Xml.XmlWriter" />
-        </param>
+        <param name="writer">a <see cref="T:System.Xml.XmlWriter" /></param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -80,10 +79,7 @@
       <Parameters />
       <Docs>
         <summary>The RELAX NG pattern type for this class. It returns Grammar.</summary>
-        <returns
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngPatternType" />
-        </returns>
+        <returns>a <see cref="T:Commons.Xml.Relaxng.RelaxngPatternType" /></returns>
       </Docs>
     </Member>
     <Member MemberName="Starts">
@@ -98,10 +94,7 @@
       <Parameters />
       <Docs>
         <summary>The list that contains "start" components.</summary>
-        <value
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngGrammarContentList" />
-        </value>
+        <value>a <see cref="T:Commons.Xml.Relaxng.RelaxngGrammarContentList" /></value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -117,10 +110,7 @@
       <Parameters />
       <Docs>
         <summary>The list that contains "define" components.</summary>
-        <value
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngGrammarContentList" />
-        </value>
+        <value>a <see cref="T:Commons.Xml.Relaxng.RelaxngGrammarContentList" /></value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -136,10 +126,7 @@
       <Parameters />
       <Docs>
         <summary>The list that contains "include" components.</summary>
-        <value
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngGrammarContentList" />
-        </value>
+        <value>a <see cref="T:Commons.Xml.Relaxng.RelaxngGrammarContentList" /></value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -155,10 +142,7 @@
       <Parameters />
       <Docs>
         <summary>The list that contains "div" components.</summary>
-        <value
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngGrammarContentList" />
-        </value>
+        <value>a <see cref="T:Commons.Xml.Relaxng.RelaxngGrammarContentList" /></value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

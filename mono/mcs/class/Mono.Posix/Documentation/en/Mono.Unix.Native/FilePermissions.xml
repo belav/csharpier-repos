@@ -25,13 +25,11 @@
     <summary>The FilePermissions enumeration describes file system modes (read,write,execute) as described in the POSIX standard.</summary>
     <remarks>
       <para
-        >A <c
-        >FilePermissions</c>
+        >A <c>FilePermissions</c>
 
         
 
-         is the Unix <c
-        >mode_t</c>
+         is the Unix <c>mode_t</c>
 
         
 

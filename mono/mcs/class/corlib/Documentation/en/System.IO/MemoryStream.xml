@@ -36,13 +36,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The current position of a stream is the position at which the next read or write operation could take place. The current position can be retrieved or set through the <see
-         cref="M:System.IO.MemoryStream.Seek(System.Int64,System.IO.SeekOrigin)" />
+        >The current position of a stream is the position at which the next read or write operation could take place. The current position can be retrieved or set through the <see cref="M:System.IO.MemoryStream.Seek(System.Int64,System.IO.SeekOrigin)" />
 
         
 
-         method. When a new instance of <see
-         cref="T:System.IO.MemoryStream" />
+         method. When a new instance of <see cref="T:System.IO.MemoryStream" />
 
         
 
@@ -50,31 +48,26 @@
       >
       <para>Memory streams created with an unsigned byte array provide a non-resizable stream of the data. When using a byte array, you can neither append to nor shrink the stream, although you might be able to modify the existing contents depending on the parameters passed into the constructor. Empty memory streams are resizable, and can be written to and read from.</para>
       <para
-        >If a <see
-         cref="T:System.IO.MemoryStream" />
+        >If a <see cref="T:System.IO.MemoryStream" />
 
         
 
-         object is added to a ResX file or a .resources file, call the <see
-         cref="M:System.Resources.ResourceManager.GetStream(System.String)" />
+         object is added to a ResX file or a .resources file, call the <see cref="M:System.Resources.ResourceManager.GetStream(System.String)" />
 
         
 
          method at runtime to retrieve it.</para
       >
       <para
-        >If a <see
-         cref="T:System.IO.MemoryStream" />
+        >If a <see cref="T:System.IO.MemoryStream" />
 
         
 
-         object is serialized to a resource file it will actually be serialized as an <see
-         cref="T:System.IO.UnmanagedMemoryStream" />
+         object is serialized to a resource file it will actually be serialized as an <see cref="T:System.IO.UnmanagedMemoryStream" />
 
         
 
-        . This behavior provides better performance, as well as the ability to get a pointer to the data directly, without having to go through <see
-         cref="T:System.IO.Stream" />
+        . This behavior provides better performance, as well as the ability to get a pointer to the data directly, without having to go through <see cref="T:System.IO.Stream" />
 
         
 
@@ -109,34 +102,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.IO.MemoryStream.CanRead" />
+            >The <see cref="P:System.IO.MemoryStream.CanRead" />
 
             
 
-            , <see
-             cref="P:System.IO.MemoryStream.CanSeek" />
+            , <see cref="P:System.IO.MemoryStream.CanSeek" />
 
             
 
-            , and <see
-             cref="P:System.IO.MemoryStream.CanWrite" />
+            , and <see cref="P:System.IO.MemoryStream.CanWrite" />
 
             
 
              properties are all set to true.</para
           >
           <para
-            >The capacity of the current stream automatically increases when you use the <see
-             cref="M:System.IO.MemoryStream.SetLength(System.Int64)" />
+            >The capacity of the current stream automatically increases when you use the <see cref="M:System.IO.MemoryStream.SetLength(System.Int64)" />
 
             
 
              method to set the length to a value larger than the capacity of the current stream.</para
           >
           <para
-            >This constructor exposes the underlying stream, which <see
-             cref="M:System.IO.MemoryStream.GetBuffer" />
+            >This constructor exposes the underlying stream, which <see cref="M:System.IO.MemoryStream.GetBuffer" />
 
             
 
@@ -146,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.MemoryStream" />
+            >Initializes a new instance of the <see cref="T:System.IO.MemoryStream" />
 
             
 
@@ -179,13 +166,11 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException"
-          >The <paramref
-           name="buffer" />
+          >The <paramref name="buffer" />
 
           
 
-           parameter is <see
-           langword="null" />
+           parameter is <see langword="null" />
 
           
 
@@ -194,44 +179,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.IO.MemoryStream.CanRead" />
+            >The <see cref="P:System.IO.MemoryStream.CanRead" />
 
             
 
-            , <see
-             cref="P:System.IO.MemoryStream.CanSeek" />
+            , <see cref="P:System.IO.MemoryStream.CanSeek" />
 
             
 
-            , and <see
-             cref="P:System.IO.MemoryStream.CanWrite" />
+            , and <see cref="P:System.IO.MemoryStream.CanWrite" />
 
             
 
-             properties are all set to true. <see
-             cref="P:System.IO.MemoryStream.Capacity" />
+             properties are all set to true. <see cref="P:System.IO.MemoryStream.Capacity" />
 
             
 
              is set to the length of the specified byte array. The new stream can be written to, but is not resizable.</para
           >
           <para
-            >The length of the stream cannot be set to a value greater than the initial length of the specified byte array; however, the stream can be truncated (see <see
-             cref="M:System.IO.MemoryStream.SetLength(System.Int64)" />
+            >The length of the stream cannot be set to a value greater than the initial length of the specified byte array; however, the stream can be truncated (see <see cref="M:System.IO.MemoryStream.SetLength(System.Int64)" />
 
             
 
             ).</para
           >
           <para
-            >This constructor does not expose the underlying stream. <see
-             cref="M:System.IO.MemoryStream.GetBuffer" />
+            >This constructor does not expose the underlying stream. <see cref="M:System.IO.MemoryStream.GetBuffer" />
 
             
 
-             throws <see
-             cref="T:System.UnauthorizedAccessException" />
+             throws <see cref="T:System.UnauthorizedAccessException" />
 
             
 
@@ -241,8 +219,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new non-resizable instance of the <see
-             cref="T:System.IO.MemoryStream" />
+            >Initializes a new non-resizable instance of the <see cref="T:System.IO.MemoryStream" />
 
             
 
@@ -250,7 +227,11 @@
           >
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -290,34 +271,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.IO.MemoryStream.CanRead" />
+            >The <see cref="P:System.IO.MemoryStream.CanRead" />
 
             
 
-            , <see
-             cref="P:System.IO.MemoryStream.CanSeek" />
+            , <see cref="P:System.IO.MemoryStream.CanSeek" />
 
             
 
-            , and <see
-             cref="P:System.IO.MemoryStream.CanWrite" />
+            , and <see cref="P:System.IO.MemoryStream.CanWrite" />
 
             
 
              properties are all set to true.</para
           >
           <para
-            >The capacity automatically increases when you use the <see
-             cref="M:System.IO.MemoryStream.SetLength(System.Int64)" />
+            >The capacity automatically increases when you use the <see cref="M:System.IO.MemoryStream.SetLength(System.Int64)" />
 
             
 
              method to set the length to a value larger than the capacity of the current stream. Except for a MemoryStream constructed with a byte[] parameter, write operations at the end of a MemoryStream expand the MemoryStream.</para
           >
           <para
-            >This constructor exposes the underlying stream that <see
-             cref="M:System.IO.MemoryStream.GetBuffer" />
+            >This constructor exposes the underlying stream that <see cref="M:System.IO.MemoryStream.GetBuffer" />
 
             
 
@@ -327,8 +303,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.MemoryStream" />
+            >Initializes a new instance of the <see cref="T:System.IO.MemoryStream" />
 
             
 
@@ -336,7 +311,11 @@
           >
         </summary>
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -372,8 +351,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -382,39 +360,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.IO.MemoryStream.CanRead" />
+            >The <see cref="P:System.IO.MemoryStream.CanRead" />
 
             
 
-             and <see
-             cref="P:System.IO.MemoryStream.CanSeek" />
+             and <see cref="P:System.IO.MemoryStream.CanSeek" />
 
             
 
-             properties are both set to true. <see
-             cref="P:System.IO.MemoryStream.Capacity" />
+             properties are both set to true. <see cref="P:System.IO.MemoryStream.Capacity" />
 
             
 
              is set to the length of the specified byte array.</para
           >
           <para
-            >The length of the stream cannot be set to a value greater than the initial length of the specified byte array; however, the stream can be truncated (see <see
-             cref="M:System.IO.MemoryStream.SetLength(System.Int64)" />
+            >The length of the stream cannot be set to a value greater than the initial length of the specified byte array; however, the stream can be truncated (see <see cref="M:System.IO.MemoryStream.SetLength(System.Int64)" />
 
             
 
             ).</para
           >
           <para
-            >This constructor does not expose the underlying stream. <see
-             cref="M:System.IO.MemoryStream.GetBuffer" />
+            >This constructor does not expose the underlying stream. <see cref="M:System.IO.MemoryStream.GetBuffer" />
 
             
 
-             throws <see
-             cref="T:System.UnauthorizedAccessException" />
+             throws <see cref="T:System.UnauthorizedAccessException" />
 
             
 
@@ -424,13 +396,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new non-resizable instance of the <see
-             cref="T:System.IO.MemoryStream" />
+            >Initializes a new non-resizable instance of the <see cref="T:System.IO.MemoryStream" />
 
             
 
-             class based on the specified byte array with the <see
-             cref="P:System.IO.MemoryStream.CanWrite" />
+             class based on the specified byte array with the <see cref="P:System.IO.MemoryStream.CanWrite" />
 
             
 
@@ -438,19 +408,26 @@
           >
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array of unsigned bytes from which to create this stream. </param
         >
         <param name="writable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The setting of the <see
-           cref="P:System.IO.MemoryStream.CanWrite" />
+          The setting of the <see cref="P:System.IO.MemoryStream.CanWrite" />
 
           
 
@@ -490,8 +467,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -502,26 +478,22 @@
 
           
 
-           or <paramref
-           name="count" />
+           or <paramref name="count" />
 
           
 
            is less than zero.</exception
         >
         <exception cref="T:System.ArgumentException"
-          >(<paramref
-           name="index" />
+          >(<paramref name="index" />
 
           
 
-           + <paramref
-           name="count" />
+           + <paramref name="count" />
 
           
 
-           ) is greater than the length of <paramref
-           name="buffer" />
+           ) is greater than the length of <paramref name="buffer" />
 
           
 
@@ -530,49 +502,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.IO.MemoryStream.CanRead" />
+            >The <see cref="P:System.IO.MemoryStream.CanRead" />
 
             
 
-            , <see
-             cref="P:System.IO.MemoryStream.CanSeek" />
+            , <see cref="P:System.IO.MemoryStream.CanSeek" />
 
             
 
-            , and <see
-             cref="P:System.IO.MemoryStream.CanWrite" />
+            , and <see cref="P:System.IO.MemoryStream.CanWrite" />
 
             
 
-             properties are all set to true, but the capacity cannot be changed. <see
-             cref="P:System.IO.MemoryStream.Capacity" />
+             properties are all set to true, but the capacity cannot be changed. <see cref="P:System.IO.MemoryStream.Capacity" />
 
             
 
-             is set to <paramref
-             name="count" />
+             is set to <paramref name="count" />
 
             
 
             .</para
           >
           <para
-            >The length of the stream cannot be set to a value greater than the initial length of the specified byte array; however, the stream can be truncated (see <see
-             cref="M:System.IO.MemoryStream.SetLength(System.Int64)" />
+            >The length of the stream cannot be set to a value greater than the initial length of the specified byte array; however, the stream can be truncated (see <see cref="M:System.IO.MemoryStream.SetLength(System.Int64)" />
 
             
 
             ).</para
           >
           <para
-            >This constructor does not expose the underlying stream. <see
-             cref="M:System.IO.MemoryStream.GetBuffer" />
+            >This constructor does not expose the underlying stream. <see cref="M:System.IO.MemoryStream.GetBuffer" />
 
             
 
-             throws <see
-             cref="T:System.UnauthorizedAccessException" />
+             throws <see cref="T:System.UnauthorizedAccessException" />
 
             
 
@@ -582,8 +546,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new non-resizable instance of the <see
-             cref="T:System.IO.MemoryStream" />
+            >Initializes a new non-resizable instance of the <see cref="T:System.IO.MemoryStream" />
 
             
 
@@ -591,26 +554,37 @@
           >
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array of unsigned bytes from which to create this stream. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index into <paramref
-           name="buffer" />
+          The index into <paramref name="buffer" />
 
           
 
            at which the stream begins. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -651,8 +625,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -663,26 +636,22 @@
 
           
 
-           or <paramref
-           name="count" />
+           or <paramref name="count" />
 
           
 
            are negative.</exception
         >
         <exception cref="T:System.ArgumentException"
-          >(<paramref
-           name="index" />
+          >(<paramref name="index" />
 
           
 
-           + <paramref
-           name="count" />
+           + <paramref name="count" />
 
           
 
-           ) is greater than the length of <paramref
-           name="buffer" />
+           ) is greater than the length of <paramref name="buffer" />
 
           
 
@@ -691,49 +660,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.IO.MemoryStream.CanRead" />
+            >The <see cref="P:System.IO.MemoryStream.CanRead" />
 
             
 
-             and <see
-             cref="P:System.IO.MemoryStream.CanSeek" />
+             and <see cref="P:System.IO.MemoryStream.CanSeek" />
 
             
 
-             properties are both set to true. <see
-             cref="P:System.IO.MemoryStream.Capacity" />
+             properties are both set to true. <see cref="P:System.IO.MemoryStream.Capacity" />
 
             
 
-             is set to <paramref
-             name="count" />
+             is set to <paramref name="count" />
 
             
 
             .</para
           >
           <para
-            >The length of the stream cannot be set to a value greater than the initial length of the specified byte array; however, the stream can be truncated (see <see
-             cref="M:System.IO.MemoryStream.SetLength(System.Int64)" />
+            >The length of the stream cannot be set to a value greater than the initial length of the specified byte array; however, the stream can be truncated (see <see cref="M:System.IO.MemoryStream.SetLength(System.Int64)" />
 
             
 
             ).</para
           >
           <para
-            >This constructor does not expose the underlying stream. <see
-             cref="M:System.IO.MemoryStream.GetBuffer" />
+            >This constructor does not expose the underlying stream. <see cref="M:System.IO.MemoryStream.GetBuffer" />
 
             
 
-             throws <see
-             cref="T:System.UnauthorizedAccessException" />
+             throws <see cref="T:System.UnauthorizedAccessException" />
 
             
 
-            . However, you can write to the stream if <paramref
-             name="writable" />
+            . However, you can write to the stream if <paramref name="writable" />
 
             
 
@@ -743,13 +704,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new non-resizable instance of the <see
-             cref="T:System.IO.MemoryStream" />
+            >Initializes a new non-resizable instance of the <see cref="T:System.IO.MemoryStream" />
 
             
 
-             class based on the specified region of a byte array, with the <see
-             cref="P:System.IO.MemoryStream.CanWrite" />
+             class based on the specified region of a byte array, with the <see cref="P:System.IO.MemoryStream.CanWrite" />
 
             
 
@@ -757,38 +716,52 @@
           >
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array of unsigned bytes from which to create this stream. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index in <paramref
-           name="buffer" />
+          The index in <paramref name="buffer" />
 
           
 
            at which the stream begins. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The length of the stream in bytes. </param
         >
         <param name="writable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The setting of the <see
-           cref="P:System.IO.MemoryStream.CanWrite" />
+          The setting of the <see cref="P:System.IO.MemoryStream.CanWrite" />
 
           
 
@@ -830,8 +803,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -842,26 +814,22 @@
 
           
 
-           or <paramref
-           name="count" />
+           or <paramref name="count" />
 
           
 
            is negative.</exception
         >
         <exception cref="T:System.ArgumentException"
-          >(<paramref
-           name="index" />
+          >(<paramref name="index" />
 
           
 
-           + <paramref
-           name="count" />
+           + <paramref name="count" />
 
           
 
-           ) is greater than the length of <paramref
-           name="buffer" />
+           ) is greater than the length of <paramref name="buffer" />
 
           
 
@@ -870,36 +838,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.IO.MemoryStream.CanRead" />
+            >The <see cref="P:System.IO.MemoryStream.CanRead" />
 
             
 
-             and <see
-             cref="P:System.IO.MemoryStream.CanSeek" />
+             and <see cref="P:System.IO.MemoryStream.CanSeek" />
 
             
 
-             properties are both set to true. <see
-             cref="P:System.IO.MemoryStream.Capacity" />
+             properties are both set to true. <see cref="P:System.IO.MemoryStream.Capacity" />
 
             
 
-             is set to <paramref
-             name="count" />
+             is set to <paramref name="count" />
 
             
 
             .</para
           >
           <para
-            >The new stream instance can be written to, but the <see
-             cref="P:System.IO.MemoryStream.Capacity" />
+            >The new stream instance can be written to, but the <see cref="P:System.IO.MemoryStream.Capacity" />
 
             
 
-             of the underlying byte array cannot be changed. The length of the stream cannot be set to a value greater than the initial length of the specified byte array; however, the stream can be truncated (see <see
-             cref="M:System.IO.MemoryStream.SetLength(System.Int64)" />
+             of the underlying byte array cannot be changed. The length of the stream cannot be set to a value greater than the initial length of the specified byte array; however, the stream can be truncated (see <see cref="M:System.IO.MemoryStream.SetLength(System.Int64)" />
 
             
 
@@ -909,18 +871,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.MemoryStream" />
+            >Initializes a new instance of the <see cref="T:System.IO.MemoryStream" />
 
             
 
-             class based on the specified region of a byte array, with the <see
-             cref="P:System.IO.MemoryStream.CanWrite" />
+             class based on the specified region of a byte array, with the <see cref="P:System.IO.MemoryStream.CanWrite" />
 
             
 
-             property set as specified, and the ability to call <see
-             cref="M:System.IO.MemoryStream.GetBuffer" />
+             property set as specified, and the ability to call <see cref="M:System.IO.MemoryStream.GetBuffer" />
 
             
 
@@ -928,50 +887,67 @@
           >
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array of unsigned bytes from which to create this stream. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index into <paramref
-           name="buffer" />
+          The index into <paramref name="buffer" />
 
           
 
            at which the stream begins. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The length of the stream in bytes. </param
         >
         <param name="writable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The setting of the <see
-           cref="P:System.IO.MemoryStream.CanWrite" />
+          The setting of the <see cref="P:System.IO.MemoryStream.CanWrite" />
 
           
 
            property, which determines whether the stream supports writing. </param
         >
         <param name="publiclyVisible">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to enable <see
-           cref="M:System.IO.MemoryStream.GetBuffer" />
+          true to enable <see cref="M:System.IO.MemoryStream.GetBuffer" />
 
           
 
@@ -1005,8 +981,7 @@
             
 
             if the current 
-   stream is open and supports reading; otherwise <see
-             langword="false" />
+   stream is open and supports reading; otherwise <see langword="false" />
 
             
 
@@ -1017,23 +992,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a class derived from <see
-             cref="T:System.IO.Stream" />
+            >If a class derived from <see cref="T:System.IO.Stream" />
 
             
 
-             does not support reading, calls to the <see
-             cref="M:System.IO.MemoryStream.Read(System.Byte[],System.Int32,System.Int32)" />
+             does not support reading, calls to the <see cref="M:System.IO.MemoryStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             and <see
-             cref="M:System.IO.MemoryStream.ReadByte" />
+             and <see cref="M:System.IO.MemoryStream.ReadByte" />
 
             
 
-             methods throw a <see
-             cref="T:System.NotSupportedException" />
+             methods throw a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -1073,8 +1044,7 @@
             
 
              if the stream is open and 
-   supports seeking; otherwise <see
-             langword="false" />
+   supports seeking; otherwise <see langword="false" />
 
             
 
@@ -1085,33 +1055,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a class derived from <see
-             cref="T:System.IO.Stream" />
+            >If a class derived from <see cref="T:System.IO.Stream" />
 
             
 
-             does not support seeking, calls to <see
-             cref="P:System.IO.MemoryStream.Length" />
+             does not support seeking, calls to <see cref="P:System.IO.MemoryStream.Length" />
 
             
 
-            , <see
-             cref="M:System.IO.MemoryStream.SetLength(System.Int64)" />
+            , <see cref="M:System.IO.MemoryStream.SetLength(System.Int64)" />
 
             
 
-            , <see
-             cref="P:System.IO.MemoryStream.Position" />
+            , <see cref="P:System.IO.MemoryStream.Position" />
 
             
 
-            , and <see
-             cref="M:System.IO.MemoryStream.Seek(System.Int64,System.IO.SeekOrigin)" />
+            , and <see cref="M:System.IO.MemoryStream.Seek(System.Int64,System.IO.SeekOrigin)" />
 
             
 
-             throw a <see
-             cref="T:System.NotSupportedException" />
+             throw a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -1151,8 +1115,7 @@
             
 
              if the stream supports writing;
-   otherwise, <see
-             langword="false" />
+   otherwise, <see langword="false" />
 
             
 
@@ -1162,28 +1125,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a class derived from <see
-             cref="T:System.IO.Stream" />
+            >If a class derived from <see cref="T:System.IO.Stream" />
 
             
 
-             does not support writing, a call to <see
-             cref="M:System.IO.Stream.SetLength(System.Int64)" />
+             does not support writing, a call to <see cref="M:System.IO.Stream.SetLength(System.Int64)" />
 
             
 
-            , <see
-             cref="M:System.IO.Stream.Write(System.Byte[],System.Int32,System.Int32)" />
+            , <see cref="M:System.IO.Stream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-            , or <see
-             cref="M:System.IO.Stream.WriteByte(System.Byte)" />
+            , or <see cref="M:System.IO.Stream.WriteByte(System.Byte)" />
 
             
 
-             throws a <see
-             cref="T:System.NotSupportedException" />
+             throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -1218,8 +1176,7 @@
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.Int32" />
+            > A <see cref="T:System.Int32" />
 
             
 
@@ -1256,8 +1213,7 @@
       <Docs>
         <summary>
           <para
-            >Closes the current <see
-             cref="T:System.IO.MemoryStream" />
+            >Closes the current <see cref="T:System.IO.MemoryStream" />
 
             
 
@@ -1267,8 +1223,7 @@
         <remarks>
           <para
             > The stream will not support reading or writing after
-      this method is invoked. Following a call to <see
-             cref="M:System.IO.MemoryStream.Close" />
+      this method is invoked. Following a call to <see cref="M:System.IO.MemoryStream.Close" />
 
             
 
@@ -1277,19 +1232,16 @@
       stream can raise an exception. </para
           >
           <para
-            > The buffer of a closed <see
-             cref="T:System.IO.MemoryStream" />
+            > The buffer of a closed <see cref="T:System.IO.MemoryStream" />
 
             
 
-             is still available, and the <see
-             cref="M:System.IO.MemoryStream.ToArray" />
+             is still available, and the <see cref="M:System.IO.MemoryStream.ToArray" />
 
             
 
             
-and <see
-             cref="M:System.IO.MemoryStream.GetBuffer" />
+and <see cref="M:System.IO.MemoryStream.GetBuffer" />
 
             
 
@@ -1297,8 +1249,7 @@ and <see
 be called successfully. </para
           >
           <block subset="none" type="note"
-            > This method overrides <see
-             cref="M:System.IO.Stream.Close" />
+            > This method overrides <see cref="M:System.IO.Stream.Close" />
 
             
 
@@ -1344,21 +1295,33 @@ be called successfully. </para
           <para>A task that represents the asynchronous copy operation.</para>
         </returns>
         <param name="destination">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream to which the contents of the current stream will be copied.</param
         >
         <param name="bufferSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The size, in bytes, of the buffer. This value must be greater than zero.</param
         >
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1387,61 +1350,50 @@ be called successfully. </para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public <see
-             cref="M:System.ComponentModel.Component.Dispose" />
+            >This method is called by the public <see cref="M:System.ComponentModel.Component.Dispose" />
 
             
 
-             method and the <see
-             cref="M:System.Object.Finalize" />
+             method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. <see
-             cref="M:System.ComponentModel.Component.Dispose" />
+             method. <see cref="M:System.ComponentModel.Component.Dispose" />
 
             
 
-             invokes the protected <see
-             cref="M:System.IO.MemoryStream.Dispose(System.Boolean)" />
+             invokes the protected <see cref="M:System.IO.MemoryStream.Dispose(System.Boolean)" />
 
             
 
-             method with the <paramref
-             name="disposing" />
+             method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes <see
-             cref="M:System.IO.MemoryStream.Dispose(System.Boolean)" />
+             invokes <see cref="M:System.IO.MemoryStream.Dispose(System.Boolean)" />
 
             
 
-             with <paramref
-             name="disposing" />
+             with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.IO.MemoryStream" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.IO.MemoryStream" />
 
             
 
-             references. This method invokes the <see
-             cref="M:System.ComponentModel.Component.Dispose" />
+             references. This method invokes the <see cref="M:System.ComponentModel.Component.Dispose" />
 
             
 
@@ -1451,8 +1403,7 @@ be called successfully. </para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.IO.MemoryStream" />
+            >Releases the unmanaged resources used by the <see cref="T:System.IO.MemoryStream" />
 
             
 
@@ -1460,7 +1411,11 @@ be called successfully. </para
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1489,16 +1444,14 @@ be called successfully. </para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides the <see
-             cref="M:System.IO.Stream.Flush" />
+            >This method overrides the <see cref="M:System.IO.Stream.Flush" />
 
             
 
              method.</para
           >
           <para
-            >Because any data written to a <see
-             cref="T:System.IO.MemoryStream" />
+            >Because any data written to a <see cref="T:System.IO.MemoryStream" />
 
             
 
@@ -1508,8 +1461,7 @@ be called successfully. </para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see
-             cref="M:System.IO.Stream.Flush" />
+            >Overrides the <see cref="M:System.IO.Stream.Flush" />
 
             
 
@@ -1542,39 +1494,33 @@ be called successfully. </para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because any data written to a <see
-             cref="T:System.IO.MemoryStream" />
+            >Because any data written to a <see cref="T:System.IO.MemoryStream" />
 
             
 
              object is written into RAM, this method is redundant.</para
           >
           <para
-            >If the operation is canceled before it completes, the returned task contains the <see
-             cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
+            >If the operation is canceled before it completes, the returned task contains the <see cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
 
             
 
-             value for the <see
-             cref="P:System.Threading.Tasks.Task.Status" />
+             value for the <see cref="P:System.Threading.Tasks.Task.Status" />
 
             
 
              property. </para
           >
           <para
-            >You can create a cancellation token by creating an instance of the <see
-             cref="T:System.Threading.CancellationTokenSource" />
+            >You can create a cancellation token by creating an instance of the <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
-             class and passing the <see
-             cref="P:System.Threading.CancellationTokenSource.Token" />
+             class and passing the <see cref="P:System.Threading.CancellationTokenSource.Token" />
 
             
 
-             property as the <paramref
-             name="cancellationToken" />
+             property as the <paramref name="cancellationToken" />
 
             
 
@@ -1590,7 +1536,11 @@ be called successfully. </para
           <para>A task that represents the asynchronous flush operation.</para>
         </returns>
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1624,8 +1574,7 @@ be called successfully. </para
         >
         <example>
           <para
-            >The following example demonstrates that two calls to the <see
-             cref="M:System.IO.MemoryStream.GetBuffer" />
+            >The following example demonstrates that two calls to the <see cref="M:System.IO.MemoryStream.GetBuffer" />
 
             
 
@@ -1673,23 +1622,19 @@ public class MemoryStreamTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Note that the buffer contains allocated bytes which might be unused. For example, if the string "test" is written into the <see
-             cref="T:System.IO.MemoryStream" />
+            >Note that the buffer contains allocated bytes which might be unused. For example, if the string "test" is written into the <see cref="T:System.IO.MemoryStream" />
 
             
 
-             object, the length of the buffer returned from <see
-             cref="M:System.IO.MemoryStream.GetBuffer" />
+             object, the length of the buffer returned from <see cref="M:System.IO.MemoryStream.GetBuffer" />
 
             
 
-             is 256, not 4, with 252 bytes unused. To obtain only the data in the buffer, use the <see
-             cref="M:System.IO.MemoryStream.ToArray" />
+             is 256, not 4, with 252 bytes unused. To obtain only the data in the buffer, use the <see cref="M:System.IO.MemoryStream.ToArray" />
 
             
 
-             method; however, <see
-             cref="M:System.IO.MemoryStream.ToArray" />
+             method; however, <see cref="M:System.IO.MemoryStream.ToArray" />
 
             
 
@@ -1697,23 +1642,19 @@ public class MemoryStreamTest {
           >
           <para>The buffer can also be null.</para>
           <para
-            >To create a MemoryStream instance with a publicly visible buffer, use <see
-             cref="M:System.IO.MemoryStream.#ctor" />
+            >To create a MemoryStream instance with a publicly visible buffer, use <see cref="M:System.IO.MemoryStream.#ctor" />
 
             
 
-            , <see
-             cref="M:System.IO.MemoryStream.#ctor(System.Byte[],System.Int32,System.Int32,System.Boolean,System.Boolean)" />
+            , <see cref="M:System.IO.MemoryStream.#ctor(System.Byte[],System.Int32,System.Int32,System.Boolean,System.Boolean)" />
 
             
 
-            , or <see
-             cref="M:System.IO.MemoryStream.#ctor(System.Int32)" />
+            , or <see cref="M:System.IO.MemoryStream.#ctor(System.Int32)" />
 
             
 
-            . If the current stream is resizable, two calls to this method do not return the same array if the underlying byte array is resized between calls. For additional information, see <see
-             cref="P:System.IO.MemoryStream.Capacity" />
+            . If the current stream is resizable, two calls to this method do not return the same array if the underlying byte array is resized between calls. For additional information, see <see cref="P:System.IO.MemoryStream.Capacity" />
 
             
 
@@ -1730,8 +1671,7 @@ public class MemoryStreamTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The byte array from which this stream was created, or the underlying array if a byte array was not provided to the <see
-             cref="T:System.IO.MemoryStream" />
+            >The byte array from which this stream was created, or the underlying array if a byte array was not provided to the <see cref="T:System.IO.MemoryStream" />
 
             
 
@@ -1761,8 +1701,7 @@ public class MemoryStreamTest {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int64" />
+            >A <see cref="T:System.Int64" />
 
             
 
@@ -1774,8 +1713,7 @@ public class MemoryStreamTest {
           <para>
             <block subset="none" type="note"
               >This property 
-      overrides <see
-               cref="P:System.IO.Stream.Length" />
+      overrides <see cref="P:System.IO.Stream.Length" />
 
               
 
@@ -1811,8 +1749,7 @@ public class MemoryStreamTest {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int64" />
+            >A <see cref="T:System.Int64" />
 
             
 
@@ -1822,8 +1759,7 @@ public class MemoryStreamTest {
         <remarks>
           <para>
             <block subset="none" type="note"
-              >This property overrides <see
-               cref="P:System.IO.Stream.Position" />
+              >This property overrides <see cref="P:System.IO.Stream.Position" />
 
               
 
@@ -1832,8 +1768,7 @@ public class MemoryStreamTest {
           </para>
         </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException"
-          >The value specified for a set operation is negative or greater than  the maximum length of a <see
-           cref="T:System.IO.MemoryStream" />
+          >The value specified for a set operation is negative or greater than  the maximum length of a <see cref="T:System.IO.MemoryStream" />
 
           
 
@@ -1880,8 +1815,7 @@ public class MemoryStreamTest {
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1892,26 +1826,22 @@ public class MemoryStreamTest {
 
           
 
-           or <paramref
-           name="count" />
+           or <paramref name="count" />
 
           
 
            is negative.</exception
         >
         <exception cref="T:System.ArgumentException"
-          >(<paramref
-           name="offset " />
+          >(<paramref name="offset " />
 
           
 
-           + <paramref
-           name="count" />
+           + <paramref name="count" />
 
           
 
-           ) is larger than the length of <paramref
-           name="buffer" />
+           ) is larger than the length of <paramref name="buffer" />
 
           
 
@@ -1922,8 +1852,7 @@ public class MemoryStreamTest {
         >
         <example>
           <para
-            >The following example demonstrates the result of reading from a <see
-             cref="T:System.IO.MemoryStream" />
+            >The following example demonstrates the result of reading from a <see cref="T:System.IO.MemoryStream" />
 
             
 
@@ -1965,26 +1894,22 @@ public class MemoryStreamTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.IO.Stream.Read(System.Byte[],System.Int32,System.Int32)" />
+            >This method overrides <see cref="M:System.IO.Stream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
             .</para
           >
           <para
-            >The <paramref
-             name="offset" />
+            >The <paramref name="offset" />
 
             
 
-             parameter gives the offset of the first byte in <paramref
-             name="buffer" />
+             parameter gives the offset of the first byte in <paramref name="buffer" />
 
             
 
-             to which data from the current stream is written. The <paramref
-             name="count" />
+             to which data from the current stream is written. The <paramref name="count" />
 
             
 
@@ -1993,8 +1918,7 @@ public class MemoryStreamTest {
           <para>If the read operation is successful, the current position within the stream advances by the number of bytes read. If an exception occurs, the current position within the stream remains unchanged.</para>
           <para>The Read method will return zero only if the end of the stream is reached. In all other cases, Read always reads at least one byte from the stream before returning. By definition, if no data is available from the stream upon a call to Read, the Read method returns zero (the end of the stream is reached automatically). An implementation is free to return fewer bytes than requested even if the end of the stream has not been reached.</para>
           <para
-            >Use <see
-             cref="T:System.IO.BinaryReader" />
+            >Use <see cref="T:System.IO.BinaryReader" />
 
             
 
@@ -2002,13 +1926,11 @@ public class MemoryStreamTest {
           >
           <block subset="none" type="note">
             <para
-              >If the byte array specified in the <paramref
-               name="buffer" />
+              >If the byte array specified in the <paramref name="buffer" />
 
               
 
-               parameter is the underlying buffer returned by the <see
-               cref="M:System.IO.MemoryStream.GetBuffer" />
+               parameter is the underlying buffer returned by the <see cref="M:System.IO.MemoryStream.GetBuffer" />
 
               
 
@@ -2025,41 +1947,49 @@ public class MemoryStreamTest {
           <para>The total number of bytes written into the buffer. This can be less than the number of bytes requested if that number of bytes are not currently available, or zero if the end of the stream is reached before any bytes are read.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          When this method returns, contains the specified byte array with the values between <paramref
-           name="offset" />
+          When this method returns, contains the specified byte array with the values between <paramref name="offset" />
 
           
 
-           and (<paramref
-           name="offset" />
+           and (<paramref name="offset" />
 
           
 
-           + <paramref
-           name="count" />
+           + <paramref name="count" />
 
           
 
            - 1) replaced by the characters read from the current stream. </param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based byte offset in <paramref
-           name="buffer" />
+          The zero-based byte offset in <paramref name="buffer" />
 
           
 
            at which to begin storing data from the current stream.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2094,31 +2024,26 @@ public class MemoryStreamTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the operation is canceled before it completes, the returned task contains the <see
-             cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
+            >If the operation is canceled before it completes, the returned task contains the <see cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
 
             
 
-             value for the <see
-             cref="P:System.Threading.Tasks.Task.Status" />
+             value for the <see cref="P:System.Threading.Tasks.Task.Status" />
 
             
 
              property.</para
           >
           <para
-            >You can create a cancellation token by creating an instance of the <see
-             cref="T:System.Threading.CancellationTokenSource" />
+            >You can create a cancellation token by creating an instance of the <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
-             class and passing the <see
-             cref="P:System.Threading.CancellationTokenSource.Token" />
+             class and passing the <see cref="P:System.Threading.CancellationTokenSource.Token" />
 
             
 
-             property as the <paramref
-             name="cancellationToken" />
+             property as the <paramref name="cancellationToken" />
 
             
 
@@ -2132,8 +2057,7 @@ public class MemoryStreamTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A task that represents the asynchronous read operation. The value of the <paramref
-             name="TResult" />
+            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" />
 
             
 
@@ -2141,38 +2065,52 @@ public class MemoryStreamTest {
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer to write the data into.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The byte offset in <paramref
-           name="buffer" />
+          The byte offset in <paramref name="buffer" />
 
           
 
            at which to begin writing data from the stream.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The maximum number of bytes to read.</param
         >
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The token to monitor for cancellation requests. The default value is <see
-           cref="P:System.Threading.CancellationToken.None" />
+          The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />
 
           
 
@@ -2204,8 +2142,7 @@ public class MemoryStreamTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.IO.Stream.ReadByte" />
+            >This method overrides <see cref="M:System.IO.Stream.ReadByte" />
 
             
 
@@ -2220,8 +2157,7 @@ public class MemoryStreamTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The byte cast to a <see
-             cref="T:System.Int32" />
+            >The byte cast to a <see cref="T:System.Int32" />
 
             
 
@@ -2266,8 +2202,7 @@ public class MemoryStreamTest {
 
           
 
-           is greater than the maximum length of <see
-           cref="T:System.IO.MemoryStream" />
+           is greater than the maximum length of <see cref="T:System.IO.MemoryStream" />
 
           
 
@@ -2278,8 +2213,7 @@ public class MemoryStreamTest {
 
           
 
-           is not a valid <see
-           cref="T:System.IO.SeekOrigin" />
+           is not a valid <see cref="T:System.IO.SeekOrigin" />
 
           
 
@@ -2291,8 +2225,7 @@ public class MemoryStreamTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.IO.Stream.Seek(System.Int64,System.IO.SeekOrigin)" />
+            >This method overrides <see cref="M:System.IO.Stream.Seek(System.Int64,System.IO.SeekOrigin)" />
 
             
 
@@ -2300,23 +2233,19 @@ public class MemoryStreamTest {
           >
           <para>Seeking to any location beyond the length of the stream is supported.</para>
           <para
-            >Do not use the <see
-             cref="M:System.IO.MemoryStream.Seek(System.Int64,System.IO.SeekOrigin)" />
+            >Do not use the <see cref="M:System.IO.MemoryStream.Seek(System.Int64,System.IO.SeekOrigin)" />
 
             
 
-             method to determine the new position in the stream if the <see
-             cref="T:System.IO.MemoryStream" />
+             method to determine the new position in the stream if the <see cref="T:System.IO.MemoryStream" />
 
             
 
-             was initialized with a non-zero offset. If you do, <see
-             cref="M:System.IO.MemoryStream.Seek(System.Int64,System.IO.SeekOrigin)" />
+             was initialized with a non-zero offset. If you do, <see cref="M:System.IO.MemoryStream.Seek(System.Int64,System.IO.SeekOrigin)" />
 
             
 
-             will return an inaccurate value. Instead, use the <see
-             cref="P:System.IO.MemoryStream.Position" />
+             will return an inaccurate value. Instead, use the <see cref="P:System.IO.MemoryStream.Position" />
 
             
 
@@ -2332,24 +2261,30 @@ public class MemoryStreamTest {
           <para>The new position within the stream, calculated by combining the initial reference point and the offset.</para>
         </returns>
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new position within the stream. This is relative to the <paramref
-           name="loc" />
+          The new position within the stream. This is relative to the <paramref name="loc" />
 
           
 
            parameter, and can be positive or negative. </param
         >
         <param name="loc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A value of type <see
-           cref="T:System.IO.SeekOrigin" />
+          A value of type <see cref="T:System.IO.SeekOrigin" />
 
           
 
@@ -2383,13 +2318,11 @@ public class MemoryStreamTest {
       <Docs>
         <exception cref="T:System.NotSupportedException">
           <para
-            >The current stream is not resizable and <paramref
-             name="value" />
+            >The current stream is not resizable and <paramref name="value" />
 
             
 
-             is greater than the current <see
-             cref="P:System.IO.MemoryStream.Capacity" />
+             is greater than the current <see cref="P:System.IO.MemoryStream.Capacity" />
 
             
 
@@ -2403,18 +2336,15 @@ public class MemoryStreamTest {
 
           
 
-           is negative or is greater than the maximum length of the <see
-           cref="T:System.IO.MemoryStream" />
+           is negative or is greater than the maximum length of the <see cref="T:System.IO.MemoryStream" />
 
           
 
-            - <paramref
-           name="origin" />
+            - <paramref name="origin" />
 
           
 
-          , where <paramref
-           name="origin" />
+          , where <paramref name="origin" />
 
           
 
@@ -2423,31 +2353,26 @@ public class MemoryStreamTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.IO.Stream.SetLength(System.Int64)" />
+            >This method overrides <see cref="M:System.IO.Stream.SetLength(System.Int64)" />
 
             
 
             .</para
           >
           <para
-            >If the specified value is less than the current length of the stream, the stream is truncated. If after the truncation the current position within the stream is past the end of the stream, the <see
-             cref="M:System.IO.MemoryStream.ReadByte" />
+            >If the specified value is less than the current length of the stream, the stream is truncated. If after the truncation the current position within the stream is past the end of the stream, the <see cref="M:System.IO.MemoryStream.ReadByte" />
 
             
 
-             method returns -1, the <see
-             cref="M:System.IO.MemoryStream.Read(System.Byte[],System.Int32,System.Int32)" />
+             method returns -1, the <see cref="M:System.IO.MemoryStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method reads zero bytes into the provided byte array, and <see
-             cref="M:System.IO.MemoryStream.Write(System.Byte[],System.Int32,System.Int32)" />
+             method reads zero bytes into the provided byte array, and <see cref="M:System.IO.MemoryStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             and <see
-             cref="M:System.IO.MemoryStream.WriteByte(System.Byte)" />
+             and <see cref="M:System.IO.MemoryStream.WriteByte(System.Byte)" />
 
             
 
@@ -2455,18 +2380,15 @@ public class MemoryStreamTest {
           >
           <block subset="none" type="note">
             <para
-              >A <see
-               cref="T:System.IO.MemoryStream" />
+              >A <see cref="T:System.IO.MemoryStream" />
 
               
 
-               instance must support writing for this method to work. Use the <see
-               cref="P:System.IO.MemoryStream.CanWrite" />
+               instance must support writing for this method to work. Use the <see cref="P:System.IO.MemoryStream.CanWrite" />
 
               
 
-               property to determine whether the current instance supports writing. For additional information, see <see
-               cref="P:System.IO.Stream.CanWrite" />
+               property to determine whether the current instance supports writing. For additional information, see <see cref="P:System.IO.Stream.CanWrite" />
 
               
 
@@ -2479,7 +2401,11 @@ public class MemoryStreamTest {
           <para>Sets the length of the current stream to the specified value.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2512,26 +2438,22 @@ public class MemoryStreamTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method omits unused bytes in <see
-             cref="T:System.IO.MemoryStream" />
+            >This method omits unused bytes in <see cref="T:System.IO.MemoryStream" />
 
             
 
-             from the array. To get the entire buffer, use the <see
-             cref="M:System.IO.MemoryStream.GetBuffer" />
+             from the array. To get the entire buffer, use the <see cref="M:System.IO.MemoryStream.GetBuffer" />
 
             
 
              method.</para
           >
           <para
-            >This method returns a copy of the contents of the <see
-             cref="T:System.IO.MemoryStream" />
+            >This method returns a copy of the contents of the <see cref="T:System.IO.MemoryStream" />
 
             
 
-             as a byte array. If the current instance was constructed on a provided byte array, a copy of the section of the array to which this instance has access is returned. See the <see
-             cref="M:System.IO.MemoryStream.#ctor(System.Byte[],System.Int32,System.Int32)" />
+             as a byte array. If the current instance was constructed on a provided byte array, a copy of the section of the array to which this instance has access is returned. See the <see cref="M:System.IO.MemoryStream.#ctor(System.Byte[],System.Int32,System.Int32)" />
 
             
 
@@ -2539,8 +2461,7 @@ public class MemoryStreamTest {
           >
           <block subset="none" type="note">
             <para
-              >This method works when the <see
-               cref="T:System.IO.MemoryStream" />
+              >This method works when the <see cref="T:System.IO.MemoryStream" />
 
               
 
@@ -2551,8 +2472,7 @@ public class MemoryStreamTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the stream contents to a byte array, regardless of the <see
-             cref="P:System.IO.MemoryStream.Position" />
+            >Writes the stream contents to a byte array, regardless of the <see cref="P:System.IO.MemoryStream.Position" />
 
             
 
@@ -2599,8 +2519,7 @@ public class MemoryStreamTest {
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -2610,8 +2529,7 @@ public class MemoryStreamTest {
           <para>The current stream does not support writing.</para>
           <para>-or-</para>
           <para
-            >The current position is closer than <paramref
-             name="count " />
+            >The current position is closer than <paramref name="count " />
 
             
 
@@ -2619,18 +2537,15 @@ public class MemoryStreamTest {
           >
         </exception>
         <exception cref="T:System.ArgumentException"
-          >(<paramref
-           name="offset " />
+          >(<paramref name="offset " />
 
           
 
-          + <paramref
-           name="count" />
+          + <paramref name="count" />
 
           
 
-           ) is greater than the length of <paramref
-           name="buffer" />
+           ) is greater than the length of <paramref name="buffer" />
 
           
 
@@ -2641,8 +2556,7 @@ public class MemoryStreamTest {
 
           
 
-           or <paramref
-           name="count" />
+           or <paramref name="count" />
 
           
 
@@ -2653,26 +2567,22 @@ public class MemoryStreamTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.IO.Stream.Write(System.Byte[],System.Int32,System.Int32)" />
+            >This method overrides <see cref="M:System.IO.Stream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
             .</para
           >
           <para
-            >The <paramref
-             name="offset" />
+            >The <paramref name="offset" />
 
             
 
-             parameter gives the offset of the first byte in <paramref
-             name="buffer" />
+             parameter gives the offset of the first byte in <paramref name="buffer" />
 
             
 
-             to write from, and the <paramref
-             name="count" />
+             to write from, and the <paramref name="count" />
 
             
 
@@ -2685,26 +2595,37 @@ public class MemoryStreamTest {
           <para>Writes a block of bytes to the current stream using data read from a buffer.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer to write data from. </param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based byte offset in <paramref
-           name="buffer" />
+          The zero-based byte offset in <paramref name="buffer" />
 
           
 
            at which to begin copying bytes to the current stream.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2739,31 +2660,26 @@ public class MemoryStreamTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the operation is canceled before it completes, the returned task contains the <see
-             cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
+            >If the operation is canceled before it completes, the returned task contains the <see cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
 
             
 
-             value for the <see
-             cref="P:System.Threading.Tasks.Task.Status" />
+             value for the <see cref="P:System.Threading.Tasks.Task.Status" />
 
             
 
              property.</para
           >
           <para
-            >You can create a cancellation token by creating an instance of the <see
-             cref="T:System.Threading.CancellationTokenSource" />
+            >You can create a cancellation token by creating an instance of the <see cref="T:System.Threading.CancellationTokenSource" />
 
             
 
-             class and passing the <see
-             cref="P:System.Threading.CancellationTokenSource.Token" />
+             class and passing the <see cref="P:System.Threading.CancellationTokenSource.Token" />
 
             
 
-             property as the <paramref
-             name="cancellationToken" />
+             property as the <paramref name="cancellationToken" />
 
             
 
@@ -2779,38 +2695,52 @@ public class MemoryStreamTest {
           <para>A task that represents the asynchronous write operation.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer to write data from.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based byte offset in <paramref
-           name="buffer" />
+          The zero-based byte offset in <paramref name="buffer" />
 
           
 
            from which to begin copying bytes to the stream.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The maximum number of bytes to write.</param
         >
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The token to monitor for cancellation requests. The default value is <see
-           cref="P:System.Threading.CancellationToken.None" />
+          The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />
 
           
 
@@ -2850,8 +2780,7 @@ public class MemoryStreamTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.IO.Stream.WriteByte(System.Byte)" />
+            >This method overrides <see cref="M:System.IO.Stream.WriteByte(System.Byte)" />
 
             
 
@@ -2864,7 +2793,11 @@ public class MemoryStreamTest {
           <para>Writes a byte to the current stream at the current position.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2904,8 +2837,7 @@ public class MemoryStreamTest {
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -2917,8 +2849,7 @@ public class MemoryStreamTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the current stream is open, this method is equivalent to calling <see
-             cref="M:System.IO.Stream.Write(System.Byte[],System.Int32,System.Int32)" />
+            >When the current stream is open, this method is equivalent to calling <see cref="M:System.IO.Stream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
@@ -2930,7 +2861,11 @@ public class MemoryStreamTest {
           <para>Writes the entire contents of this memory stream to another stream.</para>
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

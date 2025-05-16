@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >The <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -25,26 +24,22 @@
       >
       <para>Content-based automatic resizing prevents users from adjusting row heights with the mouse. </para>
       <para
-        >This enumeration is used by the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >This enumeration is used by the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
-         control <see
-         cref="P:System.Windows.Forms.DataGridView.AutoSizeRowsMode" />
+         control <see cref="P:System.Windows.Forms.DataGridView.AutoSizeRowsMode" />
 
         
 
-         property and <see
-         cref="Overload:System.Windows.Forms.DataGridView.AutoResizeRows" />
+         property and <see cref="Overload:System.Windows.Forms.DataGridView.AutoResizeRows" />
 
         
 
          method.</para
       >
       <para
-        >For more information about sizing modes, see <format
-         type="text/html">
+        >For more information about sizing modes, see <format type="text/html">
           <a href="a5620a9c-0d06-41e3-8934-c25ddb16c9e6"
             >Sizing Options in the Windows Forms DataGridView Control</a
           >

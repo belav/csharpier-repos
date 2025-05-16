@@ -47,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XPath.XPathException" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XPath.XPathException" />
 
             
 
@@ -77,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XPath.XPathException" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XPath.XPathException" />
 
             
 
@@ -86,7 +84,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -119,18 +121,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uses the information in the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Uses the information in the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             and <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             and <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
-             objects to initialize a new instance of the <see
-             cref="T:System.Xml.XPath.XPathException" />
+             objects to initialize a new instance of the <see cref="T:System.Xml.XPath.XPathException" />
 
             
 
@@ -138,29 +137,34 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
-           object that contains all the properties of an <see
-           cref="T:System.Xml.XPath.XPathException" />
+           object that contains all the properties of an <see cref="T:System.Xml.XPath.XPathException" />
 
           
 
           . </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -193,13 +197,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XPath.XPathException" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XPath.XPathException" />
 
             
 
-             class using the specified exception message and <see
-             cref="T:System.Exception" />
+             class using the specified exception message and <see cref="T:System.Exception" />
 
             
 
@@ -207,24 +209,30 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The description of the error condition. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Exception" />
+          The <see cref="T:System.Exception" />
 
           
 
-           that threw the <see
-           cref="T:System.Xml.XPath.XPathException" />
+           that threw the <see cref="T:System.Xml.XPath.XPathException" />
 
           
 
@@ -259,18 +267,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Streams all the <see
-             cref="T:System.Xml.XPath.XPathException" />
+            >Streams all the <see cref="T:System.Xml.XPath.XPathException" />
 
             
 
-             properties into the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             properties into the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             class for the specified <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             class for the specified <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -278,24 +283,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            object.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 

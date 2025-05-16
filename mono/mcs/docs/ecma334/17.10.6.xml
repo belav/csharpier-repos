@@ -2,8 +2,7 @@
 <clause number="17.10.6" title="Optional instance constructor parameters">
   <paragraph>
     <note
-      >[Note: The this(...) form of constructor initializer is commonly used in conjunction with overloading to implement optional instance constructor parameters. In the example <code_example
-      >
+      >[Note: The this(...) form of constructor initializer is commonly used in conjunction with overloading to implement optional instance constructor parameters. In the example <code_example>
         <![CDATA[
 class Text  
 {  
@@ -18,8 +17,7 @@ class Text
 
       
 
-      the first two instance constructors merely provide the default values for the missing arguments. Both use a this(...) constructor initializer to invoke the third instance constructor, which actually does the work of initializing the new instance. The effect is that of optional constructor parameters: <code_example
-      >
+      the first two instance constructors merely provide the default values for the missing arguments. Both use a this(...) constructor initializer to invoke the third instance constructor, which actually does the work of initializing the new instance. The effect is that of optional constructor parameters: <code_example>
         <![CDATA[
 Text t1 = new Text();          // Same as Text(0, 0, null)  
 Text t2 = new Text(5, 10);       // Same as Text(5, 10, null)  

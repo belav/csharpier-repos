@@ -33,31 +33,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When you create a project in vsprvsext, this attribute is automatically applied with an empty string value. You can set its value in vsprvslong by selecting the <ui
-        >Properties</ui>
+        >When you create a project in vsprvsext, this attribute is automatically applied with an empty string value. You can set its value in vsprvslong by selecting the <ui>Properties</ui>
 
         
 
-         for the project from the <ui
-        >File</ui>
+         for the project from the <ui>File</ui>
 
         
 
-         menu, and then by clicking <ui
-        >Assembly Information</ui>
+         menu, and then by clicking <ui>Assembly Information</ui>
 
         
 
         . The attribute is saved in the AssemblyInfo file in your project, and it must be removed before you can specify it in code; otherwise, you will get an error that the attribute cannot be applied multiple times.</para
       >
       <para
-        >When you right-click the assembly file in File Explorer, this attribute appears as the <ui
-        >Comments</ui>
+        >When you right-click the assembly file in File Explorer, this attribute appears as the <ui>Comments</ui>
 
         
 
-         value on the <ui
-        >Version</ui>
+         value on the <ui>Version</ui>
 
         
 
@@ -94,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.AssemblyDescriptionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyDescriptionAttribute" />
 
             
 
@@ -103,7 +97,11 @@
           >
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

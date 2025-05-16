@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is intended for future use when the .NET Framework Data Provider for OLE DB is enabled for partial trust scenarios. The .NET Framework Data Provider for OLE DB currently requires FullTrust permission. Currently, using the OleDbPermissionAttribute class has no effect. For more information, see <format
-         type="text/html">
+        >This class is intended for future use when the .NET Framework Data Provider for OLE DB is enabled for partial trust scenarios. The .NET Framework Data Provider for OLE DB currently requires FullTrust permission. Currently, using the OleDbPermissionAttribute class has no effect. For more information, see <format type="text/html">
           <a href="93E099EB-DAA1-4F1E-B031-C1E10A996F88">Code Access Security and ADO.NET</a>
         </format>
 
@@ -57,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.OleDb.OleDbPermissionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Data.OleDb.OleDbPermissionAttribute" />
 
             
 
@@ -68,8 +66,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Data.OleDb.OleDbPermissionAttribute" />
+            >An <see cref="T:System.Data.OleDb.OleDbPermissionAttribute" />
 
             
 
@@ -77,12 +74,15 @@
           >
         </returns>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+          One of the <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -109,8 +109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Data.OleDb.OleDbPermission" />
+            >Returns an <see cref="T:System.Data.OleDb.OleDbPermission" />
 
             
 
@@ -120,8 +119,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Data.OleDb.OleDbPermission" />
+            >An <see cref="T:System.Data.OleDb.OleDbPermission" />
 
             
 

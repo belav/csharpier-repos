@@ -34,27 +34,19 @@
   <Docs>
     <typeparam name="TKey">The first parameter type.</typeparam>
     <typeparam name="TValue">The second parameter type.</typeparam>
-    <param name="key"
-      >A value of type <typeparamref
-       name="TKey" />
+    <param name="key">A value of type <typeparamref name="TKey" />
 
       
 
-      .</param
-    >
-    <param name="value"
-      >A value of type <typeparamref
-       name="TValue" />
+      .</param>
+    <param name="value">A value of type <typeparamref name="TValue" />
 
       
 
-      .</param
-    >
-    <summary
-      >
+      .</param>
+    <summary>
       A delegate that can refer to any method taking two arguments and
-      returning <see
-       cref="T:System.Void" />
+      returning <see cref="T:System.Void" />
 
       
 
@@ -62,10 +54,8 @@
     </summary
     >
     <remarks>
-      <para
-        >
-        Use this to support <see
-         cref="T:Mono.Options.Option" />
+      <para>
+        Use this to support <see cref="T:Mono.Options.Option" />
 
         
 

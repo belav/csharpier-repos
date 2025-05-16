@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.AnonymousIdentificationSection" />
+        >The <see cref="T:System.Web.Configuration.AnonymousIdentificationSection" />
 
         
 
@@ -45,18 +44,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.AnonymousIdentificationSection.#ctor" />
+            >The <see cref="M:System.Web.Configuration.AnonymousIdentificationSection.#ctor" />
 
             
 
-             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
-             cref="T:System.Web.Configuration.AnonymousIdentificationSection" />
+             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.AnonymousIdentificationSection" />
 
             
 
-             class by using the <see
-             cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+             class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" />
 
             
 
@@ -66,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.AnonymousIdentificationSection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.AnonymousIdentificationSection" />
 
             
 
@@ -99,26 +94,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.AnonymousIdentificationSection.Cookieless" />
+            >The <see cref="P:System.Web.Configuration.AnonymousIdentificationSection.Cookieless" />
 
             
 
              property defines when a cookie should be used to maintain information about the user. </para
           >
           <para
-            >When the <see
-             cref="P:System.Web.Configuration.AnonymousIdentificationSection.Cookieless" />
+            >When the <see cref="P:System.Web.Configuration.AnonymousIdentificationSection.Cookieless" />
 
             
 
-             property is set to <see
-             cref="F:System.Web.HttpCookieMode.UseCookies" />
+             property is set to <see cref="F:System.Web.HttpCookieMode.UseCookies" />
 
             
 
-            , the user's identifier is stored in a cookie. For more information, refer to <see
-             cref="T:System.Web.HttpCookieMode" />
+            , the user's identifier is stored in a cookie. For more information, refer to <see cref="T:System.Web.HttpCookieMode" />
 
             
 
@@ -126,23 +117,19 @@
           >
           <block subset="none" type="note">
             <para
-              >ASP.NET stores the user's anonymous identifier within the URI path (that is, it runs in cookieless mode) if the <see
-               cref="P:System.Web.Configuration.AnonymousIdentificationSection.Cookieless" />
+              >ASP.NET stores the user's anonymous identifier within the URI path (that is, it runs in cookieless mode) if the <see cref="P:System.Web.Configuration.AnonymousIdentificationSection.Cookieless" />
 
               
 
-               property is set to one of the following values: <see
-               cref="F:System.Web.HttpCookieMode.UseUri" />
+               property is set to one of the following values: <see cref="F:System.Web.HttpCookieMode.UseUri" />
 
               
 
-              ; <see
-               cref="F:System.Web.HttpCookieMode.UseDeviceProfile" />
+              ; <see cref="F:System.Web.HttpCookieMode.UseDeviceProfile" />
 
               
 
-               when the browser profile indicates that cookies are not supported; or <see
-               cref="F:System.Web.HttpCookieMode.AutoDetect" />
+               when the browser profile indicates that cookies are not supported; or <see cref="F:System.Web.HttpCookieMode.AutoDetect" />
 
               
 
@@ -206,8 +193,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.AnonymousIdentificationSection.CookiePath" />
+            >The <see cref="P:System.Web.Configuration.AnonymousIdentificationSection.CookiePath" />
 
             
 
@@ -243,16 +229,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To improve the protection of your cookie, you may want also set the <see
-             cref="P:System.Web.Configuration.AnonymousIdentificationSection.CookieRequireSSL" />
+            >To improve the protection of your cookie, you may want also set the <see cref="P:System.Web.Configuration.AnonymousIdentificationSection.CookieRequireSSL" />
 
             
 
              property to true.</para
           >
           <para
-            >Be sure to use the default value for this property if you want both data validation and encryption to help protect the cookie. This option uses the configured data-validation algorithm, based on the <format
-             type="text/html">
+            >Be sure to use the default value for this property if you want both data validation and encryption to help protect the cookie. This option uses the configured data-validation algorithm, based on the <format type="text/html">
               <a href="4b5699a9-bc21-4c4a-85f1-8b3b8ebd2d46">&lt;machineKey&gt;</a>
             </format>
 
@@ -287,8 +271,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Web.Configuration.AnonymousIdentificationSection.CookieRequireSSL" />
+            >If <see cref="P:System.Web.Configuration.AnonymousIdentificationSection.CookieRequireSSL" />
 
             
 
@@ -296,8 +279,7 @@
           >
           <block subset="none" type="note">
             <para
-              >When the anonymous identifier is stored within the URI path, rather than in a cookie, the <see
-               cref="P:System.Web.Configuration.AnonymousIdentificationSection.CookieRequireSSL" />
+              >When the anonymous identifier is stored within the URI path, rather than in a cookie, the <see cref="P:System.Web.Configuration.AnonymousIdentificationSection.CookieRequireSSL" />
 
               
 
@@ -331,18 +313,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <see
-             cref="P:System.Web.Configuration.AnonymousIdentificationSection.CookieSlidingExpiration" />
+            >When <see cref="P:System.Web.Configuration.AnonymousIdentificationSection.CookieSlidingExpiration" />
 
             
 
-             is set to true, for each request issued during a single session the time interval during which the cookie is valid is reset to the amount of time specified in the <see
-             cref="P:System.Web.Configuration.AnonymousIdentificationSection.CookieTimeout" />
+             is set to true, for each request issued during a single session the time interval during which the cookie is valid is reset to the amount of time specified in the <see cref="P:System.Web.Configuration.AnonymousIdentificationSection.CookieTimeout" />
 
             
 
-             property. When <see
-             cref="P:System.Web.Configuration.AnonymousIdentificationSection.CookieSlidingExpiration" />
+             property. When <see cref="P:System.Web.Configuration.AnonymousIdentificationSection.CookieSlidingExpiration" />
 
             
 
@@ -381,8 +360,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property can be set to an arbitrarily large value, but internally the <see
-             cref="P:System.Web.Configuration.AnonymousIdentificationSection.CookieTimeout" />
+            >This property can be set to an arbitrarily large value, but internally the <see cref="P:System.Web.Configuration.AnonymousIdentificationSection.CookieTimeout" />
 
             
 
@@ -424,8 +402,7 @@
             </item>
           </list>
           <para
-            >For more information, refer to the <see
-             cref="T:System.Web.HttpCookie" />
+            >For more information, refer to the <see cref="T:System.Web.HttpCookie" />
 
             
 
@@ -458,8 +435,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Web.Configuration.AnonymousIdentificationSection.Enabled" />
+            >If <see cref="P:System.Web.Configuration.AnonymousIdentificationSection.Enabled" />
 
             
 
@@ -491,8 +467,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of <see
-             cref="T:System.Web.Configuration.AnonymousIdentificationSection" />
+            >Gets the collection of <see cref="T:System.Web.Configuration.AnonymousIdentificationSection" />
 
             
 

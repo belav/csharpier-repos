@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class inherits from <see
-         cref="T:System.IO.FileSystemEventArgs" />
+        >This class inherits from <see cref="T:System.IO.FileSystemEventArgs" />
 
         
 
@@ -37,8 +36,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.IO.FileSystemWatcher.Renamed" />
+        >Provides data for the <see cref="E:System.IO.FileSystemWatcher.Renamed" />
 
         
 
@@ -73,8 +71,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This class inherits from the <see
-             cref="T:System.IO.FileSystemEventArgs" />
+            >This class inherits from the <see cref="T:System.IO.FileSystemEventArgs" />
 
             
 
@@ -84,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.RenamedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.IO.RenamedEventArgs" />
 
             
 
@@ -93,33 +89,48 @@
           >
         </summary>
         <param name="changeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.IO.WatcherChangeTypes" />
+          One of the <see cref="T:System.IO.WatcherChangeTypes" />
 
           
 
            values. </param
         >
         <param name="directory">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the affected file or directory. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the affected file or directory. </param
         >
         <param name="oldName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

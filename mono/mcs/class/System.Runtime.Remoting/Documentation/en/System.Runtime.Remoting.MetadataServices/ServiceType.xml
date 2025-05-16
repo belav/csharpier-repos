@@ -17,13 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.MetadataServices.ServiceType" />
+        >The <see cref="T:System.Runtime.Remoting.MetadataServices.ServiceType" />
 
         
 
-         class is used to hold information that is specified on the command line to the <format
-         type="text/html">
+         class is used to hold information that is specified on the command line to the <format type="text/html">
           <a href="40F6F8C8-B80C-4E9F-A920-31BCD0CF45C5">Soapsuds tool</a>
         </format>
 
@@ -50,13 +48,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.MetadataServices.ServiceType" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.MetadataServices.ServiceType" />
 
             
 
-             class with the object <see
-             cref="T:System.Type" />
+             class with the object <see cref="T:System.Type" />
 
             
 
@@ -64,12 +60,15 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object <see
-           cref="T:System.Type" />
+          The object <see cref="T:System.Type" />
 
           
 
@@ -94,13 +93,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.MetadataServices.ServiceType" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.MetadataServices.ServiceType" />
 
             
 
-             class with the URL and <see
-             cref="T:System.Type" />
+             class with the URL and <see cref="T:System.Type" />
 
             
 
@@ -108,24 +105,30 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object <see
-           cref="T:System.Type" />
+          The object <see cref="T:System.Type" />
 
           
 
            that is passed to the WSDL generator. </param
         >
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The well-known endpoint that can process messages that are sent to a method on the object type that is specified in the <paramref
-           name="type" />
+          The well-known endpoint that can process messages that are sent to a method on the object type that is specified in the <paramref name="type" />
 
           
 
@@ -149,8 +152,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the object <see
-             cref="T:System.Type" />
+            >Gets the object <see cref="T:System.Type" />
 
             
 
@@ -175,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the URL of an object <see
-             cref="T:System.Type" />
+            >Gets the URL of an object <see cref="T:System.Type" />
 
             
 

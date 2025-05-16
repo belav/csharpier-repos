@@ -17,18 +17,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implement the <see
-         cref="T:System.ServiceModel.Dispatcher.ICallContextInitializer" />
+        >Implement the <see cref="T:System.ServiceModel.Dispatcher.ICallContextInitializer" />
 
         
 
-         interface and add it to the <see
-         cref="P:System.ServiceModel.Dispatcher.DispatchOperation.CallContextInitializers" />
+         interface and add it to the <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.CallContextInitializers" />
 
         
 
-         property to initialize and clean up thread-local storage for the thread that invokes user code. Typical usage is to set some value, such as impersonation or changing the <see
-         cref="T:System.Globalization.CultureInfo" />
+         property to initialize and clean up thread-local storage for the thread that invokes user code. Typical usage is to set some value, such as impersonation or changing the <see cref="T:System.Globalization.CultureInfo" />
 
         
 
@@ -67,12 +64,15 @@
           <para>Implement to participate in cleaning up the thread that invoked the operation.</para>
         </summary>
         <param name="correlationState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The correlation object returned from the <see
-           cref="M:System.ServiceModel.Dispatcher.ICallContextInitializer.BeforeInvoke(System.ServiceModel.InstanceContext,System.ServiceModel.IClientChannel,System.ServiceModel.Channels.Message)" />
+          The correlation object returned from the <see cref="M:System.ServiceModel.Dispatcher.ICallContextInitializer.BeforeInvoke(System.ServiceModel.InstanceContext,System.ServiceModel.IClientChannel,System.ServiceModel.Channels.Message)" />
 
           
 
@@ -105,13 +105,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implement the <see
-             cref="M:System.ServiceModel.Dispatcher.ICallContextInitializer.BeforeInvoke(System.ServiceModel.InstanceContext,System.ServiceModel.IClientChannel,System.ServiceModel.Channels.Message)" />
+            >Implement the <see cref="M:System.ServiceModel.Dispatcher.ICallContextInitializer.BeforeInvoke(System.ServiceModel.InstanceContext,System.ServiceModel.IClientChannel,System.ServiceModel.Channels.Message)" />
 
             
 
-             method to initialize and clean up thread-local storage for the thread that invokes user code. Typical usage is to set some value, such as impersonation or changing the <see
-             cref="T:System.Globalization.CultureInfo" />
+             method to initialize and clean up thread-local storage for the thread that invokes user code. Typical usage is to set some value, such as impersonation or changing the <see cref="T:System.Globalization.CultureInfo" />
 
             
 
@@ -125,8 +123,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A correlation object passed back as the parameter of the <see
-             cref="M:System.ServiceModel.Dispatcher.ICallContextInitializer.AfterInvoke(System.Object)" />
+            >A correlation object passed back as the parameter of the <see cref="M:System.ServiceModel.Dispatcher.ICallContextInitializer.AfterInvoke(System.Object)" />
 
             
 
@@ -134,21 +131,33 @@
           >
         </returns>
         <param name="instanceContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The service instance for the operation.</param
         >
         <param name="channel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The client channel.</param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

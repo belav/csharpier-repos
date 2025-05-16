@@ -30,18 +30,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.XmlRootAttribute" />
+        >The <see cref="T:System.Xml.Serialization.XmlRootAttribute" />
 
         
 
-         belongs to a family of attributes that controls how the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         belongs to a family of attributes that controls how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         serializes or deserializes an object. For a complete list of similar attributes, see <format
-         type="text/html">
+         serializes or deserializes an object. For a complete list of similar attributes, see <format type="text/html">
           <a href="414b820f-a696-4206-b576-2711d85490c7"
             >Attributes That Control XML Serialization</a
           >
@@ -52,34 +49,29 @@
         .</para
       >
       <para
-        >You can apply the <see
-         cref="T:System.Xml.Serialization.XmlRootAttribute" />
+        >You can apply the <see cref="T:System.Xml.Serialization.XmlRootAttribute" />
 
         
 
          to a class, structure, enumeration, or interface. You can also apply the attribute to the return value of an XML Web service method.</para
       >
       <para
-        >Every XML document must have a single root element that contains all the other elements. The <see
-         cref="T:System.Xml.Serialization.XmlRootAttribute" />
+        >Every XML document must have a single root element that contains all the other elements. The <see cref="T:System.Xml.Serialization.XmlRootAttribute" />
 
         
 
-         allows you to control how the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         allows you to control how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         generates the root element by setting certain properties. For example, specify the name of the generated XML element by setting the <see
-         cref="P:System.Xml.Serialization.XmlRootAttribute.ElementName" />
+         generates the root element by setting certain properties. For example, specify the name of the generated XML element by setting the <see cref="P:System.Xml.Serialization.XmlRootAttribute.ElementName" />
 
         
 
          property.</para
       >
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -89,8 +81,7 @@
       >
       <block subset="none" type="note">
         <para
-          >You can use the word XmlRoot in your code instead of the longer <see
-           cref="T:System.Xml.Serialization.XmlRootAttribute" />
+          >You can use the word XmlRoot in your code instead of the longer <see cref="T:System.Xml.Serialization.XmlRootAttribute" />
 
           
 
@@ -123,8 +114,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlRootAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlRootAttribute" />
 
             
 
@@ -154,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlRootAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlRootAttribute" />
 
             
 
@@ -163,7 +152,11 @@
           >
         </summary>
         <param name="elementName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -190,46 +183,38 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The following table lists the XSD simple data types with their .NET equivalents.</para>
           <para
-            >For the XSD base64Binary and hexBinary data types, use an array of <see
-             cref="T:System.Byte" />
+            >For the XSD base64Binary and hexBinary data types, use an array of <see cref="T:System.Byte" />
 
             
 
-             structures, and apply a <see
-             cref="T:System.Xml.Serialization.XmlRootAttribute" />
+             structures, and apply a <see cref="T:System.Xml.Serialization.XmlRootAttribute" />
 
             
 
-             with the <see
-             cref="P:System.Xml.Serialization.XmlRootAttribute.DataType" />
+             with the <see cref="P:System.Xml.Serialization.XmlRootAttribute.DataType" />
 
             
 
-             property set to "base64Binary" or "hexBinary", as appropriate. For the XSD time and date data types, use the <see
-             cref="T:System.DateTime" />
+             property set to "base64Binary" or "hexBinary", as appropriate. For the XSD time and date data types, use the <see cref="T:System.DateTime" />
 
             
 
-             type and apply the <see
-             cref="T:System.Xml.Serialization.XmlRootAttribute" />
+             type and apply the <see cref="T:System.Xml.Serialization.XmlRootAttribute" />
 
             
 
-             with the <see
-             cref="P:System.Xml.Serialization.XmlRootAttribute.DataType" />
+             with the <see cref="P:System.Xml.Serialization.XmlRootAttribute.DataType" />
 
             
 
              set to "date" or "time".</para
           >
           <para
-            >For every XSD type that is mapped to a string, apply the <see
-             cref="T:System.Xml.Serialization.XmlRootAttribute" />
+            >For every XSD type that is mapped to a string, apply the <see cref="T:System.Xml.Serialization.XmlRootAttribute" />
 
             
 
-             with its <see
-             cref="P:System.Xml.Serialization.XmlRootAttribute.DataType" />
+             with its <see cref="P:System.Xml.Serialization.XmlRootAttribute.DataType" />
 
             
 
@@ -269,8 +254,7 @@
               </term>
               <description>
                 <para
-                  >Array of <see
-                   cref="T:System.Byte" />
+                  >Array of <see cref="T:System.Byte" />
 
                   
 
@@ -424,8 +408,7 @@
               </term>
               <description>
                 <para
-                  >Array of <see
-                   cref="T:System.Byte" />
+                  >Array of <see cref="T:System.Byte" />
 
                   
 
@@ -739,8 +722,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specify an <see
-             cref="P:System.Xml.Serialization.XmlArrayItemAttribute.ElementName" />
+            >Specify an <see cref="P:System.Xml.Serialization.XmlArrayItemAttribute.ElementName" />
 
             
 
@@ -750,18 +732,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the XML element that is generated and recognized by the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets the name of the XML element that is generated and recognized by the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             class's <see
-             cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" />
+             class's <see cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
+             and <see cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
 
             
 
@@ -788,16 +767,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The XML schema specification for structures allows an XML document to explicitly signal that an element's content is missing. Such an element contains the attribute xsi:nil set to true. For more information, see the http://www.w3.org/TR/xmlschema-1/ specification named <paramref
-             name="XML Schema Part 1: Structures" />
+            >The XML schema specification for structures allows an XML document to explicitly signal that an element's content is missing. Such an element contains the attribute xsi:nil set to true. For more information, see the http://www.w3.org/TR/xmlschema-1/ specification named <paramref name="XML Schema Part 1: Structures" />
 
             
 
             .</para
           >
           <para
-            >If the <see
-             cref="P:System.Xml.Serialization.XmlRootAttribute.IsNullable" />
+            >If the <see cref="P:System.Xml.Serialization.XmlRootAttribute.IsNullable" />
 
             
 
@@ -807,8 +784,7 @@
  &lt;Group xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
  xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:nil="true" /&gt;</code>
           <para
-            >If the <see
-             cref="P:System.Xml.Serialization.XmlRootAttribute.IsNullable" />
+            >If the <see cref="P:System.Xml.Serialization.XmlRootAttribute.IsNullable" />
 
             
 
@@ -821,8 +797,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets a value that indicates whether the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -849,36 +824,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Serialization.XmlArrayItemAttribute.Namespace" />
+            >The <see cref="P:System.Xml.Serialization.XmlArrayItemAttribute.Namespace" />
 
             
 
-             property conforms to the World Wide Web Consortium (www.w3.org) specification named <paramref
-             name="Namespaces in XML" />
+             property conforms to the World Wide Web Consortium (www.w3.org) specification named <paramref name="Namespaces in XML" />
 
             
 
             .</para
           >
           <para
-            >To create prefixed namespaces in the XML document, create an <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+            >To create prefixed namespaces in the XML document, create an <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
-             object that contains all the prefix-namespace pairs. The namespace you set for each <see
-             cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+             object that contains all the prefix-namespace pairs. The namespace you set for each <see cref="T:System.Xml.Serialization.XmlArrayAttribute" />
 
             
 
-             must be contained in the <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+             must be contained in the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
-             object. When the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             object. When the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 

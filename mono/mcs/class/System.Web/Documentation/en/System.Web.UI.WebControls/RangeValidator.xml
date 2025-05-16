@@ -25,39 +25,33 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.RangeValidator" />
+        >The <see cref="T:System.Web.UI.WebControls.RangeValidator" />
 
         
 
          control tests whether the value of an input control is within a specified range.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.RangeValidator" />
+        >The <see cref="T:System.Web.UI.WebControls.RangeValidator" />
 
         
 
-         control uses four key properties to perform its validation. The <see
-         cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
+         control uses four key properties to perform its validation. The <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
 
         
 
-         property contains the input control to validate. The <see
-         cref="P:System.Web.UI.WebControls.RangeValidator.MinimumValue" />
+         property contains the input control to validate. The <see cref="P:System.Web.UI.WebControls.RangeValidator.MinimumValue" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.RangeValidator.MaximumValue" />
+         and <see cref="P:System.Web.UI.WebControls.RangeValidator.MaximumValue" />
 
         
 
          properties specify the minimum and maximum values of the valid range.</para
       >
       <para
-        >The <see
-         cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
+        >The <see cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
 
         
 
@@ -65,13 +59,11 @@
       >
       <block subset="none" type="note">
         <para
-          >When the <see
-           cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
+          >When the <see cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
 
           
 
-           property is set to <see
-           cref="F:System.Web.UI.WebControls.ValidationDataType.Date" />
+           property is set to <see cref="F:System.Web.UI.WebControls.ValidationDataType.Date" />
 
           
 
@@ -133,8 +125,7 @@
       </list>
       <block subset="none" type="note">
         <para
-          >Validation succeeds if the input control is empty. Use a <see
-           cref="T:System.Web.UI.WebControls.RequiredFieldValidator" />
+          >Validation succeeds if the input control is empty. Use a <see cref="T:System.Web.UI.WebControls.RequiredFieldValidator" />
 
           
 
@@ -143,23 +134,19 @@
       </block>
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.UI.WebControls.RangeValidator" />
+          >The <see cref="T:System.Web.UI.WebControls.RangeValidator" />
 
           
 
-           control throws an exception if the value specified by the <see
-           cref="P:System.Web.UI.WebControls.RangeValidator.MaximumValue" />
+           control throws an exception if the value specified by the <see cref="P:System.Web.UI.WebControls.RangeValidator.MaximumValue" />
 
           
 
-           or <see
-           cref="P:System.Web.UI.WebControls.RangeValidator.MinimumValue" />
+           or <see cref="P:System.Web.UI.WebControls.RangeValidator.MinimumValue" />
 
           
 
-           property cannot be converted to the specified <see
-           cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
+           property cannot be converted to the specified <see cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
 
           
 
@@ -168,23 +155,19 @@
       </block>
       <block subset="none" type="note">
         <para
-          >When you use the <see
-           cref="T:System.Web.UI.WebControls.RangeValidator" />
+          >When you use the <see cref="T:System.Web.UI.WebControls.RangeValidator" />
 
           
 
-           control inside an <see
-           cref="T:System.Web.UI.UpdatePanel" />
+           control inside an <see cref="T:System.Web.UI.UpdatePanel" />
 
           
 
-           control, make sure that the validator control and the control it is associated with are in the same panel. For more information about using the <see
-           cref="T:System.Web.UI.UpdatePanel" />
+           control, make sure that the validator control and the control it is associated with are in the same panel. For more information about using the <see cref="T:System.Web.UI.UpdatePanel" />
 
           
 
-           control for partial-page updates, see <format
-           type="text/html">
+           control for partial-page updates, see <format type="text/html">
             <a href="5c12736d-d9e9-464a-9388-3fe0f9f49e49">Partial-Page Rendering Overview</a>
           </format>
 
@@ -194,8 +177,7 @@
         >
       </block>
       <para
-        >For additional information on validation controls, see <see
-         cref="T:System.Web.UI.WebControls.BaseValidator" />
+        >For additional information on validation controls, see <see cref="T:System.Web.UI.WebControls.BaseValidator" />
 
         
 
@@ -205,8 +187,7 @@
         <h2>Accessibility</h2>
       </format>
       <para
-        >For information about how to configure this control so that it generates markup that conforms to accessibility standards, see <format
-         type="text/html">
+        >For information about how to configure this control so that it generates markup that conforms to accessibility standards, see <format type="text/html">
           <a href="7e3ce9c4-6b7d-4fb1-94b5-72cf2a44fe13"
             >Accessibility in Visual Studio 2010 and ASP.NET 4</a
           >
@@ -214,8 +195,7 @@
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
 
@@ -240,8 +220,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.RangeValidator" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.RangeValidator" />
 
             
 
@@ -271,8 +250,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the HTML attributes and styles for the control that need to be rendered to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Adds the HTML attributes and styles for the control that need to be rendered to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -280,12 +258,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          An <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -355,13 +336,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.RangeValidator.MaximumValue" />
+            >Use the <see cref="P:System.Web.UI.WebControls.RangeValidator.MaximumValue" />
 
             
 
-             property to specify the maximum value of the validation range. If the value specified by this property fails to convert to the data type specified by the <see
-             cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
+             property to specify the maximum value of the validation range. If the value specified by this property fails to convert to the data type specified by the <see cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
 
             
 
@@ -369,18 +348,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If you specify ValidationDataType.Date for the <see
-               cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
+              >If you specify ValidationDataType.Date for the <see cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
 
               
 
-               property without programmatically setting the culture for the application, you should use a culture-neutral format, such as YYYY/MM/DD, for the <see
-               cref="P:System.Web.UI.WebControls.RangeValidator.MaximumValue" />
+               property without programmatically setting the culture for the application, you should use a culture-neutral format, such as YYYY/MM/DD, for the <see cref="P:System.Web.UI.WebControls.RangeValidator.MaximumValue" />
 
               
 
-               and <see
-               cref="P:System.Web.UI.WebControls.RangeValidator.MinimumValue" />
+               and <see cref="P:System.Web.UI.WebControls.RangeValidator.MinimumValue" />
 
               
 
@@ -388,13 +364,11 @@
             >
           </block>
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -433,13 +407,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.RangeValidator.MinimumValue" />
+            >Use the <see cref="P:System.Web.UI.WebControls.RangeValidator.MinimumValue" />
 
             
 
-             property to specify the minimum value of the validation range. If the value specified by this property fails to convert to the data type specified by the <see
-             cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
+             property to specify the minimum value of the validation range. If the value specified by this property fails to convert to the data type specified by the <see cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
 
             
 
@@ -447,18 +419,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If you specify ValidationDataType.Date for the <see
-               cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
+              >If you specify ValidationDataType.Date for the <see cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
 
               
 
-               property without programmatically setting the culture for the application, you should use a culture-neutral format, such as YYYY/MM/DD, for the <see
-               cref="P:System.Web.UI.WebControls.RangeValidator.MaximumValue" />
+               property without programmatically setting the culture for the application, you should use a culture-neutral format, such as YYYY/MM/DD, for the <see cref="P:System.Web.UI.WebControls.RangeValidator.MaximumValue" />
 
               
 
-               and <see
-               cref="P:System.Web.UI.WebControls.RangeValidator.MinimumValue" />
+               and <see cref="P:System.Web.UI.WebControls.RangeValidator.MinimumValue" />
 
               
 
@@ -466,13 +435,11 @@
             >
           </block>
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 

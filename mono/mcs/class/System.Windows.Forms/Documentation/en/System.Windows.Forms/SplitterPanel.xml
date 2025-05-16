@@ -34,33 +34,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.SplitterPanel" />
+        >The <see cref="T:System.Windows.Forms.SplitterPanel" />
 
         
 
-         is a member of its associated <see
-         cref="T:System.Windows.Forms.SplitContainer" />
+         is a member of its associated <see cref="T:System.Windows.Forms.SplitContainer" />
 
         
 
-         rather than being a member of the underlying form. At design time, the <see
-         cref="T:System.Windows.Forms.SplitterPanel" />
+         rather than being a member of the underlying form. At design time, the <see cref="T:System.Windows.Forms.SplitterPanel" />
 
         
 
-         is accessible through the <see
-         cref="P:System.Windows.Forms.SplitContainer.Panel1" />
+         is accessible through the <see cref="P:System.Windows.Forms.SplitContainer.Panel1" />
 
         
 
-         or <see
-         cref="P:System.Windows.Forms.SplitContainer.Panel2" />
+         or <see cref="P:System.Windows.Forms.SplitContainer.Panel2" />
 
         
 
-         properties of <see
-         cref="T:System.Windows.Forms.SplitContainer" />
+         properties of <see cref="T:System.Windows.Forms.SplitContainer" />
 
         
 
@@ -70,8 +64,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Creates a panel that is associated with a <see
-         cref="T:System.Windows.Forms.SplitContainer" />
+        >Creates a panel that is associated with a <see cref="T:System.Windows.Forms.SplitContainer" />
 
         
 
@@ -95,13 +88,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.SplitterPanel" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.SplitterPanel" />
 
             
 
-             class with its specified <see
-             cref="T:System.Windows.Forms.SplitContainer" />
+             class with its specified <see cref="T:System.Windows.Forms.SplitContainer" />
 
             
 
@@ -109,17 +100,19 @@
           >
         </summary>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.SplitContainer" />
+          The <see cref="T:System.Windows.Forms.SplitContainer" />
 
           
 
-           that contains the <see
-           cref="T:System.Windows.Forms.SplitterPanel" />
+           that contains the <see cref="T:System.Windows.Forms.SplitterPanel" />
 
           
 
@@ -160,13 +153,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets how a <see
-             cref="T:System.Windows.Forms.SplitterPanel" />
+            >Gets or sets how a <see cref="T:System.Windows.Forms.SplitterPanel" />
 
             
 
-             attaches to the edges of the <see
-             cref="T:System.Windows.Forms.SplitContainer" />
+             attaches to the edges of the <see cref="T:System.Windows.Forms.SplitContainer" />
 
             
 
@@ -205,8 +196,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Windows.Forms.SplitterPanel" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.SplitterPanel" />
 
             
 
@@ -281,13 +271,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Enables the <see
-             cref="T:System.Windows.Forms.SplitterPanel" />
+            >Enables the <see cref="T:System.Windows.Forms.SplitterPanel" />
 
             
 
-             to shrink when <see
-             cref="P:System.Windows.Forms.SplitterPanel.AutoSize" />
+             to shrink when <see cref="P:System.Windows.Forms.SplitterPanel.AutoSize" />
 
             
 
@@ -326,8 +314,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the border style for the <see
-             cref="T:System.Windows.Forms.SplitterPanel" />
+            >Gets or sets the border style for the <see cref="T:System.Windows.Forms.SplitterPanel" />
 
             
 
@@ -387,13 +374,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets which edge of the <see
-             cref="T:System.Windows.Forms.SplitContainer" />
+            >Gets or sets which edge of the <see cref="T:System.Windows.Forms.SplitContainer" />
 
             
 
-             that the <see
-             cref="T:System.Windows.Forms.SplitterPanel" />
+             that the <see cref="T:System.Windows.Forms.SplitterPanel" />
 
             
 
@@ -429,8 +414,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is not relevant to this class. For more information about handling events, see <format
-             type="text/html">
+            >This event is not relevant to this class. For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -442,8 +426,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.SplitterPanel.Dock" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.SplitterPanel.Dock" />
 
             
 
@@ -482,8 +465,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the internal spacing between the <see
-             cref="T:System.Windows.Forms.SplitterPanel" />
+            >Gets the internal spacing between the <see cref="T:System.Windows.Forms.SplitterPanel" />
 
             
 
@@ -519,8 +501,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the height of the <see
-             cref="T:System.Windows.Forms.SplitterPanel" />
+            >Gets or sets the height of the <see cref="T:System.Windows.Forms.SplitterPanel" />
 
             
 
@@ -559,13 +540,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the coordinates of the upper-left corner of the <see
-             cref="T:System.Windows.Forms.SplitterPanel" />
+            >Gets or sets the coordinates of the upper-left corner of the <see cref="T:System.Windows.Forms.SplitterPanel" />
 
             
 
-             relative to the upper-left corner of its <see
-             cref="T:System.Windows.Forms.SplitContainer" />
+             relative to the upper-left corner of its <see cref="T:System.Windows.Forms.SplitContainer" />
 
             
 
@@ -601,8 +580,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is not relevant to this class. For more information about handling events, see <format
-             type="text/html">
+            >This event is not relevant to this class. For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -614,8 +592,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.SplitterPanel.Location" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.SplitterPanel.Location" />
 
             
 
@@ -651,8 +628,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the size that is the upper limit that <see
-             cref="M:System.Windows.Forms.Control.GetPreferredSize(System.Drawing.Size)" />
+            >Gets or sets the size that is the upper limit that <see cref="M:System.Windows.Forms.Control.GetPreferredSize(System.Drawing.Size)" />
 
             
 
@@ -691,8 +667,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the size that is the lower limit that <see
-             cref="M:System.Windows.Forms.Control.GetPreferredSize(System.Drawing.Size)" />
+            >Gets or sets the size that is the lower limit that <see cref="M:System.Windows.Forms.Control.GetPreferredSize(System.Drawing.Size)" />
 
             
 
@@ -731,8 +706,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name of this <see
-             cref="T:System.Windows.Forms.SplitterPanel" />
+            >The name of this <see cref="T:System.Windows.Forms.SplitterPanel" />
 
             
 
@@ -774,13 +748,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Windows.Forms.SplitContainer" />
+            >Gets or sets the <see cref="T:System.Windows.Forms.SplitContainer" />
 
             
 
-             that contains this <see
-             cref="T:System.Windows.Forms.SplitterPanel" />
+             that contains this <see cref="T:System.Windows.Forms.SplitterPanel" />
 
             
 
@@ -819,8 +791,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the height and width of the <see
-             cref="T:System.Windows.Forms.SplitterPanel" />
+            >Gets or sets the height and width of the <see cref="T:System.Windows.Forms.SplitterPanel" />
 
             
 
@@ -859,13 +830,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the tab order of the <see
-             cref="T:System.Windows.Forms.SplitterPanel" />
+            >Gets or sets the tab order of the <see cref="T:System.Windows.Forms.SplitterPanel" />
 
             
 
-             within its <see
-             cref="T:System.Windows.Forms.SplitContainer" />
+             within its <see cref="T:System.Windows.Forms.SplitContainer" />
 
             
 
@@ -901,8 +870,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is not relevant to this class. For more information about handling events, see <format
-             type="text/html">
+            >This event is not relevant to this class. For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -914,8 +882,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.SplitterPanel.TabIndex" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.SplitterPanel.TabIndex" />
 
             
 
@@ -951,8 +918,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the user can give the focus to this <see
-             cref="T:System.Windows.Forms.SplitterPanel" />
+            >Gets or sets a value indicating whether the user can give the focus to this <see cref="T:System.Windows.Forms.SplitterPanel" />
 
             
 
@@ -988,8 +954,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is not relevant to this class. For more information about handling events, see <format
-             type="text/html">
+            >This event is not relevant to this class. For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1001,8 +966,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.SplitterPanel.TabStop" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.SplitterPanel.TabStop" />
 
             
 
@@ -1038,8 +1002,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Windows.Forms.SplitterPanel" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.SplitterPanel" />
 
             
 
@@ -1075,8 +1038,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is not relevant to this class. For more information about handling events, see <format
-             type="text/html">
+            >This event is not relevant to this class. For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1088,8 +1050,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.SplitterPanel.Visible" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.SplitterPanel.Visible" />
 
             
 
@@ -1122,8 +1083,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the width of the <see
-             cref="T:System.Windows.Forms.SplitterPanel" />
+            >Gets or sets the width of the <see cref="T:System.Windows.Forms.SplitterPanel" />
 
             
 

@@ -17,13 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To run installers in a transaction, add them to the <see
-         cref="P:System.Configuration.Install.Installer.Installers" />
+        >To run installers in a transaction, add them to the <see cref="P:System.Configuration.Install.Installer.Installers" />
 
         
 
-         property of this <see
-         cref="T:System.Configuration.Install.TransactedInstaller" />
+         property of this <see cref="T:System.Configuration.Install.TransactedInstaller" />
 
         
 
@@ -45,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.Install.TransactedInstaller" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.Install.TransactedInstaller" />
 
             
 
@@ -75,38 +72,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method calls the <see
-             cref="M:System.Configuration.Install.TransactedInstaller.Install(System.Collections.IDictionary)" />
+            >This method calls the <see cref="M:System.Configuration.Install.TransactedInstaller.Install(System.Collections.IDictionary)" />
 
             
 
-             method of each installer contained in the <see
-             cref="P:System.Configuration.Install.Installer.Installers" />
+             method of each installer contained in the <see cref="P:System.Configuration.Install.Installer.Installers" />
 
             
 
-             property of this instance. The <see
-             cref="T:System.Collections.IDictionary" />
+             property of this instance. The <see cref="T:System.Collections.IDictionary" />
 
             
 
-             object referenced by the <paramref
-             name="savedState" />
+             object referenced by the <paramref name="savedState" />
 
             
 
-             parameter is updated to reflect the status of the installation after the contained installers have run. If all the <see
-             cref="M:System.Configuration.Install.TransactedInstaller.Install(System.Collections.IDictionary)" />
+             parameter is updated to reflect the status of the installation after the contained installers have run. If all the <see cref="M:System.Configuration.Install.TransactedInstaller.Install(System.Collections.IDictionary)" />
 
             
 
-             methods succeed, the <see
-             cref="M:System.Configuration.Install.Installer.Commit(System.Collections.IDictionary)" />
+             methods succeed, the <see cref="M:System.Configuration.Install.Installer.Commit(System.Collections.IDictionary)" />
 
             
 
-             method is called. Otherwise, the <see
-             cref="M:System.Configuration.Install.Installer.Rollback(System.Collections.IDictionary)" />
+             method is called. Otherwise, the <see cref="M:System.Configuration.Install.Installer.Rollback(System.Collections.IDictionary)" />
 
             
 
@@ -118,12 +108,15 @@
           <para>Performs the installation.</para>
         </summary>
         <param name="savedState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IDictionary" />
+          An <see cref="T:System.Collections.IDictionary" />
 
           
 
@@ -151,18 +144,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method to remove a previously completed installation. This <see
-             cref="M:System.Configuration.Install.TransactedInstaller.Uninstall(System.Collections.IDictionary)" />
+            >Call this method to remove a previously completed installation. This <see cref="M:System.Configuration.Install.TransactedInstaller.Uninstall(System.Collections.IDictionary)" />
 
             
 
-             method calls the <see
-             cref="M:System.Configuration.Install.Installer.Uninstall(System.Collections.IDictionary)" />
+             method calls the <see cref="M:System.Configuration.Install.Installer.Uninstall(System.Collections.IDictionary)" />
 
             
 
-             method of each installer in the <see
-             cref="P:System.Configuration.Install.Installer.Installers" />
+             method of each installer in the <see cref="P:System.Configuration.Install.Installer.Installers" />
 
             
 
@@ -170,28 +160,23 @@
           >
           <block subset="none" type="note">
             <para
-              >Although the <see
-               cref="M:System.Configuration.Install.Installer.Install(System.Collections.IDictionary)" />
+              >Although the <see cref="M:System.Configuration.Install.Installer.Install(System.Collections.IDictionary)" />
 
               
 
-               and <see
-               cref="M:System.Configuration.Install.Installer.Commit(System.Collections.IDictionary)" />
+               and <see cref="M:System.Configuration.Install.Installer.Commit(System.Collections.IDictionary)" />
 
               
 
-               methods save the state of the computer after the installations, the file containing the <see
-               cref="T:System.Collections.IDictionary" />
+               methods save the state of the computer after the installations, the file containing the <see cref="T:System.Collections.IDictionary" />
 
               
 
-               from the <paramref
-               name="savedState" />
+               from the <paramref name="savedState" />
 
               
 
-               parameter might have been deleted at some point after the installation was complete. If the file is deleted, the <paramref
-               name="savedState" />
+               parameter might have been deleted at some point after the installation was complete. If the file is deleted, the <paramref name="savedState" />
 
               
 
@@ -204,12 +189,15 @@
           <para>Removes an installation.</para>
         </summary>
         <param name="savedState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IDictionary" />
+          An <see cref="T:System.Collections.IDictionary" />
 
           
 

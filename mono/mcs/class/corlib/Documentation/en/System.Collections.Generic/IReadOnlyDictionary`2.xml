@@ -33,29 +33,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each element is a key/value pair that is stored in a <see
-         cref="T:System.Collections.Generic.KeyValuePair`2" />
+        >Each element is a key/value pair that is stored in a <see cref="T:System.Collections.Generic.KeyValuePair`2" />
 
         
 
          object.</para
       >
       <para
-        >Each pair must have a unique key. Implementations can vary in whether they allow you to specify a key that is null. The value can be null and does not have to be unique. The <see
-         cref="T:System.Collections.Generic.IDictionary`2" />
+        >Each pair must have a unique key. Implementations can vary in whether they allow you to specify a key that is null. The value can be null and does not have to be unique. The <see cref="T:System.Collections.Generic.IDictionary`2" />
 
         
 
          interface allows the contained keys and values to be enumerated, but it does not imply any particular sort order.</para
       >
       <para
-        >The foreach statement of the C# language (For Each in Visual Basic, for each in C++) requires the type of each element in the collection. Because each element of the <see
-         cref="T:System.Collections.Generic.IReadOnlyDictionary`2" />
+        >The foreach statement of the C# language (For Each in Visual Basic, for each in C++) requires the type of each element in the collection. Because each element of the <see cref="T:System.Collections.Generic.IReadOnlyDictionary`2" />
 
         
 
-         interface is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see
-         cref="T:System.Collections.Generic.KeyValuePair`2" />
+         interface is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see cref="T:System.Collections.Generic.KeyValuePair`2" />
 
         
 
@@ -134,8 +130,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The order of the keys in the enumerable collection is unspecified, but the implementation must guarantee that the keys are in the same order as the corresponding values in the enumerable collection that is returned by the <see
-             cref="P:System.Collections.Generic.IReadOnlyDictionary`2.Values" />
+            >The order of the keys in the enumerable collection is unspecified, but the implementation must guarantee that the keys are in the same order as the corresponding values in the enumerable collection that is returned by the <see cref="P:System.Collections.Generic.IReadOnlyDictionary`2.Values" />
 
             
 
@@ -197,8 +192,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The order of the values in the enumerable collection is unspecified, but the implementation must guarantee that the values are in the same order as the corresponding keys in the enumerable collection that is returned by the <see
-             cref="P:System.Collections.Generic.IReadOnlyDictionary`2.Keys" />
+            >The order of the values in the enumerable collection is unspecified, but the implementation must guarantee that the values are in the same order as the corresponding keys in the enumerable collection that is returned by the <see cref="P:System.Collections.Generic.IReadOnlyDictionary`2.Keys" />
 
             
 

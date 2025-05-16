@@ -30,39 +30,33 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>When using indigo1, a metadata endpoint can be created for any service. The endpoint can be queried for metadata that allows a client to communicate with the endpoint. For example, a metadata endpoint can return a Web Services Description Language (WSDL) document that describes the methods and data types of a service.</para>
       <para
-        >The <see
-         cref="T:System.ServiceModel.Description.MetadataReference" />
+        >The <see cref="T:System.ServiceModel.Description.MetadataReference" />
 
         
 
          class is used with WS-MetadataExchange responses where references are directly encoded as &lt;mex:MetadataReference&gt; or &lt;mex:MetadataLocation&gt;. </para
       >
       <para
-        >Metadata documents can reference many other documents that describe types and those documents can contain even more references. The <see
-         cref="T:System.ServiceModel.Description.MetadataReference" />
+        >Metadata documents can reference many other documents that describe types and those documents can contain even more references. The <see cref="T:System.ServiceModel.Description.MetadataReference" />
 
         
 
          class represents a single endpoint that returns a document that can itself contain multiple WSDL or XSD items as well as other metadata references to other WS-MetadataExchange endpoints. </para
       >
       <para
-        >Instances of the <see
-         cref="T:System.ServiceModel.Description.MetadataReference" />
+        >Instances of the <see cref="T:System.ServiceModel.Description.MetadataReference" />
 
         
 
-         class are commonly used when processing a <see
-         cref="T:System.ServiceModel.Description.MetadataSet" />
+         class are commonly used when processing a <see cref="T:System.ServiceModel.Description.MetadataSet" />
 
         
 
-        , which represents the total metadata exchange point. The <see
-         cref="T:System.ServiceModel.Description.MetadataResolver" />
+        , which represents the total metadata exchange point. The <see cref="T:System.ServiceModel.Description.MetadataResolver" />
 
         
 
-         class is designed to resolve all references used to return the metadata. If, however, you need to examine each reference, use the <see
-         cref="T:System.ServiceModel.Description.MetadataReference" />
+         class is designed to resolve all references used to return the metadata. If, however, you need to examine each reference, use the <see cref="T:System.ServiceModel.Description.MetadataReference" />
 
         
 
@@ -95,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.MetadataReference" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataReference" />
 
             
 
@@ -127,8 +120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.MetadataReference" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataReference" />
 
             
 
@@ -136,24 +128,30 @@
           >
         </summary>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          An <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
            that contains the URI of the endpoint.</param
         >
         <param name="addressVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ServiceModel.Channels.AddressingVersion" />
+          An <see cref="T:System.ServiceModel.Channels.AddressingVersion" />
 
           
 
@@ -237,8 +235,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >An <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -273,12 +270,15 @@
           <para>Reads using the supplied reader object.</para>
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlReader" />
+          An <see cref="T:System.Xml.XmlReader" />
 
           
 
@@ -312,12 +312,15 @@
           <para>Writes an XML stream with the specified writer object.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlWriter" />
+          An <see cref="T:System.Xml.XmlWriter" />
 
           
 

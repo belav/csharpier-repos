@@ -15,18 +15,15 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.UI.Design.IHtmlControlDesignerBehavior" />
+          >The <see cref="T:System.Web.UI.Design.IHtmlControlDesignerBehavior" />
 
           
 
-           interface is obsolete. Use the <see
-           cref="T:System.Web.UI.Design.IControlDesignerTag" />
+           interface is obsolete. Use the <see cref="T:System.Web.UI.Design.IControlDesignerTag" />
 
           
 
-           and <see
-           cref="T:System.Web.UI.Design.IControlDesignerView" />
+           and <see cref="T:System.Web.UI.Design.IControlDesignerView" />
 
           
 
@@ -99,23 +96,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.UI.Design.IHtmlControlDesignerBehavior.GetAttribute(System.String,System.Boolean)" />
+              >The <see cref="M:System.Web.UI.Design.IHtmlControlDesignerBehavior.GetAttribute(System.String,System.Boolean)" />
 
               
 
-               method is obsolete. Use the <see
-               cref="M:System.Web.UI.Design.IControlDesignerTag.GetAttribute(System.String)" />
+               method is obsolete. Use the <see cref="M:System.Web.UI.Design.IControlDesignerTag.GetAttribute(System.String)" />
 
               
 
-               method on the <see
-               cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
+               method on the <see cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
 
               
 
-               property of the <see
-               cref="T:System.Web.UI.Design.ControlDesigner" />
+               property of the <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
               
 
@@ -132,14 +125,22 @@
           <para>The attribute that was retrieved.</para>
         </returns>
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The attribute to retrieve. </param
         >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -170,18 +171,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.UI.Design.IHtmlControlDesignerBehavior.GetStyleAttribute(System.String,System.Boolean,System.Boolean)" />
+              >The <see cref="M:System.Web.UI.Design.IHtmlControlDesignerBehavior.GetStyleAttribute(System.String,System.Boolean,System.Boolean)" />
 
               
 
-               method is obsolete. Use the <see
-               cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeCssAttributes" />
+               method is obsolete. Use the <see cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeCssAttributes" />
 
               
 
-               method on the <see
-               cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+               method on the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
               
 
@@ -198,21 +196,33 @@
           <para>The style attribute that was retrieved.</para>
         </returns>
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The style attribute to retrieve. </param
         >
         <param name="designTimeOnly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the attribute is only active at design time; otherwise, false. </param
         >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -242,23 +252,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.UI.Design.IHtmlControlDesignerBehavior.RemoveAttribute(System.String,System.Boolean)" />
+              >The <see cref="M:System.Web.UI.Design.IHtmlControlDesignerBehavior.RemoveAttribute(System.String,System.Boolean)" />
 
               
 
-               method is obsolete. Use the <see
-               cref="M:System.Web.UI.Design.IControlDesignerTag.RemoveAttribute(System.String)" />
+               method is obsolete. Use the <see cref="M:System.Web.UI.Design.IControlDesignerTag.RemoveAttribute(System.String)" />
 
               
 
-               method on the <see
-               cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
+               method on the <see cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
 
               
 
-               property of the <see
-               cref="T:System.Web.UI.Design.ControlDesigner" />
+               property of the <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
               
 
@@ -271,14 +277,22 @@
           <para>Removes the specified attribute.</para>
         </summary>
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The attribute to remove. </param
         >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -311,21 +325,33 @@
           <para>Removes the specified style attribute.</para>
         </summary>
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The style attribute to remove. </param
         >
         <param name="designTimeOnly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the attribute is only active at design time; otherwise, false. </param
         >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -356,23 +382,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.UI.Design.IHtmlControlDesignerBehavior.SetAttribute(System.String,System.Object,System.Boolean)" />
+              >The <see cref="M:System.Web.UI.Design.IHtmlControlDesignerBehavior.SetAttribute(System.String,System.Object,System.Boolean)" />
 
               
 
-               method is obsolete. Use the <see
-               cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" />
+               method is obsolete. Use the <see cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" />
 
               
 
-               method on the <see
-               cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
+               method on the <see cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
 
               
 
-               property of the <see
-               cref="T:System.Web.UI.Design.ControlDesigner" />
+               property of the <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
               
 
@@ -385,21 +407,33 @@
           <para>Sets the specified attribute to the specified object.</para>
         </summary>
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The attribute to set. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object on which to set the attribute. </param
         >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -431,18 +465,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.UI.Design.IHtmlControlDesignerBehavior.SetStyleAttribute(System.String,System.Boolean,System.Object,System.Boolean)" />
+              >The <see cref="M:System.Web.UI.Design.IHtmlControlDesignerBehavior.SetStyleAttribute(System.String,System.Boolean,System.Object,System.Boolean)" />
 
               
 
-               method is obsolete. Use the <see
-               cref="M:System.Web.UI.Design.ContainerControlDesigner.AddDesignTimeCssAttributes(System.Collections.IDictionary)" />
+               method is obsolete. Use the <see cref="M:System.Web.UI.Design.ContainerControlDesigner.AddDesignTimeCssAttributes(System.Collections.IDictionary)" />
 
               
 
-               method on the <see
-               cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+               method on the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
               
 
@@ -455,28 +486,44 @@
           <para>Sets the specified style attribute to the specified object.</para>
         </summary>
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The attribute to set. </param
         >
         <param name="designTimeOnly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the attribute is only active at design-time; otherwise, false. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to set the attribute on. </param
         >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -27,13 +27,11 @@
 
         
 
-         is used by the <see
-         cref="T:System.IO.DriveInfo" />
+         is used by the <see cref="T:System.IO.DriveInfo" />
 
         
 
-         class to indicate drive type. It can be used with the <see
-         cref="T:System.IO.DriveType" />
+         class to indicate drive type. It can be used with the <see cref="T:System.IO.DriveType" />
 
         
 

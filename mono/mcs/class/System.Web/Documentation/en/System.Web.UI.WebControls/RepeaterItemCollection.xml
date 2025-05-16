@@ -24,28 +24,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+        >The <see cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
 
         
 
-         class represents a collection of <see
-         cref="T:System.Web.UI.WebControls.RepeaterItem" />
+         class represents a collection of <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
         
 
-         objects, which in turn represent the data items in a <see
-         cref="T:System.Web.UI.WebControls.Repeater" />
+         objects, which in turn represent the data items in a <see cref="T:System.Web.UI.WebControls.Repeater" />
 
         
 
-         control. To programmatically retrieve <see
-         cref="T:System.Web.UI.WebControls.RepeaterItem" />
+         control. To programmatically retrieve <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
         
 
-         objects from a <see
-         cref="T:System.Web.UI.WebControls.Repeater" />
+         objects from a <see cref="T:System.Web.UI.WebControls.Repeater" />
 
         
 
@@ -54,8 +49,7 @@
       <list type="bullet">
         <item>
           <para
-            >Use the indexer to get a single <see
-             cref="T:System.Web.UI.WebControls.RepeaterItem" />
+            >Use the indexer to get a single <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
             
 
@@ -64,13 +58,11 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.RepeaterItemCollection.CopyTo(System.Array,System.Int32)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.RepeaterItemCollection.CopyTo(System.Array,System.Int32)" />
 
             
 
-             method to copy the contents of the collection to a <see
-             cref="T:System.Array" />
+             method to copy the contents of the collection to a <see cref="T:System.Array" />
 
             
 
@@ -79,13 +71,11 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.RepeaterItemCollection.GetEnumerator" />
+            >Use the <see cref="M:System.Web.UI.WebControls.RepeaterItemCollection.GetEnumerator" />
 
             
 
-             method to create an <see
-             cref="T:System.Collections.IEnumerator" />
+             method to create an <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -97,8 +87,7 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="P:System.Web.UI.WebControls.RepeaterItemCollection.Count" />
+        >The <see cref="P:System.Web.UI.WebControls.RepeaterItemCollection.Count" />
 
         
 
@@ -108,13 +97,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Web.UI.WebControls.RepeaterItem" />
+        >Represents a collection of <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
         
 
-         objects in the <see
-         cref="T:System.Web.UI.WebControls.Repeater" />
+         objects in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
         
 
@@ -137,8 +124,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
 
             
 
@@ -148,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
 
             
 
@@ -157,12 +142,15 @@
           >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.ArrayList" />
+          A <see cref="T:System.Collections.ArrayList" />
 
           
 
@@ -188,13 +176,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to copy the contents of the <see
-             cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+            >Use this method to copy the contents of the <see cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
 
             
 
-             into the specified <see
-             cref="T:System.Array" />
+             into the specified <see cref="T:System.Array" />
 
             
 
@@ -202,13 +188,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <paramref
-               name="array" />
+              >The <paramref name="array" />
 
               
 
-               parameter must be a zero-based <see
-               cref="T:System.Array" />
+               parameter must be a zero-based <see cref="T:System.Array" />
 
               
 
@@ -219,18 +203,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the items from this <see
-             cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+            >Copies all the items from this <see cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
 
             
 
-             to the specified <see
-             cref="T:System.Array" />
+             to the specified <see cref="T:System.Array" />
 
             
 
-             object, starting at the specified index in the <see
-             cref="T:System.Array" />
+             object, starting at the specified index in the <see cref="T:System.Array" />
 
             
 
@@ -238,29 +219,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A zero-based <see
-           cref="T:System.Array" />
+          A zero-based <see cref="T:System.Array" />
 
           
 
-           that receives the copied items from the <see
-           cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+           that receives the copied items from the <see cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
 
           
 
           . </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first position in the specified <see
-           cref="T:System.Array" />
+          The first position in the specified <see cref="T:System.Array" />
 
           
 
@@ -283,23 +269,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.RepeaterItemCollection.Count" />
+            >Use the <see cref="P:System.Web.UI.WebControls.RepeaterItemCollection.Count" />
 
             
 
-             property to determine the number of <see
-             cref="T:System.Web.UI.WebControls.RepeaterItem" />
+             property to determine the number of <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
             
 
-             objects in the <see
-             cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+             objects in the <see cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
 
             
 
-             collection. The <see
-             cref="P:System.Web.UI.WebControls.RepeaterItemCollection.Count" />
+             collection. The <see cref="P:System.Web.UI.WebControls.RepeaterItemCollection.Count" />
 
             
 
@@ -309,8 +291,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of <see
-             cref="T:System.Web.UI.WebControls.RepeaterItem" />
+            >Gets the number of <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
             
 
@@ -337,37 +318,32 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to create a <see
-             cref="T:System.Collections.IEnumerator" />
+            >Use this method to create a <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             that can be used to iterate through each item in the <see
-             cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+             that can be used to iterate through each item in the <see cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
 
             
 
             .</para
           >
           <para
-            >Use the <see
-             cref="P:System.Collections.IEnumerator.Current" />
+            >Use the <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              property to get the item currently pointed to in the collection.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >Use the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
              method to move to the next item in the collection.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Use the <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
@@ -375,23 +351,19 @@
           >
           <block subset="none" type="note">
             <para
-              >After you create a <see
-               cref="T:System.Collections.IEnumerator" />
+              >After you create a <see cref="T:System.Collections.IEnumerator" />
 
               
 
-               object or use the <see
-               cref="M:System.Collections.IEnumerator.Reset" />
+               object or use the <see cref="M:System.Collections.IEnumerator.Reset" />
 
               
 
-               method to move the enumerator to the first item in the collection, you must call the <see
-               cref="M:System.Collections.IEnumerator.MoveNext" />
+               method to move the enumerator to the first item in the collection, you must call the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
               
 
-               method. Otherwise, the item represented by the <see
-               cref="P:System.Collections.IEnumerator.Current" />
+               method. Otherwise, the item represented by the <see cref="P:System.Collections.IEnumerator.Current" />
 
               
 
@@ -402,18 +374,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns a <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             interface that can iterate through all the <see
-             cref="T:System.Web.UI.WebControls.RepeaterItem" />
+             interface that can iterate through all the <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
             
 
-             objects in the <see
-             cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+             objects in the <see cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
 
             
 
@@ -423,18 +392,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.IEnumerator" />
+            >A <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             interface that contains all <see
-             cref="T:System.Web.UI.WebControls.RepeaterItem" />
+             interface that contains all <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
             
 
-             objects in the <see
-             cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+             objects in the <see cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
 
             
 
@@ -458,8 +424,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property always returns false to indicate that the <see
-             cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+            >This property always returns false to indicate that the <see cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
 
             
 
@@ -469,13 +434,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Web.UI.WebControls.RepeaterItem" />
+            >Gets a value that indicates whether the <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
             
 
-             objects in the <see
-             cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+             objects in the <see cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
 
             
 
@@ -499,26 +462,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is derived from the <see
-             cref="T:System.Collections.ICollection" />
+            >This property is derived from the <see cref="T:System.Collections.ICollection" />
 
             
 
              class and is overridden to always return false.</para
           >
           <para
-            >For more information on the <see
-             cref="P:System.Web.UI.WebControls.DataGridColumnCollection.IsSynchronized" />
+            >For more information on the <see cref="P:System.Web.UI.WebControls.DataGridColumnCollection.IsSynchronized" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.IsSynchronized" />
+             property, see the <see cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -528,8 +487,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see
-             cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+            >Gets a value indicating whether access to the <see cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
 
             
 
@@ -576,26 +534,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object returned in this implementation is the <see
-             cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+            >The object returned in this implementation is the <see cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
 
             
 
              object itself.</para
           >
           <para
-            >For more information on the <see
-             cref="P:System.Web.UI.WebControls.DataGridColumnCollection.SyncRoot" />
+            >For more information on the <see cref="P:System.Web.UI.WebControls.DataGridColumnCollection.SyncRoot" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             property, see the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -605,8 +559,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the object that can be used to synchronize access to the <see
-             cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+            >Gets the object that can be used to synchronize access to the <see cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
 
             
 

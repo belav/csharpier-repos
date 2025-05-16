@@ -27,13 +27,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <block subset="none" type="note">
         <para
-          >Creating or deleting a performance counter requires synchronization of the underlying code by using a named mutex. If a highly privileged application locks the named mutex, attempts to create or delete a performance counter causes the application to stop responding until the lock is released. To help avoid this problem, never grant <see
-           cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode" />
+          >Creating or deleting a performance counter requires synchronization of the underlying code by using a named mutex. If a highly privileged application locks the named mutex, attempts to create or delete a performance counter causes the application to stop responding until the lock is released. To help avoid this problem, never grant <see cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode" />
 
           
 
-           permission to untrusted code. In addition, <see
-           cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode" />
+           permission to untrusted code. In addition, <see cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode" />
 
           
 
@@ -41,57 +39,48 @@
         >
       </block>
       <para
-        >The <see
-         cref="T:System.Diagnostics.PerformanceCounterCategory" />
+        >The <see cref="T:System.Diagnostics.PerformanceCounterCategory" />
 
         
 
-         instance's <see
-         cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryName" />
+         instance's <see cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryName" />
 
         
 
          property is displayed in the Performance Object field of the Performance Viewer application's Add Counter dialog box.</para
       >
       <para
-        >The <see
-         cref="T:System.Diagnostics.PerformanceCounterCategory" />
+        >The <see cref="T:System.Diagnostics.PerformanceCounterCategory" />
 
         
 
-         class provides several methods for interacting with counters and categories on the computer. The <see
-         cref="Overload:System.Diagnostics.PerformanceCounterCategory.Create" />
+         class provides several methods for interacting with counters and categories on the computer. The <see cref="Overload:System.Diagnostics.PerformanceCounterCategory.Create" />
 
         
 
-         methods enable you to define custom categories. The <see
-         cref="M:System.Diagnostics.PerformanceCounterCategory.Delete(System.String)" />
+         methods enable you to define custom categories. The <see cref="M:System.Diagnostics.PerformanceCounterCategory.Delete(System.String)" />
 
         
 
-         method provides a way to remove categories from the computer. The <see
-         cref="M:System.Diagnostics.PerformanceCounterCategory.GetCategories" />
+         method provides a way to remove categories from the computer. The <see cref="M:System.Diagnostics.PerformanceCounterCategory.GetCategories" />
 
         
 
-         method enables you to view the list of categories, while <see
-         cref="M:System.Diagnostics.PerformanceCounterCategory.ReadCategory" />
+         method enables you to view the list of categories, while <see cref="M:System.Diagnostics.PerformanceCounterCategory.ReadCategory" />
 
         
 
          retrieves all the counter and instance data associated with a single category.</para
       >
       <para
-        >A performance counter publishes performance data about an application. Categories include physical components (such as processors, disks, and memory) and system objects (such as processes and threads). System counters that are related to the same performance object are grouped into a category that indicates their common focus. When you create an instance of the <see
-         cref="T:System.Diagnostics.PerformanceCounter" />
+        >A performance counter publishes performance data about an application. Categories include physical components (such as processors, disks, and memory) and system objects (such as processes and threads). System counters that are related to the same performance object are grouped into a category that indicates their common focus. When you create an instance of the <see cref="T:System.Diagnostics.PerformanceCounter" />
 
         
 
          class, you first indicate the category with which the component will interact, and then you choose a counter from that category.</para
       >
       <para
-        >For example, one Windows counter category is the Memory category. System counters within this category track memory data such as the number of bytes available and the number of bytes cached. If you wanted to work with the bytes cached in your application, you would create an instance of the <see
-         cref="T:System.Diagnostics.PerformanceCounter" />
+        >For example, one Windows counter category is the Memory category. System counters within this category track memory data such as the number of bytes available and the number of bytes cached. If you wanted to work with the bytes cached in your application, you would create an instance of the <see cref="T:System.Diagnostics.PerformanceCounter" />
 
         
 
@@ -100,13 +89,11 @@
       <para>Although your system makes many more counter categories available, the categories that you will probably interact with most frequently are the Cache, Memory, Objects, PhysicalDisk, Process, Processor, Server, System, and Thread categories.</para>
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="M:System.Diagnostics.PerformanceCounter.RemoveInstance" />
+          >The <see cref="M:System.Diagnostics.PerformanceCounter.RemoveInstance" />
 
           
 
-           method in the <see
-           cref="T:System.Diagnostics.PerformanceCounter" />
+           method in the <see cref="T:System.Diagnostics.PerformanceCounter" />
 
           
 
@@ -118,8 +105,7 @@
       </block>
       <block subset="none" type="note">
         <para
-          >Performance counter categories installed with the dnprdnlong use separate shared memory, with each performance counter category having its own memory. You can specify the size of separate shared memory by creating a DWORD named FileMappingSize in the registry key HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\&lt;category name&gt;\Performance. The FileMappingSize value is set to the shared memory size of the category. The default size is 131072 decimal. If the FileMappingSize value is not present, the fileMappingSize attribute value for the performanceCounters element specified in the Machine.config file is used, causing additional overhead for configuration file processing. You can realize a performance improvement for application startup by setting the file mapping size in the registry. For more information about the file mapping size, see <format
-           type="text/html">
+          >Performance counter categories installed with the dnprdnlong use separate shared memory, with each performance counter category having its own memory. You can specify the size of separate shared memory by creating a DWORD named FileMappingSize in the registry key HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\&lt;category name&gt;\Performance. The FileMappingSize value is set to the shared memory size of the category. The default size is 131072 decimal. If the FileMappingSize value is not present, the fileMappingSize attribute value for the performanceCounters element specified in the Machine.config file is used, causing additional overhead for configuration file processing. You can realize a performance improvement for application startup by setting the file mapping size in the registry. For more information about the file mapping size, see <format type="text/html">
             <a href="a71f605b-c7d9-4501-a5c3-abcbb964a43f">&lt;performanceCounters&gt; Element</a>
           </format>
 
@@ -153,13 +139,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryName" />
+            >The <see cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryName" />
 
             
 
-             property must be set before associating this <see
-             cref="T:System.Diagnostics.PerformanceCounterCategory" />
+             property must be set before associating this <see cref="T:System.Diagnostics.PerformanceCounterCategory" />
 
             
 
@@ -169,18 +153,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.PerformanceCounterCategory" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.PerformanceCounterCategory" />
 
             
 
-             class, leaves the <see
-             cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryName" />
+             class, leaves the <see cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryName" />
 
             
 
-             property empty, and sets the <see
-             cref="P:System.Diagnostics.PerformanceCounterCategory.MachineName" />
+             property empty, and sets the <see cref="P:System.Diagnostics.PerformanceCounterCategory.MachineName" />
 
             
 
@@ -213,18 +194,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.PerformanceCounterCategory" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.PerformanceCounterCategory" />
 
             
 
-             class, sets the <see
-             cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryName" />
+             class, sets the <see cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryName" />
 
             
 
-             property to the specified value, and sets the <see
-             cref="P:System.Diagnostics.PerformanceCounterCategory.MachineName" />
+             property to the specified value, and sets the <see cref="P:System.Diagnostics.PerformanceCounterCategory.MachineName" />
 
             
 
@@ -232,12 +210,15 @@
           >
         </summary>
         <param name="categoryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the performance counter category, or performance object, with which to associate this <see
-           cref="T:System.Diagnostics.PerformanceCounterCategory" />
+          The name of the performance counter category, or performance object, with which to associate this <see cref="T:System.Diagnostics.PerformanceCounterCategory" />
 
           
 
@@ -270,18 +251,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.PerformanceCounterCategory" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.PerformanceCounterCategory" />
 
             
 
-             class and sets the <see
-             cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryName" />
+             class and sets the <see cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryName" />
 
             
 
-             and <see
-             cref="P:System.Diagnostics.PerformanceCounterCategory.MachineName" />
+             and <see cref="P:System.Diagnostics.PerformanceCounterCategory.MachineName" />
 
             
 
@@ -289,19 +267,26 @@
           >
         </summary>
         <param name="categoryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the performance counter category, or performance object, with which to associate this <see
-           cref="T:System.Diagnostics.PerformanceCounterCategory" />
+          The name of the performance counter category, or performance object, with which to associate this <see cref="T:System.Diagnostics.PerformanceCounterCategory" />
 
           
 
            instance. </param
         >
         <param name="machineName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -374,36 +359,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryType" />
+            >The <see cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryType" />
 
             
 
-             property indicates whether the <see
-             cref="T:System.Diagnostics.PerformanceCounterCategory" />
+             property indicates whether the <see cref="T:System.Diagnostics.PerformanceCounterCategory" />
 
             
 
-             object can have multiple instances. The possible values are <see
-             cref="F:System.Diagnostics.PerformanceCounterCategoryType.MultiInstance" />
+             object can have multiple instances. The possible values are <see cref="F:System.Diagnostics.PerformanceCounterCategoryType.MultiInstance" />
 
             
 
-            , <see
-             cref="F:System.Diagnostics.PerformanceCounterCategoryType.SingleInstance" />
+            , <see cref="F:System.Diagnostics.PerformanceCounterCategoryType.SingleInstance" />
 
             
 
-            , or <see
-             cref="F:System.Diagnostics.PerformanceCounterCategoryType.Unknown" />
+            , or <see cref="F:System.Diagnostics.PerformanceCounterCategoryType.Unknown" />
 
             
 
             . </para
           >
           <para
-            >There are two types of performance counter categories: single-instance and multi-instance. By default, a category is single-instance when it is created and becomes multi-instance when another instance is added. Categories are created when an application is set up, and instances are added at run time. In the .NET Framework versions 1.0 and 1.1, it is not necessary to know if a performance counter category is multi-instance or single-instance. In the dnprdnext, the <see
-             cref="T:System.Diagnostics.PerformanceCounterCategoryType" />
+            >There are two types of performance counter categories: single-instance and multi-instance. By default, a category is single-instance when it is created and becomes multi-instance when another instance is added. Categories are created when an application is set up, and instances are added at run time. In the .NET Framework versions 1.0 and 1.1, it is not necessary to know if a performance counter category is multi-instance or single-instance. In the dnprdnext, the <see cref="T:System.Diagnostics.PerformanceCounterCategoryType" />
 
             
 
@@ -438,16 +417,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must set the <see
-             cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryName" />
+            >You must set the <see cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryName" />
 
             
 
              property before calling this method. Otherwise, an exception is thrown.</para
           >
           <para
-            >If you have not set the <see
-             cref="P:System.Diagnostics.PerformanceCounterCategory.MachineName" />
+            >If you have not set the <see cref="P:System.Diagnostics.PerformanceCounterCategory.MachineName" />
 
             
 
@@ -462,13 +439,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified counter is registered to this category, which is indicated by the <see
-             cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryName" />
+            >Determines whether the specified counter is registered to this category, which is indicated by the <see cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryName" />
 
             
 
-             and <see
-             cref="P:System.Diagnostics.PerformanceCounterCategory.MachineName" />
+             and <see cref="P:System.Diagnostics.PerformanceCounterCategory.MachineName" />
 
             
 
@@ -478,13 +453,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the counter is registered to the category that is specified by the <see
-             cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryName" />
+            >true if the counter is registered to the category that is specified by the <see cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryName" />
 
             
 
-             and <see
-             cref="P:System.Diagnostics.PerformanceCounterCategory.MachineName" />
+             and <see cref="P:System.Diagnostics.PerformanceCounterCategory.MachineName" />
 
             
 
@@ -492,7 +465,11 @@
           >
         </returns>
         <param name="counterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -540,14 +517,22 @@
           <para>true, if the counter is registered to the specified category on the local computer; otherwise, false.</para>
         </returns>
         <param name="counterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the performance counter to look for. </param
         >
         <param name="categoryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -596,21 +581,33 @@
           <para>true, if the counter is registered to the specified category on the specified computer; otherwise, false.</para>
         </returns>
         <param name="counterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the performance counter to look for. </param
         >
         <param name="categoryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the performance counter category, or performance object, with which the specified performance counter is associated. </param
         >
         <param name="machineName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -662,8 +659,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Diagnostics.PerformanceCounterCategory" />
+            >A <see cref="T:System.Diagnostics.PerformanceCounterCategory" />
 
             
 
@@ -671,26 +667,37 @@
           >
         </returns>
         <param name="categoryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the custom performance counter category to create and register with the system. </param
         >
         <param name="categoryHelp">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A description of the custom category. </param
         >
         <param name="counterData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Diagnostics.CounterCreationDataCollection" />
+          A <see cref="T:System.Diagnostics.CounterCreationDataCollection" />
 
           
 
@@ -725,13 +732,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="categoryType" />
+            >The <paramref name="categoryType" />
 
             
 
-             parameter specifies whether the performance counter category is single-instance or multi-instance. By default, a category is single-instance when it is created and becomes multi-instance when another instance is added. Categories are created when an application is set up, and instances are added at run time. In the  .NET Framework versions 1.0 and 1.1, it is not necessary to know if a performance counter category is multi-instance or single-instance. In the dnprdnext, the <see
-             cref="T:System.Diagnostics.PerformanceCounterCategoryType" />
+             parameter specifies whether the performance counter category is single-instance or multi-instance. By default, a category is single-instance when it is created and becomes multi-instance when another instance is added. Categories are created when an application is set up, and instances are added at run time. In the  .NET Framework versions 1.0 and 1.1, it is not necessary to know if a performance counter category is multi-instance or single-instance. In the dnprdnext, the <see cref="T:System.Diagnostics.PerformanceCounterCategoryType" />
 
             
 
@@ -754,8 +759,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Diagnostics.PerformanceCounterCategory" />
+            >A <see cref="T:System.Diagnostics.PerformanceCounterCategory" />
 
             
 
@@ -763,38 +767,52 @@
           >
         </returns>
         <param name="categoryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the custom performance counter category to create and register with the system.</param
         >
         <param name="categoryHelp">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A description of the custom category.</param
         >
         <param name="categoryType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Diagnostics.PerformanceCounterCategoryType" />
+          One of the <see cref="T:System.Diagnostics.PerformanceCounterCategoryType" />
 
           
 
             values. </param
         >
         <param name="counterData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Diagnostics.CounterCreationDataCollection" />
+          A <see cref="T:System.Diagnostics.CounterCreationDataCollection" />
 
           
 
@@ -847,8 +865,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Diagnostics.PerformanceCounterCategory" />
+            >A <see cref="T:System.Diagnostics.PerformanceCounterCategory" />
 
             
 
@@ -856,28 +873,44 @@
           >
         </returns>
         <param name="categoryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the custom performance counter category to create and register with the system. </param
         >
         <param name="categoryHelp">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A description of the custom category. </param
         >
         <param name="counterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of a new counter, of type NumberOfItems32, to create as part of the new category. </param
         >
         <param name="counterHelp">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -913,13 +946,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="categoryType" />
+            >The <paramref name="categoryType" />
 
             
 
-             parameter specifies whether the performance counter category is single-instance or multi-instance. By default, a category is single-instance when it is created and becomes multi-instance when another instance is added. Categories are created when an application is set up, and instances are added at run time. In the .NET Framework versions 1.0 and 1.1, it is not necessary to know if a performance counter category is multi-instance or single-instance. In the dnprdnext, the <see
-             cref="T:System.Diagnostics.PerformanceCounterCategoryType" />
+             parameter specifies whether the performance counter category is single-instance or multi-instance. By default, a category is single-instance when it is created and becomes multi-instance when another instance is added. Categories are created when an application is set up, and instances are added at run time. In the .NET Framework versions 1.0 and 1.1, it is not necessary to know if a performance counter category is multi-instance or single-instance. In the dnprdnext, the <see cref="T:System.Diagnostics.PerformanceCounterCategoryType" />
 
             
 
@@ -938,8 +969,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers the custom performance counter category containing a single counter of type <see
-             cref="F:System.Diagnostics.PerformanceCounterType.NumberOfItems32" />
+            >Registers the custom performance counter category containing a single counter of type <see cref="F:System.Diagnostics.PerformanceCounterType.NumberOfItems32" />
 
             
 
@@ -949,8 +979,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Diagnostics.PerformanceCounterCategory" />
+            >A <see cref="T:System.Diagnostics.PerformanceCounterCategory" />
 
             
 
@@ -958,55 +987,71 @@
           >
         </returns>
         <param name="categoryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the custom performance counter category to create and register with the system.</param
         >
         <param name="categoryHelp">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A description of the custom category.</param
         >
         <param name="categoryType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Diagnostics.PerformanceCounterCategoryType" />
+          One of the <see cref="T:System.Diagnostics.PerformanceCounterCategoryType" />
 
           
 
-            values specifying whether the category is <see
-           cref="F:System.Diagnostics.PerformanceCounterCategoryType.MultiInstance" />
+            values specifying whether the category is <see cref="F:System.Diagnostics.PerformanceCounterCategoryType.MultiInstance" />
 
           
 
-          , <see
-           cref="F:System.Diagnostics.PerformanceCounterCategoryType.SingleInstance" />
+          , <see cref="F:System.Diagnostics.PerformanceCounterCategoryType.SingleInstance" />
 
           
 
-          , or <see
-           cref="F:System.Diagnostics.PerformanceCounterCategoryType.Unknown" />
+          , or <see cref="F:System.Diagnostics.PerformanceCounterCategoryType.Unknown" />
 
           
 
           .</param
         >
         <param name="counterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of a new counter to create as part of the new category.</param
         >
         <param name="counterHelp">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1047,7 +1092,11 @@
           <para>Removes the category and its associated counters from the local computer.</para>
         </summary>
         <param name="categoryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1077,8 +1126,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use of the <see
-             cref="M:System.Diagnostics.PerformanceCounterCategory.Exists(System.String)" />
+            >Use of the <see cref="M:System.Diagnostics.PerformanceCounterCategory.Exists(System.String)" />
 
             
 
@@ -1099,7 +1147,11 @@
           <para>true if the category is registered; otherwise, false.</para>
         </returns>
         <param name="categoryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1133,8 +1185,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use of the <see
-             cref="M:System.Diagnostics.PerformanceCounterCategory.Exists(System.String,System.String)" />
+            >Use of the <see cref="M:System.Diagnostics.PerformanceCounterCategory.Exists(System.String,System.String)" />
 
             
 
@@ -1155,14 +1206,22 @@
           <para>true if the category is registered; otherwise, false.</para>
         </returns>
         <param name="categoryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the performance counter category to look for. </param
         >
         <param name="machineName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1205,8 +1264,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Diagnostics.PerformanceCounterCategory" />
+            >An array of <see cref="T:System.Diagnostics.PerformanceCounterCategory" />
 
             
 
@@ -1240,8 +1298,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To retrieve the categories on the local computer, use another overload or pass "." as the <paramref
-             name="machineName" />
+            >To retrieve the categories on the local computer, use another overload or pass "." as the <paramref name="machineName" />
 
             
 
@@ -1260,8 +1317,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Diagnostics.PerformanceCounterCategory" />
+            >An array of <see cref="T:System.Diagnostics.PerformanceCounterCategory" />
 
             
 
@@ -1269,7 +1325,11 @@
           >
         </returns>
         <param name="machineName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1300,8 +1360,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about performance object instances, see the <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >For more information about performance object instances, see the <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
@@ -1320,8 +1379,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >An array of <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
@@ -1355,16 +1413,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To represent a single-instance category, pass an empty string ("") for the <paramref
-             name="instanceName" />
+            >To represent a single-instance category, pass an empty string ("") for the <paramref name="instanceName" />
 
             
 
              parameter.</para
           >
           <para
-            >For more information about performance object instances, see the <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >For more information about performance object instances, see the <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
@@ -1383,8 +1439,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >An array of <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
@@ -1392,7 +1447,11 @@
           >
         </returns>
         <param name="instanceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1457,18 +1516,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload of <see
-             cref="M:System.Diagnostics.PerformanceCounterCategory.InstanceExists(System.String)" />
+            >This overload of <see cref="M:System.Diagnostics.PerformanceCounterCategory.InstanceExists(System.String)" />
 
             
 
-             is not static. It requires you to create a <see
-             cref="T:System.Diagnostics.PerformanceCounterCategory" />
+             is not static. It requires you to create a <see cref="T:System.Diagnostics.PerformanceCounterCategory" />
 
             
 
-             object and to set the <see
-             cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryName" />
+             object and to set the <see cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryName" />
 
             
 
@@ -1483,13 +1539,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified performance object instance exists in the category that is identified by this <see
-             cref="T:System.Diagnostics.PerformanceCounterCategory" />
+            >Determines whether the specified performance object instance exists in the category that is identified by this <see cref="T:System.Diagnostics.PerformanceCounterCategory" />
 
             
 
-             object's <see
-             cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryName" />
+             object's <see cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryName" />
 
             
 
@@ -1501,7 +1555,11 @@
           <para>true if the category contains the specified performance object instance; otherwise, false.</para>
         </returns>
         <param name="instanceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1550,14 +1608,22 @@
           <para>true if the category contains the specified performance object instance; otherwise, false.</para>
         </returns>
         <param name="instanceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The performance object instance to search for. </param
         >
         <param name="categoryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1608,21 +1674,33 @@
           <para>true if the category contains the specified performance object instance; otherwise, false.</para>
         </returns>
         <param name="instanceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The performance object instance to search for. </param
         >
         <param name="categoryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The performance counter category to search. </param
         >
         <param name="machineName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1680,13 +1758,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must set the <see
-             cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryName" />
+            >You must set the <see cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryName" />
 
             
 
-             property before you call <see
-             cref="M:System.Diagnostics.PerformanceCounterCategory.ReadCategory" />
+             property before you call <see cref="M:System.Diagnostics.PerformanceCounterCategory.ReadCategory" />
 
             
 
@@ -1706,8 +1782,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Diagnostics.InstanceDataCollectionCollection" />
+            >An <see cref="T:System.Diagnostics.InstanceDataCollectionCollection" />
 
             
 

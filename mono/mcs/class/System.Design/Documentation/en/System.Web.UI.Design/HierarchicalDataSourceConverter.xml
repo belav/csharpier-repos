@@ -19,21 +19,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.HierarchicalDataSourceConverter" />
+        >The <see cref="T:System.Web.UI.Design.HierarchicalDataSourceConverter" />
 
         
 
          class provides methods that can be used to retrieve a list of the hierarchical data sources that are accessible to the current design-time component.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.HierarchicalDataSourceConverter" />
+        >The <see cref="T:System.Web.UI.Design.HierarchicalDataSourceConverter" />
 
         
 
-         type converter is used by Microsoft Visual Studio to provide the values that appear in the list of data sources in the <ui
-        >Properties</ui>
+         type converter is used by Microsoft Visual Studio to provide the values that appear in the list of data sources in the <ui>Properties</ui>
 
         
 
@@ -41,13 +38,11 @@
       >
       <block subset="none" type="note">
         <para
-          >You should never access a type converter directly. Instead, call the appropriate converter by using the <see
-           cref="T:System.ComponentModel.TypeDescriptor" />
+          >You should never access a type converter directly. Instead, call the appropriate converter by using the <see cref="T:System.ComponentModel.TypeDescriptor" />
 
           
 
-           class. For more information, see the examples in <see
-           cref="T:System.ComponentModel.TypeConverter" />
+           class. For more information, see the examples in <see cref="T:System.ComponentModel.TypeConverter" />
 
           
 
@@ -55,13 +50,11 @@
         >
       </block>
       <para
-        >For more information about type converters, see the <see
-         cref="T:System.ComponentModel.TypeConverter" />
+        >For more information about type converters, see the <see cref="T:System.ComponentModel.TypeConverter" />
 
         
 
-         base class and <format
-         type="text/html">
+         base class and <format type="text/html">
           <a href="90373A3F-D8C8-492D-841C-945D62393C56">How to: Implement a Type Converter</a>
         </format>
 
@@ -88,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.HierarchicalDataSourceConverter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.HierarchicalDataSourceConverter" />
 
             
 
@@ -117,23 +109,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DataSourceConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+            >The <see cref="M:System.Web.UI.Design.DataSourceConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
 
             
 
-             method uses the <see
-             cref="M:System.Web.UI.Design.HierarchicalDataSourceConverter.IsValidDataSource(System.ComponentModel.IComponent)" />
+             method uses the <see cref="M:System.Web.UI.Design.HierarchicalDataSourceConverter.IsValidDataSource(System.ComponentModel.IComponent)" />
 
             
 
-             method to determine which components are available as standard accessible data sources. For the <see
-             cref="T:System.Web.UI.Design.HierarchicalDataSourceConverter" />
+             method to determine which components are available as standard accessible data sources. For the <see cref="T:System.Web.UI.Design.HierarchicalDataSourceConverter" />
 
             
 
-             class, a valid data source is a component that implements the <see
-             cref="T:System.Web.UI.IHierarchicalEnumerable" />
+             class, a valid data source is a component that implements the <see cref="T:System.Web.UI.IHierarchicalEnumerable" />
 
             
 
@@ -147,13 +135,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="component" />
+            >true if <paramref name="component" />
 
             
 
-             implements <see
-             cref="T:System.Web.UI.IHierarchicalEnumerable" />
+             implements <see cref="T:System.Web.UI.IHierarchicalEnumerable" />
 
             
 
@@ -161,7 +147,11 @@
           >
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

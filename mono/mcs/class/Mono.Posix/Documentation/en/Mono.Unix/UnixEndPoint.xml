@@ -16,8 +16,7 @@
   <Interfaces />
   <Docs>
     <summary
-      >A <see
-       cref="T:System.Net.EndPoint" />
+      >A <see cref="T:System.Net.EndPoint" />
 
       
 
@@ -25,8 +24,7 @@
     >
     <remarks>
       <example>
-        <code lang="C#"
-          >
+        <code lang="C#">
 try
 {
 	UnixEndPoint endPoint = new UnixEndPoint (socketName);
@@ -61,8 +59,7 @@ catch (Exception ex)
       </Parameters>
       <Docs>
         <param name="filename"
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
@@ -163,10 +160,7 @@ catch (Exception ex)
       </ReturnValue>
       <Docs>
         <summary>Returns the filename representing the unix socket.</summary>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks />
       </Docs>
     </Member>

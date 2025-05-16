@@ -22,13 +22,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.AccessControl.MutexAuditRule" />
+        >The <see cref="T:System.Security.AccessControl.MutexAuditRule" />
 
         
 
-         class is one of a set of classes that the .NET Framework provides for managing Windows access control security on named system mutexes. For an overview of these classes and their relationship to the underlying Windows access control structures, see <see
-         cref="T:System.Security.AccessControl.MutexSecurity" />
+         class is one of a set of classes that the .NET Framework provides for managing Windows access control security on named system mutexes. For an overview of these classes and their relationship to the underlying Windows access control structures, see <see cref="T:System.Security.AccessControl.MutexSecurity" />
 
         
 
@@ -36,8 +34,7 @@
       >
       <block subset="none" type="note">
         <para
-          >Windows access control security is meaningful only for named system mutexes. If a <see
-           cref="T:System.Threading.Mutex" />
+          >Windows access control security is meaningful only for named system mutexes. If a <see cref="T:System.Threading.Mutex" />
 
           
 
@@ -45,23 +42,19 @@
         >
       </block>
       <para
-        >To get a list of the audit rules currently applied to a named mutex, use the <see
-         cref="M:System.Threading.Mutex.GetAccessControl" />
+        >To get a list of the audit rules currently applied to a named mutex, use the <see cref="M:System.Threading.Mutex.GetAccessControl" />
 
         
 
-         method to get a <see
-         cref="T:System.Security.AccessControl.MutexSecurity" />
+         method to get a <see cref="T:System.Security.AccessControl.MutexSecurity" />
 
         
 
-         object, and then use its <see
-         cref="M:System.Security.AccessControl.CommonObjectSecurity.GetAuditRules(System.Boolean,System.Boolean,System.Type)" />
+         object, and then use its <see cref="M:System.Security.AccessControl.CommonObjectSecurity.GetAuditRules(System.Boolean,System.Boolean,System.Type)" />
 
         
 
-         method to obtain a collection of <see
-         cref="T:System.Security.AccessControl.MutexAuditRule" />
+         method to obtain a collection of <see cref="T:System.Security.AccessControl.MutexAuditRule" />
 
         
 
@@ -78,28 +71,23 @@
         <para>The underlying access control entries change as you apply and remove rules. The information in rules is merged if possible, to maintain the smallest number of access control entries. Thus, when you read the current list of rules, it might not look exactly like the list of all the rules you have added.</para>
       </block>
       <para
-        >Use <see
-         cref="T:System.Security.AccessControl.MutexAuditRule" />
+        >Use <see cref="T:System.Security.AccessControl.MutexAuditRule" />
 
         
 
-         objects to specify access rights to be audited for a user or group. To apply a rule to a named system mutex, use the <see
-         cref="M:System.Threading.Mutex.SetAccessControl(System.Security.AccessControl.MutexSecurity)" />
+         objects to specify access rights to be audited for a user or group. To apply a rule to a named system mutex, use the <see cref="M:System.Threading.Mutex.SetAccessControl(System.Security.AccessControl.MutexSecurity)" />
 
         
 
-         method to get the <see
-         cref="T:System.Security.AccessControl.MutexSecurity" />
+         method to get the <see cref="T:System.Security.AccessControl.MutexSecurity" />
 
         
 
-         object. Modify the <see
-         cref="T:System.Security.AccessControl.MutexSecurity" />
+         object. Modify the <see cref="T:System.Security.AccessControl.MutexSecurity" />
 
         
 
-         object by using its methods to add the rule, and then use the <see
-         cref="M:System.Threading.Mutex.SetAccessControl(System.Security.AccessControl.MutexSecurity)" />
+         object by using its methods to add the rule, and then use the <see cref="M:System.Threading.Mutex.SetAccessControl(System.Security.AccessControl.MutexSecurity)" />
 
         
 
@@ -107,13 +95,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Changes you make to a <see
-           cref="T:System.Security.AccessControl.MutexSecurity" />
+          >Changes you make to a <see cref="T:System.Security.AccessControl.MutexSecurity" />
 
           
 
-           object do not affect the access levels of the named mutex until you call the <see
-           cref="M:System.Threading.Mutex.SetAccessControl(System.Security.AccessControl.MutexSecurity)" />
+           object do not affect the access levels of the named mutex until you call the <see cref="M:System.Threading.Mutex.SetAccessControl(System.Security.AccessControl.MutexSecurity)" />
 
           
 
@@ -125,8 +111,7 @@
 
         
 
-         objects are immutable. Security for a mutex is modified using the methods of the <see
-         cref="T:System.Security.AccessControl.MutexSecurity" />
+         objects are immutable. Security for a mutex is modified using the methods of the <see cref="T:System.Security.AccessControl.MutexSecurity" />
 
         
 
@@ -166,13 +151,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To create an <see
-             cref="T:System.Security.Principal.NTAccount" />
+            >To create an <see cref="T:System.Security.Principal.NTAccount" />
 
             
 
-             object from a string representing a user or group name, use the <see
-             cref="M:System.Security.Principal.NTAccount.#ctor(System.String)" />
+             object from a string representing a user or group name, use the <see cref="M:System.Security.Principal.NTAccount.#ctor(System.String)" />
 
             
 
@@ -182,8 +165,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.MutexAuditRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.MutexAuditRule" />
 
             
 
@@ -191,46 +173,53 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The user or group the rule applies to. Must be of type <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The user or group the rule applies to. Must be of type <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
-           or a type such as <see
-           cref="T:System.Security.Principal.NTAccount" />
+           or a type such as <see cref="T:System.Security.Principal.NTAccount" />
 
           
 
-           that can be converted to type <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+           that can be converted to type <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
           .</param
         >
         <param name="eventRights">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Security.AccessControl.MutexRights" />
+          A bitwise combination of <see cref="T:System.Security.AccessControl.MutexRights" />
 
           
 
            values specifying the kinds of access to audit.</param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Security.AccessControl.AuditFlags" />
+          A bitwise combination of <see cref="T:System.Security.AccessControl.AuditFlags" />
 
           
 
@@ -265,8 +254,7 @@
 
             
 
-             objects are immutable. You can create a new audit rule representing a different user, different rights, or a different combination of <see
-             cref="T:System.Security.AccessControl.AuditFlags" />
+             objects are immutable. You can create a new audit rule representing a different user, different rights, or a different combination of <see cref="T:System.Security.AccessControl.AuditFlags" />
 
             
 

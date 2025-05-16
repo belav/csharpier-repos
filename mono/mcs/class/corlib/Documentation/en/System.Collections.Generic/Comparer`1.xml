@@ -33,31 +33,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Derive from this class to provide a custom implementation of the <see
-         cref="T:System.Collections.Generic.IComparer`1" />
+        >Derive from this class to provide a custom implementation of the <see cref="T:System.Collections.Generic.IComparer`1" />
 
         
 
-         interface for use with collection classes such as the <see
-         cref="T:System.Collections.Generic.SortedList`2" />
+         interface for use with collection classes such as the <see cref="T:System.Collections.Generic.SortedList`2" />
 
         
 
-         and <see
-         cref="T:System.Collections.Generic.SortedDictionary`2" />
+         and <see cref="T:System.Collections.Generic.SortedDictionary`2" />
 
         
 
          generic classes.</para
       >
       <para
-        >The difference between deriving from the <see
-         cref="T:System.Collections.Generic.Comparer`1" />
+        >The difference between deriving from the <see cref="T:System.Collections.Generic.Comparer`1" />
 
         
 
-         class and implementing the <see
-         cref="T:System.IComparable" />
+         class and implementing the <see cref="T:System.IComparable" />
 
         
 
@@ -66,8 +61,7 @@
       <list type="bullet">
         <item>
           <para
-            >To specify how two objects should be compared by default, implement the <see
-             cref="T:System.IComparable" />
+            >To specify how two objects should be compared by default, implement the <see cref="T:System.IComparable" />
 
             
 
@@ -76,8 +70,7 @@
         </item>
         <item>
           <para
-            >To define a comparer to use instead of the default comparer, derive from the <see
-             cref="T:System.Collections.Generic.Comparer`1" />
+            >To define a comparer to use instead of the default comparer, derive from the <see cref="T:System.Collections.Generic.Comparer`1" />
 
             
 
@@ -86,38 +79,31 @@
         </item>
       </list>
       <para
-        >The object returned by the <see
-         cref="P:System.Collections.Generic.Comparer`1.Default" />
+        >The object returned by the <see cref="P:System.Collections.Generic.Comparer`1.Default" />
 
         
 
-         property uses the <see
-         cref="T:System.IComparable`1" />
+         property uses the <see cref="T:System.IComparable`1" />
 
         
 
-         generic interface (IComparable&lt;T&gt; in C#, IComparable(Of T) in Visual Basic) to compare two objects. If type <paramref
-         name="T" />
+         generic interface (IComparable&lt;T&gt; in C#, IComparable(Of T) in Visual Basic) to compare two objects. If type <paramref name="T" />
 
         
 
-         does not implement the <see
-         cref="T:System.IComparable`1" />
+         does not implement the <see cref="T:System.IComparable`1" />
 
         
 
-         generic interface, the <see
-         cref="P:System.Collections.Generic.Comparer`1.Default" />
+         generic interface, the <see cref="P:System.Collections.Generic.Comparer`1.Default" />
 
         
 
-         property returns a <see
-         cref="T:System.Collections.Generic.Comparer`1" />
+         property returns a <see cref="T:System.Collections.Generic.Comparer`1" />
 
         
 
-         that uses the <see
-         cref="T:System.IComparable" />
+         that uses the <see cref="T:System.IComparable" />
 
         
 
@@ -127,8 +113,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a base class for implementations of the <see
-         cref="T:System.Collections.Generic.IComparer`1" />
+        >Provides a base class for implementations of the <see cref="T:System.Collections.Generic.IComparer`1" />
 
         
 
@@ -155,8 +140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Generic.Comparer`1" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Generic.Comparer`1" />
 
             
 
@@ -241,33 +225,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Collections.Generic.Comparer`1" />
+            >The <see cref="T:System.Collections.Generic.Comparer`1" />
 
             
 
-             returned by this property uses the <see
-             cref="T:System.IComparable`1" />
+             returned by this property uses the <see cref="T:System.IComparable`1" />
 
             
 
-             generic interface (IComparable&lt;T&gt; in C#, IComparable(Of T) in Visual Basic) to compare two objects. If type <paramref
-             name="T" />
+             generic interface (IComparable&lt;T&gt; in C#, IComparable(Of T) in Visual Basic) to compare two objects. If type <paramref name="T" />
 
             
 
-             does not implement the <see
-             cref="T:System.IComparable`1" />
+             does not implement the <see cref="T:System.IComparable`1" />
 
             
 
-             generic interface, this property returns a <see
-             cref="T:System.Collections.Generic.Comparer`1" />
+             generic interface, this property returns a <see cref="T:System.Collections.Generic.Comparer`1" />
 
             
 
-             that uses the <see
-             cref="T:System.IComparable" />
+             that uses the <see cref="T:System.IComparable" />
 
             
 
@@ -303,28 +281,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is a wrapper for the <see
-             cref="M:System.Collections.Generic.Comparer`1.Compare(`0,`0)" />
+            >This method is a wrapper for the <see cref="M:System.Collections.Generic.Comparer`1.Compare(`0,`0)" />
 
             
 
-             method, so <paramref
-             name="obj" />
+             method, so <paramref name="obj" />
 
             
 
-             must be cast to the type specified by the generic argument <paramref
-             name="T" />
+             must be cast to the type specified by the generic argument <paramref name="T" />
 
             
 
-             of the current instance. If it cannot be cast to <paramref
-             name="T" />
+             of the current instance. If it cannot be cast to <paramref name="T" />
 
             
 
-            , an <see
-             cref="T:System.ArgumentException" />
+            , an <see cref="T:System.ArgumentException" />
 
             
 
@@ -339,13 +312,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A signed integer that indicates the relative values of <paramref
-             name="x" />
+            >A signed integer that indicates the relative values of <paramref name="x" />
 
             
 
-             and <paramref
-             name="y" />
+             and <paramref name="y" />
 
             
 
@@ -372,8 +343,7 @@
 
                   
 
-                   is less than <paramref
-                   name="y" />
+                   is less than <paramref name="y" />
 
                   
 
@@ -391,8 +361,7 @@
 
                   
 
-                   equals <paramref
-                   name="y" />
+                   equals <paramref name="y" />
 
                   
 
@@ -410,8 +379,7 @@
 
                   
 
-                   is greater than <paramref
-                   name="y" />
+                   is greater than <paramref name="y" />
 
                   
 
@@ -422,14 +390,22 @@
           </list>
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first object to compare.</param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

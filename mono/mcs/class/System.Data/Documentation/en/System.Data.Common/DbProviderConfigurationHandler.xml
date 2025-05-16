@@ -64,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="System.Collections.Specialized.NameValueCollection" />
+            >Creates a new <see cref="System.Collections.Specialized.NameValueCollection" />
 
             
 
@@ -77,21 +76,33 @@
           <para>The new expression.</para>
         </returns>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           This type supports the .NET Framework infrastructure and is not intended to be used directly from your code.</param
         >
         <param name="configContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           This type supports the .NET Framework infrastructure and is not intended to be used directly from your code.</param
         >
         <param name="section">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

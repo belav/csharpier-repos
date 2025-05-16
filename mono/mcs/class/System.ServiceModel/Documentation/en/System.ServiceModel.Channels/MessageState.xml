@@ -16,38 +16,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >As the body of a <see
-         cref="T:System.ServiceModel.Channels.Message" />
+        >As the body of a <see cref="T:System.ServiceModel.Channels.Message" />
 
         
 
-         object is a stream, it can only be read or written once. This is enforced by maintaining the current state of the <see
-         cref="T:System.ServiceModel.Channels.Message" />
+         object is a stream, it can only be read or written once. This is enforced by maintaining the current state of the <see cref="T:System.ServiceModel.Channels.Message" />
 
         
 
-         object. A <see
-         cref="T:System.ServiceModel.Channels.Message" />
+         object. A <see cref="T:System.ServiceModel.Channels.Message" />
 
         
 
-         object can be read/written/copied when in the <see
-         cref="F:System.ServiceModel.Channels.MessageState.Created" />
+         object can be read/written/copied when in the <see cref="F:System.ServiceModel.Channels.MessageState.Created" />
 
         
 
-         state. Other states are <see
-         cref="F:System.ServiceModel.Channels.MessageState.Read" />
+         state. Other states are <see cref="F:System.ServiceModel.Channels.MessageState.Read" />
 
         
 
-        , <see
-         cref="F:System.ServiceModel.Channels.MessageState.Written" />
+        , <see cref="F:System.ServiceModel.Channels.MessageState.Written" />
 
         
 
-         and <see
-         cref="F:System.ServiceModel.Channels.MessageState.Copied" />
+         and <see cref="F:System.ServiceModel.Channels.MessageState.Copied" />
 
         
 

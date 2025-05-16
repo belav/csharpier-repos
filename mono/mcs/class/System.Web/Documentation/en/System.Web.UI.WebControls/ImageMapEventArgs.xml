@@ -14,71 +14,58 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Web.UI.WebControls.ImageMap.Click" />
+        >The <see cref="E:System.Web.UI.WebControls.ImageMap.Click" />
 
         
 
-         event is raised when a <see
-         cref="T:System.Web.UI.WebControls.HotSpot" />
+         event is raised when a <see cref="T:System.Web.UI.WebControls.HotSpot" />
 
         
 
-         object in an <see
-         cref="T:System.Web.UI.WebControls.ImageMap" />
+         object in an <see cref="T:System.Web.UI.WebControls.ImageMap" />
 
         
 
-         control is clicked. To allow a <see
-         cref="T:System.Web.UI.WebControls.HotSpot" />
+         control is clicked. To allow a <see cref="T:System.Web.UI.WebControls.HotSpot" />
 
         
 
-         object to raise the <see
-         cref="E:System.Web.UI.WebControls.ImageMap.Click" />
+         object to raise the <see cref="E:System.Web.UI.WebControls.ImageMap.Click" />
 
         
 
-         event, you must first set either the <see
-         cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
+         event, you must first set either the <see cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
 
         
 
-         property or the <see
-         cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
+         property or the <see cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
 
         
 
-         property to HotSpotMode.PostBack. To control the actions programmatically that are performed when a postback <see
-         cref="T:System.Web.UI.WebControls.HotSpot" />
+         property to HotSpotMode.PostBack. To control the actions programmatically that are performed when a postback <see cref="T:System.Web.UI.WebControls.HotSpot" />
 
         
 
-         is clicked, provide an event handler for the <see
-         cref="E:System.Web.UI.WebControls.ImageMap.Click" />
+         is clicked, provide an event handler for the <see cref="E:System.Web.UI.WebControls.ImageMap.Click" />
 
         
 
          event.</para
       >
       <para
-        >A <see
-         cref="P:System.Web.UI.WebControls.HotSpot.PostBackValue" />
+        >A <see cref="P:System.Web.UI.WebControls.HotSpot.PostBackValue" />
 
         
 
-         property stores a string that is associated with the behavior of the <see
-         cref="T:System.Web.UI.WebControls.HotSpot" />
+         property stores a string that is associated with the behavior of the <see cref="T:System.Web.UI.WebControls.HotSpot" />
 
         
 
-         object when clicked. This string is passed in the <see
-         cref="T:System.Web.UI.WebControls.ImageMapEventArgs" />
+         object when clicked. This string is passed in the <see cref="T:System.Web.UI.WebControls.ImageMapEventArgs" />
 
         
 
-         event data when the <see
-         cref="T:System.Web.UI.WebControls.HotSpot" />
+         event data when the <see cref="T:System.Web.UI.WebControls.HotSpot" />
 
         
 
@@ -88,13 +75,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Web.UI.WebControls.ImageMap.Click" />
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.ImageMap.Click" />
 
         
 
-         event of an <see
-         cref="T:System.Web.UI.WebControls.ImageMap" />
+         event of an <see cref="T:System.Web.UI.WebControls.ImageMap" />
 
         
 
@@ -114,16 +99,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.ImageMapEventArgs" />
+            >Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.ImageMapEventArgs" />
 
             
 
              class.</para
           >
           <para
-            >The following table shows initial property values for an instance of the <see
-             cref="T:System.Web.UI.WebControls.ImageMapEventArgs" />
+            >The following table shows initial property values for an instance of the <see cref="T:System.Web.UI.WebControls.ImageMapEventArgs" />
 
             
 
@@ -148,8 +131,7 @@
               </term>
               <description>
                 <para
-                  >The string assigned to the <paramref
-                   name="value" />
+                  >The string assigned to the <paramref name="value" />
 
                   
 
@@ -162,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.ImageMapEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.ImageMapEventArgs" />
 
             
 
@@ -171,22 +152,23 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
-           object assigned to the <see
-           cref="P:System.Web.UI.WebControls.HotSpot.PostBackValue" />
+           object assigned to the <see cref="P:System.Web.UI.WebControls.HotSpot.PostBackValue" />
 
           
 
-           property of the <see
-           cref="T:System.Web.UI.WebControls.HotSpot" />
+           property of the <see cref="T:System.Web.UI.WebControls.HotSpot" />
 
           
 
@@ -209,18 +191,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to programmatically access the <see
-             cref="P:System.Web.UI.WebControls.HotSpot.PostBackValue" />
+            >Use this property to programmatically access the <see cref="P:System.Web.UI.WebControls.HotSpot.PostBackValue" />
 
             
 
-             property of the <see
-             cref="T:System.Web.UI.WebControls.HotSpot" />
+             property of the <see cref="T:System.Web.UI.WebControls.HotSpot" />
 
             
 
-             object in an <see
-             cref="T:System.Web.UI.WebControls.ImageMap" />
+             object in an <see cref="T:System.Web.UI.WebControls.ImageMap" />
 
             
 
@@ -230,18 +209,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.String" />
+            >Gets the <see cref="T:System.String" />
 
             
 
-             assigned to the <see
-             cref="P:System.Web.UI.WebControls.HotSpot.PostBackValue" />
+             assigned to the <see cref="P:System.Web.UI.WebControls.HotSpot.PostBackValue" />
 
             
 
-             property of the <see
-             cref="T:System.Web.UI.WebControls.HotSpot" />
+             property of the <see cref="T:System.Web.UI.WebControls.HotSpot" />
 
             
 

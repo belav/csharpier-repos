@@ -27,8 +27,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides static methods to aid with the implementation of a <see
-         cref="T:System.Runtime.Serialization.Formatter" />
+        >Provides static methods to aid with the implementation of a <see cref="T:System.Runtime.Serialization.Formatter" />
 
         
 
@@ -66,46 +65,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to determine whether a specified type can be deserialized when the <see
-             cref="T:System.Runtime.Serialization.Formatters.TypeFilterLevel" />
+            >Use this method to determine whether a specified type can be deserialized when the <see cref="T:System.Runtime.Serialization.Formatters.TypeFilterLevel" />
 
             
 
              property is set to Low.</para
           >
           <para
-            >.NET Framework remoting provides two levels of automatic deserialization, <see
-             cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Low" />
+            >.NET Framework remoting provides two levels of automatic deserialization, <see cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Low" />
 
             
 
-             and <see
-             cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Full" />
+             and <see cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Full" />
 
             
 
-            . <see
-             cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Low" />
+            . <see cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Low" />
 
             
 
-             helps protect against deserialization attacks by deserializing only the types associated with the most basic remoting functionality. The <see
-             cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Full" />
+             helps protect against deserialization attacks by deserializing only the types associated with the most basic remoting functionality. The <see cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Full" />
 
             
 
-             deserialization level supports automatic deserialization of all types that remoting supports in all situations. For more information about the.NET Framework remoting types that <see
-             cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Low" />
+             deserialization level supports automatic deserialization of all types that remoting supports in all situations. For more information about the.NET Framework remoting types that <see cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Low" />
 
             
 
-             and <see
-             cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Full" />
+             and <see cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Full" />
 
             
 
-             support, see <format
-             type="text/html">
+             support, see <format type="text/html">
               <a href="313A0E88-5B2B-4A17-8391-0DDF9F7A787B"
                 >[&lt;topic://cpconAutomaticDeserializationInNETRemoting&gt;]</a
               >
@@ -119,13 +110,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Type" />
+            >Determines whether the specified <see cref="T:System.Type" />
 
             
 
-             can be deserialized with the <see
-             cref="T:System.Runtime.Serialization.Formatters.TypeFilterLevel" />
+             can be deserialized with the <see cref="T:System.Runtime.Serialization.Formatters.TypeFilterLevel" />
 
             
 
@@ -133,24 +122,30 @@
           >
         </summary>
         <param name="t">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            to check for the ability to deserialize. </param
         >
         <param name="securityLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.Formatters.TypeFilterLevel" />
+          The <see cref="T:System.Runtime.Serialization.Formatters.TypeFilterLevel" />
 
           
 
@@ -184,23 +179,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For each supplied member of the <paramref
-             name="members" />
+            >For each supplied member of the <paramref name="members" />
 
             
 
-             array the <see
-             cref="M:System.Runtime.Serialization.FormatterServices.GetObjectData(System.Object,System.Reflection.MemberInfo[])" />
+             array the <see cref="M:System.Runtime.Serialization.FormatterServices.GetObjectData(System.Object,System.Reflection.MemberInfo[])" />
 
             
 
-             method extracts the value associated with the <paramref
-             name="obj" />
+             method extracts the value associated with the <paramref name="obj" />
 
             
 
-             object, and returns it. The length of the returned array is the same as the length of the <paramref
-             name="members" />
+             object, and returns it. The length of the returned array is the same as the length of the <paramref name="members" />
 
             
 
@@ -214,18 +205,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Object" />
+            >An array of <see cref="T:System.Object" />
 
             
 
-             that contains data stored in <paramref
-             name="members" />
+             that contains data stored in <paramref name="members" />
 
             
 
-             and associated with <paramref
-             name="obj" />
+             and associated with <paramref name="obj" />
 
             
 
@@ -233,14 +221,22 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to write to the formatter. </param
         >
         <param name="members">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -273,8 +269,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the new instance of the object is initialized to zero and no constructors are run, the object might not represent a state that is regarded as valid by that object. <see
-             cref="M:System.Runtime.Serialization.FormatterServices.GetSafeUninitializedObject(System.Type)" />
+            >Because the new instance of the object is initialized to zero and no constructors are run, the object might not represent a state that is regarded as valid by that object. <see cref="M:System.Runtime.Serialization.FormatterServices.GetSafeUninitializedObject(System.Type)" />
 
             
 
@@ -285,27 +280,23 @@
 
             
 
-             converts all class level <format
-             type="text/html">
+             converts all class level <format type="text/html">
               <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">[&lt;topic://cpconLinkDemands&gt;]</a>
             </format>
 
             
 
-             to <format
-             type="text/html">
+             to <format type="text/html">
               <a href="E5283E28-2366-4519-B27D-EF5C1DDC1F48">[&lt;topic://cpconDemands&gt;]</a>
             </format>
 
             
 
-             to ensure that all direct and indirect callers have the permissions that the demand specifies. Use <see
-             cref="M:System.Runtime.Serialization.FormatterServices.GetSafeUninitializedObject(System.Type)" />
+             to ensure that all direct and indirect callers have the permissions that the demand specifies. Use <see cref="M:System.Runtime.Serialization.FormatterServices.GetSafeUninitializedObject(System.Type)" />
 
             
 
-             to increase the level of security when deserializing from a partially trusted source. For better performance in full trust scenarios, use <see
-             cref="M:System.Runtime.Serialization.FormatterServices.GetUninitializedObject(System.Type)" />
+             to increase the level of security when deserializing from a partially trusted source. For better performance in full trust scenarios, use <see cref="M:System.Runtime.Serialization.FormatterServices.GetUninitializedObject(System.Type)" />
 
             
 
@@ -321,7 +312,11 @@
           <para>A zeroed object of the specified type.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -354,8 +349,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generally, the serializable members of a class are the non-transient, non-static members such as fields and properties. To be included, properties must have both a getter and a setter. A class that implements the <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+            >Generally, the serializable members of a class are the non-transient, non-static members such as fields and properties. To be included, properties must have both a getter and a setter. A class that implements the <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
@@ -365,8 +359,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets all the serializable members for a class of the specified <see
-             cref="T:System.Type" />
+            >Gets all the serializable members for a class of the specified <see cref="T:System.Type" />
 
             
 
@@ -376,8 +369,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of type <see
-             cref="T:System.Reflection.MemberInfo" />
+            >An array of type <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -385,7 +377,11 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -419,26 +415,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generally, the serializable members of a class are the non-transient, non-static members such as fields and properties. To be included, properties must have both a getter and a setter. A class that implements <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+            >Generally, the serializable members of a class are the non-transient, non-static members such as fields and properties. To be included, properties must have both a getter and a setter. A class that implements <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
              or has a serialization surrogate does not have to serialize all these members, or can serialize additional members.</para
           >
           <para
-            >Currently, you do not need to do anything different unless <paramref
-             name="context" />
+            >Currently, you do not need to do anything different unless <paramref name="context" />
 
             
 
-             has the <see
-             cref="T:System.Runtime.Serialization.StreamingContextStates" />
+             has the <see cref="T:System.Runtime.Serialization.StreamingContextStates" />
 
             
 
-             value <see
-             cref="F:System.Runtime.Serialization.StreamingContextStates.Clone" />
+             value <see cref="F:System.Runtime.Serialization.StreamingContextStates.Clone" />
 
             
 
@@ -448,13 +440,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets all the serializable members for a class of the specified <see
-             cref="T:System.Type" />
+            >Gets all the serializable members for a class of the specified <see cref="T:System.Type" />
 
             
 
-             and in the provided <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             and in the provided <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -464,8 +454,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of type <see
-             cref="T:System.Reflection.MemberInfo" />
+            >An array of type <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -473,14 +462,22 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type being serialized or cloned. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -520,8 +517,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a serialization surrogate for the specified <see
-             cref="T:System.Runtime.Serialization.ISerializationSurrogate" />
+            >Returns a serialization surrogate for the specified <see cref="T:System.Runtime.Serialization.ISerializationSurrogate" />
 
             
 
@@ -531,13 +527,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Runtime.Serialization.ISerializationSurrogate" />
+            >An <see cref="T:System.Runtime.Serialization.ISerializationSurrogate" />
 
             
 
-             for the specified <paramref
-             name="innerSurrogate" />
+             for the specified <paramref name="innerSurrogate" />
 
             
 
@@ -545,7 +539,11 @@
           >
         </returns>
         <param name="innerSurrogate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -580,13 +578,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Looks up the <see
-             cref="T:System.Type" />
+            >Looks up the <see cref="T:System.Type" />
 
             
 
-             of the specified object in the provided <see
-             cref="T:System.Reflection.Assembly" />
+             of the specified object in the provided <see cref="T:System.Reflection.Assembly" />
 
             
 
@@ -596,8 +592,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
@@ -605,14 +600,22 @@
           >
         </returns>
         <param name="assem">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The assembly where you want to look up the object. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -647,13 +650,11 @@
           <para>Because the new instance of the object is initialized to zero and no constructors are run, the object might not represent a state that is regarded as valid by that object. The current method should only be used for deserialization when the user intends to immediately populate all fields. It does not create an uninitialized string, since creating an empty instance of an immutable type serves no purpose.</para>
           <block subset="none" type="note">
             <para
-              >You cannot use the <see
-               cref="M:System.Runtime.Serialization.FormatterServices.GetUninitializedObject(System.Type)" />
+              >You cannot use the <see cref="M:System.Runtime.Serialization.FormatterServices.GetUninitializedObject(System.Type)" />
 
               
 
-               method to create instances of types that derive from the <see
-               cref="T:System.ContextBoundObject" />
+               method to create instances of types that derive from the <see cref="T:System.ContextBoundObject" />
 
               
 
@@ -670,7 +671,11 @@
           <para>A zeroed object of the specified type.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -705,13 +710,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If an element in <paramref
-             name="data" />
+            >If an element in <paramref name="data" />
 
             
 
-             is null, <see
-             cref="M:System.Runtime.Serialization.FormatterServices.PopulateObjectMembers(System.Object,System.Reflection.MemberInfo[],System.Object[])" />
+             is null, <see cref="M:System.Runtime.Serialization.FormatterServices.PopulateObjectMembers(System.Object,System.Reflection.MemberInfo[],System.Object[])" />
 
             
 
@@ -727,31 +730,41 @@
           <para>The newly populated object.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to populate. </param
         >
         <param name="members">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Reflection.MemberInfo" />
+          An array of <see cref="T:System.Reflection.MemberInfo" />
 
           
 
            that describes which fields and properties to populate. </param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Object" />
+          An array of <see cref="T:System.Object" />
 
           
 

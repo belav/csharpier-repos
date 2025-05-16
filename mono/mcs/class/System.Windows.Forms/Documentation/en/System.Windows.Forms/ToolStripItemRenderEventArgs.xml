@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+        >The <see cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
 
         
 
@@ -103,13 +102,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the events that render the background of objects derived from <see
-         cref="T:System.Windows.Forms.ToolStripItem" />
+        >Provides data for the events that render the background of objects derived from <see cref="T:System.Windows.Forms.ToolStripItem" />
 
         
 
-         in the <see
-         cref="T:System.Windows.Forms.ToolStripRenderer" />
+         in the <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
         
 
@@ -134,18 +131,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
 
             
 
-             class for the specified <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             class for the specified <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             and using the specified <see
-             cref="T:System.Drawing.Graphics" />
+             and using the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -153,24 +147,30 @@
           >
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            object used to draw the item.</param
         >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+          The <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
@@ -194,8 +194,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the graphics used to paint the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Gets the graphics used to paint the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -223,8 +222,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Gets the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -251,18 +249,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >If the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             is in the overflow area of the <see
-             cref="T:System.Windows.Forms.Form" />
+             is in the overflow area of the <see cref="T:System.Windows.Forms.Form" />
 
             
 
-            , the <see
-             cref="P:System.Windows.Forms.ToolStripItemRenderEventArgs.ToolStrip" />
+            , the <see cref="P:System.Windows.Forms.ToolStripItemRenderEventArgs.ToolStrip" />
 
             
 
@@ -272,13 +267,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the <see
-             cref="P:System.Windows.Forms.ToolStripItem.Owner" />
+            >Gets the value of the <see cref="P:System.Windows.Forms.ToolStripItem.Owner" />
 
             
 
-             property for the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             property for the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 

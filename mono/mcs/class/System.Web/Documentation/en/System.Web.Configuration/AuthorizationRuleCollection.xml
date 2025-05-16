@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
+        >The <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
 
         
 
@@ -36,8 +35,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Web.Configuration.AuthorizationRule" />
+        >Represents a collection of <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
         
 
@@ -56,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
 
             
 
@@ -86,8 +83,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection must not already contain the <see
-             cref="T:System.Web.Configuration.AuthorizationRule" />
+            >The collection must not already contain the <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
             
 
@@ -97,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Web.Configuration.AuthorizationRule" />
+            >Adds a <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
             
 
@@ -106,12 +101,15 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Configuration.AuthorizationRule" />
+          The <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
           
 
@@ -138,8 +136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see
-             cref="T:System.Web.Configuration.AuthorizationRule" />
+            >Removes all <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
             
 
@@ -167,8 +164,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type of this <see
-             cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
+            >Gets the type of this <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
 
             
 
@@ -196,8 +192,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Configuration.ConfigurationElement" />
+            >Creates a new <see cref="T:System.Configuration.ConfigurationElement" />
 
             
 
@@ -207,8 +202,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Configuration.ConfigurationElement" />
+            >A new <see cref="T:System.Configuration.ConfigurationElement" />
 
             
 
@@ -238,8 +232,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Configuration.ConfigurationElement" />
+            >Creates a new <see cref="T:System.Configuration.ConfigurationElement" />
 
             
 
@@ -249,8 +242,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Configuration.ConfigurationElement" />
+            >A new <see cref="T:System.Configuration.ConfigurationElement" />
 
             
 
@@ -258,12 +250,15 @@
           >
         </returns>
         <param name="elementName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Name of the <see
-           cref="T:System.Configuration.ConfigurationElement" />
+          Name of the <see cref="T:System.Configuration.ConfigurationElement" />
 
           
 
@@ -311,8 +306,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Configuration.AuthorizationRule" />
+            >Gets the <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
             
 
@@ -322,8 +316,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.AuthorizationRule" />
+            >The <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
             
 
@@ -331,12 +324,15 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Configuration.AuthorizationRule" />
+          The <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
           
 
@@ -365,8 +361,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the element key for a specified <see
-             cref="T:System.Configuration.ConfigurationElement" />
+            >Gets the element key for a specified <see cref="T:System.Configuration.ConfigurationElement" />
 
             
 
@@ -376,13 +371,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Object" />
+            >The <see cref="T:System.Object" />
 
             
 
-             that acts as the key for the specified <see
-             cref="T:System.Configuration.ConfigurationElement" />
+             that acts as the key for the specified <see cref="T:System.Configuration.ConfigurationElement" />
 
             
 
@@ -390,12 +383,15 @@
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Configuration.ConfigurationElement" />
+          The <see cref="T:System.Configuration.ConfigurationElement" />
 
           
 
@@ -424,8 +420,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection index of the specified <see
-             cref="T:System.Web.Configuration.AuthorizationRule" />
+            >Gets the collection index of the specified <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
             
 
@@ -435,8 +430,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the specified <see
-             cref="T:System.Web.Configuration.AuthorizationRule" />
+            >The index of the specified <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
             
 
@@ -444,12 +438,15 @@
           >
         </returns>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Configuration.AuthorizationRule" />
+          The <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
           
 
@@ -484,7 +481,11 @@
           <para>true if the name is allowed; otherwise, false.</para>
         </returns>
         <param name="elementname">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -558,8 +559,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Web.Configuration.AuthorizationRule" />
+            >Removes a <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
             
 
@@ -567,12 +567,15 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Configuration.AuthorizationRule" />
+          The <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
           
 
@@ -601,8 +604,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Web.Configuration.AuthorizationRule" />
+            >Removes a <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
             
 
@@ -610,12 +612,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index location of the <see
-           cref="T:System.Web.Configuration.AuthorizationRule" />
+          The index location of the <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
           
 
@@ -645,8 +650,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.Configuration.AuthorizationRule" />
+            >Adds the specified <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
             
 
@@ -654,24 +658,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index location at which to add the specified <see
-           cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
+          The index location at which to add the specified <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
 
           
 
            object. </param
         >
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Configuration.AuthorizationRule" />
+          The <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
           
 

@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.XmlMembersMapping" />
+        >The <see cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
         
 
@@ -35,8 +34,7 @@
       <list type="bullet">
         <item>
           <para
-            >By the Wsdl.exe tool, or the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+            >By the Wsdl.exe tool, or the <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
 
             
 
@@ -45,8 +43,7 @@
         </item>
         <item>
           <para
-            >To initialize <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >To initialize <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -55,13 +52,11 @@
         </item>
         <item>
           <para
-            >By the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+            >By the <see cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
 
             
 
-             class while creating <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+             class while creating <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -70,13 +65,11 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.XmlMembersMapping" />
+        >The <see cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
         
 
-         class is a substitute for the <see
-         cref="T:System.Xml.Serialization.XmlTypeMapping" />
+         class is a substitute for the <see cref="T:System.Xml.Serialization.XmlTypeMapping" />
 
         
 
@@ -100,23 +93,19 @@
       <list type="bullet">
         <item>
           <para
-            >For a Web service method that uses SOAP encoding: The top-level <see
-             cref="P:System.Xml.Serialization.XmlMapping.ElementName" />
+            >For a Web service method that uses SOAP encoding: The top-level <see cref="P:System.Xml.Serialization.XmlMapping.ElementName" />
 
             
 
-             and <see
-             cref="P:System.Xml.Serialization.XmlTypeMapping.TypeName" />
+             and <see cref="P:System.Xml.Serialization.XmlTypeMapping.TypeName" />
 
             
 
-             properties pertain to a parent, wrapper element; the message parts are represented by array members. However, in the rare case when the Web service operation uses document style combined with a wrapped binding to a .NET Framework method plus SOAP encoding, the top-level <see
-             cref="P:System.Xml.Serialization.XmlMapping.ElementName" />
+             properties pertain to a parent, wrapper element; the message parts are represented by array members. However, in the rare case when the Web service operation uses document style combined with a wrapped binding to a .NET Framework method plus SOAP encoding, the top-level <see cref="P:System.Xml.Serialization.XmlMapping.ElementName" />
 
             
 
-             and <see
-             cref="P:System.Xml.Serialization.XmlTypeMapping.TypeName" />
+             and <see cref="P:System.Xml.Serialization.XmlTypeMapping.TypeName" />
 
             
 
@@ -125,28 +114,23 @@
         </item>
         <item>
           <para
-            >For a Web service method that makes literal use of XML Schema definitions: If a Web service message or operation uses a wrapped binding to a .NET Framework method or merely defines a single message part, the top-level <see
-             cref="P:System.Xml.Serialization.XmlMapping.ElementName" />
+            >For a Web service method that makes literal use of XML Schema definitions: If a Web service message or operation uses a wrapped binding to a .NET Framework method or merely defines a single message part, the top-level <see cref="P:System.Xml.Serialization.XmlMapping.ElementName" />
 
             
 
-             and <see
-             cref="P:System.Xml.Serialization.XmlTypeMapping.TypeName" />
+             and <see cref="P:System.Xml.Serialization.XmlTypeMapping.TypeName" />
 
             
 
-             properties pertain to the part. If there are multiple parts (the atypical case), the top-level <see
-             cref="P:System.Xml.Serialization.XmlMapping.ElementName" />
+             properties pertain to the part. If there are multiple parts (the atypical case), the top-level <see cref="P:System.Xml.Serialization.XmlMapping.ElementName" />
 
             
 
-             and <see
-             cref="P:System.Xml.Serialization.XmlTypeMapping.TypeName" />
+             and <see cref="P:System.Xml.Serialization.XmlTypeMapping.TypeName" />
 
             
 
-             properties pertain to a parent, wrapper element; the parts are represented by the <see
-             cref="P:System.Xml.Serialization.XmlMembersMapping.Count" />
+             properties pertain to a parent, wrapper element; the parts are represented by the <see cref="P:System.Xml.Serialization.XmlMembersMapping.Count" />
 
             
 
@@ -193,8 +177,7 @@
             </item>
           </list>
           <para
-            >See the <see
-             cref="T:System.Xml.Serialization.XmlMembersMapping" />
+            >See the <see cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
             
 
@@ -219,13 +202,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A SOAP message is defined in a Web Services Description Language (WSDL) document using the message element.</para>
           <para
-            >See the <see
-             cref="T:System.Xml.Serialization.XmlMembersMapping" />
+            >See the <see cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
             
 
-             class for the conditions under which the <see
-             cref="P:System.Xml.Serialization.XmlMapping.ElementName" />
+             class for the conditions under which the <see cref="P:System.Xml.Serialization.XmlMapping.ElementName" />
 
             
 
@@ -310,13 +291,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A SOAP message is defined in a Web Services Description Language (WSDL) document using the message element.</para>
           <para
-            >See the <see
-             cref="T:System.Xml.Serialization.XmlMembersMapping" />
+            >See the <see cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
             
 
-             class for the conditions under which the <see
-             cref="P:System.Xml.Serialization.XmlMembersMapping.TypeName" />
+             class for the conditions under which the <see cref="P:System.Xml.Serialization.XmlMembersMapping.TypeName" />
 
             
 

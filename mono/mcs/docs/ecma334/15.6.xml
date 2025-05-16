@@ -1,21 +1,20 @@
 <?xml version="1.0"?>
 <clause number="15.6" title="Expression statements">
   <paragraph
-    >An <non_terminal
-     where="15.6">expression-statement</non_terminal>
+    >An <non_terminal where="15.6"
+      >expression-statement</non_terminal
+    >
 
     
 
-     evaluates a given expression. The value computed by the expression, if any, is discarded. <grammar_production
-    >
+     evaluates a given expression. The value computed by the expression, if any, is discarded. <grammar_production>
       <name>
         <non_terminal where="15.6">expression-statement</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="15.6">statement-expression</non_terminal>
         <terminal>;</terminal>
       </rhs>
@@ -27,8 +26,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="14.5.5">invocation-expression</non_terminal>
       </rhs>
       <rhs>
@@ -52,17 +50,19 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >Not all expressions are permitted as statements. <note
-    >[Note: In particular, expressions such as x + y and x == 1, that merely compute a value (which will be discarded), are not permitted as statements. end note]</note>
+    >Not all expressions are permitted as statements. <note>[Note: In particular, expressions such as x + y and x == 1, that merely compute a value (which will be discarded), are not permitted as statements. end note]</note>
   </paragraph>
   <paragraph
     >Execution of an expression statement evaluates the contained expression and then transfers control to the end point of the expression statement. The end point of an <non_terminal
-     where="15.6">expression-statement</non_terminal>
+      where="15.6"
+      >expression-statement</non_terminal
+    >
 
     
 
-     is reachable if that <non_terminal
-     where="15.6">expression-statement</non_terminal>
+     is reachable if that <non_terminal where="15.6"
+      >expression-statement</non_terminal
+    >
 
     
 

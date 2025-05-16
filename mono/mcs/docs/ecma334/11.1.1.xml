@@ -2,11 +2,11 @@
 <clause number="11.1.1" title="Default constructors">
   <paragraph>All value types implicitly declare a public parameterless instance constructor called the default constructor. </paragraph>
   <paragraph
-    >The default constructor returns a zero-initialized instance known as the default value for the value type: <list
-    >
+    >The default constructor returns a zero-initialized instance known as the default value for the value type: <list>
       <list_item
-        > For all <non_terminal
-         where="11.1">simple-type</non_terminal>
+        > For all <non_terminal where="11.1"
+          >simple-type</non_terminal
+        >
 
         
 
@@ -14,83 +14,70 @@
       >
       <list>
         <list_item
-          > For <keyword
-          >sbyte</keyword>
+          > For <keyword>sbyte</keyword>
 
           
 
-          , <keyword
-          >byte</keyword>
+          , <keyword>byte</keyword>
 
           
 
-          , <keyword
-          >short</keyword>
+          , <keyword>short</keyword>
 
           
 
-          , <keyword
-          >ushort</keyword>
+          , <keyword>ushort</keyword>
 
           
 
-          , <keyword
-          >int</keyword>
+          , <keyword>int</keyword>
 
           
 
-          , <keyword
-          >uint</keyword>
+          , <keyword>uint</keyword>
 
           
 
-          , <keyword
-          >long</keyword>
+          , <keyword>long</keyword>
 
           
 
-          , and <keyword
-          >ulong</keyword>
+          , and <keyword>ulong</keyword>
 
           
 
           , the default value is 0. </list_item
         >
         <list_item
-          > For <keyword
-          >char</keyword>
+          > For <keyword>char</keyword>
 
           
 
           , the default value is '\x0000'. </list_item
         >
         <list_item
-          > For <keyword
-          >float</keyword>
+          > For <keyword>float</keyword>
 
           
 
           , the default value is 0.0f. </list_item
         >
         <list_item
-          > For <keyword
-          >double</keyword>
+          > For <keyword>double</keyword>
 
           
 
           , the default value is 0.0d. </list_item
         >
         <list_item
-          > For <keyword
-          >decimal</keyword>
+          > For <keyword>decimal</keyword>
 
           
 
           , the default value is 0.0m. </list_item
         >
         <list_item
-          > For <keyword
-          >bool</keyword>
+          > For <keyword>bool</keyword>
 
           
 
@@ -98,16 +85,18 @@
         >
       </list>
       <list_item
-        > For an <non_terminal
-         where="11.1">enum-type</non_terminal>
+        > For an <non_terminal where="11.1"
+          >enum-type</non_terminal
+        >
 
         
 
          E, the default value is 0. </list_item
       >
       <list_item
-        > For a <non_terminal
-         where="11.1">struct-type</non_terminal>
+        > For a <non_terminal where="11.1"
+          >struct-type</non_terminal
+        >
 
         
 
@@ -116,13 +105,11 @@
     </list>
   </paragraph>
   <paragraph
-    >Like any other instance constructor, the default constructor of a value type is invoked using the new operator. <note
-    >[Note: For efficiency reasons, this requirement is not intended to actually have the implementation generate a constructor call. end note]</note>
+    >Like any other instance constructor, the default constructor of a value type is invoked using the new operator. <note>[Note: For efficiency reasons, this requirement is not intended to actually have the implementation generate a constructor call. end note]</note>
 
     
 
-     In the example below, variables i and j are both initialized to zero. <code_example
-    >
+     In the example below, variables i and j are both initialized to zero. <code_example>
       <![CDATA[
 class A  
 {  
@@ -135,8 +122,7 @@ class A
     </code_example>
   </paragraph>
   <paragraph
-    >Because every value type implicitly has a public parameterless instance constructor, it is not possible for a struct type to contain an explicit declaration of a parameterless constructor. A struct type is however permitted to declare parameterized instance constructors (<hyperlink
-    >18.3.8</hyperlink>
+    >Because every value type implicitly has a public parameterless instance constructor, it is not possible for a struct type to contain an explicit declaration of a parameterless constructor. A struct type is however permitted to declare parameterized instance constructors (<hyperlink>18.3.8</hyperlink>
 
     
 

@@ -45,23 +45,19 @@
       <para>When this attribute is applied to an object, only one thread can be executing in all contexts that share an instance of this property. This is done by contributing sinks that intercept and serialize incoming calls for the respective contexts. If the property is marked for reentry, then callouts are intercepted too. The callout interception allows other waiting threads to enter the synchronization domain for maximal throughput.</para>
       <block subset="none" type="note">
         <para
-          >There are two classes named SynchronizationAttribute : one in the <see
-           cref="N:System.Runtime.Remoting.Contexts" />
+          >There are two classes named SynchronizationAttribute : one in the <see cref="N:System.Runtime.Remoting.Contexts" />
 
           
 
-           namespace, and the other in the <see
-           cref="N:System.EnterpriseServices" />
+           namespace, and the other in the <see cref="N:System.EnterpriseServices" />
 
           
 
-           namespace. The <see
-           cref="T:System.EnterpriseServices.SynchronizationAttribute" />
+           namespace. The <see cref="T:System.EnterpriseServices.SynchronizationAttribute" />
 
           
 
-           class supports only synchronous calls, and can be used only with serviced components. (For more information on serviced components, see <format
-           type="text/html">
+           class supports only synchronous calls, and can be used only with serviced components. (For more information on serviced components, see <format type="text/html">
             <a href="5133A620-9C8C-47BD-8E36-130E722FE463"
               >[&lt;topic://cpconservicedcomponentoverview&gt;]</a
             >
@@ -69,13 +65,11 @@
 
           
 
-          .) The <see
-           cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
+          .) The <see cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
 
           
 
-           supports both synchronous and asynchronous calls, and can be used only with context bound objects. (For more information on context bound objects, see the <see
-           cref="T:System.ContextBoundObject" />
+           supports both synchronous and asynchronous calls, and can be used only with context bound objects. (For more information on context bound objects, see the <see cref="T:System.ContextBoundObject" />
 
           
 
@@ -84,20 +78,17 @@
       </block>
       <block subset="none" type="note">
         <para
-          >This class makes a link demand and an inheritance demand at the class level. A <see
-           cref="T:System.Security.SecurityException" />
+          >This class makes a link demand and an inheritance demand at the class level. A <see cref="T:System.Security.SecurityException" />
 
           
 
-           is thrown when either the immediate caller or the derived class does not have infrastructure permission. For details about security demands, see <format
-           type="text/html">
+           is thrown when either the immediate caller or the derived class does not have infrastructure permission. For details about security demands, see <format type="text/html">
             <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">[&lt;topic://cpconLinkDemands&gt;]</a>
           </format>
 
           
 
-           and <format
-           type="text/html">
+           and <format type="text/html">
             <a href="28B9ADBB-8F08-4F10-B856-DBF59EB932D9"
               >[&lt;topic://cpconInheritanceDemands&gt;]</a
             >
@@ -134,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
 
             
 
@@ -164,8 +154,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If reentry is required, callouts out of the <see
-             cref="T:System.Runtime.Remoting.Contexts.Context" />
+            >If reentry is required, callouts out of the <see cref="T:System.Runtime.Remoting.Contexts.Context" />
 
             
 
@@ -175,8 +164,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
 
             
 
@@ -184,7 +172,11 @@
           >
         </summary>
         <param name="reEntrant">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -212,28 +204,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="flag" />
+            >The <paramref name="flag" />
 
             
 
-             parameter must be either <see
-             cref="F:System.Runtime.Remoting.Contexts.SynchronizationAttribute.NOT_SUPPORTED" />
+             parameter must be either <see cref="F:System.Runtime.Remoting.Contexts.SynchronizationAttribute.NOT_SUPPORTED" />
 
             
 
-            , <see
-             cref="F:System.Runtime.Remoting.Contexts.SynchronizationAttribute.SUPPORTED" />
+            , <see cref="F:System.Runtime.Remoting.Contexts.SynchronizationAttribute.SUPPORTED" />
 
             
 
-            , <see
-             cref="F:System.Runtime.Remoting.Contexts.SynchronizationAttribute.REQUIRED" />
+            , <see cref="F:System.Runtime.Remoting.Contexts.SynchronizationAttribute.REQUIRED" />
 
             
 
-            , or <see
-             cref="F:System.Runtime.Remoting.Contexts.SynchronizationAttribute.REQUIRES_NEW" />
+            , or <see cref="F:System.Runtime.Remoting.Contexts.SynchronizationAttribute.REQUIRES_NEW" />
 
             
 
@@ -243,8 +230,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
 
             
 
@@ -252,7 +238,11 @@
           >
         </summary>
         <param name="flag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -284,28 +274,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="flag" />
+            >The <paramref name="flag" />
 
             
 
-             parameter must be either <see
-             cref="F:System.Runtime.Remoting.Contexts.SynchronizationAttribute.NOT_SUPPORTED" />
+             parameter must be either <see cref="F:System.Runtime.Remoting.Contexts.SynchronizationAttribute.NOT_SUPPORTED" />
 
             
 
-            , <see
-             cref="F:System.Runtime.Remoting.Contexts.SynchronizationAttribute.SUPPORTED" />
+            , <see cref="F:System.Runtime.Remoting.Contexts.SynchronizationAttribute.SUPPORTED" />
 
             
 
-            , <see
-             cref="F:System.Runtime.Remoting.Contexts.SynchronizationAttribute.REQUIRED" />
+            , <see cref="F:System.Runtime.Remoting.Contexts.SynchronizationAttribute.REQUIRED" />
 
             
 
-            , or <see
-             cref="F:System.Runtime.Remoting.Contexts.SynchronizationAttribute.REQUIRES_NEW" />
+            , or <see cref="F:System.Runtime.Remoting.Contexts.SynchronizationAttribute.REQUIRES_NEW" />
 
             
 
@@ -315,8 +300,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
 
             
 
@@ -324,14 +308,22 @@
           >
         </summary>
         <param name="flag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An integer value indicating the behavior of the object to which this attribute is applied. </param
         >
         <param name="reEntrant">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -364,8 +356,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current method is an implementation of <see
-             cref="M:System.Runtime.Remoting.Contexts.IContributeClientContextSink.GetClientContextSink(System.Runtime.Remoting.Messaging.IMessageSink)" />
+            >The current method is an implementation of <see cref="M:System.Runtime.Remoting.Contexts.IContributeClientContextSink.GetClientContextSink(System.Runtime.Remoting.Messaging.IMessageSink)" />
 
             
 
@@ -381,7 +372,11 @@
           <para>The composite sink chain with the new CallOut sink.</para>
         </returns>
         <param name="nextSink">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -423,8 +418,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the Synchronized context property to the specified <see
-             cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+            >Adds the Synchronized context property to the specified <see cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
 
             
 
@@ -432,12 +426,15 @@
           >
         </summary>
         <param name="ctorMsg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+          The <see cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
 
           
 
@@ -470,8 +467,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current method is an implementation of <see
-             cref="M:System.Runtime.Remoting.Contexts.IContributeServerContextSink.GetServerContextSink(System.Runtime.Remoting.Messaging.IMessageSink)" />
+            >The current method is an implementation of <see cref="M:System.Runtime.Remoting.Contexts.IContributeServerContextSink.GetServerContextSink(System.Runtime.Remoting.Messaging.IMessageSink)" />
 
             
 
@@ -487,7 +483,11 @@
           <para>The composite sink chain with the new synchronized dispatch sink.</para>
         </returns>
         <param name="nextSink">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -533,19 +533,26 @@
           <para>true if the passed in context is OK; otherwise, false.</para>
         </returns>
         <param name="ctx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The context to check. </param
         >
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Information gathered at construction time of the context bound object marked by this attribute. The <see
-           cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
+          Information gathered at construction time of the context bound object marked by this attribute. The <see cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
 
           
 
@@ -570,8 +577,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If reentry is required, callouts out of the <see
-             cref="T:System.Runtime.Remoting.Contexts.Context" />
+            >If reentry is required, callouts out of the <see cref="T:System.Runtime.Remoting.Contexts.Context" />
 
             
 
@@ -601,13 +607,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a synchronized <see
-             cref="T:System.Runtime.Remoting.Contexts.Context" />
+            >When a synchronized <see cref="T:System.Runtime.Remoting.Contexts.Context" />
 
             
 
-             is locked, only the thread currently executing in it has access to objects in the <see
-             cref="T:System.Runtime.Remoting.Contexts.Context" />
+             is locked, only the thread currently executing in it has access to objects in the <see cref="T:System.Runtime.Remoting.Contexts.Context" />
 
             
 
@@ -617,13 +621,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a Boolean value indicating whether the <see
-             cref="T:System.Runtime.Remoting.Contexts.Context" />
+            >Gets or sets a Boolean value indicating whether the <see cref="T:System.Runtime.Remoting.Contexts.Context" />
 
             
 
-             implementing this instance of <see
-             cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
+             implementing this instance of <see cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
 
             
 

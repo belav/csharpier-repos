@@ -16,22 +16,17 @@
   </Base>
   <Interfaces />
   <Docs>
-    <typeparam name="U"
-      >Insert <c
-      >text</c>
+    <typeparam name="U">Insert <c>text</c>
 
       
 
-       here.</typeparam
-    >
+       here.</typeparam>
     <summary>To be added.</summary>
-    <remarks>
-      <c>T:Mono.DocTest.Generic.GenericBase`1</c>
+    <remarks><c>T:Mono.DocTest.Generic.GenericBase`1</c>
 
       
 
-      .</remarks
-    >
+      .</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -76,14 +71,11 @@
         <Parameter Name="genericParameter" Type="S" />
       </Parameters>
       <Docs>
-        <typeparam name="S"
-          >Insert more <c
-          >text</c>
+        <typeparam name="S">Insert more <c>text</c>
 
           
 
-           here.</typeparam
-        >
+           here.</typeparam>
         <param name="genericParameter">Something</param>
         <summary>To be added.</summary>
         <returns>The default value.</returns>
@@ -178,8 +170,7 @@
         <param name="list">Insert description here</param>
         <summary>To be added.</summary>
         <returns
-          >The default value for <typeparamref
-           name="U" />
+          >The default value for <typeparamref name="U" />
 
           
 

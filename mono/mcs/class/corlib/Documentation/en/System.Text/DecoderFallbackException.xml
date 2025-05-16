@@ -43,8 +43,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Exception.HResult" />
+            >The <see cref="P:System.Exception.HResult" />
 
             
 
@@ -54,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Text.DecoderFallbackException" />
+            >Initializes a new instance of the <see cref="T:System.Text.DecoderFallbackException" />
 
             
 
@@ -83,8 +81,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Exception.HResult" />
+            >The <see cref="P:System.Exception.HResult" />
 
             
 
@@ -94,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Text.DecoderFallbackException" />
+            >Initializes a new instance of the <see cref="T:System.Text.DecoderFallbackException" />
 
             
 
@@ -103,7 +99,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -134,8 +134,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Exception.HResult" />
+            >The <see cref="P:System.Exception.HResult" />
 
             
 
@@ -145,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Text.DecoderFallbackException" />
+            >Initializes a new instance of the <see cref="T:System.Text.DecoderFallbackException" />
 
             
 
@@ -154,14 +152,22 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An error message.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -193,8 +199,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Exception.HResult" />
+            >The <see cref="P:System.Exception.HResult" />
 
             
 
@@ -204,8 +209,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Text.DecoderFallbackException" />
+            >Initializes a new instance of the <see cref="T:System.Text.DecoderFallbackException" />
 
             
 
@@ -213,26 +217,37 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An error message.</param
         >
         <param name="bytesUnknown">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The input byte array.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index position in <paramref
-           name="bytesUnknown" />
+          The index position in <paramref name="bytesUnknown" />
 
           
 
@@ -257,8 +272,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The application uses the <see
-             cref="P:System.Text.DecoderFallbackException.Index" />
+            >The application uses the <see cref="P:System.Text.DecoderFallbackException.Index" />
 
             
 
@@ -288,8 +302,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The application uses the <see
-             cref="P:System.Text.DecoderFallbackException.BytesUnknown" />
+            >The application uses the <see cref="P:System.Text.DecoderFallbackException.BytesUnknown" />
 
             
 

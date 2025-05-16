@@ -17,8 +17,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the types of punctuation tables that can be used with the <see
-         cref="T:System.Windows.Forms.RichTextBox" />
+        >Specifies the types of punctuation tables that can be used with the <see cref="T:System.Windows.Forms.RichTextBox" />
 
         
 

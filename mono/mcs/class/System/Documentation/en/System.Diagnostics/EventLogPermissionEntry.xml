@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For more information on code access security, see <format
-         type="text/html">
+        >For more information on code access security, see <format type="text/html">
           <a href="859af632-c80d-4736-8d6f-1e01b09ce127">Code Access Security</a>
         </format>
 
@@ -35,8 +34,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines the smallest unit of a code access security permission that is set for an <see
-         cref="T:System.Diagnostics.EventLog" />
+        >Defines the smallest unit of a code access security permission that is set for an <see cref="T:System.Diagnostics.EventLog" />
 
         
 
@@ -73,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.EventLogPermissionEntry" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.EventLogPermissionEntry" />
 
             
 
@@ -82,29 +79,34 @@
           >
         </summary>
         <param name="permissionAccess">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Diagnostics.EventLogPermissionAccess" />
+          A bitwise combination of the <see cref="T:System.Diagnostics.EventLogPermissionAccess" />
 
           
 
-           values. The <see
-           cref="P:System.Diagnostics.EventLogPermissionEntry.PermissionAccess" />
+           values. The <see cref="P:System.Diagnostics.EventLogPermissionEntry.PermissionAccess" />
 
           
 
            property is set to this value. </param
         >
         <param name="machineName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the computer on which to read or write events. The <see
-           cref="P:System.Diagnostics.EventLogPermissionEntry.MachineName" />
+          The name of the computer on which to read or write events. The <see cref="P:System.Diagnostics.EventLogPermissionEntry.MachineName" />
 
           
 

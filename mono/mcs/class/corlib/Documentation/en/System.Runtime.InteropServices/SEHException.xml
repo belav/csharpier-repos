@@ -30,13 +30,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.InteropServices.SEHException" />
+        >The <see cref="T:System.Runtime.InteropServices.SEHException" />
 
         
 
-         class handles SEH errors that are thrown from unmanaged code, but that have not been mapped to another .NET Framework exception. The <see
-         cref="T:System.Runtime.InteropServices.SEHException" />
+         class handles SEH errors that are thrown from unmanaged code, but that have not been mapped to another .NET Framework exception. The <see cref="T:System.Runtime.InteropServices.SEHException" />
 
         
 
@@ -46,8 +44,7 @@
       <list type="bullet">
         <item>
           <para
-            >STATUS_NO_MEMORY exceptions are automatically mapped to the <see
-             cref="T:System.OutOfMemoryException" />
+            >STATUS_NO_MEMORY exceptions are automatically mapped to the <see cref="T:System.OutOfMemoryException" />
 
             
 
@@ -59,8 +56,7 @@
           <list type="bullet">
             <item>
               <para
-                >If legacyNullReferencePolicy is applied, all access violations are mapped to the <see
-                 cref="T:System.NullReferenceException" />
+                >If legacyNullReferencePolicy is applied, all access violations are mapped to the <see cref="T:System.NullReferenceException" />
 
                 
 
@@ -69,8 +65,7 @@
             </item>
             <item>
               <para
-                >If the address at which the read/write was attempted is not in JIT-compiled code, the exception is mapped to the <see
-                 cref="T:System.AccessViolationException" />
+                >If the address at which the read/write was attempted is not in JIT-compiled code, the exception is mapped to the <see cref="T:System.AccessViolationException" />
 
                 
 
@@ -79,8 +74,7 @@
             </item>
             <item>
               <para
-                >If the address at which the read/write was attempted is in JIT-compiled code, but it is not in the OS Null partition area, the exception is mapped to the <see
-                 cref="T:System.AccessViolationException" />
+                >If the address at which the read/write was attempted is in JIT-compiled code, but it is not in the OS Null partition area, the exception is mapped to the <see cref="T:System.AccessViolationException" />
 
                 
 
@@ -89,8 +83,7 @@
             </item>
             <item>
               <para
-                >If there is no legacyNullReferencePolicy, and the address at which the read/write was attempted is in JIT-compiled code and in the OS Null partition area, the exception is mapped to the <see
-                 cref="T:System.NullReferenceException" />
+                >If there is no legacyNullReferencePolicy, and the address at which the read/write was attempted is in JIT-compiled code and in the OS Null partition area, the exception is mapped to the <see cref="T:System.NullReferenceException" />
 
                 
 
@@ -101,8 +94,7 @@
         </item>
       </list>
       <para
-        >Any SEH exception that is not automatically mapped to a specific exception is mapped to the <see
-         cref="T:System.Runtime.InteropServices.SEHException" />
+        >Any SEH exception that is not automatically mapped to a specific exception is mapped to the <see cref="T:System.Runtime.InteropServices.SEHException" />
 
         
 
@@ -110,8 +102,7 @@
       >
       <para>For more information, search on "unmanaged exceptions" and "Structured Exception Handling" in the MSDN Library.</para>
       <para
-        > Note that the <see
-         cref="T:System.Runtime.InteropServices.SEHException" />
+        > Note that the <see cref="T:System.Runtime.InteropServices.SEHException" />
 
         
 
@@ -156,18 +147,15 @@ End Try</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Runtime.InteropServices.SEHException" />
+            >The <see cref="T:System.Runtime.InteropServices.SEHException" />
 
             
 
-             class inherits from the <see
-             cref="T:System.Runtime.InteropServices.ExternalException" />
+             class inherits from the <see cref="T:System.Runtime.InteropServices.ExternalException" />
 
             
 
-             class. This constructor sets the properties of the <see
-             cref="T:System.Exception" />
+             class. This constructor sets the properties of the <see cref="T:System.Exception" />
 
             
 
@@ -209,8 +197,7 @@ End Try</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.SEHException" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.SEHException" />
 
             
 
@@ -243,13 +230,11 @@ End Try</code>
 
             
 
-             inherits from <see
-             cref="T:System.Runtime.InteropServices.ExternalException" />
+             inherits from <see cref="T:System.Runtime.InteropServices.ExternalException" />
 
             
 
-            . This constructor sets the properties of the <see
-             cref="T:System.Exception" />
+            . This constructor sets the properties of the <see cref="T:System.Exception" />
 
             
 
@@ -297,8 +282,7 @@ End Try</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.SEHException" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.SEHException" />
 
             
 
@@ -306,7 +290,11 @@ End Try</code>
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -338,8 +326,7 @@ End Try</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see the <see
-             cref="N:System.Runtime.Serialization" />
+            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see the <see cref="N:System.Runtime.Serialization" />
 
             
 
@@ -350,8 +337,7 @@ End Try</code>
 
             
 
-             inherits from <see
-             cref="T:System.Runtime.InteropServices.ExternalException" />
+             inherits from <see cref="T:System.Runtime.InteropServices.ExternalException" />
 
             
 
@@ -361,8 +347,7 @@ End Try</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.SEHException" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.SEHException" />
 
             
 
@@ -370,14 +355,22 @@ End Try</code>
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -409,26 +402,22 @@ End Try</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Runtime.InteropServices.SEHException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Runtime.InteropServices.SEHException" />
 
             
 
@@ -470,8 +459,7 @@ End Try</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.SEHException" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.SEHException" />
 
             
 
@@ -479,19 +467,26 @@ End Try</code>
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception. </param
         >
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="inner" />
+          The exception that is the cause of the current exception. If the <paramref name="inner" />
 
           
 
@@ -519,8 +514,7 @@ End Try</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="M:System.Runtime.InteropServices.SEHException.CanResume" />
+            >If <see cref="M:System.Runtime.InteropServices.SEHException.CanResume" />
 
             
 

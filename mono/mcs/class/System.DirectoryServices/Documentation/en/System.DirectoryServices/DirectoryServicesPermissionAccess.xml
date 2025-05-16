@@ -147,18 +147,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.DirectoryServices.DirectoryServicesPermissionAccess" />
+        >The <see cref="T:System.DirectoryServices.DirectoryServicesPermissionAccess" />
 
         
 
-         enumeration defines access levels that are used by <see
-         cref="N:System.DirectoryServices" />
+         enumeration defines access levels that are used by <see cref="N:System.DirectoryServices" />
 
         
 
-         permission classes. This enumeration has a <see
-         cref="T:System.FlagsAttribute" />
+         permission classes. This enumeration has a <see cref="T:System.FlagsAttribute" />
 
         
 

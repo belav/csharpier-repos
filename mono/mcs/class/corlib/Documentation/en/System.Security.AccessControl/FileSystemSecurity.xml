@@ -22,108 +22,90 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.AccessControl.FileSystemSecurity" />
+        >The <see cref="T:System.Security.AccessControl.FileSystemSecurity" />
 
         
 
-         class is the base class for the <see
-         cref="T:System.Security.AccessControl.FileSecurity" />
+         class is the base class for the <see cref="T:System.Security.AccessControl.FileSecurity" />
 
         
 
-         and <see
-         cref="T:System.Security.AccessControl.DirectorySecurity" />
+         and <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
         
 
          classes.  These classes represent all of the access rights for a system file or directory and define how access attempts are audited.  </para
       >
       <para
-        >The <see
-         cref="T:System.Security.AccessControl.FileSystemSecurity" />
+        >The <see cref="T:System.Security.AccessControl.FileSystemSecurity" />
 
         
 
-         class represents access and audit rights as a set of rules. Each access rule is represented by a <see
-         cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+         class represents access and audit rights as a set of rules. Each access rule is represented by a <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
         
 
-         object, while each audit rule is represented by a <see
-         cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+         object, while each audit rule is represented by a <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
         
 
          object.</para
       >
       <para
-        >The <see
-         cref="T:System.Security.AccessControl.FileSystemSecurity" />
+        >The <see cref="T:System.Security.AccessControl.FileSystemSecurity" />
 
         
 
-         class is an abstraction of the underlying Microsoft Windows file security system. In this system, each file or directory has a discretionary access control list (DACL), which controls access to the file or directory, and a system access control list (SACL), which specifies the access control attempts that are audited.  The <see
-         cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+         class is an abstraction of the underlying Microsoft Windows file security system. In this system, each file or directory has a discretionary access control list (DACL), which controls access to the file or directory, and a system access control list (SACL), which specifies the access control attempts that are audited.  The <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
         
 
-         and <see
-         cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+         and <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
         
 
          classes are abstractions of access control entries (ACEs) that comprise DACLs and SACLs.      </para
       >
       <para
-        >The <see
-         cref="T:System.Security.AccessControl.FileSystemSecurity" />
+        >The <see cref="T:System.Security.AccessControl.FileSystemSecurity" />
 
         
 
          class hides many of details of DACLs and SACLs; you do not have to worry about ACE ordering or null DACLS.</para
       >
       <para
-        >To persist new or changed access control list (ACL) information to a file, use the <see
-         cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
+        >To persist new or changed access control list (ACL) information to a file, use the <see cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
 
         
 
-         or <see
-         cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+         or <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
 
         
 
-         method.  To persist new or changed ACL information to a directory, use the <see
-         cref="M:System.IO.Directory.SetAccessControl(System.String,System.Security.AccessControl.DirectorySecurity)" />
+         method.  To persist new or changed ACL information to a directory, use the <see cref="M:System.IO.Directory.SetAccessControl(System.String,System.Security.AccessControl.DirectorySecurity)" />
 
         
 
-         or <see
-         cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+         or <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
 
         
 
          method.</para
       >
       <para
-        >To retrieve ACL information from a file, use the <see
-         cref="Overload:System.IO.File.GetAccessControl" />
+        >To retrieve ACL information from a file, use the <see cref="Overload:System.IO.File.GetAccessControl" />
 
         
 
-         or <see
-         cref="Overload:System.IO.FileInfo.GetAccessControl" />
+         or <see cref="Overload:System.IO.FileInfo.GetAccessControl" />
 
         
 
-         method.  To retrieve ACL information from a directory, use the <see
-         cref="Overload:System.IO.Directory.GetAccessControl" />
+         method.  To retrieve ACL information from a directory, use the <see cref="Overload:System.IO.Directory.GetAccessControl" />
 
         
 
-         or <see
-         cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
+         or <see cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
 
         
 
@@ -156,13 +138,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Classes that derive from the <see
-             cref="T:System.Security.AccessControl.FileSystemSecurity" />
+            >Classes that derive from the <see cref="T:System.Security.AccessControl.FileSystemSecurity" />
 
             
 
-             class override the <see
-             cref="P:System.Security.AccessControl.FileSystemSecurity.AccessRightType" />
+             class override the <see cref="P:System.Security.AccessControl.FileSystemSecurity.AccessRightType" />
 
             
 
@@ -172,8 +152,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the enumeration that the <see
-             cref="T:System.Security.AccessControl.FileSystemSecurity" />
+            >Gets the enumeration that the <see cref="T:System.Security.AccessControl.FileSystemSecurity" />
 
             
 
@@ -212,21 +191,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The recommended way to create access control rules is to use the constructors of the <see
-             cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+            >The recommended way to create access control rules is to use the constructors of the <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
             
 
              class.</para
           >
           <para
-            >The return type of the <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)" />
+            >The return type of the <see cref="M:System.Security.AccessControl.FileSystemSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)" />
 
             
 
-             method is the base class, <see
-             cref="T:System.Security.AccessControl.AccessRule" />
+             method is the base class, <see cref="T:System.Security.AccessControl.AccessRule" />
 
             
 
@@ -236,8 +212,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
             
 
@@ -247,8 +222,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+            >A new <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
             
 
@@ -256,62 +230,82 @@
           >
         </returns>
         <param name="identityReference">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Principal.IdentityReference" />
+          An <see cref="T:System.Security.Principal.IdentityReference" />
 
           
 
            object that represents a user account.</param
         >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An integer that specifies an access type.</param
         >
         <param name="isInherited">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the access rule is inherited; otherwise, false.    </param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.InheritanceFlags" />
+          One of the <see cref="T:System.Security.AccessControl.InheritanceFlags" />
 
           
 
            values that specifies how to propagate access masks to child objects.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.PropagationFlags" />
+          One of the <see cref="T:System.Security.AccessControl.PropagationFlags" />
 
           
 
            values that specifies how to propagate Access Control Entries (ACEs) to child objects.</param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AccessControlType" />
+          One of the <see cref="T:System.Security.AccessControl.AccessControlType" />
 
           
 
@@ -339,13 +333,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Classes that derive from the <see
-             cref="T:System.Security.AccessControl.FileSystemSecurity" />
+            >Classes that derive from the <see cref="T:System.Security.AccessControl.FileSystemSecurity" />
 
             
 
-             class override the <see
-             cref="P:System.Security.AccessControl.FileSystemSecurity.AccessRuleType" />
+             class override the <see cref="P:System.Security.AccessControl.FileSystemSecurity.AccessRuleType" />
 
             
 
@@ -355,8 +347,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the enumeration that the <see
-             cref="T:System.Security.AccessControl.FileSystemSecurity" />
+            >Gets the enumeration that the <see cref="T:System.Security.AccessControl.FileSystemSecurity" />
 
             
 
@@ -390,100 +381,83 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.AddAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
+            >The <see cref="M:System.Security.AccessControl.FileSystemSecurity.AddAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
 
             
 
-             method adds a new rule to the list of rules contained within a <see
-             cref="T:System.Security.AccessControl.FileSystemSecurity" />
+             method adds a new rule to the list of rules contained within a <see cref="T:System.Security.AccessControl.FileSystemSecurity" />
 
             
 
              object.</para
           >
           <para
-            >If an access control list (ACL) already exists for the specified rule, the <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.AddAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
+            >If an access control list (ACL) already exists for the specified rule, the <see cref="M:System.Security.AccessControl.FileSystemSecurity.AddAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
 
             
 
-             method will still add the rule, with one exception: a <see
-             cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+             method will still add the rule, with one exception: a <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
             
 
-             object created using the <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             object created using the <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             enumeration value supersedes an object created using the <see
-             cref="F:System.Security.AccessControl.AccessControlType.Allow" />
+             enumeration value supersedes an object created using the <see cref="F:System.Security.AccessControl.AccessControlType.Allow" />
 
             
 
              enumeration value.</para
           >
           <para
-            >To persist new or changed ACL information to a file, use the <see
-             cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
+            >To persist new or changed ACL information to a file, use the <see cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
 
             
 
-             or <see
-             cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+             or <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
 
             
 
-             method.  To persist new or changed ACL information to a directory, use the <see
-             cref="M:System.IO.Directory.SetAccessControl(System.String,System.Security.AccessControl.DirectorySecurity)" />
+             method.  To persist new or changed ACL information to a directory, use the <see cref="M:System.IO.Directory.SetAccessControl(System.String,System.Security.AccessControl.DirectorySecurity)" />
 
             
 
-             or <see
-             cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+             or <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
 
             
 
              method.</para
           >
           <para
-            >To retrieve ACL information from a file, use the <see
-             cref="Overload:System.IO.File.GetAccessControl" />
+            >To retrieve ACL information from a file, use the <see cref="Overload:System.IO.File.GetAccessControl" />
 
             
 
-             or <see
-             cref="Overload:System.IO.FileInfo.GetAccessControl" />
+             or <see cref="Overload:System.IO.FileInfo.GetAccessControl" />
 
             
 
-             method.  To retrieve ACL information from a directory, use the <see
-             cref="Overload:System.IO.Directory.GetAccessControl" />
+             method.  To retrieve ACL information from a directory, use the <see cref="Overload:System.IO.Directory.GetAccessControl" />
 
             
 
-             or <see
-             cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
+             or <see cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
 
             
 
              method.</para
           >
           <para
-            >When you add an access rule without setting the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+            >When you add an access rule without setting the <see cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
             
 
-             flag, the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+             flag, the <see cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
             
 
-             flag will be automatically added to your rule.  If you remove the rule later without specifying the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+             flag will be automatically added to your rule.  If you remove the rule later without specifying the <see cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
             
 
@@ -495,12 +469,15 @@
           <para>Adds the specified access control list (ACL) permission to the current file or directory.</para>
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+          A <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
           
 
@@ -533,21 +510,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.AddAuditRule(System.Security.AccessControl.FileSystemAuditRule)" />
+            >The <see cref="M:System.Security.AccessControl.FileSystemSecurity.AddAuditRule(System.Security.AccessControl.FileSystemAuditRule)" />
 
             
 
-             method adds a new audit rule to the list of rules contained within a <see
-             cref="T:System.Security.AccessControl.FileSystemSecurity" />
+             method adds a new audit rule to the list of rules contained within a <see cref="T:System.Security.AccessControl.FileSystemSecurity" />
 
             
 
              object.</para
           >
           <para
-            >If an audit rule already exists for the specified rule, the <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.AddAuditRule(System.Security.AccessControl.FileSystemAuditRule)" />
+            >If an audit rule already exists for the specified rule, the <see cref="M:System.Security.AccessControl.FileSystemSecurity.AddAuditRule(System.Security.AccessControl.FileSystemAuditRule)" />
 
             
 
@@ -559,12 +533,15 @@
           <para>Adds the specified audit rule to the current file or directory.</para>
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+          A <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
           
 
@@ -602,21 +579,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The recommended way to create audit rules is to use the constructors of the <see
-             cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+            >The recommended way to create audit rules is to use the constructors of the <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
             
 
              class.</para
           >
           <para
-            >The return type of the <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)" />
+            >The return type of the <see cref="M:System.Security.AccessControl.FileSystemSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)" />
 
             
 
-             method is the base class, <see
-             cref="T:System.Security.AccessControl.AuditRule" />
+             method is the base class, <see cref="T:System.Security.AccessControl.AuditRule" />
 
             
 
@@ -626,8 +600,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
             
 
@@ -637,8 +610,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+            >A new <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
             
 
@@ -646,62 +618,82 @@
           >
         </returns>
         <param name="identityReference">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Principal.IdentityReference" />
+          An <see cref="T:System.Security.Principal.IdentityReference" />
 
           
 
            object that represents a user account.</param
         >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An integer that specifies an access type.</param
         >
         <param name="isInherited">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the access rule is inherited; otherwise, false.    </param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.InheritanceFlags" />
+          One of the <see cref="T:System.Security.AccessControl.InheritanceFlags" />
 
           
 
            values that specifies how to propagate access masks to child objects.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.PropagationFlags" />
+          One of the <see cref="T:System.Security.AccessControl.PropagationFlags" />
 
           
 
            values that specifies how to propagate Access Control Entries (ACEs) to child objects.</param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AuditFlags" />
+          One of the <see cref="T:System.Security.AccessControl.AuditFlags" />
 
           
 
@@ -729,13 +721,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Classes that derive from the <see
-             cref="T:System.Security.AccessControl.FileSystemSecurity" />
+            >Classes that derive from the <see cref="T:System.Security.AccessControl.FileSystemSecurity" />
 
             
 
-             class override the <see
-             cref="P:System.Security.AccessControl.FileSystemSecurity.AuditRuleType" />
+             class override the <see cref="P:System.Security.AccessControl.FileSystemSecurity.AuditRuleType" />
 
             
 
@@ -745,8 +735,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type that the <see
-             cref="T:System.Security.AccessControl.FileSystemSecurity" />
+            >Gets the type that the <see cref="T:System.Security.AccessControl.FileSystemSecurity" />
 
             
 
@@ -780,122 +769,100 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.RemoveAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
+            >The <see cref="M:System.Security.AccessControl.FileSystemSecurity.RemoveAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
 
             
 
-             method removes either all matching <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             method removes either all matching <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             access rules or all matching <see
-             cref="F:System.Security.AccessControl.AccessControlType.Allow" />
+             access rules or all matching <see cref="F:System.Security.AccessControl.AccessControlType.Allow" />
 
             
 
-             access rules from the current <see
-             cref="T:System.Security.AccessControl.FileSystemSecurity" />
+             access rules from the current <see cref="T:System.Security.AccessControl.FileSystemSecurity" />
 
             
 
-             object.  For example, you can use this method to remove all <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             object.  For example, you can use this method to remove all <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             access rules for a user by passing a <see
-             cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+             access rules for a user by passing a <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
             
 
-             object created using the <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             object created using the <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             value, the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Read" />
+             value, the <see cref="F:System.Security.AccessControl.FileSystemRights.Read" />
 
             
 
-             value, and a user account.  When you do this, the <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.RemoveAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
+             value, and a user account.  When you do this, the <see cref="M:System.Security.AccessControl.FileSystemSecurity.RemoveAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
 
             
 
-             method removes any deny rules that specify the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Read" />
+             method removes any deny rules that specify the <see cref="F:System.Security.AccessControl.FileSystemRights.Read" />
 
             
 
-             value or the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Write" />
+             value or the <see cref="F:System.Security.AccessControl.FileSystemRights.Write" />
 
             
 
              value.</para
           >
           <para
-            >To persist new or changed access control list (ACL) information to a file, use the <see
-             cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
+            >To persist new or changed access control list (ACL) information to a file, use the <see cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
 
             
 
-             or <see
-             cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+             or <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
 
             
 
-             method.  To persist new or changed ACL information to a directory, use the <see
-             cref="M:System.IO.Directory.SetAccessControl(System.String,System.Security.AccessControl.DirectorySecurity)" />
+             method.  To persist new or changed ACL information to a directory, use the <see cref="M:System.IO.Directory.SetAccessControl(System.String,System.Security.AccessControl.DirectorySecurity)" />
 
             
 
-             or <see
-             cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+             or <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
 
             
 
              method.</para
           >
           <para
-            >To retrieve ACL information from a file, use the <see
-             cref="Overload:System.IO.File.GetAccessControl" />
+            >To retrieve ACL information from a file, use the <see cref="Overload:System.IO.File.GetAccessControl" />
 
             
 
-             or <see
-             cref="Overload:System.IO.FileInfo.GetAccessControl" />
+             or <see cref="Overload:System.IO.FileInfo.GetAccessControl" />
 
             
 
-             method.  To retrieve ACL information from a directory, use the <see
-             cref="Overload:System.IO.Directory.GetAccessControl" />
+             method.  To retrieve ACL information from a directory, use the <see cref="Overload:System.IO.Directory.GetAccessControl" />
 
             
 
-             or <see
-             cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
+             or <see cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
 
             
 
              method.</para
           >
           <para
-            >When you add an access rule without setting the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+            >When you add an access rule without setting the <see cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
             
 
-             flag, the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+             flag, the <see cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
             
 
-             flag will be automatically added to your rule.  If you remove the rule later without specifying the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+             flag will be automatically added to your rule.  If you remove the rule later without specifying the <see cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
             
 
@@ -911,12 +878,15 @@
           <para>true if the access rule was removed; otherwise, false.</para>
         </returns>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+          A <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
           
 
@@ -949,77 +919,64 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.RemoveAccessRuleAll(System.Security.AccessControl.FileSystemAccessRule)" />
+            >The <see cref="M:System.Security.AccessControl.FileSystemSecurity.RemoveAccessRuleAll(System.Security.AccessControl.FileSystemAccessRule)" />
 
             
 
-             method removes all access control list (ACL) permissions for the specified user.  The method ignores all values in the <see
-             cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+             method removes all access control list (ACL) permissions for the specified user.  The method ignores all values in the <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
             
 
              object except the user account. </para
           >
           <para
-            >To persist new or changed ACL information to a file, use the <see
-             cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
+            >To persist new or changed ACL information to a file, use the <see cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
 
             
 
-             or <see
-             cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+             or <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
 
             
 
-             method.  To persist new or changed ACL information to a directory, use the <see
-             cref="M:System.IO.Directory.SetAccessControl(System.String,System.Security.AccessControl.DirectorySecurity)" />
+             method.  To persist new or changed ACL information to a directory, use the <see cref="M:System.IO.Directory.SetAccessControl(System.String,System.Security.AccessControl.DirectorySecurity)" />
 
             
 
-             or <see
-             cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+             or <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
 
             
 
              method.</para
           >
           <para
-            >To retrieve ACL information from a file, use the <see
-             cref="Overload:System.IO.File.GetAccessControl" />
+            >To retrieve ACL information from a file, use the <see cref="Overload:System.IO.File.GetAccessControl" />
 
             
 
-             or <see
-             cref="Overload:System.IO.FileInfo.GetAccessControl" />
+             or <see cref="Overload:System.IO.FileInfo.GetAccessControl" />
 
             
 
-             method.  To retrieve ACL information from a directory, use the <see
-             cref="Overload:System.IO.Directory.GetAccessControl" />
+             method.  To retrieve ACL information from a directory, use the <see cref="Overload:System.IO.Directory.GetAccessControl" />
 
             
 
-             or <see
-             cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
+             or <see cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
 
             
 
              method.</para
           >
           <para
-            >When you add an access rule without setting the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+            >When you add an access rule without setting the <see cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
             
 
-             flag, the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+             flag, the <see cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
             
 
-             flag will be automatically added to your rule.  If you remove the rule later without specifying the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+             flag will be automatically added to your rule.  If you remove the rule later without specifying the <see cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
             
 
@@ -1031,12 +988,15 @@
           <para>Removes all access control list (ACL) permissions for the specified user from the current file or directory.</para>
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+          A <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
           
 
@@ -1069,122 +1029,100 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.FileSystemAccessRule)" />
+            >The <see cref="M:System.Security.AccessControl.FileSystemSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.FileSystemAccessRule)" />
 
             
 
-             method removes the specified <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             method removes the specified <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             access rule or the specified matching <see
-             cref="F:System.Security.AccessControl.AccessControlType.Allow" />
+             access rule or the specified matching <see cref="F:System.Security.AccessControl.AccessControlType.Allow" />
 
             
 
-             access rule from the current <see
-             cref="T:System.Security.AccessControl.FileSystemSecurity" />
+             access rule from the current <see cref="T:System.Security.AccessControl.FileSystemSecurity" />
 
             
 
-             object.  For example, you can use this method to remove a specified <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             object.  For example, you can use this method to remove a specified <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             access rule for a user by passing a <see
-             cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+             access rule for a user by passing a <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
             
 
-             object created using the <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             object created using the <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             value, the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Read" />
+             value, the <see cref="F:System.Security.AccessControl.FileSystemRights.Read" />
 
             
 
-             value, and a user account.  When you do this, the <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.FileSystemAccessRule)" />
+             value, and a user account.  When you do this, the <see cref="M:System.Security.AccessControl.FileSystemSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.FileSystemAccessRule)" />
 
             
 
-             method removes only the deny rule that specifies the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Read" />
+             method removes only the deny rule that specifies the <see cref="F:System.Security.AccessControl.FileSystemRights.Read" />
 
             
 
-             value.  It does not remove any deny rules that specify the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Write" />
+             value.  It does not remove any deny rules that specify the <see cref="F:System.Security.AccessControl.FileSystemRights.Write" />
 
             
 
              value.</para
           >
           <para
-            >To persist new or changed access control list (ACL) information to a file, use the <see
-             cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
+            >To persist new or changed access control list (ACL) information to a file, use the <see cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
 
             
 
-             or <see
-             cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+             or <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
 
             
 
-             method.  To persist new or changed ACL information to a directory, use the <see
-             cref="M:System.IO.Directory.SetAccessControl(System.String,System.Security.AccessControl.DirectorySecurity)" />
+             method.  To persist new or changed ACL information to a directory, use the <see cref="M:System.IO.Directory.SetAccessControl(System.String,System.Security.AccessControl.DirectorySecurity)" />
 
             
 
-             or <see
-             cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+             or <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
 
             
 
              method.</para
           >
           <para
-            >To retrieve ACL information from a file, use the <see
-             cref="Overload:System.IO.File.GetAccessControl" />
+            >To retrieve ACL information from a file, use the <see cref="Overload:System.IO.File.GetAccessControl" />
 
             
 
-             or <see
-             cref="Overload:System.IO.FileInfo.GetAccessControl" />
+             or <see cref="Overload:System.IO.FileInfo.GetAccessControl" />
 
             
 
-             method.  To retrieve ACL information from a directory, use the <see
-             cref="Overload:System.IO.Directory.GetAccessControl" />
+             method.  To retrieve ACL information from a directory, use the <see cref="Overload:System.IO.Directory.GetAccessControl" />
 
             
 
-             or <see
-             cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
+             or <see cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
 
             
 
              method.</para
           >
           <para
-            >When you add an access rule without setting the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+            >When you add an access rule without setting the <see cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
             
 
-             flag, the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+             flag, the <see cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
             
 
-             flag will be automatically added to your rule.  If you remove the rule later without specifying the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+             flag will be automatically added to your rule.  If you remove the rule later without specifying the <see cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
             
 
@@ -1196,12 +1134,15 @@
           <para>Removes a single matching allow or deny access control list (ACL) permission from the current file or directory.</para>
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+          A <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
           
 
@@ -1234,58 +1175,47 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.RemoveAuditRule(System.Security.AccessControl.FileSystemAuditRule)" />
+            >The <see cref="M:System.Security.AccessControl.FileSystemSecurity.RemoveAuditRule(System.Security.AccessControl.FileSystemAuditRule)" />
 
             
 
-             method removes either all matching <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             method removes either all matching <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             audit rules or all matching <see
-             cref="F:System.Security.AccessControl.AccessControlType.Allow" />
+             audit rules or all matching <see cref="F:System.Security.AccessControl.AccessControlType.Allow" />
 
             
 
-             audit rules from the current <see
-             cref="T:System.Security.AccessControl.FileSystemSecurity" />
+             audit rules from the current <see cref="T:System.Security.AccessControl.FileSystemSecurity" />
 
             
 
-             object.  For example, you can use this method to remove all <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             object.  For example, you can use this method to remove all <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             audit rules for a user by passing a <see
-             cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+             audit rules for a user by passing a <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
             
 
-             object created using the <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             object created using the <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             value, the <see
-             cref="F:System.Security.AccessControl.AuditFlags.Failure" />
+             value, the <see cref="F:System.Security.AccessControl.AuditFlags.Failure" />
 
             
 
-             value, and a user account.  When you do this, the <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.RemoveAuditRule(System.Security.AccessControl.FileSystemAuditRule)" />
+             value, and a user account.  When you do this, the <see cref="M:System.Security.AccessControl.FileSystemSecurity.RemoveAuditRule(System.Security.AccessControl.FileSystemAuditRule)" />
 
             
 
-             method removes any deny rules that specify the <see
-             cref="F:System.Security.AccessControl.AuditFlags.Failure" />
+             method removes any deny rules that specify the <see cref="F:System.Security.AccessControl.AuditFlags.Failure" />
 
             
 
-             value or the <see
-             cref="F:System.Security.AccessControl.AuditFlags.Success" />
+             value or the <see cref="F:System.Security.AccessControl.AuditFlags.Success" />
 
             
 
@@ -1301,12 +1231,15 @@
           <para>true if the audit rule was removed; otherwise, false</para>
         </returns>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+          A <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
           
 
@@ -1339,13 +1272,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.RemoveAuditRuleAll(System.Security.AccessControl.FileSystemAuditRule)" />
+            >The <see cref="M:System.Security.AccessControl.FileSystemSecurity.RemoveAuditRuleAll(System.Security.AccessControl.FileSystemAuditRule)" />
 
             
 
-             method removes all audit rules for the specified user.  It ignores all values in the <see
-             cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+             method removes all audit rules for the specified user.  It ignores all values in the <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
             
 
@@ -1357,12 +1288,15 @@
           <para>Removes all audit rules for the specified user from the current file or directory.</para>
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+          A <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
           
 
@@ -1395,58 +1329,47 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.FileSystemAuditRule)" />
+            >The <see cref="M:System.Security.AccessControl.FileSystemSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.FileSystemAuditRule)" />
 
             
 
-             method removes the specified matching <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             method removes the specified matching <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             audit rule or the specified matching <see
-             cref="F:System.Security.AccessControl.AccessControlType.Allow" />
+             audit rule or the specified matching <see cref="F:System.Security.AccessControl.AccessControlType.Allow" />
 
             
 
-             audit rule from the current <see
-             cref="T:System.Security.AccessControl.FileSystemSecurity" />
+             audit rule from the current <see cref="T:System.Security.AccessControl.FileSystemSecurity" />
 
             
 
-             object.  For example, you can use this method to remove a specified <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             object.  For example, you can use this method to remove a specified <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             audit rule for a user by passing a <see
-             cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+             audit rule for a user by passing a <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
             
 
-             object created using the <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             object created using the <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             value, the <see
-             cref="F:System.Security.AccessControl.AuditFlags.Failure" />
+             value, the <see cref="F:System.Security.AccessControl.AuditFlags.Failure" />
 
             
 
-             value, and a user account.  When you do this, the <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.FileSystemAuditRule)" />
+             value, and a user account.  When you do this, the <see cref="M:System.Security.AccessControl.FileSystemSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.FileSystemAuditRule)" />
 
             
 
-             method removes only a deny rule that specifies the <see
-             cref="F:System.Security.AccessControl.AuditFlags.Failure" />
+             method removes only a deny rule that specifies the <see cref="F:System.Security.AccessControl.AuditFlags.Failure" />
 
             
 
-             value.  It does not remove any deny rules that specify the <see
-             cref="F:System.Security.AccessControl.AuditFlags.Success" />
+             value.  It does not remove any deny rules that specify the <see cref="F:System.Security.AccessControl.AuditFlags.Success" />
 
             
 
@@ -1458,12 +1381,15 @@
           <para>Removes a single matching allow or deny audit rule from the current file or directory.</para>
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+          A <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
           
 
@@ -1496,89 +1422,73 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.ResetAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
+            >The <see cref="M:System.Security.AccessControl.FileSystemSecurity.ResetAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
 
             
 
-             method adds the specified access control list (ACL) rule or overwrites any identical ACL rules that match the <paramref
-             name="rule" />
+             method adds the specified access control list (ACL) rule or overwrites any identical ACL rules that match the <paramref name="rule" />
 
             
 
-             parameter.  For example, if the <paramref
-             name="rule" />
+             parameter.  For example, if the <paramref name="rule" />
 
             
 
-             parameter specifies a <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Read" />
+             parameter specifies a <see cref="F:System.Security.AccessControl.FileSystemRights.Read" />
 
             
 
-             value and the <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.ResetAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
+             value and the <see cref="M:System.Security.AccessControl.FileSystemSecurity.ResetAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
 
             
 
-             method finds an identical ACL rule that specifies the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Read" />
+             method finds an identical ACL rule that specifies the <see cref="F:System.Security.AccessControl.FileSystemRights.Read" />
 
             
 
-             value, the identical rule will be overwritten.  If the <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.ResetAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
+             value, the identical rule will be overwritten.  If the <see cref="M:System.Security.AccessControl.FileSystemSecurity.ResetAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
 
             
 
-             method finds an identical ACL rule that specifies the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Write" />
+             method finds an identical ACL rule that specifies the <see cref="F:System.Security.AccessControl.FileSystemRights.Write" />
 
             
 
              value, the identical rule will also be overwritten. </para
           >
           <para
-            >To persist new or changed ACL information to a file, use the <see
-             cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
+            >To persist new or changed ACL information to a file, use the <see cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
 
             
 
-             or <see
-             cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+             or <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
 
             
 
-             method.  To persist new or changed ACL information to a directory, use the <see
-             cref="M:System.IO.Directory.SetAccessControl(System.String,System.Security.AccessControl.DirectorySecurity)" />
+             method.  To persist new or changed ACL information to a directory, use the <see cref="M:System.IO.Directory.SetAccessControl(System.String,System.Security.AccessControl.DirectorySecurity)" />
 
             
 
-             or <see
-             cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+             or <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
 
             
 
              method.</para
           >
           <para
-            >To retrieve ACL information from a file, use the <see
-             cref="Overload:System.IO.File.GetAccessControl" />
+            >To retrieve ACL information from a file, use the <see cref="Overload:System.IO.File.GetAccessControl" />
 
             
 
-             or <see
-             cref="Overload:System.IO.FileInfo.GetAccessControl" />
+             or <see cref="Overload:System.IO.FileInfo.GetAccessControl" />
 
             
 
-             method.  To retrieve ACL information from a directory, use the <see
-             cref="Overload:System.IO.Directory.GetAccessControl" />
+             method.  To retrieve ACL information from a directory, use the <see cref="Overload:System.IO.Directory.GetAccessControl" />
 
             
 
-             or <see
-             cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
+             or <see cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
 
             
 
@@ -1590,12 +1500,15 @@
           <para>Adds the specified access control list (ACL) permission to the current file or directory and removes all matching ACL permissions.</para>
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+          A <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
           
 
@@ -1628,94 +1541,77 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.SetAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
+            >The <see cref="M:System.Security.AccessControl.FileSystemSecurity.SetAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
 
             
 
-             method adds the specified access control list (ACL) rule or overwrites any identical ACL rules that match the <see
-             cref="T:System.Security.AccessControl.FileSystemRights" />
+             method adds the specified access control list (ACL) rule or overwrites any identical ACL rules that match the <see cref="T:System.Security.AccessControl.FileSystemRights" />
 
             
 
-             value of the <paramref
-             name="rule" />
+             value of the <paramref name="rule" />
 
             
 
-             parameter.  For example, if the <paramref
-             name="rule" />
+             parameter.  For example, if the <paramref name="rule" />
 
             
 
-             parameter specifies a <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Read" />
+             parameter specifies a <see cref="F:System.Security.AccessControl.FileSystemRights.Read" />
 
             
 
-             value and the <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.SetAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
+             value and the <see cref="M:System.Security.AccessControl.FileSystemSecurity.SetAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
 
             
 
-             method finds an identical ACL rule that specifies the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Read" />
+             method finds an identical ACL rule that specifies the <see cref="F:System.Security.AccessControl.FileSystemRights.Read" />
 
             
 
-             value, the identical rule will be overwritten.  If the <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.SetAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
+             value, the identical rule will be overwritten.  If the <see cref="M:System.Security.AccessControl.FileSystemSecurity.SetAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
 
             
 
-             method finds an identical ACL rule that specifies the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Write" />
+             method finds an identical ACL rule that specifies the <see cref="F:System.Security.AccessControl.FileSystemRights.Write" />
 
             
 
              value, the identical rule will not be overwritten. </para
           >
           <para
-            >To persist new or changed ACL information to a file, use the <see
-             cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
+            >To persist new or changed ACL information to a file, use the <see cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
 
             
 
-             or <see
-             cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+             or <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
 
             
 
-             method.  To persist new or changed ACL information to a directory, use the <see
-             cref="M:System.IO.Directory.SetAccessControl(System.String,System.Security.AccessControl.DirectorySecurity)" />
+             method.  To persist new or changed ACL information to a directory, use the <see cref="M:System.IO.Directory.SetAccessControl(System.String,System.Security.AccessControl.DirectorySecurity)" />
 
             
 
-             or <see
-             cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+             or <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
 
             
 
              method.</para
           >
           <para
-            >To retrieve ACL information from a file, use the <see
-             cref="Overload:System.IO.File.GetAccessControl" />
+            >To retrieve ACL information from a file, use the <see cref="Overload:System.IO.File.GetAccessControl" />
 
             
 
-             or <see
-             cref="Overload:System.IO.FileInfo.GetAccessControl" />
+             or <see cref="Overload:System.IO.FileInfo.GetAccessControl" />
 
             
 
-             method.  To retrieve ACL information from a directory, use the <see
-             cref="Overload:System.IO.Directory.GetAccessControl" />
+             method.  To retrieve ACL information from a directory, use the <see cref="Overload:System.IO.Directory.GetAccessControl" />
 
             
 
-             or <see
-             cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
+             or <see cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
 
             
 
@@ -1727,12 +1623,15 @@
           <para>Sets the specified access control list (ACL) permission for the current file or directory. </para>
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+          A <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
           
 
@@ -1765,48 +1664,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.SetAuditRule(System.Security.AccessControl.FileSystemAuditRule)" />
+            >The <see cref="M:System.Security.AccessControl.FileSystemSecurity.SetAuditRule(System.Security.AccessControl.FileSystemAuditRule)" />
 
             
 
-             method adds the specified audit rule or overwrites any identical audit rules that match the <see
-             cref="T:System.Security.AccessControl.FileSystemRights" />
+             method adds the specified audit rule or overwrites any identical audit rules that match the <see cref="T:System.Security.AccessControl.FileSystemRights" />
 
             
 
-             value of the <paramref
-             name="rule" />
+             value of the <paramref name="rule" />
 
             
 
-             parameter.  For example, if the <paramref
-             name="rule" />
+             parameter.  For example, if the <paramref name="rule" />
 
             
 
-             parameter specifies a <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Read" />
+             parameter specifies a <see cref="F:System.Security.AccessControl.FileSystemRights.Read" />
 
             
 
-             value and the <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.SetAuditRule(System.Security.AccessControl.FileSystemAuditRule)" />
+             value and the <see cref="M:System.Security.AccessControl.FileSystemSecurity.SetAuditRule(System.Security.AccessControl.FileSystemAuditRule)" />
 
             
 
-             method finds an identical audit rule that specifies the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Read" />
+             method finds an identical audit rule that specifies the <see cref="F:System.Security.AccessControl.FileSystemRights.Read" />
 
             
 
-             value, the identical rule will be overwritten.  If the <see
-             cref="M:System.Security.AccessControl.FileSystemSecurity.SetAuditRule(System.Security.AccessControl.FileSystemAuditRule)" />
+             value, the identical rule will be overwritten.  If the <see cref="M:System.Security.AccessControl.FileSystemSecurity.SetAuditRule(System.Security.AccessControl.FileSystemAuditRule)" />
 
             
 
-             method finds an identical audit rule that specifies the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Write" />
+             method finds an identical audit rule that specifies the <see cref="F:System.Security.AccessControl.FileSystemRights.Write" />
 
             
 
@@ -1818,12 +1708,15 @@
           <para>Sets the specified audit rule for the current file or directory.</para>
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+          A <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
           
 

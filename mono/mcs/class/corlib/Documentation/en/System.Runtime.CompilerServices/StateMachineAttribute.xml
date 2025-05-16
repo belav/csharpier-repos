@@ -22,26 +22,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You should not apply the <unmanagedCodeEntityReference
-        >StateMachine</unmanagedCodeEntityReference>
+        >You should not apply the <unmanagedCodeEntityReference>StateMachine</unmanagedCodeEntityReference>
 
         
 
-         attribute to methods in your code. For methods that are state machine methods, the compiler will apply the <see
-         cref="T:System.Runtime.CompilerServices.AsyncStateMachineAttribute" />
+         attribute to methods in your code. For methods that are state machine methods, the compiler will apply the <see cref="T:System.Runtime.CompilerServices.AsyncStateMachineAttribute" />
 
         
 
-         or <see
-         cref="T:System.Runtime.CompilerServices.IteratorStateMachineAttribute" />
+         or <see cref="T:System.Runtime.CompilerServices.IteratorStateMachineAttribute" />
 
         
 
          in the emitted IL.</para
       >
       <para
-        >When checking whether a method is a state machine method, it is preferable to instead check for following attributes, which are derived from <unmanagedCodeEntityReference
-        >StateMachineAttribute</unmanagedCodeEntityReference>
+        >When checking whether a method is a state machine method, it is preferable to instead check for following attributes, which are derived from <unmanagedCodeEntityReference>StateMachineAttribute</unmanagedCodeEntityReference>
 
         
 
@@ -96,8 +92,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.CompilerServices.StateMachineAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.StateMachineAttribute" />
 
             
 
@@ -105,7 +100,11 @@
           >
         </summary>
         <param name="stateMachineType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

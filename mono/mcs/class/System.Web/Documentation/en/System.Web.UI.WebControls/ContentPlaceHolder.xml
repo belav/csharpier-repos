@@ -38,84 +38,69 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+        >A <see cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
 
         
 
-         control defines a relative region for content in a master page, and renders all text, markup, and server controls from a related <see
-         cref="T:System.Web.UI.WebControls.Content" />
+         control defines a relative region for content in a master page, and renders all text, markup, and server controls from a related <see cref="T:System.Web.UI.WebControls.Content" />
 
         
 
          control found in a content page.</para
       >
       <para
-        >A <see
-         cref="T:System.Web.UI.WebControls.Content" />
+        >A <see cref="T:System.Web.UI.WebControls.Content" />
 
         
 
-         control is associated with a <see
-         cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+         control is associated with a <see cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
 
         
 
-         using its <see
-         cref="P:System.Web.UI.WebControls.Content.ContentPlaceHolderID" />
+         using its <see cref="P:System.Web.UI.WebControls.Content.ContentPlaceHolderID" />
 
         
 
-         property. Set the <see
-         cref="P:System.Web.UI.WebControls.Content.ContentPlaceHolderID" />
+         property. Set the <see cref="P:System.Web.UI.WebControls.Content.ContentPlaceHolderID" />
 
         
 
-         property to the value of the <see
-         cref="P:System.Web.UI.Control.ID" />
+         property to the value of the <see cref="P:System.Web.UI.Control.ID" />
 
         
 
-         property of the related <see
-         cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+         property of the related <see cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
 
         
 
-         control in a master page. More than one <see
-         cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+         control in a master page. More than one <see cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
 
         
 
          can be declared in a master page. </para
       >
       <para
-        >Within a content page, only one <see
-         cref="T:System.Web.UI.WebControls.Content" />
+        >Within a content page, only one <see cref="T:System.Web.UI.WebControls.Content" />
 
         
 
-         control can supply the content for a <see
-         cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+         control can supply the content for a <see cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
 
         
 
-         in the master page. However, in each content page that uses a master page, you can have separate <see
-         cref="T:System.Web.UI.WebControls.Content" />
+         in the master page. However, in each content page that uses a master page, you can have separate <see cref="T:System.Web.UI.WebControls.Content" />
 
         
 
-         controls associated with the <see
-         cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+         controls associated with the <see cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
 
         
 
-        . For example, you can define the <see
-         cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+        . For example, you can define the <see cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
 
         
 
-         for the page title in a master page. For each content page that uses the master page, you can add a <see
-         cref="T:System.Web.UI.WebControls.Content" />
+         for the page title in a master page. For each content page that uses the master page, you can add a <see cref="T:System.Web.UI.WebControls.Content" />
 
         
 
@@ -125,16 +110,14 @@
         <para>For XHTML compliance, an empty title element is created if a title has not been defined or cannot be found.</para>
       </block>
       <para
-        >You can specify default content placed within the <see
-         cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+        >You can specify default content placed within the <see cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
 
         
 
          control tags, but this content is replaced by any content in an associated content page. </para
       >
       <para
-        >For more information about master pages and content pages, see <format
-         type="text/html">
+        >For more information about master pages and content pages, see <format type="text/html">
           <a href="0852291d-6f62-4e9f-a809-45cc81e78d6b">ASP.NET Master Pages</a>
         </format>
 
@@ -159,8 +142,7 @@
     OnPreRender="PreRender event handler"
     OnUnload="Unload event handler"
     runat="server"
-    Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -186,8 +168,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
 
             
 

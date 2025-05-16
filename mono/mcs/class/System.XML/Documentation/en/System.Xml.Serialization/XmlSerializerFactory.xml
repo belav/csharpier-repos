@@ -20,8 +20,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Creates typed versions of the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >Creates typed versions of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
@@ -48,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlSerializerFactory" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializerFactory" />
 
             
 
@@ -84,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a derivation of the <see
-             cref="T:System.Xml.Serialization.XmlSerializerFactory" />
+            >Returns a derivation of the <see cref="T:System.Xml.Serialization.XmlSerializerFactory" />
 
             
 
@@ -95,8 +92,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A derivation of the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >A derivation of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -104,12 +100,15 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -143,8 +142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a derivation of the <see
-             cref="T:System.Xml.Serialization.XmlSerializerFactory" />
+            >Returns a derivation of the <see cref="T:System.Xml.Serialization.XmlSerializerFactory" />
 
             
 
@@ -154,8 +152,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A derivation of the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >A derivation of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -163,12 +160,15 @@
           >
         </returns>
         <param name="xmlTypeMapping">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Serialization.XmlTypeMapping" />
+          An <see cref="T:System.Xml.Serialization.XmlTypeMapping" />
 
           
 
@@ -203,8 +203,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a derivation of the <see
-             cref="T:System.Xml.Serialization.XmlSerializerFactory" />
+            >Returns a derivation of the <see cref="T:System.Xml.Serialization.XmlSerializerFactory" />
 
             
 
@@ -214,8 +213,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A derivation of the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >A derivation of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -223,19 +221,26 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            to serialize.</param
         >
         <param name="defaultNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -269,13 +274,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling this overload is similar to calling the <see
-             cref="M:System.Xml.Serialization.XmlSerializer.#ctor(System.Type,System.Type[])" />
+            >Calling this overload is similar to calling the <see cref="M:System.Xml.Serialization.XmlSerializer.#ctor(System.Type,System.Type[])" />
 
             
 
-             to create an instance of the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             to create an instance of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -285,13 +288,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a derivation of the <see
-             cref="T:System.Xml.Serialization.XmlSerializerFactory" />
+            >Returns a derivation of the <see cref="T:System.Xml.Serialization.XmlSerializerFactory" />
 
             
 
-             class that is used to serialize the specified type. If a property or field returns an array, the <paramref
-             name="extraTypes" />
+             class that is used to serialize the specified type. If a property or field returns an array, the <paramref name="extraTypes" />
 
             
 
@@ -301,8 +302,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A derivation of the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >A derivation of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -310,24 +310,30 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            to serialize.</param
         >
         <param name="extraTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -361,13 +367,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling this overload is similar to calling the <see
-             cref="M:System.Xml.Serialization.XmlSerializer.#ctor(System.Type,System.Xml.Serialization.XmlAttributeOverrides)" />
+            >Calling this overload is similar to calling the <see cref="M:System.Xml.Serialization.XmlSerializer.#ctor(System.Type,System.Xml.Serialization.XmlAttributeOverrides)" />
 
             
 
-             to create an instance of the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             to create an instance of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -377,8 +381,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a derivation of the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Returns a derivation of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -388,8 +391,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A derivation of the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >A derivation of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -397,24 +399,30 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            to serialize.</param
         >
         <param name="overrides">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+          An <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
           
 
@@ -448,13 +456,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling this overload is similar to calling the <see
-             cref="M:System.Xml.Serialization.XmlSerializer.#ctor(System.Type,System.Xml.Serialization.XmlRootAttribute)" />
+            >Calling this overload is similar to calling the <see cref="M:System.Xml.Serialization.XmlSerializer.#ctor(System.Type,System.Xml.Serialization.XmlRootAttribute)" />
 
             
 
-             to create an instance of the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             to create an instance of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -464,8 +470,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a derivation of the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Returns a derivation of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -475,8 +480,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A derivation of the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >A derivation of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -484,24 +488,30 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            to serialize.</param
         >
         <param name="root">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Serialization.XmlRootAttribute" />
+          An <see cref="T:System.Xml.Serialization.XmlRootAttribute" />
 
           
 
@@ -538,13 +548,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling this overload is similar to calling the <see
-             cref="M:System.Xml.Serialization.XmlSerializer.#ctor(System.Type,System.Xml.Serialization.XmlAttributeOverrides,System.Type[],System.Xml.Serialization.XmlRootAttribute,System.String)" />
+            >Calling this overload is similar to calling the <see cref="M:System.Xml.Serialization.XmlSerializer.#ctor(System.Type,System.Xml.Serialization.XmlAttributeOverrides,System.Type[],System.Xml.Serialization.XmlRootAttribute,System.String)" />
 
             
 
-             to create an instance of the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             to create an instance of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -554,8 +562,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a derivation of the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Returns a derivation of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -565,8 +572,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A derivation of the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >A derivation of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -574,55 +580,71 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            to serialize.</param
         >
         <param name="overrides">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+          An <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
           
 
            that contains fields that override the default serialization behavior.</param
         >
         <param name="extraTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
            array of additional object types to serialize.</param
         >
         <param name="root">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Serialization.XmlRootAttribute" />
+          An <see cref="T:System.Xml.Serialization.XmlRootAttribute" />
 
           
 
            that represents the XML root element.</param
         >
         <param name="defaultNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -661,13 +683,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling this overload is similar to calling the <see
-             cref="M:System.Xml.Serialization.XmlSerializer.#ctor(System.Type,System.Xml.Serialization.XmlAttributeOverrides,System.Type[],System.Xml.Serialization.XmlRootAttribute,System.String,System.String,System.Security.Policy.Evidence)" />
+            >Calling this overload is similar to calling the <see cref="M:System.Xml.Serialization.XmlSerializer.#ctor(System.Type,System.Xml.Serialization.XmlAttributeOverrides,System.Type[],System.Xml.Serialization.XmlRootAttribute,System.String,System.String,System.Security.Policy.Evidence)" />
 
             
 
-             to create an instance of the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             to create an instance of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -677,8 +697,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a derivation of the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Returns a derivation of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -688,8 +707,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A derivation of the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >A derivation of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -697,79 +715,101 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
-           of the object that this <see
-           cref="T:System.Xml.Serialization.XmlSerializer" />
+           of the object that this <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
           
 
            can serialize.</param
         >
         <param name="overrides">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+          An <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
           
 
            that extends or overrides the behavior of the class specified in the type parameter.</param
         >
         <param name="extraTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
            array of additional object types to serialize.</param
         >
         <param name="root">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Serialization.XmlRootAttribute" />
+          An <see cref="T:System.Xml.Serialization.XmlRootAttribute" />
 
           
 
            that defines the XML root element properties.</param
         >
         <param name="defaultNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The default namespace of all XML elements in the XML document.</param
         >
         <param name="location">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The path that specifies the location of the types.</param
         >
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Security.Policy.Evidence" />
+          An instance of the <see cref="T:System.Security.Policy.Evidence" />
 
           
 

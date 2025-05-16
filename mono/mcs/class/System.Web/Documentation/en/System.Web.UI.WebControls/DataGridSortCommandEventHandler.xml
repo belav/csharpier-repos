@@ -25,46 +25,38 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When sorting is enabled by setting the <see
-         cref="P:System.Web.UI.WebControls.DataGrid.AllowSorting" />
+        >When sorting is enabled by setting the <see cref="P:System.Web.UI.WebControls.DataGrid.AllowSorting" />
 
         
 
-         property of the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         property of the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
-         control to true, <see
-         cref="T:System.Web.UI.WebControls.LinkButton" />
+         control to true, <see cref="T:System.Web.UI.WebControls.LinkButton" />
 
         
 
-         controls are rendered in the header of each column. These links allow you to sort the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         controls are rendered in the header of each column. These links allow you to sort the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
-         control by the selected column. The <see
-         cref="E:System.Web.UI.WebControls.DataGrid.SortCommand" />
+         control by the selected column. The <see cref="E:System.Web.UI.WebControls.DataGrid.SortCommand" />
 
         
 
-         event is raised when a <see
-         cref="T:System.Web.UI.WebControls.LinkButton" />
+         event is raised when a <see cref="T:System.Web.UI.WebControls.LinkButton" />
 
         
 
          control is clicked.</para
       >
       <para
-        >When you create a <see
-         cref="T:System.Web.UI.WebControls.DataGridSortCommandEventHandler" />
+        >When you create a <see cref="T:System.Web.UI.WebControls.DataGridSortCommandEventHandler" />
 
         
 
-         delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event handler delegates, see <format
-         type="text/html">
+         delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event handler delegates, see <format type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
 
@@ -76,13 +68,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that handles the <see
-         cref="E:System.Web.UI.WebControls.DataGrid.SortCommand" />
+        >Represents the method that handles the <see cref="E:System.Web.UI.WebControls.DataGrid.SortCommand" />
 
         
 
-         event of the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         event of the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 

@@ -17,26 +17,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.ProfilePropertySettings" />
+        >The <see cref="T:System.Web.Configuration.ProfilePropertySettings" />
 
         
 
          class provides a way to programmatically create, access, and modify the definition of an individual property added to the properties subsection of the profile section of a configuration file. </para
       >
       <para
-        >The profile section of the configuration file specifies a schema for user profiles. At run time, the ASP.NET compilation system uses the information specified in the profile section to generate a class called ProfileCommon, which is derived from <see
-         cref="T:System.Web.Profile.ProfileBase" />
+        >The profile section of the configuration file specifies a schema for user profiles. At run time, the ASP.NET compilation system uses the information specified in the profile section to generate a class called ProfileCommon, which is derived from <see cref="T:System.Web.Profile.ProfileBase" />
 
         
 
-        . The ProfileCommon class definition is based on the properties defined in the properties subsection of the profile section of the configuration file. An instance of this class is created for each user profile, and you can access the individual profile values in your code through the <see
-         cref="P:System.Web.HttpContext.Profile" />
+        . The ProfileCommon class definition is based on the properties defined in the properties subsection of the profile section of the configuration file. An instance of this class is created for each user profile, and you can access the individual profile values in your code through the <see cref="P:System.Web.HttpContext.Profile" />
 
         
 
-         property. For more information about profile properties, see <format
-         type="text/html">
+         property. For more information about profile properties, see <format type="text/html">
           <a href="89439440-92ea-48c3-a4bd-dea40307899d"
             >Understanding ASP.NET Profile Properties</a
           >
@@ -44,8 +40,7 @@
 
         
 
-        . For more information about the profile features added to vstecasplong, see <format
-         type="text/html">
+        . For more information about the profile features added to vstecasplong, see <format type="text/html">
           <a href="89439440-92ea-48c3-a4bd-dea40307899d">ASP.NET Profile Properties Overview</a>
         </format>
 
@@ -57,8 +52,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.ProfilePropertySettings" />
+        >The <see cref="T:System.Web.Configuration.ProfilePropertySettings" />
 
         
 
@@ -150,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.ProfilePropertySettings" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.ProfilePropertySettings" />
 
             
 
@@ -159,12 +152,15 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A unique name for the <see
-           cref="T:System.Web.Configuration.ProfilePropertySettings" />
+          A unique name for the <see cref="T:System.Web.Configuration.ProfilePropertySettings" />
 
           
 
@@ -196,24 +192,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >At run time, the ASP.NET compilation system uses the information specified in the profile section of the configuration file to generate a class called ProfileCommon, which is derived from <see
-             cref="T:System.Web.Profile.ProfileBase" />
+            >At run time, the ASP.NET compilation system uses the information specified in the profile section of the configuration file to generate a class called ProfileCommon, which is derived from <see cref="T:System.Web.Profile.ProfileBase" />
 
             
 
             . The class allows you to access and modify the values for individual user profiles. </para
           >
           <para
-            >The ProfileCommon class definition is based on the properties defined in the properties subsection of the profile section of the configuration file. The parameter values that you specify when you create an instance of the <see
-             cref="T:System.Web.Configuration.ProfilePropertySettings" />
+            >The ProfileCommon class definition is based on the properties defined in the properties subsection of the profile section of the configuration file. The parameter values that you specify when you create an instance of the <see cref="T:System.Web.Configuration.ProfilePropertySettings" />
 
             
 
              class will be used to define an associated property in the ProfileCommon class. </para
           >
           <para
-            >For more information about profile properties, see <format
-             type="text/html">
+            >For more information about profile properties, see <format type="text/html">
               <a href="89439440-92ea-48c3-a4bd-dea40307899d"
                 >Understanding ASP.NET Profile Properties</a
               >
@@ -227,8 +220,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.ProfilePropertySettings" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.ProfilePropertySettings" />
 
             
 
@@ -236,71 +228,100 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A unique name for the <see
-           cref="T:System.Web.Configuration.ProfilePropertySettings" />
+          A unique name for the <see cref="T:System.Web.Configuration.ProfilePropertySettings" />
 
           
 
            object.</param
         >
         <param name="readOnly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to indicate that the associated property in the dynamically generated ProfileCommon class should be read-only; otherwise, false.</param
         >
         <param name="serializeAs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.Configuration.SerializationMode" />
+          One of the <see cref="T:System.Web.Configuration.SerializationMode" />
 
           
 
            values.</param
         >
         <param name="providerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of a provider from the <see
-           cref="P:System.Web.Configuration.ProfileSection.Providers" />
+          The name of a provider from the <see cref="P:System.Web.Configuration.ProfileSection.Providers" />
 
           
 
            property, or an empty string ("").</param
         >
         <param name="defaultValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string containing the default value used for the named property in the generated page Profile class.</param
         >
         <param name="profileType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A valid type reference or an empty string.</param
         >
         <param name="allowAnonymous">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to indicate associated property in the dynamically generated ProfileCommon class should support anonymous users; otherwise, false, to indicate that anonymous users cannot change the named property.</param
         >
         <param name="customProviderData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -328,24 +349,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >At run time, the ASP.NET compilation system uses the information specified in the profile section of the configuration file to generate a class called ProfileCommon, which is derived from <see
-             cref="T:System.Web.Profile.ProfileBase" />
+            >At run time, the ASP.NET compilation system uses the information specified in the profile section of the configuration file to generate a class called ProfileCommon, which is derived from <see cref="T:System.Web.Profile.ProfileBase" />
 
             
 
             . The class allows you to access and modify the values for individual user profiles. </para
           >
           <para
-            >The ProfileCommon class definition is based on the properties defined in the properties subsection of the profile section of the configuration file. The property values that you specify for an instance of the <see
-             cref="T:System.Web.Configuration.ProfilePropertySettings" />
+            >The ProfileCommon class definition is based on the properties defined in the properties subsection of the profile section of the configuration file. The property values that you specify for an instance of the <see cref="T:System.Web.Configuration.ProfilePropertySettings" />
 
             
 
              class will be used to define an associated property in the ProfileCommon class. </para
           >
           <para
-            >An exception is thrown if a property in the ProfileCommon class is changed by an anonymous user when the <see
-             cref="P:System.Web.Configuration.ProfilePropertySettings.AllowAnonymous" />
+            >An exception is thrown if a property in the ProfileCommon class is changed by an anonymous user when the <see cref="P:System.Web.Configuration.ProfilePropertySettings.AllowAnonymous" />
 
             
 
@@ -402,24 +420,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >At run time, the ASP.NET compilation system uses the information specified in the profile section of the configuration file to generate a class called ProfileCommon, which is derived from <see
-             cref="T:System.Web.Profile.ProfileBase" />
+            >At run time, the ASP.NET compilation system uses the information specified in the profile section of the configuration file to generate a class called ProfileCommon, which is derived from <see cref="T:System.Web.Profile.ProfileBase" />
 
             
 
             . The class allows you to access and modify the values for individual user profiles. </para
           >
           <para
-            >The ProfileCommon class definition is based on the properties defined in the properties subsection of the profile section of the configuration file. The property values that you specify for an instance of the <see
-             cref="T:System.Web.Configuration.ProfilePropertySettings" />
+            >The ProfileCommon class definition is based on the properties defined in the properties subsection of the profile section of the configuration file. The property values that you specify for an instance of the <see cref="T:System.Web.Configuration.ProfilePropertySettings" />
 
             
 
              class will be used to define an associated property in the ProfileCommon class. </para
           >
           <para
-            >The default value is used as the initial value for the associated ProfileCommon class property when an individual user profile does not contain a value for the property. The <see
-             cref="P:System.Web.Configuration.ProfilePropertySettings.DefaultValue" />
+            >The default value is used as the initial value for the associated ProfileCommon class property when an individual user profile does not contain a value for the property. The <see cref="P:System.Web.Configuration.ProfilePropertySettings.DefaultValue" />
 
             
 
@@ -452,16 +467,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >At run time, the ASP.NET compilation system uses the information specified in the profile section of the configuration file to generate a class called ProfileCommon, which is derived from <see
-             cref="T:System.Web.Profile.ProfileBase" />
+            >At run time, the ASP.NET compilation system uses the information specified in the profile section of the configuration file to generate a class called ProfileCommon, which is derived from <see cref="T:System.Web.Profile.ProfileBase" />
 
             
 
             . The class allows you to access and modify the values for individual user profiles. </para
           >
           <para
-            >The ProfileCommon class definition is based on the properties defined in the properties subsection of the profile section of the configuration file. The property values that you specify for an instance of the <see
-             cref="T:System.Web.Configuration.ProfilePropertySettings" />
+            >The ProfileCommon class definition is based on the properties defined in the properties subsection of the profile section of the configuration file. The property values that you specify for an instance of the <see cref="T:System.Web.Configuration.ProfilePropertySettings" />
 
             
 
@@ -471,8 +484,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the <see
-             cref="T:System.Web.Configuration.ProfilePropertySettings" />
+            >Gets or sets the name of the <see cref="T:System.Web.Configuration.ProfilePropertySettings" />
 
             
 
@@ -521,8 +533,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Profile providers are data sources in which user-profile values are stored. You can specify profile providers in the providers subsection of the profile section of a configuration file.</para>
           <para
-            >If the value of this property is an empty string, the default provider specified in the <see
-             cref="P:System.Web.Configuration.ProfileSection.DefaultProvider" />
+            >If the value of this property is an empty string, the default provider specified in the <see cref="P:System.Web.Configuration.ProfileSection.DefaultProvider" />
 
             
 
@@ -555,16 +566,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >At run time, the ASP.NET compilation system uses the information specified in the profile section of the configuration file to generate a class called ProfileCommon, which is derived from <see
-             cref="T:System.Web.Profile.ProfileBase" />
+            >At run time, the ASP.NET compilation system uses the information specified in the profile section of the configuration file to generate a class called ProfileCommon, which is derived from <see cref="T:System.Web.Profile.ProfileBase" />
 
             
 
             . The class allows you to access and modify the values for individual user profiles. </para
           >
           <para
-            >The ProfileCommon class definition is based on the properties defined in the properties subsection of the profile section of the configuration file. The property values that you specify for an instance of the <see
-             cref="T:System.Web.Configuration.ProfilePropertySettings" />
+            >The ProfileCommon class definition is based on the properties defined in the properties subsection of the profile section of the configuration file. The property values that you specify for an instance of the <see cref="T:System.Web.Configuration.ProfilePropertySettings" />
 
             
 
@@ -600,8 +609,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about profile properties, see <format
-             type="text/html">
+            >For more information about profile properties, see <format type="text/html">
               <a href="89439440-92ea-48c3-a4bd-dea40307899d"
                 >Understanding ASP.NET Profile Properties</a
               >

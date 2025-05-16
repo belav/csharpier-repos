@@ -41,23 +41,19 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="T:System.Web.UI.ChtmlTextWriter" />
+        >The <see cref="T:System.Web.UI.ChtmlTextWriter" />
 
         
 
-         class derives from the <see
-         cref="T:System.Web.UI.Html32TextWriter" />
+         class derives from the <see cref="T:System.Web.UI.Html32TextWriter" />
 
         
 
-         class and much of its functionality is provided by the <see
-         cref="T:System.Web.UI.Html32TextWriter" />
+         class and much of its functionality is provided by the <see cref="T:System.Web.UI.Html32TextWriter" />
 
         
 
-         and the base class for all markup text writers, which is the <see
-         cref="T:System.Web.UI.HtmlTextWriter" />
+         and the base class for all markup text writers, which is the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
         
 
@@ -67,8 +63,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Writes a series of cHTML-specific characters and text to the output stream of an ASP.NET server control. The <see
-         cref="T:System.Web.UI.ChtmlTextWriter" />
+        >Writes a series of cHTML-specific characters and text to the output stream of an ASP.NET server control. The <see cref="T:System.Web.UI.ChtmlTextWriter" />
 
         
 
@@ -91,26 +86,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.ChtmlTextWriter" />
+            >The <see cref="T:System.Web.UI.ChtmlTextWriter" />
 
             
 
-             class has two constructors, which is standard for all classes that derive directly or indirectly from the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             class has two constructors, which is standard for all classes that derive directly or indirectly from the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
              class.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.ChtmlTextWriter.#ctor(System.IO.TextWriter)" />
+            >The <see cref="M:System.Web.UI.ChtmlTextWriter.#ctor(System.IO.TextWriter)" />
 
             
 
-             constructor, which takes an instance of the <see
-             cref="T:System.IO.TextWriter" />
+             constructor, which takes an instance of the <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -119,8 +110,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="T:System.IO.TextWriter" />
+                >The <see cref="T:System.IO.TextWriter" />
 
                 
 
@@ -129,8 +119,7 @@
             </item>
             <item>
               <para
-                >The string value that is specified in the <see
-                 cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" />
+                >The string value that is specified in the <see cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" />
 
                 
 
@@ -142,13 +131,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.ChtmlTextWriter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.ChtmlTextWriter" />
 
             
 
-             class that uses the <see
-             cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" />
+             class that uses the <see cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" />
 
             
 
@@ -156,12 +143,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.TextWriter" />
+          The <see cref="T:System.IO.TextWriter" />
 
           
 
@@ -187,23 +177,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.ChtmlTextWriter.#ctor(System.IO.TextWriter,System.String)" />
+            >The <see cref="M:System.Web.UI.ChtmlTextWriter.#ctor(System.IO.TextWriter,System.String)" />
 
             
 
-             constructor, which takes both an instance of the <see
-             cref="T:System.IO.TextWriter" />
+             constructor, which takes both an instance of the <see cref="T:System.IO.TextWriter" />
 
             
 
-             class and a string as parameters, calls the <see
-             cref="T:System.Web.UI.Html32TextWriter" />
+             class and a string as parameters, calls the <see cref="T:System.Web.UI.Html32TextWriter" />
 
             
 
-             constructor that takes the same parameters when it creates an instance of the <see
-             cref="T:System.Web.UI.ChtmlTextWriter" />
+             constructor that takes the same parameters when it creates an instance of the <see cref="T:System.Web.UI.ChtmlTextWriter" />
 
             
 
@@ -213,8 +199,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.ChtmlTextWriter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.ChtmlTextWriter" />
 
             
 
@@ -222,24 +207,30 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.TextWriter" />
+          The <see cref="T:System.IO.TextWriter" />
 
           
 
            that renders the markup content. </param
         >
         <param name="tabString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of spaces defined in the <see
-           cref="P:System.Web.UI.HtmlTextWriter.Indent" />
+          The number of spaces defined in the <see cref="P:System.Web.UI.HtmlTextWriter.Indent" />
 
           
 
@@ -268,23 +259,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.ChtmlTextWriter.AddRecognizedAttribute(System.String,System.String)" />
+            >The <see cref="M:System.Web.UI.ChtmlTextWriter.AddRecognizedAttribute(System.String,System.String)" />
 
             
 
-             method adds an attribute to a cHTML element. The recognized attribute is stored in the recognized attributes <see
-             cref="T:System.Collections.Hashtable" />
+             method adds an attribute to a cHTML element. The recognized attribute is stored in the recognized attributes <see cref="T:System.Collections.Hashtable" />
 
             
 
-             collection of the <see
-             cref="T:System.Web.UI.ChtmlTextWriter" />
+             collection of the <see cref="T:System.Web.UI.ChtmlTextWriter" />
 
             
 
-             object that is referenced by the <see
-             cref="P:System.Web.UI.ChtmlTextWriter.RecognizedAttributes" />
+             object that is referenced by the <see cref="P:System.Web.UI.ChtmlTextWriter.RecognizedAttributes" />
 
             
 
@@ -294,8 +281,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an attribute to a cHTML element of the <see
-             cref="T:System.Web.UI.ChtmlTextWriter" />
+            >Adds an attribute to a cHTML element of the <see cref="T:System.Web.UI.ChtmlTextWriter" />
 
             
 
@@ -303,19 +289,26 @@
           >
         </summary>
         <param name="elementName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The cHTML element to add the attribute to.</param
         >
         <param name="attributeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The attribute to add to <paramref
-           name="elementName" />
+          The attribute to add to <paramref name="elementName" />
 
           
 
@@ -341,8 +334,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following list shows the globally suppressed attributes that are set when a new instance of the <see
-             cref="T:System.Web.UI.ChtmlTextWriter" />
+            >The following list shows the globally suppressed attributes that are set when a new instance of the <see cref="T:System.Web.UI.ChtmlTextWriter" />
 
             
 
@@ -394,8 +386,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Collections.Hashtable" />
+            >Gets a <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -426,28 +417,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see
-             cref="M:System.Web.UI.ChtmlTextWriter.OnAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterAttribute)" />
+            >By default, the <see cref="M:System.Web.UI.ChtmlTextWriter.OnAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterAttribute)" />
 
             
 
-             method prevents globally suppressed attributes that are listed in the <see
-             cref="P:System.Web.UI.ChtmlTextWriter.GlobalSuppressedAttributes" />
+             method prevents globally suppressed attributes that are listed in the <see cref="P:System.Web.UI.ChtmlTextWriter.GlobalSuppressedAttributes" />
 
             
 
-             property and element-specific, suppressed attributes that are listed in the <see
-             cref="P:System.Web.UI.ChtmlTextWriter.SuppressedAttributes" />
+             property and element-specific, suppressed attributes that are listed in the <see cref="P:System.Web.UI.ChtmlTextWriter.SuppressedAttributes" />
 
             
 
-             property from being written to the output stream. You can override the behavior of the <see
-             cref="M:System.Web.UI.ChtmlTextWriter.OnAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterAttribute)" />
+             property from being written to the output stream. You can override the behavior of the <see cref="M:System.Web.UI.ChtmlTextWriter.OnAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterAttribute)" />
 
             
 
-             method in classes that are derived from the <see
-             cref="T:System.Web.UI.ChtmlTextWriter" />
+             method in classes that are derived from the <see cref="T:System.Web.UI.ChtmlTextWriter" />
 
             
 
@@ -457,13 +443,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified cHTML attribute and its value are rendered to the requesting page. You can override the <see
-             cref="M:System.Web.UI.ChtmlTextWriter.OnAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterAttribute)" />
+            >Determines whether the specified cHTML attribute and its value are rendered to the requesting page. You can override the <see cref="M:System.Web.UI.ChtmlTextWriter.OnAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterAttribute)" />
 
             
 
-             method in classes that derive from the <see
-             cref="T:System.Web.UI.ChtmlTextWriter" />
+             method in classes that derive from the <see cref="T:System.Web.UI.ChtmlTextWriter" />
 
             
 
@@ -473,8 +457,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true to write the attribute and its value to the <see
-             cref="T:System.Web.UI.ChtmlTextWriter" />
+            >true to write the attribute and its value to the <see cref="T:System.Web.UI.ChtmlTextWriter" />
 
             
 
@@ -482,36 +465,45 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The cHTML attribute to render. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value assigned to <paramref
-           name="name" />
+          The value assigned to <paramref name="name" />
 
           
 
           . </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+          The <see cref="T:System.Web.UI.HtmlTextWriterAttribute" />
 
           
 
-           associated with <paramref
-           name="name" />
+           associated with <paramref name="name" />
 
           
 
@@ -542,18 +534,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.ChtmlTextWriter.OnStyleAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterStyle)" />
+            >The <see cref="M:System.Web.UI.ChtmlTextWriter.OnStyleAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterStyle)" />
 
             
 
-             method returns false when <paramref
-             name="key" />
+             method returns false when <paramref name="key" />
 
             
 
-             is equal to the <see
-             cref="F:System.Web.UI.HtmlTextWriterStyle.TextDecoration" />
+             is equal to the <see cref="F:System.Web.UI.HtmlTextWriterStyle.TextDecoration" />
 
             
 
@@ -569,29 +558,34 @@
           <para>true if the style can be rendered; otherwise, false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string containing the value that is assigned to <paramref
-           name="name" />
+          A string containing the value that is assigned to <paramref name="name" />
 
           
 
           . </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriterStyle" />
+          The <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
           
 
-           associated with <paramref
-           name="name" />
+           associated with <paramref name="name" />
 
           
 
@@ -621,8 +615,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the cHTML element is a span element, the <see
-             cref="M:System.Web.UI.ChtmlTextWriter.OnTagRender(System.String,System.Web.UI.HtmlTextWriterTag)" />
+            >If the cHTML element is a span element, the <see cref="M:System.Web.UI.ChtmlTextWriter.OnTagRender(System.String,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
@@ -638,7 +631,11 @@
           <para>true if the specified cHTML markup element can be rendered; otherwise, false.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -664,8 +661,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.ChtmlTextWriter.AddRecognizedAttribute(System.String,System.String)" />
+            >Use the <see cref="M:System.Web.UI.ChtmlTextWriter.AddRecognizedAttribute(System.String,System.String)" />
 
             
 
@@ -675,8 +671,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Collections.Hashtable" />
+            >Gets a <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -706,23 +701,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.ChtmlTextWriter.RemoveRecognizedAttribute(System.String,System.String)" />
+            >The <see cref="M:System.Web.UI.ChtmlTextWriter.RemoveRecognizedAttribute(System.String,System.String)" />
 
             
 
-             method removes an attribute from a cHTML element. The recognized attribute is removed from the recognized attributes <see
-             cref="T:System.Collections.Hashtable" />
+             method removes an attribute from a cHTML element. The recognized attribute is removed from the recognized attributes <see cref="T:System.Collections.Hashtable" />
 
             
 
-             collection of the <see
-             cref="T:System.Web.UI.ChtmlTextWriter" />
+             collection of the <see cref="T:System.Web.UI.ChtmlTextWriter" />
 
             
 
-             object that is referenced by the <see
-             cref="P:System.Web.UI.ChtmlTextWriter.RecognizedAttributes" />
+             object that is referenced by the <see cref="P:System.Web.UI.ChtmlTextWriter.RecognizedAttributes" />
 
             
 
@@ -732,8 +723,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes an attribute of a cHTML element of the <see
-             cref="T:System.Web.UI.ChtmlTextWriter" />
+            >Removes an attribute of a cHTML element of the <see cref="T:System.Web.UI.ChtmlTextWriter" />
 
             
 
@@ -741,19 +731,26 @@
           >
         </summary>
         <param name="elementName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The cHTML element to remove an attribute from.</param
         >
         <param name="attributeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The attribute to remove from <paramref
-           name="elementName" />
+          The attribute to remove from <paramref name="elementName" />
 
           
 
@@ -779,16 +776,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.ChtmlTextWriter.RemoveRecognizedAttribute(System.String,System.String)" />
+            >Use the <see cref="M:System.Web.UI.ChtmlTextWriter.RemoveRecognizedAttribute(System.String,System.String)" />
 
             
 
              method to add attributes to the suppressed attributes collection.</para
           >
           <para
-            >The following list shows the default suppressed attributes that are set for a div element when a new instance of the <see
-             cref="T:System.Web.UI.ChtmlTextWriter" />
+            >The following list shows the default suppressed attributes that are set for a div element when a new instance of the <see cref="T:System.Web.UI.ChtmlTextWriter" />
 
             
 
@@ -821,8 +816,7 @@
             </item>
           </list>
           <para
-            >The following list shows the default suppressed attributes that are set for a span element when a new instance of the <see
-             cref="T:System.Web.UI.ChtmlTextWriter" />
+            >The following list shows the default suppressed attributes that are set for a span element when a new instance of the <see cref="T:System.Web.UI.ChtmlTextWriter" />
 
             
 
@@ -850,8 +844,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Collections.Hashtable" />
+            >Gets a <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -875,8 +868,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.ChtmlTextWriter.WriteBreak" />
+            >Use the <see cref="M:System.Web.UI.ChtmlTextWriter.WriteBreak" />
 
             
 
@@ -906,29 +898,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the text parameter passed into the <see
-             cref="M:System.Web.UI.ChtmlTextWriter.WriteEncodedText(System.String)" />
+            >If the text parameter passed into the <see cref="M:System.Web.UI.ChtmlTextWriter.WriteEncodedText(System.String)" />
 
             
 
              method is null or has a length of zero, then nothing is written.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Web.UI.ChtmlTextWriter.WriteEncodedText(System.String)" />
+            >Use the <see cref="M:System.Web.UI.ChtmlTextWriter.WriteEncodedText(System.String)" />
 
             
 
              method when a string contains angle brackets (&lt; or &gt;) or an ampersand (&amp;) and you want to ensure that they are rendered correctly on the requesting device. </para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.ChtmlTextWriter.WriteEncodedText(System.String)" />
+            >The <see cref="M:System.Web.UI.ChtmlTextWriter.WriteEncodedText(System.String)" />
 
             
 
-             method uses the base class's <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteEncodedText(System.String)" />
+             method uses the base class's <see cref="M:System.Web.UI.HtmlTextWriter.WriteEncodedText(System.String)" />
 
             
 
@@ -940,7 +928,11 @@
           <para>Encodes the specified text for the requesting device, and then writes it to the output stream. </para>
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

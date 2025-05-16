@@ -33,46 +33,38 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specify that the <see
-         cref="T:System.Net.BindIPEndPoint" />
+        >Specify that the <see cref="T:System.Net.BindIPEndPoint" />
 
         
 
-         delegate is used by a <see
-         cref="T:System.Net.ServicePoint" />
+         delegate is used by a <see cref="T:System.Net.ServicePoint" />
 
         
 
-         by setting the <see
-         cref="P:System.Net.ServicePoint.BindIPEndPointDelegate" />
+         by setting the <see cref="P:System.Net.ServicePoint.BindIPEndPointDelegate" />
 
         
 
-         property with the delegate as an argument. This delegate should specify a local IP address and port number in the returned <see
-         cref="T:System.Net.IPEndPoint" />
+         property with the delegate as an argument. This delegate should specify a local IP address and port number in the returned <see cref="T:System.Net.IPEndPoint" />
 
         
 
         .</para
       >
       <para
-        >If the .NET Framework cannot bind the returned <see
-         cref="T:System.Net.IPEndPoint" />
+        >If the .NET Framework cannot bind the returned <see cref="T:System.Net.IPEndPoint" />
 
         
 
-         to the <see
-         cref="T:System.Net.ServicePoint" />
+         to the <see cref="T:System.Net.ServicePoint" />
 
         
 
-         after <see
-         cref="F:System.Int32.MaxValue" />
+         after <see cref="F:System.Int32.MaxValue" />
 
         
 
-         attempts, an <see
-         cref="T:System.OverflowException" />
+         attempts, an <see cref="T:System.OverflowException" />
 
         
 
@@ -83,8 +75,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that specifies a local Internet Protocol address and port number for a <see
-         cref="T:System.Net.ServicePoint" />
+        >Represents the method that specifies a local Internet Protocol address and port number for a <see cref="T:System.Net.ServicePoint" />
 
         
 

@@ -18,8 +18,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by the <see
-         cref="T:System.Windows.Forms.Form" />
+        >This enumeration is used by the <see cref="T:System.Windows.Forms.Form" />
 
         
 
@@ -93,13 +92,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A tool window border that is not resizable. A tool window does not appear in the taskbar or in the window that appears when the user presses ALT+TAB. Although forms that specify <see
-             cref="F:System.Windows.Forms.FormBorderStyle.FixedToolWindow" />
+            >A tool window border that is not resizable. A tool window does not appear in the taskbar or in the window that appears when the user presses ALT+TAB. Although forms that specify <see cref="F:System.Windows.Forms.FormBorderStyle.FixedToolWindow" />
 
             
 
-             typically are not shown in the taskbar, you must also ensure that the <see
-             cref="P:System.Windows.Forms.Form.ShowInTaskbar" />
+             typically are not shown in the taskbar, you must also ensure that the <see cref="P:System.Windows.Forms.Form.ShowInTaskbar" />
 
             
 

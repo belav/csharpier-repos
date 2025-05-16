@@ -30,36 +30,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.Sockets.SocketOptionLevel" />
+        >The <see cref="T:System.Net.Sockets.SocketOptionLevel" />
 
         
 
-         enumeration defines the socket option levels that can be passed to the <see
-         cref="M:System.Net.Sockets.Socket.SetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32)" />
+         enumeration defines the socket option levels that can be passed to the <see cref="M:System.Net.Sockets.Socket.SetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32)" />
 
         
 
-         and <see
-         cref="M:System.Net.Sockets.Socket.GetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName)" />
+         and <see cref="M:System.Net.Sockets.Socket.GetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName)" />
 
         
 
-         methods. <see
-         cref="T:System.Net.Sockets.SocketOptionName" />
+         methods. <see cref="T:System.Net.Sockets.SocketOptionName" />
 
         
 
-         enumerated values are grouped by <see
-         cref="T:System.Net.Sockets.SocketOptionLevel" />
+         enumerated values are grouped by <see cref="T:System.Net.Sockets.SocketOptionLevel" />
 
         
 
         . </para
       >
       <para
-        >Note   To use <see
-         cref="F:System.Net.Sockets.SocketOptionLevel.IPv6" />
+        >Note   To use <see cref="F:System.Net.Sockets.SocketOptionLevel.IPv6" />
 
         
 
@@ -69,13 +63,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines socket option levels for the <see
-         cref="M:System.Net.Sockets.Socket.SetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32)" />
+        >Defines socket option levels for the <see cref="M:System.Net.Sockets.Socket.SetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32)" />
 
         
 
-         and <see
-         cref="M:System.Net.Sockets.Socket.GetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName)" />
+         and <see cref="M:System.Net.Sockets.Socket.GetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName)" />
 
         
 

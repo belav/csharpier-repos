@@ -19,31 +19,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Like the <see
-         cref="T:System.ComponentModel.Design.DesignerActionTextItem" />
+        >Like the <see cref="T:System.ComponentModel.Design.DesignerActionTextItem" />
 
         
 
-         base class, <see
-         cref="T:System.ComponentModel.Design.DesignerActionHeaderItem" />
+         base class, <see cref="T:System.ComponentModel.Design.DesignerActionHeaderItem" />
 
         
 
-         represents individual static text items in a smart tag panel. However, <see
-         cref="T:System.ComponentModel.Design.DesignerActionHeaderItem" />
+         represents individual static text items in a smart tag panel. However, <see cref="T:System.ComponentModel.Design.DesignerActionHeaderItem" />
 
         
 
          entries are displayed using bold text. Typically, a header item is used to create a heading for a group of items in a panel. Clicking on a header item causes no action.</para
       >
       <para
-        >Individual panel items are associated together to form a panel by calling the <see
-         cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+        >Individual panel items are associated together to form a panel by calling the <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
 
         
 
-         method of the <see
-         cref="T:System.ComponentModel.Design.DesignerActionList" />
+         method of the <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
         
 
@@ -72,23 +67,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets both the <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.DisplayName" />
+            >This constructor sets both the <see cref="P:System.ComponentModel.Design.DesignerActionItem.DisplayName" />
 
             
 
-             and the <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.Category" />
+             and the <see cref="P:System.ComponentModel.Design.DesignerActionItem.Category" />
 
             
 
-             properties to the value of the <paramref
-             name="displayName" />
+             properties to the value of the <paramref name="displayName" />
 
             
 
-             parameter and sets the <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
+             parameter and sets the <see cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
 
             
 
@@ -98,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignerActionHeaderItem" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerActionHeaderItem" />
 
             
 
@@ -107,7 +97,11 @@
           >
         </summary>
         <param name="displayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -132,13 +126,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
+            >This constructor sets the <see cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
 
             
 
-             property to null. The <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.Category" />
+             property to null. The <see cref="P:System.ComponentModel.Design.DesignerActionItem.Category" />
 
             
 
@@ -148,8 +140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignerActionHeaderItem" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerActionHeaderItem" />
 
             
 
@@ -157,19 +148,26 @@
           >
         </summary>
         <param name="displayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text to be displayed in the header.</param
         >
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The case-sensitive <see
-           cref="T:System.String" />
+          The case-sensitive <see cref="T:System.String" />
 
           
 

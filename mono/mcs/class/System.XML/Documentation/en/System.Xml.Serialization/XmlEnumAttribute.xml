@@ -30,18 +30,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.XmlEnumAttribute" />
+        >The <see cref="T:System.Xml.Serialization.XmlEnumAttribute" />
 
         
 
-         belongs to a family of attributes that controls how the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         belongs to a family of attributes that controls how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         serializes or deserializes an object. For a complete list of similar attributes, see <format
-         type="text/html">
+         serializes or deserializes an object. For a complete list of similar attributes, see <format type="text/html">
           <a href="414b820f-a696-4206-b576-2711d85490c7"
             >Attributes That Control XML Serialization</a
           >
@@ -52,56 +49,46 @@
         .</para
       >
       <para
-        >Use the <see
-         cref="T:System.Xml.Serialization.XmlEnumAttribute" />
+        >Use the <see cref="T:System.Xml.Serialization.XmlEnumAttribute" />
 
         
 
-         to change the enumeration that the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         to change the enumeration that the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         generates or recognizes (when it serializes or deserializes a class, respectively). For example, if an enumeration contains a member named One, but you prefer that the XML output be named Single, apply the <see
-         cref="T:System.Xml.Serialization.XmlEnumAttribute" />
+         generates or recognizes (when it serializes or deserializes a class, respectively). For example, if an enumeration contains a member named One, but you prefer that the XML output be named Single, apply the <see cref="T:System.Xml.Serialization.XmlEnumAttribute" />
 
         
 
-         to the enumeration member and set the <see
-         cref="P:System.Xml.Serialization.XmlEnumAttribute.Name" />
+         to the enumeration member and set the <see cref="P:System.Xml.Serialization.XmlEnumAttribute.Name" />
 
         
 
          property to "Single".</para
       >
       <para
-        >You can override the <see
-         cref="P:System.Xml.Serialization.XmlEnumAttribute.Name" />
+        >You can override the <see cref="P:System.Xml.Serialization.XmlEnumAttribute.Name" />
 
         
 
-         property value of an <see
-         cref="T:System.Xml.Serialization.XmlEnumAttribute" />
+         property value of an <see cref="T:System.Xml.Serialization.XmlEnumAttribute" />
 
         
 
-         by creating an instance of the <see
-         cref="T:System.Xml.Serialization.XmlEnumAttribute" />
+         by creating an instance of the <see cref="T:System.Xml.Serialization.XmlEnumAttribute" />
 
         
 
-         class and assigning it to the <see
-         cref="P:System.Xml.Serialization.XmlAttributes.XmlEnum" />
+         class and assigning it to the <see cref="P:System.Xml.Serialization.XmlAttributes.XmlEnum" />
 
         
 
-         property of an <see
-         cref="T:System.Xml.Serialization.XmlAttributes" />
+         property of an <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
         
 
-         object. For details, see the <see
-         cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+         object. For details, see the <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
         
 
@@ -109,8 +96,7 @@
       >
       <block subset="none" type="note">
         <para
-          >You can use the word XmlEnum in your code instead of the longer <see
-           cref="T:System.Xml.Serialization.XmlEnumAttribute" />
+          >You can use the word XmlEnum in your code instead of the longer <see cref="T:System.Xml.Serialization.XmlEnumAttribute" />
 
           
 
@@ -121,8 +107,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Controls how the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >Controls how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
@@ -149,8 +134,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="M:System.Xml.Serialization.XmlEnumAttribute.#ctor" />
+            >You can use the <see cref="M:System.Xml.Serialization.XmlEnumAttribute.#ctor" />
 
             
 
@@ -158,8 +142,7 @@
           >
           <block subset="none" type="note">
             <para
-              >You can use the word XmlEnum in your code instead of the longer <see
-               cref="T:System.Xml.Serialization.XmlEnumAttribute" />
+              >You can use the word XmlEnum in your code instead of the longer <see cref="T:System.Xml.Serialization.XmlEnumAttribute" />
 
               
 
@@ -170,8 +153,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlEnumAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlEnumAttribute" />
 
             
 
@@ -201,8 +183,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >You can use the word XmlEnum in your code instead of the longer <see
-               cref="T:System.Xml.Serialization.XmlEnumAttribute" />
+              >You can use the word XmlEnum in your code instead of the longer <see cref="T:System.Xml.Serialization.XmlEnumAttribute" />
 
               
 
@@ -213,13 +194,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlEnumAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlEnumAttribute" />
 
             
 
-             class, and specifies the XML value that the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             class, and specifies the XML value that the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -227,7 +206,11 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -253,8 +236,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specify the <see
-             cref="P:System.Xml.Serialization.XmlEnumAttribute.Name" />
+            >Specify the <see cref="P:System.Xml.Serialization.XmlEnumAttribute.Name" />
 
             
 
@@ -262,8 +244,7 @@
           >
           <block subset="none" type="note">
             <para
-              >You can use the word XmlEnum in your code instead of the longer <see
-               cref="T:System.Xml.Serialization.XmlEnumAttribute" />
+              >You can use the word XmlEnum in your code instead of the longer <see cref="T:System.Xml.Serialization.XmlEnumAttribute" />
 
               
 
@@ -274,8 +255,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the value generated in an XML-document instance when the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets the value generated in an XML-document instance when the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 

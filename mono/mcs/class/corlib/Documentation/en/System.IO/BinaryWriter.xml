@@ -30,26 +30,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.IO.BinaryWriter" />
+        >The <see cref="T:System.IO.BinaryWriter" />
 
         
 
-         class provides methods that simplify writing primitive data types to a stream. For example, you can use the <see
-         cref="M:System.IO.BinaryWriter.Write(System.Boolean)" />
+         class provides methods that simplify writing primitive data types to a stream. For example, you can use the <see cref="M:System.IO.BinaryWriter.Write(System.Boolean)" />
 
         
 
          method to write a Boolean value to the stream as a one-byte value. The class includes write methods that support different data types. </para
       >
       <para
-        >When you create a new instance of the <see
-         cref="T:System.IO.BinaryWriter" />
+        >When you create a new instance of the <see cref="T:System.IO.BinaryWriter" />
 
         
 
-         class, you provide the stream to write to, and optionally specify the type of encoding and whether to leave the stream open after disposing the <see
-         cref="T:System.IO.BinaryWriter" />
+         class, you provide the stream to write to, and optionally specify the type of encoding and whether to leave the stream open after disposing the <see cref="T:System.IO.BinaryWriter" />
 
         
 
@@ -81,8 +77,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -94,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.BinaryWriter" />
+            >Initializes a new instance of the <see cref="T:System.IO.BinaryWriter" />
 
             
 
@@ -124,8 +118,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -137,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.BinaryWriter" />
+            >Initializes a new instance of the <see cref="T:System.IO.BinaryWriter" />
 
             
 
@@ -146,7 +138,11 @@
           >
         </summary>
         <param name="output">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -178,8 +174,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -191,8 +186,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.BinaryWriter" />
+            >Initializes a new instance of the <see cref="T:System.IO.BinaryWriter" />
 
             
 
@@ -200,14 +194,22 @@
           >
         </summary>
         <param name="output">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The output stream. </param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -238,8 +240,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.BinaryWriter" />
+            >Initializes a new instance of the <see cref="T:System.IO.BinaryWriter" />
 
             
 
@@ -247,26 +248,37 @@
           >
         </summary>
         <param name="output">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The output stream.</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character encoding to use.</param
         >
         <param name="leaveOpen">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to leave the stream open after the <see
-           cref="T:System.IO.BinaryWriter" />
+          true to leave the stream open after the <see cref="T:System.IO.BinaryWriter" />
 
           
 
@@ -294,8 +306,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -307,8 +318,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the underlying stream of the <see
-             cref="T:System.IO.BinaryWriter" />
+            >Gets the underlying stream of the <see cref="T:System.IO.BinaryWriter" />
 
             
 
@@ -337,21 +347,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This implementation of Close calls the <see
-             cref="M:System.IO.BinaryWriter.Dispose(System.Boolean)" />
+            >This implementation of Close calls the <see cref="M:System.IO.BinaryWriter.Dispose(System.Boolean)" />
 
             
 
              method passing a true value.</para
           >
           <para
-            >Flushing the stream will not flush its underlying encoder unless you explicitly call <see
-             cref="M:System.IO.BinaryWriter.Flush" />
+            >Flushing the stream will not flush its underlying encoder unless you explicitly call <see cref="M:System.IO.BinaryWriter.Flush" />
 
             
 
-             or Close. Setting <see
-             cref="P:System.IO.StreamWriter.AutoFlush" />
+             or Close. Setting <see cref="P:System.IO.StreamWriter.AutoFlush" />
 
             
 
@@ -361,8 +368,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Closes the current <see
-             cref="T:System.IO.BinaryWriter" />
+            >Closes the current <see cref="T:System.IO.BinaryWriter" />
 
             
 
@@ -390,8 +396,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the current instance of the <see
-             cref="T:System.IO.BinaryWriter" />
+            >Releases all resources used by the current instance of the <see cref="T:System.IO.BinaryWriter" />
 
             
 
@@ -423,8 +428,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.IO.BinaryWriter" />
+            >Releases the unmanaged resources used by the <see cref="T:System.IO.BinaryWriter" />
 
             
 
@@ -432,7 +436,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -461,21 +469,18 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>All derived classes should override Flush to ensure that all buffered data is sent to the stream.</para>
           <para
-            >Flushing the stream will not flush its underlying encoder unless you explicitly call Flush or <see
-             cref="M:System.IO.BinaryWriter.Close" />
+            >Flushing the stream will not flush its underlying encoder unless you explicitly call Flush or <see cref="M:System.IO.BinaryWriter.Close" />
 
             
 
-            . Setting <see
-             cref="P:System.IO.StreamWriter.AutoFlush" />
+            . Setting <see cref="P:System.IO.StreamWriter.AutoFlush" />
 
             
 
              to true means that data will be flushed from the buffer to the stream, but the encoder state will not be flushed. This allows the encoder to keep its state (partial characters) so that it can encode the next block of characters correctly. This scenario affects UTF8 and UTF7 where certain characters can only be encoded after the encoder receives the adjacent character or characters.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -510,8 +515,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -523,8 +527,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies a <see
-             cref="T:System.IO.BinaryWriter" />
+            >Specifies a <see cref="T:System.IO.BinaryWriter" />
 
             
 
@@ -550,8 +553,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -592,8 +594,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -611,24 +612,30 @@
           <para>The position with the current stream.</para>
         </returns>
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A byte offset relative to <paramref
-           name="origin" />
+          A byte offset relative to <paramref name="origin" />
 
           
 
           . </param
         >
         <param name="origin">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A field of <see
-           cref="T:System.IO.SeekOrigin" />
+          A field of <see cref="T:System.IO.SeekOrigin" />
 
           
 
@@ -647,13 +654,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.IO.BinaryWriter" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.IO.BinaryWriter" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IDisposable" />
+             instance is cast to an <see cref="T:System.IDisposable" />
 
             
 
@@ -692,8 +697,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -707,7 +711,11 @@
           <para>Writes a one-byte Boolean value to the current stream, with 0 representing false and 1 representing true.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -749,8 +757,7 @@
             </item>
           </list>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -764,7 +771,11 @@
           <para>Writes an unsigned byte to the current stream and advances the stream position by one byte.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -794,8 +805,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -809,7 +819,11 @@
           <para>Writes a byte array to the underlying stream.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -851,8 +865,7 @@
             </item>
           </list>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -861,8 +874,7 @@
             .</para
           >
           <para
-            >Unicode surrogate characters must be written out as pairs together in the same call, not individually. If you require support for surrogate pairs in your application, consider using a character array and the <see
-             cref="M:System.IO.BinaryWriter.Write(System.Char[])" />
+            >Unicode surrogate characters must be written out as pairs together in the same call, not individually. If you require support for surrogate pairs in your application, consider using a character array and the <see cref="M:System.IO.BinaryWriter.Write(System.Char[])" />
 
             
 
@@ -874,7 +886,11 @@
           <para>Writes a Unicode character to the current stream and advances the current position of the stream in accordance with the Encoding used and the specific characters being written to the stream.</para>
         </summary>
         <param name="ch">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1052,7 +1068,11 @@
           <para>Writes a character array to the current stream and advances the current position of the stream in accordance with the Encoding used and the specific characters being written to the stream.</para>
         </summary>
         <param name="chars">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1230,7 +1250,11 @@
           <para>Writes a decimal value to the current stream and advances the stream position by sixteen bytes.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1260,8 +1284,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1275,7 +1298,11 @@
           <para>Writes an eight-byte floating-point value to the current stream and advances the stream position by eight bytes.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1454,7 +1481,11 @@
           <para>Writes a two-byte signed integer to the current stream and advances the stream position by two bytes.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1485,8 +1516,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>BinaryWriter stores this data type in little endian format.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1500,7 +1530,11 @@
           <para>Writes a four-byte signed integer to the current stream and advances the stream position by four bytes.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1531,8 +1565,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>BinaryWriter stores this data type in little endian format.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1546,7 +1579,11 @@
           <para>Writes an eight-byte signed integer to the current stream and advances the stream position by eight bytes.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1581,8 +1618,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1596,7 +1632,11 @@
           <para>Writes a signed byte to the current stream and advances the stream position by one byte.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1627,8 +1667,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>BinaryWriter stores this data type in little endian format.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1642,7 +1681,11 @@
           <para>Writes a four-byte floating-point value to the current stream and advances the stream position by four bytes.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1672,8 +1715,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Length-prefixed means that this method first writes the length of the string, in bytes, when encoded with the <see
-             cref="T:System.IO.BinaryWriter" />
+            >Length-prefixed means that this method first writes the length of the string, in bytes, when encoded with the <see cref="T:System.IO.BinaryWriter" />
 
             
 
@@ -1681,8 +1723,7 @@
           >
           <para>For example, the string “A” has a length of 1, but when encoded with UTF-16; the length is 2 bytes, so the value written in the prefix is 2, and 3 bytes are written to the stream, including the prefix.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1694,8 +1735,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes a length-prefixed string to this stream in the current encoding of the <see
-             cref="T:System.IO.BinaryWriter" />
+            >Writes a length-prefixed string to this stream in the current encoding of the <see cref="T:System.IO.BinaryWriter" />
 
             
 
@@ -1703,7 +1743,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1739,8 +1783,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>BinaryWriter stores this data type in little endian format.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1754,7 +1797,11 @@
           <para>Writes a two-byte unsigned integer to the current stream and advances the stream position by two bytes.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1790,8 +1837,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>BinaryWriter stores this data type in little endian format.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1805,7 +1851,11 @@
           <para>Writes a four-byte unsigned integer to the current stream and advances the stream position by four bytes.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1841,8 +1891,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>BinaryWriter stores this data type in little endian format.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1856,7 +1905,11 @@
           <para>Writes an eight-byte unsigned integer to the current stream and advances the stream position by eight bytes.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1891,8 +1944,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1906,26 +1958,37 @@
           <para>Writes a region of a byte array to the current stream.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A byte array containing the data to write. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The starting point in <paramref
-           name="buffer" />
+          The starting point in <paramref name="buffer" />
 
           
 
            at which to begin writing. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1960,8 +2023,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1975,26 +2037,37 @@
           <para>Writes a section of a character array to the current stream, and advances the current position of the stream in accordance with the Encoding used and perhaps the specific characters being written to the stream.</para>
         </summary>
         <param name="chars">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A character array containing the data to write. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The starting point in <paramref
-           name="chars" />
+          The starting point in <paramref name="chars" />
 
           
 
            from which to begin writing. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2024,34 +2097,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The integer of the <paramref
-             name="value" />
+            >The integer of the <paramref name="value" />
 
             
 
              parameter is written out seven bits at a time, starting with the seven least-significant bits. The high bit of a byte indicates whether there are more bytes to be written after this one.</para
           >
           <para
-            >If <paramref
-             name="value" />
+            >If <paramref name="value" />
 
             
 
-             will fit in seven bits, it takes only one byte of space. If <paramref
-             name="value" />
+             will fit in seven bits, it takes only one byte of space. If <paramref name="value" />
 
             
 
-             will not fit in seven bits, the high bit is set on the first byte and written out. <paramref
-             name="value" />
+             will not fit in seven bits, the high bit is set on the first byte and written out. <paramref name="value" />
 
             
 
              is then shifted by seven bits and the next byte is written. This process is repeated until the entire integer has been written.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -2065,7 +2133,11 @@
           <para>Writes a 32-bit integer in a compressed format.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

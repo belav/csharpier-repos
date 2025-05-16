@@ -40,13 +40,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To get an instance of <see
-         cref="T:System.Reflection.Emit.ModuleBuilder" />
+        >To get an instance of <see cref="T:System.Reflection.Emit.ModuleBuilder" />
 
         
 
-        , use the <see
-         cref="M:System.Reflection.Emit.AssemblyBuilder.DefineDynamicModule(System.String)" />
+        , use the <see cref="M:System.Reflection.Emit.AssemblyBuilder.DefineDynamicModule(System.String)" />
 
         
 
@@ -80,18 +78,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Reflection.Assembly" />
+            >The <see cref="T:System.Reflection.Assembly" />
 
             
 
-             object that is returned is the <see
-             cref="T:System.Reflection.Emit.AssemblyBuilder" />
+             object that is returned is the <see cref="T:System.Reflection.Emit.AssemblyBuilder" />
 
             
 
-             that defined this instance of <see
-             cref="T:System.Reflection.Emit.ModuleBuilder" />
+             that defined this instance of <see cref="T:System.Reflection.Emit.ModuleBuilder" />
 
             
 
@@ -101,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the dynamic assembly that defined this instance of <see
-             cref="T:System.Reflection.Emit.ModuleBuilder" />
+            >Gets the dynamic assembly that defined this instance of <see cref="T:System.Reflection.Emit.ModuleBuilder" />
 
             
 
@@ -133,18 +127,15 @@
           <para>This method should be called when the user is done with defining all the global functions within this dynamic module. After calling this function, no more new global functions or new global data are allowed.</para>
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -191,18 +182,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Earlier versions of the .NET Framework throw <see
-               cref="T:System.ArgumentException" />
+              >Earlier versions of the .NET Framework throw <see cref="T:System.ArgumentException" />
 
               
 
-               instead of <see
-               cref="T:System.ArgumentNullException" />
+               instead of <see cref="T:System.ArgumentNullException" />
 
               
 
-               when <paramref
-               name="url" />
+               when <paramref name="url" />
 
               
 
@@ -219,43 +207,56 @@
           <para>The defined document.</para>
         </returns>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The URL for the document. </param
         >
         <param name="language">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The GUID that identifies the document language. This can be <see
-           cref="F:System.Guid.Empty" />
+          The GUID that identifies the document language. This can be <see cref="F:System.Guid.Empty" />
 
           
 
           . </param
         >
         <param name="languageVendor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The GUID that identifies the document language vendor. This can be <see
-           cref="F:System.Guid.Empty" />
+          The GUID that identifies the document language vendor. This can be <see cref="F:System.Guid.Empty" />
 
           
 
           . </param
         >
         <param name="documentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The GUID that identifies the document type. This can be <see
-           cref="F:System.Guid.Empty" />
+          The GUID that identifies the document type. This can be <see cref="F:System.Guid.Empty" />
 
           
 
@@ -290,31 +291,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The defined enum is a derived class of <see
-             cref="T:System.Enum" />
+            >The defined enum is a derived class of <see cref="T:System.Enum" />
 
             
 
-            . The <paramref
-             name="value__" />
+            . The <paramref name="value__" />
 
             
 
-             field has <see
-             cref="F:System.Reflection.FieldAttributes.Private" />
+             field has <see cref="F:System.Reflection.FieldAttributes.Private" />
 
             
 
-             and <see
-             cref="F:System.Reflection.FieldAttributes.SpecialName" />
+             and <see cref="F:System.Reflection.FieldAttributes.SpecialName" />
 
             
 
              attributes set.</para
           >
           <para
-            >For more information about the built-in integer types that can be specified as the underlying types of enumerations, see <format
-             type="text/html">
+            >For more information about the built-in integer types that can be specified as the underlying types of enumerations, see <format type="text/html">
               <a href="7e4c5921-955d-4b06-8709-101873acf157"
                 >.NET Framework Class Library Overview</a
               >
@@ -326,23 +322,19 @@
           >
           <block subset="none" type="note">
             <para
-              >In the .NET Framework versions 1.0 and 1.1, it is necessary to define enumerations using <see
-               cref="T:System.Reflection.Emit.TypeBuilder" />
+              >In the .NET Framework versions 1.0 and 1.1, it is necessary to define enumerations using <see cref="T:System.Reflection.Emit.TypeBuilder" />
 
               
 
-               because <see
-               cref="T:System.Reflection.Emit.EnumBuilder" />
+               because <see cref="T:System.Reflection.Emit.EnumBuilder" />
 
               
 
-               emits enumerations whose elements are of type <see
-               cref="T:System.Int32" />
+               emits enumerations whose elements are of type <see cref="T:System.Int32" />
 
               
 
-               instead of the enumeration type. In the .NET Framework version 2.0, <see
-               cref="T:System.Reflection.Emit.EnumBuilder" />
+               instead of the enumeration type. In the .NET Framework version 2.0, <see cref="T:System.Reflection.Emit.EnumBuilder" />
 
               
 
@@ -351,18 +343,15 @@
           </block>
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -377,8 +366,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Defines an enumeration type that is a value type with a single non-static field called <paramref
-             name="value__" />
+            >Defines an enumeration type that is a value type with a single non-static field called <paramref name="value__" />
 
             
 
@@ -390,31 +378,41 @@
           <para>The defined enumeration.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The full path of the enumeration type. <paramref
-           name="name" />
+          The full path of the enumeration type. <paramref name="name" />
 
           
 
            cannot contain embedded nulls. </param
         >
         <param name="visibility">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type attributes for the enumeration. The attributes are any bits defined by <see
-           cref="F:System.Reflection.TypeAttributes.VisibilityMask" />
+          The type attributes for the enumeration. The attributes are any bits defined by <see cref="F:System.Reflection.TypeAttributes.VisibilityMask" />
 
           
 
           . </param
         >
         <param name="underlyingType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -450,8 +448,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The global method that this method defines is not usable until you call <see
-             cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
+            >The global method that this method defines is not usable until you call <see cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
 
             
 
@@ -459,18 +456,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -491,43 +485,56 @@
           <para>The defined global method.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the method. <paramref
-           name="name" />
+          The name of the method. <paramref name="name" />
 
           
 
            cannot contain embedded nulls. </param
         >
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The attributes of the method. <paramref
-           name="attributes" />
+          The attributes of the method. <paramref name="attributes" />
 
           
 
-           must include <see
-           cref="F:System.Reflection.MethodAttributes.Static" />
+           must include <see cref="F:System.Reflection.MethodAttributes.Static" />
 
           
 
           . </param
         >
         <param name="returnType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The return type of the method. </param
         >
         <param name="parameterTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -564,8 +571,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You cannot use the global method that this method defines until you call <see
-             cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
+            >You cannot use the global method that this method defines until you call <see cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
 
             
 
@@ -573,18 +579,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -605,50 +608,67 @@
           <para>The defined global method.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the method. <paramref
-           name="name" />
+          The name of the method. <paramref name="name" />
 
           
 
            cannot contain embedded nulls. </param
         >
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The attributes of the method. <paramref
-           name="attributes" />
+          The attributes of the method. <paramref name="attributes" />
 
           
 
-           must include <see
-           cref="F:System.Reflection.MethodAttributes.Static" />
+           must include <see cref="F:System.Reflection.MethodAttributes.Static" />
 
           
 
           .</param
         >
         <param name="callingConvention">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The calling convention for the method. </param
         >
         <param name="returnType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The return type of the method. </param
         >
         <param name="parameterTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -690,8 +710,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This overload is provided for designers of managed compilers.</para>
           <para
-            >You cannot use the global method that this method defines until you call <see
-             cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
+            >You cannot use the global method that this method defines until you call <see cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
 
             
 
@@ -699,18 +718,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -731,98 +747,127 @@
           <para>The defined global method.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the method. <paramref
-           name="name" />
+          The name of the method. <paramref name="name" />
 
           
 
            cannot contain embedded null characters. </param
         >
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The attributes of the method. <paramref
-           name="attributes" />
+          The attributes of the method. <paramref name="attributes" />
 
           
 
-           must include <see
-           cref="F:System.Reflection.MethodAttributes.Static" />
+           must include <see cref="F:System.Reflection.MethodAttributes.Static" />
 
           
 
           .</param
         >
         <param name="callingConvention">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The calling convention for the method. </param
         >
         <param name="returnType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The return type of the method. </param
         >
         <param name="requiredReturnTypeCustomModifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of types representing the required custom modifiers for the return type, such as <see
-           cref="T:System.Runtime.CompilerServices.IsConst" />
+          An array of types representing the required custom modifiers for the return type, such as <see cref="T:System.Runtime.CompilerServices.IsConst" />
 
           
 
-           or <see
-           cref="T:System.Runtime.CompilerServices.IsBoxed" />
+           or <see cref="T:System.Runtime.CompilerServices.IsBoxed" />
 
           
 
           . If the return type has no required custom modifiers, specify null. </param
         >
         <param name="optionalReturnTypeCustomModifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of types representing the optional custom modifiers for the return type, such as <see
-           cref="T:System.Runtime.CompilerServices.IsConst" />
+          An array of types representing the optional custom modifiers for the return type, such as <see cref="T:System.Runtime.CompilerServices.IsConst" />
 
           
 
-           or <see
-           cref="T:System.Runtime.CompilerServices.IsBoxed" />
+           or <see cref="T:System.Runtime.CompilerServices.IsBoxed" />
 
           
 
           . If the return type has no optional custom modifiers, specify null. </param
         >
         <param name="parameterTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The types of the method's parameters. </param
         >
         <param name="requiredParameterTypeCustomModifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of arrays of types. Each array of types represents the required custom modifiers for the corresponding parameter of the global method. If a particular argument has no required custom modifiers, specify null instead of an array of types. If the global method has no arguments, or if none of the arguments have required custom modifiers, specify null instead of an array of arrays.</param
         >
         <param name="optionalParameterTypeCustomModifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -861,16 +906,14 @@
 
             
 
-             is automatically included in <paramref
-             name="attributes" />
+             is automatically included in <paramref name="attributes" />
 
             
 
             .</para
           >
           <para
-            >The data defined by this method is not created until the <see
-             cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
+            >The data defined by this method is not created until the <see cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
 
             
 
@@ -878,18 +921,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -910,26 +950,37 @@
           <para>A field to reference the data.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name used to refer to the data. <paramref
-           name="name" />
+          The name used to refer to the data. <paramref name="name" />
 
           
 
            cannot contain embedded nulls. </param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The binary large object (BLOB) of data. </param
         >
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -970,13 +1021,11 @@
             </item>
             <item>
               <para
-                >To embed a managed resource into the manifest module of a dynamic assembly or into a satellite module, use the <see
-                 cref="M:System.Reflection.Emit.ModuleBuilder.DefineResource(System.String,System.String)" />
+                >To embed a managed resource into the manifest module of a dynamic assembly or into a satellite module, use the <see cref="M:System.Reflection.Emit.ModuleBuilder.DefineResource(System.String,System.String)" />
 
                 
 
-                 method to get a resource writer, and use the <see
-                 cref="M:System.Resources.ResourceWriter.AddResource(System.String,System.String)" />
+                 method to get a resource writer, and use the <see cref="M:System.Resources.ResourceWriter.AddResource(System.String,System.String)" />
 
                 
 
@@ -985,13 +1034,11 @@
             </item>
             <item>
               <para
-                >To link a managed resource into a dynamic assembly, use the <see
-                 cref="M:System.Reflection.Emit.AssemblyBuilder.DefineResource(System.String,System.String,System.String,System.Reflection.ResourceAttributes)" />
+                >To link a managed resource into a dynamic assembly, use the <see cref="M:System.Reflection.Emit.AssemblyBuilder.DefineResource(System.String,System.String,System.String,System.Reflection.ResourceAttributes)" />
 
                 
 
-                 method to get a resource writer, and use the <see
-                 cref="M:System.Resources.ResourceWriter.AddResource(System.String,System.String)" />
+                 method to get a resource writer, and use the <see cref="M:System.Resources.ResourceWriter.AddResource(System.String,System.String)" />
 
                 
 
@@ -1000,8 +1047,7 @@
             </item>
             <item>
               <para
-                >To link a manifest resource BLOB into a dynamic assembly, use the <see
-                 cref="M:System.Reflection.Emit.AssemblyBuilder.AddResourceFile(System.String,System.String)" />
+                >To link a manifest resource BLOB into a dynamic assembly, use the <see cref="M:System.Reflection.Emit.AssemblyBuilder.AddResourceFile(System.String,System.String)" />
 
                 
 
@@ -1010,13 +1056,11 @@
             </item>
           </list>
           <para
-            >In addition, a single Win32 resource can be attached to an assembly by using the <see
-             cref="M:System.Reflection.Emit.AssemblyBuilder.DefineUnmanagedResource(System.String)" />
+            >In addition, a single Win32 resource can be attached to an assembly by using the <see cref="M:System.Reflection.Emit.AssemblyBuilder.DefineUnmanagedResource(System.String)" />
 
             
 
-             method or the <see
-             cref="M:System.Reflection.Emit.ModuleBuilder.DefineUnmanagedResource(System.Byte[])" />
+             method or the <see cref="M:System.Reflection.Emit.ModuleBuilder.DefineUnmanagedResource(System.Byte[])" />
 
             
 
@@ -1028,21 +1072,33 @@
           <para>Defines a binary large object (BLOB) that represents a manifest resource to be embedded in the dynamic assembly.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The case-sensitive name for the resource.</param
         >
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A stream that contains the bytes for the resource.</param
         >
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1084,18 +1140,15 @@
           <para>Some DLL import attributes (see the description of System.Runtime.InteropServices.DllImportAttribute) cannot be specified as arguments to this method. Such attributes should be set by emitting a custom attribute for the method. For example, the DLL import attribute PreserveSig is set by emitting a custom attribute.</para>
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -1116,61 +1169,92 @@
           <para>The defined PInvoke method.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the PInvoke method. <paramref
-           name="name" />
+          The name of the PInvoke method. <paramref name="name" />
 
           
 
            cannot contain embedded nulls. </param
         >
         <param name="dllName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the DLL in which the PInvoke method is defined. </param
         >
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The attributes of the method. </param
         >
         <param name="callingConvention">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The method's calling convention. </param
         >
         <param name="returnType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The method's return type. </param
         >
         <param name="parameterTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The types of the method's parameters. </param
         >
         <param name="nativeCallConv">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The native calling convention. </param
         >
         <param name="nativeCharSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1211,8 +1295,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Some DLL import attributes (see the description of <see
-             cref="T:System.Runtime.InteropServices.DllImportAttribute" />
+            >Some DLL import attributes (see the description of <see cref="T:System.Runtime.InteropServices.DllImportAttribute" />
 
             
 
@@ -1220,18 +1303,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -1252,68 +1332,103 @@
           <para>The defined PInvoke method.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the PInvoke method. <paramref
-           name="name" />
+          The name of the PInvoke method. <paramref name="name" />
 
           
 
            cannot contain embedded nulls. </param
         >
         <param name="dllName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the DLL in which the PInvoke method is defined. </param
         >
         <param name="entryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the entry point in the DLL. </param
         >
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The attributes of the method. </param
         >
         <param name="callingConvention">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The method's calling convention. </param
         >
         <param name="returnType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The method's return type. </param
         >
         <param name="parameterTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The types of the method's parameters. </param
         >
         <param name="nativeCallConv">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The native calling convention. </param
         >
         <param name="nativeCharSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1348,13 +1463,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The caller must not call the ResourceWriter.Generate() and ResourceWriter.Close() methods, because these methods are called by ModuleBuilder.Save when the dynamic assembly is written to disk.</para>
           <para
-            >Use this method to embed a managed resource. To embed a manifest resource blob, use the <see
-             cref="M:System.Reflection.Emit.ModuleBuilder.DefineManifestResource(System.String,System.IO.Stream,System.Reflection.ResourceAttributes)" />
+            >Use this method to embed a managed resource. To embed a manifest resource blob, use the <see cref="M:System.Reflection.Emit.ModuleBuilder.DefineManifestResource(System.String,System.IO.Stream,System.Reflection.ResourceAttributes)" />
 
             
 
-             method. For a summary of embedding and linking managed resources and manifest resource blobs, see the <see
-             cref="M:System.Reflection.Emit.ModuleBuilder.DefineManifestResource(System.String,System.IO.Stream,System.Reflection.ResourceAttributes)" />
+             method. For a summary of embedding and linking managed resources and manifest resource blobs, see the <see cref="M:System.Reflection.Emit.ModuleBuilder.DefineManifestResource(System.String,System.IO.Stream,System.Reflection.ResourceAttributes)" />
 
             
 
@@ -1362,18 +1475,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -1394,19 +1504,26 @@
           <para>A resource writer for the defined resource.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the resource. <paramref
-           name="name" />
+          The name of the resource. <paramref name="name" />
 
           
 
            cannot contain embedded nulls. </param
         >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1442,13 +1559,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The caller must not call the ResourceWriter.Generate() and ResourceWriter.Close() methods, because these methods are called by ModuleBuilder.Save when the dynamic assembly is written to disk.</para>
           <para
-            >Use this method to embed a managed resource. To embed a manifest resource blob, use the <see
-             cref="M:System.Reflection.Emit.ModuleBuilder.DefineManifestResource(System.String,System.IO.Stream,System.Reflection.ResourceAttributes)" />
+            >Use this method to embed a managed resource. To embed a manifest resource blob, use the <see cref="M:System.Reflection.Emit.ModuleBuilder.DefineManifestResource(System.String,System.IO.Stream,System.Reflection.ResourceAttributes)" />
 
             
 
-             method. For a summary of embedding and linking managed resources and manifest resource blobs, see the <see
-             cref="M:System.Reflection.Emit.ModuleBuilder.DefineManifestResource(System.String,System.IO.Stream,System.Reflection.ResourceAttributes)" />
+             method. For a summary of embedding and linking managed resources and manifest resource blobs, see the <see cref="M:System.Reflection.Emit.ModuleBuilder.DefineManifestResource(System.String,System.IO.Stream,System.Reflection.ResourceAttributes)" />
 
             
 
@@ -1456,18 +1571,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -1488,26 +1600,37 @@
           <para>A resource writer for the defined resource.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the resource. <paramref
-           name="name" />
+          The name of the resource. <paramref name="name" />
 
           
 
            cannot contain embedded nulls. </param
         >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The description of the resource. </param
         >
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1542,18 +1665,15 @@
           <para>Type names must be unique within an assembly. You cannot have two types with the same name in two different modules of an assembly.</para>
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -1574,12 +1694,15 @@
           <para>A private type with the specified name.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The full path of the type, including the namespace. <paramref
-           name="name" />
+          The full path of the type, including the namespace. <paramref name="name" />
 
           
 
@@ -1615,18 +1738,15 @@
           <para>Type names must be unique within an assembly. You cannot have two types with the same name in two different modules of an assembly.</para>
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -1647,19 +1767,26 @@
           <para>A TypeBuilder created with all of the requested attributes.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The full path of the type. <paramref
-           name="name" />
+          The full path of the type. <paramref name="name" />
 
           
 
            cannot contain embedded nulls. </param
         >
         <param name="attr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1696,18 +1823,15 @@
           <para>Type names must be unique within an assembly. You cannot have two types with the same name in two different modules of an assembly.</para>
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -1728,26 +1852,37 @@
           <para>A TypeBuilder created with all of the requested attributes.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The full path of the type. <paramref
-           name="name" />
+          The full path of the type. <paramref name="name" />
 
           
 
            cannot contain embedded nulls. </param
         >
         <param name="attr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The attribute to be associated with the type. </param
         >
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1785,18 +1920,15 @@
           <para>Type names must be unique within an assembly. It is forbidden to have two types with the same name in two different modules of an assembly.</para>
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -1817,33 +1949,48 @@
           <para>A TypeBuilder object.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The full path of the type. <paramref
-           name="name" />
+          The full path of the type. <paramref name="name" />
 
           
 
            cannot contain embedded nulls. </param
         >
         <param name="attr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The attributes of the defined type. </param
         >
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type that the defined type extends. </param
         >
         <param name="typesize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1881,18 +2028,15 @@
           <para>Type names must be unique within an assembly. You cannot have two types with the same name in two different modules of an assembly.</para>
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -1913,33 +2057,48 @@
           <para>A TypeBuilder object.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The full path of the type. <paramref
-           name="name" />
+          The full path of the type. <paramref name="name" />
 
           
 
            cannot contain embedded nulls. </param
         >
         <param name="attr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The attributes of the defined type. </param
         >
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type that the defined type extends. </param
         >
         <param name="packsize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1982,18 +2141,15 @@
           <para>Type names must be unique within an assembly. You cannot have two types with the same name in two different modules of an assembly.</para>
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -2014,33 +2170,48 @@
           <para>A TypeBuilder created with all of the requested attributes.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The full path of the type. <paramref
-           name="name" />
+          The full path of the type. <paramref name="name" />
 
           
 
            cannot contain embedded nulls. </param
         >
         <param name="attr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The attributes to be associated with the type. </param
         >
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type that the defined type extends. </param
         >
         <param name="interfaces">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2079,18 +2250,15 @@
           <para>Type names must be unique within an assembly. You cannot have two types with the same name in two different modules of an assembly.</para>
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -2111,40 +2279,59 @@
           <para>A TypeBuilder created with all of the requested attributes.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The full path of the type. <paramref
-           name="name" />
+          The full path of the type. <paramref name="name" />
 
           
 
            cannot contain embedded nulls. </param
         >
         <param name="attr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The attributes of the defined type. </param
         >
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type that the defined type extends. </param
         >
         <param name="packingSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The packing size of the type. </param
         >
         <param name="typesize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2183,16 +2370,14 @@
 
             
 
-             is automatically included in <paramref
-             name="attributes" />
+             is automatically included in <paramref name="attributes" />
 
             
 
             .</para
           >
           <para
-            >The data defined by this method is not created until the <see
-             cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
+            >The data defined by this method is not created until the <see cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
 
             
 
@@ -2200,18 +2385,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -2232,26 +2414,37 @@
           <para>A field to reference the data.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name used to refer to the data. <paramref
-           name="name" />
+          The name used to refer to the data. <paramref name="name" />
 
           
 
            cannot contain embedded nulls. </param
         >
         <param name="size">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The size of the data field. </param
         >
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2284,8 +2477,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An assembly can be associated with only one unmanaged resource. This means that calling DefineVersionInfoResource or DefineUnmanagedResource after either one of the methods was called previously throws <see
-             cref="T:System.ArgumentException" />
+            >An assembly can be associated with only one unmanaged resource. This means that calling DefineVersionInfoResource or DefineUnmanagedResource after either one of the methods was called previously throws <see cref="T:System.ArgumentException" />
 
             
 
@@ -2293,18 +2485,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -2321,7 +2510,11 @@
           <para>Defines an unmanaged embedded resource given an opaque binary large object (BLOB) of bytes.</para>
         </summary>
         <param name="resource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2354,8 +2547,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An assembly can be associated with only one unmanaged resource. This means that calling DefineVersionInfoResource or DefineUnmanagedResource after either one of the methods was called previously throws <see
-             cref="T:System.ArgumentException" />
+            >An assembly can be associated with only one unmanaged resource. This means that calling DefineVersionInfoResource or DefineUnmanagedResource after either one of the methods was called previously throws <see cref="T:System.ArgumentException" />
 
             
 
@@ -2363,18 +2555,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -2391,7 +2580,11 @@
           <para>Defines an unmanaged resource given the name of Win32 resource file.</para>
         </summary>
         <param name="resourceFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2424,8 +2617,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
@@ -2433,7 +2625,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2497,13 +2693,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >GetArrayMethod is useful when you have an array of a type whose definition has not been completed and you want to access methods defined on <see
-             cref="T:System.Array" />
+            >GetArrayMethod is useful when you have an array of a type whose definition has not been completed and you want to access methods defined on <see cref="T:System.Array" />
 
             
 
-            . For example, you might define a type and want to define a method that takes an array of the type as a parameter. In order to access the elements of the array, you will need to call methods of the <see
-             cref="T:System.Array" />
+            . For example, you might define a type and want to define a method that takes an array of the type as a parameter. In order to access the elements of the array, you will need to call methods of the <see cref="T:System.Array" />
 
             
 
@@ -2519,35 +2713,55 @@
           <para>The named method on an array class.</para>
         </returns>
         <param name="arrayClass">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array class. </param
         >
         <param name="methodName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of a method on the array class. </param
         >
         <param name="callingConvention">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The method's calling convention. </param
         >
         <param name="returnType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The return type of the method. </param
         >
         <param name="parameterTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2584,8 +2798,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is similar to <see
-             cref="M:System.Reflection.Emit.ModuleBuilder.GetArrayMethod(System.Type,System.String,System.Reflection.CallingConventions,System.Type,System.Type[])" />
+            >This method is similar to <see cref="M:System.Reflection.Emit.ModuleBuilder.GetArrayMethod(System.Type,System.String,System.Reflection.CallingConventions,System.Type,System.Type[])" />
 
             
 
@@ -2601,35 +2814,55 @@
           <para>The token for the named method on an array class.</para>
         </returns>
         <param name="arrayClass">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object for the array. </param
         >
         <param name="methodName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string that contains the name of the method. </param
         >
         <param name="callingConvention">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The calling convention for the method. </param
         >
         <param name="returnType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The return type of the method. </param
         >
         <param name="parameterTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2674,7 +2907,11 @@
           <para>The token used to identify the specified constructor within this module.</para>
         </returns>
         <param name="con">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2706,8 +2943,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns all the custom attributes that have been applied to the current <see
-             cref="T:System.Reflection.Emit.ModuleBuilder" />
+            >Returns all the custom attributes that have been applied to the current <see cref="T:System.Reflection.Emit.ModuleBuilder" />
 
             
 
@@ -2719,7 +2955,11 @@
           <para>An array that contains the custom attributes; the array is empty if there are no attributes.</para>
         </returns>
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2752,8 +2992,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns all the custom attributes that have been applied to the current <see
-             cref="T:System.Reflection.Emit.ModuleBuilder" />
+            >Returns all the custom attributes that have been applied to the current <see cref="T:System.Reflection.Emit.ModuleBuilder" />
 
             
 
@@ -2763,8 +3002,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array that contains the custom attributes that are derived, at any level, from <paramref
-             name="attributeType" />
+            >An array that contains the custom attributes that are derived, at any level, from <paramref name="attributeType" />
 
             
 
@@ -2772,14 +3010,22 @@
           >
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The base type from which attributes derive.</param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2811,13 +3057,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you emit dynamic assemblies, fields in the .sdata region of the portable executable (PE) file are defined by using the <see
-             cref="M:System.Reflection.Emit.ModuleBuilder.DefineInitializedData(System.String,System.Byte[],System.Reflection.FieldAttributes)" />
+            >When you emit dynamic assemblies, fields in the .sdata region of the portable executable (PE) file are defined by using the <see cref="M:System.Reflection.Emit.ModuleBuilder.DefineInitializedData(System.String,System.Byte[],System.Reflection.FieldAttributes)" />
 
             
 
-             or <see
-             cref="M:System.Reflection.Emit.ModuleBuilder.DefineUninitializedData(System.String,System.Int32,System.Reflection.FieldAttributes)" />
+             or <see cref="M:System.Reflection.Emit.ModuleBuilder.DefineUninitializedData(System.String,System.Int32,System.Reflection.FieldAttributes)" />
 
             
 
@@ -2825,8 +3069,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Module-level fields cannot be retrieved until after the <see
-               cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
+              >Module-level fields cannot be retrieved until after the <see cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
 
               
 
@@ -2843,14 +3086,22 @@
           <para>A field that has the specified name and binding attributes, or null if the field does not exist.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The field name. </param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2881,13 +3132,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you emit dynamic assemblies, fields in the .sdata region of the portable executable (PE) file are defined by using the <see
-             cref="M:System.Reflection.Emit.ModuleBuilder.DefineInitializedData(System.String,System.Byte[],System.Reflection.FieldAttributes)" />
+            >When you emit dynamic assemblies, fields in the .sdata region of the portable executable (PE) file are defined by using the <see cref="M:System.Reflection.Emit.ModuleBuilder.DefineInitializedData(System.String,System.Byte[],System.Reflection.FieldAttributes)" />
 
             
 
-             or <see
-             cref="M:System.Reflection.Emit.ModuleBuilder.DefineUninitializedData(System.String,System.Int32,System.Reflection.FieldAttributes)" />
+             or <see cref="M:System.Reflection.Emit.ModuleBuilder.DefineUninitializedData(System.String,System.Int32,System.Reflection.FieldAttributes)" />
 
             
 
@@ -2895,8 +3144,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Module-level fields cannot be retrieved until after the <see
-               cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
+              >Module-level fields cannot be retrieved until after the <see cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
 
               
 
@@ -2913,7 +3161,11 @@
           <para>An array of fields that match the specified flags; the array is empty if no such fields exist.</para>
         </returns>
         <param name="bindingFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2953,7 +3205,11 @@
           <para>The token used to identify the specified field within this module.</para>
         </returns>
         <param name="field">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3015,18 +3271,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method provides the implementation for all overloads of the inherited <see
-             cref="Overload:System.Reflection.Module.GetMethod" />
+            >This method provides the implementation for all overloads of the inherited <see cref="Overload:System.Reflection.Module.GetMethod" />
 
             
 
-             method. Use the inherited <see
-             cref="Overload:System.Reflection.Module.GetMethod" />
+             method. Use the inherited <see cref="Overload:System.Reflection.Module.GetMethod" />
 
             
 
-             method to get methods that have been declared at the module level. Module-level methods are defined in emitted code by using the <see
-             cref="Overload:System.Reflection.Emit.ModuleBuilder.DefineGlobalMethod" />
+             method to get methods that have been declared at the module level. Module-level methods are defined in emitted code by using the <see cref="Overload:System.Reflection.Emit.ModuleBuilder.DefineGlobalMethod" />
 
             
 
@@ -3034,8 +3287,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Module-level methods cannot be retrieved until after the <see
-               cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
+              >Module-level methods cannot be retrieved until after the <see cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
 
               
 
@@ -3052,42 +3304,66 @@
           <para>A method that is defined at the module level, and matches the specified criteria; or null if such a method does not exist.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The method name. </param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A combination of BindingFlags bit flags used to control the search. </param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object that implements Binder, containing properties related to this method. </param
         >
         <param name="callConvention">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The calling convention for the method. </param
         >
         <param name="types">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The parameter types of the method. </param
         >
         <param name="modifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3118,8 +3394,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Module-level methods are defined in emitted code by using the <see
-             cref="Overload:System.Reflection.Emit.ModuleBuilder.DefineGlobalMethod" />
+            >Module-level methods are defined in emitted code by using the <see cref="Overload:System.Reflection.Emit.ModuleBuilder.DefineGlobalMethod" />
 
             
 
@@ -3127,8 +3402,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Module-level methods cannot be retrieved until after the <see
-               cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
+              >Module-level methods cannot be retrieved until after the <see cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
 
               
 
@@ -3139,8 +3413,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns all the methods that have been defined at the module level for the current <see
-             cref="T:System.Reflection.Emit.ModuleBuilder" />
+            >Returns all the methods that have been defined at the module level for the current <see cref="T:System.Reflection.Emit.ModuleBuilder" />
 
             
 
@@ -3150,8 +3423,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array that contains all the module-level methods that match <paramref
-             name="bindingFlags" />
+            >An array that contains all the module-level methods that match <paramref name="bindingFlags" />
 
             
 
@@ -3159,7 +3431,11 @@
           >
         </returns>
         <param name="bindingFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3199,7 +3475,11 @@
           <para>The token used to identify the specified method within this module.</para>
         </returns>
         <param name="method">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3232,8 +3512,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method defines a metadata token for the signature described by <paramref
-             name="sigHelper" />
+            >This method defines a metadata token for the signature described by <paramref name="sigHelper" />
 
             
 
@@ -3243,8 +3522,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Defines a token for the signature that is defined by the specified <see
-             cref="T:System.Reflection.Emit.SignatureHelper" />
+            >Defines a token for the signature that is defined by the specified <see cref="T:System.Reflection.Emit.SignatureHelper" />
 
             
 
@@ -3256,7 +3534,11 @@
           <para>A token for the defined signature.</para>
         </returns>
         <param name="sigHelper">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3297,14 +3579,22 @@
           <para>A token for the specified signature.</para>
         </returns>
         <param name="sigBytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The signature binary large object (BLOB). </param
         >
         <param name="sigLength">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3337,8 +3627,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="str" />
+            >If <paramref name="str" />
 
             
 
@@ -3354,7 +3643,11 @@
           <para>The token of the string in the constant pool.</para>
         </returns>
         <param name="str">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3386,18 +3679,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -3446,18 +3736,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not use this method to generate array types, pointer types, or byref types. Use the <see
-             cref="M:System.Reflection.Emit.TypeBuilder.MakeArrayType" />
+            >Do not use this method to generate array types, pointer types, or byref types. Use the <see cref="M:System.Reflection.Emit.TypeBuilder.MakeArrayType" />
 
             
 
-            , <see
-             cref="M:System.Reflection.Emit.TypeBuilder.MakePointerType" />
+            , <see cref="M:System.Reflection.Emit.TypeBuilder.MakePointerType" />
 
             
 
-            , and <see
-             cref="M:System.Reflection.Emit.TypeBuilder.MakeByRefType" />
+            , and <see cref="M:System.Reflection.Emit.TypeBuilder.MakeByRefType" />
 
             
 
@@ -3465,18 +3752,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -3497,12 +3781,15 @@
           <para>The requested type, if the type is defined in this module; otherwise, null.</para>
         </returns>
         <param name="className">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Type" />
+          The name of the <see cref="T:System.Type" />
 
           
 
@@ -3541,18 +3828,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not use this method to generate array types, pointer types, or byref types. Use the <see
-             cref="M:System.Reflection.Emit.TypeBuilder.MakeArrayType" />
+            >Do not use this method to generate array types, pointer types, or byref types. Use the <see cref="M:System.Reflection.Emit.TypeBuilder.MakeArrayType" />
 
             
 
-            , <see
-             cref="M:System.Reflection.Emit.TypeBuilder.MakePointerType" />
+            , <see cref="M:System.Reflection.Emit.TypeBuilder.MakePointerType" />
 
             
 
-            , and <see
-             cref="M:System.Reflection.Emit.TypeBuilder.MakeByRefType" />
+            , and <see cref="M:System.Reflection.Emit.TypeBuilder.MakeByRefType" />
 
             
 
@@ -3560,18 +3844,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -3592,19 +3873,26 @@
           <para>The requested type, if the type is defined in this module; otherwise, null.</para>
         </returns>
         <param name="className">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Type" />
+          The name of the <see cref="T:System.Type" />
 
           
 
            to get. </param
         >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3644,36 +3932,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="throwOnError" />
+            >The <paramref name="throwOnError" />
 
             
 
-             parameter only affects what happens when the type is not found. It does not affect any other exceptions that might be thrown. In particular, if the type is found but cannot be loaded, <see
-             cref="T:System.TypeLoadException" />
+             parameter only affects what happens when the type is not found. It does not affect any other exceptions that might be thrown. In particular, if the type is found but cannot be loaded, <see cref="T:System.TypeLoadException" />
 
             
 
-             can be thrown even if <paramref
-             name="throwOnError" />
+             can be thrown even if <paramref name="throwOnError" />
 
             
 
              is false.</para
           >
           <para
-            >Do not use this method to generate array types, pointer types, or byref types. Use the <see
-             cref="M:System.Reflection.Emit.TypeBuilder.MakeArrayType" />
+            >Do not use this method to generate array types, pointer types, or byref types. Use the <see cref="M:System.Reflection.Emit.TypeBuilder.MakeArrayType" />
 
             
 
-            , <see
-             cref="M:System.Reflection.Emit.TypeBuilder.MakePointerType" />
+            , <see cref="M:System.Reflection.Emit.TypeBuilder.MakePointerType" />
 
             
 
-            , and <see
-             cref="M:System.Reflection.Emit.TypeBuilder.MakeByRefType" />
+            , and <see cref="M:System.Reflection.Emit.TypeBuilder.MakeByRefType" />
 
             
 
@@ -3681,18 +3963,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -3713,26 +3992,37 @@
           <para>The specified type, if the type is declared in this module; otherwise, null.</para>
         </returns>
         <param name="className">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Type" />
+          The name of the <see cref="T:System.Type" />
 
           
 
            to get. </param
         >
         <param name="throwOnError">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to throw an exception if the type cannot be found; false to return null. </param
         >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3763,18 +4053,15 @@
           <para>For example, if the class initializers of one of the classes throws an exception while it is being loaded, a TargetInvocationException is stored in the corresponding element of the LoaderExceptions array.</para>
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -3821,8 +4108,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is useful for clients of the <see
-             cref="T:System.Reflection.Emit.MethodRental" />
+            >This method is useful for clients of the <see cref="T:System.Reflection.Emit.MethodRental" />
 
             
 
@@ -3838,7 +4124,11 @@
           <para>The token used to identify the type with the specified name within this module.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3881,7 +4171,11 @@
           <para>The token used to identify the given type within this module.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3918,8 +4212,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if one or more instances of <paramref
-             name="attributeType" />
+            >true if one or more instances of <paramref name="attributeType" />
 
             
 
@@ -3927,14 +4220,22 @@
           >
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of custom attribute to test for.</param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4011,8 +4312,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The tokens obtained using this property can be passed to the unmanaged Reflection API. For more information, see <format
-             type="text/html">
+            >The tokens obtained using this property can be passed to the unmanaged Reflection API. For more information, see <format type="text/html">
               <a href="0c5bb9de-0cf6-438d-ba47-134e6c775fb8">The Unmanaged Reflection API</a>
             </format>
 
@@ -4023,14 +4323,14 @@
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -4064,8 +4364,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In unmanaged metadata, the GUID returned by the <see
-             cref="P:System.Reflection.Module.ModuleVersionId" />
+            >In unmanaged metadata, the GUID returned by the <see cref="P:System.Reflection.Module.ModuleVersionId" />
 
             
 
@@ -4074,14 +4373,14 @@
           <block subset="none" type="note">
             <para
               >More information about metadata can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -4144,33 +4443,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Type.GetGenericArguments" />
+            >Use the <see cref="M:System.Type.GetGenericArguments" />
 
             
 
-             method on the type where <paramref
-             name="metadataToken" />
+             method on the type where <paramref name="metadataToken" />
 
             
 
-             is in scope to obtain an array of generic type arguments for <paramref
-             name="genericTypeArguments" />
+             is in scope to obtain an array of generic type arguments for <paramref name="genericTypeArguments" />
 
             
 
-            . Use the <see
-             cref="M:System.Reflection.MethodInfo.GetGenericArguments" />
+            . Use the <see cref="M:System.Reflection.MethodInfo.GetGenericArguments" />
 
             
 
-             method on the method where <paramref
-             name="metadataToken" />
+             method on the method where <paramref name="metadataToken" />
 
             
 
-             is in scope to obtain an array of generic type arguments for <paramref
-             name="genericTypeArguments" />
+             is in scope to obtain an array of generic type arguments for <paramref name="genericTypeArguments" />
 
             
 
@@ -4179,14 +4472,14 @@
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -4196,8 +4489,7 @@
             >
           </block>
           <para
-            >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see
-             cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
+            >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
 
             
 
@@ -4211,8 +4503,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.FieldInfo" />
+            >A <see cref="T:System.Reflection.FieldInfo" />
 
             
 
@@ -4220,31 +4511,41 @@
           >
         </returns>
         <param name="metadataToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A metadata token that identifies a field in the module.</param
         >
         <param name="genericTypeArguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Type" />
+          An array of <see cref="T:System.Type" />
 
           
 
            objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param
         >
         <param name="genericMethodArguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Type" />
+          An array of <see cref="T:System.Type" />
 
           
 
@@ -4277,33 +4578,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Type.GetGenericArguments" />
+            >Use the <see cref="M:System.Type.GetGenericArguments" />
 
             
 
-             method on the type where <paramref
-             name="metadataToken" />
+             method on the type where <paramref name="metadataToken" />
 
             
 
-             is in scope to obtain an array of generic type arguments for <paramref
-             name="genericTypeArguments" />
+             is in scope to obtain an array of generic type arguments for <paramref name="genericTypeArguments" />
 
             
 
-            . Use the <see
-             cref="M:System.Reflection.MethodInfo.GetGenericArguments" />
+            . Use the <see cref="M:System.Reflection.MethodInfo.GetGenericArguments" />
 
             
 
-             method on the method where <paramref
-             name="metadataToken" />
+             method on the method where <paramref name="metadataToken" />
 
             
 
-             is in scope to obtain an array of generic type arguments for <paramref
-             name="genericTypeArguments" />
+             is in scope to obtain an array of generic type arguments for <paramref name="genericTypeArguments" />
 
             
 
@@ -4312,14 +4607,14 @@
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -4329,8 +4624,7 @@
             >
           </block>
           <para
-            >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see
-             cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
+            >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
 
             
 
@@ -4344,8 +4638,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.MemberInfo" />
+            >A <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -4353,31 +4646,41 @@
           >
         </returns>
         <param name="metadataToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A metadata token that identifies a type or member in the module.</param
         >
         <param name="genericTypeArguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Type" />
+          An array of <see cref="T:System.Type" />
 
           
 
            objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param
         >
         <param name="genericMethodArguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Type" />
+          An array of <see cref="T:System.Type" />
 
           
 
@@ -4410,33 +4713,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Type.GetGenericArguments" />
+            >Use the <see cref="M:System.Type.GetGenericArguments" />
 
             
 
-             method on the type where <paramref
-             name="metadataToken" />
+             method on the type where <paramref name="metadataToken" />
 
             
 
-             is in scope to obtain an array of generic type arguments for <paramref
-             name="genericTypeArguments" />
+             is in scope to obtain an array of generic type arguments for <paramref name="genericTypeArguments" />
 
             
 
-            . Use the <see
-             cref="M:System.Reflection.MethodInfo.GetGenericArguments" />
+            . Use the <see cref="M:System.Reflection.MethodInfo.GetGenericArguments" />
 
             
 
-             method on the method where <paramref
-             name="metadataToken" />
+             method on the method where <paramref name="metadataToken" />
 
             
 
-             is in scope to obtain an array of generic type arguments for <paramref
-             name="genericMethodArguments" />
+             is in scope to obtain an array of generic type arguments for <paramref name="genericMethodArguments" />
 
             
 
@@ -4445,14 +4742,14 @@
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -4462,8 +4759,7 @@
             >
           </block>
           <para
-            >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see
-             cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
+            >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
 
             
 
@@ -4477,8 +4773,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.MethodBase" />
+            >A <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -4486,31 +4781,41 @@
           >
         </returns>
         <param name="metadataToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A metadata token that identifies a method or constructor in the module.</param
         >
         <param name="genericTypeArguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Type" />
+          An array of <see cref="T:System.Type" />
 
           
 
            objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param
         >
         <param name="genericMethodArguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Type" />
+          An array of <see cref="T:System.Type" />
 
           
 
@@ -4543,14 +4848,14 @@
           <block subset="none" type="note">
             <para
               >Information about metadata tokens and signatures can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -4569,7 +4874,11 @@
           <para>An array of bytes representing the signature blob.</para>
         </returns>
         <param name="metadataToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4602,14 +4911,14 @@
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -4626,8 +4935,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -4635,7 +4943,11 @@
           >
         </returns>
         <param name="metadataToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4668,33 +4980,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Type.GetGenericArguments" />
+            >Use the <see cref="M:System.Type.GetGenericArguments" />
 
             
 
-             method on the type where <paramref
-             name="metadataToken" />
+             method on the type where <paramref name="metadataToken" />
 
             
 
-             is in scope to obtain an array of generic type arguments for <paramref
-             name="genericTypeArguments" />
+             is in scope to obtain an array of generic type arguments for <paramref name="genericTypeArguments" />
 
             
 
-            . Use the <see
-             cref="M:System.Reflection.MethodInfo.GetGenericArguments" />
+            . Use the <see cref="M:System.Reflection.MethodInfo.GetGenericArguments" />
 
             
 
-             method on the method where <paramref
-             name="metadataToken" />
+             method on the method where <paramref name="metadataToken" />
 
             
 
-             is in scope to obtain an array of generic type arguments for <paramref
-             name="genericTypeArguments" />
+             is in scope to obtain an array of generic type arguments for <paramref name="genericTypeArguments" />
 
             
 
@@ -4703,14 +5009,14 @@
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -4720,8 +5026,7 @@
             >
           </block>
           <para
-            >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see
-             cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
+            >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
 
             
 
@@ -4735,8 +5040,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Type" />
+            >A <see cref="T:System.Type" />
 
             
 
@@ -4744,31 +5048,41 @@
           >
         </returns>
         <param name="metadataToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A metadata token that identifies a type in the module.</param
         >
         <param name="genericTypeArguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Type" />
+          An array of <see cref="T:System.Type" />
 
           
 
            objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param
         >
         <param name="genericMethodArguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Type" />
+          An array of <see cref="T:System.Type" />
 
           
 
@@ -4821,18 +5135,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -4849,7 +5160,11 @@
           <para>Applies a custom attribute to this module by using a custom attribute builder.</para>
         </summary>
         <param name="customBuilder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4888,20 +5203,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about how to format <paramref
-             name="binaryAttribute" />
+            >For more information about how to format <paramref name="binaryAttribute" />
 
             
 
             , see the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
             >
 
             
 
              on MSDN and <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
 
@@ -4911,18 +5225,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -4939,14 +5250,22 @@
           <para>Applies a custom attribute to this module by using a specified binary large object (BLOB) that represents the attribute.</para>
         </summary>
         <param name="con">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The constructor for the custom attribute. </param
         >
         <param name="binaryAttribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4982,18 +5301,15 @@
           <para>This method does nothing. </para>
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -5010,14 +5326,22 @@
           <para>This method does nothing.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the custom attribute </param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5052,18 +5376,15 @@
           <para>The compiler might generate a startup stub before calling user main. The startup stub will be the entry point. While the user main will be the user entry point so that debugger will not step into the compiler entry point.</para>
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this member no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -5080,7 +5401,11 @@
           <para>Sets the user entry point.</para>
         </summary>
         <param name="entryPoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5150,21 +5475,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference
-            >IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
+            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
 
             
 
             , see the MSDN Library.</para
           >
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Reflection.Emit.ModuleBuilder" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Reflection.Emit.ModuleBuilder" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Runtime.InteropServices._ModuleBuilder" />
+             instance is cast to an <see cref="T:System.Runtime.InteropServices._ModuleBuilder" />
 
             
 
@@ -5174,8 +5496,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Runtime.InteropServices._ModuleBuilder.GetTypeInfo(System.UInt32,System.UInt32,System.IntPtr)" />
+            >For a description of this member, see <see cref="M:System.Runtime.InteropServices._ModuleBuilder.GetTypeInfo(System.UInt32,System.UInt32,System.IntPtr)" />
 
             
 
@@ -5183,21 +5504,33 @@
           >
         </summary>
         <param name="iTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type information to return.</param
         >
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

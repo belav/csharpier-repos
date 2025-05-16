@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class implements the <see
-         cref="T:System.Collections.ICollection" />
+        >This class implements the <see cref="T:System.Collections.ICollection" />
 
         
 
@@ -37,8 +36,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Security.Cryptography.Oid" />
+        >Represents a collection of <see cref="T:System.Security.Cryptography.Oid" />
 
         
 
@@ -68,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.OidCollection" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.OidCollection" />
 
             
 
@@ -103,8 +100,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to add an <see
-             cref="T:System.Security.Cryptography.Oid" />
+            >Use this method to add an <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
@@ -114,13 +110,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Security.Cryptography.Oid" />
+            >Adds an <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
-             object to the <see
-             cref="T:System.Security.Cryptography.OidCollection" />
+             object to the <see cref="T:System.Security.Cryptography.OidCollection" />
 
             
 
@@ -130,8 +124,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the added <see
-             cref="T:System.Security.Cryptography.Oid" />
+            >The index of the added <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
@@ -139,12 +132,15 @@
           >
         </returns>
         <param name="oid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.Oid" />
+          The <see cref="T:System.Security.Cryptography.Oid" />
 
           
 
@@ -178,8 +174,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method copies an <see
-             cref="T:System.Security.Cryptography.OidCollection" />
+            >This method copies an <see cref="T:System.Security.Cryptography.OidCollection" />
 
             
 
@@ -189,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see
-             cref="T:System.Security.Cryptography.OidCollection" />
+            >Copies the <see cref="T:System.Security.Cryptography.OidCollection" />
 
             
 
@@ -198,19 +192,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array to copy the <see
-           cref="T:System.Security.Cryptography.OidCollection" />
+          The array to copy the <see cref="T:System.Security.Cryptography.OidCollection" />
 
           
 
            object into.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -236,8 +237,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of <see
-             cref="T:System.Security.Cryptography.Oid" />
+            >Gets the number of <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
@@ -269,13 +269,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Cryptography.OidEnumerator" />
+            >The <see cref="T:System.Security.Cryptography.OidEnumerator" />
 
             
 
-             class implements the <see
-             cref="T:System.Collections.IEnumerator" />
+             class implements the <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -285,13 +283,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Security.Cryptography.OidEnumerator" />
+            >Returns an <see cref="T:System.Security.Cryptography.OidEnumerator" />
 
             
 
-             object that can be used to navigate the <see
-             cref="T:System.Security.Cryptography.OidCollection" />
+             object that can be used to navigate the <see cref="T:System.Security.Cryptography.OidCollection" />
 
             
 
@@ -301,8 +297,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.Cryptography.OidEnumerator" />
+            >An <see cref="T:System.Security.Cryptography.OidEnumerator" />
 
             
 
@@ -332,8 +327,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether access to the <see
-             cref="T:System.Security.Cryptography.OidCollection" />
+            >Gets a value that indicates whether access to the <see cref="T:System.Security.Cryptography.OidCollection" />
 
             
 
@@ -419,23 +413,19 @@
 
             
 
-             is not thread safe. Derived classes can provide their own synchronized version of the <see
-             cref="T:System.Security.Cryptography.OidCollection" />
+             is not thread safe. Derived classes can provide their own synchronized version of the <see cref="T:System.Security.Cryptography.OidCollection" />
 
             
 
-             class using this property. The synchronizing code must perform operations on the <see
-             cref="P:System.Security.Cryptography.OidCollection.SyncRoot" />
+             class using this property. The synchronizing code must perform operations on the <see cref="P:System.Security.Cryptography.OidCollection.SyncRoot" />
 
             
 
-             property of the <see
-             cref="T:System.Security.Cryptography.OidCollection" />
+             property of the <see cref="T:System.Security.Cryptography.OidCollection" />
 
             
 
-             object, not directly on the object itself. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might simultaneously be modifying the <see
-             cref="T:System.Security.Cryptography.OidCollection" />
+             object, not directly on the object itself. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might simultaneously be modifying the <see cref="T:System.Security.Cryptography.OidCollection" />
 
             
 
@@ -445,8 +435,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Security.Cryptography.OidCollection" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Security.Cryptography.OidCollection" />
 
             
 
@@ -477,8 +466,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method copies an <see
-             cref="T:System.Security.Cryptography.OidCollection" />
+            >This method copies an <see cref="T:System.Security.Cryptography.OidCollection" />
 
             
 
@@ -488,8 +476,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see
-             cref="T:System.Security.Cryptography.OidCollection" />
+            >Copies the <see cref="T:System.Security.Cryptography.OidCollection" />
 
             
 
@@ -497,19 +484,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array to copy the <see
-           cref="T:System.Security.Cryptography.OidCollection" />
+          The array to copy the <see cref="T:System.Security.Cryptography.OidCollection" />
 
           
 
            object to.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -539,13 +533,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Cryptography.OidEnumerator" />
+            >The <see cref="T:System.Security.Cryptography.OidEnumerator" />
 
             
 
-             class implements the <see
-             cref="T:System.Collections.IEnumerator" />
+             class implements the <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -555,13 +547,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Security.Cryptography.OidEnumerator" />
+            >Returns an <see cref="T:System.Security.Cryptography.OidEnumerator" />
 
             
 
-             object that can be used to navigate the <see
-             cref="T:System.Security.Cryptography.OidCollection" />
+             object that can be used to navigate the <see cref="T:System.Security.Cryptography.OidCollection" />
 
             
 
@@ -571,8 +561,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.Cryptography.OidEnumerator" />
+            >An <see cref="T:System.Security.Cryptography.OidEnumerator" />
 
             
 

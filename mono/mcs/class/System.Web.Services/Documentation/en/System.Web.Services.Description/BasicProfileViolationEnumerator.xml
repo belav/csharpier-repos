@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Enumerates the elements in a <see
-         cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
+        >Enumerates the elements in a <see cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
 
         
 
@@ -64,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.BasicProfileViolationEnumerator" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.BasicProfileViolationEnumerator" />
 
             
 
@@ -95,13 +93,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the current <see
-             cref="T:System.Web.Services.Description.BasicProfileViolation" />
+            >Gets the current <see cref="T:System.Web.Services.Description.BasicProfileViolation" />
 
             
 
-             element in the <see
-             cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
+             element in the <see cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
 
             
 
@@ -125,13 +121,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the current instance of the <see
-             cref="T:System.Web.Services.Description.BasicProfileViolationEnumerator" />
+            >Releases all resources used by the current instance of the <see cref="T:System.Web.Services.Description.BasicProfileViolationEnumerator" />
 
             
 
-             class.Releases all resources used by the <see
-             cref="T:System.Web.Services.Description.BasicProfileViolationEnumerator" />
+             class.Releases all resources used by the <see cref="T:System.Web.Services.Description.BasicProfileViolationEnumerator" />
 
             
 
@@ -155,8 +149,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Enumerates to the next element in the <see
-             cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
+            >Enumerates to the next element in the <see cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
 
             
 
@@ -187,8 +180,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the current element in the <see
-             cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
+            >Gets the current element in the <see cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
 
             
 
@@ -212,8 +204,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the enumerator to its initial position, which is before the first element in the <see
-             cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
+            >Sets the enumerator to its initial position, which is before the first element in the <see cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
 
             
 

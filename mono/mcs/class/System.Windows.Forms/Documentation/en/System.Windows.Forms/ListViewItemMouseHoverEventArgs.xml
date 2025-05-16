@@ -17,13 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.ListView.ItemMouseHover" />
+        >The <see cref="E:System.Windows.Forms.ListView.ItemMouseHover" />
 
         
 
-         event occurs when the mouse pointer hovers over a <see
-         cref="T:System.Windows.Forms.ListViewItem" />
+         event occurs when the mouse pointer hovers over a <see cref="T:System.Windows.Forms.ListViewItem" />
 
         
 
@@ -33,8 +31,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.ListView.ItemMouseHover" />
+        >Provides data for the <see cref="E:System.Windows.Forms.ListView.ItemMouseHover" />
 
         
 
@@ -58,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewItemMouseHoverEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItemMouseHoverEventArgs" />
 
             
 
@@ -67,12 +63,15 @@
           >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ListViewItem" />
+          The <see cref="T:System.Windows.Forms.ListViewItem" />
 
           
 

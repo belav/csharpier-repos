@@ -45,8 +45,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.Schema.ColumnAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.Schema.ColumnAttribute" />
 
             
 
@@ -73,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.Schema.ColumnAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.Schema.ColumnAttribute" />
 
             
 
@@ -82,7 +80,11 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -124,23 +126,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The specified order is relative to the order values specified on other properties in the class. For example, given the following definition, the column <paramref
-             name="Line1" />
+            >The specified order is relative to the order values specified on other properties in the class. For example, given the following definition, the column <paramref name="Line1" />
 
             
 
-             appears before <paramref
-             name="Line2" />
+             appears before <paramref name="Line2" />
 
             
 
-            , and <paramref
-             name="Line2" />
+            , and <paramref name="Line2" />
 
             
 
-             appears before <paramref
-             name="Country" />
+             appears before <paramref name="Country" />
 
             
 
@@ -179,8 +177,7 @@ public string Country { get; set; }
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the class that the <see
-             cref="T:System.ComponentModel.DataAnnotations.Schema.ColumnAttribute" />
+            >Gets or sets the name of the class that the <see cref="T:System.ComponentModel.DataAnnotations.Schema.ColumnAttribute" />
 
             
 

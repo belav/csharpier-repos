@@ -3,12 +3,13 @@
   <paragraph>A parameter declared with an out modifier is an output parameter. Similar to a reference parameter, an output parameter does not create a new storage location. Instead, an output parameter represents the same storage location as the variable given as the argument in the method invocation. </paragraph>
   <paragraph
     >When a formal parameter is an output parameter, the corresponding argument in a method invocation must consist of the keyword out followed by a <non_terminal
-     where="12.4">variable-reference</non_terminal>
+      where="12.4"
+      >variable-reference</non_terminal
+    >
 
     
 
-     (<hyperlink
-    >12.3.3</hyperlink>
+     (<hyperlink>12.3.3</hyperlink>
 
     
 
@@ -18,9 +19,7 @@
   <paragraph>Every output parameter of a method must be definitely assigned before the method returns. </paragraph>
   <paragraph
     >Output parameters are typically used in methods that produce multiple return values. <example
-
-      >[Example: For example: <code_example
-      >
+      >[Example: For example: <code_example>
         <![CDATA[
 using System;  
 class Test  
@@ -48,8 +47,7 @@ class Test
   </paragraph>
   <paragraph>
     <example
-      >The example produces the output: <code_example
-      >
+      >The example produces the output: <code_example>
         <![CDATA[
 c:\Windows\System\  
 hello.txt  

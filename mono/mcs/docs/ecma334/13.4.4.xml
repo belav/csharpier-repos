@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <clause number="13.4.4" title="User-defined explicit conversions">
   <paragraph
-    >A user-defined explicit conversion from type S to type T is processed as follows: <list
-    >
+    >A user-defined explicit conversion from type S to type T is processed as follows: <list>
       <list_item> Find the set of types, D, from which user-defined conversion operators will be considered. This set consists of S (if S is a class or struct), the base classes of S (if S is a class), T (if T is a class or struct), and the base classes of T (if T is a class). </list_item>
       <list_item> Find the set of applicable user-defined conversion operators, U. This set consists of the user-defined implicit or explicit conversion operators declared by the classes or structs in D that convert from a type encompassing or encompassed by S to a type encompassing or encompassed by T. If U is empty, the conversion is undefined and a compile-time error occurs. </list_item>
       <list_item> Find the most specific source type, SX, of the operators in U: </list_item>
@@ -22,8 +21,7 @@
         <list_item> If S is not SX, then a standard explicit conversion from S to SX is performed. </list_item>
         <list_item> The most specific user-defined conversion operator is invoked to convert from SX to TX. </list_item>
         <list_item
-          > If TX is not T, then a standard explicit conversion from TX to T is performed. <table_line
-           />
+          > If TX is not T, then a standard explicit conversion from TX to T is performed. <table_line />
         </list_item>
       </list>
     </list>

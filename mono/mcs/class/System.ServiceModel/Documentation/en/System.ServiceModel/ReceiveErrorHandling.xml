@@ -16,18 +16,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A poison message is a message that fails repeated attempts to deliver to the application. This is applicable only when using a Message Queuing (MSMQ)-based binding. The default value is Fault, which faults the listener and therefore the ServiceHost. In the case where the service was to fault because of a poison message, a <see
-         cref="T:System.ServiceModel.MsmqPoisonMessageException" />
+        >A poison message is a message that fails repeated attempts to deliver to the application. This is applicable only when using a Message Queuing (MSMQ)-based binding. The default value is Fault, which faults the listener and therefore the ServiceHost. In the case where the service was to fault because of a poison message, a <see cref="T:System.ServiceModel.MsmqPoisonMessageException" />
 
         
 
-         is thrown. The exception contains the LookupId of the MSMQ message that can be used to move the message out of the way using System.Messaging API. Certain values of the <see
-         cref="T:System.ServiceModel.ReceiveErrorHandling" />
+         is thrown. The exception contains the LookupId of the MSMQ message that can be used to move the message out of the way using System.Messaging API. Certain values of the <see cref="T:System.ServiceModel.ReceiveErrorHandling" />
 
         
 
-         enumeration such as Reject and Move are only available on wv. You control poison message handling by setting the <see
-         cref="P:System.ServiceModel.Channels.MsmqBindingElementBase.ReceiveErrorHandling" />
+         enumeration such as Reject and Move are only available on wv. You control poison message handling by setting the <see cref="P:System.ServiceModel.Channels.MsmqBindingElementBase.ReceiveErrorHandling" />
 
         
 

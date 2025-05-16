@@ -25,13 +25,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The X.509 structure originated in the International Organization for Standardization (ISO) working groups. This structure can be used to represent various types of information including identity, entitlement, and holder attributes (permissions, age, sex, location, affiliation, and so forth). Although the ISO specifications are most informative on the structure itself, the <see
-         cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+        >The X.509 structure originated in the International Organization for Standardization (ISO) working groups. This structure can be used to represent various types of information including identity, entitlement, and holder attributes (permissions, age, sex, location, affiliation, and so forth). Although the ISO specifications are most informative on the structure itself, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
         
 
          class is designed to model the usage scenarios defined in specifications issued by the Internet Engineering Task Force (IETF) Public Key Infrastructure, X.509 (PKIX) working group. The most informative of these specifications is RFC 3280, "<see
-         cref="http://go.microsoft.com/fwlink/?LinkId=45286"
+          cref="http://go.microsoft.com/fwlink/?LinkId=45286"
           >Certificate and Certificate Revocation List (CRL) Profile</see
         >
 
@@ -63,8 +62,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates an empty <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >This constructor creates an empty <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -74,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -103,26 +100,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a new <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >This constructor creates a new <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
              object using certificate information from a byte array. The byte array can be binary (DER) encoded or Base64-encoded X.509 data. The byte array can also be a PKCS7 (Authenticode) signed file; the signer certificate is used to create the object.</para
           >
           <para
-            >If you create an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
-             certificate by specifying a PKCS7 signed file store for <paramref
-             name="rawData" />
+             certificate by specifying a PKCS7 signed file store for <paramref name="rawData" />
 
             
 
-            , the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            , the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -132,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -141,7 +133,11 @@
           >
         </summary>
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -168,8 +164,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a new <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >This constructor creates a new <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -177,13 +172,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The constructor creates a copy of the certificate context. Do not assume that the context structure you passed to the constructor is valid; it may have been released. You can get a copy of the current PCCERT_CONTEXT structure from the <see
-               cref="P:System.Security.Cryptography.X509Certificates.X509Certificate.Handle" />
+              >The constructor creates a copy of the certificate context. Do not assume that the context structure you passed to the constructor is valid; it may have been released. You can get a copy of the current PCCERT_CONTEXT structure from the <see cref="P:System.Security.Cryptography.X509Certificates.X509Certificate.Handle" />
 
               
 
-               property, but it is valid only during the lifetime of the <see
-               cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+               property, but it is valid only during the lifetime of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
               
 
@@ -195,8 +188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -204,7 +196,11 @@
           >
         </summary>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -237,13 +233,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >This method creates a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
-             class using an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+             class using an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
             
 
@@ -253,13 +247,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
-             class using an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+             class using an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
             
 
@@ -267,12 +259,15 @@
           >
         </summary>
         <param name="certificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+          An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
           
 
@@ -299,26 +294,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a new <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >This constructor creates a new <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
              object using a certificate file name. It supports binary (DER) encoding or Base64 encoding.</para
           >
           <para
-            >If you create an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
-             certificate by specifying a PKCS7 signed file store for <paramref
-             name="fileName" />
+             certificate by specifying a PKCS7 signed file store for <paramref name="fileName" />
 
             
 
-            , the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            , the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -328,8 +319,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -337,7 +327,11 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -370,8 +364,7 @@
           <para>This constructor is used with PKCS12 (PFX) files that contain the certificate's private key. Calling this constructor with the correct password decrypts the private key and saves it to a key container.</para>
           <block subset="none" type="note">
             <para
-              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format
-               type="text/html">
+              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
               </format>
 
@@ -381,18 +374,15 @@
             >
           </block>
           <para
-            >If you create an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
             
 
-             certificate by specifying a PKCS7 signed file store for <paramref
-             name="rawData" />
+             certificate by specifying a PKCS7 signed file store for <paramref name="rawData" />
 
             
 
-            , the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+            , the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
             
 
@@ -402,8 +392,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -411,14 +400,22 @@
           >
         </summary>
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A byte array that contains data from an X.509 certificate. </param
         >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -449,8 +446,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a new <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >This constructor creates a new <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -458,8 +454,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format
-               type="text/html">
+              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
               </format>
 
@@ -469,18 +464,15 @@
             >
           </block>
           <para
-            >If you create an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
-             certificate by specifying a PKCS7 signed file store for <paramref
-             name="rawData" />
+             certificate by specifying a PKCS7 signed file store for <paramref name="rawData" />
 
             
 
-            , the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            , the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -490,8 +482,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -499,14 +490,22 @@
           >
         </summary>
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A byte array containing data from an X.509 certificate. </param
         >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -539,8 +538,7 @@
           <para>This constructor is used with PKCS12 (PFX) files that contain the certificate's private key. Calling this constructor with the correct password decrypts the private key and saves it to a key container.</para>
           <block subset="none" type="note">
             <para
-              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format
-               type="text/html">
+              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
               </format>
 
@@ -550,18 +548,15 @@
             >
           </block>
           <para
-            >If you create an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
             
 
-             certificate by specifying a PKCS7 signed file store for <paramref
-             name="fileName" />
+             certificate by specifying a PKCS7 signed file store for <paramref name="fileName" />
 
             
 
-            , the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+            , the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
             
 
@@ -571,8 +566,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -580,14 +574,22 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of a certificate file. </param
         >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -618,8 +620,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a new <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >This constructor creates a new <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -627,8 +628,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format
-               type="text/html">
+              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
               </format>
 
@@ -638,18 +638,15 @@
             >
           </block>
           <para
-            >If you create an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
-             certificate by specifying a PKCS7 signed file store for <paramref
-             name="fileName" />
+             certificate by specifying a PKCS7 signed file store for <paramref name="fileName" />
 
             
 
-            , the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            , the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -659,8 +656,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -668,14 +664,22 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of a certificate file. </param
         >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -712,8 +716,7 @@
           <para>This constructor is used with PKCS12 (PFX) files that contain the certificate's private key. Calling this constructor with the correct password decrypts the private key and saves it to a Microsoft Cryptographic API Cryptographic Service Provider (CSP).</para>
           <block subset="none" type="note">
             <para
-              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format
-               type="text/html">
+              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
               </format>
 
@@ -723,18 +726,15 @@
             >
           </block>
           <para
-            >If you create an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
             
 
-             certificate by specifying a PKCS7 signed file store for <paramref
-             name="rawData" />
+             certificate by specifying a PKCS7 signed file store for <paramref name="rawData" />
 
             
 
-            , the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+            , the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
             
 
@@ -744,8 +744,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -753,21 +752,33 @@
           >
         </summary>
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A byte array that contains data from an X.509 certificate. </param
         >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The password required to access the X.509 certificate data. </param
         >
         <param name="keyStorageFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -802,8 +813,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a new <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >This constructor creates a new <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -811,8 +821,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format
-               type="text/html">
+              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
               </format>
 
@@ -822,18 +831,15 @@
             >
           </block>
           <para
-            >If you create an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
-             certificate by specifying a PKCS7 signed file store for <paramref
-             name="rawData" />
+             certificate by specifying a PKCS7 signed file store for <paramref name="rawData" />
 
             
 
-            , the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            , the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -843,8 +849,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -852,21 +857,33 @@
           >
         </summary>
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A byte array containing data from an X.509 certificate. </param
         >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The password required to access the X.509 certificate data. </param
         >
         <param name="keyStorageFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -901,18 +918,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you create an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
             
 
-             certificate by specifying a PKCS7 signed file store for <paramref
-             name="fileName" />
+             certificate by specifying a PKCS7 signed file store for <paramref name="fileName" />
 
             
 
-            , the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+            , the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
             
 
@@ -922,8 +936,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -931,21 +944,33 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of a certificate file. </param
         >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The password required to access the X.509 certificate data. </param
         >
         <param name="keyStorageFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -980,8 +1005,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a new <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >This constructor creates a new <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -989,8 +1013,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format
-               type="text/html">
+              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
               </format>
 
@@ -1000,18 +1023,15 @@
             >
           </block>
           <para
-            >If you create an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
-             certificate by specifying a PKCS7 signed file store for <paramref
-             name="fileName" />
+             certificate by specifying a PKCS7 signed file store for <paramref name="fileName" />
 
             
 
-            , the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            , the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -1021,8 +1041,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -1030,21 +1049,33 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of a certificate file. </param
         >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The password required to access the X.509 certificate data. </param
         >
         <param name="keyStorageFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1070,18 +1101,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property is set only on a certificate that is associated with a store. If the property is set and the certificate is added to a certificate store, the value is persisted. If the property is set on a certificate retrieved from a store, the value is persisted immediately.</para>
           <para
-            >In an X.509 store, archived certificates are not included in the returned <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >In an X.509 store, archived certificates are not included in the returned <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
-             object unless the <see
-             cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.Archived" />
+             object unless the <see cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.Archived" />
 
             
 
-             property is set to true. No physical archival activity occurs when the <see
-             cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.Archived" />
+             property is set to true. No physical archival activity occurs when the <see cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.Archived" />
 
             
 
@@ -1118,19 +1146,17 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >The extensions defined in the X.509 v3 certificate format allow additional data to be included in the certificate. A number of extensions are defined by ISO in the X.509 v3 definition as well as by PKIX in RFC 3280, "<see
-             cref="http://go.microsoft.com/fwlink/?LinkId=45286"
+              cref="http://go.microsoft.com/fwlink/?LinkId=45286"
               >Certificate and Certificate Revocation List (CRL) Profile</see
             >
 
             
 
-            ." Common extensions include information regarding key usage (<see
-             cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageExtension" />
+            ." Common extensions include information regarding key usage (<see cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageExtension" />
 
             
 
-            ), key identifiers (<see
-             cref="T:System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension" />
+            ), key identifiers (<see cref="T:System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension" />
 
             
 
@@ -1140,8 +1166,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />
+            >Gets a collection of <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />
 
             
 
@@ -1213,8 +1238,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+            >An <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
 
             
 
@@ -1222,7 +1246,11 @@
           >
         </returns>
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1268,8 +1296,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+            >An <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
 
             
 
@@ -1277,7 +1304,11 @@
           >
         </returns>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1329,19 +1360,26 @@
           <para>The name of the certificate.</para>
         </returns>
         <param name="nameType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509NameType" />
+          The <see cref="T:System.Security.Cryptography.X509Certificates.X509NameType" />
 
           
 
            value for the subject. </param
         >
         <param name="forIssuer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1367,8 +1405,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Gets a value that indicates whether an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -1399,8 +1436,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used to take a raw byte array of an X.509 certificate and populate the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >This method can be used to take a raw byte array of an X.509 certificate and populate the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -1411,8 +1447,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Populates an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -1420,7 +1455,11 @@
           >
         </summary>
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1450,8 +1489,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses a certificate file, such as a file with a .cer extension, that represents an X.509 certificate and populates the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >This method uses a certificate file, such as a file with a .cer extension, that represents an X.509 certificate and populates the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -1462,8 +1500,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Populates an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -1471,7 +1508,11 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1516,8 +1557,7 @@
           <para>You can use this method for certificate types such as Base64-encoded or DER-encoded X.509 certificates, or PFX/PKCS12 certificates. Note that a PFX/PKCS12 certificate can contain more than one certificate. In that case, the first certificate associated with a private key is used or, if no private key is found, the first certificate is used.</para>
           <block subset="none" type="note">
             <para
-              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format
-               type="text/html">
+              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
               </format>
 
@@ -1530,8 +1570,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Populates an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -1539,21 +1578,33 @@
           >
         </summary>
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A byte array that contains data from an X.509 certificate. </param
         >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The password required to access the X.509 certificate data. </param
         >
         <param name="keyStorageFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1596,13 +1647,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used to populate an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >This method can be used to populate an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
-             object using a password for the certificate represented by the byte array. The <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
+             object using a password for the certificate represented by the byte array. The <see cref="T:System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
 
             
 
@@ -1611,8 +1660,7 @@
           <para>This method accepts a byte array and can be used for certificate types such as Base64-encoded or DER-encoded X.509 certificates or PFX/PKCS12 certificates. Note that a PFX/PKCS12 certificate can contain more than one certificate. In that case, the first certificate associated with a private key is used or, if no private key is found, the first certificate is used.</para>
           <block subset="none" type="note">
             <para
-              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format
-               type="text/html">
+              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
               </format>
 
@@ -1625,8 +1673,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Populates an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -1634,21 +1681,33 @@
           >
         </summary>
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A byte array containing data from an X.509 certificate. </param
         >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The password required to access the X.509 certificate data. </param
         >
         <param name="keyStorageFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1691,8 +1750,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Security Note   Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format
-             type="text/html">
+            >Security Note   Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html">
               <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
             </format>
 
@@ -1704,8 +1762,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Populates an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -1713,21 +1770,33 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of a certificate file. </param
         >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The password required to access the X.509 certificate data. </param
         >
         <param name="keyStorageFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1770,13 +1839,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used populate an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >This method can be used populate an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
-             object with information from a certificate file, a password, and an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
+             object with information from a certificate file, a password, and an <see cref="T:System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
 
             
 
@@ -1784,8 +1851,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format
-               type="text/html">
+              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
               </format>
 
@@ -1798,13 +1864,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Populates an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
-             object with information from a certificate file, a password, and a <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
+             object with information from a certificate file, a password, and a <see cref="T:System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
 
             
 
@@ -1812,21 +1876,33 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of a certificate file. </param
         >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The password required to access the X.509 certificate data. </param
         >
         <param name="keyStorageFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1857,8 +1933,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property contains the name of the certificate authority (CA) that issued the certificate. To obtain the name of a certificate, use the <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2.GetNameInfo(System.Security.Cryptography.X509Certificates.X509NameType,System.Boolean)" />
+            >This property contains the name of the certificate authority (CA) that issued the certificate. To obtain the name of a certificate, use the <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2.GetNameInfo(System.Security.Cryptography.X509Certificates.X509NameType,System.Boolean)" />
 
             
 
@@ -1949,13 +2024,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Currently this property supports only RSA or DSA keys, so it returns either an <see
-             cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />
+            >Currently this property supports only RSA or DSA keys, so it returns either an <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />
 
             
 
-             or a <see
-             cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />
+             or a <see cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />
 
             
 
@@ -1965,8 +2038,7 @@
             <para>If you set this property to null or to another key without first deleting it, a private key file is left on the disk.</para>
           </block>
           <para
-            >To properly delete the private key associated with this property, set PersistKeyInCsp to false, and then call the <see
-             cref="M:System.Security.Cryptography.AsymmetricAlgorithm.Clear" />
+            >To properly delete the private key associated with this property, set PersistKeyInCsp to false, and then call the <see cref="M:System.Security.Cryptography.AsymmetricAlgorithm.Clear" />
 
             
 
@@ -1976,8 +2048,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+            >Gets or sets the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
 
             
 
@@ -2009,36 +2080,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns a <see
-             cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.PublicKey" />
+            >This property returns a <see cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.PublicKey" />
 
             
 
-             object, which contains the object identifier (<see
-             cref="T:System.Security.Cryptography.Oid" />
+             object, which contains the object identifier (<see cref="T:System.Security.Cryptography.Oid" />
 
             
 
             ) representing the public key algorithm, the ASN.1-encoded parameters, and the ASN.1-encoded key value.</para
           >
           <para
-            >You can also obtain the key as an <see
-             cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+            >You can also obtain the key as an <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
 
             
 
-             object by referencing the <see
-             cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.PublicKey" />
+             object by referencing the <see cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.PublicKey" />
 
             
 
-             property. This property supports only RSA or DSA keys, so it returns either an <see
-             cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />
+             property. This property supports only RSA or DSA keys, so it returns either an <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />
 
             
 
-             or a <see
-             cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />
+             or a <see cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />
 
             
 
@@ -2048,8 +2113,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.PublicKey" />
+            >Gets a <see cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.PublicKey" />
 
             
 
@@ -2103,8 +2167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets the state of an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Resets the state of an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -2160,8 +2223,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object identifier (<see
-             cref="T:System.Security.Cryptography.Oid" />
+            >The object identifier (<see cref="T:System.Security.Cryptography.Oid" />
 
             
 
@@ -2248,13 +2310,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As with all ToString methods, the output might not be consistent across versions of the .NET Framework, so the method results should not be parsed for content. Use the properties on the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >As with all ToString methods, the output might not be consistent across versions of the .NET Framework, so the method results should not be parsed for content. Use the properties on the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
-             object to obtain precise information about the content or use the <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2.ToString(System.Boolean)" />
+             object to obtain precise information about the content or use the <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2.ToString(System.Boolean)" />
 
             
 
@@ -2294,21 +2354,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As with all ToString methods, the output might not be consistent across versions of the .NET Framework, so the method results should not be parsed for content. Use the properties on the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >As with all ToString methods, the output might not be consistent across versions of the .NET Framework, so the method results should not be parsed for content. Use the properties on the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
              object to obtain precise information.</para
           >
           <para
-            >This method displays the certificate in text format. If the <paramref
-             name="verbose" />
+            >This method displays the certificate in text format. If the <paramref name="verbose" />
 
             
 
-             parameter is set to true, the text display includes the public key, private key, and extensions. If <paramref
-             name="verbose" />
+             parameter is set to true, the text display includes the public key, private key, and extensions. If <paramref name="verbose" />
 
             
 
@@ -2324,12 +2381,15 @@
           <para>The certificate information.</para>
         </returns>
         <param name="verbose">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to display the public key, private key, extensions, and so forth; false to display information that is similar to the <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+          true to display the public key, private key, extensions, and so forth; false to display information that is similar to the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
           
 
@@ -2362,21 +2422,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method builds a simple chain for the certificate and applies the base policy to that chain. If you need more information about a failure, validate the certificate directly using the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Chain" />
+            >This method builds a simple chain for the certificate and applies the base policy to that chain. If you need more information about a failure, validate the certificate directly using the <see cref="T:System.Security.Cryptography.X509Certificates.X509Chain" />
 
             
 
              object.</para
           >
           <para
-            >Note that the default chaining engine can be overridden using the <see
-             cref="T:System.Security.Cryptography.CryptoConfig" />
+            >Note that the default chaining engine can be overridden using the <see cref="T:System.Security.Cryptography.CryptoConfig" />
 
             
 
              class. On Microsoft Windows Server 2003, the default engine conforms to the specification described in RFC3280, "<see
-             cref="http://go.microsoft.com/fwlink/?LinkId=45286"
+              cref="http://go.microsoft.com/fwlink/?LinkId=45286"
               >Certificate and Certificate Revocation List (CRL) Profile</see
             >
 

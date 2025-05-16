@@ -12,99 +12,81 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>ASP.NET supports a control data-binding architecture that enables Web server controls to bind to data and present it in a consistent fashion. Web server controls that bind to data are called data-bound controls, and the classes that facilitate binding are called data source controls. Data source controls can represent any data source: a file, a stream, a relational database, a business object, and so on. Data source controls present data in a consistent way to data-bound controls, regardless of the source or format of the underlying data.</para>
       <para
-        >Data source controls that represent hierarchical data derive from the <see
-         cref="T:System.Web.UI.HierarchicalDataSourceControl" />
+        >Data source controls that represent hierarchical data derive from the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" />
 
         
 
-         class, which is the base ASP.NET implementation of the <see
-         cref="T:System.Web.UI.IHierarchicalDataSource" />
+         class, which is the base ASP.NET implementation of the <see cref="T:System.Web.UI.IHierarchicalDataSource" />
 
         
 
-         interface. The <see
-         cref="T:System.Web.UI.IHierarchicalDataSource" />
+         interface. The <see cref="T:System.Web.UI.IHierarchicalDataSource" />
 
         
 
-         interface is used to define data source controls that expose hierarchical data, rather than tabular or list-style data, to Web server controls that derive from the <see
-         cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
+         interface is used to define data source controls that expose hierarchical data, rather than tabular or list-style data, to Web server controls that derive from the <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
 
         
 
-         class, such as the <see
-         cref="T:System.Web.UI.WebControls.TreeView" />
+         class, such as the <see cref="T:System.Web.UI.WebControls.TreeView" />
 
         
 
-         control. The interface defines a single method, <see
-         cref="M:System.Web.UI.IHierarchicalDataSource.GetHierarchicalView(System.String)" />
+         control. The interface defines a single method, <see cref="M:System.Web.UI.IHierarchicalDataSource.GetHierarchicalView(System.String)" />
 
         
 
-        , which retrieves a strongly typed <see
-         cref="T:System.Web.UI.HierarchicalDataSourceView" />
+        , which retrieves a strongly typed <see cref="T:System.Web.UI.HierarchicalDataSourceView" />
 
         
 
-         object. Data source controls that implement this interface support a hierarchical view for each hierarchical level of data they represent. The data source views are not named, like <see
-         cref="T:System.Web.UI.DataSourceView" />
+         object. Data source controls that implement this interface support a hierarchical view for each hierarchical level of data they represent. The data source views are not named, like <see cref="T:System.Web.UI.DataSourceView" />
 
         
 
-         objects, but are identified by their unique hierarchical path, which is the <paramref
-         name="viewPath" />
+         objects, but are identified by their unique hierarchical path, which is the <paramref name="viewPath" />
 
         
 
-         parameter passed to the <see
-         cref="M:System.Web.UI.IHierarchicalDataSource.GetHierarchicalView(System.String)" />
+         parameter passed to the <see cref="M:System.Web.UI.IHierarchicalDataSource.GetHierarchicalView(System.String)" />
 
         
 
          method.</para
       >
       <para
-        >You can think of a data source control as the combination of the <see
-         cref="T:System.Web.UI.IHierarchicalDataSource" />
+        >You can think of a data source control as the combination of the <see cref="T:System.Web.UI.IHierarchicalDataSource" />
 
         
 
-         object and its associated views on the underlying data. Each associated <see
-         cref="T:System.Web.UI.HierarchicalDataSourceView" />
+         object and its associated views on the underlying data. Each associated <see cref="T:System.Web.UI.HierarchicalDataSourceView" />
 
         
 
          object defines the capabilities of a data source control for the hierarchical level represented, and, like all ASP.NET data source view objects, performs operations such as insert, update, delete, and sort.</para
       >
       <para
-        >Data source controls that expose only hierarchical data, such as <see
-         cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
+        >Data source controls that expose only hierarchical data, such as <see cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
 
         
 
-        , are derived from the <see
-         cref="T:System.Web.UI.HierarchicalDataSourceControl" />
+        , are derived from the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" />
 
         
 
-         class. Other data source controls that expose their data as both hierarchical data and tabular data, such as <see
-         cref="T:System.Web.UI.WebControls.XmlDataSource" />
+         class. Other data source controls that expose their data as both hierarchical data and tabular data, such as <see cref="T:System.Web.UI.WebControls.XmlDataSource" />
 
         
 
-        , are derived from <see
-         cref="T:System.Web.UI.HierarchicalDataSourceControl" />
+        , are derived from <see cref="T:System.Web.UI.HierarchicalDataSourceControl" />
 
         
 
-         but implement the <see
-         cref="T:System.Web.UI.IDataSource" />
+         but implement the <see cref="T:System.Web.UI.IDataSource" />
 
         
 
-         and <see
-         cref="T:System.ComponentModel.IListSource" />
+         and <see cref="T:System.ComponentModel.IListSource" />
 
         
 
@@ -114,8 +96,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a hierarchical data source that hierarchical data-bound controls such as <see
-         cref="T:System.Web.UI.WebControls.TreeView" />
+        >Represents a hierarchical data source that hierarchical data-bound controls such as <see cref="T:System.Web.UI.WebControls.TreeView" />
 
         
 
@@ -135,23 +116,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.IHierarchicalDataSource.DataSourceChanged" />
+            >The <see cref="E:System.Web.UI.IHierarchicalDataSource.DataSourceChanged" />
 
             
 
-             event is raised when a change is made to the data source control's properties, such as changing the <see
-             cref="P:System.Web.UI.WebControls.XmlDataSource.DataFile" />
+             event is raised when a change is made to the data source control's properties, such as changing the <see cref="P:System.Web.UI.WebControls.XmlDataSource.DataFile" />
 
             
 
-             property of an <see
-             cref="T:System.Web.UI.WebControls.XmlDataSource" />
+             property of an <see cref="T:System.Web.UI.WebControls.XmlDataSource" />
 
             
 
-             control, or changing the data in the underlying data storage, which happens when XML nodes are changed by an edit action performed by an <see
-             cref="T:System.Web.UI.WebControls.XmlDataSource" />
+             control, or changing the data in the underlying data storage, which happens when XML nodes are changed by an edit action performed by an <see cref="T:System.Web.UI.WebControls.XmlDataSource" />
 
             
 
@@ -161,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the data storage that the <see
-             cref="T:System.Web.UI.IHierarchicalDataSource" />
+            >Occurs when the data storage that the <see cref="T:System.Web.UI.IHierarchicalDataSource" />
 
             
 
@@ -191,28 +167,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.IHierarchicalDataSource" />
+            >The <see cref="T:System.Web.UI.IHierarchicalDataSource" />
 
             
 
-             interface, like the <see
-             cref="T:System.Web.UI.IDataSource" />
+             interface, like the <see cref="T:System.Web.UI.IDataSource" />
 
             
 
-             interface, defines a method that hierarchical data source controls use to retrieve a data source view. Like all <see
-             cref="T:System.Web.UI.DataSourceView" />
+             interface, defines a method that hierarchical data source controls use to retrieve a data source view. Like all <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             helper objects that are associated with data source controls, a <see
-             cref="T:System.Web.UI.HierarchicalDataSourceView" />
+             helper objects that are associated with data source controls, a <see cref="T:System.Web.UI.HierarchicalDataSourceView" />
 
             
 
-             object defines the operations that the data source can perform with the underlying data. However, although data source controls that represent tabular data typically have only one named view, hierarchical data source controls support a view for each level of hierarchical data that the data source control represents. The level of hierarchical data is identified by a unique hierarchical path, passed as the <paramref
-             name="viewPath" />
+             object defines the operations that the data source can perform with the underlying data. However, although data source controls that represent tabular data typically have only one named view, hierarchical data source controls support a view for each level of hierarchical data that the data source control represents. The level of hierarchical data is identified by a unique hierarchical path, passed as the <paramref name="viewPath" />
 
             
 
@@ -222,8 +193,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the view helper object for the <see
-             cref="T:System.Web.UI.IHierarchicalDataSource" />
+            >Gets the view helper object for the <see cref="T:System.Web.UI.IHierarchicalDataSource" />
 
             
 
@@ -233,13 +203,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Web.UI.HierarchicalDataSourceView" />
+            >Returns a <see cref="T:System.Web.UI.HierarchicalDataSourceView" />
 
             
 
-             that represents a single view of the data at the hierarchical level identified by the <paramref
-             name="viewPath" />
+             that represents a single view of the data at the hierarchical level identified by the <paramref name="viewPath" />
 
             
 
@@ -247,7 +215,11 @@
           >
         </returns>
         <param name="viewPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

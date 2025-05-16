@@ -17,26 +17,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.HttpModuleAction" />
+        >The <see cref="T:System.Web.Configuration.HttpModuleAction" />
 
         
 
          class provides a way to programmatically access and modify the add element of the httpModules section of a configuration file.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Configuration.HttpModuleAction" />
+        >The <see cref="T:System.Web.Configuration.HttpModuleAction" />
 
         
 
-         type is part of a group that includes the <see
-         cref="T:System.Web.Configuration.HttpModuleActionCollection" />
+         type is part of a group that includes the <see cref="T:System.Web.Configuration.HttpModuleActionCollection" />
 
         
 
-        , collection, and the <see
-         cref="T:System.Web.Configuration.HttpModulesSection" />
+        , collection, and the <see cref="T:System.Web.Configuration.HttpModulesSection" />
 
         
 
@@ -46,8 +42,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Configures the <see
-         cref="T:System.Web.Configuration.HttpModulesSection" />
+        >Configures the <see cref="T:System.Web.Configuration.HttpModulesSection" />
 
         
 
@@ -72,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.HttpModuleAction" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.HttpModuleAction" />
 
             
 
@@ -81,14 +75,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The module name.</param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -138,8 +140,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The module name is used to identify this <see
-             cref="T:System.Web.Configuration.HttpModuleAction" />
+            >The module name is used to identify this <see cref="T:System.Web.Configuration.HttpModuleAction" />
 
             
 
@@ -191,8 +192,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To find the assembly defined by the <see
-             cref="P:System.Web.Configuration.HttpModuleAction.Type" />
+            >To find the assembly defined by the <see cref="P:System.Web.Configuration.HttpModuleAction.Type" />
 
             
 

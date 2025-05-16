@@ -13,18 +13,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Security.MembershipCreateStatus" />
+        >The <see cref="T:System.Web.Security.MembershipCreateStatus" />
 
         
 
-         enumeration indicates the success or failure of an attempt to create a new user. If the <see
-         cref="M:System.Web.Security.Membership.CreateUser(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Web.Security.MembershipCreateStatus@)" />
+         enumeration indicates the success or failure of an attempt to create a new user. If the <see cref="M:System.Web.Security.Membership.CreateUser(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Web.Security.MembershipCreateStatus@)" />
 
         
 
-         operation fails, the <see
-         cref="T:System.Web.Security.MembershipCreateStatus" />
+         operation fails, the <see cref="T:System.Web.Security.MembershipCreateStatus" />
 
         
 
@@ -32,15 +29,13 @@
       >
       <block subset="none" type="note">
         <para
-          >If you are not familiar with the membership features of ASP.NET, see <format
-           type="text/html">
+          >If you are not familiar with the membership features of ASP.NET, see <format type="text/html">
             <a href="79184d17-f4c7-4c9f-a073-cec4f5543980">Introduction to Membership</a>
           </format>
 
           
 
-           before continuing. For a list of other topics related to membership, see <format
-           type="text/html">
+           before continuing. For a list of other topics related to membership, see <format type="text/html">
             <a href="824c3a24-f0af-427c-a652-0d2d1e9397cd">Managing Users By Using Membership</a>
           </format>
 
@@ -50,28 +45,23 @@
         >
       </block>
       <para
-        >If you use a <see
-         cref="Overload:System.Web.Security.Membership.CreateUser" />
+        >If you use a <see cref="Overload:System.Web.Security.Membership.CreateUser" />
 
         
 
-         method overload that does not specify an output parameter of type <see
-         cref="T:System.Web.Security.MembershipCreateStatus" />
+         method overload that does not specify an output parameter of type <see cref="T:System.Web.Security.MembershipCreateStatus" />
 
         
 
-        , an unsuccessful attempt to create a new user throws a <see
-         cref="T:System.Web.Security.MembershipCreateUserException" />
+        , an unsuccessful attempt to create a new user throws a <see cref="T:System.Web.Security.MembershipCreateUserException" />
 
         
 
-         with the <see
-         cref="P:System.Web.Security.MembershipCreateUserException.StatusCode" />
+         with the <see cref="P:System.Web.Security.MembershipCreateUserException.StatusCode" />
 
         
 
-         property set to one of the <see
-         cref="T:System.Web.Security.MembershipCreateStatus" />
+         property set to one of the <see cref="T:System.Web.Security.MembershipCreateStatus" />
 
         
 
@@ -81,8 +71,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Describes the result of a <see
-         cref="M:System.Web.Security.Membership.CreateUser(System.String,System.String)" />
+        >Describes the result of a <see cref="M:System.Web.Security.Membership.CreateUser(System.String,System.String)" />
 
         
 
@@ -255,8 +244,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The provider returned an error that is not described by other <see
-             cref="T:System.Web.Security.MembershipCreateStatus" />
+            >The provider returned an error that is not described by other <see cref="T:System.Web.Security.MembershipCreateStatus" />
 
             
 

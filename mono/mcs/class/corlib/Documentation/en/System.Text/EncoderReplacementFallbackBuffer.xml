@@ -26,28 +26,23 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>It might not be possible to convert a character to an equivalent encoded byte sequence if no suitable encoding exists. A common reason for an encoding to fail is if the conversion operation uses a code page that cannot represent the character to encode. </para>
       <para
-        >If the input character cannot be converted to an output byte sequence, a <see
-         cref="T:System.Text.EncoderReplacementFallback" />
+        >If the input character cannot be converted to an output byte sequence, a <see cref="T:System.Text.EncoderReplacementFallback" />
 
         
 
-         object provides a replacement string that is substituted for the original input character. The replacement string initializes the value of the <see
-         cref="T:System.Text.EncoderReplacementFallback" />
+         object provides a replacement string that is substituted for the original input character. The replacement string initializes the value of the <see cref="T:System.Text.EncoderReplacementFallback" />
 
         
 
-         object, and the value of the <see
-         cref="T:System.Text.EncoderReplacementFallback" />
+         object, and the value of the <see cref="T:System.Text.EncoderReplacementFallback" />
 
         
 
-         object initializes the value of an <see
-         cref="T:System.Text.EncoderReplacementFallbackBuffer" />
+         object initializes the value of an <see cref="T:System.Text.EncoderReplacementFallbackBuffer" />
 
         
 
-         object. The value of an <see
-         cref="T:System.Text.EncoderReplacementFallbackBuffer" />
+         object. The value of an <see cref="T:System.Text.EncoderReplacementFallbackBuffer" />
 
         
 
@@ -83,13 +78,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Text.EncoderReplacementFallbackBuffer" />
+            >Initializes a new instance of the <see cref="T:System.Text.EncoderReplacementFallbackBuffer" />
 
             
 
-             class using the value of a <see
-             cref="T:System.Text.EncoderReplacementFallback" />
+             class using the value of a <see cref="T:System.Text.EncoderReplacementFallback" />
 
             
 
@@ -97,12 +90,15 @@
           >
         </summary>
         <param name="fallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Text.EncoderReplacementFallback" />
+          A <see cref="T:System.Text.EncoderReplacementFallback" />
 
           
 
@@ -136,28 +132,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="Overload:System.Text.Encoding.GetBytes" />
+            >The <see cref="Overload:System.Text.Encoding.GetBytes" />
 
             
 
-             and <see
-             cref="Overload:System.Text.Encoder.Convert" />
+             and <see cref="Overload:System.Text.Encoder.Convert" />
 
             
 
-             methods call <see
-             cref="M:System.Text.EncoderReplacementFallbackBuffer.Fallback(System.Char,System.Int32)" />
+             methods call <see cref="M:System.Text.EncoderReplacementFallbackBuffer.Fallback(System.Char,System.Int32)" />
 
             
 
-             if they encounter an unknown character in their input. If the return value of <see
-             cref="M:System.Text.EncoderReplacementFallbackBuffer.Fallback(System.Char,System.Int32)" />
+             if they encounter an unknown character in their input. If the return value of <see cref="M:System.Text.EncoderReplacementFallbackBuffer.Fallback(System.Char,System.Int32)" />
 
             
 
-             is true, the calling method can invoke the <see
-             cref="M:System.Text.EncoderReplacementFallbackBuffer.GetNextChar" />
+             is true, the calling method can invoke the <see cref="M:System.Text.EncoderReplacementFallbackBuffer.GetNextChar" />
 
             
 
@@ -173,14 +164,22 @@
           <para>true if the replacement string is not empty; false if the replacement string is empty.</para>
         </returns>
         <param name="charUnknown">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An input character. This parameter is ignored in this operation unless an exception is thrown.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -215,28 +214,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="Overload:System.Text.Encoding.GetBytes" />
+            >The <see cref="Overload:System.Text.Encoding.GetBytes" />
 
             
 
-             and <see
-             cref="Overload:System.Text.Encoder.Convert" />
+             and <see cref="Overload:System.Text.Encoder.Convert" />
 
             
 
-             methods call <see
-             cref="M:System.Text.EncoderReplacementFallbackBuffer.Fallback(System.Char,System.Char,System.Int32)" />
+             methods call <see cref="M:System.Text.EncoderReplacementFallbackBuffer.Fallback(System.Char,System.Char,System.Int32)" />
 
             
 
-             if they encounter an unknown character in their input. If the return value of <see
-             cref="M:System.Text.EncoderReplacementFallbackBuffer.Fallback(System.Char,System.Char,System.Int32)" />
+             if they encounter an unknown character in their input. If the return value of <see cref="M:System.Text.EncoderReplacementFallbackBuffer.Fallback(System.Char,System.Char,System.Int32)" />
 
             
 
-             is true, the calling method can invoke the <see
-             cref="M:System.Text.EncoderReplacementFallbackBuffer.GetNextChar" />
+             is true, the calling method can invoke the <see cref="M:System.Text.EncoderReplacementFallbackBuffer.GetNextChar" />
 
             
 
@@ -252,21 +246,33 @@
           <para>true if the replacement string is not empty; false if the replacement string is empty.</para>
         </returns>
         <param name="charUnknownHigh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The high surrogate of the input pair.</param
         >
         <param name="charUnknownLow">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The low surrogate of the input pair.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -294,28 +300,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="Overload:System.Text.Encoding.GetBytes" />
+            >The <see cref="Overload:System.Text.Encoding.GetBytes" />
 
             
 
-             and <see
-             cref="Overload:System.Text.Encoder.Convert" />
+             and <see cref="Overload:System.Text.Encoder.Convert" />
 
             
 
-             methods call <see
-             cref="Overload:System.Text.EncoderReplacementFallbackBuffer.Fallback" />
+             methods call <see cref="Overload:System.Text.EncoderReplacementFallbackBuffer.Fallback" />
 
             
 
-             if they encounter an unknown surrogate pair or character in their input. If the return value of <see
-             cref="Overload:System.Text.EncoderReplacementFallbackBuffer.Fallback" />
+             if they encounter an unknown surrogate pair or character in their input. If the return value of <see cref="Overload:System.Text.EncoderReplacementFallbackBuffer.Fallback" />
 
             
 
-             is true, the calling method can invoke <see
-             cref="M:System.Text.EncoderReplacementFallbackBuffer.GetNextChar" />
+             is true, the calling method can invoke <see cref="M:System.Text.EncoderReplacementFallbackBuffer.GetNextChar" />
 
             
 
@@ -353,8 +354,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes the next call to the <see
-             cref="M:System.Text.EncoderReplacementFallbackBuffer.GetNextChar" />
+            >Causes the next call to the <see cref="M:System.Text.EncoderReplacementFallbackBuffer.GetNextChar" />
 
             
 
@@ -364,8 +364,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="M:System.Text.EncoderReplacementFallbackBuffer.MovePrevious" />
+            >true if the <see cref="M:System.Text.EncoderReplacementFallbackBuffer.MovePrevious" />
 
             
 
@@ -391,13 +390,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="Overload:System.Text.EncoderReplacementFallbackBuffer.Fallback" />
+            >The <see cref="Overload:System.Text.EncoderReplacementFallbackBuffer.Fallback" />
 
             
 
-             method returns true if the <see
-             cref="P:System.Text.EncoderReplacementFallbackBuffer.Remaining" />
+             method returns true if the <see cref="P:System.Text.EncoderReplacementFallbackBuffer.Remaining" />
 
             
 
@@ -430,13 +427,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Text.EncoderReplacementFallbackBuffer.Reset" />
+            >The <see cref="M:System.Text.EncoderReplacementFallbackBuffer.Reset" />
 
             
 
-             method discards any persisted state information and data that govern emitting a replacement string. Unpredictable results occur if the encoding operation continues after the <see
-             cref="M:System.Text.EncoderReplacementFallbackBuffer.Reset" />
+             method discards any persisted state information and data that govern emitting a replacement string. Unpredictable results occur if the encoding operation continues after the <see cref="M:System.Text.EncoderReplacementFallbackBuffer.Reset" />
 
             
 
@@ -446,8 +441,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes all internal state information and data in this instance of <see
-             cref="T:System.Text.EncoderReplacementFallbackBuffer" />
+            >Initializes all internal state information and data in this instance of <see cref="T:System.Text.EncoderReplacementFallbackBuffer" />
 
             
 

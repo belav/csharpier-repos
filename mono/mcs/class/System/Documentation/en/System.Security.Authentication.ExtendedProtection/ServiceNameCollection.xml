@@ -28,13 +28,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
+        >The <see cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
 
         
 
-         class is used in an <see
-         cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+         class is used in an <see cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
 
         
 
@@ -44,8 +42,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
+        >The <see cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
 
         
 
@@ -74,13 +71,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
+            >The <see cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
 
             
 
-             class that is initialized contains the specified values passed in the <paramref
-             name="items" />
+             class that is initialized contains the specified values passed in the <paramref name="items" />
 
             
 
@@ -90,13 +85,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new read-only instance of the <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
+            >Initializes a new read-only instance of the <see cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
 
             
 
-             class based on an existing <see
-             cref="T:System.Collections.ICollection" />
+             class based on an existing <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -104,12 +97,15 @@
           >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Collections.ICollection" />
+          An instance of the <see cref="T:System.Collections.ICollection" />
 
           
 
@@ -140,13 +136,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
+            >The <see cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
 
             
 
-             class that is initialized contains the specified values passed in the <paramref
-             name="items" />
+             class that is initialized contains the specified values passed in the <paramref name="items" />
 
             
 
@@ -156,13 +150,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Merges the current <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
+            >Merges the current <see cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
 
             
 
-             with the specified values to create a new <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
+             with the specified values to create a new <see cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
 
             
 
@@ -172,13 +164,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
+            >A new <see cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
 
             
 
-             instance that contains the union of the existing <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
+             instance that contains the union of the existing <see cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
 
             
 
@@ -186,12 +176,15 @@
           >
         </returns>
         <param name="serviceNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Collections.IEnumerable" />
+          An instance of the <see cref="T:System.Collections.IEnumerable" />
 
           
 
@@ -222,13 +215,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
+            >The <see cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
 
             
 
-             class that is initialized contains the specified values passed in the <paramref
-             name="items" />
+             class that is initialized contains the specified values passed in the <paramref name="items" />
 
             
 
@@ -238,13 +229,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Merges the current <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
+            >Merges the current <see cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
 
             
 
-             with the specified values to create a new <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
+             with the specified values to create a new <see cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
 
             
 
@@ -254,13 +243,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
+            >A new <see cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
 
             
 
-             instance that contains the union of the existing <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
+             instance that contains the union of the existing <see cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
 
             
 
@@ -268,7 +255,11 @@
           >
         </returns>
         <param name="serviceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

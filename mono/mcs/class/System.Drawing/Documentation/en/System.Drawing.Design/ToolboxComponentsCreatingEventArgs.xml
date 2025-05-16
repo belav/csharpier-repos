@@ -24,13 +24,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Drawing.Design.ToolboxItem.ComponentsCreating" />
+        >The <see cref="E:System.Drawing.Design.ToolboxItem.ComponentsCreating" />
 
         
 
-         event is raised when components are about to be added to the toolbox. <see
-         cref="T:System.Drawing.Design.ToolboxComponentsCreatingEventArgs" />
+         event is raised when components are about to be added to the toolbox. <see cref="T:System.Drawing.Design.ToolboxComponentsCreatingEventArgs" />
 
         
 
@@ -40,8 +38,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Drawing.Design.ToolboxItem.ComponentsCreating" />
+        >Provides data for the <see cref="E:System.Drawing.Design.ToolboxItem.ComponentsCreating" />
 
         
 
@@ -65,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Design.ToolboxComponentsCreatingEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Design.ToolboxComponentsCreatingEventArgs" />
 
             
 
@@ -74,7 +70,11 @@
           >
         </summary>
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -104,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an instance of the <see
-             cref="T:System.ComponentModel.Design.IDesignerHost" />
+            >Gets or sets an instance of the <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
             
 

@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Groups together a set of related instances of the <see
-         cref="T:System.Web.Services.Description.Port" />
+        >Groups together a set of related instances of the <see cref="T:System.Web.Services.Description.Port" />
 
         
 
@@ -44,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.Service" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.Service" />
 
             
 
@@ -73,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of extensibility elements associated with the <see
-             cref="T:System.Web.Services.Description.Service" />
+            >Gets the collection of extensibility elements associated with the <see cref="T:System.Web.Services.Description.Service" />
 
             
 
@@ -129,13 +126,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of <see
-             cref="T:System.Web.Services.Description.Port" />
+            >Gets the collection of <see cref="T:System.Web.Services.Description.Port" />
 
             
 
-             instances contained in the <see
-             cref="T:System.Web.Services.Description.Service" />
+             instances contained in the <see cref="T:System.Web.Services.Description.Service" />
 
             
 
@@ -168,13 +163,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Gets the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
-             of which the <see
-             cref="T:System.Web.Services.Description.Service" />
+             of which the <see cref="T:System.Web.Services.Description.Service" />
 
             
 

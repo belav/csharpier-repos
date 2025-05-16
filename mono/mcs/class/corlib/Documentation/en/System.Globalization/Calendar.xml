@@ -36,8 +36,7 @@
       <para>A calendar divides time into units, such as weeks, months, and years. The number, length, and start of the divisions vary in each calendar.</para>
       <block subset="none" type="note">
         <para
-          >For information about using the calendar classes in the .NET Framework, see <format
-           type="text/html">
+          >For information about using the calendar classes in the .NET Framework, see <format type="text/html">
             <a href="0c1534e5-979b-4c8a-a588-1c24301aefb3">Working with Calendars</a>
           </format>
 
@@ -47,49 +46,41 @@
         >
       </block>
       <para
-        >Any moment in time can be represented as a set of numeric values using a particular calendar. For example, a vernal equinox occurred at (1999, 3, 20, 8, 46, 0, 0.0) in the Gregorian calendar, that is, March 20, 1999 C.E. at 8:46:00:0.0. An implementation of <see
-         cref="T:System.Globalization.Calendar" />
+        >Any moment in time can be represented as a set of numeric values using a particular calendar. For example, a vernal equinox occurred at (1999, 3, 20, 8, 46, 0, 0.0) in the Gregorian calendar, that is, March 20, 1999 C.E. at 8:46:00:0.0. An implementation of <see cref="T:System.Globalization.Calendar" />
 
         
 
-         can map any date in the range of a specific calendar to a similar set of numeric values, and <see
-         cref="T:System.DateTime" />
+         can map any date in the range of a specific calendar to a similar set of numeric values, and <see cref="T:System.DateTime" />
 
         
 
-         can map such sets of numeric values to a textual representation using information from <see
-         cref="T:System.Globalization.Calendar" />
+         can map such sets of numeric values to a textual representation using information from <see cref="T:System.Globalization.Calendar" />
 
         
 
-         and <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         and <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
         . The textual representation can be culture-sensitive, for example, "8:46 AM March 20th 1999 AD" for the en-US culture, or culture-insensitive, for example, "1999-03-20T08:46:00" in ISO 8601 format.</para
       >
       <para
-        >A <see
-         cref="T:System.Globalization.Calendar" />
+        >A <see cref="T:System.Globalization.Calendar" />
 
         
 
-         implementation can define one or more eras. The <see
-         cref="T:System.Globalization.Calendar" />
+         implementation can define one or more eras. The <see cref="T:System.Globalization.Calendar" />
 
         
 
-         class identifies the eras as enumerated integers, where the current era (<see
-         cref="F:System.Globalization.Calendar.CurrentEra" />
+         class identifies the eras as enumerated integers, where the current era (<see cref="F:System.Globalization.Calendar.CurrentEra" />
 
         
 
         ) has the value 0.</para
       >
       <para
-        >To make up for the difference between the calendar year and the actual time that the earth rotates around the sun or the actual time that the moon rotates around the earth, a leap year has a different number of days from a standard calendar year. Each <see
-         cref="T:System.Globalization.Calendar" />
+        >To make up for the difference between the calendar year and the actual time that the earth rotates around the sun or the actual time that the moon rotates around the earth, a leap year has a different number of days from a standard calendar year. Each <see cref="T:System.Globalization.Calendar" />
 
         
 
@@ -97,13 +88,11 @@
       >
       <para>For consistency, the first unit in each interval (the first month, for example) is assigned the value 1.</para>
       <para
-        >The <see
-         cref="N:System.Globalization" />
+        >The <see cref="N:System.Globalization" />
 
         
 
-         namespace includes the following <see
-         cref="T:System.Globalization.Calendar" />
+         namespace includes the following <see cref="T:System.Globalization.Calendar" />
 
         
 
@@ -212,8 +201,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Globalization.Calendar" />
+            >Initializes a new instance of the <see cref="T:System.Globalization.Calendar" />
 
             
 
@@ -248,104 +236,85 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="days" />
+            >The <paramref name="days" />
 
             
 
-             value is added to the specified <see
-             cref="T:System.DateTime" />
+             value is added to the specified <see cref="T:System.DateTime" />
 
             
 
-            . If <paramref
-             name="days" />
+            . If <paramref name="days" />
 
             
 
-             is negative, the resulting <see
-             cref="T:System.DateTime" />
+             is negative, the resulting <see cref="T:System.DateTime" />
 
             
 
-             is earlier than the specified <see
-             cref="T:System.DateTime" />
+             is earlier than the specified <see cref="T:System.DateTime" />
 
             
 
             .</para
           >
           <para
-            >The month part of the resulting <see
-             cref="T:System.DateTime" />
+            >The month part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting day is outside the month of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting day is outside the month of the specified <see cref="T:System.DateTime" />
 
             
 
-            . The year part of the resulting <see
-             cref="T:System.DateTime" />
+            . The year part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting month is outside the year of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting month is outside the year of the specified <see cref="T:System.DateTime" />
 
             
 
-            . The era part of the resulting <see
-             cref="T:System.DateTime" />
+            . The era part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting year is outside the era of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting year is outside the era of the specified <see cref="T:System.DateTime" />
 
             
 
-            . The time-of-day part of the resulting <see
-             cref="T:System.DateTime" />
+            . The time-of-day part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             remains the same as the specified <see
-             cref="T:System.DateTime" />
+             remains the same as the specified <see cref="T:System.DateTime" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="P:System.DateTime.Kind" />
+            >The <see cref="P:System.DateTime.Kind" />
 
             
 
-             property of the returned <see
-             cref="T:System.DateTime" />
+             property of the returned <see cref="T:System.DateTime" />
 
             
 
-             value always equals <see
-             cref="F:System.DateTimeKind.Unspecified" />
+             value always equals <see cref="F:System.DateTimeKind.Unspecified" />
 
             
 
-            . You can preserve the <see
-             cref="P:System.DateTime.Kind" />
+            . You can preserve the <see cref="P:System.DateTime.Kind" />
 
             
 
-             property of the <paramref
-             name="time" />
+             property of the <paramref name="time" />
 
             
 
-             parameter by calling the <see
-             cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
+             parameter by calling the <see cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
 
             
 
@@ -356,13 +325,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.DateTime" />
+            >Returns a <see cref="T:System.DateTime" />
 
             
 
-             that is the specified number of days away from the specified <see
-             cref="T:System.DateTime" />
+             that is the specified number of days away from the specified <see cref="T:System.DateTime" />
 
             
 
@@ -372,13 +339,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.DateTime" />
+            >The <see cref="T:System.DateTime" />
 
             
 
-             that results from adding the specified number of days to the specified <see
-             cref="T:System.DateTime" />
+             that results from adding the specified number of days to the specified <see cref="T:System.DateTime" />
 
             
 
@@ -386,19 +351,26 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
            to which to add days. </param
         >
         <param name="days">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -432,104 +404,85 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="hours" />
+            >The <paramref name="hours" />
 
             
 
-             value is added to the specified <see
-             cref="T:System.DateTime" />
+             value is added to the specified <see cref="T:System.DateTime" />
 
             
 
-            . If <paramref
-             name="hours" />
+            . If <paramref name="hours" />
 
             
 
-             is negative, the resulting <see
-             cref="T:System.DateTime" />
+             is negative, the resulting <see cref="T:System.DateTime" />
 
             
 
-             is earlier than the specified <see
-             cref="T:System.DateTime" />
+             is earlier than the specified <see cref="T:System.DateTime" />
 
             
 
             .</para
           >
           <para
-            >The day part of the resulting <see
-             cref="T:System.DateTime" />
+            >The day part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting time is outside the day of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting time is outside the day of the specified <see cref="T:System.DateTime" />
 
             
 
-            . The month part of the resulting <see
-             cref="T:System.DateTime" />
+            . The month part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting day is outside the month of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting day is outside the month of the specified <see cref="T:System.DateTime" />
 
             
 
-            . The year part of the resulting <see
-             cref="T:System.DateTime" />
+            . The year part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting month is outside the year of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting month is outside the year of the specified <see cref="T:System.DateTime" />
 
             
 
-            . The era part of the resulting <see
-             cref="T:System.DateTime" />
+            . The era part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting year is outside the era of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting year is outside the era of the specified <see cref="T:System.DateTime" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="P:System.DateTime.Kind" />
+            >The <see cref="P:System.DateTime.Kind" />
 
             
 
-             property of the returned <see
-             cref="T:System.DateTime" />
+             property of the returned <see cref="T:System.DateTime" />
 
             
 
-             value always equals <see
-             cref="F:System.DateTimeKind.Unspecified" />
+             value always equals <see cref="F:System.DateTimeKind.Unspecified" />
 
             
 
-            . You can preserve the <see
-             cref="P:System.DateTime.Kind" />
+            . You can preserve the <see cref="P:System.DateTime.Kind" />
 
             
 
-             property of the <paramref
-             name="time" />
+             property of the <paramref name="time" />
 
             
 
-             parameter by calling the <see
-             cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
+             parameter by calling the <see cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
 
             
 
@@ -540,13 +493,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.DateTime" />
+            >Returns a <see cref="T:System.DateTime" />
 
             
 
-             that is the specified number of hours away from the specified <see
-             cref="T:System.DateTime" />
+             that is the specified number of hours away from the specified <see cref="T:System.DateTime" />
 
             
 
@@ -556,13 +507,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.DateTime" />
+            >The <see cref="T:System.DateTime" />
 
             
 
-             that results from adding the specified number of hours to the specified <see
-             cref="T:System.DateTime" />
+             that results from adding the specified number of hours to the specified <see cref="T:System.DateTime" />
 
             
 
@@ -570,19 +519,26 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
            to which to add hours. </param
         >
         <param name="hours">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -616,104 +572,85 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="milliseconds" />
+            >The <paramref name="milliseconds" />
 
             
 
-             value is rounded to the nearest integer before it is added to the specified <see
-             cref="T:System.DateTime" />
+             value is rounded to the nearest integer before it is added to the specified <see cref="T:System.DateTime" />
 
             
 
-            . If <paramref
-             name="milliseconds" />
+            . If <paramref name="milliseconds" />
 
             
 
-             is negative, the resulting <see
-             cref="T:System.DateTime" />
+             is negative, the resulting <see cref="T:System.DateTime" />
 
             
 
-             is earlier than the specified <see
-             cref="T:System.DateTime" />
+             is earlier than the specified <see cref="T:System.DateTime" />
 
             
 
             .</para
           >
           <para
-            >The day part of the resulting <see
-             cref="T:System.DateTime" />
+            >The day part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting time is outside the day of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting time is outside the day of the specified <see cref="T:System.DateTime" />
 
             
 
-            . The month part of the resulting <see
-             cref="T:System.DateTime" />
+            . The month part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting day is outside the month of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting day is outside the month of the specified <see cref="T:System.DateTime" />
 
             
 
-            . The year part of the resulting <see
-             cref="T:System.DateTime" />
+            . The year part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting month is outside the year of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting month is outside the year of the specified <see cref="T:System.DateTime" />
 
             
 
-            . The era part of the resulting <see
-             cref="T:System.DateTime" />
+            . The era part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting year is outside the era of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting year is outside the era of the specified <see cref="T:System.DateTime" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="P:System.DateTime.Kind" />
+            >The <see cref="P:System.DateTime.Kind" />
 
             
 
-             property of the returned <see
-             cref="T:System.DateTime" />
+             property of the returned <see cref="T:System.DateTime" />
 
             
 
-             value always equals <see
-             cref="F:System.DateTimeKind.Unspecified" />
+             value always equals <see cref="F:System.DateTimeKind.Unspecified" />
 
             
 
-            . You can preserve the <see
-             cref="P:System.DateTime.Kind" />
+            . You can preserve the <see cref="P:System.DateTime.Kind" />
 
             
 
-             property of the <paramref
-             name="time" />
+             property of the <paramref name="time" />
 
             
 
-             parameter by calling the <see
-             cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
+             parameter by calling the <see cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
 
             
 
@@ -724,13 +661,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.DateTime" />
+            >Returns a <see cref="T:System.DateTime" />
 
             
 
-             that is the specified number of milliseconds away from the specified <see
-             cref="T:System.DateTime" />
+             that is the specified number of milliseconds away from the specified <see cref="T:System.DateTime" />
 
             
 
@@ -740,13 +675,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.DateTime" />
+            >The <see cref="T:System.DateTime" />
 
             
 
-             that results from adding the specified number of milliseconds to the specified <see
-             cref="T:System.DateTime" />
+             that results from adding the specified number of milliseconds to the specified <see cref="T:System.DateTime" />
 
             
 
@@ -754,19 +687,26 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
            to add milliseconds to. </param
         >
         <param name="milliseconds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -800,104 +740,85 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="minutes" />
+            >The <paramref name="minutes" />
 
             
 
-             value is added to the specified <see
-             cref="T:System.DateTime" />
+             value is added to the specified <see cref="T:System.DateTime" />
 
             
 
-            . If <paramref
-             name="minutes" />
+            . If <paramref name="minutes" />
 
             
 
-             is negative, the resulting <see
-             cref="T:System.DateTime" />
+             is negative, the resulting <see cref="T:System.DateTime" />
 
             
 
-             is earlier than the specified <see
-             cref="T:System.DateTime" />
+             is earlier than the specified <see cref="T:System.DateTime" />
 
             
 
             .</para
           >
           <para
-            >The day part of the resulting <see
-             cref="T:System.DateTime" />
+            >The day part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting time is outside the day of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting time is outside the day of the specified <see cref="T:System.DateTime" />
 
             
 
-            . The month part of the resulting <see
-             cref="T:System.DateTime" />
+            . The month part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting day is outside the month of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting day is outside the month of the specified <see cref="T:System.DateTime" />
 
             
 
-            . The year part of the resulting <see
-             cref="T:System.DateTime" />
+            . The year part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting month is outside the year of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting month is outside the year of the specified <see cref="T:System.DateTime" />
 
             
 
-            . The era part of the resulting <see
-             cref="T:System.DateTime" />
+            . The era part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting year is outside the era of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting year is outside the era of the specified <see cref="T:System.DateTime" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="P:System.DateTime.Kind" />
+            >The <see cref="P:System.DateTime.Kind" />
 
             
 
-             property of the returned <see
-             cref="T:System.DateTime" />
+             property of the returned <see cref="T:System.DateTime" />
 
             
 
-             value always equals <see
-             cref="F:System.DateTimeKind.Unspecified" />
+             value always equals <see cref="F:System.DateTimeKind.Unspecified" />
 
             
 
-            . You can preserve the <see
-             cref="P:System.DateTime.Kind" />
+            . You can preserve the <see cref="P:System.DateTime.Kind" />
 
             
 
-             property of the <paramref
-             name="time" />
+             property of the <paramref name="time" />
 
             
 
-             parameter by calling the <see
-             cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
+             parameter by calling the <see cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
 
             
 
@@ -908,13 +829,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.DateTime" />
+            >Returns a <see cref="T:System.DateTime" />
 
             
 
-             that is the specified number of minutes away from the specified <see
-             cref="T:System.DateTime" />
+             that is the specified number of minutes away from the specified <see cref="T:System.DateTime" />
 
             
 
@@ -924,13 +843,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.DateTime" />
+            >The <see cref="T:System.DateTime" />
 
             
 
-             that results from adding the specified number of minutes to the specified <see
-             cref="T:System.DateTime" />
+             that results from adding the specified number of minutes to the specified <see cref="T:System.DateTime" />
 
             
 
@@ -938,19 +855,26 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
            to which to add minutes. </param
         >
         <param name="minutes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -984,125 +908,103 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="months" />
+            >The <paramref name="months" />
 
             
 
-             value is added to the specified <see
-             cref="T:System.DateTime" />
+             value is added to the specified <see cref="T:System.DateTime" />
 
             
 
-            . If <paramref
-             name="months" />
+            . If <paramref name="months" />
 
             
 
-             is negative, the resulting <see
-             cref="T:System.DateTime" />
+             is negative, the resulting <see cref="T:System.DateTime" />
 
             
 
-             is earlier than the specified <see
-             cref="T:System.DateTime" />
+             is earlier than the specified <see cref="T:System.DateTime" />
 
             
 
             .</para
           >
           <para
-            >The day part of the resulting <see
-             cref="T:System.DateTime" />
+            >The day part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting day is not a valid day in the resulting month of the resulting year. It is changed to the last valid day in the resulting month of the resulting year. The year part of the resulting <see
-             cref="T:System.DateTime" />
+             is affected if the resulting day is not a valid day in the resulting month of the resulting year. It is changed to the last valid day in the resulting month of the resulting year. The year part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting month is outside the year of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting month is outside the year of the specified <see cref="T:System.DateTime" />
 
             
 
-            . The era part of the resulting <see
-             cref="T:System.DateTime" />
+            . The era part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting year is outside the era of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting year is outside the era of the specified <see cref="T:System.DateTime" />
 
             
 
-            . The time-of-day part of the resulting <see
-             cref="T:System.DateTime" />
+            . The time-of-day part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             remains the same as the specified <see
-             cref="T:System.DateTime" />
+             remains the same as the specified <see cref="T:System.DateTime" />
 
             
 
             .</para
           >
           <para
-            >For example, suppose that the current calendar has 12 months, where the fourth month has 30 days and the tenth month has 31 days. If the specified month is the tenth month, the specified day is the 31st day of that month, and the value of the <paramref
-             name="months" />
+            >For example, suppose that the current calendar has 12 months, where the fourth month has 30 days and the tenth month has 31 days. If the specified month is the tenth month, the specified day is the 31st day of that month, and the value of the <paramref name="months" />
 
             
 
              parameter is 6, the resulting year is one more than the specified year, the resulting month is the fourth month, and the resulting day is the 30th day, which is the last day of the resulting month.</para
           >
           <para
-            >If the value of the <paramref
-             name="months" />
+            >If the value of the <paramref name="months" />
 
             
 
-             parameter is negative, the resulting <see
-             cref="T:System.DateTime" />
+             parameter is negative, the resulting <see cref="T:System.DateTime" />
 
             
 
-             is earlier than the specified <see
-             cref="T:System.DateTime" />
+             is earlier than the specified <see cref="T:System.DateTime" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="P:System.DateTime.Kind" />
+            >The <see cref="P:System.DateTime.Kind" />
 
             
 
-             property of the returned <see
-             cref="T:System.DateTime" />
+             property of the returned <see cref="T:System.DateTime" />
 
             
 
-             value always equals <see
-             cref="F:System.DateTimeKind.Unspecified" />
+             value always equals <see cref="F:System.DateTimeKind.Unspecified" />
 
             
 
-            . You can preserve the <see
-             cref="P:System.DateTime.Kind" />
+            . You can preserve the <see cref="P:System.DateTime.Kind" />
 
             
 
-             property of the <paramref
-             name="time" />
+             property of the <paramref name="time" />
 
             
 
-             parameter by calling the <see
-             cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
+             parameter by calling the <see cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
 
             
 
@@ -1113,13 +1015,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, returns a <see
-             cref="T:System.DateTime" />
+            >When overridden in a derived class, returns a <see cref="T:System.DateTime" />
 
             
 
-             that is the specified number of months away from the specified <see
-             cref="T:System.DateTime" />
+             that is the specified number of months away from the specified <see cref="T:System.DateTime" />
 
             
 
@@ -1129,13 +1029,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.DateTime" />
+            >The <see cref="T:System.DateTime" />
 
             
 
-             that results from adding the specified number of months to the specified <see
-             cref="T:System.DateTime" />
+             that results from adding the specified number of months to the specified <see cref="T:System.DateTime" />
 
             
 
@@ -1143,19 +1041,26 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
            to which to add months. </param
         >
         <param name="months">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1189,104 +1094,85 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="seconds" />
+            >The <paramref name="seconds" />
 
             
 
-             value is added to the specified <see
-             cref="T:System.DateTime" />
+             value is added to the specified <see cref="T:System.DateTime" />
 
             
 
-            . If <paramref
-             name="seconds" />
+            . If <paramref name="seconds" />
 
             
 
-             is negative, the resulting <see
-             cref="T:System.DateTime" />
+             is negative, the resulting <see cref="T:System.DateTime" />
 
             
 
-             is earlier than the specified <see
-             cref="T:System.DateTime" />
+             is earlier than the specified <see cref="T:System.DateTime" />
 
             
 
             .</para
           >
           <para
-            >The day part of the resulting <see
-             cref="T:System.DateTime" />
+            >The day part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting time is outside the day of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting time is outside the day of the specified <see cref="T:System.DateTime" />
 
             
 
-            . The month part of the resulting <see
-             cref="T:System.DateTime" />
+            . The month part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting day is outside the month of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting day is outside the month of the specified <see cref="T:System.DateTime" />
 
             
 
-            . The year part of the resulting <see
-             cref="T:System.DateTime" />
+            . The year part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting month is outside the year of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting month is outside the year of the specified <see cref="T:System.DateTime" />
 
             
 
-            . The era part of the resulting <see
-             cref="T:System.DateTime" />
+            . The era part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting year is outside the era of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting year is outside the era of the specified <see cref="T:System.DateTime" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="P:System.DateTime.Kind" />
+            >The <see cref="P:System.DateTime.Kind" />
 
             
 
-             property of the returned <see
-             cref="T:System.DateTime" />
+             property of the returned <see cref="T:System.DateTime" />
 
             
 
-             value always equals <see
-             cref="F:System.DateTimeKind.Unspecified" />
+             value always equals <see cref="F:System.DateTimeKind.Unspecified" />
 
             
 
-            . You can preserve the <see
-             cref="P:System.DateTime.Kind" />
+            . You can preserve the <see cref="P:System.DateTime.Kind" />
 
             
 
-             property of the <paramref
-             name="time" />
+             property of the <paramref name="time" />
 
             
 
-             parameter by calling the <see
-             cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
+             parameter by calling the <see cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
 
             
 
@@ -1297,13 +1183,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.DateTime" />
+            >Returns a <see cref="T:System.DateTime" />
 
             
 
-             that is the specified number of seconds away from the specified <see
-             cref="T:System.DateTime" />
+             that is the specified number of seconds away from the specified <see cref="T:System.DateTime" />
 
             
 
@@ -1313,13 +1197,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.DateTime" />
+            >The <see cref="T:System.DateTime" />
 
             
 
-             that results from adding the specified number of seconds to the specified <see
-             cref="T:System.DateTime" />
+             that results from adding the specified number of seconds to the specified <see cref="T:System.DateTime" />
 
             
 
@@ -1327,19 +1209,26 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
            to which to add seconds. </param
         >
         <param name="seconds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1373,112 +1262,92 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="weeks" />
+            >The <paramref name="weeks" />
 
             
 
-             value is added to the specified <see
-             cref="T:System.DateTime" />
+             value is added to the specified <see cref="T:System.DateTime" />
 
             
 
-            . If <paramref
-             name="weeks" />
+            . If <paramref name="weeks" />
 
             
 
-             is negative, the resulting <see
-             cref="T:System.DateTime" />
+             is negative, the resulting <see cref="T:System.DateTime" />
 
             
 
-             is earlier than the specified <see
-             cref="T:System.DateTime" />
+             is earlier than the specified <see cref="T:System.DateTime" />
 
             
 
             .</para
           >
           <para
-            >The month part of the resulting <see
-             cref="T:System.DateTime" />
+            >The month part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting day is outside the month of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting day is outside the month of the specified <see cref="T:System.DateTime" />
 
             
 
-            . The year part of the resulting <see
-             cref="T:System.DateTime" />
+            . The year part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting month is outside the year of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting month is outside the year of the specified <see cref="T:System.DateTime" />
 
             
 
-            . The era part of the resulting <see
-             cref="T:System.DateTime" />
+            . The era part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting year is outside the era of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting year is outside the era of the specified <see cref="T:System.DateTime" />
 
             
 
-            . The time-of-day part of the resulting <see
-             cref="T:System.DateTime" />
+            . The time-of-day part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             remains the same as the specified <see
-             cref="T:System.DateTime" />
+             remains the same as the specified <see cref="T:System.DateTime" />
 
             
 
             .</para
           >
           <para
-            >In all .NET Framework classes derived from the <see
-             cref="T:System.Globalization.Calendar" />
+            >In all .NET Framework classes derived from the <see cref="T:System.Globalization.Calendar" />
 
             
 
              class, a week is defined as seven days.</para
           >
           <para
-            >The <see
-             cref="P:System.DateTime.Kind" />
+            >The <see cref="P:System.DateTime.Kind" />
 
             
 
-             property of the returned <see
-             cref="T:System.DateTime" />
+             property of the returned <see cref="T:System.DateTime" />
 
             
 
-             value always equals <see
-             cref="F:System.DateTimeKind.Unspecified" />
+             value always equals <see cref="F:System.DateTimeKind.Unspecified" />
 
             
 
-            . You can preserve the <see
-             cref="P:System.DateTime.Kind" />
+            . You can preserve the <see cref="P:System.DateTime.Kind" />
 
             
 
-             property of the <paramref
-             name="time" />
+             property of the <paramref name="time" />
 
             
 
-             parameter by calling the <see
-             cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
+             parameter by calling the <see cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
 
             
 
@@ -1489,13 +1358,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.DateTime" />
+            >Returns a <see cref="T:System.DateTime" />
 
             
 
-             that is the specified number of weeks away from the specified <see
-             cref="T:System.DateTime" />
+             that is the specified number of weeks away from the specified <see cref="T:System.DateTime" />
 
             
 
@@ -1505,13 +1372,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.DateTime" />
+            >The <see cref="T:System.DateTime" />
 
             
 
-             that results from adding the specified number of weeks to the specified <see
-             cref="T:System.DateTime" />
+             that results from adding the specified number of weeks to the specified <see cref="T:System.DateTime" />
 
             
 
@@ -1519,19 +1384,26 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
            to which to add weeks. </param
         >
         <param name="weeks">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1565,120 +1437,99 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="years" />
+            >The <paramref name="years" />
 
             
 
-             value is added to the specified <see
-             cref="T:System.DateTime" />
+             value is added to the specified <see cref="T:System.DateTime" />
 
             
 
-            . If <paramref
-             name="years" />
+            . If <paramref name="years" />
 
             
 
-             is negative, the resulting <see
-             cref="T:System.DateTime" />
+             is negative, the resulting <see cref="T:System.DateTime" />
 
             
 
-             is earlier than the specified <see
-             cref="T:System.DateTime" />
+             is earlier than the specified <see cref="T:System.DateTime" />
 
             
 
             .</para
           >
           <para
-            >The day part of the resulting <see
-             cref="T:System.DateTime" />
+            >The day part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting day is not a valid day in the resulting month of the resulting year. It is changed to the last valid day in the resulting month of the resulting year. The month part of the resulting <see
-             cref="T:System.DateTime" />
+             is affected if the resulting day is not a valid day in the resulting month of the resulting year. It is changed to the last valid day in the resulting month of the resulting year. The month part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting month is not a valid month in the resulting year. It is changed to the last valid month in the resulting year. The era part of the resulting <see
-             cref="T:System.DateTime" />
+             is affected if the resulting month is not a valid month in the resulting year. It is changed to the last valid month in the resulting year. The era part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             is affected if the resulting year is outside the era of the specified <see
-             cref="T:System.DateTime" />
+             is affected if the resulting year is outside the era of the specified <see cref="T:System.DateTime" />
 
             
 
-            . The time-of-day part of the resulting <see
-             cref="T:System.DateTime" />
+            . The time-of-day part of the resulting <see cref="T:System.DateTime" />
 
             
 
-             remains the same as the specified <see
-             cref="T:System.DateTime" />
+             remains the same as the specified <see cref="T:System.DateTime" />
 
             
 
             .</para
           >
           <para
-            >For example, in the Gregorian calendar, February has 28 days, except during a leap year when it has 29 days. If the specified date is the 29th day of February in a leap year and the value of <paramref
-             name="years" />
+            >For example, in the Gregorian calendar, February has 28 days, except during a leap year when it has 29 days. If the specified date is the 29th day of February in a leap year and the value of <paramref name="years" />
 
             
 
              is 1, the resulting date is the 28th day of February in the following year.</para
           >
           <para
-            >If <paramref
-             name="years" />
+            >If <paramref name="years" />
 
             
 
-             is negative, the resulting <see
-             cref="T:System.DateTime" />
+             is negative, the resulting <see cref="T:System.DateTime" />
 
             
 
-             is earlier than the specified <see
-             cref="T:System.DateTime" />
+             is earlier than the specified <see cref="T:System.DateTime" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="P:System.DateTime.Kind" />
+            >The <see cref="P:System.DateTime.Kind" />
 
             
 
-             property of the returned <see
-             cref="T:System.DateTime" />
+             property of the returned <see cref="T:System.DateTime" />
 
             
 
-             value always equals <see
-             cref="F:System.DateTimeKind.Unspecified" />
+             value always equals <see cref="F:System.DateTimeKind.Unspecified" />
 
             
 
-            . You can preserve the <see
-             cref="P:System.DateTime.Kind" />
+            . You can preserve the <see cref="P:System.DateTime.Kind" />
 
             
 
-             property of the <paramref
-             name="time" />
+             property of the <paramref name="time" />
 
             
 
-             parameter by calling the <see
-             cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
+             parameter by calling the <see cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
 
             
 
@@ -1689,13 +1540,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, returns a <see
-             cref="T:System.DateTime" />
+            >When overridden in a derived class, returns a <see cref="T:System.DateTime" />
 
             
 
-             that is the specified number of years away from the specified <see
-             cref="T:System.DateTime" />
+             that is the specified number of years away from the specified <see cref="T:System.DateTime" />
 
             
 
@@ -1705,13 +1554,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.DateTime" />
+            >The <see cref="T:System.DateTime" />
 
             
 
-             that results from adding the specified number of years to the specified <see
-             cref="T:System.DateTime" />
+             that results from adding the specified number of years to the specified <see cref="T:System.DateTime" />
 
             
 
@@ -1719,19 +1566,26 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
            to which to add years. </param
         >
         <param name="years">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1800,8 +1654,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new object that is a copy of the current <see
-             cref="T:System.Globalization.Calendar" />
+            >Creates a new object that is a copy of the current <see cref="T:System.Globalization.Calendar" />
 
             
 
@@ -1811,13 +1664,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of <see
-             cref="T:System.Object" />
+            >A new instance of <see cref="T:System.Object" />
 
             
 
-             that is the memberwise clone of the current <see
-             cref="T:System.Globalization.Calendar" />
+             that is the memberwise clone of the current <see cref="T:System.Globalization.Calendar" />
 
             
 
@@ -1847,13 +1698,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Globalization.Calendar.CurrentEra" />
+            >The <see cref="F:System.Globalization.Calendar.CurrentEra" />
 
             
 
-             field represents the index of the current era in the <see
-             cref="P:System.Globalization.Calendar.Eras" />
+             field represents the index of the current era in the <see cref="P:System.Globalization.Calendar.Eras" />
 
             
 
@@ -1887,8 +1736,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns a constant value of 365. Note that the property value can be overridden by classes derived from the <see
-             cref="T:System.Globalization.Calendar" />
+            >This property returns a constant value of 365. Note that the property value can be overridden by classes derived from the <see cref="T:System.Globalization.Calendar" />
 
             
 
@@ -1898,8 +1746,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of days in the year that precedes the year that is specified by the <see
-             cref="P:System.Globalization.Calendar.MinSupportedDateTime" />
+            >Gets the number of days in the year that precedes the year that is specified by the <see cref="P:System.Globalization.Calendar.MinSupportedDateTime" />
 
             
 
@@ -1925,8 +1772,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The eras are in reverse chronological order, with the current era as the first element of the array, and the oldest era as the last element of the array. For example, the value of the current era in <see
-             cref="T:System.Globalization.JapaneseCalendar" />
+            >The eras are in reverse chronological order, with the current era as the first element of the array, and the oldest era as the last element of the array. For example, the value of the current era in <see cref="T:System.Globalization.JapaneseCalendar" />
 
             
 
@@ -1962,8 +1808,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, returns the day of the month in the specified <see
-             cref="T:System.DateTime" />
+            >When overridden in a derived class, returns the day of the month in the specified <see cref="T:System.DateTime" />
 
             
 
@@ -1973,8 +1818,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A positive integer that represents the day of the month in the <paramref
-             name="time" />
+            >A positive integer that represents the day of the month in the <paramref name="time" />
 
             
 
@@ -1982,12 +1826,15 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
@@ -2020,8 +1867,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.DayOfWeek" />
+            >The <see cref="T:System.DayOfWeek" />
 
             
 
@@ -2031,8 +1877,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, returns the day of the week in the specified <see
-             cref="T:System.DateTime" />
+            >When overridden in a derived class, returns the day of the week in the specified <see cref="T:System.DateTime" />
 
             
 
@@ -2042,13 +1887,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.DayOfWeek" />
+            >A <see cref="T:System.DayOfWeek" />
 
             
 
-             value that represents the day of the week in the <paramref
-             name="time" />
+             value that represents the day of the week in the <paramref name="time" />
 
             
 
@@ -2056,12 +1899,15 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
@@ -2091,18 +1937,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The day of the year is defined as the number of days from the first day of the year. For example, in <see
-             cref="T:System.Globalization.GregorianCalendar" />
+            >The day of the year is defined as the number of days from the first day of the year. For example, in <see cref="T:System.Globalization.GregorianCalendar" />
 
             
 
-            , <see
-             cref="M:System.Globalization.Calendar.GetDayOfYear(System.DateTime)" />
+            , <see cref="M:System.Globalization.Calendar.GetDayOfYear(System.DateTime)" />
 
             
 
-             for January 1 returns 1, and <see
-             cref="M:System.Globalization.Calendar.GetDayOfYear(System.DateTime)" />
+             for January 1 returns 1, and <see cref="M:System.Globalization.Calendar.GetDayOfYear(System.DateTime)" />
 
             
 
@@ -2112,8 +1955,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, returns the day of the year in the specified <see
-             cref="T:System.DateTime" />
+            >When overridden in a derived class, returns the day of the year in the specified <see cref="T:System.DateTime" />
 
             
 
@@ -2123,8 +1965,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A positive integer that represents the day of the year in the <paramref
-             name="time" />
+            >A positive integer that represents the day of the year in the <paramref name="time" />
 
             
 
@@ -2132,12 +1973,15 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
@@ -2171,13 +2015,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For example, in <see
-             cref="T:System.Globalization.GregorianCalendar" />
+            >For example, in <see cref="T:System.Globalization.GregorianCalendar" />
 
             
 
-            , <see
-             cref="M:System.Globalization.Calendar.GetDaysInMonth(System.Int32,System.Int32)" />
+            , <see cref="M:System.Globalization.Calendar.GetDaysInMonth(System.Int32,System.Int32)" />
 
             
 
@@ -2193,14 +2035,22 @@
           <para>The number of days in the specified month in the specified year in the current era.</para>
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An integer that represents the year. </param
         >
         <param name="month">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2235,13 +2085,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For example, in <see
-             cref="T:System.Globalization.GregorianCalendar" />
+            >For example, in <see cref="T:System.Globalization.GregorianCalendar" />
 
             
 
-            , <see
-             cref="M:System.Globalization.Calendar.GetDaysInMonth(System.Int32,System.Int32)" />
+            , <see cref="M:System.Globalization.Calendar.GetDaysInMonth(System.Int32,System.Int32)" />
 
             
 
@@ -2257,21 +2105,33 @@
           <para>The number of days in the specified month in the specified year in the specified era.</para>
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An integer that represents the year. </param
         >
         <param name="month">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A positive integer that represents the month. </param
         >
         <param name="era">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2301,13 +2161,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For example, in <see
-             cref="T:System.Globalization.GregorianCalendar" />
+            >For example, in <see cref="T:System.Globalization.GregorianCalendar" />
 
             
 
-            , <see
-             cref="M:System.Globalization.Calendar.GetDaysInYear(System.Int32)" />
+            , <see cref="M:System.Globalization.Calendar.GetDaysInYear(System.Int32)" />
 
             
 
@@ -2323,7 +2181,11 @@
           <para>The number of days in the specified year in the current era.</para>
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2357,13 +2219,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For example, in <see
-             cref="T:System.Globalization.GregorianCalendar" />
+            >For example, in <see cref="T:System.Globalization.GregorianCalendar" />
 
             
 
-            , <see
-             cref="M:System.Globalization.Calendar.GetDaysInYear(System.Int32)" />
+            , <see cref="M:System.Globalization.Calendar.GetDaysInYear(System.Int32)" />
 
             
 
@@ -2379,14 +2239,22 @@
           <para>The number of days in the specified year in the specified era.</para>
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An integer that represents the year. </param
         >
         <param name="era">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2417,8 +2285,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, returns the era in the specified <see
-             cref="T:System.DateTime" />
+            >When overridden in a derived class, returns the era in the specified <see cref="T:System.DateTime" />
 
             
 
@@ -2428,8 +2295,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer that represents the era in <paramref
-             name="time" />
+            >An integer that represents the era in <paramref name="time" />
 
             
 
@@ -2437,12 +2303,15 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
@@ -2473,8 +2342,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the hours value in the specified <see
-             cref="T:System.DateTime" />
+            >Returns the hours value in the specified <see cref="T:System.DateTime" />
 
             
 
@@ -2484,8 +2352,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer from 0 to 23 that represents the hour in <paramref
-             name="time" />
+            >An integer from 0 to 23 that represents the hour in <paramref name="time" />
 
             
 
@@ -2493,12 +2360,15 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
@@ -2533,13 +2403,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a calendar that supports the notion of a leap month, the leap month can occur either after a particular month or after any month in a year. For example, the <see
-             cref="M:System.Globalization.EastAsianLunisolarCalendar.GetMonth(System.DateTime)" />
+            >In a calendar that supports the notion of a leap month, the leap month can occur either after a particular month or after any month in a year. For example, the <see cref="M:System.Globalization.EastAsianLunisolarCalendar.GetMonth(System.DateTime)" />
 
             
 
-             method returns a number between 1 and 13 that indicates the month associated with a specified date. If there is a leap month between the eighth and ninth months of the year, the <see
-             cref="M:System.Globalization.EastAsianLunisolarCalendar.GetMonth(System.DateTime)" />
+             method returns a number between 1 and 13 that indicates the month associated with a specified date. If there is a leap month between the eighth and ninth months of the year, the <see cref="M:System.Globalization.EastAsianLunisolarCalendar.GetMonth(System.DateTime)" />
 
             
 
@@ -2555,8 +2423,7 @@
           <para>A positive integer that indicates the leap month in the specified year.</para>
           <para>-or-</para>
           <para
-            >Zero if this calendar does not support a leap month or if the <paramref
-             name="year" />
+            >Zero if this calendar does not support a leap month or if the <paramref name="year" />
 
             
 
@@ -2564,7 +2431,11 @@
           >
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2600,13 +2471,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a calendar that supports the notion of a leap month, the leap month can occur either after a particular month or after any month in a year. For example, the <see
-             cref="M:System.Globalization.EastAsianLunisolarCalendar.GetMonth(System.DateTime)" />
+            >In a calendar that supports the notion of a leap month, the leap month can occur either after a particular month or after any month in a year. For example, the <see cref="M:System.Globalization.EastAsianLunisolarCalendar.GetMonth(System.DateTime)" />
 
             
 
-             method returns a number between 1 and 13 that indicates the month associated with a specified date. If there is a leap month between the eighth and ninth months of the year, the <see
-             cref="M:System.Globalization.EastAsianLunisolarCalendar.GetMonth(System.DateTime)" />
+             method returns a number between 1 and 13 that indicates the month associated with a specified date. If there is a leap month between the eighth and ninth months of the year, the <see cref="M:System.Globalization.EastAsianLunisolarCalendar.GetMonth(System.DateTime)" />
 
             
 
@@ -2622,13 +2491,11 @@
           <para>A positive integer that indicates the leap month in the specified year and era.</para>
           <para>-or-</para>
           <para
-            >Zero if this calendar does not support a leap month or if the <paramref
-             name="year" />
+            >Zero if this calendar does not support a leap month or if the <paramref name="year" />
 
             
 
-             and <paramref
-             name="era" />
+             and <paramref name="era" />
 
             
 
@@ -2636,14 +2503,22 @@
           >
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A year.</param
         >
         <param name="era">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2677,8 +2552,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the milliseconds value in the specified <see
-             cref="T:System.DateTime" />
+            >Returns the milliseconds value in the specified <see cref="T:System.DateTime" />
 
             
 
@@ -2688,8 +2562,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A double-precision floating-point number from 0 to 999 that represents the milliseconds in the <paramref
-             name="time" />
+            >A double-precision floating-point number from 0 to 999 that represents the milliseconds in the <paramref name="time" />
 
             
 
@@ -2697,12 +2570,15 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
@@ -2733,8 +2609,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the minutes value in the specified <see
-             cref="T:System.DateTime" />
+            >Returns the minutes value in the specified <see cref="T:System.DateTime" />
 
             
 
@@ -2744,8 +2619,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer from 0 to 59 that represents the minutes in <paramref
-             name="time" />
+            >An integer from 0 to 59 that represents the minutes in <paramref name="time" />
 
             
 
@@ -2753,12 +2627,15 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
@@ -2788,18 +2665,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For example, in <see
-             cref="T:System.Globalization.HebrewCalendar" />
+            >For example, in <see cref="T:System.Globalization.HebrewCalendar" />
 
             
 
-            , <see
-             cref="M:System.Globalization.Calendar.GetMonth(System.DateTime)" />
+            , <see cref="M:System.Globalization.Calendar.GetMonth(System.DateTime)" />
 
             
 
-             for Tishrei returns 1, and <see
-             cref="M:System.Globalization.Calendar.GetMonth(System.DateTime)" />
+             for Tishrei returns 1, and <see cref="M:System.Globalization.Calendar.GetMonth(System.DateTime)" />
 
             
 
@@ -2809,8 +2683,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, returns the month in the specified <see
-             cref="T:System.DateTime" />
+            >When overridden in a derived class, returns the month in the specified <see cref="T:System.DateTime" />
 
             
 
@@ -2820,8 +2693,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A positive integer that represents the month in <paramref
-             name="time" />
+            >A positive integer that represents the month in <paramref name="time" />
 
             
 
@@ -2829,12 +2701,15 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
@@ -2864,13 +2739,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For example, in <see
-             cref="T:System.Globalization.HebrewCalendar" />
+            >For example, in <see cref="T:System.Globalization.HebrewCalendar" />
 
             
 
-            , <see
-             cref="M:System.Globalization.Calendar.GetMonthsInYear(System.Int32)" />
+            , <see cref="M:System.Globalization.Calendar.GetMonthsInYear(System.Int32)" />
 
             
 
@@ -2886,7 +2759,11 @@
           <para>The number of months in the specified year in the current era.</para>
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2920,13 +2797,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For example, in <see
-             cref="T:System.Globalization.HebrewCalendar" />
+            >For example, in <see cref="T:System.Globalization.HebrewCalendar" />
 
             
 
-            , <see
-             cref="M:System.Globalization.Calendar.GetMonthsInYear(System.Int32)" />
+            , <see cref="M:System.Globalization.Calendar.GetMonthsInYear(System.Int32)" />
 
             
 
@@ -2942,14 +2817,22 @@
           <para>The number of months in the specified year in the specified era.</para>
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An integer that represents the year. </param
         >
         <param name="era">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2980,8 +2863,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the seconds value in the specified <see
-             cref="T:System.DateTime" />
+            >Returns the seconds value in the specified <see cref="T:System.DateTime" />
 
             
 
@@ -2991,8 +2873,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer from 0 to 59 that represents the seconds in <paramref
-             name="time" />
+            >An integer from 0 to 59 that represents the seconds in <paramref name="time" />
 
             
 
@@ -3000,12 +2881,15 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
@@ -3040,31 +2924,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used to determine the number of weeks in the year by setting <paramref
-             name="time" />
+            >This method can be used to determine the number of weeks in the year by setting <paramref name="time" />
 
             
 
              to the last day of the year.</para
           >
           <para
-            >The <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >The <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object for a particular culture that uses the calendar indicated by the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+             object for a particular culture that uses the calendar indicated by the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
 
             
 
-             property includes the following culture-specific values that can be used for the <paramref
-             name="rule" />
+             property includes the following culture-specific values that can be used for the <paramref name="rule" />
 
             
 
-             and <paramref
-             name="firstDayOfWeek" />
+             and <paramref name="firstDayOfWeek" />
 
             
 
@@ -3073,13 +2952,11 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="P:System.Globalization.DateTimeFormatInfo.FirstDayOfWeek" />
+                >The <see cref="P:System.Globalization.DateTimeFormatInfo.FirstDayOfWeek" />
 
                 
 
-                 property contains the default first day of the week that can be used for the <paramref
-                 name="firstDayOfWeek" />
+                 property contains the default first day of the week that can be used for the <paramref name="firstDayOfWeek" />
 
                 
 
@@ -3088,13 +2965,11 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.Globalization.DateTimeFormatInfo.CalendarWeekRule" />
+                >The <see cref="P:System.Globalization.DateTimeFormatInfo.CalendarWeekRule" />
 
                 
 
-                 property contains the default calendar week rule that can be used for the <paramref
-                 name="rule" />
+                 property contains the default calendar week rule that can be used for the <paramref name="rule" />
 
                 
 
@@ -3103,8 +2978,7 @@
             </item>
           </list>
           <para
-            >The following example uses the current culture's <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >The following example uses the current culture's <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -3112,53 +2986,43 @@
           >
           <para>code reference: System.Globalization.Calendar.GetWeekOfYear#2</para>
           <para
-            >For some calendars, a call to the <see
-             cref="M:System.Globalization.Calendar.GetWeekOfYear(System.DateTime,System.Globalization.CalendarWeekRule,System.DayOfWeek)" />
+            >For some calendars, a call to the <see cref="M:System.Globalization.Calendar.GetWeekOfYear(System.DateTime,System.Globalization.CalendarWeekRule,System.DayOfWeek)" />
 
             
 
-             method throws an <see
-             cref="T:System.ArgumentOutOfRangeException" />
+             method throws an <see cref="T:System.ArgumentOutOfRangeException" />
 
             
 
-             for particular combinations of <paramref
-             name="rule" />
+             for particular combinations of <paramref name="rule" />
 
             
 
-             and <paramref
-             name="firstDayOfWeek" />
+             and <paramref name="firstDayOfWeek" />
 
             
 
-             values even if <paramref
-             name="time" />
+             values even if <paramref name="time" />
 
             
 
-             is greater than the date returned by that calendar's <see
-             cref="P:System.Globalization.Calendar.MinSupportedDateTime" />
+             is greater than the date returned by that calendar's <see cref="P:System.Globalization.Calendar.MinSupportedDateTime" />
 
             
 
-             property. The following table lists the affected calendars, the specific <paramref
-             name="rule" />
+             property. The following table lists the affected calendars, the specific <paramref name="rule" />
 
             
 
-             values, and the range of the earliest supported <paramref
-             name="time" />
+             values, and the range of the earliest supported <paramref name="time" />
 
             
 
-             values. The specific minimum <see
-             cref="T:System.DateTime" />
+             values. The specific minimum <see cref="T:System.DateTime" />
 
             
 
-             value depends on the value of the <paramref
-             name="firstDayOfWeek" />
+             value depends on the value of the <paramref name="firstDayOfWeek" />
 
             
 
@@ -3528,8 +3392,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the week of the year that includes the date in the specified <see
-             cref="T:System.DateTime" />
+            >Returns the week of the year that includes the date in the specified <see cref="T:System.DateTime" />
 
             
 
@@ -3539,8 +3402,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A positive integer that represents the week of the year that includes the date in the <paramref
-             name="time" />
+            >A positive integer that represents the week of the year that includes the date in the <paramref name="time" />
 
             
 
@@ -3548,21 +3410,33 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A date and time value. </param
         >
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An enumeration value that defines a calendar week. </param
         >
         <param name="firstDayOfWeek">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3593,8 +3467,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, returns the year in the specified <see
-             cref="T:System.DateTime" />
+            >When overridden in a derived class, returns the year in the specified <see cref="T:System.DateTime" />
 
             
 
@@ -3604,8 +3477,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer that represents the year in <paramref
-             name="time" />
+            >An integer that represents the year in <paramref name="time" />
 
             
 
@@ -3613,12 +3485,15 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
@@ -3653,8 +3528,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To make up for the difference between the calendar year and the actual time that the earth rotates around the sun or the actual time that the moon rotates around the earth, a leap year has a different number of days from a standard calendar year. Each <see
-             cref="T:System.Globalization.Calendar" />
+            >To make up for the difference between the calendar year and the actual time that the earth rotates around the sun or the actual time that the moon rotates around the earth, a leap year has a different number of days from a standard calendar year. Each <see cref="T:System.Globalization.Calendar" />
 
             
 
@@ -3671,21 +3545,33 @@
           <para>true if the specified day is a leap day; otherwise, false.</para>
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An integer that represents the year. </param
         >
         <param name="month">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A positive integer that represents the month. </param
         >
         <param name="day">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3721,8 +3607,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To make up for the difference between the calendar year and the actual time that the earth rotates around the sun or the actual time that the moon rotates around the earth, a leap year has a different number of days from a standard calendar year. Each <see
-             cref="T:System.Globalization.Calendar" />
+            >To make up for the difference between the calendar year and the actual time that the earth rotates around the sun or the actual time that the moon rotates around the earth, a leap year has a different number of days from a standard calendar year. Each <see cref="T:System.Globalization.Calendar" />
 
             
 
@@ -3739,28 +3624,44 @@
           <para>true if the specified day is a leap day; otherwise, false.</para>
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An integer that represents the year. </param
         >
         <param name="month">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A positive integer that represents the month. </param
         >
         <param name="day">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A positive integer that represents the day. </param
         >
         <param name="era">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3794,8 +3695,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To make up for the difference between the calendar year and the actual time that the earth rotates around the sun or the actual time that the moon rotates around the earth, a leap year has a different number of days from a standard calendar year. Each <see
-             cref="T:System.Globalization.Calendar" />
+            >To make up for the difference between the calendar year and the actual time that the earth rotates around the sun or the actual time that the moon rotates around the earth, a leap year has a different number of days from a standard calendar year. Each <see cref="T:System.Globalization.Calendar" />
 
             
 
@@ -3812,14 +3712,22 @@
           <para>true if the specified month is a leap month; otherwise, false.</para>
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An integer that represents the year. </param
         >
         <param name="month">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3854,8 +3762,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To make up for the difference between the calendar year and the actual time that the earth rotates around the sun or the actual time that the moon rotates around the earth, a leap year has a different number of days from a standard calendar year. Each <see
-             cref="T:System.Globalization.Calendar" />
+            >To make up for the difference between the calendar year and the actual time that the earth rotates around the sun or the actual time that the moon rotates around the earth, a leap year has a different number of days from a standard calendar year. Each <see cref="T:System.Globalization.Calendar" />
 
             
 
@@ -3872,21 +3779,33 @@
           <para>true if the specified month is a leap month; otherwise, false.</para>
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An integer that represents the year. </param
         >
         <param name="month">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A positive integer that represents the month. </param
         >
         <param name="era">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3916,8 +3835,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To make up for the difference between the calendar year and the actual time that the earth rotates around the sun or the actual time that the moon rotates around the earth, a leap year has a different number of days from a standard calendar year. Each <see
-             cref="T:System.Globalization.Calendar" />
+            >To make up for the difference between the calendar year and the actual time that the earth rotates around the sun or the actual time that the moon rotates around the earth, a leap year has a different number of days from a standard calendar year. Each <see cref="T:System.Globalization.Calendar" />
 
             
 
@@ -3933,7 +3851,11 @@
           <para>true if the specified year is a leap year; otherwise, false.</para>
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3964,8 +3886,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To make up for the difference between the calendar year and the actual time that the earth rotates around the sun or the actual time that the moon rotates around the earth, a leap year has a different number of days from a standard calendar year. Each <see
-             cref="T:System.Globalization.Calendar" />
+            >To make up for the difference between the calendar year and the actual time that the earth rotates around the sun or the actual time that the moon rotates around the earth, a leap year has a different number of days from a standard calendar year. Each <see cref="T:System.Globalization.Calendar" />
 
             
 
@@ -3981,14 +3902,22 @@
           <para>true if the specified year is a leap year; otherwise, false.</para>
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An integer that represents the year. </param
         >
         <param name="era">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4019,8 +3948,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether this <see
-             cref="T:System.Globalization.Calendar" />
+            >Gets a value indicating whether this <see cref="T:System.Globalization.Calendar" />
 
             
 
@@ -4058,8 +3986,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the latest date and time supported by this <see
-             cref="T:System.Globalization.Calendar" />
+            >Gets the latest date and time supported by this <see cref="T:System.Globalization.Calendar" />
 
             
 
@@ -4097,8 +4024,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the earliest date and time supported by this <see
-             cref="T:System.Globalization.Calendar" />
+            >Gets the earliest date and time supported by this <see cref="T:System.Globalization.Calendar" />
 
             
 
@@ -4138,8 +4064,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a read-only version of the specified <see
-             cref="T:System.Globalization.Calendar" />
+            >Returns a read-only version of the specified <see cref="T:System.Globalization.Calendar" />
 
             
 
@@ -4149,18 +4074,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Globalization.Calendar" />
+            >The <see cref="T:System.Globalization.Calendar" />
 
             
 
-             object specified by the <paramref
-             name="calendar" />
+             object specified by the <paramref name="calendar" />
 
             
 
-             parameter, if <paramref
-             name="calendar" />
+             parameter, if <paramref name="calendar" />
 
             
 
@@ -4168,18 +4090,15 @@
           >
           <para>-or-</para>
           <para
-            >A read-only memberwise clone of the <see
-             cref="T:System.Globalization.Calendar" />
+            >A read-only memberwise clone of the <see cref="T:System.Globalization.Calendar" />
 
             
 
-             object specified by <paramref
-             name="calendar" />
+             object specified by <paramref name="calendar" />
 
             
 
-            , if <paramref
-             name="calendar" />
+            , if <paramref name="calendar" />
 
             
 
@@ -4187,12 +4106,15 @@
           >
         </returns>
         <param name="calendar">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.Calendar" />
+          A <see cref="T:System.Globalization.Calendar" />
 
           
 
@@ -4232,8 +4154,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.DateTime" />
+            >Returns a <see cref="T:System.DateTime" />
 
             
 
@@ -4243,8 +4164,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.DateTime" />
+            >The <see cref="T:System.DateTime" />
 
             
 
@@ -4252,49 +4172,77 @@
           >
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An integer that represents the year. </param
         >
         <param name="month">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A positive integer that represents the month. </param
         >
         <param name="day">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A positive integer that represents the day. </param
         >
         <param name="hour">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An integer from 0 to 23 that represents the hour. </param
         >
         <param name="minute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An integer from 0 to 59 that represents the minute. </param
         >
         <param name="second">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An integer from 0 to 59 that represents the second. </param
         >
         <param name="millisecond">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4334,8 +4282,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Globalization.Calendar.ToDateTime(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)" />
+            >The <see cref="M:System.Globalization.Calendar.ToDateTime(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)" />
 
             
 
@@ -4345,8 +4292,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, returns a <see
-             cref="T:System.DateTime" />
+            >When overridden in a derived class, returns a <see cref="T:System.DateTime" />
 
             
 
@@ -4356,8 +4302,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.DateTime" />
+            >The <see cref="T:System.DateTime" />
 
             
 
@@ -4365,56 +4310,88 @@
           >
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An integer that represents the year. </param
         >
         <param name="month">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A positive integer that represents the month. </param
         >
         <param name="day">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A positive integer that represents the day. </param
         >
         <param name="hour">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An integer from 0 to 23 that represents the hour. </param
         >
         <param name="minute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An integer from 0 to 59 that represents the minute. </param
         >
         <param name="second">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An integer from 0 to 59 that represents the second. </param
         >
         <param name="millisecond">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An integer from 0 to 999 that represents the millisecond. </param
         >
         <param name="era">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4448,26 +4425,22 @@
 
             
 
-             is the last year in the 100-year range that can be represented by a two-digit year. The century is determined by finding the sole occurrence of the two-digit <paramref
-             name="year" />
+             is the last year in the 100-year range that can be represented by a two-digit year. The century is determined by finding the sole occurrence of the two-digit <paramref name="year" />
 
             
 
-             within that 100-year range. For example, if <see
-             cref="P:System.Globalization.Calendar.TwoDigitYearMax" />
+             within that 100-year range. For example, if <see cref="P:System.Globalization.Calendar.TwoDigitYearMax" />
 
             
 
              is set to 2029, the 100-year range is from 1930 to 2029. Therefore, a 2-digit value of 30 is interpreted as 1930, while a 2-digit value of 29 is interpreted as 2029.</para
           >
           <para
-            >If <paramref
-             name="year" />
+            >If <paramref name="year" />
 
             
 
-             is greater than or equal to 100, the value of <paramref
-             name="year" />
+             is greater than or equal to 100, the value of <paramref name="year" />
 
             
 
@@ -4478,13 +4451,11 @@
 
             
 
-             supports either a two-digit year or a four-digit year. Passing a two-digit year value (less than 100) causes the method to convert the value to a four-digit value according to the <see
-             cref="P:System.Globalization.Calendar.TwoDigitYearMax" />
+             supports either a two-digit year or a four-digit year. Passing a two-digit year value (less than 100) causes the method to convert the value to a four-digit value according to the <see cref="P:System.Globalization.Calendar.TwoDigitYearMax" />
 
             
 
-             value representing the appropriate century. If the application supplies a four-digit year value that is within the supported calendar range to <see
-             cref="M:System.Globalization.Calendar.ToFourDigitYear(System.Int32)" />
+             value representing the appropriate century. If the application supplies a four-digit year value that is within the supported calendar range to <see cref="M:System.Globalization.Calendar.ToFourDigitYear(System.Int32)" />
 
             
 
@@ -4494,8 +4465,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the specified year to a four-digit year by using the <see
-             cref="P:System.Globalization.Calendar.TwoDigitYearMax" />
+            >Converts the specified year to a four-digit year by using the <see cref="P:System.Globalization.Calendar.TwoDigitYearMax" />
 
             
 
@@ -4505,8 +4475,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer that contains the four-digit representation of <paramref
-             name="year" />
+            >An integer that contains the four-digit representation of <paramref name="year" />
 
             
 
@@ -4514,7 +4483,11 @@
           >
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4541,18 +4514,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property allows a 2-digit year to be properly translated to a 4-digit year. For example, if this property is set to 2029, the 100-year range is from 1930 to 2029. Therefore, a 2-digit value of 30 is interpreted as 1930, while a 2-digit value of 29 is interpreted as 2029.</para>
           <para
-            >The initial value of this property is derived from the settings in the regional and language options portion of Control Panel. However, that information can change during the life of the <see
-             cref="T:System.AppDomain" />
+            >The initial value of this property is derived from the settings in the regional and language options portion of Control Panel. However, that information can change during the life of the <see cref="T:System.AppDomain" />
 
             
 
-            . The <see
-             cref="T:System.Globalization.Calendar" />
+            . The <see cref="T:System.Globalization.Calendar" />
 
             
 
-             class does not detect changes in the system settings automatically. If the calendar is not supported in the regional and language options, the initial value of this property is the default value defined by the <see
-             cref="T:System.Globalization.Calendar" />
+             class does not detect changes in the system settings automatically. If the calendar is not supported in the regional and language options, the initial value of this property is the default value defined by the <see cref="T:System.Globalization.Calendar" />
 
             
 

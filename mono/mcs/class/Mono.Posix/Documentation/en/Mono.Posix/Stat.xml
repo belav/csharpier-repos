@@ -13,7 +13,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -34,8 +36,7 @@
       <para>See 'man stat(2)' for more information. Not all filesystems implement all of the time fields and certain mount types can affect the ATime value as well. See 'man mount(8)' for more information.</para>
       <para
         >This type is obsolete.  Please use 
-    <see
-         cref="T:Mono.Unix.Native.Stat" />
+    <see cref="T:Mono.Unix.Native.Stat" />
 
         
 
@@ -407,18 +408,9 @@
         <Parameter Name="unix" Type="System.Int64" />
       </Parameters>
       <Docs>
-        <param name="unix"
-          >a <see
-           cref="T:System.Int64" />
-        </param>
-        <summary
-          >Convert unix epoch time value to <see
-           cref="T:System.DateTime" />
-        </summary>
-        <returns
-          >a <see
-           cref="T:System.DateTime" />
-        </returns>
+        <param name="unix">a <see cref="T:System.Int64" /></param>
+        <summary>Convert unix epoch time value to <see cref="T:System.DateTime" /></summary>
+        <returns>a <see cref="T:System.DateTime" /></returns>
         <remarks />
       </Docs>
     </Member>

@@ -34,18 +34,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains a default <see
-         cref="T:System.Data.DataViewSettingCollection" />
+        >Contains a default <see cref="T:System.Data.DataViewSettingCollection" />
 
         
 
-         for each <see
-         cref="T:System.Data.DataTable" />
+         for each <see cref="T:System.Data.DataTable" />
 
         
 
-         in a <see
-         cref="T:System.Data.DataSet" />
+         in a <see cref="T:System.Data.DataSet" />
 
         
 
@@ -64,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.DataViewManager" />
+            >Initializes a new instance of the <see cref="T:System.Data.DataViewManager" />
 
             
 
@@ -93,13 +89,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.DataViewManager" />
+            >Initializes a new instance of the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             class for the specified <see
-             cref="T:System.Data.DataSet" />
+             class for the specified <see cref="T:System.Data.DataSet" />
 
             
 
@@ -107,12 +101,15 @@
           >
         </summary>
         <param name="dataSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.DataSet" />
+          The name of the <see cref="T:System.Data.DataSet" />
 
           
 
@@ -141,13 +138,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Data.DataView" />
+            >Creates a <see cref="T:System.Data.DataView" />
 
             
 
-             for the specified <see
-             cref="T:System.Data.DataTable" />
+             for the specified <see cref="T:System.Data.DataTable" />
 
             
 
@@ -157,8 +152,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.DataView" />
+            >A <see cref="T:System.Data.DataView" />
 
             
 
@@ -166,17 +160,19 @@
           >
         </returns>
         <param name="table">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.DataTable" />
+          The name of the <see cref="T:System.Data.DataTable" />
 
           
 
-           to use in the <see
-           cref="T:System.Data.DataView" />
+           to use in the <see cref="T:System.Data.DataView" />
 
           
 
@@ -201,13 +197,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Data.DataSet" />
+            >Gets or sets the <see cref="T:System.Data.DataSet" />
 
             
 
-             to use with the <see
-             cref="T:System.Data.DataViewManager" />
+             to use with the <see cref="T:System.Data.DataViewManager" />
 
             
 
@@ -240,8 +234,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A user should not call <see
-             cref="P:System.Data.DataViewManager.DataViewSettingCollectionString" />
+            >A user should not call <see cref="P:System.Data.DataViewManager.DataViewSettingCollectionString" />
 
             
 
@@ -273,18 +266,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.DataViewSettingCollection" />
+            >Gets the <see cref="T:System.Data.DataViewSettingCollection" />
 
             
 
-             for each <see
-             cref="T:System.Data.DataTable" />
+             for each <see cref="T:System.Data.DataTable" />
 
             
 
-             in the <see
-             cref="T:System.Data.DataSet" />
+             in the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -317,8 +307,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs after a row is added to or deleted from a <see
-             cref="T:System.Data.DataView" />
+            >Occurs after a row is added to or deleted from a <see cref="T:System.Data.DataView" />
 
             
 
@@ -348,8 +337,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Data.DataViewManager.ListChanged" />
+            >Raises the <see cref="E:System.Data.DataViewManager.ListChanged" />
 
             
 
@@ -357,12 +345,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.ListChangedEventArgs" />
+          A <see cref="T:System.ComponentModel.ListChangedEventArgs" />
 
           
 
@@ -392,18 +383,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises a <see
-             cref="E:System.Data.DataRelationCollection.CollectionChanged" />
+            >Raises a <see cref="E:System.Data.DataRelationCollection.CollectionChanged" />
 
             
 
-             event when a <see
-             cref="T:System.Data.DataRelation" />
+             event when a <see cref="T:System.Data.DataRelation" />
 
             
 
-             is added to or removed from the <see
-             cref="T:System.Data.DataRelationCollection" />
+             is added to or removed from the <see cref="T:System.Data.DataRelationCollection" />
 
             
 
@@ -411,19 +399,26 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event. </param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.CollectionChangeEventArgs" />
+          A <see cref="T:System.ComponentModel.CollectionChangeEventArgs" />
 
           
 
@@ -453,13 +448,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -469,18 +462,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the <see
-             cref="T:System.Collections.ICollection" />
+            >Copies the elements of the <see cref="T:System.Collections.ICollection" />
 
             
 
-             to an <see
-             cref="T:System.Array" />
+             to an <see cref="T:System.Array" />
 
             
 
-            , starting at a particular <see
-             cref="T:System.Array" />
+            , starting at a particular <see cref="T:System.Array" />
 
             
 
@@ -488,34 +478,38 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from <see
-           cref="T:System.Collections.ICollection" />
+           that is the destination of the elements copied from <see cref="T:System.Collections.ICollection" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -538,13 +532,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -554,8 +546,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Collections.ICollection.Count" />
+            >For a description of this member, see <see cref="P:System.Collections.ICollection.Count" />
 
             
 
@@ -582,13 +573,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -598,8 +587,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Collections.ICollection.IsSynchronized" />
+            >For a description of this member, see <see cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
@@ -626,13 +614,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -642,8 +628,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+            >For a description of this member, see <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
@@ -670,13 +655,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IEnumerable" />
+             instance is cast to an <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -686,8 +669,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Collections.IEnumerable.GetEnumerator" />
+            >For a description of this member, see <see cref="M:System.Collections.IEnumerable.GetEnumerator" />
 
             
 
@@ -697,8 +679,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Collections.IEnumerable.GetEnumerator" />
+            >For a description of this member, see <see cref="M:System.Collections.IEnumerable.GetEnumerator" />
 
             
 
@@ -724,13 +705,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -740,8 +719,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an item to the <see
-             cref="T:System.Collections.IList" />
+            >Adds an item to the <see cref="T:System.Collections.IList" />
 
             
 
@@ -753,17 +731,19 @@
           <para>The position into which the new element was inserted.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to add to the <see
-           cref="T:System.Collections.IList" />
+           to add to the <see cref="T:System.Collections.IList" />
 
           
 
@@ -786,13 +766,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -802,8 +780,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Collections.IList.Clear" />
+            >For a description of this member, see <see cref="M:System.Collections.IList.Clear" />
 
             
 
@@ -829,13 +806,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -845,8 +820,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Collections.IList" />
+            >Determines whether the <see cref="T:System.Collections.IList" />
 
             
 
@@ -856,13 +830,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Object" />
+            >true if the <see cref="T:System.Object" />
 
             
 
-             is found in the <see
-             cref="T:System.Collections.IList" />
+             is found in the <see cref="T:System.Collections.IList" />
 
             
 
@@ -870,17 +842,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to locate in the <see
-           cref="T:System.Collections.IList" />
+           to locate in the <see cref="T:System.Collections.IList" />
 
           
 
@@ -905,13 +879,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -921,8 +893,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the index of a specific item in the <see
-             cref="T:System.Collections.IList" />
+            >Determines the index of a specific item in the <see cref="T:System.Collections.IList" />
 
             
 
@@ -932,8 +903,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of <paramref
-             name="value" />
+            >The index of <paramref name="value" />
 
             
 
@@ -941,17 +911,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to locate in the <see
-           cref="T:System.Collections.IList" />
+           to locate in the <see cref="T:System.Collections.IList" />
 
           
 
@@ -977,13 +949,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -993,8 +963,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts an item to the <see
-             cref="T:System.Collections.IList" />
+            >Inserts an item to the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1002,29 +971,34 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="value" />
+          The zero-based index at which <paramref name="value" />
 
           
 
            should be inserted. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to insert into the <see
-           cref="T:System.Collections.IList" />
+           to insert into the <see cref="T:System.Collections.IList" />
 
           
 
@@ -1047,13 +1021,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1063,8 +1035,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Collections.IList.IsFixedSize" />
+            >For a description of this member, see <see cref="P:System.Collections.IList.IsFixedSize" />
 
             
 
@@ -1088,13 +1059,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1104,8 +1073,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Collections.IList.IsReadOnly" />
+            >For a description of this member, see <see cref="P:System.Collections.IList.IsReadOnly" />
 
             
 
@@ -1154,13 +1122,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1170,8 +1136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of a specific object from the <see
-             cref="T:System.Collections.IList" />
+            >Removes the first occurrence of a specific object from the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1179,17 +1144,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to remove from the <see
-           cref="T:System.Collections.IList" />
+           to remove from the <see cref="T:System.Collections.IList" />
 
           
 
@@ -1214,13 +1181,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1230,8 +1195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Collections.IList" />
+            >Removes the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1239,7 +1203,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1267,13 +1235,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -1283,8 +1249,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Adds the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -1292,12 +1257,15 @@
           >
         </summary>
         <param name="property">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -1320,13 +1288,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -1336,8 +1302,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.IBindingList.AddNew" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.IBindingList.AddNew" />
 
             
 
@@ -1347,8 +1312,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.IBindingList.AddNew" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.IBindingList.AddNew" />
 
             
 
@@ -1375,13 +1339,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -1391,8 +1353,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.ComponentModel.IBindingList.AllowEdit" />
+            >For a description of this member, see <see cref="P:System.ComponentModel.IBindingList.AllowEdit" />
 
             
 
@@ -1419,13 +1380,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -1435,8 +1394,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.ComponentModel.IBindingList.AllowNew" />
+            >For a description of this member, see <see cref="P:System.ComponentModel.IBindingList.AllowNew" />
 
             
 
@@ -1463,13 +1421,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -1479,8 +1435,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.ComponentModel.IBindingList.AllowRemove" />
+            >For a description of this member, see <see cref="P:System.ComponentModel.IBindingList.AllowRemove" />
 
             
 
@@ -1510,13 +1465,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -1526,13 +1479,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sorts the list based on a <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Sorts the list based on a <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
-             and a <see
-             cref="T:System.ComponentModel.ListSortDirection" />
+             and a <see cref="T:System.ComponentModel.ListSortDirection" />
 
             
 
@@ -1540,24 +1491,30 @@
           >
         </summary>
         <param name="property">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
            to sort by. </param
         >
         <param name="direction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.ComponentModel.ListSortDirection" />
+          One of the <see cref="T:System.ComponentModel.ListSortDirection" />
 
           
 
@@ -1586,13 +1543,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -1602,8 +1557,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the index of the row that has the given <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Returns the index of the row that has the given <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -1613,8 +1567,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the row that has the given <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >The index of the row that has the given <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -1622,19 +1575,26 @@
           >
         </returns>
         <param name="property">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
            to search on.</param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1660,13 +1620,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -1676,8 +1634,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.ComponentModel.IBindingList.IsSorted" />
+            >For a description of this member, see <see cref="P:System.ComponentModel.IBindingList.IsSorted" />
 
             
 
@@ -1706,13 +1663,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -1722,8 +1677,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Removes the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -1731,12 +1685,15 @@
           >
         </summary>
         <param name="property">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -1759,13 +1716,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -1775,8 +1730,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes any sort applied using <see
-             cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
+            >Removes any sort applied using <see cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
 
             
 
@@ -1803,13 +1757,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -1819,8 +1771,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.ComponentModel.IBindingList.SortDirection" />
+            >For a description of this member, see <see cref="P:System.ComponentModel.IBindingList.SortDirection" />
 
             
 
@@ -1847,13 +1798,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -1863,8 +1812,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.ComponentModel.IBindingList.SortProperty" />
+            >For a description of this member, see <see cref="P:System.ComponentModel.IBindingList.SortProperty" />
 
             
 
@@ -1891,13 +1839,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -1907,8 +1853,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.ComponentModel.IBindingList.SupportsChangeNotification" />
+            >For a description of this member, see <see cref="P:System.ComponentModel.IBindingList.SupportsChangeNotification" />
 
             
 
@@ -1935,13 +1880,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -1951,8 +1894,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.ComponentModel.IBindingList.SupportsSearching" />
+            >For a description of this member, see <see cref="P:System.ComponentModel.IBindingList.SupportsSearching" />
 
             
 
@@ -1979,13 +1921,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             instance is cast to an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -1995,8 +1935,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.ComponentModel.IBindingList.SupportsSorting" />
+            >For a description of this member, see <see cref="P:System.ComponentModel.IBindingList.SupportsSorting" />
 
             
 
@@ -2027,13 +1966,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ITypedList" />
+             instance is cast to an <see cref="T:System.ComponentModel.ITypedList" />
 
             
 
@@ -2043,8 +1980,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.ITypedList.GetItemProperties(System.ComponentModel.PropertyDescriptor[])" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.ITypedList.GetItemProperties(System.ComponentModel.PropertyDescriptor[])" />
 
             
 
@@ -2073,13 +2009,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataViewManager" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ITypedList" />
+             instance is cast to an <see cref="T:System.ComponentModel.ITypedList" />
 
             
 
@@ -2095,12 +2029,15 @@
           <para>The name of the list.</para>
         </returns>
         <param name="listAccessors">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          An array of <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -2126,18 +2063,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises a <see
-             cref="E:System.Data.DataTableCollection.CollectionChanged" />
+            >Raises a <see cref="E:System.Data.DataTableCollection.CollectionChanged" />
 
             
 
-             event when a <see
-             cref="T:System.Data.DataTable" />
+             event when a <see cref="T:System.Data.DataTable" />
 
             
 
-             is added to or removed from the <see
-             cref="T:System.Data.DataTableCollection" />
+             is added to or removed from the <see cref="T:System.Data.DataTableCollection" />
 
             
 
@@ -2145,19 +2079,26 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event. </param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.CollectionChangeEventArgs" />
+          A <see cref="T:System.ComponentModel.CollectionChangeEventArgs" />
 
           
 

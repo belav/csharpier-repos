@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class contains the following information about the results of a compilation by an <see
-         cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+        >This class contains the following information about the results of a compilation by an <see cref="T:System.CodeDom.Compiler.ICodeCompiler" />
 
         
 
@@ -32,8 +31,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="P:System.CodeDom.Compiler.CompilerResults.CompiledAssembly" />
+            >The <see cref="P:System.CodeDom.Compiler.CompilerResults.CompiledAssembly" />
 
             
 
@@ -42,8 +40,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.CodeDom.Compiler.CompilerResults.Evidence" />
+            >The <see cref="P:System.CodeDom.Compiler.CompilerResults.Evidence" />
 
             
 
@@ -52,8 +49,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.CodeDom.Compiler.CompilerResults.PathToAssembly" />
+            >The <see cref="P:System.CodeDom.Compiler.CompilerResults.PathToAssembly" />
 
             
 
@@ -62,8 +58,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.CodeDom.Compiler.CompilerResults.Errors" />
+            >The <see cref="P:System.CodeDom.Compiler.CompilerResults.Errors" />
 
             
 
@@ -72,8 +67,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.CodeDom.Compiler.CompilerResults.Output" />
+            >The <see cref="P:System.CodeDom.Compiler.CompilerResults.Output" />
 
             
 
@@ -82,8 +76,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.CodeDom.Compiler.CompilerResults.NativeCompilerReturnValue" />
+            >The <see cref="P:System.CodeDom.Compiler.CompilerResults.NativeCompilerReturnValue" />
 
             
 
@@ -92,8 +85,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.CodeDom.Compiler.CompilerResults.TempFiles" />
+            >The <see cref="P:System.CodeDom.Compiler.CompilerResults.TempFiles" />
 
             
 
@@ -103,13 +95,11 @@
       </list>
       <block subset="none" type="note">
         <para
-          >This class contains an inheritance demand at the class level that applies to all members. A <see
-           cref="T:System.Security.SecurityException" />
+          >This class contains an inheritance demand at the class level that applies to all members. A <see cref="T:System.Security.SecurityException" />
 
           
 
-           is thrown when the derived class does not have full-trust permission. For details about inheritance demands, see  <format
-           type="text/html">
+           is thrown when the derived class does not have full-trust permission. For details about inheritance demands, see  <format type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
 
@@ -149,8 +139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.Compiler.CompilerResults" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.CompilerResults" />
 
             
 
@@ -158,12 +147,15 @@
           >
         </summary>
         <param name="tempFiles">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.TempFileCollection" />
+          A <see cref="T:System.CodeDom.Compiler.TempFileCollection" />
 
           
 
@@ -196,18 +188,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The get accessor for the <see
-               cref="P:System.CodeDom.Compiler.CompilerResults.CompiledAssembly" />
+              >The get accessor for the <see cref="P:System.CodeDom.Compiler.CompilerResults.CompiledAssembly" />
 
               
 
-               property calls the <see
-               cref="Overload:System.AppDomain.Load" />
+               property calls the <see cref="Overload:System.AppDomain.Load" />
 
               
 
-               method to load the compiled assembly into the current application domain.  After calling the get accessor, the compiled assembly cannot be deleted until the current <see
-               cref="T:System.AppDomain" />
+               method to load the compiled assembly into the current application domain.  After calling the get accessor, the compiled assembly cannot be deleted until the current <see cref="T:System.AppDomain" />
 
               
 
@@ -244,8 +233,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >File and line number information is associated with each <see
-             cref="T:System.CodeDom.Compiler.CompilerError" />
+            >File and line number information is associated with each <see cref="T:System.CodeDom.Compiler.CompilerError" />
 
             
 

@@ -16,13 +16,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For computers with 32-bit integers, use <see
-         cref="F:System.Drawing.Imaging.ColorMode.Argb32Mode" />
+        >For computers with 32-bit integers, use <see cref="F:System.Drawing.Imaging.ColorMode.Argb32Mode" />
 
         
 
-        . For computers with 64-bit integers, use <see
-         cref="F:System.Drawing.Imaging.ColorMode.Argb64Mode" />
+        . For computers with 64-bit integers, use <see cref="F:System.Drawing.Imaging.ColorMode.Argb64Mode" />
 
         
 

@@ -34,8 +34,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Accesses the managed version of the <see
-         cref="T:System.Security.Cryptography.Rijndael" />
+        >Accesses the managed version of the <see cref="T:System.Security.Cryptography.Rijndael" />
 
         
 
@@ -63,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.RijndaelManaged" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RijndaelManaged" />
 
             
 
@@ -99,16 +97,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method decrypts an encrypted message created using the <see
-             cref="M:System.Security.Cryptography.RijndaelManaged.CreateEncryptor(System.Byte[],System.Byte[])" />
+            >This method decrypts an encrypted message created using the <see cref="M:System.Security.Cryptography.RijndaelManaged.CreateEncryptor(System.Byte[],System.Byte[])" />
 
             
 
              overload with the same signature.</para
           >
           <para
-            >The <paramref
-             name="rgbkey" />
+            >The <paramref name="rgbkey" />
 
             
 
@@ -118,18 +114,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a symmetric <see
-             cref="T:System.Security.Cryptography.Rijndael" />
+            >Creates a symmetric <see cref="T:System.Security.Cryptography.Rijndael" />
 
             
 
-             decryptor object with the specified <see
-             cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />
+             decryptor object with the specified <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />
 
             
 
-             and initialization vector (<see
-             cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
+             and initialization vector (<see cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
 
             
 
@@ -139,8 +132,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A symmetric <see
-             cref="T:System.Security.Cryptography.Rijndael" />
+            >A symmetric <see cref="T:System.Security.Cryptography.Rijndael" />
 
             
 
@@ -148,14 +140,22 @@
           >
         </returns>
         <param name="rgbKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The secret key to be used for the symmetric algorithm. The key size must be 128, 192, or 256 bits.</param
         >
         <param name="rgbIV">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -189,16 +189,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Security.Cryptography.RijndaelManaged.CreateDecryptor(System.Byte[],System.Byte[])" />
+            >Use the <see cref="M:System.Security.Cryptography.RijndaelManaged.CreateDecryptor(System.Byte[],System.Byte[])" />
 
             
 
              overload with the same signature to decrypt the result of this method.</para
           >
           <para
-            >The <paramref
-             name="rgbkey" />
+            >The <paramref name="rgbkey" />
 
             
 
@@ -208,18 +206,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a symmetric <see
-             cref="T:System.Security.Cryptography.Rijndael" />
+            >Creates a symmetric <see cref="T:System.Security.Cryptography.Rijndael" />
 
             
 
-             encryptor object with the specified <see
-             cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />
+             encryptor object with the specified <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />
 
             
 
-             and initialization vector (<see
-             cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
+             and initialization vector (<see cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
 
             
 
@@ -229,8 +224,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A symmetric <see
-             cref="T:System.Security.Cryptography.Rijndael" />
+            >A symmetric <see cref="T:System.Security.Cryptography.Rijndael" />
 
             
 
@@ -238,14 +232,22 @@
           >
         </returns>
         <param name="rgbKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The secret key to be used for the symmetric algorithm. The key size must be 128, 192, or 256 bits.</param
         >
         <param name="rgbIV">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -277,8 +279,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a random initialization vector (<see
-             cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
+            >Generates a random initialization vector (<see cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
 
             
 
@@ -311,8 +312,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a random <see
-             cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />
+            >Generates a random <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />
 
             
 

@@ -17,8 +17,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the layout for an image contained in a <see
-         cref="T:System.Windows.Forms.DataGridViewCell" />
+        >Specifies the layout for an image contained in a <see cref="T:System.Windows.Forms.DataGridViewCell" />
 
         
 

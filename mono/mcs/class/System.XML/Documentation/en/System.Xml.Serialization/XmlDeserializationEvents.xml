@@ -20,13 +20,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains fields that can be used to pass event delegates to a thread-safe <see
-         cref="Overload:System.Xml.Serialization.XmlSerializer.Deserialize" />
+        >Contains fields that can be used to pass event delegates to a thread-safe <see cref="Overload:System.Xml.Serialization.XmlSerializer.Deserialize" />
 
         
 
-         method of the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         method of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
@@ -59,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an object that represents the method that handles the <see
-             cref="E:System.Xml.Serialization.XmlSerializer.UnknownAttribute" />
+            >Gets or sets an object that represents the method that handles the <see cref="E:System.Xml.Serialization.XmlSerializer.UnknownAttribute" />
 
             
 
@@ -93,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an object that represents the method that handles the <see
-             cref="E:System.Xml.Serialization.XmlSerializer.UnknownElement" />
+            >Gets or sets an object that represents the method that handles the <see cref="E:System.Xml.Serialization.XmlSerializer.UnknownElement" />
 
             
 
@@ -127,8 +123,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an object that represents the method that handles the <see
-             cref="E:System.Xml.Serialization.XmlSerializer.UnknownNode" />
+            >Gets or sets an object that represents the method that handles the <see cref="E:System.Xml.Serialization.XmlSerializer.UnknownNode" />
 
             
 
@@ -161,8 +156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an object that represents the method that handles the <see
-             cref="E:System.Xml.Serialization.XmlSerializer.UnreferencedObject" />
+            >Gets or sets an object that represents the method that handles the <see cref="E:System.Xml.Serialization.XmlSerializer.UnreferencedObject" />
 
             
 

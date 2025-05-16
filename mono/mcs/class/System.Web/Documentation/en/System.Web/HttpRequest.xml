@@ -16,56 +16,46 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The methods and properties of the <see
-         cref="T:System.Web.HttpRequest" />
+        >The methods and properties of the <see cref="T:System.Web.HttpRequest" />
 
         
 
-         class are exposed through the Request properties of the <see
-         cref="T:System.Web.HttpApplication" />
+         class are exposed through the Request properties of the <see cref="T:System.Web.HttpApplication" />
 
         
 
-        , <see
-         cref="T:System.Web.HttpContext" />
+        , <see cref="T:System.Web.HttpContext" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.Page" />
+        , <see cref="T:System.Web.UI.Page" />
 
         
 
-        , and <see
-         cref="T:System.Web.UI.UserControl" />
+        , and <see cref="T:System.Web.UI.UserControl" />
 
         
 
          classes.</para
       >
       <para
-        >To access data from the <see
-         cref="P:System.Web.HttpRequest.QueryString" />
+        >To access data from the <see cref="P:System.Web.HttpRequest.QueryString" />
 
         
 
-        , <see
-         cref="P:System.Web.HttpRequest.Form" />
+        , <see cref="P:System.Web.HttpRequest.Form" />
 
         
 
-        , <see
-         cref="P:System.Web.HttpRequest.Cookies" />
+        , <see cref="P:System.Web.HttpRequest.Cookies" />
 
         
 
-        , or <see
-         cref="P:System.Web.HttpRequest.ServerVariables" />
+        , or <see cref="P:System.Web.HttpRequest.ServerVariables" />
 
         
 
-         collections, you can write Request["key"], as shown in the example for the <see
-         cref="P:System.Web.HttpRequest.QueryString" />
+         collections, you can write Request["key"], as shown in the example for the <see cref="P:System.Web.HttpRequest.QueryString" />
 
         
 
@@ -73,8 +63,7 @@
       >
       <block subset="none" type="note">
         <para
-          >Unicode support for <see
-           cref="T:System.Web.HttpRequest" />
+          >Unicode support for <see cref="T:System.Web.HttpRequest" />
 
           
 
@@ -104,33 +93,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You do not need to create your own instance of the <see
-             cref="T:System.Web.HttpRequest" />
+            >You do not need to create your own instance of the <see cref="T:System.Web.HttpRequest" />
 
             
 
-             class. The methods and properties of the <see
-             cref="T:System.Web.HttpRequest" />
+             class. The methods and properties of the <see cref="T:System.Web.HttpRequest" />
 
             
 
-             class are exposed through the Request property of the <see
-             cref="T:System.Web.HttpApplication" />
+             class are exposed through the Request property of the <see cref="T:System.Web.HttpApplication" />
 
             
 
-            , <see
-             cref="T:System.Web.HttpContext" />
+            , <see cref="T:System.Web.HttpContext" />
 
             
 
-            , <see
-             cref="T:System.Web.UI.Page" />
+            , <see cref="T:System.Web.UI.Page" />
 
             
 
-            , and <see
-             cref="T:System.Web.UI.UserControl" />
+            , and <see cref="T:System.Web.UI.UserControl" />
 
             
 
@@ -140,8 +123,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an <see
-             cref="T:System.Web.HttpRequest" />
+            >Initializes an <see cref="T:System.Web.HttpRequest" />
 
             
 
@@ -149,21 +131,33 @@
           >
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the file associated with the request. </param
         >
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Information regarding the URL of the current request. </param
         >
         <param name="queryString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -208,41 +202,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.HttpRequest.AnonymousID" />
+            >The <see cref="P:System.Web.HttpRequest.AnonymousID" />
 
             
 
-             property assigns a long-lived unique identifier to a non-authenticated user, which can be used to track the user or assign profile properties to that user without storing data in a Session object. By default, the <see
-             cref="P:System.Web.HttpRequest.AnonymousID" />
+             property assigns a long-lived unique identifier to a non-authenticated user, which can be used to track the user or assign profile properties to that user without storing data in a Session object. By default, the <see cref="P:System.Web.HttpRequest.AnonymousID" />
 
             
 
-             property is tracked using a cookie, but it can be set to use the URI when the <see
-             cref="P:System.Web.Configuration.SessionStateSection.Cookieless" />
+             property is tracked using a cookie, but it can be set to use the URI when the <see cref="P:System.Web.Configuration.SessionStateSection.Cookieless" />
 
             
 
-             attribute in the anonymous identification configuration section is set to either the <see
-             cref="F:System.Web.HttpCookieMode.UseUri" />
+             attribute in the anonymous identification configuration section is set to either the <see cref="F:System.Web.HttpCookieMode.UseUri" />
 
             
 
-            , <see
-             cref="F:System.Web.HttpCookieMode.UseDeviceProfile" />
+            , <see cref="F:System.Web.HttpCookieMode.UseDeviceProfile" />
 
             
 
-            , or <see
-             cref="F:System.Web.HttpCookieMode.AutoDetect" />
+            , or <see cref="F:System.Web.HttpCookieMode.AutoDetect" />
 
             
 
              value. You must explicitly clear the cookie if you no longer want it available, for example when an anonymous user is authenticated. </para
           >
           <para
-            >Anonymous identification is used when there is a need to identify entities that are not authenticated and when authorization is required. For more information, see <format
-             type="text/html">
+            >Anonymous identification is used when there is a need to identify entities that are not authenticated and when authorization is required. For more information, see <format type="text/html">
               <a href="2bd927ef-9057-4703-9c55-4cfb6d7d0929"
                 >anonymousIdentification Element (ASP.NET Settings Schema)</a
               >
@@ -314,8 +301,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.HttpRequest.BinaryRead(System.Int32)" />
+            >The <see cref="M:System.Web.HttpRequest.BinaryRead(System.Int32)" />
 
             
 
@@ -331,7 +317,11 @@
           <para>A byte array.</para>
         </returns>
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -400,8 +390,7 @@
       <Parameters />
       <Docs>
         <value
-          >The <see
-           cref="T:System.Text.Encoding" />
+          >The <see cref="T:System.Text.Encoding" />
 
           
 
@@ -410,8 +399,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Default content encoding can be specified in the <format
-             type="text/html">
+            >Default content encoding can be specified in the <format type="text/html">
               <a href="e2dffc8e-ebd2-439b-a2fd-e3ac5e620da7"
                 >globalization Element (ASP.NET Settings Schema)</a
               >
@@ -484,23 +472,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >ASP.NET includes two intrinsic cookie collections. The collection accessed through the <see
-             cref="P:System.Web.HttpRequest.Cookies" />
+            >ASP.NET includes two intrinsic cookie collections. The collection accessed through the <see cref="P:System.Web.HttpRequest.Cookies" />
 
             
 
-             collection of <see
-             cref="T:System.Web.HttpRequest" />
+             collection of <see cref="T:System.Web.HttpRequest" />
 
             
 
-             contains cookies transmitted by the client to the server in the Cookie header. The collection accessed through the <see
-             cref="P:System.Web.HttpResponse.Cookies" />
+             contains cookies transmitted by the client to the server in the Cookie header. The collection accessed through the <see cref="P:System.Web.HttpResponse.Cookies" />
 
             
 
-             collection of <see
-             cref="T:System.Web.HttpResponse" />
+             collection of <see cref="T:System.Web.HttpResponse" />
 
             
 
@@ -508,13 +492,11 @@
           >
           <block subset="none" type="note">
             <para
-              >After you add a cookie by using the <see
-               cref="P:System.Web.HttpResponse.Cookies" />
+              >After you add a cookie by using the <see cref="P:System.Web.HttpResponse.Cookies" />
 
               
 
-               collection, the cookie is immediately available in the <see
-               cref="P:System.Web.HttpRequest.Cookies" />
+               collection, the cookie is immediately available in the <see cref="P:System.Web.HttpRequest.Cookies" />
 
               
 
@@ -547,23 +529,19 @@
 
             
 
-             returns the file path to the currently executing page handler. For redirect scenarios using <see
-             cref="M:System.Web.HttpServerUtility.Execute(System.String)" />
+             returns the file path to the currently executing page handler. For redirect scenarios using <see cref="M:System.Web.HttpServerUtility.Execute(System.String)" />
 
             
 
-             and <see
-             cref="M:System.Web.HttpServerUtility.Transfer(System.String,System.Boolean)" />
+             and <see cref="M:System.Web.HttpServerUtility.Transfer(System.String,System.Boolean)" />
 
             
 
-             methods this means that the <see
-             cref="P:System.Web.HttpRequest.CurrentExecutionFilePath" />
+             methods this means that the <see cref="P:System.Web.HttpRequest.CurrentExecutionFilePath" />
 
             
 
-             property returns the path to the page redirected to (child page). However, when the client is redirected to another page, the <see
-             cref="P:System.Web.HttpRequest.FilePath" />
+             property returns the path to the page redirected to (child page). However, when the client is redirected to another page, the <see cref="P:System.Web.HttpRequest.FilePath" />
 
             
 
@@ -591,18 +569,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.HttpRequest.FilePath" />
+            >The <see cref="P:System.Web.HttpRequest.FilePath" />
 
             
 
-             property does not include the <see
-             cref="P:System.Web.HttpRequest.PathInfo" />
+             property does not include the <see cref="P:System.Web.HttpRequest.PathInfo" />
 
             
 
-             trailer. For example, for the URL http://www.contoso.com/virdir/page.html/tail, the <see
-             cref="P:System.Web.HttpRequest.FilePath" />
+             trailer. For example, for the URL http://www.contoso.com/virdir/page.html/tail, the <see cref="P:System.Web.HttpRequest.FilePath" />
 
             
 
@@ -649,10 +624,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.IO.Stream" />
-        </value>
+        <value>a <see cref="T:System.IO.Stream" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -675,15 +647,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.Specialized.NameValueCollection" />
-        </value>
+        <value>a <see cref="T:System.Collections.Specialized.NameValueCollection" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.HttpRequest.Form" />
+            >The <see cref="P:System.Web.HttpRequest.Form" />
 
             
 
@@ -711,15 +679,14 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.Specialized.NameValueCollection" />
-        </value>
+        <value>a <see cref="T:System.Collections.Specialized.NameValueCollection" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >For a listing of all possible headers, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=73147">Request Header Fields</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=73147"
+              >Request Header Fields</see
+            >
 
             
 
@@ -763,31 +730,23 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.IO.Stream" />
-        </value>
+        <value>a <see cref="T:System.IO.Stream" /></value>
         <remarks
           >The stream returned is a seekable stream.  Because of this the whole stream lives in memory for the duration of the request.
 
-<para
-          >
+<para>
 The runtime puts a cap on the size of the maximum upload to avoid possible denials of service, this is configured in the &lt;system.web&gt; section of the  machine config or the per-application web.config file in the &lt;httpRuntime&gt; subsection with the attribute "maxRequestLength", a value expressed in kilobytes.
 </para>
-          <para
-            >
-   The stream is created on the first access to this property.   Module authors and IHttpHandler developers can work around this by using the <see
-             cref="I:System.ServiceProvider.GetService(Type)" />
+          <para>
+   The stream is created on the first access to this property.   Module authors and IHttpHandler developers can work around this by using the <see cref="I:System.ServiceProvider.GetService(Type)" />
 
             
 
-             method from the <see
-             cref="T:System.Web.HttpContext" />
+             method from the <see cref="T:System.Web.HttpContext" />
 
             
 
-             passing a <see
-             cref="T:System.Web.HttpWorkerRequest" />
+             passing a <see cref="T:System.Web.HttpWorkerRequest" />
 
             
 
@@ -838,8 +797,7 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.HttpRequest.IsLocal" />
+            >The <see cref="P:System.Web.HttpRequest.IsLocal" />
 
             
 
@@ -908,28 +866,23 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.HttpRequest.LogonUserIdentity" />
+            >The <see cref="P:System.Web.HttpRequest.LogonUserIdentity" />
 
             
 
-             property exposes the properties and methods of the <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+             property exposes the properties and methods of the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
-             object for the currently connected user to Microsoft Internet Information Services (IIS). The instance of the <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+             object for the currently connected user to Microsoft Internet Information Services (IIS). The instance of the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
-             class that is exposed by <see
-             cref="P:System.Web.HttpRequest.LogonUserIdentity" />
+             class that is exposed by <see cref="P:System.Web.HttpRequest.LogonUserIdentity" />
 
             
 
-             tracks the IIS request token and provides easy access to this token for the current HTTP request being processed inside of ASP.NET. An instance of the <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+             tracks the IIS request token and provides easy access to this token for the current HTTP request being processed inside of ASP.NET. An instance of the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
@@ -939,8 +892,7 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+            >Gets the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
@@ -972,7 +924,11 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
           <para>A two-dimensional array of integers.</para>
         </returns>
         <param name="imageFieldName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -998,8 +954,7 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.HttpRequest.MapPath(System.String)" />
+              >The <see cref="M:System.Web.HttpRequest.MapPath(System.String)" />
 
               
 
@@ -1014,8 +969,7 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The physical path on the server specified by <paramref
-             name="virtualPath" />
+            >The physical path on the server specified by <paramref name="virtualPath" />
 
             
 
@@ -1023,7 +977,11 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
           >
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1054,8 +1012,7 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.HttpRequest.MapPath(System.String,System.String,System.Boolean)" />
+              >The <see cref="M:System.Web.HttpRequest.MapPath(System.String,System.String,System.Boolean)" />
 
               
 
@@ -1072,26 +1029,37 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
           <para>The physical path on the server.</para>
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The virtual path (absolute or relative) for the current request. </param
         >
         <param name="baseVirtualDir">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The virtual base directory path used for relative resolution. </param
         >
         <param name="allowCrossAppMapping">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to indicate that <paramref
-           name="virtualPath" />
+          true to indicate that <paramref name="virtualPath" />
 
           
 
@@ -1114,10 +1082,7 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.Specialized.NameValueCollection" />
-        </value>
+        <value>a <see cref="T:System.Collections.Specialized.NameValueCollection" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Name-value pairs are added to the collection in the following order:</para>
@@ -1139,23 +1104,19 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a combined collection of <see
-             cref="P:System.Web.HttpRequest.QueryString" />
+            >Gets a combined collection of <see cref="P:System.Web.HttpRequest.QueryString" />
 
             
 
-            , <see
-             cref="P:System.Web.HttpRequest.Form" />
+            , <see cref="P:System.Web.HttpRequest.Form" />
 
             
 
-            , <see
-             cref="P:System.Web.HttpRequest.Cookies" />
+            , <see cref="P:System.Web.HttpRequest.Cookies" />
 
             
 
-            , and <see
-             cref="P:System.Web.HttpRequest.ServerVariables" />
+            , and <see cref="P:System.Web.HttpRequest.ServerVariables" />
 
             
 
@@ -1179,23 +1140,19 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.HttpRequest.Path" />
+            >The <see cref="P:System.Web.HttpRequest.Path" />
 
             
 
-             is the concatenation of the <see
-             cref="P:System.Web.HttpRequest.FilePath" />
+             is the concatenation of the <see cref="P:System.Web.HttpRequest.FilePath" />
 
             
 
-             and the <see
-             cref="P:System.Web.HttpRequest.PathInfo" />
+             and the <see cref="P:System.Web.HttpRequest.PathInfo" />
 
             
 
-             trailer. For example, for the URL http://www.contoso.com/virdir/page.html/tail, the <see
-             cref="P:System.Web.HttpRequest.Path" />
+             trailer. For example, for the URL http://www.contoso.com/virdir/page.html/tail, the <see cref="P:System.Web.HttpRequest.Path" />
 
             
 
@@ -1223,8 +1180,7 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the URL Http://www.contoso.com/virdir/page.html/tail, the <see
-             cref="P:System.Web.HttpRequest.PathInfo" />
+            >For the URL Http://www.contoso.com/virdir/page.html/tail, the <see cref="P:System.Web.HttpRequest.PathInfo" />
 
             
 
@@ -1271,28 +1227,23 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In redirect scenarios using <see
-             cref="M:System.Web.HttpServerUtility.Execute(System.String)" />
+            >In redirect scenarios using <see cref="M:System.Web.HttpServerUtility.Execute(System.String)" />
 
             
 
-             and <see
-             cref="M:System.Web.HttpServerUtility.Transfer(System.String,System.Boolean)" />
+             and <see cref="M:System.Web.HttpServerUtility.Transfer(System.String,System.Boolean)" />
 
             
 
-            , the <see
-             cref="P:System.Web.HttpRequest.PhysicalPath" />
+            , the <see cref="P:System.Web.HttpRequest.PhysicalPath" />
 
             
 
-             property returns the path to the original page. To find the physical path of the currently executing page use the <see
-             cref="M:System.Web.HttpRequest.MapPath(System.String,System.String,System.Boolean)" />
+             property returns the path to the original page. To find the physical path of the currently executing page use the <see cref="M:System.Web.HttpRequest.MapPath(System.String,System.String,System.Boolean)" />
 
             
 
-             method with the input argument set as the <see
-             cref="P:System.Web.HttpRequest.CurrentExecutionFilePath" />
+             method with the input argument set as the <see cref="P:System.Web.HttpRequest.CurrentExecutionFilePath" />
 
             
 
@@ -1320,10 +1271,7 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.Specialized.NameValueCollection" />
-        </value>
+        <value>a <see cref="T:System.Collections.Specialized.NameValueCollection" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1400,14 +1348,22 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
           <para>Saves an HTTP request to disk.</para>
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The physical drive path. </param
         >
         <param name="includeHeaders">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1430,15 +1386,14 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.Specialized.NameValueCollection" />
-        </value>
+        <value>a <see cref="T:System.Collections.Specialized.NameValueCollection" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >For a list of server variables supported by IIS, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=52471">IIS Server Variables</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=52471"
+              >IIS Server Variables</see
+            >
 
             
 
@@ -1599,51 +1554,42 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.HttpRequest" />
+            >The <see cref="T:System.Web.HttpRequest" />
 
             
 
-             class uses input validation flags to track whether to perform validation on the request collections accessed through the <see
-             cref="P:System.Web.HttpRequest.Cookies" />
+             class uses input validation flags to track whether to perform validation on the request collections accessed through the <see cref="P:System.Web.HttpRequest.Cookies" />
 
             
 
-            , <see
-             cref="P:System.Web.HttpRequest.Form" />
+            , <see cref="P:System.Web.HttpRequest.Form" />
 
             
 
-            , and <see
-             cref="P:System.Web.HttpRequest.QueryString" />
+            , and <see cref="P:System.Web.HttpRequest.QueryString" />
 
             
 
-             properties. The <see
-             cref="M:System.Web.HttpRequest.ValidateInput" />
+             properties. The <see cref="M:System.Web.HttpRequest.ValidateInput" />
 
             
 
-             method sets these flags so that when the get accessors for the <see
-             cref="P:System.Web.HttpRequest.Cookies" />
+             method sets these flags so that when the get accessors for the <see cref="P:System.Web.HttpRequest.Cookies" />
 
             
 
-            , <see
-             cref="P:System.Web.HttpRequest.Form" />
+            , <see cref="P:System.Web.HttpRequest.Form" />
 
             
 
-            , or <see
-             cref="P:System.Web.HttpRequest.QueryString" />
+            , or <see cref="P:System.Web.HttpRequest.QueryString" />
 
             
 
              property are invoked, input validation is performed. Validation works by checking all input data against a hard-coded list of potentially dangerous data.</para
           >
           <para
-            >If the validation feature is enabled by page directive or configuration, this method is called during the page's ProcessRequest processing phase. The <see
-             cref="M:System.Web.HttpRequest.ValidateInput" />
+            >If the validation feature is enabled by page directive or configuration, this method is called during the page's ProcessRequest processing phase. The <see cref="M:System.Web.HttpRequest.ValidateInput" />
 
             
 
@@ -1653,18 +1599,15 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes validation to occur for the collections accessed through the <see
-             cref="P:System.Web.HttpRequest.Cookies" />
+            >Causes validation to occur for the collections accessed through the <see cref="P:System.Web.HttpRequest.Cookies" />
 
             
 
-            , <see
-             cref="P:System.Web.HttpRequest.Form" />
+            , <see cref="P:System.Web.HttpRequest.Form" />
 
             
 
-            , and <see
-             cref="P:System.Web.HttpRequest.QueryString" />
+            , and <see cref="P:System.Web.HttpRequest.QueryString" />
 
             
 

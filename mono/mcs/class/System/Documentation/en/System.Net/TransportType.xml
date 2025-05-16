@@ -30,18 +30,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.TransportType" />
+        >The <see cref="T:System.Net.TransportType" />
 
         
 
-         enumeration defines transport types for the <see
-         cref="T:System.Net.SocketPermission" />
+         enumeration defines transport types for the <see cref="T:System.Net.SocketPermission" />
 
         
 
-         and <see
-         cref="T:System.Net.Sockets.Socket" />
+         and <see cref="T:System.Net.Sockets.Socket" />
 
         
 
@@ -51,13 +48,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines transport types for the <see
-         cref="T:System.Net.SocketPermission" />
+        >Defines transport types for the <see cref="T:System.Net.SocketPermission" />
 
         
 
-         and <see
-         cref="T:System.Net.Sockets.Socket" />
+         and <see cref="T:System.Net.Sockets.Socket" />
 
         
 
@@ -120,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The transport type is connectionless, such as UDP. Specifying this value has the same effect as specifying <see
-             cref="F:System.Net.TransportType.Udp" />
+            >The transport type is connectionless, such as UDP. Specifying this value has the same effect as specifying <see cref="F:System.Net.TransportType.Udp" />
 
             
 
@@ -156,8 +150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The transport is connection oriented, such as TCP. Specifying this value has the same effect as specifying <see
-             cref="F:System.Net.TransportType.Tcp" />
+            >The transport is connection oriented, such as TCP. Specifying this value has the same effect as specifying <see cref="F:System.Net.TransportType.Tcp" />
 
             
 

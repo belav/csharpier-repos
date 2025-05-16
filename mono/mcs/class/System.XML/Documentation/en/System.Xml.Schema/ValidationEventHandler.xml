@@ -34,8 +34,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the callback method that will handle XML schema validation events and the <see
-         cref="T:System.Xml.Schema.ValidationEventArgs" />
+        >Represents the callback method that will handle XML schema validation events and the <see cref="T:System.Xml.Schema.ValidationEventArgs" />
 
         
 

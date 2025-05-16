@@ -50,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+            >Gets or sets the <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
             
 
@@ -118,8 +117,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.CodeDom.CodeMemberMethod" />
+            >The <see cref="T:System.CodeDom.CodeMemberMethod" />
 
             
 
@@ -172,8 +170,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.CodeDom.CodeTypeDeclaration" />
+            >A <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
             
 
@@ -197,8 +194,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a Boolean value specifying whether the signature generated needs to return a <see
-             cref="T:System.Data.DataTable" />
+            >Gets or sets a Boolean value specifying whether the signature generated needs to return a <see cref="T:System.Data.DataTable" />
 
             
 
@@ -242,8 +238,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="T:System.Data.Design.ParameterGenerationOption" />
+            >For more information, see <see cref="T:System.Data.Design.ParameterGenerationOption" />
 
             
 
@@ -277,7 +272,7 @@
           <block subset="none" type="note">
             <para
               >Calling this method with untrusted data is a security risk. Call this method only with trusted data. For more information, see <see
-               cref="http://go.microsoft.com/fwlink/?LinkId=330378"
+                cref="http://go.microsoft.com/fwlink/?LinkId=330378"
                 >Untrusted Data Security Risks</see
               >
 
@@ -292,7 +287,11 @@
           <para>Sets the schema of the design table for which the database query method will be generated.</para>
         </summary>
         <param name="designTableContent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -321,7 +320,7 @@
           <block subset="none" type="note">
             <para
               >Calling this method with untrusted data is a security risk. Call this method only with trusted data. For more information, see <see
-               cref="http://go.microsoft.com/fwlink/?LinkId=330378"
+                cref="http://go.microsoft.com/fwlink/?LinkId=330378"
                 >Untrusted Data Security Risks</see
               >
 
@@ -336,7 +335,11 @@
           <para>Sets the database query for which the method signature will be generated.</para>
         </summary>
         <param name="methodSourceContent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

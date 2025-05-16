@@ -40,8 +40,7 @@
 
         
 
-         is designed for character output in a particular encoding, whereas classes derived from <see
-         cref="T:System.IO.Stream" />
+         is designed for character output in a particular encoding, whereas classes derived from <see cref="T:System.IO.Stream" />
 
         
 
@@ -52,49 +51,41 @@
 
         
 
-         defaults to using an instance of <see
-         cref="T:System.Text.UTF8Encoding" />
+         defaults to using an instance of <see cref="T:System.Text.UTF8Encoding" />
 
         
 
-         unless specified otherwise. This instance of UTF8Encoding is constructed without a byte order mark (BOM), so its <see
-         cref="M:System.Text.Encoding.GetPreamble" />
+         unless specified otherwise. This instance of UTF8Encoding is constructed without a byte order mark (BOM), so its <see cref="M:System.Text.Encoding.GetPreamble" />
 
         
 
-         method returns an empty byte array. The default UTF-8 encoding for this constructor throws an exception on invalid bytes. This behavior is different from the behavior provided by the encoding object in the <see
-         cref="P:System.Text.Encoding.UTF8" />
+         method returns an empty byte array. The default UTF-8 encoding for this constructor throws an exception on invalid bytes. This behavior is different from the behavior provided by the encoding object in the <see cref="P:System.Text.Encoding.UTF8" />
 
         
 
-         property. To specify a BOM and determine whether an exception is thrown on invalid bytes, use a constructor that accepts an encoding object as a parameter, such as <see
-         cref="M:System.IO.StreamWriter.#ctor(System.String,System.Boolean,System.Text.Encoding)" />
+         property. To specify a BOM and determine whether an exception is thrown on invalid bytes, use a constructor that accepts an encoding object as a parameter, such as <see cref="M:System.IO.StreamWriter.#ctor(System.String,System.Boolean,System.Text.Encoding)" />
 
         
 
-         or <see
-         cref="M:System.IO.StreamWriter.#ctor(System.IO.Stream,System.Text.Encoding)" />
+         or <see cref="M:System.IO.StreamWriter.#ctor(System.IO.Stream,System.Text.Encoding)" />
 
         
 
         .</para
       >
       <para
-        >By default, a <see
-         cref="T:System.IO.StreamWriter" />
+        >By default, a <see cref="T:System.IO.StreamWriter" />
 
         
 
-         is not thread safe. See <see
-         cref="M:System.IO.TextWriter.Synchronized(System.IO.TextWriter)" />
+         is not thread safe. See <see cref="M:System.IO.TextWriter.Synchronized(System.IO.TextWriter)" />
 
         
 
          for a thread-safe wrapper.</para
       >
       <para
-        >For a list of common I/O tasks, see <format
-         type="text/html">
+        >For a list of common I/O tasks, see <format type="text/html">
           <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
         </format>
 
@@ -106,8 +97,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implements a <see
-         cref="T:System.IO.TextWriter" />
+        >Implements a <see cref="T:System.IO.TextWriter" />
 
         
 
@@ -149,8 +139,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -159,56 +148,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see
-             cref="T:System.IO.StreamWriter" />
+            >This constructor creates a <see cref="T:System.IO.StreamWriter" />
 
             
 
-             with UTF-8 encoding without a Byte-Order Mark (BOM), so its <see
-             cref="M:System.Text.Encoding.GetPreamble" />
+             with UTF-8 encoding without a Byte-Order Mark (BOM), so its <see cref="M:System.Text.Encoding.GetPreamble" />
 
             
 
-             method returns an empty byte array. The default UTF-8 encoding for this constructor throws an exception on invalid bytes. This behavior is different from the behavior provided by the encoding object in the <see
-             cref="P:System.Text.Encoding.UTF8" />
+             method returns an empty byte array. The default UTF-8 encoding for this constructor throws an exception on invalid bytes. This behavior is different from the behavior provided by the encoding object in the <see cref="P:System.Text.Encoding.UTF8" />
 
             
 
-             property. To specify whether an exception is thrown on invalid bytes, use a constructor that accepts an encoding object as a parameter, such as <see
-             cref="M:System.IO.StreamWriter.#ctor(System.IO.Stream,System.Text.Encoding)" />
+             property. To specify whether an exception is thrown on invalid bytes, use a constructor that accepts an encoding object as a parameter, such as <see cref="M:System.IO.StreamWriter.#ctor(System.IO.Stream,System.Text.Encoding)" />
 
             
 
-            . The <see
-             cref="P:System.IO.StreamWriter.BaseStream" />
+            . The <see cref="P:System.IO.StreamWriter.BaseStream" />
 
             
 
-             property is initialized using the <paramref
-             name="stream" />
+             property is initialized using the <paramref name="stream" />
 
             
 
              parameter. The position of the stream is not reset.</para
           >
           <para
-            >The <see
-             cref="T:System.IO.StreamWriter" />
+            >The <see cref="T:System.IO.StreamWriter" />
 
             
 
-             object calls <see
-             cref="M:System.IO.Stream.Dispose" />
+             object calls <see cref="M:System.IO.Stream.Dispose" />
 
             
 
-             on the provided <see
-             cref="T:System.IO.Stream" />
+             on the provided <see cref="T:System.IO.Stream" />
 
             
 
-             object when <see
-             cref="M:System.IO.StreamWriter.Dispose(System.Boolean)" />
+             object when <see cref="M:System.IO.StreamWriter.Dispose(System.Boolean)" />
 
             
 
@@ -218,8 +197,7 @@
             <para>When you compile a set of characters with a particular cultural setting and retrieve those same characters with a different cultural setting, the characters might not be interpretable and could cause an exception to be thrown.</para>
           </block>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -231,8 +209,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.StreamWriter" />
+            >Initializes a new instance of the <see cref="T:System.IO.StreamWriter" />
 
             
 
@@ -240,7 +217,11 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -278,16 +259,14 @@
            is in an invalid format or contains invalid characters.</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
-          >The directory information specified in <paramref
-           name="path" />
+          >The directory information specified in <paramref name="path" />
 
           
 
            was not found.</exception
         >
         <exception cref="T:System.UnauthorizedAccessException"
-          >Access to <paramref
-           name="path" />
+          >Access to <paramref name="path" />
 
           
 
@@ -305,8 +284,7 @@
 
           
 
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
@@ -317,21 +295,23 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission for reading and writing files. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read"
+            qualify="true"
+          />
 
           
 
           , <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write"
+            qualify="true"
+          />
         </permission>
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref
-           name="path" />
+          >The length of <paramref name="path" />
 
           
 
-            or the absolute path information for <paramref
-           name="path" />
+            or the absolute path information for <paramref name="path" />
 
           
 
@@ -340,39 +320,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see
-             cref="T:System.IO.StreamWriter" />
+            >This constructor creates a <see cref="T:System.IO.StreamWriter" />
 
             
 
-             with UTF-8 encoding without a Byte-Order Mark (BOM), so its <see
-             cref="M:System.Text.Encoding.GetPreamble" />
+             with UTF-8 encoding without a Byte-Order Mark (BOM), so its <see cref="M:System.Text.Encoding.GetPreamble" />
 
             
 
-             method returns an empty byte array. The default UTF-8 encoding for this constructor throws an exception on invalid bytes. This behavior is different from the behavior provided by the encoding object in the <see
-             cref="P:System.Text.Encoding.UTF8" />
+             method returns an empty byte array. The default UTF-8 encoding for this constructor throws an exception on invalid bytes. This behavior is different from the behavior provided by the encoding object in the <see cref="P:System.Text.Encoding.UTF8" />
 
             
 
-             property. To specify a BOM and determine whether an exception is thrown on invalid bytes, use a constructor that accepts an encoding object as a parameter, such as <see
-             cref="M:System.IO.StreamWriter.#ctor(System.String,System.Boolean,System.Text.Encoding)" />
+             property. To specify a BOM and determine whether an exception is thrown on invalid bytes, use a constructor that accepts an encoding object as a parameter, such as <see cref="M:System.IO.StreamWriter.#ctor(System.String,System.Boolean,System.Text.Encoding)" />
 
             
 
             . </para
           >
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
              parameter can be a file name, including a file on a Universal Naming Convention (UNC) share. If the file exists, it is overwritten; otherwise, a new file is created.</para
           >
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
@@ -382,8 +356,7 @@
             <para>When you compile a set of characters with a particular cultural setting and retrieve those same characters with a different cultural setting, the characters might not be interpretable and could cause an exception to be thrown.</para>
           </block>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -395,8 +368,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.StreamWriter" />
+            >Initializes a new instance of the <see cref="T:System.IO.StreamWriter" />
 
             
 
@@ -404,12 +376,15 @@
           >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The complete file path to write to. <paramref
-           name="path" />
+          The complete file path to write to. <paramref name="path" />
 
           
 
@@ -448,13 +423,11 @@
 
           
 
-           or <paramref
-           name="encoding " />
+           or <paramref name="encoding " />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -470,41 +443,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.IO.StreamWriter.Encoding" />
+            >This constructor initializes the <see cref="P:System.IO.StreamWriter.Encoding" />
 
             
 
-             property using the encoding parameter, and the <see
-             cref="P:System.IO.StreamWriter.BaseStream" />
+             property using the encoding parameter, and the <see cref="P:System.IO.StreamWriter.BaseStream" />
 
             
 
-             property using the stream parameter. The position of the stream is not reset. For additional information, see <see
-             cref="P:System.IO.TextWriter.Encoding" />
+             property using the stream parameter. The position of the stream is not reset. For additional information, see <see cref="P:System.IO.TextWriter.Encoding" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="T:System.IO.StreamWriter" />
+            >The <see cref="T:System.IO.StreamWriter" />
 
             
 
-             object calls <see
-             cref="M:System.IO.Stream.Dispose" />
+             object calls <see cref="M:System.IO.Stream.Dispose" />
 
             
 
-             on the provided <see
-             cref="T:System.IO.Stream" />
+             on the provided <see cref="T:System.IO.Stream" />
 
             
 
-             object when <see
-             cref="M:System.IO.StreamWriter.Dispose(System.Boolean)" />
+             object when <see cref="M:System.IO.StreamWriter.Dispose(System.Boolean)" />
 
             
 
@@ -514,8 +480,7 @@
             <para>When you compile a set of characters with a particular cultural setting and retrieve those same characters with a different cultural setting, the characters might not be interpretable, and could cause an exception to be thrown.</para>
           </block>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -527,8 +492,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.StreamWriter" />
+            >Initializes a new instance of the <see cref="T:System.IO.StreamWriter" />
 
             
 
@@ -536,14 +500,22 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream to write to. </param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -578,16 +550,14 @@
           >A general I/O exception occurs, such as trying to access a CD-ROM drive whose tray is open</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
-          >The directory information specified in <paramref
-           name="path" />
+          >The directory information specified in <paramref name="path" />
 
           
 
            was not found.</exception
         >
         <exception cref="T:System.UnauthorizedAccessException"
-          >Access to <paramref
-           name="path" />
+          >Access to <paramref name="path" />
 
           
 
@@ -605,8 +575,7 @@
 
           
 
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
@@ -617,12 +586,16 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission for reading and writing files. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read"
+            qualify="true"
+          />
 
           
 
           , <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write"
+            qualify="true"
+          />
         </permission>
         <exception cref="T:System.IO.NotSupportedException">
           <paramref name="path " />
@@ -632,13 +605,11 @@
            is in an implementation-specific invalid format.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref
-           name="path" />
+          >The length of <paramref name="path" />
 
           
 
-            or the absolute path information for <paramref
-           name="path" />
+            or the absolute path information for <paramref name="path" />
 
           
 
@@ -647,39 +618,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see
-             cref="T:System.IO.StreamWriter" />
+            >This constructor creates a <see cref="T:System.IO.StreamWriter" />
 
             
 
-             with UTF-8 encoding without a Byte-Order Mark (BOM), so its <see
-             cref="M:System.Text.Encoding.GetPreamble" />
+             with UTF-8 encoding without a Byte-Order Mark (BOM), so its <see cref="M:System.Text.Encoding.GetPreamble" />
 
             
 
-             method returns an empty byte array. The default UTF-8 encoding for this constructor throws an exception on invalid bytes. This behavior is different from the behavior provided by the encoding object in the <see
-             cref="P:System.Text.Encoding.UTF8" />
+             method returns an empty byte array. The default UTF-8 encoding for this constructor throws an exception on invalid bytes. This behavior is different from the behavior provided by the encoding object in the <see cref="P:System.Text.Encoding.UTF8" />
 
             
 
-             property. To specify a BOM and determine whether an exception is thrown on invalid bytes, use a constructor that accepts an encoding object as a parameter, such as <see
-             cref="M:System.IO.StreamWriter.#ctor(System.String,System.Boolean,System.Text.Encoding)" />
+             property. To specify a BOM and determine whether an exception is thrown on invalid bytes, use a constructor that accepts an encoding object as a parameter, such as <see cref="M:System.IO.StreamWriter.#ctor(System.String,System.Boolean,System.Text.Encoding)" />
 
             
 
             . </para
           >
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
              parameter can be a file name, including a file on a Universal Naming Convention (UNC) share.</para
           >
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
@@ -689,8 +654,7 @@
             <para>When you compile a set of characters with a particular cultural setting and retrieve those same characters with a different cultural setting, the characters might not be interpretable, and could cause an exception to be thrown.</para>
           </block>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -702,8 +666,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.StreamWriter" />
+            >Initializes a new instance of the <see cref="T:System.IO.StreamWriter" />
 
             
 
@@ -711,14 +674,22 @@
           >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The complete file path to write to. </param
         >
         <param name="append">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -758,13 +729,11 @@
 
           
 
-           or <paramref
-           name="encoding " />
+           or <paramref name="encoding " />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -787,51 +756,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.IO.StreamWriter.Encoding" />
+            >This constructor initializes the <see cref="P:System.IO.StreamWriter.Encoding" />
 
             
 
-             property using the <paramref
-             name="encoding" />
+             property using the <paramref name="encoding" />
 
             
 
-             parameter, and the <see
-             cref="P:System.IO.StreamWriter.BaseStream" />
+             parameter, and the <see cref="P:System.IO.StreamWriter.BaseStream" />
 
             
 
-             property using the <paramref
-             name="stream" />
+             property using the <paramref name="stream" />
 
             
 
-             parameter. The position of the stream is not reset. For additional information, see <see
-             cref="P:System.IO.TextWriter.Encoding" />
+             parameter. The position of the stream is not reset. For additional information, see <see cref="P:System.IO.TextWriter.Encoding" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="T:System.IO.StreamWriter" />
+            >The <see cref="T:System.IO.StreamWriter" />
 
             
 
-             object calls <see
-             cref="M:System.IO.Stream.Dispose" />
+             object calls <see cref="M:System.IO.Stream.Dispose" />
 
             
 
-             on the provided <see
-             cref="T:System.IO.Stream" />
+             on the provided <see cref="T:System.IO.Stream" />
 
             
 
-             object when <see
-             cref="M:System.IO.StreamWriter.Dispose(System.Boolean)" />
+             object when <see cref="M:System.IO.StreamWriter.Dispose(System.Boolean)" />
 
             
 
@@ -841,8 +801,7 @@
             <para>When you compile a set of characters with a particular cultural setting and retrieve those same characters with a different cultural setting, the characters might not be interpretable, and could cause an exception to be thrown.</para>
           </block>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -854,8 +813,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.StreamWriter" />
+            >Initializes a new instance of the <see cref="T:System.IO.StreamWriter" />
 
             
 
@@ -863,21 +821,33 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream to write to. </param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character encoding to use. </param
         >
         <param name="bufferSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -916,8 +886,7 @@
           >A general I/O exception occurred, such as trying to access a CD-ROM drive whose tray is open.</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
-          >The directory information specified in <paramref
-           name="path" />
+          >The directory information specified in <paramref name="path" />
 
           
 
@@ -938,13 +907,11 @@
 
           
 
-           or <paramref
-           name="encoding" />
+           or <paramref name="encoding" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -955,12 +922,16 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission for reading and writing files. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read"
+            qualify="true"
+          />
 
           
 
           , <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write"
+            qualify="true"
+          />
         </permission>
         <exception cref="T:System.IO.NotSupportedException">
           <paramref name="path " />
@@ -970,13 +941,11 @@
            is in an implementation-specific invalid format.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref
-           name="path" />
+          >The length of <paramref name="path" />
 
           
 
-            or the absolute path information for <paramref
-           name="path" />
+            or the absolute path information for <paramref name="path" />
 
           
 
@@ -985,13 +954,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.IO.StreamWriter.Encoding" />
+            >This constructor initializes the <see cref="P:System.IO.StreamWriter.Encoding" />
 
             
 
-             property using the encoding parameter. For additional information, see <see
-             cref="P:System.IO.TextWriter.Encoding" />
+             property using the encoding parameter. For additional information, see <see cref="P:System.IO.TextWriter.Encoding" />
 
             
 
@@ -1015,8 +982,7 @@
             <para>When you compile a set of characters with a particular cultural setting and retrieve those same characters with a different cultural setting, the characters might not be interpretable, and could cause an exception to be thrown.</para>
           </block>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1028,8 +994,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.StreamWriter" />
+            >Initializes a new instance of the <see cref="T:System.IO.StreamWriter" />
 
             
 
@@ -1037,21 +1002,33 @@
           >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The complete file path to write to. </param
         >
         <param name="append">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to append data to the file; false to overwrite the file. If the specified file does not exist, this parameter has no effect, and the constructor creates a new file.</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1083,56 +1060,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unless you set the <paramref
-             name="leaveOpen" />
+            >Unless you set the <paramref name="leaveOpen" />
 
             
 
-             parameter to true, the <see
-             cref="T:System.IO.StreamWriter" />
+             parameter to true, the <see cref="T:System.IO.StreamWriter" />
 
             
 
-             object calls <see
-             cref="M:System.IO.Stream.Dispose" />
+             object calls <see cref="M:System.IO.Stream.Dispose" />
 
             
 
-             on the provided <see
-             cref="T:System.IO.Stream" />
+             on the provided <see cref="T:System.IO.Stream" />
 
             
 
-             object when <see
-             cref="M:System.IO.StreamWriter.Dispose(System.Boolean)" />
+             object when <see cref="M:System.IO.StreamWriter.Dispose(System.Boolean)" />
 
             
 
              is called.</para
           >
           <para
-            >This constructor initializes the <see
-             cref="P:System.IO.StreamWriter.Encoding" />
+            >This constructor initializes the <see cref="P:System.IO.StreamWriter.Encoding" />
 
             
 
-             property by using the <paramref
-             name="encoding" />
+             property by using the <paramref name="encoding" />
 
             
 
-             parameter, and initializes the <see
-             cref="P:System.IO.StreamWriter.BaseStream" />
+             parameter, and initializes the <see cref="P:System.IO.StreamWriter.BaseStream" />
 
             
 
-             property by using the <paramref
-             name="stream" />
+             property by using the <paramref name="stream" />
 
             
 
-             parameter. The position of the stream is not reset. For additional information, see the <see
-             cref="P:System.IO.TextWriter.Encoding" />
+             parameter. The position of the stream is not reset. For additional information, see the <see cref="P:System.IO.TextWriter.Encoding" />
 
             
 
@@ -1145,8 +1112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.StreamWriter" />
+            >Initializes a new instance of the <see cref="T:System.IO.StreamWriter" />
 
             
 
@@ -1154,33 +1120,48 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream to write to.</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character encoding to use.</param
         >
         <param name="bufferSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer size, in bytes.</param
         >
         <param name="leaveOpen">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to leave the stream open after the <see
-           cref="T:System.IO.StreamWriter" />
+          true to leave the stream open after the <see cref="T:System.IO.StreamWriter" />
 
           
 
@@ -1219,8 +1200,7 @@
           >A general I/O exception occurred, such as trying to access a CD-ROM drive whose tray is open.</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
-          >The directory information specified in <paramref
-           name="path" />
+          >The directory information specified in <paramref name="path" />
 
           
 
@@ -1238,13 +1218,11 @@
 
           
 
-           or <paramref
-           name="encoding" />
+           or <paramref name="encoding" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1265,12 +1243,16 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission for reading and writing files. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read"
+            qualify="true"
+          />
 
           
 
           , <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write"
+            qualify="true"
+          />
         </permission>
         <exception cref="T:System.IO.NotSupportedException">
           <paramref name="path" />
@@ -1280,13 +1262,11 @@
            is in an implementation-specific invalid format.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref
-           name="path" />
+          >The length of <paramref name="path" />
 
           
 
-            or the absolute path information for <paramref
-           name="path" />
+            or the absolute path information for <paramref name="path" />
 
           
 
@@ -1295,13 +1275,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.IO.StreamWriter.Encoding" />
+            >This constructor initializes the <see cref="P:System.IO.StreamWriter.Encoding" />
 
             
 
-             property using the encoding parameter. For additional information, see <see
-             cref="P:System.IO.TextWriter.Encoding" />
+             property using the encoding parameter. For additional information, see <see cref="P:System.IO.TextWriter.Encoding" />
 
             
 
@@ -1325,8 +1303,7 @@
             <para>When you compile a set of characters with a particular cultural setting and retrieve those same characters with a different cultural setting, the characters might not be interpretable, and could cause an exception to be thrown.</para>
           </block>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1338,8 +1315,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.StreamWriter" />
+            >Initializes a new instance of the <see cref="T:System.IO.StreamWriter" />
 
             
 
@@ -1347,28 +1323,44 @@
           >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The complete file path to write to. </param
         >
         <param name="append">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to append data to the file; false to overwrite the file. If the specified file does not exist, this parameter has no effect, and the constructor creates a new file.</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character encoding to use. </param
         >
         <param name="bufferSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1402,14 +1394,12 @@
             
 
              to force
-<see
-             cref="T:System.IO.StreamWriter" />
+<see cref="T:System.IO.StreamWriter" />
 
             
 
              to flush its
-   buffer; otherwise, <see
-             langword="false" />
+   buffer; otherwise, <see langword="false" />
 
             
 
@@ -1419,18 +1409,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Flushing the stream will not flush its underlying encoder unless you explicitly call <see
-             cref="M:System.IO.StreamWriter.Flush" />
+            >Flushing the stream will not flush its underlying encoder unless you explicitly call <see cref="M:System.IO.StreamWriter.Flush" />
 
             
 
-             or <see
-             cref="M:System.IO.StreamWriter.Close" />
+             or <see cref="M:System.IO.StreamWriter.Close" />
 
             
 
-            . Setting <see
-             cref="P:System.IO.StreamWriter.AutoFlush" />
+            . Setting <see cref="P:System.IO.StreamWriter.AutoFlush" />
 
             
 
@@ -1438,16 +1425,14 @@
           >
           <para>When AutoFlush is set to false, StreamWriter will do a limited amount of buffering, both internally and potentially in the encoder from the encoding you passed in. You can get better performance by setting AutoFlush to false, assuming that you always call Close (or at least Flush) when you're done writing with a StreamWriter.</para>
           <para
-            >For example, set AutoFlush to true when you are writing to a device where the user expects immediate feedback. Console.Out is one of these cases: The StreamWriter used internally for writing to Console flushes all its internal state except the encoder state after every call to <see
-             cref="M:System.IO.StreamWriter.Write(System.Char)" />
+            >For example, set AutoFlush to true when you are writing to a device where the user expects immediate feedback. Console.Out is one of these cases: The StreamWriter used internally for writing to Console flushes all its internal state except the encoder state after every call to <see cref="M:System.IO.StreamWriter.Write(System.Char)" />
 
             
 
             .</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1459,13 +1444,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.IO.StreamWriter" />
+            >Gets or sets a value indicating whether the <see cref="T:System.IO.StreamWriter" />
 
             
 
-             will flush its buffer to the underlying stream after every call to <see
-             cref="M:System.IO.StreamWriter.Write(System.Char)" />
+             will flush its buffer to the underlying stream after every call to <see cref="M:System.IO.StreamWriter.Write(System.Char)" />
 
             
 
@@ -1498,13 +1481,11 @@
       <Docs>
         <value>
           <para
-            >The <see
-             cref="T:System.IO.Stream" />
+            >The <see cref="T:System.IO.Stream" />
 
             
 
-             the current <see
-             cref="T:System.IO.StreamWriter" />
+             the current <see cref="T:System.IO.StreamWriter" />
 
             
 
@@ -1515,8 +1496,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1553,62 +1533,52 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.IO.Stream.Close" />
+            >This method overrides <see cref="M:System.IO.Stream.Close" />
 
             
 
             .</para
           >
           <para
-            >This implementation of <see
-             cref="M:System.IO.StreamWriter.Close" />
+            >This implementation of <see cref="M:System.IO.StreamWriter.Close" />
 
             
 
-             calls the <see
-             cref="M:System.IO.StreamWriter.Dispose(System.Boolean)" />
+             calls the <see cref="M:System.IO.StreamWriter.Dispose(System.Boolean)" />
 
             
 
              method passing a true value.</para
           >
           <para
-            >You must call <see
-             cref="M:System.IO.StreamWriter.Close" />
+            >You must call <see cref="M:System.IO.StreamWriter.Close" />
 
             
 
-             to ensure that all data is correctly written out to the underlying stream. Following a call to <see
-             cref="M:System.IO.StreamWriter.Close" />
+             to ensure that all data is correctly written out to the underlying stream. Following a call to <see cref="M:System.IO.StreamWriter.Close" />
 
             
 
-            , any operations on the <see
-             cref="T:System.IO.StreamWriter" />
+            , any operations on the <see cref="T:System.IO.StreamWriter" />
 
             
 
-             might raise exceptions. If there is insufficient space on the disk, calling <see
-             cref="M:System.IO.StreamWriter.Close" />
+             might raise exceptions. If there is insufficient space on the disk, calling <see cref="M:System.IO.StreamWriter.Close" />
 
             
 
              will raise an exception.</para
           >
           <para
-            >Flushing the stream will not flush its underlying encoder unless you explicitly call <see
-             cref="M:System.IO.StreamWriter.Flush" />
+            >Flushing the stream will not flush its underlying encoder unless you explicitly call <see cref="M:System.IO.StreamWriter.Flush" />
 
             
 
-             or <see
-             cref="M:System.IO.StreamWriter.Close" />
+             or <see cref="M:System.IO.StreamWriter.Close" />
 
             
 
-            . Setting <see
-             cref="P:System.IO.StreamWriter.AutoFlush" />
+            . Setting <see cref="P:System.IO.StreamWriter.AutoFlush" />
 
             
 
@@ -1648,13 +1618,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.IO.StreamWriter" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.IO.StreamWriter" />
 
             
 
@@ -1664,8 +1632,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.IO.StreamWriter" />
+            >Releases the unmanaged resources used by the <see cref="T:System.IO.StreamWriter" />
 
             
 
@@ -1673,7 +1640,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1708,14 +1679,12 @@
       <Docs>
         <value>
           <para
-            >The <see
-             cref="T:System.Text.Encoding" />
+            >The <see cref="T:System.Text.Encoding" />
 
             
 
              specified in
-   the constructor for the current instance, or <see
-             cref="T:System.Text.UTF8Encoding" />
+   the constructor for the current instance, or <see cref="T:System.Text.UTF8Encoding" />
 
             
 
@@ -1727,21 +1696,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is necessary for some XML scenarios where a header must be written containing the encoding used by the <see
-             cref="T:System.IO.StreamWriter" />
+            >This property is necessary for some XML scenarios where a header must be written containing the encoding used by the <see cref="T:System.IO.StreamWriter" />
 
             
 
-            . This allows the XML code to consume an arbitrary <see
-             cref="T:System.IO.StreamWriter" />
+            . This allows the XML code to consume an arbitrary <see cref="T:System.IO.StreamWriter" />
 
             
 
              and generate the correct XML header.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1753,8 +1719,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Text.Encoding" />
+            >Gets the <see cref="T:System.Text.Encoding" />
 
             
 
@@ -1779,21 +1744,18 @@
               >Application code does not call this 
          method; it is automatically invoked by during garbage collection unless
          finalization by the garbage collector has been disabled. For more information,
-         see <see
-               cref="M:System.GC.SuppressFinalize(System.Object)" />
+         see <see cref="M:System.GC.SuppressFinalize(System.Object)" />
 
               
 
-              , and <see
-               cref="M:System.Object.Finalize" />
+              , and <see cref="M:System.Object.Finalize" />
 
               
 
               .</para
             >
             <para
-              > This method overrides <see
-               cref="M:System.Object.Finalize" />
+              > This method overrides <see cref="M:System.Object.Finalize" />
 
               
 
@@ -1804,8 +1766,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Frees the resources of the current <see
-             cref="T:System.IO.StreamWriter" />
+            >Frees the resources of the current <see cref="T:System.IO.StreamWriter" />
 
             
 
@@ -1842,29 +1803,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.IO.TextWriter.Flush" />
+            >This method overrides <see cref="M:System.IO.TextWriter.Flush" />
 
             
 
             .</para
           >
           <para
-            >Flushing the stream will not flush its underlying encoder unless you explicitly call Flush or <see
-             cref="M:System.IO.StreamWriter.Close" />
+            >Flushing the stream will not flush its underlying encoder unless you explicitly call Flush or <see cref="M:System.IO.StreamWriter.Close" />
 
             
 
-            . Setting <see
-             cref="P:System.IO.StreamWriter.AutoFlush" />
+            . Setting <see cref="P:System.IO.StreamWriter.AutoFlush" />
 
             
 
              to true means that data will be flushed from the buffer to the stream, but the encoder state will not be flushed. This allows the encoder to keep its state (partial characters) so that it can encode the next block of characters correctly. This scenario affects UTF8 and UTF7 where certain characters can only be encoded after the encoder receives the adjacent character or characters.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1930,8 +1887,7 @@
           <para>Use Null to redirect output to a StreamWriter that will not consume any operating system resources.</para>
           <para>When the StreamWriter.Write methods are invoked on Null, the call simply returns, and no data is actually written to any backing store.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1975,18 +1931,15 @@
 
           
 
-           is <see
-           langword="true" />
+           is <see langword="true" />
 
           
 
-           or the <see
-           cref="T:System.IO.StreamWriter" />
+           or the <see cref="T:System.IO.StreamWriter" />
 
           
 
-           buffer is full, and the contents of the buffer cannot be written to the underlying fixed size stream because the <see
-           cref="T:System.IO.StreamWriter" />
+           buffer is full, and the contents of the buffer cannot be written to the underlying fixed size stream because the <see cref="T:System.IO.StreamWriter" />
 
           
 
@@ -1996,29 +1949,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.IO.TextWriter.Write(System.Char)" />
+            >This method overrides <see cref="M:System.IO.TextWriter.Write(System.Char)" />
 
             
 
             .</para
           >
           <para
-            >The specified character is written to the underlying stream unless the end of the stream is reached prematurely. If <see
-             cref="P:System.IO.StreamWriter.AutoFlush" />
+            >The specified character is written to the underlying stream unless the end of the stream is reached prematurely. If <see cref="P:System.IO.StreamWriter.AutoFlush" />
 
             
 
-             is true, <see
-             cref="M:System.IO.StreamWriter.Flush" />
+             is true, <see cref="M:System.IO.StreamWriter.Flush" />
 
             
 
              is invoked automatically.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -2032,7 +1981,11 @@
           <para>Writes a character to the stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2070,18 +2023,15 @@
 
           
 
-           is <see
-           langword="true" />
+           is <see langword="true" />
 
           
 
-           or the <see
-           cref="T:System.IO.StreamWriter" />
+           or the <see cref="T:System.IO.StreamWriter" />
 
           
 
-           buffer is full, and the contents of the buffer cannot be written to the underlying fixed size stream because the <see
-           cref="T:System.IO.StreamWriter" />
+           buffer is full, and the contents of the buffer cannot be written to the underlying fixed size stream because the <see cref="T:System.IO.StreamWriter" />
 
           
 
@@ -2091,29 +2041,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.IO.TextWriter.Write(System.Char)" />
+            >This method overrides <see cref="M:System.IO.TextWriter.Write(System.Char)" />
 
             
 
             .</para
           >
           <para
-            >The specified characters are written to the underlying stream unless the end of the stream is reached prematurely. If <see
-             cref="P:System.IO.StreamWriter.AutoFlush" />
+            >The specified characters are written to the underlying stream unless the end of the stream is reached prematurely. If <see cref="P:System.IO.StreamWriter.AutoFlush" />
 
             
 
-             is true, <see
-             cref="M:System.IO.StreamWriter.Flush" />
+             is true, <see cref="M:System.IO.StreamWriter.Flush" />
 
             
 
              is invoked automatically.</para
           >
           <para
-            >This method might provide faster performance than Write (<paramref
-             name="char[]," />
+            >This method might provide faster performance than Write (<paramref name="char[]," />
             <paramref name="int," />
             <paramref name="int" />
 
@@ -2122,8 +2068,7 @@
             ) because it has fewer arguments to check.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -2137,12 +2082,15 @@
           <para>Writes a character array to the stream.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A character array containing the data to write. If <paramref
-           name="buffer" />
+          A character array containing the data to write. If <paramref name="buffer" />
 
           
 
@@ -2180,18 +2128,15 @@
 
           
 
-           is <see
-           langword="true" />
+           is <see langword="true" />
 
           
 
-           or the <see
-           cref="T:System.IO.StreamWriter" />
+           or the <see cref="T:System.IO.StreamWriter" />
 
           
 
-           buffer is full, and the contents of the buffer cannot be written to the underlying fixed size stream because the <see
-           cref="T:System.IO.StreamWriter" />
+           buffer is full, and the contents of the buffer cannot be written to the underlying fixed size stream because the <see cref="T:System.IO.StreamWriter" />
 
           
 
@@ -2201,16 +2146,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.IO.TextWriter.Write(System.Char)" />
+            >This method overrides <see cref="M:System.IO.TextWriter.Write(System.Char)" />
 
             
 
             .</para
           >
           <para
-            >The specified <see
-             cref="T:System.String" />
+            >The specified <see cref="T:System.String" />
 
             
 
@@ -2221,21 +2164,18 @@
 
             
 
-             is invoked automatically if <see
-             cref="P:System.IO.StreamWriter.AutoFlush" />
+             is invoked automatically if <see cref="P:System.IO.StreamWriter.AutoFlush" />
 
             
 
-             is true. If <paramref
-             name="value" />
+             is true. If <paramref name="value" />
 
             
 
              is null, no entries are written.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -2249,12 +2189,15 @@
           <para>Writes a string to the stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The string to write to the stream. If <paramref
-           name="value" />
+          The string to write to the stream. If <paramref name="value" />
 
           
 
@@ -2296,21 +2239,18 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.ArgumentException"
-          >buffer.Length - <paramref
-           name="index " />
+          >buffer.Length - <paramref name="index " />
 
           
 
-           &lt; <paramref
-           name="count" />
+           &lt; <paramref name="count" />
 
           
 
@@ -2321,8 +2261,7 @@
 
           
 
-           or <paramref
-           name="count" />
+           or <paramref name="count" />
 
           
 
@@ -2334,18 +2273,15 @@
 
           
 
-           is <see
-           langword="true" />
+           is <see langword="true" />
 
           
 
-           or the <see
-           cref="T:System.IO.StreamWriter" />
+           or the <see cref="T:System.IO.StreamWriter" />
 
           
 
-           buffer is full, and the contents of the buffer cannot be written to the underlying fixed size stream because the <see
-           cref="T:System.IO.StreamWriter" />
+           buffer is full, and the contents of the buffer cannot be written to the underlying fixed size stream because the <see cref="T:System.IO.StreamWriter" />
 
           
 
@@ -2355,49 +2291,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.IO.TextWriter.Write(System.Char)" />
+            >This method overrides <see cref="M:System.IO.TextWriter.Write(System.Char)" />
 
             
 
             .</para
           >
           <para
-            >The characters are read from <paramref
-             name="buffer" />
+            >The characters are read from <paramref name="buffer" />
 
             
 
-             beginning at <paramref
-             name="index" />
+             beginning at <paramref name="index" />
 
             
 
-             and continuing through <paramref
-             name="index" />
+             and continuing through <paramref name="index" />
 
             
 
-             + (<paramref
-             name="count" />
+             + (<paramref name="count" />
 
             
 
-             - 1). All characters are written to the underlying stream unless the end of the underlying stream is reached prematurely. <see
-             cref="M:System.IO.StreamWriter.Flush" />
+             - 1). All characters are written to the underlying stream unless the end of the underlying stream is reached prematurely. <see cref="M:System.IO.StreamWriter.Flush" />
 
             
 
-             is invoked automatically if <see
-             cref="P:System.IO.StreamWriter.AutoFlush" />
+             is invoked automatically if <see cref="P:System.IO.StreamWriter.AutoFlush" />
 
             
 
              is true.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -2411,21 +2339,33 @@
           <para>Writes a subarray of characters to the stream.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A character array that contains the data to write. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character position in the buffer at which to start reading data. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2464,7 +2404,11 @@
           <para>A task that represents the asynchronous write operation.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2502,12 +2446,15 @@
           <para>A task that represents the asynchronous write operation.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The string to write to the stream. If <paramref
-           name="value" />
+          The string to write to the stream. If <paramref name="value" />
 
           
 
@@ -2547,21 +2494,33 @@
           <para>A task that represents the asynchronous write operation.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A character array that contains the data to write.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character position in the buffer at which to begin reading data.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2590,8 +2549,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The line terminator is defined by the <see
-             cref="P:System.IO.TextWriter.NewLine" />
+            >The line terminator is defined by the <see cref="P:System.IO.TextWriter.NewLine" />
 
             
 
@@ -2631,8 +2589,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The line terminator is defined by the <see
-             cref="P:System.IO.TextWriter.NewLine" />
+            >The line terminator is defined by the <see cref="P:System.IO.TextWriter.NewLine" />
 
             
 
@@ -2648,7 +2605,11 @@
           <para>A task that represents the asynchronous write operation.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2679,8 +2640,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The line terminator is defined by the <see
-             cref="P:System.IO.TextWriter.NewLine" />
+            >The line terminator is defined by the <see cref="P:System.IO.TextWriter.NewLine" />
 
             
 
@@ -2696,7 +2656,11 @@
           <para>A task that represents the asynchronous write operation.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2729,8 +2693,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The line terminator is defined by the <see
-             cref="P:System.IO.TextWriter.NewLine" />
+            >The line terminator is defined by the <see cref="P:System.IO.TextWriter.NewLine" />
 
             
 
@@ -2746,21 +2709,33 @@
           <para>A task that represents the asynchronous write operation.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character array to write data from.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character position in the buffer at which to start reading data.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

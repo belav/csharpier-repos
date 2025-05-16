@@ -20,8 +20,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Stores <see
-         cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+        >Stores <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
         
 
@@ -47,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
             
 
@@ -56,12 +54,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+          An array of type <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
           
 
@@ -89,13 +90,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
             
 
-             class with the given <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+             class with the given <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -103,12 +102,15 @@
           >
         </summary>
         <param name="behaviorService">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+          A <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
           
 
@@ -136,13 +138,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
             
 
-             class from an existing <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+             class from an existing <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
             
 
@@ -150,12 +150,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+          A <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
           
 
@@ -183,13 +186,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+            >Adds an <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
             
 
-             with the specified value to the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+             with the specified value to the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
             
 
@@ -201,12 +202,15 @@
           <para>The index at which the new element was inserted.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+          An <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
           
 
@@ -234,8 +238,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of an array to the end of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+            >Copies the elements of an array to the end of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
             
 
@@ -243,12 +246,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+          An array of type <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
           
 
@@ -279,8 +285,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the contents of another <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+            >Adds the contents of another <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
             
 
@@ -288,12 +293,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+          A <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
           
 
@@ -321,13 +329,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+            >Gets a value indicating whether the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
             
 
-             contains the specified <see
-             cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+             contains the specified <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
             
 
@@ -337,8 +343,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+            >true if the <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
             
 
@@ -346,12 +351,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+          The <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
           
 
@@ -380,13 +388,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+            >Copies the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
             
 
-             values to a one-dimensional <see
-             cref="T:System.Array" />
+             values to a one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -394,29 +400,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the values copied from <see
-           cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+           that is the destination of the values copied from <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
           
 
           .</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index in <paramref
-           name="array" />
+          The index in <paramref name="array" />
 
           
 
@@ -442,8 +453,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that can iterate through the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+            >Returns an enumerator that can iterate through the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
             
 
@@ -453,13 +463,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+             for the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
             
 
@@ -488,13 +496,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the index of an <see
-             cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+            >Returns the index of an <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
             
 
-             in the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+             in the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
             
 
@@ -504,18 +510,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+            >The index of the <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
             
 
-             of <paramref
-             name="value" />
+             of <paramref name="value" />
 
             
 
-             in the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+             in the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
             
 
@@ -523,12 +526,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+          The <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
           
 
@@ -557,13 +563,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts an <see
-             cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+            >Inserts an <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
             
 
-             into the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+             into the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
             
 
@@ -571,24 +575,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index where <paramref
-           name="value" />
+          The zero-based index where <paramref name="value" />
 
           
 
            should be inserted.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+          The <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
           
 
@@ -638,13 +648,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a specific <see
-             cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+            >Removes a specific <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
             
 
-             from the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+             from the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
             
 
@@ -652,17 +660,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+          The <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
           
 
-           to remove from the <see
-           cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+           to remove from the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
           
 

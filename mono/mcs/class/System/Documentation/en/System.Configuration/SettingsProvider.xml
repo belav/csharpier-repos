@@ -22,54 +22,45 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A settings provider defines the mechanism for storing configuration data used in the application settings architecture. The .NET Framework contains a single default settings provider, <see
-         cref="T:System.Configuration.LocalFileSettingsProvider" />
+        >A settings provider defines the mechanism for storing configuration data used in the application settings architecture. The .NET Framework contains a single default settings provider, <see cref="T:System.Configuration.LocalFileSettingsProvider" />
 
         
 
-        , which stores configuration data to the local file system. However, you can create alternate storage mechanisms by deriving from the abstract <see
-         cref="T:System.Configuration.SettingsProvider" />
+        , which stores configuration data to the local file system. However, you can create alternate storage mechanisms by deriving from the abstract <see cref="T:System.Configuration.SettingsProvider" />
 
         
 
-         class. The provider that a wrapper class uses is determined by decorating the wrapper class with the <see
-         cref="T:System.Configuration.SettingsProviderAttribute" />
+         class. The provider that a wrapper class uses is determined by decorating the wrapper class with the <see cref="T:System.Configuration.SettingsProviderAttribute" />
 
         
 
-        . If this attribute is not provided, the default, <see
-         cref="T:System.Configuration.LocalFileSettingsProvider" />
+        . If this attribute is not provided, the default, <see cref="T:System.Configuration.LocalFileSettingsProvider" />
 
         
 
         , is used.</para
       >
       <para
-        >When you create a custom settings provider, at minimum, you must provide implementations for the three methods of this class: <see
-         cref="M:System.Configuration.SettingsProvider.GetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
+        >When you create a custom settings provider, at minimum, you must provide implementations for the three methods of this class: <see cref="M:System.Configuration.SettingsProvider.GetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
 
         
 
-        , <see
-         cref="M:System.Configuration.SettingsProvider.SetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyValueCollection)" />
+        , <see cref="M:System.Configuration.SettingsProvider.SetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyValueCollection)" />
 
         
 
-         and <see
-         cref="P:System.Configuration.SettingsProvider.ApplicationName" />
+         and <see cref="P:System.Configuration.SettingsProvider.ApplicationName" />
 
         
 
         . </para
       >
       <para
-        >For client applications, you can add more standardized functionality to a custom provider by also implementing the <see
-         cref="T:System.Configuration.IApplicationSettingsProvider" />
+        >For client applications, you can add more standardized functionality to a custom provider by also implementing the <see cref="T:System.Configuration.IApplicationSettingsProvider" />
 
         
 
-         interface. This interface mirrors methods found in the <see
-         cref="T:System.Configuration.ApplicationSettingsBase" />
+         interface. This interface mirrors methods found in the <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
         
 
@@ -77,23 +68,19 @@
       >
       <para>Typically, you should design settings providers to be single-instanced to avoid storage resource contention. Providers should also be thread-safe because they can be called simultaneously from multiple wrapper instances in a single application domain or from multiple applications in different domains.</para>
       <para
-        >At minimum, a settings provider must recognize three attributes—<see
-         cref="T:System.Configuration.ApplicationScopedSettingAttribute" />
+        >At minimum, a settings provider must recognize three attributes—<see cref="T:System.Configuration.ApplicationScopedSettingAttribute" />
 
         
 
-        , <see
-         cref="T:System.Configuration.UserScopedSettingAttribute" />
+        , <see cref="T:System.Configuration.UserScopedSettingAttribute" />
 
         
 
-        , and <see
-         cref="T:System.Configuration.DefaultSettingValueAttribute" />
+        , and <see cref="T:System.Configuration.DefaultSettingValueAttribute" />
 
         
 
-        . For a full listing of attributes that can be applied to application settings, see <format
-         type="text/html">
+        . For a full listing of attributes that can be applied to application settings, see <format type="text/html">
           <a href="53caa66c-a9fb-43a5-953c-ad092590098d">Application Settings Attributes</a>
         </format>
 
@@ -110,18 +97,15 @@
         </item>
         <item>
           <para
-            >If two or more properties conflict; for example, a property being decorated with both <see
-             cref="T:System.Configuration.ApplicationScopedSettingAttribute" />
+            >If two or more properties conflict; for example, a property being decorated with both <see cref="T:System.Configuration.ApplicationScopedSettingAttribute" />
 
             
 
-             and <see
-             cref="T:System.Configuration.UserScopedSettingAttribute" />
+             and <see cref="T:System.Configuration.UserScopedSettingAttribute" />
 
             
 
-            ; the provider should throw a <see
-             cref="T:System.Configuration.ConfigurationException" />
+            ; the provider should throw a <see cref="T:System.Configuration.ConfigurationException" />
 
             
 
@@ -153,8 +137,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is this default protected constructor for this abstract class. Derived custom settings providers are not required to provide an explicit constructor because the <see
-             cref="M:System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />
+            >This is this default protected constructor for this abstract class. Derived custom settings providers are not required to provide an explicit constructor because the <see cref="M:System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
@@ -164,23 +147,19 @@
           <list type="ordered">
             <item>
               <para
-                >Call the <see
-                 cref="M:System.ComponentModel.Component.GetService(System.Type)" />
+                >Call the <see cref="M:System.ComponentModel.Component.GetService(System.Type)" />
 
                 
 
-                 method on the current <see
-                 cref="T:System.ComponentModel.Component" />
+                 method on the current <see cref="T:System.ComponentModel.Component" />
 
                 
 
-                 or <see
-                 cref="T:System.ComponentModel.ISite" />
+                 or <see cref="T:System.ComponentModel.ISite" />
 
                 
 
-                 to return a reference to the current <see
-                 cref="T:System.Configuration.ISettingsProviderService" />
+                 to return a reference to the current <see cref="T:System.Configuration.ISettingsProviderService" />
 
                 
 
@@ -189,13 +168,11 @@
             </item>
             <item>
               <para
-                >Call the <see
-                 cref="M:System.Configuration.ISettingsProviderService.GetSettingsProvider(System.Configuration.SettingsProperty)" />
+                >Call the <see cref="M:System.Configuration.ISettingsProviderService.GetSettingsProvider(System.Configuration.SettingsProperty)" />
 
                 
 
-                 method of the <see
-                 cref="T:System.Configuration.ISettingsProviderService" />
+                 method of the <see cref="T:System.Configuration.ISettingsProviderService" />
 
                 
 
@@ -207,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Configuration.SettingsProvider" />
+            >Initializes an instance of the <see cref="T:System.Configuration.SettingsProvider" />
 
             
 
@@ -234,13 +210,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Configuration.SettingsProvider.ApplicationName" />
+            >The <see cref="P:System.Configuration.SettingsProvider.ApplicationName" />
 
             
 
-             and <see
-             cref="P:System.Configuration.Provider.ProviderBase.Name" />
+             and <see cref="P:System.Configuration.Provider.ProviderBase.Name" />
 
             
 
@@ -279,13 +253,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Configuration.SettingsProvider.GetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
+            >The <see cref="M:System.Configuration.SettingsProvider.GetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
 
             
 
-             method must be implemented to handle special settings, those marked with <see
-             cref="T:System.Configuration.SpecialSettingAttribute" />
+             method must be implemented to handle special settings, those marked with <see cref="T:System.Configuration.SpecialSettingAttribute" />
 
             
 
@@ -299,8 +271,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Configuration.SettingsPropertyValueCollection" />
+            >A <see cref="T:System.Configuration.SettingsPropertyValueCollection" />
 
             
 
@@ -308,24 +279,30 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsContext" />
+          A <see cref="T:System.Configuration.SettingsContext" />
 
           
 
            describing the current application use.</param
         >
         <param name="collection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsPropertyCollection" />
+          A <see cref="T:System.Configuration.SettingsPropertyCollection" />
 
           
 
@@ -363,26 +340,22 @@
 
             
 
-             contains the <see
-             cref="M:System.Configuration.ApplicationSettingsBase.Save" />
+             contains the <see cref="M:System.Configuration.ApplicationSettingsBase.Save" />
 
             
 
-             method, which is called to persist the values of all of its settings properties. This method enumerates through all the settings providers associated with its settings properties, and calls the <see
-             cref="M:System.Configuration.SettingsProvider.SetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyValueCollection)" />
+             method, which is called to persist the values of all of its settings properties. This method enumerates through all the settings providers associated with its settings properties, and calls the <see cref="M:System.Configuration.SettingsProvider.SetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyValueCollection)" />
 
             
 
-             method for each <see
-             cref="T:System.Configuration.SettingsProvider" />
+             method for each <see cref="T:System.Configuration.SettingsProvider" />
 
             
 
              to perform the actual serialization operation.</para
           >
           <para
-            >The <see
-             cref="M:System.Configuration.SettingsProvider.SetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyValueCollection)" />
+            >The <see cref="M:System.Configuration.SettingsProvider.SetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyValueCollection)" />
 
             
 
@@ -402,24 +375,30 @@
           <para>Sets the values of the specified group of property settings.</para>
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsContext" />
+          A <see cref="T:System.Configuration.SettingsContext" />
 
           
 
            describing the current application usage.</param
         >
         <param name="collection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsPropertyValueCollection" />
+          A <see cref="T:System.Configuration.SettingsPropertyValueCollection" />
 
           
 

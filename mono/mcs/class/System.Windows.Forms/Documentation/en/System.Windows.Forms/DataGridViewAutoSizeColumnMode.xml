@@ -16,16 +16,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >The <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
          control can resize its columns to make them fill the available horizontal width of the control or to make them display the full contents of all cells or of specified cells. </para
       >
       <para
-        >With <see
-         cref="F:System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill" />
+        >With <see cref="F:System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill" />
 
         
 
@@ -33,26 +31,22 @@
       >
       <para>Content-based automatic resizing prevents users from adjusting column widths with the mouse. User resizing is enabled in fill mode, however. </para>
       <para
-        >This enumeration is used by the <see
-         cref="P:System.Windows.Forms.DataGridViewColumn.AutoSizeMode" />
+        >This enumeration is used by the <see cref="P:System.Windows.Forms.DataGridViewColumn.AutoSizeMode" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.DataGridViewColumn.InheritedAutoSizeMode" />
+         and <see cref="P:System.Windows.Forms.DataGridViewColumn.InheritedAutoSizeMode" />
 
         
 
-         properties of columns and the <see
-         cref="Overload:System.Windows.Forms.DataGridView.AutoResizeColumn" />
+         properties of columns and the <see cref="Overload:System.Windows.Forms.DataGridView.AutoResizeColumn" />
 
         
 
          method. </para
       >
       <para
-        >For more information about sizing modes, see <format
-         type="text/html">
+        >For more information about sizing modes, see <format type="text/html">
           <a href="a5620a9c-0d06-41e3-8934-c25ddb16c9e6"
             >Sizing Options in the Windows Forms DataGridView Control</a
           >
@@ -60,8 +54,7 @@
 
         
 
-        . For more information about column fill mode in particular, see <format
-         type="text/html">
+        . For more information about column fill mode in particular, see <format type="text/html">
           <a href="b4ef7411-ebf4-4e26-bb33-aecec90de80c"
             >Column Fill Mode in the Windows Forms DataGridView Control</a
           >
@@ -174,13 +167,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The column width adjusts so that the widths of all columns exactly fills the display area of the control, requiring horizontal scrolling only to keep column widths above the <see
-             cref="P:System.Windows.Forms.DataGridViewColumn.MinimumWidth" />
+            >The column width adjusts so that the widths of all columns exactly fills the display area of the control, requiring horizontal scrolling only to keep column widths above the <see cref="P:System.Windows.Forms.DataGridViewColumn.MinimumWidth" />
 
             
 
-             property values. Relative column widths are determined by the relative <see
-             cref="P:System.Windows.Forms.DataGridViewColumn.FillWeight" />
+             property values. Relative column widths are determined by the relative <see cref="P:System.Windows.Forms.DataGridViewColumn.FillWeight" />
 
             
 
@@ -220,8 +211,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The sizing behavior of the column is inherited from the <see
-             cref="P:System.Windows.Forms.DataGridView.AutoSizeColumnsMode" />
+            >The sizing behavior of the column is inherited from the <see cref="P:System.Windows.Forms.DataGridView.AutoSizeColumnsMode" />
 
             
 

@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.SchemaType" />
+        >The <see cref="T:System.Data.SchemaType" />
 
         
 
@@ -27,8 +26,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies how to handle existing schema mappings when performing a <see
-         cref="M:System.Data.Common.DataAdapter.FillSchema(System.Data.DataSet,System.Data.SchemaType)" />
+        >Specifies how to handle existing schema mappings when performing a <see cref="M:System.Data.Common.DataAdapter.FillSchema(System.Data.DataSet,System.Data.SchemaType)" />
 
         
 
@@ -49,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Apply any existing table mappings to the incoming schema. Configure the <see
-             cref="T:System.Data.DataSet" />
+            >Apply any existing table mappings to the incoming schema. Configure the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -75,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Ignore any table mappings on the DataAdapter. Configure the <see
-             cref="T:System.Data.DataSet" />
+            >Ignore any table mappings on the DataAdapter. Configure the <see cref="T:System.Data.DataSet" />
 
             
 

@@ -26,31 +26,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.Mail.SmtpPermission" />
+        >The <see cref="T:System.Net.Mail.SmtpPermission" />
 
         
 
-         and <see
-         cref="T:System.Net.Mail.SmtpPermissionAttribute" />
+         and <see cref="T:System.Net.Mail.SmtpPermissionAttribute" />
 
         
 
-         classes control access to SMTP host computers. The <see
-         cref="T:System.Net.Mail.SmtpClient" />
+         classes control access to SMTP host computers. The <see cref="T:System.Net.Mail.SmtpClient" />
 
         
 
-         class demands an <see
-         cref="T:System.Net.Mail.SmtpPermission" />
+         class demands an <see cref="T:System.Net.Mail.SmtpPermission" />
 
         
 
          when sending electronic mail to the SMTP host for delivery.</para
       >
       <para
-        >The <see
-         cref="T:System.Net.Mail.SmtpAccess" />
+        >The <see cref="T:System.Net.Mail.SmtpAccess" />
 
         
 
@@ -82,18 +77,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="unrestricted" />
+            >If <paramref name="unrestricted" />
 
             
 
-             is true, the permission controls <see
-             cref="F:System.Net.Mail.SmtpAccess.Connect" />
+             is true, the permission controls <see cref="F:System.Net.Mail.SmtpAccess.Connect" />
 
             
 
-             access to SMTP servers. If unrestricted is false, the permission controls <see
-             cref="F:System.Net.Mail.SmtpAccess.None" />
+             access to SMTP servers. If unrestricted is false, the permission controls <see cref="F:System.Net.Mail.SmtpAccess.None" />
 
             
 
@@ -103,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Mail.SmtpPermission" />
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpPermission" />
 
             
 
@@ -112,7 +103,11 @@
           >
         </summary>
         <param name="unrestricted">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -146,8 +141,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Mail.SmtpPermission" />
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpPermission" />
 
             
 
@@ -155,12 +149,15 @@
           >
         </summary>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Net.Mail.SmtpAccess" />
+          One of the <see cref="T:System.Net.Mail.SmtpAccess" />
 
           
 
@@ -194,8 +191,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Mail.SmtpPermission" />
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpPermission" />
 
             
 
@@ -203,12 +199,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -271,12 +270,15 @@
           <para>Adds the specified access level value to the permission. </para>
         </summary>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Net.Mail.SmtpAccess" />
+          One of the <see cref="T:System.Net.Mail.SmtpAccess" />
 
           
 
@@ -312,8 +314,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.Mail.SmtpPermission" />
+            >An <see cref="T:System.Net.Mail.SmtpPermission" />
 
             
 
@@ -353,7 +354,11 @@
           <para>Sets the state of the permission using the specified XML encoding.</para>
         </summary>
         <param name="securityElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -394,13 +399,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.Mail.SmtpPermission" />
+            >An <see cref="T:System.Net.Mail.SmtpPermission" />
 
             
 
-             that represents the intersection of the current permission and the specified permission. Returns null if the intersection is empty or <paramref
-             name="target" />
+             that represents the intersection of the current permission and the specified permission. Returns null if the intersection is empty or <paramref name="target" />
 
             
 
@@ -408,12 +411,15 @@
           >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.IPermission" />
+          An <see cref="T:System.Security.IPermission" />
 
           
 
@@ -456,12 +462,15 @@
           <para>true if the current permission is a subset of the specified permission; otherwise, false.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.IPermission" />
+          An <see cref="T:System.Security.IPermission" />
 
           
 
@@ -531,8 +540,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.SecurityElement" />
+            >A <see cref="T:System.Security.SecurityElement" />
 
             
 
@@ -566,8 +574,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Mail.SmtpPermission.Union(System.Security.IPermission)" />
+            >The <see cref="M:System.Net.Mail.SmtpPermission.Union(System.Security.IPermission)" />
 
             
 
@@ -581,8 +588,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Net.Mail.SmtpPermission" />
+            >A new <see cref="T:System.Net.Mail.SmtpPermission" />
 
             
 
@@ -590,12 +596,15 @@
           >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.IPermission" />
+          An <see cref="T:System.Security.IPermission" />
 
           
 

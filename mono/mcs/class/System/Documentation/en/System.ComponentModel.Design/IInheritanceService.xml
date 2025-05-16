@@ -20,28 +20,23 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This interface provides methods that can be used to identify components of a component that are inherited from a base class.</para>
       <para
-        >To determine what components are inherited, call the <see
-         cref="M:System.ComponentModel.Design.IInheritanceService.AddInheritedComponents(System.ComponentModel.IComponent,System.ComponentModel.IContainer)" />
+        >To determine what components are inherited, call the <see cref="M:System.ComponentModel.Design.IInheritanceService.AddInheritedComponents(System.ComponentModel.IComponent,System.ComponentModel.IContainer)" />
 
         
 
-         method and pass the component to search and an <see
-         cref="T:System.ComponentModel.IContainer" />
+         method and pass the component to search and an <see cref="T:System.ComponentModel.IContainer" />
 
         
 
-         to store references to the identified components. Call the <see
-         cref="M:System.ComponentModel.Design.IInheritanceService.GetInheritanceAttribute(System.ComponentModel.IComponent)" />
+         to store references to the identified components. Call the <see cref="M:System.ComponentModel.Design.IInheritanceService.GetInheritanceAttribute(System.ComponentModel.IComponent)" />
 
         
 
-         method to retrieve an <see
-         cref="T:System.ComponentModel.InheritanceAttribute" />
+         method to retrieve an <see cref="T:System.ComponentModel.InheritanceAttribute" />
 
         
 
-         for a component that has been identified by the <see
-         cref="M:System.ComponentModel.Design.IInheritanceService.AddInheritedComponents(System.ComponentModel.IComponent,System.ComponentModel.IContainer)" />
+         for a component that has been identified by the <see cref="M:System.ComponentModel.Design.IInheritanceService.AddInheritedComponents(System.ComponentModel.IComponent,System.ComponentModel.IContainer)" />
 
         
 
@@ -80,23 +75,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method searches the specified component for any fields that implement the <see
-             cref="T:System.ComponentModel.IComponent" />
+            >This method searches the specified component for any fields that implement the <see cref="T:System.ComponentModel.IComponent" />
 
             
 
-            , adds each to the specified container, and stores an <see
-             cref="T:System.ComponentModel.InheritanceAttribute" />
+            , adds each to the specified container, and stores an <see cref="T:System.ComponentModel.InheritanceAttribute" />
 
             
 
-             for each. The <see
-             cref="T:System.ComponentModel.InheritanceAttribute" />
+             for each. The <see cref="T:System.ComponentModel.InheritanceAttribute" />
 
             
 
-             for a component indicates whether the field is inherited from a base class and can be retrieved using the <see
-             cref="M:System.ComponentModel.Design.IInheritanceService.GetInheritanceAttribute(System.ComponentModel.IComponent)" />
+             for a component indicates whether the field is inherited from a base class and can be retrieved using the <see cref="M:System.ComponentModel.Design.IInheritanceService.GetInheritanceAttribute(System.ComponentModel.IComponent)" />
 
             
 
@@ -106,13 +97,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches the specified component for fields that implement the <see
-             cref="T:System.ComponentModel.IComponent" />
+            >Searches the specified component for fields that implement the <see cref="T:System.ComponentModel.IComponent" />
 
             
 
-             interface and adds each to the specified container, storing the inheritance level of each which can be retrieved using the <see
-             cref="M:System.ComponentModel.Design.IInheritanceService.GetInheritanceAttribute(System.ComponentModel.IComponent)" />
+             interface and adds each to the specified container, storing the inheritance level of each which can be retrieved using the <see cref="M:System.ComponentModel.Design.IInheritanceService.GetInheritanceAttribute(System.ComponentModel.IComponent)" />
 
             
 
@@ -120,24 +109,30 @@
           >
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IComponent" />
+          The <see cref="T:System.ComponentModel.IComponent" />
 
           
 
            to search. Searching begins with this component. </param
         >
         <param name="container">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IContainer" />
+          The <see cref="T:System.ComponentModel.IContainer" />
 
           
 
@@ -170,26 +165,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the component has been profiled by the <see
-             cref="M:System.ComponentModel.Design.IInheritanceService.AddInheritedComponents(System.ComponentModel.IComponent,System.ComponentModel.IContainer)" />
+            >If the component has been profiled by the <see cref="M:System.ComponentModel.Design.IInheritanceService.AddInheritedComponents(System.ComponentModel.IComponent,System.ComponentModel.IContainer)" />
 
             
 
-             method, this method returns the value <see
-             cref="F:System.ComponentModel.InheritanceAttribute.NotInherited" />
+             method, this method returns the value <see cref="F:System.ComponentModel.InheritanceAttribute.NotInherited" />
 
             
 
             . Otherwise, it returns the inheritance attribute for this component.</para
           >
           <para
-            >You should call <see
-             cref="M:System.ComponentModel.Design.IInheritanceService.AddInheritedComponents(System.ComponentModel.IComponent,System.ComponentModel.IContainer)" />
+            >You should call <see cref="M:System.ComponentModel.Design.IInheritanceService.AddInheritedComponents(System.ComponentModel.IComponent,System.ComponentModel.IContainer)" />
 
             
 
-             on the specified component or a parent of the specified component before attempting to obtain an <see
-             cref="T:System.ComponentModel.InheritanceAttribute" />
+             on the specified component or a parent of the specified component before attempting to obtain an <see cref="T:System.ComponentModel.InheritanceAttribute" />
 
             
 
@@ -203,8 +194,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.ComponentModel.InheritanceAttribute" />
+            >An instance of <see cref="T:System.ComponentModel.InheritanceAttribute" />
 
             
 
@@ -212,12 +202,15 @@
           >
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IComponent" />
+          The <see cref="T:System.ComponentModel.IComponent" />
 
           
 

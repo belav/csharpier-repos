@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You do not create instances of this class; instances are returned in the array returned by the <see
-         cref="P:System.Net.NetworkInformation.IPInterfaceProperties.MulticastAddresses" />
+        >You do not create instances of this class; instances are returned in the array returned by the <see cref="P:System.Net.NetworkInformation.IPInterfaceProperties.MulticastAddresses" />
 
         
 
@@ -56,8 +55,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor can be called only by classes that derive from the <see
-             cref="T:System.Net.NetworkInformation.MulticastIPAddressInformation" />
+            >This constructor can be called only by classes that derive from the <see cref="T:System.Net.NetworkInformation.MulticastIPAddressInformation" />
 
             
 
@@ -67,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.NetworkInformation.MulticastIPAddressInformation" />
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.MulticastIPAddressInformation" />
 
             
 
@@ -97,8 +94,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the value returned by this property to determine how long the preferred address remains valid. Whenever possible, applications should use a preferred address. Use <see
-             cref="P:System.Net.NetworkInformation.MulticastIPAddressInformation.DuplicateAddressDetectionState" />
+            >Use the value returned by this property to determine how long the preferred address remains valid. Whenever possible, applications should use a preferred address. Use <see cref="P:System.Net.NetworkInformation.MulticastIPAddressInformation.DuplicateAddressDetectionState" />
 
             
 
@@ -128,8 +124,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the value returned by this property to determine whether this address can be used by your application. Whenever possible, applications should use a preferred address. Use <see
-             cref="P:System.Net.NetworkInformation.MulticastIPAddressInformation.DuplicateAddressDetectionState" />
+            >Use the value returned by this property to determine whether this address can be used by your application. Whenever possible, applications should use a preferred address. Use <see cref="P:System.Net.NetworkInformation.MulticastIPAddressInformation.DuplicateAddressDetectionState" />
 
             
 
@@ -160,8 +155,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Dynamic Host Configuration Protocol (DHCP) allows a computer to obtain a network address from a DHCP server, as opposed to using a static (fixed) network address. The DHCP server does not permanently assign addresses; instead, it "leases" one of a number of available addresses to the computer. Within a specified amount of time, known as the lease lifetime for the address, the computer releases the address, leaving the DHCP server free to assign it to a different computer.</para>
           <para
-            >This property returns the number of seconds left in the lease lifetime for the IP address identified in the <see
-             cref="P:System.Net.NetworkInformation.IPAddressInformation.Address" />
+            >This property returns the number of seconds left in the lease lifetime for the IP address identified in the <see cref="P:System.Net.NetworkInformation.IPAddressInformation.Address" />
 
             
 

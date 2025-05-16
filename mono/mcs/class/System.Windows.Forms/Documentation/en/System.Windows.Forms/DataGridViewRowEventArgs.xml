@@ -14,13 +14,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.DataGridViewRowEventArgs" />
+        >The <see cref="T:System.Windows.Forms.DataGridViewRowEventArgs" />
 
         
 
-         class provides data for the following <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         class provides data for the following <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -92,8 +90,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for row-related <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >Provides data for row-related <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -116,13 +113,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor uses the <paramref
-             name="dataGridViewRow" />
+            >This constructor uses the <paramref name="dataGridViewRow" />
 
             
 
-             parameter value to initialize the <see
-             cref="P:System.Windows.Forms.DataGridViewRowEventArgs.Row" />
+             parameter value to initialize the <see cref="P:System.Windows.Forms.DataGridViewRowEventArgs.Row" />
 
             
 
@@ -132,8 +127,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewRowEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewRowEventArgs" />
 
             
 
@@ -141,12 +135,15 @@
           >
         </summary>
         <param name="dataGridViewRow">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.DataGridViewRow" />
+          The <see cref="T:System.Windows.Forms.DataGridViewRow" />
 
           
 
@@ -173,8 +170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.DataGridViewRow" />
+            >Gets the <see cref="T:System.Windows.Forms.DataGridViewRow" />
 
             
 

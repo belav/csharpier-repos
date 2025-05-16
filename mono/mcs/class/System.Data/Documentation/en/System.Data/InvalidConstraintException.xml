@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.InvalidConstraintException" />
+        >The <see cref="T:System.Data.InvalidConstraintException" />
 
         
 
@@ -46,48 +45,39 @@
         </item>
       </list>
       <para
-        >If you call <see
-         cref="M:System.Data.DataRelationCollection.Add(System.Data.DataRelation)" />
+        >If you call <see cref="M:System.Data.DataRelationCollection.Add(System.Data.DataRelation)" />
 
         
 
-        , the <see
-         cref="T:System.Data.InvalidConstraintException" />
+        , the <see cref="T:System.Data.InvalidConstraintException" />
 
         
 
-         may be thrown if a relation cannot be created based on the values supplied in the parameters. If you call <see
-         cref="M:System.Data.DataRowCollection.Clear" />
+         may be thrown if a relation cannot be created based on the values supplied in the parameters. If you call <see cref="M:System.Data.DataRowCollection.Clear" />
 
         
 
-        , the <see
-         cref="T:System.Data.InvalidConstraintException" />
+        , the <see cref="T:System.Data.InvalidConstraintException" />
 
         
 
-         may be thrown if a <see
-         cref="T:System.Data.ForeignKeyConstraint" />
+         may be thrown if a <see cref="T:System.Data.ForeignKeyConstraint" />
 
         
 
-         is enforced on the <see
-         cref="T:System.Data.DataRowCollection" />
+         is enforced on the <see cref="T:System.Data.DataRowCollection" />
 
         
 
-        . If you call <see
-         cref="M:System.Data.DataRow.GetParentRow(System.String)" />
+        . If you call <see cref="M:System.Data.DataRow.GetParentRow(System.String)" />
 
         
 
-        , the <see
-         cref="T:System.Data.InvalidConstraintException" />
+        , the <see cref="T:System.Data.InvalidConstraintException" />
 
         
 
-         may be thrown if the columns have different data types or the tables do not belong to the same <see
-         cref="T:System.Data.DataSet" />
+         may be thrown if the columns have different data types or the tables do not belong to the same <see cref="T:System.Data.DataSet" />
 
         
 
@@ -110,8 +100,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.InvalidConstraintException" />
+            >Initializes a new instance of the <see cref="T:System.Data.InvalidConstraintException" />
 
             
 
@@ -136,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.InvalidConstraintException" />
+            >Initializes a new instance of the <see cref="T:System.Data.InvalidConstraintException" />
 
             
 
@@ -145,7 +133,11 @@
           >
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -173,8 +165,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.InvalidConstraintException" />
+            >Initializes a new instance of the <see cref="T:System.Data.InvalidConstraintException" />
 
             
 
@@ -182,14 +173,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data that is required to serialize or deserialize an object. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -220,8 +219,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.InvalidConstraintException" />
+            >Initializes a new instance of the <see cref="T:System.Data.InvalidConstraintException" />
 
             
 
@@ -229,7 +227,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

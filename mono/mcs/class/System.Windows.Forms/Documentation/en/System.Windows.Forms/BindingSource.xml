@@ -46,43 +46,35 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.BindingSource" />
+        >The <see cref="T:System.Windows.Forms.BindingSource" />
 
         
 
-         component serves many purposes. First, it simplifies binding controls on a form to data by providing currency management, change notification, and other services between Windows Forms controls and data sources. This is accomplished by attaching the <see
-         cref="T:System.Windows.Forms.BindingSource" />
+         component serves many purposes. First, it simplifies binding controls on a form to data by providing currency management, change notification, and other services between Windows Forms controls and data sources. This is accomplished by attaching the <see cref="T:System.Windows.Forms.BindingSource" />
 
         
 
-         component to your data source using the <see
-         cref="P:System.Windows.Forms.BindingSource.DataSource" />
+         component to your data source using the <see cref="P:System.Windows.Forms.BindingSource.DataSource" />
 
         
 
-         property. For complex binding scenarios you can optionally set the <see
-         cref="P:System.Windows.Forms.BindingSource.DataMember" />
+         property. For complex binding scenarios you can optionally set the <see cref="P:System.Windows.Forms.BindingSource.DataMember" />
 
         
 
-         property to a specific column or list in the data source. You then bind controls to the <see
-         cref="T:System.Windows.Forms.BindingSource" />
+         property to a specific column or list in the data source. You then bind controls to the <see cref="T:System.Windows.Forms.BindingSource" />
 
         
 
-        . All further interaction with the data is accomplished with calls to the <see
-         cref="T:System.Windows.Forms.BindingSource" />
+        . All further interaction with the data is accomplished with calls to the <see cref="T:System.Windows.Forms.BindingSource" />
 
         
 
-         component. For examples on how the <see
-         cref="T:System.Windows.Forms.BindingSource" />
+         component. For examples on how the <see cref="T:System.Windows.Forms.BindingSource" />
 
         
 
-         can simplify the binding process, see <format
-         type="text/html">
+         can simplify the binding process, see <format type="text/html">
           <a href="96494e6f-5f40-4f83-af97-bbd7192c2af8"
             >How to: Bind Windows Forms Controls to DbNull Database Values</a
           >
@@ -90,8 +82,7 @@
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="eddc5bad-9513-47df-ab28-f02d8dff7892"
             >How to: Handle Errors and Exceptions that Occur with Databinding</a
           >
@@ -99,38 +90,31 @@
 
         
 
-        . Navigation and updating of the data source is accomplished through methods such as <see
-         cref="M:System.Windows.Forms.BindingSource.MoveNext" />
+        . Navigation and updating of the data source is accomplished through methods such as <see cref="M:System.Windows.Forms.BindingSource.MoveNext" />
 
         
 
-        , <see
-         cref="M:System.Windows.Forms.BindingSource.MoveLast" />
+        , <see cref="M:System.Windows.Forms.BindingSource.MoveLast" />
 
         
 
-        , and <see
-         cref="M:System.Windows.Forms.BindingSource.Remove(System.Object)" />
+        , and <see cref="M:System.Windows.Forms.BindingSource.Remove(System.Object)" />
 
         
 
-        . Operations such as sorting and filtering are handled through the <see
-         cref="P:System.Windows.Forms.BindingSource.Sort" />
+        . Operations such as sorting and filtering are handled through the <see cref="P:System.Windows.Forms.BindingSource.Sort" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.BindingSource.Filter" />
+         and <see cref="P:System.Windows.Forms.BindingSource.Filter" />
 
         
 
-         properties. For more information on using sorting and filtering with the <see
-         cref="T:System.Windows.Forms.BindingSource" />
+         properties. For more information on using sorting and filtering with the <see cref="T:System.Windows.Forms.BindingSource" />
 
         
 
-        , see <format
-         type="text/html">
+        , see <format type="text/html">
           <a href="6c206daf-d706-4602-9dbe-435343052063"
             >How to: Sort and Filter ADO.NET Data with the Windows Forms BindingSource Component</a
           >
@@ -141,8 +125,7 @@
         .</para
       >
       <para
-        >In addition, the <see
-         cref="T:System.Windows.Forms.BindingSource" />
+        >In addition, the <see cref="T:System.Windows.Forms.BindingSource" />
 
         
 
@@ -151,13 +134,11 @@
       <list type="bullet">
         <item>
           <para
-            >Use the <see
-             cref="M:System.Windows.Forms.BindingSource.Add(System.Object)" />
+            >Use the <see cref="M:System.Windows.Forms.BindingSource.Add(System.Object)" />
 
             
 
-             method to add an item to the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+             method to add an item to the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -166,8 +147,7 @@
         </item>
         <item>
           <para
-            >Set the <see
-             cref="P:System.Windows.Forms.BindingSource.DataSource" />
+            >Set the <see cref="P:System.Windows.Forms.BindingSource.DataSource" />
 
             
 
@@ -176,13 +156,11 @@
         </item>
       </list>
       <para
-        >Both of these mechanisms create a strongly-typed list. For more information on how to use the <see
-         cref="T:System.Windows.Forms.BindingSource" />
+        >Both of these mechanisms create a strongly-typed list. For more information on how to use the <see cref="T:System.Windows.Forms.BindingSource" />
 
         
 
-         to bind to a type, see <format
-         type="text/html">
+         to bind to a type, see <format type="text/html">
           <a href="94faeebb-d2bc-45d6-86d7-96a42661b43d"
             >How to: Bind a Windows Forms Control to a Type</a
           >
@@ -190,13 +168,11 @@
 
         
 
-        . You can also use the <see
-         cref="T:System.Windows.Forms.BindingSource" />
+        . You can also use the <see cref="T:System.Windows.Forms.BindingSource" />
 
         
 
-         to bind your controls to a factory object. For more information on how to do this, see <format
-         type="text/html">
+         to bind your controls to a factory object. For more information on how to do this, see <format type="text/html">
           <a href="7d59af89-ff82-41d8-a48a-f1fbae788b0d"
             >How to: Bind a Windows Forms Control to a Factory Object</a
           >
@@ -208,28 +184,23 @@
       >
       <block subset="none" type="note">
         <para
-          >Because a <see
-           cref="T:System.Windows.Forms.BindingSource" />
+          >Because a <see cref="T:System.Windows.Forms.BindingSource" />
 
           
 
-           handles both simple and complex data sources, terminology is problematic. Within this class documentation, the term <newTerm
-          >list</newTerm>
+           handles both simple and complex data sources, terminology is problematic. Within this class documentation, the term <newTerm>list</newTerm>
 
           
 
-           refers to a data collection within the hosted data source, and <newTerm
-          >item</newTerm>
+           refers to a data collection within the hosted data source, and <newTerm>item</newTerm>
 
           
 
-           denotes a single element. When discussing functionality associated with complex data sources, the equivalent terms <newTerm
-          >table</newTerm>
+           denotes a single element. When discussing functionality associated with complex data sources, the equivalent terms <newTerm>table</newTerm>
 
           
 
-           and <newTerm
-          >row</newTerm>
+           and <newTerm>row</newTerm>
 
           
 
@@ -241,99 +212,81 @@
 
         
 
-         provides members for accessing the underlying data. The current item can be retrieved through the <see
-         cref="P:System.Windows.Forms.BindingSource.Current" />
+         provides members for accessing the underlying data. The current item can be retrieved through the <see cref="P:System.Windows.Forms.BindingSource.Current" />
 
         
 
-         property, and the entire list can be retrieved through the <see
-         cref="P:System.Windows.Forms.BindingSource.List" />
+         property, and the entire list can be retrieved through the <see cref="P:System.Windows.Forms.BindingSource.List" />
 
         
 
-         property. Editing operations are supported on the current item through <see
-         cref="P:System.Windows.Forms.BindingSource.Current" />
+         property. Editing operations are supported on the current item through <see cref="P:System.Windows.Forms.BindingSource.Current" />
 
         
 
-         and the <see
-         cref="M:System.Windows.Forms.BindingSource.RemoveCurrent" />
+         and the <see cref="M:System.Windows.Forms.BindingSource.RemoveCurrent" />
 
         
 
-        , <see
-         cref="M:System.Windows.Forms.BindingSource.EndEdit" />
+        , <see cref="M:System.Windows.Forms.BindingSource.EndEdit" />
 
         
 
-        , <see
-         cref="M:System.Windows.Forms.BindingSource.CancelEdit" />
+        , <see cref="M:System.Windows.Forms.BindingSource.CancelEdit" />
 
         
 
-         and <see
-         cref="M:System.Windows.Forms.BindingSource.Add(System.Object)" />
+         and <see cref="M:System.Windows.Forms.BindingSource.Add(System.Object)" />
 
         
 
-         and <see
-         cref="M:System.Windows.Forms.BindingSource.AddNew" />
+         and <see cref="M:System.Windows.Forms.BindingSource.AddNew" />
 
         
 
-         methods. Although currency management is handled automatically for all underlying data source types, this class exposes a number of events, such as <see
-         cref="E:System.Windows.Forms.BindingSource.CurrentItemChanged" />
+         methods. Although currency management is handled automatically for all underlying data source types, this class exposes a number of events, such as <see cref="E:System.Windows.Forms.BindingSource.CurrentItemChanged" />
 
         
 
-         and <see
-         cref="E:System.Windows.Forms.BindingSource.DataSourceChanged" />
+         and <see cref="E:System.Windows.Forms.BindingSource.DataSourceChanged" />
 
         
 
         , that allow for customization.</para
       >
       <para
-        >Data sources that are bound to a <see
-         cref="T:System.Windows.Forms.BindingSource" />
+        >Data sources that are bound to a <see cref="T:System.Windows.Forms.BindingSource" />
 
         
 
-         component can also be navigated and managed with the <see
-         cref="T:System.Windows.Forms.BindingNavigator" />
+         component can also be navigated and managed with the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
         
 
-         class, which provides a VCR-like user interface (UI) for navigating items within a list. Although <see
-         cref="T:System.Windows.Forms.BindingNavigator" />
+         class, which provides a VCR-like user interface (UI) for navigating items within a list. Although <see cref="T:System.Windows.Forms.BindingNavigator" />
 
         
 
-         can be bound to any data source, it was designed to integrate with a <see
-         cref="T:System.Windows.Forms.BindingSource" />
+         can be bound to any data source, it was designed to integrate with a <see cref="T:System.Windows.Forms.BindingSource" />
 
         
 
-         component through its <see
-         cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
+         component through its <see cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
 
         
 
          property.</para
       >
       <para
-        >The default property for the <see
-         cref="T:System.Windows.Forms.BindingSource" />
+        >The default property for the <see cref="T:System.Windows.Forms.BindingSource" />
 
         
 
-         class is <see
-         cref="P:System.Windows.Forms.BindingSource.DataSource" />
+         class is <see cref="P:System.Windows.Forms.BindingSource.DataSource" />
 
         
 
-        . The default event is <see
-         cref="E:System.Windows.Forms.BindingSource.CurrentChanged" />
+        . The default event is <see cref="E:System.Windows.Forms.BindingSource.CurrentChanged" />
 
         
 
@@ -341,53 +294,43 @@
       >
       <block subset="none" type="note">
         <para
-          >  Many of the members of the <see
-           cref="T:System.Windows.Forms.BindingSource" />
+          >  Many of the members of the <see cref="T:System.Windows.Forms.BindingSource" />
 
           
 
-           class operate on the underlying list represented by the <see
-           cref="P:System.Windows.Forms.BindingSource.List" />
+           class operate on the underlying list represented by the <see cref="P:System.Windows.Forms.BindingSource.List" />
 
           
 
-           property and simply refer their operation to the underlying list. Therefore, when the <see
-           cref="T:System.Windows.Forms.BindingSource" />
+           property and simply refer their operation to the underlying list. Therefore, when the <see cref="T:System.Windows.Forms.BindingSource" />
 
           
 
-           is bound to a custom implementation of <see
-           cref="T:System.Collections.IList" />
+           is bound to a custom implementation of <see cref="T:System.Collections.IList" />
 
           
 
-          , the exact behavior of these members may differ from the behavior described in the class documentation. For example, the <see
-           cref="M:System.Windows.Forms.BindingSource.RemoveAt(System.Int32)" />
+          , the exact behavior of these members may differ from the behavior described in the class documentation. For example, the <see cref="M:System.Windows.Forms.BindingSource.RemoveAt(System.Int32)" />
 
           
 
-           method calls <see
-           cref="M:System.Collections.IList.RemoveAt(System.Int32)" />
+           method calls <see cref="M:System.Collections.IList.RemoveAt(System.Int32)" />
 
           
 
-          . The <see
-           cref="T:System.Windows.Forms.BindingSource" />
+          . The <see cref="T:System.Windows.Forms.BindingSource" />
 
           
 
-           documentation describes the <see
-           cref="M:System.Windows.Forms.BindingSource.RemoveAt(System.Int32)" />
+           documentation describes the <see cref="M:System.Windows.Forms.BindingSource.RemoveAt(System.Int32)" />
 
           
 
-           method with the understanding that the <see
-           cref="M:System.Collections.IList.RemoveAt(System.Int32)" />
+           method with the understanding that the <see cref="M:System.Collections.IList.RemoveAt(System.Int32)" />
 
           
 
-           method for the underlying <see
-           cref="T:System.Collections.IList" />
+           method for the underlying <see cref="T:System.Collections.IList" />
 
           
 
@@ -412,8 +355,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the default <see
-             cref="T:System.Windows.Forms.BindingSource" />
+            >The following table shows the default <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -487,8 +429,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -513,8 +454,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor calls the default constructor, and then adds the current <see
-             cref="T:System.Windows.Forms.BindingSource" />
+            >This constructor calls the default constructor, and then adds the current <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -524,13 +464,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
-             class and adds the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+             class and adds the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -538,17 +476,19 @@
           >
         </summary>
         <param name="container">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IContainer" />
+          The <see cref="T:System.ComponentModel.IContainer" />
 
           
 
-           to add the current <see
-           cref="T:System.Windows.Forms.BindingSource" />
+           to add the current <see cref="T:System.Windows.Forms.BindingSource" />
 
           
 
@@ -574,8 +514,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -583,19 +522,26 @@
           >
         </summary>
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The data source for the <see
-           cref="T:System.Windows.Forms.BindingSource" />
+          The data source for the <see cref="T:System.Windows.Forms.BindingSource" />
 
           
 
           .</param
         >
         <param name="dataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -619,24 +565,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingSource.Add(System.Object)" />
+            >The <see cref="M:System.Windows.Forms.BindingSource.Add(System.Object)" />
 
             
 
              method refers the call to the underlying list's Add method.</para
           >
           <para
-            >The internal list must contain homogenous types. If the <see
-             cref="P:System.Windows.Forms.BindingSource.DataSource" />
+            >The internal list must contain homogenous types. If the <see cref="P:System.Windows.Forms.BindingSource.DataSource" />
 
             
 
              property has not already been set, then the first object added to the list defines the type for the list.</para
           >
           <para
-            >This method raises the <see
-             cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+            >This method raises the <see cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
             
 
@@ -650,13 +593,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index at which <paramref
-             name="value" />
+            >The zero-based index at which <paramref name="value" />
 
             
 
-             was added to the underlying list represented by the <see
-             cref="P:System.Windows.Forms.BindingSource.List" />
+             was added to the underlying list represented by the <see cref="P:System.Windows.Forms.BindingSource.List" />
 
             
 
@@ -664,12 +605,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
@@ -693,71 +637,58 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.BindingSource.AddingNew" />
+            >The <see cref="E:System.Windows.Forms.BindingSource.AddingNew" />
 
             
 
-             event occurs before a new object is added to the underlying list represented by the <see
-             cref="P:System.Windows.Forms.BindingSource.List" />
+             event occurs before a new object is added to the underlying list represented by the <see cref="P:System.Windows.Forms.BindingSource.List" />
 
             
 
-             property. This event is fired after the <see
-             cref="M:System.Windows.Forms.BindingSource.AddNew" />
+             property. This event is fired after the <see cref="M:System.Windows.Forms.BindingSource.AddNew" />
 
             
 
-             method is called, but before the new item is created and added to the underlying list. By handling this event, the programmer can provide custom item creation and insertion behavior without being forced to derive from the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+             method is called, but before the new item is created and added to the underlying list. By handling this event, the programmer can provide custom item creation and insertion behavior without being forced to derive from the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
-             class. This is accomplished in the event handler by setting the <see
-             cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
+             class. This is accomplished in the event handler by setting the <see cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
 
             
 
-             property of the <see
-             cref="T:System.ComponentModel.AddingNewEventArgs" />
+             property of the <see cref="T:System.ComponentModel.AddingNewEventArgs" />
 
             
 
-             parameter to the new item. The new object created in the <see
-             cref="E:System.Windows.Forms.BindingSource.AddingNew" />
+             parameter to the new item. The new object created in the <see cref="E:System.Windows.Forms.BindingSource.AddingNew" />
 
             
 
-             event must be of the same type as the type contained in the list or an exception will occur. You cannot set the <see
-             cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
+             event must be of the same type as the type contained in the list or an exception will occur. You cannot set the <see cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
 
             
 
-             property when bound to a <see
-             cref="T:System.Data.DataView" />
+             property when bound to a <see cref="T:System.Data.DataView" />
 
             
 
-             or <see
-             cref="T:System.Data.DataTable" />
+             or <see cref="T:System.Data.DataTable" />
 
             
 
-             because you cannot add a new <see
-             cref="T:System.Data.DataRowView" />
+             because you cannot add a new <see cref="T:System.Data.DataRowView" />
 
             
 
              to the list.</para
           >
           <para
-            >For more information about supplying custom new item functionality, see the <see
-             cref="M:System.Windows.Forms.BindingSource.AddNew" />
+            >For more information about supplying custom new item functionality, see the <see cref="M:System.Windows.Forms.BindingSource.AddNew" />
 
             
 
-             method. For more information about handling events, see <format
-             type="text/html">
+             method. For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -786,13 +717,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingSource.AddNew" />
+            >The <see cref="M:System.Windows.Forms.BindingSource.AddNew" />
 
             
 
-             method adds a new item to the underlying list represented by the <see
-             cref="P:System.Windows.Forms.BindingSource.List" />
+             method adds a new item to the underlying list represented by the <see cref="P:System.Windows.Forms.BindingSource.List" />
 
             
 
@@ -801,8 +730,7 @@
           <list type="ordered">
             <item>
               <para
-                >The <see
-                 cref="M:System.Windows.Forms.BindingSource.EndEdit" />
+                >The <see cref="M:System.Windows.Forms.BindingSource.EndEdit" />
 
                 
 
@@ -811,46 +739,38 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="E:System.Windows.Forms.BindingSource.AddingNew" />
+                >The <see cref="E:System.Windows.Forms.BindingSource.AddingNew" />
 
                 
 
-                 event is automatically raised. This event can be programmatically handled to construct the new item. This is accomplished in the event handler by setting the <see
-                 cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
+                 event is automatically raised. This event can be programmatically handled to construct the new item. This is accomplished in the event handler by setting the <see cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
 
                 
 
-                 property of the <see
-                 cref="T:System.ComponentModel.AddingNewEventArgs" />
+                 property of the <see cref="T:System.ComponentModel.AddingNewEventArgs" />
 
                 
 
-                 parameter to the new item. The new object created in the <see
-                 cref="E:System.Windows.Forms.BindingSource.AddingNew" />
+                 parameter to the new item. The new object created in the <see cref="E:System.Windows.Forms.BindingSource.AddingNew" />
 
                 
 
                  event must be of the same type as the type contained in the list or an exception will occur.</para
               >
               <para
-                >If the <see
-                 cref="E:System.Windows.Forms.BindingSource.AddingNew" />
+                >If the <see cref="E:System.Windows.Forms.BindingSource.AddingNew" />
 
                 
 
-                 event is not handled, and the underlying list is an <see
-                 cref="T:System.ComponentModel.IBindingList" />
+                 event is not handled, and the underlying list is an <see cref="T:System.ComponentModel.IBindingList" />
 
                 
 
-                , then the request is passed to the list's <see
-                 cref="M:System.ComponentModel.IBindingList.AddNew" />
+                , then the request is passed to the list's <see cref="M:System.ComponentModel.IBindingList.AddNew" />
 
                 
 
-                 method. If the underlying list is not an <see
-                 cref="T:System.ComponentModel.IBindingList" />
+                 method. If the underlying list is not an <see cref="T:System.ComponentModel.IBindingList" />
 
                 
 
@@ -859,18 +779,15 @@
             </item>
             <item>
               <para
-                >The new item is added immediately to the internal list unless the data source implements the <see
-                 cref="T:System.ComponentModel.IEditableObject" />
+                >The new item is added immediately to the internal list unless the data source implements the <see cref="T:System.ComponentModel.IEditableObject" />
 
                 
 
-                 interface. In this case, the new item is not committed until an explicit call to <see
-                 cref="M:System.Windows.Forms.BindingSource.System#ComponentModel#ICancelAddNew#EndNew(System.Int32)" />
+                 interface. In this case, the new item is not committed until an explicit call to <see cref="M:System.Windows.Forms.BindingSource.System#ComponentModel#ICancelAddNew#EndNew(System.Int32)" />
 
                 
 
-                 is made or until a new list operation is initiated. Before it is committed, the new item can be rolled back by calling <see
-                 cref="M:System.Windows.Forms.BindingSource.CancelEdit" />
+                 is made or until a new list operation is initiated. Before it is committed, the new item can be rolled back by calling <see cref="M:System.Windows.Forms.BindingSource.CancelEdit" />
 
                 
 
@@ -879,8 +796,7 @@
             </item>
           </list>
           <para
-            >This method raises the <see
-             cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+            >This method raises the <see cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
             
 
@@ -894,8 +810,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Object" />
+            >The <see cref="T:System.Object" />
 
             
 
@@ -923,8 +838,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.BindingSource.AllowEdit" />
+            >The <see cref="P:System.Windows.Forms.BindingSource.AllowEdit" />
 
             
 
@@ -951,13 +865,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value for the <see
-             cref="P:System.Windows.Forms.BindingSource.AllowNew" />
+            >The default value for the <see cref="P:System.Windows.Forms.BindingSource.AllowNew" />
 
             
 
-             property depends on the underlying data source type. If the underlying list implements the <see
-             cref="T:System.ComponentModel.IBindingList" />
+             property depends on the underlying data source type. If the underlying list implements the <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -966,8 +878,7 @@
           <list type="bullet">
             <item>
               <para
-                >It has a fixed size, as determined by the <see
-                 cref="P:System.Collections.IList.IsFixedSize" />
+                >It has a fixed size, as determined by the <see cref="P:System.Collections.IList.IsFixedSize" />
 
                 
 
@@ -976,8 +887,7 @@
             </item>
             <item>
               <para
-                >It is read-only, as determined by the <see
-                 cref="P:System.Collections.IList.IsReadOnly" />
+                >It is read-only, as determined by the <see cref="P:System.Collections.IList.IsReadOnly" />
 
                 
 
@@ -990,8 +900,7 @@
           </list>
           <block subset="none" type="note">
             <para
-              >Once the value of this property is set, the getter no longer refers the call to the underlying list. Instead, it simply returns the value that was previously set until the <see
-               cref="M:System.Windows.Forms.BindingSource.ResetAllowNew" />
+              >Once the value of this property is set, the getter no longer refers the call to the underlying list. Instead, it simply returns the value that was previously set until the <see cref="M:System.Windows.Forms.BindingSource.ResetAllowNew" />
 
               
 
@@ -999,31 +908,26 @@
             >
           </block>
           <para
-            >Setting this property raises the <see
-             cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+            >Setting this property raises the <see cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
             
 
-             event with <see
-             cref="P:System.ComponentModel.ListChangedEventArgs.ListChangedType" />
+             event with <see cref="P:System.ComponentModel.ListChangedEventArgs.ListChangedType" />
 
             
 
-             set to <see
-             cref="F:System.ComponentModel.ListChangedType.Reset" />
+             set to <see cref="F:System.ComponentModel.ListChangedType.Reset" />
 
             
 
             .</para
           >
           <para
-            >If you set the <see
-             cref="P:System.Windows.Forms.BindingSource.AllowNew" />
+            >If you set the <see cref="P:System.Windows.Forms.BindingSource.AllowNew" />
 
             
 
-             property to true and the underlying list type does not have a default constructor, you must handle the <see
-             cref="E:System.Windows.Forms.BindingSource.AddingNew" />
+             property to true and the underlying list type does not have a default constructor, you must handle the <see cref="E:System.Windows.Forms.BindingSource.AddingNew" />
 
             
 
@@ -1033,8 +937,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="M:System.Windows.Forms.BindingSource.AddNew" />
+            >Gets or sets a value indicating whether the <see cref="M:System.Windows.Forms.BindingSource.AddNew" />
 
             
 
@@ -1062,8 +965,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.BindingSource.AllowRemove" />
+            >The <see cref="P:System.Windows.Forms.BindingSource.AllowRemove" />
 
             
 
@@ -1112,12 +1014,15 @@
           <para>Sorts the data source with the specified sort descriptions.</para>
         </summary>
         <param name="sorts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.ListSortDescriptionCollection" />
+          A <see cref="T:System.ComponentModel.ListSortDescriptionCollection" />
 
           
 
@@ -1150,18 +1055,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.IBindingList" />
+            >The <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
-             implements single column sorting using a <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+             implements single column sorting using a <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
-             to indicate a property to sort by and a <see
-             cref="T:System.ComponentModel.ListSortDirection" />
+             to indicate a property to sort by and a <see cref="T:System.ComponentModel.ListSortDirection" />
 
             
 
@@ -1173,24 +1075,30 @@
           <para>Sorts the data source using the specified property descriptor and sort direction.</para>
         </summary>
         <param name="property">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          A <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
            that describes the property by which to sort the data source.</param
         >
         <param name="sort">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.ListSortDirection" />
+          A <see cref="T:System.ComponentModel.ListSortDirection" />
 
           
 
@@ -1214,31 +1122,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.BindingSource.BindingComplete" />
+            >The <see cref="E:System.Windows.Forms.BindingSource.BindingComplete" />
 
             
 
-             event occurs after all the clients, typically controls, have been bound to the current <see
-             cref="T:System.Windows.Forms.BindingSource" />
+             event occurs after all the clients, typically controls, have been bound to the current <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
-            . The handler of this event can take the appropriate action based on the success, error, or exceptions in the binding process, by examining the <see
-             cref="P:System.Windows.Forms.BindingCompleteEventArgs.BindingCompleteState" />
+            . The handler of this event can take the appropriate action based on the success, error, or exceptions in the binding process, by examining the <see cref="P:System.Windows.Forms.BindingCompleteEventArgs.BindingCompleteState" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
 
             
 
              parameter.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1250,8 +1153,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when all the clients have been bound to this <see
-             cref="T:System.Windows.Forms.BindingSource" />
+            >Occurs when all the clients have been bound to this <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -1277,8 +1179,7 @@
           <list type="bullet">
             <item>
               <para
-                >The data source implements the <see
-                 cref="T:System.ComponentModel.IEditableObject" />
+                >The data source implements the <see cref="T:System.ComponentModel.IEditableObject" />
 
                 
 
@@ -1287,8 +1188,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="M:System.Windows.Forms.BindingSource.EndEdit" />
+                >The <see cref="M:System.Windows.Forms.BindingSource.EndEdit" />
 
                 
 
@@ -1297,13 +1197,11 @@
             </item>
           </list>
           <para
-            >This method calls the <see
-             cref="M:System.Windows.Forms.CurrencyManager.CancelCurrentEdit" />
+            >This method calls the <see cref="M:System.Windows.Forms.CurrencyManager.CancelCurrentEdit" />
 
             
 
-             method of the underlying <see
-             cref="T:System.Windows.Forms.CurrencyManager" />
+             method of the underlying <see cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
@@ -1330,26 +1228,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingSource.Clear" />
+            >The <see cref="M:System.Windows.Forms.BindingSource.Clear" />
 
             
 
-             method removes all elements from the underlying list represented by the <see
-             cref="P:System.Windows.Forms.BindingSource.List" />
+             method removes all elements from the underlying list represented by the <see cref="P:System.Windows.Forms.BindingSource.List" />
 
             
 
-             property and sets the <see
-             cref="P:System.Windows.Forms.BindingSource.Count" />
+             property and sets the <see cref="P:System.Windows.Forms.BindingSource.Count" />
 
             
 
              property to zero. </para
           >
           <para
-            >This method raises the <see
-             cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+            >This method raises the <see cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
             
 
@@ -1390,8 +1284,7 @@
             </item>
             <item>
               <para
-                >The underlying method performs a linear search; therefore, the average execution time is proportional to the value of the <see
-                 cref="P:System.Windows.Forms.BindingSource.Count" />
+                >The underlying method performs a linear search; therefore, the average execution time is proportional to the value of the <see cref="P:System.Windows.Forms.BindingSource.Count" />
 
                 
 
@@ -1400,8 +1293,7 @@
             </item>
             <item>
               <para
-                >The underlying method determines equality by calling the <see
-                 cref="M:System.Object.Equals(System.Object)" />
+                >The underlying method determines equality by calling the <see cref="M:System.Object.Equals(System.Object)" />
 
                 
 
@@ -1417,13 +1309,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="value" />
+            >true if the <paramref name="value" />
 
             
 
-             parameter is found in the <see
-             cref="P:System.Windows.Forms.BindingSource.List" />
+             parameter is found in the <see cref="P:System.Windows.Forms.BindingSource.List" />
 
             
 
@@ -1431,17 +1321,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to locate in the underlying list represented by the <see
-           cref="P:System.Windows.Forms.BindingSource.List" />
+           to locate in the underlying list represented by the <see cref="P:System.Windows.Forms.BindingSource.List" />
 
           
 
@@ -1470,8 +1362,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the contents of the <see
-             cref="P:System.Windows.Forms.BindingSource.List" />
+            >Copies the contents of the <see cref="P:System.Windows.Forms.BindingSource.List" />
 
             
 
@@ -1479,14 +1370,22 @@
           >
         </summary>
         <param name="arr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The destination array.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1513,18 +1412,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.BindingSource.Count" />
+            >The <see cref="P:System.Windows.Forms.BindingSource.Count" />
 
             
 
-             property gets the number of items in the underlying list represented by the <see
-             cref="P:System.Windows.Forms.BindingSource.List" />
+             property gets the number of items in the underlying list represented by the <see cref="P:System.Windows.Forms.BindingSource.List" />
 
             
 
-             property as modified by the value of the <see
-             cref="P:System.Windows.Forms.BindingSource.Filter" />
+             property as modified by the value of the <see cref="P:System.Windows.Forms.BindingSource.Filter" />
 
             
 
@@ -1534,8 +1430,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the total number of items in the underlying list, taking the current <see
-             cref="P:System.Windows.Forms.BindingSource.Filter" />
+            >Gets the total number of items in the underlying list, taking the current <see cref="P:System.Windows.Forms.BindingSource.Filter" />
 
             
 
@@ -1566,8 +1461,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you want to access the currency manager for another binding to the same data member use the <see
-             cref="M:System.Windows.Forms.BindingSource.GetRelatedCurrencyManager(System.String)" />
+            >If you want to access the currency manager for another binding to the same data member use the <see cref="M:System.Windows.Forms.BindingSource.GetRelatedCurrencyManager(System.String)" />
 
             
 
@@ -1577,8 +1471,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the currency manager associated with this <see
-             cref="T:System.Windows.Forms.BindingSource" />
+            >Gets the currency manager associated with this <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -1606,36 +1499,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.BindingSource.Current" />
+            >Use the <see cref="P:System.Windows.Forms.BindingSource.Current" />
 
             
 
-             property to access the current item, but use the <see
-             cref="P:System.Windows.Forms.BindingSource.List" />
+             property to access the current item, but use the <see cref="P:System.Windows.Forms.BindingSource.List" />
 
             
 
-             property to get the entire list. To determine the type of the current object, use the <see
-             cref="M:System.Object.GetType" />
+             property to get the entire list. To determine the type of the current object, use the <see cref="M:System.Object.GetType" />
 
             
 
-            , or <see
-             cref="M:System.Object.ToString" />
+            , or <see cref="M:System.Object.ToString" />
 
             
 
              methods.</para
           >
           <para
-            >To change the current item, set the <see
-             cref="P:System.Windows.Forms.BindingSource.Position" />
+            >To change the current item, set the <see cref="P:System.Windows.Forms.BindingSource.Position" />
 
             
 
-             property to a new integral value, or use one of the navigation methods such as <see
-             cref="M:System.Windows.Forms.BindingSource.MoveNext" />
+             property to a new integral value, or use one of the navigation methods such as <see cref="M:System.Windows.Forms.BindingSource.MoveNext" />
 
             
 
@@ -1661,13 +1548,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.BindingSource.CurrentChanged" />
+            >The <see cref="E:System.Windows.Forms.BindingSource.CurrentChanged" />
 
             
 
-             event is raised whenever the <see
-             cref="P:System.Windows.Forms.BindingSource.Current" />
+             event is raised whenever the <see cref="P:System.Windows.Forms.BindingSource.Current" />
 
             
 
@@ -1676,8 +1561,7 @@
           <list type="bullet">
             <item>
               <para
-                >The current position of the <see
-                 cref="P:System.Windows.Forms.BindingSource.List" />
+                >The current position of the <see cref="P:System.Windows.Forms.BindingSource.List" />
 
                 
 
@@ -1686,13 +1570,11 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.Windows.Forms.BindingSource.DataSource" />
+                >The <see cref="P:System.Windows.Forms.BindingSource.DataSource" />
 
                 
 
-                 or <see
-                 cref="P:System.Windows.Forms.BindingSource.DataMember" />
+                 or <see cref="P:System.Windows.Forms.BindingSource.DataMember" />
 
                 
 
@@ -1701,13 +1583,11 @@
             </item>
             <item>
               <para
-                >The membership of the underlying <see
-                 cref="P:System.Windows.Forms.BindingSource.List" />
+                >The membership of the underlying <see cref="P:System.Windows.Forms.BindingSource.List" />
 
                 
 
-                 changes, which causes <see
-                 cref="P:System.Windows.Forms.BindingSource.Position" />
+                 changes, which causes <see cref="P:System.Windows.Forms.BindingSource.Position" />
 
                 
 
@@ -1719,8 +1599,7 @@
             </item>
           </list>
           <para
-            >When this event is triggered, the <see
-             cref="P:System.Windows.Forms.BindingSource.Current" />
+            >When this event is triggered, the <see cref="P:System.Windows.Forms.BindingSource.Current" />
 
             
 
@@ -1731,16 +1610,14 @@
 
             
 
-             is the default event for the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+             is the default event for the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
              class.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1768,31 +1645,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.BindingSource.CurrentItemChanged" />
+            >The <see cref="E:System.Windows.Forms.BindingSource.CurrentItemChanged" />
 
             
 
-             event is raised in response to all of the circumstances that raise the <see
-             cref="E:System.Windows.Forms.BindingSource.CurrentChanged" />
+             event is raised in response to all of the circumstances that raise the <see cref="E:System.Windows.Forms.BindingSource.CurrentChanged" />
 
             
 
-             event. Additionally, <see
-             cref="E:System.Windows.Forms.BindingSource.CurrentItemChanged" />
+             event. Additionally, <see cref="E:System.Windows.Forms.BindingSource.CurrentItemChanged" />
 
             
 
-             is also fired whenever the value of one of the properties of <see
-             cref="P:System.Windows.Forms.BindingSource.Current" />
+             is also fired whenever the value of one of the properties of <see cref="P:System.Windows.Forms.BindingSource.Current" />
 
             
 
              is changed.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1804,8 +1676,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when a property value of the <see
-             cref="P:System.Windows.Forms.BindingSource.Current" />
+            >Occurs when a property value of the <see cref="P:System.Windows.Forms.BindingSource.Current" />
 
             
 
@@ -1830,21 +1701,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is informational and reports CLS-compliant exceptions only. To determine what type of exception occurred, handle this event and check the <see
-             cref="P:System.Windows.Forms.BindingManagerDataErrorEventArgs.Exception" />
+            >This event is informational and reports CLS-compliant exceptions only. To determine what type of exception occurred, handle this event and check the <see cref="P:System.Windows.Forms.BindingManagerDataErrorEventArgs.Exception" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.BindingManagerDataErrorEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.BindingManagerDataErrorEventArgs" />
 
             
 
             .</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1856,8 +1724,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when a currency-related exception is silently handled by the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+            >Occurs when a currency-related exception is silently handled by the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -1891,21 +1758,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Windows.Forms.BindingSource.DataSource" />
+            >If the <see cref="P:System.Windows.Forms.BindingSource.DataSource" />
 
             
 
-             contains multiple lists (or tables) of data, you should set the <see
-             cref="P:System.Windows.Forms.BindingSource.DataMember" />
+             contains multiple lists (or tables) of data, you should set the <see cref="P:System.Windows.Forms.BindingSource.DataMember" />
 
             
 
              property to the name of one of the sources.</para
           >
           <para
-            >Setting this property raises the <see
-             cref="E:System.Windows.Forms.BindingSource.DataMemberChanged" />
+            >Setting this property raises the <see cref="E:System.Windows.Forms.BindingSource.DataMemberChanged" />
 
             
 
@@ -1931,21 +1795,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.BindingSource.DataMemberChanged" />
+            >The <see cref="E:System.Windows.Forms.BindingSource.DataMemberChanged" />
 
             
 
-             event occurs after the <see
-             cref="P:System.Windows.Forms.BindingSource.DataMember" />
+             event occurs after the <see cref="P:System.Windows.Forms.BindingSource.DataMember" />
 
             
 
              property changes.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1957,8 +1818,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.BindingSource.DataMember" />
+            >Occurs when the <see cref="P:System.Windows.Forms.BindingSource.DataMember" />
 
             
 
@@ -1992,8 +1852,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.BindingSource.DataSource" />
+            >The <see cref="P:System.Windows.Forms.BindingSource.DataSource" />
 
             
 
@@ -2016,8 +1875,7 @@
               </term>
               <description>
                 <para
-                  >An empty <see
-                   cref="T:System.ComponentModel.IBindingList" />
+                  >An empty <see cref="T:System.ComponentModel.IBindingList" />
 
                   
 
@@ -2028,8 +1886,7 @@
             <item>
               <term>
                 <para
-                  >null with <see
-                   cref="P:System.Windows.Forms.BindingSource.DataMember" />
+                  >null with <see cref="P:System.Windows.Forms.BindingSource.DataMember" />
 
                   
 
@@ -2038,8 +1895,7 @@
               </term>
               <description>
                 <para
-                  >Not supported, raises <see
-                   cref="T:System.ArgumentException" />
+                  >Not supported, raises <see cref="T:System.ArgumentException" />
 
                   
 
@@ -2053,8 +1909,7 @@
               </term>
               <description>
                 <para
-                  >Empty <see
-                   cref="T:System.ComponentModel.IBindingList" />
+                  >Empty <see cref="T:System.ComponentModel.IBindingList" />
 
                   
 
@@ -2088,13 +1943,11 @@
               </term>
               <description>
                 <para
-                  >An <see
-                   cref="T:System.ComponentModel.IBindingList" />
+                  >An <see cref="T:System.ComponentModel.IBindingList" />
 
                   
 
-                   containing the <see
-                   cref="T:System.Collections.IEnumerable" />
+                   containing the <see cref="T:System.Collections.IEnumerable" />
 
                   
 
@@ -2118,36 +1971,30 @@
             </item>
           </list>
           <para
-            >In addition, <see
-             cref="P:System.Windows.Forms.BindingSource.DataSource" />
+            >In addition, <see cref="P:System.Windows.Forms.BindingSource.DataSource" />
 
             
 
-             can be set to other list types such as <see
-             cref="T:System.ComponentModel.IListSource" />
+             can be set to other list types such as <see cref="T:System.ComponentModel.IListSource" />
 
             
 
-             and <see
-             cref="T:System.ComponentModel.ITypedList" />
+             and <see cref="T:System.ComponentModel.ITypedList" />
 
             
 
-             and the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+             and the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
              will handle them appropriately. In this case, the type contained in the list should have a default constructor.</para
           >
           <para
-            >When setting a data source, if the supplied reference contains more than one list or table, you must set the <see
-             cref="P:System.Windows.Forms.BindingSource.DataMember" />
+            >When setting a data source, if the supplied reference contains more than one list or table, you must set the <see cref="P:System.Windows.Forms.BindingSource.DataMember" />
 
             
 
-             property to a string that specifies the list to bind to. Setting this property raises the <see
-             cref="E:System.Windows.Forms.BindingSource.DataSourceChanged" />
+             property to a string that specifies the list to bind to. Setting this property raises the <see cref="E:System.Windows.Forms.BindingSource.DataSourceChanged" />
 
             
 
@@ -2155,8 +2002,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If you make any changes to the <see
-               cref="P:System.Windows.Forms.BindingSource.DataSource" />
+              >If you make any changes to the <see cref="P:System.Windows.Forms.BindingSource.DataSource" />
 
               
 
@@ -2164,13 +2010,11 @@
             >
           </block>
           <para
-            >The <see
-             cref="P:System.Windows.Forms.BindingSource.DataSource" />
+            >The <see cref="P:System.Windows.Forms.BindingSource.DataSource" />
 
             
 
-             property is the default property for the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+             property is the default property for the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -2196,21 +2040,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.BindingSource.DataSourceChanged" />
+            >The <see cref="E:System.Windows.Forms.BindingSource.DataSourceChanged" />
 
             
 
-             event occurs after the <see
-             cref="P:System.Windows.Forms.BindingSource.DataSource" />
+             event occurs after the <see cref="P:System.Windows.Forms.BindingSource.DataSource" />
 
             
 
              property changes.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -2222,8 +2063,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.BindingSource.DataSource" />
+            >Occurs when the <see cref="P:System.Windows.Forms.BindingSource.DataSource" />
 
             
 
@@ -2248,36 +2088,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Windows.Forms.BindingSource" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -2287,8 +2121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -2296,7 +2129,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2318,29 +2155,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="M:System.Windows.Forms.BindingSource.EndEdit" />
+            >When the <see cref="M:System.Windows.Forms.BindingSource.EndEdit" />
 
             
 
              method is called, all pending changes are applied to the underlying data source.</para
           >
           <para
-            >This method has no effect unless the objects contained by the data source implement the <see
-             cref="T:System.ComponentModel.IEditableObject" />
+            >This method has no effect unless the objects contained by the data source implement the <see cref="T:System.ComponentModel.IEditableObject" />
 
             
 
-             interface. If the objects do not implement the <see
-             cref="T:System.ComponentModel.IEditableObject" />
+             interface. If the objects do not implement the <see cref="T:System.ComponentModel.IEditableObject" />
 
             
 
              interface, changes to the data are copied to the underlying data source immediately after each change.</para
           >
           <para
-            >This method raises the <see
-             cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+            >This method raises the <see cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
             
 
@@ -2372,82 +2205,68 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically used in complex data-binding scenarios, the <see
-             cref="P:System.Windows.Forms.BindingSource.Filter" />
+            >Typically used in complex data-binding scenarios, the <see cref="P:System.Windows.Forms.BindingSource.Filter" />
 
             
 
-             property allows you to view a subset of the <see
-             cref="P:System.Windows.Forms.BindingSource.DataSource" />
+             property allows you to view a subset of the <see cref="P:System.Windows.Forms.BindingSource.DataSource" />
 
             
 
-            . Only underlying lists that implement the <see
-             cref="T:System.ComponentModel.IBindingListView" />
+            . Only underlying lists that implement the <see cref="T:System.ComponentModel.IBindingListView" />
 
             
 
              interface support filtering.</para
           >
           <para
-            >When <see
-             cref="P:System.Windows.Forms.BindingSource.Filter" />
+            >When <see cref="P:System.Windows.Forms.BindingSource.Filter" />
 
             
 
-             is not null, the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+             is not null, the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
              passes this property to the underlying list. If you set this property during object initialization, the call will be deferred until after initialization is complete.</para
           >
           <para
-            >To form a filter value, specify the name of a column followed by an operator and a value to filter on. The accepted filter syntax depends on the underlying data source. If the underlying data source is a <see
-             cref="T:System.Data.DataSet" />
+            >To form a filter value, specify the name of a column followed by an operator and a value to filter on. The accepted filter syntax depends on the underlying data source. If the underlying data source is a <see cref="T:System.Data.DataSet" />
 
             
 
-            , <see
-             cref="T:System.Data.DataTable" />
+            , <see cref="T:System.Data.DataTable" />
 
             
 
-            , or <see
-             cref="T:System.Data.DataView" />
+            , or <see cref="T:System.Data.DataView" />
 
             
 
-            , you can specify Boolean expressions using the syntax documented for the <see
-             cref="P:System.Data.DataColumn.Expression" />
+            , you can specify Boolean expressions using the syntax documented for the <see cref="P:System.Data.DataColumn.Expression" />
 
             
 
              property.</para
           >
           <para
-            >The value of the <see
-             cref="P:System.Windows.Forms.BindingSource.Filter" />
+            >The value of the <see cref="P:System.Windows.Forms.BindingSource.Filter" />
 
             
 
-             property affects the value of the <see
-             cref="P:System.Windows.Forms.BindingSource.Count" />
+             property affects the value of the <see cref="P:System.Windows.Forms.BindingSource.Count" />
 
             
 
-             property. Additionally, the <see
-             cref="P:System.Windows.Forms.BindingSource.Filter" />
+             property. Additionally, the <see cref="P:System.Windows.Forms.BindingSource.Filter" />
 
             
 
-             value will persist when the data source changes. To stop filtering the <see
-             cref="P:System.Windows.Forms.BindingSource.DataSource" />
+             value will persist when the data source changes. To stop filtering the <see cref="P:System.Windows.Forms.BindingSource.DataSource" />
 
             
 
-            , call the <see
-             cref="M:System.Windows.Forms.BindingSource.RemoveFilter" />
+            , call the <see cref="M:System.Windows.Forms.BindingSource.RemoveFilter" />
 
             
 
@@ -2480,46 +2299,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is typically used in complex data-binding cases to locate the first row where the value of the field specified by the <paramref
-             name="prop" />
+            >This method is typically used in complex data-binding cases to locate the first row where the value of the field specified by the <paramref name="prop" />
 
             
 
-             parameter equals the value of the <paramref
-             name="key" />
+             parameter equals the value of the <paramref name="key" />
 
             
 
              parameter</para
           >
           <para
-            >This method simply refers the request to the underlying list's <see
-             cref="M:System.ComponentModel.IBindingList.Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
+            >This method simply refers the request to the underlying list's <see cref="M:System.ComponentModel.IBindingList.Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
 
             
 
-             method. For example, if the underlying data source is a <see
-             cref="T:System.Data.DataSet" />
+             method. For example, if the underlying data source is a <see cref="T:System.Data.DataSet" />
 
             
 
-            , <see
-             cref="T:System.Data.DataTable" />
+            , <see cref="T:System.Data.DataTable" />
 
             
 
-            , or <see
-             cref="T:System.Data.DataView" />
+            , or <see cref="T:System.Data.DataView" />
 
             
 
-            , this method calls the <see
-             cref="M:System.Data.DataView.System#ComponentModel#IBindingList#Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
+            , this method calls the <see cref="M:System.Data.DataView.System#ComponentModel#IBindingList#Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
 
             
 
-             method. The behavior of <see
-             cref="M:System.ComponentModel.IBindingList.Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
+             method. The behavior of <see cref="M:System.ComponentModel.IBindingList.Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
 
             
 
@@ -2533,8 +2344,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the item that has the given value for <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >The zero-based index of the item that has the given value for <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -2542,24 +2352,30 @@
           >
         </returns>
         <param name="prop">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
            to search for. </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value of <paramref
-           name="prop" />
+          The value of <paramref name="prop" />
 
           
 
@@ -2584,53 +2400,43 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingSource.Find(System.String,System.Object)" />
+            >The <see cref="M:System.Windows.Forms.BindingSource.Find(System.String,System.Object)" />
 
             
 
-             method can only be used when the underlying list is an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             method can only be used when the underlying list is an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
-             with searching implemented. This method simply refers the request to the underlying list's <see
-             cref="M:System.ComponentModel.IBindingList.Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
+             with searching implemented. This method simply refers the request to the underlying list's <see cref="M:System.ComponentModel.IBindingList.Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
 
             
 
-             method. For example, if the underlying data source is a <see
-             cref="T:System.Data.DataSet" />
+             method. For example, if the underlying data source is a <see cref="T:System.Data.DataSet" />
 
             
 
-            , <see
-             cref="T:System.Data.DataTable" />
+            , <see cref="T:System.Data.DataTable" />
 
             
 
-            , or <see
-             cref="T:System.Data.DataView" />
+            , or <see cref="T:System.Data.DataView" />
 
             
 
-            , this method converts <paramref
-             name="propertyName" />
+            , this method converts <paramref name="propertyName" />
 
             
 
-             to a <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+             to a <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
-             and calls the <see
-             cref="M:System.Data.DataView.System#ComponentModel#IBindingList#Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
+             and calls the <see cref="M:System.Data.DataView.System#ComponentModel#IBindingList#Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
 
             
 
-             method. The behavior of <see
-             cref="M:System.Windows.Forms.BindingSource.Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
+             method. The behavior of <see cref="M:System.Windows.Forms.BindingSource.Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
 
             
 
@@ -2647,19 +2453,26 @@
           <para>The zero-based index of the item with the specified property name and value. </para>
         </returns>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the property to search for.</param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value of the item with the specified <paramref
-           name="propertyName" />
+          The value of the item with the specified <paramref name="propertyName" />
 
           
 
@@ -2685,8 +2498,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves an enumerator for the <see
-             cref="P:System.Windows.Forms.BindingSource.List" />
+            >Retrieves an enumerator for the <see cref="P:System.Windows.Forms.BindingSource.List" />
 
             
 
@@ -2696,13 +2508,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the <see
-             cref="P:System.Windows.Forms.BindingSource.List" />
+             for the <see cref="P:System.Windows.Forms.BindingSource.List" />
 
             
 
@@ -2731,8 +2541,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves an array of <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Retrieves an array of <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -2742,8 +2551,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >An array of <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -2751,12 +2559,15 @@
           >
         </returns>
         <param name="listAccessors">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          An array of <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -2790,12 +2601,15 @@
           <para>The name of the list supplying the data for binding.</para>
         </returns>
         <param name="listAccessors">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          An array of <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -2822,18 +2636,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="dataMember" />
+            >If <paramref name="dataMember" />
 
             
 
-             is null or an empty string (""), <see
-             cref="M:System.Windows.Forms.BindingSource.GetRelatedCurrencyManager(System.String)" />
+             is null or an empty string (""), <see cref="M:System.Windows.Forms.BindingSource.GetRelatedCurrencyManager(System.String)" />
 
             
 
-             returns the main currency manager; otherwise, it checks for another <see
-             cref="T:System.Windows.Forms.BindingSource" />
+             returns the main currency manager; otherwise, it checks for another <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -2847,8 +2658,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The related <see
-             cref="T:System.Windows.Forms.CurrencyManager" />
+            >The related <see cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
@@ -2856,7 +2666,11 @@
           >
         </returns>
         <param name="dataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2883,8 +2697,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="P:System.Windows.Forms.BindingSource.List" />
+                >The <see cref="P:System.Windows.Forms.BindingSource.List" />
 
                 
 
@@ -2893,8 +2706,7 @@
             </item>
             <item>
               <para
-                >The underlying method performs a linear search; therefore, the average execution time is proportional to the value of the <see
-                 cref="P:System.Windows.Forms.BindingSource.Count" />
+                >The underlying method performs a linear search; therefore, the average execution time is proportional to the value of the <see cref="P:System.Windows.Forms.BindingSource.Count" />
 
                 
 
@@ -2903,8 +2715,7 @@
             </item>
             <item>
               <para
-                >The underlying method determines equality by calling the <see
-                 cref="M:System.Object.Equals(System.Object)" />
+                >The underlying method determines equality by calling the <see cref="M:System.Object.Equals(System.Object)" />
 
                 
 
@@ -2920,13 +2731,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the first occurrence of the <paramref
-             name="value" />
+            >The zero-based index of the first occurrence of the <paramref name="value" />
 
             
 
-             parameter; otherwise, -1 if <paramref
-             name="value" />
+             parameter; otherwise, -1 if <paramref name="value" />
 
             
 
@@ -2934,17 +2743,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to locate in the underlying list represented by the <see
-           cref="P:System.Windows.Forms.BindingSource.List" />
+           to locate in the underlying list represented by the <see cref="P:System.Windows.Forms.BindingSource.List" />
 
           
 
@@ -2972,8 +2783,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method raises the <see
-             cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+            >This method raises the <see cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
             
 
@@ -2985,24 +2795,30 @@
           <para>Inserts an item into the list at the specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="value" />
+          The zero-based index at which <paramref name="value" />
 
           
 
            should be inserted. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -3108,8 +2924,7 @@
 
             
 
-             always returns false if the list is not an <see
-             cref="T:System.ComponentModel.IBindingList" />
+             always returns false if the list is not an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
@@ -3188,18 +3003,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.BindingSource" />
+            >The <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
-             class uniformly handles different data sources. Ideally the <see
-             cref="P:System.Windows.Forms.BindingSource.List" />
+             class uniformly handles different data sources. Ideally the <see cref="P:System.Windows.Forms.BindingSource.List" />
 
             
 
-             property should be set to a general <see
-             cref="T:System.Collections.IList" />
+             property should be set to a general <see cref="T:System.Collections.IList" />
 
             
 
@@ -3223,8 +3035,7 @@
 
                   
 
-                   and <see
-                   cref="P:System.Windows.Forms.BindingSource.DataMember" />
+                   and <see cref="P:System.Windows.Forms.BindingSource.DataMember" />
 
                   
 
@@ -3233,8 +3044,7 @@
               </term>
               <description>
                 <para
-                  >An empty <see
-                   cref="T:System.Collections.ArrayList" />
+                  >An empty <see cref="T:System.Collections.ArrayList" />
 
                   
 
@@ -3249,8 +3059,7 @@
 
                   
 
-                   is null, but <see
-                   cref="P:System.Windows.Forms.BindingSource.DataMember" />
+                   is null, but <see cref="P:System.Windows.Forms.BindingSource.DataMember" />
 
                   
 
@@ -3259,35 +3068,11 @@
               </term>
               <description>
                 <para
-                  >None; an attempt to get the <see
-                   cref="P:System.Windows.Forms.BindingSource.List" />
+                  >None; an attempt to get the <see cref="P:System.Windows.Forms.BindingSource.List" />
 
                   
 
-                   will throw an <see
-                   cref="T:System.ArgumentException" />
-
-                  
-
-                  .</para
-                >
-              </description>
-            </item>
-            <item>
-              <term>
-                <para
-                  >An <see
-                   cref="T:System.Array" />
-
-                  
-
-                   instance</para
-                >
-              </term>
-              <description>
-                <para
-                  >An <see
-                   cref="T:System.Array" />
+                   will throw an <see cref="T:System.ArgumentException" />
 
                   
 
@@ -3298,8 +3083,7 @@
             <item>
               <term>
                 <para
-                  >An <see
-                   cref="T:System.ComponentModel.IListSource" />
+                  >An <see cref="T:System.Array" />
 
                   
 
@@ -3308,13 +3092,31 @@
               </term>
               <description>
                 <para
-                  >The return value from a call to the <see
-                   cref="M:System.ComponentModel.IListSource.GetList" />
+                  >An <see cref="T:System.Array" />
 
                   
 
-                   method of this <see
-                   cref="T:System.ComponentModel.IListSource" />
+                  .</para
+                >
+              </description>
+            </item>
+            <item>
+              <term>
+                <para
+                  >An <see cref="T:System.ComponentModel.IListSource" />
+
+                  
+
+                   instance</para
+                >
+              </term>
+              <description>
+                <para
+                  >The return value from a call to the <see cref="M:System.ComponentModel.IListSource.GetList" />
+
+                  
+
+                   method of this <see cref="T:System.ComponentModel.IListSource" />
 
                   
 
@@ -3325,8 +3127,7 @@
             <item>
               <term>
                 <para
-                  >An <see
-                   cref="T:System.ComponentModel.IBindingList" />
+                  >An <see cref="T:System.ComponentModel.IBindingList" />
 
                   
 
@@ -3335,8 +3136,7 @@
               </term>
               <description>
                 <para
-                  >An <see
-                   cref="T:System.ComponentModel.IBindingList" />
+                  >An <see cref="T:System.ComponentModel.IBindingList" />
 
                   
 
@@ -3347,8 +3147,7 @@
             <item>
               <term>
                 <para
-                  >An <see
-                   cref="T:System.Collections.IList" />
+                  >An <see cref="T:System.Collections.IList" />
 
                   
 
@@ -3357,8 +3156,7 @@
               </term>
               <description>
                 <para
-                  >An <see
-                   cref="T:System.Collections.IList" />
+                  >An <see cref="T:System.Collections.IList" />
 
                   
 
@@ -3369,8 +3167,7 @@
             <item>
               <term>
                 <para
-                  >A non-<see
-                   cref="T:System.Collections.IList" />
+                  >A non-<see cref="T:System.Collections.IList" />
 
                   
 
@@ -3379,8 +3176,7 @@
               </term>
               <description>
                 <para
-                  >A <see
-                   cref="T:System.ComponentModel.BindingList`1" />
+                  >A <see cref="T:System.ComponentModel.BindingList`1" />
 
                   
 
@@ -3391,8 +3187,7 @@
             <item>
               <term>
                 <para
-                  >An <see
-                   cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+                  >An <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
                   
 
@@ -3401,8 +3196,7 @@
               </term>
               <description>
                 <para
-                  >An <see
-                   cref="T:System.Collections.ArrayList" />
+                  >An <see cref="T:System.Collections.ArrayList" />
 
                   
 
@@ -3412,15 +3206,11 @@
             </item>
             <item>
               <term>
-                <para
-                  >An <see
-                   cref="T:System.Collections.IEnumerable" />
-                </para>
+                <para>An <see cref="T:System.Collections.IEnumerable" /></para>
               </term>
               <description>
                 <para
-                  >An <see
-                   cref="T:System.Collections.ArrayList" />
+                  >An <see cref="T:System.Collections.ArrayList" />
 
                   
 
@@ -3431,13 +3221,11 @@
             <item>
               <term>
                 <para
-                  >The <see
-                   cref="T:System.Array" />
+                  >The <see cref="T:System.Array" />
 
                   
 
-                   type with <see
-                   cref="P:System.Windows.Forms.BindingSource.DataMember" />
+                   type with <see cref="P:System.Windows.Forms.BindingSource.DataMember" />
 
                   
 
@@ -3446,8 +3234,7 @@
               </term>
               <description>
                 <para
-                  >A <see
-                   cref="T:System.ComponentModel.BindingList`1" />
+                  >A <see cref="T:System.ComponentModel.BindingList`1" />
 
                   
 
@@ -3458,34 +3245,28 @@
             <item>
               <term>
                 <para
-                  >A <see
-                   cref="T:System.Type" />
+                  >A <see cref="T:System.Type" />
 
                   
 
-                   that represents an <see
-                   cref="T:System.ComponentModel.IListSource" />
+                   that represents an <see cref="T:System.ComponentModel.IListSource" />
 
                   
 
-                   or <see
-                   cref="T:System.ComponentModel.ITypedList" />
+                   or <see cref="T:System.ComponentModel.ITypedList" />
                 </para>
               </term>
               <description>
                 <para
-                  >An instance created by a call to the <see
-                   cref="M:System.Activator.CreateInstance(System.Type)" />
+                  >An instance created by a call to the <see cref="M:System.Activator.CreateInstance(System.Type)" />
 
                   
 
-                   method of the <see
-                   cref="T:System.Activator" />
+                   method of the <see cref="T:System.Activator" />
 
                   
 
-                   class. A <see
-                   cref="T:System.NotSupportedException" />
+                   class. A <see cref="T:System.NotSupportedException" />
 
                   
 
@@ -3496,13 +3277,11 @@
             <item>
               <term>
                 <para
-                  >The <see
-                   cref="T:System.Collections.IList" />
+                  >The <see cref="T:System.Collections.IList" />
 
                   
 
-                   type with <see
-                   cref="P:System.Windows.Forms.BindingSource.DataMember" />
+                   type with <see cref="P:System.Windows.Forms.BindingSource.DataMember" />
 
                   
 
@@ -3510,8 +3289,7 @@
                 >
                 <para>-or-</para>
                 <para
-                  >A non-<see
-                   cref="T:System.Collections.IList" />
+                  >A non-<see cref="T:System.Collections.IList" />
 
                   
 
@@ -3520,8 +3298,7 @@
               </term>
               <description>
                 <para
-                  >A <see
-                   cref="T:System.ComponentModel.BindingList`1" />
+                  >A <see cref="T:System.ComponentModel.BindingList`1" />
 
                   
 
@@ -3532,8 +3309,7 @@
             <item>
               <term>
                 <para
-                  >The <see
-                   cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+                  >The <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
                   
 
@@ -3542,13 +3318,11 @@
               </term>
               <description>
                 <para
-                  >None; an attempt to get the <see
-                   cref="P:System.Windows.Forms.BindingSource.List" />
+                  >None; an attempt to get the <see cref="P:System.Windows.Forms.BindingSource.List" />
 
                   
 
-                   will throw an <see
-                   cref="T:System.NotSupportedException" />
+                   will throw an <see cref="T:System.NotSupportedException" />
 
                   
 
@@ -3558,18 +3332,15 @@
             </item>
           </list>
           <para
-            >If the type retrieved is the <see
-             cref="T:System.Collections.IList" />
+            >If the type retrieved is the <see cref="T:System.Collections.IList" />
 
             
 
-             interface, the underlying collection may be more complex, such as an <see
-             cref="T:System.Collections.ArrayList" />
+             interface, the underlying collection may be more complex, such as an <see cref="T:System.Collections.ArrayList" />
 
             
 
-             or <see
-             cref="T:System.Data.DataView" />
+             or <see cref="T:System.Data.DataView" />
 
             
 
@@ -3598,46 +3369,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+            >The <see cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
             
 
-             event occurs when there is a change to the membership or metadata of the underlying list represented by the <see
-             cref="P:System.Windows.Forms.BindingSource.List" />
+             event occurs when there is a change to the membership or metadata of the underlying list represented by the <see cref="P:System.Windows.Forms.BindingSource.List" />
 
             
 
-             property. For example, this event is raised when items are added, removed, or moved, or the <see
-             cref="P:System.Windows.Forms.BindingSource.DataSource" />
+             property. For example, this event is raised when items are added, removed, or moved, or the <see cref="P:System.Windows.Forms.BindingSource.DataSource" />
 
             
 
-             or <see
-             cref="P:System.Windows.Forms.BindingSource.DataMember" />
+             or <see cref="P:System.Windows.Forms.BindingSource.DataMember" />
 
             
 
-             properties change. The values of the <see
-             cref="P:System.Windows.Forms.BindingSource.Sort" />
+             properties change. The values of the <see cref="P:System.Windows.Forms.BindingSource.Sort" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.BindingSource.Filter" />
+             and <see cref="P:System.Windows.Forms.BindingSource.Filter" />
 
             
 
              properties will persist when this event occurs.</para
           >
           <para
-            >This event can be completely suppressed by setting the <see
-             cref="P:System.Windows.Forms.BindingSource.RaiseListChangedEvents" />
+            >This event can be completely suppressed by setting the <see cref="P:System.Windows.Forms.BindingSource.RaiseListChangedEvents" />
 
             
 
-             property to false. For more information about handling events, see <format
-             type="text/html">
+             property to false. For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3666,8 +3429,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Changes the current value of the <see
-             cref="P:System.Windows.Forms.BindingSource.Position" />
+            >Changes the current value of the <see cref="P:System.Windows.Forms.BindingSource.Position" />
 
             
 
@@ -3694,13 +3456,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Changes the current value of the <see
-             cref="P:System.Windows.Forms.BindingSource.Position" />
+            >Changes the current value of the <see cref="P:System.Windows.Forms.BindingSource.Position" />
 
             
 
-             property to the index of the last item in the underlying data source, which is equal to the value of the <see
-             cref="P:System.Windows.Forms.BindingSource.Count" />
+             property to the index of the last item in the underlying data source, which is equal to the value of the <see cref="P:System.Windows.Forms.BindingSource.Count" />
 
             
 
@@ -3727,8 +3487,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Changes the current value of the <see
-             cref="P:System.Windows.Forms.BindingSource.Position" />
+            >Changes the current value of the <see cref="P:System.Windows.Forms.BindingSource.Position" />
 
             
 
@@ -3755,8 +3514,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method changes the current value of the <see
-             cref="P:System.Windows.Forms.BindingSource.Position" />
+            >This method changes the current value of the <see cref="P:System.Windows.Forms.BindingSource.Position" />
 
             
 
@@ -3788,8 +3546,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -3798,8 +3555,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingSource.OnAddingNew(System.ComponentModel.AddingNewEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.BindingSource.OnAddingNew(System.ComponentModel.AddingNewEventArgs)" />
 
             
 
@@ -3809,8 +3565,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.BindingSource.AddingNew" />
+            >Raises the <see cref="E:System.Windows.Forms.BindingSource.AddingNew" />
 
             
 
@@ -3818,12 +3573,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -3850,8 +3608,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -3860,8 +3617,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingSource.OnBindingComplete(System.Windows.Forms.BindingCompleteEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.BindingSource.OnBindingComplete(System.Windows.Forms.BindingCompleteEventArgs)" />
 
             
 
@@ -3871,8 +3627,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.BindingSource.BindingComplete" />
+            >Raises the <see cref="E:System.Windows.Forms.BindingSource.BindingComplete" />
 
             
 
@@ -3880,12 +3635,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
+          A <see cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
 
           
 
@@ -3912,8 +3670,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3922,8 +3679,7 @@
             .</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -3932,8 +3688,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingSource.OnCurrentChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.BindingSource.OnCurrentChanged(System.EventArgs)" />
 
             
 
@@ -3943,8 +3698,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.BindingSource.CurrentChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.BindingSource.CurrentChanged" />
 
             
 
@@ -3952,12 +3706,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -3984,8 +3741,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -3994,8 +3750,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingSource.OnCurrentItemChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.BindingSource.OnCurrentItemChanged(System.EventArgs)" />
 
             
 
@@ -4005,8 +3760,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.BindingSource.CurrentItemChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.BindingSource.CurrentItemChanged" />
 
             
 
@@ -4014,12 +3768,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -4046,8 +3803,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -4056,8 +3812,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingSource.OnDataError(System.Windows.Forms.BindingManagerDataErrorEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.BindingSource.OnDataError(System.Windows.Forms.BindingManagerDataErrorEventArgs)" />
 
             
 
@@ -4067,8 +3822,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.BindingSource.DataError" />
+            >Raises the <see cref="E:System.Windows.Forms.BindingSource.DataError" />
 
             
 
@@ -4076,12 +3830,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.BindingManagerDataErrorEventArgs" />
+          A <see cref="T:System.Windows.Forms.BindingManagerDataErrorEventArgs" />
 
           
 
@@ -4108,8 +3865,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -4118,8 +3874,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingSource.OnDataMemberChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.BindingSource.OnDataMemberChanged(System.EventArgs)" />
 
             
 
@@ -4129,8 +3884,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.BindingSource.DataMemberChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.BindingSource.DataMemberChanged" />
 
             
 
@@ -4138,12 +3892,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -4170,8 +3927,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -4180,8 +3936,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingSource.OnDataSourceChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.BindingSource.OnDataSourceChanged(System.EventArgs)" />
 
             
 
@@ -4191,8 +3946,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.BindingSource.DataSourceChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.BindingSource.DataSourceChanged" />
 
             
 
@@ -4200,12 +3954,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -4232,8 +3989,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -4242,8 +3998,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingSource.OnListChanged(System.ComponentModel.ListChangedEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.BindingSource.OnListChanged(System.ComponentModel.ListChangedEventArgs)" />
 
             
 
@@ -4253,8 +4008,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
             
 
@@ -4262,12 +4016,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -4294,8 +4051,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -4304,8 +4060,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingSource.OnPositionChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.BindingSource.OnPositionChanged(System.EventArgs)" />
 
             
 
@@ -4315,8 +4070,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.BindingSource.PositionChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.BindingSource.PositionChanged" />
 
             
 
@@ -4324,12 +4078,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.ListChangedEventArgs" />
+          A <see cref="T:System.ComponentModel.ListChangedEventArgs" />
 
           
 
@@ -4359,8 +4116,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When setting the <see
-             cref="P:System.Windows.Forms.BindingSource.Position" />
+            >When setting the <see cref="P:System.Windows.Forms.BindingSource.Position" />
 
             
 
@@ -4372,13 +4128,11 @@
             </item>
             <item>
               <para
-                >Values greater than or equal to <see
-                 cref="P:System.Windows.Forms.BindingSource.Count" />
+                >Values greater than or equal to <see cref="P:System.Windows.Forms.BindingSource.Count" />
 
                 
 
-                 are treated as <see
-                 cref="P:System.Windows.Forms.BindingSource.Count" />
+                 are treated as <see cref="P:System.Windows.Forms.BindingSource.Count" />
 
                 
 
@@ -4387,13 +4141,11 @@
             </item>
           </list>
           <para
-            >Changing the <see
-             cref="P:System.Windows.Forms.BindingSource.Position" />
+            >Changing the <see cref="P:System.Windows.Forms.BindingSource.Position" />
 
             
 
-             property will adjust the <see
-             cref="P:System.Windows.Forms.BindingSource.Current" />
+             property will adjust the <see cref="P:System.Windows.Forms.BindingSource.Current" />
 
             
 
@@ -4419,21 +4171,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.BindingSource.PositionChanged" />
+            >The <see cref="E:System.Windows.Forms.BindingSource.PositionChanged" />
 
             
 
-             event occurs after the <see
-             cref="P:System.Windows.Forms.BindingSource.Position" />
+             event occurs after the <see cref="P:System.Windows.Forms.BindingSource.Position" />
 
             
 
              property has changed.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -4445,8 +4194,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs after the value of the <see
-             cref="P:System.Windows.Forms.BindingSource.Position" />
+            >Occurs after the value of the <see cref="P:System.Windows.Forms.BindingSource.Position" />
 
             
 
@@ -4477,13 +4225,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Windows.Forms.BindingSource.RaiseListChangedEvents" />
+            >When the <see cref="P:System.Windows.Forms.BindingSource.RaiseListChangedEvents" />
 
             
 
-             property is false, it suspends the raising of <see
-             cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+             property is false, it suspends the raising of <see cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
             
 
@@ -4493,8 +4239,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether <see
-             cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+            >Gets or sets a value indicating whether <see cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
             
 
@@ -4519,36 +4264,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingSource.Remove(System.Object)" />
+            >The <see cref="M:System.Windows.Forms.BindingSource.Remove(System.Object)" />
 
             
 
-             method causes the list to be searched for the <paramref
-             name="value" />
+             method causes the list to be searched for the <paramref name="value" />
 
             
 
-             parameter. If found, this method will attempt to remove the item from the <see
-             cref="P:System.Windows.Forms.BindingSource.List" />
+             parameter. If found, this method will attempt to remove the item from the <see cref="P:System.Windows.Forms.BindingSource.List" />
 
             
 
-            . This attempt will fail if the list has a fixed size or is read-only. These two conditions can be tested with the <see
-             cref="P:System.Windows.Forms.BindingSource.IsFixedSize" />
+            . This attempt will fail if the list has a fixed size or is read-only. These two conditions can be tested with the <see cref="P:System.Windows.Forms.BindingSource.IsFixedSize" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.BindingSource.IsReadOnly" />
+             and <see cref="P:System.Windows.Forms.BindingSource.IsReadOnly" />
 
             
 
              properties, respectively.</para
           >
           <para
-            >This method raises the <see
-             cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+            >This method raises the <see cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
             
 
@@ -4560,12 +4299,15 @@
           <para>Removes the specified item from the list.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The item to remove from the underlying list represented by the <see
-           cref="P:System.Windows.Forms.BindingSource.List" />
+          The item to remove from the underlying list represented by the <see cref="P:System.Windows.Forms.BindingSource.List" />
 
           
 
@@ -4589,21 +4331,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >These two conditions can be tested with the <see
-             cref="P:System.Windows.Forms.BindingSource.IsFixedSize" />
+            >These two conditions can be tested with the <see cref="P:System.Windows.Forms.BindingSource.IsFixedSize" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.BindingSource.IsReadOnly" />
+             and <see cref="P:System.Windows.Forms.BindingSource.IsReadOnly" />
 
             
 
              properties, respectively.</para
           >
           <para
-            >This method raises the <see
-             cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+            >This method raises the <see cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
             
 
@@ -4615,7 +4354,11 @@
           <para>Removes the item at the specified index in the list.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4637,13 +4380,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingSource.RemoveCurrent" />
+            >The <see cref="M:System.Windows.Forms.BindingSource.RemoveCurrent" />
 
             
 
-             method is equivalent to the <see
-             cref="M:System.Windows.Forms.BindingSource.RemoveAt(System.Int32)" />
+             method is equivalent to the <see cref="M:System.Windows.Forms.BindingSource.RemoveAt(System.Int32)" />
 
             
 
@@ -4670,26 +4411,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingSource.RemoveFilter" />
+            >The <see cref="M:System.Windows.Forms.BindingSource.RemoveFilter" />
 
             
 
-             method refers the request to the underlying list's <see
-             cref="M:System.ComponentModel.IBindingListView.RemoveFilter" />
+             method refers the request to the underlying list's <see cref="M:System.ComponentModel.IBindingListView.RemoveFilter" />
 
             
 
-             method. Only lists that implement <see
-             cref="T:System.ComponentModel.IBindingListView" />
+             method. Only lists that implement <see cref="T:System.ComponentModel.IBindingListView" />
 
             
 
              support filtering.</para
           >
           <para
-            >By default, a call to this method is equivalent to setting the <see
-             cref="P:System.Windows.Forms.BindingSource.Filter" />
+            >By default, a call to this method is equivalent to setting the <see cref="P:System.Windows.Forms.BindingSource.Filter" />
 
             
 
@@ -4699,8 +4436,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the filter associated with the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+            >Removes the filter associated with the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -4723,26 +4459,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingSource.RemoveSort" />
+            >The <see cref="M:System.Windows.Forms.BindingSource.RemoveSort" />
 
             
 
-             method refers the request to the underlying list's <see
-             cref="M:System.ComponentModel.IBindingList.RemoveSort" />
+             method refers the request to the underlying list's <see cref="M:System.ComponentModel.IBindingList.RemoveSort" />
 
             
 
-             method. Only lists that implement <see
-             cref="T:System.ComponentModel.IBindingList" />
+             method. Only lists that implement <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
              support sorting.</para
           >
           <para
-            >By default, a call to this method is equivalent to setting the <see
-             cref="P:System.Windows.Forms.BindingSource.Sort" />
+            >By default, a call to this method is equivalent to setting the <see cref="P:System.Windows.Forms.BindingSource.Sort" />
 
             
 
@@ -4752,8 +4484,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the sort associated with the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+            >Removes the sort associated with the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -4781,18 +4512,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingSource.ResetAllowNew" />
+            >The <see cref="M:System.Windows.Forms.BindingSource.ResetAllowNew" />
 
             
 
-             method reinitializes the <see
-             cref="P:System.Windows.Forms.BindingSource.AllowNew" />
+             method reinitializes the <see cref="P:System.Windows.Forms.BindingSource.AllowNew" />
 
             
 
-             property to reflect the value of the corresponding <see
-             cref="P:System.Windows.Forms.BindingSource.AllowNew" />
+             property to reflect the value of the corresponding <see cref="P:System.Windows.Forms.BindingSource.AllowNew" />
 
             
 
@@ -4802,8 +4530,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reinitializes the <see
-             cref="P:System.Windows.Forms.BindingSource.AllowNew" />
+            >Reinitializes the <see cref="P:System.Windows.Forms.BindingSource.AllowNew" />
 
             
 
@@ -4828,23 +4555,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingSource.ResetBindings(System.Boolean)" />
+            >The <see cref="M:System.Windows.Forms.BindingSource.ResetBindings(System.Boolean)" />
 
             
 
-             method informs all controls bound to the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+             method informs all controls bound to the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
-             to refresh their values. The method does this by raising the <see
-             cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+             to refresh their values. The method does this by raising the <see cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
             
 
-             event at least once; the <paramref
-             name="metaDataChanged" />
+             event at least once; the <paramref name="metaDataChanged" />
 
             
 
@@ -4853,28 +4576,23 @@
           <list type="bullet">
             <item>
               <para
-                >A <paramref
-                 name="metaDataChanged" />
+                >A <paramref name="metaDataChanged" />
 
                 
 
-                 value of true indicates that the data schema of <see
-                 cref="T:System.Windows.Forms.BindingSource" />
+                 value of true indicates that the data schema of <see cref="T:System.Windows.Forms.BindingSource" />
 
                 
 
-                 has changed. A <see
-                 cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+                 has changed. A <see cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
                 
 
-                 event is raised with <see
-                 cref="P:System.ComponentModel.ListChangedEventArgs.ListChangedType" />
+                 event is raised with <see cref="P:System.ComponentModel.ListChangedEventArgs.ListChangedType" />
 
                 
 
-                 set to <see
-                 cref="F:System.ComponentModel.ListChangedType.PropertyDescriptorChanged" />
+                 set to <see cref="F:System.ComponentModel.ListChangedType.PropertyDescriptorChanged" />
 
                 
 
@@ -4883,8 +4601,7 @@
             </item>
             <item>
               <para
-                >A <paramref
-                 name="metaDataChanged" />
+                >A <paramref name="metaDataChanged" />
 
                 
 
@@ -4893,33 +4610,27 @@
             </item>
           </list>
           <para
-            >Regardless of the value of <paramref
-             name="metaDataChanged" />
+            >Regardless of the value of <paramref name="metaDataChanged" />
 
             
 
-            , a <see
-             cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+            , a <see cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
             
 
-             event is raised with <see
-             cref="P:System.ComponentModel.ListChangedEventArgs.ListChangedType" />
+             event is raised with <see cref="P:System.ComponentModel.ListChangedEventArgs.ListChangedType" />
 
             
 
-             set to <see
-             cref="F:System.ComponentModel.ListChangedType.Reset" />
+             set to <see cref="F:System.ComponentModel.ListChangedType.Reset" />
 
             
 
-            . As a consequence, calling <see
-             cref="M:System.Windows.Forms.BindingSource.ResetBindings(System.Boolean)" />
+            . As a consequence, calling <see cref="M:System.Windows.Forms.BindingSource.ResetBindings(System.Boolean)" />
 
             
 
-             with a parameter of true will raise two <see
-             cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+             with a parameter of true will raise two <see cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
             
 
@@ -4930,13 +4641,11 @@
 
             
 
-             is automatically called whenever another member makes major changes to the data-binding, such as setting the <see
-             cref="P:System.Windows.Forms.BindingSource.DataSource" />
+             is automatically called whenever another member makes major changes to the data-binding, such as setting the <see cref="P:System.Windows.Forms.BindingSource.DataSource" />
 
             
 
-             or <see
-             cref="P:System.Windows.Forms.BindingSource.DataMember" />
+             or <see cref="P:System.Windows.Forms.BindingSource.DataMember" />
 
             
 
@@ -4946,8 +4655,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes a control bound to the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+            >Causes a control bound to the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -4955,7 +4663,11 @@
           >
         </summary>
         <param name="metadataChanged">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4977,8 +4689,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling this method will cause the <see
-             cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+            >Calling this method will cause the <see cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
             
 
@@ -4988,8 +4699,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes a control bound to the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+            >Causes a control bound to the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -5014,28 +4724,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingSource.ResetItem(System.Int32)" />
+            >The <see cref="M:System.Windows.Forms.BindingSource.ResetItem(System.Int32)" />
 
             
 
-             method notifies all controls bound to the item at the specified <see
-             cref="P:System.Windows.Forms.BindingSource.Position" />
+             method notifies all controls bound to the item at the specified <see cref="P:System.Windows.Forms.BindingSource.Position" />
 
             
 
-             to refresh their values. The method does this by raising the <see
-             cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+             to refresh their values. The method does this by raising the <see cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
             
 
-             event with <see
-             cref="P:System.ComponentModel.ListChangedEventArgs.ListChangedType" />
+             event with <see cref="P:System.ComponentModel.ListChangedEventArgs.ListChangedType" />
 
             
 
-             set to <see
-             cref="F:System.ComponentModel.ListChangedType.ItemChanged" />
+             set to <see cref="F:System.ComponentModel.ListChangedType.ItemChanged" />
 
             
 
@@ -5052,8 +4757,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes a control bound to the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+            >Causes a control bound to the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -5061,7 +4765,11 @@
           >
         </summary>
         <param name="itemIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5087,8 +4795,7 @@
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
+             and <see cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
 
             
 
@@ -5096,53 +4803,43 @@
           >
           <block subset="none" type="note">
             <para
-              >Using <see
-               cref="M:System.Windows.Forms.BindingSource.SuspendBinding" />
+              >Using <see cref="M:System.Windows.Forms.BindingSource.SuspendBinding" />
 
               
 
-               prevents changes from being pushed into the data source until <see
-               cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
+               prevents changes from being pushed into the data source until <see cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
 
               
 
-               is called, but does not actually prevent any events from occurring. Controls that use complex data binding, such as the <see
-               cref="T:System.Windows.Forms.DataGridView" />
+               is called, but does not actually prevent any events from occurring. Controls that use complex data binding, such as the <see cref="T:System.Windows.Forms.DataGridView" />
 
               
 
-               control, update their values based on change events such as the <see
-               cref="E:System.Windows.Forms.CurrencyManager.ListChanged" />
+               control, update their values based on change events such as the <see cref="E:System.Windows.Forms.CurrencyManager.ListChanged" />
 
               
 
-               event, so calling <see
-               cref="M:System.Windows.Forms.BindingSource.SuspendBinding" />
+               event, so calling <see cref="M:System.Windows.Forms.BindingSource.SuspendBinding" />
 
               
 
-               will not prevent them from receiving changes to the data source. For this reason, this <see
-               cref="M:System.Windows.Forms.BindingSource.SuspendBinding" />
+               will not prevent them from receiving changes to the data source. For this reason, this <see cref="M:System.Windows.Forms.BindingSource.SuspendBinding" />
 
               
 
-               and <see
-               cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
+               and <see cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
 
               
 
-               are designed for use with simple-bound controls, such as the <see
-               cref="T:System.Windows.Forms.TextBox" />
+               are designed for use with simple-bound controls, such as the <see cref="T:System.Windows.Forms.TextBox" />
 
               
 
-               control. Alternatively you can use these methods in a complex binding scenario if you suppress <see
-               cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+               control. Alternatively you can use these methods in a complex binding scenario if you suppress <see cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
               
 
-               events by setting the <see
-               cref="P:System.Windows.Forms.BindingSource.RaiseListChangedEvents" />
+               events by setting the <see cref="P:System.Windows.Forms.BindingSource.RaiseListChangedEvents" />
 
               
 
@@ -5175,39 +4872,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.BindingSource.Sort" />
+            >The <see cref="P:System.Windows.Forms.BindingSource.Sort" />
 
             
 
              property is a case-sensitive string that specifies the column names used to sort the rows, along with the sort direction. Columns are sorted ascending by default. Multiple columns can be separated by commas, such as "State, ZipCode DESC".</para
           >
           <para
-            >To support sorting, the underlying list must implement the <see
-             cref="T:System.ComponentModel.IBindingList" />
+            >To support sorting, the underlying list must implement the <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
-             or <see
-             cref="T:System.ComponentModel.IBindingListView" />
+             or <see cref="T:System.ComponentModel.IBindingListView" />
 
             
 
-             interfaces. This capability can be queried through the <see
-             cref="P:System.Windows.Forms.BindingSource.SupportsSorting" />
+             interfaces. This capability can be queried through the <see cref="P:System.Windows.Forms.BindingSource.SupportsSorting" />
 
             
 
-             property. Multicolumn sorting is available when the <see
-             cref="P:System.Windows.Forms.BindingSource.SupportsAdvancedSorting" />
+             property. Multicolumn sorting is available when the <see cref="P:System.Windows.Forms.BindingSource.SupportsAdvancedSorting" />
 
             
 
              property is true.</para
           >
           <para
-            >Setting the <see
-             cref="P:System.Windows.Forms.BindingSource.Sort" />
+            >Setting the <see cref="P:System.Windows.Forms.BindingSource.Sort" />
 
             
 
@@ -5216,18 +4907,15 @@
           <list type="bullet">
             <item>
               <para
-                >If the list is of type <see
-                 cref="T:System.ComponentModel.IBindingList" />
+                >If the list is of type <see cref="T:System.ComponentModel.IBindingList" />
 
                 
 
-                , the <see
-                 cref="P:System.ComponentModel.IBindingList.SortProperty" />
+                , the <see cref="P:System.ComponentModel.IBindingList.SortProperty" />
 
                 
 
-                 and <see
-                 cref="P:System.ComponentModel.IBindingList.SortDirection" />
+                 and <see cref="P:System.ComponentModel.IBindingList.SortDirection" />
 
                 
 
@@ -5236,13 +4924,11 @@
             </item>
             <item>
               <para
-                >If the list is of type <see
-                 cref="T:System.ComponentModel.IBindingListView" />
+                >If the list is of type <see cref="T:System.ComponentModel.IBindingListView" />
 
                 
 
-                , the <see
-                 cref="P:System.ComponentModel.IBindingListView.SortDescriptions" />
+                , the <see cref="P:System.ComponentModel.IBindingListView.SortDescriptions" />
 
                 
 
@@ -5251,8 +4937,7 @@
             </item>
           </list>
           <para
-            >The internal list's sort properties are only changed when the sort string is not null. The get accessor for this property will not retrieve the sort value of the internal list; instead, it will return the set accessor value. The value of the <see
-             cref="P:System.Windows.Forms.BindingSource.Sort" />
+            >The internal list's sort properties are only changed when the sort string is not null. The get accessor for this property will not retrieve the sort value of the internal list; instead, it will return the set accessor value. The value of the <see cref="P:System.Windows.Forms.BindingSource.Sort" />
 
             
 
@@ -5290,21 +4975,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the list is not an <see
-             cref="T:System.ComponentModel.IBindingListView" />
+            >If the list is not an <see cref="T:System.ComponentModel.IBindingListView" />
 
             
 
-            , the <see
-             cref="P:System.Windows.Forms.BindingSource.SortDescriptions" />
+            , the <see cref="P:System.Windows.Forms.BindingSource.SortDescriptions" />
 
             
 
              always returns null.</para
           >
           <para
-            >The <see
-             cref="T:System.ComponentModel.ListSortDescriptionCollection" />
+            >The <see cref="T:System.ComponentModel.ListSortDescriptionCollection" />
 
             
 
@@ -5342,18 +5024,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the underlying list is not an <see
-             cref="T:System.ComponentModel.IBindingList" />
+            >If the underlying list is not an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
-            , the <see
-             cref="P:System.Windows.Forms.BindingSource.SortDirection" />
+            , the <see cref="P:System.Windows.Forms.BindingSource.SortDirection" />
 
             
 
-             property will always return <see
-             cref="F:System.ComponentModel.ListSortDirection.Ascending" />
+             property will always return <see cref="F:System.ComponentModel.ListSortDirection.Ascending" />
 
             
 
@@ -5391,13 +5070,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the list is not an <see
-             cref="T:System.ComponentModel.IBindingList" />
+            >If the list is not an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.BindingSource.SortProperty" />
+            , <see cref="P:System.Windows.Forms.BindingSource.SortProperty" />
 
             
 
@@ -5407,8 +5084,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Gets the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -5436,13 +5112,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the list is not an <see
-             cref="T:System.ComponentModel.IBindingListView" />
+            >If the list is not an <see cref="T:System.ComponentModel.IBindingListView" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.BindingSource.SupportsAdvancedSorting" />
+            , <see cref="P:System.Windows.Forms.BindingSource.SupportsAdvancedSorting" />
 
             
 
@@ -5500,13 +5174,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the list is not an <see
-             cref="T:System.ComponentModel.IBindingListView" />
+            >If the list is not an <see cref="T:System.ComponentModel.IBindingListView" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.BindingSource.SupportsFiltering" />
+            , <see cref="P:System.Windows.Forms.BindingSource.SupportsFiltering" />
 
             
 
@@ -5538,13 +5210,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the data source is not an <see
-             cref="T:System.ComponentModel.IBindingList" />
+            >If the data source is not an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.BindingSource.SupportsSearching" />
+            , <see cref="P:System.Windows.Forms.BindingSource.SupportsSearching" />
 
             
 
@@ -5554,8 +5224,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the data source supports searching with the <see
-             cref="M:System.Windows.Forms.BindingSource.Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
+            >Gets a value indicating whether the data source supports searching with the <see cref="M:System.Windows.Forms.BindingSource.Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
 
             
 
@@ -5583,13 +5252,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the data source is not an <see
-             cref="T:System.ComponentModel.IBindingList" />
+            >If the data source is not an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
-            , the <see
-             cref="P:System.Windows.Forms.BindingSource.SupportsSorting" />
+            , the <see cref="P:System.Windows.Forms.BindingSource.SupportsSorting" />
 
             
 
@@ -5620,8 +5287,7 @@
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
+             and <see cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
 
             
 
@@ -5629,53 +5295,43 @@
           >
           <block subset="none" type="note">
             <para
-              >Using <see
-               cref="M:System.Windows.Forms.BindingSource.SuspendBinding" />
+              >Using <see cref="M:System.Windows.Forms.BindingSource.SuspendBinding" />
 
               
 
-               and prevents changes from being pushed into the data source until <see
-               cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
+               and prevents changes from being pushed into the data source until <see cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
 
               
 
-               is called, but does not actually prevent any events from occurring. Controls that use complex data binding, such as the <see
-               cref="T:System.Windows.Forms.DataGridView" />
+               is called, but does not actually prevent any events from occurring. Controls that use complex data binding, such as the <see cref="T:System.Windows.Forms.DataGridView" />
 
               
 
-               control, update their values based on change events such as the <see
-               cref="E:System.Windows.Forms.CurrencyManager.ListChanged" />
+               control, update their values based on change events such as the <see cref="E:System.Windows.Forms.CurrencyManager.ListChanged" />
 
               
 
-               event, so calling <see
-               cref="M:System.Windows.Forms.BindingSource.SuspendBinding" />
+               event, so calling <see cref="M:System.Windows.Forms.BindingSource.SuspendBinding" />
 
               
 
-               will not prevent them from receiving changes to the data source. For this reason, this <see
-               cref="M:System.Windows.Forms.BindingSource.SuspendBinding" />
+               will not prevent them from receiving changes to the data source. For this reason, this <see cref="M:System.Windows.Forms.BindingSource.SuspendBinding" />
 
               
 
-               and <see
-               cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
+               and <see cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
 
               
 
-               are designed for use with simple-bound controls, such as the <see
-               cref="T:System.Windows.Forms.TextBox" />
+               are designed for use with simple-bound controls, such as the <see cref="T:System.Windows.Forms.TextBox" />
 
               
 
-               control. Alternatively you can use these methods in a complex binding scenario if you suppress <see
-               cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+               control. Alternatively you can use these methods in a complex binding scenario if you suppress <see cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
               
 
-               events by setting the <see
-               cref="P:System.Windows.Forms.BindingSource.RaiseListChangedEvents" />
+               events by setting the <see cref="P:System.Windows.Forms.BindingSource.RaiseListChangedEvents" />
 
               
 
@@ -5731,18 +5387,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the underlying list is an <see
-             cref="T:System.ComponentModel.IBindingList" />
+            >If the underlying list is an <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
-             type, this method will add the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+             type, this method will add the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
-             to the indexes; otherwise, calling this method will throw a <see
-             cref="T:System.NotSupportedException" />
+             to the indexes; otherwise, calling this method will throw a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -5752,8 +5405,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Adds the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -5761,12 +5413,15 @@
           >
         </summary>
         <param name="property">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -5793,13 +5448,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the underlying list is not a <see
-             cref="T:System.ComponentModel.IBindingList" />
+            >If the underlying list is not a <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
-            , this method will always throw a <see
-             cref="T:System.NotSupportedException" />
+            , this method will always throw a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -5809,8 +5462,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Removes the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -5818,12 +5470,15 @@
           >
         </summary>
         <param name="prop">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -5847,18 +5502,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingSource.System#ComponentModel#ICancelAddNew#CancelNew(System.Int32)" />
+            >The <see cref="M:System.Windows.Forms.BindingSource.System#ComponentModel#ICancelAddNew#CancelNew(System.Int32)" />
 
             
 
-             method rolls back a pending addition of an item previously added to the collection at the index specified by <paramref
-             name="position" />
+             method rolls back a pending addition of an item previously added to the collection at the index specified by <paramref name="position" />
 
             
 
-            . The <paramref
-             name="position" />
+            . The <paramref name="position" />
 
             
 
@@ -5870,7 +5522,11 @@
           <para>Discards a pending new item from the collection.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5894,18 +5550,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingSource.System#ComponentModel#ICancelAddNew#EndNew(System.Int32)" />
+            >The <see cref="M:System.Windows.Forms.BindingSource.System#ComponentModel#ICancelAddNew#EndNew(System.Int32)" />
 
             
 
-             method commits a pending addition of an item previously added to the collection at the index specified by <paramref
-             name="position" />
+             method commits a pending addition of an item previously added to the collection at the index specified by <paramref name="position" />
 
             
 
-            . The <paramref
-             name="position" />
+            . The <paramref name="position" />
 
             
 
@@ -5917,7 +5570,11 @@
           <para>Commits a pending new item to the collection.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5940,8 +5597,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Signals the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+            >Signals the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -5965,8 +5621,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Signals the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+            >Signals the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -5992,13 +5647,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ISupportInitializeNotification" />
+             instance is cast to an <see cref="T:System.ComponentModel.ISupportInitializeNotification" />
 
             
 
@@ -6008,8 +5661,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+            >Gets a value indicating whether the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 

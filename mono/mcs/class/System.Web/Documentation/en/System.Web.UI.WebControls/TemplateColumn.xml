@@ -20,38 +20,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Web.UI.WebControls.TemplateColumn" />
+        >Use the <see cref="T:System.Web.UI.WebControls.TemplateColumn" />
 
         
 
-         column type in a <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         column type in a <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
-         control to create a column with a customized control layout. You can provide a custom appearance for the heading section, the footer section, and the items section of the column by using the <see
-         cref="P:System.Web.UI.WebControls.TemplateColumn.HeaderTemplate" />
+         control to create a column with a customized control layout. You can provide a custom appearance for the heading section, the footer section, and the items section of the column by using the <see cref="P:System.Web.UI.WebControls.TemplateColumn.HeaderTemplate" />
 
         
 
-        , <see
-         cref="P:System.Web.UI.WebControls.TemplateColumn.FooterTemplate" />
+        , <see cref="P:System.Web.UI.WebControls.TemplateColumn.FooterTemplate" />
 
         
 
-        , and <see
-         cref="P:System.Web.UI.WebControls.TemplateColumn.ItemTemplate" />
+        , and <see cref="P:System.Web.UI.WebControls.TemplateColumn.ItemTemplate" />
 
         
 
-         properties, respectively. You can also control how an item being edited is displayed in the <see
-         cref="T:System.Web.UI.WebControls.TemplateColumn" />
+         properties, respectively. You can also control how an item being edited is displayed in the <see cref="T:System.Web.UI.WebControls.TemplateColumn" />
 
         
 
-         object by setting the <see
-         cref="P:System.Web.UI.WebControls.TemplateColumn.EditItemTemplate" />
+         object by setting the <see cref="P:System.Web.UI.WebControls.TemplateColumn.EditItemTemplate" />
 
         
 
@@ -61,8 +54,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a column type for the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+        >Represents a column type for the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
@@ -80,8 +72,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.TemplateColumn" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.TemplateColumn" />
 
             
 
@@ -91,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.TemplateColumn" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.TemplateColumn" />
 
             
 
@@ -116,20 +106,15 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.UI.ITemplate" />
-        </value>
+        <value>a <see cref="T:System.Web.UI.ITemplate" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TemplateColumn.EditItemTemplate" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TemplateColumn.EditItemTemplate" />
 
             
 
-             property to control the appearance of the item selected for editing in the <see
-             cref="T:System.Web.UI.WebControls.TemplateColumn" />
+             property to control the appearance of the item selected for editing in the <see cref="T:System.Web.UI.WebControls.TemplateColumn" />
 
             
 
@@ -139,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the template for displaying the item selected for editing in a <see
-             cref="T:System.Web.UI.WebControls.TemplateColumn" />
+            >Gets or sets the template for displaying the item selected for editing in a <see cref="T:System.Web.UI.WebControls.TemplateColumn" />
 
             
 
@@ -178,20 +162,15 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.UI.ITemplate" />
-        </value>
+        <value>a <see cref="T:System.Web.UI.ITemplate" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TemplateColumn.FooterTemplate" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TemplateColumn.FooterTemplate" />
 
             
 
-             property to control the appearance of the footer section in the <see
-             cref="T:System.Web.UI.WebControls.TemplateColumn" />
+             property to control the appearance of the footer section in the <see cref="T:System.Web.UI.WebControls.TemplateColumn" />
 
             
 
@@ -201,8 +180,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the template for displaying the footer section of the <see
-             cref="T:System.Web.UI.WebControls.TemplateColumn" />
+            >Gets or sets the template for displaying the footer section of the <see cref="T:System.Web.UI.WebControls.TemplateColumn" />
 
             
 
@@ -240,20 +218,15 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.UI.ITemplate" />
-        </value>
+        <value>a <see cref="T:System.Web.UI.ITemplate" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TemplateColumn.HeaderTemplate" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TemplateColumn.HeaderTemplate" />
 
             
 
-             property to control the appearance of the heading section in the <see
-             cref="T:System.Web.UI.WebControls.TemplateColumn" />
+             property to control the appearance of the heading section in the <see cref="T:System.Web.UI.WebControls.TemplateColumn" />
 
             
 
@@ -263,8 +236,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the template for displaying the heading section of the <see
-             cref="T:System.Web.UI.WebControls.TemplateColumn" />
+            >Gets or sets the template for displaying the heading section of the <see cref="T:System.Web.UI.WebControls.TemplateColumn" />
 
             
 
@@ -310,13 +282,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calls a <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Calls a <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             object's base class to initialize the instance and then applies a <see
-             cref="T:System.Web.UI.WebControls.ListItemType" />
+             object's base class to initialize the instance and then applies a <see cref="T:System.Web.UI.WebControls.ListItemType" />
 
             
 
@@ -324,31 +294,41 @@
           >
         </summary>
         <param name="cell">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.TableCell" />
+          A <see cref="T:System.Web.UI.WebControls.TableCell" />
 
           
 
            object that represents the cell to reset.</param
         >
         <param name="columnIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The column number where the cell is located.</param
         >
         <param name="itemType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.ListItemType" />
+          One of the <see cref="T:System.Web.UI.WebControls.ListItemType" />
 
           
 
@@ -371,20 +351,15 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.UI.ITemplate" />
-        </value>
+        <value>a <see cref="T:System.Web.UI.ITemplate" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TemplateColumn.ItemTemplate" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TemplateColumn.ItemTemplate" />
 
             
 
-             property to control the appearance of a data item in the <see
-             cref="T:System.Web.UI.WebControls.TemplateColumn" />
+             property to control the appearance of a data item in the <see cref="T:System.Web.UI.WebControls.TemplateColumn" />
 
             
 
@@ -394,8 +369,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the template for displaying a data item in a <see
-             cref="T:System.Web.UI.WebControls.TemplateColumn" />
+            >Gets or sets the template for displaying a data item in a <see cref="T:System.Web.UI.WebControls.TemplateColumn" />
 
             
 

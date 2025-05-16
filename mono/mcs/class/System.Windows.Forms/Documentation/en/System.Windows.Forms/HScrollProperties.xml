@@ -17,8 +17,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides basic properties for the <see
-         cref="T:System.Windows.Forms.HScrollBar" />
+        >Provides basic properties for the <see cref="T:System.Windows.Forms.HScrollBar" />
       </para>
     </summary>
   </Docs>
@@ -40,8 +39,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.HScrollProperties" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.HScrollProperties" />
 
             
 
@@ -49,12 +47,15 @@
           >
         </summary>
         <param name="container">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ScrollableControl" />
+          A <see cref="T:System.Windows.Forms.ScrollableControl" />
 
           
 

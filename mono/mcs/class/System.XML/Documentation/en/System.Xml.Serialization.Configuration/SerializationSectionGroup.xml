@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used to handle the <format
-         type="text/html">
+        >This class is used to handle the <format type="text/html">
           <a href="3ce45919-388a-418c-8968-6df0372c73ec"
             >&lt;system.xml.serialization&gt; Element</a
           >
@@ -49,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.Configuration.SerializationSectionGroup" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.Configuration.SerializationSectionGroup" />
 
             
 
@@ -82,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the object that represents the <see
-             cref="T:System.DateTime" />
+            >Gets the object that represents the <see cref="T:System.DateTime" />
 
             
 
@@ -115,8 +112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the object that represents the section that contains configuration elements for the <see
-             cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+            >Gets the object that represents the section that contains configuration elements for the <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
             
 
@@ -143,8 +139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the object that represents the configuration group for the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets the object that represents the configuration group for the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 

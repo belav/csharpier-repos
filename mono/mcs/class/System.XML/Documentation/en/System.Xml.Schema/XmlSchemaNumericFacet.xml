@@ -26,8 +26,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Abstract class for defining numeric facets. This class is the base class for numeric facet classes such as <see
-         cref="T:System.Xml.Schema.XmlSchemaMinLengthFacet" />
+        >Abstract class for defining numeric facets. This class is the base class for numeric facet classes such as <see cref="T:System.Xml.Schema.XmlSchemaMinLengthFacet" />
       </para>
     </summary>
   </Docs>
@@ -51,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Schema.XmlSchemaNumericFacet" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaNumericFacet" />
 
             
 

@@ -46,18 +46,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of <see
-             cref="T:System.ServiceModel.Description.ListenUriMode" />
+            >The value of <see cref="T:System.ServiceModel.Description.ListenUriMode" />
 
             
 
-             is set to <see
-             cref="F:System.ServiceModel.Description.ListenUriMode.Explicit" />
+             is set to <see cref="F:System.ServiceModel.Description.ListenUriMode.Explicit" />
 
             
 
-             by this constructor, the relative address is set to <see
-             cref="F:System.String.Empty" />
+             by this constructor, the relative address is set to <see cref="F:System.String.Empty" />
 
             
 
@@ -67,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.BindingContext" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
             
 
@@ -76,12 +72,15 @@
           >
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.CustomBinding" />
+          The <see cref="T:System.ServiceModel.Channels.CustomBinding" />
 
           
 
@@ -117,8 +116,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.BindingContext" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
             
 
@@ -126,55 +124,71 @@
           >
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.CustomBinding" />
+          The <see cref="T:System.ServiceModel.Channels.CustomBinding" />
 
           
 
            for the channel.</param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
+          The <see cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
 
           
 
            for the channel.</param
         >
         <param name="listenUriBaseAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
            at which the service endpoint listens.</param
         >
         <param name="listenUriRelativeAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The relative address at which the service endpoint listens.</param
         >
         <param name="listenUriMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.ListenUriMode" />
+          The <see cref="T:System.ServiceModel.Description.ListenUriMode" />
 
           
 
@@ -264,13 +278,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.IChannelFactory`1" />
+            >The <see cref="T:System.ServiceModel.Channels.IChannelFactory`1" />
 
             
 
-             of type <see
-             cref="T:System.ServiceModel.Channels.IChannel" />
+             of type <see cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
@@ -278,12 +290,15 @@
           >
         </returns>
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of <see
-           cref="T:System.ServiceModel.Channels.IChannel" />
+          The type of <see cref="T:System.ServiceModel.Channels.IChannel" />
 
           
 
@@ -325,13 +340,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.IChannelListener`1" />
+            >The <see cref="T:System.ServiceModel.Channels.IChannelListener`1" />
 
             
 
-             of type <see
-             cref="T:System.ServiceModel.Channels.IChannel" />
+             of type <see cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
@@ -339,12 +352,15 @@
           >
         </returns>
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of <see
-           cref="T:System.ServiceModel.Channels.IChannel" />
+          The type of <see cref="T:System.ServiceModel.Channels.IChannel" />
 
           
 
@@ -381,8 +397,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the inner channel factory can produce the specified <paramref
-             name="TChannel" />
+            >true if the inner channel factory can produce the specified <paramref name="TChannel" />
 
             
 
@@ -390,12 +405,15 @@
           >
         </returns>
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of <see
-           cref="T:System.ServiceModel.Channels.IChannel" />
+          The type of <see cref="T:System.ServiceModel.Channels.IChannel" />
 
           
 
@@ -437,8 +455,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the inner channel listener can be built to listen for the <paramref
-             name="TChannel" />
+            >true if the inner channel listener can be built to listen for the <paramref name="TChannel" />
 
             
 
@@ -446,12 +463,15 @@
           >
         </returns>
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of <see
-           cref="T:System.ServiceModel.Channels.IChannel" />
+          The type of <see cref="T:System.ServiceModel.Channels.IChannel" />
 
           
 
@@ -488,8 +508,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Channels.BindingContext" />
+            >A <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
             
 
@@ -526,8 +545,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clones the binding context and calls <see
-             cref="M:System.ServiceModel.Channels.BindingElement.GetProperty``1(System.ServiceModel.Channels.BindingContext)" />
+            >Clones the binding context and calls <see cref="M:System.ServiceModel.Channels.BindingElement.GetProperty``1(System.ServiceModel.Channels.BindingContext)" />
 
             
 
@@ -541,8 +559,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The typed object <paramref
-             name="T" />
+            >The typed object <paramref name="T" />
 
             
 
@@ -550,7 +567,11 @@
           >
         </returns>
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -576,18 +597,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The address for the endpoint at which a service listens is obtained by appending the <see
-             cref="P:System.ServiceModel.Channels.BindingContext.ListenUriRelativeAddress" />
+            >The address for the endpoint at which a service listens is obtained by appending the <see cref="P:System.ServiceModel.Channels.BindingContext.ListenUriRelativeAddress" />
 
             
 
-             to the <see
-             cref="P:System.ServiceModel.Channels.BindingContext.ListenUriBaseAddress" />
+             to the <see cref="P:System.ServiceModel.Channels.BindingContext.ListenUriBaseAddress" />
 
             
 
-            . This absolute address can be set using the <see
-             cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
+            . This absolute address can be set using the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
 
             
 
@@ -643,18 +661,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The address for the endpoint at which a service listens is obtained by appending the <see
-             cref="P:System.ServiceModel.Channels.BindingContext.ListenUriRelativeAddress" />
+            >The address for the endpoint at which a service listens is obtained by appending the <see cref="P:System.ServiceModel.Channels.BindingContext.ListenUriRelativeAddress" />
 
             
 
-             to the <see
-             cref="P:System.ServiceModel.Channels.BindingContext.ListenUriBaseAddress" />
+             to the <see cref="P:System.ServiceModel.Channels.BindingContext.ListenUriBaseAddress" />
 
             
 
-            . This absolute address can be set using the <see
-             cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
+            . This absolute address can be set using the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
 
             
 

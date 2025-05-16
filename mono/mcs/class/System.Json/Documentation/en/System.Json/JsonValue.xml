@@ -71,7 +71,11 @@
           <para>True if the operation exception is invalid; otherwise, false.</para>
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -205,7 +209,11 @@
           <para>The text-based JSON from a stream.</para>
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -243,7 +251,11 @@
           <para>The text-based JSON from a text reader.</para>
         </returns>
         <param name="textReader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1294,7 +1306,11 @@
           <para>Serializes the JsonValue CLR type into text-based JSON using a stream.</para>
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1328,7 +1344,11 @@
           <para>Serializes the JsonValue CLR type into text-based JSON using a text writer.</para>
         </summary>
         <param name="textWriter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1358,8 +1378,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Json.JsonValue" />
+            >Gets the <see cref="T:System.Json.JsonValue" />
 
             
 

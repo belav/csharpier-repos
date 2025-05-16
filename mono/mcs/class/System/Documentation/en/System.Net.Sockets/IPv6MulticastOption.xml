@@ -46,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new version of the <see
-             cref="T:System.Net.Sockets.IPv6MulticastOption" />
+            >Initializes a new version of the <see cref="T:System.Net.Sockets.IPv6MulticastOption" />
 
             
 
@@ -55,12 +54,15 @@
           >
         </summary>
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.IPAddress" />
+          The <see cref="T:System.Net.IPAddress" />
 
           
 
@@ -91,8 +93,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="ifindex" />
+            >The <paramref name="ifindex" />
 
             
 
@@ -102,8 +103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.IPv6MulticastOption" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.IPv6MulticastOption" />
 
             
 
@@ -111,19 +111,26 @@
           >
         </summary>
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The group <see
-           cref="T:System.Net.IPAddress" />
+          The group <see cref="T:System.Net.IPAddress" />
 
           
 
           . </param
         >
         <param name="ifindex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

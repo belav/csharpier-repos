@@ -15,13 +15,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >ASP.NET provides an extensibility mechanism for calling Web Services using SOAP. The extensibility mechanism revolves around a <see
-         cref="T:System.Web.Services.Protocols.SoapExtension" />
+        >ASP.NET provides an extensibility mechanism for calling Web Services using SOAP. The extensibility mechanism revolves around a <see cref="T:System.Web.Services.Protocols.SoapExtension" />
 
         
 
-         that can inspect or modify a message at specific stages in message processing on either the client or the server. This enumeration specifies the processing stage of the <see
-         cref="T:System.Web.Services.Protocols.SoapMessage" />
+         that can inspect or modify a message at specific stages in message processing on either the client or the server. This enumeration specifies the processing stage of the <see cref="T:System.Web.Services.Protocols.SoapMessage" />
 
         
 
@@ -45,26 +43,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >During <see
-             cref="T:System.Web.Services.Protocols.SoapClientMessage" />
+            >During <see cref="T:System.Web.Services.Protocols.SoapClientMessage" />
 
             
 
-             processing, the <see
-             cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterDeserialize" />
+             processing, the <see cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterDeserialize" />
 
             
 
              stage occurs after the SOAP message containing the response from an XML Web service method invocation has been deserialized into an object, but prior to the client receiving the deserialized results.</para
           >
           <para
-            >During <see
-             cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+            >During <see cref="T:System.Web.Services.Protocols.SoapServerMessage" />
 
             
 
-             processing, the <see
-             cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterDeserialize" />
+             processing, the <see cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterDeserialize" />
 
             
 
@@ -74,8 +68,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The stage just after a <see
-             cref="T:System.Web.Services.Protocols.SoapMessage" />
+            >The stage just after a <see cref="T:System.Web.Services.Protocols.SoapMessage" />
 
             
 
@@ -99,26 +92,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >During <see
-             cref="T:System.Web.Services.Protocols.SoapClientMessage" />
+            >During <see cref="T:System.Web.Services.Protocols.SoapClientMessage" />
 
             
 
-             processing, the <see
-             cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterSerialize" />
+             processing, the <see cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterSerialize" />
 
             
 
              stage occurs after a client invokes an XML Web service method and the parameters are serialized into XML, but prior to the SOAP message containing that XML is sent over the network.</para
           >
           <para
-            >During <see
-             cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+            >During <see cref="T:System.Web.Services.Protocols.SoapServerMessage" />
 
             
 
-             processing, the <see
-             cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterSerialize" />
+             processing, the <see cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterSerialize" />
 
             
 
@@ -128,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The stage just after a <see
-             cref="T:System.Web.Services.Protocols.SoapMessage" />
+            >The stage just after a <see cref="T:System.Web.Services.Protocols.SoapMessage" />
 
             
 
@@ -153,26 +141,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >During <see
-             cref="T:System.Web.Services.Protocols.SoapClientMessage" />
+            >During <see cref="T:System.Web.Services.Protocols.SoapClientMessage" />
 
             
 
-             processing, the <see
-             cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeDeserialize" />
+             processing, the <see cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeDeserialize" />
 
             
 
              stage occurs after the network response from an XML Web service method invocation has been received, but just before the response containing the SOAP message is deserialized into an object.</para
           >
           <para
-            >During <see
-             cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+            >During <see cref="T:System.Web.Services.Protocols.SoapServerMessage" />
 
             
 
-             processing, the <see
-             cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeDeserialize" />
+             processing, the <see cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeDeserialize" />
 
             
 
@@ -182,8 +166,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The stage just before a <see
-             cref="T:System.Web.Services.Protocols.SoapMessage" />
+            >The stage just before a <see cref="T:System.Web.Services.Protocols.SoapMessage" />
 
             
 
@@ -207,26 +190,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >During <see
-             cref="T:System.Web.Services.Protocols.SoapClientMessage" />
+            >During <see cref="T:System.Web.Services.Protocols.SoapClientMessage" />
 
             
 
-             processing, the <see
-             cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeSerialize" />
+             processing, the <see cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeSerialize" />
 
             
 
              stage occurs after a client invokes an XML Web service method, but prior to the invocation being serialized.</para
           >
           <para
-            >During <see
-             cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+            >During <see cref="T:System.Web.Services.Protocols.SoapServerMessage" />
 
             
 
-             processing, the <see
-             cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeSerialize" />
+             processing, the <see cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeSerialize" />
 
             
 
@@ -236,8 +215,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The stage just prior to a <see
-             cref="T:System.Web.Services.Protocols.SoapMessage" />
+            >The stage just prior to a <see cref="T:System.Web.Services.Protocols.SoapMessage" />
 
             
 

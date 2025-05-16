@@ -51,8 +51,7 @@
       <para>It is strongly suggested that attribute based XML representation is used to express security elements and their values. This means properties of an element are expressed as attributes and property values are expressed as attribute values. Avoid nesting text within tags. For any &lt;tag&gt;text&lt;/tag&gt; representation a representation of type &lt;tag value="text"/&gt; is usually available. Using this attribute-based XML representation increases readability and allows easy WMI portability of the resulting XML serialization.</para>
       <para>An attribute name must be one character or longer, and cannot be null. If element-based value representation is used, elements with a text string that is null are represented in the &lt;tag/&gt; form; otherwise, text is delimited by the &lt;tag&gt; and &lt;/tag&gt; tokens. Both forms can be combined with attributes, which are shown if present.</para>
       <para
-        >The tags, attributes, and text of elements, if present, are always case-sensitive. The XML form contains quotations and escapes where necessary. String values that include characters invalid for use in XML result in an <see
-         cref="T:System.ArgumentException" />
+        >The tags, attributes, and text of elements, if present, are always case-sensitive. The XML form contains quotations and escapes where necessary. String values that include characters invalid for use in XML result in an <see cref="T:System.ArgumentException" />
 
         
 
@@ -87,13 +86,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="tag" />
+            >The <paramref name="tag" />
 
             
 
-             parameter must consist of a valid XML tag name. Use <see
-             cref="M:System.Security.SecurityElement.Escape(System.String)" />
+             parameter must consist of a valid XML tag name. Use <see cref="M:System.Security.SecurityElement.Escape(System.String)" />
 
             
 
@@ -103,8 +100,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.SecurityElement" />
+            >Initializes a new instance of the <see cref="T:System.Security.SecurityElement" />
 
             
 
@@ -112,7 +108,11 @@
           >
         </summary>
         <param name="tag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -140,8 +140,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="text" />
+            >If the <paramref name="text" />
 
             
 
@@ -151,8 +150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.SecurityElement" />
+            >Initializes a new instance of the <see cref="T:System.Security.SecurityElement" />
 
             
 
@@ -160,14 +158,22 @@
           >
         </summary>
         <param name="tag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The tag name of the XML element. </param
         >
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -201,8 +207,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Names and values in attributes should only contain valid XML attribute characters. XML attribute names must be unique. Use <see
-             cref="M:System.Security.SecurityElement.Escape(System.String)" />
+            >Names and values in attributes should only contain valid XML attribute characters. XML attribute names must be unique. Use <see cref="M:System.Security.SecurityElement.Escape(System.String)" />
 
             
 
@@ -215,14 +220,22 @@
           <para>Adds a name/value attribute to an XML element.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the attribute. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -261,7 +274,11 @@
           <para>Adds a child element to the XML element.</para>
         </summary>
         <param name="child">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -300,8 +317,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value associated with the named attribute, or null if no attribute with <paramref
-             name="name" />
+            >The value associated with the named attribute, or null if no attribute with <paramref name="name" />
 
             
 
@@ -309,7 +325,11 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -340,16 +360,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each attribute is stored in the <see
-             cref="T:System.Collections.Hashtable" />
+            >Each attribute is stored in the <see cref="T:System.Collections.Hashtable" />
 
             
 
              as a name/value pair.</para
           >
           <para
-            >Names and values in attributes should contain only valid XML attribute characters. Use <see
-             cref="M:System.Security.SecurityElement.Escape(System.String)" />
+            >Names and values in attributes should contain only valid XML attribute characters. Use <see cref="M:System.Security.SecurityElement.Escape(System.String)" />
 
             
 
@@ -386,23 +404,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a <see
-             cref="T:System.Security.SecurityElement" />
+            >If a <see cref="T:System.Security.SecurityElement" />
 
             
 
-             contains both <see
-             cref="P:System.Security.SecurityElement.Text" />
+             contains both <see cref="P:System.Security.SecurityElement.Text" />
 
             
 
-             and <see
-             cref="P:System.Security.SecurityElement.Children" />
+             and <see cref="P:System.Security.SecurityElement.Children" />
 
             
 
-            , <see
-             cref="P:System.Security.SecurityElement.Text" />
+            , <see cref="P:System.Security.SecurityElement.Text" />
 
             
 
@@ -440,13 +454,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The copy includes both the <see
-             cref="P:System.Security.SecurityElement.Children" />
+            >The copy includes both the <see cref="P:System.Security.SecurityElement.Children" />
 
             
 
-             and <see
-             cref="P:System.Security.SecurityElement.Attributes" />
+             and <see cref="P:System.Security.SecurityElement.Attributes" />
 
             
 
@@ -456,8 +468,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns an identical copy of the current <see
-             cref="T:System.Security.SecurityElement" />
+            >Creates and returns an identical copy of the current <see cref="T:System.Security.SecurityElement" />
 
             
 
@@ -467,8 +478,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A copy of the current <see
-             cref="T:System.Security.SecurityElement" />
+            >A copy of the current <see cref="T:System.Security.SecurityElement" />
 
             
 
@@ -511,8 +521,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the tag, attribute names and values, child elements, and text fields in the current XML element are identical to their counterparts in the <paramref
-             name="other" />
+            >true if the tag, attribute names and values, child elements, and text fields in the current XML element are identical to their counterparts in the <paramref name="other" />
 
             
 
@@ -520,7 +529,11 @@
           >
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -550,18 +563,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to replace invalid characters in a string before using the string in a <see
-             cref="T:System.Security.SecurityElement" />
+            >Use this method to replace invalid characters in a string before using the string in a <see cref="T:System.Security.SecurityElement" />
 
             
 
-            . If invalid characters are used in a <see
-             cref="T:System.Security.SecurityElement" />
+            . If invalid characters are used in a <see cref="T:System.Security.SecurityElement" />
 
             
 
-             without being escaped, an <see
-             cref="T:System.ArgumentException" />
+             without being escaped, an <see cref="T:System.ArgumentException" />
 
             
 
@@ -630,7 +640,11 @@
           <para>The input string with invalid characters replaced.</para>
         </returns>
         <param name="str">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -672,8 +686,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.SecurityElement" />
+            >A <see cref="T:System.Security.SecurityElement" />
 
             
 
@@ -681,7 +694,11 @@
           >
         </returns>
         <param name="xml">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -722,8 +739,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="name" />
+            >true if the <paramref name="name" />
 
             
 
@@ -731,7 +747,11 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -772,8 +792,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="value" />
+            >true if the <paramref name="value" />
 
             
 
@@ -781,7 +800,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -811,8 +834,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This can be used to test a <see
-             cref="P:System.Security.SecurityElement.Tag" />
+            >This can be used to test a <see cref="P:System.Security.SecurityElement.Tag" />
 
             
 
@@ -826,8 +848,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="tag" />
+            >true if the <paramref name="tag" />
 
             
 
@@ -835,7 +856,11 @@
           >
         </returns>
         <param name="tag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -865,8 +890,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used to test <see
-             cref="P:System.Security.SecurityElement.Text" />
+            >This method can be used to test <see cref="P:System.Security.SecurityElement.Text" />
 
             
 
@@ -880,8 +904,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="text" />
+            >true if the <paramref name="text" />
 
             
 
@@ -889,7 +912,11 @@
           >
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -932,8 +959,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The first child XML element with the specified tag value, or null if no child element with <paramref
-             name="tag" />
+            >The first child XML element with the specified tag value, or null if no child element with <paramref name="tag" />
 
             
 
@@ -941,7 +967,11 @@
           >
         </returns>
         <param name="tag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -985,7 +1015,11 @@
           <para>The text contents of the first child element with the specified tag value.</para>
         </returns>
         <param name="tag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1013,8 +1047,7 @@
           <code>&lt;tag attributes&gt;text&lt;/tag&gt;</code>
           <para>If this element has child elements, the children will replace text.</para>
           <para
-            >Assign only valid XML tag strings to this property. Use <see
-             cref="M:System.Security.SecurityElement.Escape(System.String)" />
+            >Assign only valid XML tag strings to this property. Use <see cref="M:System.Security.SecurityElement.Escape(System.String)" />
 
             
 
@@ -1044,31 +1077,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text should not contain XML special characters. Use <see
-             cref="M:System.Security.SecurityElement.Escape(System.String)" />
+            >The text should not contain XML special characters. Use <see cref="M:System.Security.SecurityElement.Escape(System.String)" />
 
             
 
              to remove invalid characters from the string.</para
           >
           <para
-            >If a <see
-             cref="T:System.Security.SecurityElement" />
+            >If a <see cref="T:System.Security.SecurityElement" />
 
             
 
-             contains both <see
-             cref="P:System.Security.SecurityElement.Text" />
+             contains both <see cref="P:System.Security.SecurityElement.Text" />
 
             
 
-             and <see
-             cref="P:System.Security.SecurityElement.Children" />
+             and <see cref="P:System.Security.SecurityElement.Children" />
 
             
 
-            , <see
-             cref="P:System.Security.SecurityElement.Text" />
+            , <see cref="P:System.Security.SecurityElement.Text" />
 
             
 

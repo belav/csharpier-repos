@@ -27,8 +27,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The C++ compiler applies the <see
-         cref="T:System.Runtime.CompilerServices.ScopelessEnumAttribute" />
+        >The C++ compiler applies the <see cref="T:System.Runtime.CompilerServices.ScopelessEnumAttribute" />
 
         
 
@@ -59,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.CompilerServices.ScopelessEnumAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.ScopelessEnumAttribute" />
 
             
 

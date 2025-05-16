@@ -35,29 +35,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.AttributeCollection" />
+        >The <see cref="T:System.ComponentModel.AttributeCollection" />
 
         
 
          class is read-only; it does not implement methods to add or remove attributes. You must inherit from this class to implement these methods.</para
       >
       <para
-        >Use the <see
-         cref="P:System.ComponentModel.AttributeCollection.Count" />
+        >Use the <see cref="P:System.ComponentModel.AttributeCollection.Count" />
 
         
 
          property to find the number of attributes that exist in the collection.</para
       >
       <para
-        >You can also use the methods of this class to query the collection about its contents. Call the <see
-         cref="M:System.ComponentModel.AttributeCollection.Contains(System.Attribute)" />
+        >You can also use the methods of this class to query the collection about its contents. Call the <see cref="M:System.ComponentModel.AttributeCollection.Contains(System.Attribute)" />
 
         
 
-         method to verify that a specified attribute or attribute array exists in the collection. Call the <see
-         cref="M:System.ComponentModel.AttributeCollection.Matches(System.Attribute)" />
+         method to verify that a specified attribute or attribute array exists in the collection. Call the <see cref="M:System.ComponentModel.AttributeCollection.Matches(System.Attribute)" />
 
         
 
@@ -87,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.AttributeCollection" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.AttributeCollection" />
 
             
 
@@ -124,8 +119,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.AttributeCollection" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.AttributeCollection" />
 
             
 
@@ -133,12 +127,15 @@
           >
         </summary>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Attribute" />
+          An array of type <see cref="T:System.Attribute" />
 
           
 
@@ -192,46 +189,38 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This collection has the specified attribute if the specified type of attribute exists in the collection, and if the value of the specified attribute is the same as the value of the instance of the attribute in the collection.</para>
           <para
-            >The difference between the <see
-             cref="M:System.ComponentModel.AttributeCollection.Matches(System.Attribute)" />
+            >The difference between the <see cref="M:System.ComponentModel.AttributeCollection.Matches(System.Attribute)" />
 
             
 
-             and <see
-             cref="M:System.ComponentModel.AttributeCollection.Contains(System.Attribute)" />
+             and <see cref="M:System.ComponentModel.AttributeCollection.Contains(System.Attribute)" />
 
             
 
-             methods is that <see
-             cref="M:System.ComponentModel.AttributeCollection.Matches(System.Attribute)" />
+             methods is that <see cref="M:System.ComponentModel.AttributeCollection.Matches(System.Attribute)" />
 
             
 
-             calls the <see
-             cref="M:System.Attribute.Match(System.Object)" />
+             calls the <see cref="M:System.Attribute.Match(System.Object)" />
 
             
 
-             method on an attribute, and <see
-             cref="M:System.ComponentModel.AttributeCollection.Contains(System.Attribute)" />
+             method on an attribute, and <see cref="M:System.ComponentModel.AttributeCollection.Contains(System.Attribute)" />
 
             
 
-             calls the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             calls the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >For most attributes, these methods do the same thing. For attributes that may have multiple flags, however, <see
-             cref="M:System.Attribute.Match(System.Object)" />
+            >For most attributes, these methods do the same thing. For attributes that may have multiple flags, however, <see cref="M:System.Attribute.Match(System.Object)" />
 
             
 
-             is typically implemented so that it returns true if any of the flags are satisfied. For example, consider a data binding attribute with the Boolean flags "SupportsSql", "SupportsOleDb", and "SupportsXml". This attribute may be present on a property that supports all three data-binding approaches. It will often be the case that a programmer needs to know only if a particular approach is available, not all three. Therefore, a programmer could use <see
-             cref="M:System.Attribute.Match(System.Object)" />
+             is typically implemented so that it returns true if any of the flags are satisfied. For example, consider a data binding attribute with the Boolean flags "SupportsSql", "SupportsOleDb", and "SupportsXml". This attribute may be present on a property that supports all three data-binding approaches. It will often be the case that a programmer needs to know only if a particular approach is available, not all three. Therefore, a programmer could use <see cref="M:System.Attribute.Match(System.Object)" />
 
             
 
@@ -280,12 +269,15 @@
           <para>true if the collection contains all the attributes; otherwise, false.</para>
         </returns>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Attribute" />
+          An array of type <see cref="T:System.Attribute" />
 
           
 
@@ -319,19 +311,26 @@
           <para>Copies the collection to an array, starting at the specified index.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Array" />
+          The <see cref="T:System.Array" />
 
           
 
            to copy the collection to. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -356,8 +355,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.ComponentModel.AttributeCollection.Count" />
+            >You can use the <see cref="P:System.ComponentModel.AttributeCollection.Count" />
 
             
 
@@ -428,18 +426,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="newAttributes" />
+            >If the <paramref name="newAttributes" />
 
             
 
-             parameter is provided, its <see
-             cref="T:System.Attribute" />
+             parameter is provided, its <see cref="T:System.Attribute" />
 
             
 
-             entries are merged with those of the <paramref
-             name="existing" />
+             entries are merged with those of the <paramref name="existing" />
 
             
 
@@ -449,13 +444,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.ComponentModel.AttributeCollection" />
+            >Creates a new <see cref="T:System.ComponentModel.AttributeCollection" />
 
             
 
-             from an existing <see
-             cref="T:System.ComponentModel.AttributeCollection" />
+             from an existing <see cref="T:System.ComponentModel.AttributeCollection" />
 
             
 
@@ -465,13 +458,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.ComponentModel.AttributeCollection" />
+            >A new <see cref="T:System.ComponentModel.AttributeCollection" />
 
             
 
-             that is a copy of <paramref
-             name="existing" />
+             that is a copy of <paramref name="existing" />
 
             
 
@@ -479,24 +470,30 @@
           >
         </returns>
         <param name="existing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.AttributeCollection" />
+          An <see cref="T:System.ComponentModel.AttributeCollection" />
 
           
 
            from which to create the copy.</param
         >
         <param name="newAttributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Attribute" />
+          An array of type <see cref="T:System.Attribute" />
 
           
 
@@ -530,13 +527,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the default <see
-             cref="T:System.Attribute" />
+            >Returns the default <see cref="T:System.Attribute" />
 
             
 
-             of a given <see
-             cref="T:System.Type" />
+             of a given <see cref="T:System.Type" />
 
             
 
@@ -546,13 +541,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default <see
-             cref="T:System.Attribute" />
+            >The default <see cref="T:System.Attribute" />
 
             
 
-             of a given <paramref
-             name="attributeType" />
+             of a given <paramref name="attributeType" />
 
             
 
@@ -560,12 +553,15 @@
           >
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -601,8 +597,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator of type <see
-             cref="T:System.Collections.IEnumerator" />
+            >An enumerator of type <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -685,46 +680,38 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An attribute can provide support for matching.</para>
           <para
-            >The difference between the <see
-             cref="M:System.ComponentModel.AttributeCollection.Matches(System.Attribute)" />
+            >The difference between the <see cref="M:System.ComponentModel.AttributeCollection.Matches(System.Attribute)" />
 
             
 
-             and <see
-             cref="M:System.ComponentModel.AttributeCollection.Contains(System.Attribute)" />
+             and <see cref="M:System.ComponentModel.AttributeCollection.Contains(System.Attribute)" />
 
             
 
-             methods is that <see
-             cref="M:System.ComponentModel.AttributeCollection.Matches(System.Attribute)" />
+             methods is that <see cref="M:System.ComponentModel.AttributeCollection.Matches(System.Attribute)" />
 
             
 
-             calls the <see
-             cref="M:System.Attribute.Match(System.Object)" />
+             calls the <see cref="M:System.Attribute.Match(System.Object)" />
 
             
 
-             method on an attribute, and <see
-             cref="M:System.ComponentModel.AttributeCollection.Contains(System.Attribute)" />
+             method on an attribute, and <see cref="M:System.ComponentModel.AttributeCollection.Contains(System.Attribute)" />
 
             
 
-             calls the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             calls the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >For most attributes, these methods do the same thing. For attributes that may have multiple flags, however, <see
-             cref="M:System.Attribute.Match(System.Object)" />
+            >For most attributes, these methods do the same thing. For attributes that may have multiple flags, however, <see cref="M:System.Attribute.Match(System.Object)" />
 
             
 
-             is typically implemented so that it returns true if any of the flags are satisfied. For example, consider a data binding attribute with the Boolean flags "SupportsSql", "SupportsOleDb", and "SupportsXml". This attribute may be present on a property that supports all three data binding approaches. It will often be the case that a programmer needs to know only if a particular approach is available, not all three. Therefore, a programmer could use <see
-             cref="M:System.Attribute.Match(System.Object)" />
+             is typically implemented so that it returns true if any of the flags are satisfied. For example, consider a data binding attribute with the Boolean flags "SupportsSql", "SupportsOleDb", and "SupportsXml". This attribute may be present on a property that supports all three data binding approaches. It will often be the case that a programmer needs to know only if a particular approach is available, not all three. Therefore, a programmer could use <see cref="M:System.Attribute.Match(System.Object)" />
 
             
 
@@ -773,12 +760,15 @@
           <para>true if all the attributes in the array are contained in the collection and have the same values as the attributes in the collection; otherwise, false.</para>
         </returns>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.CodeDom.MemberAttributes" />
+          An array of <see cref="T:System.CodeDom.MemberAttributes" />
 
           
 
@@ -888,13 +878,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns an <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Collections.IDictionary" />
+             for the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -904,13 +892,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Collections.IDictionary" />
+             for the <see cref="T:System.Collections.IDictionary" />
 
             
 

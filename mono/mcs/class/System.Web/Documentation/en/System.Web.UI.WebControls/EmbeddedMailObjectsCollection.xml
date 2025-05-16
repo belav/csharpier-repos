@@ -20,31 +20,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+        >The <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
         
 
-         stores references to items that will be embedded in an e-mail message. The embedded items can be image files such as company logos. The <see
-         cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+         stores references to items that will be embedded in an e-mail message. The embedded items can be image files such as company logos. The <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
         
 
-         is used by the <see
-         cref="P:System.Web.UI.WebControls.MailDefinition.EmbeddedObjects" />
+         is used by the <see cref="P:System.Web.UI.WebControls.MailDefinition.EmbeddedObjects" />
 
         
 
-         property of the <see
-         cref="T:System.Web.UI.WebControls.MailDefinition" />
+         property of the <see cref="T:System.Web.UI.WebControls.MailDefinition" />
 
         
 
          object.</para
       >
       <para
-        >E-mail messages that allow embedded objects are configurable in the following Web controls by setting their <see
-         cref="T:System.Web.UI.WebControls.MailDefinition" />
+        >E-mail messages that allow embedded objects are configurable in the following Web controls by setting their <see cref="T:System.Web.UI.WebControls.MailDefinition" />
 
         
 
@@ -69,13 +64,11 @@
       </list>
       <block subset="none" type="note">
         <para
-          >The values in the <see
-           cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+          >The values in the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
           
 
-           and <see
-           cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+           and <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
           
 
@@ -86,8 +79,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an ordered set of <see
-         cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+        >Represents an ordered set of <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
         
 
@@ -106,8 +98,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
             
 
@@ -137,13 +128,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+            >Adds an <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
             
 
-             to the end of the <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+             to the end of the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
             
 
@@ -153,13 +142,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the index of the <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+            >Returns the index of the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
             
 
-             in the <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+             in the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
             
 
@@ -167,17 +154,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+          The <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
           
 
-           to add to the <see
-           cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+           to add to the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
           
 
@@ -205,18 +194,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.EmbeddedMailObjectsCollection.IndexOf(System.Web.UI.WebControls.EmbeddedMailObject)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.EmbeddedMailObjectsCollection.IndexOf(System.Web.UI.WebControls.EmbeddedMailObject)" />
 
             
 
-             method to identify the position of the <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+             method to identify the position of the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
             
 
-             in the <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+             in the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
             
 
@@ -226,13 +212,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+            >Determines whether the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
             
 
-             contains a specific <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+             contains a specific <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
             
 
@@ -242,13 +226,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+            >true if the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
             
 
-             contains <paramref
-             name="obj" />
+             contains <paramref name="obj" />
 
             
 
@@ -256,17 +238,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+          The <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
           
 
-           to locate in the <see
-           cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+           to locate in the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
           
 
@@ -296,8 +280,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the collection objects to a one-dimensional <see
-             cref="T:System.Array" />
+            >Copies the collection objects to a one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -305,29 +288,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           is the destination of the elements copied from the current <see
-           cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+           is the destination of the elements copied from the current <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
           
 
           . The array must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array " />
+          The zero-based index in <paramref name="array " />
 
           
 
@@ -356,13 +344,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the index of a specific <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+            >Determines the index of a specific <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
             
 
-             in the <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+             in the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
             
 
@@ -372,13 +358,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+            >The index of the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
             
 
-             if it exists in the <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+             if it exists in the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
             
 
@@ -386,17 +370,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+          An <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
           
 
-           to locate in the <see
-           cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+           to locate in the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
           
 
@@ -425,33 +411,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="index" />
+            >If <paramref name="index" />
 
             
 
-             is 0, <paramref
-             name="value " />
+             is 0, <paramref name="value " />
 
             
 
-            is added to the beginning of the <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+            is added to the beginning of the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
             
 
-            . If <paramref
-             name="index" />
+            . If <paramref name="index" />
 
             
 
-             equals the number of items in the <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+             equals the number of items in the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
             
 
-            , <paramref
-             name="value" />
+            , <paramref name="value" />
 
             
 
@@ -461,13 +441,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts an <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+            >Inserts an <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
             
 
-             into the <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+             into the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
             
 
@@ -475,29 +453,34 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value that indicates the index position at which to insert the <see
-           cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+          An integer value that indicates the index position at which to insert the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
           
 
            in the collection.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+          An <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
           
 
-           object to insert into the <see
-           cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+           object to insert into the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
           
 
@@ -567,13 +550,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.EmbeddedMailObjectsCollection.Remove(System.Web.UI.WebControls.EmbeddedMailObject)" />
+            >The <see cref="M:System.Web.UI.WebControls.EmbeddedMailObjectsCollection.Remove(System.Web.UI.WebControls.EmbeddedMailObject)" />
 
             
 
-             method uses the information contained in the <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+             method uses the information contained in the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
             
 
@@ -583,13 +564,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of the specified <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+            >Removes the first occurrence of the specified <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
             
 
-             from the <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+             from the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
             
 
@@ -597,17 +576,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+          The <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
           
 
-           to remove from the <see
-           cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+           to remove from the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
           
 

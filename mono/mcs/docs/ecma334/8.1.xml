@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <clause number="8.1" title="Getting started" informative="true">
   <paragraph
-    >The canonical "hello, world" program can be written as follows: <code_example
-    >
+    >The canonical "hello, world" program can be written as follows: <code_example>
       <![CDATA[
 using System;  
 class Hello  
@@ -15,8 +14,7 @@ class Hello
     </code_example>
   </paragraph>
   <paragraph
-    >The source code for a C# program is typically stored in one or more text files with a file extension of .cs, as in hello.cs. Using a command-line compiler, such a program can be compiled with a command line like <code_example
-    >
+    >The source code for a C# program is typically stored in one or more text files with a file extension of .cs, as in hello.cs. Using a command-line compiler, such a program can be compiled with a command line like <code_example>
       <![CDATA[
 csc hello.cs  
 ]]>
@@ -24,19 +22,19 @@ csc hello.cs
 
     
 
-    which produces an application named hello.exe. The output produced by this application when it is run is: <code_example
-    >
+    which produces an application named hello.exe. The output produced by this application when it is run is: <code_example>
       <![CDATA[
 hello, world  
 ]]>
     </code_example>
   </paragraph>
   <paragraph
-    >Close examination of this program is illuminating: <list
-    >
+    >Close examination of this program is illuminating: <list>
       <list_item
         > The using System; directive references a namespace called System that is provided by the Common Language Infrastructure (CLI) class library. This namespace contains the Console class referred to in the Main method. Namespaces provide a hierarchical means of organizing the elements of one or more programs. A <non_terminal
-         where="16.3">using-directive</non_terminal>
+          where="16.3"
+          >using-directive</non_terminal
+        >
 
         
 
@@ -48,8 +46,7 @@ hello, world
     </list>
   </paragraph>
   <paragraph
-    >For C and C++ developers, it is interesting to note a few things that do not appear in the "hello, world" program. <list
-    >
+    >For C and C++ developers, it is interesting to note a few things that do not appear in the "hello, world" program. <list>
       <list_item> The program does not use a global method for Main. Methods and variables are not supported at the global level; such elements are always contained within type declarations (e.g., class and struct declarations). </list_item>
       <list_item> The program does not use either "::" or "-&gt;" operators. The "::" is not an operator at all, and the "-&gt;" operator is used in only a small fraction of programs (which involve unsafe code). The separator "." is used in compound names such as Console.WriteLine. </list_item>
       <list_item> The program does not contain forward declarations. Forward declarations are never needed, as declaration order is not significant. </list_item>

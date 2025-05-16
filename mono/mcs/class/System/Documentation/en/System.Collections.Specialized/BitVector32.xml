@@ -26,97 +26,80 @@
 
         
 
-         is more efficient than <see
-         cref="T:System.Collections.BitArray" />
+         is more efficient than <see cref="T:System.Collections.BitArray" />
 
         
 
-         for Boolean values and small integers that are used internally. A <see
-         cref="T:System.Collections.BitArray" />
+         for Boolean values and small integers that are used internally. A <see cref="T:System.Collections.BitArray" />
 
         
 
-         can grow indefinitely as needed, but it has the memory and performance overhead that a class instance requires. In contrast, a <see
-         cref="T:System.Collections.Specialized.BitVector32" />
+         can grow indefinitely as needed, but it has the memory and performance overhead that a class instance requires. In contrast, a <see cref="T:System.Collections.Specialized.BitVector32" />
 
         
 
          uses only 32 bits.</para
       >
       <para
-        >A <see
-         cref="T:System.Collections.Specialized.BitVector32" />
+        >A <see cref="T:System.Collections.Specialized.BitVector32" />
 
         
 
-         structure can be set up to contain either sections for small integers or bit flags for Booleans, but not both. A <see
-         cref="T:System.Collections.Specialized.BitVector32.Section" />
+         structure can be set up to contain either sections for small integers or bit flags for Booleans, but not both. A <see cref="T:System.Collections.Specialized.BitVector32.Section" />
 
         
 
-         is a window into the <see
-         cref="T:System.Collections.Specialized.BitVector32" />
+         is a window into the <see cref="T:System.Collections.Specialized.BitVector32" />
 
         
 
-         and is composed of the smallest number of consecutive bits that can contain the maximum value specified in <see
-         cref="M:System.Collections.Specialized.BitVector32.CreateSection(System.Int16)" />
+         and is composed of the smallest number of consecutive bits that can contain the maximum value specified in <see cref="M:System.Collections.Specialized.BitVector32.CreateSection(System.Int16)" />
 
         
 
-        . For example, a section with a maximum value of 1 is composed of only one bit, whereas a section with a maximum value of 5 is composed of three bits. You can create a <see
-         cref="T:System.Collections.Specialized.BitVector32.Section" />
+        . For example, a section with a maximum value of 1 is composed of only one bit, whereas a section with a maximum value of 5 is composed of three bits. You can create a <see cref="T:System.Collections.Specialized.BitVector32.Section" />
 
         
 
-         with a maximum value of 1 to serve as a Boolean, thereby allowing you to store integers and Booleans in the same <see
-         cref="T:System.Collections.Specialized.BitVector32" />
+         with a maximum value of 1 to serve as a Boolean, thereby allowing you to store integers and Booleans in the same <see cref="T:System.Collections.Specialized.BitVector32" />
 
         
 
         .</para
       >
       <para
-        >Some members can be used for a <see
-         cref="T:System.Collections.Specialized.BitVector32" />
+        >Some members can be used for a <see cref="T:System.Collections.Specialized.BitVector32" />
 
         
 
-         that is set up as sections, while other members can be used for one that is set up as bit flags. For example, the <see
-         cref="P:System.Collections.Specialized.BitVector32.Item(System.Collections.Specialized.BitVector32.Section)" />
+         that is set up as sections, while other members can be used for one that is set up as bit flags. For example, the <see cref="P:System.Collections.Specialized.BitVector32.Item(System.Collections.Specialized.BitVector32.Section)" />
 
         
 
-         property is the indexer for a <see
-         cref="T:System.Collections.Specialized.BitVector32" />
+         property is the indexer for a <see cref="T:System.Collections.Specialized.BitVector32" />
 
         
 
-         that is set up as sections, and the <see
-         cref="P:System.Collections.Specialized.BitVector32.Item(System.Int32)" />
+         that is set up as sections, and the <see cref="P:System.Collections.Specialized.BitVector32.Item(System.Int32)" />
 
         
 
-         property is the indexer for a <see
-         cref="T:System.Collections.Specialized.BitVector32" />
+         property is the indexer for a <see cref="T:System.Collections.Specialized.BitVector32" />
 
         
 
-         that is set up as bit flags. <see
-         cref="M:System.Collections.Specialized.BitVector32.CreateMask" />
+         that is set up as bit flags. <see cref="M:System.Collections.Specialized.BitVector32.CreateMask" />
 
         
 
-         creates a series of masks that can be used to access individual bits in a <see
-         cref="T:System.Collections.Specialized.BitVector32" />
+         creates a series of masks that can be used to access individual bits in a <see cref="T:System.Collections.Specialized.BitVector32" />
 
         
 
          that is set up as bit flags.</para
       >
       <para
-        >Using a mask on a <see
-         cref="T:System.Collections.Specialized.BitVector32" />
+        >Using a mask on a <see cref="T:System.Collections.Specialized.BitVector32" />
 
         
 
@@ -156,13 +139,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
-             structure containing the data represented in an existing <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+             structure containing the data represented in an existing <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
@@ -170,12 +151,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.Specialized.BitVector32" />
+          A <see cref="T:System.Collections.Specialized.BitVector32" />
 
           
 
@@ -207,8 +191,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
@@ -216,12 +199,15 @@
           >
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer representing the data of the new <see
-           cref="T:System.Collections.Specialized.BitVector32" />
+          An integer representing the data of the new <see cref="T:System.Collections.Specialized.BitVector32" />
 
           
 
@@ -251,21 +237,18 @@
           <para>Use CreateMask() to create the first mask in a series and CreateMask(int) for all subsequent masks.</para>
           <para>Multiple masks can be created to refer to the same bit flag.</para>
           <para
-            >The resulting mask isolates only one bit flag in the <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            >The resulting mask isolates only one bit flag in the <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
-            . You can combine masks using the bitwise OR operation to create a mask that isolates multiple bit flags in the <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            . You can combine masks using the bitwise OR operation to create a mask that isolates multiple bit flags in the <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
             .</para
           >
           <para
-            >Using a mask on a <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            >Using a mask on a <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
@@ -276,8 +259,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates the first mask in a series of masks that can be used to retrieve individual bits in a <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            >Creates the first mask in a series of masks that can be used to retrieve individual bits in a <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
@@ -287,8 +269,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A mask that isolates the first bit flag in the <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            >A mask that isolates the first bit flag in the <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
@@ -321,21 +302,18 @@
           <para>Use CreateMask() to create the first mask in a series and CreateMask(int) for all subsequent masks.</para>
           <para>Multiple masks can be created to refer to the same bit flag.</para>
           <para
-            >The resulting mask isolates only one bit flag in the <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            >The resulting mask isolates only one bit flag in the <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
-            . You can combine masks using the bitwise OR operation to create a mask that isolates multiple bit flags in the <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            . You can combine masks using the bitwise OR operation to create a mask that isolates multiple bit flags in the <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
             .</para
           >
           <para
-            >Using a mask on a <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            >Using a mask on a <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
@@ -346,8 +324,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an additional mask following the specified mask in a series of masks that can be used to retrieve individual bits in a <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            >Creates an additional mask following the specified mask in a series of masks that can be used to retrieve individual bits in a <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
@@ -357,13 +334,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A mask that isolates the bit flag following the one that <paramref
-             name="previous" />
+            >A mask that isolates the bit flag following the one that <paramref name="previous" />
 
             
 
-             points to in <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+             points to in <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
@@ -371,7 +346,11 @@
           >
         </returns>
         <param name="previous">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -404,36 +383,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.Specialized.BitVector32.Section" />
+            >A <see cref="T:System.Collections.Specialized.BitVector32.Section" />
 
             
 
-             is a window into the <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+             is a window into the <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
-             and is composed of the smallest number of consecutive bits that can contain the maximum value specified in <see
-             cref="M:System.Collections.Specialized.BitVector32.CreateSection(System.Int16)" />
+             and is composed of the smallest number of consecutive bits that can contain the maximum value specified in <see cref="M:System.Collections.Specialized.BitVector32.CreateSection(System.Int16)" />
 
             
 
-            . For example, a section with a maximum value of 1 is composed of only one bit, whereas a section with a maximum value of 5 is composed of three bits. You can create a <see
-             cref="T:System.Collections.Specialized.BitVector32.Section" />
+            . For example, a section with a maximum value of 1 is composed of only one bit, whereas a section with a maximum value of 5 is composed of three bits. You can create a <see cref="T:System.Collections.Specialized.BitVector32.Section" />
 
             
 
-             with a maximum value of 1 to serve as a Boolean, thereby allowing you to store integers and Booleans in the same <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+             with a maximum value of 1 to serve as a Boolean, thereby allowing you to store integers and Booleans in the same <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
             .</para
           >
           <para
-            >If sections already exist in the <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            >If sections already exist in the <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
@@ -444,8 +417,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates the first <see
-             cref="T:System.Collections.Specialized.BitVector32.Section" />
+            >Creates the first <see cref="T:System.Collections.Specialized.BitVector32.Section" />
 
             
 
@@ -455,13 +427,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.Specialized.BitVector32.Section" />
+            >A <see cref="T:System.Collections.Specialized.BitVector32.Section" />
 
             
 
-             that can hold a number from zero to <paramref
-             name="maxValue" />
+             that can hold a number from zero to <paramref name="maxValue" />
 
             
 
@@ -469,12 +439,15 @@
           >
         </returns>
         <param name="maxValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A 16-bit signed integer that specifies the maximum value for the new <see
-           cref="T:System.Collections.Specialized.BitVector32.Section" />
+          A 16-bit signed integer that specifies the maximum value for the new <see cref="T:System.Collections.Specialized.BitVector32.Section" />
 
           
 
@@ -529,8 +502,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To access the value of the individual sections or bit flags, use the <see
-             cref="P:System.Collections.Specialized.BitVector32.Item(System.Int32)" />
+            >To access the value of the individual sections or bit flags, use the <see cref="P:System.Collections.Specialized.BitVector32.Item(System.Int32)" />
 
             
 
@@ -541,8 +513,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            >Gets the value of the <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
@@ -573,33 +544,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object <paramref
-             name="o" />
+            >The object <paramref name="o" />
 
             
 
-             is considered equal to the <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+             is considered equal to the <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
-             if the type of <paramref
-             name="o" />
+             if the type of <paramref name="o" />
 
             
 
-             is compatible with the <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+             is compatible with the <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
-             type and if the value of <paramref
-             name="o" />
+             type and if the value of <paramref name="o" />
 
             
 
-             is equal to the value of <see
-             cref="P:System.Collections.Specialized.BitVector32.Data" />
+             is equal to the value of <see cref="P:System.Collections.Specialized.BitVector32.Data" />
 
             
 
@@ -610,8 +575,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified object is equal to the <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            >Determines whether the specified object is equal to the <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
@@ -621,8 +585,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified object is equal to the <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            >true if the specified object is equal to the <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
@@ -630,12 +593,15 @@
           >
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to compare with the current <see
-           cref="T:System.Collections.Specialized.BitVector32" />
+          The object to compare with the current <see cref="T:System.Collections.Specialized.BitVector32" />
 
           
 
@@ -663,23 +629,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hash code of a <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            >The hash code of a <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
-             is based on the value of <see
-             cref="P:System.Collections.Specialized.BitVector32.Data" />
+             is based on the value of <see cref="P:System.Collections.Specialized.BitVector32.Data" />
 
             
 
-            . Two instances of <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            . Two instances of <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
-             with the same value for <see
-             cref="P:System.Collections.Specialized.BitVector32.Data" />
+             with the same value for <see cref="P:System.Collections.Specialized.BitVector32.Data" />
 
             
 
@@ -690,8 +652,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serves as a hash function for the <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            >Serves as a hash function for the <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
@@ -701,8 +662,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            >A hash code for the <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
@@ -781,8 +741,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.Object.ToString" />
+            >This method overrides <see cref="M:System.Object.ToString" />
 
             
 
@@ -793,8 +752,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the current <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            >Returns a string that represents the current <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
@@ -804,8 +762,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the current <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            >A string that represents the current <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
@@ -843,8 +800,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the specified <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            >Returns a string that represents the specified <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
@@ -854,8 +810,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the specified <see
-             cref="T:System.Collections.Specialized.BitVector32" />
+            >A string that represents the specified <see cref="T:System.Collections.Specialized.BitVector32" />
 
             
 
@@ -863,12 +818,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.Specialized.BitVector32" />
+          The <see cref="T:System.Collections.Specialized.BitVector32" />
 
           
 

@@ -18,23 +18,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can use the <see
-         cref="T:System.Windows.Forms.ApplicationContext" />
+        >You can use the <see cref="T:System.Windows.Forms.ApplicationContext" />
 
         
 
-         class to redefine the circumstances that cause a message loop to exit. By default, the <see
-         cref="T:System.Windows.Forms.ApplicationContext" />
+         class to redefine the circumstances that cause a message loop to exit. By default, the <see cref="T:System.Windows.Forms.ApplicationContext" />
 
         
 
-         listens to the <see
-         cref="E:System.Windows.Forms.Form.Closed" />
+         listens to the <see cref="E:System.Windows.Forms.Form.Closed" />
 
         
 
-         event on the application's main <see
-         cref="T:System.Windows.Forms.Form" />
+         event on the application's main <see cref="T:System.Windows.Forms.Form" />
 
         
 
@@ -56,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ApplicationContext" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ApplicationContext" />
 
             
 
@@ -83,13 +78,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="M:System.Windows.Forms.ApplicationContext.OnMainFormClosed(System.Object,System.EventArgs)" />
+            >If <see cref="M:System.Windows.Forms.ApplicationContext.OnMainFormClosed(System.Object,System.EventArgs)" />
 
             
 
-             is not overridden, the message loop of the thread terminates when <see
-             cref="P:System.Windows.Forms.ApplicationContext.MainForm" />
+             is not overridden, the message loop of the thread terminates when <see cref="P:System.Windows.Forms.ApplicationContext.MainForm" />
 
             
 
@@ -99,13 +92,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ApplicationContext" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ApplicationContext" />
 
             
 
-             class with the specified <see
-             cref="T:System.Windows.Forms.Form" />
+             class with the specified <see cref="T:System.Windows.Forms.Form" />
 
             
 
@@ -113,12 +104,15 @@
           >
         </summary>
         <param name="mainForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The main <see
-           cref="T:System.Windows.Forms.Form" />
+          The main <see cref="T:System.Windows.Forms.Form" />
 
           
 
@@ -141,50 +135,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.Windows.Forms.ApplicationContext.Dispose" />
+            >Call <see cref="M:System.Windows.Forms.ApplicationContext.Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.Windows.Forms.ApplicationContext" />
+             when you are finished using the <see cref="T:System.Windows.Forms.ApplicationContext" />
 
             
 
-            . The <see
-             cref="M:System.Windows.Forms.ApplicationContext.Dispose" />
+            . The <see cref="M:System.Windows.Forms.ApplicationContext.Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.Windows.Forms.ApplicationContext" />
+             method leaves the <see cref="T:System.Windows.Forms.ApplicationContext" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Windows.Forms.ApplicationContext.Dispose" />
+             in an unusable state. After calling <see cref="M:System.Windows.Forms.ApplicationContext.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Windows.Forms.ApplicationContext" />
+            , you must release all references to the <see cref="T:System.Windows.Forms.ApplicationContext" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Windows.Forms.ApplicationContext" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Windows.Forms.ApplicationContext" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -194,18 +179,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.Windows.Forms.ApplicationContext.Dispose" />
+              >Always call <see cref="M:System.Windows.Forms.ApplicationContext.Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.Windows.Forms.ApplicationContext" />
+               before you release your last reference to the <see cref="T:System.Windows.Forms.ApplicationContext" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.Windows.Forms.ApplicationContext" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Windows.Forms.ApplicationContext" />
 
               
 
@@ -216,8 +198,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.Windows.Forms.ApplicationContext" />
+            >Releases all resources used by the <see cref="T:System.Windows.Forms.ApplicationContext" />
 
             
 
@@ -243,41 +224,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected <see
-             cref="M:System.Windows.Forms.ApplicationContext.Dispose(System.Boolean)" />
+             method. Dispose() invokes the protected <see cref="M:System.Windows.Forms.ApplicationContext.Dispose(System.Boolean)" />
 
             
 
-             method with the <paramref
-             name="disposing" />
+             method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Windows.Forms.ApplicationContext" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Windows.Forms.ApplicationContext" />
 
             
 
@@ -287,8 +261,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Windows.Forms.ApplicationContext" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ApplicationContext" />
 
             
 
@@ -296,7 +269,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -319,8 +296,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method calls <see
-             cref="M:System.Windows.Forms.ApplicationContext.ExitThreadCore" />
+            >This method calls <see cref="M:System.Windows.Forms.ApplicationContext.ExitThreadCore" />
 
             
 
@@ -332,23 +308,19 @@
 
               
 
-               and <see
-               cref="M:System.Windows.Forms.ApplicationContext.ExitThreadCore" />
+               and <see cref="M:System.Windows.Forms.ApplicationContext.ExitThreadCore" />
 
               
 
-               do not actually cause the thread to terminate. These methods raise the <see
-               cref="E:System.Windows.Forms.Application.ThreadExit" />
+               do not actually cause the thread to terminate. These methods raise the <see cref="E:System.Windows.Forms.Application.ThreadExit" />
 
               
 
-               event to which the <see
-               cref="T:System.Windows.Forms.Application" />
+               event to which the <see cref="T:System.Windows.Forms.Application" />
 
               
 
-               object listens. The <see
-               cref="T:System.Windows.Forms.Application" />
+               object listens. The <see cref="T:System.Windows.Forms.Application" />
 
               
 
@@ -377,8 +349,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called from <see
-             cref="M:System.Windows.Forms.ApplicationContext.ExitThread" />
+            >This method is called from <see cref="M:System.Windows.Forms.ApplicationContext.ExitThread" />
 
             
 
@@ -390,23 +361,19 @@
 
               
 
-               and <see
-               cref="M:System.Windows.Forms.ApplicationContext.ExitThreadCore" />
+               and <see cref="M:System.Windows.Forms.ApplicationContext.ExitThreadCore" />
 
               
 
-               do not actually cause the thread to terminate. These methods raise the <see
-               cref="E:System.Windows.Forms.Application.ThreadExit" />
+               do not actually cause the thread to terminate. These methods raise the <see cref="E:System.Windows.Forms.Application.ThreadExit" />
 
               
 
-               event to which the <see
-               cref="T:System.Windows.Forms.Application" />
+               event to which the <see cref="T:System.Windows.Forms.Application" />
 
               
 
-               object listens. The <see
-               cref="T:System.Windows.Forms.Application" />
+               object listens. The <see cref="T:System.Windows.Forms.Application" />
 
               
 
@@ -435,24 +402,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.Object.Finalize" />
+            >This method overrides <see cref="M:System.Object.Finalize" />
 
             
 
              and cleans up resources by calling Dispose(false). Override Dispose(Boolean) to customize the cleanup.</para
           >
           <para
-            >Application code should not call this method; an object's Finalize method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see
-             cref="M:System.GC.SuppressFinalize(System.Object)" />
+            >Application code should not call this method; an object's Finalize method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see cref="M:System.GC.SuppressFinalize(System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="FD376774-1643-499B-869E-9546A3AEEA70"
                 >[&lt;topic://cpconFinalizeMethodscDestructors&gt;]</a
               >
@@ -460,8 +424,7 @@
 
             
 
-            , <format
-             type="text/html">
+            , <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213"
                 >[&lt;topic://cpconCleaningUpUnmanagedResources&gt;]</a
               >
@@ -469,8 +432,7 @@
 
             
 
-            , and <format
-             type="text/html">
+            , and <format type="text/html">
               <a href="8026CB68-FE93-43FC-96C1-C09AD7D64CD3"
                 >[&lt;topic://cpconOverridingFinalizeMethod&gt;]</a
               >
@@ -505,18 +467,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property determines the main <see
-             cref="T:System.Windows.Forms.Form" />
+            >This property determines the main <see cref="T:System.Windows.Forms.Form" />
 
             
 
-             for this context. This property can change at any time. If <see
-             cref="M:System.Windows.Forms.ApplicationContext.OnMainFormClosed(System.Object,System.EventArgs)" />
+             for this context. This property can change at any time. If <see cref="M:System.Windows.Forms.ApplicationContext.OnMainFormClosed(System.Object,System.EventArgs)" />
 
             
 
-             is not overridden, the message loop of the thread terminates when the <paramref
-             name="mainForm" />
+             is not overridden, the message loop of the thread terminates when the <paramref name="mainForm" />
 
             
 
@@ -526,8 +485,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Windows.Forms.Form" />
+            >Gets or sets the <see cref="T:System.Windows.Forms.Form" />
 
             
 
@@ -557,8 +515,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation of this method calls <see
-             cref="M:System.Windows.Forms.ApplicationContext.ExitThreadCore" />
+            >The default implementation of this method calls <see cref="M:System.Windows.Forms.ApplicationContext.ExitThreadCore" />
 
             
 
@@ -568,13 +525,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calls <see
-             cref="M:System.Windows.Forms.ApplicationContext.ExitThreadCore" />
+            >Calls <see cref="M:System.Windows.Forms.ApplicationContext.ExitThreadCore" />
 
             
 
-            , which raises the <see
-             cref="E:System.Windows.Forms.ApplicationContext.ThreadExit" />
+            , which raises the <see cref="E:System.Windows.Forms.ApplicationContext.ThreadExit" />
 
             
 
@@ -582,19 +537,26 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that raised the event. </param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.EventArgs" />
+          The <see cref="T:System.EventArgs" />
 
           
 
@@ -634,31 +596,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any type derived from the <see
-             cref="T:System.Object" />
+            >Any type derived from the <see cref="T:System.Object" />
 
             
 
-             class can be assigned to this property. If the <see
-             cref="P:System.Windows.Forms.ApplicationContext.Tag" />
+             class can be assigned to this property. If the <see cref="P:System.Windows.Forms.ApplicationContext.Tag" />
 
             
 
              property is set through the Windows Forms designer, only text can be assigned.</para
           >
           <para
-            >A common use for the <see
-             cref="P:System.Windows.Forms.ApplicationContext.Tag" />
+            >A common use for the <see cref="P:System.Windows.Forms.ApplicationContext.Tag" />
 
             
 
-             property is to store data that is closely associated with the control. For example, if you have a control that displays information about a customer, you might store a <see
-             cref="T:System.Data.DataSet" />
+             property is to store data that is closely associated with the control. For example, if you have a control that displays information about a customer, you might store a <see cref="T:System.Data.DataSet" />
 
             
 
-             that contains the customer's order history in that control's <see
-             cref="P:System.Windows.Forms.ApplicationContext.Tag" />
+             that contains the customer's order history in that control's <see cref="P:System.Windows.Forms.ApplicationContext.Tag" />
 
             
 
@@ -682,8 +639,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the message loop of the thread should be terminated, by calling <see
-             cref="M:System.Windows.Forms.ApplicationContext.ExitThread" />
+            >Occurs when the message loop of the thread should be terminated, by calling <see cref="M:System.Windows.Forms.ApplicationContext.ExitThread" />
 
             
 

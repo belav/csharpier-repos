@@ -15,8 +15,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The .NET Framework uses the <see
-         cref="T:System.Web.Services.Protocols.ServerType" />
+        >The .NET Framework uses the <see cref="T:System.Web.Services.Protocols.ServerType" />
 
         
 
@@ -37,8 +36,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Web.Services.Protocols.ServerType" />
+            >Creates a new <see cref="T:System.Web.Services.Protocols.ServerType" />
 
             
 
@@ -46,12 +44,15 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 

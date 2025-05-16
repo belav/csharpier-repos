@@ -33,13 +33,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >User data that is specified in a <see
-         cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+        >User data that is specified in a <see cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
 
         
 
-         call is available to the method invoked by this delegate in the <see
-         cref="P:System.ComponentModel.AsyncCompletedEventArgs.UserState" />
+         call is available to the method invoked by this delegate in the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.UserState" />
 
         
 
@@ -49,13 +47,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see
-         cref="E:System.Net.NetworkInformation.Ping.PingCompleted" />
+        >Represents the method that will handle the <see cref="E:System.Net.NetworkInformation.Ping.PingCompleted" />
 
         
 
-         event of a <see
-         cref="T:System.Net.NetworkInformation.Ping" />
+         event of a <see cref="T:System.Net.NetworkInformation.Ping" />
 
         
 

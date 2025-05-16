@@ -32,8 +32,7 @@
 As you can see, the bottom row is always [0 0 1]. The Cairo.Matrix implementation deals with the top 6 values only.
 </para>
       <example>
-        <code lang="C#"
-          >
+        <code lang="C#">
 Cairo.Graphics g;
 Matrix matrix;
 
@@ -122,10 +121,7 @@ if (cs == Cairo.Status.Success) {
       <Parameters />
       <Docs>
         <summary>Returns a clone of the matrix</summary>
-        <returns
-          >The clone matrix as a <see
-           cref="t:System.Object" />
-        </returns>
+        <returns>The clone matrix as a <see cref="t:System.Object" /></returns>
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -167,8 +163,7 @@ if (cs == Cairo.Status.Success) {
       <Docs>
         <summary>Returns a hash representing the matrix</summary>
         <returns
-          >A hash as an <see
-           cref="t:System.Int32" />
+          >A hash as an <see cref="t:System.Int32" />
 
           
 
@@ -205,8 +200,7 @@ if (cs == Cairo.Status.Success) {
           >Sets the matrix to be the affine transformation given by xx, yx, xy, yy, x0, y0. The transformation is given by:
 
 
-<list
-           type="bullet">
+<list type="bullet">
             <item>
               <term>x_new = xx * x + xy * y + x0;</term>
             </item>
@@ -314,13 +308,11 @@ if (cs == Cairo.Status.Success) {
         <summary>Changes matrix to be the inverse of its original value. Not all transformation matrices have inverses; if the matrix collapses points together (it is degenerate), then it has no inverse and this function will fail.
 </summary>
         <returns
-          >If the matrix has an inverse, modifies the matrix to be the inverse matrix and returns <see
-           cref="T:Cairo.Status " />
+          >If the matrix has an inverse, modifies the matrix to be the inverse matrix and returns <see cref="T:Cairo.Status " />
 
           
 
-          .Success. Otherwise, return <see
-           cref="T:Cairo.Status" />
+          .Success. Otherwise, return <see cref="T:Cairo.Status" />
 
           
 
@@ -523,8 +515,7 @@ if (cs == Cairo.Status.Success) {
         <summary
           >Transforms the distance vector (dx,@y) by @matrix. This is similar to cairo_matrix_transform() except that the translation components of the transformation are ignored. The calculation of the returned vector is as follows:
 
-<list
-           type="bullet">
+<list type="bullet">
             <item>
               <term>dx2 = dx1 * a + dy1 * c;</term>
             </item>

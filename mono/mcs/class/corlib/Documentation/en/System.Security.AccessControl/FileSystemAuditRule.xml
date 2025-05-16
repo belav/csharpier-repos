@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+        >The <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
         
 
@@ -34,8 +33,7 @@
       <list type="ordered">
         <item>
           <para
-            >Open the <ui
-            >Local Security Settings</ui>
+            >Open the <ui>Local Security Settings</ui>
 
             
 
@@ -47,13 +45,11 @@
         </item>
         <item>
           <para
-            >Double-click the <ui
-            >Audit object access</ui>
+            >Double-click the <ui>Audit object access</ui>
 
             
 
-             entry on the right pane of the MMC snap-in, or right-click and choose Properties to display the <ui
-            >Audit object access properties</ui>
+             entry on the right pane of the MMC snap-in, or right-click and choose Properties to display the <ui>Audit object access properties</ui>
 
             
 
@@ -62,13 +58,11 @@
         </item>
         <item>
           <para
-            >Select the <ui
-            >Success</ui>
+            >Select the <ui>Success</ui>
 
             
 
-             or <ui
-            >Failure</ui>
+             or <ui>Failure</ui>
 
             
 
@@ -78,18 +72,15 @@
       </list>
       <para>Note that an audit rule for a user account requires a corresponding access rule for the same user account.  </para>
       <para
-        >Use the <see
-         cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+        >Use the <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
         
 
-         class to create a new audit rule.  You can persist this rule using the <see
-         cref="T:System.Security.AccessControl.FileSecurity" />
+         class to create a new audit rule.  You can persist this rule using the <see cref="T:System.Security.AccessControl.FileSecurity" />
 
         
 
-         or <see
-         cref="T:System.Security.AccessControl.DirectorySecurity" />
+         or <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
         
 
@@ -126,13 +117,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create an audit rule that you can persist using the <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+            >Use this constructor to create an audit rule that you can persist using the <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
-             or <see
-             cref="T:System.Security.AccessControl.DirectorySecurity" />
+             or <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
             
 
@@ -142,8 +131,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
             
 
@@ -151,36 +139,45 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Principal.IdentityReference" />
+          An <see cref="T:System.Security.Principal.IdentityReference" />
 
           
 
            object that encapsulates a reference to a user account.</param
         >
         <param name="fileSystemRights">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.FileSystemRights" />
+          One of the <see cref="T:System.Security.AccessControl.FileSystemRights" />
 
           
 
            values that specifies the type of operation associated with the audit rule. </param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AuditFlags" />
+          One of the <see cref="T:System.Security.AccessControl.AuditFlags" />
 
           
 
@@ -212,36 +209,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create an audit rule that you can persist using the <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+            >Use this constructor to create an audit rule that you can persist using the <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
-             or <see
-             cref="T:System.Security.AccessControl.DirectorySecurity" />
+             or <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
             
 
              class.  Audit rules determine when and how actions performed on system objects, such as files and folders, are logged.</para
           >
           <para
-            >The <paramref
-             name="identity" />
+            >The <paramref name="identity" />
 
             
 
-             parameter must identify a valid account on the current computer or domain.  The string takes the following form, where <paramref
-             name="DOMAIN" />
+             parameter must identify a valid account on the current computer or domain.  The string takes the following form, where <paramref name="DOMAIN" />
 
             
 
-             is the name of a valid domain or computer name and <paramref
-             name="account" />
+             is the name of a valid domain or computer name and <paramref name="account" />
 
             
 
-             is the name of a valid user account on a domain or computer: <paramref
-             name="DOMAIN\account" />
+             is the name of a valid user account on a domain or computer: <paramref name="DOMAIN\account" />
 
             
 
@@ -251,8 +242,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
             
 
@@ -260,31 +250,41 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of a user account.</param
         >
         <param name="fileSystemRights">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.FileSystemRights" />
+          One of the <see cref="T:System.Security.AccessControl.FileSystemRights" />
 
           
 
            values that specifies the type of operation associated with the audit rule. </param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AuditFlags" />
+          One of the <see cref="T:System.Security.AccessControl.AuditFlags" />
 
           
 
@@ -318,13 +318,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create an audit rule that you can persist using the <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+            >Use this constructor to create an audit rule that you can persist using the <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
-             or <see
-             cref="T:System.Security.AccessControl.DirectorySecurity" />
+             or <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
             
 
@@ -334,8 +332,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
             
 
@@ -343,60 +340,75 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Principal.IdentityReference" />
+          An <see cref="T:System.Security.Principal.IdentityReference" />
 
           
 
            object that encapsulates a reference to a user account.</param
         >
         <param name="fileSystemRights">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.FileSystemRights" />
+          One of the <see cref="T:System.Security.AccessControl.FileSystemRights" />
 
           
 
            values that specifies the type of operation associated with the audit rule.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.InheritanceFlags" />
+          One of the <see cref="T:System.Security.AccessControl.InheritanceFlags" />
 
           
 
            values that specifies how access masks are propagated to child objects.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.PropagationFlags" />
+          One of the <see cref="T:System.Security.AccessControl.PropagationFlags" />
 
           
 
            values that specifies how Access Control Entries (ACEs) are propagated to child objects.</param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AuditFlags" />
+          One of the <see cref="T:System.Security.AccessControl.AuditFlags" />
 
           
 
@@ -430,36 +442,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create an audit rule that you can persist using the <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+            >Use this constructor to create an audit rule that you can persist using the <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
-             or <see
-             cref="T:System.Security.AccessControl.DirectorySecurity" />
+             or <see cref="T:System.Security.AccessControl.DirectorySecurity" />
 
             
 
              class.  Audit rules determine when and how actions performed on system objects, such as files and folders, are logged.</para
           >
           <para
-            >The <paramref
-             name="identity" />
+            >The <paramref name="identity" />
 
             
 
-             parameter must identify a valid account on the current computer or domain.  The string takes the following form, where <paramref
-             name="DOMAIN" />
+             parameter must identify a valid account on the current computer or domain.  The string takes the following form, where <paramref name="DOMAIN" />
 
             
 
-             is the name of a valid domain or computer name and <paramref
-             name="account" />
+             is the name of a valid domain or computer name and <paramref name="account" />
 
             
 
-             is the name of a valid user account on a domain or computer: <paramref
-             name="DOMAIN\account" />
+             is the name of a valid user account on a domain or computer: <paramref name="DOMAIN\account" />
 
             
 
@@ -469,8 +475,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
             
 
@@ -478,55 +483,71 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of a user account.</param
         >
         <param name="fileSystemRights">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.FileSystemRights" />
+          One of the <see cref="T:System.Security.AccessControl.FileSystemRights" />
 
           
 
            values that specifies the type of operation associated with the audit rule.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.InheritanceFlags" />
+          One of the <see cref="T:System.Security.AccessControl.InheritanceFlags" />
 
           
 
            values that specifies how access masks are propagated to child objects.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.PropagationFlags" />
+          One of the <see cref="T:System.Security.AccessControl.PropagationFlags" />
 
           
 
            values that specifies how Access Control Entries (ACEs) are propagated to child objects.</param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AuditFlags" />
+          One of the <see cref="T:System.Security.AccessControl.AuditFlags" />
 
           
 
@@ -558,13 +579,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Security.AccessControl.FileSystemRights" />
+            >Gets the <see cref="T:System.Security.AccessControl.FileSystemRights" />
 
             
 
-             flags associated with the current <see
-             cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+             flags associated with the current <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
             
 

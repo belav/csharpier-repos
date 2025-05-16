@@ -25,8 +25,7 @@
     <remarks>
       <para
         >This type is obsolete.  Please use 
-    <see
-         cref="T:Mono.Unix.Native.SignalHandler" />
+    <see cref="T:Mono.Unix.Native.SignalHandler" />
 
         
 

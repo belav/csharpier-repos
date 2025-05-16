@@ -22,15 +22,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class indicates which set of security rules the common language runtime should enforce for an assembly. For example, an assembly that is marked with [SecurityRules(SecurityRuleSet.Level1)] uses the .NET Framework version 2.0 transparency rules, where public security-critical types and members are treated as security-safe-critical outside the assembly. This requires security-critical types and members to perform a link demand for full trust to enforce security-critical behavior when they are accessed by external callers. Typically, level 1 rules should be used only for compatibility, such as for version 2.0 assemblies. For more information about level 1 behavior, see <format
-         type="text/html">
+        >This class indicates which set of security rules the common language runtime should enforce for an assembly. For example, an assembly that is marked with [SecurityRules(SecurityRuleSet.Level1)] uses the .NET Framework version 2.0 transparency rules, where public security-critical types and members are treated as security-safe-critical outside the assembly. This requires security-critical types and members to perform a link demand for full trust to enforce security-critical behavior when they are accessed by external callers. Typically, level 1 rules should be used only for compatibility, such as for version 2.0 assemblies. For more information about level 1 behavior, see <format type="text/html">
           <a href="5fd8f46d-3961-46a7-84af-2eb1f48e75cf">Security-Transparent Code, Level 1</a>
         </format>
 
         
 
-        . For information about level 2 behavior, see <format
-         type="text/html">
+        . For information about level 2 behavior, see <format type="text/html">
           <a href="4d05610a-0da6-4f08-acea-d54c9d6143c0">Security-Transparent Code, Level 2</a>
         </format>
 
@@ -65,40 +63,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you specify the <paramref
-             name="ruleSet" />
+            >When you specify the <paramref name="ruleSet" />
 
             
 
-             parameter, use <see
-             cref="F:System.Security.SecurityRuleSet.Level1" />
+             parameter, use <see cref="F:System.Security.SecurityRuleSet.Level1" />
 
             
 
-             for .NET Framework version 2.0 rules or <see
-             cref="F:System.Security.SecurityRuleSet.Level2" />
+             for .NET Framework version 2.0 rules or <see cref="F:System.Security.SecurityRuleSet.Level2" />
 
             
 
-             for net_v40_short rules. For more information about <see
-             cref="F:System.Security.SecurityRuleSet.Level1" />
+             for net_v40_short rules. For more information about <see cref="F:System.Security.SecurityRuleSet.Level1" />
 
             
 
-             behavior, see <format
-             type="text/html">
+             behavior, see <format type="text/html">
               <a href="5fd8f46d-3961-46a7-84af-2eb1f48e75cf">Security-Transparent Code, Level 1</a>
             </format>
 
             
 
-            . For information about <see
-             cref="F:System.Security.SecurityRuleSet.Level2" />
+            . For information about <see cref="F:System.Security.SecurityRuleSet.Level2" />
 
             
 
-             behavior, see <format
-             type="text/html">
+             behavior, see <format type="text/html">
               <a href="4d05610a-0da6-4f08-acea-d54c9d6143c0">Security-Transparent Code, Level 2</a>
             </format>
 
@@ -110,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.SecurityRulesAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Security.SecurityRulesAttribute" />
 
             
 
@@ -119,7 +109,11 @@
           >
         </summary>
         <param name="ruleSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -174,8 +168,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property should be used only for optimization, because security guarantees made for transparent code cannot be enforced if the code is unverifiable.</para>
           <para
-            >If you use this property to skip MSIL verification for an assembly, use the transparent option in the <format
-             type="text/html">
+            >If you use this property to skip MSIL verification for an assembly, use the transparent option in the <format type="text/html">
               <a href="f4f46f9e-8d08-4e66-a94b-0c69c9b0bbfa">PEVerify tool</a>
             </format>
 

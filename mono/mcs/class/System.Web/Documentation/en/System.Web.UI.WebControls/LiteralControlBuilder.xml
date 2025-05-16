@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used primarily for control developers. To create a custom control builder for a <see
-         cref="T:System.Web.UI.WebControls.Literal" />
+        >This class is used primarily for control developers. To create a custom control builder for a <see cref="T:System.Web.UI.WebControls.Literal" />
 
         
 
@@ -31,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Interacts with the parser to build a <see
-         cref="T:System.Web.UI.WebControls.Literal" />
+        >Interacts with the parser to build a <see cref="T:System.Web.UI.WebControls.Literal" />
 
         
 
@@ -51,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.LiteralControlBuilder" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.LiteralControlBuilder" />
 
             
 
@@ -76,23 +73,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.LiteralControlBuilder.AllowWhitespaceLiterals" />
+            >The <see cref="M:System.Web.UI.WebControls.LiteralControlBuilder.AllowWhitespaceLiterals" />
 
             
 
-             method overrides the inherited implementation of the <see
-             cref="M:System.Web.UI.ControlBuilder.AllowWhitespaceLiterals" />
+             method overrides the inherited implementation of the <see cref="M:System.Web.UI.ControlBuilder.AllowWhitespaceLiterals" />
 
             
 
-             method to always indicate that white spaces in the text that are associated with the <see
-             cref="T:System.Web.UI.WebControls.Literal" />
+             method to always indicate that white spaces in the text that are associated with the <see cref="T:System.Web.UI.WebControls.Literal" />
 
             
 
-             control are not represented by <see
-             cref="T:System.Web.UI.WebControls.Literal" />
+             control are not represented by <see cref="T:System.Web.UI.WebControls.Literal" />
 
             
 
@@ -102,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the control builder should process the white space literals that are represented by the <see
-             cref="T:System.Web.UI.WebControls.Literal" />
+            >Determines whether the control builder should process the white space literals that are represented by the <see cref="T:System.Web.UI.WebControls.Literal" />
 
             
 
@@ -136,38 +128,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In the <see
-             cref="T:System.Web.UI.ControlBuilder" />
+            >In the <see cref="T:System.Web.UI.ControlBuilder" />
 
             
 
-             base class, this method adds the builders of all child controls associated with the <see
-             cref="T:System.Web.UI.WebControls.Literal" />
+             base class, this method adds the builders of all child controls associated with the <see cref="T:System.Web.UI.WebControls.Literal" />
 
             
 
-             control to the specified <see
-             cref="T:System.Web.UI.ControlBuilder" />
+             control to the specified <see cref="T:System.Web.UI.ControlBuilder" />
 
             
 
-             object. This method is inherited from the <see
-             cref="T:System.Web.UI.ControlBuilder" />
+             object. This method is inherited from the <see cref="T:System.Web.UI.ControlBuilder" />
 
             
 
-             class and is not applicable to the <see
-             cref="T:System.Web.UI.WebControls.LiteralControlBuilder" />
+             class and is not applicable to the <see cref="T:System.Web.UI.WebControls.LiteralControlBuilder" />
 
             
 
-            . In the overridden implementation in <see
-             cref="T:System.Web.UI.WebControls.LiteralControlBuilder" />
+            . In the overridden implementation in <see cref="T:System.Web.UI.WebControls.LiteralControlBuilder" />
 
             
 
-            , the method always throws <see
-             cref="T:System.Web.HttpException" />
+            , the method always throws <see cref="T:System.Web.HttpException" />
 
             
 
@@ -177,13 +162,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Throws <see
-             cref="T:System.Web.HttpException" />
+            >Throws <see cref="T:System.Web.HttpException" />
 
             
 
-            , because adding child control builders does not apply to the <see
-             cref="T:System.Web.UI.WebControls.Literal" />
+            , because adding child control builders does not apply to the <see cref="T:System.Web.UI.WebControls.Literal" />
 
             
 
@@ -191,12 +174,15 @@
           >
         </summary>
         <param name="subBuilder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.ControlBuilder" />
+          The <see cref="T:System.Web.UI.ControlBuilder" />
 
           
 

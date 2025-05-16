@@ -29,10 +29,7 @@
         <Parameter Name="handle" Type="System.IntPtr" />
       </Parameters>
       <Docs>
-        <param name="handle"
-          >The handle as an <see
-           cref="t:System.IntPtr" />
-        </param>
+        <param name="handle">The handle as an <see cref="t:System.IntPtr" /></param>
         <summary>The FontFace constructor</summary>
         <remarks></remarks>
       </Docs>
@@ -84,17 +81,13 @@
       </ReturnValue>
       <Docs>
         <summary
-          >The <see
-           cref="T:Cairo.FontType" />
+          >The <see cref="T:Cairo.FontType" />
 
           
 
            of the FontFace</summary
         >
-        <value
-          >The <see
-           cref="T:Cairo.FontType" />
-        </value>
+        <value>The <see cref="T:Cairo.FontType" /></value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -110,10 +103,7 @@
       </ReturnValue>
       <Docs>
         <summary>The handle of the FontFace</summary>
-        <value
-          >The handle as <see
-           cref="T:System.IntPtr" />
-        </value>
+        <value>The handle as <see cref="T:System.IntPtr" /></value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -128,14 +118,8 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >Returns the current reference count of <see
-           cref="T:Cairo.FontFace" />
-        </summary>
-        <value
-          >The current reference count as <see
-           cref="T:System.UInt32" />
-        </value>
+        <summary>Returns the current reference count of <see cref="T:Cairo.FontFace" /></summary>
+        <value>The current reference count as <see cref="T:System.UInt32" /></value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -152,8 +136,7 @@
       <Docs>
         <summary>Checks whether an error has previously occurred for this FontFace</summary>
         <value
-          >A <see
-           cref="T:Cairo.Status" />
+          >A <see cref="T:Cairo.Status" />
 
           
 
@@ -175,8 +158,7 @@
       <Parameters />
       <Docs>
         <summary
-          >Calls <see
-           cref="P:Cairo.FontFace.Dispose" />
+          >Calls <see cref="P:Cairo.FontFace.Dispose" />
 
           
 

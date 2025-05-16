@@ -70,16 +70,13 @@
       <Parameters />
       <Docs>
         <summary>Create a new session.</summary>
-        <returns
-          >
-          A <see
-           cref="T:System.Int32" />
+        <returns>
+          A <see cref="T:System.Int32" />
 
           
 
            containing the return value of the 
-          <see
-           cref="M:Mono.Unix.Native.Syscall.setsid" />
+          <see cref="M:Mono.Unix.Native.Syscall.setsid" />
 
           
 
@@ -98,13 +95,11 @@
           </para>
         </remarks>
         <exception cref="System.InvalidOperationException">
-          <para
-            >
+          <para>
             The calling process is already a process group leader, or the 
             process group ID of a process other than the calling process 
             matches the process ID of the calling process.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EPERM" />
+            [<see cref="F:Mono.Unix.Native.Errno.EPERM" />
 
             
 
@@ -129,10 +124,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets or sets the current directory of the process.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.String" />
+        <value>
+          A <see cref="T:System.String" />
 
           
 
@@ -142,8 +135,7 @@
         >
         <remarks>
           <para
-            >The <paramref
-             name="value" />
+            >The <paramref name="value" />
 
             
 
@@ -151,11 +143,14 @@
           relative or absolute path information. Relative path information is 
           interpreted as relative to the current working directory. 
           <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >To obtain the current working 
           directory, see 
           <see
-               cref="M:Mono.Unix.UnixDirectoryInfo.GetCurrentDirectory" qualify="true" />
+                cref="M:Mono.Unix.UnixDirectoryInfo.GetCurrentDirectory"
+                qualify="true"
+              />
 
               
 
@@ -164,23 +159,19 @@
             >
           </para>
         </remarks>
-        <exception cref="T:System.UnauthorizedAccessException"
-          >
+        <exception cref="T:System.UnauthorizedAccessException">
           Permission to read or search a component of the current working
           directory was denied.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.EACCESS" />
+          [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
           
 
           ]
         </exception
         >
-        <exception cref="T:System.IO.FileNotFoundException"
-          >
+        <exception cref="T:System.IO.FileNotFoundException">
           The current working directory has been unlinked.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -211,10 +202,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets information about the effective group of the process.</summary>
-        <value
-          >
-          A <see
-           cref="T:Mono.Unix.UnixGroupInfo" />
+        <value>
+          A <see cref="T:Mono.Unix.UnixGroupInfo" />
 
           
 
@@ -223,18 +212,15 @@
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             The 
-            <see
-             cref="P:Mono.Unix.UnixEnvironment.EffectiveGroup" />
+            <see cref="P:Mono.Unix.UnixEnvironment.EffectiveGroup" />
 
             
 
             
             gives the process additional permissions during the execution of 
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
 
             
 
@@ -263,10 +249,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the effective group ID of the process.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.Int64" />
+        <value>
+          A <see cref="T:System.Int64" />
 
           
 
@@ -275,18 +259,15 @@
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             The 
-            <see
-             cref="P:Mono.Unix.UnixEnvironment.EffectiveGroupId" />
+            <see cref="P:Mono.Unix.UnixEnvironment.EffectiveGroupId" />
 
             
 
             
             gives the process additional permissions during the execution of 
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
 
             
 
@@ -321,10 +302,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets information about the effective user of the process.</summary>
-        <value
-          >
-          A <see
-           cref="T:Mono.Unix.UnixUserInfo" />
+        <value>
+          A <see cref="T:Mono.Unix.UnixUserInfo" />
 
           
 
@@ -333,18 +312,15 @@
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             The 
-            <see
-             cref="P:Mono.Unix.UnixEnvironment.EffectiveUser" />
+            <see cref="P:Mono.Unix.UnixEnvironment.EffectiveUser" />
 
             
 
              gives
             the process additional permissions during execution of 
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
 
             
 
@@ -373,10 +349,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the effective user ID of the process.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.Int64" />
+        <value>
+          A <see cref="T:System.Int64" />
 
           
 
@@ -385,18 +359,15 @@
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             The 
-            <see
-             cref="P:Mono.Unix.UnixEnvironment.EffectiveUserId" />
+            <see cref="P:Mono.Unix.UnixEnvironment.EffectiveUserId" />
 
             
 
              gives
             the process additional permissions during execution of 
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
 
             
 
@@ -438,10 +409,8 @@
         <Parameter Name="name" Type="Mono.Unix.Native.ConfstrName" />
       </Parameters>
       <Docs>
-        <param name="name"
-          >
-          A <see
-           cref="T:Mono.Unix.Native.ConfstrName" />
+        <param name="name">
+          A <see cref="T:Mono.Unix.Native.ConfstrName" />
 
           
 
@@ -449,27 +418,22 @@
           configuration value to retrieve.
         </param
         >
-        <summary
-          >
+        <summary>
           Retrieve the value of the configuration value 
-          <paramref
-           name="name" />
+          <paramref name="name" />
 
           
 
           .
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.String" />
+        <returns>
+          A <see cref="T:System.String" />
 
           
 
            containing the value of the
-          configuration variable <paramref
-           name="name" />
+          configuration variable <paramref name="name" />
 
           
 
@@ -478,18 +442,15 @@
         >
         <remarks></remarks>
         <exception cref="System.ArgumentException">
-          <para
-            >
+          <para>
             The value of the
-            <paramref
-             name="name" />
+            <paramref name="name" />
 
             
 
             
             argument is invalid.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EINVAL" />
+            [<see cref="F:Mono.Unix.Native.Errno.EINVAL" />
 
             
 
@@ -527,10 +488,8 @@
         <Parameter Name="name" Type="Mono.Unix.Native.SysconfName" />
       </Parameters>
       <Docs>
-        <param name="name"
-          >
-          A <see
-           cref="T:Mono.Unix.Native.SysconfName" />
+        <param name="name">
+          A <see cref="T:Mono.Unix.Native.SysconfName" />
 
           
 
@@ -538,27 +497,22 @@
           configurable system limit or option variable to lookup.
         </param
         >
-        <summary
-          >
+        <summary>
           Retrieve the value of the configurable system limit or 
-          option value <paramref
-           name="name" />
+          option value <paramref name="name" />
 
           
 
           .
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.Int64" />
+        <returns>
+          A <see cref="T:System.Int64" />
 
           
 
            containing the value of the 
-          configurable system limit or option value <paramref
-           name="name" />
+          configurable system limit or option value <paramref name="name" />
 
           
 
@@ -566,12 +520,10 @@
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             This method provides a way for applications to determine the 
             current value of a configurable system limit or option variable.  
-            The <paramref
-             name="name" />
+            The <paramref name="name" />
 
             
 
@@ -581,18 +533,15 @@
           >
         </remarks>
         <exception cref="System.ArgumentException">
-          <para
-            >
+          <para>
             The value of the
-            <paramref
-             name="name" />
+            <paramref name="name" />
 
             
 
             
             argument is invalid.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EINVAL" />
+            [<see cref="F:Mono.Unix.Native.Errno.EINVAL" />
 
             
 
@@ -624,10 +573,8 @@
       <Parameters />
       <Docs>
         <summary>Gets information about the parent process.</summary>
-        <returns
-          >
-          A <see
-           cref="T:Mono.Unix.UnixProcess" />
+        <returns>
+          A <see cref="T:Mono.Unix.UnixProcess" />
 
           
 
@@ -656,10 +603,8 @@
       <Parameters />
       <Docs>
         <summary>Gets the process ID of the parent process.</summary>
-        <returns
-          >
-          A <see
-           cref="T:System.Int32" />
+        <returns>
+          A <see cref="T:System.Int32" />
 
           
 
@@ -689,10 +634,8 @@
       <Parameters />
       <Docs>
         <summary>Gets the process group ID of the current process.</summary>
-        <returns
-          >
-          A <see
-           cref="T:System.Int32" />
+        <returns>
+          A <see cref="T:System.Int32" />
 
           
 
@@ -708,23 +651,19 @@
             may read, while others will block with a signal if they attempt 
             to read.
           </para>
-          <para
-            >
-            This system call is thus used by programs such as <c
-            >csh</c>
+          <para>
+            This system call is thus used by programs such as <c>csh</c>
 
             
 
             (1) 
             to create process groups in implementing job control.  The 
-            <see
-             cref="M:Mono.Unix.Native.Syscall.tcgetpgrp" />
+            <see cref="M:Mono.Unix.Native.Syscall.tcgetpgrp" />
 
             
 
             () and 
-            <see
-             cref="M:Mono.Unix.Native.Syscall.tcsetpgrp" />
+            <see cref="M:Mono.Unix.Native.Syscall.tcsetpgrp" />
 
             
 
@@ -754,10 +693,8 @@
       <Parameters />
       <Docs>
         <summary>Gets the current group access list.</summary>
-        <returns
-          >
-          A <see
-           cref="T:System.Int64" />
+        <returns>
+          A <see cref="T:System.Int64" />
 
           
 
@@ -766,34 +703,29 @@
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             The group access list is a list of groups which the current
             process belongs to.  These groups are used for file access checks
             when the 
-            <see
-             cref="P:Mono.Unix.UnixEnvironment.RealUser" />
+            <see cref="P:Mono.Unix.UnixEnvironment.RealUser" />
 
             
 
              is not the
             file's
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.OwnerUser" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.OwnerUser" />
 
             
 
             ; each of
             the supplementary groups is checked against
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroup" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroup" />
 
             
 
              to see if
             group access applies, before using the  "other"
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
 
             
 
@@ -825,10 +757,8 @@
       <Parameters />
       <Docs>
         <summary>Gets the current group access list.</summary>
-        <returns
-          >
-          A <see
-           cref="T:Mono.Unix.UnixGroupInfo" />
+        <returns>
+          A <see cref="T:Mono.Unix.UnixGroupInfo" />
 
           
 
@@ -837,34 +767,29 @@
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             The group access list is a list of groups which the current
             process belongs to.  These groups are used for file access checks
             when the 
-            <see
-             cref="P:Mono.Unix.UnixEnvironment.RealUser" />
+            <see cref="P:Mono.Unix.UnixEnvironment.RealUser" />
 
             
 
              is not the
             file's
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.OwnerUser" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.OwnerUser" />
 
             
 
             ; each of
             the supplementary groups is checked against
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroup" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroup" />
 
             
 
              to see if
             group access applies, before using the  "other"
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
 
             
 
@@ -893,10 +818,8 @@
       <Parameters />
       <Docs>
         <summary>Gets all user shells.</summary>
-        <returns
-          >
-          A <see
-           cref="T:System.String" />
+        <returns>
+          A <see cref="T:System.String" />
 
           
 
@@ -905,29 +828,24 @@
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             A user shell is defined by the system manager in the shells
-            database as described in <c
-            >shells</c>
+            database as described in <c>shells</c>
 
             
 
             (5) (frequently the file
-            <c
-            >/etc/shells</c>
+            <c>/etc/shells</c>
 
             
 
             ).  If the shells database is not available,
-            then this returns an array containing the elements <c
-            >/bin/sh</c>
+            then this returns an array containing the elements <c>/bin/sh</c>
 
             
 
             
-            and <c
-            >/bin/csh</c>
+            and <c>/bin/csh</c>
 
             
 
@@ -954,10 +872,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the login name.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.String" />
+        <value>
+          A <see cref="T:System.String" />
 
           
 
@@ -966,11 +882,9 @@
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             This is identical to 
-            <see
-             cref="P:Mono.Unix.UnixEnvironment.UserName" />
+            <see cref="P:Mono.Unix.UnixEnvironment.UserName" />
 
             
 
@@ -995,10 +909,8 @@
       <Docs>
         <summary>Gets or sets the machine name of the machine the process is
           running on.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.String" />
+        <value>
+          A <see cref="T:System.String" />
 
           
 
@@ -1011,11 +923,9 @@
           </para>
         </remarks>
         <exception cref="System.InvalidOperationException">
-          <para
-            >
+          <para>
             The caller tried to set the host name and was not the super-user.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EPERM" />
+            [<see cref="F:Mono.Unix.Native.Errno.EPERM" />
 
             
 
@@ -1044,10 +954,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets information about the real group of the process.</summary>
-        <value
-          >
-          A <see
-           cref="T:Mono.Unix.UnixGroupInfo" />
+        <value>
+          A <see cref="T:Mono.Unix.UnixGroupInfo" />
 
           
 
@@ -1080,10 +988,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the real group ID of the process.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.Int64" />
+        <value>
+          A <see cref="T:System.Int64" />
 
           
 
@@ -1119,10 +1025,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets information about the real user of the process.</summary>
-        <value
-          >
-          A <see
-           cref="T:Mono.Unix.UnixUserInfo" />
+        <value>
+          A <see cref="T:Mono.Unix.UnixUserInfo" />
 
           
 
@@ -1155,10 +1059,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the real user ID of the process.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.Int64" />
+        <value>
+          A <see cref="T:System.Int64" />
 
           
 
@@ -1196,16 +1098,13 @@
         <Parameter Name="inc" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="inc"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="inc">
+          A <see cref="T:System.Int32" />
 
           
 
            containing the value to add to the
-          current process' <i
-          >nice value</i>
+          current process' <i>nice value</i>
 
           
 
@@ -1213,25 +1112,21 @@
         </param
         >
         <summary
-          >Subtraces <paramref
-           name="inc" />
+          >Subtraces <paramref name="inc" />
 
           
 
            from the process' priority.</summary
         >
         <remarks>
-          <para
-            >
-            The process' <i
-            >nice value</i>
+          <para>
+            The process' <i>nice value</i>
 
             
 
              is a value subtraced from the 
             process' priority.  The higher the value of 
-            <paramref
-             name="inc" />
+            <paramref name="inc" />
 
             
 
@@ -1246,8 +1141,7 @@
 
            is negative but the caller is not the
           super-user.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.EPERM" />
+          [<see cref="F:Mono.Unix.Native.Errno.EPERM" />
 
           
 
@@ -1283,11 +1177,9 @@
           </para>
         </remarks>
         <exception cref="System.InvalidOperationException">
-          <para
-            >
+          <para>
             The target process is a session leader.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EPERM" />
+            [<see cref="F:Mono.Unix.Native.Errno.EPERM" />
 
             
 
@@ -1296,12 +1188,10 @@
           >
         </exception>
         <exception cref="Mono.Unix.UnixIOException">
-          <para
-            >
+          <para>
             The target process is not the calling process or
             a child of the calling process.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ESRCH" />
+            [<see cref="F:Mono.Unix.Native.Errno.ESRCH" />
 
             
 
@@ -1309,19 +1199,16 @@
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The requested process is a child of the calling process,
             but it has performed an
-            <see
-             cref="F:Mono.Unix.Native.Syscall.exec" />
+            <see cref="F:Mono.Unix.Native.Syscall.exec" />
 
             
 
             (3)
             operation.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCES" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCES" />
 
             
 
@@ -1355,10 +1242,8 @@
         <Parameter Name="list" Type="System.Int64[]" />
       </Parameters>
       <Docs>
-        <param name="list"
-          >
-          A <see
-           cref="T:System.Int64" />
+        <param name="list">
+          A <see cref="T:System.Int64" />
 
           
 
@@ -1373,34 +1258,29 @@
           <para>
             Only the super-user may set new groups.
           </para>
-          <para
-            >
+          <para>
             The group access list is a list of groups which the current
             process belongs to.  These groups are used for file access checks
             when the 
-            <see
-             cref="P:Mono.Unix.UnixEnvironment.RealUser" />
+            <see cref="P:Mono.Unix.UnixEnvironment.RealUser" />
 
             
 
              is not the
             file's
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.OwnerUser" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.OwnerUser" />
 
             
 
             ; each of
             the supplementary groups is checked against
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroup" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroup" />
 
             
 
              to see if
             group access applies, before using the  "other"
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
 
             
 
@@ -1409,11 +1289,9 @@
           >
         </remarks>
         <exception cref="System.InvalidOperationException">
-          <para
-            >
+          <para>
             The caller is not the super-user.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EPERM" />
+            [<see cref="F:Mono.Unix.Native.Errno.EPERM" />
 
             
 
@@ -1446,10 +1324,8 @@
         <Parameter Name="groups" Type="Mono.Unix.UnixGroupInfo[]" />
       </Parameters>
       <Docs>
-        <param name="groups"
-          >
-          A <see
-           cref="T:Mono.Unix.UnixGroupInfo" />
+        <param name="groups">
+          A <see cref="T:Mono.Unix.UnixGroupInfo" />
 
           
 
@@ -1464,34 +1340,29 @@
           <para>
             Only the super-user may set new groups.
           </para>
-          <para
-            >
+          <para>
             The group access list is a list of groups which the current
             process belongs to.  These groups are used for file access checks
             when the 
-            <see
-             cref="P:Mono.Unix.UnixEnvironment.RealUser" />
+            <see cref="P:Mono.Unix.UnixEnvironment.RealUser" />
 
             
 
              is not the
             file's
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.OwnerUser" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.OwnerUser" />
 
             
 
             ; each of
             the supplementary groups is checked against
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroup" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroup" />
 
             
 
              to see if
             group access applies, before using the  "other"
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
 
             
 
@@ -1500,11 +1371,9 @@
           >
         </remarks>
         <exception cref="System.InvalidOperationException">
-          <para
-            >
+          <para>
             The caller is not the super-user.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EPERM" />
+            [<see cref="F:Mono.Unix.Native.Errno.EPERM" />
 
             
 
@@ -1529,10 +1398,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the user name of the user executing the process.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.String" />
+        <value>
+          A <see cref="T:System.String" />
 
           
 
@@ -1541,26 +1408,21 @@
         </value
         >
         <remarks>
-          <para
-            >
-            This is the username of the <i
-            >real</i>
+          <para>
+            This is the username of the <i>real</i>
 
             
 
              user id.
           </para
           >
-          <para
-            >
+          <para>
             This is equivalent to calling
-            <see
-             cref="P:Mono.Unix.UnixEnvironment.RealUser" />
+            <see cref="P:Mono.Unix.UnixEnvironment.RealUser" />
 
             
 
-            .<see
-             cref="P:Mono.Unix.UnixUserInfo.UserName" />
+            .<see cref="P:Mono.Unix.UnixUserInfo.UserName" />
 
             
 

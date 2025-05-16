@@ -14,13 +14,11 @@
   <Interfaces />
   <Docs>
     <summary>To be added.</summary>
-    <remarks>
-      <c>T:Mono.DocTest.Widget.NestedClass</c>
+    <remarks><c>T:Mono.DocTest.Widget.NestedClass</c>
 
       
 
-      .</remarks
-    >
+      .</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -56,14 +54,11 @@
         <Parameter Name="i" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="i"
-          >Some <see
-           cref="T:System.Int32" />
+        <param name="i">Some <see cref="T:System.Int32" />
 
           
 
-          .</param
-        >
+          .</param>
         <summary>To be added.</summary>
         <remarks>
           <c>M:Mono.DocTest.Widget.NestedClass.M(System.Int32)</c>

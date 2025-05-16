@@ -23,40 +23,33 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Reflection.IReflect" />
+        >The <see cref="T:System.Reflection.IReflect" />
 
         
 
-         interface is used to interoperate with the <format
-         type="text/html">
+         interface is used to interoperate with the <format type="text/html">
           <a href="ebbff4bc-36b2-4861-9efa-ffa45e013eb5">IDispatch interface</a>
         </format>
 
         
 
-        . <see
-         cref="T:System.Reflection.IReflect" />
+        . <see cref="T:System.Reflection.IReflect" />
 
         
 
-         defines a subset of the <see
-         cref="T:System.Type" />
+         defines a subset of the <see cref="T:System.Type" />
 
         
 
-         reflection methods. Implementing this interface enables a type to customize its behavior when the object is being accessed from COM as an IDispatch object. The <see
-         cref="T:System.Runtime.InteropServices.CustomMarshalers.ExpandoToDispatchExMarshaler" />
+         reflection methods. Implementing this interface enables a type to customize its behavior when the object is being accessed from COM as an IDispatch object. The <see cref="T:System.Runtime.InteropServices.CustomMarshalers.ExpandoToDispatchExMarshaler" />
 
         
 
-         class can be used to marshal an object that implements <see
-         cref="T:System.Reflection.IReflect" />
+         class can be used to marshal an object that implements <see cref="T:System.Reflection.IReflect" />
 
         
 
-         or <see
-         cref="T:System.Runtime.InteropServices.Expando.IExpando" />
+         or <see cref="T:System.Runtime.InteropServices.Expando.IExpando" />
 
         
 
@@ -66,8 +59,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Interoperates with the <format
-         type="text/html">
+        >Interoperates with the <format type="text/html">
           <a href="ebbff4bc-36b2-4861-9efa-ffa45e013eb5">IDispatch interface</a>
         </format>
 
@@ -105,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Reflection.FieldInfo" />
+            >Returns the <see cref="T:System.Reflection.FieldInfo" />
 
             
 
@@ -116,13 +107,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.FieldInfo" />
+            >A <see cref="T:System.Reflection.FieldInfo" />
 
             
 
-             object containing the field information for the named object that meets the search constraints specified in <paramref
-             name="bindingAttr" />
+             object containing the field information for the named object that meets the search constraints specified in <paramref name="bindingAttr" />
 
             
 
@@ -130,14 +119,22 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the field to find. </param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -170,13 +167,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The match is based upon a name. Each field must have a unique name. The <see
-             cref="F:System.Reflection.BindingFlags.NonPublic" />
+            >The match is based upon a name. Each field must have a unique name. The <see cref="F:System.Reflection.BindingFlags.NonPublic" />
 
             
 
-             flag specifies that non-public methods are included in the search. The <see
-             cref="F:System.Reflection.BindingFlags.Public" />
+             flag specifies that non-public methods are included in the search. The <see cref="F:System.Reflection.BindingFlags.Public" />
 
             
 
@@ -186,8 +181,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of <see
-             cref="T:System.Reflection.FieldInfo" />
+            >Returns an array of <see cref="T:System.Reflection.FieldInfo" />
 
             
 
@@ -197,13 +191,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Reflection.FieldInfo" />
+            >An array of <see cref="T:System.Reflection.FieldInfo" />
 
             
 
-             objects containing all the field information for this reflection object that meets the search constraints specified in <paramref
-             name="bindingAttr" />
+             objects containing all the field information for this reflection object that meets the search constraints specified in <paramref name="bindingAttr" />
 
             
 
@@ -211,7 +203,11 @@
           >
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -245,18 +241,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Reflection.IReflect.GetMember(System.String,System.Reflection.BindingFlags)" />
+            >The <see cref="M:System.Reflection.IReflect.GetMember(System.String,System.Reflection.BindingFlags)" />
 
             
 
-             method retrieves an array of <see
-             cref="T:System.Reflection.MemberInfo" />
+             method retrieves an array of <see cref="T:System.Reflection.MemberInfo" />
 
             
 
-             objects by using the name and binding attribute that correspond to all public members or to all members that match a specified name. The case of the specified name is observed or ignored, as specified by <see
-             cref="F:System.Reflection.BindingFlags.IgnoreCase" />
+             objects by using the name and binding attribute that correspond to all public members or to all members that match a specified name. The case of the specified name is observed or ignored, as specified by <see cref="F:System.Reflection.BindingFlags.IgnoreCase" />
 
             
 
@@ -266,8 +259,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves an array of <see
-             cref="T:System.Reflection.MemberInfo" />
+            >Retrieves an array of <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -277,13 +269,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Reflection.MemberInfo" />
+            >An array of <see cref="T:System.Reflection.MemberInfo" />
 
             
 
-             objects matching the <paramref
-             name="name" />
+             objects matching the <paramref name="name" />
 
             
 
@@ -291,14 +281,22 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the member to find. </param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -331,8 +329,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method retrieves an array of <see
-             cref="T:System.Reflection.MemberInfo" />
+            >This method retrieves an array of <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -342,8 +339,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves an array of <see
-             cref="T:System.Reflection.MemberInfo" />
+            >Retrieves an array of <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -353,8 +349,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Reflection.MemberInfo" />
+            >An array of <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -362,7 +357,11 @@
           >
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -397,8 +396,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a <see
-             cref="T:System.Reflection.MethodInfo" />
+            >Retrieves a <see cref="T:System.Reflection.MethodInfo" />
 
             
 
@@ -408,13 +406,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.MethodInfo" />
+            >A <see cref="T:System.Reflection.MethodInfo" />
 
             
 
-             object containing the method information, with the match being based on the method name and search constraints specified in <paramref
-             name="bindingAttr" />
+             object containing the method information, with the match being based on the method name and search constraints specified in <paramref name="bindingAttr" />
 
             
 
@@ -422,14 +418,22 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the member to find. </param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -466,18 +470,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The return value is a match based on the method name, <see
-             cref="T:System.Reflection.BindingFlags" />
+            >The return value is a match based on the method name, <see cref="T:System.Reflection.BindingFlags" />
 
             
 
-             enum member, the kind of type conversion specified by the <paramref
-             name="binder" />
+             enum member, the kind of type conversion specified by the <paramref name="binder" />
 
             
 
-             parameter, the overload, and the <see
-             cref="T:System.Reflection.ParameterInfo" />
+             parameter, the overload, and the <see cref="T:System.Reflection.ParameterInfo" />
 
             
 
@@ -487,13 +488,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a <see
-             cref="T:System.Reflection.MethodInfo" />
+            >Retrieves a <see cref="T:System.Reflection.MethodInfo" />
 
             
 
-             object corresponding to a specified method, using a <see
-             cref="T:System.Type" />
+             object corresponding to a specified method, using a <see cref="T:System.Type" />
 
             
 
@@ -505,40 +504,59 @@
           <para>The requested method that matches all the specified parameters.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the member to find. </param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The binding attributes used to control the search. </param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that implements <see
-           cref="T:System.Reflection.Binder" />
+          An object that implements <see cref="T:System.Reflection.Binder" />
 
           
 
           , containing properties related to this method. </param
         >
         <param name="types">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array used to choose among overloaded methods. </param
         >
         <param name="modifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -571,8 +589,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The non-public attribute of <paramref
-             name="bindingAttr" />
+            >The non-public attribute of <paramref name="bindingAttr" />
 
             
 
@@ -582,8 +599,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves an array of <see
-             cref="T:System.Reflection.MethodInfo" />
+            >Retrieves an array of <see cref="T:System.Reflection.MethodInfo" />
 
             
 
@@ -593,13 +609,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Reflection.MethodInfo" />
+            >An array of <see cref="T:System.Reflection.MethodInfo" />
 
             
 
-             objects containing all the methods defined for this reflection object that meet the search constraints specified in <paramref
-             name="bindingAttr" />
+             objects containing all the methods defined for this reflection object that meet the search constraints specified in <paramref name="bindingAttr" />
 
             
 
@@ -607,7 +621,11 @@
           >
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -641,8 +659,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves an array of <see
-             cref="T:System.Reflection.PropertyInfo" />
+            >Retrieves an array of <see cref="T:System.Reflection.PropertyInfo" />
 
             
 
@@ -652,8 +669,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Reflection.PropertyInfo" />
+            >An array of <see cref="T:System.Reflection.PropertyInfo" />
 
             
 
@@ -661,7 +677,11 @@
           >
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -696,8 +716,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a <see
-             cref="T:System.Reflection.PropertyInfo" />
+            >Retrieves a <see cref="T:System.Reflection.PropertyInfo" />
 
             
 
@@ -707,13 +726,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.PropertyInfo" />
+            >A <see cref="T:System.Reflection.PropertyInfo" />
 
             
 
-             object for the located property that meets the search constraints specified in <paramref
-             name="bindingAttr" />
+             object for the located property that meets the search constraints specified in <paramref name="bindingAttr" />
 
             
 
@@ -721,14 +738,22 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the property to find. </param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -766,8 +791,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method retrieves a <see
-             cref="T:System.Reflection.PropertyInfo" />
+            >This method retrieves a <see cref="T:System.Reflection.PropertyInfo" />
 
             
 
@@ -777,8 +801,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a <see
-             cref="T:System.Reflection.PropertyInfo" />
+            >Retrieves a <see cref="T:System.Reflection.PropertyInfo" />
 
             
 
@@ -788,8 +811,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.PropertyInfo" />
+            >A <see cref="T:System.Reflection.PropertyInfo" />
 
             
 
@@ -797,47 +819,70 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the member to find. </param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The binding attribute used to control the search. </param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that implements <see
-           cref="T:System.Reflection.Binder" />
+          An object that implements <see cref="T:System.Reflection.Binder" />
 
           
 
           , containing properties related to this method. </param
         >
         <param name="returnType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the property. </param
         >
         <param name="types">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array used to choose among overloaded methods with the same name. </param
         >
         <param name="modifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -880,8 +925,7 @@
           <para>A method is invoked if the number of parameters in the method declaration equals the number of arguments in the specified argument list, and the type of each argument can be converted by the binder to the type of the parameter.</para>
           <block subset="none" type="note">
             <para
-              >The array of parameter modifiers passed to the <see
-               cref="M:System.Reflection.IReflect.InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[],System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[])" />
+              >The array of parameter modifiers passed to the <see cref="M:System.Reflection.IReflect.InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[],System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[])" />
 
               
 
@@ -889,18 +933,15 @@
             >
           </block>
           <para
-            >The binder finds all matching methods, in accordance with the type of binding requested (<see
-             cref="F:System.Reflection.BindingFlags.InvokeMethod" />
+            >The binder finds all matching methods, in accordance with the type of binding requested (<see cref="F:System.Reflection.BindingFlags.InvokeMethod" />
 
             
 
-            , <see
-             cref="M:System.Reflection.IReflect.GetProperties(System.Reflection.BindingFlags)" />
+            , <see cref="M:System.Reflection.IReflect.GetProperties(System.Reflection.BindingFlags)" />
 
             
 
-            , and so on). The set of methods is filtered by the name, number of arguments, and a set of search modifiers defined in the binder. After the method is selected, it is invoked, and accessibility is checked at that point. The search may control which set of methods is searched based upon the accessibility attribute associated with the method. <see
-             cref="M:System.Reflection.Binder.BindToMethod(System.Reflection.BindingFlags,System.Reflection.MethodBase[],System.Object[]@,System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[],System.Object@)" />
+            , and so on). The set of methods is filtered by the name, number of arguments, and a set of search modifiers defined in the binder. After the method is selected, it is invoked, and accessibility is checked at that point. The search may control which set of methods is searched based upon the accessibility attribute associated with the method. <see cref="M:System.Reflection.Binder.BindToMethod(System.Reflection.BindingFlags,System.Reflection.MethodBase[],System.Object[]@,System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[],System.Object@)" />
 
             
 
@@ -917,101 +958,124 @@
           <para>The specified member.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the member to find. </param
         >
         <param name="invokeAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Reflection.BindingFlags" />
+          One of the <see cref="T:System.Reflection.BindingFlags" />
 
           
 
-           invocation attributes. The <paramref
-           name="invokeAttr" />
+           invocation attributes. The <paramref name="invokeAttr" />
 
           
 
            parameter may be a constructor, method, property, or field. A suitable invocation attribute must be specified. Invoke the default member of a class by passing the empty string ("") as the name of the member. </param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Reflection.BindingFlags" />
+          One of the <see cref="T:System.Reflection.BindingFlags" />
 
           
 
-           bit flags. Implements <see
-           cref="T:System.Reflection.Binder" />
+           bit flags. Implements <see cref="T:System.Reflection.Binder" />
 
           
 
           , containing properties related to this method. </param
         >
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object on which to invoke the specified member. This parameter is ignored for static members. </param
         >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of objects that contains the number, order, and type of the parameters of the member to be invoked. This is an empty array if there are no parameters. </param
         >
         <param name="modifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Reflection.ParameterModifier" />
+          An array of <see cref="T:System.Reflection.ParameterModifier" />
 
           
 
-           objects. This array has the same length as the <paramref
-           name="args" />
+           objects. This array has the same length as the <paramref name="args" />
 
           
 
            parameter, representing the invoked member's argument attributes in the metadata. A parameter can have the following attributes: pdIn, pdOut, pdRetval, pdOptional, and pdHasDefault. These represent [In], [Out], [retval], [optional], and a default parameter, respectively. These attributes are used by various interoperability services. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of <see
-           cref="T:System.Globalization.CultureInfo" />
+          An instance of <see cref="T:System.Globalization.CultureInfo" />
 
           
 
-           used to govern the coercion of types. For example, <paramref
-           name="culture" />
+           used to govern the coercion of types. For example, <paramref name="culture" />
 
           
 
-           converts a String that represents 1000 to a Double value, since 1000 is represented differently by different cultures. If this parameter is null, the <see
-           cref="T:System.Globalization.CultureInfo" />
+           converts a String that represents 1000 to a Double value, since 1000 is represented differently by different cultures. If this parameter is null, the <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            for the current thread is used. </param
         >
         <param name="namedParameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1040,8 +1104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the underlying type that represents the <see
-             cref="T:System.Reflection.IReflect" />
+            >Gets the underlying type that represents the <see cref="T:System.Reflection.IReflect" />
 
             
 

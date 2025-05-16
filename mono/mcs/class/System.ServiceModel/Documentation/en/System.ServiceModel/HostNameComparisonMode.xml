@@ -16,41 +16,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The value is used to specify the URI matching rules used by transports such as HTTP, Net.Tcp, and Net.Pipe when dispatching incoming messages. Configure the value of the <see
-         cref="T:System.ServiceModel.HostNameComparisonMode" />
+        >The value is used to specify the URI matching rules used by transports such as HTTP, Net.Tcp, and Net.Pipe when dispatching incoming messages. Configure the value of the <see cref="T:System.ServiceModel.HostNameComparisonMode" />
 
         
 
-         for a standard binding using one of the preceding transports, such as <see
-         cref="T:System.ServiceModel.BasicHttpBinding" />
+         for a standard binding using one of the preceding transports, such as <see cref="T:System.ServiceModel.BasicHttpBinding" />
 
         
 
-        , using the corresponding <see
-         cref="P:System.ServiceModel.BasicHttpBinding.HostNameComparisonMode" />
+        , using the corresponding <see cref="P:System.ServiceModel.BasicHttpBinding.HostNameComparisonMode" />
 
         
 
-         property. Configure the value of the <see
-         cref="T:System.ServiceModel.HostNameComparisonMode" />
+         property. Configure the value of the <see cref="T:System.ServiceModel.HostNameComparisonMode" />
 
         
 
-         for a binding element using one of the preceding transports, such as <see
-         cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" />
+         for a binding element using one of the preceding transports, such as <see cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" />
 
         
 
-        , using the corresponding <see
-         cref="P:System.ServiceModel.Channels.HttpTransportBindingElement.HostNameComparisonMode" />
+        , using the corresponding <see cref="P:System.ServiceModel.Channels.HttpTransportBindingElement.HostNameComparisonMode" />
 
         
 
          property.</para
       >
       <para
-        >Each value of the <see
-         cref="T:System.ServiceModel.HostNameComparisonMode" />
+        >Each value of the <see cref="T:System.ServiceModel.HostNameComparisonMode" />
 
         
 
@@ -74,29 +67,25 @@
         </item>
       </list>
       <para
-        >The first value, <see
-         cref="F:System.ServiceModel.HostnameComparisonMode.StrongWildcard" />
+        >The first value, <see cref="F:System.ServiceModel.HostnameComparisonMode.StrongWildcard" />
 
         
 
         , ignores the host name when matching and it takes the highest precedence of the three different matching modes. It is the default value for a indigo2 system-provided binding or binding element. This indicates that a service endpoint can be reached using any valid host name. For example, if MyService is hosted using http://localhost/MyService, it is still reachable using http://www.adatum.com/MyService because the (presumably valid) host name, "adatum.com", is ignored. Note that the port is a wildcard here as well.</para
       >
       <para
-        >The second value, <see
-         cref="F:System.ServiceModel.HostnameComparisonMode.Exact" />
+        >The second value, <see cref="F:System.ServiceModel.HostnameComparisonMode.Exact" />
 
         
 
         , requires that an exact match is found with the URI specified, including the hostname, if no strong match is found. This mode, for example, does not perform equivalence between short hostnames and fully-qualified domain names. This allows hostnames to be used as match criteria in the scenarios where multiple hosts are assigned a single IP address and it enables different services to be hosted on the same machine with distinct endpoints. Note that the port is a wildcard here as well.</para
       >
       <para
-        >The third value, <see
-         cref="F:System.ServiceModel.HostnameComparisonMode.WeakWildcard" />
+        >The third value, <see cref="F:System.ServiceModel.HostnameComparisonMode.WeakWildcard" />
 
         
 
-        , matches by ignoring the hostname if no strong or exact match was found. The behavior is the same as for <see
-         cref="F:System.ServiceModel.HostNameComparisonMode.StrongWildcard" />
+        , matches by ignoring the hostname if no strong or exact match was found. The behavior is the same as for <see cref="F:System.ServiceModel.HostNameComparisonMode.StrongWildcard" />
 
         
 

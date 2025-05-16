@@ -26,67 +26,56 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.IO.FileSystemEventArgs" />
+        >The <see cref="T:System.IO.FileSystemEventArgs" />
 
         
 
          class is passed as a parameter to event handlers for these events: </para
       >
       <para
-        >The <see
-         cref="E:System.IO.FileSystemWatcher.Changed" />
+        >The <see cref="E:System.IO.FileSystemWatcher.Changed" />
 
         
 
-         event occurs when changes are made to the size, system attributes, last write time, last access time, or security permissions in a file or directory in the specified <see
-         cref="P:System.IO.FileSystemWatcher.Path" />
+         event occurs when changes are made to the size, system attributes, last write time, last access time, or security permissions in a file or directory in the specified <see cref="P:System.IO.FileSystemWatcher.Path" />
 
         
 
-         of a <see
-         cref="T:System.IO.FileSystemWatcher" />
+         of a <see cref="T:System.IO.FileSystemWatcher" />
 
         
 
         .</para
       >
       <para
-        >The <see
-         cref="E:System.IO.FileSystemWatcher.Created" />
+        >The <see cref="E:System.IO.FileSystemWatcher.Created" />
 
         
 
-         event occurs when a file or directory in the specified <see
-         cref="P:System.IO.FileSystemWatcher.Path" />
+         event occurs when a file or directory in the specified <see cref="P:System.IO.FileSystemWatcher.Path" />
 
         
 
-         of a <see
-         cref="T:System.IO.FileSystemWatcher" />
+         of a <see cref="T:System.IO.FileSystemWatcher" />
 
         
 
          is created.</para
       >
       <para
-        >The <see
-         cref="E:System.IO.FileSystemWatcher.Deleted" />
+        >The <see cref="E:System.IO.FileSystemWatcher.Deleted" />
 
         
 
-         event occurs when a file or directory in the specified <see
-         cref="P:System.IO.FileSystemWatcher.Path" />
+         event occurs when a file or directory in the specified <see cref="P:System.IO.FileSystemWatcher.Path" />
 
         
 
-         of a <see
-         cref="T:System.IO.FileSystemWatcher" />
+         of a <see cref="T:System.IO.FileSystemWatcher" />
 
         
 
-         is deleted. For more information, see <see
-         cref="T:System.IO.FileSystemWatcher" />
+         is deleted. For more information, see <see cref="T:System.IO.FileSystemWatcher" />
 
         
 
@@ -96,18 +85,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the directory events: <see
-         cref="E:System.IO.FileSystemWatcher.Changed" />
+        >Provides data for the directory events: <see cref="E:System.IO.FileSystemWatcher.Changed" />
 
         
 
-        , <see
-         cref="E:System.IO.FileSystemWatcher.Created" />
+        , <see cref="E:System.IO.FileSystemWatcher.Created" />
 
         
 
-        , <see
-         cref="E:System.IO.FileSystemWatcher.Deleted" />
+        , <see cref="E:System.IO.FileSystemWatcher.Deleted" />
 
         
 
@@ -142,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.FileSystemEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.IO.FileSystemEventArgs" />
 
             
 
@@ -151,26 +136,37 @@
           >
         </summary>
         <param name="changeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.IO.WatcherChangeTypes" />
+          One of the <see cref="T:System.IO.WatcherChangeTypes" />
 
           
 
            values, which represents the kind of change detected in the file system. </param
         >
         <param name="directory">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The root directory of the affected file or directory. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -243,18 +239,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name returned by the <see
-             cref="P:System.IO.FileSystemEventArgs.Name" />
+            >The name returned by the <see cref="P:System.IO.FileSystemEventArgs.Name" />
 
             
 
-             property is the relative path of the affected file or directory, with respect to the directory being watched. For example, if a <see
-             cref="T:System.IO.FileSystemWatcher" />
+             property is the relative path of the affected file or directory, with respect to the directory being watched. For example, if a <see cref="T:System.IO.FileSystemWatcher" />
 
             
 
-             object is watching the directory "C:\temp" and the file at "C:\temp\test\file.txt" changes, the <see
-             cref="P:System.IO.FileSystemEventArgs.Name" />
+             object is watching the directory "C:\temp" and the file at "C:\temp\test\file.txt" changes, the <see cref="P:System.IO.FileSystemEventArgs.Name" />
 
             
 

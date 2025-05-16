@@ -37,8 +37,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Threading.ThreadState" />
+        >The <see cref="T:System.Threading.ThreadState" />
 
         
 
@@ -49,8 +48,7 @@
 
         
 
-         defines a set of all possible execution states for threads. Once a thread is created, it is in at least one of the states until it terminates. Threads created within the common language runtime are initially in the Unstarted state, while external threads that come into the runtime are already in the Running state. An Unstarted thread is transitioned into the Running state by calling <see
-         cref="M:System.Threading.Thread.Start" />
+         defines a set of all possible execution states for threads. Once a thread is created, it is in at least one of the states until it terminates. Threads created within the common language runtime are initially in the Unstarted state, while external threads that come into the runtime are already in the Running state. An Unstarted thread is transitioned into the Running state by calling <see cref="M:System.Threading.Thread.Start" />
 
         
 
@@ -58,13 +56,11 @@
       >
       <block subset="none" type="note">
         <para
-          >There are two thread state enumerations, <see
-           cref="T:System.Threading.ThreadState" />
+          >There are two thread state enumerations, <see cref="T:System.Threading.ThreadState" />
 
           
 
-           and <see
-           cref="T:System.Diagnostics.ThreadState" />
+           and <see cref="T:System.Diagnostics.ThreadState" />
 
           
 
@@ -94,21 +90,18 @@
         <item>
           <term>
             <para
-              >Another thread calls the <see
-               cref="M:System.Threading.Thread.Start" />
+              >Another thread calls the <see cref="M:System.Threading.Thread.Start" />
 
               
 
                method on the new thread, and the call returns. </para
             >
             <para
-              >The <see
-               cref="M:System.Threading.Thread.Start" />
+              >The <see cref="M:System.Threading.Thread.Start" />
 
               
 
-               method does not return until the new thread has started running. There is no way to know at what point the new thread will start running, during the call to <see
-               cref="M:System.Threading.Thread.Start" />
+               method does not return until the new thread has started running. There is no way to know at what point the new thread will start running, during the call to <see cref="M:System.Threading.Thread.Start" />
 
               
 
@@ -122,8 +115,7 @@
         <item>
           <term>
             <para
-              >The thread calls <see
-               cref="M:System.Threading.Thread.Sleep(System.Int32)" />
+              >The thread calls <see cref="M:System.Threading.Thread.Sleep(System.Int32)" />
             </para>
           </term>
           <description>
@@ -133,8 +125,7 @@
         <item>
           <term>
             <para
-              >The thread calls <see
-               cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" />
+              >The thread calls <see cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" />
 
               
 
@@ -148,8 +139,7 @@
         <item>
           <term>
             <para
-              >The thread calls <see
-               cref="M:System.Threading.Thread.Join" />
+              >The thread calls <see cref="M:System.Threading.Thread.Join" />
 
               
 
@@ -162,10 +152,7 @@
         </item>
         <item>
           <term>
-            <para
-              >Another thread calls <see
-               cref="M:System.Threading.Thread.Interrupt" />
-            </para>
+            <para>Another thread calls <see cref="M:System.Threading.Thread.Interrupt" /></para>
           </term>
           <description>
             <para>Running </para>
@@ -173,10 +160,7 @@
         </item>
         <item>
           <term>
-            <para
-              >Another thread calls <see
-               cref="M:System.Threading.Thread.Suspend" />
-            </para>
+            <para>Another thread calls <see cref="M:System.Threading.Thread.Suspend" /></para>
           </term>
           <description>
             <para>SuspendRequested </para>
@@ -185,8 +169,7 @@
         <item>
           <term>
             <para
-              >The thread responds to a <see
-               cref="M:System.Threading.Thread.Suspend" />
+              >The thread responds to a <see cref="M:System.Threading.Thread.Suspend" />
 
               
 
@@ -199,10 +182,7 @@
         </item>
         <item>
           <term>
-            <para
-              >Another thread calls <see
-               cref="M:System.Threading.Thread.Resume" />
-            </para>
+            <para>Another thread calls <see cref="M:System.Threading.Thread.Resume" /></para>
           </term>
           <description>
             <para>Running </para>
@@ -211,8 +191,7 @@
         <item>
           <term>
             <para
-              >Another thread calls <see
-               cref="M:System.Threading.Thread.Abort(System.Object)" />
+              >Another thread calls <see cref="M:System.Threading.Thread.Abort(System.Object)" />
             </para>
           </term>
           <description>
@@ -222,8 +201,7 @@
         <item>
           <term>
             <para
-              >The thread responds to a <see
-               cref="M:System.Threading.Thread.Abort(System.Object)" />
+              >The thread responds to a <see cref="M:System.Threading.Thread.Abort(System.Object)" />
 
               
 
@@ -245,31 +223,26 @@
       </list>
       <para>In addition to the states noted above, there is also the Background state, which indicates whether the thread is running in the background or foreground.</para>
       <para
-        >A thread can be in more than one state at a given time. For example, if a thread is blocked on a call to <see
-         cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" />
+        >A thread can be in more than one state at a given time. For example, if a thread is blocked on a call to <see cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" />
 
         
 
-        , and another thread calls <see
-         cref="M:System.Threading.Thread.Abort(System.Object)" />
+        , and another thread calls <see cref="M:System.Threading.Thread.Abort(System.Object)" />
 
         
 
-         on the blocked thread, the blocked thread will be in both the WaitSleepJoin and the AbortRequested states at the same time. In this case, as soon as the thread returns from the call to <see
-         cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" />
+         on the blocked thread, the blocked thread will be in both the WaitSleepJoin and the AbortRequested states at the same time. In this case, as soon as the thread returns from the call to <see cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" />
 
         
 
-         or is interrupted, it will receive the <see
-         cref="T:System.Threading.ThreadAbortException" />
+         or is interrupted, it will receive the <see cref="T:System.Threading.ThreadAbortException" />
 
         
 
          to begin aborting.</para
       >
       <para
-        >The <see
-         cref="P:System.Threading.Thread.ThreadState" />
+        >The <see cref="P:System.Threading.Thread.ThreadState" />
 
         
 
@@ -279,8 +252,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the execution states of a <see
-         cref="T:System.Threading.Thread" />
+        >Specifies the execution states of a <see cref="T:System.Threading.Thread" />
 
         
 
@@ -315,13 +287,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The thread state includes <see
-             cref="F:System.Threading.ThreadState.AbortRequested" />
+            >The thread state includes <see cref="F:System.Threading.ThreadState.AbortRequested" />
 
             
 
-             and the thread is now dead, but its state has not yet changed to <see
-             cref="F:System.Threading.ThreadState.Stopped" />
+             and the thread is now dead, but its state has not yet changed to <see cref="F:System.Threading.ThreadState.Stopped" />
 
             
 
@@ -357,13 +327,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Threading.Thread.Abort(System.Object)" />
+            >The <see cref="M:System.Threading.Thread.Abort(System.Object)" />
 
             
 
-             method has been invoked on the thread, but the thread has not yet received the pending <see
-             cref="T:System.Threading.ThreadAbortException" />
+             method has been invoked on the thread, but the thread has not yet received the pending <see cref="T:System.Threading.ThreadAbortException" />
 
             
 
@@ -399,8 +367,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The thread is being executed as a background thread, as opposed to a foreground thread. This state is controlled by setting the <see
-             cref="P:System.Threading.Thread.IsBackground" />
+            >The thread is being executed as a background thread, as opposed to a foreground thread. This state is controlled by setting the <see cref="P:System.Threading.Thread.IsBackground" />
 
             
 
@@ -436,8 +403,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The thread has been started, it is not blocked, and there is no pending <see
-             cref="T:System.Threading.ThreadAbortException" />
+            >The thread has been started, it is not blocked, and there is no pending <see cref="T:System.Threading.ThreadAbortException" />
 
             
 
@@ -575,8 +541,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Threading.Thread.Start" />
+            >The <see cref="M:System.Threading.Thread.Start" />
 
             
 
@@ -612,28 +577,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The thread is blocked. This could be the result of calling <see
-             cref="M:System.Threading.Thread.Sleep(System.Int32)" />
+            >The thread is blocked. This could be the result of calling <see cref="M:System.Threading.Thread.Sleep(System.Int32)" />
 
             
 
-             or <see
-             cref="M:System.Threading.Thread.Join" />
+             or <see cref="M:System.Threading.Thread.Join" />
 
             
 
-            , of requesting a lock — for example, by calling <see
-             cref="M:System.Threading.Monitor.Enter(System.Object)" />
+            , of requesting a lock — for example, by calling <see cref="M:System.Threading.Monitor.Enter(System.Object)" />
 
             
 
-             or <see
-             cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" />
+             or <see cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" />
 
             
 
-             — or of waiting on a thread synchronization object such as <see
-             cref="T:System.Threading.ManualResetEvent" />
+             — or of waiting on a thread synchronization object such as <see cref="T:System.Threading.ManualResetEvent" />
 
             
 

@@ -16,18 +16,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.ReleaseInstanceMode" />
+        >Use the <see cref="T:System.ServiceModel.ReleaseInstanceMode" />
 
         
 
-         with the <see
-         cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
+         with the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
 
         
 
-         property to inform indigo1 that the current service object must be recycled at a particular point in the invocation process. The default behavior is to recycle a service object according to the <see
-         cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+         property to inform indigo1 that the current service object must be recycled at a particular point in the invocation process. The default behavior is to recycle a service object according to the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
 
         
 
@@ -117,8 +114,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Recycles the object according to the <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+            >Recycles the object according to the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
 
             
 

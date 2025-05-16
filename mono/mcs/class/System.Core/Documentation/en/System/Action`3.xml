@@ -34,8 +34,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can use the <see
-         cref="T:System.Action`3" />
+        >You can use the <see cref="T:System.Action`3" />
 
         
 
@@ -43,8 +42,7 @@
       >
       <block subset="none" type="note">
         <para
-          >To reference a method that has three parameters and returns a value, use the generic <see
-           cref="T:System.Func`4" />
+          >To reference a method that has three parameters and returns a value, use the generic <see cref="T:System.Func`4" />
 
           
 
@@ -52,8 +50,7 @@
         >
       </block>
       <para
-        >When you use the <see
-         cref="T:System.Action`3" />
+        >When you use the <see cref="T:System.Action`3" />
 
         
 
@@ -61,8 +58,7 @@
       >
       <para>code reference: System.Action~3#1</para>
       <para
-        >The following example simplifies this code by instantiating the <see
-         cref="T:System.Action`3" />
+        >The following example simplifies this code by instantiating the <see cref="T:System.Action`3" />
 
         
 
@@ -70,13 +66,11 @@
       >
       <para>code reference: System.Action~3#2</para>
       <para
-        >You can also use the <see
-         cref="T:System.Action`3" />
+        >You can also use the <see cref="T:System.Action`3" />
 
         
 
-         delegate with anonymous methods in C#, as the following example illustrates. (For an introduction to anonymous methods, see <format
-         type="text/html">
+         delegate with anonymous methods in C#, as the following example illustrates. (For an introduction to anonymous methods, see <format type="text/html">
           <a href="a62441fa-f0a3-4acb-9aa6-93762a635275"
             >Anonymous Methods (C# Programming Guide)</a
           >
@@ -88,13 +82,11 @@
       >
       <para>code reference: System.Action~3#3</para>
       <para
-        >You can also assign a lambda expression to an <see
-         cref="T:System.Action`3" />
+        >You can also assign a lambda expression to an <see cref="T:System.Action`3" />
 
         
 
-         delegate instance, as the following example illustrates. (For an introduction to lambda expressions, see <format
-         type="text/html">
+         delegate instance, as the following example illustrates. (For an introduction to lambda expressions, see <format type="text/html">
           <a href="57e3ba27-9a82-4067-aca7-5ca446b7bf93"
             >Lambda Expressions (C# Programming Guide)</a
           >

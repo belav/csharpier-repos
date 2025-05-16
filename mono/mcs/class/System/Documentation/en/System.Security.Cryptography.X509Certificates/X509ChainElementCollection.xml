@@ -29,8 +29,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An instance of this class is returned when the <see
-         cref="P:System.Security.Cryptography.X509Certificates.X509Chain.ChainElements" />
+        >An instance of this class is returned when the <see cref="P:System.Security.Cryptography.X509Certificates.X509Chain.ChainElements" />
 
         
 
@@ -40,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Security.Cryptography.X509Certificates.X509ChainElement" />
+        >Represents a collection of <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElement" />
 
         
 
@@ -80,8 +78,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
+            >Copies an <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
 
             
 
@@ -89,19 +86,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509ChainElement" />
+          An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElement" />
 
           
 
            objects. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -156,28 +160,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator" />
+            >The <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator" />
 
             
 
-             class implements <see
-             cref="T:System.Collections.IEnumerator" />
+             class implements <see cref="T:System.Collections.IEnumerator" />
 
             
 
-            , which enables you to use methods such as <see
-             cref="P:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Current" />
+            , which enables you to use methods such as <see cref="P:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Current" />
 
             
 
-            , <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.MoveNext" />
+            , <see cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.MoveNext" />
 
             
 
-             and <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Reset" />
+             and <see cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Reset" />
 
             
 
@@ -187,8 +186,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator" />
+            >Gets an <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator" />
 
             
 
@@ -198,8 +196,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator" />
+            >An <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator" />
 
             
 
@@ -225,8 +222,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This value is always false because an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
+            >This value is always false because an <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
 
             
 
@@ -288,8 +284,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
+            >Gets an object that can be used to synchronize access to an <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
 
             
 
@@ -321,8 +316,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
+            >Copies an <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
 
             
 
@@ -330,24 +324,30 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array to copy the <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
+          An array to copy the <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
 
           
 
            object to.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of <paramref
-           name="array" />
+          The index of <paramref name="array" />
 
           
 
@@ -381,8 +381,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.IEnumerator" />
+            >Gets an <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -392,8 +391,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 

@@ -18,18 +18,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ConsoleKey" />
+        >The <see cref="T:System.ConsoleKey" />
 
         
 
-         enumeration is typically used in the <see
-         cref="T:System.ConsoleKeyInfo" />
+         enumeration is typically used in the <see cref="T:System.ConsoleKeyInfo" />
 
         
 
-         structure, which is returned by the <see
-         cref="M:System.Console.ReadKey" />
+         structure, which is returned by the <see cref="M:System.Console.ReadKey" />
 
         
 

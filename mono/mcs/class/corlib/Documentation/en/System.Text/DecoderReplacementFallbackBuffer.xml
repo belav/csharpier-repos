@@ -26,28 +26,23 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>It might not be possible to convert an encoded byte sequence to an equivalent character if no suitable decoding exists. A common reason for a decoding to fail is that the conversion operation uses a code page that cannot represent the character to decode. </para>
       <para
-        >If the input byte sequence cannot be converted to an output character, a <see
-         cref="T:System.Text.DecoderReplacementFallback" />
+        >If the input byte sequence cannot be converted to an output character, a <see cref="T:System.Text.DecoderReplacementFallback" />
 
         
 
-         object provides a replacement string that is substituted for the output character. The replacement string initializes the value of the <see
-         cref="T:System.Text.DecoderReplacementFallback" />
+         object provides a replacement string that is substituted for the output character. The replacement string initializes the value of the <see cref="T:System.Text.DecoderReplacementFallback" />
 
         
 
-         object, and the value of the <see
-         cref="T:System.Text.DecoderReplacementFallback" />
+         object, and the value of the <see cref="T:System.Text.DecoderReplacementFallback" />
 
         
 
-         object initializes the value of a <see
-         cref="T:System.Text.DecoderReplacementFallbackBuffer" />
+         object initializes the value of a <see cref="T:System.Text.DecoderReplacementFallbackBuffer" />
 
         
 
-         object. The value of a <see
-         cref="T:System.Text.DecoderReplacementFallbackBuffer" />
+         object. The value of a <see cref="T:System.Text.DecoderReplacementFallbackBuffer" />
 
         
 
@@ -83,13 +78,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Text.DecoderReplacementFallbackBuffer" />
+            >Initializes a new instance of the <see cref="T:System.Text.DecoderReplacementFallbackBuffer" />
 
             
 
-             class using the value of a <see
-             cref="T:System.Text.DecoderReplacementFallback" />
+             class using the value of a <see cref="T:System.Text.DecoderReplacementFallback" />
 
             
 
@@ -97,12 +90,15 @@
           >
         </summary>
         <param name="fallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Text.DecoderReplacementFallback" />
+          A <see cref="T:System.Text.DecoderReplacementFallback" />
 
           
 
@@ -136,28 +132,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="Overload:System.Text.Encoding.GetBytes" />
+            >The <see cref="Overload:System.Text.Encoding.GetBytes" />
 
             
 
-             and <see
-             cref="Overload:System.Text.Encoder.Convert" />
+             and <see cref="Overload:System.Text.Encoder.Convert" />
 
             
 
-             methods call <see
-             cref="M:System.Text.DecoderReplacementFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
+             methods call <see cref="M:System.Text.DecoderReplacementFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
 
             
 
-             if they encounter an unknown input byte sequence that cannot be decoded. If the return value of <see
-             cref="M:System.Text.DecoderReplacementFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
+             if they encounter an unknown input byte sequence that cannot be decoded. If the return value of <see cref="M:System.Text.DecoderReplacementFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
 
             
 
-             is true, the calling method can invoke the <see
-             cref="M:System.Text.DecoderReplacementFallbackBuffer.GetNextChar" />
+             is true, the calling method can invoke the <see cref="M:System.Text.DecoderReplacementFallbackBuffer.GetNextChar" />
 
             
 
@@ -173,19 +164,26 @@
           <para>true if the replacement string is not empty; false if the replacement string is empty.</para>
         </returns>
         <param name="bytesUnknown">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An input byte sequence. This parameter is ignored unless an exception is thrown.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index position of the byte in <paramref
-           name="bytesUnknown" />
+          The index position of the byte in <paramref name="bytesUnknown" />
 
           
 
@@ -213,28 +211,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Text.Encoding.GetBytes(System.Char[])" />
+            >The <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" />
 
             
 
-             and <see
-             cref="M:System.Text.Decoder.Convert(System.Byte*,System.Int32,System.Char*,System.Int32,System.Boolean,System.Int32@,System.Int32@,System.Boolean@)" />
+             and <see cref="M:System.Text.Decoder.Convert(System.Byte*,System.Int32,System.Char*,System.Int32,System.Boolean,System.Int32@,System.Int32@,System.Boolean@)" />
 
             
 
-             methods call <see
-             cref="M:System.Text.DecoderReplacementFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
+             methods call <see cref="M:System.Text.DecoderReplacementFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
 
             
 
-             if they encounter an unknown surrogate pair or character in their input. If the return value of <see
-             cref="M:System.Text.DecoderReplacementFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
+             if they encounter an unknown surrogate pair or character in their input. If the return value of <see cref="M:System.Text.DecoderReplacementFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
 
             
 
-             is true, the calling method can invoke <see
-             cref="M:System.Text.DecoderReplacementFallbackBuffer.GetNextChar" />
+             is true, the calling method can invoke <see cref="M:System.Text.DecoderReplacementFallbackBuffer.GetNextChar" />
 
             
 
@@ -272,8 +265,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes the next call to <see
-             cref="M:System.Text.DecoderReplacementFallbackBuffer.GetNextChar" />
+            >Causes the next call to <see cref="M:System.Text.DecoderReplacementFallbackBuffer.GetNextChar" />
 
             
 
@@ -283,8 +275,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="M:System.Text.DecoderReplacementFallbackBuffer.MovePrevious" />
+            >true if the <see cref="M:System.Text.DecoderReplacementFallbackBuffer.MovePrevious" />
 
             
 
@@ -310,13 +301,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Text.DecoderReplacementFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
+            >The <see cref="M:System.Text.DecoderReplacementFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
 
             
 
-             method returns true if the <see
-             cref="P:System.Text.DecoderReplacementFallbackBuffer.Remaining" />
+             method returns true if the <see cref="P:System.Text.DecoderReplacementFallbackBuffer.Remaining" />
 
             
 
@@ -349,13 +338,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Text.DecoderReplacementFallbackBuffer.Reset" />
+            >The <see cref="M:System.Text.DecoderReplacementFallbackBuffer.Reset" />
 
             
 
-             method discards any persisted state information and data that govern the emitting of a replacement string. Unpredictable results occur if the decoding operation continues after the <see
-             cref="M:System.Text.DecoderReplacementFallbackBuffer.Reset" />
+             method discards any persisted state information and data that govern the emitting of a replacement string. Unpredictable results occur if the decoding operation continues after the <see cref="M:System.Text.DecoderReplacementFallbackBuffer.Reset" />
 
             
 
@@ -365,8 +352,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes all internal state information and data in the <see
-             cref="T:System.Text.DecoderReplacementFallbackBuffer" />
+            >Initializes all internal state information and data in the <see cref="T:System.Text.DecoderReplacementFallbackBuffer" />
 
             
 

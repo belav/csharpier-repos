@@ -47,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -56,7 +55,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -86,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Computes the sum of the two <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Computes the sum of the two <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -97,18 +99,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure whose <see
-             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+             structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
             
 
-             is equal to the sum of the two <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             is equal to the sum of the two <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -116,24 +115,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -163,8 +168,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Computes the bitwise AND of its <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Computes the bitwise AND of its <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -174,8 +178,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -183,24 +186,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -230,8 +239,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Computes the bitwise OR of its two <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Computes the bitwise OR of its two <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -241,8 +249,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -250,24 +257,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -299,13 +312,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares this <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Compares this <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             instance to the supplied <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             instance to the supplied <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -355,12 +366,15 @@
           </list>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          The <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -382,13 +396,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares this <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Compares this <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             instance to the supplied <see
-             cref="T:System.Object" />
+             instance to the supplied <see cref="T:System.Object" />
 
             
 
@@ -438,12 +450,15 @@
           </list>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -473,8 +488,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Divides the first <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Divides the first <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -484,13 +498,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure whose <see
-             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+             structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
             
 
@@ -498,24 +510,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -541,13 +559,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares the supplied object parameter to the <see
-             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+            >Compares the supplied object parameter to the <see cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
             
 
-             property of the <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             property of the <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -557,8 +573,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if object is an instance of <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >true if object is an instance of <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -566,7 +581,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -596,8 +615,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison of the two <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -609,24 +627,30 @@
           <para>true if the two values are equal. Otherwise, false. If either instance is null, then the SqlInt64 will be null.</para>
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -681,8 +705,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the XML Schema definition language (XSD) of the specified <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+            >Returns the XML Schema definition language (XSD) of the specified <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
@@ -692,8 +715,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that indicates the XSD of the specified <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+            >A string that indicates the XSD of the specified <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
@@ -701,12 +723,15 @@
           >
         </returns>
         <param name="schemaSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchemaSet" />
+          An <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
           
 
@@ -732,8 +757,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison of the two <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -743,38 +767,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is greater than the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is greater than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -782,24 +799,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -829,8 +852,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison of the two <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -840,38 +862,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is greater than or equal to the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is greater than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -879,24 +894,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -919,8 +940,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="f18b288f-b265-4bbe-957f-c6833c0645ef">Handling Null Values (ADO.NET)</a>
             </format>
 
@@ -932,8 +952,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a Boolean value that indicates whether this <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Gets a Boolean value that indicates whether this <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -964,8 +983,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison on the two <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Performs a logical comparison on the two <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -975,38 +993,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is less than the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is less than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -1014,24 +1025,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -1061,8 +1078,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison on the two <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Performs a logical comparison on the two <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -1072,38 +1088,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is less than or equal to the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is less than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -1111,24 +1120,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -1154,8 +1169,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this constant is 2 <superscript
-            >63</superscript>
+            >The value of this constant is 2 <superscript>63</superscript>
 
             
 
@@ -1165,8 +1179,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A constant representing the largest possible value for a <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A constant representing the largest possible value for a <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -1193,8 +1206,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this constant is -2 <superscript
-            >63</superscript>
+            >The value of this constant is -2 <superscript>63</superscript>
 
             
 
@@ -1204,8 +1216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A constant representing the smallest possible value for a <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A constant representing the smallest possible value for a <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -1236,8 +1247,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Computes the remainder after dividing the first <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Computes the remainder after dividing the first <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -1247,13 +1257,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure whose <see
-             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+             structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
             
 
@@ -1261,24 +1269,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -1310,13 +1324,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If either instance of <paramref
-             name="x" />
+            >If either instance of <paramref name="x" />
 
             
 
-             or <paramref
-             name="y" />
+             or <paramref name="y" />
 
             
 
@@ -1326,8 +1338,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Divides two <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Divides two <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -1337,13 +1348,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The remainder left after division is performed on <paramref
-             name="x" />
+            >The remainder left after division is performed on <paramref name="x" />
 
             
 
-             and <paramref
-             name="y" />
+             and <paramref name="y" />
 
             
 
@@ -1351,24 +1360,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            value.</param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -1394,8 +1409,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Computes the product of the two <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Computes the product of the two <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -1405,18 +1419,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure whose <see
-             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+             structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
             
 
-             is equal to the product of the two <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             is equal to the product of the two <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -1424,24 +1435,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -1475,38 +1492,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the two instances are not equal or <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the two instances are not equal or <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-             if the two instances are equal. If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             if the two instances are equal. If either instance of <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -1514,24 +1524,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -1561,13 +1577,11 @@
 
             
 
-             functions as a constant for the <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             functions as a constant for the <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure. For more information, see <format
-             type="text/html">
+             structure. For more information, see <format type="text/html">
               <a href="f18b288f-b265-4bbe-957f-c6833c0645ef">Handling Null Values (ADO.NET)</a>
             </format>
 
@@ -1579,13 +1593,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a <see
-             cref="T:System.DBNull" />
+            >Represents a <see cref="T:System.DBNull" />
 
             
 
-             that can be assigned to this instance of the <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             that can be assigned to this instance of the <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -1615,8 +1627,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a bitwise one's complement operation on its <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Performs a bitwise one's complement operation on its <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -1626,18 +1637,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure whose <see
-             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+             structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
             
 
-             is equal to the ones complement of the <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             is equal to the ones complement of the <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -1645,12 +1653,15 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -1684,8 +1695,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Computes the sum of the two <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Computes the sum of the two <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -1695,18 +1705,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure whose <see
-             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+             structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
             
 
-             is equal to the sum of the two <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             is equal to the sum of the two <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -1714,24 +1721,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -1761,8 +1774,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Computes the bitwise AND of its <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Computes the bitwise AND of its <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -1772,8 +1784,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -1781,24 +1792,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -1828,8 +1845,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Computes the bitwise OR of its two <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Computes the bitwise OR of its two <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -1839,8 +1855,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -1848,24 +1863,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -1895,8 +1916,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Divides the first <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Divides the first <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -1906,13 +1926,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure whose <see
-             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+             structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
             
 
@@ -1920,24 +1938,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -1967,8 +1991,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison of the two <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -1978,38 +2001,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the two instances are equal or <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the two instances are equal or <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-             if the two instances are not equal. If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             if the two instances are not equal. If either instance of <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -2017,24 +2033,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -2068,8 +2090,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -2077,24 +2098,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -2285,8 +2312,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison of the two <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -2296,38 +2322,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is greater than the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is greater than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -2335,24 +2354,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -2382,8 +2407,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison of the two <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -2393,38 +2417,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is greater than or equal to the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is greater than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -2432,24 +2449,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -2575,38 +2598,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the two instances are not equal or <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the two instances are not equal or <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-             if the two instances are equal. If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             if the two instances are equal. If either instance of <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -2614,24 +2630,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -2661,8 +2683,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison on the two <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Performs a logical comparison on the two <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -2672,38 +2693,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is less than the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is less than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -2711,24 +2725,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -2758,8 +2778,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison on the two <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Performs a logical comparison on the two <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -2769,38 +2788,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is less than or equal to the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is less than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -2808,24 +2820,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -2855,8 +2873,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Computes the remainder after dividing the first <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Computes the remainder after dividing the first <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -2866,13 +2883,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure whose <see
-             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+             structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
             
 
@@ -2880,24 +2895,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -2927,8 +2948,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Computes the product of the two <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Computes the product of the two <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -2938,18 +2958,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure whose <see
-             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+             structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
             
 
-             is equal to the product of the two <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             is equal to the product of the two <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -2957,24 +2974,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -3003,8 +3026,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a bitwise one's complement operation on its <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Performs a bitwise one's complement operation on its <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -3014,18 +3036,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure whose <see
-             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+             structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
             
 
-             is equal to the ones complement of the <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             is equal to the ones complement of the <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -3033,12 +3052,15 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -3068,8 +3090,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Subtracts the second <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Subtracts the second <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -3079,13 +3100,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure whose <see
-             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+             structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
             
 
@@ -3093,24 +3112,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -3139,13 +3164,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The unary minus operator negates the <see
-             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+            >The unary minus operator negates the <see cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             of the <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -3155,23 +3178,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure whose <see
-             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+             structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
             
 
-             is equal to the negated <see
-             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+             is equal to the negated <see cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             of the <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -3179,12 +3198,15 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -3209,8 +3231,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.String" />
+            >Converts the <see cref="T:System.String" />
 
             
 
@@ -3220,8 +3241,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A 64-bit signed integer equivalent to the value that is contained in the specified <see
-             cref="T:System.String" />
+            >A 64-bit signed integer equivalent to the value that is contained in the specified <see cref="T:System.String" />
 
             
 
@@ -3229,12 +3249,15 @@
           >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
@@ -3264,8 +3287,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Subtracts the second <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Subtracts the second <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -3275,13 +3297,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure whose <see
-             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+             structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
             
 
@@ -3289,24 +3309,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -3365,7 +3391,11 @@
           <para>This member supports the .NET Framework infrastructure and is not intended to be used directly from your code.</para>
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3395,7 +3425,11 @@
           <para>This member supports the .NET Framework infrastructure and is not intended to be used directly from your code.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3418,13 +3452,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure to <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             structure to <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
@@ -3434,8 +3466,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+            >true if the <see cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
             
 
@@ -3460,13 +3491,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure to <see
-             cref="T:System.Data.SqlTypes.SqlByte" />
+             structure to <see cref="T:System.Data.SqlTypes.SqlByte" />
 
             
 
@@ -3476,13 +3505,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlByte" />
+            >A <see cref="T:System.Data.SqlTypes.SqlByte" />
 
             
 
-             structure whose Value equals the Value of this <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             structure whose Value equals the Value of this <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -3510,13 +3537,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure to <see
-             cref="T:System.Data.SqlTypes.SqlDecimal" />
+             structure to <see cref="T:System.Data.SqlTypes.SqlDecimal" />
 
             
 
@@ -3526,13 +3551,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlDecimal" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlDecimal" />
 
             
 
-             equal to the value of this <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             equal to the value of this <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -3560,13 +3583,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure to <see
-             cref="T:System.Data.SqlTypes.SqlDouble" />
+             structure to <see cref="T:System.Data.SqlTypes.SqlDouble" />
 
             
 
@@ -3576,13 +3597,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlDouble" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlDouble" />
 
             
 
-             equal to the value of this <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             equal to the value of this <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -3607,13 +3626,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure to <see
-             cref="T:System.Data.SqlTypes.SqlInt16" />
+             structure to <see cref="T:System.Data.SqlTypes.SqlInt16" />
 
             
 
@@ -3623,13 +3640,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlInt16" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlInt16" />
 
             
 
-             equal to the value of this <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             equal to the value of this <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -3654,13 +3669,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure to <see
-             cref="T:System.Data.SqlTypes.SqlInt32" />
+             structure to <see cref="T:System.Data.SqlTypes.SqlInt32" />
 
             
 
@@ -3670,13 +3683,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             equal to the value of this <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             equal to the value of this <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -3701,13 +3712,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure to <see
-             cref="T:System.Data.SqlTypes.SqlMoney" />
+             structure to <see cref="T:System.Data.SqlTypes.SqlMoney" />
 
             
 
@@ -3717,13 +3726,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlMoney" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlMoney" />
 
             
 
-             equal to the value of this <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             equal to the value of this <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -3751,13 +3758,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure to <see
-             cref="T:System.Data.SqlTypes.SqlSingle" />
+             structure to <see cref="T:System.Data.SqlTypes.SqlSingle" />
 
             
 
@@ -3767,13 +3772,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlSingle" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlSingle" />
 
             
 
-             equal to the value of this <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             equal to the value of this <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -3801,13 +3804,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             structure to <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             structure to <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -3817,13 +3818,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >A <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             representing the value of this <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             representing the value of this <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -3848,13 +3847,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this instance of <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Converts this instance of <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             to <see
-             cref="T:System.String" />
+             to <see cref="T:System.String" />
 
             
 
@@ -3864,13 +3861,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             representing the value of this <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             representing the value of this <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -3895,8 +3890,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of this <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >Gets the value of this <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -3931,8 +3925,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -3940,24 +3933,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
            structure. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlInt64" />
+          A <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
           
 
@@ -3983,13 +3982,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Data.SqlTypes.SqlInt64.Zero" />
+            >The <see cref="F:System.Data.SqlTypes.SqlInt64.Zero" />
 
             
 
-             field is a constant for the <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             field is a constant for the <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -3999,13 +3996,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a zero value that can be assigned to the <see
-             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+            >Represents a zero value that can be assigned to the <see cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
             
 
-             property of an instance of the <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             property of an instance of the <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 

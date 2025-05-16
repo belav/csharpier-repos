@@ -16,13 +16,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Security.Cryptography.Xml.IRelDecryptor" />
+        >Use the <see cref="T:System.Security.Cryptography.Xml.IRelDecryptor" />
 
         
 
-         interface with the <see
-         cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
+         interface with the <see cref="T:System.Security.Cryptography.Xml.XmlLicenseTransform" />
 
         
 
@@ -65,8 +63,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Xml.IRelDecryptor.Decrypt(System.Security.Cryptography.Xml.EncryptionMethod,System.Security.Cryptography.Xml.KeyInfo,System.IO.Stream)" />
+            >The <see cref="M:System.Security.Cryptography.Xml.IRelDecryptor.Decrypt(System.Security.Cryptography.Xml.EncryptionMethod,System.Security.Cryptography.Xml.KeyInfo,System.IO.Stream)" />
 
             
 
@@ -76,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Decrypts an XrML &lt;encryptedGrant&gt; element that is contained within a <see
-             cref="T:System.IO.Stream" />
+            >Decrypts an XrML &lt;encryptedGrant&gt; element that is contained within a <see cref="T:System.IO.Stream" />
 
             
 
@@ -87,8 +83,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.IO.Stream" />
+            >A <see cref="T:System.IO.Stream" />
 
             
 
@@ -96,31 +91,41 @@
           >
         </returns>
         <param name="encryptionMethod">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Cryptography.Xml.EncryptionMethod" />
+          An <see cref="T:System.Security.Cryptography.Xml.EncryptionMethod" />
 
           
 
            object that encapsulates the algorithm used for XML encryption.</param
         >
         <param name="keyInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+          A <see cref="T:System.Security.Cryptography.Xml.KeyInfo" />
 
           
 
            object that contains an asymmetric key to use for decryption.</param
         >
         <param name="toDecrypt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

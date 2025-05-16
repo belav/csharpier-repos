@@ -202,7 +202,7 @@ This package is an internal implementation of the .NET Core SDK and is not meant
     <!-- If Build won't run in the GenerateNuspec context, need to update Content, None and _PackageFiles. -->
     <GenerateNuspecDependsOn
       Condition=" '$(NoBuild)' == 'true' AND '$(GeneratePackageOnBuild)' != 'true' "
-      >
+    >
       _ResolveNativePackContent;
       _IncludeVersionFile;
       $(GenerateNuspecDependsOn);
@@ -214,8 +214,7 @@ This package is an internal implementation of the .NET Core SDK and is not meant
     <CrossGenDependsOn>
       ResolveReferences;
     </CrossGenDependsOn>
-    <CrossGenDependsOn Condition=" '$(CrossgenOutput)' == 'true' "
-      >
+    <CrossGenDependsOn Condition=" '$(CrossgenOutput)' == 'true' ">
       $(CrossGenDependsOn);
       _BatchCrossGenAssemblies;
       _GenerateComposites;

@@ -17,18 +17,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class represents the syndication versions that indigo2 supports by default. You can add support for additional syndication versions by implementing your own <see
-         cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+        >This class represents the syndication versions that indigo2 supports by default. You can add support for additional syndication versions by implementing your own <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
         
 
-        , <see
-         cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+        , <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
         
 
-        , and <see
-         cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+        , and <see cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
 
         
 

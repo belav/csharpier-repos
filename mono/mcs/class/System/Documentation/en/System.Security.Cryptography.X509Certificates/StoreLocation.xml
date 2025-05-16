@@ -18,8 +18,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used with the <see
-         cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+        >This enumeration is used with the <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
 
         
 

@@ -21,31 +21,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.TableLayoutSettings" />
+        >The <see cref="T:System.Windows.Forms.TableLayoutSettings" />
 
         
 
-         class collects and manages the characteristics associated with the table layout scheme. This class is used internally by the <see
-         cref="T:System.Windows.Forms.TableLayoutPanel" />
+         class collects and manages the characteristics associated with the table layout scheme. This class is used internally by the <see cref="T:System.Windows.Forms.TableLayoutPanel" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+         and <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-         classes, as well as the table layout engine. The <see
-         cref="T:System.Windows.Forms.TableLayoutSettings" />
+         classes, as well as the table layout engine. The <see cref="T:System.Windows.Forms.TableLayoutSettings" />
 
         
 
          class is used by the layout engine to determine how to lay out the container's child controls.</para
       >
       <para
-        >The <see
-         cref="T:System.Windows.Forms.TableLayoutSettings" />
+        >The <see cref="T:System.Windows.Forms.TableLayoutSettings" />
 
         
 
@@ -54,8 +49,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="T:System.Windows.Forms.TableLayoutPanelGrowStyle" />
+            >The <see cref="T:System.Windows.Forms.TableLayoutPanelGrowStyle" />
 
             
 
@@ -88,8 +82,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting the <see
-             cref="P:System.Windows.Forms.TableLayoutSettings.ColumnCount" />
+            >Setting the <see cref="P:System.Windows.Forms.TableLayoutSettings.ColumnCount" />
 
             
 
@@ -133,13 +126,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.TableLayoutSettings.ColumnStyles" />
+            >Use the <see cref="P:System.Windows.Forms.TableLayoutSettings.ColumnStyles" />
 
             
 
-             property to access the style properties of specific columns. The order of the styles in a <see
-             cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+             property to access the style properties of specific columns. The order of the styles in a <see cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
 
             
 
@@ -177,8 +168,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
+            >Gets the <see cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
 
             
 
@@ -188,8 +178,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
+            >A <see cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
 
             
 
@@ -197,7 +186,11 @@
           >
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -233,7 +226,11 @@
           <para>The column position of the specified child control.</para>
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -264,7 +261,11 @@
           <para>The number of columns that the cell containing the child control spans.</para>
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -300,7 +301,11 @@
           <para>The row position of the specified child control.</para>
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -331,7 +336,11 @@
           <para>The number of rows that the cell containing the child control spans.</para>
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -354,23 +363,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.TableLayoutSettings.GrowStyle" />
+            >The <see cref="P:System.Windows.Forms.TableLayoutSettings.GrowStyle" />
 
             
 
-             property determines how the layout engine should add a new cell to a full table. This property can be set to <see
-             cref="F:System.Windows.Forms.TableLayoutPanelGrowStyle.AddRows" />
+             property determines how the layout engine should add a new cell to a full table. This property can be set to <see cref="F:System.Windows.Forms.TableLayoutPanelGrowStyle.AddRows" />
 
             
 
-             to indicate that rows should be added, <see
-             cref="F:System.Windows.Forms.TableLayoutPanelGrowStyle.AddColumns" />
+             to indicate that rows should be added, <see cref="F:System.Windows.Forms.TableLayoutPanelGrowStyle.AddColumns" />
 
             
 
-             to indicate that columns should be added, or <see
-             cref="F:System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize" />
+             to indicate that columns should be added, or <see cref="F:System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize" />
 
             
 
@@ -406,8 +411,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.TableLayoutSettings.LayoutEngine" />
+            >The <see cref="P:System.Windows.Forms.TableLayoutSettings.LayoutEngine" />
 
             
 
@@ -419,8 +423,7 @@
             </item>
             <item>
               <para
-                >A control contained within a table layout container, such as a button contained in a cell of a <see
-                 cref="T:System.Windows.Forms.TableLayoutPanel" />
+                >A control contained within a table layout container, such as a button contained in a cell of a <see cref="T:System.Windows.Forms.TableLayoutPanel" />
 
                 
 
@@ -450,8 +453,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting the <see
-             cref="P:System.Windows.Forms.TableLayoutSettings.RowCount" />
+            >Setting the <see cref="P:System.Windows.Forms.TableLayoutSettings.RowCount" />
 
             
 
@@ -495,13 +497,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.TableLayoutSettings.RowStyles" />
+            >Use the <see cref="P:System.Windows.Forms.TableLayoutSettings.RowStyles" />
 
             
 
-             property to access the style properties of specific rows. The order of the styles in a <see
-             cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />
+             property to access the style properties of specific rows. The order of the styles in a <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />
 
             
 
@@ -540,8 +540,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
+            >Sets the <see cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
 
             
 
@@ -549,19 +548,26 @@
           >
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A control contained within a cell.</param
         >
         <param name="cellPosition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
+          A <see cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
 
           
 
@@ -589,14 +595,22 @@
           <para>Sets the column position for the specified child control.</para>
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A control contained within a cell.</param
         >
         <param name="column">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -627,14 +641,22 @@
           <para>Sets the number of columns that the cell containing the child control spans.</para>
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A control contained within a cell.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -662,14 +684,22 @@
           <para>Sets the row position of the specified child control.</para>
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A control contained within a cell.</param
         >
         <param name="row">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -697,14 +727,22 @@
           <para>Sets the number of rows that the cell containing the child control spans.</para>
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A control contained within a cell.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -732,13 +770,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.TableLayoutSettings" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.TableLayoutSettings" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+             instance is cast to an <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
@@ -748,8 +784,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+            >For a description of this member, see <see cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
 
             
 
@@ -757,14 +792,22 @@
           >
         </summary>
         <param name="si">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to be populated with serialization information. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

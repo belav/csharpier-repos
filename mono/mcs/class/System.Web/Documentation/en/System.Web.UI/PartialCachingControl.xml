@@ -20,33 +20,28 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Page and control developers cannot use the <see
-         cref="T:System.Web.UI.PartialCachingControl" />
+        >Page and control developers cannot use the <see cref="T:System.Web.UI.PartialCachingControl" />
 
         
 
-         class directly. ASP.NET creates an instance of the <see
-         cref="T:System.Web.UI.PartialCachingControl" />
+         class directly. ASP.NET creates an instance of the <see cref="T:System.Web.UI.PartialCachingControl" />
 
         
 
-         class to wrap a user control (.ascx file) when a dynamically loaded user control enables output caching. You can enable output caching for a user control using either the <format
-         type="text/html">
+         class to wrap a user control (.ascx file) when a dynamically loaded user control enables output caching. You can enable output caching for a user control using either the <format type="text/html">
           <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
         </format>
 
         
 
-         page directive or the <see
-         cref="T:System.Web.UI.PartialCachingAttribute" />
+         page directive or the <see cref="T:System.Web.UI.PartialCachingAttribute" />
 
         
 
          attribute.</para
       >
       <para
-        >You add a user control to a page programmatically by calling the <see
-         cref="M:System.Web.UI.TemplateControl.LoadControl(System.String)" />
+        >You add a user control to a page programmatically by calling the <see cref="M:System.Web.UI.TemplateControl.LoadControl(System.String)" />
 
         
 
@@ -56,20 +51,17 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Created when a user control (.ascx file) is specified for output caching, using either the <format
-         type="text/html">
+        >Created when a user control (.ascx file) is specified for output caching, using either the <format type="text/html">
           <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
         </format>
 
         
 
-         page directive or the <see
-         cref="T:System.Web.UI.PartialCachingAttribute" />
+         page directive or the <see cref="T:System.Web.UI.PartialCachingAttribute" />
 
         
 
-         attribute, and the user control is inserted into a page's control hierarchy by dynamically loading the user control with the <see
-         cref="M:System.Web.UI.TemplateControl.LoadControl(System.String)" />
+         attribute, and the user control is inserted into a page's control hierarchy by dynamically loading the user control with the <see cref="M:System.Web.UI.TemplateControl.LoadControl(System.String)" />
 
         
 

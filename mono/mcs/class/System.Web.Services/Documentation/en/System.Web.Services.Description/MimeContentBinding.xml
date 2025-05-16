@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For more information about specifying protocols for XML Web services, see <format
-         type="text/html">
+        >For more information about specifying protocols for XML Web services, see <format type="text/html">
           <a href="01DFC27C-C68E-4910-A0AA-5E4C2A766B0C"
             >[&lt;topic://cpconbuildingaspnetwebservices&gt;]</a
           >
@@ -43,13 +42,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an extensibility element added to an <see
-         cref="T:System.Web.Services.Description.InputBinding" />
+        >Represents an extensibility element added to an <see cref="T:System.Web.Services.Description.InputBinding" />
 
         
 
-         or an <see
-         cref="T:System.Web.Services.Description.OutputBinding" />
+         or an <see cref="T:System.Web.Services.Description.OutputBinding" />
 
         
 
@@ -68,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.MimeContentBinding" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.MimeContentBinding" />
 
             
 
@@ -94,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the URI for the XML namespace of the <see
-             cref="T:System.Web.Services.Description.MimeContentBinding" />
+            >Specifies the URI for the XML namespace of the <see cref="T:System.Web.Services.Description.MimeContentBinding" />
 
             
 
@@ -121,13 +116,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the <see
-             cref="T:System.Web.Services.Description.MessagePart" />
+            >Gets or sets the name of the <see cref="T:System.Web.Services.Description.MessagePart" />
 
             
 
-             to which the <see
-             cref="T:System.Web.Services.Description.MimeContentBinding" />
+             to which the <see cref="T:System.Web.Services.Description.MimeContentBinding" />
 
             
 

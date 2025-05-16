@@ -30,18 +30,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Configuration.ApplicationSettingsBase.SettingsSaving" />
+        >The <see cref="E:System.Configuration.ApplicationSettingsBase.SettingsSaving" />
 
         
 
-         event occurs just before a group of application settings are persisted, typically during the execution of the <see
-         cref="M:System.Configuration.ApplicationSettingsBase.Save" />
+         event occurs just before a group of application settings are persisted, typically during the execution of the <see cref="M:System.Configuration.ApplicationSettingsBase.Save" />
 
         
 
-         method of a wrapper class derived from <see
-         cref="T:System.Configuration.ApplicationSettingsBase" />
+         method of a wrapper class derived from <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
         
 
@@ -51,8 +48,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see
-         cref="E:System.Configuration.ApplicationSettingsBase.SettingsSaving" />
+        >Represents the method that will handle the <see cref="E:System.Configuration.ApplicationSettingsBase.SettingsSaving" />
 
         
 

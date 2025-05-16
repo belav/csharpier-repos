@@ -197,8 +197,7 @@
       <Docs>
         <summary
           >Number of microseconds elapsed after 
-        <see
-           cref="F:Mono.Unix.Native.Timeval.tv_sec" />
+        <see cref="F:Mono.Unix.Native.Timeval.tv_sec" />
         </summary>
         <remarks />
       </Docs>

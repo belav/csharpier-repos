@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Extends design-time behavior for the <see
-         cref="T:System.Web.UI.WebControls.Calendar" />
+        >Extends design-time behavior for the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
         
 
@@ -37,8 +36,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.WebControls.CalendarDesigner" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebControls.CalendarDesigner" />
 
             
 
@@ -67,8 +65,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The designer host calls <see
-             cref="M:System.Web.UI.Design.WebControls.CalendarDesigner.Initialize(System.ComponentModel.IComponent)" />
+            >The designer host calls <see cref="M:System.Web.UI.Design.WebControls.CalendarDesigner.Initialize(System.ComponentModel.IComponent)" />
 
             
 
@@ -80,12 +77,15 @@
           <para>Initializes the designer with the specified component.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IComponent" />
+          The <see cref="T:System.ComponentModel.IComponent" />
 
           
 
@@ -120,19 +120,26 @@
           <para>Called when an auto-format scheme has been applied to the control.</para>
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event. </param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.EventArgs" />
+          The <see cref="T:System.EventArgs" />
 
           
 

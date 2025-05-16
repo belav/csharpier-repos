@@ -14,23 +14,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The information in a <see
-         cref="T:System.Windows.Forms.CreateParams" />
+        >The information in a <see cref="T:System.Windows.Forms.CreateParams" />
 
         
 
-         can be used to pass information about the initial state and appearance of a control. Most <see
-         cref="T:System.Windows.Forms.Control" />
+         can be used to pass information about the initial state and appearance of a control. Most <see cref="T:System.Windows.Forms.Control" />
 
         
 
-         derived controls override the <see
-         cref="P:System.Windows.Forms.Control.CreateParams" />
+         derived controls override the <see cref="P:System.Windows.Forms.Control.CreateParams" />
 
         
 
-         property to pass in the appropriate values or include additional information in the <see
-         cref="T:System.Windows.Forms.CreateParams" />
+         property to pass in the appropriate values or include additional information in the <see cref="T:System.Windows.Forms.CreateParams" />
 
         
 
@@ -39,18 +35,15 @@
       <para>For more information about creating control parameters, see the CreateWindow and CreateWindowEx functions and the CREATESTRUCT structure documentation in the Windows Platform SDK reference located in the MSDN Library.</para>
       <block subset="none" type="note">
         <para
-          >The constants used to set the <see
-           cref="P:System.Windows.Forms.CreateParams.Style" />
+          >The constants used to set the <see cref="P:System.Windows.Forms.CreateParams.Style" />
 
           
 
-          , <see
-           cref="P:System.Windows.Forms.CreateParams.ExStyle" />
+          , <see cref="P:System.Windows.Forms.CreateParams.ExStyle" />
 
           
 
-          , and <see
-           cref="P:System.Windows.Forms.CreateParams.ClassStyle" />
+          , and <see cref="P:System.Windows.Forms.CreateParams.ClassStyle" />
 
           
 
@@ -73,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.CreateParams" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.CreateParams" />
 
             
 
@@ -117,8 +109,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value for this property is null, indicating that the control is not derived from an existing control class. To derive from an existing control class, store the system class name in this property. For example, to derive from the standard <see
-             cref="T:System.Windows.Forms.Button" />
+            >The default value for this property is null, indicating that the control is not derived from an existing control class. To derive from an existing control class, store the system class name in this property. For example, to derive from the standard <see cref="T:System.Windows.Forms.Button" />
 
             
 
@@ -146,13 +137,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.CreateParams.ClassStyle" />
+            >The <see cref="P:System.Windows.Forms.CreateParams.ClassStyle" />
 
             
 
-             property is ignored if the <see
-             cref="P:System.Windows.Forms.CreateParams.ClassName" />
+             property is ignored if the <see cref="P:System.Windows.Forms.CreateParams.ClassName" />
 
             
 
@@ -161,18 +150,15 @@
           <para>For more information about creating control parameters, see the CreateWindow and CreateWindowEx functions and the CREATESTRUCT structure documentation in the Windows Platform SDK reference located in the MSDN Library.</para>
           <block subset="none" type="note">
             <para
-              >The constants used to set the <see
-               cref="P:System.Windows.Forms.CreateParams.Style" />
+              >The constants used to set the <see cref="P:System.Windows.Forms.CreateParams.Style" />
 
               
 
-              , <see
-               cref="P:System.Windows.Forms.CreateParams.ExStyle" />
+              , <see cref="P:System.Windows.Forms.CreateParams.ExStyle" />
 
               
 
-              , and <see
-               cref="P:System.Windows.Forms.CreateParams.ClassStyle" />
+              , and <see cref="P:System.Windows.Forms.CreateParams.ClassStyle" />
 
               
 
@@ -201,8 +187,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.CreateParams.ExStyle" />
+            >The <see cref="P:System.Windows.Forms.CreateParams.ExStyle" />
 
             
 
@@ -211,18 +196,15 @@
           <para>For more information about creating control parameters, see the CreateWindow and CreateWindowEx functions and the CREATESTRUCT structure documentation in the Windows Platform SDK reference located in the MSDN Library.</para>
           <block subset="none" type="note">
             <para
-              >The constants used to set the <see
-               cref="P:System.Windows.Forms.CreateParams.Style" />
+              >The constants used to set the <see cref="P:System.Windows.Forms.CreateParams.Style" />
 
               
 
-              , <see
-               cref="P:System.Windows.Forms.CreateParams.ExStyle" />
+              , <see cref="P:System.Windows.Forms.CreateParams.ExStyle" />
 
               
 
-              , and <see
-               cref="P:System.Windows.Forms.CreateParams.ClassStyle" />
+              , and <see cref="P:System.Windows.Forms.CreateParams.ClassStyle" />
 
               
 
@@ -270,8 +252,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you are creating a multiple document interface (MDI) client window, the <see
-             cref="P:System.Windows.Forms.CreateParams.Param" />
+            >If you are creating a multiple document interface (MDI) client window, the <see cref="P:System.Windows.Forms.CreateParams.Param" />
 
             
 
@@ -319,8 +300,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.CreateParams.Style" />
+            >The <see cref="P:System.Windows.Forms.CreateParams.Style" />
 
             
 
@@ -329,18 +309,15 @@
           <para>For more information about creating control parameters, see the CreateWindow and CreateWindowEx functions and the CREATESTRUCT structure documentation in the Windows Platform SDK reference located in the MSDN Library.</para>
           <block subset="none" type="note">
             <para
-              >The constants used to set the <see
-               cref="P:System.Windows.Forms.CreateParams.Style" />
+              >The constants used to set the <see cref="P:System.Windows.Forms.CreateParams.Style" />
 
               
 
-              , <see
-               cref="P:System.Windows.Forms.CreateParams.ExStyle" />
+              , <see cref="P:System.Windows.Forms.CreateParams.ExStyle" />
 
               
 
-              , and <see
-               cref="P:System.Windows.Forms.CreateParams.ClassStyle" />
+              , and <see cref="P:System.Windows.Forms.CreateParams.ClassStyle" />
 
               
 

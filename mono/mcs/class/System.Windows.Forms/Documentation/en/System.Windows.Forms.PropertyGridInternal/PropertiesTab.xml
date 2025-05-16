@@ -18,13 +18,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the <ui
-        >Properties</ui>
+        >Represents the <ui>Properties</ui>
 
         
 
-         tab on a <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+         tab on a <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
@@ -42,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.PropertyGridInternal.PropertiesTab" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.PropertyGridInternal.PropertiesTab" />
 
             
 
@@ -161,14 +158,11 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Gets the name of the <ui
-            >Properties</ui>
+          <para>Gets the name of the <ui>Properties</ui>
 
             
 
-             tab.</para
-          >
+             tab.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

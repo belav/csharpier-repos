@@ -37,31 +37,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Policy.StrongName" />
+        >The <see cref="T:System.Security.Policy.StrongName" />
 
         
 
          class represents evidence of a unique, cryptographically strong name of a code assembly. The strong name consists of a public key, a given name, and a version. The public key corresponds to the publisher's private key which is kept secret, and with which the assembly must be signed in order for the strong name to be valid.</para
       >
       <para
-        >Strong names are typically assigned to assemblies using either <see
-         cref="T:System.Reflection.AssemblyKeyFileAttribute" />
+        >Strong names are typically assigned to assemblies using either <see cref="T:System.Reflection.AssemblyKeyFileAttribute" />
 
         
 
-        , <see
-         cref="T:System.Reflection.AssemblyKeyNameAttribute" />
+        , <see cref="T:System.Reflection.AssemblyKeyNameAttribute" />
 
         
 
-         or <see
-         cref="T:System.Reflection.AssemblyDelaySignAttribute" />
+         or <see cref="T:System.Reflection.AssemblyDelaySignAttribute" />
 
         
 
-         in conjunction with the SN utility (see <format
-         type="text/html">
+         in conjunction with the SN utility (see <format type="text/html">
           <a href="C1D2B532-1B8E-4C7A-8AC5-53B801135EC6"
             >[&lt;topic://cpgrfstrongnameutilitysnexe&gt;]</a
           >
@@ -110,21 +105,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="name" />
+            >The <paramref name="name" />
 
             
 
              parameter can be null, but it cannot be an empty string ("").</para
           >
           <para
-            >For more information about strong names, see <see
-             cref="T:System.Security.Permissions.StrongNameIdentityPermission" />
+            >For more information about strong names, see <see cref="T:System.Security.Permissions.StrongNameIdentityPermission" />
 
             
 
-             and <see
-             cref="T:System.Security.Permissions.StrongNamePublicKeyBlob" />
+             and <see cref="T:System.Security.Permissions.StrongNamePublicKeyBlob" />
 
             
 
@@ -134,8 +126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Policy.StrongName" />
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.StrongName" />
 
             
 
@@ -143,31 +134,41 @@
           >
         </summary>
         <param name="blob">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Permissions.StrongNamePublicKeyBlob" />
+          The <see cref="T:System.Security.Permissions.StrongNamePublicKeyBlob" />
 
           
 
            of the software publisher. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The simple name section of the strong name. </param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Version" />
+          The <see cref="T:System.Version" />
 
           
 
@@ -196,8 +197,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an equivalent copy of the current <see
-             cref="T:System.Security.Policy.StrongName" />
+            >Creates an equivalent copy of the current <see cref="T:System.Security.Policy.StrongName" />
 
             
 
@@ -207,8 +207,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new, identical copy of the current <see
-             cref="T:System.Security.Policy.StrongName" />
+            >A new, identical copy of the current <see cref="T:System.Security.Policy.StrongName" />
 
             
 
@@ -246,13 +245,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Security.Permissions.StrongNameIdentityPermission" />
+            >Creates a <see cref="T:System.Security.Permissions.StrongNameIdentityPermission" />
 
             
 
-             that corresponds to the current <see
-             cref="T:System.Security.Policy.StrongName" />
+             that corresponds to the current <see cref="T:System.Security.Policy.StrongName" />
 
             
 
@@ -262,13 +259,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.Permissions.StrongNameIdentityPermission" />
+            >A <see cref="T:System.Security.Permissions.StrongNameIdentityPermission" />
 
             
 
-             for the specified <see
-             cref="T:System.Security.Policy.StrongName" />
+             for the specified <see cref="T:System.Security.Policy.StrongName" />
 
             
 
@@ -276,17 +271,19 @@
           >
         </returns>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Policy.Evidence" />
+          The <see cref="T:System.Security.Policy.Evidence" />
 
           
 
-           from which to construct the <see
-           cref="T:System.Security.Permissions.StrongNameIdentityPermission" />
+           from which to construct the <see cref="T:System.Security.Permissions.StrongNameIdentityPermission" />
 
           
 
@@ -323,7 +320,11 @@
           <para>true if the specified strong name is equal to the current strong name; otherwise, false.</para>
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -352,8 +353,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the hash code of the current <see
-             cref="T:System.Security.Policy.StrongName" />
+            >Gets the hash code of the current <see cref="T:System.Security.Policy.StrongName" />
 
             
 
@@ -363,8 +363,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hash code of the current <see
-             cref="T:System.Security.Policy.StrongName" />
+            >The hash code of the current <see cref="T:System.Security.Policy.StrongName" />
 
             
 
@@ -391,8 +390,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the simple name of the current <see
-             cref="T:System.Security.Policy.StrongName" />
+            >Gets the simple name of the current <see cref="T:System.Security.Policy.StrongName" />
 
             
 
@@ -429,13 +427,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Security.Permissions.StrongNamePublicKeyBlob" />
+            >Gets the <see cref="T:System.Security.Permissions.StrongNamePublicKeyBlob" />
 
             
 
-             of the current <see
-             cref="T:System.Security.Policy.StrongName" />
+             of the current <see cref="T:System.Security.Policy.StrongName" />
 
             
 
@@ -555,8 +551,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a string representation of the current <see
-             cref="T:System.Security.Policy.StrongName" />
+            >Creates a string representation of the current <see cref="T:System.Security.Policy.StrongName" />
 
             
 
@@ -566,8 +561,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A representation of the current <see
-             cref="T:System.Security.Policy.StrongName" />
+            >A representation of the current <see cref="T:System.Security.Policy.StrongName" />
 
             
 
@@ -594,13 +588,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Version" />
+            >Gets the <see cref="T:System.Version" />
 
             
 
-             of the current <see
-             cref="T:System.Security.Policy.StrongName" />
+             of the current <see cref="T:System.Security.Policy.StrongName" />
 
             
 

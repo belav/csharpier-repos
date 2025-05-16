@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <clause number="18.3.4" title="Default values">
   <paragraph
-    >As described in <hyperlink
-    >12.2</hyperlink>
+    >As described in <hyperlink>12.2</hyperlink>
 
     
 
@@ -10,8 +9,7 @@
   >
   <paragraph>
     <example
-      >[Example: Referring to the Point struct declared above, the example <code_example
-      >
+      >[Example: Referring to the Point struct declared above, the example <code_example>
         <![CDATA[
 Point[] a = new Point[100];  
 ]]>
@@ -23,8 +21,7 @@ Point[] a = new Point[100];
     >
   </paragraph>
   <paragraph
-    >The default value of a struct corresponds to the value returned by the default constructor of the struct (<hyperlink
-    >11.1.1</hyperlink>
+    >The default value of a struct corresponds to the value returned by the default constructor of the struct (<hyperlink>11.1.1</hyperlink>
 
     
 
@@ -32,8 +29,7 @@ Point[] a = new Point[100];
   >
   <paragraph>
     <note
-      >[Note: Structs should be designed to consider the default initialization state a valid state. In the example <code_example
-      >
+      >[Note: Structs should be designed to consider the default initialization state a valid state. In the example <code_example>
         <![CDATA[
 using System;  
 struct KeyValuePair  

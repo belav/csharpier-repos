@@ -22,8 +22,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Extends design-time behavior for the <see
-         cref="T:System.Web.UI.WebControls.Repeater" />
+        >Extends design-time behavior for the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
         
 
@@ -41,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.WebControls.RepeaterDesigner" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebControls.RepeaterDesigner" />
 
             
 
@@ -67,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of a specific table or view in the data source object to bind the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >Gets or sets the name of a specific table or view in the data source object to bind the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -93,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A data-binding expression that identifies the source of data for the associated <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >A data-binding expression that identifies the source of data for the associated <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -120,8 +116,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the disposing parameter is true, the Dispose method releases all the resources held by the managed objects that this <see
-             cref="T:System.Web.UI.Design.WebControls.RepeaterDesigner" />
+            >When the disposing parameter is true, the Dispose method releases all the resources held by the managed objects that this <see cref="T:System.Web.UI.Design.WebControls.RepeaterDesigner" />
 
             
 
@@ -131,8 +126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Web.UI.Design.WebControls.RepeaterDesigner" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Web.UI.Design.WebControls.RepeaterDesigner" />
 
             
 
@@ -140,7 +134,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -170,8 +168,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns design-time sample data based on the <see
-             cref="M:System.Web.UI.Design.WebControls.RepeaterDesigner.GetResolvedSelectedDataSource" />
+            >Returns design-time sample data based on the <see cref="M:System.Web.UI.Design.WebControls.RepeaterDesigner.GetResolvedSelectedDataSource" />
 
             
 
@@ -181,8 +178,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerable" />
+            >An <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -219,8 +215,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerable" />
+            >An <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -296,7 +291,11 @@
           <para>Retrieves the HTML markup that provides information about the specified exception.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -322,23 +321,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.WebControls.RepeaterDesigner.GetResolvedSelectedDataSource" />
+            >The <see cref="M:System.Web.UI.Design.WebControls.RepeaterDesigner.GetResolvedSelectedDataSource" />
 
             
 
-             method uses the <see
-             cref="M:System.Web.UI.Design.WebControls.RepeaterDesigner.GetSelectedDataSource" />
+             method uses the <see cref="M:System.Web.UI.Design.WebControls.RepeaterDesigner.GetSelectedDataSource" />
 
             
 
-             method to construct a data source from the object that is specified by the <see
-             cref="P:System.Web.UI.Design.WebControls.RepeaterDesigner.DataSource" />
+             method to construct a data source from the object that is specified by the <see cref="P:System.Web.UI.Design.WebControls.RepeaterDesigner.DataSource" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.Design.WebControls.RepeaterDesigner.DataMember" />
+             and <see cref="P:System.Web.UI.Design.WebControls.RepeaterDesigner.DataMember" />
 
             
 
@@ -352,8 +347,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerable" />
+            >An <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -377,18 +371,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.WebControls.RepeaterDesigner.GetSelectedDataSource" />
+            >The <see cref="M:System.Web.UI.Design.WebControls.RepeaterDesigner.GetSelectedDataSource" />
 
             
 
-             method uses the <see
-             cref="M:System.Web.UI.Design.DesignTimeData.GetSelectedDataSource(System.ComponentModel.IComponent,System.String)" />
+             method uses the <see cref="M:System.Web.UI.Design.DesignTimeData.GetSelectedDataSource(System.ComponentModel.IComponent,System.String)" />
 
             
 
-             method to construct a data source from the object that is specified by the <see
-             cref="P:System.Web.UI.Design.WebControls.RepeaterDesigner.DataSource" />
+             method to construct a data source from the object that is specified by the <see cref="P:System.Web.UI.Design.WebControls.RepeaterDesigner.DataSource" />
 
             
 
@@ -398,8 +389,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the selected data source component from the container of the associated <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >Retrieves the selected data source component from the container of the associated <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -433,8 +423,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the designer with the provided <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >Initializes the designer with the provided <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -442,12 +431,15 @@
           >
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The associated <see
-           cref="T:System.Web.UI.WebControls.Repeater" />
+          The associated <see cref="T:System.Web.UI.WebControls.Repeater" />
 
           
 
@@ -524,7 +516,11 @@
           <para>Filters the properties to replace the runtime data source property descriptor with the designer's property descriptor.</para>
         </summary>
         <param name="properties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

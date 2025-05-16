@@ -29,43 +29,36 @@
     <remarks>
       <para
         >When a reader is instantiated, the read state is set to
-   <see
-         langword="Initial" />
+   <see langword="Initial" />
 
         
 
-        . When the <see
-         cref="M:System.Xml.XmlReader.Read" />
+        . When the <see cref="M:System.Xml.XmlReader.Read" />
 
         
 
          method is called, the read state is
-      changed to <see
-         langword="Interactive" />
+      changed to <see langword="Interactive" />
 
         
 
         . If an error occurs during a read
-      operation, the read state is changed to <see
-         langword="Error" />
+      operation, the read state is changed to <see langword="Error" />
 
         
 
         . When the end of the
-      XML data is reached, the read state is set to <see
-         langword="EndOfFile" />
+      XML data is reached, the read state is set to <see langword="EndOfFile" />
 
         
 
         . When the
-   <see
-         cref="M:System.Xml.XmlReader.Close" />
+   <see cref="M:System.Xml.XmlReader.Close" />
 
         
 
          method
-      is called, the read state is set to <see
-         langword="Closed" />
+      is called, the read state is set to <see langword="Closed" />
 
         
 
@@ -104,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.XmlReader.Close" />
+            >The <see cref="M:System.Xml.XmlReader.Close" />
 
             
 

@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Threading.SynchronizationContext" />
+        >The <see cref="T:System.Threading.SynchronizationContext" />
 
         
 
@@ -30,7 +29,7 @@
       <para>Providers of synchronization models can extend this class and provide their own implementations for these methods. </para>
       <para
         >For more information about synchronization contexts, see the article <see
-         cref="http://msdn.microsoft.com/magazine/gg598924.aspx"
+          cref="http://msdn.microsoft.com/magazine/gg598924.aspx"
           >It's All About the SynchronizationContext</see
         >
 
@@ -66,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Threading.SynchronizationContext" />
+            >Creates a new instance of the <see cref="T:System.Threading.SynchronizationContext" />
 
             
 
@@ -99,8 +97,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation returns an empty <see
-             cref="T:System.Threading.SynchronizationContext" />
+            >The default implementation returns an empty <see cref="T:System.Threading.SynchronizationContext" />
 
             
 
@@ -114,8 +111,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Threading.SynchronizationContext" />
+            >A new <see cref="T:System.Threading.SynchronizationContext" />
 
             
 
@@ -262,8 +258,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Threading.SynchronizationContext.Post(System.Threading.SendOrPostCallback,System.Object)" />
+            >The <see cref="M:System.Threading.SynchronizationContext.Post(System.Threading.SendOrPostCallback,System.Object)" />
 
             
 
@@ -275,19 +270,26 @@
           <para>When overridden in a derived class, dispatches an asynchronous message to a synchronization context.</para>
         </summary>
         <param name="d">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.SendOrPostCallback" />
+          The <see cref="T:System.Threading.SendOrPostCallback" />
 
           
 
            delegate to call.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -321,8 +323,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Threading.SynchronizationContext.Send(System.Threading.SendOrPostCallback,System.Object)" />
+            >The <see cref="M:System.Threading.SynchronizationContext.Send(System.Threading.SendOrPostCallback,System.Object)" />
 
             
 
@@ -334,19 +335,26 @@
           <para>When overridden in a derived class, dispatches a synchronous message to a synchronization context.</para>
         </summary>
         <param name="d">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.SendOrPostCallback" />
+          The <see cref="T:System.Threading.SendOrPostCallback" />
 
           
 
            delegate to call.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -382,12 +390,15 @@
           <para>Sets the current synchronization context.</para>
         </summary>
         <param name="syncContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.SynchronizationContext" />
+          The <see cref="T:System.Threading.SynchronizationContext" />
 
           
 
@@ -454,18 +465,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Threading.SynchronizationContext.Wait(System.IntPtr[],System.Boolean,System.Int32)" />
+            >The <see cref="M:System.Threading.SynchronizationContext.Wait(System.IntPtr[],System.Boolean,System.Int32)" />
 
             
 
-             method calls the external declaration <see
-             cref="M:System.Threading.SynchronizationContext.WaitHelper(System.IntPtr[],System.Boolean,System.Int32)" />
+             method calls the external declaration <see cref="M:System.Threading.SynchronizationContext.WaitHelper(System.IntPtr[],System.Boolean,System.Int32)" />
 
             
 
-             to perform the wait activity.  Override the <see
-             cref="M:System.Threading.SynchronizationContext.Wait(System.IntPtr[],System.Boolean,System.Int32)" />
+             to perform the wait activity.  Override the <see cref="M:System.Threading.SynchronizationContext.Wait(System.IntPtr[],System.Boolean,System.Int32)" />
 
             
 
@@ -481,31 +489,41 @@
           <para>The array index of the object that satisfied the wait.</para>
         </returns>
         <param name="waitHandles">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.IntPtr" />
+          An array of type <see cref="T:System.IntPtr" />
 
           
 
            that contains the native operating system handles.</param
         >
         <param name="waitAll">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to wait for all handles; false to wait for any handle. </param
         >
         <param name="millisecondsTimeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of milliseconds to wait, or <see
-           cref="F:System.Threading.Timeout.Infinite" />
+          The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" />
 
           
 
@@ -555,13 +573,11 @@
 
             
 
-             is a declaration for an unmanaged external helper function. <see
-             cref="M:System.Threading.SynchronizationContext.WaitHelper(System.IntPtr[],System.Boolean,System.Int32)" />
+             is a declaration for an unmanaged external helper function. <see cref="M:System.Threading.SynchronizationContext.WaitHelper(System.IntPtr[],System.Boolean,System.Int32)" />
 
             
 
-             is called by the <see
-             cref="M:System.Threading.SynchronizationContext.Wait(System.IntPtr[],System.Boolean,System.Int32)" />
+             is called by the <see cref="M:System.Threading.SynchronizationContext.Wait(System.IntPtr[],System.Boolean,System.Int32)" />
 
             
 
@@ -577,31 +593,41 @@
           <para>The array index of the object that satisfied the wait.</para>
         </returns>
         <param name="waitHandles">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.IntPtr" />
+          An array of type <see cref="T:System.IntPtr" />
 
           
 
            that contains the native operating system handles.</param
         >
         <param name="waitAll">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to wait for all handles;  false to wait for any handle. </param
         >
         <param name="millisecondsTimeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of milliseconds to wait, or <see
-           cref="F:System.Threading.Timeout.Infinite" />
+          The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" />
 
           
 

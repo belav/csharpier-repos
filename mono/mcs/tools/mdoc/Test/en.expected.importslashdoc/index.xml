@@ -272,13 +272,11 @@
         <Docs>
           <typeparam name="T">To be added.</typeparam>
           <param name="self">To be added.</param>
-          <summary>
-            <c>System.Object</c>
+          <summary><c>System.Object</c>
 
             
 
-             extension method</summary
-          >
+             extension method</summary>
         </Docs>
         <Link
           Type="Mono.DocTest.Generic.Extensions"

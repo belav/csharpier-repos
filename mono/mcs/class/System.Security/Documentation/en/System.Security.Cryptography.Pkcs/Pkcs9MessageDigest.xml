@@ -22,18 +22,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Security.Cryptography.Pkcs.Pkcs9MessageDigest" />
+        >A <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9MessageDigest" />
 
         
 
-         object will be automatically generated and placed in the <see
-         cref="P:System.Security.Cryptography.Pkcs.SignerInfo.SignedAttributes" />
+         object will be automatically generated and placed in the <see cref="P:System.Security.Cryptography.Pkcs.SignerInfo.SignedAttributes" />
 
         
 
-         property whenever the <see
-         cref="P:System.Security.Cryptography.Pkcs.CmsSigner.SignedAttributes" />
+         property whenever the <see cref="P:System.Security.Cryptography.Pkcs.CmsSigner.SignedAttributes" />
 
         
 
@@ -43,8 +40,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Pkcs.Pkcs9MessageDigest" />
+        >The <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9MessageDigest" />
 
         
 
@@ -71,13 +67,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.Pkcs9MessageDigest.#ctor" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.Pkcs9MessageDigest.#ctor" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.Pkcs9MessageDigest" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9MessageDigest" />
 
             
 
@@ -111,13 +105,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method replaces the current <see
-             cref="T:System.Security.Cryptography.Pkcs.Pkcs9MessageDigest" />
+            >This method replaces the current <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9MessageDigest" />
 
             
 
-             object with the specified <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+             object with the specified <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -127,8 +119,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies information from an <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >Copies information from an <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -136,12 +127,15 @@
           >
         </summary>
         <param name="asnEncodedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.AsnEncodedData" />
+          The <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
           
 
@@ -167,8 +161,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.Pkcs9MessageDigest.MessageDigest" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.Pkcs9MessageDigest.MessageDigest" />
 
             
 

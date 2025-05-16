@@ -29,8 +29,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the simpleType element for simple content from XML Schema as specified by the <format
-         type="text/html">
+        >Represents the simpleType element for simple content from XML Schema as specified by the <format type="text/html">
           <a href="">World Wide Web Consortium (W3C)</a>
         </format>
 
@@ -60,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
 
             
 
@@ -146,18 +144,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets one of <see
-             cref="T:System.Xml.Schema.XmlSchemaSimpleTypeUnion" />
+            >Gets or sets one of <see cref="T:System.Xml.Schema.XmlSchemaSimpleTypeUnion" />
 
             
 
-            , <see
-             cref="T:System.Xml.Schema.XmlSchemaSimpleTypeList" />
+            , <see cref="T:System.Xml.Schema.XmlSchemaSimpleTypeList" />
 
             
 
-            , or <see
-             cref="T:System.Xml.Schema.XmlSchemaSimpleTypeRestriction" />
+            , or <see cref="T:System.Xml.Schema.XmlSchemaSimpleTypeRestriction" />
 
             
 

@@ -66,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeMemberField" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeMemberField" />
 
             
 
@@ -101,8 +100,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeMemberField" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeMemberField" />
 
             
 
@@ -110,14 +108,22 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object that indicates the type of the field. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -146,8 +152,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="type" />
+            >If the <paramref name="type" />
 
             
 
@@ -157,8 +162,7 @@
             <para>You must use square brackets ([]) and not the C# angle brackets (&lt;&gt;) to delimit generic parameters. </para>
           </block>
           <para
-            >To avoid the possibility of making a syntactic mistake, consider using the <see
-             cref="M:System.CodeDom.CodeMemberField.#ctor(System.Type,System.String)" />
+            >To avoid the possibility of making a syntactic mistake, consider using the <see cref="M:System.CodeDom.CodeMemberField.#ctor(System.Type,System.String)" />
 
             
 
@@ -168,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeMemberField" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeMemberField" />
 
             
 
@@ -177,14 +180,22 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the field. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -214,8 +225,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeMemberField" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeMemberField" />
 
             
 
@@ -223,14 +233,22 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the field. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

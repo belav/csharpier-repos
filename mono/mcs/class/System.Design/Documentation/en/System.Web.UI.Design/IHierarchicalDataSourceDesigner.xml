@@ -13,13 +13,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Typically, when creating a new data source class for hierarchical data and an accompanying designer, you would inherit the <see
-         cref="T:System.Web.UI.Design.HierarchicalDataSourceDesigner" />
+        >Typically, when creating a new data source class for hierarchical data and an accompanying designer, you would inherit the <see cref="T:System.Web.UI.Design.HierarchicalDataSourceDesigner" />
 
         
 
-         class rather than implement the <see
-         cref="T:System.Web.UI.Design.IHierarchicalDataSourceDesigner" />
+         class rather than implement the <see cref="T:System.Web.UI.Design.IHierarchicalDataSourceDesigner" />
 
         
 
@@ -29,8 +27,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides design-time support in a visual designer for a class that is derived from the <see
-         cref="T:System.Web.UI.HierarchicalDataSourceControl" />
+        >Provides design-time support in a visual designer for a class that is derived from the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" />
 
         
 
@@ -53,13 +50,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.IHierarchicalDataSourceDesigner.CanConfigure" />
+            >The <see cref="P:System.Web.UI.Design.IHierarchicalDataSourceDesigner.CanConfigure" />
 
             
 
-             property is used by a design host, such as vsprvslong, to determine whether to display a <ui
-            >Configure</ui>
+             property is used by a design host, such as vsprvslong, to determine whether to display a <ui>Configure</ui>
 
             
 
@@ -69,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="M:System.Web.UI.Design.IHierarchicalDataSourceDesigner.Configure" />
+            >Gets a value indicating whether the <see cref="M:System.Web.UI.Design.IHierarchicalDataSourceDesigner.Configure" />
 
             
 
@@ -93,13 +87,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.IHierarchicalDataSourceDesigner.CanRefreshSchema" />
+            >The <see cref="P:System.Web.UI.Design.IHierarchicalDataSourceDesigner.CanRefreshSchema" />
 
             
 
-             property is used by a design host, such as vsprvslong, to determine whether to display a <ui
-            >Refresh Schema</ui>
+             property is used by a design host, such as vsprvslong, to determine whether to display a <ui>Refresh Schema</ui>
 
             
 
@@ -109,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="M:System.Web.UI.Design.IHierarchicalDataSourceDesigner.RefreshSchema(System.Boolean)" />
+            >Gets a value indicating whether the <see cref="M:System.Web.UI.Design.IHierarchicalDataSourceDesigner.RefreshSchema(System.Boolean)" />
 
             
 
@@ -180,7 +171,11 @@
           <para>The named data source view that is associated with the data source control.</para>
         </returns>
         <param name="viewPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -207,7 +202,11 @@
           <para>Refreshes the schema of the underlying data source.</para>
         </summary>
         <param name="preferSilent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -230,8 +229,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Restores events after calling the <see
-             cref="M:System.Web.UI.Design.IHierarchicalDataSourceDesigner.SuppressDataSourceEvents" />
+            >Restores events after calling the <see cref="M:System.Web.UI.Design.IHierarchicalDataSourceDesigner.SuppressDataSourceEvents" />
 
             
 
@@ -271,8 +269,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can restore events with the <see
-             cref="M:System.Web.UI.Design.IHierarchicalDataSourceDesigner.ResumeDataSourceEvents" />
+            >You can restore events with the <see cref="M:System.Web.UI.Design.IHierarchicalDataSourceDesigner.ResumeDataSourceEvents" />
 
             
 

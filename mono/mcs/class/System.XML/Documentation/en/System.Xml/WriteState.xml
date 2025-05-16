@@ -28,33 +28,28 @@
   <Docs>
     <remarks>
       <para
-        >When a writer is instantiated, the write state is set to <see
-         langword="Start" />
+        >When a writer is instantiated, the write state is set to <see langword="Start" />
 
         
 
         . While content is written, the write 
    state is set to reflect the type of
    content being written. When the
-<see
-         cref="M:System.Xml.XmlWriter.Close" />
+<see cref="M:System.Xml.XmlWriter.Close" />
 
         
 
          method is called, the write state is set to 
-<see
-         langword="Closed" />
+<see langword="Closed" />
 
         
 
-        . The <see
-         cref="M:System.Xml.XmlWriter.WriteEndDocument" />
+        . The <see cref="M:System.Xml.XmlWriter.WriteEndDocument" />
 
         
 
          method resets the write state back to 
-<see
-         langword="Start" />
+<see langword="Start" />
 
         
 
@@ -65,8 +60,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the state of the <see
-         cref="T:System.Xml.XmlWriter" />
+        >Specifies the state of the <see cref="T:System.Xml.XmlWriter" />
 
         
 
@@ -131,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see
-             cref="M:System.Xml.XmlWriter.Close" />
+            >Indicates that the <see cref="M:System.Xml.XmlWriter.Close" />
 
             
 
@@ -227,33 +220,27 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception has been thrown, which has left the <see
-             cref="T:System.Xml.XmlWriter" />
+            >An exception has been thrown, which has left the <see cref="T:System.Xml.XmlWriter" />
 
             
 
-             in an invalid state. You can call the <see
-             cref="M:System.Xml.XmlWriter.Close" />
+             in an invalid state. You can call the <see cref="M:System.Xml.XmlWriter.Close" />
 
             
 
-             method to put the <see
-             cref="T:System.Xml.XmlWriter" />
+             method to put the <see cref="T:System.Xml.XmlWriter" />
 
             
 
-             in the <see
-             cref="F:System.Xml.WriteState.Closed" />
+             in the <see cref="F:System.Xml.WriteState.Closed" />
 
             
 
-             state. Any other <see
-             cref="T:System.Xml.XmlWriter" />
+             state. Any other <see cref="T:System.Xml.XmlWriter" />
 
             
 
-             method calls results in an <see
-             cref="T:System.InvalidOperationException" />
+             method calls results in an <see cref="T:System.InvalidOperationException" />
 
             
 

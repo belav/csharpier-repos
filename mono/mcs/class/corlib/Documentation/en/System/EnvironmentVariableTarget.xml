@@ -23,23 +23,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.EnvironmentVariableTarget" />
+        >The <see cref="T:System.EnvironmentVariableTarget" />
 
         
 
-         enumeration is used by certain overloads of the <see
-         cref="Overload:System.Environment.SetEnvironmentVariable" />
+         enumeration is used by certain overloads of the <see cref="Overload:System.Environment.SetEnvironmentVariable" />
 
         
 
-        , <see
-         cref="Overload:System.Environment.GetEnvironmentVariable" />
+        , <see cref="Overload:System.Environment.GetEnvironmentVariable" />
 
         
 
-        , and <see
-         cref="Overload:System.Environment.GetEnvironmentVariables" />
+        , and <see cref="Overload:System.Environment.GetEnvironmentVariables" />
 
         
 

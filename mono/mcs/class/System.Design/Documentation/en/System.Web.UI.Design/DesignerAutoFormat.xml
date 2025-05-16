@@ -20,13 +20,11 @@
          provides a base class that can be inherited from and extended to display a formatted custom Web server control at design time in a visual designer tool such as vsprvslong.</para
       >
       <para
-        >A control developer provides automatic formatting in order to help developers who use the control to select a preferred display. A custom <see
-         cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+        >A control developer provides automatic formatting in order to help developers who use the control to select a preferred display. A custom <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
         
 
-         object works with a custom control designer to provide automatic formatting at design time for a custom control. For example, the <see
-         cref="T:System.Web.UI.WebControls.Calendar" />
+         object works with a custom control designer to provide automatic formatting at design time for a custom control. For example, the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
         
 
@@ -39,13 +37,11 @@
         </item>
         <item>
           <para
-            >Derive a designer class from the <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+            >Derive a designer class from the <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
-             class or another designer class that is appropriate for your control, such as the <see
-             cref="T:System.Web.UI.Design.TextControlDesigner" />
+             class or another designer class that is appropriate for your control, such as the <see cref="T:System.Web.UI.Design.TextControlDesigner" />
 
             
 
@@ -54,13 +50,11 @@
         </item>
         <item>
           <para
-            >Derive a format class from the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+            >Derive a format class from the <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
-             class that formats your custom control by overriding the <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormat.Apply(System.Web.UI.Control)" />
+             class that formats your custom control by overriding the <see cref="M:System.Web.UI.Design.DesignerAutoFormat.Apply(System.Web.UI.Control)" />
 
             
 
@@ -69,13 +63,11 @@
         </item>
         <item>
           <para
-            >In your designer class, populate the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.AutoFormats" />
+            >In your designer class, populate the <see cref="P:System.Web.UI.Design.ControlDesigner.AutoFormats" />
 
             
 
-             property, which is a <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+             property, which is a <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
@@ -84,8 +76,7 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+        >The <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
         
 
@@ -94,8 +85,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormat.Apply(System.Web.UI.Control)" />
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormat.Apply(System.Web.UI.Control)" />
 
             
 
@@ -104,13 +94,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormat.GetPreviewControl(System.Web.UI.Control)" />
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormat.GetPreviewControl(System.Web.UI.Control)" />
 
             
 
-             method, which provides a copy of the control for previewing in an <ui
-            >AutoFormat</ui>
+             method, which provides a copy of the control for previewing in an <ui>AutoFormat</ui>
 
             
 
@@ -119,8 +107,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.DesignerAutoFormat.Name" />
+            >The <see cref="P:System.Web.UI.Design.DesignerAutoFormat.Name" />
 
             
 
@@ -148,23 +135,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormat.#ctor(System.String)" />
+            >Use the <see cref="M:System.Web.UI.Design.DesignerAutoFormat.#ctor(System.String)" />
 
             
 
-             constructor to create a new format and add it to a <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+             constructor to create a new format and add it to a <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             collection that is represented by the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.AutoFormats" />
+             collection that is represented by the <see cref="P:System.Web.UI.Design.ControlDesigner.AutoFormats" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+             property of a <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
@@ -174,8 +157,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
@@ -183,12 +165,15 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that identifies a specific <see
-           cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+          A string that identifies a specific <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
           
 
@@ -215,23 +200,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormat.Apply(System.Web.UI.Control)" />
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormat.Apply(System.Web.UI.Control)" />
 
             
 
-             method applies formatting to the specified control based on the <see
-             cref="P:System.Web.UI.Design.DesignerAutoFormat.Name" />
+             method applies formatting to the specified control based on the <see cref="P:System.Web.UI.Design.DesignerAutoFormat.Name" />
 
             
 
-             property. You can apply the styles directly to the control, or set the <see
-             cref="P:System.Web.UI.Design.DesignerAutoFormat.Style" />
+             property. You can apply the styles directly to the control, or set the <see cref="P:System.Web.UI.Design.DesignerAutoFormat.Style" />
 
             
 
-             property and then use the <see
-             cref="M:System.Web.UI.WebControls.WebControl.MergeStyle(System.Web.UI.WebControls.Style)" />
+             property and then use the <see cref="M:System.Web.UI.WebControls.WebControl.MergeStyle(System.Web.UI.WebControls.Style)" />
 
             
 
@@ -243,7 +224,11 @@
           <para>Applies the associated formatting to the specified control.</para>
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -270,36 +255,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormat.GetPreviewControl(System.Web.UI.Control)" />
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormat.GetPreviewControl(System.Web.UI.Control)" />
 
             
 
-             method is used by visual designers, such as vsprvslong, in an <ui
-            >AutoFormat</ui>
+             method is used by visual designers, such as vsprvslong, in an <ui>AutoFormat</ui>
 
             
 
              dialog box to display a formatted run-time preview of the control at design time before applying the format to the actual control.</para
           >
           <para
-            >Regardless of the setting of the <see
-             cref="T:System.Web.UI.Design.SupportsPreviewControlAttribute" />
+            >Regardless of the setting of the <see cref="T:System.Web.UI.Design.SupportsPreviewControlAttribute" />
 
             
 
-             attribute for the <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+             attribute for the <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
-             object, the <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormat.GetPreviewControl(System.Web.UI.Control)" />
+             object, the <see cref="M:System.Web.UI.Design.DesignerAutoFormat.GetPreviewControl(System.Web.UI.Control)" />
 
             
 
-             method returns a copy of the control in the <paramref
-             name="runtimeControl" />
+             method returns a copy of the control in the <paramref name="runtimeControl" />
 
             
 
@@ -313,8 +292,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormat.GetPreviewControl(System.Web.UI.Control)" />
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormat.GetPreviewControl(System.Web.UI.Control)" />
 
             
 
@@ -322,7 +300,11 @@
           >
         </returns>
         <param name="runtimeControl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -344,23 +326,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A visual designer, such as vsprvslong, uses the <see
-             cref="P:System.Web.UI.Design.DesignerAutoFormat.Name" />
+            >A visual designer, such as vsprvslong, uses the <see cref="P:System.Web.UI.Design.DesignerAutoFormat.Name" />
 
             
 
-             property from each <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+             property from each <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
-             object in the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.AutoFormats" />
+             object in the <see cref="P:System.Web.UI.Design.ControlDesigner.AutoFormats" />
 
             
 
-             collection of a <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+             collection of a <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
@@ -370,8 +348,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of a <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+            >Gets the name of a <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
@@ -397,23 +374,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although the object returned by the <see
-             cref="P:System.Web.UI.Design.DesignerAutoFormat.Style" />
+            >Although the object returned by the <see cref="P:System.Web.UI.Design.DesignerAutoFormat.Style" />
 
             
 
-             property is read-only, each individual property that it contains can be set. For example, you can set the <see
-             cref="P:System.Web.UI.WebControls.Style.ForeColor" />
+             property is read-only, each individual property that it contains can be set. For example, you can set the <see cref="P:System.Web.UI.WebControls.Style.ForeColor" />
 
             
 
-             or <see
-             cref="P:System.Web.UI.Design.DesignerAutoFormatStyle.VerticalAlign" />
+             or <see cref="P:System.Web.UI.Design.DesignerAutoFormatStyle.VerticalAlign" />
 
             
 
-             property of the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatStyle" />
+             property of the <see cref="T:System.Web.UI.Design.DesignerAutoFormatStyle" />
 
             
 
@@ -423,13 +396,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatStyle" />
+            >Gets a <see cref="T:System.Web.UI.Design.DesignerAutoFormatStyle" />
 
             
 
-             object that is used by the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+             object that is used by the <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
@@ -452,18 +423,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormat.ToString" />
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormat.ToString" />
 
             
 
-             method returns a string that contains the value of the <see
-             cref="P:System.Web.UI.Design.DesignerAutoFormat.Name" />
+             method returns a string that contains the value of the <see cref="P:System.Web.UI.Design.DesignerAutoFormat.Name" />
 
             
 
-             property of the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+             property of the <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
@@ -473,8 +441,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the current <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+            >Returns a string that represents the current <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
@@ -484,13 +451,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.DesignerAutoFormat.Name" />
+            >The <see cref="P:System.Web.UI.Design.DesignerAutoFormat.Name" />
 
             
 
-             property of the current <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+             property of the current <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 

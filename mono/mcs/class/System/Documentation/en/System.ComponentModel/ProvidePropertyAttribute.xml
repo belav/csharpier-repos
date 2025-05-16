@@ -31,24 +31,21 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When you mark a class with this attribute, you tell the code generator to create an extender property with the name you provide. The marked class must implement <see
-         cref="T:System.ComponentModel.IExtenderProvider" />
+        >When you mark a class with this attribute, you tell the code generator to create an extender property with the name you provide. The marked class must implement <see cref="T:System.ComponentModel.IExtenderProvider" />
 
         
 
         . As a result, the new property can be used by other components in a container.</para
       >
       <para
-        >Within the marked class, you must implement Get &lt;name&gt; and Set &lt;name&gt; methods. For example, if you mark a class with [ProvideProperty("PropertyName")], you must implement GetPropertyName and SetPropertyName methods. To specify that the new property will be an extender property, you must implement from <see
-         cref="T:System.ComponentModel.IExtenderProvider" />
+        >Within the marked class, you must implement Get &lt;name&gt; and Set &lt;name&gt; methods. For example, if you mark a class with [ProvideProperty("PropertyName")], you must implement GetPropertyName and SetPropertyName methods. To specify that the new property will be an extender property, you must implement from <see cref="T:System.ComponentModel.IExtenderProvider" />
 
         
 
         , you must also implement a CanExtend method.</para
       >
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -60,8 +57,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the name of the property that an implementer of <see
-         cref="T:System.ComponentModel.IExtenderProvider" />
+        >Specifies the name of the property that an implementer of <see cref="T:System.ComponentModel.IExtenderProvider" />
 
         
 
@@ -95,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.ProvidePropertyAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ProvidePropertyAttribute" />
 
             
 
@@ -104,14 +99,22 @@
           >
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the property extending to an object of the specified type. </param
         >
         <param name="receiverTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -144,13 +147,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.ProvidePropertyAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ProvidePropertyAttribute" />
 
             
 
-             class with the name of the property and its <see
-             cref="T:System.Type" />
+             class with the name of the property and its <see cref="T:System.Type" />
 
             
 
@@ -158,19 +159,26 @@
           >
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the property extending to an object of the specified type. </param
         >
         <param name="receiverType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -201,8 +209,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns whether the value of the given object is equal to the current <see
-             cref="T:System.ComponentModel.ProvidePropertyAttribute" />
+            >Returns whether the value of the given object is equal to the current <see cref="T:System.ComponentModel.ProvidePropertyAttribute" />
 
             
 
@@ -214,7 +221,11 @@
           <para>true if the value of the given object is equal to that of the current; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -247,8 +258,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.ComponentModel.ProvidePropertyAttribute" />
+            >A hash code for the current <see cref="T:System.ComponentModel.ProvidePropertyAttribute" />
 
             
 

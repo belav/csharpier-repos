@@ -20,8 +20,7 @@
   </Attributes>
   <Docs>
     <summary
-      >Possible <see
-       cref="M:Mono.Unix.Native.Syscall.fcntl" />
+      >Possible <see cref="M:Mono.Unix.Native.Syscall.fcntl" />
       <paramref name="command" />
 
       
@@ -51,12 +50,10 @@
         <summary
           >Return a new descriptor as follows:
 
-<list
-           type="bullet">
+<list type="bullet">
             <item>
               <term
-                >Lowest numbered available descriptor greater than or equal to <paramref
-                 name="arg" />
+                >Lowest numbered available descriptor greater than or equal to <paramref name="arg" />
 
                 
 
@@ -77,8 +74,7 @@
             </item>
             <item>
               <term
-                >The close-on-exec flag associated with the new file descriptor is set to remain open across <see
-                 cref="M:Mono.Unix.Native.Syscall.execve" />
+                >The close-on-exec flag associated with the new file descriptor is set to remain open across <see cref="M:Mono.Unix.Native.Syscall.execve" />
 
                 
 
@@ -125,8 +121,7 @@
       </ReturnValue>
       <Docs>
         <summary
-          >Get descriptor status flags, as described below (<paramref
-           name="arg" />
+          >Get descriptor status flags, as described below (<paramref name="arg" />
 
           
 
@@ -170,23 +165,19 @@
       </ReturnValue>
       <Docs>
         <summary
-          >Get the first lock that blocks the lock description pointed to by the third argument, <paramref
-           name="arg" />
+          >Get the first lock that blocks the lock description pointed to by the third argument, <paramref name="arg" />
 
           
 
-          , taken as a reference to a <see
-           cref="T:Mono.Unix.Native.Flock" />
+          , taken as a reference to a <see cref="T:Mono.Unix.Native.Flock" />
 
           
 
-          .  The information retrieved overwrites the information passed to <see
-           cref="M:Mono.Unix.Native.Syscall.fcntl" />
+          .  The information retrieved overwrites the information passed to <see cref="M:Mono.Unix.Native.Syscall.fcntl" />
 
           
 
-           in the flock structure.  If no lock is found that would prevent this lock from being created, the structure is left unchanged by this system call except for the lock type which is set to <see
-           cref="F:Mono.Unix.Native.LockType.F_UNLCK" />
+           in the flock structure.  If no lock is found that would prevent this lock from being created, the structure is left unchanged by this system call except for the lock type which is set to <see cref="F:Mono.Unix.Native.LockType.F_UNLCK" />
 
           
 
@@ -211,18 +202,15 @@
       </ReturnValue>
       <Docs>
         <summary
-          >Get the process ID or process group currently receiving <see
-           cref="F:Mono.Unix.Native.Signum.SIGIO" />
+          >Get the process ID or process group currently receiving <see cref="F:Mono.Unix.Native.Signum.SIGIO" />
 
           
 
-           and <see
-           cref="F:Mono.Unix.Native.Signum.SIGURG" />
+           and <see cref="F:Mono.Unix.Native.Signum.SIGURG" />
 
           
 
-           signals; process groups are returned as negative values (<paramref
-           name="arg" />
+           signals; process groups are returned as negative values (<paramref name="arg" />
 
           
 
@@ -304,8 +292,7 @@
       </ReturnValue>
       <Docs>
         <summary
-          >Set descriptor status flags to <paramref
-           name="arg" />
+          >Set descriptor status flags to <paramref name="arg" />
 
           
 
@@ -349,43 +336,35 @@
       </ReturnValue>
       <Docs>
         <summary
-          >Set or clear a file segment lock according to the lock description pointed to by the third argument, <paramref
-           name="arg" />
+          >Set or clear a file segment lock according to the lock description pointed to by the third argument, <paramref name="arg" />
 
           
 
-          , taken as a pointer to a <see
-           cref="T:Mono.Unix.Native.Flock" />
+          , taken as a pointer to a <see cref="T:Mono.Unix.Native.Flock" />
 
           
 
-          . <see
-           cref="F:Mono.Unix.Native.FcntlCommand.F_SETLK" />
+          . <see cref="F:Mono.Unix.Native.FcntlCommand.F_SETLK" />
 
           
 
-           is used to establish shared (or read) locks (<see
-           cref="F:Mono.Unix.Native.LockType.F_RDLCK" />
+           is used to establish shared (or read) locks (<see cref="F:Mono.Unix.Native.LockType.F_RDLCK" />
 
           
 
-          ) or exclusive  (or write) locks, (<see
-           cref="F:Mono.Unix.Native.LockType.F_WRLCK" />
+          ) or exclusive  (or write) locks, (<see cref="F:Mono.Unix.Native.LockType.F_WRLCK" />
 
           
 
-          ), as well as remove either type of lock (<see
-           cref="F:Mono.Unix.Native.LockType.F_UNLCK" />
+          ), as well as remove either type of lock (<see cref="F:Mono.Unix.Native.LockType.F_UNLCK" />
 
           
 
-          ).  If a shared or exclusive lock cannot be set, <see
-           cref="M:Mono.Unix.Native.Syscall.fcntl" />
+          ).  If a shared or exclusive lock cannot be set, <see cref="M:Mono.Unix.Native.Syscall.fcntl" />
 
           
 
-           returns immediately with <see
-           cref="F:Mono.Unix.Native.Error.EAGAIN" />
+           returns immediately with <see cref="F:Mono.Unix.Native.Error.EAGAIN" />
 
           
 
@@ -410,23 +389,19 @@
       </ReturnValue>
       <Docs>
         <summary
-          >This command is the same as <see
-           cref="F:Mono.Unix.Native.FcntlCommand.F_SETLK" />
+          >This command is the same as <see cref="F:Mono.Unix.Native.FcntlCommand.F_SETLK" />
 
           
 
-           except that if a shared or exclusive lock is blocked by other locks, the process waits until the request can be satisfied.  If a signal that is to be caught is received while <see
-           cref="M:Mono.Unix.Native.Syscall.fcntl" />
+           except that if a shared or exclusive lock is blocked by other locks, the process waits until the request can be satisfied.  If a signal that is to be caught is received while <see cref="M:Mono.Unix.Native.Syscall.fcntl" />
 
           
 
-           is waiting for a region, the <see
-           cref="M:Mono.Unix.Native.Syscall.fcntl" />
+           is waiting for a region, the <see cref="M:Mono.Unix.Native.Syscall.fcntl" />
 
           
 
-           will be interrupted if the signal handler has not specified the SA_RESTART (see <see
-           cref="M:Mono.Unix.Native.Syscall.sigaction" />
+           will be interrupted if the signal handler has not specified the SA_RESTART (see <see cref="M:Mono.Unix.Native.Syscall.sigaction" />
 
           
 
@@ -451,13 +426,11 @@
       </ReturnValue>
       <Docs>
         <summary
-          >Set the process or process group to receive <see
-           cref="F:Mono.Unix.Native.Signum.SIGIO" />
+          >Set the process or process group to receive <see cref="F:Mono.Unix.Native.Signum.SIGIO" />
 
           
 
-           and <see
-           cref="F:Mono.Unix.Native.Signum.SIGURG" />
+           and <see cref="F:Mono.Unix.Native.Signum.SIGURG" />
 
           
 

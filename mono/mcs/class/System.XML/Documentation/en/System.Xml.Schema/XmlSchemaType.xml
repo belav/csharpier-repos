@@ -48,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Schema.XmlSchemaType" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaType" />
 
             
 
@@ -85,13 +84,11 @@
           <para>The complexType is derived from the type specified by the base value. The base value must be a QName.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Xml.Schema.XmlSchemaType.BaseSchemaType" />
+              >The <see cref="P:System.Xml.Schema.XmlSchemaType.BaseSchemaType" />
 
               
 
-               property is obsolete and has been replaced by the <see
-               cref="P:System.Xml.Schema.XmlSchemaType.BaseXmlSchemaType" />
+               property is obsolete and has been replaced by the <see cref="P:System.Xml.Schema.XmlSchemaType.BaseXmlSchemaType" />
 
               
 
@@ -133,8 +130,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Schema.XmlSchemaType.BaseXmlSchemaType" />
+            >The <see cref="P:System.Xml.Schema.XmlSchemaType.BaseXmlSchemaType" />
 
             
 
@@ -520,8 +516,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the post-compilation value of the <see
-             cref="P:System.Xml.Schema.XmlSchemaType.Final" />
+            >Gets the post-compilation value of the <see cref="P:System.Xml.Schema.XmlSchemaType.Final" />
 
             
 
@@ -556,8 +551,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Xml.Schema.XmlSchemaComplexType" />
+            >Returns an <see cref="T:System.Xml.Schema.XmlSchemaComplexType" />
 
             
 
@@ -567,8 +561,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Schema.XmlSchemaComplexType" />
+            >The <see cref="T:System.Xml.Schema.XmlSchemaComplexType" />
 
             
 
@@ -576,12 +569,15 @@
           >
         </returns>
         <param name="typeCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Xml.Schema.XmlTypeCode" />
+          One of the <see cref="T:System.Xml.Schema.XmlTypeCode" />
 
           
 
@@ -615,8 +611,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Xml.Schema.XmlSchemaComplexType" />
+            >Returns an <see cref="T:System.Xml.Schema.XmlSchemaComplexType" />
 
             
 
@@ -626,8 +621,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Schema.XmlSchemaComplexType" />
+            >The <see cref="T:System.Xml.Schema.XmlSchemaComplexType" />
 
             
 
@@ -635,12 +629,15 @@
           >
         </returns>
         <param name="qualifiedName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          The <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
@@ -677,8 +674,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
+            >Returns an <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
 
             
 
@@ -688,8 +684,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
+            >The <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
 
             
 
@@ -697,12 +692,15 @@
           >
         </returns>
         <param name="typeCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Xml.Schema.XmlTypeCode" />
+          One of the <see cref="T:System.Xml.Schema.XmlTypeCode" />
 
           
 
@@ -739,8 +737,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
+            >Returns an <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
 
             
 
@@ -750,8 +747,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
+            >The <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
 
             
 
@@ -759,12 +755,15 @@
           >
         </returns>
         <param name="qualifiedName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          The <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
@@ -806,41 +805,49 @@
           <para>true if the derived type is derived from the base type; otherwise, false.</para>
         </returns>
         <param name="derivedType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The derived <see
-           cref="T:System.Xml.Schema.XmlSchemaType" />
+          The derived <see cref="T:System.Xml.Schema.XmlSchemaType" />
 
           
 
            to test.</param
         >
         <param name="baseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The base <see
-           cref="T:System.Xml.Schema.XmlSchemaType" />
+          The base <see cref="T:System.Xml.Schema.XmlSchemaType" />
 
           
 
-           to test the derived <see
-           cref="T:System.Xml.Schema.XmlSchemaType" />
+           to test the derived <see cref="T:System.Xml.Schema.XmlSchemaType" />
 
           
 
            against.</param
         >
         <param name="except">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Xml.Schema.XmlSchemaDerivationMethod" />
+          One of the <see cref="T:System.Xml.Schema.XmlSchemaDerivationMethod" />
 
           
 
@@ -969,8 +976,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Schema.XmlTypeCode" />
+            >Gets the <see cref="T:System.Xml.Schema.XmlTypeCode" />
 
             
 

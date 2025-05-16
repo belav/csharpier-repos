@@ -39,14 +39,12 @@
     <example>
       <para
         >The following example demonstrates an error that causes
- the <see
-         cref="T:System.IO.DirectoryNotFoundException" />
+ the <see cref="T:System.IO.DirectoryNotFoundException" />
 
         
 
          exception to be
- thrown. <SPAN
-        >
+ thrown. <SPAN>
           <SPAN />
 
           
@@ -82,8 +80,7 @@ class DirectoryNotFoundExample {
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>DirectoryNotFoundException uses the HRESULT COR_E_DIRECTORYNOTFOUND which has the value 0x80070003. Note that DirectoryNotFoundException is also thrown when COM interop programs see the HRESULT STG_E_PATHNOTFOUND, which has the value 0x80030003.</para>
       <para
-        >If your code does not have <see
-         cref="P:System.Security.Permissions.FileIOPermissionAttribute.PathDiscovery" />
+        >If your code does not have <see cref="P:System.Security.Permissions.FileIOPermissionAttribute.PathDiscovery" />
 
         
 
@@ -118,16 +115,14 @@ class DirectoryNotFoundExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Exception.Message" />
+            >This constructor initializes the <see cref="P:System.Exception.Message" />
 
             
 
              property of the new instance to a system-supplied message that describes the error, such as "Could not find the specified directory." This message takes into account the current system culture.</para
           >
           <para
-            >The <see
-             cref="P:System.Exception.InnerException" />
+            >The <see cref="P:System.Exception.InnerException" />
 
             
 
@@ -137,8 +132,7 @@ class DirectoryNotFoundExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.DirectoryNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.IO.DirectoryNotFoundException" />
 
             
 
@@ -172,21 +166,18 @@ class DirectoryNotFoundExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Exception.Message" />
+            >This constructor initializes the <see cref="P:System.Exception.Message" />
 
             
 
-             property of the new instance using <paramref
-             name="message" />
+             property of the new instance using <paramref name="message" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="P:System.Exception.InnerException" />
+            >The <see cref="P:System.Exception.InnerException" />
 
             
 
@@ -196,13 +187,11 @@ class DirectoryNotFoundExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.DirectoryNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.IO.DirectoryNotFoundException" />
 
             
 
-             class with its message string set to <paramref
-             name="message" />
+             class with its message string set to <paramref name="message" />
 
             
 
@@ -210,17 +199,19 @@ class DirectoryNotFoundExample {
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that describes the error. The content of <paramref
-           name="message" />
+           that describes the error. The content of <paramref name="message" />
 
           
 
@@ -253,8 +244,7 @@ class DirectoryNotFoundExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.DirectoryNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.IO.DirectoryNotFoundException" />
 
             
 
@@ -262,24 +252,30 @@ class DirectoryNotFoundExample {
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -315,26 +311,22 @@ class DirectoryNotFoundExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.IO.DirectoryNotFoundException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.IO.DirectoryNotFoundException" />
 
             
 
@@ -376,8 +368,7 @@ class DirectoryNotFoundExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.DirectoryNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.IO.DirectoryNotFoundException" />
 
             
 
@@ -385,19 +376,26 @@ class DirectoryNotFoundExample {
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 

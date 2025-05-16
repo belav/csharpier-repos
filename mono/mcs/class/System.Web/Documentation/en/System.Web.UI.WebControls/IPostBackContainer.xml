@@ -11,21 +11,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Classes that implement the <see
-         cref="T:System.Web.UI.WebControls.IPostBackContainer" />
+        >Classes that implement the <see cref="T:System.Web.UI.WebControls.IPostBackContainer" />
 
         
 
-         interface enable buttons to get a <see
-         cref="T:System.Web.UI.PostBackOptions" />
+         interface enable buttons to get a <see cref="T:System.Web.UI.PostBackOptions" />
 
         
 
          object that is used to create the correct postback event reference.</para
       >
       <para
-        >For more information about postback processing, see <format
-         type="text/html">
+        >For more information about postback processing, see <format type="text/html">
           <a href="6304bff7-1b0e-4641-8acb-6d3b0badc4a3">ASP.NET Web Server Control Event Model</a>
         </format>
 
@@ -34,13 +31,11 @@
         .</para
       >
       <para
-        >Controls that implement the <see
-         cref="T:System.Web.UI.WebControls.IPostBackContainer" />
+        >Controls that implement the <see cref="T:System.Web.UI.WebControls.IPostBackContainer" />
 
         
 
-         interface should also implement the <see
-         cref="T:System.Web.UI.IPostBackEventHandler" />
+         interface should also implement the <see cref="T:System.Web.UI.IPostBackEventHandler" />
 
         
 
@@ -71,18 +66,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implementations of the <see
-             cref="M:System.Web.UI.WebControls.IPostBackContainer.GetPostBackOptions(System.Web.UI.WebControls.IButtonControl)" />
+            >Implementations of the <see cref="M:System.Web.UI.WebControls.IPostBackContainer.GetPostBackOptions(System.Web.UI.WebControls.IButtonControl)" />
 
             
 
-             method should configure a new <see
-             cref="T:System.Web.UI.PostBackOptions" />
+             method should configure a new <see cref="T:System.Web.UI.PostBackOptions" />
 
             
 
-             instance with the information required for the <see
-             cref="M:System.Web.UI.ClientScriptManager.GetPostBackEventReference(System.Web.UI.PostBackOptions)" />
+             instance with the information required for the <see cref="M:System.Web.UI.ClientScriptManager.GetPostBackEventReference(System.Web.UI.PostBackOptions)" />
 
             
 
@@ -96,13 +88,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.PostBackOptions" />
+            >A <see cref="T:System.Web.UI.PostBackOptions" />
 
             
 
-             object containing the options required to generate a postback script for <paramref
-             name="buttonControl" />
+             object containing the options required to generate a postback script for <paramref name="buttonControl" />
 
             
 

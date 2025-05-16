@@ -51,8 +51,7 @@
     <WriteLinesToFile Overwrite="true" File="$(BaseIntermediateOutputPath)build-sentinel" />
   </Target>
   <PropertyGroup>
-    <PackDependsOn Condition="'$(NoBuild)' != 'true'"
-      >
+    <PackDependsOn Condition="'$(NoBuild)' != 'true'">
       Build;
       $(PackDependsOn);
     </PackDependsOn

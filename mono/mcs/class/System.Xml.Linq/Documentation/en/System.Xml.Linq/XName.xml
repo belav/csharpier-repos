@@ -27,8 +27,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >XML names include a namespace and a local name. A <newTerm
-        >fully qualified name</newTerm>
+        >XML names include a namespace and a local name. A <newTerm>fully qualified name</newTerm>
 
         
 
@@ -42,23 +41,19 @@
 
         
 
-         does not contain any public constructors. Instead, this class provides an implicit conversion from <see
-         cref="T:System.String" />
+         does not contain any public constructors. Instead, this class provides an implicit conversion from <see cref="T:System.String" />
 
         
 
-         that allows you to create an <see
-         cref="T:System.Xml.Linq.XName" />
+         that allows you to create an <see cref="T:System.Xml.Linq.XName" />
 
         
 
-        . The most common place you use this conversion is when constructing an element or attribute: The first argument to the <see
-         cref="T:System.Xml.Linq.XElement" />
+        . The most common place you use this conversion is when constructing an element or attribute: The first argument to the <see cref="T:System.Xml.Linq.XElement" />
 
         
 
-         constructor is an <see
-         cref="T:System.Xml.Linq.XName" />
+         constructor is an <see cref="T:System.Xml.Linq.XName" />
 
         
 
@@ -72,44 +67,37 @@ Console.WriteLine(root)</code>
       <para>This example produces the following output:</para>
       <code>&lt;ElementName&gt;content&lt;/ElementName&gt;</code>
       <para
-        >Assigning a string to an <see
-         cref="T:System.Xml.Linq.XName" />
+        >Assigning a string to an <see cref="T:System.Xml.Linq.XName" />
 
         
 
-         uses the implicit conversion from <see
-         cref="T:System.String" />
-
-        
-
-        .</para
-      >
-      <para
-        >The Visual Basic example creates the <see
-         cref="T:System.Xml.Linq.XElement" />
-
-        
-
-         using XML literals. Even though XML literals are used, an <see
-         cref="T:System.Xml.Linq.XName" />
-
-        
-
-         object is created for the <see
-         cref="T:System.Xml.Linq.XElement" />
+         uses the implicit conversion from <see cref="T:System.String" />
 
         
 
         .</para
       >
       <para
-        >In addition, you can call the <see
-         cref="Overload:System.Xml.Linq.XName.Get" />
+        >The Visual Basic example creates the <see cref="T:System.Xml.Linq.XElement" />
 
         
 
-         method for an <see
-         cref="T:System.Xml.Linq.XName" />
+         using XML literals. Even though XML literals are used, an <see cref="T:System.Xml.Linq.XName" />
+
+        
+
+         object is created for the <see cref="T:System.Xml.Linq.XElement" />
+
+        
+
+        .</para
+      >
+      <para
+        >In addition, you can call the <see cref="Overload:System.Xml.Linq.XName.Get" />
+
+        
+
+         method for an <see cref="T:System.Xml.Linq.XName" />
 
         
 
@@ -119,21 +107,18 @@ Console.WriteLine(root)</code>
         <h2>Creating an XName in a Namespace</h2>
       </format>
       <para
-        >As with XML, an <see
-         cref="T:System.Xml.Linq.XName" />
+        >As with XML, an <see cref="T:System.Xml.Linq.XName" />
 
         
 
          can be in a namespace, or it can be in no namespace.</para
       >
       <para
-        >For C#, the recommended approach for creating an <see
-         cref="T:System.Xml.Linq.XName" />
+        >For C#, the recommended approach for creating an <see cref="T:System.Xml.Linq.XName" />
 
         
 
-         in a namespace is to declare the <see
-         cref="T:System.Xml.Linq.XNamespace" />
+         in a namespace is to declare the <see cref="T:System.Xml.Linq.XNamespace" />
 
         
 
@@ -157,28 +142,23 @@ End Module</code>
         <h2>Creating an XName in no Namespace</h2>
       </format>
       <para
-        >The <see
-         cref="P:System.Xml.Linq.XName.Namespace" />
+        >The <see cref="P:System.Xml.Linq.XName.Namespace" />
 
         
 
-         property of an <see
-         cref="T:System.Xml.Linq.XName" />
+         property of an <see cref="T:System.Xml.Linq.XName" />
 
         
 
-         object is guaranteed to not be null. If the <see
-         cref="T:System.Xml.Linq.XName" />
+         object is guaranteed to not be null. If the <see cref="T:System.Xml.Linq.XName" />
 
         
 
-         is in no namespace, then the <see
-         cref="P:System.Xml.Linq.XName.Namespace" />
+         is in no namespace, then the <see cref="P:System.Xml.Linq.XName.Namespace" />
 
         
 
-         property will be set to <see
-         cref="P:System.Xml.Linq.XNamespace.None" />
+         property will be set to <see cref="P:System.Xml.Linq.XNamespace.None" />
 
         
 
@@ -201,8 +181,7 @@ End If</code>
         <h2>Using Expanded Names</h2>
       </format>
       <para
-        >You can also create an <see
-         cref="T:System.Xml.Linq.XName" />
+        >You can also create an <see cref="T:System.Xml.Linq.XName" />
 
         
 
@@ -215,21 +194,18 @@ Console.WriteLine(root)</code>
       <para>This example produces the following output:</para>
       <code>&lt;ElementName xmlns="http://www.adventure-works.com"&gt;content&lt;/ElementName&gt;</code>
       <para
-        >Be aware that creating an <see
-         cref="T:System.Xml.Linq.XName" />
+        >Be aware that creating an <see cref="T:System.Xml.Linq.XName" />
 
         
 
-         through an expanded name is less efficient than creating an <see
-         cref="T:System.Xml.Linq.XNamespace" />
+         through an expanded name is less efficient than creating an <see cref="T:System.Xml.Linq.XNamespace" />
 
         
 
          object and using the override of the addition operator. It is also less efficient than importing a global namespace and using XML literals in Visual Basic.</para
       >
       <para
-        >If you create an <see
-         cref="T:System.Xml.Linq.XName" />
+        >If you create an <see cref="T:System.Xml.Linq.XName" />
 
         
 
@@ -243,8 +219,7 @@ Console.WriteLine(root)</code>
 
         
 
-         objects are guaranteed to be atomized; that is, if two <see
-         cref="T:System.Xml.Linq.XName" />
+         objects are guaranteed to be atomized; that is, if two <see cref="T:System.Xml.Linq.XName" />
 
         
 
@@ -278,8 +253,7 @@ Console.WriteLine(root)</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For two <see
-             cref="T:System.Xml.Linq.XName" />
+            >For two <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -289,13 +263,11 @@ Console.WriteLine(root)</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Xml.Linq.XName" />
+            >Determines whether the specified <see cref="T:System.Xml.Linq.XName" />
 
             
 
-             is equal to this <see
-             cref="T:System.Xml.Linq.XName" />
+             is equal to this <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -305,13 +277,11 @@ Console.WriteLine(root)</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see
-             cref="T:System.Xml.Linq.XName" />
+            >true if the specified <see cref="T:System.Xml.Linq.XName" />
 
             
 
-             is equal to the current <see
-             cref="T:System.Xml.Linq.XName" />
+             is equal to the current <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -319,17 +289,19 @@ Console.WriteLine(root)</code>
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XName" />
+          The <see cref="T:System.Xml.Linq.XName" />
 
           
 
-           to compare to the current <see
-           cref="T:System.Xml.Linq.XName" />
+           to compare to the current <see cref="T:System.Xml.Linq.XName" />
 
           
 
@@ -360,39 +332,33 @@ Console.WriteLine(root)</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method contains overloads that allow you to create an <see
-             cref="T:System.Xml.Linq.XName" />
+            >This method contains overloads that allow you to create an <see cref="T:System.Xml.Linq.XName" />
 
             
 
             . You can create it from a expanded XML name in the form {namespace}localname, or from a namespace and a local name, specified separately.</para
           >
           <para
-            >A much more common and easier way to create an <see
-             cref="T:System.Xml.Linq.XName" />
+            >A much more common and easier way to create an <see cref="T:System.Xml.Linq.XName" />
 
             
 
              is to use the implicit conversion from string.</para
           >
           <para
-            >Because <see
-             cref="T:System.Xml.Linq.XName" />
+            >Because <see cref="T:System.Xml.Linq.XName" />
 
             
 
-             are atomized, if there is an existing <see
-             cref="T:System.Xml.Linq.XName" />
+             are atomized, if there is an existing <see cref="T:System.Xml.Linq.XName" />
 
             
 
-             with exactly the same name, the assigned variable will refer to the existing <see
-             cref="T:System.Xml.Linq.XName" />
+             with exactly the same name, the assigned variable will refer to the existing <see cref="T:System.Xml.Linq.XName" />
 
             
 
-            . If there is no existing <see
-             cref="T:System.Xml.Linq.XName" />
+            . If there is no existing <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -402,8 +368,7 @@ Console.WriteLine(root)</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Xml.Linq.XName" />
+            >Gets an <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -413,8 +378,7 @@ Console.WriteLine(root)</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Linq.XName" />
+            >An <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -422,12 +386,15 @@ Console.WriteLine(root)</code>
           >
         </returns>
         <param name="expandedName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -459,39 +426,33 @@ Console.WriteLine(root)</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method contains overloads that allow you to create an <see
-             cref="T:System.Xml.Linq.XName" />
+            >This method contains overloads that allow you to create an <see cref="T:System.Xml.Linq.XName" />
 
             
 
             . You can create it from an expanded XML name in the form {namespace}localname, or from a namespace and a local name, specified separately.</para
           >
           <para
-            >A much more common and easier way to create an <see
-             cref="T:System.Xml.Linq.XName" />
+            >A much more common and easier way to create an <see cref="T:System.Xml.Linq.XName" />
 
             
 
              is to use the implicit conversion from string.</para
           >
           <para
-            >Because <see
-             cref="T:System.Xml.Linq.XName" />
+            >Because <see cref="T:System.Xml.Linq.XName" />
 
             
 
-             are atomized, if there is an existing <see
-             cref="T:System.Xml.Linq.XName" />
+             are atomized, if there is an existing <see cref="T:System.Xml.Linq.XName" />
 
             
 
-             with exactly the same name, the assigned variable will refer to the existing <see
-             cref="T:System.Xml.Linq.XName" />
+             with exactly the same name, the assigned variable will refer to the existing <see cref="T:System.Xml.Linq.XName" />
 
             
 
-            . If there is no existing <see
-             cref="T:System.Xml.Linq.XName" />
+            . If there is no existing <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -501,8 +462,7 @@ Console.WriteLine(root)</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Xml.Linq.XName" />
+            >Gets an <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -512,8 +472,7 @@ Console.WriteLine(root)</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Linq.XName" />
+            >An <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -521,14 +480,22 @@ Console.WriteLine(root)</code>
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A local (unqualified) name.</param
         >
         <param name="namespaceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -554,13 +521,11 @@ Console.WriteLine(root)</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method serves as a hash function for <see
-             cref="T:System.Xml.Linq.XName" />
+            >This method serves as a hash function for <see cref="T:System.Xml.Linq.XName" />
 
             
 
-            . You can use <see
-             cref="M:System.Xml.Linq.XName.GetHashCode" />
+            . You can use <see cref="M:System.Xml.Linq.XName.GetHashCode" />
 
             
 
@@ -570,8 +535,7 @@ Console.WriteLine(root)</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a hash code for this <see
-             cref="T:System.Xml.Linq.XName" />
+            >Gets a hash code for this <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -581,13 +545,11 @@ Console.WriteLine(root)</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Int32" />
+            >An <see cref="T:System.Int32" />
 
             
 
-             that contains the hash code for the <see
-             cref="T:System.Xml.Linq.XName" />
+             that contains the hash code for the <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -636,18 +598,15 @@ Console.WriteLine(root)</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Linq.XName.Namespace" />
+            >The <see cref="P:System.Xml.Linq.XName.Namespace" />
 
             
 
-             property is guaranteed to not be null. If an <see
-             cref="T:System.Xml.Linq.XName" />
+             property is guaranteed to not be null. If an <see cref="T:System.Xml.Linq.XName" />
 
             
 
-             is in no namespace, this property returns <see
-             cref="P:System.Xml.Linq.XNamespace.None" />
+             is in no namespace, this property returns <see cref="P:System.Xml.Linq.XNamespace.None" />
 
             
 
@@ -675,8 +634,7 @@ Console.WriteLine(root)</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is a convenience property to get the namespace name from an <see
-             cref="T:System.Xml.Linq.XName" />
+            >This is a convenience property to get the namespace name from an <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -686,13 +644,11 @@ Console.WriteLine(root)</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the URI of the <see
-             cref="T:System.Xml.Linq.XNamespace" />
+            >Returns the URI of the <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
-             for this <see
-             cref="T:System.Xml.Linq.XName" />
+             for this <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -725,13 +681,11 @@ Console.WriteLine(root)</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The operator overloads == and != are included to enable comparisons between <see
-             cref="T:System.Xml.Linq.XName" />
+            >The operator overloads == and != are included to enable comparisons between <see cref="T:System.Xml.Linq.XName" />
 
             
 
-             and a string, such as element.Name == "SomeElementName". The predefined reference equality operators in C# require one operand to be convertible to the type of the other through reference conversions only. These operators do not consider the implicit conversion from string to <see
-             cref="T:System.Xml.Linq.XName" />
+             and a string, such as element.Name == "SomeElementName". The predefined reference equality operators in C# require one operand to be convertible to the type of the other through reference conversions only. These operators do not consider the implicit conversion from string to <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -741,8 +695,7 @@ Console.WriteLine(root)</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether two instances of <see
-             cref="T:System.Xml.Linq.XName" />
+            >Returns a value indicating whether two instances of <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -752,13 +705,11 @@ Console.WriteLine(root)</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="left" />
+            >true if <paramref name="left" />
 
             
 
-             and <paramref
-             name="right" />
+             and <paramref name="right" />
 
             
 
@@ -766,24 +717,30 @@ Console.WriteLine(root)</code>
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first <see
-           cref="T:System.Xml.Linq.XName" />
+          The first <see cref="T:System.Xml.Linq.XName" />
 
           
 
            to compare.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The second <see
-           cref="T:System.Xml.Linq.XName" />
+          The second <see cref="T:System.Xml.Linq.XName" />
 
           
 
@@ -846,13 +803,11 @@ Console.WriteLine(root)</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The operator overloads == and != are included to enable comparisons between <see
-             cref="T:System.Xml.Linq.XName" />
+            >The operator overloads == and != are included to enable comparisons between <see cref="T:System.Xml.Linq.XName" />
 
             
 
-             and a string, such as element.Name == "SomeElementName". The predefined reference equality operators in C# require one operand to be convertible to the type of the other through reference conversions only. These operators do not consider the implicit conversion from string to <see
-             cref="T:System.Xml.Linq.XName" />
+             and a string, such as element.Name == "SomeElementName". The predefined reference equality operators in C# require one operand to be convertible to the type of the other through reference conversions only. These operators do not consider the implicit conversion from string to <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -862,8 +817,7 @@ Console.WriteLine(root)</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether two instances of <see
-             cref="T:System.Xml.Linq.XName" />
+            >Returns a value indicating whether two instances of <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -873,13 +827,11 @@ Console.WriteLine(root)</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="left" />
+            >true if <paramref name="left" />
 
             
 
-             and <paramref
-             name="right" />
+             and <paramref name="right" />
 
             
 
@@ -887,24 +839,30 @@ Console.WriteLine(root)</code>
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first <see
-           cref="T:System.Xml.Linq.XName" />
+          The first <see cref="T:System.Xml.Linq.XName" />
 
           
 
            to compare.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The second <see
-           cref="T:System.Xml.Linq.XName" />
+          The second <see cref="T:System.Xml.Linq.XName" />
 
           
 
@@ -966,8 +924,7 @@ Console.WriteLine(root)</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -975,24 +932,30 @@ Console.WriteLine(root)</code>
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            to populate with data.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The destination (see <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The destination (see <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -1023,8 +986,7 @@ Console.WriteLine(root)</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 

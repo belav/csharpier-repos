@@ -4,8 +4,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Net.Mail" />
+        >The <see cref="N:System.Net.Mail" />
 
         
 
@@ -15,18 +14,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.Mail.MailMessage" />
+        >The <see cref="T:System.Net.Mail.MailMessage" />
 
         
 
-         class represents the content of a mail message. The <see
-         cref="T:System.Net.Mail.SmtpClient" />
+         class represents the content of a mail message. The <see cref="T:System.Net.Mail.SmtpClient" />
 
         
 
-         class transmits email to the SMTP host that you designate for mail delivery. You can create mail attachments using the <see
-         cref="T:System.Net.Mail.Attachment" />
+         class transmits email to the SMTP host that you designate for mail delivery. You can create mail attachments using the <see cref="T:System.Net.Mail.Attachment" />
 
         
 

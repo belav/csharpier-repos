@@ -17,13 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.TransportContext" />
+        >The <see cref="T:System.Net.TransportContext" />
 
         
 
-         class is used with classes in the <see
-         cref="N:System.Security.Authentication.ExtendedProtection" />
+         class is used with classes in the <see cref="N:System.Security.Authentication.ExtendedProtection" />
 
         
 
@@ -35,61 +33,50 @@
 
         
 
-         is the only class derived from <see
-         cref="T:System.Net.WebRequest" />
+         is the only class derived from <see cref="T:System.Net.WebRequest" />
 
         
 
-         class that can potentially use IWA. The <see
-         cref="T:System.Net.FtpWebRequest" />
+         class that can potentially use IWA. The <see cref="T:System.Net.FtpWebRequest" />
 
         
 
-         class does only FTP clear text authentication. The <see
-         cref="T:System.Net.FileWebRequest" />
+         class does only FTP clear text authentication. The <see cref="T:System.Net.FileWebRequest" />
 
         
 
          class doesn't perform any authentication.</para
       >
       <para
-        >There are several ways an application may get a <see
-         cref="T:System.Net.TransportContext" />
+        >There are several ways an application may get a <see cref="T:System.Net.TransportContext" />
 
         
 
-         instance. An application that uses <see
-         cref="T:System.Net.Security.SslStream" />
+         instance. An application that uses <see cref="T:System.Net.Security.SslStream" />
 
         
 
-         can get the <see
-         cref="T:System.Net.TransportContext" />
+         can get the <see cref="T:System.Net.TransportContext" />
 
         
 
-         using the <see
-         cref="P:System.Net.Security.SslStream.TransportContext" />
+         using the <see cref="P:System.Net.Security.SslStream.TransportContext" />
 
         
 
-         property. An application that uses <see
-         cref="T:System.Net.HttpWebRequest" />
+         property. An application that uses <see cref="T:System.Net.HttpWebRequest" />
 
         
 
-         can get a <see
-         cref="T:System.Net.TransportContext" />
+         can get a <see cref="T:System.Net.TransportContext" />
 
         
 
-         using the <see
-         cref="M:System.Net.HttpWebRequest.GetRequestStream(System.Net.TransportContext@)" />
+         using the <see cref="M:System.Net.HttpWebRequest.GetRequestStream(System.Net.TransportContext@)" />
 
         
 
-         or <see
-         cref="M:System.Net.HttpWebRequest.EndGetRequestStream(System.IAsyncResult,System.Net.TransportContext@)" />
+         or <see cref="M:System.Net.HttpWebRequest.EndGetRequestStream(System.IAsyncResult,System.Net.TransportContext@)" />
 
         
 
@@ -99,8 +86,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.TransportContext" />
+        >The <see cref="T:System.Net.TransportContext" />
 
         
 
@@ -125,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Net.TransportContext" />
+            >Creates a new instance of the <see cref="T:System.Net.TransportContext" />
 
             
 
@@ -161,61 +146,50 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The possible values for the <paramref
-             name="kind" />
+            >The possible values for the <paramref name="kind" />
 
             
 
-             parameter are <see
-             cref="F:System.Security.Authentication.ExtendedProtection.ChannelBindingKind.Endpoint" />
+             parameter are <see cref="F:System.Security.Authentication.ExtendedProtection.ChannelBindingKind.Endpoint" />
 
             
 
-             or <see
-             cref="F:System.Security.Authentication.ExtendedProtection.ChannelBindingKind.Unique" />
+             or <see cref="F:System.Security.Authentication.ExtendedProtection.ChannelBindingKind.Unique" />
 
             
 
             . </para
           >
           <para
-            >If an application attempts to retrieve the channel binding token (CBT) from the <see
-             cref="P:System.Net.HttpListenerRequest.TransportContext" />
+            >If an application attempts to retrieve the channel binding token (CBT) from the <see cref="P:System.Net.HttpListenerRequest.TransportContext" />
 
             
 
-             property using the <see
-             cref="M:System.Net.TransportContext.GetChannelBinding(System.Security.Authentication.ExtendedProtection.ChannelBindingKind)" />
+             property using the <see cref="M:System.Net.TransportContext.GetChannelBinding(System.Security.Authentication.ExtendedProtection.ChannelBindingKind)" />
 
             
 
-             method and the <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ChannelBindingKind" />
+             method and the <see cref="T:System.Security.Authentication.ExtendedProtection.ChannelBindingKind" />
 
             
 
-             is not <see
-             cref="F:System.Security.Authentication.ExtendedProtection.ChannelBindingKind.Endpoint" />
+             is not <see cref="F:System.Security.Authentication.ExtendedProtection.ChannelBindingKind.Endpoint" />
 
             
 
-            , then the <see
-             cref="T:System.Net.HttpListenerRequest" />
+            , then the <see cref="T:System.Net.HttpListenerRequest" />
 
             
 
-             will throw <see
-             cref="T:System.NotSupportedException" />
+             will throw <see cref="T:System.NotSupportedException" />
 
             
 
-            . The <see
-             cref="T:System.Net.HttpListenerRequest" />
+            . The <see cref="T:System.Net.HttpListenerRequest" />
 
             
 
-             overrides the <see
-             cref="M:System.Net.TransportContext.GetChannelBinding(System.Security.Authentication.ExtendedProtection.ChannelBindingKind)" />
+             overrides the <see cref="M:System.Net.TransportContext.GetChannelBinding(System.Security.Authentication.ExtendedProtection.ChannelBindingKind)" />
 
             
 
@@ -229,8 +203,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The requested <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ChannelBinding" />
+            >The requested <see cref="T:System.Security.Authentication.ExtendedProtection.ChannelBinding" />
 
             
 
@@ -238,7 +211,11 @@
           >
         </returns>
         <param name="kind">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

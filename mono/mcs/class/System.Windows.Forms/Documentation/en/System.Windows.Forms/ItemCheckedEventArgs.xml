@@ -15,13 +15,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.ListView.ItemChecked" />
+        >Provides data for the <see cref="E:System.Windows.Forms.ListView.ItemChecked" />
 
         
 
-         event of the <see
-         cref="T:System.Windows.Forms.ListView" />
+         event of the <see cref="T:System.Windows.Forms.ListView" />
 
         
 
@@ -45,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ItemCheckedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ItemCheckedEventArgs" />
 
             
 
@@ -54,12 +51,15 @@
           >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ListViewItem" />
+          The <see cref="T:System.Windows.Forms.ListViewItem" />
 
           
 
@@ -86,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Gets the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 

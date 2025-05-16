@@ -26,31 +26,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="Overload:System.Linq.Expressions.Expression.MemberInit" />
+        >Use the <see cref="Overload:System.Linq.Expressions.Expression.MemberInit" />
 
         
 
-         factory methods to create a <see
-         cref="T:System.Linq.Expressions.MemberInitExpression" />
+         factory methods to create a <see cref="T:System.Linq.Expressions.MemberInitExpression" />
 
         
 
         .</para
       >
       <para
-        >The value of the <see
-         cref="P:System.Linq.Expressions.Expression.NodeType" />
+        >The value of the <see cref="P:System.Linq.Expressions.Expression.NodeType" />
 
         
 
-         property of a <see
-         cref="T:System.Linq.Expressions.MemberInitExpression" />
+         property of a <see cref="T:System.Linq.Expressions.MemberInitExpression" />
 
         
 
-         is <see
-         cref="F:System.Linq.Expressions.ExpressionType.MemberInit" />
+         is <see cref="F:System.Linq.Expressions.ExpressionType.MemberInit" />
 
         
 
@@ -182,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the node type of this Expression. Extension nodes should return <see
-             cref="F:System.Linq.Expressions.ExpressionType.Extension" />
+            >Returns the node type of this Expression. Extension nodes should return <see cref="F:System.Linq.Expressions.ExpressionType.Extension" />
 
             
 
@@ -218,8 +212,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reduces the <see
-             cref="T:System.Linq.Expressions.MemberInitExpression" />
+            >Reduces the <see cref="T:System.Linq.Expressions.MemberInitExpression" />
 
             
 
@@ -248,8 +241,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the static type of the expression that this <see
-             cref="T:System.Linq.Expressions.Expression" />
+            >Gets the static type of the expression that this <see cref="T:System.Linq.Expressions.Expression" />
 
             
 
@@ -292,24 +284,30 @@
           <para>This expression if no children are changed or an expression with the updated children.</para>
         </returns>
         <param name="newExpression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Linq.Expressions.MemberInitExpression.NewExpression" />
+          The <see cref="P:System.Linq.Expressions.MemberInitExpression.NewExpression" />
 
           
 
            property of the result.</param
         >
         <param name="bindings">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Linq.Expressions.MemberInitExpression.Bindings" />
+          The <see cref="P:System.Linq.Expressions.MemberInitExpression.Bindings" />
 
           
 

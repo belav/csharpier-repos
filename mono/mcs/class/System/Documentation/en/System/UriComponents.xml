@@ -23,13 +23,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used to identify the parts of a <see
-         cref="T:System.Uri" />
+        >This enumeration is used to identify the parts of a <see cref="T:System.Uri" />
 
         
 
-        . This enumeration is used with the <see
-         cref="M:System.Uri.GetComponents(System.UriComponents,System.UriFormat)" />
+        . This enumeration is used with the <see cref="M:System.Uri.GetComponents(System.UriComponents,System.UriFormat)" />
 
         
 
@@ -38,14 +36,11 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para
-        >Specifies the parts of a <see
-         cref="T:System.Uri" />
+      <para>Specifies the parts of a <see cref="T:System.Uri" />
 
         
 
-        .</para
-      >
+        .</para>
     </summary>
   </Docs>
   <Members>
@@ -68,38 +63,31 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Uri.Scheme" />
+            >The <see cref="P:System.Uri.Scheme" />
 
             
 
-            , <see
-             cref="P:System.Uri.UserInfo" />
+            , <see cref="P:System.Uri.UserInfo" />
 
             
 
-            , <see
-             cref="P:System.Uri.Host" />
+            , <see cref="P:System.Uri.Host" />
 
             
 
-            , <see
-             cref="P:System.Uri.Port" />
+            , <see cref="P:System.Uri.Port" />
 
             
 
-            , <see
-             cref="P:System.Uri.LocalPath" />
+            , <see cref="P:System.Uri.LocalPath" />
 
             
 
-            , <see
-             cref="P:System.Uri.Query" />
+            , <see cref="P:System.Uri.Query" />
 
             
 
-            , and <see
-             cref="P:System.Uri.Fragment" />
+            , and <see cref="P:System.Uri.Fragment" />
 
             
 
@@ -127,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Uri.Fragment" />
+            >The <see cref="P:System.Uri.Fragment" />
 
             
 
@@ -155,14 +142,11 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The <see
-             cref="P:System.Uri.Host" />
+          <para>The <see cref="P:System.Uri.Host" />
 
             
 
-             data.</para
-          >
+             data.</para>
         </summary>
       </Docs>
     </Member>
@@ -185,18 +169,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Uri.Host" />
+            >The <see cref="P:System.Uri.Host" />
 
             
 
-             and <see
-             cref="P:System.Uri.Port" />
+             and <see cref="P:System.Uri.Port" />
 
             
 
-             data. If no port data is in the Uri and a default port has been assigned to the <see
-             cref="P:System.Uri.Scheme" />
+             data. If no port data is in the Uri and a default port has been assigned to the <see cref="P:System.Uri.Scheme" />
 
             
 
@@ -224,28 +205,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Uri.Scheme" />
+            >The <see cref="P:System.Uri.Scheme" />
 
             
 
-            , <see
-             cref="P:System.Uri.Host" />
+            , <see cref="P:System.Uri.Host" />
 
             
 
-            , <see
-             cref="P:System.Uri.Port" />
+            , <see cref="P:System.Uri.Port" />
 
             
 
-            , <see
-             cref="P:System.Uri.LocalPath" />
+            , <see cref="P:System.Uri.LocalPath" />
 
             
 
-            , and <see
-             cref="P:System.Uri.Query" />
+            , and <see cref="P:System.Uri.Query" />
 
             
 
@@ -293,8 +269,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The normalized form of the <see
-             cref="P:System.Uri.Host" />
+            >The normalized form of the <see cref="P:System.Uri.Host" />
 
             
 
@@ -322,8 +297,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Uri.LocalPath" />
+            >The <see cref="P:System.Uri.LocalPath" />
 
             
 
@@ -351,18 +325,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Uri.LocalPath" />
+            >The <see cref="P:System.Uri.LocalPath" />
 
             
 
-             and <see
-             cref="P:System.Uri.Query" />
+             and <see cref="P:System.Uri.Query" />
 
             
 
-             data. Also see <see
-             cref="P:System.Uri.PathAndQuery" />
+             data. Also see <see cref="P:System.Uri.PathAndQuery" />
 
             
 
@@ -389,14 +360,11 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The <see
-             cref="P:System.Uri.Port" />
+          <para>The <see cref="P:System.Uri.Port" />
 
             
 
-             data.</para
-          >
+             data.</para>
         </summary>
       </Docs>
     </Member>
@@ -418,14 +386,11 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The <see
-             cref="P:System.Uri.Query" />
+          <para>The <see cref="P:System.Uri.Query" />
 
             
 
-             data.</para
-          >
+             data.</para>
         </summary>
       </Docs>
     </Member>
@@ -447,14 +412,11 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The <see
-             cref="P:System.Uri.Scheme" />
+          <para>The <see cref="P:System.Uri.Scheme" />
 
             
 
-             data.</para
-          >
+             data.</para>
         </summary>
       </Docs>
     </Member>
@@ -477,18 +439,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Uri.Scheme" />
+            >The <see cref="P:System.Uri.Scheme" />
 
             
 
-            , <see
-             cref="P:System.Uri.Host" />
+            , <see cref="P:System.Uri.Host" />
 
             
 
-            , and <see
-             cref="P:System.Uri.Port" />
+            , and <see cref="P:System.Uri.Port" />
 
             
 
@@ -516,8 +475,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The complete <see
-             cref="T:System.Uri" />
+            >The complete <see cref="T:System.Uri" />
 
             
 
@@ -545,28 +503,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Uri.UserInfo" />
+            >The <see cref="P:System.Uri.UserInfo" />
 
             
 
-            , <see
-             cref="P:System.Uri.Host" />
+            , <see cref="P:System.Uri.Host" />
 
             
 
-            , and <see
-             cref="P:System.Uri.Port" />
+            , and <see cref="P:System.Uri.Port" />
 
             
 
-             data. If no port data is in the <see
-             cref="T:System.Uri" />
+             data. If no port data is in the <see cref="T:System.Uri" />
 
             
 
-             and a default port has been assigned to the <see
-             cref="P:System.Uri.Scheme" />
+             and a default port has been assigned to the <see cref="P:System.Uri.Scheme" />
 
             
 
@@ -594,18 +547,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Uri.Port" />
+            >The <see cref="P:System.Uri.Port" />
 
             
 
-             data. If no port data is in the <see
-             cref="T:System.Uri" />
+             data. If no port data is in the <see cref="T:System.Uri" />
 
             
 
-             and a default port has been assigned to the <see
-             cref="P:System.Uri.Scheme" />
+             and a default port has been assigned to the <see cref="P:System.Uri.Scheme" />
 
             
 
@@ -633,8 +583,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Uri.UserInfo" />
+            >The <see cref="P:System.Uri.UserInfo" />
 
             
 

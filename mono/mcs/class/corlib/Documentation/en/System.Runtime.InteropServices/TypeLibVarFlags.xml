@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >TypeLibVarFlags is used in conjunction with the <see
-         cref="T:System.Runtime.InteropServices.TypeLibVarAttribute" />
+        >TypeLibVarFlags is used in conjunction with the <see cref="T:System.Runtime.InteropServices.TypeLibVarAttribute" />
 
         
 
@@ -40,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Describes the original settings of the <see
-         cref="T:System.Runtime.InteropServices.VARFLAGS" />
+        >Describes the original settings of the <see cref="T:System.Runtime.InteropServices.VARFLAGS" />
 
         
 
@@ -143,8 +141,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The variable is displayed as bindable. <see
-             cref="F:System.Runtime.InteropServices.TypeLibVarFlags.FBindable" />
+            >The variable is displayed as bindable. <see cref="F:System.Runtime.InteropServices.TypeLibVarFlags.FBindable" />
 
             
 

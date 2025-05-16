@@ -21,31 +21,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="Overload:System.Linq.Expressions.Expression.MemberBind" />
+        >Use the <see cref="Overload:System.Linq.Expressions.Expression.MemberBind" />
 
         
 
-         factory methods to create a <see
-         cref="T:System.Linq.Expressions.MemberMemberBinding" />
+         factory methods to create a <see cref="T:System.Linq.Expressions.MemberMemberBinding" />
 
         
 
         .</para
       >
       <para
-        >The value of the <see
-         cref="P:System.Linq.Expressions.MemberBinding.BindingType" />
+        >The value of the <see cref="P:System.Linq.Expressions.MemberBinding.BindingType" />
 
         
 
-         property of a <see
-         cref="T:System.Linq.Expressions.MemberMemberBinding" />
+         property of a <see cref="T:System.Linq.Expressions.MemberMemberBinding" />
 
         
 
-         object is <see
-         cref="F:System.Linq.Expressions.MemberBindingType.MemberBinding" />
+         object is <see cref="F:System.Linq.Expressions.MemberBindingType.MemberBinding" />
 
         
 
@@ -117,12 +112,15 @@
           <para>This expression if no children are changed or an expression with the updated children.</para>
         </returns>
         <param name="bindings">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Linq.Expressions.MemberMemberBinding.Bindings" />
+          The <see cref="P:System.Linq.Expressions.MemberMemberBinding.Bindings" />
 
           
 

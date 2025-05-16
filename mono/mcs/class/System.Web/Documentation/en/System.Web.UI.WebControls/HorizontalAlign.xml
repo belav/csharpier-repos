@@ -20,13 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.HorizontalAlign" />
+        >The <see cref="T:System.Web.UI.WebControls.HorizontalAlign" />
 
         
 
-         enumeration represents the horizontal alignment options for items within a container, such as a <see
-         cref="T:System.Web.UI.WebControls.TableCell" />
+         enumeration represents the horizontal alignment options for items within a container, such as a <see cref="T:System.Web.UI.WebControls.TableCell" />
 
         
 

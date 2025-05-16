@@ -19,13 +19,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Windows.Forms.LinkClickedEventArgs" />
+        >A <see cref="T:System.Windows.Forms.LinkClickedEventArgs" />
 
         
 
-         specifies the text of the link that is clicked in the <see
-         cref="T:System.Windows.Forms.RichTextBox" />
+         specifies the text of the link that is clicked in the <see cref="T:System.Windows.Forms.RichTextBox" />
 
         
 
@@ -35,8 +33,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.RichTextBox.LinkClicked" />
+        >Provides data for the <see cref="E:System.Windows.Forms.RichTextBox.LinkClicked" />
 
         
 
@@ -55,8 +52,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text specified in the <paramref
-             name="linkText" />
+            >The text specified in the <paramref name="linkText" />
 
             
 
@@ -66,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.LinkClickedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.LinkClickedEventArgs" />
 
             
 
@@ -75,12 +70,15 @@
           >
         </summary>
         <param name="linkText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The text of the link that is clicked in the <see
-           cref="T:System.Windows.Forms.RichTextBox" />
+          The text of the link that is clicked in the <see cref="T:System.Windows.Forms.RichTextBox" />
 
           
 

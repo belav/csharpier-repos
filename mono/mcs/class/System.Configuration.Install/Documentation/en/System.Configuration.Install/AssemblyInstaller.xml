@@ -30,8 +30,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.Install.AssemblyInstaller" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.Install.AssemblyInstaller" />
 
             
 
@@ -59,13 +58,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.Install.AssemblyInstaller" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.Install.AssemblyInstaller" />
 
             
 
-             class, and specifies both the assembly to install and the command line to use when creating a new <see
-             cref="T:System.Configuration.Install.InstallContext" />
+             class, and specifies both the assembly to install and the command line to use when creating a new <see cref="T:System.Configuration.Install.InstallContext" />
 
             
 
@@ -73,24 +70,30 @@
           >
         </summary>
         <param name="assembly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Reflection.Assembly" />
+          The <see cref="T:System.Reflection.Assembly" />
 
           
 
            to install. </param
         >
         <param name="commandLine">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The command line to use when creating a new <see
-           cref="T:System.Configuration.Install.InstallContext" />
+          The command line to use when creating a new <see cref="T:System.Configuration.Install.InstallContext" />
 
           
 
@@ -117,13 +120,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.Install.AssemblyInstaller" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.Install.AssemblyInstaller" />
 
             
 
-             class, and specifies both the file name of the assembly to install and the command line to use when creating a new <see
-             cref="T:System.Configuration.Install.InstallContext" />
+             class, and specifies both the file name of the assembly to install and the command line to use when creating a new <see cref="T:System.Configuration.Install.InstallContext" />
 
             
 
@@ -131,19 +132,26 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file name of the assembly to install. </param
         >
         <param name="commandLine">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The command line to use when creating a new <see
-           cref="T:System.Configuration.Install.InstallContext" />
+          The command line to use when creating a new <see cref="T:System.Configuration.Install.InstallContext" />
 
           
 
@@ -193,8 +201,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Configuration.Install.AssemblyInstaller.CheckIfInstallable(System.String)" />
+            >The <see cref="M:System.Configuration.Install.AssemblyInstaller.CheckIfInstallable(System.String)" />
 
             
 
@@ -212,13 +219,11 @@
             </item>
             <item>
               <para
-                >There is at least one public, non abstract class that extends the <see
-                 cref="T:System.Configuration.Install.Installer" />
+                >There is at least one public, non abstract class that extends the <see cref="T:System.Configuration.Install.Installer" />
 
                 
 
-                 class and contains the <see
-                 cref="F:System.ComponentModel.RunInstallerAttribute.Yes" />
+                 class and contains the <see cref="F:System.ComponentModel.RunInstallerAttribute.Yes" />
 
                 
 
@@ -238,7 +243,11 @@
           <para>Checks to see if the specified assembly can be installed.</para>
         </summary>
         <param name="assemblyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -262,8 +271,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the command line to use when creating a new <see
-             cref="T:System.Configuration.Install.InstallContext" />
+            >Gets or sets the command line to use when creating a new <see cref="T:System.Configuration.Install.InstallContext" />
 
             
 
@@ -292,31 +300,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called only if the <see
-             cref="M:System.Configuration.Install.AssemblyInstaller.Install(System.Collections.IDictionary)" />
+            >This method is called only if the <see cref="M:System.Configuration.Install.AssemblyInstaller.Install(System.Collections.IDictionary)" />
 
             
 
-             methods of all the installers in this instance's <see
-             cref="T:System.Configuration.Install.InstallerCollection" />
+             methods of all the installers in this instance's <see cref="T:System.Configuration.Install.InstallerCollection" />
 
             
 
-             succeed. This method then calls the <see
-             cref="M:System.Configuration.Install.AssemblyInstaller.Commit(System.Collections.IDictionary)" />
+             succeed. This method then calls the <see cref="M:System.Configuration.Install.AssemblyInstaller.Commit(System.Collections.IDictionary)" />
 
             
 
              method of each installer in the collection.</para
           >
           <para
-            >Store any information that you might need to do a correct uninstall operation in the saved-state <see
-             cref="T:System.Collections.IDictionary" />
+            >Store any information that you might need to do a correct uninstall operation in the saved-state <see cref="T:System.Collections.IDictionary" />
 
             
 
-            , which is passed to the <see
-             cref="M:System.Configuration.Install.AssemblyInstaller.Uninstall(System.Collections.IDictionary)" />
+            , which is passed to the <see cref="M:System.Configuration.Install.AssemblyInstaller.Uninstall(System.Collections.IDictionary)" />
 
             
 
@@ -328,12 +331,15 @@
           <para>Completes the installation transaction.</para>
         </summary>
         <param name="savedState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IDictionary" />
+          An <see cref="T:System.Collections.IDictionary" />
 
           
 
@@ -383,38 +389,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method calls the <see
-             cref="M:System.Configuration.Install.AssemblyInstaller.Install(System.Collections.IDictionary)" />
+            >This method calls the <see cref="M:System.Configuration.Install.AssemblyInstaller.Install(System.Collections.IDictionary)" />
 
             
 
-             method of each installer contained in the <see
-             cref="P:System.Configuration.Install.Installer.Installers" />
+             method of each installer contained in the <see cref="P:System.Configuration.Install.Installer.Installers" />
 
             
 
-             property of this instance. The <see
-             cref="T:System.Collections.IDictionary" />
+             property of this instance. The <see cref="T:System.Collections.IDictionary" />
 
             
 
-             object specified by the <paramref
-             name="savedState" />
+             object specified by the <paramref name="savedState" />
 
             
 
-             parameter is updated to reflect the status of the installation after the contained installers have run. If all the <see
-             cref="M:System.Configuration.Install.AssemblyInstaller.Install(System.Collections.IDictionary)" />
+             parameter is updated to reflect the status of the installation after the contained installers have run. If all the <see cref="M:System.Configuration.Install.AssemblyInstaller.Install(System.Collections.IDictionary)" />
 
             
 
-             methods succeed, the <see
-             cref="M:System.Configuration.Install.AssemblyInstaller.Commit(System.Collections.IDictionary)" />
+             methods succeed, the <see cref="M:System.Configuration.Install.AssemblyInstaller.Commit(System.Collections.IDictionary)" />
 
             
 
-             method is called. Otherwise, the <see
-             cref="M:System.Configuration.Install.AssemblyInstaller.Rollback(System.Collections.IDictionary)" />
+             method is called. Otherwise, the <see cref="M:System.Configuration.Install.AssemblyInstaller.Rollback(System.Collections.IDictionary)" />
 
             
 
@@ -426,12 +425,15 @@
           <para>Performs the installation.</para>
         </summary>
         <param name="savedState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IDictionary" />
+          An <see cref="T:System.Collections.IDictionary" />
 
           
 
@@ -478,23 +480,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A rollback restores the computer to the state it was in before the installation occurred. The <see
-             cref="M:System.Configuration.Install.AssemblyInstaller.Rollback(System.Collections.IDictionary)" />
+            >A rollback restores the computer to the state it was in before the installation occurred. The <see cref="M:System.Configuration.Install.AssemblyInstaller.Rollback(System.Collections.IDictionary)" />
 
             
 
-             method is called if the <see
-             cref="M:System.Configuration.Install.AssemblyInstaller.Install(System.Collections.IDictionary)" />
+             method is called if the <see cref="M:System.Configuration.Install.AssemblyInstaller.Install(System.Collections.IDictionary)" />
 
             
 
-             method of this <see
-             cref="T:System.Configuration.Install.Installer" />
+             method of this <see cref="T:System.Configuration.Install.Installer" />
 
             
 
-             instance or of any installer in the installer collection fails to run correctly. Any exceptions generated by calling the <see
-             cref="M:System.Configuration.Install.AssemblyInstaller.Rollback(System.Collections.IDictionary)" />
+             instance or of any installer in the installer collection fails to run correctly. Any exceptions generated by calling the <see cref="M:System.Configuration.Install.AssemblyInstaller.Rollback(System.Collections.IDictionary)" />
 
             
 
@@ -506,12 +504,15 @@
           <para>Restores the computer to the state it was in before the installation.</para>
         </summary>
         <param name="savedState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IDictionary" />
+          An <see cref="T:System.Collections.IDictionary" />
 
           
 
@@ -539,8 +540,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method to remove a previously completed installation. If the <see
-             cref="M:System.Configuration.Install.Installer.Uninstall(System.Collections.IDictionary)" />
+            >Call this method to remove a previously completed installation. If the <see cref="M:System.Configuration.Install.Installer.Uninstall(System.Collections.IDictionary)" />
 
             
 
@@ -548,28 +548,23 @@
           >
           <block subset="none" type="note">
             <para
-              >Although the <see
-               cref="M:System.Configuration.Install.Installer.Install(System.Collections.IDictionary)" />
+              >Although the <see cref="M:System.Configuration.Install.Installer.Install(System.Collections.IDictionary)" />
 
               
 
-               and <see
-               cref="M:System.Configuration.Install.Installer.Commit(System.Collections.IDictionary)" />
+               and <see cref="M:System.Configuration.Install.Installer.Commit(System.Collections.IDictionary)" />
 
               
 
-               methods save the state of the computer after the installations, the file containing the <see
-               cref="T:System.Collections.IDictionary" />
+               methods save the state of the computer after the installations, the file containing the <see cref="T:System.Collections.IDictionary" />
 
               
 
-               from the <paramref
-               name="savedState" />
+               from the <paramref name="savedState" />
 
               
 
-               parameter might have been deleted at some point after the installation was complete. If the file is deleted, the <paramref
-               name="savedState" />
+               parameter might have been deleted at some point after the installation was complete. If the file is deleted, the <paramref name="savedState" />
 
               
 
@@ -582,12 +577,15 @@
           <para>Removes an installation.</para>
         </summary>
         <param name="savedState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IDictionary" />
+          An <see cref="T:System.Collections.IDictionary" />
 
           
 
@@ -610,8 +608,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting this property to true creates a new file named "{Assembly name}.InstallLog" to log messages for this assembly. Setting <see
-             cref="P:System.Configuration.Install.AssemblyInstaller.UseNewContext" />
+            >Setting this property to true creates a new file named "{Assembly name}.InstallLog" to log messages for this assembly. Setting <see cref="P:System.Configuration.Install.AssemblyInstaller.UseNewContext" />
 
             
 
@@ -621,8 +618,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether to create a new <see
-             cref="T:System.Configuration.Install.InstallContext" />
+            >Gets or sets a value indicating whether to create a new <see cref="T:System.Configuration.Install.InstallContext" />
 
             
 

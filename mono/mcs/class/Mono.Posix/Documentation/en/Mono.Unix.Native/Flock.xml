@@ -35,20 +35,17 @@
     >
     <remarks
       >This can only be used with 
-    <see
-       cref="F:Mono.Unix.Native.FcntlCommand.F_GETLK" />
+    <see cref="F:Mono.Unix.Native.FcntlCommand.F_GETLK" />
 
       
 
       , 
-    <see
-       cref="F:Mono.Unix.Native.FcntlCommand.F_SETLK" />
+    <see cref="F:Mono.Unix.Native.FcntlCommand.F_SETLK" />
 
       
 
       , and
-    <see
-       cref="F:Mono.Unix.Native.FcntlCommand.F_SETLKW" />
+    <see cref="F:Mono.Unix.Native.FcntlCommand.F_SETLKW" />
 
       
 
@@ -144,8 +141,7 @@
       </ReturnValue>
       <Docs>
         <summary
-          >Length of file locking.  <c
-          >l_len</c>
+          >Length of file locking.  <c>l_len</c>
 
           
 
@@ -234,14 +230,11 @@
         <ReturnType>Mono.Unix.Native.SeekFlags</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >How to interpret <c
-          >l_start</c>
+        <summary>How to interpret <c>l_start</c>
 
           
 
-          .</summary
-        >
+          .</summary>
         <remarks />
       </Docs>
     </Member>

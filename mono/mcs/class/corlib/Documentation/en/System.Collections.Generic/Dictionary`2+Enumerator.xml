@@ -36,13 +36,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Collections.Generic.Dictionary`2" />
+        >The <see cref="T:System.Collections.Generic.Dictionary`2" />
 
         
 
-         generic class provides a mapping from a set of keys to a set of values. Each addition to the dictionary consists of a value and its associated key. Retrieving a value by using its key is very fast, close to O(1), because the <see
-         cref="T:System.Collections.Generic.Dictionary`2" />
+         generic class provides a mapping from a set of keys to a set of values. Each addition to the dictionary consists of a value and its associated key. Retrieving a value by using its key is very fast, close to O(1), because the <see cref="T:System.Collections.Generic.Dictionary`2" />
 
         
 
@@ -50,8 +48,7 @@
       >
       <block subset="none" type="note">
         <para
-          >The speed of retrieval depends on the quality of the hashing algorithm of the type specified for <paramref
-           name="TKey" />
+          >The speed of retrieval depends on the quality of the hashing algorithm of the type specified for <paramref name="TKey" />
 
           
 
@@ -59,18 +56,15 @@
         >
       </block>
       <para
-        >As long as an object is used as a key in the <see
-         cref="T:System.Collections.Generic.Dictionary`2" />
+        >As long as an object is used as a key in the <see cref="T:System.Collections.Generic.Dictionary`2" />
 
         
 
-        , it must not change in any way that affects its hash value. Every key in a <see
-         cref="T:System.Collections.Generic.Dictionary`2" />
+        , it must not change in any way that affects its hash value. Every key in a <see cref="T:System.Collections.Generic.Dictionary`2" />
 
         
 
-         must be unique according to the dictionary's equality comparer. A key cannot be null, but a value can be, if the value type <paramref
-         name="TValue" />
+         must be unique according to the dictionary's equality comparer. A key cannot be null, but a value can be, if the value type <paramref name="TValue" />
 
         
 
@@ -81,28 +75,23 @@
 
         
 
-         requires an equality implementation to determine whether keys are equal. You can specify an implementation of the <see
-         cref="T:System.Collections.Generic.IEqualityComparer`1" />
+         requires an equality implementation to determine whether keys are equal. You can specify an implementation of the <see cref="T:System.Collections.Generic.IEqualityComparer`1" />
 
         
 
-         generic interface by using a constructor that accepts a <paramref
-         name="comparer" />
+         generic interface by using a constructor that accepts a <paramref name="comparer" />
 
         
 
-         parameter; if you do not specify an implementation, the default generic equality comparer <see
-         cref="P:System.Collections.Generic.EqualityComparer`1.Default" />
+         parameter; if you do not specify an implementation, the default generic equality comparer <see cref="P:System.Collections.Generic.EqualityComparer`1.Default" />
 
         
 
-         is used. If type <paramref
-         name="TKey" />
+         is used. If type <paramref name="TKey" />
 
         
 
-         implements the <see
-         cref="T:System.IEquatable`1" />
+         implements the <see cref="T:System.IEquatable`1" />
 
         
 
@@ -110,8 +99,7 @@
       >
       <block subset="none" type="note">
         <para
-          >For example, you can use the case-insensitive string comparers provided by the <see
-           cref="T:System.StringComparer" />
+          >For example, you can use the case-insensitive string comparers provided by the <see cref="T:System.StringComparer" />
 
           
 
@@ -119,31 +107,26 @@
         >
       </block>
       <para
-        >The capacity of a <see
-         cref="T:System.Collections.Generic.Dictionary`2" />
+        >The capacity of a <see cref="T:System.Collections.Generic.Dictionary`2" />
 
         
 
-         is the number of elements the <see
-         cref="T:System.Collections.Generic.Dictionary`2" />
+         is the number of elements the <see cref="T:System.Collections.Generic.Dictionary`2" />
 
         
 
-         can hold. As elements are added to a <see
-         cref="T:System.Collections.Generic.Dictionary`2" />
+         can hold. As elements are added to a <see cref="T:System.Collections.Generic.Dictionary`2" />
 
         
 
         , the capacity is automatically increased as required by reallocating the internal array.</para
       >
       <para
-        >For very large <see
-         cref="T:System.Collections.Generic.Dictionary`2" />
+        >For very large <see cref="T:System.Collections.Generic.Dictionary`2" />
 
         
 
-         objects, you can increase the maximum capacity to 2 billion elements on a 64-bit system by setting the enabled attribute of the <format
-         type="text/html">
+         objects, you can increase the maximum capacity to 2 billion elements on a 64-bit system by setting the enabled attribute of the <format type="text/html">
           <a href="5c7ea24a-39ac-4e5f-83b7-b9f9a1b556ab">gcAllowVeryLargeObjects</a>
         </format>
 
@@ -152,21 +135,18 @@
          configuration element to true in the run-time environment.</para
       >
       <para
-        >For purposes of enumeration, each item in the dictionary is treated as a <see
-         cref="T:System.Collections.Generic.KeyValuePair`2" />
+        >For purposes of enumeration, each item in the dictionary is treated as a <see cref="T:System.Collections.Generic.KeyValuePair`2" />
 
         
 
          structure representing a value and its key. The order in which the items are returned is undefined.</para
       >
       <para
-        >The foreach statement of the C# language (for each in C++, For Each in Visual Basic) requires the type of each element in the collection. Since the <see
-         cref="T:System.Collections.Generic.Dictionary`2" />
+        >The foreach statement of the C# language (for each in C++, For Each in Visual Basic) requires the type of each element in the collection. Since the <see cref="T:System.Collections.Generic.Dictionary`2" />
 
         
 
-         is a collection of keys and values, the element type is not the type of the key or the type of the value. Instead, the element type is a <see
-         cref="T:System.Collections.Generic.KeyValuePair`2" />
+         is a collection of keys and values, the element type is not the type of the key or the type of the value. Instead, the element type is a <see cref="T:System.Collections.Generic.KeyValuePair`2" />
 
         
 
@@ -176,8 +156,7 @@
       <para>The foreach statement is a wrapper around the enumerator, which allows only reading from the collection, not writing to it.</para>
       <block subset="none" type="note">
         <para
-          >Because keys can be inherited and their behavior changed, their absolute uniqueness cannot be guaranteed by comparisons using the <see
-           cref="M:System.Type.Equals(System.Object)" />
+          >Because keys can be inherited and their behavior changed, their absolute uniqueness cannot be guaranteed by comparisons using the <see cref="M:System.Type.Equals(System.Object)" />
 
           
 

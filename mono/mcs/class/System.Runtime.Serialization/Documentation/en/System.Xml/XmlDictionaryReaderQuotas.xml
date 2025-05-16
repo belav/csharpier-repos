@@ -21,18 +21,15 @@
 
         
 
-         instances are used by WCF when serializing and deserializing SOAP messages. The <see
-         cref="T:System.Xml.XmlDictionary" />
+         instances are used by WCF when serializing and deserializing SOAP messages. The <see cref="T:System.Xml.XmlDictionary" />
 
         
 
-         contains string/value pairs which are used to decrease the size of the SOAP message. When serializing a message the value is written in place of the string. When deserializing the message the value is read but the string is written to the message object.  <see
-         cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+         contains string/value pairs which are used to decrease the size of the SOAP message. When serializing a message the value is written in place of the string. When deserializing the message the value is read but the string is written to the message object.  <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
         
 
-         is a class that contains a number of quotas used by the <see
-         cref="T:System.Xml.XmlDictionaryReader" />
+         is a class that contains a number of quotas used by the <see cref="T:System.Xml.XmlDictionaryReader" />
 
         
 

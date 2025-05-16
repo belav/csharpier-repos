@@ -28,21 +28,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Languages typically do not require a class to declare inheritance from <see
-         cref="T:System.Object" />
+        >Languages typically do not require a class to declare inheritance from <see cref="T:System.Object" />
 
         
 
          because the inheritance is implicit.</para
       >
       <para
-        >Because all classes in the .NET Framework are derived from <see
-         cref="T:System.Object" />
+        >Because all classes in the .NET Framework are derived from <see cref="T:System.Object" />
 
         
 
-        , every method defined in the <see
-         cref="T:System.Object" />
+        , every method defined in the <see cref="T:System.Object" />
 
         
 
@@ -90,8 +87,7 @@
         <h2>Performance Considerations</h2>
       </format>
       <para
-        >If you are designing a class, such as a collection, that must handle any type of object, you can create class members that accept instances of the <see
-         cref="T:System.Object" />
+        >If you are designing a class, such as a collection, that must handle any type of object, you can create class members that accept instances of the <see cref="T:System.Object" />
 
         
 
@@ -100,8 +96,7 @@
       <list type="bullet">
         <item>
           <para
-            >Create a general method that accepts an <see
-             cref="T:System.Object" />
+            >Create a general method that accepts an <see cref="T:System.Object" />
 
             
 
@@ -113,8 +108,7 @@
         </item>
       </list>
       <para
-        >Although it is sometimes necessary to develop general purpose classes that accept and return <see
-         cref="T:System.Object" />
+        >Although it is sometimes necessary to develop general purpose classes that accept and return <see cref="T:System.Object" />
 
         
 
@@ -154,8 +148,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called by constructors in derived classes, but it can also be used to directly create an instance of the <see
-             cref="T:System.Object" />
+            >This constructor is called by constructors in derived classes, but it can also be used to directly create an instance of the <see cref="T:System.Object" />
 
             
 
@@ -165,8 +158,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Object" />
+            >Initializes a new instance of the <see cref="T:System.Object" />
 
             
 
@@ -205,8 +197,7 @@
           </para>
           <para
             > The following example contains two calls to the default
-   implementation of <see
-             cref="M:System.Object.Equals(System.Object)" />
+   implementation of <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -234,69 +225,58 @@ class MyClass {
             <see langword="Example 2:" />
           </para>
           <para
-            > The following example shows a <see
-             langword="Point" />
+            > The following example shows a <see langword="Point" />
 
             
 
              class that overrides
-the <see
-             cref="M:System.Object.Equals(System.Object)" />
+the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
              method to
-provide value equality and a class <see
-             langword="Point3D" />
+provide value equality and a class <see langword="Point3D" />
 
             
 
             , which is derived
-from <see
-             langword="Point" />
+from <see langword="Point" />
 
             
 
             
 . Because Point's override of
-<see
-             cref="M:System.Object.Equals(System.Object)" />
+<see cref="M:System.Object.Equals(System.Object)" />
 
             
 
              is the first 
 in the inheritance chain to introduce value equality, the
-<see
-             langword="Equals" />
+<see langword="Equals" />
 
             
 
              method of 
-the base class (which is inherited from <see
-             cref="T:System.Object" />
+the base class (which is inherited from <see cref="T:System.Object" />
 
             
 
              and checks for referential
-equality) is not invoked. However, <see
-             langword="Point3D.Equals" />
+equality) is not invoked. However, <see langword="Point3D.Equals" />
 
             
 
              invokes
-<see
-             langword="Point.Equals" />
+<see langword="Point.Equals" />
 
             
 
-             because <see
-             langword="Point" />
+             because <see langword="Point" />
 
             
 
              implements
-<see
-             langword="Equals" />
+<see langword="Equals" />
 
             
 
@@ -330,40 +310,34 @@ class Point3D: Point {
 </code
           >
           <para
-            > The <see
-             langword="Point.Equals" />
+            > The <see langword="Point.Equals" />
 
             
 
-             method checks that the <paramref
-             name="obj" />
+             method checks that the <paramref name="obj" />
 
             
 
             
 argument is non-null and that it references an instance of the same type as this
 object. If either of those checks fail, the method returns false. The
-<see
-             cref="M:System.Object.Equals(System.Object)" />
+<see cref="M:System.Object.Equals(System.Object)" />
 
             
 
              method uses 
-<see
-             cref="M:System.Object.GetType" />
+<see cref="M:System.Object.GetType" />
 
             
 
              to determine whether 
 the run-time types of the two objects are identical. (Note that
-<see
-             langword="typeof" />
+<see langword="typeof" />
 
             
 
              is not used here because it returns the static type.) If 
-instead the method had used a check of the form <c
-            >
+instead the method had used a check of the form <c>
               <paramref name="obj" />
 
               
@@ -374,33 +348,28 @@ instead the method had used a check of the form <c
             
 
              , the check would
-return true in cases where <paramref
-             name="obj" />
+return true in cases where <paramref name="obj" />
 
             
 
              is an instance of a subclass of
-<see
-             langword="Point" />
+<see langword="Point" />
 
             
 
              ,
-even though <paramref
-             name="obj" />
+even though <paramref name="obj" />
 
             
 
              and the current instance are not of the same runtime
 type. Having verified that both objects are of the same type, the method casts
-<paramref
-             name="obj" />
+<paramref name="obj" />
 
             
 
              
-to type <see
-             langword="Point" />
+to type <see langword="Point" />
 
             
 
@@ -408,62 +377,52 @@ to type <see
 and returns the result of comparing the instance variables of the two objects.</para
           >
           <para
-            > In <see
-             langword="Point3D.Equals" />
+            > In <see langword="Point3D.Equals" />
 
             
 
              , the inherited
-<see
-             langword="Equals" />
+<see langword="Equals" />
 
             
 
              method is 
-invoked before anything else is done; the inherited <see
-             langword="Equals" />
+invoked before anything else is done; the inherited <see langword="Equals" />
 
             
 
-             method checks to see that <paramref
-             name="obj " />
+             method checks to see that <paramref name="obj " />
 
             
 
-            is non-null, that <paramref
-             name="obj" />
+            is non-null, that <paramref name="obj" />
 
             
 
              is an instance of the same class as this
 object, and that the inherited instance variables match. Only when the inherited
-<see
-             langword="Equals" />
+<see langword="Equals" />
 
             
 
              returns true does the method compare the 
 instance variables introduced in the subclass. Specifically, the cast to
-<see
-             langword="Point3D" />
+<see langword="Point3D" />
 
             
 
              
-is not executed unless <paramref
-             name="obj" />
+is not executed unless <paramref name="obj" />
 
             
 
             
-has been determined to be of type <see
-             langword="Point3D" />
+has been determined to be of type <see langword="Point3D" />
 
             
 
              or a subclass of
-<see
-             langword="Point3D" />
+<see langword="Point3D" />
 
             
 
@@ -476,14 +435,12 @@ has been determined to be of type <see
           <para
             > In the previous example, operator == (the equality
    operator) is used to compare the individual instance variables. In some cases,
-   it is appropriate to use the <see
-             cref="M:System.Object.Equals(System.Object)" />
+   it is appropriate to use the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
              method to
-   compare instance variables in an <see
-             langword="Equals" />
+   compare instance variables in an <see langword="Equals" />
 
             
 
@@ -512,15 +469,13 @@ class Rectangle {
           <para
             >In some languages, such as C#, operator overloading is
    supported. When a type overloads operator ==, it should also override the
-<see
-             cref="M:System.Object.Equals(System.Object)" />
+<see cref="M:System.Object.Equals(System.Object)" />
 
             
 
              method to 
    provide the same functionality. This is typically accomplished by writing the
-<see
-             langword="Equals" />
+<see langword="Equals" />
 
             
 
@@ -549,27 +504,23 @@ public struct Complex {
           >
           <para
             >Because Complex is a C# struct (a value type), it is
-   known that there will be no subclasses of <see
-             langword="Complex" />
+   known that there will be no subclasses of <see langword="Complex" />
 
             
 
             
    . Therefore, the
-<see
-             cref="M:System.Object.Equals(System.Object)" />
+<see cref="M:System.Object.Equals(System.Object)" />
 
             
 
              method need 
    not compare the GetType() results for each object, but can instead use the
-<see
-             langword="is" />
+<see langword="is" />
 
             
 
-             operator to check the type of the <paramref
-             name="obj" />
+             operator to check the type of the <paramref name="obj" />
 
             
 
@@ -580,8 +531,7 @@ parameter.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            > The type of comparison between the current instance and the <paramref
-             name="obj" />
+            > The type of comparison between the current instance and the <paramref name="obj" />
 
             
 
@@ -590,18 +540,15 @@ parameter.</para
           <list type="bullet">
             <item>
               <para
-                >If the current instance is a reference type, the <see
-                 cref="M:System.Object.Equals(System.Object)" />
+                >If the current instance is a reference type, the <see cref="M:System.Object.Equals(System.Object)" />
 
                 
 
-                 method tests for reference equality, and a call to the <see
-                 cref="M:System.Object.Equals(System.Object)" />
+                 method tests for reference equality, and a call to the <see cref="M:System.Object.Equals(System.Object)" />
 
                 
 
-                 method is equivalent to a call to the <see
-                 cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+                 method is equivalent to a call to the <see cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
 
                 
 
@@ -611,8 +558,7 @@ parameter.</para
             </item>
             <item>
               <para
-                >If the current instance is a value type, the <see
-                 cref="M:System.Object.Equals(System.Object)" />
+                >If the current instance is a value type, the <see cref="M:System.Object.Equals(System.Object)" />
 
                 
 
@@ -621,13 +567,11 @@ parameter.</para
               <list type="bullet">
                 <item>
                   <para
-                    >The two objects are of the same type. As the following example shows, a <see
-                     cref="T:System.Byte" />
+                    >The two objects are of the same type. As the following example shows, a <see cref="T:System.Byte" />
 
                     
 
-                     object that has a value of 12 does not equal an <see
-                     cref="T:System.Int32" />
+                     object that has a value of 12 does not equal an <see cref="T:System.Int32" />
 
                     
 
@@ -643,18 +587,15 @@ parameter.</para
             </item>
           </list>
           <para
-            >Because the <see
-             cref="T:System.Object" />
+            >Because the <see cref="T:System.Object" />
 
             
 
-             class is the base class for all types in the .NET Framework, the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             class is the base class for all types in the .NET Framework, the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             method provides the default equality comparison for all other types. However, types often override the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             method provides the default equality comparison for all other types. However, types often override the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -664,18 +605,15 @@ parameter.</para
             <h2>Notes for the wrt</h2>
           </format>
           <para
-            >When you call the <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >When you call the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             method overload on a class in the wrt, it provides the default behavior for classes that don’t override <see
-             cref="M:System.Object.Equals(System.Object)" />
+             method overload on a class in the wrt, it provides the default behavior for classes that don’t override <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-            . This is part of the support that the .NET Framework provides for the wrt (see <format
-             type="text/html">
+            . This is part of the support that the .NET Framework provides for the wrt (see <format type="text/html">
               <a href="6fa7d044-ae12-4c54-b8ee-50915607a565"
                 >.NET Framework Support for Windows Store Apps and Windows Runtime</a
               >
@@ -683,28 +621,23 @@ parameter.</para
 
             
 
-            ). Classes in the wrt don’t inherit <see
-             cref="T:System.Object" />
+            ). Classes in the wrt don’t inherit <see cref="T:System.Object" />
 
             
 
-            , and currently don’t implement an <see
-             cref="M:System.Object.Equals(System.Object)" />
+            , and currently don’t implement an <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             method. However, they appear to have <see
-             cref="M:System.Object.ToString" />
+             method. However, they appear to have <see cref="M:System.Object.ToString" />
 
             
 
-            , <see
-             cref="M:System.Object.Equals(System.Object)" />
+            , <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-            , and <see
-             cref="M:System.Object.GetHashCode" />
+            , and <see cref="M:System.Object.GetHashCode" />
 
             
 
@@ -712,8 +645,7 @@ parameter.</para
           >
           <block subset="none" type="note">
             <para
-              >wrt classes that are written in C# or Visual Basic can override the <see
-               cref="M:System.Object.Equals(System.Object)" />
+              >wrt classes that are written in C# or Visual Basic can override the <see cref="M:System.Object.Equals(System.Object)" />
 
               
 
@@ -724,26 +656,22 @@ parameter.</para
             <h2>Notes for Callers</h2>
           </format>
           <para
-            >Derived classes frequently override the <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Derived classes frequently override the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             method to implement value equality. In addition, types also frequently provide an additional strongly typed overload to the Equals method, typically by implementing the <see
-             cref="T:System.IEquatable`1" />
+             method to implement value equality. In addition, types also frequently provide an additional strongly typed overload to the Equals method, typically by implementing the <see cref="T:System.IEquatable`1" />
 
             
 
-             interface. When you call the Equals method to test for equality, you should know whether the current instance overrides <see
-             cref="M:System.Object.Equals(System.Object)" />
+             interface. When you call the Equals method to test for equality, you should know whether the current instance overrides <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
              and understand how a particular call to an Equals method is resolved. Otherwise, you may be performing a test for equality that is different from what you intended, and the method may return an unexpected value. </para
           >
           <para
-            >The following example provides an illustration. It instantiates three <see
-             cref="T:System.Text.StringBuilder" />
+            >The following example provides an illustration. It instantiates three <see cref="T:System.Text.StringBuilder" />
 
             
 
@@ -751,86 +679,70 @@ parameter.</para
           >
           <para>code reference: System.Object.Equals#5</para>
           <para
-            >In the first case, the strongly typed <see
-             cref="M:System.Text.StringBuilder.Equals(System.Text.StringBuilder)" />
+            >In the first case, the strongly typed <see cref="M:System.Text.StringBuilder.Equals(System.Text.StringBuilder)" />
 
             
 
-             method overload, which tests for value equality, is called. Because the strings assigned to the two <see
-             cref="T:System.Text.StringBuilder" />
+             method overload, which tests for value equality, is called. Because the strings assigned to the two <see cref="T:System.Text.StringBuilder" />
 
             
 
-             objects are equal, the method returns true. However, <see
-             cref="T:System.Text.StringBuilder" />
+             objects are equal, the method returns true. However, <see cref="T:System.Text.StringBuilder" />
 
             
 
-             does not override <see
-             cref="M:System.Object.Equals(System.Object)" />
+             does not override <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-            . Because of this, when the <see
-             cref="T:System.Text.StringBuilder" />
+            . Because of this, when the <see cref="T:System.Text.StringBuilder" />
 
             
 
-             object is cast to an <see
-             cref="T:System.Object" />
+             object is cast to an <see cref="T:System.Object" />
 
             
 
-            , when a <see
-             cref="T:System.Text.StringBuilder" />
+            , when a <see cref="T:System.Text.StringBuilder" />
 
             
 
-             instance is assigned to a variable of type <see
-             cref="T:System.Object" />
+             instance is assigned to a variable of type <see cref="T:System.Object" />
 
             
 
-            , and when the <see
-             cref="M:System.Object.Equals(System.Object,System.Object)" />
+            , and when the <see cref="M:System.Object.Equals(System.Object,System.Object)" />
 
             
 
-             method is passed two <see
-             cref="T:System.Text.StringBuilder" />
+             method is passed two <see cref="T:System.Text.StringBuilder" />
 
             
 
-             objects, the default <see
-             cref="M:System.Object.Equals(System.Object)" />
+             objects, the default <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             method is called. Because <see
-             cref="T:System.Text.StringBuilder" />
+             method is called. Because <see cref="T:System.Text.StringBuilder" />
 
             
 
-             is a reference type, this is equivalent to passing the two <see
-             cref="T:System.Text.StringBuilder" />
+             is a reference type, this is equivalent to passing the two <see cref="T:System.Text.StringBuilder" />
 
             
 
-             objects to the <see
-             cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+             objects to the <see cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
 
             
 
-             method. Although all three <see
-             cref="T:System.Text.StringBuilder" />
+             method. Although all three <see cref="T:System.Text.StringBuilder" />
 
             
 
              objects contain identical strings, they refer to three distinct objects. As a result, these three method calls return false. </para
           >
           <para
-            >You can compare the current object to another object for reference equality by calling the <see
-             cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+            >You can compare the current object to another object for reference equality by calling the <see cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
 
             
 
@@ -856,10 +768,7 @@ parameter.</para
             </listheader>
             <item>
               <term>
-                <para
-                  >Class derived directly from <see
-                   cref="T:System.Object" />
-                </para>
+                <para>Class derived directly from <see cref="T:System.Object" /></para>
               </term>
               <description>
                 <para>
@@ -868,8 +777,7 @@ parameter.</para
               </description>
               <description>
                 <para
-                  >Reference equality; equivalent to calling <see
-                   cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+                  >Reference equality; equivalent to calling <see cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
 
                   
 
@@ -931,46 +839,38 @@ parameter.</para
             </item>
           </list>
           <para
-            >For a value type, you should always override <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >For a value type, you should always override <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-            , because tests for equality that rely on reflection offer poor performance. You can also override the default implementation of <see
-             cref="M:System.Object.Equals(System.Object)" />
+            , because tests for equality that rely on reflection offer poor performance. You can also override the default implementation of <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             for reference types to test for value equality instead of reference equality and to define the precise meaning of value equality. Such implementations of <see
-             cref="M:System.Object.Equals(System.Object)" />
+             for reference types to test for value equality instead of reference equality and to define the precise meaning of value equality. Such implementations of <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             return true if the two objects have the same value, even if they are not the same instance. The type's implementer decides what constitutes an object's value, but it is typically some or all the data stored in the instance variables of the object. For example, the value of a <see
-             cref="T:System.String" />
+             return true if the two objects have the same value, even if they are not the same instance. The type's implementer decides what constitutes an object's value, but it is typically some or all the data stored in the instance variables of the object. For example, the value of a <see cref="T:System.String" />
 
             
 
-             object is based on the characters of the string; the <see
-             cref="M:System.String.Equals(System.Object)" />
+             object is based on the characters of the string; the <see cref="M:System.String.Equals(System.Object)" />
 
             
 
-              method overrides the <see
-             cref="M:System.Object.Equals(System.Object)" />
+              method overrides the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
              method to return true for any two string instances that contain the same characters in the same order. </para
           >
           <para
-            >The following example shows how to override the <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >The following example shows how to override the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             method to test for value equality. It overrides the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             method to test for value equality. It overrides the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -978,21 +878,18 @@ parameter.</para
           >
           <para>code reference: System.Object.Equals#6</para>
           <para
-            >In addition to overriding <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >In addition to overriding <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-            , you can implement the <see
-             cref="T:System.IEquatable`1" />
+            , you can implement the <see cref="T:System.IEquatable`1" />
 
             
 
              interface to provide a strongly typed test for equality. </para
           >
           <para
-            >The following statements must be true for all implementations of the <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >The following statements must be true for all implementations of the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -1019,31 +916,26 @@ parameter.</para
             </item>
           </list>
           <para
-            >Implementations of <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Implementations of <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             must not throw exceptions; they should always return a value. For example, if <paramref
-             name="obj" />
+             must not throw exceptions; they should always return a value. For example, if <paramref name="obj" />
 
             
 
-             is null, the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             is null, the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             method should return false instead of throwing an <see
-             cref="T:System.ArgumentNullException" />
+             method should return false instead of throwing an <see cref="T:System.ArgumentNullException" />
 
             
 
             . </para
           >
           <para
-            >Follow these guidelines when overriding <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Follow these guidelines when overriding <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -1052,13 +944,11 @@ parameter.</para
           <list type="bullet">
             <item>
               <para
-                >Types that implement <see
-                 cref="T:System.IComparable" />
+                >Types that implement <see cref="T:System.IComparable" />
 
                 
 
-                 must override <see
-                 cref="M:System.Object.Equals(System.Object)" />
+                 must override <see cref="M:System.Object.Equals(System.Object)" />
 
                 
 
@@ -1067,13 +957,11 @@ parameter.</para
             </item>
             <item>
               <para
-                >Types that override <see
-                 cref="M:System.Object.Equals(System.Object)" />
+                >Types that override <see cref="M:System.Object.Equals(System.Object)" />
 
                 
 
-                 must also override <see
-                 cref="M:System.Object.GetHashCode" />
+                 must also override <see cref="M:System.Object.GetHashCode" />
 
                 
 
@@ -1082,18 +970,15 @@ parameter.</para
             </item>
             <item>
               <para
-                >You should consider implementing the <see
-                 cref="T:System.IEquatable`1" />
+                >You should consider implementing the <see cref="T:System.IEquatable`1" />
 
                 
 
-                 interface to support strongly typed tests for equality. Your <see
-                 cref="M:System.IEquatable`1.Equals(`0)" />
+                 interface to support strongly typed tests for equality. Your <see cref="M:System.IEquatable`1.Equals(`0)" />
 
                 
 
-                 implementation should return results that are consistent with <see
-                 cref="M:System.Object.Equals(System.Object)" />
+                 implementation should return results that are consistent with <see cref="M:System.Object.Equals(System.Object)" />
 
                 
 
@@ -1102,23 +987,19 @@ parameter.</para
             </item>
             <item>
               <para
-                >If your programming language supports operator overloading and you overload the equality operator for a given type, you must also override the <see
-                 cref="M:System.Object.Equals(System.Object)" />
+                >If your programming language supports operator overloading and you overload the equality operator for a given type, you must also override the <see cref="M:System.Object.Equals(System.Object)" />
 
                 
 
-                 method to return the same result as the equality operator. This  helps ensure that class library code that uses <see
-                 cref="M:System.Object.Equals(System.Object)" />
+                 method to return the same result as the equality operator. This  helps ensure that class library code that uses <see cref="M:System.Object.Equals(System.Object)" />
 
                 
 
-                 (such as <see
-                 cref="T:System.Collections.ArrayList" />
+                 (such as <see cref="T:System.Collections.ArrayList" />
 
                 
 
-                 and <see
-                 cref="T:System.Collections.Hashtable" />
+                 and <see cref="T:System.Collections.Hashtable" />
 
                 
 
@@ -1130,8 +1011,7 @@ parameter.</para
             <h2>Guidelines for Reference Types</h2>
           </format>
           <para
-            >The following guidelines apply to overriding <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >The following guidelines apply to overriding <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -1140,8 +1020,7 @@ parameter.</para
           <list type="bullet">
             <item>
               <para
-                >Consider overriding <see
-                 cref="M:System.Object.Equals(System.Object)" />
+                >Consider overriding <see cref="M:System.Object.Equals(System.Object)" />
 
                 
 
@@ -1150,8 +1029,7 @@ parameter.</para
             </item>
             <item>
               <para
-                >Most reference types must not overload the equality operator, even if they override <see
-                 cref="M:System.Object.Equals(System.Object)" />
+                >Most reference types must not overload the equality operator, even if they override <see cref="M:System.Object.Equals(System.Object)" />
 
                 
 
@@ -1160,18 +1038,15 @@ parameter.</para
             </item>
             <item>
               <para
-                >You should not override <see
-                 cref="M:System.Object.Equals(System.Object)" />
+                >You should not override <see cref="M:System.Object.Equals(System.Object)" />
 
                 
 
-                 on a mutable reference type. This is because overriding <see
-                 cref="M:System.Object.Equals(System.Object)" />
+                 on a mutable reference type. This is because overriding <see cref="M:System.Object.Equals(System.Object)" />
 
                 
 
-                 requires that you also override the <see
-                 cref="M:System.Object.GetHashCode" />
+                 requires that you also override the <see cref="M:System.Object.GetHashCode" />
 
                 
 
@@ -1183,8 +1058,7 @@ parameter.</para
             <h2>Guidelines for Value Types</h2>
           </format>
           <para
-            >The following guidelines apply to overriding <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >The following guidelines apply to overriding <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -1193,18 +1067,15 @@ parameter.</para
           <list type="bullet">
             <item>
               <para
-                >If you are defining a value type that includes one or more fields whose values are reference types, you should override <see
-                 cref="M:System.Object.Equals(System.Object)" />
+                >If you are defining a value type that includes one or more fields whose values are reference types, you should override <see cref="M:System.Object.Equals(System.Object)" />
 
                 
 
-                . The <see
-                 cref="M:System.Object.Equals(System.Object)" />
+                . The <see cref="M:System.Object.Equals(System.Object)" />
 
                 
 
-                 implementation provided by <see
-                 cref="T:System.ValueType" />
+                 implementation provided by <see cref="T:System.ValueType" />
 
                 
 
@@ -1213,8 +1084,7 @@ parameter.</para
             </item>
             <item>
               <para
-                >If you override <see
-                 cref="M:System.Object.Equals(System.Object)" />
+                >If you override <see cref="M:System.Object.Equals(System.Object)" />
 
                 
 
@@ -1223,18 +1093,15 @@ parameter.</para
             </item>
             <item>
               <para
-                >You should implement the <see
-                 cref="T:System.IEquatable`1" />
+                >You should implement the <see cref="T:System.IEquatable`1" />
 
                 
 
-                 interface. Calling the strongly typed <see
-                 cref="M:System.IEquatable`1.Equals(`0)" />
+                 interface. Calling the strongly typed <see cref="M:System.IEquatable`1.Equals(`0)" />
 
                 
 
-                 method avoids boxing the <paramref
-                 name="obj" />
+                 method avoids boxing the <paramref name="obj" />
 
                 
 
@@ -1252,7 +1119,11 @@ parameter.</para
           <para>true if the specified object  is equal to the current object; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1290,8 +1161,7 @@ parameter.</para
       <Docs>
         <example>
           <para
-            >The following example demonstrates the <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >The following example demonstrates the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -1342,28 +1212,23 @@ public class MyClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The static <see
-             cref="M:System.Object.Equals(System.Object,System.Object)" />
+            >The static <see cref="M:System.Object.Equals(System.Object,System.Object)" />
 
             
 
-             method indicates whether two objects, <paramref
-             name="objA" />
+             method indicates whether two objects, <paramref name="objA" />
 
             
 
-             and <paramref
-             name=" objB" />
+             and <paramref name=" objB" />
 
             
 
-            , are equal. It also enables you to test objects whose value is  null for equality. It compares <paramref
-             name="objA" />
+            , are equal. It also enables you to test objects whose value is  null for equality. It compares <paramref name="objA" />
 
             
 
-             and<paramref
-             name=" objB" />
+             and<paramref name=" objB" />
 
             
 
@@ -1372,18 +1237,15 @@ public class MyClass {
           <list type="bullet">
             <item>
               <para
-                >It determines whether the two objects represent the same object reference. If they do, the method returns true. This test is equivalent to calling the <see
-                 cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+                >It determines whether the two objects represent the same object reference. If they do, the method returns true. This test is equivalent to calling the <see cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
 
                 
 
-                 method. In addition, if both <paramref
-                 name="objA" />
+                 method. In addition, if both <paramref name="objA" />
 
                 
 
-                 and <paramref
-                 name="objB" />
+                 and <paramref name="objB" />
 
                 
 
@@ -1392,13 +1254,11 @@ public class MyClass {
             </item>
             <item>
               <para
-                >It determines whether either <paramref
-                 name="objA" />
+                >It determines whether either <paramref name="objA" />
 
                 
 
-                 or <paramref
-                 name="objB" />
+                 or <paramref name="objB" />
 
                 
 
@@ -1407,23 +1267,19 @@ public class MyClass {
             </item>
             <item>
               <para
-                >If the two objects do not represent the same object reference and neither is null, it calls <paramref
-                 name="objA" />
+                >If the two objects do not represent the same object reference and neither is null, it calls <paramref name="objA" />
 
                 
 
-                .Equals(<paramref
-                 name="objB" />
+                .Equals(<paramref name="objB" />
 
                 
 
-                ) and returns the result. This means that if <paramref
-                 name="objA" />
+                ) and returns the result. This means that if <paramref name="objA" />
 
                 
 
-                 overrides the <see
-                 cref="M:System.Object.Equals(System.Object)" />
+                 overrides the <see cref="M:System.Object.Equals(System.Object)" />
 
                 
 
@@ -1439,13 +1295,11 @@ public class MyClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the objects are considered equal; otherwise, false. If both <paramref
-             name="objA" />
+            >true if the objects are considered equal; otherwise, false. If both <paramref name="objA" />
 
             
 
-             and <paramref
-             name="objB" />
+             and <paramref name="objB" />
 
             
 
@@ -1453,14 +1307,22 @@ public class MyClass {
           >
         </returns>
         <param name="objA">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first object to compare. </param
         >
         <param name="objB">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1495,8 +1357,7 @@ public class MyClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Object.Finalize" />
+            >The <see cref="M:System.Object.Finalize" />
 
             
 
@@ -1533,36 +1394,30 @@ public class MyClass {
             <h2>How finalization works</h2>
           </format>
           <para
-            >The <see
-             cref="T:System.Object" />
+            >The <see cref="T:System.Object" />
 
             
 
-             class provides no implementation for the <see
-             cref="M:System.Object.Finalize" />
+             class provides no implementation for the <see cref="M:System.Object.Finalize" />
 
             
 
-             method, and the garbage collector does not mark types derived from <see
-             cref="T:System.Object" />
+             method, and the garbage collector does not mark types derived from <see cref="T:System.Object" />
 
             
 
-             for finalization unless they override the <see
-             cref="M:System.Object.Finalize" />
+             for finalization unless they override the <see cref="M:System.Object.Finalize" />
 
             
 
              method. </para
           >
           <para
-            >If a type does override the <see
-             cref="M:System.Object.Finalize" />
+            >If a type does override the <see cref="M:System.Object.Finalize" />
 
             
 
-             method, the garbage collector adds an entry for each instance of the type to an internal structure called the finalization queue. The finalization queue contains entries for all the objects in the managed heap whose finalization code must run before the garbage collector can reclaim their memory. The garbage collector then calls the <see
-             cref="M:System.Object.Finalize" />
+             method, the garbage collector adds an entry for each instance of the type to an internal structure called the finalization queue. The finalization queue contains entries for all the objects in the managed heap whose finalization code must run before the garbage collector can reclaim their memory. The garbage collector then calls the <see cref="M:System.Object.Finalize" />
 
             
 
@@ -1571,8 +1426,7 @@ public class MyClass {
           <list type="bullet">
             <item>
               <para
-                >After an object becomes inaccessible, unless the object has been exempted from finalization by a call to the <see
-                 cref="M:System.GC.SuppressFinalize(System.Object)" />
+                >After an object becomes inaccessible, unless the object has been exempted from finalization by a call to the <see cref="M:System.GC.SuppressFinalize(System.Object)" />
 
                 
 
@@ -1588,13 +1442,11 @@ public class MyClass {
 
             
 
-             is automatically called only once on a given instance, unless the object is re-registered by using a mechanism such as <see
-             cref="M:System.GC.ReRegisterForFinalize(System.Object)" />
+             is automatically called only once on a given instance, unless the object is re-registered by using a mechanism such as <see cref="M:System.GC.ReRegisterForFinalize(System.Object)" />
 
             
 
-             and the <see
-             cref="M:System.GC.SuppressFinalize(System.Object)" />
+             and the <see cref="M:System.GC.SuppressFinalize(System.Object)" />
 
             
 
@@ -1610,8 +1462,7 @@ public class MyClass {
           <list type="bullet">
             <item>
               <para
-                >The exact time when the finalizer executes during garbage collection is undefined. To ensure deterministic release of resources for instances of your class, implement a Close method or provide a <see
-                 cref="M:System.IDisposable.Dispose" />
+                >The exact time when the finalizer executes during garbage collection is undefined. To ensure deterministic release of resources for instances of your class, implement a Close method or provide a <see cref="M:System.IDisposable.Dispose" />
 
                 
 
@@ -1626,8 +1477,7 @@ public class MyClass {
             </item>
           </list>
           <para
-            >The <see
-             cref="M:System.Object.Finalize" />
+            >The <see cref="M:System.Object.Finalize" />
 
             
 
@@ -1643,13 +1493,11 @@ public class MyClass {
           </list>
           <para>The runtime continues to finalize objects during shutdown only while the number of finalizable objects continues to decrease.</para>
           <para
-            >If <see
-             cref="M:System.Object.Finalize" />
+            >If <see cref="M:System.Object.Finalize" />
 
             
 
-             or an override of <see
-             cref="M:System.Object.Finalize" />
+             or an override of <see cref="M:System.Object.Finalize" />
 
             
 
@@ -1662,8 +1510,7 @@ public class MyClass {
             <h2>Notes for implementers</h2>
           </format>
           <para
-            >You should override <see
-             cref="M:System.Object.Finalize" />
+            >You should override <see cref="M:System.Object.Finalize" />
 
             
 
@@ -1671,18 +1518,15 @@ public class MyClass {
           >
           <block subset="none" type="note">
             <para
-              >If a <see
-               cref="T:System.Runtime.InteropServices.SafeHandle" />
+              >If a <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
               
 
-               object is available that wraps your unmanaged resource, the recommended alternative is to implement the dispose pattern with a safe handle and not override <see
-               cref="M:System.Object.Finalize" />
+               object is available that wraps your unmanaged resource, the recommended alternative is to implement the dispose pattern with a safe handle and not override <see cref="M:System.Object.Finalize" />
 
               
 
-              . For more information, see <format
-               type="text/html">
+              . For more information, see <format type="text/html">
                 <a href="#SafeHandle">The SafeHandle alternative</a>
               </format>
 
@@ -1692,36 +1536,30 @@ public class MyClass {
             >
           </block>
           <para
-            >The <see
-             cref="M:System.Object.Finalize" />
+            >The <see cref="M:System.Object.Finalize" />
 
             
 
-             method does nothing by default, but you should override <see
-             cref="M:System.Object.Finalize" />
+             method does nothing by default, but you should override <see cref="M:System.Object.Finalize" />
 
             
 
-             only if necessary, and only to release unmanaged resources. Reclaiming memory during garbage collection tends to take much longer if a finalization operation runs, because it requires at least two garbage collections. In addition, you should override the <see
-             cref="M:System.Object.Finalize" />
+             only if necessary, and only to release unmanaged resources. Reclaiming memory during garbage collection tends to take much longer if a finalization operation runs, because it requires at least two garbage collections. In addition, you should override the <see cref="M:System.Object.Finalize" />
 
             
 
              method for reference types only. The common language runtime only finalizes reference types. It ignores finalizers on value types. </para
           >
           <para
-            >Every implementation of <see
-             cref="M:System.Object.Finalize" />
+            >Every implementation of <see cref="M:System.Object.Finalize" />
 
             
 
-             in a derived type must call its base type's implementation of <see
-             cref="M:System.Object.Finalize" />
+             in a derived type must call its base type's implementation of <see cref="M:System.Object.Finalize" />
 
             
 
-            . This is the only case in which application code is allowed to call <see
-             cref="M:System.Object.Finalize" />
+            . This is the only case in which application code is allowed to call <see cref="M:System.Object.Finalize" />
 
             
 
@@ -1729,13 +1567,11 @@ public class MyClass {
           >
           <block subset="none" type="note">
             <para
-              >The C# compiler does not allow you to override the <see
-               cref="M:System.Object.Finalize" />
+              >The C# compiler does not allow you to override the <see cref="M:System.Object.Finalize" />
 
               
 
-               method. Instead, you provide a finalizer by implementing a <format
-               type="text/html">
+               method. Instead, you provide a finalizer by implementing a <format type="text/html">
                 <a href="1ae6e46d-a4b1-4a49-abe5-b97f53d9e049">destructor</a>
               </format>
 
@@ -1744,13 +1580,11 @@ public class MyClass {
                for your class. A C# destructor automatically calls the destructor of its base class.</para
             >
             <para
-              >Visual C++ also provides its own syntax for implementing the <see
-               cref="M:System.Object.Finalize" />
+              >Visual C++ also provides its own syntax for implementing the <see cref="M:System.Object.Finalize" />
 
               
 
-               method. For more information, see the "Destructors and finalizers" section of <format
-               type="text/html">
+               method. For more information, see the "Destructors and finalizers" section of <format type="text/html">
                 <a href="1c03cb0d-1459-4b5e-af65-97d6b3094fd7"
                   >How to: Define and Consume Classes and Structs (C++/CLI)</a
                 >
@@ -1762,30 +1596,25 @@ public class MyClass {
             >
           </block>
           <para
-            >Because garbage collection is non-deterministic, you do not know precisely when the garbage collector performs finalization. To release resources immediately, you can also choose to implement the <format
-             type="text/html">
+            >Because garbage collection is non-deterministic, you do not know precisely when the garbage collector performs finalization. To release resources immediately, you can also choose to implement the <format type="text/html">
               <a href="31a6c13b-d6a2-492b-9a9f-e5238c983bcb">dispose pattern</a>
             </format>
 
             
 
-             and the <see
-             cref="T:System.IDisposable" />
+             and the <see cref="T:System.IDisposable" />
 
             
 
-             interface. The <see
-             cref="M:System.IDisposable.Dispose" />
+             interface. The <see cref="M:System.IDisposable.Dispose" />
 
             
 
-             implementation can be called by consumers of your class to free unmanaged resources, and you can use the <see
-             cref="M:System.Object.Finalize" />
+             implementation can be called by consumers of your class to free unmanaged resources, and you can use the <see cref="M:System.Object.Finalize" />
 
             
 
-             method to free unmanaged resources in the event that the <see
-             cref="M:System.IDisposable.Dispose" />
+             method to free unmanaged resources in the event that the <see cref="M:System.IDisposable.Dispose" />
 
             
 
@@ -1796,13 +1625,11 @@ public class MyClass {
 
             
 
-             can take almost any action, including resurrecting an object (that is, making the object accessible again) after it has been cleaned up during garbage collection. However, the object can only be resurrected once; <see
-             cref="M:System.Object.Finalize" />
+             can take almost any action, including resurrecting an object (that is, making the object accessible again) after it has been cleaned up during garbage collection. However, the object can only be resurrected once; <see cref="M:System.Object.Finalize" />
 
             
 
-             cannot be called on resurrected objects during garbage collection. There is one action that your implementation of <see
-             cref="M:System.Object.Finalize" />
+             cannot be called on resurrected objects during garbage collection. There is one action that your implementation of <see cref="M:System.Object.Finalize" />
 
             
 
@@ -1815,28 +1642,23 @@ public class MyClass {
             <h2>The SafeHandle alternative</h2>
           </format>
           <para
-            >Creating reliable finalizers is often difficult, because you cannot make assumptions about the state of your application, and because unhandled system exceptions such as <see
-             cref="T:System.OutOfMemoryException" />
+            >Creating reliable finalizers is often difficult, because you cannot make assumptions about the state of your application, and because unhandled system exceptions such as <see cref="T:System.OutOfMemoryException" />
 
             
 
-             and <see
-             cref="T:System.StackOverflowException" />
+             and <see cref="T:System.StackOverflowException" />
 
             
 
-             terminate the finalizer. Instead of implementing a finalizer for your class to release unmanaged resources, you can use an object that is derived from the <see
-             cref="T:System.Runtime.InteropServices.SafeHandle" />
+             terminate the finalizer. Instead of implementing a finalizer for your class to release unmanaged resources, you can use an object that is derived from the <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
             
 
-             class to wrap your unmanaged resources, and then implement the dispose pattern without a finalizer. The .NET Framework provides the following classes in the <see
-             cref="N:Microsoft.Win32" />
+             class to wrap your unmanaged resources, and then implement the dispose pattern without a finalizer. The .NET Framework provides the following classes in the <see cref="N:Microsoft.Win32" />
 
             
 
-             namespace that are derived from <see
-             cref="T:System.Runtime.InteropServices.SafeHandle" />
+             namespace that are derived from <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
             
 
@@ -1876,13 +1698,11 @@ public class MyClass {
 
                 
 
-                , <see
-                 cref="T:Microsoft.Win32.SafeHandles.SafeNCryptProviderHandle" />
+                , <see cref="T:Microsoft.Win32.SafeHandles.SafeNCryptProviderHandle" />
 
                 
 
-                , and <see
-                 cref="T:Microsoft.Win32.SafeHandles.SafeNCryptSecretHandle" />
+                , and <see cref="T:Microsoft.Win32.SafeHandles.SafeNCryptSecretHandle" />
 
                 
 
@@ -1918,27 +1738,24 @@ public class MyClass {
             </item>
           </list>
           <para
-            >The following example uses the <format
-             type="text/html">
+            >The following example uses the <format type="text/html">
               <a href="31a6c13b-d6a2-492b-9a9f-e5238c983bcb">dispose pattern</a>
             </format>
 
             
 
-             with safe handles instead of overriding the <see
-             cref="M:System.Object.Finalize" />
+             with safe handles instead of overriding the <see cref="M:System.Object.Finalize" />
 
             
 
              method. It defines a FileAssociation class that wraps registry information about the application that handles files with a particular file extension. The two registry handles returned as out parameters by Windows <see
-             cref="http://msdn.microsoft.com/library/windows/desktop/ms724897.aspx"
+              cref="http://msdn.microsoft.com/library/windows/desktop/ms724897.aspx"
               >RegOpenKeyEx</see
             >
 
             
 
-             function calls are passed to the <see
-             cref="T:Microsoft.Win32.SafeHandles.SafeRegistryHandle" />
+             function calls are passed to the <see cref="T:Microsoft.Win32.SafeHandles.SafeRegistryHandle" />
 
             
 
@@ -1979,14 +1796,12 @@ public class MyClass {
             <see langword="Example 1" />
           </para>
           <para
-            >In some cases, <see
-             cref="M:System.Object.GetHashCode" />
+            >In some cases, <see cref="M:System.Object.GetHashCode" />
 
             
 
              is implemented to simply return an integer value.
-The following example illustrates an implementation of <see
-             cref="M:System.Int32.GetHashCode" />
+The following example illustrates an implementation of <see cref="M:System.Int32.GetHashCode" />
 
             
 
@@ -2033,13 +1848,11 @@ public struct Point {
             >The following example illustrates another case where the type's fields are
    combined using xor (exclusive or) to generate the hash code. Notice that in this
    example, the fields represent user-defined types, each of which implements
-<see
-             cref="M:System.Object.GetHashCode" />
+<see cref="M:System.Object.GetHashCode" />
 
             
 
-             (and should implement <see
-             cref="M:System.Object.Equals(System.Object)" />
+             (and should implement <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -2076,8 +1889,7 @@ public class MyClass {
 </code
           >
           <para
-            >Avoid implementing <see
-             cref="M:System.Object.GetHashCode" />
+            >Avoid implementing <see cref="M:System.Object.GetHashCode" />
 
             
 
@@ -2090,13 +1902,11 @@ the case that BClass.GetHashCode calls AClass.GetHashCode. </para
           </para>
           <para
             >In some cases, the data member of the class in which you are implementing
-<see
-             cref="M:System.Object.GetHashCode" />
+<see cref="M:System.Object.GetHashCode" />
 
             
 
-             is bigger than a <see
-             cref="T:System.Int32" />
+             is bigger than a <see cref="T:System.Int32" />
 
             
 
@@ -2120,23 +1930,19 @@ public struct Int64 {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code is a numeric value that is used to insert and identify an object in a hash-based collection such as the <see
-             cref="T:System.Collections.Generic.Dictionary`2" />
+            >A hash code is a numeric value that is used to insert and identify an object in a hash-based collection such as the <see cref="T:System.Collections.Generic.Dictionary`2" />
 
             
 
-             class, the <see
-             cref="T:System.Collections.Hashtable" />
+             class, the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             class, or a type derived from the <see
-             cref="T:System.Collections.DictionaryBase" />
+             class, or a type derived from the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
-             class. The <see
-             cref="M:System.Object.GetHashCode" />
+             class. The <see cref="M:System.Object.GetHashCode" />
 
             
 
@@ -2145,7 +1951,9 @@ public struct Int64 {
           <block subset="none" type="note">
             <para
               >For information about how hash codes are used in hash tables and for some additional hash code algorithms, see the <see
-               cref="http://en.wikipedia.org/wiki/Hash_function">Hash Function</see>
+                cref="http://en.wikipedia.org/wiki/Hash_function"
+                >Hash Function</see
+              >
 
               
 
@@ -2153,8 +1961,7 @@ public struct Int64 {
             >
           </block>
           <para
-            >Two objects that are equal return hash codes that are equal. However, the reverse is not true: equal hash codes do not imply object equality, because different (unequal) objects can have identical hash codes. Furthermore, the .NET Framework does not guarantee the default implementation of the <see
-             cref="M:System.Object.GetHashCode" />
+            >Two objects that are equal return hash codes that are equal. However, the reverse is not true: equal hash codes do not imply object equality, because different (unequal) objects can have identical hash codes. Furthermore, the .NET Framework does not guarantee the default implementation of the <see cref="M:System.Object.GetHashCode" />
 
             
 
@@ -2182,13 +1989,11 @@ public struct Int64 {
               </item>
               <item>
                 <para
-                  >Do not use the hash code instead of a value returned by a cryptographic hashing function if you need a cryptographically strong hash. For cryptographic hashes, use a class derived from the <see
-                   cref="T:System.Security.Cryptography.HashAlgorithm" />
+                  >Do not use the hash code instead of a value returned by a cryptographic hashing function if you need a cryptographically strong hash. For cryptographic hashes, use a class derived from the <see cref="T:System.Security.Cryptography.HashAlgorithm" />
 
                   
 
-                   or <see
-                   cref="T:System.Security.Cryptography.KeyedHashAlgorithm" />
+                   or <see cref="T:System.Security.Cryptography.KeyedHashAlgorithm" />
 
                   
 
@@ -2197,13 +2002,11 @@ public struct Int64 {
               </item>
               <item>
                 <para
-                  >Do not test for equality of hash codes to determine whether two objects are equal. (Unequal objects can have identical hash codes.) To test for equality, call the <see
-                   cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+                  >Do not test for equality of hash codes to determine whether two objects are equal. (Unequal objects can have identical hash codes.) To test for equality, call the <see cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
 
                   
 
-                   or <see
-                   cref="M:System.Object.Equals(System.Object)" />
+                   or <see cref="M:System.Object.Equals(System.Object)" />
 
                   
 
@@ -2213,43 +2016,35 @@ public struct Int64 {
             </list>
           </block>
           <para
-            >The <see
-             cref="M:System.Object.GetHashCode" />
+            >The <see cref="M:System.Object.GetHashCode" />
 
             
 
-             method can be overridden by a derived type. If <see
-             cref="M:System.Object.GetHashCode" />
+             method can be overridden by a derived type. If <see cref="M:System.Object.GetHashCode" />
 
             
 
-             is not overridden, hash codes for reference types are computed by calling the <see
-             cref="M:System.Object.GetHashCode" />
+             is not overridden, hash codes for reference types are computed by calling the <see cref="M:System.Object.GetHashCode" />
 
             
 
-             method of the base class, which computes a hash code based on an object's reference; for more information, see <see
-             cref="M:System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(System.Object)" />
+             method of the base class, which computes a hash code based on an object's reference; for more information, see <see cref="M:System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(System.Object)" />
 
             
 
-            . In other words, two objects for which the <see
-             cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+            . In other words, two objects for which the <see cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
 
             
 
-             method returns true have identical hash codes. If value types do not override <see
-             cref="M:System.Object.GetHashCode" />
+             method returns true have identical hash codes. If value types do not override <see cref="M:System.Object.GetHashCode" />
 
             
 
-            , the <see
-             cref="M:System.ValueType.GetHashCode" />
+            , the <see cref="M:System.ValueType.GetHashCode" />
 
             
 
-             method of the base class uses reflection to compute the hash code based on the values of the type's fields. In other words, value types whose fields have equal values have equal hash codes. For more information about overriding <see
-             cref="M:System.Object.GetHashCode" />
+             method of the base class uses reflection to compute the hash code based on the values of the type's fields. In other words, value types whose fields have equal values have equal hash codes. For more information about overriding <see cref="M:System.Object.GetHashCode" />
 
             
 
@@ -2257,23 +2052,19 @@ public struct Int64 {
           >
           <block subset="none" type="note">
             <para
-              >If you override the <see
-               cref="M:System.Object.GetHashCode" />
+              >If you override the <see cref="M:System.Object.GetHashCode" />
 
               
 
-               method, you should also override <see
-               cref="M:System.Object.Equals(System.Object)" />
+               method, you should also override <see cref="M:System.Object.Equals(System.Object)" />
 
               
 
-              , and vice versa. If your overridden <see
-               cref="M:System.Object.Equals(System.Object)" />
+              , and vice versa. If your overridden <see cref="M:System.Object.Equals(System.Object)" />
 
               
 
-               method returns true when two objects are tested for equality, your overridden <see
-               cref="M:System.Object.GetHashCode" />
+               method returns true when two objects are tested for equality, your overridden <see cref="M:System.Object.GetHashCode" />
 
               
 
@@ -2281,18 +2072,15 @@ public struct Int64 {
             >
           </block>
           <para
-            >If an object that is used as a key in a hash table does not provide a useful implementation of <see
-             cref="M:System.Object.GetHashCode" />
+            >If an object that is used as a key in a hash table does not provide a useful implementation of <see cref="M:System.Object.GetHashCode" />
 
             
 
-            , you can specify a hash code provider by supplying an <see
-             cref="T:System.Collections.IEqualityComparer" />
+            , you can specify a hash code provider by supplying an <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
-             implementation to one of the overloads of the <see
-             cref="T:System.Collections.Hashtable" />
+             implementation to one of the overloads of the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -2302,18 +2090,15 @@ public struct Int64 {
             <h2>Notes for the wrt</h2>
           </format>
           <para
-            >When you call the <see
-             cref="M:System.Object.GetHashCode" />
+            >When you call the <see cref="M:System.Object.GetHashCode" />
 
             
 
-             method on a class in the wrt, it provides the default behavior for classes that don’t override <see
-             cref="M:System.Object.GetHashCode" />
+             method on a class in the wrt, it provides the default behavior for classes that don’t override <see cref="M:System.Object.GetHashCode" />
 
             
 
-            . This is part of the support that the .NET Framework provides for the wrt (see <format
-             type="text/html">
+            . This is part of the support that the .NET Framework provides for the wrt (see <format type="text/html">
               <a href="6fa7d044-ae12-4c54-b8ee-50915607a565"
                 >.NET Framework Support for Windows Store Apps and Windows Runtime</a
               >
@@ -2321,28 +2106,23 @@ public struct Int64 {
 
             
 
-            ). Classes in the wrt don’t inherit <see
-             cref="T:System.Object" />
+            ). Classes in the wrt don’t inherit <see cref="T:System.Object" />
 
             
 
-            , and currently don’t implement a <see
-             cref="M:System.Object.GetHashCode" />
+            , and currently don’t implement a <see cref="M:System.Object.GetHashCode" />
 
             
 
-            . However, they appear to have <see
-             cref="M:System.Object.ToString" />
+            . However, they appear to have <see cref="M:System.Object.ToString" />
 
             
 
-            , <see
-             cref="M:System.Object.Equals(System.Object)" />
+            , <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-            , and <see
-             cref="M:System.Object.GetHashCode" />
+            , and <see cref="M:System.Object.GetHashCode" />
 
             
 
@@ -2350,8 +2130,7 @@ public struct Int64 {
           >
           <block subset="none" type="note">
             <para
-              >wrt classes that are written in C# or Visual Basic can override the <see
-               cref="M:System.Object.GetHashCode" />
+              >wrt classes that are written in C# or Visual Basic can override the <see cref="M:System.Object.GetHashCode" />
 
               
 
@@ -2393,8 +2172,7 @@ public struct Int64 {
       <Docs>
         <example>
           <para
-            >The following example demonstrates the fact that <see
-             cref="M:System.Object.GetType" />
+            >The following example demonstrates the fact that <see cref="M:System.Object.GetType" />
 
             
 
@@ -2434,23 +2212,19 @@ public class Test {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For two objects <paramref
-             name="x" />
+            >For two objects <paramref name="x" />
 
             
 
-             and <paramref
-             name="y" />
+             and <paramref name="y" />
 
             
 
-             that have identical runtime types, Object.ReferenceEquals(x.GetType(),y.GetType()) returns true. The following example uses the <see
-             cref="M:System.Object.GetType" />
+             that have identical runtime types, Object.ReferenceEquals(x.GetType(),y.GetType()) returns true. The following example uses the <see cref="M:System.Object.GetType" />
 
             
 
-             method with the <see
-             cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+             method with the <see cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
 
             
 
@@ -2461,13 +2235,11 @@ public class Test {
             <para>To determine whether an object is a specific type, you can use your language's type comparison keyword or construct. For example, you can use the TypeOf…Is construct in Visual Basic or the is keyword in C#.</para>
           </block>
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
-             object exposes the metadata associated with the class of the current <see
-             cref="T:System.Object" />
+             object exposes the metadata associated with the class of the current <see cref="T:System.Object" />
 
             
 
@@ -2477,8 +2249,7 @@ public class Test {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 
@@ -2516,20 +2287,17 @@ public class Test {
         <example>
           <para
             >The following example shows a class called
-   <see
-             langword="MyClass" />
+   <see langword="MyClass" />
 
             
 
              as well as a representation of the instance of
-   <see
-             langword="MyClass" />
+   <see langword="MyClass" />
 
             
 
             
-   returned by <see
-             cref="M:System.Object.MemberwiseClone" />
+   returned by <see cref="M:System.Object.MemberwiseClone" />
 
             
 
@@ -2589,8 +2357,7 @@ class MyDerivedClass: MyBaseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Object.MemberwiseClone" />
+            >The <see cref="M:System.Object.MemberwiseClone" />
 
             
 
@@ -2598,8 +2365,7 @@ class MyDerivedClass: MyBaseClass {
           >
           <para>For example, consider an object called X that references objects A and B. Object B, in turn, references object C. A shallow copy of X creates new object X2 that also references objects A and B. In contrast, a deep copy of X creates a new object X2 that references the new objects A2 and B2, which are copies of A and B. B2, in turn, references the new object C2, which is a copy of C. The example illustrates the difference between a shallow and a deep copy operation.</para>
           <para
-            >There are numerous ways to implement a deep copy operation if the shallow copy operation performed by the <see
-             cref="M:System.Object.MemberwiseClone" />
+            >There are numerous ways to implement a deep copy operation if the shallow copy operation performed by the <see cref="M:System.Object.MemberwiseClone" />
 
             
 
@@ -2611,8 +2377,7 @@ class MyDerivedClass: MyBaseClass {
             </item>
             <item>
               <para
-                >Call the <see
-                 cref="M:System.Object.MemberwiseClone" />
+                >Call the <see cref="M:System.Object.MemberwiseClone" />
 
                 
 
@@ -2630,8 +2395,7 @@ class MyDerivedClass: MyBaseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a shallow copy of the current <see
-             cref="T:System.Object" />
+            >Creates a shallow copy of the current <see cref="T:System.Object" />
 
             
 
@@ -2641,8 +2405,7 @@ class MyDerivedClass: MyBaseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A shallow copy of the current <see
-             cref="T:System.Object" />
+            >A shallow copy of the current <see cref="T:System.Object" />
 
             
 
@@ -2710,26 +2473,22 @@ class MyClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unlike the <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Unlike the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             method and the equality operator, the <see
-             cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+             method and the equality operator, the <see cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
 
             
 
-             method cannot be overridden. Because of this, if you want to test two object references for equality and you are unsure about the implementation of the Equals method, you can call the <see
-             cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+             method cannot be overridden. Because of this, if you want to test two object references for equality and you are unsure about the implementation of the Equals method, you can call the <see cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
 
             
 
              method. </para
           >
           <para
-            >However, the return value of the <see
-             cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+            >However, the return value of the <see cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
 
             
 
@@ -2738,33 +2497,27 @@ class MyClass {
           <list type="bullet">
             <item>
               <para
-                >When comparing value types. If <paramref
-                 name="objA" />
+                >When comparing value types. If <paramref name="objA" />
 
                 
 
-                 and <paramref
-                 name="objB" />
+                 and <paramref name="objB" />
 
                 
 
-                 are value types, they are boxed before they are passed to the <see
-                 cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+                 are value types, they are boxed before they are passed to the <see cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
 
                 
 
-                 method. This means that if both <paramref
-                 name="objA" />
+                 method. This means that if both <paramref name="objA" />
 
                 
 
-                 and <paramref
-                 name="objB" />
+                 and <paramref name="objB" />
 
                 
 
-                 represent the same instance of a value type, the <see
-                 cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+                 represent the same instance of a value type, the <see cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
 
                 
 
@@ -2774,38 +2527,31 @@ class MyClass {
             </item>
             <item>
               <para
-                >When comparing strings. If <paramref
-                 name="objA" />
+                >When comparing strings. If <paramref name="objA" />
 
                 
 
-                 and <paramref
-                 name="objB" />
+                 and <paramref name="objB" />
 
                 
 
-                 are strings, the <see
-                 cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+                 are strings, the <see cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
 
                 
 
-                 method returns true if the string is interned. It does not perform a test for value equality.  In the following example, <paramref
-                 name="s1" />
+                 method returns true if the string is interned. It does not perform a test for value equality.  In the following example, <paramref name="s1" />
 
                 
 
-                 and <paramref
-                 name="s2" />
+                 and <paramref name="s2" />
 
                 
 
-                 are equal because they are two instances of a single interned string. However, <paramref
-                 name="s3" />
+                 are equal because they are two instances of a single interned string. However, <paramref name="s3" />
 
                 
 
-                 and <paramref
-                 name="s4" />
+                 and <paramref name="s4" />
 
                 
 
@@ -2818,8 +2564,7 @@ class MyClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Object" />
+            >Determines whether the specified <see cref="T:System.Object" />
 
             
 
@@ -2829,13 +2574,11 @@ class MyClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="objA" />
+            >true if <paramref name="objA" />
 
             
 
-             is the same instance as <paramref
-             name="objB" />
+             is the same instance as <paramref name="objB" />
 
             
 
@@ -2843,14 +2586,22 @@ class MyClass {
           >
         </returns>
         <param name="objA">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first object to compare. </param
         >
         <param name="objB">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2883,8 +2634,7 @@ class MyClass {
         <example>
           <para
             >The following example outputs the textual description of
-      the value of an object of type <see
-             cref="T:System.Object" />
+      the value of an object of type <see cref="T:System.Object" />
 
             
 
@@ -2913,8 +2663,7 @@ class MyClass {
 
             
 
-             is the major formatting method in the .NET Framework. It converts an object to its string representation so that it is suitable for display. (For information about formatting support in the .NET Framework, see <format
-             type="text/html">
+             is the major formatting method in the .NET Framework. It converts an object to its string representation so that it is suitable for display. (For information about formatting support in the .NET Framework, see <format type="text/html">
               <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
             </format>
 
@@ -2923,13 +2672,11 @@ class MyClass {
             .) </para
           >
           <para
-            >The default implementation of the <see
-             cref="M:System.Object.ToString" />
+            >The default implementation of the <see cref="M:System.Object.ToString" />
 
             
 
-             method returns the fully qualified name of the type of the <see
-             cref="T:System.Object" />
+             method returns the fully qualified name of the type of the <see cref="T:System.Object" />
 
             
 
@@ -2937,23 +2684,19 @@ class MyClass {
           >
           <para>code reference: System.Object.ToString#1</para>
           <para
-            >Because <see
-             cref="T:System.Object" />
+            >Because <see cref="T:System.Object" />
 
             
 
-             is the base class of all reference types in the .NET Framework, this behavior is inherited by reference types that do not override the <see
-             cref="M:System.Object.ToString" />
+             is the base class of all reference types in the .NET Framework, this behavior is inherited by reference types that do not override the <see cref="M:System.Object.ToString" />
 
             
 
-             method. The following example illustrates this. It defines a class named Object1 that accepts the default implementation of all <see
-             cref="T:System.Object" />
+             method. The following example illustrates this. It defines a class named Object1 that accepts the default implementation of all <see cref="T:System.Object" />
 
             
 
-             members. Its <see
-             cref="M:System.Object.ToString" />
+             members. Its <see cref="M:System.Object.ToString" />
 
             
 
@@ -2961,33 +2704,27 @@ class MyClass {
           >
           <para>code reference: System.Object.ToString#2</para>
           <para
-            >Types commonly override the <see
-             cref="M:System.Object.ToString" />
+            >Types commonly override the <see cref="M:System.Object.ToString" />
 
             
 
-             method to return a string that represents the object instance. For example, the base types such as <see
-             cref="T:System.Char" />
+             method to return a string that represents the object instance. For example, the base types such as <see cref="T:System.Char" />
 
             
 
-            , <see
-             cref="T:System.Int32" />
+            , <see cref="T:System.Int32" />
 
             
 
-            , and <see
-             cref="T:System.String" />
+            , and <see cref="T:System.String" />
 
             
 
-             provide <see
-             cref="M:System.Object.ToString" />
+             provide <see cref="M:System.Object.ToString" />
 
             
 
-             implementations that return the string form of the value that the object represents. The following example defines a class, Object2, that overrides the <see
-             cref="M:System.Object.ToString" />
+             implementations that return the string form of the value that the object represents. The following example defines a class, Object2, that overrides the <see cref="M:System.Object.ToString" />
 
             
 
@@ -2998,18 +2735,15 @@ class MyClass {
             <h2>Notes for the wrt</h2>
           </format>
           <para
-            >When you call the <see
-             cref="M:System.Object.ToString" />
+            >When you call the <see cref="M:System.Object.ToString" />
 
             
 
-             method on a class in the wrt, it provides the default behavior for classes that don’t override <see
-             cref="M:System.Object.ToString" />
+             method on a class in the wrt, it provides the default behavior for classes that don’t override <see cref="M:System.Object.ToString" />
 
             
 
-            . This is part of the support that the .NET Framework provides for the wrt (see <format
-             type="text/html">
+            . This is part of the support that the .NET Framework provides for the wrt (see <format type="text/html">
               <a href="6fa7d044-ae12-4c54-b8ee-50915607a565"
                 >.NET Framework Support for Windows Store Apps and Windows Runtime</a
               >
@@ -3017,28 +2751,23 @@ class MyClass {
 
             
 
-            ). Classes in the wrt don’t inherit <see
-             cref="T:System.Object" />
+            ). Classes in the wrt don’t inherit <see cref="T:System.Object" />
 
             
 
-            , and don’t always implement a <see
-             cref="M:System.Object.ToString" />
+            , and don’t always implement a <see cref="M:System.Object.ToString" />
 
             
 
-            . However, they always appear to have <see
-             cref="M:System.Object.ToString" />
+            . However, they always appear to have <see cref="M:System.Object.ToString" />
 
             
 
-            , <see
-             cref="M:System.Object.Equals(System.Object)" />
+            , <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-            , and <see
-             cref="M:System.Object.GetHashCode" />
+            , and <see cref="M:System.Object.GetHashCode" />
 
             
 
@@ -3046,15 +2775,13 @@ class MyClass {
           >
           <para
             >Starting with the net_v451, the common language runtime will use <see
-
               cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.tostring.aspx"
               >IStringable.ToString</see
             >
 
             
 
-             on a wrt object before falling back to the default implementation of <see
-             cref="M:System.Object.ToString" />
+             on a wrt object before falling back to the default implementation of <see cref="M:System.Object.ToString" />
 
             
 
@@ -3062,8 +2789,7 @@ class MyClass {
           >
           <block subset="none" type="note">
             <para
-              >wrt classes that are written in C# or Visual Basic can override the <see
-               cref="M:System.Object.ToString" />
+              >wrt classes that are written in C# or Visual Basic can override the <see cref="M:System.Object.ToString" />
 
               
 
@@ -3075,7 +2801,6 @@ class MyClass {
           </format>
           <para
             >Starting with win81, the wrt includes an <see
-
               cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.aspx"
               >IStringable</see
             >
@@ -3083,20 +2808,17 @@ class MyClass {
             
 
              interface whose single method, <see
-
               cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.tostring.aspx"
               >IStringable.ToString</see
             >
 
             
 
-            , provides basic formatting support comparable to that provided by <see
-             cref="M:System.Object.ToString" />
+            , provides basic formatting support comparable to that provided by <see cref="M:System.Object.ToString" />
 
             
 
             . To prevent ambiguity, you should not implement <see
-
               cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.aspx"
               >IStringable</see
             >
@@ -3107,7 +2829,6 @@ class MyClass {
           >
           <para
             >When managed objects are called by native code or by code written in languages such as JavaScript or C++/CX, they appear to implement <see
-
               cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.aspx"
               >IStringable</see
             >
@@ -3115,20 +2836,17 @@ class MyClass {
             
 
             . The common language runtime will automatically route calls from <see
-
               cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.tostring.aspx"
               >IStringable.ToString</see
             >
 
             
 
-             to <see
-             cref="M:System.Object.ToString" />
+             to <see cref="M:System.Object.ToString" />
 
             
 
              in the event <see
-
               cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.aspx"
               >IStringable</see
             >
@@ -3140,7 +2858,6 @@ class MyClass {
           <block subset="none" type="note">
             <para
               >Because the common language runtime auto-implements <see
-
                 cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.aspx"
                 >IStringable</see
               >
@@ -3148,7 +2865,6 @@ class MyClass {
               
 
                for all managed types in win8_appstore_long apps, we recommend that you do not provide your own <see
-
                 cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.aspx"
                 >IStringable</see
               >
@@ -3156,7 +2872,6 @@ class MyClass {
               
 
                implementation. Implementing <see
-
                 cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.aspx"
                 >IStringable</see
               >
@@ -3168,7 +2883,6 @@ class MyClass {
           </block>
           <para
             >If you do choose to implement <see
-
               cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.aspx"
               >IStringable</see
             >
@@ -3181,7 +2895,6 @@ class MyClass {
             <item>
               <para
                 >You can define the <see
-
                   cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.aspx"
                   >IStringable</see
                 >
@@ -3198,7 +2911,6 @@ class MyClass {
             <item>
               <para
                 >You cannot implement <see
-
                   cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.aspx"
                   >IStringable</see
                 >
@@ -3211,7 +2923,6 @@ class MyClass {
             <item>
               <para
                 >You cannot declare a parameter to be of type <see
-
                   cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.aspx"
                   >IStringable</see
                 >
@@ -3236,7 +2947,6 @@ class MyClass {
             <item>
               <para
                 >You cannot hide your <see
-
                   cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.aspx"
                   >IStringable</see
                 >
@@ -3256,7 +2966,6 @@ public class NewClass : IStringable
 </code>
               <para
                 >Instead, the <see
-
                   cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.tostring.aspx"
                   >IStringable.ToString</see
                 >
@@ -3269,7 +2978,6 @@ public class NewClass : IStringable
           </list>
           <para
             >Note that under a variety of conditions, calls from native code to a managed type that implements <see
-
               cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.aspx"
               >IStringable</see
             >
@@ -3277,7 +2985,6 @@ public class NewClass : IStringable
             
 
              or hides its <see
-
               cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.istringable.tostring.aspx"
               >ToString</see
             >

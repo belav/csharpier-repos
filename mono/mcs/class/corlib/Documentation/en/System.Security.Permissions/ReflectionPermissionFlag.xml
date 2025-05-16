@@ -37,23 +37,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by the <see
-         cref="T:System.Security.Permissions.ReflectionPermission" />
+        >This enumeration is used by the <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
         
 
-         and <see
-         cref="T:System.Security.Permissions.ReflectionPermissionAttribute" />
+         and <see cref="T:System.Security.Permissions.ReflectionPermissionAttribute" />
 
         
 
-         classes. If no <see
-         cref="T:System.Security.Permissions.ReflectionPermission" />
+         classes. If no <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
         
 
-         is granted, reflection is allowed on all types and members, but invocation operations are allowed only on visible types and members. For more information, see <format
-         type="text/html">
+         is granted, reflection is allowed on all types and members, but invocation operations are allowed only on visible types and members. For more information, see <format type="text/html">
           <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5">Security Considerations for Reflection</a>
         </format>
 
@@ -63,18 +59,15 @@
       >
       <block subset="none" type="note">
         <para
-          >Because <see
-           cref="T:System.Security.Permissions.ReflectionPermission" />
+          >Because <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
           
 
-           can provide access to private class members, we recommend that you grant <see
-           cref="T:System.Security.Permissions.ReflectionPermission" />
+           can provide access to private class members, we recommend that you grant <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
           
 
-           to Internet code only with the <see
-           cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+           to Internet code only with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
 
           
 
@@ -82,8 +75,7 @@
         >
       </block>
       <para
-        >The <see
-         cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+        >The <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
 
         
 
@@ -95,18 +87,15 @@
 
           
 
-           does not include the <see
-           cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+           does not include the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
 
           
 
-           flag. To get a mask that includes all flags in this enumeration, you must use the combination of <see
-           cref="F:System.Security.Permissions.ReflectionPermissionFlag.AllFlags" />
+           flag. To get a mask that includes all flags in this enumeration, you must use the combination of <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.AllFlags" />
 
           
 
-           with <see
-           cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+           with <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
 
           
 
@@ -114,16 +103,14 @@
         >
       </block>
       <para
-        >Starting with the net_v20sp1_short, the <see
-         cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+        >Starting with the net_v20sp1_short, the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
         
 
          flag is no longer required to emit code, unless debug symbols are emitted. To use this feature, your application should target the net_v35_short or later. </para
       >
       <para
-        >Starting with the dnprdnlong, the <see
-         cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" />
+        >Starting with the dnprdnlong, the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" />
 
         
 
@@ -133,13 +120,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the permitted use of the <see
-         cref="N:System.Reflection" />
+        >Specifies the permitted use of the <see cref="N:System.Reflection" />
 
         
 
-         and <see
-         cref="N:System.Reflection.Emit" />
+         and <see cref="N:System.Reflection.Emit" />
 
         
 
@@ -174,13 +159,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >TypeInformation, MemberAccess, and ReflectionEmit are set. <see
-             cref="F:System.Security.Permissions.ReflectionPermissionFlag.AllFlags" />
+            >TypeInformation, MemberAccess, and ReflectionEmit are set. <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.AllFlags" />
 
             
 
-             does not include <see
-             cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+             does not include <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
 
             
 
@@ -335,8 +318,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This flag is obsolete. No flags are necessary to enumerate types and members and to examine their metadata. Use <see
-             cref="F:System.Security.Permissions.ReflectionPermissionFlag.NoFlags" />
+            >This flag is obsolete. No flags are necessary to enumerate types and members and to examine their metadata. Use <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.NoFlags" />
 
             
 

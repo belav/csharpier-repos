@@ -13,8 +13,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by members such as <see
-         cref="P:System.Windows.Forms.DateTimePicker.Format" />
+        >This enumeration is used by members such as <see cref="P:System.Windows.Forms.DateTimePicker.Format" />
 
         
 
@@ -27,8 +26,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the date and time format the <see
-         cref="T:System.Windows.Forms.DateTimePicker" />
+        >Specifies the date and time format the <see cref="T:System.Windows.Forms.DateTimePicker" />
 
         
 
@@ -47,13 +45,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.DateTimePicker" />
+            >The <see cref="T:System.Windows.Forms.DateTimePicker" />
 
             
 
-             control displays the date/time value in a custom format. For more information, see <see
-             cref="P:System.Windows.Forms.DateTimePicker.CustomFormat" />
+             control displays the date/time value in a custom format. For more information, see <see cref="P:System.Windows.Forms.DateTimePicker.CustomFormat" />
 
             
 
@@ -76,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.DateTimePicker" />
+            >The <see cref="T:System.Windows.Forms.DateTimePicker" />
 
             
 
@@ -100,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.DateTimePicker" />
+            >The <see cref="T:System.Windows.Forms.DateTimePicker" />
 
             
 
@@ -124,8 +118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.DateTimePicker" />
+            >The <see cref="T:System.Windows.Forms.DateTimePicker" />
 
             
 

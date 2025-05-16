@@ -10,13 +10,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Runtime.Serialization.Formatters.Binary" />
+        >The <see cref="N:System.Runtime.Serialization.Formatters.Binary" />
 
         
 
-         namespace contains the <see
-         cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+         namespace contains the <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
 
         
 

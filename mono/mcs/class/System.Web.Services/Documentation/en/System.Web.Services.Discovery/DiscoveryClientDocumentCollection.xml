@@ -23,18 +23,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Documents" />
+        >The <see cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Documents" />
 
         
 
-         property of <see
-         cref="T:System.Web.Services.Discovery.DiscoveryClientProtocol" />
+         property of <see cref="T:System.Web.Services.Discovery.DiscoveryClientProtocol" />
 
         
 
-         is of type <see
-         cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+         is of type <see cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
 
         
 
@@ -57,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
 
             
 
@@ -86,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an object with the specified URL to the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+            >Adds an object with the specified URL to the <see cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
 
             
 
@@ -95,24 +90,30 @@
           >
         </summary>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The URL for the document to add to the <see
-           cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+          The URL for the document to add to the <see cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
 
           
 
           . </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A discovered document to add to the <see
-           cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+          A discovered document to add to the <see cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
 
           
 
@@ -138,8 +139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines if the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+            >Determines if the <see cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
 
             
 
@@ -149,8 +149,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+            >true if the <see cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
 
             
 
@@ -158,12 +157,15 @@
           >
         </returns>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The URL for the document to locate within the <see
-           cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+          The URL for the document to locate within the <see cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
 
           
 
@@ -203,21 +205,16 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.ICollection" />
-        </value>
+        <value>a <see cref="T:System.Collections.ICollection" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an <see cref="T:System.Collections.ICollection" />
 
             
 
-             object with all the keys in the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+             object with all the keys in the <see cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
 
             
 
@@ -244,8 +241,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes an object with the specified URL from the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+            >Removes an object with the specified URL from the <see cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
 
             
 
@@ -253,12 +249,15 @@
           >
         </summary>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The URL for the discovered document to remove from the <see
-           cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+          The URL for the discovered document to remove from the <see cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
 
           
 
@@ -281,21 +280,16 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.ICollection" />
-        </value>
+        <value>a <see cref="T:System.Collections.ICollection" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an <see cref="T:System.Collections.ICollection" />
 
             
 
-             object with all the values in the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+             object with all the values in the <see cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
 
             
 

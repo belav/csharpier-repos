@@ -24,26 +24,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.DataViewRowState" />
+        >The <see cref="T:System.Data.DataViewRowState" />
 
         
 
-         values are used either to retrieve a particular version of data from a <see
-         cref="T:System.Data.DataRow" />
+         values are used either to retrieve a particular version of data from a <see cref="T:System.Data.DataRow" />
 
         
 
         , or to determine what versions exist.</para
       >
       <para
-        >Set the <see
-         cref="P:System.Data.DataView.RowStateFilter" />
+        >Set the <see cref="P:System.Data.DataView.RowStateFilter" />
 
         
 
-         property of the <see
-         cref="T:System.Data.DataView" />
+         property of the <see cref="T:System.Data.DataView" />
 
         
 
@@ -51,18 +47,15 @@
       >
       <para>You can use the Boolean operator Or with the values to get more than one version.</para>
       <para
-        >The <see
-         cref="T:System.Data.DataTable" />
+        >The <see cref="T:System.Data.DataTable" />
 
         
 
-         uses <see
-         cref="T:System.Data.DataViewRowState" />
+         uses <see cref="T:System.Data.DataViewRowState" />
 
         
 
-         in the <see
-         cref="M:System.Data.DataTable.Select" />
+         in the <see cref="M:System.Data.DataTable.Select" />
 
         
 
@@ -72,8 +65,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Describes the version of data in a <see
-         cref="T:System.Data.DataRow" />
+        >Describes the version of data in a <see cref="T:System.Data.DataRow" />
 
         
 
@@ -113,8 +105,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Current rows including unchanged, new, and modified rows. By default, <see
-             cref="T:System.Data.DataViewRowState" />
+            >Current rows including unchanged, new, and modified rows. By default, <see cref="T:System.Data.DataViewRowState" />
 
             
 

@@ -17,48 +17,39 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When implemented in a derived class, <see
-         cref="T:System.Drawing.Printing.PrintController" />
+        >When implemented in a derived class, <see cref="T:System.Drawing.Printing.PrintController" />
 
         
 
-         controls how a <see
-         cref="T:System.Drawing.Printing.PrintDocument" />
+         controls how a <see cref="T:System.Drawing.Printing.PrintDocument" />
 
         
 
-         is printed. <see
-         cref="M:System.Drawing.Printing.PrintDocument.Print" />
+         is printed. <see cref="M:System.Drawing.Printing.PrintDocument.Print" />
 
         
 
-         invokes the print controller's <see
-         cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+         invokes the print controller's <see cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
 
         
 
-        , <see
-         cref="M:System.Drawing.Printing.PrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+        , <see cref="M:System.Drawing.Printing.PrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
 
         
 
-        , <see
-         cref="M:System.Drawing.Printing.PrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+        , <see cref="M:System.Drawing.Printing.PrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
 
         
 
-        , and <see
-         cref="M:System.Drawing.Printing.PrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+        , and <see cref="M:System.Drawing.Printing.PrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
 
         
 
-         methods, which in turn tell the printer how to print the document. Print preview uses a specialized <see
-         cref="T:System.Drawing.Printing.PrintController" />
+         methods, which in turn tell the printer how to print the document. Print preview uses a specialized <see cref="T:System.Drawing.Printing.PrintController" />
 
         
 
-        . For an example of a print controller that is specialized for print preview, see the <see
-         cref="T:System.Drawing.Printing.PreviewPrintController" />
+        . For an example of a print controller that is specialized for print preview, see the <see cref="T:System.Drawing.Printing.PreviewPrintController" />
 
         
 
@@ -69,54 +60,45 @@
 
         
 
-         is used by <see
-         cref="T:System.Drawing.Printing.PrintDocument" />
+         is used by <see cref="T:System.Drawing.Printing.PrintDocument" />
 
         
 
         , and not typically used directly.</para
       >
       <para
-        >The .NET Framework includes three print controllers that are derived from <see
-         cref="T:System.Drawing.Printing.PrintController" />
+        >The .NET Framework includes three print controllers that are derived from <see cref="T:System.Drawing.Printing.PrintController" />
 
         
 
-         that help accomplish common tasks. The <see
-         cref="T:System.Drawing.Printing.StandardPrintController" />
+         that help accomplish common tasks. The <see cref="T:System.Drawing.Printing.StandardPrintController" />
 
         
 
-         prints a document to a printer. The <see
-         cref="T:System.Drawing.Printing.PreviewPrintController" />
+         prints a document to a printer. The <see cref="T:System.Drawing.Printing.PreviewPrintController" />
 
         
 
-         generates a preview of what the document will look like when printed and is used by the <see
-         cref="T:System.Windows.Forms.PrintPreviewControl" />
+         generates a preview of what the document will look like when printed and is used by the <see cref="T:System.Windows.Forms.PrintPreviewControl" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.PrintPreviewDialog" />
+         and <see cref="T:System.Windows.Forms.PrintPreviewDialog" />
 
         
 
-         classes. The <see
-         cref="T:System.Windows.Forms.PrintControllerWithStatusDialog" />
+         classes. The <see cref="T:System.Windows.Forms.PrintControllerWithStatusDialog" />
 
         
 
          provides a printing status dialog during the printing process.</para
       >
       <para
-        >For more information about printing with Windows Forms, see the <see
-         cref="N:System.Drawing.Printing" />
+        >For more information about printing with Windows Forms, see the <see cref="N:System.Drawing.Printing" />
 
         
 
-         namespace overview. If you wish to print from a Windows Presentation Foundation application, see the <see
-         cref="N:System.Printing" />
+         namespace overview. If you wish to print from a Windows Presentation Foundation application, see the <see cref="N:System.Printing" />
 
         
 
@@ -139,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Printing.PrintController" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Printing.PrintController" />
 
             
 
@@ -168,8 +149,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Drawing.Printing.PrintController" />
+            >Gets a value indicating whether the <see cref="T:System.Drawing.Printing.PrintController" />
 
             
 
@@ -199,28 +179,23 @@
 
             
 
-             is called immediately after the <see
-             cref="T:System.Drawing.Printing.PrintDocument" />
+             is called immediately after the <see cref="T:System.Drawing.Printing.PrintDocument" />
 
             
 
-             raises the <see
-             cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
+             raises the <see cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
 
             
 
-             event. If an exception is thrown inside a <see
-             cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
+             event. If an exception is thrown inside a <see cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
 
             
 
-             event of a <see
-             cref="T:System.Drawing.Printing.PrintDocument" />
+             event of a <see cref="T:System.Drawing.Printing.PrintDocument" />
 
             
 
-            , <see
-             cref="M:System.Drawing.Printing.PrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+            , <see cref="M:System.Drawing.Printing.PrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
 
             
 
@@ -231,43 +206,35 @@
 
             
 
-             creates the <see
-             cref="T:System.Drawing.Graphics" />
+             creates the <see cref="T:System.Drawing.Graphics" />
 
             
 
-             that is sent to the printer. After <see
-             cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+             that is sent to the printer. After <see cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
 
             
 
-             is called, the <see
-             cref="M:System.Drawing.Printing.PrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+             is called, the <see cref="M:System.Drawing.Printing.PrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
 
             
 
-             method sets the <see
-             cref="T:System.Drawing.Graphics" />
+             method sets the <see cref="T:System.Drawing.Graphics" />
 
             
 
-             to a graphic of a single page. (Use the <see
-             cref="M:System.Drawing.Printing.PrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+             to a graphic of a single page. (Use the <see cref="M:System.Drawing.Printing.PrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
 
             
 
-             method to set how to print a page in a document. For example, you can adjust page settings separately for each page.) The <see
-             cref="M:System.Drawing.Printing.PrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+             method to set how to print a page in a document. For example, you can adjust page settings separately for each page.) The <see cref="M:System.Drawing.Printing.PrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
 
             
 
-             method clears the <see
-             cref="T:System.Drawing.Graphics" />
+             method clears the <see cref="T:System.Drawing.Graphics" />
 
             
 
-            , while the <see
-             cref="M:System.Drawing.Printing.PrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+            , while the <see cref="M:System.Drawing.Printing.PrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
 
             
 
@@ -279,24 +246,30 @@
           <para>When overridden in a derived class, completes the control sequence that determines when and how to print a page of a document.</para>
         </summary>
         <param name="document">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Printing.PrintDocument" />
+          A <see cref="T:System.Drawing.Printing.PrintDocument" />
 
           
 
            that represents the document currently being printed. </param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Printing.PrintPageEventArgs" />
+          A <see cref="T:System.Drawing.Printing.PrintPageEventArgs" />
 
           
 
@@ -329,13 +302,11 @@
 
             
 
-             is called immediately after the <see
-             cref="T:System.Drawing.Printing.PrintDocument" />
+             is called immediately after the <see cref="T:System.Drawing.Printing.PrintDocument" />
 
             
 
-             raises the <see
-             cref="E:System.Drawing.Printing.PrintDocument.EndPrint" />
+             raises the <see cref="E:System.Drawing.Printing.PrintDocument.EndPrint" />
 
             
 
@@ -346,43 +317,35 @@
 
             
 
-             creates the <see
-             cref="T:System.Drawing.Graphics" />
+             creates the <see cref="T:System.Drawing.Graphics" />
 
             
 
-             that is sent to the printer. After <see
-             cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+             that is sent to the printer. After <see cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
 
             
 
-             is called, the <see
-             cref="M:System.Drawing.Printing.PrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+             is called, the <see cref="M:System.Drawing.Printing.PrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
 
             
 
-             method sets the <see
-             cref="T:System.Drawing.Graphics" />
+             method sets the <see cref="T:System.Drawing.Graphics" />
 
             
 
-             to a graphic of a single page. (Use the <see
-             cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+             to a graphic of a single page. (Use the <see cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
 
             
 
-             method to determine when and how to print a document. For example, you can delay printing for 30 minutes or adjust the printer settings for the document.) The <see
-             cref="M:System.Drawing.Printing.PrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+             method to determine when and how to print a document. For example, you can delay printing for 30 minutes or adjust the printer settings for the document.) The <see cref="M:System.Drawing.Printing.PrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
 
             
 
-             method clears the <see
-             cref="T:System.Drawing.Graphics" />
+             method clears the <see cref="T:System.Drawing.Graphics" />
 
             
 
-            , while the <see
-             cref="M:System.Drawing.Printing.PrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+            , while the <see cref="M:System.Drawing.Printing.PrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
 
             
 
@@ -394,24 +357,30 @@
           <para>When overridden in a derived class, completes the control sequence that determines when and how to print a document.</para>
         </summary>
         <param name="document">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Printing.PrintDocument" />
+          A <see cref="T:System.Drawing.Printing.PrintDocument" />
 
           
 
            that represents the document currently being printed. </param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Printing.PrintEventArgs" />
+          A <see cref="T:System.Drawing.Printing.PrintEventArgs" />
 
           
 
@@ -444,13 +413,11 @@
 
             
 
-             is called immediately before the <see
-             cref="T:System.Drawing.Printing.PrintDocument" />
+             is called immediately before the <see cref="T:System.Drawing.Printing.PrintDocument" />
 
             
 
-             raises the <see
-             cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
+             raises the <see cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
 
             
 
@@ -461,46 +428,38 @@
 
             
 
-             creates the <see
-             cref="T:System.Drawing.Graphics" />
+             creates the <see cref="T:System.Drawing.Graphics" />
 
             
 
-             that is sent to the printer. After <see
-             cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+             that is sent to the printer. After <see cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
 
             
 
-             is called, the <see
-             cref="M:System.Drawing.Printing.PrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+             is called, the <see cref="M:System.Drawing.Printing.PrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
 
             
 
-             method sets the <see
-             cref="T:System.Drawing.Graphics" />
+             method sets the <see cref="T:System.Drawing.Graphics" />
 
             
 
-             to a graphic of a single page. The <see
-             cref="M:System.Drawing.Printing.PrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+             to a graphic of a single page. The <see cref="M:System.Drawing.Printing.PrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
 
             
 
-             method clears the <see
-             cref="T:System.Drawing.Graphics" />
+             method clears the <see cref="T:System.Drawing.Graphics" />
 
             
 
-            , while the <see
-             cref="M:System.Drawing.Printing.PrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+            , while the <see cref="M:System.Drawing.Printing.PrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
 
             
 
              method deallocates the object.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Drawing.Printing.PrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+            >Use the <see cref="M:System.Drawing.Printing.PrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
 
             
 
@@ -514,13 +473,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Graphics" />
+            >A <see cref="T:System.Drawing.Graphics" />
 
             
 
-             that represents a page from a <see
-             cref="T:System.Drawing.Printing.PrintDocument" />
+             that represents a page from a <see cref="T:System.Drawing.Printing.PrintDocument" />
 
             
 
@@ -528,24 +485,30 @@
           >
         </returns>
         <param name="document">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Printing.PrintDocument" />
+          A <see cref="T:System.Drawing.Printing.PrintDocument" />
 
           
 
            that represents the document currently being printed. </param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Printing.PrintPageEventArgs" />
+          A <see cref="T:System.Drawing.Printing.PrintPageEventArgs" />
 
           
 
@@ -578,74 +541,61 @@
 
             
 
-             is called immediately after the <see
-             cref="T:System.Drawing.Printing.PrintDocument" />
+             is called immediately after the <see cref="T:System.Drawing.Printing.PrintDocument" />
 
             
 
-             raises the <see
-             cref="E:System.Drawing.Printing.PrintDocument.BeginPrint" />
+             raises the <see cref="E:System.Drawing.Printing.PrintDocument.BeginPrint" />
 
             
 
              event.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+            >Use the <see cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
 
             
 
-             method to determine when and how to print a document. For example, you can delay printing for 30 minutes or adjust the printer settings for the document. <see
-             cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+             method to determine when and how to print a document. For example, you can delay printing for 30 minutes or adjust the printer settings for the document. <see cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
 
             
 
-             creates the <see
-             cref="T:System.Drawing.Graphics" />
+             creates the <see cref="T:System.Drawing.Graphics" />
 
             
 
-             that is sent to the printer. After <see
-             cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+             that is sent to the printer. After <see cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
 
             
 
-             is called, the <see
-             cref="M:System.Drawing.Printing.PrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+             is called, the <see cref="M:System.Drawing.Printing.PrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
 
             
 
-             method sets the <see
-             cref="T:System.Drawing.Graphics" />
+             method sets the <see cref="T:System.Drawing.Graphics" />
 
             
 
-             to one of a single page. The <see
-             cref="M:System.Drawing.Printing.PrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+             to one of a single page. The <see cref="M:System.Drawing.Printing.PrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
 
             
 
-             method clears the <see
-             cref="T:System.Drawing.Graphics" />
+             method clears the <see cref="T:System.Drawing.Graphics" />
 
             
 
-            , while the <see
-             cref="M:System.Drawing.Printing.PrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+            , while the <see cref="M:System.Drawing.Printing.PrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
 
             
 
              method deallocates the object.</para
           >
           <para
-            >The <see
-             cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+            >The <see cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
 
             
 
-             method is a good place to verify that <see
-             cref="T:System.Drawing.Printing.PrinterSettings" />
+             method is a good place to verify that <see cref="T:System.Drawing.Printing.PrinterSettings" />
 
             
 
@@ -657,24 +607,30 @@
           <para>When overridden in a derived class, begins the control sequence that determines when and how to print a document.</para>
         </summary>
         <param name="document">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Printing.PrintDocument" />
+          A <see cref="T:System.Drawing.Printing.PrintDocument" />
 
           
 
            that represents the document currently being printed. </param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Printing.PrintEventArgs" />
+          A <see cref="T:System.Drawing.Printing.PrintEventArgs" />
 
           
 

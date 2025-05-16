@@ -31,8 +31,7 @@
 
           
 
-           was <see
-           langword="null" />
+           was <see langword="null" />
 
           
 
@@ -42,8 +41,7 @@
         <summary>Reads key from an existing file.</summary>
         <remarks
           >Given a path to an XML file with embedded key, it parses the file to retrieve all the information about the key. 
-File must be in the format written by <see
-           cref="T:Mono.Security.Cryptography.KeyPairPersistence" />
+File must be in the format written by <see cref="T:Mono.Security.Cryptography.KeyPairPersistence" />
         </remarks>
       </Docs>
     </Member>
@@ -73,8 +71,7 @@ File must be in the format written by <see
 
                 
 
-                 was <see
-                 langword="null" />
+                 was <see langword="null" />
 
                 
 
@@ -87,8 +84,7 @@ File must be in the format written by <see
 
                 
 
-                 was <see
-                 langword="null" />
+                 was <see langword="null" />
 
                 
 
@@ -101,14 +97,12 @@ File must be in the format written by <see
         <remarks>
           <para
             >This constructor is to be used when one wants to modify or create a key with specific value and to be stored in the named
-container. If the container doesn't exist, it will be created when <see
-             cref="M:Save" />
+container. If the container doesn't exist, it will be created when <see cref="M:Save" />
 
             
 
              is called. If container exists, its first key will
-be modified with the specified key value. The key value must follow the format used by <see
-             cref="T:Mono.Security.Cryptography.KeyPairPersistence" />
+be modified with the specified key value. The key value must follow the format used by <see cref="T:Mono.Security.Cryptography.KeyPairPersistence" />
 
             
 
@@ -119,8 +113,7 @@ be modified with the specified key value. The key value must follow the format u
 
             
 
-             is not checked for correctness but an attempt is made to determine the <see
-             cref="P:ProviderType" />
+             is not checked for correctness but an attempt is made to determine the <see cref="P:ProviderType" />
 
             
 
@@ -152,8 +145,7 @@ be modified with the specified key value. The key value must follow the format u
 
           
 
-           was <see
-           langword="null" />
+           was <see langword="null" />
 
           
 
@@ -162,19 +154,16 @@ be modified with the specified key value. The key value must follow the format u
         >
         <summary>Generates a new key to be placed in a container.</summary>
         <remarks
-          >Generates an RSA keypair with the key of size <paramref
-           name="keySize" />
+          >Generates an RSA keypair with the key of size <paramref name="keySize" />
 
           
 
-          . When the <see
-           cref="M:Save" />
+          . When the <see cref="M:Save" />
 
           
 
            method is called, the keypair will be placed in the container named by
-<paramref
-           name="containerName" />
+<paramref name="containerName" />
 
           
 
@@ -193,16 +182,13 @@ be modified with the specified key value. The key value must follow the format u
       </ReturnValue>
       <Docs>
         <summary>Name of the key's container.</summary>
-        <value>
-          <see langword="null" />
+        <value><see langword="null" />
 
           
 
-           or container name</value
-        >
+           or container name</value>
         <remarks
-          >Name of the container in which the key lives. Note that <see
-           cref="T:Mono.Security.Cryptography.KeyPairPersistence" />
+          >Name of the container in which the key lives. Note that <see cref="T:Mono.Security.Cryptography.KeyPairPersistence" />
 
           
 
@@ -230,8 +216,7 @@ to disk it will end up in a different container.
 
           
 
-           or <see
-           langword="false" />
+           or <see langword="false" />
         </value>
         <remarks>The class performs basic validation on the key and sets this property accordingly.</remarks>
       </Docs>
@@ -249,8 +234,7 @@ to disk it will end up in a different container.
         <summary>Value of the encryption key.</summary>
         <value>XML code representing the key value</value>
         <remarks
-          >The key value must follow the format used by <see
-           cref="T:Mono.Security.Cryptography.KeyPairPersistence" />
+          >The key value must follow the format used by <see cref="T:Mono.Security.Cryptography.KeyPairPersistence" />
 
           
 
@@ -274,8 +258,7 @@ to disk it will end up in a different container.
 
           
 
-           or <see
-           langword="false" />
+           or <see langword="false" />
         </value>
         <remarks></remarks>
       </Docs>
@@ -308,14 +291,12 @@ to disk it will end up in a different container.
       <Docs>
         <summary>Saves key to a key container file.</summary>
         <remarks
-          >Key is written to key container file specified by the <see
-           cref="P:ContainerName" />
+          >Key is written to key container file specified by the <see cref="P:ContainerName" />
 
           
 
            property. Saved data follows the format used by
-<see
-           cref="T:Mono.Security.Cryptography.KeyPairPersistence" />
+<see cref="T:Mono.Security.Cryptography.KeyPairPersistence" />
 
           
 

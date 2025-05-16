@@ -22,8 +22,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.ComponentModel.Design.MenuCommandService.MenuCommandsChanged" />
+        >Provides data for the <see cref="E:System.ComponentModel.Design.MenuCommandService.MenuCommandsChanged" />
 
         
 
@@ -50,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.MenuCommandsChangedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.MenuCommandsChangedEventArgs" />
 
             
 
@@ -59,14 +57,22 @@
           >
         </summary>
         <param name="changeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of change.</param
         >
         <param name="command">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -92,8 +98,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type of change that caused <see
-             cref="E:System.ComponentModel.Design.MenuCommandService.MenuCommandsChanged" />
+            >Gets the type of change that caused <see cref="E:System.ComponentModel.Design.MenuCommandService.MenuCommandsChanged" />
 
             
 

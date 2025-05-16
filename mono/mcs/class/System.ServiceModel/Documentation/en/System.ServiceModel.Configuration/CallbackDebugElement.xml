@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >If you set the <see
-         cref="P:System.ServiceModel.Configuration.CallbackDebugElement.IncludeExceptionDetailInFaults" />
+        >If you set the <see cref="P:System.ServiceModel.Configuration.CallbackDebugElement.IncludeExceptionDetailInFaults" />
 
         
 
@@ -53,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.CallbackDebugElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.CallbackDebugElement" />
 
             
 

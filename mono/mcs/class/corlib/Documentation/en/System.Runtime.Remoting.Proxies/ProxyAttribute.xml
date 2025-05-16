@@ -39,20 +39,17 @@
       <para>Apply the current attribute to types that need custom proxies. You can use the ProxyAttribute class to intercept the new (New in Visual Basic) statement by deriving from the ProxyAttribute and placing the attribute on a child of ContextBoundObject. (Placing the proxy attribute on a child of MarshalByRefObject is not supported.) </para>
       <block subset="none" type="note">
         <para
-          >This class makes a link demand and an inheritance demand at the class level. A <see
-           cref="T:System.Security.SecurityException" />
+          >This class makes a link demand and an inheritance demand at the class level. A <see cref="T:System.Security.SecurityException" />
 
           
 
-           is thrown when either the immediate caller or the derived class does not have infrastructure permission. For details about security demands, see <format
-           type="text/html">
+           is thrown when either the immediate caller or the derived class does not have infrastructure permission. For details about security demands, see <format type="text/html">
             <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">[&lt;topic://cpconLinkDemands&gt;]</a>
           </format>
 
           
 
-           and <format
-           type="text/html">
+           and <format type="text/html">
             <a href="28B9ADBB-8F08-4F10-B856-DBF59EB932D9"
               >[&lt;topic://cpconInheritanceDemands&gt;]</a
             >
@@ -89,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Proxies.ProxyAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Proxies.ProxyAttribute" />
 
             
 
@@ -125,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates either an uninitialized <see
-             cref="T:System.MarshalByRefObject" />
+            >Creates either an uninitialized <see cref="T:System.MarshalByRefObject" />
 
             
 
@@ -136,8 +131,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An uninitialized <see
-             cref="T:System.MarshalByRefObject" />
+            >An uninitialized <see cref="T:System.MarshalByRefObject" />
 
             
 
@@ -145,7 +139,11 @@
           >
         </returns>
         <param name="serverType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -182,23 +180,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The current method is called when a proxy is created out of a<see
-               cref="T:System.Runtime.Remoting.ObjRef" />
+              >The current method is called when a proxy is created out of a<see cref="T:System.Runtime.Remoting.ObjRef" />
 
               
 
-               instance that references a class that is marked with the <see
-               cref="T:System.Runtime.Remoting.Proxies.ProxyAttribute" />
+               instance that references a class that is marked with the <see cref="T:System.Runtime.Remoting.Proxies.ProxyAttribute" />
 
               
 
-               attribute. Therefore, the method is used only when a <see
-               cref="T:System.Runtime.Remoting.ObjRef" />
+               attribute. Therefore, the method is used only when a <see cref="T:System.Runtime.Remoting.ObjRef" />
 
               
 
-               is received from a return or parameter on a call, or during the activation of a client-activated object. The <see
-               cref="T:System.Runtime.Remoting.Proxies.ProxyAttribute" />
+               is received from a return or parameter on a call, or during the activation of a client-activated object. The <see cref="T:System.Runtime.Remoting.Proxies.ProxyAttribute" />
 
               
 
@@ -209,8 +203,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of a remoting proxy for a remote object described by the specified <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >Creates an instance of a remoting proxy for a remote object described by the specified <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
@@ -220,8 +213,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new instance of remoting proxy for the remote object that is described in the specified <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >The new instance of remoting proxy for the remote object that is described in the specified <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
@@ -229,28 +221,44 @@
           >
         </returns>
         <param name="objRef">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object reference to the remote object for which to create a proxy. </param
         >
         <param name="serverType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the server where the remote object is located. </param
         >
         <param name="serverObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The server object. </param
         >
         <param name="serverContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -291,7 +299,11 @@
           <para>Gets properties for a new context.</para>
         </summary>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -337,14 +349,22 @@
           <para>The specified context.</para>
         </returns>
         <param name="ctx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The context to be verified.</param
         >
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

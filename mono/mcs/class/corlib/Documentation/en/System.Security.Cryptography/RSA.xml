@@ -32,8 +32,7 @@
       <para>Extending this class proves that you are implementing an RSA key. This is required for any developer providing a new RSA key implementation.</para>
       <para>The only purpose of this class is as a hierarchy member for identification of the RSA algorithm.</para>
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />
+        >The <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />
 
         
 
@@ -43,8 +42,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the base class from which all implementations of the <see
-         cref="T:System.Security.Cryptography.RSA" />
+        >Represents the base class from which all implementations of the <see cref="T:System.Security.Cryptography.RSA" />
 
         
 
@@ -75,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.Security.Cryptography.RSA" />
+            >Initializes a new instance of <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -109,8 +106,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the default implementation of the <see
-             cref="T:System.Security.Cryptography.RSA" />
+            >Creates an instance of the default implementation of the <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -120,8 +116,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of the default implementation of <see
-             cref="T:System.Security.Cryptography.RSA" />
+            >A new instance of the default implementation of <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -156,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the specified implementation of <see
-             cref="T:System.Security.Cryptography.RSA" />
+            >Creates an instance of the specified implementation of <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -167,8 +161,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of the specified implementation of <see
-             cref="T:System.Security.Cryptography.RSA" />
+            >A new instance of the specified implementation of <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -176,12 +169,15 @@
           >
         </returns>
         <param name="algName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the implementation of <see
-           cref="T:System.Security.Cryptography.RSA" />
+          The name of the implementation of <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
@@ -216,8 +212,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The resulting decryption of the <paramref
-             name="rgb" />
+            >The resulting decryption of the <paramref name="rgb" />
 
             
 
@@ -225,7 +220,11 @@
           >
         </returns>
         <param name="rgb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -260,8 +259,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The resulting encryption of the <paramref
-             name="rgb" />
+            >The resulting encryption of the <paramref name="rgb" />
 
             
 
@@ -269,7 +267,11 @@
           >
         </returns>
         <param name="rgb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -300,38 +302,31 @@
       </Parameters>
       <Docs>
         <remarks
-          >You are responsable to zeroize the private key (<see
-           cref="T:System.Security.Cryptography.RSAParameters" />
+          >You are responsable to zeroize the private key (<see cref="T:System.Security.Cryptography.RSAParameters" />
 
           
 
-           parameters <see
-           cref="M:System.Security.Cryptography.RSAParameters.D" />
+           parameters <see cref="M:System.Security.Cryptography.RSAParameters.D" />
 
           
 
-          , <see
-           cref="M:System.Security.Cryptography.RSAParameters.P" />
+          , <see cref="M:System.Security.Cryptography.RSAParameters.P" />
 
           
 
-          , <see
-           cref="M:System.Security.Cryptography.RSAParameters.Q" />
+          , <see cref="M:System.Security.Cryptography.RSAParameters.Q" />
 
           
 
-          , <see
-           cref="M:System.Security.Cryptography.RSAParameters.DP" />
+          , <see cref="M:System.Security.Cryptography.RSAParameters.DP" />
 
           
 
-          , <see
-           cref="M:System.Security.Cryptography.RSAParameters.DQ" />
+          , <see cref="M:System.Security.Cryptography.RSAParameters.DQ" />
 
           
 
-           and <see
-           cref="M:System.Security.Cryptography.RSAParameters.InverseQ" />
+           and <see cref="M:System.Security.Cryptography.RSAParameters.InverseQ" />
 
           
 
@@ -340,8 +335,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, exports the <see
-             cref="T:System.Security.Cryptography.RSAParameters" />
+            >When overridden in a derived class, exports the <see cref="T:System.Security.Cryptography.RSAParameters" />
 
             
 
@@ -351,8 +345,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The parameters for <see
-             cref="T:System.Security.Cryptography.DSA" />
+            >The parameters for <see cref="T:System.Security.Cryptography.DSA" />
 
             
 
@@ -360,7 +353,11 @@
           >
         </returns>
         <param name="includePrivateParameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -393,31 +390,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.RSA.FromXmlString(System.String)" />
+            >The <see cref="M:System.Security.Cryptography.RSA.FromXmlString(System.String)" />
 
             
 
-             initializes an RSA object using key information in an XML string that was generated using the <see
-             cref="M:System.Security.Cryptography.RSA.ToXmlString(System.Boolean)" />
+             initializes an RSA object using key information in an XML string that was generated using the <see cref="M:System.Security.Cryptography.RSA.ToXmlString(System.Boolean)" />
 
             
 
-             method.  The <see
-             cref="M:System.Security.Cryptography.RSA.FromXmlString(System.String)" />
+             method.  The <see cref="M:System.Security.Cryptography.RSA.FromXmlString(System.String)" />
 
             
 
              method accepts either an XML string containing a public key or an XML string containing a public and private key.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Security.Cryptography.RSA.FromXmlString(System.String)" />
+            >Use the <see cref="M:System.Security.Cryptography.RSA.FromXmlString(System.String)" />
 
             
 
-             method to conveniently initialize <see
-             cref="T:System.Security.Cryptography.RSA" />
+             method to conveniently initialize <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -425,8 +417,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Persisting an XML string containing a private key to an insecure location is a security threat.  The security of your application can be compromised if a malicious third party can access your private key.  To safely persist a private key, use a secure key container.  For more information about persisting private keys in a key container, see <format
-               type="text/html">
+              >Persisting an XML string containing a private key to an insecure location is a security threat.  The security of your application can be compromised if a malicious third party can access your private key.  To safely persist a private key, use a secure key container.  For more information about persisting private keys in a key container, see <format type="text/html">
                 <a href="0dbcbd8d-0dcf-40e9-9f0c-e3f162d35ccc"
                   >How to: Store Asymmetric Keys in a Key Container</a
                 >
@@ -441,8 +432,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an <see
-             cref="T:System.Security.Cryptography.RSA" />
+            >Initializes an <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -450,12 +440,15 @@
           >
         </summary>
         <param name="xmlString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The XML string containing <see
-           cref="T:System.Security.Cryptography.RSA" />
+          The XML string containing <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
@@ -489,8 +482,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, imports the specified <see
-             cref="T:System.Security.Cryptography.RSAParameters" />
+            >When overridden in a derived class, imports the specified <see cref="T:System.Security.Cryptography.RSAParameters" />
 
             
 
@@ -498,12 +490,15 @@
           >
         </summary>
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The parameters for <see
-           cref="T:System.Security.Cryptography.RSA" />
+          The parameters for <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
@@ -536,36 +531,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.RSA.ToXmlString(System.Boolean)" />
+            >The <see cref="M:System.Security.Cryptography.RSA.ToXmlString(System.Boolean)" />
 
             
 
-             method creates an XML string that contains either the public and private key of the current <see
-             cref="T:System.Security.Cryptography.RSA" />
+             method creates an XML string that contains either the public and private key of the current <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
-             object or contains only the public key of the current <see
-             cref="T:System.Security.Cryptography.RSA" />
+             object or contains only the public key of the current <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
              object.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Security.Cryptography.RSA.ToXmlString(System.Boolean)" />
+            >Use the <see cref="M:System.Security.Cryptography.RSA.ToXmlString(System.Boolean)" />
 
             
 
-             method whenever you need to conveniently persist RSA key information.  To initialize an <see
-             cref="T:System.Security.Cryptography.RSA" />
+             method whenever you need to conveniently persist RSA key information.  To initialize an <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
-             object with the key in an XML string, use the <see
-             cref="M:System.Security.Cryptography.RSA.FromXmlString(System.String)" />
+             object with the key in an XML string, use the <see cref="M:System.Security.Cryptography.RSA.FromXmlString(System.String)" />
 
             
 
@@ -573,8 +562,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Persisting an XML string containing a private key to an insecure location is a security threat.  The security of your application can be compromised if a malicious third party can access your private key.  To safely persist a private key, use a secure key container.  For more information about persisting private keys in a key container, see <format
-               type="text/html">
+              >Persisting an XML string containing a private key to an insecure location is a security threat.  The security of your application can be compromised if a malicious third party can access your private key.  To safely persist a private key, use a secure key container.  For more information about persisting private keys in a key container, see <format type="text/html">
                 <a href="0dbcbd8d-0dcf-40e9-9f0c-e3f162d35ccc"
                   >How to: Store Asymmetric Keys in a Key Container</a
                 >
@@ -586,8 +574,7 @@
             >
           </block>
           <para
-            >When you pass true to the <see
-             cref="M:System.Security.Cryptography.RSA.ToXmlString(System.Boolean)" />
+            >When you pass true to the <see cref="M:System.Security.Cryptography.RSA.ToXmlString(System.Boolean)" />
 
             
 
@@ -604,8 +591,7 @@
    &lt;D&gt;…&lt;/D&gt;
 &lt;/RSAKeyValue&gt;</code>
           <para
-            >When you pass false to the <see
-             cref="M:System.Security.Cryptography.RSA.ToXmlString(System.Boolean)" />
+            >When you pass false to the <see cref="M:System.Security.Cryptography.RSA.ToXmlString(System.Boolean)" />
 
             
 
@@ -619,8 +605,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns an XML string containing the key of the current <see
-             cref="T:System.Security.Cryptography.RSA" />
+            >Creates and returns an XML string containing the key of the current <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -630,8 +615,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An XML string containing the key of the current <see
-             cref="T:System.Security.Cryptography.RSA" />
+            >An XML string containing the key of the current <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -639,7 +623,11 @@
           >
         </returns>
         <param name="includePrivateParameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

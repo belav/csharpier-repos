@@ -38,21 +38,18 @@
 
         
 
-         represents a label and optionally, an associated statement. A label can be used to indicate the target of a <see
-         cref="T:System.CodeDom.CodeGotoStatement" />
+         represents a label and optionally, an associated statement. A label can be used to indicate the target of a <see cref="T:System.CodeDom.CodeGotoStatement" />
 
         
 
         .</para
       >
       <para
-        >The <see
-         cref="P:System.CodeDom.CodeLabeledStatement.Statement" />
+        >The <see cref="P:System.CodeDom.CodeLabeledStatement.Statement" />
 
         
 
-         property is optional. To create only a label, leave the <see
-         cref="P:System.CodeDom.CodeLabeledStatement.Statement" />
+         property is optional. To create only a label, leave the <see cref="P:System.CodeDom.CodeLabeledStatement.Statement" />
 
         
 
@@ -60,13 +57,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Not all languages support goto statements and labels, so you should test wheter a code generator supports goto statements and labels by calling the <see
-           cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
+          >Not all languages support goto statements and labels, so you should test wheter a code generator supports goto statements and labels by calling the <see cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
 
           
 
-           method with the <see
-           cref="F:System.CodeDom.Compiler.GeneratorSupport.GotoStatements" />
+           method with the <see cref="F:System.CodeDom.Compiler.GeneratorSupport.GotoStatements" />
 
           
 
@@ -99,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeLabeledStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeLabeledStatement" />
 
             
 
@@ -130,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeLabeledStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeLabeledStatement" />
 
             
 
@@ -139,7 +132,11 @@
           >
         </summary>
         <param name="label">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -172,8 +169,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeLabeledStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeLabeledStatement" />
 
             
 
@@ -181,19 +177,26 @@
           >
         </summary>
         <param name="label">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the label. </param
         >
         <param name="statement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeStatement" />
+          The <see cref="T:System.CodeDom.CodeStatement" />
 
           
 
@@ -247,8 +250,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this property is not set, the <see
-             cref="T:System.CodeDom.CodeLabeledStatement" />
+            >If this property is not set, the <see cref="T:System.CodeDom.CodeLabeledStatement" />
 
             
 

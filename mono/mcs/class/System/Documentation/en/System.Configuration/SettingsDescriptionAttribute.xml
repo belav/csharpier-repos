@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Configuration.SettingsDescriptionAttribute" />
+        >The <see cref="T:System.Configuration.SettingsDescriptionAttribute" />
 
         
 
@@ -67,18 +66,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although the description has a theoretical maximum length of the <see
-             cref="T:System.String" />
+            >Although the description has a theoretical maximum length of the <see cref="T:System.String" />
 
             
 
-             class, whose length is represented by a <see
-             cref="T:System.Int32" />
+             class, whose length is represented by a <see cref="T:System.Int32" />
 
             
 
-            , the following two practical considerations will limit the size of the <paramref
-             name="description" />
+            , the following two practical considerations will limit the size of the <paramref name="description" />
 
             
 
@@ -96,8 +92,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Configuration.SettingsDescriptionAttribute" />
+            >Initializes an instance of the <see cref="T:System.Configuration.SettingsDescriptionAttribute" />
 
             
 
@@ -105,12 +100,15 @@
           >
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
@@ -135,13 +133,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Configuration.SettingsDescriptionAttribute.Description" />
+            >The <see cref="P:System.Configuration.SettingsDescriptionAttribute.Description" />
 
             
 
-             property is set by the <see
-             cref="M:System.Configuration.SettingsDescriptionAttribute.#ctor(System.String)" />
+             property is set by the <see cref="M:System.Configuration.SettingsDescriptionAttribute.#ctor(System.String)" />
 
             
 

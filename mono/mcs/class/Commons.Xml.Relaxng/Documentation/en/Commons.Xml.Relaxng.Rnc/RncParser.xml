@@ -7,7 +7,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -37,16 +39,14 @@
       <Docs>
         <summary>This static method internally calls ParseRnc (reader, new NameTable ()).</summary>
         <param name="reader"
-          >a <see
-           cref="T:System.IO.TextReader" />
+          >a <see cref="T:System.IO.TextReader" />
 
           
 
            that holds the compact syntax source.</param
         >
         <returns
-          >The resulting <see
-           cref="T:Commons.Xml.Relaxng.RelaxngPattern" />
+          >The resulting <see cref="T:Commons.Xml.Relaxng.RelaxngPattern" />
 
           
 
@@ -71,24 +71,21 @@
       <Docs>
         <summary>This static method internally creates a new instance of this class and then parses the input compact syntax and returns the result pattern.</summary>
         <param name="reader"
-          >a <see
-           cref="T:System.IO.TextReader" />
+          >a <see cref="T:System.IO.TextReader" />
 
           
 
            that holds the compact syntax source.</param
         >
         <param name="nameTable"
-          >a <see
-           cref="T:System.Xml.XmlNameTable" />
+          >a <see cref="T:System.Xml.XmlNameTable" />
 
           
 
            that is passed to the instance constructor.</param
         >
         <returns
-          >The resulting <see
-           cref="T:Commons.Xml.Relaxng.RelaxngPattern" />
+          >The resulting <see cref="T:Commons.Xml.Relaxng.RelaxngPattern" />
 
           
 
@@ -112,17 +109,13 @@
       <Docs>
         <summary>Parses the input compact syntax source and returns the pattern object.</summary>
         <param name="source"
-          >a <see
-           cref="T:System.IO.TextReader" />
+          >a <see cref="T:System.IO.TextReader" />
 
           
 
            that holds the input compact syntax.</param
         >
-        <returns
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngPattern" />
-        </returns>
+        <returns>a <see cref="T:Commons.Xml.Relaxng.RelaxngPattern" /></returns>
         <remarks>The resulting pattern is not compiled. To make sure that the pattern is valid in the context of simplification and limitation defined by the RELAX NG specification, you have to call Compile () against the resulting pattern.</remarks>
       </Docs>
     </Member>
@@ -139,8 +132,7 @@
       <Docs>
         <summary>The constructor.</summary>
         <param name="nameTable"
-          >a <see
-           cref="T:System.Xml.XmlNameTable" />
+          >a <see cref="T:System.Xml.XmlNameTable" />
 
           
 
@@ -158,10 +150,7 @@
       <Parameters />
       <Docs>
         <summary>Represents the line number that progresses on parse.</summary>
-        <value
-          >a <see
-           cref="T:System.Int32" />
-        </value>
+        <value>a <see cref="T:System.Int32" /></value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -174,10 +163,7 @@
       <Parameters />
       <Docs>
         <summary>Represents the column number that progresses on parse.</summary>
-        <value
-          >a <see
-           cref="T:System.Int32" />
-        </value>
+        <value>a <see cref="T:System.Int32" /></value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -190,10 +176,7 @@
       <Parameters />
       <Docs>
         <summary>Holds the default namespace through the parse phase.</summary>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

@@ -19,13 +19,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer" />
+        >The <see cref="T:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer" />
 
         
 
-         class performs the same tasks as a <see
-         cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" />
+         class performs the same tasks as a <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" />
 
         
 
@@ -50,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer" />
 
             
 
@@ -83,8 +80,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.Deserialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.CodeDom.CodeTypeDeclaration)" />
+            >The <see cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.Deserialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.CodeDom.CodeTypeDeclaration)" />
 
             
 
@@ -107,8 +103,7 @@
               </term>
               <description>
                 <para
-                  >The implementation searches for a <see
-                   cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+                  >The implementation searches for a <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
                   
 
@@ -134,8 +129,7 @@
             </item>
           </list>
           <para
-            >The following table shows the services the <see
-             cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.Deserialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.CodeDom.CodeTypeDeclaration)" />
+            >The following table shows the services the <see cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.Deserialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.CodeDom.CodeTypeDeclaration)" />
 
             
 
@@ -170,8 +164,7 @@
               </term>
               <description>
                 <para
-                  >If an object does not exist in the name table during deserialization, a query for <see
-                   cref="T:System.ComponentModel.IContainer" />
+                  >If an object does not exist in the name table during deserialization, a query for <see cref="T:System.ComponentModel.IContainer" />
 
                   
 
@@ -191,14 +184,22 @@
           <para>The root object.</para>
         </returns>
         <param name="manager">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The serialization manager to use for serialization.</param
         >
         <param name="declaration">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -230,18 +231,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.GetInitializeMethod(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.CodeDom.CodeTypeDeclaration,System.Object)" />
+            >The <see cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.GetInitializeMethod(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.CodeDom.CodeTypeDeclaration,System.Object)" />
 
             
 
-             method returns the method to emit all of the initialization code for the given member. The default implementation returns an empty constructor. If the same method is to be returned for multiple values, the same instance of the method should be returned. You can use the <see
-             cref="P:System.CodeDom.CodeObject.UserData" />
+             method returns the method to emit all of the initialization code for the given member. The default implementation returns an empty constructor. If the same method is to be returned for multiple values, the same instance of the method should be returned. You can use the <see cref="P:System.CodeDom.CodeObject.UserData" />
 
             
 
-             dictionary to remember methods you have created. The <paramref
-             name="typeDecl" />
+             dictionary to remember methods you have created. The <paramref name="typeDecl" />
 
             
 
@@ -257,21 +255,33 @@
           <para>The method used to emit all of the initialization code for the given member.</para>
         </returns>
         <param name="manager">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The serialization manager to use for serialization.</param
         >
         <param name="declaration">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type declaration to use for serialization.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -310,8 +320,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.CodeDom.CodeMemberMethod" />
+            >A <see cref="T:System.CodeDom.CodeMemberMethod" />
 
             
 
@@ -319,14 +328,22 @@
           >
         </returns>
         <param name="manager">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The serialization manager to use for serialization.</param
         >
         <param name="declaration">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -358,18 +375,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.Serialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object,System.Collections.ICollection)" />
+            >The <see cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.Serialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object,System.Collections.ICollection)" />
 
             
 
-             method serializes the given root object and optional collection of members to create a new type definition. If the <paramref
-             name="members" />
+             method serializes the given root object and optional collection of members to create a new type definition. If the <paramref name="members" />
 
             
 
-             collection contains values, these values are serialized. Values themselves may serialize as either member variables or local variables. This determination is done by searching for an extender property on the object called GenerateMember. If true, a member is generated. Otherwise, a local variable is generated. For convenience, the <paramref
-             name="members" />
+             collection contains values, these values are serialized. Values themselves may serialize as either member variables or local variables. This determination is done by searching for an extender property on the object called GenerateMember. If true, a member is generated. Otherwise, a local variable is generated. For convenience, the <paramref name="members" />
 
             
 
@@ -377,8 +391,7 @@
           >
           <para>The name of the returned type is taken from the root object’s name, if it was a named object. If not, a name is fabricated from the simple type name of the root class. </para>
           <para
-            >The following table shows the tasks performed by the default implementation of the <see
-             cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.Serialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object,System.Collections.ICollection)" />
+            >The following table shows the tasks performed by the default implementation of the <see cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.Serialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object,System.Collections.ICollection)" />
 
             
 
@@ -401,13 +414,11 @@
               </term>
               <description>
                 <para
-                  >The serialization context is initialized with data including the <see
-                   cref="T:System.ComponentModel.Design.Serialization.RootContext" />
+                  >The serialization context is initialized with data including the <see cref="T:System.ComponentModel.Design.Serialization.RootContext" />
 
                   
 
-                   and <see
-                   cref="T:System.CodeDom.CodeTypeDeclaration" />
+                   and <see cref="T:System.CodeDom.CodeTypeDeclaration" />
                 </para>
               </description>
             </item>
@@ -417,18 +428,15 @@
               </term>
               <description>
                 <para
-                  >Next, <see
-                   cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.Serialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object,System.Collections.ICollection)" />
+                  >Next, <see cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.Serialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object,System.Collections.ICollection)" />
 
                   
 
-                   walks all of the members and calls <see
-                   cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeToExpression(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object)" />
+                   walks all of the members and calls <see cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeToExpression(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object)" />
 
                   
 
-                  . Because serialization is done opportunistically in <see
-                   cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeToExpression(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object)" />
+                  . Because serialization is done opportunistically in <see cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeToExpression(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object)" />
 
                   
 
@@ -450,18 +458,15 @@
               </term>
               <description>
                 <para
-                  >After all objects are serialized, the <see
-                   cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.Serialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object,System.Collections.ICollection)" />
+                  >After all objects are serialized, the <see cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.Serialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object,System.Collections.ICollection)" />
 
                   
 
-                   method orders the statements and adds them to a method returned from <see
-                   cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.GetInitializeMethod(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.CodeDom.CodeTypeDeclaration,System.Object)" />
+                   method orders the statements and adds them to a method returned from <see cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.GetInitializeMethod(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.CodeDom.CodeTypeDeclaration,System.Object)" />
 
                   
 
-                  . Finally, a constructor is fabricated that calls all of the methods returned from <see
-                   cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.GetInitializeMethod(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.CodeDom.CodeTypeDeclaration,System.Object)" />
+                  . Finally, a constructor is fabricated that calls all of the methods returned from <see cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.GetInitializeMethod(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.CodeDom.CodeTypeDeclaration,System.Object)" />
 
                   
 
@@ -476,8 +481,7 @@
             </item>
           </list>
           <para
-            >The following table shows the objects the <see
-             cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.Serialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object,System.Collections.ICollection)" />
+            >The following table shows the objects the <see cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.Serialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object,System.Collections.ICollection)" />
 
             
 
@@ -523,8 +527,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.CodeDom.CodeTypeDeclaration" />
+            >A <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
             
 
@@ -532,21 +535,33 @@
           >
         </returns>
         <param name="manager">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The serialization manager to use for serialization.</param
         >
         <param name="root">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to serialize.</param
         >
         <param name="members">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

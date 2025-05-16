@@ -23,28 +23,23 @@
       <list type="bullet">
         <item>
           <para
-            >Using methods in the <see
-             cref="T:System.Reflection.Emit.TypeBuilder" />
+            >Using methods in the <see cref="T:System.Reflection.Emit.TypeBuilder" />
 
             
 
-             class such as <see
-             cref="Overload:System.Reflection.Emit.TypeBuilder.DefineMethod" />
+             class such as <see cref="Overload:System.Reflection.Emit.TypeBuilder.DefineMethod" />
 
             
 
-            , <see
-             cref="Overload:System.Reflection.Emit.TypeBuilder.DefineField" />
+            , <see cref="Overload:System.Reflection.Emit.TypeBuilder.DefineField" />
 
             
 
-            , <see
-             cref="Overload:System.Reflection.Emit.TypeBuilder.DefineConstructor" />
+            , <see cref="Overload:System.Reflection.Emit.TypeBuilder.DefineConstructor" />
 
             
 
-            , and <see
-             cref="Overload:System.Reflection.Emit.TypeBuilder.DefineProperty" />
+            , and <see cref="Overload:System.Reflection.Emit.TypeBuilder.DefineProperty" />
 
             
 
@@ -53,8 +48,7 @@
         </item>
         <item>
           <para
-            >Generating a Microsoft intermediate language (MSIL) instruction file that contains calls to modopt and modreq, and assembling the file with the <format
-             type="text/html">
+            >Generating a Microsoft intermediate language (MSIL) instruction file that contains calls to modopt and modreq, and assembling the file with the <format type="text/html">
               <a href="4ca3a4f0-4400-47ce-8936-8e219961c76f">MSIL Assembler (Ilasm.exe)</a>
             </format>
 

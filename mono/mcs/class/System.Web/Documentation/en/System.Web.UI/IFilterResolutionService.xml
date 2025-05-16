@@ -11,47 +11,40 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Page developers and control authors do not use the <see
-         cref="T:System.Web.UI.IFilterResolutionService" />
+        >Page developers and control authors do not use the <see cref="T:System.Web.UI.IFilterResolutionService" />
 
         
 
-         interface. The <see
-         cref="T:System.Web.UI.IFilterResolutionService" />
+         interface. The <see cref="T:System.Web.UI.IFilterResolutionService" />
 
         
 
          interface is implemented by designer developers to provide device filter-related services when parsing and persisting controls in the designer environment.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.IFilterResolutionService" />
+        >The <see cref="T:System.Web.UI.IFilterResolutionService" />
 
         
 
          interface is used when a designer developer needs to support the editing of filtered properties. </para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.IFilterResolutionService" />
+        >The <see cref="T:System.Web.UI.IFilterResolutionService" />
 
         
 
-         interface is specific to controls' use of device filters in a designer environment. When controls are parsed or persisted in the designer environment outside the context of a browser request, the <see
-         cref="T:System.Web.UI.IFilterResolutionService" />
+         interface is specific to controls' use of device filters in a designer environment. When controls are parsed or persisted in the designer environment outside the context of a browser request, the <see cref="T:System.Web.UI.IFilterResolutionService" />
 
         
 
          interface provides a way to determine whether the current control is affected by a named filter and whether a named filter is part of a specific device-filter hierarchy. </para
       >
       <para
-        >The <see
-         cref="T:System.Web.Configuration.HttpCapabilitiesBase" />
+        >The <see cref="T:System.Web.Configuration.HttpCapabilitiesBase" />
 
         
 
-         class implements the <see
-         cref="T:System.Web.UI.IFilterResolutionService" />
+         class implements the <see cref="T:System.Web.UI.IFilterResolutionService" />
 
         
 
@@ -87,23 +80,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >1 if the device filter identified by <paramref
-             name="filter1" />
+            >1 if the device filter identified by <paramref name="filter1" />
 
             
 
-             is a parent of the filter identified by <paramref
-             name="filter2" />
+             is a parent of the filter identified by <paramref name="filter2" />
 
             
 
-            , -1 if the device filter identified by <paramref
-             name="filter2" />
+            , -1 if the device filter identified by <paramref name="filter2" />
 
             
 
-             is a parent of the filter identified by <paramref
-             name="filter1" />
+             is a parent of the filter identified by <paramref name="filter1" />
 
             
 
@@ -111,14 +100,22 @@
           >
         </returns>
         <param name="filter1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A device filter name.</param
         >
         <param name="filter2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -143,13 +140,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.IFilterResolutionService.EvaluateFilter(System.String)" />
+            >The <see cref="M:System.Web.UI.IFilterResolutionService.EvaluateFilter(System.String)" />
 
             
 
-             method determines whether a named device filter is a type of filter supported by the <see
-             cref="T:System.Web.UI.IFilterResolutionService" />
+             method determines whether a named device filter is a type of filter supported by the <see cref="T:System.Web.UI.IFilterResolutionService" />
 
             
 
@@ -165,7 +160,11 @@
           <para>true if the specified filter is a type applicable to the current filter object; otherwise, false.</para>
         </returns>
         <param name="filterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

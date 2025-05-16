@@ -15,10 +15,8 @@
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
   <Docs>
-    <summary
-      >
-      Specifies whether or not a <see
-       cref="T:Mono.Options.Option" />
+    <summary>
+      Specifies whether or not a <see cref="T:Mono.Options.Option" />
 
       
 
@@ -52,41 +50,34 @@
           <para>No value is taken.</para>
           <para
             >If an option takes no value, then the callback function will 
-          receive <see
-             langword="null" />
+          receive <see langword="null" />
 
             
 
              if the value is 
-          <see
-             langword="false" />
+          <see langword="false" />
 
             
 
-             (e.g. <c
-            >-optionName-</c>
+             (e.g. <c>-optionName-</c>
 
             
 
              was used) and 
-          non-<see
-             langword="null" />
+          non-<see langword="null" />
 
             
 
-             if the value is <see
-             langword="true" />
+             if the value is <see langword="true" />
 
             
 
              
-          (e.g. <c
-            >-optionName</c>
+          (e.g. <c>-optionName</c>
 
             
 
-            , <c
-            >-optionName+</c>
+            , <c>-optionName+</c>
 
             
 
@@ -116,14 +107,12 @@
         <summary>
           <para>A value is optional.</para>
           <para
-            >This is specified by providing <c
-            >:</c>
+            >This is specified by providing <c>:</c>
 
             
 
              after the option name
-            within <see
-             cref="P:Mono.Options.Option.Prototype" />
+            within <see cref="P:Mono.Options.Option.Prototype" />
 
             
 
@@ -131,14 +120,12 @@
           >
           <para
             >If a value is optional, the callback function will receive
-            <see
-             langword="null" />
+            <see langword="null" />
 
             
 
              value if no value is provided, and will 
-            otherwise receive a non-<see
-             langword="null" />
+            otherwise receive a non-<see langword="null" />
 
             
 
@@ -146,35 +133,29 @@
           >
           <para
             >Options with optional values are not "greedy" -- the value 
-            must be part of the current argument, e.g. <c
-            >-opt:foo</c>
+            must be part of the current argument, e.g. <c>-opt:foo</c>
 
             
 
              will 
-            pass <c
-            >"foo"</c>
+            pass <c>"foo"</c>
 
             
 
-             as the value to <c
-            >-opt</c>
+             as the value to <c>-opt</c>
 
             
 
-            , but <c
-            >-opt foo</c>
+            , but <c>-opt foo</c>
 
             
 
              
-            will pass <see
-             langword="null" />
+            will pass <see langword="null" />
 
             
 
-             as the value to <c
-            >-opt</c>
+             as the value to <c>-opt</c>
 
             
 
@@ -205,14 +186,12 @@
         <summary>
           <para>A value is required.</para>
           <para
-            >This is specified by providing <c
-            >=</c>
+            >This is specified by providing <c>=</c>
 
             
 
              after the option name
-            within <see
-             cref="P:Mono.Options.Option.Prototype" />
+            within <see cref="P:Mono.Options.Option.Prototype" />
 
             
 
@@ -221,24 +200,20 @@
           <para
             >Options with required values are "greedy" -- if the current
             argument does not contain a value, the next argument will be used
-            as the value, e.g. both <c
-            >-opt:foo</c>
+            as the value, e.g. both <c>-opt:foo</c>
 
             
 
-             and <c
-            >-opt foo</c>
+             and <c>-opt foo</c>
 
             
 
              will
-            pass <c
-            >"foo"</c>
+            pass <c>"foo"</c>
 
             
 
-             as the value to <c
-            >-opt</c>
+             as the value to <c>-opt</c>
 
             
 

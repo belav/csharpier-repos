@@ -15,13 +15,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.ListSelectionMode" />
+        >The <see cref="T:System.Web.UI.WebControls.ListSelectionMode" />
 
         
 
-         enumeration represents the selection mode of the <see
-         cref="T:System.Web.UI.WebControls.ListBox" />
+         enumeration represents the selection mode of the <see cref="T:System.Web.UI.WebControls.ListBox" />
 
         
 
@@ -31,8 +29,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the selection mode of the <see
-         cref="T:System.Web.UI.WebControls.ListBox" />
+        >Specifies the selection mode of the <see cref="T:System.Web.UI.WebControls.ListBox" />
 
         
 

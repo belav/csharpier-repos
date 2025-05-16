@@ -29,18 +29,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can retrieve an instance of this class through the <see
-         cref="P:System.Windows.Forms.DataGridView.Columns" />
+        >You can retrieve an instance of this class through the <see cref="P:System.Windows.Forms.DataGridView.Columns" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         property of the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
-         control. The collection maintains a reference to the control through the <see
-         cref="P:System.Windows.Forms.DataGridViewColumnCollection.DataGridView" />
+         control. The collection maintains a reference to the control through the <see cref="P:System.Windows.Forms.DataGridViewColumnCollection.DataGridView" />
 
         
 
@@ -50,13 +47,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Windows.Forms.DataGridViewColumn" />
+        >Represents a collection of <see cref="T:System.Windows.Forms.DataGridViewColumn" />
 
         
 
-         objects in a <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         objects in a <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -80,13 +75,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewColumnCollection" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewColumnCollection" />
 
             
 
-             class for the given <see
-             cref="T:System.Windows.Forms.DataGridView" />
+             class for the given <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
@@ -94,12 +87,15 @@
           >
         </summary>
         <param name="dataGridView">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.DataGridView" />
+          The <see cref="T:System.Windows.Forms.DataGridView" />
 
           
 
@@ -134,12 +130,15 @@
           <para>The index of the column.</para>
         </returns>
         <param name="dataGridViewColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.DataGridViewColumn" />
+          The <see cref="T:System.Windows.Forms.DataGridViewColumn" />
 
           
 
@@ -168,23 +167,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="columnName" />
+            >The <paramref name="columnName" />
 
             
 
-             and <paramref
-             name="headerText" />
+             and <paramref name="headerText" />
 
             
 
-             parameters are related to the <see
-             cref="P:System.Windows.Forms.DataGridViewColumn.Name" />
+             parameters are related to the <see cref="P:System.Windows.Forms.DataGridViewColumn.Name" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.DataGridViewColumn.HeaderText" />
+             and <see cref="P:System.Windows.Forms.DataGridViewColumn.HeaderText" />
 
             
 
@@ -194,8 +189,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Windows.Forms.DataGridViewTextBoxColumn" />
+            >Adds a <see cref="T:System.Windows.Forms.DataGridViewTextBoxColumn" />
 
             
 
@@ -207,14 +201,22 @@
           <para>The index of the column.</para>
         </returns>
         <param name="columnName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name by which the column will be referred.</param
         >
         <param name="headerText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -256,12 +258,15 @@
           <para>Adds a range of columns to the collection. </para>
         </summary>
         <param name="dataGridViewColumns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Windows.Forms.DataGridViewColumn" />
+          An array of <see cref="T:System.Windows.Forms.DataGridViewColumn" />
 
           
 
@@ -306,8 +311,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Examples of collection changes include additions or removals of columns.</para>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -339,8 +343,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name of a column is indicated by the <see
-             cref="P:System.Windows.Forms.DataGridViewColumn.Name" />
+            >The name of a column is indicated by the <see cref="P:System.Windows.Forms.DataGridViewColumn.Name" />
 
             
 
@@ -356,7 +359,11 @@
           <para>true if the column is contained in the collection; otherwise, false.</para>
         </returns>
         <param name="columnName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -391,12 +398,15 @@
           <para>true if the given column is in the collection; otherwise, false.</para>
         </returns>
         <param name="dataGridViewColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.DataGridViewColumn" />
+          The <see cref="T:System.Windows.Forms.DataGridViewColumn" />
 
           
 
@@ -428,19 +438,26 @@
           <para>Copies the items from the collection to the given array.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The destination <see
-           cref="T:System.Windows.Forms.DataGridViewColumn" />
+          The destination <see cref="T:System.Windows.Forms.DataGridViewColumn" />
 
           
 
            array.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -467,8 +484,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >Gets the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
@@ -504,12 +520,15 @@
           <para>The number of columns that meet the filter requirements.</para>
         </returns>
         <param name="includeFilter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.DataGridViewElementStates" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.DataGridViewElementStates" />
 
           
 
@@ -544,12 +563,15 @@
           <para>The width, in pixels, that is necessary to display all of the columns that meet the filter requirements.</para>
         </returns>
         <param name="includeFilter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.DataGridViewElementStates" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.DataGridViewElementStates" />
 
           
 
@@ -577,8 +599,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The first column in display order is the column with the lowest <see
-             cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" />
+            >The first column in display order is the column with the lowest <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" />
 
             
 
@@ -595,12 +616,15 @@
           <para>The first column in display order that meets the given filter requirements, or null if no column is found.</para>
         </returns>
         <param name="includeFilter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.DataGridViewElementStates" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.DataGridViewElementStates" />
 
           
 
@@ -629,8 +653,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The first column in display order is the column with the lowest <see
-             cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" />
+            >The first column in display order is the column with the lowest <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" />
 
             
 
@@ -647,24 +670,30 @@
           <para>The first column in display order that meets the given filter requirements, or null if no column is found.</para>
         </returns>
         <param name="includeFilter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.DataGridViewElementStates" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.DataGridViewElementStates" />
 
           
 
            values that represent the filter to apply for inclusion.</param
         >
         <param name="excludeFilter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.DataGridViewElementStates" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.DataGridViewElementStates" />
 
           
 
@@ -693,8 +722,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The last column in display order is the column with the highest <see
-             cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" />
+            >The last column in display order is the column with the highest <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" />
 
             
 
@@ -711,24 +739,30 @@
           <para>The last displayed column in display order that meets the given filter requirements, or null if no column is found.</para>
         </returns>
         <param name="includeFilter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.DataGridViewElementStates" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.DataGridViewElementStates" />
 
           
 
            values that represent the filter to apply for inclusion.</param
         >
         <param name="excludeFilter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.DataGridViewElementStates" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.DataGridViewElementStates" />
 
           
 
@@ -758,13 +792,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The next column in display order is the column with the lowest <see
-             cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" />
+            >The next column in display order is the column with the lowest <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" />
 
             
 
-             value higher than the <see
-             cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" />
+             value higher than the <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" />
 
             
 
@@ -781,31 +813,41 @@
           <para>The next column that meets the given filter requirements, or null if no column is found.</para>
         </returns>
         <param name="dataGridViewColumnStart">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The column from which to start searching for the next column.</param
         >
         <param name="includeFilter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.DataGridViewElementStates" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.DataGridViewElementStates" />
 
           
 
            values that represent the filter to apply for inclusion.</param
         >
         <param name="excludeFilter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.DataGridViewElementStates" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.DataGridViewElementStates" />
 
           
 
@@ -835,13 +877,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The previous column in display order is the column with the highest <see
-             cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" />
+            >The previous column in display order is the column with the highest <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" />
 
             
 
-             value lower than the <see
-             cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" />
+             value lower than the <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" />
 
             
 
@@ -858,31 +898,41 @@
           <para>The previous column that meets the given filter requirements, or null if no column is found.</para>
         </returns>
         <param name="dataGridViewColumnStart">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The column from which to start searching for the previous column.</param
         >
         <param name="includeFilter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.DataGridViewElementStates" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.DataGridViewElementStates" />
 
           
 
            values that represent the filter to apply for inclusion.</param
         >
         <param name="excludeFilter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.DataGridViewElementStates" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.DataGridViewElementStates" />
 
           
 
@@ -911,8 +961,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the given <see
-             cref="T:System.Windows.Forms.DataGridViewColumn" />
+            >Gets the index of the given <see cref="T:System.Windows.Forms.DataGridViewColumn" />
 
             
 
@@ -922,8 +971,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the given <see
-             cref="T:System.Windows.Forms.DataGridViewColumn" />
+            >The index of the given <see cref="T:System.Windows.Forms.DataGridViewColumn" />
 
             
 
@@ -931,12 +979,15 @@
           >
         </returns>
         <param name="dataGridViewColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.DataGridViewColumn" />
+          The <see cref="T:System.Windows.Forms.DataGridViewColumn" />
 
           
 
@@ -968,19 +1019,26 @@
           <para>Inserts a column at the given index in the collection.</para>
         </summary>
         <param name="columnIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index at which to insert the given column.</param
         >
         <param name="dataGridViewColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.DataGridViewColumn" />
+          The <see cref="T:System.Windows.Forms.DataGridViewColumn" />
 
           
 
@@ -1073,8 +1131,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1083,8 +1140,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.DataGridViewColumnCollection.OnCollectionChanged(System.ComponentModel.CollectionChangeEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.DataGridViewColumnCollection.OnCollectionChanged(System.ComponentModel.CollectionChangeEventArgs)" />
 
             
 
@@ -1094,8 +1150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.DataGridViewColumnCollection.CollectionChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.DataGridViewColumnCollection.CollectionChanged" />
 
             
 
@@ -1103,12 +1158,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.CollectionChangeEventArgs" />
+          A <see cref="T:System.ComponentModel.CollectionChangeEventArgs" />
 
           
 
@@ -1133,16 +1191,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name of a column is indicated by the <see
-             cref="P:System.Windows.Forms.DataGridViewColumn.Name" />
+            >The name of a column is indicated by the <see cref="P:System.Windows.Forms.DataGridViewColumn.Name" />
 
             
 
              property.</para
           >
           <para
-            >To remove a column that is automatically generated when binding to a data source, call this method in a <see
-             cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" />
+            >To remove a column that is automatically generated when binding to a data source, call this method in a <see cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" />
 
             
 
@@ -1154,7 +1210,11 @@
           <para>Removes the column with the specified name from the collection.</para>
         </summary>
         <param name="columnName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1182,8 +1242,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To remove a column that is automatically generated when binding to a data source, call this method in a <see
-             cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" />
+            >To remove a column that is automatically generated when binding to a data source, call this method in a <see cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" />
 
             
 
@@ -1195,7 +1254,11 @@
           <para>Removes the specified column from the collection.</para>
         </summary>
         <param name="dataGridViewColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1220,8 +1283,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To remove a column that is automatically generated when binding to a data source, call this method in a <see
-             cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" />
+            >To remove a column that is automatically generated when binding to a data source, call this method in a <see cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" />
 
             
 
@@ -1233,7 +1295,11 @@
           <para>Removes the column at the given index in the collection.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1260,13 +1326,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.DataGridViewColumnCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewColumnCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1280,8 +1344,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index at which <paramref
-             name="value" />
+            >The index at which <paramref name="value" />
 
             
 
@@ -1289,12 +1352,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -1318,13 +1384,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.DataGridViewColumnCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewColumnCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1338,13 +1402,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="value" />
+            >true if <paramref name="value" />
 
             
 
-             is found in the <see
-             cref="T:System.Windows.Forms.DataGridViewColumnCollection" />
+             is found in the <see cref="T:System.Windows.Forms.DataGridViewColumnCollection" />
 
             
 
@@ -1352,12 +1414,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -1381,13 +1446,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.DataGridViewColumnCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewColumnCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1401,8 +1464,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the first occurrence of <paramref
-             name="value" />
+            >The zero-based index of the first occurrence of <paramref name="value" />
 
             
 
@@ -1410,12 +1472,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -1440,13 +1505,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.DataGridViewColumnCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewColumnCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1458,24 +1521,30 @@
           <para>Inserts an element into the collection at the specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="value" />
+          The zero-based index at which <paramref name="value" />
 
           
 
            should be inserted.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -1497,13 +1566,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.DataGridViewColumnCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewColumnCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1554,13 +1621,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.DataGridViewColumnCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewColumnCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1572,12 +1637,15 @@
           <para>Removes the first occurrence of the specified object from the collection.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 

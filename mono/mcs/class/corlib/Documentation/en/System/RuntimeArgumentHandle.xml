@@ -26,18 +26,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This structure has no members other than those that it inherits from the <see
-         cref="T:System.Object" />
+        >This structure has no members other than those that it inherits from the <see cref="T:System.Object" />
 
         
 
-         and <see
-         cref="T:System.ValueType" />
+         and <see cref="T:System.ValueType" />
 
         
 
-         classes. It exists only to support C/C++ programming language functions that take a variable number of parameters. An instance of the structure is passed to the <see
-         cref="T:System.ArgIterator" />
+         classes. It exists only to support C/C++ programming language functions that take a variable number of parameters. An instance of the structure is passed to the <see cref="T:System.ArgIterator" />
 
         
 

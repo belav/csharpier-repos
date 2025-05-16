@@ -16,26 +16,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.UpdateRowSource" />
+        >The <see cref="T:System.Data.UpdateRowSource" />
 
         
 
-         values are used by the <see
-         cref="P:System.Data.IDbCommand.UpdatedRowSource" />
+         values are used by the <see cref="P:System.Data.IDbCommand.UpdatedRowSource" />
 
         
 
-         property of <see
-         cref="T:System.Data.IDbCommand" />
+         property of <see cref="T:System.Data.IDbCommand" />
 
         
 
          and any classes derived from it.</para
       >
       <para
-        >For more information property, see <format
-         type="text/html">
+        >For more information property, see <format type="text/html">
           <a href="F21E6ABA-B76D-46AD-A83E-2AD8E0AF1E12"
             >[&lt;topic://cpconusingparameterswithdataadapters&gt;]</a
           >
@@ -64,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Both the output parameters and the first returned row are mapped to the changed row in the <see
-             cref="T:System.Data.DataSet" />
+            >Both the output parameters and the first returned row are mapped to the changed row in the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -90,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The data in the first returned row is mapped to the changed row in the <see
-             cref="T:System.Data.DataSet" />
+            >The data in the first returned row is mapped to the changed row in the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -135,8 +129,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Output parameters are mapped to the changed row in the <see
-             cref="T:System.Data.DataSet" />
+            >Output parameters are mapped to the changed row in the <see cref="T:System.Data.DataSet" />
 
             
 

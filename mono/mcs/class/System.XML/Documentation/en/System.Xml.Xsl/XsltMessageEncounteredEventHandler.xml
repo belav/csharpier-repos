@@ -33,16 +33,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Xml.Xsl.XsltArgumentList.XsltMessageEncountered" />
+        >The <see cref="E:System.Xml.Xsl.XsltArgumentList.XsltMessageEncountered" />
 
         
 
          event occurs during XSLT processing when an xsl:message is specified in the style sheet.</para
       >
       <para
-        >For more information about event handler delegates, see <format
-         type="text/html">
+        >For more information about event handler delegates, see <format type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
 
@@ -54,8 +52,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see
-         cref="E:System.Xml.Xsl.XsltArgumentList.XsltMessageEncountered" />
+        >Represents the method that will handle the <see cref="E:System.Xml.Xsl.XsltArgumentList.XsltMessageEncountered" />
 
         
 

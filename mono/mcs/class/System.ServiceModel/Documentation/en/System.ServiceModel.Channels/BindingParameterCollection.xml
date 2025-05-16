@@ -26,23 +26,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
+        >The <see cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
 
         
 
-         is a collection of objects that is used when a custom binding needs to provide additional parameters to another binding. For example, the <see
-         cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+         is a collection of objects that is used when a custom binding needs to provide additional parameters to another binding. For example, the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
 
         
 
-         looks for <see
-         cref="T:System.ServiceModel.Description.ServiceSecurityAuditBehavior" />
+         looks for <see cref="T:System.ServiceModel.Description.ServiceSecurityAuditBehavior" />
 
         
 
-         in the <see
-         cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
+         in the <see cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
 
         
 
@@ -71,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
 
             
 
@@ -106,13 +101,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
-             object that represents the key of the specified <paramref
-             name="item" />
+             object that represents the key of the specified <paramref name="item" />
 
             
 
@@ -120,7 +113,11 @@
           >
         </returns>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -155,19 +152,26 @@
           <para>Inserts an element at the specified index of this collection.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in the collection at which <paramref
-           name="item" />
+          The zero-based index in the collection at which <paramref name="item" />
 
           
 
            should be inserted.</param
         >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -202,19 +206,26 @@
           <para>Replaces the item at the specified index with a new object.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which to set the new <paramref
-           name="item" />
+          The zero-based index at which to set the new <paramref name="item" />
 
           
 
           .</param
         >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

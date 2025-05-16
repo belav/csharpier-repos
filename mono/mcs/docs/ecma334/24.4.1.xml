@@ -4,8 +4,7 @@
   <paragraph>A class that is decorated with the AttributeUsage attribute must derive from System.Attribute, either directly or indirectly. Otherwise, a compile-time error occurs. </paragraph>
   <paragraph>
     <note
-      >[Note: For an example of using this attribute, see <hyperlink
-      >24.1.1</hyperlink>
+      >[Note: For an example of using this attribute, see <hyperlink>24.1.1</hyperlink>
 
       
 

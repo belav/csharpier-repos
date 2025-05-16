@@ -28,82 +28,68 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.IO.File" />
+        >Use the <see cref="T:System.IO.File" />
 
         
 
-         class for typical operations such as copying, moving, renaming, creating, opening, deleting, and appending to files. You can also use the <see
-         cref="T:System.IO.File" />
+         class for typical operations such as copying, moving, renaming, creating, opening, deleting, and appending to files. You can also use the <see cref="T:System.IO.File" />
 
         
 
-         class to get and set file attributes or <see
-         cref="T:System.DateTime" />
+         class to get and set file attributes or <see cref="T:System.DateTime" />
 
         
 
          information related to the creation, access, and writing of a file.</para
       >
       <para
-        >Many of the <see
-         cref="T:System.IO.File" />
+        >Many of the <see cref="T:System.IO.File" />
 
         
 
-         methods return other I/O types when you create or open files. You can use these other types to further manipulate a file. For more information, see specific <see
-         cref="T:System.IO.File" />
+         methods return other I/O types when you create or open files. You can use these other types to further manipulate a file. For more information, see specific <see cref="T:System.IO.File" />
 
         
 
-         members such as <see
-         cref="M:System.IO.File.OpenText(System.String)" />
+         members such as <see cref="M:System.IO.File.OpenText(System.String)" />
 
         
 
-        , <see
-         cref="M:System.IO.File.CreateText(System.String)" />
+        , <see cref="M:System.IO.File.CreateText(System.String)" />
 
         
 
-        , or <see
-         cref="M:System.IO.File.Create(System.String)" />
+        , or <see cref="M:System.IO.File.Create(System.String)" />
 
         
 
         .</para
       >
       <para
-        >Because all <see
-         cref="T:System.IO.File" />
+        >Because all <see cref="T:System.IO.File" />
 
         
 
-         methods are static, it might be more efficient to use a <see
-         cref="T:System.IO.File" />
+         methods are static, it might be more efficient to use a <see cref="T:System.IO.File" />
 
         
 
-         method rather than a corresponding <see
-         cref="T:System.IO.FileInfo" />
+         method rather than a corresponding <see cref="T:System.IO.FileInfo" />
 
         
 
-         instance method if you want to perform only one action. All <see
-         cref="T:System.IO.File" />
+         instance method if you want to perform only one action. All <see cref="T:System.IO.File" />
 
         
 
          methods require the path to the file that you are manipulating.</para
       >
       <para
-        >The static methods of the <see
-         cref="T:System.IO.File" />
+        >The static methods of the <see cref="T:System.IO.File" />
 
         
 
-         class perform security checks on all methods. If you are going to reuse an object several times, consider using the corresponding instance method of <see
-         cref="T:System.IO.FileInfo" />
+         class perform security checks on all methods. If you are going to reuse an object several times, consider using the corresponding instance method of <see cref="T:System.IO.FileInfo" />
 
         
 
@@ -111,8 +97,7 @@
       >
       <para>By default, full read/write access to new files is granted to all users.</para>
       <para
-        >The following table describes the enumerations that are used to customize the behavior of various <see
-         cref="T:System.IO.File" />
+        >The following table describes the enumerations that are used to customize the behavior of various <see cref="T:System.IO.File" />
 
         
 
@@ -179,8 +164,7 @@
         </item>
       </list>
       <para
-        >For a list of common I/O tasks, see <format
-         type="text/html">
+        >For a list of common I/O tasks, see <format type="text/html">
           <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
         </format>
 
@@ -192,8 +176,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides static methods for the creation, copying, deletion, moving, and opening of files, and aids in the creation of <see
-         cref="T:System.IO.FileStream" />
+        >Provides static methods for the creation, copying, deletion, moving, and opening of files, and aids in the creation of <see cref="T:System.IO.FileStream" />
 
         
 
@@ -229,8 +212,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The method creates the file if it doesn’t exist, but it doesn't create new directories. Therefore, the value of the <paramref
-             name="path" />
+            >The method creates the file if it doesn’t exist, but it doesn't create new directories. Therefore, the value of the <paramref name="path" />
 
             
 
@@ -242,14 +224,22 @@
           <para>Appends lines to a file, and then closes the file. If the specified file does not exist, this method creates a file, writes the specified lines to the file, and then closes the file.</para>
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file to append the lines to. The file is created if it doesn't already exist.</param
         >
         <param name="contents">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -285,8 +275,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The method creates the file if it doesn’t exist, but it doesn't create new directories. Therefore, the value of the <paramref
-             name="path" />
+            >The method creates the file if it doesn’t exist, but it doesn't create new directories. Therefore, the value of the <paramref name="path" />
 
             
 
@@ -296,15 +285,13 @@
           <list type="bullet">
             <item>
               <para
-                >The results of a <format
-                 type="text/html">
+                >The results of a <format type="text/html">
                   <a href="73cafe73-37cf-46e7-bfa7-97c7eea7ced9">LINQ to Objects</a>
                 </format>
 
                 
 
-                 query on the lines of a file, as obtained by using the <see
-                 cref="Overload:System.IO.File.ReadLines" />
+                 query on the lines of a file, as obtained by using the <see cref="Overload:System.IO.File.ReadLines" />
 
                 
 
@@ -313,8 +300,7 @@
             </item>
             <item>
               <para
-                >The contents of a collection that implements an <see
-                 cref="T:System.Collections.Generic.IEnumerable`1" />
+                >The contents of a collection that implements an <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
                 
 
@@ -328,21 +314,33 @@
           <para>Appends lines to a file by using a specified encoding, and then closes the file. If the specified file does not exist, this method creates a file, writes the specified lines to the file, and then closes the file.</para>
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file to append the lines to. The file is created if it doesn't already exist.</param
         >
         <param name="contents">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The lines to append to the file.</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -377,8 +375,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Given a string and a file path, this method opens the specified file, appends the string to the end of the file, and then closes the file. The file handle is guaranteed to be closed by this method, even if exceptions are raised.</para>
           <para
-            >The method creates the file if it doesn’t exist, but it doesn't create new directories. Therefore, the value of the <paramref
-             name="path" />
+            >The method creates the file if it doesn’t exist, but it doesn't create new directories. Therefore, the value of the <paramref name="path" />
 
             
 
@@ -390,14 +387,22 @@
           <para>Opens a file, appends the specified string to the file, and then closes the file. If the file does not exist, this method creates a file, writes the specified string to the file, then closes the file.</para>
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file to append the specified string to. </param
         >
         <param name="contents">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -433,8 +438,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Given a string and a file path, this method opens the specified file, appends the string to the end of the file using the specified encoding, and then closes the file. The file handle is guaranteed to be closed by this method, even if exceptions are raised.</para>
           <para
-            >The method creates the file if it doesn’t exist, but it doesn't create new directories. Therefore, the value of the <paramref
-             name="path" />
+            >The method creates the file if it doesn’t exist, but it doesn't create new directories. Therefore, the value of the <paramref name="path" />
 
             
 
@@ -446,21 +450,33 @@
           <para>Appends the specified string to the file, creating the file if it does not already exist.</para>
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file to append the specified string to. </param
         >
         <param name="contents">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string to append to the file. </param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -516,29 +532,25 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
-          >The directory information specified in <paramref
-           name="path" />
+          >The directory information specified in <paramref name="path" />
 
           
 
            was not found.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref
-           name="path" />
+          >The length of <paramref name="path" />
 
           
 
-           or the absolute path information for <paramref
-           name="path" />
+           or the absolute path information for <paramref name="path" />
 
           
 
@@ -546,7 +558,9 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           > Requires permission to write to the specified file. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write"
+            qualify="true"
+          />
 
           
 
@@ -568,47 +582,40 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is equivalent to the <see
-             cref="M:System.IO.StreamWriter.#ctor(System.String,System.Boolean)" />
+            >This method is equivalent to the <see cref="M:System.IO.StreamWriter.#ctor(System.String,System.Boolean)" />
 
             
 
-             constructor overload. If the file specified by <paramref
-             name="path" />
+             constructor overload. If the file specified by <paramref name="path" />
 
             
 
-             does not exist, it is created. If the file does exist, write operations to the <see
-             cref="T:System.IO.StreamWriter" />
+             does not exist, it is created. If the file does exist, write operations to the <see cref="T:System.IO.StreamWriter" />
 
             
 
              append text to the file. Additional threads are permitted to read the file while it is open.</para
           >
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
             .</para
           >
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
              parameter is not case-sensitive.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -620,8 +627,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.IO.StreamWriter" />
+            >Creates a <see cref="T:System.IO.StreamWriter" />
 
             
 
@@ -633,7 +639,11 @@
           <para>A stream writer that appends UTF-8 encoded text to the specified file or to a new file.</para>
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -670,13 +680,11 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.IO.IOException">
-          <para>
-            <paramref name="destFileName" />
+          <para><paramref name="destFileName" />
 
             
 
-             exists.</para
-          >
+             exists.</para>
           <para>-or-</para>
           <para> An I/O error occurred.</para>
         </exception>
@@ -685,13 +693,11 @@
 
           
 
-          or <paramref
-           name="destFileName " />
+          or <paramref name="destFileName " />
 
           
 
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
@@ -703,8 +709,7 @@
 
             
 
-            or <paramref
-             name="destFileName " />
+            or <paramref name="destFileName " />
 
             
 
@@ -716,8 +721,7 @@
 
             
 
-            or <paramref
-             name="destFileName" />
+            or <paramref name="destFileName" />
 
             
 
@@ -728,13 +732,11 @@
           >The caller does not have the required permission.</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
-          >Directory information in <paramref
-           name="sourceFileName" />
+          >Directory information in <paramref name="sourceFileName" />
 
           
 
-           or <paramref
-           name="destFileName" />
+           or <paramref name="destFileName" />
 
           
 
@@ -748,13 +750,11 @@
            was not found.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length or the absolute path information for <paramref
-           name="sourceFileName" />
+          >The length or the absolute path information for <paramref name="sourceFileName" />
 
           
 
-           or <paramref
-           name="destFileName" />
+           or <paramref name="destFileName" />
 
           
 
@@ -762,12 +762,16 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to read the source file and write the destination file. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read"
+            qualify="true"
+          />
 
           
 
            and <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write"
+            qualify="true"
+          />
 
           
 
@@ -779,31 +783,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is equivalent to the <see
-             cref="M:System.IO.File.Copy(System.String,System.String,System.Boolean)" />
+            >This method is equivalent to the <see cref="M:System.IO.File.Copy(System.String,System.String,System.Boolean)" />
 
             
 
-              method overload with the <paramref
-             name="overwrite" />
+              method overload with the <paramref name="overwrite" />
 
             
 
              parameter set to false.</para
           >
           <para
-            >The <paramref
-             name="sourceFileName" />
+            >The <paramref name="sourceFileName" />
 
             
 
-             and <paramref
-             name="destFileName" />
+             and <paramref name="destFileName" />
 
             
 
-             parameters can specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see the <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameters can specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see the <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
@@ -816,14 +815,22 @@
           <para>Copies an existing file to a new file. Overwriting a file of the same name is not allowed.</para>
         </summary>
         <param name="sourceFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file to copy. </param
         >
         <param name="destFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -866,18 +873,15 @@
 
             
 
-             is read-only (write-protected), or <paramref
-             name="destFileName" />
+             is read-only (write-protected), or <paramref name="destFileName" />
 
             
 
-             exists and <paramref
-             name="overwrite" />
+             exists and <paramref name="overwrite" />
 
             
 
-             is <see
-             langword="false" />
+             is <see langword="false" />
 
             
 
@@ -891,13 +895,11 @@
 
           
 
-          or <paramref
-           name="destFileName " />
+          or <paramref name="destFileName " />
 
           
 
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
@@ -909,8 +911,7 @@
 
             
 
-             or <paramref
-             name="destFileName" />
+             or <paramref name="destFileName" />
 
             
 
@@ -922,8 +923,7 @@
 
             
 
-             or <paramref
-             name="destFileName" />
+             or <paramref name="destFileName" />
 
             
 
@@ -934,13 +934,11 @@
           >The caller does not have the required permission.</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
-          >Directory information in <paramref
-           name="destFileName" />
+          >Directory information in <paramref name="destFileName" />
 
           
 
-           or <paramref
-           name="sourceFileName" />
+           or <paramref name="sourceFileName" />
 
           
 
@@ -954,13 +952,11 @@
            was not found.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length or the absolute path information for <paramref
-           name="sourceFileName" />
+          >The length or the absolute path information for <paramref name="sourceFileName" />
 
           
 
-           or <paramref
-           name="destFileName" />
+           or <paramref name="destFileName" />
 
           
 
@@ -968,12 +964,16 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to read the source file and write the destination file. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read"
+            qualify="true"
+          />
 
           
 
            and <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write"
+            qualify="true"
+          />
 
           
 
@@ -985,13 +985,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="sourceFileName" />
+            >The <paramref name="sourceFileName" />
 
             
 
-             and <paramref
-             name="destFileName" />
+             and <paramref name="destFileName" />
 
             
 
@@ -999,8 +997,7 @@
           >
           <para>The attributes of the original file are retained in the copied file.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1014,21 +1011,33 @@
           <para>Copies an existing file to a new file. Overwriting a file of the same name is allowed.</para>
         </summary>
         <param name="sourceFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file to copy. </param
         >
         <param name="destFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the destination file. This cannot be a directory. </param
         >
         <param name="overwrite">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1080,16 +1089,14 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
-          >The directory information specified in <paramref
-           name="path" />
+          >The directory information specified in <paramref name="path" />
 
           
 
@@ -1102,13 +1109,11 @@
           >The caller does not have the required permission.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref
-           name="path" />
+          >The length of <paramref name="path" />
 
           
 
-           or the absolute path information for <paramref
-           name="path" />
+           or the absolute path information for <paramref name="path" />
 
           
 
@@ -1116,7 +1121,9 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to write the specified file. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write"
+            qualify="true"
+          />
 
           
 
@@ -1125,39 +1132,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IO.FileStream" />
+            >The <see cref="T:System.IO.FileStream" />
 
             
 
-             object created by this method has a default <see
-             cref="T:System.IO.FileShare" />
+             object created by this method has a default <see cref="T:System.IO.FileShare" />
 
             
 
-             value of <see
-             cref="F:System.IO.FileShare.None" />
+             value of <see cref="F:System.IO.FileShare.None" />
 
             
 
             ; no other process or code can access the created file until the original file handle is closed.</para
           >
           <para
-            >This method is equivalent to the <see
-             cref="M:System.IO.File.Create(System.String,System.Int32)" />
+            >This method is equivalent to the <see cref="M:System.IO.File.Create(System.String,System.Int32)" />
 
             
 
              method overload using the default buffer size.</para
           >
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
@@ -1166,8 +1167,7 @@
           <para>If the specified file does not exist, it is created; if it does exist and it is not read-only, the contents are overwritten.</para>
           <para>By default, full read/write access to new files is granted to all users. The file is opened with read/write access and must be closed before it can be opened by another application.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1183,13 +1183,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.IO.FileStream" />
+            >A <see cref="T:System.IO.FileStream" />
 
             
 
-             that provides read/write access to the file specified in <paramref
-             name="path" />
+             that provides read/write access to the file specified in <paramref name="path" />
 
             
 
@@ -1197,7 +1195,11 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1250,16 +1252,14 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
-          >The directory information specified in <paramref
-           name="path" />
+          >The directory information specified in <paramref name="path" />
 
           
 
@@ -1272,13 +1272,11 @@
           >The caller does not have the required permission.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref
-           name="path" />
+          >The length of <paramref name="path" />
 
           
 
-           or the absolute path information for <paramref
-           name="path" />
+           or the absolute path information for <paramref name="path" />
 
           
 
@@ -1286,7 +1284,9 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to write the specified file. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write"
+            qualify="true"
+          />
 
           
 
@@ -1295,39 +1295,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IO.FileStream" />
+            >The <see cref="T:System.IO.FileStream" />
 
             
 
-             object created by this method has a default <see
-             cref="T:System.IO.FileShare" />
+             object created by this method has a default <see cref="T:System.IO.FileShare" />
 
             
 
-             value of <see
-             cref="F:System.IO.FileShare.None" />
+             value of <see cref="F:System.IO.FileShare.None" />
 
             
 
             ; no other process or code can access the created file until the original file handle is closed.</para
           >
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
             .</para
           >
           <para
-            >This method is equivalent to the <see
-             cref="M:System.IO.FileStream.#ctor(System.String,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,System.Int32)" />
+            >This method is equivalent to the <see cref="M:System.IO.FileStream.#ctor(System.String,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,System.Int32)" />
 
             
 
@@ -1335,8 +1329,7 @@
           >
           <para>By default, full read/write access to new files is granted to all users. The file is opened with read/write access and must be closed before it can be opened by another application.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1352,13 +1345,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.IO.FileStream" />
+            >A <see cref="T:System.IO.FileStream" />
 
             
 
-             with the specified buffer size that provides read/write access to the file specified in <paramref
-             name="path" />
+             with the specified buffer size that provides read/write access to the file specified in <paramref name="path" />
 
             
 
@@ -1366,14 +1357,22 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the file. </param
         >
         <param name="bufferSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1409,21 +1408,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
             .</para
           >
           <para
-            >This method is equivalent to the <see
-             cref="M:System.IO.FileStream.#ctor(System.String,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,System.Int32)" />
+            >This method is equivalent to the <see cref="M:System.IO.FileStream.#ctor(System.String,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,System.Int32)" />
 
             
 
@@ -1431,8 +1427,7 @@
           >
           <para>By default, full read/write access to new files is granted to all users. The file is opened with read/write access and must be closed before it can be opened by another application.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1444,8 +1439,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates or overwrites the specified file, specifying a buffer size and a <see
-             cref="T:System.IO.FileOptions" />
+            >Creates or overwrites the specified file, specifying a buffer size and a <see cref="T:System.IO.FileOptions" />
 
             
 
@@ -1457,26 +1451,37 @@
           <para>A new file with the specified buffer size.</para>
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the file. </param
         >
         <param name="bufferSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes buffered for reads and writes to the file. </param
         >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.IO.FileOptions" />
+          One of the <see cref="T:System.IO.FileOptions" />
 
           
 
@@ -1512,21 +1517,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
             .</para
           >
           <para
-            >This method is equivalent to the <see
-             cref="M:System.IO.FileStream.#ctor(System.String,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,System.Int32)" />
+            >This method is equivalent to the <see cref="M:System.IO.FileStream.#ctor(System.String,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,System.Int32)" />
 
             
 
@@ -1534,8 +1536,7 @@
           >
           <para>By default, full read/write access to new files is granted to all users. The file is opened with read/write access and must be closed before it can be opened by another application.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1553,38 +1554,52 @@
           <para>A new file with the specified buffer size, file options, and file security.</para>
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the file. </param
         >
         <param name="bufferSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes buffered for reads and writes to the file. </param
         >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.IO.FileOptions" />
+          One of the <see cref="T:System.IO.FileOptions" />
 
           
 
            values that describes how to create or overwrite the file.</param
         >
         <param name="fileSecurity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.FileSecurity" />
+          One of the <see cref="T:System.Security.AccessControl.FileSecurity" />
 
           
 
@@ -1633,29 +1648,25 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
-          >The directory information specified in <paramref
-           name="path" />
+          >The directory information specified in <paramref name="path" />
 
           
 
            was not found.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref
-           name="path" />
+          >The length of <paramref name="path" />
 
           
 
-           or the absolute path information for <paramref
-           name="path" />
+           or the absolute path information for <paramref name="path" />
 
           
 
@@ -1663,7 +1674,9 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to write the specified file. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write"
+            qualify="true"
+          />
 
           
 
@@ -1685,39 +1698,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is equivalent to the <see
-             cref="M:System.IO.StreamWriter.#ctor(System.String,System.Boolean)" />
+            >This method is equivalent to the <see cref="M:System.IO.StreamWriter.#ctor(System.String,System.Boolean)" />
 
             
 
-             constructor overload with the <paramref
-             name="append" />
+             constructor overload with the <paramref name="append" />
 
             
 
-             parameter set to false. If the file specified by <paramref
-             name="path" />
+             parameter set to false. If the file specified by <paramref name="path" />
 
             
 
              does not exist, it is created. If the file does exist, its contents are overwritten. Additional threads are permitted to read the file while it is open.</para
           >
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
             .</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1733,8 +1740,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.IO.StreamWriter" />
+            >A <see cref="T:System.IO.StreamWriter" />
 
             
 
@@ -1742,7 +1748,11 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1773,44 +1783,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.File.Decrypt(System.String)" />
+            >The <see cref="M:System.IO.File.Decrypt(System.String)" />
 
             
 
-             method allows you to decrypt a file that was encrypted using the <see
-             cref="M:System.IO.File.Encrypt(System.String)" />
+             method allows you to decrypt a file that was encrypted using the <see cref="M:System.IO.File.Encrypt(System.String)" />
 
             
 
-             method.  The <see
-             cref="M:System.IO.File.Decrypt(System.String)" />
+             method.  The <see cref="M:System.IO.File.Decrypt(System.String)" />
 
             
 
              method can decrypt only files that were encrypted using the current user account. </para
           >
           <para
-            >The <see
-             cref="M:System.IO.File.Decrypt(System.String)" />
+            >The <see cref="M:System.IO.File.Decrypt(System.String)" />
 
             
 
-             method requires exclusive access to the file being decrypted, and will raise an exception if another process is using the file. If the file is not encrypted, <see
-             cref="M:System.IO.File.Decrypt(System.String)" />
+             method requires exclusive access to the file being decrypted, and will raise an exception if another process is using the file. If the file is not encrypted, <see cref="M:System.IO.File.Decrypt(System.String)" />
 
             
 
              will return a nonzero value, which indicates success.</para
           >
           <para
-            >Both the <see
-             cref="M:System.IO.File.Encrypt(System.String)" />
+            >Both the <see cref="M:System.IO.File.Encrypt(System.String)" />
 
             
 
-             method and the <see
-             cref="M:System.IO.File.Decrypt(System.String)" />
+             method and the <see cref="M:System.IO.File.Decrypt(System.String)" />
 
             
 
@@ -1821,8 +1824,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Decrypts a file that was encrypted by the current account using the <see
-             cref="M:System.IO.File.Encrypt(System.String)" />
+            >Decrypts a file that was encrypted by the current account using the <see cref="M:System.IO.File.Encrypt(System.String)" />
 
             
 
@@ -1830,7 +1832,11 @@
           >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1873,16 +1879,14 @@
 
           
 
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
-          >The directory information specified in <paramref
-           name="path" />
+          >The directory information specified in <paramref name="path" />
 
           
 
@@ -1896,13 +1900,11 @@
           >The caller does not have the required permission.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref
-           name="path" />
+          >The length of <paramref name="path" />
 
           
 
-           or the absolute path information for <paramref
-           name="path" />
+           or the absolute path information for <paramref name="path" />
 
           
 
@@ -1910,7 +1912,9 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to write to the specified file. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write"
+            qualify="true"
+          />
 
           
 
@@ -1919,13 +1923,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specify a file name with any relative or absolute path information for the <paramref
-             name="path" />
+            >Specify a file name with any relative or absolute path information for the <paramref name="path" />
 
             
 
-             parameter. Wildcard characters cannot be included. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter. Wildcard characters cannot be included. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
@@ -1933,8 +1935,7 @@
           >
           <para>If the file to be deleted does not exist, no exception is thrown.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1948,7 +1949,11 @@
           <para>Deletes the specified file. </para>
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1979,39 +1984,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.File.Encrypt(System.String)" />
+            >The <see cref="M:System.IO.File.Encrypt(System.String)" />
 
             
 
-             method allows you to encrypt a file so that only the account used to call this method can decrypt it.  Use the <see
-             cref="M:System.IO.File.Decrypt(System.String)" />
+             method allows you to encrypt a file so that only the account used to call this method can decrypt it.  Use the <see cref="M:System.IO.File.Decrypt(System.String)" />
 
             
 
-             method to decrypt a file encrypted by the <see
-             cref="M:System.IO.File.Encrypt(System.String)" />
+             method to decrypt a file encrypted by the <see cref="M:System.IO.File.Encrypt(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >The <see
-             cref="M:System.IO.File.Encrypt(System.String)" />
+            >The <see cref="M:System.IO.File.Encrypt(System.String)" />
 
             
 
              method requires exclusive access to the file being encrypted, and will fail if another process is using the file.</para
           >
           <para
-            >Both the <see
-             cref="M:System.IO.File.Encrypt(System.String)" />
+            >Both the <see cref="M:System.IO.File.Encrypt(System.String)" />
 
             
 
-             method and the <see
-             cref="M:System.IO.File.Decrypt(System.String)" />
+             method and the <see cref="M:System.IO.File.Decrypt(System.String)" />
 
             
 
@@ -2024,7 +2023,11 @@
           <para>Encrypts a file so that only the account used to encrypt the file can decrypt it.</para>
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2057,7 +2060,9 @@
       <Docs>
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to read the specified file. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read"
+            qualify="true"
+          />
 
           
 
@@ -2066,75 +2071,63 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.File.Exists(System.String)" />
+            >The <see cref="M:System.IO.File.Exists(System.String)" />
 
             
 
-             method should not be used for path validation, this method merely checks if the file specified in <paramref
-             name="path" />
+             method should not be used for path validation, this method merely checks if the file specified in <paramref name="path" />
 
             
 
-             exists. Passing an invalid path to <see
-             cref="M:System.IO.File.Exists(System.String)" />
+             exists. Passing an invalid path to <see cref="M:System.IO.File.Exists(System.String)" />
 
             
 
-             returns false. To check whether the path contains any invalid characters, you can call the <see
-             cref="M:System.IO.Path.GetInvalidPathChars" />
+             returns false. To check whether the path contains any invalid characters, you can call the <see cref="M:System.IO.Path.GetInvalidPathChars" />
 
             
 
-             method to retrieve the characters that are invalid for the file system. You can also create a regular expression to test the whether the path is valid for your environment. For examples of acceptable paths, see <see
-             cref="T:System.IO.File" />
+             method to retrieve the characters that are invalid for the file system. You can also create a regular expression to test the whether the path is valid for your environment. For examples of acceptable paths, see <see cref="T:System.IO.File" />
 
             
 
             .</para
           >
           <para
-            >Be aware that another process can potentially do something with the file in between the time you call the <see
-             cref="M:System.IO.File.Exists(System.String)" />
+            >Be aware that another process can potentially do something with the file in between the time you call the <see cref="M:System.IO.File.Exists(System.String)" />
 
             
 
-             method and perform another operation on the file, such as <see
-             cref="M:System.IO.File.Delete(System.String)" />
+             method and perform another operation on the file, such as <see cref="M:System.IO.File.Delete(System.String)" />
 
             
 
             . </para
           >
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
             .</para
           >
           <para
-            >If <paramref
-             name="path" />
+            >If <paramref name="path" />
 
             
 
-             describes a directory, this method returns false. Trailing spaces are removed from the <paramref
-             name="path" />
+             describes a directory, this method returns false. Trailing spaces are removed from the <paramref name="path" />
 
             
 
              parameter before determining if the file exists.</para
           >
           <para
-            >The <see
-             cref="M:System.IO.File.Exists(System.String)" />
+            >The <see cref="M:System.IO.File.Exists(System.String)" />
 
             
 
@@ -2148,18 +2141,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the caller has the required permissions and <paramref
-             name="path" />
+            >true if the caller has the required permissions and <paramref name="path" />
 
             
 
-             contains the name of an existing file; otherwise, false. This method also returns false if <paramref
-             name="path" />
+             contains the name of an existing file; otherwise, false. This method also returns false if <paramref name="path" />
 
             
 
-             is null, an invalid path, or a zero-length string. If the caller does not have sufficient permissions to read the specified file, no exception is thrown and the method returns false regardless of the existence of <paramref
-             name="path" />
+             is null, an invalid path, or a zero-length string. If the caller does not have sufficient permissions to read the specified file, no exception is thrown and the method returns false regardless of the existence of <paramref name="path" />
 
             
 
@@ -2167,7 +2157,11 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2201,23 +2195,20 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.IO.File.GetAccessControl(System.String)" />
+            >Use the <see cref="M:System.IO.File.GetAccessControl(System.String)" />
 
             
 
              method to retrieve the access control list (ACL) entries for a file.</para
           >
           <para
-            >An ACL describes individuals and/or groups who have, or do not have, rights to specific actions on the given file. For more information, see <format
-             type="text/html">
+            >An ACL describes individuals and/or groups who have, or do not have, rights to specific actions on the given file. For more information, see <format type="text/html">
               <a href="06fbf66d-6f02-4378-b863-b2f12e349045">ACL Technology Overview</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="53758b39-bd9b-4640-bb04-cad5ed8d0abf"
                 >How to: Add or Remove an Access Control List Entry</a
               >
@@ -2228,33 +2219,27 @@
             .</para
           >
           <para
-            >In NTFS environments, <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ReadAttributes" />
+            >In NTFS environments, <see cref="F:System.Security.AccessControl.FileSystemRights.ReadAttributes" />
 
             
 
-             and <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ReadExtendedAttributes" />
+             and <see cref="F:System.Security.AccessControl.FileSystemRights.ReadExtendedAttributes" />
 
             
 
-             are granted to the user if the user has <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ListDirectory" />
+             are granted to the user if the user has <see cref="F:System.Security.AccessControl.FileSystemRights.ListDirectory" />
 
             
 
-             rights on the parent folder. To deny <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ReadAttributes" />
+             rights on the parent folder. To deny <see cref="F:System.Security.AccessControl.FileSystemRights.ReadAttributes" />
 
             
 
-             and <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ReadExtendedAttributes" />
+             and <see cref="F:System.Security.AccessControl.FileSystemRights.ReadExtendedAttributes" />
 
             
 
-            , deny <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ListDirectory" />
+            , deny <see cref="F:System.Security.AccessControl.FileSystemRights.ListDirectory" />
 
             
 
@@ -2264,8 +2249,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+            >Gets a <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
@@ -2275,13 +2259,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+            >A <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
-             object that encapsulates the access control rules for the file described by the <paramref
-             name="path" />
+             object that encapsulates the access control rules for the file described by the <paramref name="path" />
 
             
 
@@ -2289,12 +2271,15 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The path to a file containing a <see
-           cref="T:System.Security.AccessControl.FileSecurity" />
+          The path to a file containing a <see cref="T:System.Security.AccessControl.FileSecurity" />
 
           
 
@@ -2331,23 +2316,20 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.IO.File.GetAccessControl(System.String,System.Security.AccessControl.AccessControlSections)" />
+            >Use the <see cref="M:System.IO.File.GetAccessControl(System.String,System.Security.AccessControl.AccessControlSections)" />
 
             
 
              method to retrieve the access control list (ACL) entries for a file.</para
           >
           <para
-            >An ACL describes individuals and/or groups who have, or do not have, rights to specific actions on the given file. For more information, see <format
-             type="text/html">
+            >An ACL describes individuals and/or groups who have, or do not have, rights to specific actions on the given file. For more information, see <format type="text/html">
               <a href="06fbf66d-6f02-4378-b863-b2f12e349045">ACL Technology Overview</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="53758b39-bd9b-4640-bb04-cad5ed8d0abf"
                 >How to: Add or Remove an Access Control List Entry</a
               >
@@ -2358,33 +2340,27 @@
             .</para
           >
           <para
-            >In NTFS environments, <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ReadAttributes" />
+            >In NTFS environments, <see cref="F:System.Security.AccessControl.FileSystemRights.ReadAttributes" />
 
             
 
-             and <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ReadExtendedAttributes" />
+             and <see cref="F:System.Security.AccessControl.FileSystemRights.ReadExtendedAttributes" />
 
             
 
-             are granted to the user if the user has <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ListDirectory" />
+             are granted to the user if the user has <see cref="F:System.Security.AccessControl.FileSystemRights.ListDirectory" />
 
             
 
-             rights on the parent folder. To deny <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ReadAttributes" />
+             rights on the parent folder. To deny <see cref="F:System.Security.AccessControl.FileSystemRights.ReadAttributes" />
 
             
 
-             and <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ReadExtendedAttributes" />
+             and <see cref="F:System.Security.AccessControl.FileSystemRights.ReadExtendedAttributes" />
 
             
 
-            , deny <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ListDirectory" />
+            , deny <see cref="F:System.Security.AccessControl.FileSystemRights.ListDirectory" />
 
             
 
@@ -2394,8 +2370,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+            >Gets a <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
@@ -2405,13 +2380,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+            >A <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
-             object that encapsulates the access control rules for the file described by the <paramref
-             name="path" />
+             object that encapsulates the access control rules for the file described by the <paramref name="path" />
 
             
 
@@ -2419,24 +2392,30 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The path to a file containing a <see
-           cref="T:System.Security.AccessControl.FileSecurity" />
+          The path to a file containing a <see cref="T:System.Security.AccessControl.FileSecurity" />
 
           
 
            object that describes the file's access control list (ACL) information.</param
         >
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AccessControlSections" />
+          One of the <see cref="T:System.Security.AccessControl.AccessControlSections" />
 
           
 
@@ -2469,21 +2448,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
             .</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -2495,8 +2471,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.IO.FileAttributes" />
+            >Gets the <see cref="T:System.IO.FileAttributes" />
 
             
 
@@ -2506,8 +2481,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IO.FileAttributes" />
+            >The <see cref="T:System.IO.FileAttributes" />
 
             
 
@@ -2515,7 +2489,11 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2561,8 +2539,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -2576,13 +2553,11 @@
            was not found.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref
-           name="path" />
+          >The length of <paramref name="path" />
 
           
 
-           or the absolute path information for <paramref
-           name="path" />
+           or the absolute path information for <paramref name="path" />
 
           
 
@@ -2593,7 +2568,9 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to read the specified file or directory. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read"
+            qualify="true"
+          />
 
           
 
@@ -2608,21 +2585,18 @@
             <para>This method may return an inaccurate value, because it uses native functions whose values may not be continuously updated by the operating system.</para>
           </block>
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
             .</para
           >
           <para
-            >If the file described in the <paramref
-             name="path" />
+            >If the file described in the <paramref name="path" />
 
             
 
@@ -2630,8 +2604,7 @@
           >
           <para>NTFS-formatted drives may cache information about a file, such as file creation time, for a short period of time. As a result, it may be necessary to explicitly set the creation time of a file if you are overwriting or replacing an existing file.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -2647,8 +2620,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.DateTime" />
+            >A <see cref="T:System.DateTime" />
 
             
 
@@ -2656,7 +2628,11 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2693,8 +2669,7 @@
             <para>This method may return an inaccurate value, because it uses native functions whose values may not be continuously updated by the operating system.</para>
           </block>
           <para
-            >If the file described in the <paramref
-             name="path" />
+            >If the file described in the <paramref name="path" />
 
             
 
@@ -2702,8 +2677,7 @@
           >
           <para>NTFS-formatted drives may cache information about a file, such as file creation time, for a short period of time. As a result, it may be necessary to explicitly set the creation time of a file if you are overwriting or replacing an existing file.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -2719,8 +2693,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.DateTime" />
+            >A <see cref="T:System.DateTime" />
 
             
 
@@ -2728,7 +2701,11 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2774,8 +2751,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -2789,13 +2765,11 @@
            was not found.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref
-           name="path" />
+          >The length of <paramref name="path" />
 
           
 
-           or the absolute path information for <paramref
-           name="path" />
+           or the absolute path information for <paramref name="path" />
 
           
 
@@ -2806,7 +2780,9 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to read the specified file or directory. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read"
+            qualify="true"
+          />
 
           
 
@@ -2821,29 +2797,25 @@
             <para>This method may return an inaccurate value, because it uses native functions whose values may not be continuously updated by the operating system.</para>
           </block>
           <para
-            >If the file described in the <paramref
-             name="path" />
+            >If the file described in the <paramref name="path" />
 
             
 
              parameter does not exist, this method returns 12:00 midnight, January 1, 1601 A.D. (C.E.) Coordinated Universal Time (UTC), adjusted to local time.</para
           >
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
             .</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -2859,8 +2831,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.DateTime" />
+            >A <see cref="T:System.DateTime" />
 
             
 
@@ -2868,7 +2839,11 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2905,29 +2880,25 @@
             <para>This method may return an inaccurate value, because it uses native functions whose values may not be continuously updated by the operating system.</para>
           </block>
           <para
-            >If the file described in the <paramref
-             name="path" />
+            >If the file described in the <paramref name="path" />
 
             
 
              parameter does not exist, this method returns 12:00 midnight, January 1, 1601 A.D. (C.E.) Coordinated Universal Time (UTC).</para
           >
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
             .</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -2943,8 +2914,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.DateTime" />
+            >A <see cref="T:System.DateTime" />
 
             
 
@@ -2952,7 +2922,11 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2998,8 +2972,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -3013,13 +2986,11 @@
            was not found.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref
-           name="path" />
+          >The length of <paramref name="path" />
 
           
 
-           or the absolute path information for <paramref
-           name="path" />
+           or the absolute path information for <paramref name="path" />
 
           
 
@@ -3030,7 +3001,9 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to read the specified file or directory. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read"
+            qualify="true"
+          />
 
           
 
@@ -3045,29 +3018,25 @@
             <para>This method may return an inaccurate value, because it uses native functions whose values may not be continuously updated by the operating system. Each operating system manages the last write time according to its own rules. To improve performance, an operating system might not set the last write time value to the exact time of the last write operation, but might set it to a close approximation instead.</para>
           </block>
           <para
-            >If the file described in the <paramref
-             name="path" />
+            >If the file described in the <paramref name="path" />
 
             
 
              parameter does not exist, this method returns 12:00 midnight, January 1, 1601 A.D. (C.E.) Coordinated Universal Time (UTC), adjusted to local time.</para
           >
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
             .</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -3083,8 +3052,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.DateTime" />
+            >A <see cref="T:System.DateTime" />
 
             
 
@@ -3092,7 +3060,11 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3129,29 +3101,25 @@
             <para>This method may return an inaccurate value, because it uses native functions whose values may not be continuously updated by the operating system. Each operating system manages the last write time according to its own rules. To improve performance, an operating system might not set the last write time value to the exact time of the last write operation, but might set it to a close approximation instead. </para>
           </block>
           <para
-            >If the file described in the <paramref
-             name="path" />
+            >If the file described in the <paramref name="path" />
 
             
 
              parameter does not exist, this method returns 12:00 midnight, January 1, 1601 A.D. (C.E.) Coordinated Universal Time (UTC).</para
           >
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
             .</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -3167,8 +3135,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.DateTime" />
+            >A <see cref="T:System.DateTime" />
 
             
 
@@ -3176,7 +3143,11 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3223,13 +3194,11 @@
 
           
 
-          or <paramref
-           name="destFileName " />
+          or <paramref name="destFileName " />
 
           
 
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
@@ -3241,8 +3210,7 @@
 
             
 
-            or <paramref
-             name="destFileName " />
+            or <paramref name="destFileName " />
 
             
 
@@ -3253,13 +3221,11 @@
           >The caller does not have the required permission.</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
-          >The directory information in <paramref
-           name="sourceFileName" />
+          >The directory information in <paramref name="sourceFileName" />
 
           
 
-           or <paramref
-           name="destFileName" />
+           or <paramref name="destFileName" />
 
           
 
@@ -3273,42 +3239,41 @@
           was not found or specifies a directory.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length or absolute path information for <paramref
-           name="sourceFileName" />
+          >The length or absolute path information for <paramref name="sourceFileName" />
 
           
 
-           or <paramref
-           name="destFileName" />
+           or <paramref name="destFileName" />
 
           
 
            exceeds the system-defined maximum length.</exception
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
-          >Requires permission to read from <paramref
-           name="sourceFileName," />
+          >Requires permission to read from <paramref name="sourceFileName," />
           <paramref name=" " />
 
           
 
-          and write to <paramref
-           name="sourceFileName " />
+          and write to <paramref name="sourceFileName " />
 
           
 
-          and <paramref
-           name="destFileName" />
+          and <paramref name="destFileName" />
 
           
 
           . See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read"
+            qualify="true"
+          />
 
           
 
            and <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write"
+            qualify="true"
+          />
 
           
 
@@ -3320,26 +3285,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method works across disk volumes, and it does not throw an exception if the source and destination are the same. Note that if you attempt to replace a file by moving a file of the same name into that directory, you get an <see
-             cref="T:System.IO.IOException" />
+            >This method works across disk volumes, and it does not throw an exception if the source and destination are the same. Note that if you attempt to replace a file by moving a file of the same name into that directory, you get an <see cref="T:System.IO.IOException" />
 
             
 
             . You cannot use the Move method to overwrite an existing file.</para
           >
           <para
-            >The <paramref
-             name="sourceFileName" />
+            >The <paramref name="sourceFileName" />
 
             
 
-             and <paramref
-             name="destFileName" />
+             and <paramref name="destFileName" />
 
             
 
-             arguments are permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             arguments are permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
@@ -3347,8 +3308,7 @@
           >
           <para>If you try to move a file across disk volumes and that file is in use, the file is copied to the destination, but it is not deleted from the source.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -3362,14 +3322,22 @@
           <para>Moves a specified file to a new location, providing the option to specify a new file name.</para>
         </summary>
         <param name="sourceFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the file to move. </param
         >
         <param name="destFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3429,8 +3397,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -3444,8 +3411,7 @@
            specified an invalid value.</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
-          >The directory information specified in <paramref
-           name="path" />
+          >The directory information specified in <paramref name="path" />
 
           
 
@@ -3458,13 +3424,11 @@
           >The caller does not have the required permission.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref
-           name="path" />
+          >The length of <paramref name="path" />
 
           
 
-           or the absolute path information for <paramref
-           name="path" />
+           or the absolute path information for <paramref name="path" />
 
           
 
@@ -3472,24 +3436,31 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to read and write the file. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read"
+            qualify="true"
+          />
 
           
 
            and <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write"
+            qualify="true"
+          />
 
           
 
           .</permission
         >
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.FileMode" />
+          A <see cref="T:System.IO.FileMode" />
 
           
 
@@ -3498,21 +3469,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
             .</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -3524,8 +3492,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens a <see
-             cref="T:System.IO.FileStream" />
+            >Opens a <see cref="T:System.IO.FileStream" />
 
             
 
@@ -3535,8 +3502,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.IO.FileStream" />
+            >A <see cref="T:System.IO.FileStream" />
 
             
 
@@ -3544,19 +3510,26 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file to open. </param
         >
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.FileMode" />
+          A <see cref="T:System.IO.FileMode" />
 
           
 
@@ -3610,33 +3583,27 @@
 
             
 
-             specified <see
-             langword="Read" />
+             specified <see langword="Read" />
 
             
 
-             and <paramref
-             name="mode" />
+             and <paramref name="mode" />
 
             
 
-             specified <see
-             langword="Create" />
+             specified <see langword="Create" />
 
             
 
-            , <see
-             langword="CreateNew" />
+            , <see langword="CreateNew" />
 
             
 
-            , <see
-             langword="Truncate" />
+            , <see langword="Truncate" />
 
             
 
-             or <see
-             langword="Append" />
+             or <see langword="Append" />
 
             
 
@@ -3648,13 +3615,11 @@
 
           
 
-           is <see
-           cref="F:System.IO.FileMode.Truncate" />
+           is <see cref="F:System.IO.FileMode.Truncate" />
 
           
 
-           or <see
-           cref="F:System.IO.FileMode.Open" />
+           or <see cref="F:System.IO.FileMode.Open" />
 
           
 
@@ -3665,8 +3630,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -3677,24 +3641,21 @@
 
           
 
-           or <paramref
-           name="access" />
+           or <paramref name="access" />
 
           
 
            specified an invalid value.</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
-          >The directory information specified in <paramref
-           name="path" />
+          >The directory information specified in <paramref name="path" />
 
           
 
            was not found.</exception
         >
         <exception cref="T:System.IO.IOException"
-          >An I/O error occurred, such as specifying <see
-           cref="F:System.IO.FileMode.CreateNew" />
+          >An I/O error occurred, such as specifying <see cref="F:System.IO.FileMode.CreateNew" />
 
           
 
@@ -3705,31 +3666,26 @@
 
           
 
-           specified a read-only file and <paramref
-           name="access" />
+           specified a read-only file and <paramref name="access" />
 
           
 
-           is not <see
-           langword="Read" />
+           is not <see langword="Read" />
 
           
 
-          , or <paramref
-           name="path" />
+          , or <paramref name="path" />
 
           
 
            specified a directory.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref
-           name="path" />
+          >The length of <paramref name="path" />
 
           
 
-           or the absolute path information for <paramref
-           name="path" />
+           or the absolute path information for <paramref name="path" />
 
           
 
@@ -3737,36 +3693,46 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to read and might also require permission to write to the file. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read"
+            qualify="true"
+          />
 
           
 
            and <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write"
+            qualify="true"
+          />
 
           
 
           .</permission
         >
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.FileMode" />
+          A <see cref="T:System.IO.FileMode" />
 
           
 
            value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten. </param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.FileAccess" />
+          A <see cref="T:System.IO.FileAccess" />
 
           
 
@@ -3775,13 +3741,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
@@ -3791,8 +3755,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens a <see
-             cref="T:System.IO.FileStream" />
+            >Opens a <see cref="T:System.IO.FileStream" />
 
             
 
@@ -3802,8 +3765,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An unshared <see
-             cref="T:System.IO.FileStream" />
+            >An unshared <see cref="T:System.IO.FileStream" />
 
             
 
@@ -3811,31 +3773,41 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file to open. </param
         >
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.FileMode" />
+          A <see cref="T:System.IO.FileMode" />
 
           
 
            value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten. </param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.FileAccess" />
+          A <see cref="T:System.IO.FileAccess" />
 
           
 
@@ -3890,33 +3862,27 @@
 
             
 
-             specified <see
-             langword="Read" />
+             specified <see langword="Read" />
 
             
 
-             and <paramref
-             name="mode" />
+             and <paramref name="mode" />
 
             
 
-             specified <see
-             langword="Create" />
+             specified <see langword="Create" />
 
             
 
-            , <see
-             langword="CreateNew" />
+            , <see langword="CreateNew" />
 
             
 
-            , <see
-             langword="Truncate" />
+            , <see langword="Truncate" />
 
             
 
-             or <see
-             langword="Append" />
+             or <see langword="Append" />
 
             
 
@@ -3935,8 +3901,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -3947,21 +3912,18 @@
 
           
 
-          , <paramref
-           name="access" />
+          , <paramref name="access" />
 
           
 
-          , or <paramref
-           name="share" />
+          , or <paramref name="share" />
 
           
 
            specified an invalid value.</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
-          >The directory information specified in <paramref
-           name="path" />
+          >The directory information specified in <paramref name="path" />
 
           
 
@@ -3974,13 +3936,11 @@
           >The caller does not have the required permission.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref
-           name="path" />
+          >The length of <paramref name="path" />
 
           
 
-           or the absolute path information for <paramref
-           name="path" />
+           or the absolute path information for <paramref name="path" />
 
           
 
@@ -3988,48 +3948,61 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to read and might also require permission to write the file. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read"
+            qualify="true"
+          />
 
           
 
            and <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write"
+            qualify="true"
+          />
 
           
 
           .</permission
         >
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.FileMode" />
+          A <see cref="T:System.IO.FileMode" />
 
           
 
            value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten. </param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.FileAccess" />
+          A <see cref="T:System.IO.FileAccess" />
 
           
 
            value that specifies the operations that can be performed on the file. </param
         >
         <param name="share">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.FileShare" />
+          A <see cref="T:System.IO.FileShare" />
 
           
 
@@ -4038,21 +4011,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
             .</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -4064,8 +4034,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens a <see
-             cref="T:System.IO.FileStream" />
+            >Opens a <see cref="T:System.IO.FileStream" />
 
             
 
@@ -4075,8 +4044,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.IO.FileStream" />
+            >A <see cref="T:System.IO.FileStream" />
 
             
 
@@ -4084,43 +4052,56 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file to open. </param
         >
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.FileMode" />
+          A <see cref="T:System.IO.FileMode" />
 
           
 
            value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten. </param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.FileAccess" />
+          A <see cref="T:System.IO.FileAccess" />
 
           
 
            value that specifies the operations that can be performed on the file. </param
         >
         <param name="share">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.FileShare" />
+          A <see cref="T:System.IO.FileShare" />
 
           
 
@@ -4177,16 +4158,14 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
-          >The directory information specified in <paramref
-           name="path" />
+          >The directory information specified in <paramref name="path" />
 
           
 
@@ -4196,13 +4175,11 @@
           >The caller does not have the required permission.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref
-           name="path" />
+          >The length of <paramref name="path" />
 
           
 
-           or the absolute path information for <paramref
-           name="path" />
+           or the absolute path information for <paramref name="path" />
 
           
 
@@ -4210,7 +4187,9 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to read the specified file. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read"
+            qualify="true"
+          />
 
           
 
@@ -4219,59 +4198,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is equivalent to the <see
-             cref="M:System.IO.FileStream.#ctor(System.String,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare)" />
+            >This method is equivalent to the <see cref="M:System.IO.FileStream.#ctor(System.String,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare)" />
 
             
 
-             constructor overload with a <see
-             cref="T:System.IO.FileMode" />
+             constructor overload with a <see cref="T:System.IO.FileMode" />
 
             
 
-             value of <see
-             cref="F:System.IO.FileMode.Open" />
+             value of <see cref="F:System.IO.FileMode.Open" />
 
             
 
-            , a <see
-             cref="T:System.IO.FileAccess" />
+            , a <see cref="T:System.IO.FileAccess" />
 
             
 
-             value of <see
-             cref="F:System.IO.FileAccess.Read" />
+             value of <see cref="F:System.IO.FileAccess.Read" />
 
             
 
-             and a <see
-             cref="T:System.IO.FileShare" />
+             and a <see cref="T:System.IO.FileShare" />
 
             
 
-             value of <see
-             cref="F:System.IO.FileShare.Read" />
+             value of <see cref="F:System.IO.FileShare.Read" />
 
             
 
             .</para
           >
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
             .</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -4287,8 +4256,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A read-only <see
-             cref="T:System.IO.FileStream" />
+            >A read-only <see cref="T:System.IO.FileStream" />
 
             
 
@@ -4296,7 +4264,11 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4353,29 +4325,25 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
-          >The directory information specified in <paramref
-           name="path" />
+          >The directory information specified in <paramref name="path" />
 
           
 
            was not found.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref
-           name="path" />
+          >The length of <paramref name="path" />
 
           
 
-           or the absolute path information for <paramref
-           name="path" />
+           or the absolute path information for <paramref name="path" />
 
           
 
@@ -4383,7 +4351,9 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to write to the specified file. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write"
+            qualify="true"
+          />
 
           
 
@@ -4395,29 +4365,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is equivalent to the <see
-             cref="M:System.IO.StreamReader.#ctor(System.String)" />
+            >This method is equivalent to the <see cref="M:System.IO.StreamReader.#ctor(System.String)" />
 
             
 
              constructor overload.</para
           >
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
             .</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -4433,8 +4399,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.IO.StreamReader" />
+            >A <see cref="T:System.IO.StreamReader" />
 
             
 
@@ -4442,7 +4407,11 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4499,16 +4468,14 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
-          >The directory information specified in <paramref
-           name="path" />
+          >The directory information specified in <paramref name="path" />
 
           
 
@@ -4518,13 +4485,11 @@
           >The caller does not have the required permission.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref
-           name="path" />
+          >The length of <paramref name="path" />
 
           
 
-           or the absolute path information for <paramref
-           name="path" />
+           or the absolute path information for <paramref name="path" />
 
           
 
@@ -4532,7 +4497,9 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to write the specified file. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write"
+            qualify="true"
+          />
 
           
 
@@ -4541,52 +4508,44 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is equivalent to the <see
-             cref="M:System.IO.FileStream.#ctor(System.String,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare)" />
+            >This method is equivalent to the <see cref="M:System.IO.FileStream.#ctor(System.String,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare)" />
 
             
 
-             constructor overload with file mode set to <see
-             cref="F:System.IO.FileMode.OpenOrCreate" />
+             constructor overload with file mode set to <see cref="F:System.IO.FileMode.OpenOrCreate" />
 
             
 
-            , the access set to <see
-             cref="F:System.IO.FileAccess.Write" />
+            , the access set to <see cref="F:System.IO.FileAccess.Write" />
 
             
 
-            , and the share mode set to <see
-             cref="F:System.IO.FileShare.None" />
+            , and the share mode set to <see cref="F:System.IO.FileShare.None" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="M:System.IO.File.OpenWrite(System.String)" />
+            >The <see cref="M:System.IO.File.OpenWrite(System.String)" />
 
             
 
              method opens a file if one already exists for the file path, or creates a new file if one does not exist. For an existing file, it does not append the new text to the existing text. Instead, it overwrites the existing characters with the new characters. If you overwrite a longer string (such as “This is a test of the OpenWrite method”) with a shorter string (such as “Second run”), the file will contain a mix of the strings (“Second runtest of the OpenWrite method”).</para
           >
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter may specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, use the <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter may specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, use the <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
              method.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -4602,13 +4561,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An unshared <see
-             cref="T:System.IO.FileStream" />
+            >An unshared <see cref="T:System.IO.FileStream" />
 
             
 
-             object on the specified path with <see
-             cref="F:System.IO.FileAccess.Write" />
+             object on the specified path with <see cref="F:System.IO.FileAccess.Write" />
 
             
 
@@ -4616,7 +4573,11 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4657,7 +4618,11 @@
           <para>A byte array containing the contents of the file.</para>
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4698,7 +4663,11 @@
           <para>A string array containing all lines of the file.</para>
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4743,14 +4712,22 @@
           <para>A string array containing all lines of the file.</para>
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file to open for reading. </param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4782,8 +4759,7 @@
           <para>This method opens a file, reads each line of the file, and then adds each line as an element of a string. It then closes the file. A line is defined as a sequence of characters followed by a carriage return ('\r'), a line feed ('\n'), or a carriage return immediately followed by a line feed. The resulting string does not contain the terminating carriage return and/or line feed.</para>
           <para>This method attempts to automatically detect the encoding of a file based on the presence of byte order marks. Encoding formats UTF-8 and UTF-32 (both big-endian and little-endian) can be detected.</para>
           <para
-            >Use the <see
-             cref="M:System.IO.File.ReadAllText(System.String,System.Text.Encoding)" />
+            >Use the <see cref="M:System.IO.File.ReadAllText(System.String,System.Text.Encoding)" />
 
             
 
@@ -4800,7 +4776,11 @@
           <para>A string containing all lines of the file.</para>
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4837,13 +4817,11 @@
           <para>This method attempts to automatically detect the encoding of a file based on the presence of byte order marks. Encoding formats UTF-8 and UTF-32 (both big-endian and little-endian) can be detected.</para>
           <para>The file handle is guaranteed to be closed by this method, even if exceptions are raised.</para>
           <para
-            >To use the encoding settings as configured for your operating system, specify the <see
-             cref="P:System.Text.Encoding.Default" />
+            >To use the encoding settings as configured for your operating system, specify the <see cref="P:System.Text.Encoding.Default" />
 
             
 
-             property for the <paramref
-             name="encoding" />
+             property for the <paramref name="encoding" />
 
             
 
@@ -4859,14 +4837,22 @@
           <para>A string containing all lines of the file.</para>
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file to open for reading. </param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4897,36 +4883,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.File.ReadLines(System.String)" />
+            >The <see cref="M:System.IO.File.ReadLines(System.String)" />
 
             
 
-             and <see
-             cref="M:System.IO.File.ReadAllLines(System.String)" />
+             and <see cref="M:System.IO.File.ReadAllLines(System.String)" />
 
             
 
-             methods differ as follows: When you use <see
-             cref="M:System.IO.File.ReadLines(System.String)" />
+             methods differ as follows: When you use <see cref="M:System.IO.File.ReadLines(System.String)" />
 
             
 
-            , you can start enumerating the collection of strings before the whole collection is returned; when you use <see
-             cref="M:System.IO.File.ReadAllLines(System.String)" />
+            , you can start enumerating the collection of strings before the whole collection is returned; when you use <see cref="M:System.IO.File.ReadAllLines(System.String)" />
 
             
 
-            , you must wait for the whole array of strings be returned before you can access the array. Therefore, when you are working with very large files, <see
-             cref="M:System.IO.File.ReadLines(System.String)" />
+            , you must wait for the whole array of strings be returned before you can access the array. Therefore, when you are working with very large files, <see cref="M:System.IO.File.ReadLines(System.String)" />
 
             
 
              can be more efficient. </para
           >
           <para
-            >You can use the <see
-             cref="M:System.IO.File.ReadLines(System.String)" />
+            >You can use the <see cref="M:System.IO.File.ReadLines(System.String)" />
 
             
 
@@ -4935,8 +4915,7 @@
           <list type="bullet">
             <item>
               <para
-                >Perform <format
-                 type="text/html">
+                >Perform <format type="text/html">
                   <a href="73cafe73-37cf-46e7-bfa7-97c7eea7ced9">Linq to Object</a>
                 </format>
 
@@ -4947,13 +4926,11 @@
             </item>
             <item>
               <para
-                >Write the returned collection of lines to a file with the <see
-                 cref="M:System.IO.File.WriteAllLines(System.String,System.Collections.Generic.IEnumerable{System.String})" />
+                >Write the returned collection of lines to a file with the <see cref="M:System.IO.File.WriteAllLines(System.String,System.Collections.Generic.IEnumerable{System.String})" />
 
                 
 
-                 method, or append them to an existing file with the <see
-                 cref="M:System.IO.File.AppendAllLines(System.String,System.Collections.Generic.IEnumerable{System.String})" />
+                 method, or append them to an existing file with the <see cref="M:System.IO.File.AppendAllLines(System.String,System.Collections.Generic.IEnumerable{System.String})" />
 
                 
 
@@ -4962,18 +4939,15 @@
             </item>
             <item>
               <para
-                >Create an immediately populated instance of a collection that takes an <see
-                 cref="T:System.Collections.Generic.IEnumerable`1" />
+                >Create an immediately populated instance of a collection that takes an <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
                 
 
-                 collection of strings for its constructor, such as a <see
-                 cref="T:System.Collections.Generic.IList`1" />
+                 collection of strings for its constructor, such as a <see cref="T:System.Collections.Generic.IList`1" />
 
                 
 
-                 or a <see
-                 cref="T:System.Collections.Generic.Queue`1" />
+                 or a <see cref="T:System.Collections.Generic.Queue`1" />
 
                 
 
@@ -4982,8 +4956,7 @@
             </item>
           </list>
           <para
-            >This method uses <see
-             cref="P:System.Text.Encoding.UTF8" />
+            >This method uses <see cref="P:System.Text.Encoding.UTF8" />
 
             
 
@@ -4999,7 +4972,11 @@
           <para>All the lines of the file, or the lines that are the result of a query.</para>
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5032,36 +5009,30 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Use this method to specify an encoding to use read the file.</para>
           <para
-            >The <see
-             cref="M:System.IO.File.ReadLines(System.String,System.Text.Encoding)" />
+            >The <see cref="M:System.IO.File.ReadLines(System.String,System.Text.Encoding)" />
 
             
 
-             and <see
-             cref="M:System.IO.File.ReadAllLines(System.String,System.Text.Encoding)" />
+             and <see cref="M:System.IO.File.ReadAllLines(System.String,System.Text.Encoding)" />
 
             
 
-             methods differ as follows: When you use <see
-             cref="M:System.IO.File.ReadLines(System.String,System.Text.Encoding)" />
+             methods differ as follows: When you use <see cref="M:System.IO.File.ReadLines(System.String,System.Text.Encoding)" />
 
             
 
-            , you can start enumerating the collection of strings before the whole collection is returned. When you use <see
-             cref="M:System.IO.File.ReadAllLines(System.String,System.Text.Encoding)" />
+            , you can start enumerating the collection of strings before the whole collection is returned. When you use <see cref="M:System.IO.File.ReadAllLines(System.String,System.Text.Encoding)" />
 
             
 
-            , you must wait for the whole array of strings be returned before you can access the array. Therefore, when you are working with very large files, <see
-             cref="M:System.IO.File.ReadLines(System.String,System.Text.Encoding)" />
+            , you must wait for the whole array of strings be returned before you can access the array. Therefore, when you are working with very large files, <see cref="M:System.IO.File.ReadLines(System.String,System.Text.Encoding)" />
 
             
 
              can be more efficient. </para
           >
           <para
-            >You can use the <see
-             cref="M:System.IO.File.ReadLines(System.String,System.Text.Encoding)" />
+            >You can use the <see cref="M:System.IO.File.ReadLines(System.String,System.Text.Encoding)" />
 
             
 
@@ -5070,8 +5041,7 @@
           <list type="bullet">
             <item>
               <para
-                >Perform <format
-                 type="text/html">
+                >Perform <format type="text/html">
                   <a href="73cafe73-37cf-46e7-bfa7-97c7eea7ced9">Linq to Object</a>
                 </format>
 
@@ -5082,13 +5052,11 @@
             </item>
             <item>
               <para
-                >Write the returned collection of lines to a file with the <see
-                 cref="M:System.IO.File.WriteAllLines(System.String,System.Collections.Generic.IEnumerable{System.String},System.Text.Encoding)" />
+                >Write the returned collection of lines to a file with the <see cref="M:System.IO.File.WriteAllLines(System.String,System.Collections.Generic.IEnumerable{System.String},System.Text.Encoding)" />
 
                 
 
-                 method, or append them to an existing file with the <see
-                 cref="M:System.IO.File.AppendAllLines(System.String,System.Collections.Generic.IEnumerable{System.String},System.Text.Encoding)" />
+                 method, or append them to an existing file with the <see cref="M:System.IO.File.AppendAllLines(System.String,System.Collections.Generic.IEnumerable{System.String},System.Text.Encoding)" />
 
                 
 
@@ -5097,18 +5065,15 @@
             </item>
             <item>
               <para
-                >Create an immediately populated instance of a collection that takes an <see
-                 cref="T:System.Collections.Generic.IEnumerable`1" />
+                >Create an immediately populated instance of a collection that takes an <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
                 
 
-                 collection of strings for its constructor, such as a <see
-                 cref="T:System.Collections.Generic.IList`1" />
+                 collection of strings for its constructor, such as a <see cref="T:System.Collections.Generic.IList`1" />
 
                 
 
-                 or a <see
-                 cref="T:System.Collections.Generic.Queue`1" />
+                 or a <see cref="T:System.Collections.Generic.Queue`1" />
 
                 
 
@@ -5127,14 +5092,22 @@
           <para>All the lines of the file, or the lines that are the result of a query.</para>
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file to read.</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5169,34 +5142,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.File.Replace(System.String,System.String,System.String)" />
+            >The <see cref="M:System.IO.File.Replace(System.String,System.String,System.String)" />
 
             
 
              method replaces the contents of a specified file with the contents of another file.  It also creates a backup of the file that was replaced.</para
           >
           <para
-            >If the <paramref
-             name="sourceFileName" />
+            >If the <paramref name="sourceFileName" />
 
             
 
-             and <paramref
-             name="destinationFileName" />
+             and <paramref name="destinationFileName" />
 
             
 
-             are on different volumes, this method will raise an exception. If the <paramref
-             name="destinationBackupFileName" />
+             are on different volumes, this method will raise an exception. If the <paramref name="destinationBackupFileName" />
 
             
 
              is on a different volume from the source file, the backup file will be deleted.</para
           >
           <para
-            >Pass null to the <paramref
-             name="destinationBackupFileName" />
+            >Pass null to the <paramref name="destinationBackupFileName" />
 
             
 
@@ -5208,26 +5176,37 @@
           <para>Replaces the contents of a specified file with the contents of another file, deleting the original file, and creating a backup of the replaced file.</para>
         </summary>
         <param name="sourceFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of a file that replaces the file specified by <paramref
-           name="destinationFileName" />
+          The name of a file that replaces the file specified by <paramref name="destinationFileName" />
 
           
 
           .</param
         >
         <param name="destinationFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the file being replaced.</param
         >
         <param name="destinationBackupFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5263,34 +5242,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.File.Replace(System.String,System.String,System.String,System.Boolean)" />
+            >The <see cref="M:System.IO.File.Replace(System.String,System.String,System.String,System.Boolean)" />
 
             
 
              method replaces the contents of a specified file with the contents of another file.  It also creates a backup of the file that was replaced. </para
           >
           <para
-            >If the <paramref
-             name="sourceFileName" />
+            >If the <paramref name="sourceFileName" />
 
             
 
-             and <paramref
-             name="destinationFileName" />
+             and <paramref name="destinationFileName" />
 
             
 
-             are on different volumes, this method will raise an exception. If the <paramref
-             name="destinationBackupFileName" />
+             are on different volumes, this method will raise an exception. If the <paramref name="destinationBackupFileName" />
 
             
 
              is on a different volume from the source file, the backup file will be deleted.</para
           >
           <para
-            >Pass null to the <paramref
-             name="destinationBackupFileName" />
+            >Pass null to the <paramref name="destinationBackupFileName" />
 
             
 
@@ -5302,33 +5276,48 @@
           <para>Replaces the contents of a specified file with the contents of another file, deleting the original file, and creating a backup of the replaced file and optionally ignores merge errors.</para>
         </summary>
         <param name="sourceFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of a file that replaces the file specified by <paramref
-           name="destinationFileName" />
+          The name of a file that replaces the file specified by <paramref name="destinationFileName" />
 
           
 
           .</param
         >
         <param name="destinationFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the file being replaced.</param
         >
         <param name="destinationBackupFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the backup file.</param
         >
         <param name="ignoreMetadataErrors">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5362,8 +5351,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
+            >The <see cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
 
             
 
@@ -5371,18 +5359,15 @@
           >
           <block subset="none" type="note">
             <para
-              >The ACL specified for the <paramref
-               name="fileSecurity" />
+              >The ACL specified for the <paramref name="fileSecurity" />
 
               
 
-               parameter replaces the existing ACL for the file. To add permissions for a new user, use the <see
-               cref="Overload:System.IO.File.GetAccessControl" />
+               parameter replaces the existing ACL for the file. To add permissions for a new user, use the <see cref="Overload:System.IO.File.GetAccessControl" />
 
               
 
-               method to obtain the existing ACL, modify it, and then use <see
-               cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
+               method to obtain the existing ACL, modify it, and then use <see cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
 
               
 
@@ -5390,15 +5375,13 @@
             >
           </block>
           <para
-            >An ACL describes individuals and/or groups who have, or do not have, rights to specific actions on the given file. For more information, see <format
-             type="text/html">
+            >An ACL describes individuals and/or groups who have, or do not have, rights to specific actions on the given file. For more information, see <format type="text/html">
               <a href="06fbf66d-6f02-4378-b863-b2f12e349045">ACL Technology Overview</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="53758b39-bd9b-4640-bb04-cad5ed8d0abf"
                 >How to: Add or Remove an Access Control List Entry</a
               >
@@ -5409,23 +5392,19 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
+            >The <see cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
 
             
 
-             method persists only <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+             method persists only <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
-             objects that have been modified after object creation.  If a <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+             objects that have been modified after object creation.  If a <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
-             object has not been modified, it will not be persisted to a file.  Therefore, it is not possible to retrieve a <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+             object has not been modified, it will not be persisted to a file.  Therefore, it is not possible to retrieve a <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
@@ -5435,13 +5414,11 @@
           <list type="ordered">
             <item>
               <para
-                >Use the <see
-                 cref="Overload:System.IO.File.GetAccessControl" />
+                >Use the <see cref="Overload:System.IO.File.GetAccessControl" />
 
                 
 
-                 method to retrieve the <see
-                 cref="T:System.Security.AccessControl.FileSecurity" />
+                 method to retrieve the <see cref="T:System.Security.AccessControl.FileSecurity" />
 
                 
 
@@ -5450,8 +5427,7 @@
             </item>
             <item>
               <para
-                >Create a new <see
-                 cref="T:System.Security.AccessControl.FileSecurity" />
+                >Create a new <see cref="T:System.Security.AccessControl.FileSecurity" />
 
                 
 
@@ -5460,18 +5436,15 @@
             </item>
             <item>
               <para
-                >Use the <see
-                 cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorBinaryForm" />
+                >Use the <see cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorBinaryForm" />
 
                 
 
-                 or <see
-                 cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections)" />
+                 or <see cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections)" />
 
                 
 
-                 method of the source <see
-                 cref="T:System.Security.AccessControl.FileSecurity" />
+                 method of the source <see cref="T:System.Security.AccessControl.FileSecurity" />
 
                 
 
@@ -5480,18 +5453,15 @@
             </item>
             <item>
               <para
-                >Use the <see
-                 cref="M:System.Security.AccessControl.ObjectSecurity.SetSecurityDescriptorBinaryForm(System.Byte[])" />
+                >Use the <see cref="M:System.Security.AccessControl.ObjectSecurity.SetSecurityDescriptorBinaryForm(System.Byte[])" />
 
                 
 
-                 or <see
-                 cref="M:System.Security.AccessControl.ObjectSecurity.SetSecurityDescriptorSddlForm(System.String)" />
+                 or <see cref="M:System.Security.AccessControl.ObjectSecurity.SetSecurityDescriptorSddlForm(System.String)" />
 
                 
 
-                 method to copy the information retrieved in step 3 to the destination <see
-                 cref="T:System.Security.AccessControl.FileSecurity" />
+                 method to copy the information retrieved in step 3 to the destination <see cref="T:System.Security.AccessControl.FileSecurity" />
 
                 
 
@@ -5500,13 +5470,11 @@
             </item>
             <item>
               <para
-                >Set the destination <see
-                 cref="T:System.Security.AccessControl.FileSecurity" />
+                >Set the destination <see cref="T:System.Security.AccessControl.FileSecurity" />
 
                 
 
-                 object to the destination file using the <see
-                 cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
+                 object to the destination file using the <see cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
 
                 
 
@@ -5515,33 +5483,27 @@
             </item>
           </list>
           <para
-            >In NTFS environments, <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ReadAttributes" />
+            >In NTFS environments, <see cref="F:System.Security.AccessControl.FileSystemRights.ReadAttributes" />
 
             
 
-             and <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ReadExtendedAttributes" />
+             and <see cref="F:System.Security.AccessControl.FileSystemRights.ReadExtendedAttributes" />
 
             
 
-             are granted to the user if the user has <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ListDirectory" />
+             are granted to the user if the user has <see cref="F:System.Security.AccessControl.FileSystemRights.ListDirectory" />
 
             
 
-             rights on the parent folder. To deny <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ReadAttributes" />
+             rights on the parent folder. To deny <see cref="F:System.Security.AccessControl.FileSystemRights.ReadAttributes" />
 
             
 
-             and <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ReadExtendedAttributes" />
+             and <see cref="F:System.Security.AccessControl.FileSystemRights.ReadExtendedAttributes" />
 
             
 
-            , deny <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ListDirectory" />
+            , deny <see cref="F:System.Security.AccessControl.FileSystemRights.ListDirectory" />
 
             
 
@@ -5551,8 +5513,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies access control list (ACL) entries described by a <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+            >Applies access control list (ACL) entries described by a <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
@@ -5560,24 +5521,30 @@
           >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A file to add or remove access control list (ACL) entries from.</param
         >
         <param name="fileSecurity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.AccessControl.FileSecurity" />
+          A <see cref="T:System.Security.AccessControl.FileSecurity" />
 
           
 
-           object that describes an ACL entry to apply to the file described by the <paramref
-           name="path" />
+           object that describes an ACL entry to apply to the file described by the <paramref name="path" />
 
           
 
@@ -5611,52 +5578,44 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
             .</para
           >
           <para
-            >Certain file attributes, such as <see
-             cref="F:System.IO.FileAttributes.Hidden" />
+            >Certain file attributes, such as <see cref="F:System.IO.FileAttributes.Hidden" />
 
             
 
-             and <see
-             cref="F:System.IO.FileAttributes.ReadOnly" />
+             and <see cref="F:System.IO.FileAttributes.ReadOnly" />
 
             
 
-            , can be combined. Other attributes, such as <see
-             cref="F:System.IO.FileAttributes.Normal" />
+            , can be combined. Other attributes, such as <see cref="F:System.IO.FileAttributes.Normal" />
 
             
 
             , must be used alone.  </para
           >
           <para
-            >It is not possible to change the compression status of a <see
-             cref="T:System.IO.File" />
+            >It is not possible to change the compression status of a <see cref="T:System.IO.File" />
 
             
 
-             object using the <see
-             cref="M:System.IO.File.SetAttributes(System.String,System.IO.FileAttributes)" />
+             object using the <see cref="M:System.IO.File.SetAttributes(System.String,System.IO.FileAttributes)" />
 
             
 
              method.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -5668,8 +5627,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the specified <see
-             cref="T:System.IO.FileAttributes" />
+            >Sets the specified <see cref="T:System.IO.FileAttributes" />
 
             
 
@@ -5677,14 +5635,22 @@
           >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The path to the file. </param
         >
         <param name="fileAttributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5738,8 +5704,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -5756,13 +5721,11 @@
           >An I/O error occurred while performing the operation.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref
-           name="path" />
+          >The length of <paramref name="path" />
 
           
 
-           or the absolute path information for <paramref
-           name="path" />
+           or the absolute path information for <paramref name="path" />
 
           
 
@@ -5770,7 +5733,9 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to write to the specified file or directory. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write"
+            qualify="true"
+          />
 
           
 
@@ -5782,13 +5747,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
@@ -5796,8 +5759,7 @@
           >
           <para>NTFS-formatted drives may cache file meta-info, such as file creation time, for a short period of time. As a result, it may be necessary to explicitly set the creation time of a file if you are overwriting or replacing an existing file.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -5811,24 +5773,30 @@
           <para>Sets the date and time the file was created.</para>
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file for which to set the creation date and time information. </param
         >
         <param name="creationTime">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.DateTime" />
+          A <see cref="T:System.DateTime" />
 
           
 
-           containing the value to set for the creation date and time of <paramref
-           name="path" />
+           containing the value to set for the creation date and time of <paramref name="path" />
 
           
 
@@ -5863,13 +5831,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
@@ -5877,8 +5843,7 @@
           >
           <para>NTFS-formatted drives may cache file meta-info, such as file creation time, for a short period of time. As a result, it may be necessary to explicitly set the creation time of a file if you are overwriting or replacing an existing file.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -5892,24 +5857,30 @@
           <para>Sets the date and time, in coordinated universal time (UTC), that the file was created.</para>
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file for which to set the creation date and time information. </param
         >
         <param name="creationTimeUtc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.DateTime" />
+          A <see cref="T:System.DateTime" />
 
           
 
-           containing the value to set for the creation date and time of <paramref
-           name="path" />
+           containing the value to set for the creation date and time of <paramref name="path" />
 
           
 
@@ -5956,8 +5927,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -5967,13 +5937,11 @@
           >An I/O error occurred while performing the operation.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref
-           name="path" />
+          >The length of <paramref name="path" />
 
           
 
-           or the absolute path information for <paramref
-           name="path" />
+           or the absolute path information for <paramref name="path" />
 
           
 
@@ -5984,7 +5952,9 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to write to the specified file. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write"
+            qualify="true"
+          />
 
           
 
@@ -6010,21 +5980,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
             .</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -6038,24 +6005,30 @@
           <para>Sets the date and time the specified file was last accessed.</para>
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file for which to set the access date and time information. </param
         >
         <param name="lastAccessTime">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.DateTime" />
+          A <see cref="T:System.DateTime" />
 
           
 
-           containing the value to set for the last access date and time of <paramref
-           name="path" />
+           containing the value to set for the last access date and time of <paramref name="path" />
 
           
 
@@ -6090,21 +6063,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
             .</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -6118,24 +6088,30 @@
           <para>Sets the date and time, in coordinated universal time (UTC), that the specified file was last accessed.</para>
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file for which to set the access date and time information. </param
         >
         <param name="lastAccessTimeUtc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.DateTime" />
+          A <see cref="T:System.DateTime" />
 
           
 
-           containing the value to set for the last access date and time of <paramref
-           name="path" />
+           containing the value to set for the last access date and time of <paramref name="path" />
 
           
 
@@ -6182,8 +6158,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -6193,13 +6168,11 @@
           >An I/O error occurred while performing the operation.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref
-           name="path" />
+          >The length of <paramref name="path" />
 
           
 
-           or the absolute path information for <paramref
-           name="path" />
+           or the absolute path information for <paramref name="path" />
 
           
 
@@ -6210,7 +6183,9 @@
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to write to the specified file. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write"
+            qualify="true"
+          />
 
           
 
@@ -6236,21 +6211,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
             .</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -6264,24 +6236,30 @@
           <para>Sets the date and time that the specified file was last written to.</para>
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file for which to set the date and time information. </param
         >
         <param name="lastWriteTime">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.DateTime" />
+          A <see cref="T:System.DateTime" />
 
           
 
-           containing the value to set for the last write date and time of <paramref
-           name="path" />
+           containing the value to set for the last write date and time of <paramref name="path" />
 
           
 
@@ -6316,21 +6294,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
-             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
-             cref="M:System.IO.Directory.GetCurrentDirectory" />
+             parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />
 
             
 
             .</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -6344,24 +6319,30 @@
           <para>Sets the date and time, in coordinated universal time (UTC), that the specified file was last written to.</para>
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file for which to set the date and time information. </param
         >
         <param name="lastWriteTimeUtc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.DateTime" />
+          A <see cref="T:System.DateTime" />
 
           
 
-           containing the value to set for the last write date and time of <paramref
-           name="path" />
+           containing the value to set for the last write date and time of <paramref name="path" />
 
           
 
@@ -6401,14 +6382,22 @@
           <para>Creates a new file, writes the specified byte array to the file, and then closes the file. If the target file already exists, it is overwritten.</para>
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file to write to. </param
         >
         <param name="bytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6443,18 +6432,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default behavior of the <see
-             cref="M:System.IO.File.WriteAllLines(System.String,System.Collections.Generic.IEnumerable{System.String})" />
+            >The default behavior of the <see cref="M:System.IO.File.WriteAllLines(System.String,System.Collections.Generic.IEnumerable{System.String})" />
 
             
 
-             method is to write out data by using UTF-8 encoding without a byte order mark (BOM). If it is necessary to include a UTF-8 identifier, such as a byte order mark, at the beginning of a file, use the <see
-             cref="M:System.IO.File.WriteAllLines(System.String,System.Collections.Generic.IEnumerable{System.String},System.Text.Encoding)" />
+             method is to write out data by using UTF-8 encoding without a byte order mark (BOM). If it is necessary to include a UTF-8 identifier, such as a byte order mark, at the beginning of a file, use the <see cref="M:System.IO.File.WriteAllLines(System.String,System.Collections.Generic.IEnumerable{System.String},System.Text.Encoding)" />
 
             
 
-             method overload with <see
-             cref="P:System.Text.Encoding.UTF8" />
+             method overload with <see cref="P:System.Text.Encoding.UTF8" />
 
             
 
@@ -6462,23 +6448,19 @@
           >
           <para>If the target file already exists, it is overwritten.</para>
           <para
-            >You can use this method to create the contents for a collection class that takes an <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >You can use this method to create the contents for a collection class that takes an <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             in its constructor, such as a <see
-             cref="M:System.Collections.Generic.List`1.#ctor(System.Collections.Generic.IEnumerable{`0})" />
+             in its constructor, such as a <see cref="M:System.Collections.Generic.List`1.#ctor(System.Collections.Generic.IEnumerable{`0})" />
 
             
 
-            , <see
-             cref="M:System.Collections.Generic.HashSet`1.#ctor" />
+            , <see cref="M:System.Collections.Generic.HashSet`1.#ctor" />
 
             
 
-            , or a <see
-             cref="M:System.Collections.Generic.SortedSet`1.#ctor" />
+            , or a <see cref="M:System.Collections.Generic.SortedSet`1.#ctor" />
 
             
 
@@ -6490,14 +6472,22 @@
           <para>Creates a new file, writes a collection of strings to the file, and then closes the file.</para>
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file to write to.</param
         >
         <param name="contents">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6532,18 +6522,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the target file already exists, it is overwritten. </para>
           <para
-            >The default behavior of the <see
-             cref="M:System.IO.File.WriteAllLines(System.String,System.String[])" />
+            >The default behavior of the <see cref="M:System.IO.File.WriteAllLines(System.String,System.String[])" />
 
             
 
-             method is to write out data using UTF-8 encoding without a byte order mark (BOM). If it is necessary to include a UTF-8 identifier, such as a byte order mark, at the beginning of a file, use the <see
-             cref="M:System.IO.File.WriteAllLines(System.String,System.String[],System.Text.Encoding)" />
+             method is to write out data using UTF-8 encoding without a byte order mark (BOM). If it is necessary to include a UTF-8 identifier, such as a byte order mark, at the beginning of a file, use the <see cref="M:System.IO.File.WriteAllLines(System.String,System.String[],System.Text.Encoding)" />
 
             
 
-             method overload with <see
-             cref="P:System.Text.Encoding.UTF8" />
+             method overload with <see cref="P:System.Text.Encoding.UTF8" />
 
             
 
@@ -6556,14 +6543,22 @@
           <para>Creates a new file, write the specified string array to the file, and then closes the file. </para>
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file to write to. </param
         >
         <param name="contents">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6603,15 +6598,13 @@
           <list type="bullet">
             <item>
               <para
-                >The results of a <format
-                 type="text/html">
+                >The results of a <format type="text/html">
                   <a href="73cafe73-37cf-46e7-bfa7-97c7eea7ced9">LINQ to Objects</a>
                 </format>
 
                 
 
-                 query on the lines of a file, as obtained by using the <see
-                 cref="Overload:System.IO.File.ReadLines" />
+                 query on the lines of a file, as obtained by using the <see cref="Overload:System.IO.File.ReadLines" />
 
                 
 
@@ -6620,8 +6613,7 @@
             </item>
             <item>
               <para
-                >The contents of a collection that implements an <see
-                 cref="T:System.Collections.Generic.IEnumerable`1" />
+                >The contents of a collection that implements an <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
                 
 
@@ -6635,21 +6627,33 @@
           <para>Creates a new file by using the specified encoding, writes a collection of strings to the file, and then closes the file.</para>
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file to write to.</param
         >
         <param name="contents">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The lines to write to the file.</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6691,26 +6695,37 @@
           <para>Creates a new file, writes the specified string array to the file by using the specified encoding, and then closes the file. </para>
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file to write to. </param
         >
         <param name="contents">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string array to write to the file. </param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Text.Encoding" />
+          An <see cref="T:System.Text.Encoding" />
 
           
 
@@ -6744,18 +6759,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses UTF-8 encoding without a Byte-Order Mark (BOM), so using the <see
-             cref="M:System.Text.Encoding.GetPreamble" />
+            >This method uses UTF-8 encoding without a Byte-Order Mark (BOM), so using the <see cref="M:System.Text.Encoding.GetPreamble" />
 
             
 
-             method will return an empty byte array. If it is necessary to include a UTF-8 identifier, such as a byte order mark, at the beginning of a file, use the <see
-             cref="M:System.IO.File.WriteAllText(System.String,System.String,System.Text.Encoding)" />
+             method will return an empty byte array. If it is necessary to include a UTF-8 identifier, such as a byte order mark, at the beginning of a file, use the <see cref="M:System.IO.File.WriteAllText(System.String,System.String,System.Text.Encoding)" />
 
             
 
-             method overload with <see
-             cref="P:System.Text.Encoding.UTF8" />
+             method overload with <see cref="P:System.Text.Encoding.UTF8" />
 
             
 
@@ -6768,14 +6780,22 @@
           <para>Creates a new file, writes the specified string to the file, and then closes the file. If the target file already exists, it is overwritten.</para>
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file to write to. </param
         >
         <param name="contents">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6816,21 +6836,33 @@
           <para>Creates a new file, writes the specified string to the file using the specified encoding, and then closes the file. If the target file already exists, it is overwritten.</para>
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file to write to. </param
         >
         <param name="contents">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string to write to the file. </param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

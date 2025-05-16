@@ -39,8 +39,7 @@
     <example>
       <para
         >The following example demonstrates an error that causes
-      a <see
-         cref="T:System.StackOverflowException" />
+      a <see cref="T:System.StackOverflowException" />
 
         
 
@@ -75,13 +74,11 @@ public class StackOverflowExample {
 
         
 
-         is thrown for execution stack overflow errors, typically in case of a very deep or unbounded recursion. The <see
-         cref="F:System.Reflection.Emit.OpCodes.Localloc" />
+         is thrown for execution stack overflow errors, typically in case of a very deep or unbounded recursion. The <see cref="F:System.Reflection.Emit.OpCodes.Localloc" />
 
         
 
-         Microsoft intermediate language (MSIL) instruction throws <see
-         cref="T:System.StackOverflowException" />
+         Microsoft intermediate language (MSIL) instruction throws <see cref="T:System.StackOverflowException" />
 
         
 
@@ -92,13 +89,11 @@ public class StackOverflowExample {
 
         
 
-         uses the HRESULT COR_E_STACKOVERFLOW, which has the value 0x800703E9. For a list of initial property values for a <see
-         cref="T:System.StackOverflowException" />
+         uses the HRESULT COR_E_STACKOVERFLOW, which has the value 0x800703E9. For a list of initial property values for a <see cref="T:System.StackOverflowException" />
 
         
 
-         object, see the <see
-         cref="M:System.StackOverflowException.#ctor" />
+         object, see the <see cref="M:System.StackOverflowException.#ctor" />
 
         
 
@@ -106,8 +101,7 @@ public class StackOverflowExample {
       >
       <block subset="none" type="note">
         <para
-          >The value of the inherited <see
-           cref="P:System.Exception.Data" />
+          >The value of the inherited <see cref="P:System.Exception.Data" />
 
           
 
@@ -118,28 +112,24 @@ public class StackOverflowExample {
         <h2>Version Considerations</h2>
       </format>
       <para
-        >In prior versions of the .NET Framework, your application could catch a <see
-         cref="T:System.StackOverflowException" />
+        >In prior versions of the .NET Framework, your application could catch a <see cref="T:System.StackOverflowException" />
 
         
 
          object (for example, to recover from unbounded recursion). However, that practice is currently discouraged because significant additional code is required to reliably catch a stack overflow exception and continue program execution. </para
       >
       <para
-        >Starting with the .NET Framework version 2.0, a <see
-         cref="T:System.StackOverflowException" />
+        >Starting with the .NET Framework version 2.0, a <see cref="T:System.StackOverflowException" />
 
         
 
-         object cannot be caught by a try-catch block and the corresponding process is terminated by default. Consequently, users are advised to write their code to detect and prevent a stack overflow. For example, if your application depends on recursion, use a counter or a state condition to terminate the recursive loop. Note that an application that hosts the common language runtime (CLR) can specify that the CLR unload the application domain where the stack overflow exception occurs and let the corresponding process continue. For more information, see <format
-         type="text/html">
+         object cannot be caught by a try-catch block and the corresponding process is terminated by default. Consequently, users are advised to write their code to detect and prevent a stack overflow. For example, if your application depends on recursion, use a counter or a state condition to terminate the recursive loop. Note that an application that hosts the common language runtime (CLR) can specify that the CLR unload the application domain where the stack overflow exception occurs and let the corresponding process continue. For more information, see <format type="text/html">
           <a href="5c834aa1-f2db-408a-b230-c7bec093d364">ICLRPolicyManager</a>
         </format>
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="ea527626-99e3-4995-81c4-c8f3e60eb6d5">Hosting the Common Language Runtime</a>
         </format>
 
@@ -176,8 +166,7 @@ public class StackOverflowExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.StackOverflowException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.StackOverflowException" />
 
             
 
@@ -219,13 +208,11 @@ public class StackOverflowExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.StackOverflowException" />
+            >Initializes a new instance of the <see cref="T:System.StackOverflowException" />
 
             
 
-             class, setting the <see
-             cref="P:System.Exception.Message" />
+             class, setting the <see cref="P:System.Exception.Message" />
 
             
 
@@ -259,8 +246,7 @@ public class StackOverflowExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.StackOverflowException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.StackOverflowException" />
 
             
 
@@ -302,8 +288,7 @@ public class StackOverflowExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.StackOverflowException" />
+            >Initializes a new instance of the <see cref="T:System.StackOverflowException" />
 
             
 
@@ -311,12 +296,15 @@ public class StackOverflowExample {
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -353,26 +341,22 @@ public class StackOverflowExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception can include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception can include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.StackOverflowException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.StackOverflowException" />
 
             
 
@@ -414,8 +398,7 @@ public class StackOverflowExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.StackOverflowException" />
+            >Initializes a new instance of the <see cref="T:System.StackOverflowException" />
 
             
 
@@ -423,19 +406,26 @@ public class StackOverflowExample {
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 

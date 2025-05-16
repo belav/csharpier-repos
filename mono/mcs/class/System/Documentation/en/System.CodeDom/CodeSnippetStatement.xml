@@ -41,16 +41,14 @@
          can represent a statement using a literal code fragment that will be included directly in the source without modification.</para
       >
       <para
-        >A <see
-         cref="T:System.CodeDom.CodeSnippetStatement" />
+        >A <see cref="T:System.CodeDom.CodeSnippetStatement" />
 
         
 
          stores a section of code exactly in its original format as a string. The CodeDOM does not translate literal code fragments. Literal code fragments are stored and output in their original format. CodeDOM objects that contain literal code are provided so developers can encapsulate code that is already in the target language.</para
       >
       <para
-        >The <see
-         cref="P:System.CodeDom.CodeSnippetStatement.Value" />
+        >The <see cref="P:System.CodeDom.CodeSnippetStatement.Value" />
 
         
 
@@ -82,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeSnippetStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeSnippetStatement" />
 
             
 
@@ -113,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeSnippetStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeSnippetStatement" />
 
             
 
@@ -122,7 +118,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

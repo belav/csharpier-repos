@@ -46,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an empty instance of the <see
-             cref="T:System.ServiceModel.Security.MessageSecurityException" />
+            >Initializes an empty instance of the <see cref="T:System.ServiceModel.Security.MessageSecurityException" />
 
             
 
@@ -74,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.MessageSecurityException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.MessageSecurityException" />
 
             
 
@@ -83,7 +81,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -113,18 +115,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.MessageSecurityException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.MessageSecurityException" />
 
             
 
-             class from the specified instances of the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             class from the specified instances of the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             and <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             and <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -132,34 +131,38 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
-           instance that contains the information required to serialize the new <see
-           cref="T:System.ServiceModel.Security.MessageSecurityException" />
+           instance that contains the information required to serialize the new <see cref="T:System.ServiceModel.Security.MessageSecurityException" />
 
           
 
            instance.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
-           that contains the source of the serialized stream associated with the new <see
-           cref="T:System.ServiceModel.Security.MessageSecurityException" />
+           that contains the source of the serialized stream associated with the new <see cref="T:System.ServiceModel.Security.MessageSecurityException" />
 
           
 
@@ -189,8 +192,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.MessageSecurityException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.MessageSecurityException" />
 
             
 
@@ -198,14 +200,22 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -242,13 +252,11 @@
 
             
 
-             sets a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             sets a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             with all the exception object data targeted for serialization. During deserialization, the exception is reconstituted from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             with all the exception object data targeted for serialization. During deserialization, the exception is reconstituted from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -258,8 +266,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -267,12 +274,15 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 

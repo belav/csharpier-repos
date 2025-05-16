@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by the <see
-         cref="T:System.Diagnostics.TraceSwitch" />
+        >This enumeration is used by the <see cref="T:System.Diagnostics.TraceSwitch" />
 
         
 
@@ -38,13 +37,11 @@
         </item>
       </list>
       <para
-        >For more information on instrumenting your application, see <see
-         cref="T:System.Diagnostics.Debug" />
+        >For more information on instrumenting your application, see <see cref="T:System.Diagnostics.Debug" />
 
         
 
-         and <see
-         cref="T:System.Diagnostics.Trace" />
+         and <see cref="T:System.Diagnostics.Trace" />
 
         
 
@@ -52,13 +49,11 @@
       >
       <block subset="none" type="note">
         <para
-          >In the .NET Framework version 2.0, you can use text to specify the value for a switch. For example, true for a <see
-           cref="T:System.Diagnostics.BooleanSwitch" />
+          >In the .NET Framework version 2.0, you can use text to specify the value for a switch. For example, true for a <see cref="T:System.Diagnostics.BooleanSwitch" />
 
           
 
-           or the text representing an enumeration value such as Error for a <see
-           cref="T:System.Diagnostics.TraceSwitch" />
+           or the text representing an enumeration value such as Error for a <see cref="T:System.Diagnostics.TraceSwitch" />
 
           
 
@@ -74,16 +69,14 @@
      &lt;/system.diagnostics&gt;
  &lt;/configuration&gt;</code>
       <para
-        >In addition to setting trace levels using the integer value of the enumeration, the .NET Framework version 2.0 trace levels can be set using the text representation of the enumeration value. For example, Verbose for a <see
-         cref="T:System.Diagnostics.TraceSwitch" />
+        >In addition to setting trace levels using the integer value of the enumeration, the .NET Framework version 2.0 trace levels can be set using the text representation of the enumeration value. For example, Verbose for a <see cref="T:System.Diagnostics.TraceSwitch" />
 
         
 
         . The line &lt;add name="mySwitch" value="Verbose" /&gt; is equivalent to &lt;add name="mySwitch" value="4" /&gt;.</para
       >
       <para
-        >The following table shows the relationship between the <see
-         cref="T:System.Diagnostics.TraceLevel" />
+        >The following table shows the relationship between the <see cref="T:System.Diagnostics.TraceLevel" />
 
         
 
@@ -145,18 +138,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies what messages to output for the <see
-         cref="T:System.Diagnostics.Debug" />
+        >Specifies what messages to output for the <see cref="T:System.Diagnostics.Debug" />
 
         
 
-        , <see
-         cref="T:System.Diagnostics.Trace" />
+        , <see cref="T:System.Diagnostics.Trace" />
 
         
 
-         and <see
-         cref="T:System.Diagnostics.TraceSwitch" />
+         and <see cref="T:System.Diagnostics.TraceSwitch" />
 
         
 

@@ -20,13 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >XML Web service methods created using ASP.NET can be configured to run with a SOAP extension by applying an attribute to the XML Web service method. When a custom extension attribute is added to an XML Web service method or a method on a client proxy class, ASP.NET invokes the associated extension at the appropriate time. An extension attribute is a custom attribute class deriving from <see
-         cref="T:System.Web.Services.Protocols.SoapExtensionAttribute" />
+        >XML Web service methods created using ASP.NET can be configured to run with a SOAP extension by applying an attribute to the XML Web service method. When a custom extension attribute is added to an XML Web service method or a method on a client proxy class, ASP.NET invokes the associated extension at the appropriate time. An extension attribute is a custom attribute class deriving from <see cref="T:System.Web.Services.Protocols.SoapExtensionAttribute" />
 
         
 
-        . Derived attributes must override the <see
-         cref="P:System.Web.Services.Protocols.SoapExtensionAttribute.ExtensionType" />
+        . Derived attributes must override the <see cref="P:System.Web.Services.Protocols.SoapExtensionAttribute.ExtensionType" />
 
         
 
@@ -49,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Protocols.SoapExtensionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.SoapExtensionAttribute" />
 
             
 
@@ -74,8 +71,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Derived classes must override the <see
-             cref="P:System.Web.Services.Protocols.SoapExtensionAttribute.ExtensionType" />
+            >Derived classes must override the <see cref="P:System.Web.Services.Protocols.SoapExtensionAttribute.ExtensionType" />
 
             
 
@@ -85,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets the <see
-             cref="T:System.Type" />
+            >When overridden in a derived class, gets the <see cref="T:System.Type" />
 
             
 

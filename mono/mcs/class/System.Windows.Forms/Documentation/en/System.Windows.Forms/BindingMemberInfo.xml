@@ -14,31 +14,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.BindingMemberInfo" />
+        >The <see cref="T:System.Windows.Forms.BindingMemberInfo" />
 
         
 
-         is returned by the <see
-         cref="P:System.Windows.Forms.Binding.BindingMemberInfo" />
+         is returned by the <see cref="P:System.Windows.Forms.Binding.BindingMemberInfo" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.Binding" />
+         property of the <see cref="T:System.Windows.Forms.Binding" />
 
         
 
          class.</para
       >
       <para
-        >The <see
-         cref="T:System.Windows.Forms.BindingMemberInfo" />
+        >The <see cref="T:System.Windows.Forms.BindingMemberInfo" />
 
         
 
-         is created from the string passed to the <see
-         cref="M:System.Windows.Forms.BindingMemberInfo.#ctor(System.String)" />
+         is created from the string passed to the <see cref="M:System.Windows.Forms.BindingMemberInfo.#ctor(System.String)" />
 
         
 
@@ -48,8 +43,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains information that enables a <see
-         cref="T:System.Windows.Forms.Binding" />
+        >Contains information that enables a <see cref="T:System.Windows.Forms.Binding" />
 
         
 
@@ -68,23 +62,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.BindingMemberInfo" />
+            >A <see cref="T:System.Windows.Forms.BindingMemberInfo" />
 
             
 
-             is created automatically when you call the <see
-             cref="M:System.Windows.Forms.BindingMemberInfo.#ctor(System.String)" />
+             is created automatically when you call the <see cref="M:System.Windows.Forms.BindingMemberInfo.#ctor(System.String)" />
 
             
 
-             constructor with a control-property name, data source, and navigation path. The <paramref
-             name="dataMember" />
+             constructor with a control-property name, data source, and navigation path. The <paramref name="dataMember" />
 
             
 
-             parameter contains the <see
-             cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
+             parameter contains the <see cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
 
             
 
@@ -94,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.BindingMemberInfo" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.BindingMemberInfo" />
 
             
 
@@ -103,7 +92,11 @@
           >
         </summary>
         <param name="dataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -126,28 +119,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.BindingMemberInfo.BindingField" />
+            >The <see cref="P:System.Windows.Forms.BindingMemberInfo.BindingField" />
 
             
 
-             is the last item found in the navigation path returned by the <see
-             cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
+             is the last item found in the navigation path returned by the <see cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
 
             
 
-             property. For example, if a new <see
-             cref="T:System.Windows.Forms.Binding" />
+             property. For example, if a new <see cref="T:System.Windows.Forms.Binding" />
 
             
 
-             is created that has a <paramref
-             name="dataMember" />
+             is created that has a <paramref name="dataMember" />
 
             
 
-             parameter of "Customers.custToOrders.OrderDate", <see
-             cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
+             parameter of "Customers.custToOrders.OrderDate", <see cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
 
             
 
@@ -175,56 +163,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.BindingMemberInfo" />
+            >A <see cref="T:System.Windows.Forms.BindingMemberInfo" />
 
             
 
-             is created automatically when you call the <see
-             cref="M:System.Windows.Forms.BindingMemberInfo.#ctor(System.String)" />
+             is created automatically when you call the <see cref="M:System.Windows.Forms.BindingMemberInfo.#ctor(System.String)" />
 
             
 
-             constructor with a control-property name, data source, and navigation path. The <paramref
-             name="dataMember" />
+             constructor with a control-property name, data source, and navigation path. The <paramref name="dataMember" />
 
             
 
-             parameter contains the <see
-             cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
+             parameter contains the <see cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
 
             
 
              string.</para
           >
           <para
-            >The <see
-             cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
+            >The <see cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
 
             
 
-             is the period delimitated combination of the <see
-             cref="P:System.Windows.Forms.BindingMemberInfo.BindingPath" />
+             is the period delimitated combination of the <see cref="P:System.Windows.Forms.BindingMemberInfo.BindingPath" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.BindingMemberInfo.BindingField" />
+             and <see cref="P:System.Windows.Forms.BindingMemberInfo.BindingField" />
 
             
 
-             values. For example, when a new <see
-             cref="T:System.Windows.Forms.Binding" />
+             values. For example, when a new <see cref="T:System.Windows.Forms.Binding" />
 
             
 
-             is created by using a <paramref
-             name="dataMember" />
+             is created by using a <paramref name="dataMember" />
 
             
 
-             parameter of "Customers.custToOrders.OrderDate", <see
-             cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
+             parameter of "Customers.custToOrders.OrderDate", <see cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
 
             
 
@@ -252,33 +230,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.BindingMemberInfo.BindingPath" />
+            >The <see cref="P:System.Windows.Forms.BindingMemberInfo.BindingPath" />
 
             
 
-             is the period delimitated combination of property names that comes before the <see
-             cref="P:System.Windows.Forms.BindingMemberInfo.BindingField" />
+             is the period delimitated combination of property names that comes before the <see cref="P:System.Windows.Forms.BindingMemberInfo.BindingField" />
 
             
 
-             in the navigational path returned by the <see
-             cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
+             in the navigational path returned by the <see cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
 
             
 
-             property. For example, when a new <see
-             cref="T:System.Windows.Forms.Binding" />
+             property. For example, when a new <see cref="T:System.Windows.Forms.Binding" />
 
             
 
-             is created that has a <paramref
-             name="dataMember" />
+             is created that has a <paramref name="dataMember" />
 
             
 
-             parameter of "Customers.custToOrders.OrderDate", <see
-             cref="P:System.Windows.Forms.BindingMemberInfo.BindingPath" />
+             parameter of "Customers.custToOrders.OrderDate", <see cref="P:System.Windows.Forms.BindingMemberInfo.BindingPath" />
 
             
 
@@ -308,13 +280,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
+            >The <see cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
 
             
 
-             strings are compared with a culture setting of <see
-             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+             strings are compared with a culture setting of <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
 
             
 
@@ -324,8 +294,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified object is equal to this <see
-             cref="T:System.Windows.Forms.BindingMemberInfo" />
+            >Determines whether the specified object is equal to this <see cref="T:System.Windows.Forms.BindingMemberInfo" />
 
             
 
@@ -335,18 +304,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="otherObject" />
+            >true if <paramref name="otherObject" />
 
             
 
-             is a <see
-             cref="T:System.Windows.Forms.BindingMemberInfo" />
+             is a <see cref="T:System.Windows.Forms.BindingMemberInfo" />
 
             
 
-             and both <see
-             cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
+             and both <see cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
 
             
 
@@ -354,7 +320,11 @@
           >
         </returns>
         <param name="otherObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -378,8 +348,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the hash code for this <see
-             cref="T:System.Windows.Forms.BindingMemberInfo" />
+            >Returns the hash code for this <see cref="T:System.Windows.Forms.BindingMemberInfo" />
 
             
 
@@ -389,8 +358,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hash code for this <see
-             cref="T:System.Windows.Forms.BindingMemberInfo" />
+            >The hash code for this <see cref="T:System.Windows.Forms.BindingMemberInfo" />
 
             
 
@@ -424,8 +392,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether two <see
-             cref="T:System.Windows.Forms.BindingMemberInfo" />
+            >Determines whether two <see cref="T:System.Windows.Forms.BindingMemberInfo" />
 
             
 
@@ -435,18 +402,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
+            >true if the <see cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
 
             
 
-             strings for <paramref
-             name="a" />
+             strings for <paramref name="a" />
 
             
 
-             and <paramref
-             name="b" />
+             and <paramref name="b" />
 
             
 
@@ -454,24 +418,30 @@
           >
         </returns>
         <param name="a">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first <see
-           cref="T:System.Windows.Forms.BindingMemberInfo" />
+          The first <see cref="T:System.Windows.Forms.BindingMemberInfo" />
 
           
 
            to compare for equality.</param
         >
         <param name="b">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The second <see
-           cref="T:System.Windows.Forms.BindingMemberInfo" />
+          The second <see cref="T:System.Windows.Forms.BindingMemberInfo" />
 
           
 
@@ -500,8 +470,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether two <see
-             cref="T:System.Windows.Forms.BindingMemberInfo" />
+            >Determines whether two <see cref="T:System.Windows.Forms.BindingMemberInfo" />
 
             
 
@@ -511,18 +480,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
+            >true if the <see cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
 
             
 
-             strings for <paramref
-             name="a" />
+             strings for <paramref name="a" />
 
             
 
-             and <paramref
-             name="b" />
+             and <paramref name="b" />
 
             
 
@@ -530,24 +496,30 @@
           >
         </returns>
         <param name="a">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first <see
-           cref="T:System.Windows.Forms.BindingMemberInfo" />
+          The first <see cref="T:System.Windows.Forms.BindingMemberInfo" />
 
           
 
            to compare for inequality.</param
         >
         <param name="b">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The second <see
-           cref="T:System.Windows.Forms.BindingMemberInfo" />
+          The second <see cref="T:System.Windows.Forms.BindingMemberInfo" />
 
           
 

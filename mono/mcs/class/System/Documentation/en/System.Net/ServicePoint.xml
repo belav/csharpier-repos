@@ -29,13 +29,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.ServicePoint" />
+        >The <see cref="T:System.Net.ServicePoint" />
 
         
 
-         class handles connections to an Internet resource based on the host information passed in the resource's Uniform Resource Identifier (URI). The initial connection to the resource determines the information that the <see
-         cref="T:System.Net.ServicePoint" />
+         class handles connections to an Internet resource based on the host information passed in the resource's Uniform Resource Identifier (URI). The initial connection to the resource determines the information that the <see cref="T:System.Net.ServicePoint" />
 
         
 
@@ -46,79 +44,65 @@
 
         
 
-         objects are managed by the <see
-         cref="T:System.Net.ServicePointManager" />
+         objects are managed by the <see cref="T:System.Net.ServicePointManager" />
 
         
 
-         class and are created, if necessary, by the <see
-         cref="Overload:System.Net.ServicePointManager.FindServicePoint" />
+         class and are created, if necessary, by the <see cref="Overload:System.Net.ServicePointManager.FindServicePoint" />
 
         
 
-         method. <see
-         cref="T:System.Net.ServicePoint" />
+         method. <see cref="T:System.Net.ServicePoint" />
 
         
 
-         objects are never created directly but are always created and managed by the <see
-         cref="T:System.Net.ServicePointManager" />
+         objects are never created directly but are always created and managed by the <see cref="T:System.Net.ServicePointManager" />
 
         
 
-         class. The maximum number of <see
-         cref="T:System.Net.ServicePoint" />
+         class. The maximum number of <see cref="T:System.Net.ServicePoint" />
 
         
 
-         objects that can be created is set by the <see
-         cref="P:System.Net.ServicePointManager.MaxServicePoints" />
+         objects that can be created is set by the <see cref="P:System.Net.ServicePointManager.MaxServicePoints" />
 
         
 
          property.</para
       >
       <para
-        >Each <see
-         cref="T:System.Net.ServicePoint" />
+        >Each <see cref="T:System.Net.ServicePoint" />
 
         
 
-         object maintains its connection to an Internet resource until it has been idle longer than the time specified in the <see
-         cref="P:System.Net.ServicePoint.MaxIdleTime" />
+         object maintains its connection to an Internet resource until it has been idle longer than the time specified in the <see cref="P:System.Net.ServicePoint.MaxIdleTime" />
 
         
 
-         property. When a <see
-         cref="T:System.Net.ServicePoint" />
+         property. When a <see cref="T:System.Net.ServicePoint" />
 
         
 
-         exceeds the <see
-         cref="P:System.Net.ServicePoint.MaxIdleTime" />
+         exceeds the <see cref="P:System.Net.ServicePoint.MaxIdleTime" />
 
         
 
-         value, it can be recycled to another connection. The default value of <see
-         cref="P:System.Net.ServicePoint.MaxIdleTime" />
+         value, it can be recycled to another connection. The default value of <see cref="P:System.Net.ServicePoint.MaxIdleTime" />
 
         
 
-         is set by the <see
-         cref="P:System.Net.ServicePointManager.MaxServicePointIdleTime" />
+         is set by the <see cref="P:System.Net.ServicePointManager.MaxServicePointIdleTime" />
 
         
 
          property.</para
       >
       <para
-        >When the <see
-         cref="P:System.Net.ServicePoint.ConnectionLeaseTimeout" />
+        >When the <see cref="P:System.Net.ServicePoint.ConnectionLeaseTimeout" />
 
         
 
-         property is set to a value other than -1, and after the specified time elapses, an active <see
-         cref="T:System.Net.ServicePoint" />
+         property is set to a value other than -1, and after the specified time elapses, an active <see cref="T:System.Net.ServicePoint" />
 
         
 
@@ -127,7 +111,6 @@
       <block subset="none" type="note">
         <para
           >In high load conditions, some applications may run out of free threads in the ThreadPool, which may lead to poor system performance (such as high and variable transaction times). See <see
-
             cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dnpag/html/scalenetchapt17.asp"
             >http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dnpag/html/scalenetchapt17.asp</see
           >
@@ -165,28 +148,24 @@
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.Uri" />
+            > A <see cref="T:System.Uri" />
 
             
 
              instance
-   representing the URI specified at the time the current instance was constructed <see
-             langword="." />
+   representing the URI specified at the time the current instance was constructed <see langword="." />
           </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>
           <para>
             <block subset="none" type="note"
-              >The <see
-               cref="P:System.Uri.Host" />
+              >The <see cref="P:System.Uri.Host" />
 
               
 
                property
-   of the <see
-               cref="T:System.Uri" />
+   of the <see cref="T:System.Uri" />
 
               
 
@@ -197,8 +176,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the Uniform Resource Identifier (URI) of the server that this <see
-             cref="T:System.Net.ServicePoint" />
+            >Gets the Uniform Resource Identifier (URI) of the server that this <see cref="T:System.Net.ServicePoint" />
 
             
 
@@ -230,18 +208,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Some load balancing techniques require a client to use a specific local IP address and port number, rather than <see
-             cref="F:System.Net.IPAddress.Any" />
+            >Some load balancing techniques require a client to use a specific local IP address and port number, rather than <see cref="F:System.Net.IPAddress.Any" />
 
             
 
-             (or <see
-             cref="F:System.Net.IPAddress.IPv6Any" />
+             (or <see cref="F:System.Net.IPAddress.IPv6Any" />
 
             
 
-             for Internet Protocol Version 6) and an ephemeral port. Your <see
-             cref="P:System.Net.ServicePoint.BindIPEndPointDelegate" />
+             for Internet Protocol Version 6) and an ephemeral port. Your <see cref="P:System.Net.ServicePoint.BindIPEndPointDelegate" />
 
             
 
@@ -251,13 +226,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the delegate to associate a local <see
-             cref="T:System.Net.IPEndPoint" />
+            >Specifies the delegate to associate a local <see cref="T:System.Net.IPEndPoint" />
 
             
 
-             with a <see
-             cref="T:System.Net.ServicePoint" />
+             with a <see cref="T:System.Net.ServicePoint" />
 
             
 
@@ -289,8 +262,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although a <see
-             cref="T:System.Net.ServicePoint" />
+            >Although a <see cref="T:System.Net.ServicePoint" />
 
             
 
@@ -300,8 +272,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the certificate received for this <see
-             cref="T:System.Net.ServicePoint" />
+            >Gets the certificate received for this <see cref="T:System.Net.ServicePoint" />
 
             
 
@@ -365,8 +336,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified connection group from this <see
-             cref="T:System.Net.ServicePoint" />
+            >Removes the specified connection group from this <see cref="T:System.Net.ServicePoint" />
 
             
 
@@ -376,8 +346,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Boolean" />
+            >A <see cref="T:System.Boolean" />
 
             
 
@@ -385,7 +354,11 @@
           >
         </returns>
         <param name="connectionGroupName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -414,62 +387,52 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this property to ensure that a <see
-             cref="T:System.Net.ServicePoint" />
+            >You can use this property to ensure that a <see cref="T:System.Net.ServicePoint" />
 
             
 
              object's active connections do not remain open indefinitely. This property is intended for scenarios where connections should be dropped and reestablished periodically, such as load balancing scenarios.</para
           >
           <para
-            >By default, when <see
-             cref="P:System.Net.FtpWebRequest.KeepAlive" />
+            >By default, when <see cref="P:System.Net.FtpWebRequest.KeepAlive" />
 
             
 
-             is true for a request, the <see
-             cref="P:System.Net.ServicePoint.MaxIdleTime" />
+             is true for a request, the <see cref="P:System.Net.ServicePoint.MaxIdleTime" />
 
             
 
-             property sets the time-out for closing <see
-             cref="T:System.Net.ServicePoint" />
+             property sets the time-out for closing <see cref="T:System.Net.ServicePoint" />
 
             
 
-             connections due to inactivity. If the <see
-             cref="T:System.Net.ServicePoint" />
+             connections due to inactivity. If the <see cref="T:System.Net.ServicePoint" />
 
             
 
-             has active connections, <see
-             cref="P:System.Net.ServicePoint.MaxIdleTime" />
+             has active connections, <see cref="P:System.Net.ServicePoint.MaxIdleTime" />
 
             
 
              has no effect and the connections remain open indefinitely. </para
           >
           <para
-            >When the <see
-             cref="P:System.Net.ServicePoint.ConnectionLeaseTimeout" />
+            >When the <see cref="P:System.Net.ServicePoint.ConnectionLeaseTimeout" />
 
             
 
-             property is set to a value other than -1, and after the specified time elapses, an active <see
-             cref="T:System.Net.ServicePoint" />
+             property is set to a value other than -1, and after the specified time elapses, an active <see cref="T:System.Net.ServicePoint" />
 
             
 
-             connection is closed after servicing a request by setting <see
-             cref="P:System.Net.FtpWebRequest.KeepAlive" />
+             connection is closed after servicing a request by setting <see cref="P:System.Net.FtpWebRequest.KeepAlive" />
 
             
 
              to false in that request.</para
           >
           <para
-            >Setting this value affects all connections managed by the <see
-             cref="T:System.Net.ServicePoint" />
+            >Setting this value affects all connections managed by the <see cref="T:System.Net.ServicePoint" />
 
             
 
@@ -479,8 +442,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the number of milliseconds after which an active <see
-             cref="T:System.Net.ServicePoint" />
+            >Gets or sets the number of milliseconds after which an active <see cref="T:System.Net.ServicePoint" />
 
             
 
@@ -509,14 +471,12 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
              containing the 
-   maximum number of simultaneous connections allowed on the current <see
-             cref="T:System.Net.ServicePoint" />
+   maximum number of simultaneous connections allowed on the current <see cref="T:System.Net.ServicePoint" />
 
             
 
@@ -529,38 +489,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.ServicePoint.ConnectionLimit" />
+            >The <see cref="P:System.Net.ServicePoint.ConnectionLimit" />
 
             
 
-             property sets the maximum number of connections that the <see
-             cref="T:System.Net.ServicePoint" />
+             property sets the maximum number of connections that the <see cref="T:System.Net.ServicePoint" />
 
             
 
-             object can make to an Internet resource. The value of the <see
-             cref="P:System.Net.ServicePoint.ConnectionLimit" />
+             object can make to an Internet resource. The value of the <see cref="P:System.Net.ServicePoint.ConnectionLimit" />
 
             
 
-             property is set to the value of the <see
-             cref="P:System.Net.ServicePointManager.DefaultConnectionLimit" />
+             property is set to the value of the <see cref="P:System.Net.ServicePointManager.DefaultConnectionLimit" />
 
             
 
-             property when the <see
-             cref="T:System.Net.ServicePoint" />
+             property when the <see cref="T:System.Net.ServicePoint" />
 
             
 
-             object is created; subsequent changes to <see
-             cref="P:System.Net.ServicePointManager.DefaultConnectionLimit" />
+             object is created; subsequent changes to <see cref="P:System.Net.ServicePointManager.DefaultConnectionLimit" />
 
             
 
-             have no effect on existing <see
-             cref="T:System.Net.ServicePoint" />
+             have no effect on existing <see cref="T:System.Net.ServicePoint" />
 
             
 
@@ -570,8 +523,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the maximum number of connections allowed on this <see
-             cref="T:System.Net.ServicePoint" />
+            >Gets or sets the maximum number of connections allowed on this <see cref="T:System.Net.ServicePoint" />
 
             
 
@@ -601,19 +553,16 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
              containing the 
-   value of the <see
-             cref="P:System.Net.WebRequest.ConnectionGroupName" />
+   value of the <see cref="P:System.Net.WebRequest.ConnectionGroupName" />
 
             
 
-             property of the <see
-             cref="T:System.Net.WebRequest" />
+             property of the <see cref="T:System.Net.WebRequest" />
 
             
 
@@ -625,71 +574,58 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Net.ServicePoint" />
+            >If the <see cref="T:System.Net.ServicePoint" />
 
             
 
-             object was constructed with a <see
-             cref="T:System.Uri" />
+             object was constructed with a <see cref="T:System.Uri" />
 
             
 
-             object (the <see
-             cref="M:System.Net.ServicePointManager.FindServicePoint(System.Uri)" />
+             object (the <see cref="M:System.Net.ServicePointManager.FindServicePoint(System.Uri)" />
 
             
 
-             or <see
-             cref="M:System.Net.ServicePointManager.FindServicePoint(System.Uri,System.Net.IWebProxy)" />
+             or <see cref="M:System.Net.ServicePointManager.FindServicePoint(System.Uri,System.Net.IWebProxy)" />
 
             
 
-             methods, for example), then the <see
-             cref="P:System.Net.ServicePoint.ConnectionName" />
+             methods, for example), then the <see cref="P:System.Net.ServicePoint.ConnectionName" />
 
             
 
-             property represents the <see
-             cref="P:System.Uri.Scheme" />
+             property represents the <see cref="P:System.Uri.Scheme" />
 
             
 
-             property of the <see
-             cref="T:System.Uri" />
+             property of the <see cref="T:System.Uri" />
 
             
 
              object used. </para
           >
           <para
-            >If the <see
-             cref="T:System.Net.ServicePoint" />
+            >If the <see cref="T:System.Net.ServicePoint" />
 
             
 
-             object was constructed from a network host and port, the <see
-             cref="P:System.Net.ServicePoint.ConnectionName" />
+             object was constructed from a network host and port, the <see cref="P:System.Net.ServicePoint.ConnectionName" />
 
             
 
-             property contains a string that represents the host and the network port. If the <see
-             cref="P:System.Net.ServicePoint.ConnectionName" />
+             property contains a string that represents the host and the network port. If the <see cref="P:System.Net.ServicePoint.ConnectionName" />
 
             
 
-             property is set when constructed from a host and port, only <see
-             cref="T:System.Net.WebRequest" />
+             property is set when constructed from a host and port, only <see cref="T:System.Net.WebRequest" />
 
             
 
-             objects with the same <see
-             cref="P:System.Net.WebRequest.ConnectionGroupName" />
+             objects with the same <see cref="P:System.Net.WebRequest.ConnectionGroupName" />
 
             
 
-             value can use this <see
-             cref="T:System.Net.ServicePoint" />
+             value can use this <see cref="T:System.Net.ServicePoint" />
 
             
 
@@ -721,10 +657,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >
- A <see
-           cref="T:System.Int32" />
+        <value>
+ A <see cref="T:System.Int32" />
 
           
 
@@ -735,23 +669,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.ServicePoint.CurrentConnections" />
+            >The <see cref="P:System.Net.ServicePoint.CurrentConnections" />
 
             
 
-             property contains the number of open Internet connections associated with this <see
-             cref="T:System.Net.ServicePoint" />
+             property contains the number of open Internet connections associated with this <see cref="T:System.Net.ServicePoint" />
 
             
 
-             object. The value of <see
-             cref="P:System.Net.ServicePoint.CurrentConnections" />
+             object. The value of <see cref="P:System.Net.ServicePoint.CurrentConnections" />
 
             
 
-             cannot exceed that of <see
-             cref="P:System.Net.ServicePoint.ConnectionLimit" />
+             cannot exceed that of <see cref="P:System.Net.ServicePoint.ConnectionLimit" />
 
             
 
@@ -761,8 +691,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of open connections associated with this <see
-             cref="T:System.Net.ServicePoint" />
+            >Gets the number of open connections associated with this <see cref="T:System.Net.ServicePoint" />
 
             
 
@@ -790,16 +719,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>When this property is set to true, client requests that use the POST method expect to receive a 100-Continue response from the server to indicate that the client should send the data to be posted. This mechanism allows clients to avoid sending large amounts of data over the network when the server, based on the request headers, intends to reject the request.</para>
           <para
-            >For example, assume the <see
-             cref="P:System.Net.ServicePoint.Expect100Continue" />
+            >For example, assume the <see cref="P:System.Net.ServicePoint.Expect100Continue" />
 
             
 
              property is false. When the request is sent to the server, it includes the data. If, after reading the request headers, the server requires authentication and sends a 401 response, the client must resend the data with proper authentication headers.</para
           >
           <para
-            >If the <see
-             cref="P:System.Net.ServicePoint.Expect100Continue" />
+            >If the <see cref="P:System.Net.ServicePoint.Expect100Continue" />
 
             
 
@@ -811,8 +738,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Boolean" />
+            >Gets or sets a <see cref="T:System.Boolean" />
 
             
 
@@ -836,8 +762,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.ServicePoint.GetHashCode" />
+            >The <see cref="M:System.Net.ServicePoint.GetHashCode" />
 
             
 
@@ -847,8 +772,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a hash value for a <see
-             cref="T:System.Net.ServicePoint" />
+            >Returns a hash value for a <see cref="T:System.Net.ServicePoint" />
 
             
 
@@ -888,14 +812,12 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.DateTime" />
+            >A <see cref="T:System.DateTime" />
 
             
 
              instance
-   containing the date and time at which the <see
-             cref="T:System.Net.ServicePoint" />
+   containing the date and time at which the <see cref="T:System.Net.ServicePoint" />
 
             
 
@@ -906,23 +828,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.ServicePoint.IdleSince" />
+            >The <see cref="P:System.Net.ServicePoint.IdleSince" />
 
             
 
-             property records the last date and time at which a service point was disconnected from a host. When the difference between the current time and <see
-             cref="P:System.Net.ServicePoint.IdleSince" />
+             property records the last date and time at which a service point was disconnected from a host. When the difference between the current time and <see cref="P:System.Net.ServicePoint.IdleSince" />
 
             
 
-             exceeds the value of <see
-             cref="P:System.Net.ServicePoint.MaxIdleTime" />
+             exceeds the value of <see cref="P:System.Net.ServicePoint.MaxIdleTime" />
 
             
 
-            , the <see
-             cref="T:System.Net.ServicePoint" />
+            , the <see cref="T:System.Net.ServicePoint" />
 
             
 
@@ -932,8 +850,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the date and time that the <see
-             cref="T:System.Net.ServicePoint" />
+            >Gets the date and time that the <see cref="T:System.Net.ServicePoint" />
 
             
 
@@ -963,18 +880,15 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
-             containing the number of milliseconds that a <see
-             cref="T:System.Net.ServicePoint" />
+             containing the number of milliseconds that a <see cref="T:System.Net.ServicePoint" />
 
             
 
-             can remain idle before it is released by the <see
-             cref="T:System.Net.ServicePointManager" />
+             can remain idle before it is released by the <see cref="T:System.Net.ServicePointManager" />
 
             
 
@@ -983,13 +897,11 @@ and subsequently freed.</para
           >
         </value>
         <exception cref="T:System.ArgumentOutOfRangeException"
-          >The value specified for a set operation is less than <see
-           cref="F:System.Threading.Timeout.Infinite" />
+          >The value specified for a set operation is less than <see cref="F:System.Threading.Timeout.Infinite" />
 
           
 
-           or greater than <see
-           cref="F:System.Int32.MaxValue" />
+           or greater than <see cref="F:System.Int32.MaxValue" />
 
           
 
@@ -998,59 +910,49 @@ and subsequently freed.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can set <see
-             cref="P:System.Net.ServicePoint.MaxIdleTime" />
+            >You can set <see cref="P:System.Net.ServicePoint.MaxIdleTime" />
 
             
 
-             to <see
-             cref="F:System.Threading.Timeout.Infinite" />
+             to <see cref="F:System.Threading.Timeout.Infinite" />
 
             
 
-             to indicate that a connection associated with the <see
-             cref="T:System.Net.ServicePoint" />
+             to indicate that a connection associated with the <see cref="T:System.Net.ServicePoint" />
 
             
 
              object should never time out.</para
           >
           <para
-            >The default value of the <see
-             cref="P:System.Net.ServicePoint.MaxIdleTime" />
+            >The default value of the <see cref="P:System.Net.ServicePoint.MaxIdleTime" />
 
             
 
-             property is the value of the <see
-             cref="P:System.Net.ServicePointManager.MaxServicePointIdleTime" />
+             property is the value of the <see cref="P:System.Net.ServicePointManager.MaxServicePointIdleTime" />
 
             
 
-             property when the <see
-             cref="T:System.Net.ServicePoint" />
+             property when the <see cref="T:System.Net.ServicePoint" />
 
             
 
-             object is created. Subsequent changes to the <see
-             cref="P:System.Net.ServicePointManager.MaxServicePointIdleTime" />
+             object is created. Subsequent changes to the <see cref="P:System.Net.ServicePointManager.MaxServicePointIdleTime" />
 
             
 
-             property have no effect on existing <see
-             cref="T:System.Net.ServicePoint" />
+             property have no effect on existing <see cref="T:System.Net.ServicePoint" />
 
             
 
              objects.</para
           >
           <para
-            >When the <see
-             cref="P:System.Net.ServicePoint.MaxIdleTime" />
+            >When the <see cref="P:System.Net.ServicePoint.MaxIdleTime" />
 
             
 
-             for a connection associated with a <see
-             cref="T:System.Net.ServicePoint" />
+             for a connection associated with a <see cref="T:System.Net.ServicePoint" />
 
             
 
@@ -1060,8 +962,7 @@ and subsequently freed.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the amount of time a connection associated with the <see
-             cref="T:System.Net.ServicePoint" />
+            >Gets or sets the amount of time a connection associated with the <see cref="T:System.Net.ServicePoint" />
 
             
 
@@ -1094,14 +995,12 @@ and subsequently freed.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Version" />
+            >A <see cref="T:System.Version" />
 
             
 
              instance
-   containing the version of the protocol used by the <see
-             cref="T:System.Net.ServicePoint" />
+   containing the version of the protocol used by the <see cref="T:System.Net.ServicePoint" />
 
             
 
@@ -1115,8 +1014,7 @@ and subsequently freed.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the version of the HTTP protocol that the <see
-             cref="T:System.Net.ServicePoint" />
+            >Gets the version of the HTTP protocol that the <see cref="T:System.Net.ServicePoint" />
 
             
 
@@ -1147,8 +1045,7 @@ and subsequently freed.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For additional information, see <see
-             cref="P:System.Net.Sockets.Socket.ReceiveBufferSize" />
+            >For additional information, see <see cref="P:System.Net.Sockets.Socket.ReceiveBufferSize" />
 
             
 
@@ -1158,8 +1055,7 @@ and subsequently freed.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the size of the receiving buffer for the socket used by this <see
-             cref="T:System.Net.ServicePoint" />
+            >Gets or sets the size of the receiving buffer for the socket used by this <see cref="T:System.Net.ServicePoint" />
 
             
 
@@ -1194,36 +1090,30 @@ and subsequently freed.</para
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An application can request that a TCP/IP provider enable the use of keep-alive packets on a TCP connection. The default is that the use of keep-alive packets on a TCP connection is disabled. </para>
           <para
-            >The default settings when a TCP socket is initialized sets the keep-alive timeout to 2 hours and the keep-alive interval to 1 second. The <paramref
-             name="keepAliveTime" />
+            >The default settings when a TCP socket is initialized sets the keep-alive timeout to 2 hours and the keep-alive interval to 1 second. The <paramref name="keepAliveTime" />
 
             
 
-             parameter specifies the timeout, in milliseconds, with no activity until the first keep-alive packet is sent. The <paramref
-             name="keepAliveInterval" />
+             parameter specifies the timeout, in milliseconds, with no activity until the first keep-alive packet is sent. The <paramref name="keepAliveInterval" />
 
             
 
              parameter specifies the interval, in milliseconds, between when successive keep-alive packets are sent if no acknowledgement is received. The number of keep-alive probes cannot be changed and is set to 10. </para
           >
           <para
-            >If a TCP connection is dropped as the result of keep-alives, a <see
-             cref="T:System.Net.Sockets.SocketError" />
+            >If a TCP connection is dropped as the result of keep-alives, a <see cref="T:System.Net.Sockets.SocketError" />
 
             
 
-             of <see
-             cref="F:System.Net.Sockets.SocketError.NetworkReset" />
+             of <see cref="F:System.Net.Sockets.SocketError.NetworkReset" />
 
             
 
-             is returned to any calls in progress on the socket, and any subsequent calls will fail with a <see
-             cref="T:System.Net.Sockets.SocketError" />
+             is returned to any calls in progress on the socket, and any subsequent calls will fail with a <see cref="T:System.Net.Sockets.SocketError" />
 
             
 
-             of <see
-             cref="F:System.Net.Sockets.SocketError.NotConnected" />
+             of <see cref="F:System.Net.Sockets.SocketError.NotConnected" />
 
             
 
@@ -1235,31 +1125,41 @@ and subsequently freed.</para
           <para>Enables or disables the keep-alive option on a TCP connection.</para>
         </summary>
         <param name="enabled">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          If set to true, then the TCP keep-alive option on a TCP connection will be enabled using the specified <paramref
-           name="keepAliveTime " />
+          If set to true, then the TCP keep-alive option on a TCP connection will be enabled using the specified <paramref name="keepAliveTime " />
 
           
 
-          and <paramref
-           name="keepAliveInterval" />
+          and <paramref name="keepAliveInterval" />
 
           
 
            values. </param
         >
         <param name="keepAliveTime">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Specifies the timeout, in milliseconds, with no activity until the first keep-alive packet is sent. </param
         >
         <param name="keepAliveInterval">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1291,14 +1191,12 @@ and subsequently freed.</para
 
             
 
-             if the <see
-             cref="T:System.Net.ServicePoint" />
+             if the <see cref="T:System.Net.ServicePoint" />
 
             
 
              supports pipelined connections;
-   otherwise, <see
-             langword="false" />
+   otherwise, <see langword="false" />
 
             
 
@@ -1313,8 +1211,7 @@ and subsequently freed.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the <see
-             cref="T:System.Net.ServicePoint" />
+            >Indicates whether the <see cref="T:System.Net.ServicePoint" />
 
             
 
@@ -1347,13 +1244,11 @@ and subsequently freed.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Boolean" />
+            >Gets or sets a <see cref="T:System.Boolean" />
 
             
 
-             value that determines whether the Nagle algorithm is used on connections managed by this <see
-             cref="T:System.Net.ServicePoint" />
+             value that determines whether the Nagle algorithm is used on connections managed by this <see cref="T:System.Net.ServicePoint" />
 
             
 

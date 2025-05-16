@@ -30,44 +30,37 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When two or more threads need to access a shared resource at the same time, the system needs a synchronization mechanism to ensure that only one thread at a time uses the resource. <see
-         cref="T:System.Threading.Mutex" />
+        >When two or more threads need to access a shared resource at the same time, the system needs a synchronization mechanism to ensure that only one thread at a time uses the resource. <see cref="T:System.Threading.Mutex" />
 
         
 
          is a synchronization primitive that grants exclusive access to the shared resource to only one thread. If a thread acquires a mutex, the second thread that wants to acquire that mutex is suspended until the first thread releases the mutex.</para
       >
       <para
-        >You can use the <see
-         cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+        >You can use the <see cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
 
         
 
-         method to request ownership of a mutex. The thread that owns a mutex can request the same mutex in repeated calls to <see
-         cref="Overload:System.Threading.WaitHandle.WaitOne" />
+         method to request ownership of a mutex. The thread that owns a mutex can request the same mutex in repeated calls to <see cref="Overload:System.Threading.WaitHandle.WaitOne" />
 
         
 
-         without blocking its execution. However, the thread must call the <see
-         cref="M:System.Threading.Mutex.ReleaseMutex" />
+         without blocking its execution. However, the thread must call the <see cref="M:System.Threading.Mutex.ReleaseMutex" />
 
         
 
-         method the same number of times to release ownership of the mutex. The <see
-         cref="T:System.Threading.Mutex" />
+         method the same number of times to release ownership of the mutex. The <see cref="T:System.Threading.Mutex" />
 
         
 
-         class enforces thread identity, so a mutex can be released only by the thread that acquired it. By contrast, the <see
-         cref="T:System.Threading.Semaphore" />
+         class enforces thread identity, so a mutex can be released only by the thread that acquired it. By contrast, the <see cref="T:System.Threading.Semaphore" />
 
         
 
          class does not enforce thread identity. </para
       >
       <para
-        >If a thread terminates while owning a mutex, the mutex is said to be abandoned. The state of the mutex is set to signaled, and the next waiting thread gets ownership. Beginning in version 2.0 of the .NET Framework, an <see
-         cref="T:System.Threading.AbandonedMutexException" />
+        >If a thread terminates while owning a mutex, the mutex is said to be abandoned. The state of the mutex is set to signaled, and the next waiting thread gets ownership. Beginning in version 2.0 of the .NET Framework, an <see cref="T:System.Threading.AbandonedMutexException" />
 
         
 
@@ -78,36 +71,30 @@
       </block>
       <para>In the case of a system-wide mutex, an abandoned mutex might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager).</para>
       <para
-        >Mutexes are of two types: local mutexes, which are unnamed, and named system mutexes. A local mutex exists only within your process. It can be used by any thread in your process that has a reference to the <see
-         cref="T:System.Threading.Mutex" />
+        >Mutexes are of two types: local mutexes, which are unnamed, and named system mutexes. A local mutex exists only within your process. It can be used by any thread in your process that has a reference to the <see cref="T:System.Threading.Mutex" />
 
         
 
-         object that represents the mutex. Each unnamed <see
-         cref="T:System.Threading.Mutex" />
+         object that represents the mutex. Each unnamed <see cref="T:System.Threading.Mutex" />
 
         
 
          object represents a separate local mutex.</para
       >
       <para
-        >Named system mutexes are visible throughout the operating system, and can be used to synchronize the activities of processes. You can create a <see
-         cref="T:System.Threading.Mutex" />
+        >Named system mutexes are visible throughout the operating system, and can be used to synchronize the activities of processes. You can create a <see cref="T:System.Threading.Mutex" />
 
         
 
-         object that represents a named system mutex by using a constructor that accepts a name. The operating-system object can be created at the same time, or it can exist before the creation of the <see
-         cref="T:System.Threading.Mutex" />
+         object that represents a named system mutex by using a constructor that accepts a name. The operating-system object can be created at the same time, or it can exist before the creation of the <see cref="T:System.Threading.Mutex" />
 
         
 
-         object. You can create multiple <see
-         cref="T:System.Threading.Mutex" />
+         object. You can create multiple <see cref="T:System.Threading.Mutex" />
 
         
 
-         objects that represent the same named system mutex, and you can use the <see
-         cref="Overload:System.Threading.Mutex.OpenExisting" />
+         objects that represent the same named system mutex, and you can use the <see cref="Overload:System.Threading.Mutex.OpenExisting" />
 
         
 
@@ -146,8 +133,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling this constructor overload is the same as calling the <see
-             cref="M:System.Threading.Mutex.#ctor(System.Boolean)" />
+            >Calling this constructor overload is the same as calling the <see cref="M:System.Threading.Mutex.#ctor(System.Boolean)" />
 
             
 
@@ -157,8 +143,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.Mutex" />
+            >Initializes a new instance of the <see cref="T:System.Threading.Mutex" />
 
             
 
@@ -193,8 +178,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.Mutex" />
+            >Initializes a new instance of the <see cref="T:System.Threading.Mutex" />
 
             
 
@@ -202,7 +186,11 @@
           >
         </summary>
         <param name="initiallyOwned">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -236,67 +224,56 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="name" />
+            >If <paramref name="name" />
 
             
 
-             is not null and <paramref
-             name="initiallyOwned" />
+             is not null and <paramref name="initiallyOwned" />
 
             
 
-             is true, the calling thread owns the mutex only if the named system mutex was created as a result of this call. Since there is no mechanism for determining whether the named system mutex was created, it is better to specify false for <paramref
-             name="initiallyOwned" />
+             is true, the calling thread owns the mutex only if the named system mutex was created as a result of this call. Since there is no mechanism for determining whether the named system mutex was created, it is better to specify false for <paramref name="initiallyOwned" />
 
             
 
-             when calling this constructor overload. You can use the <see
-             cref="M:System.Threading.Mutex.#ctor(System.Boolean,System.String,System.Boolean@)" />
+             when calling this constructor overload. You can use the <see cref="M:System.Threading.Mutex.#ctor(System.Boolean,System.String,System.Boolean@)" />
 
             
 
              constructor if you need to determine initial ownership.</para
           >
           <para
-            >This constructor initializes a <see
-             cref="T:System.Threading.Mutex" />
+            >This constructor initializes a <see cref="T:System.Threading.Mutex" />
 
             
 
-             object that represents a named system mutex. You can create multiple <see
-             cref="T:System.Threading.Mutex" />
+             object that represents a named system mutex. You can create multiple <see cref="T:System.Threading.Mutex" />
 
             
 
              objects that represent the same named system mutex.</para
           >
           <para
-            >If the named mutex has already been created with access control security, and the caller does not have <see
-             cref="F:System.Security.AccessControl.MutexRights.FullControl" />
+            >If the named mutex has already been created with access control security, and the caller does not have <see cref="F:System.Security.AccessControl.MutexRights.FullControl" />
 
             
 
-            , an exception is thrown. To open an existing named mutex with only those permissions needed for synchronizing thread activities, see the <see
-             cref="Overload:System.Threading.Mutex.OpenExisting" />
+            , an exception is thrown. To open an existing named mutex with only those permissions needed for synchronizing thread activities, see the <see cref="Overload:System.Threading.Mutex.OpenExisting" />
 
             
 
              method.</para
           >
           <para
-            >If you specify null or an empty string for <paramref
-             name="name" />
+            >If you specify null or an empty string for <paramref name="name" />
 
             
 
-            , a local mutex is created, as if you had called the <see
-             cref="M:System.Threading.Mutex.#ctor(System.Boolean)" />
+            , a local mutex is created, as if you had called the <see cref="M:System.Threading.Mutex.#ctor(System.Boolean)" />
 
             
 
-             constructor. In this case, <paramref
-             name="createdNew" />
+             constructor. In this case, <paramref name="createdNew" />
 
             
 
@@ -310,8 +287,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.Mutex" />
+            >Initializes a new instance of the <see cref="T:System.Threading.Mutex" />
 
             
 
@@ -319,24 +295,30 @@
           >
         </summary>
         <param name="initiallyOwned">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to give the calling thread initial ownership of the named system mutex if the named system mutex is created as a result of this call; otherwise, false. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Threading.Mutex" />
+          The name of the <see cref="T:System.Threading.Mutex" />
 
           
 
-          . If the value is null, the <see
-           cref="T:System.Threading.Mutex" />
+          . If the value is null, the <see cref="T:System.Threading.Mutex" />
 
           
 
@@ -436,36 +418,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Threading.Mutex.GetAccessControl" />
+            >The <see cref="M:System.Threading.Mutex.GetAccessControl" />
 
             
 
-             method uses the following combination of flags (combined using the bitwise OR operation) to search for permissions: <see
-             cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+             method uses the following combination of flags (combined using the bitwise OR operation) to search for permissions: <see cref="F:System.Security.AccessControl.AccessControlSections.Access" />
 
             
 
-            , <see
-             cref="F:System.Security.AccessControl.AccessControlSections.Owner" />
+            , <see cref="F:System.Security.AccessControl.AccessControlSections.Owner" />
 
             
 
-            , and <see
-             cref="F:System.Security.AccessControl.AccessControlSections.Group" />
+            , and <see cref="F:System.Security.AccessControl.AccessControlSections.Group" />
 
             
 
             .</para
           >
           <para
-            >The user must have <see
-             cref="F:System.Security.AccessControl.MutexRights.ReadPermissions" />
+            >The user must have <see cref="F:System.Security.AccessControl.MutexRights.ReadPermissions" />
 
             
 
-             to call this method, and the mutex must have been opened with <see
-             cref="F:System.Security.AccessControl.MutexRights.ReadPermissions" />
+             to call this method, and the mutex must have been opened with <see cref="F:System.Security.AccessControl.MutexRights.ReadPermissions" />
 
             
 
@@ -475,8 +451,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Security.AccessControl.MutexSecurity" />
+            >Gets a <see cref="T:System.Security.AccessControl.MutexSecurity" />
 
             
 
@@ -486,8 +461,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.AccessControl.MutexSecurity" />
+            >A <see cref="T:System.Security.AccessControl.MutexSecurity" />
 
             
 
@@ -521,67 +495,56 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="Overload:System.Threading.Mutex.OpenExisting" />
+            >The <see cref="Overload:System.Threading.Mutex.OpenExisting" />
 
             
 
-             method tries to open the specified named system mutex. If the system mutex does not exist, this method throws an exception instead of creating the system object. To create the system mutex when it does not already exist, use one of the <see
-             cref="M:System.Threading.Mutex.#ctor(System.Boolean,System.String)" />
+             method tries to open the specified named system mutex. If the system mutex does not exist, this method throws an exception instead of creating the system object. To create the system mutex when it does not already exist, use one of the <see cref="M:System.Threading.Mutex.#ctor(System.Boolean,System.String)" />
 
             
 
-             constructors that has a <paramref
-             name="name" />
+             constructors that has a <paramref name="name" />
 
             
 
              parameter.</para
           >
           <para
-            >Multiple calls to this method that use the same value for <paramref
-             name="name" />
+            >Multiple calls to this method that use the same value for <paramref name="name" />
 
             
 
-             do not necessarily return the same <see
-             cref="T:System.Threading.Mutex" />
+             do not necessarily return the same <see cref="T:System.Threading.Mutex" />
 
             
 
              object, even though the objects that are returned represent the same named system mutex. </para
           >
           <para
-            >This method overload is equivalent to calling the <see
-             cref="M:System.Threading.Mutex.OpenExisting(System.String,System.Security.AccessControl.MutexRights)" />
+            >This method overload is equivalent to calling the <see cref="M:System.Threading.Mutex.OpenExisting(System.String,System.Security.AccessControl.MutexRights)" />
 
             
 
-             method overload and specifying <see
-             cref="F:System.Security.AccessControl.MutexRights.Synchronize" />
+             method overload and specifying <see cref="F:System.Security.AccessControl.MutexRights.Synchronize" />
 
             
 
-             and <see
-             cref="F:System.Security.AccessControl.MutexRights.Modify" />
+             and <see cref="F:System.Security.AccessControl.MutexRights.Modify" />
 
             
 
              rights, combined by using the bitwise OR operation. </para
           >
           <para
-            >Specifying the <see
-             cref="F:System.Security.AccessControl.MutexRights.Synchronize" />
+            >Specifying the <see cref="F:System.Security.AccessControl.MutexRights.Synchronize" />
 
             
 
-             flag allows a thread to wait on the mutex, and specifying the <see
-             cref="F:System.Security.AccessControl.MutexRights.Modify" />
+             flag allows a thread to wait on the mutex, and specifying the <see cref="F:System.Security.AccessControl.MutexRights.Modify" />
 
             
 
-             flag allows a thread to call the <see
-             cref="M:System.Threading.Mutex.ReleaseMutex" />
+             flag allows a thread to call the <see cref="M:System.Threading.Mutex.ReleaseMutex" />
 
             
 
@@ -598,7 +561,11 @@
           <para>An object that represents the named system mutex.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -632,54 +599,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="rights" />
+            >The <paramref name="rights" />
 
             
 
-             parameter must include the <see
-             cref="F:System.Security.AccessControl.MutexRights.Synchronize" />
+             parameter must include the <see cref="F:System.Security.AccessControl.MutexRights.Synchronize" />
 
             
 
-             flag to allow threads to wait on the mutex, and the <see
-             cref="F:System.Security.AccessControl.MutexRights.Modify" />
+             flag to allow threads to wait on the mutex, and the <see cref="F:System.Security.AccessControl.MutexRights.Modify" />
 
             
 
-             flag to allow threads to call the <see
-             cref="M:System.Threading.Mutex.ReleaseMutex" />
+             flag to allow threads to call the <see cref="M:System.Threading.Mutex.ReleaseMutex" />
 
             
 
              method. </para
           >
           <para
-            >The <see
-             cref="Overload:System.Threading.Mutex.OpenExisting" />
+            >The <see cref="Overload:System.Threading.Mutex.OpenExisting" />
 
             
 
-             method tries to open an existing named mutex. If the system mutex does not exist, this method throws an exception instead of creating the system object. To create the system mutex when it does not already exist, use one of the <see
-             cref="M:System.Threading.Mutex.#ctor(System.Boolean,System.String)" />
+             method tries to open an existing named mutex. If the system mutex does not exist, this method throws an exception instead of creating the system object. To create the system mutex when it does not already exist, use one of the <see cref="M:System.Threading.Mutex.#ctor(System.Boolean,System.String)" />
 
             
 
-             constructors that has a <paramref
-             name="name" />
+             constructors that has a <paramref name="name" />
 
             
 
              parameter.</para
           >
           <para
-            >Multiple calls to this method that use the same value for <paramref
-             name="name" />
+            >Multiple calls to this method that use the same value for <paramref name="name" />
 
             
 
-             do not necessarily return the same <see
-             cref="T:System.Threading.Mutex" />
+             do not necessarily return the same <see cref="T:System.Threading.Mutex" />
 
             
 
@@ -696,14 +654,22 @@
           <para>An object that represents the named system mutex.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the system mutex to open.</param
         >
         <param name="rights">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -736,16 +702,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A thread that owns a mutex can specify the same mutex in repeated wait function calls without blocking its execution. The number of calls is kept by the common language runtime. The thread must call <see
-             cref="M:System.Threading.Mutex.ReleaseMutex" />
+            >A thread that owns a mutex can specify the same mutex in repeated wait function calls without blocking its execution. The number of calls is kept by the common language runtime. The thread must call <see cref="M:System.Threading.Mutex.ReleaseMutex" />
 
             
 
              the same number of times to release ownership of the mutex. </para
           >
           <para
-            >If a thread terminates while owning a mutex, the mutex is said to be abandoned. The state of the mutex is set to signaled and the next waiting thread gets ownership. If no one owns the mutex, the state of the mutex is signaled. Beginning in version 2.0 of the .NET Framework, an <see
-             cref="T:System.Threading.AbandonedMutexException" />
+            >If a thread terminates while owning a mutex, the mutex is said to be abandoned. The state of the mutex is set to signaled and the next waiting thread gets ownership. If no one owns the mutex, the state of the mutex is signaled. Beginning in version 2.0 of the .NET Framework, an <see cref="T:System.Threading.AbandonedMutexException" />
 
             
 
@@ -759,8 +723,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the <see
-             cref="T:System.Threading.Mutex" />
+            >Releases the <see cref="T:System.Threading.Mutex" />
 
             
 
@@ -794,13 +757,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The user must have <see
-             cref="F:System.Security.AccessControl.MutexRights.ChangePermissions" />
+            >The user must have <see cref="F:System.Security.AccessControl.MutexRights.ChangePermissions" />
 
             
 
-             rights to call this method, and the mutex must have been opened with <see
-             cref="F:System.Security.AccessControl.MutexRights.ChangePermissions" />
+             rights to call this method, and the mutex must have been opened with <see cref="F:System.Security.AccessControl.MutexRights.ChangePermissions" />
 
             
 
@@ -812,12 +773,15 @@
           <para>Sets the access control security for a named system mutex.</para>
         </summary>
         <param name="mutexSecurity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.AccessControl.MutexSecurity" />
+          A <see cref="T:System.Security.AccessControl.MutexSecurity" />
 
           
 

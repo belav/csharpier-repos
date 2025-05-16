@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A standard endpoint with a fixed contract (<see
-         cref="T:System.ServiceModel.Description.IMetadataExchange" />
+        >A standard endpoint with a fixed contract (<see cref="T:System.ServiceModel.Description.IMetadataExchange" />
 
         
 
@@ -50,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" />
+            >Creates and initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" />
 
             
 
@@ -82,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" />
+            >Creates and initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" />
 
             
 
@@ -116,8 +113,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" />
+            >Creates and initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" />
 
             
 

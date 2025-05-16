@@ -48,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.Tasks.ConcurrentExclusiveSchedulerPair" />
+            >Initializes a new instance of the <see cref="T:System.Threading.Tasks.ConcurrentExclusiveSchedulerPair" />
 
             
 
@@ -79,8 +78,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.Tasks.ConcurrentExclusiveSchedulerPair" />
+            >Initializes a new instance of the <see cref="T:System.Threading.Tasks.ConcurrentExclusiveSchedulerPair" />
 
             
 
@@ -88,7 +86,11 @@
           >
         </summary>
         <param name="taskScheduler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -118,8 +120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.Tasks.ConcurrentExclusiveSchedulerPair" />
+            >Initializes a new instance of the <see cref="T:System.Threading.Tasks.ConcurrentExclusiveSchedulerPair" />
 
             
 
@@ -127,14 +128,22 @@
           >
         </summary>
         <param name="taskScheduler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The target scheduler on which this pair should execute.</param
         >
         <param name="maxConcurrencyLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -165,8 +174,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.Tasks.ConcurrentExclusiveSchedulerPair" />
+            >Initializes a new instance of the <see cref="T:System.Threading.Tasks.ConcurrentExclusiveSchedulerPair" />
 
             
 
@@ -174,21 +182,33 @@
           >
         </summary>
         <param name="taskScheduler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The target scheduler on which this pair should execute.</param
         >
         <param name="maxConcurrencyLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The maximum number of tasks to run concurrently.</param
         >
         <param name="maxItemsPerTask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -214,13 +234,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling <see
-             cref="M:System.Threading.Tasks.ConcurrentExclusiveSchedulerPair.Complete" />
+            >Calling <see cref="M:System.Threading.Tasks.ConcurrentExclusiveSchedulerPair.Complete" />
 
             
 
-             is optional. It is necessary only if you're relying on the <see
-             cref="P:System.Threading.Tasks.ConcurrentExclusiveSchedulerPair.Completion" />
+             is optional. It is necessary only if you're relying on the <see cref="P:System.Threading.Tasks.ConcurrentExclusiveSchedulerPair.Completion" />
 
             
 
@@ -255,8 +273,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Threading.Tasks.Task" />
+            >Gets a <see cref="T:System.Threading.Tasks.Task" />
 
             
 
@@ -287,8 +304,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Threading.Tasks.TaskScheduler" />
+            >Gets a <see cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 
@@ -319,8 +335,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Threading.Tasks.TaskScheduler" />
+            >Gets a <see cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 

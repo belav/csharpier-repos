@@ -42,8 +42,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.Install.ManagedInstallerClass" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.Install.ManagedInstallerClass" />
 
             
 
@@ -70,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the functionality of the <format
-             type="text/html">
+            >Handles the functionality of the <format type="text/html">
               <a href="3f9d0533-f895-4897-b4ea-528284e0241d">Installer Tool (Installutil.exe)</a>
             </format>
 
@@ -81,7 +79,11 @@
           >
         </summary>
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -114,13 +116,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Configuration.Install.ManagedInstallerClass" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Configuration.Install.ManagedInstallerClass" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Configuration.Install.IManagedInstaller" />
+             instance is cast to an <see cref="T:System.Configuration.Install.IManagedInstaller" />
 
             
 
@@ -130,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Configuration.Install.IManagedInstaller.ManagedInstall(System.String,System.Int32)" />
+            >For a description of this member, see <see cref="M:System.Configuration.Install.IManagedInstaller.ManagedInstall(System.String,System.Int32)" />
 
             
 
@@ -143,14 +142,22 @@
           <para>The return code for installutil.exe. A successful installation returns 0. Other values indicate failure.</para>
         </returns>
         <param name="argString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The command line to install.</param
         >
         <param name="hInstall">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

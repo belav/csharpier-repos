@@ -29,13 +29,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Runtime.CompilerServices.CompilationRelaxations" />
+        >Use the <see cref="T:System.Runtime.CompilerServices.CompilationRelaxations" />
 
         
 
-         enumeration with the <see
-         cref="T:System.Runtime.CompilerServices.CompilationRelaxationsAttribute" />
+         enumeration with the <see cref="T:System.Runtime.CompilerServices.CompilationRelaxationsAttribute" />
 
         
 

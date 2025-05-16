@@ -16,13 +16,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Personalization scope is a key concept in Web Parts personalization and is tightly integrated with other settings, including the scope that the page, through the <see
-         cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" />
+        >Personalization scope is a key concept in Web Parts personalization and is tightly integrated with other settings, including the scope that the page, through the <see cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" />
 
         
 
-         control, is running in; the scope associated with each property on a control; and the way in which the control was added to the page. For more information on personalization scope, see <format
-         type="text/html">
+         control, is running in; the scope associated with each property on a control; and the way in which the control was added to the page. For more information on personalization scope, see <format type="text/html">
           <a href="7dc34f74-52aa-4082-b98d-2bcf9e07e320">Web Parts Personalization</a>
         </format>
 
@@ -32,21 +30,18 @@
       >
       <para>Personalization scope refers to how personalization data is applicable to different sets of users. Some personalization data is applicable to only a specific user and control on a page. Other personalization data is applicable to all users who view a site. Personalization scope is used in various areas of personalization to indicate which set of data should be retrieved and displayed.</para>
       <para
-        >When a page is running in <see
-         cref="F:System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared" />
+        >When a page is running in <see cref="F:System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared" />
 
         
 
-         personalization scope, this indicates that only the personalization data for a specific control, applicable to all users viewing the control, should be loaded. Depending on the currently executing user's rights, this broadly applicable data can also be modified and saved back to the data store. When a page is running in <see
-         cref="F:System.Web.UI.WebControls.WebParts.PersonalizationScope.User" />
+         personalization scope, this indicates that only the personalization data for a specific control, applicable to all users viewing the control, should be loaded. Depending on the currently executing user's rights, this broadly applicable data can also be modified and saved back to the data store. When a page is running in <see cref="F:System.Web.UI.WebControls.WebParts.PersonalizationScope.User" />
 
         
 
          personalization scope, this indicates that a control's personalization data should be saved and loaded based on the currently executing user. Usually, this means user-specific data can be loaded and saved on a control, while broadly applicable data (or shared data) can only be viewed on the control.</para
       >
       <para
-        >A <see
-         cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" />
+        >A <see cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" />
 
         
 
@@ -56,8 +51,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Indicates the personalization scope for a <see
-         cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" />
+        >Indicates the personalization scope for a <see cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" />
 
         
 
@@ -81,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When referring to the scope on the <see
-             cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" />
+            >When referring to the scope on the <see cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" />
 
             
 
@@ -109,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When referring to the scope on the <see
-             cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" />
+            >When referring to the scope on the <see cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" />
 
             
 

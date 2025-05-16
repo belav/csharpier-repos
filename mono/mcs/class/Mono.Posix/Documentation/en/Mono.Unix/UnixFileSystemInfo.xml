@@ -19,10 +19,8 @@
     <summary>Provides information and performs operations on file system
     entries.</summary>
     <remarks>
-      <para
-        >
-        The <see
-         cref="T:Mono.Unix.UnixFileSystemInfo" />
+      <para>
+        The <see cref="T:Mono.Unix.UnixFileSystemInfo" />
 
         
 
@@ -35,8 +33,7 @@
         <item>
           <term
             >Determining the full file name with 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
@@ -47,77 +44,66 @@
         <item>
           <term
             >Determining whether the file exists with 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.Exists" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.Exists" />
           </term>
         </item>
         <item>
           <term
             >Querying file system entry metadata such as the 
             hardware device it resides on 
-            (<see
-             cref="P:Mono.Unix.UnixFileSystemInfo.Device" />
+            (<see cref="P:Mono.Unix.UnixFileSystemInfo.Device" />
 
             
 
             ),
             the file system inode
-            (<see
-             cref="P:Mono.Unix.UnixFileSystemInfo.Inode" />
+            (<see cref="P:Mono.Unix.UnixFileSystemInfo.Inode" />
 
             
 
             ),
             file access permissions
-            (<see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
+            (<see cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
 
             
 
             ),
             file type
-            (<see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FileType" />
+            (<see cref="P:Mono.Unix.UnixFileSystemInfo.FileType" />
 
             
 
             ),
             file owner information
-            (<see
-             cref="P:Mono.Unix.UnixFileSystemInfo.OwnerUser" />
+            (<see cref="P:Mono.Unix.UnixFileSystemInfo.OwnerUser" />
 
             
 
             ),
             group information
-            (<see
-             cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroup" />
+            (<see cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroup" />
 
             
 
             ),
             file size
-            (<see
-             cref="P:Mono.Unix.UnixFileSystemInfo.Length" />
+            (<see cref="P:Mono.Unix.UnixFileSystemInfo.Length" />
 
             
 
             ),
             various times maintained by the operating system
-            (<see
-             cref="P:Mono.Unix.UnixFileSystemInfo.LastAccessTime" />
+            (<see cref="P:Mono.Unix.UnixFileSystemInfo.LastAccessTime" />
 
             
 
             ,
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.LastWriteTime" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.LastWriteTime" />
 
             
 
             ,
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.LastStatusChangeTime" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.LastStatusChangeTime" />
 
             
 
@@ -129,8 +115,7 @@
         <item>
           <term
             >Creating hard links with
-            <see
-             cref="M:Mono.Unix.UnixFileSystemInfo.CreateLink" />
+            <see cref="M:Mono.Unix.UnixFileSystemInfo.CreateLink" />
 
             
 
@@ -141,8 +126,7 @@
         <item>
           <term
             >Creating symbolic links with
-            <see
-             cref="M:Mono.Unix.UnixFileSystemInfo.CreateSymbolicLink" />
+            <see cref="M:Mono.Unix.UnixFileSystemInfo.CreateSymbolicLink" />
 
             
 
@@ -153,8 +137,7 @@
         <item>
           <term
             >File system entry deletion with
-            <see
-             cref="M:Mono.Unix.UnixFileSystemInfo.Delete" />
+            <see cref="M:Mono.Unix.UnixFileSystemInfo.Delete" />
 
             
 
@@ -165,8 +148,7 @@
         <item>
           <term
             >Setting file system owner and group information with
-            <see
-             cref="M:Mono.Unix.UnixFileSystemInfo.SetOwner" />
+            <see cref="M:Mono.Unix.UnixFileSystemInfo.SetOwner" />
 
             
 
@@ -181,85 +163,73 @@
         running on the system or because of file management actions performed
         within the current process.
       </para>
-      <para
-        >
-        The only guarantee is that the information provided <i
-        >was</i>
+      <para>
+        The only guarantee is that the information provided <i>was</i>
 
         
 
          valid
-        at some point in time, <i
-        >or</i>
+        at some point in time, <i>or</i>
 
         
 
          an 
-        <see
-         cref="T:System.InvalidOperationException" />
+        <see cref="T:System.InvalidOperationException" />
 
         
 
          exception will be
         thrown when attempting to access the provided information.
         <block
-         subset="none" type="note"
-          >
+          subset="none"
+          type="note"
+        >
           To clarify, once the file system entry 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is found, 
           it won't be checked for again until a call to
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.Refresh" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.Refresh" />
 
           
 
           .
-          <c
-          >FullName</c>
+          <c>FullName</c>
 
           
 
            will be checked for during object construction, but
           need not exist during object construction -- 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.Exists" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.Exists" />
 
           
 
            will let you
           know if the file currently exists and does an implicit 
-          <c
-          >Refresh</c>
+          <c>Refresh</c>
 
           
 
-          .  If <c
-          >FullName</c>
+          .  If <c>FullName</c>
 
           
 
            doesn't exist when the
-          <c
-          >UnixFileSystemInfo</c>
+          <c>UnixFileSystemInfo</c>
 
           
 
            is created, it will be checked for
           whenever information about the file system entry is required,
           such as with 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.Device" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.Device" />
 
           
 
            and
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.Length" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.Length" />
 
           
 
@@ -294,8 +264,7 @@
       </Parameters>
       <Docs>
         <param name="path"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
@@ -303,8 +272,7 @@
         name of the file system object to query.</param
         >
         <summary
-          >Creates a <see
-           cref="T:Mono.Unix.UnixFileSystemInfo" />
+          >Creates a <see cref="T:Mono.Unix.UnixFileSystemInfo" />
 
           
 
@@ -314,8 +282,7 @@
         >
         <remarks>
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
@@ -323,11 +290,14 @@
           relative or absolute path information. Relative path information is 
           interpreted as relative to the current working directory. 
           <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >To obtain the current working 
           directory, see 
           <see
-               cref="M:Mono.Unix.UnixDirectoryInfo.GetCurrentDirectory" qualify="true" />
+                cref="M:Mono.Unix.UnixDirectoryInfo.GetCurrentDirectory"
+                qualify="true"
+              />
 
               
 
@@ -341,8 +311,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -364,8 +333,7 @@
             
 
              contains an invalid character.
-            See <see
-             cref="M:Mono.Unix.UnixPath.GetInvalidPathChars" />
+            See <see cref="M:Mono.Unix.UnixPath.GetInvalidPathChars" />
 
             
 
@@ -391,8 +359,7 @@
         <summary>Gets the number of file system blocks used by this file
           system entry.</summary>
         <value
-          >A <see
-           cref="T:System.Int64" />
+          >A <see cref="T:System.Int64" />
 
           
 
@@ -427,8 +394,7 @@
       <Docs>
         <summary>Gets the preferred blocksize for filesystem I/O.</summary>
         <value
-          >A <see
-           cref="T:System.Int64" />
+          >A <see cref="T:System.Int64" />
 
           
 
@@ -476,8 +442,7 @@
       </Parameters>
       <Docs>
         <param name="mode"
-          >A <see
-           cref="T:Mono.Unix.Native.AccessModes" />
+          >A <see cref="T:Mono.Unix.Native.AccessModes" />
 
           
 
@@ -487,25 +452,21 @@
         >
         <summary
           >Determines whether or not the process can access
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            with the
-          specified access <paramref
-           name="mode" />
+          specified access <paramref name="mode" />
         </summary>
         <returns
-          >A <see
-           cref="T:System.Boolean" />
+          >A <see cref="T:System.Boolean" />
 
           
 
            specifying whether or not
           the process can access
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -513,12 +474,10 @@
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             Note that this method is subject to external race conditions --
             just because you can access 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
@@ -555,28 +514,24 @@
         <param name="path"></param>
         <summary
           >Creates a hard link so that 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            and 
-          <paramref
-           name="path" />
+          <paramref name="path" />
 
           
 
            are the same file.</summary
         >
         <returns
-          >A <see
-           cref="T:Mono.Unix.UnixFileSystemInfo" />
+          >A <see cref="T:Mono.Unix.UnixFileSystemInfo" />
 
           
 
            instance which
-          represents <paramref
-           name="path" />
+          represents <paramref name="path" />
 
           
 
@@ -584,8 +539,7 @@
         >
         <remarks>
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
@@ -593,11 +547,11 @@
           relative or absolute path information. Relative path information is 
           interpreted as relative to the current working directory. 
           <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >To obtain the current working 
             directory, see 
-            <see
-               cref="M:Mono.Unix.UnixDirectoryInfo.GetCurrentDirectory" />
+            <see cref="M:Mono.Unix.UnixDirectoryInfo.GetCurrentDirectory" />
 
               
 
@@ -605,11 +559,9 @@
           </block
             >
           </para>
-          <para
-            >
+          <para>
             After creating the link, the link count 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.LinkCount" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.LinkCount" />
 
             
 
@@ -620,18 +572,15 @@
           >
         </remarks>
         <exception cref="T:System.InvalidOperationException">
-          <para
-            >
+          <para>
             The file system containing 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
              
             does not support hard links.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -641,21 +590,18 @@
           <para>-or-</para>
           <para
             >The file
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
              
             is a directory or is flagged immutable or append-only
-            (see <see
-             cref="M:Mono.Unix.Native.Syscall.chflags" />
+            (see <see cref="M:Mono.Unix.Native.Syscall.chflags" />
 
             
 
             ).
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EPERM" />
+            [<see cref="F:Mono.Unix.Native.Errno.EPERM" />
 
             
 
@@ -666,20 +612,17 @@
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
              or
-            <paramref
-             name="path" />
+            <paramref name="path" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -694,8 +637,7 @@
 
              requires writing in a directory with a
             mode that denies write permissions.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -703,24 +645,20 @@
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            
-          or <paramref
-           name="path" />
+          or <paramref name="path" />
 
           
 
            is not a
           directory.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -728,24 +666,20 @@
         </exception
         >
         <exception cref="T:System.IO.FileNotFoundException">
-          <para
-            >
+          <para>
             A component of 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
              
-            or <paramref
-             name="path" />
+            or <paramref name="path" />
 
             
 
             
             that must exist does not exist.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
             
 
@@ -753,18 +687,15 @@
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The file 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
              
             does not exist.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
             
 
@@ -780,8 +711,7 @@
 
             
             resides on a read-only file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -790,15 +720,13 @@
           >
           <para>-or-</para>
           <para
-            >The directory for <paramref
-             name="path" />
+            >The directory for <paramref name="path" />
 
             
 
              cannot be extended 
             because there is no space left.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -808,8 +736,7 @@
           <para>-or-</para>
           <para
             >An I/O error occurred while making the directory entry.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -823,15 +750,13 @@
           
 
            or
-          <paramref
-           name="path" />
+          <paramref name="path" />
 
           
 
           
           was too long.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -841,20 +766,17 @@
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
              or
-            <paramref
-             name="path" />
+            <paramref name="path" />
 
             
 
             
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+            [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -870,8 +792,7 @@
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -886,20 +807,17 @@
 
             
             would exceed its limit.  Use 
-            <see
-             cref="M:Mono.Unix.UnixFileSystemInfo.GetConfigurationValue" />
+            <see cref="M:Mono.Unix.UnixFileSystemInfo.GetConfigurationValue" />
 
             
 
-            (<see
-             cref="M:Mono.Unix.Native.PathconfName._PC_LINK_MAX" />
+            (<see cref="M:Mono.Unix.Native.PathconfName._PC_LINK_MAX" />
 
             
 
             ) 
             to determine the maximum link value.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EMLINK" />
+            [<see cref="F:Mono.Unix.Native.Errno.EMLINK" />
 
             
 
@@ -913,8 +831,7 @@
             
 
              already exists.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EEXIST" />
+            [<see cref="F:Mono.Unix.Native.Errno.EEXIST" />
 
             
 
@@ -928,14 +845,12 @@
             
 
              and
-            <paramref
-             name="path" />
+            <paramref name="path" />
 
             
 
              are on different file systems.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EXDEV" />
+            [<see cref="F:Mono.Unix.Native.Errno.EXDEV" />
 
             
 
@@ -969,8 +884,7 @@
       </Parameters>
       <Docs>
         <param name="path"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
@@ -978,14 +892,12 @@
         of the symbolic link to create.</param
         >
         <summary
-          >Create a symbolic link so that <paramref
-           name="path" />
+          >Create a symbolic link so that <paramref name="path" />
 
           
 
            
-          "points to" <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          "points to" <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -993,8 +905,7 @@
         </summary
         >
         <returns
-          >A <see
-           cref="T:Mono.Unix.UnixSymbolicLinkInfo" />
+          >A <see cref="T:Mono.Unix.UnixSymbolicLinkInfo" />
 
           
 
@@ -1003,8 +914,7 @@
         >
         <remarks>
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
@@ -1012,11 +922,11 @@
           relative or absolute path information. Relative path information is 
           interpreted as relative to the current working directory. 
           <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >To obtain the current working 
             directory, see 
-            <see
-               cref="M:Mono.Unix.UnixDirectoryInfo.GetCurrentDirectory" />
+            <see cref="M:Mono.Unix.UnixDirectoryInfo.GetCurrentDirectory" />
 
               
 
@@ -1024,32 +934,27 @@
           </block
             >
           </para>
-          <para
-            >
+          <para>
             The created symbolic link will contain the full path name, 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .  
             If this is undesirable (for instance, you want the created
             symbolic link to contain relative path information), use
-            <see
-             cref="M:Mono.Unix.UnixSymbolicLinkInfo.CreateSymbolicLinkTo" />
+            <see cref="M:Mono.Unix.UnixSymbolicLinkInfo.CreateSymbolicLinkTo" />
 
             
 
             
-            instead.  <c
-            >UnixSymbolicLinkInfo.CreateSymbolicLinkTo</c>
+            instead.  <c>UnixSymbolicLinkInfo.CreateSymbolicLinkTo</c>
 
             
 
              
             uses the exact path provided to the 
-            <see
-             cref="T:Mono.Unix.UnixSymbolicLinkInfo" />
+            <see cref="T:Mono.Unix.UnixSymbolicLinkInfo" />
 
             
 
@@ -1059,26 +964,20 @@
           </para
           >
           <example>
-            <para
-              >The <c
-              >ln</c>
+            <para>The <c>ln</c>
 
               
 
-              (1) command:</para
-            >
+              (1) command:</para>
             <code lang="sh">ln -s target symlink</code>
-            <para
-              >
-              Can be created using <see
-               cref="N:Mono.Unix" />
+            <para>
+              Can be created using <see cref="N:Mono.Unix" />
 
               
 
                in two ways.
               First, it can be created using 
-              <see
-               cref="M:Mono.Unix.UnixFileSystemInfo.CreateSymbolicLink" />
+              <see cref="M:Mono.Unix.UnixFileSystemInfo.CreateSymbolicLink" />
 
               
 
@@ -1089,11 +988,9 @@
               >UnixFileInfo f = new UnixFileInfo ("target.ufi");
 f.CreateSymbolicLink ("symlink.ufi");</code
             >
-            <para
-              >
+            <para>
               Second, it can be created using 
-              <see
-               cref="M:Mono.Unix.UnixSymbolicLinkInfo.CreateSymbolicLinkTo" />
+              <see cref="M:Mono.Unix.UnixSymbolicLinkInfo.CreateSymbolicLinkTo" />
 
               
 
@@ -1105,19 +1002,16 @@ f.CreateSymbolicLink ("symlink.ufi");</code
     new UnixSymbolicLinkInfo ("symlink.usli");
 s.CreateSymbolicLinkTo ("target.usli");</code
             >
-            <para
-              >
+            <para>
               The links created by the above differ; in particular, the target
               of 
-              <see
-               cref="M:Mono.Unix.UnixFileSystemInfo.CreateSymbolicLink" />
+              <see cref="M:Mono.Unix.UnixFileSystemInfo.CreateSymbolicLink" />
 
               
 
               
               is the full path name of the target, while 
-              <see
-               cref="M:Mono.Unix.UnixSymbolicLinkInfo.CreateSymbolicLinkTo" />
+              <see cref="M:Mono.Unix.UnixSymbolicLinkInfo.CreateSymbolicLinkTo" />
 
               
 
@@ -1136,20 +1030,17 @@ symlink.usli -&gt; target.usli
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
              or 
-          <paramref
-             name="path" />
+          <paramref name="path" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCES" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCES" />
 
             
 
@@ -1157,35 +1048,29 @@ symlink.usli -&gt; target.usli
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is not a
           directory.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
           ]
         </exception
         >
-        <exception cref="T:System.IO.FileNotFoundException"
-          >
-          A component of <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <exception cref="T:System.IO.FileNotFoundException">
+          A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            
           that must exist does not exist.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -1198,8 +1083,7 @@ symlink.usli -&gt; target.usli
           
 
            was too long.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -1213,8 +1097,7 @@ symlink.usli -&gt; target.usli
             
 
              resides on a read-only file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -1223,16 +1106,14 @@ symlink.usli -&gt; target.usli
           >
           <para>-or-</para>
           <para
-            >The directory containing <paramref
-             name="path" />
+            >The directory containing <paramref name="path" />
 
             
 
             
           cannot be extended because there is no space left on the file
           system containing the directory.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -1243,8 +1124,7 @@ symlink.usli -&gt; target.usli
           <para
             >There are no free inodes on the file system on which the file
           is being created.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -1255,8 +1135,7 @@ symlink.usli -&gt; target.usli
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -1267,14 +1146,12 @@ symlink.usli -&gt; target.usli
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+            [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -1284,14 +1161,12 @@ symlink.usli -&gt; target.usli
           <para>-or-</para>
           <para
             >The user's quota of inodes on the file system containing
-          <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+          <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -1300,16 +1175,14 @@ symlink.usli -&gt; target.usli
           >
           <para>-or-</para>
           <para
-            >The directory containing <paramref
-             name="path" />
+            >The directory containing <paramref name="path" />
 
             
 
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -1317,13 +1190,11 @@ symlink.usli -&gt; target.usli
           </para
           >
           <para>-or-</para>
-          <para>
-            <paramref name="path" />
+          <para><paramref name="path" />
 
             
 
-             already exists.</para
-          >
+             already exists.</para>
         </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.symlink" />
       </Docs>
@@ -1347,8 +1218,7 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary
           >Deletes the file system entry
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -1358,8 +1228,7 @@ symlink.usli -&gt; target.usli
         <exception cref="T:System.InvalidOperationException">
           <para
             >The filesystem containing 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
@@ -1369,21 +1238,18 @@ symlink.usli -&gt; target.usli
           <para>-or-</para>
           <para
             >The directory containing 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
              
-          has the <see
-             cref="F:Mono.Unix.FileSpecialAttributes.Sticky" />
+          has the <see cref="F:Mono.Unix.FileSpecialAttributes.Sticky" />
 
             
 
              bit
           set and the process's 
-          <see
-             cref="P:Mono.Unix.UnixEnvironment.EffectiveUserId" />
+          <see cref="P:Mono.Unix.UnixEnvironment.EffectiveUserId" />
 
             
 
@@ -1395,15 +1261,13 @@ symlink.usli -&gt; target.usli
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Write access to the directory containing
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
              was not
           allowed for the processe's effective user id 
-          <see
-             cref="P:Mono.Unix.UnixEnvironment.EffectiveUserId" />
+          <see cref="P:Mono.Unix.UnixEnvironment.EffectiveUserId" />
 
             
 
@@ -1412,8 +1276,7 @@ symlink.usli -&gt; target.usli
           <para>-or-</para>
           <para
             >One of the directories in 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
@@ -1421,11 +1284,9 @@ symlink.usli -&gt; target.usli
           search (execute) permissions.</para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -1449,13 +1310,11 @@ symlink.usli -&gt; target.usli
             
 
              contains 
-          files other than '<c
-            >.</c>
+          files other than '<c>.</c>
 
             
 
-            ' and '<c
-            >..</c>
+            ' and '<c>..</c>
 
             
 
@@ -1479,8 +1338,7 @@ symlink.usli -&gt; target.usli
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
@@ -1507,8 +1365,7 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary>Gets the device ID that this file system entry resides on.</summary>
         <value
-          >A <see
-           cref="T:System.Int64" />
+          >A <see cref="T:System.Int64" />
 
           
 
@@ -1543,8 +1400,7 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary>Gets the device type of this inode.</summary>
         <value
-          >A <see
-           cref="T:System.Int64" />
+          >A <see cref="T:System.Int64" />
 
           
 
@@ -1578,8 +1434,7 @@ symlink.usli -&gt; target.usli
       </ReturnValue>
       <Docs>
         <summary
-          >Returns a <see
-           cref="T:System.Boolean" />
+          >Returns a <see cref="T:System.Boolean" />
 
           
 
@@ -1593,33 +1448,28 @@ symlink.usli -&gt; target.usli
             
 
              if the caller has the required permissions 
-            and <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            and <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             
             contains the name of an existing file or directory; otherwise, 
-            <see
-             langword="false" />
+            <see langword="false" />
 
             
 
             . 
-            If <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            If <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
              is
-            <see
-             langword="null" />
+            <see langword="null" />
 
             
 
              or a zero-length string,
-            returns <see
-             langword="false" />
+            returns <see langword="false" />
 
             
 
@@ -1631,21 +1481,18 @@ symlink.usli -&gt; target.usli
           <para
             >If the caller does not have sufficient permissions to read 
           the file system object 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             , no
-          exception is thrown and the method returns <see
-             langword="false" />
+          exception is thrown and the method returns <see langword="false" />
 
             
 
             
           regardless of the existence of 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
@@ -1675,8 +1522,7 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary>Gets or sets the file system entry access permissions.</summary>
         <value
-          >A <see
-           cref="T:Mono.Unix.FileAccessPermissions" />
+          >A <see cref="T:Mono.Unix.FileAccessPermissions" />
 
           
 
@@ -1684,24 +1530,20 @@ symlink.usli -&gt; target.usli
           controls access to the file system entry.</value
         >
         <remarks>
-          <para
-            >
+          <para>
             Access to file system objects 
-            (as represented by <see
-             cref="T:Mono.Unix.UnixFileSystemInfo" />
+            (as represented by <see cref="T:Mono.Unix.UnixFileSystemInfo" />
 
             
 
             )
             is controlled by the file system access permissions, 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
 
             
 
             .
-            <see
-             cref="T:Mono.Unix.FileAccessPermissions" />
+            <see cref="T:Mono.Unix.FileAccessPermissions" />
 
             
 
@@ -1710,21 +1552,16 @@ symlink.usli -&gt; target.usli
             everyone else (other).
           </para
           >
-          <para
-            >
+          <para>
             Access by the file's owner is controlled by the bits specified by
-            <c
-
-              >
-            (<see
-               cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
+            <c>
+            (<see cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
 
               
 
               
             &amp; 
-            <see
-               cref="F:Mono.Unix.FileAccessPermissions.UserReadWriteExecute" />
+            <see cref="F:Mono.Unix.FileAccessPermissions.UserReadWriteExecute" />
 
               
 
@@ -1738,21 +1575,16 @@ symlink.usli -&gt; target.usli
             permissions, even if the owner belongs to the group.
           </para
           >
-          <para
-            >
+          <para>
             Access by the file's owner group is controlled by the bits
-            specified by <c
-
-              >
-            (<see
-               cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
+            specified by <c>
+            (<see cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
 
               
 
               
             &amp; 
-            <see
-               cref="F:Mono.Unix.FileAccessPermissions.GroupReadWriteExecute" />
+            <see cref="F:Mono.Unix.FileAccessPermissions.GroupReadWriteExecute" />
 
               
 
@@ -1764,35 +1596,28 @@ symlink.usli -&gt; target.usli
             .
             All group members get these access permissions.
             See also
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroup" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroup" />
 
             
 
-            .<see
-             cref="M:Mono.Unix.UnixGroupInfo.GetMembers" />
+            .<see cref="M:Mono.Unix.UnixGroupInfo.GetMembers" />
 
             
 
             .
           </para
           >
-          <para
-            >
+          <para>
             All other users (users who are not the file's owner nor belonging
             to the file's owner group) get the file access permissions
-            specified by <c
-
-              >
-            (<see
-               cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
+            specified by <c>
+            (<see cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
 
               
 
               
             &amp; 
-            <see
-               cref="F:Mono.Unix.FileAccessPermissions.OtherReadWriteExecute" />
+            <see cref="F:Mono.Unix.FileAccessPermissions.OtherReadWriteExecute" />
 
               
 
@@ -1836,8 +1661,7 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary>Gets or sets the file system entry special attributes.</summary>
         <value
-          >A <see
-           cref="T:Mono.Unix.FileSpecialAttributes" />
+          >A <see cref="T:Mono.Unix.FileSpecialAttributes" />
 
           
 
@@ -1846,8 +1670,7 @@ symlink.usli -&gt; target.usli
         >
         <remarks>
           <para
-            >Callers may need to be the super user (often the <c
-            >root</c>
+            >Callers may need to be the super user (often the <c>root</c>
 
             
 
@@ -1884,8 +1707,7 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary>Gets the type of this file system entry.</summary>
         <value
-          >A <see
-           cref="T:Mono.Unix.FileTypes" />
+          >A <see cref="T:Mono.Unix.FileTypes" />
 
           
 
@@ -1918,8 +1740,7 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary>Gets the fully-qualified path name.</summary>
         <value
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
@@ -1945,8 +1766,7 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary>Gets or sets the fully qualified path name.</summary>
         <value
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
@@ -1954,10 +1774,8 @@ symlink.usli -&gt; target.usli
           path name.</value
         >
         <remarks>
-          <para
-            >
-            If <paramref
-             name="value" />
+          <para>
+            If <paramref name="value" />
 
             
 
@@ -1968,49 +1786,41 @@ symlink.usli -&gt; target.usli
           >
           <para
             >It is possible for the object state to be inconsistent if 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
 
             
 
              is set but
-            not <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.OriginalPath" />
+            not <see cref="P:Mono.Unix.UnixFileSystemInfo.OriginalPath" />
 
             
 
             .
-            All methods in this class do not use <c
-            >OriginalPath</c>
+            All methods in this class do not use <c>OriginalPath</c>
 
             
 
              but use
-            <c
-            >FullPath</c>
+            <c>FullPath</c>
 
             
 
             ; subclasses such as 
-            <see
-             cref="T:Mono.Unix.UnixSymbolicLinkInfo" />
+            <see cref="T:Mono.Unix.UnixSymbolicLinkInfo" />
 
             
 
              do use
-            <c
-            >OriginalPath</c>
+            <c>OriginalPath</c>
 
             
 
-            .  If <c
-            >FullPath</c>
+            .  If <c>FullPath</c>
 
             
 
              is set then
-            <c
-            >OriginalPath</c>
+            <c>OriginalPath</c>
 
             
 
@@ -2024,8 +1834,7 @@ symlink.usli -&gt; target.usli
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -2047,8 +1856,7 @@ symlink.usli -&gt; target.usli
             
 
              contains an invalid character.
-            See <see
-             cref="M:Mono.Unix.UnixPath.GetInvalidPathChars" />
+            See <see cref="M:Mono.Unix.UnixPath.GetInvalidPathChars" />
 
             
 
@@ -2086,8 +1894,7 @@ symlink.usli -&gt; target.usli
       </Parameters>
       <Docs>
         <param name="name"
-          >A <see
-           cref="T:Mono.Unix.Native.PathconfName" />
+          >A <see cref="T:Mono.Unix.Native.PathconfName" />
 
           
 
@@ -2097,8 +1904,7 @@ symlink.usli -&gt; target.usli
         <summary
           >Gets a configurable system limit or option variable
           associated with 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -2106,26 +1912,22 @@ symlink.usli -&gt; target.usli
         </summary
         >
         <returns
-          >A <see
-           cref="T:System.Int64" />
+          >A <see cref="T:System.Int64" />
 
           
 
            containing the value
-          of the configuration variable <paramref
-           name="name" />
+          of the configuration variable <paramref name="name" />
 
           
 
           .
           If there is no value for the configuration variable 
-          <paramref
-           name="name" />
+          <paramref name="name" />
 
           
 
-          , then <c
-          >-1</c>
+          , then <c>-1</c>
 
           
 
@@ -2133,17 +1935,14 @@ symlink.usli -&gt; target.usli
         </returns
         >
         <remarks></remarks>
-        <exception cref="T:System.ArgumentException"
-          >
+        <exception cref="T:System.ArgumentException">
           The implementation does not support an association of 
-          <paramref
-           name="name" />
+          <paramref name="name" />
 
           
 
            with 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -2153,14 +1952,12 @@ symlink.usli -&gt; target.usli
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCES" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCES" />
 
             
 
@@ -2168,35 +1965,29 @@ symlink.usli -&gt; target.usli
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is not a
           directory.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
           ]
         </exception
         >
-        <exception cref="T:System.IO.FileNotFoundException"
-          >
-          A component of <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <exception cref="T:System.IO.FileNotFoundException">
+          A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            
           that must exist does not exist.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -2209,16 +2000,14 @@ symlink.usli -&gt; target.usli
           
 
            was too long.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
           ]
         </exception
         >
-        <exception cref="T:System.IO.IOException"
-          >
+        <exception cref="T:System.IO.IOException">
           An I/O error occurred while reading from or writing to the file
           system.
         </exception
@@ -2226,14 +2015,12 @@ symlink.usli -&gt; target.usli
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+            [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -2268,8 +2055,7 @@ symlink.usli -&gt; target.usli
       </Parameters>
       <Docs>
         <param name="path"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
@@ -2277,14 +2063,12 @@ symlink.usli -&gt; target.usli
           to retrieve information about</param
         >
         <param name="stat"
-          >A <see
-           cref="T:Mono.Unix.Native.Stat" />
+          >A <see cref="T:Mono.Unix.Native.Stat" />
 
           
 
            which will
-          contain information about <paramref
-           name="path" />
+          contain information about <paramref name="path" />
 
           
 
@@ -2292,42 +2076,35 @@ symlink.usli -&gt; target.usli
         >
         <summary>Gets file status information.</summary>
         <returns
-          >A <see
-           cref="T:System.Boolean" />
+          >A <see cref="T:System.Boolean" />
 
           
 
            specifying whether 
-          <paramref
-           name="stat" />
+          <paramref name="stat" />
 
           
 
-           was filled.  If <see
-           langword="true" />
+           was filled.  If <see langword="true" />
 
           
 
           , then 
-          <paramref
-           name="path" />
+          <paramref name="path" />
 
           
 
-           exists and <paramref
-           name="stat" />
+           exists and <paramref name="stat" />
 
           
 
            contains
-          valid information.  Otherwise, <paramref
-           name="path" />
+          valid information.  Otherwise, <paramref name="path" />
 
           
 
            is assumed to
-          not exist and <paramref
-           name="stat" />
+          not exist and <paramref name="stat" />
 
           
 
@@ -2381,8 +2158,7 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary>Gets the inode of this file system entry.</summary>
         <value
-          >A <see
-           cref="T:System.Int64" />
+          >A <see cref="T:System.Int64" />
 
           
 
@@ -2417,35 +2193,29 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary
           >Is 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            a 
-          <see
-           cref="F:Mono.Unix.FileTypes.BlockDevice" />
+          <see cref="F:Mono.Unix.FileTypes.BlockDevice" />
 
           
 
           ?</summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.Boolean" />
+        <value>
+          A <see cref="T:System.Boolean" />
 
           
 
            indicating whether or not 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is a 
-          <see
-           cref="F:Mono.Unix.FileTypes.BlockDevice" />
+          <see cref="F:Mono.Unix.FileTypes.BlockDevice" />
 
           
 
@@ -2455,14 +2225,12 @@ symlink.usli -&gt; target.usli
         <remarks>
           <para
             >This is equivalent to comparing 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FileType" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FileType" />
 
             
 
              to 
-            <see
-             cref="F:Mono.Unix.FileTypes.BlockDevice" />
+            <see cref="F:Mono.Unix.FileTypes.BlockDevice" />
 
             
 
@@ -2495,35 +2263,29 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary
           >Is 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            a 
-          <see
-           cref="F:Mono.Unix.FileTypes.CharacterDevice" />
+          <see cref="F:Mono.Unix.FileTypes.CharacterDevice" />
 
           
 
           ?</summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.Boolean" />
+        <value>
+          A <see cref="T:System.Boolean" />
 
           
 
            indicating whether or not 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is a 
-          <see
-           cref="F:Mono.Unix.FileTypes.CharacterDevice" />
+          <see cref="F:Mono.Unix.FileTypes.CharacterDevice" />
 
           
 
@@ -2533,14 +2295,12 @@ symlink.usli -&gt; target.usli
         <remarks>
           <para
             >This is equivalent to comparing 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FileType" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FileType" />
 
             
 
              to 
-            <see
-             cref="F:Mono.Unix.FileTypes.CharacterDevice" />
+            <see cref="F:Mono.Unix.FileTypes.CharacterDevice" />
 
             
 
@@ -2573,35 +2333,29 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary
           >Is 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            a 
-          <see
-           cref="F:Mono.Unix.FileTypes.Directory" />
+          <see cref="F:Mono.Unix.FileTypes.Directory" />
 
           
 
           ?</summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.Boolean" />
+        <value>
+          A <see cref="T:System.Boolean" />
 
           
 
            indicating whether or not 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is a 
-          <see
-           cref="F:Mono.Unix.FileTypes.Directory" />
+          <see cref="F:Mono.Unix.FileTypes.Directory" />
 
           
 
@@ -2611,14 +2365,12 @@ symlink.usli -&gt; target.usli
         <remarks>
           <para
             >This is equivalent to comparing 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FileType" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FileType" />
 
             
 
              to 
-            <see
-             cref="F:Mono.Unix.FileTypes.Directory" />
+            <see cref="F:Mono.Unix.FileTypes.Directory" />
 
             
 
@@ -2651,35 +2403,29 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary
           >Is 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            a 
-          <see
-           cref="F:Mono.Unix.FileTypes.Fifo" />
+          <see cref="F:Mono.Unix.FileTypes.Fifo" />
 
           
 
           ?</summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.Boolean" />
+        <value>
+          A <see cref="T:System.Boolean" />
 
           
 
            indicating whether or not 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is a 
-          <see
-           cref="F:Mono.Unix.FileTypes.Fifo" />
+          <see cref="F:Mono.Unix.FileTypes.Fifo" />
 
           
 
@@ -2689,14 +2435,12 @@ symlink.usli -&gt; target.usli
         <remarks>
           <para
             >This is equivalent to comparing 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FileType" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FileType" />
 
             
 
              to 
-            <see
-             cref="F:Mono.Unix.FileTypes.Fifo" />
+            <see cref="F:Mono.Unix.FileTypes.Fifo" />
 
             
 
@@ -2729,35 +2473,29 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary
           >Is 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            a 
-          <see
-           cref="F:Mono.Unix.FileTypes.RegularFile" />
+          <see cref="F:Mono.Unix.FileTypes.RegularFile" />
 
           
 
           ?</summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.Boolean" />
+        <value>
+          A <see cref="T:System.Boolean" />
 
           
 
            indicating whether or not 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is a 
-          <see
-           cref="F:Mono.Unix.FileTypes.RegularFile" />
+          <see cref="F:Mono.Unix.FileTypes.RegularFile" />
 
           
 
@@ -2767,14 +2505,12 @@ symlink.usli -&gt; target.usli
         <remarks>
           <para
             >This is equivalent to comparing 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FileType" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FileType" />
 
             
 
              to 
-            <see
-             cref="F:Mono.Unix.FileTypes.RegularFile" />
+            <see cref="F:Mono.Unix.FileTypes.RegularFile" />
 
             
 
@@ -2807,35 +2543,29 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary
           >Does
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
 
           
 
            include
-          <see
-           cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+          <see cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
 
           
 
           ?</summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.Boolean" />
+        <value>
+          A <see cref="T:System.Boolean" />
 
           
 
            indicating whether or not 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
 
           
 
            includes
-          <see
-           cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+          <see cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
 
           
 
@@ -2845,14 +2575,12 @@ symlink.usli -&gt; target.usli
         <remarks>
           <para
             >This is equivalent to comparing 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
 
             
 
              with
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
 
             
 
@@ -2885,35 +2613,29 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary
           >Does
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
 
           
 
            include
-          <see
-           cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
+          <see cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
 
           
 
           ?</summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.Boolean" />
+        <value>
+          A <see cref="T:System.Boolean" />
 
           
 
            indicating whether or not 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
 
           
 
            includes
-          <see
-           cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
+          <see cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
 
           
 
@@ -2923,14 +2645,12 @@ symlink.usli -&gt; target.usli
         <remarks>
           <para
             >This is equivalent to comparing 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
 
             
 
              with
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
 
             
 
@@ -2963,35 +2683,29 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary
           >Is 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            a 
-          <see
-           cref="F:Mono.Unix.FileTypes.Socket" />
+          <see cref="F:Mono.Unix.FileTypes.Socket" />
 
           
 
           ?</summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.Boolean" />
+        <value>
+          A <see cref="T:System.Boolean" />
 
           
 
            indicating whether or not 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is a 
-          <see
-           cref="F:Mono.Unix.FileTypes.Socket" />
+          <see cref="F:Mono.Unix.FileTypes.Socket" />
 
           
 
@@ -3001,14 +2715,12 @@ symlink.usli -&gt; target.usli
         <remarks>
           <para
             >This is equivalent to comparing 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FileType" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FileType" />
 
             
 
              to 
-            <see
-             cref="F:Mono.Unix.FileTypes.Socket" />
+            <see cref="F:Mono.Unix.FileTypes.Socket" />
 
             
 
@@ -3041,35 +2753,29 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary
           >Does
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
 
           
 
            include
-          <see
-           cref="F:Mono.Unix.FileSpecialAttributes.Sticky" />
+          <see cref="F:Mono.Unix.FileSpecialAttributes.Sticky" />
 
           
 
           ?</summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.Boolean" />
+        <value>
+          A <see cref="T:System.Boolean" />
 
           
 
            indicating whether or not 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
 
           
 
            includes
-          <see
-           cref="F:Mono.Unix.FileSpecialAttributes.Sticky" />
+          <see cref="F:Mono.Unix.FileSpecialAttributes.Sticky" />
 
           
 
@@ -3079,14 +2785,12 @@ symlink.usli -&gt; target.usli
         <remarks>
           <para
             >This is equivalent to comparing 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
 
             
 
              with
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.Sticky" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.Sticky" />
 
             
 
@@ -3119,35 +2823,29 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary
           >Is 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            a 
-          <see
-           cref="F:Mono.Unix.FileTypes.SymbolicLink" />
+          <see cref="F:Mono.Unix.FileTypes.SymbolicLink" />
 
           
 
           ?</summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.Boolean" />
+        <value>
+          A <see cref="T:System.Boolean" />
 
           
 
            indicating whether or not 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is a 
-          <see
-           cref="F:Mono.Unix.FileTypes.SymbolicLink" />
+          <see cref="F:Mono.Unix.FileTypes.SymbolicLink" />
 
           
 
@@ -3157,14 +2855,12 @@ symlink.usli -&gt; target.usli
         <remarks>
           <para
             >This is equivalent to comparing 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FileType" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FileType" />
 
             
 
              to 
-            <see
-             cref="F:Mono.Unix.FileTypes.SymbolicLink" />
+            <see cref="F:Mono.Unix.FileTypes.SymbolicLink" />
 
             
 
@@ -3202,8 +2898,7 @@ symlink.usli -&gt; target.usli
         time.</summary>
         <value
           >The last access time of 
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -3243,8 +2938,7 @@ symlink.usli -&gt; target.usli
         coordinated universal time (UTC).</summary>
         <value
           >The last access time of 
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -3284,8 +2978,7 @@ symlink.usli -&gt; target.usli
         time.</summary>
         <value
           >The last status change time of 
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -3325,8 +3018,7 @@ symlink.usli -&gt; target.usli
         coordinated universal time (UTC).</summary>
         <value
           >The last status change time of 
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -3366,8 +3058,7 @@ symlink.usli -&gt; target.usli
         time.</summary>
         <value
           >The last write time of 
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -3407,8 +3098,7 @@ symlink.usli -&gt; target.usli
         coordinated universal time (UTC).</summary>
         <value
           >The last write time of 
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -3443,8 +3133,7 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary>Gets the file system entry size, in bytes.</summary>
         <value
-          >A <see
-           cref="T:System.Int64" />
+          >A <see cref="T:System.Int64" />
 
           
 
@@ -3479,8 +3168,7 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary>Gets the current link count of this file system entry.</summary>
         <value
-          >A <see
-           cref="T:System.Int64" />
+          >A <see cref="T:System.Int64" />
 
           
 
@@ -3490,24 +3178,20 @@ symlink.usli -&gt; target.usli
         <remarks>
           <para
             >A link count is the number of file system entries that share
-            this <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.Inode" />
+            this <see cref="P:Mono.Unix.UnixFileSystemInfo.Inode" />
 
             
 
             .
           </para
           >
-          <para
-            >
+          <para>
             Use 
-            <see
-             cref="M:Mono.Unix.UnixFileSystemInfo.GetConfigurationValue" />
+            <see cref="M:Mono.Unix.UnixFileSystemInfo.GetConfigurationValue" />
 
             
 
-            (<see
-             cref="M:Mono.Unix.Native.PathconfName._PC_LINK_MAX" />
+            (<see cref="M:Mono.Unix.Native.PathconfName._PC_LINK_MAX" />
 
             
 
@@ -3541,8 +3225,7 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary>The file system entry name.</summary>
         <value
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
@@ -3551,11 +3234,9 @@ symlink.usli -&gt; target.usli
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             This will generally be 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
@@ -3583,8 +3264,7 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary
           >The original string passed to the 
-          <see
-           cref="C:Mono.Unix.UnixFileSystemInfo(System.String)" />
+          <see cref="C:Mono.Unix.UnixFileSystemInfo(System.String)" />
 
           
 
@@ -3592,15 +3272,13 @@ symlink.usli -&gt; target.usli
           constructor.</summary
         >
         <value
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
            containing 
           the original string passed to the 
-          <see
-           cref="C:Mono.Unix.UnixFileSystemInfo(System.String)" />
+          <see cref="C:Mono.Unix.UnixFileSystemInfo(System.String)" />
 
           
 
@@ -3615,8 +3293,7 @@ symlink.usli -&gt; target.usli
             >This is primarily useful if you need relative path names
             instead of fully-qualified directory names, such as when dealing
             with symbolic links (with 
-            <see
-             cref="T:Mono.Unix.UnixSymbolicLinkInfo" />
+            <see cref="T:Mono.Unix.UnixSymbolicLinkInfo" />
 
             
 
@@ -3625,49 +3302,41 @@ symlink.usli -&gt; target.usli
           >
           <para
             >It is possible for the object state to be inconsistent if 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
 
             
 
              is set but
-            not <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.OriginalPath" />
+            not <see cref="P:Mono.Unix.UnixFileSystemInfo.OriginalPath" />
 
             
 
             .
-            All methods in this class do not use <c
-            >OriginalPath</c>
+            All methods in this class do not use <c>OriginalPath</c>
 
             
 
              but use
-            <c
-            >FullPath</c>
+            <c>FullPath</c>
 
             
 
             ; subclasses such as 
-            <see
-             cref="T:Mono.Unix.UnixSymbolicLinkInfo" />
+            <see cref="T:Mono.Unix.UnixSymbolicLinkInfo" />
 
             
 
              do use
-            <c
-            >OriginalPath</c>
+            <c>OriginalPath</c>
 
             
 
-            .  If <c
-            >FullPath</c>
+            .  If <c>FullPath</c>
 
             
 
              is set then
-            <c
-            >OriginalPath</c>
+            <c>OriginalPath</c>
 
             
 
@@ -3696,8 +3365,7 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary>Gets information about the owner group.</summary>
         <value
-          >A <see
-           cref="T:Mono.Unix.UnixGroupInfo" />
+          >A <see cref="T:Mono.Unix.UnixGroupInfo" />
 
           
 
@@ -3706,13 +3374,11 @@ symlink.usli -&gt; target.usli
         >
         <remarks>
           <para
-            >This is identical to <see
-             cref="C:Mono.Unix.UnixGroupInfo" />
+            >This is identical to <see cref="C:Mono.Unix.UnixGroupInfo" />
 
             
 
-            (<see
-             cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroupId" />
+            (<see cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroupId" />
 
             
 
@@ -3747,8 +3413,7 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary>Gets the owner group id.</summary>
         <value
-          >A <see
-           cref="T:System.Int64" />
+          >A <see cref="T:System.Int64" />
 
           
 
@@ -3785,8 +3450,7 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary>Gets information about the owner user.</summary>
         <value
-          >A <see
-           cref="T:Mono.Unix.UnixUserInfo" />
+          >A <see cref="T:Mono.Unix.UnixUserInfo" />
 
           
 
@@ -3795,13 +3459,11 @@ symlink.usli -&gt; target.usli
         >
         <remarks>
           <para
-            >This is identical to <see
-             cref="C:Mono.Unix.UnixUserInfo" />
+            >This is identical to <see cref="C:Mono.Unix.UnixUserInfo" />
 
             
 
-            (<see
-             cref="P:Mono.Unix.UnixFileSystemInfo.OwnerUserId" />
+            (<see cref="P:Mono.Unix.UnixFileSystemInfo.OwnerUserId" />
 
             
 
@@ -3835,10 +3497,8 @@ symlink.usli -&gt; target.usli
       </ReturnValue>
       <Docs>
         <summary>Gets the owner user id.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.Int64" />
+        <value>
+          A <see cref="T:System.Int64" />
 
           
 
@@ -3884,8 +3544,7 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary>Gets or sets the file system entry protection.</summary>
         <value
-          >A <see
-           cref="T:Mono.Unix.Native.FilePermissions" />
+          >A <see cref="T:Mono.Unix.Native.FilePermissions" />
 
           
 
@@ -3925,30 +3584,25 @@ symlink.usli -&gt; target.usli
         <summary>Refreshes the file system metadata presented.</summary>
         <remarks>
           <para>This method does not throw exceptions.</para>
-          <para
-            >
+          <para>
             Many properties and members will throw a
-            <see
-             cref="T:System.InvalidOperationException" />
+            <see cref="T:System.InvalidOperationException" />
 
             
 
              if 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
              doesn't
             exist (that is, 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.Exists" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.Exists" />
 
             
 
              returns
-            <see
-             langword="false" />
+            <see langword="false" />
 
             
 
@@ -3961,34 +3615,29 @@ symlink.usli -&gt; target.usli
             
 
              is checked
-            during <see
-             cref="T:Mono.Unix.UnixFileSystemInfo" />
+            during <see cref="T:Mono.Unix.UnixFileSystemInfo" />
 
             
 
              creation and
             on every property access until the file is found.  Once found, the
             file will not be checked for until 
-            <see
-             cref="M:Mono.Unix.UnixFileSystemInfo.Refresh" />
+            <see cref="M:Mono.Unix.UnixFileSystemInfo.Refresh" />
 
             
 
              is invoked.
           </para
           >
-          <para
-            >
+          <para>
             Consequently, if the file system entry is removed
-            (via <see
-             cref="M:Mono.Unix.UnixFileSystemInfo.Delete" />
+            (via <see cref="M:Mono.Unix.UnixFileSystemInfo.Delete" />
 
             
 
              or
             another process or some other means) or changed
-            (written to, <c
-            >touch(1)</c>
+            (written to, <c>touch(1)</c>
 
             
 
@@ -4022,26 +3671,22 @@ symlink.usli -&gt; target.usli
       </Parameters>
       <Docs>
         <param name="length"
-          >A <see
-           cref="T:System.Int64" />
+          >A <see cref="T:System.Int64" />
 
           
 
            containing the 
           desired file size for 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
         </param>
         <summary
           >Truncate or extend 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            to be
-          <paramref
-           name="length" />
+          <paramref name="length" />
 
           
 
@@ -4050,14 +3695,12 @@ symlink.usli -&gt; target.usli
         >
         <remarks>
           <para
-            >If <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.Length" />
+            >If <see cref="P:Mono.Unix.UnixFileSystemInfo.Length" />
 
             
 
              is
-            less than <paramref
-             name="length" />
+            less than <paramref name="length" />
 
             
 
@@ -4066,14 +3709,12 @@ symlink.usli -&gt; target.usli
           </para
           >
           <para
-            >If <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.Length" />
+            >If <see cref="P:Mono.Unix.UnixFileSystemInfo.Length" />
 
             
 
              is
-            greater than <paramref
-             name="length" />
+            greater than <paramref name="length" />
 
             
 
@@ -4085,14 +3726,12 @@ symlink.usli -&gt; target.usli
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCES" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCES" />
 
             
 
@@ -4107,8 +3746,7 @@ symlink.usli -&gt; target.usli
 
              is not
             writable by the user.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCES" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCES" />
 
             
 
@@ -4123,8 +3761,7 @@ symlink.usli -&gt; target.usli
 
              is a
           directory.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EISDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.EISDIR" />
 
             
 
@@ -4132,35 +3769,29 @@ symlink.usli -&gt; target.usli
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is not a
           directory.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
           ]
         </exception
         >
-        <exception cref="T:System.IO.FileNotFoundException"
-          >
-          A component of <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <exception cref="T:System.IO.FileNotFoundException">
+          A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            
           that must exist does not exist.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -4175,8 +3806,7 @@ symlink.usli -&gt; target.usli
 
              resides on a
           read-only file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -4187,8 +3817,7 @@ symlink.usli -&gt; target.usli
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -4202,8 +3831,7 @@ symlink.usli -&gt; target.usli
           
 
            was too long.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -4213,14 +3841,12 @@ symlink.usli -&gt; target.usli
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+            [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -4235,15 +3861,13 @@ symlink.usli -&gt; target.usli
 
              is a
           pure procedure (shared text) file that is being executed and 
-          <see
-             cref="M:Mono.Unix.Native.Syscall.open" />
+          <see cref="M:Mono.Unix.Native.Syscall.open" />
 
             
 
              requests write
           access.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
+            [<see cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
 
             
 
@@ -4274,8 +3898,7 @@ symlink.usli -&gt; target.usli
       </Parameters>
       <Docs>
         <param name="owner"
-          >A <see
-           cref="T:Mono.Unix.UnixUserInfo" />
+          >A <see cref="T:Mono.Unix.UnixUserInfo" />
 
           
 
@@ -4285,8 +3908,7 @@ symlink.usli -&gt; target.usli
         >
         <summary
           >Set the owner user and owner group of
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -4294,23 +3916,19 @@ symlink.usli -&gt; target.usli
         </summary
         >
         <remarks>
-          <para
-            >
-            If this is called by the non-super user (usually the <c
-            >root</c>
+          <para>
+            If this is called by the non-super user (usually the <c>root</c>
 
             
 
             
             user), then the 
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
 
             
 
              and
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
 
             
 
@@ -4318,10 +3936,8 @@ symlink.usli -&gt; target.usli
             are cleared.
           </para
           >
-          <para
-            >
-            Classes deriving from <see
-             cref="T:Mono.Unix.UnixFileSystemInfo" />
+          <para>
+            Classes deriving from <see cref="T:Mono.Unix.UnixFileSystemInfo" />
 
             
 
@@ -4330,8 +3946,7 @@ symlink.usli -&gt; target.usli
             default version will follow symbolic links, changing the
             permissions of the symbolic link target instead of the symbolic
             link itself.
-            <see
-             cref="M:Mono.Unix.UnixSymbolicLinkInfo.SetOwner" />
+            <see cref="M:Mono.Unix.UnixSymbolicLinkInfo.SetOwner" />
 
             
 
@@ -4339,44 +3954,36 @@ symlink.usli -&gt; target.usli
             permissions on the symbolic link itself.
           </para
           >
-          <para
-            >
+          <para>
             This is (almost) equivalent to calling 
-            <see
-             cref="M:Mono.Unix.UnixFileSystemInfo.SetOwner" />
+            <see cref="M:Mono.Unix.UnixFileSystemInfo.SetOwner" />
 
             
 
-            (<paramref
-             name="owner" />
+            (<paramref name="owner" />
 
             
 
             .UserId, 
-            <paramref
-             name="group" />
+            <paramref name="group" />
 
             
 
             .GroupId).
           </para
           >
-          <para
-            >
+          <para>
             This is (almost) equivalent to calling 
-            <see
-             cref="M:Mono.Unix.UnixFileSystemInfo.SetOwner" />
+            <see cref="M:Mono.Unix.UnixFileSystemInfo.SetOwner" />
 
             
 
-            (<paramref
-             name="owner" />
+            (<paramref name="owner" />
 
             
 
             .UserId, 
-            <paramref
-             name="owner" />
+            <paramref name="owner" />
 
             
 
@@ -4384,12 +3991,10 @@ symlink.usli -&gt; target.usli
           </para
           >
         </remarks>
-        <exception cref="T:System.InvalidOperationException"
-          >
+        <exception cref="T:System.InvalidOperationException">
           The effective user ID does not match the owner of the file and the
           effective user ID is not the super-user.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.EPERM" />
+            [<see cref="F:Mono.Unix.Native.Errno.EPERM" />
 
           
 
@@ -4399,14 +4004,12 @@ symlink.usli -&gt; target.usli
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCES" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCES" />
 
             
 
@@ -4414,35 +4017,29 @@ symlink.usli -&gt; target.usli
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is not a
           directory.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
           ]
         </exception
         >
-        <exception cref="T:System.IO.FileNotFoundException"
-          >
-          A component of <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <exception cref="T:System.IO.FileNotFoundException">
+          A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            
           that must exist does not exist.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -4457,8 +4054,7 @@ symlink.usli -&gt; target.usli
 
              resides on a
           read-only file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -4469,8 +4065,7 @@ symlink.usli -&gt; target.usli
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -4484,8 +4079,7 @@ symlink.usli -&gt; target.usli
           
 
            was too long.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -4495,14 +4089,12 @@ symlink.usli -&gt; target.usli
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+            [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -4513,8 +4105,7 @@ symlink.usli -&gt; target.usli
           <para
             >An attempt was made to set the sticky bit upon an
             executable.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EFTYPE" />
+            [<see cref="F:Mono.Unix.Native.Errno.EFTYPE" />
 
             
 
@@ -4545,8 +4136,7 @@ symlink.usli -&gt; target.usli
       </Parameters>
       <Docs>
         <param name="owner"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
@@ -4555,8 +4145,7 @@ symlink.usli -&gt; target.usli
         >
         <summary
           >Set the owner user ID and owner group ID of
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -4565,51 +4154,43 @@ symlink.usli -&gt; target.usli
         >
         <remarks>
           <para
-            >The user <paramref
-             name="owner" />
+            >The user <paramref name="owner" />
 
             
 
              is looked up in the local 
             password database and the resulting 
-            <see
-             cref="P:Mono.Unix.UnixUserInfo.UserId" />
+            <see cref="P:Mono.Unix.UnixUserInfo.UserId" />
 
             
 
              and 
-            <see
-             cref="P:Mono.Unix.UnixUserInfo.GroupId" />
+            <see cref="P:Mono.Unix.UnixUserInfo.GroupId" />
 
             
 
              are used as the new
             owner user id and owner group id for
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
           </para
           >
-          <para
-            >
-            If this is called by the non-super user (usually the <c
-            >root</c>
+          <para>
+            If this is called by the non-super user (usually the <c>root</c>
 
             
 
             
             user), then the 
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
 
             
 
              and
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
 
             
 
@@ -4617,10 +4198,8 @@ symlink.usli -&gt; target.usli
             are cleared.
           </para
           >
-          <para
-            >
-            Classes deriving from <see
-             cref="T:Mono.Unix.UnixFileSystemInfo" />
+          <para>
+            Classes deriving from <see cref="T:Mono.Unix.UnixFileSystemInfo" />
 
             
 
@@ -4629,8 +4208,7 @@ symlink.usli -&gt; target.usli
             default version will follow symbolic links, changing the
             permissions of the symbolic link target instead of the symbolic
             link itself.
-            <see
-             cref="M:Mono.Unix.UnixSymbolicLinkInfo.SetOwner" />
+            <see cref="M:Mono.Unix.UnixSymbolicLinkInfo.SetOwner" />
 
             
 
@@ -4639,12 +4217,10 @@ symlink.usli -&gt; target.usli
           </para
           >
         </remarks>
-        <exception cref="T:System.InvalidOperationException"
-          >
+        <exception cref="T:System.InvalidOperationException">
           The effective user ID does not match the owner of the file and the
           effective user ID is not the super-user.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.EPERM" />
+            [<see cref="F:Mono.Unix.Native.Errno.EPERM" />
 
           
 
@@ -4654,14 +4230,12 @@ symlink.usli -&gt; target.usli
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCES" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCES" />
 
             
 
@@ -4669,35 +4243,29 @@ symlink.usli -&gt; target.usli
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is not a
           directory.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
           ]
         </exception
         >
-        <exception cref="T:System.IO.FileNotFoundException"
-          >
-          A component of <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <exception cref="T:System.IO.FileNotFoundException">
+          A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            
           that must exist does not exist.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -4712,8 +4280,7 @@ symlink.usli -&gt; target.usli
 
              resides on a
           read-only file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -4724,8 +4291,7 @@ symlink.usli -&gt; target.usli
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -4739,8 +4305,7 @@ symlink.usli -&gt; target.usli
           
 
            was too long.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -4750,14 +4315,12 @@ symlink.usli -&gt; target.usli
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+            [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -4768,8 +4331,7 @@ symlink.usli -&gt; target.usli
           <para
             >An attempt was made to set the sticky bit upon an
             executable.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EFTYPE" />
+            [<see cref="F:Mono.Unix.Native.Errno.EFTYPE" />
 
             
 
@@ -4805,14 +4367,12 @@ symlink.usli -&gt; target.usli
       </Parameters>
       <Docs>
         <param name="owner"
-          >A <see
-           cref="T:Mono.Unix.UnixUserInfo" />
+          >A <see cref="T:Mono.Unix.UnixUserInfo" />
 
           
 
            containing 
-          information about the new owner user.  If <see
-           langword="null" />
+          information about the new owner user.  If <see langword="null" />
 
           
 
@@ -4820,14 +4380,12 @@ symlink.usli -&gt; target.usli
           the owner user id is unchanged.</param
         >
         <param name="group"
-          >A <see
-           cref="T:Mono.Unix.UnixUserInfo" />
+          >A <see cref="T:Mono.Unix.UnixUserInfo" />
 
           
 
            containing 
-          information about the new owner group.  If <see
-           langword="null" />
+          information about the new owner group.  If <see langword="null" />
 
           
 
@@ -4836,8 +4394,7 @@ symlink.usli -&gt; target.usli
         >
         <summary
           >Set the owner user and owner group of
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -4845,23 +4402,19 @@ symlink.usli -&gt; target.usli
         </summary
         >
         <remarks>
-          <para
-            >
-            If this is called by the non-super user (usually the <c
-            >root</c>
+          <para>
+            If this is called by the non-super user (usually the <c>root</c>
 
             
 
             
             user), then the 
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
 
             
 
              and
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
 
             
 
@@ -4869,10 +4422,8 @@ symlink.usli -&gt; target.usli
             are cleared.
           </para
           >
-          <para
-            >
-            Classes deriving from <see
-             cref="T:Mono.Unix.UnixFileSystemInfo" />
+          <para>
+            Classes deriving from <see cref="T:Mono.Unix.UnixFileSystemInfo" />
 
             
 
@@ -4881,8 +4432,7 @@ symlink.usli -&gt; target.usli
             default version will follow symbolic links, changing the
             permissions of the symbolic link target instead of the symbolic
             link itself.
-            <see
-             cref="M:Mono.Unix.UnixSymbolicLinkInfo.SetOwner" />
+            <see cref="M:Mono.Unix.UnixSymbolicLinkInfo.SetOwner" />
 
             
 
@@ -4890,22 +4440,18 @@ symlink.usli -&gt; target.usli
             permissions on the symbolic link itself.
           </para
           >
-          <para
-            >
+          <para>
             This is (almost) equivalent to calling 
-            <see
-             cref="M:Mono.Unix.UnixFileSystemInfo.SetOwner" />
+            <see cref="M:Mono.Unix.UnixFileSystemInfo.SetOwner" />
 
             
 
-            (<paramref
-             name="owner" />
+            (<paramref name="owner" />
 
             
 
             .UserId, 
-            <paramref
-             name="group" />
+            <paramref name="group" />
 
             
 
@@ -4913,12 +4459,10 @@ symlink.usli -&gt; target.usli
           </para
           >
         </remarks>
-        <exception cref="T:System.InvalidOperationException"
-          >
+        <exception cref="T:System.InvalidOperationException">
           The effective user ID does not match the owner of the file and the
           effective user ID is not the super-user.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.EPERM" />
+            [<see cref="F:Mono.Unix.Native.Errno.EPERM" />
 
           
 
@@ -4928,14 +4472,12 @@ symlink.usli -&gt; target.usli
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCES" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCES" />
 
             
 
@@ -4943,35 +4485,29 @@ symlink.usli -&gt; target.usli
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is not a
           directory.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
           ]
         </exception
         >
-        <exception cref="T:System.IO.FileNotFoundException"
-          >
-          A component of <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <exception cref="T:System.IO.FileNotFoundException">
+          A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            
           that must exist does not exist.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -4986,8 +4522,7 @@ symlink.usli -&gt; target.usli
 
              resides on a
           read-only file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -4998,8 +4533,7 @@ symlink.usli -&gt; target.usli
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -5013,8 +4547,7 @@ symlink.usli -&gt; target.usli
           
 
            was too long.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -5024,14 +4557,12 @@ symlink.usli -&gt; target.usli
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+            [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -5042,8 +4573,7 @@ symlink.usli -&gt; target.usli
           <para
             >An attempt was made to set the sticky bit upon an
             executable.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EFTYPE" />
+            [<see cref="F:Mono.Unix.Native.Errno.EFTYPE" />
 
             
 
@@ -5078,14 +4608,12 @@ symlink.usli -&gt; target.usli
       </Parameters>
       <Docs>
         <param name="owner"
-          >A <see
-           cref="T:System.Int64" />
+          >A <see cref="T:System.Int64" />
 
           
 
            containing the user
-          id of the new owner user.  If <c
-          >-1</c>
+          id of the new owner user.  If <c>-1</c>
 
           
 
@@ -5093,14 +4621,12 @@ symlink.usli -&gt; target.usli
           unchanged.</param
         >
         <param name="group"
-          >A <see
-           cref="T:System.Int64" />
+          >A <see cref="T:System.Int64" />
 
           
 
            containing the
-          group id of the new owner group.  If <c
-          >-1</c>
+          group id of the new owner group.  If <c>-1</c>
 
           
 
@@ -5109,8 +4635,7 @@ symlink.usli -&gt; target.usli
         >
         <summary
           >Set the owner user ID and owner group ID of
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -5118,23 +4643,19 @@ symlink.usli -&gt; target.usli
         </summary
         >
         <remarks>
-          <para
-            >
-            If this is called by the non-super user (usually the <c
-            >root</c>
+          <para>
+            If this is called by the non-super user (usually the <c>root</c>
 
             
 
             
             user), then the 
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
 
             
 
              and
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
 
             
 
@@ -5142,10 +4663,8 @@ symlink.usli -&gt; target.usli
             are cleared.
           </para
           >
-          <para
-            >
-            Classes deriving from <see
-             cref="T:Mono.Unix.UnixFileSystemInfo" />
+          <para>
+            Classes deriving from <see cref="T:Mono.Unix.UnixFileSystemInfo" />
 
             
 
@@ -5154,8 +4673,7 @@ symlink.usli -&gt; target.usli
             default version will follow symbolic links, changing the
             permissions of the symbolic link target instead of the symbolic
             link itself.
-            <see
-             cref="M:Mono.Unix.UnixSymbolicLinkInfo.SetOwner" />
+            <see cref="M:Mono.Unix.UnixSymbolicLinkInfo.SetOwner" />
 
             
 
@@ -5164,12 +4682,10 @@ symlink.usli -&gt; target.usli
           </para
           >
         </remarks>
-        <exception cref="T:System.InvalidOperationException"
-          >
+        <exception cref="T:System.InvalidOperationException">
           The effective user ID does not match the owner of the file and the
           effective user ID is not the super-user.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.EPERM" />
+            [<see cref="F:Mono.Unix.Native.Errno.EPERM" />
 
           
 
@@ -5179,14 +4695,12 @@ symlink.usli -&gt; target.usli
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCES" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCES" />
 
             
 
@@ -5194,35 +4708,29 @@ symlink.usli -&gt; target.usli
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is not a
           directory.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
           ]
         </exception
         >
-        <exception cref="T:System.IO.FileNotFoundException"
-          >
-          A component of <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <exception cref="T:System.IO.FileNotFoundException">
+          A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            
           that must exist does not exist.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -5237,8 +4745,7 @@ symlink.usli -&gt; target.usli
 
              resides on a
           read-only file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -5249,8 +4756,7 @@ symlink.usli -&gt; target.usli
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -5264,8 +4770,7 @@ symlink.usli -&gt; target.usli
           
 
            was too long.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -5275,14 +4780,12 @@ symlink.usli -&gt; target.usli
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+            [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -5293,8 +4796,7 @@ symlink.usli -&gt; target.usli
           <para
             >An attempt was made to set the sticky bit upon an
             executable.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EFTYPE" />
+            [<see cref="F:Mono.Unix.Native.Errno.EFTYPE" />
 
             
 
@@ -5326,8 +4828,7 @@ symlink.usli -&gt; target.usli
       </Parameters>
       <Docs>
         <param name="owner"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
@@ -5335,8 +4836,7 @@ symlink.usli -&gt; target.usli
           user name of the owner user id to use.</param
         >
         <param name="group"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
@@ -5345,8 +4845,7 @@ symlink.usli -&gt; target.usli
         >
         <summary
           >Set the owner user ID and owner group ID of
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -5354,23 +4853,19 @@ symlink.usli -&gt; target.usli
         </summary
         >
         <remarks>
-          <para
-            >
-            If this is called by the non-super user (usually the <c
-            >root</c>
+          <para>
+            If this is called by the non-super user (usually the <c>root</c>
 
             
 
             
             user), then the 
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
 
             
 
              and
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
 
             
 
@@ -5378,10 +4873,8 @@ symlink.usli -&gt; target.usli
             are cleared.
           </para
           >
-          <para
-            >
-            Classes deriving from <see
-             cref="T:Mono.Unix.UnixFileSystemInfo" />
+          <para>
+            Classes deriving from <see cref="T:Mono.Unix.UnixFileSystemInfo" />
 
             
 
@@ -5390,8 +4883,7 @@ symlink.usli -&gt; target.usli
             default version will follow symbolic links, changing the
             permissions of the symbolic link target instead of the symbolic
             link itself.
-            <see
-             cref="M:Mono.Unix.UnixSymbolicLinkInfo.SetOwner" />
+            <see cref="M:Mono.Unix.UnixSymbolicLinkInfo.SetOwner" />
 
             
 
@@ -5400,12 +4892,10 @@ symlink.usli -&gt; target.usli
           </para
           >
         </remarks>
-        <exception cref="T:System.InvalidOperationException"
-          >
+        <exception cref="T:System.InvalidOperationException">
           The effective user ID does not match the owner of the file and the
           effective user ID is not the super-user.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.EPERM" />
+            [<see cref="F:Mono.Unix.Native.Errno.EPERM" />
 
           
 
@@ -5415,14 +4905,12 @@ symlink.usli -&gt; target.usli
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCES" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCES" />
 
             
 
@@ -5430,35 +4918,29 @@ symlink.usli -&gt; target.usli
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is not a
           directory.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
           ]
         </exception
         >
-        <exception cref="T:System.IO.FileNotFoundException"
-          >
-          A component of <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <exception cref="T:System.IO.FileNotFoundException">
+          A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            
           that must exist does not exist.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -5473,8 +4955,7 @@ symlink.usli -&gt; target.usli
 
              resides on a
           read-only file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -5485,8 +4966,7 @@ symlink.usli -&gt; target.usli
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -5500,8 +4980,7 @@ symlink.usli -&gt; target.usli
           
 
            was too long.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -5511,14 +4990,12 @@ symlink.usli -&gt; target.usli
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+            [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -5529,8 +5006,7 @@ symlink.usli -&gt; target.usli
           <para
             >An attempt was made to set the sticky bit upon an
             executable.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EFTYPE" />
+            [<see cref="F:Mono.Unix.Native.Errno.EFTYPE" />
 
             
 
@@ -5562,22 +5038,19 @@ symlink.usli -&gt; target.usli
       <Docs>
         <summary
           >Converts the instance into a 
-          <see
-           cref="T:Mono.Unix.Native.Stat" />
+          <see cref="T:Mono.Unix.Native.Stat" />
 
           
 
            intance.</summary
         >
         <returns
-          >A <see
-           cref="T:Mono.Unix.Native.Stat" />
+          >A <see cref="T:Mono.Unix.Native.Stat" />
 
           
 
            which contains
-          information about <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          information about <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 

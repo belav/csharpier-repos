@@ -35,18 +35,15 @@
       <para>This algorithm supports key lengths from 128 bits to 192 bits in increments of 64 bits.</para>
       <block subset="none" type="note">
         <para
-          >A newer symmetric encryption algorithm, Advanced Encryption Standard (AES), is available. Consider using the <see
-           cref="T:System.Security.Cryptography.AesCryptoServiceProvider" />
+          >A newer symmetric encryption algorithm, Advanced Encryption Standard (AES), is available. Consider using the <see cref="T:System.Security.Cryptography.AesCryptoServiceProvider" />
 
           
 
-           class instead of the <see
-           cref="T:System.Security.Cryptography.TripleDESCryptoServiceProvider" />
+           class instead of the <see cref="T:System.Security.Cryptography.TripleDESCryptoServiceProvider" />
 
           
 
-           class. Use <see
-           cref="T:System.Security.Cryptography.TripleDESCryptoServiceProvider" />
+           class. Use <see cref="T:System.Security.Cryptography.TripleDESCryptoServiceProvider" />
 
           
 
@@ -57,8 +54,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines a wrapper object to access the cryptographic service provider (CSP) version of the <see
-         cref="T:System.Security.Cryptography.TripleDES" />
+        >Defines a wrapper object to access the cryptographic service provider (CSP) version of the <see cref="T:System.Security.Cryptography.TripleDES" />
 
         
 
@@ -86,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.TripleDESCryptoServiceProvider" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.TripleDESCryptoServiceProvider" />
 
             
 
@@ -122,8 +117,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method decrypts an encrypted message created using the <see
-             cref="M:System.Security.Cryptography.TripleDESCryptoServiceProvider.CreateEncryptor(System.Byte[],System.Byte[])" />
+            >This method decrypts an encrypted message created using the <see cref="M:System.Security.Cryptography.TripleDESCryptoServiceProvider.CreateEncryptor(System.Byte[],System.Byte[])" />
 
             
 
@@ -133,18 +127,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a symmetric <see
-             cref="T:System.Security.Cryptography.TripleDES" />
+            >Creates a symmetric <see cref="T:System.Security.Cryptography.TripleDES" />
 
             
 
-             decryptor object with the specified key (<see
-             cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />
+             decryptor object with the specified key (<see cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />
 
             
 
-            ) and initialization vector (<see
-             cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
+            ) and initialization vector (<see cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
 
             
 
@@ -154,8 +145,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A symmetric <see
-             cref="T:System.Security.Cryptography.TripleDES" />
+            >A symmetric <see cref="T:System.Security.Cryptography.TripleDES" />
 
             
 
@@ -163,14 +153,22 @@
           >
         </returns>
         <param name="rgbKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The secret key to use for the symmetric algorithm. </param
         >
         <param name="rgbIV">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -204,8 +202,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Security.Cryptography.TripleDESCryptoServiceProvider.CreateDecryptor(System.Byte[],System.Byte[])" />
+            >Use the <see cref="M:System.Security.Cryptography.TripleDESCryptoServiceProvider.CreateDecryptor(System.Byte[],System.Byte[])" />
 
             
 
@@ -215,18 +212,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a symmetric <see
-             cref="T:System.Security.Cryptography.TripleDES" />
+            >Creates a symmetric <see cref="T:System.Security.Cryptography.TripleDES" />
 
             
 
-             encryptor object with the specified key (<see
-             cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />
+             encryptor object with the specified key (<see cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />
 
             
 
-            ) and initialization vector (<see
-             cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
+            ) and initialization vector (<see cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
 
             
 
@@ -236,8 +230,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A symmetric <see
-             cref="T:System.Security.Cryptography.TripleDES" />
+            >A symmetric <see cref="T:System.Security.Cryptography.TripleDES" />
 
             
 
@@ -245,14 +238,22 @@
           >
         </returns>
         <param name="rgbKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The secret key to use for the symmetric algorithm. </param
         >
         <param name="rgbIV">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -284,8 +285,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a random initialization vector (<see
-             cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
+            >Generates a random initialization vector (<see cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
 
             
 
@@ -314,8 +314,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to generate a random key when none is specified. This method will never return a weak key (see <see
-             cref="M:System.Security.Cryptography.TripleDES.IsWeakKey(System.Byte[])" />
+            >Use this method to generate a random key when none is specified. This method will never return a weak key (see <see cref="M:System.Security.Cryptography.TripleDES.IsWeakKey(System.Byte[])" />
 
             
 
@@ -326,8 +325,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a random <see
-             cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />
+            >Generates a random <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />
 
             
 

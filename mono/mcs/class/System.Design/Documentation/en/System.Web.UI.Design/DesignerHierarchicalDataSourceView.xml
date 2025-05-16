@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.DesignerHierarchicalDataSourceView" />
+        >The <see cref="T:System.Web.UI.Design.DesignerHierarchicalDataSourceView" />
 
         
 
@@ -48,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initiates a new instance of the <see
-             cref="T:System.Web.UI.Design.DesignerHierarchicalDataSourceView" />
+            >Initiates a new instance of the <see cref="T:System.Web.UI.Design.DesignerHierarchicalDataSourceView" />
 
             
 
@@ -57,19 +55,26 @@
           >
         </summary>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Design.IHierarchicalDataSourceDesigner" />
+          The <see cref="T:System.Web.UI.Design.IHierarchicalDataSourceDesigner" />
 
           
 
            that is the designer for the associated control.</param
         >
         <param name="viewPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -134,8 +139,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The specific nature of the <see
-             cref="P:System.Web.UI.Design.DesignerHierarchicalDataSourceView.Path" />
+            >The specific nature of the <see cref="P:System.Web.UI.Design.DesignerHierarchicalDataSourceView.Path" />
 
             
 
@@ -165,8 +169,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.DesignerHierarchicalDataSourceView.Schema" />
+            >The <see cref="P:System.Web.UI.Design.DesignerHierarchicalDataSourceView.Schema" />
 
             
 

@@ -27,13 +27,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the connection between an instance of <see
-         cref="T:System.Runtime.Serialization.SerializationInfo" />
+        >Provides the connection between an instance of <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
         
 
-         and the formatter-provided class best suited to parse the data inside the <see
-         cref="T:System.Runtime.Serialization.SerializationInfo" />
+         and the formatter-provided class best suited to parse the data inside the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
         
 
@@ -66,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a value to the given <see
-             cref="T:System.Type" />
+            >Converts a value to the given <see cref="T:System.Type" />
 
             
 
@@ -76,34 +73,37 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The converted <paramref
-             name="value" />
+          <para>The converted <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to be converted. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
-           into which <paramref
-           name="value" />
+           into which <paramref name="value" />
 
           
 
@@ -138,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a value to the given <see
-             cref="T:System.TypeCode" />
+            >Converts a value to the given <see cref="T:System.TypeCode" />
 
             
 
@@ -148,34 +147,37 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The converted <paramref
-             name="value" />
+          <para>The converted <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to be converted. </param
         >
         <param name="typeCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.TypeCode" />
+          The <see cref="T:System.TypeCode" />
 
           
 
-           into which <paramref
-           name="value" />
+           into which <paramref name="value" />
 
           
 
@@ -206,8 +208,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a value to a <see
-             cref="T:System.Boolean" />
+            >Converts a value to a <see cref="T:System.Boolean" />
 
             
 
@@ -216,17 +217,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The converted <paramref
-             name="value" />
+          <para>The converted <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -260,17 +262,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The converted <paramref
-             name="value" />
+          <para>The converted <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -304,17 +307,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The converted <paramref
-             name="value" />
+          <para>The converted <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -345,8 +349,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a value to a <see
-             cref="T:System.DateTime" />
+            >Converts a value to a <see cref="T:System.DateTime" />
 
             
 
@@ -355,17 +358,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The converted <paramref
-             name="value" />
+          <para>The converted <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -396,8 +400,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a value to a <see
-             cref="T:System.Decimal" />
+            >Converts a value to a <see cref="T:System.Decimal" />
 
             
 
@@ -406,17 +409,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The converted <paramref
-             name="value" />
+          <para>The converted <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -450,17 +454,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The converted <paramref
-             name="value" />
+          <para>The converted <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -494,17 +499,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The converted <paramref
-             name="value" />
+          <para>The converted <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -538,17 +544,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The converted <paramref
-             name="value" />
+          <para>The converted <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -582,17 +589,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The converted <paramref
-             name="value" />
+          <para>The converted <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -623,8 +631,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a value to a <see
-             cref="T:System.SByte" />
+            >Converts a value to a <see cref="T:System.SByte" />
 
             
 
@@ -633,17 +640,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The converted <paramref
-             name="value" />
+          <para>The converted <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -677,17 +685,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The converted <paramref
-             name="value" />
+          <para>The converted <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -718,8 +727,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a value to a <see
-             cref="T:System.String" />
+            >Converts a value to a <see cref="T:System.String" />
 
             
 
@@ -728,17 +736,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The converted <paramref
-             name="value" />
+          <para>The converted <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -772,17 +781,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The converted <paramref
-             name="value" />
+          <para>The converted <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -816,17 +826,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The converted <paramref
-             name="value" />
+          <para>The converted <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -860,17 +871,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The converted <paramref
-             name="value" />
+          <para>The converted <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

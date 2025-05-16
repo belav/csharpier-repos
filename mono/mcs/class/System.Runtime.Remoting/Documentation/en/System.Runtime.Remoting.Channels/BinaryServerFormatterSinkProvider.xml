@@ -28,47 +28,40 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Channel sinks are connected to a server channel through implementations of the <see
-         cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
+        >Channel sinks are connected to a server channel through implementations of the <see cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
 
         
 
-         interface. All the remoting server channels provide constructors that take a <see
-         cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
+         interface. All the remoting server channels provide constructors that take a <see cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
 
         
 
          as a parameter.</para
       >
       <para
-        >Channel sink providers are stored in a chain, and the user is responsible for chaining all channel sink providers together before passing the outer one to the channel constructor. <see
-         cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
+        >Channel sink providers are stored in a chain, and the user is responsible for chaining all channel sink providers together before passing the outer one to the channel constructor. <see cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
 
         
 
-         provides a property called <see
-         cref="P:System.Runtime.Remoting.Channels.IServerChannelSinkProvider.Next" />
+         provides a property called <see cref="P:System.Runtime.Remoting.Channels.IServerChannelSinkProvider.Next" />
 
         
 
          for this purpose.</para
       >
       <para
-        >When multiple channel sink providers are provided in a configuration file, the remoting infrastructure will chain them together in the order they are found in the configuration file. The channel sink providers will be created when the channel is created during the <see
-         cref="M:System.Runtime.Remoting.RemotingConfiguration.Configure(System.String)" />
+        >When multiple channel sink providers are provided in a configuration file, the remoting infrastructure will chain them together in the order they are found in the configuration file. The channel sink providers will be created when the channel is created during the <see cref="M:System.Runtime.Remoting.RemotingConfiguration.Configure(System.String)" />
 
         
 
          call.</para
       >
       <para
-        >Formatter sinks use sink configuration properties to configure the channel at run time. Sink properties can be specified in a configuration file, or programmatically, inside of a <see
-         cref="T:System.Collections.IDictionary" />
+        >Formatter sinks use sink configuration properties to configure the channel at run time. Sink properties can be specified in a configuration file, or programmatically, inside of a <see cref="T:System.Collections.IDictionary" />
 
         
 
-        . In a configuration file all values are represented by strings, but when building a property <see
-         cref="T:System.Collections.IDictionary" />
+        . In a configuration file all values are represented by strings, but when building a property <see cref="T:System.Collections.IDictionary" />
 
         
 
@@ -98,7 +91,9 @@
       <block subset="none" type="note">
         <para
           >Using an instance of this object with untrusted data or across an unsecure channel is a security risk. Use this object only with trusted data and across a secure channel. For more information, see <see
-           cref="http://go.microsoft.com/fwlink/?LinkId=330378">Untrusted Data Security Risks</see>
+            cref="http://go.microsoft.com/fwlink/?LinkId=330378"
+            >Untrusted Data Security Risks</see
+          >
 
           
 
@@ -109,8 +104,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the implementation for the server formatter channel sink provider that uses the <see
-         cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+        >Provides the implementation for the server formatter channel sink provider that uses the <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
 
         
 
@@ -129,8 +123,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Channels.BinaryServerFormatterSinkProvider" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Channels.BinaryServerFormatterSinkProvider" />
 
             
 
@@ -159,8 +152,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Channels.BinaryServerFormatterSinkProvider" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Channels.BinaryServerFormatterSinkProvider" />
 
             
 
@@ -168,39 +160,42 @@
           >
         </summary>
         <param name="properties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.IDictionary" />
+          A <see cref="T:System.Collections.IDictionary" />
 
           
 
-           of configuration properties to use with the new instance of <see
-           cref="T:System.Runtime.Remoting.Channels.BinaryServerFormatterSinkProvider" />
+           of configuration properties to use with the new instance of <see cref="T:System.Runtime.Remoting.Channels.BinaryServerFormatterSinkProvider" />
 
           
 
           . </param
         >
         <param name="providerData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.ICollection" />
+          A <see cref="T:System.Collections.ICollection" />
 
           
 
-           of <see
-           cref="T:System.Runtime.Remoting.Channels.SinkProviderData" />
+           of <see cref="T:System.Runtime.Remoting.Channels.SinkProviderData" />
 
           
 
-           to use with the new instance of <see
-           cref="T:System.Runtime.Remoting.Channels.BinaryServerFormatterSinkProvider" />
+           to use with the new instance of <see cref="T:System.Runtime.Remoting.Channels.BinaryServerFormatterSinkProvider" />
 
           
 
@@ -235,7 +230,11 @@
           <para>The first sink of the newly formed channel sink chain.</para>
         </returns>
         <param name="channel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -266,12 +265,15 @@
           <para>Returns the channel data for the channel that the current sink is associated with.</para>
         </summary>
         <param name="channelData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Remoting.Channels.IChannelDataStore" />
+          A <see cref="T:System.Runtime.Remoting.Channels.IChannelDataStore" />
 
           
 
@@ -299,8 +301,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the next <see
-             cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
+            >Gets or sets the next <see cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
 
             
 
@@ -336,8 +337,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Supported values are Low (the default) and Full. For details about deserialization levels, see <format
-             type="text/html">
+            >Supported values are Low (the default) and Full. For details about deserialization levels, see <format type="text/html">
               <a href="313a0e88-5b2b-4a17-8391-0ddf9f7a787b"
                 >Automatic Deserialization in .NET Remoting</a
               >

@@ -65,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Policy.ZoneMembershipCondition" />
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.ZoneMembershipCondition" />
 
             
 
@@ -74,12 +73,15 @@
           >
         </summary>
         <param name="zone">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.SecurityZone" />
+          The <see cref="T:System.Security.SecurityZone" />
 
           
 
@@ -112,8 +114,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This membership condition tests only the <see
-             cref="T:System.Security.Policy.Zone" />
+            >This membership condition tests only the <see cref="T:System.Security.Policy.Zone" />
 
             
 
@@ -129,7 +130,11 @@
           <para>true if the specified evidence satisfies the membership condition; otherwise, false.</para>
         </returns>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -191,8 +196,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the zone from the specified object is equivalent to the zone contained in the current <see
-             cref="T:System.Security.Policy.ZoneMembershipCondition" />
+            >Determines whether the zone from the specified object is equivalent to the zone contained in the current <see cref="T:System.Security.Policy.ZoneMembershipCondition" />
 
             
 
@@ -202,8 +206,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the zone from the specified object is equivalent to the zone contained in the current <see
-             cref="T:System.Security.Policy.ZoneMembershipCondition" />
+            >true if the zone from the specified object is equivalent to the zone contained in the current <see cref="T:System.Security.Policy.ZoneMembershipCondition" />
 
             
 
@@ -211,12 +214,15 @@
           >
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to compare to the current <see
-           cref="T:System.Security.Policy.ZoneMembershipCondition" />
+          The object to compare to the current <see cref="T:System.Security.Policy.ZoneMembershipCondition" />
 
           
 
@@ -252,7 +258,11 @@
           <para>Reconstructs a security object with a specified state from an XML encoding.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -289,14 +299,22 @@
           <para>Reconstructs a security object with a specified state from an XML encoding.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML encoding to use to reconstruct the security object. </param
         >
         <param name="level">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -355,8 +373,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Refer to the <see
-             cref="T:System.Security.SecurityZone" />
+            >Refer to the <see cref="T:System.Security.SecurityZone" />
 
             
 
@@ -451,8 +468,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an XML encoding of the security object and its current state with the specified <see
-             cref="T:System.Security.Policy.PolicyLevel" />
+            >Creates an XML encoding of the security object and its current state with the specified <see cref="T:System.Security.Policy.PolicyLevel" />
 
             
 
@@ -464,7 +480,11 @@
           <para>An XML encoding of the security object, including any state information.</para>
         </returns>
         <param name="level">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

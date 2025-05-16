@@ -26,54 +26,45 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used by objects with custom serialization behavior. The <see
-         cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+        >This class is used by objects with custom serialization behavior. The <see cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
 
         
 
-         method on either <see
-         cref="T:System.Runtime.Serialization.ISerializable" />
+         method on either <see cref="T:System.Runtime.Serialization.ISerializable" />
 
         
 
-         or <see
-         cref="T:System.Runtime.Serialization.ISerializationSurrogate" />
+         or <see cref="T:System.Runtime.Serialization.ISerializationSurrogate" />
 
         
 
-         populates the <see
-         cref="T:System.Runtime.Serialization.SerializationInfo" />
+         populates the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
         
 
          store with the name, type, and value of each piece of information it wants to serialize. During deserialization, the appropriate function can extract this information.</para
       >
       <para
-        >Objects are added to the <see
-         cref="T:System.Runtime.Serialization.SerializationInfo" />
+        >Objects are added to the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
         
 
-         store at serialization time using the <see
-         cref="M:System.Runtime.Serialization.SerializationInfo.AddValue(System.String,System.Object,System.Type)" />
+         store at serialization time using the <see cref="M:System.Runtime.Serialization.SerializationInfo.AddValue(System.String,System.Object,System.Type)" />
 
         
 
-         methods and extracted from the <see
-         cref="T:System.Runtime.Serialization.SerializationInfo" />
+         methods and extracted from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
         
 
-         store at deserialization using the <see
-         cref="M:System.Runtime.Serialization.SerializationInfo.GetValue(System.String,System.Type)" />
+         store at deserialization using the <see cref="M:System.Runtime.Serialization.SerializationInfo.GetValue(System.String,System.Type)" />
 
         
 
          methods.</para
       >
       <para
-        >For more information about customizing serialization, see <format
-         type="text/html">
+        >For more information about customizing serialization, see <format type="text/html">
           <a href="12ED422D-5280-49B8-9B71-A2ED129C0384"
             >[&lt;topic://cpconCustomSerialization&gt;]</a
           >
@@ -119,18 +110,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Runtime.Serialization.IFormatterConverter" />
+            >The <see cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
             
 
-             passed as the <paramref
-             name="converter" />
+             passed as the <paramref name="converter" />
 
             
 
-             parameter converts data from its internal representation to the form the user requested. The internal representation of the data within the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             parameter converts data from its internal representation to the form the user requested. The internal representation of the data within the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -140,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Creates a new instance of the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -149,24 +136,30 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            of the object to serialize. </param
         >
         <param name="converter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.IFormatterConverter" />
+          The <see cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
           
 
@@ -197,8 +190,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -226,8 +218,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a Boolean value into the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Adds a Boolean value into the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -235,14 +226,22 @@ End Sub</code>
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -273,8 +272,7 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -284,8 +282,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an 8-bit unsigned integer value into the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Adds an 8-bit unsigned integer value into the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -293,14 +290,22 @@ End Sub</code>
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -331,8 +336,7 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -342,8 +346,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a Unicode character value into the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Adds a Unicode character value into the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -351,14 +354,22 @@ End Sub</code>
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -389,8 +400,7 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -400,13 +410,11 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.DateTime" />
+            >Adds a <see cref="T:System.DateTime" />
 
             
 
-             value into the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             value into the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -414,19 +422,26 @@ End Sub</code>
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
@@ -457,8 +472,7 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -468,8 +482,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a decimal value into the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Adds a decimal value into the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -477,14 +490,22 @@ End Sub</code>
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -515,8 +536,7 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -526,8 +546,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a double-precision floating-point value into the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Adds a double-precision floating-point value into the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -535,14 +554,22 @@ End Sub</code>
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -573,8 +600,7 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -584,8 +610,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a 16-bit signed integer value into the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Adds a 16-bit signed integer value into the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -593,14 +618,22 @@ End Sub</code>
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -631,8 +664,7 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -642,8 +674,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a 32-bit signed integer value into the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Adds a 32-bit signed integer value into the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -651,14 +682,22 @@ End Sub</code>
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -689,8 +728,7 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -700,8 +738,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a 64-bit signed integer value into the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Adds a 64-bit signed integer value into the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -709,14 +746,22 @@ End Sub</code>
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -747,21 +792,18 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object contained in the <paramref
-             name="value" />
+            >The object contained in the <paramref name="value" />
 
             
 
-             parameter is serialized as the type returned by <paramref
-             name="value" />
+             parameter is serialized as the type returned by <paramref name="value" />
 
             
 
             . </para
           >
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -771,8 +813,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified object into the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Adds the specified object into the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -780,14 +821,22 @@ End Sub</code>
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -823,8 +872,7 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -834,8 +882,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an 8-bit signed integer value into the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Adds an 8-bit signed integer value into the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -843,14 +890,22 @@ End Sub</code>
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -881,8 +936,7 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -892,8 +946,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a single-precision floating-point value into the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Adds a single-precision floating-point value into the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -901,14 +954,22 @@ End Sub</code>
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -944,8 +1005,7 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -955,8 +1015,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a 16-bit unsigned integer value into the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Adds a 16-bit unsigned integer value into the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -964,14 +1023,22 @@ End Sub</code>
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1007,8 +1074,7 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -1018,8 +1084,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a 32-bit unsigned integer value into the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Adds a 32-bit unsigned integer value into the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1027,14 +1092,22 @@ End Sub</code>
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1070,8 +1143,7 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -1081,8 +1153,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a 64-bit unsigned integer value into the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Adds a 64-bit unsigned integer value into the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1090,14 +1161,22 @@ End Sub</code>
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1133,8 +1212,7 @@ End Sub</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The assigned type is always the type of the object, or one of its parents.</para>
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -1144,23 +1222,19 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a value into the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Adds a value into the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             store, where <paramref
-             name="value" />
+             store, where <paramref name="value" />
 
             
 
-             is associated with <paramref
-             name="name" />
+             is associated with <paramref name="name" />
 
             
 
-             and is serialized as being of <see
-             cref="T:System.Type" />
+             and is serialized as being of <see cref="T:System.Type" />
             <paramref name="type" />
 
             
@@ -1169,26 +1243,37 @@ End Sub</code>
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value to be serialized. Any children of this object will automatically be serialized. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -1213,13 +1298,11 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Runtime.Serialization.SerializationInfo.AssemblyName" />
+            >The <see cref="P:System.Runtime.Serialization.SerializationInfo.AssemblyName" />
 
             
 
-             is the same as the value returned by <see
-             cref="P:System.Reflection.Assembly.FullName" />
+             is the same as the value returned by <see cref="P:System.Reflection.Assembly.FullName" />
 
             
 
@@ -1254,18 +1337,15 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Runtime.Serialization.SerializationInfo.FullTypeName" />
+            >The <see cref="P:System.Runtime.Serialization.SerializationInfo.FullTypeName" />
 
             
 
-             is the same as what would be returned by calling the <see
-             cref="P:System.Type.FullName" />
+             is the same as what would be returned by calling the <see cref="P:System.Type.FullName" />
 
             
 
-             on <see
-             cref="T:System.Type" />
+             on <see cref="T:System.Type" />
 
             
 
@@ -1279,8 +1359,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the full name of the <see
-             cref="T:System.Type" />
+            >Gets or sets the full name of the <see cref="T:System.Type" />
 
             
 
@@ -1311,18 +1390,15 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value is a Boolean, or can be converted to one, that value is returned; otherwise, a <see
-             cref="T:System.InvalidCastException" />
+            >If the value is a Boolean, or can be converted to one, that value is returned; otherwise, a <see cref="T:System.InvalidCastException" />
 
             
 
-             is thrown. All conversions are done by the <see
-             cref="T:System.Runtime.Serialization.IFormatterConverter" />
+             is thrown. All conversions are done by the <see cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
             
 
-             associated with this <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             associated with this <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1332,8 +1408,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a Boolean value from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Retrieves a Boolean value from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1343,8 +1418,7 @@ End Sub</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Boolean value associated with <paramref
-             name="name" />
+            >The Boolean value associated with <paramref name="name" />
 
             
 
@@ -1352,7 +1426,11 @@ End Sub</code>
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1382,18 +1460,15 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value is an 8-bit unsigned integer, or can be converted to one, that value is returned; otherwise, a <see
-             cref="T:System.InvalidCastException" />
+            >If the value is an 8-bit unsigned integer, or can be converted to one, that value is returned; otherwise, a <see cref="T:System.InvalidCastException" />
 
             
 
-             is thrown. All conversions are done by the <see
-             cref="T:System.Runtime.Serialization.IFormatterConverter" />
+             is thrown. All conversions are done by the <see cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
             
 
-             associated with this <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             associated with this <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1403,8 +1478,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves an 8-bit unsigned integer value from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Retrieves an 8-bit unsigned integer value from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1414,8 +1488,7 @@ End Sub</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The 8-bit unsigned integer associated with <paramref
-             name="name" />
+            >The 8-bit unsigned integer associated with <paramref name="name" />
 
             
 
@@ -1423,7 +1496,11 @@ End Sub</code>
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1453,18 +1530,15 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value is a Unicode character, or can be converted to one, that value is returned; otherwise, a <see
-             cref="T:System.InvalidCastException" />
+            >If the value is a Unicode character, or can be converted to one, that value is returned; otherwise, a <see cref="T:System.InvalidCastException" />
 
             
 
-             is thrown. All conversions are done by the <see
-             cref="T:System.Runtime.Serialization.IFormatterConverter" />
+             is thrown. All conversions are done by the <see cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
             
 
-             associated with this <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             associated with this <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1474,8 +1548,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a Unicode character value from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Retrieves a Unicode character value from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1485,8 +1558,7 @@ End Sub</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Unicode character associated with <paramref
-             name="name" />
+            >The Unicode character associated with <paramref name="name" />
 
             
 
@@ -1494,7 +1566,11 @@ End Sub</code>
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1524,28 +1600,23 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value is a <see
-             cref="T:System.DateTime" />
+            >If the value is a <see cref="T:System.DateTime" />
 
             
 
-            , or can be converted to a <see
-             cref="T:System.DateTime" />
+            , or can be converted to a <see cref="T:System.DateTime" />
 
             
 
-            , that value is returned; otherwise, a <see
-             cref="T:System.InvalidCastException" />
+            , that value is returned; otherwise, a <see cref="T:System.InvalidCastException" />
 
             
 
-             is thrown. All conversions are done by the <see
-             cref="T:System.Runtime.Serialization.IFormatterConverter" />
+             is thrown. All conversions are done by the <see cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
             
 
-             associated with this <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             associated with this <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1555,13 +1626,11 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a <see
-             cref="T:System.DateTime" />
+            >Retrieves a <see cref="T:System.DateTime" />
 
             
 
-             value from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             value from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1571,13 +1640,11 @@ End Sub</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.DateTime" />
+            >The <see cref="T:System.DateTime" />
 
             
 
-             value associated with <paramref
-             name="name" />
+             value associated with <paramref name="name" />
 
             
 
@@ -1585,7 +1652,11 @@ End Sub</code>
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1615,18 +1686,15 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value is a decimal, or can be converted to a decimal, that value is returned; otherwise, a <see
-             cref="T:System.InvalidCastException" />
+            >If the value is a decimal, or can be converted to a decimal, that value is returned; otherwise, a <see cref="T:System.InvalidCastException" />
 
             
 
-             is thrown. All conversions are done by the <see
-             cref="T:System.Runtime.Serialization.IFormatterConverter" />
+             is thrown. All conversions are done by the <see cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
             
 
-             associated with this <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             associated with this <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1636,8 +1704,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a decimal value from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Retrieves a decimal value from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1647,8 +1714,7 @@ End Sub</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A decimal value from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >A decimal value from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1656,7 +1722,11 @@ End Sub</code>
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1686,18 +1756,15 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value is a double, or can be converted to a double, that value is returned; otherwise, a <see
-             cref="T:System.InvalidCastException" />
+            >If the value is a double, or can be converted to a double, that value is returned; otherwise, a <see cref="T:System.InvalidCastException" />
 
             
 
-             is thrown. All conversions are done by the <see
-             cref="T:System.Runtime.Serialization.IFormatterConverter" />
+             is thrown. All conversions are done by the <see cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
             
 
-             associated with this <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             associated with this <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1707,8 +1774,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a double-precision floating-point value from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Retrieves a double-precision floating-point value from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1718,8 +1784,7 @@ End Sub</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The double-precision floating-point value associated with <paramref
-             name="name" />
+            >The double-precision floating-point value associated with <paramref name="name" />
 
             
 
@@ -1727,7 +1792,11 @@ End Sub</code>
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1762,13 +1831,11 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Runtime.Serialization.SerializationInfoEnumerator" />
+            >Returns a <see cref="T:System.Runtime.Serialization.SerializationInfoEnumerator" />
 
             
 
-             used to iterate through the name-value pairs in the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             used to iterate through the name-value pairs in the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1778,13 +1845,11 @@ End Sub</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Runtime.Serialization.SerializationInfoEnumerator" />
+            >A <see cref="T:System.Runtime.Serialization.SerializationInfoEnumerator" />
 
             
 
-             for parsing the name-value pairs contained in the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             for parsing the name-value pairs contained in the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1815,18 +1880,15 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value is a 16-bit signed integer, or can be converted to one, that value is returned; otherwise, a <see
-             cref="T:System.InvalidCastException" />
+            >If the value is a 16-bit signed integer, or can be converted to one, that value is returned; otherwise, a <see cref="T:System.InvalidCastException" />
 
             
 
-             is thrown. All conversions are done by the <see
-             cref="T:System.Runtime.Serialization.IFormatterConverter" />
+             is thrown. All conversions are done by the <see cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
             
 
-             associated with this <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             associated with this <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1836,8 +1898,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a 16-bit signed integer value from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Retrieves a 16-bit signed integer value from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1847,8 +1908,7 @@ End Sub</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The 16-bit signed integer associated with <paramref
-             name="name" />
+            >The 16-bit signed integer associated with <paramref name="name" />
 
             
 
@@ -1856,7 +1916,11 @@ End Sub</code>
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1886,18 +1950,15 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value is a 32-bit signed integer, or can be converted to one, that value is returned; otherwise, a <see
-             cref="T:System.InvalidCastException" />
+            >If the value is a 32-bit signed integer, or can be converted to one, that value is returned; otherwise, a <see cref="T:System.InvalidCastException" />
 
             
 
-             is thrown. All conversions are done by the <see
-             cref="T:System.Runtime.Serialization.IFormatterConverter" />
+             is thrown. All conversions are done by the <see cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
             
 
-             associated with this <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             associated with this <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1907,8 +1968,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a 32-bit signed integer value from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Retrieves a 32-bit signed integer value from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1918,8 +1978,7 @@ End Sub</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The 32-bit signed integer associated with <paramref
-             name="name" />
+            >The 32-bit signed integer associated with <paramref name="name" />
 
             
 
@@ -1927,7 +1986,11 @@ End Sub</code>
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1957,18 +2020,15 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value is a 64-bit signed integer, or can be converted to one, that value is returned; otherwise, a <see
-             cref="T:System.InvalidCastException" />
+            >If the value is a 64-bit signed integer, or can be converted to one, that value is returned; otherwise, a <see cref="T:System.InvalidCastException" />
 
             
 
-             is thrown. All conversions are done by the <see
-             cref="T:System.Runtime.Serialization.IFormatterConverter" />
+             is thrown. All conversions are done by the <see cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
             
 
-             associated with this <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             associated with this <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1978,8 +2038,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a 64-bit signed integer value from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Retrieves a 64-bit signed integer value from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1989,8 +2048,7 @@ End Sub</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The 64-bit signed integer associated with <paramref
-             name="name" />
+            >The 64-bit signed integer associated with <paramref name="name" />
 
             
 
@@ -1998,7 +2056,11 @@ End Sub</code>
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2033,18 +2095,15 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value is an Int8, or can be converted to an Int8, that value is returned; otherwise, a <see
-             cref="T:System.InvalidCastException" />
+            >If the value is an Int8, or can be converted to an Int8, that value is returned; otherwise, a <see cref="T:System.InvalidCastException" />
 
             
 
-             is thrown. All conversions are done by the <see
-             cref="T:System.Runtime.Serialization.IFormatterConverter" />
+             is thrown. All conversions are done by the <see cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
             
 
-             associated with this <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             associated with this <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -2054,8 +2113,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves an 8-bit signed integer value from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Retrieves an 8-bit signed integer value from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -2065,8 +2123,7 @@ End Sub</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The 8-bit signed integer associated with <paramref
-             name="name" />
+            >The 8-bit signed integer associated with <paramref name="name" />
 
             
 
@@ -2074,7 +2131,11 @@ End Sub</code>
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2104,18 +2165,15 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value is a single-precision floating-point number, or can be converted to one, that value is returned; otherwise, a <see
-             cref="T:System.InvalidCastException" />
+            >If the value is a single-precision floating-point number, or can be converted to one, that value is returned; otherwise, a <see cref="T:System.InvalidCastException" />
 
             
 
-             is thrown. All conversions are done by the <see
-             cref="T:System.Runtime.Serialization.IFormatterConverter" />
+             is thrown. All conversions are done by the <see cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
             
 
-             associated with this <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             associated with this <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -2125,8 +2183,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a single-precision floating-point value from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Retrieves a single-precision floating-point value from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -2136,8 +2193,7 @@ End Sub</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The single-precision floating-point value associated with <paramref
-             name="name" />
+            >The single-precision floating-point value associated with <paramref name="name" />
 
             
 
@@ -2145,7 +2201,11 @@ End Sub</code>
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2175,28 +2235,23 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value is a <see
-             cref="T:System.String" />
+            >If the value is a <see cref="T:System.String" />
 
             
 
-            , or can be converted to a <see
-             cref="T:System.String" />
+            , or can be converted to a <see cref="T:System.String" />
 
             
 
-            , that value is returned; otherwise, a <see
-             cref="T:System.InvalidCastException" />
+            , that value is returned; otherwise, a <see cref="T:System.InvalidCastException" />
 
             
 
-             is thrown. All conversions are done by the <see
-             cref="T:System.Runtime.Serialization.IFormatterConverter" />
+             is thrown. All conversions are done by the <see cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
             
 
-             associated with this <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             associated with this <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -2206,13 +2261,11 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a <see
-             cref="T:System.String" />
+            >Retrieves a <see cref="T:System.String" />
 
             
 
-             value from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             value from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -2222,13 +2275,11 @@ End Sub</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.String" />
+            >The <see cref="T:System.String" />
 
             
 
-             associated with <paramref
-             name="name" />
+             associated with <paramref name="name" />
 
             
 
@@ -2236,7 +2287,11 @@ End Sub</code>
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2271,18 +2326,15 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value is a 16-bit unsigned integer, or can be converted to one, that value is returned; otherwise, a <see
-             cref="T:System.InvalidCastException" />
+            >If the value is a 16-bit unsigned integer, or can be converted to one, that value is returned; otherwise, a <see cref="T:System.InvalidCastException" />
 
             
 
-             is thrown. All conversions are done by the <see
-             cref="T:System.Runtime.Serialization.IFormatterConverter" />
+             is thrown. All conversions are done by the <see cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
             
 
-             associated with this <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             associated with this <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -2292,8 +2344,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a 16-bit unsigned integer value from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Retrieves a 16-bit unsigned integer value from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -2303,8 +2354,7 @@ End Sub</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The 16-bit unsigned integer associated with <paramref
-             name="name" />
+            >The 16-bit unsigned integer associated with <paramref name="name" />
 
             
 
@@ -2312,7 +2362,11 @@ End Sub</code>
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2347,18 +2401,15 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value is a 32-bit signed integer, or can be converted to one, that value is returned; otherwise, a <see
-             cref="T:System.InvalidCastException" />
+            >If the value is a 32-bit signed integer, or can be converted to one, that value is returned; otherwise, a <see cref="T:System.InvalidCastException" />
 
             
 
-             is thrown. All conversions are done by the <see
-             cref="T:System.Runtime.Serialization.IFormatterConverter" />
+             is thrown. All conversions are done by the <see cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
             
 
-             associated with this <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             associated with this <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -2368,8 +2419,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a 32-bit unsigned integer value from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Retrieves a 32-bit unsigned integer value from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -2379,8 +2429,7 @@ End Sub</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The 32-bit unsigned integer associated with <paramref
-             name="name" />
+            >The 32-bit unsigned integer associated with <paramref name="name" />
 
             
 
@@ -2388,7 +2437,11 @@ End Sub</code>
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2423,18 +2476,15 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value is a 64-bit unsigned integer, or can be converted to one, that value is returned; otherwise, a <see
-             cref="T:System.InvalidCastException" />
+            >If the value is a 64-bit unsigned integer, or can be converted to one, that value is returned; otherwise, a <see cref="T:System.InvalidCastException" />
 
             
 
-             is thrown. All conversions are done by the <see
-             cref="T:System.Runtime.Serialization.IFormatterConverter" />
+             is thrown. All conversions are done by the <see cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
             
 
-             associated with this <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             associated with this <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -2444,8 +2494,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a 64-bit unsigned integer value from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Retrieves a 64-bit unsigned integer value from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -2455,8 +2504,7 @@ End Sub</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The 64-bit unsigned integer associated with <paramref
-             name="name" />
+            >The 64-bit unsigned integer associated with <paramref name="name" />
 
             
 
@@ -2464,7 +2512,11 @@ End Sub</code>
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2495,26 +2547,22 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the data stored in the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >If the data stored in the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             is of the type requested (or one of its derived classes), that value is returned directly. Otherwise, <see
-             cref="M:System.Runtime.Serialization.IFormatterConverter.Convert(System.Object,System.Type)" />
+             is of the type requested (or one of its derived classes), that value is returned directly. Otherwise, <see cref="M:System.Runtime.Serialization.IFormatterConverter.Convert(System.Object,System.Type)" />
 
             
 
              is called to convert it to the appropriate type.</para
           >
           <para
-            >The value returned by the <see
-             cref="M:System.Runtime.Serialization.SerializationInfo.GetValue(System.String,System.Type)" />
+            >The value returned by the <see cref="M:System.Runtime.Serialization.SerializationInfo.GetValue(System.String,System.Type)" />
 
             
 
-             method can always be safely cast to the type specified in the <paramref
-             name="type" />
+             method can always be safely cast to the type specified in the <paramref name="type" />
 
             
 
@@ -2524,8 +2572,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a value from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Retrieves a value from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -2535,13 +2582,11 @@ End Sub</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object of the specified <see
-             cref="T:System.Type" />
+            >The object of the specified <see cref="T:System.Type" />
 
             
 
-             associated with <paramref
-             name="name" />
+             associated with <paramref name="name" />
 
             
 
@@ -2549,24 +2594,30 @@ End Sub</code>
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name associated with the value to retrieve.</param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
-           of the value to retrieve. If the stored value cannot be converted to this type, the system will throw a <see
-           cref="T:System.InvalidCastException" />
+           of the value to retrieve. If the stored value cannot be converted to this type, the system will throw a <see cref="T:System.InvalidCastException" />
 
           
 
@@ -2630,8 +2681,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of members that have been added to the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Gets the number of members that have been added to the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -2681,43 +2731,35 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Runtime.Serialization.Formatter" />
+            >The <see cref="T:System.Runtime.Serialization.Formatter" />
 
             
 
-             is responsible for setting the <see
-             cref="T:System.Type" />
+             is responsible for setting the <see cref="T:System.Type" />
 
             
 
-             of the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             of the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             instance before passing it to <see
-             cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+             instance before passing it to <see cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
 
             
 
-            . However, users who want to send proxies for their objects will need to change the type represented by this <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            . However, users who want to send proxies for their objects will need to change the type represented by this <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             instance. Using the <see
-             cref="M:System.Runtime.Serialization.SerializationInfo.SetType(System.Type)" />
+             instance. Using the <see cref="M:System.Runtime.Serialization.SerializationInfo.SetType(System.Type)" />
 
             
 
-             method is equivalent to setting both the <see
-             cref="P:System.Runtime.Serialization.SerializationInfo.FullTypeName" />
+             method is equivalent to setting both the <see cref="P:System.Runtime.Serialization.SerializationInfo.FullTypeName" />
 
             
 
-             and the <see
-             cref="P:System.Runtime.Serialization.SerializationInfo.AssemblyName" />
+             and the <see cref="P:System.Runtime.Serialization.SerializationInfo.AssemblyName" />
 
             
 
@@ -2727,8 +2769,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Type" />
+            >Sets the <see cref="T:System.Type" />
 
             
 
@@ -2736,12 +2777,15 @@ End Sub</code>
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 

@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.Sockets.UdpClient" />
+        >The <see cref="T:System.Net.Sockets.UdpClient" />
 
         
 
@@ -36,8 +35,7 @@
       <list type="bullet">
         <item>
           <para
-            >Create an instance of the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >Create an instance of the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -46,13 +44,11 @@
         </item>
         <item>
           <para
-            >Create an instance of the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >Create an instance of the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             class and then call the <see
-             cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+             class and then call the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
             
 
@@ -61,13 +57,11 @@
         </item>
       </list>
       <para
-        >You can use any of the send methods provided in the <see
-         cref="T:System.Net.Sockets.UdpClient" />
+        >You can use any of the send methods provided in the <see cref="T:System.Net.Sockets.UdpClient" />
 
         
 
-         to send data to a remote device. Use the <see
-         cref="M:System.Net.Sockets.UdpClient.Receive(System.Net.IPEndPoint@)" />
+         to send data to a remote device. Use the <see cref="M:System.Net.Sockets.UdpClient.Receive(System.Net.IPEndPoint@)" />
 
         
 
@@ -75,18 +69,15 @@
       >
       <block subset="none" type="note">
         <para
-          >Do not call <see
-           cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+          >Do not call <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
           
 
-           using a host name or <see
-           cref="T:System.Net.IPEndPoint" />
+           using a host name or <see cref="T:System.Net.IPEndPoint" />
 
           
 
-           if you have already specified a default remote host. If you do, <see
-           cref="T:System.Net.Sockets.UdpClient" />
+           if you have already specified a default remote host. If you do, <see cref="T:System.Net.Sockets.UdpClient" />
 
           
 
@@ -98,23 +89,19 @@
 
         
 
-         methods also allow you to send and receive multicast datagrams. Use the <see
-         cref="M:System.Net.Sockets.UdpClient.JoinMulticastGroup(System.Net.IPAddress)" />
+         methods also allow you to send and receive multicast datagrams. Use the <see cref="M:System.Net.Sockets.UdpClient.JoinMulticastGroup(System.Net.IPAddress)" />
 
         
 
-         method to subscribe a <see
-         cref="T:System.Net.Sockets.UdpClient" />
+         method to subscribe a <see cref="T:System.Net.Sockets.UdpClient" />
 
         
 
-         to a multicast group. Use the <see
-         cref="M:System.Net.Sockets.UdpClient.DropMulticastGroup(System.Net.IPAddress)" />
+         to a multicast group. Use the <see cref="M:System.Net.Sockets.UdpClient.DropMulticastGroup(System.Net.IPAddress)" />
 
         
 
-         method to unsubscribe a <see
-         cref="T:System.Net.Sockets.UdpClient" />
+         method to unsubscribe a <see cref="T:System.Net.Sockets.UdpClient" />
 
         
 
@@ -145,13 +132,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a new <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >This constructor creates a new <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             and allows the underlying service provider to assign the most appropriate local IPv4 address and port number. If this constructor is used, the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             and allows the underlying service provider to assign the most appropriate local IPv4 address and port number. If this constructor is used, the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -159,13 +144,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -177,8 +160,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -207,13 +189,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates an underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+            >This constructor creates an underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             and binds it to the port number from which you intend to communicate. Use this constructor if you are only interested in setting the local port number. The underlying service provider will assign the local IP address. If you pass 0 to the constructor, the underlying service provider will assign a port number. If this constructor is used, the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             and binds it to the port number from which you intend to communicate. Use this constructor if you are only interested in setting the local port number. The underlying service provider will assign the local IP address. If you pass 0 to the constructor, the underlying service provider will assign a port number. If this constructor is used, the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -221,13 +201,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -239,8 +217,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -248,7 +225,11 @@
           >
         </summary>
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -276,36 +257,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a new <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >This constructor creates a new <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             and binds it to the <see
-             cref="T:System.Net.IPEndPoint" />
+             and binds it to the <see cref="T:System.Net.IPEndPoint" />
 
             
 
-             specified by the <paramref
-             name="localEP" />
+             specified by the <paramref name="localEP" />
 
             
 
-             parameter. Before you call this constructor, you must create an <see
-             cref="T:System.Net.IPEndPoint" />
+             parameter. Before you call this constructor, you must create an <see cref="T:System.Net.IPEndPoint" />
 
             
 
              using the IP address and port number from which you intend to send and receive data. You do not need to specify a local IP address and port number for sending and receiving data. If you do not, the underlying service provider will assign the most appropriate local IP address and port number.</para
           >
           <para
-            >If this constructor is used, the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >If this constructor is used, the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             instance is set with the address family specified by the <paramref
-             name="localEP" />
+             instance is set with the address family specified by the <paramref name="localEP" />
 
             
 
@@ -313,13 +288,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -330,8 +303,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -339,12 +311,15 @@
           >
         </summary>
         <param name="localEP">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Net.IPEndPoint" />
+          An <see cref="T:System.Net.IPEndPoint" />
 
           
 
@@ -374,36 +349,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="family" />
+            >The <paramref name="family" />
 
             
 
-             parameter determines whether the listener uses an IP version 4 address (IPv4) or an IP version 6 (IPv6) address. To use an IPv4 address, pass the <see
-             cref="F:System.Net.Sockets.AddressFamily.InterNetwork" />
+             parameter determines whether the listener uses an IP version 4 address (IPv4) or an IP version 6 (IPv6) address. To use an IPv4 address, pass the <see cref="F:System.Net.Sockets.AddressFamily.InterNetwork" />
 
             
 
-             value. To use an IPv6 address, pass the <see
-             cref="F:System.Net.Sockets.AddressFamily.InterNetworkV6" />
+             value. To use an IPv6 address, pass the <see cref="F:System.Net.Sockets.AddressFamily.InterNetworkV6" />
 
             
 
-             value. Passing any other value will cause the method to throw an <see
-             cref="T:System.ArgumentException" />
+             value. Passing any other value will cause the method to throw an <see cref="T:System.ArgumentException" />
 
             
 
             .</para
           >
           <para
-            >If this constructor is used, the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >If this constructor is used, the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             instance is set with the address family specified by the <paramref
-             name="family" />
+             instance is set with the address family specified by the <paramref name="family" />
 
             
 
@@ -411,13 +380,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -425,8 +392,7 @@
             >
           </block>
           <para
-            >The <see
-             cref="M:System.Net.Sockets.UdpClient.#ctor(System.Net.Sockets.AddressFamily)" />
+            >The <see cref="M:System.Net.Sockets.UdpClient.#ctor(System.Net.Sockets.AddressFamily)" />
 
             
 
@@ -436,8 +402,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -445,12 +410,15 @@
           >
         </summary>
         <param name="family">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Net.Sockets.AddressFamily" />
+          One of the <see cref="T:System.Net.Sockets.AddressFamily" />
 
           
 
@@ -481,44 +449,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates an underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+            >This constructor creates an underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
              and binds it to the port number from which you intend to communicate.</para
           >
           <para
-            >The <paramref
-             name="family" />
+            >The <paramref name="family" />
 
             
 
-             parameter determines whether the listener uses an IP version 4 address (IPv4) or an IP version 6 (IPv6) address. To use an IPv4 address, pass the <see
-             cref="F:System.Net.Sockets.AddressFamily.InterNetwork" />
+             parameter determines whether the listener uses an IP version 4 address (IPv4) or an IP version 6 (IPv6) address. To use an IPv4 address, pass the <see cref="F:System.Net.Sockets.AddressFamily.InterNetwork" />
 
             
 
-             value. To use an IPv6 address, pass the <see
-             cref="F:System.Net.Sockets.AddressFamily.InterNetworkV6" />
+             value. To use an IPv6 address, pass the <see cref="F:System.Net.Sockets.AddressFamily.InterNetworkV6" />
 
             
 
-             value. Passing any other value will cause the method to throw an <see
-             cref="T:System.ArgumentException" />
+             value. Passing any other value will cause the method to throw an <see cref="T:System.ArgumentException" />
 
             
 
             .</para
           >
           <para
-            >If this constructor is used, the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >If this constructor is used, the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             instance is set with the address family specified by the <paramref
-             name="family" />
+             instance is set with the address family specified by the <paramref name="family" />
 
             
 
@@ -526,13 +487,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -543,8 +502,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -552,19 +510,26 @@
           >
         </summary>
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The port on which to listen for incoming connection attempts. </param
         >
         <param name="family">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Net.Sockets.AddressFamily" />
+          One of the <see cref="T:System.Net.Sockets.AddressFamily" />
 
           
 
@@ -593,33 +558,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes a new <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >This constructor initializes a new <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             and establishes a remote host using the <paramref
-             name="hostname" />
+             and establishes a remote host using the <paramref name="hostname" />
 
             
 
-             and <paramref
-             name="port" />
+             and <paramref name="port" />
 
             
 
-             parameters. Establishing a default remote host is optional. If you use this constructor, you do not have to specify a remote host in each call to the <see
-             cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+             parameters. Establishing a default remote host is optional. If you use this constructor, you do not have to specify a remote host in each call to the <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
             
 
-             method. Specifying a default remote host limits you to that host only. You can change the default remote host at any time by calling the <see
-             cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+             method. Specifying a default remote host limits you to that host only. You can change the default remote host at any time by calling the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
             
 
-             method. If you want to specify a remote host in your call to the <see
-             cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+             method. If you want to specify a remote host in your call to the <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
             
 
@@ -627,13 +586,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -644,8 +601,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -653,14 +609,22 @@
           >
         </summary>
         <param name="hostname">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the remote DNS host to which you intend to connect. </param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -685,18 +649,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Classes deriving from <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >Classes deriving from <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             can use this property to determine if a default remote host has been established. You can establish a default remote host by using the appropriate constructor or by calling the <see
-             cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+             can use this property to determine if a default remote host has been established. You can establish a default remote host by using the appropriate constructor or by calling the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
             
 
-             method. If you do establish a default remote host, you cannot specify a remote host in your call to <see
-             cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+             method. If you do establish a default remote host, you cannot specify a remote host in your call to <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
             
 
@@ -725,31 +686,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Sockets.UdpClient.Available" />
+            >The <see cref="P:System.Net.Sockets.UdpClient.Available" />
 
             
 
-             property is used to determine the amount of data queued in the network buffer for reading. If data is available, call <see
-             cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+             property is used to determine the amount of data queued in the network buffer for reading. If data is available, call <see cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             to get the data. If no data is available, the <see
-             cref="P:System.Net.Sockets.UdpClient.Available" />
+             to get the data. If no data is available, the <see cref="P:System.Net.Sockets.UdpClient.Available" />
 
             
 
              property returns 0.</para
           >
           <para
-            >If the remote host shuts down or closes the connection, the <see
-             cref="P:System.Net.Sockets.UdpClient.Available" />
+            >If the remote host shuts down or closes the connection, the <see cref="P:System.Net.Sockets.UdpClient.Available" />
 
             
 
-             property throws a <see
-             cref="T:System.Net.Sockets.SocketException" />
+             property throws a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
@@ -757,18 +713,18 @@
           >
           <block subset="none" type="note">
             <para
-              > If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              > If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
                to obtain the specific error code and refer to the Windows Sockets version 2 API error code documentation in the MSDN library at <see
-               cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+                cref="http://msdn.microsoft.com/library"
+                >http://msdn.microsoft.com/library</see
+              >
 
               
 
@@ -807,34 +763,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The asynchronous <see
-             cref="M:System.Net.Sockets.UdpClient.BeginReceive(System.AsyncCallback,System.Object)" />
+            >The asynchronous <see cref="M:System.Net.Sockets.UdpClient.BeginReceive(System.AsyncCallback,System.Object)" />
 
             
 
-             operation must be completed by calling the <see
-             cref="M:System.Net.Sockets.UdpClient.EndReceive(System.IAsyncResult,System.Net.IPEndPoint@)" />
+             operation must be completed by calling the <see cref="M:System.Net.Sockets.UdpClient.EndReceive(System.IAsyncResult,System.Net.IPEndPoint@)" />
 
             
 
-             method. Typically, the method is invoked by the <paramref
-             name="requestCallback" />
+             method. Typically, the method is invoked by the <paramref name="requestCallback" />
 
             
 
              delegate.</para
           >
           <para
-            >This method does not block until the operation is complete. To block until the operation is complete, use the <see
-             cref="M:System.Net.Sockets.UdpClient.Receive(System.Net.IPEndPoint@)" />
+            >This method does not block until the operation is complete. To block until the operation is complete, use the <see cref="M:System.Net.Sockets.UdpClient.Receive(System.Net.IPEndPoint@)" />
 
             
 
              method.</para
           >
           <para
-            >For detailed information about using the asynchronous programming model, see <format
-             type="text/html">
+            >For detailed information about using the asynchronous programming model, see <format type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
 
@@ -850,8 +801,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -859,24 +809,30 @@
           >
         </returns>
         <param name="requestCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when the operation is complete. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined object that contains information about the receive operation. This object is passed to the <paramref
-           name="requestCallback" />
+          A user-defined object that contains information about the receive operation. This object is passed to the <paramref name="requestCallback" />
 
           
 
@@ -911,34 +867,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The asynchronous <see
-             cref="M:System.Net.Sockets.UdpClient.BeginSend(System.Byte[],System.Int32,System.AsyncCallback,System.Object)" />
+            >The asynchronous <see cref="M:System.Net.Sockets.UdpClient.BeginSend(System.Byte[],System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             operation must be completed by calling the <see
-             cref="M:System.Net.Sockets.UdpClient.EndSend(System.IAsyncResult)" />
+             operation must be completed by calling the <see cref="M:System.Net.Sockets.UdpClient.EndSend(System.IAsyncResult)" />
 
             
 
-             method. Typically, the method is invoked by the <paramref
-             name="requestCallback" />
+             method. Typically, the method is invoked by the <paramref name="requestCallback" />
 
             
 
              delegate.</para
           >
           <para
-            >This method does not block until the operation completes. To block until the operation is complete, use one of the <see
-             cref="Overload:System.Net.Sockets.UdpClient.Send" />
+            >This method does not block until the operation completes. To block until the operation is complete, use one of the <see cref="Overload:System.Net.Sockets.UdpClient.Send" />
 
             
 
              method overloads.</para
           >
           <para
-            >For detailed information about using the asynchronous programming model, see <format
-             type="text/html">
+            >For detailed information about using the asynchronous programming model, see <format type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
 
@@ -950,8 +901,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sends a datagram to a remote host asynchronously. The destination was specified previously by a call to <see
-             cref="Overload:System.Net.Sockets.UdpClient.Connect" />
+            >Sends a datagram to a remote host asynchronously. The destination was specified previously by a call to <see cref="Overload:System.Net.Sockets.UdpClient.Connect" />
 
             
 
@@ -961,8 +911,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -970,43 +919,56 @@
           >
         </returns>
         <param name="datagram">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Byte" />
+          A <see cref="T:System.Byte" />
 
           
 
            array that contains the data to be sent.</param
         >
         <param name="bytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes to send.</param
         >
         <param name="requestCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when the operation is complete.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined object that contains information about the send operation. This object is passed to the <paramref
-           name="requestCallback" />
+          A user-defined object that contains information about the send operation. This object is passed to the <paramref name="requestCallback" />
 
           
 
@@ -1042,34 +1004,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The asynchronous <see
-             cref="M:System.Net.Sockets.UdpClient.BeginSend(System.Byte[],System.Int32,System.Net.IPEndPoint,System.AsyncCallback,System.Object)" />
+            >The asynchronous <see cref="M:System.Net.Sockets.UdpClient.BeginSend(System.Byte[],System.Int32,System.Net.IPEndPoint,System.AsyncCallback,System.Object)" />
 
             
 
-             operation must be completed by calling the <see
-             cref="M:System.Net.Sockets.UdpClient.EndSend(System.IAsyncResult)" />
+             operation must be completed by calling the <see cref="M:System.Net.Sockets.UdpClient.EndSend(System.IAsyncResult)" />
 
             
 
-             method. Typically, the method is invoked by the <paramref
-             name="requestCallback" />
+             method. Typically, the method is invoked by the <paramref name="requestCallback" />
 
             
 
              delegate.</para
           >
           <para
-            >This method does not block until the operation is complete. To block until the operation is complete, use one of the <see
-             cref="Overload:System.Net.Sockets.UdpClient.Send" />
+            >This method does not block until the operation is complete. To block until the operation is complete, use one of the <see cref="Overload:System.Net.Sockets.UdpClient.Send" />
 
             
 
              method overloads.</para
           >
           <para
-            >For detailed information about using the asynchronous programming model, see <format
-             type="text/html">
+            >For detailed information about using the asynchronous programming model, see <format type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
 
@@ -1081,8 +1038,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sends a datagram to a destination asynchronously. The destination is specified by a <see
-             cref="T:System.Net.EndPoint" />
+            >Sends a datagram to a destination asynchronously. The destination is specified by a <see cref="T:System.Net.EndPoint" />
 
             
 
@@ -1092,8 +1048,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -1101,55 +1056,71 @@
           >
         </returns>
         <param name="datagram">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Byte" />
+          A <see cref="T:System.Byte" />
 
           
 
            array that contains the data to be sent.</param
         >
         <param name="bytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes to send.</param
         >
         <param name="endPoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.EndPoint" />
+          The <see cref="T:System.Net.EndPoint" />
 
           
 
            that represents the destination for the data.</param
         >
         <param name="requestCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when the operation is complete. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined object that contains information about the send operation. This object is passed to the <paramref
-           name="requestCallback" />
+          A user-defined object that contains information about the send operation. This object is passed to the <paramref name="requestCallback" />
 
           
 
@@ -1186,34 +1157,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The asynchronous <see
-             cref="M:System.Net.Sockets.UdpClient.BeginSend(System.Byte[],System.Int32,System.String,System.Int32,System.AsyncCallback,System.Object)" />
+            >The asynchronous <see cref="M:System.Net.Sockets.UdpClient.BeginSend(System.Byte[],System.Int32,System.String,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             operation must be completed by calling the <see
-             cref="M:System.Net.Sockets.UdpClient.EndSend(System.IAsyncResult)" />
+             operation must be completed by calling the <see cref="M:System.Net.Sockets.UdpClient.EndSend(System.IAsyncResult)" />
 
             
 
-             method. Typically, the method is invoked by the <paramref
-             name="requestCallback" />
+             method. Typically, the method is invoked by the <paramref name="requestCallback" />
 
             
 
              delegate.</para
           >
           <para
-            >This method does not block until the operation is complete. To block until the operation is complete, use one of the <see
-             cref="Overload:System.Net.Sockets.UdpClient.Send" />
+            >This method does not block until the operation is complete. To block until the operation is complete, use one of the <see cref="Overload:System.Net.Sockets.UdpClient.Send" />
 
             
 
              method overloads.</para
           >
           <para
-            >For detailed information about using the asynchronous programming model, see <format
-             type="text/html">
+            >For detailed information about using the asynchronous programming model, see <format type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
 
@@ -1229,8 +1195,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -1238,57 +1203,78 @@
           >
         </returns>
         <param name="datagram">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Byte" />
+          A <see cref="T:System.Byte" />
 
           
 
            array that contains the data to be sent.</param
         >
         <param name="bytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes to send.</param
         >
         <param name="hostname">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The destination host.</param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The destination port number.</param
         >
         <param name="requestCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when the operation is complete. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined object that contains information about the send operation. This object is passed to the <paramref
-           name="requestCallback" />
+          A user-defined object that contains information about the send operation. This object is passed to the <paramref name="requestCallback" />
 
           
 
@@ -1323,58 +1309,47 @@
 
             
 
-             creates a <see
-             cref="T:System.Net.Sockets.Socket" />
+             creates a <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             used to send and receive data over a network. Classes deriving from <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             used to send and receive data over a network. Classes deriving from <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             can use this property to get or set this <see
-             cref="T:System.Net.Sockets.Socket" />
+             can use this property to get or set this <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            . Use the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+            . Use the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             returned from <see
-             cref="P:System.Net.Sockets.UdpClient.Client" />
+             returned from <see cref="P:System.Net.Sockets.UdpClient.Client" />
 
             
 
-             if you require access beyond that which <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             if you require access beyond that which <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             provides. You can also use <see
-             cref="P:System.Net.Sockets.UdpClient.Client" />
+             provides. You can also use <see cref="P:System.Net.Sockets.UdpClient.Client" />
 
             
 
-             to set the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             to set the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             to an existing <see
-             cref="T:System.Net.Sockets.Socket" />
+             to an existing <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            . This is useful if you want to take advantage of the simplicity of <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            . This is useful if you want to take advantage of the simplicity of <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             using a pre-existing <see
-             cref="T:System.Net.Sockets.Socket" />
+             using a pre-existing <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -1384,8 +1359,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the underlying network <see
-             cref="T:System.Net.Sockets.Socket" />
+            >Gets or sets the underlying network <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -1414,18 +1388,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.UdpClient.Close" />
+            >The <see cref="M:System.Net.Sockets.UdpClient.Close" />
 
             
 
-             disables the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             disables the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             and releases all managed and unmanaged resources associated with the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             and releases all managed and unmanaged resources associated with the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -1433,13 +1404,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -1478,97 +1447,80 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+            >The <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
             
 
-             method establishes a default remote host using the value specified in the <paramref
-             name="endPoint" />
+             method establishes a default remote host using the value specified in the <paramref name="endPoint" />
 
             
 
-             parameter. Once established, you do not have to specify a remote host in each call to the <see
-             cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+             parameter. Once established, you do not have to specify a remote host in each call to the <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
             
 
              method.</para
           >
           <para
-            >Establishing a default remote host is optional. Specifying a default remote host limits you to that host only. If you want to send datagrams to a different remote host, you must make another call to the <see
-             cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+            >Establishing a default remote host is optional. Specifying a default remote host limits you to that host only. If you want to send datagrams to a different remote host, you must make another call to the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
             
 
-             method or create another <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             method or create another <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             without a default remote host. If you have established a default remote host and you also provide a remote host in your call to the <see
-             cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+             without a default remote host. If you have established a default remote host and you also provide a remote host in your call to the <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
             
 
-             method, <see
-             cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+             method, <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
             
 
-             will throw a <see
-             cref="T:System.Net.Sockets.SocketException" />
+             will throw a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
-            . If you receive a <see
-             cref="T:System.Net.Sockets.SocketException" />
+            . If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
-            , use <see
-             cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+            , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
             
 
              to obtain the specific error code. Once you have obtained this code, you can refer to the Windows Sockets version 2 API error code documentation in MSDN for a detailed description of the error.</para
           >
           <para
-            >If you call the <see
-             cref="M:System.Net.Sockets.Socket.Connect(System.Net.EndPoint)" />
+            >If you call the <see cref="M:System.Net.Sockets.Socket.Connect(System.Net.EndPoint)" />
 
             
 
-             method, any datagrams that arrive from an address other than the specified default will be discarded. You cannot set the default remote host to a broadcast address using this method unless you inherit from <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             method, any datagrams that arrive from an address other than the specified default will be discarded. You cannot set the default remote host to a broadcast address using this method unless you inherit from <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-            , use the Client method to obtain the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+            , use the Client method to obtain the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            , and set the socket option to <see
-             cref="F:System.Net.Sockets.SocketOptionName.Broadcast" />
+            , and set the socket option to <see cref="F:System.Net.Sockets.SocketOptionName.Broadcast" />
 
             
 
             .</para
           >
           <para
-            >You can however, broadcast data to the default broadcast address, 255.255.255.255, if you specify <see
-             cref="F:System.Net.IPAddress.Broadcast" />
+            >You can however, broadcast data to the default broadcast address, 255.255.255.255, if you specify <see cref="F:System.Net.IPAddress.Broadcast" />
 
             
 
-             in your call to the <see
-             cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+             in your call to the <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
             
 
-             method. If your application requires greater control over broadcast addresses, you can also revert to using the <see
-             cref="T:System.Net.Sockets.Socket" />
+             method. If your application requires greater control over broadcast addresses, you can also revert to using the <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -1576,13 +1528,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Since the UDP protocol is connectionless, the <see
-               cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+              >Since the UDP protocol is connectionless, the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
               
 
-               method does not block. Do not call the <see
-               cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+               method does not block. Do not call the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
               
 
@@ -1595,12 +1545,15 @@
           <para>Establishes a default remote host using the specified network endpoint.</para>
         </summary>
         <param name="endPoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Net.IPEndPoint" />
+          An <see cref="T:System.Net.IPEndPoint" />
 
           
 
@@ -1634,102 +1587,84 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+            >The <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
             
 
-             method establishes a default remote host using the values specified in the <paramref
-             name="addr" />
+             method establishes a default remote host using the values specified in the <paramref name="addr" />
 
             
 
-             and <paramref
-             name="port" />
+             and <paramref name="port" />
 
             
 
-             parameters. Once established, you do not have to specify a remote host in each call to the <see
-             cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+             parameters. Once established, you do not have to specify a remote host in each call to the <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
             
 
              method.</para
           >
           <para
-            >Establishing a default remote host is optional. Specifying a default remote host limits you to that host only. If you want to send datagrams to a different remote host, you must make another call to the <see
-             cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+            >Establishing a default remote host is optional. Specifying a default remote host limits you to that host only. If you want to send datagrams to a different remote host, you must make another call to the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
             
 
-             method or create another <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             method or create another <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             without a default remote host. If you have established a default remote host and you also provide a remote host in your call to the <see
-             cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+             without a default remote host. If you have established a default remote host and you also provide a remote host in your call to the <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
             
 
-             method, <see
-             cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+             method, <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
             
 
-             will throw a <see
-             cref="T:System.Net.Sockets.SocketException" />
+             will throw a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
-            . If you receive a <see
-             cref="T:System.Net.Sockets.SocketException" />
+            . If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
-            , use <see
-             cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+            , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
             
 
              to obtain the specific error code. Once you have obtained this code, you can refer to the Windows Sockets version 2 API error code documentation in MSDN for a detailed description of the error.</para
           >
           <para
-            >If you call the <see
-             cref="M:System.Net.Sockets.Socket.Connect(System.Net.EndPoint)" />
+            >If you call the <see cref="M:System.Net.Sockets.Socket.Connect(System.Net.EndPoint)" />
 
             
 
-             method, any datagrams that arrive from an address other than the specified default will be discarded. You cannot set the default remote host to a broadcast address using this method unless you inherit from <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             method, any datagrams that arrive from an address other than the specified default will be discarded. You cannot set the default remote host to a broadcast address using this method unless you inherit from <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-            , use the client method to obtain the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+            , use the client method to obtain the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            , and set the socket option to <see
-             cref="F:System.Net.Sockets.SocketOptionName.Broadcast" />
+            , and set the socket option to <see cref="F:System.Net.Sockets.SocketOptionName.Broadcast" />
 
             
 
             .</para
           >
           <para
-            >You can however, broadcast data to the default broadcast address, 255.255.255.255, if you specify <see
-             cref="F:System.Net.IPAddress.Broadcast" />
+            >You can however, broadcast data to the default broadcast address, 255.255.255.255, if you specify <see cref="F:System.Net.IPAddress.Broadcast" />
 
             
 
-             in your call to the <see
-             cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+             in your call to the <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
             
 
-             method. If your application requires greater control over broadcast addresses, you can also revert to using the <see
-             cref="T:System.Net.Sockets.Socket" />
+             method. If your application requires greater control over broadcast addresses, you can also revert to using the <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -1737,13 +1672,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Since the UDP protocol is connectionless, the <see
-               cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+              >Since the UDP protocol is connectionless, the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
               
 
-               method does not block. Do not call the <see
-               cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+               method does not block. Do not call the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
               
 
@@ -1756,19 +1689,26 @@
           <para>Establishes a default remote host using the specified IP address and port number.</para>
         </summary>
         <param name="addr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.IPAddress" />
+          The <see cref="T:System.Net.IPAddress" />
 
           
 
            of the remote host to which you intend to send data. </param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1799,105 +1739,87 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+            >The <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
             
 
-             method establishes a default remote host using the values specified in the <paramref
-             name="port" />
+             method establishes a default remote host using the values specified in the <paramref name="port" />
 
             
 
-             and <paramref
-             name="hostname" />
+             and <paramref name="hostname" />
 
             
 
-             parameters. Once established, you do not have to specify a remote host in each call to the <see
-             cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+             parameters. Once established, you do not have to specify a remote host in each call to the <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
             
 
              method.</para
           >
           <para
-            >Establishing a default remote host is optional. Specifying a default remote host limits you to that host only. If you want to send datagrams to a different remote host, you must make another call to the <see
-             cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+            >Establishing a default remote host is optional. Specifying a default remote host limits you to that host only. If you want to send datagrams to a different remote host, you must make another call to the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
             
 
-             method or create another <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             method or create another <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
              without a default remote host.</para
           >
           <para
-            >If you have established a default remote host and you also provide a remote host in your call to the <see
-             cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+            >If you have established a default remote host and you also provide a remote host in your call to the <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
             
 
-             method, <see
-             cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+             method, <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
             
 
-             will throw a <see
-             cref="T:System.Net.Sockets.SocketException" />
+             will throw a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
-            . If you receive a <see
-             cref="T:System.Net.Sockets.SocketException" />
+            . If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
-            , use <see
-             cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+            , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
             
 
              to obtain the specific error code. Once you have obtained this code, you can refer to the Windows Sockets version 2 API error code documentation in MSDN for a detailed description of the error.</para
           >
           <para
-            >If you call the <see
-             cref="M:System.Net.Sockets.Socket.Connect(System.Net.EndPoint)" />
+            >If you call the <see cref="M:System.Net.Sockets.Socket.Connect(System.Net.EndPoint)" />
 
             
 
-             method, any datagrams that arrive from an address other than the specified default will be discarded. You cannot set the default remote host to a broadcast address using this method unless you inherit from <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             method, any datagrams that arrive from an address other than the specified default will be discarded. You cannot set the default remote host to a broadcast address using this method unless you inherit from <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-            , use the client method to obtain the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+            , use the client method to obtain the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            , and set the socket option to <see
-             cref="F:System.Net.Sockets.SocketOptionName.Broadcast" />
+            , and set the socket option to <see cref="F:System.Net.Sockets.SocketOptionName.Broadcast" />
 
             
 
             .</para
           >
           <para
-            >You can however, broadcast data to the default broadcast address, 255.255.255.255, if you specify <see
-             cref="F:System.Net.IPAddress.Broadcast" />
+            >You can however, broadcast data to the default broadcast address, 255.255.255.255, if you specify <see cref="F:System.Net.IPAddress.Broadcast" />
 
             
 
-             in your call to the <see
-             cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+             in your call to the <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
             
 
-             method. If your application requires greater control over broadcast addresses, you can also revert to using the <see
-             cref="T:System.Net.Sockets.Socket" />
+             method. If your application requires greater control over broadcast addresses, you can also revert to using the <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -1905,13 +1827,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Since the UDP protocol is connectionless, the <see
-               cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+              >Since the UDP protocol is connectionless, the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
               
 
-               method does not block. Do not call the <see
-               cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+               method does not block. Do not call the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
               
 
@@ -1924,14 +1844,22 @@
           <para>Establishes a default remote host using the specified host name and port number.</para>
         </summary>
         <param name="hostname">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The DNS name of the remote host to which you intend send data. </param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1960,36 +1888,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -1999,8 +1921,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -2008,7 +1929,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2032,8 +1957,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Datagrams require fragmentation when their size exceeds the Maximum Transfer Unit (MTU) of the transmission medium. Datagrams may be fragmented by the sending host or by an intermediate router. If a datagram must be fragmented, and the <see
-             cref="P:System.Net.Sockets.Socket.DontFragment" />
+            >Datagrams require fragmentation when their size exceeds the Maximum Transfer Unit (MTU) of the transmission medium. Datagrams may be fragmented by the sending host or by an intermediate router. If a datagram must be fragmented, and the <see cref="P:System.Net.Sockets.Socket.DontFragment" />
 
             
 
@@ -2043,13 +1967,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Boolean" />
+            >Gets or sets a <see cref="T:System.Boolean" />
 
             
 
-             value that specifies whether the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             value that specifies whether the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -2083,33 +2005,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.UdpClient.DropMulticastGroup(System.Net.IPAddress)" />
+            >The <see cref="M:System.Net.Sockets.UdpClient.DropMulticastGroup(System.Net.IPAddress)" />
 
             
 
-             method withdraws the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             method withdraws the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             from the multicast group identified by the specified <see
-             cref="T:System.Net.IPAddress" />
+             from the multicast group identified by the specified <see cref="T:System.Net.IPAddress" />
 
             
 
-            . After calling the <see
-             cref="M:System.Net.Sockets.UdpClient.DropMulticastGroup(System.Net.IPAddress)" />
+            . After calling the <see cref="M:System.Net.Sockets.UdpClient.DropMulticastGroup(System.Net.IPAddress)" />
 
             
 
-             method, the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             method, the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             sends an Internet Group Management Protocol (IGMP) packet to the router, removing the router from the multicast group. After a <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             sends an Internet Group Management Protocol (IGMP) packet to the router, removing the router from the multicast group. After a <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -2117,13 +2033,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -2136,12 +2050,15 @@
           <para>Leaves a multicast group.</para>
         </summary>
         <param name="multicastAddr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.IPAddress" />
+          The <see cref="T:System.Net.IPAddress" />
 
           
 
@@ -2175,33 +2092,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.UdpClient.DropMulticastGroup(System.Net.IPAddress,System.Int32)" />
+            >The <see cref="M:System.Net.Sockets.UdpClient.DropMulticastGroup(System.Net.IPAddress,System.Int32)" />
 
             
 
-             method withdraws the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             method withdraws the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             from the multicast group identified by the specified <see
-             cref="T:System.Net.IPAddress" />
+             from the multicast group identified by the specified <see cref="T:System.Net.IPAddress" />
 
             
 
-            . After calling the <see
-             cref="M:System.Net.Sockets.UdpClient.DropMulticastGroup(System.Net.IPAddress,System.Int32)" />
+            . After calling the <see cref="M:System.Net.Sockets.UdpClient.DropMulticastGroup(System.Net.IPAddress,System.Int32)" />
 
             
 
-             method, the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             method, the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             sends an Internet Group Management Protocol (IGMP) packet to the router, removing the router from the multicast group. After a <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             sends an Internet Group Management Protocol (IGMP) packet to the router, removing the router from the multicast group. After a <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -2209,13 +2120,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use the <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use the <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -2228,19 +2137,26 @@
           <para>Leaves a multicast group.</para>
         </summary>
         <param name="multicastAddr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.IPAddress" />
+          The <see cref="T:System.Net.IPAddress" />
 
           
 
            of the multicast group to leave. </param
         >
         <param name="ifindex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2268,13 +2184,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Boolean" />
+            >Gets or sets a <see cref="T:System.Boolean" />
 
             
 
-             value that specifies whether the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             value that specifies whether the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -2334,8 +2248,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method blocks until the operation is complete. </para>
           <para
-            >To perform this operation synchronously, use the <see
-             cref="Overload:System.Net.Sockets.UdpClient.Send" />
+            >To perform this operation synchronously, use the <see cref="Overload:System.Net.Sockets.UdpClient.Send" />
 
             
 
@@ -2349,8 +2262,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If successful, the number of bytes sent to the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >If successful, the number of bytes sent to the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -2358,17 +2270,19 @@
           >
         </returns>
         <param name="asyncResult">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IAsyncResult" />
+          An <see cref="T:System.IAsyncResult" />
 
           
 
-           object returned by a call to <see
-           cref="Overload:System.Net.Sockets.UdpClient.BeginSend" />
+           object returned by a call to <see cref="Overload:System.Net.Sockets.UdpClient.BeginSend" />
 
           
 
@@ -2392,36 +2306,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, multiple clients can use a specific port; however, only one of the clients can perform operations on the network traffic sent to the port. You can use the <see
-             cref="P:System.Net.Sockets.UdpClient.ExclusiveAddressUse" />
+            >By default, multiple clients can use a specific port; however, only one of the clients can perform operations on the network traffic sent to the port. You can use the <see cref="P:System.Net.Sockets.UdpClient.ExclusiveAddressUse" />
 
             
 
              property to prevent multiple clients from using a specific port.</para
           >
           <para
-            >This property must be set before the underlying socket is bound to a client port. If you call <see
-             cref="M:System.Net.Sockets.UdpClient.#ctor(System.Int32)" />
+            >This property must be set before the underlying socket is bound to a client port. If you call <see cref="M:System.Net.Sockets.UdpClient.#ctor(System.Int32)" />
 
             
 
-            , <see
-             cref="M:System.Net.Sockets.UdpClient.#ctor(System.Int32,System.Net.Sockets.AddressFamily)" />
+            , <see cref="M:System.Net.Sockets.UdpClient.#ctor(System.Int32,System.Net.Sockets.AddressFamily)" />
 
             
 
-            , <see
-             cref="M:System.Net.Sockets.UdpClient.#ctor(System.Net.IPEndPoint)" />
+            , <see cref="M:System.Net.Sockets.UdpClient.#ctor(System.Net.IPEndPoint)" />
 
             
 
-            , or <see
-             cref="M:System.Net.Sockets.UdpClient.#ctor(System.String,System.Int32)" />
+            , or <see cref="M:System.Net.Sockets.UdpClient.#ctor(System.String,System.Int32)" />
 
             
 
-            , the client port is bound as a side effect of the constructor, and you cannot subsequently set the <see
-             cref="P:System.Net.Sockets.UdpClient.ExclusiveAddressUse" />
+            , the client port is bound as a side effect of the constructor, and you cannot subsequently set the <see cref="P:System.Net.Sockets.UdpClient.ExclusiveAddressUse" />
 
             
 
@@ -2431,13 +2339,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Boolean" />
+            >Gets or sets a <see cref="T:System.Boolean" />
 
             
 
-             value that specifies whether the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             value that specifies whether the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -2492,58 +2398,47 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.UdpClient.JoinMulticastGroup(System.Net.IPAddress)" />
+            >The <see cref="M:System.Net.Sockets.UdpClient.JoinMulticastGroup(System.Net.IPAddress)" />
 
             
 
-             method subscribes the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             method subscribes the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             to a multicast group using the specified <see
-             cref="T:System.Net.IPAddress" />
+             to a multicast group using the specified <see cref="T:System.Net.IPAddress" />
 
             
 
-            . After calling the <see
-             cref="M:System.Net.Sockets.UdpClient.JoinMulticastGroup(System.Net.IPAddress)" />
+            . After calling the <see cref="M:System.Net.Sockets.UdpClient.JoinMulticastGroup(System.Net.IPAddress)" />
 
             
 
-             method, the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             method, the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             sends an Internet Group Management Protocol (IGMP) packet to the router requesting membership to the multicast group. The multicast address range is 224.0.0.0 to 239.255.255.255. If you specify an address outside this range or if the router to which the request is made is not multicast enabled, <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             sends an Internet Group Management Protocol (IGMP) packet to the router requesting membership to the multicast group. The multicast address range is 224.0.0.0 to 239.255.255.255. If you specify an address outside this range or if the router to which the request is made is not multicast enabled, <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             will throw a <see
-             cref="T:System.Net.Sockets.SocketException" />
+             will throw a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
-            . If you receive a <see
-             cref="T:System.Net.Sockets.SocketException" />
+            . If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
-            , use <see
-             cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+            , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
             
 
-             to obtain the specific error code. Once you have obtained this code, you can refer to the Windows Sockets version 2 API error code documentation in MSDN for a detailed description of the error. Once the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             to obtain the specific error code. Once you have obtained this code, you can refer to the Windows Sockets version 2 API error code documentation in MSDN for a detailed description of the error. Once the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             is listed with the router as a member of the multicast group, it will be able to receive multicasted datagrams sent to the specified <see
-             cref="T:System.Net.IPAddress" />
+             is listed with the router as a member of the multicast group, it will be able to receive multicasted datagrams sent to the specified <see cref="T:System.Net.IPAddress" />
 
             
 
@@ -2551,23 +2446,19 @@
           >
           <block subset="none" type="note">
             <para
-              >You must create the <see
-               cref="T:System.Net.Sockets.UdpClient" />
+              >You must create the <see cref="T:System.Net.Sockets.UdpClient" />
 
               
 
-               using the multicast port number; otherwise, you will not be able to receive multicasted datagrams. Do not call the <see
-               cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+               using the multicast port number; otherwise, you will not be able to receive multicasted datagrams. Do not call the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
               
 
-               method prior to calling the <see
-               cref="M:System.Net.Sockets.UdpClient.JoinMulticastGroup(System.Net.IPAddress)" />
+               method prior to calling the <see cref="M:System.Net.Sockets.UdpClient.JoinMulticastGroup(System.Net.IPAddress)" />
 
               
 
-               method, or the <see
-               cref="M:System.Net.Sockets.UdpClient.Receive(System.Net.IPEndPoint@)" />
+               method, or the <see cref="M:System.Net.Sockets.UdpClient.Receive(System.Net.IPEndPoint@)" />
 
               
 
@@ -2576,13 +2467,11 @@
           </block>
           <para>Before joining a multicast group, make sure the socket is bound to the port or endpoint. You do that by calling one of the constructors that accept a port or an endpoint as a parameter.</para>
           <para
-            >To stop receiving multicasted datagrams, call the <see
-             cref="M:System.Net.Sockets.UdpClient.DropMulticastGroup(System.Net.IPAddress)" />
+            >To stop receiving multicasted datagrams, call the <see cref="M:System.Net.Sockets.UdpClient.DropMulticastGroup(System.Net.IPAddress)" />
 
             
 
-             method and provide the <see
-             cref="T:System.Net.IPAddress" />
+             method and provide the <see cref="T:System.Net.IPAddress" />
 
             
 
@@ -2593,23 +2482,19 @@
           </block>
           <block subset="none" type="note">
             <para
-              >You cannot call <see
-               cref="Overload:System.Net.Sockets.UdpClient.JoinMulticastGroup" />
+              >You cannot call <see cref="Overload:System.Net.Sockets.UdpClient.JoinMulticastGroup" />
 
               
 
-               on a <see
-               cref="T:System.Net.Sockets.UdpClient" />
+               on a <see cref="T:System.Net.Sockets.UdpClient" />
 
               
 
-               constructed without a specific local port (that is, using the <see
-               cref="M:System.Net.Sockets.UdpClient.#ctor" />
+               constructed without a specific local port (that is, using the <see cref="M:System.Net.Sockets.UdpClient.#ctor" />
 
               
 
-               or <see
-               cref="M:System.Net.Sockets.UdpClient.#ctor(System.Net.Sockets.AddressFamily)" />
+               or <see cref="M:System.Net.Sockets.UdpClient.#ctor(System.Net.Sockets.AddressFamily)" />
 
               
 
@@ -2620,8 +2505,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >Adds a <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -2629,12 +2513,15 @@
           >
         </summary>
         <param name="multicastAddr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The multicast <see
-           cref="T:System.Net.IPAddress" />
+          The multicast <see cref="T:System.Net.IPAddress" />
 
           
 
@@ -2669,8 +2556,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Before joining a multicast group, be sure the socket is bound to the port or endpoint. You can do this by calling one of the constructors that accepts a port or an endpoint as parameter.</para>
           <para
-            >The <paramref
-             name="infindex" />
+            >The <paramref name="infindex" />
 
             
 
@@ -2681,23 +2567,19 @@
           </block>
           <block subset="none" type="note">
             <para
-              >You cannot call <see
-               cref="Overload:System.Net.Sockets.UdpClient.JoinMulticastGroup" />
+              >You cannot call <see cref="Overload:System.Net.Sockets.UdpClient.JoinMulticastGroup" />
 
               
 
-               on a <see
-               cref="T:System.Net.Sockets.UdpClient" />
+               on a <see cref="T:System.Net.Sockets.UdpClient" />
 
               
 
-               constructed without a specific local port (that is, using the <see
-               cref="M:System.Net.Sockets.UdpClient.#ctor" />
+               constructed without a specific local port (that is, using the <see cref="M:System.Net.Sockets.UdpClient.#ctor" />
 
               
 
-               or <see
-               cref="M:System.Net.Sockets.UdpClient.#ctor(System.Net.Sockets.AddressFamily)" />
+               or <see cref="M:System.Net.Sockets.UdpClient.#ctor(System.Net.Sockets.AddressFamily)" />
 
               
 
@@ -2708,8 +2590,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >Adds a <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -2717,19 +2598,26 @@
           >
         </summary>
         <param name="ifindex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The interface index associated with the local IP address on which to join the multicast group.</param
         >
         <param name="multicastAddr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The multicast <see
-           cref="T:System.Net.IPAddress" />
+          The multicast <see cref="T:System.Net.IPAddress" />
 
           
 
@@ -2763,63 +2651,51 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.UdpClient.JoinMulticastGroup(System.Net.IPAddress)" />
+            >The <see cref="M:System.Net.Sockets.UdpClient.JoinMulticastGroup(System.Net.IPAddress)" />
 
             
 
-             method subscribes the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             method subscribes the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             to a multicast group using the specified <see
-             cref="T:System.Net.IPAddress" />
+             to a multicast group using the specified <see cref="T:System.Net.IPAddress" />
 
             
 
-            . After calling the <see
-             cref="M:System.Net.Sockets.UdpClient.JoinMulticastGroup(System.Net.IPAddress)" />
+            . After calling the <see cref="M:System.Net.Sockets.UdpClient.JoinMulticastGroup(System.Net.IPAddress)" />
 
             
 
-             method, the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             method, the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             sends an Internet Group Management Protocol (IGMP) packet to the router requesting membership to the multicast group. The multicast address range is 224.0.0.0 to 239.255.255.255. If you specify an address outside this range or if the router to which the request is made is not multicast enabled, <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             sends an Internet Group Management Protocol (IGMP) packet to the router requesting membership to the multicast group. The multicast address range is 224.0.0.0 to 239.255.255.255. If you specify an address outside this range or if the router to which the request is made is not multicast enabled, <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             will throw a <see
-             cref="T:System.Net.Sockets.SocketException" />
+             will throw a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
-            . If you receive a <see
-             cref="T:System.Net.Sockets.SocketException" />
+            . If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
-            , use <see
-             cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+            , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
             
 
-             to obtain the specific error code. Once you have obtained this code, you can refer to the Windows Sockets version 2 API error code documentation in MSDN for a detailed description of the error. The <paramref
-             name="timeToLive" />
+             to obtain the specific error code. Once you have obtained this code, you can refer to the Windows Sockets version 2 API error code documentation in MSDN for a detailed description of the error. The <paramref name="timeToLive" />
 
             
 
-             parameter specifies how many router hops will be allowed for a multicasted datagram before being discarded. Once the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             parameter specifies how many router hops will be allowed for a multicasted datagram before being discarded. Once the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             is listed with the router as a member of the multicast group, it will be able to receive multicasted datagrams sent to the specified <see
-             cref="T:System.Net.IPAddress" />
+             is listed with the router as a member of the multicast group, it will be able to receive multicasted datagrams sent to the specified <see cref="T:System.Net.IPAddress" />
 
             
 
@@ -2827,18 +2703,15 @@
           >
           <block subset="none" type="note">
             <para
-              >You must create the <see
-               cref="T:System.Net.Sockets.UdpClient" />
+              >You must create the <see cref="T:System.Net.Sockets.UdpClient" />
 
               
 
-               using the multicast port number otherwise you will not be able to receive multicasted datagrams. Do not call the <see
-               cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+               using the multicast port number otherwise you will not be able to receive multicasted datagrams. Do not call the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
               
 
-               method prior to calling the <see
-               cref="M:System.Net.Sockets.UdpClient.JoinMulticastGroup(System.Net.IPAddress)" />
+               method prior to calling the <see cref="M:System.Net.Sockets.UdpClient.JoinMulticastGroup(System.Net.IPAddress)" />
 
               
 
@@ -2847,13 +2720,11 @@
           </block>
           <para>Before joining a multicast group make sure the socket is bound to the port or endpoint. You do that by calling one of the constructors that accept as parameter a port or an endpoint.</para>
           <para
-            >To stop receiving multicasted datagrams, call the <see
-             cref="M:System.Net.Sockets.UdpClient.DropMulticastGroup(System.Net.IPAddress)" />
+            >To stop receiving multicasted datagrams, call the <see cref="M:System.Net.Sockets.UdpClient.DropMulticastGroup(System.Net.IPAddress)" />
 
             
 
-             method and provide the <see
-             cref="T:System.Net.IPAddress" />
+             method and provide the <see cref="T:System.Net.IPAddress" />
 
             
 
@@ -2861,23 +2732,19 @@
           >
           <block subset="none" type="note">
             <para
-              >You cannot call <see
-               cref="Overload:System.Net.Sockets.UdpClient.JoinMulticastGroup" />
+              >You cannot call <see cref="Overload:System.Net.Sockets.UdpClient.JoinMulticastGroup" />
 
               
 
-               on a <see
-               cref="T:System.Net.Sockets.UdpClient" />
+               on a <see cref="T:System.Net.Sockets.UdpClient" />
 
               
 
-               constructed without a specific local port (that is, using the <see
-               cref="M:System.Net.Sockets.UdpClient.#ctor" />
+               constructed without a specific local port (that is, using the <see cref="M:System.Net.Sockets.UdpClient.#ctor" />
 
               
 
-               or <see
-               cref="M:System.Net.Sockets.UdpClient.#ctor(System.Net.Sockets.AddressFamily)" />
+               or <see cref="M:System.Net.Sockets.UdpClient.#ctor(System.Net.Sockets.AddressFamily)" />
 
               
 
@@ -2888,8 +2755,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >Adds a <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -2897,19 +2763,26 @@
           >
         </summary>
         <param name="multicastAddr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.IPAddress" />
+          The <see cref="T:System.Net.IPAddress" />
 
           
 
            of the multicast group to join. </param
         >
         <param name="timeToLive">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2947,23 +2820,19 @@
           </block>
           <block subset="none" type="note">
             <para
-              >You cannot call <see
-               cref="Overload:System.Net.Sockets.UdpClient.JoinMulticastGroup" />
+              >You cannot call <see cref="Overload:System.Net.Sockets.UdpClient.JoinMulticastGroup" />
 
               
 
-               on a <see
-               cref="T:System.Net.Sockets.UdpClient" />
+               on a <see cref="T:System.Net.Sockets.UdpClient" />
 
               
 
-               constructed without a specific local port (that is, using the <see
-               cref="M:System.Net.Sockets.UdpClient.#ctor" />
+               constructed without a specific local port (that is, using the <see cref="M:System.Net.Sockets.UdpClient.#ctor" />
 
               
 
-               or <see
-               cref="M:System.Net.Sockets.UdpClient.#ctor(System.Net.Sockets.AddressFamily)" />
+               or <see cref="M:System.Net.Sockets.UdpClient.#ctor(System.Net.Sockets.AddressFamily)" />
 
               
 
@@ -2974,8 +2843,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >Adds a <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -2983,24 +2851,30 @@
           >
         </summary>
         <param name="multicastAddr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The multicast <see
-           cref="T:System.Net.IPAddress" />
+          The multicast <see cref="T:System.Net.IPAddress" />
 
           
 
            of the group you want to join.</param
         >
         <param name="localAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The local <see
-           cref="T:System.Net.IPAddress" />
+          The local <see cref="T:System.Net.IPAddress" />
 
           
 
@@ -3028,8 +2902,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Boolean" />
+            >Gets or sets a <see cref="T:System.Boolean" />
 
             
 
@@ -3087,29 +2960,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
             &gt; object will complete after the UDP packet has been received.</para
           >
           <para
-            >If you specify a default remote host in the <see
-             cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+            >If you specify a default remote host in the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
             
 
              method, this method will accept datagrams from that host only. All other datagrams will be discarded.</para
           >
           <para
-            >If you receive a <see
-             cref="T:System.Net.Sockets.SocketException" />
+            >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
-            , use <see
-             cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+            , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
             
 
@@ -3117,13 +2986,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If you intend to receive multicasted datagrams, do not call the <see
-               cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+              >If you intend to receive multicasted datagrams, do not call the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
               
 
-               method prior to calling this method. The <see
-               cref="T:System.Net.Sockets.UdpClient" />
+               method prior to calling this method. The <see cref="T:System.Net.Sockets.UdpClient" />
 
               
 
@@ -3138,8 +3005,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Returns <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
@@ -3172,46 +3038,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload sends datagrams to the remote host established in the <see
-             cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+            >This overload sends datagrams to the remote host established in the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
             
 
-             method and returns the number of bytes sent. If you do not call <see
-             cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+             method and returns the number of bytes sent. If you do not call <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
             
 
-             before calling this overload, the <see
-             cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+             before calling this overload, the <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
             
 
-             method will throw a <see
-             cref="T:System.Net.Sockets.SocketException" />
+             method will throw a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
-            . If you receive a <see
-             cref="T:System.Net.Sockets.SocketException" />
+            . If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
-            , use <see
-             cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+            , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
             
 
              to obtain the specific error code. Once you have obtained this code, you can refer to the Windows Sockets version 2 API error code documentation in MSDN for a detailed description of the error.</para
           >
           <para
-            >If you want to send datagrams to a different remote host, you must call the <see
-             cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+            >If you want to send datagrams to a different remote host, you must call the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
             
 
-             method and specify the desired remote host. Use either of the other <see
-             cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+             method and specify the desired remote host. Use either of the other <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
             
 
@@ -3227,19 +3085,26 @@
           <para>The number of bytes sent.</para>
         </returns>
         <param name="dgram">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Byte" />
+          An array of type <see cref="T:System.Byte" />
 
           
 
            that specifies the UDP datagram that you intend to send represented as an array of bytes. </param
         >
         <param name="bytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3274,66 +3139,54 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+            >The <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
             
 
-             method sends datagrams to the specified endpoint and returns the number of bytes successfully sent. Before calling this overload, you must first create an <see
-             cref="T:System.Net.IPEndPoint" />
+             method sends datagrams to the specified endpoint and returns the number of bytes successfully sent. Before calling this overload, you must first create an <see cref="T:System.Net.IPEndPoint" />
 
             
 
-             using the IP address and port number of the remote host to which your datagrams will be delivered. You can send datagrams to the default broadcast address, 255.255.255.255, by specifying <see
-             cref="F:System.Net.Sockets.SocketOptionName.Broadcast" />
+             using the IP address and port number of the remote host to which your datagrams will be delivered. You can send datagrams to the default broadcast address, 255.255.255.255, by specifying <see cref="F:System.Net.Sockets.SocketOptionName.Broadcast" />
 
             
 
-             for the <see
-             cref="P:System.Net.IPAddress.Address" />
+             for the <see cref="P:System.Net.IPAddress.Address" />
 
             
 
-             property of the <see
-             cref="T:System.Net.IPEndPoint" />
+             property of the <see cref="T:System.Net.IPEndPoint" />
 
             
 
-            . After you have created this <see
-             cref="T:System.Net.IPEndPoint" />
+            . After you have created this <see cref="T:System.Net.IPEndPoint" />
 
             
 
-            , pass it to the <see
-             cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+            , pass it to the <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
             
 
-             method as the <paramref
-             name="endPoint" />
+             method as the <paramref name="endPoint" />
 
             
 
              parameter.</para
           >
           <para
-            >If you want to send datagrams to any other broadcast address, use the <see
-             cref="P:System.Net.Sockets.UdpClient.Client" />
+            >If you want to send datagrams to any other broadcast address, use the <see cref="P:System.Net.Sockets.UdpClient.Client" />
 
             
 
-             method to obtain the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             method to obtain the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            , and set the socket option to <see
-             cref="F:System.Net.Sockets.SocketOptionName.Broadcast" />
+            , and set the socket option to <see cref="F:System.Net.Sockets.SocketOptionName.Broadcast" />
 
             
 
-            . You can also revert to using the <see
-             cref="T:System.Net.Sockets.Socket" />
+            . You can also revert to using the <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -3341,33 +3194,27 @@
           >
           <block subset="none" type="note">
             <para
-              >Do not provide an <paramref
-               name="endPoint" />
+              >Do not provide an <paramref name="endPoint" />
 
               
 
-               parameter to this method if you have already established a remote host with the <see
-               cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+               parameter to this method if you have already established a remote host with the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
               
 
-               method. If you do, the <see
-               cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+               method. If you do, the <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
               
 
-               method will throw a <see
-               cref="T:System.Net.Sockets.SocketException" />
+               method will throw a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              . If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              . If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -3384,31 +3231,41 @@
           <para>The number of bytes sent.</para>
         </returns>
         <param name="dgram">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Byte" />
+          An array of type <see cref="T:System.Byte" />
 
           
 
            that specifies the UDP datagram that you intend to send, represented as an array of bytes. </param
         >
         <param name="bytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes in the datagram. </param
         >
         <param name="endPoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Net.IPEndPoint" />
+          An <see cref="T:System.Net.IPEndPoint" />
 
           
 
@@ -3444,46 +3301,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+            >The <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
             
 
-             method sends datagrams to the values specified by the <paramref
-             name="hostname" />
+             method sends datagrams to the values specified by the <paramref name="hostname" />
 
             
 
-             and <paramref
-             name="port" />
+             and <paramref name="port" />
 
             
 
-             parameters and returns the number of bytes successfully sent. You can send datagrams to the default broadcast address by specifying "255.255.255.255" for the <paramref
-             name="hostname" />
+             parameters and returns the number of bytes successfully sent. You can send datagrams to the default broadcast address by specifying "255.255.255.255" for the <paramref name="hostname" />
 
             
 
              parameter value.</para
           >
           <para
-            >If you want to send datagrams to any other broadcast address, use the <see
-             cref="P:System.Net.Sockets.UdpClient.Client" />
+            >If you want to send datagrams to any other broadcast address, use the <see cref="P:System.Net.Sockets.UdpClient.Client" />
 
             
 
-             method to obtain the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             method to obtain the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            , and set the socket option to <see
-             cref="F:System.Net.Sockets.SocketOptionName.Broadcast" />
+            , and set the socket option to <see cref="F:System.Net.Sockets.SocketOptionName.Broadcast" />
 
             
 
-            . You can also revert to using the <see
-             cref="T:System.Net.Sockets.Socket" />
+            . You can also revert to using the <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -3491,28 +3340,23 @@
           >
           <block subset="none" type="note">
             <para
-              >Do not provide a host name or port number to this method if you have already established a remote host with the <see
-               cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+              >Do not provide a host name or port number to this method if you have already established a remote host with the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
               
 
-               method. If you do, the <see
-               cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+               method. If you do, the <see cref="M:System.Net.Sockets.UdpClient.Send(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
               
 
-               method will throw a <see
-               cref="T:System.Net.Sockets.SocketException" />
+               method will throw a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              . If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              . If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -3529,33 +3373,48 @@
           <para>The number of bytes sent.</para>
         </returns>
         <param name="dgram">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Byte" />
+          An array of type <see cref="T:System.Byte" />
 
           
 
            that specifies the UDP datagram that you intend to send represented as an array of bytes. </param
         >
         <param name="bytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes in the datagram. </param
         >
         <param name="hostname">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the remote host to which you intend to send the datagram. </param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3587,41 +3446,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload sends datagrams to the remote host established in the <see
-             cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+            >This overload sends datagrams to the remote host established in the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
             
 
-             method. If you do not call <see
-             cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+             method. If you do not call <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
             
 
-             before calling this overload, the method will throw a <see
-             cref="T:System.Net.Sockets.SocketException" />
+             before calling this overload, the method will throw a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
-            . If you receive a <see
-             cref="T:System.Net.Sockets.SocketException" />
+            . If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
-            , use <see
-             cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+            , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
             
 
              to obtain the specific error code. Once you have obtained this code, you can refer to the Windows Sockets version 2 API error code documentation in MSDN for a detailed description of the error.</para
           >
           <para
-            >If you want to send datagrams to a different remote host, you must call the <see
-             cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+            >If you want to send datagrams to a different remote host, you must call the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
             
 
-             method and specify the desired remote host. Use either of the other <see
-             cref="M:System.Net.Sockets.UdpClient.SendAsync(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
+             method and specify the desired remote host. Use either of the other <see cref="M:System.Net.Sockets.UdpClient.SendAsync(System.Byte[],System.Int32,System.Net.IPEndPoint)" />
 
             
 
@@ -3635,8 +3487,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Returns <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
@@ -3644,19 +3495,26 @@
           >
         </returns>
         <param name="datagram">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Byte" />
+          An array of type <see cref="T:System.Byte" />
 
           
 
            that specifies the UDP datagram that you intend to send represented as an array of bytes.</param
         >
         <param name="bytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3689,56 +3547,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method sends datagrams to the specified endpoint. Before calling this overload, you must first create an <see
-             cref="T:System.Net.IPEndPoint" />
+            >This method sends datagrams to the specified endpoint. Before calling this overload, you must first create an <see cref="T:System.Net.IPEndPoint" />
 
             
 
-             using the IP address and port number of the remote host to which your datagrams will be delivered. You can send datagrams to the default broadcast address, 255.255.255.255, by specifying <see
-             cref="F:System.Net.Sockets.SocketOptionName.Broadcast" />
+             using the IP address and port number of the remote host to which your datagrams will be delivered. You can send datagrams to the default broadcast address, 255.255.255.255, by specifying <see cref="F:System.Net.Sockets.SocketOptionName.Broadcast" />
 
             
 
-             for the <see
-             cref="P:System.Net.IPAddress.Address" />
+             for the <see cref="P:System.Net.IPAddress.Address" />
 
             
 
-             property of the <see
-             cref="T:System.Net.IPEndPoint" />
+             property of the <see cref="T:System.Net.IPEndPoint" />
 
             
 
-            . After you have created this <see
-             cref="T:System.Net.IPEndPoint" />
+            . After you have created this <see cref="T:System.Net.IPEndPoint" />
 
             
 
-            , pass it to this method as the <paramref
-             name="endPoint" />
+            , pass it to this method as the <paramref name="endPoint" />
 
             
 
              parameter.</para
           >
           <para
-            >If you want to send datagrams to any other broadcast address, use the <see
-             cref="P:System.Net.Sockets.UdpClient.Client" />
+            >If you want to send datagrams to any other broadcast address, use the <see cref="P:System.Net.Sockets.UdpClient.Client" />
 
             
 
-             method to obtain the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             method to obtain the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            , and set the socket option to <see
-             cref="F:System.Net.Sockets.SocketOptionName.Broadcast" />
+            , and set the socket option to <see cref="F:System.Net.Sockets.SocketOptionName.Broadcast" />
 
             
 
-            . You can also revert to using the <see
-             cref="T:System.Net.Sockets.Socket" />
+            . You can also revert to using the <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -3746,28 +3594,23 @@
           >
           <block subset="none" type="note">
             <para
-              >Do not provide an <paramref
-               name="endPoint" />
+              >Do not provide an <paramref name="endPoint" />
 
               
 
-               parameter to this method if you have already established a remote host with the <see
-               cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+               parameter to this method if you have already established a remote host with the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
               
 
-               method. If you do, this method will throw a <see
-               cref="T:System.Net.Sockets.SocketException" />
+               method. If you do, this method will throw a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              . If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              . If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -3782,8 +3625,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Returns <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
@@ -3791,31 +3633,41 @@
           >
         </returns>
         <param name="datagram">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Byte" />
+          An array of type <see cref="T:System.Byte" />
 
           
 
            that specifies the UDP datagram that you intend to send represented as an array of bytes.</param
         >
         <param name="bytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes in the datagram.</param
         >
         <param name="endPoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Net.IPEndPoint" />
+          An <see cref="T:System.Net.IPEndPoint" />
 
           
 
@@ -3849,41 +3701,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method sends datagrams to the values specified by the <paramref
-             name="hostname" />
+            >This method sends datagrams to the values specified by the <paramref name="hostname" />
 
             
 
-             and <paramref
-             name="port" />
+             and <paramref name="port" />
 
             
 
-             parameters. You can send datagrams to the default broadcast address by specifying "255.255.255.255" for the <paramref
-             name="hostname" />
+             parameters. You can send datagrams to the default broadcast address by specifying "255.255.255.255" for the <paramref name="hostname" />
 
             
 
              parameter value.</para
           >
           <para
-            >If you want to send datagrams to any other broadcast address, use the <see
-             cref="P:System.Net.Sockets.UdpClient.Client" />
+            >If you want to send datagrams to any other broadcast address, use the <see cref="P:System.Net.Sockets.UdpClient.Client" />
 
             
 
-             method to obtain the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             method to obtain the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            , and set the socket option to <see
-             cref="F:System.Net.Sockets.SocketOptionName.Broadcast" />
+            , and set the socket option to <see cref="F:System.Net.Sockets.SocketOptionName.Broadcast" />
 
             
 
-            . You can also revert to using the <see
-             cref="T:System.Net.Sockets.Socket" />
+            . You can also revert to using the <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -3891,23 +3736,19 @@
           >
           <block subset="none" type="note">
             <para
-              >Do not provide a host name or port number to this method if you have already established a remote host with the <see
-               cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
+              >Do not provide a host name or port number to this method if you have already established a remote host with the <see cref="M:System.Net.Sockets.UdpClient.Connect(System.String,System.Int32)" />
 
               
 
-               method. If you do, this method will throw a <see
-               cref="T:System.Net.Sockets.SocketException" />
+               method. If you do, this method will throw a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              . If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              . If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -3922,8 +3763,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Returns <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
@@ -3931,33 +3771,48 @@
           >
         </returns>
         <param name="datagram">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Byte" />
+          An array of type <see cref="T:System.Byte" />
 
           
 
            that specifies the UDP datagram that you intend to send represented as an array of bytes.</param
         >
         <param name="bytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes in the datagram.</param
         >
         <param name="hostname">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the remote host to which you intend to send the datagram.</param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3985,50 +3840,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.Net.Sockets.UdpClient.System#IDisposable#Dispose" />
+            >Call <see cref="M:System.Net.Sockets.UdpClient.System#IDisposable#Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             when you are finished using the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-            . The <see
-             cref="M:System.Net.Sockets.UdpClient.System#IDisposable#Dispose" />
+            . The <see cref="M:System.Net.Sockets.UdpClient.System#IDisposable#Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             method leaves the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Net.Sockets.UdpClient.System#IDisposable#Dispose" />
+             in an unusable state. After calling <see cref="M:System.Net.Sockets.UdpClient.System#IDisposable#Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            , you must release all references to the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -4037,18 +3883,15 @@
             . </para
           >
           <para
-            >Note: Always call <see
-             cref="M:System.Net.Sockets.UdpClient.System#IDisposable#Dispose" />
+            >Note: Always call <see cref="M:System.Net.Sockets.UdpClient.System#IDisposable#Dispose" />
 
             
 
-             before you release your last reference to the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+             before you release your last reference to the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
-            . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -4058,8 +3901,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >Releases all resources used by the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 
@@ -4088,8 +3930,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that specifies the Time to Live (TTL) value of Internet Protocol (IP) packets sent by the <see
-             cref="T:System.Net.Sockets.UdpClient" />
+            >Gets or sets a value that specifies the Time to Live (TTL) value of Internet Protocol (IP) packets sent by the <see cref="T:System.Net.Sockets.UdpClient" />
 
             
 

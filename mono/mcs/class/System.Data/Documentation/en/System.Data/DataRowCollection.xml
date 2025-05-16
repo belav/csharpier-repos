@@ -21,89 +21,73 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.DataRowCollection" />
+        >The <see cref="T:System.Data.DataRowCollection" />
 
         
 
-         is a major component of the <see
-         cref="T:System.Data.DataTable" />
+         is a major component of the <see cref="T:System.Data.DataTable" />
 
         
 
-        . While the <see
-         cref="T:System.Data.DataColumnCollection" />
+        . While the <see cref="T:System.Data.DataColumnCollection" />
 
         
 
-         defines the schema of the table, the <see
-         cref="T:System.Data.DataRowCollection" />
+         defines the schema of the table, the <see cref="T:System.Data.DataRowCollection" />
 
         
 
-         contains the actual data for the table, where each <see
-         cref="T:System.Data.DataRow" />
+         contains the actual data for the table, where each <see cref="T:System.Data.DataRow" />
 
         
 
-         in the <see
-         cref="T:System.Data.DataRowCollection" />
+         in the <see cref="T:System.Data.DataRowCollection" />
 
         
 
          represents a single row.</para
       >
       <para
-        >You can call the <see
-         cref="M:System.Data.DataRowCollection.Add(System.Data.DataRow)" />
+        >You can call the <see cref="M:System.Data.DataRowCollection.Add(System.Data.DataRow)" />
 
         
 
-         and <see
-         cref="M:System.Data.DataRowCollection.Remove(System.Data.DataRow)" />
+         and <see cref="M:System.Data.DataRowCollection.Remove(System.Data.DataRow)" />
 
         
 
-         methods to insert and delete <see
-         cref="T:System.Data.DataRow" />
+         methods to insert and delete <see cref="T:System.Data.DataRow" />
 
         
 
-         objects from the <see
-         cref="T:System.Data.DataRowCollection" />
+         objects from the <see cref="T:System.Data.DataRowCollection" />
 
         
 
-        . You can also call the <see
-         cref="M:System.Data.DataRowCollection.Find(System.Object)" />
+        . You can also call the <see cref="M:System.Data.DataRowCollection.Find(System.Object)" />
 
         
 
-         method to search for <see
-         cref="T:System.Data.DataRow" />
+         method to search for <see cref="T:System.Data.DataRow" />
 
         
 
-         objects that contain specific values in primary key columns, and the <see
-         cref="M:System.Data.DataRowCollection.Contains(System.Object)" />
+         objects that contain specific values in primary key columns, and the <see cref="M:System.Data.DataRowCollection.Contains(System.Object)" />
 
         
 
          method to search character-based data for single words or phrases.</para
       >
       <para
-        >For other operations, such as sorting or filtering the <see
-         cref="T:System.Data.DataRowCollection" />
+        >For other operations, such as sorting or filtering the <see cref="T:System.Data.DataRowCollection" />
 
         
 
-        , use methods on the <see
-         cref="T:System.Data.DataRowCollection" />
+        , use methods on the <see cref="T:System.Data.DataRowCollection" />
 
         
 
-        ’s associated <see
-         cref="T:System.Data.DataTable" />
+        ’s associated <see cref="T:System.Data.DataTable" />
 
         
 
@@ -113,8 +97,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of rows for a <see
-         cref="T:System.Data.DataTable" />
+        >Represents a collection of rows for a <see cref="T:System.Data.DataTable" />
 
         
 
@@ -136,51 +119,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To create a new <see
-             cref="T:System.Data.DataRow" />
+            >To create a new <see cref="T:System.Data.DataRow" />
 
             
 
-            , you must use the <see
-             cref="M:System.Data.DataTable.NewRow" />
+            , you must use the <see cref="M:System.Data.DataTable.NewRow" />
 
             
 
-             method of the <see
-             cref="T:System.Data.DataTable" />
+             method of the <see cref="T:System.Data.DataTable" />
 
             
 
-             class. When you use the <see
-             cref="M:System.Data.DataTable.NewRow" />
+             class. When you use the <see cref="M:System.Data.DataTable.NewRow" />
 
             
 
-             method, a new <see
-             cref="T:System.Data.DataRow" />
+             method, a new <see cref="T:System.Data.DataRow" />
 
             
 
-             object is returned using the schema of parent <see
-             cref="T:System.Data.DataTable" />
+             object is returned using the schema of parent <see cref="T:System.Data.DataTable" />
 
             
 
-            . After you create the <see
-             cref="T:System.Data.DataRow" />
+            . After you create the <see cref="T:System.Data.DataRow" />
 
             
 
-             object and set the values for each of its columns, use the <see
-             cref="M:System.Data.DataRowCollection.Add(System.Data.DataRow)" />
+             object and set the values for each of its columns, use the <see cref="M:System.Data.DataRowCollection.Add(System.Data.DataRow)" />
 
             
 
              method to add the object to the collection.</para
           >
           <para
-            >Generates an exception if the user generates an exception in the <see
-             cref="E:System.Data.DataTable.RowChanging" />
+            >Generates an exception if the user generates an exception in the <see cref="E:System.Data.DataTable.RowChanging" />
 
             
 
@@ -190,13 +164,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Data.DataRow" />
+            >Adds the specified <see cref="T:System.Data.DataRow" />
 
             
 
-             to the <see
-             cref="T:System.Data.DataRowCollection" />
+             to the <see cref="T:System.Data.DataRowCollection" />
 
             
 
@@ -204,12 +176,15 @@
           >
         </summary>
         <param name="row">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataRow" />
+          The <see cref="T:System.Data.DataRow" />
 
           
 
@@ -240,26 +215,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a <see
-             cref="T:System.Data.DataColumn" />
+            >If a <see cref="T:System.Data.DataColumn" />
 
             
 
-             object has its <see
-             cref="P:System.Data.DataColumn.AutoIncrement" />
+             object has its <see cref="P:System.Data.DataColumn.AutoIncrement" />
 
             
 
              set to True, null should be passed to get the default value for that column.</para
           >
           <para
-            >Exceptions can also occur if you generate an exception during either a <see
-             cref="E:System.Data.DataTable.ColumnChanging" />
+            >Exceptions can also occur if you generate an exception during either a <see cref="E:System.Data.DataTable.ColumnChanging" />
 
             
 
-             or <see
-             cref="E:System.Data.DataTable.RowChanging" />
+             or <see cref="E:System.Data.DataTable.RowChanging" />
 
             
 
@@ -269,8 +240,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a row using specified values and adds it to the <see
-             cref="T:System.Data.DataRowCollection" />
+            >Creates a row using specified values and adds it to the <see cref="T:System.Data.DataRowCollection" />
 
             
 
@@ -282,7 +252,11 @@
           <para>None.</para>
         </returns>
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -326,36 +300,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To use the <see
-             cref="M:System.Data.DataRowCollection.Contains(System.Object)" />
+            >To use the <see cref="M:System.Data.DataRowCollection.Contains(System.Object)" />
 
             
 
-             method, the <see
-             cref="T:System.Data.DataTable" />
+             method, the <see cref="T:System.Data.DataTable" />
 
             
 
-             object to which the <see
-             cref="T:System.Data.DataRowCollection" />
+             object to which the <see cref="T:System.Data.DataRowCollection" />
 
             
 
-             object belongs to must have at least one column designated as a primary key column. See the <see
-             cref="P:System.Data.DataTable.PrimaryKey" />
+             object belongs to must have at least one column designated as a primary key column. See the <see cref="P:System.Data.DataTable.PrimaryKey" />
 
             
 
              property for more information about how to create a primary key column.</para
           >
           <para
-            >As soon as you have determined that a row contains the specified value, you can use the <see
-             cref="M:System.Data.DataRowCollection.Find(System.Object)" />
+            >As soon as you have determined that a row contains the specified value, you can use the <see cref="M:System.Data.DataRowCollection.Find(System.Object)" />
 
             
 
-             method to return the specific <see
-             cref="T:System.Data.DataRow" />
+             method to return the specific <see cref="T:System.Data.DataRow" />
 
             
 
@@ -369,8 +337,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the collection contains a <see
-             cref="T:System.Data.DataRow" />
+            >true if the collection contains a <see cref="T:System.Data.DataRow" />
 
             
 
@@ -378,7 +345,11 @@
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -403,41 +374,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To use the <see
-             cref="M:System.Data.DataRowCollection.Contains(System.Object)" />
+            >To use the <see cref="M:System.Data.DataRowCollection.Contains(System.Object)" />
 
             
 
-             method with an array of values, the <see
-             cref="T:System.Data.DataTable" />
+             method with an array of values, the <see cref="T:System.Data.DataTable" />
 
             
 
-             object to which the <see
-             cref="T:System.Data.DataRowCollection" />
+             object to which the <see cref="T:System.Data.DataRowCollection" />
 
             
 
-             object belongs must have an array of columns designated as primary keys. See the <see
-             cref="P:System.Data.DataTable.PrimaryKey" />
+             object belongs must have an array of columns designated as primary keys. See the <see cref="P:System.Data.DataTable.PrimaryKey" />
 
             
 
-             property for more information about how to create an array of primary key columns. The number of array elements must correspond to the number of primary key columns in the <see
-             cref="T:System.Data.DataTable" />
+             property for more information about how to create an array of primary key columns. The number of array elements must correspond to the number of primary key columns in the <see cref="T:System.Data.DataTable" />
 
             
 
             .</para
           >
           <para
-            >As soon as you have determined that a row contains the specified value, use the <see
-             cref="M:System.Data.DataRowCollection.Find(System.Object)" />
+            >As soon as you have determined that a row contains the specified value, use the <see cref="M:System.Data.DataRowCollection.Find(System.Object)" />
 
             
 
-             method to return the specific <see
-             cref="T:System.Data.DataRow" />
+             method to return the specific <see cref="T:System.Data.DataRow" />
 
             
 
@@ -451,13 +415,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Data.DataRowCollection" />
+            >true if the <see cref="T:System.Data.DataRowCollection" />
 
             
 
-             contains a <see
-             cref="T:System.Data.DataRow" />
+             contains a <see cref="T:System.Data.DataRow" />
 
             
 
@@ -465,7 +427,11 @@
           >
         </returns>
         <param name="keys">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -499,8 +465,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the <see
-             cref="T:System.Data.DataRow" />
+            >Copies all the <see cref="T:System.Data.DataRow" />
 
             
 
@@ -508,7 +473,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -537,8 +506,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the <see
-             cref="T:System.Data.DataRow" />
+            >Copies all the <see cref="T:System.Data.DataRow" />
 
             
 
@@ -546,14 +514,22 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The one-dimensional array that is the destination of the elements copied from the DataRowCollection. The array must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -577,8 +553,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the total number of <see
-             cref="T:System.Data.DataRow" />
+            >Gets the total number of <see cref="T:System.Data.DataRow" />
 
             
 
@@ -600,18 +575,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To use the Find method, the <see
-             cref="T:System.Data.DataTable" />
+            >To use the Find method, the <see cref="T:System.Data.DataTable" />
 
             
 
-             object to which the <see
-             cref="T:System.Data.DataRowCollection" />
+             object to which the <see cref="T:System.Data.DataRowCollection" />
 
             
 
-             object belongs must have at least one column designated as a primary key column. See the <see
-             cref="P:System.Data.DataTable.PrimaryKey" />
+             object belongs must have at least one column designated as a primary key column. See the <see cref="P:System.Data.DataTable.PrimaryKey" />
 
             
 
@@ -625,13 +597,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.DataRow" />
+            >A <see cref="T:System.Data.DataRow" />
 
             
 
-             that contains the primary key value specified; otherwise a null value if the primary key value does not exist in the <see
-             cref="T:System.Data.DataRowCollection" />
+             that contains the primary key value specified; otherwise a null value if the primary key value does not exist in the <see cref="T:System.Data.DataRowCollection" />
 
             
 
@@ -639,12 +609,15 @@
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The primary key value of the <see
-           cref="T:System.Data.DataRow" />
+          The primary key value of the <see cref="T:System.Data.DataRow" />
 
           
 
@@ -669,38 +642,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To use the <see
-             cref="M:System.Data.DataRowCollection.Find(System.Object)" />
+            >To use the <see cref="M:System.Data.DataRowCollection.Find(System.Object)" />
 
             
 
-             method, the <see
-             cref="T:System.Data.DataTable" />
+             method, the <see cref="T:System.Data.DataTable" />
 
             
 
-             object to which the <see
-             cref="T:System.Data.DataRowCollection" />
+             object to which the <see cref="T:System.Data.DataRowCollection" />
 
             
 
-             object belongs must have at least one column designated as a primary key column. When two or more rows have the same primary key value, then the first row found is returned. This occurs when <see
-             cref="P:System.Data.DataSet.EnforceConstraints" />
+             object belongs must have at least one column designated as a primary key column. When two or more rows have the same primary key value, then the first row found is returned. This occurs when <see cref="P:System.Data.DataSet.EnforceConstraints" />
 
             
 
-             is set to false. See the <see
-             cref="P:System.Data.DataTable.PrimaryKey" />
+             is set to false. See the <see cref="P:System.Data.DataTable.PrimaryKey" />
 
             
 
-             property for more information about how to create a <see
-             cref="P:System.Data.DataTable.PrimaryKey" />
+             property for more information about how to create a <see cref="P:System.Data.DataTable.PrimaryKey" />
 
             
 
-             column, or an array of <see
-             cref="T:System.Data.DataColumn" />
+             column, or an array of <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -714,13 +680,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.DataRow" />
+            >A <see cref="T:System.Data.DataRow" />
 
             
 
-             object that contains the primary key values specified; otherwise a null value if the primary key value does not exist in the <see
-             cref="T:System.Data.DataRowCollection" />
+             object that contains the primary key values specified; otherwise a null value if the primary key value does not exist in the <see cref="T:System.Data.DataRowCollection" />
 
             
 
@@ -728,7 +692,11 @@
           >
         </returns>
         <param name="keys">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -758,8 +726,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.IEnumerator" />
+            >Gets an <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -769,8 +736,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -796,8 +762,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the specified <see
-             cref="T:System.Data.DataRow" />
+            >Gets the index of the specified <see cref="T:System.Data.DataRow" />
 
             
 
@@ -809,7 +774,11 @@
           <para>The zero-based index of the row, or -1 if the row is not found in the collection.</para>
         </returns>
         <param name="row">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -834,61 +803,50 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The location specified by <see
-             cref="M:System.Data.DataRowCollection.InsertAt(System.Data.DataRow,System.Int32)" />
+            >The location specified by <see cref="M:System.Data.DataRowCollection.InsertAt(System.Data.DataRow,System.Int32)" />
 
             
 
-             is reflected by the order of rows in the <see
-             cref="T:System.Data.DataRowCollection" />
+             is reflected by the order of rows in the <see cref="T:System.Data.DataRowCollection" />
 
             
 
-             only. If more than one row is returned in a <see
-             cref="T:System.Data.DataRow" />
+             only. If more than one row is returned in a <see cref="T:System.Data.DataRow" />
 
             
 
-             array, the inserted row may not be returned in the location specified by <see
-             cref="M:System.Data.DataRowCollection.InsertAt(System.Data.DataRow,System.Int32)" />
+             array, the inserted row may not be returned in the location specified by <see cref="M:System.Data.DataRowCollection.InsertAt(System.Data.DataRow,System.Int32)" />
 
             
 
-            . For example, the <see
-             cref="P:System.Data.DataTable.Rows" />
+            . For example, the <see cref="P:System.Data.DataTable.Rows" />
 
             
 
-             property returns the row in the specified insert position. <see
-             cref="M:System.Data.DataTable.Select" />
+             property returns the row in the specified insert position. <see cref="M:System.Data.DataTable.Select" />
 
             
 
-             and <see
-             cref="M:System.Data.DataRow.GetChildRows(System.String)" />
+             and <see cref="M:System.Data.DataRow.GetChildRows(System.String)" />
 
             
 
-             may not. When you write the contents of the <see
-             cref="T:System.Data.DataRowCollection" />
+             may not. When you write the contents of the <see cref="T:System.Data.DataRowCollection" />
 
             
 
-             as XML, for example, <see
-             cref="M:System.Data.DataSet.WriteXml(System.IO.Stream)" />
+             as XML, for example, <see cref="M:System.Data.DataSet.WriteXml(System.IO.Stream)" />
 
             
 
-            , the rows are written according to the order specified by the <see
-             cref="T:System.Data.DataRowCollection" />
+            , the rows are written according to the order specified by the <see cref="T:System.Data.DataRowCollection" />
 
             
 
             .</para
           >
           <para
-            >If the value specified for the <paramref
-             name="pos" />
+            >If the value specified for the <paramref name="pos" />
 
             
 
@@ -900,19 +858,26 @@
           <para>Inserts a new row into the collection at the specified location.</para>
         </summary>
         <param name="row">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataRow" />
+          The <see cref="T:System.Data.DataRow" />
 
           
 
            to add. </param
         >
         <param name="pos">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -979,23 +944,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a row is removed, all data in that row is lost. You can also call the <see
-             cref="M:System.Data.DataRow.Delete" />
+            >When a row is removed, all data in that row is lost. You can also call the <see cref="M:System.Data.DataRow.Delete" />
 
             
 
-             method of the <see
-             cref="T:System.Data.DataRow" />
+             method of the <see cref="T:System.Data.DataRow" />
 
             
 
-             class to just mark a row for removal. Calling Remove is the same as calling <see
-             cref="M:System.Data.DataRow.Delete" />
+             class to just mark a row for removal. Calling Remove is the same as calling <see cref="M:System.Data.DataRow.Delete" />
 
             
 
-             and then calling <see
-             cref="M:System.Data.DataRow.AcceptChanges" />
+             and then calling <see cref="M:System.Data.DataRow.AcceptChanges" />
 
             
 
@@ -1006,21 +967,18 @@
 
             
 
-             should not be called in a foreach loop while iterating through a <see
-             cref="T:System.Data.DataRowCollection" />
+             should not be called in a foreach loop while iterating through a <see cref="T:System.Data.DataRowCollection" />
 
             
 
-             object. <see
-             cref="M:System.Data.DataRowCollection.Remove(System.Data.DataRow)" />
+             object. <see cref="M:System.Data.DataRowCollection.Remove(System.Data.DataRow)" />
 
             
 
              modifies the state of the collection.</para
           >
           <para
-            >You can also use the <see
-             cref="M:System.Data.DataRowCollection.Clear" />
+            >You can also use the <see cref="M:System.Data.DataRowCollection.Clear" />
 
             
 
@@ -1030,8 +988,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Data.DataRow" />
+            >Removes the specified <see cref="T:System.Data.DataRow" />
 
             
 
@@ -1039,12 +996,15 @@
           >
         </summary>
         <param name="row">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataRow" />
+          The <see cref="T:System.Data.DataRow" />
 
           
 
@@ -1069,31 +1029,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a row is removed, all data in that row is lost. You can also call the <see
-             cref="M:System.Data.DataRow.Delete" />
+            >When a row is removed, all data in that row is lost. You can also call the <see cref="M:System.Data.DataRow.Delete" />
 
             
 
-             method of the <see
-             cref="T:System.Data.DataRow" />
+             method of the <see cref="T:System.Data.DataRow" />
 
             
 
-             class to just mark a row for removal. Calling RemoveAt is the same as calling <see
-             cref="M:System.Data.DataRow.Delete" />
+             class to just mark a row for removal. Calling RemoveAt is the same as calling <see cref="M:System.Data.DataRow.Delete" />
 
             
 
-             and then calling <see
-             cref="M:System.Data.DataRow.AcceptChanges" />
+             and then calling <see cref="M:System.Data.DataRow.AcceptChanges" />
 
             
 
             .</para
           >
           <para
-            >You can use the <see
-             cref="M:System.Data.DataRowCollection.Clear" />
+            >You can use the <see cref="M:System.Data.DataRowCollection.Clear" />
 
             
 
@@ -1105,7 +1060,11 @@
           <para>Removes the row at the specified index from the collection.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -20,13 +20,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This class provides access to the Data Protection API (DPAPI) available in the Windows XP and later operating systems. This is a service that is provided by the operating system and does not require additional libraries. It provides encryption for sensitive data in memory.</para>
       <para
-        >The class consists of two wrappers for the unmanaged DPAPI, <see
-         cref="M:System.Security.Cryptography.ProtectedMemory.Protect(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)" />
+        >The class consists of two wrappers for the unmanaged DPAPI, <see cref="M:System.Security.Cryptography.ProtectedMemory.Protect(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)" />
 
         
 
-         and <see
-         cref="M:System.Security.Cryptography.ProtectedMemory.Unprotect(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)" />
+         and <see cref="M:System.Security.Cryptography.ProtectedMemory.Unprotect(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)" />
 
         
 
@@ -65,8 +63,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used to protect data in memory. Note that the method does not make a copy of the data, but encrypts the byte array in place. The <paramref
-             name="userData" />
+            >This method can be used to protect data in memory. Note that the method does not make a copy of the data, but encrypts the byte array in place. The <paramref name="userData" />
 
             
 
@@ -79,14 +76,22 @@
           <para>Protects the specified data.</para>
         </summary>
         <param name="userData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The byte array containing data in memory to protect. The array must be a multiple of 16 bytes. </param
         >
         <param name="scope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -120,8 +125,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used to unencrypt data in memory that was encrypted using the <see
-             cref="M:System.Security.Cryptography.ProtectedMemory.Protect(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)" />
+            >This method can be used to unencrypt data in memory that was encrypted using the <see cref="M:System.Security.Cryptography.ProtectedMemory.Protect(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)" />
 
             
 
@@ -132,8 +136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unprotects data in memory that was protected using the <see
-             cref="M:System.Security.Cryptography.ProtectedMemory.Protect(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)" />
+            >Unprotects data in memory that was protected using the <see cref="M:System.Security.Cryptography.ProtectedMemory.Protect(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)" />
 
             
 
@@ -141,14 +144,22 @@
           >
         </summary>
         <param name="encryptedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The byte array in memory to unencrypt. </param
         >
         <param name="scope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

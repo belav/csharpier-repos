@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
 <clause number="9.4.4.4" title="Character literals">
   <paragraph
-    >A character literal represents a single character, and usually consists of a character in quotes, as in 'a'. <grammar_production
-    >
+    >A character literal represents a single character, and usually consists of a character in quotes, as in 'a'. <grammar_production>
       <name>
         <non_terminal where="9.4.4.4">character-literal</non_terminal>
       </name>
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <terminal>'</terminal>
         <non_terminal where="9.4.4.4">character</non_terminal>
         <terminal>'</terminal>
@@ -21,8 +19,7 @@
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <non_terminal where="9.4.4.4">single-character</non_terminal>
       </rhs>
       <rhs>
@@ -43,9 +40,9 @@
       
 
        :: <rhs
-
-        >Any character except ' (U+0027), \ (U+005C), and <non_terminal
-         where="9.3.2">new-line-character</non_terminal>
+        >Any character except ' (U+0027), \ (U+005C), and <non_terminal where="9.3.2"
+          >new-line-character</non_terminal
+        >
       </rhs>
     </grammar_production>
     <grammar_production>
@@ -55,8 +52,7 @@
 
       
 
-       :: one of <rhs
-      >
+       :: one of <rhs>
         <terminal>\'</terminal>
         <terminal>\"</terminal>
         <terminal>\\</terminal>
@@ -77,8 +73,7 @@
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <terminal>\x</terminal>
         <non_terminal where="9.4.4.2">hex-digit</non_terminal>
         <non_terminal where="9.4.4.2">hex-digit</non_terminal>
@@ -96,16 +91,14 @@
   <paragraph>A hexadecimal escape sequence represents a single Unicode character, with the value formed by the hexadecimal number following "\x". </paragraph>
   <paragraph>If the value represented by a character literal is greater than U+FFFF, a compile-time error occurs. </paragraph>
   <paragraph
-    >A Unicode character escape sequence (<hyperlink
-    >9.4.1</hyperlink>
+    >A Unicode character escape sequence (<hyperlink>9.4.1</hyperlink>
 
     
 
     ) in a character literal must be in the range U+0000 to U+FFFF. </paragraph
   >
   <paragraph
-    >A simple escape sequence represents a Unicode character encoding, as described in the table below. <table_line
-    >Escape </table_line>
+    >A simple escape sequence represents a Unicode character encoding, as described in the table below. <table_line>Escape </table_line>
     <table_line>sequence </table_line>
     <table_line>Character </table_line>
     <table_line>name </table_line>
@@ -124,13 +117,13 @@
     <table_line>\v Vertical tab 0x000B </table_line>
   </paragraph>
   <paragraph
-    >The type of a <non_terminal
-     where="9.4.4.4">character-literal</non_terminal>
+    >The type of a <non_terminal where="9.4.4.4"
+      >character-literal</non_terminal
+    >
 
     
 
-     is <keyword
-    >char</keyword>
+     is <keyword>char</keyword>
 
     
 

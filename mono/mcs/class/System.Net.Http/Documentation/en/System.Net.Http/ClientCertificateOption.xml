@@ -37,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.Http.HttpClientHandler" />
+            >The <see cref="T:System.Net.Http.HttpClientHandler" />
 
             
 
@@ -64,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The application manually provides the client certificates to the <see
-             cref="T:System.Net.Http.WebRequestHandler" />
+            >The application manually provides the client certificates to the <see cref="T:System.Net.Http.WebRequestHandler" />
 
             
 

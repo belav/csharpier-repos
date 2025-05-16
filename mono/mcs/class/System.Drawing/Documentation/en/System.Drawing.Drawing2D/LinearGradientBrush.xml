@@ -23,39 +23,33 @@
       <para>This class encapsulates both two-color gradients and custom multicolor gradients.</para>
       <para>All linear gradients are defined along a line specified either by the width of a rectangle or by two points.</para>
       <para
-        >By default, a two-color linear gradient is an even horizontal linear blend from the starting color to the ending color along the specified line. Customize the blend pattern using the <see
-         cref="T:System.Drawing.Drawing2D.Blend" />
+        >By default, a two-color linear gradient is an even horizontal linear blend from the starting color to the ending color along the specified line. Customize the blend pattern using the <see cref="T:System.Drawing.Drawing2D.Blend" />
 
         
 
-         class, the <see
-         cref="Overload:System.Drawing.Drawing2D.LinearGradientBrush.SetSigmaBellShape" />
+         class, the <see cref="Overload:System.Drawing.Drawing2D.LinearGradientBrush.SetSigmaBellShape" />
 
         
 
-         methods, or the <see
-         cref="Overload:System.Drawing.Drawing2D.LinearGradientBrush.SetBlendTriangularShape" />
+         methods, or the <see cref="Overload:System.Drawing.Drawing2D.LinearGradientBrush.SetBlendTriangularShape" />
 
         
 
-         methods. Customize the direction of the gradient by specifying the <see
-         cref="T:System.Drawing.Drawing2D.LinearGradientMode" />
+         methods. Customize the direction of the gradient by specifying the <see cref="T:System.Drawing.Drawing2D.LinearGradientMode" />
 
         
 
          enumeration or the angle in the constructor.</para
       >
       <para
-        >Use the <see
-         cref="P:System.Drawing.Drawing2D.LinearGradientBrush.InterpolationColors" />
+        >Use the <see cref="P:System.Drawing.Drawing2D.LinearGradientBrush.InterpolationColors" />
 
         
 
          property to create a multicolor gradient.</para
       >
       <para
-        >The <see
-         cref="P:System.Drawing.Drawing2D.LinearGradientBrush.Transform" />
+        >The <see cref="P:System.Drawing.Drawing2D.LinearGradientBrush.Transform" />
 
         
 
@@ -65,8 +59,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Encapsulates a <see
-         cref="T:System.Drawing.Brush" />
+        >Encapsulates a <see cref="T:System.Drawing.Brush" />
 
         
 
@@ -93,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
 
             
 
@@ -102,48 +94,60 @@
           >
         </summary>
         <param name="point1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
            structure that represents the starting point of the linear gradient. </param
         >
         <param name="point2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
            structure that represents the endpoint of the linear gradient. </param
         >
         <param name="color1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            structure that represents the starting color of the linear gradient. </param
         >
         <param name="color2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
@@ -173,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
 
             
 
@@ -182,48 +185,60 @@
           >
         </summary>
         <param name="point1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.PointF" />
+          A <see cref="T:System.Drawing.PointF" />
 
           
 
            structure that represents the starting point of the linear gradient. </param
         >
         <param name="point2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.PointF" />
+          A <see cref="T:System.Drawing.PointF" />
 
           
 
            structure that represents the endpoint of the linear gradient. </param
         >
         <param name="color1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            structure that represents the starting color of the linear gradient. </param
         >
         <param name="color2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
@@ -253,8 +268,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+            >Creates a new instance of the <see cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
 
             
 
@@ -262,48 +276,60 @@
           >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
            structure that specifies the bounds of the linear gradient. </param
         >
         <param name="color1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            structure that represents the starting color for the gradient. </param
         >
         <param name="color2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            structure that represents the ending color for the gradient. </param
         >
         <param name="linearGradientMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.LinearGradientMode" />
+          A <see cref="T:System.Drawing.Drawing2D.LinearGradientMode" />
 
           
 
@@ -338,8 +364,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+            >Creates a new instance of the <see cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
 
             
 
@@ -347,43 +372,56 @@
           >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
            structure that specifies the bounds of the linear gradient. </param
         >
         <param name="color1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            structure that represents the starting color for the gradient. </param
         >
         <param name="color2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            structure that represents the ending color for the gradient. </param
         >
         <param name="angle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -413,8 +451,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+            >Creates a new instance of the <see cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
 
             
 
@@ -422,48 +459,60 @@
           >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
            structure that specifies the bounds of the linear gradient. </param
         >
         <param name="color1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            structure that represents the starting color for the gradient. </param
         >
         <param name="color2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            structure that represents the ending color for the gradient. </param
         >
         <param name="linearGradientMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.LinearGradientMode" />
+          A <see cref="T:System.Drawing.Drawing2D.LinearGradientMode" />
 
           
 
@@ -498,8 +547,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+            >Creates a new instance of the <see cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
 
             
 
@@ -507,43 +555,56 @@
           >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
            structure that specifies the bounds of the linear gradient. </param
         >
         <param name="color1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            structure that represents the starting color for the gradient. </param
         >
         <param name="color2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            structure that represents the ending color for the gradient. </param
         >
         <param name="angle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -579,8 +640,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+            >Creates a new instance of the <see cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
 
             
 
@@ -588,55 +648,71 @@
           >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
            structure that specifies the bounds of the linear gradient. </param
         >
         <param name="color1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            structure that represents the starting color for the gradient. </param
         >
         <param name="color2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            structure that represents the ending color for the gradient. </param
         >
         <param name="angle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The angle, measured in degrees clockwise from the x-axis, of the gradient's orientation line. </param
         >
         <param name="isAngleScaleable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Set to true to specify that the angle is affected by the transform associated with this <see
-           cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+          Set to true to specify that the angle is affected by the transform associated with this <see cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
 
           
 
@@ -672,8 +748,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+            >Creates a new instance of the <see cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
 
             
 
@@ -681,55 +756,71 @@
           >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
            structure that specifies the bounds of the linear gradient. </param
         >
         <param name="color1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            structure that represents the starting color for the gradient. </param
         >
         <param name="color2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            structure that represents the ending color for the gradient. </param
         >
         <param name="angle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The angle, measured in degrees clockwise from the x-axis, of the gradient's orientation line. </param
         >
         <param name="isAngleScaleable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Set to true to specify that the angle is affected by the transform associated with this <see
-           cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+          Set to true to specify that the angle is affected by the transform associated with this <see cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
 
           
 
@@ -756,8 +847,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Drawing2D.Blend" />
+            >A <see cref="T:System.Drawing.Drawing2D.Blend" />
 
             
 
@@ -767,8 +857,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Drawing.Drawing2D.Blend" />
+            >Gets or sets a <see cref="T:System.Drawing.Drawing2D.Blend" />
 
             
 
@@ -793,8 +882,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an exact copy of this <see
-             cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+            >Creates an exact copy of this <see cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
 
             
 
@@ -804,8 +892,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+            >The <see cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
 
             
 
@@ -831,8 +918,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether gamma correction is enabled for this <see
-             cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+            >Gets or sets a value indicating whether gamma correction is enabled for this <see cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
 
             
 
@@ -860,16 +946,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Drawing2D.ColorBlend" />
+            >A <see cref="T:System.Drawing.Drawing2D.ColorBlend" />
 
             
 
              contains corresponding arrays of colors and positions. The positions are values from 0 through 1 that specify the percentage of the distance along the gradient line where the corresponding color is located.</para
           >
           <para
-            >Setting this property creates a multicolor gradient with one color at each position along the gradient line. Setting this property nullifies all previous color, position, and falloff settings for this <see
-             cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+            >Setting this property creates a multicolor gradient with one color at each position along the gradient line. Setting this property nullifies all previous color, position, and falloff settings for this <see cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
 
             
 
@@ -879,8 +963,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Drawing.Drawing2D.ColorBlend" />
+            >Gets or sets a <see cref="T:System.Drawing.Drawing2D.ColorBlend" />
 
             
 
@@ -933,23 +1016,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Multiplies the <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Multiplies the <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
-             that represents the local geometric transform of this <see
-             cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+             that represents the local geometric transform of this <see cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
 
             
 
-             by the specified <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+             by the specified <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
-             by prepending the specified <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+             by prepending the specified <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -957,12 +1036,15 @@
           >
         </summary>
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
@@ -992,18 +1074,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Multiplies the <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Multiplies the <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
-             that represents the local geometric transform of this <see
-             cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+             that represents the local geometric transform of this <see cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
 
             
 
-             by the specified <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+             by the specified <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -1011,24 +1090,30 @@
           >
         </summary>
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
            by which to multiply the geometric transform. </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+          A <see cref="T:System.Drawing.Drawing2D.MatrixOrder" />
 
           
 
@@ -1074,8 +1159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets the <see
-             cref="P:System.Drawing.Drawing2D.LinearGradientBrush.Transform" />
+            >Resets the <see cref="P:System.Drawing.Drawing2D.LinearGradientBrush.Transform" />
 
             
 
@@ -1104,7 +1188,11 @@
           <para>Rotates the local geometric transform by the specified amount. This method prepends the rotation to the transform.</para>
         </summary>
         <param name="angle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1136,19 +1224,26 @@
           <para>Rotates the local geometric transform by the specified amount in the specified order.</para>
         </summary>
         <param name="angle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The angle of rotation. </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+          A <see cref="T:System.Drawing.Drawing2D.MatrixOrder" />
 
           
 
@@ -1177,14 +1272,22 @@
           <para>Scales the local geometric transform by the specified amounts. This method prepends the scaling matrix to the transform.</para>
         </summary>
         <param name="sx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The amount by which to scale the transform in the x-axis direction. </param
         >
         <param name="sy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1217,26 +1320,37 @@
           <para>Scales the local geometric transform by the specified amounts in the specified order.</para>
         </summary>
         <param name="sx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The amount by which to scale the transform in the x-axis direction. </param
         >
         <param name="sy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The amount by which to scale the transform in the y-axis direction. </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+          A <see cref="T:System.Drawing.Drawing2D.MatrixOrder" />
 
           
 
@@ -1261,13 +1375,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method specifies a <paramref
-             name="focus" />
+            >This method specifies a <paramref name="focus" />
 
             
 
-            , which is the point where the gradient is composed only of the ending color. The <paramref
-             name="focus" />
+            , which is the point where the gradient is composed only of the ending color. The <paramref name="focus" />
 
             
 
@@ -1279,7 +1391,11 @@
           <para>Creates a linear gradient with a center color and a linear falloff to a single color on both ends.</para>
         </summary>
         <param name="focus">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1308,13 +1424,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method specifies a <paramref
-             name="focus" />
+            >This method specifies a <paramref name="focus" />
 
             
 
-            , which is the point where the gradient is composed only of the ending color. The <paramref
-             name="focus" />
+            , which is the point where the gradient is composed only of the ending color. The <paramref name="focus" />
 
             
 
@@ -1326,19 +1440,26 @@
           <para>Creates a linear gradient with a center color and a linear falloff to a single color on both ends.</para>
         </summary>
         <param name="focus">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A value from 0 through 1 that specifies the center of the gradient (the point where the gradient is composed of only the ending color). </param
         >
         <param name="scale">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A value from 0 through1 that specifies how fast the colors falloff from the starting color to <paramref
-           name="focus" />
+          A value from 0 through1 that specifies how fast the colors falloff from the starting color to <paramref name="focus" />
 
           
 
@@ -1363,13 +1484,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method specifies a <paramref
-             name="focus" />
+            >This method specifies a <paramref name="focus" />
 
             
 
-            , which is the point where the gradient is composed only of the ending color. The <paramref
-             name="focus" />
+            , which is the point where the gradient is composed only of the ending color. The <paramref name="focus" />
 
             
 
@@ -1381,7 +1500,11 @@
           <para>Creates a gradient falloff based on a bell-shaped curve.</para>
         </summary>
         <param name="focus">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1410,13 +1533,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method specifies a <paramref
-             name="focus" />
+            >This method specifies a <paramref name="focus" />
 
             
 
-            , which is the point where the gradient is composed only of the ending color. The <paramref
-             name="focus" />
+            , which is the point where the gradient is composed only of the ending color. The <paramref name="focus" />
 
             
 
@@ -1428,19 +1549,26 @@
           <para>Creates a gradient falloff based on a bell-shaped curve.</para>
         </summary>
         <param name="focus">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A value from 0 through 1 that specifies the center of the gradient (the point where the gradient is composed of only the ending color). </param
         >
         <param name="scale">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A value from 0 through 1 that specifies how fast the colors falloff from the <paramref
-           name="focus" />
+          A value from 0 through 1 that specifies how fast the colors falloff from the <paramref name="focus" />
 
           
 
@@ -1467,8 +1595,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A geometric transform can be used to translate, scale, rotate, or skew the gradient fill. Because the matrix returned and by the <see
-             cref="P:System.Drawing.Drawing2D.LinearGradientBrush.Transform" />
+            >A geometric transform can be used to translate, scale, rotate, or skew the gradient fill. Because the matrix returned and by the <see cref="P:System.Drawing.Drawing2D.LinearGradientBrush.Transform" />
 
             
 
@@ -1478,13 +1605,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a copy <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Gets or sets a copy <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
-             that defines a local geometric transform for this <see
-             cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+             that defines a local geometric transform for this <see cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
 
             
 
@@ -1514,14 +1639,22 @@
           <para>Translates the local geometric transform by the specified dimensions. This method prepends the translation to the transform.</para>
         </summary>
         <param name="dx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value of the translation in x. </param
         >
         <param name="dy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1554,21 +1687,33 @@
           <para>Translates the local geometric transform by the specified dimensions in the specified order.</para>
         </summary>
         <param name="dx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value of the translation in x. </param
         >
         <param name="dy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value of the translation in y. </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1596,13 +1741,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Drawing.Drawing2D.WrapMode" />
+            >Gets or sets a <see cref="T:System.Drawing.Drawing2D.WrapMode" />
 
             
 
-             enumeration that indicates the wrap mode for this <see
-             cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+             enumeration that indicates the wrap mode for this <see cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
 
             
 

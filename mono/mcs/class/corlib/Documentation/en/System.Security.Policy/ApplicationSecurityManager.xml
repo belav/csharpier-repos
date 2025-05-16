@@ -27,23 +27,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Policy.ApplicationSecurityManager" />
+        >The <see cref="T:System.Security.Policy.ApplicationSecurityManager" />
 
         
 
-         class provides essential information for the execution of a manifest-based application. The <see
-         cref="P:System.Security.Policy.ApplicationSecurityManager.ApplicationTrustManager" />
+         class provides essential information for the execution of a manifest-based application. The <see cref="P:System.Security.Policy.ApplicationSecurityManager.ApplicationTrustManager" />
 
         
 
-         property identifies the trust manager responsible for determining whether an application is trusted. The <see
-         cref="M:System.Security.Policy.ApplicationSecurityManager.DetermineApplicationTrust(System.ActivationContext,System.Security.Policy.TrustManagerContext)" />
+         property identifies the trust manager responsible for determining whether an application is trusted. The <see cref="M:System.Security.Policy.ApplicationSecurityManager.DetermineApplicationTrust(System.ActivationContext,System.Security.Policy.TrustManagerContext)" />
 
         
 
-         method calls the application trust manager to determine whether an application is trusted. The <see
-         cref="P:System.Security.Policy.ApplicationSecurityManager.UserApplicationTrusts" />
+         method calls the application trust manager to determine whether an application is trusted. The <see cref="P:System.Security.Policy.ApplicationSecurityManager.UserApplicationTrusts" />
 
         
 
@@ -79,8 +75,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In the current release there is only one trust manager, which can be a custom implementation of the <see
-             cref="T:System.Security.Policy.IApplicationTrustManager" />
+            >In the current release there is only one trust manager, which can be a custom implementation of the <see cref="T:System.Security.Policy.IApplicationTrustManager" />
 
             
 
@@ -123,28 +118,23 @@
 
             
 
-             uses the configured <see
-             cref="P:System.Security.Policy.ApplicationSecurityManager.ApplicationTrustManager" />
+             uses the configured <see cref="P:System.Security.Policy.ApplicationSecurityManager.ApplicationTrustManager" />
 
             
 
-             property to determine whether to allow execution of the specified application with the permission set requested in the application manifest. The trust manager's behavior is dependent on the trust manager implementation and the information passed in the <paramref
-             name="context" />
+             property to determine whether to allow execution of the specified application with the permission set requested in the application manifest. The trust manager's behavior is dependent on the trust manager implementation and the information passed in the <paramref name="context" />
 
             
 
-             parameter. The default behavior of the trust manager is to establish a user interface (UI) dialog box to determine the user's approval. However, a trust manager can also determine an application's trust status based on other criteria, such as decisions provided by a corporate database. The trust decision can be persisted, depending upon the <paramref
-             name="context" />
+             parameter. The default behavior of the trust manager is to establish a user interface (UI) dialog box to determine the user's approval. However, a trust manager can also determine an application's trust status based on other criteria, such as decisions provided by a corporate database. The trust decision can be persisted, depending upon the <paramref name="context" />
 
             
 
-             parameters properties and the trust manager implementation. If the trust for the application is persisted for a decision based on a user dialog box, future calls to the <see
-             cref="T:System.Security.Policy.ApplicationSecurityManager" />
+             parameters properties and the trust manager implementation. If the trust for the application is persisted for a decision based on a user dialog box, future calls to the <see cref="T:System.Security.Policy.ApplicationSecurityManager" />
 
             
 
-             will not present the UI dialog box for every request for that application. <see
-             cref="M:System.Security.Policy.ApplicationSecurityManager.DetermineApplicationTrust(System.ActivationContext,System.Security.Policy.TrustManagerContext)" />
+             will not present the UI dialog box for every request for that application. <see cref="M:System.Security.Policy.ApplicationSecurityManager.DetermineApplicationTrust(System.ActivationContext,System.Security.Policy.TrustManagerContext)" />
 
             
 
@@ -160,24 +150,30 @@
           <para>true to execute the specified application; otherwise, false.</para>
         </returns>
         <param name="activationContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ActivationContext" />
+          An <see cref="T:System.ActivationContext" />
 
           
 
            identifying the activation context for the application.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.Policy.TrustManagerContext" />
+          A <see cref="T:System.Security.Policy.TrustManagerContext" />
 
           
 
@@ -208,13 +204,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The trust decisions in the collection are maintained using the methods of the collection, such as the <see
-             cref="M:System.Security.Policy.ApplicationTrustCollection.Add(System.Security.Policy.ApplicationTrust)" />
+            >The trust decisions in the collection are maintained using the methods of the collection, such as the <see cref="M:System.Security.Policy.ApplicationTrustCollection.Add(System.Security.Policy.ApplicationTrust)" />
 
             
 
-             method or the <see
-             cref="Overload:System.Security.Policy.ApplicationTrustCollection.Remove" />
+             method or the <see cref="Overload:System.Security.Policy.ApplicationTrustCollection.Remove" />
 
             
 

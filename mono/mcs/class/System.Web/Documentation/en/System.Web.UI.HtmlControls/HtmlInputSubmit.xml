@@ -25,36 +25,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />
+        >The <see cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />
 
         
 
-         class is derived from the <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+         class is derived from the <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
         
 
-         class and is used to create a button control on a Web page that submits a form. The <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />
+         class and is used to create a button control on a Web page that submits a form. The <see cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />
 
         
 
-         control is often used with the <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
+         control is often used with the <see cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
 
         
 
          control, which resets form controls to their initial values. </para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />
 
         
 
-        , see the <see
-         cref="M:System.Web.UI.HtmlControls.HtmlInputSubmit.#ctor" />
+        , see the <see cref="M:System.Web.UI.HtmlControls.HtmlInputSubmit.#ctor" />
 
         
 
@@ -76,8 +70,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property value for an instance of <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />
+            >The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />
 
             
 
@@ -109,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />
 
             
 
@@ -133,8 +125,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property value for an instance of <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />
+            >The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />
 
             
 
@@ -159,8 +150,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="type" />
+                  >The value of the <paramref name="type" />
 
                   
 
@@ -173,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />
 
             
 
@@ -182,7 +171,11 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

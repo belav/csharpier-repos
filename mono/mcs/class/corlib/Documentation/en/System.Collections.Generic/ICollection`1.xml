@@ -27,79 +27,65 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Collections.Generic.ICollection`1" />
+        >The <see cref="T:System.Collections.Generic.ICollection`1" />
 
         
 
-         interface is the base interface for classes in the <see
-         cref="N:System.Collections.Generic" />
+         interface is the base interface for classes in the <see cref="N:System.Collections.Generic" />
 
         
 
          namespace.</para
       >
       <para
-        >The <see
-         cref="T:System.Collections.Generic.ICollection`1" />
+        >The <see cref="T:System.Collections.Generic.ICollection`1" />
 
         
 
-         interface extends <see
-         cref="T:System.Collections.Generic.IEnumerable`1" />
+         interface extends <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
         
 
-        ; <see
-         cref="T:System.Collections.Generic.IDictionary`2" />
+        ; <see cref="T:System.Collections.Generic.IDictionary`2" />
 
         
 
-         and <see
-         cref="T:System.Collections.Generic.IList`1" />
+         and <see cref="T:System.Collections.Generic.IList`1" />
 
         
 
-         are more specialized interfaces that extend <see
-         cref="T:System.Collections.Generic.ICollection`1" />
+         are more specialized interfaces that extend <see cref="T:System.Collections.Generic.ICollection`1" />
 
         
 
-        . A <see
-         cref="T:System.Collections.Generic.IDictionary`2" />
+        . A <see cref="T:System.Collections.Generic.IDictionary`2" />
 
         
 
-         implementation is a collection of key/value pairs, like the <see
-         cref="T:System.Collections.Generic.Dictionary`2" />
+         implementation is a collection of key/value pairs, like the <see cref="T:System.Collections.Generic.Dictionary`2" />
 
         
 
-         class. A <see
-         cref="T:System.Collections.Generic.IList`1" />
+         class. A <see cref="T:System.Collections.Generic.IList`1" />
 
         
 
-         implementation is a collection of values, and its members can be accessed by index, like the <see
-         cref="T:System.Collections.Generic.List`1" />
+         implementation is a collection of values, and its members can be accessed by index, like the <see cref="T:System.Collections.Generic.List`1" />
 
         
 
          class.</para
       >
       <para
-        >If neither the <see
-         cref="T:System.Collections.Generic.IDictionary`2" />
+        >If neither the <see cref="T:System.Collections.Generic.IDictionary`2" />
 
         
 
-         interface nor the <see
-         cref="T:System.Collections.Generic.IList`1" />
+         interface nor the <see cref="T:System.Collections.Generic.IList`1" />
 
         
 
-         interface meet the requirements of the required collection, derive the new collection class from the <see
-         cref="T:System.Collections.Generic.ICollection`1" />
+         interface meet the requirements of the required collection, derive the new collection class from the <see cref="T:System.Collections.Generic.ICollection`1" />
 
         
 
@@ -174,8 +160,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all items from the <see
-             cref="T:System.Collections.Generic.ICollection`1" />
+            >Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1" />
 
             
 
@@ -211,8 +196,7 @@
 
           
 
-          , if item is found in the current collection; otherwise, <see
-           langword="false" />
+          , if item is found in the current collection; otherwise, <see langword="false" />
 
           
 
@@ -244,8 +228,7 @@
       </Parameters>
       <Docs>
         <param name="array"
-          >A one-dimensional, zero-based <see
-           cref="T:System.Array" />
+          >A one-dimensional, zero-based <see cref="T:System.Array" />
 
           
 
@@ -254,8 +237,7 @@
         <param name="arrayIndex">To be added.</param>
         <summary>
           <para
-            >Copies the elements of the current collection to a <see
-             cref="T:System.Array" />
+            >Copies the elements of the current collection to a <see cref="T:System.Array" />
 
             
 
@@ -271,8 +253,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -299,8 +280,7 @@
 
             
 
-             is greater than or equal to <paramref
-             name="array" />
+             is greater than or equal to <paramref name="array" />
 
             
 
@@ -308,18 +288,15 @@
           >
           <para>-or-</para>
           <para
-            > The sum of <paramref
-             name="index" />
+            > The sum of <paramref name="index" />
 
             
 
-             and the <see
-             cref="P:System.Collections.ICollection.Count" />
+             and the <see cref="P:System.Collections.ICollection.Count" />
 
             
 
-             of the current instance is greater than <paramref
-             name="array" />
+             of the current instance is greater than <paramref name="array" />
 
             
 
@@ -327,8 +304,7 @@
           >
           <para>-or-</para>
           <para
-            >Type <see
-             langword="T" />
+            >Type <see langword="T" />
 
             
 
@@ -351,8 +327,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
@@ -367,8 +342,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of elements contained in the <see
-             cref="T:System.Collections.Generic.ICollection`1" />
+            >Gets the number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1" />
 
             
 
@@ -395,8 +369,7 @@
 
             
 
-            , if the current collection is read-only; otherwise, <see
-             langword="false" />
+            , if the current collection is read-only; otherwise, <see langword="false" />
 
             
 
@@ -411,8 +384,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Collections.Generic.ICollection`1" />
+            >Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1" />
 
             
 
@@ -448,18 +420,15 @@
 
           
 
-          , if <paramref
-           name="item" />
+          , if <paramref name="item" />
 
           
 
-           was removed from the current collection; <see
-           langword="false" />
+           was removed from the current collection; <see langword="false" />
 
           
 
-           if <paramref
-           name="item" />
+           if <paramref name="item" />
 
           
 
@@ -467,8 +436,7 @@
         >
         <remarks>
           <para
-            >If <paramref
-             name="item" />
+            >If <paramref name="item" />
 
             
 

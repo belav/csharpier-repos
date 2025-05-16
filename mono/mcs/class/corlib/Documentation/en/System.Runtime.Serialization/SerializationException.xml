@@ -41,21 +41,18 @@
 
         
 
-         uses the default <see
-         cref="M:System.Object.Equals(System.Object)" />
+         uses the default <see cref="M:System.Object.Equals(System.Object)" />
 
         
 
          implementation, which supports reference equality.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Runtime.Serialization.SerializationException" />
+        >For a list of initial property values for an instance of <see cref="T:System.Runtime.Serialization.SerializationException" />
 
         
 
-        , see the <see
-         cref="M:System.Runtime.Serialization.SerializationException.#ctor" />
+        , see the <see cref="M:System.Runtime.Serialization.SerializationException.#ctor" />
 
         
 
@@ -90,13 +87,11 @@
 
             
 
-             inherits from the <see
-             cref="T:System.SystemException" />
+             inherits from the <see cref="T:System.SystemException" />
 
             
 
-             class. The following table shows initial property values for an instance of <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+             class. The following table shows initial property values for an instance of <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -131,8 +126,7 @@
               </term>
               <description>
                 <para
-                  >Localized error message for <see
-                   cref="T:System.Runtime.Serialization.SerializationException" />
+                  >Localized error message for <see cref="T:System.Runtime.Serialization.SerializationException" />
 
                   
 
@@ -145,8 +139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -179,13 +172,11 @@
 
             
 
-             inherits from the <see
-             cref="T:System.SystemException" />
+             inherits from the <see cref="T:System.SystemException" />
 
             
 
-             class. The following table shows initial property values for an instance of <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+             class. The following table shows initial property values for an instance of <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -220,8 +211,7 @@
               </term>
               <description>
                 <para
-                  >The <paramref
-                   name="message" />
+                  >The <paramref name="message" />
 
                   
 
@@ -234,8 +224,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -243,7 +232,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -275,8 +268,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current constructor is called during deserialization to reconstitute the exception object transmitted over a stream. (For more information on serialization see <format
-             type="text/html">
+            >The current constructor is called during deserialization to reconstitute the exception object transmitted over a stream. (For more information on serialization see <format type="text/html">
               <a href="832AC524-21BC-419A-A27B-CA8BFC45840F"
                 >[&lt;topic://cpconSerialization&gt;]</a
               >
@@ -290,8 +282,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -299,14 +290,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The serialization information object holding the serialized object data in the name-value form. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -338,26 +337,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -399,8 +394,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.SerializationException" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.SerializationException" />
 
             
 
@@ -408,19 +402,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 

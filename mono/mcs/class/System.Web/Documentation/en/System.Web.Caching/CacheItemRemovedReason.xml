@@ -15,13 +15,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by the <see
-         cref="T:System.Web.Caching.CacheItemRemovedCallback" />
+        >This enumeration is used by the <see cref="T:System.Web.Caching.CacheItemRemovedCallback" />
 
         
 
-         delegate to notify your ASP.NET applications when and why an object was removed from the <see
-         cref="T:System.Web.Caching.Cache" />
+         delegate to notify your ASP.NET applications when and why an object was removed from the <see cref="T:System.Web.Caching.Cache" />
 
         
 
@@ -31,8 +29,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the reason an item was removed from the <see
-         cref="T:System.Web.Caching.Cache" />
+        >Specifies the reason an item was removed from the <see cref="T:System.Web.Caching.Cache" />
 
         
 
@@ -91,13 +88,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The item is removed from the cache by a <see
-             cref="M:System.Web.Caching.Cache.Remove(System.String)" />
+            >The item is removed from the cache by a <see cref="M:System.Web.Caching.Cache.Remove(System.String)" />
 
             
 
-             method call or by an <see
-             cref="M:System.Web.Caching.Cache.Insert(System.String,System.Object)" />
+             method call or by an <see cref="M:System.Web.Caching.Cache.Insert(System.String,System.Object)" />
 
             
 

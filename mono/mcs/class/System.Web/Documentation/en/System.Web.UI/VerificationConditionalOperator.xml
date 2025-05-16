@@ -16,28 +16,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When using extending a class, member or indexer with a <see
-         cref="T:System.Web.UI.VerificationAttribute" />
+        >When using extending a class, member or indexer with a <see cref="T:System.Web.UI.VerificationAttribute" />
 
         
 
-        , you may use a conditional expression to define how accessibility is verified. The left side of a conditional expression is the <see
-         cref="P:System.Web.UI.VerificationAttribute.ConditionalProperty" />
+        , you may use a conditional expression to define how accessibility is verified. The left side of a conditional expression is the <see cref="P:System.Web.UI.VerificationAttribute.ConditionalProperty" />
 
         
 
-         and the right side is the <see
-         cref="P:System.Web.UI.VerificationAttribute.ConditionalValue" />
+         and the right side is the <see cref="P:System.Web.UI.VerificationAttribute.ConditionalValue" />
 
         
 
-        . When the <see
-         cref="F:System.Web.UI.VerificationConditionalOperator.Equals" />
+        . When the <see cref="F:System.Web.UI.VerificationConditionalOperator.Equals" />
 
         
 
-         operator is used, the left side must equal the right side of the conditional expression for the verification rule to report true. When the <see
-         cref="F:System.Web.UI.VerificationConditionalOperator.NotEquals" />
+         operator is used, the left side must equal the right side of the conditional expression for the verification rule to report true. When the <see cref="F:System.Web.UI.VerificationConditionalOperator.NotEquals" />
 
         
 
@@ -47,8 +42,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies operators for a conditional expression used in a <see
-         cref="T:System.Web.UI.VerificationAttribute" />
+        >Specifies operators for a conditional expression used in a <see cref="T:System.Web.UI.VerificationAttribute" />
 
         
 

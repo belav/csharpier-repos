@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Services.Description.PortType" />
+        >The <see cref="T:System.Web.Services.Description.PortType" />
 
         
 
@@ -44,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.PortType" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.PortType" />
 
             
 
@@ -81,13 +79,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+            >Gets the <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
 
             
 
-             associated with this <see
-             cref="T:System.Web.Services.Description.PortType" />
+             associated with this <see cref="T:System.Web.Services.Description.PortType" />
 
             
 
@@ -133,13 +129,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of <see
-             cref="T:System.Web.Services.Description.Operation" />
+            >Gets the collection of <see cref="T:System.Web.Services.Description.Operation" />
 
             
 
-             instances defined by the <see
-             cref="T:System.Web.Services.Description.PortType" />
+             instances defined by the <see cref="T:System.Web.Services.Description.PortType" />
 
             
 
@@ -172,13 +166,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Gets the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
-             of which the <see
-             cref="T:System.Web.Services.Description.PortType" />
+             of which the <see cref="T:System.Web.Services.Description.PortType" />
 
             
 

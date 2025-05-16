@@ -18,23 +18,19 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the attributes of a bitmap image. The <see
-         cref="T:System.Drawing.Imaging.BitmapData" />
+        >Specifies the attributes of a bitmap image. The <see cref="T:System.Drawing.Imaging.BitmapData" />
 
         
 
-         class is used by the <see
-         cref="Overload:System.Drawing.Bitmap.LockBits" />
+         class is used by the <see cref="Overload:System.Drawing.Bitmap.LockBits" />
 
         
 
-         and <see
-         cref="M:System.Drawing.Bitmap.UnlockBits(System.Drawing.Imaging.BitmapData)" />
+         and <see cref="M:System.Drawing.Bitmap.UnlockBits(System.Drawing.Imaging.BitmapData)" />
 
         
 
-         methods of the <see
-         cref="T:System.Drawing.Bitmap" />
+         methods of the <see cref="T:System.Drawing.Bitmap" />
 
         
 
@@ -53,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.BitmapData" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.BitmapData" />
 
             
 
@@ -80,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the pixel height of the <see
-             cref="T:System.Drawing.Bitmap" />
+            >Gets or sets the pixel height of the <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -113,13 +107,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the format of the pixel information in the <see
-             cref="T:System.Drawing.Bitmap" />
+            >Gets or sets the format of the pixel information in the <see cref="T:System.Drawing.Bitmap" />
 
             
 
-             object that returned this <see
-             cref="T:System.Drawing.Imaging.BitmapData" />
+             object that returned this <see cref="T:System.Drawing.Imaging.BitmapData" />
 
             
 
@@ -188,8 +180,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the stride width (also called scan width) of the <see
-             cref="T:System.Drawing.Bitmap" />
+            >Gets or sets the stride width (also called scan width) of the <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -215,8 +206,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the pixel width of the <see
-             cref="T:System.Drawing.Bitmap" />
+            >Gets or sets the pixel width of the <see cref="T:System.Drawing.Bitmap" />
 
             
 

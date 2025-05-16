@@ -46,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.X509ServiceCertificateAuthenticationElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.X509ServiceCertificateAuthenticationElement" />
 
             
 
@@ -170,8 +169,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The system verifies that the service certificate has not been revoked by looking it up in the revoked certificate list. This check can be performed either by checking online or against a cached revocation list. Revocation checking can be turned off by setting this property to <see
-             cref="F:System.Security.Cryptography.X509Certificates.X509RevocationMode.NoCheck" />
+            >The system verifies that the service certificate has not been revoked by looking it up in the revoked certificate list. This check can be performed either by checking online or against a cached revocation list. Revocation checking can be turned off by setting this property to <see cref="F:System.Security.Cryptography.X509Certificates.X509RevocationMode.NoCheck" />
 
             
 
@@ -210,8 +208,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >indigo1 security system validates the service certificate against a <see
-             cref="T:System.Security.Cryptography.X509Certificates.StoreLocation" />
+            >indigo1 security system validates the service certificate against a <see cref="T:System.Security.Cryptography.X509Certificates.StoreLocation" />
 
             
 

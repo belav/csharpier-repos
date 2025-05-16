@@ -46,8 +46,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This permission distinguishes between the following four types of file IO access provided by <see
-         cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+        >This permission distinguishes between the following four types of file IO access provided by <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
         
 
@@ -69,13 +68,11 @@
       </list>
       <block subset="none" type="note">
         <para
-          >Giving <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
+          >Giving <see cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
 
           
 
-           access to an assembly is similar to granting it full trust. If an application should not write to the file system, it should not have <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
+           access to an assembly is similar to granting it full trust. If an application should not write to the file system, it should not have <see cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
 
           
 
@@ -88,8 +85,7 @@
 
         
 
-         describes protected operations on files and folders. The <see
-         cref="T:System.IO.File" />
+         describes protected operations on files and folders. The <see cref="T:System.IO.File" />
 
         
 
@@ -105,18 +101,15 @@
       <para>Access to a folder implies access to all the files it contains, as well as access to all the files and folders in its subfolders. For example, Read access to C:\folder1\ implies Read access to C:\folder1\file1.txt, C:\folder1\folder2\, C:\folder1\folder2\file2.txt, and so on.</para>
       <block subset="none" type="note">
         <para
-          >In versions of the .NET Framework before the net_v40_long, you could use the <see
-           cref="M:System.Security.CodeAccessPermission.Deny" />
+          >In versions of the .NET Framework before the net_v40_long, you could use the <see cref="M:System.Security.CodeAccessPermission.Deny" />
 
           
 
-           method to prevent inadvertent access to system resources by trusted code. <see
-           cref="M:System.Security.CodeAccessPermission.Deny" />
+           method to prevent inadvertent access to system resources by trusted code. <see cref="M:System.Security.CodeAccessPermission.Deny" />
 
           
 
-           is now obsolete, and access to resources is now determined solely by the granted permission set for an assembly. To limit access to files, you must run partially trusted code in a sandbox and assign it permissions only to resources that the code is allowed to access. For information about running an application in a sandbox, see <format
-           type="text/html">
+           is now obsolete, and access to resources is now determined solely by the granted permission set for an assembly. To limit access to files, you must run partially trusted code in a sandbox and assign it permissions only to resources that the code is allowed to access. For information about running an application in a sandbox, see <format type="text/html">
             <a href="d1ad722b-5b49-4040-bff3-431b94bb8095"
               >How To: Run Partially Trusted Code in a Sandbox</a
             >
@@ -163,8 +156,7 @@
 
           
 
-           is not a valid <see
-           cref="T:System.Security.Permissions.PermissionState" />
+           is not a valid <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -177,8 +169,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.FileIOPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.FileIOPermission" />
 
             
 
@@ -186,12 +177,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -231,8 +225,7 @@
 
             
 
-             specifies values not defined in <see
-             cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+             specifies values not defined in <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
             
 
@@ -256,13 +249,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor allows only one of the <see
-             cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+            >This constructor allows only one of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
             
 
-             values to be specified for the specified file or directory. Use the <see
-             cref="M:System.Security.Permissions.FileIOPermission.AddPathList(System.Security.Permissions.FileIOPermissionAccess,System.String)" />
+             values to be specified for the specified file or directory. Use the <see cref="M:System.Security.Permissions.FileIOPermission.AddPathList(System.Security.Permissions.FileIOPermissionAccess,System.String)" />
 
             
 
@@ -272,8 +263,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.FileIOPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.FileIOPermission" />
 
             
 
@@ -281,19 +271,26 @@
           >
         </summary>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+          A bitwise combination of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
           
 
            enumeration values. </param
         >
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -325,13 +322,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor allows only one <see
-             cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+            >This constructor allows only one <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
             
 
-             value to be specified for the specified files and directories. Use the <see
-             cref="M:System.Security.Permissions.FileIOPermission.AddPathList(System.Security.Permissions.FileIOPermissionAccess,System.String)" />
+             value to be specified for the specified files and directories. Use the <see cref="M:System.Security.Permissions.FileIOPermission.AddPathList(System.Security.Permissions.FileIOPermissionAccess,System.String)" />
 
             
 
@@ -341,8 +336,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.FileIOPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.FileIOPermission" />
 
             
 
@@ -350,19 +344,26 @@
           >
         </summary>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+          A bitwise combination of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
           
 
            enumeration values. </param
         >
         <param name="pathList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -394,26 +395,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor allows only one <see
-             cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+            >This constructor allows only one <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
             
 
-             value to be specified for the specified file or directories. Use the <see
-             cref="M:System.Security.Permissions.FileIOPermission.AddPathList(System.Security.Permissions.FileIOPermissionAccess,System.String)" />
+             value to be specified for the specified file or directories. Use the <see cref="M:System.Security.Permissions.FileIOPermission.AddPathList(System.Security.Permissions.FileIOPermissionAccess,System.String)" />
 
             
 
              method to define complex permissions.</para
           >
           <para
-            >The <paramref
-             name="control" />
+            >The <paramref name="control" />
 
             
 
-             parameter specifies whether the access control list (ACL) for the file or directory specified by <paramref
-             name="path" />
+             parameter specifies whether the access control list (ACL) for the file or directory specified by <paramref name="path" />
 
             
 
@@ -426,8 +423,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.FileIOPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.FileIOPermission" />
 
             
 
@@ -435,31 +431,41 @@
           >
         </summary>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+          A bitwise combination of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
           
 
            enumeration values.</param
         >
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Security.AccessControl.AccessControlActions" />
+          A bitwise combination of the <see cref="T:System.Security.AccessControl.AccessControlActions" />
 
           
 
             enumeration values.</param
         >
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -491,26 +497,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor allows only one <see
-             cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+            >This constructor allows only one <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
             
 
-             value to be specified for the specified files and directories. Use the <see
-             cref="M:System.Security.Permissions.FileIOPermission.AddPathList(System.Security.Permissions.FileIOPermissionAccess,System.String)" />
+             value to be specified for the specified files and directories. Use the <see cref="M:System.Security.Permissions.FileIOPermission.AddPathList(System.Security.Permissions.FileIOPermissionAccess,System.String)" />
 
             
 
              method to define complex permissions.</para
           >
           <para
-            >The <paramref
-             name="control" />
+            >The <paramref name="control" />
 
             
 
-             parameter specifies whether the access control list (ACL) for the file or directory specified by <paramref
-             name="path" />
+             parameter specifies whether the access control list (ACL) for the file or directory specified by <paramref name="path" />
 
             
 
@@ -523,8 +525,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.FileIOPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.FileIOPermission" />
 
             
 
@@ -532,31 +533,41 @@
           >
         </summary>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+          A bitwise combination of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
           
 
            enumeration values. </param
         >
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Security.AccessControl.AccessControlActions" />
+          A bitwise combination of the <see cref="T:System.Security.AccessControl.AccessControlActions" />
 
           
 
             enumeration values.</param
         >
         <param name="pathList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -596,19 +607,26 @@
           <para>Adds access for the specified file or directory to the existing state of the permission.</para>
         </summary>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+          A bitwise combination of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
           
 
            values. </param
         >
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -648,19 +666,26 @@
           <para>Adds access for the specified files and directories to the existing state of the permission.</para>
         </summary>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+          A bitwise combination of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
           
 
            values. </param
         >
         <param name="pathList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -692,8 +717,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property gets or sets the permitted access to all files on the local computer and network drives.</para>
           <para
-            >An individual <see
-             cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+            >An individual <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
             
 
@@ -730,8 +754,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Local files are files contained on the local computer. Any files not accessed through a network drive are local files.</para>
           <para
-            >An individual <see
-             cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+            >An individual <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
             
 
@@ -807,8 +830,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >For more information, see <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -818,13 +840,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Security.Permissions.FileIOPermission" />
+            >Determines whether the specified <see cref="T:System.Security.Permissions.FileIOPermission" />
 
             
 
-             object is equal to the current <see
-             cref="T:System.Security.Permissions.FileIOPermission" />
+             object is equal to the current <see cref="T:System.Security.Permissions.FileIOPermission" />
 
             
 
@@ -834,13 +854,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see
-             cref="T:System.Security.Permissions.FileIOPermission" />
+            >true if the specified <see cref="T:System.Security.Permissions.FileIOPermission" />
 
             
 
-             is equal to the current <see
-             cref="T:System.Security.Permissions.FileIOPermission" />
+             is equal to the current <see cref="T:System.Security.Permissions.FileIOPermission" />
 
             
 
@@ -848,17 +866,19 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Permissions.FileIOPermission" />
+          The <see cref="T:System.Security.Permissions.FileIOPermission" />
 
           
 
-           object to compare with the current <see
-           cref="T:System.Security.Permissions.FileIOPermission" />
+           object to compare with the current <see cref="T:System.Security.Permissions.FileIOPermission" />
 
           
 
@@ -895,8 +915,7 @@
         <remarks>
           <para
             >The state of the current instance is changed to the
- state encoded in <paramref
-             name="esd" />
+ state encoded in <paramref name="esd" />
 
             
 
@@ -904,8 +923,7 @@
           >
           <block subset="none" type="note">
             <para
-              > For the XML encoding for this class, see the <see
-               cref="T:System.Security.Permissions.FileIOPermission" />
+              > For the XML encoding for this class, see the <see cref="T:System.Security.Permissions.FileIOPermission" />
 
               
 
@@ -913,8 +931,7 @@
  page.</para
             >
             <para
-              >This method overrides <see
-               cref="M:System.Security.CodeAccessPermission.FromXml(System.Security.SecurityElement)" />
+              >This method overrides <see cref="M:System.Security.CodeAccessPermission.FromXml(System.Security.SecurityElement)" />
 
               
 
@@ -927,8 +944,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -940,16 +956,14 @@
 
             
 
-             does not contain the encoding for a <see
-             cref="T:System.Security.Permissions.FileIOPermission" />
+             does not contain the encoding for a <see cref="T:System.Security.Permissions.FileIOPermission" />
 
             
 
              instance.</para
           >
           <para
-            >The version number of <paramref
-             name="esd" />
+            >The version number of <paramref name="esd" />
 
             
 
@@ -961,7 +975,11 @@
           <para>Reconstructs a permission with a specified state from an XML encoding.</para>
         </summary>
         <param name="esd">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -995,8 +1013,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hash code for two instances of the same permission might be different, hence a hash code should not be used to compare two <see
-             cref="T:System.Security.Permissions.FileIOPermission" />
+            >The hash code for two instances of the same permission might be different, hence a hash code should not be used to compare two <see cref="T:System.Security.Permissions.FileIOPermission" />
 
             
 
@@ -1006,8 +1023,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a hash code for the <see
-             cref="T:System.Security.Permissions.FileIOPermission" />
+            >Gets a hash code for the <see cref="T:System.Security.Permissions.FileIOPermission" />
 
             
 
@@ -1017,8 +1033,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.Security.Permissions.FileIOPermission" />
+            >A hash code for the current <see cref="T:System.Security.Permissions.FileIOPermission" />
 
             
 
@@ -1054,48 +1069,39 @@
           <para>Use this method to get the state of the current permission. To get the state of both Read and Write access, two calls to this method are required.</para>
           <block subset="none" type="note">
             <para
-              >The <paramref
-               name="access" />
+              >The <paramref name="access" />
 
               
 
-               parameter is limited to the values of <see
-               cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+               parameter is limited to the values of <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
               
 
-              , which represent single types of file access. Those values are <see
-               cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
+              , which represent single types of file access. Those values are <see cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
 
               
 
-              , <see
-               cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
+              , <see cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
 
               
 
-              , <see
-               cref="F:System.Security.Permissions.FileIOPermissionAccess.Append" />
+              , <see cref="F:System.Security.Permissions.FileIOPermissionAccess.Append" />
 
               
 
-              , and <see
-               cref="F:System.Security.Permissions.FileIOPermissionAccess.PathDiscovery" />
+              , and <see cref="F:System.Security.Permissions.FileIOPermissionAccess.PathDiscovery" />
 
               
 
-              . The values acceptable to <paramref
-               name="access" />
+              . The values acceptable to <paramref name="access" />
 
               
 
-               do not include <see
-               cref="F:System.Security.Permissions.FileIOPermissionAccess.NoAccess" />
+               do not include <see cref="F:System.Security.Permissions.FileIOPermissionAccess.NoAccess" />
 
               
 
-               and <see
-               cref="F:System.Security.Permissions.FileIOPermissionAccess.AllAccess" />
+               and <see cref="F:System.Security.Permissions.FileIOPermissionAccess.AllAccess" />
 
               
 
@@ -1106,8 +1112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets all files and directories with the specified <see
-             cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+            >Gets all files and directories with the specified <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
             
 
@@ -1117,8 +1122,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array containing the paths of the files and directories to which access specified by the <paramref
-             name="access" />
+            >An array containing the paths of the files and directories to which access specified by the <paramref name="access" />
 
             
 
@@ -1126,12 +1130,15 @@
           >
         </returns>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+          One of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
           
 
@@ -1170,13 +1177,11 @@
 
           
 
-           is not <see
-           langword="null" />
+           is not <see langword="null" />
 
           
 
-           and is not of type <see
-           cref="T:System.Security.Permissions.FileIOPermission" />
+           and is not of type <see cref="T:System.Security.Permissions.FileIOPermission" />
 
           
 
@@ -1195,7 +1200,11 @@
           <para>A new permission that represents the intersection of the current permission and the specified permission. This new permission is null if the intersection is empty.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1235,13 +1244,11 @@
 
           
 
-           is not <see
-           langword="null" />
+           is not <see langword="null" />
 
           
 
-           and is not of type <see
-           cref="T:System.Security.Permissions.FileIOPermission" />
+           and is not of type <see cref="T:System.Security.Permissions.FileIOPermission" />
 
           
 
@@ -1260,7 +1267,11 @@
           <para>true if the current permission is a subset of the specified permission; otherwise, false.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1326,8 +1337,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The previous state of the current permission for the specified access type is overwritten. The following code sets the access for C:\temp to <see
-             cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
+            >The previous state of the current permission for the specified access type is overwritten. The following code sets the access for C:\temp to <see cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
 
             
 
@@ -1342,19 +1352,26 @@
           <para>Sets the specified access to the specified file or directory, replacing the existing state of the permission.</para>
         </summary>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+          A bitwise combination of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
           
 
            values. </param
         >
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1388,8 +1405,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The previous state of the current permission for the specified access type is overwritten. The following code sets the access for C:\temp to <see
-             cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
+            >The previous state of the current permission for the specified access type is overwritten. The following code sets the access for C:\temp to <see cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
 
             
 
@@ -1403,19 +1419,26 @@
           <para>Sets the specified access to the specified files and directories, replacing the current state for the specified access with the new set of paths.</para>
         </summary>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+          A bitwise combination of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
           
 
            values. </param
         >
         <param name="pathList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1472,8 +1495,7 @@
         <remarks>
           <block subset="none" type="note">
             <para
-              >For the XML encoding for this class, see the <see
-               cref="T:System.Security.Permissions.FileIOPermission" />
+              >For the XML encoding for this class, see the <see cref="T:System.Security.Permissions.FileIOPermission" />
 
               
 
@@ -1481,8 +1503,7 @@
  page.</para
             >
             <para
-              >This method overrides <see
-               cref="M:System.Security.CodeAccessPermission.ToXml" />
+              >This method overrides <see cref="M:System.Security.CodeAccessPermission.ToXml" />
 
               
 
@@ -1532,13 +1553,11 @@
 
           
 
-           is not <see
-           langword="null" />
+           is not <see langword="null" />
 
           
 
-           and is not of type <see
-           cref="T:System.Security.Permissions.FileIOPermission" />
+           and is not of type <see cref="T:System.Security.Permissions.FileIOPermission" />
 
           
 
@@ -1547,8 +1566,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see
-             cref="M:System.Security.Permissions.FileIOPermission.Union(System.Security.IPermission)" />
+            >The result of a call to <see cref="M:System.Security.Permissions.FileIOPermission.Union(System.Security.IPermission)" />
 
             
 
@@ -1564,7 +1582,11 @@
           <para>A new permission that represents the union of the current permission and the specified permission.</para>
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

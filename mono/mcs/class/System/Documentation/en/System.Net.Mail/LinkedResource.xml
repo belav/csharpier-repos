@@ -49,13 +49,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.Net.Mail.LinkedResource" />
+            >Initializes a new instance of <see cref="T:System.Net.Mail.LinkedResource" />
 
             
 
-             using the supplied <see
-             cref="T:System.IO.Stream" />
+             using the supplied <see cref="T:System.IO.Stream" />
 
             
 
@@ -63,7 +61,11 @@
           >
         </summary>
         <param name="contentStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -91,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.Net.Mail.LinkedResource" />
+            >Initializes a new instance of <see cref="T:System.Net.Mail.LinkedResource" />
 
             
 
@@ -100,7 +101,11 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -132,18 +137,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.Net.Mail.LinkedResource" />
+            >Initializes a new instance of <see cref="T:System.Net.Mail.LinkedResource" />
 
             
 
-             with the values supplied by <see
-             cref="T:System.IO.Stream" />
+             with the values supplied by <see cref="T:System.IO.Stream" />
 
             
 
-             and <see
-             cref="T:System.Net.Mime.ContentType" />
+             and <see cref="T:System.Net.Mime.ContentType" />
 
             
 
@@ -151,14 +153,22 @@
           >
         </summary>
         <param name="contentStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A stream that contains the content for this embedded resource.</param
         >
         <param name="contentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -190,13 +200,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.Net.Mail.LinkedResource" />
+            >Initializes a new instance of <see cref="T:System.Net.Mail.LinkedResource" />
 
             
 
-             with the specified <see
-             cref="T:System.IO.Stream" />
+             with the specified <see cref="T:System.IO.Stream" />
 
             
 
@@ -204,14 +212,22 @@
           >
         </summary>
         <param name="contentStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A stream that contains the content for this embedded resource.</param
         >
         <param name="mediaType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -243,8 +259,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.Net.Mail.LinkedResource" />
+            >Initializes a new instance of <see cref="T:System.Net.Mail.LinkedResource" />
 
             
 
@@ -252,14 +267,22 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file name that holds the content for this embedded resource.</param
         >
         <param name="contentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -291,8 +314,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.Net.Mail.LinkedResource" />
+            >Initializes a new instance of <see cref="T:System.Net.Mail.LinkedResource" />
 
             
 
@@ -300,14 +322,22 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file name that holds the content for this embedded resource.</param
         >
         <param name="mediaType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -362,8 +392,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Net.Mail.LinkedResource" />
+            >Creates a <see cref="T:System.Net.Mail.LinkedResource" />
 
             
 
@@ -373,8 +402,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.Mail.LinkedResource" />
+            >A <see cref="T:System.Net.Mail.LinkedResource" />
 
             
 
@@ -382,7 +410,11 @@
           >
         </returns>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -417,8 +449,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Net.Mail.LinkedResource" />
+            >Creates a <see cref="T:System.Net.Mail.LinkedResource" />
 
             
 
@@ -428,8 +459,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.Mail.LinkedResource" />
+            >A <see cref="T:System.Net.Mail.LinkedResource" />
 
             
 
@@ -437,14 +467,22 @@
           >
         </returns>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string that contains the embedded resource to be included in the email attachment.</param
         >
         <param name="contentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -480,8 +518,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Net.Mail.LinkedResource" />
+            >Creates a <see cref="T:System.Net.Mail.LinkedResource" />
 
             
 
@@ -491,8 +528,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.Mail.LinkedResource" />
+            >A <see cref="T:System.Net.Mail.LinkedResource" />
 
             
 
@@ -500,21 +536,33 @@
           >
         </returns>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string that contains the embedded resource to be included in the email attachment.</param
         >
         <param name="contentEncoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the content.</param
         >
         <param name="mediaType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

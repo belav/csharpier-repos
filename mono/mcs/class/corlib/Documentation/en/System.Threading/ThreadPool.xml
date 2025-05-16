@@ -24,13 +24,11 @@
       <list type="bullet">
         <item>
           <para
-            >When you create a <see
-             cref="T:System.Threading.Tasks.Task" />
+            >When you create a <see cref="T:System.Threading.Tasks.Task" />
 
             
 
-             or <see
-             cref="T:System.Threading.Tasks.Task`1" />
+             or <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
@@ -39,13 +37,11 @@
         </item>
         <item>
           <para
-            >Asynchronous timers use the thread pool. Thread pool threads execute callbacks from the <see
-             cref="T:System.Threading.Timer" />
+            >Asynchronous timers use the thread pool. Thread pool threads execute callbacks from the <see cref="T:System.Threading.Timer" />
 
             
 
-             class and raise events from the <see
-             cref="T:System.Timers.Timer" />
+             class and raise events from the <see cref="T:System.Timers.Timer" />
 
             
 
@@ -58,13 +54,11 @@
       </list>
       <block subset="none" type="note">
         <para
-          >The threads in the managed thread pool are background threads. That is, their <see
-           cref="P:System.Threading.Thread.IsBackground" />
+          >The threads in the managed thread pool are background threads. That is, their <see cref="P:System.Threading.Thread.IsBackground" />
 
           
 
-           properties are true. This means that a <see
-           cref="T:System.Threading.ThreadPool" />
+           properties are true. This means that a <see cref="T:System.Threading.ThreadPool" />
 
           
 
@@ -73,13 +67,11 @@
       </block>
       <block subset="none" type="note">
         <para
-          >When the thread pool reuses a thread, it does not clear the data in thread local storage or in fields that are marked with the <see
-           cref="T:System.ThreadStaticAttribute" />
+          >When the thread pool reuses a thread, it does not clear the data in thread local storage or in fields that are marked with the <see cref="T:System.ThreadStaticAttribute" />
 
           
 
-           attribute. Therefore, when a method examines thread local storage or fields that are marked with the <see
-           cref="T:System.ThreadStaticAttribute" />
+           attribute. Therefore, when a method examines thread local storage or fields that are marked with the <see cref="T:System.ThreadStaticAttribute" />
 
           
 
@@ -87,8 +79,7 @@
         >
       </block>
       <para
-        >You can also queue work items that are not related to a wait operation to the thread pool. To request that a work item be handled by a thread in the thread pool, call the <see
-         cref="M:System.Threading.ThreadPool.QueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
+        >You can also queue work items that are not related to a wait operation to the thread pool. To request that a work item be handled by a thread in the thread pool, call the <see cref="M:System.Threading.ThreadPool.QueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
 
         
 
@@ -96,13 +87,11 @@
       >
       <para>Timer-queue timers and registered wait operations also use the thread pool. Their callback functions are queued to the thread pool.</para>
       <para
-        >There is one thread pool per process. Beginning with the net_v40_long, the default size of the thread pool for a process depends on several factors, such as the size of the virtual address space. A process can call the <see
-         cref="M:System.Threading.ThreadPool.GetMaxThreads(System.Int32@,System.Int32@)" />
+        >There is one thread pool per process. Beginning with the net_v40_long, the default size of the thread pool for a process depends on several factors, such as the size of the virtual address space. A process can call the <see cref="M:System.Threading.ThreadPool.GetMaxThreads(System.Int32@,System.Int32@)" />
 
         
 
-         method to determine the number of threads. The number of threads in the thread pool can be changed by using the <see
-         cref="M:System.Threading.ThreadPool.SetMaxThreads(System.Int32,System.Int32)" />
+         method to determine the number of threads. The number of threads in the thread pool can be changed by using the <see cref="M:System.Threading.ThreadPool.SetMaxThreads(System.Int32,System.Int32)" />
 
         
 
@@ -110,8 +99,7 @@
       >
       <block subset="none" type="note">
         <para
-          >Unmanaged code that hosts the .NET Framework can change the size of the thread pool by using the <unmanagedCodeEntityReference
-          >CorSetMaxThreads</unmanagedCodeEntityReference>
+          >Unmanaged code that hosts the .NET Framework can change the size of the thread pool by using the <unmanagedCodeEntityReference>CorSetMaxThreads</unmanagedCodeEntityReference>
 
           
 
@@ -123,8 +111,7 @@
         <para>When demand is low, the actual number of thread pool threads can fall below the minimum values.</para>
       </block>
       <para
-        >You can use the <see
-         cref="M:System.Threading.ThreadPool.GetMinThreads(System.Int32@,System.Int32@)" />
+        >You can use the <see cref="M:System.Threading.ThreadPool.GetMinThreads(System.Int32@,System.Int32@)" />
 
         
 
@@ -132,8 +119,7 @@
       >
       <block subset="none" type="note">
         <para
-          >You can use the <see
-           cref="M:System.Threading.ThreadPool.SetMinThreads(System.Int32,System.Int32)" />
+          >You can use the <see cref="M:System.Threading.ThreadPool.SetMinThreads(System.Int32,System.Int32)" />
 
           
 
@@ -175,8 +161,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Binds an operating system handle to the <see
-             cref="T:System.Threading.ThreadPool" />
+            >Binds an operating system handle to the <see cref="T:System.Threading.ThreadPool" />
 
             
 
@@ -188,12 +173,15 @@
           <para>true if the handle is bound; otherwise, false.</para>
         </returns>
         <param name="osHandle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IntPtr" />
+          An <see cref="T:System.IntPtr" />
 
           
 
@@ -226,18 +214,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="osHandle" />
+            >The <paramref name="osHandle" />
 
             
 
-             parameter should be a <see
-             cref="T:Microsoft.Win32.SafeHandles.SafeFileHandle" />
+             parameter should be a <see cref="T:Microsoft.Win32.SafeHandles.SafeFileHandle" />
 
             
 
-            , which derives from the abstract <see
-             cref="T:System.Runtime.InteropServices.SafeHandle" />
+            , which derives from the abstract <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
             
 
@@ -247,8 +232,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Binds an operating system handle to the <see
-             cref="T:System.Threading.ThreadPool" />
+            >Binds an operating system handle to the <see cref="T:System.Threading.ThreadPool" />
 
             
 
@@ -260,12 +244,15 @@
           <para>true if the handle is bound; otherwise, false.</para>
         </returns>
         <param name="osHandle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.InteropServices.SafeHandle" />
+          A <see cref="T:System.Runtime.InteropServices.SafeHandle" />
 
           
 
@@ -385,8 +372,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can place data required by the queued method in the instance fields of the class in which the method is defined, or you can use the <see
-             cref="M:System.Threading.ThreadPool.QueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
+            >You can place data required by the queued method in the instance fields of the class in which the method is defined, or you can use the <see cref="M:System.Threading.ThreadPool.QueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
 
             
 
@@ -394,13 +380,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Visual Basic users can omit the <see
-               cref="T:System.Threading.WaitCallback" />
+              >Visual Basic users can omit the <see cref="T:System.Threading.WaitCallback" />
 
               
 
-               constructor, and simply use the AddressOf operator when passing the callback method to <see
-               cref="M:System.Threading.ThreadPool.QueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
+               constructor, and simply use the AddressOf operator when passing the callback method to <see cref="M:System.Threading.ThreadPool.QueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
 
               
 
@@ -411,13 +395,11 @@
             <h2>Version Information</h2>
           </format>
           <para
-            >In the .NET Framework version 2.0, the <see
-             cref="P:System.Threading.Thread.CurrentPrincipal" />
+            >In the .NET Framework version 2.0, the <see cref="P:System.Threading.Thread.CurrentPrincipal" />
 
             
 
-             property value is propagated to worker threads queued using the <see
-             cref="Overload:System.Threading.ThreadPool.QueueUserWorkItem" />
+             property value is propagated to worker threads queued using the <see cref="Overload:System.Threading.ThreadPool.QueueUserWorkItem" />
 
             
 
@@ -431,8 +413,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the method is successfully queued; <see
-             cref="T:System.NotSupportedException" />
+            >true if the method is successfully queued; <see cref="T:System.NotSupportedException" />
 
             
 
@@ -440,12 +421,15 @@
           >
         </returns>
         <param name="callBack">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Threading.WaitCallback" />
+          A <see cref="T:System.Threading.WaitCallback" />
 
           
 
@@ -481,13 +465,11 @@
           <para>If the callback method requires complex data, you can define a class to contain the data.</para>
           <block subset="none" type="note">
             <para
-              >Visual Basic users can omit the <see
-               cref="T:System.Threading.WaitCallback" />
+              >Visual Basic users can omit the <see cref="T:System.Threading.WaitCallback" />
 
               
 
-               constructor, and simply use the AddressOf operator when passing the callback method to <see
-               cref="M:System.Threading.ThreadPool.QueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
+               constructor, and simply use the AddressOf operator when passing the callback method to <see cref="M:System.Threading.ThreadPool.QueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
 
               
 
@@ -498,13 +480,11 @@
             <h2>Version Information</h2>
           </format>
           <para
-            >In the .NET Framework version 2.0, the <see
-             cref="P:System.Threading.Thread.CurrentPrincipal" />
+            >In the .NET Framework version 2.0, the <see cref="P:System.Threading.Thread.CurrentPrincipal" />
 
             
 
-             property value is propagated to worker threads queued using the <see
-             cref="Overload:System.Threading.ThreadPool.QueueUserWorkItem" />
+             property value is propagated to worker threads queued using the <see cref="Overload:System.Threading.ThreadPool.QueueUserWorkItem" />
 
             
 
@@ -518,8 +498,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the method is successfully queued; <see
-             cref="T:System.NotSupportedException" />
+            >true if the method is successfully queued; <see cref="T:System.NotSupportedException" />
 
             
 
@@ -527,19 +506,26 @@
           >
         </returns>
         <param name="callBack">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Threading.WaitCallback" />
+          A <see cref="T:System.Threading.WaitCallback" />
 
           
 
            representing the method to execute. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -576,36 +562,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you are finished using the <see
-             cref="T:System.Threading.RegisteredWaitHandle" />
+            >When you are finished using the <see cref="T:System.Threading.RegisteredWaitHandle" />
 
             
 
-             that is returned by this method, call its <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+             that is returned by this method, call its <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
-             method to release references to the wait handle. We recommend that you always call the <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+             method to release references to the wait handle. We recommend that you always call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
-             method, even if you specify true for <paramref
-             name="executeOnlyOnce" />
+             method, even if you specify true for <paramref name="executeOnlyOnce" />
 
             
 
-            . Garbage collection works more efficiently if you call the <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+            . Garbage collection works more efficiently if you call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
              method instead of depending on the registered wait handle's finalizer.</para
           >
           <para
-            >The <see
-             cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int32,System.Boolean)" />
+            >The <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int32,System.Boolean)" />
 
             
 
@@ -620,23 +600,19 @@
             </item>
           </list>
           <para
-            >The <see
-             cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int32,System.Boolean)" />
+            >The <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int32,System.Boolean)" />
 
             
 
-             method checks the current state of the specified object's <see
-             cref="T:System.Threading.WaitHandle" />
+             method checks the current state of the specified object's <see cref="T:System.Threading.WaitHandle" />
 
             
 
-            . If the object's state is unsignaled, the method registers a wait operation. The wait operation is performed by a thread from the thread pool. The delegate is executed by a worker thread when the object's state becomes signaled or the time-out interval elapses. If the <paramref
-             name="timeOutInterval" />
+            . If the object's state is unsignaled, the method registers a wait operation. The wait operation is performed by a thread from the thread pool. The delegate is executed by a worker thread when the object's state becomes signaled or the time-out interval elapses. If the <paramref name="timeOutInterval" />
 
             
 
-             parameter is not 0 (zero) and the <paramref
-             name="executeOnlyOnce" />
+             parameter is not 0 (zero) and the <paramref name="executeOnlyOnce" />
 
             
 
@@ -644,23 +620,19 @@
           >
           <block subset="none" type="note">
             <para
-              >Using a <see
-               cref="T:System.Threading.Mutex" />
+              >Using a <see cref="T:System.Threading.Mutex" />
 
               
 
-               for <paramref
-               name="waitObject" />
+               for <paramref name="waitObject" />
 
               
 
-               does not provide mutual exclusion for the callbacks because the underlying Win32 API uses the default WT_EXECUTEDEFAULT flag, so each callback is dispatched on a separate thread pool thread. Instead of a <see
-               cref="T:System.Threading.Mutex" />
+               does not provide mutual exclusion for the callbacks because the underlying Win32 API uses the default WT_EXECUTEDEFAULT flag, so each callback is dispatched on a separate thread pool thread. Instead of a <see cref="T:System.Threading.Mutex" />
 
               
 
-              , use a <see
-               cref="T:System.Threading.Semaphore" />
+              , use a <see cref="T:System.Threading.Semaphore" />
 
               
 
@@ -668,31 +640,26 @@
             >
           </block>
           <para
-            >To cancel the wait operation, call the <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+            >To cancel the wait operation, call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
              method.</para
           >
           <para
-            >The wait thread uses the Win32 <unmanagedCodeEntityReference
-            >WaitForMultipleObjects</unmanagedCodeEntityReference>
+            >The wait thread uses the Win32 <unmanagedCodeEntityReference>WaitForMultipleObjects</unmanagedCodeEntityReference>
 
             
 
-             function to monitor registered wait operations. Therefore, if you must use the same native operating system handle in multiple calls to <see
-             cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int32,System.Boolean)" />
+             function to monitor registered wait operations. Therefore, if you must use the same native operating system handle in multiple calls to <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int32,System.Boolean)" />
 
             
 
-            , you must duplicate the handle using the Win32 <unmanagedCodeEntityReference
-            >DuplicateHandle</unmanagedCodeEntityReference>
+            , you must duplicate the handle using the Win32 <unmanagedCodeEntityReference>DuplicateHandle</unmanagedCodeEntityReference>
 
             
 
-             function. Note that you should not pulse an event object passed to <see
-             cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int32,System.Boolean)" />
+             function. Note that you should not pulse an event object passed to <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int32,System.Boolean)" />
 
             
 
@@ -703,13 +670,11 @@
             <h2>Version Information</h2>
           </format>
           <para
-            >Starting with the .NET Framework version 2.0, the <see
-             cref="P:System.Threading.Thread.CurrentPrincipal" />
+            >Starting with the .NET Framework version 2.0, the <see cref="P:System.Threading.Thread.CurrentPrincipal" />
 
             
 
-             property value is propagated to worker threads queued using the <see
-             cref="Overload:System.Threading.ThreadPool.RegisterWaitForSingleObject" />
+             property value is propagated to worker threads queued using the <see cref="Overload:System.Threading.ThreadPool.RegisterWaitForSingleObject" />
 
             
 
@@ -719,8 +684,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers a delegate to wait for a <see
-             cref="T:System.Threading.WaitHandle" />
+            >Registers a delegate to wait for a <see cref="T:System.Threading.WaitHandle" />
 
             
 
@@ -730,8 +694,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Threading.RegisteredWaitHandle" />
+            >The <see cref="T:System.Threading.RegisteredWaitHandle" />
 
             
 
@@ -739,75 +702,87 @@
           >
         </returns>
         <param name="waitObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.WaitHandle" />
+          The <see cref="T:System.Threading.WaitHandle" />
 
           
 
-           to register. Use a <see
-           cref="T:System.Threading.WaitHandle" />
+           to register. Use a <see cref="T:System.Threading.WaitHandle" />
 
           
 
-           other than <see
-           cref="T:System.Threading.Mutex" />
+           other than <see cref="T:System.Threading.Mutex" />
 
           
 
           .</param
         >
         <param name="callBack">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.WaitOrTimerCallback" />
+          The <see cref="T:System.Threading.WaitOrTimerCallback" />
 
           
 
-           delegate to call when the <paramref
-           name="waitObject" />
+           delegate to call when the <paramref name="waitObject" />
 
           
 
            parameter is signaled. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that is passed to the delegate. </param
         >
         <param name="millisecondsTimeOutInterval">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The time-out in milliseconds. If the <paramref
-           name="millisecondsTimeOutInterval" />
+          The time-out in milliseconds. If the <paramref name="millisecondsTimeOutInterval" />
 
           
 
-           parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref
-           name="millisecondsTimeOutInterval" />
+           parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="millisecondsTimeOutInterval" />
 
           
 
            is -1, the function's time-out interval never elapses. </param
         >
         <param name="executeOnlyOnce">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to indicate that the thread will no longer wait on the <paramref
-           name="waitObject" />
+          true to indicate that the thread will no longer wait on the <paramref name="waitObject" />
 
           
 
@@ -844,36 +819,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you are finished using the <see
-             cref="T:System.Threading.RegisteredWaitHandle" />
+            >When you are finished using the <see cref="T:System.Threading.RegisteredWaitHandle" />
 
             
 
-             that is returned by this method, call its <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+             that is returned by this method, call its <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
-             method to release references to the wait handle. We recommend that you always call the <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+             method to release references to the wait handle. We recommend that you always call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
-             method, even if you specify true for <paramref
-             name="executeOnlyOnce" />
+             method, even if you specify true for <paramref name="executeOnlyOnce" />
 
             
 
-            . Garbage collection works more efficiently if you call the <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+            . Garbage collection works more efficiently if you call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
              method instead of depending on the registered wait handle's finalizer.</para
           >
           <para
-            >The <see
-             cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
+            >The <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
 
             
 
@@ -888,23 +857,19 @@
             </item>
           </list>
           <para
-            >The <see
-             cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
+            >The <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
 
             
 
-             method checks the current state of the specified object's <see
-             cref="T:System.Threading.WaitHandle" />
+             method checks the current state of the specified object's <see cref="T:System.Threading.WaitHandle" />
 
             
 
-            . If the object's state is unsignaled, the method registers a wait operation. The wait operation is performed by a thread from the thread pool. The delegate is executed by a worker thread when the object's state becomes signaled or the time-out interval elapses. If the <paramref
-             name="timeOutInterval" />
+            . If the object's state is unsignaled, the method registers a wait operation. The wait operation is performed by a thread from the thread pool. The delegate is executed by a worker thread when the object's state becomes signaled or the time-out interval elapses. If the <paramref name="timeOutInterval" />
 
             
 
-             parameter is not 0 (zero) and the <paramref
-             name="executeOnlyOnce" />
+             parameter is not 0 (zero) and the <paramref name="executeOnlyOnce" />
 
             
 
@@ -912,23 +877,19 @@
           >
           <block subset="none" type="note">
             <para
-              >Using a <see
-               cref="T:System.Threading.Mutex" />
+              >Using a <see cref="T:System.Threading.Mutex" />
 
               
 
-               for <paramref
-               name="waitObject" />
+               for <paramref name="waitObject" />
 
               
 
-               does not provide mutual exclusion for the callbacks because the underlying Win32 API uses the default WT_EXECUTEDEFAULT flag, so each callback is dispatched on a separate thread pool thread. Instead of a <see
-               cref="T:System.Threading.Mutex" />
+               does not provide mutual exclusion for the callbacks because the underlying Win32 API uses the default WT_EXECUTEDEFAULT flag, so each callback is dispatched on a separate thread pool thread. Instead of a <see cref="T:System.Threading.Mutex" />
 
               
 
-              , use a <see
-               cref="T:System.Threading.Semaphore" />
+              , use a <see cref="T:System.Threading.Semaphore" />
 
               
 
@@ -936,31 +897,26 @@
             >
           </block>
           <para
-            >To cancel the wait operation, call the <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+            >To cancel the wait operation, call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
              method.</para
           >
           <para
-            >The wait thread uses the Win32 <unmanagedCodeEntityReference
-            >WaitForMultipleObjects</unmanagedCodeEntityReference>
+            >The wait thread uses the Win32 <unmanagedCodeEntityReference>WaitForMultipleObjects</unmanagedCodeEntityReference>
 
             
 
-             function to monitor registered wait operations. Therefore, if you must use the same native operating system handle in multiple calls to <see
-             cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
+             function to monitor registered wait operations. Therefore, if you must use the same native operating system handle in multiple calls to <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
 
             
 
-            , you must duplicate the handle using the Win32 <unmanagedCodeEntityReference
-            >DuplicateHandle</unmanagedCodeEntityReference>
+            , you must duplicate the handle using the Win32 <unmanagedCodeEntityReference>DuplicateHandle</unmanagedCodeEntityReference>
 
             
 
-             function. Note that you should not pulse an event object passed to <see
-             cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
+             function. Note that you should not pulse an event object passed to <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
 
             
 
@@ -971,13 +927,11 @@
             <h2>Version Information</h2>
           </format>
           <para
-            >Starting with the .NET Framework version 2.0, the <see
-             cref="P:System.Threading.Thread.CurrentPrincipal" />
+            >Starting with the .NET Framework version 2.0, the <see cref="P:System.Threading.Thread.CurrentPrincipal" />
 
             
 
-             property value is propagated to worker threads queued using the <see
-             cref="Overload:System.Threading.ThreadPool.RegisterWaitForSingleObject" />
+             property value is propagated to worker threads queued using the <see cref="Overload:System.Threading.ThreadPool.RegisterWaitForSingleObject" />
 
             
 
@@ -987,8 +941,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers a delegate to wait for a <see
-             cref="T:System.Threading.WaitHandle" />
+            >Registers a delegate to wait for a <see cref="T:System.Threading.WaitHandle" />
 
             
 
@@ -998,8 +951,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Threading.RegisteredWaitHandle" />
+            >The <see cref="T:System.Threading.RegisteredWaitHandle" />
 
             
 
@@ -1007,75 +959,87 @@
           >
         </returns>
         <param name="waitObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.WaitHandle" />
+          The <see cref="T:System.Threading.WaitHandle" />
 
           
 
-           to register. Use a <see
-           cref="T:System.Threading.WaitHandle" />
+           to register. Use a <see cref="T:System.Threading.WaitHandle" />
 
           
 
-           other than <see
-           cref="T:System.Threading.Mutex" />
+           other than <see cref="T:System.Threading.Mutex" />
 
           
 
           .</param
         >
         <param name="callBack">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.WaitOrTimerCallback" />
+          The <see cref="T:System.Threading.WaitOrTimerCallback" />
 
           
 
-           delegate to call when the <paramref
-           name="waitObject" />
+           delegate to call when the <paramref name="waitObject" />
 
           
 
            parameter is signaled. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object passed to the delegate. </param
         >
         <param name="millisecondsTimeOutInterval">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The time-out in milliseconds. If the <paramref
-           name="millisecondsTimeOutInterval" />
+          The time-out in milliseconds. If the <paramref name="millisecondsTimeOutInterval" />
 
           
 
-           parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref
-           name="millisecondsTimeOutInterval" />
+           parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="millisecondsTimeOutInterval" />
 
           
 
            is -1, the function's time-out interval never elapses. </param
         >
         <param name="executeOnlyOnce">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to indicate that the thread will no longer wait on the <paramref
-           name="waitObject" />
+          true to indicate that the thread will no longer wait on the <paramref name="waitObject" />
 
           
 
@@ -1112,36 +1076,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you are finished using the <see
-             cref="T:System.Threading.RegisteredWaitHandle" />
+            >When you are finished using the <see cref="T:System.Threading.RegisteredWaitHandle" />
 
             
 
-             that is returned by this method, call its <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+             that is returned by this method, call its <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
-             method to release references to the wait handle. We recommend that you always call the <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+             method to release references to the wait handle. We recommend that you always call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
-             method, even if you specify true for <paramref
-             name="executeOnlyOnce" />
+             method, even if you specify true for <paramref name="executeOnlyOnce" />
 
             
 
-            . Garbage collection works more efficiently if you call the <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+            . Garbage collection works more efficiently if you call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
              method instead of depending on the registered wait handle's finalizer.</para
           >
           <para
-            >The <see
-             cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.TimeSpan,System.Boolean)" />
+            >The <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.TimeSpan,System.Boolean)" />
 
             
 
@@ -1156,23 +1114,19 @@
             </item>
           </list>
           <para
-            >The <see
-             cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.TimeSpan,System.Boolean)" />
+            >The <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.TimeSpan,System.Boolean)" />
 
             
 
-             method checks the current state of the specified object's <see
-             cref="T:System.Threading.WaitHandle" />
+             method checks the current state of the specified object's <see cref="T:System.Threading.WaitHandle" />
 
             
 
-            . If the object's state is unsignaled, the method registers a wait operation. The wait operation is performed by a thread from the thread pool. The delegate is executed by a worker thread when the object's state becomes signaled or the time-out interval elapses. If the <paramref
-             name="timeOutInterval" />
+            . If the object's state is unsignaled, the method registers a wait operation. The wait operation is performed by a thread from the thread pool. The delegate is executed by a worker thread when the object's state becomes signaled or the time-out interval elapses. If the <paramref name="timeOutInterval" />
 
             
 
-             parameter is not 0 (zero) and the <paramref
-             name="executeOnlyOnce" />
+             parameter is not 0 (zero) and the <paramref name="executeOnlyOnce" />
 
             
 
@@ -1180,23 +1134,19 @@
           >
           <block subset="none" type="note">
             <para
-              >Using a <see
-               cref="T:System.Threading.Mutex" />
+              >Using a <see cref="T:System.Threading.Mutex" />
 
               
 
-               for <paramref
-               name="waitObject" />
+               for <paramref name="waitObject" />
 
               
 
-               does not provide mutual exclusion for the callbacks because the underlying Win32 API uses the default WT_EXECUTEDEFAULT flag, so each callback is dispatched on a separate thread pool thread. Instead of a <see
-               cref="T:System.Threading.Mutex" />
+               does not provide mutual exclusion for the callbacks because the underlying Win32 API uses the default WT_EXECUTEDEFAULT flag, so each callback is dispatched on a separate thread pool thread. Instead of a <see cref="T:System.Threading.Mutex" />
 
               
 
-              , use a <see
-               cref="T:System.Threading.Semaphore" />
+              , use a <see cref="T:System.Threading.Semaphore" />
 
               
 
@@ -1204,31 +1154,26 @@
             >
           </block>
           <para
-            >To cancel the wait operation, call the <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+            >To cancel the wait operation, call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
              method.</para
           >
           <para
-            >The wait thread uses the Win32 <unmanagedCodeEntityReference
-            >WaitForMultipleObjects</unmanagedCodeEntityReference>
+            >The wait thread uses the Win32 <unmanagedCodeEntityReference>WaitForMultipleObjects</unmanagedCodeEntityReference>
 
             
 
-             function to monitor registered wait operations. Therefore, if you must use the same native operating system handle in multiple calls to <see
-             cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.TimeSpan,System.Boolean)" />
+             function to monitor registered wait operations. Therefore, if you must use the same native operating system handle in multiple calls to <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.TimeSpan,System.Boolean)" />
 
             
 
-            , you must duplicate the handle using the Win32 <unmanagedCodeEntityReference
-            >DuplicateHandle</unmanagedCodeEntityReference>
+            , you must duplicate the handle using the Win32 <unmanagedCodeEntityReference>DuplicateHandle</unmanagedCodeEntityReference>
 
             
 
-             function. Note that you should not pulse an event object passed to <see
-             cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.TimeSpan,System.Boolean)" />
+             function. Note that you should not pulse an event object passed to <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.TimeSpan,System.Boolean)" />
 
             
 
@@ -1239,13 +1184,11 @@
             <h2>Version Information</h2>
           </format>
           <para
-            >Starting with the .NET Framework version 2.0, the <see
-             cref="P:System.Threading.Thread.CurrentPrincipal" />
+            >Starting with the .NET Framework version 2.0, the <see cref="P:System.Threading.Thread.CurrentPrincipal" />
 
             
 
-             property value is propagated to worker threads queued using the <see
-             cref="Overload:System.Threading.ThreadPool.RegisterWaitForSingleObject" />
+             property value is propagated to worker threads queued using the <see cref="Overload:System.Threading.ThreadPool.RegisterWaitForSingleObject" />
 
             
 
@@ -1255,13 +1198,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers a delegate to wait for a <see
-             cref="T:System.Threading.WaitHandle" />
+            >Registers a delegate to wait for a <see cref="T:System.Threading.WaitHandle" />
 
             
 
-            , specifying a <see
-             cref="T:System.TimeSpan" />
+            , specifying a <see cref="T:System.TimeSpan" />
 
             
 
@@ -1271,8 +1212,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Threading.RegisteredWaitHandle" />
+            >The <see cref="T:System.Threading.RegisteredWaitHandle" />
 
             
 
@@ -1280,80 +1220,91 @@
           >
         </returns>
         <param name="waitObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.WaitHandle" />
+          The <see cref="T:System.Threading.WaitHandle" />
 
           
 
-           to register. Use a <see
-           cref="T:System.Threading.WaitHandle" />
+           to register. Use a <see cref="T:System.Threading.WaitHandle" />
 
           
 
-           other than <see
-           cref="T:System.Threading.Mutex" />
+           other than <see cref="T:System.Threading.Mutex" />
 
           
 
           .</param
         >
         <param name="callBack">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.WaitOrTimerCallback" />
+          The <see cref="T:System.Threading.WaitOrTimerCallback" />
 
           
 
-           delegate to call when the <paramref
-           name="waitObject" />
+           delegate to call when the <paramref name="waitObject" />
 
           
 
            parameter is signaled. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object passed to the delegate. </param
         >
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The time-out represented by a <see
-           cref="T:System.TimeSpan" />
+          The time-out represented by a <see cref="T:System.TimeSpan" />
 
           
 
-          . If <paramref
-           name="timeout" />
+          . If <paramref name="timeout" />
 
           
 
-           is 0 (zero), the function tests the object's state and returns immediately. If <paramref
-           name="timeout" />
+           is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="timeout" />
 
           
 
            is -1, the function's time-out interval never elapses. </param
         >
         <param name="executeOnlyOnce">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to indicate that the thread will no longer wait on the <paramref
-           name="waitObject" />
+          true to indicate that the thread will no longer wait on the <paramref name="waitObject" />
 
           
 
@@ -1395,36 +1346,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you are finished using the <see
-             cref="T:System.Threading.RegisteredWaitHandle" />
+            >When you are finished using the <see cref="T:System.Threading.RegisteredWaitHandle" />
 
             
 
-             that is returned by this method, call its <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+             that is returned by this method, call its <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
-             method to release references to the wait handle. We recommend that you always call the <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+             method to release references to the wait handle. We recommend that you always call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
-             method, even if you specify true for <paramref
-             name="executeOnlyOnce" />
+             method, even if you specify true for <paramref name="executeOnlyOnce" />
 
             
 
-            . Garbage collection works more efficiently if you call the <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+            . Garbage collection works more efficiently if you call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
              method instead of depending on the registered wait handle's finalizer.</para
           >
           <para
-            >The <see
-             cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
+            >The <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
 
             
 
@@ -1439,23 +1384,19 @@
             </item>
           </list>
           <para
-            >The <see
-             cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
+            >The <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
 
             
 
-            method checks the current state of the specified object's <see
-             cref="T:System.Threading.WaitHandle" />
+            method checks the current state of the specified object's <see cref="T:System.Threading.WaitHandle" />
 
             
 
-            . If the object's state is unsignaled, the method registers a wait operation. The wait operation is performed by a thread from the thread pool. The delegate is executed by a worker thread when the object's state becomes signaled or the time-out interval elapses. If the <paramref
-             name="timeOutInterval" />
+            . If the object's state is unsignaled, the method registers a wait operation. The wait operation is performed by a thread from the thread pool. The delegate is executed by a worker thread when the object's state becomes signaled or the time-out interval elapses. If the <paramref name="timeOutInterval" />
 
             
 
-             parameter is not 0 (zero) and the <paramref
-             name="executeOnlyOnce" />
+             parameter is not 0 (zero) and the <paramref name="executeOnlyOnce" />
 
             
 
@@ -1463,23 +1404,19 @@
           >
           <block subset="none" type="note">
             <para
-              >Using a <see
-               cref="T:System.Threading.Mutex" />
+              >Using a <see cref="T:System.Threading.Mutex" />
 
               
 
-               for <paramref
-               name="waitObject" />
+               for <paramref name="waitObject" />
 
               
 
-               does not provide mutual exclusion for the callbacks because the underlying Win32 API uses the default WT_EXECUTEDEFAULT flag, so each callback is dispatched on a separate thread pool thread. Instead of a <see
-               cref="T:System.Threading.Mutex" />
+               does not provide mutual exclusion for the callbacks because the underlying Win32 API uses the default WT_EXECUTEDEFAULT flag, so each callback is dispatched on a separate thread pool thread. Instead of a <see cref="T:System.Threading.Mutex" />
 
               
 
-              , use a <see
-               cref="T:System.Threading.Semaphore" />
+              , use a <see cref="T:System.Threading.Semaphore" />
 
               
 
@@ -1487,31 +1424,26 @@
             >
           </block>
           <para
-            >To cancel the wait operation, call the <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+            >To cancel the wait operation, call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
              method.</para
           >
           <para
-            >The wait thread uses the Win32 <unmanagedCodeEntityReference
-            >WaitForMultipleObjects</unmanagedCodeEntityReference>
+            >The wait thread uses the Win32 <unmanagedCodeEntityReference>WaitForMultipleObjects</unmanagedCodeEntityReference>
 
             
 
-             function to monitor registered wait operations. Therefore, if you must use the same native operating system handle in multiple calls to <see
-             cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
+             function to monitor registered wait operations. Therefore, if you must use the same native operating system handle in multiple calls to <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
 
             
 
-            , you must duplicate the handle using the Win32 <unmanagedCodeEntityReference
-            >DuplicateHandle</unmanagedCodeEntityReference>
+            , you must duplicate the handle using the Win32 <unmanagedCodeEntityReference>DuplicateHandle</unmanagedCodeEntityReference>
 
             
 
-             function. Note that you should not pulse an event object passed to <see
-             cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
+             function. Note that you should not pulse an event object passed to <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
 
             
 
@@ -1522,13 +1454,11 @@
             <h2>Version Information</h2>
           </format>
           <para
-            >Starting with the .NET Framework version 2.0, the <see
-             cref="P:System.Threading.Thread.CurrentPrincipal" />
+            >Starting with the .NET Framework version 2.0, the <see cref="P:System.Threading.Thread.CurrentPrincipal" />
 
             
 
-             property value is propagated to worker threads queued using the <see
-             cref="Overload:System.Threading.ThreadPool.RegisterWaitForSingleObject" />
+             property value is propagated to worker threads queued using the <see cref="Overload:System.Threading.ThreadPool.RegisterWaitForSingleObject" />
 
             
 
@@ -1538,8 +1468,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers a delegate to wait for a <see
-             cref="T:System.Threading.WaitHandle" />
+            >Registers a delegate to wait for a <see cref="T:System.Threading.WaitHandle" />
 
             
 
@@ -1549,8 +1478,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Threading.RegisteredWaitHandle" />
+            >The <see cref="T:System.Threading.RegisteredWaitHandle" />
 
             
 
@@ -1558,75 +1486,87 @@
           >
         </returns>
         <param name="waitObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.WaitHandle" />
+          The <see cref="T:System.Threading.WaitHandle" />
 
           
 
-           to register. Use a <see
-           cref="T:System.Threading.WaitHandle" />
+           to register. Use a <see cref="T:System.Threading.WaitHandle" />
 
           
 
-           other than <see
-           cref="T:System.Threading.Mutex" />
+           other than <see cref="T:System.Threading.Mutex" />
 
           
 
           .</param
         >
         <param name="callBack">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.WaitOrTimerCallback" />
+          The <see cref="T:System.Threading.WaitOrTimerCallback" />
 
           
 
-           delegate to call when the <paramref
-           name="waitObject" />
+           delegate to call when the <paramref name="waitObject" />
 
           
 
            parameter is signaled. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object passed to the delegate. </param
         >
         <param name="millisecondsTimeOutInterval">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The time-out in milliseconds. If the <paramref
-           name="millisecondsTimeOutInterval" />
+          The time-out in milliseconds. If the <paramref name="millisecondsTimeOutInterval" />
 
           
 
-           parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref
-           name="millisecondsTimeOutInterval" />
+           parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="millisecondsTimeOutInterval" />
 
           
 
            is -1, the function's time-out interval never elapses. </param
         >
         <param name="executeOnlyOnce">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to indicate that the thread will no longer wait on the <paramref
-           name="waitObject" />
+          true to indicate that the thread will no longer wait on the <paramref name="waitObject" />
 
           
 
@@ -1673,14 +1613,22 @@
           <para>true if the change is successful; otherwise, false.</para>
         </returns>
         <param name="workerThreads">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The maximum number of worker threads in the thread pool. </param
         >
         <param name="completionPortThreads">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1716,13 +1664,11 @@
           <para>The thread pool provides new worker threads or I/O completion threads on demand until it reaches the minimum for each category. When the minimum is reached, the thread pool can create additional threads in that category or wait until some tasks complete. Beginning with the net_v40_short, the thread pool creates and destroys threads in order to optimize throughput, which is defined as the number of tasks that complete per unit of time. Too few threads might not make optimal use of available resources, whereas too many threads could increase resource contention. </para>
           <para>When demand is low, the actual number of thread pool threads can fall below the minimum values.</para>
           <para
-            >If you specify a negative number or a number larger than the maximum number of active thread pool threads (obtained using <see
-             cref="M:System.Threading.ThreadPool.GetMaxThreads(System.Int32@,System.Int32@)" />
+            >If you specify a negative number or a number larger than the maximum number of active thread pool threads (obtained using <see cref="M:System.Threading.ThreadPool.GetMaxThreads(System.Int32@,System.Int32@)" />
 
             
 
-            ), <see
-             cref="M:System.Threading.ThreadPool.SetMinThreads(System.Int32,System.Int32)" />
+            ), <see cref="M:System.Threading.ThreadPool.SetMinThreads(System.Int32,System.Int32)" />
 
             
 
@@ -1730,8 +1676,7 @@
           >
           <block subset="none" type="note">
             <para
-              >You can use the <see
-               cref="M:System.Threading.ThreadPool.SetMinThreads(System.Int32,System.Int32)" />
+              >You can use the <see cref="M:System.Threading.ThreadPool.SetMinThreads(System.Int32,System.Int32)" />
 
               
 
@@ -1748,14 +1693,22 @@
           <para>true if the change is successful; otherwise, false.</para>
         </returns>
         <param name="workerThreads">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The minimum number of worker threads that the thread pool creates on demand. </param
         >
         <param name="completionPortThreads">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1793,18 +1746,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For information about using native Win32 overlapped I/O, see the <see
-             cref="T:System.Threading.Overlapped" />
+            >For information about using native Win32 overlapped I/O, see the <see cref="T:System.Threading.Overlapped" />
 
             
 
-             class, the <see
-             cref="T:System.Threading.NativeOverlapped" />
+             class, the <see cref="T:System.Threading.NativeOverlapped" />
 
             
 
-             structure, and the <unmanagedCodeEntityReference
-            >OVERLAPPED</unmanagedCodeEntityReference>
+             structure, and the <unmanagedCodeEntityReference>OVERLAPPED</unmanagedCodeEntityReference>
 
             
 
@@ -1812,13 +1762,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Using the <see
-               cref="M:System.Threading.ThreadPool.UnsafeQueueNativeOverlapped(System.Threading.NativeOverlapped*)" />
+              >Using the <see cref="M:System.Threading.ThreadPool.UnsafeQueueNativeOverlapped(System.Threading.NativeOverlapped*)" />
 
               
 
-               method could inadvertently open up a security hole. Code access security bases its permission checks on the permissions of all the callers on the stack. When work is queued on a thread pool thread using <see
-               cref="M:System.Threading.ThreadPool.UnsafeQueueNativeOverlapped(System.Threading.NativeOverlapped*)" />
+               method could inadvertently open up a security hole. Code access security bases its permission checks on the permissions of all the callers on the stack. When work is queued on a thread pool thread using <see cref="M:System.Threading.ThreadPool.UnsafeQueueNativeOverlapped(System.Threading.NativeOverlapped*)" />
 
               
 
@@ -1835,12 +1783,15 @@
           <para>true if the operation was successfully queued to an I/O completion port; otherwise, false.</para>
         </returns>
         <param name="overlapped">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.NativeOverlapped" />
+          The <see cref="T:System.Threading.NativeOverlapped" />
 
           
 
@@ -1874,13 +1825,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unlike the <see
-             cref="M:System.Threading.ThreadPool.QueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
+            >Unlike the <see cref="M:System.Threading.ThreadPool.QueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
 
             
 
-             method, <see
-             cref="M:System.Threading.ThreadPool.UnsafeQueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
+             method, <see cref="M:System.Threading.ThreadPool.UnsafeQueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
 
             
 
@@ -1888,13 +1837,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Using <see
-               cref="M:System.Threading.ThreadPool.UnsafeQueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
+              >Using <see cref="M:System.Threading.ThreadPool.UnsafeQueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
 
               
 
-               could inadvertently open up a security hole. Code access security bases its permission checks on the permissions of all the callers on the stack. When work is queued on a thread pool thread using <see
-               cref="M:System.Threading.ThreadPool.UnsafeQueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
+               could inadvertently open up a security hole. Code access security bases its permission checks on the permissions of all the callers on the stack. When work is queued on a thread pool thread using <see cref="M:System.Threading.ThreadPool.UnsafeQueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
 
               
 
@@ -1909,8 +1856,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the method succeeds; <see
-             cref="T:System.OutOfMemoryException" />
+            >true if the method succeeds; <see cref="T:System.OutOfMemoryException" />
 
             
 
@@ -1918,19 +1864,26 @@
           >
         </returns>
         <param name="callBack">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Threading.WaitCallback" />
+          A <see cref="T:System.Threading.WaitCallback" />
 
           
 
            that represents the delegate to invoke when a thread in the thread pool picks up the work item. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1967,13 +1920,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unlike the <see
-             cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.UInt32,System.Boolean)" />
+            >Unlike the <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.UInt32,System.Boolean)" />
 
             
 
-             method, <see
-             cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int32,System.Boolean)" />
+             method, <see cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int32,System.Boolean)" />
 
             
 
@@ -1981,13 +1932,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Using <see
-               cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int32,System.Boolean)" />
+              >Using <see cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int32,System.Boolean)" />
 
               
 
-               could inadvertently open up a security hole. Code access security bases its permission checks on the permissions of all the callers on the stack. When work is queued on a thread pool thread using <see
-               cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int32,System.Boolean)" />
+               could inadvertently open up a security hole. Code access security bases its permission checks on the permissions of all the callers on the stack. When work is queued on a thread pool thread using <see cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int32,System.Boolean)" />
 
               
 
@@ -1995,41 +1944,34 @@
             >
           </block>
           <para
-            >Using a <see
-             cref="T:System.Threading.Mutex" />
+            >Using a <see cref="T:System.Threading.Mutex" />
 
             
 
-             for <paramref
-             name="waitObject" />
+             for <paramref name="waitObject" />
 
             
 
              does not provide mutual exclusion for the callbacks because the underlying Win32 API uses the default WT_EXECUTEDEFAULT flag, so each callback is dispatched on a separate thread pool thread.</para
           >
           <para
-            >When you are finished using the <see
-             cref="T:System.Threading.RegisteredWaitHandle" />
+            >When you are finished using the <see cref="T:System.Threading.RegisteredWaitHandle" />
 
             
 
-             that is returned by this method, call its <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+             that is returned by this method, call its <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
-             method to release references to the wait handle. We recommend that you always call the <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+             method to release references to the wait handle. We recommend that you always call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
-             method, even if you specify true for <paramref
-             name="executeOnlyOnce" />
+             method, even if you specify true for <paramref name="executeOnlyOnce" />
 
             
 
-            . Garbage collection works more efficiently if you call the <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+            . Garbage collection works more efficiently if you call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
@@ -2039,8 +1981,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers a delegate to wait for a <see
-             cref="T:System.Threading.WaitHandle" />
+            >Registers a delegate to wait for a <see cref="T:System.Threading.WaitHandle" />
 
             
 
@@ -2050,8 +1991,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Threading.RegisteredWaitHandle" />
+            >The <see cref="T:System.Threading.RegisteredWaitHandle" />
 
             
 
@@ -2059,70 +1999,83 @@
           >
         </returns>
         <param name="waitObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.WaitHandle" />
+          The <see cref="T:System.Threading.WaitHandle" />
 
           
 
-           to register. Use a <see
-           cref="T:System.Threading.WaitHandle" />
+           to register. Use a <see cref="T:System.Threading.WaitHandle" />
 
           
 
-           other than <see
-           cref="T:System.Threading.Mutex" />
+           other than <see cref="T:System.Threading.Mutex" />
 
           
 
           .</param
         >
         <param name="callBack">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The delegate to call when the <paramref
-           name="waitObject" />
+          The delegate to call when the <paramref name="waitObject" />
 
           
 
            parameter is signaled. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that is passed to the delegate. </param
         >
         <param name="millisecondsTimeOutInterval">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The time-out in milliseconds. If the <paramref
-           name="millisecondsTimeOutInterval" />
+          The time-out in milliseconds. If the <paramref name="millisecondsTimeOutInterval" />
 
           
 
-           parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref
-           name="millisecondsTimeOutInterval" />
+           parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="millisecondsTimeOutInterval" />
 
           
 
            is -1, the function's time-out interval never elapses. </param
         >
         <param name="executeOnlyOnce">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to indicate that the thread will no longer wait on the <paramref
-           name="waitObject" />
+          true to indicate that the thread will no longer wait on the <paramref name="waitObject" />
 
           
 
@@ -2159,13 +2112,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unlike the <see
-             cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.UInt32,System.Boolean)" />
+            >Unlike the <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.UInt32,System.Boolean)" />
 
             
 
-             method, <see
-             cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
+             method, <see cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
 
             
 
@@ -2173,13 +2124,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Using <see
-               cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
+              >Using <see cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
 
               
 
-               could inadvertently open up a security hole. Code access security bases its permission checks on the permissions of all the callers on the stack. When work is queued on a thread pool thread using <see
-               cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
+               could inadvertently open up a security hole. Code access security bases its permission checks on the permissions of all the callers on the stack. When work is queued on a thread pool thread using <see cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
 
               
 
@@ -2187,41 +2136,34 @@
             >
           </block>
           <para
-            >Using a <see
-             cref="T:System.Threading.Mutex" />
+            >Using a <see cref="T:System.Threading.Mutex" />
 
             
 
-             for <paramref
-             name="waitObject" />
+             for <paramref name="waitObject" />
 
             
 
              does not provide mutual exclusion for the callbacks because the underlying Win32 API uses the default WT_EXECUTEDEFAULT flag, so each callback is dispatched on a separate thread pool thread.</para
           >
           <para
-            >When you are finished using the <see
-             cref="T:System.Threading.RegisteredWaitHandle" />
+            >When you are finished using the <see cref="T:System.Threading.RegisteredWaitHandle" />
 
             
 
-             that is returned by this method, call its <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+             that is returned by this method, call its <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
-             method to release references to the wait handle. We recommend that you always call the <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+             method to release references to the wait handle. We recommend that you always call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
-             method, even if you specify true for <paramref
-             name="executeOnlyOnce" />
+             method, even if you specify true for <paramref name="executeOnlyOnce" />
 
             
 
-            . Garbage collection works more efficiently if you call the <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+            . Garbage collection works more efficiently if you call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
@@ -2231,8 +2173,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers a delegate to wait for a <see
-             cref="T:System.Threading.WaitHandle" />
+            >Registers a delegate to wait for a <see cref="T:System.Threading.WaitHandle" />
 
             
 
@@ -2242,8 +2183,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Threading.RegisteredWaitHandle" />
+            >The <see cref="T:System.Threading.RegisteredWaitHandle" />
 
             
 
@@ -2251,70 +2191,83 @@
           >
         </returns>
         <param name="waitObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.WaitHandle" />
+          The <see cref="T:System.Threading.WaitHandle" />
 
           
 
-           to register. Use a <see
-           cref="T:System.Threading.WaitHandle" />
+           to register. Use a <see cref="T:System.Threading.WaitHandle" />
 
           
 
-           other than <see
-           cref="T:System.Threading.Mutex" />
+           other than <see cref="T:System.Threading.Mutex" />
 
           
 
           .</param
         >
         <param name="callBack">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The delegate to call when the <paramref
-           name="waitObject" />
+          The delegate to call when the <paramref name="waitObject" />
 
           
 
            parameter is signaled. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that is passed to the delegate. </param
         >
         <param name="millisecondsTimeOutInterval">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The time-out in milliseconds. If the <paramref
-           name="millisecondsTimeOutInterval" />
+          The time-out in milliseconds. If the <paramref name="millisecondsTimeOutInterval" />
 
           
 
-           parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref
-           name="millisecondsTimeOutInterval" />
+           parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="millisecondsTimeOutInterval" />
 
           
 
            is -1, the function's time-out interval never elapses. </param
         >
         <param name="executeOnlyOnce">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to indicate that the thread will no longer wait on the <paramref
-           name="waitObject" />
+          true to indicate that the thread will no longer wait on the <paramref name="waitObject" />
 
           
 
@@ -2351,13 +2304,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unlike the <see
-             cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.UInt32,System.Boolean)" />
+            >Unlike the <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.UInt32,System.Boolean)" />
 
             
 
-             method, <see
-             cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.TimeSpan,System.Boolean)" />
+             method, <see cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.TimeSpan,System.Boolean)" />
 
             
 
@@ -2365,13 +2316,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Using <see
-               cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.TimeSpan,System.Boolean)" />
+              >Using <see cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.TimeSpan,System.Boolean)" />
 
               
 
-               could inadvertently open up a security hole. Code access security bases its permission checks on the permissions of all the callers on the stack. When work is queued on a thread pool thread using <see
-               cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.TimeSpan,System.Boolean)" />
+               could inadvertently open up a security hole. Code access security bases its permission checks on the permissions of all the callers on the stack. When work is queued on a thread pool thread using <see cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.TimeSpan,System.Boolean)" />
 
               
 
@@ -2379,41 +2328,34 @@
             >
           </block>
           <para
-            >Using a <see
-             cref="T:System.Threading.Mutex" />
+            >Using a <see cref="T:System.Threading.Mutex" />
 
             
 
-             for <paramref
-             name="waitObject" />
+             for <paramref name="waitObject" />
 
             
 
              does not provide mutual exclusion for the callbacks because the underlying Win32 API uses the default WT_EXECUTEDEFAULT flag, so each callback is dispatched on a separate thread pool thread.</para
           >
           <para
-            >When you are finished using the <see
-             cref="T:System.Threading.RegisteredWaitHandle" />
+            >When you are finished using the <see cref="T:System.Threading.RegisteredWaitHandle" />
 
             
 
-             that is returned by this method, call its <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+             that is returned by this method, call its <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
-             method to release references to the wait handle. We recommend that you always call the <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+             method to release references to the wait handle. We recommend that you always call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
-             method, even if you specify true for <paramref
-             name="executeOnlyOnce" />
+             method, even if you specify true for <paramref name="executeOnlyOnce" />
 
             
 
-            . Garbage collection works more efficiently if you call the <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+            . Garbage collection works more efficiently if you call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
@@ -2423,13 +2365,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers a delegate to wait for a <see
-             cref="T:System.Threading.WaitHandle" />
+            >Registers a delegate to wait for a <see cref="T:System.Threading.WaitHandle" />
 
             
 
-            , specifying a <see
-             cref="T:System.TimeSpan" />
+            , specifying a <see cref="T:System.TimeSpan" />
 
             
 
@@ -2439,8 +2379,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Threading.RegisteredWaitHandle" />
+            >The <see cref="T:System.Threading.RegisteredWaitHandle" />
 
             
 
@@ -2448,75 +2387,87 @@
           >
         </returns>
         <param name="waitObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.WaitHandle" />
+          The <see cref="T:System.Threading.WaitHandle" />
 
           
 
-           to register. Use a <see
-           cref="T:System.Threading.WaitHandle" />
+           to register. Use a <see cref="T:System.Threading.WaitHandle" />
 
           
 
-           other than <see
-           cref="T:System.Threading.Mutex" />
+           other than <see cref="T:System.Threading.Mutex" />
 
           
 
           .</param
         >
         <param name="callBack">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The delegate to call when the <paramref
-           name="waitObject" />
+          The delegate to call when the <paramref name="waitObject" />
 
           
 
            parameter is signaled. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that is passed to the delegate. </param
         >
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The time-out represented by a <see
-           cref="T:System.TimeSpan" />
+          The time-out represented by a <see cref="T:System.TimeSpan" />
 
           
 
-          . If <paramref
-           name="timeout" />
+          . If <paramref name="timeout" />
 
           
 
-           is 0 (zero), the function tests the object's state and returns immediately. If <paramref
-           name="timeout" />
+           is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="timeout" />
 
           
 
            is -1, the function's time-out interval never elapses. </param
         >
         <param name="executeOnlyOnce">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to indicate that the thread will no longer wait on the <paramref
-           name="waitObject" />
+          true to indicate that the thread will no longer wait on the <paramref name="waitObject" />
 
           
 
@@ -2558,13 +2509,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unlike the <see
-             cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.UInt32,System.Boolean)" />
+            >Unlike the <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.UInt32,System.Boolean)" />
 
             
 
-             method, <see
-             cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.UInt32,System.Boolean)" />
+             method, <see cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.UInt32,System.Boolean)" />
 
             
 
@@ -2572,13 +2521,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Using <see
-               cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.UInt32,System.Boolean)" />
+              >Using <see cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.UInt32,System.Boolean)" />
 
               
 
-               could inadvertently open up a security hole. Code access security bases its permission checks on the permissions of all the callers on the stack. When work is queued on a thread pool thread using <see
-               cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.UInt32,System.Boolean)" />
+               could inadvertently open up a security hole. Code access security bases its permission checks on the permissions of all the callers on the stack. When work is queued on a thread pool thread using <see cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.UInt32,System.Boolean)" />
 
               
 
@@ -2586,41 +2533,34 @@
             >
           </block>
           <para
-            >Using a <see
-             cref="T:System.Threading.Mutex" />
+            >Using a <see cref="T:System.Threading.Mutex" />
 
             
 
-             for <paramref
-             name="waitObject" />
+             for <paramref name="waitObject" />
 
             
 
              does not provide mutual exclusion for the callbacks because the underlying Win32 API uses the default WT_EXECUTEDEFAULT flag, so each callback is dispatched on a separate thread pool thread.</para
           >
           <para
-            >When you are finished using the <see
-             cref="T:System.Threading.RegisteredWaitHandle" />
+            >When you are finished using the <see cref="T:System.Threading.RegisteredWaitHandle" />
 
             
 
-             that is returned by this method, call its <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+             that is returned by this method, call its <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
-             method to release references to the wait handle. We recommend that you always call the <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+             method to release references to the wait handle. We recommend that you always call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
-             method, even if you specify true for <paramref
-             name="executeOnlyOnce" />
+             method, even if you specify true for <paramref name="executeOnlyOnce" />
 
             
 
-            . Garbage collection works more efficiently if you call the <see
-             cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+            . Garbage collection works more efficiently if you call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
 
             
 
@@ -2630,8 +2570,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers a delegate to wait for a <see
-             cref="T:System.Threading.WaitHandle" />
+            >Registers a delegate to wait for a <see cref="T:System.Threading.WaitHandle" />
 
             
 
@@ -2641,8 +2580,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Threading.RegisteredWaitHandle" />
+            >The <see cref="T:System.Threading.RegisteredWaitHandle" />
 
             
 
@@ -2650,70 +2588,83 @@
           >
         </returns>
         <param name="waitObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.WaitHandle" />
+          The <see cref="T:System.Threading.WaitHandle" />
 
           
 
-           to register. Use a <see
-           cref="T:System.Threading.WaitHandle" />
+           to register. Use a <see cref="T:System.Threading.WaitHandle" />
 
           
 
-           other than <see
-           cref="T:System.Threading.Mutex" />
+           other than <see cref="T:System.Threading.Mutex" />
 
           
 
           .</param
         >
         <param name="callBack">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The delegate to call when the <paramref
-           name="waitObject" />
+          The delegate to call when the <paramref name="waitObject" />
 
           
 
            parameter is signaled. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that is passed to the delegate. </param
         >
         <param name="millisecondsTimeOutInterval">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The time-out in milliseconds. If the <paramref
-           name="millisecondsTimeOutInterval" />
+          The time-out in milliseconds. If the <paramref name="millisecondsTimeOutInterval" />
 
           
 
-           parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref
-           name="millisecondsTimeOutInterval" />
+           parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="millisecondsTimeOutInterval" />
 
           
 
            is -1, the function's time-out interval never elapses. </param
         >
         <param name="executeOnlyOnce">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to indicate that the thread will no longer wait on the <paramref
-           name="waitObject" />
+          true to indicate that the thread will no longer wait on the <paramref name="waitObject" />
 
           
 

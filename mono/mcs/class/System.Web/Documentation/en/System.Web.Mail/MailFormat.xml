@@ -16,8 +16,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides enumerated values for e-mail format. Recommended alternative: <see
-         cref="N:System.Net.Mail" />
+        >Provides enumerated values for e-mail format. Recommended alternative: <see cref="N:System.Net.Mail" />
 
         
 

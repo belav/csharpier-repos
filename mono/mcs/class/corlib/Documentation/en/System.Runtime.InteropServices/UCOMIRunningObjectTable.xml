@@ -36,8 +36,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use <see
-         cref="T:System.Runtime.InteropServices.ComTypes.IRunningObjectTable" />
+        >Use <see cref="T:System.Runtime.InteropServices.ComTypes.IRunningObjectTable" />
 
         
 
@@ -170,7 +169,11 @@
           <para>Determines if the specified moniker is currently registered in the Running Object Table.</para>
         </summary>
         <param name="pmkObjectName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -272,7 +275,11 @@
           <para>Unregisters the specified object from the ROT.</para>
         </summary>
         <param name="dwRegister">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

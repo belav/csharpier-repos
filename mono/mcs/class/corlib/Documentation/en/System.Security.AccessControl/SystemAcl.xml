@@ -51,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.SystemAcl" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.SystemAcl" />
 
             
 
@@ -60,36 +59,45 @@
           >
         </summary>
         <param name="isContainer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true if the new <see
-           cref="T:System.Security.AccessControl.SystemAcl" />
+          true if the new <see cref="T:System.Security.AccessControl.SystemAcl" />
 
           
 
            object is a container.</param
         >
         <param name="isDS">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true if the new <see
-           cref="T:System.Security.AccessControl.SystemAcl" />
+          true if the new <see cref="T:System.Security.AccessControl.SystemAcl" />
 
           
 
            object is a directory object Access Control List (ACL).</param
         >
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of Access Control Entries (ACEs) this <see
-           cref="T:System.Security.AccessControl.SystemAcl" />
+          The number of Access Control Entries (ACEs) this <see cref="T:System.Security.AccessControl.SystemAcl" />
 
           
 
@@ -121,8 +129,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Access Control Entries (ACEs) in the <see
-             cref="T:System.Security.AccessControl.RawAcl" />
+            >The Access Control Entries (ACEs) in the <see cref="T:System.Security.AccessControl.RawAcl" />
 
             
 
@@ -132,13 +139,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.SystemAcl" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.SystemAcl" />
 
             
 
-             class with the specified values from the specified <see
-             cref="T:System.Security.AccessControl.RawAcl" />
+             class with the specified values from the specified <see cref="T:System.Security.AccessControl.RawAcl" />
 
             
 
@@ -146,41 +151,49 @@
           >
         </summary>
         <param name="isContainer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true if the new <see
-           cref="T:System.Security.AccessControl.SystemAcl" />
+          true if the new <see cref="T:System.Security.AccessControl.SystemAcl" />
 
           
 
            object is a container.</param
         >
         <param name="isDS">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true if the new <see
-           cref="T:System.Security.AccessControl.SystemAcl" />
+          true if the new <see cref="T:System.Security.AccessControl.SystemAcl" />
 
           
 
            object is a directory object Access Control List (ACL).</param
         >
         <param name="rawAcl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The underlying <see
-           cref="T:System.Security.AccessControl.RawAcl" />
+          The underlying <see cref="T:System.Security.AccessControl.RawAcl" />
 
           
 
-           object for the new <see
-           cref="T:System.Security.AccessControl.SystemAcl" />
+           object for the new <see cref="T:System.Security.AccessControl.SystemAcl" />
 
           
 
@@ -214,8 +227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.SystemAcl" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.SystemAcl" />
 
             
 
@@ -223,48 +235,60 @@
           >
         </summary>
         <param name="isContainer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true if the new <see
-           cref="T:System.Security.AccessControl.SystemAcl" />
+          true if the new <see cref="T:System.Security.AccessControl.SystemAcl" />
 
           
 
            object is a container.</param
         >
         <param name="isDS">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true if the new <see
-           cref="T:System.Security.AccessControl.SystemAcl" />
+          true if the new <see cref="T:System.Security.AccessControl.SystemAcl" />
 
           
 
            object is a directory object Access Control List (ACL).</param
         >
         <param name="revision">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The revision level of the new <see
-           cref="T:System.Security.AccessControl.SystemAcl" />
+          The revision level of the new <see cref="T:System.Security.AccessControl.SystemAcl" />
 
           
 
            object.</param
         >
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of Access Control Entries (ACEs) this <see
-           cref="T:System.Security.AccessControl.SystemAcl" />
+          The number of Access Control Entries (ACEs) this <see cref="T:System.Security.AccessControl.SystemAcl" />
 
           
 
@@ -305,8 +329,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an audit rule to the current <see
-             cref="T:System.Security.AccessControl.SystemAcl" />
+            >Adds an audit rule to the current <see cref="T:System.Security.AccessControl.SystemAcl" />
 
             
 
@@ -314,40 +337,59 @@
           >
         </summary>
         <param name="auditFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of audit rule to add.</param
         >
         <param name="sid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
            for which to add an audit rule.</param
         >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The access mask for the new audit rule.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Flags that specify the inheritance properties of the new audit rule.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -388,8 +430,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an audit rule with the specified settings to the current <see
-             cref="T:System.Security.AccessControl.SystemAcl" />
+            >Adds an audit rule with the specified settings to the current <see cref="T:System.Security.AccessControl.SystemAcl" />
 
             
 
@@ -397,71 +438,100 @@
           >
         </summary>
         <param name="auditFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of audit rule to add.</param
         >
         <param name="sid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
            for which to add an audit rule.</param
         >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The access mask for the new audit rule.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Flags that specify the inheritance properties of the new audit rule.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Flags that specify the inheritance propagation properties for the new audit rule.</param
         >
         <param name="objectFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Flags that specify if the <paramref
-           name="objectType" />
+          Flags that specify if the <paramref name="objectType" />
 
           
 
-           and <paramref
-           name="inheritedObjectType" />
+           and <paramref name="inheritedObjectType" />
 
           
 
            parameters contain non-null values.</param
         >
         <param name="objectType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The identity of the class of objects to which the new audit rule applies.</param
         >
         <param name="inheritedObjectType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -502,8 +572,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified audit rule from the current <see
-             cref="T:System.Security.AccessControl.SystemAcl" />
+            >Removes the specified audit rule from the current <see cref="T:System.Security.AccessControl.SystemAcl" />
 
             
 
@@ -515,40 +584,59 @@
           <para>true if this method successfully removes the specified audit rule; otherwise, false.</para>
         </returns>
         <param name="auditFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of audit rule to remove.</param
         >
         <param name="sid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
            for which to remove an audit rule.</param
         >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The access mask for the rule to be removed.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Flags that specify the inheritance properties of the rule to be removed.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -592,8 +680,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified audit rule from the current <see
-             cref="T:System.Security.AccessControl.SystemAcl" />
+            >Removes the specified audit rule from the current <see cref="T:System.Security.AccessControl.SystemAcl" />
 
             
 
@@ -605,71 +692,100 @@
           <para>true if this method successfully removes the specified audit rule; otherwise, false.</para>
         </returns>
         <param name="auditFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of audit rule to remove.</param
         >
         <param name="sid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
            for which to remove an audit rule.</param
         >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The access mask for the rule to be removed.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Flags that specify the inheritance properties of the rule to be removed.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Flags that specify the inheritance propagation properties for the rule to be removed.</param
         >
         <param name="objectFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Flags that specify if the <paramref
-           name="objectType" />
+          Flags that specify if the <paramref name="objectType" />
 
           
 
-           and <paramref
-           name="inheritedObjectType" />
+           and <paramref name="inheritedObjectType" />
 
           
 
            parameters contain non-null values.</param
         >
         <param name="objectType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The identity of the class of objects to which the removed audit control rule applies.</param
         >
         <param name="inheritedObjectType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -707,8 +823,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified audit rule from the current <see
-             cref="T:System.Security.AccessControl.DiscretionaryAcl" />
+            >Removes the specified audit rule from the current <see cref="T:System.Security.AccessControl.DiscretionaryAcl" />
 
             
 
@@ -716,40 +831,59 @@
           >
         </summary>
         <param name="auditFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of audit rule to remove.</param
         >
         <param name="sid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
            for which to remove an audit rule.</param
         >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The access mask for the rule to be removed.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Flags that specify the inheritance properties of the rule to be removed.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -790,8 +924,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified audit rule from the current <see
-             cref="T:System.Security.AccessControl.DiscretionaryAcl" />
+            >Removes the specified audit rule from the current <see cref="T:System.Security.AccessControl.DiscretionaryAcl" />
 
             
 
@@ -799,71 +932,100 @@
           >
         </summary>
         <param name="auditFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of audit rule to remove.</param
         >
         <param name="sid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
            for which to remove an audit rule.</param
         >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The access mask for the rule to be removed.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Flags that specify the inheritance properties of the rule to be removed.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Flags that specify the inheritance propagation properties for the rule to be removed.</param
         >
         <param name="objectFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Flags that specify if the <paramref
-           name="objectType" />
+          Flags that specify if the <paramref name="objectType" />
 
           
 
-           and <paramref
-           name="inheritedObjectType" />
+           and <paramref name="inheritedObjectType" />
 
           
 
            parameters contain non-null values.</param
         >
         <param name="objectType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The identity of the class of objects to which the removed audit control rule applies.</param
         >
         <param name="inheritedObjectType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -900,8 +1062,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method removes all existing Access Control Entries (ACEs) that match both specified <see
-             cref="T:System.Security.Principal.SecurityIdentifier" />
+            >This method removes all existing Access Control Entries (ACEs) that match both specified <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
             
 
@@ -911,8 +1072,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the specified audit rule for the specified <see
-             cref="T:System.Security.Principal.SecurityIdentifier" />
+            >Sets the specified audit rule for the specified <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
             
 
@@ -920,40 +1080,59 @@
           >
         </summary>
         <param name="auditFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The audit condition to set.</param
         >
         <param name="sid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
            for which to set an audit rule.</param
         >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The access mask for the new audit rule.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Flags that specify the inheritance properties of the new audit rule.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -993,8 +1172,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method removes all existing Access Control Entries (ACEs) that match both specified <see
-             cref="T:System.Security.Principal.SecurityIdentifier" />
+            >This method removes all existing Access Control Entries (ACEs) that match both specified <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
             
 
@@ -1004,8 +1182,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the specified audit rule for the specified <see
-             cref="T:System.Security.Principal.SecurityIdentifier" />
+            >Sets the specified audit rule for the specified <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
             
 
@@ -1013,71 +1190,100 @@
           >
         </summary>
         <param name="auditFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The audit condition to set.</param
         >
         <param name="sid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
            for which to set an audit rule.</param
         >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The access mask for the new audit rule.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Flags that specify the inheritance properties of the new audit rule.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Flags that specify the inheritance propagation properties for the new audit rule.</param
         >
         <param name="objectFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Flags that specify if the <paramref
-           name="objectType" />
+          Flags that specify if the <paramref name="objectType" />
 
           
 
-           and <paramref
-           name="inheritedObjectType" />
+           and <paramref name="inheritedObjectType" />
 
           
 
            parameters contain non-null values.</param
         >
         <param name="objectType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The identity of the class of objects to which the new audit rule applies.</param
         >
         <param name="inheritedObjectType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

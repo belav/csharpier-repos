@@ -31,169 +31,137 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.Splitter" />
+        >The <see cref="T:System.Windows.Forms.Splitter" />
 
         
 
-         control enables the user to resize controls that are docked to the edges of the <see
-         cref="T:System.Windows.Forms.Splitter" />
+         control enables the user to resize controls that are docked to the edges of the <see cref="T:System.Windows.Forms.Splitter" />
 
         
 
-         control at run time. When the user passes the mouse pointer over the <see
-         cref="T:System.Windows.Forms.Splitter" />
+         control at run time. When the user passes the mouse pointer over the <see cref="T:System.Windows.Forms.Splitter" />
 
         
 
-         control, the cursor changes to indicate that the controls docked to the <see
-         cref="T:System.Windows.Forms.Splitter" />
+         control, the cursor changes to indicate that the controls docked to the <see cref="T:System.Windows.Forms.Splitter" />
 
         
 
-         control can be resized. The <see
-         cref="T:System.Windows.Forms.Splitter" />
+         control can be resized. The <see cref="T:System.Windows.Forms.Splitter" />
 
         
 
-         control enables the user to resize the docked control that is immediately before it in the docking order. Therefore, to enable the user to resize a docked control, dock the control you want the user to be able to resize to an edge of a container, and then dock a splitter to the same side of that container. For example, to create a window similar to Windows Explorer, add a <see
-         cref="T:System.Windows.Forms.TreeView" />
+         control enables the user to resize the docked control that is immediately before it in the docking order. Therefore, to enable the user to resize a docked control, dock the control you want the user to be able to resize to an edge of a container, and then dock a splitter to the same side of that container. For example, to create a window similar to Windows Explorer, add a <see cref="T:System.Windows.Forms.TreeView" />
 
         
 
-         control to a form and set its <see
-         cref="P:System.Windows.Forms.Control.Dock" />
+         control to a form and set its <see cref="P:System.Windows.Forms.Control.Dock" />
 
         
 
-         property to DockStyle.Left. Add a <see
-         cref="T:System.Windows.Forms.Splitter" />
+         property to DockStyle.Left. Add a <see cref="T:System.Windows.Forms.Splitter" />
 
         
 
-         control to the form and set its <see
-         cref="P:System.Windows.Forms.Control.Dock" />
+         control to the form and set its <see cref="P:System.Windows.Forms.Control.Dock" />
 
         
 
-         property to DockStyle.Left as well. To complete the form layout, add a <see
-         cref="T:System.Windows.Forms.ListView" />
+         property to DockStyle.Left as well. To complete the form layout, add a <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         control and set its <see
-         cref="P:System.Windows.Forms.Control.Dock" />
+         control and set its <see cref="P:System.Windows.Forms.Control.Dock" />
 
         
 
-         property to DockStyle.Fill to have the <see
-         cref="T:System.Windows.Forms.ListView" />
+         property to DockStyle.Fill to have the <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         occupy the remaining space on the form. At run time, the user can then resize the width of the <see
-         cref="T:System.Windows.Forms.TreeView" />
+         occupy the remaining space on the form. At run time, the user can then resize the width of the <see cref="T:System.Windows.Forms.TreeView" />
 
         
 
-         control (as well as the <see
-         cref="T:System.Windows.Forms.ListView" />
+         control (as well as the <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         control) by moving the <see
-         cref="T:System.Windows.Forms.Splitter" />
+         control) by moving the <see cref="T:System.Windows.Forms.Splitter" />
 
         
 
          control.</para
       >
       <para
-        >To ensure that the <see
-         cref="T:System.Windows.Forms.Splitter" />
+        >To ensure that the <see cref="T:System.Windows.Forms.Splitter" />
 
         
 
-         control does not resize controls docked to a size that is too small to be useful to the user, you use the <see
-         cref="P:System.Windows.Forms.Splitter.MinExtra" />
+         control does not resize controls docked to a size that is too small to be useful to the user, you use the <see cref="P:System.Windows.Forms.Splitter.MinExtra" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.Splitter.MinSize" />
+         and <see cref="P:System.Windows.Forms.Splitter.MinSize" />
 
         
 
-         properties. The <see
-         cref="P:System.Windows.Forms.Splitter.MinExtra" />
+         properties. The <see cref="P:System.Windows.Forms.Splitter.MinExtra" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.Splitter.MinSize" />
+         and <see cref="P:System.Windows.Forms.Splitter.MinSize" />
 
         
 
-         properties determine the minimum size that controls docked to the left and right (or top and bottom if a horizontal <see
-         cref="T:System.Windows.Forms.Splitter" />
+         properties determine the minimum size that controls docked to the left and right (or top and bottom if a horizontal <see cref="T:System.Windows.Forms.Splitter" />
 
         
 
-         control) can be sized to. If the other controls on your form that the <see
-         cref="T:System.Windows.Forms.Splitter" />
+         control) can be sized to. If the other controls on your form that the <see cref="T:System.Windows.Forms.Splitter" />
 
         
 
-         control is docked to display a specific style of border, you can use the <see
-         cref="P:System.Windows.Forms.Splitter.BorderStyle" />
+         control is docked to display a specific style of border, you can use the <see cref="P:System.Windows.Forms.Splitter.BorderStyle" />
 
         
 
          property to match the border style of the controls that are docked to it.</para
       >
       <para
-        >You might want to set a maximum size limit on controls that the <see
-         cref="T:System.Windows.Forms.Splitter" />
+        >You might want to set a maximum size limit on controls that the <see cref="T:System.Windows.Forms.Splitter" />
 
         
 
-         control is docked to. The <see
-         cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
+         control is docked to. The <see cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
 
         
 
-         and <see
-         cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
+         and <see cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
 
         
 
-         events enable you to determine when the user is resizing a docked control. You can use the <see
-         cref="P:System.Windows.Forms.Splitter.SplitPosition" />
+         events enable you to determine when the user is resizing a docked control. You can use the <see cref="P:System.Windows.Forms.Splitter.SplitPosition" />
 
         
 
-         property in an event handler for the <see
-         cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
+         property in an event handler for the <see cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
 
         
 
-         or <see
-         cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
+         or <see cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
 
         
 
-         events to determine the size of the control that the <see
-         cref="T:System.Windows.Forms.Splitter" />
+         events to determine the size of the control that the <see cref="T:System.Windows.Forms.Splitter" />
 
         
 
-         control is docked to and set the <see
-         cref="P:System.Windows.Forms.Splitter.SplitPosition" />
+         control is docked to and set the <see cref="P:System.Windows.Forms.Splitter.SplitPosition" />
 
         
 
-         property to a different value to limit the docked control's width to a specified maximum width (or height if a horizontally aligned <see
-         cref="T:System.Windows.Forms.Splitter" />
+         property to a different value to limit the docked control's width to a specified maximum width (or height if a horizontally aligned <see cref="T:System.Windows.Forms.Splitter" />
 
         
 
@@ -201,13 +169,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Resizing a control using the <see
-           cref="T:System.Windows.Forms.Splitter" />
+          >Resizing a control using the <see cref="T:System.Windows.Forms.Splitter" />
 
           
 
-           control can only be done using the mouse. It is not possible to access the <see
-           cref="T:System.Windows.Forms.Splitter" />
+           control can only be done using the mouse. It is not possible to access the <see cref="T:System.Windows.Forms.Splitter" />
 
           
 
@@ -218,13 +184,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a splitter control that enables the user to resize docked controls. <see
-         cref="T:System.Windows.Forms.Splitter" />
+        >Represents a splitter control that enables the user to resize docked controls. <see cref="T:System.Windows.Forms.Splitter" />
 
         
 
-         has been replaced by <see
-         cref="T:System.Windows.Forms.SplitContainer" />
+         has been replaced by <see cref="T:System.Windows.Forms.SplitContainer" />
 
         
 
@@ -241,18 +205,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see
-             cref="P:System.Windows.Forms.Splitter.MinSize" />
+            >By default, the <see cref="P:System.Windows.Forms.Splitter.MinSize" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.Splitter.MinExtra" />
+             and <see cref="P:System.Windows.Forms.Splitter.MinExtra" />
 
             
 
-             properties are set to 25. The <see
-             cref="P:System.Windows.Forms.Control.Dock" />
+             properties are set to 25. The <see cref="P:System.Windows.Forms.Control.Dock" />
 
             
 
@@ -262,18 +223,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Splitter" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             class. <see
-             cref="T:System.Windows.Forms.Splitter" />
+             class. <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             has been replaced by <see
-             cref="T:System.Windows.Forms.SplitContainer" />
+             has been replaced by <see cref="T:System.Windows.Forms.SplitContainer" />
 
             
 
@@ -499,33 +457,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is typically used when the controls the <see
-             cref="T:System.Windows.Forms.Splitter" />
+            >This property is typically used when the controls the <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control is docked to are displayed with a specific border style and you want the <see
-             cref="T:System.Windows.Forms.Splitter" />
+             control is docked to are displayed with a specific border style and you want the <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control to match their display style. For example, if you have a <see
-             cref="T:System.Windows.Forms.TreeView" />
+             control to match their display style. For example, if you have a <see cref="T:System.Windows.Forms.TreeView" />
 
             
 
-             and a <see
-             cref="T:System.Windows.Forms.ListView" />
+             and a <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control that the <see
-             cref="T:System.Windows.Forms.Splitter" />
+             control that the <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control will be docked to that you want to display without any borders, you can set the <see
-             cref="P:System.Windows.Forms.Splitter.BorderStyle" />
+             control will be docked to that you want to display without any borders, you can set the <see cref="P:System.Windows.Forms.Splitter.BorderStyle" />
 
             
 
@@ -535,13 +487,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the style of border for the control. <see
-             cref="P:System.Windows.Forms.Splitter.BorderStyle" />
+            >Gets or sets the style of border for the control. <see cref="P:System.Windows.Forms.Splitter.BorderStyle" />
 
             
 
-             has been replaced by <see
-             cref="P:System.Windows.Forms.SplitContainer.BorderStyle" />
+             has been replaced by <see cref="P:System.Windows.Forms.SplitContainer.BorderStyle" />
 
             
 
@@ -666,48 +616,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.Splitter.Dock" />
+            >Use the <see cref="P:System.Windows.Forms.Splitter.Dock" />
 
             
 
-             property to define how a control is automatically resized as its parent control is resized. You can only set the <see
-             cref="P:System.Windows.Forms.Splitter.Dock" />
+             property to define how a control is automatically resized as its parent control is resized. You can only set the <see cref="P:System.Windows.Forms.Splitter.Dock" />
 
             
 
-             property to <see
-             cref="F:System.Windows.Forms.DockStyle.Top" />
+             property to <see cref="F:System.Windows.Forms.DockStyle.Top" />
 
             
 
-            , <see
-             cref="F:System.Windows.Forms.DockStyle.Bottom" />
+            , <see cref="F:System.Windows.Forms.DockStyle.Bottom" />
 
             
 
-            , <see
-             cref="F:System.Windows.Forms.DockStyle.Left" />
+            , <see cref="F:System.Windows.Forms.DockStyle.Left" />
 
             
 
-            , or <see
-             cref="F:System.Windows.Forms.DockStyle.Right" />
+            , or <see cref="F:System.Windows.Forms.DockStyle.Right" />
 
             
 
-            . The <see
-             cref="T:System.Windows.Forms.Splitter" />
+            . The <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control enables the user to resize the docked control that is immediately before it in the docking order. Therefore, to enable the user to resize a docked control, dock the control to an edge of a container, and then dock a <see
-             cref="T:System.Windows.Forms.Splitter" />
+             control enables the user to resize the docked control that is immediately before it in the docking order. Therefore, to enable the user to resize a docked control, dock the control to an edge of a container, and then dock a <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control to the same side of that container. For more information, see the example in the <see
-             cref="T:System.Windows.Forms.Splitter" />
+             control to the same side of that container. For more information, see the example in the <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
@@ -717,13 +658,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets which <see
-             cref="T:System.Windows.Forms.Splitter" />
+            >Gets or sets which <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             borders are docked to its parent control and determines how a <see
-             cref="T:System.Windows.Forms.Splitter" />
+             borders are docked to its parent control and determines how a <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
@@ -1095,33 +1034,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a horizontal <see
-             cref="T:System.Windows.Forms.Splitter" />
+            >For a horizontal <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control (a <see
-             cref="T:System.Windows.Forms.Splitter" />
+             control (a <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control docked to the top or bottom of a container), the minimum height of the area of the container reserved for undocked controls is this value minus the height of the <see
-             cref="T:System.Windows.Forms.Splitter" />
+             control docked to the top or bottom of a container), the minimum height of the area of the container reserved for undocked controls is this value minus the height of the <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control. For a vertical <see
-             cref="T:System.Windows.Forms.Splitter" />
+             control. For a vertical <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control (a <see
-             cref="T:System.Windows.Forms.Splitter" />
+             control (a <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control docked to the left or right of a container), the minimum width of the area of the container reserved for undocked controls is this value minus the width of the <see
-             cref="T:System.Windows.Forms.Splitter" />
+             control docked to the left or right of a container), the minimum width of the area of the container reserved for undocked controls is this value minus the width of the <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
@@ -1129,8 +1062,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Windows.Forms.Splitter.MinExtra" />
+              >If the <see cref="P:System.Windows.Forms.Splitter.MinExtra" />
 
               
 
@@ -1141,13 +1073,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the minimum distance that must remain between the splitter control and the edge of the opposite side of the container (or the closest control docked to that side). <see
-             cref="P:System.Windows.Forms.Splitter.MinExtra" />
+            >Gets or sets the minimum distance that must remain between the splitter control and the edge of the opposite side of the container (or the closest control docked to that side). <see cref="P:System.Windows.Forms.Splitter.MinExtra" />
 
             
 
-             has been replaced by similar properties in <see
-             cref="T:System.Windows.Forms.SplitContainer" />
+             has been replaced by similar properties in <see cref="T:System.Windows.Forms.SplitContainer" />
 
             
 
@@ -1179,23 +1109,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a horizontal <see
-             cref="T:System.Windows.Forms.Splitter" />
+            >For a horizontal <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control (a <see
-             cref="T:System.Windows.Forms.Splitter" />
+             control (a <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control docked to the top or bottom of a container), this value is the minimum height of the resizable control. For a vertical <see
-             cref="T:System.Windows.Forms.Splitter" />
+             control docked to the top or bottom of a container), this value is the minimum height of the resizable control. For a vertical <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control (a <see
-             cref="T:System.Windows.Forms.Splitter" />
+             control (a <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
@@ -1203,8 +1129,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Windows.Forms.Splitter.MinSize" />
+              >If the <see cref="P:System.Windows.Forms.Splitter.MinSize" />
 
               
 
@@ -1215,18 +1140,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the minimum distance that must remain between the splitter control and the container edge that the control is docked to. <see
-             cref="P:System.Windows.Forms.Splitter.MinSize" />
+            >Gets or sets the minimum distance that must remain between the splitter control and the container edge that the control is docked to. <see cref="P:System.Windows.Forms.Splitter.MinSize" />
 
             
 
-             has been replaced by <see
-             cref="P:System.Windows.Forms.SplitContainer.Panel1MinSize" />
+             has been replaced by <see cref="P:System.Windows.Forms.SplitContainer.Panel1MinSize" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.SplitContainer.Panel2MinSize" />
+             and <see cref="P:System.Windows.Forms.SplitContainer.Panel2MinSize" />
 
             
 
@@ -1261,12 +1183,15 @@
           <para>This method is not relevant to this class.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.KeyEventArgs" />
+          A <see cref="T:System.Windows.Forms.KeyEventArgs" />
 
           
 
@@ -1294,8 +1219,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Splitter.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.Splitter.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -1305,8 +1229,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.MouseDown" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.MouseDown" />
 
             
 
@@ -1314,12 +1237,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -1347,18 +1273,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the user holds down left mouse button and moves the mouse, the <see
-             cref="M:System.Windows.Forms.Splitter.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
+            >If the user holds down left mouse button and moves the mouse, the <see cref="M:System.Windows.Forms.Splitter.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
 
             
 
-             method moves the <see
-             cref="T:System.Windows.Forms.Splitter" />
+             method moves the <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control to resize the docked control that is immediately before <see
-             cref="T:System.Windows.Forms.Splitter" />
+             control to resize the docked control that is immediately before <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
@@ -1368,8 +1291,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.MouseMove" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.MouseMove" />
 
             
 
@@ -1377,12 +1299,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -1410,8 +1335,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Splitter.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.Splitter.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -1421,8 +1345,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.MouseUp" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.MouseUp" />
 
             
 
@@ -1430,12 +1353,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -1463,8 +1389,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1473,8 +1398,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Splitter.OnSplitterMoved(System.Windows.Forms.SplitterEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.Splitter.OnSplitterMoved(System.Windows.Forms.SplitterEventArgs)" />
 
             
 
@@ -1484,18 +1408,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
+            >Raises the <see cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
 
             
 
-             event. <see
-             cref="M:System.Windows.Forms.Splitter.OnSplitterMoved(System.Windows.Forms.SplitterEventArgs)" />
+             event. <see cref="M:System.Windows.Forms.Splitter.OnSplitterMoved(System.Windows.Forms.SplitterEventArgs)" />
 
             
 
-             has been replaced by <see
-             cref="M:System.Windows.Forms.SplitContainer.OnSplitterMoved(System.Windows.Forms.SplitterEventArgs)" />
+             has been replaced by <see cref="M:System.Windows.Forms.SplitContainer.OnSplitterMoved(System.Windows.Forms.SplitterEventArgs)" />
 
             
 
@@ -1503,12 +1424,15 @@
           >
         </summary>
         <param name="sevent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.SplitterEventArgs" />
+          A <see cref="T:System.Windows.Forms.SplitterEventArgs" />
 
           
 
@@ -1536,8 +1460,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1546,8 +1469,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Splitter.OnSplitterMoving(System.Windows.Forms.SplitterEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.Splitter.OnSplitterMoving(System.Windows.Forms.SplitterEventArgs)" />
 
             
 
@@ -1557,18 +1479,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
+            >Raises the <see cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
 
             
 
-             event. <see
-             cref="M:System.Windows.Forms.Splitter.OnSplitterMoving(System.Windows.Forms.SplitterEventArgs)" />
+             event. <see cref="M:System.Windows.Forms.Splitter.OnSplitterMoving(System.Windows.Forms.SplitterEventArgs)" />
 
             
 
-             has been replaced by <see
-             cref="M:System.Windows.Forms.SplitContainer.OnSplitterMoving(System.Windows.Forms.SplitterCancelEventArgs)" />
+             has been replaced by <see cref="M:System.Windows.Forms.SplitContainer.OnSplitterMoving(System.Windows.Forms.SplitterCancelEventArgs)" />
 
             
 
@@ -1576,12 +1495,15 @@
           >
         </summary>
         <param name="sevent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.SplitterEventArgs" />
+          A <see cref="T:System.Windows.Forms.SplitterEventArgs" />
 
           
 
@@ -1664,48 +1586,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a horizontal <see
-             cref="T:System.Windows.Forms.Splitter" />
+            >For a horizontal <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control (a <see
-             cref="T:System.Windows.Forms.Splitter" />
+             control (a <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control docked to the top or bottom of a container), this value is the height of the resizable control. For a vertical <see
-             cref="T:System.Windows.Forms.Splitter" />
+             control docked to the top or bottom of a container), this value is the height of the resizable control. For a vertical <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control (a <see
-             cref="T:System.Windows.Forms.Splitter" />
+             control (a <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control docked to the left or right of a container), this value is the width of the resizable control. You can use the <see
-             cref="P:System.Windows.Forms.Splitter.SplitPosition" />
+             control docked to the left or right of a container), this value is the width of the resizable control. You can use the <see cref="P:System.Windows.Forms.Splitter.SplitPosition" />
 
             
 
-             property in an event handler for the <see
-             cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
+             property in an event handler for the <see cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
 
             
 
-             or <see
-             cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
+             or <see cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
 
             
 
-             events to determine the size of the control that the <see
-             cref="T:System.Windows.Forms.Splitter" />
+             events to determine the size of the control that the <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control is docked to and limit its width to a specified maximum width (or height if a horizontally docked <see
-             cref="T:System.Windows.Forms.Splitter" />
+             control is docked to and limit its width to a specified maximum width (or height if a horizontally docked <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
@@ -1715,18 +1628,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the distance between the splitter control and the container edge that the control is docked to. <see
-             cref="P:System.Windows.Forms.Splitter.SplitPosition" />
+            >Gets or sets the distance between the splitter control and the container edge that the control is docked to. <see cref="P:System.Windows.Forms.Splitter.SplitPosition" />
 
             
 
-             has been replaced by <see
-             cref="P:System.Windows.Forms.SplitContainer.Panel1MinSize" />
+             has been replaced by <see cref="P:System.Windows.Forms.SplitContainer.Panel1MinSize" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.SplitContainer.Panel2MinSize" />
+             and <see cref="P:System.Windows.Forms.SplitContainer.Panel2MinSize" />
 
             
 
@@ -1752,46 +1662,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can create an event handler for the <see
-             cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
+            >You can create an event handler for the <see cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
 
             
 
-             event to perform resize validation in your application. For example, if a <see
-             cref="T:System.Windows.Forms.Splitter" />
+             event to perform resize validation in your application. For example, if a <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control is docked to the edges of a <see
-             cref="T:System.Windows.Forms.TreeView" />
+             control is docked to the edges of a <see cref="T:System.Windows.Forms.TreeView" />
 
             
 
-             control and a <see
-             cref="T:System.Windows.Forms.ListView" />
+             control and a <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control, you can write code in the <see
-             cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
+             control, you can write code in the <see cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
 
             
 
-             event to determine if the minimum and/or maximum size for the <see
-             cref="T:System.Windows.Forms.TreeView" />
+             event to determine if the minimum and/or maximum size for the <see cref="T:System.Windows.Forms.TreeView" />
 
             
 
-             and <see
-             cref="T:System.Windows.Forms.ListView" />
+             and <see cref="T:System.Windows.Forms.ListView" />
 
             
 
              controls has been exceeded and resize the controls to their minimum or maximum size.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -1803,13 +1705,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the splitter control is moved. <see
-             cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
+            >Occurs when the splitter control is moved. <see cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
 
             
 
-             has been replaced by <see
-             cref="E:System.Windows.Forms.SplitContainer.SplitterMoved" />
+             has been replaced by <see cref="E:System.Windows.Forms.SplitContainer.SplitterMoved" />
 
             
 
@@ -1835,46 +1735,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can create an event handler for the <see
-             cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
+            >You can create an event handler for the <see cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
 
             
 
-             event to perform resize validation in your application. For example, if a <see
-             cref="T:System.Windows.Forms.Splitter" />
+             event to perform resize validation in your application. For example, if a <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control is docked to the edges of a <see
-             cref="T:System.Windows.Forms.TreeView" />
+             control is docked to the edges of a <see cref="T:System.Windows.Forms.TreeView" />
 
             
 
-             control and a <see
-             cref="T:System.Windows.Forms.ListView" />
+             control and a <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control, you can write code in the <see
-             cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
+             control, you can write code in the <see cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
 
             
 
-             event to determine if the minimum and/or maximum size for the <see
-             cref="T:System.Windows.Forms.TreeView" />
+             event to determine if the minimum and/or maximum size for the <see cref="T:System.Windows.Forms.TreeView" />
 
             
 
-             and <see
-             cref="T:System.Windows.Forms.ListView" />
+             and <see cref="T:System.Windows.Forms.ListView" />
 
             
 
              controls has been exceeded and restrict the resizing of the controls to their minimum or maximum size.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -1886,13 +1778,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the splitter control is in the process of moving. <see
-             cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
+            >Occurs when the splitter control is in the process of moving. <see cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
 
             
 
-             has been replaced by <see
-             cref="E:System.Windows.Forms.SplitContainer.SplitterMoving" />
+             has been replaced by <see cref="E:System.Windows.Forms.SplitContainer.SplitterMoving" />
 
             
 
@@ -2040,18 +1930,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Splitter.ToString" />
+            >The <see cref="M:System.Windows.Forms.Splitter.ToString" />
 
             
 
-             method returns a string that includes the type and the values for the <see
-             cref="P:System.Windows.Forms.Splitter.MinSize" />
+             method returns a string that includes the type and the values for the <see cref="P:System.Windows.Forms.Splitter.MinSize" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.Splitter.MinExtra" />
+             and <see cref="P:System.Windows.Forms.Splitter.MinExtra" />
 
             
 
@@ -2061,8 +1948,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the <see
-             cref="T:System.Windows.Forms.Splitter" />
+            >Returns a string that represents the <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
@@ -2072,8 +1958,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the current <see
-             cref="T:System.Windows.Forms.Splitter" />
+            >A string that represents the current <see cref="T:System.Windows.Forms.Splitter" />
 
             
 

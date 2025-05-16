@@ -28,28 +28,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An <see
-         cref="T:System.Drawing.Imaging.ImageAttributes" />
+        >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
         
 
-         object maintains several color-adjustment settings, including color-adjustment matrices, grayscale-adjustment matrices, gamma-correction values, color-map tables, and color-threshold values. During rendering, colors can be corrected, darkened, lightened, and removed. To apply such manipulations, initialize an <see
-         cref="T:System.Drawing.Imaging.ImageAttributes" />
+         object maintains several color-adjustment settings, including color-adjustment matrices, grayscale-adjustment matrices, gamma-correction values, color-map tables, and color-threshold values. During rendering, colors can be corrected, darkened, lightened, and removed. To apply such manipulations, initialize an <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
         
 
-         object and pass the path of that <see
-         cref="T:System.Drawing.Imaging.ImageAttributes" />
+         object and pass the path of that <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
         
 
-         object (along with the path of an <see
-         cref="T:System.Drawing.Image" />
+         object (along with the path of an <see cref="T:System.Drawing.Image" />
 
         
 
-        ) to the <see
-         cref="Overload:System.Drawing.Graphics.DrawImage" />
+        ) to the <see cref="Overload:System.Drawing.Graphics.DrawImage" />
 
         
 
@@ -72,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -97,8 +91,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -106,13 +99,11 @@
           >
           <para>The default color-adjustment and grayscale-adjustment settings apply to all categories that do not have adjustment settings of their own. For example, if you never specify any adjustment settings for the brush category, the default settings apply to the brush category.</para>
           <para
-            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a default remap table that converts red to green, and you specify a default gamma value of 1.8. If you call the <see
-             cref="M:System.Drawing.Imaging.ImageAttributes.SetBrushRemapTable(System.Drawing.Imaging.ColorMap[])" />
+            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a default remap table that converts red to green, and you specify a default gamma value of 1.8. If you call the <see cref="M:System.Drawing.Imaging.ImageAttributes.SetBrushRemapTable(System.Drawing.Imaging.ColorMap[])" />
 
             
 
-             method, the default remap table (red to green) and the default gamma value (1.8) will not apply to brushes. If you later call the <see
-             cref="M:System.Drawing.Imaging.ImageAttributes.ClearBrushRemapTable" />
+             method, the default remap table (red to green) and the default gamma value (1.8) will not apply to brushes. If you later call the <see cref="M:System.Drawing.Imaging.ImageAttributes.ClearBrushRemapTable" />
 
             
 
@@ -122,8 +113,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clears the brush color-remap table of this <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >Clears the brush color-remap table of this <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -151,8 +141,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -186,8 +175,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -195,13 +183,11 @@
           >
           <para>The default color-adjustment and grayscale-adjustment settings apply to all categories that do not have adjustment settings of their own. For example, if you never specify any adjustment settings for the pen category, the default settings apply to the pen category.</para>
           <para
-            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a default color key that makes any color with a red component from 200 through 255 transparent, and you specify a default gamma value of 1.8. If you set the color key of the pen category by calling the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetColorKey" />
+            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a default color key that makes any color with a red component from 200 through 255 transparent, and you specify a default gamma value of 1.8. If you set the color key of the pen category by calling the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetColorKey" />
 
             
 
-             method, the default color key and the default gamma value will not apply to pens. If you later clear the pen color key by calling the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.ClearColorKey" />
+             method, the default color key and the default gamma value will not apply to pens. If you later clear the pen color key by calling the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.ClearColorKey" />
 
             
 
@@ -217,12 +203,15 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Imaging.ColorAdjustType" />
+          An element of <see cref="T:System.Drawing.Imaging.ColorAdjustType" />
 
           
 
@@ -245,8 +234,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -284,8 +272,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -293,13 +280,11 @@
           >
           <para>The default color-adjustment and grayscale-adjustment settings apply to all categories that do not have adjustment settings of their own. For example, if you never specify any adjustment settings for the pen category, then the default settings apply to the pen category.</para>
           <para
-            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a color-adjustment matrix and a gamma value for the default category. If you set a color-adjustment matrix for the pen category by calling the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetColorMatrix" />
+            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a color-adjustment matrix and a gamma value for the default category. If you set a color-adjustment matrix for the pen category by calling the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetColorMatrix" />
 
             
 
-             method, the default color-adjustment matrix will not apply to pens. If you later clear the pen color-adjustment matrix by calling the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.ClearColorMatrix" />
+             method, the default color-adjustment matrix will not apply to pens. If you later clear the pen color-adjustment matrix by calling the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.ClearColorMatrix" />
 
             
 
@@ -315,12 +300,15 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Imaging.ColorAdjustType" />
+          An element of <see cref="T:System.Drawing.Imaging.ColorAdjustType" />
 
           
 
@@ -343,8 +331,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -378,8 +365,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -387,13 +373,11 @@
           >
           <para>The default color-adjustment and grayscale-adjustment settings apply to all categories that do not have adjustment settings of their own. For example, if you never specify any adjustment settings for the pen category, then the default settings apply to the pen category.</para>
           <para
-            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a gamma value and a color-adjustment matrix for the default category. If you set the gamma value for the pen category by calling the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetGamma" />
+            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a gamma value and a color-adjustment matrix for the default category. If you set the gamma value for the pen category by calling the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetGamma" />
 
             
 
-             method, the default gamma value will not apply to pens. If you later clear the pen gamma value by calling the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.ClearGamma" />
+             method, the default gamma value will not apply to pens. If you later clear the pen gamma value by calling the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.ClearGamma" />
 
             
 
@@ -409,12 +393,15 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Imaging.ColorAdjustType" />
+          An element of <see cref="T:System.Drawing.Imaging.ColorAdjustType" />
 
           
 
@@ -437,26 +424,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
              object maintains color and grayscale settings for five adjustment categories: default, bitmap, brush, pen, and text. For example, you can specify a gamma value for the default category, a different gamma value for the bitmap category, and still a different gamma value for the pen category.</para
           >
           <para
-            >You can disable color adjustment for the default category by calling the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetNoOp" />
+            >You can disable color adjustment for the default category by calling the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetNoOp" />
 
             
 
-             method. Later, you can reinstate color adjustment for the default category by calling the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.ClearNoOp" />
+             method. Later, you can reinstate color adjustment for the default category by calling the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.ClearNoOp" />
 
             
 
-             method. The color adjustment then returns to what was in place before the call to <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetNoOp" />
+             method. The color adjustment then returns to what was in place before the call to <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetNoOp" />
 
             
 
@@ -489,26 +472,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
              object maintains color and grayscale settings for five adjustment categories: default, bitmap, brush, pen, and text. For example, you can specify a gamma value for the default category, a different gamma value for the bitmap category, and still a different gamma value for the pen category.</para
           >
           <para
-            >You can disable color adjustment for a certain category by calling the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetNoOp" />
+            >You can disable color adjustment for a certain category by calling the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetNoOp" />
 
             
 
-             method. Later, you can reinstate color adjustment for that category by calling the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.ClearNoOp" />
+             method. Later, you can reinstate color adjustment for that category by calling the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.ClearNoOp" />
 
             
 
-             method. The color adjustment then returns to what was in place before the call to <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetNoOp" />
+             method. The color adjustment then returns to what was in place before the call to <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetNoOp" />
 
             
 
@@ -524,12 +503,15 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Imaging.ColorAdjustType" />
+          An element of <see cref="T:System.Drawing.Imaging.ColorAdjustType" />
 
           
 
@@ -552,8 +534,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -587,8 +568,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -596,13 +576,11 @@
           >
           <para>The default color-adjustment and grayscale-adjustment settings apply to all categories that do not have adjustment settings of their own. For example, if you never specify any adjustment settings for the bitmap category, the default settings apply to the bitmap category.</para>
           <para
-            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify an output channel and an adjustment matrix for the default category. If you set the output channel for the bitmap category by calling the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannel" />
+            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify an output channel and an adjustment matrix for the default category. If you set the output channel for the bitmap category by calling the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannel" />
 
             
 
-             method, the default output channel will not apply to bitmaps. If you later clear the bitmap output channel by calling the <see
-             cref="M:System.Drawing.Imaging.ImageAttributes.ClearOutputChannel" />
+             method, the default output channel will not apply to bitmaps. If you later clear the bitmap output channel by calling the <see cref="M:System.Drawing.Imaging.ImageAttributes.ClearOutputChannel" />
 
             
 
@@ -618,12 +596,15 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Imaging.ColorAdjustType" />
+          An element of <see cref="T:System.Drawing.Imaging.ColorAdjustType" />
 
           
 
@@ -646,8 +627,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -681,8 +661,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -690,13 +669,11 @@
           >
           <para>The default color-adjustment and grayscale-adjustment settings apply to all categories that do not have adjustment settings of their own. For example, if you never specify any adjustment settings for the bitmap category, the default settings apply to the bitmap category.</para>
           <para
-            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify an output channel profile and an adjustment matrix for the default category. If you set the output channel profile for the bitmap category by calling the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannelColorProfile" />
+            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify an output channel profile and an adjustment matrix for the default category. If you set the output channel profile for the bitmap category by calling the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannelColorProfile" />
 
             
 
-             method, the default output channel profile will not apply to bitmaps. If you later clear the bitmap output channel profile by calling the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.ClearOutputChannelColorProfile" />
+             method, the default output channel profile will not apply to bitmaps. If you later clear the bitmap output channel profile by calling the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.ClearOutputChannelColorProfile" />
 
             
 
@@ -712,12 +689,15 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Imaging.ColorAdjustType" />
+          An element of <see cref="T:System.Drawing.Imaging.ColorAdjustType" />
 
           
 
@@ -740,8 +720,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -775,8 +754,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -784,13 +762,11 @@
           >
           <para>The default color-adjustment and grayscale-adjustment settings apply to all categories that do not have adjustment settings of their own. For example, if you never specify any adjustment settings for the pen category, then the default settings apply to the pen category.</para>
           <para
-            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a remap table and a gamma value for the default category. If you set the remap table for the pen category by calling the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetRemapTable" />
+            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a remap table and a gamma value for the default category. If you set the remap table for the pen category by calling the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetRemapTable" />
 
             
 
-             method, the default remap table will not apply to pens. If you later clear the pen remap table by calling the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.ClearRemapTable" />
+             method, the default remap table will not apply to pens. If you later clear the pen remap table by calling the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.ClearRemapTable" />
 
             
 
@@ -806,12 +782,15 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Imaging.ColorAdjustType" />
+          An element of <see cref="T:System.Drawing.Imaging.ColorAdjustType" />
 
           
 
@@ -835,8 +814,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The threshold is a value from 0 through 1 that specifies a cutoff point for each color component. For example, suppose the threshold is set to 0.7, and suppose you are rendering a color whose red, green, and blue components are 230, 50, and 220, respectively. The red component (230) is greater than 0.7x255, so the red component will be changed to 255 (full intensity). The green component (50) is less than 0.7x255, so the green component will be changed to 0. The blue component (220) is greater than 0.7x255, so the blue component will be changed to 255.</para>
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -875,8 +853,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The threshold is a value from 0 through 1 that specifies a cutoff point for each color component. For example, suppose the threshold is set to 0.7, and suppose you are rendering a color whose red, green, and blue components are 230, 50, and 220, respectively. The red component (230) is greater than 0.7x55, so the red component will be changed to 255 (full intensity). The green component (50) is less than 0.7x255, so the green component will be changed to 0. The blue component (220) is greater than 0.7x255, so the blue component will be changed to 255.</para>
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -884,13 +861,11 @@
           >
           <para>The default color-adjustment and grayscale-adjustment settings apply to all categories that do not have adjustment settings of their own. For example, if you never specify any adjustment settings for the pen category, the default settings apply to the pen category.</para>
           <para
-            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a threshold and a gamma value for the default category. If you set the threshold for the pen category by calling the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetThreshold" />
+            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a threshold and a gamma value for the default category. If you set the threshold for the pen category by calling the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetThreshold" />
 
             
 
-             method, the default threshold will not apply to pens. If you later clear the pen threshold by calling the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.ClearThreshold" />
+             method, the default threshold will not apply to pens. If you later clear the pen threshold by calling the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.ClearThreshold" />
 
             
 
@@ -906,12 +881,15 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Imaging.ColorAdjustType" />
+          An element of <see cref="T:System.Drawing.Imaging.ColorAdjustType" />
 
           
 
@@ -935,8 +913,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an exact copy of this <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >Creates an exact copy of this <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -946,8 +923,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >The <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -971,50 +947,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.Drawing.Imaging.ImageAttributes.Dispose" />
+            >Call <see cref="M:System.Drawing.Imaging.ImageAttributes.Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+             when you are finished using the <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
-            . The <see
-             cref="M:System.Drawing.Imaging.ImageAttributes.Dispose" />
+            . The <see cref="M:System.Drawing.Imaging.ImageAttributes.Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+             method leaves the <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Drawing.Imaging.ImageAttributes.Dispose" />
+             in an unusable state. After calling <see cref="M:System.Drawing.Imaging.ImageAttributes.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            , you must release all references to the <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -1024,18 +991,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.Drawing.Imaging.ImageAttributes.Dispose" />
+              >Always call <see cref="M:System.Drawing.Imaging.ImageAttributes.Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.Drawing.Imaging.ImageAttributes" />
+               before you release your last reference to the <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.Drawing.Imaging.ImageAttributes" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
               
 
@@ -1046,8 +1010,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by this <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >Releases all resources used by this <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -1097,26 +1060,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
              object maintains color and grayscale settings for five adjustment categories: default, bitmap, brush, pen, and text. For example, you can specify a color-remap table for the default category, a different color-remap table for the bitmap category, and still a different color-remap table for the pen category.</para
           >
           <para
-            >When you call the <see
-             cref="M:System.Drawing.Imaging.ImageAttributes.GetAdjustedPalette(System.Drawing.Imaging.ColorPalette,System.Drawing.Imaging.ColorAdjustType)" />
+            >When you call the <see cref="M:System.Drawing.Imaging.ImageAttributes.GetAdjustedPalette(System.Drawing.Imaging.ColorPalette,System.Drawing.Imaging.ColorAdjustType)" />
 
             
 
-             method, you can specify the adjustment category that is used to adjust the palette colors. For example, if you pass <see
-             cref="F:System.Drawing.Imaging.ColorAdjustType.Bitmap" />
+             method, you can specify the adjustment category that is used to adjust the palette colors. For example, if you pass <see cref="F:System.Drawing.Imaging.ColorAdjustType.Bitmap" />
 
             
 
-             to the <see
-             cref="M:System.Drawing.Imaging.ImageAttributes.GetAdjustedPalette(System.Drawing.Imaging.ColorPalette,System.Drawing.Imaging.ColorAdjustType)" />
+             to the <see cref="M:System.Drawing.Imaging.ImageAttributes.GetAdjustedPalette(System.Drawing.Imaging.ColorPalette,System.Drawing.Imaging.ColorAdjustType)" />
 
             
 
@@ -1132,24 +1091,30 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="palette">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.ColorPalette" />
+          A <see cref="T:System.Drawing.Imaging.ColorPalette" />
 
           
 
            that on input contains the palette to be adjusted, and on output contains the adjusted palette. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Imaging.ColorAdjustType" />
+          An element of <see cref="T:System.Drawing.Imaging.ColorAdjustType" />
 
           
 
@@ -1177,36 +1142,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A color-remap table is an array of <see
-             cref="T:System.Drawing.Imaging.ColorMap" />
+            >A color-remap table is an array of <see cref="T:System.Drawing.Imaging.ColorMap" />
 
             
 
-             structures. Each <see
-             cref="T:System.Drawing.Imaging.ColorMap" />
+             structures. Each <see cref="T:System.Drawing.Imaging.ColorMap" />
 
             
 
-             structure has two <see
-             cref="T:System.Drawing.Color" />
+             structure has two <see cref="T:System.Drawing.Color" />
 
             
 
              objects: one that specifies an old color and one that specifies a corresponding new color. During rendering, any color that matches one of the old colors in the remap table is changed to the corresponding new color.</para
           >
           <para
-            >Calling the <see
-             cref="M:System.Drawing.Imaging.ImageAttributes.SetBrushRemapTable(System.Drawing.Imaging.ColorMap[])" />
+            >Calling the <see cref="M:System.Drawing.Imaging.ImageAttributes.SetBrushRemapTable(System.Drawing.Imaging.ColorMap[])" />
 
             
 
-             method has the same effect as passing <see
-             cref="F:System.Drawing.Imaging.ColorAdjustType.Brush" />
+             method has the same effect as passing <see cref="F:System.Drawing.Imaging.ColorAdjustType.Brush" />
 
             
 
-             to the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetRemapTable" />
+             to the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetRemapTable" />
 
             
 
@@ -1223,12 +1182,15 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="map">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.Imaging.ColorMap" />
+          An array of <see cref="T:System.Drawing.Imaging.ColorMap" />
 
           
 
@@ -1258,8 +1220,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method sets the high and low color-key values so that a range of colors can be made transparent. Any color that has each of its three components (red, green, blue) between the corresponding components of the high and low color keys is made transparent.</para>
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -1276,14 +1237,22 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="colorLow">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The low color-key value. </param
         >
         <param name="colorHigh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1314,8 +1283,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method sets the high and low color-key values so that a range of colors can be made transparent. Any color that has each of its three components (red, green, blue) between the corresponding components of the high and low color keys is made transparent.</para>
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -1323,13 +1291,11 @@
           >
           <para>The default color-adjustment and grayscale-adjustment settings apply to all categories that do not have adjustment settings of their own. For example, if you never specify any adjustment settings for the pen category, the default settings apply to the pen category.</para>
           <para
-            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a collection of adjustment settings for the default category. If you set the color key for the pen category by passing <see
-             cref="F:System.Drawing.Imaging.ColorAdjustType.Pen" />
+            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a collection of adjustment settings for the default category. If you set the color key for the pen category by passing <see cref="F:System.Drawing.Imaging.ColorAdjustType.Pen" />
 
             
 
-             to the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetColorKey" />
+             to the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetColorKey" />
 
             
 
@@ -1345,26 +1311,37 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="colorLow">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The low color-key value. </param
         >
         <param name="colorHigh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The high color-key value. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Imaging.ColorAdjustType" />
+          An element of <see cref="T:System.Drawing.Imaging.ColorAdjustType" />
 
           
 
@@ -1393,8 +1370,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -1402,28 +1378,23 @@
           >
           <para>The default color-adjustment and grayscale-adjustment settings apply to all categories that do not have adjustment settings of their own. For example, if you never specify any adjustment settings for the pen category, the default settings apply to the pen category.</para>
           <para
-            >Calling the <see
-             cref="M:System.Drawing.Imaging.ImageAttributes.SetColorMatrices(System.Drawing.Imaging.ColorMatrix,System.Drawing.Imaging.ColorMatrix)" />
+            >Calling the <see cref="M:System.Drawing.Imaging.ImageAttributes.SetColorMatrices(System.Drawing.Imaging.ColorMatrix,System.Drawing.Imaging.ColorMatrix)" />
 
             
 
-             method is equivalent to calling the <see
-             cref="M:System.Drawing.Imaging.ImageAttributes.SetColorMatrices(System.Drawing.Imaging.ColorMatrix,System.Drawing.Imaging.ColorMatrix,System.Drawing.Imaging.ColorMatrixFlag)" />
+             method is equivalent to calling the <see cref="M:System.Drawing.Imaging.ImageAttributes.SetColorMatrices(System.Drawing.Imaging.ColorMatrix,System.Drawing.Imaging.ColorMatrix,System.Drawing.Imaging.ColorMatrixFlag)" />
 
             
 
-             method and passing <see
-             cref="F:System.Drawing.Imaging.ColorMatrixFlag.Default" />
+             method and passing <see cref="F:System.Drawing.Imaging.ColorMatrixFlag.Default" />
 
             
 
-             for the <paramref
-             name="flags" />
+             for the <paramref name="flags" />
 
             
 
-             parameter. <see
-             cref="F:System.Drawing.Imaging.ColorMatrixFlag.Default" />
+             parameter. <see cref="F:System.Drawing.Imaging.ColorMatrixFlag.Default" />
 
             
 
@@ -1439,14 +1410,22 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="newColorMatrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The color-adjustment matrix. </param
         >
         <param name="grayMatrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1476,8 +1455,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -1494,26 +1472,37 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="newColorMatrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The color-adjustment matrix. </param
         >
         <param name="grayMatrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The grayscale-adjustment matrix. </param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Imaging.ColorMatrixFlag" />
+          An element of <see cref="T:System.Drawing.Imaging.ColorMatrixFlag" />
 
           
 
@@ -1544,8 +1533,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -1553,13 +1541,11 @@
           >
           <para>The default color-adjustment and grayscale-adjustment settings apply to all categories that do not have adjustment settings of their own. For example, if you never specify any adjustment settings for the pen category, the default settings apply to the pen category.</para>
           <para
-            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a collection of adjustment settings for the default category. If you set the color-adjustment and grayscale-adjustment matrices for the pen category by passing <see
-             cref="F:System.Drawing.Imaging.ColorAdjustType.Pen" />
+            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a collection of adjustment settings for the default category. If you set the color-adjustment and grayscale-adjustment matrices for the pen category by passing <see cref="F:System.Drawing.Imaging.ColorAdjustType.Pen" />
 
             
 
-             to the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetColorMatrices" />
+             to the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetColorMatrices" />
 
             
 
@@ -1575,38 +1561,52 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="newColorMatrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The color-adjustment matrix. </param
         >
         <param name="grayMatrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The grayscale-adjustment matrix. </param
         >
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Imaging.ColorMatrixFlag" />
+          An element of <see cref="T:System.Drawing.Imaging.ColorMatrixFlag" />
 
           
 
            that specifies the type of image and color that will be affected by the color-adjustment and grayscale-adjustment matrices. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Imaging.ColorAdjustType" />
+          An element of <see cref="T:System.Drawing.Imaging.ColorAdjustType" />
 
           
 
@@ -1635,8 +1635,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -1644,28 +1643,23 @@
           >
           <para>The default color-adjustment and grayscale-adjustment settings apply to all categories that do not have adjustment settings of their own. For example, if you never specify any adjustment settings for the pen category, the default settings apply to the pen category.</para>
           <para
-            >Calling the <see
-             cref="M:System.Drawing.Imaging.ImageAttributes.SetColorMatrix(System.Drawing.Imaging.ColorMatrix)" />
+            >Calling the <see cref="M:System.Drawing.Imaging.ImageAttributes.SetColorMatrix(System.Drawing.Imaging.ColorMatrix)" />
 
             
 
-             method is equivalent to calling the <see
-             cref="M:System.Drawing.Imaging.ImageAttributes.SetColorMatrix(System.Drawing.Imaging.ColorMatrix,System.Drawing.Imaging.ColorMatrixFlag)" />
+             method is equivalent to calling the <see cref="M:System.Drawing.Imaging.ImageAttributes.SetColorMatrix(System.Drawing.Imaging.ColorMatrix,System.Drawing.Imaging.ColorMatrixFlag)" />
 
             
 
-             method and passing <see
-             cref="F:System.Drawing.Imaging.ColorMatrixFlag.Default" />
+             method and passing <see cref="F:System.Drawing.Imaging.ColorMatrixFlag.Default" />
 
             
 
-             for the <paramref
-             name="flags" />
+             for the <paramref name="flags" />
 
             
 
-             parameter. <see
-             cref="F:System.Drawing.Imaging.ColorMatrixFlag.Default" />
+             parameter. <see cref="F:System.Drawing.Imaging.ColorMatrixFlag.Default" />
 
             
 
@@ -1705,8 +1699,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -1749,8 +1742,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -1758,13 +1750,11 @@
           >
           <para>The default color-adjustment and grayscale-adjustment settings apply to all categories that do not have adjustment settings of their own. For example, if you never specify any adjustment settings for the pen category, the default settings apply to the pen category.</para>
           <para
-            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a collection of adjustment settings for the default category. If you set the color-adjustment matrix for the pen category by passing <see
-             cref="F:System.Drawing.Imaging.ColorAdjustType.Pen" />
+            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a collection of adjustment settings for the default category. If you set the color-adjustment matrix for the pen category by passing <see cref="F:System.Drawing.Imaging.ColorAdjustType.Pen" />
 
             
 
-             to the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetColorMatrix" />
+             to the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetColorMatrix" />
 
             
 
@@ -1798,16 +1788,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typical values for the <paramref
-             name="gamma" />
+            >Typical values for the <paramref name="gamma" />
 
             
 
              parameter are from 1.0 to 2.2; however, values from 0.1 to 5.0 could prove useful in some circumstances.</para
           >
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -1825,7 +1813,11 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="gamma">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1855,16 +1847,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typical values for the <paramref
-             name="gamma" />
+            >Typical values for the <paramref name="gamma" />
 
             
 
              parameter are from 1.0 to 2.2; however, values from 0.1 to 5.0 could prove useful in some circumstances.</para
           >
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -1872,13 +1862,11 @@
           >
           <para>The default color-adjustment and grayscale-adjustment settings apply to all categories that do not have adjustment settings of their own. For example, if you never specify any adjustment settings for the pen category, the default settings apply to the pen category.</para>
           <para
-            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a collection of adjustment settings for the default category. If you set the gamma value for the pen category by passing <see
-             cref="F:System.Drawing.Imaging.ColorAdjustType.Pen" />
+            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a collection of adjustment settings for the default category. If you set the gamma value for the pen category by passing <see cref="F:System.Drawing.Imaging.ColorAdjustType.Pen" />
 
             
 
-             to the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetGamma" />
+             to the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetGamma" />
 
             
 
@@ -1895,7 +1883,11 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="gamma">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1918,8 +1910,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -1930,13 +1921,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Turns off color adjustment for the default category. You can call the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.ClearNoOp" />
+            >Turns off color adjustment for the default category. You can call the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.ClearNoOp" />
 
             
 
-             method to reinstate the color-adjustment settings that were in place before the call to the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetNoOp" />
+             method to reinstate the color-adjustment settings that were in place before the call to the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetNoOp" />
 
             
 
@@ -1965,8 +1954,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -1976,13 +1964,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Turns off color adjustment for a specified category. You can call the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.ClearNoOp" />
+            >Turns off color adjustment for a specified category. You can call the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.ClearNoOp" />
 
             
 
-             method to reinstate the color-adjustment settings that were in place before the call to the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetNoOp" />
+             method to reinstate the color-adjustment settings that were in place before the call to the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetNoOp" />
 
             
 
@@ -1994,12 +1980,15 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Imaging.ColorAdjustType" />
+          An element of <see cref="T:System.Drawing.Imaging.ColorAdjustType" />
 
           
 
@@ -2027,36 +2016,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannel" />
+            >You can use the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannel" />
 
             
 
-             method to convert an image to a CMYK color space and examine the intensities of one of the CMYK color channels. For example, suppose you create an <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+             method to convert an image to a CMYK color space and examine the intensities of one of the CMYK color channels. For example, suppose you create an <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
-             object and set its bitmap output channel to <see
-             cref="F:System.Drawing.Imaging.ColorChannelFlag.ColorChannelC" />
+             object and set its bitmap output channel to <see cref="F:System.Drawing.Imaging.ColorChannelFlag.ColorChannelC" />
 
             
 
-            . If you pass the path of that <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            . If you pass the path of that <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
-             object to the <see
-             cref="Overload:System.Drawing.Graphics.DrawImage" />
+             object to the <see cref="Overload:System.Drawing.Graphics.DrawImage" />
 
             
 
              method, the cyan component of each pixel is calculated, and each pixel in the rendered image is a shade of gray that indicates the intensity of its cyan channel. Similarly, you can render images that indicate the intensities of the magenta, yellow, and black channels.</para
           >
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -2070,12 +2053,15 @@
           <para>Sets the CMYK (cyan-magenta-yellow-black) output channel for the default category.</para>
         </summary>
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Imaging.ColorChannelFlag" />
+          An element of <see cref="T:System.Drawing.Imaging.ColorChannelFlag" />
 
           
 
@@ -2104,36 +2090,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannel" />
+            >You can use the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannel" />
 
             
 
-             method to convert an image to a CMYK color space and examine the intensities of one of the CMYK color channels. For example, suppose you create an <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+             method to convert an image to a CMYK color space and examine the intensities of one of the CMYK color channels. For example, suppose you create an <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
-             object and set its bitmap output channel to <see
-             cref="F:System.Drawing.Imaging.ColorChannelFlag.ColorChannelC" />
+             object and set its bitmap output channel to <see cref="F:System.Drawing.Imaging.ColorChannelFlag.ColorChannelC" />
 
             
 
-            . If you pass the path of that <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            . If you pass the path of that <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
-             object to the <see
-             cref="Overload:System.Drawing.Graphics.DrawImage" />
+             object to the <see cref="Overload:System.Drawing.Graphics.DrawImage" />
 
             
 
              method, the cyan component of each pixel is calculated, and each pixel in the rendered image is a shade of gray that indicates the intensity of its cyan channel. Similarly, you can render images that indicate the intensities of the magenta, yellow, and black channels.</para
           >
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -2141,13 +2121,11 @@
           >
           <para>The default color-adjustment and grayscale-adjustment settings apply to all categories that do not have adjustment settings of their own. For example, if you never specify any adjustment settings for the bitmap category, the default settings apply to the bitmap category.</para>
           <para
-            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a collection of adjustment settings for the default category. If you set the output channel for the bitmap category by passing <see
-             cref="F:System.Drawing.Imaging.ColorAdjustType.Bitmap" />
+            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a collection of adjustment settings for the default category. If you set the output channel for the bitmap category by passing <see cref="F:System.Drawing.Imaging.ColorAdjustType.Bitmap" />
 
             
 
-             to the <see
-             cref="M:System.Drawing.Imaging.ImageAttributes.SetOutputChannel(System.Drawing.Imaging.ColorChannelFlag,System.Drawing.Imaging.ColorAdjustType)" />
+             to the <see cref="M:System.Drawing.Imaging.ImageAttributes.SetOutputChannel(System.Drawing.Imaging.ColorChannelFlag,System.Drawing.Imaging.ColorAdjustType)" />
 
             
 
@@ -2159,24 +2137,30 @@
           <para>Sets the CMYK (cyan-magenta-yellow-black) output channel for a specified category.</para>
         </summary>
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Imaging.ColorChannelFlag" />
+          An element of <see cref="T:System.Drawing.Imaging.ColorChannelFlag" />
 
           
 
            that specifies the output channel. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Imaging.ColorAdjustType" />
+          An element of <see cref="T:System.Drawing.Imaging.ColorAdjustType" />
 
           
 
@@ -2204,13 +2188,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannel" />
+            >You can use the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannel" />
 
             
 
-             and <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannelColorProfile" />
+             and <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannelColorProfile" />
 
             
 
@@ -2219,8 +2201,7 @@
           <list type="ordered">
             <item>
               <para
-                >Create an <see
-                 cref="T:System.Drawing.Image" />
+                >Create an <see cref="T:System.Drawing.Image" />
 
                 
 
@@ -2229,8 +2210,7 @@
             </item>
             <item>
               <para
-                >Create an <see
-                 cref="T:System.Drawing.Imaging.ImageAttributes" />
+                >Create an <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
                 
 
@@ -2239,18 +2219,15 @@
             </item>
             <item>
               <para
-                >Pass <see
-                 cref="F:System.Drawing.Imaging.ColorChannelFlag.ColorChannelC" />
+                >Pass <see cref="F:System.Drawing.Imaging.ColorChannelFlag.ColorChannelC" />
 
                 
 
-                 to the <see
-                 cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannel" />
+                 to the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannel" />
 
                 
 
-                 method of the <see
-                 cref="T:System.Drawing.Imaging.ImageAttributes" />
+                 method of the <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
                 
 
@@ -2259,13 +2236,11 @@
             </item>
             <item>
               <para
-                >Pass the path name of a color profile file to the <see
-                 cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannelColorProfile" />
+                >Pass the path name of a color profile file to the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannelColorProfile" />
 
                 
 
-                 method of the <see
-                 cref="T:System.Drawing.Imaging.ImageAttributes" />
+                 method of the <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
                 
 
@@ -2274,18 +2249,15 @@
             </item>
             <item>
               <para
-                >Pass the paths of the <see
-                 cref="T:System.Drawing.Image" />
+                >Pass the paths of the <see cref="T:System.Drawing.Image" />
 
                 
 
-                 and <see
-                 cref="T:System.Drawing.Imaging.ImageAttributes" />
+                 and <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
                 
 
-                 objects to the <see
-                 cref="Overload:System.Drawing.Graphics.DrawImage" />
+                 objects to the <see cref="Overload:System.Drawing.Graphics.DrawImage" />
 
                 
 
@@ -2295,8 +2267,7 @@
           </list>
           <para>ndptecgdiplus will use the color-profile file to calculate the cyan component of each pixel in the image, and each pixel in the rendered image will be a shade of gray that indicates the intensity of its cyan channel.</para>
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -2313,7 +2284,11 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="colorProfileFilename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2342,13 +2317,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannel" />
+            >You can use the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannel" />
 
             
 
-             and <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannelColorProfile" />
+             and <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannelColorProfile" />
 
             
 
@@ -2357,8 +2330,7 @@
           <list type="ordered">
             <item>
               <para
-                >Create an <see
-                 cref="T:System.Drawing.Image" />
+                >Create an <see cref="T:System.Drawing.Image" />
 
                 
 
@@ -2367,8 +2339,7 @@
             </item>
             <item>
               <para
-                >Create an <see
-                 cref="T:System.Drawing.Imaging.ImageAttributes" />
+                >Create an <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
                 
 
@@ -2377,18 +2348,15 @@
             </item>
             <item>
               <para
-                >Pass <see
-                 cref="F:System.Drawing.Imaging.ColorChannelFlag.ColorChannelC" />
+                >Pass <see cref="F:System.Drawing.Imaging.ColorChannelFlag.ColorChannelC" />
 
                 
 
-                 to the <see
-                 cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannel" />
+                 to the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannel" />
 
                 
 
-                 method of the <see
-                 cref="T:System.Drawing.Imaging.ImageAttributes" />
+                 method of the <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
                 
 
@@ -2397,13 +2365,11 @@
             </item>
             <item>
               <para
-                >Pass the path name of a color profile file to the <see
-                 cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannelColorProfile" />
+                >Pass the path name of a color profile file to the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannelColorProfile" />
 
                 
 
-                 method of the <see
-                 cref="T:System.Drawing.Imaging.ImageAttributes" />
+                 method of the <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
                 
 
@@ -2412,18 +2378,15 @@
             </item>
             <item>
               <para
-                >Pass the paths of the <see
-                 cref="T:System.Drawing.Image" />
+                >Pass the paths of the <see cref="T:System.Drawing.Image" />
 
                 
 
-                 and <see
-                 cref="T:System.Drawing.Imaging.ImageAttributes" />
+                 and <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
                 
 
-                 objects to the <see
-                 cref="Overload:System.Drawing.Graphics.DrawImage" />
+                 objects to the <see cref="Overload:System.Drawing.Graphics.DrawImage" />
 
                 
 
@@ -2433,8 +2396,7 @@
           </list>
           <para>ndptecgdiplus will use the color-profile file to calculate the cyan component of each pixel in the image, and each pixel in the rendered image will be a shade of gray that indicates the intensity of its cyan channel.</para>
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -2442,13 +2404,11 @@
           >
           <para>The default color-adjustment and grayscale-adjustment settings apply to all categories that do not have adjustment settings of their own. For example, if you never specify any adjustment settings for the bitmap category, the default settings apply to the bitmap category.</para>
           <para
-            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a collection of adjustment settings for the default category. If you set the output channel color-profile file for the bitmap category by passing <see
-             cref="F:System.Drawing.Imaging.ColorAdjustType.Bitmap" />
+            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a collection of adjustment settings for the default category. If you set the output channel color-profile file for the bitmap category by passing <see cref="F:System.Drawing.Imaging.ColorAdjustType.Bitmap" />
 
             
 
-             to the <see
-             cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannelColorProfile" />
+             to the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannelColorProfile" />
 
             
 
@@ -2464,19 +2424,26 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="colorProfileFilename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The path name of a color-profile file. If the color-profile file is in the %SystemRoot%\System32\Spool\Drivers\Color directory, this parameter can be the file name. Otherwise, this parameter must be the fully qualified path name. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Imaging.ColorAdjustType" />
+          An element of <see cref="T:System.Drawing.Imaging.ColorAdjustType" />
 
           
 
@@ -2504,26 +2471,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A color-remap table is an array of <see
-             cref="T:System.Drawing.Imaging.ColorMap" />
+            >A color-remap table is an array of <see cref="T:System.Drawing.Imaging.ColorMap" />
 
             
 
-             structures. Each <see
-             cref="T:System.Drawing.Imaging.ColorMap" />
+             structures. Each <see cref="T:System.Drawing.Imaging.ColorMap" />
 
             
 
-             structure has two <see
-             cref="T:System.Drawing.Color" />
+             structure has two <see cref="T:System.Drawing.Color" />
 
             
 
              objects: one that specifies an old color and one that specifies a corresponding new color. During rendering, any color that matches one of the old colors in the remap table is changed to the corresponding new color.</para
           >
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -2540,12 +2503,15 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="map">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of color pairs of type <see
-           cref="T:System.Drawing.Imaging.ColorMap" />
+          An array of color pairs of type <see cref="T:System.Drawing.Imaging.ColorMap" />
 
           
 
@@ -2574,26 +2540,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A color-remap table is an array of <see
-             cref="T:System.Drawing.Imaging.ColorMap" />
+            >A color-remap table is an array of <see cref="T:System.Drawing.Imaging.ColorMap" />
 
             
 
-             structures. Each <see
-             cref="T:System.Drawing.Imaging.ColorMap" />
+             structures. Each <see cref="T:System.Drawing.Imaging.ColorMap" />
 
             
 
-             structure has two <see
-             cref="T:System.Drawing.Color" />
+             structure has two <see cref="T:System.Drawing.Color" />
 
             
 
              objects: one that specifies an old color and one that specifies a corresponding new color. During rendering, any color that matches one of the old colors in the remap table is changed to the corresponding new color.</para
           >
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -2601,13 +2563,11 @@
           >
           <para>The default color-adjustment and grayscale-adjustment settings apply to all categories that do not have adjustment settings of their own. For example, if you never specify any adjustment settings for the pen category, the default settings apply to the pen category.</para>
           <para
-            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a collection of adjustment settings for the default category. If you set the color-remap table for the pen category by passing <see
-             cref="F:System.Drawing.Imaging.ColorAdjustType.Pen" />
+            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a collection of adjustment settings for the default category. If you set the color-remap table for the pen category by passing <see cref="F:System.Drawing.Imaging.ColorAdjustType.Pen" />
 
             
 
-             to the <see
-             cref="M:System.Drawing.Imaging.ImageAttributes.SetRemapTable(System.Drawing.Imaging.ColorMap[],System.Drawing.Imaging.ColorAdjustType)" />
+             to the <see cref="M:System.Drawing.Imaging.ImageAttributes.SetRemapTable(System.Drawing.Imaging.ColorMap[],System.Drawing.Imaging.ColorAdjustType)" />
 
             
 
@@ -2623,24 +2583,30 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="map">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of color pairs of type <see
-           cref="T:System.Drawing.Imaging.ColorMap" />
+          An array of color pairs of type <see cref="T:System.Drawing.Imaging.ColorMap" />
 
           
 
           . Each color pair contains an existing color (the first value) and the color that it will be mapped to (the second value). </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Imaging.ColorAdjustType" />
+          An element of <see cref="T:System.Drawing.Imaging.ColorAdjustType" />
 
           
 
@@ -2666,8 +2632,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The threshold is a value from 0 through 1 that specifies a cutoff point for each color component. For example, suppose the threshold is set to 0.7, and suppose you are rendering a color whose red, green, and blue components are 230, 50, and 220, respectively. The red component (230) is greater than 0.7x255, so the red component will be changed to 255 (full intensity). The green component (50) is less than 0.7x255, so the green component will be changed to 0. The blue component (220) is greater than 0.7x255, so the blue component will be changed to 255.</para>
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -2684,7 +2649,11 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="threshold">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2714,8 +2683,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The threshold is a value from 0 through 1 that specifies a cutoff point for each color component. For example, suppose the threshold is set to 0.7, and suppose you are rendering a color whose red, green, and blue components are 230, 50, and 220, respectively. The red component (230) is greater than 0.7x255, so the red component will be changed to 255 (full intensity). The green component (50) is less than 0.7x255, so the green component will be changed to 0. The blue component (220) is greater than 0.7x255, so the blue component will be changed to 255.</para>
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.ImageAttributes" />
+            >An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
             
 
@@ -2723,13 +2691,11 @@
           >
           <para>The default color-adjustment and grayscale-adjustment settings apply to all categories that do not have adjustment settings of their own. For example, if you never specify any adjustment settings for the pen category, the default settings apply to the pen category.</para>
           <para
-            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a collection of adjustment settings for the default category. If you set the threshold for the pen category by passing <see
-             cref="F:System.Drawing.Imaging.ColorAdjustType.Pen" />
+            >As soon as you specify a color-adjustment or grayscale-adjustment setting for a certain category, the default adjustment settings no longer apply to that category. For example, suppose you specify a collection of adjustment settings for the default category. If you set the threshold for the pen category by passing <see cref="F:System.Drawing.Imaging.ColorAdjustType.Pen" />
 
             
 
-             to the <see
-             cref="M:System.Drawing.Imaging.ImageAttributes.SetThreshold(System.Single,System.Drawing.Imaging.ColorAdjustType)" />
+             to the <see cref="M:System.Drawing.Imaging.ImageAttributes.SetThreshold(System.Single,System.Drawing.Imaging.ColorAdjustType)" />
 
             
 
@@ -2745,19 +2711,26 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="threshold">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A threshold value from 0.0 to 1.0 that is used as a breakpoint to sort colors that will be mapped to either a maximum or a minimum value. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Imaging.ColorAdjustType" />
+          An element of <see cref="T:System.Drawing.Imaging.ColorAdjustType" />
 
           
 
@@ -2785,38 +2758,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling the <see
-             cref="M:System.Drawing.Imaging.ImageAttributes.SetWrapMode(System.Drawing.Drawing2D.WrapMode)" />
+            >Calling the <see cref="M:System.Drawing.Imaging.ImageAttributes.SetWrapMode(System.Drawing.Drawing2D.WrapMode)" />
 
             
 
-             method is equivalent to calling <see
-             cref="M:System.Drawing.Imaging.ImageAttributes.SetWrapMode(System.Drawing.Drawing2D.WrapMode,System.Drawing.Color)" />
+             method is equivalent to calling <see cref="M:System.Drawing.Imaging.ImageAttributes.SetWrapMode(System.Drawing.Drawing2D.WrapMode,System.Drawing.Color)" />
 
             
 
-             and passing <see
-             cref="P:System.Drawing.Color.Black" />
+             and passing <see cref="P:System.Drawing.Color.Black" />
 
             
 
-             for the <paramref
-             name="color" />
+             for the <paramref name="color" />
 
             
 
-             parameter. <see
-             cref="P:System.Drawing.Color.Black" />
+             parameter. <see cref="P:System.Drawing.Color.Black" />
 
             
 
-             specifies the color of pixels outside of a rendered image. This color is visible if the mode parameter is set to <see
-             cref="F:System.Drawing.Drawing2D.WrapMode.Clamp" />
+             specifies the color of pixels outside of a rendered image. This color is visible if the mode parameter is set to <see cref="F:System.Drawing.Drawing2D.WrapMode.Clamp" />
 
             
 
-             and the source rectangle passed to the <see
-             cref="Overload:System.Drawing.Graphics.DrawImage" />
+             and the source rectangle passed to the <see cref="Overload:System.Drawing.Graphics.DrawImage" />
 
             
 
@@ -2832,12 +2798,15 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Drawing2D.WrapMode" />
+          An element of <see cref="T:System.Drawing.Drawing2D.WrapMode" />
 
           
 
@@ -2873,34 +2842,38 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Drawing2D.WrapMode" />
+          An element of <see cref="T:System.Drawing.Drawing2D.WrapMode" />
 
           
 
            that specifies how repeated copies of an image are used to tile an area. </param
         >
         <param name="color">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.ImageAttributes" />
+          An <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
           
 
-           object that specifies the color of pixels outside of a rendered image. This color is visible if the mode parameter is set to <see
-           cref="F:System.Drawing.Drawing2D.WrapMode.Clamp" />
+           object that specifies the color of pixels outside of a rendered image. This color is visible if the mode parameter is set to <see cref="F:System.Drawing.Drawing2D.WrapMode.Clamp" />
 
           
 
-           and the source rectangle passed to <see
-           cref="Overload:System.Drawing.Graphics.DrawImage" />
+           and the source rectangle passed to <see cref="Overload:System.Drawing.Graphics.DrawImage" />
 
           
 
@@ -2937,36 +2910,45 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of <see
-           cref="T:System.Drawing.Drawing2D.WrapMode" />
+          An element of <see cref="T:System.Drawing.Drawing2D.WrapMode" />
 
           
 
            that specifies how repeated copies of an image are used to tile an area. </param
         >
         <param name="color">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A color object that specifies the color of pixels outside of a rendered image. This color is visible if the mode parameter is set to <see
-           cref="F:System.Drawing.Drawing2D.WrapMode.Clamp" />
+          A color object that specifies the color of pixels outside of a rendered image. This color is visible if the mode parameter is set to <see cref="F:System.Drawing.Drawing2D.WrapMode.Clamp" />
 
           
 
-           and the source rectangle passed to <see
-           cref="Overload:System.Drawing.Graphics.DrawImage" />
+           and the source rectangle passed to <see cref="Overload:System.Drawing.Graphics.DrawImage" />
 
           
 
            is larger than the image itself. </param
         >
         <param name="clamp">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

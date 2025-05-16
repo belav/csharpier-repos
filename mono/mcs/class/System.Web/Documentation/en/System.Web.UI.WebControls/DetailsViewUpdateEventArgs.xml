@@ -20,74 +20,61 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+        >The <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-         control raises the <see
-         cref="E:System.Web.UI.WebControls.DetailsView.ItemUpdating" />
+         control raises the <see cref="E:System.Web.UI.WebControls.DetailsView.ItemUpdating" />
 
         
 
-         event when an Update button (a button with its CommandName property set to "Update") within the control is clicked, but before the <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         event when an Update button (a button with its CommandName property set to "Update") within the control is clicked, but before the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
          control updates the record. This allows you to provide an event handler that performs a custom routine, such as HTML-encoding the values of a record before updating it in the data source, whenever this event occurs.</para
       >
       <para
-        >A <see
-         cref="T:System.Web.UI.WebControls.DetailsViewUpdateEventArgs" />
+        >A <see cref="T:System.Web.UI.WebControls.DetailsViewUpdateEventArgs" />
 
         
 
-         object is passed to the event handler, which allows you to determine the value of an optional command argument sent to the <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         object is passed to the event handler, which allows you to determine the value of an optional command argument sent to the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-         control and to indicate whether the update operation should be canceled. To determine the value of the command argument, use the <see
-         cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.CommandArgument" />
+         control and to indicate whether the update operation should be canceled. To determine the value of the command argument, use the <see cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.CommandArgument" />
 
         
 
-         property. To cancel the update operation, set the <see
-         cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+         property. To cancel the update operation, set the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
         
 
-         property to true. You can also read or modify the new values entered by the user by using the <see
-         cref="P:System.Web.UI.WebControls.DetailsViewUpdatedEventArgs.Keys" />
+         property to true. You can also read or modify the new values entered by the user by using the <see cref="P:System.Web.UI.WebControls.DetailsViewUpdatedEventArgs.Keys" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.NewValues" />
+         and <see cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.NewValues" />
 
         
 
-         properties. The <see
-         cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.Keys" />
+         properties. The <see cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.Keys" />
 
         
 
-         property contains the key fields, while the <see
-         cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.NewValues" />
+         property contains the key fields, while the <see cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.NewValues" />
 
         
 
-         property contains the non-key fields. If you need to access the original non-key field values, use the <see
-         cref="P:System.Web.UI.WebControls.DetailsViewUpdatedEventArgs.OldValues" />
+         property contains the non-key fields. If you need to access the original non-key field values, use the <see cref="P:System.Web.UI.WebControls.DetailsViewUpdatedEventArgs.OldValues" />
 
         
 
          property.</para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
 
@@ -96,13 +83,11 @@
         .</para
       >
       <para
-        >For a list of initial property values for an instance of the <see
-         cref="T:System.Web.UI.WebControls.DetailsViewUpdateEventArgs" />
+        >For a list of initial property values for an instance of the <see cref="T:System.Web.UI.WebControls.DetailsViewUpdateEventArgs" />
 
         
 
-         class, see the <see
-         cref="M:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.#ctor(System.Object)" />
+         class, see the <see cref="M:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.#ctor(System.Object)" />
 
         
 
@@ -112,8 +97,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Web.UI.WebControls.DetailsView.ItemUpdating" />
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.DetailsView.ItemUpdating" />
 
         
 
@@ -134,16 +118,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DetailsViewUpdateEventArgs" />
+            >Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.DetailsViewUpdateEventArgs" />
 
             
 
              class.</para
           >
           <para
-            >The following table shows the initial property value for an instance of the <see
-             cref="T:System.Web.UI.WebControls.DetailsViewUpdateEventArgs" />
+            >The following table shows the initial property value for an instance of the <see cref="T:System.Web.UI.WebControls.DetailsViewUpdateEventArgs" />
 
             
 
@@ -168,8 +150,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="commandArgument" />
+                  >The value of the <paramref name="commandArgument" />
 
                   
 
@@ -185,8 +166,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DetailsViewUpdateEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.DetailsViewUpdateEventArgs" />
 
             
 
@@ -210,13 +190,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DetailsViewInsertEventArgs.CommandArgument" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DetailsViewInsertEventArgs.CommandArgument" />
 
             
 
-             property to determine the value of the command argument passed to the <see
-             cref="T:System.Web.UI.WebControls.DetailsView" />
+             property to determine the value of the command argument passed to the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
             
 
@@ -226,8 +204,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the command argument for the update operation passed to the <see
-             cref="T:System.Web.UI.WebControls.DetailsView" />
+            >Gets the command argument for the update operation passed to the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
             
 
@@ -254,8 +231,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.Keys" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.Keys" />
 
             
 
@@ -263,13 +239,11 @@
           >
           <block subset="none" type="note">
             <para
-              >This property contains only the key fields. To access the updated and original non-key fields, use the <see
-               cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.NewValues" />
+              >This property contains only the key fields. To access the updated and original non-key fields, use the <see cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.NewValues" />
 
               
 
-               and <see
-               cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.OldValues" />
+               and <see cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.OldValues" />
 
               
 
@@ -277,18 +251,15 @@
             >
           </block>
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.Keys" />
+            >The <see cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.Keys" />
 
             
 
-             property returns an object that implements the <see
-             cref="T:System.Collections.Specialized.IOrderedDictionary" />
+             property returns an object that implements the <see cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
             
 
-             interface. The object contains <see
-             cref="T:System.Collections.DictionaryEntry" />
+             interface. The object contains <see cref="T:System.Collections.DictionaryEntry" />
 
             
 
@@ -296,8 +267,7 @@
           >
           <block subset="none" type="note">
             <para
-              >As a shortcut, you can also use the indexer of the <see
-               cref="T:System.Collections.Specialized.IOrderedDictionary" />
+              >As a shortcut, you can also use the indexer of the <see cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
               
 
@@ -329,8 +299,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.NewValues" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.NewValues" />
 
             
 
@@ -338,13 +307,11 @@
           >
           <block subset="none" type="note">
             <para
-              >This property does not contain the key fields. To access the key fields, use the <see
-               cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.Keys" />
+              >This property does not contain the key fields. To access the key fields, use the <see cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.Keys" />
 
               
 
-               property. You can also access the original field values by using the <see
-               cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.OldValues" />
+               property. You can also access the original field values by using the <see cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.OldValues" />
 
               
 
@@ -352,18 +319,15 @@
             >
           </block>
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.NewValues" />
+            >The <see cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.NewValues" />
 
             
 
-             property returns an object that implements the <see
-             cref="T:System.Collections.Specialized.IOrderedDictionary" />
+             property returns an object that implements the <see cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
             
 
-             interface. The object contains <see
-             cref="T:System.Collections.DictionaryEntry" />
+             interface. The object contains <see cref="T:System.Collections.DictionaryEntry" />
 
             
 
@@ -371,8 +335,7 @@
           >
           <block subset="none" type="note">
             <para
-              >As a shortcut, you can also use the indexer of the <see
-               cref="T:System.Collections.Specialized.IOrderedDictionary" />
+              >As a shortcut, you can also use the indexer of the <see cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
               
 
@@ -404,8 +367,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.OldValues" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.OldValues" />
 
             
 
@@ -413,13 +375,11 @@
           >
           <block subset="none" type="note">
             <para
-              >This property does not contain the key fields. To access the key fields, use the <see
-               cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.Keys" />
+              >This property does not contain the key fields. To access the key fields, use the <see cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.Keys" />
 
               
 
-               property. You can also access the new field values entered by the user by using the <see
-               cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.NewValues" />
+               property. You can also access the new field values entered by the user by using the <see cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.NewValues" />
 
               
 
@@ -427,18 +387,15 @@
             >
           </block>
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.OldValues" />
+            >The <see cref="P:System.Web.UI.WebControls.DetailsViewUpdateEventArgs.OldValues" />
 
             
 
-             property returns an object that implements the <see
-             cref="T:System.Collections.Specialized.IOrderedDictionary" />
+             property returns an object that implements the <see cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
             
 
-             interface. The object contains <see
-             cref="T:System.Collections.DictionaryEntry" />
+             interface. The object contains <see cref="T:System.Collections.DictionaryEntry" />
 
             
 

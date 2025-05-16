@@ -34,39 +34,33 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.CodeDom.CodeMethodReferenceExpression" />
+        >A <see cref="T:System.CodeDom.CodeMethodReferenceExpression" />
 
         
 
          can be used to represent an expression of the form Object.Method.</para
       >
       <para
-        >The <see
-         cref="P:System.CodeDom.CodeMethodReferenceExpression.TargetObject" />
+        >The <see cref="P:System.CodeDom.CodeMethodReferenceExpression.TargetObject" />
 
         
 
-         property indicates the object that contains the method. The <see
-         cref="P:System.CodeDom.CodeMethodReferenceExpression.MethodName" />
+         property indicates the object that contains the method. The <see cref="P:System.CodeDom.CodeMethodReferenceExpression.MethodName" />
 
         
 
          property indicates the name of the method.</para
       >
       <para
-        >A <see
-         cref="T:System.CodeDom.CodeMethodReferenceExpression" />
+        >A <see cref="T:System.CodeDom.CodeMethodReferenceExpression" />
 
         
 
-         is used with a <see
-         cref="T:System.CodeDom.CodeMethodInvokeExpression" />
+         is used with a <see cref="T:System.CodeDom.CodeMethodInvokeExpression" />
 
         
 
-         to indicate the method to invoke, and with a <see
-         cref="T:System.CodeDom.CodeDelegateCreateExpression" />
+         to indicate the method to invoke, and with a <see cref="T:System.CodeDom.CodeDelegateCreateExpression" />
 
         
 
@@ -98,8 +92,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeMethodReferenceExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeMethodReferenceExpression" />
 
             
 
@@ -133,8 +126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeMethodReferenceExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeMethodReferenceExpression" />
 
             
 
@@ -142,19 +134,26 @@
           >
         </summary>
         <param name="targetObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeExpression" />
+          A <see cref="T:System.CodeDom.CodeExpression" />
 
           
 
            that indicates the object to target. </param
         >
         <param name="methodName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -191,8 +190,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="typeParameters" />
+            >The <paramref name="typeParameters" />
 
             
 
@@ -202,8 +200,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeMethodReferenceExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeMethodReferenceExpression" />
 
             
 
@@ -211,41 +208,49 @@
           >
         </summary>
         <param name="targetObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeExpression" />
+          A <see cref="T:System.CodeDom.CodeExpression" />
 
           
 
            that indicates the object to target. </param
         >
         <param name="methodName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the method to call. </param
         >
         <param name="typeParameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.CodeDom.CodeTypeReference" />
+          An array of <see cref="T:System.CodeDom.CodeTypeReference" />
 
           
 
-           values that specify the <see
-           cref="P:System.CodeDom.CodeMethodReferenceExpression.TypeArguments" />
+           values that specify the <see cref="P:System.CodeDom.CodeMethodReferenceExpression.TypeArguments" />
 
           
 
-           for this <see
-           cref="T:System.CodeDom.CodeMethodReferenceExpression" />
+           for this <see cref="T:System.CodeDom.CodeMethodReferenceExpression" />
 
           
 
@@ -330,8 +335,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.CodeDom.CodeMethodReferenceExpression.TypeArguments" />
+            >The <see cref="P:System.CodeDom.CodeMethodReferenceExpression.TypeArguments" />
 
             
 

@@ -26,13 +26,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used in conjunction with the <see
-         cref="T:System.Security.Cryptography.X509Certificates.X509ChainStatus" />
+        >This enumeration is used in conjunction with the <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainStatus" />
 
         
 
-         structure and the <see
-         cref="P:System.Security.Cryptography.X509Certificates.X509Chain.ChainStatus" />
+         structure and the <see cref="P:System.Security.Cryptography.X509Certificates.X509Chain.ChainStatus" />
 
         
 

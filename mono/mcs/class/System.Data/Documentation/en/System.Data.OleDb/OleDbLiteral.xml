@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.OleDb.OleDbLiteral" />
+        >The <see cref="T:System.Data.OleDb.OleDbLiteral" />
 
         
 
@@ -68,8 +67,7 @@
         </item>
       </list>
       <para
-        >Most members of the <see
-         cref="T:System.Data.OleDb.OleDbLiteral" />
+        >Most members of the <see cref="T:System.Data.OleDb.OleDbLiteral" />
 
         
 
@@ -77,8 +75,7 @@
       >
       <para>Multidimensional restriction columns are members of schema objects and map to OLE DB for OLAP used by the IDBSchemaRowset interface.</para>
       <para
-        >A <see
-         cref="T:System.NotSupportedException" />
+        >A <see cref="T:System.NotSupportedException" />
 
         
 

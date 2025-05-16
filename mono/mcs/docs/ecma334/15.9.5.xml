@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
 <clause number="15.9.5" title="The throw statement">
   <paragraph
-    >The throw statement throws an exception. <grammar_production
-    >
+    >The throw statement throws an exception. <grammar_production>
       <name>
         <non_terminal where="15.9.5">throw-statement</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <keyword>throw</keyword>
         <non_terminal where="14.14">expression</non_terminal>
         <opt />
@@ -22,13 +20,11 @@
   <paragraph>A throw statement with no expression can be used only in a catch block, in which case, that statement  re-throws the exception that is currently being handled by that catch block. </paragraph>
   <paragraph>Because a throw statement unconditionally transfers control elsewhere, the end point of a throw statement is never reachable. </paragraph>
   <paragraph
-    >When an exception is thrown, control is transferred to the first catch clause in an enclosing try statement that can handle the exception. The process that takes place from the point of the exception being thrown to the point of transferring control to a suitable exception handler is known as exception propagation. Propagation of an exception consists of repeatedly evaluating the following steps until a catch clause that matches the exception is found. In this description, the throw point is initially the location at which the exception is thrown. <list
-    >
+    >When an exception is thrown, control is transferred to the first catch clause in an enclosing try statement that can handle the exception. The process that takes place from the point of the exception being thrown to the point of transferring control to a suitable exception handler is known as exception propagation. Propagation of an exception consists of repeatedly evaluating the following steps until a catch clause that matches the exception is found. In this description, the throw point is initially the location at which the exception is thrown. <list>
       <list_item> In the current function member, each try statement that encloses the throw point is examined. For each statement S, starting with the innermost try statement and ending with the outermost try statement, the following steps are evaluated: </list_item>
       <list>
         <list_item
-          > If the try block of S encloses the throw point and if S has one or more catch clauses, the catch clauses are examined in order of appearance to locate a suitable handler for the exception. The first catch clause that specifies the exception type or a base type of the exception type is considered a match. A general catch (<hyperlink
-          >15.10</hyperlink>
+          > If the try block of S encloses the throw point and if S has one or more catch clauses, the catch clauses are examined in order of appearance to locate a suitable handler for the exception. The first catch clause that specifies the exception type or a base type of the exception type is considered a match. A general catch (<hyperlink>15.10</hyperlink>
 
           
 

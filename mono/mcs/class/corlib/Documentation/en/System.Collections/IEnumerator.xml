@@ -36,8 +36,7 @@
          is the base interface for all non-generic enumerators.</para
       >
       <para
-        >For the generic version of this interface see <see
-         cref="T:System.Collections.Generic.IEnumerator`1" />
+        >For the generic version of this interface see <see cref="T:System.Collections.Generic.IEnumerator`1" />
 
         
 
@@ -46,28 +45,23 @@
       <para>The foreach statement of the C# language (for each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended instead of directly manipulating the enumerator.</para>
       <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
       <para
-        >Initially, the enumerator is positioned before the first element in the collection. The <see
-         cref="M:System.Collections.IEnumerator.Reset" />
+        >Initially, the enumerator is positioned before the first element in the collection. The <see cref="M:System.Collections.IEnumerator.Reset" />
 
         
 
-         method also brings the enumerator back to this position. After an enumerator is created or the <see
-         cref="M:System.Collections.IEnumerator.Reset" />
+         method also brings the enumerator back to this position. After an enumerator is created or the <see cref="M:System.Collections.IEnumerator.Reset" />
 
         
 
-         method is called, you must call the <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+         method is called, you must call the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         method to advance the enumerator to the first element of the collection before reading the value of <see
-         cref="P:System.Collections.IEnumerator.Current" />
+         method to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.IEnumerator.Current" />
 
         
 
-        ; otherwise, <see
-         cref="P:System.Collections.IEnumerator.Current" />
+        ; otherwise, <see cref="P:System.Collections.IEnumerator.Current" />
 
         
 
@@ -78,99 +72,81 @@
 
         
 
-         returns the same object until either <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+         returns the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         or <see
-         cref="M:System.Collections.IEnumerator.Reset" />
+         or <see cref="M:System.Collections.IEnumerator.Reset" />
 
         
 
-         is called. <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+         is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         sets <see
-         cref="P:System.Collections.IEnumerator.Current" />
+         sets <see cref="P:System.Collections.IEnumerator.Current" />
 
         
 
          to the next element.</para
       >
       <para
-        >If <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+        >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+         passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         returns false. When the enumerator is at this position, subsequent calls to <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+         returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         also return false. If the last call to <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+         also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         returned false, calling <see
-         cref="P:System.Collections.IEnumerator.Current" />
+         returned false, calling <see cref="P:System.Collections.IEnumerator.Current" />
 
         
 
-         throws an exception. To set <see
-         cref="P:System.Collections.IEnumerator.Current" />
+         throws an exception. To set <see cref="P:System.Collections.IEnumerator.Current" />
 
         
 
-         to the first element of the collection again, you can call <see
-         cref="M:System.Collections.IEnumerator.Reset" />
+         to the first element of the collection again, you can call <see cref="M:System.Collections.IEnumerator.Reset" />
 
         
 
-         followed by <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+         followed by <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
         .</para
       >
       <para
-        >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+        >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         or <see
-         cref="M:System.Collections.IEnumerator.Reset" />
+         or <see cref="M:System.Collections.IEnumerator.Reset" />
 
         
 
-         throws an <see
-         cref="T:System.InvalidOperationException" />
+         throws an <see cref="T:System.InvalidOperationException" />
 
         
 
-        . If the collection is modified between <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+        . If the collection is modified between <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         and <see
-         cref="P:System.Collections.IEnumerator.Current" />
+         and <see cref="P:System.Collections.IEnumerator.Current" />
 
         
 
-        , <see
-         cref="P:System.Collections.IEnumerator.Current" />
+        , <see cref="P:System.Collections.IEnumerator.Current" />
 
         
 
@@ -212,23 +188,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After an enumerator is created or after the <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >After an enumerator is created or after the <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             method is called, the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             method is called, the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             method must be called to advance the enumerator to the first element of the collection before reading the value of the <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             method must be called to advance the enumerator to the first element of the collection before reading the value of the <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             property; otherwise, <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             property; otherwise, <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -239,8 +211,7 @@
 
             
 
-             also throws an exception if the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also throws an exception if the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
@@ -251,51 +222,42 @@
 
             
 
-             does not move the position of the enumerator, and consecutive calls to <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             does not move the position of the enumerator, and consecutive calls to <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             return the same object until either <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             return the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
              is called.</para
           >
           <para
-            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             throws an <see
-             cref="T:System.InvalidOperationException" />
+             throws an <see cref="T:System.InvalidOperationException" />
 
             
 
-            . If the collection is modified between <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            . If the collection is modified between <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             and <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             and <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-            , <see
-             cref="P:System.Collections.IEnumerator.Current" />
+            , <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -336,54 +298,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After an enumerator is created or after the <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >After an enumerator is created or after the <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             method is called, an enumerator is positioned before the first element of the collection, and the first call to the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             method is called, an enumerator is positioned before the first element of the collection, and the first call to the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
              method moves the enumerator over the first element of the collection.</para
           >
           <para
-            >If <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returns false. When the enumerator is at this position, subsequent calls to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             also return false until <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             also return false until <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
              is called.</para
           >
           <para
-            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             throws an <see
-             cref="T:System.InvalidOperationException" />
+             throws an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -428,31 +381,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             method throws an <see
-             cref="T:System.InvalidOperationException" />
+             method throws an <see cref="T:System.InvalidOperationException" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >The <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             method is provided for COM interoperability. It does not necessarily need to be implemented; instead, the implementer can simply throw a <see
-             cref="T:System.NotSupportedException" />
+             method is provided for COM interoperability. It does not necessarily need to be implemented; instead, the implementer can simply throw a <see cref="T:System.NotSupportedException" />
 
             
 

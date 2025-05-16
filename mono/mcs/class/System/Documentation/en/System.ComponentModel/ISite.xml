@@ -32,21 +32,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Sites bind a <see
-         cref="T:System.ComponentModel.Component" />
+        >Sites bind a <see cref="T:System.ComponentModel.Component" />
 
         
 
-         to a <see
-         cref="T:System.ComponentModel.Container" />
+         to a <see cref="T:System.ComponentModel.Container" />
 
         
 
          and enable communication between them, as well as provide a way for the container to manage its components.</para
       >
       <para
-        >Sites can also serve as a repository for container-specific, per-component information, such as the component name. For more information about components, see <format
-         type="text/html">
+        >Sites can also serve as a repository for container-specific, per-component information, such as the component name. For more information about components, see <format type="text/html">
           <a href="d4d4fcb4-e0b8-46b3-b679-7ee0026eb9e3">Programming with Components</a>
         </format>
 
@@ -88,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the component associated with the <see
-             cref="T:System.ComponentModel.ISite" />
+            >Gets the component associated with the <see cref="T:System.ComponentModel.ISite" />
 
             
 
@@ -121,18 +117,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >null for the <see
-             cref="P:System.ComponentModel.ISite.Container" />
+            >null for the <see cref="P:System.ComponentModel.ISite.Container" />
 
             
 
-             property indicates that the <see
-             cref="T:System.ComponentModel.IComponent" />
+             property indicates that the <see cref="T:System.ComponentModel.IComponent" />
 
             
 
-             instance does not have an <see
-             cref="T:System.ComponentModel.ISite" />
+             instance does not have an <see cref="T:System.ComponentModel.ISite" />
 
             
 
@@ -142,13 +135,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ComponentModel.IContainer" />
+            >Gets the <see cref="T:System.ComponentModel.IContainer" />
 
             
 
-             associated with the <see
-             cref="T:System.ComponentModel.ISite" />
+             associated with the <see cref="T:System.ComponentModel.ISite" />
 
             
 
@@ -174,18 +165,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The design mode indicator is stored in the <see
-             cref="T:System.ComponentModel.ISite" />
+            >The design mode indicator is stored in the <see cref="T:System.ComponentModel.ISite" />
 
             
 
-            ; therefore, if the <see
-             cref="T:System.ComponentModel.Component" />
+            ; therefore, if the <see cref="T:System.ComponentModel.Component" />
 
             
 
-             does not have an <see
-             cref="T:System.ComponentModel.ISite" />
+             does not have an <see cref="T:System.ComponentModel.ISite" />
 
             
 
@@ -220,8 +208,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the component associated with the <see
-             cref="T:System.ComponentModel.ISite" />
+            >Gets or sets the name of the component associated with the <see cref="T:System.ComponentModel.ISite" />
 
             
 

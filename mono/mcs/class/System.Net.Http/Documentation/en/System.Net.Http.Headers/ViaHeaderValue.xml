@@ -47,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Http.Headers.ViaHeaderValue" />
+            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.ViaHeaderValue" />
 
             
 
@@ -56,14 +55,22 @@
           >
         </summary>
         <param name="protocolVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The protocol version of the received protocol.</param
         >
         <param name="receivedBy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -94,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Http.Headers.ViaHeaderValue" />
+            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.ViaHeaderValue" />
 
             
 
@@ -103,21 +109,33 @@
           >
         </summary>
         <param name="protocolVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The protocol version of the received protocol.</param
         >
         <param name="receivedBy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The host and port that the request or response was received by.</param
         >
         <param name="protocolName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -149,8 +167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Http.Headers.ViaHeaderValue" />
+            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.ViaHeaderValue" />
 
             
 
@@ -158,28 +175,44 @@
           >
         </summary>
         <param name="protocolVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The protocol version of the received protocol.</param
         >
         <param name="receivedBy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The host and port that the request or response was received by.</param
         >
         <param name="protocolName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The protocol name of the received protocol.</param
         >
         <param name="comment">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -227,13 +260,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Object" />
+            >Determines whether the specified <see cref="T:System.Object" />
 
             
 
-             is equal to the current <see
-             cref="T:System.Net.Http.Headers.ViaHeaderValue" />
+             is equal to the current <see cref="T:System.Net.Http.Headers.ViaHeaderValue" />
 
             
 
@@ -242,17 +273,13 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Boolean" />
+          <para>Returns <see cref="T:System.Boolean" />
 
             
 
-            .</para
-          >
+            .</para>
           <para
-            >true if the specified <see
-             cref="T:System.Object" />
+            >true if the specified <see cref="T:System.Object" />
 
             
 
@@ -260,7 +287,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -287,8 +318,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A hash code is a numeric value that is used to identify an object during equality testing. It can also serve as an index for an object in a collection.</para>
           <para
-            >The <see
-             cref="M:System.Net.Http.Headers.ViaHeaderValue.GetHashCode" />
+            >The <see cref="M:System.Net.Http.Headers.ViaHeaderValue.GetHashCode" />
 
             
 
@@ -298,8 +328,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serves as a hash function for an <see
-             cref="T:System.Net.Http.Headers.ViaHeaderValue" />
+            >Serves as a hash function for an <see cref="T:System.Net.Http.Headers.ViaHeaderValue" />
 
             
 
@@ -308,14 +337,11 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Int32" />
+          <para>Returns <see cref="T:System.Int32" />
 
             
 
-            .</para
-          >
+            .</para>
           <para>Returns a hash code for the current object.</para>
         </returns>
       </Docs>
@@ -344,8 +370,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a string to an <see
-             cref="T:System.Net.Http.Headers.ViaHeaderValue" />
+            >Converts a string to an <see cref="T:System.Net.Http.Headers.ViaHeaderValue" />
 
             
 
@@ -355,16 +380,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Net.Http.Headers.ViaHeaderValue" />
+            >Returns <see cref="T:System.Net.Http.Headers.ViaHeaderValue" />
 
             
 
             .</para
           >
           <para
-            >An <see
-             cref="T:System.Net.Http.Headers.ViaHeaderValue" />
+            >An <see cref="T:System.Net.Http.Headers.ViaHeaderValue" />
 
             
 
@@ -372,7 +395,11 @@
           >
         </returns>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -459,8 +486,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new object that is a copy of the current <see
-             cref="T:System.Net.Http.Headers.ViaHeaderValue" />
+            >Creates a new object that is a copy of the current <see cref="T:System.Net.Http.Headers.ViaHeaderValue" />
 
             
 
@@ -469,14 +495,11 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Object" />
+          <para>Returns <see cref="T:System.Object" />
 
             
 
-            .</para
-          >
+            .</para>
           <para>A copy of the current instance.</para>
         </returns>
       </Docs>
@@ -500,8 +523,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the current <see
-             cref="T:System.Net.Http.Headers.ViaHeaderValue" />
+            >Returns a string that represents the current <see cref="T:System.Net.Http.Headers.ViaHeaderValue" />
 
             
 
@@ -510,14 +532,11 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.String" />
+          <para>Returns <see cref="T:System.String" />
 
             
 
-            .</para
-          >
+            .</para>
           <para>A string that represents the current object.</para>
         </returns>
       </Docs>

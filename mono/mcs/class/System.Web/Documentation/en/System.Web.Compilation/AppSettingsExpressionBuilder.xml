@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Compilation.AppSettingsExpressionBuilder" />
+        >The <see cref="T:System.Web.Compilation.AppSettingsExpressionBuilder" />
 
         
 
@@ -42,21 +41,18 @@
       <para>    &lt;add key="appSettingsKey" value="appSettingsValue"/&gt;</para>
       <para>&lt;/appSettings&gt;</para>
       <para
-        >When the page parser encounters an expression with the AppSettings prefix, it creates an instance of the <see
-         cref="T:System.Web.Compilation.AppSettingsExpressionBuilder" />
+        >When the page parser encounters an expression with the AppSettings prefix, it creates an instance of the <see cref="T:System.Web.Compilation.AppSettingsExpressionBuilder" />
 
         
 
          class to handle the expression. </para
       >
       <para
-        >If the expression is encountered in a page that will be compiled, the <see
-         cref="T:System.Web.Compilation.AppSettingsExpressionBuilder" />
+        >If the expression is encountered in a page that will be compiled, the <see cref="T:System.Web.Compilation.AppSettingsExpressionBuilder" />
 
         
 
-         object generates code to retrieve the specified value from the Web.config file. This code is executed during the execution of the generated page class. If the expression is encountered in a page that will not be compiled, the <see
-         cref="T:System.Web.Compilation.AppSettingsExpressionBuilder" />
+         object generates code to retrieve the specified value from the Web.config file. This code is executed during the execution of the generated page class. If the expression is encountered in a page that will not be compiled, the <see cref="T:System.Web.Compilation.AppSettingsExpressionBuilder" />
 
         
 
@@ -79,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Compilation.AppSettingsExpressionBuilder" />
+            >Initializes a new instance of the <see cref="T:System.Web.Compilation.AppSettingsExpressionBuilder" />
 
             
 
@@ -112,53 +107,43 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called when an expression of the form &lt;%$ AppSettings: someApplicationSetting %&gt; is encountered in a no-compile page. It retrieves the appropriate value from the key/value pairs in the &lt;appSettings&gt; section of the Web.config file. This method overrides <see
-             cref="M:System.Web.Compilation.ExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
+            >This method is called when an expression of the form &lt;%$ AppSettings: someApplicationSetting %&gt; is encountered in a no-compile page. It retrieves the appropriate value from the key/value pairs in the &lt;appSettings&gt; section of the Web.config file. This method overrides <see cref="M:System.Web.Compilation.ExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
 
             
 
-             by calling the <see
-             cref="M:System.Web.Compilation.AppSettingsExpressionBuilder.GetAppSetting(System.String,System.Type,System.String)" />
+             by calling the <see cref="M:System.Web.Compilation.AppSettingsExpressionBuilder.GetAppSetting(System.String,System.Type,System.String)" />
 
             
 
-             method with the <see
-             cref="P:System.Web.UI.BoundPropertyEntry.Expression" />
+             method with the <see cref="P:System.Web.UI.BoundPropertyEntry.Expression" />
 
             
 
-             property as the <paramref
-             name="key" />
+             property as the <paramref name="key" />
 
             
 
-             parameter, the <see
-             cref="P:System.Web.UI.PropertyEntry.Name" />
+             parameter, the <see cref="P:System.Web.UI.PropertyEntry.Name" />
 
             
 
-             property on the <see
-             cref="P:System.Web.UI.PropertyEntry.PropertyInfo" />
+             property on the <see cref="P:System.Web.UI.PropertyEntry.PropertyInfo" />
 
             
 
-             property as the <paramref
-             name="propertyName" />
+             property as the <paramref name="propertyName" />
 
             
 
-             parameter, and the <see
-             cref="T:System.Type" />
+             parameter, and the <see cref="T:System.Type" />
 
             
 
-             of the <paramref
-             name="target" />
+             of the <paramref name="target" />
 
             
 
-             parameter as the <paramref
-             name="targetType" />
+             parameter as the <paramref name="targetType" />
 
             
 
@@ -172,8 +157,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Object" />
+            >The <see cref="T:System.Object" />
 
             
 
@@ -181,33 +165,48 @@
           >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that contains the property entry.</param
         >
         <param name="entry">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The property to which the expression is bound..</param
         >
         <param name="parsedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object that represents parsed data as returned by <see
-           cref="M:System.Web.Compilation.ExpressionBuilder.ParseExpression(System.String,System.Type,System.Web.Compilation.ExpressionBuilderContext)" />
+          The object that represents parsed data as returned by <see cref="M:System.Web.Compilation.ExpressionBuilder.ParseExpression(System.String,System.Type,System.Web.Compilation.ExpressionBuilderContext)" />
 
           
 
           .</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -232,18 +231,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method retrieves the appropriate value from the key/value pairs in the &lt;appSettings&gt; section of the Web.config file. It retrieves the value by getting the <see
-             cref="P:System.Configuration.ConfigurationManager.AppSettings" />
+            >This method retrieves the appropriate value from the key/value pairs in the &lt;appSettings&gt; section of the Web.config file. It retrieves the value by getting the <see cref="P:System.Configuration.ConfigurationManager.AppSettings" />
 
             
 
-             property with the key as the index. The <see
-             cref="T:System.Object" />
+             property with the key as the index. The <see cref="T:System.Object" />
 
             
 
-             returned is of the type <see
-             cref="T:System.String" />
+             returned is of the type <see cref="T:System.String" />
 
             
 
@@ -257,8 +253,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Object" />
+            >The <see cref="T:System.Object" />
 
             
 
@@ -266,7 +261,11 @@
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -296,18 +295,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method retrieves the appropriate value from the key/value pairs in the &lt;appSettings&gt; section of the Web.config file. The value is retrieved by getting the <see
-             cref="P:System.Configuration.ConfigurationManager.AppSettings" />
+            >This method retrieves the appropriate value from the key/value pairs in the &lt;appSettings&gt; section of the Web.config file. The value is retrieved by getting the <see cref="P:System.Configuration.ConfigurationManager.AppSettings" />
 
             
 
-             property with the key as the index. The resulting string value is converted to a new type based on the <paramref
-             name="targetType" />
+             property with the key as the index. The resulting string value is converted to a new type based on the <paramref name="targetType" />
 
             
 
-             and <paramref
-             name="propertyName" />
+             and <paramref name="propertyName" />
 
             
 
@@ -321,8 +317,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Object" />
+            >The <see cref="T:System.Object" />
 
             
 
@@ -330,21 +325,33 @@
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key for a value to be retrieved from the configuration file.</param
         >
         <param name="targetType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the object that contains the property entry.</param
         >
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -374,8 +381,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called during the CodeDOM creation for a page or control. The returned <see
-             cref="T:System.CodeDom.CodeExpression" />
+            >This method is called during the CodeDOM creation for a page or control. The returned <see cref="T:System.CodeDom.CodeExpression" />
 
             
 
@@ -389,8 +395,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.CodeDom.CodeExpression" />
+            >A <see cref="T:System.CodeDom.CodeExpression" />
 
             
 
@@ -398,26 +403,37 @@
           >
         </returns>
         <param name="entry">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The property to which the expression is bound.</param
         >
         <param name="parsedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object that represents parsed data as returned by <see
-           cref="M:System.Web.Compilation.ExpressionBuilder.ParseExpression(System.String,System.Type,System.Web.Compilation.ExpressionBuilderContext)" />
+          The object that represents parsed data as returned by <see cref="M:System.Web.Compilation.ExpressionBuilder.ParseExpression(System.String,System.Type,System.Web.Compilation.ExpressionBuilderContext)" />
 
           
 
           .</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -440,23 +456,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Compilation.AppSettingsExpressionBuilder.SupportsEvaluate" />
+            >The <see cref="P:System.Web.Compilation.AppSettingsExpressionBuilder.SupportsEvaluate" />
 
             
 
-             property indicates whether the <see
-             cref="M:System.Web.Compilation.AppSettingsExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
+             property indicates whether the <see cref="M:System.Web.Compilation.AppSettingsExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
 
             
 
-             method has been implemented in the class and can return a value for the expression. <see
-             cref="M:System.Web.Compilation.AppSettingsExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
+             method has been implemented in the class and can return a value for the expression. <see cref="M:System.Web.Compilation.AppSettingsExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
 
             
 
-             must be implemented within an expression builder for an expression to be evaluated in a page that is not compiled. The <see
-             cref="T:System.Web.Compilation.AppSettingsExpressionBuilder" />
+             must be implemented within an expression builder for an expression to be evaluated in a page that is not compiled. The <see cref="T:System.Web.Compilation.AppSettingsExpressionBuilder" />
 
             
 

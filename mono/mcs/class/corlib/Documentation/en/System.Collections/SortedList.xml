@@ -43,80 +43,67 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For the generic version of this collection, see <see
-         cref="T:System.Collections.Generic.SortedList`2" />
+        >For the generic version of this collection, see <see cref="T:System.Collections.Generic.SortedList`2" />
 
         
 
         .</para
       >
       <para
-        >A <see
-         cref="T:System.Collections.SortedList" />
+        >A <see cref="T:System.Collections.SortedList" />
 
         
 
-         element can be accessed by its key, like an element in any <see
-         cref="T:System.Collections.IDictionary" />
+         element can be accessed by its key, like an element in any <see cref="T:System.Collections.IDictionary" />
 
         
 
-         implementation, or by its index, like an element in any <see
-         cref="T:System.Collections.IList" />
+         implementation, or by its index, like an element in any <see cref="T:System.Collections.IList" />
 
         
 
          implementation.</para
       >
       <para
-        >A <see
-         cref="T:System.Collections.SortedList" />
+        >A <see cref="T:System.Collections.SortedList" />
 
         
 
-         object internally maintains two arrays to store the elements of the list; that is, one array for the keys and another array for the associated values. Each element is a key/value pair that can be accessed as a <see
-         cref="T:System.Collections.DictionaryEntry" />
+         object internally maintains two arrays to store the elements of the list; that is, one array for the keys and another array for the associated values. Each element is a key/value pair that can be accessed as a <see cref="T:System.Collections.DictionaryEntry" />
 
         
 
          object. A key cannot be null, but a value can be.</para
       >
       <para
-        >The capacity of a <see
-         cref="T:System.Collections.SortedList" />
+        >The capacity of a <see cref="T:System.Collections.SortedList" />
 
         
 
-         object is the number of elements the <see
-         cref="T:System.Collections.SortedList" />
+         object is the number of elements the <see cref="T:System.Collections.SortedList" />
 
         
 
-         can hold. As elements are added to a <see
-         cref="T:System.Collections.SortedList" />
+         can hold. As elements are added to a <see cref="T:System.Collections.SortedList" />
 
         
 
-        , the capacity is automatically increased as required through reallocation. The capacity can be decreased by calling <see
-         cref="M:System.Collections.SortedList.TrimToSize" />
+        , the capacity is automatically increased as required through reallocation. The capacity can be decreased by calling <see cref="M:System.Collections.SortedList.TrimToSize" />
 
         
 
-         or by setting the <see
-         cref="P:System.Collections.SortedList.Capacity" />
+         or by setting the <see cref="P:System.Collections.SortedList.Capacity" />
 
         
 
          property explicitly.</para
       >
       <para
-        >For very large <see
-         cref="T:System.Collections.SortedList" />
+        >For very large <see cref="T:System.Collections.SortedList" />
 
         
 
-         objects, you can increase the maximum capacity to 2 billion elements on a 64-bit system by setting the enabled attribute of the <format
-         type="text/html">
+         objects, you can increase the maximum capacity to 2 billion elements on a 64-bit system by setting the enabled attribute of the <format type="text/html">
           <a href="5c7ea24a-39ac-4e5f-83b7-b9f9a1b556ab">gcAllowVeryLargeObjects</a>
         </format>
 
@@ -125,59 +112,49 @@
          configuration element to true in the run-time environment.</para
       >
       <para
-        >The elements of a <see
-         cref="T:System.Collections.SortedList" />
+        >The elements of a <see cref="T:System.Collections.SortedList" />
 
         
 
-         object are sorted by the keys either according to a specific <see
-         cref="T:System.Collections.IComparer" />
+         object are sorted by the keys either according to a specific <see cref="T:System.Collections.IComparer" />
 
         
 
-         implementation specified when the <see
-         cref="T:System.Collections.SortedList" />
+         implementation specified when the <see cref="T:System.Collections.SortedList" />
 
         
 
-         is created or according to the <see
-         cref="T:System.IComparable" />
+         is created or according to the <see cref="T:System.IComparable" />
 
         
 
-         implementation provided by the keys themselves. In either case, a <see
-         cref="T:System.Collections.SortedList" />
+         implementation provided by the keys themselves. In either case, a <see cref="T:System.Collections.SortedList" />
 
         
 
          does not allow duplicate keys.</para
       >
       <para
-        >The index sequence is based on the sort sequence. When an element is added, it is inserted into <see
-         cref="T:System.Collections.SortedList" />
+        >The index sequence is based on the sort sequence. When an element is added, it is inserted into <see cref="T:System.Collections.SortedList" />
 
         
 
-         in the correct sort order, and the indexing adjusts accordingly. When an element is removed, the indexing also adjusts accordingly. Therefore, the index of a specific key/value pair might change as elements are added or removed from the <see
-         cref="T:System.Collections.SortedList" />
+         in the correct sort order, and the indexing adjusts accordingly. When an element is removed, the indexing also adjusts accordingly. Therefore, the index of a specific key/value pair might change as elements are added or removed from the <see cref="T:System.Collections.SortedList" />
 
         
 
          object.</para
       >
       <para
-        >Operations on a <see
-         cref="T:System.Collections.SortedList" />
+        >Operations on a <see cref="T:System.Collections.SortedList" />
 
         
 
-         object tend to be slower than operations on a <see
-         cref="T:System.Collections.Hashtable" />
+         object tend to be slower than operations on a <see cref="T:System.Collections.Hashtable" />
 
         
 
-         object because of the sorting. However, the <see
-         cref="T:System.Collections.SortedList" />
+         object because of the sorting. However, the <see cref="T:System.Collections.SortedList" />
 
         
 
@@ -185,13 +162,11 @@
       >
       <para>Elements in this collection can be accessed using an integer index.  Indexes in this collection are zero-based.</para>
       <para
-        >The foreach statement of the C# language (for each in Visual Basic) requires the type of each element in the collection. Since each element of the <see
-         cref="T:System.Collections.SortedList" />
+        >The foreach statement of the C# language (for each in Visual Basic) requires the type of each element in the collection. Since each element of the <see cref="T:System.Collections.SortedList" />
 
         
 
-         object is a key/value pair, the element type is not the type of the key or the type of the value. Rather, the element type is <see
-         cref="T:System.Collections.DictionaryEntry" />
+         object is a key/value pair, the element type is not the type of the key or the type of the value. Rather, the element type is <see cref="T:System.Collections.DictionaryEntry" />
 
         
 
@@ -224,49 +199,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each key must implement the <see
-             cref="T:System.IComparable" />
+            >Each key must implement the <see cref="T:System.IComparable" />
 
             
 
-             interface to be capable of comparisons with every other key in the <see
-             cref="T:System.Collections.SortedList" />
+             interface to be capable of comparisons with every other key in the <see cref="T:System.Collections.SortedList" />
 
             
 
-             object. The elements are sorted according to the <see
-             cref="T:System.IComparable" />
+             object. The elements are sorted according to the <see cref="T:System.IComparable" />
 
             
 
-             implementation of each key added to the <see
-             cref="T:System.Collections.SortedList" />
+             implementation of each key added to the <see cref="T:System.Collections.SortedList" />
 
             
 
             .</para
           >
           <para
-            >The capacity of a <see
-             cref="T:System.Collections.SortedList" />
+            >The capacity of a <see cref="T:System.Collections.SortedList" />
 
             
 
-             object is the number of elements that the <see
-             cref="T:System.Collections.SortedList" />
+             object is the number of elements that the <see cref="T:System.Collections.SortedList" />
 
             
 
-             can hold. As elements are added to a <see
-             cref="T:System.Collections.SortedList" />
+             can hold. As elements are added to a <see cref="T:System.Collections.SortedList" />
 
             
 
             , the capacity is automatically increased as required by reallocating the internal array.</para
           >
           <para
-            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.SortedList" />
+            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -277,18 +244,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.SortedList" />
+            >Initializes a new instance of the <see cref="T:System.Collections.SortedList" />
 
             
 
-             class that is empty, has the default initial capacity, and is sorted according to the <see
-             cref="T:System.IComparable" />
+             class that is empty, has the default initial capacity, and is sorted according to the <see cref="T:System.IComparable" />
 
             
 
-             interface implemented by each key added to the <see
-             cref="T:System.Collections.SortedList" />
+             interface implemented by each key added to the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -320,54 +284,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The elements are sorted according to the specified <see
-             cref="T:System.Collections.IComparer" />
+            >The elements are sorted according to the specified <see cref="T:System.Collections.IComparer" />
 
             
 
-             implementation. If the <paramref
-             name="comparer" />
+             implementation. If the <paramref name="comparer" />
 
             
 
-             parameter is null, the <see
-             cref="T:System.IComparable" />
+             parameter is null, the <see cref="T:System.IComparable" />
 
             
 
-             implementation of each key is used; therefore, each key must implement the <see
-             cref="T:System.IComparable" />
+             implementation of each key is used; therefore, each key must implement the <see cref="T:System.IComparable" />
 
             
 
-             interface to be capable of comparisons with every other key in the <see
-             cref="T:System.Collections.SortedList" />
+             interface to be capable of comparisons with every other key in the <see cref="T:System.Collections.SortedList" />
 
             
 
              object.</para
           >
           <para
-            >The capacity of a <see
-             cref="T:System.Collections.SortedList" />
+            >The capacity of a <see cref="T:System.Collections.SortedList" />
 
             
 
-             object is the number of elements that the <see
-             cref="T:System.Collections.SortedList" />
+             object is the number of elements that the <see cref="T:System.Collections.SortedList" />
 
             
 
-             can hold. As elements are added to a <see
-             cref="T:System.Collections.SortedList" />
+             can hold. As elements are added to a <see cref="T:System.Collections.SortedList" />
 
             
 
             , the capacity is automatically increased as required by reallocating the internal array.</para
           >
           <para
-            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.SortedList" />
+            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -378,13 +333,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.SortedList" />
+            >Initializes a new instance of the <see cref="T:System.Collections.SortedList" />
 
             
 
-             class that is empty, has the default initial capacity, and is sorted according to the specified <see
-             cref="T:System.Collections.IComparer" />
+             class that is empty, has the default initial capacity, and is sorted according to the specified <see cref="T:System.Collections.IComparer" />
 
             
 
@@ -392,12 +345,15 @@
           >
         </summary>
         <param name="comparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IComparer" />
+          The <see cref="T:System.Collections.IComparer" />
 
           
 
@@ -428,90 +384,75 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each key must implement the <see
-             cref="T:System.IComparable" />
+            >Each key must implement the <see cref="T:System.IComparable" />
 
             
 
-             interface to be capable of comparisons with every other key in the <see
-             cref="T:System.Collections.SortedList" />
+             interface to be capable of comparisons with every other key in the <see cref="T:System.Collections.SortedList" />
 
             
 
-             object. The elements are sorted according to the <see
-             cref="T:System.IComparable" />
+             object. The elements are sorted according to the <see cref="T:System.IComparable" />
 
             
 
-             implementation of each key added to the <see
-             cref="T:System.Collections.SortedList" />
+             implementation of each key added to the <see cref="T:System.Collections.SortedList" />
 
             
 
             .</para
           >
           <para
-            >A <see
-             cref="T:System.Collections.Hashtable" />
+            >A <see cref="T:System.Collections.Hashtable" />
 
             
 
-             object is an example of an <see
-             cref="T:System.Collections.IDictionary" />
+             object is an example of an <see cref="T:System.Collections.IDictionary" />
 
             
 
-             implementation that can be passed to this constructor. The new <see
-             cref="T:System.Collections.SortedList" />
+             implementation that can be passed to this constructor. The new <see cref="T:System.Collections.SortedList" />
 
             
 
-             object contains a copy of the keys and values stored in the <see
-             cref="T:System.Collections.Hashtable" />
+             object contains a copy of the keys and values stored in the <see cref="T:System.Collections.Hashtable" />
 
             
 
             .</para
           >
           <para
-            >The capacity of a <see
-             cref="T:System.Collections.SortedList" />
+            >The capacity of a <see cref="T:System.Collections.SortedList" />
 
             
 
-             object is the number of elements that the <see
-             cref="T:System.Collections.SortedList" />
+             object is the number of elements that the <see cref="T:System.Collections.SortedList" />
 
             
 
-             can hold. As elements are added to a <see
-             cref="T:System.Collections.SortedList" />
+             can hold. As elements are added to a <see cref="T:System.Collections.SortedList" />
 
             
 
             , the capacity is automatically increased as required by reallocating the internal array.</para
           >
           <para
-            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.SortedList" />
+            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.SortedList" />
 
             
 
              object.</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >This constructor is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is the number of elements in <paramref
-             name="d" />
+             is the number of elements in <paramref name="d" />
 
             
 
@@ -521,13 +462,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.SortedList" />
+            >Initializes a new instance of the <see cref="T:System.Collections.SortedList" />
 
             
 
-             class that contains elements copied from the specified dictionary, has the same initial capacity as the number of elements copied, and is sorted according to the <see
-             cref="T:System.IComparable" />
+             class that contains elements copied from the specified dictionary, has the same initial capacity as the number of elements copied, and is sorted according to the <see cref="T:System.IComparable" />
 
             
 
@@ -535,17 +474,19 @@
           >
         </summary>
         <param name="d">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IDictionary" />
+          The <see cref="T:System.Collections.IDictionary" />
 
           
 
-           implementation to copy to a new <see
-           cref="T:System.Collections.SortedList" />
+           implementation to copy to a new <see cref="T:System.Collections.SortedList" />
 
           
 
@@ -573,67 +514,56 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each key must implement the <see
-             cref="T:System.IComparable" />
+            >Each key must implement the <see cref="T:System.IComparable" />
 
             
 
-             interface to be capable of comparisons with every other key in the <see
-             cref="T:System.Collections.SortedList" />
+             interface to be capable of comparisons with every other key in the <see cref="T:System.Collections.SortedList" />
 
             
 
-             object. The elements are sorted according to the <see
-             cref="T:System.IComparable" />
+             object. The elements are sorted according to the <see cref="T:System.IComparable" />
 
             
 
-             implementation of each key added to the <see
-             cref="T:System.Collections.SortedList" />
+             implementation of each key added to the <see cref="T:System.Collections.SortedList" />
 
             
 
             .</para
           >
           <para
-            >The capacity of a <see
-             cref="T:System.Collections.SortedList" />
+            >The capacity of a <see cref="T:System.Collections.SortedList" />
 
             
 
-             object is the number of elements that the <see
-             cref="T:System.Collections.SortedList" />
+             object is the number of elements that the <see cref="T:System.Collections.SortedList" />
 
             
 
-             can hold. As elements are added to a <see
-             cref="T:System.Collections.SortedList" />
+             can hold. As elements are added to a <see cref="T:System.Collections.SortedList" />
 
             
 
             , the capacity is automatically increased as required by reallocating the internal array.</para
           >
           <para
-            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.SortedList" />
+            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.SortedList" />
 
             
 
              object.</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >This constructor is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <paramref
-             name="initialCapacity" />
+             is <paramref name="initialCapacity" />
 
             
 
@@ -643,18 +573,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.SortedList" />
+            >Initializes a new instance of the <see cref="T:System.Collections.SortedList" />
 
             
 
-             class that is empty, has the specified initial capacity, and is sorted according to the <see
-             cref="T:System.IComparable" />
+             class that is empty, has the specified initial capacity, and is sorted according to the <see cref="T:System.IComparable" />
 
             
 
-             interface implemented by each key added to the <see
-             cref="T:System.Collections.SortedList" />
+             interface implemented by each key added to the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -662,12 +589,15 @@
           >
         </summary>
         <param name="initialCapacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The initial number of elements that the <see
-           cref="T:System.Collections.SortedList" />
+          The initial number of elements that the <see cref="T:System.Collections.SortedList" />
 
           
 
@@ -699,72 +629,60 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The elements are sorted according to the specified <see
-             cref="T:System.Collections.IComparer" />
+            >The elements are sorted according to the specified <see cref="T:System.Collections.IComparer" />
 
             
 
-             implementation. If the <paramref
-             name="comparer" />
+             implementation. If the <paramref name="comparer" />
 
             
 
-             parameter is null, the <see
-             cref="T:System.IComparable" />
+             parameter is null, the <see cref="T:System.IComparable" />
 
             
 
-             implementation of each key is used; therefore, each key must implement the <see
-             cref="T:System.IComparable" />
+             implementation of each key is used; therefore, each key must implement the <see cref="T:System.IComparable" />
 
             
 
-             interface to be capable of comparisons with every other key in the <see
-             cref="T:System.Collections.SortedList" />
+             interface to be capable of comparisons with every other key in the <see cref="T:System.Collections.SortedList" />
 
             
 
              object.</para
           >
           <para
-            >The capacity of a <see
-             cref="T:System.Collections.SortedList" />
+            >The capacity of a <see cref="T:System.Collections.SortedList" />
 
             
 
-             object is the number of elements that the <see
-             cref="T:System.Collections.SortedList" />
+             object is the number of elements that the <see cref="T:System.Collections.SortedList" />
 
             
 
-             can hold. As elements are added to a <see
-             cref="T:System.Collections.SortedList" />
+             can hold. As elements are added to a <see cref="T:System.Collections.SortedList" />
 
             
 
             , the capacity is automatically increased as required by reallocating the internal array.</para
           >
           <para
-            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.SortedList" />
+            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.SortedList" />
 
             
 
              object.</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >This constructor is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <paramref
-             name="capacity" />
+             is <paramref name="capacity" />
 
             
 
@@ -774,13 +692,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.SortedList" />
+            >Initializes a new instance of the <see cref="T:System.Collections.SortedList" />
 
             
 
-             class that is empty, has the specified initial capacity, and is sorted according to the specified <see
-             cref="T:System.Collections.IComparer" />
+             class that is empty, has the specified initial capacity, and is sorted according to the specified <see cref="T:System.Collections.IComparer" />
 
             
 
@@ -788,24 +704,30 @@
           >
         </summary>
         <param name="comparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IComparer" />
+          The <see cref="T:System.Collections.IComparer" />
 
           
 
            implementation to use when comparing keys.</param
         >
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The initial number of elements that the <see
-           cref="T:System.Collections.SortedList" />
+          The initial number of elements that the <see cref="T:System.Collections.SortedList" />
 
           
 
@@ -837,95 +759,79 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The elements are sorted according to the specified <see
-             cref="T:System.Collections.IComparer" />
+            >The elements are sorted according to the specified <see cref="T:System.Collections.IComparer" />
 
             
 
-             implementation. If the <paramref
-             name="comparer" />
+             implementation. If the <paramref name="comparer" />
 
             
 
-             parameter is null, the <see
-             cref="T:System.IComparable" />
+             parameter is null, the <see cref="T:System.IComparable" />
 
             
 
-             implementation of each key is used; therefore, each key must implement the <see
-             cref="T:System.IComparable" />
+             implementation of each key is used; therefore, each key must implement the <see cref="T:System.IComparable" />
 
             
 
-             interface to be capable of comparisons with every other key in the <see
-             cref="T:System.Collections.SortedList" />
+             interface to be capable of comparisons with every other key in the <see cref="T:System.Collections.SortedList" />
 
             
 
              object.</para
           >
           <para
-            >A <see
-             cref="T:System.Collections.Hashtable" />
+            >A <see cref="T:System.Collections.Hashtable" />
 
             
 
-             object is an example of an <see
-             cref="T:System.Collections.IDictionary" />
+             object is an example of an <see cref="T:System.Collections.IDictionary" />
 
             
 
-             implementation that can be passed to this constructor. The new <see
-             cref="T:System.Collections.SortedList" />
+             implementation that can be passed to this constructor. The new <see cref="T:System.Collections.SortedList" />
 
             
 
-             object contains a copy of the keys and values stored in the <see
-             cref="T:System.Collections.Hashtable" />
+             object contains a copy of the keys and values stored in the <see cref="T:System.Collections.Hashtable" />
 
             
 
             .</para
           >
           <para
-            >The capacity of a <see
-             cref="T:System.Collections.SortedList" />
+            >The capacity of a <see cref="T:System.Collections.SortedList" />
 
             
 
-             object is the number of elements that the <see
-             cref="T:System.Collections.SortedList" />
+             object is the number of elements that the <see cref="T:System.Collections.SortedList" />
 
             
 
-             can hold. As elements are added to a <see
-             cref="T:System.Collections.SortedList" />
+             can hold. As elements are added to a <see cref="T:System.Collections.SortedList" />
 
             
 
             , the capacity is automatically increased as required by reallocating the internal array.</para
           >
           <para
-            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.SortedList" />
+            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.SortedList" />
 
             
 
              object.</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >This constructor is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is the number of elements in <paramref
-             name="d" />
+             is the number of elements in <paramref name="d" />
 
             
 
@@ -935,13 +841,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.SortedList" />
+            >Initializes a new instance of the <see cref="T:System.Collections.SortedList" />
 
             
 
-             class that contains elements copied from the specified dictionary, has the same initial capacity as the number of elements copied, and is sorted according to the specified <see
-             cref="T:System.Collections.IComparer" />
+             class that contains elements copied from the specified dictionary, has the same initial capacity as the number of elements copied, and is sorted according to the specified <see cref="T:System.Collections.IComparer" />
 
             
 
@@ -949,29 +853,34 @@
           >
         </summary>
         <param name="d">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IDictionary" />
+          The <see cref="T:System.Collections.IDictionary" />
 
           
 
-           implementation to copy to a new <see
-           cref="T:System.Collections.SortedList" />
+           implementation to copy to a new <see cref="T:System.Collections.SortedList" />
 
           
 
            object.</param
         >
         <param name="comparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IComparer" />
+          The <see cref="T:System.Collections.IComparer" />
 
           
 
@@ -1002,77 +911,64 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The insertion point is determined based on the comparer selected, either explicitly or by default, when the <see
-             cref="T:System.Collections.SortedList" />
+            >The insertion point is determined based on the comparer selected, either explicitly or by default, when the <see cref="T:System.Collections.SortedList" />
 
             
 
              object was created.</para
           >
           <para
-            >If <see
-             cref="P:System.Collections.SortedList.Count" />
+            >If <see cref="P:System.Collections.SortedList.Count" />
 
             
 
-             already equals <see
-             cref="P:System.Collections.SortedList.Capacity" />
+             already equals <see cref="P:System.Collections.SortedList.Capacity" />
 
             
 
-            , the capacity of the <see
-             cref="T:System.Collections.SortedList" />
+            , the capacity of the <see cref="T:System.Collections.SortedList" />
 
             
 
              object is increased by automatically reallocating the internal array, and the existing elements are copied to the new array before the new element is added.</para
           >
           <para
-            >You can also use the <see
-             cref="P:System.Collections.SortedList.Item(System.Object)" />
+            >You can also use the <see cref="P:System.Collections.SortedList.Item(System.Object)" />
 
             
 
-             property to add new elements by setting the value of a key that does not exist in the <see
-             cref="T:System.Collections.SortedList" />
+             property to add new elements by setting the value of a key that does not exist in the <see cref="T:System.Collections.SortedList" />
 
             
 
-             object (for example, myCollection["myNonexistentKey"] = myValue). However, if the specified key already exists in the <see
-             cref="T:System.Collections.SortedList" />
+             object (for example, myCollection["myNonexistentKey"] = myValue). However, if the specified key already exists in the <see cref="T:System.Collections.SortedList" />
 
             
 
-            , setting the <see
-             cref="P:System.Collections.SortedList.Item(System.Object)" />
+            , setting the <see cref="P:System.Collections.SortedList.Item(System.Object)" />
 
             
 
-             property overwrites the old value. In contrast, the <see
-             cref="M:System.Collections.SortedList.Add(System.Object,System.Object)" />
+             property overwrites the old value. In contrast, the <see cref="M:System.Collections.SortedList.Add(System.Object,System.Object)" />
 
             
 
              method does not modify existing elements.</para
           >
           <para
-            >The elements of a <see
-             cref="T:System.Collections.SortedList" />
+            >The elements of a <see cref="T:System.Collections.SortedList" />
 
             
 
-             object are sorted by the keys either according to a specific <see
-             cref="T:System.Collections.IComparer" />
+             object are sorted by the keys either according to a specific <see cref="T:System.Collections.IComparer" />
 
             
 
-             implementation specified when the <see
-             cref="T:System.Collections.SortedList" />
+             implementation specified when the <see cref="T:System.Collections.SortedList" />
 
             
 
-             is created or according to the <see
-             cref="T:System.IComparable" />
+             is created or according to the <see cref="T:System.IComparable" />
 
             
 
@@ -1080,28 +976,23 @@
           >
           <para>A key cannot be null, but a value can be.</para>
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation for unsorted data, where <paramref
-             name="n" />
+            ) operation for unsorted data, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.SortedList.Count" />
+             is <see cref="P:System.Collections.SortedList.Count" />
 
             
 
-            . It is an O(log <paramref
-             name="n" />
+            . It is an O(log <paramref name="n" />
 
             
 
-            ) operation if the new element is added at the end of the list. If insertion causes a resize, the operation is O(<paramref
-             name="n" />
+            ) operation if the new element is added at the end of the list. If insertion causes a resize, the operation is O(<paramref name="n" />
 
             
 
@@ -1111,8 +1002,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an element with the specified key and value to a <see
-             cref="T:System.Collections.SortedList" />
+            >Adds an element with the specified key and value to a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -1120,14 +1010,22 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key of the element to add. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1157,18 +1055,15 @@
 
             
 
-             is the number of elements that the <see
-             cref="T:System.Collections.SortedList" />
+             is the number of elements that the <see cref="T:System.Collections.SortedList" />
 
             
 
-             object can store. <see
-             cref="P:System.Collections.SortedList.Count" />
+             object can store. <see cref="P:System.Collections.SortedList.Count" />
 
             
 
-             is the number of elements that are actually in the <see
-             cref="T:System.Collections.SortedList" />
+             is the number of elements that are actually in the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -1179,49 +1074,41 @@
 
             
 
-             is always greater than or equal to <see
-             cref="P:System.Collections.SortedList.Count" />
+             is always greater than or equal to <see cref="P:System.Collections.SortedList.Count" />
 
             
 
-            . If <see
-             cref="P:System.Collections.SortedList.Count" />
+            . If <see cref="P:System.Collections.SortedList.Count" />
 
             
 
-             exceeds <see
-             cref="P:System.Collections.SortedList.Capacity" />
+             exceeds <see cref="P:System.Collections.SortedList.Capacity" />
 
             
 
              while adding elements, the capacity is automatically increased by reallocating the internal array before copying the old elements and adding the new elements.</para
           >
           <para
-            >The capacity can be decreased by calling <see
-             cref="M:System.Collections.SortedList.TrimToSize" />
+            >The capacity can be decreased by calling <see cref="M:System.Collections.SortedList.TrimToSize" />
 
             
 
-             or by setting the <see
-             cref="P:System.Collections.SortedList.Capacity" />
+             or by setting the <see cref="P:System.Collections.SortedList.Capacity" />
 
             
 
-             property explicitly. When the value of <see
-             cref="P:System.Collections.SortedList.Capacity" />
+             property explicitly. When the value of <see cref="P:System.Collections.SortedList.Capacity" />
 
             
 
              is set explicitly, the internal array is also reallocated to accommodate the specified capacity.</para
           >
           <para
-            >Retrieving the value of this property is an O(1) operation; setting the property is an O(<paramref
-             name="n" />
+            >Retrieving the value of this property is an O(1) operation; setting the property is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
@@ -1231,8 +1118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the capacity of a <see
-             cref="T:System.Collections.SortedList" />
+            >Gets or sets the capacity of a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -1272,46 +1158,38 @@
 
             
 
-             remains unchanged. To reset the capacity of the <see
-             cref="T:System.Collections.SortedList" />
+             remains unchanged. To reset the capacity of the <see cref="T:System.Collections.SortedList" />
 
             
 
-             object, call <see
-             cref="M:System.Collections.SortedList.TrimToSize" />
+             object, call <see cref="M:System.Collections.SortedList.TrimToSize" />
 
             
 
-             or set the <see
-             cref="P:System.Collections.SortedList.Capacity" />
+             or set the <see cref="P:System.Collections.SortedList.Capacity" />
 
             
 
-             property directly. Trimming an empty <see
-             cref="T:System.Collections.SortedList" />
+             property directly. Trimming an empty <see cref="T:System.Collections.SortedList" />
 
             
 
-             sets the capacity of the <see
-             cref="T:System.Collections.SortedList" />
+             sets the capacity of the <see cref="T:System.Collections.SortedList" />
 
             
 
              to the default capacity.</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.SortedList.Count" />
+             is <see cref="P:System.Collections.SortedList.Count" />
 
             
 
@@ -1321,8 +1199,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all elements from a <see
-             cref="T:System.Collections.SortedList" />
+            >Removes all elements from a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -1353,18 +1230,15 @@
           <para>A shallow copy of a collection copies only the elements of the collection, whether they are reference types or value types, but does not copy the objects that the references refer to. The references in the new collection point to the same objects that the references in the original collection point to.</para>
           <para>In contrast, a deep copy of a collection copies the elements and everything directly or indirectly referenced by the elements.</para>
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.SortedList.Count" />
+             is <see cref="P:System.Collections.SortedList.Count" />
 
             
 
@@ -1374,8 +1248,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a shallow copy of a <see
-             cref="T:System.Collections.SortedList" />
+            >Creates a shallow copy of a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -1385,8 +1258,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A shallow copy of the <see
-             cref="T:System.Collections.SortedList" />
+            >A shallow copy of the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -1417,23 +1289,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The elements of a <see
-             cref="T:System.Collections.SortedList" />
+            >The elements of a <see cref="T:System.Collections.SortedList" />
 
             
 
-             object are sorted by the keys either according to a specific <see
-             cref="T:System.Collections.IComparer" />
+             object are sorted by the keys either according to a specific <see cref="T:System.Collections.IComparer" />
 
             
 
-             implementation specified when the <see
-             cref="T:System.Collections.SortedList" />
+             implementation specified when the <see cref="T:System.Collections.SortedList" />
 
             
 
-             is created or according to the <see
-             cref="T:System.IComparable" />
+             is created or according to the <see cref="T:System.IComparable" />
 
             
 
@@ -1444,64 +1312,53 @@
 
             
 
-             implements <see
-             cref="M:System.Collections.IDictionary.Contains(System.Object)" />
+             implements <see cref="M:System.Collections.IDictionary.Contains(System.Object)" />
 
             
 
-            . It behaves exactly as <see
-             cref="M:System.Collections.SortedList.ContainsKey(System.Object)" />
-
-            
-
-            .</para
-          >
-          <para
-            >This method uses a binary search algorithm; therefore, this method is an O(log <paramref
-             name="n" />
-
-            
-
-            ) operation, where <paramref
-             name="n" />
-
-            
-
-             is <see
-             cref="P:System.Collections.SortedList.Count" />
+            . It behaves exactly as <see cref="M:System.Collections.SortedList.ContainsKey(System.Object)" />
 
             
 
             .</para
           >
           <para
-            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >This method uses a binary search algorithm; therefore, this method is an O(log <paramref name="n" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+            ) operation, where <paramref name="n" />
 
             
 
-             methods on <paramref
-             name="item" />
+             is <see cref="P:System.Collections.SortedList.Count" />
 
             
 
-             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+            .</para
+          >
+          <para
+            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods of the <paramref
-             name="item" />
+             methods on <paramref name="item" />
+
+            
+
+             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see cref="M:System.Object.Equals(System.Object)" />
+
+            
+
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
+
+             methods of the <paramref name="item" />
 
             
 
@@ -1511,8 +1368,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether a <see
-             cref="T:System.Collections.SortedList" />
+            >Determines whether a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -1522,13 +1378,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Collections.SortedList" />
+            >true if the <see cref="T:System.Collections.SortedList" />
 
             
 
-             object contains an element with the specified <paramref
-             name="key" />
+             object contains an element with the specified <paramref name="key" />
 
             
 
@@ -1536,12 +1390,15 @@
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key to locate in the <see
-           cref="T:System.Collections.SortedList" />
+          The key to locate in the <see cref="T:System.Collections.SortedList" />
 
           
 
@@ -1571,82 +1428,68 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The elements of a <see
-             cref="T:System.Collections.SortedList" />
+            >The elements of a <see cref="T:System.Collections.SortedList" />
 
             
 
-             object are sorted by the keys either according to a specific <see
-             cref="T:System.Collections.IComparer" />
+             object are sorted by the keys either according to a specific <see cref="T:System.Collections.IComparer" />
 
             
 
-             implementation specified when the <see
-             cref="T:System.Collections.SortedList" />
+             implementation specified when the <see cref="T:System.Collections.SortedList" />
 
             
 
-             is created or according to the <see
-             cref="T:System.IComparable" />
+             is created or according to the <see cref="T:System.IComparable" />
 
             
 
              implementation provided by the keys themselves.</para
           >
           <para
-            >This method behaves exactly as the <see
-             cref="M:System.Collections.SortedList.Contains(System.Object)" />
+            >This method behaves exactly as the <see cref="M:System.Collections.SortedList.Contains(System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >This method uses a binary search algorithm; therefore, this method is an O(log <paramref
-             name="n" />
+            >This method uses a binary search algorithm; therefore, this method is an O(log <paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.SortedList.Count" />
+             is <see cref="P:System.Collections.SortedList.Count" />
 
             
 
             .</para
           >
           <para
-            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods on <paramref
-             name="item" />
+             methods on <paramref name="item" />
 
             
 
-             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods of the <paramref
-             name="item" />
+             methods of the <paramref name="item" />
 
             
 
@@ -1656,8 +1499,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether a <see
-             cref="T:System.Collections.SortedList" />
+            >Determines whether a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -1667,13 +1509,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Collections.SortedList" />
+            >true if the <see cref="T:System.Collections.SortedList" />
 
             
 
-             object contains an element with the specified <paramref
-             name="key" />
+             object contains an element with the specified <paramref name="key" />
 
             
 
@@ -1681,12 +1521,15 @@
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key to locate in the <see
-           cref="T:System.Collections.SortedList" />
+          The key to locate in the <see cref="T:System.Collections.SortedList" />
 
           
 
@@ -1716,69 +1559,57 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The values of the elements of the <see
-             cref="T:System.Collections.SortedList" />
+            >The values of the elements of the <see cref="T:System.Collections.SortedList" />
 
             
 
-             object are compared to the specified value using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             object are compared to the specified value using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >This method performs a linear search; therefore, the average execution time is proportional to <see
-             cref="P:System.Collections.SortedList.Count" />
+            >This method performs a linear search; therefore, the average execution time is proportional to <see cref="P:System.Collections.SortedList.Count" />
 
             
 
-            . That is, this method is an O(<paramref
-             name="n" />
+            . That is, this method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.SortedList.Count" />
+             is <see cref="P:System.Collections.SortedList.Count" />
 
             
 
             .</para
           >
           <para
-            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods on <paramref
-             name="item" />
+             methods on <paramref name="item" />
 
             
 
-             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods of the <paramref
-             name="item" />
+             methods of the <paramref name="item" />
 
             
 
@@ -1788,8 +1619,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether a <see
-             cref="T:System.Collections.SortedList" />
+            >Determines whether a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -1799,13 +1629,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Collections.SortedList" />
+            >true if the <see cref="T:System.Collections.SortedList" />
 
             
 
-             object contains an element with the specified <paramref
-             name="value" />
+             object contains an element with the specified <paramref name="value" />
 
             
 
@@ -1813,12 +1641,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value to locate in the <see
-           cref="T:System.Collections.SortedList" />
+          The value to locate in the <see cref="T:System.Collections.SortedList" />
 
           
 
@@ -1852,47 +1683,40 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The key/value pairs are copied to the <see
-             cref="T:System.Array" />
+            >The key/value pairs are copied to the <see cref="T:System.Array" />
 
             
 
-             object in the same order in which the enumerator iterates through the <see
-             cref="T:System.Collections.SortedList" />
+             object in the same order in which the enumerator iterates through the <see cref="T:System.Collections.SortedList" />
 
             
 
              object.</para
           >
           <para
-            >To copy only the keys in the <see
-             cref="T:System.Collections.SortedList" />
+            >To copy only the keys in the <see cref="T:System.Collections.SortedList" />
 
             
 
             , use SortedList.Keys.CopyTo.</para
           >
           <para
-            >To copy only the values in the <see
-             cref="T:System.Collections.SortedList" />
+            >To copy only the values in the <see cref="T:System.Collections.SortedList" />
 
             
 
             , use SortedList.Values.CopyTo.</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.SortedList.Count" />
+             is <see cref="P:System.Collections.SortedList.Count" />
 
             
 
@@ -1902,13 +1726,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies <see
-             cref="T:System.Collections.SortedList" />
+            >Copies <see cref="T:System.Collections.SortedList" />
 
             
 
-             elements to a one-dimensional <see
-             cref="T:System.Array" />
+             elements to a one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -1916,39 +1738,42 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           object that is the destination of the <see
-           cref="T:System.Collections.DictionaryEntry" />
+           object that is the destination of the <see cref="T:System.Collections.DictionaryEntry" />
 
           
 
-           objects copied from <see
-           cref="T:System.Collections.SortedList" />
+           objects copied from <see cref="T:System.Collections.SortedList" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing. </param
         >
         <param name="arrayIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -1973,8 +1798,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each element is a key/value pair that can be accessed as a <see
-             cref="T:System.Collections.DictionaryEntry" />
+            >Each element is a key/value pair that can be accessed as a <see cref="T:System.Collections.DictionaryEntry" />
 
             
 
@@ -1985,18 +1809,15 @@
 
             
 
-             is the number of elements that the <see
-             cref="T:System.Collections.SortedList" />
+             is the number of elements that the <see cref="T:System.Collections.SortedList" />
 
             
 
-             object can store. <see
-             cref="P:System.Collections.SortedList.Count" />
+             object can store. <see cref="P:System.Collections.SortedList.Count" />
 
             
 
-             is the number of elements that are actually in the <see
-             cref="T:System.Collections.SortedList" />
+             is the number of elements that are actually in the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -2007,18 +1828,15 @@
 
             
 
-             is always greater than or equal to <see
-             cref="P:System.Collections.SortedList.Count" />
+             is always greater than or equal to <see cref="P:System.Collections.SortedList.Count" />
 
             
 
-            . If <see
-             cref="P:System.Collections.SortedList.Count" />
+            . If <see cref="P:System.Collections.SortedList.Count" />
 
             
 
-             exceeds <see
-             cref="P:System.Collections.SortedList.Capacity" />
+             exceeds <see cref="P:System.Collections.SortedList.Capacity" />
 
             
 
@@ -2029,8 +1847,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of elements contained in a <see
-             cref="T:System.Collections.SortedList" />
+            >Gets the number of elements contained in a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -2061,13 +1878,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index sequence is based on the sort sequence. When an element is added, it is inserted into <see
-             cref="T:System.Collections.SortedList" />
+            >The index sequence is based on the sort sequence. When an element is added, it is inserted into <see cref="T:System.Collections.SortedList" />
 
             
 
-             in the correct sort order, and the indexing adjusts accordingly. When an element is removed, the indexing also adjusts accordingly. Therefore, the index of a specific key/value pair might change as elements are added or removed from the <see
-             cref="T:System.Collections.SortedList" />
+             in the correct sort order, and the indexing adjusts accordingly. When an element is removed, the indexing also adjusts accordingly. Therefore, the index of a specific key/value pair might change as elements are added or removed from the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -2078,8 +1893,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value at the specified index of a <see
-             cref="T:System.Collections.SortedList" />
+            >Gets the value at the specified index of a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -2089,8 +1903,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value at the specified index of the <see
-             cref="T:System.Collections.SortedList" />
+            >The value at the specified index of the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -2098,7 +1911,11 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2131,23 +1948,19 @@
           <para>The foreach statement of the C# language (for each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
           <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
           <para
-            >Initially, the enumerator is positioned before the first element in the collection. <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Initially, the enumerator is positioned before the first element in the collection. <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             also brings the enumerator back to this position.  At this position, <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             also brings the enumerator back to this position.  At this position, <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             is undefined. Therefore, you must call <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is undefined. Therefore, you must call <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             to advance the enumerator to the first element of the collection before reading the value of <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -2158,66 +1971,54 @@
 
             
 
-             returns the same object until either <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             is called. <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             sets <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             sets <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              to the next element.</para
           >
           <para
-            >If <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returns false. When the enumerator is at this position, subsequent calls to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             also return false. If the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returned false, <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             returned false, <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             is undefined. To set <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             is undefined. To set <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             to the first element of the collection again, you can call <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             to the first element of the collection again, you can call <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             followed by <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             followed by <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
@@ -2230,13 +2031,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >Returns an <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
-             object that iterates through a <see
-             cref="T:System.Collections.SortedList" />
+             object that iterates through a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -2246,13 +2045,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >An <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
-             object for the <see
-             cref="T:System.Collections.SortedList" />
+             object for the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -2283,13 +2080,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index sequence is based on the sort sequence. When an element is added, it is inserted into <see
-             cref="T:System.Collections.SortedList" />
+            >The index sequence is based on the sort sequence. When an element is added, it is inserted into <see cref="T:System.Collections.SortedList" />
 
             
 
-             in the correct sort order, and the indexing adjusts accordingly. When an element is removed, the indexing also adjusts accordingly. Therefore, the index of a specific key/value pair might change as elements are added or removed from the <see
-             cref="T:System.Collections.SortedList" />
+             in the correct sort order, and the indexing adjusts accordingly. When an element is removed, the indexing also adjusts accordingly. Therefore, the index of a specific key/value pair might change as elements are added or removed from the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -2300,8 +2095,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the key at the specified index of a <see
-             cref="T:System.Collections.SortedList" />
+            >Gets the key at the specified index of a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -2311,8 +2105,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The key at the specified index of the <see
-             cref="T:System.Collections.SortedList" />
+            >The key at the specified index of the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -2320,7 +2113,11 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2351,54 +2148,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The returned <see
-             cref="T:System.Collections.IList" />
+            >The returned <see cref="T:System.Collections.IList" />
 
             
 
-             object is a read-only view of the keys of the <see
-             cref="T:System.Collections.SortedList" />
+             object is a read-only view of the keys of the <see cref="T:System.Collections.SortedList" />
 
             
 
-             object. Modifications made to the underlying <see
-             cref="T:System.Collections.SortedList" />
+             object. Modifications made to the underlying <see cref="T:System.Collections.SortedList" />
 
             
 
-             are immediately reflected in the <see
-             cref="T:System.Collections.IList" />
+             are immediately reflected in the <see cref="T:System.Collections.IList" />
 
             
 
             .</para
           >
           <para
-            >The elements of the returned <see
-             cref="T:System.Collections.IList" />
+            >The elements of the returned <see cref="T:System.Collections.IList" />
 
             
 
-             are sorted in the same order as the keys of the <see
-             cref="T:System.Collections.SortedList" />
+             are sorted in the same order as the keys of the <see cref="T:System.Collections.SortedList" />
 
             
 
             .</para
           >
           <para
-            >This method is similar to the <see
-             cref="P:System.Collections.SortedList.Keys" />
+            >This method is similar to the <see cref="P:System.Collections.SortedList.Keys" />
 
             
 
-             property, but returns an <see
-             cref="T:System.Collections.IList" />
+             property, but returns an <see cref="T:System.Collections.IList" />
 
             
 
-             object instead of an <see
-             cref="T:System.Collections.ICollection" />
+             object instead of an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -2409,8 +2197,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the keys in a <see
-             cref="T:System.Collections.SortedList" />
+            >Gets the keys in a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -2420,13 +2207,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IList" />
+            >An <see cref="T:System.Collections.IList" />
 
             
 
-             object containing the keys in the <see
-             cref="T:System.Collections.SortedList" />
+             object containing the keys in the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -2458,54 +2243,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The returned <see
-             cref="T:System.Collections.IList" />
+            >The returned <see cref="T:System.Collections.IList" />
 
             
 
-             object is a read-only view of the values of the <see
-             cref="T:System.Collections.SortedList" />
+             object is a read-only view of the values of the <see cref="T:System.Collections.SortedList" />
 
             
 
-             object. Modifications made to the underlying <see
-             cref="T:System.Collections.SortedList" />
+             object. Modifications made to the underlying <see cref="T:System.Collections.SortedList" />
 
             
 
-             are immediately reflected in the <see
-             cref="T:System.Collections.IList" />
+             are immediately reflected in the <see cref="T:System.Collections.IList" />
 
             
 
             .</para
           >
           <para
-            >The elements of the returned <see
-             cref="T:System.Collections.IList" />
+            >The elements of the returned <see cref="T:System.Collections.IList" />
 
             
 
-             are sorted in the same order as the values of the <see
-             cref="T:System.Collections.SortedList" />
+             are sorted in the same order as the values of the <see cref="T:System.Collections.SortedList" />
 
             
 
             .</para
           >
           <para
-            >This method is similar to the <see
-             cref="P:System.Collections.SortedList.Values" />
+            >This method is similar to the <see cref="P:System.Collections.SortedList.Values" />
 
             
 
-             property, but returns an <see
-             cref="T:System.Collections.IList" />
+             property, but returns an <see cref="T:System.Collections.IList" />
 
             
 
-             object instead of an <see
-             cref="T:System.Collections.ICollection" />
+             object instead of an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -2516,8 +2292,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the values in a <see
-             cref="T:System.Collections.SortedList" />
+            >Gets the values in a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -2527,13 +2302,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IList" />
+            >An <see cref="T:System.Collections.IList" />
 
             
 
-             object containing the values in the <see
-             cref="T:System.Collections.SortedList" />
+             object containing the values in the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -2564,87 +2337,72 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The elements of a <see
-             cref="T:System.Collections.SortedList" />
+            >The elements of a <see cref="T:System.Collections.SortedList" />
 
             
 
-             object are sorted by the keys either according to a specific <see
-             cref="T:System.Collections.IComparer" />
+             object are sorted by the keys either according to a specific <see cref="T:System.Collections.IComparer" />
 
             
 
-             implementation specified when the <see
-             cref="T:System.Collections.SortedList" />
+             implementation specified when the <see cref="T:System.Collections.SortedList" />
 
             
 
-             is created, or according to the <see
-             cref="T:System.IComparable" />
+             is created, or according to the <see cref="T:System.IComparable" />
 
             
 
              implementation provided by the keys themselves.</para
           >
           <para
-            >The index sequence is based on the sort sequence. When an element is added, it is inserted into <see
-             cref="T:System.Collections.SortedList" />
+            >The index sequence is based on the sort sequence. When an element is added, it is inserted into <see cref="T:System.Collections.SortedList" />
 
             
 
-             in the correct sort order, and the indexing adjusts accordingly. When an element is removed, the indexing also adjusts accordingly. Therefore, the index of a specific key/value pair might change as elements are added or removed from the <see
-             cref="T:System.Collections.SortedList" />
-
-            
-
-            .</para
-          >
-          <para
-            >This method uses a binary search algorithm; therefore, this method is an O(log <paramref
-             name="n" />
-
-            
-
-            ) operation, where <paramref
-             name="n" />
-
-            
-
-             is <see
-             cref="P:System.Collections.SortedList.Count" />
+             in the correct sort order, and the indexing adjusts accordingly. When an element is removed, the indexing also adjusts accordingly. Therefore, the index of a specific key/value pair might change as elements are added or removed from the <see cref="T:System.Collections.SortedList" />
 
             
 
             .</para
           >
           <para
-            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >This method uses a binary search algorithm; therefore, this method is an O(log <paramref name="n" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+            ) operation, where <paramref name="n" />
 
             
 
-             methods on <paramref
-             name="item" />
+             is <see cref="P:System.Collections.SortedList.Count" />
 
             
 
-             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+            .</para
+          >
+          <para
+            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods of the <paramref
-             name="item" />
+             methods on <paramref name="item" />
+
+            
+
+             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see cref="M:System.Object.Equals(System.Object)" />
+
+            
+
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
+
+             methods of the <paramref name="item" />
 
             
 
@@ -2654,8 +2412,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the zero-based index of the specified key in a <see
-             cref="T:System.Collections.SortedList" />
+            >Returns the zero-based index of the specified key in a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -2665,18 +2422,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the <paramref
-             name="key" />
+            >The zero-based index of the <paramref name="key" />
 
             
 
-             parameter, if <paramref
-             name="key" />
+             parameter, if <paramref name="key" />
 
             
 
-             is found in the <see
-             cref="T:System.Collections.SortedList" />
+             is found in the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -2684,12 +2438,15 @@
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key to locate in the <see
-           cref="T:System.Collections.SortedList" />
+          The key to locate in the <see cref="T:System.Collections.SortedList" />
 
           
 
@@ -2719,77 +2476,64 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index sequence is based on the sort sequence. When an element is added, it is inserted into <see
-             cref="T:System.Collections.SortedList" />
+            >The index sequence is based on the sort sequence. When an element is added, it is inserted into <see cref="T:System.Collections.SortedList" />
 
             
 
-             in the correct sort order, and the indexing adjusts accordingly. When an element is removed, the indexing also adjusts accordingly. Therefore, the index of a specific key/value pair might change as elements are added or removed from the <see
-             cref="T:System.Collections.SortedList" />
+             in the correct sort order, and the indexing adjusts accordingly. When an element is removed, the indexing also adjusts accordingly. Therefore, the index of a specific key/value pair might change as elements are added or removed from the <see cref="T:System.Collections.SortedList" />
 
             
 
              object.</para
           >
           <para
-            >The values of the elements of the <see
-             cref="T:System.Collections.SortedList" />
+            >The values of the elements of the <see cref="T:System.Collections.SortedList" />
 
             
 
-             are compared to the specified value using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             are compared to the specified value using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >This method uses a linear search; therefore, this method is an O(<paramref
-             name="n" />
+            >This method uses a linear search; therefore, this method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.SortedList.Count" />
+             is <see cref="P:System.Collections.SortedList.Count" />
 
             
 
             .</para
           >
           <para
-            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods on <paramref
-             name="item" />
+             methods on <paramref name="item" />
 
             
 
-             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods of the <paramref
-             name="item" />
+             methods of the <paramref name="item" />
 
             
 
@@ -2799,8 +2543,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the zero-based index of the first occurrence of the specified value in a <see
-             cref="T:System.Collections.SortedList" />
+            >Returns the zero-based index of the first occurrence of the specified value in a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -2810,18 +2553,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the first occurrence of the <paramref
-             name="value" />
+            >The zero-based index of the first occurrence of the <paramref name="value" />
 
             
 
-             parameter, if <paramref
-             name="value" />
+             parameter, if <paramref name="value" />
 
             
 
-             is found in the <see
-             cref="T:System.Collections.SortedList" />
+             is found in the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -2829,12 +2569,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value to locate in the <see
-           cref="T:System.Collections.SortedList" />
+          The value to locate in the <see cref="T:System.Collections.SortedList" />
 
           
 
@@ -2865,8 +2608,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether a <see
-             cref="T:System.Collections.SortedList" />
+            >Gets a value indicating whether a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -2898,8 +2640,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether a <see
-             cref="T:System.Collections.SortedList" />
+            >Gets a value indicating whether a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -2925,13 +2666,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To guarantee the thread safety of a <see
-             cref="T:System.Collections.SortedList" />
+            >To guarantee the thread safety of a <see cref="T:System.Collections.SortedList" />
 
             
 
-             object, all operations must be done through the wrapper returned by the <see
-             cref="M:System.Collections.SortedList.Synchronized(System.Collections.SortedList)" />
+             object, all operations must be done through the wrapper returned by the <see cref="M:System.Collections.SortedList.Synchronized(System.Collections.SortedList)" />
 
             
 
@@ -2942,8 +2681,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to a <see
-             cref="T:System.Collections.SortedList" />
+            >Gets a value indicating whether access to a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -2997,54 +2735,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Collections.ICollection" />
+            >The <see cref="T:System.Collections.ICollection" />
 
             
 
-             object is a read-only view of the keys of the <see
-             cref="T:System.Collections.SortedList" />
+             object is a read-only view of the keys of the <see cref="T:System.Collections.SortedList" />
 
             
 
-             object. Modifications made to the underlying <see
-             cref="T:System.Collections.SortedList" />
+             object. Modifications made to the underlying <see cref="T:System.Collections.SortedList" />
 
             
 
-             are immediately reflected in the <see
-             cref="T:System.Collections.ICollection" />
+             are immediately reflected in the <see cref="T:System.Collections.ICollection" />
 
             
 
             .</para
           >
           <para
-            >The elements of the <see
-             cref="T:System.Collections.ICollection" />
+            >The elements of the <see cref="T:System.Collections.ICollection" />
 
             
 
-             are sorted in the same order as the keys of the <see
-             cref="T:System.Collections.SortedList" />
+             are sorted in the same order as the keys of the <see cref="T:System.Collections.SortedList" />
 
             
 
             .</para
           >
           <para
-            >This property is similar to the <see
-             cref="M:System.Collections.SortedList.GetKeyList" />
+            >This property is similar to the <see cref="M:System.Collections.SortedList.GetKeyList" />
 
             
 
-             method, but returns an <see
-             cref="T:System.Collections.ICollection" />
+             method, but returns an <see cref="T:System.Collections.ICollection" />
 
             
 
-             object instead of an <see
-             cref="T:System.Collections.IList" />
+             object instead of an <see cref="T:System.Collections.IList" />
 
             
 
@@ -3055,8 +2784,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the keys in a <see
-             cref="T:System.Collections.SortedList" />
+            >Gets the keys in a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -3087,13 +2815,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Collections.SortedList" />
+            >If the <see cref="T:System.Collections.SortedList" />
 
             
 
-             object does not contain an element with the specified key, the <see
-             cref="T:System.Collections.SortedList" />
+             object does not contain an element with the specified key, the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -3101,18 +2827,15 @@
           >
           <para>In collections of contiguous elements, such as lists, the elements that follow the removed element move up to occupy the vacated spot. If the collection is indexed, the indexes of the elements that are moved are also updated. This behavior does not apply to collections where elements are conceptually grouped into buckets, such as a hash table.</para>
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.SortedList.Count" />
+             is <see cref="P:System.Collections.SortedList.Count" />
 
             
 
@@ -3122,8 +2845,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the element with the specified key from a <see
-             cref="T:System.Collections.SortedList" />
+            >Removes the element with the specified key from a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -3131,7 +2853,11 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3161,13 +2887,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index sequence is based on the sort sequence. When an element is added, it is inserted into <see
-             cref="T:System.Collections.SortedList" />
+            >The index sequence is based on the sort sequence. When an element is added, it is inserted into <see cref="T:System.Collections.SortedList" />
 
             
 
-             in the correct sort order, and the indexing adjusts accordingly. When an element is removed, the indexing also adjusts accordingly. Therefore, the index of a specific key/value pair might change as elements are added or removed from the <see
-             cref="T:System.Collections.SortedList" />
+             in the correct sort order, and the indexing adjusts accordingly. When an element is removed, the indexing also adjusts accordingly. Therefore, the index of a specific key/value pair might change as elements are added or removed from the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -3175,18 +2899,15 @@
           >
           <para>In collections of contiguous elements, such as lists, the elements that follow the removed element move up to occupy the vacated spot. If the collection is indexed, the indexes of the elements that are moved are also updated. This behavior does not apply to collections where elements are conceptually grouped into buckets, such as a hash table.</para>
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.SortedList.Count" />
+             is <see cref="P:System.Collections.SortedList.Count" />
 
             
 
@@ -3196,8 +2917,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the element at the specified index of a <see
-             cref="T:System.Collections.SortedList" />
+            >Removes the element at the specified index of a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -3205,7 +2925,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3239,13 +2963,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index sequence is based on the sort sequence. When an element is added, it is inserted into <see
-             cref="T:System.Collections.SortedList" />
+            >The index sequence is based on the sort sequence. When an element is added, it is inserted into <see cref="T:System.Collections.SortedList" />
 
             
 
-             in the correct sort order, and the indexing adjusts accordingly. When an element is removed, the indexing also adjusts accordingly. Therefore, the index of a specific key/value pair might change as elements are added or removed from the <see
-             cref="T:System.Collections.SortedList" />
+             in the correct sort order, and the indexing adjusts accordingly. When an element is removed, the indexing also adjusts accordingly. Therefore, the index of a specific key/value pair might change as elements are added or removed from the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -3256,8 +2978,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Replaces the value at a specific index in a <see
-             cref="T:System.Collections.SortedList" />
+            >Replaces the value at a specific index in a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -3265,29 +2986,34 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which to save <paramref
-           name="value" />
+          The zero-based index at which to save <paramref name="value" />
 
           
 
           . </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to save into the <see
-           cref="T:System.Collections.SortedList" />
+           to save into the <see cref="T:System.Collections.SortedList" />
 
           
 
@@ -3320,8 +3046,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To guarantee the thread safety of a <see
-             cref="T:System.Collections.SortedList" />
+            >To guarantee the thread safety of a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -3332,8 +3057,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a synchronized (thread-safe) wrapper for a <see
-             cref="T:System.Collections.SortedList" />
+            >Returns a synchronized (thread-safe) wrapper for a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -3343,8 +3067,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A synchronized (thread-safe) wrapper for the <see
-             cref="T:System.Collections.SortedList" />
+            >A synchronized (thread-safe) wrapper for the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -3352,12 +3075,15 @@
           >
         </returns>
         <param name="list">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.SortedList" />
+          The <see cref="T:System.Collections.SortedList" />
 
           
 
@@ -3382,43 +3108,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To create a synchronized version of the <see
-             cref="T:System.Collections.SortedList" />
+            >To create a synchronized version of the <see cref="T:System.Collections.SortedList" />
 
             
 
-             object, use the <see
-             cref="M:System.Collections.SortedList.Synchronized(System.Collections.SortedList)" />
+             object, use the <see cref="M:System.Collections.SortedList.Synchronized(System.Collections.SortedList)" />
 
             
 
-             method. However, derived classes can provide their own synchronized version of the <see
-             cref="T:System.Collections.SortedList" />
+             method. However, derived classes can provide their own synchronized version of the <see cref="T:System.Collections.SortedList" />
 
             
 
-             using the <see
-             cref="P:System.Collections.SortedList.SyncRoot" />
+             using the <see cref="P:System.Collections.SortedList.SyncRoot" />
 
             
 
-             property. The synchronizing code must perform operations on the <see
-             cref="P:System.Collections.SortedList.SyncRoot" />
+             property. The synchronizing code must perform operations on the <see cref="P:System.Collections.SortedList.SyncRoot" />
 
             
 
-             of the <see
-             cref="T:System.Collections.SortedList" />
+             of the <see cref="T:System.Collections.SortedList" />
 
             
 
-            , not directly on the <see
-             cref="T:System.Collections.SortedList" />
+            , not directly on the <see cref="T:System.Collections.SortedList" />
 
             
 
-            . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
-             cref="T:System.Collections.SortedList" />
+            . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -3429,8 +3147,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to a <see
-             cref="T:System.Collections.SortedList" />
+            >Gets an object that can be used to synchronize access to a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -3465,23 +3182,19 @@
           <para>The foreach statement of the C# language (for each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
           <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
           <para
-            >Initially, the enumerator is positioned before the first element in the collection. <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Initially, the enumerator is positioned before the first element in the collection. <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             also brings the enumerator back to this position. At this position, calling <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             also brings the enumerator back to this position. At this position, calling <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             throws an exception. Therefore, you must call <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             throws an exception. Therefore, you must call <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             to advance the enumerator to the first element of the collection before reading the value of <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -3492,99 +3205,81 @@
 
             
 
-             returns the same object until either <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             is called. <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             sets <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             sets <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              to the next element.</para
           >
           <para
-            >If <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returns false. When the enumerator is at this position, subsequent calls to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             also return false. If the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returned false, calling <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             returned false, calling <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             throws an exception. To set <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             throws an exception. To set <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             to the first element of the collection again, you can call <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             to the first element of the collection again, you can call <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             followed by <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             followed by <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
             .</para
           >
           <para
-            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             throws an <see
-             cref="T:System.InvalidOperationException" />
+             throws an <see cref="T:System.InvalidOperationException" />
 
             
 
-            . If the collection is modified between <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            . If the collection is modified between <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             and <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             and <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-            , <see
-             cref="P:System.Collections.IEnumerator.Current" />
+            , <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -3596,13 +3291,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns an <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             that iterates through the <see
-             cref="T:System.Collections.SortedList" />
+             that iterates through the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -3612,13 +3305,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Collections.SortedList" />
+             for the <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -3648,46 +3339,38 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method can be used to minimize a collection's memory overhead if no new elements will be added to the collection.</para>
           <para
-            >To reset a <see
-             cref="T:System.Collections.SortedList" />
+            >To reset a <see cref="T:System.Collections.SortedList" />
 
             
 
-             object to its initial state, call the <see
-             cref="M:System.Collections.SortedList.Clear" />
+             object to its initial state, call the <see cref="M:System.Collections.SortedList.Clear" />
 
             
 
-             method before calling <see
-             cref="M:System.Collections.SortedList.TrimToSize" />
+             method before calling <see cref="M:System.Collections.SortedList.TrimToSize" />
 
             
 
-            . Trimming an empty <see
-             cref="T:System.Collections.SortedList" />
+            . Trimming an empty <see cref="T:System.Collections.SortedList" />
 
             
 
-             sets the capacity of the <see
-             cref="T:System.Collections.SortedList" />
+             sets the capacity of the <see cref="T:System.Collections.SortedList" />
 
             
 
              to the default capacity.</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.SortedList.Count" />
+             is <see cref="P:System.Collections.SortedList.Count" />
 
             
 
@@ -3697,8 +3380,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the capacity to the actual number of elements in a <see
-             cref="T:System.Collections.SortedList" />
+            >Sets the capacity to the actual number of elements in a <see cref="T:System.Collections.SortedList" />
 
             
 
@@ -3730,54 +3412,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Collections.ICollection" />
+            >The <see cref="T:System.Collections.ICollection" />
 
             
 
-             object is a read-only view of the values of the <see
-             cref="T:System.Collections.SortedList" />
+             object is a read-only view of the values of the <see cref="T:System.Collections.SortedList" />
 
             
 
-             object. Modifications made to the underlying <see
-             cref="T:System.Collections.SortedList" />
+             object. Modifications made to the underlying <see cref="T:System.Collections.SortedList" />
 
             
 
-             are immediately reflected in the <see
-             cref="T:System.Collections.ICollection" />
+             are immediately reflected in the <see cref="T:System.Collections.ICollection" />
 
             
 
             .</para
           >
           <para
-            >The elements of the <see
-             cref="T:System.Collections.ICollection" />
+            >The elements of the <see cref="T:System.Collections.ICollection" />
 
             
 
-             are sorted in the same order as the values of the <see
-             cref="T:System.Collections.SortedList" />
+             are sorted in the same order as the values of the <see cref="T:System.Collections.SortedList" />
 
             
 
             .</para
           >
           <para
-            >This property is similar to the <see
-             cref="M:System.Collections.SortedList.GetValueList" />
+            >This property is similar to the <see cref="M:System.Collections.SortedList.GetValueList" />
 
             
 
-             method, but returns an <see
-             cref="T:System.Collections.ICollection" />
+             method, but returns an <see cref="T:System.Collections.ICollection" />
 
             
 
-             object instead of an <see
-             cref="T:System.Collections.IList" />
+             object instead of an <see cref="T:System.Collections.IList" />
 
             
 
@@ -3788,8 +3461,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the values in a <see
-             cref="T:System.Collections.SortedList" />
+            >Gets the values in a <see cref="T:System.Collections.SortedList" />
 
             
 

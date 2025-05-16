@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class contains the <see
-         cref="T:System.ServiceModel.Security.MessagePartSpecification" />
+        >This class contains the <see cref="T:System.ServiceModel.Security.MessagePartSpecification" />
 
         
 
@@ -50,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.ScopedMessagePartSpecification" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.ScopedMessagePartSpecification" />
 
             
 
@@ -84,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.ScopedMessagePartSpecification" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.ScopedMessagePartSpecification" />
 
             
 
@@ -93,12 +90,15 @@
           >
         </summary>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The other <see
-           cref="T:System.ServiceModel.Security.ScopedMessagePartSpecification" />
+          The other <see cref="T:System.ServiceModel.Security.ScopedMessagePartSpecification" />
 
           
 
@@ -157,12 +157,15 @@
           <para>Adds channel message parts to the collections in the instance of this class. </para>
         </summary>
         <param name="parts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Security.MessagePartSpecification" />
+          The <see cref="T:System.ServiceModel.Security.MessagePartSpecification" />
 
           
 
@@ -197,19 +200,26 @@
           <para>Adds message parts to the MessagePartSpecification that corresponds to the specified action.</para>
         </summary>
         <param name="parts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Security.MessagePartSpecification" />
+          The <see cref="T:System.ServiceModel.Security.MessagePartSpecification" />
 
           
 
            that contains the parts to be added.</param
         >
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -260,8 +270,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use <see
-             cref="M:System.ServiceModel.Security.ScopedMessagePartSpecification.MakeReadOnly" />
+            >You can use <see cref="M:System.ServiceModel.Security.ScopedMessagePartSpecification.MakeReadOnly" />
 
             
 

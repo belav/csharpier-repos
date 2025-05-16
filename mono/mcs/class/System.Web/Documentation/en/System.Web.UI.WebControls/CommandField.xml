@@ -17,18 +17,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.CommandField" />
+        >The <see cref="T:System.Web.UI.WebControls.CommandField" />
 
         
 
-         class is a special field used by data-bound controls (such as <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         class is a special field used by data-bound controls (such as <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         and <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
@@ -53,8 +50,7 @@
           </term>
           <description>
             <para
-              >Shows or hides a Delete button in a <see
-               cref="T:System.Web.UI.WebControls.CommandField" />
+              >Shows or hides a Delete button in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
               
 
@@ -70,8 +66,7 @@
           </term>
           <description>
             <para
-              >Shows or hides an Edit button in a <see
-               cref="T:System.Web.UI.WebControls.CommandField" />
+              >Shows or hides an Edit button in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
               
 
@@ -87,8 +82,7 @@
           </term>
           <description>
             <para
-              >Shows or hides the New button in a <see
-               cref="T:System.Web.UI.WebControls.CommandField" />
+              >Shows or hides the New button in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
               
 
@@ -96,8 +90,7 @@
             >
             <block subset="none" type="note">
               <para
-                >This property applies only to data-bound controls that support inserting operations, such as the <see
-                 cref="T:System.Web.UI.WebControls.DetailsView" />
+                >This property applies only to data-bound controls that support inserting operations, such as the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
                 
 
@@ -114,8 +107,7 @@
           </term>
           <description>
             <para
-              >Shows or hides a Select button in a <see
-               cref="T:System.Web.UI.WebControls.CommandField" />
+              >Shows or hides a Select button in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
               
 
@@ -125,8 +117,7 @@
         </item>
       </list>
       <para
-        >In addition, the Cancel button displayed when a record is in edit or insert mode can be shown or hidden by setting the <see
-         cref="P:System.Web.UI.WebControls.CommandField.ShowCancelButton" />
+        >In addition, the Cancel button displayed when a record is in edit or insert mode can be shown or hidden by setting the <see cref="P:System.Web.UI.WebControls.CommandField.ShowCancelButton" />
 
         
 
@@ -134,8 +125,7 @@
       >
       <block subset="none" type="note">
         <para
-          >When a data-bound control is used in combination with a data source control (such as a <see
-           cref="T:System.Web.UI.WebControls.SqlDataSource" />
+          >When a data-bound control is used in combination with a data source control (such as a <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
           
 
@@ -143,36 +133,30 @@
         >
       </block>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.CommandField" />
+        >The <see cref="T:System.Web.UI.WebControls.CommandField" />
 
         
 
-         field is displayed differently depending on the data-bound control in which it is used. For example, the <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         field is displayed differently depending on the data-bound control in which it is used. For example, the <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         control displays a <see
-         cref="T:System.Web.UI.WebControls.CommandField" />
+         control displays a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
         
 
-         field as a column, while the <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         field as a column, while the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
          control displays it as a row.</para
       >
       <para
-        >To specify the type of button to display, use the <see
-         cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+        >To specify the type of button to display, use the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
         
 
-         property. When the <see
-         cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+         property. When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
         
 
@@ -229,8 +213,7 @@
             <para>The caption for the Insert button.</para>
             <block subset="none" type="note">
               <para
-                >This property applies only to data-bound controls that support insert operations, such as the <see
-                 cref="T:System.Web.UI.WebControls.DetailsView" />
+                >This property applies only to data-bound controls that support insert operations, such as the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
                 
 
@@ -249,8 +232,7 @@
             <para>The caption for the New button.</para>
             <block subset="none" type="note">
               <para
-                >This property applies only to data-bound controls that support insert operations, such as the <see
-                 cref="T:System.Web.UI.WebControls.DetailsView" />
+                >This property applies only to data-bound controls that support insert operations, such as the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
                 
 
@@ -281,8 +263,7 @@
         </item>
       </list>
       <para
-        >Instead of displaying a command button or a link button, you can display an image button by setting the <see
-         cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+        >Instead of displaying a command button or a link button, you can display an image button by setting the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
         
 
@@ -339,8 +320,7 @@
             <para>The image to display for the Insert button.</para>
             <block subset="none" type="note">
               <para
-                >This property applies only to data-bound controls that support insert operations, such as the <see
-                 cref="T:System.Web.UI.WebControls.DetailsView" />
+                >This property applies only to data-bound controls that support insert operations, such as the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
                 
 
@@ -359,8 +339,7 @@
             <para>The image to display for the New button.</para>
             <block subset="none" type="note">
               <para
-                >This property applies only to data-bound controls that support insert operations, such as the <see
-                 cref="T:System.Web.UI.WebControls.DetailsView" />
+                >This property applies only to data-bound controls that support insert operations, such as the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
                 
 
@@ -391,59 +370,49 @@
         </item>
       </list>
       <para
-        >By default, when the user clicks a button in a <see
-         cref="T:System.Web.UI.WebControls.CommandField" />
+        >By default, when the user clicks a button in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
         
 
-         field, validation is performed on all validation controls on the page. To prevent validation from occurring when a button is clicked, set the <see
-         cref="P:System.Web.UI.WebControls.CommandField.CausesValidation" />
-
-        
-
-         property to false.</para
-      >
-      <para
-        >You can hide a <see
-         cref="T:System.Web.UI.WebControls.CommandField" />
-
-        
-
-         field in a data-bound control by setting the <see
-         cref="P:System.Web.UI.WebControls.DataControlField.Visible" />
+         field, validation is performed on all validation controls on the page. To prevent validation from occurring when a button is clicked, set the <see cref="P:System.Web.UI.WebControls.CommandField.CausesValidation" />
 
         
 
          property to false.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.CommandField" />
+        >You can hide a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
         
 
-         field allows you to customize its header and footer sections. To display a caption in the header or the footer section, set the <see
-         cref="P:System.Web.UI.WebControls.DataControlField.HeaderText" />
+         field in a data-bound control by setting the <see cref="P:System.Web.UI.WebControls.DataControlField.Visible" />
 
         
 
-         or the <see
-         cref="P:System.Web.UI.WebControls.DataControlField.FooterText" />
+         property to false.</para
+      >
+      <para
+        >The <see cref="T:System.Web.UI.WebControls.CommandField" />
 
         
 
-         property, respectively. Instead of displaying text in the header section, you can display an image by setting the <see
-         cref="P:System.Web.UI.WebControls.DataControlField.HeaderImageUrl" />
+         field allows you to customize its header and footer sections. To display a caption in the header or the footer section, set the <see cref="P:System.Web.UI.WebControls.DataControlField.HeaderText" />
 
         
 
-         property. To hide the header section in a <see
-         cref="T:System.Web.UI.WebControls.CommandField" />
+         or the <see cref="P:System.Web.UI.WebControls.DataControlField.FooterText" />
 
         
 
-         object, set the <see
-         cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
+         property, respectively. Instead of displaying text in the header section, you can display an image by setting the <see cref="P:System.Web.UI.WebControls.DataControlField.HeaderImageUrl" />
+
+        
+
+         property. To hide the header section in a <see cref="T:System.Web.UI.WebControls.CommandField" />
+
+        
+
+         object, set the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
 
         
 
@@ -451,13 +420,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Some data-bound controls (such as the <see
-           cref="T:System.Web.UI.WebControls.GridView" />
+          >Some data-bound controls (such as the <see cref="T:System.Web.UI.WebControls.GridView" />
 
           
 
-           control) can show or hide only the entire header section of the control. These data-bound controls do not support the <see
-           cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
+           control) can show or hide only the entire header section of the control. These data-bound controls do not support the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
 
           
 
@@ -465,8 +432,7 @@
         >
       </block>
       <para
-        >You also can customize the appearance of the <see
-         cref="T:System.Web.UI.WebControls.CommandField" />
+        >You also can customize the appearance of the <see cref="T:System.Web.UI.WebControls.CommandField" />
 
         
 
@@ -491,8 +457,7 @@
           </term>
           <description>
             <para
-              >The style settings for the child Web server controls of the <see
-               cref="T:System.Web.UI.WebControls.CommandField" />
+              >The style settings for the child Web server controls of the <see cref="T:System.Web.UI.WebControls.CommandField" />
 
               
 
@@ -508,8 +473,7 @@
           </term>
           <description>
             <para
-              >The style settings for the footer section of the <see
-               cref="T:System.Web.UI.WebControls.CommandField" />
+              >The style settings for the footer section of the <see cref="T:System.Web.UI.WebControls.CommandField" />
 
               
 
@@ -525,8 +489,7 @@
           </term>
           <description>
             <para
-              >The style settings for the header section of the <see
-               cref="T:System.Web.UI.WebControls.CommandField" />
+              >The style settings for the header section of the <see cref="T:System.Web.UI.WebControls.CommandField" />
 
               
 
@@ -542,8 +505,7 @@
           </term>
           <description>
             <para
-              >The style settings for the data items in the <see
-               cref="T:System.Web.UI.WebControls.CommandField" />
+              >The style settings for the data items in the <see cref="T:System.Web.UI.WebControls.CommandField" />
 
               
 
@@ -568,36 +530,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
              class. This constructor is commonly used when adding fields to a dynamically created data-bound control.</para
           >
           <para
-            >To dynamically add a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >To dynamically add a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             field to a data-bound control, create a new <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             field to a data-bound control, create a new <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             object, set its properties, and then add it to the data-bound control's field collection. For example, if you are using the <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             object, set its properties, and then add it to the data-bound control's field collection. For example, if you are using the <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
-             control, add the <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             control, add the <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             object to the <see
-             cref="P:System.Web.UI.WebControls.GridView.Columns" />
+             object to the <see cref="P:System.Web.UI.WebControls.GridView.Columns" />
 
             
 
@@ -610,8 +566,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -646,18 +601,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property of a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             field is set to ButtonType.Image, use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.CancelImageUrl" />
+             field is set to ButtonType.Image, use the <see cref="P:System.Web.UI.WebControls.CommandField.CancelImageUrl" />
 
             
 
@@ -665,13 +617,11 @@
           >
           <block subset="none" type="note">
             <para
-              >As an alternative to displaying an image for the Cancel button, you can display text by first setting the <see
-               cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+              >As an alternative to displaying an image for the Cancel button, you can display text by first setting the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
               
 
-               property to ButtonType.Button or ButtonType.Link and then setting the <see
-               cref="P:System.Web.UI.WebControls.CommandField.CancelText" />
+               property to ButtonType.Button or ButtonType.Link and then setting the <see cref="P:System.Web.UI.WebControls.CommandField.CancelText" />
 
               
 
@@ -682,8 +632,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the URL to an image to display for the Cancel button in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Gets or sets the URL to an image to display for the Cancel button in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -712,18 +661,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property of a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             field is set to ButtonType.Button or ButtonType.Link, use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.CancelText" />
+             field is set to ButtonType.Button or ButtonType.Link, use the <see cref="P:System.Web.UI.WebControls.CommandField.CancelText" />
 
             
 
@@ -731,13 +677,11 @@
           >
           <block subset="none" type="note">
             <para
-              >As an alternative to displaying text for a Cancel button, you can display an image by first setting the <see
-               cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+              >As an alternative to displaying text for a Cancel button, you can display an image by first setting the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
               
 
-               property to ButtonType.Image and then setting the <see
-               cref="P:System.Web.UI.WebControls.CommandField.CancelImageUrl" />
+               property to ButtonType.Image and then setting the <see cref="P:System.Web.UI.WebControls.CommandField.CancelImageUrl" />
 
               
 
@@ -745,13 +689,11 @@
             >
           </block>
           <para
-            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
@@ -765,8 +707,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the caption for the Cancel button displayed in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Gets or sets the caption for the Cancel button displayed in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -795,23 +736,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.CausesValidation" />
+            >Use the <see cref="P:System.Web.UI.WebControls.CommandField.CausesValidation" />
 
             
 
-             property to specify whether validation is performed when a button in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property to specify whether validation is performed when a button in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             field is clicked. When this property is set to true, by default all validation controls on the page are validated. To limit validation to only a certain group of validation controls, create a validation group and then set the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ValidationGroup" />
+             field is clicked. When this property is set to true, by default all validation controls on the page are validated. To limit validation to only a certain group of validation controls, create a validation group and then set the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ValidationGroup" />
 
             
 
-             property to the validation group's name. For more information on validation groups, see <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.ValidationGroup" />
+             property to the validation group's name. For more information on validation groups, see <see cref="P:System.Web.UI.WebControls.BaseValidator.ValidationGroup" />
 
             
 
@@ -821,8 +758,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether validation is performed when the user clicks a button in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Gets or sets a value indicating whether validation is performed when the user clicks a button in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -851,23 +787,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CommandField.CopyProperties(System.Web.UI.WebControls.DataControlField)" />
+            >The <see cref="M:System.Web.UI.WebControls.CommandField.CopyProperties(System.Web.UI.WebControls.DataControlField)" />
 
             
 
-             method is a helper method used by the <see
-             cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
+             method is a helper method used by the <see cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
 
             
 
-             method to copy the properties of the current <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             method to copy the properties of the current <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             object to the <see
-             cref="T:System.Web.UI.WebControls.DataControlField" />
+             object to the <see cref="T:System.Web.UI.WebControls.DataControlField" />
 
             
 
@@ -877,13 +809,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the properties of the current <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Copies the properties of the current <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             object to the specified <see
-             cref="T:System.Web.UI.WebControls.DataControlField" />
+             object to the specified <see cref="T:System.Web.UI.WebControls.DataControlField" />
 
             
 
@@ -891,17 +821,19 @@
           >
         </summary>
         <param name="newField">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.DataControlField" />
+          The <see cref="T:System.Web.UI.WebControls.DataControlField" />
 
           
 
-           to copy the properties of the current <see
-           cref="T:System.Web.UI.WebControls.CommandField" />
+           to copy the properties of the current <see cref="T:System.Web.UI.WebControls.CommandField" />
 
           
 
@@ -927,23 +859,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CommandField.CreateField" />
+            >The <see cref="M:System.Web.UI.WebControls.CommandField.CreateField" />
 
             
 
-             method is a helper method used by the <see
-             cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
+             method is a helper method used by the <see cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
 
             
 
-             method to create an empty <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             method to create an empty <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             object to copy the properties of the current <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             object to copy the properties of the current <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -953,8 +881,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an empty <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Creates an empty <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -964,8 +891,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An empty <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >An empty <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -1000,18 +926,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property of a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             field is set to ButtonType.Image, use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.DeleteImageUrl" />
+             field is set to ButtonType.Image, use the <see cref="P:System.Web.UI.WebControls.CommandField.DeleteImageUrl" />
 
             
 
@@ -1019,13 +942,11 @@
           >
           <block subset="none" type="note">
             <para
-              >As an alternative to displaying an image for a Delete button, you can display text by first setting the <see
-               cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+              >As an alternative to displaying an image for a Delete button, you can display text by first setting the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
               
 
-               property to ButtonType.Button or ButtonType.Link and then setting the <see
-               cref="P:System.Web.UI.WebControls.CommandField.DeleteText" />
+               property to ButtonType.Button or ButtonType.Link and then setting the <see cref="P:System.Web.UI.WebControls.CommandField.DeleteText" />
 
               
 
@@ -1036,8 +957,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the URL to an image to display for a Delete button in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Gets or sets the URL to an image to display for a Delete button in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -1066,18 +986,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property of a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             field is set to ButtonType.Button or ButtonType.Link, use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.DeleteText" />
+             field is set to ButtonType.Button or ButtonType.Link, use the <see cref="P:System.Web.UI.WebControls.CommandField.DeleteText" />
 
             
 
@@ -1085,13 +1002,11 @@
           >
           <block subset="none" type="note">
             <para
-              >As an alternative to displaying text for a Delete button, you can display an image by first setting the <see
-               cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+              >As an alternative to displaying text for a Delete button, you can display an image by first setting the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
               
 
-               property to ButtonType.Image and then setting the <see
-               cref="P:System.Web.UI.WebControls.CommandField.DeleteImageUrl" />
+               property to ButtonType.Image and then setting the <see cref="P:System.Web.UI.WebControls.CommandField.DeleteImageUrl" />
 
               
 
@@ -1099,13 +1014,11 @@
             >
           </block>
           <para
-            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
@@ -1119,8 +1032,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the caption for a Delete button in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Gets or sets the caption for a Delete button in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -1155,18 +1067,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property of a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             field is set to ButtonType.Image, use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.EditImageUrl" />
+             field is set to ButtonType.Image, use the <see cref="P:System.Web.UI.WebControls.CommandField.EditImageUrl" />
 
             
 
@@ -1174,13 +1083,11 @@
           >
           <block subset="none" type="note">
             <para
-              >As an alternative to displaying an image for an Edit button, you can display text by first setting the <see
-               cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+              >As an alternative to displaying an image for an Edit button, you can display text by first setting the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
               
 
-               property to ButtonType.Button or ButtonType.Link and then setting the <see
-               cref="P:System.Web.UI.WebControls.CommandField.EditText" />
+               property to ButtonType.Button or ButtonType.Link and then setting the <see cref="P:System.Web.UI.WebControls.CommandField.EditText" />
 
               
 
@@ -1191,8 +1098,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the URL to an image to display for an Edit button in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Gets or sets the URL to an image to display for an Edit button in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -1221,18 +1127,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property of a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             object is set to ButtonType.Button or ButtonType.Link, use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.EditText" />
+             object is set to ButtonType.Button or ButtonType.Link, use the <see cref="P:System.Web.UI.WebControls.CommandField.EditText" />
 
             
 
@@ -1240,13 +1143,11 @@
           >
           <block subset="none" type="note">
             <para
-              >As an alternative to displaying text for an Edit button, you can display an image by first setting the <see
-               cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+              >As an alternative to displaying text for an Edit button, you can display an image by first setting the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
               
 
-               property to ButtonType.Image and then setting the <see
-               cref="P:System.Web.UI.WebControls.CommandField.EditImageUrl" />
+               property to ButtonType.Image and then setting the <see cref="P:System.Web.UI.WebControls.CommandField.EditImageUrl" />
 
               
 
@@ -1254,13 +1155,11 @@
             >
           </block>
           <para
-            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
@@ -1274,8 +1173,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the caption for an Edit button in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Gets or sets the caption for an Edit button in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -1307,46 +1205,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CommandField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" />
+            >The <see cref="M:System.Web.UI.WebControls.CommandField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" />
 
             
 
-             method is implemented by <see
-             cref="T:System.Web.UI.WebControls.DataControlField" />
+             method is implemented by <see cref="T:System.Web.UI.WebControls.DataControlField" />
 
             
 
-            -derived types to add text and controls to a <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            -derived types to add text and controls to a <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             object of a data control that uses tables to display a user interface (UI). These data controls create the complete table structure row-by-row when the control's CreateChildControls method is called. The <see
-             cref="M:System.Web.UI.WebControls.CommandField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" />
+             object of a data control that uses tables to display a user interface (UI). These data controls create the complete table structure row-by-row when the control's CreateChildControls method is called. The <see cref="M:System.Web.UI.WebControls.CommandField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" />
 
             
 
-             method is called by the InitializeRow method of data controls such as <see
-             cref="T:System.Web.UI.WebControls.DetailsView" />
+             method is called by the InitializeRow method of data controls such as <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
             
 
-             and <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             and <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
             .</para
           >
           <para
-            >Call this method when you are writing a custom data-bound control that uses <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Call this method when you are writing a custom data-bound control that uses <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             objects to initialize the cells of the table structure with data or controls. Implement this method when you are writing a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             objects to initialize the cells of the table structure with data or controls. Implement this method when you are writing a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -1356,8 +1246,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the specified <see
-             cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+            >Initializes the specified <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
 
             
 
@@ -1365,43 +1254,56 @@
           >
         </summary>
         <param name="cell">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+          The <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
 
           
 
            to initialize.</param
         >
         <param name="cellType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.DataControlCellType" />
+          One of the <see cref="T:System.Web.UI.WebControls.DataControlCellType" />
 
           
 
            values.</param
         >
         <param name="rowState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.DataControlRowState" />
+          One of the <see cref="T:System.Web.UI.WebControls.DataControlRowState" />
 
           
 
            values.</param
         >
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1435,18 +1337,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property of a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             field is set to ButtonType.Image, use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.InsertImageUrl" />
+             field is set to ButtonType.Image, use the <see cref="P:System.Web.UI.WebControls.CommandField.InsertImageUrl" />
 
             
 
@@ -1454,13 +1353,11 @@
           >
           <block subset="none" type="note">
             <para
-              >As an alternative to displaying an image for the Insert button, you can display text by first setting the <see
-               cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+              >As an alternative to displaying an image for the Insert button, you can display text by first setting the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
               
 
-               property to ButtonType.Button or ButtonType.Link and then setting the <see
-               cref="P:System.Web.UI.WebControls.CommandField.InsertText" />
+               property to ButtonType.Button or ButtonType.Link and then setting the <see cref="P:System.Web.UI.WebControls.CommandField.InsertText" />
 
               
 
@@ -1471,8 +1368,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the URL to an image to display for the Insert button in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Gets or sets the URL to an image to display for the Insert button in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -1501,18 +1397,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property of a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             field is set to ButtonType.Button or ButtonType.Link, use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.InsertText" />
+             field is set to ButtonType.Button or ButtonType.Link, use the <see cref="P:System.Web.UI.WebControls.CommandField.InsertText" />
 
             
 
@@ -1520,13 +1413,11 @@
           >
           <block subset="none" type="note">
             <para
-              >As an alternative to displaying text for the Insert button, you can display an image by first setting the <see
-               cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+              >As an alternative to displaying text for the Insert button, you can display an image by first setting the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
               
 
-               property to ButtonType.Image and then setting the <see
-               cref="P:System.Web.UI.WebControls.CommandField.InsertImageUrl" />
+               property to ButtonType.Image and then setting the <see cref="P:System.Web.UI.WebControls.CommandField.InsertImageUrl" />
 
               
 
@@ -1534,13 +1425,11 @@
             >
           </block>
           <para
-            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
@@ -1554,8 +1443,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the caption for the Insert button in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Gets or sets the caption for the Insert button in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -1590,18 +1478,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property of a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             field is set to ButtonType.Image, use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.NewImageUrl" />
+             field is set to ButtonType.Image, use the <see cref="P:System.Web.UI.WebControls.CommandField.NewImageUrl" />
 
             
 
@@ -1609,13 +1494,11 @@
           >
           <block subset="none" type="note">
             <para
-              >As an alternative to displaying an image for the New button, you can display text by first setting the <see
-               cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+              >As an alternative to displaying an image for the New button, you can display text by first setting the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
               
 
-               property to ButtonType.Button or ButtonType.Link and then setting the <see
-               cref="P:System.Web.UI.WebControls.CommandField.NewText" />
+               property to ButtonType.Button or ButtonType.Link and then setting the <see cref="P:System.Web.UI.WebControls.CommandField.NewText" />
 
               
 
@@ -1626,8 +1509,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the URL to an image to display for the New button in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Gets or sets the URL to an image to display for the New button in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -1656,18 +1538,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property of a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             object is set to ButtonType.Button or ButtonType.Link, use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.NewText" />
+             object is set to ButtonType.Button or ButtonType.Link, use the <see cref="P:System.Web.UI.WebControls.CommandField.NewText" />
 
             
 
@@ -1675,13 +1554,11 @@
           >
           <block subset="none" type="note">
             <para
-              >As an alternative to displaying text for the New button, you can display an image by first setting the <see
-               cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+              >As an alternative to displaying text for the New button, you can display an image by first setting the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
               
 
-               property to ButtonType.Image and then setting the <see
-               cref="P:System.Web.UI.WebControls.CommandField.NewImageUrl" />
+               property to ButtonType.Image and then setting the <see cref="P:System.Web.UI.WebControls.CommandField.NewImageUrl" />
 
               
 
@@ -1689,13 +1566,11 @@
             >
           </block>
           <para
-            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
@@ -1709,8 +1584,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the caption for the New button in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Gets or sets the caption for the New button in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -1745,18 +1619,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property of a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             field is set to ButtonType.Image, use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.SelectImageUrl" />
+             field is set to ButtonType.Image, use the <see cref="P:System.Web.UI.WebControls.CommandField.SelectImageUrl" />
 
             
 
@@ -1764,13 +1635,11 @@
           >
           <block subset="none" type="note">
             <para
-              >As an alternative to displaying an image for a Select button, you can display text by first setting the <see
-               cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+              >As an alternative to displaying an image for a Select button, you can display text by first setting the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
               
 
-               property to ButtonType.Button or ButtonType.Link and then setting the <see
-               cref="P:System.Web.UI.WebControls.CommandField.SelectText" />
+               property to ButtonType.Button or ButtonType.Link and then setting the <see cref="P:System.Web.UI.WebControls.CommandField.SelectText" />
 
               
 
@@ -1781,8 +1650,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the URL to an image to display for a Select button in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Gets or sets the URL to an image to display for a Select button in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -1811,18 +1679,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property of a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             field is set to ButtonType.Button or ButtonType.Link, use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.SelectText" />
+             field is set to ButtonType.Button or ButtonType.Link, use the <see cref="P:System.Web.UI.WebControls.CommandField.SelectText" />
 
             
 
@@ -1830,13 +1695,11 @@
           >
           <block subset="none" type="note">
             <para
-              >As an alternative to displaying text for a Select button, you can display an image by first setting the <see
-               cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+              >As an alternative to displaying text for a Select button, you can display an image by first setting the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
               
 
-               property to ButtonType.Image and then setting the <see
-               cref="P:System.Web.UI.WebControls.CommandField.SelectImageUrl" />
+               property to ButtonType.Image and then setting the <see cref="P:System.Web.UI.WebControls.CommandField.SelectImageUrl" />
 
               
 
@@ -1844,13 +1707,11 @@
             >
           </block>
           <para
-            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
@@ -1864,8 +1725,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the caption for a Select button in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Gets or sets the caption for a Select button in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -1894,46 +1754,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.ShowCancelButton" />
+            >Use the <see cref="P:System.Web.UI.WebControls.CommandField.ShowCancelButton" />
 
             
 
-             property to specify whether the Cancel button is displayed in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property to specify whether the Cancel button is displayed in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             object. A Cancel button can be displayed in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             object. A Cancel button can be displayed in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
              field when the corresponding record in a data-bound control is in edit or insert mode. The Cancel button allows the user to cancel the edit or insert operation and returns the record to its normal display mode. </para
           >
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property of a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             field is set to ButtonType.Button or ButtonType.Link, use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.CancelText" />
+             field is set to ButtonType.Button or ButtonType.Link, use the <see cref="P:System.Web.UI.WebControls.CommandField.CancelText" />
 
             
 
-             property to specify the text to display for a Cancel button. Alternatively, you can display an image by first setting the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+             property to specify the text to display for a Cancel button. Alternatively, you can display an image by first setting the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property to ButtonType.Image and then setting the <see
-             cref="P:System.Web.UI.WebControls.CommandField.CancelImageUrl" />
+             property to ButtonType.Image and then setting the <see cref="P:System.Web.UI.WebControls.CommandField.CancelImageUrl" />
 
             
 
@@ -1943,8 +1795,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether a Cancel button is displayed in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Gets or sets a value indicating whether a Cancel button is displayed in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -1973,13 +1824,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.ShowDeleteButton" />
+            >Use the <see cref="P:System.Web.UI.WebControls.CommandField.ShowDeleteButton" />
 
             
 
-             property to specify whether a Delete button is displayed in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property to specify whether a Delete button is displayed in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -1987,8 +1836,7 @@
           >
           <block subset="none" type="note">
             <para
-              >When a data-bound control is used in combination with a data source control (such as a <see
-               cref="T:System.Web.UI.WebControls.SqlDataSource" />
+              >When a data-bound control is used in combination with a data source control (such as a <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
               
 
@@ -1996,28 +1844,23 @@
             >
           </block>
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property of a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             field is set to ButtonType.Button or ButtonType.Link, use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.DeleteText" />
+             field is set to ButtonType.Button or ButtonType.Link, use the <see cref="P:System.Web.UI.WebControls.CommandField.DeleteText" />
 
             
 
-             property to specify the text to display for a Delete button. Alternatively, you can display an image by first setting the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+             property to specify the text to display for a Delete button. Alternatively, you can display an image by first setting the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property to ButtonType.Image and then setting the <see
-             cref="P:System.Web.UI.WebControls.CommandField.DeleteImageUrl" />
+             property to ButtonType.Image and then setting the <see cref="P:System.Web.UI.WebControls.CommandField.DeleteImageUrl" />
 
             
 
@@ -2027,8 +1870,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether a Delete button is displayed in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Gets or sets a value indicating whether a Delete button is displayed in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -2057,13 +1899,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.ShowEditButton" />
+            >Use the <see cref="P:System.Web.UI.WebControls.CommandField.ShowEditButton" />
 
             
 
-             property to specify whether an Edit button is displayed in the <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property to specify whether an Edit button is displayed in the <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -2072,8 +1912,7 @@
           <para>When the user clicks an Edit button, input controls are displayed for each field in the record. The Edit button for the record is replaced with an Update button and a Cancel button, and all other command buttons for the record are hidden. Clicking the Update button updates the record with the new values in the data source, whereas clicking the Cancel button cancels the operation.</para>
           <block subset="none" type="note">
             <para
-              >When a data-bound control is used in combination with a data source control (such as a <see
-               cref="T:System.Web.UI.WebControls.SqlDataSource" />
+              >When a data-bound control is used in combination with a data source control (such as a <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
               
 
@@ -2081,28 +1920,23 @@
             >
           </block>
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property of a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             field is set to ButtonType.Button or ButtonType.Link, use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.EditText" />
+             field is set to ButtonType.Button or ButtonType.Link, use the <see cref="P:System.Web.UI.WebControls.CommandField.EditText" />
 
             
 
-             property to specify the text to display for an Edit button. Alternatively, you can display an image by first setting the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+             property to specify the text to display for an Edit button. Alternatively, you can display an image by first setting the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property to ButtonType.Image and then setting the <see
-             cref="P:System.Web.UI.WebControls.CommandField.EditImageUrl" />
+             property to ButtonType.Image and then setting the <see cref="P:System.Web.UI.WebControls.CommandField.EditImageUrl" />
 
             
 
@@ -2112,8 +1946,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether an Edit button is displayed in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Gets or sets a value indicating whether an Edit button is displayed in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -2142,18 +1975,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.ShowInsertButton" />
+            >Use the <see cref="P:System.Web.UI.WebControls.CommandField.ShowInsertButton" />
 
             
 
-             property to specify whether a New button is displayed in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property to specify whether a New button is displayed in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             field. The New button is displayed only once in the <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             field. The New button is displayed only once in the <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -2161,8 +1991,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This property applies only to data-bound controls that support insert operations, such as the <see
-               cref="T:System.Web.UI.WebControls.DetailsView" />
+              >This property applies only to data-bound controls that support insert operations, such as the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
               
 
@@ -2170,8 +1999,7 @@
             >
           </block>
           <para
-            >When the user clicks the New button, input controls are displayed for each field displayed in the data-bound control, allowing the user to enter the values for the new record. The New button is replaced with an Insert button and a Cancel button, and all other command buttons in the <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >When the user clicks the New button, input controls are displayed for each field displayed in the data-bound control, allowing the user to enter the values for the new record. The New button is replaced with an Insert button and a Cancel button, and all other command buttons in the <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -2179,8 +2007,7 @@
           >
           <block subset="none" type="note">
             <para
-              >When a data-bound control is used in combination with a data source control (such as a <see
-               cref="T:System.Web.UI.WebControls.SqlDataSource" />
+              >When a data-bound control is used in combination with a data source control (such as a <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
               
 
@@ -2188,28 +2015,23 @@
             >
           </block>
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property of a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             field is set to ButtonType.Button or ButtonType.Link, use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.NewText" />
+             field is set to ButtonType.Button or ButtonType.Link, use the <see cref="P:System.Web.UI.WebControls.CommandField.NewText" />
 
             
 
-             property to specify the text to display for a New button. Alternatively, you can display an image by first setting the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+             property to specify the text to display for a New button. Alternatively, you can display an image by first setting the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property to ButtonType.Image and then setting the <see
-             cref="P:System.Web.UI.WebControls.CommandField.NewImageUrl" />
+             property to ButtonType.Image and then setting the <see cref="P:System.Web.UI.WebControls.CommandField.NewImageUrl" />
 
             
 
@@ -2219,8 +2041,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether a New button is displayed in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Gets or sets a value indicating whether a New button is displayed in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -2249,81 +2070,66 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.ShowSelectButton" />
+            >Use the <see cref="P:System.Web.UI.WebControls.CommandField.ShowSelectButton" />
 
             
 
-             property to specify whether a Select button is displayed in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property to specify whether a Select button is displayed in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             field for each record in the data-source control. The Select button allows the user to select a row in the data-source control. When the Select button for a record is clicked, the data-source control responds accordingly. For example, a <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             field for each record in the data-source control. The Select button allows the user to select a row in the data-source control. When the Select button for a record is clicked, the data-source control responds accordingly. For example, a <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
-             control updates the <see
-             cref="P:System.Web.UI.WebControls.GridView.SelectedDataKey" />
+             control updates the <see cref="P:System.Web.UI.WebControls.GridView.SelectedDataKey" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.WebControls.GridView.SelectedIndex" />
+            , <see cref="P:System.Web.UI.WebControls.GridView.SelectedIndex" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.WebControls.GridView.SelectedRow" />
+            , <see cref="P:System.Web.UI.WebControls.GridView.SelectedRow" />
 
             
 
-            , and <see
-             cref="P:System.Web.UI.WebControls.GridView.SelectedValue" />
+            , and <see cref="P:System.Web.UI.WebControls.GridView.SelectedValue" />
 
             
 
-             properties to values corresponding to the selected row. The <see
-             cref="P:System.Web.UI.WebControls.GridView.SelectedRowStyle" />
+             properties to values corresponding to the selected row. The <see cref="P:System.Web.UI.WebControls.GridView.SelectedRowStyle" />
 
             
 
-             style is then applied to the selected row and the <see
-             cref="E:System.Web.UI.WebControls.GridView.SelectedIndexChanged" />
+             style is then applied to the selected row and the <see cref="E:System.Web.UI.WebControls.GridView.SelectedIndexChanged" />
 
             
 
-             and <see
-             cref="E:System.Web.UI.WebControls.GridView.SelectedIndexChanging" />
+             and <see cref="E:System.Web.UI.WebControls.GridView.SelectedIndexChanging" />
 
             
 
              events are raised.</para
           >
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property of a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             field is set to ButtonType.Button or ButtonType.Link, use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.SelectText" />
+             field is set to ButtonType.Button or ButtonType.Link, use the <see cref="P:System.Web.UI.WebControls.CommandField.SelectText" />
 
             
 
-             property to specify the text to display for a Select button. Alternatively, you can display an image by first setting the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+             property to specify the text to display for a Select button. Alternatively, you can display an image by first setting the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property to ButtonType.Image and then setting the <see
-             cref="P:System.Web.UI.WebControls.CommandField.SelectImageUrl" />
+             property to ButtonType.Image and then setting the <see cref="P:System.Web.UI.WebControls.CommandField.SelectImageUrl" />
 
             
 
@@ -2333,8 +2139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether a Select button is displayed in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Gets or sets a value indicating whether a Select button is displayed in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -2369,18 +2174,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property of a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             field is set to ButtonType.Image, use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.UpdateImageUrl" />
+             field is set to ButtonType.Image, use the <see cref="P:System.Web.UI.WebControls.CommandField.UpdateImageUrl" />
 
             
 
@@ -2388,13 +2190,11 @@
           >
           <block subset="none" type="note">
             <para
-              >As an alternative to displaying an image for an Update button, you can display text by first setting the <see
-               cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+              >As an alternative to displaying an image for an Update button, you can display text by first setting the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
               
 
-               property to ButtonType.Button or ButtonType.Link and then setting the <see
-               cref="P:System.Web.UI.WebControls.CommandField.UpdateText" />
+               property to ButtonType.Button or ButtonType.Link and then setting the <see cref="P:System.Web.UI.WebControls.CommandField.UpdateText" />
 
               
 
@@ -2405,8 +2205,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the URL to an image to display for an Update button in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Gets or sets the URL to an image to display for an Update button in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -2435,18 +2234,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             property of a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             field is set to ButtonType.Button or ButtonType.Link, use the <see
-             cref="P:System.Web.UI.WebControls.CommandField.UpdateText" />
+             field is set to ButtonType.Button or ButtonType.Link, use the <see cref="P:System.Web.UI.WebControls.CommandField.UpdateText" />
 
             
 
@@ -2454,13 +2250,11 @@
           >
           <block subset="none" type="note">
             <para
-              >As an alternative to displaying text for an Update button, you can display an image by first setting the <see
-               cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+              >As an alternative to displaying text for an Update button, you can display an image by first setting the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
               
 
-               property to ButtonType.Image and then setting the <see
-               cref="P:System.Web.UI.WebControls.CommandField.UpdateImageUrl" />
+               property to ButtonType.Image and then setting the <see cref="P:System.Web.UI.WebControls.CommandField.UpdateImageUrl" />
 
               
 
@@ -2468,13 +2262,11 @@
             >
           </block>
           <para
-            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
@@ -2488,8 +2280,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the caption for an Update button in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Gets or sets the caption for an Update button in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
@@ -2513,23 +2304,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CommandField.ValidateSupportsCallback" />
+            >The <see cref="M:System.Web.UI.WebControls.CommandField.ValidateSupportsCallback" />
 
             
 
-             method is a helper method used to determine whether the controls contained in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             method is a helper method used to determine whether the controls contained in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             object support callbacks. The <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+             object support callbacks. The <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 
-             class does not support callbacks when the Select button is displayed. This method has been implemented to throw a <see
-             cref="T:System.NotSupportedException" />
+             class does not support callbacks when the Select button is displayed. This method has been implemented to throw a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -2542,8 +2329,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the controls contained in a <see
-             cref="T:System.Web.UI.WebControls.CommandField" />
+            >Determines whether the controls contained in a <see cref="T:System.Web.UI.WebControls.CommandField" />
 
             
 

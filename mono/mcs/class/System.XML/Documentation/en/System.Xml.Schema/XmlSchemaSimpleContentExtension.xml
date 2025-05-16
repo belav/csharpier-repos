@@ -29,8 +29,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the extension element for simple content from XML Schema as specified by the <format
-         type="text/html">
+        >Represents the extension element for simple content from XML Schema as specified by the <format type="text/html">
           <a href="">World Wide Web Consortium (W3C)</a>
         </format>
 
@@ -60,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Schema.XmlSchemaSimpleContentExtension" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaSimpleContentExtension" />
 
             
 
@@ -135,13 +133,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of <see
-             cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+            >Gets the collection of <see cref="T:System.Xml.Schema.XmlSchemaAttribute" />
 
             
 
-             and <see
-             cref="T:System.Xml.Schema.XmlSchemaAttributeGroupRef" />
+             and <see cref="T:System.Xml.Schema.XmlSchemaAttributeGroupRef" />
 
             
 

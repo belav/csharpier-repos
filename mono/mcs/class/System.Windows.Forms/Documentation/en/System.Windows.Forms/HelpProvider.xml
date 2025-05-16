@@ -38,64 +38,53 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each instance of <see
-         cref="T:System.Windows.Forms.HelpProvider" />
+        >Each instance of <see cref="T:System.Windows.Forms.HelpProvider" />
 
         
 
-         maintains a collection of references to controls associated with it. To associate a Help file with the <see
-         cref="T:System.Windows.Forms.HelpProvider" />
+         maintains a collection of references to controls associated with it. To associate a Help file with the <see cref="T:System.Windows.Forms.HelpProvider" />
 
         
 
-        , set the <see
-         cref="P:System.Windows.Forms.HelpProvider.HelpNamespace" />
+        , set the <see cref="P:System.Windows.Forms.HelpProvider.HelpNamespace" />
 
         
 
-         property. You specify the type of Help provided by calling the <see
-         cref="M:System.Windows.Forms.HelpProvider.SetHelpNavigator(System.Windows.Forms.Control,System.Windows.Forms.HelpNavigator)" />
+         property. You specify the type of Help provided by calling the <see cref="M:System.Windows.Forms.HelpProvider.SetHelpNavigator(System.Windows.Forms.Control,System.Windows.Forms.HelpNavigator)" />
 
         
 
-         method and providing a <see
-         cref="T:System.Windows.Forms.HelpNavigator" />
+         method and providing a <see cref="T:System.Windows.Forms.HelpNavigator" />
 
         
 
-         value for the specified control. You provide the keyword or topic for the Help by calling the <see
-         cref="M:System.Windows.Forms.HelpProvider.SetHelpKeyword(System.Windows.Forms.Control,System.String)" />
+         value for the specified control. You provide the keyword or topic for the Help by calling the <see cref="M:System.Windows.Forms.HelpProvider.SetHelpKeyword(System.Windows.Forms.Control,System.String)" />
 
         
 
          method. To open Help to a specific topic, the keyword should be passed in the form topicName.htm.</para
       >
       <para
-        >To associate a specific Help string with a control, use the <see
-         cref="M:System.Windows.Forms.HelpProvider.SetHelpString(System.Windows.Forms.Control,System.String)" />
+        >To associate a specific Help string with a control, use the <see cref="M:System.Windows.Forms.HelpProvider.SetHelpString(System.Windows.Forms.Control,System.String)" />
 
         
 
          method. The string that you associate with a control using this method is displayed in a pop-up window when the user presses the F1 key while the control has focus.</para
       >
       <para
-        >If the <see
-         cref="P:System.Windows.Forms.HelpProvider.HelpNamespace" />
+        >If the <see cref="P:System.Windows.Forms.HelpProvider.HelpNamespace" />
 
         
 
-         property has not been set, you must use the <see
-         cref="M:System.Windows.Forms.HelpProvider.SetHelpString(System.Windows.Forms.Control,System.String)" />
+         property has not been set, you must use the <see cref="M:System.Windows.Forms.HelpProvider.SetHelpString(System.Windows.Forms.Control,System.String)" />
 
         
 
-         method to provide the Help text. If you have set both <see
-         cref="P:System.Windows.Forms.HelpProvider.HelpNamespace" />
+         method to provide the Help text. If you have set both <see cref="P:System.Windows.Forms.HelpProvider.HelpNamespace" />
 
         
 
-         and the Help string, Help based on the <see
-         cref="P:System.Windows.Forms.HelpProvider.HelpNamespace" />
+         and the Help string, Help based on the <see cref="P:System.Windows.Forms.HelpProvider.HelpNamespace" />
 
         
 
@@ -106,8 +95,7 @@
 
         
 
-         calls methods on the <see
-         cref="T:System.Windows.Forms.Help" />
+         calls methods on the <see cref="T:System.Windows.Forms.Help" />
 
         
 
@@ -128,23 +116,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Once you have created an instance of the <see
-             cref="T:System.Windows.Forms.HelpProvider" />
+            >Once you have created an instance of the <see cref="T:System.Windows.Forms.HelpProvider" />
 
             
 
-             class, use the <see
-             cref="P:System.Windows.Forms.HelpProvider.HelpNamespace" />
+             class, use the <see cref="P:System.Windows.Forms.HelpProvider.HelpNamespace" />
 
             
 
-             property, <see
-             cref="M:System.Windows.Forms.HelpProvider.SetHelpKeyword(System.Windows.Forms.Control,System.String)" />
+             property, <see cref="M:System.Windows.Forms.HelpProvider.SetHelpKeyword(System.Windows.Forms.Control,System.String)" />
 
             
 
-             method, and <see
-             cref="M:System.Windows.Forms.HelpProvider.SetHelpNavigator(System.Windows.Forms.Control,System.Windows.Forms.HelpNavigator)" />
+             method, and <see cref="M:System.Windows.Forms.HelpProvider.SetHelpNavigator(System.Windows.Forms.Control,System.Windows.Forms.HelpNavigator)" />
 
             
 
@@ -154,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.HelpProvider" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.HelpProvider" />
 
             
 
@@ -188,7 +171,11 @@
           <para>true if this object can provide its extender properties; otherwise, false.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -221,8 +208,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Help keyword associated with this control, or null if the <see
-             cref="T:System.Windows.Forms.HelpProvider" />
+            >The Help keyword associated with this control, or null if the <see cref="T:System.Windows.Forms.HelpProvider" />
 
             
 
@@ -230,12 +216,15 @@
           >
         </returns>
         <param name="ctl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Control" />
+          A <see cref="T:System.Windows.Forms.Control" />
 
           
 
@@ -272,8 +261,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the current <see
-             cref="T:System.Windows.Forms.HelpNavigator" />
+            >Returns the current <see cref="T:System.Windows.Forms.HelpNavigator" />
 
             
 
@@ -283,13 +271,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.HelpNavigator" />
+            >The <see cref="T:System.Windows.Forms.HelpNavigator" />
 
             
 
-             setting for the specified control. The default is <see
-             cref="F:System.Windows.Forms.HelpNavigator.AssociateIndex" />
+             setting for the specified control. The default is <see cref="F:System.Windows.Forms.HelpNavigator.AssociateIndex" />
 
             
 
@@ -297,12 +283,15 @@
           >
         </returns>
         <param name="ctl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Control" />
+          A <see cref="T:System.Windows.Forms.Control" />
 
           
 
@@ -348,12 +337,15 @@
           <para>The Help string associated with this control. The default is null.</para>
         </returns>
         <param name="ctl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Control" />
+          A <see cref="T:System.Windows.Forms.Control" />
 
           
 
@@ -389,18 +381,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you use the <see
-             cref="M:System.Windows.Forms.HelpProvider.SetHelpKeyword(System.Windows.Forms.Control,System.String)" />
+            >When you use the <see cref="M:System.Windows.Forms.HelpProvider.SetHelpKeyword(System.Windows.Forms.Control,System.String)" />
 
             
 
-             or <see
-             cref="M:System.Windows.Forms.HelpProvider.SetHelpString(System.Windows.Forms.Control,System.String)" />
+             or <see cref="M:System.Windows.Forms.HelpProvider.SetHelpString(System.Windows.Forms.Control,System.String)" />
 
             
 
-             method to associate a keyword or prompt with a specified control, calling this method automatically returns true. You can override this behavior by passing false to the <see
-             cref="M:System.Windows.Forms.HelpProvider.SetShowHelp(System.Windows.Forms.Control,System.Boolean)" />
+             method to associate a keyword or prompt with a specified control, calling this method automatically returns true. You can override this behavior by passing false to the <see cref="M:System.Windows.Forms.HelpProvider.SetShowHelp(System.Windows.Forms.Control,System.Boolean)" />
 
             
 
@@ -416,12 +405,15 @@
           <para>true if Help will be displayed for the control; otherwise, false.</para>
         </returns>
         <param name="ctl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Control" />
+          A <see cref="T:System.Windows.Forms.Control" />
 
           
 
@@ -464,8 +456,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value specifying the name of the Help file associated with this <see
-             cref="T:System.Windows.Forms.HelpProvider" />
+            >Gets or sets a value specifying the name of the Help file associated with this <see cref="T:System.Windows.Forms.HelpProvider" />
 
             
 
@@ -500,7 +491,11 @@
           <para>Removes the Help associated with the specified control.</para>
         </summary>
         <param name="ctl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -529,18 +524,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Help keyword provides the key information to retrieve the Help associated with this control from the Help file specified by the <see
-             cref="P:System.Windows.Forms.HelpProvider.HelpNamespace" />
+            >The Help keyword provides the key information to retrieve the Help associated with this control from the Help file specified by the <see cref="P:System.Windows.Forms.HelpProvider.HelpNamespace" />
 
             
 
-             property. To open Help to a specific topic, the keyword should be passed in the form topicName.htm. To clear the keyword, call the <see
-             cref="M:System.Windows.Forms.HelpProvider.SetHelpKeyword(System.Windows.Forms.Control,System.String)" />
+             property. To open Help to a specific topic, the keyword should be passed in the form topicName.htm. To clear the keyword, call the <see cref="M:System.Windows.Forms.HelpProvider.SetHelpKeyword(System.Windows.Forms.Control,System.String)" />
 
             
 
-             method with a <paramref
-             name="keyword" />
+             method with a <paramref name="keyword" />
 
             
 
@@ -552,19 +544,26 @@
           <para>Specifies the keyword used to retrieve Help when the user invokes Help for the specified control.</para>
         </summary>
         <param name="ctl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Control" />
+          A <see cref="T:System.Windows.Forms.Control" />
 
           
 
            that specifies the control for which to set the Help topic. </param
         >
         <param name="keyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -596,24 +595,30 @@
           <para>Specifies the Help command to use when retrieving Help from the Help file for the specified control.</para>
         </summary>
         <param name="ctl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Control" />
+          A <see cref="T:System.Windows.Forms.Control" />
 
           
 
            for which to set the Help keyword. </param
         >
         <param name="navigator">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.HelpNavigator" />
+          One of the <see cref="T:System.Windows.Forms.HelpNavigator" />
 
           
 
@@ -642,8 +647,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Help string that you specify in the <paramref
-             name="helpString" />
+            >The Help string that you specify in the <paramref name="helpString" />
 
             
 
@@ -655,19 +659,26 @@
           <para>Specifies the Help string associated with the specified control.</para>
         </summary>
         <param name="ctl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Control" />
+          A <see cref="T:System.Windows.Forms.Control" />
 
           
 
            with which to associate the Help string. </param
         >
         <param name="helpString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -696,33 +707,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you previously called the <see
-             cref="M:System.Windows.Forms.HelpProvider.SetHelpString(System.Windows.Forms.Control,System.String)" />
+            >If you previously called the <see cref="M:System.Windows.Forms.HelpProvider.SetHelpString(System.Windows.Forms.Control,System.String)" />
 
             
 
-             or <see
-             cref="M:System.Windows.Forms.HelpProvider.SetHelpKeyword(System.Windows.Forms.Control,System.String)" />
+             or <see cref="M:System.Windows.Forms.HelpProvider.SetHelpKeyword(System.Windows.Forms.Control,System.String)" />
 
             
 
-             for the control specified in the <paramref
-             name="ctl" />
+             for the control specified in the <paramref name="ctl" />
 
             
 
-             parameter, the <see
-             cref="T:System.Windows.Forms.HelpProvider" />
+             parameter, the <see cref="T:System.Windows.Forms.HelpProvider" />
 
             
 
-             automatically displays Help for that control. To modify this behavior, call the <see
-             cref="M:System.Windows.Forms.HelpProvider.SetShowHelp(System.Windows.Forms.Control,System.Boolean)" />
+             automatically displays Help for that control. To modify this behavior, call the <see cref="M:System.Windows.Forms.HelpProvider.SetShowHelp(System.Windows.Forms.Control,System.Boolean)" />
 
             
 
-             method, specifying false in the <paramref
-             name="value" />
+             method, specifying false in the <paramref name="value" />
 
             
 
@@ -734,19 +739,26 @@
           <para>Specifies whether Help is displayed for the specified control.</para>
         </summary>
         <param name="ctl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Control" />
+          A <see cref="T:System.Windows.Forms.Control" />
 
           
 
            for which Help is turned on or off. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -787,8 +799,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the object that contains supplemental data about the <see
-             cref="T:System.Windows.Forms.HelpProvider" />
+            >Gets or sets the object that contains supplemental data about the <see cref="T:System.Windows.Forms.HelpProvider" />
 
             
 
@@ -808,18 +819,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.HelpProvider.ToString" />
+            >The <see cref="M:System.Windows.Forms.HelpProvider.ToString" />
 
             
 
-             method returns a string that includes the type and the <see
-             cref="P:System.Windows.Forms.HelpProvider.HelpNamespace" />
+             method returns a string that includes the type and the <see cref="P:System.Windows.Forms.HelpProvider.HelpNamespace" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HelpProvider" />
+             property of the <see cref="T:System.Windows.Forms.HelpProvider" />
 
             
 
@@ -829,8 +837,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the current <see
-             cref="T:System.Windows.Forms.HelpProvider" />
+            >Returns a string that represents the current <see cref="T:System.Windows.Forms.HelpProvider" />
 
             
 
@@ -840,8 +847,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the current <see
-             cref="T:System.Windows.Forms.HelpProvider" />
+            >A string that represents the current <see cref="T:System.Windows.Forms.HelpProvider" />
 
             
 

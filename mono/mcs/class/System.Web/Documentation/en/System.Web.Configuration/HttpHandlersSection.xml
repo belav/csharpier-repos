@@ -17,18 +17,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.HttpHandlersSection" />
+        >The <see cref="T:System.Web.Configuration.HttpHandlersSection" />
 
         
 
-         class provides a way to programmatically access and modify the httpHandlers section of a configuration file. This type is part of a group that includes the <see
-         cref="T:System.Web.Configuration.HttpHandlerAction" />
+         class provides a way to programmatically access and modify the httpHandlers section of a configuration file. This type is part of a group that includes the <see cref="T:System.Web.Configuration.HttpHandlerAction" />
 
         
 
-         and the <see
-         cref="T:System.Web.Configuration.HttpHandlerActionCollection" />
+         and the <see cref="T:System.Web.Configuration.HttpHandlerActionCollection" />
 
         
 
@@ -36,18 +33,15 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.Configuration.HttpHandlersSection" />
+          >The <see cref="T:System.Web.Configuration.HttpHandlersSection" />
 
           
 
-           can read and write information from and to the related section of the configuration file according to the <see
-           cref="P:System.Configuration.SectionInformation.AllowDefinition" />
+           can read and write information from and to the related section of the configuration file according to the <see cref="P:System.Configuration.SectionInformation.AllowDefinition" />
 
           
 
-           section property whose value is <see
-           cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />
+           section property whose value is <see cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />
 
           
 
@@ -70,18 +64,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.HttpHandlersSection.#ctor" />
+            >The <see cref="M:System.Web.Configuration.HttpHandlersSection.#ctor" />
 
             
 
-             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
-             cref="T:System.Web.Configuration.HttpHandlersSection" />
+             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.HttpHandlersSection" />
 
             
 
-             class by using the <see
-             cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+             class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" />
 
             
 
@@ -91,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.HttpHandlersSection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.HttpHandlersSection" />
 
             
 
@@ -124,13 +114,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpHandlersSection.Handlers" />
+            >The <see cref="P:System.Web.Configuration.HttpHandlersSection.Handlers" />
 
             
 
-             property collection returned by this method does not refer to any actual element in the underlying configuration file. It is a <see
-             cref="N:System.Web.Configuration" />
+             property collection returned by this method does not refer to any actual element in the underlying configuration file. It is a <see cref="N:System.Web.Configuration" />
 
             
 
@@ -140,18 +128,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Configuration.HttpHandlerActionCollection" />
+            >Gets the <see cref="T:System.Web.Configuration.HttpHandlerActionCollection" />
 
             
 
-             collection of <see
-             cref="T:System.Web.Configuration.HttpHandlerAction" />
+             collection of <see cref="T:System.Web.Configuration.HttpHandlerAction" />
 
             
 
-             objects contained by the <see
-             cref="T:System.Web.Configuration.HttpHandlersSection" />
+             objects contained by the <see cref="T:System.Web.Configuration.HttpHandlersSection" />
 
             
 

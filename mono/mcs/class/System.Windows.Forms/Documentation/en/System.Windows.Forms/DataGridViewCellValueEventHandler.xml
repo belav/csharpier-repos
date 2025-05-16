@@ -28,13 +28,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use this delegate to implement virtual mode in the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >Use this delegate to implement virtual mode in the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
-         control. For more information about virtual mode, see <format
-         type="text/html">
+         control. For more information about virtual mode, see <format type="text/html">
           <a href="feae5d43-2848-4b1a-8ea7-77085dc415b5"
             >Virtual Mode in the Windows Forms DataGridView Control</a
           >
@@ -45,13 +43,11 @@
         .</para
       >
       <para
-        >When you create a <see
-         cref="T:System.Windows.Forms.DataGridViewCellValueEventHandler" />
+        >When you create a <see cref="T:System.Windows.Forms.DataGridViewCellValueEventHandler" />
 
         
 
-         delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format
-         type="text/html">
+         delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
 
@@ -63,18 +59,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see
-         cref="E:System.Windows.Forms.DataGridView.CellValueNeeded" />
+        >Represents the method that will handle the <see cref="E:System.Windows.Forms.DataGridView.CellValueNeeded" />
 
         
 
-         event or <see
-         cref="E:System.Windows.Forms.DataGridView.CellValuePushed" />
+         event or <see cref="E:System.Windows.Forms.DataGridView.CellValuePushed" />
 
         
 
-         event of a <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         event of a <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 

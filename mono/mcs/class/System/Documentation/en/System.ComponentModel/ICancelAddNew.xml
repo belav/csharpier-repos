@@ -15,13 +15,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.ICancelAddNew" />
+        >The <see cref="T:System.ComponentModel.ICancelAddNew" />
 
         
 
-         interface enables a collection to add a new item in an extensible way. The new item subsequently can be committed or rolled back. The <see
-         cref="M:System.ComponentModel.IBindingList.AddNew" />
+         interface enables a collection to add a new item in an extensible way. The new item subsequently can be committed or rolled back. The <see cref="M:System.ComponentModel.IBindingList.AddNew" />
 
         
 
@@ -30,8 +28,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="M:System.ComponentModel.ICancelAddNew.EndNew(System.Int32)" />
+            >The <see cref="M:System.ComponentModel.ICancelAddNew.EndNew(System.Int32)" />
 
             
 
@@ -43,8 +40,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.ComponentModel.ICancelAddNew.CancelNew(System.Int32)" />
+            >The <see cref="M:System.ComponentModel.ICancelAddNew.CancelNew(System.Int32)" />
 
             
 
@@ -54,13 +50,11 @@
       </list>
       <block subset="none" type="note">
         <para
-          >In some scenarios, such as Windows Forms complex data binding, the collection may receive <see
-           cref="M:System.ComponentModel.ICancelAddNew.CancelNew(System.Int32)" />
+          >In some scenarios, such as Windows Forms complex data binding, the collection may receive <see cref="M:System.ComponentModel.ICancelAddNew.CancelNew(System.Int32)" />
 
           
 
-           or <see
-           cref="M:System.ComponentModel.ICancelAddNew.EndNew(System.Int32)" />
+           or <see cref="M:System.ComponentModel.ICancelAddNew.EndNew(System.Int32)" />
 
           
 
@@ -71,43 +65,35 @@
       <list type="bullet">
         <item>
           <para
-            >The older model relies directly on a collection that implements the <see
-             cref="T:System.ComponentModel.IBindingList" />
+            >The older model relies directly on a collection that implements the <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
-             interface and is data-bound directly using the <see
-             cref="T:System.Windows.Forms.CurrencyManager" />
+             interface and is data-bound directly using the <see cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
-             class. The <see
-             cref="M:System.Windows.Forms.CurrencyManager.AddNew" />
+             class. The <see cref="M:System.Windows.Forms.CurrencyManager.AddNew" />
 
             
 
-            , <see
-             cref="M:System.Windows.Forms.CurrencyManager.EndCurrentEdit" />
+            , <see cref="M:System.Windows.Forms.CurrencyManager.EndCurrentEdit" />
 
             
 
-            , and <see
-             cref="M:System.Windows.Forms.CurrencyManager.CancelCurrentEdit" />
+            , and <see cref="M:System.Windows.Forms.CurrencyManager.CancelCurrentEdit" />
 
             
 
-             methods of the <see
-             cref="T:System.Windows.Forms.CurrencyManager" />
+             methods of the <see cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
-             class are responsible for transactional support for adding new items. However, this functionality depends upon the items supporting transactional behavior through the <see
-             cref="T:System.ComponentModel.IEditableObject" />
+             class are responsible for transactional support for adding new items. However, this functionality depends upon the items supporting transactional behavior through the <see cref="T:System.ComponentModel.IEditableObject" />
 
             
 
-             interface. If the items do not support this interface, the item will always be added to the list, regardless of subsequent calls to <see
-             cref="M:System.Windows.Forms.CurrencyManager.CancelCurrentEdit" />
+             interface. If the items do not support this interface, the item will always be added to the list, regardless of subsequent calls to <see cref="M:System.Windows.Forms.CurrencyManager.CancelCurrentEdit" />
 
             
 
@@ -116,23 +102,19 @@
         </item>
         <item>
           <para
-            >The newer model supports a more robust data-binding scenario through the generic <see
-             cref="T:System.ComponentModel.BindingList`1" />
+            >The newer model supports a more robust data-binding scenario through the generic <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
-             class, which implements the <see
-             cref="T:System.ComponentModel.IBindingList" />
+             class, which implements the <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
-             and <see
-             cref="T:System.ComponentModel.ICancelAddNew" />
+             and <see cref="T:System.ComponentModel.ICancelAddNew" />
 
             
 
-             interfaces. In this case, the transactional support is managed by the <see
-             cref="T:System.ComponentModel.BindingList`1" />
+             interfaces. In this case, the transactional support is managed by the <see cref="T:System.ComponentModel.BindingList`1" />
 
             
 
@@ -168,18 +150,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.ICancelAddNew.CancelNew(System.Int32)" />
+            >The <see cref="M:System.ComponentModel.ICancelAddNew.CancelNew(System.Int32)" />
 
             
 
-             method rolls back a pending addition (<see
-             cref="M:System.ComponentModel.IBindingList.AddNew" />
+             method rolls back a pending addition (<see cref="M:System.ComponentModel.IBindingList.AddNew" />
 
             
 
-            ) of an item previously added to the collection at position <paramref
-             name="itemIndex" />
+            ) of an item previously added to the collection at position <paramref name="itemIndex" />
 
             
 
@@ -191,7 +170,11 @@
           <para>Discards a pending new item from the collection.</para>
         </summary>
         <param name="itemIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -220,18 +203,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.ICancelAddNew.EndNew(System.Int32)" />
+            >The <see cref="M:System.ComponentModel.ICancelAddNew.EndNew(System.Int32)" />
 
             
 
-             commits a pending addition (<see
-             cref="M:System.ComponentModel.IBindingList.AddNew" />
+             commits a pending addition (<see cref="M:System.ComponentModel.IBindingList.AddNew" />
 
             
 
-            ) of an item previously added to the collection at position <paramref
-             name="itemIndex" />
+            ) of an item previously added to the collection at position <paramref name="itemIndex" />
 
             
 
@@ -243,7 +223,11 @@
           <para>Commits a pending new item to the collection.</para>
         </summary>
         <param name="itemIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

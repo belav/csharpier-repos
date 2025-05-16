@@ -20,26 +20,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.FormsAuthenticationConfiguration" />
+        >The <see cref="T:System.Web.Configuration.FormsAuthenticationConfiguration" />
 
         
 
          class provides a way to programmatically access and modify the forms element of a configuration authentication section.</para
       >
       <para
-        >This type is part of a group that includes the <see
-         cref="T:System.Web.Configuration.FormsAuthenticationCredentials" />
+        >This type is part of a group that includes the <see cref="T:System.Web.Configuration.FormsAuthenticationCredentials" />
 
         
 
-        ,the <see
-         cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
+        ,the <see cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
 
         
 
-        , and the <see
-         cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+        , and the <see cref="T:System.Web.Configuration.FormsAuthenticationUser" />
 
         
 
@@ -47,18 +43,15 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.Configuration.FormsAuthenticationConfiguration" />
+          >The <see cref="T:System.Web.Configuration.FormsAuthenticationConfiguration" />
 
           
 
-           can write information into the related section of the configuration file according to the restrictions defined by the section property <see
-           cref="P:System.Configuration.SectionInformation.AllowDefinition" />
+           can write information into the related section of the configuration file according to the restrictions defined by the section property <see cref="P:System.Configuration.SectionInformation.AllowDefinition" />
 
           
 
-           whose value is <see
-           cref="F:System.Configuration.ConfigurationAllowDefinition.MachineToApplication" />
+           whose value is <see cref="F:System.Configuration.ConfigurationAllowDefinition.MachineToApplication" />
 
           
 
@@ -69,8 +62,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Configures an ASP.NET application to use the <see
-         cref="T:System.Web.Configuration.AuthenticationMode" />
+        >Configures an ASP.NET application to use the <see cref="T:System.Web.Configuration.AuthenticationMode" />
 
         
 
@@ -89,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.FormsAuthenticationConfiguration" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.FormsAuthenticationConfiguration" />
 
             
 
@@ -122,8 +113,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.Cookieless" />
+            >The <see cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.Cookieless" />
 
             
 
@@ -159,8 +149,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.Credentials" />
+            >The <see cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.Credentials" />
 
             
 
@@ -173,8 +162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Configuration.FormsAuthenticationCredentials" />
+            >Gets the <see cref="T:System.Web.Configuration.FormsAuthenticationCredentials" />
 
             
 
@@ -206,8 +194,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.DefaultUrl" />
+            >The <see cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.DefaultUrl" />
 
             
 
@@ -240,24 +227,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.Domain" />
+            >The <see cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.Domain" />
 
             
 
              is used for the authentication cookies.</para
           >
           <para
-            >This property corresponds to the value of <see
-             cref="P:System.Web.HttpCookie.Domain" />
+            >This property corresponds to the value of <see cref="P:System.Web.HttpCookie.Domain" />
 
             
 
             . </para
           >
           <para
-            >This setting will take precedence over the domain attribute of the <format
-             type="text/html">
+            >This setting will take precedence over the domain attribute of the <format type="text/html">
               <a href="74790718-bfa3-4935-bc9a-59c88797e08f">httpCookies</a>
             </format>
 
@@ -311,31 +295,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.EnableCrossAppRedirects" />
+            >The <see cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.EnableCrossAppRedirects" />
 
             
 
              property value sets the enableCrossAppRedirects attribute of the forms section in the authentication section of a configuration.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.EnableCrossAppRedirects" />
+            >The <see cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.EnableCrossAppRedirects" />
 
             
 
-             property is checked by the <see
-             cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.EnableCrossAppRedirects" />
+             property is checked by the <see cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.EnableCrossAppRedirects" />
 
             
 
-             method when the redirection is to a URL that is not in the current application. If <see
-             cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.EnableCrossAppRedirects" />
+             method when the redirection is to a URL that is not in the current application. If <see cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.EnableCrossAppRedirects" />
 
             
 
-             is true, then the redirect is performed; otherwise the browser is redirected to the page defined in the <see
-             cref="P:System.Web.Security.FormsAuthentication.DefaultUrl" />
+             is true, then the redirect is performed; otherwise the browser is redirected to the page defined in the <see cref="P:System.Web.Security.FormsAuthentication.DefaultUrl" />
 
             
 
@@ -343,8 +322,7 @@
           >
           <block subset="none" type="note">
             <para
-              >When performing redirects across applications, you must ensure that several of the attributes in the form configuration section are duplicated across the authenticated applications. For more information and an example, see <format
-               type="text/html">
+              >When performing redirects across applications, you must ensure that several of the attributes in the form configuration section are duplicated across the authenticated applications. For more information and an example, see <format type="text/html">
                 <a href="99e2f9e8-5b97-4a4d-a4ed-5f93276053b7"
                   >Forms Authentication Across Applications</a
                 >
@@ -385,8 +363,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.LoginUrl" />
+            >The <see cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.LoginUrl" />
 
             
 
@@ -449,8 +426,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.Path" />
+            >The <see cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.Path" />
 
             
 
@@ -529,8 +505,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.RequireSSL" />
+            >If <see cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.RequireSSL" />
 
             
 
@@ -563,13 +538,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.SlidingExpiration" />
+            >When the <see cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.SlidingExpiration" />
 
             
 
-             is set to true, the time interval during which the authentication cookie is valid is reset to the expiration <see
-             cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.Timeout" />
+             is set to true, the time interval during which the authentication cookie is valid is reset to the expiration <see cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.Timeout" />
 
             
 

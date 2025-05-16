@@ -13,13 +13,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.VisualStyles.ThemeSizeType" />
+        >The <see cref="T:System.Windows.Forms.VisualStyles.ThemeSizeType" />
 
         
 
-         values are used as an argument for the <see
-         cref="Overload:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetPartSize" />
+         values are used as an argument for the <see cref="Overload:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetPartSize" />
 
         
 

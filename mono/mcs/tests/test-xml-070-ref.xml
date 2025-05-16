@@ -5,10 +5,8 @@
   </assembly>
   <members>
     <member name="T:I">
-      <summary
-        >
-            Test base <see
-         cref="!:ToString" />
+      <summary>
+            Test base <see cref="!:ToString" />
       </summary>
     </member>
     <member name="M:X.Main">

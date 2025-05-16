@@ -23,13 +23,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Using the <see
-         cref="T:System.Net.HttpListener" />
+        >Using the <see cref="T:System.Net.HttpListener" />
 
         
 
-         class, you can create a simple HTTP protocol listener that responds to HTTP requests. The listener is active for the lifetime of the <see
-         cref="T:System.Net.HttpListener" />
+         class, you can create a simple HTTP protocol listener that responds to HTTP requests. The listener is active for the lifetime of the <see cref="T:System.Net.HttpListener" />
 
         
 
@@ -37,13 +35,11 @@
       >
       <block subset="none" type="note">
         <para
-          >This class is available only on computers running the Windows XP SP2 or Windows Server 2003 operating systems. If you attempt to create an <see
-           cref="T:System.Net.HttpListener" />
+          >This class is available only on computers running the Windows XP SP2 or Windows Server 2003 operating systems. If you attempt to create an <see cref="T:System.Net.HttpListener" />
 
           
 
-           object on a computer that is running an earlier operating system, the constructor throws a <see
-           cref="T:System.PlatformNotSupportedException" />
+           object on a computer that is running an earlier operating system, the constructor throws a <see cref="T:System.PlatformNotSupportedException" />
 
           
 
@@ -51,184 +47,152 @@
         >
       </block>
       <para
-        >To use <see
-         cref="T:System.Net.HttpListener" />
+        >To use <see cref="T:System.Net.HttpListener" />
 
         
 
-        , create a new instance of the class using the <see
-         cref="T:System.Net.HttpListener" />
+        , create a new instance of the class using the <see cref="T:System.Net.HttpListener" />
 
         
 
-         constructor and use the <see
-         cref="P:System.Net.HttpListener.Prefixes" />
+         constructor and use the <see cref="P:System.Net.HttpListener.Prefixes" />
 
         
 
-         property to gain access to the collection that holds the strings that specify which Uniform Resource Identifier (URI) prefixes the <see
-         cref="T:System.Net.HttpListener" />
+         property to gain access to the collection that holds the strings that specify which Uniform Resource Identifier (URI) prefixes the <see cref="T:System.Net.HttpListener" />
 
         
 
          should process. </para
       >
       <para
-        >A URI prefix string is composed of a scheme (http or https), a host, an optional port, and an optional path. An example of a complete prefix string is "http://www.contoso.com:8080/customerData/". Prefixes must end in a forward slash ("/"). The <see
-         cref="T:System.Net.HttpListener" />
+        >A URI prefix string is composed of a scheme (http or https), a host, an optional port, and an optional path. An example of a complete prefix string is "http://www.contoso.com:8080/customerData/". Prefixes must end in a forward slash ("/"). The <see cref="T:System.Net.HttpListener" />
 
         
 
-         object with the prefix that most closely matches a requested URI responds to the request. Multiple <see
-         cref="T:System.Net.HttpListener" />
+         object with the prefix that most closely matches a requested URI responds to the request. Multiple <see cref="T:System.Net.HttpListener" />
 
         
 
-         objects cannot add the same prefix; a <see
-         cref="T:System.ComponentModel.Win32Exception" />
+         objects cannot add the same prefix; a <see cref="T:System.ComponentModel.Win32Exception" />
 
         
 
-         exception is thrown if a <see
-         cref="T:System.Net.HttpListener" />
+         exception is thrown if a <see cref="T:System.Net.HttpListener" />
 
         
 
          adds a prefix that is already in use. </para
       >
       <para
-        >When a port is specified, the host element can be replaced with "*" to indicate that the <see
-         cref="T:System.Net.HttpListener" />
+        >When a port is specified, the host element can be replaced with "*" to indicate that the <see cref="T:System.Net.HttpListener" />
 
         
 
-         accepts requests sent to the port if the requested URI does not match any other prefix. For example, to receive all requests sent to port 8080 when the requested URI is not handled by any <see
-         cref="T:System.Net.HttpListener" />
+         accepts requests sent to the port if the requested URI does not match any other prefix. For example, to receive all requests sent to port 8080 when the requested URI is not handled by any <see cref="T:System.Net.HttpListener" />
 
         
 
-        , the prefix is "http://*:8080/". Similarly, to specify that the <see
-         cref="T:System.Net.HttpListener" />
+        , the prefix is "http://*:8080/". Similarly, to specify that the <see cref="T:System.Net.HttpListener" />
 
         
 
          accepts all requests sent to a port, replace the host element with the "+" character, "https://+:8080". The "*" and "+" characters can be present in prefixes that include paths.</para
       >
       <para
-        >To begin listening for requests from clients, add the URI prefixes to the collection and call the <see
-         cref="M:System.Net.HttpListener.Start" />
+        >To begin listening for requests from clients, add the URI prefixes to the collection and call the <see cref="M:System.Net.HttpListener.Start" />
 
         
 
-         method. <see
-         cref="T:System.Net.HttpListener" />
+         method. <see cref="T:System.Net.HttpListener" />
 
         
 
-         offers both synchronous and asynchronous models for processing client requests. Requests and their associated responses are accessed using the <see
-         cref="T:System.Net.HttpListenerContext" />
+         offers both synchronous and asynchronous models for processing client requests. Requests and their associated responses are accessed using the <see cref="T:System.Net.HttpListenerContext" />
 
         
 
-         object returned by the <see
-         cref="M:System.Net.HttpListener.GetContext" />
+         object returned by the <see cref="M:System.Net.HttpListener.GetContext" />
 
         
 
-         method or its asynchronous counterparts, the <see
-         cref="M:System.Net.HttpListener.BeginGetContext(System.AsyncCallback,System.Object)" />
+         method or its asynchronous counterparts, the <see cref="M:System.Net.HttpListener.BeginGetContext(System.AsyncCallback,System.Object)" />
 
         
 
-         and <see
-         cref="M:System.Net.HttpListener.EndGetContext(System.IAsyncResult)" />
+         and <see cref="M:System.Net.HttpListener.EndGetContext(System.IAsyncResult)" />
 
         
 
          methods. </para
       >
       <para
-        >The synchronous model is appropriate if your application should block while waiting for a client request and if you want to process only one request at a time. Using the synchronous model, call the <see
-         cref="M:System.Net.HttpListener.GetContext" />
+        >The synchronous model is appropriate if your application should block while waiting for a client request and if you want to process only one request at a time. Using the synchronous model, call the <see cref="M:System.Net.HttpListener.GetContext" />
 
         
 
-         method, which waits for a client to send a request. The method returns an <see
-         cref="T:System.Net.HttpListenerContext" />
+         method, which waits for a client to send a request. The method returns an <see cref="T:System.Net.HttpListenerContext" />
 
         
 
          object to you for processing when one occurs. </para
       >
       <para
-        >In the more complex asynchronous model, your application does not block while waiting for requests and each request is processed in its own execution thread. Use the <see
-         cref="M:System.Net.HttpListener.BeginGetContext(System.AsyncCallback,System.Object)" />
+        >In the more complex asynchronous model, your application does not block while waiting for requests and each request is processed in its own execution thread. Use the <see cref="M:System.Net.HttpListener.BeginGetContext(System.AsyncCallback,System.Object)" />
 
         
 
-         method to specify an application-defined method to be called for each incoming request. Within that method, call the <see
-         cref="M:System.Net.HttpListener.EndGetContext(System.IAsyncResult)" />
+         method to specify an application-defined method to be called for each incoming request. Within that method, call the <see cref="M:System.Net.HttpListener.EndGetContext(System.IAsyncResult)" />
 
         
 
          method to obtain the request, process it, and respond. </para
       >
       <para
-        >In either model, incoming requests are accessed using the <see
-         cref="P:System.Net.HttpListenerContext.Request" />
+        >In either model, incoming requests are accessed using the <see cref="P:System.Net.HttpListenerContext.Request" />
 
         
 
-         property and are represented by <see
-         cref="T:System.Net.HttpListenerRequest" />
+         property and are represented by <see cref="T:System.Net.HttpListenerRequest" />
 
         
 
-         objects. Similarly, responses are accessed using the <see
-         cref="P:System.Net.HttpListenerContext.Response" />
+         objects. Similarly, responses are accessed using the <see cref="P:System.Net.HttpListenerContext.Response" />
 
         
 
-         property and are represented by <see
-         cref="T:System.Net.HttpListenerResponse" />
+         property and are represented by <see cref="T:System.Net.HttpListenerResponse" />
 
         
 
-         objects. These objects share some functionality with the <see
-         cref="T:System.Net.HttpWebRequest" />
+         objects. These objects share some functionality with the <see cref="T:System.Net.HttpWebRequest" />
 
         
 
-         and <see
-         cref="T:System.Net.HttpWebResponse" />
+         and <see cref="T:System.Net.HttpWebResponse" />
 
         
 
-         objects, but the latter objects cannot be used in conjunction with <see
-         cref="T:System.Net.HttpListener" />
+         objects, but the latter objects cannot be used in conjunction with <see cref="T:System.Net.HttpListener" />
 
         
 
          because they implement client, not server, behaviors.</para
       >
       <para
-        >An <see
-         cref="T:System.Net.HttpListener" />
+        >An <see cref="T:System.Net.HttpListener" />
 
         
 
-         can require client authentication. You can either specify a particular scheme to use for authentication, or you can specify a delegate that determines the scheme to use. You must require some form of authentication to obtain information about the client's identity. For additional information, see the <see
-         cref="P:System.Net.HttpListenerContext.User" />
+         can require client authentication. You can either specify a particular scheme to use for authentication, or you can specify a delegate that determines the scheme to use. You must require some form of authentication to obtain information about the client's identity. For additional information, see the <see cref="P:System.Net.HttpListenerContext.User" />
 
         
 
-        , <see
-         cref="P:System.Net.HttpListener.AuthenticationSchemes" />
+        , <see cref="P:System.Net.HttpListener.AuthenticationSchemes" />
 
         
 
-        , and <see
-         cref="P:System.Net.HttpListener.AuthenticationSchemeSelectorDelegate" />
+        , and <see cref="P:System.Net.HttpListener.AuthenticationSchemeSelectorDelegate" />
 
         
 
@@ -236,18 +200,15 @@
       >
       <block subset="none" type="note">
         <para
-          >If you create an <see
-           cref="T:System.Net.HttpListener" />
+          >If you create an <see cref="T:System.Net.HttpListener" />
 
           
 
-           using https, you must select a Server Certificate for that listener. Otherwise, an <see
-           cref="T:System.Net.HttpWebRequest" />
+           using https, you must select a Server Certificate for that listener. Otherwise, an <see cref="T:System.Net.HttpWebRequest" />
 
           
 
-           query of this <see
-           cref="T:System.Net.HttpListener" />
+           query of this <see cref="T:System.Net.HttpListener" />
 
           
 
@@ -257,7 +218,6 @@
       <block subset="none" type="note">
         <para
           >You can configure Server Certificates and other listener options by using HttpCfg.exe. See <see
-
             cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/http/http/httpcfg_exe.asp"
             >http://msdn.microsoft.com/library/default.asp?url=/library/en-us/http/http/httpcfg_exe.asp</see
           >
@@ -269,8 +229,7 @@
       </block>
       <block subset="none" type="note">
         <para
-          >If you specify multiple authentication schemes for the <see
-           cref="T:System.Net.HttpListener" />
+          >If you specify multiple authentication schemes for the <see cref="T:System.Net.HttpListener" />
 
           
 
@@ -301,8 +260,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before using the instance returned by this constructor, you must invoke its <see
-             cref="M:System.Net.HttpListener.Start" />
+            >Before using the instance returned by this constructor, you must invoke its <see cref="M:System.Net.HttpListener.Start" />
 
             
 
@@ -312,8 +270,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.HttpListener" />
+            >Initializes a new instance of the <see cref="T:System.Net.HttpListener" />
 
             
 
@@ -343,13 +300,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method disposes of all resources held by this listener. Any pending requests are unable to complete. </para>
           <para
-            >After calling this method, you will receive an <see
-             cref="T:System.ObjectDisposedException" />
+            >After calling this method, you will receive an <see cref="T:System.ObjectDisposedException" />
 
             
 
-             if you attempt to use this <see
-             cref="T:System.Net.HttpListener" />
+             if you attempt to use this <see cref="T:System.Net.HttpListener" />
 
             
 
@@ -359,8 +314,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Shuts down the <see
-             cref="T:System.Net.HttpListener" />
+            >Shuts down the <see cref="T:System.Net.HttpListener" />
 
             
 
@@ -392,54 +346,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.HttpListener" />
+            >The <see cref="T:System.Net.HttpListener" />
 
             
 
-             uses the specified scheme to authenticate all incoming requests. The <see
-             cref="M:System.Net.HttpListener.GetContext" />
+             uses the specified scheme to authenticate all incoming requests. The <see cref="M:System.Net.HttpListener.GetContext" />
 
             
 
-             and <see
-             cref="M:System.Net.HttpListener.EndGetContext(System.IAsyncResult)" />
+             and <see cref="M:System.Net.HttpListener.EndGetContext(System.IAsyncResult)" />
 
             
 
-             methods return an incoming client request only if the <see
-             cref="T:System.Net.HttpListener" />
+             methods return an incoming client request only if the <see cref="T:System.Net.HttpListener" />
 
             
 
              successfully authenticates the request.</para
           >
           <para
-            >You can interrogate the identity of a successfully authenticated client by using the <see
-             cref="P:System.Net.HttpListenerContext.User" />
+            >You can interrogate the identity of a successfully authenticated client by using the <see cref="P:System.Net.HttpListenerContext.User" />
 
             
 
              property.</para
           >
           <para
-            >If you want an <see
-             cref="T:System.Net.HttpListener" />
+            >If you want an <see cref="T:System.Net.HttpListener" />
 
             
 
-             object to use different authentication mechanisms based on characteristics of the requests it receives (for example, the request's <see
-             cref="P:System.Net.HttpListenerRequest.Url" />
+             object to use different authentication mechanisms based on characteristics of the requests it receives (for example, the request's <see cref="P:System.Net.HttpListenerRequest.Url" />
 
             
 
-             or <see
-             cref="P:System.Net.HttpListenerRequest.UserHostName" />
+             or <see cref="P:System.Net.HttpListenerRequest.UserHostName" />
 
             
 
-             property), you must implement a method that chooses the authentication scheme. For instructions about how to do this, see the <see
-             cref="P:System.Net.HttpListener.AuthenticationSchemeSelectorDelegate" />
+             property), you must implement a method that chooses the authentication scheme. For instructions about how to do this, see the <see cref="P:System.Net.HttpListener.AuthenticationSchemeSelectorDelegate" />
 
             
 
@@ -447,13 +392,11 @@
           >
           <block subset="none" type="note">
             <para
-              >To set this property to enable Digest, NTLM, or Negotiate requires the <see
-               cref="T:System.Security.Permissions.SecurityPermission" />
+              >To set this property to enable Digest, NTLM, or Negotiate requires the <see cref="T:System.Security.Permissions.SecurityPermission" />
 
               
 
-              , <see
-               cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlPrincipal" />
+              , <see cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlPrincipal" />
 
               
 
@@ -491,13 +434,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >If you want the same authentication protocol to be used for all requests handled by a particular instance of <see
-               cref="T:System.Net.HttpListener" />
+              >If you want the same authentication protocol to be used for all requests handled by a particular instance of <see cref="T:System.Net.HttpListener" />
 
               
 
-              , you do not need to set this property. To specify a protocol to be used for all client requests, use the <see
-               cref="P:System.Net.HttpListener.AuthenticationSchemes" />
+              , you do not need to set this property. To specify a protocol to be used for all client requests, use the <see cref="P:System.Net.HttpListener.AuthenticationSchemes" />
 
               
 
@@ -505,51 +446,42 @@
             >
           </block>
           <para
-            >If the client has not specified authentication information in its headers, the <see
-             cref="T:System.Net.HttpListener" />
+            >If the client has not specified authentication information in its headers, the <see cref="T:System.Net.HttpListener" />
 
             
 
-             calls the specified delegate for each unauthenticated incoming request to determine which, if any, protocol to use to authenticate the client. The <see
-             cref="M:System.Net.HttpListener.GetContext" />
+             calls the specified delegate for each unauthenticated incoming request to determine which, if any, protocol to use to authenticate the client. The <see cref="M:System.Net.HttpListener.GetContext" />
 
             
 
-             and <see
-             cref="M:System.Net.HttpListener.EndGetContext(System.IAsyncResult)" />
+             and <see cref="M:System.Net.HttpListener.EndGetContext(System.IAsyncResult)" />
 
             
 
-             methods return an incoming request only if the <see
-             cref="T:System.Net.HttpListener" />
+             methods return an incoming request only if the <see cref="T:System.Net.HttpListener" />
 
             
 
-             successfully authenticated the request. If a request cannot be authenticated, the <see
-             cref="T:System.Net.HttpListener" />
+             successfully authenticated the request. If a request cannot be authenticated, the <see cref="T:System.Net.HttpListener" />
 
             
 
-             automatically sends back a 401 response. You can get the identity of a successfully authenticated client using the <see
-             cref="P:System.Web.HttpRequest.LogonUserIdentity" />
+             automatically sends back a 401 response. You can get the identity of a successfully authenticated client using the <see cref="P:System.Web.HttpRequest.LogonUserIdentity" />
 
             
 
              property.</para
           >
           <para
-            >The ability to delegate the choice of authentication protocol to an application-specific method is useful if you want an instance of <see
-             cref="T:System.Net.HttpListener" />
+            >The ability to delegate the choice of authentication protocol to an application-specific method is useful if you want an instance of <see cref="T:System.Net.HttpListener" />
 
             
 
-             to use different authentication protocols depending on the characteristics of the requests it receives (for example, the request's <see
-             cref="P:System.Net.HttpListenerRequest.Url" />
+             to use different authentication protocols depending on the characteristics of the requests it receives (for example, the request's <see cref="P:System.Net.HttpListenerRequest.Url" />
 
             
 
-             or <see
-             cref="P:System.Net.HttpListenerRequest.UserHostAddress" />
+             or <see cref="P:System.Net.HttpListenerRequest.UserHostAddress" />
 
             
 
@@ -557,13 +489,11 @@
           >
           <block subset="none" type="note">
             <para
-              >To set this property to enable Digest, NTLM, or Negotiate requires the <see
-               cref="T:System.Security.Permissions.SecurityPermission" />
+              >To set this property to enable Digest, NTLM, or Negotiate requires the <see cref="T:System.Security.Permissions.SecurityPermission" />
 
               
 
-              , <see
-               cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlPrincipal" />
+              , <see cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlPrincipal" />
 
               
 
@@ -603,52 +533,44 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.HttpListener.BeginGetContext(System.AsyncCallback,System.Object)" />
+            >The <see cref="M:System.Net.HttpListener.BeginGetContext(System.AsyncCallback,System.Object)" />
 
             
 
-             method begins an asynchronous (non-blocking) call to receive incoming client requests. Before calling this method, you must call the <see
-             cref="M:System.Net.HttpListener.Start" />
+             method begins an asynchronous (non-blocking) call to receive incoming client requests. Before calling this method, you must call the <see cref="M:System.Net.HttpListener.Start" />
 
             
 
-             method and add at least one Uniform Resource Identifier (URI) prefix to listen for by adding the URI strings to the <see
-             cref="T:System.Net.HttpListenerPrefixCollection" />
+             method and add at least one Uniform Resource Identifier (URI) prefix to listen for by adding the URI strings to the <see cref="T:System.Net.HttpListenerPrefixCollection" />
 
             
 
-             returned by the <see
-             cref="P:System.Net.HttpListener.Prefixes" />
+             returned by the <see cref="P:System.Net.HttpListener.Prefixes" />
 
             
 
              property.</para
           >
           <para
-            >The asynchronous operation must be completed by calling the <see
-             cref="M:System.Net.HttpListener.EndGetContext(System.IAsyncResult)" />
+            >The asynchronous operation must be completed by calling the <see cref="M:System.Net.HttpListener.EndGetContext(System.IAsyncResult)" />
 
             
 
-             method. Typically, the method is invoked by the <paramref
-             name="callback" />
+             method. Typically, the method is invoked by the <paramref name="callback" />
 
             
 
              delegate.</para
           >
           <para
-            >This method does not block while the operation completes. To get an incoming request and block until the operation completes, call the <see
-             cref="M:System.Net.HttpListener.GetContext" />
+            >This method does not block while the operation completes. To get an incoming request and block until the operation completes, call the <see cref="M:System.Net.HttpListener.GetContext" />
 
             
 
              method.</para
           >
           <para
-            >For detailed information about using the asynchronous programming model, see <format
-             type="text/html">
+            >For detailed information about using the asynchronous programming model, see <format type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
           </para>
@@ -660,8 +582,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -669,24 +590,30 @@
           >
         </returns>
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when a client request is available.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined object that contains information about the operation. This object is passed to the <paramref
-           name="callback" />
+          A user-defined object that contains information about the operation. This object is passed to the <paramref name="callback" />
 
           
 
@@ -714,26 +641,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After calling this method, you can no longer use the <see
-             cref="T:System.Net.HttpListener" />
+            >After calling this method, you can no longer use the <see cref="T:System.Net.HttpListener" />
 
             
 
-             object. To temporarily pause an <see
-             cref="T:System.Net.HttpListener" />
+             object. To temporarily pause an <see cref="T:System.Net.HttpListener" />
 
             
 
-             object, use the <see
-             cref="M:System.Net.HttpListener.Stop" />
+             object, use the <see cref="M:System.Net.HttpListener.Stop" />
 
             
 
              method.</para
           >
           <para
-            >This method shut downs the <see
-             cref="T:System.Net.HttpListener" />
+            >This method shut downs the <see cref="T:System.Net.HttpListener" />
 
             
 
@@ -743,8 +666,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Shuts down the <see
-             cref="T:System.Net.HttpListener" />
+            >Shuts down the <see cref="T:System.Net.HttpListener" />
 
             
 
@@ -778,54 +700,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.HttpListener.EndGetContext(System.IAsyncResult)" />
+            >The <see cref="M:System.Net.HttpListener.EndGetContext(System.IAsyncResult)" />
 
             
 
-             method is called, usually within an application-defined callback method invoked by a delegate, to obtain the <see
-             cref="T:System.Net.HttpListenerContext" />
+             method is called, usually within an application-defined callback method invoked by a delegate, to obtain the <see cref="T:System.Net.HttpListenerContext" />
 
             
 
-             object that contains an incoming client request and its associated response. This method completes an operation previously started by calling the <see
-             cref="M:System.Net.HttpListener.BeginGetContext(System.AsyncCallback,System.Object)" />
+             object that contains an incoming client request and its associated response. This method completes an operation previously started by calling the <see cref="M:System.Net.HttpListener.BeginGetContext(System.AsyncCallback,System.Object)" />
 
             
 
              method. If the operation has not completed, this method blocks until it does.</para
           >
           <para
-            >Because calling the <see
-             cref="M:System.Net.HttpListener.EndGetContext(System.IAsyncResult)" />
+            >Because calling the <see cref="M:System.Net.HttpListener.EndGetContext(System.IAsyncResult)" />
 
             
 
-             method requires the <see
-             cref="T:System.Net.HttpListener" />
+             method requires the <see cref="T:System.Net.HttpListener" />
 
             
 
-             object, this object is typically passed into a callback method by using the state object passed into the <see
-             cref="M:System.Net.HttpListener.BeginGetContext(System.AsyncCallback,System.Object)" />
+             object, this object is typically passed into a callback method by using the state object passed into the <see cref="M:System.Net.HttpListener.BeginGetContext(System.AsyncCallback,System.Object)" />
 
             
 
-             method. You can obtain this state object by using the <see
-             cref="P:System.IAsyncResult.AsyncState" />
+             method. You can obtain this state object by using the <see cref="P:System.IAsyncResult.AsyncState" />
 
             
 
-             property of the <paramref
-             name="asyncResult" />
+             property of the <paramref name="asyncResult" />
 
             
 
              object.</para
           >
           <para
-            >For detailed information about using the asynchronous programming model, see <format
-             type="text/html">
+            >For detailed information about using the asynchronous programming model, see <format type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
           </para>
@@ -837,8 +750,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.HttpListenerContext" />
+            >An <see cref="T:System.Net.HttpListenerContext" />
 
             
 
@@ -846,12 +758,15 @@
           >
         </returns>
         <param name="asyncResult">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IAsyncResult" />
+          An <see cref="T:System.IAsyncResult" />
 
           
 
@@ -879,31 +794,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before calling this method, you must call the <see
-             cref="M:System.Net.HttpListener.Start" />
+            >Before calling this method, you must call the <see cref="M:System.Net.HttpListener.Start" />
 
             
 
-             method and add at least one URI prefix to listen for by adding the URI strings to the <see
-             cref="T:System.Net.HttpListenerPrefixCollection" />
+             method and add at least one URI prefix to listen for by adding the URI strings to the <see cref="T:System.Net.HttpListenerPrefixCollection" />
 
             
 
-             returned by the <see
-             cref="P:System.Net.HttpListener.Prefixes" />
+             returned by the <see cref="P:System.Net.HttpListener.Prefixes" />
 
             
 
-             property. For a detailed description of prefixes, see the <see
-             cref="T:System.Net.HttpListener" />
+             property. For a detailed description of prefixes, see the <see cref="T:System.Net.HttpListener" />
 
             
 
              class overview.</para
           >
           <para
-            >This method blocks while waiting for an incoming request. If you want incoming requests to be processed asynchronously (on separate threads) so that your application does not block, use the <see
-             cref="M:System.Net.HttpListener.BeginGetContext(System.AsyncCallback,System.Object)" />
+            >This method blocks while waiting for an incoming request. If you want incoming requests to be processed asynchronously (on separate threads) so that your application does not block, use the <see cref="M:System.Net.HttpListener.BeginGetContext(System.AsyncCallback,System.Object)" />
 
             
 
@@ -917,8 +827,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.HttpListenerContext" />
+            >An <see cref="T:System.Net.HttpListenerContext" />
 
             
 
@@ -948,31 +857,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
              object will complete when the incoming request has been received.</para
           >
           <para
-            >Before calling this method, you must call the <see
-             cref="M:System.Net.HttpListener.Start" />
+            >Before calling this method, you must call the <see cref="M:System.Net.HttpListener.Start" />
 
             
 
-             method and add at least one URI prefix to listen for by adding the URI strings to the <see
-             cref="T:System.Net.HttpListenerPrefixCollection" />
+             method and add at least one URI prefix to listen for by adding the URI strings to the <see cref="T:System.Net.HttpListenerPrefixCollection" />
 
             
 
-             returned by the <see
-             cref="P:System.Net.HttpListener.Prefixes" />
+             returned by the <see cref="P:System.Net.HttpListener.Prefixes" />
 
             
 
-             property. For a detailed description of prefixes, see the <see
-             cref="T:System.Net.HttpListener" />
+             property. For a detailed description of prefixes, see the <see cref="T:System.Net.HttpListener" />
 
             
 
@@ -986,21 +890,18 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Returns <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
             .</para
           >
           <para
-            >The task object representing the asynchronous operation. The <see
-             cref="P:System.Threading.Tasks.Task`1.Result" />
+            >The task object representing the asynchronous operation. The <see cref="P:System.Threading.Tasks.Task`1.Result" />
 
             
 
-             property on the task object returns an <see
-             cref="T:System.Net.HttpListenerContext" />
+             property on the task object returns an <see cref="T:System.Net.HttpListenerContext" />
 
             
 
@@ -1030,13 +931,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Boolean" />
+            >Gets or sets a <see cref="T:System.Boolean" />
 
             
 
-             value that specifies whether your application receives exceptions that occur when an <see
-             cref="T:System.Net.HttpListener" />
+             value that specifies whether your application receives exceptions that occur when an <see cref="T:System.Net.HttpListener" />
 
             
 
@@ -1062,13 +961,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To start an <see
-             cref="T:System.Net.HttpListener" />
+            >To start an <see cref="T:System.Net.HttpListener" />
 
             
 
-            , call the <see
-             cref="M:System.Net.HttpListener.Start" />
+            , call the <see cref="M:System.Net.HttpListener.Start" />
 
             
 
@@ -1078,8 +975,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether <see
-             cref="T:System.Net.HttpListener" />
+            >Gets a value that indicates whether <see cref="T:System.Net.HttpListener" />
 
             
 
@@ -1109,8 +1005,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether <see
-             cref="T:System.Net.HttpListener" />
+            >Gets a value that indicates whether <see cref="T:System.Net.HttpListener" />
 
             
 
@@ -1142,8 +1037,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The prefixes are in canonical form. For a detailed description of prefixes, see the <see
-             cref="T:System.Net.HttpListener" />
+            >The prefixes are in canonical form. For a detailed description of prefixes, see the <see cref="T:System.Net.HttpListener" />
 
             
 
@@ -1153,8 +1047,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the Uniform Resource Identifier (URI) prefixes handled by this <see
-             cref="T:System.Net.HttpListener" />
+            >Gets the Uniform Resource Identifier (URI) prefixes handled by this <see cref="T:System.Net.HttpListener" />
 
             
 
@@ -1181,15 +1074,16 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >Servers use realms to partition protected resources; each partition can have its own authentication scheme and/or authorization database. Realms are used only for basic and digest authentication. After a client successfully authenticates, the authentication is valid for all resources in a given realm. For a detailed description of realms, see RFC 2617 at <see
-             cref="http://www.ietf.org">http://www.ietf.org</see>
+              cref="http://www.ietf.org"
+              >http://www.ietf.org</see
+            >
 
             
 
             .</para
           >
           <para
-            >An instance of <see
-             cref="T:System.Net.HttpListener" />
+            >An instance of <see cref="T:System.Net.HttpListener" />
 
             
 
@@ -1199,8 +1093,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the realm, or resource partition, associated with this <see
-             cref="T:System.Net.HttpListener" />
+            >Gets or sets the realm, or resource partition, associated with this <see cref="T:System.Net.HttpListener" />
 
             
 
@@ -1229,26 +1122,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method must be called before you call the <see
-             cref="M:System.Net.HttpListener.GetContext" />
+            >This method must be called before you call the <see cref="M:System.Net.HttpListener.GetContext" />
 
             
 
-             or <see
-             cref="M:System.Net.HttpListener.BeginGetContext(System.AsyncCallback,System.Object)" />
+             or <see cref="M:System.Net.HttpListener.BeginGetContext(System.AsyncCallback,System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >After you have started an <see
-             cref="T:System.Net.HttpListener" />
+            >After you have started an <see cref="T:System.Net.HttpListener" />
 
             
 
-             object, you can use the <see
-             cref="M:System.Net.HttpListener.Stop" />
+             object, you can use the <see cref="M:System.Net.HttpListener.Stop" />
 
             
 
@@ -1256,18 +1145,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If this listener instance uses https, you must install and select a Server Certificate. Otherwise, an <see
-               cref="T:System.Net.HttpWebRequest" />
+              >If this listener instance uses https, you must install and select a Server Certificate. Otherwise, an <see cref="T:System.Net.HttpWebRequest" />
 
               
 
-               query of this <see
-               cref="T:System.Net.HttpListener" />
+               query of this <see cref="T:System.Net.HttpListener" />
 
               
 
                will fail with an unexpected close of the connection. You can configure Server Certificates and other listener options by using HttpCfg.exe. See <see
-
                 cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/http/http/httpcfg_exe.asp"
                 >http://msdn.microsoft.com/library/default.asp?url=/library/en-us/http/http/httpcfg_exe.asp</see
               >
@@ -1305,13 +1191,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If this instance is already stopped, calling this method has no effect.</para>
           <para
-            >After you have stopped an <see
-             cref="T:System.Net.HttpListener" />
+            >After you have stopped an <see cref="T:System.Net.HttpListener" />
 
             
 
-             object, you can use the <see
-             cref="M:System.Net.HttpListener.Start" />
+             object, you can use the <see cref="M:System.Net.HttpListener.Start" />
 
             
 
@@ -1343,8 +1227,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applications should use the <see
-             cref="M:System.Net.HttpListener.Close" />
+            >Applications should use the <see cref="M:System.Net.HttpListener.Close" />
 
             
 
@@ -1354,8 +1237,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the resources held by this <see
-             cref="T:System.Net.HttpListener" />
+            >Releases the resources held by this <see cref="T:System.Net.HttpListener" />
 
             
 
@@ -1392,8 +1274,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When this property is set to true and the first request over a particular TCP connection is authenticated using NTLM, subsequent requests over the same TCP connection are processed using the authentication information (<see
-             cref="T:System.Security.Principal.IIdentity" />
+            >When this property is set to true and the first request over a particular TCP connection is authenticated using NTLM, subsequent requests over the same TCP connection are processed using the authentication information (<see cref="T:System.Security.Principal.IIdentity" />
 
             
 
@@ -1402,8 +1283,7 @@
           <para>This property has no effect when NTLM is not the authentication protocol. When Negotiate is specified as the authentication protocol, this property has an effect only if NTLM is the actual protocol used for authentication. </para>
           <block subset="none" type="note">
             <para
-              >While setting this property to true increases performance because the <see
-               cref="T:System.Net.HttpListener" />
+              >While setting this property to true increases performance because the <see cref="T:System.Net.HttpListener" />
 
               
 
@@ -1414,8 +1294,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Boolean" />
+            >Gets or sets a <see cref="T:System.Boolean" />
 
             
 

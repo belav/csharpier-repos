@@ -27,8 +27,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This interface is similar to <see
-         cref="T:System.Security.ISecurityEncodable" />
+        >This interface is similar to <see cref="T:System.Security.ISecurityEncodable" />
 
         
 
@@ -67,13 +66,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Custom code that extends security policy objects needs to implement the <see
-             cref="M:System.Security.ISecurityPolicyEncodable.ToXml(System.Security.Policy.PolicyLevel)" />
+            >Custom code that extends security policy objects needs to implement the <see cref="M:System.Security.ISecurityPolicyEncodable.ToXml(System.Security.Policy.PolicyLevel)" />
 
             
 
-             and <see
-             cref="M:System.Security.ISecurityPolicyEncodable.FromXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
+             and <see cref="M:System.Security.ISecurityPolicyEncodable.FromXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
 
             
 
@@ -85,14 +82,22 @@
           <para>Reconstructs a security object with a specified state from an XML encoding.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML encoding to use to reconstruct the security object. </param
         >
         <param name="level">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -126,13 +131,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The policy-level context is provided for resolution of named permission set references. For example, code groups use policy level to find named permission sets by name.</para>
           <para
-            >Custom code that extends security policy objects needs to implement the <see
-             cref="M:System.Security.ISecurityPolicyEncodable.ToXml(System.Security.Policy.PolicyLevel)" />
+            >Custom code that extends security policy objects needs to implement the <see cref="M:System.Security.ISecurityPolicyEncodable.ToXml(System.Security.Policy.PolicyLevel)" />
 
             
 
-             and <see
-             cref="M:System.Security.ISecurityPolicyEncodable.FromXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
+             and <see cref="M:System.Security.ISecurityPolicyEncodable.FromXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
 
             
 
@@ -148,7 +151,11 @@
           <para>The root element of the XML representation of the policy object.</para>
         </returns>
         <param name="level">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

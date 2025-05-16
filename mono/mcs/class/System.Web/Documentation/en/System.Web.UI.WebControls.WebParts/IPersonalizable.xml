@@ -11,8 +11,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >In addition to using the Personalizable attribute on control properties, a control can also implement <see
-         cref="T:System.Web.UI.WebControls.WebParts.IPersonalizable" />
+        >In addition to using the Personalizable attribute on control properties, a control can also implement <see cref="T:System.Web.UI.WebControls.WebParts.IPersonalizable" />
 
         
 
@@ -40,13 +39,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When data managed by a control has changed, the control is considered "dirty." A control should return true if the custom data that it manages through the <see
-             cref="T:System.Web.UI.WebControls.WebParts.IPersonalizable" />
+            >When data managed by a control has changed, the control is considered "dirty." A control should return true if the custom data that it manages through the <see cref="T:System.Web.UI.WebControls.WebParts.IPersonalizable" />
 
             
 
-             interface has changed. If a control returns true from this property, the control's <see
-             cref="M:System.Web.UI.WebControls.WebParts.IPersonalizable.Save(System.Web.UI.WebControls.WebParts.PersonalizationDictionary)" />
+             interface has changed. If a control returns true from this property, the control's <see cref="M:System.Web.UI.WebControls.WebParts.IPersonalizable.Save(System.Web.UI.WebControls.WebParts.PersonalizationDictionary)" />
 
             
 
@@ -54,18 +51,15 @@
           >
           <block subset="none" type="note">
             <para
-              >This property is checked automatically by the personalization infrastructure during the latter phases of processing a POST request. However, for GET requests, the value returned from the <see
-               cref="P:System.Web.UI.WebControls.WebParts.IPersonalizable.IsDirty" />
+              >This property is checked automatically by the personalization infrastructure during the latter phases of processing a POST request. However, for GET requests, the value returned from the <see cref="P:System.Web.UI.WebControls.WebParts.IPersonalizable.IsDirty" />
 
               
 
-               property is not checked. Some other event has to have caused the control to be considered "dirty" for any control state--not just data managed by <see
-               cref="T:System.Web.UI.WebControls.WebParts.IPersonalizable" />
+               property is not checked. Some other event has to have caused the control to be considered "dirty" for any control state--not just data managed by <see cref="T:System.Web.UI.WebControls.WebParts.IPersonalizable" />
 
               
 
-              --to be saved. If a control can mark itself as "dirty" during a GET request, or if the personalization infrastructure under some very specific boundary conditions considers a control "dirty" during a GET request, then <see
-               cref="M:System.Web.UI.WebControls.WebParts.IPersonalizable.Save(System.Web.UI.WebControls.WebParts.PersonalizationDictionary)" />
+              --to be saved. If a control can mark itself as "dirty" during a GET request, or if the personalization infrastructure under some very specific boundary conditions considers a control "dirty" during a GET request, then <see cref="M:System.Web.UI.WebControls.WebParts.IPersonalizable.Save(System.Web.UI.WebControls.WebParts.PersonalizationDictionary)" />
 
               
 
@@ -73,13 +67,11 @@
             >
           </block>
           <para
-            >A control can reference its associated <see
-             cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" />
+            >A control can reference its associated <see cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" />
 
             
 
-             control and check the <see
-             cref="P:System.Web.UI.WebControls.WebParts.WebPartPersonalization.Scope" />
+             control and check the <see cref="P:System.Web.UI.WebControls.WebParts.WebPartPersonalization.Scope" />
 
             
 

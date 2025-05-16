@@ -29,8 +29,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Data.ForeignKeyConstraint" />
+        >A <see cref="T:System.Data.ForeignKeyConstraint" />
 
         
 
@@ -55,44 +54,37 @@
 
         
 
-         objects are contained in the <see
-         cref="T:System.Data.ConstraintCollection" />
+         objects are contained in the <see cref="T:System.Data.ConstraintCollection" />
 
         
 
-         of a <see
-         cref="T:System.Data.DataTable" />
+         of a <see cref="T:System.Data.DataTable" />
 
         
 
-        , which is accessed through the <see
-         cref="P:System.Data.DataTable.Constraints" />
+        , which is accessed through the <see cref="P:System.Data.DataTable.Constraints" />
 
         
 
          property.</para
       >
       <para
-        >Constraints are not enforced unless the <see
-         cref="P:System.Data.DataSet.EnforceConstraints" />
+        >Constraints are not enforced unless the <see cref="P:System.Data.DataSet.EnforceConstraints" />
 
         
 
          property is set to true.</para
       >
       <para
-        >The <see
-         cref="P:System.Data.ForeignKeyConstraint.AcceptRejectRule" />
+        >The <see cref="P:System.Data.ForeignKeyConstraint.AcceptRejectRule" />
 
         
 
-         is enforced whenever a <see
-         cref="T:System.Data.DataTable" />
+         is enforced whenever a <see cref="T:System.Data.DataTable" />
 
         
 
-         object's <see
-         cref="M:System.Data.DataTable.AcceptChanges" />
+         object's <see cref="M:System.Data.DataTable.AcceptChanges" />
 
         
 
@@ -121,13 +113,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+            >Initializes a new instance of the <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
-             class with the specified parent and child <see
-             cref="T:System.Data.DataColumn" />
+             class with the specified parent and child <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -135,24 +125,30 @@
           >
         </summary>
         <param name="parentColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The parent <see
-           cref="T:System.Data.DataColumn" />
+          The parent <see cref="T:System.Data.DataColumn" />
 
           
 
            in the constraint. </param
         >
         <param name="childColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The child <see
-           cref="T:System.Data.DataColumn" />
+          The child <see cref="T:System.Data.DataColumn" />
 
           
 
@@ -180,13 +176,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+            >Initializes a new instance of the <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
-             class with the specified arrays of parent and child <see
-             cref="T:System.Data.DataColumn" />
+             class with the specified arrays of parent and child <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -194,24 +188,30 @@
           >
         </summary>
         <param name="parentColumns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of parent <see
-           cref="T:System.Data.DataColumn" />
+          An array of parent <see cref="T:System.Data.DataColumn" />
 
           
 
            in the constraint. </param
         >
         <param name="childColumns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of child <see
-           cref="T:System.Data.DataColumn" />
+          An array of child <see cref="T:System.Data.DataColumn" />
 
           
 
@@ -240,13 +240,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+            >Initializes a new instance of the <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
-             class with the specified name, parent and child <see
-             cref="T:System.Data.DataColumn" />
+             class with the specified name, parent and child <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -254,31 +252,41 @@
           >
         </summary>
         <param name="constraintName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the constraint. </param
         >
         <param name="parentColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The parent <see
-           cref="T:System.Data.DataColumn" />
+          The parent <see cref="T:System.Data.DataColumn" />
 
           
 
            in the constraint. </param
         >
         <param name="childColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The child <see
-           cref="T:System.Data.DataColumn" />
+          The child <see cref="T:System.Data.DataColumn" />
 
           
 
@@ -307,13 +315,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+            >Initializes a new instance of the <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
-             class with the specified name, and arrays of parent and child <see
-             cref="T:System.Data.DataColumn" />
+             class with the specified name, and arrays of parent and child <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -321,36 +327,45 @@
           >
         </summary>
         <param name="constraintName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.ForeignKeyConstraint" />
+          The name of the <see cref="T:System.Data.ForeignKeyConstraint" />
 
           
 
           . If null or empty string, a default name will be given when added to the constraints collection. </param
         >
         <param name="parentColumns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of parent <see
-           cref="T:System.Data.DataColumn" />
+          An array of parent <see cref="T:System.Data.DataColumn" />
 
           
 
            in the constraint. </param
         >
         <param name="childColumns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of child <see
-           cref="T:System.Data.DataColumn" />
+          An array of child <see cref="T:System.Data.DataColumn" />
 
           
 
@@ -383,23 +398,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is provided for design time support in the Visual Studio  environment. <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+            >This constructor is provided for design time support in the Visual Studio  environment. <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
-             objects created by using this constructor must then be added to the collection via <see
-             cref="M:System.Data.ConstraintCollection.AddRange(System.Data.Constraint[])" />
+             objects created by using this constructor must then be added to the collection via <see cref="M:System.Data.ConstraintCollection.AddRange(System.Data.Constraint[])" />
 
             
 
-            . Tables and columns with the specified names must exist at the time the method is called, or if <see
-             cref="M:System.Data.DataTable.BeginInit" />
+            . Tables and columns with the specified names must exist at the time the method is called, or if <see cref="M:System.Data.DataTable.BeginInit" />
 
             
 
-             has been called prior to calling this constructor, the tables and columns with the specified names must exist at the time that <see
-             cref="M:System.Data.DataTable.EndInit" />
+             has been called prior to calling this constructor, the tables and columns with the specified names must exist at the time that <see cref="M:System.Data.DataTable.EndInit" />
 
             
 
@@ -407,84 +418,105 @@
           >
         </summary>
         <param name="constraintName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the constraint. </param
         >
         <param name="parentTableName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the parent <see
-           cref="T:System.Data.DataTable" />
+          The name of the parent <see cref="T:System.Data.DataTable" />
 
           
 
-           that contains parent <see
-           cref="T:System.Data.DataColumn" />
+           that contains parent <see cref="T:System.Data.DataColumn" />
 
           
 
            objects in the constraint. </param
         >
         <param name="parentColumnNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of the names of parent <see
-           cref="T:System.Data.DataColumn" />
+          An array of the names of parent <see cref="T:System.Data.DataColumn" />
 
           
 
            objects in the constraint. </param
         >
         <param name="childColumnNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of the names of child <see
-           cref="T:System.Data.DataColumn" />
+          An array of the names of child <see cref="T:System.Data.DataColumn" />
 
           
 
            objects in the constraint. </param
         >
         <param name="acceptRejectRule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.AcceptRejectRule" />
+          One of the <see cref="T:System.Data.AcceptRejectRule" />
 
           
 
            values. Possible values include None, Cascade, and Default. </param
         >
         <param name="deleteRule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.Rule" />
+          One of the <see cref="T:System.Data.Rule" />
 
           
 
            values to use when a row is deleted. The default is Cascade. Possible values include: None, Cascade, SetNull, SetDefault, and Default. </param
         >
         <param name="updateRule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.Rule" />
+          One of the <see cref="T:System.Data.Rule" />
 
           
 
@@ -530,23 +562,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is provided for design time support in the Visual Studio  environment. <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+            >This constructor is provided for design time support in the Visual Studio  environment. <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
-             objects created by using this constructor must then be added to the collection via <see
-             cref="M:System.Data.ConstraintCollection.AddRange(System.Data.Constraint[])" />
+             objects created by using this constructor must then be added to the collection via <see cref="M:System.Data.ConstraintCollection.AddRange(System.Data.Constraint[])" />
 
             
 
-            . Tables and columns with the specified names must exist at the time the method is called, or if <see
-             cref="M:System.Data.DataTable.BeginInit" />
+            . Tables and columns with the specified names must exist at the time the method is called, or if <see cref="M:System.Data.DataTable.BeginInit" />
 
             
 
-             has been called prior to calling this constructor, the tables and columns with the specified names must exist at the time that <see
-             cref="M:System.Data.DataTable.EndInit" />
+             has been called prior to calling this constructor, the tables and columns with the specified names must exist at the time that <see cref="M:System.Data.DataTable.EndInit" />
 
             
 
@@ -554,96 +582,120 @@
           >
         </summary>
         <param name="constraintName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the constraint. </param
         >
         <param name="parentTableName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the parent <see
-           cref="T:System.Data.DataTable" />
+          The name of the parent <see cref="T:System.Data.DataTable" />
 
           
 
-           that contains parent <see
-           cref="T:System.Data.DataColumn" />
+           that contains parent <see cref="T:System.Data.DataColumn" />
 
           
 
            objects in the constraint. </param
         >
         <param name="parentTableNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="P:System.Data.DataTable.Namespace" />
+          The name of the <see cref="P:System.Data.DataTable.Namespace" />
 
           
 
           . </param
         >
         <param name="parentColumnNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of the names of parent <see
-           cref="T:System.Data.DataColumn" />
+          An array of the names of parent <see cref="T:System.Data.DataColumn" />
 
           
 
            objects in the constraint. </param
         >
         <param name="childColumnNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of the names of child <see
-           cref="T:System.Data.DataColumn" />
+          An array of the names of child <see cref="T:System.Data.DataColumn" />
 
           
 
            objects in the constraint. </param
         >
         <param name="acceptRejectRule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.AcceptRejectRule" />
+          One of the <see cref="T:System.Data.AcceptRejectRule" />
 
           
 
            values. Possible values include None, Cascade, and Default. </param
         >
         <param name="deleteRule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.Rule" />
+          One of the <see cref="T:System.Data.Rule" />
 
           
 
            values to use when a row is deleted. The default is Cascade. Possible values include: None, Cascade, SetNull, SetDefault, and Default. </param
         >
         <param name="updateRule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.Rule" />
+          One of the <see cref="T:System.Data.Rule" />
 
           
 
@@ -666,18 +718,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Changes to a <see
-             cref="T:System.Data.DataRow" />
+            >Changes to a <see cref="T:System.Data.DataRow" />
 
             
 
-             or <see
-             cref="T:System.Data.DataTable" />
+             or <see cref="T:System.Data.DataTable" />
 
             
 
-             are not final until the AcceptChanges method is invoked. At that point, the <see
-             cref="P:System.Data.ForeignKeyConstraint.AcceptRejectRule" />
+             are not final until the AcceptChanges method is invoked. At that point, the <see cref="P:System.Data.ForeignKeyConstraint.AcceptRejectRule" />
 
             
 
@@ -687,8 +736,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates the action that should take place across this constraint when <see
-             cref="M:System.Data.DataTable.AcceptChanges" />
+            >Indicates the action that should take place across this constraint when <see cref="M:System.Data.DataTable.AcceptChanges" />
 
             
 
@@ -748,26 +796,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a row is deleted from a parent table, the <see
-             cref="P:System.Data.ForeignKeyConstraint.DeleteRule" />
+            >When a row is deleted from a parent table, the <see cref="P:System.Data.ForeignKeyConstraint.DeleteRule" />
 
             
 
              determines what will happen in the columns of the child table (or tables). If the rule is set to Cascade, child rows will be deleted.</para
           >
           <para
-            >If set to SetNull, a DBnull will be placed in the appropriate columns of the affected rows. Depending on your data source, a null value may or may not be permitted in a column. For example, SQLServer allows multiple null values to be found in a primary key column, even if they are not unique. In a <see
-             cref="T:System.Data.DataTable" />
+            >If set to SetNull, a DBnull will be placed in the appropriate columns of the affected rows. Depending on your data source, a null value may or may not be permitted in a column. For example, SQLServer allows multiple null values to be found in a primary key column, even if they are not unique. In a <see cref="T:System.Data.DataTable" />
 
             
 
-            , however, if a <see
-             cref="T:System.Data.DataColumn" />
+            , however, if a <see cref="T:System.Data.DataColumn" />
 
             
 
-             object's <see
-             cref="P:System.Data.DataColumn.Unique" />
+             object's <see cref="P:System.Data.DataColumn.Unique" />
 
             
 
@@ -804,8 +848,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the current <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+            >Gets a value indicating whether the current <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
@@ -817,17 +860,19 @@
           <para>true, if the objects are identical; otherwise, false.</para>
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to which this <see
-           cref="T:System.Data.ForeignKeyConstraint" />
+          The object to which this <see cref="T:System.Data.ForeignKeyConstraint" />
 
           
 
-           is compared. Two <see
-           cref="T:System.Data.ForeignKeyConstraint" />
+           is compared. Two <see cref="T:System.Data.ForeignKeyConstraint" />
 
           
 
@@ -851,8 +896,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the hash code of this instance of the <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+            >Gets the hash code of this instance of the <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 

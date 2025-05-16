@@ -20,18 +20,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
+        >Use the <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
 
         
 
-         class when you have created a Web service that incorporates data represented by common language runtime (CLR) types and when you need to export XML schemas for each type to be consumed by other Web services. That is, <see
-         cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
+         class when you have created a Web service that incorporates data represented by common language runtime (CLR) types and when you need to export XML schemas for each type to be consumed by other Web services. That is, <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
 
         
 
-         transforms a set of CLR types into XML schemas. (For more information about the types that can be used, see <format
-         type="text/html">
+         transforms a set of CLR types into XML schemas. (For more information about the types that can be used, see <format type="text/html">
           <a href="7381b200-437a-4506-9556-d77bf1bc3f34"
             >Types Supported by the Data Contract Serializer</a
           >
@@ -42,26 +39,22 @@
         .) The schemas can then be exposed through a Web Services Description Language (WSDL) document for use by others who need to interoperate with your service. </para
       >
       <para
-        >Conversely, if you are creating a Web service that must interoperate with an existing Web service, use the <see
-         cref="T:System.Runtime.Serialization.XsdDataContractImporter" />
+        >Conversely, if you are creating a Web service that must interoperate with an existing Web service, use the <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" />
 
         
 
          to transform XML schemas and create the CLR types that represent the data in a selected programming language. </para
       >
       <para
-        >The <see
-         cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
+        >The <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
 
         
 
-         generates an <see
-         cref="T:System.Xml.Schema.XmlSchemaSet" />
+         generates an <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
         
 
-         object that contains the collection of schemas. Access the set of schemas through the <see
-         cref="M:System.Xml.Schema.XmlSchemaSet.Schemas" />
+         object that contains the collection of schemas. Access the set of schemas through the <see cref="M:System.Xml.Schema.XmlSchemaSet.Schemas" />
 
         
 
@@ -69,8 +62,7 @@
       >
       <block subset="none" type="note">
         <para
-          >To quickly generate XML schema definition (XSD) files that other Web services can consume, use the <see
-           cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
+          >To quickly generate XML schema definition (XSD) files that other Web services can consume, use the <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
 
           
 
@@ -81,26 +73,22 @@
         <h2>Exporting Schemas Into an XmlSchemaSet</h2>
       </format>
       <para
-        >To create an instance of the <see
-         cref="T:System.Xml.Schema.XmlSchemaSet" />
+        >To create an instance of the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
         
 
          class that contains XML schema files, you should be aware of the following.</para
       >
       <para
-        >The set of types you are exporting are recorded as an internal set of data contracts. Thus, you can call the <see
-         cref="Overload:System.Runtime.Serialization.XsdDataContractExporter.CanExport" />
+        >The set of types you are exporting are recorded as an internal set of data contracts. Thus, you can call the <see cref="Overload:System.Runtime.Serialization.XsdDataContractExporter.CanExport" />
 
         
 
-         method multiple times to add new types to the schema set without degrading performance because only the new types will be added to the set. During the <see
-         cref="M:System.Runtime.Serialization.XsdDataContractExporter.Export(System.Collections.Generic.IList{System.Reflection.Assembly})" />
+         method multiple times to add new types to the schema set without degrading performance because only the new types will be added to the set. During the <see cref="M:System.Runtime.Serialization.XsdDataContractExporter.Export(System.Collections.Generic.IList{System.Reflection.Assembly})" />
 
         
 
-         operation, the existing schemas are compared to the new schemas being added. If there are conflicts, an exception will be thrown. A conflict is usually detected if two types with the same data contract name but different contracts (different members) are exported by the same <see
-         cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
+         operation, the existing schemas are compared to the new schemas being added. If there are conflicts, an exception will be thrown. A conflict is usually detected if two types with the same data contract name but different contracts (different members) are exported by the same <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
 
         
 
@@ -113,8 +101,7 @@
       <list type="ordered">
         <item>
           <para
-            >Use one of the <see
-             cref="Overload:System.Runtime.Serialization.XsdDataContractExporter.CanExport" />
+            >Use one of the <see cref="Overload:System.Runtime.Serialization.XsdDataContractExporter.CanExport" />
 
             
 
@@ -123,8 +110,7 @@
         </item>
         <item>
           <para
-            >Call the corresponding <see
-             cref="Overload:System.Runtime.Serialization.XsdDataContractExporter.Export" />
+            >Call the corresponding <see cref="Overload:System.Runtime.Serialization.XsdDataContractExporter.Export" />
 
             
 
@@ -133,8 +119,7 @@
         </item>
         <item>
           <para
-            >Retrieve the schemas from the <see
-             cref="P:System.Runtime.Serialization.XsdDataContractExporter.Schemas" />
+            >Retrieve the schemas from the <see cref="P:System.Runtime.Serialization.XsdDataContractExporter.Schemas" />
 
             
 
@@ -165,8 +150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
 
             
 
@@ -195,18 +179,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this overload when you have an existing <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+            >Use this overload when you have an existing <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
-             to which you want to add new schemas. After you construct a <see
-             cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
+             to which you want to add new schemas. After you construct a <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
 
             
 
-             with this overload, call the <see
-             cref="M:System.Runtime.Serialization.XsdDataContractExporter.Export(System.Collections.Generic.IList{System.Reflection.Assembly})" />
+             with this overload, call the <see cref="M:System.Runtime.Serialization.XsdDataContractExporter.Export(System.Collections.Generic.IList{System.Reflection.Assembly})" />
 
             
 
@@ -216,8 +197,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
 
             
 
@@ -225,12 +205,15 @@
           >
         </summary>
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchemaSet" />
+          An <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
           
 
@@ -271,17 +254,19 @@
           <para>true if the types can be exported; otherwise, false.</para>
         </returns>
         <param name="assemblies">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.Generic.ICollection`1" />
+          A <see cref="T:System.Collections.Generic.ICollection`1" />
 
           
 
-             of <see
-           cref="T:System.Reflection.Assembly" />
+             of <see cref="T:System.Reflection.Assembly" />
 
           
 
@@ -313,8 +298,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the set of .common language runtime (CLR) types contained in a <see
-             cref="T:System.Collections.Generic.ICollection`1" />
+            >Gets a value that indicates whether the set of .common language runtime (CLR) types contained in a <see cref="T:System.Collections.Generic.ICollection`1" />
 
             
 
@@ -326,12 +310,15 @@
           <para>true if the types can be exported; otherwise, false.</para>
         </returns>
         <param name="types">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.Generic.ICollection`1" />
+          A <see cref="T:System.Collections.Generic.ICollection`1" />
 
           
 
@@ -366,12 +353,15 @@
           <para>true if the type can be exported; otherwise, false. </para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -408,17 +398,19 @@
           <para>Transforms the types contained in the specified collection of assemblies. </para>
         </summary>
         <param name="assemblies">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.Generic.ICollection`1" />
+          A <see cref="T:System.Collections.Generic.ICollection`1" />
 
           
 
-             (of <see
-           cref="T:System.Reflection.Assembly" />
+             (of <see cref="T:System.Reflection.Assembly" />
 
           
 
@@ -450,8 +442,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Transforms the types contained in the <see
-             cref="T:System.Collections.Generic.ICollection`1" />
+            >Transforms the types contained in the <see cref="T:System.Collections.Generic.ICollection`1" />
 
             
 
@@ -459,17 +450,19 @@
           >
         </summary>
         <param name="types">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A  <see
-           cref="T:System.Collections.Generic.ICollection`1" />
+          A  <see cref="T:System.Collections.Generic.ICollection`1" />
 
           
 
-           (of <see
-           cref="T:System.Type" />
+           (of <see cref="T:System.Type" />
 
           
 
@@ -497,18 +490,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call the <see
-             cref="M:System.Runtime.Serialization.XsdDataContractExporter.CanExport(System.Collections.Generic.IList{System.Type})" />
+            >Call the <see cref="M:System.Runtime.Serialization.XsdDataContractExporter.CanExport(System.Collections.Generic.IList{System.Type})" />
 
             
 
-             to determine whether the type can be exported. After calling the <see
-             cref="M:System.Runtime.Serialization.XsdDataContractExporter.Export(System.Type)" />
+             to determine whether the type can be exported. After calling the <see cref="M:System.Runtime.Serialization.XsdDataContractExporter.Export(System.Type)" />
 
             
 
-             method, the schema can be retrieved through the <see
-             cref="P:System.Runtime.Serialization.XsdDataContractExporter.Schemas" />
+             method, the schema can be retrieved through the <see cref="P:System.Runtime.Serialization.XsdDataContractExporter.Schemas" />
 
             
 
@@ -520,12 +510,15 @@
           <para>Transforms the specified dnprdnshort type into an XML schema definition language (XSD) schema. </para>
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -557,8 +550,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the top-level name and namespace for the <see
-             cref="T:System.Type" />
+            >Returns the top-level name and namespace for the <see cref="T:System.Type" />
 
             
 
@@ -568,13 +560,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.XmlQualifiedName" />
+            >The <see cref="T:System.Xml.XmlQualifiedName" />
 
             
 
-             that represents the top-level name and namespace for this <see
-             cref="T:System.Type" />
+             that represents the top-level name and namespace for this <see cref="T:System.Type" />
 
             
 
@@ -582,12 +572,15 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -618,18 +611,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The main purpose of this method is to allow anonymous types in XML schema to be represented. Because anonymous types do not have a contract name and namespace, they cannot be looked up using the <see
-             cref="M:System.Runtime.Serialization.XsdDataContractExporter.GetSchemaTypeName(System.Type)" />
+            >The main purpose of this method is to allow anonymous types in XML schema to be represented. Because anonymous types do not have a contract name and namespace, they cannot be looked up using the <see cref="M:System.Runtime.Serialization.XsdDataContractExporter.GetSchemaTypeName(System.Type)" />
 
             
 
-            . This method returns the <see
-             cref="T:System.Xml.Schema.XmlSchemaType" />
+            . This method returns the <see cref="T:System.Xml.Schema.XmlSchemaType" />
 
             
 
-             definition for such types. The types for which the <see
-             cref="M:System.Runtime.Serialization.XsdDataContractExporter.GetSchemaTypeName(System.Type)" />
+             definition for such types. The types for which the <see cref="M:System.Runtime.Serialization.XsdDataContractExporter.GetSchemaTypeName(System.Type)" />
 
             
 
@@ -643,8 +633,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Schema.XmlSchemaType" />
+            >An <see cref="T:System.Xml.Schema.XmlSchemaType" />
 
             
 
@@ -652,7 +641,11 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -684,8 +677,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the contract name and contract namespace for the <see
-             cref="T:System.Type" />
+            >Returns the contract name and contract namespace for the <see cref="T:System.Type" />
 
             
 
@@ -695,8 +687,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlQualifiedName" />
+            >An <see cref="T:System.Xml.XmlQualifiedName" />
 
             
 
@@ -704,12 +695,15 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -739,8 +733,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an <see
-             cref="T:System.Runtime.Serialization.ExportOptions" />
+            >Gets or sets an <see cref="T:System.Runtime.Serialization.ExportOptions" />
 
             
 

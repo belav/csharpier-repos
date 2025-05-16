@@ -23,79 +23,65 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Reflection.Emit.DynamicILInfo" />
+        >The <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
         
 
-         class allows developers to write their own MSIL generators instead of using <see
-         cref="T:System.Reflection.Emit.ILGenerator" />
+         class allows developers to write their own MSIL generators instead of using <see cref="T:System.Reflection.Emit.ILGenerator" />
 
         
 
         . </para
       >
       <para
-        >To create instances of other types, call methods, and so on, the MSIL you generate must include tokens for those entities. The <see
-         cref="T:System.Reflection.Emit.DynamicILInfo" />
+        >To create instances of other types, call methods, and so on, the MSIL you generate must include tokens for those entities. The <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
         
 
-         class provides several overloads of the <see
-         cref="Overload:System.Reflection.Emit.DynamicILInfo.GetTokenFor" />
+         class provides several overloads of the <see cref="Overload:System.Reflection.Emit.DynamicILInfo.GetTokenFor" />
 
         
 
-         method, which return tokens valid in the scope of the current <see
-         cref="T:System.Reflection.Emit.DynamicILInfo" />
+         method, which return tokens valid in the scope of the current <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
         
 
-        . For example, if you need to call an overload of the <see
-         cref="Overload:System.Console.WriteLine" />
+        . For example, if you need to call an overload of the <see cref="Overload:System.Console.WriteLine" />
 
         
 
-         method, you can obtain a <see
-         cref="T:System.RuntimeMethodHandle" />
+         method, you can obtain a <see cref="T:System.RuntimeMethodHandle" />
 
         
 
-         for that overload and pass it to the <see
-         cref="Overload:System.Reflection.Emit.DynamicILInfo.GetTokenFor" />
+         for that overload and pass it to the <see cref="Overload:System.Reflection.Emit.DynamicILInfo.GetTokenFor" />
 
         
 
          method to obtain a token to embed in your MSIL.</para
       >
       <para
-        >Once you have created <see
-         cref="T:System.Byte" />
+        >Once you have created <see cref="T:System.Byte" />
 
         
 
-         arrays for your local variable signature, exceptions, and code body, you can use the <see
-         cref="Overload:System.Reflection.Emit.DynamicILInfo.SetCode" />
+         arrays for your local variable signature, exceptions, and code body, you can use the <see cref="Overload:System.Reflection.Emit.DynamicILInfo.SetCode" />
 
         
 
-        , <see
-         cref="Overload:System.Reflection.Emit.DynamicILInfo.SetExceptions" />
+        , <see cref="Overload:System.Reflection.Emit.DynamicILInfo.SetExceptions" />
 
         
 
-        , and <see
-         cref="Overload:System.Reflection.Emit.DynamicILInfo.SetLocalSignature" />
+        , and <see cref="Overload:System.Reflection.Emit.DynamicILInfo.SetLocalSignature" />
 
         
 
-         methods to insert them into the <see
-         cref="T:System.Reflection.Emit.DynamicMethod" />
+         methods to insert them into the <see cref="T:System.Reflection.Emit.DynamicMethod" />
 
         
 
-         associated with your <see
-         cref="T:System.Reflection.Emit.DynamicILInfo" />
+         associated with your <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
         
 
@@ -103,14 +89,14 @@
       >
       <para
         >Generating your own metadata and MSIL requires familiarity with the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see
-         cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+          cref="http://go.microsoft.com/fwlink/?LinkID=99212"
           >ECMA C# and Common Language Infrastructure Standards</see
         >
 
         
 
          on MSDN and <see
-         cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+          cref="http://go.microsoft.com/fwlink/?LinkID=65552"
           >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
         >
 
@@ -120,13 +106,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Do not use <see
-           cref="T:System.Reflection.Emit.DynamicILInfo" />
+          >Do not use <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
           
 
-           to generate code that creates a delegate to another dynamic method by calling the delegate constructor directly. Instead, use the <see
-           cref="M:System.Reflection.Emit.DynamicMethod.CreateDelegate(System.Type)" />
+           to generate code that creates a delegate to another dynamic method by calling the delegate constructor directly. Instead, use the <see cref="M:System.Reflection.Emit.DynamicMethod.CreateDelegate(System.Type)" />
 
           
 
@@ -162,18 +146,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.Emit.DynamicILInfo" />
+            >A <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
             
 
-             object is always associated with a dynamic method. The purpose of the <see
-             cref="T:System.Reflection.Emit.DynamicILInfo" />
+             object is always associated with a dynamic method. The purpose of the <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
             
 
-             class is to provide another way of inserting the MSIL stream, exception handling, and local variable signature into a dynamic method, for developers who want to generate MSIL without using the <see
-             cref="T:System.Reflection.Emit.ILGenerator" />
+             class is to provide another way of inserting the MSIL stream, exception handling, and local variable signature into a dynamic method, for developers who want to generate MSIL without using the <see cref="T:System.Reflection.Emit.ILGenerator" />
 
             
 
@@ -208,14 +189,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >For information on signature blobs, see the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
             >
 
             
 
              on MSDN and <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
 
@@ -227,8 +208,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a token, valid in the scope of the current <see
-             cref="T:System.Reflection.Emit.DynamicILInfo" />
+            >Gets a token, valid in the scope of the current <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
             
 
@@ -240,7 +220,11 @@
           <para>A token that can be embedded in the metadata and the MSIL stream for the associated dynamic method.</para>
         </returns>
         <param name="signature">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -272,13 +256,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The token returned by this method overload allows you to call a dynamic method from the dynamic method associated with the current <see
-             cref="T:System.Reflection.Emit.DynamicILInfo" />
+            >The token returned by this method overload allows you to call a dynamic method from the dynamic method associated with the current <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
             
 
-             object. To call the associated dynamic method recursively, pass the value of the <see
-             cref="P:System.Reflection.Emit.DynamicILInfo.DynamicMethod" />
+             object. To call the associated dynamic method recursively, pass the value of the <see cref="P:System.Reflection.Emit.DynamicILInfo.DynamicMethod" />
 
             
 
@@ -288,8 +270,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a token, valid in the scope of the current <see
-             cref="T:System.Reflection.Emit.DynamicILInfo" />
+            >Gets a token, valid in the scope of the current <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
             
 
@@ -301,7 +282,11 @@
           <para>A token that can be embedded in the MSIL stream for the associated dynamic method, as the target of an MSIL instruction.</para>
         </returns>
         <param name="method">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -330,28 +315,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must obtain a token for any field that will be accessed by the dynamic method associated with the current <see
-             cref="T:System.Reflection.Emit.DynamicILInfo" />
+            >You must obtain a token for any field that will be accessed by the dynamic method associated with the current <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
             
 
-             object. Use the <see
-             cref="M:System.Type.GetField(System.String)" />
+             object. Use the <see cref="M:System.Type.GetField(System.String)" />
 
             
 
-             method to get a <see
-             cref="T:System.Reflection.FieldInfo" />
+             method to get a <see cref="T:System.Reflection.FieldInfo" />
 
             
 
-             for the field you want to access, then use the <see
-             cref="P:System.Reflection.FieldInfo.FieldHandle" />
+             for the field you want to access, then use the <see cref="P:System.Reflection.FieldInfo.FieldHandle" />
 
             
 
-             property to get the <see
-             cref="T:System.RuntimeFieldHandle" />
+             property to get the <see cref="T:System.RuntimeFieldHandle" />
 
             
 
@@ -361,8 +341,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a token, valid in the scope of the current <see
-             cref="T:System.Reflection.Emit.DynamicILInfo" />
+            >Gets a token, valid in the scope of the current <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
             
 
@@ -372,8 +351,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A token that can be used as the operand of an MSIL instruction that accesses fields, in the scope of the current <see
-             cref="T:System.Reflection.Emit.DynamicILInfo" />
+            >A token that can be used as the operand of an MSIL instruction that accesses fields, in the scope of the current <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
             
 
@@ -381,7 +359,11 @@
           >
         </returns>
         <param name="field">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -410,28 +392,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must obtain a token for any method that will be accessed by the dynamic method associated with the current <see
-             cref="T:System.Reflection.Emit.DynamicILInfo" />
+            >You must obtain a token for any method that will be accessed by the dynamic method associated with the current <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
             
 
-             object. Use the <see
-             cref="Overload:System.Type.GetMethod" />
+             object. Use the <see cref="Overload:System.Type.GetMethod" />
 
             
 
-             method to get a <see
-             cref="T:System.Reflection.MethodInfo" />
+             method to get a <see cref="T:System.Reflection.MethodInfo" />
 
             
 
-             for the method you want to access, and then use the <see
-             cref="P:System.Reflection.MethodBase.MethodHandle" />
+             for the method you want to access, and then use the <see cref="P:System.Reflection.MethodBase.MethodHandle" />
 
             
 
-             property to get the <see
-             cref="T:System.RuntimeMethodHandle" />
+             property to get the <see cref="T:System.RuntimeMethodHandle" />
 
             
 
@@ -439,13 +416,11 @@
           >
           <block subset="none" type="note">
             <para
-              >For a method that belongs to a generic type, use the <see
-               cref="M:System.Reflection.Emit.DynamicILInfo.GetTokenFor(System.RuntimeMethodHandle,System.RuntimeTypeHandle)" />
+              >For a method that belongs to a generic type, use the <see cref="M:System.Reflection.Emit.DynamicILInfo.GetTokenFor(System.RuntimeMethodHandle,System.RuntimeTypeHandle)" />
 
               
 
-               method overload and specify a <see
-               cref="T:System.RuntimeTypeHandle" />
+               method overload and specify a <see cref="T:System.RuntimeTypeHandle" />
 
               
 
@@ -456,8 +431,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a token, valid in the scope of the current <see
-             cref="T:System.Reflection.Emit.DynamicILInfo" />
+            >Gets a token, valid in the scope of the current <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
             
 
@@ -467,18 +441,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A token that can be used as the operand of an MSIL instruction that accesses methods, such as <see
-             cref="F:System.Reflection.Emit.OpCodes.Call" />
+            >A token that can be used as the operand of an MSIL instruction that accesses methods, such as <see cref="F:System.Reflection.Emit.OpCodes.Call" />
 
             
 
-             or <see
-             cref="F:System.Reflection.Emit.OpCodes.Ldtoken" />
+             or <see cref="F:System.Reflection.Emit.OpCodes.Ldtoken" />
 
             
 
-            , in the scope of the current <see
-             cref="T:System.Reflection.Emit.DynamicILInfo" />
+            , in the scope of the current <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
             
 
@@ -486,7 +457,11 @@
           >
         </returns>
         <param name="method">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -515,21 +490,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The token returned by this method overload allows you to define a local variable type, and emit MSIL to create an instance of a type in the dynamic method associated with the current <see
-             cref="T:System.Reflection.Emit.DynamicILInfo" />
+            >The token returned by this method overload allows you to define a local variable type, and emit MSIL to create an instance of a type in the dynamic method associated with the current <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
             
 
              object.</para
           >
           <para
-            >To get a <see
-             cref="T:System.RuntimeTypeHandle" />
+            >To get a <see cref="T:System.RuntimeTypeHandle" />
 
             
 
-             representing a type, use the <see
-             cref="P:System.Type.TypeHandle" />
+             representing a type, use the <see cref="P:System.Type.TypeHandle" />
 
             
 
@@ -539,8 +511,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a token, valid in the scope of the current <see
-             cref="T:System.Reflection.Emit.DynamicILInfo" />
+            >Gets a token, valid in the scope of the current <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
             
 
@@ -550,8 +521,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A token that can be used as the operand of an MSIL instruction that requires a type, in the scope of the current <see
-             cref="T:System.Reflection.Emit.DynamicILInfo" />
+            >A token that can be used as the operand of an MSIL instruction that requires a type, in the scope of the current <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
             
 
@@ -559,7 +529,11 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -589,8 +563,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a token, valid in the scope of the current <see
-             cref="T:System.Reflection.Emit.DynamicILInfo" />
+            >Gets a token, valid in the scope of the current <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
             
 
@@ -600,8 +573,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A token that can be used as the operand of an MSIL instruction that requires a string, in the scope of the current <see
-             cref="T:System.Reflection.Emit.DynamicILInfo" />
+            >A token that can be used as the operand of an MSIL instruction that requires a string, in the scope of the current <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
             
 
@@ -609,7 +581,11 @@
           >
         </returns>
         <param name="literal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -641,28 +617,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must obtain a token for any field that will be accessed by the dynamic method associated with the current <see
-             cref="T:System.Reflection.Emit.DynamicILInfo" />
+            >You must obtain a token for any field that will be accessed by the dynamic method associated with the current <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
             
 
-             object. Use the <see
-             cref="M:System.Type.GetField(System.String)" />
+             object. Use the <see cref="M:System.Type.GetField(System.String)" />
 
             
 
-             method to get a <see
-             cref="T:System.Reflection.FieldInfo" />
+             method to get a <see cref="T:System.Reflection.FieldInfo" />
 
             
 
-             for the field you want to access, and then use the <see
-             cref="P:System.Reflection.FieldInfo.FieldHandle" />
+             for the field you want to access, and then use the <see cref="P:System.Reflection.FieldInfo.FieldHandle" />
 
             
 
-             property to get the <see
-             cref="T:System.RuntimeFieldHandle" />
+             property to get the <see cref="T:System.RuntimeFieldHandle" />
 
             
 
@@ -672,8 +643,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a token, valid in the scope of the current <see
-             cref="T:System.Reflection.Emit.DynamicILInfo" />
+            >Gets a token, valid in the scope of the current <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
             
 
@@ -683,8 +653,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A token that can be used as the operand of an MSIL instruction that accesses fields in the scope of the current <see
-             cref="T:System.Reflection.Emit.DynamicILInfo" />
+            >A token that can be used as the operand of an MSIL instruction that accesses fields in the scope of the current <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
             
 
@@ -692,14 +661,22 @@
           >
         </returns>
         <param name="field">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The field to be accessed.</param
         >
         <param name="contextType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -732,28 +709,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must obtain a token for any method that will be called by the dynamic method associated with the current <see
-             cref="T:System.Reflection.Emit.DynamicILInfo" />
+            >You must obtain a token for any method that will be called by the dynamic method associated with the current <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
             
 
-             object. Use the <see
-             cref="M:System.Type.GetMethod(System.String)" />
+             object. Use the <see cref="M:System.Type.GetMethod(System.String)" />
 
             
 
-             method to get a <see
-             cref="T:System.Reflection.MethodInfo" />
+             method to get a <see cref="T:System.Reflection.MethodInfo" />
 
             
 
-             for the method you want to call, and then use the <see
-             cref="P:System.Reflection.MethodBase.MethodHandle" />
+             for the method you want to call, and then use the <see cref="P:System.Reflection.MethodBase.MethodHandle" />
 
             
 
-             property to get the <see
-             cref="T:System.RuntimeMethodHandle" />
+             property to get the <see cref="T:System.RuntimeMethodHandle" />
 
             
 
@@ -763,8 +735,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a token, valid in the scope of the current <see
-             cref="T:System.Reflection.Emit.DynamicILInfo" />
+            >Gets a token, valid in the scope of the current <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
             
 
@@ -774,18 +745,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A token that can be used as the operand of an MSIL instruction that accesses methods, such as <see
-             cref="F:System.Reflection.Emit.OpCodes.Call" />
+            >A token that can be used as the operand of an MSIL instruction that accesses methods, such as <see cref="F:System.Reflection.Emit.OpCodes.Call" />
 
             
 
-             or <see
-             cref="F:System.Reflection.Emit.OpCodes.Ldtoken" />
+             or <see cref="F:System.Reflection.Emit.OpCodes.Ldtoken" />
 
             
 
-            , in the scope of the current <see
-             cref="T:System.Reflection.Emit.DynamicILInfo" />
+            , in the scope of the current <see cref="T:System.Reflection.Emit.DynamicILInfo" />
 
             
 
@@ -793,14 +761,22 @@
           >
         </returns>
         <param name="method">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The method.</param
         >
         <param name="contextType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -833,14 +809,14 @@
           <para>Calling this method a second time replaces the first MSIL stream with the second.</para>
           <para
             >Generating your own metadata and MSIL requires familiarity with the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
             >
 
             
 
              on MSDN and <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
 
@@ -854,14 +830,22 @@
           <para>Sets the code body of the associated dynamic method.</para>
         </summary>
         <param name="code">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array that contains the MSIL stream.</param
         >
         <param name="maxStackSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -903,14 +887,14 @@
           <para>Calling this method a second time replaces the first MSIL stream with the second.</para>
           <para
             >Generating your own metadata and MSIL requires familiarity with the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set." The documentation is available online; see <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
             >
 
             
 
              on MSDN and <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
 
@@ -924,21 +908,33 @@
           <para>Sets the code body of the associated dynamic method.</para>
         </summary>
         <param name="code">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A pointer to a byte array containing the MSIL stream.</param
         >
         <param name="codeSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes in the MSIL stream.</param
         >
         <param name="maxStackSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -968,14 +964,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >The exception metadata for a method defines the location and size of all try, catch, finally, filter, and fault blocks. For information on the layout of this metadata, see the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
             >
 
             
 
              on MSDN and <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
 
@@ -989,7 +985,11 @@
           <para>Sets the exception metadata for the associated dynamic method.</para>
         </summary>
         <param name="exceptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1028,14 +1028,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >The exception metadata for a method defines the location and size of all try, catch, finally, filter, and fault blocks. For information on the layout of this metadata, see the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
             >
 
             
 
              on MSDN and <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
 
@@ -1049,14 +1049,22 @@
           <para>Sets the exception metadata for the associated dynamic method.</para>
         </summary>
         <param name="exceptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A pointer to a byte array containing the exception metadata.</param
         >
         <param name="exceptionsSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1088,13 +1096,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The local variable signature describes the layout of a method's local variables. To simplify construction of the local variable signature, use the static (Shared in Visual Basic) <see
-             cref="M:System.Reflection.Emit.SignatureHelper.GetLocalVarSigHelper(System.Reflection.Module)" />
+            >The local variable signature describes the layout of a method's local variables. To simplify construction of the local variable signature, use the static (Shared in Visual Basic) <see cref="M:System.Reflection.Emit.SignatureHelper.GetLocalVarSigHelper(System.Reflection.Module)" />
 
             
 
-             method to get a <see
-             cref="T:System.Reflection.Emit.SignatureHelper" />
+             method to get a <see cref="T:System.Reflection.Emit.SignatureHelper" />
 
             
 
@@ -1102,14 +1108,14 @@
           >
           <para
             >For information on local variable signatures, see the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
             >
 
             
 
              on MSDN and <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
 
@@ -1123,12 +1129,15 @@
           <para>Sets the local variable signature that describes the layout of local variables for the associated dynamic method.</para>
         </summary>
         <param name="localSignature">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array that contains the layout of local variables for the associated <see
-           cref="T:System.Reflection.Emit.DynamicMethod" />
+          An array that contains the layout of local variables for the associated <see cref="T:System.Reflection.Emit.DynamicMethod" />
 
           
 
@@ -1166,13 +1175,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The local variable signature describes the layout of a method's local variables. To simplify construction of the local variable signature, use the static (Shared in Visual Basic) <see
-             cref="M:System.Reflection.Emit.SignatureHelper.GetLocalVarSigHelper(System.Reflection.Module)" />
+            >The local variable signature describes the layout of a method's local variables. To simplify construction of the local variable signature, use the static (Shared in Visual Basic) <see cref="M:System.Reflection.Emit.SignatureHelper.GetLocalVarSigHelper(System.Reflection.Module)" />
 
             
 
-             method to get a <see
-             cref="T:System.Reflection.Emit.SignatureHelper" />
+             method to get a <see cref="T:System.Reflection.Emit.SignatureHelper" />
 
             
 
@@ -1180,14 +1187,14 @@
           >
           <para
             >For information on local variable signatures, see the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
             >
 
             
 
              on MSDN and <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
 
@@ -1201,19 +1208,26 @@
           <para>Sets the local variable signature that describes the layout of local variables for the associated dynamic method.</para>
         </summary>
         <param name="localSignature">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array that contains the layout of local variables for the associated <see
-           cref="T:System.Reflection.Emit.DynamicMethod" />
+          An array that contains the layout of local variables for the associated <see cref="T:System.Reflection.Emit.DynamicMethod" />
 
           
 
           .</param
         >
         <param name="signatureSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

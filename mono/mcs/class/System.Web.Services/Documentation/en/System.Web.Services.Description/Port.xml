@@ -25,18 +25,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class specifies a single address (URI) for a <see
-         cref="T:System.Web.Services.Description.Binding" />
+        >This class specifies a single address (URI) for a <see cref="T:System.Web.Services.Description.Binding" />
 
         
 
-        , which defines message format and protocol details for operations and messages for a given <see
-         cref="T:System.Web.Services.Description.PortType" />
+        , which defines message format and protocol details for operations and messages for a given <see cref="T:System.Web.Services.Description.PortType" />
 
         
 
-        . The <see
-         cref="P:System.Web.Services.Description.Port.Binding" />
+        . The <see cref="P:System.Web.Services.Description.Port.Binding" />
 
         
 
@@ -60,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.Port" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.Port" />
 
             
 
@@ -85,15 +81,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Xml.XmlQualifiedName" />
-        </value>
+        <value>a <see cref="T:System.Xml.XmlQualifiedName" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A binding defines message format and protocol details for operations and messages for a <see
-             cref="T:System.Web.Services.Description.PortType" />
+            >A binding defines message format and protocol details for operations and messages for a <see cref="T:System.Web.Services.Description.PortType" />
 
             
 
@@ -103,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the value of the XML &lt;binding&gt; attribute of the <see
-             cref="T:System.Web.Services.Description.Port" />
+            >Gets or sets the value of the XML &lt;binding&gt; attribute of the <see cref="T:System.Web.Services.Description.Port" />
 
             
 
@@ -137,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of extensibility elements associated with the <see
-             cref="T:System.Web.Services.Description.Port" />
+            >Gets the collection of extensibility elements associated with the <see cref="T:System.Web.Services.Description.Port" />
 
             
 
@@ -193,13 +183,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Services.Description.Service" />
+            >Gets the <see cref="T:System.Web.Services.Description.Service" />
 
             
 
-             of which the <see
-             cref="T:System.Web.Services.Description.Port" />
+             of which the <see cref="T:System.Web.Services.Description.Port" />
 
             
 

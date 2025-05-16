@@ -13,31 +13,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >If you author a custom server control that inherits from the <see
-         cref="T:System.Web.UI.WebControls.WebControl" />
+        >If you author a custom server control that inherits from the <see cref="T:System.Web.UI.WebControls.WebControl" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+        , <see cref="T:System.Web.UI.HtmlControls.HtmlControl" />
 
         
 
-        , or <see
-         cref="T:System.Web.UI.WebControls.ListItem" />
+        , or <see cref="T:System.Web.UI.WebControls.ListItem" />
 
         
 
-         class, the .NET Framework automatically provides programmatic access to attributes because each of these classes implement the <see
-         cref="T:System.Web.UI.IAttributeAccessor" />
+         class, the .NET Framework automatically provides programmatic access to attributes because each of these classes implement the <see cref="T:System.Web.UI.IAttributeAccessor" />
 
         
 
          interface.</para
       >
       <para
-        >If you author a custom server control that does not inherit from one of these classes and plan to allow programmatic access to attributes that do not correspond with the control's strongly typed properties, be sure to implement the <see
-         cref="T:System.Web.UI.IAttributeAccessor" />
+        >If you author a custom server control that does not inherit from one of these classes and plan to allow programmatic access to attributes that do not correspond with the control's strongly typed properties, be sure to implement the <see cref="T:System.Web.UI.IAttributeAccessor" />
 
         
 
@@ -70,12 +65,15 @@
           <para>The value of the specified attribute.</para>
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -104,14 +102,22 @@
           <para>When implemented by a class, designates an attribute and its value to assign to the ASP.NET server control.</para>
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the attribute to be set. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

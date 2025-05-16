@@ -19,31 +19,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Xml.CipherData" />
+        >The <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
         
 
          class represents the &lt;CipherData&gt; element in XML encryption. It is a required element that provides the encrypted data. It must either contain the encrypted data as base64-encoded text of the &lt;CipherValue&gt; element, or provide a reference to an external location containing the encrypted data using the &lt;CipherReference&gt; element.</para
       >
       <para
-        >In many cases, you do not need to directly create a new instance of the <see
-         cref="T:System.Security.Cryptography.Xml.CipherData" />
+        >In many cases, you do not need to directly create a new instance of the <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
         
 
-         class.  The <see
-         cref="P:System.Security.Cryptography.Xml.SignedXml.EncryptedXml" />
+         class.  The <see cref="P:System.Security.Cryptography.Xml.SignedXml.EncryptedXml" />
 
         
 
-        , <see
-         cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+        , <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
         
 
-        , and <see
-         cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+        , and <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
         
 
@@ -51,28 +46,23 @@
       >
       <block subset="none" type="note">
         <para
-          >A <see
-           cref="T:System.Security.Cryptography.Xml.CipherData" />
+          >A <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
           
 
-           object can have either a <see
-           cref="T:System.Security.Cryptography.Xml.CipherReference" />
+           object can have either a <see cref="T:System.Security.Cryptography.Xml.CipherReference" />
 
           
 
-           property or a <see
-           cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
+           property or a <see cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
 
           
 
-           property, but not both. A <see
-           cref="T:System.Security.Cryptography.CryptographicException" />
+           property, but not both. A <see cref="T:System.Security.Cryptography.CryptographicException" />
 
           
 
-           is thrown if both are assigned to a <see
-           cref="T:System.Security.Cryptography.Xml.CipherData" />
+           is thrown if both are assigned to a <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
           
 
@@ -103,8 +93,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see
-             cref="T:System.Security.Cryptography.Xml.CipherData" />
+            >This constructor creates a <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
             
 
@@ -114,8 +103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.CipherData" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
             
 
@@ -143,18 +131,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see
-             cref="T:System.Security.Cryptography.Xml.CipherData" />
+            >This constructor creates a <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
             
 
-             object that represents the &lt;CipherData&gt; element in XML encryption. The constructor assigns the <paramref
-             name="cipherValue" />
+             object that represents the &lt;CipherData&gt; element in XML encryption. The constructor assigns the <paramref name="cipherValue" />
 
             
 
-             value to the <see
-             cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
+             value to the <see cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
 
             
 
@@ -162,23 +147,19 @@
           >
           <block subset="none" type="note">
             <para
-              >The &lt;CipherData&gt; element can have either a <see
-               cref="T:System.Security.Cryptography.Xml.CipherReference" />
+              >The &lt;CipherData&gt; element can have either a <see cref="T:System.Security.Cryptography.Xml.CipherReference" />
 
               
 
-               or a <see
-               cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
+               or a <see cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
 
               
 
-               child element, but not both. A <see
-               cref="T:System.Security.Cryptography.CryptographicException" />
+               child element, but not both. A <see cref="T:System.Security.Cryptography.CryptographicException" />
 
               
 
-               is thrown if both are assigned to a <see
-               cref="T:System.Security.Cryptography.Xml.CipherData" />
+               is thrown if both are assigned to a <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
               
 
@@ -189,13 +170,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.CipherData" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
             
 
-             class using a byte array as the <see
-             cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
+             class using a byte array as the <see cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
 
             
 
@@ -203,7 +182,11 @@
           >
         </summary>
         <param name="cipherValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -233,23 +216,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see
-             cref="T:System.Security.Cryptography.Xml.CipherData" />
+            >This constructor creates a <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
             
 
-             object that represents the &lt;CipherData&gt; element in XML encryption and assigns the <paramref
-             name="cipherReference" />
+             object that represents the &lt;CipherData&gt; element in XML encryption and assigns the <paramref name="cipherReference" />
 
             
 
-             value to the <see
-             cref="T:System.Security.Cryptography.Xml.CipherReference" />
+             value to the <see cref="T:System.Security.Cryptography.Xml.CipherReference" />
 
             
 
-             property. The <see
-             cref="T:System.Security.Cryptography.Xml.CipherReference" />
+             property. The <see cref="T:System.Security.Cryptography.Xml.CipherReference" />
 
             
 
@@ -257,28 +236,23 @@
           >
           <block subset="none" type="note">
             <para
-              >A <see
-               cref="T:System.Security.Cryptography.Xml.CipherData" />
+              >A <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
               
 
-               object can have either a <see
-               cref="T:System.Security.Cryptography.Xml.CipherReference" />
+               object can have either a <see cref="T:System.Security.Cryptography.Xml.CipherReference" />
 
               
 
-               property or a <see
-               cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
+               property or a <see cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
 
               
 
-               property, but not both. A <see
-               cref="T:System.Security.Cryptography.CryptographicException" />
+               property, but not both. A <see cref="T:System.Security.Cryptography.CryptographicException" />
 
               
 
-               is thrown if both are assigned to a <see
-               cref="T:System.Security.Cryptography.Xml.CipherData" />
+               is thrown if both are assigned to a <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
               
 
@@ -289,13 +263,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.CipherData" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
             
 
-             class using a <see
-             cref="T:System.Security.Cryptography.Xml.CipherReference" />
+             class using a <see cref="T:System.Security.Cryptography.Xml.CipherReference" />
 
             
 
@@ -303,12 +275,15 @@
           >
         </summary>
         <param name="cipherReference">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.Xml.CipherReference" />
+          The <see cref="T:System.Security.Cryptography.Xml.CipherReference" />
 
           
 
@@ -339,8 +314,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The &lt;CipherReference&gt; element identifies a source which, when processed, yields the encrypted data. For more information about this element, see <see
-             cref="T:System.Security.Cryptography.Xml.CipherReference" />
+            >The &lt;CipherReference&gt; element identifies a source which, when processed, yields the encrypted data. For more information about this element, see <see cref="T:System.Security.Cryptography.Xml.CipherReference" />
 
             
 
@@ -348,28 +322,23 @@
           >
           <block subset="none" type="note">
             <para
-              >A <see
-               cref="T:System.Security.Cryptography.Xml.CipherData" />
+              >A <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
               
 
-               object can have either a <see
-               cref="T:System.Security.Cryptography.Xml.CipherReference" />
+               object can have either a <see cref="T:System.Security.Cryptography.Xml.CipherReference" />
 
               
 
-               property or a <see
-               cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
+               property or a <see cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
 
               
 
-               property, but not both. A <see
-               cref="T:System.Security.Cryptography.CryptographicException" />
+               property, but not both. A <see cref="T:System.Security.Cryptography.CryptographicException" />
 
               
 
-               is thrown if both are assigned to a <see
-               cref="T:System.Security.Cryptography.Xml.CipherData" />
+               is thrown if both are assigned to a <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
               
 
@@ -402,23 +371,19 @@
           <para>The value is encrypted data.</para>
           <block subset="none" type="note">
             <para
-              >The &lt;CipherData&gt; element can have either a <see
-               cref="T:System.Security.Cryptography.Xml.CipherReference" />
+              >The &lt;CipherData&gt; element can have either a <see cref="T:System.Security.Cryptography.Xml.CipherReference" />
 
               
 
-               or a <see
-               cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
+               or a <see cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
 
               
 
-               child element, but not both. A <see
-               cref="T:System.Security.Cryptography.CryptographicException" />
+               child element, but not both. A <see cref="T:System.Security.Cryptography.CryptographicException" />
 
               
 
-               is thrown if both are assigned to a <see
-               cref="T:System.Security.Cryptography.Xml.CipherData" />
+               is thrown if both are assigned to a <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
               
 
@@ -452,8 +417,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to output XML for a <see
-             cref="T:System.Security.Cryptography.Xml.CipherData" />
+            >Use this method to output XML for a <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
             
 
@@ -463,8 +427,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the XML values for the <see
-             cref="T:System.Security.Cryptography.Xml.CipherData" />
+            >Gets the XML values for the <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
             
 
@@ -474,13 +437,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Xml.XmlElement" />
+            >A <see cref="T:System.Xml.XmlElement" />
 
             
 
-             object that represents the XML information for the <see
-             cref="T:System.Security.Cryptography.Xml.CipherData" />
+             object that represents the XML information for the <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
             
 
@@ -511,13 +472,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Xml.CipherData.LoadXml(System.Xml.XmlElement)" />
+            >The <see cref="M:System.Security.Cryptography.Xml.CipherData.LoadXml(System.Xml.XmlElement)" />
 
             
 
-             method overwrites existing XML elements with the <paramref
-             name="value" />
+             method overwrites existing XML elements with the <paramref name="value" />
 
             
 
@@ -527,13 +486,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads XML data from an <see
-             cref="T:System.Xml.XmlElement" />
+            >Loads XML data from an <see cref="T:System.Xml.XmlElement" />
 
             
 
-             into a <see
-             cref="T:System.Security.Cryptography.Xml.CipherData" />
+             into a <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
             
 
@@ -541,12 +498,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlElement" />
+          An <see cref="T:System.Xml.XmlElement" />
 
           
 

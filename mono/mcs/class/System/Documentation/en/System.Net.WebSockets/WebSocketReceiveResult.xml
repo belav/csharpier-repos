@@ -44,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Net.WebSockets.WebSocketReceiveResult" />
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketReceiveResult" />
 
             
 
@@ -53,21 +52,33 @@
           >
         </summary>
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes received.</param
         >
         <param name="messageType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of message that was received.</param
         >
         <param name="endOfMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -103,8 +114,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Net.WebSockets.WebSocketReceiveResult" />
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketReceiveResult" />
 
             
 
@@ -112,45 +122,63 @@
           >
         </summary>
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes received.</param
         >
         <param name="messageType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of message that was received.</param
         >
         <param name="endOfMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Indicates whether this is the final message.</param
         >
         <param name="closeStatus">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Indicates the <see
-           cref="T:System.Net.WebSockets.WebSocketCloseStatus" />
+          Indicates the <see cref="T:System.Net.WebSockets.WebSocketCloseStatus" />
 
           
 
            of the connection.</param
         >
         <param name="closeStatusDescription">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The description of <paramref
-           name="closeStatus" />
+          The description of <paramref name="closeStatus" />
 
           
 
@@ -220,8 +248,7 @@
           <list type="ordered">
             <item>
               <para
-                >The WebSocket received an empty message. In this case the <see
-                 cref="P:System.Net.WebSockets.WebSocketReceiveResult.CloseStatus" />
+                >The WebSocket received an empty message. In this case the <see cref="P:System.Net.WebSockets.WebSocketReceiveResult.CloseStatus" />
 
                 
 
@@ -230,8 +257,7 @@
             </item>
             <item>
               <para
-                >The WebSocket received a close message was received from the remote endpoint. In this case the <see
-                 cref="P:System.Net.WebSockets.WebSocketReceiveResult.CloseStatus" />
+                >The WebSocket received a close message was received from the remote endpoint. In this case the <see cref="P:System.Net.WebSockets.WebSocketReceiveResult.CloseStatus" />
 
                 
 

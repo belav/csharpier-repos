@@ -17,13 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.DnsEndPoint" />
+        >The <see cref="T:System.Net.DnsEndPoint" />
 
         
 
-         class contains a host name or an IP address and remote port information needed by an application to connect to a service on a host. By combining the host name or IP address and port number of a service, the <see
-         cref="T:System.Net.DnsEndPoint" />
+         class contains a host name or an IP address and remote port information needed by an application to connect to a service on a host. By combining the host name or IP address and port number of a service, the <see cref="T:System.Net.DnsEndPoint" />
 
         
 
@@ -54,51 +52,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.DnsEndPoint.#ctor(System.String,System.Int32)" />
+            >The <see cref="M:System.Net.DnsEndPoint.#ctor(System.String,System.Int32)" />
 
             
 
-             constructor can be used to initialize a <see
-             cref="T:System.Net.DnsEndPoint" />
+             constructor can be used to initialize a <see cref="T:System.Net.DnsEndPoint" />
 
             
 
-             class using either a host name or a string that represents an IP address and a port. This constructor sets the <see
-             cref="P:System.Net.DnsEndPoint.AddressFamily" />
+             class using either a host name or a string that represents an IP address and a port. This constructor sets the <see cref="P:System.Net.DnsEndPoint.AddressFamily" />
 
             
 
-             property to <see
-             cref="F:System.Net.Sockets.AddressFamily.Unknown" />
+             property to <see cref="F:System.Net.Sockets.AddressFamily.Unknown" />
 
             
 
             . </para
           >
           <para
-            >When using this constructor with a host name rather than a string representation of an IP address, the address family of the <see
-             cref="T:System.Net.DnsEndPoint" />
+            >When using this constructor with a host name rather than a string representation of an IP address, the address family of the <see cref="T:System.Net.DnsEndPoint" />
 
             
 
-             will remain <see
-             cref="F:System.Net.Sockets.AddressFamily.Unknown" />
+             will remain <see cref="F:System.Net.Sockets.AddressFamily.Unknown" />
 
             
 
-             even after use. The <see
-             cref="P:System.Net.DnsEndPoint.AddressFamily" />
+             even after use. The <see cref="P:System.Net.DnsEndPoint.AddressFamily" />
 
             
 
-             property of any <see
-             cref="T:System.Net.Sockets.Socket" />
+             property of any <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             that is created by calls to the <see
-             cref="M:System.Net.Sockets.Socket.ConnectAsync(System.Net.Sockets.SocketType,System.Net.Sockets.ProtocolType,System.Net.Sockets.SocketAsyncEventArgs)" />
+             that is created by calls to the <see cref="M:System.Net.Sockets.Socket.ConnectAsync(System.Net.Sockets.SocketType,System.Net.Sockets.ProtocolType,System.Net.Sockets.SocketAsyncEventArgs)" />
 
             
 
@@ -108,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.DnsEndPoint" />
+            >Initializes a new instance of the <see cref="T:System.Net.DnsEndPoint" />
 
             
 
@@ -117,19 +105,26 @@
           >
         </summary>
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The host name or a string representation of the IP address.</param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The port number associated with the address, or 0 to specify any available port. <paramref
-           name="port" />
+          The port number associated with the address, or 0 to specify any available port. <paramref name="port" />
 
           
 
@@ -159,46 +154,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.DnsEndPoint.#ctor(System.String,System.Int32,System.Net.Sockets.AddressFamily)" />
+            >The <see cref="M:System.Net.DnsEndPoint.#ctor(System.String,System.Int32,System.Net.Sockets.AddressFamily)" />
 
             
 
-             constructor can be used to initialize a <see
-             cref="T:System.Net.DnsEndPoint" />
+             constructor can be used to initialize a <see cref="T:System.Net.DnsEndPoint" />
 
             
 
              class using either a host name or a string that represents an IP address, a port, and an address family. </para
           >
           <para
-            >When using the constructor with a host name rather than a string representation of an IP address, the address family restricts DNS resolution to prefer addresses of the specified address family value. When using the constructor with the address family specified as <see
-             cref="F:System.Net.Sockets.AddressFamily.Unknown" />
+            >When using the constructor with a host name rather than a string representation of an IP address, the address family restricts DNS resolution to prefer addresses of the specified address family value. When using the constructor with the address family specified as <see cref="F:System.Net.Sockets.AddressFamily.Unknown" />
 
             
 
-            , the address family of the <see
-             cref="T:System.Net.DnsEndPoint" />
+            , the address family of the <see cref="T:System.Net.DnsEndPoint" />
 
             
 
-             will remain <see
-             cref="F:System.Net.Sockets.AddressFamily.Unknown" />
+             will remain <see cref="F:System.Net.Sockets.AddressFamily.Unknown" />
 
             
 
-             even after use. The <see
-             cref="P:System.Net.DnsEndPoint.AddressFamily" />
+             even after use. The <see cref="P:System.Net.DnsEndPoint.AddressFamily" />
 
             
 
-             property of any <see
-             cref="T:System.Net.Sockets.Socket" />
+             property of any <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             that is created by calls to the <see
-             cref="M:System.Net.Sockets.Socket.ConnectAsync(System.Net.Sockets.SocketType,System.Net.Sockets.ProtocolType,System.Net.Sockets.SocketAsyncEventArgs)" />
+             that is created by calls to the <see cref="M:System.Net.Sockets.Socket.ConnectAsync(System.Net.Sockets.SocketType,System.Net.Sockets.ProtocolType,System.Net.Sockets.SocketAsyncEventArgs)" />
 
             
 
@@ -208,8 +195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.DnsEndPoint" />
+            >Initializes a new instance of the <see cref="T:System.Net.DnsEndPoint" />
 
             
 
@@ -217,31 +203,41 @@
           >
         </summary>
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The host name or a string representation of the IP address.</param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The port number associated with the address, or 0 to specify any available port. <paramref
-           name="port" />
+          The port number associated with the address, or 0 to specify any available port. <paramref name="port" />
 
           
 
            is in host order.</param
         >
         <param name="addressFamily">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Net.Sockets.AddressFamily" />
+          One of the <see cref="T:System.Net.Sockets.AddressFamily" />
 
           
 
@@ -270,13 +266,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.DnsEndPoint.AddressFamily" />
+            >The <see cref="P:System.Net.DnsEndPoint.AddressFamily" />
 
             
 
-             property indicates the address family for an instance of the <see
-             cref="T:System.Net.DnsEndPoint" />
+             property indicates the address family for an instance of the <see cref="T:System.Net.DnsEndPoint" />
 
             
 
@@ -309,18 +303,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.DnsEndPoint.Equals(System.Object)" />
+            >The <see cref="M:System.Net.DnsEndPoint.Equals(System.Object)" />
 
             
 
-             method compares the current <see
-             cref="T:System.Net.DnsEndPoint" />
+             method compares the current <see cref="T:System.Net.DnsEndPoint" />
 
             
 
-             instance with the <paramref
-             name="comparand" />
+             instance with the <paramref name="comparand" />
 
             
 
@@ -330,8 +321,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two <see
-             cref="T:System.Net.DnsEndPoint" />
+            >Compares two <see cref="T:System.Net.DnsEndPoint" />
 
             
 
@@ -341,8 +331,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the two <see
-             cref="T:System.Net.DnsEndPoint" />
+            >true if the two <see cref="T:System.Net.DnsEndPoint" />
 
             
 
@@ -350,12 +339,15 @@
           >
         </returns>
         <param name="comparand">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Net.DnsEndPoint" />
+          A <see cref="T:System.Net.DnsEndPoint" />
 
           
 
@@ -381,13 +373,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.DnsEndPoint.GetHashCode" />
+            >The <see cref="M:System.Net.DnsEndPoint.GetHashCode" />
 
             
 
-             method returns a hash code of the <see
-             cref="T:System.Net.DnsEndPoint" />
+             method returns a hash code of the <see cref="T:System.Net.DnsEndPoint" />
 
             
 
@@ -397,8 +387,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a hash value for a <see
-             cref="T:System.Net.DnsEndPoint" />
+            >Returns a hash value for a <see cref="T:System.Net.DnsEndPoint" />
 
             
 
@@ -408,8 +397,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer hash value for the <see
-             cref="T:System.Net.DnsEndPoint" />
+            >An integer hash value for the <see cref="T:System.Net.DnsEndPoint" />
 
             
 
@@ -433,13 +421,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.DnsEndPoint.Host" />
+            >The <see cref="P:System.Net.DnsEndPoint.Host" />
 
             
 
-             property indicates the host name or string representation of the IP address for an instance of the <see
-             cref="T:System.Net.DnsEndPoint" />
+             property indicates the host name or string representation of the IP address for an instance of the <see cref="T:System.Net.DnsEndPoint" />
 
             
 
@@ -468,8 +454,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the port number of the <see
-             cref="T:System.Net.DnsEndPoint" />
+            >Gets the port number of the <see cref="T:System.Net.DnsEndPoint" />
 
             
 
@@ -496,8 +481,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.DnsEndPoint.ToString" />
+            >The <see cref="M:System.Net.DnsEndPoint.ToString" />
 
             
 
@@ -507,8 +491,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the host name or string representation of the IP address and port number of the <see
-             cref="T:System.Net.DnsEndPoint" />
+            >Returns the host name or string representation of the IP address and port number of the <see cref="T:System.Net.DnsEndPoint" />
 
             
 
@@ -518,8 +501,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string containing the address family, host name or IP address string, and the port number of the specified <see
-             cref="T:System.Net.DnsEndPoint" />
+            >A string containing the address family, host name or IP address string, and the port number of the specified <see cref="T:System.Net.DnsEndPoint" />
 
             
 

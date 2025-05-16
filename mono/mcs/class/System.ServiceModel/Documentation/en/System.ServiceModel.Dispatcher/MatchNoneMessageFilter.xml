@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class provides a filter that never allows a message through. Specifically, the <see
-         cref="Overload:System.ServiceModel.Dispatcher.MatchNoneMessageFilter.Match" />
+        >This class provides a filter that never allows a message through. Specifically, the <see cref="Overload:System.ServiceModel.Dispatcher.MatchNoneMessageFilter.Match" />
 
         
 
@@ -57,8 +56,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor can be used to create distinct instances of <see
-             cref="T:System.ServiceModel.Dispatcher.MatchNoneMessageFilter" />
+            >This constructor can be used to create distinct instances of <see cref="T:System.ServiceModel.Dispatcher.MatchNoneMessageFilter" />
 
             
 
@@ -68,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.MatchNoneMessageFilter" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.MatchNoneMessageFilter" />
 
             
 
@@ -101,18 +98,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The difference between the two overloads of the <see
-             cref="Overload:System.ServiceModel.Dispatcher.MatchNoneMessageFilter.Match" />
+            >The difference between the two overloads of the <see cref="Overload:System.ServiceModel.Dispatcher.MatchNoneMessageFilter.Match" />
 
             
 
-             method is that one takes the <see
-             cref="T:System.ServiceModel.Channels.MessageBuffer" />
+             method is that one takes the <see cref="T:System.ServiceModel.Channels.MessageBuffer" />
 
             
 
-             parameter and buffers the entire contents of a message (including its body) into memory, while the other takes the <see
-             cref="T:System.ServiceModel.Channels.Message" />
+             parameter and buffers the entire contents of a message (including its body) into memory, while the other takes the <see cref="T:System.ServiceModel.Channels.Message" />
 
             
 
@@ -128,12 +122,15 @@
           <para>Returns false.</para>
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Message" />
+          The <see cref="T:System.ServiceModel.Channels.Message" />
 
           
 
@@ -165,8 +162,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method takes the <see
-             cref="T:System.ServiceModel.Channels.MessageBuffer" />
+            >This method takes the <see cref="T:System.ServiceModel.Channels.MessageBuffer" />
 
             
 

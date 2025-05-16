@@ -14,28 +14,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Windows.Forms.LabelEditEventArgs" />
+        >A <see cref="T:System.Windows.Forms.LabelEditEventArgs" />
 
         
 
-         specifies the index and caption of a <see
-         cref="T:System.Windows.Forms.ListViewItem" />
+         specifies the index and caption of a <see cref="T:System.Windows.Forms.ListViewItem" />
 
         
 
-         and the caption after it has been edited by the user. This class also provides a <see
-         cref="P:System.Windows.Forms.LabelEditEventArgs.CancelEdit" />
+         and the caption after it has been edited by the user. This class also provides a <see cref="P:System.Windows.Forms.LabelEditEventArgs.CancelEdit" />
 
         
 
-         property. You can use this property in a <see
-         cref="E:System.Windows.Forms.ListView.BeforeLabelEdit" />
+         property. You can use this property in a <see cref="E:System.Windows.Forms.ListView.BeforeLabelEdit" />
 
         
 
-         event handler to prevent the user from editing the label. You can also use it in an <see
-         cref="E:System.Windows.Forms.ListView.AfterLabelEdit" />
+         event handler to prevent the user from editing the label. You can also use it in an <see cref="E:System.Windows.Forms.ListView.AfterLabelEdit" />
 
         
 
@@ -43,13 +38,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Because the <see
-           cref="E:System.Windows.Forms.ListView.AfterLabelEdit" />
+          >Because the <see cref="E:System.Windows.Forms.ListView.AfterLabelEdit" />
 
           
 
-           event takes place before the label edit is committed, calling the <see
-           cref="M:System.Windows.Forms.ListView.Sort" />
+           event takes place before the label edit is committed, calling the <see cref="M:System.Windows.Forms.ListView.Sort" />
 
           
 
@@ -60,13 +53,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.ListView.BeforeLabelEdit" />
+        >Provides data for the <see cref="E:System.Windows.Forms.ListView.BeforeLabelEdit" />
 
         
 
-         and <see
-         cref="E:System.Windows.Forms.ListView.AfterLabelEdit" />
+         and <see cref="E:System.Windows.Forms.ListView.AfterLabelEdit" />
 
         
 
@@ -85,18 +76,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this constructor when raising the <see
-             cref="E:System.Windows.Forms.ListView.BeforeLabelEdit" />
+            >You can use this constructor when raising the <see cref="E:System.Windows.Forms.ListView.BeforeLabelEdit" />
 
             
 
-             or <see
-             cref="E:System.Windows.Forms.ListView.AfterLabelEdit" />
+             or <see cref="E:System.Windows.Forms.ListView.AfterLabelEdit" />
 
             
 
-             event at run time to specify a specific list item in the <see
-             cref="T:System.Windows.Forms.ListView" />
+             event at run time to specify a specific list item in the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -106,13 +94,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.LabelEditEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.LabelEditEventArgs" />
 
             
 
-             class with the specified index to the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+             class with the specified index to the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -120,12 +106,15 @@
           >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the <see
-           cref="T:System.Windows.Forms.ListViewItem" />
+          The zero-based index of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
           
 
@@ -148,23 +137,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this constructor when raising the <see
-             cref="E:System.Windows.Forms.ListView.BeforeLabelEdit" />
+            >You can use this constructor when raising the <see cref="E:System.Windows.Forms.ListView.BeforeLabelEdit" />
 
             
 
-             or <see
-             cref="E:System.Windows.Forms.ListView.AfterLabelEdit" />
+             or <see cref="E:System.Windows.Forms.ListView.AfterLabelEdit" />
 
             
 
-             event at run time to specify a list item in the <see
-             cref="T:System.Windows.Forms.ListView" />
+             event at run time to specify a list item in the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             to edit. The constructor also enables you to specify the new text associated with the label of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+             to edit. The constructor also enables you to specify the new text associated with the label of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -174,18 +159,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.LabelEditEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.LabelEditEventArgs" />
 
             
 
-             class with the specified index to the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+             class with the specified index to the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
-             being edited and the new text for the label of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+             being edited and the new text for the label of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -193,24 +175,30 @@
           >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the <see
-           cref="T:System.Windows.Forms.ListViewItem" />
+          The zero-based index of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
           
 
           , containing the label to edit. </param
         >
         <param name="label">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new text assigned to the label of the <see
-           cref="T:System.Windows.Forms.ListViewItem" />
+          The new text assigned to the label of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
           
 
@@ -233,8 +221,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this property to cancel changes made to the label of a <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >You can use this property to cancel changes made to the label of a <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -244,8 +231,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether changes made to the label of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Gets or sets a value indicating whether changes made to the label of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -270,8 +256,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the zero-based index of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Gets the zero-based index of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -296,8 +281,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the new text assigned to the label of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Gets the new text assigned to the label of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 

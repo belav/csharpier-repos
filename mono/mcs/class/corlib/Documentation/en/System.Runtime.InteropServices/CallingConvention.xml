@@ -34,28 +34,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Always use the <see
-         cref="T:System.Runtime.InteropServices.CallingConvention" />
+        >Always use the <see cref="T:System.Runtime.InteropServices.CallingConvention" />
 
         
 
-         enumeration rather than the <see
-         cref="T:System.Runtime.InteropServices.CALLCONV" />
+         enumeration rather than the <see cref="T:System.Runtime.InteropServices.CALLCONV" />
 
         
 
-         enumeration to specify a calling convention in managed code. The latter exists only for the sake of COM definitions. The <see
-         cref="T:System.Runtime.InteropServices.CallingConvention" />
+         enumeration to specify a calling convention in managed code. The latter exists only for the sake of COM definitions. The <see cref="T:System.Runtime.InteropServices.CallingConvention" />
 
         
 
-         enumeration is used by <see
-         cref="T:System.Runtime.InteropServices.DllImportAttribute" />
+         enumeration is used by <see cref="T:System.Runtime.InteropServices.DllImportAttribute" />
 
         
 
-         and several classes in <see
-         cref="N:System.Reflection.Emit" />
+         and several classes in <see cref="N:System.Reflection.Emit" />
 
         
 
@@ -209,13 +204,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is not actually a calling convention, but instead uses the default platform calling convention. For example, on Windows the default is <see
-             cref="F:System.Runtime.InteropServices.CallingConvention.StdCall" />
+            >This member is not actually a calling convention, but instead uses the default platform calling convention. For example, on Windows the default is <see cref="F:System.Runtime.InteropServices.CallingConvention.StdCall" />
 
             
 
-             and on Windows CE.NET it is <see
-             cref="F:System.Runtime.InteropServices.CallingConvention.Cdecl" />
+             and on Windows CE.NET it is <see cref="F:System.Runtime.InteropServices.CallingConvention.Cdecl" />
 
             
 

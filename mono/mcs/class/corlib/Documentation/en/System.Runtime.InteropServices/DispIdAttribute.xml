@@ -64,7 +64,11 @@
           <para>Initializes a new instance of the DispIdAttribute class with the specified DISPID.</para>
         </summary>
         <param name="dispId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

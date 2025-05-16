@@ -22,13 +22,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.IDataParameterCollection" />
+        >The <see cref="T:System.Data.IDataParameterCollection" />
 
         
 
-         interface allows an inheriting class to implement a Parameter collection. For more information about Parameter classes, see <format
-         type="text/html">
+         interface allows an inheriting class to implement a Parameter collection. For more information about Parameter classes, see <format type="text/html">
           <a href="537d8a2c-d40b-4000-83eb-bc1fcc93f707">Using Stored Procedures with a Command</a>
         </format>
 
@@ -37,36 +35,30 @@
         .</para
       >
       <para
-        >An application does not create an instance of the <see
-         cref="T:System.Data.IDataParameterCollection" />
+        >An application does not create an instance of the <see cref="T:System.Data.IDataParameterCollection" />
 
         
 
-         interface directly, but creates an instance of a class that inherits <see
-         cref="T:System.Data.IDataParameterCollection" />
+         interface directly, but creates an instance of a class that inherits <see cref="T:System.Data.IDataParameterCollection" />
 
         
 
         .</para
       >
       <para
-        >Classes that inherit <see
-         cref="T:System.Data.IDataParameterCollection" />
+        >Classes that inherit <see cref="T:System.Data.IDataParameterCollection" />
 
         
 
-         must implement the inherited members, and typically define additional members to add provider-specific functionality. For example, the <see
-         cref="T:System.Data.IDataParameterCollection" />
+         must implement the inherited members, and typically define additional members to add provider-specific functionality. For example, the <see cref="T:System.Data.IDataParameterCollection" />
 
         
 
-         interface defines one implementation of the <see
-         cref="M:System.Data.IDataParameterCollection.RemoveAt(System.String)" />
+         interface defines one implementation of the <see cref="M:System.Data.IDataParameterCollection.RemoveAt(System.String)" />
 
         
 
-         method. In turn, the <see
-         cref="T:System.Data.OleDb.OleDbParameterCollection" />
+         method. In turn, the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
         
 
@@ -76,8 +68,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Collects all parameters relevant to a Command object and their mappings to <see
-         cref="T:System.Data.DataSet" />
+        >Collects all parameters relevant to a Command object and their mappings to <see cref="T:System.Data.DataSet" />
 
         
 
@@ -106,7 +97,11 @@
           <para>true if the collection contains the parameter; otherwise, false.</para>
         </returns>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -132,8 +127,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the location of the <see
-             cref="T:System.Data.IDataParameter" />
+            >Gets the location of the <see cref="T:System.Data.IDataParameter" />
 
             
 
@@ -143,8 +137,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based location of the <see
-             cref="T:System.Data.IDataParameter" />
+            >The zero-based location of the <see cref="T:System.Data.IDataParameter" />
 
             
 
@@ -152,7 +145,11 @@
           >
         </returns>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -201,8 +198,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Data.IDataParameter" />
+            >Removes the <see cref="T:System.Data.IDataParameter" />
 
             
 
@@ -210,7 +206,11 @@
           >
         </summary>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

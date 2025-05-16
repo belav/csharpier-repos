@@ -37,8 +37,7 @@
       <para>For more information about accessibility, including information about accessibility applications, see the documentation for Microsoft Accessibility in the MSDN library or at the Microsoft Web site.</para>
       <block subset="none" type="note">
         <para
-          >To use the <see
-           cref="T:System.Windows.Forms.AccessibleObject" />
+          >To use the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
           
 
@@ -64,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
@@ -93,13 +91,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             instance is cast to an <see
-             cref="T:Accessibility.IAccessible" />
+             instance is cast to an <see cref="T:Accessibility.IAccessible" />
 
             
 
@@ -109,8 +105,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of child interfaces that belong to this object. For a description of this member, see <see
-             cref="P:Accessibility.IAccessible.accChildCount" />
+            >Gets the number of child interfaces that belong to this object. For a description of this member, see <see cref="P:Accessibility.IAccessible.accChildCount" />
 
             
 
@@ -139,13 +134,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             instance is cast to an <see
-             cref="T:Accessibility.IAccessible" />
+             instance is cast to an <see cref="T:Accessibility.IAccessible" />
 
             
 
@@ -155,8 +148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs the specified object's default action. Not all objects have a default action. For a description of this member, see <see
-             cref="M:Accessibility.IAccessible.accDoDefaultAction(System.Object)" />
+            >Performs the specified object's default action. Not all objects have a default action. For a description of this member, see <see cref="M:Accessibility.IAccessible.accDoDefaultAction(System.Object)" />
 
             
 
@@ -164,12 +156,15 @@
           >
         </summary>
         <param name="childID">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The child ID in the <see
-           cref="T:Accessibility.IAccessible" />
+          The child ID in the <see cref="T:Accessibility.IAccessible" />
 
           
 
@@ -192,13 +187,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The return value type of the <see
-             cref="P:System.Windows.Forms.AccessibleObject.Accessibility#IAccessible#accFocus" />
+            >The return value type of the <see cref="P:System.Windows.Forms.AccessibleObject.Accessibility#IAccessible#accFocus" />
 
             
 
-             property depends on the object that has keyboard focus. The following table describes the object types that the <see
-             cref="P:System.Windows.Forms.AccessibleObject.Accessibility#IAccessible#accFocus" />
+             property depends on the object that has keyboard focus. The following table describes the object types that the <see cref="P:System.Windows.Forms.AccessibleObject.Accessibility#IAccessible#accFocus" />
 
             
 
@@ -245,13 +238,11 @@
           </list>
           <para />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             instance is cast to an <see
-             cref="T:Accessibility.IAccessible" />
+             instance is cast to an <see cref="T:Accessibility.IAccessible" />
 
             
 
@@ -262,8 +253,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the object that has the keyboard focus. For a description of this member, see <see
-             cref="P:Accessibility.IAccessible.accFocus" />
+            >Gets the object that has the keyboard focus. For a description of this member, see <see cref="P:Accessibility.IAccessible.accFocus" />
 
             
 
@@ -290,8 +280,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table describes the object types that the <see
-             cref="M:System.Windows.Forms.AccessibleObject.Accessibility#IAccessible#accHitTest(System.Int32,System.Int32)" />
+            >The following table describes the object types that the <see cref="M:System.Windows.Forms.AccessibleObject.Accessibility#IAccessible#accHitTest(System.Int32,System.Int32)" />
 
             
 
@@ -328,13 +317,11 @@
             </item>
           </list>
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             instance is cast to an <see
-             cref="T:Accessibility.IAccessible" />
+             instance is cast to an <see cref="T:Accessibility.IAccessible" />
 
             
 
@@ -344,8 +331,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the child object at the specified screen coordinates. For a description of this member, see <see
-             cref="M:Accessibility.IAccessible.accHitTest(System.Int32,System.Int32)" />
+            >Gets the child object at the specified screen coordinates. For a description of this member, see <see cref="M:Accessibility.IAccessible.accHitTest(System.Int32,System.Int32)" />
 
             
 
@@ -355,13 +341,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The accessible object at the point specified by <paramref
-             name="xLeft" />
+            >The accessible object at the point specified by <paramref name="xLeft" />
 
             
 
-             and <paramref
-             name="yTop" />
+             and <paramref name="yTop" />
 
             
 
@@ -369,14 +353,22 @@
           >
         </returns>
         <param name="xLeft">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The horizontal coordinate.</param
         >
         <param name="yTop">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -435,8 +427,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table describes the object types that the <see
-             cref="M:System.Windows.Forms.AccessibleObject.Accessibility#IAccessible#accNavigate(System.Int32,System.Object)" />
+            >The following table describes the object types that the <see cref="M:System.Windows.Forms.AccessibleObject.Accessibility#IAccessible#accNavigate(System.Int32,System.Object)" />
 
             
 
@@ -477,8 +468,7 @@
               </term>
               <description>
                 <para
-                  >The child ID that identifies the accessible object at the specified direction. Use the parent <see
-                   cref="T:Accessibility.IAccessible" />
+                  >The child ID that identifies the accessible object at the specified direction. Use the parent <see cref="T:Accessibility.IAccessible" />
 
                   
 
@@ -488,13 +478,11 @@
             </item>
           </list>
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             instance is cast to an <see
-             cref="T:Accessibility.IAccessible" />
+             instance is cast to an <see cref="T:Accessibility.IAccessible" />
 
             
 
@@ -504,8 +492,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Navigates to an accessible object relative to the current object. For a description of this member, see <see
-             cref="M:Accessibility.IAccessible.accNavigate(System.Int32,System.Object)" />
+            >Navigates to an accessible object relative to the current object. For a description of this member, see <see cref="M:Accessibility.IAccessible.accNavigate(System.Int32,System.Object)" />
 
             
 
@@ -515,8 +502,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The accessible object positioned at the value specified by <paramref
-             name="navDir" />
+            >The accessible object positioned at the value specified by <paramref name="navDir" />
 
             
 
@@ -524,19 +510,26 @@
           >
         </returns>
         <param name="navDir">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.AccessibleNavigation" />
+          One of the <see cref="T:System.Windows.Forms.AccessibleNavigation" />
 
           
 
            enumerations that specifies the direction to navigate. </param
         >
         <param name="childID">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -559,13 +552,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             instance is cast to an <see
-             cref="T:Accessibility.IAccessible" />
+             instance is cast to an <see cref="T:Accessibility.IAccessible" />
 
             
 
@@ -575,8 +566,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the parent accessible object of this object. For a description of this member, see <see
-             cref="P:Accessibility.IAccessible.accParent" />
+            >Gets the parent accessible object of this object. For a description of this member, see <see cref="P:Accessibility.IAccessible.accParent" />
 
             
 
@@ -606,8 +596,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following describes which <see
-             cref="T:System.Windows.Forms.AccessibleSelection" />
+            >The following describes which <see cref="T:System.Windows.Forms.AccessibleSelection" />
 
             
 
@@ -634,8 +623,7 @@
 
                   
 
-                   OR <see
-                   cref="F:System.Windows.Forms.AccessibleSelection.TakeSelection" />
+                   OR <see cref="F:System.Windows.Forms.AccessibleSelection.TakeSelection" />
                 </para>
               </description>
             </item>
@@ -649,8 +637,7 @@
 
                   
 
-                   OR <see
-                   cref="F:System.Windows.Forms.AccessibleSelection.AddSelection" />
+                   OR <see cref="F:System.Windows.Forms.AccessibleSelection.AddSelection" />
                 </para>
               </description>
             </item>
@@ -664,8 +651,7 @@
 
                   
 
-                   OR <see
-                   cref="F:System.Windows.Forms.AccessibleSelection.RemoveSelection" />
+                   OR <see cref="F:System.Windows.Forms.AccessibleSelection.RemoveSelection" />
                 </para>
               </description>
             </item>
@@ -679,8 +665,7 @@
 
                   
 
-                   OR <see
-                   cref="F:System.Windows.Forms.AccessibleSelection.ExtendSelection" />
+                   OR <see cref="F:System.Windows.Forms.AccessibleSelection.ExtendSelection" />
                 </para>
               </description>
             </item>
@@ -690,18 +675,15 @@
               </term>
               <description>
                 <para
-                  >Specify <see
-                   cref="F:System.Windows.Forms.AccessibleSelection.TakeFocus" />
+                  >Specify <see cref="F:System.Windows.Forms.AccessibleSelection.TakeFocus" />
 
                   
 
-                   on the starting object to set the selection anchor. Then call Select again and specify <see
-                   cref="F:System.Windows.Forms.AccessibleSelection.TakeFocus" />
+                   on the starting object to set the selection anchor. Then call Select again and specify <see cref="F:System.Windows.Forms.AccessibleSelection.TakeFocus" />
 
                   
 
-                   OR <see
-                   cref="F:System.Windows.Forms.AccessibleSelection.ExtendSelection" />
+                   OR <see cref="F:System.Windows.Forms.AccessibleSelection.ExtendSelection" />
 
                   
 
@@ -715,13 +697,11 @@
               </term>
               <description>
                 <para
-                  >Specify <see
-                   cref="F:System.Windows.Forms.AccessibleSelection.TakeSelection" />
+                  >Specify <see cref="F:System.Windows.Forms.AccessibleSelection.TakeSelection" />
 
                   
 
-                   on any object. This flag deselects all selected objects except the one just selected. Then call Select again and specify <see
-                   cref="F:System.Windows.Forms.AccessibleSelection.RemoveSelection" />
+                   on any object. This flag deselects all selected objects except the one just selected. Then call Select again and specify <see cref="F:System.Windows.Forms.AccessibleSelection.RemoveSelection" />
 
                   
 
@@ -731,13 +711,11 @@
             </item>
           </list>
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             instance is cast to an <see
-             cref="T:Accessibility.IAccessible" />
+             instance is cast to an <see cref="T:Accessibility.IAccessible" />
 
             
 
@@ -747,8 +725,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Modifies the selection or moves the keyboard focus of the accessible object. For a description of this member, see <see
-             cref="M:Accessibility.IAccessible.accSelect(System.Int32,System.Object)" />
+            >Modifies the selection or moves the keyboard focus of the accessible object. For a description of this member, see <see cref="M:Accessibility.IAccessible.accSelect(System.Int32,System.Object)" />
 
             
 
@@ -756,19 +733,26 @@
           >
         </summary>
         <param name="flagsSelect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.AccessibleSelection" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.AccessibleSelection" />
 
           
 
            values.</param
         >
         <param name="childID">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -794,8 +778,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table describes the object types that the <see
-             cref="P:System.Windows.Forms.AccessibleObject.Accessibility#IAccessible#accSelection" />
+            >The following table describes the object types that the <see cref="P:System.Windows.Forms.AccessibleObject.Accessibility#IAccessible#accSelection" />
 
             
 
@@ -837,8 +820,7 @@
               </term>
               <description>
                 <para
-                  >The child ID that identifies the accessible object that is selected. Use the parent <see
-                   cref="T:Accessibility.IAccessible" />
+                  >The child ID that identifies the accessible object that is selected. Use the parent <see cref="T:Accessibility.IAccessible" />
 
                   
 
@@ -857,13 +839,11 @@
           </list>
           <para />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             instance is cast to an <see
-             cref="T:Accessibility.IAccessible" />
+             instance is cast to an <see cref="T:Accessibility.IAccessible" />
 
             
 
@@ -874,8 +854,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the selected child objects of an accessible object. For a description of this member, see <see
-             cref="P:Accessibility.IAccessible.accSelection" />
+            >Gets the selected child objects of an accessible object. For a description of this member, see <see cref="P:Accessibility.IAccessible.accSelection" />
 
             
 
@@ -1160,18 +1139,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.AccessibleObject.Bounds" />
+            >The <see cref="P:System.Windows.Forms.AccessibleObject.Bounds" />
 
             
 
-             property retrieves the object's bounding rectangle in screen coordinates. If the object has a nonrectangular shape, then this property represents the smallest rectangle that completely encompasses the entire object region. Therefore, for nonrectangular objects such as list view items, the coordinates of the object's bounding rectangle can fail, if tested, by calling the <see
-             cref="M:System.Windows.Forms.AccessibleObject.HitTest(System.Int32,System.Int32)" />
+             property retrieves the object's bounding rectangle in screen coordinates. If the object has a nonrectangular shape, then this property represents the smallest rectangle that completely encompasses the entire object region. Therefore, for nonrectangular objects such as list view items, the coordinates of the object's bounding rectangle can fail, if tested, by calling the <see cref="M:System.Windows.Forms.AccessibleObject.HitTest(System.Int32,System.Int32)" />
 
             
 
-             method, because <see
-             cref="M:System.Windows.Forms.AccessibleObject.HitTest(System.Int32,System.Int32)" />
+             method, because <see cref="M:System.Windows.Forms.AccessibleObject.HitTest(System.Int32,System.Int32)" />
 
             
 
@@ -1243,18 +1219,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clients can retrieve the object's default action by inspecting an object's <see
-             cref="P:System.Windows.Forms.AccessibleObject.DefaultAction" />
+            >Clients can retrieve the object's default action by inspecting an object's <see cref="P:System.Windows.Forms.AccessibleObject.DefaultAction" />
 
             
 
-             property. A client can use automation (if supported) instead of <see
-             cref="M:System.Windows.Forms.AccessibleObject.DoDefaultAction" />
+             property. A client can use automation (if supported) instead of <see cref="M:System.Windows.Forms.AccessibleObject.DoDefaultAction" />
 
             
 
-             to perform an object's default action. However, <see
-             cref="M:System.Windows.Forms.AccessibleObject.DoDefaultAction" />
+             to perform an object's default action. However, <see cref="M:System.Windows.Forms.AccessibleObject.DoDefaultAction" />
 
             
 
@@ -1292,8 +1265,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >An <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
@@ -1301,7 +1273,11 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1359,8 +1335,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >An <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
@@ -1415,8 +1390,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >An <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
@@ -1465,18 +1439,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For nonrectangular objects such as list view items, the coordinates of the object's bounding rectangle retrieved by <see
-             cref="P:System.Windows.Forms.AccessibleObject.Bounds" />
+            >For nonrectangular objects such as list view items, the coordinates of the object's bounding rectangle retrieved by <see cref="P:System.Windows.Forms.AccessibleObject.Bounds" />
 
             
 
-             can fail if tested with <see
-             cref="M:System.Windows.Forms.AccessibleObject.HitTest(System.Int32,System.Int32)" />
+             can fail if tested with <see cref="M:System.Windows.Forms.AccessibleObject.HitTest(System.Int32,System.Int32)" />
 
             
 
-            , because <see
-             cref="M:System.Windows.Forms.AccessibleObject.HitTest(System.Int32,System.Int32)" />
+            , because <see cref="M:System.Windows.Forms.AccessibleObject.HitTest(System.Int32,System.Int32)" />
 
             
 
@@ -1490,8 +1461,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >An <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
@@ -1499,14 +1469,22 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The horizontal screen coordinate. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1529,8 +1507,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An access key, also known as a mnemonic, is an underlined character in the text of a menu, menu item, label of a button, or some other control. For example, a user can display a menu by pressing the ALT key while also pressing the indicated underlined key, such as ALT+F, to open the File menu. To use the access key of a menu item, the menu containing the item must be active. Controls such as toolbar buttons and menu items often have an associated shortcut key. A menu item can have both an access key and a shortcut key associated with it. If the value of the <see
-             cref="P:System.Windows.Forms.AccessibleObject.KeyboardShortcut" />
+            >An access key, also known as a mnemonic, is an underlined character in the text of a menu, menu item, label of a button, or some other control. For example, a user can display a menu by pressing the ALT key while also pressing the indicated underlined key, such as ALT+F, to open the File menu. To use the access key of a menu item, the menu containing the item must be active. Controls such as toolbar buttons and menu items often have an associated shortcut key. A menu item can have both an access key and a shortcut key associated with it. If the value of the <see cref="P:System.Windows.Forms.AccessibleObject.KeyboardShortcut" />
 
             
 
@@ -1558,13 +1535,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.AccessibleObject.Name" />
+            >The <see cref="P:System.Windows.Forms.AccessibleObject.Name" />
 
             
 
-             property is a string used by clients to identify, find, or announce an object for the user. To access the name of a child object, you must first call <see
-             cref="M:System.Windows.Forms.AccessibleObject.GetChild(System.Int32)" />
+             property is a string used by clients to identify, find, or announce an object for the user. To access the name of a child object, you must first call <see cref="M:System.Windows.Forms.AccessibleObject.GetChild(System.Int32)" />
 
             
 
@@ -1597,13 +1572,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Navigation, both spatial and logical, is always restricted to the user interface elements within a container. With spatial navigation, clients can navigate only to a sibling of the starting object. Depending on the navigational flag used with logical navigation, clients can navigate to either a child or to a sibling of the starting object. This method does not change the selection or focus. To change the focus or to select an object, use <see
-             cref="M:System.Windows.Forms.AccessibleObject.Select(System.Windows.Forms.AccessibleSelection)" />
+            >Navigation, both spatial and logical, is always restricted to the user interface elements within a container. With spatial navigation, clients can navigate only to a sibling of the starting object. Depending on the navigational flag used with logical navigation, clients can navigate to either a child or to a sibling of the starting object. This method does not change the selection or focus. To change the focus or to select an object, use <see cref="M:System.Windows.Forms.AccessibleObject.Select(System.Windows.Forms.AccessibleSelection)" />
 
             
 
-            . The <see
-             cref="M:System.Windows.Forms.AccessibleObject.Navigate(System.Windows.Forms.AccessibleNavigation)" />
+            . The <see cref="M:System.Windows.Forms.AccessibleObject.Navigate(System.Windows.Forms.AccessibleNavigation)" />
 
             
 
@@ -1617,13 +1590,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >An <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             that represents one of the <see
-             cref="T:System.Windows.Forms.AccessibleNavigation" />
+             that represents one of the <see cref="T:System.Windows.Forms.AccessibleNavigation" />
 
             
 
@@ -1631,12 +1602,15 @@
           >
         </returns>
         <param name="navdir">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.AccessibleNavigation" />
+          One of the <see cref="T:System.Windows.Forms.AccessibleNavigation" />
 
           
 
@@ -1712,13 +1686,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Applications can use this method to perform complex selection operations.</para>
           <para
-            >The following describes which <see
-             cref="T:System.Windows.Forms.AccessibleSelection" />
+            >The following describes which <see cref="T:System.Windows.Forms.AccessibleSelection" />
 
             
 
-             values to specify when calling <see
-             cref="M:System.Windows.Forms.AccessibleObject.Select(System.Windows.Forms.AccessibleSelection)" />
+             values to specify when calling <see cref="M:System.Windows.Forms.AccessibleObject.Select(System.Windows.Forms.AccessibleSelection)" />
 
             
 
@@ -1745,8 +1717,7 @@
 
                   
 
-                   OR <see
-                   cref="F:System.Windows.Forms.AccessibleSelection.TakeSelection" />
+                   OR <see cref="F:System.Windows.Forms.AccessibleSelection.TakeSelection" />
                 </para>
                 <block subset="none" type="note">
                   <para>This combination will not select the desired control if called from within your own application. It will have the desired effect, however, if called from an external application. </para>
@@ -1763,8 +1734,7 @@
 
                   
 
-                   OR <see
-                   cref="F:System.Windows.Forms.AccessibleSelection.AddSelection" />
+                   OR <see cref="F:System.Windows.Forms.AccessibleSelection.AddSelection" />
                 </para>
               </description>
             </item>
@@ -1778,8 +1748,7 @@
 
                   
 
-                   OR <see
-                   cref="F:System.Windows.Forms.AccessibleSelection.RemoveSelection" />
+                   OR <see cref="F:System.Windows.Forms.AccessibleSelection.RemoveSelection" />
                 </para>
               </description>
             </item>
@@ -1793,8 +1762,7 @@
 
                   
 
-                   OR <see
-                   cref="F:System.Windows.Forms.AccessibleSelection.ExtendSelection" />
+                   OR <see cref="F:System.Windows.Forms.AccessibleSelection.ExtendSelection" />
                 </para>
               </description>
             </item>
@@ -1804,23 +1772,19 @@
               </term>
               <description>
                 <para
-                  >Specify <see
-                   cref="F:System.Windows.Forms.AccessibleSelection.TakeFocus" />
+                  >Specify <see cref="F:System.Windows.Forms.AccessibleSelection.TakeFocus" />
 
                   
 
-                   on the starting object to set the selection anchor. Then call <see
-                   cref="M:System.Windows.Forms.AccessibleObject.Select(System.Windows.Forms.AccessibleSelection)" />
+                   on the starting object to set the selection anchor. Then call <see cref="M:System.Windows.Forms.AccessibleObject.Select(System.Windows.Forms.AccessibleSelection)" />
 
                   
 
-                   again and specify <see
-                   cref="F:System.Windows.Forms.AccessibleSelection.TakeFocus" />
+                   again and specify <see cref="F:System.Windows.Forms.AccessibleSelection.TakeFocus" />
 
                   
 
-                   OR <see
-                   cref="F:System.Windows.Forms.AccessibleSelection.ExtendSelection" />
+                   OR <see cref="F:System.Windows.Forms.AccessibleSelection.ExtendSelection" />
 
                   
 
@@ -1834,18 +1798,15 @@
               </term>
               <description>
                 <para
-                  >Specify <see
-                   cref="F:System.Windows.Forms.AccessibleSelection.TakeSelection" />
+                  >Specify <see cref="F:System.Windows.Forms.AccessibleSelection.TakeSelection" />
 
                   
 
-                   on any object. This flag deselects all selected objects except the one just selected. Then call <see
-                   cref="M:System.Windows.Forms.AccessibleObject.Select(System.Windows.Forms.AccessibleSelection)" />
+                   on any object. This flag deselects all selected objects except the one just selected. Then call <see cref="M:System.Windows.Forms.AccessibleObject.Select(System.Windows.Forms.AccessibleSelection)" />
 
                   
 
-                   again and specify <see
-                   cref="F:System.Windows.Forms.AccessibleSelection.RemoveSelection" />
+                   again and specify <see cref="F:System.Windows.Forms.AccessibleSelection.RemoveSelection" />
 
                   
 
@@ -1860,12 +1821,15 @@
           <para>Modifies the selection or moves the keyboard focus of the accessible object.</para>
         </summary>
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.AccessibleSelection" />
+          One of the <see cref="T:System.Windows.Forms.AccessibleSelection" />
 
           
 
@@ -1920,13 +1884,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Reflection.IReflect" />
+             instance is cast to an <see cref="T:System.Reflection.IReflect" />
 
             
 
@@ -1936,13 +1898,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Reflection.FieldInfo" />
+            >Gets the <see cref="T:System.Reflection.FieldInfo" />
 
             
 
-             object corresponding to the specified field and binding flag. For a description of this member, see <see
-             cref="M:System.Reflection.IReflect.GetField(System.String,System.Reflection.BindingFlags)" />
+             object corresponding to the specified field and binding flag. For a description of this member, see <see cref="M:System.Reflection.IReflect.GetField(System.String,System.Reflection.BindingFlags)" />
 
             
 
@@ -1952,13 +1912,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.FieldInfo" />
+            >A <see cref="T:System.Reflection.FieldInfo" />
 
             
 
-             object containing the field information for the named object that meets the search constraints specified in <paramref
-             name="bindingAttr" />
+             object containing the field information for the named object that meets the search constraints specified in <paramref name="bindingAttr" />
 
             
 
@@ -1966,14 +1924,22 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the field to find.</param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2001,26 +1967,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each field must have a unique name. The <see
-             cref="F:System.Reflection.BindingFlags.NonPublic" />
+            >Each field must have a unique name. The <see cref="F:System.Reflection.BindingFlags.NonPublic" />
 
             
 
-             flag specifies that nonpublic fields are included in the search. The <see
-             cref="F:System.Reflection.BindingFlags.Public" />
+             flag specifies that nonpublic fields are included in the search. The <see cref="F:System.Reflection.BindingFlags.Public" />
 
             
 
              flag specifies that public fields are included in the search.</para
           >
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Reflection.IReflect" />
+             instance is cast to an <see cref="T:System.Reflection.IReflect" />
 
             
 
@@ -2030,13 +1992,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of <see
-             cref="T:System.Reflection.FieldInfo" />
+            >Gets an array of <see cref="T:System.Reflection.FieldInfo" />
 
             
 
-             objects corresponding to all fields of the current class. For a description of this member, see <see
-             cref="M:System.Reflection.IReflect.GetFields(System.Reflection.BindingFlags)" />
+             objects corresponding to all fields of the current class. For a description of this member, see <see cref="M:System.Reflection.IReflect.GetFields(System.Reflection.BindingFlags)" />
 
             
 
@@ -2046,13 +2006,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Reflection.FieldInfo" />
+            >An array of <see cref="T:System.Reflection.FieldInfo" />
 
             
 
-             objects containing all the field information for this reflection object that meets the search constraints specified in <paramref
-             name="bindingAttr" />
+             objects containing all the field information for this reflection object that meets the search constraints specified in <paramref name="bindingAttr" />
 
             
 
@@ -2060,7 +2018,11 @@
           >
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2089,13 +2051,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Reflection.IReflect" />
+             instance is cast to an <see cref="T:System.Reflection.IReflect" />
 
             
 
@@ -2105,13 +2065,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of <see
-             cref="T:System.Reflection.MemberInfo" />
+            >Gets an array of <see cref="T:System.Reflection.MemberInfo" />
 
             
 
-             objects corresponding to all public members or to all members that match a specified name. For a description of this member, see <see
-             cref="M:System.Reflection.IReflect.GetMember(System.String,System.Reflection.BindingFlags)" />
+             objects corresponding to all public members or to all members that match a specified name. For a description of this member, see <see cref="M:System.Reflection.IReflect.GetMember(System.String,System.Reflection.BindingFlags)" />
 
             
 
@@ -2121,8 +2079,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Reflection.MemberInfo" />
+            >An array of <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -2130,14 +2087,22 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the member to find.</param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2165,13 +2130,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Reflection.IReflect" />
+             instance is cast to an <see cref="T:System.Reflection.IReflect" />
 
             
 
@@ -2181,13 +2144,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of <see
-             cref="T:System.Reflection.MemberInfo" />
+            >Gets an array of <see cref="T:System.Reflection.MemberInfo" />
 
             
 
-             objects corresponding either to all public members or to all members of the current class. For a description of this member, see <see
-             cref="M:System.Reflection.IReflect.GetMembers(System.Reflection.BindingFlags)" />
+             objects corresponding either to all public members or to all members of the current class. For a description of this member, see <see cref="M:System.Reflection.IReflect.GetMembers(System.Reflection.BindingFlags)" />
 
             
 
@@ -2197,8 +2158,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Reflection.MemberInfo" />
+            >An array of <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -2206,7 +2166,11 @@
           >
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2235,13 +2199,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Reflection.IReflect" />
+             instance is cast to an <see cref="T:System.Reflection.IReflect" />
 
             
 
@@ -2251,13 +2213,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Reflection.MethodInfo" />
+            >Gets a <see cref="T:System.Reflection.MethodInfo" />
 
             
 
-             object corresponding to a specified method under specified search constraints. For a description of this member, see <see
-             cref="M:System.Reflection.IReflect.GetMethod(System.String,System.Reflection.BindingFlags)" />
+             object corresponding to a specified method under specified search constraints. For a description of this member, see <see cref="M:System.Reflection.IReflect.GetMethod(System.String,System.Reflection.BindingFlags)" />
 
             
 
@@ -2267,13 +2227,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.MethodInfo" />
+            >A <see cref="T:System.Reflection.MethodInfo" />
 
             
 
-             object containing the method information, with the match being based on the method name and search constraints specified in <paramref
-             name="bindingAttr" />
+             object containing the method information, with the match being based on the method name and search constraints specified in <paramref name="bindingAttr" />
 
             
 
@@ -2281,14 +2239,22 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the member to find.</param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2320,31 +2286,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The return value is a match based on the method name, the <see
-             cref="T:System.Reflection.BindingFlags" />
+            >The return value is a match based on the method name, the <see cref="T:System.Reflection.BindingFlags" />
 
             
 
-             enumeration, the kind of type conversion specified by the <paramref
-             name="binder" />
+             enumeration, the kind of type conversion specified by the <paramref name="binder" />
 
             
 
-             parameter, the overload, and the <see
-             cref="T:System.Reflection.ParameterInfo" />
+             parameter, the overload, and the <see cref="T:System.Reflection.ParameterInfo" />
 
             
 
              that describes the signature of the method.</para
           >
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Reflection.IReflect" />
+             instance is cast to an <see cref="T:System.Reflection.IReflect" />
 
             
 
@@ -2354,13 +2315,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Reflection.MethodInfo" />
+            >Gets a <see cref="T:System.Reflection.MethodInfo" />
 
             
 
-             object corresponding to a specified method, using a Type array to choose from among overloaded methods. For a description of this member, see <see
-             cref="M:System.Reflection.IReflect.GetMethod(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Type[],System.Reflection.ParameterModifier[])" />
+             object corresponding to a specified method, using a Type array to choose from among overloaded methods. For a description of this member, see <see cref="M:System.Reflection.IReflect.GetMethod(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Type[],System.Reflection.ParameterModifier[])" />
 
             
 
@@ -2372,40 +2331,59 @@
           <para>The requested method that matches all the specified parameters.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the member to find.</param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The binding attributes used to control the search.</param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that implements <see
-           cref="T:System.Reflection.Binder" />
+          An object that implements <see cref="T:System.Reflection.Binder" />
 
           
 
           , containing properties related to this method.</param
         >
         <param name="types">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array used to choose among overloaded methods.</param
         >
         <param name="modifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2433,13 +2411,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Reflection.IReflect" />
+             instance is cast to an <see cref="T:System.Reflection.IReflect" />
 
             
 
@@ -2449,13 +2425,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of <see
-             cref="T:System.Reflection.MethodInfo" />
+            >Gets an array of <see cref="T:System.Reflection.MethodInfo" />
 
             
 
-             objects with all public methods or all methods of the current class. For a description of this member, see <see
-             cref="M:System.Reflection.IReflect.GetMethods(System.Reflection.BindingFlags)" />
+             objects with all public methods or all methods of the current class. For a description of this member, see <see cref="M:System.Reflection.IReflect.GetMethods(System.Reflection.BindingFlags)" />
 
             
 
@@ -2465,8 +2439,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Reflection.MethodInfo" />
+            >An array of <see cref="T:System.Reflection.MethodInfo" />
 
             
 
@@ -2474,7 +2447,11 @@
           >
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2502,13 +2479,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Reflection.IReflect" />
+             instance is cast to an <see cref="T:System.Reflection.IReflect" />
 
             
 
@@ -2518,13 +2493,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of <see
-             cref="T:System.Reflection.PropertyInfo" />
+            >Gets an array of <see cref="T:System.Reflection.PropertyInfo" />
 
             
 
-             objects corresponding to all public properties or to all properties of the current class. For a description of this member, see <see
-             cref="M:System.Reflection.IReflect.GetProperties(System.Reflection.BindingFlags)" />
+             objects corresponding to all public properties or to all properties of the current class. For a description of this member, see <see cref="M:System.Reflection.IReflect.GetProperties(System.Reflection.BindingFlags)" />
 
             
 
@@ -2534,8 +2507,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Reflection.PropertyInfo" />
+            >An array of <see cref="T:System.Reflection.PropertyInfo" />
 
             
 
@@ -2543,7 +2515,11 @@
           >
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2572,13 +2548,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Reflection.IReflect" />
+             instance is cast to an <see cref="T:System.Reflection.IReflect" />
 
             
 
@@ -2588,13 +2562,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Reflection.PropertyInfo" />
+            >Gets a <see cref="T:System.Reflection.PropertyInfo" />
 
             
 
-             object corresponding to a specified property under specified search constraints. For a description of this member, see <see
-             cref="M:System.Reflection.IReflect.GetProperty(System.String,System.Reflection.BindingFlags)" />
+             object corresponding to a specified property under specified search constraints. For a description of this member, see <see cref="M:System.Reflection.IReflect.GetProperty(System.String,System.Reflection.BindingFlags)" />
 
             
 
@@ -2604,13 +2576,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.PropertyInfo" />
+            >A <see cref="T:System.Reflection.PropertyInfo" />
 
             
 
-             object for the located property that meets the search constraints specified in <paramref
-             name="bindingAttr" />
+             object for the located property that meets the search constraints specified in <paramref name="bindingAttr" />
 
             
 
@@ -2618,14 +2588,22 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the property to find.</param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2658,13 +2636,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Reflection.IReflect" />
+             instance is cast to an <see cref="T:System.Reflection.IReflect" />
 
             
 
@@ -2674,13 +2650,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Reflection.PropertyInfo" />
+            >Gets a <see cref="T:System.Reflection.PropertyInfo" />
 
             
 
-             object corresponding to a specified property with specified search constraints. For a description of this member, see <see
-             cref="M:System.Reflection.IReflect.GetProperty(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Type,System.Type[],System.Reflection.ParameterModifier[])" />
+             object corresponding to a specified property with specified search constraints. For a description of this member, see <see cref="M:System.Reflection.IReflect.GetProperty(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Type,System.Type[],System.Reflection.ParameterModifier[])" />
 
             
 
@@ -2690,8 +2664,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.PropertyInfo" />
+            >A <see cref="T:System.Reflection.PropertyInfo" />
 
             
 
@@ -2699,42 +2672,66 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the member to find.</param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The binding attributes used to control the search.</param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object that implements Binder, containing properties related to this method.</param
         >
         <param name="returnType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array used to choose among overloaded methods.</param
         >
         <param name="types">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of parameter modifiers used to make binding work with parameter signatures in which the types have been modified.</param
         >
         <param name="modifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2769,34 +2766,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="invokeAttr" />
+            >The <paramref name="invokeAttr" />
 
             
 
              parameter may be a constructor, method, property, or field. A suitable invocation attribute must be specified. Invoke the default member of a class by passing the empty string ("") as the name of the member.</para
           >
           <para
-            >The <paramref
-             name="modifiers" />
+            >The <paramref name="modifiers" />
 
             
 
-             parameter has the same length as the <paramref
-             name="args" />
+             parameter has the same length as the <paramref name="args" />
 
             
 
              parameter, representing the invoked member's argument attributes in the metadata. A parameter can have the following attributes: pdIn, pdOut, pdRetval, pdOptional, and pdHasDefault. These represent [In], [Out], [retval], [optional], and a default parameter, respectively. </para
           >
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Reflection.IReflect" />
+             instance is cast to an <see cref="T:System.Reflection.IReflect" />
 
             
 
@@ -2806,8 +2798,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Invokes a specified member. For a description of this member, see <see
-             cref="M:System.Reflection.IReflect.InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[],System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[])" />
+            >Invokes a specified member. For a description of this member, see <see cref="M:System.Reflection.IReflect.InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[],System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[])" />
 
             
 
@@ -2819,76 +2810,104 @@
           <para>The specified member.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the member to find.</param
         >
         <param name="invokeAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Reflection.BindingFlags" />
+          One of the <see cref="T:System.Reflection.BindingFlags" />
 
           
 
            invocation attributes. </param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Reflection.BindingFlags" />
+          One of the <see cref="T:System.Reflection.BindingFlags" />
 
           
 
            bit flags. Implements Binder, containing properties related to this method.</param
         >
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object on which to invoke the specified member. This parameter is ignored for static members.</param
         >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of objects that contains the number, order, and type of the parameters of the member to be invoked. This is an empty array if there are no parameters.</param
         >
         <param name="modifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Reflection.ParameterModifier" />
+          An array of <see cref="T:System.Reflection.ParameterModifier" />
 
           
 
            objects. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of <see
-           cref="T:System.Globalization.CultureInfo" />
+          An instance of <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            used to govern the coercion of types. </param
         >
         <param name="namedParameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2914,13 +2933,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Reflection.IReflect" />
+             instance is cast to an <see cref="T:System.Reflection.IReflect" />
 
             
 
@@ -2930,13 +2947,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the underlying type that represents the <see
-             cref="T:System.Reflection.IReflect" />
+            >Gets the underlying type that represents the <see cref="T:System.Reflection.IReflect" />
 
             
 
-             object. For a description of this member, see <see
-             cref="P:System.Reflection.IReflect.UnderlyingSystemType" />
+             object. For a description of this member, see <see cref="P:System.Reflection.IReflect.UnderlyingSystemType" />
 
             
 
@@ -2961,13 +2976,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Server applications can call this function when they contain a custom UI object that is similar to a system-provided object. Server applications call CreateStdAccessibleObject and override the <see
-             cref="T:Accessibility.IAccessible" />
+            >Server applications can call this function when they contain a custom UI object that is similar to a system-provided object. Server applications call CreateStdAccessibleObject and override the <see cref="T:Accessibility.IAccessible" />
 
             
 
-             methods and properties as needed to match their custom object. This approach saves server developers the work of fully implementing all the <see
-             cref="T:Accessibility.IAccessible" />
+             methods and properties as needed to match their custom object. This approach saves server developers the work of fully implementing all the <see cref="T:Accessibility.IAccessible" />
 
             
 
@@ -2978,8 +2991,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Associates an object with an instance of an <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >Associates an object with an instance of an <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
@@ -2987,12 +2999,15 @@
           >
         </summary>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IntPtr" />
+          An <see cref="T:System.IntPtr" />
 
           
 
@@ -3022,26 +3037,21 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Creates an accessible object with the methods and properties for the specified type of system-provided user interface element.</para>
           <para
-            >Server applications can call this function when they contain a custom UI object that is similar to a system-provided object. Server applications call CreateStdAccessibleObject and override the <see
-             cref="T:Accessibility.IAccessible" />
+            >Server applications can call this function when they contain a custom UI object that is similar to a system-provided object. Server applications call CreateStdAccessibleObject and override the <see cref="T:Accessibility.IAccessible" />
 
             
 
-             methods and properties as needed to match their custom object. This approach saves server developers the work of fully implementing all the <see
-             cref="T:Accessibility.IAccessible" />
+             methods and properties as needed to match their custom object. This approach saves server developers the work of fully implementing all the <see cref="T:Accessibility.IAccessible" />
 
             
 
              properties and methods.</para
           >
-          <para
-            >Valid <paramref
-             name="objid" />
+          <para>Valid <paramref name="objid" />
 
             
 
-             values.</para
-          >
+             values.</para>
           <list type="table">
             <listheader>
               <item>
@@ -3193,8 +3203,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Associates an object with an instance of an <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >Associates an object with an instance of an <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
@@ -3202,24 +3211,30 @@
           >
         </summary>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IntPtr" />
+          An <see cref="T:System.IntPtr" />
 
           
 
            that contains the handle of the object. </param
         >
         <param name="objid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An Int that defines the type of object that the <paramref
-           name="handle" />
+          An Int that defines the type of object that the <paramref name="handle" />
 
           
 
@@ -3242,34 +3257,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, the <see
-             cref="P:System.Windows.Forms.AccessibleObject.Value" />
+            >Typically, the <see cref="P:System.Windows.Forms.AccessibleObject.Value" />
 
             
 
-             property represents visual information contained by the object. Not all objects support the <see
-             cref="P:System.Windows.Forms.AccessibleObject.Value" />
+             property represents visual information contained by the object. Not all objects support the <see cref="P:System.Windows.Forms.AccessibleObject.Value" />
 
             
 
              property.</para
           >
           <para
-            >In most cases, the <see
-             cref="P:System.Windows.Forms.AccessibleObject.Value" />
+            >In most cases, the <see cref="P:System.Windows.Forms.AccessibleObject.Value" />
 
             
 
              property is used to tell the client about what visual information an object contains. For example, the value for an edit control is the text it contains, but a menu item has no value.</para
           >
           <para
-            >The <see
-             cref="P:System.Windows.Forms.AccessibleObject.Value" />
+            >The <see cref="P:System.Windows.Forms.AccessibleObject.Value" />
 
             
 
-             property can provide hierarchical information in cases such as a tree view control. Although the parent object in the tree view control does not provide information in the <see
-             cref="P:System.Windows.Forms.AccessibleObject.Value" />
+             property can provide hierarchical information in cases such as a tree view control. Although the parent object in the tree view control does not provide information in the <see cref="P:System.Windows.Forms.AccessibleObject.Value" />
 
             
 

@@ -20,11 +20,9 @@
   </Attributes>
   <Docs>
     <summary>Unix file special attributes.</summary>
-    <remarks
-      >
+    <remarks>
       Unix file special attributes are a part of the Unix file system entry 
-      (see <see
-       cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
+      (see <see cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
 
       
 
@@ -54,22 +52,19 @@
       <Docs>
         <summary
           >When the file is executed (either as a new process or via
-          <see
-           cref="M:Mono.Unix.Native.Syscall.exec" />
+          <see cref="M:Mono.Unix.Native.Syscall.exec" />
 
           
 
           ), set the effective 
           group-id of the process 
-          (<see
-           cref="P:Mono.Unix.UnixEnvironment.EffectiveGroupId" />
+          (<see cref="P:Mono.Unix.UnixEnvironment.EffectiveGroupId" />
 
           
 
           )
           to the owner group of the file
-          (<see
-           cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroupId" />
+          (<see cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroupId" />
 
           
 
@@ -96,22 +91,19 @@
       <Docs>
         <summary
           >When the file is executed (either as a new process or via
-          <see
-           cref="M:Mono.Unix.Native.Syscall.exec" />
+          <see cref="M:Mono.Unix.Native.Syscall.exec" />
 
           
 
           ), set the effective 
           user-id of the process 
-          (<see
-           cref="P:Mono.Unix.UnixEnvironment.EffectiveUserId" />
+          (<see cref="P:Mono.Unix.UnixEnvironment.EffectiveUserId" />
 
           
 
           )
           to the owner of the file
-          (<see
-           cref="P:Mono.Unix.UnixFileSystemInfo.OwnerUserId" />
+          (<see cref="P:Mono.Unix.UnixFileSystemInfo.OwnerUserId" />
 
           
 
@@ -157,14 +149,11 @@
               <term>owns the directory, or</term>
             </item>
             <item>
-              <term
-                >is the superuser (<c
-                >root</c>
+              <term>is the superuser (<c>root</c>
 
                 
 
-                ).</term
-              >
+                ).</term>
             </item>
           </list>
         </summary>

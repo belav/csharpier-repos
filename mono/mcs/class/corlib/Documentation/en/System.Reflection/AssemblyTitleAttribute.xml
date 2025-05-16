@@ -34,28 +34,23 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The assembly title is a friendly name, which can include spaces. </para>
       <para
-        >In Windows Vista, the information specified for this attribute appears on the <ui
-        >Details</ui>
+        >In Windows Vista, the information specified for this attribute appears on the <ui>Details</ui>
 
         
 
-         tab of the <ui
-        >Windows File Properties</ui>
+         tab of the <ui>Windows File Properties</ui>
 
         
 
-         dialog box for the assembly. The property name is <ui
-        >File description</ui>
+         dialog box for the assembly. The property name is <ui>File description</ui>
 
         
 
-        . In Windows XP, this information appears on the <ui
-        >Version</ui>
+        . In Windows XP, this information appears on the <ui>Version</ui>
 
         
 
-         tab of the <ui
-        >Windows File Properties</ui>
+         tab of the <ui>Windows File Properties</ui>
 
         
 
@@ -88,33 +83,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In Windows Vista, the string specified for the <paramref
-             name="title" />
+            >In Windows Vista, the string specified for the <paramref name="title" />
 
             
 
-             parameter appears on the <ui
-            >Details</ui>
+             parameter appears on the <ui>Details</ui>
 
             
 
-             tab of the <ui
-            >Windows File Properties</ui>
+             tab of the <ui>Windows File Properties</ui>
 
             
 
-             dialog box for the assembly. The property name is <ui
-            >File description</ui>
+             dialog box for the assembly. The property name is <ui>File description</ui>
 
             
 
-            . In Windows XP, this string appears on the <ui
-            >Version</ui>
+            . In Windows XP, this string appears on the <ui>Version</ui>
 
             
 
-             tab of the <ui
-            >Windows File Properties</ui>
+             tab of the <ui>Windows File Properties</ui>
 
             
 
@@ -124,8 +113,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.AssemblyTitleAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyTitleAttribute" />
 
             
 
@@ -133,7 +121,11 @@
           >
         </summary>
         <param name="title">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -158,33 +150,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In Windows Vista, the value of the <see
-             cref="P:System.Reflection.AssemblyTitleAttribute.Title" />
+            >In Windows Vista, the value of the <see cref="P:System.Reflection.AssemblyTitleAttribute.Title" />
 
             
 
-             property appears on the <ui
-            >Details</ui>
+             property appears on the <ui>Details</ui>
 
             
 
-             tab of the <ui
-            >Windows File Properties</ui>
+             tab of the <ui>Windows File Properties</ui>
 
             
 
-             dialog box for the assembly. The property name is <ui
-            >File description</ui>
+             dialog box for the assembly. The property name is <ui>File description</ui>
 
             
 
-            . In Windows XP, this property appears on the <ui
-            >Version</ui>
+            . In Windows XP, this property appears on the <ui>Version</ui>
 
             
 
-             tab of the <ui
-            >Windows File Properties</ui>
+             tab of the <ui>Windows File Properties</ui>
 
             
 

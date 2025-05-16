@@ -34,8 +34,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.IComponentDesignerDebugService.Assert(System.Boolean,System.String)" />
+            >The <see cref="M:System.ComponentModel.Design.IComponentDesignerDebugService.Assert(System.Boolean,System.String)" />
 
             
 
@@ -47,19 +46,26 @@
           <para>Asserts on a condition inside a design-time environment.</para>
         </summary>
         <param name="condition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to prevent <paramref
-           name="message" />
+          true to prevent <paramref name="message" />
 
           
 
            from being displayed; otherwise, false.</param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -83,8 +89,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.IComponentDesignerDebugService.Fail(System.String)" />
+            >The <see cref="M:System.ComponentModel.Design.IComponentDesignerDebugService.Fail(System.String)" />
 
             
 
@@ -96,7 +101,11 @@
           <para>Logs a failure message inside a design-time environment.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -118,8 +127,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.Design.IComponentDesignerDebugService.IndentLevel" />
+            >The <see cref="P:System.ComponentModel.Design.IComponentDesignerDebugService.IndentLevel" />
 
             
 
@@ -149,8 +157,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.Design.IComponentDesignerDebugService.Listeners" />
+            >The <see cref="P:System.ComponentModel.Design.IComponentDesignerDebugService.Listeners" />
 
             
 
@@ -180,8 +187,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.IComponentDesignerDebugService.Trace(System.String,System.String)" />
+            >The <see cref="M:System.ComponentModel.Design.IComponentDesignerDebugService.Trace(System.String,System.String)" />
 
             
 
@@ -193,19 +199,26 @@
           <para>Logs a debug message inside a design-time environment.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message to log.</param
         >
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The category of <paramref
-           name="message" />
+          The category of <paramref name="message" />
 
           
 

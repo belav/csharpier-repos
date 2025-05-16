@@ -44,8 +44,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Security.Policy.ApplicationTrust" />
+        >Represents a collection of <see cref="T:System.Security.Policy.ApplicationTrust" />
 
         
 
@@ -79,13 +78,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Policy.ApplicationTrust" />
+            >The <see cref="T:System.Security.Policy.ApplicationTrust" />
 
             
 
-             object is added to the end of the collection.  To remove an application trust that you previously added, use the <see
-             cref="Overload:System.Security.Policy.ApplicationTrustCollection.Remove" />
+             object is added to the end of the collection.  To remove an application trust that you previously added, use the <see cref="Overload:System.Security.Policy.ApplicationTrustCollection.Remove" />
 
             
 
@@ -101,12 +98,15 @@
           <para>The index at which the new element was inserted.</para>
         </returns>
         <param name="trust">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Policy.ApplicationTrust" />
+          The <see cref="T:System.Security.Policy.ApplicationTrust" />
 
           
 
@@ -139,21 +139,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Policy.ApplicationTrust" />
+            >The <see cref="T:System.Security.Policy.ApplicationTrust" />
 
             
 
-             objects contained in the <paramref
-             name="trusts" />
+             objects contained in the <paramref name="trusts" />
 
             
 
              array are appended to the end of the collection.</para
           >
           <para
-            >To remove a range of application trusts that you previously added, use the <see
-             cref="Overload:System.Security.Policy.ApplicationTrustCollection.RemoveRange" />
+            >To remove a range of application trusts that you previously added, use the <see cref="Overload:System.Security.Policy.ApplicationTrustCollection.RemoveRange" />
 
             
 
@@ -163,8 +160,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the specified <see
-             cref="T:System.Security.Policy.ApplicationTrust" />
+            >Copies the elements of the specified <see cref="T:System.Security.Policy.ApplicationTrust" />
 
             
 
@@ -172,12 +168,15 @@
           >
         </summary>
         <param name="trusts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Security.Policy.ApplicationTrust" />
+          An array of type <see cref="T:System.Security.Policy.ApplicationTrust" />
 
           
 
@@ -210,34 +209,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Policy.ApplicationTrust" />
+            >The <see cref="T:System.Security.Policy.ApplicationTrust" />
 
             
 
-             objects contained in <paramref
-             name="trusts" />
+             objects contained in <paramref name="trusts" />
 
             
 
              are appended to the end of the collection.</para
           >
           <para
-            >You can use the <see
-             cref="M:System.Security.Policy.ApplicationTrustCollection.AddRange(System.Security.Policy.ApplicationTrustCollection)" />
+            >You can use the <see cref="M:System.Security.Policy.ApplicationTrustCollection.AddRange(System.Security.Policy.ApplicationTrustCollection)" />
 
             
 
-             method to quickly add another collection of application trust objects to the collection instead of manually adding each application trust to the collection using the <see
-             cref="M:System.Security.Policy.ApplicationTrustCollection.Add(System.Security.Policy.ApplicationTrust)" />
+             method to quickly add another collection of application trust objects to the collection instead of manually adding each application trust to the collection using the <see cref="M:System.Security.Policy.ApplicationTrustCollection.Add(System.Security.Policy.ApplicationTrust)" />
 
             
 
              method.</para
           >
           <para
-            >To remove a range of application trusts that you previously added, use the <see
-             cref="Overload:System.Security.Policy.ApplicationTrustCollection.RemoveRange" />
+            >To remove a range of application trusts that you previously added, use the <see cref="Overload:System.Security.Policy.ApplicationTrustCollection.RemoveRange" />
 
             
 
@@ -247,8 +241,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the specified <see
-             cref="T:System.Security.Policy.ApplicationTrustCollection" />
+            >Copies the elements of the specified <see cref="T:System.Security.Policy.ApplicationTrustCollection" />
 
             
 
@@ -256,12 +249,15 @@
           >
         </summary>
         <param name="trusts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.Policy.ApplicationTrustCollection" />
+          A <see cref="T:System.Security.Policy.ApplicationTrustCollection" />
 
           
 
@@ -289,28 +285,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each <see
-             cref="T:System.Security.Policy.ApplicationTrust" />
+            >Each <see cref="T:System.Security.Policy.ApplicationTrust" />
 
             
 
-             in the collection is identified by its <see
-             cref="P:System.Security.Policy.ApplicationTrust.ApplicationIdentity" />
+             in the collection is identified by its <see cref="P:System.Security.Policy.ApplicationTrust.ApplicationIdentity" />
 
             
 
-             property. If the value of the <see
-             cref="P:System.Security.Policy.ApplicationTrust.ApplicationIdentity" />
+             property. If the value of the <see cref="P:System.Security.Policy.ApplicationTrust.ApplicationIdentity" />
 
             
 
-             property for any <see
-             cref="T:System.Security.Policy.ApplicationTrust" />
+             property for any <see cref="T:System.Security.Policy.ApplicationTrust" />
 
             
 
-             object in the collection is null, an <see
-             cref="T:System.ArgumentException" />
+             object in the collection is null, an <see cref="T:System.ArgumentException" />
 
             
 
@@ -357,24 +348,30 @@
           <para>Copies the entire collection to a compatible one-dimensional array, starting at the specified index of the target array.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional array of type <see
-           cref="T:System.Security.Policy.ApplicationTrust" />
+          The one-dimensional array of type <see cref="T:System.Security.Policy.ApplicationTrust" />
 
           
 
            that is the destination of the elements copied from the current collection. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -429,8 +426,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The application trust is optionally selected by an exact version match, based on the value of the <paramref
-             name="versionMatch" />
+            >The application trust is optionally selected by an exact version match, based on the value of the <paramref name="versionMatch" />
 
             
 
@@ -444,13 +440,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.Policy.ApplicationTrustCollection" />
+            >An <see cref="T:System.Security.Policy.ApplicationTrustCollection" />
 
             
 
-             containing all matching <see
-             cref="T:System.Security.Policy.ApplicationTrust" />
+             containing all matching <see cref="T:System.Security.Policy.ApplicationTrust" />
 
             
 
@@ -458,24 +452,30 @@
           >
         </returns>
         <param name="applicationIdentity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ApplicationIdentity" />
+          An <see cref="T:System.ApplicationIdentity" />
 
           
 
            object describing the application to find.</param
         >
         <param name="versionMatch">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Policy.ApplicationVersionMatch" />
+          One of the <see cref="T:System.Security.Policy.ApplicationVersionMatch" />
 
           
 
@@ -506,37 +506,32 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Policy.ApplicationTrustEnumerator" />
+            >The <see cref="T:System.Security.Policy.ApplicationTrustEnumerator" />
 
             
 
-             implements the <see
-             cref="T:System.Collections.IEnumerator" />
+             implements the <see cref="T:System.Collections.IEnumerator" />
 
             
 
              interface that allows you to move within a collection.</para
           >
           <para
-            >Use the <see
-             cref="P:System.Collections.IEnumerator.Current" />
+            >Use the <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              property to get the item currently pointed to in the collection.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >Use the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
              method to move to the next item in the collection.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Use the <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
@@ -544,18 +539,15 @@
           >
           <block subset="none" type="note">
             <para
-              >After you create the enumerator, or use the <see
-               cref="M:System.Collections.IEnumerator.Reset" />
+              >After you create the enumerator, or use the <see cref="M:System.Collections.IEnumerator.Reset" />
 
               
 
-               method to reposition the enumerator to the start of the collection, you must then call the <see
-               cref="M:System.Collections.IEnumerator.MoveNext" />
+               method to reposition the enumerator to the start of the collection, you must then call the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
               
 
-               method to position the enumerator to the first item. Otherwise, the item represented by the <see
-               cref="P:System.Collections.IEnumerator.Current" />
+               method to position the enumerator to the first item. Otherwise, the item represented by the <see cref="P:System.Collections.IEnumerator.Current" />
 
               
 
@@ -570,8 +562,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.Policy.ApplicationTrustEnumerator" />
+            >An <see cref="T:System.Security.Policy.ApplicationTrustEnumerator" />
 
             
 
@@ -689,12 +680,15 @@
           <para>Removes the specified application trust from the collection.</para>
         </summary>
         <param name="trust">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Policy.ApplicationTrust" />
+          The <see cref="T:System.Security.Policy.ApplicationTrust" />
 
           
 
@@ -728,13 +722,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The application trust can be identified by an exact version match, dependent upon the value of the <paramref
-             name="versionMatch" />
+            >The application trust can be identified by an exact version match, dependent upon the value of the <paramref name="versionMatch" />
 
             
 
-             parameter. The <see
-             cref="M:System.Security.Policy.ApplicationTrustCollection.Find(System.ApplicationIdentity,System.Security.Policy.ApplicationVersionMatch)" />
+             parameter. The <see cref="M:System.Security.Policy.ApplicationTrustCollection.Find(System.ApplicationIdentity,System.Security.Policy.ApplicationVersionMatch)" />
 
             
 
@@ -747,29 +739,34 @@
           <para>Removes all application trust objects that match the specified criteria from the collection.</para>
         </summary>
         <param name="applicationIdentity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ApplicationIdentity" />
+          The <see cref="T:System.ApplicationIdentity" />
 
           
 
-           of the <see
-           cref="T:System.Security.Policy.ApplicationTrust" />
+           of the <see cref="T:System.Security.Policy.ApplicationTrust" />
 
           
 
            object to be removed.</param
         >
         <param name="versionMatch">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Policy.ApplicationVersionMatch" />
+          One of the <see cref="T:System.Security.Policy.ApplicationVersionMatch" />
 
           
 
@@ -808,12 +805,15 @@
           <para>Removes the application trust objects in the specified array from the collection.</para>
         </summary>
         <param name="trusts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A one-dimensional array of type <see
-           cref="T:System.Security.Policy.ApplicationTrust" />
+          A one-dimensional array of type <see cref="T:System.Security.Policy.ApplicationTrust" />
 
           
 
@@ -852,12 +852,15 @@
           <para>Removes the application trust objects in the specified collection from the collection.</para>
         </summary>
         <param name="trusts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Policy.ApplicationTrustCollection" />
+          An <see cref="T:System.Security.Policy.ApplicationTrustCollection" />
 
           
 
@@ -913,18 +916,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the <see
-             cref="T:System.Collections.ICollection" />
+            >Copies the elements of the <see cref="T:System.Collections.ICollection" />
 
             
 
-             to the specified <see
-             cref="T:System.Array" />
+             to the specified <see cref="T:System.Array" />
 
             
 
-            , starting at the specified <see
-             cref="T:System.Array" />
+            , starting at the specified <see cref="T:System.Array" />
 
             
 
@@ -932,34 +932,38 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from the <see
-           cref="T:System.Collections.ICollection" />
+           that is the destination of the elements copied from the <see cref="T:System.Collections.ICollection" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -995,8 +999,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 

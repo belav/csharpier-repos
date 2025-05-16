@@ -18,23 +18,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.SystemParameter" />
+        >The <see cref="T:System.Windows.Forms.SystemParameter" />
 
         
 
-         enumeration is primarily used by the <see
-         cref="Overload:System.Windows.Forms.OSFeature.IsPresent" />
+         enumeration is primarily used by the <see cref="Overload:System.Windows.Forms.OSFeature.IsPresent" />
 
         
 
-         method. <see
-         cref="Overload:System.Windows.Forms.OSFeature.IsPresent" />
+         method. <see cref="Overload:System.Windows.Forms.OSFeature.IsPresent" />
 
         
 
-         retrieves whether a <see
-         cref="T:System.Windows.Forms.SystemParameter" />
+         retrieves whether a <see cref="T:System.Windows.Forms.SystemParameter" />
 
         
 
@@ -42,7 +38,9 @@
       >
       <para
         >For more information about system-wide parameters, see "SystemParametersInfo" in the Platform SDK documentation at <see
-         cref="">http://msdn.microsoft.com</see>
+          cref=""
+          >http://msdn.microsoft.com</see
+        >
 
         
 
@@ -66,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Identifies the caret width, in pixels, for edit controls. Use the <see
-             cref="P:System.Windows.Forms.SystemInformation.CaretWidth" />
+            >Identifies the caret width, in pixels, for edit controls. Use the <see cref="P:System.Windows.Forms.SystemInformation.CaretWidth" />
 
             
 
@@ -90,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Identifies the drop shadow effect. Use the <see
-             cref="P:System.Windows.Forms.SystemInformation.IsDropShadowEnabled" />
+            >Identifies the drop shadow effect. Use the <see cref="P:System.Windows.Forms.SystemInformation.IsDropShadowEnabled" />
 
             
 
@@ -114,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Identifies the flat menu appearance feature. Use the <see
-             cref="P:System.Windows.Forms.SystemInformation.IsFlatMenuEnabled" />
+            >Identifies the flat menu appearance feature. Use the <see cref="P:System.Windows.Forms.SystemInformation.IsFlatMenuEnabled" />
 
             
 
@@ -138,8 +133,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Identifies the contrast value used in ClearType font smoothing. Use the <see
-             cref="P:System.Windows.Forms.SystemInformation.FontSmoothingContrast" />
+            >Identifies the contrast value used in ClearType font smoothing. Use the <see cref="P:System.Windows.Forms.SystemInformation.FontSmoothingContrast" />
 
             
 
@@ -162,8 +156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Identifies the type of font smoothing. Use the <see
-             cref="P:System.Windows.Forms.SystemInformation.FontSmoothingType" />
+            >Identifies the type of font smoothing. Use the <see cref="P:System.Windows.Forms.SystemInformation.FontSmoothingType" />
 
             
 
@@ -186,8 +179,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Identifies the thickness of the left and right edges of the system focus rectangle. Use the <see
-             cref="P:System.Windows.Forms.SystemInformation.HorizontalFocusThickness" />
+            >Identifies the thickness of the left and right edges of the system focus rectangle. Use the <see cref="P:System.Windows.Forms.SystemInformation.HorizontalFocusThickness" />
 
             
 
@@ -210,8 +202,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Identifies the menu fade animation feature. Use the <see
-             cref="P:System.Windows.Forms.SystemInformation.IsMenuFadeEnabled" />
+            >Identifies the menu fade animation feature. Use the <see cref="P:System.Windows.Forms.SystemInformation.IsMenuFadeEnabled" />
 
             
 
@@ -234,8 +225,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Identifies the selection fade effect. Use the <see
-             cref="P:System.Windows.Forms.SystemInformation.IsSelectionFadeEnabled" />
+            >Identifies the selection fade effect. Use the <see cref="P:System.Windows.Forms.SystemInformation.IsSelectionFadeEnabled" />
 
             
 
@@ -258,8 +248,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Identifies the ToolTip animation feature. Use the <see
-             cref="P:System.Windows.Forms.SystemInformation.IsToolTipAnimationEnabled" />
+            >Identifies the ToolTip animation feature. Use the <see cref="P:System.Windows.Forms.SystemInformation.IsToolTipAnimationEnabled" />
 
             
 
@@ -282,8 +271,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Identifies the user interface (UI) effects feature. Use the <see
-             cref="P:System.Windows.Forms.SystemInformation.UIEffectsEnabled" />
+            >Identifies the user interface (UI) effects feature. Use the <see cref="P:System.Windows.Forms.SystemInformation.UIEffectsEnabled" />
 
             
 
@@ -306,8 +294,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Identifies the thickness of the top and bottom edges of the system focus rectangle. Use the <see
-             cref="P:System.Windows.Forms.SystemInformation.VerticalFocusThickness" />
+            >Identifies the thickness of the top and bottom edges of the system focus rectangle. Use the <see cref="P:System.Windows.Forms.SystemInformation.VerticalFocusThickness" />
 
             
 

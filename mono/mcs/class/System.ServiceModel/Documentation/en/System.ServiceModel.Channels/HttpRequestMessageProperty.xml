@@ -40,8 +40,7 @@
         </item>
       </list>
       <para
-        >This class can be used by <see
-         cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" />
+        >This class can be used by <see cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" />
 
         
 
@@ -56,8 +55,7 @@
 
             
 
-             is set to <see
-             cref="P:System.ServiceModel.Channels.HttpRequestMessageProperty.Method" />
+             is set to <see cref="P:System.ServiceModel.Channels.HttpRequestMessageProperty.Method" />
 
             
 
@@ -70,8 +68,7 @@
 
             
 
-             is appended to the <see
-             cref="P:System.Net.HttpWebRequest.RequestUri" />
+             is appended to the <see cref="P:System.Net.HttpWebRequest.RequestUri" />
 
             
 
@@ -143,8 +140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.HttpRequestMessageProperty" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.HttpRequestMessageProperty" />
 
             
 
@@ -197,7 +193,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >By default, indigo2 uses the POST verb for HTTP messages. The GET verb is used by indigo2 to display help information when accessing a ServiceHost's base address. This is useful for checking whether a indigo2 service is active when using a Web browser. Other methods defined by the <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=96616">HTTP RFC</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=96616"
+              >HTTP RFC</see
+            >
 
             
 
@@ -226,8 +224,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the message property associated with the <see
-             cref="T:System.ServiceModel.Channels.HttpRequestMessageProperty" />
+            >Gets the name of the message property associated with the <see cref="T:System.ServiceModel.Channels.HttpRequestMessageProperty" />
 
             
 
@@ -273,13 +270,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is used for empty message requests: for example, a service that accepts a GET request without a message body. In this case, when building the <see
-             cref="T:System.ServiceModel.Channels.HttpRequestMessageProperty" />
+            >This property is used for empty message requests: for example, a service that accepts a GET request without a message body. In this case, when building the <see cref="T:System.ServiceModel.Channels.HttpRequestMessageProperty" />
 
             
 
-             object for the response message, set the <see
-             cref="P:System.ServiceModel.Channels.HttpRequestMessageProperty.SuppressEntityBody" />
+             object for the response message, set the <see cref="P:System.ServiceModel.Channels.HttpRequestMessageProperty.SuppressEntityBody" />
 
             
 
@@ -319,8 +314,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Channels.IMessageProperty" />
+            >A <see cref="T:System.ServiceModel.Channels.IMessageProperty" />
 
             
 

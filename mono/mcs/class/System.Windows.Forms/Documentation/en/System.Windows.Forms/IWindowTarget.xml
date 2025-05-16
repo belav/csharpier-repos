@@ -11,8 +11,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.Control" />
+        >The <see cref="T:System.Windows.Forms.Control" />
 
         
 
@@ -38,8 +37,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.IWindowTarget.OnHandleChange(System.IntPtr)" />
+            >The <see cref="M:System.Windows.Forms.IWindowTarget.OnHandleChange(System.IntPtr)" />
 
             
 
@@ -49,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the handle of the <see
-             cref="T:System.Windows.Forms.IWindowTarget" />
+            >Sets the handle of the <see cref="T:System.Windows.Forms.IWindowTarget" />
 
             
 
@@ -58,12 +55,15 @@
           >
         </summary>
         <param name="newHandle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new handle of the <see
-           cref="T:System.Windows.Forms.IWindowTarget" />
+          The new handle of the <see cref="T:System.Windows.Forms.IWindowTarget" />
 
           
 

@@ -19,13 +19,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>IP addresses are divided into two parts: the prefix and the suffix. The address prefix identifies the network portion of an IP address, and the address suffix identifies the host portion. Prefixes are assigned by global authorities, and suffixes are assigned by local system administrators.</para>
       <para
-        >This enumeration is used by the <see
-         cref="T:System.Net.NetworkInformation.UnicastIPAddressInformation" />
+        >This enumeration is used by the <see cref="T:System.Net.NetworkInformation.UnicastIPAddressInformation" />
 
         
 
-         class. Instances of this class are returned when you retrieve the unicast address information for a <see
-         cref="T:System.Net.NetworkInformation.NetworkInterface" />
+         class. Instances of this class are returned when you retrieve the unicast address information for a <see cref="T:System.Net.NetworkInformation.NetworkInterface" />
 
         
 

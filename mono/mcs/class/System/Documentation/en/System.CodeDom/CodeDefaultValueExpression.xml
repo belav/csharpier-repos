@@ -30,41 +30,35 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.CodeDom.CodeDefaultValueExpression" />
+        >A <see cref="T:System.CodeDom.CodeDefaultValueExpression" />
 
         
 
          can be used to represent a reference to a default value.</para
       >
       <para
-        >The <see
-         cref="P:System.CodeDom.CodeDefaultValueExpression.Type" />
+        >The <see cref="P:System.CodeDom.CodeDefaultValueExpression.Type" />
 
         
 
-         property specifies the reference to the value type. The <see
-         cref="T:System.CodeDom.CodeDefaultValueExpression" />
+         property specifies the reference to the value type. The <see cref="T:System.CodeDom.CodeDefaultValueExpression" />
 
         
 
-         class is used in the generation of generics-based code. For more information on generics, see <format
-         type="text/html">
+         class is used in the generation of generics-based code. For more information on generics, see <format type="text/html">
           <a href="afdd5477-6770-4686-8297-f58a4d749daf">Generics in the Base Class Library</a>
         </format>
 
         
 
-        . The following code steps are provided in this section to further describe the use of the <see
-         cref="T:System.CodeDom.CodeDefaultValueExpression" />
+        . The following code steps are provided in this section to further describe the use of the <see cref="T:System.CodeDom.CodeDefaultValueExpression" />
 
         
 
          class to add a new default value to a code graph.  </para
       >
       <para
-        >The code in part 1 is part of a larger example provided for the <see
-         cref="T:System.CodeDom.CodeTypeParameter" />
+        >The code in part 1 is part of a larger example provided for the <see cref="T:System.CodeDom.CodeTypeParameter" />
 
         
 
@@ -125,8 +119,7 @@ dict.Print&lt;System.Decimal, int&gt;();</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeDefaultValueExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDefaultValueExpression" />
 
             
 
@@ -158,8 +151,7 @@ dict.Print&lt;System.Decimal, int&gt;();</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeDefaultValueExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDefaultValueExpression" />
 
             
 
@@ -167,12 +159,15 @@ dict.Print&lt;System.Decimal, int&gt;();</code>
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeTypeReference" />
+          A <see cref="T:System.CodeDom.CodeTypeReference" />
 
           
 

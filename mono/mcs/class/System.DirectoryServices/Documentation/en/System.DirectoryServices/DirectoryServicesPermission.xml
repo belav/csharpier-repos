@@ -86,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DirectoryServices.DirectoryServicesPermission" />
+            >Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectoryServicesPermission" />
 
             
 
@@ -114,8 +113,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DirectoryServices.DirectoryServicesPermission" />
+            >Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectoryServicesPermission" />
 
             
 
@@ -139,8 +137,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DirectoryServices.DirectoryServicesPermission" />
+            >Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectoryServicesPermission" />
 
             
 
@@ -168,8 +165,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DirectoryServices.DirectoryServicesPermission" />
+            >Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectoryServicesPermission" />
 
             
 
@@ -177,7 +173,11 @@
           >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -209,13 +209,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.DirectoryServices.DirectoryServicesPermission" />
+        >The <see cref="T:System.DirectoryServices.DirectoryServicesPermission" />
 
         
 
-         class allows you to control code access security permissions for <see
-         cref="N:System.DirectoryServices" />
+         class allows you to control code access security permissions for <see cref="N:System.DirectoryServices" />
 
         
 

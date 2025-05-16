@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <clause number="14.4" title="Function members">
   <paragraph
-    >Function members are members that contain executable statements. Function members are always members of types and cannot be members of namespaces. C# defines the following categories of function members: <list
-    >
+    >Function members are members that contain executable statements. Function members are always members of types and cannot be members of namespaces. C# defines the following categories of function members: <list>
       <list_item> Methods </list_item>
       <list_item> Properties </list_item>
       <list_item> Events </list_item>
@@ -15,24 +14,21 @@
   </paragraph>
   <paragraph>Except for static constructors and destructors (which cannot be invoked explicitly), the statements contained in function members are executed through function member invocations. The actual syntax for writing a function member invocation depends on the particular function member category. </paragraph>
   <paragraph
-    >The argument list (<hyperlink
-    >14.4.1</hyperlink>
+    >The argument list (<hyperlink>14.4.1</hyperlink>
 
     
 
     ) of a function member invocation provides actual values or variable references for the parameters of the function member. </paragraph
   >
   <paragraph
-    >Invocations of methods, indexers, operators, and instance constructors employ overload resolution to determine which of a candidate set of function members to invoke. This process is described in <hyperlink
-    >14.4.2</hyperlink>
+    >Invocations of methods, indexers, operators, and instance constructors employ overload resolution to determine which of a candidate set of function members to invoke. This process is described in <hyperlink>14.4.2</hyperlink>
 
     
 
     . </paragraph
   >
   <paragraph
-    >Once a particular function member has been identified at compile-time, possibly through overload resolution, the actual run-time process of invoking the function member is described in <hyperlink
-    >14.4.3</hyperlink>
+    >Once a particular function member has been identified at compile-time, possibly through overload resolution, the actual run-time process of invoking the function member is described in <hyperlink>14.4.3</hyperlink>
 
     
 
@@ -40,8 +36,7 @@
   >
   <paragraph>
     <note
-      >[Note: The following table summarizes the processing that takes place in constructs involving the six categories of function members that can be explicitly invoked. In the table, e, x, y, and value indicate expressions classified as variables or values, T indicates an expression classified as a type, F is the simple name of a method, and P is the simple name of a property. <table_line
-      >Construct Example Description </table_line>
+      >[Note: The following table summarizes the processing that takes place in constructs involving the six categories of function members that can be explicitly invoked. In the table, e, x, y, and value indicate expressions classified as variables or values, T indicates an expression classified as a type, F is the simple name of a method, and P is the simple name of a property. <table_line>Construct Example Description </table_line>
       <table_line>F(x, y) Overload resolution is applied to select the best method F in the </table_line>
       <table_line>containing class or struct. The method is invoked with the </table_line>
       <table_line>argument list (x, y). If the method is not static, the </table_line>

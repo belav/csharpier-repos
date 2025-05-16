@@ -60,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapTime" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapTime" />
 
             
 
@@ -91,13 +90,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapTime" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapTime" />
 
             
 
-             class with a specified <see
-             cref="T:System.DateTime" />
+             class with a specified <see cref="T:System.DateTime" />
 
             
 
@@ -105,12 +102,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.DateTime" />
+          A <see cref="T:System.DateTime" />
 
           
 
@@ -143,8 +143,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -178,8 +177,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapTime.Parse(System.String)" />
+            >The <see cref="M:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapTime.Parse(System.String)" />
 
             
 
@@ -256,13 +254,11 @@
             </item>
           </list>
           <para
-            >Only the first 3 fraction digits are parsed because the parsed value is stored as a <see
-             cref="T:System.DateTime" />
+            >Only the first 3 fraction digits are parsed because the parsed value is stored as a <see cref="T:System.DateTime" />
 
             
 
-             object, and the <see
-             cref="T:System.DateTime" />
+             object, and the <see cref="T:System.DateTime" />
 
             
 
@@ -272,13 +268,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the specified <see
-             cref="T:System.String" />
+            >Converts the specified <see cref="T:System.String" />
 
             
 
-             into a <see
-             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapTime" />
+             into a <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapTime" />
 
             
 
@@ -288,13 +282,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapTime" />
+            >A <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapTime" />
 
             
 
-             object that is obtained from <paramref
-             name="value" />
+             object that is obtained from <paramref name="value" />
 
             
 
@@ -302,12 +294,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
@@ -336,13 +331,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapTime.Value" />
+            >Returns <see cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapTime.Value" />
 
             
 
-             as a <see
-             cref="T:System.String" />
+             as a <see cref="T:System.String" />
 
             
 
@@ -352,13 +345,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             that is obtained from <see
-             cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapTime.Value" />
+             that is obtained from <see cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapTime.Value" />
 
             
 

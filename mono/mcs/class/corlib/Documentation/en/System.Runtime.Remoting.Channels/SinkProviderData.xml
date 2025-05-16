@@ -26,20 +26,17 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The sink provider data is a tree structure of configuration information stored in the <format
-         type="text/html">
+        >The sink provider data is a tree structure of configuration information stored in the <format type="text/html">
           <a href="D3E67E16-8CA3-4B7F-B7A4-37E3E1A66364">[&lt;topic://gnconprovidertemplate&gt;]</a>
         </format>
 
         
 
-         configuration nodes. All sink providers must have a constructor that accepts a <see
-         cref="T:System.Collections.IDictionary" />
+         configuration nodes. All sink providers must have a constructor that accepts a <see cref="T:System.Collections.IDictionary" />
 
         
 
-         of properties and a <see
-         cref="T:System.Collections.ICollection" />
+         of properties and a <see cref="T:System.Collections.ICollection" />
 
         
 
@@ -73,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Channels.SinkProviderData" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Channels.SinkProviderData" />
 
             
 
@@ -82,12 +78,15 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the sink provider that the data in the current <see
-           cref="T:System.Runtime.Remoting.Channels.SinkProviderData" />
+          The name of the sink provider that the data in the current <see cref="T:System.Runtime.Remoting.Channels.SinkProviderData" />
 
           
 
@@ -116,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a list of the child <see
-             cref="T:System.Runtime.Remoting.Channels.SinkProviderData" />
+            >Gets a list of the child <see cref="T:System.Runtime.Remoting.Channels.SinkProviderData" />
 
             
 
@@ -144,8 +142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the sink provider that the data in the current <see
-             cref="T:System.Runtime.Remoting.Channels.SinkProviderData" />
+            >Gets the name of the sink provider that the data in the current <see cref="T:System.Runtime.Remoting.Channels.SinkProviderData" />
 
             
 

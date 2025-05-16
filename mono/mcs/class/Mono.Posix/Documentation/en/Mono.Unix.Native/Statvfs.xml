@@ -135,8 +135,7 @@
       </ReturnValue>
       <Docs>
         <summary
-          >Size of filesystem in <see
-           cref="F:Mono.Unix.Native.Statvfs.f_frsize" />
+          >Size of filesystem in <see cref="F:Mono.Unix.Native.Statvfs.f_frsize" />
 
           
 

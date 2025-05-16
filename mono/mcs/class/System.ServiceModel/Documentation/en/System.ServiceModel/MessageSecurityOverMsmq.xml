@@ -17,23 +17,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This object is accessed from the binding by means of the <see
-         cref="P:System.ServiceModel.NetMsmqBinding.Security" />
+        >This object is accessed from the binding by means of the <see cref="P:System.ServiceModel.NetMsmqBinding.Security" />
 
         
 
-         property, which returns a <see
-         cref="T:System.ServiceModel.NetMsmqSecurity" />
+         property, which returns a <see cref="T:System.ServiceModel.NetMsmqSecurity" />
 
         
 
-         object. This object has a <see
-         cref="P:System.ServiceModel.NetMsmqSecurity.Message" />
+         object. This object has a <see cref="P:System.ServiceModel.NetMsmqSecurity.Message" />
 
         
 
-         property that provides a reference to the <see
-         cref="T:System.ServiceModel.MessageSecurityOverMsmq" />
+         property that provides a reference to the <see cref="T:System.ServiceModel.MessageSecurityOverMsmq" />
 
         
 
@@ -43,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Enables setting message-level security properties on the <see
-         cref="T:System.ServiceModel.NetMsmqBinding" />
+        >Enables setting message-level security properties on the <see cref="T:System.ServiceModel.NetMsmqBinding" />
 
         
 
@@ -117,8 +112,7 @@
             </item>
             <item>
               <para
-                >UserName: This allows the service to require that the client be authenticated using a UserName credential. This credential must be specified using <see
-                 cref="T:System.ServiceModel.Description.ClientCredentials" />
+                >UserName: This allows the service to require that the client be authenticated using a UserName credential. This credential must be specified using <see cref="T:System.ServiceModel.Description.ClientCredentials" />
 
                 
 
@@ -132,13 +126,11 @@
           <list type="bullet">
             <item>
               <para
-                >Certificate: This allows the service to require that the client be authenticated using a certificate. The client credential in this case must be specified using <see
-                 cref="T:System.ServiceModel.Description.ClientCredentials" />
+                >Certificate: This allows the service to require that the client be authenticated using a certificate. The client credential in this case must be specified using <see cref="T:System.ServiceModel.Description.ClientCredentials" />
 
                 
 
-                 class or ClientCredentials behavior. The service credential in this case must be specified using <see
-                 cref="T:System.ServiceModel.Description.ClientCredentials" />
+                 class or ClientCredentials behavior. The service credential in this case must be specified using <see cref="T:System.ServiceModel.Description.ClientCredentials" />
 
                 
 
@@ -156,8 +148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.ServiceModel.MessageCredentialType" />
+            >Gets or sets the <see cref="T:System.ServiceModel.MessageCredentialType" />
 
             
 

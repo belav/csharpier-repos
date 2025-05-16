@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Scaffolding is the mechanism for generating web page templates based on database schemas. ASP.NET Dynamic Data uses scaffolding to generate Web-based UI that lets a user to view and update a database. This class uses the <see
-         cref="P:System.ComponentModel.DataAnnotations.ScaffoldColumnAttribute.Scaffold" />
+        >Scaffolding is the mechanism for generating web page templates based on database schemas. ASP.NET Dynamic Data uses scaffolding to generate Web-based UI that lets a user to view and update a database. This class uses the <see cref="P:System.ComponentModel.DataAnnotations.ScaffoldColumnAttribute.Scaffold" />
 
         
 
@@ -76,18 +75,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can set <paramref
-             name="scaffold" />
+            >You can set <paramref name="scaffold" />
 
             
 
-             to true for the entire data model to expose all data columns in the database for CRUD (Create, Read, Update and Delete) operations by setting <paramref
-             name="scaffold" />
+             to true for the entire data model to expose all data columns in the database for CRUD (Create, Read, Update and Delete) operations by setting <paramref name="scaffold" />
 
             
 
-             to true in the Global.asax file or expose individual data columns in a data table to CRUD operations by setting <paramref
-             name="scaffold" />
+             to true in the Global.asax file or expose individual data columns in a data table to CRUD operations by setting <paramref name="scaffold" />
 
             
 
@@ -97,13 +93,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.ComponentModel.DataAnnotations.ScaffoldColumnAttribute" />
+            >Initializes a new instance of <see cref="T:System.ComponentModel.DataAnnotations.ScaffoldColumnAttribute" />
 
             
 
-             using the <see
-             cref="P:System.ComponentModel.DataAnnotations.ScaffoldColumnAttribute.Scaffold" />
+             using the <see cref="P:System.ComponentModel.DataAnnotations.ScaffoldColumnAttribute.Scaffold" />
 
             
 
@@ -111,7 +105,11 @@
           >
         </summary>
         <param name="scaffold">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

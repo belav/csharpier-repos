@@ -18,36 +18,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.TableLayoutStyle" />
+        >The <see cref="T:System.Windows.Forms.TableLayoutStyle" />
 
         
 
-         class is a common base class for the <see
-         cref="T:System.Windows.Forms.ColumnStyle" />
+         class is a common base class for the <see cref="T:System.Windows.Forms.ColumnStyle" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.RowStyle" />
+         and <see cref="T:System.Windows.Forms.RowStyle" />
 
         
 
-         classes, which describe the appearance and behavior of columns and rows, respectively, in a <see
-         cref="T:System.Windows.Forms.TableLayoutPanel" />
+         classes, which describe the appearance and behavior of columns and rows, respectively, in a <see cref="T:System.Windows.Forms.TableLayoutPanel" />
 
         
 
         .</para
       >
       <para
-        >The series of styles that represent the current columns and rows in the current table layout are aggregated in a <see
-         cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+        >The series of styles that represent the current columns and rows in the current table layout are aggregated in a <see cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />
+         and <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />
 
         
 
@@ -71,18 +65,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is the default constructor for the <see
-             cref="T:System.Windows.Forms.TableLayoutStyle" />
+            >This is the default constructor for the <see cref="T:System.Windows.Forms.TableLayoutStyle" />
 
             
 
-             class. It effectively sets the <see
-             cref="T:System.Windows.Forms.SizeType" />
+             class. It effectively sets the <see cref="T:System.Windows.Forms.SizeType" />
 
             
 
-             property to <see
-             cref="F:System.Windows.Forms.SizeType.AutoSize" />
+             property to <see cref="F:System.Windows.Forms.SizeType.AutoSize" />
 
             
 
@@ -92,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.TableLayoutStyle" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.TableLayoutStyle" />
 
             
 
@@ -127,8 +117,7 @@
           <list type="bullet">
             <item>
               <para
-                >In an absolute number of pixels (<see
-                 cref="F:System.Windows.Forms.SizeType.Absolute" />
+                >In an absolute number of pixels (<see cref="F:System.Windows.Forms.SizeType.Absolute" />
 
                 
 
@@ -137,8 +126,7 @@
             </item>
             <item>
               <para
-                >As a percentage of the parent container (<see
-                 cref="F:System.Windows.Forms.SizeType.Percent" />
+                >As a percentage of the parent container (<see cref="F:System.Windows.Forms.SizeType.Percent" />
 
                 
 
@@ -147,8 +135,7 @@
             </item>
             <item>
               <para
-                >To share equal space with its peers (<see
-                 cref="F:System.Windows.Forms.SizeType.AutoSize" />
+                >To share equal space with its peers (<see cref="F:System.Windows.Forms.SizeType.AutoSize" />
 
                 
 

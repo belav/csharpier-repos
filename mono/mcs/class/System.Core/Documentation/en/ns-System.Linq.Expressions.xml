@@ -4,8 +4,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Linq.Expressions" />
+        >The <see cref="N:System.Linq.Expressions" />
 
         
 
@@ -15,39 +14,33 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The abstract class <see
-         cref="T:System.Linq.Expressions.Expression" />
+        >The abstract class <see cref="T:System.Linq.Expressions.Expression" />
 
         
 
          provides the root of a class hierarchy used to model expression trees.</para
       >
       <para
-        >The classes in this namespace that derive from <see
-         cref="T:System.Linq.Expressions.Expression" />
+        >The classes in this namespace that derive from <see cref="T:System.Linq.Expressions.Expression" />
 
         
 
-        , for example <see
-         cref="T:System.Linq.Expressions.MemberExpression" />
+        , for example <see cref="T:System.Linq.Expressions.MemberExpression" />
 
         
 
-         and <see
-         cref="T:System.Linq.Expressions.ParameterExpression" />
+         and <see cref="T:System.Linq.Expressions.ParameterExpression" />
 
         
 
-        , are used to represent nodes in an expression tree. The <see
-         cref="T:System.Linq.Expressions.Expression" />
+        , are used to represent nodes in an expression tree. The <see cref="T:System.Linq.Expressions.Expression" />
 
         
 
          class contains static (Shared in Visual Basic) factory methods to create expression tree nodes of the various types.</para
       >
       <para
-        >The enumeration type <see
-         cref="T:System.Linq.Expressions.ExpressionType" />
+        >The enumeration type <see cref="T:System.Linq.Expressions.ExpressionType" />
 
         
 

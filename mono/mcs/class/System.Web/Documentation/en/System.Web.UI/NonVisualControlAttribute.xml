@@ -14,46 +14,38 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.NonVisualControlAttribute" />
+        >The <see cref="T:System.Web.UI.NonVisualControlAttribute" />
 
         
 
-         attribute is applied to controls that are not rendered to the client, such as data source controls and the <see
-         cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" />
+         attribute is applied to controls that are not rendered to the client, such as data source controls and the <see cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" />
 
         
 
-         control. During design time, a page developer might decide to hide all non-visual controls. The designer would mark as invisible all of the controls with the <see
-         cref="T:System.Web.UI.NonVisualControlAttribute" />
+         control. During design time, a page developer might decide to hide all non-visual controls. The designer would mark as invisible all of the controls with the <see cref="T:System.Web.UI.NonVisualControlAttribute" />
 
         
 
          attribute set to true. </para
       >
       <para
-        >Examples of controls that employ the <see
-         cref="T:System.Web.UI.NonVisualControlAttribute" />
+        >Examples of controls that employ the <see cref="T:System.Web.UI.NonVisualControlAttribute" />
 
         
 
-         attribute are <see
-         cref="T:System.Web.UI.DataSourceControl" />
+         attribute are <see cref="T:System.Web.UI.DataSourceControl" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.HierarchicalDataSourceControl" />
+        , <see cref="T:System.Web.UI.HierarchicalDataSourceControl" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.WebControls.HiddenField" />
+        , <see cref="T:System.Web.UI.WebControls.HiddenField" />
 
         
 
-        , and <see
-         cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" />
+        , and <see cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" />
 
         
 
@@ -75,18 +67,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A default instance of the <see
-             cref="T:System.Web.UI.NonVisualControlAttribute" />
+            >A default instance of the <see cref="T:System.Web.UI.NonVisualControlAttribute" />
 
             
 
-             class is equivalent to the <see
-             cref="F:System.Web.UI.NonVisualControlAttribute.NonVisual" />
+             class is equivalent to the <see cref="F:System.Web.UI.NonVisualControlAttribute.NonVisual" />
 
             
 
-             field, or passing true to the <see
-             cref="M:System.Web.UI.NonVisualControlAttribute.#ctor(System.Boolean)" />
+             field, or passing true to the <see cref="M:System.Web.UI.NonVisualControlAttribute.#ctor(System.Boolean)" />
 
             
 
@@ -96,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.NonVisualControlAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.NonVisualControlAttribute" />
 
             
 
@@ -120,13 +108,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Passing true to this constructor is equivalent to using the <see
-             cref="F:System.Web.UI.NonVisualControlAttribute.NonVisual" />
+            >Passing true to this constructor is equivalent to using the <see cref="F:System.Web.UI.NonVisualControlAttribute.NonVisual" />
 
             
 
-             field, and passing false is equivalent to using the <see
-             cref="F:System.Web.UI.NonVisualControlAttribute.Visual" />
+             field, and passing false is equivalent to using the <see cref="F:System.Web.UI.NonVisualControlAttribute.Visual" />
 
             
 
@@ -136,8 +122,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.NonVisualControlAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.NonVisualControlAttribute" />
 
             
 
@@ -145,12 +130,15 @@
           >
         </summary>
         <param name="nonVisual">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to initialize the <see
-           cref="T:System.Web.UI.NonVisualControlAttribute" />
+          true to initialize the <see cref="T:System.Web.UI.NonVisualControlAttribute" />
 
           
 
@@ -175,13 +163,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A default instance of the <see
-             cref="T:System.Web.UI.NonVisualControlAttribute" />
+            >A default instance of the <see cref="T:System.Web.UI.NonVisualControlAttribute" />
 
             
 
-             class is equivalent to the <see
-             cref="F:System.Web.UI.NonVisualControlAttribute.Visual" />
+             class is equivalent to the <see cref="F:System.Web.UI.NonVisualControlAttribute.Visual" />
 
             
 
@@ -191,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Web.UI.NonVisualControlAttribute" />
+            >Returns a <see cref="T:System.Web.UI.NonVisualControlAttribute" />
 
             
 
@@ -254,8 +239,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether the current instance is equivalent to a default instance of the <see
-             cref="T:System.Web.UI.NonVisualControlAttribute" />
+            >Returns a value indicating whether the current instance is equivalent to a default instance of the <see cref="T:System.Web.UI.NonVisualControlAttribute" />
 
             
 
@@ -265,8 +249,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the current instance is equivalent to a <see
-             cref="F:System.Web.UI.NonVisualControlAttribute.Default" />
+            >true if the current instance is equivalent to a <see cref="F:System.Web.UI.NonVisualControlAttribute.Default" />
 
             
 
@@ -311,13 +294,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Web.UI.NonVisualControlAttribute.NonVisual" />
+            >The <see cref="F:System.Web.UI.NonVisualControlAttribute.NonVisual" />
 
             
 
-             field is equivalent to creating an instance of the attribute using the <see
-             cref="M:System.Web.UI.NonVisualControlAttribute.#ctor(System.Boolean)" />
+             field is equivalent to creating an instance of the attribute using the <see cref="M:System.Web.UI.NonVisualControlAttribute.#ctor(System.Boolean)" />
 
             
 
@@ -327,8 +308,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Web.UI.NonVisualControlAttribute" />
+            >Returns a <see cref="T:System.Web.UI.NonVisualControlAttribute" />
 
             
 
@@ -354,18 +334,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Web.UI.NonVisualControlAttribute.Visual" />
+            >The <see cref="F:System.Web.UI.NonVisualControlAttribute.Visual" />
 
             
 
-             field is equivalent to creating an instance of the attribute using the default <see
-             cref="M:System.Web.UI.NonVisualControlAttribute.#ctor" />
+             field is equivalent to creating an instance of the attribute using the default <see cref="M:System.Web.UI.NonVisualControlAttribute.#ctor" />
 
             
 
-             constructor, or creating an instance of the attribute using the <see
-             cref="M:System.Web.UI.NonVisualControlAttribute.#ctor(System.Boolean)" />
+             constructor, or creating an instance of the attribute using the <see cref="M:System.Web.UI.NonVisualControlAttribute.#ctor(System.Boolean)" />
 
             
 
@@ -375,8 +352,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.UI.NonVisualControlAttribute" />
+            >Gets a <see cref="T:System.Web.UI.NonVisualControlAttribute" />
 
             
 

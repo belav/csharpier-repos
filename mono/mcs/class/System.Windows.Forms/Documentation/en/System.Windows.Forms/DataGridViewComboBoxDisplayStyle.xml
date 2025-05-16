@@ -16,23 +16,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by the <see
-         cref="P:System.Windows.Forms.DataGridViewComboBoxCell.DisplayStyle" />
+        >This enumeration is used by the <see cref="P:System.Windows.Forms.DataGridViewComboBoxCell.DisplayStyle" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+         property of the <see cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.DataGridViewComboBoxColumn" />
+         and <see cref="T:System.Windows.Forms.DataGridViewComboBoxColumn" />
 
         
 
-         types to indicate the appearance of the cell when it is not in edit mode. In edit mode, the cell displays the hosted <see
-         cref="T:System.Windows.Forms.ComboBox" />
+         types to indicate the appearance of the cell when it is not in edit mode. In edit mode, the cell displays the hosted <see cref="T:System.Windows.Forms.ComboBox" />
 
         
 
@@ -42,8 +38,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines constants that indicate how a <see
-         cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+        >Defines constants that indicate how a <see cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
 
         
 
@@ -63,13 +58,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When it is not in edit mode, the <see
-             cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+            >When it is not in edit mode, the <see cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
 
             
 
-             mimics the appearance of a <see
-             cref="T:System.Windows.Forms.ComboBox" />
+             mimics the appearance of a <see cref="T:System.Windows.Forms.ComboBox" />
 
             
 
@@ -92,13 +85,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When it is not in edit mode, the <see
-             cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+            >When it is not in edit mode, the <see cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
 
             
 
-             is displayed with a drop-down button but does not otherwise mimic the appearance of a <see
-             cref="T:System.Windows.Forms.ComboBox" />
+             is displayed with a drop-down button but does not otherwise mimic the appearance of a <see cref="T:System.Windows.Forms.ComboBox" />
 
             
 
@@ -121,8 +112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When it is not in edit mode, the <see
-             cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+            >When it is not in edit mode, the <see cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
 
             
 

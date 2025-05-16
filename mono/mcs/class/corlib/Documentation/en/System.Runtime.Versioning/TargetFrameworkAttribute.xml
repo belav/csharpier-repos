@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Versioning.TargetFrameworkAttribute" />
+        >The <see cref="T:System.Runtime.Versioning.TargetFrameworkAttribute" />
 
         
 
@@ -31,28 +30,23 @@
       >
       <para>code reference: System.Runtime.Versioning.TargetFrameworkAttribute#1</para>
       <para
-        >The <see
-         cref="T:System.Runtime.Versioning.TargetFrameworkAttribute" />
+        >The <see cref="T:System.Runtime.Versioning.TargetFrameworkAttribute" />
 
         
 
-         class constructor has a single parameter, <paramref
-         name="frameworkName" />
+         class constructor has a single parameter, <paramref name="frameworkName" />
 
         
 
-        , that specifies the .NET Framework version against which the assembly was built. This parameter maps to the <see
-         cref="P:System.Runtime.Versioning.TargetFrameworkAttribute.FrameworkName" />
+        , that specifies the .NET Framework version against which the assembly was built. This parameter maps to the <see cref="P:System.Runtime.Versioning.TargetFrameworkAttribute.FrameworkName" />
 
         
 
-         property. In addition, the <see
-         cref="T:System.Runtime.Versioning.TargetFrameworkAttribute" />
+         property. In addition, the <see cref="T:System.Runtime.Versioning.TargetFrameworkAttribute" />
 
         
 
-         attribute can specify a <see
-         cref="P:System.Runtime.Versioning.TargetFrameworkAttribute.FrameworkDisplayName" />
+         attribute can specify a <see cref="P:System.Runtime.Versioning.TargetFrameworkAttribute.FrameworkDisplayName" />
 
         
 
@@ -86,13 +80,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string that is assigned to the <paramref
-             name="frameworkName" />
+            >The string that is assigned to the <paramref name="frameworkName" />
 
             
 
-             parameter generally takes the same form as the string that is returned by the <see
-             cref="M:System.Runtime.Versioning.FrameworkName.ToString" />
+             parameter generally takes the same form as the string that is returned by the <see cref="M:System.Runtime.Versioning.FrameworkName.ToString" />
 
             
 
@@ -102,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Runtime.Versioning.TargetFrameworkAttribute" />
+            >Initializes an instance of the <see cref="T:System.Runtime.Versioning.TargetFrameworkAttribute" />
 
             
 
@@ -111,7 +102,11 @@
           >
         </summary>
         <param name="frameworkName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -134,8 +129,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Runtime.Versioning.TargetFrameworkAttribute.FrameworkDisplayName" />
+            >The <see cref="P:System.Runtime.Versioning.TargetFrameworkAttribute.FrameworkDisplayName" />
 
             
 
@@ -163,23 +157,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Runtime.Versioning.TargetFrameworkAttribute.FrameworkName" />
+            >The <see cref="P:System.Runtime.Versioning.TargetFrameworkAttribute.FrameworkName" />
 
             
 
-             property maps to the <paramref
-             name="frameworkName" />
+             property maps to the <paramref name="frameworkName" />
 
             
 
-             parameter of the <see
-             cref="M:System.Runtime.Versioning.TargetFrameworkAttribute.#ctor(System.String)" />
+             parameter of the <see cref="M:System.Runtime.Versioning.TargetFrameworkAttribute.#ctor(System.String)" />
 
             
 
-             constructor. It represents the .NET Framework version in a compact form and typically corresponds to the string that is returned by the <see
-             cref="M:System.Runtime.Versioning.FrameworkName.ToString" />
+             constructor. It represents the .NET Framework version in a compact form and typically corresponds to the string that is returned by the <see cref="M:System.Runtime.Versioning.FrameworkName.ToString" />
 
             
 

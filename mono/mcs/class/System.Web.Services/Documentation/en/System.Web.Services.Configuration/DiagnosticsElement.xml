@@ -17,20 +17,17 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Services.Configuration.DiagnosticsElement" />
+        >The <see cref="T:System.Web.Services.Configuration.DiagnosticsElement" />
 
         
 
-         class represents the <format
-         type="text/html">
+         class represents the <format type="text/html">
           <a href="e4ca05d1-1e10-4873-9ef6-75e55851d888">&lt;diagnostics&gt;</a>
         </format>
 
         
 
-         element in a Web.config file. Set the <see
-         cref="P:System.Web.Services.Configuration.DiagnosticsElement.SuppressReturningExceptions" />
+         element in a Web.config file. Set the <see cref="P:System.Web.Services.Configuration.DiagnosticsElement.SuppressReturningExceptions" />
 
         
 
@@ -40,8 +37,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the <format
-         type="text/html">
+        >Represents the <format type="text/html">
           <a href="e4ca05d1-1e10-4873-9ef6-75e55851d888">&lt;diagnostics&gt;</a>
         </format>
 
@@ -62,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Configuration.DiagnosticsElement" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Configuration.DiagnosticsElement" />
 
             
 

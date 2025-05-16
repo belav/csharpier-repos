@@ -22,23 +22,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To convert a <see
-         cref="T:System.Drawing.PointF" />
+        >To convert a <see cref="T:System.Drawing.PointF" />
 
         
 
-         to a <see
-         cref="T:System.Drawing.Point" />
+         to a <see cref="T:System.Drawing.Point" />
 
         
 
-        , use <see
-         cref="M:System.Drawing.Point.Round(System.Drawing.PointF)" />
+        , use <see cref="M:System.Drawing.Point.Round(System.Drawing.PointF)" />
 
         
 
-         or <see
-         cref="M:System.Drawing.Point.Truncate(System.Drawing.PointF)" />
+         or <see cref="M:System.Drawing.Point.Truncate(System.Drawing.PointF)" />
 
         
 
@@ -64,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.PointF" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -73,14 +68,22 @@
           >
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The horizontal position of the point. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -112,28 +115,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Drawing.PointF.Add(System.Drawing.PointF,System.Drawing.SizeF)" />
+            >The <see cref="M:System.Drawing.PointF.Add(System.Drawing.PointF,System.Drawing.SizeF)" />
 
             
 
-             method adds the <see
-             cref="P:System.Drawing.Size.Width" />
+             method adds the <see cref="P:System.Drawing.Size.Width" />
 
             
 
-             of the specified size to the x-coordinate of the <see
-             cref="T:System.Drawing.PointF" />
+             of the specified size to the x-coordinate of the <see cref="T:System.Drawing.PointF" />
 
             
 
-             and the <see
-             cref="P:System.Drawing.Size.Height" />
+             and the <see cref="P:System.Drawing.Size.Height" />
 
             
 
-             to the y-coordinate of the <see
-             cref="T:System.Drawing.PointF" />
+             to the y-coordinate of the <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -143,13 +141,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Translates a given <see
-             cref="T:System.Drawing.PointF" />
+            >Translates a given <see cref="T:System.Drawing.PointF" />
 
             
 
-             by the specified <see
-             cref="T:System.Drawing.Size" />
+             by the specified <see cref="T:System.Drawing.Size" />
 
             
 
@@ -159,8 +155,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The translated <see
-             cref="T:System.Drawing.PointF" />
+            >The translated <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -168,29 +163,34 @@
           >
         </returns>
         <param name="pt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.PointF" />
+          The <see cref="T:System.Drawing.PointF" />
 
           
 
            to translate.</param
         >
         <param name="sz">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Size" />
+          The <see cref="T:System.Drawing.Size" />
 
           
 
-           that specifies the numbers to add to the coordinates of <paramref
-           name="pt" />
+           that specifies the numbers to add to the coordinates of <paramref name="pt" />
 
           
 
@@ -218,28 +218,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Drawing.PointF.Add(System.Drawing.PointF,System.Drawing.SizeF)" />
+            >The <see cref="M:System.Drawing.PointF.Add(System.Drawing.PointF,System.Drawing.SizeF)" />
 
             
 
-             method adds the <see
-             cref="P:System.Drawing.SizeF.Width" />
+             method adds the <see cref="P:System.Drawing.SizeF.Width" />
 
             
 
-             of the specified size to the x-coordinate of the <see
-             cref="T:System.Drawing.PointF" />
+             of the specified size to the x-coordinate of the <see cref="T:System.Drawing.PointF" />
 
             
 
-             and the <see
-             cref="P:System.Drawing.SizeF.Height" />
+             and the <see cref="P:System.Drawing.SizeF.Height" />
 
             
 
-             to the y-coordinate of the <see
-             cref="T:System.Drawing.PointF" />
+             to the y-coordinate of the <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -249,13 +244,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Translates a given <see
-             cref="T:System.Drawing.PointF" />
+            >Translates a given <see cref="T:System.Drawing.PointF" />
 
             
 
-             by a specified <see
-             cref="T:System.Drawing.SizeF" />
+             by a specified <see cref="T:System.Drawing.SizeF" />
 
             
 
@@ -265,8 +258,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The translated <see
-             cref="T:System.Drawing.PointF" />
+            >The translated <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -274,29 +266,34 @@
           >
         </returns>
         <param name="pt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.PointF" />
+          The <see cref="T:System.Drawing.PointF" />
 
           
 
            to translate.</param
         >
         <param name="sz">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.SizeF" />
+          The <see cref="T:System.Drawing.SizeF" />
 
           
 
-           that specifies the numbers to add to the coordinates of <paramref
-           name="pt" />
+           that specifies the numbers to add to the coordinates of <paramref name="pt" />
 
           
 
@@ -316,8 +313,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a new instance of the <see
-             cref="T:System.Drawing.PointF" />
+            >Represents a new instance of the <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -344,13 +340,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies whether this <see
-             cref="T:System.Drawing.PointF" />
+            >Specifies whether this <see cref="T:System.Drawing.PointF" />
 
             
 
-             contains the same coordinates as the specified <see
-             cref="T:System.Object" />
+             contains the same coordinates as the specified <see cref="T:System.Object" />
 
             
 
@@ -360,18 +354,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if <paramref
-             name="obj" />
+            >This method returns true if <paramref name="obj" />
 
             
 
-             is a <see
-             cref="T:System.Drawing.PointF" />
+             is a <see cref="T:System.Drawing.PointF" />
 
             
 
-             and has the same coordinates as this <see
-             cref="T:System.Drawing.Point" />
+             and has the same coordinates as this <see cref="T:System.Drawing.Point" />
 
             
 
@@ -379,12 +370,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -408,8 +402,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a hash code for this <see
-             cref="T:System.Drawing.PointF" />
+            >Returns a hash code for this <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -419,8 +412,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer value that specifies a hash value for this <see
-             cref="T:System.Drawing.PointF" />
+            >An integer value that specifies a hash value for this <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -445,8 +437,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether this <see
-             cref="T:System.Drawing.PointF" />
+            >Gets a value indicating whether this <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -482,13 +473,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Translates a <see
-             cref="T:System.Drawing.PointF" />
+            >Translates a <see cref="T:System.Drawing.PointF" />
 
             
 
-             by a given <see
-             cref="T:System.Drawing.Size" />
+             by a given <see cref="T:System.Drawing.Size" />
 
             
 
@@ -498,8 +487,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the translated <see
-             cref="T:System.Drawing.PointF" />
+            >Returns the translated <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -507,29 +495,34 @@
           >
         </returns>
         <param name="pt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.PointF" />
+          The <see cref="T:System.Drawing.PointF" />
 
           
 
            to translate. </param
         >
         <param name="sz">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Size" />
+          A <see cref="T:System.Drawing.Size" />
 
           
 
-           that specifies the pair of numbers to add to the coordinates of <paramref
-           name="pt" />
+           that specifies the pair of numbers to add to the coordinates of <paramref name="pt" />
 
           
 
@@ -561,28 +554,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Drawing.PointF.op_Addition(System.Drawing.PointF,System.Drawing.SizeF)" />
+            >The <see cref="M:System.Drawing.PointF.op_Addition(System.Drawing.PointF,System.Drawing.SizeF)" />
 
             
 
-             operator adds the <see
-             cref="P:System.Drawing.SizeF.Width" />
+             operator adds the <see cref="P:System.Drawing.SizeF.Width" />
 
             
 
-             of the specified size to the x-coordinate of the <see
-             cref="T:System.Drawing.PointF" />
+             of the specified size to the x-coordinate of the <see cref="T:System.Drawing.PointF" />
 
             
 
-             and the <see
-             cref="P:System.Drawing.SizeF.Height" />
+             and the <see cref="P:System.Drawing.SizeF.Height" />
 
             
 
-             to the y-coordinate of the <see
-             cref="T:System.Drawing.PointF" />
+             to the y-coordinate of the <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -592,13 +580,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Translates the <see
-             cref="T:System.Drawing.PointF" />
+            >Translates the <see cref="T:System.Drawing.PointF" />
 
             
 
-             by the specified <see
-             cref="T:System.Drawing.SizeF" />
+             by the specified <see cref="T:System.Drawing.SizeF" />
 
             
 
@@ -608,8 +594,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The translated <see
-             cref="T:System.Drawing.PointF" />
+            >The translated <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -617,29 +602,34 @@
           >
         </returns>
         <param name="pt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.PointF" />
+          The <see cref="T:System.Drawing.PointF" />
 
           
 
            to translate.</param
         >
         <param name="sz">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.SizeF" />
+          The <see cref="T:System.Drawing.SizeF" />
 
           
 
-           that specifies the numbers to add to the x- and y-coordinates of the <see
-           cref="T:System.Drawing.PointF" />
+           that specifies the numbers to add to the x- and y-coordinates of the <see cref="T:System.Drawing.PointF" />
 
           
 
@@ -665,23 +655,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two <see
-             cref="T:System.Drawing.PointF" />
+            >Compares two <see cref="T:System.Drawing.PointF" />
 
             
 
-             structures. The result specifies whether the values of the <see
-             cref="P:System.Drawing.PointF.X" />
+             structures. The result specifies whether the values of the <see cref="P:System.Drawing.PointF.X" />
 
             
 
-             and <see
-             cref="P:System.Drawing.PointF.Y" />
+             and <see cref="P:System.Drawing.PointF.Y" />
 
             
 
-             properties of the two <see
-             cref="T:System.Drawing.PointF" />
+             properties of the two <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -691,18 +677,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="P:System.Drawing.PointF.X" />
+            >true if the <see cref="P:System.Drawing.PointF.X" />
 
             
 
-             and <see
-             cref="P:System.Drawing.PointF.Y" />
+             and <see cref="P:System.Drawing.PointF.Y" />
 
             
 
-             values of the left and right <see
-             cref="T:System.Drawing.PointF" />
+             values of the left and right <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -710,24 +693,30 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.PointF" />
+          A <see cref="T:System.Drawing.PointF" />
 
           
 
            to compare. </param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.PointF" />
+          A <see cref="T:System.Drawing.PointF" />
 
           
 
@@ -761,23 +750,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true to indicate the <see
-             cref="P:System.Drawing.PointF.X" />
+            >true to indicate the <see cref="P:System.Drawing.PointF.X" />
 
             
 
-             and <see
-             cref="P:System.Drawing.PointF.Y" />
+             and <see cref="P:System.Drawing.PointF.Y" />
 
             
 
-             values of <paramref
-             name="left" />
+             values of <paramref name="left" />
 
             
 
-             and <paramref
-             name="right" />
+             and <paramref name="right" />
 
             
 
@@ -785,24 +770,30 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.PointF" />
+          A <see cref="T:System.Drawing.PointF" />
 
           
 
            to compare.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.PointF" />
+          A <see cref="T:System.Drawing.PointF" />
 
           
 
@@ -832,13 +823,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Translates a <see
-             cref="T:System.Drawing.PointF" />
+            >Translates a <see cref="T:System.Drawing.PointF" />
 
             
 
-             by the negative of a given <see
-             cref="T:System.Drawing.Size" />
+             by the negative of a given <see cref="T:System.Drawing.Size" />
 
             
 
@@ -848,8 +837,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The translated <see
-             cref="T:System.Drawing.PointF" />
+            >The translated <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -857,29 +845,34 @@
           >
         </returns>
         <param name="pt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.PointF" />
+          The <see cref="T:System.Drawing.PointF" />
 
           
 
            to translate.</param
         >
         <param name="sz">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Size" />
+          The <see cref="T:System.Drawing.Size" />
 
           
 
-           that specifies the numbers to subtract from the coordinates of <paramref
-           name="pt" />
+           that specifies the numbers to subtract from the coordinates of <paramref name="pt" />
 
           
 
@@ -911,28 +904,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Drawing.PointF.op_Subtraction(System.Drawing.PointF,System.Drawing.SizeF)" />
+            >The <see cref="M:System.Drawing.PointF.op_Subtraction(System.Drawing.PointF,System.Drawing.SizeF)" />
 
             
 
-             operator subtracts the <see
-             cref="P:System.Drawing.SizeF.Width" />
+             operator subtracts the <see cref="P:System.Drawing.SizeF.Width" />
 
             
 
-             of the specified size from the x-coordinate of the <see
-             cref="T:System.Drawing.PointF" />
+             of the specified size from the x-coordinate of the <see cref="T:System.Drawing.PointF" />
 
             
 
-             and the <see
-             cref="P:System.Drawing.SizeF.Height" />
+             and the <see cref="P:System.Drawing.SizeF.Height" />
 
             
 
-             from the y-coordinate of the <see
-             cref="T:System.Drawing.PointF" />
+             from the y-coordinate of the <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -942,13 +930,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Translates a <see
-             cref="T:System.Drawing.PointF" />
+            >Translates a <see cref="T:System.Drawing.PointF" />
 
             
 
-             by the negative of a specified <see
-             cref="T:System.Drawing.SizeF" />
+             by the negative of a specified <see cref="T:System.Drawing.SizeF" />
 
             
 
@@ -958,8 +944,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The translated <see
-             cref="T:System.Drawing.PointF" />
+            >The translated <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -967,29 +952,34 @@
           >
         </returns>
         <param name="pt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.PointF" />
+          The <see cref="T:System.Drawing.PointF" />
 
           
 
            to translate.</param
         >
         <param name="sz">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.SizeF" />
+          The <see cref="T:System.Drawing.SizeF" />
 
           
 
-           that specifies the numbers to subtract from the coordinates of <paramref
-           name="pt" />
+           that specifies the numbers to subtract from the coordinates of <paramref name="pt" />
 
           
 
@@ -1017,28 +1007,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Drawing.PointF.Subtract(System.Drawing.PointF,System.Drawing.Size)" />
+            >The <see cref="M:System.Drawing.PointF.Subtract(System.Drawing.PointF,System.Drawing.Size)" />
 
             
 
-             method subtracts the <see
-             cref="P:System.Drawing.Size.Width" />
+             method subtracts the <see cref="P:System.Drawing.Size.Width" />
 
             
 
-             of the specified size from the x-coordinate of the <see
-             cref="T:System.Drawing.PointF" />
+             of the specified size from the x-coordinate of the <see cref="T:System.Drawing.PointF" />
 
             
 
-             and the <see
-             cref="P:System.Drawing.Size.Height" />
+             and the <see cref="P:System.Drawing.Size.Height" />
 
             
 
-             from the y-coordinate of the <see
-             cref="T:System.Drawing.PointF" />
+             from the y-coordinate of the <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -1048,8 +1033,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Translates a <see
-             cref="T:System.Drawing.PointF" />
+            >Translates a <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -1059,8 +1043,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The translated <see
-             cref="T:System.Drawing.PointF" />
+            >The translated <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -1068,29 +1051,34 @@
           >
         </returns>
         <param name="pt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.PointF" />
+          The <see cref="T:System.Drawing.PointF" />
 
           
 
            to translate.</param
         >
         <param name="sz">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Size" />
+          The <see cref="T:System.Drawing.Size" />
 
           
 
-           that specifies the numbers to subtract from the coordinates of <paramref
-           name="pt" />
+           that specifies the numbers to subtract from the coordinates of <paramref name="pt" />
 
           
 
@@ -1118,28 +1106,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Drawing.PointF.Subtract(System.Drawing.PointF,System.Drawing.SizeF)" />
+            >The <see cref="M:System.Drawing.PointF.Subtract(System.Drawing.PointF,System.Drawing.SizeF)" />
 
             
 
-             method subtracts the <see
-             cref="P:System.Drawing.SizeF.Width" />
+             method subtracts the <see cref="P:System.Drawing.SizeF.Width" />
 
             
 
-             of the specified size from the x-coordinate of the <see
-             cref="T:System.Drawing.PointF" />
+             of the specified size from the x-coordinate of the <see cref="T:System.Drawing.PointF" />
 
             
 
-             and the <see
-             cref="P:System.Drawing.SizeF.Height" />
+             and the <see cref="P:System.Drawing.SizeF.Height" />
 
             
 
-             from the y-coordinate of the <see
-             cref="T:System.Drawing.PointF" />
+             from the y-coordinate of the <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -1149,8 +1132,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Translates a <see
-             cref="T:System.Drawing.PointF" />
+            >Translates a <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -1160,8 +1142,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The translated <see
-             cref="T:System.Drawing.PointF" />
+            >The translated <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -1169,29 +1150,34 @@
           >
         </returns>
         <param name="pt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.PointF" />
+          The <see cref="T:System.Drawing.PointF" />
 
           
 
            to translate.</param
         >
         <param name="sz">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.SizeF" />
+          The <see cref="T:System.Drawing.SizeF" />
 
           
 
-           that specifies the numbers to subtract from the coordinates of <paramref
-           name="pt" />
+           that specifies the numbers to subtract from the coordinates of <paramref name="pt" />
 
           
 
@@ -1211,8 +1197,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Drawing.PointF" />
+            >Converts this <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -1222,8 +1207,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents this <see
-             cref="T:System.Drawing.PointF" />
+            >A string that represents this <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -1249,8 +1233,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the x-coordinate of this <see
-             cref="T:System.Drawing.PointF" />
+            >Gets or sets the x-coordinate of this <see cref="T:System.Drawing.PointF" />
 
             
 
@@ -1276,8 +1259,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the y-coordinate of this <see
-             cref="T:System.Drawing.PointF" />
+            >Gets or sets the y-coordinate of this <see cref="T:System.Drawing.PointF" />
 
             
 

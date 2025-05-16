@@ -33,8 +33,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When building a strong-named assembly, the author must supply either this attribute or <see
-         cref="T:System.Reflection.AssemblyKeyFileAttribute" />
+        >When building a strong-named assembly, the author must supply either this attribute or <see cref="T:System.Reflection.AssemblyKeyFileAttribute" />
 
         
 
@@ -44,14 +43,14 @@
       <para>The classes in System.Runtime.CompilerServices are intended for use by compilers only. Do not use them unless you are building a compiler.</para>
       <para
         >For more information, see the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-         cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+          cref="http://go.microsoft.com/fwlink/?LinkID=99212"
           >ECMA C# and Common Language Infrastructure Standards</see
         >
 
         
 
          on MSDN and <see
-         cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+          cref="http://go.microsoft.com/fwlink/?LinkID=65552"
           >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
         >
 
@@ -87,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.AssemblyKeyNameAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyKeyNameAttribute" />
 
             
 
@@ -96,7 +94,11 @@
           >
         </summary>
         <param name="keyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -35,23 +35,19 @@
 
         
 
-         has the same child matching semantics as <see
-         cref="T:System.Security.Policy.UnionCodeGroup" />
+         has the same child matching semantics as <see cref="T:System.Security.Policy.UnionCodeGroup" />
 
         
 
-        . However, <see
-         cref="T:System.Security.Policy.FileCodeGroup" />
+        . However, <see cref="T:System.Security.Policy.FileCodeGroup" />
 
         
 
-         returns a permission set containing a dynamically-calculated <see
-         cref="T:System.Security.Permissions.FileIOPermission" />
+         returns a permission set containing a dynamically-calculated <see cref="T:System.Security.Permissions.FileIOPermission" />
 
         
 
-         that grants file access to the directory from which the code is run; <see
-         cref="T:System.Security.Policy.UnionCodeGroup" />
+         that grants file access to the directory from which the code is run; <see cref="T:System.Security.Policy.UnionCodeGroup" />
 
         
 
@@ -89,8 +85,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a basic code group. Child code groups can be added with the <see
-             cref="M:System.Security.Policy.CodeGroup.AddChild(System.Security.Policy.CodeGroup)" />
+            >This constructor creates a basic code group. Child code groups can be added with the <see cref="M:System.Security.Policy.CodeGroup.AddChild(System.Security.Policy.CodeGroup)" />
 
             
 
@@ -101,13 +96,11 @@
 
             
 
-             returns a permission set containing a dynamically-calculated <see
-             cref="T:System.Security.Permissions.FileIOPermission" />
+             returns a permission set containing a dynamically-calculated <see cref="T:System.Security.Permissions.FileIOPermission" />
 
             
 
-             that grants file access to the directory from which the code is run. The type of access granted is determined by the <paramref
-             name="access" />
+             that grants file access to the directory from which the code is run. The type of access granted is determined by the <paramref name="access" />
 
             
 
@@ -117,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Policy.FileCodeGroup" />
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.FileCodeGroup" />
 
             
 
@@ -126,24 +118,30 @@
           >
         </summary>
         <param name="membershipCondition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A membership condition that tests evidence to determine whether this code group applies policy. </param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+          One of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
           
 
-           values. This value is used to construct the <see
-           cref="T:System.Security.Permissions.FileIOPermission" />
+           values. This value is used to construct the <see cref="T:System.Security.Permissions.FileIOPermission" />
 
           
 
@@ -172,8 +170,7 @@
 
             
 
-             does not use <see
-             cref="P:System.Security.Policy.FileCodeGroup.AttributeString" />
+             does not use <see cref="P:System.Security.Policy.FileCodeGroup.AttributeString" />
 
             
 
@@ -278,7 +275,11 @@
           <para>true if the specified code group is equivalent to the current code group; otherwise, false.</para>
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -411,8 +412,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Given evidence for an assembly to be loaded, this method evaluates the code group by first checking the membership condition against the specified evidence. If there is a match, this method returns a policy statement for the code group, including evaluation of child code groups.</para>
           <para
-            >The .NET Framework security system uses <see
-             cref="M:System.Security.Policy.FileCodeGroup.Resolve(System.Security.Policy.Evidence)" />
+            >The .NET Framework security system uses <see cref="M:System.Security.Policy.FileCodeGroup.Resolve(System.Security.Policy.Evidence)" />
 
             
 
@@ -423,13 +423,11 @@
 
             
 
-             uses union semantics and forms a permission set based on the <see
-             cref="T:System.Security.Policy.Url" />
+             uses union semantics and forms a permission set based on the <see cref="T:System.Security.Policy.Url" />
 
             
 
-             specified by <paramref
-             name="evidence" />
+             specified by <paramref name="evidence" />
 
             
 
@@ -445,7 +443,11 @@
           <para>A policy statement consisting of the permissions granted by the code group with optional attributes, or null if the code group does not apply (the membership condition does not match the specified evidence).</para>
         </returns>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -483,13 +485,11 @@
 
             
 
-             uses union semantics and forms a permission set based on the <see
-             cref="T:System.Security.Policy.Url" />
+             uses union semantics and forms a permission set based on the <see cref="T:System.Security.Policy.Url" />
 
             
 
-             specified by <paramref
-             name="evidence" />
+             specified by <paramref name="evidence" />
 
             
 
@@ -503,8 +503,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.Policy.CodeGroup" />
+            >A <see cref="T:System.Security.Policy.CodeGroup" />
 
             
 
@@ -512,7 +511,11 @@
           >
         </returns>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

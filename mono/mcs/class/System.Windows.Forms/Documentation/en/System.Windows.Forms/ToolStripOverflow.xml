@@ -24,8 +24,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >If there are more overflow items than can be displayed on the form, use the <format
-         type="text/html">
+        >If there are more overflow items than can be displayed on the form, use the <format type="text/html">
           <a href="e681f3ab-94ba-4b2b-ac64-1dfad46caa25">ToolStrip Items Collection Editor</a>
         </format>
 
@@ -37,8 +36,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Manages the overflow behavior of a <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        >Manages the overflow behavior of a <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
@@ -64,13 +62,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripOverflow" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripOverflow" />
 
             
 
-             class derived from a base <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             class derived from a base <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -78,17 +74,19 @@
           >
         </summary>
         <param name="parentItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+          The <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
-           from which to derive this <see
-           cref="T:System.Windows.Forms.ToolStripOverflow" />
+           from which to derive this <see cref="T:System.Windows.Forms.ToolStripOverflow" />
 
           
 
@@ -113,13 +111,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you do not explicitly call the <see
-             cref="M:System.Windows.Forms.ToolStripOverflow.CreateAccessibilityInstance" />
+            >If you do not explicitly call the <see cref="M:System.Windows.Forms.ToolStripOverflow.CreateAccessibilityInstance" />
 
             
 
-             method, it will be called when the <see
-             cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+             method, it will be called when the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" />
 
             
 
@@ -127,8 +123,7 @@
           >
           <block subset="none" type="note">
             <para
-              >To get or set the <see
-               cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+              >To get or set the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" />
 
               
 
@@ -143,8 +138,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >A new <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
@@ -170,28 +164,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStripOverflow.DisplayedItems" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStripOverflow.DisplayedItems" />
 
             
 
-             property to get everything the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property to get everything the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             currently displays, including items the user did not add, such as a <see
-             cref="T:System.Windows.Forms.ToolStripOverflowButton" />
+             currently displays, including items the user did not add, such as a <see cref="T:System.Windows.Forms.ToolStripOverflowButton" />
 
             
 
-            . Use the <see
-             cref="P:System.Windows.Forms.ToolStripOverflow.Items" />
+            . Use the <see cref="P:System.Windows.Forms.ToolStripOverflow.Items" />
 
             
 
-             property to get all items on the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property to get all items on the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -201,8 +190,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets all of the items that are currently being displayed on the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets all of the items that are currently being displayed on the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -235,8 +223,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An ordered pair of type <see
-             cref="T:System.Drawing.Size" />
+            >An ordered pair of type <see cref="T:System.Drawing.Size" />
 
             
 
@@ -244,7 +231,11 @@
           >
         </returns>
         <param name="constrainingSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -269,23 +260,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStripOverflow.Items" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStripOverflow.Items" />
 
             
 
-             property to get all items on the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property to get all items on the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            , including those not being displayed. Use the <see
-             cref="P:System.Windows.Forms.ToolStripOverflow.DisplayedItems" />
+            , including those not being displayed. Use the <see cref="P:System.Windows.Forms.ToolStripOverflow.DisplayedItems" />
 
             
 
-             property to get only those items that are currently displayed on the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property to get only those items that are currently displayed on the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -295,8 +282,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets all of the items on the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets all of the items on the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -342,8 +328,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -352,8 +337,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripOverflow.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripOverflow.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
 
             
 
@@ -363,8 +347,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Layout" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Layout" />
 
             
 
@@ -372,12 +355,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.LayoutEventArgs" />
+          A <see cref="T:System.Windows.Forms.LayoutEventArgs" />
 
           
 

@@ -34,28 +34,24 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can use the foreach statement to iterate over the contents of the header list that contains objects of type <see
-         cref="T:System.Collections.DictionaryEntry" />
+        >You can use the foreach statement to iterate over the contents of the header list that contains objects of type <see cref="T:System.Collections.DictionaryEntry" />
 
         
 
         . Keys to the headers are required to be strings, and comparisons are done on a case-insensitive basis.</para
       >
       <para
-        >This class makes a link demand and an inheritance demand at the class level. A <see
-         cref="T:System.Security.SecurityException" />
+        >This class makes a link demand and an inheritance demand at the class level. A <see cref="T:System.Security.SecurityException" />
 
         
 
-         is thrown when either the immediate caller or the derived class does not have infrastructure permission. For details about security demands, see <format
-         type="text/html">
+         is thrown when either the immediate caller or the derived class does not have infrastructure permission. For details about security demands, see <format type="text/html">
           <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">[&lt;topic://cpconLinkDemands&gt;]</a>
         </format>
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="28B9ADBB-8F08-4F10-B856-DBF59EB932D9"
             >[&lt;topic://cpconInheritanceDemands&gt;]</a
           >
@@ -91,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Channels.TransportHeaders" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Channels.TransportHeaders" />
 
             
 

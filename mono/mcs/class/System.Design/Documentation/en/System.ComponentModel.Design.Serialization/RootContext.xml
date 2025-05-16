@@ -13,18 +13,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.Serialization.RootContext" />
+        >The <see cref="T:System.ComponentModel.Design.Serialization.RootContext" />
 
         
 
-         can be placed on the context stack to represent the object that is the root of the serialization hierarchy. In addition to this instance, the <see
-         cref="T:System.ComponentModel.Design.Serialization.RootContext" />
+         can be placed on the context stack to represent the object that is the root of the serialization hierarchy. In addition to this instance, the <see cref="T:System.ComponentModel.Design.Serialization.RootContext" />
 
         
 
-         also contains an expression that can be used to reference the <see
-         cref="T:System.ComponentModel.Design.Serialization.RootContext" />
+         also contains an expression that can be used to reference the <see cref="T:System.ComponentModel.Design.Serialization.RootContext" />
 
         
 
@@ -34,8 +31,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" />
+        >A <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" />
 
         
 
@@ -63,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.RootContext" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.RootContext" />
 
             
 
@@ -72,7 +67,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

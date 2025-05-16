@@ -17,18 +17,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Hosting.VirtualDirectory" />
+        >The <see cref="T:System.Web.Hosting.VirtualDirectory" />
 
         
 
-         class is the base class for objects that represent directories in a virtual file system. Typically, you would implement a descendent of the <see
-         cref="T:System.Web.Hosting.VirtualDirectory" />
+         class is the base class for objects that represent directories in a virtual file system. Typically, you would implement a descendent of the <see cref="T:System.Web.Hosting.VirtualDirectory" />
 
         
 
-         class for each <see
-         cref="T:System.Web.Hosting.VirtualPathProvider" />
+         class for each <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
         
 
@@ -53,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Hosting.VirtualDirectory" />
+            >Initializes a new instance of the <see cref="T:System.Web.Hosting.VirtualDirectory" />
 
             
 
@@ -62,7 +58,11 @@
           >
         </summary>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -88,38 +88,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Hosting.VirtualDirectory.Children" />
+            >The <see cref="P:System.Web.Hosting.VirtualDirectory.Children" />
 
             
 
-             property contains both <see
-             cref="T:System.Web.Hosting.VirtualFile" />
+             property contains both <see cref="T:System.Web.Hosting.VirtualFile" />
 
             
 
-             and <see
-             cref="T:System.Web.Hosting.VirtualDirectory" />
+             and <see cref="T:System.Web.Hosting.VirtualDirectory" />
 
             
 
-             objects that represent the files and directories contained in this virtual directory. To return only the <see
-             cref="T:System.Web.Hosting.VirtualFile" />
+             objects that represent the files and directories contained in this virtual directory. To return only the <see cref="T:System.Web.Hosting.VirtualFile" />
 
             
 
-             objects, use the <see
-             cref="P:System.Web.Hosting.VirtualDirectory.Files" />
+             objects, use the <see cref="P:System.Web.Hosting.VirtualDirectory.Files" />
 
             
 
-             property. To return only the <see
-             cref="T:System.Web.Hosting.VirtualDirectory" />
+             property. To return only the <see cref="T:System.Web.Hosting.VirtualDirectory" />
 
             
 
-             objects, use the <see
-             cref="P:System.Web.Hosting.VirtualDirectory.Directories" />
+             objects, use the <see cref="P:System.Web.Hosting.VirtualDirectory.Directories" />
 
             
 
@@ -150,38 +143,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Hosting.VirtualDirectory.Directories" />
+            >The <see cref="P:System.Web.Hosting.VirtualDirectory.Directories" />
 
             
 
-             property contains <see
-             cref="T:System.Web.Hosting.VirtualDirectory" />
+             property contains <see cref="T:System.Web.Hosting.VirtualDirectory" />
 
             
 
-             objects that represent the directories contained in this virtual directory. To return the <see
-             cref="T:System.Web.Hosting.VirtualFile" />
+             objects that represent the directories contained in this virtual directory. To return the <see cref="T:System.Web.Hosting.VirtualFile" />
 
             
 
-             objects, use the <see
-             cref="P:System.Web.Hosting.VirtualDirectory.Files" />
+             objects, use the <see cref="P:System.Web.Hosting.VirtualDirectory.Files" />
 
             
 
-             property. To return both <see
-             cref="T:System.Web.Hosting.VirtualFile" />
+             property. To return both <see cref="T:System.Web.Hosting.VirtualFile" />
 
             
 
-             and <see
-             cref="T:System.Web.Hosting.VirtualDirectory" />
+             and <see cref="T:System.Web.Hosting.VirtualDirectory" />
 
             
 
-             objects, use the <see
-             cref="P:System.Web.Hosting.VirtualDirectory.Children" />
+             objects, use the <see cref="P:System.Web.Hosting.VirtualDirectory.Children" />
 
             
 
@@ -212,38 +198,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Hosting.VirtualDirectory.Files" />
+            >The <see cref="P:System.Web.Hosting.VirtualDirectory.Files" />
 
             
 
-             property contains <see
-             cref="T:System.Web.Hosting.VirtualFile" />
+             property contains <see cref="T:System.Web.Hosting.VirtualFile" />
 
             
 
-             objects that represent the files contained in this virtual directory. To return the <see
-             cref="T:System.Web.Hosting.VirtualDirectory" />
+             objects that represent the files contained in this virtual directory. To return the <see cref="T:System.Web.Hosting.VirtualDirectory" />
 
             
 
-             objects, use the <see
-             cref="P:System.Web.Hosting.VirtualDirectory.Directories" />
+             objects, use the <see cref="P:System.Web.Hosting.VirtualDirectory.Directories" />
 
             
 
-             property. To return both <see
-             cref="T:System.Web.Hosting.VirtualFile" />
+             property. To return both <see cref="T:System.Web.Hosting.VirtualFile" />
 
             
 
-             and <see
-             cref="T:System.Web.Hosting.VirtualDirectory" />
+             and <see cref="T:System.Web.Hosting.VirtualDirectory" />
 
             
 
-             objects, use the <see
-             cref="P:System.Web.Hosting.VirtualDirectory.Children" />
+             objects, use the <see cref="P:System.Web.Hosting.VirtualDirectory.Children" />
 
             
 

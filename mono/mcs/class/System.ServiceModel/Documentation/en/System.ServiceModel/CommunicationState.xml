@@ -17,13 +17,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This enumeration defines the states that are valid for all communication objects in the system, including channels, listeners, factories, dispatchers, and service hosts. </para>
       <para
-        >The methods that manage transitions between these states and the events that can be associated with them are defined in the <see
-         cref="T:System.ServiceModel.ICommunicationObject" />
+        >The methods that manage transitions between these states and the events that can be associated with them are defined in the <see cref="T:System.ServiceModel.ICommunicationObject" />
 
         
 
-         interface. The state of an object can be obtained using the <see
-         cref="P:System.ServiceModel.ICommunicationObject.State" />
+         interface. The state of an object can be obtained using the <see cref="P:System.ServiceModel.ICommunicationObject.State" />
 
         
 
@@ -66,78 +64,66 @@
         </item>
       </list>
       <para
-        >The communication object can be configured in the <see
-         cref="F:System.ServiceModel.CommunicationState.Created" />
+        >The communication object can be configured in the <see cref="F:System.ServiceModel.CommunicationState.Created" />
 
         
 
          state. For example, its properties can be changed, and its events can be registered. No input or output can occur in this state. So messages, for example, cannot be sent or received from a channel in this state.</para
       >
       <para
-        >The <see
-         cref="F:System.ServiceModel.CommunicationState.Opening" />
+        >The <see cref="F:System.ServiceModel.CommunicationState.Opening" />
 
         
 
-         is a temporary state that the communication object enters when the <see
-         cref="M:System.ServiceModel.ICommunicationObject.Open" />
+         is a temporary state that the communication object enters when the <see cref="M:System.ServiceModel.ICommunicationObject.Open" />
 
         
 
-         method is invoked. Unless otherwise noted on derived classes, objects in the opening state cannot be configured. This transition state can only be entered from the <see
-         cref="F:System.ServiceModel.CommunicationState.Created" />
+         method is invoked. Unless otherwise noted on derived classes, objects in the opening state cannot be configured. This transition state can only be entered from the <see cref="F:System.ServiceModel.CommunicationState.Created" />
 
         
 
          state.</para
       >
       <para
-        >Objects transition to the <see
-         cref="F:System.ServiceModel.CommunicationState.Opened" />
+        >Objects transition to the <see cref="F:System.ServiceModel.CommunicationState.Opened" />
 
         
 
-         state when the open process completes. This transition to the <see
-         cref="F:System.ServiceModel.CommunicationState.Opened" />
+         state when the open process completes. This transition to the <see cref="F:System.ServiceModel.CommunicationState.Opened" />
 
         
 
-         state is only valid from the <see
-         cref="F:System.ServiceModel.CommunicationState.Opening" />
+         state is only valid from the <see cref="F:System.ServiceModel.CommunicationState.Opening" />
 
         
 
          state. Unless otherwise noted on derived classes, the configuration of the object is now disabled. At this point, the object is fully usable for message transfers.</para
       >
       <para
-        >The <see
-         cref="F:System.ServiceModel.CommunicationState.Closing" />
+        >The <see cref="F:System.ServiceModel.CommunicationState.Closing" />
 
         
 
-         is a temporary state that the object enters when the <see
-         cref="M:System.ServiceModel.ICommunicationObject.Close" />
+         is a temporary state that the object enters when the <see cref="M:System.ServiceModel.ICommunicationObject.Close" />
 
         
 
-         method is invoked for a graceful shutdown or the object is aborted. At this point, the object becomes (if not already) unusable. This transition is valid from any state except the <see
-         cref="F:System.ServiceModel.CommunicationState.Closed" />
+         method is invoked for a graceful shutdown or the object is aborted. At this point, the object becomes (if not already) unusable. This transition is valid from any state except the <see cref="F:System.ServiceModel.CommunicationState.Closed" />
 
         
 
          state.</para
       >
       <para
-        >The <see
-         cref="F:System.ServiceModel.CommunicationState.Closed" />
+        >The <see cref="F:System.ServiceModel.CommunicationState.Closed" />
 
         
 
          state is equivalent to being disposed and the configuration of the object can still be inspected.</para
       >
       <para
-        >The <see
-         cref="F:System.ServiceModel.CommunicationState.Faulted" />
+        >The <see cref="F:System.ServiceModel.CommunicationState.Faulted" />
 
         
 
@@ -146,8 +132,7 @@
       <list type="bullet">
         <item>
           <para
-            >If the <see
-             cref="M:System.ServiceModel.ICommunicationObject.Open" />
+            >If the <see cref="M:System.ServiceModel.ICommunicationObject.Open" />
 
             
 
@@ -159,28 +144,23 @@
         </item>
       </list>
       <para
-        >An object in the <see
-         cref="F:System.ServiceModel.CommunicationState.Faulted" />
+        >An object in the <see cref="F:System.ServiceModel.CommunicationState.Faulted" />
 
         
 
-         state is not closed and may be holding resources. The <see
-         cref="M:System.ServiceModel.ICommunicationObject.Abort" />
+         state is not closed and may be holding resources. The <see cref="M:System.ServiceModel.ICommunicationObject.Abort" />
 
         
 
-         method should be used to close an object that has faulted. If <see
-         cref="M:System.ServiceModel.ICommunicationObject.Close" />
+         method should be used to close an object that has faulted. If <see cref="M:System.ServiceModel.ICommunicationObject.Close" />
 
         
 
-         is called on an object in the <see
-         cref="F:System.ServiceModel.CommunicationState.Faulted" />
+         is called on an object in the <see cref="F:System.ServiceModel.CommunicationState.Faulted" />
 
         
 
-         state, a <see
-         cref="T:System.ServiceModel.CommunicationObjectFaultedException" />
+         state, a <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" />
 
         
 
@@ -190,8 +170,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines the states in which an <see
-         cref="T:System.ServiceModel.ICommunicationObject" />
+        >Defines the states in which an <see cref="T:System.ServiceModel.ICommunicationObject" />
 
         
 
@@ -237,8 +216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the communication object is transitioning to the <see
-             cref="F:System.ServiceModel.CommunicationState.Closed" />
+            >Indicates that the communication object is transitioning to the <see cref="F:System.ServiceModel.CommunicationState.Closed" />
 
             
 
@@ -324,13 +302,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the communication object is being transitioned from the <see
-             cref="F:System.ServiceModel.CommunicationState.Created" />
+            >Indicates that the communication object is being transitioned from the <see cref="F:System.ServiceModel.CommunicationState.Created" />
 
             
 
-             state to the <see
-             cref="F:System.ServiceModel.CommunicationState.Opened" />
+             state to the <see cref="F:System.ServiceModel.CommunicationState.Opened" />
 
             
 

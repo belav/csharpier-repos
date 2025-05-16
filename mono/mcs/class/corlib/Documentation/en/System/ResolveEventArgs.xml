@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When the loader cannot resolve an assembly reference and a handler has been provided for the appropriate loader resolution event, the event is raised and the <see
-         cref="T:System.ResolveEventArgs" />
+        >When the loader cannot resolve an assembly reference and a handler has been provided for the appropriate loader resolution event, the event is raised and the <see cref="T:System.ResolveEventArgs" />
 
         
 
@@ -40,8 +39,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="P:System.ResolveEventArgs.Name" />
+            >The <see cref="P:System.ResolveEventArgs.Name" />
 
             
 
@@ -50,13 +48,11 @@
         </item>
         <item>
           <para
-            >Beginning with the net_v40_long, the <see
-             cref="P:System.ResolveEventArgs.RequestingAssembly" />
+            >Beginning with the net_v40_long, the <see cref="P:System.ResolveEventArgs.RequestingAssembly" />
 
             
 
-             property contains the assembly that requested an assembly that can provide the named item. For more information, see the <see
-             cref="P:System.ResolveEventArgs.RequestingAssembly" />
+             property contains the assembly that requested an assembly that can provide the named item. For more information, see the <see cref="P:System.ResolveEventArgs.RequestingAssembly" />
 
             
 
@@ -68,23 +64,19 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for loader resolution events, such as the <see
-         cref="E:System.AppDomain.TypeResolve" />
+        >Provides data for loader resolution events, such as the <see cref="E:System.AppDomain.TypeResolve" />
 
         
 
-        , <see
-         cref="E:System.AppDomain.ResourceResolve" />
+        , <see cref="E:System.AppDomain.ResourceResolve" />
 
         
 
-        , <see
-         cref="E:System.AppDomain.ReflectionOnlyAssemblyResolve" />
+        , <see cref="E:System.AppDomain.ReflectionOnlyAssemblyResolve" />
 
         
 
-        , and <see
-         cref="E:System.AppDomain.AssemblyResolve" />
+        , and <see cref="E:System.AppDomain.AssemblyResolve" />
 
         
 
@@ -117,8 +109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ResolveEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.ResolveEventArgs" />
 
             
 
@@ -126,7 +117,11 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -156,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ResolveEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.ResolveEventArgs" />
 
             
 
@@ -165,14 +159,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of an item to resolve. </param
         >
         <param name="requestingAssembly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -197,13 +199,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the <see
-             cref="E:System.AppDomain.AssemblyResolve" />
+            >For the <see cref="E:System.AppDomain.AssemblyResolve" />
 
             
 
-             event, <see
-             cref="P:System.ResolveEventArgs.Name" />
+             event, <see cref="P:System.ResolveEventArgs.Name" />
 
             
 
@@ -237,44 +237,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The assembly that is returned by this property is an assembly that was unable to resolve the item specified by the <see
-             cref="P:System.ResolveEventArgs.Name" />
+            >The assembly that is returned by this property is an assembly that was unable to resolve the item specified by the <see cref="P:System.ResolveEventArgs.Name" />
 
             
 
              property, because the item did not exist in that assembly, in any of its loaded dependencies, or in any dependencies the loader could find through probing. </para
           >
           <para
-            >For example, suppose the current assembly uses the <see
-             cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
+            >For example, suppose the current assembly uses the <see cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
 
             
 
-             method to load assembly A from a directory outside the probing path, in order to use class CA. Suppose further that class CA uses class CB, in assembly B, and that assembly A has a compile-time reference to assembly B, also located outside the probing path. When the current assembly attempts to instantiate CA, the loader attempts to resolve the reference to assembly B. However, because assembly A was loaded by using the <see
-             cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
+             method to load assembly A from a directory outside the probing path, in order to use class CA. Suppose further that class CA uses class CB, in assembly B, and that assembly A has a compile-time reference to assembly B, also located outside the probing path. When the current assembly attempts to instantiate CA, the loader attempts to resolve the reference to assembly B. However, because assembly A was loaded by using the <see cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
 
             
 
-             method, the loader cannot resolve the dependency. If there is a handler for the <see
-             cref="E:System.AppDomain.AssemblyResolve" />
+             method, the loader cannot resolve the dependency. If there is a handler for the <see cref="E:System.AppDomain.AssemblyResolve" />
 
             
 
-             event, the event is raised, and the <see
-             cref="P:System.ResolveEventArgs.RequestingAssembly" />
+             event, the event is raised, and the <see cref="P:System.ResolveEventArgs.RequestingAssembly" />
 
             
 
-             property of the resulting <see
-             cref="T:System.ResolveEventArgs" />
+             property of the resulting <see cref="T:System.ResolveEventArgs" />
 
             
 
              object contains assembly A, because assembly A is the assembly that is missing a dependency.</para
           >
           <para
-            >The semantics of the <see
-             cref="P:System.ResolveEventArgs.RequestingAssembly" />
+            >The semantics of the <see cref="P:System.ResolveEventArgs.RequestingAssembly" />
 
             
 
@@ -283,8 +276,7 @@
           <list type="bullet">
             <item>
               <para
-                >Load context: The value of the property might be null. The load context is load-order independent, and the identity of the requesting assembly is not necessarily meaningful. A non-null example occurs when the <see
-                 cref="M:System.Type.GetType(System.String,System.Boolean)" />
+                >Load context: The value of the property might be null. The load context is load-order independent, and the identity of the requesting assembly is not necessarily meaningful. A non-null example occurs when the <see cref="M:System.Type.GetType(System.String,System.Boolean)" />
 
                 
 
@@ -296,13 +288,11 @@
             </item>
             <item>
               <para
-                >No context (that is, the requesting assembly was loaded by using the <see
-                 cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
+                >No context (that is, the requesting assembly was loaded by using the <see cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
 
                 
 
-                 method, or as a byte stream, or in mixed mode): The handler can use the <see
-                 cref="P:System.ResolveEventArgs.RequestingAssembly" />
+                 method, or as a byte stream, or in mixed mode): The handler can use the <see cref="P:System.ResolveEventArgs.RequestingAssembly" />
 
                 
 

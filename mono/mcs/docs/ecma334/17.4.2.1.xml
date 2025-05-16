@@ -2,9 +2,7 @@
 <clause number="17.4.2.1" title="Using static readonly fields for constants">
   <paragraph
     >A static readonly field is useful when a symbolic name for a constant value is desired, but when the type of the value is not permitted in a const declaration, or when the value cannot be computed at  compile-time. <example
-
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 public class Color  
 {  

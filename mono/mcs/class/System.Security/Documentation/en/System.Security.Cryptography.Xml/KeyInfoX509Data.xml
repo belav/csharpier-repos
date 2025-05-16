@@ -18,7 +18,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -32,16 +34,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+        >The <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
         
 
          class represents the &lt;X509Data&gt; element that contains X.509v3 certificate information related to the validation or encryption key. For example, an &lt;X509Data&gt; element might contain an X.509 certificate whose subject public key is the validation key, or a chain of X.509 certificates that terminate in a certificate for the validating key, or other identifiers for related X.509 certificates.</para
       >
       <para
-        >Use the <see
-         cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+        >Use the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
         
 
@@ -74,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
             
 
@@ -105,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
             
 
@@ -114,17 +112,19 @@
           >
         </summary>
         <param name="rgbCert">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The ASN.1 DER encoding of an <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+          The ASN.1 DER encoding of an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
           
 
-           object to initialize the new instance of <see
-           cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+           object to initialize the new instance of <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
           
 
@@ -159,8 +159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
             
 
@@ -168,17 +167,19 @@
           >
         </summary>
         <param name="cert">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+          The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
           
 
-           object to initialize the new instance of <see
-           cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+           object to initialize the new instance of <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
           
 
@@ -215,8 +216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
             
 
@@ -224,29 +224,34 @@
           >
         </summary>
         <param name="cert">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+          The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
           
 
-           object to initialize the new instance of <see
-           cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+           object to initialize the new instance of <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
           
 
            from.</param
         >
         <param name="includeOption">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509IncludeOption" />
+          One of the <see cref="T:System.Security.Cryptography.X509Certificates.X509IncludeOption" />
 
           
 
@@ -283,8 +288,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified X.509v3 certificate to the <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+            >Adds the specified X.509v3 certificate to the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
             
 
@@ -292,17 +296,19 @@
           >
         </summary>
         <param name="certificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+          The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
           
 
-           object to add to the <see
-           cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+           object to add to the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
           
 
@@ -337,18 +343,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>For identification, each X.509v3 certificate carries the name of the certification authority that issued the certificate paired with a unique serial number assigned by the certification authority.</para>
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Xml.KeyInfoX509Data.AddIssuerSerial(System.String,System.String)" />
+            >The <see cref="M:System.Security.Cryptography.Xml.KeyInfoX509Data.AddIssuerSerial(System.String,System.String)" />
 
             
 
-             method adds information about an issuer name and serial number pair to a list of <see
-             cref="T:System.Security.Cryptography.Xml.X509IssuerSerial" />
+             method adds information about an issuer name and serial number pair to a list of <see cref="T:System.Security.Cryptography.Xml.X509IssuerSerial" />
 
             
 
-             objects that are accessible through the <see
-             cref="P:System.Security.Cryptography.Xml.KeyInfoX509Data.IssuerSerials" />
+             objects that are accessible through the <see cref="P:System.Security.Cryptography.Xml.KeyInfoX509Data.IssuerSerials" />
 
             
 
@@ -358,8 +361,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified issuer name and serial number pair to the <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+            >Adds the specified issuer name and serial number pair to the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
             
 
@@ -367,24 +369,30 @@
           >
         </summary>
         <param name="issuerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The issuer name portion of the pair to add to the <see
-           cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+          The issuer name portion of the pair to add to the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
           
 
            object. </param
         >
         <param name="serialNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The serial number portion of the pair to add to the <see
-           cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+          The serial number portion of the pair to add to the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
           
 
@@ -418,8 +426,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified subject key identifier (SKI) byte array to the <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+            >Adds the specified subject key identifier (SKI) byte array to the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
             
 
@@ -427,12 +434,15 @@
           >
         </summary>
         <param name="subjectKeyId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A byte array that represents the subject key identifier (SKI) to add to the <see
-           cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+          A byte array that represents the subject key identifier (SKI) to add to the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
           
 
@@ -470,8 +480,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified subject key identifier (SKI) string to the <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+            >Adds the specified subject key identifier (SKI) string to the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
             
 
@@ -479,12 +488,15 @@
           >
         </summary>
         <param name="subjectKeyId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that represents the subject key identifier (SKI) to add to the <see
-           cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+          A string that represents the subject key identifier (SKI) to add to the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
           
 
@@ -515,8 +527,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the subject name of the entity that was issued an X.509v3 certificate to the <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+            >Adds the subject name of the entity that was issued an X.509v3 certificate to the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
             
 
@@ -524,12 +535,15 @@
           >
         </summary>
         <param name="subjectName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the entity that was issued an X.509 certificate to add to the <see
-           cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+          The name of the entity that was issued an X.509 certificate to add to the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
           
 
@@ -557,16 +571,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.ArrayList" />
-        </value>
+        <value>a <see cref="T:System.Collections.ArrayList" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a list of the X.509v3 certificates contained in the <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+            >Gets a list of the X.509v3 certificates contained in the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
             
 
@@ -589,16 +599,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Byte[]" />
-        </value>
+        <value>a <see cref="T:System.Byte[]" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the Certificate Revocation List (CRL) contained within the <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+            >Gets or sets the Certificate Revocation List (CRL) contained within the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
             
 
@@ -627,8 +633,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.XmlElement" />
+            >The <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -638,8 +643,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an XML representation of the <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+            >Returns an XML representation of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
             
 
@@ -649,8 +653,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An XML representation of the <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+            >An XML representation of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
             
 
@@ -679,20 +682,15 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.ArrayList" />
-        </value>
+        <value>a <see cref="T:System.Collections.ArrayList" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Xml.KeyInfoX509Data.IssuerSerials" />
+            >The <see cref="P:System.Security.Cryptography.Xml.KeyInfoX509Data.IssuerSerials" />
 
             
 
-             property represents the &lt;X509IssuerSerial&gt; element of an XML digital signature using a list of <see
-             cref="T:System.Security.Cryptography.Xml.X509IssuerSerial" />
+             property represents the &lt;X509IssuerSerial&gt; element of an XML digital signature using a list of <see cref="T:System.Security.Cryptography.Xml.X509IssuerSerial" />
 
             
 
@@ -700,8 +698,7 @@
           >
           <para>The issuer of an X.509 certificate is the name of the certification authority that issued the certificate. Certification authorities assign each certificate they issue a unique serial number.</para>
           <para
-            >You can add a name and serial number pair using the <see
-             cref="M:System.Security.Cryptography.Xml.KeyInfoX509Data.AddIssuerSerial(System.String,System.String)" />
+            >You can add a name and serial number pair using the <see cref="M:System.Security.Cryptography.Xml.KeyInfoX509Data.AddIssuerSerial(System.String,System.String)" />
 
             
 
@@ -711,8 +708,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a list of <see
-             cref="T:System.Security.Cryptography.Xml.X509IssuerSerial" />
+            >Gets a list of <see cref="T:System.Security.Cryptography.Xml.X509IssuerSerial" />
 
             
 
@@ -750,13 +746,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Parses the input <see
-             cref="T:System.Xml.XmlElement" />
+            >Parses the input <see cref="T:System.Xml.XmlElement" />
 
             
 
-             object and configures the internal state of the <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+             object and configures the internal state of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
             
 
@@ -764,17 +758,19 @@
           >
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlElement" />
+          The <see cref="T:System.Xml.XmlElement" />
 
           
 
-           object that specifies the state of the <see
-           cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+           object that specifies the state of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
           
 
@@ -802,10 +798,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.ArrayList" />
-        </value>
+        <value>a <see cref="T:System.Collections.ArrayList" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Subject key identifiers (SKIs) are a way to identify certificates that contain a certain public key. An SKI can be used to identify one or more certificates issued to a particular subject key pair.</para>
@@ -813,8 +806,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a list of the subject key identifiers (SKIs) contained in the <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+            >Gets a list of the subject key identifiers (SKIs) contained in the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
             
 
@@ -843,10 +835,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.ArrayList" />
-        </value>
+        <value>a <see cref="T:System.Collections.ArrayList" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Every X.509v3 certificate includes a subject name. This name can be used to identify one or more certificates.</para>
@@ -854,8 +843,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a list of the subject names of the entities contained in the <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+            >Gets a list of the subject names of the entities contained in the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
             
 

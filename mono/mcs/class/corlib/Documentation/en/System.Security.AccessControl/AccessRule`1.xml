@@ -30,13 +30,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Access rights (permissions) are type T, which you can type-cast to or from an int. For example, you can cast a <see
-         cref="T:System.Security.AccessControl.FileSystemRights" />
+        >Access rights (permissions) are type T, which you can type-cast to or from an int. For example, you can cast a <see cref="T:System.Security.AccessControl.FileSystemRights" />
 
         
 
-         as the access rights type, and then use the instance normally. In contrast, <see
-         cref="T:System.Security.AccessControl.AccessRule" />
+         as the access rights type, and then use the instance normally. In contrast, <see cref="T:System.Security.AccessControl.AccessRule" />
 
         
 

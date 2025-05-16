@@ -20,48 +20,39 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.StatusBar.PanelClick" />
+        >The <see cref="E:System.Windows.Forms.StatusBar.PanelClick" />
 
         
 
-         event occurs when the user clicks a panel on the <see
-         cref="T:System.Windows.Forms.StatusBar" />
+         event occurs when the user clicks a panel on the <see cref="T:System.Windows.Forms.StatusBar" />
 
         
 
-        . A <see
-         cref="T:System.Windows.Forms.StatusBarPanelClickEventArgs" />
+        . A <see cref="T:System.Windows.Forms.StatusBarPanelClickEventArgs" />
 
         
 
-         specifies which <see
-         cref="T:System.Windows.Forms.StatusBarPanel" />
+         specifies which <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
         
 
-         was clicked, the mouse button that was pressed, how many times it was pressed, and the coordinates of the mouse click at the time the <see
-         cref="T:System.Windows.Forms.StatusBarPanel" />
+         was clicked, the mouse button that was pressed, how many times it was pressed, and the coordinates of the mouse click at the time the <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
         
 
-         was clicked. You can use the data provided by this class in an event handler for the <see
-         cref="E:System.Windows.Forms.StatusBar.PanelClick" />
+         was clicked. You can use the data provided by this class in an event handler for the <see cref="E:System.Windows.Forms.StatusBar.PanelClick" />
 
         
 
-         event to perform tasks related to the <see
-         cref="T:System.Windows.Forms.StatusBarPanel" />
+         event to perform tasks related to the <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
         
 
-         being clicked. For example, if a <see
-         cref="T:System.Windows.Forms.StatusBarPanel" />
+         being clicked. For example, if a <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
         
 
-         is used to display the time, you could create an event handler for the <see
-         cref="E:System.Windows.Forms.StatusBar.PanelClick" />
+         is used to display the time, you could create an event handler for the <see cref="E:System.Windows.Forms.StatusBar.PanelClick" />
 
         
 
@@ -71,8 +62,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.StatusBar.PanelClick" />
+        >Provides data for the <see cref="E:System.Windows.Forms.StatusBar.PanelClick" />
 
         
 
@@ -99,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.StatusBarPanelClickEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.StatusBarPanelClickEventArgs" />
 
             
 
@@ -108,50 +97,67 @@
           >
         </summary>
         <param name="statusBarPanel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.StatusBarPanel" />
+          The <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
           
 
            that represents the panel that was clicked. </param
         >
         <param name="button">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.MouseButtons" />
+          One of the <see cref="T:System.Windows.Forms.MouseButtons" />
 
           
 
-           values that represents the mouse buttons that were clicked while over the <see
-           cref="T:System.Windows.Forms.StatusBarPanel" />
+           values that represents the mouse buttons that were clicked while over the <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
           
 
           . </param
         >
         <param name="clicks">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of times that the mouse button was clicked. </param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the mouse click. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -177,33 +183,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.StatusBarPanelClickEventArgs.StatusBarPanel" />
+            >The <see cref="P:System.Windows.Forms.StatusBarPanelClickEventArgs.StatusBarPanel" />
 
             
 
-             property enables you to obtain the <see
-             cref="T:System.Windows.Forms.StatusBarPanel" />
+             property enables you to obtain the <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
             
 
-             that was clicked. You can use this within the event handler for the <see
-             cref="E:System.Windows.Forms.StatusBar.PanelClick" />
+             that was clicked. You can use this within the event handler for the <see cref="E:System.Windows.Forms.StatusBar.PanelClick" />
 
             
 
-             event of a <see
-             cref="T:System.Windows.Forms.StatusBar" />
+             event of a <see cref="T:System.Windows.Forms.StatusBar" />
 
             
 
-             control to perform tasks such as displaying custom dialog boxes when a <see
-             cref="T:System.Windows.Forms.StatusBarPanel" />
+             control to perform tasks such as displaying custom dialog boxes when a <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
             
 
-             within a <see
-             cref="T:System.Windows.Forms.StatusBar" />
+             within a <see cref="T:System.Windows.Forms.StatusBar" />
 
             
 
@@ -213,8 +213,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.StatusBarPanel" />
+            >Gets the <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
             
 

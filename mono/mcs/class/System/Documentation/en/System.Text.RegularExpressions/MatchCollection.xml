@@ -30,44 +30,37 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The collection is immutable (read-only) and has no public constructor. The <see
-         cref="M:System.Text.RegularExpressions.Regex.Matches(System.String,System.String)" />
+        >The collection is immutable (read-only) and has no public constructor. The <see cref="M:System.Text.RegularExpressions.Regex.Matches(System.String,System.String)" />
 
         
 
-         method returns a <see
-         cref="T:System.Text.RegularExpressions.MatchCollection" />
+         method returns a <see cref="T:System.Text.RegularExpressions.MatchCollection" />
 
         
 
          object.</para
       >
       <para
-        >The collection contains zero or more <see
-         cref="T:System.Text.RegularExpressions.Match" />
+        >The collection contains zero or more <see cref="T:System.Text.RegularExpressions.Match" />
 
         
 
-         objects. If the match is successful, the collection is populated with one <see
-         cref="T:System.Text.RegularExpressions.Match" />
+         objects. If the match is successful, the collection is populated with one <see cref="T:System.Text.RegularExpressions.Match" />
 
         
 
-         object for each match found in the input string. If the match is unsuccessful, the collection contains no <see
-         cref="T:System.Text.RegularExpressions.Match" />
+         object for each match found in the input string. If the match is unsuccessful, the collection contains no <see cref="T:System.Text.RegularExpressions.Match" />
 
         
 
-         objects, and its <see
-         cref="P:System.Text.RegularExpressions.MatchCollection.Count" />
+         objects, and its <see cref="P:System.Text.RegularExpressions.MatchCollection.Count" />
 
         
 
          property equals zero.</para
       >
       <para
-        >When applying a regular expression pattern to a particular input string, the regular expression engine uses either of two techniques to build the <see
-         cref="T:System.Text.RegularExpressions.MatchCollection" />
+        >When applying a regular expression pattern to a particular input string, the regular expression engine uses either of two techniques to build the <see cref="T:System.Text.RegularExpressions.MatchCollection" />
 
         
 
@@ -77,18 +70,15 @@
         <item>
           <para>Direct evaluation. </para>
           <para
-            >The <see
-             cref="T:System.Text.RegularExpressions.MatchCollection" />
+            >The <see cref="T:System.Text.RegularExpressions.MatchCollection" />
 
             
 
-             object is populated all at once, with all matches resulting from a particular call to the <see
-             cref="M:System.Text.RegularExpressions.Regex.Matches(System.String)" />
+             object is populated all at once, with all matches resulting from a particular call to the <see cref="M:System.Text.RegularExpressions.Regex.Matches(System.String)" />
 
             
 
-             method. This technique is used when the collection's <see
-             cref="P:System.Text.RegularExpressions.MatchCollection.Count" />
+             method. This technique is used when the collection's <see cref="P:System.Text.RegularExpressions.MatchCollection.Count" />
 
             
 
@@ -98,18 +88,15 @@
         <item>
           <para>Lazy evaluation. </para>
           <para
-            >The <see
-             cref="T:System.Text.RegularExpressions.MatchCollection" />
+            >The <see cref="T:System.Text.RegularExpressions.MatchCollection" />
 
             
 
-             object is populated as needed on a match-by-match basis. It is equivalent to the regular expression engine calling the <see
-             cref="M:System.Text.RegularExpressions.Regex.Match(System.String)" />
+             object is populated as needed on a match-by-match basis. It is equivalent to the regular expression engine calling the <see cref="M:System.Text.RegularExpressions.Regex.Match(System.String)" />
 
             
 
-             method repeatedly and adding each match to the collection. This technique is used when the collection is accessed through its <see
-             cref="M:System.Text.RegularExpressions.MatchCollection.GetEnumerator" />
+             method repeatedly and adding each match to the collection. This technique is used when the collection is accessed through its <see cref="M:System.Text.RegularExpressions.MatchCollection.GetEnumerator" />
 
             
 
@@ -118,8 +105,7 @@
         </item>
       </list>
       <para
-        >To iterate through the members of the collection, you should use the collection iteration construct provided by your language (such as foreach in C# and For Each…Next in Visual Basic) instead of retrieving the enumerator that is returned by the <see
-         cref="M:System.Text.RegularExpressions.MatchCollection.GetEnumerator" />
+        >To iterate through the members of the collection, you should use the collection iteration construct provided by your language (such as foreach in C# and For Each…Next in Visual Basic) instead of retrieving the enumerator that is returned by the <see cref="M:System.Text.RegularExpressions.MatchCollection.GetEnumerator" />
 
         
 
@@ -157,8 +143,7 @@
           <para>Because the collection is copied into the array starting at the given index, the destination array must be at least as large as the entire collection.</para>
           <block subset="none" type="note">
             <para
-              >This member is not present in the net_portable. If you are developing applications that target the net_portable, use the <see
-               cref="M:System.Text.RegularExpressions.CaptureCollection.System#Collections#ICollection#CopyTo(System.Array,System.Int32)" />
+              >This member is not present in the net_portable. If you are developing applications that target the net_portable, use the <see cref="M:System.Text.RegularExpressions.CaptureCollection.System#Collections#ICollection#CopyTo(System.Array,System.Int32)" />
 
               
 
@@ -166,13 +151,11 @@
             >
           </block>
           <para
-            >Because the <see
-             cref="T:System.Text.RegularExpressions.MatchCollection" />
+            >Because the <see cref="T:System.Text.RegularExpressions.MatchCollection" />
 
             
 
-             object is generally populated by using lazy evaluation, trying to copy the collection before it has been fully populated may throw a <see
-             cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+             object is generally populated by using lazy evaluation, trying to copy the collection before it has been fully populated may throw a <see cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
 
             
 
@@ -184,14 +167,22 @@
           <para>Copies all the elements of the collection to the given array starting at the given index.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array the collection is to be copied into. </param
         >
         <param name="arrayIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -216,31 +207,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Accessing individual members of the <see
-             cref="T:System.Text.RegularExpressions.MatchCollection" />
+            >Accessing individual members of the <see cref="T:System.Text.RegularExpressions.MatchCollection" />
 
             
 
-             object by retrieving the value of the collection's <see
-             cref="P:System.Text.RegularExpressions.MatchCollection.Count" />
+             object by retrieving the value of the collection's <see cref="P:System.Text.RegularExpressions.MatchCollection.Count" />
 
             
 
-             property causes the regular expression engine to populate the collection using direct evaluation. ln contrast, calling the <see
-             cref="M:System.Text.RegularExpressions.MatchCollection.GetEnumerator" />
+             property causes the regular expression engine to populate the collection using direct evaluation. ln contrast, calling the <see cref="M:System.Text.RegularExpressions.MatchCollection.GetEnumerator" />
 
             
 
              method (or using the foreach statement in C# and the For Each...Next statement in Visual Basic) causes the regular expression engine to populate the collection on an as needed basis using lazy evaluation. Direct evaluation can be a much more expensive method of building the collection than lazy evaluation.</para
           >
           <para
-            >Because the <see
-             cref="T:System.Text.RegularExpressions.MatchCollection" />
+            >Because the <see cref="T:System.Text.RegularExpressions.MatchCollection" />
 
             
 
-             object is generally populated by using lazy evaluation, trying to determine the number of elements in the collection before it has been fully populated may throw a <see
-             cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+             object is generally populated by using lazy evaluation, trying to determine the number of elements in the collection before it has been fully populated may throw a <see cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
 
             
 
@@ -276,54 +262,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instead of  calling the <see
-             cref="M:System.Text.RegularExpressions.MatchCollection.GetEnumerator" />
+            >Instead of  calling the <see cref="M:System.Text.RegularExpressions.MatchCollection.GetEnumerator" />
 
             
 
-             method to retrieve an enumerator that lets you iterate through the <see
-             cref="T:System.Text.RegularExpressions.Match" />
+             method to retrieve an enumerator that lets you iterate through the <see cref="T:System.Text.RegularExpressions.Match" />
 
             
 
              objects in the collection, you should use the group iteration construct (such as foreach in C# and For Each…Next in Visual Basic) provided by your programming language.</para
           >
           <para
-            >Iterating the members of the <see
-             cref="T:System.Text.RegularExpressions.MatchCollection" />
+            >Iterating the members of the <see cref="T:System.Text.RegularExpressions.MatchCollection" />
 
             
 
-             object using the <see
-             cref="M:System.Text.RegularExpressions.MatchCollection.GetEnumerator" />
+             object using the <see cref="M:System.Text.RegularExpressions.MatchCollection.GetEnumerator" />
 
             
 
-             method (or the foreach statement in C# and the For Each...Next statement in Visual Basic) causes the regular expression engine to populate the collection on an as needed basis using lazy evaluation. This is analogous to repeatedly calling the <see
-             cref="M:System.Text.RegularExpressions.Regex.Match(System.String)" />
+             method (or the foreach statement in C# and the For Each...Next statement in Visual Basic) causes the regular expression engine to populate the collection on an as needed basis using lazy evaluation. This is analogous to repeatedly calling the <see cref="M:System.Text.RegularExpressions.Regex.Match(System.String)" />
 
             
 
-             method, and then adding the resulting match to the <see
-             cref="T:System.Text.RegularExpressions.MatchCollection" />
+             method, and then adding the resulting match to the <see cref="T:System.Text.RegularExpressions.MatchCollection" />
 
             
 
-             object. In contrast, the regular expression engine uses direct evaluation to populate the collection all at once when the <see
-             cref="P:System.Text.RegularExpressions.MatchCollection.Count" />
+             object. In contrast, the regular expression engine uses direct evaluation to populate the collection all at once when the <see cref="P:System.Text.RegularExpressions.MatchCollection.Count" />
 
             
 
              property is accessed. This can be a much more expensive method of building the collection than lazy evaluation. </para
           >
           <para
-            >Because the <see
-             cref="T:System.Text.RegularExpressions.MatchCollection" />
+            >Because the <see cref="T:System.Text.RegularExpressions.MatchCollection" />
 
             
 
-             object is generally populated by using lazy evaluation, trying to navigate to the next member of the collection may throw a <see
-             cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+             object is generally populated by using lazy evaluation, trying to navigate to the next member of the collection may throw a <see cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
 
             
 
@@ -337,13 +314,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that contains all <see
-             cref="T:System.Text.RegularExpressions.Match" />
+            >An object that contains all <see cref="T:System.Text.RegularExpressions.Match" />
 
             
 
-             objects within the <see
-             cref="T:System.Text.RegularExpressions.MatchCollection" />
+             objects within the <see cref="T:System.Text.RegularExpressions.MatchCollection" />
 
             
 
@@ -391,8 +366,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This member is not present in the net_portable. If you are developing applications that target the net_portable, use the <see
-               cref="P:System.Text.RegularExpressions.MatchCollection.System#Collections#ICollection#IsSynchronized" />
+              >This member is not present in the net_portable. If you are developing applications that target the net_portable, use the <see cref="P:System.Text.RegularExpressions.MatchCollection.System#Collections#ICollection#IsSynchronized" />
 
               
 
@@ -452,8 +426,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This member is not present in the net_portable. If you are developing applications that target the net_portable, use the <see
-               cref="P:System.Text.RegularExpressions.MatchCollection.System#Collections#ICollection#SyncRoot" />
+              >This member is not present in the net_portable. If you are developing applications that target the net_portable, use the <see cref="P:System.Text.RegularExpressions.MatchCollection.System#Collections#ICollection#SyncRoot" />
 
               
 

@@ -25,24 +25,21 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.DataAnnotations.MetadataTypeAttribute" />
+        >The <see cref="T:System.ComponentModel.DataAnnotations.MetadataTypeAttribute" />
 
         
 
          attribute enables you to associate a class with a data-model partial class. In this associated class you provide additional metadata information that is not in the data model.</para
       >
       <para
-        >For example, in the associated class you can apply the <see
-         cref="T:System.ComponentModel.DataAnnotations.RequiredAttribute" />
+        >For example, in the associated class you can apply the <see cref="T:System.ComponentModel.DataAnnotations.RequiredAttribute" />
 
         
 
          attribute to a data field. This enforces that a value is provided for the field even if this constraint is not required by the database schema.</para
       >
       <para
-        >You use the <see
-         cref="T:System.ComponentModel.DataAnnotations.MetadataTypeAttribute" />
+        >You use the <see cref="T:System.ComponentModel.DataAnnotations.MetadataTypeAttribute" />
 
         
 
@@ -57,8 +54,7 @@
         </item>
         <item>
           <para
-            >Apply the <see
-             cref="T:System.ComponentModel.DataAnnotations.MetadataTypeAttribute" />
+            >Apply the <see cref="T:System.ComponentModel.DataAnnotations.MetadataTypeAttribute" />
 
             
 
@@ -106,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.MetadataTypeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.MetadataTypeAttribute" />
 
             
 
@@ -115,7 +110,11 @@
           >
         </summary>
         <param name="metadataClassType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

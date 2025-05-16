@@ -36,8 +36,7 @@
     <example>
       <para
         >The following example demonstrates an error that causes
-      the <see
-         cref="T:System.IO.FileNotFoundException" />
+      the <see cref="T:System.IO.FileNotFoundException" />
 
         
 
@@ -70,8 +69,7 @@ class FileNotFoundExample {
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>FileNotFoundException uses the HRESULT COR_E_FILENOTFOUND which has the value 0x80070002.</para>
       <para
-        >If your code does not have <see
-         cref="P:System.Security.Permissions.FileIOPermissionAttribute.PathDiscovery" />
+        >If your code does not have <see cref="P:System.Security.Permissions.FileIOPermissionAttribute.PathDiscovery" />
 
         
 
@@ -106,8 +104,7 @@ class FileNotFoundExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.IO.FileNotFoundException.Message" />
+            >This constructor initializes the <see cref="P:System.IO.FileNotFoundException.Message" />
 
             
 
@@ -117,8 +114,7 @@ class FileNotFoundExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.FileNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.IO.FileNotFoundException" />
 
             
 
@@ -152,13 +148,11 @@ class FileNotFoundExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.IO.FileNotFoundException.Message" />
+            >This constructor initializes the <see cref="P:System.IO.FileNotFoundException.Message" />
 
             
 
-             property of the new instance using <paramref
-             name="message" />
+             property of the new instance using <paramref name="message" />
 
             
 
@@ -168,13 +162,11 @@ class FileNotFoundExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.FileNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.IO.FileNotFoundException" />
 
             
 
-             class with its message string set to <paramref
-             name="message" />
+             class with its message string set to <paramref name="message" />
 
             
 
@@ -182,12 +174,15 @@ class FileNotFoundExample {
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A description of the error. The content of <paramref
-           name="message" />
+          A description of the error. The content of <paramref name="message" />
 
           
 
@@ -220,8 +215,7 @@ class FileNotFoundExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.FileNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.IO.FileNotFoundException" />
 
             
 
@@ -229,14 +223,22 @@ class FileNotFoundExample {
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object that holds the serialized object data about the exception being thrown. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -272,26 +274,22 @@ class FileNotFoundExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.IO.FileNotFoundException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.IO.FileNotFoundException" />
 
             
 
@@ -330,8 +328,7 @@ class FileNotFoundExample {
             </item>
           </list>
           <para
-            >For more information on inner exceptions, see <see
-             cref="P:System.Exception.InnerException" />
+            >For more information on inner exceptions, see <see cref="P:System.Exception.InnerException" />
 
             
 
@@ -341,8 +338,7 @@ class FileNotFoundExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.FileNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.IO.FileNotFoundException" />
 
             
 
@@ -350,24 +346,30 @@ class FileNotFoundExample {
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A description of the error. The content of <paramref
-           name="message" />
+          A description of the error. The content of <paramref name="message" />
 
           
 
            is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 
@@ -402,7 +404,11 @@ class FileNotFoundExample {
       </Parameters>
       <Docs>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -411,23 +417,19 @@ class FileNotFoundExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The constructor initializes the <see
-             cref="P:System.IO.FileNotFoundException.Message" />
+            >The constructor initializes the <see cref="P:System.IO.FileNotFoundException.Message" />
 
             
 
-             property of the new instance using <paramref
-             name="message" />
+             property of the new instance using <paramref name="message" />
 
             
 
-             and the <see
-             cref="P:System.IO.FileNotFoundException.FileName" />
+             and the <see cref="P:System.IO.FileNotFoundException.FileName" />
 
             
 
-             property using <paramref
-             name="fileName" />
+             property using <paramref name="fileName" />
 
             
 
@@ -437,13 +439,11 @@ class FileNotFoundExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.FileNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.IO.FileNotFoundException" />
 
             
 
-             class with its message string set to <paramref
-             name="message" />
+             class with its message string set to <paramref name="message" />
 
             
 
@@ -451,19 +451,26 @@ class FileNotFoundExample {
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A description of the error. The content of <paramref
-           name="message" />
+          A description of the error. The content of <paramref name="message" />
 
           
 
            is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture. </param
         >
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -499,12 +506,15 @@ class FileNotFoundExample {
       </Parameters>
       <Docs>
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 
@@ -513,26 +523,22 @@ class FileNotFoundExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.IO.FileNotFoundException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.IO.FileNotFoundException" />
 
             
 
@@ -571,8 +577,7 @@ class FileNotFoundExample {
             </item>
           </list>
           <para
-            >For more information on inner exceptions, see <see
-             cref="P:System.Exception.InnerException" />
+            >For more information on inner exceptions, see <see cref="P:System.Exception.InnerException" />
 
             
 
@@ -582,8 +587,7 @@ class FileNotFoundExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.FileNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.IO.FileNotFoundException" />
 
             
 
@@ -591,26 +595,37 @@ class FileNotFoundExample {
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception. </param
         >
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The full name of the file with the invalid image. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 
@@ -639,14 +654,12 @@ class FileNotFoundExample {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
              containing the name of the file, or
-<see
-             langword="null" />
+<see langword="null" />
 
             
 
@@ -713,8 +726,7 @@ class FileNotFoundExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -722,14 +734,22 @@ class FileNotFoundExample {
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data about the exception being thrown. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -757,14 +777,12 @@ class FileNotFoundExample {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
              containing the
-   error message. This string includes the <see
-             cref="P:System.IO.FileNotFoundException.FileName" />
+   error message. This string includes the <see cref="P:System.IO.FileNotFoundException.FileName" />
 
             
 
@@ -775,8 +793,7 @@ class FileNotFoundExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If no message was supplied to the constructor for the current exception, this property returns a system-supplied error message. If the <see
-             cref="P:System.IO.FileLoadException.FileName" />
+            >If no message was supplied to the constructor for the current exception, this property returns a system-supplied error message. If the <see cref="P:System.IO.FileLoadException.FileName" />
 
             
 
@@ -814,14 +831,12 @@ class FileNotFoundExample {
       <Docs>
         <example>
           <para
-            >The following example causes a <see
-             cref="T:System.IO.FileNotFoundException" />
+            >The following example causes a <see cref="T:System.IO.FileNotFoundException" />
 
             
 
              exception and displays the result
-   of calling <see
-             langword="ToString" />
+   of calling <see langword="ToString" />
 
             
 
@@ -857,26 +872,22 @@ File name: "/Eccma/examples/FileTest.cs"
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.Object.ToString" />
+            >This method overrides <see cref="M:System.Object.ToString" />
 
             
 
             .</para
           >
           <para
-            >The string representation returned by this method includes the name of the exception, the value of the <see
-             cref="P:System.IO.FileNotFoundException.Message" />
+            >The string representation returned by this method includes the name of the exception, the value of the <see cref="P:System.IO.FileNotFoundException.Message" />
 
             
 
-             property, the result of calling ToString on the inner exception, the value of the <see
-             cref="P:System.IO.FileNotFoundException.FileName" />
+             property, the result of calling ToString on the inner exception, the value of the <see cref="P:System.IO.FileNotFoundException.FileName" />
 
             
 
-             property, and the result of calling <see
-             cref="P:System.Environment.StackTrace" />
+             property, and the result of calling <see cref="P:System.Environment.StackTrace" />
 
             
 

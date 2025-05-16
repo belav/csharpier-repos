@@ -5,18 +5,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Net.Cache" />
+        >The <see cref="N:System.Net.Cache" />
 
         
 
-         namespace defines the types and enumerations used to define cache policies for resources obtained using the <see
-         cref="T:System.Net.WebRequest" />
+         namespace defines the types and enumerations used to define cache policies for resources obtained using the <see cref="T:System.Net.WebRequest" />
 
         
 
-         and <see
-         cref="T:System.Net.HttpWebRequest" />
+         and <see cref="T:System.Net.HttpWebRequest" />
 
         
 

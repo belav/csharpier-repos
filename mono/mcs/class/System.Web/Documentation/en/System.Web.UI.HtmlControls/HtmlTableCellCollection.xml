@@ -24,23 +24,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+        >Use the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
         
 
-         class to programmatically manage a collection of <see
-         cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+         class to programmatically manage a collection of <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
         
 
-         objects that represent the cells of a single row in an <see
-         cref="T:System.Web.UI.HtmlControls.HtmlTable" />
+         objects that represent the cells of a single row in an <see cref="T:System.Web.UI.HtmlControls.HtmlTable" />
 
         
 
-         control. This class is commonly used to add, remove, or modify the contents of a cell in a row of an <see
-         cref="T:System.Web.UI.HtmlControls.HtmlTable" />
+         control. This class is commonly used to add, remove, or modify the contents of a cell in a row of an <see cref="T:System.Web.UI.HtmlControls.HtmlTable" />
 
         
 
@@ -48,68 +44,55 @@
       >
       <block subset="none" type="note">
         <para
-          >An <see
-           cref="T:System.Web.UI.HtmlControls.HtmlTable" />
+          >An <see cref="T:System.Web.UI.HtmlControls.HtmlTable" />
 
           
 
-           control contains a <see
-           cref="P:System.Web.UI.HtmlControls.HtmlTable.Rows" />
+           control contains a <see cref="P:System.Web.UI.HtmlControls.HtmlTable.Rows" />
 
           
 
-           property that contains a collection of <see
-           cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+           property that contains a collection of <see cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
 
           
 
-           objects. Each <see
-           cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+           objects. Each <see cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
 
           
 
-           object represents an individual row in the table. An <see
-           cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+           object represents an individual row in the table. An <see cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
 
           
 
-           object contains a <see
-           cref="P:System.Web.UI.HtmlControls.HtmlTableRow.Cells" />
+           object contains a <see cref="P:System.Web.UI.HtmlControls.HtmlTableRow.Cells" />
 
           
 
-           property that represents a collection of <see
-           cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+           property that represents a collection of <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
           
 
-           objects. These objects, in turn, represent the individual cells of a row. To retrieve an individual cell, first get the <see
-           cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+           objects. These objects, in turn, represent the individual cells of a row. To retrieve an individual cell, first get the <see cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
 
           
 
-           object that represents the row containing the cell in the table (from the <see
-           cref="P:System.Web.UI.HtmlControls.HtmlTable.Rows" />
+           object that represents the row containing the cell in the table (from the <see cref="P:System.Web.UI.HtmlControls.HtmlTable.Rows" />
 
           
 
-           collection of the <see
-           cref="T:System.Web.UI.HtmlControls.HtmlTable" />
+           collection of the <see cref="T:System.Web.UI.HtmlControls.HtmlTable" />
 
           
 
-           control). You can then get the <see
-           cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+           control). You can then get the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
           
 
-           object that represents the cell in the row (from the <see
-           cref="P:System.Web.UI.HtmlControls.HtmlTableRow.Cells" />
+           object that represents the cell in the row (from the <see cref="P:System.Web.UI.HtmlControls.HtmlTableRow.Cells" />
 
           
 
-           collection of the <see
-           cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+           collection of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
 
           
 
@@ -120,13 +103,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A collection of <see
-         cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+        >A collection of <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
         
 
-         objects that represent the cells in a single row of an <see
-         cref="T:System.Web.UI.HtmlControls.HtmlTable" />
+         objects that represent the cells in a single row of an <see cref="T:System.Web.UI.HtmlControls.HtmlTable" />
 
         
 
@@ -151,23 +132,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to add the specified <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Use this method to add the specified <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
-             object to the end of an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+             object to the end of an <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 
-             collection. If you want to insert an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+             collection. If you want to insert an <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
-             object in a specified location in the collection, use the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlTableCellCollection.Insert(System.Int32,System.Web.UI.HtmlControls.HtmlTableCell)" />
+             object in a specified location in the collection, use the <see cref="M:System.Web.UI.HtmlControls.HtmlTableCellCollection.Insert(System.Int32,System.Web.UI.HtmlControls.HtmlTableCell)" />
 
             
 
@@ -177,13 +154,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends the specified <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Appends the specified <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
-             object to the end of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+             object to the end of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 
@@ -191,12 +166,15 @@
           >
         </summary>
         <param name="cell">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+          The <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
           
 
@@ -219,18 +197,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to remove all <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Use this method to remove all <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
-             objects from the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+             objects from the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 
-             collection and reset the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlTableCellCollection.Count" />
+             collection and reset the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCellCollection.Count" />
 
             
 
@@ -238,18 +213,15 @@
           >
           <block subset="none" type="note">
             <para
-              >This method removes the cells from a row, but it does not remove the row from the table. To remove a row from the table, be sure to also remove the <see
-               cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+              >This method removes the cells from a row, but it does not remove the row from the table. To remove a row from the table, be sure to also remove the <see cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
 
               
 
-               object that represents the row from the <see
-               cref="P:System.Web.UI.HtmlControls.HtmlTable.Rows" />
+               object that represents the row from the <see cref="P:System.Web.UI.HtmlControls.HtmlTable.Rows" />
 
               
 
-               collection of the <see
-               cref="T:System.Web.UI.HtmlControls.HtmlTable" />
+               collection of the <see cref="T:System.Web.UI.HtmlControls.HtmlTable" />
 
               
 
@@ -260,13 +232,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Removes all <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
-             objects from the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+             objects from the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 
@@ -293,13 +263,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to copy the contents of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+            >Use this method to copy the contents of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 
-             collection into the specified <see
-             cref="T:System.Array" />
+             collection into the specified <see cref="T:System.Array" />
 
             
 
@@ -307,13 +275,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <paramref
-               name="array" />
+              >The <paramref name="array" />
 
               
 
-               parameter must be a zero-based <see
-               cref="T:System.Array" />
+               parameter must be a zero-based <see cref="T:System.Array" />
 
               
 
@@ -324,18 +290,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the items from the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+            >Copies the items from the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 
-             collection to the specified <see
-             cref="T:System.Array" />
+             collection to the specified <see cref="T:System.Array" />
 
             
 
-            , beginning with the specified index in the <see
-             cref="T:System.Array" />
+            , beginning with the specified index in the <see cref="T:System.Array" />
 
             
 
@@ -343,29 +306,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A zero-based <see
-           cref="T:System.Array" />
+          A zero-based <see cref="T:System.Array" />
 
           
 
-           that receives the copied items from the <see
-           cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+           that receives the copied items from the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
           
 
           . </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first index in the specified <see
-           cref="T:System.Array" />
+          The first index in the specified <see cref="T:System.Array" />
 
           
 
@@ -388,18 +356,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlTableCellCollection.Count" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCellCollection.Count" />
 
             
 
-             property to determine the number of cells contained in the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+             property to determine the number of cells contained in the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 
-             collection. The <see
-             cref="P:System.Web.UI.HtmlControls.HtmlTableCellCollection.Count" />
+             collection. The <see cref="P:System.Web.UI.HtmlControls.HtmlTableCellCollection.Count" />
 
             
 
@@ -409,13 +374,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Gets the number of <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
-             objects in the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+             objects in the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 
@@ -442,37 +405,32 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to create a <see
-             cref="T:System.Collections.IEnumerator" />
+            >Use this method to create a <see cref="T:System.Collections.IEnumerator" />
 
             
 
-            -implemented object that can be iterated through to retrieve the contents of each item in the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+            -implemented object that can be iterated through to retrieve the contents of each item in the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 
              collection.</para
           >
           <para
-            >Use the <see
-             cref="P:System.Collections.IEnumerator.Current" />
+            >Use the <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              property to get the item currently pointed to in the collection.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >Use the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
              method to move to the next item in the collection.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Use the <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
@@ -480,23 +438,19 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Collections.IEnumerator.MoveNext" />
+              >The <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
               
 
-               method must be called after creating the <see
-               cref="T:System.Collections.IEnumerator" />
+               method must be called after creating the <see cref="T:System.Collections.IEnumerator" />
 
               
 
-              -implemented object, or after using the <see
-               cref="M:System.Collections.IEnumerator.Reset" />
+              -implemented object, or after using the <see cref="M:System.Collections.IEnumerator.Reset" />
 
               
 
-               method to move the enumerator to the first item in the collection. Otherwise, the item represented by the <see
-               cref="P:System.Collections.IEnumerator.Current" />
+               method to move the enumerator to the first item in the collection. Otherwise, the item represented by the <see cref="P:System.Collections.IEnumerator.Current" />
 
               
 
@@ -507,18 +461,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns a <see cref="T:System.Collections.IEnumerator" />
 
             
 
-            -implemented object that contains all <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            -implemented object that contains all <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
-             objects in the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+             objects in the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 
@@ -528,18 +479,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.IEnumerator" />
+            >A <see cref="T:System.Collections.IEnumerator" />
 
             
 
-            -implemented object that contains all <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            -implemented object that contains all <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
-             objects in the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+             objects in the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 
@@ -569,28 +517,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlTableCellCollection.Insert(System.Int32,System.Web.UI.HtmlControls.HtmlTableCell)" />
+            >Use the <see cref="M:System.Web.UI.HtmlControls.HtmlTableCellCollection.Insert(System.Int32,System.Web.UI.HtmlControls.HtmlTableCell)" />
 
             
 
-             method to add the specified <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+             method to add the specified <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
-             object to an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+             object to an <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 
-             collection at the specified index. If you want to simply append an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+             collection at the specified index. If you want to simply append an <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
-             object to the end of the collection, use the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlTableCellCollection.Add(System.Web.UI.HtmlControls.HtmlTableCell)" />
+             object to the end of the collection, use the <see cref="M:System.Web.UI.HtmlControls.HtmlTableCellCollection.Add(System.Web.UI.HtmlControls.HtmlTableCell)" />
 
             
 
@@ -600,13 +543,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Adds the specified <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
-             object at the specified index location of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+             object at the specified index location of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 
@@ -614,34 +555,38 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The location in the <see
-           cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+          The location in the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
           
 
-           at which to add the <see
-           cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+           at which to add the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
           
 
           . </param
         >
         <param name="cell">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+          The <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
           
 
-           to add to the <see
-           cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+           to add to the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
           
 
@@ -664,8 +609,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property always returns false to indicate that the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+            >This property always returns false to indicate that the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 
@@ -675,8 +619,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 
@@ -700,31 +643,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is derived from <see
-             cref="T:System.Collections.ICollection" />
+            >This property is derived from <see cref="T:System.Collections.ICollection" />
 
             
 
-             and is overridden to always return false to indicate that access to the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+             and is overridden to always return false to indicate that access to the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 
              collection is not synchronized (not thread safe).</para
           >
           <para
-            >For more information on the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlTableCellCollection.IsSynchronized" />
+            >For more information on the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCellCollection.IsSynchronized" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.IsSynchronized" />
+             property, see the <see cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -734,8 +672,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+            >Gets a value indicating whether access to the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 
@@ -787,13 +724,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to remove the specified <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Use this method to remove the specified <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
-             object from the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+             object from the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 
@@ -801,13 +736,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If you specify an <see
-               cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+              >If you specify an <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
               
 
-               object that does not exist in the <see
-               cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+               object that does not exist in the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
               
 
@@ -818,13 +751,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Removes the specified <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
-             object from the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+             object from the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 
@@ -832,17 +763,19 @@
           >
         </summary>
         <param name="cell">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+          The <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
           
 
-           to remove from the <see
-           cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+           to remove from the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
           
 
@@ -867,13 +800,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to remove the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Use this method to remove the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
-             object at the specified index from an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+             object at the specified index from an <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 
@@ -886,13 +817,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Removes the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
-             object at the specified index from the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+             object at the specified index from the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 
@@ -900,17 +829,19 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the <see
-           cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+          The index of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
           
 
-           to remove from the <see
-           cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+           to remove from the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
           
 
@@ -933,26 +864,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object returned in this implementation is the current instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+            >The object returned in this implementation is the current instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 
              class.</para
           >
           <para
-            >For more information on the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlTableCellCollection.SyncRoot" />
+            >For more information on the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCellCollection.SyncRoot" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             property, see the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -962,8 +889,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the object that can be used to synchronize access to the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+            >Gets the object that can be used to synchronize access to the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
             
 

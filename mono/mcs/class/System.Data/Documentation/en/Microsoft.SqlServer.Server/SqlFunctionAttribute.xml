@@ -33,38 +33,31 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An optional attribute on a user-defined aggregate, used to indicate that the method should be registered in SQL Server as a function. Also used to set the <see
-             cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.DataAccess" />
+            >An optional attribute on a user-defined aggregate, used to indicate that the method should be registered in SQL Server as a function. Also used to set the <see cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.DataAccess" />
 
             
 
-            , <see
-             cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.FillRowMethodName" />
+            , <see cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.FillRowMethodName" />
 
             
 
-            , <see
-             cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.IsDeterministic" />
+            , <see cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.IsDeterministic" />
 
             
 
-            , <see
-             cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.IsPrecise" />
+            , <see cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.IsPrecise" />
 
             
 
-            , <see
-             cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.Name" />
+            , <see cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.Name" />
 
             
 
-            , <see
-             cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.SystemDataAccess" />
+            , <see cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.SystemDataAccess" />
 
             
 
-            , and <see
-             cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.TableDefinition" />
+            , and <see cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.TableDefinition" />
 
             
 
@@ -91,21 +84,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default is <see
-             cref="F:Microsoft.SqlServer.Server.DataAccessKind.None" />
+            >The default is <see cref="F:Microsoft.SqlServer.Server.DataAccessKind.None" />
 
             
 
-            .<see
-             cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.DataAccess" />
+            .<see cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.DataAccess" />
 
             
 
              is also required when connecting to remote servers if transactions integration is required (the default). </para
           >
           <para
-            >If a Transact-SQL query is executed from inside a table-valued function (TVF), the <see
-             cref="T:Microsoft.SqlServer.Server.DataAccessKind" />
+            >If a Transact-SQL query is executed from inside a table-valued function (TVF), the <see cref="T:Microsoft.SqlServer.Server.DataAccessKind" />
 
             
 
@@ -134,34 +124,29 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A user-defined function is said to be deterministic if it always produces the same output values given the same input values and the same database state.</para>
           <para
-            >The <see
-             cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.IsDeterministic" />
+            >The <see cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.IsDeterministic" />
 
             
 
              property is also useful for indexing the result of the function in the form of indexed computed columns and indexed views. If this property is not specified, the function is assumed to be non-deterministic.</para
           >
           <para
-            >Functions that access local data can be deterministic. The data access characteristic is captured separately by the <see
-             cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.DataAccess" />
+            >Functions that access local data can be deterministic. The data access characteristic is captured separately by the <see cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.DataAccess" />
 
             
 
-             and <see
-             cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.SystemDataAccess" />
+             and <see cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.SystemDataAccess" />
 
             
 
              properties.</para
           >
           <para
-            >Note that data access to remote servers (for example, using a <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+            >Note that data access to remote servers (for example, using a <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
-             to connect to another SQL Server instance) is available in user-defined functions. However, you must still honor the <see
-             cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.IsDeterministic" />
+             to connect to another SQL Server instance) is available in user-defined functions. However, you must still honor the <see cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.IsDeterministic" />
 
             
 
@@ -217,8 +202,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default is <see
-             cref="F:Microsoft.SqlServer.Server.SystemDataAccessKind.None" />
+            >The default is <see cref="F:Microsoft.SqlServer.Server.SystemDataAccessKind.None" />
 
             
 

@@ -52,8 +52,7 @@
 
                 
 
-                 is set to <see
-                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
+                 is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
 
                 
 
@@ -66,8 +65,7 @@
 
                 
 
-                 is set to <see
-                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+                 is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
 
                 
 
@@ -88,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" />
 
             
 
@@ -122,8 +119,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new instance property values are set to the corresponding values in <paramref
-             name="other" />
+            >The new instance property values are set to the corresponding values in <paramref name="other" />
 
             
 
@@ -133,8 +129,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" />
 
             
 
@@ -170,8 +165,7 @@
 
                 
 
-                 is set to <see
-                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
+                 is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
 
                 
 
@@ -184,8 +178,7 @@
 
                 
 
-                 is set to <see
-                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+                 is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
 
                 
 
@@ -207,8 +200,7 @@
 
                 
 
-                 is set to <paramref
-                 name="tokenType" />
+                 is set to <paramref name="tokenType" />
 
                 
 
@@ -220,8 +212,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" />
 
             
 
@@ -229,7 +220,11 @@
           >
         </summary>
         <param name="tokenType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -265,8 +260,7 @@
 
                 
 
-                 is set to <see
-                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
+                 is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
 
                 
 
@@ -279,8 +273,7 @@
 
                 
 
-                 is set to <see
-                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+                 is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
 
                 
 
@@ -302,8 +295,7 @@
 
                 
 
-                 is set to <paramref
-                 name="tokenType" />
+                 is set to <paramref name="tokenType" />
 
                 
 
@@ -316,8 +308,7 @@
 
                 
 
-                 is set to <paramref
-                 name="issuerAddress" />
+                 is set to <paramref name="issuerAddress" />
 
                 
 
@@ -329,8 +320,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" />
 
             
 
@@ -338,14 +328,22 @@
           >
         </summary>
         <param name="tokenType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The token type.</param
         >
         <param name="issuerAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -382,8 +380,7 @@
 
                 
 
-                 is set to <see
-                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
+                 is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
 
                 
 
@@ -396,8 +393,7 @@
 
                 
 
-                 is set to <see
-                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+                 is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
 
                 
 
@@ -419,8 +415,7 @@
 
                 
 
-                 is set to <paramref
-                 name="tokenType" />
+                 is set to <paramref name="tokenType" />
 
                 
 
@@ -433,8 +428,7 @@
 
                 
 
-                 is set to <paramref
-                 name="issuerAddress" />
+                 is set to <paramref name="issuerAddress" />
 
                 
 
@@ -447,8 +441,7 @@
 
                 
 
-                 is set to <paramref
-                 name="issuerBinding" />
+                 is set to <paramref name="issuerBinding" />
 
                 
 
@@ -460,8 +453,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" />
 
             
 
@@ -469,21 +461,33 @@
           >
         </summary>
         <param name="tokenType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The token type.</param
         >
         <param name="issuerAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The address of the endpoint that issues the token.</param
         >
         <param name="issuerBinding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -537,8 +541,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a federated scenario, services state the requirements on incoming credentials. For example, the incoming credentials must possess a certain set of claim types. Each <see
-             cref="T:System.ServiceModel.Security.Tokens.ClaimTypeRequirement" />
+            >In a federated scenario, services state the requirements on incoming credentials. For example, the incoming credentials must possess a certain set of claim types. Each <see cref="T:System.ServiceModel.Security.Tokens.ClaimTypeRequirement" />
 
             
 
@@ -573,13 +576,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.Clone" />
+            >The <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.Clone" />
 
             
 
-             and <see
-             cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
+             and <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
 
             
 
@@ -590,21 +591,18 @@
 
             
 
-             is an abstract class that is overridden by <see
-             cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.CloneCore" />
+             is an abstract class that is overridden by <see cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.CloneCore" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.CloneCore" />
+            >The <see cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.CloneCore" />
 
             
 
-             method calls the <see
-             cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.#ctor(System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters)" />
+             method calls the <see cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.#ctor(System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters)" />
 
             
 
@@ -618,8 +616,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
+            >A <see cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
 
             
 
@@ -655,13 +652,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a key identifier clause using the <see
-             cref="M:System.IdentityModel.Tokens.SecurityToken.CreateKeyIdentifierClause``1" />
+            >Creates a key identifier clause using the <see cref="M:System.IdentityModel.Tokens.SecurityToken.CreateKeyIdentifierClause``1" />
 
             
 
-             method, with <paramref
-             name="referenceStyle" />
+             method, with <paramref name="referenceStyle" />
 
             
 
@@ -677,14 +672,22 @@
           <para>The security key identifier clause.</para>
         </returns>
         <param name="token">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The token.</param
         >
         <param name="referenceStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -727,8 +730,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.ObjectModel.Collection`1" />
+            >A <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
             
 
@@ -736,14 +738,22 @@
           >
         </returns>
         <param name="messageSecurityVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message security version.</param
         >
         <param name="securityTokenSerializer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -799,8 +809,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following properties of the <see
-             cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" />
+            >The following properties of the <see cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" />
 
             
 
@@ -841,7 +850,11 @@
           <para>When implemented, initializes a security token requirement based on the properties set on the IssuedSecurityTokenParameters.</para>
         </summary>
         <param name="requirement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1092,38 +1105,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The method displays the name of this class, <see
-             cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.TokenType" />
+            >The method displays the name of this class, <see cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.TokenType" />
 
             
 
-            , <see
-             cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.KeyType" />
+            , <see cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.KeyType" />
 
             
 
-            , <see
-             cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.KeySize" />
+            , <see cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.KeySize" />
 
             
 
-            , <see
-             cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.IssuerAddress" />
+            , <see cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.IssuerAddress" />
 
             
 
-            , <see
-             cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.IssuerMetadataAddress" />
+            , <see cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.IssuerMetadataAddress" />
 
             
 
-            , <see
-             cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.IssuerBinding" />
+            , <see cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.IssuerBinding" />
 
             
 
-             (if not null) and binding elements, and <see
-             cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.ClaimTypeRequirements" />
+             (if not null) and binding elements, and <see cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.ClaimTypeRequirements" />
 
             
 

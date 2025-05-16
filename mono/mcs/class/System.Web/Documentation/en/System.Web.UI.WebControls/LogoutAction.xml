@@ -13,13 +13,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.LogoutAction" />
+        >The <see cref="T:System.Web.UI.WebControls.LogoutAction" />
 
         
 
-         enumeration members indicate the action taken when the user logs out of the Web site using the <see
-         cref="T:System.Web.UI.WebControls.LoginStatus" />
+         enumeration members indicate the action taken when the user logs out of the Web site using the <see cref="T:System.Web.UI.WebControls.LoginStatus" />
 
         
 

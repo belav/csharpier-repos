@@ -37,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a strongly-typed <see
-             cref="T:System.Data.Common.DbCommand" />
+            >Returns a strongly-typed <see cref="T:System.Data.Common.DbCommand" />
 
             
 
@@ -48,8 +47,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new strongly-typed instance of <see
-             cref="T:System.Data.Common.DbCommand" />
+            >A new strongly-typed instance of <see cref="T:System.Data.Common.DbCommand" />
 
             
 
@@ -77,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a strongly-typed <see
-             cref="T:System.Data.Common.DbCommandBuilder" />
+            >Returns a strongly-typed <see cref="T:System.Data.Common.DbCommandBuilder" />
 
             
 
@@ -88,8 +85,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new strongly-typed instance of <see
-             cref="T:System.Data.Common.DbCommandBuilder" />
+            >A new strongly-typed instance of <see cref="T:System.Data.Common.DbCommandBuilder" />
 
             
 
@@ -117,8 +113,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a strongly-typed <see
-             cref="T:System.Data.Common.DbConnection" />
+            >Returns a strongly-typed <see cref="T:System.Data.Common.DbConnection" />
 
             
 
@@ -128,8 +123,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new strongly-typed instance of <see
-             cref="T:System.Data.Common.DbConnection" />
+            >A new strongly-typed instance of <see cref="T:System.Data.Common.DbConnection" />
 
             
 
@@ -159,8 +153,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a strongly-typed <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >Returns a strongly-typed <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -170,8 +163,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new strongly-typed instance of <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >A new strongly-typed instance of <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -196,8 +188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a strongly-typed <see
-             cref="T:System.Data.Common.DbDataAdapter" />
+            >Returns a strongly-typed <see cref="T:System.Data.Common.DbDataAdapter" />
 
             
 
@@ -207,8 +198,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new strongly-typed instance of <see
-             cref="T:System.Data.Common.DbDataAdapter" />
+            >A new strongly-typed instance of <see cref="T:System.Data.Common.DbDataAdapter" />
 
             
 
@@ -236,8 +226,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a strongly-typed <see
-             cref="T:System.Data.Common.DbParameter" />
+            >Returns a strongly-typed <see cref="T:System.Data.Common.DbParameter" />
 
             
 
@@ -247,8 +236,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new strongly-typed instance of <see
-             cref="T:System.Data.Common.DbParameter" />
+            >A new strongly-typed instance of <see cref="T:System.Data.Common.DbParameter" />
 
             
 
@@ -280,8 +268,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a strongly-typed <see
-             cref="T:System.Security.CodeAccessPermission" />
+            >Returns a strongly-typed <see cref="T:System.Security.CodeAccessPermission" />
 
             
 
@@ -291,8 +278,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new strongly-typed instance of <see
-             cref="T:System.Security.CodeAccessPermission" />
+            >A new strongly-typed instance of <see cref="T:System.Security.CodeAccessPermission" />
 
             
 
@@ -300,12 +286,15 @@
           >
         </returns>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A member of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          A member of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -328,8 +317,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an instance of the <see
-             cref="T:System.Data.Odbc.OdbcFactory" />
+            >Gets an instance of the <see cref="T:System.Data.Odbc.OdbcFactory" />
 
             
 

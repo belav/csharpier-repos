@@ -21,8 +21,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the security settings for the <see
-         cref="T:System.ServiceModel.WSFederationHttpBinding" />
+        >Specifies the security settings for the <see cref="T:System.ServiceModel.WSFederationHttpBinding" />
 
         
 
@@ -56,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates the message security settings for the <see
-             cref="T:System.ServiceModel.WSFederationHttpBinding" />
+            >Indicates the message security settings for the <see cref="T:System.ServiceModel.WSFederationHttpBinding" />
 
             
 
@@ -88,29 +86,25 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The enumeration member returned specifies which general type of security is to be applied.</para>
           <para
-            >The allowed values are <see
-             cref="F:System.ServiceModel.WSFederationHttpSecurityMode.Message" />
+            >The allowed values are <see cref="F:System.ServiceModel.WSFederationHttpSecurityMode.Message" />
 
             
 
-             and <see
-             cref="F:System.ServiceModel.WSFederationHttpSecurityMode.TransportWithMessageCredential" />
+             and <see cref="F:System.ServiceModel.WSFederationHttpSecurityMode.TransportWithMessageCredential" />
 
             
 
             . </para
           >
           <para
-            >In the <see
-             cref="F:System.ServiceModel.WSFederationHttpSecurityMode.Message" />
+            >In the <see cref="F:System.ServiceModel.WSFederationHttpSecurityMode.Message" />
 
             
 
              security mode, the message is sent over HTTP and SOAP message security is used to protect the message. Client authentication is performed based on the issued token obtained from the security token service. Server authentication is based on the server's certificate.</para
           >
           <para
-            >In the <see
-             cref="F:System.ServiceModel.WSFederationHttpSecurityMode.TransportWithMessageCredential" />
+            >In the <see cref="F:System.ServiceModel.WSFederationHttpSecurityMode.TransportWithMessageCredential" />
 
             
 

@@ -30,34 +30,29 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Some languages, such as C++, allow you to throw exceptions of any type.  Other languages, such as Microsoft C# and Visual Basic, require that every thrown exception be derived from the <see
-         cref="T:System.Exception" />
+        >Some languages, such as C++, allow you to throw exceptions of any type.  Other languages, such as Microsoft C# and Visual Basic, require that every thrown exception be derived from the <see cref="T:System.Exception" />
 
         
 
-         class.  To maintain compatibility between languages, the common language runtime (CLR) wraps objects that do not derive from <see
-         cref="T:System.Exception" />
+         class.  To maintain compatibility between languages, the common language runtime (CLR) wraps objects that do not derive from <see cref="T:System.Exception" />
 
         
 
-         in a <see
-         cref="T:System.Runtime.CompilerServices.RuntimeWrappedException" />
+         in a <see cref="T:System.Runtime.CompilerServices.RuntimeWrappedException" />
 
         
 
          object. </para
       >
       <para
-        >You can use the <see
-         cref="T:System.Runtime.CompilerServices.RuntimeCompatibilityAttribute" />
+        >You can use the <see cref="T:System.Runtime.CompilerServices.RuntimeCompatibilityAttribute" />
 
         
 
          class to specify whether exceptions should appear wrapped inside catch blocks and exception filters for an assembly.  Many language compilers, including the Microsoft C# and Visual Basic compilers, apply this attribute by default to specify the wrapping behavior.</para
       >
       <para
-        >Note that the runtime still wraps exceptions even if you use the <see
-         cref="T:System.Runtime.CompilerServices.RuntimeCompatibilityAttribute" />
+        >Note that the runtime still wraps exceptions even if you use the <see cref="T:System.Runtime.CompilerServices.RuntimeCompatibilityAttribute" />
 
         
 
@@ -67,13 +62,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies whether to wrap exceptions that do not derive from the <see
-         cref="T:System.Exception" />
+        >Specifies whether to wrap exceptions that do not derive from the <see cref="T:System.Exception" />
 
         
 
-         class with a <see
-         cref="T:System.Runtime.CompilerServices.RuntimeWrappedException" />
+         class with a <see cref="T:System.Runtime.CompilerServices.RuntimeWrappedException" />
 
         
 
@@ -100,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.CompilerServices.RuntimeCompatibilityAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.RuntimeCompatibilityAttribute" />
 
             
 
@@ -128,13 +120,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether to wrap exceptions that do not derive from the <see
-             cref="T:System.Exception" />
+            >Gets or sets a value that indicates whether to wrap exceptions that do not derive from the <see cref="T:System.Exception" />
 
             
 
-             class with a <see
-             cref="T:System.Runtime.CompilerServices.RuntimeWrappedException" />
+             class with a <see cref="T:System.Runtime.CompilerServices.RuntimeWrappedException" />
 
             
 

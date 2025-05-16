@@ -37,8 +37,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Inherited by <see
-         cref="T:System.ServiceModel.UriSchemeKeyedCollection" />
+        >Inherited by <see cref="T:System.ServiceModel.UriSchemeKeyedCollection" />
 
         
 
@@ -67,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Generic.SynchronizedKeyedCollection`2" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Generic.SynchronizedKeyedCollection`2" />
 
             
 
@@ -97,13 +95,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If multiple instances of the <see
-             cref="T:System.Collections.Generic.SynchronizedKeyedCollection`2" />
+            >If multiple instances of the <see cref="T:System.Collections.Generic.SynchronizedKeyedCollection`2" />
 
             
 
-             are created using the same <paramref
-             name="syncRoot" />
+             are created using the same <paramref name="syncRoot" />
 
             
 
@@ -113,8 +109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Generic.SynchronizedKeyedCollection`2" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Generic.SynchronizedKeyedCollection`2" />
 
             
 
@@ -122,7 +117,11 @@
           >
         </summary>
         <param name="syncRoot">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -390,7 +389,11 @@
           <para>Removes an item at a specified location from the collection.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

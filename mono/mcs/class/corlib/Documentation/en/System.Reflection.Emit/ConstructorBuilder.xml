@@ -44,18 +44,15 @@
 
         
 
-         is used to fully describe a constructor in Microsoft intermediate language (MSIL), including the name, attributes, signature, and constructor body. It is used in conjunction with the <see
-         cref="T:System.Reflection.Emit.TypeBuilder" />
+         is used to fully describe a constructor in Microsoft intermediate language (MSIL), including the name, attributes, signature, and constructor body. It is used in conjunction with the <see cref="T:System.Reflection.Emit.TypeBuilder" />
 
         
 
-         class to create classes at run time. Call <see
-         cref="M:System.Reflection.Emit.TypeBuilder.DefineConstructor(System.Reflection.MethodAttributes,System.Reflection.CallingConventions,System.Type[])" />
+         class to create classes at run time. Call <see cref="M:System.Reflection.Emit.TypeBuilder.DefineConstructor(System.Reflection.MethodAttributes,System.Reflection.CallingConventions,System.Type[])" />
 
         
 
-         to get an instance of <see
-         cref="T:System.Reflection.Emit.ConstructorBuilder" />
+         to get an instance of <see cref="T:System.Reflection.Emit.ConstructorBuilder" />
 
         
 
@@ -63,8 +60,7 @@
       >
       <para>If you do not define a constructor for your dynamic type, a default constructor is provided automatically, and it calls the default constructor of the base class.</para>
       <para
-        >If you use <see
-         cref="T:System.Reflection.Emit.ConstructorBuilder" />
+        >If you use <see cref="T:System.Reflection.Emit.ConstructorBuilder" />
 
         
 
@@ -73,13 +69,11 @@
       <list type="bullet">
         <item>
           <para
-            >If you want a default constructor that simply calls the default constructor of the base class, you can use the <see
-             cref="M:System.Reflection.Emit.TypeBuilder.DefineDefaultConstructor(System.Reflection.MethodAttributes)" />
+            >If you want a default constructor that simply calls the default constructor of the base class, you can use the <see cref="M:System.Reflection.Emit.TypeBuilder.DefineDefaultConstructor(System.Reflection.MethodAttributes)" />
 
             
 
-             method to create one (and optionally restrict access to it). Do not provide an implementation for this default constructor. If you do, an exception is thrown when you try to use the constructor. No exception is thrown when the <see
-             cref="M:System.Reflection.Emit.TypeBuilder.CreateType" />
+             method to create one (and optionally restrict access to it). Do not provide an implementation for this default constructor. If you do, an exception is thrown when you try to use the constructor. No exception is thrown when the <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" />
 
             
 
@@ -88,13 +82,11 @@
         </item>
         <item>
           <para
-            >If you want a default constructor that does something more than simply calling the default constructor of the base class, or that calls another constructor of the base class, or that does something else entirely, you must use the <see
-             cref="M:System.Reflection.Emit.TypeBuilder.DefineConstructor(System.Reflection.MethodAttributes,System.Reflection.CallingConventions,System.Type[])" />
+            >If you want a default constructor that does something more than simply calling the default constructor of the base class, or that calls another constructor of the base class, or that does something else entirely, you must use the <see cref="M:System.Reflection.Emit.TypeBuilder.DefineConstructor(System.Reflection.MethodAttributes,System.Reflection.CallingConventions,System.Type[])" />
 
             
 
-             method to create a <see
-             cref="T:System.Reflection.Emit.ConstructorBuilder" />
+             method to create a <see cref="T:System.Reflection.Emit.ConstructorBuilder" />
 
             
 
@@ -150,14 +142,22 @@
           <para>Adds declarative security to this constructor.</para>
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The security action to be taken, such as Demand, Assert, and so on. </param
         >
         <param name="pset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -220,8 +220,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Reflection.CallingConventions" />
+            >Gets a <see cref="T:System.Reflection.CallingConventions" />
 
             
 
@@ -256,8 +255,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a reference to the <see
-             cref="T:System.Type" />
+            >Retrieves a reference to the <see cref="T:System.Type" />
 
             
 
@@ -293,18 +291,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you specify 0 (zero) for <paramref
-             name="iSequence" />
+            >If you specify 0 (zero) for <paramref name="iSequence" />
 
             
 
-            , this method returns a <see
-             cref="T:System.Reflection.Emit.ParameterBuilder" />
+            , this method returns a <see cref="T:System.Reflection.Emit.ParameterBuilder" />
 
             
 
-             instead of throwing an exception. There is nothing useful that you can do with this <see
-             cref="T:System.Reflection.Emit.ParameterBuilder" />
+             instead of throwing an exception. There is nothing useful that you can do with this <see cref="T:System.Reflection.Emit.ParameterBuilder" />
 
             
 
@@ -320,21 +315,33 @@
           <para>Returns a ParameterBuilder object that represents the new parameter of this constructor.</para>
         </returns>
         <param name="iSequence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The position of the parameter in the parameter list. Parameters are indexed beginning with the number 1 for the first parameter. </param
         >
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The attributes of the parameter. </param
         >
         <param name="strParamName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -367,31 +374,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="inherit" />
+            >The <paramref name="inherit" />
 
             
 
              parameter is ignored because a class never inherits constructors from base classes.</para
           >
           <para
-            >To get the custom attributes, finish building the type by calling <see
-             cref="M:System.Reflection.Emit.TypeBuilder.CreateType" />
+            >To get the custom attributes, finish building the type by calling <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" />
 
             
 
-            , retrieve the constructor by calling the <see
-             cref="M:System.Type.GetConstructor(System.Type[])" />
+            , retrieve the constructor by calling the <see cref="M:System.Type.GetConstructor(System.Type[])" />
 
             
 
-             method on the returned type, and then call the <see
-             cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
+             method on the returned type, and then call the <see cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
 
             
 
-             method on the returned <see
-             cref="T:System.Reflection.ConstructorInfo" />
+             method on the returned <see cref="T:System.Reflection.ConstructorInfo" />
 
             
 
@@ -405,8 +407,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of objects representing all the custom attributes of the constructor represented by this <see
-             cref="T:System.Reflection.Emit.ConstructorBuilder" />
+            >Returns an array of objects representing all the custom attributes of the constructor represented by this <see cref="T:System.Reflection.Emit.ConstructorBuilder" />
 
             
 
@@ -414,7 +415,11 @@
           >
         </returns>
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -448,31 +453,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="inherit" />
+            >The <paramref name="inherit" />
 
             
 
              parameter is ignored because a class never inherits constructors from base classes.</para
           >
           <para
-            >To get the custom attributes, finish building the type by calling <see
-             cref="M:System.Reflection.Emit.TypeBuilder.CreateType" />
+            >To get the custom attributes, finish building the type by calling <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" />
 
             
 
-            , retrieve the constructor by calling the <see
-             cref="M:System.Type.GetConstructor(System.Type[])" />
+            , retrieve the constructor by calling the <see cref="M:System.Type.GetConstructor(System.Type[])" />
 
             
 
-             method on the returned type, and then call the <see
-             cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
+             method on the returned type, and then call the <see cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
 
             
 
-             method on the returned <see
-             cref="T:System.Reflection.ConstructorInfo" />
+             method on the returned <see cref="T:System.Reflection.ConstructorInfo" />
 
             
 
@@ -486,8 +486,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of type <see
-             cref="T:System.Object" />
+            >Returns an array of type <see cref="T:System.Object" />
 
             
 
@@ -495,14 +494,22 @@
           >
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The custom attribute type. </param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -537,8 +544,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Reflection.Emit.ILGenerator" />
+            >Gets an <see cref="T:System.Reflection.Emit.ILGenerator" />
 
             
 
@@ -548,8 +554,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Reflection.Emit.ILGenerator" />
+            >Returns an <see cref="T:System.Reflection.Emit.ILGenerator" />
 
             
 
@@ -587,8 +592,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Reflection.Emit.ILGenerator" />
+            >Gets an <see cref="T:System.Reflection.Emit.ILGenerator" />
 
             
 
@@ -598,8 +602,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Reflection.Emit.ILGenerator" />
+            >An <see cref="T:System.Reflection.Emit.ILGenerator" />
 
             
 
@@ -607,7 +610,11 @@
           >
         </returns>
         <param name="streamSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -705,18 +712,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is not supported until after the <see
-             cref="M:System.Reflection.Emit.TypeBuilder.CreateType" />
+            >This property is not supported until after the <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" />
 
             
 
-             method has been called. In the .NET Framework versions 1.0 and 1.1, <see
-             cref="T:System.InvalidOperationException" />
+             method has been called. In the .NET Framework versions 1.0 and 1.1, <see cref="T:System.InvalidOperationException" />
 
             
 
-             is thrown. In the .NET Framework version 2.0, <see
-             cref="T:System.NotSupportedException" />
+             is thrown. In the .NET Framework version 2.0, <see cref="T:System.NotSupportedException" />
 
             
 
@@ -730,8 +734,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of <see
-             cref="T:System.Reflection.ParameterInfo" />
+            >Returns an array of <see cref="T:System.Reflection.ParameterInfo" />
 
             
 
@@ -768,8 +771,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Reflection.Emit.MethodToken" />
+            >Returns the <see cref="T:System.Reflection.Emit.MethodToken" />
 
             
 
@@ -779,8 +781,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Reflection.Emit.MethodToken" />
+            >Returns the <see cref="T:System.Reflection.Emit.MethodToken" />
 
             
 
@@ -839,26 +840,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the constructor has no parameters, the value of the <paramref
-             name="parameters" />
+            >If the constructor has no parameters, the value of the <paramref name="parameters" />
 
             
 
-             parameter should be null. Otherwise, the number, type, and order of elements in the <paramref
-             name="parameters" />
+             parameter should be null. Otherwise, the number, type, and order of elements in the <paramref name="parameters" />
 
             
 
              array should be identical to the number, type, and order of parameters for the constructor reflected by this instance.</para
           >
           <para
-            >For example, if the constructor reflected by this instance is declared as public class taking two strings, then the <paramref
-             name="parameters" />
+            >For example, if the constructor reflected by this instance is declared as public class taking two strings, then the <paramref name="parameters" />
 
             
 
-             parameter should be an array of <see
-             cref="T:System.Object" />
+             parameter should be an array of <see cref="T:System.Object" />
 
             
 
@@ -875,8 +872,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Object" />
+            >Returns an <see cref="T:System.Object" />
 
             
 
@@ -884,58 +880,68 @@
           >
         </returns>
         <param name="invokeAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          This must be a bit flag from <see
-           cref="T:System.Reflection.BindingFlags" />
+          This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />
 
           
 
           , such as InvokeMethod, NonPublic, and so on. </param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If binder is null, the default binder is used. See <see
-           cref="T:System.Reflection.Binder" />
+          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If binder is null, the default binder is used. See <see cref="T:System.Reflection.Binder" />
 
           
 
           . </param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An argument list. This is an array of arguments with the same number, order, and type as the parameters of the constructor to be invoked. If there are no parameters this should be null. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of <see
-           cref="T:System.Globalization.CultureInfo" />
+          An instance of <see cref="T:System.Globalization.CultureInfo" />
 
           
 
-           used to govern the coercion of types. If this is null, the <see
-           cref="T:System.Globalization.CultureInfo" />
+           used to govern the coercion of types. If this is null, the <see cref="T:System.Globalization.CultureInfo" />
 
           
 
-           for the current thread is used. (For example, this is necessary to convert a <see
-           cref="T:System.String" />
+           for the current thread is used. (For example, this is necessary to convert a <see cref="T:System.String" />
 
           
 
-           that represents 1000 to a <see
-           cref="T:System.Double" />
+           that represents 1000 to a <see cref="T:System.Double" />
 
           
 
@@ -984,50 +990,67 @@
           <para>An instance of the class associated with the constructor.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that needs to be reinitialized. </param
         >
         <param name="invokeAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           One of the BindingFlags values that specifies the type of binding that is desired. </param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A Binder that defines a set of properties and enables the binding, coercion of argument types, and invocation of members using reflection. If <paramref
-           name="binder" />
+          A Binder that defines a set of properties and enables the binding, coercion of argument types, and invocation of members using reflection. If <paramref name="binder" />
 
           
 
            is null, then Binder.DefaultBinding is used. </param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An argument list. This is an array of arguments with the same number, order, and type as the parameters of the constructor to be invoked. If there are no parameters, this should be a null reference (Nothing in Visual Basic). </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
-           used to govern the coercion of types. If this is null, the <see
-           cref="T:System.Globalization.CultureInfo" />
+           used to govern the coercion of types. If this is null, the <see cref="T:System.Globalization.CultureInfo" />
 
           
 
@@ -1061,8 +1084,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the metadata specification for details on how to format <paramref
-             name="binaryAttribute" />
+            >See the metadata specification for details on how to format <paramref name="binaryAttribute" />
 
             
 
@@ -1078,14 +1100,22 @@
           <para>true if the specified custom attribute type is defined; otherwise, false.</para>
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A custom attribute type. </param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1143,8 +1173,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns the same value as the <see
-             cref="M:System.Reflection.Emit.ConstructorBuilder.GetModule" />
+            >This property returns the same value as the <see cref="M:System.Reflection.Emit.ConstructorBuilder.GetModule" />
 
             
 
@@ -1202,23 +1231,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.Emit.ConstructorBuilder" />
+            >A <see cref="T:System.Reflection.Emit.ConstructorBuilder" />
 
             
 
-             object represents a constructor on a particular class. In order to obtain a <see
-             cref="T:System.Reflection.ConstructorInfo" />
+             object represents a constructor on a particular class. In order to obtain a <see cref="T:System.Reflection.ConstructorInfo" />
 
             
 
-             object, the <see
-             cref="T:System.Type" />
+             object, the <see cref="T:System.Type" />
 
             
 
-             object that represents the class that supports the constructor is queried. This property holds a reference to that <see
-             cref="T:System.Type" />
+             object that represents the class that supports the constructor is queried. This property holds a reference to that <see cref="T:System.Type" />
 
             
 
@@ -1228,8 +1253,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Holds a reference to the <see
-             cref="T:System.Type" />
+            >Holds a reference to the <see cref="T:System.Type" />
 
             
 
@@ -1295,7 +1319,11 @@
           <para>Set a custom attribute using a custom attribute builder.</para>
         </summary>
         <param name="customBuilder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1334,20 +1362,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the metadata specification in the ECMA Partition II documentation for details on how to format <paramref
-             name="binaryAttribute" />
+            >See the metadata specification in the ECMA Partition II documentation for details on how to format <paramref name="binaryAttribute" />
 
             
 
             . The documentation is available online; see <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
             >
 
             
 
              on MSDN and <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
 
@@ -1361,14 +1388,22 @@
           <para>Set a custom attribute using a specified custom attribute blob.</para>
         </summary>
         <param name="con">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The constructor for the custom attribute. </param
         >
         <param name="binaryAttribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1408,7 +1443,11 @@
           <para>Sets the method implementation flags for this constructor.</para>
         </summary>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1449,14 +1488,22 @@
           <para>Sets this constructor's custom attribute associated with symbolic information.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the custom attribute. </param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1547,8 +1594,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference
-            >IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
+            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
 
             
 
@@ -1560,21 +1606,33 @@
           <para>Retrieves the type information for an object, which can then be used to get the type information for an interface.</para>
         </summary>
         <param name="iTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type information to return.</param
         >
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1671,13 +1729,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns this <see
-             cref="T:System.Reflection.Emit.ConstructorBuilder" />
+            >Returns this <see cref="T:System.Reflection.Emit.ConstructorBuilder" />
 
             
 
-             instance as a <see
-             cref="T:System.String" />
+             instance as a <see cref="T:System.String" />
 
             
 
@@ -1687,8 +1743,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.String" />
+            >Returns a <see cref="T:System.String" />
 
             
 

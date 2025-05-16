@@ -21,13 +21,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies how the <see
-         cref="T:System.Xml.XmlTextReader" />
+        >Specifies how the <see cref="T:System.Xml.XmlTextReader" />
 
         
 
-         or <see
-         cref="T:System.Xml.XmlValidatingReader" />
+         or <see cref="T:System.Xml.XmlValidatingReader" />
 
         
 
@@ -56,16 +54,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must call <see
-             cref="M:System.Xml.XmlReader.ResolveEntity" />
+            >You must call <see cref="M:System.Xml.XmlReader.ResolveEntity" />
 
             
 
              to see what the general entities expand to. This enables you to optimize entity handling by only expanding the entity the first time it is used.</para
           >
           <para
-            >When set to ExpandCharEntities, a reader call to the <see
-             cref="M:System.Xml.XmlReader.GetAttribute(System.String)" />
+            >When set to ExpandCharEntities, a reader call to the <see cref="M:System.Xml.XmlReader.GetAttribute(System.String)" />
 
             
 
@@ -75,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Expands character entities and returns general entities as <see
-             cref="F:System.Xml.XmlNodeType.EntityReference" />
+            >Expands character entities and returns general entities as <see cref="F:System.Xml.XmlNodeType.EntityReference" />
 
             
 

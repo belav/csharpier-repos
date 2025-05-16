@@ -20,44 +20,37 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.Description.WsdlContractConversionContext" />
+        >Use the <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" />
 
         
 
          object to examine and modify items that are to be converted to or from WSDL. </para
       >
       <para
-        >When exporting metadata a <see
-         cref="T:System.ServiceModel.Description.WsdlContractConversionContext" />
+        >When exporting metadata a <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" />
 
         
 
-         object is passed to the <see
-         cref="M:System.ServiceModel.Description.IWsdlExportExtension.ExportContract(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlContractConversionContext)" />
+         object is passed to the <see cref="M:System.ServiceModel.Description.IWsdlExportExtension.ExportContract(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlContractConversionContext)" />
 
         
 
-         and <see
-         cref="M:System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" />
+         and <see cref="M:System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" />
 
         
 
          methods. Use the various methods and properties to obtain metadata objects that you can use to examine and modify to alter the published WSDL.</para
       >
       <para
-        >When importing metadata a <see
-         cref="T:System.ServiceModel.Description.WsdlContractConversionContext" />
+        >When importing metadata a <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" />
 
         
 
-         object is passed to the <see
-         cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportContract(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlContractConversionContext)" />
+         object is passed to the <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportContract(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlContractConversionContext)" />
 
         
 
-         and <see
-         cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportEndpoint(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" />
+         and <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportEndpoint(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" />
 
         
 
@@ -91,8 +84,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.WsdlContractConversionContext.Contract" />
+            >Use the <see cref="P:System.ServiceModel.Description.WsdlContractConversionContext.Contract" />
 
             
 
@@ -102,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.Description.ContractDescription" />
+            >Gets the <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
             
 
@@ -145,17 +136,19 @@
           <para>The message description for the specified message.</para>
         </returns>
         <param name="operationMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.OperationMessage" />
+          The <see cref="T:System.Web.Services.Description.OperationMessage" />
 
           
 
-           for the requested <see
-           cref="T:System.ServiceModel.Description.MessageDescription" />
+           for the requested <see cref="T:System.ServiceModel.Description.MessageDescription" />
 
           
 
@@ -193,17 +186,19 @@
           <para>The operation for the specified operation description.</para>
         </returns>
         <param name="operation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.OperationDescription" />
+          The <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
           
 
-           for the requested <see
-           cref="T:System.Web.Services.Description.Operation" />
+           for the requested <see cref="T:System.Web.Services.Description.Operation" />
 
           
 
@@ -241,17 +236,19 @@
           <para>The operation description associated with the operation.</para>
         </returns>
         <param name="operation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.Operation" />
+          The <see cref="T:System.Web.Services.Description.Operation" />
 
           
 
-           for the requested <see
-           cref="T:System.ServiceModel.Description.OperationDescription" />
+           for the requested <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
           
 
@@ -283,13 +280,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.Services.Description.OperationMessage" />
+            >Gets a <see cref="T:System.Web.Services.Description.OperationMessage" />
 
             
 
-             object for the specified <paramref
-             name="message" />
+             object for the specified <paramref name="message" />
 
             
 
@@ -299,8 +294,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Services.Description.OperationMessage" />
+            >A <see cref="T:System.Web.Services.Description.OperationMessage" />
 
             
 
@@ -308,17 +302,19 @@
           >
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.MessageDescription" />
+          The <see cref="T:System.ServiceModel.Description.MessageDescription" />
 
           
 
-           for the requested <see
-           cref="T:System.Web.Services.Description.OperationMessage" />
+           for the requested <see cref="T:System.Web.Services.Description.OperationMessage" />
 
           
 
@@ -348,8 +344,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Services.Description.PortType" />
+            >Gets the <see cref="T:System.Web.Services.Description.PortType" />
 
             
 

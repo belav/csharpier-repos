@@ -21,8 +21,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Stores a set of four floating-point numbers that represent the location and size of a rectangle. For more advanced region functions, use a <see
-         cref="T:System.Drawing.Region" />
+        >Stores a set of four floating-point numbers that represent the location and size of a rectangle. For more advanced region functions, use a <see cref="T:System.Drawing.Region" />
 
         
 
@@ -47,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.RectangleF" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -56,24 +54,30 @@
           >
         </summary>
         <param name="location">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.PointF" />
+          A <see cref="T:System.Drawing.PointF" />
 
           
 
            that represents the upper-left corner of the rectangular region. </param
         >
         <param name="size">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.SizeF" />
+          A <see cref="T:System.Drawing.SizeF" />
 
           
 
@@ -103,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.RectangleF" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -112,28 +115,44 @@
           >
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the upper-left corner of the rectangle. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the upper-left corner of the rectangle. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the rectangle. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -156,8 +175,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Drawing.RectangleF.Bottom" />
+            >The <see cref="P:System.Drawing.RectangleF.Bottom" />
 
             
 
@@ -167,18 +185,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the y-coordinate that is the sum of <see
-             cref="P:System.Drawing.RectangleF.Y" />
+            >Gets the y-coordinate that is the sum of <see cref="P:System.Drawing.RectangleF.Y" />
 
             
 
-             and <see
-             cref="P:System.Drawing.RectangleF.Height" />
+             and <see cref="P:System.Drawing.RectangleF.Height" />
 
             
 
-             of this <see
-             cref="T:System.Drawing.RectangleF" />
+             of this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -210,8 +225,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines if the specified point is contained within this <see
-             cref="T:System.Drawing.RectangleF" />
+            >Determines if the specified point is contained within this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -221,13 +235,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if the point represented by the <paramref
-             name="pt" />
+            >This method returns true if the point represented by the <paramref name="pt" />
 
             
 
-             parameter is contained within this <see
-             cref="T:System.Drawing.RectangleF" />
+             parameter is contained within this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -235,12 +247,15 @@
           >
         </returns>
         <param name="pt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.PointF" />
+          The <see cref="T:System.Drawing.PointF" />
 
           
 
@@ -269,13 +284,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines if the rectangular region represented by <paramref
-             name="rect" />
+            >Determines if the rectangular region represented by <paramref name="rect" />
 
             
 
-             is entirely contained within this <see
-             cref="T:System.Drawing.RectangleF" />
+             is entirely contained within this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -285,13 +298,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if the rectangular region represented by <paramref
-             name="rect" />
+            >This method returns true if the rectangular region represented by <paramref name="rect" />
 
             
 
-             is entirely contained within the rectangular region represented by this <see
-             cref="T:System.Drawing.RectangleF" />
+             is entirely contained within the rectangular region represented by this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -299,12 +310,15 @@
           >
         </returns>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.RectangleF" />
+          The <see cref="T:System.Drawing.RectangleF" />
 
           
 
@@ -331,8 +345,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines if the specified point is contained within this <see
-             cref="T:System.Drawing.RectangleF" />
+            >Determines if the specified point is contained within this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -342,18 +355,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if the point defined by <paramref
-             name="x" />
+            >This method returns true if the point defined by <paramref name="x" />
 
             
 
-             and <paramref
-             name="y" />
+             and <paramref name="y" />
 
             
 
-             is contained within this <see
-             cref="T:System.Drawing.RectangleF" />
+             is contained within this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -361,14 +371,22 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the point to test. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -394,8 +412,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The members of the new <see
-             cref="T:System.Drawing.RectangleF" />
+            >The members of the new <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -405,8 +422,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents an instance of the <see
-             cref="T:System.Drawing.RectangleF" />
+            >Represents an instance of the <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -433,18 +449,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether <paramref
-             name="obj" />
+            >Tests whether <paramref name="obj" />
 
             
 
-             is a <see
-             cref="T:System.Drawing.RectangleF" />
+             is a <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             with the same location and size of this <see
-             cref="T:System.Drawing.RectangleF" />
+             with the same location and size of this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -454,18 +467,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if <paramref
-             name="obj" />
+            >This method returns true if <paramref name="obj" />
 
             
 
-             is a <see
-             cref="T:System.Drawing.RectangleF" />
+             is a <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             and its X, Y, Width, and Height properties are equal to the corresponding properties of this <see
-             cref="T:System.Drawing.RectangleF" />
+             and its X, Y, Width, and Height properties are equal to the corresponding properties of this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -473,12 +483,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -509,8 +522,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates a <see
-             cref="T:System.Drawing.RectangleF" />
+            >This method creates a <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -520,8 +532,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Drawing.RectangleF" />
+            >Creates a <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -531,8 +542,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.Drawing.RectangleF" />
+            >The new <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -540,28 +550,44 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the upper-left corner of the rectangular region. </param
         >
         <param name="top">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the upper-left corner of the rectangular region. </param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the lower-right corner of the rectangular region. </param
         >
         <param name="bottom">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -585,8 +611,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the hash code for this <see
-             cref="T:System.Drawing.RectangleF" />
+            >Gets the hash code for this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -596,8 +621,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hash code for this <see
-             cref="T:System.Drawing.RectangleF" />
+            >The hash code for this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -623,8 +647,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the height of this <see
-             cref="T:System.Drawing.RectangleF" />
+            >Gets or sets the height of this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -654,8 +677,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Enlarges this <see
-             cref="T:System.Drawing.RectangleF" />
+            >Enlarges this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -663,7 +685,11 @@
           >
         </summary>
         <param name="size">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -690,18 +716,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method enlarges this rectangle, not a copy of it. The rectangle is enlarged in both directions along an axis. For example, if a 50 by 50 rectangle is inflated by 50 in the x-axis, the resultant rectangle will be 150 units long (the original 50, the 50 in the minus direction, and the 50 in the plus direction) maintaining the rectangle's geometric center.</para>
           <para
-            >If either <paramref
-             name="x" />
+            >If either <paramref name="x" />
 
             
 
-             or <paramref
-             name="y" />
+             or <paramref name="y" />
 
             
 
-             is negative, the <see
-             cref="T:System.Drawing.RectangleF" />
+             is negative, the <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -711,8 +734,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Enlarges this <see
-             cref="T:System.Drawing.RectangleF" />
+            >Enlarges this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -720,24 +742,30 @@
           >
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The amount to inflate this <see
-           cref="T:System.Drawing.RectangleF" />
+          The amount to inflate this <see cref="T:System.Drawing.RectangleF" />
 
           
 
            structure horizontally. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The amount to inflate this <see
-           cref="T:System.Drawing.RectangleF" />
+          The amount to inflate this <see cref="T:System.Drawing.RectangleF" />
 
           
 
@@ -767,8 +795,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method makes a copy of <paramref
-             name="rect" />
+            >This method makes a copy of <paramref name="rect" />
 
             
 
@@ -778,8 +805,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns an enlarged copy of the specified <see
-             cref="T:System.Drawing.RectangleF" />
+            >Creates and returns an enlarged copy of the specified <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -789,8 +815,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The enlarged <see
-             cref="T:System.Drawing.RectangleF" />
+            >The enlarged <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -798,26 +823,37 @@
           >
         </returns>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.RectangleF" />
+          The <see cref="T:System.Drawing.RectangleF" />
 
           
 
            to be copied. This rectangle is not modified. </param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The amount to enlarge the copy of the rectangle horizontally. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -846,13 +882,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Replaces this <see
-             cref="T:System.Drawing.RectangleF" />
+            >Replaces this <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             structure with the intersection of itself and the specified <see
-             cref="T:System.Drawing.RectangleF" />
+             structure with the intersection of itself and the specified <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -864,7 +898,11 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -894,13 +932,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Drawing.RectangleF" />
+            >Returns a <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             structure that represents the intersection of two rectangles. If there is no intersection, and empty <see
-             cref="T:System.Drawing.RectangleF" />
+             structure that represents the intersection of two rectangles. If there is no intersection, and empty <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -910,8 +946,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A third <see
-             cref="T:System.Drawing.RectangleF" />
+            >A third <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -919,14 +954,22 @@
           >
         </returns>
         <param name="a">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A rectangle to intersect. </param
         >
         <param name="b">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -955,8 +998,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines if this rectangle intersects with <paramref
-             name="rect" />
+            >Determines if this rectangle intersects with <paramref name="rect" />
 
             
 
@@ -968,7 +1010,11 @@
           <para>This method returns true if there is any intersection.</para>
         </returns>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -992,18 +1038,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether the <see
-             cref="P:System.Drawing.RectangleF.Width" />
+            >Tests whether the <see cref="P:System.Drawing.RectangleF.Width" />
 
             
 
-             or <see
-             cref="P:System.Drawing.RectangleF.Height" />
+             or <see cref="P:System.Drawing.RectangleF.Height" />
 
             
 
-             property of this <see
-             cref="T:System.Drawing.RectangleF" />
+             property of this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -1033,8 +1076,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the x-coordinate of the left edge of this <see
-             cref="T:System.Drawing.RectangleF" />
+            >Gets the x-coordinate of the left edge of this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -1065,8 +1107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the coordinates of the upper-left corner of this <see
-             cref="T:System.Drawing.RectangleF" />
+            >Gets or sets the coordinates of the upper-left corner of this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -1104,7 +1145,11 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="pos">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1137,14 +1182,22 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The amount to offset the location horizontally. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1174,8 +1227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether two <see
-             cref="T:System.Drawing.RectangleF" />
+            >Tests whether two <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -1185,28 +1237,23 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operator returns true if the two specified <see
-             cref="T:System.Drawing.RectangleF" />
+            >This operator returns true if the two specified <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             structures have equal <see
-             cref="P:System.Drawing.RectangleF.X" />
+             structures have equal <see cref="P:System.Drawing.RectangleF.X" />
 
             
 
-            , <see
-             cref="P:System.Drawing.RectangleF.Y" />
+            , <see cref="P:System.Drawing.RectangleF.Y" />
 
             
 
-            , <see
-             cref="P:System.Drawing.RectangleF.Width" />
+            , <see cref="P:System.Drawing.RectangleF.Width" />
 
             
 
-            , and <see
-             cref="P:System.Drawing.RectangleF.Height" />
+            , and <see cref="P:System.Drawing.RectangleF.Height" />
 
             
 
@@ -1214,24 +1261,30 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.RectangleF" />
+          The <see cref="T:System.Drawing.RectangleF" />
 
           
 
            structure that is to the left of the equality operator. </param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.RectangleF" />
+          The <see cref="T:System.Drawing.RectangleF" />
 
           
 
@@ -1284,8 +1337,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether two <see
-             cref="T:System.Drawing.RectangleF" />
+            >Tests whether two <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -1295,28 +1347,23 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operator returns true if any of the <see
-             cref="P:System.Drawing.RectangleF.X" />
+            >This operator returns true if any of the <see cref="P:System.Drawing.RectangleF.X" />
 
             
 
-             , <see
-             cref="P:System.Drawing.RectangleF.Y" />
+             , <see cref="P:System.Drawing.RectangleF.Y" />
 
             
 
-            , <see
-             cref="P:System.Drawing.RectangleF.Width" />
+            , <see cref="P:System.Drawing.RectangleF.Width" />
 
             
 
-            , or <see
-             cref="P:System.Drawing.RectangleF.Height" />
+            , or <see cref="P:System.Drawing.RectangleF.Height" />
 
             
 
-             properties of the two <see
-             cref="T:System.Drawing.Rectangle" />
+             properties of the two <see cref="T:System.Drawing.Rectangle" />
 
             
 
@@ -1324,24 +1371,30 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.RectangleF" />
+          The <see cref="T:System.Drawing.RectangleF" />
 
           
 
            structure that is to the left of the inequality operator. </param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.RectangleF" />
+          The <see cref="T:System.Drawing.RectangleF" />
 
           
 
@@ -1364,8 +1417,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Drawing.RectangleF.Right" />
+            >The <see cref="P:System.Drawing.RectangleF.Right" />
 
             
 
@@ -1375,18 +1427,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the x-coordinate that is the sum of <see
-             cref="P:System.Drawing.RectangleF.X" />
+            >Gets the x-coordinate that is the sum of <see cref="P:System.Drawing.RectangleF.X" />
 
             
 
-             and <see
-             cref="P:System.Drawing.RectangleF.Width" />
+             and <see cref="P:System.Drawing.RectangleF.Width" />
 
             
 
-             of this <see
-             cref="T:System.Drawing.RectangleF" />
+             of this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -1417,8 +1466,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the size of this <see
-             cref="T:System.Drawing.RectangleF" />
+            >Gets or sets the size of this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -1448,8 +1496,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the y-coordinate of the top edge of this <see
-             cref="T:System.Drawing.RectangleF" />
+            >Gets the y-coordinate of the top edge of this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -1479,13 +1526,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the Location and <see
-             cref="T:System.Drawing.Size" />
+            >Converts the Location and <see cref="T:System.Drawing.Size" />
 
             
 
-             of this <see
-             cref="T:System.Drawing.RectangleF" />
+             of this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -1495,8 +1540,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that contains the position, width, and height of this <see
-             cref="T:System.Drawing.RectangleF" />
+            >A string that contains the position, width, and height of this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -1526,8 +1570,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When one of the two rectangles is empty, meaning all of its values are zero, the <see
-             cref="M:System.Drawing.Rectangle.Union(System.Drawing.Rectangle,System.Drawing.Rectangle)" />
+            >When one of the two rectangles is empty, meaning all of its values are zero, the <see cref="M:System.Drawing.Rectangle.Union(System.Drawing.Rectangle,System.Drawing.Rectangle)" />
 
             
 
@@ -1541,8 +1584,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A third <see
-             cref="T:System.Drawing.RectangleF" />
+            >A third <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -1550,14 +1592,22 @@
           >
         </returns>
         <param name="a">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A rectangle to union. </param
         >
         <param name="b">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1582,8 +1632,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the width of this <see
-             cref="T:System.Drawing.RectangleF" />
+            >Gets or sets the width of this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -1609,8 +1658,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the x-coordinate of the upper-left corner of this <see
-             cref="T:System.Drawing.RectangleF" />
+            >Gets or sets the x-coordinate of the upper-left corner of this <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -1636,8 +1684,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the y-coordinate of the upper-left corner of this <see
-             cref="T:System.Drawing.RectangleF" />
+            >Gets or sets the y-coordinate of the upper-left corner of this <see cref="T:System.Drawing.RectangleF" />
 
             
 

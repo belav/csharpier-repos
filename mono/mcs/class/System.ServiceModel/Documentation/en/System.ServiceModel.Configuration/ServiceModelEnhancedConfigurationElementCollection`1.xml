@@ -42,13 +42,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An abstract base class for a <see
-         cref="T:System.Configuration.ConfigurationElementCollection" />
+        >An abstract base class for a <see cref="T:System.Configuration.ConfigurationElementCollection" />
 
         
 
-         looking for a merge semantic similar to an <see
-         cref="F:System.Configuration.ConfigurationElementCollectionType.AddRemoveClearMap" />
+         looking for a merge semantic similar to an <see cref="F:System.Configuration.ConfigurationElementCollectionType.AddRemoveClearMap" />
 
         
 
@@ -81,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Configuration.ConfigurationElement" />
+            >Adds a <see cref="T:System.Configuration.ConfigurationElement" />
 
             
 
@@ -90,12 +87,15 @@
           >
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Configuration.ConfigurationElement" />
+          The <see cref="T:System.Configuration.ConfigurationElement" />
 
           
 
@@ -119,8 +119,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a Boolean value that indicates whether an attempt to add a duplicate <see
-             cref="T:System.Configuration.ConfigurationElement" />
+            >Gets a Boolean value that indicates whether an attempt to add a duplicate <see cref="T:System.Configuration.ConfigurationElement" />
 
             
 

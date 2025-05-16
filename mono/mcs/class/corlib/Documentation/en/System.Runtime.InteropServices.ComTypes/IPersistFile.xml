@@ -22,8 +22,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>For more information, see the existing documentation for IPersistFile and IPersist in the MSDN library.</para>
       <para
-        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format
-         type="text/html">
+        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html">
           <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
         </format>
 
@@ -147,19 +146,26 @@
           <para>Opens the specified file and initializes an object from the file contents.</para>
         </summary>
         <param name="pszFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A zero-terminated string containing the absolute path of the file to open. </param
         >
         <param name="dwMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A combination of values from the STGM enumeration to indicate the access mode in which to open <paramref
-           name="pszFileName" />
+          A combination of values from the STGM enumeration to indicate the access mode in which to open <paramref name="pszFileName" />
 
           
 
@@ -199,19 +205,26 @@
           <para>Saves a copy of the object into the specified file.</para>
         </summary>
         <param name="pszFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A zero-terminated string containing the absolute path of the file to which the object is saved. </param
         >
         <param name="fRemember">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to used the <paramref
-           name="pszFileName" />
+          true to used the <paramref name="pszFileName" />
 
           
 
@@ -247,7 +260,11 @@
           <para>Notifies the object that it can write to its file.</para>
         </summary>
         <param name="pszFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

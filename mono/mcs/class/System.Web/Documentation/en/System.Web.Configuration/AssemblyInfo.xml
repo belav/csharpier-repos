@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >ASP.NET automatically links assemblies to a resource when compiling each code module. An <see
-         cref="T:System.Web.Configuration.AssemblyInfo" />
+        >ASP.NET automatically links assemblies to a resource when compiling each code module. An <see cref="T:System.Web.Configuration.AssemblyInfo" />
 
         
 
@@ -43,8 +42,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Web.Configuration.AssemblyInfo" />
+            >If the <see cref="T:System.Web.Configuration.AssemblyInfo" />
 
             
 
@@ -54,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of an <see
-             cref="T:System.Web.Configuration.AssemblyInfo" />
+            >Creates an instance of an <see cref="T:System.Web.Configuration.AssemblyInfo" />
 
             
 
@@ -63,7 +60,11 @@
           >
         </summary>
         <param name="assemblyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

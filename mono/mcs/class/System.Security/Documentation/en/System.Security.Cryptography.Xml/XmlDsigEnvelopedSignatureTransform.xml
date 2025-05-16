@@ -21,7 +21,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -35,8 +37,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+        >The <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
         
 
@@ -44,8 +45,7 @@
       >
       <para>Although you can create and insert a signature into an XML document, verifying the modified document using the embedded signature will fail because the document now has additional elements.  This transform removes the &lt;Signature&gt; element and allows you to verify the document using its original form.</para>
       <para
-        >Use the <see
-         cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+        >Use the <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
         
 
@@ -78,8 +78,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
             
 
@@ -112,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
             
 
@@ -121,7 +119,11 @@
           >
         </summary>
         <param name="includeComments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -153,8 +155,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an XML representation of the parameters of an <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+            >Returns an XML representation of the parameters of an <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
             
 
@@ -164,8 +165,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A list of the XML nodes that represent the transform-specific content needed to describe the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+            >A list of the XML nodes that represent the transform-specific content needed to describe the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
             
 
@@ -194,8 +194,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type of the returned object must be <see
-             cref="T:System.Xml.XmlNodeList" />
+            >The type of the returned object must be <see cref="T:System.Xml.XmlNodeList" />
 
             
 
@@ -205,8 +204,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the output of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+            >Returns the output of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
             
 
@@ -216,8 +214,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The output of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+            >The output of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
             
 
@@ -248,8 +245,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type of the returned object must be <see
-             cref="T:System.Xml.XmlNodeList" />
+            >The type of the returned object must be <see cref="T:System.Xml.XmlNodeList" />
 
             
 
@@ -259,13 +255,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the output of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+            >Returns the output of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
             
 
-             object of type <see
-             cref="T:System.Xml.XmlNodeList" />
+             object of type <see cref="T:System.Xml.XmlNodeList" />
 
             
 
@@ -275,13 +269,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The output of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+            >The output of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
             
 
-             object of type <see
-             cref="T:System.Xml.XmlNodeList" />
+             object of type <see cref="T:System.Xml.XmlNodeList" />
 
             
 
@@ -289,12 +281,15 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of the output to return. <see
-           cref="T:System.Xml.XmlNodeList" />
+          The type of the output to return. <see cref="T:System.Xml.XmlNodeList" />
 
           
 
@@ -316,30 +311,23 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Type[]" />
-        </value>
+        <value>a <see cref="T:System.Type[]" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The valid input types to <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+            >The valid input types to <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
             
 
-             are <see
-             cref="T:System.IO.Stream" />
+             are <see cref="T:System.IO.Stream" />
 
             
 
-            , <see
-             cref="T:System.Xml.XmlDocument" />
+            , <see cref="T:System.Xml.XmlDocument" />
 
             
 
-            , and <see
-             cref="T:System.Xml.XmlNodeList" />
+            , and <see cref="T:System.Xml.XmlNodeList" />
 
             
 
@@ -349,13 +337,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of types that are valid inputs to the <see
-             cref="M:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform.LoadInput(System.Object)" />
+            >Gets an array of types that are valid inputs to the <see cref="M:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform.LoadInput(System.Object)" />
 
             
 
-             method of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+             method of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
             
 
@@ -389,8 +375,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because no transform-specific content is defined for <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+            >Because no transform-specific content is defined for <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
             
 
@@ -400,13 +385,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Parses the specified <see
-             cref="T:System.Xml.XmlNodeList" />
+            >Parses the specified <see cref="T:System.Xml.XmlNodeList" />
 
             
 
-             as transform-specific content of a &lt;Transform&gt; element and configures the internal state of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+             as transform-specific content of a &lt;Transform&gt; element and configures the internal state of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
             
 
@@ -414,17 +397,19 @@
           >
         </summary>
         <param name="nodeList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlNodeList" />
+          An <see cref="T:System.Xml.XmlNodeList" />
 
           
 
-           to load into the current <see
-           cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+           to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
           
 
@@ -454,8 +439,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type of the input object must be one of the types in the <see
-             cref="P:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform.InputTypes" />
+            >The type of the input object must be one of the types in the <see cref="P:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform.InputTypes" />
 
             
 
@@ -465,8 +449,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads the specified input into the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+            >Loads the specified input into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
             
 
@@ -474,12 +457,15 @@
           >
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The input to load into the current <see
-           cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+          The input to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
           
 
@@ -504,25 +490,19 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Type[]" />
-        </value>
+        <value>a <see cref="T:System.Type[]" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The valid output types for <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+            >The valid output types for <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
             
 
-             are <see
-             cref="T:System.Xml.XmlNodeList" />
+             are <see cref="T:System.Xml.XmlNodeList" />
 
             
 
-             and <see
-             cref="T:System.Xml.XmlDocument" />
+             and <see cref="T:System.Xml.XmlDocument" />
 
             
 
@@ -532,13 +512,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of types that are possible outputs from the <see
-             cref="M:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform.GetOutput" />
+            >Gets an array of types that are possible outputs from the <see cref="M:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform.GetOutput" />
 
             
 
-             methods of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+             methods of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
             
 

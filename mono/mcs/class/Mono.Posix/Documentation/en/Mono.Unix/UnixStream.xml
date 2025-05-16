@@ -17,8 +17,7 @@
   <Interfaces />
   <Docs>
     <summary
-      >A <see
-       cref="T:System.IO.Stream" />
+      >A <see cref="T:System.IO.Stream" />
 
       
 
@@ -40,29 +39,25 @@
 
         
 
-         objects <i
-        >may</i>
+         objects <i>may</i>
 
         
 
          support 
         random access to files using the 
-        <see
-         cref="M:System.IO.Stream.Seek(System.Int64,System.IO.SeekOrigin)" />
+        <see cref="M:System.IO.Stream.Seek(System.Int64,System.IO.SeekOrigin)" />
 
         
 
          
         method (it depends on whether the underlying file descriptor supports
         seeking), and the 
-        <see
-         cref="P:System.IO.Stream.CanSeek" />
+        <see cref="P:System.IO.Stream.CanSeek" />
 
         
 
          properties of 
-        <see
-         cref="T:Mono.Unix.UnixStream" />
+        <see cref="T:Mono.Unix.UnixStream" />
 
         
 
@@ -70,8 +65,7 @@
         encapsulating file descriptors are set depending on the capabilities
         of the underlying file descriptor.
         The 
-        <see
-         cref="M:System.IO.Stream.Seek(System.Int64,System.IO.SeekOrigin)" />
+        <see cref="M:System.IO.Stream.Seek(System.Int64,System.IO.SeekOrigin)" />
 
         
 
@@ -81,41 +75,36 @@
         parameters. The byte offset is relative to the seek reference point, 
         which can be the beginning, the current position, or the end of the 
         underlying file, as represented by the three values of the
-        <see
-         cref="T:System.IO.SeekOrigin" />
+        <see cref="T:System.IO.SeekOrigin" />
 
         
 
          enumeration.
       </para
       >
-      <para
-        >
-        If a <see
-         cref="T:Mono.Unix.StdioFileStream" />
+      <para>
+        If a <see cref="T:Mono.Unix.StdioFileStream" />
 
         
 
          encapsulates a 
         device that does not support seeking, its 
-        <see
-         cref="P:System.IO.FileStream.CanSeek" />
+        <see cref="P:System.IO.FileStream.CanSeek" />
 
         
 
          property is 
-        <see
-         langword="false" />
+        <see langword="false" />
 
         
 
         . 
         <block
-         subset="none" type="note"
-          >
+          subset="none"
+          type="note"
+        >
           For additional information, see 
-          <see
-           cref="P:System.IO.Stream.CanSeek" />
+          <see cref="P:System.IO.Stream.CanSeek" />
 
           
 
@@ -124,11 +113,9 @@
         >
       </para>
       <example>
-        <para
-          >
+        <para>
           The following example demonstrates the use of a 
-          <see
-           cref="T:Mono.Unix.UnixStream" />
+          <see cref="T:Mono.Unix.UnixStream" />
 
           
 
@@ -213,27 +200,22 @@ class Directory {
         <Parameter Name="fileDescriptor" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="fileDescriptor"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="fileDescriptor">
+          A <see cref="T:System.Int32" />
 
           
 
            containing a file descriptor.
         </param
         >
-        <summary
-          >
-          Creates and initializes a <see
-           cref="T:Mono.Unix.UnixStream" />
+        <summary>
+          Creates and initializes a <see cref="T:Mono.Unix.UnixStream" />
 
           
 
           
           instance, wrapping the specified file descriptor 
-          <paramref
-           name="fileDescriptor" />
+          <paramref name="fileDescriptor" />
 
           
 
@@ -242,14 +224,12 @@ class Directory {
         >
         <remarks>
           <para
-            >By default, <paramref
-             name="fileStream" />
+            >By default, <paramref name="fileStream" />
 
             
 
              is owned by the
-          created <see
-             cref="T:Mono.Unix.StdioFileStream" />
+          created <see cref="T:Mono.Unix.StdioFileStream" />
 
             
 
@@ -262,8 +242,7 @@ class Directory {
           
 
            is equal to 
-          <see
-           cref="F:Mono.Unix.UnixStream.InvalidFileDescriptor" />
+          <see cref="F:Mono.Unix.UnixStream.InvalidFileDescriptor" />
 
           
 
@@ -293,49 +272,40 @@ class Directory {
         <Parameter Name="ownsHandle" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="fileDescriptor"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="fileDescriptor">
+          A <see cref="T:System.Int32" />
 
           
 
            containing a file descriptor.
         </param
         >
-        <param name="ownsHandle"
-          >
-          A <see
-           cref="T:System.Boolean" />
+        <param name="ownsHandle">
+          A <see cref="T:System.Boolean" />
 
           
 
            specifying whether or not the
-          created <see
-           cref="T:Mono.Unix.UnixStream" />
+          created <see cref="T:Mono.Unix.UnixStream" />
 
           
 
            instance "owns" 
-          <paramref
-           name="fileDescriptor" />
+          <paramref name="fileDescriptor" />
 
           
 
           .
         </param
         >
-        <summary
-          >
-          Creates and initializes a <see
-           cref="T:Mono.Unix.UnixStream" />
+        <summary>
+          Creates and initializes a <see cref="T:Mono.Unix.UnixStream" />
 
           
 
           
           instance, wrapping the specified file descriptor 
-          <paramref
-           name="fileDescriptor" />
+          <paramref name="fileDescriptor" />
 
           
 
@@ -343,52 +313,43 @@ class Directory {
         </summary
         >
         <remarks>
-          <para
-            >
-            If <paramref
-             name="ownsHandle" />
+          <para>
+            If <paramref name="ownsHandle" />
 
             
 
-             is <see
-             langword="true" />
+             is <see langword="true" />
 
             
 
             ,
-            then <paramref
-             name="fileDescriptor" />
+            then <paramref name="fileDescriptor" />
 
             
 
              will be closed via 
-            <see
-             cref="M:Mono.Unix.Native.Syscall.close" />
+            <see cref="M:Mono.Unix.Native.Syscall.close" />
 
             
 
              when 
-            <see
-             cref="M:Mono.Unix.UnixStream.Close" />
+            <see cref="M:Mono.Unix.UnixStream.Close" />
 
             
 
              is invoked (which 
             is also called from the finalizer and from the 
-            <see
-             cref="T:System.IDisposable" />
+            <see cref="T:System.IDisposable" />
 
             
 
              implementation).  Otherwise,
-            <paramref
-             name="fileDescriptor" />
+            <paramref name="fileDescriptor" />
 
             
 
              will only be flushed on 
-            <see
-             cref="M:Mono.Unix.UnixStream.Close" />
+            <see cref="M:Mono.Unix.UnixStream.Close" />
 
             
 
@@ -403,8 +364,7 @@ class Directory {
           
 
            is equal to 
-          <see
-           cref="F:Mono.Unix.UnixStream.InvalidFileDescriptor" />
+          <see cref="F:Mono.Unix.UnixStream.InvalidFileDescriptor" />
 
           
 
@@ -435,10 +395,8 @@ class Directory {
         <Parameter Name="pattern" Type="Mono.Unix.FileAccessPattern" />
       </Parameters>
       <Docs>
-        <param name="pattern"
-          >
-          A <see
-           cref="T:Mono.Unix.FileAccessPattern" />
+        <param name="pattern">
+          A <see cref="T:Mono.Unix.FileAccessPattern" />
 
           
 
@@ -463,30 +421,25 @@ class Directory {
             
 
              applies to a region starting at
-          <paramref
-             name="offset" />
+          <paramref name="offset" />
 
             
 
-             and extending for <paramref
-             name="len" />
+             and extending for <paramref name="len" />
 
             
 
             
-          bytes (or until end-of-file if <paramref
-             name="len" />
+          bytes (or until end-of-file if <paramref name="len" />
 
             
 
-             is <c
-            >0</c>
+             is <c>0</c>
 
             
 
             )
-          within the file specified by <paramref
-             name="stream" />
+          within the file specified by <paramref name="stream" />
 
             
 
@@ -520,15 +473,13 @@ class Directory {
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
         </exception
         >
@@ -567,10 +518,8 @@ class Directory {
         <Parameter Name="len" Type="System.Int64" />
       </Parameters>
       <Docs>
-        <param name="pattern"
-          >
-          A <see
-           cref="T:Mono.Unix.FileAccessPattern" />
+        <param name="pattern">
+          A <see cref="T:Mono.Unix.FileAccessPattern" />
 
           
 
@@ -578,43 +527,35 @@ class Directory {
           access pattern to suggest.
         </param
         >
-        <param name="offset"
-          >
-          A <see
-           cref="T:System.Int64" />
+        <param name="offset">
+          A <see cref="T:System.Int64" />
 
           
 
            containing the start of the range to suggest 
-          the <paramref
-           name="pattern" />
+          the <paramref name="pattern" />
 
           
 
            access pattern.
         </param
         >
-        <param name="len"
-          >
-          A <see
-           cref="T:System.Int64" />
+        <param name="len">
+          A <see cref="T:System.Int64" />
 
           
 
            containing the length of the range
-          to suggest the <paramref
-           name="pattern" />
+          to suggest the <paramref name="pattern" />
 
           
 
           
-          access pattern.  If <c
-          >0</c>
+          access pattern.  If <c>0</c>
 
           
 
-          , <paramref
-           name="pattern" />
+          , <paramref name="pattern" />
 
           
 
@@ -639,30 +580,25 @@ class Directory {
             
 
              applies to a region starting at
-          <paramref
-             name="offset" />
+          <paramref name="offset" />
 
             
 
-             and extending for <paramref
-             name="len" />
+             and extending for <paramref name="len" />
 
             
 
             
-          bytes (or until end-of-file if <paramref
-             name="len" />
+          bytes (or until end-of-file if <paramref name="len" />
 
             
 
-             is <c
-            >0</c>
+             is <c>0</c>
 
             
 
             )
-          within the file specified by <paramref
-             name="stream" />
+          within the file specified by <paramref name="stream" />
 
             
 
@@ -696,15 +632,13 @@ class Directory {
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
         </exception
         >
@@ -815,8 +749,7 @@ class Directory {
       <Docs>
         <summary>Gets or sets the file system entry access permissions.</summary>
         <value
-          >A <see
-           cref="T:Mono.Unix.FileAccessPermissions" />
+          >A <see cref="T:Mono.Unix.FileAccessPermissions" />
 
           
 
@@ -824,8 +757,7 @@ class Directory {
           controls access to the file system entry.</value
         >
         <remarks></remarks>
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
         </exception
         >
@@ -852,8 +784,7 @@ class Directory {
       <Docs>
         <summary>Gets or sets the file system entry special attributes.</summary>
         <value
-          >A <see
-           cref="T:Mono.Unix.FileSpecialAttributes" />
+          >A <see cref="T:Mono.Unix.FileSpecialAttributes" />
 
           
 
@@ -862,8 +793,7 @@ class Directory {
         >
         <remarks>
           <para
-            >Callers may need to be the super user (often the <c
-            >root</c>
+            >Callers may need to be the super user (often the <c>root</c>
 
             
 
@@ -872,8 +802,7 @@ class Directory {
           </para
           >
         </remarks>
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
         </exception
         >
@@ -897,8 +826,7 @@ class Directory {
       <Docs>
         <summary>Gets the type of this file system entry.</summary>
         <value
-          >A <see
-           cref="T:Mono.Unix.FileTypes" />
+          >A <see cref="T:Mono.Unix.FileTypes" />
 
           
 
@@ -906,8 +834,7 @@ class Directory {
           of this file system entry.</value
         >
         <remarks></remarks>
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
         </exception
         >
@@ -983,8 +910,7 @@ class Directory {
       </Parameters>
       <Docs>
         <param name="name"
-          >A <see
-           cref="T:Mono.Unix.Native.PathconfName" />
+          >A <see cref="T:Mono.Unix.Native.PathconfName" />
 
           
 
@@ -994,8 +920,7 @@ class Directory {
         <summary
           >Gets a configurable system limit or option variable
           associated with 
-          <see
-           cref="P:Mono.Unix.UnixStream.Handle" />
+          <see cref="P:Mono.Unix.UnixStream.Handle" />
 
           
 
@@ -1003,26 +928,22 @@ class Directory {
         </summary
         >
         <returns
-          >A <see
-           cref="T:System.Int64" />
+          >A <see cref="T:System.Int64" />
 
           
 
            containing the value
-          of the configuration variable <paramref
-           name="name" />
+          of the configuration variable <paramref name="name" />
 
           
 
           .
           If there is no value for the configuration variable 
-          <paramref
-           name="name" />
+          <paramref name="name" />
 
           
 
-          , then <c
-          >-1</c>
+          , then <c>-1</c>
 
           
 
@@ -1030,30 +951,25 @@ class Directory {
         </returns
         >
         <remarks></remarks>
-        <exception cref="T:System.ArgumentException"
-          >
+        <exception cref="T:System.ArgumentException">
           The implementation does not support an association of 
-          <paramref
-           name="name" />
+          <paramref name="name" />
 
           
 
            with 
-          <see
-           cref="P:Mono.Unix.UnixStream.Handle" />
+          <see cref="P:Mono.Unix.UnixStream.Handle" />
 
           
 
           .
         </exception
         >
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
         </exception
         >
-        <exception cref="T:System.IO.IOException"
-          >
+        <exception cref="T:System.IO.IOException">
           An I/O error occurred while reading from or writing to the file
           system.
         </exception
@@ -1076,8 +992,7 @@ class Directory {
       <Docs>
         <summary>The underlying file descriptor.</summary>
         <value
-          >A <see
-           cref="T:System.Int32" />
+          >A <see cref="T:System.Int32" />
 
           
 
@@ -1085,8 +1000,7 @@ class Directory {
           descriptor value.</value
         >
         <remarks></remarks>
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
         </exception
         >
@@ -1110,14 +1024,11 @@ class Directory {
       <MemberValue>-1</MemberValue>
       <Docs>
         <summary>An invalid file descriptor.</summary>
-        <remarks
-          >This is the value <c
-          >-1</c>
+        <remarks>This is the value <c>-1</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
     <Member MemberName="Length">
@@ -1156,8 +1067,7 @@ class Directory {
       <Docs>
         <summary>Gets information about the owner group.</summary>
         <value
-          >A <see
-           cref="T:Mono.Unix.UnixGroupInfo" />
+          >A <see cref="T:Mono.Unix.UnixGroupInfo" />
 
           
 
@@ -1166,13 +1076,11 @@ class Directory {
         >
         <remarks>
           <para
-            >This is identical to <see
-             cref="C:Mono.Unix.UnixGroupInfo" />
+            >This is identical to <see cref="C:Mono.Unix.UnixGroupInfo" />
 
             
 
-            (<see
-             cref="P:Mono.Unix.UnixStream.OwnerGroupId" />
+            (<see cref="P:Mono.Unix.UnixStream.OwnerGroupId" />
 
             
 
@@ -1180,8 +1088,7 @@ class Directory {
           </para
           >
         </remarks>
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
         </exception
         >
@@ -1204,16 +1111,14 @@ class Directory {
       <Docs>
         <summary>Gets the owner group id.</summary>
         <value
-          >A <see
-           cref="T:System.Int64" />
+          >A <see cref="T:System.Int64" />
 
           
 
            containing the owner group id.</value
         >
         <remarks></remarks>
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
         </exception
         >
@@ -1239,8 +1144,7 @@ class Directory {
       <Docs>
         <summary>Gets information about the owner user.</summary>
         <value
-          >A <see
-           cref="T:Mono.Unix.UnixUserInfo" />
+          >A <see cref="T:Mono.Unix.UnixUserInfo" />
 
           
 
@@ -1249,13 +1153,11 @@ class Directory {
         >
         <remarks>
           <para
-            >This is identical to <see
-             cref="C:Mono.Unix.UnixUserInfo" />
+            >This is identical to <see cref="C:Mono.Unix.UnixUserInfo" />
 
             
 
-            (<see
-             cref="P:Mono.Unix.UnixStream.OwnerUserId" />
+            (<see cref="P:Mono.Unix.UnixStream.OwnerUserId" />
 
             
 
@@ -1263,8 +1165,7 @@ class Directory {
           </para
           >
         </remarks>
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
         </exception
         >
@@ -1286,10 +1187,8 @@ class Directory {
       </ReturnValue>
       <Docs>
         <summary>Gets the owner user id.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.Int64" />
+        <value>
+          A <see cref="T:System.Int64" />
 
           
 
@@ -1297,8 +1196,7 @@ class Directory {
         </value
         >
         <remarks></remarks>
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
         </exception
         >
@@ -1350,8 +1248,7 @@ class Directory {
       <Docs>
         <summary>Gets or sets the file system entry protection.</summary>
         <value
-          >A <see
-           cref="T:Mono.Unix.Native.FilePermissions" />
+          >A <see cref="T:Mono.Unix.Native.FilePermissions" />
 
           
 
@@ -1359,8 +1256,7 @@ class Directory {
           containing the file system entry protection.</value
         >
         <remarks></remarks>
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
         </exception
         >
@@ -1425,22 +1321,18 @@ class Directory {
         <Parameter Name="fileOffset" Type="System.Int64" />
       </Parameters>
       <Docs>
-        <param name="buffer"
-          >
-          A <see
-           cref="T:System.Byte" />
+        <param name="buffer">
+          A <see cref="T:System.Byte" />
 
           
 
            array.  When this method returns, the
-          elements between <paramref
-           name="offset" />
+          elements between <paramref name="offset" />
 
           
 
            and 
-          <paramref
-           name="(offset + count)" />
+          <paramref name="(offset + count)" />
 
           
 
@@ -1448,16 +1340,13 @@ class Directory {
           from the current source.
         </param
         >
-        <param name="offset"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="offset">
+          A <see cref="T:System.Int32" />
 
           
 
            that specifies the zero-based byte
-          offset within <paramref
-           name="buffer" />
+          offset within <paramref name="buffer" />
 
           
 
@@ -1465,10 +1354,8 @@ class Directory {
           the data read from the current stream.
         </param
         >
-        <param name="count"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="count">
+          A <see cref="T:System.Int32" />
 
           
 
@@ -1476,10 +1363,8 @@ class Directory {
           bytes to be read from the current stream.
         </param
         >
-        <param name="fileOffset"
-          >
-          A <see
-           cref="T:System.Int64" />
+        <param name="fileOffset">
+          A <see cref="T:System.Int64" />
 
           
 
@@ -1487,10 +1372,8 @@ class Directory {
           the file to begin reading.
         </param
         >
-        <summary
-          >
-          Reads a sequence of bytes from the current stream <i
-          >without</i>
+        <summary>
+          Reads a sequence of bytes from the current stream <i>without</i>
 
           
 
@@ -1498,10 +1381,8 @@ class Directory {
           advancing the position within the stream.
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.Int32" />
+        <returns>
+          A <see cref="T:System.Int32" />
 
           
 
@@ -1511,16 +1392,13 @@ class Directory {
         </returns
         >
         <remarks>
-          <para
-            >
-            Unlike <see
-             cref="M:System.IO.Stream.Read" />
+          <para>
+            Unlike <see cref="M:System.IO.Stream.Read" />
 
             
 
             , this method does
-            not modify <see
-             cref="P:System.IO.Stream.Position" />
+            not modify <see cref="P:System.IO.Stream.Position" />
 
             
 
@@ -1528,10 +1406,8 @@ class Directory {
           </para
           >
           <para>
-            <block subset="none" type="note"
-              >
-              Use the <see
-               cref="P:System.IO.Stream.CanRead" />
+            <block subset="none" type="note">
+              Use the <see cref="P:System.IO.Stream.CanRead" />
 
               
 
@@ -1548,8 +1424,7 @@ class Directory {
             
 
              is greater than the length of 
-            <paramref
-             name="buffer" />
+            <paramref name="buffer" />
 
             
 
@@ -1562,8 +1437,7 @@ class Directory {
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1575,8 +1449,7 @@ class Directory {
 
           
 
-           or <paramref
-           name="count" />
+           or <paramref name="count" />
 
           
 
@@ -1584,12 +1457,10 @@ class Directory {
         </exception
         >
         <exception cref="T:System.InvalidOperationException">
-          <para
-            >
+          <para>
             The file descriptor is associated with a file system and file type that
             do not allow regular read operations on it.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -1597,44 +1468,37 @@ class Directory {
           </para
           >
         </exception>
-        <exception cref="T:System.NotSupportedException"
-          >
+        <exception cref="T:System.NotSupportedException">
           The stream does not support reading.
         </exception
         >
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
         </exception
         >
         <exception cref="T:System.OverflowException">
-          <para
-            >
+          <para>
             The file descriptor is associated with a regular file,
-            <paramref
-             name="count" />
+            <paramref name="count" />
 
             
 
             
             is greater than 0,
-            <paramref
-             name="fileOffset" />
+            <paramref name="fileOffset" />
 
             
 
             
             is before the end-of-file, and
-            <paramref
-             name="fileOffset" />
+            <paramref name="fileOffset" />
 
             
 
             
             is greater than or equal to the offset maximum established
             for this file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOVERFLOW" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOVERFLOW" />
 
             
 
@@ -1643,13 +1507,11 @@ class Directory {
           >
         </exception>
         <exception cref="T:System.UnauthorizedAccessException">
-          <para
-            >
+          <para>
             The file descriptor is associated with a directory residing
             on a file system that does not allow regular read operations on
             directories (e.g.NFS).
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EISDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.EISDIR" />
 
             
 
@@ -1658,11 +1520,9 @@ class Directory {
           >
         </exception>
         <exception cref="T:System.IO.IOException">
-          <para
-            >
+          <para>
             An I/O error occurred while reading from the file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -1670,11 +1530,9 @@ class Directory {
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The file descriptor is associated with a pipe, socket, or FIFO.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ESPIPE" />
+            [<see cref="F:Mono.Unix.Native.Errno.ESPIPE" />
 
             
 
@@ -1683,12 +1541,10 @@ class Directory {
           >
         </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
-          <para
-            >
+          <para>
             The file was marked for non-blocking I/O,
             and no data were ready to be read.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EAGAIN" />
+            [<see cref="F:Mono.Unix.Native.Errno.EAGAIN" />
 
             
 
@@ -1748,10 +1604,8 @@ class Directory {
         <Parameter Name="output" Type="Mono.Unix.UnixStream" />
       </Parameters>
       <Docs>
-        <param name="output"
-          >
-          A <see
-           cref="T:Mono.Unix.UnixStream" />
+        <param name="output">
+          A <see cref="T:Mono.Unix.UnixStream" />
 
           
 
@@ -1759,11 +1613,9 @@ class Directory {
           current stream contents to.
         </param
         >
-        <summary
-          >
+        <summary>
           Copies all the data from this stream to the specified 
-          <see
-           cref="T:Mono.Unix.UnixStream" />
+          <see cref="T:Mono.Unix.UnixStream" />
           <paramref name="output" />
 
           
@@ -1772,17 +1624,14 @@ class Directory {
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
             This performs an in-kernel copy between the file descriptor 
-            <see
-             cref="P:Mono.Unix.UnixStream.Handle" />
+            <see cref="P:Mono.Unix.UnixStream.Handle" />
 
             
 
              and 
-            <paramref
-             name="output" />
+            <paramref name="output" />
 
             
 
@@ -1797,14 +1646,12 @@ class Directory {
             
 
              was not opened for
-            reading or <paramref
-             name="output" />
+            reading or <paramref name="output" />
 
             
 
              was not opened for writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EBADF" />
+            [<see cref="F:Mono.Unix.Native.Errno.EBADF" />
 
             
 
@@ -1812,11 +1659,9 @@ class Directory {
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             Descriptor is not valid or locked.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EINVAL" />
+            [<see cref="F:Mono.Unix.Native.Errno.EINVAL" />
 
             
 
@@ -1824,22 +1669,18 @@ class Directory {
           </para
           >
         </exception>
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
         </exception
         >
-        <exception cref="T:System.IO.IOException"
-          >
+        <exception cref="T:System.IO.IOException">
             Unspecified error while reading from 
-            <see
-           cref="P:Mono.Unix.UnixStream.Handle" />
+            <see cref="P:Mono.Unix.UnixStream.Handle" />
 
           
 
           .
-            [<see
-           cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
           
 
@@ -1847,18 +1688,15 @@ class Directory {
         </exception
         >
         <exception cref="T:Mono.Unix.UnixIOException">
-          <para
-            >
+          <para>
             Non-blocking I/O has been selected using
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_NONBLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_NONBLOCK" />
 
             
 
              and the
             write would block.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EAGAIN" />
+            [<see cref="F:Mono.Unix.Native.Errno.EAGAIN" />
 
             
 
@@ -1866,17 +1704,14 @@ class Directory {
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             Insufficient memory to read from 
-            <see
-             cref="P:Mono.Unix.UnixStream.Handle" />
+            <see cref="P:Mono.Unix.UnixStream.Handle" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOMEM" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />
 
             
 
@@ -1915,10 +1750,8 @@ class Directory {
         <Parameter Name="count" Type="System.UInt64" />
       </Parameters>
       <Docs>
-        <param name="output"
-          >
-          A <see
-           cref="T:Mono.Unix.UnixStream" />
+        <param name="output">
+          A <see cref="T:Mono.Unix.UnixStream" />
 
           
 
@@ -1926,27 +1759,22 @@ class Directory {
           current stream contents to.
         </param
         >
-        <param name="count"
-          >
-          A <see
-           cref="T:System.UInt64" />
+        <param name="count">
+          A <see cref="T:System.UInt64" />
 
           
 
            containing the number of bytes to
-          copy from the current stream into <paramref
-           name="output" />
+          copy from the current stream into <paramref name="output" />
 
           
 
           .
         </param
         >
-        <summary
-          >
+        <summary>
           Copies data from this stream to the specified 
-          <see
-           cref="T:Mono.Unix.UnixStream" />
+          <see cref="T:Mono.Unix.UnixStream" />
           <paramref name="output" />
 
           
@@ -1955,17 +1783,14 @@ class Directory {
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
             This performs an in-kernel copy between the file descriptor 
-            <see
-             cref="P:Mono.Unix.UnixStream.Handle" />
+            <see cref="P:Mono.Unix.UnixStream.Handle" />
 
             
 
              and 
-            <paramref
-             name="output" />
+            <paramref name="output" />
 
             
 
@@ -1980,14 +1805,12 @@ class Directory {
             
 
              was not opened for
-            reading or <paramref
-             name="output" />
+            reading or <paramref name="output" />
 
             
 
              was not opened for writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EBADF" />
+            [<see cref="F:Mono.Unix.Native.Errno.EBADF" />
 
             
 
@@ -1995,11 +1818,9 @@ class Directory {
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             Descriptor is not valid or locked.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EINVAL" />
+            [<see cref="F:Mono.Unix.Native.Errno.EINVAL" />
 
             
 
@@ -2007,22 +1828,18 @@ class Directory {
           </para
           >
         </exception>
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
         </exception
         >
-        <exception cref="T:System.IO.IOException"
-          >
+        <exception cref="T:System.IO.IOException">
             Unspecified error while reading from 
-            <see
-           cref="P:Mono.Unix.UnixStream.Handle" />
+            <see cref="P:Mono.Unix.UnixStream.Handle" />
 
           
 
           .
-            [<see
-           cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
           
 
@@ -2030,18 +1847,15 @@ class Directory {
         </exception
         >
         <exception cref="T:Mono.Unix.UnixIOException">
-          <para
-            >
+          <para>
             Non-blocking I/O has been selected using
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_NONBLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_NONBLOCK" />
 
             
 
              and the
             write would block.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EAGAIN" />
+            [<see cref="F:Mono.Unix.Native.Errno.EAGAIN" />
 
             
 
@@ -2049,17 +1863,14 @@ class Directory {
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             Insufficient memory to read from 
-            <see
-             cref="P:Mono.Unix.UnixStream.Handle" />
+            <see cref="P:Mono.Unix.UnixStream.Handle" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOMEM" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />
 
             
 
@@ -2095,10 +1906,8 @@ class Directory {
         <Parameter Name="count" Type="System.UInt64" />
       </Parameters>
       <Docs>
-        <param name="out_fd"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="out_fd">
+          A <see cref="T:System.Int32" />
 
           
 
@@ -2106,27 +1915,22 @@ class Directory {
           copy the current stream contents to.
         </param
         >
-        <param name="count"
-          >
-          A <see
-           cref="T:System.UInt64" />
+        <param name="count">
+          A <see cref="T:System.UInt64" />
 
           
 
            containing the number of bytes to
-          copy from the current stream into <paramref
-           name="out_fd" />
+          copy from the current stream into <paramref name="out_fd" />
 
           
 
           .
         </param
         >
-        <summary
-          >
+        <summary>
           Copies data from this stream to the specified file descriptor
-          <paramref
-           name="out_fd" />
+          <paramref name="out_fd" />
 
           
 
@@ -2134,17 +1938,14 @@ class Directory {
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
             This performs an in-kernel copy between the file descriptor 
-            <see
-             cref="P:Mono.Unix.UnixStream.Handle" />
+            <see cref="P:Mono.Unix.UnixStream.Handle" />
 
             
 
              and 
-            <paramref
-             name="out_fd" />
+            <paramref name="out_fd" />
 
             
 
@@ -2159,14 +1960,12 @@ class Directory {
             
 
              was not opened for
-            reading or <paramref
-             name="out_fd" />
+            reading or <paramref name="out_fd" />
 
             
 
              was not opened for writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EBADF" />
+            [<see cref="F:Mono.Unix.Native.Errno.EBADF" />
 
             
 
@@ -2174,11 +1973,9 @@ class Directory {
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             Descriptor is not valid or locked.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EINVAL" />
+            [<see cref="F:Mono.Unix.Native.Errno.EINVAL" />
 
             
 
@@ -2186,22 +1983,18 @@ class Directory {
           </para
           >
         </exception>
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
         </exception
         >
-        <exception cref="T:System.IO.IOException"
-          >
+        <exception cref="T:System.IO.IOException">
             Unspecified error while reading from 
-            <see
-           cref="P:Mono.Unix.UnixStream.Handle" />
+            <see cref="P:Mono.Unix.UnixStream.Handle" />
 
           
 
           .
-            [<see
-           cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
           
 
@@ -2209,18 +2002,15 @@ class Directory {
         </exception
         >
         <exception cref="T:Mono.Unix.UnixIOException">
-          <para
-            >
+          <para>
             Non-blocking I/O has been selected using
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_NONBLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_NONBLOCK" />
 
             
 
              and the
             write would block.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EAGAIN" />
+            [<see cref="F:Mono.Unix.Native.Errno.EAGAIN" />
 
             
 
@@ -2228,17 +2018,14 @@ class Directory {
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             Insufficient memory to read from 
-            <see
-             cref="P:Mono.Unix.UnixStream.Handle" />
+            <see cref="P:Mono.Unix.UnixStream.Handle" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOMEM" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />
 
             
 
@@ -2293,8 +2080,7 @@ class Directory {
       </Parameters>
       <Docs>
         <param name="user"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
@@ -2303,8 +2089,7 @@ class Directory {
         >
         <summary
           >Set the owner user ID and owner group ID of
-          <see
-           cref="P:Mono.Unix.UnixStream.Handle" />
+          <see cref="P:Mono.Unix.UnixStream.Handle" />
 
           
 
@@ -2313,51 +2098,43 @@ class Directory {
         >
         <remarks>
           <para
-            >The user <paramref
-             name="user" />
+            >The user <paramref name="user" />
 
             
 
              is looked up in the local 
             password database and the resulting 
-            <see
-             cref="P:Mono.Unix.UnixUserInfo.UserId" />
+            <see cref="P:Mono.Unix.UnixUserInfo.UserId" />
 
             
 
              and 
-            <see
-             cref="P:Mono.Unix.UnixUserInfo.GroupId" />
+            <see cref="P:Mono.Unix.UnixUserInfo.GroupId" />
 
             
 
              are used as the new
             owner user id and owner group id for
-            <see
-             cref="P:Mono.Unix.UnixStream.Handle" />
+            <see cref="P:Mono.Unix.UnixStream.Handle" />
 
             
 
             .
           </para
           >
-          <para
-            >
-            If this is called by the non-super user (usually the <c
-            >root</c>
+          <para>
+            If this is called by the non-super user (usually the <c>root</c>
 
             
 
             
             user), then the 
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
 
             
 
              and
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
 
             
 
@@ -2366,34 +2143,28 @@ class Directory {
           </para
           >
         </remarks>
-        <exception cref="T:System.InvalidOperationException"
-          >
+        <exception cref="T:System.InvalidOperationException">
           The effective user ID does not match the owner of the file and the
           effective user ID is not the super-user.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.EPERM" />
+            [<see cref="F:Mono.Unix.Native.Errno.EPERM" />
 
           
 
           ]
         </exception
         >
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
         </exception
         >
-        <exception cref="T:System.IO.FileNotFoundException"
-          >
-          A component of <see
-           cref="P:Mono.Unix.UnixStream.Handle" />
+        <exception cref="T:System.IO.FileNotFoundException">
+          A component of <see cref="P:Mono.Unix.UnixStream.Handle" />
 
           
 
            
           that must exist does not exist.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -2408,8 +2179,7 @@ class Directory {
 
              resides on a
           read-only file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -2420,8 +2190,7 @@ class Directory {
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -2454,14 +2223,12 @@ class Directory {
       </Parameters>
       <Docs>
         <param name="user"
-          >A <see
-           cref="T:System.Int64" />
+          >A <see cref="T:System.Int64" />
 
           
 
            containing the user
-          id of the new owner user.  If <c
-          >-1</c>
+          id of the new owner user.  If <c>-1</c>
 
           
 
@@ -2469,14 +2236,12 @@ class Directory {
           unchanged.</param
         >
         <param name="group"
-          >A <see
-           cref="T:System.Int64" />
+          >A <see cref="T:System.Int64" />
 
           
 
            containing the
-          group id of the new owner group.  If <c
-          >-1</c>
+          group id of the new owner group.  If <c>-1</c>
 
           
 
@@ -2485,8 +2250,7 @@ class Directory {
         >
         <summary
           >Set the owner user ID and owner group ID of
-          <see
-           cref="P:Mono.Unix.UnixStream.Handle" />
+          <see cref="P:Mono.Unix.UnixStream.Handle" />
 
           
 
@@ -2494,23 +2258,19 @@ class Directory {
         </summary
         >
         <remarks>
-          <para
-            >
-            If this is called by the non-super user (usually the <c
-            >root</c>
+          <para>
+            If this is called by the non-super user (usually the <c>root</c>
 
             
 
             
             user), then the 
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
 
             
 
              and
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
 
             
 
@@ -2519,34 +2279,28 @@ class Directory {
           </para
           >
         </remarks>
-        <exception cref="T:System.InvalidOperationException"
-          >
+        <exception cref="T:System.InvalidOperationException">
           The effective user ID does not match the owner of the file and the
           effective user ID is not the super-user.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.EPERM" />
+            [<see cref="F:Mono.Unix.Native.Errno.EPERM" />
 
           
 
           ]
         </exception
         >
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
         </exception
         >
-        <exception cref="T:System.IO.FileNotFoundException"
-          >
-          A component of <see
-           cref="P:Mono.Unix.UnixStream.Handle" />
+        <exception cref="T:System.IO.FileNotFoundException">
+          A component of <see cref="P:Mono.Unix.UnixStream.Handle" />
 
           
 
            
           that must exist does not exist.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -2561,8 +2315,7 @@ class Directory {
 
              resides on a
           read-only file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -2573,8 +2326,7 @@ class Directory {
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -2606,8 +2358,7 @@ class Directory {
       </Parameters>
       <Docs>
         <param name="user"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
@@ -2615,8 +2366,7 @@ class Directory {
           user name of the owner user id to use.</param
         >
         <param name="group"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
@@ -2625,8 +2375,7 @@ class Directory {
         >
         <summary
           >Set the owner user ID and owner group ID of
-          <see
-           cref="P:Mono.Unix.UnixStream.Handle" />
+          <see cref="P:Mono.Unix.UnixStream.Handle" />
 
           
 
@@ -2634,23 +2383,19 @@ class Directory {
         </summary
         >
         <remarks>
-          <para
-            >
-            If this is called by the non-super user (usually the <c
-            >root</c>
+          <para>
+            If this is called by the non-super user (usually the <c>root</c>
 
             
 
             
             user), then the 
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
 
             
 
              and
-            <see
-             cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+            <see cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
 
             
 
@@ -2659,34 +2404,28 @@ class Directory {
           </para
           >
         </remarks>
-        <exception cref="T:System.InvalidOperationException"
-          >
+        <exception cref="T:System.InvalidOperationException">
           The effective user ID does not match the owner of the file and the
           effective user ID is not the super-user.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.EPERM" />
+            [<see cref="F:Mono.Unix.Native.Errno.EPERM" />
 
           
 
           ]
         </exception
         >
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
         </exception
         >
-        <exception cref="T:System.IO.FileNotFoundException"
-          >
-          A component of <see
-           cref="P:Mono.Unix.UnixStream.Handle" />
+        <exception cref="T:System.IO.FileNotFoundException">
+          A component of <see cref="P:Mono.Unix.UnixStream.Handle" />
 
           
 
            
           that must exist does not exist.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -2701,8 +2440,7 @@ class Directory {
 
              resides on a
           read-only file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -2713,8 +2451,7 @@ class Directory {
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -2745,14 +2482,11 @@ class Directory {
       <MemberValue>2</MemberValue>
       <Docs>
         <summary>The standard error file descriptor.</summary>
-        <remarks
-          >This is the value <c
-          >2</c>
+        <remarks>This is the value <c>2</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
     <Member MemberName="StandardInputFileDescriptor">
@@ -2773,14 +2507,11 @@ class Directory {
       <MemberValue>0</MemberValue>
       <Docs>
         <summary>The standard input file descriptor.</summary>
-        <remarks
-          >This is the value <c
-          >0</c>
+        <remarks>This is the value <c>0</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
     <Member MemberName="StandardOutputFileDescriptor">
@@ -2801,14 +2532,11 @@ class Directory {
       <MemberValue>1</MemberValue>
       <Docs>
         <summary>The standard output file descriptor.</summary>
-        <remarks
-          >This is the value <c
-          >1</c>
+        <remarks>This is the value <c>1</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
     <Member MemberName="System.IDisposable.Dispose">
@@ -2888,38 +2616,31 @@ class Directory {
         <Parameter Name="fileOffset" Type="System.Int64" />
       </Parameters>
       <Docs>
-        <param name="buffer"
-          >
-          A <see
-           cref="T:System.Byte" />
+        <param name="buffer">
+          A <see cref="T:System.Byte" />
 
           
 
            array containing the data to write.
-          The elements between <paramref
-           name="offset" />
+          The elements between <paramref name="offset" />
 
           
 
            and 
-          <paramref
-           name="(offset + count)" />
+          <paramref name="(offset + count)" />
 
           
 
            are written to the stream.
         </param
         >
-        <param name="offset"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="offset">
+          A <see cref="T:System.Int32" />
 
           
 
            that specifies the zero-based byte
-          offset within <paramref
-           name="buffer" />
+          offset within <paramref name="buffer" />
 
           
 
@@ -2927,10 +2648,8 @@ class Directory {
           bytes to the current stream.
         </param
         >
-        <param name="count"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="count">
+          A <see cref="T:System.Int32" />
 
           
 
@@ -2938,10 +2657,8 @@ class Directory {
           bytes to be written to the current stream.
         </param
         >
-        <param name="fileOffset"
-          >
-          A <see
-           cref="T:System.Int64" />
+        <param name="fileOffset">
+          A <see cref="T:System.Int64" />
 
           
 
@@ -2949,10 +2666,8 @@ class Directory {
           the file to begin writing.
         </param
         >
-        <summary
-          >
-          Writes a sequence of bytes to the current stream <i
-          >without</i>
+        <summary>
+          Writes a sequence of bytes to the current stream <i>without</i>
 
           
 
@@ -2961,16 +2676,13 @@ class Directory {
         </summary
         >
         <remarks>
-          <para
-            >
-            Unlike <see
-             cref="M:System.IO.Stream.Write" />
+          <para>
+            Unlike <see cref="M:System.IO.Stream.Write" />
 
             
 
             , this method does
-            not modify <see
-             cref="P:System.IO.Stream.Position" />
+            not modify <see cref="P:System.IO.Stream.Position" />
 
             
 
@@ -2978,10 +2690,8 @@ class Directory {
           </para
           >
           <para>
-            <block subset="none" type="note"
-              >
-              Use the <see
-               cref="P:System.IO.Stream.CanWrite" />
+            <block subset="none" type="note">
+              Use the <see cref="P:System.IO.Stream.CanWrite" />
 
               
 
@@ -2998,8 +2708,7 @@ class Directory {
             
 
              is greater than the length of 
-            <paramref
-             name="buffer" />
+            <paramref name="buffer" />
 
             
 
@@ -3012,8 +2721,7 @@ class Directory {
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -3025,31 +2733,26 @@ class Directory {
 
           
 
-           or <paramref
-           name="count" />
+           or <paramref name="count" />
 
           
 
            is negative.
         </exception
         >
-        <exception cref="T:System.NotSupportedException"
-          >
+        <exception cref="T:System.NotSupportedException">
           The stream does not support writing.
         </exception
         >
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
         </exception
         >
         <exception cref="T:System.IO.IOException">
-          <para
-            >
+          <para>
             There is no free space remaining on the file system
             containing the file.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -3057,11 +2760,9 @@ class Directory {
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             An I/O error occurred while reading from or writing to the file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -3069,12 +2770,10 @@ class Directory {
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             An attempt was made to write over a disk label area at the beginning
             of a slice.
-            Use <c
-            >
+            Use <c>
               <b>disklabel</b>
 
               
@@ -3086,8 +2785,7 @@ class Directory {
 
             
             to enable writing on the disk label area.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -3095,11 +2793,9 @@ class Directory {
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The file descriptor is associated with a pipe, socket, or FIFO.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ESPIPE" />
+            [<see cref="F:Mono.Unix.Native.Errno.ESPIPE" />
 
             
 
@@ -3108,12 +2804,10 @@ class Directory {
           >
         </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
-          <para
-            >
+          <para>
             An attempt is made to write to a pipe that is not open
             for reading by any process.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EPIPE" />
+            [<see cref="F:Mono.Unix.Native.Errno.EPIPE" />
 
             
 
@@ -3121,18 +2815,15 @@ class Directory {
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             An attempt is made to write to a socket of type
-            <see
-             cref="F:Mono.Unix.Native.TODO.SOCK_STREAM" />
+            <see cref="F:Mono.Unix.Native.TODO.SOCK_STREAM" />
 
             
 
             
             that is not connected to a peer socket.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EPIPE" />
+            [<see cref="F:Mono.Unix.Native.Errno.EPIPE" />
 
             
 
@@ -3140,12 +2831,10 @@ class Directory {
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             An attempt was made to write a file that exceeds the process's
             file size limit or the maximum file size.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EFBIG" />
+            [<see cref="F:Mono.Unix.Native.Errno.EFBIG" />
 
             
 
@@ -3153,12 +2842,10 @@ class Directory {
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The user's quota of disk blocks on the file system
             containing the file has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -3166,11 +2853,9 @@ class Directory {
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             A signal interrupted the write before it could be completed.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EINTR" />
+            [<see cref="F:Mono.Unix.Native.Errno.EINTR" />
 
             
 
@@ -3178,12 +2863,10 @@ class Directory {
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The file was marked for non-blocking I/O,
             and no data could be written immediately.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EAGAIN" />
+            [<see cref="F:Mono.Unix.Native.Errno.EAGAIN" />
 
             
 
@@ -3191,20 +2874,17 @@ class Directory {
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The destination is no longer available when writing to a
             UNIX
             domain datagram socket on which
-            <see
-             cref="M:Mono.Unix.Native.Syscall.connect" />
+            <see cref="M:Mono.Unix.Native.Syscall.connect" />
 
             
 
             (2)
             had been used to set a destination address.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDESTADDRREQ" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDESTADDRREQ" />
 
             
 
@@ -3212,11 +2892,9 @@ class Directory {
           </para
           >
           <para>-or-</para>
-          <para
-            >
+          <para>
             The mbuf pool has been completely exhausted when writing to a socket.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOBUFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOBUFS" />
 
             
 

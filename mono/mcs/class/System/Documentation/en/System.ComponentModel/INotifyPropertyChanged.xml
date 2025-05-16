@@ -16,21 +16,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.INotifyPropertyChanged" />
+        >The <see cref="T:System.ComponentModel.INotifyPropertyChanged" />
 
         
 
          interface is used to notify clients, typically binding clients, that a property value has changed.</para
       >
       <para
-        >For example, consider a Person object with a property called FirstName. To provide generic property-change notification, the Person type implements the <see
-         cref="T:System.ComponentModel.INotifyPropertyChanged" />
+        >For example, consider a Person object with a property called FirstName. To provide generic property-change notification, the Person type implements the <see cref="T:System.ComponentModel.INotifyPropertyChanged" />
 
         
 
-         interface and raises a <see
-         cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" />
+         interface and raises a <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" />
 
         
 
@@ -40,8 +37,7 @@
       <list type="bullet">
         <item>
           <para
-            >Implement the <see
-             cref="T:System.ComponentModel.INotifyPropertyChanged" />
+            >Implement the <see cref="T:System.ComponentModel.INotifyPropertyChanged" />
 
             
 
@@ -82,18 +78,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" />
+            >The <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" />
 
             
 
-             event can indicate all properties on the object have changed by using either null or <see
-             cref="F:System.String.Empty" />
+             event can indicate all properties on the object have changed by using either null or <see cref="F:System.String.Empty" />
 
             
 
-             as the property name in the <see
-             cref="T:System.ComponentModel.PropertyChangedEventArgs" />
+             as the property name in the <see cref="T:System.ComponentModel.PropertyChangedEventArgs" />
 
             
 

@@ -38,39 +38,33 @@
 
         
 
-         provides data about a <see
-         cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
+         provides data about a <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
 
         
 
-         event. The <see
-         cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
+         event. The <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
 
         
 
-         event notifies the <see
-         cref="T:System.ComponentModel.Design.IComponentChangeService" />
+         event notifies the <see cref="T:System.ComponentModel.Design.IComponentChangeService" />
 
         
 
          and registered event handlers that a particular component in the current design document is about to be changed. This event provides a widely accessible method to prevent a component from changing.</para
       >
       <para
-        >A <see
-         cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
+        >A <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
 
         
 
-         event is raised before a component is changed. This event provides an opportunity for a designer to abort the change. Component designers typically raise the <see
-         cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
+         event is raised before a component is changed. This event provides an opportunity for a designer to abort the change. Component designers typically raise the <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
 
         
 
          event automatically. If a property cannot be changed, the method that handles the event can throw an exception. For example, if a designer file is checked into source code control, the handler of this event typically throws an exception if the user refuses to check out the file.</para
       >
       <para
-        >A <see
-         cref="T:System.ComponentModel.Design.ComponentChangingEventArgs" />
+        >A <see cref="T:System.ComponentModel.Design.ComponentChangingEventArgs" />
 
         
 
@@ -88,8 +82,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
+        >Provides data for the <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
 
         
 
@@ -122,8 +115,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.ComponentChangingEventArgs" />
+            >A <see cref="T:System.ComponentModel.Design.ComponentChangingEventArgs" />
 
             
 
@@ -133,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.ComponentChangingEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.ComponentChangingEventArgs" />
 
             
 
@@ -142,19 +133,26 @@
           >
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component that is about to be changed. </param
         >
         <param name="member">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.MemberDescriptor" />
+          A <see cref="T:System.ComponentModel.MemberDescriptor" />
 
           
 

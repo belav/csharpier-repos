@@ -47,38 +47,52 @@
           <para>Specifies initialization requirements for XML binary writers that implement this method.</para>
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream to write to.</param
         >
         <param name="dictionary">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionary" />
+          The <see cref="T:System.Xml.XmlDictionary" />
 
           
 
            to use.</param
         >
         <param name="session">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlBinaryWriterSession" />
+          The <see cref="T:System.Xml.XmlBinaryWriterSession" />
 
           
 
            to use.</param
         >
         <param name="ownsStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -31,8 +31,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can create a <see
-         cref="T:System.ComponentModel.DefaultValueAttribute" />
+        >You can create a <see cref="T:System.ComponentModel.DefaultValueAttribute" />
 
         
 
@@ -40,8 +39,7 @@
       >
       <block subset="none" type="note">
         <para
-          >A <see
-           cref="T:System.ComponentModel.DefaultValueAttribute" />
+          >A <see cref="T:System.ComponentModel.DefaultValueAttribute" />
 
           
 
@@ -49,8 +47,7 @@
         >
       </block>
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -86,13 +83,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DefaultValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" />
 
             
 
-             class using a <see
-             cref="T:System.Boolean" />
+             class using a <see cref="T:System.Boolean" />
 
             
 
@@ -100,12 +95,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Boolean" />
+          A <see cref="T:System.Boolean" />
 
           
 
@@ -134,8 +132,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DefaultValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" />
 
             
 
@@ -143,7 +140,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -172,8 +173,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DefaultValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" />
 
             
 
@@ -181,7 +181,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -210,8 +214,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DefaultValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" />
 
             
 
@@ -219,7 +222,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -248,8 +255,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DefaultValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" />
 
             
 
@@ -257,7 +263,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -286,8 +296,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DefaultValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" />
 
             
 
@@ -295,7 +304,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -324,8 +337,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DefaultValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" />
 
             
 
@@ -333,7 +345,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -362,8 +378,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DefaultValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" />
 
             
 
@@ -371,12 +386,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
@@ -405,8 +423,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DefaultValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" />
 
             
 
@@ -414,7 +431,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -443,13 +464,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DefaultValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" />
 
             
 
-             class using a <see
-             cref="T:System.String" />
+             class using a <see cref="T:System.String" />
 
             
 
@@ -457,12 +476,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -495,8 +517,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DefaultValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" />
 
             
 
@@ -504,29 +525,34 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
            that represents the type to convert the value to. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that can be converted to the type using the <see
-           cref="T:System.ComponentModel.TypeConverter" />
+           that can be converted to the type using the <see cref="T:System.ComponentModel.TypeConverter" />
 
           
 
@@ -557,8 +583,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns whether the value of the given object is equal to the current <see
-             cref="T:System.ComponentModel.DefaultValueAttribute" />
+            >Returns whether the value of the given object is equal to the current <see cref="T:System.ComponentModel.DefaultValueAttribute" />
 
             
 
@@ -570,7 +595,11 @@
           <para>true if the value of the given object is equal to that of the current; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -624,7 +653,11 @@
           <para>Sets the default value for the property to which this attribute is bound.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

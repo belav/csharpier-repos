@@ -21,18 +21,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by <see
-         cref="T:System.Windows.Forms.DataGridViewCellStyleContentChangedEventArgs" />
+        >This enumeration is used by <see cref="T:System.Windows.Forms.DataGridViewCellStyleContentChangedEventArgs" />
 
         
 
-         to indicate which part of the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         to indicate which part of the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
-         owns the <see
-         cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+         owns the <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
         
 
@@ -42,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >Specifies the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -63,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One or more values of the object returned by the <see
-             cref="P:System.Windows.Forms.DataGridView.AlternatingRowsDefaultCellStyle" />
+            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridView.AlternatingRowsDefaultCellStyle" />
 
             
 
@@ -87,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One or more values of the object returned by the <see
-             cref="P:System.Windows.Forms.DataGridViewCell.Style" />
+            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewCell.Style" />
 
             
 
@@ -111,8 +105,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One or more values of the object returned by the <see
-             cref="P:System.Windows.Forms.DataGridViewColumn.DefaultCellStyle" />
+            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewColumn.DefaultCellStyle" />
 
             
 
@@ -135,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One or more values of the object returned by the <see
-             cref="P:System.Windows.Forms.DataGridView.ColumnHeadersDefaultCellStyle" />
+            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridView.ColumnHeadersDefaultCellStyle" />
 
             
 
@@ -159,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One or more values of the object returned by the <see
-             cref="P:System.Windows.Forms.DataGridView.DefaultCellStyle" />
+            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridView.DefaultCellStyle" />
 
             
 
@@ -200,8 +191,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One or more values of the object returned by the <see
-             cref="P:System.Windows.Forms.DataGridViewRow.DefaultCellStyle" />
+            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewRow.DefaultCellStyle" />
 
             
 
@@ -224,8 +214,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One or more values of the object returned by the <see
-             cref="P:System.Windows.Forms.DataGridView.RowHeadersDefaultCellStyle" />
+            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridView.RowHeadersDefaultCellStyle" />
 
             
 
@@ -248,8 +237,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One or more values of the object returned by the <see
-             cref="P:System.Windows.Forms.DataGridView.RowsDefaultCellStyle" />
+            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridView.RowsDefaultCellStyle" />
 
             
 

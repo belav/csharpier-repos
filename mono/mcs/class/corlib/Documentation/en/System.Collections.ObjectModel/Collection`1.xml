@@ -56,44 +56,37 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Collections.ObjectModel.Collection`1" />
+        >The <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
         
 
-         class can be used immediately by creating an instance of one of its constructed types; all you have to do is specify the type of object to be contained in the collection. In addition, you can derive your own collection type from any constructed type, or derive a generic collection type from the <see
-         cref="T:System.Collections.ObjectModel.Collection`1" />
+         class can be used immediately by creating an instance of one of its constructed types; all you have to do is specify the type of object to be contained in the collection. In addition, you can derive your own collection type from any constructed type, or derive a generic collection type from the <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
         
 
          class itself.</para
       >
       <para
-        >The <see
-         cref="T:System.Collections.ObjectModel.Collection`1" />
+        >The <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
         
 
          class provides protected methods that can be used to customize its behavior when adding and removing items, clearing the collection, or setting the value of an existing item.</para
       >
       <para
-        >Most <see
-         cref="T:System.Collections.ObjectModel.Collection`1" />
+        >Most <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
         
 
-         objects can be modified. However, a <see
-         cref="T:System.Collections.ObjectModel.Collection`1" />
+         objects can be modified. However, a <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
         
 
-         object that is initialized with a read-only <see
-         cref="T:System.Collections.Generic.IList`1" />
+         object that is initialized with a read-only <see cref="T:System.Collections.Generic.IList`1" />
 
         
 
-         object cannot be modified. See <see
-         cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" />
+         object cannot be modified. See <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" />
 
         
 
@@ -135,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.ObjectModel.Collection`1" />
+            >Initializes a new instance of the <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
             
 
@@ -220,18 +212,15 @@
              is set to zero, and references to other objects from elements of the collection are also released.</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.ObjectModel.Collection`1.Count" />
+             is <see cref="P:System.Collections.ObjectModel.Collection`1.Count" />
 
             
 
@@ -241,8 +230,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all elements from the <see
-             cref="T:System.Collections.ObjectModel.Collection`1" />
+            >Removes all elements from the <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
             
 
@@ -278,18 +266,15 @@
              is set to zero, and references to other objects from elements of the collection are also released.</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.ObjectModel.Collection`1.Count" />
+             is <see cref="P:System.Collections.ObjectModel.Collection`1.Count" />
 
             
 
@@ -299,8 +284,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all elements from the <see
-             cref="T:System.Collections.ObjectModel.Collection`1" />
+            >Removes all elements from the <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
             
 
@@ -381,8 +365,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of elements actually contained in the <see
-             cref="T:System.Collections.ObjectModel.Collection`1" />
+            >Gets the number of elements actually contained in the <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
             
 
@@ -416,18 +399,15 @@
           <para>The foreach statement of the C# language (for each in C++, For Each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
           <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
           <para
-            >Initially, the enumerator is positioned before the first element in the collection. At this position, <see
-             cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+            >Initially, the enumerator is positioned before the first element in the collection. At this position, <see cref="P:System.Collections.Generic.IEnumerator`1.Current" />
 
             
 
-             is undefined. Therefore, you must call <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is undefined. Therefore, you must call <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             to advance the enumerator to the first element of the collection before reading the value of <see
-             cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+             to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.Generic.IEnumerator`1.Current" />
 
             
 
@@ -438,51 +418,42 @@
 
             
 
-             returns the same object until <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns the same object until <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             is called. <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             sets <see
-             cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+             sets <see cref="P:System.Collections.Generic.IEnumerator`1.Current" />
 
             
 
              to the next element.</para
           >
           <para
-            >If <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returns false. When the enumerator is at this position, subsequent calls to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             also return false. If the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returned false, <see
-             cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+             returned false, <see cref="P:System.Collections.Generic.IEnumerator`1.Current" />
 
             
 
-             is undefined. You cannot set <see
-             cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+             is undefined. You cannot set <see cref="P:System.Collections.Generic.IEnumerator`1.Current" />
 
             
 
@@ -491,8 +462,7 @@
           <para>An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and its behavior is undefined.</para>
           <para>The enumerator does not have exclusive access to the collection; therefore, enumerating through a collection is intrinsically not a thread-safe procedure. To guarantee thread safety during enumeration, you can lock the collection during the entire enumeration.  To allow the collection to be accessed by multiple threads for reading and writing, you must implement your own synchronization.</para>
           <para
-            >Default implementations of collections in <see
-             cref="N:System.Collections.Generic" />
+            >Default implementations of collections in <see cref="N:System.Collections.Generic" />
 
             
 
@@ -503,8 +473,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that iterates through the <see
-             cref="T:System.Collections.ObjectModel.Collection`1" />
+            >Returns an enumerator that iterates through the <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
             
 
@@ -514,13 +483,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerator`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerator`1" />
 
             
 
-             for the <see
-             cref="T:System.Collections.ObjectModel.Collection`1" />
+             for the <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
             
 
@@ -654,13 +621,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The wrapper provides the functionality of the <see
-             cref="T:System.Collections.Generic.IList`1" />
+            >The wrapper provides the functionality of the <see cref="T:System.Collections.Generic.IList`1" />
 
             
 
-             class and exposes all the elements of the <see
-             cref="T:System.Collections.ObjectModel.Collection`1" />
+             class and exposes all the elements of the <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
             
 
@@ -671,13 +636,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Collections.Generic.IList`1" />
+            >Gets a <see cref="T:System.Collections.Generic.IList`1" />
 
             
 
-             wrapper around the <see
-             cref="T:System.Collections.ObjectModel.Collection`1" />
+             wrapper around the <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
             
 
@@ -733,18 +696,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.ObjectModel.Collection`1.Count" />
+             is <see cref="P:System.Collections.ObjectModel.Collection`1.Count" />
 
             
 
@@ -754,8 +714,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the element at the specified index of the <see
-             cref="T:System.Collections.ObjectModel.Collection`1" />
+            >Removes the element at the specified index of the <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
             
 
@@ -763,7 +722,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -793,18 +756,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.ObjectModel.Collection`1.Count" />
+             is <see cref="P:System.Collections.ObjectModel.Collection`1.Count" />
 
             
 
@@ -814,8 +774,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the element at the specified index of the <see
-             cref="T:System.Collections.ObjectModel.Collection`1" />
+            >Removes the element at the specified index of the <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
             
 
@@ -823,7 +782,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -905,28 +868,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >If the type of the source <see
-               cref="T:System.Collections.ICollection" />
+              >If the type of the source <see cref="T:System.Collections.ICollection" />
 
               
 
-               cannot be cast automatically to the type of the destination <paramref
-               name="array" />
+               cannot be cast automatically to the type of the destination <paramref name="array" />
 
               
 
-              , the non-generic implementations of <see
-               cref="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)" />
+              , the non-generic implementations of <see cref="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)" />
 
               
 
-               throw <see
-               cref="T:System.InvalidCastException" />
+               throw <see cref="T:System.InvalidCastException" />
 
               
 
-              , whereas the generic implementations throw <see
-               cref="T:System.ArgumentException" />
+              , whereas the generic implementations throw <see cref="T:System.ArgumentException" />
 
               
 
@@ -934,18 +892,15 @@
             >
           </block>
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.ObjectModel.Collection`1.Count" />
+             is <see cref="P:System.Collections.ObjectModel.Collection`1.Count" />
 
             
 
@@ -955,18 +910,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the <see
-             cref="T:System.Collections.ICollection" />
+            >Copies the elements of the <see cref="T:System.Collections.ICollection" />
 
             
 
-             to an <see
-             cref="T:System.Array" />
+             to an <see cref="T:System.Array" />
 
             
 
-            , starting at a particular <see
-             cref="T:System.Array" />
+            , starting at a particular <see cref="T:System.Array" />
 
             
 
@@ -974,34 +926,38 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from <see
-           cref="T:System.Collections.ICollection" />
+           that is the destination of the elements copied from <see cref="T:System.Collections.ICollection" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -1032,8 +988,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Default implementations of collections in <see
-             cref="N:System.Collections.Generic" />
+            >Default implementations of collections in <see cref="N:System.Collections.Generic" />
 
             
 
@@ -1045,8 +1000,7 @@
 
             
 
-             returns an object that can be used to synchronize access to the <see
-             cref="T:System.Collections.ICollection" />
+             returns an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1057,8 +1011,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see
-             cref="T:System.Collections.ICollection" />
+            >Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1090,8 +1043,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Default implementations of collections in <see
-             cref="N:System.Collections.Generic" />
+            >Default implementations of collections in <see cref="N:System.Collections.Generic" />
 
             
 
@@ -1103,13 +1055,11 @@
 
             
 
-             returns an object that can be used to synchronize access to the <see
-             cref="T:System.Collections.ICollection" />
+             returns an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection" />
 
             
 
-            . Synchronization is effective only if all threads lock this object before accessing the collection. The following code shows the use of the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+            . Synchronization is effective only if all threads lock this object before accessing the collection. The following code shows the use of the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
@@ -1136,8 +1086,7 @@ finally {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1171,23 +1120,19 @@ finally {
           <para>The foreach statement of the C# language (for each in C++, For Each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
           <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
           <para
-            >Initially, the enumerator is positioned before the first element in the collection. <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Initially, the enumerator is positioned before the first element in the collection. <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             also brings the enumerator back to this position.  At this position, <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             also brings the enumerator back to this position.  At this position, <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             is undefined. Therefore, you must call <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is undefined. Therefore, you must call <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             to advance the enumerator to the first element of the collection before reading the value of <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -1198,66 +1143,54 @@ finally {
 
             
 
-             returns the same object until either <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             is called. <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             sets <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             sets <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              to the next element.</para
           >
           <para
-            >If <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returns false. When the enumerator is at this position, subsequent calls to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             also return false. If the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returned false, <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             returned false, <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             is undefined. To set <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             is undefined. To set <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             to the first element of the collection again, you can call <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             to the first element of the collection again, you can call <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             followed by <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             followed by <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
@@ -1266,8 +1199,7 @@ finally {
           <para>An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and its behavior is undefined.</para>
           <para>The enumerator does not have exclusive access to the collection; therefore, enumerating through a collection is intrinsically not a thread-safe procedure.  To guarantee thread safety during enumeration, you can lock the collection during the entire enumeration.  To allow the collection to be accessed by multiple threads for reading and writing, you must implement your own synchronization.</para>
           <para
-            >Default implementations of collections in <see
-             cref="N:System.Collections.Generic" />
+            >Default implementations of collections in <see cref="N:System.Collections.Generic" />
 
             
 
@@ -1282,8 +1214,7 @@ finally {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -1318,8 +1249,7 @@ finally {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an item to the <see
-             cref="T:System.Collections.IList" />
+            >Adds an item to the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1331,17 +1261,19 @@ finally {
           <para>The position into which the new element was inserted.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to add to the <see
-           cref="T:System.Collections.IList" />
+           to add to the <see cref="T:System.Collections.IList" />
 
           
 
@@ -1371,36 +1303,30 @@ finally {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method determines equality by first determining whether <paramref
-             name="value" />
+            >This method determines equality by first determining whether <paramref name="value" />
 
             
 
-             is of type <paramref
-             name="T" />
+             is of type <paramref name="T" />
 
             
 
-             (or null) and then calling <see
-             cref="M:System.Collections.ObjectModel.Collection`1.Contains(`0)" />
+             (or null) and then calling <see cref="M:System.Collections.ObjectModel.Collection`1.Contains(`0)" />
 
             
 
             .</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.ObjectModel.Collection`1.Count" />
+             is <see cref="P:System.Collections.ObjectModel.Collection`1.Count" />
 
             
 
@@ -1410,8 +1336,7 @@ finally {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Collections.IList" />
+            >Determines whether the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1421,13 +1346,11 @@ finally {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Object" />
+            >true if the <see cref="T:System.Object" />
 
             
 
-             is found in the <see
-             cref="T:System.Collections.IList" />
+             is found in the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1435,17 +1358,19 @@ finally {
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to locate in the <see
-           cref="T:System.Collections.IList" />
+           to locate in the <see cref="T:System.Collections.IList" />
 
           
 
@@ -1475,66 +1400,54 @@ finally {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method determines equality using the default comparer <see
-             cref="P:System.Collections.Generic.Comparer`1.Default" />
+            >This method determines equality using the default comparer <see cref="P:System.Collections.Generic.Comparer`1.Default" />
 
             
 
-            .  <see
-             cref="P:System.Collections.Generic.Comparer`1.Default" />
+            .  <see cref="P:System.Collections.Generic.Comparer`1.Default" />
 
             
 
-             checks whether type <paramref
-             name="T" />
+             checks whether type <paramref name="T" />
 
             
 
-             implements <see
-             cref="T:System.IComparable`1" />
+             implements <see cref="T:System.IComparable`1" />
 
             
 
-             and uses that implementation, if available.  If not, <see
-             cref="P:System.Collections.Generic.Comparer`1.Default" />
+             and uses that implementation, if available.  If not, <see cref="P:System.Collections.Generic.Comparer`1.Default" />
 
             
 
-             checks whether type <paramref
-             name="T" />
+             checks whether type <paramref name="T" />
 
             
 
-             implements <see
-             cref="T:System.IComparable" />
+             implements <see cref="T:System.IComparable" />
 
             
 
-            .  If type <paramref
-             name="T" />
+            .  If type <paramref name="T" />
 
             
 
-             does not implement either interface, this method uses <see
-             cref="Overload:System.Object.Equals" />
+             does not implement either interface, this method uses <see cref="Overload:System.Object.Equals" />
 
             
 
             .</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.ObjectModel.Collection`1.Count" />
+             is <see cref="P:System.Collections.ObjectModel.Collection`1.Count" />
 
             
 
@@ -1544,8 +1457,7 @@ finally {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the index of a specific item in the <see
-             cref="T:System.Collections.IList" />
+            >Determines the index of a specific item in the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1555,8 +1467,7 @@ finally {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of <paramref
-             name="value" />
+            >The index of <paramref name="value" />
 
             
 
@@ -1564,17 +1475,19 @@ finally {
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to locate in the <see
-           cref="T:System.Collections.IList" />
+           to locate in the <see cref="T:System.Collections.IList" />
 
           
 
@@ -1605,36 +1518,30 @@ finally {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="index" />
+            >If <paramref name="index" />
 
             
 
-             equals the number of items in the <see
-             cref="T:System.Collections.IList" />
+             equals the number of items in the <see cref="T:System.Collections.IList" />
 
             
 
-            , then <paramref
-             name="value" />
+            , then <paramref name="value" />
 
             
 
              is appended to the end.</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.ObjectModel.Collection`1.Count" />
+             is <see cref="P:System.Collections.ObjectModel.Collection`1.Count" />
 
             
 
@@ -1644,8 +1551,7 @@ finally {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts an item into the <see
-             cref="T:System.Collections.IList" />
+            >Inserts an item into the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1653,29 +1559,34 @@ finally {
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="value" />
+          The zero-based index at which <paramref name="value" />
 
           
 
            should be inserted.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to insert into the <see
-           cref="T:System.Collections.IList" />
+           to insert into the <see cref="T:System.Collections.IList" />
 
           
 
@@ -1709,8 +1620,7 @@ finally {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Collections.IList" />
+            >Gets a value indicating whether the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1745,8 +1655,7 @@ finally {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Collections.IList" />
+            >Gets a value indicating whether the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1805,66 +1714,54 @@ finally {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method determines equality using the default comparer <see
-             cref="P:System.Collections.Generic.Comparer`1.Default" />
+            >This method determines equality using the default comparer <see cref="P:System.Collections.Generic.Comparer`1.Default" />
 
             
 
-            .  <see
-             cref="P:System.Collections.Generic.Comparer`1.Default" />
+            .  <see cref="P:System.Collections.Generic.Comparer`1.Default" />
 
             
 
-             checks whether type <paramref
-             name="T" />
+             checks whether type <paramref name="T" />
 
             
 
-             implements <see
-             cref="T:System.IComparable`1" />
+             implements <see cref="T:System.IComparable`1" />
 
             
 
-             and uses that implementation, if available.  If not, <see
-             cref="P:System.Collections.Generic.Comparer`1.Default" />
+             and uses that implementation, if available.  If not, <see cref="P:System.Collections.Generic.Comparer`1.Default" />
 
             
 
-             checks whether type <paramref
-             name="T" />
+             checks whether type <paramref name="T" />
 
             
 
-             implements <see
-             cref="T:System.IComparable" />
+             implements <see cref="T:System.IComparable" />
 
             
 
-            .  If type <paramref
-             name="T" />
+            .  If type <paramref name="T" />
 
             
 
-             does not implement either interface, this method uses <see
-             cref="Overload:System.Object.Equals" />
+             does not implement either interface, this method uses <see cref="Overload:System.Object.Equals" />
 
             
 
             .</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.ObjectModel.Collection`1.Count" />
+             is <see cref="P:System.Collections.ObjectModel.Collection`1.Count" />
 
             
 
@@ -1874,8 +1771,7 @@ finally {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of a specific object from the <see
-             cref="T:System.Collections.IList" />
+            >Removes the first occurrence of a specific object from the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1883,17 +1779,19 @@ finally {
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to remove from the <see
-           cref="T:System.Collections.IList" />
+           to remove from the <see cref="T:System.Collections.IList" />
 
           
 

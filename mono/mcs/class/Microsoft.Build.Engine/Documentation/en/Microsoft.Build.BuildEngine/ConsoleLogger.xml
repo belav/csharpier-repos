@@ -35,8 +35,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" />
 
             
 
@@ -63,13 +62,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" />
 
             
 
-             class with the specified <see
-             cref="T:Microsoft.Build.Framework.LoggerVerbosity" />
+             class with the specified <see cref="T:Microsoft.Build.Framework.LoggerVerbosity" />
 
             
 
@@ -77,12 +74,15 @@
           >
         </summary>
         <param name="verbosity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:Microsoft.Build.Framework.LoggerVerbosity" />
+          The <see cref="T:Microsoft.Build.Framework.LoggerVerbosity" />
 
           
 
@@ -111,23 +111,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" />
 
             
 
-             class with the specified <see
-             cref="T:Microsoft.Build.Framework.LoggerVerbosity" />
+             class with the specified <see cref="T:Microsoft.Build.Framework.LoggerVerbosity" />
 
             
 
-            , <see
-             cref="T:Microsoft.Build.BuildEngine.ColorSetter" />
+            , <see cref="T:Microsoft.Build.BuildEngine.ColorSetter" />
 
             
 
-            , and <see
-             cref="T:Microsoft.Build.BuildEngine.ColorResetter" />
+            , and <see cref="T:Microsoft.Build.BuildEngine.ColorResetter" />
 
             
 
@@ -135,48 +131,60 @@
           >
         </summary>
         <param name="verbosity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:Microsoft.Build.Framework.LoggerVerbosity" />
+          The <see cref="T:Microsoft.Build.Framework.LoggerVerbosity" />
 
           
 
            to apply to the logger.</param
         >
         <param name="write">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:Microsoft.Build.BuildEngine.WriteHandler" />
+          The <see cref="T:Microsoft.Build.BuildEngine.WriteHandler" />
 
           
 
            for the logger to use.</param
         >
         <param name="colorSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:Microsoft.Build.BuildEngine.ColorSetter" />
+          The <see cref="T:Microsoft.Build.BuildEngine.ColorSetter" />
 
           
 
            for the logger to use.</param
         >
         <param name="colorReset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:Microsoft.Build.BuildEngine.ColorResetter" />
+          The <see cref="T:Microsoft.Build.BuildEngine.ColorResetter" />
 
           
 
@@ -208,19 +216,26 @@
           <para>Adds the specified parameter name and value to the logger.</para>
         </summary>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The parameter name to add to the logger.</param
         >
         <param name="parameterValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The parameter value to assign to the <paramref
-           name="parameterName" />
+          The parameter value to assign to the <paramref name="parameterName" />
 
           
 
@@ -251,8 +266,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see
-             cref="E:Microsoft.Build.Framework.IEventSource.BuildFinished" />
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.BuildFinished" />
 
             
 
@@ -260,7 +274,11 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -291,8 +309,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see
-             cref="E:Microsoft.Build.Framework.IEventSource.BuildStarted" />
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.BuildStarted" />
 
             
 
@@ -300,7 +317,11 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -331,8 +352,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see
-             cref="E:Microsoft.Build.Framework.IEventSource.CustomEventRaised" />
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.CustomEventRaised" />
 
             
 
@@ -340,7 +360,11 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -371,8 +395,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see
-             cref="E:Microsoft.Build.Framework.IEventSource.ErrorRaised" />
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.ErrorRaised" />
 
             
 
@@ -380,7 +403,11 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -411,12 +438,15 @@
           <para>Registers the logger for the specified events.</para>
         </summary>
         <param name="eventSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:Microsoft.Build.Framework.IEventSource" />
+          The <see cref="T:Microsoft.Build.Framework.IEventSource" />
 
           
 
@@ -447,8 +477,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see
-             cref="E:Microsoft.Build.Framework.IEventSource.MessageRaised" />
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.MessageRaised" />
 
             
 
@@ -456,7 +485,11 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -480,8 +513,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the parameters passed to the <see
-             cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" />
+            >Gets or sets the parameters passed to the <see cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" />
 
             
 
@@ -513,8 +545,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see
-             cref="E:Microsoft.Build.Framework.IEventSource.ProjectFinished" />
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.ProjectFinished" />
 
             
 
@@ -522,7 +553,11 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -553,8 +588,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see
-             cref="E:Microsoft.Build.Framework.IEventSource.ProjectStarted" />
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.ProjectStarted" />
 
             
 
@@ -562,7 +596,11 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -653,8 +691,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see
-             cref="E:Microsoft.Build.Framework.IEventSource.TargetFinished" />
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.TargetFinished" />
 
             
 
@@ -662,7 +699,11 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -693,8 +734,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see
-             cref="E:Microsoft.Build.Framework.IEventSource.TargetStarted" />
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.TargetStarted" />
 
             
 
@@ -702,7 +742,11 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -733,8 +777,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see
-             cref="E:Microsoft.Build.Framework.IEventSource.TaskFinished" />
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.TaskFinished" />
 
             
 
@@ -742,7 +785,11 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -773,8 +820,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see
-             cref="E:Microsoft.Build.Framework.IEventSource.TaskStarted" />
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.TaskStarted" />
 
             
 
@@ -782,7 +828,11 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -809,8 +859,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:Microsoft.Build.Framework.LoggerVerbosity" />
+            >Gets or sets the <see cref="T:Microsoft.Build.Framework.LoggerVerbosity" />
 
             
 
@@ -842,8 +891,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see
-             cref="E:Microsoft.Build.Framework.IEventSource.WarningRaised" />
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.WarningRaised" />
 
             
 
@@ -851,7 +899,11 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -878,13 +930,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets to the <see
-             cref="T:Microsoft.Build.BuildEngine.WriteHandler" />
+            >Gets or sets to the <see cref="T:Microsoft.Build.BuildEngine.WriteHandler" />
 
             
 
-             delegate for the <see
-             cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" />
+             delegate for the <see cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" />
 
             
 

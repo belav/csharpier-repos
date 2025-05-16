@@ -26,8 +26,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see
-         cref="E:Microsoft.Build.Framework.IEventSource.AnyEventRaised" />
+        >Represents the method that will handle the <see cref="E:Microsoft.Build.Framework.IEventSource.AnyEventRaised" />
 
         
 

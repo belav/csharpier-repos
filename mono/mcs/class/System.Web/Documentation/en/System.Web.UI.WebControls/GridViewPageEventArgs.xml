@@ -17,18 +17,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+        >The <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         control raises the <see
-         cref="E:System.Web.UI.WebControls.GridView.PageIndexChanging" />
+         control raises the <see cref="E:System.Web.UI.WebControls.GridView.PageIndexChanging" />
 
         
 
-         event when a pager button (a button with its CommandName property set to "Page") within the control is clicked, but before the <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         event when a pager button (a button with its CommandName property set to "Page") within the control is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
@@ -36,8 +33,7 @@
       >
       <block subset="none" type="note">
         <para
-          >Pager buttons are usually located in the pager row of a <see
-           cref="T:System.Web.UI.WebControls.GridView" />
+          >Pager buttons are usually located in the pager row of a <see cref="T:System.Web.UI.WebControls.GridView" />
 
           
 
@@ -45,26 +41,22 @@
         >
       </block>
       <para
-        >A <see
-         cref="T:System.Web.UI.WebControls.GridViewPageEventArgs" />
+        >A <see cref="T:System.Web.UI.WebControls.GridViewPageEventArgs" />
 
         
 
-         object is passed to the event-handling method, which allows you to determine the index of the page selected by the user and to indicate that the paging operation should be canceled. To cancel the paging operation, set the <see
-         cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+         object is passed to the event-handling method, which allows you to determine the index of the page selected by the user and to indicate that the paging operation should be canceled. To cancel the paging operation, set the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
         
 
-         property of the <see
-         cref="T:System.Web.UI.WebControls.GridViewPageEventArgs" />
+         property of the <see cref="T:System.Web.UI.WebControls.GridViewPageEventArgs" />
 
         
 
          object to true.</para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
 
@@ -73,13 +65,11 @@
         .</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.WebControls.GridViewPageEventArgs" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.GridViewPageEventArgs" />
 
         
 
-        , see the <see
-         cref="M:System.Web.UI.WebControls.GridViewPageEventArgs.#ctor(System.Int32)" />
+        , see the <see cref="M:System.Web.UI.WebControls.GridViewPageEventArgs.#ctor(System.Int32)" />
 
         
 
@@ -89,8 +79,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Web.UI.WebControls.GridView.PageIndexChanging" />
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.GridView.PageIndexChanging" />
 
         
 
@@ -111,16 +100,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.GridViewPageEventArgs" />
+            >Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.GridViewPageEventArgs" />
 
             
 
              class.</para
           >
           <para
-            >The following table shows the initial property value for an instance of <see
-             cref="T:System.Web.UI.WebControls.GridViewPageEventArgs" />
+            >The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.WebControls.GridViewPageEventArgs" />
 
             
 
@@ -145,8 +132,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="newPageIndex" />
+                  >The value of the <paramref name="newPageIndex" />
 
                   
 
@@ -162,8 +148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.GridViewPageEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.GridViewPageEventArgs" />
 
             
 
@@ -187,23 +172,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the <see
-             cref="E:System.Web.UI.WebControls.GridView.PageIndexChanging" />
+            >Because the <see cref="E:System.Web.UI.WebControls.GridView.PageIndexChanging" />
 
             
 
-             event occurs before the <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             event occurs before the <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
-             control performs the paging operation, the <see
-             cref="P:System.Web.UI.WebControls.GridView.PageIndex" />
+             control performs the paging operation, the <see cref="P:System.Web.UI.WebControls.GridView.PageIndex" />
 
             
 
-             property of the control cannot be used to determine the index of the page selected by the user. Use the <see
-             cref="P:System.Web.UI.WebControls.GridViewPageEventArgs.NewPageIndex" />
+             property of the control cannot be used to determine the index of the page selected by the user. Use the <see cref="P:System.Web.UI.WebControls.GridViewPageEventArgs.NewPageIndex" />
 
             
 
@@ -211,13 +192,11 @@
           >
           <block subset="none" type="note">
             <para
-              >During the <see
-               cref="E:System.Web.UI.WebControls.GridView.PageIndexChanging" />
+              >During the <see cref="E:System.Web.UI.WebControls.GridView.PageIndexChanging" />
 
               
 
-               event, the <see
-               cref="P:System.Web.UI.WebControls.GridView.PageIndex" />
+               event, the <see cref="P:System.Web.UI.WebControls.GridView.PageIndex" />
 
               
 
@@ -229,8 +208,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the index of the new page to display in the <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+            >Gets or sets the index of the new page to display in the <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 

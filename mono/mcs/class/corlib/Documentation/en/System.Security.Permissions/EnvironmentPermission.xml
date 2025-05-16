@@ -48,18 +48,15 @@
       <para>Environment variable names are designated by one or more case-insensitive name lists separated by semicolons, with separate lists for read and write access to the named variables. Write access includes the ability to create and delete environment variables as well as to change existing values.</para>
       <block subset="none" type="note">
         <para
-          >In versions of the .NET Framework before the net_v40_long, you could use the <see
-           cref="M:System.Security.CodeAccessPermission.Deny" />
+          >In versions of the .NET Framework before the net_v40_long, you could use the <see cref="M:System.Security.CodeAccessPermission.Deny" />
 
           
 
-           method to prevent inadvertent access to system resources by trusted code. <see
-           cref="M:System.Security.CodeAccessPermission.Deny" />
+           method to prevent inadvertent access to system resources by trusted code. <see cref="M:System.Security.CodeAccessPermission.Deny" />
 
           
 
-           is now obsolete, and access to resources is now determined solely by the granted permission set for an assembly. To limit access to files, you must run partially trusted code in a sandbox and assign it permissions only to resources that the code is allowed to access. For information about running an application in a sandbox, see <format
-           type="text/html">
+           is now obsolete, and access to resources is now determined solely by the granted permission set for an assembly. To limit access to files, you must run partially trusted code in a sandbox and assign it permissions only to resources that the code is allowed to access. For information about running an application in a sandbox, see <format type="text/html">
             <a href="d1ad722b-5b49-4040-bff3-431b94bb8095"
               >How To: Run Partially Trusted Code in a Sandbox</a
             >
@@ -107,8 +104,7 @@
 
           
 
-           is not a valid <see
-           cref="T:System.Security.Permissions.PermissionState" />
+           is not a valid <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -121,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.EnvironmentPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.EnvironmentPermission" />
 
             
 
@@ -130,12 +125,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -175,8 +173,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -189,8 +186,7 @@
 
             
 
-             specifies a value not defined in <see
-             cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
+             specifies a value not defined in <see cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
 
             
 
@@ -200,13 +196,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor allows only one of the <see
-             cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
+            >This constructor allows only one of the <see cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
 
             
 
-             values to be specified. This access applies to all listed environment variables. Use <see
-             cref="M:System.Security.Permissions.EnvironmentPermission.AddPathList(System.Security.Permissions.EnvironmentPermissionAccess,System.String)" />
+             values to be specified. This access applies to all listed environment variables. Use <see cref="M:System.Security.Permissions.EnvironmentPermission.AddPathList(System.Security.Permissions.EnvironmentPermissionAccess,System.String)" />
 
             
 
@@ -216,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.EnvironmentPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.EnvironmentPermission" />
 
             
 
@@ -225,19 +218,26 @@
           >
         </summary>
         <param name="flag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
+          One of the <see cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
 
           
 
            values. </param
         >
         <param name="pathList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -278,19 +278,26 @@
           <para>Adds access for the specified environment variables to the existing state of the permission.</para>
         </summary>
         <param name="flag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
+          One of the <see cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
 
           
 
            values. </param
         >
         <param name="pathList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -363,8 +370,7 @@
         <remarks>
           <para
             >The state of the current instance is changed to the
- state encoded in <paramref
-             name="esd" />
+ state encoded in <paramref name="esd" />
 
             
 
@@ -372,8 +378,7 @@
           >
           <block subset="none" type="note">
             <para
-              >For the XML encoding for this class, see the <see
-               cref="T:System.Security.Permissions.EnvironmentPermission" />
+              >For the XML encoding for this class, see the <see cref="T:System.Security.Permissions.EnvironmentPermission" />
 
               
 
@@ -381,8 +386,7 @@
  page.</para
             >
             <para
-              >This method overrides <see
-               cref="M:System.Security.CodeAccessPermission.FromXml(System.Security.SecurityElement)" />
+              >This method overrides <see cref="M:System.Security.CodeAccessPermission.FromXml(System.Security.SecurityElement)" />
 
               
 
@@ -395,8 +399,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -408,16 +411,14 @@
 
             
 
-             does not contain the encoding for a <see
-             cref="T:System.Security.Permissions.EnvironmentPermission" />
+             does not contain the encoding for a <see cref="T:System.Security.Permissions.EnvironmentPermission" />
 
             
 
              instance.</para
           >
           <para
-            >The version number of <paramref
-             name="esd" />
+            >The version number of <paramref name="esd" />
 
             
 
@@ -429,7 +430,11 @@
           <para>Reconstructs a permission with a specified state from an XML encoding.</para>
         </summary>
         <param name="esd">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -465,38 +470,31 @@
           <para>Use this method to get the state of the current permission. To get both Read and Write access states requires two calls to this method.</para>
           <block subset="none" type="note">
             <para
-              >The <paramref
-               name="flag" />
+              >The <paramref name="flag" />
 
               
 
-               parameter is limited to the values of <see
-               cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
+               parameter is limited to the values of <see cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
 
               
 
-              , which represent single types of environment variable access. Those values are <see
-               cref="F:System.Security.Permissions.EnvironmentPermissionAccess.Read" />
+              , which represent single types of environment variable access. Those values are <see cref="F:System.Security.Permissions.EnvironmentPermissionAccess.Read" />
 
               
 
-               and <see
-               cref="F:System.Security.Permissions.EnvironmentPermissionAccess.Write" />
+               and <see cref="F:System.Security.Permissions.EnvironmentPermissionAccess.Write" />
 
               
 
-              . The values acceptable to <paramref
-               name="flag" />
+              . The values acceptable to <paramref name="flag" />
 
               
 
-               do not include <see
-               cref="F:System.Security.Permissions.EnvironmentPermissionAccess.NoAccess" />
+               do not include <see cref="F:System.Security.Permissions.EnvironmentPermissionAccess.NoAccess" />
 
               
 
-               and <see
-               cref="F:System.Security.Permissions.EnvironmentPermissionAccess.AllAccess" />
+               and <see cref="F:System.Security.Permissions.EnvironmentPermissionAccess.AllAccess" />
 
               
 
@@ -507,8 +505,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets all environment variables with the specified <see
-             cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
+            >Gets all environment variables with the specified <see cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
 
             
 
@@ -520,12 +517,15 @@
           <para>A list of environment variables (semicolon-separated) for the selected flag.</para>
         </returns>
         <param name="flag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
+          One of the <see cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
 
           
 
@@ -564,13 +564,11 @@
 
           
 
-           is not <see
-           langword="null" />
+           is not <see langword="null" />
 
           
 
-           and is not of type <see
-           cref="T:System.Security.Permissions.EnvironmentPermission" />
+           and is not of type <see cref="T:System.Security.Permissions.EnvironmentPermission" />
 
           
 
@@ -589,7 +587,11 @@
           <para>A new permission that represents the intersection of the current permission and the specified permission. This new permission is null if the intersection is empty.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -629,13 +631,11 @@
 
           
 
-           is not <see
-           langword="null" />
+           is not <see langword="null" />
 
           
 
-           and is not of type <see
-           cref="T:System.Security.Permissions.EnvironmentPermission" />
+           and is not of type <see cref="T:System.Security.Permissions.EnvironmentPermission" />
 
           
 
@@ -654,7 +654,11 @@
           <para>true if the current permission is a subset of the specified permission; otherwise, false.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -726,19 +730,26 @@
           <para>Sets the specified access to the specified environment variables to the existing state of the permission.</para>
         </summary>
         <param name="flag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
+          One of the <see cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
 
           
 
            values. </param
         >
         <param name="pathList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -795,8 +806,7 @@
         <remarks>
           <block subset="none" type="note">
             <para
-              >For the XML encoding for this class, see the <see
-               cref="T:System.Security.Permissions.EnvironmentPermission" />
+              >For the XML encoding for this class, see the <see cref="T:System.Security.Permissions.EnvironmentPermission" />
 
               
 
@@ -804,8 +814,7 @@
  page.</para
             >
             <para
-              >This method overrides <see
-               cref="M:System.Security.CodeAccessPermission.ToXml" />
+              >This method overrides <see cref="M:System.Security.CodeAccessPermission.ToXml" />
 
               
 
@@ -855,13 +864,11 @@
 
           
 
-           is not <see
-           langword="null" />
+           is not <see langword="null" />
 
           
 
-           and is not of type <see
-           cref="T:System.Security.Permissions.EnvironmentPermission" />
+           and is not of type <see cref="T:System.Security.Permissions.EnvironmentPermission" />
 
           
 
@@ -870,8 +877,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see
-             cref="M:System.Security.Permissions.EnvironmentPermission.Union(System.Security.IPermission)" />
+            >The result of a call to <see cref="M:System.Security.Permissions.EnvironmentPermission.Union(System.Security.IPermission)" />
 
             
 
@@ -887,7 +893,11 @@
           <para>A new permission that represents the union of the current permission and the specified permission.</para>
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

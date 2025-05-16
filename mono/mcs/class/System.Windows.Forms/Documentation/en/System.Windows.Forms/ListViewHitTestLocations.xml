@@ -18,13 +18,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.ListViewHitTestLocations" />
+        >The <see cref="T:System.Windows.Forms.ListViewHitTestLocations" />
 
         
 
-         enumeration is used by the <see
-         cref="T:System.Windows.Forms.ListViewHitTestInfo" />
+         enumeration is used by the <see cref="T:System.Windows.Forms.ListViewHitTestInfo" />
 
         
 
@@ -34,13 +32,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines constants that represent areas in a <see
-         cref="T:System.Windows.Forms.ListView" />
+        >Defines constants that represent areas in a <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         or <see
-         cref="T:System.Windows.Forms.ListViewItem" />
+         or <see cref="T:System.Windows.Forms.ListViewItem" />
 
         
 
@@ -60,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A position above the client portion of a <see
-             cref="T:System.Windows.Forms.ListView" />
+            >A position above the client portion of a <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -84,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A position below the client portion of a <see
-             cref="T:System.Windows.Forms.ListView" />
+            >A position below the client portion of a <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -108,13 +102,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A position within the bounds of an image contained in a <see
-             cref="T:System.Windows.Forms.ListView" />
+            >A position within the bounds of an image contained in a <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             or <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+             or <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -137,13 +129,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A position within the bounds of a text area contained in a <see
-             cref="T:System.Windows.Forms.ListView" />
+            >A position within the bounds of a text area contained in a <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             or <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+             or <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -166,8 +156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A position to the left of the client portion of a <see
-             cref="T:System.Windows.Forms.ListView" />
+            >A position to the left of the client portion of a <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -190,8 +179,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A position outside the bounds of a <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >A position outside the bounds of a <see cref="T:System.Windows.Forms.ListViewItem" />
           </para>
         </summary>
       </Docs>
@@ -210,8 +198,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A position to the right of the client portion of a <see
-             cref="T:System.Windows.Forms.ListView" />
+            >A position to the right of the client portion of a <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -234,8 +221,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A position within the bounds of an image associated with a <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >A position within the bounds of an image associated with a <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 

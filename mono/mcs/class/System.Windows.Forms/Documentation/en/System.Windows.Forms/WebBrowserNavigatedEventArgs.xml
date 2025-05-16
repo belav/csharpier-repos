@@ -17,43 +17,35 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Handle the <see
-         cref="E:System.Windows.Forms.WebBrowser.Navigated" />
+        >Handle the <see cref="E:System.Windows.Forms.WebBrowser.Navigated" />
 
         
 
-         event to receive notification when the <see
-         cref="T:System.Windows.Forms.WebBrowser" />
+         event to receive notification when the <see cref="T:System.Windows.Forms.WebBrowser" />
 
         
 
-         control has navigated to a new document. The <see
-         cref="T:System.Windows.Forms.WebBrowserNavigatedEventArgs" />
+         control has navigated to a new document. The <see cref="T:System.Windows.Forms.WebBrowserNavigatedEventArgs" />
 
         
 
-         object passed to the event handler lets you retrieve the location of the new document through the <see
-         cref="P:System.Windows.Forms.WebBrowserNavigatedEventArgs.Url" />
+         object passed to the event handler lets you retrieve the location of the new document through the <see cref="P:System.Windows.Forms.WebBrowserNavigatedEventArgs.Url" />
 
         
 
-         property. When the <see
-         cref="E:System.Windows.Forms.WebBrowser.Navigated" />
+         property. When the <see cref="E:System.Windows.Forms.WebBrowser.Navigated" />
 
         
 
-         event occurs, the new document has begun loading, which means you can access some of its content through the <see
-         cref="P:System.Windows.Forms.WebBrowser.Document" />
+         event occurs, the new document has begun loading, which means you can access some of its content through the <see cref="P:System.Windows.Forms.WebBrowser.Document" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.WebBrowser.DocumentText" />
+        , <see cref="P:System.Windows.Forms.WebBrowser.DocumentText" />
 
         
 
-        , or <see
-         cref="P:System.Windows.Forms.WebBrowser.DocumentStream" />
+        , or <see cref="P:System.Windows.Forms.WebBrowser.DocumentStream" />
 
         
 
@@ -63,8 +55,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.WebBrowser.Navigated" />
+        >Provides data for the <see cref="E:System.Windows.Forms.WebBrowser.Navigated" />
 
         
 
@@ -85,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.WebBrowserNavigatedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.WebBrowserNavigatedEventArgs" />
 
             
 
@@ -94,17 +84,19 @@
           >
         </summary>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Uri" />
+          A <see cref="T:System.Uri" />
 
           
 
-           representing the location of the document to which the <see
-           cref="T:System.Windows.Forms.WebBrowser" />
+           representing the location of the document to which the <see cref="T:System.Windows.Forms.WebBrowser" />
 
           
 
@@ -128,8 +120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the location of the document to which the <see
-             cref="T:System.Windows.Forms.WebBrowser" />
+            >Gets the location of the document to which the <see cref="T:System.Windows.Forms.WebBrowser" />
 
             
 

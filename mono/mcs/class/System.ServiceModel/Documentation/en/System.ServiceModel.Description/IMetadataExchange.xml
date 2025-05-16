@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When programming indigo1 services, it is useful to publish metadata about the service. For example, metadata can be a Web Services Description Language (WSDL) document that describes all of the methods and data types employed by a service. Returning metadata about an indigo2 service allows consumers of a service to easily create clients for the service. For more information about indigo2 metadata endpoints, see <format
-         type="text/html">
+        >When programming indigo1 services, it is useful to publish metadata about the service. For example, metadata can be a Web Services Description Language (WSDL) document that describes all of the methods and data types employed by a service. Returning metadata about an indigo2 service allows consumers of a service to easily create clients for the service. For more information about indigo2 metadata endpoints, see <format type="text/html">
           <a href="66a61bd0-18d3-4e7e-bf8b-177a10ac2f60">Metadata</a>
         </format>
 
@@ -29,29 +28,25 @@
         .</para
       >
       <para
-        >Services implemented using indigo2 publish metadata by exposing one or more metadata endpoints. Metadata endpoints in indigo2 have an address, a binding and a contract like any other endpoint.  The <see
-         cref="T:System.ServiceModel.Description.MetadataReference" />
+        >Services implemented using indigo2 publish metadata by exposing one or more metadata endpoints. Metadata endpoints in indigo2 have an address, a binding and a contract like any other endpoint.  The <see cref="T:System.ServiceModel.Description.MetadataReference" />
 
         
 
          interface specifies the service contract implemented by all metadata endpoints in indigo2.</para
       >
       <para
-        >There is no need to implement the <see
-         cref="T:System.ServiceModel.Description.MetadataReference" />
+        >There is no need to implement the <see cref="T:System.ServiceModel.Description.MetadataReference" />
 
         
 
-         contract in your service implementation.  Instead, add the <see
-         cref="T:System.ServiceModel.Description.ServiceMetadataBehavior" />
+         contract in your service implementation.  Instead, add the <see cref="T:System.ServiceModel.Description.ServiceMetadataBehavior" />
 
         
 
          to the service description. </para
       >
       <para
-        >Or, when using configuration, set the contract attribute of the endpoint element to IMetadataExchange. For an example, see <format
-         type="text/html">
+        >Or, when using configuration, set the contract attribute of the endpoint element to IMetadataExchange. For an example, see <format type="text/html">
           <a href="f061443f-92df-4824-b36a-609c4cd14a17"
             >How to: Publish Metadata for a Service Using a Configuration File</a
           >
@@ -62,8 +57,7 @@
         .</para
       >
       <para
-        >For details on publishing metadata in indigo2 see <format
-         type="text/html">
+        >For details on publishing metadata in indigo2 see <format type="text/html">
           <a href="3a56831a-cabc-45c0-bd02-12e2e9bd7313">Publishing Metadata</a>
         </format>
 
@@ -113,13 +107,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
-             that can be passed to the <see
-             cref="M:System.ServiceModel.Description.IMetadataExchange.EndGet(System.IAsyncResult)" />
+             that can be passed to the <see cref="M:System.ServiceModel.Description.IMetadataExchange.EndGet(System.IAsyncResult)" />
 
             
 
@@ -127,31 +119,41 @@
           >
         </returns>
         <param name="request">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ServiceModel.Channels.Message" />
+          A <see cref="T:System.ServiceModel.Channels.Message" />
 
           
 
            that should be processed to determine the metadata to return.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            that points to the method that will process the metadata.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -187,8 +189,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Channels.Message" />
+            >A <see cref="T:System.ServiceModel.Channels.Message" />
 
             
 
@@ -196,12 +197,15 @@
           >
         </returns>
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IAsyncResult" />
+          An <see cref="T:System.IAsyncResult" />
 
           
 
@@ -242,8 +246,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Channels.Message" />
+            >A <see cref="T:System.ServiceModel.Channels.Message" />
 
             
 
@@ -251,12 +254,15 @@
           >
         </returns>
         <param name="request">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ServiceModel.Channels.Message" />
+          A <see cref="T:System.ServiceModel.Channels.Message" />
 
           
 

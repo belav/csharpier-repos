@@ -31,13 +31,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A designer verb is a menu command linked to an event handler. Designer verbs are added to a component's shortcut menu at design time. In Visual Studio, each designer verb is also listed, using a <see
-         cref="T:System.Windows.Forms.LinkLabel" />
+        >A designer verb is a menu command linked to an event handler. Designer verbs are added to a component's shortcut menu at design time. In Visual Studio, each designer verb is also listed, using a <see cref="T:System.Windows.Forms.LinkLabel" />
 
         
 
-        , in the <ui
-        >Description</ui>
+        , in the <ui>Description</ui>
 
         
 
@@ -78,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignerVerb" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
             
 
@@ -87,14 +84,22 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text of the menu command that is shown to the user. </param
         >
         <param name="handler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -131,8 +136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignerVerb" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
             
 
@@ -140,21 +144,33 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text of the menu command that is shown to the user. </param
         >
         <param name="handler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The event handler that performs the actions of the verb. </param
         >
         <param name="startCommandID">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -224,8 +240,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides <see
-             cref="M:System.Object.ToString" />
+            >Overrides <see cref="M:System.Object.ToString" />
 
             
 

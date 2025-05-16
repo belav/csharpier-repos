@@ -24,18 +24,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The default is the name of the property or event. The default implementation of <see
-         cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+        >The default is the name of the property or event. The default implementation of <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
 
         
 
-         uses reflection to search the public properties and public void methods that take no arguments. <see
-         cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+         uses reflection to search the public properties and public void methods that take no arguments. <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
 
         
 
-         searches for the <see
-         cref="T:System.ComponentModel.DisplayNameAttribute" />
+         searches for the <see cref="T:System.ComponentModel.DisplayNameAttribute" />
 
         
 
@@ -66,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DisplayNameAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DisplayNameAttribute" />
 
             
 
@@ -96,8 +92,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DisplayNameAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DisplayNameAttribute" />
 
             
 
@@ -105,7 +100,11 @@
           >
         </summary>
         <param name="displayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -136,8 +135,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the default value for the <see
-             cref="T:System.ComponentModel.DisplayNameAttribute" />
+            >Specifies the default value for the <see cref="T:System.ComponentModel.DisplayNameAttribute" />
 
             
 
@@ -211,8 +209,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether two <see
-             cref="T:System.ComponentModel.DisplayNameAttribute" />
+            >Determines whether two <see cref="T:System.ComponentModel.DisplayNameAttribute" />
 
             
 
@@ -224,12 +221,15 @@
           <para>true if the value of the given object is equal to that of the current object; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.DisplayNameAttribute" />
+          The <see cref="T:System.ComponentModel.DisplayNameAttribute" />
 
           
 
@@ -262,8 +262,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.ComponentModel.DisplayNameAttribute" />
+            >A hash code for the current <see cref="T:System.ComponentModel.DisplayNameAttribute" />
 
             
 

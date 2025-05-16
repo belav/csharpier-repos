@@ -11,26 +11,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.IDataSourceFieldSchema" />
+        >The <see cref="T:System.Web.UI.Design.IDataSourceFieldSchema" />
 
         
 
-         interface allows a class to implement a set of properties that describe a field in a data source. The <see
-         cref="T:System.Web.UI.Design.DataSetFieldSchema" />
+         interface allows a class to implement a set of properties that describe a field in a data source. The <see cref="T:System.Web.UI.Design.DataSetFieldSchema" />
 
         
 
-         class implements the <see
-         cref="T:System.Web.UI.Design.IDataSourceFieldSchema" />
+         class implements the <see cref="T:System.Web.UI.Design.IDataSourceFieldSchema" />
 
         
 
          interface.</para
       >
       <para
-        >Classes that implement the <see
-         cref="T:System.Web.UI.Design.IDataSourceFieldSchema" />
+        >Classes that implement the <see cref="T:System.Web.UI.Design.IDataSourceFieldSchema" />
 
         
 
@@ -74,18 +70,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a <see
-             cref="T:System.Data.DataColumn" />
+            >For a <see cref="T:System.Data.DataColumn" />
 
             
 
-             object, the <see
-             cref="P:System.Web.UI.Design.IDataSourceFieldSchema.Identity" />
+             object, the <see cref="P:System.Web.UI.Design.IDataSourceFieldSchema.Identity" />
 
             
 
-             property corresponds to the <see
-             cref="P:System.Data.DataColumn.AutoIncrement" />
+             property corresponds to the <see cref="P:System.Data.DataColumn.AutoIncrement" />
 
             
 
@@ -113,18 +106,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a <see
-             cref="T:System.Data.DataColumn" />
+            >For a <see cref="T:System.Data.DataColumn" />
 
             
 
-            , the <see
-             cref="P:System.Web.UI.Design.IDataSourceFieldSchema.IsReadOnly" />
+            , the <see cref="P:System.Web.UI.Design.IDataSourceFieldSchema.IsReadOnly" />
 
             
 
-             property corresponds to the <see
-             cref="P:System.Data.DataColumn.ReadOnly" />
+             property corresponds to the <see cref="P:System.Data.DataColumn.ReadOnly" />
 
             
 
@@ -152,18 +142,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a <see
-             cref="T:System.Data.DataColumn" />
+            >For a <see cref="T:System.Data.DataColumn" />
 
             
 
-             object, the <see
-             cref="P:System.Web.UI.Design.IDataSourceFieldSchema.IsUnique" />
+             object, the <see cref="P:System.Web.UI.Design.IDataSourceFieldSchema.IsUnique" />
 
             
 
-             property corresponds to the <see
-             cref="P:System.Data.DataColumn.Unique" />
+             property corresponds to the <see cref="P:System.Data.DataColumn.Unique" />
 
             
 
@@ -191,18 +178,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a <see
-             cref="T:System.Data.DataColumn" />
+            >For a <see cref="T:System.Data.DataColumn" />
 
             
 
-             object, the <see
-             cref="P:System.Web.UI.Design.IDataSourceFieldSchema.Length" />
+             object, the <see cref="P:System.Web.UI.Design.IDataSourceFieldSchema.Length" />
 
             
 
-             property corresponds to the <see
-             cref="P:System.Data.DataColumn.MaxLength" />
+             property corresponds to the <see cref="P:System.Data.DataColumn.MaxLength" />
 
             
 
@@ -230,18 +214,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a <see
-             cref="T:System.Data.DataColumn" />
+            >For a <see cref="T:System.Data.DataColumn" />
 
             
 
-            object, the <see
-             cref="P:System.Web.UI.Design.IDataSourceFieldSchema.Name" />
+            object, the <see cref="P:System.Web.UI.Design.IDataSourceFieldSchema.Name" />
 
             
 
-             property corresponds to the <see
-             cref="P:System.Data.DataColumn.ColumnName" />
+             property corresponds to the <see cref="P:System.Data.DataColumn.ColumnName" />
 
             
 
@@ -269,18 +250,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a <see
-             cref="T:System.Data.DataColumn" />
+            >For a <see cref="T:System.Data.DataColumn" />
 
             
 
-             object, the <see
-             cref="P:System.Web.UI.Design.IDataSourceFieldSchema.Nullable" />
+             object, the <see cref="P:System.Web.UI.Design.IDataSourceFieldSchema.Nullable" />
 
             
 
-             property corresponds to the <see
-             cref="P:System.Data.DataColumn.AllowDBNull" />
+             property corresponds to the <see cref="P:System.Data.DataColumn.AllowDBNull" />
 
             
 

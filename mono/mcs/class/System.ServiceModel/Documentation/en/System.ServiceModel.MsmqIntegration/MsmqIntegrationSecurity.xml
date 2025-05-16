@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurity" />
+        >The <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurity" />
 
         
 
@@ -50,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurity" />
+            >Initializes a new instance of <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurity" />
 
             
 
@@ -85,18 +83,15 @@
 
             
 
-             is an enumeration that contains the following values: <see
-             cref="F:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode.None" />
+             is an enumeration that contains the following values: <see cref="F:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode.None" />
 
             
 
-             and <see
-             cref="F:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode.Transport" />
+             and <see cref="F:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode.Transport" />
 
             
 
-            . The default value is <see
-             cref="F:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode.Transport" />
+            . The default value is <see cref="F:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode.Transport" />
 
             
 
@@ -106,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode" />
+            >Gets or sets the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode" />
 
             
 
@@ -141,8 +135,7 @@
 
             
 
-             encapsulates the security settings for the Message Queuing integration transport. The settings are the same for both the Message Queuing integration and queued transports. <see
-             cref="T:System.ServiceModel.MsmqTransportSecurity" />
+             encapsulates the security settings for the Message Queuing integration transport. The settings are the same for both the Message Queuing integration and queued transports. <see cref="T:System.ServiceModel.MsmqTransportSecurity" />
 
             
 
@@ -152,8 +145,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.MsmqTransportSecurity" />
+            >Gets the <see cref="T:System.ServiceModel.MsmqTransportSecurity" />
 
             
 

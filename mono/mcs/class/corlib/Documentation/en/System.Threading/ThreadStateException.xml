@@ -36,8 +36,7 @@
     <example>
       <para
         >The following example demonstrates an error that causes
- a <see
-         cref="T:System.Threading.ThreadStateException" />
+ a <see cref="T:System.Threading.ThreadStateException" />
 
         
 
@@ -80,18 +79,15 @@ class ThreadStateTest{
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Once a thread is created, it is in at least one of the <see
-         cref="T:System.Threading.ThreadState" />
+        >Once a thread is created, it is in at least one of the <see cref="T:System.Threading.ThreadState" />
 
         
 
-         states until it terminates. ThreadStateException is thrown by methods that cannot perform the requested operation due to the current state of a thread. For example, trying to restart an aborted thread by calling <see
-         cref="M:System.Threading.Thread.Start" />
+         states until it terminates. ThreadStateException is thrown by methods that cannot perform the requested operation due to the current state of a thread. For example, trying to restart an aborted thread by calling <see cref="M:System.Threading.Thread.Start" />
 
         
 
-         on a thread that has terminated throws a <see
-         cref="T:System.Threading.ThreadStateException" />
+         on a thread that has terminated throws a <see cref="T:System.Threading.ThreadStateException" />
 
         
 
@@ -105,13 +101,11 @@ class ThreadStateTest{
          uses the HRESULT COR_E_THREADSTATE, which has the value 0x80131520.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Threading.ThreadStateException" />
+        >For a list of initial property values for an instance of <see cref="T:System.Threading.ThreadStateException" />
 
         
 
-        , see the <see
-         cref="M:System.Threading.ThreadStateException.#ctor" />
+        , see the <see cref="M:System.Threading.ThreadStateException.#ctor" />
 
         
 
@@ -121,13 +115,11 @@ class ThreadStateTest{
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The exception that is thrown when a <see
-         cref="T:System.Threading.Thread" />
+        >The exception that is thrown when a <see cref="T:System.Threading.Thread" />
 
         
 
-         is in an invalid <see
-         cref="P:System.Threading.Thread.ThreadState" />
+         is in an invalid <see cref="P:System.Threading.Thread.ThreadState" />
 
         
 
@@ -159,8 +151,7 @@ class ThreadStateTest{
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor initializes the Message property of the new instance to a system-supplied message that describes the error, such as "The requested operation cannot be performed on the thread due to its current state." This message takes into account the current system culture.</para>
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Threading.ThreadStateException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Threading.ThreadStateException" />
 
             
 
@@ -202,8 +193,7 @@ class ThreadStateTest{
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.ThreadStateException" />
+            >Initializes a new instance of the <see cref="T:System.Threading.ThreadStateException" />
 
             
 
@@ -237,16 +227,14 @@ class ThreadStateTest{
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the Message property of the new instance using the <paramref
-             name="message" />
+            >This constructor initializes the Message property of the new instance using the <paramref name="message" />
 
             
 
              parameter.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Threading.ThreadStateException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Threading.ThreadStateException" />
 
             
 
@@ -288,8 +276,7 @@ class ThreadStateTest{
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.ThreadStateException" />
+            >Initializes a new instance of the <see cref="T:System.Threading.ThreadStateException" />
 
             
 
@@ -297,7 +284,11 @@ class ThreadStateTest{
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -329,8 +320,7 @@ class ThreadStateTest{
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format
-             type="text/html">
+            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format type="text/html">
               <a href="832AC524-21BC-419A-A27B-CA8BFC45840F"
                 >[&lt;topic://cpconSerialization&gt;]</a
               >
@@ -344,8 +334,7 @@ class ThreadStateTest{
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.ThreadStateException" />
+            >Initializes a new instance of the <see cref="T:System.Threading.ThreadStateException" />
 
             
 
@@ -353,24 +342,30 @@ class ThreadStateTest{
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -406,26 +401,22 @@ class ThreadStateTest{
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Threading.ThreadStateException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Threading.ThreadStateException" />
 
             
 
@@ -467,8 +458,7 @@ class ThreadStateTest{
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.ThreadStateException" />
+            >Initializes a new instance of the <see cref="T:System.Threading.ThreadStateException" />
 
             
 
@@ -476,19 +466,26 @@ class ThreadStateTest{
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 

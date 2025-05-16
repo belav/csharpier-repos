@@ -24,25 +24,21 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Security.UrlAuthorizationModule" />
+        >The <see cref="T:System.Web.Security.UrlAuthorizationModule" />
 
         
 
-         determines whether the current user is permitted access to the requested URL, based on the user <see
-         cref="P:System.Security.Principal.IIdentity.Name" />
+         determines whether the current user is permitted access to the requested URL, based on the user <see cref="P:System.Security.Principal.IIdentity.Name" />
 
         
 
-         or the list of roles that a user is a member of. For information about how the user name is determined, see <format
-         type="text/html">
+         or the list of roles that a user is a member of. For information about how the user name is determined, see <format type="text/html">
           <a href="fc10b0ef-4ce4-4a7f-9174-886325221ee1">ASP.NET Authentication</a>
         </format>
 
         
 
-        . For information about how to manage user roles, see <format
-         type="text/html">
+        . For information about how to manage user roles, see <format type="text/html">
           <a href="01954ce4-39a2-487f-8153-a69f6f6f3195"
             >Managing Authorization Using ASP.NET Roles</a
           >
@@ -53,20 +49,17 @@
         .</para
       >
       <para
-        >Authorization for a user or a role is managed using the <format
-         type="text/html">
+        >Authorization for a user or a role is managed using the <format type="text/html">
           <a href="2d3d9bf6-f914-4c30-ad03-32eea98fa612">authorization</a>
         </format>
 
         
 
-         configuration element. You can allow or deny a user or a role using the allow or deny subelements, respectively. The allow and deny subelements are interpreted in the order they appear in the configuration. Once an element specifies that access is allowed or denied, the <see
-         cref="T:System.Web.Security.UrlAuthorizationModule" />
+         configuration element. You can allow or deny a user or a role using the allow or deny subelements, respectively. The allow and deny subelements are interpreted in the order they appear in the configuration. Once an element specifies that access is allowed or denied, the <see cref="T:System.Web.Security.UrlAuthorizationModule" />
 
         
 
-         completes its authorization check. For example, the following <format
-         type="text/html">
+         completes its authorization check. For example, the following <format type="text/html">
           <a href="2d3d9bf6-f914-4c30-ad03-32eea98fa612">authorization</a>
         </format>
 
@@ -97,18 +90,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor is not intended to be called from application code.</para>
           <para
-            >ASP.NET calls this constructor to create an instance of the <see
-             cref="T:System.Web.Security.UrlAuthorizationModule" />
+            >ASP.NET calls this constructor to create an instance of the <see cref="T:System.Web.Security.UrlAuthorizationModule" />
 
             
 
-             class. After calling the constructor, it calls the <see
-             cref="M:System.Web.Security.UrlAuthorizationModule.Init(System.Web.HttpApplication)" />
+             class. After calling the constructor, it calls the <see cref="M:System.Web.Security.UrlAuthorizationModule.Init(System.Web.HttpApplication)" />
 
             
 
-             method to initialize the new <see
-             cref="T:System.Web.Security.UrlAuthorizationModule" />
+             method to initialize the new <see cref="T:System.Web.Security.UrlAuthorizationModule" />
 
             
 
@@ -118,8 +108,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Web.Security.UrlAuthorizationModule" />
+            >Creates an instance of the <see cref="T:System.Web.Security.UrlAuthorizationModule" />
 
             
 
@@ -153,29 +142,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Security.UrlAuthorizationModule.CheckUrlAccessForPrincipal(System.String,System.Security.Principal.IPrincipal,System.String)" />
+            >The <see cref="M:System.Web.Security.UrlAuthorizationModule.CheckUrlAccessForPrincipal(System.String,System.Security.Principal.IPrincipal,System.String)" />
 
             
 
              method checks to see whether the current user is granted access to the requested file in the Web.config file for the application.</para
           >
           <para
-            >If the HTTP verb used to make the request is GET, POST, or HEAD, the <see
-             cref="M:System.Web.Security.UrlAuthorizationModule.CheckUrlAccessForPrincipal(System.String,System.Security.Principal.IPrincipal,System.String)" />
+            >If the HTTP verb used to make the request is GET, POST, or HEAD, the <see cref="M:System.Web.Security.UrlAuthorizationModule.CheckUrlAccessForPrincipal(System.String,System.Security.Principal.IPrincipal,System.String)" />
 
             
 
-             method checks for read access to the file. If any other verb is used, the <see
-             cref="M:System.Web.Security.UrlAuthorizationModule.CheckUrlAccessForPrincipal(System.String,System.Security.Principal.IPrincipal,System.String)" />
+             method checks for read access to the file. If any other verb is used, the <see cref="M:System.Web.Security.UrlAuthorizationModule.CheckUrlAccessForPrincipal(System.String,System.Security.Principal.IPrincipal,System.String)" />
 
             
 
              checks for read/write access to the file.</para
           >
           <para
-            >For more information and an example Web.config file, see the <see
-             cref="T:System.Web.Security.UrlAuthorizationModule" />
+            >For more information and an example Web.config file, see the <see cref="T:System.Web.Security.UrlAuthorizationModule" />
 
             
 
@@ -191,26 +176,37 @@
           <para>true if the current user can access the file; otherwise, false.</para>
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The virtual path to the file.</param
         >
         <param name="user">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Principal.IPrincipal" />
+          An <see cref="T:System.Security.Principal.IPrincipal" />
 
           
 
            object representing the current user.</param
         >
         <param name="verb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -233,8 +229,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources, other than memory, used by the <see
-             cref="T:System.Web.Security.UrlAuthorizationModule" />
+            >Releases all resources, other than memory, used by the <see cref="T:System.Web.Security.UrlAuthorizationModule" />
 
             
 
@@ -261,18 +256,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is not intended to be called from application code.</para>
           <para
-            >The <see
-             cref="M:System.Web.Security.UrlAuthorizationModule.Init(System.Web.HttpApplication)" />
+            >The <see cref="M:System.Web.Security.UrlAuthorizationModule.Init(System.Web.HttpApplication)" />
 
             
 
-             method ensures that the <see
-             cref="T:System.Web.Security.UrlAuthorizationModule" />
+             method ensures that the <see cref="T:System.Web.Security.UrlAuthorizationModule" />
 
             
 
-             is included in the processing of the <see
-             cref="E:System.Web.HttpApplication.AuthorizeRequest" />
+             is included in the processing of the <see cref="E:System.Web.HttpApplication.AuthorizeRequest" />
 
             
 
@@ -282,8 +274,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the <see
-             cref="T:System.Web.Security.UrlAuthorizationModule" />
+            >Initializes the <see cref="T:System.Web.Security.UrlAuthorizationModule" />
 
             
 
@@ -291,12 +282,15 @@
           >
         </summary>
         <param name="app">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The current <see
-           cref="T:System.Web.HttpApplication" />
+          The current <see cref="T:System.Web.HttpApplication" />
 
           
 

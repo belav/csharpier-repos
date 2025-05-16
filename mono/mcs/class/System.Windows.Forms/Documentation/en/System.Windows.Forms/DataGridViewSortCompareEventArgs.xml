@@ -20,81 +20,66 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can handle the <see
-         cref="E:System.Windows.Forms.DataGridView.SortCompare" />
+        >You can handle the <see cref="E:System.Windows.Forms.DataGridView.SortCompare" />
 
         
 
-         event to provide custom sorting. This event occurs only when the <see
-         cref="P:System.Windows.Forms.DataGridView.DataSource" />
+         event to provide custom sorting. This event occurs only when the <see cref="P:System.Windows.Forms.DataGridView.DataSource" />
 
         
 
-         property is not set and the <see
-         cref="P:System.Windows.Forms.DataGridView.VirtualMode" />
+         property is not set and the <see cref="P:System.Windows.Forms.DataGridView.VirtualMode" />
 
         
 
-         property is set to false. This event occurs once for each pair of cells in the column being sorted. It occurs only when the user clicks the header of a column with a <see
-         cref="P:System.Windows.Forms.DataGridViewColumn.SortMode" />
+         property is set to false. This event occurs once for each pair of cells in the column being sorted. It occurs only when the user clicks the header of a column with a <see cref="P:System.Windows.Forms.DataGridViewColumn.SortMode" />
 
         
 
-         property value of <see
-         cref="F:System.Windows.Forms.DataGridViewColumnSortMode.Automatic" />
+         property value of <see cref="F:System.Windows.Forms.DataGridViewColumnSortMode.Automatic" />
 
         
 
-        , or when you call the <see
-         cref="M:System.Windows.Forms.DataGridView.Sort(System.Windows.Forms.DataGridViewColumn,System.ComponentModel.ListSortDirection)" />
+        , or when you call the <see cref="M:System.Windows.Forms.DataGridView.Sort(System.Windows.Forms.DataGridViewColumn,System.ComponentModel.ListSortDirection)" />
 
         
 
-         overload. When this event occurs for a column with a <see
-         cref="P:System.Windows.Forms.DataGridViewColumn.SortMode" />
+         overload. When this event occurs for a column with a <see cref="P:System.Windows.Forms.DataGridViewColumn.SortMode" />
 
         
 
-         property value of <see
-         cref="F:System.Windows.Forms.DataGridViewColumnSortMode.Programmatic" />
+         property value of <see cref="F:System.Windows.Forms.DataGridViewColumnSortMode.Programmatic" />
 
         
 
-        , you must display the sorting glyph yourself through the <see
-         cref="P:System.Windows.Forms.DataGridViewColumnHeaderCell.SortGlyphDirection" />
+        , you must display the sorting glyph yourself through the <see cref="P:System.Windows.Forms.DataGridViewColumnHeaderCell.SortGlyphDirection" />
 
         
 
          property.</para
       >
       <para
-        >You can use this event to sort rows using the cell values in one column or in multiple columns. Use the <see
-         cref="P:System.Windows.Forms.DataGridViewSortCompareEventArgs.CellValue1" />
+        >You can use this event to sort rows using the cell values in one column or in multiple columns. Use the <see cref="P:System.Windows.Forms.DataGridViewSortCompareEventArgs.CellValue1" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.DataGridViewSortCompareEventArgs.CellValue2" />
+         and <see cref="P:System.Windows.Forms.DataGridViewSortCompareEventArgs.CellValue2" />
 
         
 
-         properties to compare cell values in the column specified in the <see
-         cref="P:System.Windows.Forms.DataGridViewSortCompareEventArgs.Column" />
+         properties to compare cell values in the column specified in the <see cref="P:System.Windows.Forms.DataGridViewSortCompareEventArgs.Column" />
 
         
 
-         property. Use the <see
-         cref="P:System.Windows.Forms.DataGridViewSortCompareEventArgs.RowIndex1" />
+         property. Use the <see cref="P:System.Windows.Forms.DataGridViewSortCompareEventArgs.RowIndex1" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.DataGridViewSortCompareEventArgs.RowIndex2" />
+         and <see cref="P:System.Windows.Forms.DataGridViewSortCompareEventArgs.RowIndex2" />
 
         
 
-         properties to access values in other columns through the <see
-         cref="P:System.Windows.Forms.DataGridView.Rows" />
+         properties to access values in other columns through the <see cref="P:System.Windows.Forms.DataGridView.Rows" />
 
         
 
@@ -104,8 +89,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.DataGridView.SortCompare" />
+        >Provides data for the <see cref="E:System.Windows.Forms.DataGridView.SortCompare" />
 
         
 
@@ -133,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewSortCompareEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewSortCompareEventArgs" />
 
             
 
@@ -142,35 +125,55 @@
           >
         </summary>
         <param name="dataGridViewColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The column to sort.</param
         >
         <param name="cellValue1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value of the first cell to compare.</param
         >
         <param name="cellValue2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value of the second cell to compare.</param
         >
         <param name="rowIndex1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index of the row containing the first cell.</param
         >
         <param name="rowIndex2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -193,8 +196,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is typically used in conjunction with the <see
-             cref="P:System.Windows.Forms.DataGridViewSortCompareEventArgs.CellValue2" />
+            >This property is typically used in conjunction with the <see cref="P:System.Windows.Forms.DataGridViewSortCompareEventArgs.CellValue2" />
 
             
 
@@ -222,8 +224,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is typically used in conjunction with the <see
-             cref="P:System.Windows.Forms.DataGridViewSortCompareEventArgs.CellValue1" />
+            >This property is typically used in conjunction with the <see cref="P:System.Windows.Forms.DataGridViewSortCompareEventArgs.CellValue1" />
 
             
 
@@ -320,13 +321,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting this value is typically the last operation you will perform in a handler for the <see
-             cref="E:System.Windows.Forms.DataGridView.SortCompare" />
+            >Setting this value is typically the last operation you will perform in a handler for the <see cref="E:System.Windows.Forms.DataGridView.SortCompare" />
 
             
 
-             event. You will typically set this value to the return value of a comparison method such as <see
-             cref="Overload:System.String.Compare" />
+             event. You will typically set this value to the return value of a comparison method such as <see cref="Overload:System.String.Compare" />
 
             
 

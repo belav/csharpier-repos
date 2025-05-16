@@ -14,29 +14,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.TreeNodeEventArgs" />
+        >The <see cref="T:System.Web.UI.WebControls.TreeNodeEventArgs" />
 
         
 
          class is used to store the event data that is passed to an event-handling method.</para
       >
       <para
-        >For a list of the initial property values for an instance of the <see
-         cref="T:System.Web.UI.WebControls.TreeNodeEventArgs" />
+        >For a list of the initial property values for an instance of the <see cref="T:System.Web.UI.WebControls.TreeNodeEventArgs" />
 
         
 
-         class, see <see
-         cref="M:System.Web.UI.WebControls.TreeNodeEventArgs.#ctor(System.Web.UI.WebControls.TreeNode)" />
+         class, see <see cref="M:System.Web.UI.WebControls.TreeNodeEventArgs.#ctor(System.Web.UI.WebControls.TreeNode)" />
 
         
 
         .</para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
 
@@ -48,33 +44,27 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Web.UI.WebControls.TreeView.TreeNodeCheckChanged" />
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.TreeView.TreeNodeCheckChanged" />
 
         
 
-        , <see
-         cref="E:System.Web.UI.WebControls.TreeView.TreeNodeCollapsed" />
+        , <see cref="E:System.Web.UI.WebControls.TreeView.TreeNodeCollapsed" />
 
         
 
-        , <see
-         cref="E:System.Web.UI.WebControls.TreeView.TreeNodeDataBound" />
+        , <see cref="E:System.Web.UI.WebControls.TreeView.TreeNodeDataBound" />
 
         
 
-        , <see
-         cref="E:System.Web.UI.WebControls.TreeView.TreeNodeExpanded" />
+        , <see cref="E:System.Web.UI.WebControls.TreeView.TreeNodeExpanded" />
 
         
 
-        , and <see
-         cref="E:System.Web.UI.WebControls.TreeView.TreeNodePopulate" />
+        , and <see cref="E:System.Web.UI.WebControls.TreeView.TreeNodePopulate" />
 
         
 
-         events of the <see
-         cref="T:System.Web.UI.WebControls.TreeView" />
+         events of the <see cref="T:System.Web.UI.WebControls.TreeView" />
 
         
 
@@ -97,13 +87,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.TreeNodeEventArgs.#ctor(System.Web.UI.WebControls.TreeNode)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.TreeNodeEventArgs.#ctor(System.Web.UI.WebControls.TreeNode)" />
 
             
 
-             constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.TreeNodeEventArgs" />
+             constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.TreeNodeEventArgs" />
 
             
 
@@ -111,8 +99,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.UI.WebControls.TreeNodeEventArgs.#ctor(System.Web.UI.WebControls.TreeNode)" />
+              >The <see cref="M:System.Web.UI.WebControls.TreeNodeEventArgs.#ctor(System.Web.UI.WebControls.TreeNode)" />
 
               
 
@@ -120,8 +107,7 @@
             >
           </block>
           <para
-            >The following table shows the initial property value for an instance of the <see
-             cref="T:System.Web.UI.WebControls.TreeNodeEventArgs" />
+            >The following table shows the initial property value for an instance of the <see cref="T:System.Web.UI.WebControls.TreeNodeEventArgs" />
 
             
 
@@ -146,13 +132,11 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Web.UI.WebControls.TreeNode" />
+                  >The <see cref="T:System.Web.UI.WebControls.TreeNode" />
 
                   
 
-                   contained in <paramref
-                   name="node" />
+                   contained in <paramref name="node" />
 
                   
 
@@ -165,13 +149,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.TreeNodeEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.TreeNodeEventArgs" />
 
             
 
-             class using the specified <see
-             cref="T:System.Web.UI.WebControls.TreeNode" />
+             class using the specified <see cref="T:System.Web.UI.WebControls.TreeNode" />
 
             
 
@@ -179,12 +161,15 @@
           >
         </summary>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.TreeNode" />
+          A <see cref="T:System.Web.UI.WebControls.TreeNode" />
 
           
 
@@ -210,18 +195,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TreeNodeEventArgs.Node" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TreeNodeEventArgs.Node" />
 
             
 
-             property to access the properties of the node that raised the event. The <see
-             cref="P:System.Web.UI.WebControls.TreeNodeEventArgs.Node" />
+             property to access the properties of the node that raised the event. The <see cref="P:System.Web.UI.WebControls.TreeNodeEventArgs.Node" />
 
             
 
-             property returns a <see
-             cref="T:System.Web.UI.WebControls.TreeNode" />
+             property returns a <see cref="T:System.Web.UI.WebControls.TreeNode" />
 
             
 

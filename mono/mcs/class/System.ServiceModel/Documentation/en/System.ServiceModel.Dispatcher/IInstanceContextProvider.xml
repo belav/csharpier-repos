@@ -17,31 +17,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implement the <see
-         cref="T:System.ServiceModel.Dispatcher.IInstanceContextProvider" />
+        >Implement the <see cref="T:System.ServiceModel.Dispatcher.IInstanceContextProvider" />
 
         
 
-         interface to provide the appropriate <see
-         cref="T:System.ServiceModel.InstanceContext" />
+         interface to provide the appropriate <see cref="T:System.ServiceModel.InstanceContext" />
 
         
 
          object to the system. Typically, this interface is implemented to support shared sessions, enable service instance pooling, control lifetimes of service instances, or to group contexts among clients.</para
       >
       <para
-        >For example, to implement sharing, insert a custom <see
-         cref="T:System.ServiceModel.Dispatcher.IInstanceContextProvider" />
+        >For example, to implement sharing, insert a custom <see cref="T:System.ServiceModel.Dispatcher.IInstanceContextProvider" />
 
         
 
-         to decide which session or call from a client is associated with which <see
-         cref="T:System.ServiceModel.InstanceContext" />
+         to decide which session or call from a client is associated with which <see cref="T:System.ServiceModel.InstanceContext" />
 
         
 
-         object. For an example that demonstrates the sharing of instance contexts, see <format
-         type="text/html">
+         object. For an example that demonstrates the sharing of instance contexts, see <format type="text/html">
           <a href="4a6a46d7-b7d7-4bb5-a0dd-03ffa3cbc230">InstanceContextSharing</a>
         </format>
 
@@ -51,18 +46,15 @@
       >
       <block subset="none" type="note">
         <para
-          >When an <see
-           cref="T:System.ServiceModel.Dispatcher.IInstanceContextProvider" />
+          >When an <see cref="T:System.ServiceModel.Dispatcher.IInstanceContextProvider" />
 
           
 
-           is inserted into indigo1, the normal property that controls the creation of <see
-           cref="T:System.ServiceModel.InstanceContext" />
+           is inserted into indigo1, the normal property that controls the creation of <see cref="T:System.ServiceModel.InstanceContext" />
 
           
 
-           objects (the <see
-           cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+           objects (the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
 
           
 
@@ -70,18 +62,15 @@
         >
       </block>
       <para
-        >A more generic mechanism by which you can initialize <see
-         cref="T:System.ServiceModel.InstanceContext" />
+        >A more generic mechanism by which you can initialize <see cref="T:System.ServiceModel.InstanceContext" />
 
         
 
-         objects when created (for example, to attach custom extensions to each <see
-         cref="T:System.ServiceModel.InstanceContext" />
+         objects when created (for example, to attach custom extensions to each <see cref="T:System.ServiceModel.InstanceContext" />
 
         
 
-        ) is the <see
-         cref="T:System.ServiceModel.Dispatcher.IInstanceContextInitializer" />
+        ) is the <see cref="T:System.ServiceModel.Dispatcher.IInstanceContextInitializer" />
 
         
 
@@ -91,8 +80,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implement to participate in the creation or choosing of a <see
-         cref="T:System.ServiceModel.InstanceContext" />
+        >Implement to participate in the creation or choosing of a <see cref="T:System.ServiceModel.InstanceContext" />
 
         
 
@@ -125,36 +113,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ServiceModel.Dispatcher.IInstanceContextProvider.GetExistingInstanceContext(System.ServiceModel.Channels.Message,System.ServiceModel.IContextChannel)" />
+            >The <see cref="M:System.ServiceModel.Dispatcher.IInstanceContextProvider.GetExistingInstanceContext(System.ServiceModel.Channels.Message,System.ServiceModel.IContextChannel)" />
 
             
 
-             method is called when a message is received. Return the <see
-             cref="T:System.ServiceModel.InstanceContext" />
+             method is called when a message is received. Return the <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
-             object that you want to process the message, or null. In the case of null, indigo2 creates a new <see
-             cref="T:System.ServiceModel.InstanceContext" />
+             object that you want to process the message, or null. In the case of null, indigo2 creates a new <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
-             object for the message and then calls the <see
-             cref="M:System.ServiceModel.Dispatcher.IInstanceContextProvider.InitializeInstanceContext(System.ServiceModel.InstanceContext,System.ServiceModel.Channels.Message,System.ServiceModel.IContextChannel)" />
+             object for the message and then calls the <see cref="M:System.ServiceModel.Dispatcher.IInstanceContextProvider.InitializeInstanceContext(System.ServiceModel.InstanceContext,System.ServiceModel.Channels.Message,System.ServiceModel.IContextChannel)" />
 
             
 
              method.</para
           >
           <para
-            >If you return null, the new <see
-             cref="T:System.ServiceModel.InstanceContext" />
+            >If you return null, the new <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
-             object goes through the throttling system and increments the count of <see
-             cref="P:System.ServiceModel.Dispatcher.ServiceThrottle.MaxConcurrentInstances" />
+             object goes through the throttling system and increments the count of <see cref="P:System.ServiceModel.Dispatcher.ServiceThrottle.MaxConcurrentInstances" />
 
             
 
@@ -168,13 +150,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.InstanceContext" />
+            >The <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
-             object that is used to process the message; return null to instruct indigo2 to create a new <see
-             cref="T:System.ServiceModel.InstanceContext" />
+             object that is used to process the message; return null to instruct indigo2 to create a new <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
@@ -182,14 +162,22 @@
           >
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The incoming message.</param
         >
         <param name="channel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -226,18 +214,15 @@
 
             
 
-             is called when <see
-             cref="M:System.ServiceModel.Dispatcher.IInstanceContextProvider.GetExistingInstanceContext(System.ServiceModel.Channels.Message,System.ServiceModel.IContextChannel)" />
+             is called when <see cref="M:System.ServiceModel.Dispatcher.IInstanceContextProvider.GetExistingInstanceContext(System.ServiceModel.Channels.Message,System.ServiceModel.IContextChannel)" />
 
             
 
-             returns null and a new <see
-             cref="T:System.ServiceModel.InstanceContext" />
+             returns null and a new <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
-             object is created. This method is called to notify you that a new <see
-             cref="T:System.ServiceModel.InstanceContext" />
+             object is created. This method is called to notify you that a new <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
@@ -247,8 +232,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Called when null is returned from the <see
-             cref="M:System.ServiceModel.Dispatcher.IInstanceContextProvider.GetExistingInstanceContext(System.ServiceModel.Channels.Message,System.ServiceModel.IContextChannel)" />
+            >Called when null is returned from the <see cref="M:System.ServiceModel.Dispatcher.IInstanceContextProvider.GetExistingInstanceContext(System.ServiceModel.Channels.Message,System.ServiceModel.IContextChannel)" />
 
             
 
@@ -256,26 +240,37 @@
           >
         </summary>
         <param name="instanceContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new <see
-           cref="T:System.ServiceModel.InstanceContext" />
+          The new <see cref="T:System.ServiceModel.InstanceContext" />
 
           
 
            object.</param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The incoming message.</param
         >
         <param name="channel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -310,16 +305,14 @@
 
             
 
-             is called when indigo2 is about to close and recycle an idle <see
-             cref="T:System.ServiceModel.InstanceContext" />
+             is called when indigo2 is about to close and recycle an idle <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
              object so that you can inform the runtime whether to continue doing so. </para
           >
           <para
-            >For an example that demonstrates the sharing of instance contexts, see <format
-             type="text/html">
+            >For an example that demonstrates the sharing of instance contexts, see <format type="text/html">
               <a href="4a6a46d7-b7d7-4bb5-a0dd-03ffa3cbc230">InstanceContextSharing</a>
             </format>
 
@@ -331,13 +324,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Called when all <see
-             cref="T:System.ServiceModel.InstanceContext" />
+            >Called when all <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
-             activities have completed to enable implementers to prevent the <see
-             cref="T:System.ServiceModel.InstanceContext" />
+             activities have completed to enable implementers to prevent the <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
@@ -347,13 +338,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if indigo1 is to close and recycle the <see
-             cref="T:System.ServiceModel.InstanceContext" />
+            >true if indigo1 is to close and recycle the <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
-             object and adjust the value of <see
-             cref="P:System.ServiceModel.Dispatcher.ServiceThrottle.MaxConcurrentInstances" />
+             object and adjust the value of <see cref="P:System.ServiceModel.Dispatcher.ServiceThrottle.MaxConcurrentInstances" />
 
             
 
@@ -361,12 +350,15 @@
           >
         </returns>
         <param name="instanceContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.InstanceContext" />
+          The <see cref="T:System.ServiceModel.InstanceContext" />
 
           
 
@@ -401,43 +393,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ServiceModel.Dispatcher.IInstanceContextProvider.NotifyIdle(System.ServiceModel.Dispatcher.InstanceContextIdleCallback,System.ServiceModel.InstanceContext)" />
+            >The <see cref="M:System.ServiceModel.Dispatcher.IInstanceContextProvider.NotifyIdle(System.ServiceModel.Dispatcher.InstanceContextIdleCallback,System.ServiceModel.InstanceContext)" />
 
             
 
-             method is called when the <see
-             cref="M:System.ServiceModel.Dispatcher.IInstanceContextProvider.IsIdle(System.ServiceModel.InstanceContext)" />
+             method is called when the <see cref="M:System.ServiceModel.Dispatcher.IInstanceContextProvider.IsIdle(System.ServiceModel.InstanceContext)" />
 
             
 
-             method returns false to enable you to provide indigo2 with a <see
-             cref="T:System.ServiceModel.Dispatcher.InstanceContextIdleCallback" />
+             method returns false to enable you to provide indigo2 with a <see cref="T:System.ServiceModel.Dispatcher.InstanceContextIdleCallback" />
 
             
 
-             object that you use to inform the runtime that the <see
-             cref="T:System.ServiceModel.InstanceContext" />
+             object that you use to inform the runtime that the <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
-             has finished its work. When the <see
-             cref="T:System.ServiceModel.Dispatcher.InstanceContextIdleCallback" />
+             has finished its work. When the <see cref="T:System.ServiceModel.Dispatcher.InstanceContextIdleCallback" />
 
             
 
-             object notifies the runtime that the <see
-             cref="T:System.ServiceModel.InstanceContext" />
+             object notifies the runtime that the <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
-             has finished its work, indigo2 calls <see
-             cref="M:System.ServiceModel.Dispatcher.IInstanceContextProvider.IsIdle(System.ServiceModel.InstanceContext)" />
+             has finished its work, indigo2 calls <see cref="M:System.ServiceModel.Dispatcher.IInstanceContextProvider.IsIdle(System.ServiceModel.InstanceContext)" />
 
             
 
-             once again. This cycle continues until <see
-             cref="M:System.ServiceModel.Dispatcher.IInstanceContextProvider.IsIdle(System.ServiceModel.InstanceContext)" />
+             once again. This cycle continues until <see cref="M:System.ServiceModel.Dispatcher.IInstanceContextProvider.IsIdle(System.ServiceModel.InstanceContext)" />
 
             
 
@@ -447,13 +431,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Called when the <see
-             cref="M:System.ServiceModel.Dispatcher.IInstanceContextProvider.IsIdle(System.ServiceModel.InstanceContext)" />
+            >Called when the <see cref="M:System.ServiceModel.Dispatcher.IInstanceContextProvider.IsIdle(System.ServiceModel.InstanceContext)" />
 
             
 
-             method returns false to enable implementers to provide a callback to notify indigo2 when the <see
-             cref="T:System.ServiceModel.InstanceContext" />
+             method returns false to enable implementers to provide a callback to notify indigo2 when the <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
@@ -461,29 +443,34 @@
           >
         </summary>
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Dispatcher.InstanceContextIdleCallback" />
+          The <see cref="T:System.ServiceModel.Dispatcher.InstanceContextIdleCallback" />
 
           
 
-           object that notifies indigo2 when the <see
-           cref="T:System.ServiceModel.InstanceContext" />
+           object that notifies indigo2 when the <see cref="T:System.ServiceModel.InstanceContext" />
 
           
 
            object is to be closed and recycled.</param
         >
         <param name="instanceContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The current <see
-           cref="T:System.ServiceModel.InstanceContext" />
+          The current <see cref="T:System.ServiceModel.InstanceContext" />
 
           
 

@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >If the specified peer resolver is unavailable, a <see
-         cref="T:System.InvalidOperationException" />
+        >If the specified peer resolver is unavailable, a <see cref="T:System.InvalidOperationException" />
 
         
 
@@ -47,13 +46,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If available, a custom resolver is used.  If one is unavailable, the PNRP peer resolver is used. A peer resolver is considered "available" if the <see
-             cref="P: System.ServiceModel.PeerResolvers.PeerCustomResolverSettings.Address" />
+            >If available, a custom resolver is used.  If one is unavailable, the PNRP peer resolver is used. A peer resolver is considered "available" if the <see cref="P: System.ServiceModel.PeerResolvers.PeerCustomResolverSettings.Address" />
 
             
 
-             and <see
-             cref="P:System.ServiceModel.PeerResolvers.PeerCustomResolverSettings.Binding" />
+             and <see cref="P:System.ServiceModel.PeerResolvers.PeerCustomResolverSettings.Binding" />
 
             
 

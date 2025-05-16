@@ -25,18 +25,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.XmlDocumentType" />
+        >The <see cref="T:System.Xml.XmlDocumentType" />
 
         
 
-         class can be used to return information about a document type declaration. Use the <see
-         cref="M:System.Xml.XmlDocument.CreateDocumentType(System.String,System.String,System.String,System.String)" />
+         class can be used to return information about a document type declaration. Use the <see cref="M:System.Xml.XmlDocument.CreateDocumentType(System.String,System.String,System.String,System.String)" />
 
         
 
-         method to create an <see
-         cref="T:System.Xml.XmlDocumentType" />
+         method to create an <see cref="T:System.Xml.XmlDocumentType" />
 
         
 
@@ -75,13 +72,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not instantiate an <see
-             cref="T:System.Xml.XmlDocumentType" />
+            >Do not instantiate an <see cref="T:System.Xml.XmlDocumentType" />
 
             
 
-             directly; instead, use members such as <see
-             cref="P:System.Xml.XmlDocument.DocumentType" />
+             directly; instead, use members such as <see cref="P:System.Xml.XmlDocument.DocumentType" />
 
             
 
@@ -91,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlDocumentType" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlDocumentType" />
 
             
 
@@ -100,55 +94,71 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The qualified name; see the <see
-           cref="P:System.Xml.XmlDocumentType.Name" />
+          The qualified name; see the <see cref="P:System.Xml.XmlDocumentType.Name" />
 
           
 
            property.</param
         >
         <param name="publicId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The public identifier; see the <see
-           cref="P:System.Xml.XmlDocumentType.PublicId" />
+          The public identifier; see the <see cref="P:System.Xml.XmlDocumentType.PublicId" />
 
           
 
            property.</param
         >
         <param name="systemId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The system identifier; see the <see
-           cref="P:System.Xml.XmlDocumentType.SystemId" />
+          The system identifier; see the <see cref="P:System.Xml.XmlDocumentType.SystemId" />
 
           
 
            property.</param
         >
         <param name="internalSubset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The DTD internal subset; see the <see
-           cref="P:System.Xml.XmlDocumentType.InternalSubset" />
+          The DTD internal subset; see the <see cref="P:System.Xml.XmlDocumentType.InternalSubset" />
 
           
 
            property.</param
         >
         <param name="doc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -181,16 +191,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method serves as a copy constructor for nodes. The cloned node has no parent (<see
-             cref="P:System.Xml.XmlNode.ParentNode" />
+            >This method serves as a copy constructor for nodes. The cloned node has no parent (<see cref="P:System.Xml.XmlNode.ParentNode" />
 
             
 
              returns null).</para
           >
           <para
-            >To see how this method behaves with other node types, see <see
-             cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />
+            >To see how this method behaves with other node types, see <see cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />
 
             
 
@@ -206,7 +214,11 @@
           <para>The cloned node.</para>
         </returns>
         <param name="deep">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -238,8 +250,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of <see
-             cref="T:System.Xml.XmlEntity" />
+            >Gets the collection of <see cref="T:System.Xml.XmlEntity" />
 
             
 
@@ -388,8 +399,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of <see
-             cref="T:System.Xml.XmlNotation" />
+            >Gets the collection of <see cref="T:System.Xml.XmlNotation" />
 
             
 
@@ -466,8 +476,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves all the children of the node to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Saves all the children of the node to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -475,7 +484,11 @@
           >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -509,8 +522,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the node to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Saves the node to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -518,7 +530,11 @@
           >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

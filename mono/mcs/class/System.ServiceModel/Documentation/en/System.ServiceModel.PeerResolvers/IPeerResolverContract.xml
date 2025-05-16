@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implementors of custom peer resolver services should consider deriving from the base <see
-         cref="T:System.ServiceModel.PeerResolvers.CustomPeerResolverService" />
+        >Implementors of custom peer resolver services should consider deriving from the base <see cref="T:System.ServiceModel.PeerResolvers.CustomPeerResolverService" />
       </para>
       <para>type and overriding the virtual methods defined on it.</para>
     </remarks>
@@ -101,8 +100,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A "refresh" of an entry is implemented by updating the supplied entry's expiry timestamp. All information used to uniquely identify the entry must be supplied in the <see
-             cref="T:System.ServiceModel.PeerResolvers.RefreshInfo" />
+            >A "refresh" of an entry is implemented by updating the supplied entry's expiry timestamp. All information used to uniquely identify the entry must be supplied in the <see cref="T:System.ServiceModel.PeerResolvers.RefreshInfo" />
 
             
 
@@ -223,8 +221,7 @@
 
             
 
-             that contains the endpoints for the registration entry in the lookup table that matches the information supplied in the <paramref
-             name="resolveInfo" />
+             that contains the endpoints for the registration entry in the lookup table that matches the information supplied in the <paramref name="resolveInfo" />
 
             
 

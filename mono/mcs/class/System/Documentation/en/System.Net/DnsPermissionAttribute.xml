@@ -40,26 +40,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The security information declared by <see
-         cref="T:System.Net.DnsPermissionAttribute" />
+        >The security information declared by <see cref="T:System.Net.DnsPermissionAttribute" />
 
         
 
-         is stored in the metadata of the attribute target, which is the class to which the <see
-         cref="T:System.Net.DnsPermissionAttribute" />
+         is stored in the metadata of the attribute target, which is the class to which the <see cref="T:System.Net.DnsPermissionAttribute" />
 
         
 
-         is applied. The system then accesses this information at run time. The <see
-         cref="T:System.Security.Permissions.SecurityAction" />
+         is applied. The system then accesses this information at run time. The <see cref="T:System.Security.Permissions.SecurityAction" />
 
         
 
          that is passed to the constructor determines the allowable DNS targets.</para
       >
       <para
-        >These security attributes are used only for <format
-         type="text/html">
+        >These security attributes are used only for <format type="text/html">
           <a href="97E21EFD-6E89-4115-90D5-AD239513DAD8"
             >[&lt;topic://cpcondeclarativesecurity&gt;]</a
           >
@@ -67,8 +63,7 @@
 
         
 
-        . For <format
-         type="text/html">
+        . For <format type="text/html">
           <a href="15AAB1E1-6B7D-41AD-B102-C1ED7BEDEA27"
             >[&lt;topic://cpconimperativesecurity&gt;]</a
           >
@@ -76,24 +71,21 @@
 
         
 
-        , use the corresponding <see
-         cref="T:System.Net.DnsPermission" />
+        , use the corresponding <see cref="T:System.Net.DnsPermission" />
 
         
 
          class.</para
       >
       <para
-        >Security access is either fully restricted or fully unrestricted. Set the <see
-         cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+        >Security access is either fully restricted or fully unrestricted. Set the <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
 
         
 
          property to true to grant access, or false for no access. Set this property as a named parameter.</para
       >
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1E00-4602-9EBF-526B271A8B87"
             >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
           >
@@ -139,8 +131,7 @@
 
           
 
-           is not a valid <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+           is not a valid <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -149,13 +140,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Permissions.SecurityAction" />
+            >The <see cref="T:System.Security.Permissions.SecurityAction" />
 
             
 
-             value that is passed to this constructor specifies the allowable <see
-             cref="T:System.Net.DnsPermissionAttribute" />
+             value that is passed to this constructor specifies the allowable <see cref="T:System.Net.DnsPermissionAttribute" />
 
             
 
@@ -165,13 +154,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.DnsPermissionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Net.DnsPermissionAttribute" />
 
             
 
-             class with the specified <see
-             cref="T:System.Security.Permissions.SecurityAction" />
+             class with the specified <see cref="T:System.Security.Permissions.SecurityAction" />
 
             
 
@@ -179,12 +166,15 @@
           >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+          One of the <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -221,23 +211,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The CreatePermission method is called by the security system, not by application code.</para>
           <para
-            >The security information described by <see
-             cref="T:System.Net.DnsPermissionAttribute" />
+            >The security information described by <see cref="T:System.Net.DnsPermissionAttribute" />
 
             
 
-             is stored in the metadata of the attribute target, which is the class to which <see
-             cref="T:System.Net.DnsPermissionAttribute" />
+             is stored in the metadata of the attribute target, which is the class to which <see cref="T:System.Net.DnsPermissionAttribute" />
 
             
 
-             is applied. The system then accesses the information at run time and calls <see
-             cref="M:System.Net.DnsPermissionAttribute.CreatePermission" />
+             is applied. The system then accesses the information at run time and calls <see cref="M:System.Net.DnsPermissionAttribute.CreatePermission" />
 
             
 
-            . The system uses the returned <see
-             cref="T:System.Security.IPermission" />
+            . The system uses the returned <see cref="T:System.Security.IPermission" />
 
             
 
@@ -247,8 +233,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns a new instance of the <see
-             cref="T:System.Net.DnsPermission" />
+            >Creates and returns a new instance of the <see cref="T:System.Net.DnsPermission" />
 
             
 
@@ -258,8 +243,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.DnsPermission" />
+            >A <see cref="T:System.Net.DnsPermission" />
 
             
 

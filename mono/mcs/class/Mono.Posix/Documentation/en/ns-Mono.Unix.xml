@@ -6,45 +6,38 @@
         >The Mono.Unix namespace contains 
         high-level wrapper classes, which provide .NET naming and
         usage conventions over the low-level 
-        <see
-         cref="T:Mono.Unix.Native.Syscall" />
+        <see cref="T:Mono.Unix.Native.Syscall" />
 
         
 
          and 
-        <see
-         cref="T:Mono.Unix.Native.Stdlib" />
+        <see cref="T:Mono.Unix.Native.Stdlib" />
 
         
 
          functionality.
       </para
       >
-      <para
-        >
+      <para>
 				If an exception is generated due to an operating system-level error
 				(as opposed to invalid arguments or some fully managed reason), the
 				exception thrown will either inherit from 
-				<see
-         cref="T:Mono.Unix.UnixIOException" />
+				<see cref="T:Mono.Unix.UnixIOException" />
 
         
 
         , or the
-				<see
-         cref="P:System.Exception.InnerException" />
+				<see cref="P:System.Exception.InnerException" />
 
         
 
          property will be a
-				type inheriting from <c
-        >UnixIOException</c>
+				type inheriting from <c>UnixIOException</c>
 
         
 
         .  In either case, the
-				<see
-         cref="P:Mono.Unix.UnixIOException.ErrorCode" />
+				<see cref="P:Mono.Unix.UnixIOException.ErrorCode" />
 
         
 
@@ -65,33 +58,28 @@
         <para
           >An effort is made to provide thread-safety from managed code,
         but it is impossible to know all dependencies for all potential
-        Unix-like platforms.  For example, is <see
-           cref="M:Mono.Unix.Native.Stdlib.fopen" />
+        Unix-like platforms.  For example, is <see cref="M:Mono.Unix.Native.Stdlib.fopen" />
 
           
 
            thread-safe?  It appears to be under
         glibc, but isn't necessarily under all Unix platforms.  
-        <c
-          >Mono.Unix.Native.Stdlib</c>
+        <c>Mono.Unix.Native.Stdlib</c>
 
           
 
-           assumes that it is.  Only <i
-          >obviously</i>
+           assumes that it is.  Only <i>obviously</i>
 
           
 
            
         unsafe exports are actually synchronized from managed code, such as 
-        <see
-           cref="M:Mono.Unix.Native.Stdlib.tmpnam" />
+        <see cref="M:Mono.Unix.Native.Stdlib.tmpnam" />
 
           
 
            and 
-        <see
-           cref="M:Mono.Unix.Native.Stdlib.strerror" />
+        <see cref="M:Mono.Unix.Native.Stdlib.strerror" />
 
           
 
@@ -101,8 +89,7 @@
       <para>Documentation is based upon the FreeBSD man pages, which is under the 
       following copyright:</para>
       <example>
-        <code lang="FreeBSD Copyright"
-          >
+        <code lang="FreeBSD Copyright">
 Copyright (c) 1980, 1983, 1986, 1991, 1993
     The Regents of the University of California.  All rights reserved.
 

@@ -44,16 +44,13 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary
-      >
-      A collection of <see
-       cref="T:System.String" />
+    <summary>
+      A collection of <see cref="T:System.String" />
 
       
 
        values to use as values to
-      <see
-       cref="M:Mono.Options.Option.OnParseComplete(Mono.Options.OptionContext)" />
+      <see cref="M:Mono.Options.Option.OnParseComplete(Mono.Options.OptionContext)" />
 
       
 
@@ -61,109 +58,90 @@
     </summary
     >
     <remarks>
-      <para
-        >
-        A <see
-         cref="T:Mono.Options.OptionValueCollection" />
+      <para>
+        A <see cref="T:Mono.Options.OptionValueCollection" />
 
         
 
          instance is
-        tied to a controlling <see
-         cref="T:Mono.Options.OptionContext" />
+        tied to a controlling <see cref="T:Mono.Options.OptionContext" />
 
         
 
         
         instance, and its behavior is tied to the 
-        <see
-         cref="T:Mono.Options.Option" />
+        <see cref="T:Mono.Options.Option" />
 
         
 
          that the 
-        <see
-         cref="P:Mono.Options.OptionContext.Option" />
+        <see cref="P:Mono.Options.OptionContext.Option" />
 
         
 
          property returns.
       </para
       >
-      <para
-        >
-        If <see
-         cref="P:Mono.Options.OptionContext.Option" />
+      <para>
+        If <see cref="P:Mono.Options.OptionContext.Option" />
 
         
 
          refers to an
-        <see
-         cref="T:Mono.Options.Option" />
+        <see cref="T:Mono.Options.Option" />
 
         
 
          with an 
-        <see
-         cref="T:Mono.Options.OptionValueType" />
+        <see cref="T:Mono.Options.OptionValueType" />
 
         
 
          of
-        <see
-         cref="F:Mono.Options.OptionValueType.Optional" />
+        <see cref="F:Mono.Options.OptionValueType.Optional" />
 
         
 
         , then the
-        <see
-         cref="P:Mono.Options.OptionValueCollection.Item(System.Int32)" />
+        <see cref="P:Mono.Options.OptionValueCollection.Item(System.Int32)" />
 
         
 
         
-        indexer will return <see
-         langword="null" />
+        indexer will return <see langword="null" />
 
         
 
          if 
-        <paramref
-         name="index" />
+        <paramref name="index" />
 
         
 
          is less than 
-        <see
-         cref="P:Mono.Options.Option.MaxValueCount" />
+        <see cref="P:Mono.Options.Option.MaxValueCount" />
 
         
 
          and 
-        <paramref
-         name="index" />
+        <paramref name="index" />
 
         
 
          is otherwise invalid (i.e. there hasn't been
-        a string <c
-        >Add</c>
+        a string <c>Add</c>
 
         
 
-        ed for that <paramref
-         name="index" />
+        ed for that <paramref name="index" />
 
         
 
         .
       </para
       >
-      <para
-        >
+      <para>
         Otherwise, this instance behaves like
-        <see
-         cref="T:System.Collections.Generic.List{System.String}" />
+        <see cref="T:System.Collections.Generic.List{System.String}" />
 
         
 

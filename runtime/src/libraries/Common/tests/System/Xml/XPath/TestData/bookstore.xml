@@ -15,11 +15,9 @@
     <author>
       <first-name>Mary</first-name>
       <last-name>Bob</last-name>
-      <publication
-        >
+      <publication>
 				Selected Short Stories of
-				<first-name
-        >Mary</first-name>
+				<first-name>Mary</first-name>
         <last-name>Bob</last-name>
       </publication>
     </author>
@@ -47,8 +45,7 @@
       <p
         >But then all nights in Trenton seem dark and
 			stormy to someone who has gone through what
-			<emph
-        >I</emph>
+			<emph>I</emph>
 
         
 

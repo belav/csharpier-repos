@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <clause number="2" title="Conformance">
   <paragraph
-    >Conformance is of interest to the following audiences: <list
-    >
+    >Conformance is of interest to the following audiences: <list>
       <list_item> Those designing, implementing, or maintaining C# implementations. </list_item>
       <list_item> Governmental or commercial entities wishing to procure C# implementations. </list_item>
       <list_item> Testing organizations wishing to provide a C# conformance test suite. </list_item>
@@ -19,8 +18,7 @@
   <paragraph>A conforming implementation of C# must provide and support all the types, values, objects, properties, methods, and program syntax and semantics described in this ECMA Standard. </paragraph>
   <paragraph>A conforming implementation of C# shall interpret characters in conformance with the Unicode Standard, Version 3.0 or later, and ISO/IEC 10646-1. Conforming implementations must accept Unicode source files encoded with the UTF-8 encoding form. </paragraph>
   <paragraph
-    >A conforming implementation of C# shall not successfully translate source containing a <symbol
-    >#error</symbol>
+    >A conforming implementation of C# shall not successfully translate source containing a <symbol>#error</symbol>
 
     
 
@@ -30,8 +28,7 @@
   <paragraph>A conforming implementation of C# is permitted to provide additional types, values, objects, properties, and methods beyond those described in this ECMA Standard, provided they do not alter the behavior of any strictly conforming program. Conforming implementations are required to diagnose programs that use extensions that are ill formed according to this ECMA Standard. Having done so, however; they can compile and execute such programs. (The ability to have extensions implies that a conforming implementation reserves no identifiers other than those explicitly reserved in this ECMA Standard.) </paragraph>
   <paragraph>A conforming implementation of C# shall be accompanied by a document that defines all  implementation-defined characteristics, and all extensions. </paragraph>
   <paragraph
-    >A conforming implementation of C# shall support the class library documented in <unicode
-    >167</unicode>
+    >A conforming implementation of C# shall support the class library documented in <unicode>167</unicode>
 
     
 

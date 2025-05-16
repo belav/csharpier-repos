@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >These enum values are returned by <see
-         cref="P:System.Type.MemberType" />
+        >These enum values are returned by <see cref="P:System.Type.MemberType" />
 
         
 
@@ -38,14 +37,11 @@
       <para>To obtain the MemberTypes value for a method: </para>
       <list type="bullet">
         <item>
-          <para
-            >First get a <see
-             cref="T:System.Type" />
+          <para>First get a <see cref="T:System.Type" />
 
             
 
-            .</para
-          >
+            .</para>
         </item>
         <item>
           <para>From the Type, get the MemberInfo array.</para>
@@ -106,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the member is a constructor, representing a <see
-             cref="T:System.Reflection.ConstructorInfo" />
+            >Specifies that the member is a constructor, representing a <see cref="T:System.Reflection.ConstructorInfo" />
 
             
 
@@ -161,8 +156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the member is an event, representing an <see
-             cref="T:System.Reflection.EventInfo" />
+            >Specifies that the member is an event, representing an <see cref="T:System.Reflection.EventInfo" />
 
             
 
@@ -192,8 +186,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the member is a field, representing a <see
-             cref="T:System.Reflection.FieldInfo" />
+            >Specifies that the member is a field, representing a <see cref="T:System.Reflection.FieldInfo" />
 
             
 
@@ -223,8 +216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the member is a method, representing a <see
-             cref="T:System.Reflection.MethodInfo" />
+            >Specifies that the member is a method, representing a <see cref="T:System.Reflection.MethodInfo" />
 
             
 
@@ -254,8 +246,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the member is a nested type, extending <see
-             cref="T:System.Reflection.MemberInfo" />
+            >Specifies that the member is a nested type, extending <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -285,8 +276,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the member is a property, representing a <see
-             cref="T:System.Reflection.PropertyInfo" />
+            >Specifies that the member is a property, representing a <see cref="T:System.Reflection.PropertyInfo" />
 
             
 
@@ -316,8 +306,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the member is a type, representing a <see
-             cref="F:System.Reflection.MemberTypes.TypeInfo" />
+            >Specifies that the member is a type, representing a <see cref="F:System.Reflection.MemberTypes.TypeInfo" />
 
             
 

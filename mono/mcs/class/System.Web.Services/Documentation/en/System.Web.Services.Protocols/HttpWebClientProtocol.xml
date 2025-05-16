@@ -20,29 +20,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The properties on this class are used to control the behavior of the HTTP request object used to transmit the XML Web service request and response. The properties map to properties found on <see
-         cref="T:System.Net.HttpWebRequest" />
+        >The properties on this class are used to control the behavior of the HTTP request object used to transmit the XML Web service request and response. The properties map to properties found on <see cref="T:System.Net.HttpWebRequest" />
 
         
 
         .</para
       >
       <para
-        >To communicate with an XML Web service using HTTP, you must create a proxy class deriving indirectly or directly from <see
-         cref="T:System.Web.Services.Protocols.HttpWebClientProtocol" />
+        >To communicate with an XML Web service using HTTP, you must create a proxy class deriving indirectly or directly from <see cref="T:System.Web.Services.Protocols.HttpWebClientProtocol" />
 
         
 
          for the XML Web service. Instead of creating the proxy class manually, you can use the Wsdl.exe tool to create a proxy class for a given XML Web service's service description.</para
       >
       <para
-        >Since HttpWebClientProtocol is the base class for all proxy classes, its properties are on your proxy classes. These properties are useful for controlling the request behavior of the underlying transport. For example, use the <see
-         cref="P:System.Web.Services.Protocols.HttpWebClientProtocol.Proxy" />
+        >Since HttpWebClientProtocol is the base class for all proxy classes, its properties are on your proxy classes. These properties are useful for controlling the request behavior of the underlying transport. For example, use the <see cref="P:System.Web.Services.Protocols.HttpWebClientProtocol.Proxy" />
 
         
 
-         property for calling XML Web services through a firewall. Many of these properties are used to initialize the <see
-         cref="T:System.Net.HttpWebRequest" />
+         property for calling XML Web services through a firewall. Many of these properties are used to initialize the <see cref="T:System.Net.HttpWebRequest" />
 
         
 
@@ -53,18 +49,15 @@
 
         
 
-        , <see
-         cref="T:System.Web.Services.Protocols.HttpGetClientProtocol" />
+        , <see cref="T:System.Web.Services.Protocols.HttpGetClientProtocol" />
 
         
 
-        , and <see
-         cref="T:System.Web.Services.Protocols.HttpPostClientProtocol" />
+        , and <see cref="T:System.Web.Services.Protocols.HttpPostClientProtocol" />
 
         
 
-         derive directly or indirectly from <see
-         cref="T:System.Web.Services.Protocols.HttpWebClientProtocol" />
+         derive directly or indirectly from <see cref="T:System.Web.Services.Protocols.HttpWebClientProtocol" />
 
         
 
@@ -87,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Protocols.HttpWebClientProtocol" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.HttpWebClientProtocol" />
 
             
 
@@ -114,48 +106,39 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If a client sends authentication information, such as a user name and password, you do not want to enable the server to redirect, because this can compromise security.</para>
           <para
-            >A <see
-             cref="T:System.Net.WebException" />
+            >A <see cref="T:System.Net.WebException" />
 
             
 
-             is thrown if the <see
-             cref="P:System.Web.Services.Protocols.HttpWebClientProtocol.AllowAutoRedirect" />
+             is thrown if the <see cref="P:System.Web.Services.Protocols.HttpWebClientProtocol.AllowAutoRedirect" />
 
             
 
-             property is false and the Web server attempts to redirect the request. The <see
-             cref="P:System.Net.WebException.Response" />
+             property is false and the Web server attempts to redirect the request. The <see cref="P:System.Net.WebException.Response" />
 
             
 
-             property contains an <see
-             cref="T:System.Net.HttpWebResponse" />
+             property contains an <see cref="T:System.Net.HttpWebResponse" />
 
             
 
-             object, where both the <see
-             cref="P:System.Net.HttpWebResponse.StatusCode" />
+             object, where both the <see cref="P:System.Net.HttpWebResponse.StatusCode" />
 
             
 
-             and <see
-             cref="P:System.Net.HttpWebResponse.Headers" />
+             and <see cref="P:System.Net.HttpWebResponse.Headers" />
 
             
 
-             properties reflect details regarding the attempted redirect. The <see
-             cref="P:System.Net.HttpWebResponse.StatusCode" />
+             properties reflect details regarding the attempted redirect. The <see cref="P:System.Net.HttpWebResponse.StatusCode" />
 
             
 
-             property contains an <see
-             cref="T:System.Net.HttpStatusCode" />
+             property contains an <see cref="T:System.Net.HttpStatusCode" />
 
             
 
-             equivalent to one of the HTTP redirect status codes (301, 302, and 307) and the Location header within the <see
-             cref="P:System.Net.HttpWebResponse.Headers" />
+             equivalent to one of the HTTP redirect status codes (301, 302, and 307) and the Location header within the <see cref="P:System.Net.HttpWebResponse.Headers" />
 
             
 
@@ -196,7 +179,11 @@
           <para>Cancels an asynchronous call to an XML Web service method, unless the call has already completed.</para>
         </summary>
         <param name="userState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -216,8 +203,7 @@
       <Parameters />
       <Docs>
         <value
-          >a <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+          >a <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -252,30 +238,23 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Net.CookieContainer" />
-        </value>
+        <value>a <see cref="T:System.Net.CookieContainer" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If an XML Web service method uses session state, then a cookie is passed back in the response headers to the XML Web service client that uniquely identifies the session for that XML Web service client. In order for an XML Web service to maintain session state for a client, the client must store the cookie. Clients receive the HTTP cookie by creating a new instance of <see
-             cref="T:System.Net.CookieContainer" />
+            >If an XML Web service method uses session state, then a cookie is passed back in the response headers to the XML Web service client that uniquely identifies the session for that XML Web service client. In order for an XML Web service to maintain session state for a client, the client must store the cookie. Clients receive the HTTP cookie by creating a new instance of <see cref="T:System.Net.CookieContainer" />
 
             
 
-             and assigning that to the <see
-             cref="P:System.Web.Services.Protocols.HttpWebClientProtocol.CookieContainer" />
+             and assigning that to the <see cref="P:System.Web.Services.Protocols.HttpWebClientProtocol.CookieContainer" />
 
             
 
-             property of the proxy class before calling the XML Web service method. If you need to maintain session state beyond when the proxy class instance goes out of scope, the client must store the HTTP cookie between calls to the XML Web service. For instance, a Web Forms client can store the HTTP cookie by saving the <see
-             cref="T:System.Net.CookieContainer" />
+             property of the proxy class before calling the XML Web service method. If you need to maintain session state beyond when the proxy class instance goes out of scope, the client must store the HTTP cookie between calls to the XML Web service. For instance, a Web Forms client can store the HTTP cookie by saving the <see cref="T:System.Net.CookieContainer" />
 
             
 
-             in its own session state. Because not all XML Web services use session state and thus clients are not always required to use the <see
-             cref="P:System.Web.Services.Protocols.HttpWebClientProtocol.CookieContainer" />
+             in its own session state. Because not all XML Web services use session state and thus clients are not always required to use the <see cref="P:System.Web.Services.Protocols.HttpWebClientProtocol.CookieContainer" />
 
             
 
@@ -317,8 +296,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether decompression is enabled for this <see
-             cref="T:System.Web.Services.Protocols.HttpWebClientProtocol" />
+            >Gets or sets a value that indicates whether decompression is enabled for this <see cref="T:System.Web.Services.Protocols.HttpWebClientProtocol" />
 
             
 
@@ -349,13 +327,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Serialization.XmlMembersMapping" />
+            >Gets the <see cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
             
 
-             for each XML Web service method exposed by the specified type, and stores the mappings in the specified <see
-             cref="T:System.Collections.ArrayList" />
+             for each XML Web service method exposed by the specified type, and stores the mappings in the specified <see cref="T:System.Collections.ArrayList" />
 
             
 
@@ -365,13 +341,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="type" />
+            >true if <paramref name="type" />
 
             
 
-             can be assigned to a <see
-             cref="T:System.Web.Services.Protocols.SoapHttpClientProtocol" />
+             can be assigned to a <see cref="T:System.Web.Services.Protocols.SoapHttpClientProtocol" />
 
             
 
@@ -379,12 +353,15 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -414,18 +391,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Serialization.XmlMembersMapping" />
+            >Gets the <see cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
             
 
-             for each XML Web service method exposed by the specified types, and stores the mappings in the specified <see
-             cref="T:System.Collections.ArrayList" />
+             for each XML Web service method exposed by the specified types, and stores the mappings in the specified <see cref="T:System.Collections.ArrayList" />
 
             
 
-            , as well as in a <see
-             cref="T:System.Collections.Hashtable" />
+            , as well as in a <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -435,18 +409,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.Hashtable" />
+            >A <see cref="T:System.Collections.Hashtable" />
 
             
 
-             that contains the <see
-             cref="T:System.Xml.Serialization.XmlMembersMapping" />
+             that contains the <see cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
             
 
-             for each XML Web service method exposed by the specified types. The types contained in <paramref
-             name="types" />
+             for each XML Web service method exposed by the specified types. The types contained in <paramref name="types" />
 
             
 
@@ -454,12 +425,15 @@
           >
         </returns>
         <param name="types">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Type" />
+          An array of type <see cref="T:System.Type" />
 
           
 
@@ -484,8 +458,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Net.WebRequest" />
+            >Creates a <see cref="T:System.Net.WebRequest" />
 
             
 
@@ -495,8 +468,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The created <see
-             cref="T:System.Net.WebRequest" />
+            >The created <see cref="T:System.Net.WebRequest" />
 
             
 
@@ -504,17 +476,19 @@
           >
         </returns>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
-           for creating the <see
-           cref="T:System.Net.WebRequest" />
+           for creating the <see cref="T:System.Net.WebRequest" />
 
           
 
@@ -549,12 +523,15 @@
           <para>A response from a synchronous request to an XML Web service method.</para>
         </returns>
         <param name="request">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.WebRequest" />
+          The <see cref="T:System.Net.WebRequest" />
 
           
 
@@ -590,29 +567,34 @@
           <para>A response from an asynchronous request to an XML Web service method.</para>
         </returns>
         <param name="request">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.WebRequest" />
+          The <see cref="T:System.Net.WebRequest" />
 
           
 
            from which to get the response. </param
         >
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IAsyncResult" />
+          The <see cref="T:System.IAsyncResult" />
 
           
 
-           to pass to <see
-           cref="M:System.Net.HttpWebRequest.EndGetResponse(System.IAsyncResult)" />
+           to pass to <see cref="M:System.Net.HttpWebRequest.EndGetResponse(System.IAsyncResult)" />
 
           
 
@@ -632,33 +614,26 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Net.IWebProxy" />
-        </value>
+        <value>a <see cref="T:System.Net.IWebProxy" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.Services.Protocols.HttpWebClientProtocol.Proxy" />
+            >Use the <see cref="P:System.Web.Services.Protocols.HttpWebClientProtocol.Proxy" />
 
             
 
-             property if a client needs to use different proxy settings than those in the system settings. Use the <see
-             cref="T:System.Net.WebProxy" />
+             property if a client needs to use different proxy settings than those in the system settings. Use the <see cref="T:System.Net.WebProxy" />
 
             
 
-             class to set the proxy settings, because it implements <see
-             cref="T:System.Net.IWebProxy" />
+             class to set the proxy settings, because it implements <see cref="T:System.Net.IWebProxy" />
 
             
 
             .</para
           >
           <para
-            >Default proxy settings can be set in a configuration file. For details, see <format
-             type="text/html">
+            >Default proxy settings can be set in a configuration file. For details, see <format type="text/html">
               <a href="BB707C72-EED2-4A82-8800-C9E68DF2FD4F"
                 >[&lt;topic://cpconconfiguringinternetapplications&gt;]</a
               >
@@ -705,13 +680,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property sets the value of the <see
-             cref="P:System.Net.HttpWebRequest.UnsafeAuthenticatedConnectionSharing" />
+            >This property sets the value of the <see cref="P:System.Net.HttpWebRequest.UnsafeAuthenticatedConnectionSharing" />
 
             
 
-             property of the <see
-             cref="T:System.Net.HttpWebRequest" />
+             property of the <see cref="T:System.Net.HttpWebRequest" />
 
             
 

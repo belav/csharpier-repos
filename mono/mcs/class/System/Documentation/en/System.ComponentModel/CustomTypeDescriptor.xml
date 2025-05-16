@@ -25,23 +25,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Like <see
-         cref="T:System.ComponentModel.TypeDescriptionProvider" />
+        >Like <see cref="T:System.ComponentModel.TypeDescriptionProvider" />
 
         
 
-        , the <see
-         cref="T:System.ComponentModel.CustomTypeDescriptor" />
+        , the <see cref="T:System.ComponentModel.CustomTypeDescriptor" />
 
         
 
-         class relies on a parent object of type <see
-         cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+         class relies on a parent object of type <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
         
 
-         supplied during construction. This allows classes that derive from <see
-         cref="T:System.ComponentModel.CustomTypeDescriptor" />
+         supplied during construction. This allows classes that derive from <see cref="T:System.ComponentModel.CustomTypeDescriptor" />
 
         
 
@@ -51,8 +47,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a simple default implementation of the <see
-         cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+        >Provides a simple default implementation of the <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
         
 
@@ -77,16 +72,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is equivalent to calling the other <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
+            >This constructor is equivalent to calling the other <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
 
             
 
              constructor with a parameter that is null. </para
           >
           <para
-            >All methods of a <see
-             cref="T:System.ComponentModel.CustomTypeDescriptor" />
+            >All methods of a <see cref="T:System.ComponentModel.CustomTypeDescriptor" />
 
             
 
@@ -96,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.CustomTypeDescriptor" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.CustomTypeDescriptor" />
 
             
 
@@ -127,31 +119,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="parent" />
+            >If the <paramref name="parent" />
 
             
 
-             parameter is null, all <see
-             cref="T:System.ComponentModel.CustomTypeDescriptor" />
+             parameter is null, all <see cref="T:System.ComponentModel.CustomTypeDescriptor" />
 
             
 
-             methods will return default values. Otherwise, all <see
-             cref="T:System.ComponentModel.CustomTypeDescriptor" />
+             methods will return default values. Otherwise, all <see cref="T:System.ComponentModel.CustomTypeDescriptor" />
 
             
 
-             methods will delegate to the methods of <paramref
-             name="parent" />
+             methods will delegate to the methods of <paramref name="parent" />
 
             
 
             .</para
           >
           <para
-            >Most <see
-             cref="T:System.ComponentModel.CustomTypeDescriptor" />
+            >Most <see cref="T:System.ComponentModel.CustomTypeDescriptor" />
 
             
 
@@ -176,8 +163,7 @@
               </term>
               <description>
                 <para
-                  >An empty attribute collection (<see
-                   cref="F:System.ComponentModel.AttributeCollection.Empty" />
+                  >An empty attribute collection (<see cref="F:System.ComponentModel.AttributeCollection.Empty" />
 
                   
 
@@ -193,8 +179,7 @@
               </term>
               <description>
                 <para
-                  >The default <see
-                   cref="T:System.ComponentModel.TypeConverter" />
+                  >The default <see cref="T:System.ComponentModel.TypeConverter" />
 
                   
 
@@ -210,8 +195,7 @@
               </term>
               <description>
                 <para
-                  >An empty events collection (<see
-                   cref="F:System.ComponentModel.EventDescriptorCollection.Empty" />
+                  >An empty events collection (<see cref="F:System.ComponentModel.EventDescriptorCollection.Empty" />
 
                   
 
@@ -227,8 +211,7 @@
               </term>
               <description>
                 <para
-                  >An empty property collection (<see
-                   cref="F:System.ComponentModel.PropertyDescriptorCollection.Empty" />
+                  >An empty property collection (<see cref="F:System.ComponentModel.PropertyDescriptorCollection.Empty" />
 
                   
 
@@ -241,8 +224,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.CustomTypeDescriptor" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.CustomTypeDescriptor" />
 
             
 
@@ -250,7 +232,11 @@
           >
         </summary>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -280,13 +266,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a parent custom type descriptor was passed to the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
+            >If a parent custom type descriptor was passed to the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
 
             
 
-             constructor, the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.GetAttributes" />
+             constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetAttributes" />
 
             
 
@@ -300,13 +284,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ComponentModel.AttributeCollection" />
+            >An <see cref="T:System.ComponentModel.AttributeCollection" />
 
             
 
-             containing the attributes for the type. The default is <see
-             cref="F:System.ComponentModel.AttributeCollection.Empty" />
+             containing the attributes for the type. The default is <see cref="F:System.ComponentModel.AttributeCollection.Empty" />
 
             
 
@@ -334,13 +316,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a parent custom type descriptor was passed to the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
+            >If a parent custom type descriptor was passed to the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
 
             
 
-             constructor, the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.GetClassName" />
+             constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetClassName" />
 
             
 
@@ -354,8 +334,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -383,13 +362,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a parent custom type descriptor was passed to the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
+            >If a parent custom type descriptor was passed to the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
 
             
 
-             constructor, the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.GetComponentName" />
+             constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetComponentName" />
 
             
 
@@ -403,8 +380,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -435,13 +411,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a parent custom type descriptor was passed into the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
+            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
 
             
 
-             constructor, the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.GetConverter" />
+             constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetConverter" />
 
             
 
@@ -455,13 +429,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.TypeConverter" />
+            >A <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
-             for the type represented by this type descriptor. The default is a newly created <see
-             cref="T:System.ComponentModel.TypeConverter" />
+             for the type represented by this type descriptor. The default is a newly created <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
@@ -492,13 +464,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a parent custom type descriptor was passed into the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
+            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
 
             
 
-             constructor, the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.GetDefaultEvent" />
+             constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetDefaultEvent" />
 
             
 
@@ -512,8 +482,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.EventDescriptor" />
+            >The <see cref="T:System.ComponentModel.EventDescriptor" />
 
             
 
@@ -544,13 +513,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a parent custom type descriptor was passed into the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
+            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
 
             
 
-             constructor, the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.GetDefaultProperty" />
+             constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetDefaultProperty" />
 
             
 
@@ -564,8 +531,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -598,13 +564,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a parent custom type descriptor was passed into the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
+            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
 
             
 
-             constructor, the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.GetEditor(System.Type)" />
+             constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetEditor(System.Type)" />
 
             
 
@@ -620,7 +584,11 @@
           <para>An editor of the given type that is to be associated with the class represented by this type descriptor. The default is null.</para>
         </returns>
         <param name="editorBaseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -650,13 +618,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a parent custom type descriptor was passed into the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
+            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
 
             
 
-             constructor, the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.GetEvents" />
+             constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetEvents" />
 
             
 
@@ -670,13 +636,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ComponentModel.EventDescriptorCollection" />
+            >An <see cref="T:System.ComponentModel.EventDescriptorCollection" />
 
             
 
-             containing the event descriptors for the object represented by this type descriptor. The default is <see
-             cref="F:System.ComponentModel.EventDescriptorCollection.Empty" />
+             containing the event descriptors for the object represented by this type descriptor. The default is <see cref="F:System.ComponentModel.EventDescriptorCollection.Empty" />
 
             
 
@@ -709,21 +673,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <paramref
-             name="attributes" />
+            >You can use the <paramref name="attributes" />
 
             
 
              parameter to filter the collection that is returned.</para
           >
           <para
-            >If a parent custom type descriptor was passed into the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
+            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
 
             
 
-             constructor, the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.GetEvents(System.Attribute[])" />
+             constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetEvents(System.Attribute[])" />
 
             
 
@@ -737,13 +698,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ComponentModel.EventDescriptorCollection" />
+            >An <see cref="T:System.ComponentModel.EventDescriptorCollection" />
 
             
 
-             containing the event descriptions for the object represented by this type descriptor. The default is <see
-             cref="F:System.ComponentModel.EventDescriptorCollection.Empty" />
+             containing the event descriptions for the object represented by this type descriptor. The default is <see cref="F:System.ComponentModel.EventDescriptorCollection.Empty" />
 
             
 
@@ -751,7 +710,11 @@
           >
         </returns>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -781,13 +744,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a parent custom type descriptor was passed into the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
+            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
 
             
 
-             constructor, the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.GetProperties" />
+             constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetProperties" />
 
             
 
@@ -801,13 +762,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
-             containing the property descriptions for the object represented by this type descriptor. The default is <see
-             cref="F:System.ComponentModel.PropertyDescriptorCollection.Empty" />
+             containing the property descriptions for the object represented by this type descriptor. The default is <see cref="F:System.ComponentModel.PropertyDescriptorCollection.Empty" />
 
             
 
@@ -840,26 +799,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <paramref
-             name="attributes" />
+            >You can use the <paramref name="attributes" />
 
             
 
-             parameter to filter the collection that is returned. For filtering rules, see <see
-             cref="M:System.ComponentModel.TypeDescriptor.GetProperties(System.Object,System.Attribute[])" />
+             parameter to filter the collection that is returned. For filtering rules, see <see cref="M:System.ComponentModel.TypeDescriptor.GetProperties(System.Object,System.Attribute[])" />
 
             
 
             . </para
           >
           <para
-            >If a parent custom type descriptor was passed into the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
+            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
 
             
 
-             constructor, the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.GetProperties(System.Attribute[])" />
+             constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetProperties(System.Attribute[])" />
 
             
 
@@ -873,13 +828,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
-             containing the property descriptions for the object represented by this type descriptor. The default is <see
-             cref="F:System.ComponentModel.PropertyDescriptorCollection.Empty" />
+             containing the property descriptions for the object represented by this type descriptor. The default is <see cref="F:System.ComponentModel.PropertyDescriptorCollection.Empty" />
 
             
 
@@ -887,7 +840,11 @@
           >
         </returns>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -919,13 +876,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a parent custom type descriptor was passed into the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
+            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" />
 
             
 
-             constructor, the <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.GetPropertyOwner(System.ComponentModel.PropertyDescriptor)" />
+             constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetPropertyOwner(System.ComponentModel.PropertyDescriptor)" />
 
             
 
@@ -939,8 +894,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -948,7 +902,11 @@
           >
         </returns>
         <param name="pd">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

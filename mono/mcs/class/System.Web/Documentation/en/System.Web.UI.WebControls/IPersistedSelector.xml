@@ -19,8 +19,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a property that is used by the <see
-         cref="T:System.Web.DynamicData.DynamicDataManager" />
+        >Provides a property that is used by the <see cref="T:System.Web.DynamicData.DynamicDataManager" />
 
         
 
@@ -46,8 +45,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.IPersistedSelector.DataKey" />
+            >The <see cref="P:System.Web.UI.WebControls.IPersistedSelector.DataKey" />
 
             
 

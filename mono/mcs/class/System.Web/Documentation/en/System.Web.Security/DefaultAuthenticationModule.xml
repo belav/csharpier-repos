@@ -24,129 +24,105 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Security.DefaultAuthenticationModule" />
+        >The <see cref="T:System.Web.Security.DefaultAuthenticationModule" />
 
         
 
-         ensures that the <see
-         cref="P:System.Web.HttpContext.User" />
+         ensures that the <see cref="P:System.Web.HttpContext.User" />
 
         
 
-         property of the current <see
-         cref="T:System.Web.HttpContext" />
+         property of the current <see cref="T:System.Web.HttpContext" />
 
         
 
-         instance is set to an <see
-         cref="T:System.Security.Principal.IPrincipal" />
+         instance is set to an <see cref="T:System.Security.Principal.IPrincipal" />
 
         
 
-         object for each request. The <see
-         cref="T:System.Web.Security.DefaultAuthenticationModule" />
+         object for each request. The <see cref="T:System.Web.Security.DefaultAuthenticationModule" />
 
         
 
-         examines the <see
-         cref="P:System.Web.HttpContext.User" />
+         examines the <see cref="P:System.Web.HttpContext.User" />
 
         
 
-         property after the <see
-         cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+         property after the <see cref="E:System.Web.HttpApplication.AuthenticateRequest" />
 
         
 
-         event and before the <see
-         cref="E:System.Web.HttpApplication.AuthorizeRequest" />
+         event and before the <see cref="E:System.Web.HttpApplication.AuthorizeRequest" />
 
         
 
-         event. If the <see
-         cref="P:System.Web.HttpContext.User" />
+         event. If the <see cref="P:System.Web.HttpContext.User" />
 
         
 
-         property is null, the <see
-         cref="T:System.Web.Security.DefaultAuthenticationModule" />
+         property is null, the <see cref="T:System.Web.Security.DefaultAuthenticationModule" />
 
         
 
-         sets the <see
-         cref="P:System.Web.HttpContext.User" />
+         sets the <see cref="P:System.Web.HttpContext.User" />
 
         
 
-         property to a <see
-         cref="T:System.Security.Principal.GenericPrincipal" />
+         property to a <see cref="T:System.Security.Principal.GenericPrincipal" />
 
         
 
          object that contains no user information. </para
       >
       <para
-        >If the authentication module sets the <see
-         cref="P:System.Web.HttpResponse.StatusCode" />
+        >If the authentication module sets the <see cref="P:System.Web.HttpResponse.StatusCode" />
 
         
 
-         property to 401, the <see
-         cref="T:System.Web.Security.DefaultAuthenticationModule" />
+         property to 401, the <see cref="T:System.Web.Security.DefaultAuthenticationModule" />
 
         
 
-         will render an access-denied error page. If the value of the <see
-         cref="P:System.Web.HttpResponse.StatusCode" />
+         will render an access-denied error page. If the value of the <see cref="P:System.Web.HttpResponse.StatusCode" />
 
         
 
-         property is set to a value greater than 200, the <see
-         cref="T:System.Web.Security.DefaultAuthenticationModule" />
+         property is set to a value greater than 200, the <see cref="T:System.Web.Security.DefaultAuthenticationModule" />
 
         
 
-         object will end the request. In that case, only HTTP modules that subscribe to the <see
-         cref="E:System.Web.HttpApplication.EndRequest" />
+         object will end the request. In that case, only HTTP modules that subscribe to the <see cref="E:System.Web.HttpApplication.EndRequest" />
 
         
 
          event are called prior to the completion of the current request.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Security.DefaultAuthenticationModule" />
+        >The <see cref="T:System.Web.Security.DefaultAuthenticationModule" />
 
         
 
-         exposes an <see
-         cref="E:System.Web.Security.DefaultAuthenticationModule.Authenticate" />
+         exposes an <see cref="E:System.Web.Security.DefaultAuthenticationModule.Authenticate" />
 
         
 
-         event. You can use this event to provide a custom <see
-         cref="T:System.Security.Principal.IPrincipal" />
+         event. You can use this event to provide a custom <see cref="T:System.Security.Principal.IPrincipal" />
 
         
 
-         object for the <see
-         cref="P:System.Web.HttpContext.User" />
+         object for the <see cref="P:System.Web.HttpContext.User" />
 
         
 
-         property of the current <see
-         cref="T:System.Web.HttpContext" />
+         property of the current <see cref="T:System.Web.HttpContext" />
 
         
 
-         instance. The <see
-         cref="E:System.Web.Security.WindowsAuthenticationModule.Authenticate" />
+         instance. The <see cref="E:System.Web.Security.WindowsAuthenticationModule.Authenticate" />
 
         
 
-         event is accessed by specifying an event named <system
-        >DefaultAuthentication_OnAuthenticate</system>
+         event is accessed by specifying an event named <system>DefaultAuthentication_OnAuthenticate</system>
 
         
 
@@ -169,18 +145,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor is not intended to be called from application code.</para>
           <para
-            >ASP.NET calls this constructor to create an instance of the <see
-             cref="T:System.Web.Security.DefaultAuthenticationModule" />
+            >ASP.NET calls this constructor to create an instance of the <see cref="T:System.Web.Security.DefaultAuthenticationModule" />
 
             
 
-             class. After calling the constructor, it calls the <see
-             cref="M:System.Web.Security.DefaultAuthenticationModule.Init(System.Web.HttpApplication)" />
+             class. After calling the constructor, it calls the <see cref="M:System.Web.Security.DefaultAuthenticationModule.Init(System.Web.HttpApplication)" />
 
             
 
-             method to initialize the new <see
-             cref="T:System.Web.Security.DefaultAuthenticationModule" />
+             method to initialize the new <see cref="T:System.Web.Security.DefaultAuthenticationModule" />
 
             
 
@@ -190,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Security.DefaultAuthenticationModule" />
+            >Initializes a new instance of the <see cref="T:System.Web.Security.DefaultAuthenticationModule" />
 
             
 
@@ -218,149 +190,122 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.Security.DefaultAuthenticationModule.Authenticate" />
+            >The <see cref="E:System.Web.Security.DefaultAuthenticationModule.Authenticate" />
 
             
 
-             event is raised after the <see
-             cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+             event is raised after the <see cref="E:System.Web.HttpApplication.AuthenticateRequest" />
 
             
 
-             event. It is used to ensure that the <see
-             cref="P:System.Web.HttpContext.User" />
+             event. It is used to ensure that the <see cref="P:System.Web.HttpContext.User" />
 
             
 
-             property of the current <see
-             cref="T:System.Web.HttpContext" />
+             property of the current <see cref="T:System.Web.HttpContext" />
 
             
 
-             instance is populated with an <see
-             cref="T:System.Security.Principal.IPrincipal" />
+             instance is populated with an <see cref="T:System.Security.Principal.IPrincipal" />
 
             
 
              object.</para
           >
           <para
-            >You can access the <see
-             cref="E:System.Web.Security.DefaultAuthenticationModule.Authenticate" />
+            >You can access the <see cref="E:System.Web.Security.DefaultAuthenticationModule.Authenticate" />
 
             
 
-             event of the <see
-             cref="T:System.Web.Security.DefaultAuthenticationModule" />
+             event of the <see cref="T:System.Web.Security.DefaultAuthenticationModule" />
 
             
 
-             class by specifying a subroutine named <system
-            >DefaultAuthentication_OnAuthenticate</system>
+             class by specifying a subroutine named <system>DefaultAuthentication_OnAuthenticate</system>
 
             
 
              in the application's Global.asax file. </para
           >
           <para
-            >You can use the <see
-             cref="P:System.Web.Security.DefaultAuthenticationEventArgs.Context" />
+            >You can use the <see cref="P:System.Web.Security.DefaultAuthenticationEventArgs.Context" />
 
             
 
-             property of the <see
-             cref="T:System.Web.Security.DefaultAuthenticationEventArgs" />
+             property of the <see cref="T:System.Web.Security.DefaultAuthenticationEventArgs" />
 
             
 
-             object in the <system
-            >DefaultAuthentication_OnAuthenticate</system>
+             object in the <system>DefaultAuthentication_OnAuthenticate</system>
 
             
 
-             event to set the <see
-             cref="P:System.Web.HttpContext.User" />
+             event to set the <see cref="P:System.Web.HttpContext.User" />
 
             
 
-             property of the current <see
-             cref="T:System.Web.HttpContext" />
+             property of the current <see cref="T:System.Web.HttpContext" />
 
             
 
-             instance to a custom <see
-             cref="T:System.Security.Principal.IPrincipal" />
+             instance to a custom <see cref="T:System.Security.Principal.IPrincipal" />
 
             
 
-             object. If you do not specify a value for the <see
-             cref="P:System.Web.HttpContext.User" />
+             object. If you do not specify a value for the <see cref="P:System.Web.HttpContext.User" />
 
             
 
-             property, the <see
-             cref="T:System.Web.Security.DefaultAuthenticationModule" />
+             property, the <see cref="T:System.Web.Security.DefaultAuthenticationModule" />
 
             
 
-             sets the <see
-             cref="P:System.Web.HttpContext.User" />
+             sets the <see cref="P:System.Web.HttpContext.User" />
 
             
 
-             property of the <see
-             cref="T:System.Web.HttpContext" />
+             property of the <see cref="T:System.Web.HttpContext" />
 
             
 
-             instance to a <see
-             cref="T:System.Security.Principal.GenericPrincipal" />
+             instance to a <see cref="T:System.Security.Principal.GenericPrincipal" />
 
             
 
              object that contains no user information.</para
           >
           <para
-            >The <system
-            >DefaultAuthentication_OnAuthenticate</system>
+            >The <system>DefaultAuthentication_OnAuthenticate</system>
 
             
 
-             event is raised after the <see
-             cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+             event is raised after the <see cref="E:System.Web.HttpApplication.AuthenticateRequest" />
 
             
 
-             event and before the <see
-             cref="E:System.Web.HttpApplication.AuthorizeRequest" />
+             event and before the <see cref="E:System.Web.HttpApplication.AuthorizeRequest" />
 
             
 
-             event. If you have an <format
-             type="text/html">
+             event. If you have an <format type="text/html">
               <a href="2d3d9bf6-f914-4c30-ad03-32eea98fa612">authorization</a>
             </format>
 
             
 
-             section that depends on the user name to deny or allow access to your application, modifying the <see
-             cref="P:System.Web.HttpContext.User" />
+             section that depends on the user name to deny or allow access to your application, modifying the <see cref="P:System.Web.HttpContext.User" />
 
             
 
-             property of the current <see
-             cref="T:System.Web.HttpContext" />
+             property of the current <see cref="T:System.Web.HttpContext" />
 
             
 
-             instance can affect the behavior of your application. Be sure that the user name you set during the <system
-            >DefaultAuthentication_OnAuthenticate</system>
+             instance can affect the behavior of your application. Be sure that the user name you set during the <system>DefaultAuthentication_OnAuthenticate</system>
 
             
 
-             event is considered when you specify the <format
-             type="text/html">
+             event is considered when you specify the <format type="text/html">
               <a href="2d3d9bf6-f914-4c30-ad03-32eea98fa612">authorization</a>
             </format>
 
@@ -370,45 +315,37 @@
           >
           <block subset="none" type="note">
             <para
-              >If the Web application is running in IIS 7.0 in Integrated mode, the <see
-               cref="E:System.Web.Security.DefaultAuthenticationModule.Authenticate" />
+              >If the Web application is running in IIS 7.0 in Integrated mode, the <see cref="E:System.Web.Security.DefaultAuthenticationModule.Authenticate" />
 
               
 
-               event of the <see
-               cref="T:System.Web.Security.DefaultAuthenticationModule" />
+               event of the <see cref="T:System.Web.Security.DefaultAuthenticationModule" />
 
               
 
-               is not raised. If the mode attribute of the <format
-               type="text/html">
+               is not raised. If the mode attribute of the <format type="text/html">
                 <a href="27bc0ba9-f23a-45f3-ae42-dbe7916e3ee2">authentication</a>
               </format>
 
               
 
-               configuration element is set to "None" and the application subscribes to the <see
-               cref="E:System.Web.Security.DefaultAuthenticationModule.Authenticate" />
+               configuration element is set to "None" and the application subscribes to the <see cref="E:System.Web.Security.DefaultAuthenticationModule.Authenticate" />
 
               
 
-               event, a <see
-               cref="T:System.PlatformNotSupportedException" />
+               event, a <see cref="T:System.PlatformNotSupportedException" />
 
               
 
-               error is raised. In this scenario, to receive authentication notification, subscribe to the <see
-               cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+               error is raised. In this scenario, to receive authentication notification, subscribe to the <see cref="E:System.Web.HttpApplication.AuthenticateRequest" />
 
               
 
-               event of the <see
-               cref="T:System.Web.HttpApplication" />
+               event of the <see cref="T:System.Web.HttpApplication" />
 
               
 
-               instance. For more information about compatibility issues in Integrated mode, see <format
-               type="text/html">
+               instance. For more information about compatibility issues in Integrated mode, see <format type="text/html">
                 <a href="76f9cc78-f978-4837-b1c8-51d642ec4847"
                   >Moving an ASP.NET Application from IIS 6.0 to IIS 7.0</a
                 >
@@ -445,8 +382,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources, other than memory, used by the <see
-             cref="T:System.Web.Security.DefaultAuthenticationModule" />
+            >Releases all resources, other than memory, used by the <see cref="T:System.Web.Security.DefaultAuthenticationModule" />
 
             
 
@@ -473,13 +409,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is not intended to be called from application code.</para>
           <para
-            >The <see
-             cref="M:System.Web.Security.DefaultAuthenticationModule.Init(System.Web.HttpApplication)" />
+            >The <see cref="M:System.Web.Security.DefaultAuthenticationModule.Init(System.Web.HttpApplication)" />
 
             
 
-             method ensures that the <see
-             cref="T:System.Web.Security.DefaultAuthenticationModule" />
+             method ensures that the <see cref="T:System.Web.Security.DefaultAuthenticationModule" />
 
             
 
@@ -489,8 +423,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the <see
-             cref="T:System.Web.Security.DefaultAuthenticationModule" />
+            >Initializes the <see cref="T:System.Web.Security.DefaultAuthenticationModule" />
 
             
 
@@ -498,12 +431,15 @@
           >
         </summary>
         <param name="app">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The current <see
-           cref="T:System.Web.HttpApplication" />
+          The current <see cref="T:System.Web.HttpApplication" />
 
           
 

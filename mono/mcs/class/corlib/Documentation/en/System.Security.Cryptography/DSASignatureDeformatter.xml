@@ -31,8 +31,7 @@
   </Attributes>
   <Docs>
     <remarks
-      >You are encouraged to use this class for verifying all DSA signatures to ensure code portability with all DSA implementation. Some DSA implementations, like <see
-       cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />
+      >You are encouraged to use this class for verifying all DSA signatures to ensure code portability with all DSA implementation. Some DSA implementations, like <see cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />
 
       
 
@@ -41,8 +40,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Verifies a Digital Signature Algorithm (<see
-         cref="T:System.Security.Cryptography.DSA" />
+        >Verifies a Digital Signature Algorithm (<see cref="T:System.Security.Cryptography.DSA" />
 
         
 
@@ -70,8 +68,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.DSASignatureDeformatter" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.DSASignatureDeformatter" />
 
             
 
@@ -102,10 +99,8 @@
       <Docs>
         <remarks
           >Using this constructor is equivalent to the following code:
-<example
-          >
-            <code lang="C#"
-              >
+<example>
+            <code lang="C#">
 DSASignatureDeformatter d = new DSASignatureDeformatter ();
 d.SetKey (dsa);
   </code
@@ -115,8 +110,7 @@ d.SetKey (dsa);
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.DSASignatureDeformatter" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.DSASignatureDeformatter" />
 
             
 
@@ -124,12 +118,15 @@ d.SetKey (dsa);
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The instance of Digital Signature Algorithm (<see
-           cref="T:System.Security.Cryptography.DSA" />
+          The instance of Digital Signature Algorithm (<see cref="T:System.Security.Cryptography.DSA" />
 
           
 
@@ -160,15 +157,12 @@ d.SetKey (dsa);
       </Parameters>
       <Docs>
         <remarks>
-          <para
-            >
-This class only support the <see
-             cref="T:System.Security.Cryptography.SHA1" />
+          <para>
+This class only support the <see cref="T:System.Security.Cryptography.SHA1" />
 
             
 
-             hash algorithm. Any name that resolves in another hash algorithm (or anything else) will throw a <see
-             cref="T:System.Security.Cryptography.CryptographicUnexpectedOperationException" />
+             hash algorithm. Any name that resolves in another hash algorithm (or anything else) will throw a <see cref="T:System.Security.Cryptography.CryptographicUnexpectedOperationException" />
 
             
 
@@ -179,8 +173,7 @@ This class only support the <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the hash algorithm for the Digital Signature Algorithm (<see
-             cref="T:System.Security.Cryptography.DSA" />
+            >Specifies the hash algorithm for the Digital Signature Algorithm (<see cref="T:System.Security.Cryptography.DSA" />
 
             
 
@@ -188,7 +181,11 @@ This class only support the <see
           >
         </summary>
         <param name="strName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -222,8 +219,7 @@ This class only support the <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the key to be used for the Digital Signature Algorithm (<see
-             cref="T:System.Security.Cryptography.DSA" />
+            >Specifies the key to be used for the Digital Signature Algorithm (<see cref="T:System.Security.Cryptography.DSA" />
 
             
 
@@ -231,12 +227,15 @@ This class only support the <see
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The instance of <see
-           cref="T:System.Security.Cryptography.DSA" />
+          The instance of <see cref="T:System.Security.Cryptography.DSA" />
 
           
 
@@ -268,20 +267,16 @@ This class only support the <see
       </Parameters>
       <Docs>
         <remarks>
-          <para
-            >
-A <see
-             cref="T:System.Security.Cryptography.CryptographicUnexpectedOperationException" />
+          <para>
+A <see cref="T:System.Security.Cryptography.CryptographicUnexpectedOperationException" />
 
             
 
-             will be thrown if a <see
-             cref="T:System.Security.Cryptography.DSA" />
+             will be thrown if a <see cref="T:System.Security.Cryptography.DSA" />
 
             
 
-             object instance hasn't been set in the constructor or by <see
-             cref="M:System.Security.Cryptography.DSASignatureFormatter.SetKey" />
+             object instance hasn't been set in the constructor or by <see cref="M:System.Security.Cryptography.DSASignatureFormatter.SetKey" />
 
             
 
@@ -298,8 +293,7 @@ The size of the signature, 40 bytes, isn't affected by the length of the public 
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Verifies the Digital Signature Algorithm (<see
-             cref="T:System.Security.Cryptography.DSA" />
+            >Verifies the Digital Signature Algorithm (<see cref="T:System.Security.Cryptography.DSA" />
 
             
 
@@ -311,24 +305,30 @@ The size of the signature, 40 bytes, isn't affected by the length of the public 
           <para>true if the signature is valid for the data; otherwise, false.</para>
         </returns>
         <param name="rgbHash">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The data signed with <paramref
-           name="rgbSignature" />
+          The data signed with <paramref name="rgbSignature" />
 
           
 
           . </param
         >
         <param name="rgbSignature">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The signature to be verified for <paramref
-           name="rgbHash" />
+          The signature to be verified for <paramref name="rgbHash" />
 
           
 

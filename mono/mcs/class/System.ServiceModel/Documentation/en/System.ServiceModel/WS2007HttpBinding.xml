@@ -20,28 +20,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.WS2007HttpBinding" />
+        >The <see cref="T:System.ServiceModel.WS2007HttpBinding" />
 
         
 
-         class adds a system-provided binding similar to <see
-         cref="T:System.ServiceModel.WSHttpBinding" />
+         class adds a system-provided binding similar to <see cref="T:System.ServiceModel.WSHttpBinding" />
 
         
 
-         but uses the Organization for the Advancement of Structured Information Standards (OASIS) standard versions of the <see
-         cref="T:System.ServiceModel.ReliableSession" />
+         but uses the Organization for the Advancement of Structured Information Standards (OASIS) standard versions of the <see cref="T:System.ServiceModel.ReliableSession" />
 
         
 
-        , <see
-         cref="P:System.ServiceModel.WSHttpBinding.Security" />
+        , <see cref="P:System.ServiceModel.WSHttpBinding.Security" />
 
         
 
-        , and <see
-         cref="P:System.ServiceModel.WSHttpBindingBase.TransactionFlow" />
+        , and <see cref="P:System.ServiceModel.WSHttpBindingBase.TransactionFlow" />
 
         
 
@@ -51,23 +46,19 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an interoperable binding that derives from <see
-         cref="T:System.ServiceModel.WSHttpBinding" />
+        >Represents an interoperable binding that derives from <see cref="T:System.ServiceModel.WSHttpBinding" />
 
         
 
-         and provides support for the updated versions of the <see
-         cref="P:System.ServiceModel.WSHttpBinding.Security" />
+         and provides support for the updated versions of the <see cref="P:System.ServiceModel.WSHttpBinding.Security" />
 
         
 
-        , <see
-         cref="T:System.ServiceModel.ReliableSession" />
+        , <see cref="T:System.ServiceModel.ReliableSession" />
 
         
 
-        , and <see
-         cref="P:System.ServiceModel.WSHttpBindingBase.TransactionFlow" />
+        , and <see cref="P:System.ServiceModel.WSHttpBindingBase.TransactionFlow" />
 
         
 
@@ -91,23 +82,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes an instance of the <see
-             cref="T:System.ServiceModel.WS2007HttpBinding" />
+            >This constructor initializes an instance of the <see cref="T:System.ServiceModel.WS2007HttpBinding" />
 
             
 
-             class and sets the <see
-             cref="T:System.ServiceModel.MessageSecurityVersion" />
+             class and sets the <see cref="T:System.ServiceModel.MessageSecurityVersion" />
 
             
 
-            , <see
-             cref="T:System.ServiceModel.ReliableMessagingVersion" />
+            , <see cref="T:System.ServiceModel.ReliableMessagingVersion" />
 
             
 
-            , and <see
-             cref="T:System.ServiceModel.TransactionProtocol" />
+            , and <see cref="T:System.ServiceModel.TransactionProtocol" />
 
             
 
@@ -117,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.WS2007HttpBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.WS2007HttpBinding" />
 
             
 
@@ -149,8 +135,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.WS2007HttpBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.WS2007HttpBinding" />
 
             
 
@@ -178,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.WS2007HttpBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.WS2007HttpBinding" />
 
             
 
@@ -210,23 +194,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes an instance of the <see
-             cref="T:System.ServiceModel.WS2007HttpBinding" />
+            >This constructor initializes an instance of the <see cref="T:System.ServiceModel.WS2007HttpBinding" />
 
             
 
-             class and sets the <see
-             cref="T:System.ServiceModel.MessageSecurityVersion" />
+             class and sets the <see cref="T:System.ServiceModel.MessageSecurityVersion" />
 
             
 
-            , <see
-             cref="T:System.ServiceModel.ReliableMessagingVersion" />
+            , <see cref="T:System.ServiceModel.ReliableMessagingVersion" />
 
             
 
-            , and <see
-             cref="T:System.ServiceModel.TransactionProtocol" />
+            , and <see cref="T:System.ServiceModel.TransactionProtocol" />
 
             
 
@@ -236,8 +216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.WS2007HttpBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.WS2007HttpBinding" />
 
             
 
@@ -245,7 +224,11 @@
           >
         </summary>
         <param name="reliableSessionEnabled">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

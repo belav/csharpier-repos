@@ -33,13 +33,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Configuration.ConfigXmlDocument" />
+        >The <see cref="T:System.Configuration.ConfigXmlDocument" />
 
         
 
-         wraps the corresponding <see
-         cref="T:System.Xml.XmlDocument" />
+         wraps the corresponding <see cref="T:System.Xml.XmlDocument" />
 
         
 
@@ -49,8 +47,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Wraps the corresponding <see
-         cref="T:System.Xml.XmlDocument" />
+        >Wraps the corresponding <see cref="T:System.Xml.XmlDocument" />
 
         
 
@@ -78,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.ConfigXmlDocument" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigXmlDocument" />
 
             
 
@@ -120,8 +116,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Serialization.XmlAttributes.XmlAttribute" />
+            >The <see cref="P:System.Xml.Serialization.XmlAttributes.XmlAttribute" />
 
             
 
@@ -129,21 +124,33 @@
           >
         </returns>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The prefix definition.</param
         >
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name that is used locally.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -181,8 +188,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.XmlCDataSection" />
+            >The <see cref="T:System.Xml.XmlCDataSection" />
 
             
 
@@ -190,7 +196,11 @@
           >
         </returns>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -229,8 +239,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.XmlComment" />
+            >The <see cref="T:System.Xml.XmlComment" />
 
             
 
@@ -271,8 +280,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.XmlElement" />
+            >The <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -280,21 +288,33 @@
           >
         </returns>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The prefix definition.</param
         >
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name used locally.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -332,8 +352,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.XmlSignificantWhitespace" />
+            >The <see cref="T:System.Xml.XmlSignificantWhitespace" />
 
             
 
@@ -341,7 +360,11 @@
           >
         </returns>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -379,8 +402,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.XmlText" />
+            >The <see cref="T:System.Xml.XmlText" />
 
             
 
@@ -388,7 +410,11 @@
           >
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -426,8 +452,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.XmlWhitespace" />
+            >The <see cref="T:System.Xml.XmlWhitespace" />
 
             
 
@@ -435,7 +460,11 @@
           >
         </returns>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -510,7 +539,11 @@
           <para>Loads the configuration file.</para>
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -547,14 +580,22 @@
           <para>Loads a single configuration element.</para>
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the file.</param
         >
         <param name="sourceReader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

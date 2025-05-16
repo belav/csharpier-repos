@@ -26,13 +26,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider" />
+        >The <see cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider" />
 
         
 
-         class is a serialization provider that provides a localization feature. It supports serializing to resources through <see
-         cref="T:System.ComponentModel.Design.IResourceService" />
+         class is a serialization provider that provides a localization feature. It supports serializing to resources through <see cref="T:System.ComponentModel.Design.IResourceService" />
 
         
 
@@ -66,26 +64,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="Overload:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider.#ctor" />
+            >The <see cref="Overload:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider.#ctor" />
 
             
 
              constructor creates a new adapter and attaches it to the serialization manager. This adds itself as a serializer for resources into the serialization manager, and, if not already added, adds itself as an extender provider to the root component. </para
           >
           <para
-            >If the <paramref
-             name="model" />
+            >If the <paramref name="model" />
 
             
 
-             parameter is not <see
-             cref="F:System.ComponentModel.Design.Serialization.CodeDomLocalizationModel.None" />
+             parameter is not <see cref="F:System.ComponentModel.Design.Serialization.CodeDomLocalizationModel.None" />
 
             
 
-            , the <see
-             cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider" />
+            , the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider" />
 
             
 
@@ -95,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider" />
 
             
 
@@ -104,24 +97,30 @@
           >
         </summary>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IServiceProvider" />
+          An <see cref="T:System.IServiceProvider" />
 
           
 
            used by the localization provider to add its extender properties.</param
         >
         <param name="model">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationModel" />
+          A <see cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationModel" />
 
           
 
@@ -150,34 +149,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="Overload:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider.#ctor" />
+            >The <see cref="Overload:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider.#ctor" />
 
             
 
              constructor creates a new adapter and attaches it to the serialization manager. This adds itself as a serializer for resources into the serialization manager, and, if not already added, adds itself as an extender provider to the root component.</para
           >
           <para
-            >If the <paramref
-             name="model" />
+            >If the <paramref name="model" />
 
             
 
-             parameter is not <see
-             cref="F:System.ComponentModel.Design.Serialization.CodeDomLocalizationModel.None" />
+             parameter is not <see cref="F:System.ComponentModel.Design.Serialization.CodeDomLocalizationModel.None" />
 
             
 
-            , the <see
-             cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider" />
+            , the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider" />
 
             
 
              provides the Language and Localizable properties.</para
           >
           <para
-            >If <paramref
-             name="supportedCultures" />
+            >If <paramref name="supportedCultures" />
 
             
 
@@ -187,8 +181,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider" />
 
             
 
@@ -196,31 +189,41 @@
           >
         </summary>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IServiceProvider" />
+          An <see cref="T:System.IServiceProvider" />
 
           
 
            used by the localization provider to add its extender properties.</param
         >
         <param name="model">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationModel" />
+          A <see cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationModel" />
 
           
 
            value indicating the localization model to be used by the CodeDOM resource adapter </param
         >
         <param name="supportedCultures">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -243,8 +246,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider" />
+            >Releases all resources used by the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider" />
 
             
 
@@ -278,13 +280,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationProvider" />
+             instance is cast to an <see cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationProvider" />
 
             
 
@@ -294,8 +294,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.Design.Serialization.IDesignerSerializationProvider.GetSerializer(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object,System.Type,System.Type)" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.Design.Serialization.IDesignerSerializationProvider.GetSerializer(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object,System.Type,System.Type)" />
 
             
 
@@ -307,28 +306,44 @@
           <para>An instance of a serializer of the type requested, or null if the request cannot be satisfied.</para>
         </returns>
         <param name="manager">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The serialization manager requesting the serializer. </param
         >
         <param name="currentSerializer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An instance of the current serializer of the specified type. This can be null if no serializer of the specified type exists. </param
         >
         <param name="objectType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data type of the object to serialize. </param
         >
         <param name="serializerType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -23,8 +23,7 @@
   </Attributes>
   <Docs>
     <summary
-      >File and directory change notification flags for <see
-       cref="M:Mono.Unix.Native.Syscall.fcntl" />
+      >File and directory change notification flags for <see cref="M:Mono.Unix.Native.Syscall.fcntl" />
 
       
 
@@ -32,18 +31,15 @@
     >
     <remarks>
       <para
-        >These values may be bitwise ORed together to form the <paramref
-         name="arg" />
+        >These values may be bitwise ORed together to form the <paramref name="arg" />
 
         
 
-         parameter for <see
-         cref="M:Mono.Unix.Native.Syscall.fcntl" />
+         parameter for <see cref="M:Mono.Unix.Native.Syscall.fcntl" />
 
         
 
-        .  They may only be used with the <see
-         cref="F:Mono.Unix.Native.FcntlCommand.F_NOTIFY" />
+        .  They may only be used with the <see cref="F:Mono.Unix.Native.FcntlCommand.F_NOTIFY" />
 
         
 

@@ -20,13 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.ListView.VirtualItemsSelectionRangeChanged" />
+        >The <see cref="E:System.Windows.Forms.ListView.VirtualItemsSelectionRangeChanged" />
 
         
 
-         event occurs when the <see
-         cref="T:System.Windows.Forms.ListView" />
+         event occurs when the <see cref="T:System.Windows.Forms.ListView" />
 
         
 
@@ -36,8 +34,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.ListView.VirtualItemsSelectionRangeChanged" />
+        >Provides data for the <see cref="E:System.Windows.Forms.ListView.VirtualItemsSelectionRangeChanged" />
 
         
 
@@ -62,13 +59,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ListViewVirtualItemsSelectionRangeChangedEventArgs" />
+            >The <see cref="T:System.Windows.Forms.ListViewVirtualItemsSelectionRangeChangedEventArgs" />
 
             
 
-             occurs when items are changed from selected to deselected, and deselected to selected. The <paramref
-             name="isSelected" />
+             occurs when items are changed from selected to deselected, and deselected to selected. The <paramref name="isSelected" />
 
             
 
@@ -78,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewVirtualItemsSelectionRangeChangedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewVirtualItemsSelectionRangeChangedEventArgs" />
 
             
 
@@ -87,21 +81,33 @@
           >
         </summary>
         <param name="startIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index of the first item in the range that has changed.</param
         >
         <param name="endIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index of the last item in the range that has changed.</param
         >
         <param name="isSelected">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -143,13 +149,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ListViewVirtualItemsSelectionRangeChangedEventArgs" />
+            >The <see cref="T:System.Windows.Forms.ListViewVirtualItemsSelectionRangeChangedEventArgs" />
 
             
 
-             occurs when items are changed from selected to deselected, and deselected to selected. The <paramref
-             name="isSelected" />
+             occurs when items are changed from selected to deselected, and deselected to selected. The <paramref name="isSelected" />
 
             
 

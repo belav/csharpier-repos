@@ -14,8 +14,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Compilation.ImplicitResourceKey" />
+        >The <see cref="T:System.Web.Compilation.ImplicitResourceKey" />
 
         
 
@@ -49,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Compilation.ImplicitResourceKey" />
+            >Initializes a new instance of the <see cref="T:System.Web.Compilation.ImplicitResourceKey" />
 
             
 
@@ -79,23 +77,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Compilation.ImplicitResourceKey" />
+            >Initializes a new instance of the <see cref="T:System.Web.Compilation.ImplicitResourceKey" />
 
             
 
-             class with the specified values for the <see
-             cref="P:System.Web.Compilation.ImplicitResourceKey.Filter" />
+             class with the specified values for the <see cref="P:System.Web.Compilation.ImplicitResourceKey.Filter" />
 
             
 
-            , <see
-             cref="P:System.Web.Compilation.ImplicitResourceKey.KeyPrefix" />
+            , <see cref="P:System.Web.Compilation.ImplicitResourceKey.KeyPrefix" />
 
             
 
-             and <see
-             cref="P:System.Web.Compilation.ImplicitResourceKey.Property" />
+             and <see cref="P:System.Web.Compilation.ImplicitResourceKey.Property" />
 
             
 
@@ -103,21 +97,33 @@
           >
         </summary>
         <param name="filter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The filter value of an implicit resource key.</param
         >
         <param name="keyPrefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The prefix for identifying a group of properties.</param
         >
         <param name="property">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -140,8 +146,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Compilation.ImplicitResourceKey.Filter" />
+            >The <see cref="P:System.Web.Compilation.ImplicitResourceKey.Filter" />
 
             
 
@@ -152,8 +157,7 @@
         ie:text="Welcome Internet Explorer User"  
         forecolor="blue"/&gt;  </code>
           <para
-            >This resource contains three keys that potentially have localized resource values to retrieve from the resource file or source code. One of these keys is Ie:Welcome.Text, in which "Ie" is the <see
-             cref="P:System.Web.Compilation.ImplicitResourceKey.Filter" />
+            >This resource contains three keys that potentially have localized resource values to retrieve from the resource file or source code. One of these keys is Ie:Welcome.Text, in which "Ie" is the <see cref="P:System.Web.Compilation.ImplicitResourceKey.Filter" />
 
             
 
@@ -181,13 +185,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Compilation.ImplicitResourceKey.KeyPrefix" />
+            >The <see cref="P:System.Web.Compilation.ImplicitResourceKey.KeyPrefix" />
 
             
 
-             property ties together a collection of properties that can be assigned to a control. The <see
-             cref="P:System.Web.Compilation.ImplicitResourceKey.KeyPrefix" />
+             property ties together a collection of properties that can be assigned to a control. The <see cref="P:System.Web.Compilation.ImplicitResourceKey.KeyPrefix" />
 
             
 
@@ -198,8 +200,7 @@
         ie:text="Welcome Internet Explorer User"  
         forecolor="blue"/&gt;  </code>
           <para
-            >This resource contains three keys, Welcome.Text, Ie:Welcome.Text, and Welcome.Forecolor, that potentially have localized resource values to retrieve from the resource file or source code. Each key has "Welcome" as the <see
-             cref="P:System.Web.Compilation.ImplicitResourceKey.KeyPrefix" />
+            >This resource contains three keys, Welcome.Text, Ie:Welcome.Text, and Welcome.Forecolor, that potentially have localized resource values to retrieve from the resource file or source code. Each key has "Welcome" as the <see cref="P:System.Web.Compilation.ImplicitResourceKey.KeyPrefix" />
 
             
 
@@ -227,13 +228,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Compilation.ImplicitResourceKey.Property" />
+            >The <see cref="P:System.Web.Compilation.ImplicitResourceKey.Property" />
 
             
 
-             property specifies the control property to be localized. The <see
-             cref="P:System.Web.Compilation.ImplicitResourceKey.Property" />
+             property specifies the control property to be localized. The <see cref="P:System.Web.Compilation.ImplicitResourceKey.Property" />
 
             
 
@@ -244,8 +243,7 @@
         ie:text="Welcome Internet Explorer User"  
         forecolor="blue"/&gt;  </code>
           <para
-            >This resource contains three keys, Welcome.Text, Ie:Welcome.Text, and Welcome.Forecolor, that potentially have localized resource values to retrieve from the resource file or source code. Those keys have <see
-             cref="P:System.Web.Compilation.ImplicitResourceKey.Property" />
+            >This resource contains three keys, Welcome.Text, Ie:Welcome.Text, and Welcome.Forecolor, that potentially have localized resource values to retrieve from the resource file or source code. Those keys have <see cref="P:System.Web.Compilation.ImplicitResourceKey.Property" />
 
             
 

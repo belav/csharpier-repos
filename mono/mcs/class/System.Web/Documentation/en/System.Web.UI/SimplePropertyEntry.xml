@@ -17,13 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.SimplePropertyEntry" />
+        >The <see cref="T:System.Web.UI.SimplePropertyEntry" />
 
         
 
-         class represents simple properties or those properties that are not collections. The <see
-         cref="T:System.Web.UI.ComplexPropertyEntry" />
+         class represents simple properties or those properties that are not collections. The <see cref="T:System.Web.UI.ComplexPropertyEntry" />
 
         
 
@@ -49,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="M:System.Web.UI.IAttributeAccessor.SetAttribute(System.String,System.String)" />
+            >Gets or sets a value indicating whether the <see cref="M:System.Web.UI.IAttributeAccessor.SetAttribute(System.String,System.String)" />
 
             
 

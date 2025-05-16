@@ -49,8 +49,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called by the <see
-             cref="T:System.Net.HttpListener" />
+            >This constructor is called by the <see cref="T:System.Net.HttpListener" />
 
             
 
@@ -60,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.HttpListenerBasicIdentity" />
+            >Initializes a new instance of the <see cref="T:System.Net.HttpListenerBasicIdentity" />
 
             
 
@@ -69,14 +67,22 @@
           >
         </summary>
         <param name="username">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The user name.</param
         >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

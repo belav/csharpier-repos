@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Web.Configuration.CodeSubDirectory" />
+        >A <see cref="T:System.Web.Configuration.CodeSubDirectory" />
 
         
 
@@ -44,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.CodeSubDirectory" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.CodeSubDirectory" />
 
             
 
@@ -53,12 +51,15 @@
           >
         </summary>
         <param name="directoryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string value specifying the <see
-           cref="T:System.Web.Configuration.CodeSubDirectory" />
+          A string value specifying the <see cref="T:System.Web.Configuration.CodeSubDirectory" />
 
           
 

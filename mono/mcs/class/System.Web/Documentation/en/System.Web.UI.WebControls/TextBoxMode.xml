@@ -15,13 +15,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.TextBoxMode" />
+        >The <see cref="T:System.Web.UI.WebControls.TextBoxMode" />
 
         
 
-         enumeration represents the different display options for <see
-         cref="T:System.Web.UI.WebControls.TextBox" />
+         enumeration represents the different display options for <see cref="T:System.Web.UI.WebControls.TextBox" />
 
         
 
@@ -32,13 +30,11 @@
 
         
 
-         mode displays the <see
-         cref="T:System.Web.UI.WebControls.TextBox" />
+         mode displays the <see cref="T:System.Web.UI.WebControls.TextBox" />
 
         
 
-         control as a single row. If the user enters text that exceeds the physical size of the <see
-         cref="T:System.Web.UI.WebControls.TextBox" />
+         control as a single row. If the user enters text that exceeds the physical size of the <see cref="T:System.Web.UI.WebControls.TextBox" />
 
         
 
@@ -49,41 +45,34 @@
 
         
 
-         mode displays the height of the <see
-         cref="T:System.Web.UI.WebControls.TextBox" />
+         mode displays the height of the <see cref="T:System.Web.UI.WebControls.TextBox" />
 
         
 
-         based on the <see
-         cref="P:System.Web.UI.WebControls.TextBox.Rows" />
+         based on the <see cref="P:System.Web.UI.WebControls.TextBox.Rows" />
 
         
 
-         property, and allows data entry on multiple lines. The text will automatically wrap if the <see
-         cref="P:System.Web.UI.WebControls.TextBox.Wrap" />
+         property, and allows data entry on multiple lines. The text will automatically wrap if the <see cref="P:System.Web.UI.WebControls.TextBox.Wrap" />
 
         
 
-         property is set to true. If the user enters text that exceeds the physical size of the <see
-         cref="T:System.Web.UI.WebControls.TextBox" />
+         property is set to true. If the user enters text that exceeds the physical size of the <see cref="T:System.Web.UI.WebControls.TextBox" />
 
         
 
         , the text will scroll accordingly and scroll bars will appear.</para
       >
       <para
-        >The behavior of <see
-         cref="F:System.Web.UI.WebControls.TextBoxMode.Password" />
+        >The behavior of <see cref="F:System.Web.UI.WebControls.TextBoxMode.Password" />
 
         
 
-         mode is similar to <see
-         cref="F:System.Web.UI.WebControls.TextBoxMode.SingleLine" />
+         mode is similar to <see cref="F:System.Web.UI.WebControls.TextBoxMode.SingleLine" />
 
         
 
-         mode except that all characters entered in the <see
-         cref="T:System.Web.UI.WebControls.TextBox" />
+         mode except that all characters entered in the <see cref="T:System.Web.UI.WebControls.TextBox" />
 
         
 

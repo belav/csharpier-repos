@@ -32,8 +32,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.BaseValidator" />
+        >The <see cref="T:System.Web.UI.WebControls.BaseValidator" />
 
         
 
@@ -58,13 +57,11 @@
           </term>
           <description>
             <para
-              >Validates a value against the value entered into another input control, against a constant value, or against a proper data type by setting the <see
-               cref="P:System.Web.UI.WebControls.CompareValidator.Operator" />
+              >Validates a value against the value entered into another input control, against a constant value, or against a proper data type by setting the <see cref="P:System.Web.UI.WebControls.CompareValidator.Operator" />
 
               
 
-               property to <see
-               cref="F:System.Web.UI.WebControls.ValidationCompareOperator.DataTypeCheck" />
+               property to <see cref="F:System.Web.UI.WebControls.ValidationCompareOperator.DataTypeCheck" />
 
               
 
@@ -115,23 +112,19 @@
       </list>
       <para>Validation controls always validate the associated input control on the server. Validation controls also have complete client-side implementation that allows script-enabled browsers (such as Microsoft Internet Explorer version 4.0 and later) to perform validation on the client. Client-side validation enhances the validation process by checking user input before it is sent to the server. This allows errors to be detected on the client before the form is submitted, avoiding the round trip of information necessary for server-side validation.</para>
       <para
-        >Multiple validation controls can be used with an individual input control to validate different criteria. For example, you can apply multiple validation controls on a <see
-         cref="T:System.Web.UI.WebControls.TextBox" />
+        >Multiple validation controls can be used with an individual input control to validate different criteria. For example, you can apply multiple validation controls on a <see cref="T:System.Web.UI.WebControls.TextBox" />
 
         
 
-         control. You can use a <see
-         cref="T:System.Web.UI.WebControls.RangeValidator" />
+         control. You can use a <see cref="T:System.Web.UI.WebControls.RangeValidator" />
 
         
 
-         control to ensure that the value entered in the <see
-         cref="T:System.Web.UI.WebControls.TextBox" />
+         control to ensure that the value entered in the <see cref="T:System.Web.UI.WebControls.TextBox" />
 
         
 
-         control is within a set range, and a <see
-         cref="T:System.Web.UI.WebControls.RequiredFieldValidator" />
+         control is within a set range, and a <see cref="T:System.Web.UI.WebControls.RequiredFieldValidator" />
 
         
 
@@ -209,36 +202,30 @@
         <para>Some of these controls post back to the server only when the AutoPostBack property is set to true.</para>
       </block>
       <para
-        >These controls each have a ValidationGroup property that, when set, validates only the validation controls within the specified group when the control triggers a post back to the server. To group validation controls, set the <see
-         cref="P:System.Web.UI.WebControls.BaseValidator.ValidationGroup" />
+        >These controls each have a ValidationGroup property that, when set, validates only the validation controls within the specified group when the control triggers a post back to the server. To group validation controls, set the <see cref="P:System.Web.UI.WebControls.BaseValidator.ValidationGroup" />
 
         
 
          property of each validation control to the same value.</para
       >
       <para
-        >To associate an input control with a validation control, use the <see
-         cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
+        >To associate an input control with a validation control, use the <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
 
         
 
-         property. To specify the text to display in a validation control when validation fails, use the <see
-         cref="P:System.Web.UI.WebControls.BaseValidator.Text" />
+         property. To specify the text to display in a validation control when validation fails, use the <see cref="P:System.Web.UI.WebControls.BaseValidator.Text" />
 
         
 
-         property. You can also display a summary of all controls that fail validation in the page by using a <see
-         cref="T:System.Web.UI.WebControls.ValidationSummary" />
+         property. You can also display a summary of all controls that fail validation in the page by using a <see cref="T:System.Web.UI.WebControls.ValidationSummary" />
 
         
 
-         control. To specify the text to display in a <see
-         cref="T:System.Web.UI.WebControls.ValidationSummary" />
+         control. To specify the text to display in a <see cref="T:System.Web.UI.WebControls.ValidationSummary" />
 
         
 
-         control, use the <see
-         cref="P:System.Web.UI.WebControls.BaseValidator.ErrorMessage" />
+         control, use the <see cref="P:System.Web.UI.WebControls.BaseValidator.ErrorMessage" />
 
         
 
@@ -246,18 +233,15 @@
       >
       <block subset="none" type="note">
         <para
-          >If you set the <see
-           cref="P:System.Web.UI.WebControls.BaseValidator.ErrorMessage" />
+          >If you set the <see cref="P:System.Web.UI.WebControls.BaseValidator.ErrorMessage" />
 
           
 
-           property without setting the <see
-           cref="P:System.Web.UI.WebControls.BaseValidator.Text" />
+           property without setting the <see cref="P:System.Web.UI.WebControls.BaseValidator.Text" />
 
           
 
-           property, the value of the <see
-           cref="P:System.Web.UI.WebControls.BaseValidator.ErrorMessage" />
+           property, the value of the <see cref="P:System.Web.UI.WebControls.BaseValidator.ErrorMessage" />
 
           
 
@@ -265,31 +249,26 @@
         >
       </block>
       <para
-        >When using validator controls, you should always check the results of server-side validation before performing any processing. After a postback but before your event methods are called, the page calls the validator controls and aggregates their results into the <see
-         cref="P:System.Web.UI.Page.IsValid" />
+        >When using validator controls, you should always check the results of server-side validation before performing any processing. After a postback but before your event methods are called, the page calls the validator controls and aggregates their results into the <see cref="P:System.Web.UI.Page.IsValid" />
 
         
 
-         property. (You can also call the validator controls explicitly using the Validate method.) In your own code, you should check that the <see
-         cref="P:System.Web.UI.Page.IsValid" />
+         property. (You can also call the validator controls explicitly using the Validate method.) In your own code, you should check that the <see cref="P:System.Web.UI.Page.IsValid" />
 
         
 
-         property returns true before processing input. Even though script-enabled browsers might prevent a postback from occurring on the client if a validation check has failed, you should always also check <see
-         cref="P:System.Web.UI.Page.IsValid" />
+         property returns true before processing input. Even though script-enabled browsers might prevent a postback from occurring on the client if a validation check has failed, you should always also check <see cref="P:System.Web.UI.Page.IsValid" />
 
         
 
          in server code before processing validated data.</para
       >
       <para
-        >You can also manually perform validation. To validate all validation controls on the page, use the <see
-         cref="M:System.Web.UI.Page.Validate" />
+        >You can also manually perform validation. To validate all validation controls on the page, use the <see cref="M:System.Web.UI.Page.Validate" />
 
         
 
-         method. Individual validation controls can be validated by using the <see
-         cref="M:System.Web.UI.WebControls.BaseValidator.Validate" />
+         method. Individual validation controls can be validated by using the <see cref="M:System.Web.UI.WebControls.BaseValidator.Validate" />
 
         
 
@@ -297,28 +276,23 @@
       >
       <block subset="none" type="note">
         <para
-          >If you use the <see
-           cref="P:System.Web.UI.Page.IsValid" />
+          >If you use the <see cref="P:System.Web.UI.Page.IsValid" />
 
           
 
-           property in a Page_Load method, you must first explicitly call the <see
-           cref="M:System.Web.UI.Page.Validate" />
+           property in a Page_Load method, you must first explicitly call the <see cref="M:System.Web.UI.Page.Validate" />
 
           
 
-           method. Because validation occurs after the <see
-           cref="E:System.Web.UI.Control.Load" />
+           method. Because validation occurs after the <see cref="E:System.Web.UI.Control.Load" />
 
           
 
-           event for the page, but before the event handler for the Click or Command events, the <see
-           cref="P:System.Web.UI.Page.IsValid" />
+           event for the page, but before the event handler for the Click or Command events, the <see cref="P:System.Web.UI.Page.IsValid" />
 
           
 
-           property is not updated until the <see
-           cref="M:System.Web.UI.Page.Validate" />
+           property is not updated until the <see cref="M:System.Web.UI.Page.Validate" />
 
           
 
@@ -380,8 +354,7 @@
       </list>
       <block subset="none" type="note">
         <para
-          >For an input control to be validated, the <see
-           cref="T:System.Web.UI.ValidationPropertyAttribute" />
+          >For an input control to be validated, the <see cref="T:System.Web.UI.ValidationPropertyAttribute" />
 
           
 
@@ -390,23 +363,19 @@
       </block>
       <block subset="none" type="note">
         <para
-          >When you use validator controls that derive from <see
-           cref="T:System.Web.UI.WebControls.BaseValidator" />
+          >When you use validator controls that derive from <see cref="T:System.Web.UI.WebControls.BaseValidator" />
 
           
 
-           inside an <see
-           cref="T:System.Web.UI.UpdatePanel" />
+           inside an <see cref="T:System.Web.UI.UpdatePanel" />
 
           
 
-           control, make sure that the validator control and the control it is associated with are in the same panel. For more information about using the <see
-           cref="T:System.Web.UI.UpdatePanel" />
+           control, make sure that the validator control and the control it is associated with are in the same panel. For more information about using the <see cref="T:System.Web.UI.UpdatePanel" />
 
           
 
-           control for partial-page updates, see <format
-           type="text/html">
+           control for partial-page updates, see <format type="text/html">
             <a href="5c12736d-d9e9-464a-9388-3fe0f9f49e49">Partial-Page Rendering Overview</a>
           </format>
 
@@ -416,21 +385,18 @@
         >
       </block>
       <para
-        >When validation fails, you can set the focus on the associated input control by setting the <see
-         cref="P:System.Web.UI.WebControls.BaseValidator.SetFocusOnError" />
+        >When validation fails, you can set the focus on the associated input control by setting the <see cref="P:System.Web.UI.WebControls.BaseValidator.SetFocusOnError" />
 
         
 
          property to true.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.WebControls.BaseValidator" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.BaseValidator" />
 
         
 
-        , see the <see
-         cref="M:System.Web.UI.WebControls.BaseValidator.#ctor" />
+        , see the <see cref="M:System.Web.UI.WebControls.BaseValidator.#ctor" />
 
         
 
@@ -440,8 +406,7 @@
         <h2>Accessibility</h2>
       </format>
       <para
-        >For information about how to configure this control so that it generates markup that conforms to accessibility standards, see <format
-         type="text/html">
+        >For information about how to configure this control so that it generates markup that conforms to accessibility standards, see <format type="text/html">
           <a href="7e3ce9c4-6b7d-4fb1-94b5-72cf2a44fe13"
             >Accessibility in Visual Studio 2010 and ASP.NET 4</a
           >
@@ -449,8 +414,7 @@
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
 
@@ -475,8 +439,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor is not called directly. Validation controls that inherit from this class can call this constructor from their own constructors to initialize the base properties.</para>
           <para
-            >The following table shows initial property values for an instance of <see
-             cref="T:System.Web.UI.WebControls.BaseValidator" />
+            >The following table shows initial property values for an instance of <see cref="T:System.Web.UI.WebControls.BaseValidator" />
 
             
 
@@ -540,8 +503,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.BaseValidator" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.BaseValidator" />
 
             
 
@@ -570,13 +532,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BaseValidator.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.WebControls.BaseValidator.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method is used to render the attributes of the control in the HTML tag for the control. This method is typically overridden by control developers in derived classes to insert the appropriate attributes and styles to the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             method is used to render the attributes of the control in the HTML tag for the control. This method is typically overridden by control developers in derived classes to insert the appropriate attributes and styles to the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -586,8 +546,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the HTML attributes and styles that need to be rendered for the control to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Adds the HTML attributes and styles that need to be rendered for the control to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -595,12 +554,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          An <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -638,8 +600,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is not supported. This property is supported only on the base <see
-             cref="T:System.Web.UI.WebControls.Label" />
+            >This property is not supported. This property is supported only on the base <see cref="T:System.Web.UI.WebControls.Label" />
 
             
 
@@ -669,13 +630,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BaseValidator.CheckControlValidationProperty(System.String,System.String)" />
+            >The <see cref="M:System.Web.UI.WebControls.BaseValidator.CheckControlValidationProperty(System.String,System.String)" />
 
             
 
-             method is a helper method used primarily by the <see
-             cref="M:System.Web.UI.WebControls.BaseValidator.ControlPropertiesValid" />
+             method is a helper method used primarily by the <see cref="M:System.Web.UI.WebControls.BaseValidator.ControlPropertiesValid" />
 
             
 
@@ -690,14 +649,22 @@
           <para>Verifies whether the specified control is on the page and contains validation properties.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The control to verify. </param
         >
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -720,23 +687,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BaseValidator.ControlPropertiesValid" />
+            >The <see cref="M:System.Web.UI.WebControls.BaseValidator.ControlPropertiesValid" />
 
             
 
-             method is a helper method used primarily by the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.PropertiesValid" />
+             method is a helper method used primarily by the <see cref="P:System.Web.UI.WebControls.BaseValidator.PropertiesValid" />
 
             
 
-             property to determine whether the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
+             property to determine whether the <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
 
             
 
-             property contains a valid input control. To be a valid input control, the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
+             property contains a valid input control. To be a valid input control, the <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
 
             
 
@@ -749,8 +712,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the control specified by the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
+            >Determines whether the control specified by the <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
 
             
 
@@ -760,8 +722,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the control specified by <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
+            >true if the control specified by <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
 
             
 
@@ -786,13 +747,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
 
             
 
-             property to specify the input control to validate. This property must be set to the ID of an input control for all validation controls except the <see
-             cref="T:System.Web.UI.WebControls.CustomValidator" />
+             property to specify the input control to validate. This property must be set to the ID of an input control for all validation controls except the <see cref="T:System.Web.UI.WebControls.CustomValidator" />
 
             
 
@@ -853,8 +812,7 @@
           </list>
           <block subset="none" type="note">
             <para
-              >For an input control to be validated, the <see
-               cref="T:System.Web.UI.ValidationPropertyAttribute" />
+              >For an input control to be validated, the <see cref="T:System.Web.UI.ValidationPropertyAttribute" />
 
               
 
@@ -862,31 +820,26 @@
             >
           </block>
           <para
-            >All validation controls, except the <see
-             cref="T:System.Web.UI.WebControls.RequiredFieldValidator" />
+            >All validation controls, except the <see cref="T:System.Web.UI.WebControls.RequiredFieldValidator" />
 
             
 
-             control, will pass validation if the input control specified by the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
+             control, will pass validation if the input control specified by the <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
 
             
 
-             property contains no text. If you are using a <see
-             cref="T:System.Web.UI.WebControls.CustomValidator" />
+             property contains no text. If you are using a <see cref="T:System.Web.UI.WebControls.CustomValidator" />
 
             
 
              control, the client-side and server-side validation functions are not called either.</para
           >
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -930,13 +883,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BaseValidator.DetermineRenderUplevel" />
+            >The <see cref="M:System.Web.UI.WebControls.BaseValidator.DetermineRenderUplevel" />
 
             
 
-             method is a helper function that is used primarily by the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.RenderUplevel" />
+             method is a helper function that is used primarily by the <see cref="P:System.Web.UI.WebControls.BaseValidator.RenderUplevel" />
 
             
 
@@ -948,18 +899,15 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.Web.HttpBrowserCapabilitiesBase.W3CDomVersion" />
+                >The <see cref="P:System.Web.HttpBrowserCapabilitiesBase.W3CDomVersion" />
 
                 
 
-                 property of the <see
-                 cref="T:System.Web.HttpBrowserCapabilitiesBase" />
+                 property of the <see cref="T:System.Web.HttpBrowserCapabilitiesBase" />
 
                 
 
-                 object that is stored in the <see
-                 cref="P:System.Web.HttpRequest.Browser" />
+                 object that is stored in the <see cref="P:System.Web.HttpRequest.Browser" />
 
                 
 
@@ -968,18 +916,15 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.Web.Configuration.HttpCapabilitiesBase.EcmaScriptVersion" />
+                >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.EcmaScriptVersion" />
 
                 
 
-                 property of the <see
-                 cref="T:System.Web.HttpBrowserCapabilitiesBase" />
+                 property of the <see cref="T:System.Web.HttpBrowserCapabilitiesBase" />
 
                 
 
-                 object that is stored in the <see
-                 cref="P:System.Web.HttpRequest.Browser" />
+                 object that is stored in the <see cref="P:System.Web.HttpRequest.Browser" />
 
                 
 
@@ -1020,8 +965,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.Display" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseValidator.Display" />
 
             
 
@@ -1065,13 +1009,11 @@
           </list>
           <block subset="none" type="note">
             <para
-              >The display behavior depends on whether client-side validation is performed. If client-side validation is not active (because the browser does not support it or because it has been disabled by using the <see
-               cref="P:System.Web.UI.Page.ClientTarget" />
+              >The display behavior depends on whether client-side validation is performed. If client-side validation is not active (because the browser does not support it or because it has been disabled by using the <see cref="P:System.Web.UI.Page.ClientTarget" />
 
               
 
-               page directive or <see
-               cref="P:System.Web.UI.WebControls.BaseValidator.EnableClientScript" />
+               page directive or <see cref="P:System.Web.UI.WebControls.BaseValidator.EnableClientScript" />
 
               
 
@@ -1079,13 +1021,11 @@
             >
           </block>
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -1124,8 +1064,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.EnableClientScript" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseValidator.EnableClientScript" />
 
             
 
@@ -1134,13 +1073,11 @@
           <para>Validation controls always perform validation on the server. They also have complete client-side implementation that allows DHTML-supported browsers (such as Microsoft Internet Explorer 4.0 and later) to perform validation on the client. Client-side validation enhances the validation process by checking user input before it is sent to the server. This allows errors to be detected on the client before the form is submitted, avoiding the round trip of information necessary for server-side validation.</para>
           <para>By default, this value is set to true, which enables client-side validation if the browser supports it. You can disable client-side validation on a control-by-control basis. This is useful if dynamic updating on the client creates problems with the layout of the page, or if you want to execute some server code before validation takes place.</para>
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -1175,56 +1112,45 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Boolean" />
-        </value>
+        <value>a <see cref="T:System.Boolean" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.Enabled" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseValidator.Enabled" />
 
             
 
              property to specify whether the validation control is enabled. You can disable the validation control by setting this property to false.</para
           >
           <para
-            >Setting either the <see
-             cref="P:System.Web.UI.Control.Visible" />
+            >Setting either the <see cref="P:System.Web.UI.Control.Visible" />
 
             
 
-             or the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.Enabled" />
+             or the <see cref="P:System.Web.UI.WebControls.BaseValidator.Enabled" />
 
             
 
-             property to false will prevent validation from being performed. This causes the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.IsValid" />
+             property to false will prevent validation from being performed. This causes the <see cref="P:System.Web.UI.WebControls.BaseValidator.IsValid" />
 
             
 
              property to always evaluate to true.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.Enabled" />
+            >The <see cref="P:System.Web.UI.WebControls.BaseValidator.Enabled" />
 
             
 
-             property is slightly different from the <see
-             cref="P:System.Web.UI.Control.Visible" />
+             property is slightly different from the <see cref="P:System.Web.UI.Control.Visible" />
 
             
 
-             property. If the <see
-             cref="P:System.Web.UI.Control.Visible" />
+             property. If the <see cref="P:System.Web.UI.Control.Visible" />
 
             
 
-             property for a validation control is set to true, but the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.Enabled" />
+             property for a validation control is set to true, but the <see cref="P:System.Web.UI.WebControls.BaseValidator.Enabled" />
 
             
 
@@ -1253,23 +1179,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When using a <see
-             cref="T:System.Web.UI.WebControls.ValidationSummary" />
+            >When using a <see cref="T:System.Web.UI.WebControls.ValidationSummary" />
 
             
 
-             control, use the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.ErrorMessage" />
+             control, use the <see cref="P:System.Web.UI.WebControls.BaseValidator.ErrorMessage" />
 
             
 
-             property to specify the text to display in the <see
-             cref="T:System.Web.UI.WebControls.ValidationSummary" />
+             property to specify the text to display in the <see cref="T:System.Web.UI.WebControls.ValidationSummary" />
 
             
 
-             control when validation fails for the current validation control. To specify the text to display in the validation control itself, use the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.Text" />
+             control when validation fails for the current validation control. To specify the text to display in the validation control itself, use the <see cref="P:System.Web.UI.WebControls.BaseValidator.Text" />
 
             
 
@@ -1277,18 +1199,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If you set the <see
-               cref="P:System.Web.UI.WebControls.BaseValidator.ErrorMessage" />
+              >If you set the <see cref="P:System.Web.UI.WebControls.BaseValidator.ErrorMessage" />
 
               
 
-               property without setting the <see
-               cref="P:System.Web.UI.WebControls.BaseValidator.Text" />
+               property without setting the <see cref="P:System.Web.UI.WebControls.BaseValidator.Text" />
 
               
 
-               property, the value of the <see
-               cref="P:System.Web.UI.WebControls.BaseValidator.ErrorMessage" />
+               property, the value of the <see cref="P:System.Web.UI.WebControls.BaseValidator.ErrorMessage" />
 
               
 
@@ -1296,13 +1215,11 @@
             >
           </block>
           <para
-            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
@@ -1316,8 +1233,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the text for the error message displayed in a <see
-             cref="T:System.Web.UI.WebControls.ValidationSummary" />
+            >Gets or sets the text for the error message displayed in a <see cref="T:System.Web.UI.WebControls.ValidationSummary" />
 
             
 
@@ -1349,13 +1265,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.BaseValidator.EvaluateIsValid" />
+            >Use the <see cref="M:System.Web.UI.WebControls.BaseValidator.EvaluateIsValid" />
 
             
 
-             method to determine whether the value in the input control specified by the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
+             method to determine whether the value in the input control specified by the <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
 
             
 
@@ -1390,15 +1304,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Drawing.Color" />
-        </value>
+        <value>a <see cref="T:System.Drawing.Color" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.ForeColor" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseValidator.ForeColor" />
 
             
 
@@ -1433,13 +1343,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.BaseValidator.GetControlRenderID(System.String)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.BaseValidator.GetControlRenderID(System.String)" />
 
             
 
-             method to get the client ID of the specified control. For more information, see <see
-             cref="P:System.Web.UI.Control.ClientID" />
+             method to get the client ID of the specified control. For more information, see <see cref="P:System.Web.UI.Control.ClientID" />
 
             
 
@@ -1458,7 +1366,11 @@
           <para>The client ID of the specified control.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1486,18 +1398,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.BaseValidator.GetControlValidationValue(System.String)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.BaseValidator.GetControlValidationValue(System.String)" />
 
             
 
-             method to get the value associated with the specified input control, regardless of the control type. For example, you can use this method to get the value in a <see
-             cref="T:System.Web.UI.WebControls.TextBox" />
+             method to get the value associated with the specified input control, regardless of the control type. For example, you can use this method to get the value in a <see cref="T:System.Web.UI.WebControls.TextBox" />
 
             
 
-             control, as well as the value of the selected item from a <see
-             cref="T:System.Web.UI.WebControls.ListBox" />
+             control, as well as the value of the selected item from a <see cref="T:System.Web.UI.WebControls.ListBox" />
 
             
 
@@ -1516,7 +1425,11 @@
           <para>The value associated with the specified input control.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1541,15 +1454,11 @@
         <Parameter Name="o" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="o"
-          >a <see
-           cref="T:System.Object" />
-        </param>
+        <param name="o">a <see cref="T:System.Object" /></param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BaseValidator.GetValidationProperty(System.Object)" />
+            >The <see cref="M:System.Web.UI.WebControls.BaseValidator.GetValidationProperty(System.Object)" />
 
             
 
@@ -1566,8 +1475,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -1592,8 +1500,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.IsValid" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseValidator.IsValid" />
 
             
 
@@ -1601,8 +1508,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Because the default value of this property is true, it will return true if you query this property before validation is performed. For example, this might occur if you attempt to use this property in the <see
-               cref="E:System.Web.UI.Control.Load" />
+              >Because the default value of this property is true, it will return true if you query this property before validation is performed. For example, this might occur if you attempt to use this property in the <see cref="E:System.Web.UI.Control.Load" />
 
               
 
@@ -1610,28 +1516,23 @@
             >
           </block>
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.IsValid" />
+            >The <see cref="P:System.Web.UI.WebControls.BaseValidator.IsValid" />
 
             
 
-             property is evaluated only when the <see
-             cref="M:System.Web.UI.WebControls.BaseValidator.Validate" />
+             property is evaluated only when the <see cref="M:System.Web.UI.WebControls.BaseValidator.Validate" />
 
             
 
-             method is called. You can call the <see
-             cref="M:System.Web.UI.WebControls.BaseValidator.Validate" />
+             method is called. You can call the <see cref="M:System.Web.UI.WebControls.BaseValidator.Validate" />
 
             
 
-             method for each validation control on the page individually, or call all of them at once by using the <see
-             cref="M:System.Web.UI.Page.Validate" />
+             method for each validation control on the page individually, or call all of them at once by using the <see cref="M:System.Web.UI.Page.Validate" />
 
             
 
-             method. Button controls with their CausesValidation property set to true will also call the <see
-             cref="M:System.Web.UI.Page.Validate" />
+             method. Button controls with their CausesValidation property set to true will also call the <see cref="M:System.Web.UI.Page.Validate" />
 
             
 
@@ -1641,26 +1542,22 @@
             <para>It is possible to change the value of this property manually after validation has taken place. This allows you to override the validation result, if necessary.</para>
           </block>
           <para
-            >The <see
-             cref="P:System.Web.UI.Page.IsValid" />
+            >The <see cref="P:System.Web.UI.Page.IsValid" />
 
             
 
-             property for the page is set to true only if the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.IsValid" />
+             property for the page is set to true only if the <see cref="P:System.Web.UI.WebControls.BaseValidator.IsValid" />
 
             
 
              property for each validation control on the page is also set to true.</para
           >
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -1706,18 +1603,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After this method calls the base control's <see
-             cref="M:System.Web.UI.Control.OnInit(System.EventArgs)" />
+            >After this method calls the base control's <see cref="M:System.Web.UI.Control.OnInit(System.EventArgs)" />
 
             
 
-             method, it sets the <see
-             cref="P:System.Web.UI.WebControls.WebControl.ForeColor" />
+             method, it sets the <see cref="P:System.Web.UI.WebControls.WebControl.ForeColor" />
 
             
 
-             property to <see
-             cref="P:System.Drawing.Color.Red" />
+             property to <see cref="P:System.Drawing.Color.Red" />
 
             
 
@@ -1726,8 +1620,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="P:System.Web.UI.WebControls.WebControl.ForeColor" />
+                >The <see cref="P:System.Web.UI.WebControls.WebControl.ForeColor" />
 
                 
 
@@ -1736,13 +1629,11 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.Web.UI.Control.RenderingCompatibility" />
+                >The <see cref="P:System.Web.UI.Control.RenderingCompatibility" />
 
                 
 
-                 property indicates an ASP.NET version earlier than 4.0. By default, validator controls in ASP.NET 4 and later versions do not display errors in red. For information about how to control the visual appearance of validator controls, see <format
-                 type="text/html">
+                 property indicates an ASP.NET version earlier than 4.0. By default, validator controls in ASP.NET 4 and later versions do not display errors in red. For information about how to control the visual appearance of validator controls, see <format type="text/html">
                   <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
                     >Validating User Input in ASP.NET Web Pages</a
                   >
@@ -1759,8 +1650,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.Init" />
+            >Raises the <see cref="E:System.Web.UI.Control.Init" />
 
             
 
@@ -1768,12 +1658,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.EventArgs" />
+          A <see cref="T:System.EventArgs" />
 
           
 
@@ -1799,8 +1692,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method has been overridden to check the client browser and configure the validation control for compatibility prior to rendering.</para>
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1809,8 +1701,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BaseValidator.OnPreRender(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.BaseValidator.OnPreRender(System.EventArgs)" />
 
             
 
@@ -1820,8 +1711,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.PreRender" />
+            >Raises the <see cref="E:System.Web.UI.Control.PreRender" />
 
             
 
@@ -1829,12 +1719,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.EventArgs" />
+          A <see cref="T:System.EventArgs" />
 
           
 
@@ -1860,8 +1753,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method has been overridden to unregister the validation control on the page.</para>
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1870,8 +1762,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BaseValidator.OnUnload(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.BaseValidator.OnUnload(System.EventArgs)" />
 
             
 
@@ -1881,8 +1772,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.Unload" />
+            >Raises the <see cref="E:System.Web.UI.Control.Unload" />
 
             
 
@@ -1890,12 +1780,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.EventArgs" />
+          A <see cref="T:System.EventArgs" />
 
           
 
@@ -1918,18 +1811,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.PropertiesValid" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseValidator.PropertiesValid" />
 
             
 
-             property to determine whether the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
+             property to determine whether the <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
 
             
 
-             property contains a valid input control. To be a valid input control, the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
+             property contains a valid input control. To be a valid input control, the <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
 
             
 
@@ -1942,8 +1832,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the control specified by the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
+            >Gets a value that indicates whether the control specified by the <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
 
             
 
@@ -1967,8 +1856,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.BaseValidator.RegisterValidatorCommonScript" />
+            >Use the <see cref="M:System.Web.UI.WebControls.BaseValidator.RegisterValidatorCommonScript" />
 
             
 
@@ -2002,8 +1890,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.BaseValidator.RegisterValidatorDeclaration" />
+            >Use the <see cref="M:System.Web.UI.WebControls.BaseValidator.RegisterValidatorDeclaration" />
 
             
 
@@ -2039,8 +1926,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BaseValidator.Render(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.WebControls.BaseValidator.Render(System.Web.UI.HtmlTextWriter)" />
 
             
 
@@ -2052,12 +1938,15 @@
           <para>Displays the control on the client.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          A <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -2080,8 +1969,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.RenderUplevel" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseValidator.RenderUplevel" />
 
             
 
@@ -2123,34 +2011,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.SetFocusOnError" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseValidator.SetFocusOnError" />
 
             
 
-             property to specify whether focus is automatically set to the control specified by the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
+             property to specify whether focus is automatically set to the control specified by the <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
 
             
 
              property when this validation control fails. This allows the user to quickly update the appropriate control.</para
           >
           <para
-            >If multiple validation controls fail and this property is set to true, the control specified in the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
+            >If multiple validation controls fail and this property is set to true, the control specified in the <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
 
             
 
              property for the first validation control receives focus.</para
           >
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -2162,8 +2045,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether focus is set to the control specified by the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
+            >Gets or sets a value that indicates whether focus is set to the control specified by the <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
 
             
 
@@ -2195,23 +2077,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.Text" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseValidator.Text" />
 
             
 
-             property to specify the text to display in a validation control when validation fails. You can also display a summary of all controls that fail validation in the page by using a <see
-             cref="T:System.Web.UI.WebControls.ValidationSummary" />
+             property to specify the text to display in a validation control when validation fails. You can also display a summary of all controls that fail validation in the page by using a <see cref="T:System.Web.UI.WebControls.ValidationSummary" />
 
             
 
-             control. To specify the text to display in a <see
-             cref="T:System.Web.UI.WebControls.ValidationSummary" />
+             control. To specify the text to display in a <see cref="T:System.Web.UI.WebControls.ValidationSummary" />
 
             
 
-             control, use the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.ErrorMessage" />
+             control, use the <see cref="P:System.Web.UI.WebControls.BaseValidator.ErrorMessage" />
 
             
 
@@ -2219,18 +2097,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If you set the <see
-               cref="P:System.Web.UI.WebControls.BaseValidator.ErrorMessage" />
+              >If you set the <see cref="P:System.Web.UI.WebControls.BaseValidator.ErrorMessage" />
 
               
 
-               property without setting the <see
-               cref="P:System.Web.UI.WebControls.BaseValidator.Text" />
+               property without setting the <see cref="P:System.Web.UI.WebControls.BaseValidator.Text" />
 
               
 
-               property, the value of the <see
-               cref="P:System.Web.UI.WebControls.BaseValidator.ErrorMessage" />
+               property, the value of the <see cref="P:System.Web.UI.WebControls.BaseValidator.ErrorMessage" />
 
               
 
@@ -2255,13 +2130,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.BaseValidator.Validate" />
+            >Use the <see cref="M:System.Web.UI.WebControls.BaseValidator.Validate" />
 
             
 
-             method to perform validation on the associated input control. This method allows you to programmatically perform validation on the input control. The <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.IsValid" />
+             method to perform validation on the associated input control. This method allows you to programmatically perform validation on the input control. The <see cref="P:System.Web.UI.WebControls.BaseValidator.IsValid" />
 
             
 
@@ -2271,8 +2144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs validation on the associated input control and updates the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.IsValid" />
+            >Performs validation on the associated input control and updates the <see cref="P:System.Web.UI.WebControls.BaseValidator.IsValid" />
 
             
 
@@ -2378,41 +2250,34 @@
             <para>Some of these controls post back to the server only when the AutoPostBack property is set to true.</para>
           </block>
           <para
-            >These controls each have a ValidationGroup property that, when set, validates only the validation controls within the specified group when the control triggers a post back to the server. Use the <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.ValidationGroup" />
+            >These controls each have a ValidationGroup property that, when set, validates only the validation controls within the specified group when the control triggers a post back to the server. Use the <see cref="P:System.Web.UI.WebControls.BaseValidator.ValidationGroup" />
 
             
 
-             property to assign a validation control to a validation group. The <see
-             cref="T:System.Web.UI.Page" />
+             property to assign a validation control to a validation group. The <see cref="T:System.Web.UI.Page" />
 
             
 
-             class also exposes a <see
-             cref="M:System.Web.UI.Page.GetValidators(System.String)" />
+             class also exposes a <see cref="M:System.Web.UI.Page.GetValidators(System.String)" />
 
             
 
-             method and a <see
-             cref="M:System.Web.UI.Page.Validate(System.String)" />
+             method and a <see cref="M:System.Web.UI.Page.Validate(System.String)" />
 
             
 
-             method that accept a <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.ValidationGroup" />
+             method that accept a <see cref="P:System.Web.UI.WebControls.BaseValidator.ValidationGroup" />
 
             
 
              input parameter.</para
           >
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 

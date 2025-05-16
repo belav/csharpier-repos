@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The following table shows the simple names recognized by this class and the default algorithm implementations to which they map. Alternatively, you can map other implementations to these names, as described in <format
-         type="text/html">
+        >The following table shows the simple names recognized by this class and the default algorithm implementations to which they map. Alternatively, you can map other implementations to these names, as described in <format type="text/html">
           <a href="01327c69-c5e1-4ef6-b73f-0a58351f0492"
             >Mapping Algorithm Names to Cryptography Classes</a
           >
@@ -445,8 +444,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.CryptoConfig" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.CryptoConfig" />
 
             
 
@@ -491,14 +489,22 @@
           <para>Adds a set of names to algorithm mappings to be used for the current application domain.  </para>
         </summary>
         <param name="algorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The algorithm to map to.</param
         >
         <param name="names">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -542,14 +548,22 @@
           <para>Adds a set of names to object identifier (OID) mappings to be used for the current application domain.  </para>
         </summary>
         <param name="oid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object identifier (OID) to map to.</param
         >
         <param name="names">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -601,8 +615,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of simple names recognized by this class, see <see
-             cref="T:System.Security.Cryptography.CryptoConfig" />
+            >For a list of simple names recognized by this class, see <see cref="T:System.Security.Cryptography.CryptoConfig" />
 
             
 
@@ -618,7 +631,11 @@
           <para>A new instance of the specified cryptographic object.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -658,8 +675,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of simple names recognized by this class, see <see
-             cref="T:System.Security.Cryptography.CryptoConfig" />
+            >For a list of simple names recognized by this class, see <see cref="T:System.Security.Cryptography.CryptoConfig" />
 
             
 
@@ -675,14 +691,22 @@
           <para>A new instance of the specified cryptographic object.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The simple name of the cryptographic object of which to create an instance. </param
         >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -710,16 +734,13 @@
       </Parameters>
       <Docs>
         <remarks>
-          <para
-            >
-A <see
-             cref="T:System.Security.Cryptography.CryptographicUnexpectedOperationException" />
+          <para>
+A <see cref="T:System.Security.Cryptography.CryptographicUnexpectedOperationException" />
 
             
 
              will be thrown if the OID is invalid, like: 
-<list
-             type="bullet">
+<list type="bullet">
               <item>
                 <term>if the OID string has less than two parts (e.g. "0");</term>
               </item>
@@ -728,20 +749,16 @@ A <see
               </item>
             </list>
           </para>
-          <para
-            >
-A <see
-             cref="T:System.OverflowException" />
+          <para>
+A <see cref="T:System.OverflowException" />
 
             
 
-             will be thrown if a part of the OID is bigger than <see
-             cref="T:System.Int32" />
+             will be thrown if a part of the OID is bigger than <see cref="T:System.Int32" />
 
             
 
-            .<see
-             cref="M:System.Int32.MaxValue" />
+            .<see cref="M:System.Int32.MaxValue" />
 
             
 
@@ -758,7 +775,11 @@ A <see
           <para>A byte array containing the encoded OID.</para>
         </returns>
         <param name="str">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -788,8 +809,7 @@ A <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of simple names recognized by this class, see <see
-             cref="T:System.Security.Cryptography.CryptoConfig" />
+            >For a list of simple names recognized by this class, see <see cref="T:System.Security.Cryptography.CryptoConfig" />
 
             
 
@@ -805,7 +825,11 @@ A <see
           <para>The OID of the specified algorithm.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

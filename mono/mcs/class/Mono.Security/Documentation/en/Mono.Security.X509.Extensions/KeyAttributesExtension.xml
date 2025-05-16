@@ -12,7 +12,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -52,10 +54,7 @@
         <Parameter Name="asn1" Type="Mono.Security.ASN1" />
       </Parameters>
       <Docs>
-        <param name="asn1"
-          >a <see
-           cref="T:Mono.Security.ASN1" />
-        </param>
+        <param name="asn1">a <see cref="T:Mono.Security.ASN1" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -75,10 +74,7 @@
         <Parameter Name="extension" Type="Mono.Security.X509.X509Extension" />
       </Parameters>
       <Docs>
-        <param name="extension"
-          >a <see
-           cref="T:Mono.Security.X509.X509Extension" />
-        </param>
+        <param name="extension">a <see cref="T:Mono.Security.X509.X509Extension" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -112,10 +108,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.Byte[]" />
-        </value>
+        <value>a <see cref="T:System.Byte[]" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -132,10 +125,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -152,10 +142,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.DateTime" />
-        </value>
+        <value>a <see cref="T:System.DateTime" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -172,10 +159,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.DateTime" />
-        </value>
+        <value>a <see cref="T:System.DateTime" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -196,15 +180,9 @@
         <Parameter Name="usage" Type="Mono.Security.X509.Extensions.KeyUsages" />
       </Parameters>
       <Docs>
-        <param name="usage"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="usage">a <see cref="T:System.Int32" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -221,10 +199,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>

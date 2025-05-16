@@ -20,18 +20,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An object must implement the <see
-         cref="T:System.Runtime.Remoting.Lifetime.ISponsor" />
+        >An object must implement the <see cref="T:System.Runtime.Remoting.Lifetime.ISponsor" />
 
         
 
-         interface if it needs to request a lease renewal for a particular object. An object that implements the <see
-         cref="T:System.Runtime.Remoting.Lifetime.ISponsor" />
+         interface if it needs to request a lease renewal for a particular object. An object that implements the <see cref="T:System.Runtime.Remoting.Lifetime.ISponsor" />
 
         
 
-         interface can become a sponsor by registering itself with the lease manager. The <see
-         cref="T:System.Runtime.Remoting.Lifetime.ISponsor" />
+         interface can become a sponsor by registering itself with the lease manager. The <see cref="T:System.Runtime.Remoting.Lifetime.ISponsor" />
 
         
 
@@ -69,8 +66,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.Remoting.Lifetime.ISponsor.Renewal(System.Runtime.Remoting.Lifetime.ILease)" />
+            >The <see cref="M:System.Runtime.Remoting.Lifetime.ISponsor.Renewal(System.Runtime.Remoting.Lifetime.ILease)" />
 
             
 
@@ -86,7 +82,11 @@
           <para>The additional lease time for the specified object.</para>
         </returns>
         <param name="lease">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

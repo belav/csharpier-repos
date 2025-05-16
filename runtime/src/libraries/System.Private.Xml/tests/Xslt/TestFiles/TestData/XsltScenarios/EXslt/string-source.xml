@@ -6,9 +6,6 @@
     <a>abcd</a>
     <b>efgh</b>
     <c></c>
-    <d
-      >kl<e
-      >ml</e>
-    </d>
+    <d>kl<e>ml</e></d>
   </list>
 </data>

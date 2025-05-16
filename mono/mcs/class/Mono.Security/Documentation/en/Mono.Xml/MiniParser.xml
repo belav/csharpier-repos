@@ -8,7 +8,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -85,8 +87,7 @@
       </Parameters>
       <Docs>
         <param name="descr"
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
@@ -130,14 +131,8 @@
         <Parameter Name="handler" Type="Mono.Xml.MiniParser+IHandler" />
       </Parameters>
       <Docs>
-        <param name="reader"
-          >a <see
-           cref="T:Mono.Xml.MiniParser+IReader" />
-        </param>
-        <param name="handler"
-          >a <see
-           cref="T:Mono.Xml.MiniParser+IHandler" />
-        </param>
+        <param name="reader">a <see cref="T:Mono.Xml.MiniParser+IReader" /></param>
+        <param name="handler">a <see cref="T:Mono.Xml.MiniParser+IHandler" /></param>
         <summary>Parses the XML string using the "reader" and "handler" objects.</summary>
         <remarks>The reader and handler objects don't have to be different; SecurityParser passes in the same object for both.</remarks>
       </Docs>
@@ -194,27 +189,12 @@
         <Parameter Name="len" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="str"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <param name="sb"
-          >a <see
-           cref="T:System.Text.StringBuilder" />
-        </param>
-        <param name="sbStart"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="len"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="str">a <see cref="T:System.String" /></param>
+        <param name="sb">a <see cref="T:System.Text.StringBuilder" /></param>
+        <param name="sbStart">a <see cref="T:System.Int32" /></param>
+        <param name="len">a <see cref="T:System.Int32" /></param>
         <summary>Compares the string in "str" to the string held by "sb" starting at character "sbStart" and extending for "len" characters.</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>None.</remarks>
       </Docs>
       <AssemblyInfo>
@@ -249,19 +229,10 @@
         <Parameter Name="state" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="charCode"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="state"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="charCode">a <see cref="T:System.Int32" /></param>
+        <param name="state">a <see cref="T:System.Int32" /></param>
         <summary>A method only for internal use which takes the current input character and current parser state and determines what action to take.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>None</remarks>
       </Docs>
       <AssemblyInfo>

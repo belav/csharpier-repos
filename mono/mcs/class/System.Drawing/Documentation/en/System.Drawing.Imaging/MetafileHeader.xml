@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains attributes of an associated <see
-         cref="T:System.Drawing.Imaging.Metafile" />
+        >Contains attributes of an associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
         
 
@@ -40,13 +39,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Rectangle" />
+            >Gets a <see cref="T:System.Drawing.Rectangle" />
 
             
 
-             that bounds the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             that bounds the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -71,8 +68,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the horizontal resolution, in dots per inch, of the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Gets the horizontal resolution, in dots per inch, of the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -97,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the vertical resolution, in dots per inch, of the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Gets the vertical resolution, in dots per inch, of the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -142,8 +137,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Returns a value that indicates whether the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -153,8 +147,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >true if the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -179,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Returns a value that indicates whether the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -190,8 +182,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >true if the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -216,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Returns a value that indicates whether the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -227,8 +217,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >true if the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -253,8 +242,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Returns a value that indicates whether the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -264,8 +252,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >true if the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -290,8 +277,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Returns a value that indicates whether the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -301,8 +287,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >true if the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -327,8 +312,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Returns a value that indicates whether the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -338,8 +322,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >true if the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -364,8 +347,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Returns a value that indicates whether the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -375,8 +357,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >true if the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -401,8 +382,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Returns a value that indicates whether the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -412,8 +392,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >true if the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -438,8 +417,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the logical horizontal resolution, in dots per inch, of the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Gets the logical horizontal resolution, in dots per inch, of the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -464,8 +442,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the logical vertical resolution, in dots per inch, of the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Gets the logical vertical resolution, in dots per inch, of the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -490,8 +467,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the size, in bytes, of the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Gets the size, in bytes, of the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -519,8 +495,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type of the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Gets the type of the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -545,8 +520,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the version number of the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Gets the version number of the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -574,8 +548,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the Windows metafile (WMF) header file for the associated <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Gets the Windows metafile (WMF) header file for the associated <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 

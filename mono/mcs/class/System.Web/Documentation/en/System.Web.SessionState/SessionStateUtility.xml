@@ -13,8 +13,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.SessionState.SessionStateUtility" />
+        >The <see cref="T:System.Web.SessionState.SessionStateUtility" />
 
         
 
@@ -58,13 +57,11 @@
           </term>
           <description>
             <para
-              >Called by the session-state module to add the session data to the current <see
-               cref="T:System.Web.HttpContext" />
+              >Called by the session-state module to add the session data to the current <see cref="T:System.Web.HttpContext" />
 
               
 
-               and make it available to application code through the <see
-               cref="P:System.Web.HttpContext.Session" />
+               and make it available to application code through the <see cref="P:System.Web.HttpContext.Session" />
 
               
 
@@ -84,18 +81,15 @@
           </term>
           <description>
             <para
-              >Called by the session-state module during the <see
-               cref="E:System.Web.HttpApplication.ReleaseRequestState" />
+              >Called by the session-state module during the <see cref="E:System.Web.HttpApplication.ReleaseRequestState" />
 
               
 
-               or <see
-               cref="E:System.Web.HttpApplication.EndRequest" />
+               or <see cref="E:System.Web.HttpApplication.EndRequest" />
 
               
 
-               events at the end of a request, to clear session data from the current <see
-               cref="T:System.Web.HttpContext" />
+               events at the end of a request, to clear session data from the current <see cref="T:System.Web.HttpContext" />
 
               
 
@@ -115,18 +109,15 @@
           </term>
           <description>
             <para
-              >Called by the session-state module to get a reference to the <see
-               cref="P:System.Web.SessionState.HttpSessionState.StaticObjects" />
+              >Called by the session-state module to get a reference to the <see cref="P:System.Web.SessionState.HttpSessionState.StaticObjects" />
 
               
 
-               collection based on objects defined in the Global.asax file. The <see
-               cref="T:System.Web.HttpStaticObjectsCollection" />
+               collection based on objects defined in the Global.asax file. The <see cref="T:System.Web.HttpStaticObjectsCollection" />
 
               
 
-               collection returned is included with the session data added to the current <see
-               cref="T:System.Web.HttpContext" />
+               collection returned is included with the session data added to the current <see cref="T:System.Web.HttpContext" />
 
               
 
@@ -136,26 +127,22 @@
         </item>
       </list>
       <para
-        >Session data is passed to and retrieved from the current <see
-         cref="T:System.Web.HttpContext" />
+        >Session data is passed to and retrieved from the current <see cref="T:System.Web.HttpContext" />
 
         
 
-         as an <see
-         cref="T:System.Web.SessionState.HttpSessionStateContainer" />
+         as an <see cref="T:System.Web.SessionState.HttpSessionStateContainer" />
 
         
 
-         object or any valid implementation of the <see
-         cref="T:System.Web.SessionState.IHttpSessionState" />
+         object or any valid implementation of the <see cref="T:System.Web.SessionState.IHttpSessionState" />
 
         
 
          interface.</para
       >
       <para
-        >For information about implementing a session-state store provider, see <format
-         type="text/html">
+        >For information about implementing a session-state store provider, see <format type="text/html">
           <a href="baadfec5-c881-468a-9681-7d8796b05a66"
             >Implementing a Session State Store Provider</a
           >
@@ -192,33 +179,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.SessionState.SessionStateUtility.AddHttpSessionStateToContext(System.Web.HttpContext,System.Web.SessionState.IHttpSessionState)" />
+            >The <see cref="M:System.Web.SessionState.SessionStateUtility.AddHttpSessionStateToContext(System.Web.HttpContext,System.Web.SessionState.IHttpSessionState)" />
 
             
 
-             method is used by a session-state module to apply session data to the current request. This occurs during the <see
-             cref="E:System.Web.HttpApplication.AcquireRequestState" />
+             method is used by a session-state module to apply session data to the current request. This occurs during the <see cref="E:System.Web.HttpApplication.AcquireRequestState" />
 
             
 
-             event at the beginning of a request. Session data for the current request is either retrieved for an existing session or created for a new session. The session data is then encapsulated in an <see
-             cref="T:System.Web.SessionState.IHttpSessionState" />
+             event at the beginning of a request. Session data for the current request is either retrieved for an existing session or created for a new session. The session data is then encapsulated in an <see cref="T:System.Web.SessionState.IHttpSessionState" />
 
             
 
-             implementation instance, which is passed to the <see
-             cref="M:System.Web.SessionState.SessionStateUtility.AddHttpSessionStateToContext(System.Web.HttpContext,System.Web.SessionState.IHttpSessionState)" />
+             implementation instance, which is passed to the <see cref="M:System.Web.SessionState.SessionStateUtility.AddHttpSessionStateToContext(System.Web.HttpContext,System.Web.SessionState.IHttpSessionState)" />
 
             
 
-             method along with the current <see
-             cref="T:System.Web.HttpContext" />
+             method along with the current <see cref="T:System.Web.HttpContext" />
 
             
 
-            . The supplied session data is then made available to application code through the <see
-             cref="P:System.Web.HttpContext.Session" />
+            . The supplied session data is then made available to application code through the <see cref="P:System.Web.HttpContext.Session" />
 
             
 
@@ -230,29 +211,34 @@
           <para>Applies the session data to the context for the current request.</para>
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.HttpContext" />
+          The <see cref="T:System.Web.HttpContext" />
 
           
 
-           object to which to add the <see
-           cref="T:System.Web.SessionState.HttpSessionState" />
+           object to which to add the <see cref="T:System.Web.SessionState.HttpSessionState" />
 
           
 
            object.</param
         >
         <param name="container">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.SessionState.IHttpSessionState" />
+          The <see cref="T:System.Web.SessionState.IHttpSessionState" />
 
           
 
@@ -279,23 +265,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.SessionState.SessionStateUtility.GetHttpSessionStateFromContext(System.Web.HttpContext)" />
+            >The <see cref="M:System.Web.SessionState.SessionStateUtility.GetHttpSessionStateFromContext(System.Web.HttpContext)" />
 
             
 
-             method can be used by a session-state module to retrieve session data from the current request. This occurs during the <see
-             cref="E:System.Web.HttpApplication.ReleaseRequestState" />
+             method can be used by a session-state module to retrieve session data from the current request. This occurs during the <see cref="E:System.Web.HttpApplication.ReleaseRequestState" />
 
             
 
-             event at the end of a request. The returned session data can then be written to the session data store. If the session has been abandoned, the session data can be removed from the data store and <see
-             cref="T:System.Web.HttpContext" />
+             event at the end of a request. The returned session data can then be written to the session data store. If the session has been abandoned, the session data can be removed from the data store and <see cref="T:System.Web.HttpContext" />
 
             
 
-            , and the <system
-            >Session_OnEnd</system>
+            , and the <system>Session_OnEnd</system>
 
             
 
@@ -309,8 +291,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Web.SessionState.IHttpSessionState" />
+            >An <see cref="T:System.Web.SessionState.IHttpSessionState" />
 
             
 
@@ -318,12 +299,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.HttpContext" />
+          The <see cref="T:System.Web.HttpContext" />
 
           
 
@@ -350,41 +334,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.SessionState.SessionStateUtility.GetSessionStaticObjects(System.Web.HttpContext)" />
+            >The <see cref="M:System.Web.SessionState.SessionStateUtility.GetSessionStaticObjects(System.Web.HttpContext)" />
 
             
 
-             method is used to retrieve the collection of static objects defined in the Global.asax file for the ASP.NET application. A session-state module implementation will supply the returned <see
-             cref="T:System.Web.HttpStaticObjectsCollection" />
+             method is used to retrieve the collection of static objects defined in the Global.asax file for the ASP.NET application. A session-state module implementation will supply the returned <see cref="T:System.Web.HttpStaticObjectsCollection" />
 
             
 
-             collection to the <see
-             cref="T:System.Web.SessionState.IHttpSessionState" />
+             collection to the <see cref="T:System.Web.SessionState.IHttpSessionState" />
 
             
 
-             implementation instance that is added to the current context using the <see
-             cref="M:System.Web.SessionState.SessionStateUtility.AddHttpSessionStateToContext(System.Web.HttpContext,System.Web.SessionState.IHttpSessionState)" />
+             implementation instance that is added to the current context using the <see cref="M:System.Web.SessionState.SessionStateUtility.AddHttpSessionStateToContext(System.Web.HttpContext,System.Web.SessionState.IHttpSessionState)" />
 
             
 
              method.</para
           >
           <para
-            >A <see
-             cref="T:System.Web.SessionState.SessionStateStoreProviderBase" />
+            >A <see cref="T:System.Web.SessionState.SessionStateStoreProviderBase" />
 
             
 
-             can also use the <see
-             cref="M:System.Web.SessionState.SessionStateUtility.GetSessionStaticObjects(System.Web.HttpContext)" />
+             can also use the <see cref="M:System.Web.SessionState.SessionStateUtility.GetSessionStaticObjects(System.Web.HttpContext)" />
 
             
 
-             method when creating a <see
-             cref="T:System.Web.SessionState.SessionStateStoreData" />
+             method when creating a <see cref="T:System.Web.SessionState.SessionStateStoreData" />
 
             
 
@@ -398,18 +375,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Web.HttpStaticObjectsCollection" />
+            >An <see cref="T:System.Web.HttpStaticObjectsCollection" />
 
             
 
-             collection populated with the <see
-             cref="P:System.Web.SessionState.HttpSessionState.StaticObjects" />
+             collection populated with the <see cref="P:System.Web.SessionState.HttpSessionState.StaticObjects" />
 
             
 
-             property value for the specified <see
-             cref="T:System.Web.HttpContext" />
+             property value for the specified <see cref="T:System.Web.HttpContext" />
 
             
 
@@ -417,12 +391,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.HttpContext" />
+          The <see cref="T:System.Web.HttpContext" />
 
           
 
@@ -451,18 +428,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.SessionState.SessionStateUtility.RaiseSessionEnd(System.Web.SessionState.IHttpSessionState,System.Object,System.EventArgs)" />
+            >The <see cref="M:System.Web.SessionState.SessionStateUtility.RaiseSessionEnd(System.Web.SessionState.IHttpSessionState,System.Object,System.EventArgs)" />
 
             
 
-             method is used by a session-state module to execute the <system
-            >Session_OnEnd</system>
+             method is used by a session-state module to execute the <system>Session_OnEnd</system>
 
             
 
-             event defined in the Global.asax file for an ASP.NET application. A session-state module will call the <see
-             cref="M:System.Web.SessionState.SessionStateUtility.RaiseSessionEnd(System.Web.SessionState.IHttpSessionState,System.Object,System.EventArgs)" />
+             event defined in the Global.asax file for an ASP.NET application. A session-state module will call the <see cref="M:System.Web.SessionState.SessionStateUtility.RaiseSessionEnd(System.Web.SessionState.IHttpSessionState,System.Object,System.EventArgs)" />
 
             
 
@@ -472,8 +446,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes the <system
-            >Session_OnEnd</system>
+            >Executes the <system>Session_OnEnd</system>
 
             
 
@@ -481,31 +454,41 @@
           >
         </summary>
         <param name="session">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.SessionState.IHttpSessionState" />
+          The <see cref="T:System.Web.SessionState.IHttpSessionState" />
 
           
 
            implementation instance for the session that has ended.</param
         >
         <param name="eventSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The event source object to supply to the Session_OnEnd event.</param
         >
         <param name="eventArgs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.EventArgs" />
+          The <see cref="T:System.EventArgs" />
 
           
 
@@ -532,23 +515,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.SessionState.SessionStateUtility.RemoveHttpSessionStateFromContext(System.Web.HttpContext)" />
+            >The <see cref="M:System.Web.SessionState.SessionStateUtility.RemoveHttpSessionStateFromContext(System.Web.HttpContext)" />
 
             
 
-             method clears session data from the specified <see
-             cref="T:System.Web.HttpContext" />
+             method clears session data from the specified <see cref="T:System.Web.HttpContext" />
 
             
 
-            . A session-state module will call the <see
-             cref="M:System.Web.SessionState.SessionStateUtility.RemoveHttpSessionStateFromContext(System.Web.HttpContext)" />
+            . A session-state module will call the <see cref="M:System.Web.SessionState.SessionStateUtility.RemoveHttpSessionStateFromContext(System.Web.HttpContext)" />
 
             
 
-             method in the handler for the <see
-             cref="E:System.Web.HttpApplication.ReleaseRequestState" />
+             method in the handler for the <see cref="E:System.Web.HttpApplication.ReleaseRequestState" />
 
             
 
@@ -560,12 +539,15 @@
           <para>Removes session data from the specified context.</para>
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.HttpContext" />
+          The <see cref="T:System.Web.HttpContext" />
 
           
 

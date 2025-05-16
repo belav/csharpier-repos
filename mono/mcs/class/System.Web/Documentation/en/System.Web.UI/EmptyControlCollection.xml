@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides standard support for a <see
-         cref="T:System.Web.UI.ControlCollection" />
+        >Provides standard support for a <see cref="T:System.Web.UI.ControlCollection" />
 
         
 
@@ -49,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.EmptyControlCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.EmptyControlCollection" />
 
             
 
@@ -58,12 +56,15 @@
           >
         </summary>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 
@@ -92,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Denies the addition of the specified <see
-             cref="T:System.Web.UI.Control" />
+            >Denies the addition of the specified <see cref="T:System.Web.UI.Control" />
 
             
 
@@ -101,12 +101,15 @@
           >
         </summary>
         <param name="child">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 
@@ -136,8 +139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Denies the addition of the specified <see
-             cref="T:System.Web.UI.Control" />
+            >Denies the addition of the specified <see cref="T:System.Web.UI.Control" />
 
             
 
@@ -145,24 +147,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index at which to add the <see
-           cref="T:System.Web.UI.Control" />
+          The index at which to add the <see cref="T:System.Web.UI.Control" />
 
           
 
           . This parameter is always ignored. </param
         >
         <param name="child">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 

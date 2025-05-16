@@ -31,13 +31,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Win32 error codes are translated from their numeric representations into a system message when they are displayed. Use <see
-         cref="P:System.ComponentModel.Win32Exception.NativeErrorCode" />
+        >Win32 error codes are translated from their numeric representations into a system message when they are displayed. Use <see cref="P:System.ComponentModel.Win32Exception.NativeErrorCode" />
 
         
 
          to access the numeric representation of the error code associated with this exception. For more information about the error codes, see "Win32 Error Codes" in the Platform SDK documentation at <see
-         cref="http://msdn.microsoft.com/">http://msdn.microsoft.com</see>
+          cref="http://msdn.microsoft.com/"
+          >http://msdn.microsoft.com</see
+        >
 
         
 
@@ -69,13 +70,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The detailed description of the error will be determined by the Win32 error message associated with the error.</para>
           <para
-            >This constructor uses the <see
-             cref="M:System.Runtime.InteropServices.Marshal.GetLastWin32Error" />
+            >This constructor uses the <see cref="M:System.Runtime.InteropServices.Marshal.GetLastWin32Error" />
 
             
 
-             method of <see
-             cref="T:System.Runtime.InteropServices.Marshal" />
+             method of <see cref="T:System.Runtime.InteropServices.Marshal" />
 
             
 
@@ -85,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Win32Exception" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Win32Exception" />
 
             
 
@@ -119,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Win32Exception" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Win32Exception" />
 
             
 
@@ -128,7 +125,11 @@
           >
         </summary>
         <param name="error">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -155,8 +156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Win32Exception" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Win32Exception" />
 
             
 
@@ -164,7 +164,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -197,8 +201,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Win32Exception" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Win32Exception" />
 
             
 
@@ -206,14 +209,22 @@
           >
         </summary>
         <param name="error">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The Win32 error code associated with this exception. </param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -246,8 +257,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Win32Exception" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Win32Exception" />
 
             
 
@@ -255,24 +265,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            associated with this exception. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -303,8 +319,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Win32Exception" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Win32Exception" />
 
             
 
@@ -312,14 +327,22 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A detailed description of the error.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -354,13 +377,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             object with the file name and line number at which this <see
-             cref="T:System.ComponentModel.Win32Exception" />
+             object with the file name and line number at which this <see cref="T:System.ComponentModel.Win32Exception" />
 
             
 
@@ -368,19 +389,26 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
           .</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

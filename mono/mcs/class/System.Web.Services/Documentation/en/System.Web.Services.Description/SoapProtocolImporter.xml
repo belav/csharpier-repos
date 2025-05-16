@@ -20,21 +20,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+        >The <see cref="T:System.Web.Services.Description.SoapProtocolImporter" />
 
         
 
          class generates client proxy code or abstract server code according to the SOAP protocol. The class generates a class for each supported binding defined in a Web Services Description Language (WSDL) document.</para
       >
       <para
-        >Typically, instead of invoking <see
-         cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+        >Typically, instead of invoking <see cref="T:System.Web.Services.Description.SoapProtocolImporter" />
 
         
 
-         directly, a developer uses the class indirectly through the <see
-         cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+         directly, a developer uses the class indirectly through the <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
 
         
 
@@ -57,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.SoapProtocolImporter" />
 
             
 
@@ -85,13 +81,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >During generation of a class for a given binding, the <see
-             cref="M:System.Web.Services.Description.SoapProtocolImporter.BeginClass" />
+            >During generation of a class for a given binding, the <see cref="M:System.Web.Services.Description.SoapProtocolImporter.BeginClass" />
 
             
 
-             method executes before the <see
-             cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+             method executes before the <see cref="T:System.Web.Services.Description.SoapProtocolImporter" />
 
             
 
@@ -123,13 +117,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >During code generation, the <see
-             cref="M:System.Web.Services.Description.SoapProtocolImporter.BeginNamespace" />
+            >During code generation, the <see cref="M:System.Web.Services.Description.SoapProtocolImporter.BeginNamespace" />
 
             
 
-             method executes before the <see
-             cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+             method executes before the <see cref="T:System.Web.Services.Description.SoapProtocolImporter" />
 
             
 
@@ -157,13 +149,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >During generation of a class for a given binding, the <see
-             cref="M:System.Web.Services.Description.SoapProtocolImporter.EndClass" />
+            >During generation of a class for a given binding, the <see cref="M:System.Web.Services.Description.SoapProtocolImporter.EndClass" />
 
             
 
-             method executes after the <see
-             cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+             method executes after the <see cref="T:System.Web.Services.Description.SoapProtocolImporter" />
 
             
 
@@ -191,13 +181,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >During code generation, the <see
-             cref="M:System.Web.Services.Description.SoapProtocolImporter.EndNamespace" />
+            >During code generation, the <see cref="M:System.Web.Services.Description.SoapProtocolImporter.EndNamespace" />
 
             
 
-             method executes after the <see
-             cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+             method executes after the <see cref="T:System.Web.Services.Description.SoapProtocolImporter" />
 
             
 
@@ -228,8 +216,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >During generation of a class for a given binding, the <see
-             cref="M:System.Web.Services.Description.SoapProtocolImporter.GenerateMethod" />
+            >During generation of a class for a given binding, the <see cref="M:System.Web.Services.Description.SoapProtocolImporter.GenerateMethod" />
 
             
 
@@ -261,33 +248,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Services.Description.SoapProtocolImporter.IsBindingSupported" />
+            >The <see cref="M:System.Web.Services.Description.SoapProtocolImporter.IsBindingSupported" />
 
             
 
-             method determines whether to generate a class for the current binding, as represented by the <see
-             cref="P:System.Web.Services.Description.SoapProtocolImporter.Binding" />
+             method determines whether to generate a class for the current binding, as represented by the <see cref="P:System.Web.Services.Description.SoapProtocolImporter.Binding" />
 
             
 
-             property. The method checks whether the <see
-             cref="P:System.Web.Services.Description.SoapProtocolImporter.Binding" />
+             property. The method checks whether the <see cref="P:System.Web.Services.Description.SoapProtocolImporter.Binding" />
 
             
 
-             property's <see
-             cref="P:System.Web.Services.Description.Binding.Extensions" />
+             property's <see cref="P:System.Web.Services.Description.Binding.Extensions" />
 
             
 
-             property contains a <see
-             cref="T:System.Web.Services.Description.SoapBinding" />
+             property contains a <see cref="T:System.Web.Services.Description.SoapBinding" />
 
             
 
-             instance. In addition, the transport mechanism obtained through the <see
-             cref="P:System.Web.Services.Description.SoapBinding.Transport" />
+             instance. In addition, the transport mechanism obtained through the <see cref="P:System.Web.Services.Description.SoapBinding.Transport" />
 
             
 
@@ -324,46 +305,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Services.Description.SoapProtocolImporter.IsOperationFlowSupported(System.Web.Services.Description.OperationFlow)" />
+            >The <see cref="M:System.Web.Services.Description.SoapProtocolImporter.IsOperationFlowSupported(System.Web.Services.Description.OperationFlow)" />
 
             
 
-             method determines whether to generate a method for the current operation, as represented by the <see
-             cref="T:System.Web.Services.Description.Operation" />
+             method determines whether to generate a method for the current operation, as represented by the <see cref="T:System.Web.Services.Description.Operation" />
 
             
 
-             property. This evaluation takes place for each operation in a binding for which a class is being generated. If a false value is returned, the <see
-             cref="M:System.Web.Services.Description.SoapProtocolImporter.UnsupportedOperationWarning(System.String)" />
+             property. This evaluation takes place for each operation in a binding for which a class is being generated. If a false value is returned, the <see cref="M:System.Web.Services.Description.SoapProtocolImporter.UnsupportedOperationWarning(System.String)" />
 
             
 
-             method executes. A true value is returned only if the input value is <see
-             cref="F:System.Web.Services.Description.OperationFlow.OneWay" />
+             method executes. A true value is returned only if the input value is <see cref="F:System.Web.Services.Description.OperationFlow.OneWay" />
 
             
 
-             or <see
-             cref="F:System.Web.Services.Description.OperationFlow.RequestResponse" />
+             or <see cref="F:System.Web.Services.Description.OperationFlow.RequestResponse" />
 
             
 
             .</para
           >
           <para
-            >For more information, see the <see
-             cref="P:System.Web.Services.Description.OperationMessageCollection.Flow" />
+            >For more information, see the <see cref="P:System.Web.Services.Description.OperationMessageCollection.Flow" />
 
             
 
-             property. The <see
-             cref="P:System.Web.Services.Description.Operation.Messages" />
+             property. The <see cref="P:System.Web.Services.Description.Operation.Messages" />
 
             
 
-             property is of type <see
-             cref="T:System.Web.Services.Description.OperationMessageCollection" />
+             property is of type <see cref="T:System.Web.Services.Description.OperationMessageCollection" />
 
             
 
@@ -379,12 +352,15 @@
           <para>true if the current operation's operation flow is supported; otherwise false.</para>
         </returns>
         <param name="flow">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.Services.Description.OperationFlow" />
+          An <see cref="T:System.Web.Services.Description.OperationFlow" />
 
           
 
@@ -421,8 +397,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true it the string contains <see
-             cref="http://schemas.xmlsoap.org/soap/encoding/"
+            >true it the string contains <see cref="http://schemas.xmlsoap.org/soap/encoding/"
               >http://schemas.xmlsoap.org/soap/encoding/</see
             >
 
@@ -432,7 +407,11 @@
           >
         </returns>
         <param name="uriList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -448,10 +427,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -478,18 +454,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.Services.Description.SoapBinding" />
+            >Gets a <see cref="T:System.Web.Services.Description.SoapBinding" />
 
             
 
-             instance obtained through the <see
-             cref="P:System.Web.Services.Description.SoapProtocolImporter.SoapBinding" />
+             instance obtained through the <see cref="P:System.Web.Services.Description.SoapProtocolImporter.SoapBinding" />
 
             
 
-             property's <see
-             cref="P:System.Web.Services.Description.Binding.Extensions" />
+             property's <see cref="P:System.Web.Services.Description.Binding.Extensions" />
 
             
 
@@ -513,20 +486,15 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Xml.Serialization.SoapCodeExporter" />
-        </value>
+        <value>a <see cref="T:System.Xml.Serialization.SoapCodeExporter" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+            >The <see cref="T:System.Web.Services.Description.SoapProtocolImporter" />
 
             
 
-             class uses a <see
-             cref="T:System.Xml.Serialization.SoapCodeExporter" />
+             class uses a <see cref="T:System.Xml.Serialization.SoapCodeExporter" />
 
             
 
@@ -536,13 +504,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the object of type <see
-             cref="T:System.Xml.Serialization.SoapCodeExporter" />
+            >Gets the object of type <see cref="T:System.Xml.Serialization.SoapCodeExporter" />
 
             
 
-             used internally by the <see
-             cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+             used internally by the <see cref="T:System.Web.Services.Description.SoapProtocolImporter" />
 
             
 
@@ -566,20 +532,15 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Xml.Serialization.SoapSchemaImporter" />
-        </value>
+        <value>a <see cref="T:System.Xml.Serialization.SoapSchemaImporter" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+            >The <see cref="T:System.Web.Services.Description.SoapProtocolImporter" />
 
             
 
-             class uses a <see
-             cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+             class uses a <see cref="T:System.Xml.Serialization.SoapSchemaImporter" />
 
             
 
@@ -589,13 +550,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the object of type <see
-             cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+            >Gets the object of type <see cref="T:System.Xml.Serialization.SoapSchemaImporter" />
 
             
 
-             used internally by the <see
-             cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+             used internally by the <see cref="T:System.Web.Services.Description.SoapProtocolImporter" />
 
             
 
@@ -619,20 +578,15 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Xml.Serialization.XmlCodeExporter" />
-        </value>
+        <value>a <see cref="T:System.Xml.Serialization.XmlCodeExporter" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+            >The <see cref="T:System.Web.Services.Description.SoapProtocolImporter" />
 
             
 
-             class uses an <see
-             cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+             class uses an <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
             
 
@@ -642,13 +596,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the object of type <see
-             cref="T:System.Xml.Serialization.XmlCodeExporter" />
+            >Gets the object of type <see cref="T:System.Xml.Serialization.XmlCodeExporter" />
 
             
 
-             used internally by the <see
-             cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+             used internally by the <see cref="T:System.Web.Services.Description.SoapProtocolImporter" />
 
             
 
@@ -672,20 +624,15 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Xml.Serialization.XmlSchemaImporter" />
-        </value>
+        <value>a <see cref="T:System.Xml.Serialization.XmlSchemaImporter" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+            >The <see cref="T:System.Web.Services.Description.SoapProtocolImporter" />
 
             
 
-             class uses an <see
-             cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+             class uses an <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
             
 
@@ -695,13 +642,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the object of type <see
-             cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+            >Gets the object of type <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
             
 
-             used internally by the <see
-             cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+             used internally by the <see cref="T:System.Web.Services.Description.SoapProtocolImporter" />
 
             
 

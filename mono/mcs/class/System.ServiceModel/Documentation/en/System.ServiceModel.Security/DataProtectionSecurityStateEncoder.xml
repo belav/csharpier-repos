@@ -23,8 +23,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used for encoding the security state as represented by a <newTerm
-        >Stateful Security Context Token</newTerm>
+        >This class is used for encoding the security state as represented by a <newTerm>Stateful Security Context Token</newTerm>
 
         
 
@@ -32,8 +31,7 @@
       >
       <para>The encoding can either be in the current user scope (whereby only processes running as the user account can decode the security state) or it can be in the local machine scope (whereby all processes running on the machine can decode the security state). By default, the encoding is in the current user scope.</para>
       <para
-        >This class is used by the server when sending the security state in the <newTerm
-        >Stateful Security Context Token</newTerm>
+        >This class is used by the server when sending the security state in the <newTerm>Stateful Security Context Token</newTerm>
 
         
 
@@ -89,7 +87,11 @@
           <para>Initializes a new instance of this class.  </para>
         </summary>
         <param name="useCurrentUserProtectionScope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -121,14 +123,22 @@
           <para>Initializes a new instance of this class.  </para>
         </summary>
         <param name="useCurrentUserProtectionScope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Indicates whether to use the current user protection scope.</param
         >
         <param name="entropy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -166,7 +176,11 @@
           <para>A byte array that represents the decoded security state.</para>
         </returns>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -204,7 +218,11 @@
           <para>A byte array that represents the encoded security state.</para>
         </returns>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -235,8 +253,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of type <see
-             cref="T:System.Byte" />
+            >An array of type <see cref="T:System.Byte" />
 
             
 
@@ -263,13 +280,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Information returned by this method includes the <see
-             cref="P:System.ServiceModel.Security.DataProtectionSecurityStateEncoder.UseCurrentUserProtectionScope" />
+            >Information returned by this method includes the <see cref="P:System.ServiceModel.Security.DataProtectionSecurityStateEncoder.UseCurrentUserProtectionScope" />
 
             
 
-             and <see
-             cref="M:System.ServiceModel.Security.DataProtectionSecurityStateEncoder.GetEntropy" />
+             and <see cref="M:System.ServiceModel.Security.DataProtectionSecurityStateEncoder.GetEntropy" />
 
             
 
@@ -279,8 +294,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the current <see
-             cref="T:System.ServiceModel.Security.DataProtectionSecurityStateEncoder" />
+            >Returns a string that represents the current <see cref="T:System.ServiceModel.Security.DataProtectionSecurityStateEncoder" />
 
             
 
@@ -290,13 +304,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             that represents the current <see
-             cref="T:System.ServiceModel.Security.DataProtectionSecurityStateEncoder" />
+             that represents the current <see cref="T:System.ServiceModel.Security.DataProtectionSecurityStateEncoder" />
 
             
 

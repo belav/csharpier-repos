@@ -18,51 +18,42 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The data consists of: an identifier, the length (in bytes) of the property, the property type, and a pointer to the property value. </para>
       <para
-        >A <see
-         cref="T:System.Drawing.Imaging.PropertyItem" />
+        >A <see cref="T:System.Drawing.Imaging.PropertyItem" />
 
         
 
-         is not intended to be used as a stand-alone object. A <see
-         cref="T:System.Drawing.Imaging.PropertyItem" />
+         is not intended to be used as a stand-alone object. A <see cref="T:System.Drawing.Imaging.PropertyItem" />
 
         
 
-         object is intended to be used by classes that are derived from <see
-         cref="T:System.Drawing.Image" />
+         object is intended to be used by classes that are derived from <see cref="T:System.Drawing.Image" />
 
         
 
-        . A <see
-         cref="T:System.Drawing.Imaging.PropertyItem" />
+        . A <see cref="T:System.Drawing.Imaging.PropertyItem" />
 
         
 
-         object is used to retrieve and to change the metadata of existing image files, not to create the metadata. Therefore, the <see
-         cref="T:System.Drawing.Imaging.PropertyItem" />
+         object is used to retrieve and to change the metadata of existing image files, not to create the metadata. Therefore, the <see cref="T:System.Drawing.Imaging.PropertyItem" />
 
         
 
-         class does not have a defined Public constructor, and you cannot create an instance of a <see
-         cref="T:System.Drawing.Imaging.PropertyItem" />
+         class does not have a defined Public constructor, and you cannot create an instance of a <see cref="T:System.Drawing.Imaging.PropertyItem" />
 
         
 
          object.</para
       >
       <para
-        >To work around the absence of a Public constructor, use an existing <see
-         cref="T:System.Drawing.Imaging.PropertyItem" />
+        >To work around the absence of a Public constructor, use an existing <see cref="T:System.Drawing.Imaging.PropertyItem" />
 
         
 
-         object instead of creating a new instance of the <see
-         cref="T:System.Drawing.Imaging.PropertyItem" />
+         object instead of creating a new instance of the <see cref="T:System.Drawing.Imaging.PropertyItem" />
 
         
 
-         class. For more information, see <see
-         cref="M:System.Drawing.Image.GetPropertyItem(System.Int32)" />
+         class. For more information, see <see cref="M:System.Drawing.Image.GetPropertyItem(System.Int32)" />
 
         
 
@@ -88,12 +79,16 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >The following table shows the property tags and their IDs. For more information about property tags, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=145387">Image Property Tag Constants</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=145387"
+              >Image Property Tag Constants</see
+            >
 
             
 
             . For a description of each property tag, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=145383">Property Item Descriptions</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=145383"
+              >Property Item Descriptions</see
+            >
 
             
 
@@ -1871,8 +1866,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the length (in bytes) of the <see
-             cref="P:System.Drawing.Imaging.PropertyItem.Value" />
+            >Gets or sets the length (in bytes) of the <see cref="P:System.Drawing.Imaging.PropertyItem.Value" />
 
             
 
@@ -1914,8 +1908,7 @@
               </term>
               <description>
                 <para
-                  >Specifies that <see
-                   cref="P:System.Drawing.Imaging.PropertyItem.Value" />
+                  >Specifies that <see cref="P:System.Drawing.Imaging.PropertyItem.Value" />
 
                   
 
@@ -1929,13 +1922,11 @@
               </term>
               <description>
                 <para
-                  >Specifies that <see
-                   cref="P:System.Drawing.Imaging.PropertyItem.Value" />
+                  >Specifies that <see cref="P:System.Drawing.Imaging.PropertyItem.Value" />
 
                   
 
-                   is a null-terminated ASCII string. If you set the type data member to ASCII type, you should set the <see
-                   cref="P:System.Drawing.Imaging.PropertyItem.Len" />
+                   is a null-terminated ASCII string. If you set the type data member to ASCII type, you should set the <see cref="P:System.Drawing.Imaging.PropertyItem.Len" />
 
                   
 
@@ -1949,8 +1940,7 @@
               </term>
               <description>
                 <para
-                  >Specifies that <see
-                   cref="P:System.Drawing.Imaging.PropertyItem.Value" />
+                  >Specifies that <see cref="P:System.Drawing.Imaging.PropertyItem.Value" />
 
                   
 
@@ -1964,8 +1954,7 @@
               </term>
               <description>
                 <para
-                  >Specifies that <see
-                   cref="P:System.Drawing.Imaging.PropertyItem.Value" />
+                  >Specifies that <see cref="P:System.Drawing.Imaging.PropertyItem.Value" />
 
                   
 
@@ -1979,8 +1968,7 @@
               </term>
               <description>
                 <para
-                  >Specifies that <see
-                   cref="P:System.Drawing.Imaging.PropertyItem.Value" />
+                  >Specifies that <see cref="P:System.Drawing.Imaging.PropertyItem.Value" />
 
                   
 
@@ -1994,8 +1982,7 @@
               </term>
               <description>
                 <para
-                  >Specifies that <see
-                   cref="P:System.Drawing.Imaging.PropertyItem.Value" />
+                  >Specifies that <see cref="P:System.Drawing.Imaging.PropertyItem.Value" />
 
                   
 
@@ -2009,8 +1996,7 @@
               </term>
               <description>
                 <para
-                  >Specifies that <see
-                   cref="P:System.Drawing.Imaging.PropertyItem.Value" />
+                  >Specifies that <see cref="P:System.Drawing.Imaging.PropertyItem.Value" />
 
                   
 
@@ -2024,8 +2010,7 @@
               </term>
               <description>
                 <para
-                  >Specifies that <see
-                   cref="P:System.Drawing.Imaging.PropertyItem.Value" />
+                  >Specifies that <see cref="P:System.Drawing.Imaging.PropertyItem.Value" />
 
                   
 
@@ -2039,8 +2024,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an integer that defines the type of data contained in the <see
-             cref="P:System.Drawing.Imaging.PropertyItem.Value" />
+            >Gets or sets an integer that defines the type of data contained in the <see cref="P:System.Drawing.Imaging.PropertyItem.Value" />
 
             
 
@@ -2065,13 +2049,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The byte array returned by the <see
-             cref="P:System.Drawing.Imaging.PropertyItem.Value" />
+            >The byte array returned by the <see cref="P:System.Drawing.Imaging.PropertyItem.Value" />
 
             
 
-             property contains data in one of several different primitive types. To use the data, determine the data type using the <see
-             cref="P:System.Drawing.Imaging.PropertyItem.Type" />
+             property contains data in one of several different primitive types. To use the data, determine the data type using the <see cref="P:System.Drawing.Imaging.PropertyItem.Type" />
 
             
 

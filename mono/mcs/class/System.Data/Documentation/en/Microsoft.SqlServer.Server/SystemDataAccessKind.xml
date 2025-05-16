@@ -14,13 +14,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Describes the type of access to system data for a user-defined method or function.</para>
       <para
-        >This enumeration is used in <see
-         cref="T:Microsoft.SqlServer.Server.SqlMethodAttribute" />
+        >This enumeration is used in <see cref="T:Microsoft.SqlServer.Server.SqlMethodAttribute" />
 
         
 
-         and <see
-         cref="T:Microsoft.SqlServer.Server.SqlFunctionAttribute" />
+         and <see cref="T:Microsoft.SqlServer.Server.SqlFunctionAttribute" />
 
         
 

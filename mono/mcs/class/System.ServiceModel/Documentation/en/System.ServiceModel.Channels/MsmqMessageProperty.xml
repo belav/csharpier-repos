@@ -17,23 +17,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Channels.MsmqMessageProperty" />
+        >The <see cref="T:System.ServiceModel.Channels.MsmqMessageProperty" />
 
         
 
-         class is obtained from the channel context and is used primarily for error processing. For example, if an application reads a message from the dead-letter queue, the application should examine properties like <see
-         cref="P:System.ServiceModel.Channels.MsmqMessageProperty.DeliveryFailure" />
+         class is obtained from the channel context and is used primarily for error processing. For example, if an application reads a message from the dead-letter queue, the application should examine properties like <see cref="P:System.ServiceModel.Channels.MsmqMessageProperty.DeliveryFailure" />
 
         
 
-         and <see
-         cref="P:System.ServiceModel.Channels.MsmqMessageProperty.DeliveryStatus" />
+         and <see cref="P:System.ServiceModel.Channels.MsmqMessageProperty.DeliveryStatus" />
 
         
 
-        . If an application is performing its own poison-message handling, it should examine properties like <see
-         cref="P:System.ServiceModel.Channels.MsmqMessageProperty.AbortCount" />
+        . If an application is performing its own poison-message handling, it should examine properties like <see cref="P:System.ServiceModel.Channels.MsmqMessageProperty.AbortCount" />
 
         
 
@@ -43,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Channels.MsmqMessageProperty" />
+        >The <see cref="T:System.ServiceModel.Channels.MsmqMessageProperty" />
 
         
 
@@ -68,8 +63,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is used in poison-message handling. For more information about poison-message handling, see <format
-             type="text/html">
+            >This property is used in poison-message handling. For more information about poison-message handling, see <format type="text/html">
               <a href="8d1c5e5a-7928-4a80-95ed-d8da211b8595">Poison-Message Handling</a>
             </format>
 
@@ -81,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Int32" />
+            >Gets an <see cref="T:System.Int32" />
 
             
 
@@ -112,8 +105,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property together with <see
-             cref="P:System.ServiceModel.Channels.MsmqMessageProperty.DeliveryStatus" />
+            >Use this property together with <see cref="P:System.ServiceModel.Channels.MsmqMessageProperty.DeliveryStatus" />
 
             
 
@@ -123,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value from the <see
-             cref="T:System.ServiceModel.Channels.DeliveryFailure" />
+            >Gets a value from the <see cref="T:System.ServiceModel.Channels.DeliveryFailure" />
 
             
 
@@ -154,23 +145,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A message may have a delivery status of <see
-             cref="F:System.ServiceModel.Channels.DeliveryStatus.InDoubt" />
+            >A message may have a delivery status of <see cref="F:System.ServiceModel.Channels.DeliveryStatus.InDoubt" />
 
             
 
-             or <see
-             cref="F:System.ServiceModel.Channels.DeliveryStatus.NotDelivered" />
+             or <see cref="F:System.ServiceModel.Channels.DeliveryStatus.NotDelivered" />
 
             
 
-            . A message has a delivery status of <see
-             cref="F:System.ServiceModel.Channels.DeliveryStatus.InDoubt" />
+            . A message has a delivery status of <see cref="F:System.ServiceModel.Channels.DeliveryStatus.InDoubt" />
 
             
 
-             unless Message Queuing (MSMQ) can determine that it was not delivered, in which case its delivery status becomes <see
-             cref="F:System.ServiceModel.Channels.DeliveryStatus.NotDelivered" />
+             unless Message Queuing (MSMQ) can determine that it was not delivered, in which case its delivery status becomes <see cref="F:System.ServiceModel.Channels.DeliveryStatus.NotDelivered" />
 
             
 
@@ -178,8 +165,7 @@
           >
           <para>An example of an in-doubt message is a message that has expired. Message Queuing cannot determine whether the message was delivered to the application after it expired.</para>
           <para
-            >Use this property together with <see
-             cref="P:System.ServiceModel.Channels.MsmqMessageProperty.DeliveryFailure" />
+            >Use this property together with <see cref="P:System.ServiceModel.Channels.MsmqMessageProperty.DeliveryFailure" />
 
             
 
@@ -189,8 +175,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value from the <see
-             cref="T:System.ServiceModel.Channels.DeliveryStatus" />
+            >Gets a value from the <see cref="T:System.ServiceModel.Channels.DeliveryStatus" />
 
             
 
@@ -223,13 +208,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.Channels.MsmqMessageProperty" />
+            >Gets the <see cref="T:System.ServiceModel.Channels.MsmqMessageProperty" />
 
             
 
-             for the specified <see
-             cref="T:System.ServiceModel.Channels.Message" />
+             for the specified <see cref="T:System.ServiceModel.Channels.Message" />
 
             
 
@@ -239,13 +222,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.MsmqMessageProperty" />
+            >The <see cref="T:System.ServiceModel.Channels.MsmqMessageProperty" />
 
             
 
-             for the specified <see
-             cref="T:System.ServiceModel.Channels.Message" />
+             for the specified <see cref="T:System.ServiceModel.Channels.Message" />
 
             
 
@@ -253,12 +234,15 @@
           >
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Message" />
+          The <see cref="T:System.ServiceModel.Channels.Message" />
 
           
 
@@ -282,8 +266,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Int32" />
+            >Gets an <see cref="T:System.Int32" />
 
             
 
@@ -306,8 +289,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -317,8 +299,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.String" />
+            >Gets a <see cref="T:System.String" />
 
             
 

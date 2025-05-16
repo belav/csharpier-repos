@@ -44,26 +44,22 @@
          can be used to represent a reference to a local variable.</para
       >
       <para
-        >The <see
-         cref="P:System.CodeDom.CodeVariableReferenceExpression.VariableName" />
+        >The <see cref="P:System.CodeDom.CodeVariableReferenceExpression.VariableName" />
 
         
 
          property specifies the name of the local variable to reference.</para
       >
       <para
-        >Use <see
-         cref="T:System.CodeDom.CodeFieldReferenceExpression" />
+        >Use <see cref="T:System.CodeDom.CodeFieldReferenceExpression" />
 
         
 
-         to reference a field. Use <see
-         cref="T:System.CodeDom.CodePropertyReferenceExpression" />
+         to reference a field. Use <see cref="T:System.CodeDom.CodePropertyReferenceExpression" />
 
         
 
-         to reference a property. Use <see
-         cref="T:System.CodeDom.CodeEventReferenceExpression" />
+         to reference a property. Use <see cref="T:System.CodeDom.CodeEventReferenceExpression" />
 
         
 
@@ -95,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeVariableReferenceExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeVariableReferenceExpression" />
 
             
 
@@ -129,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeVariableReferenceExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeVariableReferenceExpression" />
 
             
 
@@ -138,7 +132,11 @@
           >
         </summary>
         <param name="variableName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

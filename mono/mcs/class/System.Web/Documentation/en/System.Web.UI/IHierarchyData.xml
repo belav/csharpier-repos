@@ -11,18 +11,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.IHierarchyData" />
+        >The <see cref="T:System.Web.UI.IHierarchyData" />
 
         
 
-         interface is implemented by classes that represent nodes of a hierarchical structure, and track the hierarchical relationships to their parent and child nodes. Classes that implement the <see
-         cref="T:System.Web.UI.IHierarchyData" />
+         interface is implemented by classes that represent nodes of a hierarchical structure, and track the hierarchical relationships to their parent and child nodes. Classes that implement the <see cref="T:System.Web.UI.IHierarchyData" />
 
         
 
-         interface can be contained in collections that implement the <see
-         cref="T:System.Web.UI.IHierarchicalEnumerable" />
+         interface can be contained in collections that implement the <see cref="T:System.Web.UI.IHierarchicalEnumerable" />
 
         
 
@@ -32,13 +29,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Exposes a node of a hierarchical data structure, including the node object and some properties that describe characteristics of the node. Objects that implement the <see
-         cref="T:System.Web.UI.IHierarchyData" />
+        >Exposes a node of a hierarchical data structure, including the node object and some properties that describe characteristics of the node. Objects that implement the <see cref="T:System.Web.UI.IHierarchyData" />
 
         
 
-         interface can be contained in <see
-         cref="T:System.Web.UI.IHierarchicalEnumerable" />
+         interface can be contained in <see cref="T:System.Web.UI.IHierarchicalEnumerable" />
 
         
 
@@ -62,13 +57,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Web.UI.IHierarchyData.HasChildren" />
+            >You can use the <see cref="P:System.Web.UI.IHierarchyData.HasChildren" />
 
             
 
-             property to determine whether the <see
-             cref="T:System.Web.UI.IHierarchyData" />
+             property to determine whether the <see cref="T:System.Web.UI.IHierarchyData" />
 
             
 
@@ -82,8 +75,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Web.UI.IHierarchicalEnumerable" />
+            >An <see cref="T:System.Web.UI.IHierarchicalEnumerable" />
 
             
 
@@ -107,18 +99,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.IHierarchyData" />
+            >The <see cref="T:System.Web.UI.IHierarchyData" />
 
             
 
-             interface does not define a HasParent convenience property, so callers must check the return value of the <see
-             cref="M:System.Web.UI.IHierarchyData.GetParent" />
+             interface does not define a HasParent convenience property, so callers must check the return value of the <see cref="M:System.Web.UI.IHierarchyData.GetParent" />
 
             
 
-             method for null to determine whether the current <see
-             cref="T:System.Web.UI.IHierarchyData" />
+             method for null to determine whether the current <see cref="T:System.Web.UI.IHierarchyData" />
 
             
 
@@ -128,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Web.UI.IHierarchyData" />
+            >Gets an <see cref="T:System.Web.UI.IHierarchyData" />
 
             
 
@@ -139,8 +127,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Web.UI.IHierarchyData" />
+            >An <see cref="T:System.Web.UI.IHierarchyData" />
 
             
 
@@ -164,28 +151,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.IHierarchyData.HasChildren" />
+            >The <see cref="P:System.Web.UI.IHierarchyData.HasChildren" />
 
             
 
-             property is a convenience property that enables callers to avoid checking the return value of the <see
-             cref="M:System.Web.UI.IHierarchyData.GetChildren" />
+             property is a convenience property that enables callers to avoid checking the return value of the <see cref="M:System.Web.UI.IHierarchyData.GetChildren" />
 
             
 
-             method for null. If the <see
-             cref="P:System.Web.UI.IHierarchyData.HasChildren" />
+             method for null. If the <see cref="P:System.Web.UI.IHierarchyData.HasChildren" />
 
             
 
-             property returns true, call the <see
-             cref="M:System.Web.UI.IHierarchyData.GetChildren" />
+             property returns true, call the <see cref="M:System.Web.UI.IHierarchyData.GetChildren" />
 
             
 
-             method to retrieve an <see
-             cref="T:System.Web.UI.IHierarchicalEnumerable" />
+             method to retrieve an <see cref="T:System.Web.UI.IHierarchicalEnumerable" />
 
             
 
@@ -195,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the hierarchical data node that the <see
-             cref="T:System.Web.UI.IHierarchyData" />
+            >Indicates whether the hierarchical data node that the <see cref="T:System.Web.UI.IHierarchyData" />
 
             
 
@@ -220,23 +201,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >While many classes that represent hierarchical data nodes, such as the <see
-             cref="T:System.Web.SiteMapNode" />
+            >While many classes that represent hierarchical data nodes, such as the <see cref="T:System.Web.SiteMapNode" />
 
             
 
-             class, implement the <see
-             cref="T:System.Web.UI.IHierarchyData" />
+             class, implement the <see cref="T:System.Web.UI.IHierarchyData" />
 
             
 
-             interface directly, other classes only act as a wrapper for a class that does not implement the interface. The <see
-             cref="P:System.Web.UI.IHierarchyData.Item" />
+             interface directly, other classes only act as a wrapper for a class that does not implement the interface. The <see cref="P:System.Web.UI.IHierarchyData.Item" />
 
             
 
-             property is provided for these design situations, when business objects are functionally equivalent to an <see
-             cref="T:System.Web.UI.IHierarchyData" />
+             property is provided for these design situations, when business objects are functionally equivalent to an <see cref="T:System.Web.UI.IHierarchyData" />
 
             
 
@@ -246,8 +223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the hierarchical data node that the <see
-             cref="T:System.Web.UI.IHierarchyData" />
+            >Gets the hierarchical data node that the <see cref="T:System.Web.UI.IHierarchyData" />
 
             
 
@@ -271,23 +247,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.IHierarchyData.Path" />
+            >The <see cref="P:System.Web.UI.IHierarchyData.Path" />
 
             
 
-             property can be passed to the <see
-             cref="M:System.Web.UI.HierarchicalDataSourceControl.GetHierarchicalView(System.String)" />
+             property can be passed to the <see cref="M:System.Web.UI.HierarchicalDataSourceControl.GetHierarchicalView(System.String)" />
 
             
 
-             method to retrieve the <see
-             cref="T:System.Web.UI.HierarchicalDataSourceView" />
+             method to retrieve the <see cref="T:System.Web.UI.HierarchicalDataSourceView" />
 
             
 
-             object that corresponds to the node identified by <see
-             cref="P:System.Web.UI.IHierarchyData.Path" />
+             object that corresponds to the node identified by <see cref="P:System.Web.UI.IHierarchyData.Path" />
 
             
 
@@ -295,8 +267,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.UI.IHierarchyData.Path" />
+              >The <see cref="P:System.Web.UI.IHierarchyData.Path" />
 
               
 
@@ -325,18 +296,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.IHierarchyData.Type" />
+            >The <see cref="P:System.Web.UI.IHierarchyData.Type" />
 
             
 
-             property does not return the <see
-             cref="T:System.Type" />
+             property does not return the <see cref="T:System.Type" />
 
             
 
-             of the object represented in an <see
-             cref="T:System.Web.UI.IHierarchyData" />
+             of the object represented in an <see cref="T:System.Web.UI.IHierarchyData" />
 
             
 
@@ -346,13 +314,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the type of <see
-             cref="T:System.Object" />
+            >Gets the name of the type of <see cref="T:System.Object" />
 
             
 
-             contained in the <see
-             cref="P:System.Web.UI.IHierarchyData.Item" />
+             contained in the <see cref="P:System.Web.UI.IHierarchyData.Item" />
 
             
 

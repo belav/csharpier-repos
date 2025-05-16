@@ -37,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
 
             
 
@@ -68,13 +67,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+            >Adds a <see cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
             
 
-             to the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
+             to the <see cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
 
             
 
@@ -84,13 +81,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The position where the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+            >The position where the <see cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
             
 
-             was inserted in the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
+             was inserted in the <see cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
 
             
 
@@ -98,17 +93,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+          The <see cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
           
 
-           to add to the <see
-           cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
+           to add to the <see cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
 
           
 
@@ -137,13 +134,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
+            >Determines whether the <see cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
 
             
 
-             contains a specific <see
-             cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+             contains a specific <see cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
             
 
@@ -153,13 +148,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
+            >true if the <see cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
 
             
 
-             contains the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+             contains the <see cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
             
 
@@ -167,17 +160,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+          The <see cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
           
 
-           to locate within the <see
-           cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
+           to locate within the <see cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
 
           
 
@@ -229,13 +224,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+            >Removes a <see cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
             
 
-             from the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
+             from the <see cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
 
             
 
@@ -243,17 +236,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+          The <see cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
           
 
-           to remove from the <see
-           cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
+           to remove from the <see cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
 
           
 

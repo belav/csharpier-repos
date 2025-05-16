@@ -21,43 +21,35 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+        >The <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
         
 
-         class is used to store and manage a collection of <see
-         cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+         class is used to store and manage a collection of <see cref="T:System.Web.UI.WebControls.DetailsViewRow" />
 
         
 
-         objects in a <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         objects in a <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-         control. Each row in a <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         control. Each row in a <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-         control is represented by a <see
-         cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+         control is represented by a <see cref="T:System.Web.UI.WebControls.DetailsViewRow" />
 
         
 
-         object. The <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         object. The <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-         control uses the <see
-         cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+         control uses the <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
         
 
-         class for its <see
-         cref="P:System.Web.UI.WebControls.DetailsView.Rows" />
+         class for its <see cref="P:System.Web.UI.WebControls.DetailsView.Rows" />
 
         
 
@@ -65,28 +57,23 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="P:System.Web.UI.WebControls.DetailsView.Rows" />
+          >The <see cref="P:System.Web.UI.WebControls.DetailsView.Rows" />
 
           
 
-           property contains only the data rows. To access the header row, footer row, top pager row, and bottom pager row, use the <see
-           cref="P:System.Web.UI.WebControls.DetailsView.HeaderRow" />
+           property contains only the data rows. To access the header row, footer row, top pager row, and bottom pager row, use the <see cref="P:System.Web.UI.WebControls.DetailsView.HeaderRow" />
 
           
 
-          , <see
-           cref="P:System.Web.UI.WebControls.DetailsView.FooterRow" />
+          , <see cref="P:System.Web.UI.WebControls.DetailsView.FooterRow" />
 
           
 
-          , <see
-           cref="P:System.Web.UI.WebControls.DetailsView.TopPagerRow" />
+          , <see cref="P:System.Web.UI.WebControls.DetailsView.TopPagerRow" />
 
           
 
-          , and <see
-           cref="P:System.Web.UI.WebControls.DetailsView.BottomPagerRow" />
+          , and <see cref="P:System.Web.UI.WebControls.DetailsView.BottomPagerRow" />
 
           
 
@@ -94,8 +81,7 @@
         >
       </block>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+        >The <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
         
 
@@ -104,13 +90,11 @@
       <list type="bullet">
         <item>
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.Item(System.Int32)" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.Item(System.Int32)" />
 
             
 
-             indexer to directly retrieve a <see
-             cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+             indexer to directly retrieve a <see cref="T:System.Web.UI.WebControls.DetailsViewRow" />
 
             
 
@@ -119,8 +103,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.DetailsViewRowCollection.GetEnumerator" />
+            >Use the <see cref="M:System.Web.UI.WebControls.DetailsViewRowCollection.GetEnumerator" />
 
             
 
@@ -129,8 +112,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.DetailsViewRowCollection.CopyTo(System.Web.UI.WebControls.DetailsViewRow[],System.Int32)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.DetailsViewRowCollection.CopyTo(System.Web.UI.WebControls.DetailsViewRow[],System.Int32)" />
 
             
 
@@ -139,8 +121,7 @@
         </item>
       </list>
       <para
-        >To determine the total number of items in the collection, use the <see
-         cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.Count" />
+        >To determine the total number of items in the collection, use the <see cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.Count" />
 
         
 
@@ -150,13 +131,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+        >Represents a collection of <see cref="T:System.Web.UI.WebControls.DetailsViewRow" />
 
         
 
-         objects in a <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         objects in a <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
@@ -179,23 +158,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+            >Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
             
 
-             class using the specified <see
-             cref="T:System.Collections.ArrayList" />
+             class using the specified <see cref="T:System.Collections.ArrayList" />
 
             
 
-             object. The <see
-             cref="T:System.Collections.ArrayList" />
+             object. The <see cref="T:System.Collections.ArrayList" />
 
             
 
-             object contains the <see
-             cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+             object contains the <see cref="T:System.Web.UI.WebControls.DetailsViewRow" />
 
             
 
@@ -205,13 +180,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
             
 
-             class using the specified <see
-             cref="T:System.Collections.ArrayList" />
+             class using the specified <see cref="T:System.Collections.ArrayList" />
 
             
 
@@ -219,17 +192,19 @@
           >
         </summary>
         <param name="rows">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.ArrayList" />
+          An <see cref="T:System.Collections.ArrayList" />
 
           
 
-           that contains the <see
-           cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+           that contains the <see cref="T:System.Web.UI.WebControls.DetailsViewRow" />
 
           
 
@@ -258,8 +233,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to copy the items in the <see
-             cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+            >Use this method to copy the items in the <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
             
 
@@ -267,8 +241,7 @@
           >
           <block subset="none" type="note">
             <para
-              >You must use a zero-based array for the <paramref
-               name="array" />
+              >You must use a zero-based array for the <paramref name="array" />
 
               
 
@@ -279,18 +252,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the items from this <see
-             cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+            >Copies all the items from this <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
             
 
-             object to the specified <see
-             cref="T:System.Array" />
+             object to the specified <see cref="T:System.Array" />
 
             
 
-             object, starting at the specified index in the <see
-             cref="T:System.Array" />
+             object, starting at the specified index in the <see cref="T:System.Array" />
 
             
 
@@ -298,29 +268,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A zero-based <see
-           cref="T:System.Array" />
+          A zero-based <see cref="T:System.Array" />
 
           
 
-           that receives the copied items from the <see
-           cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+           that receives the copied items from the <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
           
 
           .</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first index in the specified <see
-           cref="T:System.Array" />
+          The first index in the specified <see cref="T:System.Array" />
 
           
 
@@ -343,18 +318,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.Count" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.Count" />
 
             
 
-             property to determine the number of items in the collection. The <see
-             cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.Count" />
+             property to determine the number of items in the collection. The <see cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.Count" />
 
             
 
-             property is commonly used when iterating through the collection to determine its upper bound. The <see
-             cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.Count" />
+             property is commonly used when iterating through the collection to determine its upper bound. The <see cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.Count" />
 
             
 
@@ -364,8 +336,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of items in the <see
-             cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+            >Gets the number of items in the <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
             
 
@@ -392,23 +363,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to get an enumerator that can be iterated through linearly to access each item in the <see
-             cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+            >Use this method to get an enumerator that can be iterated through linearly to access each item in the <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
             
 
-             object. To access the item at the current position in the enumerator, use the <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             object. To access the item at the current position in the enumerator, use the <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             property. Use the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             property. Use the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             method to move to the next item in the collection. To move the enumerator to its initial position, use the <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             method to move to the next item in the collection. To move the enumerator to its initial position, use the <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
@@ -416,18 +383,15 @@
           >
           <block subset="none" type="note">
             <para
-              >When you initially get the enumerator or use the <see
-               cref="M:System.Collections.IEnumerator.Reset" />
+              >When you initially get the enumerator or use the <see cref="M:System.Collections.IEnumerator.Reset" />
 
               
 
-               method to move the enumerator to the first item in the collection, you must call the <see
-               cref="M:System.Collections.IEnumerator.MoveNext" />
+               method to move the enumerator to the first item in the collection, you must call the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
               
 
-               method. Otherwise, the item represented by the <see
-               cref="P:System.Collections.IEnumerator.Current" />
+               method. Otherwise, the item represented by the <see cref="P:System.Collections.IEnumerator.Current" />
 
               
 
@@ -438,13 +402,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that contains all <see
-             cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+            >Returns an enumerator that contains all <see cref="T:System.Web.UI.WebControls.DetailsViewRow" />
 
             
 
-             objects in the <see
-             cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+             objects in the <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
             
 
@@ -454,18 +416,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-            -implemented object that contains all <see
-             cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+            -implemented object that contains all <see cref="T:System.Web.UI.WebControls.DetailsViewRow" />
 
             
 
-             objects in the <see
-             cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+             objects in the <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
             
 
@@ -489,18 +448,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.IsReadOnly" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.IsReadOnly" />
 
             
 
-             property to determine whether the <see
-             cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+             property to determine whether the <see cref="T:System.Web.UI.WebControls.DetailsViewRow" />
 
             
 
-             objects in the <see
-             cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+             objects in the <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
             
 
@@ -508,13 +464,11 @@
           >
           <block subset="none" type="note">
             <para
-              >This property has been overridden to always return false, to indicate that the <see
-               cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+              >This property has been overridden to always return false, to indicate that the <see cref="T:System.Web.UI.WebControls.DetailsViewRow" />
 
               
 
-               objects in the <see
-               cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+               objects in the <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
               
 
@@ -525,8 +479,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the rows in the <see
-             cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+            >Gets a value indicating whether the rows in the <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
             
 
@@ -550,13 +503,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.IsSynchronized" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.IsSynchronized" />
 
             
 
-             property to determine whether the <see
-             cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+             property to determine whether the <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
             
 
@@ -564,8 +515,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This property has been overridden to always return false to indicate that the <see
-               cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+              >This property has been overridden to always return false to indicate that the <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
               
 
@@ -573,18 +523,15 @@
             >
           </block>
           <para
-            >For more information on the <see
-             cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.IsSynchronized" />
+            >For more information on the <see cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.IsSynchronized" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.IsSynchronized" />
+             property, see the <see cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -594,8 +541,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
             
 
@@ -642,31 +588,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.SyncRoot" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.SyncRoot" />
 
             
 
-             property to get an object that can be used to synchronize access to the collection. The object returned in this implementation is the <see
-             cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+             property to get an object that can be used to synchronize access to the collection. The object returned in this implementation is the <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
             
 
              object itself.</para
           >
           <para
-            >For more information on the <see
-             cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.SyncRoot" />
+            >For more information on the <see cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.SyncRoot" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             property, see the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -699,28 +640,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This implementation of the <see
-             cref="M:System.Web.UI.WebControls.DetailsViewRowCollection.System.Collections.ICollection.CopyTo(System.Array,System.Int32)" />
+            >This implementation of the <see cref="M:System.Web.UI.WebControls.DetailsViewRowCollection.System.Collections.ICollection.CopyTo(System.Array,System.Int32)" />
 
             
 
-             method is a helper method used by the <see
-             cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+             method is a helper method used by the <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
             
 
-             class to copy the items in the <see
-             cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+             class to copy the items in the <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
             
 
-             object into the specified <see
-             cref="T:System.Array" />
+             object into the specified <see cref="T:System.Array" />
 
             
 
-             object, starting at the specified index. The <see
-             cref="T:System.Array" />
+             object, starting at the specified index. The <see cref="T:System.Array" />
 
             
 
@@ -728,13 +664,11 @@
           >
           <block subset="none" type="note">
             <para
-              >You must use a zero-based <see
-               cref="T:System.Array" />
+              >You must use a zero-based <see cref="T:System.Array" />
 
               
 
-               object for the <paramref
-               name="array" />
+               object for the <paramref name="array" />
 
               
 
@@ -745,18 +679,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the items from this <see
-             cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+            >Copies all the items from this <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
             
 
-             object to the specified <see
-             cref="T:System.Array" />
+             object to the specified <see cref="T:System.Array" />
 
             
 
-             object, starting at the specified index in the <see
-             cref="T:System.Array" />
+             object, starting at the specified index in the <see cref="T:System.Array" />
 
             
 
@@ -764,29 +695,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A zero-based <see
-           cref="T:System.Array" />
+          A zero-based <see cref="T:System.Array" />
 
           
 
-           that receives the copied items from the <see
-           cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+           that receives the copied items from the <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
           
 
           .</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first index in the specified <see
-           cref="T:System.Array" />
+          The first index in the specified <see cref="T:System.Array" />
 
           
 

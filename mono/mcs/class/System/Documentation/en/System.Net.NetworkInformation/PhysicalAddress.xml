@@ -20,8 +20,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The MAC address, or physical address, is a hardware address that uniquely identifies each node, such as a computer or printer, on a network.</para>
       <para
-        >Instances of this class are returned by the <see
-         cref="M:System.Net.NetworkInformation.NetworkInterface.GetPhysicalAddress" />
+        >Instances of this class are returned by the <see cref="M:System.Net.NetworkInformation.NetworkInterface.GetPhysicalAddress" />
 
         
 
@@ -53,21 +52,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In common scenarios, applications do not need to call this constructor; instances of this class are returned by the <see
-             cref="M:System.Net.NetworkInformation.NetworkInterface.GetPhysicalAddress" />
+            >In common scenarios, applications do not need to call this constructor; instances of this class are returned by the <see cref="M:System.Net.NetworkInformation.NetworkInterface.GetPhysicalAddress" />
 
             
 
              method.</para
           >
           <para
-            >Note that you can also use the <see
-             cref="M:System.Net.NetworkInformation.PhysicalAddress.Parse(System.String)" />
+            >Note that you can also use the <see cref="M:System.Net.NetworkInformation.PhysicalAddress.Parse(System.String)" />
 
             
 
-             method to create a new instance of <see
-             cref="T:System.Net.NetworkInformation.PhysicalAddress" />
+             method to create a new instance of <see cref="T:System.Net.NetworkInformation.PhysicalAddress" />
 
             
 
@@ -77,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.NetworkInformation.PhysicalAddress" />
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.PhysicalAddress" />
 
             
 
@@ -86,12 +81,15 @@
           >
         </summary>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Byte" />
+          A <see cref="T:System.Byte" />
 
           
 
@@ -122,8 +120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two <see
-             cref="T:System.Net.NetworkInformation.PhysicalAddress" />
+            >Compares two <see cref="T:System.Net.NetworkInformation.PhysicalAddress" />
 
             
 
@@ -135,12 +132,15 @@
           <para>true if this instance and the specified instance contain the same address; otherwise false.</para>
         </returns>
         <param name="comparand">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.NetworkInformation.PhysicalAddress" />
+          The <see cref="T:System.Net.NetworkInformation.PhysicalAddress" />
 
           
 
@@ -173,8 +173,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Byte" />
+            >A <see cref="T:System.Byte" />
 
             
 
@@ -233,13 +232,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.NetworkInformation.PhysicalAddress.Parse(System.String)" />
+            >The <see cref="M:System.Net.NetworkInformation.PhysicalAddress.Parse(System.String)" />
 
             
 
-             method returns <see
-             cref="F:System.Net.NetworkInformation.PhysicalAddress.None" />
+             method returns <see cref="F:System.Net.NetworkInformation.PhysicalAddress.None" />
 
             
 
@@ -249,8 +246,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new <see
-             cref="T:System.Net.NetworkInformation.PhysicalAddress" />
+            >Returns a new <see cref="T:System.Net.NetworkInformation.PhysicalAddress" />
 
             
 
@@ -284,8 +280,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="address" />
+            >The <paramref name="address" />
 
             
 
@@ -296,13 +291,11 @@
           <para>F0-E1-D2-C3-B4-A5</para>
           <para>Note that an address that contains f0-e1-d2-c3-b4-a5 will fail to parse and throw an exception.</para>
           <para
-            >Use the <see
-             cref="M:System.Net.NetworkInformation.PhysicalAddress.GetAddressBytes" />
+            >Use the <see cref="M:System.Net.NetworkInformation.PhysicalAddress.GetAddressBytes" />
 
             
 
-             method to retrieve the address from an existing <see
-             cref="T:System.Net.NetworkInformation.PhysicalAddress" />
+             method to retrieve the address from an existing <see cref="T:System.Net.NetworkInformation.PhysicalAddress" />
 
             
 
@@ -312,13 +305,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Parses the specified <see
-             cref="T:System.String" />
+            >Parses the specified <see cref="T:System.String" />
 
             
 
-             and stores its contents as the address bytes of the <see
-             cref="T:System.Net.NetworkInformation.PhysicalAddress" />
+             and stores its contents as the address bytes of the <see cref="T:System.Net.NetworkInformation.PhysicalAddress" />
 
             
 
@@ -328,8 +319,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.NetworkInformation.PhysicalAddress" />
+            >A <see cref="T:System.Net.NetworkInformation.PhysicalAddress" />
 
             
 
@@ -337,17 +327,19 @@
           >
         </returns>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           containing the address that will be used to initialize the <see
-           cref="T:System.Net.NetworkInformation.PhysicalAddress" />
+           containing the address that will be used to initialize the <see cref="T:System.Net.NetworkInformation.PhysicalAddress" />
 
           
 
@@ -376,8 +368,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.String" />
+            >Returns the <see cref="T:System.String" />
 
             
 
@@ -387,8 +378,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 

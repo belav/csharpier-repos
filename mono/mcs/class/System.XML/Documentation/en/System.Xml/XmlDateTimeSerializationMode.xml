@@ -18,13 +18,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by the <see
-         cref="Overload:System.Xml.XmlConvert.ToDateTime" />
+        >This enumeration is used by the <see cref="Overload:System.Xml.XmlConvert.ToDateTime" />
 
         
 
-         and <see
-         cref="Overload:System.Xml.XmlConvert.ToString" />
+         and <see cref="Overload:System.Xml.XmlConvert.ToString" />
 
         
 
@@ -34,8 +32,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies how to treat the time value when converting between string and <see
-         cref="T:System.DateTime" />
+        >Specifies how to treat the time value when converting between string and <see cref="T:System.DateTime" />
 
         
 
@@ -63,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Treat as local time. If the <see
-             cref="T:System.DateTime" />
+            >Treat as local time. If the <see cref="T:System.DateTime" />
 
             
 
@@ -114,8 +110,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a string is being converted to <see
-             cref="T:System.DateTime" />
+            >If a string is being converted to <see cref="T:System.DateTime" />
 
             
 
@@ -125,8 +120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Treat as a local time if a <see
-             cref="T:System.DateTime" />
+            >Treat as a local time if a <see cref="T:System.DateTime" />
 
             
 
@@ -154,8 +148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Treat as a UTC. If the <see
-             cref="T:System.DateTime" />
+            >Treat as a UTC. If the <see cref="T:System.DateTime" />
 
             
 

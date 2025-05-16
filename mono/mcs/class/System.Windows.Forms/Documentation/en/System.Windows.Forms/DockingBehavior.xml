@@ -13,41 +13,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.DockingBehavior" />
+        >The <see cref="T:System.Windows.Forms.DockingBehavior" />
 
         
 
-         enumeration is used by the <see
-         cref="T:System.Windows.Forms.DockingAttribute" />
+         enumeration is used by the <see cref="T:System.Windows.Forms.DockingAttribute" />
 
         
 
          class.</para
       >
       <para
-        >The <see
-         cref="T:System.Windows.Forms.SplitContainer" />
+        >The <see cref="T:System.Windows.Forms.SplitContainer" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.WebBrowser" />
+         and <see cref="T:System.Windows.Forms.WebBrowser" />
 
         
 
-         controls are set to <see
-         cref="F:System.Windows.Forms.DockingBehavior.AutoDock" />
+         controls are set to <see cref="F:System.Windows.Forms.DockingBehavior.AutoDock" />
 
         
 
-        . The <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        . The <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
-         control is set to <see
-         cref="F:System.Windows.Forms.DockingBehavior.Ask" />
+         control is set to <see cref="F:System.Windows.Forms.DockingBehavior.Ask" />
 
         
 
@@ -88,13 +81,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the control's <see
-             cref="P:System.Windows.Forms.Control.Dock" />
+            >Set the control's <see cref="P:System.Windows.Forms.Control.Dock" />
 
             
 
-             property to <see
-             cref="F:System.Windows.Forms.DockStyle.Fill" />
+             property to <see cref="F:System.Windows.Forms.DockStyle.Fill" />
 
             
 

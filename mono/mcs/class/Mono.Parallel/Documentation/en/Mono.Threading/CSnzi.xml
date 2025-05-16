@@ -14,8 +14,7 @@
   <Interfaces />
   <Docs>
     <summary
-      >Implementation of a closable scalable non-zero indicator. It has the same API than <see
-       cref="T:System.Theading.Snzi" />
+      >Implementation of a closable scalable non-zero indicator. It has the same API than <see cref="T:System.Theading.Snzi" />
 
       
 
@@ -58,8 +57,7 @@
         <summary>Increment the state of the CSnzi object.</summary>
         <returns>Returns the internal node where the increment action occured. Returns null if CSnzi is closed.</returns>
         <remarks
-          >To undo an Arrive, you must call <see
-           cref="M:Mono.Threading.CSnzi.Depart()" />
+          >To undo an Arrive, you must call <see cref="M:Mono.Threading.CSnzi.Depart()" />
 
           
 
@@ -83,16 +81,14 @@
       <Parameters />
       <Docs>
         <summary
-          >Close the CSnzi object to subsequent Arrive or Depart action until <see
-           cref="M:Mono.Threading.CSnzi.Open()" />
+          >Close the CSnzi object to subsequent Arrive or Depart action until <see cref="M:Mono.Threading.CSnzi.Open()" />
 
           
 
            is called.</summary
         >
         <returns
-          >True if the state of the CSnzi was zero or if it was already closed, <see
-           langword="false" />
+          >True if the state of the CSnzi was zero or if it was already closed, <see langword="false" />
 
           
 
@@ -121,16 +117,14 @@
         <param name="node">The node to execute the decrement operation on.</param>
         <summary>Decrement the state of the CSnzi object.</summary>
         <returns
-          >True if the CSnzi is open and its state is zero, <see
-           langword="false" />
+          >True if the CSnzi is open and its state is zero, <see langword="false" />
 
           
 
            otherwise.</returns
         >
         <remarks
-          >Node argument must have been returned by a prior <see
-           cref="M:Mono.Threading.CSnzi.Arrive()" />
+          >Node argument must have been returned by a prior <see cref="M:Mono.Threading.CSnzi.Arrive()" />
 
           
 
@@ -177,8 +171,7 @@
       <Docs>
         <summary>Returns the current state of the CSnzi object.</summary>
         <returns
-          >A <see
-           cref="T:System.Threading.QueryReturn" />
+          >A <see cref="T:System.Threading.QueryReturn" />
 
           
 

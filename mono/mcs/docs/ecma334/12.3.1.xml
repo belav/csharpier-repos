@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <clause number="12.3.1" title="Initially assigned variables">
   <paragraph
-    >The following categories of variables are classified as initially assigned: <list
-    >
+    >The following categories of variables are classified as initially assigned: <list>
       <list_item> Static variables. </list_item>
       <list_item> Instance variables of class instances. </list_item>
       <list_item> Instance variables of initially assigned struct variables. </list_item>

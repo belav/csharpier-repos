@@ -17,41 +17,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.RequestNotification" />
+        >The <see cref="T:System.Web.RequestNotification" />
 
         
 
-         enumeration is used with the <see
-         cref="P:System.Web.HttpContext.CurrentNotification" />
+         enumeration is used with the <see cref="P:System.Web.HttpContext.CurrentNotification" />
 
         
 
-         property of the <see
-         cref="T:System.Web.HttpContext" />
+         property of the <see cref="T:System.Web.HttpContext" />
 
         
 
-         class to determine what event in the pipeline is currently processing. To determine when all the handlers for a specific event of the <see
-         cref="T:System.Web.HttpApplication" />
+         class to determine what event in the pipeline is currently processing. To determine when all the handlers for a specific event of the <see cref="T:System.Web.HttpApplication" />
 
         
 
-         instance have finished processing, use the <see
-         cref="P:System.Web.HttpContext.IsPostNotification" />
+         instance have finished processing, use the <see cref="P:System.Web.HttpContext.IsPostNotification" />
 
         
 
          property.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.RequestNotification" />
+        >The <see cref="T:System.Web.RequestNotification" />
 
         
 
-         type is introduced in the net_v35_long. For more information, see <format
-         type="text/html">
+         type is introduced in the net_v35_long. For more information, see <format type="text/html">
           <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
         </format>
 
@@ -63,8 +56,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Indicates when events and other life-cycle events occur while a <see
-         cref="T:System.Web.HttpApplication" />
+        >Indicates when events and other life-cycle events occur while a <see cref="T:System.Web.HttpApplication" />
 
         
 
@@ -86,8 +78,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see
-             cref="E:System.Web.HttpApplication.AcquireRequestState" />
+            >Indicates that the <see cref="E:System.Web.HttpApplication.AcquireRequestState" />
 
             
 
@@ -109,8 +100,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see
-             cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+            >Indicates that the <see cref="E:System.Web.HttpApplication.AuthenticateRequest" />
 
             
 
@@ -132,8 +122,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see
-             cref="E:System.Web.HttpApplication.AuthorizeRequest" />
+            >Indicates that the <see cref="E:System.Web.HttpApplication.AuthorizeRequest" />
 
             
 
@@ -155,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see
-             cref="E:System.Web.HttpApplication.BeginRequest" />
+            >Indicates that the <see cref="E:System.Web.HttpApplication.BeginRequest" />
 
             
 
@@ -178,8 +166,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see
-             cref="E:System.Web.HttpApplication.EndRequest" />
+            >Indicates that the <see cref="E:System.Web.HttpApplication.EndRequest" />
 
             
 
@@ -217,8 +204,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see
-             cref="E:System.Web.HttpApplication.LogRequest" />
+            >Indicates that the <see cref="E:System.Web.HttpApplication.LogRequest" />
 
             
 
@@ -240,8 +226,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see
-             cref="E:System.Web.HttpApplication.MapRequestHandler" />
+            >Indicates that the <see cref="E:System.Web.HttpApplication.MapRequestHandler" />
 
             
 
@@ -279,8 +264,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see
-             cref="E:System.Web.HttpApplication.ReleaseRequestState" />
+            >Indicates that the <see cref="E:System.Web.HttpApplication.ReleaseRequestState" />
 
             
 
@@ -302,8 +286,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see
-             cref="E:System.Web.HttpApplication.ResolveRequestCache" />
+            >Indicates that the <see cref="E:System.Web.HttpApplication.ResolveRequestCache" />
 
             
 
@@ -341,8 +324,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see
-             cref="E:System.Web.HttpApplication.UpdateRequestCache" />
+            >Indicates that the <see cref="E:System.Web.HttpApplication.UpdateRequestCache" />
 
             
 

@@ -43,26 +43,22 @@
          is read-only; it does not implement methods that add or remove properties. You must inherit from this class to implement these methods.</para
       >
       <para
-        >Using the properties available in the <see
-         cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+        >Using the properties available in the <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
         
 
-         class, you can query the collection about its contents. Use the <see
-         cref="P:System.ComponentModel.PropertyDescriptorCollection.Count" />
+         class, you can query the collection about its contents. Use the <see cref="P:System.ComponentModel.PropertyDescriptorCollection.Count" />
 
         
 
-         property to determine the number of elements in the collection. Use the <see
-         cref="P:System.ComponentModel.PropertyDescriptorCollection.Item(System.Int32)" />
+         property to determine the number of elements in the collection. Use the <see cref="P:System.ComponentModel.PropertyDescriptorCollection.Item(System.Int32)" />
 
         
 
          property to get a specific property by index number or by name.</para
       >
       <para
-        >In addition to properties, you can use the <see
-         cref="M:System.ComponentModel.PropertyDescriptorCollection.Find(System.String,System.Boolean)" />
+        >In addition to properties, you can use the <see cref="M:System.ComponentModel.PropertyDescriptorCollection.Find(System.String,System.Boolean)" />
 
         
 
@@ -72,8 +68,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.ComponentModel.PropertyDescriptor" />
+        >Represents a collection of <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
         
 
@@ -106,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
@@ -115,12 +109,15 @@
           >
         </summary>
         <param name="properties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          An array of type <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -151,8 +148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
@@ -160,19 +156,26 @@
           >
         </summary>
         <param name="properties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          An array of type <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
            that provides the properties for this collection.</param
         >
         <param name="readOnly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -206,8 +209,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Adds the specified <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -217,8 +219,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >The index of the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -226,12 +227,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -260,8 +264,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Removes all <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -296,8 +299,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns whether the collection contains the given <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Returns whether the collection contains the given <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -307,8 +309,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the collection contains the given <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >true if the collection contains the given <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -316,12 +317,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -355,24 +359,30 @@
           <para>Copies the entire collection to an array, starting at the specified index number.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          An array of <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
            objects to copy elements of the collection to. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the <paramref
-           name="array" />
+          The index of the <paramref name="array" />
 
           
 
@@ -397,8 +407,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.ComponentModel.PropertyDescriptorCollection.Count" />
+            >You can use the <see cref="P:System.ComponentModel.PropertyDescriptorCollection.Count" />
 
             
 
@@ -465,8 +474,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Returns the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -476,8 +484,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -485,19 +492,26 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The name of the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
            to return from the collection. </param
         >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -533,8 +547,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator of type <see
-             cref="T:System.Collections.IEnumerator" />
+            >An enumerator of type <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -569,8 +582,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the index of the given <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Returns the index of the given <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -580,8 +592,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the given <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >The index of the given <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -589,12 +600,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -629,8 +643,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Adds the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -638,24 +651,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index at which to add the <paramref
-           name="value" />
+          The index at which to add the <paramref name="value" />
 
           
 
            parameter to the collection. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -690,8 +709,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sorts the members of this collection, using the specified <see
-             cref="T:System.Collections.IComparer" />
+            >Sorts the members of this collection, using the specified <see cref="T:System.Collections.IComparer" />
 
             
 
@@ -809,8 +827,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Removes the specified <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -818,12 +835,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -854,8 +874,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Removes the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -863,12 +882,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The index of the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -904,13 +926,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >A new <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
-             that contains the sorted <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+             that contains the sorted <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -945,8 +965,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sorts the members of this collection, using the specified <see
-             cref="T:System.Collections.IComparer" />
+            >Sorts the members of this collection, using the specified <see cref="T:System.Collections.IComparer" />
 
             
 
@@ -956,13 +975,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >A new <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
-             that contains the sorted <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+             that contains the sorted <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -970,12 +987,15 @@
           >
         </returns>
         <param name="comparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A comparer to use to sort the <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          A comparer to use to sort the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -1014,13 +1034,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >A new <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
-             that contains the sorted <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+             that contains the sorted <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -1057,8 +1075,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sorts the members of this collection. The specified order is applied first, followed by the sort using the specified <see
-             cref="T:System.Collections.IComparer" />
+            >Sorts the members of this collection. The specified order is applied first, followed by the sort using the specified <see cref="T:System.Collections.IComparer" />
 
             
 
@@ -1068,13 +1085,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >A new <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
-             that contains the sorted <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+             that contains the sorted <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -1082,12 +1097,15 @@
           >
         </returns>
         <param name="comparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A comparer to use to sort the <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          A comparer to use to sort the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -1197,8 +1215,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an element with the provided key and value to the <see
-             cref="T:System.Collections.IDictionary" />
+            >Adds an element with the provided key and value to the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1206,24 +1223,30 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
            to use as the key of the element to add.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -1252,8 +1275,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all elements from the <see
-             cref="T:System.Collections.IDictionary" />
+            >Removes all elements from the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1286,8 +1308,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Collections.IDictionary" />
+            >Determines whether the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1297,8 +1318,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Collections.IDictionary" />
+            >true if the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1340,8 +1360,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator of type <see
-             cref="T:System.Collections.IEnumerator" />
+            >An enumerator of type <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -1374,8 +1393,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Collections.IDictionary" />
+            >Gets a value indicating whether the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1408,8 +1426,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Collections.IDictionary" />
+            >Gets a value indicating whether the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1470,13 +1487,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an <see cref="T:System.Collections.ICollection" />
 
             
 
-             containing the keys of the <see
-             cref="T:System.Collections.IDictionary" />
+             containing the keys of the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1509,8 +1524,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the element with the specified key from the <see
-             cref="T:System.Collections.IDictionary" />
+            >Removes the element with the specified key from the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1543,13 +1557,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an <see cref="T:System.Collections.ICollection" />
 
             
 
-             containing the values in the <see
-             cref="T:System.Collections.IDictionary" />
+             containing the values in the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1582,13 +1594,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns an <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Collections.IDictionary" />
+             for the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1598,13 +1608,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Collections.IDictionary" />
+             for the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1636,8 +1644,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an item to the <see
-             cref="T:System.Collections.IList" />
+            >Adds an item to the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1649,7 +1656,11 @@
           <para>The position into which the new element was inserted.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1710,7 +1721,11 @@
           <para>true if the item is found in the collection; otherwise, false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1745,8 +1760,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of <paramref
-             name="value" />
+            >The index of <paramref name="value" />
 
             
 
@@ -1754,7 +1768,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1788,19 +1806,26 @@
           <para>Inserts an item into the collection at a specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="value" />
+          The zero-based index at which <paramref name="value" />
 
           
 
            should be inserted.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1909,7 +1934,11 @@
           <para>Removes the first occurrence of a specified value from the collection.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1942,7 +1971,11 @@
           <para>Removes the item at the specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

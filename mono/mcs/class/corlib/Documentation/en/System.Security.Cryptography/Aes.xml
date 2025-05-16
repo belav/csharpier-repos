@@ -45,8 +45,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Aes" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Aes" />
 
             
 
@@ -107,8 +106,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Possible <paramref
-             name="algorithmName" />
+            >Possible <paramref name="algorithmName" />
 
             
 
@@ -124,7 +122,11 @@
           <para>A cryptographic object that is used to perform the symmetric algorithm.</para>
         </returns>
         <param name="algorithmName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

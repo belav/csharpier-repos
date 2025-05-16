@@ -22,8 +22,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the available verbosity levels of a <see
-         cref="T:Microsoft.Build.Utilities.Logger" />
+        >Specifies the available verbosity levels of a <see cref="T:Microsoft.Build.Utilities.Logger" />
 
         
 
@@ -43,18 +42,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Detailed verbosity, which displays errors, warnings, messages with <see
-             cref="T:Microsoft.Build.Framework.MessageImportance" />
+            >Detailed verbosity, which displays errors, warnings, messages with <see cref="T:Microsoft.Build.Framework.MessageImportance" />
 
             
 
-             values of <see
-             cref="F:Microsoft.Build.Framework.MessageImportance.High" />
+             values of <see cref="F:Microsoft.Build.Framework.MessageImportance.High" />
 
             
 
-             or <see
-             cref="F:Microsoft.Build.Framework.MessageImportance.Normal" />
+             or <see cref="F:Microsoft.Build.Framework.MessageImportance.Normal" />
 
             
 
@@ -94,13 +90,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Minimal verbosity, which displays errors, warnings, messages with <see
-             cref="T:Microsoft.Build.Framework.MessageImportance" />
+            >Minimal verbosity, which displays errors, warnings, messages with <see cref="T:Microsoft.Build.Framework.MessageImportance" />
 
             
 
-             values of <see
-             cref="F:Microsoft.Build.Framework.MessageImportance.High" />
+             values of <see cref="F:Microsoft.Build.Framework.MessageImportance.High" />
 
             
 
@@ -123,13 +117,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Normal verbosity, which displays errors, warnings, messages with <see
-             cref="T:Microsoft.Build.Framework.MessageImportance" />
+            >Normal verbosity, which displays errors, warnings, messages with <see cref="T:Microsoft.Build.Framework.MessageImportance" />
 
             
 
-             values of <see
-             cref="F:Microsoft.Build.Framework.MessageImportance.High" />
+             values of <see cref="F:Microsoft.Build.Framework.MessageImportance.High" />
 
             
 

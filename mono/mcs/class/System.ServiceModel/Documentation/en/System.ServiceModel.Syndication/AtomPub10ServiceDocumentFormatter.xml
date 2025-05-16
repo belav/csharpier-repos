@@ -32,23 +32,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use this class to serialize instances of <see
-         cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+        >Use this class to serialize instances of <see cref="T:System.ServiceModel.Syndication.ServiceDocument" />
 
         
 
-         to XML and to generate instances of <see
-         cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+         to XML and to generate instances of <see cref="T:System.ServiceModel.Syndication.ServiceDocument" />
 
         
 
-         from an XML document. If you want to serialize or deserialized an object derived from <see
-         cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+         from an XML document. If you want to serialize or deserialized an object derived from <see cref="T:System.ServiceModel.Syndication.ServiceDocument" />
 
         
 
-        , use the <see
-         cref="T:System.ServiceModel.Syndication.AtomPub10ServiceDocumentFormatter`1" />
+        , use the <see cref="T:System.ServiceModel.Syndication.AtomPub10ServiceDocumentFormatter`1" />
 
         
 
@@ -58,8 +54,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A formatter that serializes a <see
-         cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+        >A formatter that serializes a <see cref="T:System.ServiceModel.Syndication.ServiceDocument" />
 
         
 
@@ -84,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the Atom 1.0-based <see
-             cref="T:System.ServiceModel.Syndication.ServiceDocumentFormatter" />
+            >Creates a new instance of the Atom 1.0-based <see cref="T:System.ServiceModel.Syndication.ServiceDocumentFormatter" />
 
             
 
@@ -114,8 +108,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="documentToWrite" />
+            >The <paramref name="documentToWrite" />
 
             
 
@@ -125,8 +118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the Atom 1.0-based <see
-             cref="T:System.ServiceModel.Syndication.ServiceDocumentFormatter" />
+            >Creates a new instance of the Atom 1.0-based <see cref="T:System.ServiceModel.Syndication.ServiceDocumentFormatter" />
 
             
 
@@ -134,12 +126,15 @@
           >
         </summary>
         <param name="documentToWrite">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+          The <see cref="T:System.ServiceModel.Syndication.ServiceDocument" />
 
           
 
@@ -167,8 +162,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="documentTypeToCreate" />
+            >The <paramref name="documentTypeToCreate" />
 
             
 
@@ -178,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the Atom 1.0-based <see
-             cref="T:System.ServiceModel.Syndication.ServiceDocumentFormatter" />
+            >Creates a new instance of the Atom 1.0-based <see cref="T:System.ServiceModel.Syndication.ServiceDocumentFormatter" />
 
             
 
@@ -187,12 +180,15 @@
           >
         </summary>
         <param name="documentTypeToCreate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The instance of an object that is derived from a <see
-           cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+          The instance of an object that is derived from a <see cref="T:System.ServiceModel.Syndication.ServiceDocument" />
 
           
 
@@ -232,7 +228,11 @@ true if the XML reader does contain a valid service document; otherwise false.
 </para>
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -262,8 +262,7 @@ true if the XML reader does contain a valid service document; otherwise false.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+            >Creates a new <see cref="T:System.ServiceModel.Syndication.ServiceDocument" />
 
             
 
@@ -272,10 +271,8 @@ true if the XML reader does contain a valid service document; otherwise false.
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >
-Returns an instance of a <see
-             cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+          <para>
+Returns an instance of a <see cref="T:System.ServiceModel.Syndication.ServiceDocument" />
 
             
 
@@ -309,8 +306,7 @@ Returns an instance of a <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a <see
-             cref="T:System.ServiceModelSyndication.ServiceDocument" />
+            >Generates a <see cref="T:System.ServiceModelSyndication.ServiceDocument" />
 
             
 
@@ -318,7 +314,11 @@ Returns an instance of a <see
           >
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -347,8 +347,7 @@ Returns an instance of a <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Explicitly implements the <see
-             cref="T:System.Xml.Serialization.ISerialization.GetSchema" />
+            >Explicitly implements the <see cref="T:System.Xml.Serialization.ISerialization.GetSchema" />
 
             
 
@@ -390,8 +389,7 @@ Returns null.
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Explicitly implements the <see
-             cref="T:System.Xml.Serialization.ISerialization.ReadXml" />
+            >Explicitly implements the <see cref="T:System.Xml.Serialization.ISerialization.ReadXml" />
 
             
 
@@ -401,8 +399,7 @@ Returns null.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a <see
-             cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+            >Generates a <see cref="T:System.ServiceModel.Syndication.ServiceDocument" />
 
             
 
@@ -410,17 +407,19 @@ Returns null.
           >
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlReader" />
+          The <see cref="T:System.Xml.XmlReader" />
 
           
 
-           stream from which the <see
-           cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+           stream from which the <see cref="T:System.ServiceModel.Syndication.ServiceDocument" />
 
           
 
@@ -451,8 +450,7 @@ Returns null.
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Explicitly implements the <see
-             cref="T:System.Xml.Serialization.ISerialization.WriteXml" />
+            >Explicitly implements the <see cref="T:System.Xml.Serialization.ISerialization.WriteXml" />
 
             
 
@@ -462,8 +460,7 @@ Returns null.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+            >Converts the <see cref="T:System.ServiceModel.Syndication.ServiceDocument" />
 
             
 
@@ -471,12 +468,15 @@ Returns null.
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
@@ -527,8 +527,7 @@ Returns null.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes a <see
-             cref="T:System.ServiceModelSyndication.ServiceDocument" />
+            >Writes a <see cref="T:System.ServiceModelSyndication.ServiceDocument" />
 
             
 
@@ -536,7 +535,11 @@ Returns null.
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -21,23 +21,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.Sockets.ProtocolFamily" />
+        >The <see cref="T:System.Net.Sockets.ProtocolFamily" />
 
         
 
-         enumeration specifies the protocol scheme that is used by the <see
-         cref="T:System.Net.Sockets.Socket" />
+         enumeration specifies the protocol scheme that is used by the <see cref="T:System.Net.Sockets.Socket" />
 
         
 
-         class to resolve an address. For example, <see
-         cref="F:System.Net.Sockets.ProtocolFamily.InterNetwork" />
+         class to resolve an address. For example, <see cref="F:System.Net.Sockets.ProtocolFamily.InterNetwork" />
 
         
 
-         indicates that the IP version 4 protocol is expected when a <see
-         cref="T:System.Net.Sockets.Socket" />
+         indicates that the IP version 4 protocol is expected when a <see cref="T:System.Net.Sockets.Socket" />
 
         
 
@@ -47,8 +43,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the type of protocol that an instance of the <see
-         cref="T:System.Net.Sockets.Socket" />
+        >Specifies the type of protocol that an instance of the <see cref="T:System.Net.Sockets.Socket" />
 
         
 

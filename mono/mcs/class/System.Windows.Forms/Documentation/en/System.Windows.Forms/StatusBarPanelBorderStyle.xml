@@ -13,28 +13,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by the <see
-         cref="P:System.Windows.Forms.StatusBarPanel.BorderStyle" />
+        >This enumeration is used by the <see cref="P:System.Windows.Forms.StatusBarPanel.BorderStyle" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.StatusBarPanel" />
+         property of the <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
         
 
-         class. The <see
-         cref="P:System.Windows.Forms.StatusBarPanel.BorderStyle" />
+         class. The <see cref="P:System.Windows.Forms.StatusBarPanel.BorderStyle" />
 
         
 
-         property enables you to specify the style of border to display on a <see
-         cref="T:System.Windows.Forms.StatusBarPanel" />
+         property enables you to specify the style of border to display on a <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
         
 
-         within a <see
-         cref="T:System.Windows.Forms.StatusBar" />
+         within a <see cref="T:System.Windows.Forms.StatusBar" />
 
         
 
@@ -44,13 +39,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the appearance of the border for a <see
-         cref="T:System.Windows.Forms.StatusBarPanel" />
+        >Specifies the appearance of the border for a <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
         
 
-         on a <see
-         cref="T:System.Windows.Forms.StatusBar" />
+         on a <see cref="T:System.Windows.Forms.StatusBar" />
 
         
 
@@ -86,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.StatusBarPanel" />
+            >The <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
             
 
@@ -110,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.StatusBarPanel" />
+            >The <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
             
 

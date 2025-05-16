@@ -22,33 +22,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.LicenseManager" />
+        >The <see cref="T:System.ComponentModel.LicenseManager" />
 
         
 
-         class provides the following static properties: <see
-         cref="P:System.ComponentModel.LicenseManager.CurrentContext" />
+         class provides the following static properties: <see cref="P:System.ComponentModel.LicenseManager.CurrentContext" />
 
         
 
-         and <see
-         cref="P:System.ComponentModel.LicenseManager.UsageMode" />
+         and <see cref="P:System.ComponentModel.LicenseManager.UsageMode" />
 
         
 
-        . The class also provides the following static methods: <see
-         cref="M:System.ComponentModel.LicenseManager.CreateWithContext(System.Type,System.ComponentModel.LicenseContext)" />
+        . The class also provides the following static methods: <see cref="M:System.ComponentModel.LicenseManager.CreateWithContext(System.Type,System.ComponentModel.LicenseContext)" />
 
         
 
-        , <see
-         cref="M:System.ComponentModel.LicenseManager.IsValid(System.Type)" />
+        , <see cref="M:System.ComponentModel.LicenseManager.IsValid(System.Type)" />
 
         
 
-        , and <see
-         cref="M:System.ComponentModel.LicenseManager.Validate(System.Type)" />
+        , and <see cref="M:System.ComponentModel.LicenseManager.Validate(System.Type)" />
 
         
 
@@ -58,13 +52,11 @@
       <list type="ordered">
         <item>
           <para
-            >Specify the <see
-             cref="T:System.ComponentModel.LicenseProvider" />
+            >Specify the <see cref="T:System.ComponentModel.LicenseProvider" />
 
             
 
-             by marking the component with a <see
-             cref="T:System.ComponentModel.LicenseProviderAttribute" />
+             by marking the component with a <see cref="T:System.ComponentModel.LicenseProviderAttribute" />
 
             
 
@@ -73,28 +65,23 @@
         </item>
         <item>
           <para
-            >Call <see
-             cref="M:System.ComponentModel.LicenseManager.Validate(System.Type)" />
+            >Call <see cref="M:System.ComponentModel.LicenseManager.Validate(System.Type)" />
 
             
 
-             or <see
-             cref="M:System.ComponentModel.LicenseManager.IsValid(System.Type)" />
+             or <see cref="M:System.ComponentModel.LicenseManager.IsValid(System.Type)" />
 
             
 
-             in the constructor of the component. <see
-             cref="M:System.ComponentModel.LicenseManager.Validate(System.Type)" />
+             in the constructor of the component. <see cref="M:System.ComponentModel.LicenseManager.Validate(System.Type)" />
 
             
 
-             throws a <see
-             cref="T:System.ComponentModel.LicenseException" />
+             throws a <see cref="T:System.ComponentModel.LicenseException" />
 
             
 
-             when it tries to create an instance without a valid license. <see
-             cref="M:System.ComponentModel.LicenseManager.IsValid(System.Type)" />
+             when it tries to create an instance without a valid license. <see cref="M:System.ComponentModel.LicenseManager.IsValid(System.Type)" />
 
             
 
@@ -103,8 +90,7 @@
         </item>
         <item>
           <para
-            >Call <see
-             cref="M:System.ComponentModel.License.Dispose" />
+            >Call <see cref="M:System.ComponentModel.License.Dispose" />
 
             
 
@@ -113,8 +99,7 @@
         </item>
       </list>
       <para
-        >For more information on licensing, see <format
-         type="text/html">
+        >For more information on licensing, see <format type="text/html">
           <a href="8e66c1ed-a445-4b26-8185-990b6e2bbd57">How to: License Components and Controls</a>
         </format>
 
@@ -126,8 +111,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides properties and methods to add a license to a component and to manage a <see
-         cref="T:System.ComponentModel.LicenseProvider" />
+        >Provides properties and methods to add a license to a component and to manage a <see cref="T:System.ComponentModel.LicenseProvider" />
 
         
 
@@ -162,43 +146,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.LicenseContext" />
+            >The <see cref="T:System.ComponentModel.LicenseContext" />
 
             
 
-             you specify as the <paramref
-             name="creationContext" />
+             you specify as the <paramref name="creationContext" />
 
             
 
-             parameter is used as the <see
-             cref="P:System.ComponentModel.LicenseManager.CurrentContext" />
+             parameter is used as the <see cref="P:System.ComponentModel.LicenseManager.CurrentContext" />
 
             
 
-             for the life of this <see
-             cref="T:System.ComponentModel.License" />
+             for the life of this <see cref="T:System.ComponentModel.License" />
 
             
 
-            . The <see
-             cref="M:System.ComponentModel.LicenseManager.CreateWithContext(System.Type,System.ComponentModel.LicenseContext)" />
+            . The <see cref="M:System.ComponentModel.LicenseManager.CreateWithContext(System.Type,System.ComponentModel.LicenseContext)" />
 
             
 
-             method blocks all other threads in the <see
-             cref="T:System.AppDomain" />
+             method blocks all other threads in the <see cref="T:System.AppDomain" />
 
             
 
-             from modifying the <see
-             cref="P:System.ComponentModel.LicenseManager.CurrentContext" />
+             from modifying the <see cref="P:System.ComponentModel.LicenseManager.CurrentContext" />
 
             
 
-            , allowing <see
-             cref="M:System.ComponentModel.LicenseManager.CreateWithContext(System.Type,System.ComponentModel.LicenseContext)" />
+            , allowing <see cref="M:System.ComponentModel.LicenseManager.CreateWithContext(System.Type,System.ComponentModel.LicenseContext)" />
 
             
 
@@ -214,24 +190,30 @@
           <para>An instance of the specified type.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
            that represents the type to create. </param
         >
         <param name="creationContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.LicenseContext" />
+          A <see cref="T:System.ComponentModel.LicenseContext" />
 
           
 
@@ -266,38 +248,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.LicenseContext" />
+            >The <see cref="T:System.ComponentModel.LicenseContext" />
 
             
 
-             you specify as the <paramref
-             name="creationContext" />
+             you specify as the <paramref name="creationContext" />
 
             
 
-             parameter is used as the <see
-             cref="P:System.ComponentModel.LicenseManager.CurrentContext" />
+             parameter is used as the <see cref="P:System.ComponentModel.LicenseManager.CurrentContext" />
 
             
 
-             for the life of this <see
-             cref="T:System.ComponentModel.License" />
+             for the life of this <see cref="T:System.ComponentModel.License" />
 
             
 
-            . This method blocks all other threads in the <see
-             cref="T:System.AppDomain" />
+            . This method blocks all other threads in the <see cref="T:System.AppDomain" />
 
             
 
-             from modifying the <see
-             cref="P:System.ComponentModel.LicenseManager.CurrentContext" />
+             from modifying the <see cref="P:System.ComponentModel.LicenseManager.CurrentContext" />
 
             
 
-            , allowing <see
-             cref="M:System.ComponentModel.LicenseManager.CreateWithContext(System.Type,System.ComponentModel.LicenseContext)" />
+            , allowing <see cref="M:System.ComponentModel.LicenseManager.CreateWithContext(System.Type,System.ComponentModel.LicenseContext)" />
 
             
 
@@ -313,36 +288,45 @@
           <para>An instance of the specified type with the given array of arguments.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
            that represents the type to create. </param
         >
         <param name="creationContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.LicenseContext" />
+          A <see cref="T:System.ComponentModel.LicenseContext" />
 
           
 
            that specifies when you can use the licensed instance. </param
         >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Object" />
+          An array of type <see cref="T:System.Object" />
 
           
 
@@ -374,28 +358,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the user requests a valid <see
-             cref="T:System.ComponentModel.License" />
+            >When the user requests a valid <see cref="T:System.ComponentModel.License" />
 
             
 
-            , the user must give the context in which the <see
-             cref="T:System.ComponentModel.License" />
+            , the user must give the context in which the <see cref="T:System.ComponentModel.License" />
 
             
 
-             is valid to the <see
-             cref="M:System.ComponentModel.LicenseProvider.GetLicense(System.ComponentModel.LicenseContext,System.Type,System.Object,System.Boolean)" />
+             is valid to the <see cref="M:System.ComponentModel.LicenseProvider.GetLicense(System.ComponentModel.LicenseContext,System.Type,System.Object,System.Boolean)" />
 
             
 
-             method. The <see
-             cref="T:System.ComponentModel.LicenseContext" />
+             method. The <see cref="T:System.ComponentModel.LicenseContext" />
 
             
 
-             returned by this property should be passed to all <see
-             cref="T:System.ComponentModel.LicenseProvider" />
+             returned by this property should be passed to all <see cref="T:System.ComponentModel.LicenseProvider" />
 
             
 
@@ -405,8 +384,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the current <see
-             cref="T:System.ComponentModel.LicenseContext" />
+            >Gets or sets the current <see cref="T:System.ComponentModel.LicenseContext" />
 
             
 
@@ -444,12 +422,15 @@
           <para>true if the given type is licensed; otherwise, false.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -479,26 +460,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.LicenseManager.IsValid(System.Type)" />
+            >The <see cref="M:System.ComponentModel.LicenseManager.IsValid(System.Type)" />
 
             
 
              method returns true when the type is either not licensed, or is licensed and the license is valid.</para
           >
           <para
-            >This method does not throw a <see
-             cref="T:System.ComponentModel.LicenseException" />
+            >This method does not throw a <see cref="T:System.ComponentModel.LicenseException" />
 
             
 
-             when it cannot grant a valid <see
-             cref="T:System.ComponentModel.License" />
+             when it cannot grant a valid <see cref="T:System.ComponentModel.License" />
 
             
 
-            . The <see
-             cref="M:System.ComponentModel.LicenseManager.Validate(System.Type)" />
+            . The <see cref="M:System.ComponentModel.LicenseManager.Validate(System.Type)" />
 
             
 
@@ -514,17 +491,19 @@
           <para>true if a valid license can be granted; otherwise, false.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
-           that represents the type of object that requests the <see
-           cref="T:System.ComponentModel.License" />
+           that represents the type of object that requests the <see cref="T:System.ComponentModel.License" />
 
           
 
@@ -586,23 +565,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="T:System.ComponentModel.LicenseContext" />
+            >Use the <see cref="T:System.ComponentModel.LicenseContext" />
 
             
 
-             to get the <see
-             cref="T:System.ComponentModel.License" />
+             to get the <see cref="T:System.ComponentModel.License" />
 
             
 
-             of an object. This method locks the <see
-             cref="T:System.ComponentModel.LicenseContext" />
+             of an object. This method locks the <see cref="T:System.ComponentModel.LicenseContext" />
 
             
 
-            , preventing the <see
-             cref="T:System.ComponentModel.License" />
+            , preventing the <see cref="T:System.ComponentModel.License" />
 
             
 
@@ -612,8 +587,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Prevents changes being made to the current <see
-             cref="T:System.ComponentModel.LicenseContext" />
+            >Prevents changes being made to the current <see cref="T:System.ComponentModel.LicenseContext" />
 
             
 
@@ -621,7 +595,11 @@
           >
         </summary>
         <param name="contextUser">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -654,23 +632,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="T:System.ComponentModel.LicenseContext" />
+            >Use the <see cref="T:System.ComponentModel.LicenseContext" />
 
             
 
-             to get the <see
-             cref="T:System.ComponentModel.License" />
+             to get the <see cref="T:System.ComponentModel.License" />
 
             
 
-             of an object. This method unlocks the <see
-             cref="T:System.ComponentModel.LicenseContext" />
+             of an object. This method unlocks the <see cref="T:System.ComponentModel.LicenseContext" />
 
             
 
-            , allowing the <see
-             cref="T:System.ComponentModel.License" />
+            , allowing the <see cref="T:System.ComponentModel.License" />
 
             
 
@@ -680,8 +654,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Allows changes to be made to the current <see
-             cref="T:System.ComponentModel.LicenseContext" />
+            >Allows changes to be made to the current <see cref="T:System.ComponentModel.LicenseContext" />
 
             
 
@@ -689,7 +662,11 @@
           >
         </summary>
         <param name="contextUser">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -720,13 +697,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this property cannot find a <see
-             cref="P:System.ComponentModel.LicenseManager.CurrentContext" />
+            >If this property cannot find a <see cref="P:System.ComponentModel.LicenseManager.CurrentContext" />
 
             
 
-             value, it returns <see
-             cref="F:System.ComponentModel.LicenseUsageMode.Runtime" />
+             value, it returns <see cref="F:System.ComponentModel.LicenseUsageMode.Runtime" />
 
             
 
@@ -736,13 +711,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ComponentModel.LicenseUsageMode" />
+            >Gets the <see cref="T:System.ComponentModel.LicenseUsageMode" />
 
             
 
-             which specifies when you can use the licensed object for the <see
-             cref="P:System.ComponentModel.LicenseManager.CurrentContext" />
+             which specifies when you can use the licensed object for the <see cref="P:System.ComponentModel.LicenseManager.CurrentContext" />
 
             
 
@@ -773,18 +746,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method throws a <see
-             cref="T:System.ComponentModel.LicenseException" />
+            >This method throws a <see cref="T:System.ComponentModel.LicenseException" />
 
             
 
-             when a valid <see
-             cref="T:System.ComponentModel.License" />
+             when a valid <see cref="T:System.ComponentModel.License" />
 
             
 
-             cannot be granted. The <see
-             cref="M:System.ComponentModel.LicenseManager.IsValid(System.Type)" />
+             cannot be granted. The <see cref="M:System.ComponentModel.LicenseManager.IsValid(System.Type)" />
 
             
 
@@ -796,12 +766,15 @@
           <para>Determines whether a license can be granted for the specified type.</para>
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -835,31 +808,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method throws a <see
-             cref="T:System.ComponentModel.LicenseException" />
+            >This method throws a <see cref="T:System.ComponentModel.LicenseException" />
 
             
 
-             when a valid <see
-             cref="T:System.ComponentModel.License" />
+             when a valid <see cref="T:System.ComponentModel.License" />
 
             
 
-             cannot be granted. The <see
-             cref="M:System.ComponentModel.LicenseManager.IsValid(System.Type)" />
+             cannot be granted. The <see cref="M:System.ComponentModel.LicenseManager.IsValid(System.Type)" />
 
             
 
              method does not throw an exception.</para
           >
           <para
-            >All objects asking for a <see
-             cref="T:System.ComponentModel.License" />
+            >All objects asking for a <see cref="T:System.ComponentModel.License" />
 
             
 
-             must dispose of the license by calling the <see
-             cref="M:System.ComponentModel.License.Dispose" />
+             must dispose of the license by calling the <see cref="M:System.ComponentModel.License.Dispose" />
 
             
 
@@ -873,8 +841,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A valid <see
-             cref="T:System.ComponentModel.License" />
+            >A valid <see cref="T:System.ComponentModel.License" />
 
             
 
@@ -882,24 +849,30 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
            that represents the type of object that requests the license. </param
         >
         <param name="instance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 

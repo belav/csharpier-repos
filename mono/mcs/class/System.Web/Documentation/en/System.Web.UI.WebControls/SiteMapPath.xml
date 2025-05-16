@@ -80,46 +80,38 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.SiteMapPath" />
+        >The <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
         
 
-         control is a site navigation control that reflects data provided by the <see
-         cref="T:System.Web.SiteMap" />
+         control is a site navigation control that reflects data provided by the <see cref="T:System.Web.SiteMap" />
 
         
 
-         object. It provides a space-saving way to easily navigate a site and serves as a point of reference for where the currently displayed page is within a site. This type of control is commonly called a breadcrumb, or eyebrow, because it displays a hierarchical path of hyperlinked page names that provides an escape up the hierarchy of pages from the current location. <see
-         cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
+         object. It provides a space-saving way to easily navigate a site and serves as a point of reference for where the currently displayed page is within a site. This type of control is commonly called a breadcrumb, or eyebrow, because it displays a hierarchical path of hyperlinked page names that provides an escape up the hierarchy of pages from the current location. <see cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
 
         
 
-        . The <see
-         cref="T:System.Web.UI.WebControls.SiteMapPath" />
+        . The <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
         
 
-         is useful for sites that have deep hierarchical page structures, but where a <see
-         cref="T:System.Web.UI.WebControls.TreeView" />
+         is useful for sites that have deep hierarchical page structures, but where a <see cref="T:System.Web.UI.WebControls.TreeView" />
 
         
 
-         or <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         or <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
          might require too much space on a page. </para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.SiteMapPath" />
+        >The <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
         
 
-         control works directly with your Web site's site map data. If you use it on a page that is not represented in your site map, it will not be displayed. For more information about site maps, see <format
-         type="text/html">
+         control works directly with your Web site's site map data. If you use it on a page that is not represented in your site map, it will not be displayed. For more information about site maps, see <format type="text/html">
           <a href="23de8a05-cac3-4693-b508-39f1d4b7053d">ASP.NET Site Navigation</a>
         </format>
 
@@ -134,13 +126,11 @@
         <h2>Nodes</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.SiteMapPath" />
+        >The <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
         
 
-         is made up of nodes. Each element in the path is called a node and is represented by a <see
-         cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+         is made up of nodes. Each element in the path is called a node and is represented by a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
         
 
@@ -189,18 +179,15 @@
         <h2>Node Appearance</h2>
       </format>
       <para
-        >Each node displayed by a <see
-         cref="T:System.Web.UI.WebControls.SiteMapPath" />
+        >Each node displayed by a <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
         
 
-         is a <see
-         cref="T:System.Web.UI.WebControls.HyperLink" />
+         is a <see cref="T:System.Web.UI.WebControls.HyperLink" />
 
         
 
-         or <see
-         cref="T:System.Web.UI.WebControls.Literal" />
+         or <see cref="T:System.Web.UI.WebControls.Literal" />
 
         
 
@@ -215,177 +202,144 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
+        >The <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.NodeTemplate" />
+         and <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeTemplate" />
 
         
 
-         properties are applied to all nodes, regardless of their node type. If both these properties are defined, the <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.NodeTemplate" />
+         properties are applied to all nodes, regardless of their node type. If both these properties are defined, the <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeTemplate" />
 
         
 
          takes precedence.</para
       >
       <para
-        >The <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
+        >The <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
+         and <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
 
         
 
-         properties are applied to nodes that represent the currently displayed page. If a <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.NodeTemplate" />
+         properties are applied to nodes that represent the currently displayed page. If a <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeTemplate" />
 
         
 
-         is defined in addition to the <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
+         is defined in addition to the <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
 
         
 
-        , it is ignored. If a <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
+        , it is ignored. If a <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
 
         
 
-         is defined in addition to the <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
+         is defined in addition to the <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
 
         
 
-        , it is merged with the <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
+        , it is merged with the <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
 
         
 
-         to create a merged style. This merged style uses all the elements of the <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
+         to create a merged style. This merged style uses all the elements of the <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
 
         
 
-        , plus any additional elements of the <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
+        , plus any additional elements of the <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
 
         
 
-         that do not conflict with the <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
+         that do not conflict with the <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
 
         
 
         .</para
       >
       <para
-        >The <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
+        >The <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
+         and <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
 
         
 
-         properties are applied to the node that represents the root of the site navigation hierarchy. If a <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.NodeTemplate" />
+         properties are applied to the node that represents the root of the site navigation hierarchy. If a <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeTemplate" />
 
         
 
-         is defined in addition to the <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
+         is defined in addition to the <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
 
         
 
-        , it is ignored. If a <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
+        , it is ignored. If a <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
 
         
 
-         is defined in addition to the <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
+         is defined in addition to the <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
 
         
 
-        , it is merged with the <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
+        , it is merged with the <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
 
         
 
-         to create a merged style. This merged style uses all the elements of the <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
+         to create a merged style. This merged style uses all the elements of the <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
 
         
 
-        , plus any additional elements of the <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
+        , plus any additional elements of the <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
 
         
 
-         that did not conflict with the <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
+         that did not conflict with the <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
 
         
 
-        . Finally, if the currently displayed page is the root page of the site, the <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
+        . Finally, if the currently displayed page is the root page of the site, the <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
+         and <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
 
         
 
-         are used instead of the <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
+         are used instead of the <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
 
         
 
-         or <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
+         or <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
 
         
 
         .</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.SiteMapPath" />
+        >The <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
         
 
-         control uses the site map provider identified by the <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.SiteMapProvider" />
+         control uses the site map provider identified by the <see cref="P:System.Web.UI.WebControls.SiteMapPath.SiteMapProvider" />
 
         
 
-         property as its data source for site navigation information. If no provider is specified, it uses the default provider for the site, identified in the <see
-         cref="P:System.Web.SiteMap.Provider" />
+         property as its data source for site navigation information. If no provider is specified, it uses the default provider for the site, identified in the <see cref="P:System.Web.SiteMap.Provider" />
 
         
 
-         property. Typically, this is an instance of the default site map provider for ASP.NET, the <see
-         cref="T:System.Web.XmlSiteMapProvider" />
+         property. Typically, this is an instance of the default site map provider for ASP.NET, the <see cref="T:System.Web.XmlSiteMapProvider" />
 
         
 
-        . If the <see
-         cref="T:System.Web.UI.WebControls.SiteMapPath" />
+        . If the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
         
 
-         control is used within a site but no site map provider is configured, the control throws an <see
-         cref="T:System.Web.HttpException" />
+         control is used within a site but no site map provider is configured, the control throws an <see cref="T:System.Web.HttpException" />
 
         
 
@@ -398,13 +352,11 @@
         <h2>Events</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.SiteMapPath" />
+        >The <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
         
 
-         control also provides events that you can program against. This allows you to run a custom routine whenever an event occurs. The following table lists the events supported by the <see
-         cref="T:System.Web.UI.WebControls.SiteMapPath" />
+         control also provides events that you can program against. This allows you to run a custom routine whenever an event occurs. The following table lists the events supported by the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
         
 
@@ -429,18 +381,15 @@
           </term>
           <description>
             <para
-              >Occurs when the <see
-               cref="T:System.Web.UI.WebControls.SiteMapPath" />
+              >Occurs when the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
               
 
-               control first creates a <see
-               cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+               control first creates a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
               
 
-               and associates it with a <see
-               cref="T:System.Web.SiteMapNode" />
+               and associates it with a <see cref="T:System.Web.SiteMapNode" />
 
               
 
@@ -456,13 +405,11 @@
           </term>
           <description>
             <para
-              >Occurs when a <see
-               cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+              >Occurs when a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
               
 
-               is bound to site map data contained by the <see
-               cref="T:System.Web.SiteMapNode" />
+               is bound to site map data contained by the <see cref="T:System.Web.SiteMapNode" />
 
               
 
@@ -478,33 +425,27 @@
         <h2>Customizing the SiteMapPath Control</h2>
       </format>
       <para
-        >Classes that derive from <see
-         cref="T:System.Web.UI.WebControls.SiteMapPath" />
+        >Classes that derive from <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
         
 
-         override the <see
-         cref="M:System.Web.UI.WebControls.SiteMapPath.InitializeItem(System.Web.UI.WebControls.SiteMapNodeItem)" />
+         override the <see cref="M:System.Web.UI.WebControls.SiteMapPath.InitializeItem(System.Web.UI.WebControls.SiteMapNodeItem)" />
 
         
 
-         method to customize the <see
-         cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+         method to customize the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
         
 
-         controls contained by the navigation control. For complete control over the way <see
-         cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+         controls contained by the navigation control. For complete control over the way <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
         
 
-         objects are created and added to the <see
-         cref="T:System.Web.UI.WebControls.SiteMapPath" />
+         objects are created and added to the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
         
 
-        , derived classes override the <see
-         cref="M:System.Web.UI.WebControls.SiteMapPath.CreateControlHierarchy" />
+        , derived classes override the <see cref="M:System.Web.UI.WebControls.SiteMapPath.CreateControlHierarchy" />
 
         
 
@@ -517,8 +458,7 @@
         <h2>Accessibility</h2>
       </format>
       <para
-        >For information about how to configure this control so that it generates markup that conforms to accessibility standards, see <format
-         type="text/html">
+        >For information about how to configure this control so that it generates markup that conforms to accessibility standards, see <format type="text/html">
           <a href="7e3ce9c4-6b7d-4fb1-94b5-72cf2a44fe13"
             >Accessibility in Visual Studio 2010 and ASP.NET 4</a
           >
@@ -526,8 +466,7 @@
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
 
@@ -546,8 +485,7 @@
     AccessKey="string"
     BackColor="color name|#dddddd"
     BorderColor="color name|#dddddd"
-    BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+    BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -555,53 +493,45 @@
         Inset|Outset"
     BorderWidth="size"
     CssClass="string"
-    Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     Font-Names="string"
-    Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     Font-Size="string|Smaller|Larger|XX-Small|X-Small|Small|Medium|
         Large|X-Large|XX-Large"
-    Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -618,22 +548,19 @@
     OnPreRender="PreRender event handler"
     OnUnload="Unload event handler"
     ParentLevelsDisplayed="integer"
-    PathDirection="<codeFeaturedElement
-        >RootToCurrent</codeFeaturedElement>
+    PathDirection="<codeFeaturedElement>RootToCurrent</codeFeaturedElement>
 
         
 
         |CurrentToRoot"
     PathSeparator="string"
-    RenderCurrentNodeAsLink="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    RenderCurrentNodeAsLink="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     runat="server"
-    ShowToolTips="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    ShowToolTips="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -644,8 +571,7 @@
     Style="string"
     TabIndex="integer"
     ToolTip="string"
-    Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -686,28 +612,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
-             class. To dynamically add a <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+             class. To dynamically add a <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
-             control to a page, create a new <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+             control to a page, create a new <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
-             object, set its properties, and then add it to the <see
-             cref="P:System.Web.UI.Control.Controls" />
+             object, set its properties, and then add it to the <see cref="P:System.Web.UI.Control.Controls" />
 
             
 
-             collection of a container control such as <see
-             cref="T:System.Web.UI.WebControls.PlaceHolder" />
+             collection of a container control such as <see cref="T:System.Web.UI.WebControls.PlaceHolder" />
 
             
 
@@ -717,8 +638,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
@@ -744,13 +664,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the ASP.NET infrastructure to notify any controls that use composition-based implementation, including controls that derive from <see
-             cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
+            >This method is called by the ASP.NET infrastructure to notify any controls that use composition-based implementation, including controls that derive from <see cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
 
             
 
-             and <see
-             cref="T:System.Web.UI.WebControls.CompositeControl" />
+             and <see cref="T:System.Web.UI.WebControls.CompositeControl" />
 
             
 
@@ -760,8 +678,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clears the current child controls collection, and rebuilds it by calling the <see
-             cref="M:System.Web.UI.WebControls.SiteMapPath.CreateControlHierarchy" />
+            >Clears the current child controls collection, and rebuilds it by calling the <see cref="M:System.Web.UI.WebControls.SiteMapPath.CreateControlHierarchy" />
 
             
 
@@ -782,160 +699,131 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.SiteMapPath.CreateControlHierarchy" />
+            >The <see cref="M:System.Web.UI.WebControls.SiteMapPath.CreateControlHierarchy" />
 
             
 
-             method creates <see
-             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+             method creates <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
             
 
-             controls, associates them with the corresponding <see
-             cref="T:System.Web.SiteMapNode" />
+             controls, associates them with the corresponding <see cref="T:System.Web.SiteMapNode" />
 
             
 
-             objects from the current site map provider, and adds the nodes to the <see
-             cref="P:System.Web.UI.Control.Controls" />
+             objects from the current site map provider, and adds the nodes to the <see cref="P:System.Web.UI.Control.Controls" />
 
             
 
              collection.</para
           >
           <para
-            >The method begins by finding the <see
-             cref="P:System.Web.SiteMap.CurrentNode" />
+            >The method begins by finding the <see cref="P:System.Web.SiteMap.CurrentNode" />
 
             
 
-            , and then walks up the hierarchical tree of <see
-             cref="T:System.Web.SiteMapNode" />
+            , and then walks up the hierarchical tree of <see cref="T:System.Web.SiteMapNode" />
 
             
 
-             objects, creating a <see
-             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+             objects, creating a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
             
 
-             for each one until the <see
-             cref="P:System.Web.SiteMap.RootNode" />
+             for each one until the <see cref="P:System.Web.SiteMap.RootNode" />
 
             
 
-             is reached. After each <see
-             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+             is reached. After each <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
             
 
-             is created, but before it is bound to its corresponding <see
-             cref="T:System.Web.SiteMapNode" />
+             is created, but before it is bound to its corresponding <see cref="T:System.Web.SiteMapNode" />
 
             
 
-            , the <see
-             cref="M:System.Web.UI.WebControls.SiteMapPath.InitializeItem(System.Web.UI.WebControls.SiteMapNodeItem)" />
+            , the <see cref="M:System.Web.UI.WebControls.SiteMapPath.InitializeItem(System.Web.UI.WebControls.SiteMapNodeItem)" />
 
             
 
-             method is called. The <see
-             cref="M:System.Web.UI.WebControls.SiteMapPath.InitializeItem(System.Web.UI.WebControls.SiteMapNodeItem)" />
+             method is called. The <see cref="M:System.Web.UI.WebControls.SiteMapPath.InitializeItem(System.Web.UI.WebControls.SiteMapNodeItem)" />
 
             
 
-             method applies any templates or styles defined for a particular node type and creates and initializes any child controls that the <see
-             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+             method applies any templates or styles defined for a particular node type and creates and initializes any child controls that the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
             
 
-             contains. Finally, the <see
-             cref="M:System.Web.UI.WebControls.SiteMapPath.InitializeItem(System.Web.UI.WebControls.SiteMapNodeItem)" />
+             contains. Finally, the <see cref="M:System.Web.UI.WebControls.SiteMapPath.InitializeItem(System.Web.UI.WebControls.SiteMapNodeItem)" />
 
             
 
-             method adds the child controls of the <see
-             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+             method adds the child controls of the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
             
 
-             to the <see
-             cref="P:System.Web.UI.Control.Controls" />
+             to the <see cref="P:System.Web.UI.Control.Controls" />
 
             
 
              collection.</para
           >
           <para
-            >After each <see
-             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+            >After each <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
             
 
-             is initialized, the <see
-             cref="M:System.Web.UI.WebControls.SiteMapPath.OnItemCreated(System.Web.UI.WebControls.SiteMapNodeItemEventArgs)" />
+             is initialized, the <see cref="M:System.Web.UI.WebControls.SiteMapPath.OnItemCreated(System.Web.UI.WebControls.SiteMapNodeItemEventArgs)" />
 
             
 
-             method is called. Then the <see
-             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+             method is called. Then the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
             
 
-             is bound to its corresponding <see
-             cref="T:System.Web.SiteMapNode" />
+             is bound to its corresponding <see cref="T:System.Web.SiteMapNode" />
 
             
 
-            , and <see
-             cref="M:System.Web.UI.WebControls.BaseDataBoundControl.OnDataBound(System.EventArgs)" />
+            , and <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.OnDataBound(System.EventArgs)" />
 
             
 
              is called.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.SiteMapPath.CreateControlHierarchy" />
+            >The <see cref="M:System.Web.UI.WebControls.SiteMapPath.CreateControlHierarchy" />
 
             
 
-             method is called from the <see
-             cref="M:System.Web.UI.WebControls.SiteMapPath.CreateChildControls" />
+             method is called from the <see cref="M:System.Web.UI.WebControls.SiteMapPath.CreateChildControls" />
 
             
 
              method.</para
           >
           <para
-            >Classes that extend the <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+            >Classes that extend the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
-             control override the <see
-             cref="M:System.Web.UI.WebControls.SiteMapPath.CreateControlHierarchy" />
+             control override the <see cref="M:System.Web.UI.WebControls.SiteMapPath.CreateControlHierarchy" />
 
             
 
-             method to alter how the <see
-             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+             method to alter how the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
             
 
-             controls are created or added to the <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+             controls are created or added to the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
-             control. The manipulation of individual node items is performed in the <see
-             cref="M:System.Web.UI.WebControls.SiteMapPath.InitializeItem(System.Web.UI.WebControls.SiteMapNodeItem)" />
+             control. The manipulation of individual node items is performed in the <see cref="M:System.Web.UI.WebControls.SiteMapPath.InitializeItem(System.Web.UI.WebControls.SiteMapNodeItem)" />
 
             
 
-             method, and most classes that extend <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+             method, and most classes that extend <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
@@ -945,8 +833,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Examines the site map structure provided by the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.SiteMapProvider" />
+            >Examines the site map structure provided by the <see cref="P:System.Web.UI.WebControls.SiteMapPath.SiteMapProvider" />
 
             
 
@@ -987,26 +874,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
+            >Use the <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
 
             
 
-             property to control the appearance of the display text for the navigation path node that represents the currently displayed page. By default, the display text is that specified in the <see
-             cref="P:System.Web.SiteMapNode.Title" />
+             property to control the appearance of the display text for the navigation path node that represents the currently displayed page. By default, the display text is that specified in the <see cref="P:System.Web.SiteMapNode.Title" />
 
             
 
-             property of the <see
-             cref="T:System.Web.SiteMapNode" />
+             property of the <see cref="T:System.Web.SiteMapNode" />
 
             
 
              that represents the page. Common style settings include custom background color, foreground color, font properties, and node spacing.</para
           >
           <para
-            >For <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+            >For <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
@@ -1024,8 +907,7 @@
 
                 
 
-                 or, if the currently displayed page is the root node, <see
-                 cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
+                 or, if the currently displayed page is the root node, <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
 
                 
 
@@ -1037,13 +919,11 @@
             <para>If you set the node font style to a strikeout or overline style, the default underline style of the node is not displayed unless it is explicitly set to true.</para>
           </block>
           <para
-            >If a <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
+            >If a <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
 
             
 
-             property is defined, the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
+             property is defined, the <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
 
             
 
@@ -1088,84 +968,69 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
+            >Set the <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
 
             
 
-             to an <see
-             cref="T:System.Web.UI.ITemplate" />
+             to an <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             object to use an <see
-             cref="T:System.Web.UI.WebControls.Image" />
+             object to use an <see cref="T:System.Web.UI.WebControls.Image" />
 
             
 
-             control or some other control, such as a <see
-             cref="T:System.Web.UI.WebControls.Label" />
+             control or some other control, such as a <see cref="T:System.Web.UI.WebControls.Label" />
 
             
 
             , as the current node's user interface element instead of a string.</para
           >
           <para
-            >If the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
+            >If the <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
 
             
 
-             property is set, the template overrides both the current navigation node text displayed and any <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
+             property is set, the template overrides both the current navigation node text displayed and any <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
 
             
 
-             applied to it. If the currently displayed page corresponds to the root node, however, the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
+             applied to it. If the currently displayed page corresponds to the root node, however, the <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
 
             
 
-             or <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
+             or <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
 
             
 
              is used.</para
           >
           <para
-            >You can declaratively set the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
+            >You can declaratively set the <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
 
             
 
-             property to any Web server control, and the ASP.NET infrastructure performs the necessary steps to wrap the Web server control as an <see
-             cref="T:System.Web.UI.ITemplate" />
+             property to any Web server control, and the ASP.NET infrastructure performs the necessary steps to wrap the Web server control as an <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             object. However, Web server controls do not implement the <see
-             cref="T:System.Web.UI.ITemplate" />
+             object. However, Web server controls do not implement the <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             interface; therefore, when you work with the <see
-             cref="T:System.Web.UI.ITemplate" />
+             interface; therefore, when you work with the <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             properties programmatically, you must write an <see
-             cref="T:System.Web.UI.ITemplate" />
+             properties programmatically, you must write an <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             wrapper for any template code. Then, the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
+             wrapper for any template code. Then, the <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
 
             
 
-             property is set to an instance of the <see
-             cref="T:System.Web.UI.ITemplate" />
+             property is set to an instance of the <see cref="T:System.Web.UI.ITemplate" />
 
             
 
@@ -1193,23 +1058,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+            >The <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
-             control is designed to retrieve its data directly from a site map provider by using the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.Provider" />
+             control is designed to retrieve its data directly from a site map provider by using the <see cref="P:System.Web.UI.WebControls.SiteMapPath.Provider" />
 
             
 
-             property. Do not use the <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+             property. Do not use the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
-             control to bind to ASP.NET data source controls, and do not call the <see
-             cref="M:System.Web.UI.WebControls.SiteMapPath.DataBind" />
+             control to bind to ASP.NET data source controls, and do not call the <see cref="M:System.Web.UI.WebControls.SiteMapPath.DataBind" />
 
             
 
@@ -1219,8 +1080,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Binds a data source to the <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+            >Binds a data source to the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
@@ -1249,228 +1109,186 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.SiteMapPath.InitializeItem(System.Web.UI.WebControls.SiteMapNodeItem)" />
+            >The <see cref="M:System.Web.UI.WebControls.SiteMapPath.InitializeItem(System.Web.UI.WebControls.SiteMapNodeItem)" />
 
             
 
-             method determines the functional type of node that the item represents by checking the <see
-             cref="T:System.Web.UI.WebControls.SiteMapNodeItemType" />
+             method determines the functional type of node that the item represents by checking the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItemType" />
 
             
 
             , and applies any templates or styles that are defined for that kind of node.</para
           >
           <para
-            >If the <see
-             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+            >If the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
             
 
-             has a <see
-             cref="F:System.Web.UI.WebControls.SiteMapNodeItemType.Root" />
+             has a <see cref="F:System.Web.UI.WebControls.SiteMapNodeItemType.Root" />
 
             
 
-             item type, a <see
-             cref="T:System.Web.UI.WebControls.HyperLink" />
+             item type, a <see cref="T:System.Web.UI.WebControls.HyperLink" />
 
             
 
-             child control is created, and the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
+             child control is created, and the <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
+             and <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
 
             
 
-             may be applied. If the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
+             may be applied. If the <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
 
             
 
-             is set, its <see
-             cref="T:System.Web.UI.ITemplate" />
+             is set, its <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             is applied to the node. In instead the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
+             is applied to the node. In instead the <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
 
             
 
-             is set, it is merged with any defined <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
+             is set, it is merged with any defined <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
 
             
 
-             and applied. Finally, if no templates or styles are defined, a basic <see
-             cref="T:System.Web.UI.WebControls.HyperLink" />
+             and applied. Finally, if no templates or styles are defined, a basic <see cref="T:System.Web.UI.WebControls.HyperLink" />
 
             
 
              control is created and initialized with values from the node.</para
           >
           <para
-            >If the <see
-             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+            >If the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
             
 
-             has a <see
-             cref="F:System.Web.UI.WebControls.SiteMapNodeItemType.Current" />
+             has a <see cref="F:System.Web.UI.WebControls.SiteMapNodeItemType.Current" />
 
             
 
-             item type, either a <see
-             cref="T:System.Web.UI.WebControls.Literal" />
+             item type, either a <see cref="T:System.Web.UI.WebControls.Literal" />
 
             
 
-             or <see
-             cref="T:System.Web.UI.WebControls.HyperLink" />
+             or <see cref="T:System.Web.UI.WebControls.HyperLink" />
 
             
 
-             child control is created, depending on the return value of <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.RenderCurrentNodeAsLink" />
+             child control is created, depending on the return value of <see cref="P:System.Web.UI.WebControls.SiteMapPath.RenderCurrentNodeAsLink" />
 
             
 
-            . Then either the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
+            . Then either the <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
 
             
 
-             or <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
+             or <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
 
             
 
-             may be applied. If the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
+             may be applied. If the <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
 
             
 
-             is set, its <see
-             cref="T:System.Web.UI.ITemplate" />
+             is set, its <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             is applied to the node. If instead the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
+             is applied to the node. If instead the <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
 
             
 
-             is set, it is merged with any defined <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
+             is set, it is merged with any defined <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
 
             
 
              and applied.</para
           >
           <para
-            >If the <see
-             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+            >If the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
             
 
-             has a <see
-             cref="F:System.Web.UI.WebControls.SiteMapNodeItemType.Parent" />
+             has a <see cref="F:System.Web.UI.WebControls.SiteMapNodeItemType.Parent" />
 
             
 
-             item type, a <see
-             cref="T:System.Web.UI.WebControls.HyperLink" />
+             item type, a <see cref="T:System.Web.UI.WebControls.HyperLink" />
 
             
 
-             child control is created and the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.NodeTemplate" />
+             child control is created and the <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeTemplate" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
+             and <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
 
             
 
-             may be applied. If the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.NodeTemplate" />
+             may be applied. If the <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeTemplate" />
 
             
 
-             is set, its <see
-             cref="T:System.Web.UI.ITemplate" />
+             is set, its <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             is applied to the node. If instead the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
+             is applied to the node. If instead the <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
 
             
 
              is set, it is applied.</para
           >
           <para
-            >Finally, if the <see
-             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+            >Finally, if the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
             
 
-             has a <see
-             cref="F:System.Web.UI.WebControls.SiteMapNodeItemType.PathSeparator" />
+             has a <see cref="F:System.Web.UI.WebControls.SiteMapNodeItemType.PathSeparator" />
 
             
 
-             item type, a <see
-             cref="T:System.Web.UI.WebControls.Literal" />
+             item type, a <see cref="T:System.Web.UI.WebControls.Literal" />
 
             
 
-             child control is created and the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorTemplate" />
+             child control is created and the <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorTemplate" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorStyle" />
+             and <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorStyle" />
 
             
 
-             are applied according to the same general rules defined for a <see
-             cref="F:System.Web.UI.WebControls.SiteMapNodeItemType.Parent" />
+             are applied according to the same general rules defined for a <see cref="F:System.Web.UI.WebControls.SiteMapNodeItemType.Parent" />
 
             
 
              node type.</para
           >
           <para
-            >Override the <see
-             cref="M:System.Web.UI.WebControls.SiteMapPath.InitializeItem(System.Web.UI.WebControls.SiteMapNodeItem)" />
+            >Override the <see cref="M:System.Web.UI.WebControls.SiteMapPath.InitializeItem(System.Web.UI.WebControls.SiteMapNodeItem)" />
 
             
 
-             method to manipulate individual <see
-             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+             method to manipulate individual <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
             
 
-             objects. If the design of the class requires more extensive control over how the <see
-             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+             objects. If the design of the class requires more extensive control over how the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
             
 
-             objects are created and added to the <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+             objects are created and added to the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
-             control, override the <see
-             cref="M:System.Web.UI.WebControls.SiteMapPath.CreateControlHierarchy" />
+             control, override the <see cref="M:System.Web.UI.WebControls.SiteMapPath.CreateControlHierarchy" />
 
             
 
@@ -1480,13 +1298,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+            >Populates a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
             
 
-            , which is a Web server control that represents a <see
-             cref="T:System.Web.SiteMapNode" />
+            , which is a Web server control that represents a <see cref="T:System.Web.SiteMapNode" />
 
             
 
@@ -1494,12 +1310,15 @@
           >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+          The <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
           
 
@@ -1524,8 +1343,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="b6f65241-e0ad-4590-a99f-200ce741bb1f">Handling and Raising Events</a>
             </format>
 
@@ -1537,23 +1355,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when a <see
-             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+            >Occurs when a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
             
 
-             is created by the <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+             is created by the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
-             and is associated with its corresponding <see
-             cref="T:System.Web.SiteMapNode" />
+             and is associated with its corresponding <see cref="T:System.Web.SiteMapNode" />
 
             
 
-            . This event is raised by the <see
-             cref="M:System.Web.UI.WebControls.SiteMapPath.OnItemCreated(System.Web.UI.WebControls.SiteMapNodeItemEventArgs)" />
+            . This event is raised by the <see cref="M:System.Web.UI.WebControls.SiteMapPath.OnItemCreated(System.Web.UI.WebControls.SiteMapNodeItemEventArgs)" />
 
             
 
@@ -1579,8 +1393,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="b6f65241-e0ad-4590-a99f-200ce741bb1f">Handling and Raising Events</a>
             </format>
 
@@ -1592,23 +1405,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs after a <see
-             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+            >Occurs after a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
             
 
-             has been bound to its underlying <see
-             cref="T:System.Web.SiteMapNode" />
+             has been bound to its underlying <see cref="T:System.Web.SiteMapNode" />
 
             
 
-             data by the <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+             data by the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
-            . This event is raised by the <see
-             cref="M:System.Web.UI.WebControls.SiteMapPath.OnItemDataBound(System.Web.UI.WebControls.SiteMapNodeItemEventArgs)" />
+            . This event is raised by the <see cref="M:System.Web.UI.WebControls.SiteMapPath.OnItemDataBound(System.Web.UI.WebControls.SiteMapNodeItemEventArgs)" />
 
             
 
@@ -1637,8 +1446,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used primarily by the .NET Framework infrastructure and is not intended to be used directly from your code. However, control developers can override this method to specify how a custom server control restores its view state. For more information, see <format
-             type="text/html">
+            >This method is used primarily by the .NET Framework infrastructure and is not intended to be used directly from your code. However, control developers can override this method to specify how a custom server control restores its view state. For more information, see <format type="text/html">
               <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
             </format>
 
@@ -1647,8 +1455,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Login.LoadViewState(System.Object)" />
+            >The <see cref="M:System.Web.UI.WebControls.Login.LoadViewState(System.Object)" />
 
             
 
@@ -1658,8 +1465,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Restores view-state information from a previous request that was saved with the <see
-             cref="M:System.Web.UI.WebControls.SiteMapPath.SaveViewState" />
+            >Restores view-state information from a previous request that was saved with the <see cref="M:System.Web.UI.WebControls.SiteMapPath.SaveViewState" />
 
             
 
@@ -1667,12 +1473,15 @@
           >
         </summary>
         <param name="savedState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
@@ -1712,26 +1521,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
+            >Use the <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
 
             
 
-             property to control the appearance of the display text for all navigation path nodes rendered by the control. By default, the display text is that specified in the <see
-             cref="P:System.Web.SiteMapNode.Title" />
+             property to control the appearance of the display text for all navigation path nodes rendered by the control. By default, the display text is that specified in the <see cref="P:System.Web.SiteMapNode.Title" />
 
             
 
-             property of the <see
-             cref="T:System.Web.SiteMapNode" />
+             property of the <see cref="T:System.Web.SiteMapNode" />
 
             
 
              that represents the page. Common style settings include custom background color, foreground color, font properties, and node spacing.</para
           >
           <para
-            >For <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+            >For <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
@@ -1749,8 +1554,7 @@
 
                 
 
-                 or <see
-                 cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
+                 or <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
 
                 
 
@@ -1762,13 +1566,11 @@
             <para>If you set the node font style to a strikeout or overline style, the default underline style of the node is not displayed unless it is explicitly set to true.</para>
           </block>
           <para
-            >If the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
+            >If the <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
 
             
 
-             is defined, it is initially applied to each node. If an additional style is defined for a particular type of node, such as the root node or current node, this style supersedes the general style specified in the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
+             is defined, it is initially applied to each node. If an additional style is defined for a particular type of node, such as the root node or current node, this style supersedes the general style specified in the <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
 
             
 
@@ -1813,89 +1615,73 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.NodeTemplate" />
+            >Set the <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeTemplate" />
 
             
 
-             to an <see
-             cref="T:System.Web.UI.ITemplate" />
+             to an <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             object to use an <see
-             cref="T:System.Web.UI.WebControls.Image" />
+             object to use an <see cref="T:System.Web.UI.WebControls.Image" />
 
             
 
-             or some other control, such as a <see
-             cref="T:System.Web.UI.WebControls.Label" />
+             or some other control, such as a <see cref="T:System.Web.UI.WebControls.Label" />
 
             
 
             , as a user interface element for all navigation path nodes.</para
           >
           <para
-            >If the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.NodeTemplate" />
+            >If the <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeTemplate" />
 
             
 
-             property is set, the template overrides both the navigation node text displayed and any <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
+             property is set, the template overrides both the navigation node text displayed and any <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" />
 
             
 
-             applied to it. For the current and root nodes, if a <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
+             applied to it. For the current and root nodes, if a <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
 
             
 
-             or <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
+             or <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
 
             
 
-             is set, these templates override the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.NodeTemplate" />
+             is set, these templates override the <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeTemplate" />
 
             
 
             .</para
           >
           <para
-            >You can declaratively set the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.NodeTemplate" />
+            >You can declaratively set the <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeTemplate" />
 
             
 
-             property to any Web server control, and the ASP.NET infrastructure performs the necessary steps to wrap the Web server control as an <see
-             cref="T:System.Web.UI.ITemplate" />
+             property to any Web server control, and the ASP.NET infrastructure performs the necessary steps to wrap the Web server control as an <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             object. However, Web server controls do not implement the <see
-             cref="T:System.Web.UI.ITemplate" />
+             object. However, Web server controls do not implement the <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             interface; therefore, when you work with the <see
-             cref="T:System.Web.UI.ITemplate" />
+             interface; therefore, when you work with the <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             properties programmatically, you must write an <see
-             cref="T:System.Web.UI.ITemplate" />
+             properties programmatically, you must write an <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             wrapper for any template code. Then, the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
+             wrapper for any template code. Then, the <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
 
             
 
-             property is set to an instance of the <see
-             cref="T:System.Web.UI.ITemplate" />
+             property is set to an instance of the <see cref="T:System.Web.UI.ITemplate" />
 
             
 
@@ -1926,18 +1712,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see
-             cref="M:System.Web.UI.Control.OnDataBinding(System.EventArgs)" />
+            >Overrides the <see cref="M:System.Web.UI.Control.OnDataBinding(System.EventArgs)" />
 
             
 
-             method of the <see
-             cref="T:System.Web.UI.WebControls.CompositeControl" />
+             method of the <see cref="T:System.Web.UI.WebControls.CompositeControl" />
 
             
 
-             class and raises the <see
-             cref="E:System.Web.UI.Control.DataBinding" />
+             class and raises the <see cref="E:System.Web.UI.Control.DataBinding" />
 
             
 
@@ -1945,12 +1728,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1978,46 +1764,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.SiteMapPath.ItemCreated" />
+            >The <see cref="E:System.Web.UI.WebControls.SiteMapPath.ItemCreated" />
 
             
 
-             event is raised after the <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+             event is raised after the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
-             control creates a <see
-             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+             control creates a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
             
 
-            , which is a Web server control that represents a <see
-             cref="T:System.Web.SiteMapNode" />
+            , which is a Web server control that represents a <see cref="T:System.Web.SiteMapNode" />
 
             
 
-            , and associates it to a <see
-             cref="T:System.Web.SiteMapNode" />
+            , and associates it to a <see cref="T:System.Web.SiteMapNode" />
 
             
 
-            . The <see
-             cref="M:System.Web.UI.WebControls.SiteMapPath.OnItemCreated(System.Web.UI.WebControls.SiteMapNodeItemEventArgs)" />
+            . The <see cref="M:System.Web.UI.WebControls.SiteMapPath.OnItemCreated(System.Web.UI.WebControls.SiteMapNodeItemEventArgs)" />
 
             
 
-             method is called before the created node item is bound to its data. This allows you to provide an event-handling method that performs a custom routine whenever a <see
-             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+             method is called before the created node item is bound to its data. This allows you to provide an event-handling method that performs a custom routine whenever a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
             
 
              is created.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2026,8 +1804,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.SiteMapPath.OnItemCreated(System.Web.UI.WebControls.SiteMapNodeItemEventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.SiteMapPath.OnItemCreated(System.Web.UI.WebControls.SiteMapNodeItemEventArgs)" />
 
             
 
@@ -2037,13 +1814,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.WebControls.SiteMapPath.ItemCreated" />
+            >Raises the <see cref="E:System.Web.UI.WebControls.SiteMapPath.ItemCreated" />
 
             
 
-             event of the <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+             event of the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
@@ -2051,12 +1826,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.SiteMapNodeItemEventArgs" />
+          A <see cref="T:System.Web.UI.WebControls.SiteMapNodeItemEventArgs" />
 
           
 
@@ -2084,26 +1862,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.SiteMapPath.ItemDataBound" />
+            >The <see cref="E:System.Web.UI.WebControls.SiteMapPath.ItemDataBound" />
 
             
 
-             event is raised when the <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+             event is raised when the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
-             control binds to the data provided by its <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.SiteMapProvider" />
+             control binds to the data provided by its <see cref="P:System.Web.UI.WebControls.SiteMapPath.SiteMapProvider" />
 
             
 
             . This allows you to provide an event-handling method that performs a custom routine, such as updating a database or the displayed content, whenever this event occurs.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2112,8 +1886,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.SiteMapPath.OnItemDataBound(System.Web.UI.WebControls.SiteMapNodeItemEventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.SiteMapPath.OnItemDataBound(System.Web.UI.WebControls.SiteMapNodeItemEventArgs)" />
 
             
 
@@ -2123,13 +1896,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.WebControls.SiteMapPath.ItemDataBound" />
+            >Raises the <see cref="E:System.Web.UI.WebControls.SiteMapPath.ItemDataBound" />
 
             
 
-             event of the <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+             event of the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
@@ -2137,12 +1908,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.SiteMapNodeItemEventArgs" />
+          A <see cref="T:System.Web.UI.WebControls.SiteMapNodeItemEventArgs" />
 
           
 
@@ -2176,13 +1950,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.ParentLevelsDisplayed" />
+            >The <see cref="P:System.Web.UI.WebControls.SiteMapPath.ParentLevelsDisplayed" />
 
             
 
-             property governs how many levels of parent nodes are displayed by the <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+             property governs how many levels of parent nodes are displayed by the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
@@ -2190,13 +1962,11 @@
           >
           <para>The value of this property is stored in view state.</para>
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -2234,31 +2004,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.PathDirection" />
+            >Set <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathDirection" />
 
             
 
-             to <see
-             cref="F:System.Web.UI.WebControls.PathDirection.RootToCurrent" />
+             to <see cref="F:System.Web.UI.WebControls.PathDirection.RootToCurrent" />
 
             
 
              if you want to display the navigation path from left to right; the navigation path appears as a progression from left to right of site map nodes. In other words, the root node is at the leftmost position, each subsequent node is in the next position to the right, and the current node is in the rightmost position.</para
           >
           <para
-            >Set <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.PathDirection" />
+            >Set <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathDirection" />
 
             
 
-             to <see
-             cref="F:System.Web.UI.WebControls.PathDirection.CurrentToRoot" />
+             to <see cref="F:System.Web.UI.WebControls.PathDirection.CurrentToRoot" />
 
             
 
-             if you want to display the navigation path from right to left. In other words, the node order is reversed so that the root node displays at the rightmost position and the current node displays at the leftmost position. While not as common, this ordering can be used for localizing Web Forms pages and the <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+             if you want to display the navigation path from right to left. In other words, the node order is reversed so that the root node displays at the rightmost position and the current node displays at the leftmost position. While not as common, this ordering can be used for localizing Web Forms pages and the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
@@ -2295,28 +2060,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorStyle" />
+            >If the <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorStyle" />
 
             
 
-             is defined, it is applied to the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparator" />
+             is defined, it is applied to the <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparator" />
 
             
 
-             property. However, if a <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorTemplate" />
+             property. However, if a <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorTemplate" />
 
             
 
-             property is defined, both the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparator" />
+             property is defined, both the <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparator" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorStyle" />
+             and <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorStyle" />
 
             
 
@@ -2324,13 +2084,11 @@
           >
           <para>The value of this property is stored in view state.</para>
           <para
-            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
@@ -2344,8 +2102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the string that delimits <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+            >Gets or sets the string that delimits <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
@@ -2386,31 +2143,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorStyle" />
+            >Use the <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorStyle" />
 
             
 
-             property to control the appearance of the path separator that appears between navigation path nodes. Common style settings include font properties and a foreground color for the font used by the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparator" />
+             property to control the appearance of the path separator that appears between navigation path nodes. Common style settings include font properties and a foreground color for the font used by the <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparator" />
 
             
 
              property.</para
           >
           <para
-            >If a <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorTemplate" />
+            >If a <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorTemplate" />
 
             
 
-             property is defined, both the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparator" />
+             property is defined, both the <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparator" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorStyle" />
+             and <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorStyle" />
 
             
 
@@ -2420,8 +2172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the style used for the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparator" />
+            >Gets the style used for the <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparator" />
 
             
 
@@ -2462,84 +2213,69 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorTemplate" />
+            >Set the <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorTemplate" />
 
             
 
-             to an <see
-             cref="T:System.Web.UI.ITemplate" />
+             to an <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             object to use an <see
-             cref="T:System.Web.UI.WebControls.Image" />
+             object to use an <see cref="T:System.Web.UI.WebControls.Image" />
 
             
 
-             or some other control, such as a <see
-             cref="T:System.Web.UI.WebControls.Label" />
+             or some other control, such as a <see cref="T:System.Web.UI.WebControls.Label" />
 
             
 
-            , as the path delimiter between navigation nodes instead of the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparator" />
+            , as the path delimiter between navigation nodes instead of the <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparator" />
 
             
 
              string.</para
           >
           <para
-            >If the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorTemplate" />
+            >If the <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorTemplate" />
 
             
 
-             property is set, the template overrides both the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparator" />
+             property is set, the template overrides both the <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparator" />
 
             
 
-             text displayed and any <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorStyle" />
+             text displayed and any <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorStyle" />
 
             
 
              applied to it.</para
           >
           <para
-            >You can declaratively set the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorTemplate" />
+            >You can declaratively set the <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorTemplate" />
 
             
 
-             property to any Web server control, and the ASP.NET infrastructure performs the necessary steps to wrap the Web server control as an <see
-             cref="T:System.Web.UI.ITemplate" />
+             property to any Web server control, and the ASP.NET infrastructure performs the necessary steps to wrap the Web server control as an <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-            . However, Web server controls do not implement the <see
-             cref="T:System.Web.UI.ITemplate" />
+            . However, Web server controls do not implement the <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             interface; therefore, when you work with the <see
-             cref="T:System.Web.UI.ITemplate" />
+             interface; therefore, when you work with the <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             properties programmatically, you must write an <see
-             cref="T:System.Web.UI.ITemplate" />
+             properties programmatically, you must write an <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             wrapper for any template code. Then, the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorTemplate" />
+             wrapper for any template code. Then, the <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathSeparatorTemplate" />
 
             
 
-             property is set to an instance of the <see
-             cref="T:System.Web.UI.ITemplate" />
+             property is set to an instance of the <see cref="T:System.Web.UI.ITemplate" />
 
             
 
@@ -2578,13 +2314,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.Provider" />
+            >The <see cref="P:System.Web.UI.WebControls.SiteMapPath.Provider" />
 
             
 
-             property specifies an instance of a site map provider to use with the control. This provider may be different from the provider identified by the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.SiteMapProvider" />
+             property specifies an instance of a site map provider to use with the control. This provider may be different from the provider identified by the <see cref="P:System.Web.UI.WebControls.SiteMapPath.SiteMapProvider" />
 
             
 
@@ -2594,8 +2328,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Web.SiteMapProvider" />
+            >Gets or sets a <see cref="T:System.Web.SiteMapProvider" />
 
             
 
@@ -2648,23 +2381,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+            >The <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
-             control overrides the <see
-             cref="M:System.Web.UI.WebControls.SiteMapPath.RenderContents(System.Web.UI.HtmlTextWriter)" />
+             control overrides the <see cref="M:System.Web.UI.WebControls.SiteMapPath.RenderContents(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method to perform its accessibility rendering, if the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.SkipLinkText" />
+             method to perform its accessibility rendering, if the <see cref="P:System.Web.UI.WebControls.SiteMapPath.SkipLinkText" />
 
             
 
-             property is not set to <see
-             cref="F:System.String.Empty" />
+             property is not set to <see cref="F:System.String.Empty" />
 
             
 
@@ -2674,8 +2403,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the nodes in the <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+            >Renders the nodes in the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
@@ -2704,18 +2432,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The node that represents the currently displayed page is the <see
-             cref="P:System.Web.SiteMap.CurrentNode" />
+            >The node that represents the currently displayed page is the <see cref="P:System.Web.SiteMap.CurrentNode" />
 
             
 
-            . Its <see
-             cref="P:System.Web.SiteMapNode.Title" />
+            . Its <see cref="P:System.Web.SiteMapNode.Title" />
 
             
 
-             property specifies the text to display for the current node, and its <see
-             cref="P:System.Web.SiteMapNode.Url" />
+             property specifies the text to display for the current node, and its <see cref="P:System.Web.SiteMapNode.Url" />
 
             
 
@@ -2761,26 +2486,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
+            >Use the <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
 
             
 
-             property to control the appearance of the display text for the root node of the navigation path. By default, the display text is that specified in the <see
-             cref="P:System.Web.SiteMapNode.Title" />
+             property to control the appearance of the display text for the root node of the navigation path. By default, the display text is that specified in the <see cref="P:System.Web.SiteMapNode.Title" />
 
             
 
-             property of the <see
-             cref="T:System.Web.SiteMapNode" />
+             property of the <see cref="T:System.Web.SiteMapNode" />
 
             
 
              that represents the page. Common style settings include custom background color, foreground color, font properties, and node spacing.</para
           >
           <para
-            >For <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+            >For <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
@@ -2798,8 +2519,7 @@
 
                 
 
-                 or <see
-                 cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
+                 or <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
 
                 
 
@@ -2811,13 +2531,11 @@
             <para>If you set the node font style to a strikeout or overline style, the default underline style of the node is not displayed unless it is explicitly set to true.</para>
           </block>
           <para
-            >If a <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
+            >If a <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
 
             
 
-             property is defined, the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
+             property is defined, the <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
 
             
 
@@ -2862,84 +2580,69 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
+            >Set the <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
 
             
 
-             to an <see
-             cref="T:System.Web.UI.ITemplate" />
+             to an <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             object to use an <see
-             cref="T:System.Web.UI.WebControls.Image" />
+             object to use an <see cref="T:System.Web.UI.WebControls.Image" />
 
             
 
-             control or some other control, such as a <see
-             cref="T:System.Web.UI.WebControls.Label" />
+             control or some other control, such as a <see cref="T:System.Web.UI.WebControls.Label" />
 
             
 
              as the root node's user interface element instead of a string.</para
           >
           <para
-            >If the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
+            >If the <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
 
             
 
-             property is set, the template overrides both the root navigation node text displayed and any <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
+             property is set, the template overrides both the root navigation node text displayed and any <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" />
 
             
 
-             applied to it. The template also overrides the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
+             applied to it. The template also overrides the <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeTemplate" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
+             and <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" />
 
             
 
              properties if the root page is the currently displayed page.</para
           >
           <para
-            >You can declaratively set the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
+            >You can declaratively set the <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
 
             
 
-             property to any Web server control, and the ASP.NET infrastructure performs the necessary steps to wrap the Web server control as an <see
-             cref="T:System.Web.UI.ITemplate" />
+             property to any Web server control, and the ASP.NET infrastructure performs the necessary steps to wrap the Web server control as an <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-            . However, Web server controls do not implement the <see
-             cref="T:System.Web.UI.ITemplate" />
+            . However, Web server controls do not implement the <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             interface; therefore, when you work with the <see
-             cref="T:System.Web.UI.ITemplate" />
+             interface; therefore, when you work with the <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             properties programmatically, you must write an <see
-             cref="T:System.Web.UI.ITemplate" />
+             properties programmatically, you must write an <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             wrapper for any template code. Then, the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
+             wrapper for any template code. Then, the <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeTemplate" />
 
             
 
-             property is set to an instance of the <see
-             cref="T:System.Web.UI.ITemplate" />
+             property is set to an instance of the <see cref="T:System.Web.UI.ITemplate" />
 
             
 
@@ -2967,21 +2670,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >View state is the accumulation of the values of a server control's properties. These values are automatically placed in the server control's <see
-             cref="P:System.Web.UI.Control.ViewState" />
+            >View state is the accumulation of the values of a server control's properties. These values are automatically placed in the server control's <see cref="P:System.Web.UI.Control.ViewState" />
 
             
 
-             property, which is an instance of the <see
-             cref="T:System.Web.UI.StateBag" />
+             property, which is an instance of the <see cref="T:System.Web.UI.StateBag" />
 
             
 
              class. The value of this property is then persisted to a string object after the save state stage of the server control life cycle.</para
           >
           <para
-            >When view state is saved, this string object is returned to the client as a variable that is stored in an Hidden HTML element. When you author custom server controls, you can improve efficiency by overriding this method and modifying your server control's <see
-             cref="P:System.Web.UI.Control.ViewState" />
+            >When view state is saved, this string object is returned to the client as a variable that is stored in an Hidden HTML element. When you author custom server controls, you can improve efficiency by overriding this method and modifying your server control's <see cref="P:System.Web.UI.Control.ViewState" />
 
             
 
@@ -2991,8 +2691,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves changes to view state for the <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+            >Saves changes to view state for the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
@@ -3030,13 +2729,11 @@
           <para>The most common scenario is when a Title HTML attribute exists for an HTML A Href hyperlink. For example, Microsoft Internet Explorer 4.0 and later and Netscape 6.0 and later implement the Title attribute as a hovering ToolTip, while Opera 3.0 and later implements the Title attribute as both a ToolTip and a caption in Opera's toolbar area. Not all clients display ToolTips for additional hyperlink attributes.</para>
           <para>The value of this property is stored in view state.</para>
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -3048,8 +2745,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
@@ -3081,81 +2777,66 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+            >The <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
-             control uses a <see
-             cref="T:System.Web.SiteMapProvider" />
+             control uses a <see cref="T:System.Web.SiteMapProvider" />
 
             
 
-             as a source for the site map data it renders. If the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.SiteMapProvider" />
+             as a source for the site map data it renders. If the <see cref="P:System.Web.UI.WebControls.SiteMapPath.SiteMapProvider" />
 
             
 
-             property is not set, the <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+             property is not set, the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
-             control uses the provider identified by the <see
-             cref="P:System.Web.SiteMap.Provider" />
+             control uses the provider identified by the <see cref="P:System.Web.SiteMap.Provider" />
 
             
 
-             property, which is the default <see
-             cref="T:System.Web.SiteMapProvider" />
+             property, which is the default <see cref="T:System.Web.SiteMapProvider" />
 
             
 
-             defined for the site in the configuration hierarchy, typically the <see
-             cref="T:System.Web.XmlSiteMapProvider" />
+             defined for the site in the configuration hierarchy, typically the <see cref="T:System.Web.XmlSiteMapProvider" />
 
             
 
-            . Setting the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.SiteMapProvider" />
+            . Setting the <see cref="P:System.Web.UI.WebControls.SiteMapPath.SiteMapProvider" />
 
             
 
-             property directs the <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+             property directs the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
              control to render the site map data that the provider defines.</para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+            >The <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
-             control works directly with a <see
-             cref="T:System.Web.SiteMapProvider" />
+             control works directly with a <see cref="T:System.Web.SiteMapProvider" />
 
             
 
-             and its <see
-             cref="T:System.Web.SiteMapNode" />
+             and its <see cref="T:System.Web.SiteMapNode" />
 
             
 
-             objects to display site map information. Other controls, such as <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             objects to display site map information. Other controls, such as <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             and <see
-             cref="T:System.Web.UI.WebControls.TreeView" />
+             and <see cref="T:System.Web.UI.WebControls.TreeView" />
 
             
 
-            , require a data abstraction, provided by the <see
-             cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
+            , require a data abstraction, provided by the <see cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
 
             
 
@@ -3163,13 +2844,11 @@
           >
           <para>The value of this property is stored in view state.</para>
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -3181,8 +2860,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the <see
-             cref="T:System.Web.SiteMapProvider" />
+            >Gets or sets the name of the <see cref="T:System.Web.SiteMapProvider" />
 
             
 
@@ -3218,23 +2896,19 @@
              is a property that you can set to make a Web page more or less accessible to users of screen readers. Web sites that contain content that repeats on multiple pages, such as controls that display site map data, can provide a mechanism that allows users of screen readers to skip the repeated content so that it is not read aloud. </para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+            >The <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 
-             control provides the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.SkipLinkText" />
+             control provides the <see cref="P:System.Web.UI.WebControls.SiteMapPath.SkipLinkText" />
 
             
 
-             property as a way for the entire control to be skipped by screen readers.  If the <see
-             cref="P:System.Web.UI.WebControls.SiteMapPath.SkipLinkText" />
+             property as a way for the entire control to be skipped by screen readers.  If the <see cref="P:System.Web.UI.WebControls.SiteMapPath.SkipLinkText" />
 
             
 
-             property is set, an invisible image with alternate text is rendered, giving the user the option to jump to the end of the content. Screen readers read the alternate text aloud but the image does not disturb the visual flow of the page. The property is set to "Skip Navigation Links" by default, which makes screen readers skip the control. If you want to disable this behavior, set the property to <see
-             cref="F:System.String.Empty" />
+             property is set, an invisible image with alternate text is rendered, giving the user the option to jump to the end of the content. Screen readers read the alternate text aloud but the image does not disturb the visual flow of the page. The property is set to "Skip Navigation Links" by default, which makes screen readers skip the control. If you want to disable this behavior, set the property to <see cref="F:System.String.Empty" />
 
             
 
@@ -3242,13 +2916,11 @@
           >
           <para>The value of this property is stored in view state.</para>
           <para
-            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
@@ -3281,8 +2953,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tracks changes to the <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+            >Tracks changes to the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 

@@ -14,113 +14,94 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Instances of the <see
-         cref="T:System.Web.Compilation.AssemblyBuilder" />
+        >Instances of the <see cref="T:System.Web.Compilation.AssemblyBuilder" />
 
         
 
-         class are used with <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+         class are used with <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
          class methods to build one or more files into a compiled assembly.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+        >The <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
-         class defines build functionality for individual files, and the <see
-         cref="T:System.Web.Compilation.AssemblyBuilder" />
+         class defines build functionality for individual files, and the <see cref="T:System.Web.Compilation.AssemblyBuilder" />
 
         
 
-         class combines the source code contributed by each <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+         class combines the source code contributed by each <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
-         instance into a single assembly. The ASP.NET build environment passes an <see
-         cref="T:System.Web.Compilation.AssemblyBuilder" />
+         instance into a single assembly. The ASP.NET build environment passes an <see cref="T:System.Web.Compilation.AssemblyBuilder" />
 
         
 
-         object to the <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+         object to the <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
-         methods when building an assembly from one or more files, so that each <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+         methods when building an assembly from one or more files, so that each <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
          instance can contribute source code for its file to the overall assembly. </para
       >
       <para
-        >The ASP.NET build environment determines the language and compiler required by files within the project, based on the <see
-         cref="P:System.Web.Compilation.BuildProvider.CodeCompilerType" />
+        >The ASP.NET build environment determines the language and compiler required by files within the project, based on the <see cref="P:System.Web.Compilation.BuildProvider.CodeCompilerType" />
 
         
 
          property. The build environment groups files based on their compiler settings and builds an assembly from files that require the same compiler.</para
       >
       <para
-        >The <see
-         cref="P:System.Web.Compilation.AssemblyBuilder.CodeDomProvider" />
+        >The <see cref="P:System.Web.Compilation.AssemblyBuilder.CodeDomProvider" />
 
         
 
-         property indicates the <see
-         cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+         property indicates the <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
         
 
-         implementation that the ASP.NET build environment uses to compile an assembly from the source code contributed by each <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+         implementation that the ASP.NET build environment uses to compile an assembly from the source code contributed by each <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
          implementation.</para
       >
       <para
-        >A <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+        >A <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
-         object contributes source code in the form of a CodeDOM graph using the <see
-         cref="M:System.Web.Compilation.AssemblyBuilder.AddCodeCompileUnit(System.Web.Compilation.BuildProvider,System.CodeDom.CodeCompileUnit)" />
+         object contributes source code in the form of a CodeDOM graph using the <see cref="M:System.Web.Compilation.AssemblyBuilder.AddCodeCompileUnit(System.Web.Compilation.BuildProvider,System.CodeDom.CodeCompileUnit)" />
 
         
 
-         method. A <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+         method. A <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
-         object contributes source code stored in a physical file using the <see
-         cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" />
+         object contributes source code stored in a physical file using the <see cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" />
 
         
 
          method. </para
       >
       <para
-        >After each <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+        >After each <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
-         object contributes source code using the appropriate <see
-         cref="T:System.Web.Compilation.AssemblyBuilder" />
+         object contributes source code using the appropriate <see cref="T:System.Web.Compilation.AssemblyBuilder" />
 
         
 
-         methods, the ASP.NET build environment uses the <see
-         cref="T:System.Web.Compilation.AssemblyBuilder" />
+         methods, the ASP.NET build environment uses the <see cref="T:System.Web.Compilation.AssemblyBuilder" />
 
         
 
@@ -150,67 +131,56 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+            >A <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             implementation uses the <see
-             cref="M:System.Web.Compilation.AssemblyBuilder.AddAssemblyReference(System.Reflection.Assembly)" />
+             implementation uses the <see cref="M:System.Web.Compilation.AssemblyBuilder.AddAssemblyReference(System.Reflection.Assembly)" />
 
             
 
              method when generating source code that references types within the input assembly. </para
           >
           <para
-            >The ASP.NET build environment initializes the default collection of assemblies available for reference through the build provider in the <see
-             cref="P:System.Web.Compilation.BuildProvider.ReferencedAssemblies" />
+            >The ASP.NET build environment initializes the default collection of assemblies available for reference through the build provider in the <see cref="P:System.Web.Compilation.BuildProvider.ReferencedAssemblies" />
 
             
 
-             property. If the build provider generates source code that references additional assemblies, the build provider adds the additional assemblies using the <see
-             cref="M:System.Web.Compilation.AssemblyBuilder.AddAssemblyReference(System.Reflection.Assembly)" />
+             property. If the build provider generates source code that references additional assemblies, the build provider adds the additional assemblies using the <see cref="M:System.Web.Compilation.AssemblyBuilder.AddAssemblyReference(System.Reflection.Assembly)" />
 
             
 
              method. The ASP.NET build environment resolves external types during assembly compilation using both the referenced assemblies added by build providers and the default collection of assemblies available for reference.</para
           >
           <para
-            >Typically, a <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+            >Typically, a <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             object adds source code to the <see
-             cref="T:System.Web.Compilation.AssemblyBuilder" />
+             object adds source code to the <see cref="T:System.Web.Compilation.AssemblyBuilder" />
 
             
 
-             object in the <see
-             cref="M:System.Web.Compilation.BuildProvider.GenerateCode(System.Web.Compilation.AssemblyBuilder)" />
+             object in the <see cref="M:System.Web.Compilation.BuildProvider.GenerateCode(System.Web.Compilation.AssemblyBuilder)" />
 
             
 
-             method. If a build provider generates source code that uses an external type, the build provider adds the type's assembly using the <see
-             cref="M:System.Web.Compilation.AssemblyBuilder.AddAssemblyReference(System.Reflection.Assembly)" />
+             method. If a build provider generates source code that uses an external type, the build provider adds the type's assembly using the <see cref="M:System.Web.Compilation.AssemblyBuilder.AddAssemblyReference(System.Reflection.Assembly)" />
 
             
 
              method.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Web.Compilation.AssemblyBuilder.AddAssemblyReference(System.Reflection.Assembly)" />
+            >Use the <see cref="M:System.Web.Compilation.AssemblyBuilder.AddAssemblyReference(System.Reflection.Assembly)" />
 
             
 
-             method to add a referenced assembly required in source code generated by a <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+             method to add a referenced assembly required in source code generated by a <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             instance for a specific file type. Use the <format
-             type="text/html">
+             instance for a specific file type. Use the <format type="text/html">
               <a href="3811c448-af1c-498d-be2b-6ed2634c51e9">&lt;assemblies&gt;</a>
             </format>
 
@@ -224,7 +194,11 @@
           <para>Adds an assembly that is referenced by source code generated for a file.</para>
         </summary>
         <param name="a">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -253,46 +227,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+            >A <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             implementation calls the <see
-             cref="M:System.Web.Compilation.AssemblyBuilder.AddCodeCompileUnit(System.Web.Compilation.BuildProvider,System.CodeDom.CodeCompileUnit)" />
+             implementation calls the <see cref="M:System.Web.Compilation.AssemblyBuilder.AddCodeCompileUnit(System.Web.Compilation.BuildProvider,System.CodeDom.CodeCompileUnit)" />
 
             
 
-             method when generating a CodeDOM graph for a virtual path. Source code added with <see
-             cref="M:System.Web.Compilation.AssemblyBuilder.AddCodeCompileUnit(System.Web.Compilation.BuildProvider,System.CodeDom.CodeCompileUnit)" />
+             method when generating a CodeDOM graph for a virtual path. Source code added with <see cref="M:System.Web.Compilation.AssemblyBuilder.AddCodeCompileUnit(System.Web.Compilation.BuildProvider,System.CodeDom.CodeCompileUnit)" />
 
             
 
              is included in the assembly compilation. </para
           >
           <para
-            >Typically, a build provider's <see
-             cref="M:System.Web.Compilation.BuildProvider.GenerateCode(System.Web.Compilation.AssemblyBuilder)" />
+            >Typically, a build provider's <see cref="M:System.Web.Compilation.BuildProvider.GenerateCode(System.Web.Compilation.AssemblyBuilder)" />
 
             
 
-             method implementation reads the <see
-             cref="P:System.Web.Compilation.BuildProvider.VirtualPath" />
+             method implementation reads the <see cref="P:System.Web.Compilation.BuildProvider.VirtualPath" />
 
             
 
-             property, parses the contents, and then adds the generated source code to the specified <see
-             cref="T:System.Web.Compilation.AssemblyBuilder" />
+             property, parses the contents, and then adds the generated source code to the specified <see cref="T:System.Web.Compilation.AssemblyBuilder" />
 
             
 
-             object. The build provider uses the <see
-             cref="M:System.Web.Compilation.AssemblyBuilder.AddCodeCompileUnit(System.Web.Compilation.BuildProvider,System.CodeDom.CodeCompileUnit)" />
+             object. The build provider uses the <see cref="M:System.Web.Compilation.AssemblyBuilder.AddCodeCompileUnit(System.Web.Compilation.BuildProvider,System.CodeDom.CodeCompileUnit)" />
 
             
 
-             method to add source code as a CodeDOM graph to the assembly. Alternately, the build provider can use the <see
-             cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" />
+             method to add source code as a CodeDOM graph to the assembly. Alternately, the build provider can use the <see cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" />
 
             
 
@@ -304,19 +270,26 @@
           <para>Adds source code for the assembly in the form of a CodeDOM graph.</para>
         </summary>
         <param name="buildProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The build provider generating <paramref
-           name="compileUnit" />
+          The build provider generating <paramref name="compileUnit" />
 
           
 
           .</param
         >
         <param name="compileUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -342,26 +315,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Compilation.AssemblyBuilder.CodeDomProvider" />
+            >The <see cref="P:System.Web.Compilation.AssemblyBuilder.CodeDomProvider" />
 
             
 
-             property indicates the <see
-             cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+             property indicates the <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
             
 
-             implementation that the ASP.NET build environment uses to compile an assembly from the source code contributed by each <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+             implementation that the ASP.NET build environment uses to compile an assembly from the source code contributed by each <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
              implementation.</para
           >
           <para
-            >The ASP.NET build environment determines the language and compiler required by files within the project, based on the <see
-             cref="P:System.Web.Compilation.BuildProvider.CodeCompilerType" />
+            >The ASP.NET build environment determines the language and compiler required by files within the project, based on the <see cref="P:System.Web.Compilation.BuildProvider.CodeCompilerType" />
 
             
 
@@ -394,74 +363,61 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+            >A <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             implementation calls the <see
-             cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" />
+             implementation calls the <see cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" />
 
             
 
-             method when generating a source file for a virtual path. Source code added with <see
-             cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" />
+             method when generating a source file for a virtual path. Source code added with <see cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" />
 
             
 
              is included in the assembly compilation. </para
           >
           <para
-            >Typically, a build provider <see
-             cref="M:System.Web.Compilation.BuildProvider.GenerateCode(System.Web.Compilation.AssemblyBuilder)" />
+            >Typically, a build provider <see cref="M:System.Web.Compilation.BuildProvider.GenerateCode(System.Web.Compilation.AssemblyBuilder)" />
 
             
 
-             method implementation reads the <see
-             cref="P:System.Web.Compilation.BuildProvider.VirtualPath" />
+             method implementation reads the <see cref="P:System.Web.Compilation.BuildProvider.VirtualPath" />
 
             
 
-             property, parses the contents, and then adds the generated source code to the specified <see
-             cref="T:System.Web.Compilation.AssemblyBuilder" />
+             property, parses the contents, and then adds the generated source code to the specified <see cref="T:System.Web.Compilation.AssemblyBuilder" />
 
             
 
-             object. The build provider uses the <see
-             cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" />
+             object. The build provider uses the <see cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" />
 
             
 
-             method to add source code as a physical file to the assembly. Alternately, the build provider can use the <see
-             cref="M:System.Web.Compilation.AssemblyBuilder.AddCodeCompileUnit(System.Web.Compilation.BuildProvider,System.CodeDom.CodeCompileUnit)" />
+             method to add source code as a physical file to the assembly. Alternately, the build provider can use the <see cref="M:System.Web.Compilation.AssemblyBuilder.AddCodeCompileUnit(System.Web.Compilation.BuildProvider,System.CodeDom.CodeCompileUnit)" />
 
             
 
              method to add source code as a CodeDOM graph to the assembly.</para
           >
           <para
-            >After calling <see
-             cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" />
+            >After calling <see cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" />
 
             
 
-            , the build provider writes the source file contents using the returned <see
-             cref="T:System.IO.TextWriter" />
+            , the build provider writes the source file contents using the returned <see cref="T:System.IO.TextWriter" />
 
             
 
-             object. After writing the source file, the <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+             object. After writing the source file, the <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             object must use the <see
-             cref="M:System.IO.TextWriter.Close" />
+             object must use the <see cref="M:System.IO.TextWriter.Close" />
 
             
 
-             method to close the <see
-             cref="T:System.IO.TextWriter" />
+             method to close the <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -475,8 +431,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An open <see
-             cref="T:System.IO.TextWriter" />
+            >An open <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -484,7 +439,11 @@
           >
         </returns>
         <param name="buildProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -513,33 +472,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After calling the <see
-             cref="M:System.Web.Compilation.AssemblyBuilder.CreateEmbeddedResource(System.Web.Compilation.BuildProvider,System.String)" />
+            >After calling the <see cref="M:System.Web.Compilation.AssemblyBuilder.CreateEmbeddedResource(System.Web.Compilation.BuildProvider,System.String)" />
 
             
 
-             method, a <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+             method, a <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             object writes the resource file contents using the returned <see
-             cref="T:System.IO.Stream" />
+             object writes the resource file contents using the returned <see cref="T:System.IO.Stream" />
 
             
 
-             object. For example, the build provider can write the resources using a <see
-             cref="T:System.Resources.ResourceWriter" />
+             object. For example, the build provider can write the resources using a <see cref="T:System.Resources.ResourceWriter" />
 
             
 
-             object. After writing the resource file, the build provider must use the <see
-             cref="M:System.IO.Stream.Close" />
+             object. After writing the resource file, the build provider must use the <see cref="M:System.IO.Stream.Close" />
 
             
 
-             method to close the <see
-             cref="T:System.IO.Stream" />
+             method to close the <see cref="T:System.IO.Stream" />
 
             
 
@@ -553,8 +506,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An open <see
-             cref="T:System.IO.Stream" />
+            >An open <see cref="T:System.IO.Stream" />
 
             
 
@@ -562,14 +514,22 @@
           >
         </returns>
         <param name="buildProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The build provider generating the resource.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -594,13 +554,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+            >A <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             implementation calls the <see
-             cref="M:System.Web.Compilation.AssemblyBuilder.GenerateTypeFactory(System.String)" />
+             implementation calls the <see cref="M:System.Web.Compilation.AssemblyBuilder.GenerateTypeFactory(System.String)" />
 
             
 
@@ -612,7 +570,11 @@
           <para>Inserts a fast object factory template for a type into the compiled assembly.</para>
         </summary>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -640,21 +602,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+            >A <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             implementation calls the <see
-             cref="M:System.Web.Compilation.AssemblyBuilder.GetTempFilePhysicalPath(System.String)" />
+             implementation calls the <see cref="M:System.Web.Compilation.AssemblyBuilder.GetTempFilePhysicalPath(System.String)" />
 
             
 
              method to get a temporary file path that is deleted automatically after the assembly is compiled. </para
           >
           <para
-            >The <see
-             cref="M:System.Web.Compilation.AssemblyBuilder.GetTempFilePhysicalPath(System.String)" />
+            >The <see cref="M:System.Web.Compilation.AssemblyBuilder.GetTempFilePhysicalPath(System.String)" />
 
             
 
@@ -670,7 +629,11 @@
           <para>A path to a temporary file, with the specified file extension.</para>
         </returns>
         <param name="extension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -13,33 +13,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When the <see
-         cref="P:System.Web.UI.WebControls.TreeNode.NavigateUrl" />
+        >When the <see cref="P:System.Web.UI.WebControls.TreeNode.NavigateUrl" />
 
         
 
-         property for a <see
-         cref="T:System.Web.UI.WebControls.TreeNode" />
+         property for a <see cref="T:System.Web.UI.WebControls.TreeNode" />
 
         
 
-         control is set to a value other than an empty string (""), clicking the node navigates to the specified URL. If the <see
-         cref="P:System.Web.UI.WebControls.TreeNode.NavigateUrl" />
+         control is set to a value other than an empty string (""), clicking the node navigates to the specified URL. If the <see cref="P:System.Web.UI.WebControls.TreeNode.NavigateUrl" />
 
         
 
-         property is set to an empty string, clicking the node causes a postback. The <see
-         cref="P:System.Web.UI.WebControls.TreeNode.SelectAction" />
+         property is set to an empty string, clicking the node causes a postback. The <see cref="P:System.Web.UI.WebControls.TreeNode.SelectAction" />
 
         
 
-         property determines the events to raise on the postback. By default, the <see
-         cref="M:System.Web.UI.WebControls.TreeNode.Select" />
+         property determines the events to raise on the postback. By default, the <see cref="M:System.Web.UI.WebControls.TreeNode.Select" />
 
         
 
-         event is raised. No events are raised if the <see
-         cref="P:System.Web.UI.WebControls.TreeNode.NavigateUrl" />
+         event is raised. No events are raised if the <see cref="P:System.Web.UI.WebControls.TreeNode.NavigateUrl" />
 
         
 
@@ -47,18 +41,15 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="P:System.Web.UI.WebControls.TreeView.HoverNodeStyle" />
+          >The <see cref="P:System.Web.UI.WebControls.TreeView.HoverNodeStyle" />
 
           
 
-           property is not rendered for a node with its <see
-           cref="P:System.Web.UI.WebControls.TreeNode.SelectAction" />
+           property is not rendered for a node with its <see cref="P:System.Web.UI.WebControls.TreeNode.SelectAction" />
 
           
 
-           property set to the <see
-           cref="F:System.Web.UI.WebControls.TreeNodeSelectAction.None" />
+           property set to the <see cref="F:System.Web.UI.WebControls.TreeNodeSelectAction.None" />
 
           
 
@@ -69,8 +60,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the event or events to raise when a node in the <see
-         cref="T:System.Web.UI.WebControls.TreeView" />
+        >Represents the event or events to raise when a node in the <see cref="T:System.Web.UI.WebControls.TreeView" />
 
         
 
@@ -90,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.WebControls.TreeView.TreeNodeExpanded" />
+            >Raises the <see cref="E:System.Web.UI.WebControls.TreeView.TreeNodeExpanded" />
 
             
 
@@ -131,8 +120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.WebControls.TreeView.SelectedNodeChanged" />
+            >Raises the <see cref="E:System.Web.UI.WebControls.TreeView.SelectedNodeChanged" />
 
             
 
@@ -155,13 +143,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises both the <see
-             cref="E:System.Web.UI.WebControls.TreeView.SelectedNodeChanged" />
+            >Raises both the <see cref="E:System.Web.UI.WebControls.TreeView.SelectedNodeChanged" />
 
             
 
-             and <see
-             cref="E:System.Web.UI.WebControls.TreeView.TreeNodeExpanded" />
+             and <see cref="E:System.Web.UI.WebControls.TreeView.TreeNodeExpanded" />
 
             
 

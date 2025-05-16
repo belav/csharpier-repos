@@ -26,8 +26,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The body block is protected by the try block.</para>
       <para
-        >The handlers consist of a set of <see
-         cref="T:System.Linq.Expressions.CatchBlock" />
+        >The handlers consist of a set of <see cref="T:System.Linq.Expressions.CatchBlock" />
 
         
 
@@ -92,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Linq.Expressions.Expression" />
+            >Gets the <see cref="T:System.Linq.Expressions.Expression" />
 
             
 
@@ -124,8 +122,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Linq.Expressions.Expression" />
+            >Gets the <see cref="T:System.Linq.Expressions.Expression" />
 
             
 
@@ -156,8 +153,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Linq.Expressions.Expression" />
+            >Gets the <see cref="T:System.Linq.Expressions.Expression" />
 
             
 
@@ -188,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of <see
-             cref="T:System.Linq.Expressions.CatchBlock" />
+            >Gets the collection of <see cref="T:System.Linq.Expressions.CatchBlock" />
 
             
 
@@ -220,8 +215,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the node type of this <see
-             cref="T:System.Linq.Expressions.Expression" />
+            >Returns the node type of this <see cref="T:System.Linq.Expressions.Expression" />
 
             
 
@@ -246,8 +240,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the static type of the expression that this <see
-             cref="T:System.Linq.Expressions.Expression" />
+            >Gets the static type of the expression that this <see cref="T:System.Linq.Expressions.Expression" />
 
             
 
@@ -292,48 +285,60 @@
           <para>This expression if no children are changed or an expression with the updated children.</para>
         </returns>
         <param name="body">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Linq.Expressions.TryExpression.Body" />
+          The <see cref="P:System.Linq.Expressions.TryExpression.Body" />
 
           
 
            property of the result.</param
         >
         <param name="handlers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Linq.Expressions.TryExpression.Handlers" />
+          The <see cref="P:System.Linq.Expressions.TryExpression.Handlers" />
 
           
 
            property of the result.</param
         >
         <param name="finally">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Linq.Expressions.TryExpression.Finally" />
+          The <see cref="P:System.Linq.Expressions.TryExpression.Finally" />
 
           
 
            property of the result.</param
         >
         <param name="fault">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Linq.Expressions.TryExpression.Fault" />
+          The <see cref="P:System.Linq.Expressions.TryExpression.Fault" />
 
           
 

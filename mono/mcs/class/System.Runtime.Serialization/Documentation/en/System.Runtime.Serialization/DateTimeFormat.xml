@@ -39,8 +39,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.DateTimeFormat" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.DateTimeFormat" />
 
             
 
@@ -48,7 +47,11 @@
           >
         </summary>
         <param name="formatString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -78,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.DateTimeFormat" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.DateTimeFormat" />
 
             
 
@@ -87,14 +89,22 @@
           >
         </summary>
         <param name="formatString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The format sting.</param
         >
         <param name="formatProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

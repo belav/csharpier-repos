@@ -27,26 +27,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A complex number is a number that comprises a real number part and an imaginary number part. A complex number <math
-        >z</math>
+        >A complex number is a number that comprises a real number part and an imaginary number part. A complex number <math>z</math>
 
         
 
-         is usually written in the form <math
-        >z = x + yi</math>
+         is usually written in the form <math>z = x + yi</math>
 
         
 
-        , where x and y are real numbers, and i is the imaginary unit that has the property i<superscript
-        >2</superscript>
+        , where x and y are real numbers, and i is the imaginary unit that has the property i<superscript>2</superscript>
 
         
 
          = -1. The real part of the complex number is represented by x, and the imaginary part of the complex number is represented by y.</para
       >
       <para
-        >The <see
-         cref="T:System.Numerics.Complex" />
+        >The <see cref="T:System.Numerics.Complex" />
 
         
 
@@ -68,8 +64,7 @@
       <list type="bullet">
         <item>
           <para
-            >By passing two <see
-             cref="T:System.Double" />
+            >By passing two <see cref="T:System.Double" />
 
             
 
@@ -78,8 +73,7 @@
         </item>
         <item>
           <para
-            >By calling the static (Shared in Visual Basic) <see
-             cref="M:System.Numerics.Complex.FromPolarCoordinates(System.Double,System.Double)" />
+            >By calling the static (Shared in Visual Basic) <see cref="M:System.Numerics.Complex.FromPolarCoordinates(System.Double,System.Double)" />
 
             
 
@@ -88,58 +82,47 @@
         </item>
         <item>
           <para
-            >By assigning a <see
-             cref="T:System.Byte" />
+            >By assigning a <see cref="T:System.Byte" />
 
             
 
-            , <see
-             cref="T:System.SByte" />
+            , <see cref="T:System.SByte" />
 
             
 
-            , <see
-             cref="T:System.Int16" />
+            , <see cref="T:System.Int16" />
 
             
 
-            , <see
-             cref="T:System.UInt16" />
+            , <see cref="T:System.UInt16" />
 
             
 
-            , <see
-             cref="T:System.Int32" />
+            , <see cref="T:System.Int32" />
 
             
 
-            , <see
-             cref="T:System.UInt32" />
+            , <see cref="T:System.UInt32" />
 
             
 
-            , <see
-             cref="T:System.Int64" />
+            , <see cref="T:System.Int64" />
 
             
 
-            , <see
-             cref="T:System.UInt64" />
+            , <see cref="T:System.UInt64" />
 
             
 
-            , <see
-             cref="T:System.Single" />
+            , <see cref="T:System.Single" />
 
             
 
-            , or <see
-             cref="T:System.Double" />
+            , or <see cref="T:System.Double" />
 
             
 
-             value to a <see
-             cref="T:System.Numerics.Complex" />
+             value to a <see cref="T:System.Numerics.Complex" />
 
             
 
@@ -148,18 +131,15 @@
         </item>
         <item>
           <para
-            >By casting (in C#) or converting (in Visual Basic) a <see
-             cref="T:System.Decimal" />
+            >By casting (in C#) or converting (in Visual Basic) a <see cref="T:System.Decimal" />
 
             
 
-             or <see
-             cref="T:System.Numerics.BigInteger" />
+             or <see cref="T:System.Numerics.BigInteger" />
 
             
 
-             value to a <see
-             cref="T:System.Numerics.Complex" />
+             value to a <see cref="T:System.Numerics.Complex" />
 
             
 
@@ -168,18 +148,15 @@
         </item>
         <item>
           <para
-            >By assigning the complex number that is returned by a method or operator to a <see
-             cref="T:System.Numerics.Complex" />
+            >By assigning the complex number that is returned by a method or operator to a <see cref="T:System.Numerics.Complex" />
 
             
 
-             object. For example, <see
-             cref="M:System.Numerics.Complex.Add(System.Numerics.Complex,System.Numerics.Complex)" />
+             object. For example, <see cref="M:System.Numerics.Complex.Add(System.Numerics.Complex,System.Numerics.Complex)" />
 
             
 
-             is a static method that returns a complex number that is the sum of two complex numbers, and the <see
-             cref="M:System.Numerics.Complex.op_Addition(System.Numerics.Complex,System.Numerics.Complex)" />
+             is a static method that returns a complex number that is the sum of two complex numbers, and the <see cref="M:System.Numerics.Complex.op_Addition(System.Numerics.Complex,System.Numerics.Complex)" />
 
             
 
@@ -193,8 +170,7 @@
         <h2>Operations with Complex Numbers</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Numerics.Complex" />
+        >The <see cref="T:System.Numerics.Complex" />
 
         
 
@@ -206,8 +182,7 @@
         </item>
         <item>
           <para
-            >Operators to perform arithmetic operations on complex numbers. <see
-             cref="T:System.Numerics.Complex" />
+            >Operators to perform arithmetic operations on complex numbers. <see cref="T:System.Numerics.Complex" />
 
             
 
@@ -225,18 +200,15 @@
         <h2>Precision and Complex Numbers</h2>
       </format>
       <para
-        >The real and imaginary parts of a complex number are represented by two double-precision floating-point values. This means that <see
-         cref="T:System.Numerics.Complex" />
+        >The real and imaginary parts of a complex number are represented by two double-precision floating-point values. This means that <see cref="T:System.Numerics.Complex" />
 
         
 
-         values, like double-precision floating-point values, can lose precision as a result of numerical operations. This means that strict comparisons for equality of two <see
-         cref="T:System.Numerics.Complex" />
+         values, like double-precision floating-point values, can lose precision as a result of numerical operations. This means that strict comparisons for equality of two <see cref="T:System.Numerics.Complex" />
 
         
 
-         values may fail, even if the difference between the two values is due to a loss of precision. For more information, see <see
-         cref="T:System.Double" />
+         values may fail, even if the difference between the two values is due to a loss of precision. For more information, see <see cref="T:System.Double" />
 
         
 
@@ -245,8 +217,7 @@
       <para>For example, performing exponentiation on the logarithm of a number should return the original number. However, in some cases, the loss of precision of floating-point values can cause slight differences between the two values, as the following example illustrates.</para>
       <para>code reference: System.Numerics.Complex.Class#5</para>
       <para
-        >Similarly, the following example, which calculates the square root of a <see
-         cref="T:System.Numerics.Complex" />
+        >Similarly, the following example, which calculates the square root of a <see cref="T:System.Numerics.Complex" />
 
         
 
@@ -257,91 +228,74 @@
         <h2>Complex Numbers, Infinity, and NaN</h2>
       </format>
       <para
-        >The real and imaginary parts of a complex number are represented by <see
-         cref="T:System.Double" />
+        >The real and imaginary parts of a complex number are represented by <see cref="T:System.Double" />
 
         
 
-         values. In addition to ranging from <see
-         cref="F:System.Double.MinValue" />
+         values. In addition to ranging from <see cref="F:System.Double.MinValue" />
 
         
 
-         to <see
-         cref="F:System.Double.MaxValue" />
+         to <see cref="F:System.Double.MaxValue" />
 
         
 
-        , the real or imaginary part of a complex number can have a value of <see
-         cref="F:System.Double.PositiveInfinity" />
+        , the real or imaginary part of a complex number can have a value of <see cref="F:System.Double.PositiveInfinity" />
 
         
 
-        , <see
-         cref="F:System.Double.NegativeInfinity" />
+        , <see cref="F:System.Double.NegativeInfinity" />
 
         
 
-        , or <see
-         cref="F:System.Double.NaN" />
+        , or <see cref="F:System.Double.NaN" />
 
         
 
-        . <see
-         cref="F:System.Double.PositiveInfinity" />
+        . <see cref="F:System.Double.PositiveInfinity" />
 
         
 
-        , <see
-         cref="F:System.Double.NegativeInfinity" />
+        , <see cref="F:System.Double.NegativeInfinity" />
 
         
 
-        , and <see
-         cref="F:System.Double.NaN" />
+        , and <see cref="F:System.Double.NaN" />
 
         
 
          all propagate in any arithmetic or trigonometric operation.  </para
       >
       <para
-        >In the following example, division by <see
-         cref="F:System.Numerics.Complex.Zero" />
+        >In the following example, division by <see cref="F:System.Numerics.Complex.Zero" />
 
         
 
-         produces a complex number whose real and imaginary parts are both <see
-         cref="F:System.Double.NaN" />
+         produces a complex number whose real and imaginary parts are both <see cref="F:System.Double.NaN" />
 
         
 
-        . As a result, performing multiplication with this value also produces a complex number whose real and imaginary parts are <see
-         cref="F:System.Double.NaN" />
+        . As a result, performing multiplication with this value also produces a complex number whose real and imaginary parts are <see cref="F:System.Double.NaN" />
 
         
 
-        . Similarly, performing a multiplication that overflows the range of the <see
-         cref="T:System.Double" />
+        . Similarly, performing a multiplication that overflows the range of the <see cref="T:System.Double" />
 
         
 
-         type produces a complex number whose real part is <see
-         cref="F:System.Double.NaN" />
+         type produces a complex number whose real part is <see cref="F:System.Double.NaN" />
 
         
 
-         and whose imaginary part is <see
-         cref="F:System.Double.PositiveInfinity" />
+         and whose imaginary part is <see cref="F:System.Double.PositiveInfinity" />
 
         
 
-        . Subsequently performing division with this complex number returns a complex number whose real part is <see
-         cref="F:System.Double.NaN" />
+        . Subsequently performing division with this complex number returns a complex number whose real part is <see cref="F:System.Double.NaN" />
 
         
 
-         and whose imaginary part is <see
-         cref="F:System.Double.PositiveInfinity" />
+         and whose imaginary part is <see cref="F:System.Double.PositiveInfinity" />
 
         
 
@@ -349,23 +303,19 @@
       >
       <para>code reference: System.Numerics.Complex.Class#3</para>
       <para
-        >Mathematical operations with complex numbers that are invalid or that overflow the range of the <see
-         cref="T:System.Double" />
+        >Mathematical operations with complex numbers that are invalid or that overflow the range of the <see cref="T:System.Double" />
 
         
 
-         data type do not throw an exception. Instead, they return a <see
-         cref="F:System.Double.PositiveInfinity" />
+         data type do not throw an exception. Instead, they return a <see cref="F:System.Double.PositiveInfinity" />
 
         
 
-        , <see
-         cref="F:System.Double.NegativeInfinity" />
+        , <see cref="F:System.Double.NegativeInfinity" />
 
         
 
-        , or <see
-         cref="F:System.Double.NaN" />
+        , or <see cref="F:System.Double.NaN" />
 
         
 
@@ -374,8 +324,7 @@
       <list type="bullet">
         <item>
           <para
-            >The division of a positive number by zero returns <see
-             cref="F:System.Double.PositiveInfinity" />
+            >The division of a positive number by zero returns <see cref="F:System.Double.PositiveInfinity" />
 
             
 
@@ -384,23 +333,11 @@
         </item>
         <item>
           <para
-            >Any operation that overflows the upper bound of the <see
-             cref="T:System.Double" />
+            >Any operation that overflows the upper bound of the <see cref="T:System.Double" />
 
             
 
-             data type returns <see
-             cref="F:System.Double.PositiveInfinity" />
-
-            
-
-            .</para
-          >
-        </item>
-        <item>
-          <para
-            >The division of a negative number by zero returns <see
-             cref="F:System.Double.NegativeInfinity" />
+             data type returns <see cref="F:System.Double.PositiveInfinity" />
 
             
 
@@ -409,13 +346,7 @@
         </item>
         <item>
           <para
-            >Any operation that overflows the lower bound of the <see
-             cref="T:System.Double" />
-
-            
-
-             data type returns <see
-             cref="F:System.Double.NegativeInfinity" />
+            >The division of a negative number by zero returns <see cref="F:System.Double.NegativeInfinity" />
 
             
 
@@ -424,8 +355,11 @@
         </item>
         <item>
           <para
-            >The division of a zero by zero returns <see
-             cref="F:System.Double.NaN" />
+            >Any operation that overflows the lower bound of the <see cref="T:System.Double" />
+
+            
+
+             data type returns <see cref="F:System.Double.NegativeInfinity" />
 
             
 
@@ -434,33 +368,36 @@
         </item>
         <item>
           <para
-            >Any operation that is performed on operands whose values are <see
-             cref="F:System.Double.PositiveInfinity" />
+            >The division of a zero by zero returns <see cref="F:System.Double.NaN" />
 
             
 
-            , <see
-             cref="F:System.Double.NegativeInfinity" />
+            .</para
+          >
+        </item>
+        <item>
+          <para
+            >Any operation that is performed on operands whose values are <see cref="F:System.Double.PositiveInfinity" />
 
             
 
-            , or <see
-             cref="F:System.Double.NaN" />
+            , <see cref="F:System.Double.NegativeInfinity" />
 
             
 
-             returns <see
-             cref="F:System.Double.PositiveInfinity" />
+            , or <see cref="F:System.Double.NaN" />
 
             
 
-            , <see
-             cref="F:System.Double.NegativeInfinity" />
+             returns <see cref="F:System.Double.PositiveInfinity" />
 
             
 
-            , or <see
-             cref="F:System.Double.NaN" />
+            , <see cref="F:System.Double.NegativeInfinity" />
+
+            
+
+            , or <see cref="F:System.Double.NaN" />
 
             
 
@@ -469,33 +406,27 @@
         </item>
       </list>
       <para
-        >Note that this applies to any intermediate calculations performed by a method. For example, the multiplication of new Complex(9e308, 9e308) and new Complex(2.5, 3.5) uses the formula <math
-        >(ac - bd) + (ad + bc)i</math>
+        >Note that this applies to any intermediate calculations performed by a method. For example, the multiplication of new Complex(9e308, 9e308) and new Complex(2.5, 3.5) uses the formula <math>(ac - bd) + (ad + bc)i</math>
 
         
 
-        . The calculation of the real component that results from the multiplication evaluates the expression <math
-        >9e308 * 2.5 - 9e308 * 3.5</math>
+        . The calculation of the real component that results from the multiplication evaluates the expression <math>9e308 * 2.5 - 9e308 * 3.5</math>
 
         
 
-        . Each intermediate multiplication in this expression returns <see
-         cref="F:System.Double.PositiveInfinity" />
+        . Each intermediate multiplication in this expression returns <see cref="F:System.Double.PositiveInfinity" />
 
         
 
-        , and the attempt to subtract <see
-         cref="F:System.Double.PositiveInfinity" />
+        , and the attempt to subtract <see cref="F:System.Double.PositiveInfinity" />
 
         
 
-         from <see
-         cref="F:System.Double.PositiveInfinity" />
+         from <see cref="F:System.Double.PositiveInfinity" />
 
         
 
-         returns <see
-         cref="F:System.Double.NaN" />
+         returns <see cref="F:System.Double.NaN" />
 
         
 
@@ -505,30 +436,25 @@
         <h2>Formatting a Complex Number</h2>
       </format>
       <para
-        >By default, the string representation of a complex number takes the form (real, imaginary), where real and imaginary are the string representations of the <see
-         cref="T:System.Double" />
+        >By default, the string representation of a complex number takes the form (real, imaginary), where real and imaginary are the string representations of the <see cref="T:System.Double" />
 
         
 
-         values that form the complex number's real and imaginary components. Some overloads of the <see
-         cref="Overload:System.Numerics.Complex.ToString" />
+         values that form the complex number's real and imaginary components. Some overloads of the <see cref="Overload:System.Numerics.Complex.ToString" />
 
         
 
-         method allow customization of the string representations of these <see
-         cref="T:System.Double" />
+         method allow customization of the string representations of these <see cref="T:System.Double" />
 
         
 
-         values to reflect the formatting conventions of a particular culture or to appear in a particular format defined by a standard or custom numeric format string. (For more information, see <format
-         type="text/html">
+         values to reflect the formatting conventions of a particular culture or to appear in a particular format defined by a standard or custom numeric format string. (For more information, see <format type="text/html">
           <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
         </format>
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
         </format>
 
@@ -537,51 +463,42 @@
         .)</para
       >
       <para
-        >One of the more common ways of expressing the string representation of a complex number takes the form <math
-        >a + bi</math>
+        >One of the more common ways of expressing the string representation of a complex number takes the form <math>a + bi</math>
 
         
 
-        , where <math
-        >a</math>
+        , where <math>a</math>
 
         
 
-         is the complex number's real component, and <math
-        >b</math>
+         is the complex number's real component, and <math>b</math>
 
         
 
-         is the complex number's imaginary component. In electrical engineering, a complex number is most commonly expressed as <math
-        >a + bj</math>
+         is the complex number's imaginary component. In electrical engineering, a complex number is most commonly expressed as <math>a + bj</math>
 
         
 
-        . You can return the string representation of a complex number in either of these two forms. To do this, define a custom format provider by implementing the <see
-         cref="T:System.ICustomFormatter" />
+        . You can return the string representation of a complex number in either of these two forms. To do this, define a custom format provider by implementing the <see cref="T:System.ICustomFormatter" />
 
         
 
-         and <see
-         cref="T:System.IFormatProvider" />
+         and <see cref="T:System.IFormatProvider" />
 
         
 
-         interfaces, and then call the <see
-         cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />
+         interfaces, and then call the <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />
 
         
 
          method. </para
       >
       <para
-        >The following example defines a ComplexFormatter class that represents a complex number as a string in the form of either <math
-        >a + bi</math>
+        >The following example defines a ComplexFormatter class that represents a complex number as a string in the form of either <math>a + bi</math>
 
         
 
-         or <math
-        >a + bj</math>
+         or <math>a + bj</math>
 
         
 
@@ -615,18 +532,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="real" />
+            >The <paramref name="real" />
 
             
 
-             or <paramref
-             name="imaginary" />
+             or <paramref name="imaginary" />
 
             
 
-             arguments may lose precision if they are data types that require an explicit cast to <see
-             cref="T:System.Double" />
+             arguments may lose precision if they are data types that require an explicit cast to <see cref="T:System.Double" />
 
             
 
@@ -636,8 +550,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Numerics.Complex" />
+            >Initializes a new instance of the <see cref="T:System.Numerics.Complex" />
 
             
 
@@ -645,14 +558,22 @@
           >
         </summary>
         <param name="real">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The real part of the complex number.</param
         >
         <param name="imaginary">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -683,13 +604,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The absolute value of a complex number is equivalent to its <see
-             cref="P:System.Numerics.Complex.Magnitude" />
+            >The absolute value of a complex number is equivalent to its <see cref="P:System.Numerics.Complex.Magnitude" />
 
             
 
-             property. The absolute value of a real number <math
-            >a + bi</math>
+             property. The absolute value of a real number <math>a + bi</math>
 
             
 
@@ -698,8 +617,7 @@
           <list type="bullet">
             <item>
               <para
-                >If <math
-                >b = 0</math>
+                >If <math>b = 0</math>
 
                 
 
@@ -708,13 +626,11 @@
             </item>
             <item>
               <para
-                >If <math
-                >a &gt; b</math>
+                >If <math>a &gt; b</math>
 
                 
 
-                , the result is <math
-                >a *</math>
+                , the result is <math>a *</math>
                 <see cref="M:System.Math.Sqrt(System.Double)" />
                 <math>(1 + b</math>
                 <superscript>2</superscript>
@@ -729,13 +645,11 @@
             </item>
             <item>
               <para
-                >If <math
-                >b &gt; a</math>
+                >If <math>b &gt; a</math>
 
                 
 
-                , the result is <math
-                >b * </math>
+                , the result is <math>b * </math>
                 <see cref="M:System.Math.Sqrt(System.Double)" />
                 <math>(1 + a</math>
                 <superscript>2</superscript>
@@ -750,43 +664,35 @@
             </item>
           </list>
           <para
-            >If the calculation of the absolute value results in an overflow, the method returns either <see
-             cref="F:System.Double.PositiveInfinity" />
+            >If the calculation of the absolute value results in an overflow, the method returns either <see cref="F:System.Double.PositiveInfinity" />
 
             
 
-             or <see
-             cref="F:System.Double.NegativeInfinity" />
+             or <see cref="F:System.Double.NegativeInfinity" />
 
             
 
-            . If either the <see
-             cref="P:System.Numerics.Complex.Real" />
+            . If either the <see cref="P:System.Numerics.Complex.Real" />
 
             
 
-             or <see
-             cref="P:System.Numerics.Complex.Imaginary" />
+             or <see cref="P:System.Numerics.Complex.Imaginary" />
 
             
 
-             property is <see
-             cref="F:System.Double.NaN" />
+             property is <see cref="F:System.Double.NaN" />
 
             
 
-             and the other property is neither <see
-             cref="F:System.Double.PositiveInfinity" />
+             and the other property is neither <see cref="F:System.Double.PositiveInfinity" />
 
             
 
-             nor <see
-             cref="F:System.Double.NegativeInfinity" />
+             nor <see cref="F:System.Double.NegativeInfinity" />
 
             
 
-            , the method returns <see
-             cref="F:System.Double.NaN" />
+            , the method returns <see cref="F:System.Double.NaN" />
 
             
 
@@ -800,8 +706,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The absolute value of <paramref
-             name="value" />
+            >The absolute value of <paramref name="value" />
 
             
 
@@ -809,7 +714,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -840,21 +749,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Acos(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Acos(System.Numerics.Complex)" />
 
             
 
-             method for complex numbers corresponds to the <see
-             cref="M:System.Math.Acos(System.Double)" />
+             method for complex numbers corresponds to the <see cref="M:System.Math.Acos(System.Double)" />
 
             
 
              method for real numbers.</para
           >
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Acos(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Acos(System.Numerics.Complex)" />
 
             
 
@@ -887,8 +793,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The angle, measured in radians, which is the arc cosine of <paramref
-             name="value" />
+            >The angle, measured in radians, which is the arc cosine of <paramref name="value" />
 
             
 
@@ -896,7 +801,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -928,13 +837,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The addition of a complex number, <math
-            >a + bi</math>
+            >The addition of a complex number, <math>a + bi</math>
 
             
 
-            , and a second complex number, <math
-            >c + di</math>
+            , and a second complex number, <math>c + di</math>
 
             
 
@@ -944,21 +851,18 @@
             <math>(a + c) + (b + d)i. </math>
           </para>
           <para
-            >If the method call results in an overflow in either the real or imaginary component, the value of the component is either <see
-             cref="F:System.Double.PositiveInfinity" />
+            >If the method call results in an overflow in either the real or imaginary component, the value of the component is either <see cref="F:System.Double.PositiveInfinity" />
 
             
 
-             or <see
-             cref="F:System.Double.NegativeInfinity" />
+             or <see cref="F:System.Double.NegativeInfinity" />
 
             
 
             .</para
           >
           <para
-            >Languages that do not support custom operators can use the <see
-             cref="M:System.Numerics.Complex.Add(System.Numerics.Complex,System.Numerics.Complex)" />
+            >Languages that do not support custom operators can use the <see cref="M:System.Numerics.Complex.Add(System.Numerics.Complex,System.Numerics.Complex)" />
 
             
 
@@ -972,13 +876,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The sum of <paramref
-             name="left" />
+            >The sum of <paramref name="left" />
 
             
 
-             and <paramref
-             name="right" />
+             and <paramref name="right" />
 
             
 
@@ -986,14 +888,22 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first complex number to add.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1024,21 +934,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Asin(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Asin(System.Numerics.Complex)" />
 
             
 
-             method for complex numbers corresponds to the <see
-             cref="M:System.Math.Asin(System.Double)" />
+             method for complex numbers corresponds to the <see cref="M:System.Math.Asin(System.Double)" />
 
             
 
              method for real numbers.</para
           >
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Asin(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Asin(System.Numerics.Complex)" />
 
             
 
@@ -1065,8 +972,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The angle which is the arc sine of <paramref
-             name="value" />
+            >The angle which is the arc sine of <paramref name="value" />
 
             
 
@@ -1074,7 +980,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1105,21 +1015,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Atan(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Atan(System.Numerics.Complex)" />
 
             
 
-             method for complex numbers corresponds to the <see
-             cref="M:System.Math.Atan(System.Double)" />
+             method for complex numbers corresponds to the <see cref="M:System.Math.Atan(System.Double)" />
 
             
 
              method for real numbers.</para
           >
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Atan(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Atan(System.Numerics.Complex)" />
 
             
 
@@ -1147,8 +1054,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The angle that is the arc tangent of <paramref
-             name="value" />
+            >The angle that is the arc tangent of <paramref name="value" />
 
             
 
@@ -1156,7 +1062,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1187,13 +1097,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The conjugate of a complex number inverts the sign of the imaginary component; that is, it applies unary negation to the imaginary component. If <math
-            >a + bi</math>
+            >The conjugate of a complex number inverts the sign of the imaginary component; that is, it applies unary negation to the imaginary component. If <math>a + bi</math>
 
             
 
-             is a complex number, its conjugate is <math
-            >a - bi</math>
+             is a complex number, its conjugate is <math>a - bi</math>
 
             
 
@@ -1206,17 +1114,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The conjugate of <paramref
-             name="value" />
+          <para>The conjugate of <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1247,26 +1156,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Cos(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Cos(System.Numerics.Complex)" />
 
             
 
-             method for complex numbers corresponds to the <see
-             cref="M:System.Math.Cos(System.Double)" />
+             method for complex numbers corresponds to the <see cref="M:System.Math.Cos(System.Double)" />
 
             
 
              method for real numbers.</para
           >
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Cos(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Cos(System.Numerics.Complex)" />
 
             
 
-             method uses the following formula to calculate the cosine of the complex number <math
-            >a + bi</math>
+             method uses the following formula to calculate the cosine of the complex number <math>a + bi</math>
 
             
 
@@ -1290,17 +1195,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The cosine of <paramref
-             name="value" />
+          <para>The cosine of <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1331,49 +1237,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Cosh(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Cosh(System.Numerics.Complex)" />
 
             
 
-             method for complex numbers corresponds to the <see
-             cref="M:System.Math.Cosh(System.Double)" />
+             method for complex numbers corresponds to the <see cref="M:System.Math.Cosh(System.Double)" />
 
             
 
              method for real numbers.</para
           >
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Cosh(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Cosh(System.Numerics.Complex)" />
 
             
 
-             method uses the following formula to calculate the hyperbolic cosine of the complex number <math
-            >a + bi</math>
+             method uses the following formula to calculate the hyperbolic cosine of the complex number <math>a + bi</math>
 
             
 
             :</para
           >
           <para
-            >(<see
-             cref="M:System.Math.Cosh(System.Double)" />
+            >(<see cref="M:System.Math.Cosh(System.Double)" />
 
             
 
-            (a) * <see
-             cref="M:System.Math.Cos(System.Double)" />
+            (a) * <see cref="M:System.Math.Cos(System.Double)" />
 
             
 
-            (b), <see
-             cref="M:System.Math.Sinh(System.Double)" />
+            (b), <see cref="M:System.Math.Sinh(System.Double)" />
 
             
 
-            (a) * <see
-             cref="M:System.Math.Sin(System.Double)" />
+            (a) * <see cref="M:System.Math.Sin(System.Double)" />
 
             
 
@@ -1387,8 +1285,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hyperbolic cosine of <paramref
-             name="value" />
+            >The hyperbolic cosine of <paramref name="value" />
 
             
 
@@ -1396,7 +1293,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1428,13 +1329,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The division of a complex number, <math
-            >a + bi</math>
+            >The division of a complex number, <math>a + bi</math>
 
             
 
-            , by a second complex number, number, <math
-            >c + di</math>
+            , by a second complex number, number, <math>c + di</math>
 
             
 
@@ -1452,21 +1351,18 @@
             <math>)i</math>
           </para>
           <para
-            >If the calculation of the quotient results in an overflow in either the real or imaginary component, the value of that component is either <see
-             cref="F:System.Double.PositiveInfinity" />
+            >If the calculation of the quotient results in an overflow in either the real or imaginary component, the value of that component is either <see cref="F:System.Double.PositiveInfinity" />
 
             
 
-             or <see
-             cref="F:System.Double.NegativeInfinity" />
+             or <see cref="F:System.Double.NegativeInfinity" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Divide(System.Numerics.Complex,System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Divide(System.Numerics.Complex,System.Numerics.Complex)" />
 
             
 
@@ -1482,14 +1378,22 @@
           <para>The quotient of the division.</para>
         </returns>
         <param name="dividend">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The complex number to be divided.</param
         >
         <param name="divisor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1517,31 +1421,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Equals(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Equals(System.Numerics.Complex)" />
 
             
 
-             method provides the <see
-             cref="T:System.IEquatable`1" />
+             method provides the <see cref="T:System.IEquatable`1" />
 
             
 
-             implementation for the <see
-             cref="T:System.Numerics.Complex" />
+             implementation for the <see cref="T:System.Numerics.Complex" />
 
             
 
-             structure. It performs slightly better than <see
-             cref="M:System.Numerics.Complex.Equals(System.Object)" />
+             structure. It performs slightly better than <see cref="M:System.Numerics.Complex.Equals(System.Object)" />
 
             
 
              method because it does not have to convert its parameter to a complex number.</para
           >
           <para
-            >Two complex numbers are equal if their real parts are equal and their imaginary parts are equal. The <see
-             cref="M:System.Numerics.Complex.Equals(System.Numerics.Complex)" />
+            >Two complex numbers are equal if their real parts are equal and their imaginary parts are equal. The <see cref="M:System.Numerics.Complex.Equals(System.Numerics.Complex)" />
 
             
 
@@ -1556,8 +1455,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if this complex number and <paramref
-             name="value" />
+            >true if this complex number and <paramref name="value" />
 
             
 
@@ -1565,7 +1463,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1593,8 +1495,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Two complex numbers are equal if their real parts are equal and their imaginary parts are equal. The <see
-             cref="M:System.Numerics.Complex.Equals(System.Object)" />
+            >Two complex numbers are equal if their real parts are equal and their imaginary parts are equal. The <see cref="M:System.Numerics.Complex.Equals(System.Object)" />
 
             
 
@@ -1602,33 +1503,27 @@
           >
           <para>code reference: System.Numerics.Complex.Equals#2</para>
           <para
-            >If the <paramref
-             name="obj" />
+            >If the <paramref name="obj" />
 
             
 
-             parameter is not a <see
-             cref="T:System.Numerics.Complex" />
+             parameter is not a <see cref="T:System.Numerics.Complex" />
 
             
 
-             object, but it is a data type for which an implicit conversion is defined, the <see
-             cref="M:System.Numerics.Complex.Equals(System.Object)" />
+             object, but it is a data type for which an implicit conversion is defined, the <see cref="M:System.Numerics.Complex.Equals(System.Object)" />
 
             
 
-             method converts <paramref
-             name="obj" />
+             method converts <paramref name="obj" />
 
             
 
-             to a <see
-             cref="T:System.Numerics.Complex" />
+             to a <see cref="T:System.Numerics.Complex" />
 
             
 
-             object whose real part is equal to the value of <paramref
-             name="obj" />
+             object whose real part is equal to the value of <paramref name="obj" />
 
             
 
@@ -1643,23 +1538,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="obj" />
+            >true if the <paramref name="obj" />
 
             
 
-             parameter is a <see
-             cref="T:System.Numerics.Complex" />
+             parameter is a <see cref="T:System.Numerics.Complex" />
 
             
 
-             object or a type capable of implicit conversion to a <see
-             cref="T:System.Numerics.Complex" />
+             object or a type capable of implicit conversion to a <see cref="T:System.Numerics.Complex" />
 
             
 
-             object, and its value is equal to the current <see
-             cref="T:System.Numerics.Complex" />
+             object, and its value is equal to the current <see cref="T:System.Numerics.Complex" />
 
             
 
@@ -1667,7 +1558,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1698,31 +1593,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="Overload:System.Numerics.Complex.Pow" />
+            >Use the <see cref="Overload:System.Numerics.Complex.Pow" />
 
             
 
              method to calculate the powers of other bases.</para
           >
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Exp(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Exp(System.Numerics.Complex)" />
 
             
 
-             method for complex numbers corresponds to the <see
-             cref="M:System.Math.Exp(System.Double)" />
+             method for complex numbers corresponds to the <see cref="M:System.Math.Exp(System.Double)" />
 
             
 
-             method for real numbers. <see
-             cref="M:System.Numerics.Complex.Exp(System.Numerics.Complex)" />
+             method for real numbers. <see cref="M:System.Numerics.Complex.Exp(System.Numerics.Complex)" />
 
             
 
-             is the inverse of <see
-             cref="Overload:System.Numerics.Complex.Log" />
+             is the inverse of <see cref="Overload:System.Numerics.Complex.Log" />
 
             
 
@@ -1736,8 +1626,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number e raised to the power <paramref
-             name="value" />
+            >The number e raised to the power <paramref name="value" />
 
             
 
@@ -1745,7 +1634,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1777,59 +1670,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.FromPolarCoordinates(System.Double,System.Double)" />
+            >The <see cref="M:System.Numerics.Complex.FromPolarCoordinates(System.Double,System.Double)" />
 
             
 
              method instantiates a complex number based on its polar coordinates. </para
           >
           <para
-            >Because there are multiple representations of a point on a complex plane, the return value of the <see
-             cref="M:System.Numerics.Complex.FromPolarCoordinates(System.Double,System.Double)" />
+            >Because there are multiple representations of a point on a complex plane, the return value of the <see cref="M:System.Numerics.Complex.FromPolarCoordinates(System.Double,System.Double)" />
 
             
 
-             method is normalized. The magnitude is normalized to a positive number, and the phase is normalized to a value in the range of -<see
-             cref="F:System.Math.PI" />
+             method is normalized. The magnitude is normalized to a positive number, and the phase is normalized to a value in the range of -<see cref="F:System.Math.PI" />
 
             
 
-             to <see
-             cref="F:System.Math.PI" />
+             to <see cref="F:System.Math.PI" />
 
             
 
-            . As a result, the values of the <see
-             cref="P:System.Numerics.Complex.Phase" />
+            . As a result, the values of the <see cref="P:System.Numerics.Complex.Phase" />
 
             
 
-             and <see
-             cref="P:System.Numerics.Complex.Magnitude" />
+             and <see cref="P:System.Numerics.Complex.Magnitude" />
 
             
 
-             properties of the resulting complex number may not equal the original values of the <paramref
-             name="magnitude" />
+             properties of the resulting complex number may not equal the original values of the <paramref name="magnitude" />
 
             
 
-             and <paramref
-             name="phase" />
+             and <paramref name="phase" />
 
             
 
              parameters.</para
           >
           <para
-            >To convert a value from degrees to radians for the <paramref
-             name="phase" />
+            >To convert a value from degrees to radians for the <paramref name="phase" />
 
             
 
-             parameter, multiply it by <see
-             cref="F:System.Math.PI" />
+             parameter, multiply it by <see cref="F:System.Math.PI" />
 
             
 
@@ -1845,14 +1728,22 @@
           <para>A complex number.</para>
         </returns>
         <param name="magnitude">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The magnitude, which is the distance from the origin (the intersection of the x-axis and the y-axis) to the number.</param
         >
         <param name="phase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1879,8 +1770,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the hash code for the current <see
-             cref="T:System.Numerics.Complex" />
+            >Returns the hash code for the current <see cref="T:System.Numerics.Complex" />
 
             
 
@@ -1908,18 +1798,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Given a complex number <math
-            >a + bi</math>
+            >Given a complex number <math>a + bi</math>
 
             
 
-            , the <see
-             cref="P:System.Numerics.Complex.Imaginary" />
+            , the <see cref="P:System.Numerics.Complex.Imaginary" />
 
             
 
-             property returns the value of <math
-            >b</math>
+             property returns the value of <math>b</math>
 
             
 
@@ -1929,8 +1816,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the imaginary component of the current <see
-             cref="T:System.Numerics.Complex" />
+            >Gets the imaginary component of the current <see cref="T:System.Numerics.Complex" />
 
             
 
@@ -1960,8 +1846,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new <see
-             cref="T:System.Numerics.Complex" />
+            >Returns a new <see cref="T:System.Numerics.Complex" />
 
             
 
@@ -1993,13 +1878,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Log(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Log(System.Numerics.Complex)" />
 
             
 
-             method for complex numbers corresponds to the <see
-             cref="M:System.Math.Log(System.Double)" />
+             method for complex numbers corresponds to the <see cref="M:System.Math.Log(System.Double)" />
 
             
 
@@ -2013,8 +1896,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The natural (base e) logarithm of <paramref
-             name="value" />
+            >The natural (base e) logarithm of <paramref name="value" />
 
             
 
@@ -2022,7 +1904,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2054,13 +1940,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Log(System.Numerics.Complex,System.Double)" />
+            >The <see cref="M:System.Numerics.Complex.Log(System.Numerics.Complex,System.Double)" />
 
             
 
-             method for complex numbers corresponds to the <see
-             cref="M:System.Math.Log(System.Double,System.Double)" />
+             method for complex numbers corresponds to the <see cref="M:System.Math.Log(System.Double,System.Double)" />
 
             
 
@@ -2074,13 +1958,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The logarithm of <paramref
-             name="value" />
+            >The logarithm of <paramref name="value" />
 
             
 
-             in base <paramref
-             name="baseValue" />
+             in base <paramref name="baseValue" />
 
             
 
@@ -2088,14 +1970,22 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A complex number.</param
         >
         <param name="baseValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2126,13 +2016,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Log10(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Log10(System.Numerics.Complex)" />
 
             
 
-             method for complex numbers corresponds to the <see
-             cref="M:System.Math.Log10(System.Double)" />
+             method for complex numbers corresponds to the <see cref="M:System.Math.Log10(System.Double)" />
 
             
 
@@ -2146,8 +2034,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The base-10 logarithm of <paramref
-             name="value" />
+            >The base-10 logarithm of <paramref name="value" />
 
             
 
@@ -2155,7 +2042,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2178,8 +2069,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Numerics.Complex.Magnitude" />
+            >The <see cref="P:System.Numerics.Complex.Magnitude" />
 
             
 
@@ -2191,34 +2081,29 @@
             <math>(a2 + b2) </math>
           </para>
           <para
-            >If the calculation of the absolute value results in an overflow, this property returns either <see
-             cref="F:System.Double.PositiveInfinity" />
+            >If the calculation of the absolute value results in an overflow, this property returns either <see cref="F:System.Double.PositiveInfinity" />
 
             
 
-             or <see
-             cref="F:System.Double.NegativeInfinity" />
+             or <see cref="F:System.Double.NegativeInfinity" />
 
             
 
             . </para
           >
           <para
-            >The <see
-             cref="P:System.Numerics.Complex.Magnitude" />
+            >The <see cref="P:System.Numerics.Complex.Magnitude" />
 
             
 
-             and the <see
-             cref="P:System.Numerics.Complex.Phase" />
+             and the <see cref="P:System.Numerics.Complex.Phase" />
 
             
 
              properties define the position of a point that represents a complex number in the polar coordinate system.</para
           >
           <para
-            >You can instantiate a complex number based on its polar coordinates instead of its Cartesian coordinates by calling the <see
-             cref="M:System.Numerics.Complex.FromPolarCoordinates(System.Double,System.Double)" />
+            >You can instantiate a complex number based on its polar coordinates instead of its Cartesian coordinates by calling the <see cref="M:System.Numerics.Complex.FromPolarCoordinates(System.Double,System.Double)" />
 
             
 
@@ -2255,13 +2140,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The multiplication of a complex number, <math
-            >a + bi</math>
+            >The multiplication of a complex number, <math>a + bi</math>
 
             
 
-            , and a second complex number, <math
-            >c + di</math>
+            , and a second complex number, <math>c + di</math>
 
             
 
@@ -2271,21 +2154,18 @@
             <math>(ac - bd) + (ad + bc)i</math>
           </para>
           <para
-            >If the multiplication results in an overflow in either the real or imaginary component, the value of that component is either <see
-             cref="F:System.Double.PositiveInfinity" />
+            >If the multiplication results in an overflow in either the real or imaginary component, the value of that component is either <see cref="F:System.Double.PositiveInfinity" />
 
             
 
-             or <see
-             cref="F:System.Double.NegativeInfinity" />
+             or <see cref="F:System.Double.NegativeInfinity" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Multiply(System.Numerics.Complex,System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Multiply(System.Numerics.Complex,System.Numerics.Complex)" />
 
             
 
@@ -2299,13 +2179,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The product of the <paramref
-             name="left" />
+            >The product of the <paramref name="left" />
 
             
 
-             and <paramref
-             name="right" />
+             and <paramref name="right" />
 
             
 
@@ -2313,14 +2191,22 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first complex number to multiply.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2351,21 +2237,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The additive inverse of a complex number is a complex number that produces a value of <see
-             cref="F:System.Numerics.Complex.Zero" />
+            >The additive inverse of a complex number is a complex number that produces a value of <see cref="F:System.Numerics.Complex.Zero" />
 
             
 
              when it is added to the original complex number. This method returns a complex number in which the real and imaginary components of the original complex number are multiplied by -1.</para
           >
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Negate(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Negate(System.Numerics.Complex)" />
 
             
 
-             method is implemented for languages that do not support custom operators. Its behavior is identical to negation using the unary negation operator, <see
-             cref="M:System.Numerics.Complex.op_UnaryNegation(System.Numerics.Complex)" />
+             method is implemented for languages that do not support custom operators. Its behavior is identical to negation using the unary negation operator, <see cref="M:System.Numerics.Complex.op_UnaryNegation(System.Numerics.Complex)" />
 
             
 
@@ -2379,18 +2262,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of the <see
-             cref="P:System.Numerics.Complex.Real" />
+            >The result of the <see cref="P:System.Numerics.Complex.Real" />
 
             
 
-             and <see
-             cref="P:System.Numerics.Complex.Imaginary" />
+             and <see cref="P:System.Numerics.Complex.Imaginary" />
 
             
 
-             components of the <paramref
-             name="value" />
+             components of the <paramref name="value" />
 
             
 
@@ -2398,7 +2278,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2424,8 +2308,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new <see
-             cref="T:System.Numerics.Complex" />
+            >Returns a new <see cref="T:System.Numerics.Complex" />
 
             
 
@@ -2458,8 +2341,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.op_Addition(System.Numerics.Complex,System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.op_Addition(System.Numerics.Complex,System.Numerics.Complex)" />
 
             
 
@@ -2467,13 +2349,11 @@
           >
           <para>code reference: System.Numerics.Complex.Add#3</para>
           <para
-            >The addition of a complex number, <math
-            >a + bi</math>
+            >The addition of a complex number, <math>a + bi</math>
 
             
 
-            , and a second complex number, <math
-            >c + di</math>
+            , and a second complex number, <math>c + di</math>
 
             
 
@@ -2483,21 +2363,18 @@
             <math>(a + c) + (b + d)i</math>
           </para>
           <para
-            >If the method call results in an overflow in either the real or imaginary component, the value of that component is either <see
-             cref="F:System.Double.PositiveInfinity" />
+            >If the method call results in an overflow in either the real or imaginary component, the value of that component is either <see cref="F:System.Double.PositiveInfinity" />
 
             
 
-             or <see
-             cref="F:System.Double.NegativeInfinity" />
+             or <see cref="F:System.Double.NegativeInfinity" />
 
             
 
             .</para
           >
           <para
-            >Languages that do not support custom operators can call the <see
-             cref="M:System.Numerics.Complex.Add(System.Numerics.Complex,System.Numerics.Complex)" />
+            >Languages that do not support custom operators can call the <see cref="M:System.Numerics.Complex.Add(System.Numerics.Complex,System.Numerics.Complex)" />
 
             
 
@@ -2511,13 +2388,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The sum of <paramref
-             name="left" />
+            >The sum of <paramref name="left" />
 
             
 
-             and <paramref
-             name="right" />
+             and <paramref name="right" />
 
             
 
@@ -2525,14 +2400,22 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first value to add.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2564,8 +2447,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.op_Division(System.Numerics.Complex,System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.op_Division(System.Numerics.Complex,System.Numerics.Complex)" />
 
             
 
@@ -2573,13 +2455,11 @@
           >
           <para>code reference: System.Numerics.Complex.Divide#2</para>
           <para
-            >The division of a complex number, <math
-            >a + bi</math>
+            >The division of a complex number, <math>a + bi</math>
 
             
 
-            , and a second complex number, <math
-            >c + di</math>
+            , and a second complex number, <math>c + di</math>
 
             
 
@@ -2597,21 +2477,18 @@
             <math>)i</math>
           </para>
           <para
-            >If the division results in an overflow in either the real or imaginary component, the value of that component is either <see
-             cref="F:System.Double.PositiveInfinity" />
+            >If the division results in an overflow in either the real or imaginary component, the value of that component is either <see cref="F:System.Double.PositiveInfinity" />
 
             
 
-             or <see
-             cref="F:System.Double.NegativeInfinity" />
+             or <see cref="F:System.Double.NegativeInfinity" />
 
             
 
             .</para
           >
           <para
-            >Languages that do not support custom operators and operator overloading can call the <see
-             cref="M:System.Numerics.Complex.Divide(System.Numerics.Complex,System.Numerics.Complex)" />
+            >Languages that do not support custom operators and operator overloading can call the <see cref="M:System.Numerics.Complex.Divide(System.Numerics.Complex,System.Numerics.Complex)" />
 
             
 
@@ -2625,13 +2502,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of dividing <paramref
-             name="left" />
+            >The result of dividing <paramref name="left" />
 
             
 
-             by <paramref
-             name="right" />
+             by <paramref name="right" />
 
             
 
@@ -2639,14 +2514,22 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value to be divided.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2678,13 +2561,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.op_Equality(System.Numerics.Complex,System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.op_Equality(System.Numerics.Complex,System.Numerics.Complex)" />
 
             
 
-             method defines the operation of the equality operator for <see
-             cref="T:System.Numerics.Complex" />
+             method defines the operation of the equality operator for <see cref="T:System.Numerics.Complex" />
 
             
 
@@ -2692,16 +2573,14 @@
           >
           <para>code reference: System.Numerics.Complex.Equals#9</para>
           <para
-            >Languages that do not support custom operators can call the <see
-             cref="M:System.Numerics.Complex.Equals(System.Numerics.Complex)" />
+            >Languages that do not support custom operators can call the <see cref="M:System.Numerics.Complex.Equals(System.Numerics.Complex)" />
 
             
 
              method instead.</para
           >
           <para
-            >Two complex numbers are equal if their real parts are equal and their imaginary parts are equal. The <see
-             cref="M:System.Numerics.Complex.op_Equality(System.Numerics.Complex,System.Numerics.Complex)" />
+            >Two complex numbers are equal if their real parts are equal and their imaginary parts are equal. The <see cref="M:System.Numerics.Complex.op_Equality(System.Numerics.Complex,System.Numerics.Complex)" />
 
             
 
@@ -2709,8 +2588,7 @@
           >
           <para>code reference: System.Numerics.Complex.Equals#3</para>
           <para
-            >Note that, because of differences in precision, two complex numbers that are apparently equivalent can be considered unequal. For more information and a possible workaround, see the <see
-             cref="M:System.Numerics.Complex.Equals(System.Numerics.Complex)" />
+            >Note that, because of differences in precision, two complex numbers that are apparently equivalent can be considered unequal. For more information and a possible workaround, see the <see cref="M:System.Numerics.Complex.Equals(System.Numerics.Complex)" />
 
             
 
@@ -2724,13 +2602,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="left" />
+            >true if the <paramref name="left" />
 
             
 
-             and <paramref
-             name="right" />
+             and <paramref name="right" />
 
             
 
@@ -2738,14 +2614,22 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first complex number to compare.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3109,8 +2993,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.op_Equality(System.Numerics.Complex,System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.op_Equality(System.Numerics.Complex,System.Numerics.Complex)" />
 
             
 
@@ -3118,16 +3001,14 @@
           >
           <para>code reference: System.Numerics.Complex.Inequality#1</para>
           <para
-            >Languages that do not support custom operators can test for inequality by calling the <see
-             cref="M:System.Numerics.Complex.Equals(System.Numerics.Complex)" />
+            >Languages that do not support custom operators can test for inequality by calling the <see cref="M:System.Numerics.Complex.Equals(System.Numerics.Complex)" />
 
             
 
              method and reversing its value.</para
           >
           <para
-            >Note that, because of differences in precision, two complex numbers that are apparently equivalent can be considered unequal. One possible workaround is to implement a comparison method that returns true only if the difference between the two real and imaginary parts of the complex numbers exceeds a certain threshold (such as .01% of the value of the real or imaginary component of one of the complex numbers). For more information, see the <see
-             cref="M:System.Numerics.Complex.Equals(System.Numerics.Complex)" />
+            >Note that, because of differences in precision, two complex numbers that are apparently equivalent can be considered unequal. One possible workaround is to implement a comparison method that returns true only if the difference between the two real and imaginary parts of the complex numbers exceeds a certain threshold (such as .01% of the value of the real or imaginary component of one of the complex numbers). For more information, see the <see cref="M:System.Numerics.Complex.Equals(System.Numerics.Complex)" />
 
             
 
@@ -3141,13 +3022,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="left" />
+            >true if <paramref name="left" />
 
             
 
-             and <paramref
-             name="right" />
+             and <paramref name="right" />
 
             
 
@@ -3155,14 +3034,22 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first value to compare.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3194,8 +3081,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.op_Multiply(System.Numerics.Complex,System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.op_Multiply(System.Numerics.Complex,System.Numerics.Complex)" />
 
             
 
@@ -3203,13 +3089,11 @@
           >
           <para>code reference: System.Numerics.Complex.Multiply#2</para>
           <para
-            >The multiplication of a complex number, <math
-            >a + bi</math>
+            >The multiplication of a complex number, <math>a + bi</math>
 
             
 
-            , and a second complex number, <math
-            >c + di</math>
+            , and a second complex number, <math>c + di</math>
 
             
 
@@ -3219,21 +3103,18 @@
             <math>(ac - bd) + (ad + bc)i</math>
           </para>
           <para
-            >If the multiplication results in an overflow in either the real or imaginary component, the value of that component is either <see
-             cref="F:System.Double.PositiveInfinity" />
+            >If the multiplication results in an overflow in either the real or imaginary component, the value of that component is either <see cref="F:System.Double.PositiveInfinity" />
 
             
 
-             or <see
-             cref="F:System.Double.NegativeInfinity" />
+             or <see cref="F:System.Double.NegativeInfinity" />
 
             
 
             .</para
           >
           <para
-            >Languages that do not support custom operators can call the <see
-             cref="M:System.Numerics.Complex.Multiply(System.Numerics.Complex,System.Numerics.Complex)" />
+            >Languages that do not support custom operators can call the <see cref="M:System.Numerics.Complex.Multiply(System.Numerics.Complex,System.Numerics.Complex)" />
 
             
 
@@ -3247,13 +3128,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The product of <paramref
-             name="left" />
+            >The product of <paramref name="left" />
 
             
 
-             and <paramref
-             name="right" />
+             and <paramref name="right" />
 
             
 
@@ -3261,14 +3140,22 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first value to multiply.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3300,8 +3187,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.op_Subtraction(System.Numerics.Complex,System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.op_Subtraction(System.Numerics.Complex,System.Numerics.Complex)" />
 
             
 
@@ -3309,26 +3195,22 @@
           >
           <para>code reference: System.Numerics.Complex.Subtract#2</para>
           <para
-            >If the method call results in an overflow in either the real or imaginary component, the value of that component is either <see
-             cref="F:System.Double.PositiveInfinity" />
+            >If the method call results in an overflow in either the real or imaginary component, the value of that component is either <see cref="F:System.Double.PositiveInfinity" />
 
             
 
-             or <see
-             cref="F:System.Double.NegativeInfinity" />
+             or <see cref="F:System.Double.NegativeInfinity" />
 
             
 
             .</para
           >
           <para
-            >The subtraction of a complex number, <math
-            >c + di</math>
+            >The subtraction of a complex number, <math>c + di</math>
 
             
 
-            , from another complex number, <math
-            >a + bi</math>
+            , from another complex number, <math>a + bi</math>
 
             
 
@@ -3338,8 +3220,7 @@
             <math>(a - c) + (b - d)i</math>
           </para>
           <para
-            >Languages that do not support custom operators can call the <see
-             cref="M:System.Numerics.Complex.Subtract(System.Numerics.Complex,System.Numerics.Complex)" />
+            >Languages that do not support custom operators can call the <see cref="M:System.Numerics.Complex.Subtract(System.Numerics.Complex,System.Numerics.Complex)" />
 
             
 
@@ -3353,13 +3234,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of subtracting <paramref
-             name="right" />
+            >The result of subtracting <paramref name="right" />
 
             
 
-             from <paramref
-             name="left" />
+             from <paramref name="left" />
 
             
 
@@ -3367,14 +3246,22 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value to subtract from (the minuend).</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3405,8 +3292,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.op_UnaryNegation(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.op_UnaryNegation(System.Numerics.Complex)" />
 
             
 
@@ -3414,13 +3300,11 @@
           >
           <para>code reference: System.Numerics.Complex.Negate#2</para>
           <para
-            >The resulting complex number produces a value of <see
-             cref="F:System.Numerics.Complex.Zero" />
+            >The resulting complex number produces a value of <see cref="F:System.Numerics.Complex.Zero" />
 
             
 
-             0 (zero) when it is added to the original complex number. Languages that do not support custom operators can call the <see
-             cref="M:System.Numerics.Complex.Negate(System.Numerics.Complex)" />
+             0 (zero) when it is added to the original complex number. Languages that do not support custom operators can call the <see cref="M:System.Numerics.Complex.Negate(System.Numerics.Complex)" />
 
             
 
@@ -3434,18 +3318,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of the <see
-             cref="P:System.Numerics.Complex.Real" />
+            >The result of the <see cref="P:System.Numerics.Complex.Real" />
 
             
 
-             and <see
-             cref="P:System.Numerics.Complex.Imaginary" />
+             and <see cref="P:System.Numerics.Complex.Imaginary" />
 
             
 
-             components of the <paramref
-             name="value" />
+             components of the <paramref name="value" />
 
             
 
@@ -3453,7 +3334,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3476,13 +3361,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a complex number <math
-            >a + bi</math>
+            >For a complex number <math>a + bi</math>
 
             
 
-            , the phase is computed as <see
-             cref="M:System.Math.Atan2(System.Double,System.Double)" />
+            , the phase is computed as <see cref="M:System.Math.Atan2(System.Double,System.Double)" />
             <math>(b, a)</math>
 
             
@@ -3490,24 +3373,21 @@
             .</para
           >
           <para
-            >You can identify a complex number by its Cartesian coordinates on the complex plane or by its polar coordinates. The phase (argument) of a complex number is the angle to the real axis of a line drawn from the point of origin (the intersection of the x-axis and the y-axis) to the point represented by the complex number. The magnitude (represented by the <see
-             cref="P:System.Numerics.Complex.Magnitude" />
+            >You can identify a complex number by its Cartesian coordinates on the complex plane or by its polar coordinates. The phase (argument) of a complex number is the angle to the real axis of a line drawn from the point of origin (the intersection of the x-axis and the y-axis) to the point represented by the complex number. The magnitude (represented by the <see cref="P:System.Numerics.Complex.Magnitude" />
 
             
 
              property) is the distance from the point of origin to the point that is represented by the complex number. </para
           >
           <para
-            >You can instantiate a complex number based on its polar coordinates instead of its Cartesian coordinates by calling the <see
-             cref="M:System.Numerics.Complex.FromPolarCoordinates(System.Double,System.Double)" />
+            >You can instantiate a complex number based on its polar coordinates instead of its Cartesian coordinates by calling the <see cref="M:System.Numerics.Complex.FromPolarCoordinates(System.Double,System.Double)" />
 
             
 
              method.</para
           >
           <para
-            >To convert the phase from radians to degrees, multiply it by 180/<see
-             cref="F:System.Math.PI" />
+            >To convert the phase from radians to degrees, multiply it by 180/<see cref="F:System.Math.PI" />
 
             
 
@@ -3544,46 +3424,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="value" />
+            >If <paramref name="value" />
 
             
 
-             is <see
-             cref="F:System.Numerics.Complex.Zero" />
+             is <see cref="F:System.Numerics.Complex.Zero" />
 
             
 
-            , the method returns <see
-             cref="F:System.Numerics.Complex.Zero" />
+            , the method returns <see cref="F:System.Numerics.Complex.Zero" />
 
             
 
-            . For other values, if <paramref
-             name="power" />
+            . For other values, if <paramref name="power" />
 
             
 
-             is 0, the method returns <see
-             cref="F:System.Numerics.Complex.One" />
+             is 0, the method returns <see cref="F:System.Numerics.Complex.One" />
 
             
 
-            , and if <paramref
-             name="power" />
+            , and if <paramref name="power" />
 
             
 
-             is 1, it returns <paramref
-             name="value" />
+             is 1, it returns <paramref name="value" />
 
             
 
             . </para
           >
           <para
-            >This method corresponds to the <see
-             cref="M:System.Math.Pow(System.Double,System.Double)" />
+            >This method corresponds to the <see cref="M:System.Math.Pow(System.Double,System.Double)" />
 
             
 
@@ -3597,13 +3469,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The complex number <paramref
-             name="value" />
+            >The complex number <paramref name="value" />
 
             
 
-             raised to the power <paramref
-             name="power" />
+             raised to the power <paramref name="power" />
 
             
 
@@ -3611,14 +3481,22 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A complex number to be raised to a power.</param
         >
         <param name="power">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3655,13 +3533,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The complex number <paramref
-             name="value" />
+            >The complex number <paramref name="value" />
 
             
 
-             raised to the power <paramref
-             name="power" />
+             raised to the power <paramref name="power" />
 
             
 
@@ -3669,14 +3545,22 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A complex number to be raised to a power.</param
         >
         <param name="power">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3699,18 +3583,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Given a complex number <math
-            >a + bi</math>
+            >Given a complex number <math>a + bi</math>
 
             
 
-            , the <see
-             cref="P:System.Numerics.Complex.Real" />
+            , the <see cref="P:System.Numerics.Complex.Real" />
 
             
 
-             property returns the value of <math
-            >a</math>
+             property returns the value of <math>a</math>
 
             
 
@@ -3720,8 +3601,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the real component of the current <see
-             cref="T:System.Numerics.Complex" />
+            >Gets the real component of the current <see cref="T:System.Numerics.Complex" />
 
             
 
@@ -3753,18 +3633,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The reciprocal, or multiplicative inverse, of a number x is a number y where x multiplied by y yields 1. The reciprocal of a complex number is the complex number that produces <see
-             cref="F:System.Numerics.Complex.One" />
+            >The reciprocal, or multiplicative inverse, of a number x is a number y where x multiplied by y yields 1. The reciprocal of a complex number is the complex number that produces <see cref="F:System.Numerics.Complex.One" />
 
             
 
-             when the two numbers are multiplied. If a complex number is represented by <math
-            >a +bi</math>
+             when the two numbers are multiplied. If a complex number is represented by <math>a +bi</math>
 
             
 
-            , its reciprocal is represented by the expression <math
-            >a/(a</math>
+            , its reciprocal is represented by the expression <math>a/(a</math>
             <superscript>2</superscript>
             <math>+b</math>
             <superscript>2</superscript>
@@ -3779,23 +3656,19 @@
             .</para
           >
           <para
-            >If value is <see
-             cref="F:System.Numerics.Complex.Zero" />
+            >If value is <see cref="F:System.Numerics.Complex.Zero" />
 
             
 
-            , the method returns <see
-             cref="F:System.Numerics.Complex.Zero" />
+            , the method returns <see cref="F:System.Numerics.Complex.Zero" />
 
             
 
-            . Otherwise, it returns the result of the expression <see
-             cref="F:System.Numerics.Complex.One" />
+            . Otherwise, it returns the result of the expression <see cref="F:System.Numerics.Complex.One" />
 
             
 
-            /<paramref
-             name="value" />
+            /<paramref name="value" />
 
             
 
@@ -3808,17 +3681,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The reciprocal of <paramref
-             name="value" />
+          <para>The reciprocal of <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3849,26 +3723,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Sin(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Sin(System.Numerics.Complex)" />
 
             
 
-             method for complex numbers corresponds to the <see
-             cref="M:System.Math.Sin(System.Double)" />
+             method for complex numbers corresponds to the <see cref="M:System.Math.Sin(System.Double)" />
 
             
 
              method for real numbers.</para
           >
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Sin(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Sin(System.Numerics.Complex)" />
 
             
 
-             method uses the following formula to calculate the sine of the complex number <math
-            >a + bi</math>
+             method uses the following formula to calculate the sine of the complex number <math>a + bi</math>
 
             
 
@@ -3892,17 +3762,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The sine of <paramref
-             name="value" />
+          <para>The sine of <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3933,26 +3804,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Sinh(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Sinh(System.Numerics.Complex)" />
 
             
 
-             method for complex numbers corresponds to the <see
-             cref="M:System.Math.Sinh(System.Double)" />
+             method for complex numbers corresponds to the <see cref="M:System.Math.Sinh(System.Double)" />
 
             
 
              method for real numbers.</para
           >
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Sinh(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Sinh(System.Numerics.Complex)" />
 
             
 
-             method uses the following formula to calculate the hyperbolic sine of the complex number <math
-            >a + bi</math>
+             method uses the following formula to calculate the hyperbolic sine of the complex number <math>a + bi</math>
 
             
 
@@ -3977,8 +3844,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hyperbolic sine of <paramref
-             name="value" />
+            >The hyperbolic sine of <paramref name="value" />
 
             
 
@@ -3986,7 +3852,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4017,8 +3887,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The square root of the complex number <paramref
-             name="value" />
+            >The square root of the complex number <paramref name="value" />
 
             
 
@@ -4039,13 +3908,11 @@
             <math>/2.0)</math>
           </para>
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Sqrt(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Sqrt(System.Numerics.Complex)" />
 
             
 
-             method for complex numbers corresponds to the <see
-             cref="M:System.Math.Sqrt(System.Double)" />
+             method for complex numbers corresponds to the <see cref="M:System.Math.Sqrt(System.Double)" />
 
             
 
@@ -4058,17 +3925,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The square root of <paramref
-             name="value" />
+          <para>The square root of <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4100,13 +3968,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The subtraction of a complex number, <math
-            >c + di</math>
+            >The subtraction of a complex number, <math>c + di</math>
 
             
 
-            , from another complex number, <math
-            >a + bi</math>
+            , from another complex number, <math>a + bi</math>
 
             
 
@@ -4116,21 +3982,18 @@
             <math>(a - c) + (b - d)i</math>
           </para>
           <para
-            >If the method call results in an overflow in either the real or imaginary component, the value of that component is either <see
-             cref="F:System.Double.PositiveInfinity" />
+            >If the method call results in an overflow in either the real or imaginary component, the value of that component is either <see cref="F:System.Double.PositiveInfinity" />
 
             
 
-             or <see
-             cref="F:System.Double.NegativeInfinity" />
+             or <see cref="F:System.Double.NegativeInfinity" />
 
             
 
             .</para
           >
           <para
-            >Languages that do not support custom operators can use the <see
-             cref="M:System.Numerics.Complex.Subtract(System.Numerics.Complex,System.Numerics.Complex)" />
+            >Languages that do not support custom operators can use the <see cref="M:System.Numerics.Complex.Subtract(System.Numerics.Complex,System.Numerics.Complex)" />
 
             
 
@@ -4144,13 +4007,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of subtracting <paramref
-             name="right" />
+            >The result of subtracting <paramref name="right" />
 
             
 
-             from <paramref
-             name="left" />
+             from <paramref name="left" />
 
             
 
@@ -4158,14 +4019,22 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value to subtract from (the minuend).</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4196,26 +4065,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Tan(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Tan(System.Numerics.Complex)" />
 
             
 
-             method for complex numbers corresponds to the <see
-             cref="M:System.Math.Tan(System.Double)" />
+             method for complex numbers corresponds to the <see cref="M:System.Math.Tan(System.Double)" />
 
             
 
              method for real numbers.</para
           >
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Tan(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Tan(System.Numerics.Complex)" />
 
             
 
-             method uses the following formula to calculate the tangent of the complex number <paramref
-             name="value" />
+             method uses the following formula to calculate the tangent of the complex number <paramref name="value" />
 
             
 
@@ -4238,17 +4103,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The tangent of <paramref
-             name="value" />
+          <para>The tangent of <paramref name="value" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4279,26 +4145,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Tanh(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Tanh(System.Numerics.Complex)" />
 
             
 
-             method for complex numbers corresponds to the <see
-             cref="M:System.Math.Tanh(System.Double)" />
+             method for complex numbers corresponds to the <see cref="M:System.Math.Tanh(System.Double)" />
 
             
 
              method for real numbers.</para
           >
           <para
-            >The <see
-             cref="M:System.Numerics.Complex.Tanh(System.Numerics.Complex)" />
+            >The <see cref="M:System.Numerics.Complex.Tanh(System.Numerics.Complex)" />
 
             
 
-             method uses the following formula to calculate the hyperbolic tangent of the complex number <paramref
-             name="value" />
+             method uses the following formula to calculate the hyperbolic tangent of the complex number <paramref name="value" />
 
             
 
@@ -4322,8 +4184,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hyperbolic tangent of <paramref
-             name="value" />
+            >The hyperbolic tangent of <paramref name="value" />
 
             
 
@@ -4331,7 +4192,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4388,49 +4253,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string representation of the complex number returned by this method displays the number using its Cartesian coordinates in the form (a, b), where a is the real part of the complex number, and b is its imaginary part. Both a and b are formatted using the general format specifier ("G") and the conventions of the culture defined by <paramref
-             name="provider" />
+            >The string representation of the complex number returned by this method displays the number using its Cartesian coordinates in the form (a, b), where a is the real part of the complex number, and b is its imaginary part. Both a and b are formatted using the general format specifier ("G") and the conventions of the culture defined by <paramref name="provider" />
 
             
 
             . </para
           >
           <para
-            >The <paramref
-             name="provider" />
+            >The <paramref name="provider" />
 
             
 
-             parameter is an <see
-             cref="T:System.IFormatProvider" />
+             parameter is an <see cref="T:System.IFormatProvider" />
 
             
 
-             implementation. Its <see
-             cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+             implementation. Its <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
             
 
-             method returns a <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             method returns a <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object that provides culture-specific information about the format of the real and imaginary numbers in the returned string. If <paramref
-             name="provider" />
+             object that provides culture-specific information about the format of the real and imaginary numbers in the returned string. If <paramref name="provider" />
 
             
 
-             is null, the returned string is formatted using the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             is null, the returned string is formatted using the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
              object of the current culture. </para
           >
           <para
-            >The <paramref
-             name="provider" />
+            >The <paramref name="provider" />
 
             
 
@@ -4439,8 +4296,7 @@
           <list type="bullet">
             <item>
               <para
-                >A <see
-                 cref="T:System.Globalization.CultureInfo" />
+                >A <see cref="T:System.Globalization.CultureInfo" />
 
                 
 
@@ -4449,8 +4305,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="T:System.Globalization.NumberFormatInfo" />
+                >The <see cref="T:System.Globalization.NumberFormatInfo" />
 
                 
 
@@ -4459,18 +4314,15 @@
             </item>
             <item>
               <para
-                >A custom object that implements the <see
-                 cref="T:System.IFormatProvider" />
+                >A custom object that implements the <see cref="T:System.IFormatProvider" />
 
                 
 
-                 interface. Its <see
-                 cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+                 interface. Its <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
-                 method returns the <see
-                 cref="T:System.Globalization.NumberFormatInfo" />
+                 method returns the <see cref="T:System.Globalization.NumberFormatInfo" />
 
                 
 
@@ -4486,8 +4338,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string representation of the current instance in Cartesian form, as specified by <paramref
-             name="provider" />
+            >The string representation of the current instance in Cartesian form, as specified by <paramref name="provider" />
 
             
 
@@ -4495,7 +4346,11 @@
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4523,33 +4378,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string representation of the complex number returned by this method displays the number using its Cartesian coordinates in the form (a, b), where a is the real part of the complex number, and b is its imaginary part. Both a and b are formatted using the format string specified by <paramref
-             name="format" />
+            >The string representation of the complex number returned by this method displays the number using its Cartesian coordinates in the form (a, b), where a is the real part of the complex number, and b is its imaginary part. Both a and b are formatted using the format string specified by <paramref name="format" />
 
             
 
-            . The <paramref
-             name="format" />
+            . The <paramref name="format" />
 
             
 
-             parameter can be any valid standard numeric format specifier, or any combination of custom numeric format specifiers. If <paramref
-             name="format" />
+             parameter can be any valid standard numeric format specifier, or any combination of custom numeric format specifiers. If <paramref name="format" />
 
             
 
-             is equal to <see
-             cref="F:System.String.Empty" />
+             is equal to <see cref="F:System.String.Empty" />
 
             
 
-             or is null, the real and imaginary parts of the complex number are formatted with the general format specifier ("G"). If <paramref
-             name="format" />
+             or is null, the real and imaginary parts of the complex number are formatted with the general format specifier ("G"). If <paramref name="format" />
 
             
 
-             is any other value, the method throws a <see
-             cref="T:System.FormatException" />
+             is any other value, the method throws a <see cref="T:System.FormatException" />
 
             
 
@@ -4559,15 +4408,13 @@
           <list type="bullet">
             <item>
               <para
-                >For more information about numeric format strings, see <format
-                 type="text/html">
+                >For more information about numeric format strings, see <format type="text/html">
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format>
 
                 
 
-                 and <format
-                 type="text/html">
+                 and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
 
@@ -4578,8 +4425,7 @@
             </item>
             <item>
               <para
-                >For more information about formatting in the .NET Framework, see <format
-                 type="text/html">
+                >For more information about formatting in the .NET Framework, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
 
@@ -4590,18 +4436,15 @@
             </item>
           </list>
           <para
-            >The format of the returned string is determined by the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >The format of the returned string is determined by the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object for the current culture. Depending on the <paramref
-             name="format" />
+             object for the current culture. Depending on the <paramref name="format" />
 
             
 
-             parameter, this object controls symbols such as the negative sign, the group separator, and the decimal point symbol in the output string. To provide formatting information for cultures other than the current culture, call the <see
-             cref="M:System.Numerics.Complex.ToString(System.String,System.IFormatProvider)" />
+             parameter, this object controls symbols such as the negative sign, the group separator, and the decimal point symbol in the output string. To provide formatting information for cultures other than the current culture, call the <see cref="M:System.Numerics.Complex.ToString(System.String,System.IFormatProvider)" />
 
             
 
@@ -4617,7 +4460,11 @@
           <para>The string representation of the current instance in Cartesian form.</para>
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4649,33 +4496,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string representation of the complex number returned by this method displays the number using its Cartesian coordinates in the form (a, b), where a is the real part of the complex number, and b is its imaginary part. Both a and b are formatted using the format string specified by <paramref
-             name="format" />
+            >The string representation of the complex number returned by this method displays the number using its Cartesian coordinates in the form (a, b), where a is the real part of the complex number, and b is its imaginary part. Both a and b are formatted using the format string specified by <paramref name="format" />
 
             
 
-            . The <paramref
-             name="format" />
+            . The <paramref name="format" />
 
             
 
-             parameter can be any valid standard numeric format specifier, or any combination of custom numeric format specifiers. If <paramref
-             name="format" />
+             parameter can be any valid standard numeric format specifier, or any combination of custom numeric format specifiers. If <paramref name="format" />
 
             
 
-             is equal to <see
-             cref="F:System.String.Empty" />
+             is equal to <see cref="F:System.String.Empty" />
 
             
 
-             or is null, the real and imaginary parts of the complex number are formatted with the general format specifier ("G"). If <paramref
-             name="format" />
+             or is null, the real and imaginary parts of the complex number are formatted with the general format specifier ("G"). If <paramref name="format" />
 
             
 
-             is any other value, the method throws a <see
-             cref="T:System.FormatException" />
+             is any other value, the method throws a <see cref="T:System.FormatException" />
 
             
 
@@ -4685,15 +4526,13 @@
           <list type="bullet">
             <item>
               <para
-                >For more information about numeric format strings, see <format
-                 type="text/html">
+                >For more information about numeric format strings, see <format type="text/html">
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format>
 
                 
 
-                 and <format
-                 type="text/html">
+                 and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
 
@@ -4704,8 +4543,7 @@
             </item>
             <item>
               <para
-                >For more information about formatting in the .NET Framework, see <format
-                 type="text/html">
+                >For more information about formatting in the .NET Framework, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
 
@@ -4716,46 +4554,38 @@
             </item>
           </list>
           <para
-            >The <paramref
-             name="provider" />
+            >The <paramref name="provider" />
 
             
 
-             parameter is an <see
-             cref="T:System.IFormatProvider" />
+             parameter is an <see cref="T:System.IFormatProvider" />
 
             
 
-             implementation. Its <see
-             cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+             implementation. Its <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
             
 
-             method returns a <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             method returns a <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object that provides culture-specific information about the format of the real and imaginary numbers in the returned string. Depending on the <paramref
-             name="format" />
+             object that provides culture-specific information about the format of the real and imaginary numbers in the returned string. Depending on the <paramref name="format" />
 
             
 
-             parameter, this object controls symbols such as the negative sign, the group separator, and the decimal point symbol in the output string. If <paramref
-             name="provider" />
+             parameter, this object controls symbols such as the negative sign, the group separator, and the decimal point symbol in the output string. If <paramref name="provider" />
 
             
 
-             is null, the returned string is formatted using the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             is null, the returned string is formatted using the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
              object of the current culture.</para
           >
           <para
-            >The <paramref
-             name="provider" />
+            >The <paramref name="provider" />
 
             
 
@@ -4764,8 +4594,7 @@
           <list type="bullet">
             <item>
               <para
-                >A <see
-                 cref="T:System.Globalization.CultureInfo" />
+                >A <see cref="T:System.Globalization.CultureInfo" />
 
                 
 
@@ -4774,8 +4603,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="T:System.Globalization.NumberFormatInfo" />
+                >The <see cref="T:System.Globalization.NumberFormatInfo" />
 
                 
 
@@ -4784,18 +4612,15 @@
             </item>
             <item>
               <para
-                >A custom object that implements the <see
-                 cref="T:System.IFormatProvider" />
+                >A custom object that implements the <see cref="T:System.IFormatProvider" />
 
                 
 
-                 interface. Its <see
-                 cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+                 interface. Its <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
-                 method returns the <see
-                 cref="T:System.Globalization.NumberFormatInfo" />
+                 method returns the <see cref="T:System.Globalization.NumberFormatInfo" />
 
                 
 
@@ -4811,13 +4636,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string representation of the current instance in Cartesian form, as specified by <paramref
-             name="format" />
+            >The string representation of the current instance in Cartesian form, as specified by <paramref name="format" />
 
             
 
-             and <paramref
-             name="provider" />
+             and <paramref name="provider" />
 
             
 
@@ -4825,14 +4648,22 @@
           >
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A standard or custom numeric format string.</param
         >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4857,13 +4688,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Numerics.Complex.Zero" />
+            >The <see cref="F:System.Numerics.Complex.Zero" />
 
             
 
-             property is most frequently used to compare a <see
-             cref="T:System.Numerics.Complex" />
+             property is most frequently used to compare a <see cref="T:System.Numerics.Complex" />
 
             
 
@@ -4873,8 +4702,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new <see
-             cref="T:System.Numerics.Complex" />
+            >Returns a new <see cref="T:System.Numerics.Complex" />
 
             
 

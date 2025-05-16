@@ -20,97 +20,80 @@
          represents any possible type of element in an HTML document, such as BODY, TABLE, and FORM, among others. The class exposes the most common properties you can expect to find on all elements.</para
       >
       <para
-        >Most elements can have <newTerm
-        >child elements</newTerm>
+        >Most elements can have <newTerm>child elements</newTerm>
 
         
 
-        : other HTML elements that are placed underneath them. Use the <see
-         cref="P:System.Windows.Forms.HtmlElement.CanHaveChildren" />
+        : other HTML elements that are placed underneath them. Use the <see cref="P:System.Windows.Forms.HtmlElement.CanHaveChildren" />
 
         
 
-         property to test whether a given element has children, and the <see
-         cref="P:System.Windows.Forms.HtmlElement.Children" />
+         property to test whether a given element has children, and the <see cref="P:System.Windows.Forms.HtmlElement.Children" />
 
         
 
-         collection to iterate through them. The <see
-         cref="P:System.Windows.Forms.HtmlElement.Parent" />
+         collection to iterate through them. The <see cref="P:System.Windows.Forms.HtmlElement.Parent" />
 
         
 
-         property returns the <see
-         cref="T:System.Windows.Forms.HtmlElement" />
+         property returns the <see cref="T:System.Windows.Forms.HtmlElement" />
 
         
 
          in which the current element is nested. </para
       >
       <para
-        >You often need access to attributes, properties, and methods on the underlying element that are not directly exposed by <see
-         cref="T:System.Windows.Forms.HtmlElement" />
+        >You often need access to attributes, properties, and methods on the underlying element that are not directly exposed by <see cref="T:System.Windows.Forms.HtmlElement" />
 
         
 
-        , such as the SRC attribute on an IMG element or the Submit method on a FORM. The <see
-         cref="M:System.Windows.Forms.HtmlElement.GetAttribute(System.String)" />
+        , such as the SRC attribute on an IMG element or the Submit method on a FORM. The <see cref="M:System.Windows.Forms.HtmlElement.GetAttribute(System.String)" />
 
         
 
-         and <see
-         cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
+         and <see cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
 
         
 
-         methods enable you to retrieve and alter any attribute or property on a specific element, while <see
-         cref="M:System.Windows.Forms.HtmlElement.InvokeMember(System.String)" />
+         methods enable you to retrieve and alter any attribute or property on a specific element, while <see cref="M:System.Windows.Forms.HtmlElement.InvokeMember(System.String)" />
 
         
 
-         provides access to any methods not exposed in the managed Document Object Model (DOM). If your application has unmanaged code permission, you can also access unexposed properties and methods with the <see
-         cref="P:System.Windows.Forms.HtmlElement.DomElement" />
+         provides access to any methods not exposed in the managed Document Object Model (DOM). If your application has unmanaged code permission, you can also access unexposed properties and methods with the <see cref="P:System.Windows.Forms.HtmlElement.DomElement" />
 
         
 
          attribute. </para
       >
       <para
-        >Use the <see
-         cref="P:System.Windows.Forms.HtmlElement.TagName" />
+        >Use the <see cref="P:System.Windows.Forms.HtmlElement.TagName" />
 
         
 
          property to test whether an element is of a specific type. </para
       >
       <para
-        >Any HTML document can be modified at run time. You can create new <see
-         cref="T:System.Windows.Forms.HtmlElement" />
+        >Any HTML document can be modified at run time. You can create new <see cref="T:System.Windows.Forms.HtmlElement" />
 
         
 
-         objects with the <see
-         cref="M:System.Windows.Forms.HtmlDocument.CreateElement(System.String)" />
+         objects with the <see cref="M:System.Windows.Forms.HtmlDocument.CreateElement(System.String)" />
 
         
 
-         method of <see
-         cref="T:System.Windows.Forms.HtmlDocument" />
+         method of <see cref="T:System.Windows.Forms.HtmlDocument" />
 
         
 
-        , and add them to another element using the <see
-         cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
+        , and add them to another element using the <see cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
 
         
 
-         or <see
-         cref="M:System.Windows.Forms.HtmlElement.InsertAdjacentElement(System.Windows.Forms.HtmlElementInsertionOrientation,System.Windows.Forms.HtmlElement)" />
+         or <see cref="M:System.Windows.Forms.HtmlElement.InsertAdjacentElement(System.Windows.Forms.HtmlElementInsertionOrientation,System.Windows.Forms.HtmlElement)" />
 
         
 
-         methods. You can also create the elements as HTML tags and assign them to an existing element's <see
-         cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+         methods. You can also create the elements as HTML tags and assign them to an existing element's <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
 
         
 
@@ -140,8 +123,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To access only those elements which have the current element as their direct parent, use the <see
-             cref="P:System.Windows.Forms.HtmlElement.Children" />
+            >To access only those elements which have the current element as their direct parent, use the <see cref="P:System.Windows.Forms.HtmlElement.Children" />
 
             
 
@@ -152,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Windows.Forms.HtmlElementCollection" />
+            >Gets an <see cref="T:System.Windows.Forms.HtmlElementCollection" />
 
             
 
@@ -181,8 +162,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The HTML Document Object Model (DOM) enables you to alter the run-time contents of an HTML file in a number of ways. Use <see
-             cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
+            >The HTML Document Object Model (DOM) enables you to alter the run-time contents of an HTML file in a number of ways. Use <see cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
 
             
 
@@ -190,18 +170,15 @@
           >
           <para>If an element has already been parented, appending an element to another element will automatically remove that element from its previous parent.</para>
           <para
-            >Any additions made to a document at run-time using <see
-             cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
+            >Any additions made to a document at run-time using <see cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
 
             
 
-             will not be persisted when you call the <see
-             cref="M:System.Windows.Forms.WebBrowser.ShowSaveAsDialog" />
+             will not be persisted when you call the <see cref="M:System.Windows.Forms.WebBrowser.ShowSaveAsDialog" />
 
             
 
-             method on the <see
-             cref="T:System.Windows.Forms.WebBrowser" />
+             method on the <see cref="T:System.Windows.Forms.WebBrowser" />
 
             
 
@@ -217,12 +194,15 @@
           <para>The element after it has been added to the tree. </para>
         </returns>
         <param name="newElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.HtmlElement" />
+          The <see cref="T:System.Windows.Forms.HtmlElement" />
 
           
 
@@ -250,29 +230,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Managed Document Object Model (DOM) exposes only a select number of events. Most of the unexposed events are only defined for specific types of elements; such as the submit event, which is valid only on FORM elements. Use <see
-             cref="M:System.Windows.Forms.HtmlElement.AttachEventHandler(System.String,System.EventHandler)" />
+            >The Managed Document Object Model (DOM) exposes only a select number of events. Most of the unexposed events are only defined for specific types of elements; such as the submit event, which is valid only on FORM elements. Use <see cref="M:System.Windows.Forms.HtmlElement.AttachEventHandler(System.String,System.EventHandler)" />
 
             
 
              to add an event handler to these unexposed events.</para
           >
           <para
-            >You should not attach an event to the document or one of its objects until the document has completed loading. The earliest you should call this method is in the <see
-             cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" />
+            >You should not attach an event to the document or one of its objects until the document has completed loading. The earliest you should call this method is in the <see cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" />
 
             
 
-             event of the <see
-             cref="T:System.Windows.Forms.WebBrowser" />
+             event of the <see cref="T:System.Windows.Forms.WebBrowser" />
 
             
 
              control. </para
           >
           <para
-            >For more information about the available unmanaged events, see <format
-             type="text/html">
+            >For more information about the available unmanaged events, see <format type="text/html">
               <a href="762295bd-2355-4aa7-b43c-5bff997a33e6"
                 >Accessing Unexposed Members on the Managed HTML Document Object Model</a
               >
@@ -281,22 +257,30 @@
             
 
              and the IHTMLElement interfaces: <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=104876">IHTMLElement</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=104876"
+              >IHTMLElement</see
+            >
 
             
 
             , <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=104877">IHTMLElement2</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=104877"
+              >IHTMLElement2</see
+            >
 
             
 
             , <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=104878">IHTMLElement3</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=104878"
+              >IHTMLElement3</see
+            >
 
             
 
             , <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=104879">IHTMLElement4</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=104879"
+              >IHTMLElement4</see
+            >
 
             
 
@@ -308,14 +292,22 @@
           <para>Adds an event handler for a named event on the HTML Document Object Model (DOM).</para>
         </summary>
         <param name="eventName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the event you want to handle.</param
         >
         <param name="eventHandler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -337,13 +329,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Some elements, such as IMG and SCRIPT, cannot have any children. Use this property before you call <see
-             cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
+            >Some elements, such as IMG and SCRIPT, cannot have any children. Use this property before you call <see cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
 
             
 
-             or <see
-             cref="M:System.Windows.Forms.HtmlElement.InsertAdjacentElement(System.Windows.Forms.HtmlElementInsertionOrientation,System.Windows.Forms.HtmlElement)" />
+             or <see cref="M:System.Windows.Forms.HtmlElement.InsertAdjacentElement(System.Windows.Forms.HtmlElementInsertionOrientation,System.Windows.Forms.HtmlElement)" />
 
             
 
@@ -373,8 +363,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Many of the elements inside of an HTML file can have other HTML elements underneath them. The <see
-             cref="P:System.Windows.Forms.HtmlElement.Children" />
+            >Many of the elements inside of an HTML file can have other HTML elements underneath them. The <see cref="P:System.Windows.Forms.HtmlElement.Children" />
 
             
 
@@ -385,28 +374,23 @@
 
             
 
-             only exposes elements whose direct parent is the current element. If you have an <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+             only exposes elements whose direct parent is the current element. If you have an <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
-             for a TABLE element, <see
-             cref="P:System.Windows.Forms.HtmlElement.Children" />
+             for a TABLE element, <see cref="P:System.Windows.Forms.HtmlElement.Children" />
 
             
 
-             will give you all of the TR (row) elements inside of the TABLE. To retrieve the TD (cell) elements contained inside of the TR elements, you will need to use either the <see
-             cref="P:System.Windows.Forms.HtmlElement.Children" />
+             will give you all of the TR (row) elements inside of the TABLE. To retrieve the TD (cell) elements contained inside of the TR elements, you will need to use either the <see cref="P:System.Windows.Forms.HtmlElement.Children" />
 
             
 
-             collection on each individual TR element, or use the <see
-             cref="P:System.Windows.Forms.HtmlElement.All" />
+             collection on each individual TR element, or use the <see cref="P:System.Windows.Forms.HtmlElement.All" />
 
             
 
-             collection on <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+             collection on <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
@@ -414,8 +398,7 @@
           >
           <para>Elements in this collection are not guaranteed to be in source order. </para>
           <para
-            >If <see
-             cref="P:System.Windows.Forms.HtmlElement.CanHaveChildren" />
+            >If <see cref="P:System.Windows.Forms.HtmlElement.CanHaveChildren" />
 
             
 
@@ -425,8 +408,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Windows.Forms.HtmlElementCollection" />
+            >Gets an <see cref="T:System.Windows.Forms.HtmlElementCollection" />
 
             
 
@@ -451,59 +433,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can cancel the default action for a <see
-             cref="E:System.Windows.Forms.HtmlElement.Click" />
+            >You can cancel the default action for a <see cref="E:System.Windows.Forms.HtmlElement.Click" />
 
             
 
-             event on an element by setting the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
+             event on an element by setting the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
              class to true.</para
           >
           <para
-            >A <see
-             cref="E:System.Windows.Forms.HtmlElement.Click" />
+            >A <see cref="E:System.Windows.Forms.HtmlElement.Click" />
 
             
 
-             event on an element will also occur on that element's parent elements and on the <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+             event on an element will also occur on that element's parent elements and on the <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
-             class itself, unless you set the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
+             class itself, unless you set the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
              class to true.</para
           >
           <para
-            >If the user clicks on an element that does not currently have input focus, the <see
-             cref="E:System.Windows.Forms.HtmlElement.Click" />
+            >If the user clicks on an element that does not currently have input focus, the <see cref="E:System.Windows.Forms.HtmlElement.Click" />
 
             
 
-             event will occur after the <see
-             cref="E:System.Windows.Forms.HtmlElement.Focusing" />
+             event will occur after the <see cref="E:System.Windows.Forms.HtmlElement.Focusing" />
 
             
 
-             event, but before the <see
-             cref="E:System.Windows.Forms.HtmlElement.LostFocus" />
+             event, but before the <see cref="E:System.Windows.Forms.HtmlElement.LostFocus" />
 
             
 
@@ -511,7 +483,7 @@
           >
           <para
             >For more information about the difference between canceling event bubbling and canceling the default action on an event, see <see
-             cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
+              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
 
@@ -547,8 +519,7 @@
 
             
 
-             will return position data only for elements that have been assigned an explicit height and width, or elements that use absolute positioning. A document is absolutely positioned if its position style is set to <userInput
-            >absolute</userInput>
+             will return position data only for elements that have been assigned an explicit height and width, or elements that use absolute positioning. A document is absolutely positioned if its position style is set to <userInput>absolute</userInput>
 
             
 
@@ -584,14 +555,22 @@
           <para>Removes an event handler from a named event on the HTML Document Object Model (DOM).</para>
         </summary>
         <param name="eventName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the event you want to handle.</param
         >
         <param name="eventHandler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -616,13 +595,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Some HTML pages can host frames using the FRAMESET tags. In this case, each individual FRAME element will contain its own instance of <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+            >Some HTML pages can host frames using the FRAMESET tags. In this case, each individual FRAME element will contain its own instance of <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
-            . This property is most useful when you have received a reference to an element in an event handler from the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+            . This property is most useful when you have received a reference to an element in an event handler from the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
@@ -632,8 +609,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+            >Gets the <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
@@ -687,41 +663,34 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A double-click is determined by the mouse settings of the user's operating system. The user can set the time between clicks of a mouse button that should be considered a double-click rather than two clicks.</para>
           <para
-            >You can cancel the default action for a <see
-             cref="E:System.Windows.Forms.HtmlElement.DoubleClick" />
+            >You can cancel the default action for a <see cref="E:System.Windows.Forms.HtmlElement.DoubleClick" />
 
             
 
-             event on an element by setting the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
+             event on an element by setting the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
              class to true.</para
           >
           <para
-            >A <see
-             cref="E:System.Windows.Forms.HtmlElement.DoubleClick" />
+            >A <see cref="E:System.Windows.Forms.HtmlElement.DoubleClick" />
 
             
 
-             event on an element will also occur on that element's parent elements and on the <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+             event on an element will also occur on that element's parent elements and on the <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
-             class itself, unless you set the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
+             class itself, unless you set the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
@@ -729,7 +698,7 @@
           >
           <para
             >For more information about the difference between canceling event bubbling and canceling the default action on an event, see <see
-             cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
+              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
 
@@ -763,8 +732,7 @@
           <list type="bullet">
             <item>
               <para
-                >Within or between HTML pages hosted in the <see
-                 cref="T:System.Windows.Forms.WebBrowser" />
+                >Within or between HTML pages hosted in the <see cref="T:System.Windows.Forms.WebBrowser" />
 
                 
 
@@ -779,41 +747,34 @@
             </item>
           </list>
           <para
-            >You can cancel the default action for a <see
-             cref="E:System.Windows.Forms.HtmlElement.Drag" />
+            >You can cancel the default action for a <see cref="E:System.Windows.Forms.HtmlElement.Drag" />
 
             
 
-             event on an element by setting the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
+             event on an element by setting the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
              class to true.</para
           >
           <para
-            >A <see
-             cref="E:System.Windows.Forms.HtmlElement.Drag" />
+            >A <see cref="E:System.Windows.Forms.HtmlElement.Drag" />
 
             
 
-             event on an element will also occur on that element's parent elements and on the <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+             event on an element will also occur on that element's parent elements and on the <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
-             class itself, unless you set the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
+             class itself, unless you set the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
@@ -821,7 +782,7 @@
           >
           <para
             >For more information about the difference between canceling event bubbling and canceling the default action on an event, see <see
-             cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
+              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
 
@@ -852,41 +813,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can cancel the default action for a <see
-             cref="E:System.Windows.Forms.HtmlElement.DragEnd" />
+            >You can cancel the default action for a <see cref="E:System.Windows.Forms.HtmlElement.DragEnd" />
 
             
 
-             event on an element by setting the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
+             event on an element by setting the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
              class to true.</para
           >
           <para
-            >A <see
-             cref="E:System.Windows.Forms.HtmlElement.DragEnd" />
+            >A <see cref="E:System.Windows.Forms.HtmlElement.DragEnd" />
 
             
 
-             event on an element will also occur on that element's parent elements and on the <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+             event on an element will also occur on that element's parent elements and on the <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
-             class itself, unless you set the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
+             class itself, unless you set the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
@@ -894,7 +848,7 @@
           >
           <para
             >For more information about the difference between canceling event bubbling and canceling the default action on an event, see <see
-             cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
+              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
 
@@ -945,41 +899,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can cancel the default action for a <see
-             cref="E:System.Windows.Forms.HtmlElement.DragOver" />
+            >You can cancel the default action for a <see cref="E:System.Windows.Forms.HtmlElement.DragOver" />
 
             
 
-             event on an element by setting the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
+             event on an element by setting the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
              class to true.</para
           >
           <para
-            >A <see
-             cref="E:System.Windows.Forms.HtmlElement.DragOver" />
+            >A <see cref="E:System.Windows.Forms.HtmlElement.DragOver" />
 
             
 
-             event on an element will also occur on that element's parent elements and on the <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+             event on an element will also occur on that element's parent elements and on the <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
-             class itself, unless you set the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
+             class itself, unless you set the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
@@ -987,7 +934,7 @@
           >
           <para
             >For more information about the difference between canceling event bubbling and canceling the default action on an event, see <see
-             cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
+              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
 
@@ -1016,18 +963,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For FORM elements such as text boxes and radio buttons, setting <see
-             cref="P:System.Windows.Forms.HtmlElement.Enabled" />
+            >For FORM elements such as text boxes and radio buttons, setting <see cref="P:System.Windows.Forms.HtmlElement.Enabled" />
 
             
 
-             to false will prevent the user from using these form fields. For other elements, such as DIV or SPAN, setting <see
-             cref="P:System.Windows.Forms.HtmlElement.Enabled" />
+             to false will prevent the user from using these form fields. For other elements, such as DIV or SPAN, setting <see cref="P:System.Windows.Forms.HtmlElement.Enabled" />
 
             
 
-             to false will cause all text within the element to appear shaded; however, the text will still be selectable. To cancel selection, add an event handler for the unexposed onselectstart event using the <see
-             cref="M:System.Windows.Forms.HtmlElement.AttachEventHandler(System.String,System.EventHandler)" />
+             to false will cause all text within the element to appear shaded; however, the text will still be selectable. To cancel selection, add an event handler for the unexposed onselectstart event using the <see cref="M:System.Windows.Forms.HtmlElement.AttachEventHandler(System.String,System.EventHandler)" />
 
             
 
@@ -1061,13 +1005,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
-             is an <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+             is an <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
@@ -1075,7 +1017,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1100,13 +1046,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="P:System.Windows.Forms.HtmlElement.FirstChild" />
+            >Use <see cref="P:System.Windows.Forms.HtmlElement.FirstChild" />
 
             
 
-             in conjunction with <see
-             cref="P:System.Windows.Forms.HtmlElement.NextSibling" />
+             in conjunction with <see cref="P:System.Windows.Forms.HtmlElement.NextSibling" />
 
             
 
@@ -1133,21 +1077,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting the focus on an element both gives that element focus and makes it the active element; for example, the element that has focus will be returned by the <see
-             cref="P:System.Windows.Forms.HtmlDocument.ActiveElement" />
+            >Setting the focus on an element both gives that element focus and makes it the active element; for example, the element that has focus will be returned by the <see cref="P:System.Windows.Forms.HtmlDocument.ActiveElement" />
 
             
 
-             property of <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+             property of <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
             .</para
           >
           <para
-            >Any key strokes entered by a user after <see
-             cref="M:System.Windows.Forms.HtmlElement.Focus" />
+            >Any key strokes entered by a user after <see cref="M:System.Windows.Forms.HtmlElement.Focus" />
 
             
 
@@ -1176,49 +1117,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An element that had focus before the user switched to another application using the taskbar or the ALT+TAB keys will receive the <see
-             cref="E:System.Windows.Forms.HtmlElement.Focusing" />
+            >An element that had focus before the user switched to another application using the taskbar or the ALT+TAB keys will receive the <see cref="E:System.Windows.Forms.HtmlElement.Focusing" />
 
             
 
-             and <see
-             cref="E:System.Windows.Forms.HtmlElement.GotFocus" />
+             and <see cref="E:System.Windows.Forms.HtmlElement.GotFocus" />
 
             
 
              events again when the user switches back to your application.</para
           >
           <para
-            >You cannot cancel the default behavior of this event. To remove focus from an element, call <see
-             cref="M:System.Windows.Forms.HtmlElement.Focus" />
+            >You cannot cancel the default behavior of this event. To remove focus from an element, call <see cref="M:System.Windows.Forms.HtmlElement.Focus" />
 
             
 
-             on a different element from within the <see
-             cref="E:System.Windows.Forms.HtmlElement.GotFocus" />
+             on a different element from within the <see cref="E:System.Windows.Forms.HtmlElement.GotFocus" />
 
             
 
              event.</para
           >
           <para
-            >A <see
-             cref="E:System.Windows.Forms.HtmlElement.Focusing" />
+            >A <see cref="E:System.Windows.Forms.HtmlElement.Focusing" />
 
             
 
-             event on an element will also occur on that element's parents and on the <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+             event on an element will also occur on that element's parents and on the <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
-             class itself, unless you set the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
+             class itself, unless you set the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
@@ -1226,7 +1159,7 @@
           >
           <para
             >For more information about the difference between canceling event bubbling and canceling the default action on an event, see <see
-             cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
+              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
 
@@ -1257,18 +1190,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An attribute in HTML is any valid name/value pair for that element. <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+            >An attribute in HTML is any valid name/value pair for that element. <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
-             exposes only those attributes that are common to all elements, leaving out those that only apply to certain types of elements; SRC is a predefined attribute for the IMG tag, for example, but not for the DIV tag. Use <see
-             cref="M:System.Windows.Forms.HtmlElement.GetAttribute(System.String)" />
+             exposes only those attributes that are common to all elements, leaving out those that only apply to certain types of elements; SRC is a predefined attribute for the IMG tag, for example, but not for the DIV tag. Use <see cref="M:System.Windows.Forms.HtmlElement.GetAttribute(System.String)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
+             and <see cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
 
             
 
@@ -1279,8 +1209,7 @@
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
+             and <see cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
 
             
 
@@ -1294,8 +1223,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this attribute on the element, as a <see
-             cref="T:System.String" />
+            >The value of this attribute on the element, as a <see cref="T:System.String" />
 
             
 
@@ -1303,7 +1231,11 @@
           >
         </returns>
         <param name="attributeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1335,13 +1267,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Windows.Forms.HtmlElementCollection" />
+            >An <see cref="T:System.Windows.Forms.HtmlElementCollection" />
 
             
 
-             containing all elements whose HTML tag name is equal to <paramref
-             name="tagName" />
+             containing all elements whose HTML tag name is equal to <paramref name="tagName" />
 
             
 
@@ -1349,12 +1279,15 @@
           >
         </returns>
         <param name="tagName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the tag whose <see
-           cref="T:System.Windows.Forms.HtmlElement" />
+          The name of the tag whose <see cref="T:System.Windows.Forms.HtmlElement" />
 
           
 
@@ -1394,13 +1327,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can neither cancel this event's default behavior, nor prevent it from bubbling. To remove focus from an element, call <see
-             cref="M:System.Windows.Forms.HtmlElement.Focus" />
+            >You can neither cancel this event's default behavior, nor prevent it from bubbling. To remove focus from an element, call <see cref="M:System.Windows.Forms.HtmlElement.Focus" />
 
             
 
-             on a different element from within the <see
-             cref="E:System.Windows.Forms.HtmlElement.GotFocus" />
+             on a different element from within the <see cref="E:System.Windows.Forms.HtmlElement.GotFocus" />
 
             
 
@@ -1408,7 +1339,7 @@
           >
           <para
             >For more information about the difference between canceling event bubbling and canceling the default action on an event, see <see
-             cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
+              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
 
@@ -1441,13 +1372,11 @@
 
             
 
-             must be unique; you cannot have two elements with the same <see
-             cref="P:System.Windows.Forms.HtmlElement.Id" />
+             must be unique; you cannot have two elements with the same <see cref="P:System.Windows.Forms.HtmlElement.Id" />
 
             
 
-             inside of the same document. Use the <see
-             cref="P:System.Windows.Forms.HtmlElement.Name" />
+             inside of the same document. Use the <see cref="P:System.Windows.Forms.HtmlElement.Name" />
 
             
 
@@ -1474,18 +1403,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >There are several ways to add new elements to an existing HTML page, such as the <see
-             cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
+            >There are several ways to add new elements to an existing HTML page, such as the <see cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.HtmlElement.InsertAdjacentElement(System.Windows.Forms.HtmlElementInsertionOrientation,System.Windows.Forms.HtmlElement)" />
+             and <see cref="M:System.Windows.Forms.HtmlElement.InsertAdjacentElement(System.Windows.Forms.HtmlElementInsertionOrientation,System.Windows.Forms.HtmlElement)" />
 
             
 
-             methods. Using <see
-             cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+             methods. Using <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
 
             
 
@@ -1496,95 +1422,79 @@
 
             
 
-             differs from <see
-             cref="P:System.Windows.Forms.HtmlElement.OuterHtml" />
+             differs from <see cref="P:System.Windows.Forms.HtmlElement.OuterHtml" />
 
             
 
-             in that <see
-             cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+             in that <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
 
             
 
-             will not include the HTML that represents the object you are calling. See <see
-             cref="P:System.Windows.Forms.HtmlElement.OuterHtml" />
+             will not include the HTML that represents the object you are calling. See <see cref="P:System.Windows.Forms.HtmlElement.OuterHtml" />
 
             
 
              for more information about the difference between these two properties.</para
           >
           <para
-            >Setting <see
-             cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+            >Setting <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
 
             
 
-             destroys any children previously appended to the element. If you retrieve an element from the DOM and then assign new HTML to its parents' <see
-             cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+             destroys any children previously appended to the element. If you retrieve an element from the DOM and then assign new HTML to its parents' <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
 
             
 
              property, your reference to that element will be useless, and its behavior when it calls its properties and methods is undefined. </para
           >
           <para
-            >For some elements, setting <see
-             cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+            >For some elements, setting <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
 
             
 
-             is not a valid operation. Some HTML tags have no closing tag, such as the IMG tag, and therefore cannot contain nested elements. Some tags, such as the SCRIPT tag, can only contain text content; setting <see
-             cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+             is not a valid operation. Some HTML tags have no closing tag, such as the IMG tag, and therefore cannot contain nested elements. Some tags, such as the SCRIPT tag, can only contain text content; setting <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
 
             
 
-             will result in an error. For both types of tags, the <see
-             cref="P:System.Windows.Forms.HtmlElement.CanHaveChildren" />
+             will result in an error. For both types of tags, the <see cref="P:System.Windows.Forms.HtmlElement.CanHaveChildren" />
 
             
 
-             property will return false. However, you also cannot set <see
-             cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+             property will return false. However, you also cannot set <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
 
             
 
-             on TABLE and TR elements, as assigning malformed HTML to these elements could corrupt the rendering of the document. Use <see
-             cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
+             on TABLE and TR elements, as assigning malformed HTML to these elements could corrupt the rendering of the document. Use <see cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
 
             
 
-             or the <unmanagedCodeEntityReference
-            >insertRow</unmanagedCodeEntityReference>
+             or the <unmanagedCodeEntityReference>insertRow</unmanagedCodeEntityReference>
 
             
 
-             and <unmanagedCodeEntityReference
-            >insertCell</unmanagedCodeEntityReference>
+             and <unmanagedCodeEntityReference>insertCell</unmanagedCodeEntityReference>
 
             
 
-             methods on the unmanaged <unmanagedCodeEntityReference
-            >IHTMLTable</unmanagedCodeEntityReference>
+             methods on the unmanaged <unmanagedCodeEntityReference>IHTMLTable</unmanagedCodeEntityReference>
 
             
 
              interface to add rows and cells to a TABLE.</para
           >
           <para
-            >If you need only to assign text to an element and not HTML markup, use the <see
-             cref="P:System.Windows.Forms.HtmlElement.InnerText" />
+            >If you need only to assign text to an element and not HTML markup, use the <see cref="P:System.Windows.Forms.HtmlElement.InnerText" />
 
             
 
              property instead.</para
           >
           <para
-            >Assigning a value to <see
-             cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+            >Assigning a value to <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
 
             
 
-             will destroy any text values previously assigned using <see
-             cref="P:System.Windows.Forms.HtmlElement.InnerText" />
+             will destroy any text values previously assigned using <see cref="P:System.Windows.Forms.HtmlElement.InnerText" />
 
             
 
@@ -1611,26 +1521,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to assign HTML to an element with <see
-             cref="P:System.Windows.Forms.HtmlElement.InnerText" />
+            >If you attempt to assign HTML to an element with <see cref="P:System.Windows.Forms.HtmlElement.InnerText" />
 
             
 
-            , the HTML code will display as literals in the document, just as if you were viewing HTML within a text file. If you assign HTML to an element using the <see
-             cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+            , the HTML code will display as literals in the document, just as if you were viewing HTML within a text file. If you assign HTML to an element using the <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
 
             
 
-             property, <see
-             cref="P:System.Windows.Forms.HtmlElement.InnerText" />
+             property, <see cref="P:System.Windows.Forms.HtmlElement.InnerText" />
 
             
 
              will return all of the text in that HTML with the markup removed.</para
           >
           <para
-            >Assigning a value to <see
-             cref="P:System.Windows.Forms.HtmlElement.InnerText" />
+            >Assigning a value to <see cref="P:System.Windows.Forms.HtmlElement.InnerText" />
 
             
 
@@ -1663,26 +1569,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not call this method until after the <see
-             cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" />
+            >Do not call this method until after the <see cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" />
 
             
 
-             event on the <see
-             cref="T:System.Windows.Forms.WebBrowser" />
+             event on the <see cref="T:System.Windows.Forms.WebBrowser" />
 
             
 
              control has occurred. Calling this method before then can result in an exception, as the document will not have finished loading. </para
           >
           <para
-            >Whether a value of <see
-             cref="T:System.Windows.Forms.HtmlElementInsertionOrientation" />
+            >Whether a value of <see cref="T:System.Windows.Forms.HtmlElementInsertionOrientation" />
 
             
 
-             is valid will depend on the type of the element. For example, <see
-             cref="F:System.Windows.Forms.HtmlElementInsertionOrientation.AfterBegin" />
+             is valid will depend on the type of the element. For example, <see cref="F:System.Windows.Forms.HtmlElementInsertionOrientation.AfterBegin" />
 
             
 
@@ -1696,8 +1598,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+            >The <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
@@ -1705,14 +1606,22 @@
           >
         </returns>
         <param name="orient">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Where to insert this element in relation to the current element.</param
         >
         <param name="newElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1736,13 +1645,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used to call methods from the Document Object Model (DOM) that do not have equivalents in managed code. Use this version of <see
-             cref="M:System.Windows.Forms.HtmlElement.InvokeMember(System.String)" />
+            >This method can be used to call methods from the Document Object Model (DOM) that do not have equivalents in managed code. Use this version of <see cref="M:System.Windows.Forms.HtmlElement.InvokeMember(System.String)" />
 
             
 
-             to execute unexposed methods that take no arguments. For an example, see <see
-             cref="M:System.Windows.Forms.HtmlElement.InvokeMember(System.String,System.Object[])" />
+             to execute unexposed methods that take no arguments. For an example, see <see cref="M:System.Windows.Forms.HtmlElement.InvokeMember(System.String,System.Object[])" />
 
             
 
@@ -1756,13 +1663,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The element returned by this method, represented as an <see
-             cref="T:System.Object" />
+            >The element returned by this method, represented as an <see cref="T:System.Object" />
 
             
 
-            . If this <see
-             cref="T:System.Object" />
+            . If this <see cref="T:System.Object" />
 
             
 
@@ -1770,7 +1675,11 @@
           >
         </returns>
         <param name="methodName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1804,8 +1713,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used to call methods from the Document Object Model (DOM) that do not have equivalents in managed code. All arguments supplied to <see
-             cref="M:System.Windows.Forms.HtmlElement.InvokeMember(System.String,System.Object[])" />
+            >This method can be used to call methods from the Document Object Model (DOM) that do not have equivalents in managed code. All arguments supplied to <see cref="M:System.Windows.Forms.HtmlElement.InvokeMember(System.String,System.Object[])" />
 
             
 
@@ -1819,13 +1727,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The element returned by the function, represented as an <see
-             cref="T:System.Object" />
+            >The element returned by the function, represented as an <see cref="T:System.Object" />
 
             
 
-            . If this <see
-             cref="T:System.Object" />
+            . If this <see cref="T:System.Object" />
 
             
 
@@ -1833,14 +1739,22 @@
           >
         </returns>
         <param name="methodName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the property or method to invoke.</param
         >
         <param name="parameter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1868,54 +1782,45 @@
 
             
 
-             occurs before <see
-             cref="E:System.Windows.Forms.HtmlElement.KeyPress" />
+             occurs before <see cref="E:System.Windows.Forms.HtmlElement.KeyPress" />
 
             
 
-            , which in turns occurs before <see
-             cref="E:System.Windows.Forms.HtmlElement.KeyUp" />
+            , which in turns occurs before <see cref="E:System.Windows.Forms.HtmlElement.KeyUp" />
 
             
 
             . </para
           >
           <para
-            >You can cancel the default action for a <see
-             cref="E:System.Windows.Forms.HtmlElement.KeyDown" />
+            >You can cancel the default action for a <see cref="E:System.Windows.Forms.HtmlElement.KeyDown" />
 
             
 
-             event on an element by setting the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
+             event on an element by setting the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
              class to true.</para
           >
           <para
-            >A <see
-             cref="E:System.Windows.Forms.HtmlElement.KeyDown" />
+            >A <see cref="E:System.Windows.Forms.HtmlElement.KeyDown" />
 
             
 
-             event on an element will also occur on that element's parent elements and on the <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+             event on an element will also occur on that element's parent elements and on the <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
-             class itself, unless you set the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
+             class itself, unless you set the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
@@ -1923,7 +1828,7 @@
           >
           <para
             >For more information about the difference between canceling event bubbling and canceling the default action on an event, see <see
-             cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
+              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
 
@@ -1958,54 +1863,45 @@
 
             
 
-             occurs after <see
-             cref="E:System.Windows.Forms.HtmlElement.KeyDown" />
+             occurs after <see cref="E:System.Windows.Forms.HtmlElement.KeyDown" />
 
             
 
-             and before <see
-             cref="E:System.Windows.Forms.HtmlElement.KeyUp" />
+             and before <see cref="E:System.Windows.Forms.HtmlElement.KeyUp" />
 
             
 
             .</para
           >
           <para
-            >You can cancel the default action for a <see
-             cref="E:System.Windows.Forms.HtmlElement.KeyPress" />
+            >You can cancel the default action for a <see cref="E:System.Windows.Forms.HtmlElement.KeyPress" />
 
             
 
-             event on an element by setting the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
+             event on an element by setting the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
              class to true.</para
           >
           <para
-            >A <see
-             cref="E:System.Windows.Forms.HtmlElement.KeyPress" />
+            >A <see cref="E:System.Windows.Forms.HtmlElement.KeyPress" />
 
             
 
-             event on an element will also occur on that element's parent elements and on the <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+             event on an element will also occur on that element's parent elements and on the <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
-             class itself, unless you set the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
+             class itself, unless you set the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
@@ -2013,7 +1909,7 @@
           >
           <para
             >For more information about the difference between canceling event bubbling and canceling the default action on an event, see <see
-             cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
+              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
 
@@ -2048,13 +1944,11 @@
 
             
 
-             occurs after <see
-             cref="E:System.Windows.Forms.HtmlElement.KeyPress" />
+             occurs after <see cref="E:System.Windows.Forms.HtmlElement.KeyPress" />
 
             
 
-            , which occurs after <see
-             cref="E:System.Windows.Forms.HtmlElement.KeyDown" />
+            , which occurs after <see cref="E:System.Windows.Forms.HtmlElement.KeyDown" />
 
             
 
@@ -2062,23 +1956,19 @@
           >
           <para>You cannot cancel this event.</para>
           <para
-            >A <see
-             cref="E:System.Windows.Forms.HtmlElement.KeyUp" />
+            >A <see cref="E:System.Windows.Forms.HtmlElement.KeyUp" />
 
             
 
-             event on an element will also occur on that element's parent elements and on the <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+             event on an element will also occur on that element's parent elements and on the <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
-             class itself, unless you set the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
+             class itself, unless you set the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
@@ -2086,7 +1976,7 @@
           >
           <para
             >For more information about the difference between canceling event bubbling and canceling the default action on an event, see <see
-             cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
+              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
 
@@ -2137,13 +2027,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An element will no longer receive key stroke events after <see
-             cref="E:System.Windows.Forms.HtmlElement.LostFocus" />
+            >An element will no longer receive key stroke events after <see cref="E:System.Windows.Forms.HtmlElement.LostFocus" />
 
             
 
-             occurs until it is given focus again, either by the user selecting it on the page or by the application calling the <see
-             cref="M:System.Windows.Forms.HtmlElement.Focus" />
+             occurs until it is given focus again, either by the user selecting it on the page or by the application calling the <see cref="M:System.Windows.Forms.HtmlElement.Focus" />
 
             
 
@@ -2151,23 +2039,19 @@
           >
           <para>You cannot cancel this event. </para>
           <para
-            >An <see
-             cref="E:System.Windows.Forms.HtmlElement.LostFocus" />
+            >An <see cref="E:System.Windows.Forms.HtmlElement.LostFocus" />
 
             
 
-             event on an element will also occur on that element's parents and on the <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+             event on an element will also occur on that element's parents and on the <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
-             class itself, unless you set the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
+             class itself, unless you set the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
@@ -2175,7 +2059,7 @@
           >
           <para
             >For more information about the difference between canceling event bubbling and canceling the default action on an event, see <see
-             cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
+              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
 
@@ -2206,41 +2090,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can cancel the default action for a <see
-             cref="E:System.Windows.Forms.HtmlElement.MouseDown" />
+            >You can cancel the default action for a <see cref="E:System.Windows.Forms.HtmlElement.MouseDown" />
 
             
 
-             event on an element by setting the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
+             event on an element by setting the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
              class to true.</para
           >
           <para
-            >A <see
-             cref="E:System.Windows.Forms.HtmlElement.MouseDown" />
+            >A <see cref="E:System.Windows.Forms.HtmlElement.MouseDown" />
 
             
 
-             event on an element will also occur on that element's parent elements and on the <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+             event on an element will also occur on that element's parent elements and on the <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
-             class itself, unless you set the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
+             class itself, unless you set the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
@@ -2248,7 +2125,7 @@
           >
           <para
             >For more information about the difference between canceling event bubbling and canceling the default action on an event, see <see
-             cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
+              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
 
@@ -2320,23 +2197,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You cannot cancel this event.</para>
           <para
-            >A <see
-             cref="E:System.Windows.Forms.HtmlElement.MouseMove" />
+            >A <see cref="E:System.Windows.Forms.HtmlElement.MouseMove" />
 
             
 
-             event on an element will also occur on that element's parent elements and on the <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+             event on an element will also occur on that element's parent elements and on the <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
-             class itself, unless you set the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
+             class itself, unless you set the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
@@ -2344,7 +2217,7 @@
           >
           <para
             >For more information about the difference between canceling event bubbling and canceling the default action on an event, see <see
-             cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
+              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
 
@@ -2375,41 +2248,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can cancel the default action for a <see
-             cref="E:System.Windows.Forms.HtmlElement.MouseOver" />
+            >You can cancel the default action for a <see cref="E:System.Windows.Forms.HtmlElement.MouseOver" />
 
             
 
-             event on an element by setting the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
+             event on an element by setting the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
              class to true.</para
           >
           <para
-            >A <see
-             cref="E:System.Windows.Forms.HtmlElement.MouseOver" />
+            >A <see cref="E:System.Windows.Forms.HtmlElement.MouseOver" />
 
             
 
-             event on an element will also occur on that element's parent elements and on the <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+             event on an element will also occur on that element's parent elements and on the <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
-             class itself, unless you set the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
+             class itself, unless you set the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
@@ -2417,7 +2283,7 @@
           >
           <para
             >For more information about the difference between canceling event bubbling and canceling the default action on an event, see <see
-             cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
+              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
 
@@ -2448,41 +2314,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can cancel the default action for a <see
-             cref="E:System.Windows.Forms.HtmlElement.MouseUp" />
+            >You can cancel the default action for a <see cref="E:System.Windows.Forms.HtmlElement.MouseUp" />
 
             
 
-             event on an element by setting the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
+             event on an element by setting the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
              class to true.</para
           >
           <para
-            >A <see
-             cref="E:System.Windows.Forms.HtmlElement.MouseUp" />
+            >A <see cref="E:System.Windows.Forms.HtmlElement.MouseUp" />
 
             
 
-             event on an element will also occur on that element's parent elements and on the <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+             event on an element will also occur on that element's parent elements and on the <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
-             class itself, unless you set the <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
+             class itself, unless you set the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.HtmlElementEventArgs" />
+             property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />
 
             
 
@@ -2490,7 +2349,7 @@
           >
           <para
             >For more information about the difference between canceling event bubbling and canceling the default action on an event, see <see
-             cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
+              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
 
@@ -2519,31 +2378,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.HtmlElement.Name" />
+            >Use the <see cref="P:System.Windows.Forms.HtmlElement.Name" />
 
             
 
-             property to retrieve elements from a document using the <see
-             cref="M:System.Windows.Forms.HtmlElementCollection.GetElementsByName(System.String)" />
+             property to retrieve elements from a document using the <see cref="M:System.Windows.Forms.HtmlElementCollection.GetElementsByName(System.String)" />
 
             
 
-             method on the <see
-             cref="P:System.Windows.Forms.HtmlElement.All" />
+             method on the <see cref="P:System.Windows.Forms.HtmlElement.All" />
 
             
 
-             property of <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+             property of <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
             .</para
           >
           <para
-            >When applied to INPUT elements, <see
-             cref="P:System.Windows.Forms.HtmlElement.Name" />
+            >When applied to INPUT elements, <see cref="P:System.Windows.Forms.HtmlElement.Name" />
 
             
 
@@ -2573,13 +2427,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="P:System.Windows.Forms.HtmlElement.NextSibling" />
+            >Use <see cref="P:System.Windows.Forms.HtmlElement.NextSibling" />
 
             
 
-             in conjunction with <see
-             cref="P:System.Windows.Forms.HtmlElement.FirstChild" />
+             in conjunction with <see cref="P:System.Windows.Forms.HtmlElement.FirstChild" />
 
             
 
@@ -2612,7 +2464,7 @@
           <para>When a document's elements use relative or absolute positioning, you can use OffsetParent to calculate an element's coordinate position in the client area.</para>
           <para
             >For more information about element positioning in HTML, see <see
-             cref="http://msdn.microsoft.com/en-us/library/ms533005.aspx"
+              cref="http://msdn.microsoft.com/en-us/library/ms533005.aspx"
               >About Element Positioning</see
             >
 
@@ -2624,8 +2476,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the element from which <see
-             cref="P:System.Windows.Forms.HtmlElement.OffsetRectangle" />
+            >Gets the element from which <see cref="P:System.Windows.Forms.HtmlElement.OffsetRectangle" />
 
             
 
@@ -2664,7 +2515,7 @@
           </list>
           <para
             >For more information about element positioning in HTML, see <see
-             cref="http://msdn.microsoft.com/en-us/library/ms533005.aspx"
+              cref="http://msdn.microsoft.com/en-us/library/ms533005.aspx"
               >About Element Positioning</see
             >
 
@@ -2699,8 +2550,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The equality operator tests the IUnknown pointers of the underlying COM objects wrapped by the supplied <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+            >The equality operator tests the IUnknown pointers of the underlying COM objects wrapped by the supplied <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
@@ -2716,24 +2566,30 @@
           <para>true if both parameters are null, or if both elements have the same underlying COM interface; otherwise, false.</para>
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first <see
-           cref="T:System.Windows.Forms.HtmlElement" />
+          The first <see cref="T:System.Windows.Forms.HtmlElement" />
 
           
 
           .</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The second <see
-           cref="T:System.Windows.Forms.HtmlElement" />
+          The second <see cref="T:System.Windows.Forms.HtmlElement" />
 
           
 
@@ -2762,8 +2618,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+            >Compares two <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
@@ -2775,24 +2630,30 @@
           <para>true is only one element is null, or the two objects are not equal; otherwise, false. </para>
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first <see
-           cref="T:System.Windows.Forms.HtmlElement" />
+          The first <see cref="T:System.Windows.Forms.HtmlElement" />
 
           
 
           .</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The second <see
-           cref="T:System.Windows.Forms.HtmlElement" />
+          The second <see cref="T:System.Windows.Forms.HtmlElement" />
 
           
 
@@ -2814,13 +2675,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Whereas <see
-             cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+            >Whereas <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
 
             
 
-             will return all HTML contained in the current element excluding the current element's surrounding tags, <see
-             cref="P:System.Windows.Forms.HtmlElement.OuterHtml" />
+             will return all HTML contained in the current element excluding the current element's surrounding tags, <see cref="P:System.Windows.Forms.HtmlElement.OuterHtml" />
 
             
 
@@ -2840,8 +2699,7 @@
           <para>    &lt;/BODY&gt;</para>
           <para>&lt;/HTML&gt;</para>
           <para
-            >In this example, calling <see
-             cref="P:System.Windows.Forms.HtmlElement.OuterHtml" />
+            >In this example, calling <see cref="P:System.Windows.Forms.HtmlElement.OuterHtml" />
 
             
 
@@ -2854,8 +2712,7 @@
           <para>    &lt;/DIV&gt;</para>
           <para>&lt;/DIV&gt;</para>
           <para
-            >Calling <see
-             cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+            >Calling <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
 
             
 
@@ -2866,8 +2723,7 @@
           <para>    How are you?</para>
           <para>    &lt;/DIV&gt;</para>
           <para
-            >If you assign a new value to <see
-             cref="P:System.Windows.Forms.HtmlElement.OuterHtml" />
+            >If you assign a new value to <see cref="P:System.Windows.Forms.HtmlElement.OuterHtml" />
 
             
 
@@ -2894,26 +2750,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to assign HTML to an element with <see
-             cref="P:System.Windows.Forms.HtmlElement.OuterText" />
+            >If you attempt to assign HTML to an element with <see cref="P:System.Windows.Forms.HtmlElement.OuterText" />
 
             
 
-            , the HTML code will display as literals in the document, just as if you were viewing HTML within a text file. If you assign HTML to an element using the <see
-             cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+            , the HTML code will display as literals in the document, just as if you were viewing HTML within a text file. If you assign HTML to an element using the <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
 
             
 
-             property, <see
-             cref="P:System.Windows.Forms.HtmlElement.OuterText" />
+             property, <see cref="P:System.Windows.Forms.HtmlElement.OuterText" />
 
             
 
              will return all of the text in that HTML with the markup removed.</para
           >
           <para
-            >Assigning a value to <see
-             cref="P:System.Windows.Forms.HtmlElement.OuterText" />
+            >Assigning a value to <see cref="P:System.Windows.Forms.HtmlElement.OuterText" />
 
             
 
@@ -2943,26 +2795,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.HtmlElement.Parent" />
+            >The <see cref="P:System.Windows.Forms.HtmlElement.Parent" />
 
             
 
-             property enables discovery of an element's context. It is most useful inside of event handlers such as <see
-             cref="E:System.Windows.Forms.HtmlElement.Click" />
+             property enables discovery of an element's context. It is most useful inside of event handlers such as <see cref="E:System.Windows.Forms.HtmlElement.Click" />
 
             
 
             , which can fire for any element anywhere in the document's object hierarchy.</para
           >
           <para
-            >The <see
-             cref="P:System.Windows.Forms.HtmlElement.Parent" />
+            >The <see cref="P:System.Windows.Forms.HtmlElement.Parent" />
 
             
 
-             property of the HTML element (the top of an HTML document) points back to itself. If you call <see
-             cref="P:System.Windows.Forms.HtmlElement.Parent" />
+             property of the HTML element (the top of an HTML document) points back to itself. If you call <see cref="P:System.Windows.Forms.HtmlElement.Parent" />
 
             
 
@@ -2992,17 +2840,17 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >This method is used to access HTML Document Object Model (DOM) events. It directly calls the <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=103189">IHTMLElement3::fireEvent</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=103189"
+              >IHTMLElement3::fireEvent</see
+            >
 
             
 
-             method. For more information about how to use the DOM through the <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+             method. For more information about how to use the DOM through the <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
-             class, see <format
-             type="text/html">
+             class, see <format type="text/html">
               <a href="762295bd-2355-4aa7-b43c-5bff997a33e6"
                 >Accessing Unexposed Members on the Managed HTML Document Object Model</a
               >
@@ -3018,7 +2866,11 @@
           <para>Causes the named event to call all registered event handlers. </para>
         </summary>
         <param name="eventName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3040,8 +2892,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling this method raises the <see
-             cref="E:System.Windows.Forms.HtmlElement.LostFocus" />
+            >Calling this method raises the <see cref="E:System.Windows.Forms.HtmlElement.LostFocus" />
 
             
 
@@ -3074,7 +2925,11 @@
           <para>Scrolls through the document containing this element until the top or bottom edge of this element is aligned with the document's window. </para>
         </summary>
         <param name="alignWithTop">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3096,13 +2951,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The full dimensions of the scroll area are available using <see
-             cref="P:System.Windows.Forms.HtmlElement.ScrollRectangle" />
+            >The full dimensions of the scroll area are available using <see cref="P:System.Windows.Forms.HtmlElement.ScrollRectangle" />
 
             
 
-            ; ScrollLeft and <see
-             cref="P:System.Windows.Forms.HtmlElement.ScrollTop" />
+            ; ScrollLeft and <see cref="P:System.Windows.Forms.HtmlElement.ScrollTop" />
 
             
 
@@ -3133,13 +2986,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An element will have a scrollable region if its content exceeds the size of its dimensions, unless the overflow style on the element forbids rendering scrollbars. </para>
           <para
-            >You cannot modify the size of the scroll area directly, but you can modify the distance between the edges of the scroll area and the edges of the element. Use the <see
-             cref="P:System.Windows.Forms.HtmlElement.ScrollLeft" />
+            >You cannot modify the size of the scroll area directly, but you can modify the distance between the edges of the scroll area and the edges of the element. Use the <see cref="P:System.Windows.Forms.HtmlElement.ScrollLeft" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.HtmlElement.ScrollTop" />
+             and <see cref="P:System.Windows.Forms.HtmlElement.ScrollTop" />
 
             
 
@@ -3166,13 +3017,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The full dimensions of the scroll area are available using <see
-             cref="P:System.Windows.Forms.HtmlElement.ScrollRectangle" />
+            >The full dimensions of the scroll area are available using <see cref="P:System.Windows.Forms.HtmlElement.ScrollRectangle" />
 
             
 
-            ; <see
-             cref="P:System.Windows.Forms.HtmlElement.ScrollLeft" />
+            ; <see cref="P:System.Windows.Forms.HtmlElement.ScrollLeft" />
 
             
 
@@ -3205,31 +3054,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An attribute in HTML is any valid name-value pair for that element. <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+            >An attribute in HTML is any valid name-value pair for that element. <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
-             exposes only those attributes that are common to all elements, leaving out those that only apply to certain types of elements; SRC is a predefined attribute for the IMG tag, for example, but not for the DIV tag. Use <see
-             cref="M:System.Windows.Forms.HtmlElement.GetAttribute(System.String)" />
+             exposes only those attributes that are common to all elements, leaving out those that only apply to certain types of elements; SRC is a predefined attribute for the IMG tag, for example, but not for the DIV tag. Use <see cref="M:System.Windows.Forms.HtmlElement.GetAttribute(System.String)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
+             and <see cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
 
             
 
              to manipulate attributes not exposed on the managed Document Object Model (DOM). </para
           >
           <para
-            >If <paramref
-             name="attributeName" />
+            >If <paramref name="attributeName" />
 
             
 
-             is not a defined attribute on an element, <see
-             cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
+             is not a defined attribute on an element, <see cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
 
             
 
@@ -3240,21 +3084,18 @@
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
+             and <see cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
 
             
 
              are case-insensitive.</para
           >
           <para
-            >To set the class attribute on an <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+            >To set the class attribute on an <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
-             , you must refer to the attribute as className when specifying the first argument to <see
-             cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
+             , you must refer to the attribute as className when specifying the first argument to <see cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" />
           </para>
         </remarks>
         <summary>
@@ -3262,14 +3103,22 @@
           <para>Sets the value of the named attribute on the element.</para>
         </summary>
         <param name="attributeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the attribute to set.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3291,8 +3140,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The HTML Document Object Model (DOM) uses styles as defined in the World Wide Web Consortiums Cascading Style Sheets specification to control the display of an element. Styles in the <see
-             cref="P:System.Windows.Forms.HtmlElement.Style" />
+            >The HTML Document Object Model (DOM) uses styles as defined in the World Wide Web Consortiums Cascading Style Sheets specification to control the display of an element. Styles in the <see cref="P:System.Windows.Forms.HtmlElement.Style" />
 
             
 
@@ -3303,7 +3151,9 @@
           <para>font-face:Times New Roman;font-size:14px;font-weight:bold;</para>
           <para
             >For a full list of all available styles in the HTML DOM, see <see
-             cref="http://msdn.microsoft.com/en-us/library/ms534651.aspx">STYLE Attribute</see>
+              cref="http://msdn.microsoft.com/en-us/library/ms534651.aspx"
+              >STYLE Attribute</see
+            >
 
             
 
@@ -3334,16 +3184,14 @@
 
             
 
-             determines which element in an HTML document will next receive focus when the user presses the TAB key. By default, the only elements included in the tab order are INPUT elements, the SELECT control, and any element whose contentEditable property is set to true. You can include any HTML element in the tab order, such as a DIV, by assigning it an explicit <see
-             cref="P:System.Windows.Forms.HtmlElement.TabIndex" />
+             determines which element in an HTML document will next receive focus when the user presses the TAB key. By default, the only elements included in the tab order are INPUT elements, the SELECT control, and any element whose contentEditable property is set to true. You can include any HTML element in the tab order, such as a DIV, by assigning it an explicit <see cref="P:System.Windows.Forms.HtmlElement.TabIndex" />
 
             
 
             .</para
           >
           <para
-            >Valid values for <see
-             cref="P:System.Windows.Forms.HtmlElement.TabIndex" />
+            >Valid values for <see cref="P:System.Windows.Forms.HtmlElement.TabIndex" />
 
             
 
@@ -3370,8 +3218,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Many elements in the HTML Document Object Model have attributes, properties, and methods that are unique to those elements; such as the HREF attribute on the A element, or the Submit method on FORM. Use <see
-             cref="P:System.Windows.Forms.HtmlElement.TagName" />
+            >Many elements in the HTML Document Object Model have attributes, properties, and methods that are unique to those elements; such as the HREF attribute on the A element, or the Submit method on FORM. Use <see cref="P:System.Windows.Forms.HtmlElement.TagName" />
 
             
 

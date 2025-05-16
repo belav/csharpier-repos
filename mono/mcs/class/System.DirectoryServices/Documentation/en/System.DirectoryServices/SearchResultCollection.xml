@@ -107,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all <see
-             cref="T:System.DirectoryServices.SearchResult" />
+            >Copies all <see cref="T:System.DirectoryServices.SearchResult" />
 
             
 
@@ -135,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines if a specified <see
-             cref="T:System.DirectoryServices.SearchResult" />
+            >Determines if a specified <see cref="T:System.DirectoryServices.SearchResult" />
 
             
 
@@ -166,8 +164,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the index of the first occurrence of the specified <see
-             cref="T:System.DirectoryServices.SearchResult" />
+            >Returns the index of the first occurrence of the specified <see cref="T:System.DirectoryServices.SearchResult" />
 
             
 
@@ -177,8 +174,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the first matching object. Returns -1 if no member of this collection is identical to the <see
-             cref="T:System.DirectoryServices.SearchResult" />
+            >The zero-based index of the first matching object. Returns -1 if no member of this collection is identical to the <see cref="T:System.DirectoryServices.SearchResult" />
 
             
 
@@ -186,12 +182,15 @@
           >
         </returns>
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DirectoryServices.SearchResult" />
+          The <see cref="T:System.DirectoryServices.SearchResult" />
 
           
 
@@ -218,8 +217,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -239,23 +237,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.DirectoryServices.SearchResultCollection.Dispose" />
+            >The <see cref="M:System.DirectoryServices.SearchResultCollection.Dispose" />
 
             
 
-             method, it allows the resources that are used by the <see
-             cref="T:System.DirectoryServices.SearchResultCollection" />
+             method, it allows the resources that are used by the <see cref="T:System.DirectoryServices.SearchResultCollection" />
 
             
 
-             to be reallocated for other purposes. For more information about <see
-             cref="M:System.DirectoryServices.SearchResultCollection.Dispose" />
+             to be reallocated for other purposes. For more information about <see cref="M:System.DirectoryServices.SearchResultCollection.Dispose" />
 
             
 
-            , see <format
-             type="text/html">
+            , see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
@@ -264,13 +258,11 @@
             .</para
           >
           <para
-            >The garbage collector does not release memory for a <see
-             cref="T:System.DirectoryServices.SearchResultCollection" />
+            >The garbage collector does not release memory for a <see cref="T:System.DirectoryServices.SearchResultCollection" />
 
             
 
-             object. Therefore, an application must call the <see
-             cref="M:System.DirectoryServices.SearchResultCollection.Dispose" />
+             object. Therefore, an application must call the <see cref="M:System.DirectoryServices.SearchResultCollection.Dispose" />
 
             
 
@@ -280,8 +272,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources that are used by the <see
-             cref="T:System.DirectoryServices.SearchResultCollection" />
+            >Releases all resources that are used by the <see cref="T:System.DirectoryServices.SearchResultCollection" />
 
             
 
@@ -302,8 +293,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of <see
-             cref="T:System.DirectoryServices.SearchResult" />
+            >Gets the number of <see cref="T:System.DirectoryServices.SearchResult" />
 
             
 
@@ -324,8 +314,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.DirectoryServices.DirectorySearcher" />
+            >Gets the <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
             
 
@@ -345,13 +334,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The  <see
-             cref="T:System.DirectoryServices.DirectorySearcher" />
+            >The  <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
             
 
              that created this collection calls the <see
-
               cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/adsi/adsi/idirectorysearch_executesearch.asp"
               >IDirectorySearch::ExecuteSearch</see
             >
@@ -359,7 +346,6 @@
             
 
              method, which makes the query results available to the T:System.DirectoryServices.SearchResultCollection object. For more information, see the <see
-
               cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/adsi/adsi/idirectorysearch_executesearch.asp"
               >IDirectorySearch::ExecuteSearch</see
             >
@@ -367,30 +353,28 @@
             
 
              topic in the MSDN Library at <see
-             cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+              cref="http://msdn.microsoft.com/library"
+              >http://msdn.microsoft.com/library</see
+            >
 
             
 
             .</para
           >
           <para
-            >Each time that a query is performed, a handle for the results of that query is associated with its  <see
-             cref="T:System.DirectoryServices.SearchResultCollection" />
+            >Each time that a query is performed, a handle for the results of that query is associated with its  <see cref="T:System.DirectoryServices.SearchResultCollection" />
 
             
 
-             object. This handle corresponds to the search handle in ADSI. This handle persists until you call the <see
-             cref="M:System.DirectoryServices.SearchResultCollection.Dispose" />
+             object. This handle corresponds to the search handle in ADSI. This handle persists until you call the <see cref="M:System.DirectoryServices.SearchResultCollection.Dispose" />
 
             
 
-             method on the <see
-             cref="T:System.DirectoryServices.SearchResultCollection" />
+             method on the <see cref="T:System.DirectoryServices.SearchResultCollection" />
 
             
 
-             object, so you must call <see
-             cref="M:System.DirectoryServices.SearchResultCollection.Dispose" />
+             object, so you must call <see cref="M:System.DirectoryServices.SearchResultCollection.Dispose" />
 
             
 
@@ -401,7 +385,6 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >Gets the handle that is returned by the <see
-
               cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/adsi/adsi/idirectorysearch_executesearch.asp"
               >IDirectorySearch::ExecuteSearch</see
             >
@@ -409,7 +392,6 @@
             
 
              method that performs the actual search. For more information, see the <see
-
               cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/adsi/adsi/idirectorysearch_executesearch.asp"
               >IDirectorySearch::ExecuteSearch</see
             >
@@ -417,7 +399,9 @@
             
 
              topic in the MSDN Library at <see
-             cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+              cref="http://msdn.microsoft.com/library"
+              >http://msdn.microsoft.com/library</see
+            >
 
             
 
@@ -450,18 +434,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Due to implementation restrictions, the <see
-         cref="T:System.DirectoryServices.SearchResultCollection" />
+        >Due to implementation restrictions, the <see cref="T:System.DirectoryServices.SearchResultCollection" />
 
         
 
-         class cannot release all of its unmanaged resources when it is garbage collected. To prevent a memory leak, you must call the <see
-         cref="M:System.DirectoryServices.SearchResultCollection.Dispose" />
+         class cannot release all of its unmanaged resources when it is garbage collected. To prevent a memory leak, you must call the <see cref="M:System.DirectoryServices.SearchResultCollection.Dispose" />
 
         
 
-         method when the <see
-         cref="T:System.DirectoryServices.SearchResultCollection" />
+         method when the <see cref="T:System.DirectoryServices.SearchResultCollection" />
 
         
 
@@ -471,18 +452,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.DirectoryServices.SearchResultCollection" />
+        >The <see cref="T:System.DirectoryServices.SearchResultCollection" />
 
         
 
-         class contains the <see
-         cref="T:System.DirectoryServices.SearchResult" />
+         class contains the <see cref="T:System.DirectoryServices.SearchResult" />
 
         
 
-         instances that the Active Directory hierarchy returned during a <see
-         cref="T:System.DirectoryServices.DirectorySearcher" />
+         instances that the Active Directory hierarchy returned during a <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
         
 

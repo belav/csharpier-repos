@@ -20,47 +20,40 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Web.UI.WebControls.DataGrid.ItemCreated" />
+        >The <see cref="E:System.Web.UI.WebControls.DataGrid.ItemCreated" />
 
         
 
-         event is raised when an item in the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         event is raised when an item in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
          control is created.</para
       >
       <para
-        >The <see
-         cref="E:System.Web.UI.WebControls.DataGrid.ItemDataBound" />
+        >The <see cref="E:System.Web.UI.WebControls.DataGrid.ItemDataBound" />
 
         
 
-         event is raised when an item in the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         event is raised when an item in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
          control is bound to a data source.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.WebControls.DataGridItemEventArgs" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.DataGridItemEventArgs" />
 
         
 
-        , see the <see
-         cref="M:System.Web.UI.WebControls.DataGridItemEventArgs.#ctor(System.Web.UI.WebControls.DataGridItem)" />
+        , see the <see cref="M:System.Web.UI.WebControls.DataGridItemEventArgs.#ctor(System.Web.UI.WebControls.DataGridItem)" />
 
         
 
          constructor.</para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
 
@@ -72,18 +65,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Web.UI.WebControls.DataGrid.ItemCreated" />
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.DataGrid.ItemCreated" />
 
         
 
-         and <see
-         cref="E:System.Web.UI.WebControls.DataGrid.ItemDataBound" />
+         and <see cref="E:System.Web.UI.WebControls.DataGrid.ItemDataBound" />
 
         
 
-         events of the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         events of the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
@@ -106,16 +96,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DataGridItemEventArgs" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.DataGridItemEventArgs" />
 
             
 
              class.</para
           >
           <para
-            >When an instance of <see
-             cref="T:System.Web.UI.WebControls.DataGridItemEventArgs" />
+            >When an instance of <see cref="T:System.Web.UI.WebControls.DataGridItemEventArgs" />
 
             
 
@@ -138,8 +126,7 @@
               </term>
               <description>
                 <para
-                  >The <paramref
-                   name="item" />
+                  >The <paramref name="item" />
 
                   
 
@@ -152,8 +139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DataGridItemEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.DataGridItemEventArgs" />
 
             
 
@@ -161,17 +147,19 @@
           >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.DataGridItem" />
+          A <see cref="T:System.Web.UI.WebControls.DataGridItem" />
 
           
 
-           that represents an item in the <see
-           cref="T:System.Web.UI.WebControls.DataGrid" />
+           that represents an item in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
           
 
@@ -197,8 +185,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to programmatically access the item referenced in the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+            >Use this property to programmatically access the item referenced in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
@@ -208,8 +195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the referenced item in the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+            >Gets the referenced item in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 

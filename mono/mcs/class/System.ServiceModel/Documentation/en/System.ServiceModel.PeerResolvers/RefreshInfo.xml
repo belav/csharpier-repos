@@ -46,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new default instance of the <see
-             cref="T:System.ServiceModel.PeerResolvers.RefreshInfo" />
+            >Initializes a new default instance of the <see cref="T:System.ServiceModel.PeerResolvers.RefreshInfo" />
 
             
 
@@ -75,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.PeerResolvers.RefreshInfo" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.PeerResolvers.RefreshInfo" />
 
             
 
@@ -84,24 +82,30 @@
           >
         </summary>
         <param name="meshId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            that identifies the mesh in which the peer node participates.</param
         >
         <param name="regId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Guid" />
+          A <see cref="T:System.Guid" />
 
           
 

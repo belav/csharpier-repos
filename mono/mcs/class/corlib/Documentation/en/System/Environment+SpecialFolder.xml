@@ -22,8 +22,7 @@
     <summary>An enumeration of common directories on the file system.</summary>
     <remarks>
       <para
-        >The enumeration is used by <see
-         cref="M:System.Environment.GetFolderPath" />
+        >The enumeration is used by <see cref="M:System.Environment.GetFolderPath" />
 
         
 

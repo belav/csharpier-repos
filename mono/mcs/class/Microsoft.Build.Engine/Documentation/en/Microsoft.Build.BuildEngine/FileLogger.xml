@@ -17,13 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:Microsoft.Build.BuildEngine.FileLogger" />
+        >The <see cref="T:Microsoft.Build.BuildEngine.FileLogger" />
 
         
 
-         writes messages to a file in exactly the same format as the <see
-         cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" />
+         writes messages to a file in exactly the same format as the <see cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" />
 
         
 
@@ -33,8 +31,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Extends the <see
-         cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" />
+        >Extends the <see cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" />
 
         
 
@@ -53,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.BuildEngine.FileLogger" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.FileLogger" />
 
             
 
@@ -88,12 +84,15 @@
           <para>Registers the logger for the specified events.</para>
         </summary>
         <param name="eventSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:Microsoft.Build.Framework.IEventSource" />
+          The <see cref="T:Microsoft.Build.Framework.IEventSource" />
 
           
 

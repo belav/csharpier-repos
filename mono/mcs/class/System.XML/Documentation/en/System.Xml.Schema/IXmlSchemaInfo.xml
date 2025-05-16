@@ -37,8 +37,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Schema.IXmlSchemaInfo" />
+            >The <see cref="T:System.Xml.Schema.IXmlSchemaInfo" />
 
             
 
@@ -95,13 +94,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Schema.IXmlSchemaInfo.MemberType" />
+            >The <see cref="P:System.Xml.Schema.IXmlSchemaInfo.MemberType" />
 
             
 
-             property is set only if the static type of the XML node is a union type in which case the <see
-             cref="P:System.Xml.Schema.IXmlSchemaInfo.MemberType" />
+             property is set only if the static type of the XML node is a union type in which case the <see cref="P:System.Xml.Schema.IXmlSchemaInfo.MemberType" />
 
             
 
@@ -138,8 +135,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the compiled <see
-             cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+            >Gets the compiled <see cref="T:System.Xml.Schema.XmlSchemaAttribute" />
 
             
 
@@ -172,8 +168,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the compiled <see
-             cref="T:System.Xml.Schema.XmlSchemaElement" />
+            >Gets the compiled <see cref="T:System.Xml.Schema.XmlSchemaElement" />
 
             
 
@@ -235,23 +230,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The possible <see
-             cref="T:System.Xml.Schema.XmlSchemaValidity" />
+            >The possible <see cref="T:System.Xml.Schema.XmlSchemaValidity" />
 
             
 
-             values for this XML node are <see
-             cref="F:System.Xml.Schema.XmlSchemaValidity.Valid" />
+             values for this XML node are <see cref="F:System.Xml.Schema.XmlSchemaValidity.Valid" />
 
             
 
-            , <see
-             cref="F:System.Xml.Schema.XmlSchemaValidity.Invalid" />
+            , <see cref="F:System.Xml.Schema.XmlSchemaValidity.Invalid" />
 
             
 
-            , and <see
-             cref="F:System.Xml.Schema.XmlSchemaValidity.NotKnown" />
+            , and <see cref="F:System.Xml.Schema.XmlSchemaValidity.NotKnown" />
 
             
 
@@ -261,8 +252,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Schema.XmlSchemaValidity" />
+            >Gets the <see cref="T:System.Xml.Schema.XmlSchemaValidity" />
 
             
 

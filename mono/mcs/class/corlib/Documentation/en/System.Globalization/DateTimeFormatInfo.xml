@@ -46,8 +46,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The properties of the <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >The properties of the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
@@ -148,13 +147,11 @@
         <h2>Instantiating a DateTimeFormatInfo object</h2>
       </format>
       <para
-        >A <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >A <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object can represent the formatting conventions of the invariant culture, a specific culture, a neutral culture, or the current culture. This section discusses how to instantiate each type of <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         object can represent the formatting conventions of the invariant culture, a specific culture, a neutral culture, or the current culture. This section discusses how to instantiate each type of <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
@@ -167,8 +164,7 @@
         <h2>Instantiating a DateTimeFormatInfo object for the invariant culture</h2>
       </format>
       <para
-        >The invariant culture represents a culture that is culture-insensitive. It is based on the English language, but not on any specific English-speaking country/region. Although the data of specific cultures can be dynamic and can change to reflect new cultural conventions or user preferences, the data of the invariant culture does not change. You can instantiate a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >The invariant culture represents a culture that is culture-insensitive. It is based on the English language, but not on any specific English-speaking country/region. Although the data of specific cultures can be dynamic and can change to reflect new cultural conventions or user preferences, the data of the invariant culture does not change. You can instantiate a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
@@ -177,13 +173,11 @@
       <list type="bullet">
         <item>
           <para
-            >By retrieving the value of the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.InvariantInfo" />
+            >By retrieving the value of the <see cref="P:System.Globalization.DateTimeFormatInfo.InvariantInfo" />
 
             
 
-             property. The returned <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             property. The returned <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -192,13 +186,11 @@
         </item>
         <item>
           <para
-            >By calling the parameterless <see
-             cref="M:System.Globalization.DateTimeFormatInfo.#ctor" />
+            >By calling the parameterless <see cref="M:System.Globalization.DateTimeFormatInfo.#ctor" />
 
             
 
-             constructor. The returned <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             constructor. The returned <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -207,23 +199,19 @@
         </item>
         <item>
           <para
-            >By retrieving the value of the <see
-             cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+            >By retrieving the value of the <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
             
 
-             property from the <see
-             cref="T:System.Globalization.CultureInfo" />
+             property from the <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             object that is returned by the <see
-             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+             object that is returned by the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
 
             
 
-             property. The returned <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             property. The returned <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -232,8 +220,7 @@
         </item>
       </list>
       <para
-        >The following example uses each of these methods to instantiate a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >The following example uses each of these methods to instantiate a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
@@ -247,8 +234,7 @@
         <h2>Instantiating a DateTimeFormatInfo object for a specific culture</h2>
       </format>
       <para
-        >A specific culture represents a language that is spoken in a particular country/region. For example, en-US is a specific culture that represents the English language spoken in the United States, and en-CA is a specific culture that represents the English language spoken in Canada. You can instantiate a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >A specific culture represents a language that is spoken in a particular country/region. For example, en-US is a specific culture that represents the English language spoken in the United States, and en-CA is a specific culture that represents the English language spoken in Canada. You can instantiate a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
@@ -257,23 +243,19 @@
       <list type="bullet">
         <item>
           <para
-            >By calling the <see
-             cref="M:System.Globalization.CultureInfo.GetCultureInfo(System.String)" />
+            >By calling the <see cref="M:System.Globalization.CultureInfo.GetCultureInfo(System.String)" />
 
             
 
-             method and retrieving the value of the returned <see
-             cref="T:System.Globalization.CultureInfo" />
+             method and retrieving the value of the returned <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             object's <see
-             cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+             object's <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
             
 
-             property. The returned <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             property. The returned <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -282,23 +264,19 @@
         </item>
         <item>
           <para
-            >By passing the static <see
-             cref="M:System.Globalization.DateTimeFormatInfo.GetInstance(System.IFormatProvider)" />
+            >By passing the static <see cref="M:System.Globalization.DateTimeFormatInfo.GetInstance(System.IFormatProvider)" />
 
             
 
-             method a <see
-             cref="T:System.Globalization.CultureInfo" />
+             method a <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             object that represents the culture whose <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             object that represents the culture whose <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object you want to retrieve. The returned <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             object you want to retrieve. The returned <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -307,23 +285,19 @@
         </item>
         <item>
           <para
-            >By calling the static <see
-             cref="M:System.Globalization.CultureInfo.CreateSpecificCulture(System.String)" />
+            >By calling the static <see cref="M:System.Globalization.CultureInfo.CreateSpecificCulture(System.String)" />
 
             
 
-             method and retrieving the value of the returned <see
-             cref="T:System.Globalization.CultureInfo" />
+             method and retrieving the value of the returned <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             object's <see
-             cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+             object's <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
             
 
-             property. The returned <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             property. The returned <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -332,23 +306,19 @@
         </item>
         <item>
           <para
-            >By calling the <see
-             cref="M:System.Globalization.CultureInfo.#ctor(System.String)" />
+            >By calling the <see cref="M:System.Globalization.CultureInfo.#ctor(System.String)" />
 
             
 
-             class constructor and retrieving the value of the returned <see
-             cref="T:System.Globalization.CultureInfo" />
+             class constructor and retrieving the value of the returned <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             object's <see
-             cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+             object's <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
             
 
-             property. The returned <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             property. The returned <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -357,8 +327,7 @@
         </item>
       </list>
       <para
-        >The following example illustrates each of these ways to instantiate a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >The following example illustrates each of these ways to instantiate a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
@@ -372,43 +341,35 @@
         <h2>Instantiating a DateTimeFormatInfo object for a neutral culture</h2>
       </format>
       <para
-        >A neutral culture represents a culture or language that is independent of a country/region; it is typically the parent of one or more specific cultures. For example, Fr is a neutral culture for the French language and the parent of the fr-FR culture. You can instantiate a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >A neutral culture represents a culture or language that is independent of a country/region; it is typically the parent of one or more specific cultures. For example, Fr is a neutral culture for the French language and the parent of the fr-FR culture. You can instantiate a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object that represents the formatting conventions of a neutral culture in the same ways that you create a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         object that represents the formatting conventions of a neutral culture in the same ways that you create a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object that represents the formatting conventions of a specific culture. In addition, you can retrieve a neutral culture's <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         object that represents the formatting conventions of a specific culture. In addition, you can retrieve a neutral culture's <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object by retrieving a neutral culture from a specific culture's <see
-         cref="P:System.Globalization.CultureInfo.Parent" />
+         object by retrieving a neutral culture from a specific culture's <see cref="P:System.Globalization.CultureInfo.Parent" />
 
         
 
-         property and retrieving the <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         property and retrieving the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object returned by its <see
-         cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+         object returned by its <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
         
 
-         property. Unless the parent culture represents the invariant culture, the returned <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         property. Unless the parent culture represents the invariant culture, the returned <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object is read/write. The following example illustrates these ways of instantiating a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         object is read/write. The following example illustrates these ways of instantiating a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
@@ -417,13 +378,11 @@
       <para>code reference: System.Globalization.DateTimeFormatInfo.Class#2</para>
       <block subset="none" type="note">
         <para
-          >In the .NET Framework versions 1.0 through net_v35_short, trying to retrieve a <see
-           cref="T:System.Globalization.DateTimeFormatInfo" />
+          >In the .NET Framework versions 1.0 through net_v35_short, trying to retrieve a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
           
 
-           object that  reflects the formatting conventions of a neutral culture throws a <see
-           cref="T:System.NotSupportedException" />
+           object that  reflects the formatting conventions of a neutral culture throws a <see cref="T:System.NotSupportedException" />
 
           
 
@@ -431,36 +390,30 @@
         >
       </block>
       <para
-        >However, a neutral culture lacks culture-specific formatting information, because it is independent of a specific country/region. Instead of populating the <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >However, a neutral culture lacks culture-specific formatting information, because it is independent of a specific country/region. Instead of populating the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object with generic values, the .NET Framework returns a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         object with generic values, the .NET Framework returns a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object that reflects the formatting conventions of a specific culture that is a child of the neutral culture. For example, the <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         object that reflects the formatting conventions of a specific culture that is a child of the neutral culture. For example, the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object for the neutral en culture reflects the formatting conventions of the en-US culture, and the <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         object for the neutral en culture reflects the formatting conventions of the en-US culture, and the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
          object for the fr culture reflects the formatting conventions of the fr-FR culture. </para
       >
       <para
-        >You can use code like the following to determine which specific culture's formatting conventions a neutral culture represents. The example uses reflection to compare the <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >You can use code like the following to determine which specific culture's formatting conventions a neutral culture represents. The example uses reflection to compare the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         properties of a neutral culture with the properties of a specific child culture. It considers two calendars to be equivalent if they are the same calendar type and, for Gregorian calendars, if their <see
-         cref="P:System.Globalization.GregorianCalendar.CalendarType" />
+         properties of a neutral culture with the properties of a specific child culture. It considers two calendars to be equivalent if they are the same calendar type and, for Gregorian calendars, if their <see cref="P:System.Globalization.GregorianCalendar.CalendarType" />
 
         
 
@@ -474,8 +427,7 @@
         <h2>Instantiating a DateTimeFormatInfo object for the current culture</h2>
       </format>
       <para
-        >You can instantiate a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >You can instantiate a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
@@ -484,13 +436,11 @@
       <list type="bullet">
         <item>
           <para
-            >By retrieving the value of the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.CurrentInfo" />
+            >By retrieving the value of the <see cref="P:System.Globalization.DateTimeFormatInfo.CurrentInfo" />
 
             
 
-             property. The returned <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             property. The returned <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -499,23 +449,19 @@
         </item>
         <item>
           <para
-            >By retrieving the value of the <see
-             cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+            >By retrieving the value of the <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
             
 
-             property from the <see
-             cref="T:System.Globalization.CultureInfo" />
+             property from the <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             object that is returned by the <see
-             cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+             object that is returned by the <see cref="P:System.Globalization.CultureInfo.CurrentCulture" />
 
             
 
-             property. The returned <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             property. The returned <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -524,18 +470,15 @@
         </item>
         <item>
           <para
-            >By calling the <see
-             cref="M:System.Globalization.NumberFormatInfo.GetInstance(System.IFormatProvider)" />
+            >By calling the <see cref="M:System.Globalization.NumberFormatInfo.GetInstance(System.IFormatProvider)" />
 
             
 
-             method with a <see
-             cref="T:System.Globalization.CultureInfo" />
+             method with a <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             object that represents the current culture. The returned <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             object that represents the current culture. The returned <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -544,8 +487,7 @@
         </item>
       </list>
       <para
-        >The following example uses each of these methods to instantiate a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >The following example uses each of these methods to instantiate a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
@@ -553,8 +495,7 @@
       >
       <para>code reference: System.Globalization.DateTimeFormatInfo.Class#4</para>
       <para
-        >You can create a writable <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >You can create a writable <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
@@ -563,28 +504,23 @@
       <list type="bullet">
         <item>
           <para
-            >By retrieving a <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >By retrieving a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object in any of the three previous ways and calling the <see
-             cref="M:System.Globalization.DateTimeFormatInfo.Clone" />
+             object in any of the three previous ways and calling the <see cref="M:System.Globalization.DateTimeFormatInfo.Clone" />
 
             
 
-             method on the returned <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             method on the returned <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object. This creates a copy of the original <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             object. This creates a copy of the original <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object, except that its <see
-             cref="P:System.Globalization.DateTimeFormatInfo.IsReadOnly" />
+             object, except that its <see cref="P:System.Globalization.DateTimeFormatInfo.IsReadOnly" />
 
             
 
@@ -593,23 +529,19 @@
         </item>
         <item>
           <para
-            >By calling the <see
-             cref="M:System.Globalization.CultureInfo.CreateSpecificCulture(System.String)" />
+            >By calling the <see cref="M:System.Globalization.CultureInfo.CreateSpecificCulture(System.String)" />
 
             
 
-             method to create a <see
-             cref="T:System.Globalization.CultureInfo" />
+             method to create a <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             object that represents the current culture, and then using its <see
-             cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+             object that represents the current culture, and then using its <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
             
 
-             property to retrieve the <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             property to retrieve the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -618,13 +550,11 @@
         </item>
       </list>
       <para
-        >The following example illustrates each way of instantiating a read/write <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >The following example illustrates each way of instantiating a read/write <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object and displays the value of its <see
-         cref="P:System.Globalization.DateTimeFormatInfo.IsReadOnly" />
+         object and displays the value of its <see cref="P:System.Globalization.DateTimeFormatInfo.IsReadOnly" />
 
         
 
@@ -632,33 +562,27 @@
       >
       <para>code reference: System.Globalization.DateTimeFormatInfo.Class#7</para>
       <para
-        >In Windows, the user can override some of the <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >In Windows, the user can override some of the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         property values used in formatting and parsing operations through the <ui
-        >Region and Language</ui>
+         property values used in formatting and parsing operations through the <ui>Region and Language</ui>
 
         
 
-         application in Control Panel. For example, a user whose culture is English (United States) might choose to display long time values using a 24-hour clock (in the format HH:mm:ss) instead of the default 12-hour clock (in the format h:mm:ss tt). The <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         application in Control Panel. For example, a user whose culture is English (United States) might choose to display long time values using a 24-hour clock (in the format HH:mm:ss) instead of the default 12-hour clock (in the format h:mm:ss tt). The <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         objects retrieved in the ways discussed previously all reflect these user overrides. If this is undesirable, you can create a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         objects retrieved in the ways discussed previously all reflect these user overrides. If this is undesirable, you can create a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         object that does not reflect user overrides (and is also read/write instead of read-only) by calling the <see
-         cref="M:System.Globalization.CultureInfo.#ctor(System.String,System.Boolean)" />
+         object that does not reflect user overrides (and is also read/write instead of read-only) by calling the <see cref="M:System.Globalization.CultureInfo.#ctor(System.String,System.Boolean)" />
 
         
 
-         constructor and supplying a value of false for the <paramref
-         name="useUserOverride" />
+         constructor and supplying a value of false for the <paramref name="useUserOverride" />
 
         
 
@@ -672,28 +596,23 @@
         <h2>DateTimeFormatInfo and dynamic data</h2>
       </format>
       <para
-        >The culture-specific data for formatting date and time values provided by the <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >The culture-specific data for formatting date and time values provided by the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         class is dynamic, just like cultural data provided by the <see
-         cref="T:System.Globalization.CultureInfo" />
+         class is dynamic, just like cultural data provided by the <see cref="T:System.Globalization.CultureInfo" />
 
         
 
-         class. You should not make any assumptions about the stability of values for <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         class. You should not make any assumptions about the stability of values for <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         objects that are associated with particular <see
-         cref="T:System.Globalization.CultureInfo" />
+         objects that are associated with particular <see cref="T:System.Globalization.CultureInfo" />
 
         
 
-         objects. Only the data provided by the invariant culture and its associated <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         objects. Only the data provided by the invariant culture and its associated <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
@@ -702,8 +621,7 @@
       <list type="bullet">
         <item>
           <para
-            >System updates. Cultural preferences such as the preferred calendar or customary date and time formats change over time. When this happens, Windows Update includes changes to the <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >System updates. Cultural preferences such as the preferred calendar or customary date and time formats change over time. When this happens, Windows Update includes changes to the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -712,8 +630,7 @@
         </item>
         <item>
           <para
-            >Replacement cultures. The <see
-             cref="T:System.Globalization.CultureAndRegionInfoBuilder" />
+            >Replacement cultures. The <see cref="T:System.Globalization.CultureAndRegionInfoBuilder" />
 
             
 
@@ -722,23 +639,19 @@
         </item>
         <item>
           <para
-            >Cascading changes to property values. A number of culture-related properties can change at run time, which, in turn, causes <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >Cascading changes to property values. A number of culture-related properties can change at run time, which, in turn, causes <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             data to change. For example, the current culture can be changed either programmatically or through user action. When this happens, the <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             data to change. For example, the current culture can be changed either programmatically or through user action. When this happens, the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object returned by the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.CurrentInfo" />
+             object returned by the <see cref="P:System.Globalization.DateTimeFormatInfo.CurrentInfo" />
 
             
 
-             property changes to an object associated with the current culture. Similarly, a culture's calendar can change, which can result in changes to numerous <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             property changes to an object associated with the current culture. Similarly, a culture's calendar can change, which can result in changes to numerous <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -747,23 +660,19 @@
         </item>
         <item>
           <para
-            >User preferences. Users of your application might choose to override some of the values associated with the current system culture through the regional and language options in Control Panel. For example, users might choose to display the date in a different format. If the <see
-             cref="P:System.Globalization.CultureInfo.UseUserOverride" />
+            >User preferences. Users of your application might choose to override some of the values associated with the current system culture through the regional and language options in Control Panel. For example, users might choose to display the date in a different format. If the <see cref="P:System.Globalization.CultureInfo.UseUserOverride" />
 
             
 
-             property is set to true, the properties of the <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             property is set to true, the properties of the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object is also retrieved from the user settings. If the user settings are incompatible with the culture associated with the <see
-             cref="T:System.Globalization.CultureInfo" />
+             object is also retrieved from the user settings. If the user settings are incompatible with the culture associated with the <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             object (for example, if the selected calendar is not one of the calendars indicated by the <see
-             cref="P:System.Globalization.CultureInfo.OptionalCalendars" />
+             object (for example, if the selected calendar is not one of the calendars indicated by the <see cref="P:System.Globalization.CultureInfo.OptionalCalendars" />
 
             
 
@@ -772,21 +681,18 @@
         </item>
       </list>
       <para
-        >To minimize the possibility of inconsistent data, all user-overridable properties of a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >To minimize the possibility of inconsistent data, all user-overridable properties of a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
          object are initialized when the object is created. There is still a possibility of inconsistency, because neither object creation nor the user override process is atomic and the relevant values can change during object creation. However, this situation should be extremely rare.</para
       >
       <para
-        >You can control whether user overrides are reflected in <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >You can control whether user overrides are reflected in <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         objects that represent the same culture as the system culture. The following table lists the ways in which a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         objects that represent the same culture as the system culture. The following table lists the ways in which a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
@@ -879,8 +785,7 @@
           </term>
           <description>
             <para
-              >Depends on value of <paramref
-               name="useUserOverride" />
+              >Depends on value of <paramref name="useUserOverride" />
 
               
 
@@ -891,18 +796,15 @@
       </list>
       <para></para>
       <para
-        >Unless there is a compelling reason to do otherwise, you should respect user overrides when you use the <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >Unless there is a compelling reason to do otherwise, you should respect user overrides when you use the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object in client applications to format and parse user input or to display data. For server applications or unattended applications, you should not. However, if you are using the <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         object in client applications to format and parse user input or to display data. For server applications or unattended applications, you should not. However, if you are using the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object either explicitly or implicitly to persist date and time data in string form, you should either use a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         object either explicitly or implicitly to persist date and time data in string form, you should either use a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
@@ -916,8 +818,7 @@
         <h2>Formatting dates and times</h2>
       </format>
       <para
-        >A <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >A <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
@@ -926,23 +827,11 @@
       <list type="bullet">
         <item>
           <para
-            >All date and time formatting methods, such as <see
-             cref="M:System.DateTime.ToString" />
+            >All date and time formatting methods, such as <see cref="M:System.DateTime.ToString" />
 
             
 
-             and <see
-             cref="M:System.DateTimeOffset.ToString(System.String)" />
-
-            
-
-            . </para
-          >
-        </item>
-        <item>
-          <para
-            >The major composite formatting method, which is <see
-             cref="M:System.String.Format(System.String,System.Object[])" />
+             and <see cref="M:System.DateTimeOffset.ToString(System.String)" />
 
             
 
@@ -951,13 +840,20 @@
         </item>
         <item>
           <para
-            >Other composite formatting methods, such as <see
-             cref="M:System.Console.WriteLine(System.String,System.Object[])" />
+            >The major composite formatting method, which is <see cref="M:System.String.Format(System.String,System.Object[])" />
 
             
 
-             and <see
-             cref="M:System.Text.StringBuilder.AppendFormat(System.String,System.Object[])" />
+            . </para
+          >
+        </item>
+        <item>
+          <para
+            >Other composite formatting methods, such as <see cref="M:System.Console.WriteLine(System.String,System.Object[])" />
+
+            
+
+             and <see cref="M:System.Text.StringBuilder.AppendFormat(System.String,System.Object[])" />
 
             
 
@@ -966,28 +862,23 @@
         </item>
       </list>
       <para
-        >All date and time formatting operations make use of an <see
-         cref="T:System.IFormatProvider" />
+        >All date and time formatting operations make use of an <see cref="T:System.IFormatProvider" />
 
         
 
-         implementation. The <see
-         cref="T:System.IFormatProvider" />
+         implementation. The <see cref="T:System.IFormatProvider" />
 
         
 
-         interface includes a single method, <see
-         cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+         interface includes a single method, <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
         
 
-        . This callback method is passed a <see
-         cref="T:System.Type" />
+        . This callback method is passed a <see cref="T:System.Type" />
 
         
 
-         object that represents the type needed to provide formatting information. The method returns either an instance of that type or null if it cannot provide an instance of the type. The .NET Framework includes two <see
-         cref="T:System.IFormatProvider" />
+         object that represents the type needed to provide formatting information. The method returns either an instance of that type or null if it cannot provide an instance of the type. The .NET Framework includes two <see cref="T:System.IFormatProvider" />
 
         
 
@@ -996,23 +887,19 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="T:System.Globalization.CultureInfo" />
+            >The <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             class,  which represents a specific culture (or a specific language in a specific country/region). In a date and time formatting operation, the <see
-             cref="M:System.Globalization.CultureInfo.GetFormat(System.Type)" />
+             class,  which represents a specific culture (or a specific language in a specific country/region). In a date and time formatting operation, the <see cref="M:System.Globalization.CultureInfo.GetFormat(System.Type)" />
 
             
 
-             method returns the <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             method returns the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object associated with its <see
-             cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+             object associated with its <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
             
 
@@ -1021,13 +908,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >The <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             class, which provides information about the formatting conventions of its associated culture. The <see
-             cref="M:System.Globalization.DateTimeFormatInfo.GetFormat(System.Type)" />
+             class, which provides information about the formatting conventions of its associated culture. The <see cref="M:System.Globalization.DateTimeFormatInfo.GetFormat(System.Type)" />
 
             
 
@@ -1036,81 +921,66 @@
         </item>
       </list>
       <para
-        >If an <see
-         cref="T:System.IFormatProvider" />
+        >If an <see cref="T:System.IFormatProvider" />
 
         
 
-         implementation is not provided to a formatting method explicitly, the <see
-         cref="T:System.Globalization.CultureInfo" />
+         implementation is not provided to a formatting method explicitly, the <see cref="T:System.Globalization.CultureInfo" />
 
         
 
-         object returned by the <see
-         cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+         object returned by the <see cref="P:System.Globalization.CultureInfo.CurrentCulture" />
 
         
 
          property that represents the current thread culture is used.  </para
       >
       <para
-        >The following example illustrates the relationship between the <see
-         cref="T:System.IFormatProvider" />
+        >The following example illustrates the relationship between the <see cref="T:System.IFormatProvider" />
 
         
 
-         interface and the <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         interface and the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         class in formatting operations. It defines a custom <see
-         cref="T:System.IFormatProvider" />
+         class in formatting operations. It defines a custom <see cref="T:System.IFormatProvider" />
 
         
 
-         implementation whose <see
-         cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+         implementation whose <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
         
 
-         method displays the type of the object requested by the formatting operation. If it is requesting a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         method displays the type of the object requested by the formatting operation. If it is requesting a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object, the method provides the <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         object, the method provides the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object for the current thread culture. As the output from the example shows, the <see
-         cref="M:System.Decimal.ToString(System.IFormatProvider)" />
+         object for the current thread culture. As the output from the example shows, the <see cref="M:System.Decimal.ToString(System.IFormatProvider)" />
 
         
 
-         method requests a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         method requests a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object to provide formatting information, whereas the <see
-         cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />
+         object to provide formatting information, whereas the <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />
 
         
 
-         method requests <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         method requests <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         and <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         and <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         objects as well as an <see
-         cref="T:System.ICustomFormatter" />
+         objects as well as an <see cref="T:System.ICustomFormatter" />
 
         
 
@@ -1124,8 +994,7 @@
         <h2>Format strings and DateTimeFormatInfo properties</h2>
       </format>
       <para
-        > The <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        > The <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
@@ -1134,28 +1003,23 @@
       <list type="bullet">
         <item>
           <para
-            >Calendar-related properties. Properties such as <see
-             cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedDayNames" />
+            >Calendar-related properties. Properties such as <see cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedDayNames" />
 
             
 
-            , <see
-             cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedMonthNames" />
+            , <see cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedMonthNames" />
 
             
 
-            , <see
-             cref="P:System.Globalization.DateTimeFormatInfo.DayNames" />
+            , <see cref="P:System.Globalization.DateTimeFormatInfo.DayNames" />
 
             
 
-            , and <see
-             cref="P:System.Globalization.DateTimeFormatInfo.MonthNames" />
+            , and <see cref="P:System.Globalization.DateTimeFormatInfo.MonthNames" />
 
             
 
-            , are associated with the calendar used by the culture, which is defined by the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+            , are associated with the calendar used by the culture, which is defined by the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
 
             
 
@@ -1164,18 +1028,15 @@
         </item>
         <item>
           <para
-            >Properties that produce a standards-defined result string. The <see
-             cref="P:System.Globalization.DateTimeFormatInfo.RFC1123Pattern" />
+            >Properties that produce a standards-defined result string. The <see cref="P:System.Globalization.DateTimeFormatInfo.RFC1123Pattern" />
 
             
 
-            , <see
-             cref="P:System.Globalization.DateTimeFormatInfo.SortableDateTimePattern" />
+            , <see cref="P:System.Globalization.DateTimeFormatInfo.SortableDateTimePattern" />
 
             
 
-            , and <see
-             cref="P:System.Globalization.DateTimeFormatInfo.UniversalSortableDateTimePattern" />
+            , and <see cref="P:System.Globalization.DateTimeFormatInfo.UniversalSortableDateTimePattern" />
 
             
 
@@ -1184,40 +1045,33 @@
         </item>
         <item>
           <para
-            >Properties that define culture-sensitive result strings. Some properties, such as <see
-             cref="P:System.Globalization.DateTimeFormatInfo.FullDateTimePattern" />
+            >Properties that define culture-sensitive result strings. Some properties, such as <see cref="P:System.Globalization.DateTimeFormatInfo.FullDateTimePattern" />
 
             
 
-             and <see
-             cref="P:System.Globalization.DateTimeFormatInfo.ShortDatePattern" />
+             and <see cref="P:System.Globalization.DateTimeFormatInfo.ShortDatePattern" />
 
             
 
-            , contain <format
-             type="text/html">
+            , contain <format type="text/html">
               <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">custom format strings</a>
             </format>
 
             
 
-             that specify the format of the result string. Others, such as <see
-             cref="P:System.Globalization.DateTimeFormatInfo.AMDesignator" />
+             that specify the format of the result string. Others, such as <see cref="P:System.Globalization.DateTimeFormatInfo.AMDesignator" />
 
             
 
-            , <see
-             cref="P:System.Globalization.DateTimeFormatInfo.DateSeparator" />
+            , <see cref="P:System.Globalization.DateTimeFormatInfo.DateSeparator" />
 
             
 
-            , <see
-             cref="P:System.Globalization.DateTimeFormatInfo.PMDesignator" />
+            , <see cref="P:System.Globalization.DateTimeFormatInfo.PMDesignator" />
 
             
 
-            , and <see
-             cref="P:System.Globalization.DateTimeFormatInfo.TimeSeparator" />
+            , and <see cref="P:System.Globalization.DateTimeFormatInfo.TimeSeparator" />
 
             
 
@@ -1226,61 +1080,51 @@
         </item>
       </list>
       <para
-        >The <format
-         type="text/html">
+        >The <format type="text/html">
           <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b">standard date and time format strings</a>
         </format>
 
         
 
-        , such as "d", "D", "f", and "F", are aliases that correspond to particular <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        , such as "d", "D", "f", and "F", are aliases that correspond to particular <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         format pattern properties. Most of the <format
-         type="text/html">
+         format pattern properties. Most of the <format type="text/html">
           <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">custom date and time format specifiers</a>
         </format>
 
         
 
-         are related to strings or substrings that a formatting operation inserts into the result stream. The following table lists the standard and custom date and time format specifiers and their associated <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         are related to strings or substrings that a formatting operation inserts into the result stream. The following table lists the standard and custom date and time format specifiers and their associated <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         properties. For details about how to use these format specifiers, see <format
-         type="text/html">
+         properties. For details about how to use these format specifiers, see <format type="text/html">
           <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b">Standard Date and Time Format Strings</a>
         </format>
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom Date and Time Format Strings</a>
         </format>
 
         
 
-        . Note that each standard format string corresponds to a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        . Note that each standard format string corresponds to a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         property whose value is a custom date and time format string. The individual specifiers in this custom format string in turn correspond to other <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         property whose value is a custom date and time format string. The individual specifiers in this custom format string in turn correspond to other <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         properties. The table lists only the <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         properties. The table lists only the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         properties for which the standard format strings are aliases, and does not list properties that may be accessed by custom format strings assigned to those aliased properties. In addition, the table lists only custom format specifiers that correspond to <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         properties for which the standard format strings are aliases, and does not list properties that may be accessed by custom format strings assigned to those aliased properties. In addition, the table lists only custom format specifiers that correspond to <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
@@ -1549,8 +1393,7 @@
           </term>
           <description>
             <para
-              >Calls the <see
-               cref="M:System.Globalization.DateTimeFormatInfo.GetEraName(System.Int32)" />
+              >Calls the <see cref="M:System.Globalization.DateTimeFormatInfo.GetEraName(System.Int32)" />
 
               
 
@@ -1582,8 +1425,7 @@
 
               
 
-               or <see
-               cref="P:System.Globalization.DateTimeFormatInfo.MonthGenitiveNames" />
+               or <see cref="P:System.Globalization.DateTimeFormatInfo.MonthGenitiveNames" />
 
               
 
@@ -1601,8 +1443,7 @@
 
               
 
-               or <see
-               cref="P:System.Globalization.DateTimeFormatInfo.PMDesignator" />
+               or <see cref="P:System.Globalization.DateTimeFormatInfo.PMDesignator" />
 
               
 
@@ -1620,8 +1461,7 @@
 
               
 
-               or <see
-               cref="P:System.Globalization.DateTimeFormatInfo.PMDesignator" />
+               or <see cref="P:System.Globalization.DateTimeFormatInfo.PMDesignator" />
 
               
 
@@ -1666,23 +1506,19 @@
         <h2>Modifying DateTimeFormatInfo properties</h2>
       </format>
       <para
-        >You can change the result string produced by date and time format strings by modifying the associated properties of a writable <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >You can change the result string produced by date and time format strings by modifying the associated properties of a writable <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object. To determine if a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         object. To determine if a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object is writable, use the <see
-         cref="P:System.Globalization.DateTimeFormatInfo.IsReadOnly" />
+         object is writable, use the <see cref="P:System.Globalization.DateTimeFormatInfo.IsReadOnly" />
 
         
 
-         property. To customize a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         property. To customize a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
@@ -1691,13 +1527,11 @@
       <list type="ordered">
         <item>
           <para
-            >Create a read/write copy of a <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >Create a read/write copy of a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object whose formatting conventions you want to modify. (See the <format
-             type="text/html">
+             object whose formatting conventions you want to modify. (See the <format type="text/html">
               <a href="#instantiating">Instantiating a DateTimeFormatInfo object</a>
             </format>
 
@@ -1708,13 +1542,11 @@
         </item>
         <item>
           <para
-            >Modify the property or properties that are used to produce the desired result string. (For information about how formatting methods use <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >Modify the property or properties that are used to produce the desired result string. (For information about how formatting methods use <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             properties to define result strings, see the previous section, <format
-             type="text/html">
+             properties to define result strings, see the previous section, <format type="text/html">
               <a href="#properties">Format strings and DateTimeFormatInfo properties</a>
             </format>
 
@@ -1725,13 +1557,11 @@
         </item>
         <item>
           <para
-            >Use the custom <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >Use the custom <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object you created as the <see
-             cref="T:System.IFormatProvider" />
+             object you created as the <see cref="T:System.IFormatProvider" />
 
             
 
@@ -1743,13 +1573,11 @@
       <list type="bullet">
         <item>
           <para
-            >You can use the <see
-             cref="T:System.Globalization.CultureAndRegionInfoBuilder" />
+            >You can use the <see cref="T:System.Globalization.CultureAndRegionInfoBuilder" />
 
             
 
-             class to define either a custom culture (a culture that has a unique name and that supplements existing cultures) or a replacement culture (one that is used instead of a specific culture). You can save and access this culture programmatically as you would any <see
-             cref="T:System.Globalization.CultureInfo" />
+             class to define either a custom culture (a culture that has a unique name and that supplements existing cultures) or a replacement culture (one that is used instead of a specific culture). You can save and access this culture programmatically as you would any <see cref="T:System.Globalization.CultureInfo" />
 
             
 
@@ -1758,18 +1586,15 @@
         </item>
         <item>
           <para
-            >If the result string is not culture-sensitive and doesn't follow a predefined format, you can use a custom date and time format string. For example, if you are serializing date and time data in the format YYYYMMDDHHmmss, you can generate the result string by passing the custom format string to the <see
-             cref="M:System.DateTime.ToString(System.String)" />
+            >If the result string is not culture-sensitive and doesn't follow a predefined format, you can use a custom date and time format string. For example, if you are serializing date and time data in the format YYYYMMDDHHmmss, you can generate the result string by passing the custom format string to the <see cref="M:System.DateTime.ToString(System.String)" />
 
             
 
-             method, and you can  convert the result string back to a <see
-             cref="T:System.DateTime" />
+             method, and you can  convert the result string back to a <see cref="T:System.DateTime" />
 
             
 
-             value by calling the <see
-             cref="M:System.DateTime.ParseExact(System.String,System.String,System.IFormatProvider)" />
+             value by calling the <see cref="M:System.DateTime.ParseExact(System.String,System.String,System.IFormatProvider)" />
 
             
 
@@ -1781,13 +1606,11 @@
         <h2>Changing the short date pattern</h2>
       </format>
       <para
-        >The following example changes the format of a result string produced by the "d" (short date) standard format string. It changes the associated <see
-         cref="P:System.Globalization.DateTimeFormatInfo.ShortDatePattern" />
+        >The following example changes the format of a result string produced by the "d" (short date) standard format string. It changes the associated <see cref="P:System.Globalization.DateTimeFormatInfo.ShortDatePattern" />
 
         
 
-         property for the en-US or English (United States) culture from its default of "M/d/yyyy" to "yyyy'-"MM"-"dd" and uses the "d" standard format string to display the date both before and after the <see
-         cref="P:System.Globalization.DateTimeFormatInfo.ShortDatePattern" />
+         property for the en-US or English (United States) culture from its default of "M/d/yyyy" to "yyyy'-"MM"-"dd" and uses the "d" standard format string to display the date both before and after the <see cref="P:System.Globalization.DateTimeFormatInfo.ShortDatePattern" />
 
         
 
@@ -1798,13 +1621,11 @@
         <h2>Changing the date separator character</h2>
       </format>
       <para
-        >The following example changes the date separator character in a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >The following example changes the date separator character in a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object that represents the formatting conventions of the fr-FR culture. The example uses the "g" standard format string to display the date both before and after the <see
-         cref="P:System.Globalization.DateTimeFormatInfo.DateSeparator" />
+         object that represents the formatting conventions of the fr-FR culture. The example uses the "g" standard format string to display the date both before and after the <see cref="P:System.Globalization.DateTimeFormatInfo.DateSeparator" />
 
         
 
@@ -1815,13 +1636,11 @@
         <h2>Changing day name abbreviations and the long date pattern</h2>
       </format>
       <para
-        >In some cases, the long date pattern, which typically displays the full day and month name along with the number of the day of the month and the year, may be too long. The following example shortens the long date pattern for the en-US culture to return a one-character or two-character day name abbreviation followed by the day number, the month name abbreviation, and the year. It does this by assigning shorter day name abbreviations to the <see
-         cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedDayNames" />
+        >In some cases, the long date pattern, which typically displays the full day and month name along with the number of the day of the month and the year, may be too long. The following example shortens the long date pattern for the en-US culture to return a one-character or two-character day name abbreviation followed by the day number, the month name abbreviation, and the year. It does this by assigning shorter day name abbreviations to the <see cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedDayNames" />
 
         
 
-         array, and by modifying the custom format string assigned to the <see
-         cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
+         array, and by modifying the custom format string assigned to the <see cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
 
         
 
@@ -1829,23 +1648,19 @@
       >
       <para>code reference: System.Globalization.DateTimeFormatInfo.Class#13</para>
       <para
-        >Ordinarily, the change to the <see
-         cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
+        >Ordinarily, the change to the <see cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
 
         
 
-         property also affects the <see
-         cref="P:System.Globalization.DateTimeFormatInfo.FullDateTimePattern" />
+         property also affects the <see cref="P:System.Globalization.DateTimeFormatInfo.FullDateTimePattern" />
 
         
 
-         property, which in turn defines the result string returned by the "F" standard format string. To preserve the original full date and time pattern, the example reassigns the original custom format string assigned to the <see
-         cref="P:System.Globalization.DateTimeFormatInfo.FullDateTimePattern" />
+         property, which in turn defines the result string returned by the "F" standard format string. To preserve the original full date and time pattern, the example reassigns the original custom format string assigned to the <see cref="P:System.Globalization.DateTimeFormatInfo.FullDateTimePattern" />
 
         
 
-         property after the <see
-         cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
+         property after the <see cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
 
         
 
@@ -1906,8 +1721,7 @@
         <h2>Displaying and changing the era in a date</h2>
       </format>
       <para
-        >The following example adds the "g" custom format specifier to the  <see
-         cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
+        >The following example adds the "g" custom format specifier to the  <see cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
 
         
 
@@ -1916,8 +1730,7 @@
       <list type="bullet">
         <item>
           <para
-            >The "D" (long date) standard format string, which maps directly to the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
+            >The "D" (long date) standard format string, which maps directly to the <see cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
 
             
 
@@ -1926,13 +1739,11 @@
         </item>
         <item>
           <para
-            >The "f" (full date / short time) standard format string, which produces a result string that concatenates the substrings produced by the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
+            >The "f" (full date / short time) standard format string, which produces a result string that concatenates the substrings produced by the <see cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
 
             
 
-             and <see
-             cref="P:System.Globalization.DateTimeFormatInfo.ShortTimePattern" />
+             and <see cref="P:System.Globalization.DateTimeFormatInfo.ShortTimePattern" />
 
             
 
@@ -1941,18 +1752,15 @@
         </item>
         <item>
           <para
-            >The "F" (full date / long time) standard format string, which maps directly to the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.FullDateTimePattern" />
+            >The "F" (full date / long time) standard format string, which maps directly to the <see cref="P:System.Globalization.DateTimeFormatInfo.FullDateTimePattern" />
 
             
 
-             property. Because we have not explicitly set this property value, it is generated dynamically by concatenating the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
+             property. Because we have not explicitly set this property value, it is generated dynamically by concatenating the <see cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
 
             
 
-             and <see
-             cref="P:System.Globalization.DateTimeFormatInfo.LongTimePattern" />
+             and <see cref="P:System.Globalization.DateTimeFormatInfo.LongTimePattern" />
 
             
 
@@ -1961,23 +1769,19 @@
         </item>
       </list>
       <para
-        >The example also shows how to change the era name for a culture whose calendar has a single era. In this case, the en-US culture uses the Gregorian calendar, which is represented by a <see
-         cref="T:System.Globalization.GregorianCalendar" />
+        >The example also shows how to change the era name for a culture whose calendar has a single era. In this case, the en-US culture uses the Gregorian calendar, which is represented by a <see cref="T:System.Globalization.GregorianCalendar" />
 
         
 
-         object. The <see
-         cref="T:System.Globalization.GregorianCalendar" />
+         object. The <see cref="T:System.Globalization.GregorianCalendar" />
 
         
 
-         class supports a single era, which it names A.D. (Anno Domini). The example changes the era name to C.E. (Common Era) by replacing the "g" custom format specifier in the format string assigned to the <see
-         cref="P:System.Globalization.DateTimeFormatInfo.FullDateTimePattern" />
+         class supports a single era, which it names A.D. (Anno Domini). The example changes the era name to C.E. (Common Era) by replacing the "g" custom format specifier in the format string assigned to the <see cref="P:System.Globalization.DateTimeFormatInfo.FullDateTimePattern" />
 
         
 
-        property with a literal string. The use of a literal string is necessary, because the era name is typically returned by the <see
-         cref="M:System.Globalization.DateTimeFormatInfo.GetEraName(System.Int32)" />
+        property with a literal string. The use of a literal string is necessary, because the era name is typically returned by the <see cref="M:System.Globalization.DateTimeFormatInfo.GetEraName(System.Int32)" />
 
         
 
@@ -1988,97 +1792,80 @@
         <h2>Parsing date and time strings</h2>
       </format>
       <para
-        >Parsing involves converting the string representation of a date and time to a <see
-         cref="T:System.DateTime" />
+        >Parsing involves converting the string representation of a date and time to a <see cref="T:System.DateTime" />
 
         
 
-         or <see
-         cref="T:System.DateTimeOffset" />
+         or <see cref="T:System.DateTimeOffset" />
 
         
 
          value. Both of these types include the Parse, TryParse, ParseExact, and TryParseExact methods to support parsing operations. The Parse and TryParse methods convert a string that can have a variety of formats, whereas ParseExact and TryParseExact require that the string have a defined format or formats. If the parsing operation fails, Parse and ParseExact throw an exception, whereas TryParse and TryParseExact return false. </para
       >
       <para
-        >The parsing methods implicitly or explicitly use a <see
-         cref="T:System.Globalization.DateTimeStyles" />
+        >The parsing methods implicitly or explicitly use a <see cref="T:System.Globalization.DateTimeStyles" />
 
         
 
-         enumeration value to determine which style elements (such as leading, trailing, or inner white space) can be present in the string to be parsed, and how to interpret the parsed string or any missing elements. If you don't provide a <see
-         cref="T:System.Globalization.DateTimeStyles" />
+         enumeration value to determine which style elements (such as leading, trailing, or inner white space) can be present in the string to be parsed, and how to interpret the parsed string or any missing elements. If you don't provide a <see cref="T:System.Globalization.DateTimeStyles" />
 
         
 
-         value when you call the Parse or TryParse method, the default is <see
-         cref="F:System.Globalization.DateTimeStyles.AllowWhiteSpaces" />
+         value when you call the Parse or TryParse method, the default is <see cref="F:System.Globalization.DateTimeStyles.AllowWhiteSpaces" />
 
         
 
-        , which is a composite style that includes the <see
-         cref="F:System.Globalization.DateTimeStyles.AllowLeadingWhite" />
+        , which is a composite style that includes the <see cref="F:System.Globalization.DateTimeStyles.AllowLeadingWhite" />
 
         
 
-        , <see
-         cref="F:System.Globalization.DateTimeStyles.AllowTrailingWhite" />
+        , <see cref="F:System.Globalization.DateTimeStyles.AllowTrailingWhite" />
 
         
 
-        , and <see
-         cref="F:System.Globalization.DateTimeStyles.AllowInnerWhite" />
+        , and <see cref="F:System.Globalization.DateTimeStyles.AllowInnerWhite" />
 
         
 
-         flags. For the ParseExact and TryParseExact methods, the default is <see
-         cref="F:System.Globalization.DateTimeStyles.None" />
+         flags. For the ParseExact and TryParseExact methods, the default is <see cref="F:System.Globalization.DateTimeStyles.None" />
 
         
 
         ; the input string must correspond precisely to a particular custom date and time format string. </para
       >
       <para
-        >The parsing methods also implicitly or explicitly use a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >The parsing methods also implicitly or explicitly use a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object that defines the specific symbols and patterns that can occur in the string to be parsed. If you don't provide a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         object that defines the specific symbols and patterns that can occur in the string to be parsed. If you don't provide a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object, the <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         object, the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object for the current thread culture is used by default. For more information about parsing date and time strings, see the individual parsing methods, such as <see
-         cref="M:System.DateTime.Parse(System.String)" />
+         object for the current thread culture is used by default. For more information about parsing date and time strings, see the individual parsing methods, such as <see cref="M:System.DateTime.Parse(System.String)" />
 
         
 
-        , <see
-         cref="M:System.DateTime.TryParse(System.String,System.DateTime@)" />
+        , <see cref="M:System.DateTime.TryParse(System.String,System.DateTime@)" />
 
         
 
-        , <see
-         cref="M:System.DateTimeOffset.ParseExact(System.String,System.String,System.IFormatProvider)" />
+        , <see cref="M:System.DateTimeOffset.ParseExact(System.String,System.String,System.IFormatProvider)" />
 
         
 
-        , and <see
-         cref="M:System.DateTimeOffset.TryParseExact(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTimeOffset@)" />
+        , and <see cref="M:System.DateTimeOffset.TryParseExact(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTimeOffset@)" />
 
         
 
         . </para
       >
       <para
-        >The following example illustrates the culture-sensitive nature of parsing date and time strings. It tries to parse two date strings by using the conventions of the en-US, en-GB, fr-FR, and fi-FI cultures. The date that is interpreted as 8/18/2014 in the en-US culture throws a <see
-         cref="T:System.FormatException" />
+        >The following example illustrates the culture-sensitive nature of parsing date and time strings. It tries to parse two date strings by using the conventions of the en-US, en-GB, fr-FR, and fi-FI cultures. The date that is interpreted as 8/18/2014 in the en-US culture throws a <see cref="T:System.FormatException" />
 
         
 
@@ -2099,18 +1886,15 @@
         <h2>Parsing user strings</h2>
       </format>
       <para
-        >When you parse date and time strings input by the user, you should always instantiate a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+        >When you parse date and time strings input by the user, you should always instantiate a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object that reflects the user's cultural settings, including any customizations the user may have made. Otherwise, the  date and time object may have incorrect values. For information about how to instantiate a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         object that reflects the user's cultural settings, including any customizations the user may have made. Otherwise, the  date and time object may have incorrect values. For information about how to instantiate a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object that reflects user cultural customizations, see the <format
-         type="text/html">
+         object that reflects user cultural customizations, see the <format type="text/html">
           <a href="#dynamic">DateTimeFormatInfo and dynamic data</a>
         </format>
 
@@ -2119,23 +1903,19 @@
           section. </para
       >
       <para
-        >The following example illustrates the difference between a parsing operation that reflects user cultural settings and one that does not. In this case, the default system culture is en-US, but the user has used Control Panel, <ui
-        >Region and Language</ui>
+        >The following example illustrates the difference between a parsing operation that reflects user cultural settings and one that does not. In this case, the default system culture is en-US, but the user has used Control Panel, <ui>Region and Language</ui>
 
         
 
-         to change the short date pattern from its default of "M/d/yyyy" to "yy/MM/dd". When the user enters a string that reflects user settings, and the string is parsed by a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         to change the short date pattern from its default of "M/d/yyyy" to "yy/MM/dd". When the user enters a string that reflects user settings, and the string is parsed by a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object that also reflects user settings (overrides), the parsing operation returns a correct result. However, when the string is parsed by a <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         object that also reflects user settings (overrides), the parsing operation returns a correct result. However, when the string is parsed by a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         object that reflects standard en-US cultural settings, the parsing method throws a <see
-         cref="T:System.FormatException" />
+         object that reflects standard en-US cultural settings, the parsing method throws a <see cref="T:System.FormatException" />
 
         
 
@@ -2146,23 +1926,20 @@
         <h2>Serializing and deserializing date and time data</h2>
       </format>
       <para
-        >Serialized date and time data are expected to round-trip; that is, all serialized and deserialized values should be identical. If a date and time value represents a single moment in time, the deserialized value should represent the same moment in time regardless of the culture or time zone of the system on which it was restored. To round-trip date and time data successfully, you must use the conventions of the invariant culture, which is returned by the <see
-         cref="P:System.Globalization.DateTimeFormatInfo.InvariantInfo" />
+        >Serialized date and time data are expected to round-trip; that is, all serialized and deserialized values should be identical. If a date and time value represents a single moment in time, the deserialized value should represent the same moment in time regardless of the culture or time zone of the system on which it was restored. To round-trip date and time data successfully, you must use the conventions of the invariant culture, which is returned by the <see cref="P:System.Globalization.DateTimeFormatInfo.InvariantInfo" />
 
         
 
          property, to generate and parse the data. The formatting and parsing operations should never reflect the conventions of the default culture. If you use default cultural settings, the portability of the data is strictly limited; it can be successfully deserialized only on a thread whose cultural-specific settings are identical to those of the thread on which it was serialized. In some cases, this means that the data cannot even be successfully serialized and deserialized on the same system. </para
       >
       <para
-        >If the time component of a date and time value is significant, it should also be converted to UTC and serialized by using the "o" or "r" <format
-         type="text/html">
+        >If the time component of a date and time value is significant, it should also be converted to UTC and serialized by using the "o" or "r" <format type="text/html">
           <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b">standard format string</a>
         </format>
 
         
 
-        . The time data can then be restored by calling a parsing method and passing it the appropriate format string along with the invariant culture as the <paramref
-         name="provider" />
+        . The time data can then be restored by calling a parsing method and passing it the appropriate format string along with the invariant culture as the <paramref name="provider" />
 
         
 
@@ -2201,66 +1978,54 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >This constructor creates a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object that represents the date and time information of the invariant culture. To create a <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             object that represents the date and time information of the invariant culture. To create a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object for a specific culture, create a <see
-             cref="T:System.Globalization.CultureInfo" />
+             object for a specific culture, create a <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             object for that culture and retrieve the <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             object for that culture and retrieve the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object returned by its <see
-             cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+             object returned by its <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
             
 
              property.</para
           >
           <para
-            >The properties of the <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >The properties of the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object created by this constructor can be modified. However, you cannot modify the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+             object created by this constructor can be modified. However, you cannot modify the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
 
             
 
-             property, because the invariant culture supports only a localized version of the Gregorian calendar. To create a <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             property, because the invariant culture supports only a localized version of the Gregorian calendar. To create a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object that uses a specific calendar, you must instantiate a <see
-             cref="T:System.Globalization.CultureInfo" />
+             object that uses a specific calendar, you must instantiate a <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             object that supports that calendar and assign the calendar to the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+             object that supports that calendar and assign the calendar to the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
 
             
 
-             property of the <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             property of the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object returned by the <see
-             cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+             object returned by the <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
             
 
@@ -2270,8 +2035,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new writable instance of the <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >Initializes a new writable instance of the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -2301,8 +2065,7 @@
       <Docs>
         <value>
           <para
-            >A one-dimensional array of type <see
-             cref="T:System.String" />
+            >A one-dimensional array of type <see cref="T:System.String" />
 
             
 
@@ -2323,31 +2086,26 @@ containing the culture-specific abbreviated names of the days of the week.</para
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If setting this property, the array must be one-dimensional and must have exactly seven elements.</para>
           <para
-            >If a custom format string includes the "ddd" format specifier, the <see
-             cref="M:System.DateTime.ToString" />
+            >If a custom format string includes the "ddd" format specifier, the <see cref="M:System.DateTime.ToString" />
 
             
 
-             or <see
-             cref="M:System.DateTimeOffset.ToString" />
+             or <see cref="M:System.DateTimeOffset.ToString" />
 
             
 
-             method includes the appropriate member of the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedDayNames" />
+             method includes the appropriate member of the <see cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedDayNames" />
 
             
 
              array in place of the "ddd" in the result string.</para
           >
           <para
-            >This property is affected if the value of the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+            >This property is affected if the value of the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
 
             
 
-             property changes. If the selected <see
-             cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+             property changes. If the selected <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
 
             
 
@@ -2357,8 +2115,7 @@ containing the culture-specific abbreviated names of the days of the week.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a one-dimensional array of type <see
-             cref="T:System.String" />
+            >Gets or sets a one-dimensional array of type <see cref="T:System.String" />
 
             
 
@@ -2396,44 +2153,37 @@ containing the culture-specific abbreviated names of the days of the week.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In some languages, a month name that is part of a date appears in the genitive case. For example, a date in the ru-RU or Russian (Russia) culture consists of the day number and the genitive month name, such as 1 Января (1 January). For these cultures, if a custom format string includes the "MMM" format specifier, the <see
-             cref="M:System.DateTime.ToString" />
+            >In some languages, a month name that is part of a date appears in the genitive case. For example, a date in the ru-RU or Russian (Russia) culture consists of the day number and the genitive month name, such as 1 Января (1 January). For these cultures, if a custom format string includes the "MMM" format specifier, the <see cref="M:System.DateTime.ToString" />
 
             
 
-             or <see
-             cref="M:System.DateTimeOffset.ToString" />
+             or <see cref="M:System.DateTimeOffset.ToString" />
 
             
 
-             method includes the appropriate member of the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedMonthGenitiveNames" />
+             method includes the appropriate member of the <see cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedMonthGenitiveNames" />
 
             
 
              array in place of the "MMM" in the result string.</para
           >
           <para
-            >In a set operation, the array must be one-dimensional with exactly 13 elements, because <see
-             cref="T:System.Globalization.Calendar" />
+            >In a set operation, the array must be one-dimensional with exactly 13 elements, because <see cref="T:System.Globalization.Calendar" />
 
             
 
-             objects accommodate calendars that have 13 months. For calendars that have 12 months, the thirteenth element should be <see
-             cref="F:System.String.Empty" />
+             objects accommodate calendars that have 13 months. For calendars that have 12 months, the thirteenth element should be <see cref="F:System.String.Empty" />
 
             
 
             .</para
           >
           <para
-            >If you set the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedMonthGenitiveNames" />
+            >If you set the <see cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedMonthGenitiveNames" />
 
             
 
-             property, you must also set the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedMonthNames" />
+             property, you must also set the <see cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedMonthNames" />
 
             
 
@@ -2443,8 +2193,7 @@ containing the culture-specific abbreviated names of the days of the week.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a string array of abbreviated month names associated with the current <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >Gets or sets a string array of abbreviated month names associated with the current <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -2473,8 +2222,7 @@ containing the culture-specific abbreviated names of the days of the week.</para
       <Docs>
         <value>
           <para
-            >A one-dimensional array of type <see
-             cref="T:System.String" />
+            >A one-dimensional array of type <see cref="T:System.String" />
 
             
 
@@ -2495,31 +2243,26 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you set this property, the array must be one-dimensional with exactly 13 elements. <see
-             cref="T:System.Globalization.Calendar" />
+            >If you set this property, the array must be one-dimensional with exactly 13 elements. <see cref="T:System.Globalization.Calendar" />
 
             
 
              objects accommodate calendars with 13 months.</para
           >
           <para
-            >If you set the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedMonthNames" />
+            >If you set the <see cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedMonthNames" />
 
             
 
-             property, you must also set the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedMonthGenitiveNames" />
+             property, you must also set the <see cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedMonthGenitiveNames" />
 
             
 
-             property. The <see
-             cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedMonthNames" />
+             property. The <see cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedMonthNames" />
 
             
 
-             and <see
-             cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedMonthGenitiveNames" />
+             and <see cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedMonthGenitiveNames" />
 
             
 
@@ -2534,13 +2277,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
             </item>
           </list>
           <para
-            >This property is affected if the value of the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+            >This property is affected if the value of the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
 
             
 
-             property changes. If the selected <see
-             cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+             property changes. If the selected <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
 
             
 
@@ -2574,8 +2315,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
       <Docs>
         <value>
           <para
-            >The <see
-             cref="T:System.String" />
+            >The <see cref="T:System.String" />
 
             
 
@@ -2591,31 +2331,26 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.DateTimeFormatInfo.AMDesignator" />
+            >The <see cref="P:System.Globalization.DateTimeFormatInfo.AMDesignator" />
 
             
 
              property is used for all times from 0:00:00 (midnight) to 11:59:59.999.</para
           >
           <para
-            >If a custom format string includes the "tt" format specifier and the time is before noon, the <see
-             cref="M:System.DateTime.ToString" />
+            >If a custom format string includes the "tt" format specifier and the time is before noon, the <see cref="M:System.DateTime.ToString" />
 
             
 
-             or <see
-             cref="M:System.DateTimeOffset.ToString" />
+             or <see cref="M:System.DateTimeOffset.ToString" />
 
             
 
-             method includes the value of the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.AMDesignator" />
+             method includes the value of the <see cref="P:System.Globalization.DateTimeFormatInfo.AMDesignator" />
 
             
 
-             property in place of "tt" in the result string. If the custom format string includes the "t" custom format specifier, only the first character of the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.AMDesignator" />
+             property in place of "tt" in the result string. If the custom format string includes the "t" custom format specifier, only the first character of the <see cref="P:System.Globalization.DateTimeFormatInfo.AMDesignator" />
 
             
 
@@ -2653,111 +2388,91 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+            >The <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
 
             
 
-             property accepts only calendars that are valid for the culture that is associated with the <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             property accepts only calendars that are valid for the culture that is associated with the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object. The <see
-             cref="P:System.Globalization.CultureInfo.OptionalCalendars" />
+             object. The <see cref="P:System.Globalization.CultureInfo.OptionalCalendars" />
 
             
 
-             property specifies the calendars that can be used by a particular culture, and the <see
-             cref="P:System.Globalization.CultureInfo.Calendar" />
+             property specifies the calendars that can be used by a particular culture, and the <see cref="P:System.Globalization.CultureInfo.Calendar" />
 
             
 
              property specifies the default calendar for the culture.</para
           >
           <para
-            >Changing the value of this property affects the following properties as well: <see
-             cref="P:System.Globalization.DateTimeFormatInfo.MonthNames" />
+            >Changing the value of this property affects the following properties as well: <see cref="P:System.Globalization.DateTimeFormatInfo.MonthNames" />
 
             
 
-            , <see
-             cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedMonthNames" />
+            , <see cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedMonthNames" />
 
             
 
-            , <see
-             cref="P:System.Globalization.DateTimeFormatInfo.DayNames" />
+            , <see cref="P:System.Globalization.DateTimeFormatInfo.DayNames" />
 
             
 
-            , <see
-             cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedDayNames" />
+            , <see cref="P:System.Globalization.DateTimeFormatInfo.AbbreviatedDayNames" />
 
             
 
-            , <see
-             cref="P:System.Globalization.DateTimeFormatInfo.CalendarWeekRule" />
+            , <see cref="P:System.Globalization.DateTimeFormatInfo.CalendarWeekRule" />
 
             
 
-            , <see
-             cref="P:System.Globalization.DateTimeFormatInfo.FirstDayOfWeek" />
+            , <see cref="P:System.Globalization.DateTimeFormatInfo.FirstDayOfWeek" />
 
             
 
-            , <see
-             cref="P:System.Globalization.DateTimeFormatInfo.FullDateTimePattern" />
+            , <see cref="P:System.Globalization.DateTimeFormatInfo.FullDateTimePattern" />
 
             
 
-            , <see
-             cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
+            , <see cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
 
             
 
-            , <see
-             cref="P:System.Globalization.DateTimeFormatInfo.ShortDatePattern" />
+            , <see cref="P:System.Globalization.DateTimeFormatInfo.ShortDatePattern" />
 
             
 
-            , <see
-             cref="P:System.Globalization.DateTimeFormatInfo.YearMonthPattern" />
+            , <see cref="P:System.Globalization.DateTimeFormatInfo.YearMonthPattern" />
 
             
 
-            , and <see
-             cref="P:System.Globalization.DateTimeFormatInfo.MonthDayPattern" />
+            , and <see cref="P:System.Globalization.DateTimeFormatInfo.MonthDayPattern" />
 
             
 
             .</para
           >
           <para
-            >For example, if the culture of the current thread is Japanese, this property accepts <see
-             cref="T:System.Globalization.JapaneseCalendar" />
+            >For example, if the culture of the current thread is Japanese, this property accepts <see cref="T:System.Globalization.JapaneseCalendar" />
 
             
 
-            , <see
-             cref="F:System.Globalization.GregorianCalendarTypes.Localized" />
+            , <see cref="F:System.Globalization.GregorianCalendarTypes.Localized" />
             <see cref="T:System.Globalization.GregorianCalendar" />
 
             
 
-            , or <see
-             cref="F:System.Globalization.GregorianCalendarTypes.USEnglish" />
+            , or <see cref="F:System.Globalization.GregorianCalendarTypes.USEnglish" />
             <see cref="T:System.Globalization.GregorianCalendar" />
 
             
 
-            . When the <see
-             cref="T:System.Globalization.JapaneseCalendar" />
+            . When the <see cref="T:System.Globalization.JapaneseCalendar" />
 
             
 
-             is used, the default long date specifier is "gg y'\x5e74'M'\x6708'd'\x65e5'". When the <see
-             cref="F:System.Globalization.GregorianCalendarTypes.Localized" />
+             is used, the default long date specifier is "gg y'\x5e74'M'\x6708'd'\x65e5'". When the <see cref="F:System.Globalization.GregorianCalendarTypes.Localized" />
             <see cref="T:System.Globalization.GregorianCalendar" />
 
             
@@ -2794,8 +2509,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is affected if the value of the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+            >This property is affected if the value of the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
 
             
 
@@ -2832,8 +2546,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The clone is writable even if the original <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >The clone is writable even if the original <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -2844,8 +2557,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a shallow copy of the <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >Creates a shallow copy of the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -2855,13 +2567,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >A new <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object copied from the original <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             object copied from the original <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -2897,8 +2607,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
       <Docs>
         <value>
           <para
-            >A read-only <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >A read-only <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -2909,13 +2618,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >The <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object returned by the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.CurrentInfo" />
+             object returned by the <see cref="P:System.Globalization.DateTimeFormatInfo.CurrentInfo" />
 
             
 
@@ -2925,8 +2632,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a read-only <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >Gets a read-only <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -2956,8 +2662,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
       <Docs>
         <value>
           <para
-            >The <see
-             cref="T:System.String" />
+            >The <see cref="T:System.String" />
 
             
 
@@ -2973,21 +2678,18 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a custom format string includes the "/" format specifier, the <see
-             cref="M:System.DateTime.ToString" />
+            >If a custom format string includes the "/" format specifier, the <see cref="M:System.DateTime.ToString" />
 
             
 
-             method displays the value of <see
-             cref="P:System.Globalization.DateTimeFormatInfo.DateSeparator" />
+             method displays the value of <see cref="P:System.Globalization.DateTimeFormatInfo.DateSeparator" />
 
             
 
              in place of the "/" in the result string.</para
           >
           <para
-            >The <see
-             cref="P:System.Globalization.DateTimeFormatInfo.DateSeparator" />
+            >The <see cref="P:System.Globalization.DateTimeFormatInfo.DateSeparator" />
 
             
 
@@ -3021,8 +2723,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
       <Docs>
         <value>
           <para
-            >A one-dimensional array of type <see
-             cref="T:System.String" />
+            >A one-dimensional array of type <see cref="T:System.String" />
 
             
 
@@ -3042,21 +2743,18 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If setting this property, the array must be one-dimensional and must have exactly seven elements.</para>
           <para
-            >If a custom format string includes the "dddd" format specifier, the <see
-             cref="M:System.DateTime.ToString" />
+            >If a custom format string includes the "dddd" format specifier, the <see cref="M:System.DateTime.ToString" />
 
             
 
-             method includes the value of the appropriate <see
-             cref="P:System.Globalization.DateTimeFormatInfo.DayNames" />
+             method includes the value of the appropriate <see cref="P:System.Globalization.DateTimeFormatInfo.DayNames" />
 
             
 
              member in place of "dddd" in the result string.</para
           >
           <para
-            >This property is affected if the value of the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+            >This property is affected if the value of the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
 
             
 
@@ -3090,8 +2788,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is affected if the value of the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+            >This property is affected if the value of the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
 
             
 
@@ -3124,8 +2821,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.String" />
+            > A <see cref="T:System.String" />
 
             
 
@@ -3141,13 +2837,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The "F" standard format string is an alias for the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.FullDateTimePattern" />
+            >The "F" standard format string is an alias for the <see cref="P:System.Globalization.DateTimeFormatInfo.FullDateTimePattern" />
 
             
 
-             property. In other words, the custom format string assigned to this property defines the format of the result string for the "F" standard format string. For more information, see <format
-             type="text/html">
+             property. In other words, the custom format string assigned to this property defines the format of the result string for the "F" standard format string. For more information, see <format type="text/html">
               <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b"
                 >Standard Date and Time Format Strings</a
               >
@@ -3158,18 +2852,15 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
             .</para
           >
           <para
-            >The value of the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.FullDateTimePattern" />
+            >The value of the <see cref="P:System.Globalization.DateTimeFormatInfo.FullDateTimePattern" />
 
             
 
-             property is generated dynamically by concatenating the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
+             property is generated dynamically by concatenating the <see cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
 
             
 
-              and <see
-             cref="P:System.Globalization.DateTimeFormatInfo.LongTimePattern" />
+              and <see cref="P:System.Globalization.DateTimeFormatInfo.LongTimePattern" />
 
             
 
@@ -3181,8 +2872,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
             </item>
             <item>
               <para
-                >When the value of the <see
-                 cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
+                >When the value of the <see cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
 
                 
 
@@ -3191,8 +2881,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
             </item>
             <item>
               <para
-                >When the value of the <see
-                 cref="P:System.Globalization.DateTimeFormatInfo.LongTimePattern" />
+                >When the value of the <see cref="P:System.Globalization.DateTimeFormatInfo.LongTimePattern" />
 
                 
 
@@ -3201,8 +2890,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
             </item>
           </list>
           <para
-            >This property is affected if the value of the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+            >This property is affected if the value of the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
 
             
 
@@ -3241,13 +2929,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the default invariant <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >For the default invariant <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object, this method returns a string from the <see
-             cref="T:System.Globalization.GregorianCalendar" />
+             object, this method returns a string from the <see cref="T:System.Globalization.GregorianCalendar" />
 
             
 
@@ -3327,8 +3013,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the culture-specific abbreviated name of the specified day of the week based on the culture associated with the current <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >Returns the culture-specific abbreviated name of the specified day of the week based on the culture associated with the current <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -3338,8 +3023,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The culture-specific abbreviated name of the day of the week represented by <paramref
-             name="dayofweek" />
+            >The culture-specific abbreviated name of the day of the week represented by <paramref name="dayofweek" />
 
             
 
@@ -3347,12 +3031,15 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           >
         </returns>
         <param name="dayofweek">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.DayOfWeek" />
+          A <see cref="T:System.DayOfWeek" />
 
           
 
@@ -3383,31 +3070,26 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The era name is the name a calendar uses to refer to a period of time reckoned from a fixed point or event. For example, "A.D." or "C.E." is the current era in the Gregorian calendar.</para>
           <para
-            >The valid values for <paramref
-             name="era" />
+            >The valid values for <paramref name="era" />
 
             
 
-             are listed in the <see
-             cref="P:System.Globalization.Calendar.Eras" />
+             are listed in the <see cref="P:System.Globalization.Calendar.Eras" />
 
             
 
-             property of the appropriate class derived from <see
-             cref="T:System.Globalization.Calendar" />
+             property of the appropriate class derived from <see cref="T:System.Globalization.Calendar" />
 
             
 
-            . For example: <see
-             cref="P:System.Globalization.JapaneseCalendar.Eras" />
+            . For example: <see cref="P:System.Globalization.JapaneseCalendar.Eras" />
 
             
 
              displays a list of eras that are supported by this implementation.</para
           >
           <para
-            >In the <see
-             cref="T:System.Globalization.JapaneseCalendar" />
+            >In the <see cref="T:System.Globalization.JapaneseCalendar" />
 
             
 
@@ -3425,7 +3107,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           <para>A string containing the full name of the era, if an abbreviation does not exist.</para>
         </returns>
         <param name="era">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3466,13 +3152,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the default invariant <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >For the default invariant <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object, this method returns a string from the <see
-             cref="T:System.Globalization.GregorianCalendar" />
+             object, this method returns a string from the <see cref="T:System.Globalization.GregorianCalendar" />
 
             
 
@@ -3607,8 +3291,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the culture-specific abbreviated name of the specified month based on the culture associated with the current <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >Returns the culture-specific abbreviated name of the specified month based on the culture associated with the current <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -3618,8 +3301,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The culture-specific abbreviated name of the month represented by <paramref
-             name="month" />
+            >The culture-specific abbreviated name of the month represented by <paramref name="month" />
 
             
 
@@ -3627,7 +3309,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           >
         </returns>
         <param name="month">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3656,8 +3342,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns an array that contains all custom format strings that correspond to standard format strings. See <format
-             type="text/html">
+            >This method returns an array that contains all custom format strings that correspond to standard format strings. See <format type="text/html">
               <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b"
                 >Standard Date and Time Format Strings</a
               >
@@ -3668,33 +3353,27 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
              for a list of the standard format strings.</para
           >
           <para
-            >You can use the custom format strings in the array returned by the <see
-             cref="M:System.Globalization.DateTimeFormatInfo.GetAllDateTimePatterns(System.Char)" />
+            >You can use the custom format strings in the array returned by the <see cref="M:System.Globalization.DateTimeFormatInfo.GetAllDateTimePatterns(System.Char)" />
 
             
 
-             method in formatting operations. However, if you do, the string representation of a date and time value returned in that formatting operation cannot always be parsed successfully by the Parse and TryParse methods. Therefore, you cannot assume that the custom format strings returned by the <see
-             cref="M:System.Globalization.DateTimeFormatInfo.GetAllDateTimePatterns" />
+             method in formatting operations. However, if you do, the string representation of a date and time value returned in that formatting operation cannot always be parsed successfully by the Parse and TryParse methods. Therefore, you cannot assume that the custom format strings returned by the <see cref="M:System.Globalization.DateTimeFormatInfo.GetAllDateTimePatterns" />
 
             
 
-             method can be used to round-trip date and time values. The following example illustrates this problem. It retrieves a <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             method can be used to round-trip date and time values. The following example illustrates this problem. It retrieves a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object that contains formatting information for the Italy (Italian) culture. It passes each custom format string in the array returned by the <see
-             cref="M:System.Globalization.DateTimeFormatInfo.GetAllDateTimePatterns" />
+             object that contains formatting information for the Italy (Italian) culture. It passes each custom format string in the array returned by the <see cref="M:System.Globalization.DateTimeFormatInfo.GetAllDateTimePatterns" />
 
             
 
-             method to the <see
-             cref="M:System.DateTime.ToString(System.String)" />
+             method to the <see cref="M:System.DateTime.ToString(System.String)" />
 
             
 
-             method to create the string representation of a date and time. This example then attempts to parse this value by calling the <see
-             cref="M:System.DateTime.TryParse(System.String,System.DateTime@)" />
+             method to create the string representation of a date and time. This example then attempts to parse this value by calling the <see cref="M:System.DateTime.TryParse(System.String,System.DateTime@)" />
 
             
 
@@ -3725,13 +3404,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
             </item>
           </list>
           <para
-            >The custom format strings in the array returned by the <see
-             cref="M:System.Globalization.DateTimeFormatInfo.GetAllDateTimePatterns" />
+            >The custom format strings in the array returned by the <see cref="M:System.Globalization.DateTimeFormatInfo.GetAllDateTimePatterns" />
 
             
 
-             method depends on the current calendar of the culture for which the <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             method depends on the current calendar of the culture for which the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -3773,8 +3450,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns an array containing the custom format strings that correspond to a particular standard format string. See <format
-             type="text/html">
+            >This method returns an array containing the custom format strings that correspond to a particular standard format string. See <format type="text/html">
               <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b"
                 >Standard Date and Time Format Strings</a
               >
@@ -3785,33 +3461,27 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
              for a list of the standard format strings.</para
           >
           <para
-            >You can use the custom format strings in the array returned by the <see
-             cref="M:System.Globalization.DateTimeFormatInfo.GetAllDateTimePatterns(System.Char)" />
+            >You can use the custom format strings in the array returned by the <see cref="M:System.Globalization.DateTimeFormatInfo.GetAllDateTimePatterns(System.Char)" />
 
             
 
-             method in formatting operations. However, if you do, the string representation of a date and time value returned in that formatting operation cannot always be parsed successfully by the Parse and TryParse methods. Therefore, you cannot assume that the custom format strings returned by the <see
-             cref="M:System.Globalization.DateTimeFormatInfo.GetAllDateTimePatterns" />
+             method in formatting operations. However, if you do, the string representation of a date and time value returned in that formatting operation cannot always be parsed successfully by the Parse and TryParse methods. Therefore, you cannot assume that the custom format strings returned by the <see cref="M:System.Globalization.DateTimeFormatInfo.GetAllDateTimePatterns" />
 
             
 
-             method can be used to round-trip date and time values. The following example illustrates this problem. It retrieves a <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             method can be used to round-trip date and time values. The following example illustrates this problem. It retrieves a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object that contains formatting information for the Russia (Russian) culture. It calls the <see
-             cref="M:System.Globalization.DateTimeFormatInfo.GetAllDateTimePatterns(System.Char)" />
+             object that contains formatting information for the Russia (Russian) culture. It calls the <see cref="M:System.Globalization.DateTimeFormatInfo.GetAllDateTimePatterns(System.Char)" />
 
             
 
-             method for each standard format string, and then passes each custom format string in the returned array to the <see
-             cref="M:System.DateTime.ToString(System.String)" />
+             method for each standard format string, and then passes each custom format string in the returned array to the <see cref="M:System.DateTime.ToString(System.String)" />
 
             
 
-             method to create the string representation of a date and time. This example then attempts to parse this value by calling the <see
-             cref="M:System.DateTime.TryParse(System.String,System.DateTime@)" />
+             method to create the string representation of a date and time. This example then attempts to parse this value by calling the <see cref="M:System.DateTime.TryParse(System.String,System.DateTime@)" />
 
             
 
@@ -3842,13 +3512,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
             </item>
           </list>
           <para
-            >The custom format strings in the array returned by the <see
-             cref="M:System.Globalization.DateTimeFormatInfo.GetAllDateTimePatterns" />
+            >The custom format strings in the array returned by the <see cref="M:System.Globalization.DateTimeFormatInfo.GetAllDateTimePatterns" />
 
             
 
-             method depends on the current calendar of the culture for which the <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             method depends on the current calendar of the culture for which the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -3864,7 +3532,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           <para>An array containing the standard patterns in which date and time values can be formatted using the specified format string.</para>
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3894,13 +3566,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the default invariant <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >For the default invariant <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object, this method returns a string from the <see
-             cref="T:System.Globalization.GregorianCalendar" />
+             object, this method returns a string from the <see cref="T:System.Globalization.GregorianCalendar" />
 
             
 
@@ -3980,8 +3650,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the culture-specific full name of the specified day of the week based on the culture associated with the current <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >Returns the culture-specific full name of the specified day of the week based on the culture associated with the current <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -3991,8 +3660,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The culture-specific full name of the day of the week represented by <paramref
-             name="dayofweek" />
+            >The culture-specific full name of the day of the week represented by <paramref name="dayofweek" />
 
             
 
@@ -4000,12 +3668,15 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           >
         </returns>
         <param name="dayofweek">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.DayOfWeek" />
+          A <see cref="T:System.DayOfWeek" />
 
           
 
@@ -4047,8 +3718,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The era name is the name a calendar uses to refer to a period of time reckoned from a fixed point or event. For example, "A.D." or "C.E." is the current era in the Gregorian calendar.</para>
           <para
-            >The comparison with <paramref
-             name="eraName" />
+            >The comparison with <paramref name="eraName" />
 
             
 
@@ -4059,13 +3729,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
 
             
 
-             ignores punctuation in abbreviated era names, only if the <see
-             cref="T:System.Globalization.GregorianCalendar" />
+             ignores punctuation in abbreviated era names, only if the <see cref="T:System.Globalization.GregorianCalendar" />
 
             
 
-             is selected in <see
-             cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+             is selected in <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
 
             
 
@@ -4076,18 +3744,15 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
 
             
 
-             compares <paramref
-             name="eraName" />
+             compares <paramref name="eraName" />
 
             
 
-             with the full era name returned by <see
-             cref="M:System.Globalization.DateTimeFormatInfo.GetEraName(System.Int32)" />
+             with the full era name returned by <see cref="M:System.Globalization.DateTimeFormatInfo.GetEraName(System.Int32)" />
 
             
 
-             and with the abbreviated era name returned by <see
-             cref="M:System.Globalization.DateTimeFormatInfo.GetAbbreviatedEraName(System.Int32)" />
+             and with the abbreviated era name returned by <see cref="M:System.Globalization.DateTimeFormatInfo.GetAbbreviatedEraName(System.Int32)" />
 
             
 
@@ -4101,8 +3766,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The integer representing the era, if <paramref
-             name="eraName" />
+            >The integer representing the era, if <paramref name="eraName" />
 
             
 
@@ -4110,7 +3774,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           >
         </returns>
         <param name="eraName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4153,23 +3821,19 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The era name is the name a calendar uses to refer to a period of time reckoned from a fixed point or event. For example, "A.D." or "C.E." is the current era in the Gregorian calendar.</para>
           <para
-            >The valid values for <paramref
-             name="era" />
+            >The valid values for <paramref name="era" />
 
             
 
-             are listed in the <see
-             cref="P:System.Globalization.Calendar.Eras" />
+             are listed in the <see cref="P:System.Globalization.Calendar.Eras" />
 
             
 
-             property of the appropriate class derived from <see
-             cref="T:System.Globalization.Calendar" />
+             property of the appropriate class derived from <see cref="T:System.Globalization.Calendar" />
 
             
 
-            . For example: <see
-             cref="P:System.Globalization.JapaneseCalendar.Eras" />
+            . For example: <see cref="P:System.Globalization.JapaneseCalendar.Eras" />
 
             
 
@@ -4185,7 +3849,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           <para>A string containing the name of the era.</para>
         </returns>
         <param name="era">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4220,18 +3888,15 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Format(String, IFormatProvider) method supported by the base data types invoke this method when the current <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >The Format(String, IFormatProvider) method supported by the base data types invoke this method when the current <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object is passed as the <see
-             cref="T:System.IFormatProvider" />
+             object is passed as the <see cref="T:System.IFormatProvider" />
 
             
 
-             parameter. This method implements <see
-             cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+             parameter. This method implements <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
             
 
@@ -4245,13 +3910,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current  object, if <paramref
-             name="formatType" />
+            >The current  object, if <paramref name="formatType" />
 
             
 
-             is the same as the type of the current <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             is the same as the type of the current <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -4259,7 +3922,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           >
         </returns>
         <param name="formatType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4293,46 +3960,38 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the <see
-             cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+            >This method uses the <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
             
 
-             method of <paramref
-             name="formatProvider" />
+             method of <paramref name="formatProvider" />
 
             
 
-             using an <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             using an <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object as the <paramref
-             name="Type" />
+             object as the <paramref name="Type" />
 
             
 
-             parameter. If <paramref
-             name="formatProvider" />
+             parameter. If <paramref name="formatProvider" />
 
             
 
-             is null or if <see
-             cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+             is null or if <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
             
 
-             returns null, this method returns <see
-             cref="P:System.Globalization.DateTimeFormatInfo.CurrentInfo" />
+             returns null, this method returns <see cref="P:System.Globalization.DateTimeFormatInfo.CurrentInfo" />
 
             
 
             .</para
           >
           <para
-            >Your application can get a <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >Your application can get a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -4341,8 +4000,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+                >The <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
                 
 
@@ -4351,18 +4009,15 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
             </item>
             <item>
               <para
-                >The <see
-                 cref="M:System.Globalization.DateTimeFormatInfo.GetInstance(System.IFormatProvider)" />
+                >The <see cref="M:System.Globalization.DateTimeFormatInfo.GetInstance(System.IFormatProvider)" />
 
                 
 
-                 method, where <paramref
-                 name="provider" />
+                 method, where <paramref name="provider" />
 
                 
 
-                 is a <see
-                 cref="T:System.Globalization.CultureInfo" />
+                 is a <see cref="T:System.Globalization.CultureInfo" />
 
                 
 
@@ -4371,16 +4026,14 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
             </item>
           </list>
           <para
-            >A <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >A <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
              object can be created only for the invariant culture or for specific cultures, not for neutral cultures. </para
           >
           <para
-            >For more information about the invariant culture, specific cultures, and neutral cultures, see the <see
-             cref="T:System.Globalization.CultureInfo" />
+            >For more information about the invariant culture, specific cultures, and neutral cultures, see the <see cref="T:System.Globalization.CultureInfo" />
 
             
 
@@ -4390,13 +4043,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >Returns the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object associated with the specified <see
-             cref="T:System.IFormatProvider" />
+             object associated with the specified <see cref="T:System.IFormatProvider" />
 
             
 
@@ -4406,13 +4057,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >A <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object associated with <see
-             cref="T:System.IFormatProvider" />
+             object associated with <see cref="T:System.IFormatProvider" />
 
             
 
@@ -4420,17 +4069,19 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IFormatProvider" />
+          The <see cref="T:System.IFormatProvider" />
 
           
 
-           that gets the <see
-           cref="T:System.Globalization.DateTimeFormatInfo" />
+           that gets the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
           
 
@@ -4471,13 +4122,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the default invariant <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >For the default invariant <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object, this method returns a string from the <see
-             cref="T:System.Globalization.GregorianCalendar" />
+             object, this method returns a string from the <see cref="T:System.Globalization.GregorianCalendar" />
 
             
 
@@ -4612,8 +4261,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the culture-specific full name of the specified month based on the culture associated with the current <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >Returns the culture-specific full name of the specified month based on the culture associated with the current <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -4623,8 +4271,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The culture-specific full name of the month represented by <paramref
-             name="month" />
+            >The culture-specific full name of the month represented by <paramref name="month" />
 
             
 
@@ -4632,7 +4279,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           >
         </returns>
         <param name="month">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4672,8 +4323,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Obtains the shortest abbreviated day name for a specified day of the week associated with the current <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >Obtains the shortest abbreviated day name for a specified day of the week associated with the current <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -4683,8 +4333,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The abbreviated name of the week that corresponds to the <paramref
-             name="dayOfWeek" />
+            >The abbreviated name of the week that corresponds to the <paramref name="dayOfWeek" />
 
             
 
@@ -4692,12 +4341,15 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           >
         </returns>
         <param name="dayOfWeek">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.DayOfWeek" />
+          One of the <see cref="T:System.DayOfWeek" />
 
           
 
@@ -4731,8 +4383,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
       <Docs>
         <value>
           <para
-            >A read-only <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >A read-only <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -4742,18 +4393,15 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property does not change, regardless of the current culture. Because of this, the invariant culture's <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >This property does not change, regardless of the current culture. Because of this, the invariant culture's <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object can be used to produce consistent, culture-independent results in parsing and formatting operations on data that is multi-cultural. For example, if date and time data from multiple cultures is to be persisted in string form, it can be formatted by using the <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             object can be used to produce consistent, culture-independent results in parsing and formatting operations on data that is multi-cultural. For example, if date and time data from multiple cultures is to be persisted in string form, it can be formatted by using the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             object of the invariant culture and saved. It can then be parsed by using the invariant culture's <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             object of the invariant culture and saved. It can then be parsed by using the invariant culture's <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -4763,8 +4411,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the default read-only <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >Gets the default read-only <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -4798,13 +4445,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
 
             
 
-             if the <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             if the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
-             is read-only; otherwise, <see
-             langword="false" />
+             is read-only; otherwise, <see langword="false" />
 
             
 
@@ -4817,8 +4462,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >Gets a value indicating whether the <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -4848,8 +4492,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.String" />
+            > A <see cref="T:System.String" />
 
             
 
@@ -4865,23 +4508,19 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
+            >The <see cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
 
             
 
-             property defines the culture-specific format of date strings that are returned by calls to the <see
-             cref="M:System.DateTime.ToString" />
+             property defines the culture-specific format of date strings that are returned by calls to the <see cref="M:System.DateTime.ToString" />
 
             
 
-             and <see
-             cref="M:System.DateTimeOffset.ToString" />
+             and <see cref="M:System.DateTimeOffset.ToString" />
 
             
 
-             methods and by composite format strings that are supplied the "D" standard format string. The following example illustrates the relationships among the following: the "D" standard format string, the custom format string returned by the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
+             methods and by composite format strings that are supplied the "D" standard format string. The following example illustrates the relationships among the following: the "D" standard format string, the custom format string returned by the <see cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
 
             
 
@@ -4889,8 +4528,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           >
           <para>code reference: System.Globalization.DateTimeFormatInfo.LongDatePattern#2</para>
           <para
-            >See <format
-             type="text/html">
+            >See <format type="text/html">
               <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom Date and Time Format Strings</a>
             </format>
 
@@ -4900,18 +4538,15 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           >
           <para>You should set the date separator in the long date pattern to an exact string instead of using the date separator placeholder. For example, to obtain the pattern MM-DD-yyyy, set the long date pattern to "MM-DD-yyyy".</para>
           <para
-            >The value of this property may change if the calendar used by a culture changes. For instance, the following example shows how the<see
-             cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
+            >The value of this property may change if the calendar used by a culture changes. For instance, the following example shows how the<see cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
 
             
 
-             property of a <see
-             cref="T:System.Globalization.CultureInfo" />
+             property of a <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             object that represents the Arabic (Syria) culture changes when the <see
-             cref="T:System.Globalization.Calendar" />
+             object that represents the Arabic (Syria) culture changes when the <see cref="T:System.Globalization.Calendar" />
 
             
 
@@ -4946,8 +4581,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.String" />
+            > A <see cref="T:System.String" />
 
             
 
@@ -4963,18 +4597,15 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.DateTimeFormatInfo.LongTimePattern" />
+            >The <see cref="P:System.Globalization.DateTimeFormatInfo.LongTimePattern" />
 
             
 
-             property defines the culture-specific format of date strings that are returned by calls to the <see
-             cref="M:System.DateTime.ToString" />
+             property defines the culture-specific format of date strings that are returned by calls to the <see cref="M:System.DateTime.ToString" />
 
             
 
-             and <see
-             cref="M:System.DateTimeOffset.ToString" />
+             and <see cref="M:System.DateTimeOffset.ToString" />
 
             
 
@@ -5009,8 +4640,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.String" />
+            > A <see cref="T:System.String" />
 
             
 
@@ -5026,26 +4656,22 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.DateTimeFormatInfo.MonthDayPattern" />
+            >The <see cref="P:System.Globalization.DateTimeFormatInfo.MonthDayPattern" />
 
             
 
-             property defines the culture-specific format of date strings that are returned by calls to the <see
-             cref="M:System.DateTime.ToString" />
+             property defines the culture-specific format of date strings that are returned by calls to the <see cref="M:System.DateTime.ToString" />
 
             
 
-             and <see
-             cref="M:System.DateTimeOffset.ToString" />
+             and <see cref="M:System.DateTimeOffset.ToString" />
 
             
 
              methods and by composite format strings that are supplied the "m" and "M" standard format strings.</para
           >
           <para
-            >This property is affected if the value of the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+            >This property is affected if the value of the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
 
             
 
@@ -5083,13 +4709,11 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>In some languages, a month name that is part of a date appears in the genitive case. For example, a date in the Russian (Russia) or "ru-RU", culture consists of the day number and the genitive month name, such as 1 Января.</para>
           <para
-            >If you set the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.MonthGenitiveNames" />
+            >If you set the <see cref="P:System.Globalization.DateTimeFormatInfo.MonthGenitiveNames" />
 
             
 
-             property, you must also set the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.MonthNames" />
+             property, you must also set the <see cref="P:System.Globalization.DateTimeFormatInfo.MonthNames" />
 
             
 
@@ -5099,8 +4723,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a string array of month names associated with the current <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >Gets or sets a string array of month names associated with the current <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -5129,8 +4752,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
       <Docs>
         <value>
           <para
-            >A one-dimensional array of type <see
-             cref="T:System.String" />
+            >A one-dimensional array of type <see cref="T:System.String" />
 
             
 
@@ -5151,42 +4773,36 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When this property is set, the array must be one-dimensional and must have exactly 13 elements. <see
-             cref="T:System.Globalization.Calendar" />
+            >When this property is set, the array must be one-dimensional and must have exactly 13 elements. <see cref="T:System.Globalization.Calendar" />
 
             
 
              objects accommodate calendars with 13 months.</para
           >
           <para
-            >If you set the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.MonthNames" />
+            >If you set the <see cref="P:System.Globalization.DateTimeFormatInfo.MonthNames" />
 
             
 
-             property, you must also set the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.MonthGenitiveNames" />
+             property, you must also set the <see cref="P:System.Globalization.DateTimeFormatInfo.MonthGenitiveNames" />
 
             
 
              property.</para
           >
           <para
-            >If the custom pattern includes the format pattern "MMMM", <see
-             cref="M:System.DateTime.ToString" />
+            >If the custom pattern includes the format pattern "MMMM", <see cref="M:System.DateTime.ToString" />
 
             
 
-             displays the value of <see
-             cref="P:System.Globalization.DateTimeFormatInfo.MonthNames" />
+             displays the value of <see cref="P:System.Globalization.DateTimeFormatInfo.MonthNames" />
 
             
 
              in place of the "MMMM" in the format pattern.</para
           >
           <para
-            >This property is affected if the value of the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+            >This property is affected if the value of the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
 
             
 
@@ -5196,8 +4812,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a one-dimensional array of type <see
-             cref="T:System.String" />
+            >Gets or sets a one-dimensional array of type <see cref="T:System.String" />
 
             
 
@@ -5230,8 +4845,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the native name of the calendar associated with the current <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >Gets the native name of the calendar associated with the current <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -5260,8 +4874,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
       <Docs>
         <value>
           <para
-            >The <see
-             cref="T:System.String" />
+            >The <see cref="T:System.String" />
 
             
 
@@ -5277,26 +4890,22 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.DateTimeFormatInfo.PMDesignator" />
+            >The <see cref="P:System.Globalization.DateTimeFormatInfo.PMDesignator" />
 
             
 
              property is used for all times from 12:00:00 (noon) to 23:59:59.999.</para
           >
           <para
-            >If the custom pattern includes the format pattern "tt" and the time is after noon, <see
-             cref="M:System.DateTime.ToString" />
+            >If the custom pattern includes the format pattern "tt" and the time is after noon, <see cref="M:System.DateTime.ToString" />
 
             
 
-             displays the value of <see
-             cref="P:System.Globalization.DateTimeFormatInfo.PMDesignator" />
+             displays the value of <see cref="P:System.Globalization.DateTimeFormatInfo.PMDesignator" />
 
             
 
-             in place of the "tt" in the format pattern. If the custom pattern includes the format pattern "t", only the first character of <see
-             cref="P:System.Globalization.DateTimeFormatInfo.PMDesignator" />
+             in place of the "tt" in the format pattern. If the custom pattern includes the format pattern "t", only the first character of <see cref="P:System.Globalization.DateTimeFormatInfo.PMDesignator" />
 
             
 
@@ -5347,8 +4956,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This wrapper prevents any modifications to <paramref
-             name="dtfi" />
+            >This wrapper prevents any modifications to <paramref name="dtfi" />
 
             
 
@@ -5358,8 +4966,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a read-only <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >Returns a read-only <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -5369,8 +4976,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A read-only <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >A read-only <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -5378,12 +4984,15 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           >
         </returns>
         <param name="dtfi">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Globalization.DateTimeFormatInfo" />
+          The <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
           
 
@@ -5409,18 +5018,15 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.DateTimeFormatInfo.RFC1123Pattern" />
+            >The <see cref="P:System.Globalization.DateTimeFormatInfo.RFC1123Pattern" />
 
             
 
-             property defines the culture-specific format of date strings that are returned by calls to the <see
-             cref="M:System.DateTime.ToString" />
+             property defines the culture-specific format of date strings that are returned by calls to the <see cref="M:System.DateTime.ToString" />
 
             
 
-             and <see
-             cref="M:System.DateTimeOffset.ToString" />
+             and <see cref="M:System.DateTimeOffset.ToString" />
 
             
 
@@ -5464,18 +5070,15 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Globalization.DateTimeFormatInfo.SetAllDateTimePatterns(System.String[],System.Char)" />
+            >The <see cref="M:System.Globalization.DateTimeFormatInfo.SetAllDateTimePatterns(System.String[],System.Char)" />
 
             
 
-             method defines the custom format strings that correspond to a particular standard date and time format string. If a call to a date and time formatting method includes the standard date and time format string specified by <paramref
-             name="format" />
+             method defines the custom format strings that correspond to a particular standard date and time format string. If a call to a date and time formatting method includes the standard date and time format string specified by <paramref name="format" />
 
             
 
-            , the method uses the first element in the <paramref
-             name="patterns" />
+            , the method uses the first element in the <paramref name="patterns" />
 
             
 
@@ -5483,28 +5086,23 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           >
           <block subset="none" type="note">
             <para
-              >The Parse and TryParse methods do not fully iterate all strings in <paramref
-               name="patterns" />
+              >The Parse and TryParse methods do not fully iterate all strings in <paramref name="patterns" />
 
               
 
-               when parsing the string representation of a date and time. If you require a date and time string to have particular formats in a parsing operation, you should pass the array of valid formats to the <see
-               cref="M:System.DateTime.ParseExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles)" />
+               when parsing the string representation of a date and time. If you require a date and time string to have particular formats in a parsing operation, you should pass the array of valid formats to the <see cref="M:System.DateTime.ParseExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles)" />
 
               
 
-              , <see
-               cref="M:System.DateTimeOffset.ParseExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles)" />
+              , <see cref="M:System.DateTimeOffset.ParseExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles)" />
 
               
 
-              , <see
-               cref="M:System.DateTime.TryParseExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime@)" />
+              , <see cref="M:System.DateTime.TryParseExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime@)" />
 
               
 
-              , or <see
-               cref="M:System.DateTimeOffset.TryParseExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTimeOffset@)" />
+              , or <see cref="M:System.DateTimeOffset.TryParseExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTimeOffset@)" />
 
               
 
@@ -5512,18 +5110,15 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
             >
           </block>
           <para
-            >You can define custom format strings that correspond to the "d", "D", "t", "T", and "y" or "Y" standard date and time format strings. If the value of <paramref
-             name="format" />
+            >You can define custom format strings that correspond to the "d", "D", "t", "T", and "y" or "Y" standard date and time format strings. If the value of <paramref name="format" />
 
             
 
-             is any other standard format string, the <see
-             cref="M:System.Globalization.DateTimeFormatInfo.SetAllDateTimePatterns(System.String[],System.Char)" />
+             is any other standard format string, the <see cref="M:System.Globalization.DateTimeFormatInfo.SetAllDateTimePatterns(System.String[],System.Char)" />
 
             
 
-             method throws an <see
-             cref="T:System.ArgumentException" />
+             method throws an <see cref="T:System.ArgumentException" />
 
             
 
@@ -5536,19 +5131,26 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           <para>Sets the custom date and time format strings that correspond to a specified standard format string.</para>
         </summary>
         <param name="patterns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of custom format strings.</param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The standard format string associated with the custom format strings specified in the <paramref
-           name="patterns" />
+          The standard format string associated with the custom format strings specified in the <paramref name="patterns" />
 
           
 
@@ -5576,8 +5178,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.String" />
+            > A <see cref="T:System.String" />
 
             
 
@@ -5593,26 +5194,22 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.DateTimeFormatInfo.ShortDatePattern" />
+            >The <see cref="P:System.Globalization.DateTimeFormatInfo.ShortDatePattern" />
 
             
 
-             property defines the culture-specific format of date strings that are returned by calls to the <see
-             cref="M:System.DateTime.ToString" />
+             property defines the culture-specific format of date strings that are returned by calls to the <see cref="M:System.DateTime.ToString" />
 
             
 
-             and <see
-             cref="M:System.DateTimeOffset.ToString" />
+             and <see cref="M:System.DateTimeOffset.ToString" />
 
             
 
              methods and by composite format strings that are supplied the "d" standard format string.</para
           >
           <para
-            >This property is affected if the value of the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+            >This property is affected if the value of the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
 
             
 
@@ -5649,8 +5246,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a string array of the shortest unique abbreviated day names associated with the current <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >Gets or sets a string array of the shortest unique abbreviated day names associated with the current <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -5679,8 +5275,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.String" />
+            > A <see cref="T:System.String" />
 
             
 
@@ -5696,18 +5291,15 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.DateTimeFormatInfo.ShortTimePattern" />
+            >The <see cref="P:System.Globalization.DateTimeFormatInfo.ShortTimePattern" />
 
             
 
-             property defines the culture-specific format of date strings that are returned by calls to the <see
-             cref="M:System.DateTime.ToString" />
+             property defines the culture-specific format of date strings that are returned by calls to the <see cref="M:System.DateTime.ToString" />
 
             
 
-             and <see
-             cref="M:System.DateTimeOffset.ToString" />
+             and <see cref="M:System.DateTimeOffset.ToString" />
 
             
 
@@ -5739,18 +5331,15 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.DateTimeFormatInfo.SortableDateTimePattern" />
+            >The <see cref="P:System.Globalization.DateTimeFormatInfo.SortableDateTimePattern" />
 
             
 
-             property defines the culture-specific format of date strings that are returned by calls to the <see
-             cref="M:System.DateTime.ToString" />
+             property defines the culture-specific format of date strings that are returned by calls to the <see cref="M:System.DateTime.ToString" />
 
             
 
-             and <see
-             cref="M:System.DateTimeOffset.ToString" />
+             and <see cref="M:System.DateTimeOffset.ToString" />
 
             
 
@@ -5783,8 +5372,7 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
       <Docs>
         <value>
           <para
-            >The <see
-             cref="T:System.String" />
+            >The <see cref="T:System.String" />
 
             
 
@@ -5800,26 +5388,22 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the custom pattern includes the format pattern ":", <see
-             cref="M:System.DateTime.ToString" />
+            >If the custom pattern includes the format pattern ":", <see cref="M:System.DateTime.ToString" />
 
             
 
-             displays the value of <see
-             cref="P:System.Globalization.DateTimeFormatInfo.TimeSeparator" />
+             displays the value of <see cref="P:System.Globalization.DateTimeFormatInfo.TimeSeparator" />
 
             
 
              in place of the ":" in the format pattern.</para
           >
           <para
-            >The time separator is derived from the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.ShortTimePattern" />
+            >The time separator is derived from the <see cref="P:System.Globalization.DateTimeFormatInfo.ShortTimePattern" />
 
             
 
-             property. We recommend that you set the time separator in short or long time patterns to an exact string instead of using the time separator placeholder. For example, to obtain the pattern h-mm-ss, set the pattern to "h-mm-ss". This practice also enables you to set patterns such as "h'h 'mm'm 'ss's'" (3h 36m 12s) that include multiple types of separators. The <see
-             cref="P:System.Globalization.DateTimeFormatInfo.TimeSeparator" />
+             property. We recommend that you set the time separator in short or long time patterns to an exact string instead of using the time separator placeholder. For example, to obtain the pattern h-mm-ss, set the pattern to "h-mm-ss". This practice also enables you to set patterns such as "h'h 'mm'm 'ss's'" (3h 36m 12s) that include multiple types of separators. The <see cref="P:System.Globalization.DateTimeFormatInfo.TimeSeparator" />
 
             
 
@@ -5856,18 +5440,15 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.DateTimeFormatInfo.UniversalSortableDateTimePattern" />
+            >The <see cref="P:System.Globalization.DateTimeFormatInfo.UniversalSortableDateTimePattern" />
 
             
 
-             property defines the format of date strings that are returned by calls to the <see
-             cref="M:System.DateTime.ToString" />
+             property defines the format of date strings that are returned by calls to the <see cref="M:System.DateTime.ToString" />
 
             
 
-             and <see
-             cref="M:System.DateTimeOffset.ToString" />
+             and <see cref="M:System.DateTimeOffset.ToString" />
 
             
 
@@ -5910,26 +5491,22 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.DateTimeFormatInfo.YearMonthPattern" />
+            >The <see cref="P:System.Globalization.DateTimeFormatInfo.YearMonthPattern" />
 
             
 
-             property defines the culture-specific format of date strings that are returned by calls to the <see
-             cref="M:System.DateTime.ToString" />
+             property defines the culture-specific format of date strings that are returned by calls to the <see cref="M:System.DateTime.ToString" />
 
             
 
-             and <see
-             cref="M:System.DateTimeOffset.ToString" />
+             and <see cref="M:System.DateTimeOffset.ToString" />
 
             
 
              methods and by composite format strings that are supplied the "y" and "Y" standard format strings.</para
           >
           <para
-            >This property is affected if the value of the <see
-             cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+            >This property is affected if the value of the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
 
             
 

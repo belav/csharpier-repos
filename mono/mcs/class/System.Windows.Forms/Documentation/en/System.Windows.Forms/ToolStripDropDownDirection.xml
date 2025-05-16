@@ -14,8 +14,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the direction in which a <see
-         cref="T:System.Windows.Forms.ToolStripDropDown" />
+        >Specifies the direction in which a <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
         
 
@@ -35,8 +34,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uses the mouse position to specify that the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Uses the mouse position to specify that the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -59,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uses the mouse position to specify that the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Uses the mouse position to specify that the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -83,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uses the mouse position to specify that the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Uses the mouse position to specify that the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -107,8 +103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uses the mouse position to specify that the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Uses the mouse position to specify that the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -131,18 +126,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compensates for nested drop-down controls and responds to the <see
-             cref="T:System.Windows.Forms.RightToLeft" />
+            >Compensates for nested drop-down controls and responds to the <see cref="T:System.Windows.Forms.RightToLeft" />
 
             
 
-             setting, specifying either <see
-             cref="F:System.Windows.Forms.ToolStripDropDownDirection.Left" />
+             setting, specifying either <see cref="F:System.Windows.Forms.ToolStripDropDownDirection.Left" />
 
             
 
-             or <see
-             cref="F:System.Windows.Forms.ToolStripDropDownDirection.Right" />
+             or <see cref="F:System.Windows.Forms.ToolStripDropDownDirection.Right" />
 
             
 
@@ -165,8 +157,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compensates for nested drop-down controls and specifies that the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Compensates for nested drop-down controls and specifies that the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -189,8 +180,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compensates for nested drop-down controls and specifies that the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Compensates for nested drop-down controls and specifies that the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 

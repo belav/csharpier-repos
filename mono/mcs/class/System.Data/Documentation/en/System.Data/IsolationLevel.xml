@@ -16,16 +16,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.IsolationLevel" />
+        >The <see cref="T:System.Data.IsolationLevel" />
 
         
 
          values are used by a .NET Framework data provider when performing a transaction.</para
       >
       <para
-        >The <see
-         cref="T:System.Data.IsolationLevel" />
+        >The <see cref="T:System.Data.IsolationLevel" />
 
         
 
@@ -126,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A range lock is placed on the <see
-             cref="T:System.Data.DataSet" />
+            >A range lock is placed on the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -167,18 +164,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When using <see
-             cref="T:System.Data.Odbc.OdbcTransaction" />
+            >When using <see cref="T:System.Data.Odbc.OdbcTransaction" />
 
             
 
-            , if you do not set <see
-             cref="T:System.Data.IsolationLevel" />
+            , if you do not set <see cref="T:System.Data.IsolationLevel" />
 
             
 
-             or you set <see
-             cref="T:System.Data.IsolationLevel" />
+             or you set <see cref="T:System.Data.IsolationLevel" />
 
             
 

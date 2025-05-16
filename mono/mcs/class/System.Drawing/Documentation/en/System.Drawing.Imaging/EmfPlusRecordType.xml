@@ -35,8 +35,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="M:System.Drawing.Graphics.BeginContainer" />
+            >See <see cref="M:System.Drawing.Graphics.BeginContainer" />
 
             
 
@@ -61,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="M:System.Drawing.Graphics.BeginContainer" />
+            >See <see cref="M:System.Drawing.Graphics.BeginContainer" />
 
             
 
@@ -87,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="M:System.Drawing.Graphics.Clear(System.Drawing.Color)" />
+            >See <see cref="M:System.Drawing.Graphics.Clear(System.Drawing.Color)" />
 
             
 
@@ -113,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="M:System.Drawing.Graphics.AddMetafileComment(System.Byte[])" />
+            >See <see cref="M:System.Drawing.Graphics.AddMetafileComment(System.Byte[])" />
 
             
 
@@ -139,8 +135,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.DrawArc" />
+            >See <see cref="Overload:System.Drawing.Graphics.DrawArc" />
 
             
 
@@ -165,8 +160,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.DrawBeziers" />
+            >See <see cref="Overload:System.Drawing.Graphics.DrawBeziers" />
 
             
 
@@ -191,8 +185,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.DrawClosedCurve" />
+            >See <see cref="Overload:System.Drawing.Graphics.DrawClosedCurve" />
 
             
 
@@ -217,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.DrawCurve" />
+            >See <see cref="Overload:System.Drawing.Graphics.DrawCurve" />
 
             
 
@@ -262,8 +254,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.DrawEllipse" />
+            >See <see cref="Overload:System.Drawing.Graphics.DrawEllipse" />
 
             
 
@@ -288,8 +279,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.DrawImage" />
+            >See <see cref="Overload:System.Drawing.Graphics.DrawImage" />
 
             
 
@@ -314,8 +304,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.DrawImage" />
+            >See <see cref="Overload:System.Drawing.Graphics.DrawImage" />
 
             
 
@@ -340,8 +329,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.DrawLines" />
+            >See <see cref="Overload:System.Drawing.Graphics.DrawLines" />
 
             
 
@@ -366,8 +354,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="M:System.Drawing.Graphics.DrawPath(System.Drawing.Pen,System.Drawing.Drawing2D.GraphicsPath)" />
+            >See <see cref="M:System.Drawing.Graphics.DrawPath(System.Drawing.Pen,System.Drawing.Drawing2D.GraphicsPath)" />
 
             
 
@@ -392,8 +379,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.DrawPie" />
+            >See <see cref="Overload:System.Drawing.Graphics.DrawPie" />
 
             
 
@@ -418,8 +404,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.DrawRectangles" />
+            >See <see cref="Overload:System.Drawing.Graphics.DrawRectangles" />
 
             
 
@@ -444,8 +429,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.DrawString" />
+            >See <see cref="Overload:System.Drawing.Graphics.DrawString" />
 
             
 
@@ -2845,8 +2829,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="M:System.Drawing.Graphics.EndContainer(System.Drawing.Drawing2D.GraphicsContainer)" />
+            >See <see cref="M:System.Drawing.Graphics.EndContainer(System.Drawing.Drawing2D.GraphicsContainer)" />
 
             
 
@@ -2890,8 +2873,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.FillClosedCurve" />
+            >See <see cref="Overload:System.Drawing.Graphics.FillClosedCurve" />
 
             
 
@@ -2916,8 +2898,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.FillEllipse" />
+            >See <see cref="Overload:System.Drawing.Graphics.FillEllipse" />
 
             
 
@@ -2942,8 +2923,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="M:System.Drawing.Graphics.FillPath(System.Drawing.Brush,System.Drawing.Drawing2D.GraphicsPath)" />
+            >See <see cref="M:System.Drawing.Graphics.FillPath(System.Drawing.Brush,System.Drawing.Drawing2D.GraphicsPath)" />
 
             
 
@@ -2968,8 +2948,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.FillPie" />
+            >See <see cref="Overload:System.Drawing.Graphics.FillPie" />
 
             
 
@@ -2994,8 +2973,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.FillPolygon" />
+            >See <see cref="Overload:System.Drawing.Graphics.FillPolygon" />
 
             
 
@@ -3020,8 +2998,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.FillRectangles" />
+            >See <see cref="Overload:System.Drawing.Graphics.FillRectangles" />
 
             
 
@@ -3046,8 +3023,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="M:System.Drawing.Graphics.FillRegion(System.Drawing.Brush,System.Drawing.Region)" />
+            >See <see cref="M:System.Drawing.Graphics.FillRegion(System.Drawing.Brush,System.Drawing.Region)" />
 
             
 
@@ -3072,8 +3048,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="M:System.Drawing.Graphics.GetHdc" />
+            >See <see cref="M:System.Drawing.Graphics.GetHdc" />
 
             
 
@@ -3231,8 +3206,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.MultiplyTransform" />
+            >See <see cref="Overload:System.Drawing.Graphics.MultiplyTransform" />
 
             
 
@@ -3276,8 +3250,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.TranslateClip" />
+            >See <see cref="Overload:System.Drawing.Graphics.TranslateClip" />
 
             
 
@@ -3302,8 +3275,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="M:System.Drawing.Graphics.ResetClip" />
+            >See <see cref="M:System.Drawing.Graphics.ResetClip" />
 
             
 
@@ -3328,8 +3300,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="M:System.Drawing.Graphics.ResetTransform" />
+            >See <see cref="M:System.Drawing.Graphics.ResetTransform" />
 
             
 
@@ -3354,8 +3325,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="M:System.Drawing.Graphics.Restore(System.Drawing.Drawing2D.GraphicsState)" />
+            >See <see cref="M:System.Drawing.Graphics.Restore(System.Drawing.Drawing2D.GraphicsState)" />
 
             
 
@@ -3380,8 +3350,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.RotateTransform" />
+            >See <see cref="Overload:System.Drawing.Graphics.RotateTransform" />
 
             
 
@@ -3406,8 +3375,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="M:System.Drawing.Graphics.Save" />
+            >See <see cref="M:System.Drawing.Graphics.Save" />
 
             
 
@@ -3432,8 +3400,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.ScaleTransform" />
+            >See <see cref="Overload:System.Drawing.Graphics.ScaleTransform" />
 
             
 
@@ -3458,8 +3425,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="P:System.Drawing.Graphics.SmoothingMode" />
+            >See <see cref="P:System.Drawing.Graphics.SmoothingMode" />
 
             
 
@@ -3484,8 +3450,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.SetClip" />
+            >See <see cref="Overload:System.Drawing.Graphics.SetClip" />
 
             
 
@@ -3510,8 +3475,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.SetClip" />
+            >See <see cref="Overload:System.Drawing.Graphics.SetClip" />
 
             
 
@@ -3536,8 +3500,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.SetClip" />
+            >See <see cref="Overload:System.Drawing.Graphics.SetClip" />
 
             
 
@@ -3562,8 +3525,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="P:System.Drawing.Graphics.CompositingMode" />
+            >See <see cref="P:System.Drawing.Graphics.CompositingMode" />
 
             
 
@@ -3588,8 +3550,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="P:System.Drawing.Graphics.CompositingQuality" />
+            >See <see cref="P:System.Drawing.Graphics.CompositingQuality" />
 
             
 
@@ -3614,8 +3575,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="P:System.Drawing.Graphics.InterpolationMode" />
+            >See <see cref="P:System.Drawing.Graphics.InterpolationMode" />
 
             
 
@@ -3640,8 +3600,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.TransformPoints" />
+            >See <see cref="Overload:System.Drawing.Graphics.TransformPoints" />
 
             
 
@@ -3666,8 +3625,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="P:System.Drawing.Graphics.PixelOffsetMode" />
+            >See <see cref="P:System.Drawing.Graphics.PixelOffsetMode" />
 
             
 
@@ -3692,8 +3650,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="P:System.Drawing.Graphics.RenderingOrigin" />
+            >See <see cref="P:System.Drawing.Graphics.RenderingOrigin" />
 
             
 
@@ -3718,8 +3675,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="P:System.Drawing.Graphics.TextContrast" />
+            >See <see cref="P:System.Drawing.Graphics.TextContrast" />
 
             
 
@@ -3744,8 +3700,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="P:System.Drawing.Graphics.TextRenderingHint" />
+            >See <see cref="P:System.Drawing.Graphics.TextRenderingHint" />
 
             
 
@@ -3770,8 +3725,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.TransformPoints" />
+            >See <see cref="Overload:System.Drawing.Graphics.TransformPoints" />
 
             
 
@@ -3815,8 +3769,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="Overload:System.Drawing.Graphics.TransformPoints" />
+            >See <see cref="Overload:System.Drawing.Graphics.TransformPoints" />
 
             
 

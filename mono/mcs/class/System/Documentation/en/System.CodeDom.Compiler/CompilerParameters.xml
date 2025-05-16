@@ -22,143 +22,118 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.CodeDom.Compiler.CompilerParameters" />
+        >A <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
         
 
-         object represents the settings and options for an <see
-         cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+         object represents the settings and options for an <see cref="T:System.CodeDom.Compiler.ICodeCompiler" />
 
         
 
          interface.</para
       >
       <para
-        >If you are compiling an executable program, you must set the <see
-         cref="P:System.CodeDom.Compiler.CompilerParameters.GenerateExecutable" />
+        >If you are compiling an executable program, you must set the <see cref="P:System.CodeDom.Compiler.CompilerParameters.GenerateExecutable" />
 
         
 
-         property to true. When the <see
-         cref="P:System.CodeDom.Compiler.CompilerParameters.GenerateExecutable" />
+         property to true. When the <see cref="P:System.CodeDom.Compiler.CompilerParameters.GenerateExecutable" />
 
         
 
-         is set to false, the compiler will generate a class library. By default, a new <see
-         cref="T:System.CodeDom.Compiler.CompilerParameters" />
+         is set to false, the compiler will generate a class library. By default, a new <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
         
 
-         is initialized with its <see
-         cref="P:System.CodeDom.Compiler.CompilerParameters.GenerateExecutable" />
+         is initialized with its <see cref="P:System.CodeDom.Compiler.CompilerParameters.GenerateExecutable" />
 
         
 
-         property set to false. If you are compiling an executable from a CodeDOM graph, a <see
-         cref="T:System.CodeDom.CodeEntryPointMethod" />
+         property set to false. If you are compiling an executable from a CodeDOM graph, a <see cref="T:System.CodeDom.CodeEntryPointMethod" />
 
         
 
-         must be defined in the graph. If there are multiple code entry points, you can indicate the class that defines the entry point to use by setting the name of the class to the <see
-         cref="P:System.CodeDom.Compiler.CompilerParameters.MainClass" />
+         must be defined in the graph. If there are multiple code entry points, you can indicate the class that defines the entry point to use by setting the name of the class to the <see cref="P:System.CodeDom.Compiler.CompilerParameters.MainClass" />
 
         
 
          property.</para
       >
       <para
-        >You can specify a file name for the output assembly in the <see
-         cref="P:System.CodeDom.Compiler.CompilerParameters.OutputAssembly" />
+        >You can specify a file name for the output assembly in the <see cref="P:System.CodeDom.Compiler.CompilerParameters.OutputAssembly" />
 
         
 
-         property. Otherwise, a default output file name will be used. To include debug information in a generated assembly, set the <see
-         cref="P:System.CodeDom.Compiler.CompilerParameters.IncludeDebugInformation" />
+         property. Otherwise, a default output file name will be used. To include debug information in a generated assembly, set the <see cref="P:System.CodeDom.Compiler.CompilerParameters.IncludeDebugInformation" />
 
         
 
-         property to true. If your project references any assemblies, you must specify the assembly names as items in a <see
-         cref="T:System.Collections.Specialized.StringCollection" />
+         property to true. If your project references any assemblies, you must specify the assembly names as items in a <see cref="T:System.Collections.Specialized.StringCollection" />
 
         
 
-         set to the <see
-         cref="P:System.CodeDom.Compiler.CompilerParameters.ReferencedAssemblies" />
+         set to the <see cref="P:System.CodeDom.Compiler.CompilerParameters.ReferencedAssemblies" />
 
         
 
-         property of the <see
-         cref="T:System.CodeDom.Compiler.CompilerParameters" />
+         property of the <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
         
 
          used when invoking compilation.</para
       >
       <para
-        >You can compile an assembly that is written to memory rather than disk by setting the <see
-         cref="P:System.CodeDom.Compiler.CompilerParameters.GenerateInMemory" />
+        >You can compile an assembly that is written to memory rather than disk by setting the <see cref="P:System.CodeDom.Compiler.CompilerParameters.GenerateInMemory" />
 
         
 
-         property to true. When an assembly is generated in memory, your code can obtain a reference to the generated assembly from the <see
-         cref="P:System.CodeDom.Compiler.CompilerResults.CompiledAssembly" />
+         property to true. When an assembly is generated in memory, your code can obtain a reference to the generated assembly from the <see cref="P:System.CodeDom.Compiler.CompilerResults.CompiledAssembly" />
 
         
 
-         property of a <see
-         cref="T:System.CodeDom.Compiler.CompilerResults" />
+         property of a <see cref="T:System.CodeDom.Compiler.CompilerResults" />
 
         
 
-        . If an assembly is written to disk, you can obtain the path to the generated assembly from the <see
-         cref="P:System.CodeDom.Compiler.CompilerResults.PathToAssembly" />
+        . If an assembly is written to disk, you can obtain the path to the generated assembly from the <see cref="P:System.CodeDom.Compiler.CompilerResults.PathToAssembly" />
 
         
 
-         property of a <see
-         cref="T:System.CodeDom.Compiler.CompilerResults" />
+         property of a <see cref="T:System.CodeDom.Compiler.CompilerResults" />
 
         
 
         .</para
       >
       <para
-        >To specify a warning level at which to halt compilation, set the <see
-         cref="P:System.CodeDom.Compiler.CompilerParameters.WarningLevel" />
+        >To specify a warning level at which to halt compilation, set the <see cref="P:System.CodeDom.Compiler.CompilerParameters.WarningLevel" />
 
         
 
-         property to an integer that represents the warning level at which to halt compilation. You can also configure the compiler to halt compilation if warnings are encountered by setting the <see
-         cref="P:System.CodeDom.Compiler.CompilerParameters.TreatWarningsAsErrors" />
+         property to an integer that represents the warning level at which to halt compilation. You can also configure the compiler to halt compilation if warnings are encountered by setting the <see cref="P:System.CodeDom.Compiler.CompilerParameters.TreatWarningsAsErrors" />
 
         
 
          property to true.</para
       >
       <para
-        >To specify a custom command-line arguments string to use when invoking the compilation process, set the string in the <see
-         cref="P:System.CodeDom.Compiler.CompilerParameters.CompilerOptions" />
+        >To specify a custom command-line arguments string to use when invoking the compilation process, set the string in the <see cref="P:System.CodeDom.Compiler.CompilerParameters.CompilerOptions" />
 
         
 
-         property. If a Win32 security token is required to invoke the compiler process, specify the token in the <see
-         cref="P:System.CodeDom.Compiler.CompilerParameters.UserToken" />
+         property. If a Win32 security token is required to invoke the compiler process, specify the token in the <see cref="P:System.CodeDom.Compiler.CompilerParameters.UserToken" />
 
         
 
-         property. To include .NET Framework resource files in the compiled assembly, add the names of the resource files to the <see
-         cref="P:System.CodeDom.Compiler.CompilerParameters.EmbeddedResources" />
+         property. To include .NET Framework resource files in the compiled assembly, add the names of the resource files to the <see cref="P:System.CodeDom.Compiler.CompilerParameters.EmbeddedResources" />
 
         
 
-         property. To reference .NET Framework resources in another assembly, add the names of the resource files to the <see
-         cref="P:System.CodeDom.Compiler.CompilerParameters.LinkedResources" />
+         property. To reference .NET Framework resources in another assembly, add the names of the resource files to the <see cref="P:System.CodeDom.Compiler.CompilerParameters.LinkedResources" />
 
         
 
-         property. To include a Win32 resource file in the compiled assembly, specify the name of the Win32 resource file in the <see
-         cref="P:System.CodeDom.Compiler.CompilerParameters.Win32Resource" />
+         property. To include a Win32 resource file in the compiled assembly, specify the name of the Win32 resource file in the <see cref="P:System.CodeDom.Compiler.CompilerParameters.Win32Resource" />
 
         
 
@@ -166,20 +141,17 @@
       >
       <block subset="none" type="note">
         <para
-          >This class contains a link demand and an inheritance demand at the class level that applies to all members. A <see
-           cref="T:System.Security.SecurityException" />
+          >This class contains a link demand and an inheritance demand at the class level that applies to all members. A <see cref="T:System.Security.SecurityException" />
 
           
 
-           is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see <format
-           type="text/html">
+           is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see <format type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
           </format>
 
           
 
-           and <format
-           type="text/html">
+           and <format type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
 
@@ -214,8 +186,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.Compiler.CompilerParameters" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
             
 
@@ -245,8 +216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.Compiler.CompilerParameters" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
             
 
@@ -254,7 +224,11 @@
           >
         </summary>
         <param name="assemblyNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -288,8 +262,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.Compiler.CompilerParameters" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
             
 
@@ -297,7 +270,11 @@
           >
         </summary>
         <param name="assemblyNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -333,8 +310,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.Compiler.CompilerParameters" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
             
 
@@ -342,7 +318,11 @@
           >
         </summary>
         <param name="assemblyNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -368,8 +348,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+            >An <see cref="T:System.CodeDom.Compiler.ICodeCompiler" />
 
             
 
@@ -410,34 +389,29 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Embedded resources are built into the generated assembly output file. Including files through this property is similar to the /resource command-line argument supported by many of the .NET Framework compilers.</para>
           <para
-            >Not all compilers support .NET Framework resource files, so you should test for this support by calling the <see
-             cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
+            >Not all compilers support .NET Framework resource files, so you should test for this support by calling the <see cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
 
             
 
-             method with the flag <see
-             cref="F:System.CodeDom.Compiler.GeneratorSupport.Resources" />
+             method with the flag <see cref="F:System.CodeDom.Compiler.GeneratorSupport.Resources" />
 
             
 
             .</para
           >
           <para
-            >Add one or more .NET Framework resource file paths to the returned <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Add one or more .NET Framework resource file paths to the returned <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
              to embed the file resources in the compiled assembly. Adding a duplicate or invalid file path results in compilation errors; ensure that each string specifies a unique path to a valid .NET Framework resource file.</para
           >
           <para
-            >Use <see
-             cref="P:System.CodeDom.Compiler.CompilerParameters.EmbeddedResources" />
+            >Use <see cref="P:System.CodeDom.Compiler.CompilerParameters.EmbeddedResources" />
 
             
 
-             to include default or neutral culture .NET Framework resources for an assembly; use the <see
-             cref="P:System.CodeDom.Compiler.CompilerParameters.LinkedResources" />
+             to include default or neutral culture .NET Framework resources for an assembly; use the <see cref="P:System.CodeDom.Compiler.CompilerParameters.LinkedResources" />
 
             
 
@@ -579,34 +553,29 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Linked resource files allow your assembly to reference .NET Framework resources without embedding the actual resources in the assembly. Referencing files through this property is similar to the /linkresource command-line argument supported by many of the .NET Framework compilers.</para>
           <para
-            >Not all compilers support .NET Framework resource files, so you should test for this support by calling the <see
-             cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
+            >Not all compilers support .NET Framework resource files, so you should test for this support by calling the <see cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
 
             
 
-             method with the flag <see
-             cref="F:System.CodeDom.Compiler.GeneratorSupport.Resources" />
+             method with the flag <see cref="F:System.CodeDom.Compiler.GeneratorSupport.Resources" />
 
             
 
             .</para
           >
           <para
-            >Add one or more .NET Framework resource file paths to the returned <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Add one or more .NET Framework resource file paths to the returned <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
              to create links for the resources in the compiled assembly. Adding a duplicate or invalid file path results in compilation errors; ensure that each string specifies a unique path to a valid .NET Framework resource file.</para
           >
           <para
-            >Use <see
-             cref="P:System.CodeDom.Compiler.CompilerParameters.LinkedResources" />
+            >Use <see cref="P:System.CodeDom.Compiler.CompilerParameters.LinkedResources" />
 
             
 
-             to reference .NET Framework resources in satellite assemblies, localized for a particular culture; use the <see
-             cref="P:System.CodeDom.Compiler.CompilerParameters.EmbeddedResources" />
+             to reference .NET Framework resources in satellite assemblies, localized for a particular culture; use the <see cref="P:System.CodeDom.Compiler.CompilerParameters.EmbeddedResources" />
 
             
 
@@ -689,8 +658,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string collection should consist of, or include, the assemblies referenced by the current project. Add assembly file names to the returned <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >The string collection should consist of, or include, the assemblies referenced by the current project. Add assembly file names to the returned <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
@@ -727,23 +695,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The temporary files in the collection are retained or deleted upon the completion of compiler activity based on the value of the <see
-             cref="P:System.CodeDom.Compiler.TempFileCollection.KeepFiles" />
+            >The temporary files in the collection are retained or deleted upon the completion of compiler activity based on the value of the <see cref="P:System.CodeDom.Compiler.TempFileCollection.KeepFiles" />
 
             
 
-             property in the collection. The <see
-             cref="P:System.CodeDom.Compiler.TempFileCollection.KeepFiles" />
+             property in the collection. The <see cref="P:System.CodeDom.Compiler.TempFileCollection.KeepFiles" />
 
             
 
-             property is set if the collection is created using the <see
-             cref="M:System.CodeDom.Compiler.TempFileCollection.#ctor(System.String,System.Boolean)" />
+             property is set if the collection is created using the <see cref="M:System.CodeDom.Compiler.TempFileCollection.#ctor(System.String,System.Boolean)" />
 
             
 
-             constructor with the <paramref
-             name="keepFiles" />
+             constructor with the <paramref name="keepFiles" />
 
             
 
@@ -751,20 +715,17 @@
           >
           <block subset="none" type="note">
             <para
-              >This class contains a link demand and an inheritance demand at the class level that applies to all members. A <see
-               cref="T:System.Security.SecurityException" />
+              >This class contains a link demand and an inheritance demand at the class level that applies to all members. A <see cref="T:System.Security.SecurityException" />
 
               
 
-               is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see <format
-               type="text/html">
+               is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see <format type="text/html">
                 <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
               </format>
 
               
 
-               and <format
-               type="text/html">
+               and <format type="text/html">
                 <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
               </format>
 
@@ -865,31 +826,26 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Linking files through this property is similar to the /winres and /winresource command-line arguments supported by many of the .NET Framework compilers.</para>
           <para
-            >Use <see
-             cref="P:System.CodeDom.Compiler.CompilerParameters.Win32Resource" />
+            >Use <see cref="P:System.CodeDom.Compiler.CompilerParameters.Win32Resource" />
 
             
 
-             to compile a Win32 resource file into the assembly. Use <see
-             cref="P:System.CodeDom.Compiler.CompilerParameters.EmbeddedResources" />
+             to compile a Win32 resource file into the assembly. Use <see cref="P:System.CodeDom.Compiler.CompilerParameters.EmbeddedResources" />
 
             
 
-             or <see
-             cref="P:System.CodeDom.Compiler.CompilerParameters.LinkedResources" />
+             or <see cref="P:System.CodeDom.Compiler.CompilerParameters.LinkedResources" />
 
             
 
              to compile with .NET Framework resource files.</para
           >
           <para
-            >Not all compilers support Win32 resource files, so you should test a code generator for this support before linking a resource file by calling the <see
-             cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
+            >Not all compilers support Win32 resource files, so you should test a code generator for this support before linking a resource file by calling the <see cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
 
             
 
-             method with the flag <see
-             cref="F:System.CodeDom.Compiler.GeneratorSupport.Win32Resources" />
+             method with the flag <see cref="F:System.CodeDom.Compiler.GeneratorSupport.Win32Resources" />
 
             
 

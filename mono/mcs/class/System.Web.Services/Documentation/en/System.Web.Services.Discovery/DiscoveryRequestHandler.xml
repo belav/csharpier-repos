@@ -27,26 +27,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Services.Discovery.DiscoveryRequestHandler" />
+        >The <see cref="T:System.Web.Services.Discovery.DiscoveryRequestHandler" />
 
         
 
-          class, via its <see
-         cref="M:System.Web.Services.Discovery.DiscoveryRequestHandler.ProcessRequest(System.Web.HttpContext)" />
+          class, via its <see cref="M:System.Web.Services.Discovery.DiscoveryRequestHandler.ProcessRequest(System.Web.HttpContext)" />
 
         
 
-         method, processes an HTTP request for a discovery document. A discovery document is represented by the <see
-         cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+         method, processes an HTTP request for a discovery document. A discovery document is represented by the <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
         
 
          class and is usually serialized as a file using a .disco extension. Web services discovery provides a mechanism for determining the Web services that are available at a given location.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Services.Discovery.DiscoveryRequestHandler" />
+        >The <see cref="T:System.Web.Services.Discovery.DiscoveryRequestHandler" />
 
         
 
@@ -69,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryRequestHandler" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.DiscoveryRequestHandler" />
 
             
 
@@ -95,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value of true, indicates whether the instance of <see
-             cref="T:System.Web.Services.Discovery.DiscoveryRequestHandler" />
+            >Gets a value of true, indicates whether the instance of <see cref="T:System.Web.Services.Discovery.DiscoveryRequestHandler" />
 
             
 
@@ -125,21 +119,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Services.Discovery.DiscoveryRequestHandler.ProcessRequest(System.Web.HttpContext)" />
+            >The <see cref="M:System.Web.Services.Discovery.DiscoveryRequestHandler.ProcessRequest(System.Web.HttpContext)" />
 
             
 
               method searches for applicable files within the file system path corresponding to the HTTP request's Uniform Resource Locator (URL). The search may extend to subdirectories and switch target file extensions depending on what it finds in the root search directory.</para
           >
           <para
-            >The search process populates the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+            >The search process populates the <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
             
 
-             object's <see
-             cref="P:System.Web.Services.Discovery.DiscoveryDocument.References" />
+             object's <see cref="P:System.Web.Services.Discovery.DiscoveryDocument.References" />
 
             
 
@@ -151,22 +142,23 @@
           <para>Handles an HTTP request for a discovery document, which is serialized to the HTTP response.</para>
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Web.HttpContext.Request" />
+          The <see cref="P:System.Web.HttpContext.Request" />
 
           
 
-           and <see
-           cref="P:System.Web.HttpContext.Response" />
+           and <see cref="P:System.Web.HttpContext.Response" />
 
           
 
-           properties of the <see
-           cref="T:System.Web.HttpContext" />
+           properties of the <see cref="T:System.Web.HttpContext" />
 
           
 

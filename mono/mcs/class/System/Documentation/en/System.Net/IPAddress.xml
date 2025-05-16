@@ -32,8 +32,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.IPAddress" />
+        >The <see cref="T:System.Net.IPAddress" />
 
         
 
@@ -65,39 +64,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.IPAddress" />
+            >The <see cref="T:System.Net.IPAddress" />
 
             
 
-             is created with the <see
-             cref="P:System.Net.IPAddress.Address" />
+             is created with the <see cref="P:System.Net.IPAddress.Address" />
 
             
 
-             property set to <paramref
-             name="address" />
+             property set to <paramref name="address" />
 
             
 
             .</para
           >
           <para
-            >If the length of <paramref
-             name="address" />
+            >If the length of <paramref name="address" />
 
             
 
-             is 4, <see
-             cref="M:System.Net.IPAddress.#ctor(System.Byte[])" />
+             is 4, <see cref="M:System.Net.IPAddress.#ctor(System.Byte[])" />
 
             
 
              constructs an IPv4 address; otherwise, an IPv6 address with a scope of 0 is constructed.</para
           >
           <para
-            >The <see
-             cref="T:System.Byte" />
+            >The <see cref="T:System.Byte" />
 
             
 
@@ -107,13 +100,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.IPAddress" />
+            >Initializes a new instance of the <see cref="T:System.Net.IPAddress" />
 
             
 
-             class with the address specified as a <see
-             cref="T:System.Byte" />
+             class with the address specified as a <see cref="T:System.Byte" />
 
             
 
@@ -121,7 +112,11 @@
           >
         </summary>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -160,26 +155,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.IPAddress" />
+            >The <see cref="T:System.Net.IPAddress" />
 
             
 
-             instance is created with the <see
-             cref="P:System.Net.IPAddress.Address" />
+             instance is created with the <see cref="P:System.Net.IPAddress.Address" />
 
             
 
-             property set to <paramref
-             name="newAddress" />
+             property set to <paramref name="newAddress" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="T:System.Int64" />
+            >The <see cref="T:System.Int64" />
 
             
 
@@ -189,13 +180,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.IPAddress" />
+            >Initializes a new instance of the <see cref="T:System.Net.IPAddress" />
 
             
 
-             class with the address specified as an <see
-             cref="T:System.Int64" />
+             class with the address specified as an <see cref="T:System.Int64" />
 
             
 
@@ -203,7 +192,11 @@
           >
         </summary>
         <param name="newAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -232,16 +225,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor instantiates an IPv6 address. The <paramref
-             name="scopeid" />
+            >This constructor instantiates an IPv6 address. The <paramref name="scopeid" />
 
             
 
              identifies a network interface in the case of a link-local address. The scope is valid only for link-local and site-local addresses.</para
           >
           <para
-            >The <see
-             cref="T:System.Byte" />
+            >The <see cref="T:System.Byte" />
 
             
 
@@ -251,13 +242,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.IPAddress" />
+            >Initializes a new instance of the <see cref="T:System.Net.IPAddress" />
 
             
 
-             class with the address specified as a <see
-             cref="T:System.Byte" />
+             class with the address specified as a <see cref="T:System.Byte" />
 
             
 
@@ -265,14 +254,22 @@
           >
         </summary>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The byte array value of the IP address. </param
         >
         <param name="scopeid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -305,8 +302,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int64" />
+            >A <see cref="T:System.Int64" />
 
             
 
@@ -320,21 +316,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is obsolete. Use <see
-             cref="M:System.Net.IPAddress.GetAddressBytes" />
+            >This property is obsolete. Use <see cref="M:System.Net.IPAddress.GetAddressBytes" />
 
             
 
             .</para
           >
           <para
-            >To convert <see
-             cref="P:System.Net.IPAddress.Address" />
+            >To convert <see cref="P:System.Net.IPAddress.Address" />
 
             
 
-             to dotted-quad notation, use the <see
-             cref="M:System.Net.IPAddress.ToString" />
+             to dotted-quad notation, use the <see cref="M:System.Net.IPAddress.ToString" />
 
             
 
@@ -416,26 +409,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.Socket.Bind(System.Net.EndPoint)" />
+            >The <see cref="M:System.Net.Sockets.Socket.Bind(System.Net.EndPoint)" />
 
             
 
-             method uses the <see
-             cref="F:System.Net.IPAddress.Any" />
+             method uses the <see cref="F:System.Net.IPAddress.Any" />
 
             
 
-             field to indicate that a <see
-             cref="T:System.Net.Sockets.Socket" />
+             field to indicate that a <see cref="T:System.Net.Sockets.Socket" />
 
             
 
              instance must listen for client activity on all network interfaces.</para
           >
           <para
-            >The <see
-             cref="F:System.Net.IPAddress.Any" />
+            >The <see cref="F:System.Net.IPAddress.Any" />
 
             
 
@@ -476,8 +465,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Net.IPAddress.Broadcast" />
+            >The <see cref="F:System.Net.IPAddress.Broadcast" />
 
             
 
@@ -517,18 +505,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.IPAddress.Equals(System.Object)" />
+            >The <see cref="M:System.Net.IPAddress.Equals(System.Object)" />
 
             
 
-             method compares the current <see
-             cref="T:System.Net.IPAddress" />
+             method compares the current <see cref="T:System.Net.IPAddress" />
 
             
 
-             instance with the <paramref
-             name="comparand" />
+             instance with the <paramref name="comparand" />
 
             
 
@@ -544,12 +529,15 @@
           <para>true if the two addresses are equal; otherwise, false.</para>
         </returns>
         <param name="comparand">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Net.IPAddress" />
+          An <see cref="T:System.Net.IPAddress" />
 
           
 
@@ -579,8 +567,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides a copy of the <see
-             cref="T:System.Net.IPAddress" />
+            >Provides a copy of the <see cref="T:System.Net.IPAddress" />
 
             
 
@@ -589,14 +576,11 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >A <see
-             cref="T:System.Byte" />
+          <para>A <see cref="T:System.Byte" />
 
             
 
-             array.</para
-          >
+             array.</para>
         </returns>
       </Docs>
     </Member>
@@ -624,8 +608,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.IPAddress.GetHashCode" />
+            >The <see cref="M:System.Net.IPAddress.GetHashCode" />
 
             
 
@@ -670,8 +653,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Different computers use different conventions for ordering the bytes within multibyte integer values. Some computers put the most significant byte first (known as big-endian order) and others put the least-significant byte first (known as little-endian order). To work with computers that use different byte ordering, all integer values that are sent over the network are sent in network byte order which has the most significant byte first.</para>
           <para
-            >The <see
-             cref="M:System.Net.IPAddress.HostToNetworkOrder(System.Int64)" />
+            >The <see cref="M:System.Net.IPAddress.HostToNetworkOrder(System.Int64)" />
 
             
 
@@ -687,7 +669,11 @@
           <para>A short value, expressed in network byte order.</para>
         </returns>
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -723,8 +709,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Different computers use different conventions for ordering the bytes within multibyte integer values. Some computers put the most significant byte first (known as big-endian order) and others put the least-significant byte first (known as little-endian order). To work with computers that use different byte ordering, all integer values that are sent over the network are sent in network byte order which has the most significant byte first.</para>
           <para
-            >The <see
-             cref="M:System.Net.IPAddress.HostToNetworkOrder(System.Int64)" />
+            >The <see cref="M:System.Net.IPAddress.HostToNetworkOrder(System.Int64)" />
 
             
 
@@ -740,7 +725,11 @@
           <para>An integer value, expressed in network byte order.</para>
         </returns>
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -776,8 +765,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Different computers use different conventions for ordering the bytes within multibyte integer values. Some computers put the most significant byte first (known as big-endian order) and others put the least-significant byte first (known as little-endian order). To work with computers that use different byte ordering, all integer values that are sent over the network are sent in network byte order which has the most significant byte first.</para>
           <para
-            >The <see
-             cref="M:System.Net.IPAddress.HostToNetworkOrder(System.Int64)" />
+            >The <see cref="M:System.Net.IPAddress.HostToNetworkOrder(System.Int64)" />
 
             
 
@@ -793,7 +781,11 @@
           <para>A long value, expressed in network byte order.</para>
         </returns>
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -821,8 +813,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Net.IPAddress.IPv6Any" />
+            >The <see cref="F:System.Net.IPAddress.IPv6Any" />
 
             
 
@@ -832,18 +823,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.Socket.Bind(System.Net.EndPoint)" />
+            >The <see cref="M:System.Net.Sockets.Socket.Bind(System.Net.EndPoint)" />
 
             
 
-             method uses the <see
-             cref="F:System.Net.IPAddress.IPv6Any" />
+             method uses the <see cref="F:System.Net.IPAddress.IPv6Any" />
 
             
 
-             field to indicate that a <see
-             cref="T:System.Net.Sockets.Socket" />
+             field to indicate that a <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -874,8 +862,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Net.IPAddress.IPv6Loopback" />
+            >The <see cref="F:System.Net.IPAddress.IPv6Loopback" />
 
             
 
@@ -910,23 +897,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.Socket.Bind(System.Net.EndPoint)" />
+            >The <see cref="M:System.Net.Sockets.Socket.Bind(System.Net.EndPoint)" />
 
             
 
-             method uses the <see
-             cref="F:System.Net.IPAddress.IPv6None" />
+             method uses the <see cref="F:System.Net.IPAddress.IPv6None" />
 
             
 
-             field to indicate that a <see
-             cref="T:System.Net.Sockets.Socket" />
+             field to indicate that a <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             must not listen for client activity. The <see
-             cref="F:System.Net.IPAddress.IPv6None" />
+             must not listen for client activity. The <see cref="F:System.Net.IPAddress.IPv6None" />
 
             
 
@@ -1050,31 +1033,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.IPAddress.IsLoopback(System.Net.IPAddress)" />
+            >The <see cref="M:System.Net.IPAddress.IsLoopback(System.Net.IPAddress)" />
 
             
 
-             method compares <paramref
-             name="address" />
+             method compares <paramref name="address" />
 
             
 
-             to <see
-             cref="F:System.Net.IPAddress.Loopback" />
+             to <see cref="F:System.Net.IPAddress.Loopback" />
 
             
 
              and returns true if the two IP addresses are the same.</para
           >
           <para
-            >In the case of IPv4, that the <see
-             cref="M:System.Net.IPAddress.IsLoopback(System.Net.IPAddress)" />
+            >In the case of IPv4, that the <see cref="M:System.Net.IPAddress.IsLoopback(System.Net.IPAddress)" />
 
             
 
-             method returns true for any IP address of the form 127.X.Y.Z (where X, Y, and Z are in the range 0-255), not just <see
-             cref="F:System.Net.IPAddress.Loopback" />
+             method returns true for any IP address of the form 127.X.Y.Z (where X, Y, and Z are in the range 0-255), not just <see cref="F:System.Net.IPAddress.Loopback" />
 
             
 
@@ -1088,8 +1066,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="address" />
+            >true if <paramref name="address" />
 
             
 
@@ -1097,7 +1074,11 @@
           >
         </returns>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1133,8 +1114,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Net.IPAddress.Loopback" />
+            >The <see cref="F:System.Net.IPAddress.Loopback" />
 
             
 
@@ -1178,8 +1158,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Different computers use different conventions for ordering the bytes within multibyte integer values. Some computers put the most significant byte first (known as big-endian order) and others put the least-significant byte first (known as little-endian order). To work with computers that use different byte ordering, all integer values that are sent over the network are sent in network byte order which has the most significant byte first.</para>
           <para
-            >The <see
-             cref="M:System.Net.IPAddress.NetworkToHostOrder(System.Int64)" />
+            >The <see cref="M:System.Net.IPAddress.NetworkToHostOrder(System.Int64)" />
 
             
 
@@ -1195,7 +1174,11 @@
           <para>A short value, expressed in host byte order.</para>
         </returns>
         <param name="network">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1231,8 +1214,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Different computers use different conventions for ordering the bytes within multibyte integer values. Some computers put the most significant byte first (known as big-endian order) and others put the least-significant byte first (known as little-endian order). To work with computers that use different byte ordering, all integer values that are sent over the network are sent in network byte order which has the most significant byte first.</para>
           <para
-            >The <see
-             cref="M:System.Net.IPAddress.NetworkToHostOrder(System.Int64)" />
+            >The <see cref="M:System.Net.IPAddress.NetworkToHostOrder(System.Int64)" />
 
             
 
@@ -1248,7 +1230,11 @@
           <para>An integer value, expressed in host byte order.</para>
         </returns>
         <param name="network">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1287,8 +1273,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Different computers use different conventions for ordering the bytes within multibyte integer values. Some computers put the most significant byte first (known as big-endian order) and others put the least-significant byte first (known as little-endian order). To work with computers that use different byte ordering, all integer values that are sent over the network are sent in network byte order which has the most significant byte first.</para>
           <para
-            >The <see
-             cref="M:System.Net.IPAddress.NetworkToHostOrder(System.Int64)" />
+            >The <see cref="M:System.Net.IPAddress.NetworkToHostOrder(System.Int64)" />
 
             
 
@@ -1304,7 +1289,11 @@
           <para>A long value, expressed in host byte order.</para>
         </returns>
         <param name="network">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1337,23 +1326,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.Socket.Bind(System.Net.EndPoint)" />
+            >The <see cref="M:System.Net.Sockets.Socket.Bind(System.Net.EndPoint)" />
 
             
 
-             method uses the <see
-             cref="F:System.Net.IPAddress.None" />
+             method uses the <see cref="F:System.Net.IPAddress.None" />
 
             
 
-             field to indicate that a <see
-             cref="T:System.Net.Sockets.Socket" />
+             field to indicate that a <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             must not listen for client activity. The <see
-             cref="F:System.Net.IPAddress.None" />
+             must not listen for client activity. The <see cref="F:System.Net.IPAddress.None" />
 
             
 
@@ -1398,8 +1383,7 @@
 
           
 
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
@@ -1415,21 +1399,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The static <see
-             cref="M:System.Net.IPAddress.Parse(System.String)" />
+            >The static <see cref="M:System.Net.IPAddress.Parse(System.String)" />
 
             
 
-             method creates an <see
-             cref="T:System.Net.IPAddress" />
+             method creates an <see cref="T:System.Net.IPAddress" />
 
             
 
              instance from an IP address expressed in dotted-quad notation for IPv4 and in colon-hexadecimal notation for IPv6.</para
           >
           <para
-            >The number of parts (each part is separated by a period) in <paramref
-             name="ipString" />
+            >The number of parts (each part is separated by a period) in <paramref name="ipString" />
 
             
 
@@ -1439,10 +1420,7 @@
             <listheader>
               <item>
                 <term>
-                  <para
-                    >Number of parts and example <paramref
-                     name="ipString" />
-                  </para>
+                  <para>Number of parts and example <paramref name="ipString" /></para>
                 </term>
                 <description>
                   <para>IPv4 address for IPAddress</para>
@@ -1487,8 +1465,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts an IP address string to an <see
-             cref="T:System.Net.IPAddress" />
+            >Converts an IP address string to an <see cref="T:System.Net.IPAddress" />
 
             
 
@@ -1498,8 +1475,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.IPAddress" />
+            >An <see cref="T:System.Net.IPAddress" />
 
             
 
@@ -1507,7 +1483,11 @@
           >
         </returns>
         <param name="ipString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1533,8 +1513,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The meaning of <see
-             cref="P:System.Net.IPAddress.ScopeId" />
+            >The meaning of <see cref="P:System.Net.IPAddress.ScopeId" />
 
             
 
@@ -1557,8 +1536,7 @@
             <para>Site-local addresses, identified by the Format Prefix (FP) FEC0, are used by nodes when communicating on private intranets.</para>
           </block>
           <para
-            >The notation that is used to specify the <paramref
-             name="ScopeId" />
+            >The notation that is used to specify the <paramref name="ScopeId" />
 
             
 
@@ -1595,13 +1573,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.IPAddress.ToString" />
+            >The <see cref="M:System.Net.IPAddress.ToString" />
 
             
 
-             method converts the IP address that is stored in the <see
-             cref="P:System.Net.IPAddress.Address" />
+             method converts the IP address that is stored in the <see cref="P:System.Net.IPAddress.Address" />
 
             
 

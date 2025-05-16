@@ -28,23 +28,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="M:System.ServiceModel.Description.FaultDescriptionCollection.Find(System.String)" />
+        >Use the <see cref="M:System.ServiceModel.Description.FaultDescriptionCollection.Find(System.String)" />
 
         
 
-         and <see
-         cref="M:System.ServiceModel.Description.FaultDescriptionCollection.FindAll(System.String)" />
+         and <see cref="M:System.ServiceModel.Description.FaultDescriptionCollection.FindAll(System.String)" />
 
         
 
-         methods to retrieve a <see
-         cref="T:System.ServiceModel.Description.FaultDescription" />
+         methods to retrieve a <see cref="T:System.ServiceModel.Description.FaultDescription" />
 
         
 
-         or group of <see
-         cref="T:System.ServiceModel.Description.FaultDescription" />
+         or group of <see cref="T:System.ServiceModel.Description.FaultDescription" />
 
         
 
@@ -54,8 +50,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.ServiceModel.Description.FaultDescription" />
+        >Represents a collection of <see cref="T:System.ServiceModel.Description.FaultDescription" />
 
         
 
@@ -89,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.ServiceModel.Description.FaultDescription" />
+            >Returns the <see cref="T:System.ServiceModel.Description.FaultDescription" />
 
             
 
@@ -100,13 +94,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Description.FaultDescription" />
+            >The <see cref="T:System.ServiceModel.Description.FaultDescription" />
 
             
 
-             object that has the specified action, or null. If more than one <see
-             cref="T:System.ServiceModel.Description.FaultDescription" />
+             object that has the specified action, or null. If more than one <see cref="T:System.ServiceModel.Description.FaultDescription" />
 
             
 
@@ -140,8 +132,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns all <see
-             cref="T:System.ServiceModel.Description.FaultDescription" />
+            >Returns all <see cref="T:System.ServiceModel.Description.FaultDescription" />
 
             
 
@@ -151,13 +142,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of <see
-             cref="T:System.ServiceModel.Description.FaultDescription" />
+            >A collection of <see cref="T:System.ServiceModel.Description.FaultDescription" />
 
             
 
-             objects that have the specified action. If there are no <see
-             cref="T:System.ServiceModel.Description.FaultDescription" />
+             objects that have the specified action. If there are no <see cref="T:System.ServiceModel.Description.FaultDescription" />
 
             
 

@@ -20,23 +20,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Web.UI.WebControls.BoundColumn" />
+        >Use the <see cref="T:System.Web.UI.WebControls.BoundColumn" />
 
         
 
-         column type in a <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         column type in a <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
-         control to display the contents of a field in the data source. The values are listed in a single column. The field is linked to the <see
-         cref="T:System.Web.UI.WebControls.BoundColumn" />
+         control to display the contents of a field in the data source. The values are listed in a single column. The field is linked to the <see cref="T:System.Web.UI.WebControls.BoundColumn" />
 
         
 
-        , so any updates in the data source will reflect in the corresponding cells of the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+        , so any updates in the data source will reflect in the corresponding cells of the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
@@ -44,8 +40,7 @@
       >
       <block subset="none" type="note">
         <para
-          >This column type is the default for the <see
-           cref="T:System.Web.UI.WebControls.DataGrid" />
+          >This column type is the default for the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
           
 
@@ -53,8 +48,7 @@
         >
       </block>
       <para
-        >To control appearance of this column, use the style properties of the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+        >To control appearance of this column, use the style properties of the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
@@ -62,8 +56,7 @@
       >
       <block subset="none" type="note">
         <para
-          >Text is not HTML encoded before it is displayed in the <see
-           cref="T:System.Web.UI.WebControls.BoundColumn" />
+          >Text is not HTML encoded before it is displayed in the <see cref="T:System.Web.UI.WebControls.BoundColumn" />
 
           
 
@@ -74,8 +67,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A column type for the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+        >A column type for the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
@@ -93,8 +85,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.BoundColumn" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.BoundColumn" />
 
             
 
@@ -104,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.BoundColumn" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.BoundColumn" />
 
             
 
@@ -130,13 +120,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BoundColumn.DataField" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BoundColumn.DataField" />
 
             
 
-             property to specify the field to bind to the <see
-             cref="T:System.Web.UI.WebControls.BoundColumn" />
+             property to specify the field to bind to the <see cref="T:System.Web.UI.WebControls.BoundColumn" />
 
             
 
@@ -146,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the field name from the data source to bind to the <see
-             cref="T:System.Web.UI.WebControls.BoundColumn" />
+            >Gets or sets the field name from the data source to bind to the <see cref="T:System.Web.UI.WebControls.BoundColumn" />
 
             
 
@@ -177,21 +164,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BoundColumn.DataFormatString" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BoundColumn.DataFormatString" />
 
             
 
              property to provide a custom format for the items in the column.</para
           >
           <para
-            >The data format string consists of two parts, separated by a colon, in the form { <paramref
-             name="A" />
+            >The data format string consists of two parts, separated by a colon, in the form { <paramref name="A" />
 
             
 
-             : <paramref
-             name="Bxx" />
+             : <paramref name="Bxx" />
 
             
 
@@ -201,8 +185,7 @@
             <para>The entire string must be enclosed in braces to indicate that it is a format string and not a literal string. Any text outside the braces is displayed as literal text.</para>
           </block>
           <para
-            >The value before the colon (<paramref
-             name="A" />
+            >The value before the colon (<paramref name="A" />
 
             
 
@@ -212,8 +195,7 @@
             <para>This value can only be set to 0 because there is only one value in each cell.</para>
           </block>
           <para
-            >The character after the colon (<paramref
-             name="B" />
+            >The character after the colon (<paramref name="B" />
 
             
 
@@ -291,16 +273,14 @@
             <para>The format character is not case-sensitive, except for X, which displays the hexadecimal characters in the case specified.</para>
           </block>
           <para
-            >The value after the format character (<paramref
-             name="xx" />
+            >The value after the format character (<paramref name="xx" />
 
             
 
              in the general example) specifies the number of significant digits or decimal places to display.</para
           >
           <para
-            >For more information on formatting strings, see <format
-             type="text/html">
+            >For more information on formatting strings, see <format type="text/html">
               <a href="0D1364DA-5B30-4D42-8E6B-03378343343F"
                 >[&lt;topic://cpconformattingoverview&gt;]</a
               >
@@ -342,13 +322,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.BoundColumn.FormatDataValue(System.Object)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.BoundColumn.FormatDataValue(System.Object)" />
 
             
 
-             method to convert the specified value to the format indicated by the <see
-             cref="P:System.Web.UI.WebControls.BoundColumn.DataFormatString" />
+             method to convert the specified value to the format indicated by the <see cref="P:System.Web.UI.WebControls.BoundColumn.DataFormatString" />
 
             
 
@@ -356,8 +334,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This method returns the string equivalent of the value if the <see
-               cref="P:System.Web.UI.WebControls.BoundColumn.DataFormatString" />
+              >This method returns the string equivalent of the value if the <see cref="P:System.Web.UI.WebControls.BoundColumn.DataFormatString" />
 
               
 
@@ -368,8 +345,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the specified value to the format indicated by the <see
-             cref="P:System.Web.UI.WebControls.BoundColumn.DataFormatString" />
+            >Converts the specified value to the format indicated by the <see cref="P:System.Web.UI.WebControls.BoundColumn.DataFormatString" />
 
             
 
@@ -379,8 +355,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The specified value converted to the format indicated by the <see
-             cref="P:System.Web.UI.WebControls.BoundColumn.DataFormatString" />
+            >The specified value converted to the format indicated by the <see cref="P:System.Web.UI.WebControls.BoundColumn.DataFormatString" />
 
             
 
@@ -388,7 +363,11 @@
           >
         </returns>
         <param name="dataValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -411,13 +390,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.BoundColumn.Initialize" />
+            >Use the <see cref="M:System.Web.UI.WebControls.BoundColumn.Initialize" />
 
             
 
-             method to reset the <see
-             cref="T:System.Web.UI.WebControls.BoundColumn" />
+             method to reset the <see cref="T:System.Web.UI.WebControls.BoundColumn" />
 
             
 
@@ -427,8 +404,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets the <see
-             cref="T:System.Web.UI.WebControls.BoundColumn" />
+            >Resets the <see cref="T:System.Web.UI.WebControls.BoundColumn" />
 
             
 
@@ -459,13 +435,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BoundColumn.InitializeCell(System.Web.UI.WebControls.TableCell,System.Int32,System.Web.UI.WebControls.ListItemType)" />
+            >The <see cref="M:System.Web.UI.WebControls.BoundColumn.InitializeCell(System.Web.UI.WebControls.TableCell,System.Int32,System.Web.UI.WebControls.ListItemType)" />
 
             
 
-             method resets the specified cell in the <see
-             cref="T:System.Web.UI.WebControls.BoundColumn" />
+             method resets the specified cell in the <see cref="T:System.Web.UI.WebControls.BoundColumn" />
 
             
 
@@ -475,8 +449,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets the specified cell in the <see
-             cref="T:System.Web.UI.WebControls.BoundColumn" />
+            >Resets the specified cell in the <see cref="T:System.Web.UI.WebControls.BoundColumn" />
 
             
 
@@ -484,31 +457,41 @@
           >
         </summary>
         <param name="cell">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.TableCell" />
+          A <see cref="T:System.Web.UI.WebControls.TableCell" />
 
           
 
            object that represents the cell to reset. </param
         >
         <param name="columnIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The column number where the cell is located. </param
         >
         <param name="itemType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.ListItemType" />
+          One of the <see cref="T:System.Web.UI.WebControls.ListItemType" />
 
           
 
@@ -532,13 +515,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BoundColumn.ReadOnly" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BoundColumn.ReadOnly" />
 
             
 
-             property to specify whether the items in the <see
-             cref="T:System.Web.UI.WebControls.BoundColumn" />
+             property to specify whether the items in the <see cref="T:System.Web.UI.WebControls.BoundColumn" />
 
             
 
@@ -548,8 +529,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether the items in the <see
-             cref="T:System.Web.UI.WebControls.BoundColumn" />
+            >Gets or sets a value that indicates whether the items in the <see cref="T:System.Web.UI.WebControls.BoundColumn" />
 
             
 
@@ -578,8 +558,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="F:System.Web.UI.WebControls.BoundColumn.thisExpr" />
+            >Use the <see cref="F:System.Web.UI.WebControls.BoundColumn.thisExpr" />
 
             
 

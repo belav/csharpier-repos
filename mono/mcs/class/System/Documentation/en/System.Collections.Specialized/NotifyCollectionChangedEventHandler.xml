@@ -37,8 +37,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that handles the <see
-         cref="E:System.Collections.Specialized.INotifyCollectionChanged.CollectionChanged" />
+        >Represents the method that handles the <see cref="E:System.Collections.Specialized.INotifyCollectionChanged.CollectionChanged" />
 
         
 

@@ -47,8 +47,7 @@
       <para>   &lt;/system.serviceModel&gt;</para>
       <para>This flag is false by default and thus indigo2 services run in the Mixed Transports Mode unless you explicitly opt into the vstecasp compatibility mode. </para>
       <para
-        >crabout vstecasp compatibility mode, see <format
-         type="text/html">
+        >crabout vstecasp compatibility mode, see <format type="text/html">
           <a href="4f8a7c4f-e735-4987-979a-b74fcdae2652">serviceHostingEnvironment</a>
         </format>
 
@@ -57,13 +56,11 @@
         . </para
       >
       <para
-        >Use the <see
-         cref="P:System.ServiceModel.Activation.AspNetCompatibilityRequirementsAttribute.RequirementsMode" />
+        >Use the <see cref="P:System.ServiceModel.Activation.AspNetCompatibilityRequirementsAttribute.RequirementsMode" />
 
         
 
-         property to do this. At runtime, applications can detect if vstecasp compatibility mode is enabled by checking the value of the static property <see
-         cref="P:System.ServiceModel.ServiceHostingEnvironment.AspNetCompatibilityEnabled" />
+         property to do this. At runtime, applications can detect if vstecasp compatibility mode is enabled by checking the value of the static property <see cref="P:System.ServiceModel.ServiceHostingEnvironment.AspNetCompatibilityEnabled" />
 
         
 
@@ -92,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Activation.AspNetCompatibilityRequirementsAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Activation.AspNetCompatibilityRequirementsAttribute" />
 
             
 
@@ -123,13 +119,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Activation.AspNetCompatibilityRequirementsAttribute.RequirementsMode" />
+            >Use the <see cref="P:System.ServiceModel.Activation.AspNetCompatibilityRequirementsAttribute.RequirementsMode" />
 
             
 
-             property to set the hosting mode in code. This can also be done by setting an application-level configuration flag aspNetCompatibilityEnabled. crdefault <format
-             type="text/html">
+             property to set the hosting mode in code. This can also be done by setting an application-level configuration flag aspNetCompatibilityEnabled. crdefault <format type="text/html">
               <a href="4f8a7c4f-e735-4987-979a-b74fcdae2652">serviceHostingEnvironment</a>
             </format>
 
@@ -138,8 +132,7 @@
             . </para
           >
           <para
-            >At runtime, applications can detect whether vstecasp compatibility mode is enabled by checking the value of the static property <see
-             cref="P:System.ServiceModel.ServiceHostingEnvironment.AspNetCompatibilityEnabled" />
+            >At runtime, applications can detect whether vstecasp compatibility mode is enabled by checking the value of the static property <see cref="P:System.ServiceModel.ServiceHostingEnvironment.AspNetCompatibilityEnabled" />
 
             
 
@@ -190,53 +183,64 @@
           <para>Adds custom data that the binding elements can access to support the implementation of the contract.</para>
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.ServiceDescription" />
+          The <see cref="T:System.ServiceModel.Description.ServiceDescription" />
 
           
 
            of the service. </param
         >
         <param name="serviceHostBase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.ServiceHostBase" />
+          The <see cref="T:System.ServiceModel.ServiceHostBase" />
 
           
 
            used to host the service.</param
         >
         <param name="endpoints">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.ObjectModel.Collection`1" />
+          The <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
           
 
-           of type <see
-           cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+           of type <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
           
 
            that contains the endpoints for the service.</param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
+          The <see cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
 
           
 
@@ -274,24 +278,30 @@
           <para>Checks that the type of hosting is consistent with the vstecasp compatibility requirements.</para>
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.ServiceDescription" />
+          The <see cref="T:System.ServiceModel.Description.ServiceDescription" />
 
           
 
            of the service. </param
         >
         <param name="serviceHostBase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.ServiceHostBase" />
+          The <see cref="T:System.ServiceModel.ServiceHostBase" />
 
           
 
@@ -329,24 +339,30 @@
           <para>Validates the service behavior.</para>
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.ServiceDescription" />
+          The <see cref="T:System.ServiceModel.Description.ServiceDescription" />
 
           
 
            of the service. </param
         >
         <param name="serviceHostBase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.ServiceHostBase" />
+          The <see cref="T:System.ServiceModel.ServiceHostBase" />
 
           
 

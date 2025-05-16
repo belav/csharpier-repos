@@ -23,56 +23,46 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
+        >The <see cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
 
         
 
-         class is designed to be a container of <see
-         cref="T:System.ComponentModel.Design.DesignSurface" />
+         class is designed to be a container of <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
         
 
-         objects. It provides common services that handle event routing between designers, property windows, and other global objects. Using <see
-         cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
+         objects. It provides common services that handle event routing between designers, property windows, and other global objects. Using <see cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
 
         
 
          is optional, but it is recommended if you intend to have several designer windows.</para
       >
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
+        >The <see cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
 
         
 
-         class provides several design-time services automatically. You can override each of these services by replacing them in the protected <see
-         cref="P:System.ComponentModel.Design.DesignSurfaceManager.ServiceContainer" />
+         class provides several design-time services automatically. You can override each of these services by replacing them in the protected <see cref="P:System.ComponentModel.Design.DesignSurfaceManager.ServiceContainer" />
 
         
 
-         property. To replace a service, override the constructor, call base, and make any changes through the protected <see
-         cref="P:System.ComponentModel.Design.DesignSurfaceManager.ServiceContainer" />
+         property. To replace a service, override the constructor, call base, and make any changes through the protected <see cref="P:System.ComponentModel.Design.DesignSurfaceManager.ServiceContainer" />
 
         
 
-         property. All services added to the service container that implement the <see
-         cref="T:System.IDisposable" />
+         property. All services added to the service container that implement the <see cref="T:System.IDisposable" />
 
         
 
-         interface are disposed when the design surface manager is disposed. The <see
-         cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
+         interface are disposed when the design surface manager is disposed. The <see cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
 
         
 
-         class provides the <see
-         cref="T:System.ComponentModel.Design.IDesignerEventService" />
+         class provides the <see cref="T:System.ComponentModel.Design.IDesignerEventService" />
 
         
 
-         interface as the default service. <see
-         cref="T:System.ComponentModel.Design.IDesignerEventService" />
+         interface as the default service. <see cref="T:System.ComponentModel.Design.IDesignerEventService" />
 
         
 
@@ -82,8 +72,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Manages a collection of <see
-         cref="T:System.ComponentModel.Design.DesignSurface" />
+        >Manages a collection of <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
         
 
@@ -104,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
 
             
 
@@ -132,8 +120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
 
             
 
@@ -159,18 +146,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.Design.DesignSurfaceManager.ActiveDesignSurface" />
+            >The <see cref="P:System.ComponentModel.Design.DesignSurfaceManager.ActiveDesignSurface" />
 
             
 
-             property should be set by the designer's user interface whenever a designer becomes the active window. The default implementation of this property works with the default implementation of the <see
-             cref="T:System.ComponentModel.Design.IDesignerEventService" />
+             property should be set by the designer's user interface whenever a designer becomes the active window. The default implementation of this property works with the default implementation of the <see cref="T:System.ComponentModel.Design.IDesignerEventService" />
 
             
 
-             interface to notify interested parties that a new designer is now active. If you provide your own implementation of <see
-             cref="T:System.ComponentModel.Design.IDesignerEventService" />
+             interface to notify interested parties that a new designer is now active. If you provide your own implementation of <see cref="T:System.ComponentModel.Design.IDesignerEventService" />
 
             
 
@@ -247,61 +231,50 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you want to conveniently add additional per-designer services, use the <paramref
-             name="parentProvider" />
+            >If you want to conveniently add additional per-designer services, use the <paramref name="parentProvider" />
 
             
 
-             parameter to provide a service provider for this design surface. The <see
-             cref="M:System.ComponentModel.Design.DesignSurfaceManager.CreateDesignSurface(System.IServiceProvider)" />
+             parameter to provide a service provider for this design surface. The <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.CreateDesignSurface(System.IServiceProvider)" />
 
             
 
-             method creates a merged service provider that can satisfy service requests from both the given service provider as well as the <see
-             cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
+             method creates a merged service provider that can satisfy service requests from both the given service provider as well as the <see cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
 
             
 
-             itself. The <see
-             cref="M:System.ComponentModel.Design.DesignSurfaceManager.CreateDesignSurface(System.IServiceProvider)" />
+             itself. The <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.CreateDesignSurface(System.IServiceProvider)" />
 
             
 
-             method then passes this service provider into the <see
-             cref="M:System.ComponentModel.Design.DesignSurfaceManager.CreateDesignSurfaceCore(System.IServiceProvider)" />
+             method then passes this service provider into the <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.CreateDesignSurfaceCore(System.IServiceProvider)" />
 
             
 
              method.</para
           >
           <para
-            >After <see
-             cref="M:System.ComponentModel.Design.DesignSurfaceManager.CreateDesignSurfaceCore(System.IServiceProvider)" />
+            >After <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.CreateDesignSurfaceCore(System.IServiceProvider)" />
 
             
 
-             returns the design surface, the <see
-             cref="M:System.ComponentModel.Design.DesignSurfaceManager.CreateDesignSurface(System.IServiceProvider)" />
+             returns the design surface, the <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.CreateDesignSurface(System.IServiceProvider)" />
 
             
 
-             method tries to obtain the <see
-             cref="T:System.ComponentModel.Design.IDesignerEventService" />
+             method tries to obtain the <see cref="T:System.ComponentModel.Design.IDesignerEventService" />
 
             
 
-            . If it is present, and if it is the instance of the service that <see
-             cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
+            . If it is present, and if it is the instance of the service that <see cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
 
             
 
-             provided by default, the <see
-             cref="M:System.ComponentModel.Design.DesignSurfaceManager.CreateDesignSurface(System.IServiceProvider)" />
+             provided by default, the <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.CreateDesignSurface(System.IServiceProvider)" />
 
             
 
-             method raises the <see
-             cref="E:System.ComponentModel.Design.IDesignerEventService.DesignerCreated" />
+             method raises the <see cref="E:System.ComponentModel.Design.IDesignerEventService.DesignerCreated" />
 
             
 
@@ -317,12 +290,15 @@
           <para>A new design surface instance.</para>
         </returns>
         <param name="parentProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A parent service provider. A new merged service provider will be created that will first ask this provider for a service, and then delegate any failures to the design surface manager object. This merged provider will be passed into the <see
-           cref="M:System.ComponentModel.Design.DesignSurfaceManager.CreateDesignSurfaceCore(System.IServiceProvider)" />
+          A parent service provider. A new merged service provider will be created that will first ask this provider for a service, and then delegate any failures to the design surface manager object. This merged provider will be passed into the <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.CreateDesignSurfaceCore(System.IServiceProvider)" />
 
           
 
@@ -349,23 +325,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.DesignSurfaceManager.CreateDesignSurfaceCore(System.IServiceProvider)" />
+            >The <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.CreateDesignSurfaceCore(System.IServiceProvider)" />
 
             
 
-             method is called by both <see
-             cref="Overload:System.ComponentModel.Design.DesignSurfaceManager.CreateDesignSurface" />
+             method is called by both <see cref="Overload:System.ComponentModel.Design.DesignSurfaceManager.CreateDesignSurface" />
 
             
 
-             methods. It is the implementation that actually creates the design surface. The default implementation just returns a new <see
-             cref="T:System.ComponentModel.Design.DesignSurface" />
+             methods. It is the implementation that actually creates the design surface. The default implementation just returns a new <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
             
 
-            . You may override this method to provide a custom object that derives from the <see
-             cref="T:System.ComponentModel.Design.DesignSurface" />
+            . You may override this method to provide a custom object that derives from the <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
             
 
@@ -381,22 +353,23 @@
           <para>A new design surface instance.</para>
         </returns>
         <param name="parentProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A service provider to pass to the design surface. This is either an instance of <see
-           cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
+          A service provider to pass to the design surface. This is either an instance of <see cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
 
           
 
-           or an object that implements <see
-           cref="T:System.IServiceProvider" />
+           or an object that implements <see cref="T:System.IServiceProvider" />
 
           
 
-          , and represents a merge between the service provider of the <see
-           cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
+          , and represents a merge between the service provider of the <see cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
 
           
 
@@ -461,13 +434,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.Design.DesignSurfaceManager.DesignSurfaces" />
+            >The <see cref="P:System.ComponentModel.Design.DesignSurfaceManager.DesignSurfaces" />
 
             
 
-             property is implemented directly on top of <see
-             cref="T:System.ComponentModel.Design.IDesignerEventService" />
+             property is implemented directly on top of <see cref="T:System.ComponentModel.Design.IDesignerEventService" />
 
             
 
@@ -494,23 +465,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The public <see
-             cref="M:System.ComponentModel.Design.DesignSurfaceManager.Dispose" />
+            >The public <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.Dispose" />
 
             
 
-             method follows the standard <see
-             cref="T:System.IDisposable" />
+             method follows the standard <see cref="T:System.IDisposable" />
 
             
 
-             pattern. Calling this method destroys the design surface manager. It also disposes the service container, which causes all services that implement <see
-             cref="T:System.IDisposable" />
+             pattern. Calling this method destroys the design surface manager. It also disposes the service container, which causes all services that implement <see cref="T:System.IDisposable" />
 
             
 
-             to also be disposed. The protected version of this method is virtual and follows the normal <see
-             cref="T:System.IDisposable" />
+             to also be disposed. The protected version of this method is virtual and follows the normal <see cref="T:System.IDisposable" />
 
             
 
@@ -518,18 +485,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Because <see
-               cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
+              >Because <see cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
 
               
 
-               does not have any native code to clean up, it does not have a finalizer that calls <see
-               cref="M:System.ComponentModel.Design.DesignSurfaceManager.Dispose(System.Boolean)" />
+               does not have any native code to clean up, it does not have a finalizer that calls <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.Dispose(System.Boolean)" />
 
               
 
-              . If you need to call <see
-               cref="M:System.ComponentModel.Design.DesignSurfaceManager.Dispose(System.Boolean)" />
+              . If you need to call <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.Dispose(System.Boolean)" />
 
               
 
@@ -540,8 +504,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the resources used by the <see
-             cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
+            >Releases the resources used by the <see cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
 
             
 
@@ -566,23 +529,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The public <see
-             cref="M:System.ComponentModel.Design.DesignSurfaceManager.Dispose" />
+            >The public <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.Dispose" />
 
             
 
-             method follows the standard <see
-             cref="T:System.IDisposable" />
+             method follows the standard <see cref="T:System.IDisposable" />
 
             
 
-             pattern. Calling this method destroys the design surface manager. It also disposes the service container, which causes all services that implement <see
-             cref="T:System.IDisposable" />
+             pattern. Calling this method destroys the design surface manager. It also disposes the service container, which causes all services that implement <see cref="T:System.IDisposable" />
 
             
 
-             to also be disposed. The protected version of this method is virtual and follows the normal <see
-             cref="T:System.IDisposable" />
+             to also be disposed. The protected version of this method is virtual and follows the normal <see cref="T:System.IDisposable" />
 
             
 
@@ -590,18 +549,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Because <see
-               cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
+              >Because <see cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
 
               
 
-               does not have any native code to clean up, it does not have a finalizer that calls <see
-               cref="M:System.ComponentModel.Design.DesignSurfaceManager.Dispose(System.Boolean)" />
+               does not have any native code to clean up, it does not have a finalizer that calls <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.Dispose(System.Boolean)" />
 
               
 
-              . If you need to call <see
-               cref="M:System.ComponentModel.Design.DesignSurfaceManager.Dispose(System.Boolean)" />
+              . If you need to call <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.Dispose(System.Boolean)" />
 
               
 
@@ -609,36 +565,30 @@
             >
           </block>
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
 
             
 
@@ -648,8 +598,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
+            >Releases the unmanaged resources used by the <see cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
 
             
 
@@ -657,7 +606,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -682,8 +635,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.DesignSurfaceManager.GetService(System.Type)" />
+            >The <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.GetService(System.Type)" />
 
             
 
@@ -713,8 +665,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is raised when the active designer's selection of component set changes. This is mapped through the <see
-             cref="T:System.ComponentModel.Design.IDesignerEventService" />
+            >This event is raised when the active designer's selection of component set changes. This is mapped through the <see cref="T:System.ComponentModel.Design.IDesignerEventService" />
 
             
 
@@ -745,8 +696,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the design surface manager's <see
-             cref="P:System.ComponentModel.Design.DesignSurfaceManager.ServiceContainer" />
+            >Gets the design surface manager's <see cref="P:System.ComponentModel.Design.DesignSurfaceManager.ServiceContainer" />
 
             
 

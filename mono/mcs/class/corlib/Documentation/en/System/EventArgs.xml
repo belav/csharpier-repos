@@ -31,34 +31,29 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class serves as the base class for all classes that represent event data. For example, the <see
-         cref="T:System.AssemblyLoadEventArgs" />
+        >This class serves as the base class for all classes that represent event data. For example, the <see cref="T:System.AssemblyLoadEventArgs" />
 
         
 
-         class derives from <see
-         cref="T:System.EventArgs" />
+         class derives from <see cref="T:System.EventArgs" />
 
         
 
-         and is used to hold the data for assembly load events. To create a custom event data class, create a class that derives from the <see
-         cref="T:System.EventArgs" />
+         and is used to hold the data for assembly load events. To create a custom event data class, create a class that derives from the <see cref="T:System.EventArgs" />
 
         
 
          class and provide the properties to store the necessary data. The name of your custom event data class should end with EventArgs.</para
       >
       <para
-        >To pass an object that does not contain any data, use the <see
-         cref="F:System.EventArgs.Empty" />
+        >To pass an object that does not contain any data, use the <see cref="F:System.EventArgs.Empty" />
 
         
 
          field.</para
       >
       <para
-        >For more information about events, see the <format
-         type="text/html">
+        >For more information about events, see the <format type="text/html">
           <a href="b6f65241-e0ad-4590-a99f-200ce741bb1f">Handling and Raising Events</a>
         </format>
 
@@ -95,8 +90,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To pass an object that does not contain any data, use the <see
-             cref="F:System.EventArgs.Empty" />
+            >To pass an object that does not contain any data, use the <see cref="F:System.EventArgs.Empty" />
 
             
 
@@ -106,8 +100,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.EventArgs" />
+            >Initializes a new instance of the <see cref="T:System.EventArgs" />
 
             
 

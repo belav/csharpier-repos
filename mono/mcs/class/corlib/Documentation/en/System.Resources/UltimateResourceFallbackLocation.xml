@@ -29,23 +29,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Resources.UltimateResourceFallbackLocation" />
+        >The <see cref="T:System.Resources.UltimateResourceFallbackLocation" />
 
         
 
-         enumeration is used with the <see
-         cref="M:System.Resources.NeutralResourcesLanguageAttribute.#ctor(System.String,System.Resources.UltimateResourceFallbackLocation)" />
+         enumeration is used with the <see cref="M:System.Resources.NeutralResourcesLanguageAttribute.#ctor(System.String,System.Resources.UltimateResourceFallbackLocation)" />
 
         
 
-         constructor to specify whether a <see
-         cref="T:System.Resources.ResourceManager" />
+         constructor to specify whether a <see cref="T:System.Resources.ResourceManager" />
 
         
 
-         object retrieves the resources of the app's default culture from the main app assembly (the default), or from a satellite assembly. In a localized application, the resources of the default culture are used if no culture-specific resources are found after using the resource fallback process. For more information, see the "Resource Fallback Process" section in <format
-         type="text/html">
+         object retrieves the resources of the app's default culture from the main app assembly (the default), or from a satellite assembly. In a localized application, the resources of the default culture are used if no culture-specific resources are found after using the resource fallback process. For more information, see the "Resource Fallback Process" section in <format type="text/html">
           <a href="b224d7c0-35f8-4e82-a705-dd76795e8d16">Packaging and Deploying Resources</a>
         </format>
 
@@ -54,33 +50,27 @@
         .</para
       >
       <para
-        >If you specify a value of <see
-         cref="F:System.Resources.UltimateResourceFallbackLocation.MainAssembly" />
+        >If you specify a value of <see cref="F:System.Resources.UltimateResourceFallbackLocation.MainAssembly" />
 
         
 
-         or no value to the <see
-         cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
+         or no value to the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
 
         
 
-         attribute and resource manager cannot load a resource set that belongs to the default culture, it throws a <see
-         cref="T:System.Resources.MissingManifestResourceException" />
+         attribute and resource manager cannot load a resource set that belongs to the default culture, it throws a <see cref="T:System.Resources.MissingManifestResourceException" />
 
         
 
-         exception. If you specify a value of <see
-         cref="F:System.Resources.UltimateResourceFallbackLocation.Satellite" />
+         exception. If you specify a value of <see cref="F:System.Resources.UltimateResourceFallbackLocation.Satellite" />
 
         
 
-         to the <see
-         cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
+         to the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
 
         
 
-         and resource manager cannot load a resource set that belongs to the default culture, it throws a <see
-         cref="T:System.Resources.MissingSatelliteAssemblyException" />
+         and resource manager cannot load a resource set that belongs to the default culture, it throws a <see cref="T:System.Resources.MissingSatelliteAssemblyException" />
 
         
 
@@ -90,8 +80,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies whether a <see
-         cref="T:System.Resources.ResourceManager" />
+        >Specifies whether a <see cref="T:System.Resources.ResourceManager" />
 
         
 

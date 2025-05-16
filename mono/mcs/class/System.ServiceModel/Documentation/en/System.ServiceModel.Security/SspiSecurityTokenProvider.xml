@@ -56,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.SspiSecurityTokenProvider" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SspiSecurityTokenProvider" />
 
             
 
@@ -65,26 +64,37 @@
           >
         </summary>
         <param name="credential">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.NetworkCredential" />
+          The <see cref="T:System.Net.NetworkCredential" />
 
           
 
            that represents the server identity.</param
         >
         <param name="extractGroupsForWindowsAccounts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to expand users to include Windows Groups; otherwise, false.</param
         >
         <param name="allowUnauthenticatedCallers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -121,8 +131,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.SspiSecurityTokenProvider" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SspiSecurityTokenProvider" />
 
             
 
@@ -130,31 +139,41 @@
           >
         </summary>
         <param name="credential">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.NetworkCredential" />
+          The <see cref="T:System.Net.NetworkCredential" />
 
           
 
            that represents the client identity.</param
         >
         <param name="allowNtlm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to allow NTLM authentication; otherwise, false.</param
         >
         <param name="impersonationLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Principal.TokenImpersonationLevel" />
+          The <see cref="T:System.Security.Principal.TokenImpersonationLevel" />
 
           
 
@@ -185,8 +204,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The security token is of type <see
-             cref="T:System.ServiceModel.Security.Tokens.SspiSecurityToken" />
+            >The security token is of type <see cref="T:System.ServiceModel.Security.Tokens.SspiSecurityToken" />
 
             
 
@@ -202,12 +220,15 @@
           <para>The security token.</para>
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Timespan" />
+          A <see cref="T:System.Timespan" />
 
           
 

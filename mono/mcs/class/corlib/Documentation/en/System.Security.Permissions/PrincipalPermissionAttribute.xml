@@ -40,41 +40,34 @@
 
         
 
-         can be used to declaratively demand that users running your code belong to a specified role or have been authenticated. Use of <see
-         cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+         can be used to declaratively demand that users running your code belong to a specified role or have been authenticated. Use of <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
 
         
 
-         creates a <see
-         cref="T:System.Security.Permissions.PrincipalPermission" />
+         creates a <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
         
 
-         with <see
-         cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Authenticated" />
+         with <see cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Authenticated" />
 
         
 
-         set to true and <see
-         cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Name" />
+         set to true and <see cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Name" />
 
         
 
-         and <see
-         cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Role" />
+         and <see cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Role" />
 
         
 
          set to null.</para
       >
       <para
-        >The scope of the declaration that is allowed depends on the <see
-         cref="T:System.Security.Permissions.SecurityAction" />
+        >The scope of the declaration that is allowed depends on the <see cref="T:System.Security.Permissions.SecurityAction" />
 
         
 
-         that is used. <see
-         cref="T:System.Security.Permissions.PrincipalPermissionAttribute" />
+         that is used. <see cref="T:System.Security.Permissions.PrincipalPermissionAttribute" />
 
         
 
@@ -83,18 +76,15 @@
       <para>The security information declared by a security attribute is stored in the metadata of the attribute target and is accessed by the system at run time. Security attributes are used only for declarative security. For imperative security, use the corresponding permission class.</para>
       <block subset="none" type="note">
         <para
-          >Before you use this class to demand principal permission, you must set the current application domain's principal policy to the enumeration value <see
-           cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />
+          >Before you use this class to demand principal permission, you must set the current application domain's principal policy to the enumeration value <see cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />
 
           
 
-          . By default, the principal policy is set to <see
-           cref="F:System.Security.Principal.PrincipalPolicy.UnauthenticatedPrincipal" />
+          . By default, the principal policy is set to <see cref="F:System.Security.Principal.PrincipalPolicy.UnauthenticatedPrincipal" />
 
           
 
-          . If you do not set the principal policy to <see
-           cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />
+          . If you do not set the principal policy to <see cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />
 
           
 
@@ -105,8 +95,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Allows security actions for <see
-         cref="T:System.Security.Permissions.PrincipalPermission" />
+        >Allows security actions for <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
         
 
@@ -138,8 +127,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Demand, InheritanceDemand, and LinkDemand are the only values of <see
-             cref="T:System.Security.Permissions.SecurityAction" />
+            >Demand, InheritanceDemand, and LinkDemand are the only values of <see cref="T:System.Security.Permissions.SecurityAction" />
 
             
 
@@ -149,13 +137,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.PrincipalPermissionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.PrincipalPermissionAttribute" />
 
             
 
-             class with the specified <see
-             cref="T:System.Security.Permissions.SecurityAction" />
+             class with the specified <see cref="T:System.Security.Permissions.SecurityAction" />
 
             
 
@@ -163,12 +149,15 @@
           >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+          One of the <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -225,8 +214,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns a new <see
-             cref="T:System.Security.Permissions.PrincipalPermission" />
+            >Creates and returns a new <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
             
 
@@ -236,8 +224,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.Permissions.PrincipalPermission" />
+            >A <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
             
 
@@ -263,8 +250,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the authentication provider is Windows NT, <see
-             cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Name" />
+            >If the authentication provider is Windows NT, <see cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Name" />
 
             
 

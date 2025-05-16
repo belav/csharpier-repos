@@ -65,18 +65,15 @@
            to connect to.</param
         >
         <summary
-          >Creates a new UnixClient and establishes a connection to the passed in <see
-           cref="T:Mono.Unix.UnixEndPoint" />
+          >Creates a new UnixClient and establishes a connection to the passed in <see cref="T:Mono.Unix.UnixEndPoint" />
 
           
 
-          .  Most of the time users will want to use the <see
-           cref="C:Mono.Unix.UnixClient(System.String)" />
+          .  Most of the time users will want to use the <see cref="C:Mono.Unix.UnixClient(System.String)" />
 
           
 
-           constructor instead, unless you already have a <see
-           cref="T:Mono.Unix.UnixEndPoint" />
+           constructor instead, unless you already have a <see cref="T:Mono.Unix.UnixEndPoint" />
 
           
 
@@ -88,8 +85,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -122,8 +118,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -152,16 +147,14 @@
       </ReturnValue>
       <Docs>
         <summary
-          >The underlying <see
-           cref="T:System.Net.Sockets.Socket" />
+          >The underlying <see cref="T:System.Net.Sockets.Socket" />
 
           
 
            for this UnixClient.</summary
         >
         <value
-          >The <see
-           cref="T:System.Net.Sockets.Socket" />
+          >The <see cref="T:System.Net.Sockets.Socket" />
 
           
 
@@ -189,8 +182,7 @@
       <Docs>
         <summary>Closes the connection</summary>
         <remarks />
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           Instance has been disposed.
         </exception
         >
@@ -219,8 +211,7 @@
       </Parameters>
       <Docs>
         <param name="remoteEndPoint"
-          >The <see
-           cref="T:Mono.Unix.UnixEndPoint" />
+          >The <see cref="T:Mono.Unix.UnixEndPoint" />
 
           
 
@@ -228,8 +219,7 @@
         >
         <summary>Connects to a Unix domain socket specified by the endpoint.</summary>
         <remarks />
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           Instance has been disposed.
         </exception
         >
@@ -257,8 +247,7 @@
         <param name="path">A file system path pointing to the Unix domain socket</param>
         <summary>Connects to a Unix domain socket specified by path.</summary>
         <remarks />
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           Instance has been disposed.
         </exception
         >
@@ -351,24 +340,21 @@
       <Parameters />
       <Docs>
         <summary
-          >Gets the underlying <see
-           cref="T:System.Net.Sockets.NetworkStream" />
+          >Gets the underlying <see cref="T:System.Net.Sockets.NetworkStream" />
 
           
 
            for this UnixClient.</summary
         >
         <returns
-          >The <see
-           cref="T:System.Net.Sockets.NetworkStream" />
+          >The <see cref="T:System.Net.Sockets.NetworkStream" />
 
           
 
            for this client.</returns
         >
         <remarks />
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           Instance has been disposed.
         </exception
         >
@@ -398,8 +384,7 @@
           <see cref="T:System.Net.Sockets.LingerOption" />
         </value>
         <remarks />
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           Instance has been disposed.
         </exception
         >
@@ -426,8 +411,7 @@
           <see cref="T:Mono.Unix.PeerCred" />
         </value>
         <remarks>Not all operating systems support peer credentials on Unix domain sockets.  This might not be available on all systems.</remarks>
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           Instance has been disposed.
         </exception
         >
@@ -449,8 +433,7 @@
         <summary>The size of the receive buffer</summary>
         <value>The size of the receive buffer, in bytes.  The default value is 8192 bytes.</value>
         <remarks />
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           Instance has been disposed.
         </exception
         >
@@ -472,8 +455,7 @@
         <summary>The amount of time to wait when receiving data once a read has started.</summary>
         <value>Amount of time to wait, in milliseconds.  The default is 0, which means no timeout.</value>
         <remarks />
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           Instance has been disposed.
         </exception
         >
@@ -495,8 +477,7 @@
         <summary>The size of the send buffer.</summary>
         <value>The size of the send buffer, in bytes. The default value is 8192 bytes.</value>
         <remarks />
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           Instance has been disposed.
         </exception
         >
@@ -518,8 +499,7 @@
         <summary>The amount of time to wait when sending data once a write has started. </summary>
         <value>Amount of time to wait, in milliseconds. The default is 0, which means no timeout.</value>
         <remarks>To be added.</remarks>
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           Instance has been disposed.
         </exception
         >

@@ -37,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.PeerResolvers.PeerResolverSettings" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.PeerResolvers.PeerResolverSettings" />
 
             
 
@@ -68,13 +67,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is set only if <see
-             cref="P:System.ServiceModel.PeerResolvers.PeerResolverSettings.Mode" />
+            >This property is set only if <see cref="P:System.ServiceModel.PeerResolvers.PeerResolverSettings.Mode" />
 
             
 
-             is set to <see
-             cref="F:System.ServiceModel.PeerResolvers.PeerResolverMode.Custom" />
+             is set to <see cref="F:System.ServiceModel.PeerResolvers.PeerResolverMode.Custom" />
 
             
 

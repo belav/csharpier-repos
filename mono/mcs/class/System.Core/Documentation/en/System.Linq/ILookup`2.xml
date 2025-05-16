@@ -28,26 +28,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The type <see
-         cref="T:System.Linq.Lookup`2" />
+        >The type <see cref="T:System.Linq.Lookup`2" />
 
         
 
-         implements the <see
-         cref="T:System.Linq.ILookup`2" />
+         implements the <see cref="T:System.Linq.ILookup`2" />
 
         
 
          interface.</para
       >
       <para
-        >The extension method <see
-         cref="Overload:System.Linq.Enumerable.ToLookup" />
+        >The extension method <see cref="Overload:System.Linq.Enumerable.ToLookup" />
 
         
 
-        , which can be appended to the end of a LINQ query, returns an object of type <see
-         cref="T:System.Linq.ILookup`2" />
+        , which can be appended to the end of a LINQ query, returns an object of type <see cref="T:System.Linq.ILookup`2" />
 
         
 
@@ -57,8 +53,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines an indexer, size property, and Boolean search method for data structures that map keys to <see
-         cref="T:System.Collections.Generic.IEnumerable`1" />
+        >Defines an indexer, size property, and Boolean search method for data structures that map keys to <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
         
 
@@ -108,8 +103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of key/value collection pairs in the <see
-             cref="T:System.Linq.ILookup`2" />
+            >Gets the number of key/value collection pairs in the <see cref="T:System.Linq.ILookup`2" />
 
             
 

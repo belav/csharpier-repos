@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
 <clause number="11.1" title="Value types">
   <paragraph
-    >A value type is either a struct type or an enumeration type. C# provides a set of predefined struct types called the simple types. The simple types are identified through reserved words. <grammar_production
-    >
+    >A value type is either a struct type or an enumeration type. C# provides a set of predefined struct types called the simple types. The simple types are identified through reserved words. <grammar_production>
       <name>
         <non_terminal where="11.1">value-type</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="11.1">struct-type</non_terminal>
       </rhs>
       <rhs>
@@ -24,8 +22,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="10.8">type-name</non_terminal>
       </rhs>
       <rhs>
@@ -39,8 +36,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="11.1">numeric-type</non_terminal>
       </rhs>
       <rhs>
@@ -54,8 +50,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="11.1">integral-type</non_terminal>
       </rhs>
       <rhs>
@@ -72,8 +67,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <keyword>sbyte</keyword>
       </rhs>
       <rhs>
@@ -108,8 +102,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <keyword>float</keyword>
       </rhs>
       <rhs>
@@ -123,15 +116,13 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="10.8">type-name</non_terminal>
       </rhs>
     </grammar_production>
   </paragraph>
   <paragraph
-    >All value types implicitly inherit from class object. It is not possible for any type to derive from a value type, and value types are thus implicitly sealed (<hyperlink
-    >17.1.1.2</hyperlink>
+    >All value types implicitly inherit from class object. It is not possible for any type to derive from a value type, and value types are thus implicitly sealed (<hyperlink>17.1.1.2</hyperlink>
 
     
 

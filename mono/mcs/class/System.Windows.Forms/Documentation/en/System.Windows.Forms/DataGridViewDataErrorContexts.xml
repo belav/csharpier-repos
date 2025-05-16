@@ -21,38 +21,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Members of this enumeration may be combined using the bitwise OR operation to represent the state of a data-bound <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >Members of this enumeration may be combined using the bitwise OR operation to represent the state of a data-bound <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
-         when a data error occurred. For example, if a user enters an invalid cell value (such as entering a name in a cell that expects a date) and then selects a different cell, the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         when a data error occurred. For example, if a user enters an invalid cell value (such as entering a name in a cell that expects a date) and then selects a different cell, the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
-         will try to commit the invalid cell value. When the commit fails, the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         will try to commit the invalid cell value. When the commit fails, the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
-         will raise a <see
-         cref="E:System.Windows.Forms.DataGridView.DataError" />
+         will raise a <see cref="E:System.Windows.Forms.DataGridView.DataError" />
 
         
 
-         event whose <see
-         cref="P:System.Windows.Forms.DataGridViewDataErrorEventArgs.Context" />
+         event whose <see cref="P:System.Windows.Forms.DataGridViewDataErrorEventArgs.Context" />
 
         
 
-         property will have a value of <see
-         cref="F:System.Windows.Forms.DataGridViewDataErrorContexts.Commit" />
+         property will have a value of <see cref="F:System.Windows.Forms.DataGridViewDataErrorContexts.Commit" />
 
         
 
-         and <see
-         cref="F:System.Windows.Forms.DataGridViewDataErrorContexts.CurrentCellChange" />
+         and <see cref="F:System.Windows.Forms.DataGridViewDataErrorContexts.CurrentCellChange" />
 
         
 
@@ -62,8 +55,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the state of a data-bound <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >Represents the state of a data-bound <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -185,13 +177,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A data error occurred when the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >A data error occurred when the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
-             lost focus. This value indicates that the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+             lost focus. This value indicates that the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
@@ -214,8 +204,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A data error occurred when parsing new data. This value indicates that the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >A data error occurred when parsing new data. This value indicates that the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
@@ -238,8 +227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A data error occurred when calculating the preferred size of a cell. This value indicates that the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >A data error occurred when calculating the preferred size of a cell. This value indicates that the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
@@ -262,8 +250,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A data error occurred when deleting a row. This value indicates that the underlying data store threw an exception when a data-bound <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >A data error occurred when deleting a row. This value indicates that the underlying data store threw an exception when a data-bound <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 

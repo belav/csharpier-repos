@@ -21,18 +21,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Channels.IReplyChannel" />
+        >The <see cref="T:System.ServiceModel.Channels.IReplyChannel" />
 
         
 
-         interface includes synchronous and asynchronous variants of a <see
-         cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
+         interface includes synchronous and asynchronous variants of a <see cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
 
         
 
-         method return an <see
-         cref="T:System.ServiceModel.Channels.RequestContext" />
+         method return an <see cref="T:System.ServiceModel.Channels.RequestContext" />
 
         
 
@@ -40,21 +37,18 @@
       >
       <para>The contract includes synchronous and asynchronous variants of receive, try-to-receive and wait-for-a-message functionality.</para>
       <para
-        >An <see
-         cref="T:System.ServiceModel.Channels.IReplyChannel" />
+        >An <see cref="T:System.ServiceModel.Channels.IReplyChannel" />
 
         
 
          is not necessarily bound to a single sender. Other channels and channel interfaces provide correlation between the sender and the reply channel, but the base contract makes no such restriction. </para
       >
       <para
-        >The pull model is used with an <see
-         cref="T:System.ServiceModel.Channels.IReplyChannel" />
+        >The pull model is used with an <see cref="T:System.ServiceModel.Channels.IReplyChannel" />
 
         
 
-         to receive messages. This model consists of calling <see
-         cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
+         to receive messages. This model consists of calling <see cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
 
         
 
@@ -91,31 +85,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ServiceModel.Channels.IReplyChannel.BeginReceiveRequest(System.AsyncCallback,System.Object)" />
+            >The <see cref="M:System.ServiceModel.Channels.IReplyChannel.BeginReceiveRequest(System.AsyncCallback,System.Object)" />
 
             
 
-             method implements the standard pattern for invoking <see
-             cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
+             method implements the standard pattern for invoking <see cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
 
             
 
-             asynchronously. The default timeout is 1 minute. If a receive timeout is set on the binding used to configure the connection, then that value is used. Use <see
-             cref="M:System.ServiceModel.Channels.IReplyChannel.BeginReceiveRequest(System.TimeSpan,System.AsyncCallback,System.Object)" />
+             asynchronously. The default timeout is 1 minute. If a receive timeout is set on the binding used to configure the connection, then that value is used. Use <see cref="M:System.ServiceModel.Channels.IReplyChannel.BeginReceiveRequest(System.TimeSpan,System.AsyncCallback,System.Object)" />
 
             
 
              if you want to specify an explicit timeout with the call that overrides these other values.</para
           >
           <para
-            >If the request message received is larger that the maximum message size allowed by the binding being used, a <see
-             cref="T:System.ServiceModel.QuotaExceededException" />
+            >If the request message received is larger that the maximum message size allowed by the binding being used, a <see cref="T:System.ServiceModel.QuotaExceededException" />
 
             
 
-             is thrown. The maximum message size is set by the <see
-             cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
+             is thrown. The maximum message size is set by the <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
 
             
 
@@ -129,8 +118,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IAsyncResult" />
+            >The <see cref="T:System.IAsyncResult" />
 
             
 
@@ -138,19 +126,26 @@
           >
         </returns>
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.AsyncCallback" />
+          The <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that receives the notification of the asynchronous receive that a request operation completes.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -183,26 +178,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ServiceModel.Channels.IReplyChannel.BeginReceiveRequest(System.TimeSpan,System.AsyncCallback,System.Object)" />
+            >The <see cref="M:System.ServiceModel.Channels.IReplyChannel.BeginReceiveRequest(System.TimeSpan,System.AsyncCallback,System.Object)" />
 
             
 
-             method implements the standard pattern for invoking <see
-             cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest(System.TimeSpan)" />
+             method implements the standard pattern for invoking <see cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest(System.TimeSpan)" />
 
             
 
             asynchronously. The timeout set on this method overrides a receive timeout set on the binding that is used to configure the connection.</para
           >
           <para
-            >If the request message received is larger that the maximum message size allowed by the binding being used, a <see
-             cref="T:System.ServiceModel.QuotaExceededException" />
+            >If the request message received is larger that the maximum message size allowed by the binding being used, a <see cref="T:System.ServiceModel.QuotaExceededException" />
 
             
 
-             is thrown. The maximum message size is set by the <see
-             cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
+             is thrown. The maximum message size is set by the <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
 
             
 
@@ -216,8 +207,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IAsyncResult" />
+            >The <see cref="T:System.IAsyncResult" />
 
             
 
@@ -225,31 +215,41 @@
           >
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Timespan" />
+          The <see cref="T:System.Timespan" />
 
           
 
            that specifies the interval of time to wait for the reception of an available request.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.AsyncCallback" />
+          The <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that receives the notification of the asynchronous receive that a request operation completes.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -282,13 +282,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the asynchronous <see
-             cref="M:System.ServiceModel.Channels.IReplyChannel.BeginTryReceiveRequest(System.TimeSpan,System.AsyncCallback,System.Object)" />
+            >Use the asynchronous <see cref="M:System.ServiceModel.Channels.IReplyChannel.BeginTryReceiveRequest(System.TimeSpan,System.AsyncCallback,System.Object)" />
 
             
 
-             method when you need the application processing to continue without waiting. Use one of the synchronous <see
-             cref="M:System.ServiceModel.Channels.IReplyChannel.TryReceiveRequest(System.TimeSpan,System.ServiceModel.Channels.RequestContext@)" />
+             method when you need the application processing to continue without waiting. Use one of the synchronous <see cref="M:System.ServiceModel.Channels.IReplyChannel.TryReceiveRequest(System.TimeSpan,System.ServiceModel.Channels.RequestContext@)" />
 
             
 
@@ -303,8 +301,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IAsyncResult" />
+            >The <see cref="T:System.IAsyncResult" />
 
             
 
@@ -312,31 +309,41 @@
           >
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Timespan" />
+          The <see cref="T:System.Timespan" />
 
           
 
            that specifies how long the receive request operation has to complete before timing out and returning false.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.AsyncCallback" />
+          The <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that receives the notification of the asynchronous receive that a request operation completes.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -369,13 +376,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the synchronous <see
-             cref="M:System.ServiceModel.Channels.IReplyChannel.WaitForRequest(System.TimeSpan)" />
+            >Use the synchronous <see cref="M:System.ServiceModel.Channels.IReplyChannel.WaitForRequest(System.TimeSpan)" />
 
             
 
-             method when it is acceptable for the current thread to be blocked while it waits for a request message to arrive in the queue. The thread is blocked up to the specified <paramref
-             name="timeout" />
+             method when it is acceptable for the current thread to be blocked while it waits for a request message to arrive in the queue. The thread is blocked up to the specified <paramref name="timeout" />
 
             
 
@@ -390,8 +395,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IAsyncResult" />
+            >The <see cref="T:System.IAsyncResult" />
 
             
 
@@ -399,31 +403,41 @@
           >
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Timespan" />
+          The <see cref="T:System.Timespan" />
 
           
 
            that specifies the interval of time to wait for the reception of an available request.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.AsyncCallback" />
+          The <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that receives the notification of the asynchronous receive that a request operation completes.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -454,13 +468,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the request message received is larger that the maximum message size allowed by the binding being used, a <see
-             cref="T:System.ServiceModel.QuotaExceededException" />
+            >If the request message received is larger that the maximum message size allowed by the binding being used, a <see cref="T:System.ServiceModel.QuotaExceededException" />
 
             
 
-             is thrown. The maximum message size is set by the <see
-             cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
+             is thrown. The maximum message size is set by the <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
 
             
 
@@ -474,8 +486,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.RequestContext" />
+            >The <see cref="T:System.ServiceModel.Channels.RequestContext" />
 
             
 
@@ -483,17 +494,19 @@
           >
         </returns>
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IAsyncResult" />
+          The <see cref="T:System.IAsyncResult" />
 
           
 
-           returned by a call to the <see
-           cref="M:System.ServiceModel.Channels.IInputChannel.BeginReceive" />
+           returned by a call to the <see cref="M:System.ServiceModel.Channels.IInputChannel.BeginReceive" />
 
           
 
@@ -560,17 +573,19 @@
           <para>true if a request is received before the specified interval of time elapses; otherwise false.</para>
         </returns>
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IAsyncResult" />
+          The <see cref="T:System.IAsyncResult" />
 
           
 
-           that identifies the <see
-           cref="M:System.ServiceModel.Channels.IReplyChannel.BeginWaitForRequest(System.TimeSpan,System.AsyncCallback,System.Object)" />
+           that identifies the <see cref="M:System.ServiceModel.Channels.IReplyChannel.BeginWaitForRequest(System.TimeSpan,System.AsyncCallback,System.Object)" />
 
           
 
@@ -635,21 +650,18 @@
 
             
 
-             can be called multiple times or concurrently. Only one <see
-             cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
+             can be called multiple times or concurrently. Only one <see cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
 
             
 
              call completes per request received. </para
           >
           <para
-            >If the request message received is larger that the maximum message size allowed by the binding being used, a <see
-             cref="T:System.ServiceModel.QuotaExceededException" />
+            >If the request message received is larger that the maximum message size allowed by the binding being used, a <see cref="T:System.ServiceModel.QuotaExceededException" />
 
             
 
-             is thrown. The maximum message size is set by the <see
-             cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
+             is thrown. The maximum message size is set by the <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
 
             
 
@@ -663,8 +675,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.RequestContext" />
+            >The <see cref="T:System.ServiceModel.Channels.RequestContext" />
 
             
 
@@ -707,21 +718,18 @@
 
             
 
-             can be called multiple times or concurrently. Only one <see
-             cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
+             can be called multiple times or concurrently. Only one <see cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
 
             
 
              call completes per request received. </para
           >
           <para
-            >If the request message received is larger that the maximum message size allowed by the binding being used, a <see
-             cref="T:System.ServiceModel.QuotaExceededException" />
+            >If the request message received is larger that the maximum message size allowed by the binding being used, a <see cref="T:System.ServiceModel.QuotaExceededException" />
 
             
 
-             is thrown. The maximum message size is set by the <see
-             cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
+             is thrown. The maximum message size is set by the <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
 
             
 
@@ -735,8 +743,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.RequestContext" />
+            >The <see cref="T:System.ServiceModel.Channels.RequestContext" />
 
             
 
@@ -744,12 +751,15 @@
           >
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.TimeSpan" />
+          The <see cref="T:System.TimeSpan" />
 
           
 
@@ -809,57 +819,48 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling <see
-             cref="M:System.ServiceModel.Channels.IReplyChannel.WaitForRequest(System.TimeSpan)" />
+            >Calling <see cref="M:System.ServiceModel.Channels.IReplyChannel.WaitForRequest(System.TimeSpan)" />
 
             
 
              does not result in a request message being received or processed in any way.</para
           >
           <para
-            >The <see
-             cref="M:System.ServiceModel.Channels.IReplyChannel.BeginWaitForRequest(System.TimeSpan,System.AsyncCallback,System.Object)" />
+            >The <see cref="M:System.ServiceModel.Channels.IReplyChannel.BeginWaitForRequest(System.TimeSpan,System.AsyncCallback,System.Object)" />
 
             
 
-             method exists primarily for transacted scenarios where the user wants to receive the message using a transaction. When using just <see
-             cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
+             method exists primarily for transacted scenarios where the user wants to receive the message using a transaction. When using just <see cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
 
             
 
-             normally for this, the user must create the transaction, and then call <see
-             cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
+             normally for this, the user must create the transaction, and then call <see cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
 
             
 
              and hope the message arrives before the transaction times out, which may not be possible.</para
           >
           <para
-            >Instead, the user can call <see
-             cref="M:System.ServiceModel.Channels.IReplyChannel.WaitForRequest(System.TimeSpan)" />
+            >Instead, the user can call <see cref="M:System.ServiceModel.Channels.IReplyChannel.WaitForRequest(System.TimeSpan)" />
 
             
 
-             and specify the time out (even infinite), then when a message arrives they can open the transaction, call <see
-             cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
+             and specify the time out (even infinite), then when a message arrives they can open the transaction, call <see cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
 
             
 
              and be confident that they can get the message back before the transaction expires.</para
           >
           <para
-            >Use <see
-             cref="M:System.ServiceModel.Channels.IReplyChannel.WaitForRequest(System.TimeSpan)" />
+            >Use <see cref="M:System.ServiceModel.Channels.IReplyChannel.WaitForRequest(System.TimeSpan)" />
 
             
 
-             when it is acceptable for the current thread to be blocked while it waits for a message to arrive in the queue. The thread is blocked up to the specified <paramref
-             name="timeout" />
+             when it is acceptable for the current thread to be blocked while it waits for a message to arrive in the queue. The thread is blocked up to the specified <paramref name="timeout" />
 
             
 
-            . If you need the application processing to continue without waiting, use the asynchronous <see
-             cref="M:System.ServiceModel.Channels.IReplyChannel.BeginWaitForRequest(System.TimeSpan,System.AsyncCallback,System.Object)" />
+            . If you need the application processing to continue without waiting, use the asynchronous <see cref="M:System.ServiceModel.Channels.IReplyChannel.BeginWaitForRequest(System.TimeSpan,System.AsyncCallback,System.Object)" />
 
             
 
@@ -875,12 +876,15 @@
           <para>true if a request is received before the specified interval of time elapses; otherwise false.</para>
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Timespan" />
+          The <see cref="T:System.Timespan" />
 
           
 

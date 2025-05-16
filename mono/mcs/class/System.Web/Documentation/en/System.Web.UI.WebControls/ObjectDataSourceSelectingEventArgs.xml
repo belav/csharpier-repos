@@ -20,61 +20,50 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs" />
+        >The <see cref="T:System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs" />
 
         
 
-         class is used in the <see
-         cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnSelecting(System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs)" />
+         class is used in the <see cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnSelecting(System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs)" />
 
         
 
-         method. Because it is derived from the <see
-         cref="T:System.Web.UI.WebControls.ObjectDataSourceMethodEventArgs" />
+         method. Because it is derived from the <see cref="T:System.Web.UI.WebControls.ObjectDataSourceMethodEventArgs" />
 
         
 
-         class, the <see
-         cref="T:System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs" />
+         class, the <see cref="T:System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs" />
 
         
 
-         class provides access to input parameters for validation and manipulation through the <see
-         cref="P:System.Web.UI.WebControls.ObjectDataSourceMethodEventArgs.InputParameters" />
+         class provides access to input parameters for validation and manipulation through the <see cref="P:System.Web.UI.WebControls.ObjectDataSourceMethodEventArgs.InputParameters" />
 
         
 
-         property. The <see
-         cref="T:System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs" />
+         property. The <see cref="T:System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs" />
 
         
 
-         class also provides the <see
-         cref="P:System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs.ExecutingSelectCount" />
+         class also provides the <see cref="P:System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs.ExecutingSelectCount" />
 
         
 
-         property, which is used to check whether the currently executing data retrieval operation is retrieving a row count, in addition to the data. This is important because when data source paging is enabled, the <see
-         cref="E:System.Web.UI.WebControls.ObjectDataSource.Selecting" />
+         property, which is used to check whether the currently executing data retrieval operation is retrieving a row count, in addition to the data. This is important because when data source paging is enabled, the <see cref="E:System.Web.UI.WebControls.ObjectDataSource.Selecting" />
 
         
 
-         event is raised twice. For more information, see <see
-         cref="P:System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs.ExecutingSelectCount" />
+         event is raised twice. For more information, see <see cref="P:System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs.ExecutingSelectCount" />
 
         
 
         .</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+        >The <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
         
 
-         control exposes many events that you can handle to work with the underlying business object at various times in its life cycle. The following table lists the events and associated <see
-         cref="T:System.EventArgs" />
+         control exposes many events that you can handle to work with the underlying business object at various times in its life cycle. The following table lists the events and associated <see cref="T:System.EventArgs" />
 
         
 
@@ -167,13 +156,11 @@
 
               
 
-              , <see
-               cref="E:System.Web.UI.WebControls.ObjectDataSource.Updating" />
+              , <see cref="E:System.Web.UI.WebControls.ObjectDataSource.Updating" />
 
               
 
-              , and <see
-               cref="E:System.Web.UI.WebControls.ObjectDataSource.Deleting" />
+              , and <see cref="E:System.Web.UI.WebControls.ObjectDataSource.Deleting" />
 
               
 
@@ -221,13 +208,11 @@
 
               
 
-              , <see
-               cref="E:System.Web.UI.WebControls.ObjectDataSource.Updated" />
+              , <see cref="E:System.Web.UI.WebControls.ObjectDataSource.Updated" />
 
               
 
-              , and <see
-               cref="E:System.Web.UI.WebControls.ObjectDataSource.Deleted" />
+              , and <see cref="E:System.Web.UI.WebControls.ObjectDataSource.Deleted" />
 
               
 
@@ -273,13 +258,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Web.UI.WebControls.ObjectDataSource.Selecting" />
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.ObjectDataSource.Selecting" />
 
         
 
-         event of the <see
-         cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+         event of the <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
         
 
@@ -308,13 +291,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="inputParameters" />
+            >The <paramref name="inputParameters" />
 
             
 
-             parameter is an <see
-             cref="T:System.Collections.IDictionary" />
+             parameter is an <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -324,8 +305,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs" />
 
             
 
@@ -333,34 +313,38 @@
           >
         </summary>
         <param name="inputParameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IDictionary" />
+          An <see cref="T:System.Collections.IDictionary" />
 
           
 
-           of <see
-           cref="T:System.Web.UI.WebControls.Parameter" />
+           of <see cref="T:System.Web.UI.WebControls.Parameter" />
 
           
 
            objects.</param
         >
         <param name="arguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.DataSourceSelectArguments" />
+          A <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
           
 
-           that specifies which additional data-related operations the <see
-           cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+           that specifies which additional data-related operations the <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
           
 
@@ -386,28 +370,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Data-bound controls use the <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+            >Data-bound controls use the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
-             class to request that the <see
-             cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+             class to request that the <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
             
 
-             object perform additional data-related operations on a results set, such as sorting the data or returning a specific subset of data. These data-related operations are enumerated by the <see
-             cref="T:System.Web.UI.DataSourceCapabilities" />
+             object perform additional data-related operations on a results set, such as sorting the data or returning a specific subset of data. These data-related operations are enumerated by the <see cref="T:System.Web.UI.DataSourceCapabilities" />
 
             
 
-             enumeration. The <see
-             cref="P:System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs.Arguments" />
+             enumeration. The <see cref="P:System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs.Arguments" />
 
             
 
-             property is read-only, so you can examine, but not change, the arguments that are passed by the data-bound control. For more information, see <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+             property is read-only, so you can examine, but not change, the arguments that are passed by the data-bound control. For more information, see <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
@@ -417,8 +396,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides a mechanism that the <see
-             cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+            >Provides a mechanism that the <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
             
 
@@ -442,8 +420,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+            >When the <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
             
 
@@ -458,13 +435,11 @@
             </item>
           </list>
           <para
-            >This raises the <see
-             cref="E:System.Web.UI.WebControls.ObjectDataSource.Selecting" />
+            >This raises the <see cref="E:System.Web.UI.WebControls.ObjectDataSource.Selecting" />
 
             
 
-             event twice. For code that handles the <see
-             cref="E:System.Web.UI.WebControls.ObjectDataSource.Selecting" />
+             event twice. For code that handles the <see cref="E:System.Web.UI.WebControls.ObjectDataSource.Selecting" />
 
             
 
@@ -474,8 +449,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
             
 

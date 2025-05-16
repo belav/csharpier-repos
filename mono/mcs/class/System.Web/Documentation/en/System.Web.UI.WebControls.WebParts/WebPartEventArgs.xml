@@ -14,43 +14,35 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.WebParts.WebPartEventArgs" />
+        >The <see cref="T:System.Web.UI.WebControls.WebParts.WebPartEventArgs" />
 
         
 
-         class contains information for several different Web Parts events. These events include the <see
-         cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartAdded" />
+         class contains information for several different Web Parts events. These events include the <see cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartAdded" />
 
         
 
-        , <see
-         cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartDeleted" />
+        , <see cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartDeleted" />
 
         
 
-        , <see
-         cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartClosed" />
+        , <see cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartClosed" />
 
         
 
-        , <see
-         cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartMoved" />
+        , <see cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartMoved" />
 
         
 
-        , and <see
-         cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.SelectedWebPartChanged" />
+        , and <see cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.SelectedWebPartChanged" />
 
         
 
-         events. The <see
-         cref="T:System.Web.UI.WebControls.WebParts.WebPartEventArgs" />
+         events. The <see cref="T:System.Web.UI.WebControls.WebParts.WebPartEventArgs" />
 
         
 
-         class provides access to the Web Parts control involved in the event. The Web Parts control is accessed through the <see
-         cref="P:System.Web.UI.WebControls.WebParts.WebPartEventArgs.WebPart" />
+         class provides access to the Web Parts control involved in the event. The Web Parts control is accessed through the <see cref="P:System.Web.UI.WebControls.WebParts.WebPartEventArgs.WebPart" />
 
         
 
@@ -60,28 +52,23 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartAdded" />
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartAdded" />
 
         
 
-        , <see
-         cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartDeleted" />
+        , <see cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartDeleted" />
 
         
 
-        , <see
-         cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartClosed" />
+        , <see cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartClosed" />
 
         
 
-        , <see
-         cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartMoved" />
+        , <see cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartMoved" />
 
         
 
-        , and <see
-         cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.SelectedWebPartChanged" />
+        , and <see cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.SelectedWebPartChanged" />
 
         
 
@@ -106,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.WebParts.WebPartEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.WebParts.WebPartEventArgs" />
 
             
 

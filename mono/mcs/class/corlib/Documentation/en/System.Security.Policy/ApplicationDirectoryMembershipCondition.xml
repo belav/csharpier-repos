@@ -44,27 +44,23 @@
 
         
 
-         determines whether an <see
-         cref="T:System.Security.Policy.ApplicationDirectory" />
+         determines whether an <see cref="T:System.Security.Policy.ApplicationDirectory" />
         <see cref="P:System.Security.Policy.ApplicationDirectory.Directory" />
 
         
 
-         property contains the assembly URL evidence path. For example, if the <see
-         cref="T:System.Security.Policy.ApplicationDirectory" />
+         property contains the assembly URL evidence path. For example, if the <see cref="T:System.Security.Policy.ApplicationDirectory" />
 
         
 
          is C:\app1, assemblies with URL evidence such as C:\app1, C:\app1\main.aspx, C:\app1\folder1, or C:\app1\folder1\main1.aspx match this membership condition. Code that is not in the C:\app1 directory or in one of its subdirectories fails this membership condition test.</para
       >
       <para
-        >Code without either <see
-         cref="T:System.Security.Policy.ApplicationDirectory" />
+        >Code without either <see cref="T:System.Security.Policy.ApplicationDirectory" />
 
         
 
-         or <see
-         cref="T:System.Security.Policy.Url" />
+         or <see cref="T:System.Security.Policy.Url" />
 
         
 
@@ -72,8 +68,7 @@
       >
       <block subset="none" type="note">
         <para
-          >The membership condition is determined by the URL evidence for the application. You cannot configure the <see
-           cref="T:System.Security.Policy.ApplicationDirectoryMembershipCondition" />
+          >The membership condition is determined by the URL evidence for the application. You cannot configure the <see cref="T:System.Security.Policy.ApplicationDirectoryMembershipCondition" />
 
           
 
@@ -105,8 +100,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The membership condition tests whether the assembly URL evidence is a path within the directory specified by <see
-             cref="T:System.Security.Policy.ApplicationDirectory" />
+            >The membership condition tests whether the assembly URL evidence is a path within the directory specified by <see cref="T:System.Security.Policy.ApplicationDirectory" />
 
             
 
@@ -116,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Policy.ApplicationDirectoryMembershipCondition" />
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.ApplicationDirectoryMembershipCondition" />
 
             
 
@@ -151,28 +144,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="evidence" />
+            >The <paramref name="evidence" />
 
             
 
-             parameter must contain both <see
-             cref="T:System.Security.Policy.ApplicationDirectory" />
+             parameter must contain both <see cref="T:System.Security.Policy.ApplicationDirectory" />
 
             
 
-             evidence that specifies the application directory of the running application and <see
-             cref="T:System.Security.Policy.Url" />
+             evidence that specifies the application directory of the running application and <see cref="T:System.Security.Policy.Url" />
 
             
 
-             evidence that specifies the code base of the assembly. The code base specified by the <see
-             cref="T:System.Security.Policy.Url" />
+             evidence that specifies the code base of the assembly. The code base specified by the <see cref="T:System.Security.Policy.Url" />
 
             
 
-             evidence must represent a path in the directory tree of the application directory specified by the <see
-             cref="T:System.Security.Policy.ApplicationDirectory" />
+             evidence must represent a path in the directory tree of the application directory specified by the <see cref="T:System.Security.Policy.ApplicationDirectory" />
 
             
 
@@ -188,7 +176,11 @@
           <para>true if the specified evidence satisfies the membership condition; otherwise, false.</para>
         </returns>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -250,8 +242,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified membership condition is an <see
-             cref="T:System.Security.Policy.ApplicationDirectoryMembershipCondition" />
+            >Determines whether the specified membership condition is an <see cref="T:System.Security.Policy.ApplicationDirectoryMembershipCondition" />
 
             
 
@@ -261,8 +252,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified membership condition is an <see
-             cref="T:System.Security.Policy.ApplicationDirectoryMembershipCondition" />
+            >true if the specified membership condition is an <see cref="T:System.Security.Policy.ApplicationDirectoryMembershipCondition" />
 
             
 
@@ -270,12 +260,15 @@
           >
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to compare to <see
-           cref="T:System.Security.Policy.ApplicationDirectoryMembershipCondition" />
+          The object to compare to <see cref="T:System.Security.Policy.ApplicationDirectoryMembershipCondition" />
 
           
 
@@ -311,7 +304,11 @@
           <para>Reconstructs a security object with a specified state from an XML encoding.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -348,14 +345,22 @@
           <para>Reconstructs a security object with a specified state from an XML encoding.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML encoding to use to reconstruct the security object. </param
         >
         <param name="level">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -473,8 +478,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an XML encoding of the security object and its current state with the specified <see
-             cref="T:System.Security.Policy.PolicyLevel" />
+            >Creates an XML encoding of the security object and its current state with the specified <see cref="T:System.Security.Policy.PolicyLevel" />
 
             
 
@@ -486,7 +490,11 @@
           <para>An XML encoding of the security object, including any state information.</para>
         </returns>
         <param name="level">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

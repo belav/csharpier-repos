@@ -21,33 +21,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When a control is anchored to an edge of its container, the distance between the control and the specified edge remains constant when the container resizes. For example, if a control is anchored to the right edge of its container, the distance between the right edge of the control and the right edge of the container remains constant when the container resizes. A control can be anchored to any combination of control edges. If the control is anchored to opposite edges of its container (for example, to the top and bottom), it resizes when the container resizes. If a control has its <see
-         cref="P:System.Windows.Forms.Control.Anchor" />
+        >When a control is anchored to an edge of its container, the distance between the control and the specified edge remains constant when the container resizes. For example, if a control is anchored to the right edge of its container, the distance between the right edge of the control and the right edge of the container remains constant when the container resizes. A control can be anchored to any combination of control edges. If the control is anchored to opposite edges of its container (for example, to the top and bottom), it resizes when the container resizes. If a control has its <see cref="P:System.Windows.Forms.Control.Anchor" />
 
         
 
-         property set to <see
-         cref="F:System.Windows.Forms.AnchorStyles.None" />
+         property set to <see cref="F:System.Windows.Forms.AnchorStyles.None" />
 
         
 
-        , the control moves half of the distance that the container of the control is resized. For example, if a <see
-         cref="T:System.Windows.Forms.Button" />
+        , the control moves half of the distance that the container of the control is resized. For example, if a <see cref="T:System.Windows.Forms.Button" />
 
         
 
-         has its <see
-         cref="P:System.Windows.Forms.Control.Anchor" />
+         has its <see cref="P:System.Windows.Forms.Control.Anchor" />
 
         
 
-         property set to <see
-         cref="F:System.Windows.Forms.AnchorStyles.None" />
+         property set to <see cref="F:System.Windows.Forms.AnchorStyles.None" />
 
         
 
-         and the <see
-         cref="T:System.Windows.Forms.Form" />
+         and the <see cref="T:System.Windows.Forms.Form" />
 
         
 

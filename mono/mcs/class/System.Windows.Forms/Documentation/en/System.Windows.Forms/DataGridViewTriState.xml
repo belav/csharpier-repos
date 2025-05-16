@@ -13,38 +13,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.DataGridViewTriState" />
+        >The <see cref="T:System.Windows.Forms.DataGridViewTriState" />
 
         
 
-         enumeration is useful whenever a third state is needed in addition to the two states of the <see
-         cref="T:System.Boolean" />
+         enumeration is useful whenever a third state is needed in addition to the two states of the <see cref="T:System.Boolean" />
 
         
 
-         type. For example, the <see
-         cref="P:System.Windows.Forms.DataGridViewCellStyle.WrapMode" />
+         type. For example, the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.WrapMode" />
 
         
 
-         property is of type <see
-         cref="T:System.Windows.Forms.DataGridViewTriState" />
+         property is of type <see cref="T:System.Windows.Forms.DataGridViewTriState" />
 
         
 
-         so that a <see
-         cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+         so that a <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
         
 
-         object can indicate no preference in regards to the text wrapping of a cell value, and can instead indicate that the <see
-         cref="P:System.Windows.Forms.DataGridViewCellStyle.WrapMode" />
+         object can indicate no preference in regards to the text wrapping of a cell value, and can instead indicate that the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.WrapMode" />
 
         
 
-         value of a different <see
-         cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+         value of a different <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
         
 

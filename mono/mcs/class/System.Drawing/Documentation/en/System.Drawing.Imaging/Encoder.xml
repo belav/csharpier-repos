@@ -17,23 +17,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
-         cref="T:System.Drawing.Imaging.EncoderParameter" />
+        >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
         
 
-         object. One of the fields of the <see
-         cref="T:System.Drawing.Imaging.EncoderParameter" />
+         object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
         
 
-         object is a GUID that specifies the category of the parameter. Use the static fields of the <see
-         cref="T:System.Drawing.Imaging.Encoder" />
+         object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" />
 
         
 
-         class to retrieve an <see
-         cref="T:System.Drawing.Imaging.Encoder" />
+         class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" />
 
         
 
@@ -126,8 +122,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An <see
-         cref="T:System.Drawing.Imaging.Encoder" />
+        >An <see cref="T:System.Drawing.Imaging.Encoder" />
 
         
 
@@ -233,8 +228,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
@@ -242,7 +236,11 @@
           >
         </summary>
         <param name="guid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -268,23 +266,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             object. One of the fields of the <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+             object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             object is a GUID that specifies the category of the parameter. Use the static fields of the <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+             object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
-             class to retrieve an <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+             class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
@@ -377,8 +371,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+            >An <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
@@ -405,23 +398,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             object. One of the fields of the <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+             object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             object is a GUID that specifies the category of the parameter. Use the static fields of the <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+             object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
-             class to retrieve an <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+             class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
@@ -514,8 +503,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+            >An <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
@@ -542,23 +530,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             object. One of the fields of the <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+             object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             object is a GUID that specifies the category of the parameter. Use the static fields of the <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+             object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
-             class to retrieve an <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+             class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
@@ -651,8 +635,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+            >An <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
@@ -676,23 +659,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             object. One of the fields of the <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+             object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             object is a GUID that specifies the category of the parameter. Use the static fields of the <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+             object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
-             class to retrieve an <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+             class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
@@ -806,23 +785,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             object. One of the fields of the <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+             object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             object is a GUID that specifies the category of the parameter. Use the static fields of the <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+             object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
-             class to retrieve an <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+             class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
@@ -915,8 +890,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents an <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+            >Represents an <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
@@ -943,36 +917,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Drawing.Imaging.Encoder.Quality" />
+            >The <see cref="F:System.Drawing.Imaging.Encoder.Quality" />
 
             
 
-             category specifies the level of compression for an image. When used to construct an <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+             category specifies the level of compression for an image. When used to construct an <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
             , the range of useful values for the quality category is from 0 to 100. The lower the number specified, the higher the compression and therefore the lower the quality of the image. Zero would give you the lowest quality image and 100 the highest.</para
           >
           <para
-            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             object. One of the fields of the <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+             object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             object is a GUID that specifies the category of the parameter. Use the static fields of the <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+             object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
-             class to retrieve an <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+             class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
@@ -1065,8 +1033,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+            >Gets an <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
@@ -1093,23 +1060,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             object. One of the fields of the <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+             object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             object is a GUID that specifies the category of the parameter. Use the static fields of the <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+             object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
-             class to retrieve an <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+             class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
@@ -1202,8 +1165,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents an <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+            >Represents an <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
@@ -1230,23 +1192,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             object. One of the fields of the <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+             object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             object is a GUID that specifies the category of the parameter. Use the static fields of the <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+             object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
-             class to retrieve an <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+             class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
@@ -1339,8 +1297,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents an <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+            >Represents an <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
@@ -1367,23 +1324,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             object. One of the fields of the <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+             object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             object is a GUID that specifies the category of the parameter. Use the static fields of the <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+             object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
-             class to retrieve an <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+             class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
@@ -1476,8 +1429,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents an <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+            >Represents an <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
@@ -1504,23 +1456,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             object. One of the fields of the <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+             object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             object is a GUID that specifies the category of the parameter. Use the static fields of the <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+             object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
-             class to retrieve an <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+             class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
@@ -1613,8 +1561,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents an <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+            >Represents an <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
@@ -1641,36 +1588,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Drawing.Imaging.Encoder.Quality" />
+            >The <see cref="F:System.Drawing.Imaging.Encoder.Quality" />
 
             
 
-             category specifies the level of compression for an image. When used to construct an <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+             category specifies the level of compression for an image. When used to construct an <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
             , the range of useful values for the quality category is from 0 to 100. The lower the number specified, the higher the compression and therefore the lower the quality of the image. Zero would give you the lowest quality image and 100 the highest.</para
           >
           <para
-            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             object. One of the fields of the <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+             object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             object is a GUID that specifies the category of the parameter. Use the static fields of the <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+             object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
-             class to retrieve an <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+             class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 
@@ -1763,8 +1704,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents an <see
-             cref="T:System.Drawing.Imaging.Encoder" />
+            >Represents an <see cref="T:System.Drawing.Imaging.Encoder" />
 
             
 

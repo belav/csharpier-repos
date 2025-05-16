@@ -29,28 +29,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >By default, ASP.NET Web page and control execution is synchronous. However, data source controls can be extended to support asynchronous data retrieval and data operations. The <see
-         cref="T:System.Web.UI.DataSourceView" />
+        >By default, ASP.NET Web page and control execution is synchronous. However, data source controls can be extended to support asynchronous data retrieval and data operations. The <see cref="T:System.Web.UI.DataSourceView" />
 
         
 
-         object supports the <see
-         cref="M:System.Web.UI.DataSourceView.Insert(System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
+         object supports the <see cref="M:System.Web.UI.DataSourceView.Insert(System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
 
         
 
-        , <see
-         cref="M:System.Web.UI.DataSourceView.Update(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
+        , <see cref="M:System.Web.UI.DataSourceView.Update(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
 
         
 
-        , and <see
-         cref="M:System.Web.UI.DataSourceView.Delete(System.Collections.IDictionary,System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
+        , and <see cref="M:System.Web.UI.DataSourceView.Delete(System.Collections.IDictionary,System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
 
         
 
-         methods for asynchronous data processing. The <see
-         cref="T:System.Web.UI.DataSourceViewOperationCallback" />
+         methods for asynchronous data processing. The <see cref="T:System.Web.UI.DataSourceViewOperationCallback" />
 
         
 

@@ -7,7 +7,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -16,8 +18,7 @@
   <Docs>
     <summary>An abstract representation of RELAX NG grammar element.</summary>
     <remarks
-      >This class does not represent "element" pattern (see <see
-       cref="T:Commons.Xml.Relaxng.RelaxngElement" />
+      >This class does not represent "element" pattern (see <see cref="T:Commons.Xml.Relaxng.RelaxngElement" />
 
       
 
@@ -44,8 +45,7 @@
       <Docs>
         <summary>Writes the whole element to the XmlWriter.</summary>
         <param name="writer"
-          >an <see
-           cref="T:System.Xml.XmlWriter" />
+          >an <see cref="T:System.Xml.XmlWriter" />
 
           
 
@@ -76,8 +76,7 @@
       <Docs>
         <summary>Represents the line number of this element, if provided by the source.</summary>
         <value
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
@@ -96,8 +95,7 @@
       <Docs>
         <summary>Represents the column number of this element, if provided by the source.</summary>
         <value
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
@@ -116,8 +114,7 @@
       <Docs>
         <summary>Represents the base URI of this element, if provided by the source.</summary>
         <value
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 

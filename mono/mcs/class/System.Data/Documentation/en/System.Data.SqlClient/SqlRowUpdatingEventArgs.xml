@@ -21,21 +21,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Data.SqlClient.SqlDataAdapter.RowUpdating" />
+        >The <see cref="E:System.Data.SqlClient.SqlDataAdapter.RowUpdating" />
 
         
 
-         event is raised before an <see
-         cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+         event is raised before an <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
         
 
          to a row.</para
       >
       <para
-        >When you are using <see
-         cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+        >When you are using <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
         
 
@@ -44,8 +41,7 @@
       <list type="ordered">
         <item>
           <para
-            >The values in the <see
-             cref="T:System.Data.DataRow" />
+            >The values in the <see cref="T:System.Data.DataRow" />
 
             
 
@@ -54,8 +50,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
+            >The <see cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
 
             
 
@@ -67,8 +62,7 @@
         </item>
         <item>
           <para
-            >If the command is set to FirstReturnedRecord, and the first returned result is placed in the <see
-             cref="T:System.Data.DataRow" />
+            >If the command is set to FirstReturnedRecord, and the first returned result is placed in the <see cref="T:System.Data.DataRow" />
 
             
 
@@ -77,8 +71,7 @@
         </item>
         <item>
           <para
-            >If there are output parameters, they are placed in the <see
-             cref="T:System.Data.DataRow" />
+            >If there are output parameters, they are placed in the <see cref="T:System.Data.DataRow" />
 
             
 
@@ -87,8 +80,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" />
+            >The <see cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" />
 
             
 
@@ -109,8 +101,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Data.SqlClient.SqlDataAdapter.RowUpdating" />
+        >Provides data for the <see cref="E:System.Data.SqlClient.SqlDataAdapter.RowUpdating" />
 
         
 
@@ -137,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlClient.SqlRowUpdatingEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlClient.SqlRowUpdatingEventArgs" />
 
             
 
@@ -146,63 +136,72 @@
           >
         </summary>
         <param name="row">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataRow" />
+          The <see cref="T:System.Data.DataRow" />
 
           
 
-           to <see
-           cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+           to <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
           
 
           . </param
         >
         <param name="command">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.IDbCommand" />
+          The <see cref="T:System.Data.IDbCommand" />
 
           
 
-           to execute during <see
-           cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+           to execute during <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
           
 
           . </param
         >
         <param name="statementType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.StatementType" />
+          One of the <see cref="T:System.Data.StatementType" />
 
           
 
            values that specifies the type of query executed. </param
         >
         <param name="tableMapping">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.Common.DataTableMapping" />
+          The <see cref="T:System.Data.Common.DataTableMapping" />
 
           
 
-           sent through an <see
-           cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+           sent through an <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
           
 
@@ -248,13 +247,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >Gets or sets the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
-             to execute when performing the <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+             to execute when performing the <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 

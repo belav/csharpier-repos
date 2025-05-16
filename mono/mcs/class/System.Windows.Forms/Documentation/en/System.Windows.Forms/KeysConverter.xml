@@ -21,18 +21,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Most commonly, the <see
-         cref="T:System.Windows.Forms.KeysConverter" />
+        >Most commonly, the <see cref="T:System.Windows.Forms.KeysConverter" />
 
         
 
-         type converter is used to convert <see
-         cref="T:System.Windows.Forms.Keys" />
+         type converter is used to convert <see cref="T:System.Windows.Forms.Keys" />
 
         
 
-         instances to and from their corresponding localized <see
-         cref="T:System.String" />
+         instances to and from their corresponding localized <see cref="T:System.String" />
 
         
 
@@ -42,13 +39,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a <see
-         cref="T:System.ComponentModel.TypeConverter" />
+        >Provides a <see cref="T:System.ComponentModel.TypeConverter" />
 
         
 
-         to convert <see
-         cref="T:System.Windows.Forms.Keys" />
+         to convert <see cref="T:System.Windows.Forms.Keys" />
 
         
 
@@ -65,31 +60,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is the default, compiler-supplied constructor for the <see
-             cref="T:System.Windows.Forms.KeysConverter" />
+            >This is the default, compiler-supplied constructor for the <see cref="T:System.Windows.Forms.KeysConverter" />
 
             
 
              class.</para
           >
           <para
-            >Typically, you do not directly create an instance of a <see
-             cref="T:System.Windows.Forms.KeysConverter" />
+            >Typically, you do not directly create an instance of a <see cref="T:System.Windows.Forms.KeysConverter" />
 
             
 
-            . Instead, call the <see
-             cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+            . Instead, call the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
 
             
 
-             method of <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+             method of <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
-             class. For more information, see the examples in the <see
-             cref="T:System.ComponentModel.TypeConverter" />
+             class. For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
@@ -99,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Windows.Forms.KeysConverter" />
+            >Initializes an instance of the <see cref="T:System.Windows.Forms.KeysConverter" />
 
             
 
@@ -130,23 +119,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.KeysConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
+            >The <see cref="M:System.Windows.Forms.KeysConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
 
             
 
-             method is specialized to return true if the <paramref
-             name="sourceType" />
+             method is specialized to return true if the <paramref name="sourceType" />
 
             
 
-             parameter is of type <see
-             cref="T:System.String" />
+             parameter is of type <see cref="T:System.String" />
 
             
 
-             or <see
-             cref="T:System.Enum" />
+             or <see cref="T:System.Enum" />
 
             
 
@@ -162,24 +147,30 @@
           <para>true if the conversion can be performed; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that provides a format context, which can be used to extract additional information about the environment this converter is being invoked from. This parameter or properties of this parameter can be null. </param
         >
         <param name="sourceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -211,18 +202,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.KeysConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
+            >The <see cref="M:System.Windows.Forms.KeysConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
 
             
 
-             method is specialized to return true if the <paramref
-             name="destinationType" />
+             method is specialized to return true if the <paramref name="destinationType" />
 
             
 
-             parameter is of type <see
-             cref="T:System.Enum" />
+             parameter is of type <see cref="T:System.Enum" />
 
             
 
@@ -238,24 +226,30 @@
           <para>true if the conversion can be performed; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that provides a format context, which can be used to extract additional information about the environment this converter is being invoked from. This parameter or properties of this parameter can be null. </param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -277,8 +271,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses <see
-             cref="M:System.String.Compare(System.String,System.String)" />
+            >This method uses <see cref="M:System.String.Compare(System.String,System.String)" />
 
             
 
@@ -313,8 +306,7 @@
 
                   
 
-                   is less than <paramref
-                   name="b" />
+                   is less than <paramref name="b" />
 
                   
 
@@ -332,8 +324,7 @@
 
                   
 
-                   equals <paramref
-                   name="b" />
+                   equals <paramref name="b" />
 
                   
 
@@ -351,8 +342,7 @@
 
                   
 
-                   is greater than <paramref
-                   name="b" />
+                   is greater than <paramref name="b" />
 
                   
 
@@ -363,24 +353,30 @@
           </list>
         </returns>
         <param name="a">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
            that represents the first key to compare. </param
         >
         <param name="b">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
@@ -410,23 +406,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.KeysConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
+            >The <see cref="M:System.Windows.Forms.KeysConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
 
             
 
-             method is specialized to convert objects of type <see
-             cref="T:System.String" />
+             method is specialized to convert objects of type <see cref="T:System.String" />
 
             
 
-             or <see
-             cref="T:System.Enum" />
+             or <see cref="T:System.Enum" />
 
             
 
-             array. In this case, it will return an object of type <see
-             cref="T:System.Windows.Forms.Keys" />
+             array. In this case, it will return an object of type <see cref="T:System.Windows.Forms.Keys" />
 
             
 
@@ -440,8 +432,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that represents the converted <paramref
-             name="value" />
+            >An object that represents the converted <paramref name="value" />
 
             
 
@@ -449,21 +440,33 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An ITypeDescriptorContext that provides a format context, which can be used to extract additional information about the environment this converter is being invoked from. This parameter or properties of this parameter can be null. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A CultureInfo object to provide locale information. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -494,23 +497,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.KeysConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)" />
+            >The <see cref="M:System.Windows.Forms.KeysConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)" />
 
             
 
-             method is specialized to convert objects of type <see
-             cref="T:System.Windows.Forms.Keys" />
+             method is specialized to convert objects of type <see cref="T:System.Windows.Forms.Keys" />
 
             
 
-             or <see
-             cref="T:System.Int32" />
+             or <see cref="T:System.Int32" />
 
             
 
-            . In this case, it will return an object of type <see
-             cref="T:System.String" />
+            . In this case, it will return an object of type <see cref="T:System.String" />
 
             
 
@@ -524,13 +523,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             that represents the converted <paramref
-             name="value" />
+             that represents the converted <paramref name="value" />
 
             
 
@@ -538,48 +535,60 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that provides a format context, which can be used to extract additional information about the environment this converter is being invoked from. This parameter or properties of this parameter can be null. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            to provide locale information. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
            to convert. </param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -615,8 +624,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+            >A <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
 
             
 
@@ -624,12 +632,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
@@ -657,21 +668,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="context" />
+            >The <paramref name="context" />
 
             
 
              parameter is not used in the standard implementation of this method.</para
           >
           <para
-            >If the list is exclusive, then no other values are valid, such as in an <see
-             cref="T:System.Enum" />
+            >If the list is exclusive, then no other values are valid, such as in an <see cref="T:System.Enum" />
 
             
 
-             data type. If the list is not exclusive, then there are other valid values besides the list of standard values <see
-             cref="Overload:System.Windows.Forms.KeysConverter.GetStandardValues" />
+             data type. If the list is not exclusive, then there are other valid values besides the list of standard values <see cref="Overload:System.Windows.Forms.KeysConverter.GetStandardValues" />
 
             
 
@@ -681,8 +689,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines if the list of standard values returned from GetStandardValues is an exclusive list using the specified <see
-             cref="T:System.ComponentModel.ITypeDescriptorContext" />
+            >Determines if the list of standard values returned from GetStandardValues is an exclusive list using the specified <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
             
 
@@ -692,8 +699,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the collection returned from <see
-             cref="Overload:System.Windows.Forms.KeysConverter.GetStandardValues" />
+            >true if the collection returned from <see cref="Overload:System.Windows.Forms.KeysConverter.GetStandardValues" />
 
             
 
@@ -701,7 +707,11 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -729,8 +739,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="context" />
+            >The <paramref name="context" />
 
             
 
@@ -746,12 +755,15 @@
           <para>Always returns true.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 

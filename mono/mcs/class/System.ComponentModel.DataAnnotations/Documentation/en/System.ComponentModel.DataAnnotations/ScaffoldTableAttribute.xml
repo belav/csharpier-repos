@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Scaffolding is the mechanism for generating web page templates based on database schemas. ASP.NET Dynamic Data uses scaffolding to generate Web-based UI that lets a user to view and update a database. This class uses the <see
-         cref="P:System.ComponentModel.DataAnnotations.ScaffoldTableAttribute.Scaffold" />
+        >Scaffolding is the mechanism for generating web page templates based on database schemas. ASP.NET Dynamic Data uses scaffolding to generate Web-based UI that lets a user to view and update a database. This class uses the <see cref="P:System.ComponentModel.DataAnnotations.ScaffoldTableAttribute.Scaffold" />
 
         
 
@@ -75,13 +74,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can set <paramref
-             name="scaffold" />
+            >You can set <paramref name="scaffold" />
 
             
 
-             to true for the entire data model to expose all data tables in the database for CRUD (Create, Read, Update and Delete) operations or expose individual tables to CRUD operations by setting <paramref
-             name="scaffold" />
+             to true for the entire data model to expose all data tables in the database for CRUD (Create, Read, Update and Delete) operations or expose individual tables to CRUD operations by setting <paramref name="scaffold" />
 
             
 
@@ -91,13 +88,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.ComponentModel.DataAnnotations.ScaffoldTableAttribute" />
+            >Initializes a new instance of <see cref="T:System.ComponentModel.DataAnnotations.ScaffoldTableAttribute" />
 
             
 
-             using the <see
-             cref="P:System.ComponentModel.DataAnnotations.ScaffoldTableAttribute.Scaffold" />
+             using the <see cref="P:System.ComponentModel.DataAnnotations.ScaffoldTableAttribute.Scaffold" />
 
             
 
@@ -105,7 +100,11 @@
           >
         </summary>
         <param name="scaffold">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -128,8 +127,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Scaffolding is the mechanism of generating web page templates based on database schemas. ASP.NET Dynamic Data uses scaffolding to generate Web-based UI that lets a user to view and update a database. For more information about the Scaffold attribute, see <see
-             cref="T:System.ComponentModel.DataAnnotations.ScaffoldTableAttribute" />
+            >Scaffolding is the mechanism of generating web page templates based on database schemas. ASP.NET Dynamic Data uses scaffolding to generate Web-based UI that lets a user to view and update a database. For more information about the Scaffold attribute, see <see cref="T:System.ComponentModel.DataAnnotations.ScaffoldTableAttribute" />
 
             
 

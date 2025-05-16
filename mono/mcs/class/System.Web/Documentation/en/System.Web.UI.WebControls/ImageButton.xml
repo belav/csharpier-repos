@@ -85,94 +85,78 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >Use the <see
-         cref="T:System.Web.UI.WebControls.ImageButton" />
+        >Use the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
         
 
          control to display an image that responds to mouse clicks. </para
       >
       <para
-        >Both the <see
-         cref="E:System.Web.UI.WebControls.ImageButton.Click" />
+        >Both the <see cref="E:System.Web.UI.WebControls.ImageButton.Click" />
 
         
 
-         and <see
-         cref="E:System.Web.UI.WebControls.ImageButton.Command" />
+         and <see cref="E:System.Web.UI.WebControls.ImageButton.Command" />
 
         
 
-         events are raised when the <see
-         cref="T:System.Web.UI.WebControls.ImageButton" />
+         events are raised when the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
         
 
          control is clicked.</para
       >
       <para
-        >You can use the <see
-         cref="M:System.Web.UI.WebControls.ImageButton.OnCommand(System.Web.UI.WebControls.CommandEventArgs)" />
+        >You can use the <see cref="M:System.Web.UI.WebControls.ImageButton.OnCommand(System.Web.UI.WebControls.CommandEventArgs)" />
 
         
 
-         event handler to make the <see
-         cref="T:System.Web.UI.WebControls.ImageButton" />
+         event handler to make the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
         
 
-         control behave like a Command button. A command name can be associated with the control by using the <see
-         cref="P:System.Web.UI.WebControls.ImageButton.CommandName" />
+         control behave like a Command button. A command name can be associated with the control by using the <see cref="P:System.Web.UI.WebControls.ImageButton.CommandName" />
 
         
 
-         property. This allows multiple <see
-         cref="T:System.Web.UI.WebControls.ImageButton" />
+         property. This allows multiple <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
         
 
-         controls to be placed on the same Web page. The value of the <see
-         cref="P:System.Web.UI.WebControls.ImageButton.CommandName" />
+         controls to be placed on the same Web page. The value of the <see cref="P:System.Web.UI.WebControls.ImageButton.CommandName" />
 
         
 
-         property can then be programmatically identified in the <see
-         cref="M:System.Web.UI.WebControls.ImageButton.OnCommand(System.Web.UI.WebControls.CommandEventArgs)" />
+         property can then be programmatically identified in the <see cref="M:System.Web.UI.WebControls.ImageButton.OnCommand(System.Web.UI.WebControls.CommandEventArgs)" />
 
         
 
-         event handler to determine the appropriate action to perform when each <see
-         cref="T:System.Web.UI.WebControls.ImageButton" />
+         event handler to determine the appropriate action to perform when each <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
         
 
-         control is clicked. The <see
-         cref="P:System.Web.UI.WebControls.ImageButton.CommandArgument" />
+         control is clicked. The <see cref="P:System.Web.UI.WebControls.ImageButton.CommandArgument" />
 
         
 
          property can also be used to pass additional information about the command, such as specifying ascending order.</para
       >
       <para
-        >Using the <see
-         cref="T:System.Web.UI.WebControls.ImageButton" />
+        >Using the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
         
 
-         control is similar to using the ASP.NET <see
-         cref="T:System.Web.UI.WebControls.Button" />
+         control is similar to using the ASP.NET <see cref="T:System.Web.UI.WebControls.Button" />
 
         
 
-         control. For more information, see <format
-         type="text/html">
+         control. For more information, see <format type="text/html">
           <a href="66b3ce28-3b93-4f0a-951f-42fb5bb5fddf">Button Web Server Controls Overview</a>
         </format>
 
         
 
-        . and the class overview for the <see
-         cref="T:System.Web.UI.WebControls.Button" />
+        . and the class overview for the <see cref="T:System.Web.UI.WebControls.Button" />
 
         
 
@@ -185,8 +169,7 @@
         <h2>Determining Where the User Clicked</h2>
       </format>
       <para
-        >By using the <see
-         cref="M:System.Web.UI.WebControls.ImageButton.OnClick(System.Web.UI.ImageClickEventArgs)" />
+        >By using the <see cref="M:System.Web.UI.WebControls.ImageButton.OnClick(System.Web.UI.ImageClickEventArgs)" />
 
         
 
@@ -199,13 +182,11 @@
         <h2>ImageButton Controls and Validation</h2>
       </format>
       <para
-        >By default, page validation is performed when an <see
-         cref="T:System.Web.UI.WebControls.ImageButton" />
+        >By default, page validation is performed when an <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
         
 
-         control is clicked. Page validation determines whether the input controls associated with a validation control on the page all pass the validation rules specified by the validation control. To prevent page validation from occurring, set the <see
-         cref="P:System.Web.UI.WebControls.ImageButton.CausesValidation" />
+         control is clicked. Page validation determines whether the input controls associated with a validation control on the page all pass the validation rules specified by the validation control. To prevent page validation from occurring, set the <see cref="P:System.Web.UI.WebControls.ImageButton.CausesValidation" />
 
         
 
@@ -218,8 +199,7 @@
         <h2>Accessibility</h2>
       </format>
       <para
-        >For information about how to configure this control so that it generates markup that conforms to accessibility standards, see <format
-         type="text/html">
+        >For information about how to configure this control so that it generates markup that conforms to accessibility standards, see <format type="text/html">
           <a href="7e3ce9c4-6b7d-4fb1-94b5-72cf2a44fe13"
             >Accessibility in Visual Studio 2010 and ASP.NET 4</a
           >
@@ -227,8 +207,7 @@
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
 
@@ -248,16 +227,14 @@
     AlternateText="string"
     BackColor="color name|#dddddd"
     BorderColor="color name|#dddddd"
-    BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+    BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
-    CausesValidation="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    CausesValidation="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -266,20 +243,17 @@
     CommandName="string"
     CssClass="string"
     DescriptionUrl="uri"
-    Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -287,8 +261,7 @@
     ForeColor="color name|#dddddd"
     Height="size"
     ID="string"
-    ImageAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+    ImageAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -311,8 +284,7 @@
     TabIndex="integer"
     ToolTip="string"
     ValidationGroup="string"
-    Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -336,8 +308,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -347,8 +318,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -377,13 +347,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ImageButton.OnPreRender(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.ImageButton.OnPreRender(System.EventArgs)" />
 
             
 
-             method is used primarily by control developers when deriving a custom class from the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             method is used primarily by control developers when deriving a custom class from the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -393,8 +361,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the attributes of an <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >Adds the attributes of an <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -402,7 +369,11 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -426,26 +397,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, page validation is performed when an <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >By default, page validation is performed when an <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
              control is clicked. Page validation determines whether the input controls associated with a validation control on the page all pass the validation rules specified by the validation control.</para
           >
           <para
-            >You can specify or determine whether validation is performed on both the client and the server when an <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >You can specify or determine whether validation is performed on both the client and the server when an <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             control is clicked by using the <see
-             cref="P:System.Web.UI.WebControls.ImageButton.CausesValidation" />
+             control is clicked by using the <see cref="P:System.Web.UI.WebControls.ImageButton.CausesValidation" />
 
             
 
-             property. To prevent validation from being performed, set the <see
-             cref="P:System.Web.UI.WebControls.ImageButton.CausesValidation" />
+             property. To prevent validation from being performed, set the <see cref="P:System.Web.UI.WebControls.ImageButton.CausesValidation" />
 
             
 
@@ -453,31 +420,26 @@
           >
           <para>This property is commonly set to false for a Reset or Clear button to prevent validation from being performed when the button is clicked.</para>
           <para
-            >When the value of the <see
-             cref="P:System.Web.UI.WebControls.ImageButton.CausesValidation" />
+            >When the value of the <see cref="P:System.Web.UI.WebControls.ImageButton.CausesValidation" />
 
             
 
-             property is set to true, you can also use the <see
-             cref="P:System.Web.UI.WebControls.ImageButton.ValidationGroup" />
+             property is set to true, you can also use the <see cref="P:System.Web.UI.WebControls.ImageButton.ValidationGroup" />
 
             
 
-             property to specify the name of the validation group for which the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             property to specify the name of the validation group for which the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
              control causes validation.</para
           >
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -489,8 +451,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether validation is performed when the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >Gets or sets a value indicating whether validation is performed when the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -525,13 +486,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.ImageButton.Click" />
+            >The <see cref="E:System.Web.UI.WebControls.ImageButton.Click" />
 
             
 
-             event is raised when the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             event is raised when the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -541,8 +500,7 @@
             <para>This event causes the page to be posted back to the server.</para>
           </block>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="73bf8638-c4ec-4069-b0bb-a1dc79b92e32"
                 >How to: Consume Events in a Web Forms Application</a
               >
@@ -556,8 +514,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >Occurs when the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -584,13 +541,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.ImageButton.Command" />
+            >The <see cref="E:System.Web.UI.WebControls.ImageButton.Command" />
 
             
 
-             event is raised when an <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             event is raised when an <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -598,8 +553,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="E:System.Web.UI.WebControls.ImageButton.Command" />
+              >The <see cref="E:System.Web.UI.WebControls.ImageButton.Command" />
 
               
 
@@ -610,8 +564,7 @@
             <para>This event causes the page to post back to the server.</para>
           </block>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="73bf8638-c4ec-4069-b0bb-a1dc79b92e32"
                 >How to: Consume Events in a Web Forms Application</a
               >
@@ -625,8 +578,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >Occurs when the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -651,51 +603,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sometimes, multiple <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >Sometimes, multiple <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             controls are related and share the same value for the <see
-             cref="P:System.Web.UI.WebControls.ImageButton.CommandName" />
+             controls are related and share the same value for the <see cref="P:System.Web.UI.WebControls.ImageButton.CommandName" />
 
             
 
-             property, such as Sort. Use this property to supplement the <see
-             cref="P:System.Web.UI.WebControls.ImageButton.CommandName" />
+             property, such as Sort. Use this property to supplement the <see cref="P:System.Web.UI.WebControls.ImageButton.CommandName" />
 
             
 
-             property with additional information about the command to perform, such as Ascending. The values of the <see
-             cref="P:System.Web.UI.WebControls.ImageButton.CommandName" />
+             property with additional information about the command to perform, such as Ascending. The values of the <see cref="P:System.Web.UI.WebControls.ImageButton.CommandName" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.ImageButton.CommandArgument" />
+             and <see cref="P:System.Web.UI.WebControls.ImageButton.CommandArgument" />
 
             
 
-             properties are typically used in the <see
-             cref="M:System.Web.UI.WebControls.ImageButton.OnCommand(System.Web.UI.WebControls.CommandEventArgs)" />
+             properties are typically used in the <see cref="M:System.Web.UI.WebControls.ImageButton.OnCommand(System.Web.UI.WebControls.CommandEventArgs)" />
 
             
 
-             event handler to determine the action to perform when the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             event handler to determine the action to perform when the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
              control is clicked.</para
           >
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -707,8 +650,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an optional argument that provides additional information about the <see
-             cref="P:System.Web.UI.WebControls.ImageButton.CommandName" />
+            >Gets or sets an optional argument that provides additional information about the <see cref="P:System.Web.UI.WebControls.ImageButton.CommandName" />
 
             
 
@@ -744,44 +686,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to specify the command to perform when the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >Use this property to specify the command to perform when the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             control is clicked, such as Sort, Cancel, or Edit. This allows multiple <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             control is clicked, such as Sort, Cancel, or Edit. This allows multiple <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             controls to be placed on the same Web page. The value in this property can then be programmatically identified in the <see
-             cref="M:System.Web.UI.WebControls.ImageButton.OnCommand(System.Web.UI.WebControls.CommandEventArgs)" />
+             controls to be placed on the same Web page. The value in this property can then be programmatically identified in the <see cref="M:System.Web.UI.WebControls.ImageButton.OnCommand(System.Web.UI.WebControls.CommandEventArgs)" />
 
             
 
-             event handler to determine the appropriate action to perform when each <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             event handler to determine the appropriate action to perform when each <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
              control is clicked.</para
           >
           <para
-            >Supplemental information about the command, such as specifying ascending sort order, can be included by using the <see
-             cref="P:System.Web.UI.WebControls.Button.CommandArgument" />
+            >Supplemental information about the command, such as specifying ascending sort order, can be included by using the <see cref="P:System.Web.UI.WebControls.Button.CommandArgument" />
 
             
 
              property.</para
           >
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -793,8 +728,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the command name associated with the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >Gets or sets the command name associated with the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -844,13 +778,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.ImageButton.Enabled" />
+            >Use the <see cref="P:System.Web.UI.WebControls.ImageButton.Enabled" />
 
             
 
-             property to specify whether an <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             property to specify whether an <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -860,8 +792,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -901,44 +832,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >By default, the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             control renders the <see
-             cref="P:System.Web.UI.WebControls.Image.AlternateText" />
+             control renders the <see cref="P:System.Web.UI.WebControls.Image.AlternateText" />
 
             
 
-             property using an alt attribute. When the <see
-             cref="P:System.Web.UI.WebControls.Image.AlternateText" />
+             property using an alt attribute. When the <see cref="P:System.Web.UI.WebControls.Image.AlternateText" />
 
             
 
-             property is not set, the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             property is not set, the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
              control does not include the alt attribute to specify the alternate-text in the control rendering. </para
           >
           <para
-            >The XHTML document type definition requires the alt attribute on image controls. However, accessibility best practices recommend that image controls that do not convey information relevant to the context of the Web page should not specify an alt attribute. You can meet both XHTML and accessibility requirements by setting the <see
-             cref="P:System.Web.UI.WebControls.Image.AlternateText" />
+            >The XHTML document type definition requires the alt attribute on image controls. However, accessibility best practices recommend that image controls that do not convey information relevant to the context of the Web page should not specify an alt attribute. You can meet both XHTML and accessibility requirements by setting the <see cref="P:System.Web.UI.WebControls.Image.AlternateText" />
 
             
 
              property to true.</para
           >
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -970,36 +894,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ImageButton.GetPostBackOptions" />
+            >The <see cref="M:System.Web.UI.WebControls.ImageButton.GetPostBackOptions" />
 
             
 
-             method creates a <see
-             cref="T:System.Web.UI.PostBackOptions" />
+             method creates a <see cref="T:System.Web.UI.PostBackOptions" />
 
             
 
-             object that represents the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             object that represents the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             control's postback behavior. The <see
-             cref="T:System.Web.UI.PostBackOptions" />
+             control's postback behavior. The <see cref="T:System.Web.UI.PostBackOptions" />
 
             
 
-             object is then typically passed to the <see
-             cref="M:System.Web.UI.ClientScriptManager.GetPostBackEventReference(System.Web.UI.PostBackOptions)" />
+             object is then typically passed to the <see cref="M:System.Web.UI.ClientScriptManager.GetPostBackEventReference(System.Web.UI.PostBackOptions)" />
 
             
 
              method, which is used to obtain a reference to a client-side script function that, when invoked, causes the server to postback to the page.</para
           >
           <para
-            >This method is used primarily by control developers when extending the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >This method is used primarily by control developers when extending the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -1009,13 +927,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Web.UI.PostBackOptions" />
+            >Creates a <see cref="T:System.Web.UI.PostBackOptions" />
 
             
 
-             object that represents the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             object that represents the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -1025,13 +941,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.PostBackOptions" />
+            >A <see cref="T:System.Web.UI.PostBackOptions" />
 
             
 
-             that represents the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             that represents the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -1063,26 +977,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ImageButton.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+            >The <see cref="M:System.Web.UI.WebControls.ImageButton.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             member is used primarily by control developers when deriving a custom class from the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             member is used primarily by control developers when deriving a custom class from the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
              control.</para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >The <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             checks to see if the x and y values were posted, which indicates that the image was clicked by the user. The <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             checks to see if the x and y values were posted, which indicates that the image was clicked by the user. The <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -1092,8 +1002,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Processes posted data for the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >Processes posted data for the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -1105,19 +1014,26 @@
           <para>Returns false for all cases.</para>
         </returns>
         <param name="postDataKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key value used to index an entry in the collection. </param
         >
         <param name="postCollection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.Specialized.NameValueCollection" />
+          A <see cref="T:System.Collections.Specialized.NameValueCollection" />
 
           
 
@@ -1141,26 +1057,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.ImageButton.Click" />
+            >The <see cref="E:System.Web.UI.WebControls.ImageButton.Click" />
 
             
 
-             event is raised when the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             event is raised when the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             control is clicked. By using the <see
-             cref="M:System.Web.UI.WebControls.ImageButton.OnClick(System.Web.UI.ImageClickEventArgs)" />
+             control is clicked. By using the <see cref="M:System.Web.UI.WebControls.ImageButton.OnClick(System.Web.UI.ImageClickEventArgs)" />
 
             
 
              event handler, you can programmatically determine the coordinates where the image is clicked. You can then code a response, based on the values of these coordinates. Note that the origin (0, 0) is located at the upper left corner of the image.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="73bf8638-c4ec-4069-b0bb-a1dc79b92e32"
                 >How to: Consume Events in a Web Forms Application</a
               >
@@ -1171,8 +1083,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ImageButton.OnClick(System.Web.UI.ImageClickEventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.ImageButton.OnClick(System.Web.UI.ImageClickEventArgs)" />
 
             
 
@@ -1182,13 +1093,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.WebControls.ImageButton.Click" />
+            >Raises the <see cref="E:System.Web.UI.WebControls.ImageButton.Click" />
 
             
 
-             event and allows you to handle the <see
-             cref="E:System.Web.UI.WebControls.ImageButton.Click" />
+             event and allows you to handle the <see cref="E:System.Web.UI.WebControls.ImageButton.Click" />
 
             
 
@@ -1196,12 +1105,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.ImageClickEventArgs" />
+          A <see cref="T:System.Web.UI.ImageClickEventArgs" />
 
           
 
@@ -1235,36 +1147,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.ImageButton.OnClientClick" />
+            >Use the <see cref="P:System.Web.UI.WebControls.ImageButton.OnClientClick" />
 
             
 
-             property to specify additional client-side script that executes when an <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             property to specify additional client-side script that executes when an <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             control's <see
-             cref="E:System.Web.UI.WebControls.ImageButton.Click" />
+             control's <see cref="E:System.Web.UI.WebControls.ImageButton.Click" />
 
             
 
-             event is raised. The script that you specify for this property is rendered in the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             event is raised. The script that you specify for this property is rendered in the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
              control's OnClick attribute in addition to the control's predefined client-side script.</para
           >
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -1276,13 +1182,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the client-side script that executes when an <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >Gets or sets the client-side script that executes when an <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             control's <see
-             cref="E:System.Web.UI.WebControls.ImageButton.Click" />
+             control's <see cref="E:System.Web.UI.WebControls.ImageButton.Click" />
 
             
 
@@ -1307,48 +1211,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.ImageButton.Command" />
+            >The <see cref="E:System.Web.UI.WebControls.ImageButton.Command" />
 
             
 
-             event is raised when the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             event is raised when the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             control is clicked. The <see
-             cref="M:System.Web.UI.WebControls.ImageButton.OnCommand(System.Web.UI.WebControls.CommandEventArgs)" />
+             control is clicked. The <see cref="M:System.Web.UI.WebControls.ImageButton.OnCommand(System.Web.UI.WebControls.CommandEventArgs)" />
 
             
 
-             event handler is used to make the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             event handler is used to make the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             control behave like a Command button. A command name can be associated with the control by using the <see
-             cref="P:System.Web.UI.WebControls.ImageButton.CommandName" />
+             control behave like a Command button. A command name can be associated with the control by using the <see cref="P:System.Web.UI.WebControls.ImageButton.CommandName" />
 
             
 
-             property. This allows multiple <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             property. This allows multiple <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             controls to be placed on the Web page. The value in this property can then be programmatically identified in the <see
-             cref="M:System.Web.UI.WebControls.ImageButton.OnCommand(System.Web.UI.WebControls.CommandEventArgs)" />
+             controls to be placed on the Web page. The value in this property can then be programmatically identified in the <see cref="M:System.Web.UI.WebControls.ImageButton.OnCommand(System.Web.UI.WebControls.CommandEventArgs)" />
 
             
 
-             event handler to determine the appropriate action to perform when each <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             event handler to determine the appropriate action to perform when each <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             control is clicked. The <see
-             cref="P:System.Web.UI.WebControls.ImageButton.CommandArgument" />
+             control is clicked. The <see cref="P:System.Web.UI.WebControls.ImageButton.CommandArgument" />
 
             
 
@@ -1356,8 +1251,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="E:System.Web.UI.WebControls.ImageButton.Command" />
+              >The <see cref="E:System.Web.UI.WebControls.ImageButton.Command" />
 
               
 
@@ -1365,8 +1259,7 @@
             >
           </block>
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="73bf8638-c4ec-4069-b0bb-a1dc79b92e32"
                 >How to: Consume Events in a Web Forms Application</a
               >
@@ -1377,8 +1270,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ImageButton.OnCommand(System.Web.UI.WebControls.CommandEventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.ImageButton.OnCommand(System.Web.UI.WebControls.CommandEventArgs)" />
 
             
 
@@ -1388,13 +1280,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.WebControls.ImageButton.Command" />
+            >Raises the <see cref="E:System.Web.UI.WebControls.ImageButton.Command" />
 
             
 
-             event and allows you to handle the <see
-             cref="E:System.Web.UI.WebControls.ImageButton.Command" />
+             event and allows you to handle the <see cref="E:System.Web.UI.WebControls.ImageButton.Command" />
 
             
 
@@ -1402,12 +1292,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+          A <see cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
           
 
@@ -1432,13 +1325,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ImageButton.OnPreRender(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.ImageButton.OnPreRender(System.EventArgs)" />
 
             
 
-             method is used primarily by control developers when deriving a custom class from the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             method is used primarily by control developers when deriving a custom class from the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -1450,12 +1341,15 @@
           <para>Determines whether the image has been clicked prior to rendering on the client.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1495,33 +1389,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.ImageButton.PostBackUrl" />
+            >The <see cref="P:System.Web.UI.WebControls.ImageButton.PostBackUrl" />
 
             
 
-             property allows you to perform a cross-page post using the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             property allows you to perform a cross-page post using the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             control. Set the <see
-             cref="P:System.Web.UI.WebControls.ImageButton.PostBackUrl" />
+             control. Set the <see cref="P:System.Web.UI.WebControls.ImageButton.PostBackUrl" />
 
             
 
-             property to the URL of the Web page to post to when the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             property to the URL of the Web page to post to when the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             control is clicked. For example, specifying Page2.aspx causes the page that contains the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             control is clicked. For example, specifying Page2.aspx causes the page that contains the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             control to post to Page2.aspx. If you do not specify a value for the <see
-             cref="P:System.Web.UI.WebControls.ImageButton.PostBackUrl" />
+             control to post to Page2.aspx. If you do not specify a value for the <see cref="P:System.Web.UI.WebControls.ImageButton.PostBackUrl" />
 
             
 
@@ -1529,8 +1417,7 @@
           >
           <block subset="none" type="note">
             <para
-              >When performing a cross-page postback with controls with server-side validation, you should check that the page's <see
-               cref="P:System.Web.UI.Page.IsValid" />
+              >When performing a cross-page postback with controls with server-side validation, you should check that the page's <see cref="P:System.Web.UI.Page.IsValid" />
 
               
 
@@ -1545,8 +1432,7 @@
         End If
 End Sub</code>
           <para
-            >For more information on cross-page posting techniques, see <format
-             type="text/html">
+            >For more information on cross-page posting techniques, see <format type="text/html">
               <a href="fedf234e-b7c4-4644-a9e8-c1c0870b043b"
                 >Cross-Page Posting in an ASP.NET Web Page</a
               >
@@ -1557,13 +1443,11 @@ End Sub</code>
             .</para
           >
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -1575,8 +1459,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the URL of the page to post to from the current page when the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >Gets or sets the URL of the page to post to from the current page when the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -1604,31 +1487,26 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ImageButton.RaisePostBackEvent(System.String)" />
+            >The <see cref="M:System.Web.UI.WebControls.ImageButton.RaisePostBackEvent(System.String)" />
 
             
 
-             member is used primarily by control developers when deriving a custom class from the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             member is used primarily by control developers when deriving a custom class from the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
              control.</para
           >
           <para
-            >This method is used internally by the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >This method is used internally by the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             control, when it is clicked, to raise a <see
-             cref="E:System.Web.UI.WebControls.ImageButton.Click" />
+             control, when it is clicked, to raise a <see cref="E:System.Web.UI.WebControls.ImageButton.Click" />
 
             
 
-             event and, if defined, a <see
-             cref="E:System.Web.UI.WebControls.ImageButton.Command" />
+             event and, if defined, a <see cref="E:System.Web.UI.WebControls.ImageButton.Command" />
 
             
 
@@ -1638,8 +1516,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises events for the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >Raises events for the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -1647,7 +1524,11 @@ End Sub</code>
           >
         </summary>
         <param name="eventArgument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1669,21 +1550,18 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ImageButton.RaisePostDataChangedEvent" />
+            >The <see cref="M:System.Web.UI.WebControls.ImageButton.RaisePostDataChangedEvent" />
 
             
 
-             member is used primarily by control developers when deriving a custom class from the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             member is used primarily by control developers when deriving a custom class from the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
              control.</para
           >
           <para
-            >This method can be overridden in a derived class to raise change events for the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >This method can be overridden in a derived class to raise change events for the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -1693,8 +1571,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Notifies the ASP.NET application that the state of the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >Notifies the ASP.NET application that the state of the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -1727,18 +1604,15 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+            >The <see cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IPostBackDataHandler" />
+             instance is cast to an <see cref="T:System.Web.UI.IPostBackDataHandler" />
 
             
 
@@ -1748,8 +1622,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+            >For a description of this member, see <see cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
@@ -1761,24 +1634,30 @@ End Sub</code>
           <para>true if the server control's state changes as a result of the postback; otherwise, false.</para>
         </returns>
         <param name="postDataKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key identifier for the control, used to index the <paramref
-           name="postCollection" />
+          The key identifier for the control, used to index the <paramref name="postCollection" />
 
           
 
           .</param
         >
         <param name="postCollection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.Specialized.NameValueCollection" />
+          A <see cref="T:System.Collections.Specialized.NameValueCollection" />
 
           
 
@@ -1804,18 +1683,15 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
+            >The <see cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
 
             
 
-             method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IPostBackDataHandler" />
+             instance is cast to an <see cref="T:System.Web.UI.IPostBackDataHandler" />
 
             
 
@@ -1825,8 +1701,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
+            >For a description of this member, see <see cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
 
             
 
@@ -1855,18 +1730,15 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            > The <see
-             cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />
+            > The <see cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />
 
             
 
-             method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IPostBackEventHandler" />
+             instance is cast to an <see cref="T:System.Web.UI.IPostBackEventHandler" />
 
             
 
@@ -1876,8 +1748,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />
+            >For a description of this member, see <see cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />
 
             
 
@@ -1885,7 +1756,11 @@ End Sub</code>
           >
         </summary>
         <param name="eventArgument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1910,18 +1785,15 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.IButtonControl.Text" />
+            >The <see cref="P:System.Web.UI.WebControls.IButtonControl.Text" />
 
             
 
-             member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.WebControls.IButtonControl" />
+             instance is cast to an <see cref="T:System.Web.UI.WebControls.IButtonControl" />
 
             
 
@@ -1931,8 +1803,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Web.UI.WebControls.IButtonControl.Text" />
+            >For a description of this member, see <see cref="P:System.Web.UI.WebControls.IButtonControl.Text" />
 
             
 
@@ -1952,38 +1823,30 @@ End Sub</code>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.UI.HtmlTextWriterTag" />
-        </value>
+        <value>a <see cref="T:System.Web.UI.HtmlTextWriterTag" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.ImageButton.TagKey" />
+            >The <see cref="P:System.Web.UI.WebControls.ImageButton.TagKey" />
 
             
 
-             property is used primarily by control developers when deriving a custom class from the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             property is used primarily by control developers when deriving a custom class from the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
              control.</para
           >
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.ImageButton.TagKey" />
+            >Use the <see cref="P:System.Web.UI.WebControls.ImageButton.TagKey" />
 
             
 
-             property to determine the <see
-             cref="T:System.Web.UI.HtmlTextWriterTag" />
+             property to determine the <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
             
 
-             value associated with an <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             value associated with an <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -1993,13 +1856,11 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.UI.HtmlTextWriterTag" />
+            >Gets the <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
             
 
-             value that corresponds to the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             value that corresponds to the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
@@ -2034,8 +1895,7 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.ImageButton.Text" />
+            >The <see cref="P:System.Web.UI.WebControls.ImageButton.Text" />
 
             
 
@@ -2045,13 +1905,11 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the value of the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >Gets or sets the value of the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             control's <see
-             cref="P:System.Web.UI.WebControls.Image.AlternateText" />
+             control's <see cref="P:System.Web.UI.WebControls.Image.AlternateText" />
 
             
 
@@ -2082,46 +1940,38 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validation groups allow you to assign validation controls on a page to a specific category. Each validation group can be validated independently of other validation groups on the page. Use the <see
-             cref="P:System.Web.UI.WebControls.ImageButton.ValidationGroup" />
+            >Validation groups allow you to assign validation controls on a page to a specific category. Each validation group can be validated independently of other validation groups on the page. Use the <see cref="P:System.Web.UI.WebControls.ImageButton.ValidationGroup" />
 
             
 
-             property to specify the name of the validation group for which the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             property to specify the name of the validation group for which the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             control causes validation when it posts back to the server. This property has an effect only when the value of the <see
-             cref="P:System.Web.UI.WebControls.ImageButton.CausesValidation" />
+             control causes validation when it posts back to the server. This property has an effect only when the value of the <see cref="P:System.Web.UI.WebControls.ImageButton.CausesValidation" />
 
             
 
-             property is set to true. When you specify a value for the <see
-             cref="P:System.Web.UI.WebControls.ImageButton.ValidationGroup" />
+             property is set to true. When you specify a value for the <see cref="P:System.Web.UI.WebControls.ImageButton.ValidationGroup" />
 
             
 
-             property, only the validation controls that are part of the specified group are validated when the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+             property, only the validation controls that are part of the specified group are validated when the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 
-             control posts back to the server. If you do not specify a value for this property and the <see
-             cref="P:System.Web.UI.WebControls.ImageButton.CausesValidation" />
+             control posts back to the server. If you do not specify a value for this property and the <see cref="P:System.Web.UI.WebControls.ImageButton.CausesValidation" />
 
             
 
              property is set to true, all validation controls on the page that are not assigned to a validation group are validated when the control posts back to the server.</para
           >
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -2133,8 +1983,7 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the group of controls for which the <see
-             cref="T:System.Web.UI.WebControls.ImageButton" />
+            >Gets or sets the group of controls for which the <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
             
 

@@ -17,8 +17,7 @@
   <Interfaces />
   <Docs>
     <summary
-      >A wrapper to the <c
-      >libintl</c>
+      >A wrapper to the <c>libintl</c>
 
       
 
@@ -28,8 +27,7 @@
       <example>
         <para
           >The following example demonstrates the use of the 
-      <see
-           cref="T:Mono.Unix.Catalog" />
+      <see cref="T:Mono.Unix.Catalog" />
 
           
 
@@ -57,14 +55,12 @@ public class i18n
         <para>To generate the translations, use:</para>
         <code lang="sh">xgettext --from-code=UTF-8 i18n.cs -o es.po</code>
         <para
-          >Edit the translations in <c
-          >es.po</c>
+          >Edit the translations in <c>es.po</c>
 
           
 
           , then compile the
-      translations and copy the file so that <c
-          >libintl</c>
+      translations and copy the file so that <c>libintl</c>
 
           
 
@@ -106,44 +102,37 @@ msgfmt es.po -o locale/es/LC_MESSAGES/i18n.mo</code
       </Parameters>
       <Docs>
         <param name="s"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
            containing the singular form of the string. It is also used as the key to search the catalog on.</param
         >
         <param name="p"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
            containing the plural form of the string.</param
         >
-        <param name="n"
-          >
-	  An <see
-           cref="T:System.Int32" />
+        <param name="n">
+	  An <see cref="T:System.Int32" />
 
           
 
            containing a number that determines 
 	  which form of the string to return.  
-	  If <paramref
-           name="n" />
+	  If <paramref name="n" />
 
           
 
            is one, the translation for 
-	  <paramref
-           name="s" />
+	  <paramref name="s" />
 
           
 
            is returned; otherwise, the translation for
-	  <paramref
-           name="p" />
+	  <paramref name="p" />
 
           
 
@@ -152,8 +141,7 @@ msgfmt es.po -o locale/es/LC_MESSAGES/i18n.mo</code
         >
         <summary>Returns a native language translation of a text whose form depends on the number passed to the method.</summary>
         <returns
-          >The translated string. If no message catalog can be found, the method returns the singular form if <paramref
-           name="n" />
+          >The translated string. If no message catalog can be found, the method returns the singular form if <paramref name="n" />
 
           
 
@@ -163,8 +151,7 @@ msgfmt es.po -o locale/es/LC_MESSAGES/i18n.mo</code
           <example>
             <para
               >The following example demonstrates the use of the 
-              <see
-               cref="T:Mono.Unix.Catalog" />
+              <see cref="T:Mono.Unix.Catalog" />
 
               
 
@@ -213,8 +200,7 @@ public class i18n
       </Parameters>
       <Docs>
         <param name="s"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
@@ -222,8 +208,7 @@ public class i18n
         >
         <summary>Returns a native language translation of the text passed as the parameter.</summary>
         <returns
-          >The translated string, if found in the catalog, <paramref
-           name="s" />
+          >The translated string, if found in the catalog, <paramref name="s" />
 
           
 
@@ -233,8 +218,7 @@ public class i18n
           <example>
             <para
               >The following example demonstrates the use of the 
-              <see
-               cref="T:Mono.Unix.Catalog" />
+              <see cref="T:Mono.Unix.Catalog" />
 
               
 
@@ -287,16 +271,14 @@ public class i18n
       </Parameters>
       <Docs>
         <param name="package"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
            containing the name of the package (domain) that is to be accessed.</param
         >
         <param name="localedir"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
@@ -304,23 +286,19 @@ public class i18n
         >
         <summary>Initialize the object instance by providing information required to build the base directory where the message catalog is stored.</summary>
         <remarks
-          >The path to the message catalogs is constructed as follows <c
-          >localedir/locale/category/package</c>
+          >The path to the message catalogs is constructed as follows <c>localedir/locale/category/package</c>
 
           
 
-          . In this notation <c
-          >locale</c>
+          . In this notation <c>locale</c>
 
           
 
-           and <c
-          >category</c>
+           and <c>category</c>
 
           
 
-           are, respectively, the locale name and the message category name, such as <c
-          >LC_MESSAGES</c>
+           are, respectively, the locale name and the message category name, such as <c>LC_MESSAGES</c>
 
           
 

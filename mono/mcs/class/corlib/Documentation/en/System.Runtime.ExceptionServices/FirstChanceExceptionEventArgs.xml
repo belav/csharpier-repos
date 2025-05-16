@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class provides the exception handler for the <see
-         cref="E:System.AppDomain.FirstChanceException" />
+        >This class provides the exception handler for the <see cref="E:System.AppDomain.FirstChanceException" />
 
         
 
@@ -58,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.ExceptionServices.FirstChanceExceptionEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.ExceptionServices.FirstChanceExceptionEventArgs" />
 
             
 
@@ -67,12 +65,15 @@
           >
         </summary>
         <param name="exception">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that was just thrown by managed code, and that will be examined by the <see
-           cref="E:System.AppDomain.UnhandledException" />
+          The exception that was just thrown by managed code, and that will be examined by the <see cref="E:System.AppDomain.UnhandledException" />
 
           
 
@@ -98,16 +99,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The method that handles the <see
-             cref="E:System.AppDomain.UnhandledException" />
+            >The method that handles the <see cref="E:System.AppDomain.UnhandledException" />
 
             
 
              event can examine the exception and perform appropriate logging or other notification services. </para
           >
           <para
-            >For example code, see <see
-             cref="T:System.Runtime.ExceptionServices.FirstChanceExceptionEventArgs" />
+            >For example code, see <see cref="T:System.Runtime.ExceptionServices.FirstChanceExceptionEventArgs" />
 
             
 

@@ -14,26 +14,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:Microsoft.Build.BuildEngine.Project" />
+        >A <see cref="T:Microsoft.Build.BuildEngine.Project" />
 
         
 
          represents an vstecmsbuild project. It is a container for items, properties and targets. It can load project content from in-memory XML or from an XML file, and can save to an XML file, preserving most whitespace and all XML comments.</para
       >
       <para
-        >Every <see
-         cref="T:Microsoft.Build.BuildEngine.Project" />
+        >Every <see cref="T:Microsoft.Build.BuildEngine.Project" />
 
         
 
-         must be associated with an <see
-         cref="T:Microsoft.Build.BuildEngine.Engine" />
+         must be associated with an <see cref="T:Microsoft.Build.BuildEngine.Engine" />
 
         
 
-         to access shared information. During a build, the <see
-         cref="T:Microsoft.Build.BuildEngine.Engine" />
+         to access shared information. During a build, the <see cref="T:Microsoft.Build.BuildEngine.Engine" />
 
         
 
@@ -56,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.BuildEngine.Project" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.Project" />
 
             
 
@@ -84,13 +79,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.BuildEngine.Project" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.Project" />
 
             
 
-             class using the supplied <see
-             cref="T:Microsoft.Build.BuildEngine.Engine" />
+             class using the supplied <see cref="T:Microsoft.Build.BuildEngine.Engine" />
 
             
 
@@ -98,12 +91,15 @@
           >
         </summary>
         <param name="engine">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:Microsoft.Build.BuildEngine.Engine" />
+          The <see cref="T:Microsoft.Build.BuildEngine.Engine" />
 
           
 
@@ -135,8 +131,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Add an <format
-             type="text/html">
+            >Add an <format type="text/html">
               <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
             </format>
 
@@ -172,8 +167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <format
-             type="text/html">
+            >Adds the specified <format type="text/html">
               <a href="dcef5f91-0613-4bfc-8ee9-d7004bb6d3a9">Item</a>
             </format>
 
@@ -185,8 +179,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+            >A <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />
 
             
 
@@ -194,14 +187,22 @@
           >
         </returns>
         <param name="itemName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the item collection to add the item to. Corresponds to the user-defined name of the Item element.</param
         >
         <param name="itemInclude">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -235,8 +236,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <format
-             type="text/html">
+            >Adds the specified <format type="text/html">
               <a href="dcef5f91-0613-4bfc-8ee9-d7004bb6d3a9">Item</a>
             </format>
 
@@ -248,8 +248,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+            >A <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />
 
             
 
@@ -257,26 +256,37 @@
           >
         </returns>
         <param name="itemName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the item collection to add the item to. Corresponds to the user-defined name of the Item element.</param
         >
         <param name="itemInclude">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value of the Include attribute of the item.</param
         >
         <param name="treatItemIncludeAsLiteral">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to treat the <paramref
-           name="itemInclude" />
+          true to treat the <paramref name="itemInclude" />
 
           
 
@@ -303,8 +313,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a new <format
-             type="text/html">
+            >Adds a new <format type="text/html">
               <a href="aac894e3-a9f1-4bbc-a796-6ef07001f35b">ItemGroup</a>
             </format>
 
@@ -316,8 +325,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+            >A <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
@@ -347,8 +355,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a new <format
-             type="text/html">
+            >Adds a new <format type="text/html">
               <a href="ff1e6c68-b9a1-4263-a1ce-dc3b829a64d4">PropertyGroup</a>
             </format>
 
@@ -360,8 +367,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+            >A <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
 
             
 
@@ -369,7 +375,11 @@
           >
         </returns>
         <param name="insertAtEndOfProject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -399,8 +409,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a new <format
-             type="text/html">
+            >Adds a new <format type="text/html">
               <a href="20247902-9446-4a1f-8253-5c7a17e4fe43">UsingTask</a>
             </format>
 
@@ -410,14 +419,22 @@
           >
         </summary>
         <param name="taskName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the task to reference from the assembly. Corresponds to the TaskName attribute of the UsingTask element.</param
         >
         <param name="assemblyFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -447,8 +464,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a new <format
-             type="text/html">
+            >Adds a new <format type="text/html">
               <a href="20247902-9446-4a1f-8253-5c7a17e4fe43">UsingTask</a>
             </format>
 
@@ -458,14 +474,22 @@
           >
         </summary>
         <param name="taskName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the task to reference from the assembly. Corresponds to the TaskName attribute of the UsingTask element.</param
         >
         <param name="assemblyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -520,7 +544,11 @@
           <para>true if the build was successful; otherwise, false.</para>
         </returns>
         <param name="targetName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -552,7 +580,11 @@
           <para>true if the build was successful; otherwise, false.</para>
         </returns>
         <param name="targetNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -588,14 +620,22 @@
           <para>true if the build was successful; otherwise, false.</para>
         </returns>
         <param name="targetNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The list of targets to build. This parameter can be a null reference (Nothing in vbprvb) to build the default targets.</param
         >
         <param name="targetOutputs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -632,26 +672,37 @@
           <para>true if the build was successful; otherwise, false.</para>
         </returns>
         <param name="targetNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The list of targets to build. This parameter can be a null reference (Nothing in vbprvb) to build the default targets.</param
         >
         <param name="targetOutputs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The outputs of the built targets. This parameter can be a null reference (Nothing) if outputs are not needed.</param
         >
         <param name="buildFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:Microsoft.Build.BuildEngine.BuildSettings" />
+          The <see cref="T:Microsoft.Build.BuildEngine.BuildSettings" />
 
           
 
@@ -674,13 +725,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, this property uses value of the <see
-             cref="P:Microsoft.Build.BuildEngine.Engine.BuildEnabled" />
+            >By default, this property uses value of the <see cref="P:Microsoft.Build.BuildEngine.Engine.BuildEnabled" />
 
             
 
-             property of the project's <see
-             cref="P:Microsoft.Build.BuildEngine.Project.ParentEngine" />
+             property of the project's <see cref="P:Microsoft.Build.BuildEngine.Project.ParentEngine" />
 
             
 
@@ -709,13 +758,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <unmanagedCodeEntityReference
-            >DefaultTargets</unmanagedCodeEntityReference>
+            >Gets or sets the <unmanagedCodeEntityReference>DefaultTargets</unmanagedCodeEntityReference>
 
             
 
-             attribute of the <format
-             type="text/html">
+             attribute of the <format type="text/html">
               <a href="d1cda56a-dbef-4109-9201-39e962e3f653">Project</a>
             </format>
 
@@ -763,8 +810,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The returned <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+            >The returned <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
@@ -795,18 +841,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The returned <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+            >The returned <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
-             contains all items in the project after wildcard and property expansion, including those that were not used during the build process due to <unmanagedCodeEntityReference
-            >Condition</unmanagedCodeEntityReference>
+             contains all items in the project after wildcard and property expansion, including those that were not used during the build process due to <unmanagedCodeEntityReference>Condition</unmanagedCodeEntityReference>
 
             
 
-             attributes evaluating to false. This property value is only generated when certain changes occur, such as a new <format
-             type="text/html">
+             attributes evaluating to false. This property value is only generated when certain changes occur, such as a new <format type="text/html">
               <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
             </format>
 
@@ -818,8 +861,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of all items in a project, even those not used in the build process because a <format
-             type="text/html">
+            >Gets a collection of all items in a project, even those not used in the build process because a <format type="text/html">
               <a href="9d7aa308-b667-48ed-b4c9-a61e49eb0a85">Condition</a>
             </format>
 
@@ -848,8 +890,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The returned <see
-             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+            >The returned <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
 
             
 
@@ -857,8 +898,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Cloning a <see
-               cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+              >Cloning a <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
 
               
 
@@ -914,8 +954,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method generates the list of possible values by inspecting all of the <format
-             type="text/html">
+            >This method generates the list of possible values by inspecting all of the <format type="text/html">
               <a href="9d7aa308-b667-48ed-b4c9-a61e49eb0a85">Condition</a>
             </format>
 
@@ -933,7 +972,11 @@
           <para>The list of possible values for the property.</para>
         </returns>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -966,8 +1009,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+            >A <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
@@ -975,7 +1017,11 @@
           >
         </returns>
         <param name="itemName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1008,13 +1054,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+            >A <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
-             containing all items belonging to the specified item collection, even those not used in the build process because a <format
-             type="text/html">
+             containing all items belonging to the specified item collection, even those not used in the build process because a <format type="text/html">
               <a href="9d7aa308-b667-48ed-b4c9-a61e49eb0a85">Condition</a>
             </format>
 
@@ -1024,7 +1068,11 @@
           >
         </returns>
         <param name="itemName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1052,8 +1100,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you need to retrieve a large number of property values, use the <see
-             cref="P:Microsoft.Build.BuildEngine.Project.EvaluatedProperties" />
+            >If you need to retrieve a large number of property values, use the <see cref="P:Microsoft.Build.BuildEngine.Project.EvaluatedProperties" />
 
             
 
@@ -1069,7 +1116,11 @@
           <para>The value of the specified property.</para>
         </returns>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1095,8 +1146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string value of the XML from the specified element in the <format
-             type="text/html">
+            >Returns a string value of the XML from the specified element in the <format type="text/html">
               <a href="f95f312f-ff92-41eb-9469-ad99e236a307">ProjectExtensions</a>
             </format>
 
@@ -1108,8 +1158,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string value of the specified element in the <unmanagedCodeEntityReference
-            >ProjectExtensions</unmanagedCodeEntityReference>
+            >The string value of the specified element in the <unmanagedCodeEntityReference>ProjectExtensions</unmanagedCodeEntityReference>
 
             
 
@@ -1117,7 +1166,11 @@
           >
         </returns>
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1143,13 +1196,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Global properties are properties set with the <system
-            >/property</system>
+            >Global properties are properties set with the <system>/property</system>
 
             
 
-             switch on the command line, or properties set by the integrated development environment before invoking vstecmsbuild. For more information, see <format
-             type="text/html">
+             switch on the command line, or properties set by the integrated development environment before invoking vstecmsbuild. For more information, see <format type="text/html">
               <a href="edaa65ec-ab8a-42a1-84cb-d76d5b2f4584">MSBuild Command Line Reference</a>
             </format>
 
@@ -1182,8 +1233,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Imported projects are specified by the <format
-             type="text/html">
+            >Imported projects are specified by the <format type="text/html">
               <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
             </format>
 
@@ -1214,13 +1264,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <unmanagedCodeEntityReference
-            >InitialTargets</unmanagedCodeEntityReference>
+            >Gets or sets the <unmanagedCodeEntityReference>InitialTargets</unmanagedCodeEntityReference>
 
             
 
-             attribute of the <format
-             type="text/html">
+             attribute of the <format type="text/html">
               <a href="d1cda56a-dbef-4109-9201-39e962e3f653">Project</a>
             </format>
 
@@ -1287,8 +1335,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroupCollection" />
+            >The <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroupCollection" />
 
             
 
@@ -1298,8 +1345,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of the item groups specified with the <format
-             type="text/html">
+            >Gets a collection of the item groups specified with the <format type="text/html">
               <a href="aac894e3-a9f1-4bbc-a796-6ef07001f35b">ItemGroup</a>
             </format>
 
@@ -1328,13 +1374,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads the contents of the specified <see
-             cref="T:System.IO.TextReader" />
+            >Loads the contents of the specified <see cref="T:System.IO.TextReader" />
 
             
 
-             into the <see
-             cref="T:Microsoft.Build.BuildEngine.Project" />
+             into the <see cref="T:Microsoft.Build.BuildEngine.Project" />
 
             
 
@@ -1342,12 +1386,15 @@
           >
         </summary>
         <param name="textReader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.TextReader" />
+          The <see cref="T:System.IO.TextReader" />
 
           
 
@@ -1373,8 +1420,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads the contents of the specified project file into the <see
-             cref="T:Microsoft.Build.BuildEngine.Project" />
+            >Loads the contents of the specified project file into the <see cref="T:Microsoft.Build.BuildEngine.Project" />
 
             
 
@@ -1382,7 +1428,11 @@
           >
         </summary>
         <param name="projectFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1408,8 +1458,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads the contents of the specified string into the <see
-             cref="T:Microsoft.Build.BuildEngine.Project" />
+            >Loads the contents of the specified string into the <see cref="T:Microsoft.Build.BuildEngine.Project" />
 
             
 
@@ -1417,7 +1466,11 @@
           >
         </summary>
         <param name="projectXml">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1441,8 +1494,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="P:Microsoft.Build.BuildEngine.Project.IsDirty" />
+            >Sets the <see cref="P:Microsoft.Build.BuildEngine.Project.IsDirty" />
 
             
 
@@ -1470,8 +1522,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:Microsoft.Build.BuildEngine.Engine" />
+            >Gets the <see cref="T:Microsoft.Build.BuildEngine.Engine" />
 
             
 
@@ -1498,8 +1549,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroupCollection" />
+            >The <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroupCollection" />
 
             
 
@@ -1509,8 +1559,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of the property groups specified with the <format
-             type="text/html">
+            >Gets a collection of the property groups specified with the <format type="text/html">
               <a href="ff1e6c68-b9a1-4263-a1ce-dc3b829a64d4">PropertyGroup</a>
             </format>
 
@@ -1582,7 +1631,11 @@
           <para>Removes the specified item from the project.</para>
         </summary>
         <param name="itemToRemove">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1613,7 +1666,11 @@
           <para>Removes the specified item group from the project.</para>
         </summary>
         <param name="itemGroupToRemove">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1643,8 +1700,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all item groups with the specified <format
-             type="text/html">
+            >Removes all item groups with the specified <format type="text/html">
               <a href="9d7aa308-b667-48ed-b4c9-a61e49eb0a85">condition</a>
             </format>
 
@@ -1675,7 +1731,11 @@
           <para>Removes all items in the specified item collection from the project, but does not modify imported projects.</para>
         </summary>
         <param name="itemName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1709,7 +1769,11 @@
           <para>Removes the specified property group from the project.</para>
         </summary>
         <param name="propertyGroupToRemove">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1738,8 +1802,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all property groups with the specified <format
-             type="text/html">
+            >Removes all property groups with the specified <format type="text/html">
               <a href="9d7aa308-b667-48ed-b4c9-a61e49eb0a85">condition</a>
             </format>
 
@@ -1749,7 +1812,11 @@
           >
         </summary>
         <param name="matchCondition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1798,8 +1865,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the project in the specified <see
-             cref="T:System.IO.TextWriter" />
+            >Saves the project in the specified <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -1828,7 +1894,11 @@
           <para>Saves the project to the specified file.</para>
         </summary>
         <param name="projectFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1860,19 +1930,26 @@
           <para>Saves the project in the specified file with the specified encoding.</para>
         </summary>
         <param name="projectFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the file in which to save the project.</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Text.Encoding" />
+          The <see cref="T:System.Text.Encoding" />
 
           
 
@@ -1925,33 +2002,48 @@
           <para>Sets the value of a property in the specified imported project.</para>
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the property to change.</param
         >
         <param name="propertyValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value to assign the property.</param
         >
         <param name="condition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The condition to use on the property. Corresponds to the Condition attribute of the Property element.</param
         >
         <param name="importProject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:Microsoft.Build.BuildEngine.Project" />
+          The <see cref="T:Microsoft.Build.BuildEngine.Project" />
 
           
 
@@ -1986,45 +2078,63 @@
           <para>Sets the value of a property in the specified imported project.</para>
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the property to change.</param
         >
         <param name="propertyValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value to assign the property.</param
         >
         <param name="condition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The condition to use on the property. Corresponds to the Condition attribute of the Property element.</param
         >
         <param name="importedProject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:Microsoft.Build.BuildEngine.Project" />
+          The <see cref="T:Microsoft.Build.BuildEngine.Project" />
 
           
 
            that contains the specified property.</param
         >
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:Microsoft.Build.BuildEngine.PropertyPosition" />
+          A <see cref="T:Microsoft.Build.BuildEngine.PropertyPosition" />
 
           
 
@@ -2063,57 +2173,78 @@
           <para>Sets the value of a property in the specified imported project.</para>
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the property to change.</param
         >
         <param name="propertyValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value to assign the property.</param
         >
         <param name="condition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The condition to use on the property. Corresponds to the Condition attribute of the Property element.</param
         >
         <param name="importedProject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:Microsoft.Build.BuildEngine.Project" />
+          The <see cref="T:Microsoft.Build.BuildEngine.Project" />
 
           
 
            that contains the specified property.</param
         >
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:Microsoft.Build.BuildEngine.PropertyPosition" />
+          A <see cref="T:Microsoft.Build.BuildEngine.PropertyPosition" />
 
           
 
            value indicating the location to insert the property.</param
         >
         <param name="treatPropertyValueAsLiteral">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to treat the <paramref
-           name="propertyValue" />
+          true to treat the <paramref name="propertyValue" />
 
           
 
@@ -2144,8 +2275,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <format
-             type="text/html">
+            >Sets the <format type="text/html">
               <a href="f95f312f-ff92-41eb-9469-ad99e236a307">ProjectExtensions</a>
             </format>
 
@@ -2155,7 +2285,11 @@
           >
         </summary>
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2187,14 +2321,22 @@
           <para>Sets the value of the specified property.</para>
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the property to change.</param
         >
         <param name="propertyValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2227,21 +2369,33 @@
           <para>Sets the value of the specified property.</para>
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the property to change.</param
         >
         <param name="propertyValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value to assign the property.</param
         >
         <param name="condition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2276,13 +2430,11 @@
 
             
 
-             is called from the integrated development environment (IDE) to set a particular property at the project level. This method searches the existing property groups for a property with this name. If one is found, it changes its value. Otherwise, it either adds a new property to that property group, or adds a new property group to the project. <see
-             cref="M:Microsoft.Build.BuildEngine.Project.SetProperty(System.String,System.String,System.String,Microsoft.Build.BuildEngine.PropertyPosition)" />
+             is called from the integrated development environment (IDE) to set a particular property at the project level. This method searches the existing property groups for a property with this name. If one is found, it changes its value. Otherwise, it either adds a new property to that property group, or adds a new property group to the project. <see cref="M:Microsoft.Build.BuildEngine.Project.SetProperty(System.String,System.String,System.String,Microsoft.Build.BuildEngine.PropertyPosition)" />
 
             
 
-             uses the <paramref
-             name="condition" />
+             uses the <paramref name="condition" />
 
             
 
@@ -2294,33 +2446,48 @@
           <para>Sets the value of the specified property.</para>
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the property to change.</param
         >
         <param name="propertyValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value to assign the property.</param
         >
         <param name="condition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The condition to use on the property. Corresponds to the Condition attribute of the Property element.</param
         >
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:Microsoft.Build.BuildEngine.PropertyPosition" />
+          A <see cref="T:Microsoft.Build.BuildEngine.PropertyPosition" />
 
           
 
@@ -2355,45 +2522,63 @@
           <para>Sets the value of the specified property.</para>
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the property to change.</param
         >
         <param name="propertyValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value to assign the property.</param
         >
         <param name="condition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The condition to use on the property. Corresponds to the Condition attribute of the Property element.</param
         >
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:Microsoft.Build.BuildEngine.PropertyPosition" />
+          A <see cref="T:Microsoft.Build.BuildEngine.PropertyPosition" />
 
           
 
            value indicating the location to insert the property.</param
         >
         <param name="treatPropertyValueAsLiteral">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to treat the <paramref
-           name="propertyValue" />
+          true to treat the <paramref name="propertyValue" />
 
           
 
@@ -2419,8 +2604,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Targets are specified by the <format
-             type="text/html">
+            >Targets are specified by the <format type="text/html">
               <a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a>
             </format>
 
@@ -2451,8 +2635,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.DateTime" />
+            >Gets a <see cref="T:System.DateTime" />
 
             
 
@@ -2480,8 +2663,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of the <format
-             type="text/html">
+            >Gets a collection of the <format type="text/html">
               <a href="20247902-9446-4a1f-8253-5c7a17e4fe43">UsingTask</a>
             </format>
 

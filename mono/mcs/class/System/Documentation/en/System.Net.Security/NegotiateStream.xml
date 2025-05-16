@@ -22,13 +22,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Net.Security.NegotiateStream" />
+        >Use the <see cref="T:System.Net.Security.NegotiateStream" />
 
         
 
-         class for authentication and to help secure information transmitted between a client and a server. Using <see
-         cref="T:System.Net.Security.NegotiateStream" />
+         class for authentication and to help secure information transmitted between a client and a server. Using <see cref="T:System.Net.Security.NegotiateStream" />
 
         
 
@@ -46,115 +44,95 @@
         </item>
       </list>
       <para
-        >Authentication must be performed before transmitting information. Clients request authentication using the synchronous <see
-         cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
+        >Authentication must be performed before transmitting information. Clients request authentication using the synchronous <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
 
         
 
-         methods, which block until the authentication completes, or the asynchronous <see
-         cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
+         methods, which block until the authentication completes, or the asynchronous <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
 
         
 
-         methods, which do not block while waiting for the authentication to complete. Servers request authentication using the synchronous <see
-         cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
+         methods, which do not block while waiting for the authentication to complete. Servers request authentication using the synchronous <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
 
         
 
-         or asynchronous <see
-         cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
+         or asynchronous <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
 
         
 
-         methods. The client, and optionally the server, is authenticated using the Negotiate security protocol. On Windows 95/98 systems, Windows NT LAN Manager (NTLM) is the protocol used for authentication. On other platforms the Kerberos protocol is used for authentication if both client and server support it; otherwise NTLM is used. For detailed descriptions of these protocols, see the Platform SDK documentation on MSDN, at msdn.microsoft.com/library/. The <see
-         cref="T:System.Net.Security.NegotiateStream" />
+         methods. The client, and optionally the server, is authenticated using the Negotiate security protocol. On Windows 95/98 systems, Windows NT LAN Manager (NTLM) is the protocol used for authentication. On other platforms the Kerberos protocol is used for authentication if both client and server support it; otherwise NTLM is used. For detailed descriptions of these protocols, see the Platform SDK documentation on MSDN, at msdn.microsoft.com/library/. The <see cref="T:System.Net.Security.NegotiateStream" />
 
         
 
          class performs the authentication using the Security Support Provider Interface (SSPI). </para
       >
       <para
-        >When authentication succeeds, you must check the <see
-         cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
+        >When authentication succeeds, you must check the <see cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
 
         
 
-         and <see
-         cref="P:System.Net.Security.NegotiateStream.IsSigned" />
+         and <see cref="P:System.Net.Security.NegotiateStream.IsSigned" />
 
         
 
-         properties to determine what security services will be used by the <see
-         cref="T:System.Net.Security.NegotiateStream" />
+         properties to determine what security services will be used by the <see cref="T:System.Net.Security.NegotiateStream" />
 
         
 
-         to help secure your data during transmission. Check the <see
-         cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
+         to help secure your data during transmission. Check the <see cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
 
         
 
-         property to determine whether mutual authentication occurred. You can get information about the remote client or server using the <see
-         cref="P:System.Net.Security.NegotiateStream.RemoteIdentity" />
+         property to determine whether mutual authentication occurred. You can get information about the remote client or server using the <see cref="P:System.Net.Security.NegotiateStream.RemoteIdentity" />
 
         
 
          property.</para
       >
       <para
-        >If the authentication fails, you will receive an <see
-         cref="T:System.Security.Authentication.AuthenticationException" />
+        >If the authentication fails, you will receive an <see cref="T:System.Security.Authentication.AuthenticationException" />
 
         
 
-         or a <see
-         cref="T:System.Security.Authentication.InvalidCredentialException" />
+         or a <see cref="T:System.Security.Authentication.InvalidCredentialException" />
 
         
 
         . In this case, you can retry the authentication with a different credential.</para
       >
       <para
-        >You send data using the synchronous <see
-         cref="M:System.Net.Security.NegotiateStream.Write(System.Byte[],System.Int32,System.Int32)" />
+        >You send data using the synchronous <see cref="M:System.Net.Security.NegotiateStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
         
 
-         or asynchronous <see
-         cref="M:System.Net.Security.NegotiateStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+         or asynchronous <see cref="M:System.Net.Security.NegotiateStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
         
 
-         methods. You receive data using the synchronous <see
-         cref="M:System.Net.Security.NegotiateStream.Read(System.Byte[],System.Int32,System.Int32)" />
+         methods. You receive data using the synchronous <see cref="M:System.Net.Security.NegotiateStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
         
 
-         or asynchronous <see
-         cref="M:System.Net.Security.NegotiateStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+         or asynchronous <see cref="M:System.Net.Security.NegotiateStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
         
 
-         methods. If security services such as encryption or signing are enabled, these are automatically applied to your data by the <see
-         cref="T:System.Net.Security.NegotiateStream" />
+         methods. If security services such as encryption or signing are enabled, these are automatically applied to your data by the <see cref="T:System.Net.Security.NegotiateStream" />
 
         
 
         .</para
       >
       <para
-        >The <see
-         cref="T:System.Net.Security.NegotiateStream" />
+        >The <see cref="T:System.Net.Security.NegotiateStream" />
 
         
 
-         transmits data using a stream that you supply when creating the <see
-         cref="T:System.Net.Security.NegotiateStream" />
+         transmits data using a stream that you supply when creating the <see cref="T:System.Net.Security.NegotiateStream" />
 
         
 
-        . When you supply this underlying stream, you have the option to specify whether closing the <see
-         cref="T:System.Net.Security.NegotiateStream" />
+        . When you supply this underlying stream, you have the option to specify whether closing the <see cref="T:System.Net.Security.NegotiateStream" />
 
         
 
@@ -195,13 +173,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Security.NegotiateStream" />
+            >Initializes a new instance of the <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
-             class using the specified <see
-             cref="T:System.IO.Stream" />
+             class using the specified <see cref="T:System.IO.Stream" />
 
             
 
@@ -209,17 +185,19 @@
           >
         </summary>
         <param name="innerStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
-           object used by the <see
-           cref="T:System.Net.Security.NegotiateStream" />
+           object used by the <see cref="T:System.Net.Security.NegotiateStream" />
 
           
 
@@ -255,23 +233,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you specify true for the <paramref
-             name="leaveStreamOpen" />
+            >When you specify true for the <paramref name="leaveStreamOpen" />
 
             
 
-             parameter, closing the <see
-             cref="T:System.Net.Security.NegotiateStream" />
+             parameter, closing the <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
-             has no effect on the <paramref
-             name="innerStream" />
+             has no effect on the <paramref name="innerStream" />
 
             
 
-             stream; you must explicitly close <paramref
-             name="innerStream" />
+             stream; you must explicitly close <paramref name="innerStream" />
 
             
 
@@ -281,13 +255,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Security.NegotiateStream" />
+            >Initializes a new instance of the <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
-             class using the specified <see
-             cref="T:System.IO.Stream" />
+             class using the specified <see cref="T:System.IO.Stream" />
 
             
 
@@ -295,44 +267,46 @@
           >
         </summary>
         <param name="innerStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
-           object used by the <see
-           cref="T:System.Net.Security.NegotiateStream" />
+           object used by the <see cref="T:System.Net.Security.NegotiateStream" />
 
           
 
            for sending and receiving data.</param
         >
         <param name="leaveInnerStreamOpen">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to indicate that closing this <see
-           cref="T:System.Net.Security.NegotiateStream" />
+          true to indicate that closing this <see cref="T:System.Net.Security.NegotiateStream" />
 
           
 
-           has no effect on <paramref
-           name="innerstream" />
+           has no effect on <paramref name="innerstream" />
 
           
 
-          ; false to indicate that closing this <see
-           cref="T:System.Net.Security.NegotiateStream" />
+          ; false to indicate that closing this <see cref="T:System.Net.Security.NegotiateStream" />
 
           
 
-           also closes <paramref
-           name="innerStream" />
+           also closes <paramref name="innerStream" />
 
           
 
@@ -365,59 +339,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The authentication uses the client's <see
-             cref="P:System.Net.CredentialCache.DefaultCredentials" />
+            >The authentication uses the client's <see cref="P:System.Net.CredentialCache.DefaultCredentials" />
 
             
 
-            . No Service Principal Name (SPN) is specified for the server. The impersonation level is <see
-             cref="F:System.Security.Principal.TokenImpersonationLevel.Identification" />
+            . No Service Principal Name (SPN) is specified for the server. The impersonation level is <see cref="F:System.Security.Principal.TokenImpersonationLevel.Identification" />
 
             
 
-            , the security level is <see
-             cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
+            , the security level is <see cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
 
             
 
-            , and mutual authentication is requested. The <see
-             cref="T:System.Net.Security.NegotiateStream" />
+            , and mutual authentication is requested. The <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
              class will construct the SPN used for mutual authentication. </para
           >
           <para
-            >When authentication succeeds, you must check the <see
-             cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
+            >When authentication succeeds, you must check the <see cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
 
             
 
-             and <see
-             cref="P:System.Net.Security.NegotiateStream.IsSigned" />
+             and <see cref="P:System.Net.Security.NegotiateStream.IsSigned" />
 
             
 
-             properties to determine what security services are used by the <see
-             cref="T:System.Net.Security.NegotiateStream" />
+             properties to determine what security services are used by the <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
-            . Check the <see
-             cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
+            . Check the <see cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
 
             
 
              property to determine whether mutual authentication occurred.</para
           >
           <para
-            >If the authentication fails, you receive an <see
-             cref="T:System.Security.Authentication.AuthenticationException" />
+            >If the authentication fails, you receive an <see cref="T:System.Security.Authentication.AuthenticationException" />
 
             
 
-             or an <see
-             cref="T:System.Security.Authentication.InvalidCredentialException" />
+             or an <see cref="T:System.Security.Authentication.InvalidCredentialException" />
 
             
 
@@ -461,41 +425,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The impersonation level is <see
-             cref="F:System.Security.Principal.TokenImpersonationLevel.Identification" />
+            >The impersonation level is <see cref="F:System.Security.Principal.TokenImpersonationLevel.Identification" />
 
             
 
-            , the security level is <see
-             cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
+            , the security level is <see cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
 
             
 
-            , and mutual authentication is requested. The <see
-             cref="T:System.Net.Security.NegotiateStream" />
+            , and mutual authentication is requested. The <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
              class will construct the SPN used for mutual authentication. </para
           >
           <para
-            >When authentication succeeds, you must check the <see
-             cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
+            >When authentication succeeds, you must check the <see cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
 
             
 
-             and <see
-             cref="P:System.Net.Security.NegotiateStream.IsSigned" />
+             and <see cref="P:System.Net.Security.NegotiateStream.IsSigned" />
 
             
 
-             properties to determine what security services are used by the <see
-             cref="T:System.Net.Security.NegotiateStream" />
+             properties to determine what security services are used by the <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
-            . Check the <see
-             cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
+            . Check the <see cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
 
             
 
@@ -507,19 +464,26 @@
           <para>Called by clients to authenticate the client, and optionally the server, in a client-server connection. The authentication process uses the specified client credential. </para>
         </summary>
         <param name="credential">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.NetworkCredential" />
+          The <see cref="T:System.Net.NetworkCredential" />
 
           
 
            that is used to establish the identity of the client.</param
         >
         <param name="targetName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -563,46 +527,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <paramref
-             name="requiredProtectionLevel" />
+            >Use the <paramref name="requiredProtectionLevel" />
 
             
 
-             parameter to request security services for data transmitted using the authenticated stream. For example, to have the data encrypted and signed, specify the <see
-             cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
+             parameter to request security services for data transmitted using the authenticated stream. For example, to have the data encrypted and signed, specify the <see cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
 
             
 
-             value. Successful authentication does not guarantee that the requested <see
-             cref="T:System.Net.Security.ProtectionLevel" />
+             value. Successful authentication does not guarantee that the requested <see cref="T:System.Net.Security.ProtectionLevel" />
 
             
 
-             has been granted. You must check the <see
-             cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
+             has been granted. You must check the <see cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
 
             
 
-             and <see
-             cref="P:System.Net.Security.NegotiateStream.IsSigned" />
+             and <see cref="P:System.Net.Security.NegotiateStream.IsSigned" />
 
             
 
-             properties to determine what security services are used by the <see
-             cref="T:System.Net.Security.NegotiateStream" />
+             properties to determine what security services are used by the <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
             .</para
           >
           <para
-            >If the authentication fails, you receive an <see
-             cref="T:System.Security.Authentication.AuthenticationException" />
+            >If the authentication fails, you receive an <see cref="T:System.Security.Authentication.AuthenticationException" />
 
             
 
-             or an <see
-             cref="T:System.Security.Authentication.InvalidCredentialException" />
+             or an <see cref="T:System.Security.Authentication.InvalidCredentialException" />
 
             
 
@@ -614,43 +570,56 @@
           <para>Called by clients to authenticate the client, and optionally the server, in a client-server connection. The authentication process uses the specified credentials and authentication options.</para>
         </summary>
         <param name="credential">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.NetworkCredential" />
+          The <see cref="T:System.Net.NetworkCredential" />
 
           
 
            that is used to establish the identity of the client.</param
         >
         <param name="targetName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The Service Principal Name (SPN) that uniquely identifies the server to authenticate.</param
         >
         <param name="requiredProtectionLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Net.Security.ProtectionLevel" />
+          One of the <see cref="T:System.Net.Security.ProtectionLevel" />
 
           
 
            values, indicating the security services for the stream.</param
         >
         <param name="allowedImpersonationLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Principal.TokenImpersonationLevel" />
+          One of the <see cref="T:System.Security.Principal.TokenImpersonationLevel" />
 
           
 
@@ -683,62 +652,52 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The authentication uses the server's <see
-             cref="P:System.Net.CredentialCache.DefaultCredentials" />
+            >The authentication uses the server's <see cref="P:System.Net.CredentialCache.DefaultCredentials" />
 
             
 
-            . No Service Principal Name (SPN) is specified for the server. The impersonation level is <see
-             cref="F:System.Security.Principal.TokenImpersonationLevel.Identification" />
+            . No Service Principal Name (SPN) is specified for the server. The impersonation level is <see cref="F:System.Security.Principal.TokenImpersonationLevel.Identification" />
 
             
 
-            , and the security level is <see
-             cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
+            , and the security level is <see cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
 
             
 
             .</para
           >
           <para
-            >When authentication succeeds, you must check the <see
-             cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
+            >When authentication succeeds, you must check the <see cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
 
             
 
-             and <see
-             cref="P:System.Net.Security.NegotiateStream.IsSigned" />
+             and <see cref="P:System.Net.Security.NegotiateStream.IsSigned" />
 
             
 
-             properties to determine what security services are used by the <see
-             cref="T:System.Net.Security.NegotiateStream" />
+             properties to determine what security services are used by the <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
-            . Check the <see
-             cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
+            . Check the <see cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
 
             
 
              property to determine whether mutual authentication occurred.</para
           >
           <para
-            >This method blocks until the operation completes. To prevent blocking until the operation completes, use one of the <see
-             cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
+            >This method blocks until the operation completes. To prevent blocking until the operation completes, use one of the <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
 
             
 
              method overloads.</para
           >
           <para
-            >If the authentication fails, you receive an <see
-             cref="T:System.Security.Authentication.AuthenticationException" />
+            >If the authentication fails, you receive an <see cref="T:System.Security.Authentication.AuthenticationException" />
 
             
 
-             or an <see
-             cref="T:System.Security.Authentication.InvalidCredentialException" />
+             or an <see cref="T:System.Security.Authentication.InvalidCredentialException" />
 
             
 
@@ -786,44 +745,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When authentication succeeds, you must check the <see
-             cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
+            >When authentication succeeds, you must check the <see cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
 
             
 
-             and <see
-             cref="P:System.Net.Security.NegotiateStream.IsSigned" />
+             and <see cref="P:System.Net.Security.NegotiateStream.IsSigned" />
 
             
 
-             properties to determine what security services are used by the <see
-             cref="T:System.Net.Security.NegotiateStream" />
+             properties to determine what security services are used by the <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
-            . Check the <see
-             cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
+            . Check the <see cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
 
             
 
              property to determine whether mutual authentication occurred.</para
           >
           <para
-            >This method blocks until the operation completes. To prevent blocking until the operation completes, use one of the <see
-             cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
+            >This method blocks until the operation completes. To prevent blocking until the operation completes, use one of the <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
 
             
 
              method overloads.</para
           >
           <para
-            >If the authentication fails, you receive an <see
-             cref="T:System.Security.Authentication.AuthenticationException" />
+            >If the authentication fails, you receive an <see cref="T:System.Security.Authentication.AuthenticationException" />
 
             
 
-             or an <see
-             cref="T:System.Security.Authentication.InvalidCredentialException" />
+             or an <see cref="T:System.Security.Authentication.InvalidCredentialException" />
 
             
 
@@ -835,36 +787,45 @@
           <para>Called by servers to authenticate the client, and optionally the server, in a client-server connection. The authentication process uses the specified server credentials and authentication options.</para>
         </summary>
         <param name="credential">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.NetworkCredential" />
+          The <see cref="T:System.Net.NetworkCredential" />
 
           
 
            that is used to establish the identity of the server.</param
         >
         <param name="requiredProtectionLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Net.Security.ProtectionLevel" />
+          One of the <see cref="T:System.Net.Security.ProtectionLevel" />
 
           
 
            values, indicating the security services for the stream.</param
         >
         <param name="requiredImpersonationLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Principal.TokenImpersonationLevel" />
+          One of the <see cref="T:System.Security.Principal.TokenImpersonationLevel" />
 
           
 
@@ -903,60 +864,50 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The authentication uses the client's <see
-             cref="P:System.Net.CredentialCache.DefaultCredentials" />
+            >The authentication uses the client's <see cref="P:System.Net.CredentialCache.DefaultCredentials" />
 
             
 
-            . No Service Principal Name (SPN) is specified for the server. The impersonation level is <see
-             cref="F:System.Security.Principal.TokenImpersonationLevel.Identification" />
+            . No Service Principal Name (SPN) is specified for the server. The impersonation level is <see cref="F:System.Security.Principal.TokenImpersonationLevel.Identification" />
 
             
 
-            , and the security level is <see
-             cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
+            , and the security level is <see cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
 
             
 
-            . The <see
-             cref="T:System.Net.Security.NegotiateStream" />
+            . The <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
              class will construct the SPN used for mutual authentication. </para
           >
           <para
-            >This method is asynchronous and does not block while the operation completes. To block until the operation completes, use one of the <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
+            >This method is asynchronous and does not block while the operation completes. To block until the operation completes, use one of the <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
 
             
 
              method overloads. </para
           >
           <para
-            >The asynchronous authentication operation must be completed by calling the <see
-             cref="M:System.Net.Security.NegotiateStream.EndAuthenticateAsClient(System.IAsyncResult)" />
+            >The asynchronous authentication operation must be completed by calling the <see cref="M:System.Net.Security.NegotiateStream.EndAuthenticateAsClient(System.IAsyncResult)" />
 
             
 
-             method. Typically, the method is invoked by the <paramref
-             name="asyncCallback" />
+             method. Typically, the method is invoked by the <paramref name="asyncCallback" />
 
             
 
-             delegate. For detailed information about using the asynchronous programming model, see <format
-             type="text/html">
+             delegate. For detailed information about using the asynchronous programming model, see <format type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
           </para>
           <para
-            >If the authentication fails, you receive an <see
-             cref="T:System.Security.Authentication.AuthenticationException" />
+            >If the authentication fails, you receive an <see cref="T:System.Security.Authentication.AuthenticationException" />
 
             
 
-             or an <see
-             cref="T:System.Security.Authentication.InvalidCredentialException" />
+             or an <see cref="T:System.Security.Authentication.InvalidCredentialException" />
 
             
 
@@ -970,8 +921,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -979,24 +929,30 @@
           >
         </returns>
         <param name="asyncCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when the authentication is complete.</param
         >
         <param name="asyncState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined object containing information about the operation. This object is passed to the <paramref
-           name="asyncCallback" />
+          A user-defined object containing information about the operation. This object is passed to the <paramref name="asyncCallback" />
 
           
 
@@ -1037,37 +993,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is asynchronous and does not block while the operation completes. To block until the operation completes, use one of the <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
+            >This method is asynchronous and does not block while the operation completes. To block until the operation completes, use one of the <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
 
             
 
              method overloads.</para
           >
           <para
-            >The asynchronous authentication operation must be completed by calling the <see
-             cref="M:System.Net.Security.NegotiateStream.EndAuthenticateAsClient(System.IAsyncResult)" />
+            >The asynchronous authentication operation must be completed by calling the <see cref="M:System.Net.Security.NegotiateStream.EndAuthenticateAsClient(System.IAsyncResult)" />
 
             
 
-             method. Typically, the method is invoked by the <paramref
-             name="asyncCallback" />
+             method. Typically, the method is invoked by the <paramref name="asyncCallback" />
 
             
 
-             delegate. For detailed information about using the asynchronous programming model, see <format
-             type="text/html">
+             delegate. For detailed information about using the asynchronous programming model, see <format type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
           </para>
           <para
-            >If the authentication fails, you receive an <see
-             cref="T:System.Security.Authentication.AuthenticationException" />
+            >If the authentication fails, you receive an <see cref="T:System.Security.Authentication.AuthenticationException" />
 
             
 
-             or an <see
-             cref="T:System.Security.Authentication.InvalidCredentialException" />
+             or an <see cref="T:System.Security.Authentication.InvalidCredentialException" />
 
             
 
@@ -1081,8 +1031,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -1090,43 +1039,56 @@
           >
         </returns>
         <param name="credential">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.NetworkCredential" />
+          The <see cref="T:System.Net.NetworkCredential" />
 
           
 
            that is used to establish the identity of the client.</param
         >
         <param name="targetName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The Service Principal Name (SPN) that uniquely identifies the server to authenticate.</param
         >
         <param name="asyncCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when the authentication is complete.</param
         >
         <param name="asyncState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined object containing information about the write operation. This object is passed to the <paramref
-           name="asyncCallback" />
+          A user-defined object containing information about the write operation. This object is passed to the <paramref name="asyncCallback" />
 
           
 
@@ -1172,70 +1134,58 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <paramref
-             name="requiredProtectionLevel" />
+            >Use the <paramref name="requiredProtectionLevel" />
 
             
 
-             parameter to request security services for data transmitted using the authenticated stream. For example, to have the data encrypted and signed, specify the <see
-             cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
+             parameter to request security services for data transmitted using the authenticated stream. For example, to have the data encrypted and signed, specify the <see cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
 
             
 
-             value. Successful authentication does not guarantee that the requested <see
-             cref="T:System.Net.Security.ProtectionLevel" />
+             value. Successful authentication does not guarantee that the requested <see cref="T:System.Net.Security.ProtectionLevel" />
 
             
 
-             has been granted. You must check the <see
-             cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
+             has been granted. You must check the <see cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
 
             
 
-             and <see
-             cref="P:System.Net.Security.NegotiateStream.IsSigned" />
+             and <see cref="P:System.Net.Security.NegotiateStream.IsSigned" />
 
             
 
-             properties to determine what security services are used by the <see
-             cref="T:System.Net.Security.NegotiateStream" />
+             properties to determine what security services are used by the <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
             .</para
           >
           <para
-            >This method is asynchronous and does not block while the operation completes. To block until the operation completes, use one of the <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
+            >This method is asynchronous and does not block while the operation completes. To block until the operation completes, use one of the <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
 
             
 
              method overloads.</para
           >
           <para
-            >The asynchronous authentication operation must be completed by calling the <see
-             cref="M:System.Net.Security.NegotiateStream.EndAuthenticateAsClient(System.IAsyncResult)" />
+            >The asynchronous authentication operation must be completed by calling the <see cref="M:System.Net.Security.NegotiateStream.EndAuthenticateAsClient(System.IAsyncResult)" />
 
             
 
-             method. Typically, the method is invoked by the <paramref
-             name="asyncCallback" />
+             method. Typically, the method is invoked by the <paramref name="asyncCallback" />
 
             
 
-             delegate. For detailed information about using the asynchronous programming model, see <format
-             type="text/html">
+             delegate. For detailed information about using the asynchronous programming model, see <format type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
           </para>
           <para
-            >If the authentication fails, you receive an <see
-             cref="T:System.Security.Authentication.AuthenticationException" />
+            >If the authentication fails, you receive an <see cref="T:System.Security.Authentication.AuthenticationException" />
 
             
 
-             or an <see
-             cref="T:System.Security.Authentication.InvalidCredentialException" />
+             or an <see cref="T:System.Security.Authentication.InvalidCredentialException" />
 
             
 
@@ -1249,8 +1199,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -1258,67 +1207,86 @@
           >
         </returns>
         <param name="credential">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.NetworkCredential" />
+          The <see cref="T:System.Net.NetworkCredential" />
 
           
 
            that is used to establish the identity of the client.</param
         >
         <param name="targetName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The Service Principal Name (SPN) that uniquely identifies the server to authenticate.</param
         >
         <param name="requiredProtectionLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Net.Security.ProtectionLevel" />
+          One of the <see cref="T:System.Net.Security.ProtectionLevel" />
 
           
 
            values, indicating the security services for the stream.</param
         >
         <param name="allowedImpersonationLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Principal.TokenImpersonationLevel" />
+          One of the <see cref="T:System.Security.Principal.TokenImpersonationLevel" />
 
           
 
            values, indicating how the server can use the client's credentials to access resources.</param
         >
         <param name="asyncCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when the authentication is complete. </param
         >
         <param name="asyncState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined object containing information about the write operation. This object is passed to the <paramref
-           name="asyncCallback" />
+          A user-defined object containing information about the write operation. This object is passed to the <paramref name="asyncCallback" />
 
           
 
@@ -1357,62 +1325,52 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The authentication uses the server's <see
-             cref="P:System.Net.CredentialCache.DefaultCredentials" />
+            >The authentication uses the server's <see cref="P:System.Net.CredentialCache.DefaultCredentials" />
 
             
 
-            . No Service Principal Name (SPN) is specified for the server. The impersonation level is <see
-             cref="F:System.Security.Principal.TokenImpersonationLevel.Identification" />
+            . No Service Principal Name (SPN) is specified for the server. The impersonation level is <see cref="F:System.Security.Principal.TokenImpersonationLevel.Identification" />
 
             
 
-            , the security level is <see
-             cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
+            , the security level is <see cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
 
             
 
             .</para
           >
           <para
-            >When authentication succeeds, you must check the <see
-             cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
+            >When authentication succeeds, you must check the <see cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
 
             
 
-             and <see
-             cref="P:System.Net.Security.NegotiateStream.IsSigned" />
+             and <see cref="P:System.Net.Security.NegotiateStream.IsSigned" />
 
             
 
-             properties to determine what security services are used by the <see
-             cref="T:System.Net.Security.NegotiateStream" />
+             properties to determine what security services are used by the <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
-            . Check the <see
-             cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
+            . Check the <see cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
 
             
 
              property to determine whether mutual authentication occurred.</para
           >
           <para
-            >To block until the operation completes, use one of the <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
+            >To block until the operation completes, use one of the <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
 
             
 
              method overloads.</para
           >
           <para
-            >If the authentication fails, you receive an <see
-             cref="T:System.Security.Authentication.AuthenticationException" />
+            >If the authentication fails, you receive an <see cref="T:System.Security.Authentication.AuthenticationException" />
 
             
 
-             or an <see
-             cref="T:System.Security.Authentication.InvalidCredentialException" />
+             or an <see cref="T:System.Security.Authentication.InvalidCredentialException" />
 
             
 
@@ -1426,8 +1384,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -1435,24 +1392,30 @@
           >
         </returns>
         <param name="asyncCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when the authentication is complete.</param
         >
         <param name="asyncState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined object containing information about the operation. This object is passed to the <paramref
-           name="asyncCallback" />
+          A user-defined object containing information about the operation. This object is passed to the <paramref name="asyncCallback" />
 
           
 
@@ -1497,70 +1460,58 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <paramref
-             name="requiredProtectionLevel" />
+            >Use the <paramref name="requiredProtectionLevel" />
 
             
 
-             parameter to request security services for data transmitted using the authenticated stream. For example, to have the data encrypted and signed, specify the <see
-             cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
+             parameter to request security services for data transmitted using the authenticated stream. For example, to have the data encrypted and signed, specify the <see cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
 
             
 
-             value. Successful authentication does not guarantee that, the requested <see
-             cref="T:System.Net.Security.ProtectionLevel" />
+             value. Successful authentication does not guarantee that, the requested <see cref="T:System.Net.Security.ProtectionLevel" />
 
             
 
-             has been granted. You must check the <see
-             cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
+             has been granted. You must check the <see cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
 
             
 
-             and <see
-             cref="P:System.Net.Security.NegotiateStream.IsSigned" />
+             and <see cref="P:System.Net.Security.NegotiateStream.IsSigned" />
 
             
 
-             properties to determine what security services are used by the <see
-             cref="T:System.Net.Security.NegotiateStream" />
+             properties to determine what security services are used by the <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
             .</para
           >
           <para
-            >This method is asynchronous and does not block while the operation completes. To block until the operation completes, use one of the <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
+            >This method is asynchronous and does not block while the operation completes. To block until the operation completes, use one of the <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
 
             
 
              method overloads.</para
           >
           <para
-            >The asynchronous authentication operation must be completed by calling the <see
-             cref="M:System.Net.Security.NegotiateStream.EndAuthenticateAsServer(System.IAsyncResult)" />
+            >The asynchronous authentication operation must be completed by calling the <see cref="M:System.Net.Security.NegotiateStream.EndAuthenticateAsServer(System.IAsyncResult)" />
 
             
 
-             method. Typically, the method is invoked by the <paramref
-             name="asyncCallback" />
+             method. Typically, the method is invoked by the <paramref name="asyncCallback" />
 
             
 
-             delegate. For detailed information about using the asynchronous programming model, see <format
-             type="text/html">
+             delegate. For detailed information about using the asynchronous programming model, see <format type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
           </para>
           <para
-            >If the authentication fails, you receive an <see
-             cref="T:System.Security.Authentication.AuthenticationException" />
+            >If the authentication fails, you receive an <see cref="T:System.Security.Authentication.AuthenticationException" />
 
             
 
-             or an <see
-             cref="T:System.Security.Authentication.InvalidCredentialException" />
+             or an <see cref="T:System.Security.Authentication.InvalidCredentialException" />
 
             
 
@@ -1574,8 +1525,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -1583,60 +1533,75 @@
           >
         </returns>
         <param name="credential">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.NetworkCredential" />
+          The <see cref="T:System.Net.NetworkCredential" />
 
           
 
            that is used to establish the identity of the client.</param
         >
         <param name="requiredProtectionLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Net.Security.ProtectionLevel" />
+          One of the <see cref="T:System.Net.Security.ProtectionLevel" />
 
           
 
            values, indicating the security services for the stream.</param
         >
         <param name="requiredImpersonationLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Principal.TokenImpersonationLevel" />
+          One of the <see cref="T:System.Security.Principal.TokenImpersonationLevel" />
 
           
 
            values, indicating how the server can use the client's credentials to access resources.</param
         >
         <param name="asyncCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when the authentication is complete.</param
         >
         <param name="asyncState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined object containing information about the operation. This object is passed to the <paramref
-           name="asyncCallback" />
+          A user-defined object containing information about the operation. This object is passed to the <paramref name="asyncCallback" />
 
           
 
@@ -1679,60 +1644,50 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If encryption, signing, or encryption and signing are enabled, the read operation reads the data from the underlying stream, checks the integrity of the data, and decrypts it. If no security services such as data encryption or signing are in use, this method starts an asynchronous read operation on the underlying stream.</para>
           <para
-            >This method is asynchronous and does not block while the operation completes. To block until the operation completes, use the <see
-             cref="M:System.Net.Security.NegotiateStream.Read(System.Byte[],System.Int32,System.Int32)" />
+            >This method is asynchronous and does not block while the operation completes. To block until the operation completes, use the <see cref="M:System.Net.Security.NegotiateStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
              method.</para
           >
           <para
-            >The asynchronous read operation must be completed by calling the <see
-             cref="M:System.Net.Security.NegotiateStream.EndRead(System.IAsyncResult)" />
+            >The asynchronous read operation must be completed by calling the <see cref="M:System.Net.Security.NegotiateStream.EndRead(System.IAsyncResult)" />
 
             
 
-             method. Typically, the method is invoked by the <paramref
-             name="asyncCallback" />
+             method. Typically, the method is invoked by the <paramref name="asyncCallback" />
 
             
 
-             delegate. For detailed information about using the asynchronous programming model, see <format
-             type="text/html">
+             delegate. For detailed information about using the asynchronous programming model, see <format type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
           </para>
           <para
-            >The <see
-             cref="T:System.Net.Security.NegotiateStream" />
+            >The <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
-             class does not support multiple simultaneous read operations. If you attempt to start a read operation while another read operation is already executing on the same stream, a <see
-             cref="T:System.NotSupportedException" />
+             class does not support multiple simultaneous read operations. If you attempt to start a read operation while another read operation is already executing on the same stream, a <see cref="T:System.NotSupportedException" />
 
             
 
              exception will be thrown.</para
           >
           <para
-            >You cannot call this method until you have successfully authenticated. To authenticate, call one of the <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
+            >You cannot call this method until you have successfully authenticated. To authenticate, call one of the <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
 
             
 
-            , <see
-             cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
+            , <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
 
             
 
-            , <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
+            , <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
 
             
 
-            , or <see
-             cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
+            , or <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
 
             
 
@@ -1746,8 +1701,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -1755,55 +1709,71 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Byte" />
+          A <see cref="T:System.Byte" />
 
           
 
            array that receives the bytes read from the stream.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based location in <paramref
-           name="buffer" />
+          The zero-based location in <paramref name="buffer" />
 
           
 
            at which to begin storing the data read from this stream.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The maximum number of bytes to read from the stream.</param
         >
         <param name="asyncCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when the read operation is complete. </param
         >
         <param name="asyncState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined object containing information about the read operation. This object is passed to the <paramref
-           name="asyncCallback" />
+          A user-defined object containing information about the read operation. This object is passed to the <paramref name="asyncCallback" />
 
           
 
@@ -1846,60 +1816,50 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If encryption, signing, or encryption and signing are enabled, this method reads the data from buffer, encrypts, signs, or encrypts and signs it, and transmits it using the underlying stream. If no security services such as data encryption or signing are in use, this method starts an asynchronous write operation on the underlying stream. </para>
           <para
-            >This method is asynchronous and does not block while the operation completes. To block until the operation completes, use the <see
-             cref="M:System.Net.Security.NegotiateStream.Read(System.Byte[],System.Int32,System.Int32)" />
+            >This method is asynchronous and does not block while the operation completes. To block until the operation completes, use the <see cref="M:System.Net.Security.NegotiateStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
              method.</para
           >
           <para
-            >The asynchronous read operation must be completed by calling the <see
-             cref="M:System.Net.Security.NegotiateStream.EndWrite(System.IAsyncResult)" />
+            >The asynchronous read operation must be completed by calling the <see cref="M:System.Net.Security.NegotiateStream.EndWrite(System.IAsyncResult)" />
 
             
 
-             method. Typically, the method is invoked by the <paramref
-             name="asyncCallback" />
+             method. Typically, the method is invoked by the <paramref name="asyncCallback" />
 
             
 
-             delegate. For detailed information about using the asynchronous programming model, see <format
-             type="text/html">
+             delegate. For detailed information about using the asynchronous programming model, see <format type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
           </para>
           <para
-            >The <see
-             cref="T:System.Net.Security.NegotiateStream" />
+            >The <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
-             class does not support multiple simultaneous write operations. If you attempt to start a write operation while another write operation is already executing on the same stream, a <see
-             cref="T:System.NotSupportedException" />
+             class does not support multiple simultaneous write operations. If you attempt to start a write operation while another write operation is already executing on the same stream, a <see cref="T:System.NotSupportedException" />
 
             
 
              exception will be thrown.</para
           >
           <para
-            >You cannot call this method until you have successfully authenticated. To authenticate, call one of the <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
+            >You cannot call this method until you have successfully authenticated. To authenticate, call one of the <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
 
             
 
-            , <see
-             cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
+            , <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
 
             
 
-            , <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
+            , <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
 
             
 
-            , or <see
-             cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
+            , or <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
 
             
 
@@ -1909,8 +1869,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Begins an asynchronous write operation that writes <see
-             cref="T:System.Byte" />
+            >Begins an asynchronous write operation that writes <see cref="T:System.Byte" />
 
             
 
@@ -1920,8 +1879,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -1929,65 +1887,79 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Byte" />
+          A <see cref="T:System.Byte" />
 
           
 
            array that supplies the bytes to be written to the stream.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based location in<paramref
-           name=" buffer" />
+          The zero-based location in<paramref name=" buffer" />
 
           
 
            at which to begin reading bytes to be written to the stream.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Int32" />
+          An <see cref="T:System.Int32" />
 
           
 
-           value that specifies the number of bytes to read from <paramref
-           name="buffer" />
+           value that specifies the number of bytes to read from <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="asyncCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when the write operation is complete. </param
         >
         <param name="asyncState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined object containing information about the write operation. This object is passed to the <paramref
-           name="asyncCallback" />
+          A user-defined object containing information about the write operation. This object is passed to the <paramref name="asyncCallback" />
 
           
 
@@ -2012,13 +1984,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If successful authentication has occurred, this property returns the value returned by invoking the <see
-             cref="P:System.IO.Stream.CanRead" />
+            >If successful authentication has occurred, this property returns the value returned by invoking the <see cref="P:System.IO.Stream.CanRead" />
 
             
 
-             property on the underlying stream. The underlying stream is specified when you create an instance of the <see
-             cref="T:System.Net.Security.NegotiateStream" />
+             property on the underlying stream. The underlying stream is specified when you create an instance of the <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
@@ -2028,8 +1998,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -2055,13 +2024,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You should not attempt to set the position of the <see
-             cref="T:System.Net.Security.NegotiateStream" />
+            >You should not attempt to set the position of the <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
-             object or its underlying stream. The underlying stream is specified when you create an instance of the <see
-             cref="T:System.Net.Security.NegotiateStream" />
+             object or its underlying stream. The underlying stream is specified when you create an instance of the <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
@@ -2071,8 +2038,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -2103,13 +2069,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns the value returned by invoking the <see
-             cref="P:System.IO.Stream.CanTimeout" />
+            >This property returns the value returned by invoking the <see cref="P:System.IO.Stream.CanTimeout" />
 
             
 
-             property on the underlying stream. The underlying stream is specified when you create an instance of the <see
-             cref="T:System.Net.Security.NegotiateStream" />
+             property on the underlying stream. The underlying stream is specified when you create an instance of the <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
@@ -2119,8 +2083,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -2146,13 +2109,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If successful authentication has occurred, this property returns the value returned by invoking the <see
-             cref="P:System.IO.Stream.CanWrite" />
+            >If successful authentication has occurred, this property returns the value returned by invoking the <see cref="P:System.IO.Stream.CanWrite" />
 
             
 
-             property on the underlying stream. The underlying stream is specified when you create an instance of the <see
-             cref="T:System.Net.Security.NegotiateStream" />
+             property on the underlying stream. The underlying stream is specified when you create an instance of the <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
@@ -2162,8 +2123,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -2199,36 +2159,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Net.Security.NegotiateStream" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
@@ -2238,8 +2192,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Net.Security.NegotiateStream" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
@@ -2247,7 +2200,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2285,44 +2242,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the operation has not completed, this method blocks until it does. When the authentication succeeds, you must check the <see
-             cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
+            >If the operation has not completed, this method blocks until it does. When the authentication succeeds, you must check the <see cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
 
             
 
-             and <see
-             cref="P:System.Net.Security.NegotiateStream.IsSigned" />
+             and <see cref="P:System.Net.Security.NegotiateStream.IsSigned" />
 
             
 
-             properties to determine what security services are used by the <see
-             cref="T:System.Net.Security.NegotiateStream" />
+             properties to determine what security services are used by the <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
-            . Check the <see
-             cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
+            . Check the <see cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
 
             
 
              property to determine whether mutual authentication occurred.</para
           >
           <para
-            >If the authentication fails, you receive an <see
-             cref="T:System.Security.Authentication.AuthenticationException" />
+            >If the authentication fails, you receive an <see cref="T:System.Security.Authentication.AuthenticationException" />
 
             
 
-             or an <see
-             cref="T:System.Security.Authentication.InvalidCredentialException" />
+             or an <see cref="T:System.Security.Authentication.InvalidCredentialException" />
 
             
 
             . In this case, you can retry the authentication with a different credential. </para
           >
           <para
-            >To perform this operation synchronously, use one of the <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
+            >To perform this operation synchronously, use one of the <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
 
             
 
@@ -2332,8 +2282,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Ends a pending asynchronous client authentication operation that was started with a call to <see
-             cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
+            >Ends a pending asynchronous client authentication operation that was started with a call to <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
 
             
 
@@ -2341,17 +2290,19 @@
           >
         </summary>
         <param name="asyncResult">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IAsyncResult" />
+          An <see cref="T:System.IAsyncResult" />
 
           
 
-           instance returned by a call to <see
-           cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
+           instance returned by a call to <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
 
           
 
@@ -2390,44 +2341,37 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the operation has not completed, this method blocks until it does. </para>
           <para
-            >When authentication succeeds, you must check the <see
-             cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
+            >When authentication succeeds, you must check the <see cref="P:System.Net.Security.NegotiateStream.IsEncrypted" />
 
             
 
-             and <see
-             cref="P:System.Net.Security.NegotiateStream.IsSigned" />
+             and <see cref="P:System.Net.Security.NegotiateStream.IsSigned" />
 
             
 
-             properties to determine what security services are used by the <see
-             cref="T:System.Net.Security.NegotiateStream" />
+             properties to determine what security services are used by the <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
-            . Check the <see
-             cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
+            . Check the <see cref="P:System.Net.Security.NegotiateStream.IsMutuallyAuthenticated" />
 
             
 
              property to determine whether mutual authentication occurred.</para
           >
           <para
-            >If the authentication fails, you receive an <see
-             cref="T:System.Security.Authentication.AuthenticationException" />
+            >If the authentication fails, you receive an <see cref="T:System.Security.Authentication.AuthenticationException" />
 
             
 
-             or an <see
-             cref="T:System.Security.Authentication.InvalidCredentialException" />
+             or an <see cref="T:System.Security.Authentication.InvalidCredentialException" />
 
             
 
             . In this case, you can retry the authentication with a different credential. </para
           >
           <para
-            >To perform this operation synchronously, use the <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
+            >To perform this operation synchronously, use the <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
 
             
 
@@ -2437,8 +2381,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Ends a pending asynchronous client authentication operation that was started with a call to <see
-             cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
+            >Ends a pending asynchronous client authentication operation that was started with a call to <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
 
             
 
@@ -2446,17 +2389,19 @@
           >
         </summary>
         <param name="asyncResult">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IAsyncResult" />
+          An <see cref="T:System.IAsyncResult" />
 
           
 
-           instance returned by a call to <see
-           cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
+           instance returned by a call to <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
 
           
 
@@ -2495,31 +2440,26 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the operation has not completed, this method blocks until it does. </para>
           <para
-            >To perform this operation synchronously, use the <see
-             cref="M:System.Net.Security.NegotiateStream.Read(System.Byte[],System.Int32,System.Int32)" />
+            >To perform this operation synchronously, use the <see cref="M:System.Net.Security.NegotiateStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
              method. </para
           >
           <para
-            >You cannot call this method until you have successfully authenticated. To authenticate, call one of the <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
+            >You cannot call this method until you have successfully authenticated. To authenticate, call one of the <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
 
             
 
-            , <see
-             cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
+            , <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
 
             
 
-            , <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
+            , <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
 
             
 
-            , or <see
-             cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
+            , or <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
 
             
 
@@ -2529,8 +2469,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Ends an asynchronous read operation that was started with a call to <see
-             cref="M:System.Net.Security.NegotiateStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+            >Ends an asynchronous read operation that was started with a call to <see cref="M:System.Net.Security.NegotiateStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
@@ -2540,8 +2479,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
@@ -2549,17 +2487,19 @@
           >
         </returns>
         <param name="asyncResult">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IAsyncResult" />
+          An <see cref="T:System.IAsyncResult" />
 
           
 
-           instance returned by a call to <see
-           cref="M:System.Net.Security.NegotiateStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+           instance returned by a call to <see cref="M:System.Net.Security.NegotiateStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
         </param>
       </Docs>
     </Member>
@@ -2594,31 +2534,26 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the operation has not completed, this method blocks until it does. </para>
           <para
-            >You cannot call this method until you have successfully authenticated. To authenticate, call one of the <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
+            >You cannot call this method until you have successfully authenticated. To authenticate, call one of the <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
 
             
 
-            , <see
-             cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
+            , <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
 
             
 
-            , <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
+            , <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
 
             
 
-            , or <see
-             cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
+            , or <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
 
             
 
              methods.</para
           >
           <para
-            >To perform this operation synchronously, use the <see
-             cref="M:System.Net.Security.NegotiateStream.Write(System.Byte[],System.Int32,System.Int32)" />
+            >To perform this operation synchronously, use the <see cref="M:System.Net.Security.NegotiateStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
@@ -2628,8 +2563,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Ends an asynchronous write operation that was started with a call to <see
-             cref="M:System.Net.Security.NegotiateStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+            >Ends an asynchronous write operation that was started with a call to <see cref="M:System.Net.Security.NegotiateStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
@@ -2637,17 +2571,19 @@
           >
         </summary>
         <param name="asyncResult">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IAsyncResult" />
+          An <see cref="T:System.IAsyncResult" />
 
           
 
-           instance returned by a call to <see
-           cref="M:System.Net.Security.NegotiateStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+           instance returned by a call to <see cref="M:System.Net.Security.NegotiateStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
         </param>
       </Docs>
     </Member>
@@ -2676,8 +2612,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method invokes <see
-             cref="M:System.IO.Stream.Flush" />
+            >This method invokes <see cref="M:System.IO.Stream.Flush" />
 
             
 
@@ -2718,23 +2653,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must successfully authenticate before calling this method. Clients specify the impersonation level when they request authentication by calling one of the <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
+            >You must successfully authenticate before calling this method. Clients specify the impersonation level when they request authentication by calling one of the <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
 
             
 
-             or <see
-             cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
+             or <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
 
             
 
-             methods. If you authenticate without specifying a <see
-             cref="T:System.Security.Principal.TokenImpersonationLevel" />
+             methods. If you authenticate without specifying a <see cref="T:System.Security.Principal.TokenImpersonationLevel" />
 
             
 
-             , <see
-             cref="F:System.Security.Principal.TokenImpersonationLevel.Identification" />
+             , <see cref="F:System.Security.Principal.TokenImpersonationLevel.Identification" />
 
             
 
@@ -2769,23 +2700,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clients authenticate by calling the <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
+            >Clients authenticate by calling the <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
 
             
 
-             or <see
-             cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
+             or <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
 
             
 
-             methods. Servers authenticate by calling the <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
+             methods. Servers authenticate by calling the <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
 
             
 
-             or <see
-             cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
+             or <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
 
             
 
@@ -2795,8 +2722,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -2831,13 +2757,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
-             value that indicates whether this <see
-             cref="T:System.Net.Security.NegotiateStream" />
+             value that indicates whether this <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
@@ -2876,8 +2800,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -2909,13 +2832,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If authentication failed or did not occur, this property returns false.</para>
           <para
-            >To authenticate as the server, call the <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
+            >To authenticate as the server, call the <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
 
             
 
-             or <see
-             cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
+             or <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
 
             
 
@@ -2925,13 +2846,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
-             value that indicates whether the local side of the connection used by this <see
-             cref="T:System.Net.Security.NegotiateStream" />
+             value that indicates whether the local side of the connection used by this <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
@@ -2966,8 +2885,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -2993,8 +2911,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns the value returned by invoking the <see
-             cref="P:System.IO.Stream.Length" />
+            >This property returns the value returned by invoking the <see cref="P:System.IO.Stream.Length" />
 
             
 
@@ -3024,8 +2941,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns the value returned by invoking the <see
-             cref="P:System.IO.Stream.Position" />
+            >This property returns the value returned by invoking the <see cref="P:System.IO.Stream.Position" />
 
             
 
@@ -3070,49 +2986,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The method reads a maximum of <paramref
-             name="count" />
+            >The method reads a maximum of <paramref name="count" />
 
             
 
-             bytes from the current stream and stores them in <paramref
-             name="buffer" />
+             bytes from the current stream and stores them in <paramref name="buffer" />
 
             
 
-             beginning at <paramref
-             name="offset" />
+             beginning at <paramref name="offset" />
 
             
 
             .</para
           >
           <para
-            >You cannot call this method until you have successfully authenticated. To authenticate, call one of the <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
+            >You cannot call this method until you have successfully authenticated. To authenticate, call one of the <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
 
             
 
-            , <see
-             cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
+            , <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
 
             
 
-            , <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
+            , <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
 
             
 
-            , or <see
-             cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
+            , or <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
 
             
 
              methods.</para
           >
           <para
-            >To perform this operation asynchronously, use the <see
-             cref="M:System.Net.Security.NegotiateStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+            >To perform this operation asynchronously, use the <see cref="M:System.Net.Security.NegotiateStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
@@ -3126,8 +3034,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
@@ -3135,41 +3042,49 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Byte" />
+          A <see cref="T:System.Byte" />
 
           
 
            array that receives the bytes read from the stream.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Int32" />
+          A <see cref="T:System.Int32" />
 
           
 
-           containing the zero-based location in <paramref
-           name="buffer" />
+           containing the zero-based location in <paramref name="buffer" />
 
           
 
            at which to begin storing the data read from this stream.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Int32" />
+          A <see cref="T:System.Int32" />
 
           
 
@@ -3194,31 +3109,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns the value returned by invoking the <see
-             cref="P:System.IO.Stream.ReadTimeout" />
+            >This property returns the value returned by invoking the <see cref="P:System.IO.Stream.ReadTimeout" />
 
             
 
-             property on the underlying stream. When you set this property, the <see
-             cref="P:System.IO.Stream.ReadTimeout" />
+             property on the underlying stream. When you set this property, the <see cref="P:System.IO.Stream.ReadTimeout" />
 
             
 
              value on the underlying stream is set to the specified value.</para
           >
           <para
-            >If the underlying stream is a <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >If the underlying stream is a <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-            , <see
-             cref="P:System.Net.Security.NegotiateStream.ReadTimeout" />
+            , <see cref="P:System.Net.Security.NegotiateStream.ReadTimeout" />
 
             
 
-             is in milliseconds and is set to <see
-             cref="F:System.Threading.Timeout.Infinite" />
+             is in milliseconds and is set to <see cref="F:System.Threading.Timeout.Infinite" />
 
             
 
@@ -3259,23 +3169,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When accessed by the client, this property returns a <see
-             cref="T:System.Security.Principal.GenericIdentity" />
+            >When accessed by the client, this property returns a <see cref="T:System.Security.Principal.GenericIdentity" />
 
             
 
-             containing the Service Principal Name (SPN) of the server and the authentication protocol used. When accessed by the server, this property returns a <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+             containing the Service Principal Name (SPN) of the server and the authentication protocol used. When accessed by the server, this property returns a <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
-             that describes the client. If the <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+             that describes the client. If the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
-             is not available, client information is returned to the server in a <see
-             cref="T:System.Security.Principal.GenericIdentity" />
+             is not available, client information is returned to the server in a <see cref="T:System.Security.Principal.GenericIdentity" />
 
             
 
@@ -3319,8 +3225,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not call this method. It is inherited, but is not supported by <see
-             cref="T:System.Net.Security.NegotiateStream" />
+            >Do not call this method. It is inherited, but is not supported by <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
@@ -3330,8 +3235,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Throws <see
-             cref="T:System.NotSupportedException" />
+            >Throws <see cref="T:System.NotSupportedException" />
 
             
 
@@ -3341,8 +3245,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Always throws a <see
-             cref="T:System.NotSupportedException" />
+            >Always throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -3350,14 +3253,22 @@
           >
         </returns>
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           This value is ignored.</param
         >
         <param name="origin">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3395,12 +3306,15 @@
           <para>Sets the length of the underlying stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Int64" />
+          An <see cref="T:System.Int64" />
 
           
 
@@ -3440,52 +3354,44 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If encryption, signing, or encryption and signing are enabled, this method reads the data from buffer, encrypts, signs, or encrypts and signs it, and transmits it using the underlying stream. If no security services such as data encryption or signing are in use, this method invokes <see
-             cref="M:System.IO.Stream.Write(System.Byte[],System.Int32,System.Int32)" />
+            >If encryption, signing, or encryption and signing are enabled, this method reads the data from buffer, encrypts, signs, or encrypts and signs it, and transmits it using the underlying stream. If no security services such as data encryption or signing are in use, this method invokes <see cref="M:System.IO.Stream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
              on the underlying stream.</para
           >
           <para
-            >This method blocks while the write operation completes. To prevent blocking while the operation completes, use the <see
-             cref="M:System.Net.Security.NegotiateStream.Write(System.Byte[],System.Int32,System.Int32)" />
+            >This method blocks while the write operation completes. To prevent blocking while the operation completes, use the <see cref="M:System.Net.Security.NegotiateStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
              method.</para
           >
           <para
-            >You cannot call this method until you have successfully authenticated. To authenticate, call one of the <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
+            >You cannot call this method until you have successfully authenticated. To authenticate, call one of the <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsClient" />
 
             
 
-            , <see
-             cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
+            , <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient" />
 
             
 
-            , <see
-             cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
+            , <see cref="Overload:System.Net.Security.NegotiateStream.AuthenticateAsServer" />
 
             
 
-            , or <see
-             cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
+            , or <see cref="Overload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer" />
 
             
 
              methods.</para
           >
           <para
-            >The <see
-             cref="T:System.Net.Security.NegotiateStream" />
+            >The <see cref="T:System.Net.Security.NegotiateStream" />
 
             
 
-             class does not support multiple simultaneous write operations. If you attempt to start a write operation while another write operation is already executing on the same stream, a <see
-             cref="T:System.NotSupportedException" />
+             class does not support multiple simultaneous write operations. If you attempt to start a write operation while another write operation is already executing on the same stream, a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -3495,8 +3401,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Write the specified number of <see
-             cref="T:System.Byte" />
+            >Write the specified number of <see cref="T:System.Byte" />
 
             
 
@@ -3504,46 +3409,53 @@
           >
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Byte" />
+          A <see cref="T:System.Byte" />
 
           
 
            array that supplies the bytes written to the stream.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Int32" />
+          An <see cref="T:System.Int32" />
 
           
 
-           containing the zero-based location in<paramref
-           name=" buffer" />
+           containing the zero-based location in<paramref name=" buffer" />
 
           
 
            at which to begin reading bytes to be written to the stream.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Int32" />
+          A <see cref="T:System.Int32" />
 
           
 
-           containing the number of bytes to read from <paramref
-           name="buffer" />
+           containing the number of bytes to read from <paramref name="buffer" />
 
           
 
@@ -3568,31 +3480,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns the value returned by invoking the <see
-             cref="P:System.IO.Stream.WriteTimeout" />
+            >This property returns the value returned by invoking the <see cref="P:System.IO.Stream.WriteTimeout" />
 
             
 
-             property on the underlying stream. For set operations, the specified value sets the <see
-             cref="P:System.IO.Stream.WriteTimeout" />
+             property on the underlying stream. For set operations, the specified value sets the <see cref="P:System.IO.Stream.WriteTimeout" />
 
             
 
              value on the underlying stream.</para
           >
           <para
-            >If the underlying stream is a <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >If the underlying stream is a <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-            , <see
-             cref="P:System.Net.Security.NegotiateStream.WriteTimeout" />
+            , <see cref="P:System.Net.Security.NegotiateStream.WriteTimeout" />
 
             
 
-             is in milliseconds and is set to <see
-             cref="F:System.Threading.Timeout.Infinite" />
+             is in milliseconds and is set to <see cref="F:System.Threading.Timeout.Infinite" />
 
             
 

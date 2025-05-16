@@ -90,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends the specified <see
-             cref="T:System.DirectoryServices.PropertyValueCollection" />
+            >Appends the specified <see cref="T:System.DirectoryServices.PropertyValueCollection" />
 
             
 
@@ -101,8 +100,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the <see
-             cref="T:System.DirectoryServices.PropertyValueCollection" />
+            >The zero-based index of the <see cref="T:System.DirectoryServices.PropertyValueCollection" />
 
             
 
@@ -110,12 +108,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DirectoryServices.PropertyValueCollection" />
+          The <see cref="T:System.DirectoryServices.PropertyValueCollection" />
 
           
 
@@ -138,8 +139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends the contents of the specified <see
-             cref="T:System.DirectoryServices.PropertyValueCollection" />
+            >Appends the contents of the specified <see cref="T:System.DirectoryServices.PropertyValueCollection" />
 
             
 
@@ -166,8 +166,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends the contents of the <see
-             cref="T:System.DirectoryServices.PropertyValueCollection" />
+            >Appends the contents of the <see cref="T:System.DirectoryServices.PropertyValueCollection" />
 
             
 
@@ -196,7 +195,11 @@
           <para>The zero-based index of the specified property value. If the object is not found, the return value is -1.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -221,14 +224,22 @@
           <para>Inserts a property value into this collection at a specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index at which to insert the property value.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -250,13 +261,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When working with a multi-valued string property value, the <see
-             cref="M:System.DirectoryServices.PropertyValueCollection.Remove" />
+            >When working with a multi-valued string property value, the <see cref="M:System.DirectoryServices.PropertyValueCollection.Remove" />
 
             
 
-             method will successfully remove the correct item. However, identifying the correct items by name is difficult with a multi-valued DNWithString property value (as the DNWithString COM class, which is used to store the DNWithString items, has 2 string properties representing the item). The way to remove such items is to find the object in the collection (by looping thru all the items), then call the <see
-             cref="M:System.DirectoryServices.PropertyValueCollection.Remove" />
+             method will successfully remove the correct item. However, identifying the correct items by name is difficult with a multi-valued DNWithString property value (as the DNWithString COM class, which is used to store the DNWithString items, has 2 string properties representing the item). The way to remove such items is to find the object in the collection (by looping thru all the items), then call the <see cref="M:System.DirectoryServices.PropertyValueCollection.Remove" />
 
             
 
@@ -283,8 +292,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.DirectoryServices.PropertyValueCollection" />
+            >Determines whether the specified <see cref="T:System.DirectoryServices.PropertyValueCollection" />
 
             
 
@@ -296,12 +304,15 @@
           <para>true if the specified property belongs to this collection; otherwise, false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DirectoryServices.PropertyValueCollection" />
+          The <see cref="T:System.DirectoryServices.PropertyValueCollection" />
 
           
 
@@ -325,8 +336,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all <see
-             cref="T:System.DirectoryServices.PropertyValueCollection" />
+            >Copies all <see cref="T:System.DirectoryServices.PropertyValueCollection" />
 
             
 
@@ -334,12 +344,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -387,8 +400,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains the values of a <see
-         cref="T:System.DirectoryServices.DirectoryEntry" />
+        >Contains the values of a <see cref="T:System.DirectoryServices.DirectoryEntry" />
 
         
 

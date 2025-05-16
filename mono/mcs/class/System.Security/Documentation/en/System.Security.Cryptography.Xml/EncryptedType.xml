@@ -19,18 +19,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Xml.EncryptedType" />
+        >The <see cref="T:System.Security.Cryptography.Xml.EncryptedType" />
 
         
 
-         class represents the abstract base class from which the classes <see
-         cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+         class represents the abstract base class from which the classes <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
         
 
-         and <see
-         cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+         and <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
         
 
@@ -41,13 +38,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the abstract base class from which the classes <see
-         cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+        >Represents the abstract base class from which the classes <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
         
 
-         and <see
-         cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+         and <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
         
 
@@ -73,18 +68,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedType" />
+            >This constructor creates a new instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptedType" />
 
             
 
-             class. This class represents the abstract base class from which the classes <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+             class. This class represents the abstract base class from which the classes <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
             
 
-             and <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+             and <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
             
 
@@ -94,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedType" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptedType" />
 
             
 
@@ -133,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an &lt;EncryptionProperty&gt; child element to the &lt;EncryptedProperties&gt; element in the current <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedType" />
+            >Adds an &lt;EncryptionProperty&gt; child element to the &lt;EncryptedProperties&gt; element in the current <see cref="T:System.Security.Cryptography.Xml.EncryptedType" />
 
             
 
@@ -142,12 +132,15 @@
           >
         </summary>
         <param name="ep">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+          An <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
           
 
@@ -178,21 +171,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The &lt;CipherData&gt; element is a required element in XML encryption that provides the encrypted data. It must either contain the encrypted octet sequence as the base64-encoded text of the <see
-             cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
+            >The &lt;CipherData&gt; element is a required element in XML encryption that provides the encrypted data. It must either contain the encrypted octet sequence as the base64-encoded text of the <see cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
 
             
 
-             property, or provide a reference to an external location containing the encrypted octet sequence using the <see
-             cref="P:System.Security.Cryptography.Xml.CipherData.CipherReference" />
+             property, or provide a reference to an external location containing the encrypted octet sequence using the <see cref="P:System.Security.Cryptography.Xml.CipherData.CipherReference" />
 
             
 
              property.</para
           >
           <para
-            >For more information about this element, see <see
-             cref="T:System.Security.Cryptography.Xml.CipherData" />
+            >For more information about this element, see <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
             
 
@@ -202,13 +192,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Security.Cryptography.Xml.CipherData" />
+            >Gets or sets the <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
             
 
-             value for an instance of an <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedType" />
+             value for an instance of an <see cref="T:System.Security.Cryptography.Xml.EncryptedType" />
 
             
 
@@ -238,8 +226,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the Encoding attribute of an <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedType" />
+            >Gets or sets the Encoding attribute of an <see cref="T:System.Security.Cryptography.Xml.EncryptedType" />
 
             
 
@@ -301,8 +288,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The &lt;EncryptionProperties&gt; element can contain additional information about the creation of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedType" />
+            >The &lt;EncryptionProperties&gt; element can contain additional information about the creation of the <see cref="T:System.Security.Cryptography.Xml.EncryptedType" />
 
             
 
@@ -339,8 +325,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the XML representation of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedType" />
+            >Returns the XML representation of the <see cref="T:System.Security.Cryptography.Xml.EncryptedType" />
 
             
 
@@ -350,8 +335,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlElement" />
+            >An <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -381,8 +365,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the Id attribute of an <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedType" />
+            >Gets or sets the Id attribute of an <see cref="T:System.Security.Cryptography.Xml.EncryptedType" />
 
             
 
@@ -446,8 +429,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to load an existing XML element into the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedType" />
+            >Use this method to load an existing XML element into the <see cref="T:System.Security.Cryptography.Xml.EncryptedType" />
 
             
 
@@ -459,12 +441,15 @@
           <para>Loads XML information into the &lt;EncryptedType&gt; element in XML encryption.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlElement" />
+          An <see cref="T:System.Xml.XmlElement" />
 
           
 
@@ -490,7 +475,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >The MimeType attribute is an optional attribute that describes the media type of the encrypted data. The value of this attribute is a string with values defined by <see
-             cref="http://www.ietf.org/rfc/rfc2045.txt"
+              cref="http://www.ietf.org/rfc/rfc2045.txt"
               >RFC 2045: Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies</see
             >
 
@@ -502,8 +487,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the MimeType attribute of an <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedType" />
+            >Gets or sets the MimeType attribute of an <see cref="T:System.Security.Cryptography.Xml.EncryptedType" />
 
             
 
@@ -530,7 +514,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >The Type attribute is an optional attribute that identifies type information about the text form of the encrypted content. While optional, this is an important attribute and is used in mandatory processing described in <see
-             cref="http://www.w3.org/TR/xmlenc-core/">Processing Rules: Decryption</see>
+              cref="http://www.w3.org/TR/xmlenc-core/"
+              >Processing Rules: Decryption</see
+            >
 
             
 
@@ -540,8 +526,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the Type attribute of an <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedType" />
+            >Gets or sets the Type attribute of an <see cref="T:System.Security.Cryptography.Xml.EncryptedType" />
 
             
 

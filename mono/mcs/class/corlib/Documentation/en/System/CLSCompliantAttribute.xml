@@ -39,13 +39,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.CLSCompliantAttribute" />
+        >The <see cref="T:System.CLSCompliantAttribute" />
 
         
 
-         attribute is used to indicate whether a particular program element complies with the Common Language Specification (CLS), which defines the features that any language that targets the .NET Framework must support. CLS compliance is primarily of concern to library developers who want to ensure that their libraries are accessible in any language that targets the .NET Framework. For more information, See <format
-         type="text/html">
+         attribute is used to indicate whether a particular program element complies with the Common Language Specification (CLS), which defines the features that any language that targets the .NET Framework must support. CLS compliance is primarily of concern to library developers who want to ensure that their libraries are accessible in any language that targets the .NET Framework. For more information, See <format type="text/html">
           <a href="4f0b77d0-4844-464f-af73-6e06bedeafc6"
             >Language Independence and Language-Independent Components</a
           >
@@ -56,21 +54,18 @@
         . </para
       >
       <para
-        >You can apply the <see
-         cref="T:System.CLSCompliantAttribute" />
+        >You can apply the <see cref="T:System.CLSCompliantAttribute" />
 
         
 
-         attribute to the following program elements: assembly, module, class, struct, enum, constructor, method, property, field, event, interface, delegate, parameter, and return value. However, the notion of CLS compliance is only meaningful for assemblies, modules, types, and members of types, not parts of a member signature. Consequently, <see
-         cref="T:System.CLSCompliantAttribute" />
+         attribute to the following program elements: assembly, module, class, struct, enum, constructor, method, property, field, event, interface, delegate, parameter, and return value. However, the notion of CLS compliance is only meaningful for assemblies, modules, types, and members of types, not parts of a member signature. Consequently, <see cref="T:System.CLSCompliantAttribute" />
 
         
 
          is ignored when applied to parameter or return value program elements.</para
       >
       <para
-        >If no <see
-         cref="T:System.CLSCompliantAttribute" />
+        >If no <see cref="T:System.CLSCompliantAttribute" />
 
         
 
@@ -88,8 +83,7 @@
         </item>
       </list>
       <para
-        >If an assembly is marked as CLS-compliant, any publicly exposed type in the assembly that is not CLS-compliant must be marked with <see
-         cref="T:System.CLSCompliantAttribute" />
+        >If an assembly is marked as CLS-compliant, any publicly exposed type in the assembly that is not CLS-compliant must be marked with <see cref="T:System.CLSCompliantAttribute" />
 
         
 
@@ -97,8 +91,7 @@
       >
       <para>Attributes that are applied to assemblies or modules must occur after the C# using (Imports in Visual Basic) clauses and before the code.</para>
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1E00-4602-9EBF-526B271A8B87"
             >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
           >
@@ -143,8 +136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.CLSCompliantAttribute" />
+            >Initializes an instance of the <see cref="T:System.CLSCompliantAttribute" />
 
             
 
@@ -152,7 +144,11 @@
           >
         </summary>
         <param name="isCompliant">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -188,8 +184,7 @@
             if the target 
  of
  the current instance complies with
- the CLS; otherwise, <see
-             langword="false" />
+ the CLS; otherwise, <see langword="false" />
 
             
 

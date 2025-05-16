@@ -31,33 +31,28 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The class you use for conversion must inherit from <see
-         cref="T:System.ComponentModel.TypeConverter" />
+        >The class you use for conversion must inherit from <see cref="T:System.ComponentModel.TypeConverter" />
 
         
 
-        . Use the <see
-         cref="P:System.ComponentModel.TypeConverterAttribute.ConverterTypeName" />
+        . Use the <see cref="P:System.ComponentModel.TypeConverterAttribute.ConverterTypeName" />
 
         
 
          property to get the name of the class that provides the data conversion for the object this attribute is bound to.</para
       >
       <para
-        >For more information about attributes, see <format
-         type="text/html">
+        >For more information about attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
         
 
-        . For more information about type converters, see the <see
-         cref="T:System.ComponentModel.TypeConverter" />
+        . For more information about type converters, see the <see cref="T:System.ComponentModel.TypeConverter" />
 
         
 
-         base class and <format
-         type="text/html">
+         base class and <format type="text/html">
           <a href="90373a3f-d8c8-492d-841c-945d62393c56">How to: Implement a Type Converter</a>
         </format>
 
@@ -66,13 +61,11 @@
         .</para
       >
       <para
-        >In order to establish a type converter on a custom class that provides type conversion behavior for XAML, you apply the <see
-         cref="T:System.ComponentModel.TypeConverterAttribute" />
+        >In order to establish a type converter on a custom class that provides type conversion behavior for XAML, you apply the <see cref="T:System.ComponentModel.TypeConverterAttribute" />
 
         
 
-         attribute to your type. The argument of the attribute references your type converter implementation. Your type converter should be able to accept values from a string that is used for attributes or initialization text in XAML markup, and convert that string into your intended destination type. For more information, see<format
-         type="text/html">
+         attribute to your type. The argument of the attribute references your type converter implementation. Your type converter should be able to accept values from a string that is used for attributes or initialization text in XAML markup, and convert that string into your intended destination type. For more information, see<format type="text/html">
           <a href="f6313e4d-e89d-497d-ac87-b43511a1ae4b"> TypeConverters and XAML</a>
         </format>
 
@@ -81,21 +74,18 @@
         .</para
       >
       <para
-        >Rather than applying to all values of a type, a type converter behavior for XAML can also be established on a specific property. In this case, you apply <see
-         cref="T:System.ComponentModel.TypeConverterAttribute" />
+        >Rather than applying to all values of a type, a type converter behavior for XAML can also be established on a specific property. In this case, you apply <see cref="T:System.ComponentModel.TypeConverterAttribute" />
 
         
 
          to the property definition (the outer definition, not the specific get and set definitions).</para
       >
       <para
-        >A type converter behavior for XAML usage of a custom attachable member can be assigned by applying <see
-         cref="T:System.ComponentModel.TypeConverterAttribute" />
+        >A type converter behavior for XAML usage of a custom attachable member can be assigned by applying <see cref="T:System.ComponentModel.TypeConverterAttribute" />
 
         
 
-         to the get method accessor that supports the XAML usage. For more information, see <format
-         type="text/html">
+         to the get method accessor that supports the XAML usage. For more information, see <format type="text/html">
           <a href="75928354-dc01-47e8-a018-8409aec1f32d">Attached Properties Overview</a>
         </format>
 
@@ -104,8 +94,7 @@
         .</para
       >
       <para
-        >For complex XAML serialization cases that require additional state from the object runtime, consider defining a value serializer in addition to a type converter, and attribute both support classes on your custom types or custom members. For more information, see <see
-         cref="T:System.Windows.Markup.ValueSerializer" />
+        >For complex XAML serialization cases that require additional state from the object runtime, consider defining a value serializer in addition to a type converter, and attribute both support classes on your custom types or custom members. For more information, see <see cref="T:System.Windows.Markup.ValueSerializer" />
 
         
 
@@ -136,8 +125,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The class that provides the data conversion must inherit from <see
-             cref="T:System.ComponentModel.TypeConverter" />
+            >The class that provides the data conversion must inherit from <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
@@ -147,8 +135,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.TypeConverterAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.TypeConverterAttribute" />
 
             
 
@@ -177,8 +164,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The class that provides the data conversion must inherit from <see
-             cref="T:System.ComponentModel.TypeConverter" />
+            >The class that provides the data conversion must inherit from <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
@@ -188,8 +174,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.TypeConverterAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.TypeConverterAttribute" />
 
             
 
@@ -197,7 +182,11 @@
           >
         </summary>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -225,8 +214,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The class that provides the data conversion must inherit from <see
-             cref="T:System.ComponentModel.TypeConverter" />
+            >The class that provides the data conversion must inherit from <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
@@ -236,8 +224,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.TypeConverterAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.TypeConverterAttribute" />
 
             
 
@@ -245,12 +232,15 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -276,8 +266,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the fully qualified type name of the <see
-             cref="T:System.Type" />
+            >Gets the fully qualified type name of the <see cref="T:System.Type" />
 
             
 
@@ -336,8 +325,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns whether the value of the given object is equal to the current <see
-             cref="T:System.ComponentModel.TypeConverterAttribute" />
+            >Returns whether the value of the given object is equal to the current <see cref="T:System.ComponentModel.TypeConverterAttribute" />
 
             
 
@@ -347,8 +335,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the value of the given object is equal to that of the current <see
-             cref="T:System.ComponentModel.TypeConverterAttribute" />
+            >true if the value of the given object is equal to that of the current <see cref="T:System.ComponentModel.TypeConverterAttribute" />
 
             
 
@@ -356,7 +343,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -389,8 +380,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.ComponentModel.TypeConverterAttribute" />
+            >A hash code for the current <see cref="T:System.ComponentModel.TypeConverterAttribute" />
 
             
 

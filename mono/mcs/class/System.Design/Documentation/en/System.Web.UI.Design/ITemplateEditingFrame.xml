@@ -16,13 +16,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.UI.Design.ITemplateEditingFrame" />
+          >The <see cref="T:System.Web.UI.Design.ITemplateEditingFrame" />
 
           
 
-           interface is obsolete. Use the <see
-           cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+           interface is obsolete. Use the <see cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
 
           
 
@@ -51,18 +49,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.Design.ITemplateEditingFrame" />
+              >The <see cref="T:System.Web.UI.Design.ITemplateEditingFrame" />
 
               
 
-               interface is obsolete. Use the <see
-               cref="P:System.Web.UI.Design.TemplateGroup.GroupStyle" />
+               interface is obsolete. Use the <see cref="P:System.Web.UI.Design.TemplateGroup.GroupStyle" />
 
               
 
-               property on each template group element in the <see
-               cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+               property on each template group element in the <see cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
 
               
 
@@ -75,7 +70,11 @@
           <para>Closes the control and optionally saves any changes.</para>
         </summary>
         <param name="saveChanges">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -102,18 +101,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.Design.ITemplateEditingFrame" />
+              >The <see cref="T:System.Web.UI.Design.ITemplateEditingFrame" />
 
               
 
-               interface is obsolete. Use the <see
-               cref="P:System.Web.UI.Design.TemplateGroup.GroupStyle" />
+               interface is obsolete. Use the <see cref="P:System.Web.UI.Design.TemplateGroup.GroupStyle" />
 
               
 
-               property on each template group element in the <see
-               cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+               property on each template group element in the <see cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
 
               
 
@@ -143,23 +139,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.Design.ITemplateEditingFrame" />
+              >The <see cref="T:System.Web.UI.Design.ITemplateEditingFrame" />
 
               
 
-               interface is obsolete. Use the <see
-               cref="P:System.Web.UI.WebControls.Style.Height" />
+               interface is obsolete. Use the <see cref="P:System.Web.UI.WebControls.Style.Height" />
 
               
 
-               property in the <see
-               cref="P:System.Web.UI.Design.TemplateGroup.GroupStyle" />
+               property in the <see cref="P:System.Web.UI.Design.TemplateGroup.GroupStyle" />
 
               
 
-               property for each template group element in the <see
-               cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+               property for each template group element in the <see cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
 
               
 
@@ -189,23 +181,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.Design.ITemplateEditingFrame" />
+              >The <see cref="T:System.Web.UI.Design.ITemplateEditingFrame" />
 
               
 
-               interface is obsolete. Use the <see
-               cref="P:System.Web.UI.WebControls.Style.Width" />
+               interface is obsolete. Use the <see cref="P:System.Web.UI.WebControls.Style.Width" />
 
               
 
-               property in the <see
-               cref="P:System.Web.UI.Design.TemplateGroup.GroupStyle" />
+               property in the <see cref="P:System.Web.UI.Design.TemplateGroup.GroupStyle" />
 
               
 
-               property for each template group element in the <see
-               cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+               property for each template group element in the <see cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
 
               
 
@@ -235,18 +223,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.Design.ITemplateEditingFrame" />
+              >The <see cref="T:System.Web.UI.Design.ITemplateEditingFrame" />
 
               
 
-               interface is obsolete. The template group name is provided in the <see
-               cref="P:System.Web.UI.Design.TemplateGroup.GroupName" />
+               interface is obsolete. The template group name is provided in the <see cref="P:System.Web.UI.Design.TemplateGroup.GroupName" />
 
               
 
-               property of each template group element in the <see
-               cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+               property of each template group element in the <see cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
 
               
 
@@ -298,18 +283,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.Design.ITemplateEditingFrame" />
+              >The <see cref="T:System.Web.UI.Design.ITemplateEditingFrame" />
 
               
 
-               interface is obsolete. Use the <see
-               cref="P:System.Web.UI.Design.TemplateGroup.GroupStyle" />
+               interface is obsolete. Use the <see cref="P:System.Web.UI.Design.TemplateGroup.GroupStyle" />
 
               
 
-               property on each template group element in the <see
-               cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+               property on each template group element in the <see cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
 
               
 
@@ -322,14 +304,22 @@
           <para>Resizes the control to the specified width and height.</para>
         </summary>
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The new width for the control. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -372,33 +362,27 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.Design.ITemplateEditingFrame" />
+              >The <see cref="T:System.Web.UI.Design.ITemplateEditingFrame" />
 
               
 
-               interface is obsolete. A template name is provided through the <see
-               cref="P:System.Web.UI.Design.DesignerObject.Name" />
+               interface is obsolete. A template name is provided through the <see cref="P:System.Web.UI.Design.DesignerObject.Name" />
 
               
 
-               property of a <see
-               cref="T:System.Web.UI.Design.TemplateDefinition" />
+               property of a <see cref="T:System.Web.UI.Design.TemplateDefinition" />
 
               
 
-               object. Enumerate the collection of template definitions by using the <see
-               cref="P:System.Web.UI.Design.TemplateGroup.Templates" />
+               object. Enumerate the collection of template definitions by using the <see cref="P:System.Web.UI.Design.TemplateGroup.Templates" />
 
               
 
-               property of each <see
-               cref="T:System.Web.UI.Design.TemplateGroup" />
+               property of each <see cref="T:System.Web.UI.Design.TemplateGroup" />
 
               
 
-               element in the <see
-               cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+               element in the <see cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
 
               
 
@@ -431,33 +415,27 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.Design.ITemplateEditingFrame" />
+              >The <see cref="T:System.Web.UI.Design.ITemplateEditingFrame" />
 
               
 
-               interface is obsolete. A template style is provided through the <see
-               cref="P:System.Web.UI.Design.TemplateDefinition.Style" />
+               interface is obsolete. A template style is provided through the <see cref="P:System.Web.UI.Design.TemplateDefinition.Style" />
 
               
 
-               property of a <see
-               cref="T:System.Web.UI.Design.TemplateDefinition" />
+               property of a <see cref="T:System.Web.UI.Design.TemplateDefinition" />
 
               
 
-               object. Enumerate the collection of template definitions by using the <see
-               cref="P:System.Web.UI.Design.TemplateGroup.Templates" />
+               object. Enumerate the collection of template definitions by using the <see cref="P:System.Web.UI.Design.TemplateGroup.Templates" />
 
               
 
-               property of each <see
-               cref="T:System.Web.UI.Design.TemplateGroup" />
+               property of each <see cref="T:System.Web.UI.Design.TemplateGroup" />
 
               
 
-               element in the <see
-               cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+               element in the <see cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
 
               
 
@@ -489,18 +467,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.Design.ITemplateEditingFrame" />
+              >The <see cref="T:System.Web.UI.Design.ITemplateEditingFrame" />
 
               
 
-               interface is obsolete. Use the <see
-               cref="P:System.Web.UI.Design.TemplateGroup.GroupStyle" />
+               interface is obsolete. Use the <see cref="P:System.Web.UI.Design.TemplateGroup.GroupStyle" />
 
               
 
-               property on each template group element in the <see
-               cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+               property on each template group element in the <see cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
 
               
 
@@ -513,7 +488,11 @@
           <para>Changes the name of the control to the specified name.</para>
         </summary>
         <param name="newName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -540,18 +519,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.Design.ITemplateEditingFrame" />
+              >The <see cref="T:System.Web.UI.Design.ITemplateEditingFrame" />
 
               
 
-               interface is obsolete. Use the <see
-               cref="P:System.Web.UI.Design.TemplateGroup.GroupName" />
+               interface is obsolete. Use the <see cref="P:System.Web.UI.Design.TemplateGroup.GroupName" />
 
               
 
-               property of each template group in the <see
-               cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+               property of each template group in the <see cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
 
               
 

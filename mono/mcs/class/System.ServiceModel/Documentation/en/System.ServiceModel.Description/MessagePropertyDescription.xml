@@ -23,13 +23,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Description.MessagePropertyDescription" />
+        >The <see cref="T:System.ServiceModel.Description.MessagePropertyDescription" />
 
         
 
-         class represents message properties specified in a message contract by the use of the <see
-         cref="T:System.ServiceModel.MessagePropertyAttribute" />
+         class represents message properties specified in a message contract by the use of the <see cref="T:System.ServiceModel.MessagePropertyAttribute" />
 
         
 
@@ -39,8 +37,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a message property specified by the <see
-         cref="T:System.ServiceModel.MessagePropertyAttribute" />
+        >Represents a message property specified by the <see cref="T:System.ServiceModel.MessagePropertyAttribute" />
 
         
 
@@ -67,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.MessagePropertyDescription" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MessagePropertyDescription" />
 
             
 
@@ -76,7 +72,11 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

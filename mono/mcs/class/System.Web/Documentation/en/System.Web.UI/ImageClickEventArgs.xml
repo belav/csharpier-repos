@@ -20,33 +20,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class passes the location where a user clicked an <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+        >This class passes the location where a user clicked an <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
         
 
-         server control or an <see
-         cref="T:System.Web.UI.WebControls.ImageButton" />
+         server control or an <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
         
 
-         Web server control. Clicking an <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+         Web server control. Clicking an <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
         
 
-         server control causes a <see
-         cref="E:System.Web.UI.HtmlControls.HtmlInputImage.ServerClick" />
+         server control causes a <see cref="E:System.Web.UI.HtmlControls.HtmlInputImage.ServerClick" />
 
         
 
-         event to occur, while clicking an <see
-         cref="T:System.Web.UI.WebControls.ImageButton" />
+         event to occur, while clicking an <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
         
 
-         server control causes a <see
-         cref="E:System.Web.UI.WebControls.ImageButton.Click" />
+         server control causes a <see cref="E:System.Web.UI.WebControls.ImageButton.Click" />
 
         
 
@@ -56,8 +50,7 @@
         <para>The origin coordinates (0,0) are located at the upper left corner of the image.</para>
       </block>
       <para
-        >Raising an event invokes the event handler through a delegate. For more information, see <format
-         type="text/html">
+        >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
           <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
         </format>
 
@@ -69,13 +62,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for any events that occur when a user clicks an image-based ASP.NET server control, such as the <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+        >Provides data for any events that occur when a user clicks an image-based ASP.NET server control, such as the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
         
 
-         or <see
-         cref="T:System.Web.UI.WebControls.ImageButton" />
+         or <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
         
 
@@ -97,18 +88,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.ImageClickEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.ImageClickEventArgs" />
 
             
 
-             class using the <paramref
-             name="x" />
+             class using the <paramref name="x" />
 
             
 
-             and <paramref
-             name="y" />
+             and <paramref name="y" />
 
             
 
@@ -116,14 +104,22 @@
           >
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate where the user clicked an image-based ASP.NET server control. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

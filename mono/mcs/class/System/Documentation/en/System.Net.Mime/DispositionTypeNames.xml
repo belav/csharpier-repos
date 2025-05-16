@@ -19,18 +19,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The values in this enumeration can be used to set the <see
-         cref="P:System.Net.Mime.ContentDisposition.DispositionType" />
+        >The values in this enumeration can be used to set the <see cref="P:System.Net.Mime.ContentDisposition.DispositionType" />
 
         
 
-         property for an e-mail attachment. The information in the <see
-         cref="T:System.Net.Mime.ContentDisposition" />
+         property for an e-mail attachment. The information in the <see cref="T:System.Net.Mime.ContentDisposition" />
 
         
 
          class represents the MIME Content-Disposition header. This header is described in RFC 2183 available at <see
-         cref="http://www.ietf.org/">http://www.ietf.org</see>
+          cref="http://www.ietf.org/"
+          >http://www.ietf.org</see
+        >
 
         
 

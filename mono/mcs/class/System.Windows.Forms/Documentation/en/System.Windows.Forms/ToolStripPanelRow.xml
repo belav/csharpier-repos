@@ -22,8 +22,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a row of a <see
-         cref="T:System.Windows.Forms.ToolStripPanel" />
+        >Represents a row of a <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
         
 
@@ -47,13 +46,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripPanelRow" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripPanelRow" />
 
             
 
-             class, specifying the containing <see
-             cref="T:System.Windows.Forms.ToolStripPanel" />
+             class, specifying the containing <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
             
 
@@ -61,12 +58,15 @@
           >
         </summary>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The containing <see
-           cref="T:System.Windows.Forms.ToolStripPanel" />
+          The containing <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
           
 
@@ -89,13 +89,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >While the <see
-             cref="P:System.Windows.Forms.ToolStripPanelRow.DisplayRectangle" />
+            >While the <see cref="P:System.Windows.Forms.ToolStripPanelRow.DisplayRectangle" />
 
             
 
-             property gets only the client elements of the control, the <see
-             cref="P:System.Windows.Forms.ToolStripPanelRow.Bounds" />
+             property gets only the client elements of the control, the <see cref="P:System.Windows.Forms.ToolStripPanelRow.Bounds" />
 
             
 
@@ -105,8 +103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the size and location of the <see
-             cref="T:System.Windows.Forms.ToolStripPanelRow" />
+            >Gets the size and location of the <see cref="T:System.Windows.Forms.ToolStripPanelRow" />
 
             
 
@@ -136,13 +133,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets a value indicating whether a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             can be dragged and dropped into a <see
-             cref="T:System.Windows.Forms.ToolStripPanelRow" />
+             can be dragged and dropped into a <see cref="T:System.Windows.Forms.ToolStripPanelRow" />
 
             
 
@@ -152,13 +147,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if there is enough space in the <see
-             cref="T:System.Windows.Forms.ToolStripPanelRow" />
+            >true if there is enough space in the <see cref="T:System.Windows.Forms.ToolStripPanelRow" />
 
             
 
-             to receive the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             to receive the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -166,17 +159,19 @@
           >
         </returns>
         <param name="toolStripToDrag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+          The <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
-           to be dragged and dropped into the <see
-           cref="T:System.Windows.Forms.ToolStripPanelRow" />
+           to be dragged and dropped into the <see cref="T:System.Windows.Forms.ToolStripPanelRow" />
 
           
 
@@ -203,8 +198,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the controls in the <see
-             cref="T:System.Windows.Forms.ToolStripPanelRow" />
+            >Gets the controls in the <see cref="T:System.Windows.Forms.ToolStripPanelRow" />
 
             
 
@@ -283,13 +277,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >While the <see
-             cref="P:System.Windows.Forms.ToolStripPanelRow.Bounds" />
+            >While the <see cref="P:System.Windows.Forms.ToolStripPanelRow.Bounds" />
 
             
 
-             property gets the nonclient and client elements, the <see
-             cref="P:System.Windows.Forms.ToolStripPanelRow.DisplayRectangle" />
+             property gets the nonclient and client elements, the <see cref="P:System.Windows.Forms.ToolStripPanelRow.DisplayRectangle" />
 
             
 
@@ -319,36 +311,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Windows.Forms.ToolStripPanelRow" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Windows.Forms.ToolStripPanelRow" />
 
             
 
@@ -358,8 +344,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Windows.Forms.ToolStripPanelRow" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ToolStripPanelRow" />
 
             
 
@@ -367,7 +352,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -440,8 +429,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -450,8 +438,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripPanelRow.OnBoundsChanged(System.Drawing.Rectangle,System.Drawing.Rectangle)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripPanelRow.OnBoundsChanged(System.Drawing.Rectangle,System.Drawing.Rectangle)" />
 
             
 
@@ -461,8 +448,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.ToolStripPanelRow.Bounds" />
+            >Occurs when the <see cref="P:System.Windows.Forms.ToolStripPanelRow.Bounds" />
 
             
 
@@ -470,24 +456,30 @@
           >
         </summary>
         <param name="oldBounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The original value of the <see
-           cref="P:System.Windows.Forms.ToolStripPanelRow.Bounds" />
+          The original value of the <see cref="P:System.Windows.Forms.ToolStripPanelRow.Bounds" />
 
           
 
            property.</param
         >
         <param name="newBounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new value of the <see
-           cref="P:System.Windows.Forms.ToolStripPanelRow.Bounds" />
+          The new value of the <see cref="P:System.Windows.Forms.ToolStripPanelRow.Bounds" />
 
           
 
@@ -518,8 +510,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -528,8 +519,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripPanelRow.OnControlAdded(System.Windows.Forms.Control,System.Int32)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripPanelRow.OnControlAdded(System.Windows.Forms.Control,System.Int32)" />
 
             
 
@@ -539,8 +529,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.ControlAdded" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.ControlAdded" />
 
             
 
@@ -548,19 +537,26 @@
           >
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The control that was added to the <see
-           cref="T:System.Windows.Forms.ToolStripPanelRow" />
+          The control that was added to the <see cref="T:System.Windows.Forms.ToolStripPanelRow" />
 
           
 
           .</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -588,8 +584,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -598,8 +593,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripPanelRow.OnControlRemoved(System.Windows.Forms.Control,System.Int32)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripPanelRow.OnControlRemoved(System.Windows.Forms.Control,System.Int32)" />
 
             
 
@@ -609,8 +603,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.ControlRemoved" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.ControlRemoved" />
 
             
 
@@ -618,19 +611,26 @@
           >
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The control that was removed from the <see
-           cref="T:System.Windows.Forms.ToolStripPanelRow" />
+          The control that was removed from the <see cref="T:System.Windows.Forms.ToolStripPanelRow" />
 
           
 
           .</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -655,8 +655,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -665,8 +664,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripPanelRow.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripPanelRow.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
 
             
 
@@ -676,8 +674,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Layout" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Layout" />
 
             
 
@@ -685,12 +682,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.LayoutEventArgs" />
+          A <see cref="T:System.Windows.Forms.LayoutEventArgs" />
 
           
 
@@ -715,8 +715,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -725,8 +724,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripPanelRow.OnOrientationChanged" />
+            >The <see cref="M:System.Windows.Forms.ToolStripPanelRow.OnOrientationChanged" />
 
             
 
@@ -736,8 +734,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ToolStripPanelRow.Orientation" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ToolStripPanelRow.Orientation" />
 
             
 
@@ -762,13 +759,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the layout direction of the <see
-             cref="T:System.Windows.Forms.ToolStripPanelRow" />
+            >Gets the layout direction of the <see cref="T:System.Windows.Forms.ToolStripPanelRow" />
 
             
 
-             relative to its containing <see
-             cref="T:System.Windows.Forms.ToolStripPanel" />
+             relative to its containing <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
             
 
@@ -818,13 +813,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.ToolStripPanel" />
+            >Gets the <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
             
 
-             that contains the <see
-             cref="T:System.Windows.Forms.ToolStripPanelRow" />
+             that contains the <see cref="T:System.Windows.Forms.ToolStripPanelRow" />
 
             
 

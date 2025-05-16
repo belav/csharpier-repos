@@ -12,7 +12,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -61,8 +63,7 @@
           >The G parameter of the Diffie-Hellman algorithm. This is a public parameter.</param
         >
         <param name="x"
-          >The X parameter of the Diffie-Hellman algorithm. This is a private parameter. If this parameters is a null reference (<b
-          >Nothing</b>
+          >The X parameter of the Diffie-Hellman algorithm. This is a private parameter. If this parameters is a null reference (<b>Nothing</b>
 
           
 
@@ -71,41 +72,34 @@
         <summary>Initializes a new DiffieHellmanManaged instance.</summary>
         <remarks>
           <para
-            >An <see
-             cref="T:System.ArgumentNullException" />
+            >An <see cref="T:System.ArgumentNullException" />
 
             
 
-             is thrown if <paramref
-             name="p" />
+             is thrown if <paramref name="p" />
 
             
 
-             or <paramref
-             name="g" />
+             or <paramref name="g" />
 
             
 
-             is a null reference (<b
-            >Nothing</b>
+             is a null reference (<b>Nothing</b>
 
             
 
              in Visual Basic).</para
           >
           <para
-            >A <see
-             cref="T:System.Security.Cryptography.CryptographicException" />
+            >A <see cref="T:System.Security.Cryptography.CryptographicException" />
 
             
 
-             is thrown if <paramref
-             name="p" />
+             is thrown if <paramref name="p" />
 
             
 
-             or <paramref
-             name="g" />
+             or <paramref name="g" />
 
             
 
@@ -144,54 +138,45 @@
         <summary>The P parameter of the Diffie-Hellman algorithm. This is a public parameter.</summary>
         <remarks>
           <para
-            >An <see
-             cref="T:System.ArgumentNullException" />
+            >An <see cref="T:System.ArgumentNullException" />
 
             
 
-             is thrown if <paramref
-             name="p" />
+             is thrown if <paramref name="p" />
 
             
 
-             or <paramref
-             name="g" />
+             or <paramref name="g" />
 
             
 
-             is a null reference (<b
-            >Nothing</b>
+             is a null reference (<b>Nothing</b>
 
             
 
              in Visual Basic).</para
           >
           <para
-            >An <see
-             cref="T:System.ArgumentException" />
+            >An <see cref="T:System.ArgumentException" />
 
             
 
-             if <paramref
-             name="l" />
+             if <paramref name="l" />
 
             
 
              is invalid.</para
           >
           <para
-            >A <see
-             cref="T:System.Security.Cryptography.CryptographicException" />
+            >A <see cref="T:System.Security.Cryptography.CryptographicException" />
 
             
 
-             is thrown if <paramref
-             name="p" />
+             is thrown if <paramref name="p" />
 
             
 
-             or <paramref
-             name="g" />
+             or <paramref name="g" />
 
             
 
@@ -223,8 +208,7 @@
           >The length, in bits, of the secret value X. This parameter can be set to 0 to use the default size.</param
         >
         <param name="method"
-          >One of the <see
-           cref="T:Mono.Security.Cryptography.DHKeyGeneration" />
+          >One of the <see cref="T:Mono.Security.Cryptography.DHKeyGeneration" />
 
           
 
@@ -234,8 +218,7 @@
         <remarks>
           <para>The larger the bit length, the more secure the algorithm is. The default is 1024 bits. The minimum bit length is 128 bits.</para>
           <para
-            >An <see
-             cref="T:System.ArgumentException" />
+            >An <see cref="T:System.ArgumentException" />
 
             
 
@@ -298,10 +281,7 @@
         <Parameter Name="disposing" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="disposing"
-          >a <see
-           cref="T:System.Boolean" />
-        </param>
+        <param name="disposing">a <see cref="T:System.Boolean" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -328,8 +308,7 @@
 
           
 
-           to include private parameters; otherwise, <b
-          >false</b>
+           to include private parameters; otherwise, <b>false</b>
 
           
 
@@ -376,28 +355,23 @@
         <param name="parameters">The parameters for DiffieHellman.</param>
         <summary>Imports the specified DH parameters.</summary>
         <remarks
-          >A <see
-           cref="T:System.Security.Cryptography.CryptographicException" />
+          >A <see cref="T:System.Security.Cryptography.CryptographicException" />
 
           
 
-           is thrown if <paramref
-           name="P" />
+           is thrown if <paramref name="P" />
 
           
 
-           or <paramref
-           name="G" />
+           or <paramref name="G" />
 
           
 
-           is a null reference (<b
-          >Nothing</b>
+           is a null reference (<b>Nothing</b>
 
           
 
-           in Visual Basic) -or- <paramref
-           name="P" />
+           in Visual Basic) -or- <paramref name="P" />
 
           
 

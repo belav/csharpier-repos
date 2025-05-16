@@ -4,8 +4,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Drawing.Text" />
+        >The <see cref="N:System.Drawing.Text" />
 
         
 
@@ -15,8 +14,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Basic graphics functionality is provided by the <see
-         cref="N:System.Drawing" />
+        >Basic graphics functionality is provided by the <see cref="N:System.Drawing" />
 
         
 
@@ -24,8 +22,7 @@
       >
       <block subset="none" type="note">
         <para
-          >Classes within the <see
-           cref="N:System.Drawing.Text" />
+          >Classes within the <see cref="N:System.Drawing.Text" />
 
           
 

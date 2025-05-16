@@ -28,23 +28,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each element of the <see
-         cref="T:System.Collections.Generic.LinkedList`1" />
+        >Each element of the <see cref="T:System.Collections.Generic.LinkedList`1" />
 
         
 
-         collection is a <see
-         cref="T:System.Collections.Generic.LinkedListNode`1" />
+         collection is a <see cref="T:System.Collections.Generic.LinkedListNode`1" />
 
         
 
-        .  The <see
-         cref="T:System.Collections.Generic.LinkedListNode`1" />
+        .  The <see cref="T:System.Collections.Generic.LinkedListNode`1" />
 
         
 
-         contains a value, a reference to the <see
-         cref="T:System.Collections.Generic.LinkedList`1" />
+         contains a value, a reference to the <see cref="T:System.Collections.Generic.LinkedList`1" />
 
         
 
@@ -54,8 +50,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a node in a <see
-         cref="T:System.Collections.Generic.LinkedList`1" />
+        >Represents a node in a <see cref="T:System.Collections.Generic.LinkedList`1" />
 
         
 
@@ -109,13 +104,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Collections.Generic.LinkedList`1" />
+            >Gets the <see cref="T:System.Collections.Generic.LinkedList`1" />
 
             
 
-             that the <see
-             cref="T:System.Collections.Generic.LinkedListNode`1" />
+             that the <see cref="T:System.Collections.Generic.LinkedListNode`1" />
 
             
 
@@ -148,8 +141,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the next node in the <see
-             cref="T:System.Collections.Generic.LinkedList`1" />
+            >Gets the next node in the <see cref="T:System.Collections.Generic.LinkedList`1" />
 
             
 
@@ -182,8 +174,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the previous node in the <see
-             cref="T:System.Collections.Generic.LinkedList`1" />
+            >Gets the previous node in the <see cref="T:System.Collections.Generic.LinkedList`1" />
 
             
 
@@ -209,8 +200,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is set in the <see
-             cref="M:System.Collections.Generic.LinkedListNode`1.#ctor(`0)" />
+            >This property is set in the <see cref="M:System.Collections.Generic.LinkedListNode`1.#ctor(`0)" />
 
             
 

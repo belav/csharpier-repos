@@ -14,8 +14,7 @@
   <Interfaces />
   <Docs>
     <summary
-      >Provide a simplistic class wrapper around <see
-       cref="T:System.Threading.SpinLock" />
+      >Provide a simplistic class wrapper around <see cref="T:System.Threading.SpinLock" />
 
       
 
@@ -37,8 +36,7 @@
       <Parameters />
       <Docs>
         <summary
-          >Initialize underlying <see
-           cref="T:System.Threading.SpinLock" />
+          >Initialize underlying <see cref="T:System.Threading.SpinLock" />
 
           
 
@@ -66,16 +64,14 @@
 
           
 
-           to enable thread tracking, <see
-           langword="false" />
+           to enable thread tracking, <see langword="false" />
 
           
 
            otherwise.</param
         >
         <summary
-          >Initialize underlying <see
-           cref="T:System.Threading.SpinLock" />
+          >Initialize underlying <see cref="T:System.Threading.SpinLock" />
 
           
 
@@ -99,8 +95,7 @@
       </ReturnValue>
       <Docs>
         <summary
-          >Instance of <see
-           cref="T:System.Threading.SpinLock" />
+          >Instance of <see cref="T:System.Threading.SpinLock" />
 
           
 

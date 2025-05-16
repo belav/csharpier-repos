@@ -20,13 +20,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Authentication.ExtendedProtection.PolicyEnforcement" />
+        >The <see cref="T:System.Security.Authentication.ExtendedProtection.PolicyEnforcement" />
 
         
 
-         enumeration specifies when the <see
-         cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+         enumeration specifies when the <see cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
 
         
 
@@ -52,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+            >The <see cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
 
             
 
@@ -79,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+            >The <see cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
 
             
 
@@ -106,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+            >The <see cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
 
             
 

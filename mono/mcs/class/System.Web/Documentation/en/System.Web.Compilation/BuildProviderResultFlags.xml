@@ -18,23 +18,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Compilation.BuildProviderResultFlags" />
+        >The <see cref="T:System.Web.Compilation.BuildProviderResultFlags" />
 
         
 
-         values are used to indicate the results from the <see
-         cref="M:System.Web.Compilation.BuildProvider.GetResultFlags(System.CodeDom.Compiler.CompilerResults)" />
+         values are used to indicate the results from the <see cref="M:System.Web.Compilation.BuildProvider.GetResultFlags(System.CodeDom.Compiler.CompilerResults)" />
 
         
 
-         method. The enumeration values indicate actions that are required after a virtual path is built within the ASP.NET build environment. The <see
-         cref="T:System.Web.Compilation.BuildProviderResultFlags" />
+         method. The enumeration values indicate actions that are required after a virtual path is built within the ASP.NET build environment. The <see cref="T:System.Web.Compilation.BuildProviderResultFlags" />
 
         
 
-         values are used by the ASP.NET build environment when using instances of the <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+         values are used by the ASP.NET build environment when using instances of the <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
@@ -75,13 +71,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The compilation of the virtual path requires the containing <see
-             cref="T:System.AppDomain" />
+            >The compilation of the virtual path requires the containing <see cref="T:System.AppDomain" />
 
             
 
-             to be unloaded and restarted. This is only used in advanced compilation scenarios; typically, you should use the <see
-             cref="F:System.Web.Compilation.BuildProviderResultFlags.Default" />
+             to be unloaded and restarted. This is only used in advanced compilation scenarios; typically, you should use the <see cref="F:System.Web.Compilation.BuildProviderResultFlags.Default" />
 
             
 

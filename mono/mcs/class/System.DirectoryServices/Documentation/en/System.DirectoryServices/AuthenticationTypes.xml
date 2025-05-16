@@ -154,12 +154,16 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >Specifies that ADSI will not attempt to query the Active Directory Domain Services objectClass property.  Therefore, only the base interfaces that are supported by all ADSI objects will be exposed.  Other interfaces that the object supports will not be available. A user can use this option to boost the performance in a series of object manipulations that involve only methods of the base interfaces. However, ADSI does not verify if any of the request objects actually exist on the server. For more information, see the topic "Fast Binding Option for Batch Write/Modify Operations" in the MSDN Library at <see
-             cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+              cref="http://msdn.microsoft.com/library"
+              >http://msdn.microsoft.com/library</see
+            >
 
             
 
             .  For more information about the objectClass property, see the "Object-Class" topic in the MSDN Library at <see
-             cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+              cref="http://msdn.microsoft.com/library"
+              >http://msdn.microsoft.com/library</see
+            >
 
             
 
@@ -219,8 +223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Encrypts data using Kerberos. The <see
-             cref="F:System.DirectoryServices.AuthenticationTypes.Secure" />
+            >Encrypts data using Kerberos. The <see cref="F:System.DirectoryServices.AuthenticationTypes.Secure" />
 
             
 
@@ -298,8 +301,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Verifies data integrity to ensure that the data received is the same as the data sent. The <see
-             cref="F:System.DirectoryServices.AuthenticationTypes.Secure" />
+            >Verifies data integrity to ensure that the data received is the same as the data sent. The <see cref="F:System.DirectoryServices.AuthenticationTypes.Secure" />
 
             
 
@@ -313,18 +315,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="F:System.DirectoryServices.AuthenticationTypes.Secure" />
+        >The <see cref="F:System.DirectoryServices.AuthenticationTypes.Secure" />
 
         
 
-         flag can be used in combination with other flags such as <see
-         cref="F:System.DirectoryServices.AuthenticationTypes.ReadonlyServer" />
+         flag can be used in combination with other flags such as <see cref="F:System.DirectoryServices.AuthenticationTypes.ReadonlyServer" />
 
         
 
-        , <see
-         cref="F:System.DirectoryServices.AuthenticationTypes.FastBind" />
+        , <see cref="F:System.DirectoryServices.AuthenticationTypes.FastBind" />
 
         
 
@@ -340,18 +339,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.DirectoryServices.AuthenticationTypes" />
+        >The <see cref="T:System.DirectoryServices.AuthenticationTypes" />
 
         
 
-         enumeration specifies the types of authentication used in <see
-         cref="N:System.DirectoryServices" />
+         enumeration specifies the types of authentication used in <see cref="N:System.DirectoryServices" />
 
         
 
-        . This enumeration has a <see
-         cref="T:System.FlagsAttribute" />
+        . This enumeration has a <see cref="T:System.FlagsAttribute" />
 
         
 

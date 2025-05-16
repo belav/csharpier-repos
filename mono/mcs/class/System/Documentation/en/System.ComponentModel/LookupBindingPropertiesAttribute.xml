@@ -29,26 +29,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
+        >The <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
 
         
 
-         is used to specify the properties used with lookup-based binding, particularly <see
-         cref="T:System.Windows.Forms.ListBox" />
+         is used to specify the properties used with lookup-based binding, particularly <see cref="T:System.Windows.Forms.ListBox" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.ComboBox" />
+         and <see cref="T:System.Windows.Forms.ComboBox" />
 
         
 
          controls.</para
       >
       <para
-        >The <see
-         cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
+        >The <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
 
         
 
@@ -77,23 +73,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default constructor sets the <see
-             cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.DataSource" />
+            >The default constructor sets the <see cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.DataSource" />
 
             
 
-            , <see
-             cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.DisplayMember" />
+            , <see cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.DisplayMember" />
 
             
 
-            , <see
-             cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.ValueMember" />
+            , <see cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.ValueMember" />
 
             
 
-            , and <see
-             cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.LookupMember" />
+            , and <see cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.LookupMember" />
 
             
 
@@ -103,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
 
             
 
@@ -137,13 +128,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets each of its public properties to the corresponding supplied parameter; for example, the <see
-             cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.DataSource" />
+            >This constructor sets each of its public properties to the corresponding supplied parameter; for example, the <see cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.DataSource" />
 
             
 
-             property is set to <paramref
-             name="dataSource" />
+             property is set to <paramref name="dataSource" />
 
             
 
@@ -153,8 +142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
 
             
 
@@ -162,28 +150,44 @@
           >
         </summary>
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the property to be used as the data source.</param
         >
         <param name="displayMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the property to be used for the display name.</param
         >
         <param name="valueMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the property to be used as the source for values.</param
         >
         <param name="lookupMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -207,8 +211,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.DataSource" />
+            >The <see cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.DataSource" />
 
             
 
@@ -218,8 +221,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the data source property for the component to which the <see
-             cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
+            >Gets the name of the data source property for the component to which the <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
 
             
 
@@ -249,13 +251,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.ComponentModel.LookupBindingPropertiesAttribute.Default" />
+            >The <see cref="F:System.ComponentModel.LookupBindingPropertiesAttribute.Default" />
 
             
 
-             member is a static, read-only field that defines an instance of the <see
-             cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
+             member is a static, read-only field that defines an instance of the <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
 
             
 
@@ -265,8 +265,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the default value for the <see
-             cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
+            >Represents the default value for the <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
 
             
 
@@ -291,8 +290,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.DisplayMember" />
+            >The <see cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.DisplayMember" />
 
             
 
@@ -302,8 +300,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the display member property for the component to which the <see
-             cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
+            >Gets the name of the display member property for the component to which the <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
 
             
 
@@ -333,38 +330,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.LookupBindingPropertiesAttribute.Equals(System.Object)" />
+            >The <see cref="M:System.ComponentModel.LookupBindingPropertiesAttribute.Equals(System.Object)" />
 
             
 
-             method returns true if the <paramref
-             name="obj" />
+             method returns true if the <paramref name="obj" />
 
             
 
-             parameter is of type <see
-             cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
+             parameter is of type <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
 
             
 
-             and all the public properties—<see
-             cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.DataSource" />
+             and all the public properties—<see cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.DataSource" />
 
             
 
-            , <see
-             cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.DisplayMember" />
+            , <see cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.DisplayMember" />
 
             
 
-            , <see
-             cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.ValueMember" />
+            , <see cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.ValueMember" />
 
             
 
-            , and <see
-             cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.LookupMember" />
+            , and <see cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.LookupMember" />
 
             
 
@@ -374,13 +364,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Object" />
+            >Determines whether the specified <see cref="T:System.Object" />
 
             
 
-             is equal to the current <see
-             cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
+             is equal to the current <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
 
             
 
@@ -392,17 +380,19 @@
           <para>true if the object is equal to the current instance; otherwise, false, indicating they are not equal.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to compare with the current <see
-           cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
+           to compare with the current <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
 
           
 
@@ -434,8 +424,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
+            >A hash code for the current <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
 
             
 
@@ -460,8 +449,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.LookupMember" />
+            >The <see cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.LookupMember" />
 
             
 
@@ -490,8 +478,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.ValueMember" />
+            >The <see cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.ValueMember" />
 
             
 
@@ -501,8 +488,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the value member property for the component to which the <see
-             cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
+            >Gets the name of the value member property for the component to which the <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
 
             
 

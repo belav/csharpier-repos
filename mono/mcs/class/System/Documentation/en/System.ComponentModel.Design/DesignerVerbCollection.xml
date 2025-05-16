@@ -31,8 +31,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class provides a collection that can contain <see
-         cref="T:System.ComponentModel.Design.DesignerVerb" />
+        >This class provides a collection that can contain <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
         
 
@@ -42,8 +41,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.ComponentModel.Design.DesignerVerb" />
+        >Represents a collection of <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
         
 
@@ -74,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignerVerbCollection" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerVerbCollection" />
 
             
 
@@ -108,13 +105,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignerVerbCollection" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerVerbCollection" />
 
             
 
-             class using the specified array of <see
-             cref="T:System.ComponentModel.Design.DesignerVerb" />
+             class using the specified array of <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
             
 
@@ -122,12 +117,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.Design.DesignerVerb" />
+          A <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
           
 
@@ -161,8 +159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.ComponentModel.Design.DesignerVerb" />
+            >Adds the specified <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
             
 
@@ -174,12 +171,15 @@
           <para>The index in the collection at which the verb was added.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerVerb" />
+          The <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
           
 
@@ -215,12 +215,15 @@
           <para>Adds the specified set of designer verbs to the collection.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.ComponentModel.Design.DesignerVerb" />
+          An array of <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
           
 
@@ -256,12 +259,15 @@
           <para>Adds the specified collection of designer verbs to the collection.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.Design.DesignerVerbCollection" />
+          A <see cref="T:System.ComponentModel.Design.DesignerVerbCollection" />
 
           
 
@@ -295,8 +301,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the specified <see
-             cref="T:System.ComponentModel.Design.DesignerVerb" />
+            >Gets a value indicating whether the specified <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
             
 
@@ -308,12 +313,15 @@
           <para>true if the specified object exists in the collection; otherwise, false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerVerb" />
+          The <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
           
 
@@ -348,8 +356,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the collection members to the specified <see
-             cref="T:System.ComponentModel.Design.DesignerVerb" />
+            >Copies the collection members to the specified <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
             
 
@@ -357,14 +364,22 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array to copy collection members to. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -398,8 +413,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the specified <see
-             cref="T:System.ComponentModel.Design.DesignerVerb" />
+            >Gets the index of the specified <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
             
 
@@ -411,12 +425,15 @@
           <para>The index of the specified object if it is found in the list; otherwise, -1.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerVerb" />
+          The <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
           
 
@@ -451,8 +468,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts the specified <see
-             cref="T:System.ComponentModel.Design.DesignerVerb" />
+            >Inserts the specified <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
             
 
@@ -460,19 +476,26 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index in the collection at which to insert the verb. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerVerb" />
+          The <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
           
 
@@ -567,14 +590,22 @@
           <para>Raises the Insert event.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index at which to insert an item. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -614,14 +645,22 @@
           <para>Raises the Remove event.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index at which to remove the item. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -662,21 +701,33 @@
           <para>Raises the Set event.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index at which to set the item. </param
         >
         <param name="oldValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The old object. </param
         >
         <param name="newValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -712,7 +763,11 @@
           <para>Raises the Validate event.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -746,8 +801,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.ComponentModel.Design.DesignerVerb" />
+            >Removes the specified <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
             
 
@@ -755,12 +809,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerVerb" />
+          The <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
           
 

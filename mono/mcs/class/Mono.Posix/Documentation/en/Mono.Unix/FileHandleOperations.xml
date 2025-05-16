@@ -17,23 +17,19 @@
   <Interfaces />
   <Docs>
     <summary>Operations that can be performed on a file handle.</summary>
-    <remarks
-      >
-      The <see
-       cref="T:Mono.Unix.FileHandleOperations" />
+    <remarks>
+      The <see cref="T:Mono.Unix.FileHandleOperations" />
 
       
 
        class provides
       access to operating system operations that effect file handles, such as
-      <see
-       cref="T:System.IO.FileStream" />
+      <see cref="T:System.IO.FileStream" />
 
       
 
       s,
-      <see
-       cref="T:Mono.Unix.UnixStream" />
+      <see cref="T:Mono.Unix.UnixStream" />
 
       
 
@@ -67,10 +63,8 @@
       </Parameters>
       <Docs>
         <param name="stream">File stream to advise.</param>
-        <param name="pattern"
-          >
-          A <see
-           cref="T:Mono.Unix.FileAccessPattern" />
+        <param name="pattern">
+          A <see cref="T:Mono.Unix.FileAccessPattern" />
 
           
 
@@ -125,8 +119,7 @@
           
 
            
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
@@ -166,20 +159,16 @@
         <Parameter Name="pattern" Type="Mono.Unix.FileAccessPattern" />
       </Parameters>
       <Docs>
-        <param name="fd"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="fd">
+          A <see cref="T:System.Int32" />
 
           
 
            containing the file descriptor to advise.
         </param
         >
-        <param name="pattern"
-          >
-          A <see
-           cref="T:Mono.Unix.FileAccessPattern" />
+        <param name="pattern">
+          A <see cref="T:Mono.Unix.FileAccessPattern" />
 
           
 
@@ -263,10 +252,8 @@
       </Parameters>
       <Docs>
         <param name="file">File stream to advise.</param>
-        <param name="pattern"
-          >
-          A <see
-           cref="T:Mono.Unix.FileAccessPattern" />
+        <param name="pattern">
+          A <see cref="T:Mono.Unix.FileAccessPattern" />
 
           
 
@@ -321,8 +308,7 @@
           
 
            
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
@@ -365,10 +351,8 @@
       </Parameters>
       <Docs>
         <param name="stream">File stream to advise.</param>
-        <param name="pattern"
-          >
-          A <see
-           cref="T:Mono.Unix.FileAccessPattern" />
+        <param name="pattern">
+          A <see cref="T:Mono.Unix.FileAccessPattern" />
 
           
 
@@ -376,43 +360,35 @@
           access pattern to suggest.
         </param
         >
-        <param name="offset"
-          >
-          A <see
-           cref="T:System.Int64" />
+        <param name="offset">
+          A <see cref="T:System.Int64" />
 
           
 
            containing the start of the range to suggest 
-          the <paramref
-           name="pattern" />
+          the <paramref name="pattern" />
 
           
 
            access pattern.
         </param
         >
-        <param name="len"
-          >
-          A <see
-           cref="T:System.Int64" />
+        <param name="len">
+          A <see cref="T:System.Int64" />
 
           
 
            containing the length of the range
-          to suggest the <paramref
-           name="pattern" />
+          to suggest the <paramref name="pattern" />
 
           
 
           
-          access pattern.  If <c
-          >0</c>
+          access pattern.  If <c>0</c>
 
           
 
-          , <paramref
-           name="pattern" />
+          , <paramref name="pattern" />
 
           
 
@@ -437,30 +413,25 @@
             
 
              applies to a region starting at
-        <paramref
-             name="offset" />
+        <paramref name="offset" />
 
             
 
-             and extending for <paramref
-             name="len" />
+             and extending for <paramref name="len" />
 
             
 
             
-        bytes (or until end-of-file if <paramref
-             name="len" />
+        bytes (or until end-of-file if <paramref name="len" />
 
             
 
-             is <c
-            >0</c>
+             is <c>0</c>
 
             
 
             )
-        within the file specified by <paramref
-             name="stream" />
+        within the file specified by <paramref name="stream" />
 
             
 
@@ -494,8 +465,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -537,20 +507,16 @@
         <Parameter Name="len" Type="System.Int64" />
       </Parameters>
       <Docs>
-        <param name="fd"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="fd">
+          A <see cref="T:System.Int32" />
 
           
 
            containing the file descriptor to advise.
         </param
         >
-        <param name="pattern"
-          >
-          A <see
-           cref="T:Mono.Unix.FileAccessPattern" />
+        <param name="pattern">
+          A <see cref="T:Mono.Unix.FileAccessPattern" />
 
           
 
@@ -558,43 +524,35 @@
           access pattern to suggest.
         </param
         >
-        <param name="offset"
-          >
-          A <see
-           cref="T:System.Int64" />
+        <param name="offset">
+          A <see cref="T:System.Int64" />
 
           
 
            containing the start of the range to suggest 
-          the <paramref
-           name="pattern" />
+          the <paramref name="pattern" />
 
           
 
            access pattern.
         </param
         >
-        <param name="len"
-          >
-          A <see
-           cref="T:System.Int64" />
+        <param name="len">
+          A <see cref="T:System.Int64" />
 
           
 
            containing the length of the range
-          to suggest the <paramref
-           name="pattern" />
+          to suggest the <paramref name="pattern" />
 
           
 
           
-          access pattern.  If <c
-          >0</c>
+          access pattern.  If <c>0</c>
 
           
 
-          , <paramref
-           name="pattern" />
+          , <paramref name="pattern" />
 
           
 
@@ -619,30 +577,25 @@
             
 
              applies to a region starting at
-        <paramref
-             name="offset" />
+        <paramref name="offset" />
 
             
 
-             and extending for <paramref
-             name="len" />
+             and extending for <paramref name="len" />
 
             
 
             
-        bytes (or until end-of-file if <paramref
-             name="len" />
+        bytes (or until end-of-file if <paramref name="len" />
 
             
 
-             is <c
-            >0</c>
+             is <c>0</c>
 
             
 
             )
-        within the file specified by <paramref
-             name="fd" />
+        within the file specified by <paramref name="fd" />
 
             
 
@@ -708,10 +661,8 @@
       </Parameters>
       <Docs>
         <param name="file">File stream to advise.</param>
-        <param name="pattern"
-          >
-          A <see
-           cref="T:Mono.Unix.FileAccessPattern" />
+        <param name="pattern">
+          A <see cref="T:Mono.Unix.FileAccessPattern" />
 
           
 
@@ -719,43 +670,35 @@
           access pattern to suggest.
         </param
         >
-        <param name="offset"
-          >
-          A <see
-           cref="T:System.Int64" />
+        <param name="offset">
+          A <see cref="T:System.Int64" />
 
           
 
            containing the start of the range to suggest 
-          the <paramref
-           name="pattern" />
+          the <paramref name="pattern" />
 
           
 
            access pattern.
         </param
         >
-        <param name="len"
-          >
-          A <see
-           cref="T:System.Int64" />
+        <param name="len">
+          A <see cref="T:System.Int64" />
 
           
 
            containing the length of the range
-          to suggest the <paramref
-           name="pattern" />
+          to suggest the <paramref name="pattern" />
 
           
 
           
-          access pattern.  If <c
-          >0</c>
+          access pattern.  If <c>0</c>
 
           
 
-          , <paramref
-           name="pattern" />
+          , <paramref name="pattern" />
 
           
 
@@ -780,30 +723,25 @@
             
 
              applies to a region starting at
-        <paramref
-             name="offset" />
+        <paramref name="offset" />
 
             
 
-             and extending for <paramref
-             name="len" />
+             and extending for <paramref name="len" />
 
             
 
             
-        bytes (or until end-of-file if <paramref
-             name="len" />
+        bytes (or until end-of-file if <paramref name="len" />
 
             
 
-             is <c
-            >0</c>
+             is <c>0</c>
 
             
 
             )
-        within the file specified by <paramref
-             name="file" />
+        within the file specified by <paramref name="file" />
 
             
 
@@ -838,8 +776,7 @@
           
 
            
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 

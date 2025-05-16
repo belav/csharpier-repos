@@ -17,8 +17,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the current stage in the lifecycle of a <see
-         cref="T:System.Threading.Tasks.Task" />
+        >Represents the current stage in the lifecycle of a <see cref="T:System.Threading.Tasks.Task" />
 
         
 
@@ -44,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The task acknowledged cancellation by throwing an OperationCanceledException with its own CancellationToken while the token was in signaled state, or the task's CancellationToken was already signaled before the task started executing. For more information, see <format
-             type="text/html">
+            >The task acknowledged cancellation by throwing an OperationCanceledException with its own CancellationToken while the token was in signaled state, or the task's CancellationToken was already signaled before the task started executing. For more information, see <format type="text/html">
               <a href="3ecf1ea9-e399-4a6a-a0d6-8475f48dcb28">Task Cancellation</a>
             </format>
 

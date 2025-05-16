@@ -18,8 +18,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>An XML CDATA section allows you to store almost any arbitrary string as the contents of an XML element. This class represents the XML concept of a CDATA text node.</para>
       <para
-        >This class derives from <see
-         cref="T:System.Xml.Linq.XText" />
+        >This class derives from <see cref="T:System.Xml.Linq.XText" />
 
         
 
@@ -50,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Linq.XCData" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XCData" />
 
             
 
@@ -59,12 +57,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that contains the value of the <see
-           cref="T:System.Xml.Linq.XCData" />
+          A string that contains the value of the <see cref="T:System.Xml.Linq.XCData" />
 
           
 
@@ -93,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Linq.XCData" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XCData" />
 
             
 
@@ -102,12 +102,15 @@
           >
         </summary>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XCData" />
+          The <see cref="T:System.Xml.Linq.XCData" />
 
           
 
@@ -136,18 +139,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because all classes that derive from <see
-             cref="T:System.Xml.Linq.XObject" />
+            >Because all classes that derive from <see cref="T:System.Xml.Linq.XObject" />
 
             
 
-             contain a <see
-             cref="P:System.Xml.Linq.XObject.NodeType" />
+             contain a <see cref="P:System.Xml.Linq.XObject.NodeType" />
 
             
 
-             property, you can write code that operates on collections of concrete subclass of <see
-             cref="T:System.Xml.Linq.XObject" />
+             property, you can write code that operates on collections of concrete subclass of <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -183,8 +183,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is primarily used internally by the methods that write an XML tree to an <see
-             cref="T:System.Xml.XmlWriter" />
+            >This method is primarily used internally by the methods that write an XML tree to an <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -194,8 +193,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes this CDATA object to an <see
-             cref="T:System.Xml.XmlWriter" />
+            >Writes this CDATA object to an <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -203,12 +201,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlWriter" />
+          An <see cref="T:System.Xml.XmlWriter" />
 
           
 

@@ -13,23 +13,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.WebApplicationLevel" />
+        >The <see cref="T:System.Web.Configuration.WebApplicationLevel" />
 
         
 
-         class provides three levels that are used to distinguish where a configuration file is in relation to the root level of an ASP.NET Web application. The three path-level types are <see
-         cref="F:System.Web.Configuration.WebApplicationLevel.AboveApplication" />
+         class provides three levels that are used to distinguish where a configuration file is in relation to the root level of an ASP.NET Web application. The three path-level types are <see cref="F:System.Web.Configuration.WebApplicationLevel.AboveApplication" />
 
         
 
-        , <see
-         cref="F:System.Web.Configuration.WebApplicationLevel.AtApplication" />
+        , <see cref="F:System.Web.Configuration.WebApplicationLevel.AtApplication" />
 
         
 
-        , and <see
-         cref="F:System.Web.Configuration.WebApplicationLevel.BelowApplication" />
+        , and <see cref="F:System.Web.Configuration.WebApplicationLevel.BelowApplication" />
 
         
 

@@ -25,77 +25,64 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A member of the <see
-         cref="T:System.Globalization.CalendarWeekRule" />
+        >A member of the <see cref="T:System.Globalization.CalendarWeekRule" />
 
         
 
-         enumeration is returned by the <see
-         cref="P:System.Globalization.DateTimeFormatInfo.CalendarWeekRule" />
+         enumeration is returned by the <see cref="P:System.Globalization.DateTimeFormatInfo.CalendarWeekRule" />
 
         
 
-         property and is used by the culture's current calendar to determine the calendar week rule. The enumeration value is also used as a parameter to the <see
-         cref="M:System.Globalization.Calendar.GetWeekOfYear(System.DateTime,System.Globalization.CalendarWeekRule,System.DayOfWeek)" />
+         property and is used by the culture's current calendar to determine the calendar week rule. The enumeration value is also used as a parameter to the <see cref="M:System.Globalization.Calendar.GetWeekOfYear(System.DateTime,System.Globalization.CalendarWeekRule,System.DayOfWeek)" />
 
         
 
          method. </para
       >
       <para
-        >Calendar week rules depend on the <see
-         cref="T:System.DayOfWeek" />
+        >Calendar week rules depend on the <see cref="T:System.DayOfWeek" />
 
         
 
-         value that indicates the first day of the week in addition to depending on a <see
-         cref="T:System.Globalization.CalendarWeekRule" />
+         value that indicates the first day of the week in addition to depending on a <see cref="T:System.Globalization.CalendarWeekRule" />
 
         
 
-         value. The <see
-         cref="P:System.Globalization.DateTimeFormatInfo.FirstDayOfWeek" />
+         value. The <see cref="P:System.Globalization.DateTimeFormatInfo.FirstDayOfWeek" />
 
         
 
-         property provides the default value for a culture, but any <see
-         cref="T:System.DayOfWeek" />
+         property provides the default value for a culture, but any <see cref="T:System.DayOfWeek" />
 
         
 
-         value can be specified as the first day of the week in the <see
-         cref="M:System.Globalization.Calendar.GetWeekOfYear(System.DateTime,System.Globalization.CalendarWeekRule,System.DayOfWeek)" />
+         value can be specified as the first day of the week in the <see cref="M:System.Globalization.Calendar.GetWeekOfYear(System.DateTime,System.Globalization.CalendarWeekRule,System.DayOfWeek)" />
 
         
 
          method.</para
       >
       <para
-        >The first week based on the <see
-         cref="F:System.Globalization.CalendarWeekRule.FirstDay" />
+        >The first week based on the <see cref="F:System.Globalization.CalendarWeekRule.FirstDay" />
 
         
 
-         value can have one to seven days. The first week based on the <see
-         cref="F:System.Globalization.CalendarWeekRule.FirstFullWeek" />
+         value can have one to seven days. The first week based on the <see cref="F:System.Globalization.CalendarWeekRule.FirstFullWeek" />
 
         
 
-         value always has seven days. The first week based on the <see
-         cref="F:System.Globalization.CalendarWeekRule.FirstFourDayWeek" />
+         value always has seven days. The first week based on the <see cref="F:System.Globalization.CalendarWeekRule.FirstFourDayWeek" />
 
         
 
          value can have four to seven days.</para
       >
       <para
-        >For example, in the Gregorian calendar, suppose that the first day of the year (January 1) falls on a Tuesday and the designated first day of the week is Sunday. Selecting <see
-         cref="F:System.Globalization.CalendarWeekRule.FirstFullWeek" />
+        >For example, in the Gregorian calendar, suppose that the first day of the year (January 1) falls on a Tuesday and the designated first day of the week is Sunday. Selecting <see cref="F:System.Globalization.CalendarWeekRule.FirstFullWeek" />
 
         
 
-         defines the first Sunday (January 6) as the beginning of the first week of the year. The first five days of the year are considered part of the last week of the previous year. In contrast, selecting <see
-         cref="F:System.Globalization.CalendarWeekRule.FirstFourDayWeek" />
+         defines the first Sunday (January 6) as the beginning of the first week of the year. The first five days of the year are considered part of the last week of the previous year. In contrast, selecting <see cref="F:System.Globalization.CalendarWeekRule.FirstFourDayWeek" />
 
         
 
@@ -302,8 +289,7 @@
         </item>
       </list>
       <para
-        >Suppose the first day of the year (January 1) falls on a Friday and the designated first day of the week is Sunday. Selecting <see
-         cref="F:System.Globalization.CalendarWeekRule.FirstFourDayWeek" />
+        >Suppose the first day of the year (January 1) falls on a Friday and the designated first day of the week is Sunday. Selecting <see cref="F:System.Globalization.CalendarWeekRule.FirstFourDayWeek" />
 
         
 
@@ -468,28 +454,23 @@
         </item>
       </list>
       <para
-        >The following example illustrates how the <see
-         cref="T:System.Globalization.CalendarWeekRule" />
+        >The following example illustrates how the <see cref="T:System.Globalization.CalendarWeekRule" />
 
         
 
-         and <see
-         cref="T:System.DayOfWeek" />
+         and <see cref="T:System.DayOfWeek" />
 
         
 
-         values are used together to determine how weeks are assigned. In the Gregorian calendar, the first day of the year (January 1) in 2013 falls on a Tuesday. If the designated first day of the week is Sunday, the first Sunday (January 6) is the first day of the first week of the year, and Saturday (January 5) belongs to the fifty-third week of the previous year. Changing the calendar week rule to <see
-         cref="F:System.Globalization.CalendarWeekRule.FirstFourDayWeek" />
+         values are used together to determine how weeks are assigned. In the Gregorian calendar, the first day of the year (January 1) in 2013 falls on a Tuesday. If the designated first day of the week is Sunday, the first Sunday (January 6) is the first day of the first week of the year, and Saturday (January 5) belongs to the fifty-third week of the previous year. Changing the calendar week rule to <see cref="F:System.Globalization.CalendarWeekRule.FirstFourDayWeek" />
 
         
 
-         defines Tuesday (January 1) as the beginning of the first week of the year, because there are more than four days between Tuesday, January 1, and Sunday, January 6. Using this rule, January 5 belongs to the first week of the year. For 2010, a year in which January 1 falls on a Friday, applying the <see
-         cref="F:System.Globalization.CalendarWeekRule.FirstFourDayWeek" />
+         defines Tuesday (January 1) as the beginning of the first week of the year, because there are more than four days between Tuesday, January 1, and Sunday, January 6. Using this rule, January 5 belongs to the first week of the year. For 2010, a year in which January 1 falls on a Friday, applying the <see cref="F:System.Globalization.CalendarWeekRule.FirstFourDayWeek" />
 
         
 
-         rule with <see
-         cref="F:System.DayOfWeek.Sunday" />
+         rule with <see cref="F:System.DayOfWeek.Sunday" />
 
         
 
@@ -499,7 +480,7 @@
       <block subset="none" type="note">
         <para
           >This does not map exactly to ISO 8601. The differences are discussed in the blog entry <see
-           cref="http://go.microsoft.com/fwlink/?LinkId=160851"
+            cref="http://go.microsoft.com/fwlink/?LinkId=160851"
             >ISO 8601 Week of Year format in Microsoft .Net</see
           >
 
@@ -509,38 +490,31 @@
         >
       </block>
       <para
-        >Each <see
-         cref="T:System.Globalization.CultureInfo" />
+        >Each <see cref="T:System.Globalization.CultureInfo" />
 
         
 
-         object supports a set of calendars. The <see
-         cref="P:System.Globalization.CultureInfo.Calendar" />
+         object supports a set of calendars. The <see cref="P:System.Globalization.CultureInfo.Calendar" />
 
         
 
-         property returns the default calendar for the culture, and the <see
-         cref="P:System.Globalization.CultureInfo.OptionalCalendars" />
+         property returns the default calendar for the culture, and the <see cref="P:System.Globalization.CultureInfo.OptionalCalendars" />
 
         
 
-         property returns an array containing all the calendars supported by the culture. To change the calendar used by a <see
-         cref="T:System.Globalization.CultureInfo" />
+         property returns an array containing all the calendars supported by the culture. To change the calendar used by a <see cref="T:System.Globalization.CultureInfo" />
 
         
 
-        , the application should set the <see
-         cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+        , the application should set the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
 
         
 
-         property of <see
-         cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+         property of <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
         
 
-         to a new <see
-         cref="T:System.Globalization.Calendar" />
+         to a new <see cref="T:System.Globalization.Calendar" />
 
         
 

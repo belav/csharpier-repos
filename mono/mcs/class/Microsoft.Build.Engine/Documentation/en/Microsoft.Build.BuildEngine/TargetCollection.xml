@@ -22,8 +22,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of all <format
-         type="text/html">
+        >Represents a collection of all <format type="text/html">
           <a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a>
         </format>
 
@@ -52,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a new <format
-             type="text/html">
+            >Adds a new <format type="text/html">
               <a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a>
             </format>
 
@@ -65,13 +63,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:Microsoft.Build.BuildEngine.Target" />
+            >A <see cref="T:Microsoft.Build.BuildEngine.Target" />
 
             
 
-             object representing the created <unmanagedCodeEntityReference
-            >Target</unmanagedCodeEntityReference>
+             object representing the created <unmanagedCodeEntityReference>Target</unmanagedCodeEntityReference>
 
             
 
@@ -79,7 +75,11 @@
           >
         </returns>
         <param name="targetName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -106,13 +106,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the entire <see
-             cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
+            >Copies the entire <see cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
 
             
 
-             to a compatible one-dimensional <see
-             cref="T:System.Array" />
+             to a compatible one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -120,34 +118,38 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from <see
-           cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
+           that is the destination of the elements copied from <see cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -170,13 +172,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each <see
-             cref="T:Microsoft.Build.BuildEngine.Target" />
+            >Each <see cref="T:Microsoft.Build.BuildEngine.Target" />
 
             
 
-             object in the collection represents a <format
-             type="text/html">
+             object in the collection represents a <format type="text/html">
               <a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a>
             </format>
 
@@ -188,13 +188,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating the number of <see
-             cref="T:Microsoft.Build.BuildEngine.Target" />
+            >Gets a value indicating the number of <see cref="T:Microsoft.Build.BuildEngine.Target" />
 
             
 
-             objects in the <see
-             cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
+             objects in the <see cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
 
             
 
@@ -221,13 +219,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:Microsoft.Build.BuildEngine.Target" />
+            >Determines whether the specified <see cref="T:Microsoft.Build.BuildEngine.Target" />
 
             
 
-             exists in the <see
-             cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
+             exists in the <see cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
 
             
 
@@ -237,8 +233,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <unmanagedCodeEntityReference
-            >Target</unmanagedCodeEntityReference>
+            >true if the <unmanagedCodeEntityReference>Target</unmanagedCodeEntityReference>
 
             
 
@@ -246,7 +241,11 @@
           >
         </returns>
         <param name="targetName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -272,13 +271,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method allows the caller to use the foreach statement of the C# language (for each in vbprvb) to iterate through the individual <see
-             cref="T:Microsoft.Build.BuildEngine.Target" />
+            >This method allows the caller to use the foreach statement of the C# language (for each in vbprvb) to iterate through the individual <see cref="T:Microsoft.Build.BuildEngine.Target" />
 
             
 
-             objects in the <see
-             cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
+             objects in the <see cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
 
             
 
@@ -288,8 +285,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an enumerator that iterates through the <see
-             cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
+            >Gets an enumerator that iterates through the <see cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
 
             
 
@@ -299,13 +295,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the entire <see
-             cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
+             for the entire <see cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
 
             
 
@@ -330,8 +324,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see
-             cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
+            >Gets a value indicating whether access to the <see cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
 
             
 
@@ -384,8 +377,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <format
-             type="text/html">
+            >Removes the specified <format type="text/html">
               <a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a>
             </format>
 
@@ -395,7 +387,11 @@
           >
         </summary>
         <param name="targetToRemove">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -419,8 +415,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
 
             
 

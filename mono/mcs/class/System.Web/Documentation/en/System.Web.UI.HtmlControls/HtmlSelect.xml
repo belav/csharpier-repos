@@ -38,239 +38,196 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+        >Use the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
         
 
-         control to create a selection box. Specify item listings in the control by placing HTML &lt;option&gt; elements between the opening and closing &lt;select&gt; tags. Each item is represented by a <see
-         cref="T:System.Web.UI.WebControls.ListItem" />
+         control to create a selection box. Specify item listings in the control by placing HTML &lt;option&gt; elements between the opening and closing &lt;select&gt; tags. Each item is represented by a <see cref="T:System.Web.UI.WebControls.ListItem" />
 
         
 
-         object. To specify the text that is displayed for each item in the control, you can set the <see
-         cref="P:System.Web.UI.WebControls.ListItem.Text" />
+         object. To specify the text that is displayed for each item in the control, you can set the <see cref="P:System.Web.UI.WebControls.ListItem.Text" />
 
         
 
-         property of the item, or simply place text between the opening and closing &lt;option&gt; tags. By setting the <see
-         cref="P:System.Web.UI.WebControls.ListItem.Value" />
+         property of the item, or simply place text between the opening and closing &lt;option&gt; tags. By setting the <see cref="P:System.Web.UI.WebControls.ListItem.Value" />
 
         
 
-         property of the item, you can associate a value with the item that is different from the text. To select an item from the list by default, set the <see
-         cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+         property of the item, you can associate a value with the item that is different from the text. To select an item from the list by default, set the <see cref="P:System.Web.UI.WebControls.ListItem.Selected" />
 
         
 
          property of the item to true.</para
       >
       <para
-        >You can control the appearance and behavior of the <see
-         cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+        >You can control the appearance and behavior of the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
         
 
-         control by setting the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlSelect.Size" />
+         control by setting the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Size" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
+         and <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
 
         
 
-         properties. The <see
-         cref="P:System.Web.UI.HtmlControls.HtmlSelect.Size" />
+         properties. The <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Size" />
 
         
 
-         property specifies the height (in rows) of the control. The <see
-         cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
+         property specifies the height (in rows) of the control. The <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
 
         
 
-         property specifies whether more than one item can be concurrently selected in the <see
-         cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+         property specifies whether more than one item can be concurrently selected in the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
         
 
          control.</para
       >
       <para
-        >By default, the <see
-         cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+        >By default, the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
         
 
-         control is displayed as a drop-down list box. If you allow multiple selections (by setting the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
+         control is displayed as a drop-down list box. If you allow multiple selections (by setting the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
 
         
 
-         property to true) or specify a height greater than one row (by setting the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlSelect.Size" />
+         property to true) or specify a height greater than one row (by setting the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Size" />
 
         
 
          property to a value greater than 1), the control is displayed as a list box.</para
       >
       <para
-        >To determine the selected item in a single-selection <see
-         cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+        >To determine the selected item in a single-selection <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
         
 
-         control, use the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
+         control, use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
 
         
 
-         property to get the index of the selected item. You can then use this value to retrieve the item from the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+         property to get the index of the selected item. You can then use this value to retrieve the item from the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
 
         
 
          collection.</para
       >
       <para
-        >To determine the selected items from an <see
-         cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+        >To determine the selected items from an <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
         
 
-         control that allows multiple selections, iterate through the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+         control that allows multiple selections, iterate through the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
 
         
 
-         collection and test the <see
-         cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+         collection and test the <see cref="P:System.Web.UI.WebControls.ListItem.Selected" />
 
         
 
          property of each item.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+        >The <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
         
 
-         class provides two properties to support data binding. To bind data to any object that implements the <see
-         cref="T:System.Collections.IEnumerable" />
+         class provides two properties to support data binding. To bind data to any object that implements the <see cref="T:System.Collections.IEnumerable" />
 
         
 
-         interface (such as <see
-         cref="T:System.Data.DataView" />
+         interface (such as <see cref="T:System.Data.DataView" />
 
         
 
-        , <see
-         cref="T:System.Collections.ArrayList" />
+        , <see cref="T:System.Collections.ArrayList" />
 
         
 
-        , and <see
-         cref="T:System.Collections.Generic.List`1" />
+        , and <see cref="T:System.Collections.Generic.List`1" />
 
         
 
-        ), or the <see
-         cref="T:System.ComponentModel.IListSource" />
+        ), or the <see cref="T:System.ComponentModel.IListSource" />
 
         
 
-         interface, use the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+         interface, use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
 
         
 
-         property to specify the data source to bind to. When you set the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+         property to specify the data source to bind to. When you set the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
 
         
 
-         property, you must manually write the code to perform the data binding. To automatically bind an <see
-         cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+         property, you must manually write the code to perform the data binding. To automatically bind an <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
         
 
-         control to a data source represented by a data source control, use the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+         control to a data source represented by a data source control, use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
         
 
-         property and set its value to the <see
-         cref="P:System.Web.UI.Control.ID" />
+         property and set its value to the <see cref="P:System.Web.UI.Control.ID" />
 
         
 
-         property of the data source control to use. When you set the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+         property of the data source control to use. When you set the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
         
 
-         property, the <see
-         cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+         property, the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
         
 
-         control automatically binds to the specified data source control. Therefore, you do not need to explicitly call the <see
-         cref="M:System.Web.UI.Control.DataBind" />
+         control automatically binds to the specified data source control. Therefore, you do not need to explicitly call the <see cref="M:System.Web.UI.Control.DataBind" />
 
         
 
          method.</para
       >
       <para
-        >You can also specify which fields in the data source bind to the <see
-         cref="P:System.Web.UI.WebControls.ListItem.Text" />
+        >You can also specify which fields in the data source bind to the <see cref="P:System.Web.UI.WebControls.ListItem.Text" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.ListItem.Value" />
+         and <see cref="P:System.Web.UI.WebControls.ListItem.Value" />
 
         
 
-         properties of an item in the control by setting the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataTextField" />
+         properties of an item in the control by setting the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataTextField" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataValueField" />
+         and <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataValueField" />
 
         
 
-         properties, respectively. If the data source contains multiple sources of data, use the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataMember" />
+         properties, respectively. If the data source contains multiple sources of data, use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataMember" />
 
         
 
-         property to specify the specific source to bind to the control. For example, if you have a <see
-         cref="T:System.Data.DataSet" />
+         property to specify the specific source to bind to the control. For example, if you have a <see cref="T:System.Data.DataSet" />
 
         
 
-         object with multiple tables, you must specify which table to bind to the control with the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataMember" />
+         object with multiple tables, you must specify which table to bind to the control with the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataMember" />
 
         
 
          property.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
         
 
-        , see the <see
-         cref="M:System.Web.UI.HtmlControls.HtmlSelect.#ctor" />
+        , see the <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.#ctor" />
 
         
 
@@ -292,16 +249,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
              class.</para
           >
           <para
-            >The following table shows the initial property value for an instance of <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -333,8 +288,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -363,13 +317,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.AddParsedSubObject(System.Object)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.AddParsedSubObject(System.Object)" />
 
             
 
-             method is used by ASP.NET to add parsed child controls to the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             method is used by ASP.NET to add parsed child controls to the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -379,8 +331,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a parsed child control to the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Adds a parsed child control to the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -388,7 +339,11 @@
           >
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -411,33 +366,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.ClearSelection" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.ClearSelection" />
 
             
 
-             method iterates through the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+             method iterates through the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
-             collection represented by the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             collection represented by the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control's <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+             control's <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
 
             
 
-             property and sets the <see
-             cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+             property and sets the <see cref="P:System.Web.UI.WebControls.ListItem.Selected" />
 
             
 
-             property of each <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             property of each <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
@@ -447,13 +396,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clears the list selection of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Clears the list selection of the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control and sets the <see
-             cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+             control and sets the <see cref="P:System.Web.UI.WebControls.ListItem.Selected" />
 
             
 
@@ -480,8 +427,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >The <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -491,13 +437,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Web.UI.EmptyControlCollection" />
+            >Creates an <see cref="T:System.Web.UI.EmptyControlCollection" />
 
             
 
-             object for the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             object for the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -507,8 +451,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >A <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
@@ -533,41 +476,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+            >If the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
 
             
 
-             property contains multiple sets of data, use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataMember" />
+             property contains multiple sets of data, use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataMember" />
 
             
 
-             property to specify which set of data to bind to the control. For example, if you have a <see
-             cref="T:System.Data.DataSet" />
+             property to specify which set of data to bind to the control. For example, if you have a <see cref="T:System.Data.DataSet" />
 
             
 
              object with multiple tables, use this property to indicate which table to bind to the control.</para
           >
           <para
-            >After you have specified the data source to bind to the control, you can then specify which fields from the data source to bind to the <see
-             cref="P:System.Web.UI.WebControls.ListItem.Text" />
+            >After you have specified the data source to bind to the control, you can then specify which fields from the data source to bind to the <see cref="P:System.Web.UI.WebControls.ListItem.Text" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.ListItem.Value" />
+             and <see cref="P:System.Web.UI.WebControls.ListItem.Value" />
 
             
 
-             properties of each item in the control by setting the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataTextField" />
+             properties of each item in the control by setting the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataTextField" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataValueField" />
+             and <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataValueField" />
 
             
 
@@ -577,13 +513,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the set of data to bind to the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Gets or sets the set of data to bind to the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control from a <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+             control from a <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
 
             
 
@@ -616,115 +550,95 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
 
             
 
-             property to specify the data source to bind to the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property to specify the data source to bind to the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control. A data source must be a collection that implements either the <see
-             cref="T:System.Collections.IEnumerable" />
+             control. A data source must be a collection that implements either the <see cref="T:System.Collections.IEnumerable" />
 
             
 
-             interface (such as <see
-             cref="T:System.Data.DataView" />
+             interface (such as <see cref="T:System.Data.DataView" />
 
             
 
-            , <see
-             cref="T:System.Collections.ArrayList" />
+            , <see cref="T:System.Collections.ArrayList" />
 
             
 
-            , or <see
-             cref="T:System.Collections.Generic.List`1" />
+            , or <see cref="T:System.Collections.Generic.List`1" />
 
             
 
-            ) or the <see
-             cref="T:System.ComponentModel.IListSource" />
+            ) or the <see cref="T:System.ComponentModel.IListSource" />
 
             
 
-             interface. When you set the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+             interface. When you set the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
 
             
 
              property, you must manually write the code to perform data binding.</para
           >
           <para
-            >If the data source contains multiple sets of data, such as a <see
-             cref="T:System.Data.DataSet" />
+            >If the data source contains multiple sets of data, such as a <see cref="T:System.Data.DataSet" />
 
             
 
-             object with multiple tables, use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataMember" />
+             object with multiple tables, use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataMember" />
 
             
 
              property to specify which data set to bind to the control.</para
           >
           <para
-            >You can specify which fields from the data source to bind to the <see
-             cref="P:System.Web.UI.WebControls.ListItem.Text" />
+            >You can specify which fields from the data source to bind to the <see cref="P:System.Web.UI.WebControls.ListItem.Text" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.ListItem.Value" />
+             and <see cref="P:System.Web.UI.WebControls.ListItem.Value" />
 
             
 
-             properties of each item in the control by setting the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataTextField" />
+             properties of each item in the control by setting the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataTextField" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataValueField" />
+             and <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataValueField" />
 
             
 
              properties, respectively.</para
           >
           <para
-            >Alternately, you can use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+            >Alternately, you can use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
-             property to automatically bind to a data source represented by a data source control. When you set the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+             property to automatically bind to a data source represented by a data source control. When you set the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
-             property, the data listing control automatically binds to the specified data source control. You do not need to write code that explicitly calls the <see
-             cref="M:System.Web.UI.Control.DataBind" />
+             property, the data listing control automatically binds to the specified data source control. You do not need to write code that explicitly calls the <see cref="M:System.Web.UI.Control.DataBind" />
 
             
 
              method.</para
           >
           <para
-            >If values are specified for both the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+            >If values are specified for both the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
 
             
 
-             property and the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+             property and the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
-             property, ASP.NET is not able to resolve the data source and a <see
-             cref="T:System.Web.HttpException" />
+             property, ASP.NET is not able to resolve the data source and a <see cref="T:System.Web.HttpException" />
 
             
 
@@ -734,8 +648,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the source of information to bind to the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Gets or sets the source of information to bind to the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -775,109 +688,89 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
-             property to set or access the <see
-             cref="P:System.Web.UI.Control.ID" />
+             property to set or access the <see cref="P:System.Web.UI.Control.ID" />
 
             
 
-             property of the data source control that the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property of the data source control that the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control should use to retrieve its data source. The data source control referenced by the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+             control should use to retrieve its data source. The data source control referenced by the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
-             property can be any control that implements the <see
-             cref="T:System.Web.UI.IDataSource" />
+             property can be any control that implements the <see cref="T:System.Web.UI.IDataSource" />
 
             
 
-             interface. The data source control must exist either in the same naming container as the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             interface. The data source control must exist either in the same naming container as the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control that references it or in a parent control of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             control that references it or in a parent control of the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control. When you specify a value for this property, the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             control. When you specify a value for this property, the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control automatically binds to the specified data source control. You do not need to write code that explicitly calls the <see
-             cref="M:System.Web.UI.Control.DataBind" />
+             control automatically binds to the specified data source control. You do not need to write code that explicitly calls the <see cref="M:System.Web.UI.Control.DataBind" />
 
             
 
              method.</para
           >
           <para
-            >Alternately, you can use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+            >Alternately, you can use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
 
             
 
-             property to specify the source of values to bind to an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property to specify the source of values to bind to an <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control. The data source must be a collection that implements the <see
-             cref="T:System.Collections.IEnumerable" />
+             control. The data source must be a collection that implements the <see cref="T:System.Collections.IEnumerable" />
 
             
 
-             interface (such as <see
-             cref="T:System.Data.DataView" />
+             interface (such as <see cref="T:System.Data.DataView" />
 
             
 
-            , <see
-             cref="T:System.Collections.ArrayList" />
+            , <see cref="T:System.Collections.ArrayList" />
 
             
 
-            , or <see
-             cref="T:System.Collections.Generic.List`1" />
+            , or <see cref="T:System.Collections.Generic.List`1" />
 
             
 
-            ) or the <see
-             cref="T:System.ComponentModel.IListSource" />
+            ) or the <see cref="T:System.ComponentModel.IListSource" />
 
             
 
-             interface. When you set the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+             interface. When you set the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
 
             
 
              property, you must manually write the code to perform data binding.</para
           >
           <para
-            >If values are specified for both the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+            >If values are specified for both the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
 
             
 
-             property and the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+             property and the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
-             property, ASP.NET is not able to resolve the data source and a <see
-             cref="T:System.Web.HttpException" />
+             property, ASP.NET is not able to resolve the data source and a <see cref="T:System.Web.HttpException" />
 
             
 
@@ -887,13 +780,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="P:System.Web.UI.Control.ID" />
+            >Gets or sets the <see cref="P:System.Web.UI.Control.ID" />
 
             
 
-             property of the data source control that the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property of the data source control that the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -914,114 +805,93 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataTextField" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataTextField" />
 
             
 
-             property to specify which field from the data source to bind to the <see
-             cref="P:System.Web.UI.WebControls.ListItem.Text" />
+             property to specify which field from the data source to bind to the <see cref="P:System.Web.UI.WebControls.ListItem.Text" />
 
             
 
-             property of each item in the control. This property is commonly used to provide a value for the <see
-             cref="P:System.Web.UI.WebControls.ListItem.Text" />
+             property of each item in the control. This property is commonly used to provide a value for the <see cref="P:System.Web.UI.WebControls.ListItem.Text" />
 
             
 
-             property that differs from the value of the <see
-             cref="P:System.Web.UI.WebControls.ListItem.Value" />
+             property that differs from the value of the <see cref="P:System.Web.UI.WebControls.ListItem.Value" />
 
             
 
              property.</para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >The <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             class provides two properties for specifying the data source to bind to. The <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+             class provides two properties for specifying the data source to bind to. The <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
 
             
 
-             property allows you to bind an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property allows you to bind an <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control to any collection that implements the <see
-             cref="T:System.Collections.IEnumerable" />
+             control to any collection that implements the <see cref="T:System.Collections.IEnumerable" />
 
             
 
-             or <see
-             cref="T:System.ComponentModel.IListSource" />
+             or <see cref="T:System.ComponentModel.IListSource" />
 
             
 
-             interfaces (such as <see
-             cref="T:System.Data.DataView" />
+             interfaces (such as <see cref="T:System.Data.DataView" />
 
             
 
-            , <see
-             cref="T:System.Collections.ArrayList" />
+            , <see cref="T:System.Collections.ArrayList" />
 
             
 
-            , or <see
-             cref="T:System.Collections.Generic.List`1" />
+            , or <see cref="T:System.Collections.Generic.List`1" />
 
             
 
-            ). When you use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+            ). When you use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
 
             
 
-             property to specify the data source, you must explicitly call the <see
-             cref="M:System.Web.UI.Control.DataBind" />
+             property to specify the data source, you must explicitly call the <see cref="M:System.Web.UI.Control.DataBind" />
 
             
 
-             method to bind the control and its <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataTextField" />
+             method to bind the control and its <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataTextField" />
 
             
 
              property to the data source.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+            >The <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
-             property allows you to bind an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property allows you to bind an <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control to a data source control that represents a data source. When you use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+             control to a data source control that represents a data source. When you use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
-             property to specify the data source, the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property to specify the data source, the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control and its <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataTextField" />
+             control and its <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataTextField" />
 
             
 
-             property automatically bind to the specified data source control. Therefore, you do not need to explicitly call the <see
-             cref="M:System.Web.UI.Control.DataBind" />
+             property automatically bind to the specified data source control. Therefore, you do not need to explicitly call the <see cref="M:System.Web.UI.Control.DataBind" />
 
             
 
@@ -1031,13 +901,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the field from the data source to bind to the <see
-             cref="P:System.Web.UI.WebControls.ListItem.Text" />
+            >Gets or sets the field from the data source to bind to the <see cref="P:System.Web.UI.WebControls.ListItem.Text" />
 
             
 
-             property of each item in the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property of each item in the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -1067,114 +935,93 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataValueField" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataValueField" />
 
             
 
-             property to specify which field from the data source to bind to the <see
-             cref="P:System.Web.UI.WebControls.ListItem.Value" />
+             property to specify which field from the data source to bind to the <see cref="P:System.Web.UI.WebControls.ListItem.Value" />
 
             
 
-             property of each item in the control. This property is commonly used to provide a value for the <see
-             cref="P:System.Web.UI.WebControls.ListItem.Value" />
+             property of each item in the control. This property is commonly used to provide a value for the <see cref="P:System.Web.UI.WebControls.ListItem.Value" />
 
             
 
-             property that differs from the value of the <see
-             cref="P:System.Web.UI.WebControls.ListItem.Text" />
+             property that differs from the value of the <see cref="P:System.Web.UI.WebControls.ListItem.Text" />
 
             
 
              property.</para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >The <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             class provides two properties for specifying the data source to bind to. The <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+             class provides two properties for specifying the data source to bind to. The <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
 
             
 
-             property allows you to bind an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property allows you to bind an <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control to any collection that implements the <see
-             cref="T:System.Collections.IEnumerable" />
+             control to any collection that implements the <see cref="T:System.Collections.IEnumerable" />
 
             
 
-             or <see
-             cref="T:System.ComponentModel.IListSource" />
+             or <see cref="T:System.ComponentModel.IListSource" />
 
             
 
-             interfaces (such as <see
-             cref="T:System.Data.DataView" />
+             interfaces (such as <see cref="T:System.Data.DataView" />
 
             
 
-            , <see
-             cref="T:System.Collections.ArrayList" />
+            , <see cref="T:System.Collections.ArrayList" />
 
             
 
-            , or <see
-             cref="T:System.Collections.Generic.List`1" />
+            , or <see cref="T:System.Collections.Generic.List`1" />
 
             
 
-            ). When you use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+            ). When you use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
 
             
 
-             property to specify the data source, you must explicitly call the <see
-             cref="M:System.Web.UI.Control.DataBind" />
+             property to specify the data source, you must explicitly call the <see cref="M:System.Web.UI.Control.DataBind" />
 
             
 
-             method to bind the control and its <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataValueField" />
+             method to bind the control and its <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataValueField" />
 
             
 
              property to the data source.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+            >The <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
-             property allows you to bind an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property allows you to bind an <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control to a data source control that represents a data source. When you use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+             control to a data source control that represents a data source. When you use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
-             property to specify the data source, the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property to specify the data source, the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control and its <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataValueField" />
+             control and its <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataValueField" />
 
             
 
-             property automatically bind to the data source control. Therefore, you do not need to explicitly call the <see
-             cref="M:System.Web.UI.Control.DataBind" />
+             property automatically bind to the data source control. Therefore, you do not need to explicitly call the <see cref="M:System.Web.UI.Control.DataBind" />
 
             
 
@@ -1184,13 +1031,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the field from the data source to bind to the <see
-             cref="P:System.Web.UI.WebControls.ListItem.Value" />
+            >Gets or sets the field from the data source to bind to the <see cref="P:System.Web.UI.WebControls.ListItem.Value" />
 
             
 
-             property of each item in the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property of each item in the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -1222,33 +1067,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you specify a value for the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+            >When you specify a value for the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
-             property, ASP.NET automatically binds the data listing control to the specified data source control. When ASP.NET performs data binding for the control, it calls the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.EnsureDataBound" />
+             property, ASP.NET automatically binds the data listing control to the specified data source control. When ASP.NET performs data binding for the control, it calls the <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.EnsureDataBound" />
 
             
 
-             method first to verify that the control has not already been data-bound and that a valid data source control that implements the <see
-             cref="T:System.Web.UI.IDataSource" />
+             method first to verify that the control has not already been data-bound and that a valid data source control that implements the <see cref="T:System.Web.UI.IDataSource" />
 
             
 
-             interface is specified for its <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+             interface is specified for its <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
-             property. The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.EnsureDataBound" />
+             property. The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.EnsureDataBound" />
 
             
 
-             method then calls the <see
-             cref="M:System.Web.UI.Control.DataBind" />
+             method then calls the <see cref="M:System.Web.UI.Control.DataBind" />
 
             
 
@@ -1258,13 +1097,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Verifies that the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Verifies that the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control requires data binding and that a valid data source control is specified before calling the <see
-             cref="M:System.Web.UI.Control.DataBind" />
+             control requires data binding and that a valid data source control is specified before calling the <see cref="M:System.Web.UI.Control.DataBind" />
 
             
 
@@ -1290,23 +1127,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.GetData" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.GetData" />
 
             
 
-             method returns an <see
-             cref="T:System.Collections.IEnumerable" />
+             method returns an <see cref="T:System.Collections.IEnumerable" />
 
             
 
-             object independent of whether the data source was specified by the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+             object independent of whether the data source was specified by the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
 
             
 
-             property or the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+             property or the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
@@ -1316,13 +1149,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.IEnumerable" />
+            >Gets an <see cref="T:System.Collections.IEnumerable" />
 
             
 
-             object that represents the data source that is bound to the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             object that represents the data source that is bound to the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -1332,8 +1163,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerable" />
+            >An <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -1350,26 +1180,20 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Do not read from or assign a value to this property. Otherwise, a <see
-               cref="T:System.NotSupportedException" />
+              >Do not read from or assign a value to this property. Otherwise, a <see cref="T:System.NotSupportedException" />
 
               
 
-               exception is thrown. This property is inherited from the <see
-               cref="T:System.Web.UI.HtmlControls.HtmlContainerControl" />
+               exception is thrown. This property is inherited from the <see cref="T:System.Web.UI.HtmlControls.HtmlContainerControl" />
 
               
 
-               class and is not applicable to the <see
-               cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+               class and is not applicable to the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
               
 
@@ -1395,26 +1219,20 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Do not read from or assign a value to this property. Otherwise, a <see
-               cref="T:System.NotSupportedException" />
+              >Do not read from or assign a value to this property. Otherwise, a <see cref="T:System.NotSupportedException" />
 
               
 
-               exception is thrown. This property is inherited from the <see
-               cref="T:System.Web.UI.HtmlControls.HtmlContainerControl" />
+               exception is thrown. This property is inherited from the <see cref="T:System.Web.UI.HtmlControls.HtmlContainerControl" />
 
               
 
-               class and is not applicable to the <see
-               cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+               class and is not applicable to the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
               
 
@@ -1446,13 +1264,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the length of the string representing the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+            >If the length of the string representing the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
-             property string is greater than zero, then <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.IsBoundUsingDataSourceID" />
+             property string is greater than zero, then <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.IsBoundUsingDataSourceID" />
 
             
 
@@ -1462,13 +1278,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether a <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+            >Gets a value indicating whether a <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
-             property is defined for the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property is defined for the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -1488,38 +1302,30 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.UI.WebControls.ListItemCollection" />
-        </value>
+        <value>a <see cref="T:System.Web.UI.WebControls.ListItemCollection" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
 
             
 
-             collection to manage the items listed in the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             collection to manage the items listed in the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
              control. You can programmatically add items to, remove items from, and insert items into the collection.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+            >The <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
 
             
 
-             collection is commonly used to iterate through the items in the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             collection is commonly used to iterate through the items in the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control. For example, when multiple items are selected, you can iterate through the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+             control. For example, when multiple items are selected, you can iterate through the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
 
             
 
@@ -1529,8 +1335,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection that contains the items listed in an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Gets a collection that contains the items listed in an <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -1574,76 +1379,62 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             method checks whether the postback data of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             method checks whether the postback data of the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control is different from its previous value, and if so, returns true. If the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             control is different from its previous value, and if so, returns true. If the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control's <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
+             control's <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
 
             
 
-             property is false, indicating a single-selection <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property is false, indicating a single-selection <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control, then the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+             control, then the <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             method checks the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
+             method checks the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
 
             
 
-             property. If the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property. If the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control's <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
+             control's <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
 
             
 
-             property is true, indicating a multiple-selection <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property is true, indicating a multiple-selection <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control, then the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+             control, then the <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             method checks the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndices" />
+             method checks the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndices" />
 
             
 
              property.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -1653,8 +1444,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Processes the postback data for the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Processes the postback data for the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -1664,8 +1454,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >true if the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -1673,14 +1462,22 @@
           >
         </returns>
         <param name="postDataKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key identifier for the control.</param
         >
         <param name="postCollection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1704,8 +1501,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used primarily by the .NET Framework infrastructure and is not intended to be used directly from your code. However, control developers can override this method to specify how a custom server control restores its view state. For more information, see <format
-             type="text/html">
+            >This method is used primarily by the .NET Framework infrastructure and is not intended to be used directly from your code. However, control developers can override this method to specify how a custom server control restores its view state. For more information, see <format type="text/html">
               <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
             </format>
 
@@ -1714,86 +1510,70 @@
             .</para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >The <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control's view state is stored as a <see
-             cref="T:System.Web.UI.Triplet" />
+             control's view state is stored as a <see cref="T:System.Web.UI.Triplet" />
 
             
 
-             object. The <see
-             cref="F:System.Web.UI.Triplet.First" />
+             object. The <see cref="F:System.Web.UI.Triplet.First" />
 
             
 
-             field of the <see
-             cref="T:System.Web.UI.Triplet" />
+             field of the <see cref="T:System.Web.UI.Triplet" />
 
             
 
-             object holds the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             object holds the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control's base view state. The <see
-             cref="F:System.Web.UI.Triplet.Second" />
+             control's base view state. The <see cref="F:System.Web.UI.Triplet.Second" />
 
             
 
-             field of the <see
-             cref="T:System.Web.UI.Triplet" />
+             field of the <see cref="T:System.Web.UI.Triplet" />
 
             
 
-             object holds the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+             object holds the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
-             collection represented by the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+             collection represented by the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
 
             
 
-             property. The <see
-             cref="F:System.Web.UI.Triplet.Third" />
+             property. The <see cref="F:System.Web.UI.Triplet.Third" />
 
             
 
-             field of the <see
-             cref="T:System.Web.UI.Triplet" />
+             field of the <see cref="T:System.Web.UI.Triplet" />
 
             
 
-             object holds the selected indices represented by the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndices" />
+             object holds the selected indices represented by the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndices" />
 
             
 
-             property. The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.LoadViewState(System.Object)" />
+             property. The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.LoadViewState(System.Object)" />
 
             
 
-             method calls the base class's <see
-             cref="M:System.Web.UI.HtmlControls.HtmlContainerControl.LoadViewState(System.Object)" />
+             method calls the base class's <see cref="M:System.Web.UI.HtmlControls.HtmlContainerControl.LoadViewState(System.Object)" />
 
             
 
              method to restore the control's base view state.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.LoadViewState(System.Object)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.LoadViewState(System.Object)" />
 
             
 
-             method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -1803,13 +1583,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Restores the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Restores the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control's view state information from a previous page request that was saved by the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.SaveViewState" />
+             control's view state information from a previous page request that was saved by the <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.SaveViewState" />
 
             
 
@@ -1817,12 +1595,15 @@
           >
         </summary>
         <param name="savedState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
@@ -1846,49 +1627,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
 
             
 
-             property to specify whether multiple items can be concurrently selected in the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property to specify whether multiple items can be concurrently selected in the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
              control.</para
           >
           <para
-            >By default, the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >By default, the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control is displayed as a drop-down list box. If you allow multiple selections (by setting the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
+             control is displayed as a drop-down list box. If you allow multiple selections (by setting the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
 
             
 
-             property to true) or specify a height greater than one row (by setting the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Size" />
+             property to true) or specify a height greater than one row (by setting the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Size" />
 
             
 
              property to a value greater than 1), the control is displayed as a list box.</para
           >
           <para
-            >To determine the selected items in an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >To determine the selected items in an <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control that allows multiple simultaneous selections, iterate through the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+             control that allows multiple simultaneous selections, iterate through the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
 
             
 
-             collection and test the <see
-             cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+             collection and test the <see cref="P:System.Web.UI.WebControls.ListItem.Selected" />
 
             
 
@@ -1896,8 +1669,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The multiple attribute is rendered in the <see
-               cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+              >The multiple attribute is rendered in the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
               
 
@@ -1908,8 +1680,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether multiple items can be selected concurrently in the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Gets or sets a value indicating whether multiple items can be selected concurrently in the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -1942,18 +1713,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Name" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Name" />
 
             
 
-             property to determine the unique identifier name for an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property to determine the unique identifier name for an <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control. In this implementation, the get accessor returns the value of the <see
-             cref="P:System.Web.UI.Control.UniqueID" />
+             control. In this implementation, the get accessor returns the value of the <see cref="P:System.Web.UI.Control.UniqueID" />
 
             
 
@@ -1961,18 +1729,15 @@
           >
           <block subset="none" type="note">
             <para
-              >The set accessor does not assign a value to this property because the <see
-               cref="P:System.Web.UI.HtmlControls.HtmlSelect.Name" />
+              >The set accessor does not assign a value to this property because the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Name" />
 
               
 
-               property must have the same value as the <see
-               cref="P:System.Web.UI.Control.UniqueID" />
+               property must have the same value as the <see cref="P:System.Web.UI.Control.UniqueID" />
 
               
 
-               property for the <see
-               cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+               property for the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
               
 
@@ -1983,8 +1748,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the unique identifier name associated with the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Gets or sets the unique identifier name associated with the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -2018,41 +1782,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.Control.DataBinding" />
+            >The <see cref="E:System.Web.UI.Control.DataBinding" />
 
             
 
-             event is raised when data is bound to the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             event is raised when data is bound to the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control. This method notifies the control to perform any data-binding logic that is associated with it. Specifically, the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnDataBinding(System.EventArgs)" />
+             control. This method notifies the control to perform any data-binding logic that is associated with it. Specifically, the <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnDataBinding(System.EventArgs)" />
 
             
 
-             method creates the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+             method creates the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
 
             
 
-             collection from the data source specified in either the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+             collection from the data source specified in either the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
 
             
 
-             property or the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+             property or the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
              property.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -2061,8 +1818,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnDataBinding(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnDataBinding(System.EventArgs)" />
 
             
 
@@ -2072,13 +1828,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.DataBinding" />
+            >Raises the <see cref="E:System.Web.UI.Control.DataBinding" />
 
             
 
-             event of an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             event of an <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -2086,12 +1840,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.EventArgs" />
+          A <see cref="T:System.EventArgs" />
 
           
 
@@ -2117,28 +1874,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnDataPropertyChanged" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnDataPropertyChanged" />
 
             
 
-             method sets the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.RequiresDataBinding" />
+             method sets the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.RequiresDataBinding" />
 
             
 
-             property to true if the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+             property to true if the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataMember" />
+            , <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataMember" />
 
             
 
-            , or <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+            , or <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
@@ -2148,18 +1900,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Invoked when the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+            >Invoked when the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataMember" />
+            , <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataMember" />
 
             
 
-            , or <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+            , or <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
@@ -2188,13 +1937,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
 
             
 
-             method sets the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.RequiresDataBinding" />
+             method sets the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.RequiresDataBinding" />
 
             
 
@@ -2204,18 +1951,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Invoked when the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+            >Invoked when the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataMember" />
+            , <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataMember" />
 
             
 
-            , or <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+            , or <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
@@ -2223,19 +1967,26 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2259,28 +2010,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnInit(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnInit(System.EventArgs)" />
 
             
 
-             method notifies the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             method notifies the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control to perform any initialization steps that are required to create and set up an instance. If the <see
-             cref="P:System.Web.UI.Control.IsViewStateEnabled" />
+             control to perform any initialization steps that are required to create and set up an instance. If the <see cref="P:System.Web.UI.Control.IsViewStateEnabled" />
 
             
 
-             property is false and the <see
-             cref="P:System.Web.UI.Page.IsPostBack" />
+             property is false and the <see cref="P:System.Web.UI.Page.IsPostBack" />
 
             
 
-             property is true, then the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.RequiresDataBinding" />
+             property is true, then the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.RequiresDataBinding" />
 
             
 
@@ -2290,13 +2036,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.Init" />
+            >Raises the <see cref="E:System.Web.UI.Control.Init" />
 
             
 
-             event for the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             event for the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -2304,12 +2048,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.EventArgs" />
+          A <see cref="T:System.EventArgs" />
 
           
 
@@ -2333,48 +2080,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnLoad(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnLoad(System.EventArgs)" />
 
             
 
-             method notifies the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             method notifies the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control that it should perform actions common to each HTTP request for the page it is associated with. The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnLoad(System.EventArgs)" />
+             control that it should perform actions common to each HTTP request for the page it is associated with. The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnLoad(System.EventArgs)" />
 
             
 
-             method connects the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             method connects the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control to the appropriate data source specified in either the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+             control to the appropriate data source specified in either the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
 
             
 
-             property or the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+             property or the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
-             property. If the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+             property. If the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
-             property is to specify the data source control that the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property is to specify the data source control that the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control should use to retrieve its data source, then the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
+             control should use to retrieve its data source, then the <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
 
             
 
@@ -2384,13 +2122,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.Load" />
+            >Raises the <see cref="E:System.Web.UI.Control.Load" />
 
             
 
-             event for the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             event for the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -2398,12 +2134,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.EventArgs" />
+          A <see cref="T:System.EventArgs" />
 
           
 
@@ -2447,23 +2186,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Size" />
+            >If the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Size" />
 
             
 
-             property is greater than 1, then the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnPreRender(System.EventArgs)" />
+             property is greater than 1, then the <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnPreRender(System.EventArgs)" />
 
             
 
-             method registers the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             method registers the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control with the <see
-             cref="T:System.Web.UI.Page" />
+             control with the <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -2473,13 +2208,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.PreRender" />
+            >Raises the <see cref="E:System.Web.UI.Control.PreRender" />
 
             
 
-             event for the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             event for the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -2487,12 +2220,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2517,13 +2253,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.HtmlControls.HtmlSelect.ServerChange" />
+            >The <see cref="E:System.Web.UI.HtmlControls.HtmlSelect.ServerChange" />
 
             
 
-             event is raised when the selected items in the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             event is raised when the selected items in the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -2534,8 +2268,7 @@
           </block>
           <block subset="none" type="note">
             <para
-              >The control must have view state enabled for the <see
-               cref="E:System.Web.UI.HtmlControls.HtmlSelect.ServerChange" />
+              >The control must have view state enabled for the <see cref="E:System.Web.UI.HtmlControls.HtmlSelect.ServerChange" />
 
               
 
@@ -2543,16 +2276,14 @@
             >
           </block>
           <para
-            >You can use this event to perform data validation on the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >You can use this event to perform data validation on the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
              control when the user changes the selection in the control.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -2561,8 +2292,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnServerChange(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnServerChange(System.EventArgs)" />
 
             
 
@@ -2572,13 +2302,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.HtmlControls.HtmlSelect.ServerChange" />
+            >Raises the <see cref="E:System.Web.UI.HtmlControls.HtmlSelect.ServerChange" />
 
             
 
-             event of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             event of the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -2586,12 +2314,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.EventArgs" />
+          A <see cref="T:System.EventArgs" />
 
           
 
@@ -2617,13 +2348,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.RaisePostDataChangedEvent" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.RaisePostDataChangedEvent" />
 
             
 
-             method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -2633,13 +2362,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calls the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnServerChange(System.EventArgs)" />
+            >Calls the <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnServerChange(System.EventArgs)" />
 
             
 
-             method to signal the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             method to signal the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -2661,53 +2388,42 @@
         <Parameter Name="w" Type="System.Web.UI.HtmlTextWriter" />
       </Parameters>
       <Docs>
-        <param name="w"
-          >a <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
-        </param>
+        <param name="w">a <see cref="T:System.Web.UI.HtmlTextWriter" /></param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method renders the <paramref
-             name="name" />
+             method renders the <paramref name="name" />
 
             
 
-             attribute of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             attribute of the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control directly to ensure that it has the same value as the <see
-             cref="P:System.Web.UI.Control.UniqueID" />
+             control directly to ensure that it has the same value as the <see cref="P:System.Web.UI.Control.UniqueID" />
 
             
 
-             property. After rendering the attribute, the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+             property. After rendering the attribute, the <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method calls the base class's <see
-             cref="M:System.Web.UI.HtmlControls.HtmlContainerControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+             method calls the base class's <see cref="M:System.Web.UI.HtmlControls.HtmlContainerControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
 
             
 
              method.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -2717,13 +2433,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Renders the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control's attributes to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             control's attributes to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -2749,43 +2463,34 @@
         <Parameter Name="w" Type="System.Web.UI.HtmlTextWriter" />
       </Parameters>
       <Docs>
-        <param name="w"
-          >a <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
-        </param>
+        <param name="w">a <see cref="T:System.Web.UI.HtmlTextWriter" /></param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.RenderChildren(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.RenderChildren(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method overrides the base class's <see
-             cref="M:System.Web.UI.Control.RenderChildren(System.Web.UI.HtmlTextWriter)" />
+             method overrides the base class's <see cref="M:System.Web.UI.Control.RenderChildren(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method without calling the base method. Each of the &lt;option&gt; elements between the opening and closing &lt;select&gt; tags is rendered with a <paramref
-             name="value" />
+             method without calling the base method. Each of the &lt;option&gt; elements between the opening and closing &lt;select&gt; tags is rendered with a <paramref name="value" />
 
             
 
-             attribute, a <paramref
-             name="selected" />
+             attribute, a <paramref name="selected" />
 
             
 
              attribute if the item is selected, and its associated text.</para
           >
           <para
-            >If multiple items were selected but the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
+            >If multiple items were selected but the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
 
             
 
-             property is set to false, then an <see
-             cref="T:System.Web.HttpException" />
+             property is set to false, then an <see cref="T:System.Web.HttpException" />
 
             
 
@@ -2795,13 +2500,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Renders the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control's child controls to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             control's child controls to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -2828,69 +2531,57 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >The <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control uses the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.RequiresDataBinding" />
+             control uses the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.RequiresDataBinding" />
 
             
 
-             property to determine whether the control needs to call the <see
-             cref="M:System.Web.UI.Control.DataBind" />
+             property to determine whether the control needs to call the <see cref="M:System.Web.UI.Control.DataBind" />
 
             
 
              method to bind to its specified data source.</para
           >
           <para
-            >Each time the set accessor is called on either the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+            >Each time the set accessor is called on either the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+            , <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
-            , or <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataMember" />
+            , or <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataMember" />
 
             
 
-             property to change the data source after the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnInit(System.EventArgs)" />
+             property to change the data source after the <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnInit(System.EventArgs)" />
 
             
 
-             method has already been called, ASP.NET automatically sets the value of the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.RequiresDataBinding" />
+             method has already been called, ASP.NET automatically sets the value of the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.RequiresDataBinding" />
 
             
 
-             property to true. The value of the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.RequiresDataBinding" />
+             property to true. The value of the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.RequiresDataBinding" />
 
             
 
-             property is also set to true when the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnDataPropertyChanged" />
+             property is also set to true when the <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnDataPropertyChanged" />
 
             
 
              method is invoked.</para
           >
           <para
-            >ASP.NET automatically sets the value of the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.RequiresDataBinding" />
+            >ASP.NET automatically sets the value of the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.RequiresDataBinding" />
 
             
 
-             property to false immediately after the <see
-             cref="M:System.Web.UI.Control.DataBind" />
+             property to false immediately after the <see cref="M:System.Web.UI.Control.DataBind" />
 
             
 
@@ -2900,8 +2591,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -2921,86 +2611,70 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >The <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control's view state is stored as a <see
-             cref="T:System.Web.UI.Triplet" />
+             control's view state is stored as a <see cref="T:System.Web.UI.Triplet" />
 
             
 
-             object. The <see
-             cref="F:System.Web.UI.Triplet.First" />
+             object. The <see cref="F:System.Web.UI.Triplet.First" />
 
             
 
-             field of the <see
-             cref="T:System.Web.UI.Triplet" />
+             field of the <see cref="T:System.Web.UI.Triplet" />
 
             
 
-             object holds the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             object holds the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control's base view state. The <see
-             cref="F:System.Web.UI.Triplet.Second" />
+             control's base view state. The <see cref="F:System.Web.UI.Triplet.Second" />
 
             
 
-             field of the <see
-             cref="T:System.Web.UI.Triplet" />
+             field of the <see cref="T:System.Web.UI.Triplet" />
 
             
 
-             object holds the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+             object holds the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
-             collection represented by the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+             collection represented by the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
 
             
 
-             property. The <see
-             cref="F:System.Web.UI.Triplet.Third" />
+             property. The <see cref="F:System.Web.UI.Triplet.Third" />
 
             
 
-             field of the <see
-             cref="T:System.Web.UI.Triplet" />
+             field of the <see cref="T:System.Web.UI.Triplet" />
 
             
 
-             object holds the selected indices represented by the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndices" />
+             object holds the selected indices represented by the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndices" />
 
             
 
-             property. The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.SaveViewState" />
+             property. The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.SaveViewState" />
 
             
 
-             method calls the base class's <see
-             cref="M:System.Web.UI.Control.SaveViewState" />
+             method calls the base class's <see cref="M:System.Web.UI.Control.SaveViewState" />
 
             
 
              method to save the control's base view state.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.SaveViewState" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.SaveViewState" />
 
             
 
-             method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -3010,8 +2684,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves any <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Saves any <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -3021,13 +2694,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Object" />
+            >The <see cref="T:System.Object" />
 
             
 
-             that contains the changes to the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             that contains the changes to the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -3056,13 +2727,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.Select(System.Int32[])" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.Select(System.Int32[])" />
 
             
 
-             method selects multiple items of the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+             method selects multiple items of the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
 
             
 
@@ -3072,13 +2741,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Selects multiple items of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Selects multiple items of the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control's <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+             control's <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
 
             
 
@@ -3086,17 +2753,19 @@
           >
         </summary>
         <param name="selectedIndices">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Array" />
+          An <see cref="T:System.Array" />
 
           
 
-           of type <see
-           cref="T:System.Int32" />
+           of type <see cref="T:System.Int32" />
 
           
 
@@ -3120,46 +2789,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
+            >The <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
 
             
 
-             property is commonly used to determine the index of the selected item in a single-selection <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property is commonly used to determine the index of the selected item in a single-selection <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control. This index can then be used to retrieve the item from the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+             control. This index can then be used to retrieve the item from the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
 
             
 
              collection.</para
           >
           <para
-            >If the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
+            >If the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
 
             
 
-             property is set to true, indicating that multiple items can be concurrently selected, the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
+             property is set to true, indicating that multiple items can be concurrently selected, the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
 
             
 
-             property contains the index of the first selected item. To determine the selected items from an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property contains the index of the first selected item. To determine the selected items from an <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control that allows multiple simultaneous selections, iterate through the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+             control that allows multiple simultaneous selections, iterate through the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
 
             
 
-             collection and test the <see
-             cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+             collection and test the <see cref="P:System.Web.UI.WebControls.ListItem.Selected" />
 
             
 
@@ -3167,13 +2828,11 @@
           >
           <block subset="none" type="note">
             <para
-              >It is possible to have no item selected. If no item is selected, the <see
-               cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
+              >It is possible to have no item selected. If no item is selected, the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
 
               
 
-               property contains a value of -1. This commonly occurs when the page first loads and an item is not selected by default. Provide code to test this value before referencing the item in the <see
-               cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+               property contains a value of -1. This commonly occurs when the page first loads and an item is not selected by default. Provide code to test this value before referencing the item in the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
 
               
 
@@ -3181,23 +2840,19 @@
             >
           </block>
           <para
-            >By default, the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >By default, the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control is displayed as a drop-down list box. If you allow multiple selections (by setting the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
+             control is displayed as a drop-down list box. If you allow multiple selections (by setting the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
 
             
 
-             property to true) or specify a height greater than one row (by setting the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Size" />
+             property to true) or specify a height greater than one row (by setting the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Size" />
 
             
 
-             property to a value greater than 1), the control is displayed as a list box. If a drop-down list box is displayed, an item is always selected. If a list box is displayed, you can programmatically clear the selection from all items by setting the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
+             property to a value greater than 1), the control is displayed as a list box. If a drop-down list box is displayed, an item is always selected. If a list box is displayed, you can programmatically clear the selection from all items by setting the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
 
             
 
@@ -3207,8 +2862,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the ordinal index of the selected item in an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Gets or sets the ordinal index of the selected item in an <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -3240,31 +2894,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndices" />
+            >The <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndices" />
 
             
 
-             property is used by the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property is used by the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             class to return a collection that contains the zero-based indexes of all currently selected items in the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             class to return a collection that contains the zero-based indexes of all currently selected items in the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
              control.</para
           >
           <para
-            >Control developers extending the functionality of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Control developers extending the functionality of the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             class can override the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndices" />
+             class can override the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndices" />
 
             
 
@@ -3274,8 +2923,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection that contains the zero-based indexes of all currently selected items in the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Gets a collection that contains the zero-based indexes of all currently selected items in the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -3299,13 +2947,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.HtmlControls.HtmlSelect.ServerChange" />
+            >The <see cref="E:System.Web.UI.HtmlControls.HtmlSelect.ServerChange" />
 
             
 
-             event is raised when the selected items in the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             event is raised when the selected items in the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -3313,8 +2959,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The control must have view state enabled for the <see
-               cref="E:System.Web.UI.HtmlControls.HtmlSelect.ServerChange" />
+              >The control must have view state enabled for the <see cref="E:System.Web.UI.HtmlControls.HtmlSelect.ServerChange" />
 
               
 
@@ -3322,8 +2967,7 @@
             >
           </block>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -3335,8 +2979,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the selected items in the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Occurs when the selected items in the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -3361,31 +3004,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Size" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Size" />
 
             
 
-             property to specify the height (in rows) of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             property to specify the height (in rows) of the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
              control. If you specify a size that is smaller than the number of items in the control, scroll bars are displayed to allow you to move up and down the list.</para
           >
           <para
-            >By default, the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >By default, the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control is displayed as a drop-down list box. If you allow multiple selections (by setting the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
+             control is displayed as a drop-down list box. If you allow multiple selections (by setting the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
 
             
 
-             property to true) or specify a height greater than one row (by setting the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Size" />
+             property to true) or specify a height greater than one row (by setting the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Size" />
 
             
 
@@ -3395,8 +3033,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the height (in rows) of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Gets or sets the height (in rows) of the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -3438,13 +3075,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IPostBackDataHandler" />
+             instance is cast to an <see cref="T:System.Web.UI.IPostBackDataHandler" />
 
             
 
@@ -3454,8 +3089,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+            >For a description of this member, see <see cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
@@ -3465,8 +3099,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >true if the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -3474,14 +3107,22 @@
           >
         </returns>
         <param name="postDataKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key identifier for the control.</param
         >
         <param name="postCollection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3507,13 +3148,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IPostBackDataHandler" />
+             instance is cast to an <see cref="T:System.Web.UI.IPostBackDataHandler" />
 
             
 
@@ -3523,8 +3162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
+            >For a description of this member, see <see cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
 
             
 
@@ -3544,18 +3182,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlSelect.TrackViewState" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlSelect.TrackViewState" />
 
             
 
-             method persists items in the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+             method persists items in the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
 
             
 
-             collection of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+             collection of the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
@@ -3565,18 +3200,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tracks view state changes to the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Tracks view state changes to the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control so the changes can be stored in the control's <see
-             cref="T:System.Web.UI.StateBag" />
+             control so the changes can be stored in the control's <see cref="T:System.Web.UI.StateBag" />
 
             
 
-             object. This object is accessible through the <see
-             cref="P:System.Web.UI.Control.ViewState" />
+             object. This object is accessible through the <see cref="P:System.Web.UI.Control.ViewState" />
 
             
 
@@ -3601,13 +3233,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.Value" />
+            >The <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.Value" />
 
             
 
-             property is commonly used to get the value of the item referenced by the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
+             property is commonly used to get the value of the item referenced by the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
 
             
 
@@ -3615,8 +3245,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If no item is selected in the control, <see
-               cref="F:System.String.Empty" />
+              >If no item is selected in the control, <see cref="F:System.String.Empty" />
 
               
 
@@ -3624,13 +3253,11 @@
             >
           </block>
           <para
-            >If you set this property to a value, the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
+            >If you set this property to a value, the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
 
             
 
-             property is updated with the index of the first item in the list that contains that value. If no matching value is found, the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
+             property is updated with the index of the first item in the list that contains that value. If no matching value is found, the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
 
             
 
@@ -3640,13 +3267,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the selected item in the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+            >Gets the value of the selected item in the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
-             control or sets the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
+             control or sets the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
 
             
 

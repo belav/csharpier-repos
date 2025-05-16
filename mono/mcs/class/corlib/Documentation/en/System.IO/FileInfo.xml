@@ -30,59 +30,49 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.IO.FileInfo" />
+        >Use the <see cref="T:System.IO.FileInfo" />
 
         
 
          class for typical operations such as copying, moving, renaming, creating, opening, deleting, and appending to files.</para
       >
       <para
-        >If you are performing multiple operations on the same file, it can be more efficient to use <see
-         cref="T:System.IO.FileInfo" />
+        >If you are performing multiple operations on the same file, it can be more efficient to use <see cref="T:System.IO.FileInfo" />
 
         
 
-         instance methods instead of the corresponding static methods of the <see
-         cref="T:System.IO.File" />
+         instance methods instead of the corresponding static methods of the <see cref="T:System.IO.File" />
 
         
 
          class, because a security check will not always be necessary.</para
       >
       <para
-        >Many of the <see
-         cref="T:System.IO.FileInfo" />
+        >Many of the <see cref="T:System.IO.FileInfo" />
 
         
 
-         methods return other I/O types when you create or open files. You can use these other types to further manipulate a file. For more information, see specific <see
-         cref="T:System.IO.FileInfo" />
+         methods return other I/O types when you create or open files. You can use these other types to further manipulate a file. For more information, see specific <see cref="T:System.IO.FileInfo" />
 
         
 
-         members such as <see
-         cref="M:System.IO.FileInfo.Open(System.IO.FileMode)" />
+         members such as <see cref="M:System.IO.FileInfo.Open(System.IO.FileMode)" />
 
         
 
-        , <see
-         cref="M:System.IO.FileInfo.OpenRead" />
+        , <see cref="M:System.IO.FileInfo.OpenRead" />
 
         
 
-        , <see
-         cref="M:System.IO.FileInfo.OpenText" />
+        , <see cref="M:System.IO.FileInfo.OpenText" />
 
         
 
-        , <see
-         cref="M:System.IO.FileInfo.CreateText" />
+        , <see cref="M:System.IO.FileInfo.CreateText" />
 
         
 
-        , or <see
-         cref="M:System.IO.FileInfo.Create" />
+        , or <see cref="M:System.IO.FileInfo.Create" />
 
         
 
@@ -90,8 +80,7 @@
       >
       <para>By default, full read/write access to new files is granted to all users.</para>
       <para
-        >The following table describes the enumerations that are used to customize the behavior of various <see
-         cref="T:System.IO.FileInfo" />
+        >The following table describes the enumerations that are used to customize the behavior of various <see cref="T:System.IO.FileInfo" />
 
         
 
@@ -158,8 +147,7 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="T:System.IO.FileInfo" />
+        >The <see cref="T:System.IO.FileInfo" />
 
         
 
@@ -168,8 +156,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="P:System.IO.FileInfo.Directory" />
+            >The <see cref="P:System.IO.FileInfo.Directory" />
 
             
 
@@ -178,8 +165,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.IO.FileInfo.DirectoryName" />
+            >The <see cref="P:System.IO.FileInfo.DirectoryName" />
 
             
 
@@ -188,8 +174,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.IO.FileInfo.Exists" />
+            >The <see cref="P:System.IO.FileInfo.Exists" />
 
             
 
@@ -198,8 +183,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.IO.FileInfo.IsReadOnly" />
+            >The <see cref="P:System.IO.FileInfo.IsReadOnly" />
 
             
 
@@ -208,8 +192,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.IO.FileInfo.Length" />
+            >The <see cref="P:System.IO.FileInfo.Length" />
 
             
 
@@ -218,8 +201,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.IO.FileInfo.Name" />
+            >The <see cref="P:System.IO.FileInfo.Name" />
 
             
 
@@ -231,8 +213,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides properties and instance methods for the creation, copying, deletion, moving, and opening of files, and aids in the creation of <see
-         cref="T:System.IO.FileStream" />
+        >Provides properties and instance methods for the creation, copying, deletion, moving, and opening of files, and aids in the creation of <see cref="T:System.IO.FileStream" />
 
         
 
@@ -265,8 +246,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.FileInfo" />
+            >Initializes a new instance of the <see cref="T:System.IO.FileInfo" />
 
             
 
@@ -274,7 +254,11 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -303,13 +287,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.IO.StreamWriter" />
+            >Creates a <see cref="T:System.IO.StreamWriter" />
 
             
 
-             that appends text to the file represented by this instance of the <see
-             cref="T:System.IO.FileInfo" />
+             that appends text to the file represented by this instance of the <see cref="T:System.IO.FileInfo" />
 
             
 
@@ -347,8 +329,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.IO.FileInfo.CopyTo(System.String,System.Boolean)" />
+            >Use the <see cref="M:System.IO.FileInfo.CopyTo(System.String,System.Boolean)" />
 
             
 
@@ -367,7 +348,11 @@
           <para>A new file with a fully qualified path.</para>
         </returns>
         <param name="destFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -401,8 +386,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to allow or prevent overwriting of an existing file. Use the <see
-             cref="M:System.IO.FileInfo.CopyTo(System.String)" />
+            >Use this method to allow or prevent overwriting of an existing file. Use the <see cref="M:System.IO.FileInfo.CopyTo(System.String)" />
 
             
 
@@ -419,18 +403,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new file, or an overwrite of an existing file if <paramref
-             name="overwrite" />
+            >A new file, or an overwrite of an existing file if <paramref name="overwrite" />
 
             
 
-             is true. If the file exists and <paramref
-             name="overwrite" />
+             is true. If the file exists and <paramref name="overwrite" />
 
             
 
-             is false, an <see
-             cref="T:System.IO.IOException" />
+             is false, an <see cref="T:System.IO.IOException" />
 
             
 
@@ -438,14 +419,22 @@
           >
         </returns>
         <param name="destFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the new file to copy to. </param
         >
         <param name="overwrite">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -474,8 +463,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>By default, full read/write access to new files is granted to all users.</para>
           <para
-            >This method is a wrapper for the functionality provided by <see
-             cref="M:System.IO.File.Create(System.String)" />
+            >This method is a wrapper for the functionality provided by <see cref="M:System.IO.File.Create(System.String)" />
 
             
 
@@ -516,8 +504,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.IO.StreamWriter" />
+            >Creates a <see cref="T:System.IO.StreamWriter" />
 
             
 
@@ -555,31 +542,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.FileInfo.Decrypt" />
+            >The <see cref="M:System.IO.FileInfo.Decrypt" />
 
             
 
-             method allows you to decrypt a file that was encrypted using the <see
-             cref="M:System.IO.FileInfo.Encrypt" />
+             method allows you to decrypt a file that was encrypted using the <see cref="M:System.IO.FileInfo.Encrypt" />
 
             
 
-             method.  The <see
-             cref="M:System.IO.FileInfo.Decrypt" />
+             method.  The <see cref="M:System.IO.FileInfo.Decrypt" />
 
             
 
              method can decrypt only files that were encrypted using the current user account. </para
           >
           <para
-            >Both the <see
-             cref="M:System.IO.FileInfo.Encrypt" />
+            >Both the <see cref="M:System.IO.FileInfo.Encrypt" />
 
             
 
-             method and the <see
-             cref="M:System.IO.FileInfo.Decrypt" />
+             method and the <see cref="M:System.IO.FileInfo.Decrypt" />
 
             
 
@@ -590,8 +572,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Decrypts a file that was encrypted by the current account using the <see
-             cref="M:System.IO.FileInfo.Encrypt" />
+            >Decrypts a file that was encrypted by the current account using the <see cref="M:System.IO.FileInfo.Encrypt" />
 
             
 
@@ -647,8 +628,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To get the parent directory as a string, use the <see
-             cref="P:System.IO.FileInfo.DirectoryName" />
+            >To get the parent directory as a string, use the <see cref="P:System.IO.FileInfo.DirectoryName" />
 
             
 
@@ -678,31 +658,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To get the parent directory as a <see
-             cref="T:System.IO.DirectoryInfo" />
+            >To get the parent directory as a <see cref="T:System.IO.DirectoryInfo" />
 
             
 
-             object, use the <see
-             cref="P:System.IO.FileInfo.Directory" />
+             object, use the <see cref="P:System.IO.FileInfo.Directory" />
 
             
 
              property.</para
           >
           <para
-            >When first called, <see
-             cref="T:System.IO.FileInfo" />
+            >When first called, <see cref="T:System.IO.FileInfo" />
 
             
 
-             calls <see
-             cref="M:System.IO.FileSystemInfo.Refresh" />
+             calls <see cref="M:System.IO.FileSystemInfo.Refresh" />
 
             
 
-             and caches information about the file. On subsequent calls, you must call <see
-             cref="M:System.IO.FileSystemInfo.Refresh" />
+             and caches information about the file. On subsequent calls, you must call <see cref="M:System.IO.FileSystemInfo.Refresh" />
 
             
 
@@ -740,31 +715,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.FileInfo.Encrypt" />
+            >The <see cref="M:System.IO.FileInfo.Encrypt" />
 
             
 
-             method allows you to encrypt a file so that only the account used to call this method can decrypt it.  Use the <see
-             cref="M:System.IO.FileInfo.Decrypt" />
+             method allows you to encrypt a file so that only the account used to call this method can decrypt it.  Use the <see cref="M:System.IO.FileInfo.Decrypt" />
 
             
 
-             method to decrypt a file encrypted by the <see
-             cref="M:System.IO.FileInfo.Encrypt" />
+             method to decrypt a file encrypted by the <see cref="M:System.IO.FileInfo.Encrypt" />
 
             
 
              method. </para
           >
           <para
-            >Both the <see
-             cref="M:System.IO.FileInfo.Encrypt" />
+            >Both the <see cref="M:System.IO.FileInfo.Encrypt" />
 
             
 
-             method and the <see
-             cref="M:System.IO.FileInfo.Decrypt" />
+             method and the <see cref="M:System.IO.FileInfo.Decrypt" />
 
             
 
@@ -795,26 +765,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When first called, <see
-             cref="T:System.IO.FileInfo" />
+            >When first called, <see cref="T:System.IO.FileInfo" />
 
             
 
-             calls <see
-             cref="M:System.IO.FileSystemInfo.Refresh" />
+             calls <see cref="M:System.IO.FileSystemInfo.Refresh" />
 
             
 
-             and caches information about the file. On subsequent calls, you must call <see
-             cref="M:System.IO.FileSystemInfo.Refresh" />
+             and caches information about the file. On subsequent calls, you must call <see cref="M:System.IO.FileSystemInfo.Refresh" />
 
             
 
              to get the latest copy of the information.</para
           >
           <para
-            >The <see
-             cref="P:System.IO.FileInfo.Exists" />
+            >The <see cref="P:System.IO.FileInfo.Exists" />
 
             
 
@@ -850,23 +816,20 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.IO.FileInfo.GetAccessControl" />
+            >Use the <see cref="M:System.IO.FileInfo.GetAccessControl" />
 
             
 
              method to retrieve the access control list (ACL) entries for the current file.</para
           >
           <para
-            >An ACL describes individuals and/or groups who have, or do not have, rights to specific actions on the given file. For more information, see <format
-             type="text/html">
+            >An ACL describes individuals and/or groups who have, or do not have, rights to specific actions on the given file. For more information, see <format type="text/html">
               <a href="06fbf66d-6f02-4378-b863-b2f12e349045">ACL Technology Overview</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="53758b39-bd9b-4640-bb04-cad5ed8d0abf"
                 >How to: Add or Remove an Access Control List Entry</a
               >
@@ -880,13 +843,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+            >Gets a <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
-             object that encapsulates the access control list (ACL) entries for the file described by the current <see
-             cref="T:System.IO.FileInfo" />
+             object that encapsulates the access control list (ACL) entries for the file described by the current <see cref="T:System.IO.FileInfo" />
 
             
 
@@ -896,8 +857,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+            >A <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
@@ -934,23 +894,20 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.IO.FileInfo.GetAccessControl(System.Security.AccessControl.AccessControlSections)" />
+            >Use the <see cref="M:System.IO.FileInfo.GetAccessControl(System.Security.AccessControl.AccessControlSections)" />
 
             
 
              method to retrieve the access control list (ACL) entries for the current file.</para
           >
           <para
-            >An ACL describes individuals and/or groups who have, or do not have, rights to specific actions on the given file. For more information, see <format
-             type="text/html">
+            >An ACL describes individuals and/or groups who have, or do not have, rights to specific actions on the given file. For more information, see <format type="text/html">
               <a href="06fbf66d-6f02-4378-b863-b2f12e349045">ACL Technology Overview</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="53758b39-bd9b-4640-bb04-cad5ed8d0abf"
                 >How to: Add or Remove an Access Control List Entry</a
               >
@@ -964,13 +921,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+            >Gets a <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
-             object that encapsulates the specified type of access control list (ACL) entries for the file described by the current <see
-             cref="T:System.IO.FileInfo" />
+             object that encapsulates the specified type of access control list (ACL) entries for the file described by the current <see cref="T:System.IO.FileInfo" />
 
             
 
@@ -980,8 +935,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+            >A <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
@@ -989,12 +943,15 @@
           >
         </returns>
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AccessControlSections" />
+          One of the <see cref="T:System.Security.AccessControl.AccessControlSections" />
 
           
 
@@ -1019,26 +976,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.IO.FileInfo.IsReadOnly" />
+            >Use the <see cref="P:System.IO.FileInfo.IsReadOnly" />
 
             
 
              property to quickly determine or change whether the current file is read only.</para
           >
           <para
-            >When first called, <see
-             cref="T:System.IO.FileInfo" />
+            >When first called, <see cref="T:System.IO.FileInfo" />
 
             
 
-             calls <see
-             cref="M:System.IO.FileSystemInfo.Refresh" />
+             calls <see cref="M:System.IO.FileSystemInfo.Refresh" />
 
             
 
-             and caches information about the file. On subsequent calls, you must call <see
-             cref="M:System.IO.FileSystemInfo.Refresh" />
+             and caches information about the file. On subsequent calls, you must call <see cref="M:System.IO.FileSystemInfo.Refresh" />
 
             
 
@@ -1068,18 +1021,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="P:System.IO.FileInfo.Length" />
+            >The value of the <see cref="P:System.IO.FileInfo.Length" />
 
             
 
-             property is pre-cached if the current instance of the <see
-             cref="T:System.IO.FileInfo" />
+             property is pre-cached if the current instance of the <see cref="T:System.IO.FileInfo" />
 
             
 
-             object was returned from any of the following <see
-             cref="T:System.IO.DirectoryInfo" />
+             object was returned from any of the following <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -1118,8 +1068,7 @@
             </item>
           </list>
           <para
-            >To get the latest value, call the <see
-             cref="M:System.IO.FileSystemInfo.Refresh" />
+            >To get the latest value, call the <see cref="M:System.IO.FileSystemInfo.Refresh" />
 
             
 
@@ -1160,7 +1109,11 @@
           <para>Moves a specified file to a new location, providing the option to specify a new file name.</para>
         </summary>
         <param name="destFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1185,18 +1138,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When first called, <see
-             cref="T:System.IO.FileInfo" />
+            >When first called, <see cref="T:System.IO.FileInfo" />
 
             
 
-             calls <see
-             cref="M:System.IO.FileSystemInfo.Refresh" />
+             calls <see cref="M:System.IO.FileSystemInfo.Refresh" />
 
             
 
-             and caches information about the file. On subsequent calls, you must call <see
-             cref="M:System.IO.FileSystemInfo.Refresh" />
+             and caches information about the file. On subsequent calls, you must call <see cref="M:System.IO.FileSystemInfo.Refresh" />
 
             
 
@@ -1242,12 +1192,15 @@
           <para>A file opened in the specified mode, with read/write access and unshared.</para>
         </returns>
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.FileMode" />
+          A <see cref="T:System.IO.FileMode" />
 
           
 
@@ -1286,8 +1239,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.IO.FileStream" />
+            >A <see cref="T:System.IO.FileStream" />
 
             
 
@@ -1295,24 +1247,30 @@
           >
         </returns>
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.FileMode" />
+          A <see cref="T:System.IO.FileMode" />
 
           
 
            constant specifying the mode (for example, Open or Append) in which to open the file. </param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.FileAccess" />
+          A <see cref="T:System.IO.FileAccess" />
 
           
 
@@ -1352,8 +1310,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.IO.FileStream" />
+            >A <see cref="T:System.IO.FileStream" />
 
             
 
@@ -1361,36 +1318,45 @@
           >
         </returns>
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.FileMode" />
+          A <see cref="T:System.IO.FileMode" />
 
           
 
            constant specifying the mode (for example, Open or Append) in which to open the file. </param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.FileAccess" />
+          A <see cref="T:System.IO.FileAccess" />
 
           
 
            constant specifying whether to open the file with Read, Write, or ReadWrite file access. </param
         >
         <param name="share">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.FileShare" />
+          A <see cref="T:System.IO.FileShare" />
 
           
 
@@ -1418,18 +1384,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns a read-only <see
-             cref="T:System.IO.FileStream" />
+            >This method returns a read-only <see cref="T:System.IO.FileStream" />
 
             
 
-             object with the <see
-             cref="T:System.IO.FileShare" />
+             object with the <see cref="T:System.IO.FileShare" />
 
             
 
-             mode set to <see
-             cref="F:System.IO.FileShare.Read" />
+             mode set to <see cref="F:System.IO.FileShare.Read" />
 
             
 
@@ -1439,8 +1402,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a read-only <see
-             cref="T:System.IO.FileStream" />
+            >Creates a read-only <see cref="T:System.IO.FileStream" />
 
             
 
@@ -1450,8 +1412,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new read-only <see
-             cref="T:System.IO.FileStream" />
+            >A new read-only <see cref="T:System.IO.FileStream" />
 
             
 
@@ -1481,8 +1442,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.IO.StreamReader" />
+            >Creates a <see cref="T:System.IO.StreamReader" />
 
             
 
@@ -1515,8 +1475,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.FileInfo.OpenWrite" />
+            >The <see cref="M:System.IO.FileInfo.OpenWrite" />
 
             
 
@@ -1526,8 +1485,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a write-only <see
-             cref="T:System.IO.FileStream" />
+            >Creates a write-only <see cref="T:System.IO.FileStream" />
 
             
 
@@ -1537,8 +1495,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A write-only unshared <see
-             cref="T:System.IO.FileStream" />
+            >A write-only unshared <see cref="T:System.IO.FileStream" />
 
             
 
@@ -1578,18 +1535,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.FileInfo.Replace(System.String,System.String)" />
+            >The <see cref="M:System.IO.FileInfo.Replace(System.String,System.String)" />
 
             
 
-             method replaces the contents of a specified file with the contents of the file described by the current <see
-             cref="T:System.IO.FileInfo" />
+             method replaces the contents of a specified file with the contents of the file described by the current <see cref="T:System.IO.FileInfo" />
 
             
 
-             object.  It also creates a backup of the file that was replaced.  Finally, it returns a new <see
-             cref="T:System.IO.FileInfo" />
+             object.  It also creates a backup of the file that was replaced.  Finally, it returns a new <see cref="T:System.IO.FileInfo" />
 
             
 
@@ -1597,13 +1551,11 @@
           >
           <block subset="none" type="note">
             <para
-              >This method will succeed in Windows 2000 environments if the <paramref
-               name="destFileName" />
+              >This method will succeed in Windows 2000 environments if the <paramref name="destFileName" />
 
               
 
-               is read-only and will not raise an exception. Use the <see
-               cref="P:System.IO.FileInfo.IsReadOnly" />
+               is read-only and will not raise an exception. Use the <see cref="P:System.IO.FileInfo.IsReadOnly" />
 
               
 
@@ -1611,8 +1563,7 @@
             >
           </block>
           <para
-            >Pass null to the <paramref
-             name="destBackupFileName" />
+            >Pass null to the <paramref name="destBackupFileName" />
 
             
 
@@ -1622,8 +1573,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Replaces the contents of a specified file with the file described by the current <see
-             cref="T:System.IO.FileInfo" />
+            >Replaces the contents of a specified file with the file described by the current <see cref="T:System.IO.FileInfo" />
 
             
 
@@ -1633,13 +1583,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.IO.FileInfo" />
+            >A <see cref="T:System.IO.FileInfo" />
 
             
 
-             object that encapsulates information about the file described by the <paramref
-             name="destFileName" />
+             object that encapsulates information about the file described by the <paramref name="destFileName" />
 
             
 
@@ -1647,19 +1595,26 @@
           >
         </returns>
         <param name="destinationFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of a file to replace with the current file.</param
         >
         <param name="destinationBackupFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of a file with which to create a backup of the file described by the <paramref
-           name="destFileName" />
+          The name of a file with which to create a backup of the file described by the <paramref name="destFileName" />
 
           
 
@@ -1699,18 +1654,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.FileInfo.Replace(System.String,System.String,System.Boolean)" />
+            >The <see cref="M:System.IO.FileInfo.Replace(System.String,System.String,System.Boolean)" />
 
             
 
-             method replaces the contents of a specified file with the contents of the file described by the current <see
-             cref="T:System.IO.FileInfo" />
+             method replaces the contents of a specified file with the contents of the file described by the current <see cref="T:System.IO.FileInfo" />
 
             
 
-             object.  It also creates a backup of the file that was replaced.  Finally, it returns a new <see
-             cref="T:System.IO.FileInfo" />
+             object.  It also creates a backup of the file that was replaced.  Finally, it returns a new <see cref="T:System.IO.FileInfo" />
 
             
 
@@ -1718,13 +1670,11 @@
           >
           <block subset="none" type="note">
             <para
-              >This method will succeed in Windows 2000 environments if the <paramref
-               name="destFileName" />
+              >This method will succeed in Windows 2000 environments if the <paramref name="destFileName" />
 
               
 
-               is read-only and will not raise an exception. Use the <see
-               cref="P:System.IO.FileInfo.IsReadOnly" />
+               is read-only and will not raise an exception. Use the <see cref="P:System.IO.FileInfo.IsReadOnly" />
 
               
 
@@ -1732,8 +1682,7 @@
             >
           </block>
           <para
-            >Pass null to the <paramref
-             name="destBackupFileName" />
+            >Pass null to the <paramref name="destBackupFileName" />
 
             
 
@@ -1743,8 +1692,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Replaces the contents of a specified file with the file described by the current <see
-             cref="T:System.IO.FileInfo" />
+            >Replaces the contents of a specified file with the file described by the current <see cref="T:System.IO.FileInfo" />
 
             
 
@@ -1754,13 +1702,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.IO.FileInfo" />
+            >A <see cref="T:System.IO.FileInfo" />
 
             
 
-             object that encapsulates information about the file described by the <paramref
-             name="destFileName" />
+             object that encapsulates information about the file described by the <paramref name="destFileName" />
 
             
 
@@ -1768,26 +1714,37 @@
           >
         </returns>
         <param name="destinationFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of a file to replace with the current file.</param
         >
         <param name="destinationBackupFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of a file with which to create a backup of the file described by the <paramref
-           name="destFileName" />
+          The name of a file with which to create a backup of the file described by the <paramref name="destFileName" />
 
           
 
            parameter.</param
         >
         <param name="ignoreMetadataErrors">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1820,16 +1777,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+            >The <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
 
             
 
              method applies access control list (ACL) entries to the current file that represents the noninherited ACL list. </para
           >
           <para
-            >Use the <see
-             cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+            >Use the <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
 
             
 
@@ -1837,18 +1792,15 @@
           >
           <block subset="none" type="note">
             <para
-              >The ACL specified for the <paramref
-               name="fileSecurity" />
+              >The ACL specified for the <paramref name="fileSecurity" />
 
               
 
-               parameter replaces the existing ACL for the file. To add permissions for a new user, use the <see
-               cref="Overload:System.IO.Directory.GetAccessControl" />
+               parameter replaces the existing ACL for the file. To add permissions for a new user, use the <see cref="Overload:System.IO.Directory.GetAccessControl" />
 
               
 
-               method to obtain the existing ACL, modify it, and then use <see
-               cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+               method to obtain the existing ACL, modify it, and then use <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
 
               
 
@@ -1856,15 +1808,13 @@
             >
           </block>
           <para
-            >An ACL describes individuals and/or groups who have, or do not have, rights to specific actions on the given file. For more information, see <format
-             type="text/html">
+            >An ACL describes individuals and/or groups who have, or do not have, rights to specific actions on the given file. For more information, see <format type="text/html">
               <a href="06fbf66d-6f02-4378-b863-b2f12e349045">ACL Technology Overview</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="53758b39-bd9b-4640-bb04-cad5ed8d0abf"
                 >How to: Add or Remove an Access Control List Entry</a
               >
@@ -1875,23 +1825,19 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+            >The <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
 
             
 
-             method persists only <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+             method persists only <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
-             objects that have been modified after object creation.  If a <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+             objects that have been modified after object creation.  If a <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
-             object has not been modified, it will not be persisted to a file.  Therefore, it is not possible to retrieve a <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+             object has not been modified, it will not be persisted to a file.  Therefore, it is not possible to retrieve a <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
@@ -1901,13 +1847,11 @@
           <list type="ordered">
             <item>
               <para
-                >Use the <see
-                 cref="Overload:System.IO.FileInfo.GetAccessControl" />
+                >Use the <see cref="Overload:System.IO.FileInfo.GetAccessControl" />
 
                 
 
-                 method to retrieve the <see
-                 cref="T:System.Security.AccessControl.FileSecurity" />
+                 method to retrieve the <see cref="T:System.Security.AccessControl.FileSecurity" />
 
                 
 
@@ -1916,8 +1860,7 @@
             </item>
             <item>
               <para
-                >Create a new <see
-                 cref="T:System.Security.AccessControl.FileSecurity" />
+                >Create a new <see cref="T:System.Security.AccessControl.FileSecurity" />
 
                 
 
@@ -1926,18 +1869,15 @@
             </item>
             <item>
               <para
-                >Use the <see
-                 cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorBinaryForm" />
+                >Use the <see cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorBinaryForm" />
 
                 
 
-                 or <see
-                 cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections)" />
+                 or <see cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections)" />
 
                 
 
-                 method of the source <see
-                 cref="T:System.Security.AccessControl.FileSecurity" />
+                 method of the source <see cref="T:System.Security.AccessControl.FileSecurity" />
 
                 
 
@@ -1946,18 +1886,15 @@
             </item>
             <item>
               <para
-                >Use the <see
-                 cref="M:System.Security.AccessControl.ObjectSecurity.SetSecurityDescriptorBinaryForm(System.Byte[])" />
+                >Use the <see cref="M:System.Security.AccessControl.ObjectSecurity.SetSecurityDescriptorBinaryForm(System.Byte[])" />
 
                 
 
-                 or <see
-                 cref="M:System.Security.AccessControl.ObjectSecurity.SetSecurityDescriptorSddlForm(System.String)" />
+                 or <see cref="M:System.Security.AccessControl.ObjectSecurity.SetSecurityDescriptorSddlForm(System.String)" />
 
                 
 
-                 method to copy the information retrieved in step 3 to the destination <see
-                 cref="T:System.Security.AccessControl.FileSecurity" />
+                 method to copy the information retrieved in step 3 to the destination <see cref="T:System.Security.AccessControl.FileSecurity" />
 
                 
 
@@ -1966,13 +1903,11 @@
             </item>
             <item>
               <para
-                >Set the destination <see
-                 cref="T:System.Security.AccessControl.FileSecurity" />
+                >Set the destination <see cref="T:System.Security.AccessControl.FileSecurity" />
 
                 
 
-                 object to the destination file using the <see
-                 cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+                 object to the destination file using the <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
 
                 
 
@@ -1984,13 +1919,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies access control list (ACL) entries described by a <see
-             cref="T:System.Security.AccessControl.FileSecurity" />
+            >Applies access control list (ACL) entries described by a <see cref="T:System.Security.AccessControl.FileSecurity" />
 
             
 
-             object to the file described by the current <see
-             cref="T:System.IO.FileInfo" />
+             object to the file described by the current <see cref="T:System.IO.FileInfo" />
 
             
 
@@ -1998,12 +1931,15 @@
           >
         </summary>
         <param name="fileSecurity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.AccessControl.FileSecurity" />
+          A <see cref="T:System.Security.AccessControl.FileSecurity" />
 
           
 
@@ -2031,38 +1967,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string returned by the <see
-             cref="M:System.IO.FileInfo.ToString" />
+            >The string returned by the <see cref="M:System.IO.FileInfo.ToString" />
 
             
 
-             method represents path that was passed to the constructor.  When you create a <see
-             cref="T:System.IO.FileInfo" />
+             method represents path that was passed to the constructor.  When you create a <see cref="T:System.IO.FileInfo" />
 
             
 
-             object using the constructors, the <see
-             cref="M:System.IO.FileInfo.ToString" />
+             object using the constructors, the <see cref="M:System.IO.FileInfo.ToString" />
 
             
 
-             method returns the fully qualified path.  However, there are cases where the string returned by the <see
-             cref="M:System.IO.FileInfo.ToString" />
+             method returns the fully qualified path.  However, there are cases where the string returned by the <see cref="M:System.IO.FileInfo.ToString" />
 
             
 
-             method does not represent the fully qualified path.  For example, when you create a <see
-             cref="T:System.IO.FileInfo" />
+             method does not represent the fully qualified path.  For example, when you create a <see cref="T:System.IO.FileInfo" />
 
             
 
-             object using the <see
-             cref="Overload:System.IO.DirectoryInfo.GetFiles" />
+             object using the <see cref="Overload:System.IO.DirectoryInfo.GetFiles" />
 
             
 
-             method, the <see
-             cref="M:System.IO.FileInfo.ToString" />
+             method, the <see cref="M:System.IO.FileInfo.ToString" />
 
             
 

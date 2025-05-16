@@ -15,8 +15,7 @@
   <Docs>
     <summary>Allows launching and connecting to mono virtual machines.</summary>
     <remarks
-      >This class implements the functionality of the classes in the <format
-       type="text/html">
+      >This class implements the functionality of the classes in the <format type="text/html">
         <a
           href="http://java.sun.com/j2se/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/connect/package-frame.html"
           >com.sun.kdi.connect</a

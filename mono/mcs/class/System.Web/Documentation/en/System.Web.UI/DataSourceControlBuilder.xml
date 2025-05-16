@@ -17,23 +17,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.DataSourceControlBuilder" />
+        >The <see cref="T:System.Web.UI.DataSourceControlBuilder" />
 
         
 
-         class extends <see
-         cref="T:System.Web.UI.ControlBuilder" />
+         class extends <see cref="T:System.Web.UI.ControlBuilder" />
 
         
 
-         by overriding the <see
-         cref="M:System.Web.UI.DataSourceControlBuilder.AllowWhitespaceLiterals" />
+         by overriding the <see cref="M:System.Web.UI.DataSourceControlBuilder.AllowWhitespaceLiterals" />
 
         
 
-         method to return false. <see
-         cref="T:System.Web.UI.DataSourceControlBuilder" />
+         method to return false. <see cref="T:System.Web.UI.DataSourceControlBuilder" />
 
         
 
@@ -56,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.DataSourceControlBuilder" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.DataSourceControlBuilder" />
 
             
 

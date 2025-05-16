@@ -26,18 +26,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+        >A <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
         
 
-         has a <see
-         cref="P:System.CodeDom.Compiler.CodeDomProvider.LanguageOptions" />
+         has a <see cref="P:System.CodeDom.Compiler.CodeDomProvider.LanguageOptions" />
 
         
 
-         property that is used to indicate certain characteristics of the programming language supported by the provider. The meaning of a <see
-         cref="T:System.CodeDom.Compiler.LanguageOptions" />
+         property that is used to indicate certain characteristics of the programming language supported by the provider. The meaning of a <see cref="T:System.CodeDom.Compiler.LanguageOptions" />
 
         
 

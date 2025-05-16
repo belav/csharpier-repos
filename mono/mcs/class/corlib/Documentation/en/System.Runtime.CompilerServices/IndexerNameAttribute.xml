@@ -35,8 +35,7 @@
       <para>You can apply this attribute to properties.</para>
       <para>This attribute is directly processed by the compiler, and cannot be accessed after compilation through Reflection.</para>
       <para
-        >The classes in <see
-         cref="N:System.Runtime.CompilerServices" />
+        >The classes in <see cref="N:System.Runtime.CompilerServices" />
 
         
 
@@ -70,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.CompilerServices.IndexerNameAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.IndexerNameAttribute" />
 
             
 
@@ -79,7 +77,11 @@
           >
         </summary>
         <param name="indexerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

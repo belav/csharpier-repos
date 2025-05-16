@@ -25,16 +25,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
+        >The <see cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
 
         
 
          allows to centralize the management of the output cache settings used by pages or user controls.</para
       >
       <para
-        >It allows you to programmatically access and modify the <see
-         cref="T:System.Web.Configuration.OutputCacheProfile" />
+        >It allows you to programmatically access and modify the <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
         
 
@@ -42,13 +40,11 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.Configuration.OutputCacheProfile" />
+          >The <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
           
 
-           can be applied to a page using the CacheProfile attribute of the <format
-           type="text/html">
+           can be applied to a page using the CacheProfile attribute of the <format type="text/html">
             <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
           </format>
 
@@ -61,8 +57,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Web.Configuration.OutputCacheProfile" />
+        >Represents a collection of <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
         
 
@@ -81,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
 
             
 
@@ -111,8 +105,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection cannot contain a <see
-             cref="T:System.Web.Configuration.OutputCacheProfile" />
+            >The collection cannot contain a <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
             
 
@@ -122,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Web.Configuration.OutputCacheProfile" />
+            >Adds a <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
             
 
@@ -131,12 +123,15 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Web.Configuration.OutputCacheProfile" />
+          The name of the <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
           
 
@@ -160,8 +155,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
+            >Gets the <see cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
 
             
 
@@ -189,8 +183,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all the  <see
-             cref="T:System.Web.Configuration.OutputCacheProfile" />
+            >Removes all the  <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
             
 
@@ -240,8 +233,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Configuration.OutputCacheProfile" />
+            >Gets the <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
             
 
@@ -251,8 +243,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.OutputCacheProfile" />
+            >The <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
             
 
@@ -260,12 +251,15 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the <see
-           cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
+          The index of the <see cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
 
           
 
@@ -294,8 +288,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Configuration.OutputCacheProfile" />
+            >Gets the <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
             
 
@@ -305,8 +298,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.OutputCacheProfile" />
+            >The <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
             
 
@@ -314,12 +306,15 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
+          The name of the <see cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
 
           
 
@@ -368,8 +363,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the key at the specified <see
-             cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
+            >Gets the key at the specified <see cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
 
             
 
@@ -379,8 +373,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The key with the specified <see
-             cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
+            >The key with the specified <see cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
 
             
 
@@ -388,12 +381,15 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
+          The <see cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
 
           
 
@@ -483,8 +479,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.OutputCacheProfileCollection.Remove(System.String)" />
+            >The <see cref="M:System.Web.Configuration.OutputCacheProfileCollection.Remove(System.String)" />
 
             
 
@@ -494,8 +489,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Web.Configuration.OutputCacheProfile" />
+            >Removes the <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
             
 
@@ -503,12 +497,15 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Web.Configuration.OutputCacheProfile" />
+          The name of the <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
           
 
@@ -533,8 +530,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.OutputCacheProfileCollection.RemoveAt(System.Int32)" />
+            >The <see cref="M:System.Web.Configuration.OutputCacheProfileCollection.RemoveAt(System.Int32)" />
 
             
 
@@ -544,8 +540,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Web.Configuration.OutputCacheProfile" />
+            >Removes the <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
             
 
@@ -553,12 +548,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the <see
-           cref="T:System.Web.Configuration.OutputCacheProfile" />
+          The index of the <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
           
 
@@ -586,13 +584,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.OutputCacheProfileCollection.Set(System.Web.Configuration.OutputCacheProfile)" />
+            >The <see cref="M:System.Web.Configuration.OutputCacheProfileCollection.Set(System.Web.Configuration.OutputCacheProfile)" />
 
             
 
-             method modifies an existing <see
-             cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
+             method modifies an existing <see cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
 
             
 
@@ -602,8 +598,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the specified <see
-             cref="T:System.Web.Configuration.OutputCacheProfile" />
+            >Sets the specified <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
             
 
@@ -611,12 +606,15 @@
           >
         </summary>
         <param name="user">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
+          The <see cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
 
           
 

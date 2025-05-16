@@ -8,7 +8,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -45,10 +47,7 @@
         <Parameter Name="bi" Type="Mono.Math.BigInteger" />
       </Parameters>
       <Docs>
-        <param name="bi"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
+        <param name="bi">a <see cref="T:Mono.Math.BigInteger" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -65,10 +64,7 @@
         <Parameter Name="inData" Type="System.Byte[]" />
       </Parameters>
       <Docs>
-        <param name="inData"
-          >a <see
-           cref="T:System.Byte" />
-        </param>
+        <param name="inData">a <see cref="T:System.Byte" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -85,10 +81,7 @@
         <Parameter Name="ui" Type="System.UInt32" />
       </Parameters>
       <Docs>
-        <param name="ui"
-          >a <see
-           cref="T:System.UInt32" />
-        </param>
+        <param name="ui">a <see cref="T:System.UInt32" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -110,10 +103,7 @@
         <Parameter Name="inData" Type="System.UInt32[]" />
       </Parameters>
       <Docs>
-        <param name="inData"
-          >a <see
-           cref="T:System.UInt32" />
-        </param>
+        <param name="inData">a <see cref="T:System.UInt32" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -135,10 +125,7 @@
         <Parameter Name="ul" Type="System.UInt64" />
       </Parameters>
       <Docs>
-        <param name="ul"
-          >a <see
-           cref="T:System.UInt64" />
-        </param>
+        <param name="ul">a <see cref="T:System.UInt64" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -164,14 +151,8 @@
         <Parameter Name="len" Type="System.UInt32" />
       </Parameters>
       <Docs>
-        <param name="bi"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
-        <param name="len"
-          >a <see
-           cref="T:System.UInt32" />
-        </param>
+        <param name="bi">a <see cref="T:Mono.Math.BigInteger" /></param>
+        <param name="len">a <see cref="T:System.UInt32" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -197,14 +178,8 @@
         <Parameter Name="len" Type="System.UInt32" />
       </Parameters>
       <Docs>
-        <param name="sign"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="len"
-          >a <see
-           cref="T:System.UInt32" />
-        </param>
+        <param name="sign">a <see cref="T:System.Int32" /></param>
+        <param name="len">a <see cref="T:System.UInt32" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -232,19 +207,10 @@
         <Parameter Name="bi2" Type="Mono.Math.BigInteger" />
       </Parameters>
       <Docs>
-        <param name="bi1"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
-        <param name="bi2"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
+        <param name="bi1">a <see cref="T:Mono.Math.BigInteger" /></param>
+        <param name="bi2">a <see cref="T:Mono.Math.BigInteger" /></param>
         <summary>Adds two BigIntegers and returns the result.</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </returns>
+        <returns>a <see cref="T:Mono.Math.BigInteger" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -261,10 +227,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -298,10 +261,7 @@
         <Parameter Name="bitNum" Type="System.UInt32" />
       </Parameters>
       <Docs>
-        <param name="bitNum"
-          >a <see
-           cref="T:System.UInt32" />
-        </param>
+        <param name="bitNum">a <see cref="T:System.UInt32" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -328,15 +288,9 @@
         <Parameter Name="bi" Type="Mono.Math.BigInteger" />
       </Parameters>
       <Docs>
-        <param name="bi"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
+        <param name="bi">a <see cref="T:Mono.Math.BigInteger" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Math.BigInteger+Sign" />
-        </returns>
+        <returns>a <see cref="T:Mono.Math.BigInteger+Sign" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -358,19 +312,10 @@
         <Parameter Name="bi2" Type="Mono.Math.BigInteger" />
       </Parameters>
       <Docs>
-        <param name="bi1"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
-        <param name="bi2"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
+        <param name="bi1">a <see cref="T:Mono.Math.BigInteger" /></param>
+        <param name="bi2">a <see cref="T:Mono.Math.BigInteger" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </returns>
+        <returns>a <see cref="T:Mono.Math.BigInteger" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -392,19 +337,10 @@
         <Parameter Name="i" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="bi"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
-        <param name="i"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="bi">a <see cref="T:Mono.Math.BigInteger" /></param>
+        <param name="i">a <see cref="T:System.Int32" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </returns>
+        <returns>a <see cref="T:Mono.Math.BigInteger" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -422,15 +358,9 @@
         <Parameter Name="o" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="o"
-          >a <see
-           cref="T:System.Object" />
-        </param>
+        <param name="o">a <see cref="T:System.Object" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -451,15 +381,9 @@
         <Parameter Name="bi" Type="Mono.Math.BigInteger" />
       </Parameters>
       <Docs>
-        <param name="bi"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
+        <param name="bi">a <see cref="T:Mono.Math.BigInteger" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </returns>
+        <returns>a <see cref="T:Mono.Math.BigInteger" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -480,15 +404,9 @@
         <Parameter Name="bits" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="bits"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="bits">a <see cref="T:System.Int32" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </returns>
+        <returns>a <see cref="T:Mono.Math.BigInteger" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -509,15 +427,9 @@
         <Parameter Name="bits" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="bits"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="bits">a <see cref="T:System.Int32" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </returns>
+        <returns>a <see cref="T:Mono.Math.BigInteger" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -539,19 +451,12 @@
         <Parameter Name="rng" Type="System.Security.Cryptography.RandomNumberGenerator" />
       </Parameters>
       <Docs>
-        <param name="bits"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="bits">a <see cref="T:System.Int32" /></param>
         <param name="rng"
-          >a <see
-           cref="T:System.Security.Cryptography.RandomNumberGenerator" />
+          >a <see cref="T:System.Security.Cryptography.RandomNumberGenerator" />
         </param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </returns>
+        <returns>a <see cref="T:Mono.Math.BigInteger" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -568,10 +473,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Byte[]" />
-        </returns>
+        <returns>a <see cref="T:System.Byte[]" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -588,10 +490,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -624,10 +523,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -644,10 +540,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -668,15 +561,9 @@
         <Parameter Name="modulus" Type="Mono.Math.BigInteger" />
       </Parameters>
       <Docs>
-        <param name="modulus"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
+        <param name="modulus">a <see cref="T:Mono.Math.BigInteger" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </returns>
+        <returns>a <see cref="T:Mono.Math.BigInteger" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -698,19 +585,10 @@
         <Parameter Name="n" Type="Mono.Math.BigInteger" />
       </Parameters>
       <Docs>
-        <param name="exp"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
-        <param name="n"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
+        <param name="exp">a <see cref="T:Mono.Math.BigInteger" /></param>
+        <param name="n">a <see cref="T:Mono.Math.BigInteger" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </returns>
+        <returns>a <see cref="T:Mono.Math.BigInteger" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -732,19 +610,10 @@
         <Parameter Name="bi2" Type="Mono.Math.BigInteger" />
       </Parameters>
       <Docs>
-        <param name="bi1"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
-        <param name="bi2"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
+        <param name="bi1">a <see cref="T:Mono.Math.BigInteger" /></param>
+        <param name="bi2">a <see cref="T:Mono.Math.BigInteger" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </returns>
+        <returns>a <see cref="T:Mono.Math.BigInteger" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -766,19 +635,10 @@
         <Parameter Name="i" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="bi"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
-        <param name="i"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="bi">a <see cref="T:Mono.Math.BigInteger" /></param>
+        <param name="i">a <see cref="T:System.Int32" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -800,19 +660,10 @@
         <Parameter Name="ui" Type="System.UInt32" />
       </Parameters>
       <Docs>
-        <param name="bi"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
-        <param name="ui"
-          >a <see
-           cref="T:System.UInt32" />
-        </param>
+        <param name="bi">a <see cref="T:Mono.Math.BigInteger" /></param>
+        <param name="ui">a <see cref="T:System.UInt32" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.UInt32" />
-        </returns>
+        <returns>a <see cref="T:System.UInt32" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -839,19 +690,10 @@
         <Parameter Name="bi2" Type="Mono.Math.BigInteger" />
       </Parameters>
       <Docs>
-        <param name="bi1"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
-        <param name="bi2"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
+        <param name="bi1">a <see cref="T:Mono.Math.BigInteger" /></param>
+        <param name="bi2">a <see cref="T:Mono.Math.BigInteger" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </returns>
+        <returns>a <see cref="T:Mono.Math.BigInteger" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -873,19 +715,10 @@
         <Parameter Name="i" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="bi"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
-        <param name="i"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="bi">a <see cref="T:Mono.Math.BigInteger" /></param>
+        <param name="i">a <see cref="T:System.Int32" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </returns>
+        <returns>a <see cref="T:Mono.Math.BigInteger" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -906,15 +739,9 @@
         <Parameter Name="bi" Type="Mono.Math.BigInteger" />
       </Parameters>
       <Docs>
-        <param name="bi"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
+        <param name="bi">a <see cref="T:Mono.Math.BigInteger" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </returns>
+        <returns>a <see cref="T:Mono.Math.BigInteger" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -1504,15 +1331,9 @@
         <Parameter Name="number" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="number"
-          >a <see
-           cref="T:System.String" />
-        </param>
+        <param name="number">a <see cref="T:System.String" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </returns>
+        <returns>a <see cref="T:Mono.Math.BigInteger" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -1550,8 +1371,7 @@
       </Parameters>
       <Docs>
         <param name="rng"
-          >a <see
-           cref="T:System.Security.Cryptography.RandomNumberGenerator" />
+          >a <see cref="T:System.Security.Cryptography.RandomNumberGenerator" />
         </param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
@@ -1571,10 +1391,7 @@
         <Parameter Name="bitNum" Type="System.UInt32" />
       </Parameters>
       <Docs>
-        <param name="bitNum"
-          >a <see
-           cref="T:System.UInt32" />
-        </param>
+        <param name="bitNum">a <see cref="T:System.UInt32" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -1599,14 +1416,8 @@
         <Parameter Name="value" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="bitNum"
-          >a <see
-           cref="T:System.UInt32" />
-        </param>
-        <param name="value"
-          >a <see
-           cref="T:System.Boolean" />
-        </param>
+        <param name="bitNum">a <see cref="T:System.UInt32" /></param>
+        <param name="value">a <see cref="T:System.Boolean" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -1634,19 +1445,10 @@
         <Parameter Name="bi2" Type="Mono.Math.BigInteger" />
       </Parameters>
       <Docs>
-        <param name="bi1"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
-        <param name="bi2"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
+        <param name="bi1">a <see cref="T:Mono.Math.BigInteger" /></param>
+        <param name="bi2">a <see cref="T:Mono.Math.BigInteger" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </returns>
+        <returns>a <see cref="T:Mono.Math.BigInteger" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -1664,15 +1466,9 @@
         <Parameter Name="bitNum" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="bitNum"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="bitNum">a <see cref="T:System.Int32" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -1690,15 +1486,9 @@
         <Parameter Name="bitNum" Type="System.UInt32" />
       </Parameters>
       <Docs>
-        <param name="bitNum"
-          >a <see
-           cref="T:System.UInt32" />
-        </param>
+        <param name="bitNum">a <see cref="T:System.UInt32" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -1720,10 +1510,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -1741,15 +1528,9 @@
         <Parameter Name="radix" Type="System.UInt32" />
       </Parameters>
       <Docs>
-        <param name="radix"
-          >a <see
-           cref="T:System.UInt32" />
-        </param>
+        <param name="radix">a <see cref="T:System.UInt32" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -1776,19 +1557,10 @@
         <Parameter Name="characterSet" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="radix"
-          >a <see
-           cref="T:System.UInt32" />
-        </param>
-        <param name="characterSet"
-          >a <see
-           cref="T:System.String" />
-        </param>
+        <param name="radix">a <see cref="T:System.UInt32" /></param>
+        <param name="characterSet">a <see cref="T:System.String" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>

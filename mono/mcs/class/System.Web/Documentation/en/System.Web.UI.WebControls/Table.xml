@@ -68,16 +68,14 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.Table" />
+        >The <see cref="T:System.Web.UI.WebControls.Table" />
 
         
 
          control allows you to build an HTML table and specify its characteristics in a straightforward manner.</para
       >
       <para
-        >A table can be built at design time given some static content, but the power of a <see
-         cref="T:System.Web.UI.WebControls.Table" />
+        >A table can be built at design time given some static content, but the power of a <see cref="T:System.Web.UI.WebControls.Table" />
 
         
 
@@ -85,8 +83,7 @@
       >
       <block subset="none" type="note">
         <para
-          >If the controlRenderingCompatibilityVersion attribute of the <format
-           type="text/html">
+          >If the controlRenderingCompatibilityVersion attribute of the <format type="text/html">
             <a href="4123bb66-3fe4-4d62-b70e-33758656b458">pages</a>
           </format>
 
@@ -96,33 +93,27 @@
         >
       </block>
       <para
-        >It is important to remember that any programmatic addition or modification of table rows or cells will not persist across posts to the server. This is because table rows and cells are controls of their own, and not properties of the <see
-         cref="T:System.Web.UI.WebControls.Table" />
+        >It is important to remember that any programmatic addition or modification of table rows or cells will not persist across posts to the server. This is because table rows and cells are controls of their own, and not properties of the <see cref="T:System.Web.UI.WebControls.Table" />
 
         
 
-         control. To persist any changes to the table, rows and cells must be reconstructed after each postback. In fact, if substantial modifications are expected, it is recommended that a <see
-         cref="T:System.Web.UI.WebControls.DataList" />
+         control. To persist any changes to the table, rows and cells must be reconstructed after each postback. In fact, if substantial modifications are expected, it is recommended that a <see cref="T:System.Web.UI.WebControls.DataList" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+        , <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
-        , or <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+        , or <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         control be used instead of the <see
-         cref="T:System.Web.UI.WebControls.Table" />
+         control be used instead of the <see cref="T:System.Web.UI.WebControls.Table" />
 
         
 
-         control. As a result, the <see
-         cref="T:System.Web.UI.WebControls.Table" />
+         control. As a result, the <see cref="T:System.Web.UI.WebControls.Table" />
 
         
 
@@ -130,15 +121,13 @@
       >
       <block subset="none" type="note">
         <para
-          >This control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. You can use validation controls to verify user input before displaying the input text in a control. ASP.NET provides an input request validation feature to block script and HTML in user input. For more information, see <format
-           type="text/html">
+          >This control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. You can use validation controls to verify user input before displaying the input text in a control. ASP.NET provides an input request validation feature to block script and HTML in user input. For more information, see <format type="text/html">
             <a href="f3e7718f-63d0-44a3-bd5f-48cc2059c2a8">Securing Standard Controls</a>
           </format>
 
           
 
-          , <format
-           type="text/html">
+          , <format type="text/html">
             <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
               >How to: Protect Against Script Exploits in a Web Application by Applying HTML Encoding to Strings</a
             >
@@ -146,8 +135,7 @@
 
           
 
-          , and <format
-           type="text/html">
+          , and <format type="text/html">
             <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
               >Introduction to Validating User Input in ASP.NET Web Pages</a
             >
@@ -165,8 +153,7 @@
         <h2>Accessibility</h2>
       </format>
       <para
-        >For information about how to configure this control so that it generates markup that conforms to accessibility standards, see <format
-         type="text/html">
+        >For information about how to configure this control so that it generates markup that conforms to accessibility standards, see <format type="text/html">
           <a href="7e3ce9c4-6b7d-4fb1-94b5-72cf2a44fe13"
             >Accessibility in Visual Studio 2010 and ASP.NET 4</a
           >
@@ -174,8 +161,7 @@
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
 
@@ -195,8 +181,7 @@
     BackColor="color name|#dddddd"
     BackImageUrl="uri"
     BorderColor="color name|#dddddd"
-    BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+    BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -204,8 +189,7 @@
         Inset|Outset"
     BorderWidth="size"
     Caption="string"
-    CaptionAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+    CaptionAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -213,67 +197,57 @@
     CellPadding="integer"
     CellSpacing="integer"
     CssClass="string"
-    Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     Font-Names="string"
-    Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     Font-Size="string|Smaller|Larger|XX-Small|X-Small|Small|Medium|
         Large|X-Large|XX-Large"
-    Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     ForeColor="color name|#dddddd"
-    GridLines="<codeFeaturedElement
-        >None</codeFeaturedElement>
+    GridLines="<codeFeaturedElement>None</codeFeaturedElement>
 
         
 
         |Horizontal|Vertical|Both"
     Height="size"
-    HorizontalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+    HorizontalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -290,8 +264,7 @@
     Style="string"
     TabIndex="integer"
     ToolTip="string"
-    Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -302,8 +275,7 @@
                 AccessKey="string"
                 BackColor="color name|#dddddd"
                 BorderColor="color name|#dddddd"
-                BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -311,61 +283,52 @@
                     Groove|Ridge|Inset|Outset"
                 BorderWidth="size"
                 CssClass="string"
-                Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                 Font-Names="string"
-                Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                 Font-Size="string|Smaller|Larger|XX-Small|X-Small|
                     Small|Medium|Large|X-Large|XX-Large"
-                Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                 ForeColor="color name|#dddddd"
                 Height="size"
-                HorizontalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                HorizontalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -381,21 +344,18 @@
                 SkinID="string"
                 Style="string"
                 TabIndex="integer"
-                TableSection="TableHeader|<codeFeaturedElement
-        >TableBody</codeFeaturedElement>
+                TableSection="TableHeader|<codeFeaturedElement>TableBody</codeFeaturedElement>
 
         
 
         |TableFooter"
                 ToolTip="string"
-                VerticalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                VerticalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
         |Top|Middle|Bottom"
-                Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -407,8 +367,7 @@
                             AssociatedHeaderCellID="string"
                             BackColor="color name|#dddddd"
                             BorderColor="color name|#dddddd"
-                            BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                            BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -418,39 +377,33 @@
                             BorderWidth="size"
                             ColumnSpan="integer"
                             CssClass="string"
-                            Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                            EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                            EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                            Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                            Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                             Font-Names="string"
-                            Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -458,22 +411,19 @@
                             Font-Size="string|Smaller|Larger|
                                 XX-Small|X-Small|Small|Medium|Large|
                                 X-Large|XX-Large"
-                            Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                            Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                             ForeColor="color name|#dddddd"
                             Height="size"
-                            HorizontalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                            HorizontalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -493,21 +443,18 @@
                             TabIndex="integer"
                             Text="string"
                             ToolTip="string"
-                            VerticalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                            VerticalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
         |Top|Middle|Bottom"
-                            Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                             Width="size"
-                            Wrap="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            Wrap="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -519,8 +466,7 @@
                             AssociatedHeaderCellID="string"
                             BackColor="color name|#dddddd"
                             BorderColor="color name|#dddddd"
-                            BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                            BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -531,39 +477,33 @@
                             CategoryText="string"
                             ColumnSpan="integer"
                             CssClass="string"
-                            Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                            EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                            EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                            Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                            Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                             Font-Names="string"
-                            Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -571,22 +511,19 @@
                             Font-Size="string|Smaller|Larger|
                                 XX-Small|X-Small|Small|Medium|Large|
                                 X-Large|XX-Large"
-                            Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                            Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                             ForeColor="color name|#dddddd"
                             Height="size"
-                            HorizontalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                            HorizontalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -601,8 +538,7 @@
                             OnUnload="Unload event handler"
                             RowSpan="integer"
                             runat="server"
-                            Scope="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                            Scope="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -612,21 +548,18 @@
                             TabIndex="integer"
                             Text="string"
                             ToolTip="string"
-                            VerticalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                            VerticalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
         |Top|Middle|Bottom"
-                            Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                             Width="size"
-                            Wrap="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            Wrap="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -637,8 +570,7 @@
                 AccessKey="string"
                 BackColor="color name|#dddddd"
                 BorderColor="color name|#dddddd"
-                BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -646,61 +578,52 @@
                     Groove|Ridge|Inset|Outset"
                 BorderWidth="size"
                 CssClass="string"
-                Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                 Font-Names="string"
-                Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                 Font-Size="string|Smaller|Larger|XX-Small|X-Small|
                     Small|Medium|Large|X-Large|XX-Large"
-                Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                 ForeColor="color name|#dddddd"
                 Height="size"
-                HorizontalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                HorizontalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -716,21 +639,18 @@
                 SkinID="string"
                 Style="string"
                 TabIndex="integer"
-                TableSection="TableHeader|<codeFeaturedElement
-        >TableBody</codeFeaturedElement>
+                TableSection="TableHeader|<codeFeaturedElement>TableBody</codeFeaturedElement>
 
         
 
         |TableFooter"
                 ToolTip="string"
-                VerticalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                VerticalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
         |Top|Middle|Bottom"
-                Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -742,8 +662,7 @@
                             AssociatedHeaderCellID="string"
                             BackColor="color name|#dddddd"
                             BorderColor="color name|#dddddd"
-                            BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                            BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -753,39 +672,33 @@
                             BorderWidth="size"
                             ColumnSpan="integer"
                             CssClass="string"
-                            Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                            EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                            EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                            Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                            Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                             Font-Names="string"
-                            Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -793,22 +706,19 @@
                             Font-Size="string|Smaller|Larger|
                                 XX-Small|X-Small|Small|Medium|Large|
                                 X-Large|XX-Large"
-                            Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                            Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                             ForeColor="color name|#dddddd"
                             Height="size"
-                            HorizontalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                            HorizontalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -828,21 +738,18 @@
                             TabIndex="integer"
                             Text="string"
                             ToolTip="string"
-                            VerticalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                            VerticalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
         |Top|Middle|Bottom"
-                            Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                             Width="size"
-                            Wrap="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            Wrap="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -854,8 +761,7 @@
                             AssociatedHeaderCellID="string"
                             BackColor="color name|#dddddd"
                             BorderColor="color name|#dddddd"
-                            BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                            BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -866,39 +772,33 @@
                             CategoryText="string"
                             ColumnSpan="integer"
                             CssClass="string"
-                            Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                            EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                            EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                            Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                            Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                             Font-Names="string"
-                            Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -906,22 +806,19 @@
                             Font-Size="string|Smaller|Larger|
                                 XX-Small|X-Small|Small|Medium|Large|
                                 X-Large|XX-Large"
-                            Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                            Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                             ForeColor="color name|#dddddd"
                             Height="size"
-                            HorizontalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                            HorizontalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -936,8 +833,7 @@
                             OnUnload="Unload event handler"
                             RowSpan="integer"
                             runat="server"
-                            Scope="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                            Scope="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -947,21 +843,18 @@
                             TabIndex="integer"
                             Text="string"
                             ToolTip="string"
-                            VerticalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                            VerticalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
         |Top|Middle|Bottom"
-                            Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                             Width="size"
-                            Wrap="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            Wrap="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -972,8 +865,7 @@
                 AccessKey="string"
                 BackColor="color name|#dddddd"
                 BorderColor="color name|#dddddd"
-                BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -981,61 +873,52 @@
                     Groove|Ridge|Inset|Outset"
                 BorderWidth="size"
                 CssClass="string"
-                Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                 Font-Names="string"
-                Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                 Font-Size="string|Smaller|Larger|XX-Small|
                     X-Small|Small|Medium|Large|X-Large|XX-Large"
-                Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                 ForeColor="color name|#dddddd"
                 Height="size"
-                HorizontalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                HorizontalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -1051,21 +934,18 @@
                 SkinID="string"
                 Style="string"
                 TabIndex="integer"
-                TableSection="TableHeader|<codeFeaturedElement
-        >TableBody</codeFeaturedElement>
+                TableSection="TableHeader|<codeFeaturedElement>TableBody</codeFeaturedElement>
 
         
 
         |TableFooter"
                 ToolTip="string"
-                VerticalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                VerticalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
         |Top|Middle|Bottom"
-                Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -1077,8 +957,7 @@
                             AssociatedHeaderCellID="string"
                             BackColor="color name|#dddddd"
                             BorderColor="color name|#dddddd"
-                            BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                            BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -1088,39 +967,33 @@
                             BorderWidth="size"
                             ColumnSpan="integer"
                             CssClass="string"
-                            Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                            EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                            EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                            Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                            Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                             Font-Names="string"
-                            Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -1128,22 +1001,19 @@
                             Font-Size="string|Smaller|Larger|
                                 XX-Small|X-Small|Small|Medium|Large|
                                 X-Large|XX-Large"
-                            Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                            Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                             ForeColor="color name|#dddddd"
                             Height="size"
-                            HorizontalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                            HorizontalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -1163,21 +1033,18 @@
                             TabIndex="integer"
                             Text="string"
                             ToolTip="string"
-                            VerticalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                            VerticalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
         |Top|Middle|Bottom"
-                            Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                             Width="size"
-                            Wrap="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            Wrap="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -1189,8 +1056,7 @@
                             AssociatedHeaderCellID="string"
                             BackColor="color name|#dddddd"
                             BorderColor="color name|#dddddd"
-                            BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                            BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -1201,39 +1067,33 @@
                             CategoryText="string"
                             ColumnSpan="integer"
                             CssClass="string"
-                            Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                            EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                            EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                            EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                            Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                            Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                             Font-Names="string"
-                            Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -1241,22 +1101,19 @@
                             Font-Size="string|Smaller|Larger|
                                 XX-Small|X-Small|Small|Medium|Large|
                                 X-Large|XX-Large"
-                            Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                            Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                            Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                             ForeColor="color name|#dddddd"
                             Height="size"
-                            HorizontalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                            HorizontalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -1271,8 +1128,7 @@
                             OnUnload="Unload event handler"
                             RowSpan="integer"
                             runat="server"
-                            Scope="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                            Scope="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -1282,8 +1138,7 @@
                             TabIndex="integer"
                             Text="string"
                             ToolTip="string"
-                            VerticalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                            VerticalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -1311,8 +1166,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -1322,8 +1176,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -1352,18 +1205,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used primarily by control developers to insert the appropriate attributes and styles into the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >This method is used primarily by control developers to insert the appropriate attributes and styles into the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             output stream for a <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             output stream for a <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
-             control. This method overrides <see
-             cref="M:System.Web.UI.WebControls.WebControl.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
+             control. This method overrides <see cref="M:System.Web.UI.WebControls.WebControl.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
 
             
 
@@ -1373,8 +1223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds HTML attributes and styles that need to be rendered to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Adds HTML attributes and styles that need to be rendered to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -1382,7 +1231,11 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1406,13 +1259,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Table.BackImageUrl" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Table.BackImageUrl" />
 
             
 
-             property to specify the location of an image to display in the background of the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             property to specify the location of an image to display in the background of the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -1420,8 +1271,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If the image is smaller than the <see
-               cref="T:System.Web.UI.WebControls.Table" />
+              >If the image is smaller than the <see cref="T:System.Web.UI.WebControls.Table" />
 
               
 
@@ -1432,8 +1282,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the URL of the background image to display behind the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >Gets or sets the URL of the background image to display behind the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -1480,49 +1329,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Table.Caption" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Table.Caption" />
 
             
 
-             property to specify the text to render in an HTML caption element in a <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             property to specify the text to render in an HTML caption element in a <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
              control. The text that you specify provides Assistive Technology devices with a description of the table that can be used to make the control more accessible.</para
           >
           <para
-            >Additional accessibility support for the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >Additional accessibility support for the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
-             control is provided by the <see
-             cref="P:System.Web.UI.WebControls.Table.CaptionAlign" />
+             control is provided by the <see cref="P:System.Web.UI.WebControls.Table.CaptionAlign" />
 
             
 
-             property. Use the <see
-             cref="P:System.Web.UI.WebControls.Table.CaptionAlign" />
+             property. Use the <see cref="P:System.Web.UI.WebControls.Table.CaptionAlign" />
 
             
 
-             property to specify the alignment of the HTML caption element in a <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             property to specify the alignment of the HTML caption element in a <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
              control.</para
           >
           <para
-            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
@@ -1536,8 +1377,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the text to render in an HTML caption element in a <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >Gets or sets the text to render in an HTML caption element in a <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -1569,21 +1409,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Table.CaptionAlign" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Table.CaptionAlign" />
 
             
 
-             property to specify the horizontal or vertical position of the HTML caption element in a <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             property to specify the horizontal or vertical position of the HTML caption element in a <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
              control. This property is provided to make the control more accessible to users of Assistive Technology devices.</para
           >
           <para
-            >This property is set using one of the <see
-             cref="T:System.Web.UI.WebControls.TableCaptionAlign" />
+            >This property is set using one of the <see cref="T:System.Web.UI.WebControls.TableCaptionAlign" />
 
             
 
@@ -1642,23 +1479,19 @@
             </item>
           </list>
           <para
-            >Additional accessibility support for the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >Additional accessibility support for the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
-             control is provided by the <see
-             cref="P:System.Web.UI.WebControls.Table.Caption" />
+             control is provided by the <see cref="P:System.Web.UI.WebControls.Table.Caption" />
 
             
 
-             property. Use the <see
-             cref="P:System.Web.UI.WebControls.Table.Caption" />
+             property. Use the <see cref="P:System.Web.UI.WebControls.Table.Caption" />
 
             
 
-             property to specify the text to render in an HTML caption element in a <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             property to specify the text to render in an HTML caption element in a <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -1668,8 +1501,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the horizontal or vertical position of the HTML caption element in a <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >Gets or sets the horizontal or vertical position of the HTML caption element in a <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -1690,16 +1522,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Table.CellPadding" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Table.CellPadding" />
 
             
 
              property to control the spacing between the contents of a cell and the cell's border. The padding amount specified is added to all four sides of the cell.</para
           >
           <para
-            >All cells in the same column of a <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >All cells in the same column of a <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -1734,13 +1564,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Table.CellSpacing" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Table.CellSpacing" />
 
             
 
-             property to control the spacing between adjacent cells in the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             property to control the spacing between adjacent cells in the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -1748,13 +1576,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If you set this property to a value greater than 0 and set the <see
-               cref="P:System.Web.UI.WebControls.Table.GridLines" />
+              >If you set this property to a value greater than 0 and set the <see cref="P:System.Web.UI.WebControls.Table.GridLines" />
 
               
 
-               property to a value that displays the cell borders, a gap is displayed between the borders of adjacent cells. In this situation, the <see
-               cref="P:System.Web.UI.WebControls.Table.CellSpacing" />
+               property to a value that displays the cell borders, a gap is displayed between the borders of adjacent cells. In this situation, the <see cref="P:System.Web.UI.WebControls.Table.CellSpacing" />
 
               
 
@@ -1791,46 +1617,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used primarily by control developers when deriving a custom class from a <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >This method is used primarily by control developers when deriving a custom class from a <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
              control.</para
           >
           <para
-            >This method overrides the <see
-             cref="M:System.Web.UI.Control.CreateControlCollection" />
+            >This method overrides the <see cref="M:System.Web.UI.Control.CreateControlCollection" />
 
             
 
-             implementation for the base <see
-             cref="T:System.Web.UI.Control" />
+             implementation for the base <see cref="T:System.Web.UI.Control" />
 
             
 
-             class. For a <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             class. For a <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
-             control, the <see
-             cref="M:System.Web.UI.WebControls.Table.CreateControlCollection" />
+             control, the <see cref="M:System.Web.UI.WebControls.Table.CreateControlCollection" />
 
             
 
-             always returns a <see
-             cref="T:System.Web.UI.ControlCollection" />
+             always returns a <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
-             that can only contain <see
-             cref="T:System.Web.UI.WebControls.TableRow" />
+             that can only contain <see cref="T:System.Web.UI.WebControls.TableRow" />
 
             
 
-             controls of the current <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             controls of the current <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -1840,18 +1658,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >Creates a new <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
-             object to hold the <see
-             cref="T:System.Web.UI.WebControls.TableRow" />
+             object to hold the <see cref="T:System.Web.UI.WebControls.TableRow" />
 
             
 
-             controls of the current <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             controls of the current <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -1861,18 +1676,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >A <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
-             object to contain the <see
-             cref="T:System.Web.UI.WebControls.TableRow" />
+             object to contain the <see cref="T:System.Web.UI.WebControls.TableRow" />
 
             
 
-             controls of the current <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             controls of the current <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -1899,8 +1711,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used primarily by control developers when deriving a custom control from the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >This method is used primarily by control developers when deriving a custom control from the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -1910,8 +1721,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a reference to a collection of properties that define the appearance of a <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >Gets a reference to a collection of properties that define the appearance of a <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -1921,13 +1731,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A reference to the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >A reference to the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             object that contains the properties that define the appearance of the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             object that contains the properties that define the appearance of the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -1955,13 +1763,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Table.GridLines" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Table.GridLines" />
 
             
 
-             property to specify which cell borders are displayed in the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             property to specify which cell borders are displayed in the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -2015,8 +1821,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the grid line style to display in the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >Gets or sets the grid line style to display in the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -2049,13 +1854,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Table.HorizontalAlign" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Table.HorizontalAlign" />
 
             
 
-             property to specify the horizontal alignment of the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             property to specify the horizontal alignment of the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -2078,8 +1881,7 @@
               </term>
               <description>
                 <para
-                  >The horizontal alignment of the <see
-                   cref="T:System.Web.UI.WebControls.Table" />
+                  >The horizontal alignment of the <see cref="T:System.Web.UI.WebControls.Table" />
 
                   
 
@@ -2093,8 +1895,7 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Web.UI.WebControls.Table" />
+                  >The <see cref="T:System.Web.UI.WebControls.Table" />
 
                   
 
@@ -2108,8 +1909,7 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Web.UI.WebControls.Table" />
+                  >The <see cref="T:System.Web.UI.WebControls.Table" />
 
                   
 
@@ -2123,8 +1923,7 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Web.UI.WebControls.Table" />
+                  >The <see cref="T:System.Web.UI.WebControls.Table" />
 
                   
 
@@ -2138,8 +1937,7 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Web.UI.WebControls.Table" />
+                  >The <see cref="T:System.Web.UI.WebControls.Table" />
 
                   
 
@@ -2152,8 +1950,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the horizontal alignment of the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >Gets or sets the horizontal alignment of the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -2190,13 +1987,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The page passes the value of the <paramref
-             name="argument" />
+            >The page passes the value of the <paramref name="argument" />
 
             
 
-             parameter to the <see
-             cref="M:System.Web.UI.WebControls.Table.RaisePostBackEvent(System.String)" />
+             parameter to the <see cref="M:System.Web.UI.WebControls.Table.RaisePostBackEvent(System.String)" />
 
             
 
@@ -2206,8 +2001,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises events for the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >Raises events for the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -2215,12 +2009,15 @@
           >
         </summary>
         <param name="argument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -2248,21 +2045,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used primarily by control developers when deriving a custom class from a <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >This method is used primarily by control developers when deriving a custom class from a <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
              control.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Table.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.WebControls.Table.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method renders the opening tag for the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             method renders the opening tag for the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -2272,8 +2066,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the HTML opening tag of the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >Renders the HTML opening tag of the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -2281,12 +2074,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          An <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -2310,26 +2106,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used primarily by control developers when deriving a custom class from a <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >This method is used primarily by control developers when deriving a custom class from a <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
              control. </para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >The <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
-             control implements the <see
-             cref="M:System.Web.UI.WebControls.Table.RenderContents(System.Web.UI.HtmlTextWriter)" />
+             control implements the <see cref="M:System.Web.UI.WebControls.Table.RenderContents(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             to render the <see
-             cref="P:System.Web.UI.WebControls.Table.Rows" />
+             to render the <see cref="P:System.Web.UI.WebControls.Table.Rows" />
 
             
 
@@ -2341,12 +2133,15 @@
           <para>Renders the rows in the table control to the specified writer.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          An <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -2372,23 +2167,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Table.Rows" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Table.Rows" />
 
             
 
-             collection to programmatically manage the <see
-             cref="T:System.Web.UI.WebControls.TableRow" />
+             collection to programmatically manage the <see cref="T:System.Web.UI.WebControls.TableRow" />
 
             
 
-             objects in the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             objects in the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
-             control. A <see
-             cref="T:System.Web.UI.WebControls.TableRow" />
+             control. A <see cref="T:System.Web.UI.WebControls.TableRow" />
 
             
 
@@ -2396,13 +2187,11 @@
           >
           <block subset="none" type="note">
             <para
-              >This property is normally used only when building tables programmatically. At design time, it is set by declaring <see
-               cref="T:System.Web.UI.WebControls.TableRow" />
+              >This property is normally used only when building tables programmatically. At design time, it is set by declaring <see cref="T:System.Web.UI.WebControls.TableRow" />
 
               
 
-               objects between the opening and closing tags of the <see
-               cref="T:System.Web.UI.WebControls.Table" />
+               objects between the opening and closing tags of the <see cref="T:System.Web.UI.WebControls.Table" />
 
               
 
@@ -2413,8 +2202,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of rows in the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >Gets the collection of rows in the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -2455,26 +2243,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see
-             cref="M:System.Web.UI.WebControls.Table.RaisePostBackEvent(System.String)" />
+            >Typically, you should use the <see cref="M:System.Web.UI.WebControls.Table.RaisePostBackEvent(System.String)" />
 
             
 
-             method to raise an event for the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             method to raise an event for the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
              control when a form is posted back to the server. </para
           >
           <para
-            >This method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >This method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IPostBackEventHandler" />
+             instance is cast to an <see cref="T:System.Web.UI.IPostBackEventHandler" />
 
             
 
@@ -2484,8 +2268,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />
+            >For a description of this member, see <see cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />
 
             
 

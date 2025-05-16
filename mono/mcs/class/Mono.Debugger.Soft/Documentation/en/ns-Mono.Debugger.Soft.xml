@@ -6,8 +6,7 @@
 	inside a mono runtime.
 	</para>
       <para
-        >The API is based on and is very similar to the <format
-         type="text/html">
+        >The API is based on and is very similar to the <format type="text/html">
           <a href="http://java.sun.com/j2se/1.5.0/docs/guide/jpda/jdi/index.html"
             >Java Debug Interface.</a
           >
@@ -21,28 +20,23 @@
 	In this documentation, debuggee refers to the remote process running the mono runtime which this API communicates with.
 	</para>
       <para
-        >A <c
-        >Mirror</c>
+        >A <c>Mirror</c>
 
         
 
-         object represents an entity in the debuggee. There is usually one mirror subclass for each type of entity, i.e. <c
-        >TypeMirror</c>
+         object represents an entity in the debuggee. There is usually one mirror subclass for each type of entity, i.e. <c>TypeMirror</c>
 
         
 
-         for types, <c
-        >AppDomainMirror</c>
+         for types, <c>AppDomainMirror</c>
 
         
 
-         for application domains etc. These classes usually have a similar set of properties/methods as their non-mirror counterparts, the difference is that calling these properties/methods might result in a remote call to the debuggee to request information. The results of these remote calls are usually cached in the mirror object, so when multiple calls are made to <c
-        >TypeMirror.Name</c>
+         for application domains etc. These classes usually have a similar set of properties/methods as their non-mirror counterparts, the difference is that calling these properties/methods might result in a remote call to the debuggee to request information. The results of these remote calls are usually cached in the mirror object, so when multiple calls are made to <c>TypeMirror.Name</c>
 
         
 
-        , for example, only the first call involves a remote operation. The <c
-        >ToString()/Equals()/GetHashCode ()</c>
+        , for example, only the first call involves a remote operation. The <c>ToString()/Equals()/GetHashCode ()</c>
 
         
 
@@ -51,8 +45,7 @@
       >
       <para
         >Differences between this API and JDI:
-	<list
-         type="bullet">
+	<list type="bullet">
           <item>
             <term>There is only one namespace, instead of 5 in JDI.</term>
           </item>
@@ -67,18 +60,15 @@
           </item>
           <item>
             <term
-              >There are fewer classes, i.e. <c
-              >EventQueue</c>
+              >There are fewer classes, i.e. <c>EventQueue</c>
 
               
 
-              /<c
-              >EventRequestManager</c>
+              /<c>EventRequestManager</c>
 
               
 
-               is integrated into <c
-              >VirtualMachine</c>
+               is integrated into <c>VirtualMachine</c>
 
               
 
@@ -87,8 +77,7 @@
           </item>
           <item>
             <term
-              >Values which have primitive types i.e. int are represented by a class called <c
-              >PrimitiveValue</c>
+              >Values which have primitive types i.e. int are represented by a class called <c>PrimitiveValue</c>
 
               
 

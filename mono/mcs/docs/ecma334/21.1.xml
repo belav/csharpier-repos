@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
 <clause number="21.1" title="Enum declarations">
   <paragraph
-    >An enum declaration declares a new enum type. An enum declaration begins with the keyword enum, and defines the name, accessibility, underlying type, and members of the enum. <grammar_production
-    >
+    >An enum declaration declares a new enum type. An enum declaration begins with the keyword enum, and defines the name, accessibility, underlying type, and members of the enum. <grammar_production>
       <name>
         <non_terminal where="21.1">enum-declaration</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="24.2">attributes</non_terminal>
         <opt />
         <non_terminal where="21.2">enum-modifiers</non_terminal>
@@ -31,8 +29,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <terminal>:</terminal>
         <non_terminal where="11.1">integral-type</non_terminal>
       </rhs>
@@ -44,8 +41,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <terminal>{</terminal>
         <non_terminal where="21.3">enum-member-declarations</non_terminal>
         <opt />
@@ -60,50 +56,40 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >Each enum type has a corresponding integral type called the underlying type of the enum type. This underlying type must be able to represent all the enumerator values defined in the enumeration. An enum declaration may explicitly declare an underlying type of <keyword
-    >byte</keyword>
+    >Each enum type has a corresponding integral type called the underlying type of the enum type. This underlying type must be able to represent all the enumerator values defined in the enumeration. An enum declaration may explicitly declare an underlying type of <keyword>byte</keyword>
 
     
 
-    , <keyword
-    >sbyte</keyword>
+    , <keyword>sbyte</keyword>
 
     
 
-    , <keyword
-    >short</keyword>
+    , <keyword>short</keyword>
 
     
 
-    , <keyword
-    >ushort</keyword>
+    , <keyword>ushort</keyword>
 
     
 
-    , <keyword
-    >int</keyword>
+    , <keyword>int</keyword>
 
     
 
-    , <keyword
-    >uint</keyword>
+    , <keyword>uint</keyword>
 
     
 
-    , <keyword
-    >long</keyword>
+    , <keyword>long</keyword>
 
     
 
-     or <keyword
-    >ulong</keyword>
+     or <keyword>ulong</keyword>
 
     
 
     . <note
-
-      >[Note: <keyword
-      >char</keyword>
+      >[Note: <keyword>char</keyword>
 
       
 
@@ -112,8 +98,7 @@
 
     
 
-     An enum declaration that does not explicitly declare an underlying type has an underlying type of <keyword
-    >int</keyword>
+     An enum declaration that does not explicitly declare an underlying type has an underlying type of <keyword>int</keyword>
 
     
 
@@ -121,8 +106,7 @@
   >
   <paragraph>
     <example
-      >[Example: The example <code_example
-      >
+      >[Example: The example <code_example>
         <![CDATA[
 enum Color: long  
 {  
@@ -135,26 +119,22 @@ enum Color: long
 
       
 
-      declares an enum with an underlying type of <keyword
-      >long</keyword>
+      declares an enum with an underlying type of <keyword>long</keyword>
 
       
 
       . end example]</example
     >
     <note
-      >[Note: A developer might choose to use an underlying type of <keyword
-      >long</keyword>
+      >[Note: A developer might choose to use an underlying type of <keyword>long</keyword>
 
       
 
-      , as in the example, to enable the use of values that are in the range of <keyword
-      >long</keyword>
+      , as in the example, to enable the use of values that are in the range of <keyword>long</keyword>
 
       
 
-       but not in the range of <keyword
-      >int</keyword>
+       but not in the range of <keyword>int</keyword>
 
       
 

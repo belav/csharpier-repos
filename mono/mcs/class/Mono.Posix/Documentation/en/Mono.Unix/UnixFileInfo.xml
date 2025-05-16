@@ -22,8 +22,7 @@
     <summary>Provides information and performs operations on files.</summary>
     <remarks>
       <para
-        >The <see
-         cref="T:Mono.Unix.UnixFileInfo" />
+        >The <see cref="T:Mono.Unix.UnixFileInfo" />
 
         
 
@@ -34,14 +33,12 @@
         <item>
           <term
             >File creation with 
-          <see
-             cref="M:Mono.Unix.UnixFileInfo.Create" />
+          <see cref="M:Mono.Unix.UnixFileInfo.Create" />
 
             
 
              and
-          <see
-             cref="M:Mono.Unix.UnixFileInfo.Open" />
+          <see cref="M:Mono.Unix.UnixFileInfo.Open" />
 
             
 
@@ -51,8 +48,7 @@
         <item>
           <term
             >File deletion with 
-          <see
-             cref="M:Mono.Unix.UnixFileInfo.Delete" />
+          <see cref="M:Mono.Unix.UnixFileInfo.Delete" />
 
             
 
@@ -82,8 +78,7 @@
       </Parameters>
       <Docs>
         <param name="path"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
@@ -91,15 +86,13 @@
         to query.</param
         >
         <summary
-          >Creates a new <see
-           cref="T:Mono.Unix.UnixFileInfo" />
+          >Creates a new <see cref="T:Mono.Unix.UnixFileInfo" />
 
           
 
           
         instance containing information about the file
-        <paramref
-           name="path" />
+        <paramref name="path" />
 
           
 
@@ -107,8 +100,7 @@
         >
         <remarks>
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
@@ -116,11 +108,11 @@
           relative or absolute path information. Relative path information is 
           interpreted as relative to the current working directory. 
           <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >To obtain the current working 
           directory, see 
-          <see
-               cref="M:.Mono.Unix.UnixDirectoryInfo.GetCurrentDirectory" />
+          <see cref="M:.Mono.Unix.UnixDirectoryInfo.GetCurrentDirectory" />
 
               
 
@@ -130,45 +122,38 @@
           </para>
           <para
             >It is valid to construct 
-          <see
-             cref="T:Mono.Unix.UnixFileInfo" />
+          <see cref="T:Mono.Unix.UnixFileInfo" />
 
             
 
              objects for files
           that do not exist or for directories.  However, attempts to use
-          the <see
-             cref="T:Mono.Unix.UnixFileInfo" />
+          the <see cref="T:Mono.Unix.UnixFileInfo" />
 
             
 
              instance may
-          generate <see
-             cref="T:System.InvalidOperationException" />
+          generate <see cref="T:System.InvalidOperationException" />
 
             
 
             s.
-          Use <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.Exists" />
+          Use <see cref="P:Mono.Unix.UnixFileSystemInfo.Exists" />
 
             
 
              to see if
-          <paramref
-             name="path" />
+          <paramref name="path" />
 
             
 
              exists and 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.IsFile" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.IsFile" />
 
             
 
              to ensure
-          that <paramref
-             name="path" />
+          that <paramref name="path" />
 
             
 
@@ -180,8 +165,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -194,8 +178,7 @@
           
 
            contains invalid characters; see
-          <see
-           cref="M:Mono.Unix.UnixPath.GetInvalidPathChars" />
+          <see cref="M:Mono.Unix.UnixPath.GetInvalidPathChars" />
 
           
 
@@ -222,22 +205,19 @@
       <Parameters />
       <Docs>
         <summary
-          >Creates or overwrites <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          >Creates or overwrites <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
           .</summary
         >
         <returns
-          >A <see
-           cref="T:Mono.Unix.UnixStream" />
+          >A <see cref="T:Mono.Unix.UnixStream" />
 
           
 
            that provides
-        write access to <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        write access to <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -246,8 +226,7 @@
         <remarks>
           <para
             >If 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
@@ -255,10 +234,8 @@
           it is created; if it does exist and it is not read-only, the contents
           are overwritten.</para
           >
-          <para
-            >
-            This method is equivalent to <c
-            >
+          <para>
+            This method is equivalent to <c>
               <see
                 cref="M:Mono.Unix.UnixFileInfo.Create(Mono.Unix.Native.FilePermissions)"
                 qualify="false"
@@ -267,26 +244,22 @@
               
 
               (
-              <see
-               cref="F:Mono.Unix.Native.FilePermissions.S_IRUSR" />
+              <see cref="F:Mono.Unix.Native.FilePermissions.S_IRUSR" />
 
               
 
                |
-              <see
-               cref="F:Mono.Unix.Native.FilePermissions.S_IWUSR" />
+              <see cref="F:Mono.Unix.Native.FilePermissions.S_IWUSR" />
 
               
 
                |
-              <see
-               cref="F:Mono.Unix.Native.FilePermissions.S_IRGRP" />
+              <see cref="F:Mono.Unix.Native.FilePermissions.S_IRGRP" />
 
               
 
                |
-              <see
-               cref="F:Mono.Unix.Native.FilePermissions.S_IROTH" />
+              <see cref="F:Mono.Unix.Native.FilePermissions.S_IROTH" />
 
               
 
@@ -309,8 +282,7 @@
              is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -320,8 +292,7 @@
           <para>-or-</para>
           <para
             >An attempt was made to open a socket.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -332,14 +303,12 @@
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -350,8 +319,7 @@
           <para
             >The required permissions (for reading and/or writing)
           are denied for the given flags.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -365,15 +333,13 @@
             
 
              does not
-          exist, and <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+          exist, and <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              does not
           permit writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -388,8 +354,7 @@
 
              is a
           directory.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EISDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.EISDIR" />
 
             
 
@@ -397,35 +362,29 @@
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is not a
           directory.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
           ]
         </exception
         >
-        <exception cref="T:System.IO.FileNotFoundException"
-          >
-          A component of <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <exception cref="T:System.IO.FileNotFoundException">
+          A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            
           that must exist does not exist.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -440,8 +399,7 @@
 
              resides on a
           read-only file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -457,8 +415,7 @@
              is a
           character device or block device, and the device associated with
           this file does not exist.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENXIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
             
 
@@ -474,8 +431,7 @@
              is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENXIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
             
 
@@ -484,16 +440,14 @@
           >
           <para>-or-</para>
           <para
-            >The directory <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+            >The directory <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              
           cannot be extended because there is no space left on the file
           system containing the directory.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -504,8 +458,7 @@
           <para
             >There are no free inodes on the file system on which the file
           is being created.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -516,8 +469,7 @@
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -531,8 +483,7 @@
           
 
            was too long.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -542,14 +493,12 @@
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+            [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -560,8 +509,7 @@
           <para
             >The process has already reached its limit for open file
           descriptors.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EMFILE" />
+            [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />
 
             
 
@@ -571,8 +519,7 @@
           <para>-or-</para>
           <para
             >The system file table is full.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENFILE" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />
 
             
 
@@ -582,14 +529,12 @@
           <para>-or-</para>
           <para
             >The user's quota of inodes on the file system containing
-          <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+          <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -605,8 +550,7 @@
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -621,15 +565,13 @@
 
              is a
           pure procedure (shared text) file that is being executed and 
-          <see
-             cref="M:Mono.Unix.Native.Syscall.open" />
+          <see cref="M:Mono.Unix.Native.Syscall.open" />
 
             
 
              requests write
           access.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
+            [<see cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
 
             
 
@@ -664,8 +606,7 @@
       <Docs>
         <param name="mode"
           >A 
-          <see
-           cref="T:Mono.Unix.FileAccessPermissions" />
+          <see cref="T:Mono.Unix.FileAccessPermissions" />
 
           
 
@@ -673,8 +614,7 @@
           the file permissions the created file should have.</param
         >
         <summary
-          >Creates or overwrites <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          >Creates or overwrites <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -682,14 +622,12 @@
           file permissions.</summary
         >
         <returns
-          >A <see
-           cref="T:Mono.Unix.UnixStream" />
+          >A <see cref="T:Mono.Unix.UnixStream" />
 
           
 
            that provides
-        write access to <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        write access to <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -698,8 +636,7 @@
         <remarks>
           <para
             >If 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
@@ -717,8 +654,7 @@
              is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -728,8 +664,7 @@
           <para>-or-</para>
           <para
             >An attempt was made to open a socket.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -740,14 +675,12 @@
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -758,8 +691,7 @@
           <para
             >The required permissions (for reading and/or writing)
           are denied for the given flags.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -773,15 +705,13 @@
             
 
              does not
-          exist, and <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+          exist, and <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              does not
           permit writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -796,8 +726,7 @@
 
              is a
           directory.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EISDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.EISDIR" />
 
             
 
@@ -805,35 +734,29 @@
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is not a
           directory.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
           ]
         </exception
         >
-        <exception cref="T:System.IO.FileNotFoundException"
-          >
-          A component of <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <exception cref="T:System.IO.FileNotFoundException">
+          A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            
           that must exist does not exist.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -848,8 +771,7 @@
 
              resides on a
           read-only file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -865,8 +787,7 @@
              is a
           character device or block device, and the device associated with
           this file does not exist.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENXIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
             
 
@@ -882,8 +803,7 @@
              is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENXIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
             
 
@@ -892,16 +812,14 @@
           >
           <para>-or-</para>
           <para
-            >The directory <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+            >The directory <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              
           cannot be extended because there is no space left on the file
           system containing the directory.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -912,8 +830,7 @@
           <para
             >There are no free inodes on the file system on which the file
           is being created.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -924,8 +841,7 @@
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -939,8 +855,7 @@
           
 
            was too long.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -950,14 +865,12 @@
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+            [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -968,8 +881,7 @@
           <para
             >The process has already reached its limit for open file
           descriptors.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EMFILE" />
+            [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />
 
             
 
@@ -979,8 +891,7 @@
           <para>-or-</para>
           <para
             >The system file table is full.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENFILE" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />
 
             
 
@@ -990,14 +901,12 @@
           <para>-or-</para>
           <para
             >The user's quota of inodes on the file system containing
-          <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+          <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -1013,8 +922,7 @@
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -1029,15 +937,13 @@
 
              is a
           pure procedure (shared text) file that is being executed and 
-          <see
-             cref="M:Mono.Unix.Native.Syscall.open" />
+          <see cref="M:Mono.Unix.Native.Syscall.open" />
 
             
 
              requests write
           access.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
+            [<see cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
 
             
 
@@ -1077,8 +983,7 @@
       <Docs>
         <param name="mode"
           >A 
-        <see
-           cref="T:Mono.Unix.Native.FilePermissions" />
+        <see cref="T:Mono.Unix.Native.FilePermissions" />
 
           
 
@@ -1086,8 +991,7 @@
         the file permissions the created file should have.</param
         >
         <summary
-          >Creates or overwrites <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          >Creates or overwrites <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -1095,14 +999,12 @@
         file permissions.</summary
         >
         <returns
-          >A <see
-           cref="T:Mono.Unix.UnixStream" />
+          >A <see cref="T:Mono.Unix.UnixStream" />
 
           
 
            that provides
-        write access to <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        write access to <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -1111,8 +1013,7 @@
         <remarks>
           <para
             >If 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
@@ -1130,8 +1031,7 @@
              is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -1141,8 +1041,7 @@
           <para>-or-</para>
           <para
             >An attempt was made to open a socket.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -1153,14 +1052,12 @@
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -1171,8 +1068,7 @@
           <para
             >The required permissions (for reading and/or writing)
           are denied for the given flags.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -1186,15 +1082,13 @@
             
 
              does not
-          exist, and <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+          exist, and <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              does not
           permit writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -1209,8 +1103,7 @@
 
              is a
           directory.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EISDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.EISDIR" />
 
             
 
@@ -1218,35 +1111,29 @@
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is not a
           directory.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
           ]
         </exception
         >
-        <exception cref="T:System.IO.FileNotFoundException"
-          >
-          A component of <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <exception cref="T:System.IO.FileNotFoundException">
+          A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            
           that must exist does not exist.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -1261,8 +1148,7 @@
 
              resides on a
           read-only file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -1278,8 +1164,7 @@
              is a
           character device or block device, and the device associated with
           this file does not exist.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENXIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
             
 
@@ -1295,8 +1180,7 @@
              is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENXIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
             
 
@@ -1305,16 +1189,14 @@
           >
           <para>-or-</para>
           <para
-            >The directory <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+            >The directory <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              
           cannot be extended because there is no space left on the file
           system containing the directory.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -1325,8 +1207,7 @@
           <para
             >There are no free inodes on the file system on which the file
           is being created.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -1337,8 +1218,7 @@
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -1352,8 +1232,7 @@
           
 
            was too long.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -1363,14 +1242,12 @@
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+            [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -1381,8 +1258,7 @@
           <para
             >The process has already reached its limit for open file
           descriptors.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EMFILE" />
+            [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />
 
             
 
@@ -1392,8 +1268,7 @@
           <para>-or-</para>
           <para
             >The system file table is full.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENFILE" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />
 
             
 
@@ -1403,14 +1278,12 @@
           <para>-or-</para>
           <para
             >The user's quota of inodes on the file system containing
-          <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+          <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -1426,8 +1299,7 @@
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -1442,15 +1314,13 @@
 
              is a
           pure procedure (shared text) file that is being executed and 
-          <see
-             cref="M:Mono.Unix.Native.Syscall.open" />
+          <see cref="M:Mono.Unix.Native.Syscall.open" />
 
             
 
              requests write
           access.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
+            [<see cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
 
             
 
@@ -1502,30 +1372,26 @@
       </ReturnValue>
       <Docs>
         <summary
-          >Gets a <see
-           cref="T:Mono.Unix.UnixDirectoryInfo" />
+          >Gets a <see cref="T:Mono.Unix.UnixDirectoryInfo" />
 
           
 
            instance
         containing information about the directory that
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            resides in.</summary
         >
         <value
-          >A <see
-           cref="T:Mono.Unix.UnixDirectoryInfo" />
+          >A <see cref="T:Mono.Unix.UnixDirectoryInfo" />
 
           
 
            instance
         containing information about the directory 
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -1536,12 +1402,13 @@
           <para
             >This is identical to 
           <see
-             cref="C:Mono.Unix.UnixDirectoryInfo(System.String)" qualify="false" />
+              cref="C:Mono.Unix.UnixDirectoryInfo(System.String)"
+              qualify="false"
+            />
 
             
 
-            (<see
-             cref="P:Mono.Unix.UnixFileInfo.DirectoryName" />
+            (<see cref="P:Mono.Unix.UnixFileInfo.DirectoryName" />
 
             
 
@@ -1566,22 +1433,19 @@
       <Docs>
         <summary
           >Gets the name of the directory that 
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            resides in.</summary
         >
         <value
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
            containing the directory that 
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -1590,13 +1454,11 @@
         <remarks>
           <para
             >This is equivalent to 
-            <see
-             cref="M:Mono.Unix.UnixPath.GetDirectoryName" />
+            <see cref="M:Mono.Unix.UnixPath.GetDirectoryName" />
 
             
 
-            (<see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            (<see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
@@ -1652,15 +1514,13 @@
       </Parameters>
       <Docs>
         <param name="flags"
-          >A <see
-           cref="T:Mono.Unix.Native.OpenFlags" />
+          >A <see cref="T:Mono.Unix.Native.OpenFlags" />
 
           
 
            value
         which controls how 
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -1668,28 +1528,24 @@
         (read/write/append/etc.).</param
         >
         <summary
-          >Opens <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          >Opens <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            with the specified
-        access <paramref
-           name="flags" />
+        access <paramref name="flags" />
 
           
 
            (read/write/etc.).</summary
         >
         <returns
-          >A <see
-           cref="T:Mono.Unix.UnixStream" />
+          >A <see cref="T:Mono.Unix.UnixStream" />
 
           
 
            that provides
-        access to <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        access to <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -1700,26 +1556,22 @@
           <para
             >An attempt was made to open a descriptor with an illegal combination
           of
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_RDONLY" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_RDONLY" />
 
             
 
             ,
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />
 
             
 
             , and
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_RDWR" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_RDWR" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EINVAL" />
+            [<see cref="F:Mono.Unix.Native.Errno.EINVAL" />
 
             
 
@@ -1733,21 +1585,18 @@
             
 
              was
-          specified in <paramref
-             name="flags" />
+          specified in <paramref name="flags" />
 
             
 
             .  
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
 
             
 
              requires a file
           mode for file creation; use 
           <see
-
               cref="M:Mono.Unix.UnixFileInfo.Open(Mono.Unix.Native.OpenFlags,Mono.Unix.Native.FilePermissions"
               qualify="true"
             />
@@ -1765,15 +1614,13 @@
             
 
              or
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
 
             
 
              is specified
             but the underlying file system does not support locking.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -1789,8 +1636,7 @@
              is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -1803,14 +1649,12 @@
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -1821,8 +1665,7 @@
           <para
             >The required permissions (for reading and/or writing)
           are denied for the given flags.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -1836,15 +1679,13 @@
             
 
              does not
-          exist, and <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+          exist, and <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              does not
           permit writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -1859,8 +1700,7 @@
 
              is a
           directory.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EISDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.EISDIR" />
 
             
 
@@ -1868,18 +1708,15 @@
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is not a
           directory.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -1888,15 +1725,13 @@
         >
         <exception cref="T:System.IO.FileNotFoundException">
           <para
-            >A component of <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            >A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
              
           that must exist does not exist.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
             
 
@@ -1910,15 +1745,13 @@
             
 
              does not exist
-          and <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+          and <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
 
             
 
              is not
           set.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
             
 
@@ -1934,8 +1767,7 @@
 
              resides on a
           read-only file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -1951,8 +1783,7 @@
              is a
           character device or block device, and the device associated with
           this file does not exist.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENXIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
             
 
@@ -1968,8 +1799,7 @@
              is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENXIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
             
 
@@ -1978,16 +1808,14 @@
           >
           <para>-or-</para>
           <para
-            >The directory <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+            >The directory <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              
           cannot be extended because there is no space left on the file
           system containing the directory.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -1998,8 +1826,7 @@
           <para
             >There are no free inodes on the file system on which the file
           is being created.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -2010,8 +1837,7 @@
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -2025,8 +1851,7 @@
           
 
            was too long.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -2036,14 +1861,12 @@
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+            [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -2054,8 +1877,7 @@
           <para
             >The process has already reached its limit for open file
           descriptors.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EMFILE" />
+            [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />
 
             
 
@@ -2065,8 +1887,7 @@
           <para>-or-</para>
           <para
             >The system file table is full.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENFILE" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />
 
             
 
@@ -2081,8 +1902,7 @@
 
              was
           specified and the target is a symbolic link.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EMLINK" />
+            [<see cref="F:Mono.Unix.Native.Errno.EMLINK" />
 
             
 
@@ -2096,21 +1916,18 @@
             
 
              and one of
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_SHLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_SHLOCK" />
 
             
 
              or
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
 
             
 
              is specified
             and the file is locked.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />
+            [<see cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />
 
             
 
@@ -2120,14 +1937,12 @@
           <para>-or-</para>
           <para
             >The user's quota of inodes on the file system containing
-          <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+          <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -2143,8 +1958,7 @@
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -2159,15 +1973,13 @@
 
              is a
           pure procedure (shared text) file that is being executed and 
-          <see
-             cref="M:Mono.Unix.Native.Syscall.open" />
+          <see cref="M:Mono.Unix.Native.Syscall.open" />
 
             
 
              requests write
           access.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
+            [<see cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
 
             
 
@@ -2181,22 +1993,19 @@
             
 
              and
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_EXCL" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_EXCL" />
 
             
 
              were specified
             and 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             
             exists.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EEXIST" />
+            [<see cref="F:Mono.Unix.Native.Errno.EEXIST" />
 
             
 
@@ -2230,8 +2039,7 @@
       </Parameters>
       <Docs>
         <param name="mode"
-          >A <see
-           cref="T:System.IO.FileMode" />
+          >A <see cref="T:System.IO.FileMode" />
 
           
 
@@ -2241,28 +2049,24 @@
         overwritten.</param
         >
         <summary
-          >Opens <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          >Opens <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            with the specified
-        access <paramref
-           name="mode" />
+        access <paramref name="mode" />
 
           
 
            (read/write/etc.).</summary
         >
         <returns
-          >A <see
-           cref="T:Mono.Unix.UnixStream" />
+          >A <see cref="T:Mono.Unix.UnixStream" />
 
           
 
            that provides
-        access to <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        access to <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -2270,8 +2074,7 @@
         >
         <remarks>
           <para
-            >This is equivalent to <c
-            >
+            >This is equivalent to <c>
               <see
                 cref="M:Mono.Unix.UnixFileInfo.Open(Mono.Unix.Native.OpenFlags)"
                 qualify="false"
@@ -2281,15 +2084,13 @@
 
               
             (<see
-
                 cref="M:Mono.Unix.Native.NativeConvert.ToOpenFlags(System.IO.FileMode)"
                 qualify="false"
               />
 
               
 
-               (<paramref
-               name="mode" />
+               (<paramref name="mode" />
 
               
 
@@ -2306,26 +2107,22 @@
           <para
             >An attempt was made to open a descriptor with an illegal combination
           of
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_RDONLY" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_RDONLY" />
 
             
 
             ,
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />
 
             
 
             , and
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_RDWR" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_RDWR" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EINVAL" />
+            [<see cref="F:Mono.Unix.Native.Errno.EINVAL" />
 
             
 
@@ -2339,21 +2136,18 @@
             
 
              was
-          specified in <paramref
-             name="flags" />
+          specified in <paramref name="flags" />
 
             
 
             .  
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
 
             
 
              requires a file
           mode for file creation; use 
           <see
-
               cref="M:Mono.Unix.UnixFileInfo.Open(Mono.Unix.Native.OpenFlags,Mono.Unix.Native.FilePermissions"
               qualify="true"
             />
@@ -2371,15 +2165,13 @@
             
 
              or
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
 
             
 
              is specified
             but the underlying file system does not support locking.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -2395,8 +2187,7 @@
              is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -2406,8 +2197,7 @@
           <para>-or-</para>
           <para
             >An attempt was made to open a socket.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -2418,14 +2208,12 @@
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -2436,8 +2224,7 @@
           <para
             >The required permissions (for reading and/or writing)
           are denied for the given flags.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -2451,15 +2238,13 @@
             
 
              does not
-          exist, and <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+          exist, and <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              does not
           permit writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -2474,8 +2259,7 @@
 
              is a
           directory.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EISDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.EISDIR" />
 
             
 
@@ -2483,18 +2267,15 @@
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is not a
           directory.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -2503,15 +2284,13 @@
         >
         <exception cref="T:System.IO.FileNotFoundException">
           <para
-            >A component of <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            >A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
              
           that must exist does not exist.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
             
 
@@ -2525,15 +2304,13 @@
             
 
              does not exist
-          and <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+          and <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
 
             
 
              is not
           set.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
             
 
@@ -2549,8 +2326,7 @@
 
              resides on a
           read-only file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -2566,8 +2342,7 @@
              is a
           character device or block device, and the device associated with
           this file does not exist.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENXIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
             
 
@@ -2583,8 +2358,7 @@
              is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENXIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
             
 
@@ -2593,16 +2367,14 @@
           >
           <para>-or-</para>
           <para
-            >The directory <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+            >The directory <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              
           cannot be extended because there is no space left on the file
           system containing the directory.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -2613,8 +2385,7 @@
           <para
             >There are no free inodes on the file system on which the file
           is being created.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -2625,8 +2396,7 @@
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -2640,8 +2410,7 @@
           
 
            was too long.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -2651,14 +2420,12 @@
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+            [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -2669,8 +2436,7 @@
           <para
             >The process has already reached its limit for open file
           descriptors.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EMFILE" />
+            [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />
 
             
 
@@ -2680,8 +2446,7 @@
           <para>-or-</para>
           <para
             >The system file table is full.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENFILE" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />
 
             
 
@@ -2696,8 +2461,7 @@
 
              was
           specified and the target is a symbolic link.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EMLINK" />
+            [<see cref="F:Mono.Unix.Native.Errno.EMLINK" />
 
             
 
@@ -2711,21 +2475,18 @@
             
 
              and one of
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_SHLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_SHLOCK" />
 
             
 
              or
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
 
             
 
              is specified
             and the file is locked.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />
+            [<see cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />
 
             
 
@@ -2735,14 +2496,12 @@
           <para>-or-</para>
           <para
             >The user's quota of inodes on the file system containing
-          <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+          <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -2758,8 +2517,7 @@
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -2774,15 +2532,13 @@
 
              is a
           pure procedure (shared text) file that is being executed and 
-          <see
-             cref="M:Mono.Unix.Native.Syscall.open" />
+          <see cref="M:Mono.Unix.Native.Syscall.open" />
 
             
 
              requests write
           access.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
+            [<see cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
 
             
 
@@ -2796,22 +2552,19 @@
             
 
              and
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_EXCL" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_EXCL" />
 
             
 
              were specified
             and 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             
             exists.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EEXIST" />
+            [<see cref="F:Mono.Unix.Native.Errno.EEXIST" />
 
             
 
@@ -2850,15 +2603,13 @@
       </Parameters>
       <Docs>
         <param name="flags"
-          >A <see
-           cref="T:Mono.Unix.Native.OpenFlags" />
+          >A <see cref="T:Mono.Unix.Native.OpenFlags" />
 
           
 
            value
         which controls how 
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -2867,8 +2618,7 @@
         >
         <param name="mode"
           >A 
-        <see
-           cref="T:Mono.Unix.Native.FilePermissions" />
+        <see cref="T:Mono.Unix.Native.FilePermissions" />
 
           
 
@@ -2876,34 +2626,29 @@
         the file permissions the created file should have.</param
         >
         <summary
-          >Opens <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          >Opens <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            with the specified
-        access <paramref
-           name="flags" />
+        access <paramref name="flags" />
 
           
 
            (read/write/etc.) and
-        file permissions <paramref
-           name="mode" />
+        file permissions <paramref name="mode" />
 
           
 
           .</summary
         >
         <returns
-          >A <see
-           cref="T:Mono.Unix.UnixStream" />
+          >A <see cref="T:Mono.Unix.UnixStream" />
 
           
 
            that provides
-        access to <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        access to <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -2914,26 +2659,22 @@
           <para
             >An attempt was made to open a descriptor with an illegal combination
           of
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_RDONLY" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_RDONLY" />
 
             
 
             ,
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />
 
             
 
             , and
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_RDWR" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_RDWR" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EINVAL" />
+            [<see cref="F:Mono.Unix.Native.Errno.EINVAL" />
 
             
 
@@ -2947,21 +2688,18 @@
             
 
              was
-          specified in <paramref
-             name="flags" />
+          specified in <paramref name="flags" />
 
             
 
             .  
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
 
             
 
              requires a file
           mode for file creation; use 
           <see
-
               cref="M:Mono.Unix.UnixFileInfo.Open(Mono.Unix.Native.OpenFlags,Mono.Unix.Native.FilePermissions"
               qualify="true"
             />
@@ -2979,15 +2717,13 @@
             
 
              or
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
 
             
 
              is specified
             but the underlying file system does not support locking.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -3003,8 +2739,7 @@
              is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -3014,8 +2749,7 @@
           <para>-or-</para>
           <para
             >An attempt was made to open a socket.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -3026,14 +2760,12 @@
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -3044,8 +2776,7 @@
           <para
             >The required permissions (for reading and/or writing)
           are denied for the given flags.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -3059,15 +2790,13 @@
             
 
              does not
-          exist, and <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+          exist, and <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              does not
           permit writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -3082,8 +2811,7 @@
 
              is a
           directory.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EISDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.EISDIR" />
 
             
 
@@ -3091,18 +2819,15 @@
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is not a
           directory.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -3111,15 +2836,13 @@
         >
         <exception cref="T:System.IO.FileNotFoundException">
           <para
-            >A component of <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            >A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
              
           that must exist does not exist.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
             
 
@@ -3133,15 +2856,13 @@
             
 
              does not exist
-          and <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+          and <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
 
             
 
              is not
           set.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
             
 
@@ -3157,8 +2878,7 @@
 
              resides on a
           read-only file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -3174,8 +2894,7 @@
              is a
           character device or block device, and the device associated with
           this file does not exist.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENXIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
             
 
@@ -3191,8 +2910,7 @@
              is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENXIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
             
 
@@ -3201,16 +2919,14 @@
           >
           <para>-or-</para>
           <para
-            >The directory <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+            >The directory <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              
           cannot be extended because there is no space left on the file
           system containing the directory.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -3221,8 +2937,7 @@
           <para
             >There are no free inodes on the file system on which the file
           is being created.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -3233,8 +2948,7 @@
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -3248,8 +2962,7 @@
           
 
            was too long.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -3259,14 +2972,12 @@
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+            [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -3277,8 +2988,7 @@
           <para
             >The process has already reached its limit for open file
           descriptors.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EMFILE" />
+            [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />
 
             
 
@@ -3288,8 +2998,7 @@
           <para>-or-</para>
           <para
             >The system file table is full.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENFILE" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />
 
             
 
@@ -3304,8 +3013,7 @@
 
              was
           specified and the target is a symbolic link.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EMLINK" />
+            [<see cref="F:Mono.Unix.Native.Errno.EMLINK" />
 
             
 
@@ -3319,21 +3027,18 @@
             
 
              and one of
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_SHLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_SHLOCK" />
 
             
 
              or
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
 
             
 
              is specified
             and the file is locked.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />
+            [<see cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />
 
             
 
@@ -3343,14 +3048,12 @@
           <para>-or-</para>
           <para
             >The user's quota of inodes on the file system containing
-          <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+          <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -3366,8 +3069,7 @@
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -3382,15 +3084,13 @@
 
              is a
           pure procedure (shared text) file that is being executed and 
-          <see
-             cref="M:Mono.Unix.Native.Syscall.open" />
+          <see cref="M:Mono.Unix.Native.Syscall.open" />
 
             
 
              requests write
           access.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
+            [<see cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
 
             
 
@@ -3404,22 +3104,19 @@
             
 
              and
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_EXCL" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_EXCL" />
 
             
 
              were specified
             and 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             
             exists.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EEXIST" />
+            [<see cref="F:Mono.Unix.Native.Errno.EEXIST" />
 
             
 
@@ -3454,8 +3151,7 @@
       </Parameters>
       <Docs>
         <param name="mode"
-          >A <see
-           cref="T:System.IO.FileMode" />
+          >A <see cref="T:System.IO.FileMode" />
 
           
 
@@ -3465,8 +3161,7 @@
         overwritten.</param
         >
         <param name="access"
-          >A <see
-           cref="T:System.IO.FileAccess" />
+          >A <see cref="T:System.IO.FileAccess" />
 
           
 
@@ -3474,33 +3169,28 @@
         specifies the operations that can be performed on the file.</param
         >
         <summary
-          >Opens <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          >Opens <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            with the specified
-        <paramref
-           name="mode" />
+        <paramref name="mode" />
 
           
 
-           and <paramref
-           name="access" />
+           and <paramref name="access" />
 
           
 
           .</summary
         >
         <returns
-          >A <see
-           cref="T:Mono.Unix.UnixStream" />
+          >A <see cref="T:Mono.Unix.UnixStream" />
 
           
 
            that provides
-        access to <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        access to <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -3508,8 +3198,7 @@
         >
         <remarks>
           <para
-            >This is equivalent to <c
-            >
+            >This is equivalent to <c>
               <see
                 cref="M:Mono.Unix.UnixFileInfo.Open(Mono.Unix.Native.OpenFlags)"
                 qualify="false"
@@ -3519,21 +3208,18 @@
 
               
             (<see
-
                 cref="M:Mono.Unix.Native.NativeConvert.ToOpenFlags(System.IO.FileMode,System.IO.FileAccess)"
                 qualify="false"
               />
 
               
 
-               (<paramref
-               name="mode" />
+               (<paramref name="mode" />
 
               
 
               , 
-            <paramref
-               name="access" />
+            <paramref name="access" />
 
               
 
@@ -3550,26 +3236,22 @@
           <para
             >An attempt was made to open a descriptor with an illegal combination
           of
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_RDONLY" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_RDONLY" />
 
             
 
             ,
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />
 
             
 
             , and
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_RDWR" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_RDWR" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EINVAL" />
+            [<see cref="F:Mono.Unix.Native.Errno.EINVAL" />
 
             
 
@@ -3583,21 +3265,18 @@
             
 
              was
-          specified in <paramref
-             name="flags" />
+          specified in <paramref name="flags" />
 
             
 
             .  
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
 
             
 
              requires a file
           mode for file creation; use 
           <see
-
               cref="M:Mono.Unix.UnixFileInfo.Open(Mono.Unix.Native.OpenFlags,Mono.Unix.Native.FilePermissions"
               qualify="true"
             />
@@ -3615,15 +3294,13 @@
             
 
              or
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
 
             
 
              is specified
             but the underlying file system does not support locking.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -3639,8 +3316,7 @@
              is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -3650,8 +3326,7 @@
           <para>-or-</para>
           <para
             >An attempt was made to open a socket.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -3662,14 +3337,12 @@
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -3680,8 +3353,7 @@
           <para
             >The required permissions (for reading and/or writing)
           are denied for the given flags.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -3695,15 +3367,13 @@
             
 
              does not
-          exist, and <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+          exist, and <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              does not
           permit writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -3718,8 +3388,7 @@
 
              is a
           directory.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EISDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.EISDIR" />
 
             
 
@@ -3727,18 +3396,15 @@
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is not a
           directory.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -3747,15 +3413,13 @@
         >
         <exception cref="T:System.IO.FileNotFoundException">
           <para
-            >A component of <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            >A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
              
           that must exist does not exist.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
             
 
@@ -3769,15 +3433,13 @@
             
 
              does not exist
-          and <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+          and <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
 
             
 
              is not
           set.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
             
 
@@ -3793,8 +3455,7 @@
 
              resides on a
           read-only file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -3810,8 +3471,7 @@
              is a
           character device or block device, and the device associated with
           this file does not exist.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENXIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
             
 
@@ -3827,8 +3487,7 @@
              is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENXIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
             
 
@@ -3837,16 +3496,14 @@
           >
           <para>-or-</para>
           <para
-            >The directory <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+            >The directory <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              
           cannot be extended because there is no space left on the file
           system containing the directory.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -3857,8 +3514,7 @@
           <para
             >There are no free inodes on the file system on which the file
           is being created.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -3869,8 +3525,7 @@
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -3884,8 +3539,7 @@
           
 
            was too long.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -3895,14 +3549,12 @@
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+            [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -3913,8 +3565,7 @@
           <para
             >The process has already reached its limit for open file
           descriptors.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EMFILE" />
+            [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />
 
             
 
@@ -3924,8 +3575,7 @@
           <para>-or-</para>
           <para
             >The system file table is full.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENFILE" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />
 
             
 
@@ -3940,8 +3590,7 @@
 
              was
           specified and the target is a symbolic link.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EMLINK" />
+            [<see cref="F:Mono.Unix.Native.Errno.EMLINK" />
 
             
 
@@ -3955,21 +3604,18 @@
             
 
              and one of
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_SHLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_SHLOCK" />
 
             
 
              or
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
 
             
 
              is specified
             and the file is locked.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />
+            [<see cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />
 
             
 
@@ -3979,14 +3625,12 @@
           <para>-or-</para>
           <para
             >The user's quota of inodes on the file system containing
-          <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+          <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -4002,8 +3646,7 @@
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -4018,15 +3661,13 @@
 
              is a
           pure procedure (shared text) file that is being executed and 
-          <see
-             cref="M:Mono.Unix.Native.Syscall.open" />
+          <see cref="M:Mono.Unix.Native.Syscall.open" />
 
             
 
              requests write
           access.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
+            [<see cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
 
             
 
@@ -4040,22 +3681,19 @@
             
 
              and
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_EXCL" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_EXCL" />
 
             
 
              were specified
             and 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             
             exists.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EEXIST" />
+            [<see cref="F:Mono.Unix.Native.Errno.EEXIST" />
 
             
 
@@ -4095,8 +3733,7 @@
       </Parameters>
       <Docs>
         <param name="mode"
-          >A <see
-           cref="T:System.IO.FileMode" />
+          >A <see cref="T:System.IO.FileMode" />
 
           
 
@@ -4106,8 +3743,7 @@
         overwritten.</param
         >
         <param name="access"
-          >A <see
-           cref="T:System.IO.FileAccess" />
+          >A <see cref="T:System.IO.FileAccess" />
 
           
 
@@ -4116,8 +3752,7 @@
         >
         <param name="perms"
           >A 
-        <see
-           cref="T:Mono.Unix.Native.FilePermissions" />
+        <see cref="T:Mono.Unix.Native.FilePermissions" />
 
           
 
@@ -4125,40 +3760,34 @@
         the file permissions the created file should have.</param
         >
         <summary
-          >Opens <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          >Opens <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            
-        with the specified <paramref
-           name="mode" />
+        with the specified <paramref name="mode" />
 
           
 
            and 
-        <paramref
-           name="access" />
+        <paramref name="access" />
 
           
 
            with file permissions 
-        <paramref
-           name="perms" />
+        <paramref name="perms" />
 
           
 
           .</summary
         >
         <returns
-          >A <see
-           cref="T:Mono.Unix.UnixStream" />
+          >A <see cref="T:Mono.Unix.UnixStream" />
 
           
 
            that provides
-        access to <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        access to <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -4166,8 +3795,7 @@
         >
         <remarks>
           <para
-            >This is equivalent to <c
-            >
+            >This is equivalent to <c>
               <see
                 cref="M:Mono.Unix.UnixFileInfo.Open(Mono.Unix.Native.OpenFlags,Mono.Unix.Native.FilePermissions)"
                 qualify="false"
@@ -4177,26 +3805,22 @@
 
               
             (<see
-
                 cref="M:Mono.Unix.Native.NativeConvert.ToOpenFlags(System.IO.FileMode,System.IO.FileAccess)"
                 qualify="false"
               />
 
               
 
-               (<paramref
-               name="mode" />
+               (<paramref name="mode" />
 
               
 
               , 
-            <paramref
-               name="access" />
+            <paramref name="access" />
 
               
 
-              ), <paramref
-               name="perms" />
+              ), <paramref name="perms" />
 
               
 
@@ -4213,26 +3837,22 @@
           <para
             >An attempt was made to open a descriptor with an illegal combination
           of
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_RDONLY" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_RDONLY" />
 
             
 
             ,
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />
 
             
 
             , and
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_RDWR" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_RDWR" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EINVAL" />
+            [<see cref="F:Mono.Unix.Native.Errno.EINVAL" />
 
             
 
@@ -4246,21 +3866,18 @@
             
 
              was
-          specified in <paramref
-             name="flags" />
+          specified in <paramref name="flags" />
 
             
 
             .  
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
 
             
 
              requires a file
           mode for file creation; use 
           <see
-
               cref="M:Mono.Unix.UnixFileInfo.Open(Mono.Unix.Native.OpenFlags,Mono.Unix.Native.FilePermissions"
               qualify="true"
             />
@@ -4278,15 +3895,13 @@
             
 
              or
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
 
             
 
              is specified
             but the underlying file system does not support locking.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -4302,8 +3917,7 @@
              is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -4313,8 +3927,7 @@
           <para>-or-</para>
           <para
             >An attempt was made to open a socket.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -4325,14 +3938,12 @@
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -4343,8 +3954,7 @@
           <para
             >The required permissions (for reading and/or writing)
           are denied for the given flags.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -4358,15 +3968,13 @@
             
 
              does not
-          exist, and <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+          exist, and <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              does not
           permit writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -4381,8 +3989,7 @@
 
              is a
           directory.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EISDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.EISDIR" />
 
             
 
@@ -4390,18 +3997,15 @@
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is not a
           directory.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -4410,15 +4014,13 @@
         >
         <exception cref="T:System.IO.FileNotFoundException">
           <para
-            >A component of <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            >A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
              
           that must exist does not exist.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
             
 
@@ -4432,15 +4034,13 @@
             
 
              does not exist
-          and <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+          and <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
 
             
 
              is not
           set.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
             
 
@@ -4456,8 +4056,7 @@
 
              resides on a
           read-only file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -4473,8 +4072,7 @@
              is a
           character device or block device, and the device associated with
           this file does not exist.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENXIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
             
 
@@ -4490,8 +4088,7 @@
              is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENXIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
             
 
@@ -4500,16 +4097,14 @@
           >
           <para>-or-</para>
           <para
-            >The directory <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+            >The directory <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              
           cannot be extended because there is no space left on the file
           system containing the directory.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -4520,8 +4115,7 @@
           <para
             >There are no free inodes on the file system on which the file
           is being created.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -4532,8 +4126,7 @@
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -4547,8 +4140,7 @@
           
 
            was too long.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -4558,14 +4150,12 @@
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+            [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -4576,8 +4166,7 @@
           <para
             >The process has already reached its limit for open file
           descriptors.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EMFILE" />
+            [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />
 
             
 
@@ -4587,8 +4176,7 @@
           <para>-or-</para>
           <para
             >The system file table is full.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENFILE" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />
 
             
 
@@ -4603,8 +4191,7 @@
 
              was
           specified and the target is a symbolic link.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EMLINK" />
+            [<see cref="F:Mono.Unix.Native.Errno.EMLINK" />
 
             
 
@@ -4618,21 +4205,18 @@
             
 
              and one of
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_SHLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_SHLOCK" />
 
             
 
              or
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
 
             
 
              is specified
             and the file is locked.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />
+            [<see cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />
 
             
 
@@ -4642,14 +4226,12 @@
           <para>-or-</para>
           <para
             >The user's quota of inodes on the file system containing
-          <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+          <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -4665,8 +4247,7 @@
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -4681,15 +4262,13 @@
 
              is a
           pure procedure (shared text) file that is being executed and 
-          <see
-             cref="M:Mono.Unix.Native.Syscall.open" />
+          <see cref="M:Mono.Unix.Native.Syscall.open" />
 
             
 
              requests write
           access.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
+            [<see cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
 
             
 
@@ -4703,22 +4282,19 @@
             
 
              and
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_EXCL" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_EXCL" />
 
             
 
              were specified
             and 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             
             exists.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EEXIST" />
+            [<see cref="F:Mono.Unix.Native.Errno.EEXIST" />
 
             
 
@@ -4746,8 +4322,7 @@
       <Parameters />
       <Docs>
         <summary
-          >Opens <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          >Opens <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -4755,24 +4330,20 @@
         reading.</summary
         >
         <returns
-          >A <see
-           cref="T:Mono.Unix.UnixStream" />
+          >A <see cref="T:Mono.Unix.UnixStream" />
 
           
 
            that provides
-        read access to <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        read access to <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
           .</returns
         >
         <remarks>
-          <para
-            >
-            This is equivalent to <c
-            >
+          <para>
+            This is equivalent to <c>
               <see
                 cref="M:Mono.Unix.UnixFileInfo.Open(System.IO.FileMode,System.IO.FileAccess"
                 qualify="false"
@@ -4780,14 +4351,12 @@
 
               
 
-               (<see
-               cref="F:System.IO.FileMode.Open" />
+               (<see cref="F:System.IO.FileMode.Open" />
 
               
 
               ,
-              <see
-               cref="F:System.IO.FileAccess.Read" />
+              <see cref="F:System.IO.FileAccess.Read" />
 
               
 
@@ -4804,26 +4373,22 @@
           <para
             >An attempt was made to open a descriptor with an illegal combination
           of
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_RDONLY" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_RDONLY" />
 
             
 
             ,
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />
 
             
 
             , and
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_RDWR" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_RDWR" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EINVAL" />
+            [<see cref="F:Mono.Unix.Native.Errno.EINVAL" />
 
             
 
@@ -4837,21 +4402,18 @@
             
 
              was
-          specified in <paramref
-             name="flags" />
+          specified in <paramref name="flags" />
 
             
 
             .  
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
 
             
 
              requires a file
           mode for file creation; use 
           <see
-
               cref="M:Mono.Unix.UnixFileInfo.Open(Mono.Unix.Native.OpenFlags,Mono.Unix.Native.FilePermissions"
               qualify="true"
             />
@@ -4869,15 +4431,13 @@
             
 
              or
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
 
             
 
              is specified
             but the underlying file system does not support locking.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -4893,8 +4453,7 @@
              is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -4904,8 +4463,7 @@
           <para>-or-</para>
           <para
             >An attempt was made to open a socket.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -4916,14 +4474,12 @@
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -4934,8 +4490,7 @@
           <para
             >The required permissions (for reading and/or writing)
           are denied for the given flags.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -4949,15 +4504,13 @@
             
 
              does not
-          exist, and <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+          exist, and <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              does not
           permit writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -4972,8 +4525,7 @@
 
              is a
           directory.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EISDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.EISDIR" />
 
             
 
@@ -4981,18 +4533,15 @@
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is not a
           directory.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -5001,15 +4550,13 @@
         >
         <exception cref="T:System.IO.FileNotFoundException">
           <para
-            >A component of <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            >A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
              
           that must exist does not exist.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
             
 
@@ -5023,15 +4570,13 @@
             
 
              does not exist
-          and <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+          and <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
 
             
 
              is not
           set.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
             
 
@@ -5047,8 +4592,7 @@
 
              resides on a
           read-only file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -5064,8 +4608,7 @@
              is a
           character device or block device, and the device associated with
           this file does not exist.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENXIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
             
 
@@ -5081,8 +4624,7 @@
              is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENXIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
             
 
@@ -5091,16 +4633,14 @@
           >
           <para>-or-</para>
           <para
-            >The directory <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+            >The directory <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              
           cannot be extended because there is no space left on the file
           system containing the directory.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -5111,8 +4651,7 @@
           <para
             >There are no free inodes on the file system on which the file
           is being created.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -5123,8 +4662,7 @@
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -5138,8 +4676,7 @@
           
 
            was too long.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -5149,14 +4686,12 @@
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+            [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -5167,8 +4702,7 @@
           <para
             >The process has already reached its limit for open file
           descriptors.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EMFILE" />
+            [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />
 
             
 
@@ -5178,8 +4712,7 @@
           <para>-or-</para>
           <para
             >The system file table is full.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENFILE" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />
 
             
 
@@ -5194,8 +4727,7 @@
 
              was
           specified and the target is a symbolic link.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EMLINK" />
+            [<see cref="F:Mono.Unix.Native.Errno.EMLINK" />
 
             
 
@@ -5209,21 +4741,18 @@
             
 
              and one of
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_SHLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_SHLOCK" />
 
             
 
              or
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
 
             
 
              is specified
             and the file is locked.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />
+            [<see cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />
 
             
 
@@ -5233,14 +4762,12 @@
           <para>-or-</para>
           <para
             >The user's quota of inodes on the file system containing
-          <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+          <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -5256,8 +4783,7 @@
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -5272,15 +4798,13 @@
 
              is a
           pure procedure (shared text) file that is being executed and 
-          <see
-             cref="M:Mono.Unix.Native.Syscall.open" />
+          <see cref="M:Mono.Unix.Native.Syscall.open" />
 
             
 
              requests write
           access.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
+            [<see cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
 
             
 
@@ -5294,22 +4818,19 @@
             
 
              and
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_EXCL" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_EXCL" />
 
             
 
              were specified
             and 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             
             exists.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EEXIST" />
+            [<see cref="F:Mono.Unix.Native.Errno.EEXIST" />
 
             
 
@@ -5337,8 +4858,7 @@
       <Parameters />
       <Docs>
         <summary
-          >Opens <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          >Opens <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -5346,24 +4866,20 @@
         writing.</summary
         >
         <returns
-          >A <see
-           cref="T:Mono.Unix.UnixStream" />
+          >A <see cref="T:Mono.Unix.UnixStream" />
 
           
 
            that provides
-        write access to <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        write access to <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
           .</returns
         >
         <remarks>
-          <para
-            >
-            This is equivalent to <c
-            >
+          <para>
+            This is equivalent to <c>
               <see
                 cref="M:Mono.Unix.UnixFileInfo.Open(System.IO.FileMode,System.IO.FileAccess"
                 qualify="false"
@@ -5371,14 +4887,12 @@
 
               
 
-               (<see
-               cref="F:System.IO.FileMode.OpenOrCreate" />
+               (<see cref="F:System.IO.FileMode.OpenOrCreate" />
 
               
 
               ,
-              <see
-               cref="F:System.IO.FileAccess.Write" />
+              <see cref="F:System.IO.FileAccess.Write" />
 
               
 
@@ -5395,26 +4909,22 @@
           <para
             >An attempt was made to open a descriptor with an illegal combination
           of
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_RDONLY" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_RDONLY" />
 
             
 
             ,
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />
 
             
 
             , and
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_RDWR" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_RDWR" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EINVAL" />
+            [<see cref="F:Mono.Unix.Native.Errno.EINVAL" />
 
             
 
@@ -5428,21 +4938,18 @@
             
 
              was
-          specified in <paramref
-             name="flags" />
+          specified in <paramref name="flags" />
 
             
 
             .  
-          <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+          <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
 
             
 
              requires a file
           mode for file creation; use 
           <see
-
               cref="M:Mono.Unix.UnixFileInfo.Open(Mono.Unix.Native.OpenFlags,Mono.Unix.Native.FilePermissions"
               qualify="true"
             />
@@ -5460,15 +4967,13 @@
             
 
              or
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
 
             
 
              is specified
             but the underlying file system does not support locking.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -5484,8 +4989,7 @@
              is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -5495,8 +4999,7 @@
           <para>-or-</para>
           <para
             >An attempt was made to open a socket.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+            [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
 
             
 
@@ -5507,14 +5010,12 @@
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -5525,8 +5026,7 @@
           <para
             >The required permissions (for reading and/or writing)
           are denied for the given flags.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -5540,15 +5040,13 @@
             
 
              does not
-          exist, and <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+          exist, and <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              does not
           permit writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -5563,8 +5061,7 @@
 
              is a
           directory.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EISDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.EISDIR" />
 
             
 
@@ -5572,18 +5069,15 @@
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is not a
           directory.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -5592,15 +5086,13 @@
         >
         <exception cref="T:System.IO.FileNotFoundException">
           <para
-            >A component of <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            >A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
              
           that must exist does not exist.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
             
 
@@ -5614,15 +5106,13 @@
             
 
              does not exist
-          and <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+          and <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
 
             
 
              is not
           set.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOENT" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
             
 
@@ -5638,8 +5128,7 @@
 
              resides on a
           read-only file system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -5655,8 +5144,7 @@
              is a
           character device or block device, and the device associated with
           this file does not exist.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENXIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
             
 
@@ -5672,8 +5160,7 @@
              is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENXIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />
 
             
 
@@ -5682,16 +5169,14 @@
           >
           <para>-or-</para>
           <para
-            >The directory <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+            >The directory <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              
           cannot be extended because there is no space left on the file
           system containing the directory.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -5702,8 +5187,7 @@
           <para
             >There are no free inodes on the file system on which the file
           is being created.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -5714,8 +5198,7 @@
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+            [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -5729,8 +5212,7 @@
           
 
            was too long.
-            [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -5740,14 +5222,12 @@
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+            [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -5758,8 +5238,7 @@
           <para
             >The process has already reached its limit for open file
           descriptors.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EMFILE" />
+            [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />
 
             
 
@@ -5769,8 +5248,7 @@
           <para>-or-</para>
           <para
             >The system file table is full.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENFILE" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />
 
             
 
@@ -5785,8 +5263,7 @@
 
              was
           specified and the target is a symbolic link.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EMLINK" />
+            [<see cref="F:Mono.Unix.Native.Errno.EMLINK" />
 
             
 
@@ -5800,21 +5277,18 @@
             
 
              and one of
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_SHLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_SHLOCK" />
 
             
 
              or
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
 
             
 
              is specified
             and the file is locked.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />
+            [<see cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />
 
             
 
@@ -5824,14 +5298,12 @@
           <para>-or-</para>
           <para
             >The user's quota of inodes on the file system containing
-          <see
-             cref="P:Mono.Unix.UnixFileInfo.Directory" />
+          <see cref="P:Mono.Unix.UnixFileInfo.Directory" />
 
             
 
              has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -5847,8 +5319,7 @@
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+            [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -5863,15 +5334,13 @@
 
              is a
           pure procedure (shared text) file that is being executed and 
-          <see
-             cref="M:Mono.Unix.Native.Syscall.open" />
+          <see cref="M:Mono.Unix.Native.Syscall.open" />
 
             
 
              requests write
           access.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
+            [<see cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
 
             
 
@@ -5885,22 +5354,19 @@
             
 
              and
-            <see
-             cref="F:Mono.Unix.Native.OpenFlags.O_EXCL" />
+            <see cref="F:Mono.Unix.Native.OpenFlags.O_EXCL" />
 
             
 
              were specified
             and 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             
             exists.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EEXIST" />
+            [<see cref="F:Mono.Unix.Native.Errno.EEXIST" />
 
             
 

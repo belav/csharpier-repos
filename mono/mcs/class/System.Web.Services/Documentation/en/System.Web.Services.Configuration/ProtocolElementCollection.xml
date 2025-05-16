@@ -25,13 +25,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Services.Configuration.ProtocolElementCollection" />
+        >The <see cref="T:System.Web.Services.Configuration.ProtocolElementCollection" />
 
         
 
-         class is used to work with a collection of <see
-         cref="T:System.Web.Services.Configuration.ProtocolElement" />
+         class is used to work with a collection of <see cref="T:System.Web.Services.Configuration.ProtocolElement" />
 
         
 
@@ -41,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains a strongly typed collection of <see
-         cref="T:System.Web.Services.Configuration.ProtocolElement" />
+        >Contains a strongly typed collection of <see cref="T:System.Web.Services.Configuration.ProtocolElement" />
 
         
 
@@ -61,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Web.Services.Configuration.ProtocolElementCollection" />
+            >Creates a new <see cref="T:System.Web.Services.Configuration.ProtocolElementCollection" />
 
             
 
@@ -92,8 +88,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Web.Services.Configuration.ProtocolElement" />
+            >Adds a <see cref="T:System.Web.Services.Configuration.ProtocolElement" />
 
             
 
@@ -101,12 +96,15 @@
           >
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Configuration.ProtocolElement" />
+          The <see cref="T:System.Web.Services.Configuration.ProtocolElement" />
 
           
 
@@ -130,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see
-             cref="T:System.Web.Services.Configuration.ProtocolElement" />
+            >Removes all <see cref="T:System.Web.Services.Configuration.ProtocolElement" />
 
             
 
@@ -158,13 +155,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Boolean" />
+            >Returns a <see cref="T:System.Boolean" />
 
             
 
-             that indicates whether a <see
-             cref="T:System.Web.Services.Configuration.ProtocolElement" />
+             that indicates whether a <see cref="T:System.Web.Services.Configuration.ProtocolElement" />
 
             
 
@@ -174,8 +169,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the collection contains a <see
-             cref="T:System.Web.Services.Configuration.ProtocolElement" />
+            >true if the collection contains a <see cref="T:System.Web.Services.Configuration.ProtocolElement" />
 
             
 
@@ -183,12 +177,15 @@
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key of the <see
-           cref="T:System.Web.Services.Configuration.ProtocolElement" />
+          The key of the <see cref="T:System.Web.Services.Configuration.ProtocolElement" />
 
           
 
@@ -220,24 +217,30 @@
           <para>Copies the elements from the collection to an array, starting at a particular index of the array.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Web.Services.Configuration.ProtocolElement" />
+          An array of type <see cref="T:System.Web.Services.Configuration.ProtocolElement" />
 
           
 
            to which to copy the contents of the collection.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="Array" />
+          The zero-based index in <paramref name="Array" />
 
           
 
@@ -309,8 +312,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the zero-based index of a specified <see
-             cref="T:System.Web.Services.Configuration.ProtocolElement" />
+            >Returns the zero-based index of a specified <see cref="T:System.Web.Services.Configuration.ProtocolElement" />
 
             
 
@@ -320,8 +322,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the specified <see
-             cref="T:System.Web.Services.Configuration.ProtocolElement" />
+            >The zero-based index of the specified <see cref="T:System.Web.Services.Configuration.ProtocolElement" />
 
             
 
@@ -329,12 +330,15 @@
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Configuration.ProtocolElement" />
+          The <see cref="T:System.Web.Services.Configuration.ProtocolElement" />
 
           
 
@@ -409,8 +413,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a specified <see
-             cref="T:System.Web.Services.Configuration.ProtocolElement" />
+            >Removes a specified <see cref="T:System.Web.Services.Configuration.ProtocolElement" />
 
             
 
@@ -418,12 +421,15 @@
           >
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Configuration.ProtocolElement" />
+          The <see cref="T:System.Web.Services.Configuration.ProtocolElement" />
 
           
 
@@ -451,12 +457,15 @@
           <para>Removes the element at the specified index in the collection.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the <see
-           cref="T:System.Web.Services.Configuration.ProtocolElement" />
+          The zero-based index of the <see cref="T:System.Web.Services.Configuration.ProtocolElement" />
 
           
 
@@ -482,8 +491,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Web.Services.Configuration.ProtocolElement" />
+            >Removes the <see cref="T:System.Web.Services.Configuration.ProtocolElement" />
 
             
 
@@ -491,12 +499,15 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key of the <see
-           cref="T:System.Web.Services.Configuration.ProtocolElement" />
+          The key of the <see cref="T:System.Web.Services.Configuration.ProtocolElement" />
 
           
 

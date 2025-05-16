@@ -10,8 +10,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.IControlDesignerTag" />
+        >The <see cref="T:System.Web.UI.Design.IControlDesignerTag" />
 
         
 
@@ -47,7 +46,11 @@
           <para>A string containing the value of the attribute.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -136,7 +139,11 @@
           <para>Deletes the specified attribute from the tag.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -167,14 +174,22 @@
           <para>Sets the value of the specified attribute and creates the attribute, if necessary.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The attribute name.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -201,7 +216,11 @@
           <para>Sets the HTML markup for the content of the tag.</para>
         </summary>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -226,8 +245,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="P:System.Web.UI.Design.IControlDesignerTag.IsDirty" />
+            >Sets the <see cref="P:System.Web.UI.Design.IControlDesignerTag.IsDirty" />
 
             
 
@@ -235,12 +253,15 @@
           >
         </summary>
         <param name="dirty">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value for the <see
-           cref="P:System.Web.UI.Design.IControlDesignerTag.IsDirty" />
+          The value for the <see cref="P:System.Web.UI.Design.IControlDesignerTag.IsDirty" />
 
           
 

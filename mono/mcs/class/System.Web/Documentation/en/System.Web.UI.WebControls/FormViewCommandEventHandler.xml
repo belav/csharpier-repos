@@ -28,21 +28,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Web.UI.WebControls.FormView.ItemCommand" />
+        >The <see cref="E:System.Web.UI.WebControls.FormView.ItemCommand" />
 
         
 
-         event is raised when a button within the <see
-         cref="T:System.Web.UI.WebControls.FormView" />
+         event is raised when a button within the <see cref="T:System.Web.UI.WebControls.FormView" />
 
         
 
          control is clicked. This allows you to provide an event-handling method that performs a custom routine whenever this event occurs.</para
       >
       <para
-        >Buttons within a <see
-         cref="T:System.Web.UI.WebControls.FormView" />
+        >Buttons within a <see cref="T:System.Web.UI.WebControls.FormView" />
 
         
 
@@ -65,23 +62,19 @@
           </term>
           <description>
             <para
-              >Cancels an edit or insert operation and returns the <see
-               cref="T:System.Web.UI.WebControls.FormView" />
+              >Cancels an edit or insert operation and returns the <see cref="T:System.Web.UI.WebControls.FormView" />
 
               
 
-               control to the mode specified by the <see
-               cref="P:System.Web.UI.WebControls.FormView.DefaultMode" />
+               control to the mode specified by the <see cref="P:System.Web.UI.WebControls.FormView.DefaultMode" />
 
               
 
-               property. Raises the <see
-               cref="E:System.Web.UI.WebControls.FormView.ModeChanged" />
+               property. Raises the <see cref="E:System.Web.UI.WebControls.FormView.ModeChanged" />
 
               
 
-               and <see
-               cref="E:System.Web.UI.WebControls.FormView.ModeChanging" />
+               and <see cref="E:System.Web.UI.WebControls.FormView.ModeChanging" />
 
               
 
@@ -95,13 +88,11 @@
           </term>
           <description>
             <para
-              >Deletes the current record. Raises the <see
-               cref="E:System.Web.UI.WebControls.FormView.ItemDeleted" />
+              >Deletes the current record. Raises the <see cref="E:System.Web.UI.WebControls.FormView.ItemDeleted" />
 
               
 
-               and <see
-               cref="E:System.Web.UI.WebControls.FormView.ItemDeleting" />
+               and <see cref="E:System.Web.UI.WebControls.FormView.ItemDeleting" />
 
               
 
@@ -115,18 +106,15 @@
           </term>
           <description>
             <para
-              >Puts the <see
-               cref="T:System.Web.UI.WebControls.FormView" />
+              >Puts the <see cref="T:System.Web.UI.WebControls.FormView" />
 
               
 
-               control in edit mode. Raises the <see
-               cref="E:System.Web.UI.WebControls.FormView.ModeChanged" />
+               control in edit mode. Raises the <see cref="E:System.Web.UI.WebControls.FormView.ModeChanged" />
 
               
 
-               and <see
-               cref="E:System.Web.UI.WebControls.FormView.ModeChanging" />
+               and <see cref="E:System.Web.UI.WebControls.FormView.ModeChanging" />
 
               
 
@@ -140,13 +128,11 @@
           </term>
           <description>
             <para
-              >Inserts the current record in the data source. Raises the <see
-               cref="E:System.Web.UI.WebControls.FormView.ItemInserted" />
+              >Inserts the current record in the data source. Raises the <see cref="E:System.Web.UI.WebControls.FormView.ItemInserted" />
 
               
 
-               and <see
-               cref="E:System.Web.UI.WebControls.FormView.ItemInserting" />
+               and <see cref="E:System.Web.UI.WebControls.FormView.ItemInserting" />
 
               
 
@@ -160,18 +146,15 @@
           </term>
           <description>
             <para
-              >Puts the <see
-               cref="T:System.Web.UI.WebControls.FormView" />
+              >Puts the <see cref="T:System.Web.UI.WebControls.FormView" />
 
               
 
-               control in insert mode. Raises the <see
-               cref="E:System.Web.UI.WebControls.FormView.ModeChanged" />
+               control in insert mode. Raises the <see cref="E:System.Web.UI.WebControls.FormView.ModeChanged" />
 
               
 
-               and <see
-               cref="E:System.Web.UI.WebControls.FormView.ModeChanging" />
+               and <see cref="E:System.Web.UI.WebControls.FormView.ModeChanging" />
 
               
 
@@ -185,13 +168,11 @@
           </term>
           <description>
             <para
-              >Performs a paging operation. Set the CommandArgument property of the button to "First", "Last", "Next", "Prev", or a page number to specify the type of paging operation to perform. Raises the <see
-               cref="E:System.Web.UI.WebControls.FormView.PageIndexChanged" />
+              >Performs a paging operation. Set the CommandArgument property of the button to "First", "Last", "Next", "Prev", or a page number to specify the type of paging operation to perform. Raises the <see cref="E:System.Web.UI.WebControls.FormView.PageIndexChanged" />
 
               
 
-               and <see
-               cref="E:System.Web.UI.WebControls.FormView.PageIndexChanging" />
+               and <see cref="E:System.Web.UI.WebControls.FormView.PageIndexChanging" />
 
               
 
@@ -205,13 +186,11 @@
           </term>
           <description>
             <para
-              >Updates the current record in the data source. Raises the <see
-               cref="E:System.Web.UI.WebControls.FormView.ItemUpdated" />
+              >Updates the current record in the data source. Raises the <see cref="E:System.Web.UI.WebControls.FormView.ItemUpdated" />
 
               
 
-               and <see
-               cref="E:System.Web.UI.WebControls.FormView.ItemUpdating" />
+               and <see cref="E:System.Web.UI.WebControls.FormView.ItemUpdating" />
 
               
 
@@ -221,21 +200,18 @@
         </item>
       </list>
       <para
-        >Although the <see
-         cref="E:System.Web.UI.WebControls.FormView.ItemCommand" />
+        >Although the <see cref="E:System.Web.UI.WebControls.FormView.ItemCommand" />
 
         
 
          event is raised when a button listed in the previous table is clicked, it is recommended that you handle the events listed in the table for the operation.</para
       >
       <para
-        >When you create a <see
-         cref="T:System.Web.UI.WebControls.FormViewCommandEventHandler" />
+        >When you create a <see cref="T:System.Web.UI.WebControls.FormViewCommandEventHandler" />
 
         
 
-         delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format
-         type="text/html">
+         delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
 
@@ -247,13 +223,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that handles the <see
-         cref="E:System.Web.UI.WebControls.FormView.ItemCommand" />
+        >Represents the method that handles the <see cref="E:System.Web.UI.WebControls.FormView.ItemCommand" />
 
         
 
-         event of a <see
-         cref="T:System.Web.UI.WebControls.FormView" />
+         event of a <see cref="T:System.Web.UI.WebControls.FormView" />
 
         
 

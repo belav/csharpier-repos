@@ -38,51 +38,42 @@
 
         
 
-         can be used to represent code that declares a class, structure, interface, or enumeration. <see
-         cref="T:System.CodeDom.CodeTypeDeclaration" />
+         can be used to represent code that declares a class, structure, interface, or enumeration. <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
         
 
          can be used to declare a type that is nested within another type.</para
       >
       <para
-        >The <see
-         cref="P:System.CodeDom.CodeTypeDeclaration.BaseTypes" />
+        >The <see cref="P:System.CodeDom.CodeTypeDeclaration.BaseTypes" />
 
         
 
-         property specifies the base type or base types of the type being declared. The <see
-         cref="P:System.CodeDom.CodeTypeDeclaration.Members" />
+         property specifies the base type or base types of the type being declared. The <see cref="P:System.CodeDom.CodeTypeDeclaration.Members" />
 
         
 
-         property contains the type members, which can include methods, fields, properties, comments and other types. The <see
-         cref="P:System.CodeDom.CodeTypeDeclaration.TypeAttributes" />
+         property contains the type members, which can include methods, fields, properties, comments and other types. The <see cref="P:System.CodeDom.CodeTypeDeclaration.TypeAttributes" />
 
         
 
-         property indicates the <see
-         cref="T:System.Reflection.TypeAttributes" />
+         property indicates the <see cref="T:System.Reflection.TypeAttributes" />
 
         
 
-         values for the type declaration, which indicate the type category of the type. The <see
-         cref="P:System.CodeDom.CodeTypeDeclaration.IsClass" />
+         values for the type declaration, which indicate the type category of the type. The <see cref="P:System.CodeDom.CodeTypeDeclaration.IsClass" />
 
         
 
-        , <see
-         cref="P:System.CodeDom.CodeTypeDeclaration.IsStruct" />
+        , <see cref="P:System.CodeDom.CodeTypeDeclaration.IsStruct" />
 
         
 
-        , <see
-         cref="P:System.CodeDom.CodeTypeDeclaration.IsEnum" />
+        , <see cref="P:System.CodeDom.CodeTypeDeclaration.IsEnum" />
 
         
 
-        , and <see
-         cref="P:System.CodeDom.CodeTypeDeclaration.IsInterface" />
+        , and <see cref="P:System.CodeDom.CodeTypeDeclaration.IsInterface" />
 
         
 
@@ -90,28 +81,23 @@
       >
       <block subset="none" type="note">
         <para
-          >Some programming languages only support the declaration of reference types, or classes. To check a language-specific CodeDOM code generator for support for declaring interfaces, enumerations, or value types, call the <see
-           cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
+          >Some programming languages only support the declaration of reference types, or classes. To check a language-specific CodeDOM code generator for support for declaring interfaces, enumerations, or value types, call the <see cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
 
           
 
-           method to test for the appropriate <see
-           cref="T:System.CodeDom.Compiler.GeneratorSupport" />
+           method to test for the appropriate <see cref="T:System.CodeDom.Compiler.GeneratorSupport" />
 
           
 
-           flags. <see
-           cref="F:System.CodeDom.Compiler.GeneratorSupport.DeclareInterfaces" />
+           flags. <see cref="F:System.CodeDom.Compiler.GeneratorSupport.DeclareInterfaces" />
 
           
 
-           indicates support for interfaces, <see
-           cref="F:System.CodeDom.Compiler.GeneratorSupport.DeclareEnums" />
+           indicates support for interfaces, <see cref="F:System.CodeDom.Compiler.GeneratorSupport.DeclareEnums" />
 
           
 
-           indicates support for enumerations, and <see
-           cref="F:System.CodeDom.Compiler.GeneratorSupport.DeclareValueTypes" />
+           indicates support for enumerations, and <see cref="F:System.CodeDom.Compiler.GeneratorSupport.DeclareValueTypes" />
 
           
 
@@ -119,18 +105,15 @@
         >
       </block>
       <para
-        >You can build a class or a structure implementation in one complete declaration, or spread the implementation across multiple declarations. The <see
-         cref="P:System.CodeDom.CodeTypeDeclaration.IsPartial" />
+        >You can build a class or a structure implementation in one complete declaration, or spread the implementation across multiple declarations. The <see cref="P:System.CodeDom.CodeTypeDeclaration.IsPartial" />
 
         
 
-         property indicates whether the type declaration is complete or partial. Not all code generators support partial type declarations, so you should test for this support by calling the <see
-         cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
+         property indicates whether the type declaration is complete or partial. Not all code generators support partial type declarations, so you should test for this support by calling the <see cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
 
         
 
-         method with the flag <see
-         cref="F:System.CodeDom.Compiler.GeneratorSupport.PartialTypes" />
+         method with the flag <see cref="F:System.CodeDom.Compiler.GeneratorSupport.PartialTypes" />
 
         
 
@@ -162,8 +145,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTypeDeclaration" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
             
 
@@ -193,8 +175,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTypeDeclaration" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
             
 
@@ -202,7 +183,11 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -239,13 +224,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To generate a class in Visual Basic that does not inherit from a base type, but that does implement one or more interfaces, you must include <see
-             cref="T:System.Object" />
+            >To generate a class in Visual Basic that does not inherit from a base type, but that does implement one or more interfaces, you must include <see cref="T:System.Object" />
 
             
 
-             as the first item in the <see
-             cref="P:System.CodeDom.CodeTypeDeclaration.BaseTypes" />
+             as the first item in the <see cref="P:System.CodeDom.CodeTypeDeclaration.BaseTypes" />
 
             
 
@@ -253,18 +236,15 @@
           >
           <block subset="none" type="note">
             <para
-              >In the .NET Framework version 2.0 you do not need the <see
-               cref="T:System.CodeDom.CodeTypeReference" />
+              >In the .NET Framework version 2.0 you do not need the <see cref="T:System.CodeDom.CodeTypeReference" />
 
               
 
-               for <see
-               cref="T:System.Object" />
+               for <see cref="T:System.Object" />
 
               
 
-               if the interface you are implementing already exists and you are referring to it by type. For example, if you are implementing the <see
-               cref="T:System.Collections.ICollection" />
+               if the interface you are implementing already exists and you are referring to it by type. For example, if you are implementing the <see cref="T:System.Collections.ICollection" />
 
               
 
@@ -273,13 +253,11 @@
           </block>
           <para />
           <para
-            >The following code illustrates the addition of a <see
-             cref="T:System.CodeDom.CodeTypeReference" />
+            >The following code illustrates the addition of a <see cref="T:System.CodeDom.CodeTypeReference" />
 
             
 
-             to the collection that refers to <see
-             cref="T:System.Object" />
+             to the collection that refers to <see cref="T:System.Object" />
 
             
 
@@ -348,8 +326,7 @@ Implements Interface1</code>
         <value>To be added: an object of type 'bool'</value>
         <remarks>
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 		CodeTypeDeclaration colorEnum=new CodeTypeDeclaration("Colors");
 		colorEnum.IsEnum=true;
 		CodeMemberField memBlue=new CodeMemberField(typeof(int),"BLUE");
@@ -364,8 +341,8 @@ Implements Interface1</code>
             
 Generates the following code for the C# generator:
 <code
-             lang="C#"
-              >
+              lang="C#"
+            >
     public enum Colors {
 
         BLUE = 2,
@@ -420,8 +397,7 @@ Generates the following code for the C# generator:
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can build a class or structure implementation in one complete declaration, or spread the implementation across multiple declarations. Implementations are commonly supplied in one complete type declaration. In this case, set the type declaration <see
-             cref="P:System.CodeDom.CodeTypeDeclaration.IsPartial" />
+            >You can build a class or structure implementation in one complete declaration, or spread the implementation across multiple declarations. Implementations are commonly supplied in one complete type declaration. In this case, set the type declaration <see cref="P:System.CodeDom.CodeTypeDeclaration.IsPartial" />
 
             
 
@@ -429,13 +405,11 @@ Generates the following code for the C# generator:
           >
           <para>A partial type declaration makes it easier to build different portions of a class or structure implementation in different modules of your application. The partial type declarations can be stored in one source file, or spread across multiple source files that are eventually compiled together to form the combined type implementation.</para>
           <para
-            >The C# language supports partial type declarations of classes and structures through the partial keyword. Visual Basic supports partial type declarations of classes and structures with the Partial keyword. Not all code generators support partial type declarations, so you should test for this support by calling the <see
-             cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
+            >The C# language supports partial type declarations of classes and structures through the partial keyword. Visual Basic supports partial type declarations of classes and structures with the Partial keyword. Not all code generators support partial type declarations, so you should test for this support by calling the <see cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
 
             
 
-             method with the flag <see
-             cref="F:System.CodeDom.Compiler.GeneratorSupport.PartialTypes" />
+             method with the flag <see cref="F:System.CodeDom.Compiler.GeneratorSupport.PartialTypes" />
 
             
 
@@ -445,8 +419,7 @@ Generates the following code for the C# generator:
             <para>Partial type declarations are supported for classes and structures. If you specify a partial type declaration for an enumeration or interface, the generated code produces compiler errors.</para>
           </block>
           <para
-            >When supplying a class or structure implementation across multiple declarations, set the <see
-             cref="P:System.CodeDom.CodeTypeDeclaration.IsPartial" />
+            >When supplying a class or structure implementation across multiple declarations, set the <see cref="P:System.CodeDom.CodeTypeDeclaration.IsPartial" />
 
             
 
@@ -530,8 +503,7 @@ Generates the following code for the C# generator:
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.CodeDom.CodeTypeDeclaration.BaseTypes" />
+            >Occurs when the <see cref="P:System.CodeDom.CodeTypeDeclaration.BaseTypes" />
 
             
 
@@ -558,8 +530,7 @@ Generates the following code for the C# generator:
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.CodeDom.CodeTypeDeclaration.Members" />
+            >Occurs when the <see cref="P:System.CodeDom.CodeTypeDeclaration.Members" />
 
             
 
@@ -592,58 +563,47 @@ Generates the following code for the C# generator:
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Reflection.TypeAttributes" />
+            >The <see cref="T:System.Reflection.TypeAttributes" />
 
             
 
-             property contains the same type of values used by <see
-             cref="N:System.Reflection" />
+             property contains the same type of values used by <see cref="N:System.Reflection" />
 
             
 
-             when investigating a type at run time. Many of these flags do not correspond to the type declaration syntax for some languages. As a result, only the following flags are significant to <see
-             cref="T:System.CodeDom.CodeTypeDeclaration" />
+             when investigating a type at run time. Many of these flags do not correspond to the type declaration syntax for some languages. As a result, only the following flags are significant to <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
             
 
-             : <see
-             cref="F:System.Reflection.TypeAttributes.Class" />
+             : <see cref="F:System.Reflection.TypeAttributes.Class" />
 
             
 
-            , <see
-             cref="F:System.Reflection.TypeAttributes.Interface" />
+            , <see cref="F:System.Reflection.TypeAttributes.Interface" />
 
             
 
-            , <see
-             cref="F:System.Reflection.TypeAttributes.Abstract" />
+            , <see cref="F:System.Reflection.TypeAttributes.Abstract" />
 
             
 
-            , <see
-             cref="F:System.Reflection.TypeAttributes.Sealed" />
+            , <see cref="F:System.Reflection.TypeAttributes.Sealed" />
 
             
 
-            , <see
-             cref="F:System.Reflection.TypeAttributes.Public" />
+            , <see cref="F:System.Reflection.TypeAttributes.Public" />
 
             
 
-            , <see
-             cref="F:System.Reflection.TypeAttributes.NotPublic" />
+            , <see cref="F:System.Reflection.TypeAttributes.NotPublic" />
 
             
 
-            , <see
-             cref="F:System.Reflection.TypeAttributes.NestedPublic" />
+            , <see cref="F:System.Reflection.TypeAttributes.NestedPublic" />
 
             
 
-            , and <see
-             cref="F:System.Reflection.TypeAttributes.NestedPrivate" />
+            , and <see cref="F:System.Reflection.TypeAttributes.NestedPrivate" />
 
             
 
@@ -651,48 +611,39 @@ Generates the following code for the C# generator:
           >
           <block subset="none" type="note">
             <para
-              >Some of the flags such as <see
-               cref="F:System.Reflection.TypeAttributes.Abstract" />
+              >Some of the flags such as <see cref="F:System.Reflection.TypeAttributes.Abstract" />
 
               
 
-               overlap with the meaning of flags in the <see
-               cref="P:System.CodeDom.CodeTypeMember.Attributes" />
+               overlap with the meaning of flags in the <see cref="P:System.CodeDom.CodeTypeMember.Attributes" />
 
               
 
-               property of <see
-               cref="T:System.CodeDom.CodeTypeDeclaration" />
+               property of <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
               
 
-               that is inherited from <see
-               cref="T:System.CodeDom.CodeTypeMember" />
+               that is inherited from <see cref="T:System.CodeDom.CodeTypeMember" />
 
               
 
-              . The <see
-               cref="P:System.CodeDom.CodeTypeMember.Attributes" />
+              . The <see cref="P:System.CodeDom.CodeTypeMember.Attributes" />
 
               
 
-               property is a side effect of the <see
-               cref="T:System.CodeDom.CodeTypeDeclaration" />
+               property is a side effect of the <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
               
 
-               class inheriting from <see
-               cref="T:System.CodeDom.CodeTypeMember" />
+               class inheriting from <see cref="T:System.CodeDom.CodeTypeMember" />
 
               
 
-               so that classes can be nested. The flags in the <see
-               cref="P:System.CodeDom.CodeTypeDeclaration.TypeAttributes" />
+               so that classes can be nested. The flags in the <see cref="P:System.CodeDom.CodeTypeDeclaration.TypeAttributes" />
 
               
 
-               property should be used instead of the flags in the <see
-               cref="P:System.CodeDom.CodeTypeMember.Attributes" />
+               property should be used instead of the flags in the <see cref="P:System.CodeDom.CodeTypeMember.Attributes" />
 
               
 
@@ -701,18 +652,15 @@ Generates the following code for the C# generator:
           </block>
           <block subset="none" type="note">
             <para
-              >The pattern for setting the visibility flags (flags containing the words Public or Nested) is to mask out all visibility flags using the <see
-               cref="F:System.Reflection.TypeAttributes.VisibilityMask" />
+              >The pattern for setting the visibility flags (flags containing the words Public or Nested) is to mask out all visibility flags using the <see cref="F:System.Reflection.TypeAttributes.VisibilityMask" />
 
               
 
-               and then set the desired visibility flag. For example, the C# code statement to identify the <see
-               cref="T:System.CodeDom.CodeTypeDeclaration" />
+               and then set the desired visibility flag. For example, the C# code statement to identify the <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
               
 
-               (named cd) as an internal class is cd.TypeAttributes = (cd.TypeAttributes &amp; ~TypeAttributes.VisibilityMask) | TypeAttributes.NotPublic;.  The code to set the same value in Visual Basic is cd.TypeAttributes = (cd.TypeAttributes And (TypeAttributes.VisibilityMask Xor -1)) Or TypeAttributes.NotPublic. Setting the <see
-               cref="P:System.CodeDom.CodeTypeDeclaration.TypeAttributes" />
+               (named cd) as an internal class is cd.TypeAttributes = (cd.TypeAttributes &amp; ~TypeAttributes.VisibilityMask) | TypeAttributes.NotPublic;.  The code to set the same value in Visual Basic is cd.TypeAttributes = (cd.TypeAttributes And (TypeAttributes.VisibilityMask Xor -1)) Or TypeAttributes.NotPublic. Setting the <see cref="P:System.CodeDom.CodeTypeDeclaration.TypeAttributes" />
 
               
 
@@ -754,21 +702,18 @@ Generates the following code for the C# generator:
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A generic type declaration contains one or more unspecified types known as type parameters. A type parameter name stands for the type within the body of the generic declaration. For example, the generic declaration for the <see
-             cref="T:System.Collections.Generic.List`1" />
+            >A generic type declaration contains one or more unspecified types known as type parameters. A type parameter name stands for the type within the body of the generic declaration. For example, the generic declaration for the <see cref="T:System.Collections.Generic.List`1" />
 
             
 
-             class contains the type parameter <paramref
-             name="T" />
+             class contains the type parameter <paramref name="T" />
 
             
 
             .</para
           >
           <para
-            >For more information on generics, see <format
-             type="text/html">
+            >For more information on generics, see <format type="text/html">
               <a href="afdd5477-6770-4686-8297-f58a4d749daf"
                 >Generics in the .NET Framework Class Library</a
               >

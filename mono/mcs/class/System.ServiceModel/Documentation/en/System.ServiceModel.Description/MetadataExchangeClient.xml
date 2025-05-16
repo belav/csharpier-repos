@@ -20,59 +20,49 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+        >Use the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
 
         
 
-         to download metadata. Typically, a <see
-         cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+         to download metadata. Typically, a <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
 
         
 
-         is configured for a metadata request and then passed to the <see
-         cref="M:System.ServiceModel.Description.MetadataResolver.Resolve(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ContractDescription},System.Uri,System.ServiceModel.Description.MetadataExchangeClientMode)" />
+         is configured for a metadata request and then passed to the <see cref="M:System.ServiceModel.Description.MetadataResolver.Resolve(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ContractDescription},System.Uri,System.ServiceModel.Description.MetadataExchangeClientMode)" />
 
         
 
-         or <see
-         cref="M:System.ServiceModel.Description.MetadataResolver.Resolve(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ContractDescription},System.Uri,System.ServiceModel.Description.MetadataExchangeClientMode,System.ServiceModel.Description.MetadataExchangeClient)" />
+         or <see cref="M:System.ServiceModel.Description.MetadataResolver.Resolve(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ContractDescription},System.Uri,System.ServiceModel.Description.MetadataExchangeClientMode,System.ServiceModel.Description.MetadataExchangeClient)" />
 
         
 
-         method for the <see
-         cref="T:System.ServiceModel.Description.MetadataResolver" />
+         method for the <see cref="T:System.ServiceModel.Description.MetadataResolver" />
 
         
 
          to use to download metadata. </para
       >
       <para
-        >However, you can use the <see
-         cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+        >However, you can use the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
 
         
 
-         directly to retrieve metadata as a <see
-         cref="T:System.ServiceModel.Description.MetadataSet" />
+         directly to retrieve metadata as a <see cref="T:System.ServiceModel.Description.MetadataSet" />
 
         
 
-         that contains <see
-         cref="T:System.ServiceModel.Description.MetadataSection" />
+         that contains <see cref="T:System.ServiceModel.Description.MetadataSection" />
 
         
 
          objects.</para
       >
       <para
-        >Whether used directly or passed to a <see
-         cref="T:System.ServiceModel.Description.MetadataResolver" />
+        >Whether used directly or passed to a <see cref="T:System.ServiceModel.Description.MetadataResolver" />
 
         
 
-        , <see
-         cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+        , <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
 
         
 
@@ -84,8 +74,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.MetadataExchangeClient.HttpCredentials" />
+            >Use the <see cref="P:System.ServiceModel.Description.MetadataExchangeClient.HttpCredentials" />
 
             
 
@@ -94,8 +83,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.MetadataExchangeClient.SoapCredentials" />
+            >Use the <see cref="P:System.ServiceModel.Description.MetadataExchangeClient.SoapCredentials" />
 
             
 
@@ -104,13 +92,11 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.MetadataExchangeClient.MaximumResolvedReferences" />
+            >Use the <see cref="P:System.ServiceModel.Description.MetadataExchangeClient.MaximumResolvedReferences" />
 
             
 
-             property to limit the number of metadata references the <see
-             cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+             property to limit the number of metadata references the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
 
             
 
@@ -119,8 +105,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.MetadataExchangeClient.OperationTimeout" />
+            >Use the <see cref="P:System.ServiceModel.Description.MetadataExchangeClient.OperationTimeout" />
 
             
 
@@ -129,8 +114,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.MetadataExchangeClient.ResolveMetadataReferences" />
+            >Use the <see cref="P:System.ServiceModel.Description.MetadataExchangeClient.ResolveMetadataReferences" />
 
             
 
@@ -139,8 +123,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="Overload:System.ServiceModel.Description.MetadataExchangeClient.GetMetadata" />
+            >Use the <see cref="Overload:System.ServiceModel.Description.MetadataExchangeClient.GetMetadata" />
 
             
 
@@ -152,8 +135,7 @@
       <list type="bullet">
         <item>
           <para
-            >Override the <see
-             cref="M:System.ServiceModel.Description.MetadataExchangeClient.GetChannelFactory(System.ServiceModel.EndpointAddress,System.String,System.String)" />
+            >Override the <see cref="M:System.ServiceModel.Description.MetadataExchangeClient.GetChannelFactory(System.ServiceModel.EndpointAddress,System.String,System.String)" />
 
             
 
@@ -162,13 +144,11 @@
         </item>
         <item>
           <para
-            >Override the <see
-             cref="M:System.ServiceModel.Description.MetadataExchangeClient.GetWebRequest(System.Uri,System.String,System.String)" />
+            >Override the <see cref="M:System.ServiceModel.Description.MetadataExchangeClient.GetWebRequest(System.Uri,System.String,System.String)" />
 
             
 
-             method to modify the <see
-             cref="T:System.Net.HttpWebRequest" />
+             method to modify the <see cref="T:System.Net.HttpWebRequest" />
 
             
 
@@ -199,8 +179,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
 
             
 
@@ -233,8 +212,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
 
             
 
@@ -242,7 +220,11 @@
           >
         </summary>
         <param name="mexBinding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -274,8 +256,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
 
             
 
@@ -283,7 +264,11 @@
           >
         </summary>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -315,8 +300,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
 
             
 
@@ -324,7 +308,11 @@
           >
         </summary>
         <param name="endpointConfigurationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -353,8 +341,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to specify the address and whether to use an HTTP GET request or WS-Transfer Get. crdefault <see
-             cref="T:System.ServiceModel.Description.MetadataExchangeClientMode" />
+            >Use this constructor to specify the address and whether to use an HTTP GET request or WS-Transfer Get. crdefault <see cref="T:System.ServiceModel.Description.MetadataExchangeClientMode" />
 
             
 
@@ -364,8 +351,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
 
             
 
@@ -373,14 +359,22 @@
           >
         </summary>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The address of the metadata.</param
         >
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -412,8 +406,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An asynchronous implementation of the <see
-             cref="M:System.ServiceModel.Description.MetadataExchangeClient.GetMetadata" />
+            >An asynchronous implementation of the <see cref="M:System.ServiceModel.Description.MetadataExchangeClient.GetMetadata" />
 
             
 
@@ -423,8 +416,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Begins an asynchronous method call that returns a <see
-             cref="T:System.ServiceModel.Description.MetadataSet" />
+            >Begins an asynchronous method call that returns a <see cref="T:System.ServiceModel.Description.MetadataSet" />
 
             
 
@@ -436,14 +428,22 @@
           <para>The metadata.</para>
         </returns>
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The asynchronous callback delegate invoked when the call is complete.</param
         >
         <param name="asyncState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -476,8 +476,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An asynchronous implementation of the <see
-             cref="M:System.ServiceModel.Description.MetadataExchangeClient.GetMetadata(System.ServiceModel.EndpointAddress)" />
+            >An asynchronous implementation of the <see cref="M:System.ServiceModel.Description.MetadataExchangeClient.GetMetadata(System.ServiceModel.EndpointAddress)" />
 
             
 
@@ -487,8 +486,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Begins an asynchronous method call that returns a <see
-             cref="T:System.ServiceModel.Description.MetadataSet" />
+            >Begins an asynchronous method call that returns a <see cref="T:System.ServiceModel.Description.MetadataSet" />
 
             
 
@@ -498,8 +496,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The metadata obtained from the specified <paramref
-             name="address" />
+            >The metadata obtained from the specified <paramref name="address" />
 
             
 
@@ -507,21 +504,33 @@
           >
         </returns>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The address of the metadata.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The asynchronous callback delegate invoked when the call is complete.</param
         >
         <param name="asyncState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -555,8 +564,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An asynchronous implementation of the <see
-             cref="M:System.ServiceModel.Description.MetadataExchangeClient.GetMetadata(System.Uri,System.ServiceModel.Description.MetadataExchangeClientMode)" />
+            >An asynchronous implementation of the <see cref="M:System.ServiceModel.Description.MetadataExchangeClient.GetMetadata(System.Uri,System.ServiceModel.Description.MetadataExchangeClientMode)" />
 
             
 
@@ -566,8 +574,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Begins an asynchronous method call that returns a <see
-             cref="T:System.ServiceModel.Description.MetadataSet" />
+            >Begins an asynchronous method call that returns a <see cref="T:System.ServiceModel.Description.MetadataSet" />
 
             
 
@@ -577,8 +584,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The metadata obtained from the specified <paramref
-             name="address" />
+            >The metadata obtained from the specified <paramref name="address" />
 
             
 
@@ -586,33 +592,48 @@
           >
         </returns>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The address of the metadata.</param
         >
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.MetadataExchangeClientMode" />
+          The <see cref="T:System.ServiceModel.Description.MetadataExchangeClientMode" />
 
           
 
            value to use when downloading the metadata.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The asynchronous callback delegate invoked when the call is complete.</param
         >
         <param name="asyncState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -643,8 +664,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Ends one of the asynchronous <see
-             cref="Overload:System.ServiceModel.Description.MetadataExchangeClient.BeginGetMetadata" />
+            >Ends one of the asynchronous <see cref="Overload:System.ServiceModel.Description.MetadataExchangeClient.BeginGetMetadata" />
 
             
 
@@ -654,8 +674,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Ends an asynchronous method call that returns a <see
-             cref="T:System.ServiceModel.Description.MetadataSet" />
+            >Ends an asynchronous method call that returns a <see cref="T:System.ServiceModel.Description.MetadataSet" />
 
             
 
@@ -665,8 +684,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Description.MetadataSet" />
+            >The <see cref="T:System.ServiceModel.Description.MetadataSet" />
 
             
 
@@ -674,17 +692,19 @@
           >
         </returns>
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IAsyncResult" />
+          The <see cref="T:System.IAsyncResult" />
 
           
 
-           object that is received from a call to the <see
-           cref="Overload:System.ServiceModel.Description.MetadataExchangeClient.BeginGetMetadata" />
+           object that is received from a call to the <see cref="Overload:System.ServiceModel.Description.MetadataExchangeClient.BeginGetMetadata" />
 
           
 
@@ -717,8 +737,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called when retrieving metadata for a <see
-             cref="T:System.ServiceModel.Description.MetadataReference" />
+            >This method is called when retrieving metadata for a <see cref="T:System.ServiceModel.Description.MetadataReference" />
 
             
 
@@ -732,13 +751,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.ChannelFactory`1" />
+            >A <see cref="T:System.ServiceModel.ChannelFactory`1" />
 
             
 
-             of type <see
-             cref="T:System.ServiceModel.Channels.IRequestChannel" />
+             of type <see cref="T:System.ServiceModel.Channels.IRequestChannel" />
 
             
 
@@ -746,21 +763,33 @@
           >
         </returns>
         <param name="metadataAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The metadata address.</param
         >
         <param name="dialect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The dialect of the metadata.</param
         >
         <param name="identifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -790,8 +819,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.ServiceModel.Description.MetadataSet" />
+            >Returns a <see cref="T:System.ServiceModel.Description.MetadataSet" />
 
             
 
@@ -801,8 +829,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Description.MetadataSet" />
+            >The <see cref="T:System.ServiceModel.Description.MetadataSet" />
 
             
 
@@ -835,8 +862,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.ServiceModel.Description.MetadataSet" />
+            >Returns a <see cref="T:System.ServiceModel.Description.MetadataSet" />
 
             
 
@@ -846,8 +872,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The metadata located at the <paramref
-             name="address" />
+            >The metadata located at the <paramref name="address" />
 
             
 
@@ -855,7 +880,11 @@
           >
         </returns>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -891,8 +920,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.ServiceModel.Description.MetadataSet" />
+            >Returns a <see cref="T:System.ServiceModel.Description.MetadataSet" />
 
             
 
@@ -904,14 +932,22 @@
           <para>The metadata that is downloaded.</para>
         </returns>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The address from which to download the metadata.</param
         >
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -944,8 +980,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ServiceModel.Description.MetadataExchangeClient.GetWebRequest(System.Uri,System.String,System.String)" />
+            >The <see cref="M:System.ServiceModel.Description.MetadataExchangeClient.GetWebRequest(System.Uri,System.String,System.String)" />
 
             
 
@@ -954,8 +989,7 @@
           <list type="bullet">
             <item>
               <para
-                >When there is an attempt to resolve a <see
-                 cref="T:System.ServiceModel.Description.MetadataLocation" />
+                >When there is an attempt to resolve a <see cref="T:System.ServiceModel.Description.MetadataLocation" />
 
                 
 
@@ -964,8 +998,7 @@
             </item>
             <item>
               <para
-                >When <see
-                 cref="F:System.ServiceModel.Description.MetadataExchangeClientMode.HttpGet" />
+                >When <see cref="F:System.ServiceModel.Description.MetadataExchangeClientMode.HttpGet" />
 
                 
 
@@ -977,8 +1010,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, returns the <see
-             cref="T:System.Net.HttpWebRequest" />
+            >When overridden in a derived class, returns the <see cref="T:System.Net.HttpWebRequest" />
 
             
 
@@ -988,8 +1020,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The internal <see
-             cref="T:System.Net.HttpWebRequest" />
+            >The internal <see cref="T:System.Net.HttpWebRequest" />
 
             
 
@@ -997,21 +1028,33 @@
           >
         </returns>
         <param name="location">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The location of the metadata.</param
         >
         <param name="dialect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The dialect of the metadata.</param
         >
         <param name="identifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1040,13 +1083,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.MetadataExchangeClient.HttpCredentials" />
+            >Use the <see cref="P:System.ServiceModel.Description.MetadataExchangeClient.HttpCredentials" />
 
             
 
-             property to customize the security credentials that the <see
-             cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+             property to customize the security credentials that the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
 
             
 
@@ -1077,8 +1118,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.MetadataExchangeClient.MaximumResolvedReferences" />
+            >Use the <see cref="P:System.ServiceModel.Description.MetadataExchangeClient.MaximumResolvedReferences" />
 
             
 
@@ -1088,8 +1128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the maximum number of references to metadata that the <see
-             cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+            >Gets or sets the maximum number of references to metadata that the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
 
             
 
@@ -1116,13 +1155,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.MetadataExchangeClient.OperationTimeout" />
+            >Use the <see cref="P:System.ServiceModel.Description.MetadataExchangeClient.OperationTimeout" />
 
             
 
-             property to limit the amount of time the <see
-             cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+             property to limit the amount of time the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
 
             
 
@@ -1150,23 +1187,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.ServiceModel.Description.MetadataExchangeClient.ResolveMetadataReferences" />
+            >Set the <see cref="P:System.ServiceModel.Description.MetadataExchangeClient.ResolveMetadataReferences" />
 
             
 
-             property to false to prevent the resolution of references to metadata. In this case, references are returned as <see
-             cref="T:System.ServiceModel.Description.MetadataReference" />
+             property to false to prevent the resolution of references to metadata. In this case, references are returned as <see cref="T:System.ServiceModel.Description.MetadataReference" />
 
             
 
-             or <see
-             cref="T:System.ServiceModel.Description.MetadataLocation" />
+             or <see cref="T:System.ServiceModel.Description.MetadataLocation" />
 
             
 
-             objects inside the <see
-             cref="T:System.ServiceModel.Description.MetadataSet" />
+             objects inside the <see cref="T:System.ServiceModel.Description.MetadataSet" />
 
             
 
@@ -1200,13 +1233,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.MetadataExchangeClient.SoapCredentials" />
+            >Use the <see cref="P:System.ServiceModel.Description.MetadataExchangeClient.SoapCredentials" />
 
             
 
-             property to specify the security credentials the <see
-             cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+             property to specify the security credentials the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
 
             
 

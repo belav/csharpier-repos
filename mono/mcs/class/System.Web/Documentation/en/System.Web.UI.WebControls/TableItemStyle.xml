@@ -20,61 +20,50 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.TableItemStyle" />
+        >The <see cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
         
 
-         class represents the style properties for an element of a control that renders as a <see
-         cref="T:System.Web.UI.WebControls.TableRow" />
+         class represents the style properties for an element of a control that renders as a <see cref="T:System.Web.UI.WebControls.TableRow" />
 
         
 
-         or <see
-         cref="T:System.Web.UI.WebControls.TableCell" />
+         or <see cref="T:System.Web.UI.WebControls.TableCell" />
 
         
 
-        . You can control the vertical and horizontal alignment of the contents in an item of the table by setting the <see
-         cref="P:System.Web.UI.WebControls.TableItemStyle.HorizontalAlign" />
+        . You can control the vertical and horizontal alignment of the contents in an item of the table by setting the <see cref="P:System.Web.UI.WebControls.TableItemStyle.HorizontalAlign" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.TableItemStyle.VerticalAlign" />
+         and <see cref="P:System.Web.UI.WebControls.TableItemStyle.VerticalAlign" />
 
         
 
-         properties, respectively. You can also specify whether the contents of the cell automatically continue on the next line when the end of the cell is reached by setting the <see
-         cref="P:System.Web.UI.WebControls.TableItemStyle.Wrap" />
+         properties, respectively. You can also specify whether the contents of the cell automatically continue on the next line when the end of the cell is reached by setting the <see cref="P:System.Web.UI.WebControls.TableItemStyle.Wrap" />
 
         
 
          property.</para
       >
       <para
-        >This class provides methods that are useful for creating a style for an item in the <see
-         cref="T:System.Web.UI.WebControls.Table" />
+        >This class provides methods that are useful for creating a style for an item in the <see cref="T:System.Web.UI.WebControls.Table" />
 
         
 
-         control. You can use the <see
-         cref="M:System.Web.UI.WebControls.TableItemStyle.CopyFrom(System.Web.UI.WebControls.Style)" />
+         control. You can use the <see cref="M:System.Web.UI.WebControls.TableItemStyle.CopyFrom(System.Web.UI.WebControls.Style)" />
 
         
 
-         and <see
-         cref="M:System.Web.UI.WebControls.TableItemStyle.MergeWith(System.Web.UI.WebControls.Style)" />
+         and <see cref="M:System.Web.UI.WebControls.TableItemStyle.MergeWith(System.Web.UI.WebControls.Style)" />
 
         
 
-         methods to copy or merge the style properties of another <see
-         cref="T:System.Web.UI.WebControls.TableItemStyle" />
+         methods to copy or merge the style properties of another <see cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
         
 
-         with the instance of the <see
-         cref="T:System.Web.UI.WebControls.TableItemStyle" />
+         with the instance of the <see cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
         
 
@@ -84,13 +73,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the style properties for an element of a control that renders as a <see
-         cref="T:System.Web.UI.WebControls.TableRow" />
+        >Represents the style properties for an element of a control that renders as a <see cref="T:System.Web.UI.WebControls.TableRow" />
 
         
 
-         or <see
-         cref="T:System.Web.UI.WebControls.TableCell" />
+         or <see cref="T:System.Web.UI.WebControls.TableCell" />
 
         
 
@@ -108,8 +95,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.TableItemStyle" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
             
 
@@ -119,8 +105,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Web.UI.WebControls.TableItemStyle" />
+            >Creates a new instance of the <see cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
             
 
@@ -144,13 +129,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.TableItemStyle" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
             
 
-             class using the specified <see
-             cref="T:System.Web.UI.StateBag" />
+             class using the specified <see cref="T:System.Web.UI.StateBag" />
 
             
 
@@ -160,8 +143,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Web.UI.WebControls.TableItemStyle" />
+            >Creates a new instance of the <see cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
             
 
@@ -169,12 +151,15 @@
           >
         </summary>
         <param name="bag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.StateBag" />
+          A <see cref="T:System.Web.UI.StateBag" />
 
           
 
@@ -203,28 +188,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="Overload:System.Web.UI.WebControls.TableItemStyle.AddAttributesToRender" />
+            >The <see cref="Overload:System.Web.UI.WebControls.TableItemStyle.AddAttributesToRender" />
 
             
 
-             method is used primarily by control developers to insert additional attributes and styles in the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             method is used primarily by control developers to insert additional attributes and styles in the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             output stream for the <see
-             cref="T:System.Web.UI.WebControls.TableItemStyle" />
+             output stream for the <see cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
             
 
-            . The <see
-             cref="Overload:System.Web.UI.WebControls.TableItemStyle.AddAttributesToRender" />
+            . The <see cref="Overload:System.Web.UI.WebControls.TableItemStyle.AddAttributesToRender" />
 
             
 
-             method overrides the <see
-             cref="Overload:System.Web.UI.WebControls.Style.AddAttributesToRender" />
+             method overrides the <see cref="Overload:System.Web.UI.WebControls.Style.AddAttributesToRender" />
 
             
 
@@ -236,14 +216,22 @@
           <para>Adds information about horizontal alignment, vertical alignment, and wrap to the list of attributes to render.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The output stream that renders HTML content to the client. </param
         >
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -271,18 +259,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.TableItemStyle.CopyFrom(System.Web.UI.WebControls.Style)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.TableItemStyle.CopyFrom(System.Web.UI.WebControls.Style)" />
 
             
 
-             method to duplicate the non-empty style properties of the specified <see
-             cref="T:System.Web.UI.WebControls.Style" />
+             method to duplicate the non-empty style properties of the specified <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             into the instance of the <see
-             cref="T:System.Web.UI.WebControls.TableItemStyle" />
+             into the instance of the <see cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
             
 
@@ -290,13 +275,11 @@
           >
           <block subset="none" type="note">
             <para
-              >All properties in the current instance of the <see
-               cref="T:System.Web.UI.WebControls.TableItemStyle" />
+              >All properties in the current instance of the <see cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
               
 
-               class are replaced by the associated property in the <paramref
-               name="s" />
+               class are replaced by the associated property in the <paramref name="s" />
 
               
 
@@ -307,13 +290,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Duplicates the non-empty style properties of the specified <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >Duplicates the non-empty style properties of the specified <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             into the instance of the <see
-             cref="T:System.Web.UI.WebControls.TableItemStyle" />
+             into the instance of the <see cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
             
 
@@ -321,12 +302,15 @@
           >
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.Style" />
+          A <see cref="T:System.Web.UI.WebControls.Style" />
 
           
 
@@ -353,13 +337,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TableItemStyle.HorizontalAlign" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TableItemStyle.HorizontalAlign" />
 
             
 
-             property to specify the horizontal alignment of the data list control within its container. This property is set with one of the <see
-             cref="T:System.Web.UI.WebControls.HorizontalAlign" />
+             property to specify the horizontal alignment of the data list control within its container. This property is set with one of the <see cref="T:System.Web.UI.WebControls.HorizontalAlign" />
 
             
 
@@ -453,51 +435,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.TableItemStyle.MergeWith(System.Web.UI.WebControls.Style)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.TableItemStyle.MergeWith(System.Web.UI.WebControls.Style)" />
 
             
 
-             method to combine the style properties of the specified <see
-             cref="T:System.Web.UI.WebControls.Style" />
+             method to combine the style properties of the specified <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             into the instance of the <see
-             cref="T:System.Web.UI.WebControls.TableItemStyle" />
+             into the instance of the <see cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
             
 
              class that this method is called from.</para
           >
           <para
-            >This method joins the properties of the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >This method joins the properties of the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             object and the current instance of the <see
-             cref="T:System.Web.UI.WebControls.TableItemStyle" />
+             object and the current instance of the <see cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
             
 
-             class. This is accomplished by setting each property that is not set in the current instance of the <see
-             cref="T:System.Web.UI.WebControls.TableItemStyle" />
+             class. This is accomplished by setting each property that is not set in the current instance of the <see cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
             
 
-             class with the value in the corresponding property of the <paramref
-             name="s" />
+             class with the value in the corresponding property of the <paramref name="s" />
 
             
 
-             parameter. Only properties that have not been set are replaced. If a property in the <paramref
-             name="s" />
+             parameter. Only properties that have not been set are replaced. If a property in the <paramref name="s" />
 
             
 
-             parameter is not set, it does not replace the corresponding property in the current instance of the <see
-             cref="T:System.Web.UI.WebControls.TableItemStyle" />
+             parameter is not set, it does not replace the corresponding property in the current instance of the <see cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
             
 
@@ -507,13 +480,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Combines the style properties of the specified <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >Combines the style properties of the specified <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             into the instance of the <see
-             cref="T:System.Web.UI.WebControls.TableItemStyle" />
+             into the instance of the <see cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
             
 
@@ -521,12 +492,15 @@
           >
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.Style" />
+          A <see cref="T:System.Web.UI.WebControls.Style" />
 
           
 
@@ -575,8 +549,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TableItemStyle.VerticalAlign" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TableItemStyle.VerticalAlign" />
 
             
 
@@ -666,8 +639,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TableItemStyle.Wrap" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TableItemStyle.Wrap" />
 
             
 

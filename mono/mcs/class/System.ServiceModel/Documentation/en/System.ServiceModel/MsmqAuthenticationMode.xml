@@ -24,23 +24,19 @@
          property to indicate how a message must be authenticated by the MSMQ transport.</para
       >
       <para
-        >If security is turned off by setting the <see
-         cref="P:System.ServiceModel.MsmqTransportSecurity.MsmqAuthenticationMode" />
+        >If security is turned off by setting the <see cref="P:System.ServiceModel.MsmqTransportSecurity.MsmqAuthenticationMode" />
 
         
 
-         to <see
-         cref="F:System.ServiceModel.MsmqAuthenticationMode.None" />
+         to <see cref="F:System.ServiceModel.MsmqAuthenticationMode.None" />
 
         
 
-        , then the <see
-         cref="P:System.ServiceModel.MsmqTransportSecurity.MsmqProtectionLevel" />
+        , then the <see cref="P:System.ServiceModel.MsmqTransportSecurity.MsmqProtectionLevel" />
 
         
 
-         property must also be set to <see
-         cref="F:System.Net.Security.ProtectionLevel.None" />
+         property must also be set to <see cref="F:System.Net.Security.ProtectionLevel.None" />
 
         
 

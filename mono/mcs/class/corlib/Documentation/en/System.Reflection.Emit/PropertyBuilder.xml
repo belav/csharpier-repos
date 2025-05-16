@@ -75,7 +75,11 @@
           <para>Adds one of the other methods associated with this property.</para>
         </summary>
         <param name="mdBuilder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -217,7 +221,11 @@
           <para>An array of type MethodInfo containing the matching public or non-public accessors, or an empty array if matching accessors do not exist on this property.</para>
         </returns>
         <param name="nonPublic">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -260,7 +268,11 @@
           <para>An array of all the custom attributes.</para>
         </returns>
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -298,8 +310,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of custom attributes identified by <see
-             cref="T:System.Type" />
+            >Returns an array of custom attributes identified by <see cref="T:System.Type" />
 
             
 
@@ -311,14 +322,22 @@
           <para>An array of custom attributes defined on this reflected member, or null if no attributes are defined on this member.</para>
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of custom attributes identified by type. </param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -359,18 +378,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A MethodInfo object representing the get accessor for this property, if <paramref
-             name="nonPublic" />
+            >A MethodInfo object representing the get accessor for this property, if <paramref name="nonPublic" />
 
             
 
-             is true. Returns null if <paramref
-             name="nonPublic" />
+             is true. Returns null if <paramref name="nonPublic" />
 
             
 
-             is false and the get accessor is non-public, or if <paramref
-             name="nonPublic" />
+             is false and the get accessor is non-public, or if <paramref name="nonPublic" />
 
             
 
@@ -378,7 +394,11 @@
           >
         </returns>
         <param name="nonPublic">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -466,8 +486,7 @@
             <item>
               <term>
                 <para
-                  >A <see
-                   cref="T:System.Reflection.MethodInfo" />
+                  >A <see cref="T:System.Reflection.MethodInfo" />
 
                   
 
@@ -509,7 +528,11 @@
           </list>
         </returns>
         <param name="nonPublic">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -553,14 +576,22 @@
           <para>The value of the specified indexed property.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object whose property value will be returned. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -605,8 +636,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The property value for <paramref
-             name="obj" />
+            >The property value for <paramref name="obj" />
 
             
 
@@ -614,40 +644,59 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object whose property value will be returned. </param
         >
         <param name="invokeAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The invocation attribute. This must be a bit flag from BindingFlags : InvokeMethod, CreateInstance, Static, GetField, SetField, GetProperty, or SetProperty. A suitable invocation attribute must be specified. If a static member is to be invoked, the Static flag of BindingFlags must be set. </param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If <paramref
-           name="binder" />
+          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If <paramref name="binder" />
 
           
 
            is null, the default binder is used. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Optional index values for indexed properties. This value should be null for non-indexed properties. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -685,8 +734,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether one or more instance of <paramref
-             name="attributeType" />
+            >Indicates whether one or more instance of <paramref name="attributeType" />
 
             
 
@@ -696,8 +744,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if one or more instance of <paramref
-             name="attributeType" />
+            >true if one or more instance of <paramref name="attributeType" />
 
             
 
@@ -705,14 +752,22 @@
           >
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The Type object to which the custom attributes are applied. </param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -743,18 +798,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is provided as a convenience for the user. It is equivalent to using the <see
-             cref="P:System.Reflection.Emit.PropertyBuilder.DeclaringType" />
+            >This property is provided as a convenience for the user. It is equivalent to using the <see cref="P:System.Reflection.Emit.PropertyBuilder.DeclaringType" />
 
             
 
-             property to get the type in which the property is declared, and then calling the <see
-             cref="P:System.Type.Module" />
+             property to get the type in which the property is declared, and then calling the <see cref="P:System.Type.Module" />
 
             
 
-             property of the resulting <see
-             cref="T:System.Type" />
+             property of the resulting <see cref="T:System.Type" />
 
             
 
@@ -886,18 +938,15 @@
 
             
 
-             is restricted to the following types: Boolean, SByte, Int16, Int32, Int64, Byte, UInt16, UInt32, UInt64, Single, Double, DateTime, Char, String, and Enum. If the property type is a reference type, CLS compliance requires <paramref
-             name="defaultValue" />
+             is restricted to the following types: Boolean, SByte, Int16, Int32, Int64, Byte, UInt16, UInt32, UInt64, Single, Double, DateTime, Char, String, and Enum. If the property type is a reference type, CLS compliance requires <paramref name="defaultValue" />
 
             
 
-             to be null. However, starting with the net_v40_long, <paramref
-             name="defaultValue" />
+             to be null. However, starting with the net_v40_long, <paramref name="defaultValue" />
 
             
 
-             can be non-null for reference types as long as the value can be assigned to that reference type. For example, an Int32 value can be assigned to a property of type <see
-             cref="T:System.Object" />
+             can be non-null for reference types as long as the value can be assigned to that reference type. For example, an Int32 value can be assigned to a property of type <see cref="T:System.Object" />
 
             
 
@@ -909,7 +958,11 @@
           <para>Sets the default value of this property.</para>
         </summary>
         <param name="defaultValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -945,7 +998,11 @@
           <para>Set a custom attribute using a custom attribute builder.</para>
         </summary>
         <param name="customBuilder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -984,20 +1041,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the metadata specification in the ECMA Partition II documentation for details on how to format <paramref
-             name="binaryAttribute" />
+            >See the metadata specification in the ECMA Partition II documentation for details on how to format <paramref name="binaryAttribute" />
 
             
 
             . The Partition II documentation is available online on MSDN (<see
-             cref="http://go.microsoft.com/fwlink/?linkid=65555"
+              cref="http://go.microsoft.com/fwlink/?linkid=65555"
               >ECMA C# and Common Language Infrastructure Standards</see
             >
 
             
 
              Web page) and on the ECMA Web site (<see
-             cref="http://go.microsoft.com/fwlink/?linkid=65552"
+              cref="http://go.microsoft.com/fwlink/?linkid=65552"
               >Standard ECMA-335 Common Language Infrastructure</see
             >
 
@@ -1011,14 +1067,22 @@
           <para>Set a custom attribute using a specified custom attribute blob.</para>
         </summary>
         <param name="con">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The constructor for the custom attribute. </param
         >
         <param name="binaryAttribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1054,7 +1118,11 @@
           <para>Sets the method that gets the property value.</para>
         </summary>
         <param name="mdBuilder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1090,7 +1158,11 @@
           <para>Sets the method that sets the property value.</para>
         </summary>
         <param name="mdBuilder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1125,23 +1197,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To set the value of a property, reflect on the property's parent type using <see
-             cref="Overload:System.Type.GetType" />
+            >To set the value of a property, reflect on the property's parent type using <see cref="Overload:System.Type.GetType" />
 
             
 
-             or <see
-             cref="Overload:System.Reflection.Assembly.GetType" />
+             or <see cref="Overload:System.Reflection.Assembly.GetType" />
 
             
 
-            , retrieve the <see
-             cref="T:System.Reflection.PropertyInfo" />
+            , retrieve the <see cref="T:System.Reflection.PropertyInfo" />
 
             
 
-             object from the type, and call <see
-             cref="Overload:System.Reflection.PropertyInfo.SetValue" />
+             object from the type, and call <see cref="Overload:System.Reflection.PropertyInfo.SetValue" />
 
             
 
@@ -1153,21 +1221,33 @@
           <para>Sets the value of the property with optional index values for index properties.</para>
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object whose property value will be set. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The new value for this property. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1205,23 +1285,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To set the value of a property, reflect on the property's parent type using <see
-             cref="Overload:System.Type.GetType" />
+            >To set the value of a property, reflect on the property's parent type using <see cref="Overload:System.Type.GetType" />
 
             
 
-             or <see
-             cref="Overload:System.Reflection.Assembly.GetType" />
+             or <see cref="Overload:System.Reflection.Assembly.GetType" />
 
             
 
-            , retrieve the <see
-             cref="T:System.Reflection.PropertyInfo" />
+            , retrieve the <see cref="T:System.Reflection.PropertyInfo" />
 
             
 
-             object from the type, and call <see
-             cref="Overload:System.Reflection.PropertyInfo.SetValue" />
+             object from the type, and call <see cref="Overload:System.Reflection.PropertyInfo.SetValue" />
 
             
 
@@ -1233,47 +1309,70 @@
           <para>Sets the property value for the given object to the given value.</para>
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object whose property value will be returned. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The new value for this property. </param
         >
         <param name="invokeAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The invocation attribute. This must be a bit flag from BindingFlags : InvokeMethod, CreateInstance, Static, GetField, SetField, GetProperty, or SetProperty. A suitable invocation attribute must be specified. If a static member is to be invoked, the Static flag of BindingFlags must be set. </param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If <paramref
-           name="binder" />
+          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If <paramref name="binder" />
 
           
 
            is null, the default binder is used. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Optional index values for indexed properties. This value should be null for non-indexed properties. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1343,8 +1442,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference
-            >IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
+            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
 
             
 
@@ -1356,21 +1454,33 @@
           <para>Retrieves the type information for an object, which can then be used to get the type information for an interface.</para>
         </summary>
         <param name="iTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type information to return.</param
         >
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

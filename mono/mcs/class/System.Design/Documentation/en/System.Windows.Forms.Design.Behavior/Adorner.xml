@@ -13,41 +13,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each <see
-         cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+        >Each <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
         
 
-         can be enabled and disabled. Only enabled <see
-         cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+         can be enabled and disabled. Only enabled <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
         
 
-         objects will receive hit test and paint messages from the <see
-         cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+         objects will receive hit test and paint messages from the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
         
 
-        . An <see
-         cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+        . An <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
         
 
-         can be viewed as a proxy between user-interface related elements, which consist of all <see
-         cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+         can be viewed as a proxy between user-interface related elements, which consist of all <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
         
 
-         objects, and the <see
-         cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+         objects, and the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
         
 
         .</para
       >
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="7c60cc41-4324-46b5-b444-b39eda7cb33f">Behavior Service Overview</a>
         </format>
 
@@ -59,8 +52,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Manages a collection of user-interface related <see
-         cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+        >Manages a collection of user-interface related <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
         
 
@@ -80,13 +72,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Design.Behavior.Adorner.#ctor" />
+            >The <see cref="M:System.Windows.Forms.Design.Behavior.Adorner.#ctor" />
 
             
 
-             constructor creates a new <see
-             cref="T:System.Windows.Forms.Design.Behavior.GlyphCollection" />
+             constructor creates a new <see cref="T:System.Windows.Forms.Design.Behavior.GlyphCollection" />
 
             
 
@@ -96,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
             
 
@@ -123,28 +112,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When an <see
-             cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+            >When an <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
             
 
-             is added to the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+             is added to the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
             
 
-             of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+             of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
-            , the collection sets this property so that the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+            , the collection sets this property so that the <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
             
 
-             can call back to the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+             can call back to the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -154,13 +138,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >Gets or sets the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
-             associated with the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+             associated with the <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
             
 
@@ -183,18 +165,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Windows.Forms.Design.Behavior.Adorner.Enabled" />
+            >If the <see cref="P:System.Windows.Forms.Design.Behavior.Adorner.Enabled" />
 
             
 
-             property is true, the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+             property is true, the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
-             class will send HitTest and Paint messages to the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+             class will send HitTest and Paint messages to the <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
             
 
@@ -204,8 +183,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating if the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+            >Gets or sets a value indicating if the <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
             
 
@@ -232,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+            >Gets the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
@@ -257,8 +234,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Forces the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >Forces the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -287,13 +263,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Forces the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >Forces the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
-             to refresh its adorner window within the given <see
-             cref="T:System.Drawing.Rectangle" />
+             to refresh its adorner window within the given <see cref="T:System.Drawing.Rectangle" />
 
             
 
@@ -301,7 +275,11 @@
           >
         </summary>
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -329,13 +307,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Forces the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >Forces the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
-             to refresh its adorner window within the given <see
-             cref="T:System.Drawing.Region" />
+             to refresh its adorner window within the given <see cref="T:System.Drawing.Region" />
 
             
 
@@ -343,12 +319,15 @@
           >
         </summary>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Region" />
+          The <see cref="T:System.Drawing.Region" />
 
           
 

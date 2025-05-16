@@ -31,8 +31,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Util.Transactions" />
+            >Initializes a new instance of the <see cref="T:System.Web.Util.Transactions" />
 
             
 
@@ -65,24 +64,30 @@
           <para>Wraps a specified transaction support around a callback method.</para>
         </summary>
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Util.TransactedCallback" />
+          The <see cref="T:System.Web.Util.TransactedCallback" />
 
           
 
            to be run under the specified transaction support.</param
         >
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.EnterpriseServices.TransactionOption" />
+          The <see cref="T:System.EnterpriseServices.TransactionOption" />
 
           
 

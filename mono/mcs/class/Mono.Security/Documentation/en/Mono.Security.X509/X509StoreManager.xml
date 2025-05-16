@@ -8,7 +8,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -35,10 +37,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:Mono.Security.X509.X509Stores" />
-        </value>
+        <value>a <see cref="T:Mono.Security.X509.X509Stores" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -58,10 +57,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:Mono.Security.X509.X509CertificateCollection" />
-        </value>
+        <value>a <see cref="T:Mono.Security.X509.X509CertificateCollection" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -81,10 +77,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.Collections.ArrayList" />
-        </value>
+        <value>a <see cref="T:System.Collections.ArrayList" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -104,10 +97,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:Mono.Security.X509.X509Stores" />
-        </value>
+        <value>a <see cref="T:Mono.Security.X509.X509Stores" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -127,10 +117,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.Collections.ArrayList" />
-        </value>
+        <value>a <see cref="T:System.Collections.ArrayList" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -150,10 +137,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:Mono.Security.X509.X509CertificateCollection" />
-        </value>
+        <value>a <see cref="T:Mono.Security.X509.X509CertificateCollection" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -173,10 +157,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:Mono.Security.X509.X509CertificateCollection" />
-        </value>
+        <value>a <see cref="T:Mono.Security.X509.X509CertificateCollection" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>

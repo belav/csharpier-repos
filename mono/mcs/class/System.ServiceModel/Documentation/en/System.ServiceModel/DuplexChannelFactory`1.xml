@@ -30,30 +30,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A duplex channel allows clients and servers to communicate with each other independently so that either can initiate calls to the other. A duplex service can send messages to the client endpoint, providing event-like behavior. Duplex communication occurs when a client establishes a session with a service and provides the service with a channel on which the service can send messages back to the client. The various <see
-         cref="Overload:System.ServiceModel.DuplexChannelFactory`1.CreateChannel" />
+        >A duplex channel allows clients and servers to communicate with each other independently so that either can initiate calls to the other. A duplex service can send messages to the client endpoint, providing event-like behavior. Duplex communication occurs when a client establishes a session with a service and provides the service with a channel on which the service can send messages back to the client. The various <see cref="Overload:System.ServiceModel.DuplexChannelFactory`1.CreateChannel" />
 
         
 
          methods are used to create these duplex channels. The duplex message pattern is one of three message patterns available to indigo1 services. The other two message patterns are one-way and request-reply.</para
       >
       <para
-        >For a general discussion of duplex services that allow clients to connect back to the service, see <format
-         type="text/html">
+        >For a general discussion of duplex services that allow clients to connect back to the service, see <format type="text/html">
           <a href="396b875a-d203-4ebe-a3a1-6a330d962e95">Duplex Services</a>
         </format>
 
         
 
-        . For an outline and discussion of the steps involved in writing a indigo1 client application using a channel factory, see <format
-         type="text/html">
+        . For an outline and discussion of the steps involved in writing a indigo1 client application using a channel factory, see <format type="text/html">
           <a href="d48f01b5-582b-4c8b-b547-8adddae7e371">How to: Use the ChannelFactory</a>
         </format>
 
         
 
-        . For a procedure describing how to create a indigo1 client in a client class that implements the callback interface to access a service that uses a duplex messaging pattern, see <format
-         type="text/html">
+        . For a procedure describing how to create a indigo1 client in a client class that implements the callback interface to access a service that uses a duplex messaging pattern, see <format type="text/html">
           <a href="746a9d64-f21c-426c-b85d-972e916ec6c5"
             >How to: Access Services with a Duplex Contract</a
           >
@@ -95,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexChannelFactory`1" />
 
             
 
@@ -126,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexChannelFactory`1" />
 
             
 
@@ -135,12 +129,15 @@
           >
         </summary>
         <param name="callbackInstance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.InstanceContext" />
+          The <see cref="T:System.ServiceModel.InstanceContext" />
 
           
 
@@ -169,8 +166,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexChannelFactory`1" />
 
             
 
@@ -178,12 +174,15 @@
           >
         </summary>
         <param name="callbackInstanceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -217,8 +216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexChannelFactory`1" />
 
             
 
@@ -226,12 +224,15 @@
           >
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
@@ -265,8 +266,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexChannelFactory`1" />
 
             
 
@@ -274,12 +274,15 @@
           >
         </summary>
         <param name="endpoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+          The <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
           
 
@@ -313,8 +316,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexChannelFactory`1" />
 
             
 
@@ -322,7 +324,11 @@
           >
         </summary>
         <param name="endpointConfigurationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -355,8 +361,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexChannelFactory`1" />
 
             
 
@@ -364,24 +369,30 @@
           >
         </summary>
         <param name="callbackInstance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.InstanceContext" />
+          The <see cref="T:System.ServiceModel.InstanceContext" />
 
           
 
            that the client uses to listen for messages from the connected service.</param
         >
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
@@ -414,8 +425,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexChannelFactory`1" />
 
             
 
@@ -423,24 +433,30 @@
           >
         </summary>
         <param name="callbackInstance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.InstanceContext" />
+          The <see cref="T:System.ServiceModel.InstanceContext" />
 
           
 
            that the client uses to listen for messages from the connected service.</param
         >
         <param name="endpoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+          The <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
           
 
@@ -473,8 +489,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexChannelFactory`1" />
 
             
 
@@ -482,19 +497,26 @@
           >
         </summary>
         <param name="callbackInstance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.InstanceContext" />
+          The <see cref="T:System.ServiceModel.InstanceContext" />
 
           
 
            that the client uses to listen for messages from the connected service.</param
         >
         <param name="endpointConfigurationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -524,8 +546,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexChannelFactory`1" />
 
             
 
@@ -533,24 +554,30 @@
           >
         </summary>
         <param name="callbackInstanceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            that provides the callback instance that the client uses to listen for messages from the connected service.</param
         >
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
@@ -580,8 +607,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexChannelFactory`1" />
 
             
 
@@ -589,24 +615,30 @@
           >
         </summary>
         <param name="callbackInstanceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            that provides the callback instance that the client uses to listen for messages from the connected service.</param
         >
         <param name="endpoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+          The <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
           
 
@@ -636,8 +668,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexChannelFactory`1" />
 
             
 
@@ -645,19 +676,26 @@
           >
         </summary>
         <param name="callbackInstanceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            that provides the callback instance that the client uses to listen for messages from the connected service.</param
         >
         <param name="endpointConfigurationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -692,8 +730,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexChannelFactory`1" />
 
             
 
@@ -701,24 +738,30 @@
           >
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
            used to connect to the service by channels produced by the factory.</param
         >
         <param name="remoteAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          The <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
@@ -750,8 +793,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexChannelFactory`1" />
 
             
 
@@ -759,19 +801,26 @@
           >
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
            used to connect to the service by channels produced by the factory.</param
         >
         <param name="remoteAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -806,8 +855,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexChannelFactory`1" />
 
             
 
@@ -815,19 +863,26 @@
           >
         </summary>
         <param name="endpointConfigurationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name used for the endpoint configuration.</param
         >
         <param name="remoteAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          The <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
@@ -861,8 +916,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexChannelFactory`1" />
 
             
 
@@ -870,36 +924,45 @@
           >
         </summary>
         <param name="callbackInstance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.InstanceContext" />
+          The <see cref="T:System.ServiceModel.InstanceContext" />
 
           
 
            that the client uses to listen for messages from the connected service.</param
         >
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
            used to connect to the service by channels produced by the factory.</param
         >
         <param name="remoteAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          The <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
@@ -930,8 +993,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexChannelFactory`1" />
 
             
 
@@ -939,31 +1001,41 @@
           >
         </summary>
         <param name="callbackInstance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.InstanceContext" />
+          The <see cref="T:System.ServiceModel.InstanceContext" />
 
           
 
            that the client uses to listen for messages from the connected service.</param
         >
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
            used to connect to the service by channels produced by the factory.</param
         >
         <param name="remoteAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -997,8 +1069,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexChannelFactory`1" />
 
             
 
@@ -1006,31 +1077,41 @@
           >
         </summary>
         <param name="callbackInstance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.InstanceContext" />
+          The <see cref="T:System.ServiceModel.InstanceContext" />
 
           
 
            that the client uses to listen for messages from the connected service.</param
         >
         <param name="endpointConfigurationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name used for the endpoint configuration.</param
         >
         <param name="remoteAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          The <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
@@ -1061,8 +1142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexChannelFactory`1" />
 
             
 
@@ -1070,36 +1150,45 @@
           >
         </summary>
         <param name="callbackInstanceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            that provides the callback instance that the client uses to listen for messages from the connected service.</param
         >
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
            used to connect to the service by channels produced by the factory.</param
         >
         <param name="remoteAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          The <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
@@ -1130,8 +1219,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexChannelFactory`1" />
 
             
 
@@ -1139,31 +1227,41 @@
           >
         </summary>
         <param name="callbackInstanceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            that provides the callback instance that the client uses to listen for messages from the connected service.</param
         >
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
            used to connect to the service by channels produced by the factory.</param
         >
         <param name="remoteAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1194,8 +1292,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexChannelFactory`1" />
 
             
 
@@ -1203,31 +1300,41 @@
           >
         </summary>
         <param name="callbackInstanceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            that provides the callback instance that the client uses to listen for messages from the connected service.</param
         >
         <param name="endpointConfigurationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name used for the endpoint configuration.</param
         >
         <param name="remoteAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          The <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
@@ -1263,8 +1370,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A duplex channel of type <paramref
-             name="TChannel" />
+            >A duplex channel of type <paramref name="TChannel" />
 
             
 
@@ -1272,12 +1378,15 @@
           >
         </returns>
         <param name="callbackInstance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.InstanceContext" />
+          The <see cref="T:System.ServiceModel.InstanceContext" />
 
           
 
@@ -1314,8 +1423,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A channel of type <paramref
-             name="TChannel" />
+            >A channel of type <paramref name="TChannel" />
 
             
 
@@ -1323,19 +1431,26 @@
           >
         </returns>
         <param name="callbackObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
            that the client uses to listen for messages from the connected service.</param
         >
         <param name="endpointConfigurationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1372,8 +1487,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A duplex channel of type <paramref
-             name="TChannel" />
+            >A duplex channel of type <paramref name="TChannel" />
 
             
 
@@ -1381,24 +1495,30 @@
           >
         </returns>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          The <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
            that provides the location of the service.</param
         >
         <param name="via">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
@@ -1435,8 +1555,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A duplex channel of type <paramref
-             name="TChannel" />
+            >A duplex channel of type <paramref name="TChannel" />
 
             
 
@@ -1444,24 +1563,30 @@
           >
         </returns>
         <param name="callbackInstance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.InstanceContext" />
+          The <see cref="T:System.ServiceModel.InstanceContext" />
 
           
 
            that the client uses to listen for messages from the connected service.</param
         >
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          The <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
@@ -1498,8 +1623,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A channel of type <paramref
-             name="TChannel" />
+            >A channel of type <paramref name="TChannel" />
 
             
 
@@ -1507,19 +1631,26 @@
           >
         </returns>
         <param name="callbackInstance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.InstanceContext" />
+          The <see cref="T:System.ServiceModel.InstanceContext" />
 
           
 
            that the client uses to listen for messages from the connected service.</param
         >
         <param name="endpointConfigurationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1557,8 +1688,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A channel of type <paramref
-             name="TChannel" />
+            >A channel of type <paramref name="TChannel" />
 
             
 
@@ -1566,36 +1696,45 @@
           >
         </returns>
         <param name="callbackObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
            that the client uses to listen for messages from the connected service.</param
         >
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
            used to connect to the service by channels produced by the factory.</param
         >
         <param name="endpointAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          The <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
@@ -1633,8 +1772,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A channel of type <paramref
-             name="TChannel" />
+            >A channel of type <paramref name="TChannel" />
 
             
 
@@ -1642,36 +1780,45 @@
           >
         </returns>
         <param name="callbackInstance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.InstanceContext" />
+          The <see cref="T:System.ServiceModel.InstanceContext" />
 
           
 
            that the client uses to listen for messages from the connected service.</param
         >
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
            used to connect to the service by channels produced by the factory.</param
         >
         <param name="endpointAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          The <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
@@ -1709,8 +1856,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A channel of type <paramref
-             name="TChannel" />
+            >A channel of type <paramref name="TChannel" />
 
             
 
@@ -1718,36 +1864,45 @@
           >
         </returns>
         <param name="callbackInstance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.InstanceContext" />
+          The <see cref="T:System.ServiceModel.InstanceContext" />
 
           
 
            that the client uses to listen for messages from the connected service.</param
         >
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          The <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
            that provides the location of the service.</param
         >
         <param name="via">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
@@ -1786,8 +1941,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A channel of type <paramref
-             name="TChannel" />
+            >A channel of type <paramref name="TChannel" />
 
             
 
@@ -1795,48 +1949,60 @@
           >
         </returns>
         <param name="callbackObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
            that the client uses to listen for messages from the connected service.</param
         >
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
            used to connect to the service by channels produced by the factory.</param
         >
         <param name="endpointAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          The <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
            that provides the location of the service.</param
         >
         <param name="via">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
@@ -1875,8 +2041,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A channel of type <paramref
-             name="TChannel" />
+            >A channel of type <paramref name="TChannel" />
 
             
 
@@ -1884,48 +2049,60 @@
           >
         </returns>
         <param name="callbackInstance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.InstanceContext" />
+          The <see cref="T:System.ServiceModel.InstanceContext" />
 
           
 
            that the client uses to listen for messages from the connected service.</param
         >
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
            used to connect to the service by channels produced by the factory.</param
         >
         <param name="endpointAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          The <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
            that provides the location of the service.</param
         >
         <param name="via">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 

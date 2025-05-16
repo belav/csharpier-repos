@@ -32,41 +32,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.DataGridViewTextBoxEditingControl" />
+        >The <see cref="T:System.Windows.Forms.DataGridViewTextBoxEditingControl" />
 
         
 
-         class is a specialized type of <see
-         cref="T:System.Windows.Forms.TextBox" />
+         class is a specialized type of <see cref="T:System.Windows.Forms.TextBox" />
 
         
 
-         control that implements the <see
-         cref="T:System.Windows.Forms.IDataGridViewEditingControl" />
+         control that implements the <see cref="T:System.Windows.Forms.IDataGridViewEditingControl" />
 
         
 
-         interface, allowing it to be hosted in a <see
-         cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
+         interface, allowing it to be hosted in a <see cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
 
         
 
          when the cell is in edit mode. </para
       >
       <para
-        >Handle the <see
-         cref="E:System.Windows.Forms.DataGridView.EditingControlShowing" />
+        >Handle the <see cref="E:System.Windows.Forms.DataGridView.EditingControlShowing" />
 
         
 
-         event to perform custom initialization of the editing control when a cell enters edit mode. To customize the display characteristics of the control, set the properties of the object returned by the <see
-         cref="P:System.Windows.Forms.DataGridViewEditingControlShowingEventArgs.CellStyle" />
+         event to perform custom initialization of the editing control when a cell enters edit mode. To customize the display characteristics of the control, set the properties of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewEditingControlShowingEventArgs.CellStyle" />
 
         
 
-         property rather than setting the properties of the control returned by the <see
-         cref="P:System.Windows.Forms.DataGridViewEditingControlShowingEventArgs.Control" />
+         property rather than setting the properties of the control returned by the <see cref="P:System.Windows.Forms.DataGridViewEditingControlShowingEventArgs.Control" />
 
         
 
@@ -76,8 +69,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a text box control that can be hosted in a <see
-         cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
+        >Represents a text box control that can be hosted in a <see cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
 
         
 
@@ -95,21 +87,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This default constructor sets the <see
-             cref="P:System.Windows.Forms.Control.TabStop" />
+            >This default constructor sets the <see cref="P:System.Windows.Forms.Control.TabStop" />
 
             
 
              property to false. </para
           >
           <para
-            >Application code typically won't explicitly create instances of this class, because this is performed automatically when the containing <see
-             cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
+            >Application code typically won't explicitly create instances of this class, because this is performed automatically when the containing <see cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
 
             
 
-             or <see
-             cref="T:System.Windows.Forms.DataGridViewTextBoxColumn" />
+             or <see cref="T:System.Windows.Forms.DataGridViewTextBoxColumn" />
 
             
 
@@ -119,8 +108,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewTextBoxEditingControl" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewTextBoxEditingControl" />
 
             
 
@@ -152,12 +140,15 @@
           <para>Changes the control's user interface (UI) to be consistent with the specified cell style.</para>
         </summary>
         <param name="dataGridViewCellStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+          The <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
           
 
@@ -183,23 +174,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is automatically set when a <see
-             cref="T:System.Windows.Forms.DataGridViewTextBoxColumn" />
+            >This property is automatically set when a <see cref="T:System.Windows.Forms.DataGridViewTextBoxColumn" />
 
             
 
-             or <see
-             cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
+             or <see cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
 
             
 
-             is created within a <see
-             cref="T:System.Windows.Forms.DataGridView" />
+             is created within a <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
-             or added to a <see
-             cref="T:System.Windows.Forms.DataGridView" />
+             or added to a <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
@@ -209,8 +196,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >Gets or sets the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
@@ -237,13 +223,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.TextBox.Text" />
+            >The <see cref="P:System.Windows.Forms.TextBox.Text" />
 
             
 
-             property contains the actual data contained by the control. The data is the string shown in the text box of the control. In contrast, the <see
-             cref="P:System.Windows.Forms.IDataGridViewEditingControl.EditingControlFormattedValue" />
+             property contains the actual data contained by the control. The data is the string shown in the text box of the control. In contrast, the <see cref="P:System.Windows.Forms.IDataGridViewEditingControl.EditingControlFormattedValue" />
 
             
 
@@ -300,8 +284,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.DataGridViewTextBoxEditingControl.EditingControlValueChanged" />
+            >The <see cref="P:System.Windows.Forms.DataGridViewTextBoxEditingControl.EditingControlValueChanged" />
 
             
 
@@ -337,8 +320,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified key is a regular input key that the editing control should process or a special key that the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >Determines whether the specified key is a regular input key that the editing control should process or a special key that the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
@@ -350,29 +332,34 @@
           <para>true if the specified key is a regular input key that should be handled by the editing control; otherwise, false.</para>
         </returns>
         <param name="keyData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Keys" />
+          A <see cref="T:System.Windows.Forms.Keys" />
 
           
 
            that represents the key that was pressed.</param
         >
         <param name="dataGridViewWantsInputKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true when the <see
-           cref="T:System.Windows.Forms.DataGridView" />
+          true when the <see cref="T:System.Windows.Forms.DataGridView" />
 
           
 
-           wants to process the <paramref
-           name="keyData" />
+           wants to process the <paramref name="keyData" />
 
           
 
@@ -399,8 +386,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the cursor used when the mouse pointer is over the <see
-             cref="P:System.Windows.Forms.DataGridView.EditingPanel" />
+            >Gets the cursor used when the mouse pointer is over the <see cref="P:System.Windows.Forms.DataGridView.EditingPanel" />
 
             
 
@@ -434,8 +420,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -443,12 +428,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.DataGridViewDataErrorContexts" />
+          One of the <see cref="T:System.Windows.Forms.DataGridViewDataErrorContexts" />
 
           
 
@@ -496,13 +484,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.TextChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.TextChanged" />
 
             
 
-             event and notifies the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+             event and notifies the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
@@ -510,7 +496,11 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -541,7 +531,11 @@
           <para>Prepares the currently selected cell for editing.</para>
         </summary>
         <param name="selectAll">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

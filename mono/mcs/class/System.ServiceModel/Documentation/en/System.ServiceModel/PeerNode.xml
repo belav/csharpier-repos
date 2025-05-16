@@ -24,39 +24,33 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A peer node can host multiple peer channels within the mesh as long as they share a common URI and host name in the <see
-         cref="T:System.ServiceModel.EndpointAddress" />
+        >A peer node can host multiple peer channels within the mesh as long as they share a common URI and host name in the <see cref="T:System.ServiceModel.EndpointAddress" />
 
         
 
          supplied to the binding for each channel.</para
       >
       <para
-        >If two or more peer channels defined for a peer node are created with separate bindings, then the <see
-         cref="P:System.ServiceModel.NetPeerTcpBinding.Port" />
+        >If two or more peer channels defined for a peer node are created with separate bindings, then the <see cref="P:System.ServiceModel.NetPeerTcpBinding.Port" />
 
         
 
-        , <see
-         cref="P:System.ServiceModel.NetPeerTcpBinding.ListenIPAddress" />
+        , <see cref="P:System.ServiceModel.NetPeerTcpBinding.ListenIPAddress" />
 
         
 
-        , and <see
-         cref="P:System.ServiceModel.NetPeerTcpBinding.Resolver" />
+        , and <see cref="P:System.ServiceModel.NetPeerTcpBinding.Resolver" />
 
         
 
          properties must be identical on all bindings.</para
       >
       <para
-        >If a subsequent channel binding is created after the first one for the same peer node instance, then the <see
-         cref="P:System.ServiceModel.NetPeerTcpBinding.MaxReceivedMessageSize" />
+        >If a subsequent channel binding is created after the first one for the same peer node instance, then the <see cref="P:System.ServiceModel.NetPeerTcpBinding.MaxReceivedMessageSize" />
 
         
 
-         property on this and subsequent bindings must be less than or equal to the value of <see
-         cref="P:System.ServiceModel.NetPeerTcpBinding.MaxReceivedMessageSize" />
+         property on this and subsequent bindings must be less than or equal to the value of <see cref="P:System.ServiceModel.NetPeerTcpBinding.MaxReceivedMessageSize" />
 
         
 

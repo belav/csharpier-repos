@@ -24,18 +24,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.WSHttpBindingBase" />
+        >The <see cref="T:System.ServiceModel.WSHttpBindingBase" />
 
         
 
-         provides some basic functionality for the bindings used to configure secure, reliable, and interoperable Web services, such as that implemented by the <see
-         cref="T:System.ServiceModel.WSHttpBinding" />
+         provides some basic functionality for the bindings used to configure secure, reliable, and interoperable Web services, such as that implemented by the <see cref="T:System.ServiceModel.WSHttpBinding" />
 
         
 
-         for non-duplex service contracts, and more particularly, for the secure and interoperable <see
-         cref="T:System.ServiceModel.WSFederationHttpBinding" />
+         for non-duplex service contracts, and more particularly, for the secure and interoperable <see cref="T:System.ServiceModel.WSFederationHttpBinding" />
 
         
 
@@ -43,8 +40,7 @@
       >
       <para>By default it generates a run-time stack that uses WS-Security for message security and authentication, HTTP for message delivery, and a Text/XML message encoding. It can be configured to also use WS-ReliableMessaging for reliability.</para>
       <para
-        >The use of WS-ReliableMessaging is configurable using the optional <paramref
-         name="reliableSessionEnabled" />
+        >The use of WS-ReliableMessaging is configurable using the optional <paramref name="reliableSessionEnabled" />
 
         
 
@@ -54,13 +50,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the base class with members common to the <see
-         cref="T:System.ServiceModel.WSHttpBinding" />
+        >Provides the base class with members common to the <see cref="T:System.ServiceModel.WSHttpBinding" />
 
         
 
-         and the <see
-         cref="T:System.ServiceModel.WSFederationHttpBinding" />
+         and the <see cref="T:System.ServiceModel.WSFederationHttpBinding" />
 
         
 
@@ -85,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.WSHttpBindingBase" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.WSHttpBindingBase" />
 
             
 
@@ -116,8 +109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.WSHttpBindingBase" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.WSHttpBindingBase" />
 
             
 
@@ -125,7 +117,11 @@
           >
         </summary>
         <param name="reliableSessionEnabled">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -149,26 +145,22 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An Internet resource is local if it has a local address. A local address is one that is on same computer, the local LAN or intranet and is identified, syntactically, by the lack of a period (.) as in the URIs "http://webserver/" and "http://localhost/".</para>
           <para
-            >Setting the <see
-             cref="P:System.ServiceModel.WSHttpBindingBase.BypassProxyOnLocal" />
+            >Setting the <see cref="P:System.ServiceModel.WSHttpBindingBase.BypassProxyOnLocal" />
 
             
 
-             property determines whether endpoints configured with the <see
-             cref="T:System.ServiceModel.WSHttpBindingBase" />
+             property determines whether endpoints configured with the <see cref="T:System.ServiceModel.WSHttpBindingBase" />
 
             
 
              use the proxy server when accessing local resources.</para
           >
           <para
-            >If <see
-             cref="P:System.ServiceModel.WSHttpBindingBase.BypassProxyOnLocal" />
+            >If <see cref="P:System.ServiceModel.WSHttpBindingBase.BypassProxyOnLocal" />
 
             
 
-             is true, requests to local Internet resources do not use the proxy server. When <see
-             cref="P:System.ServiceModel.WSHttpBindingBase.BypassProxyOnLocal" />
+             is true, requests to local Internet resources do not use the proxy server. When <see cref="P:System.ServiceModel.WSHttpBindingBase.BypassProxyOnLocal" />
 
             
 
@@ -210,13 +202,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Channels.BindingElementCollection" />
+            >A <see cref="T:System.ServiceModel.Channels.BindingElementCollection" />
 
             
 
-             that contains the <see
-             cref="T:System.ServiceModel.Channels.BindingElement" />
+             that contains the <see cref="T:System.ServiceModel.Channels.BindingElement" />
 
             
 
@@ -247,8 +237,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When implemented in a derived class, returns the <see
-             cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+            >When implemented in a derived class, returns the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
 
             
 
@@ -258,8 +247,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+            >A <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
 
             
 
@@ -319,8 +307,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.TransportBindingElement" />
+            >The <see cref="T:System.ServiceModel.Channels.TransportBindingElement" />
 
             
 
@@ -369,18 +356,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.BufferManager" />
+            >The <see cref="T:System.ServiceModel.Channels.BufferManager" />
 
             
 
-             tries to minimize the cost of using buffers with a buffer pool. Buffers are required to process messages by the service when they come out of the channel. If there is not sufficient memory in the buffer pool to process the message load, the <see
-             cref="T:System.ServiceModel.Channels.BufferManager" />
+             tries to minimize the cost of using buffers with a buffer pool. Buffers are required to process messages by the service when they come out of the channel. If there is not sufficient memory in the buffer pool to process the message load, the <see cref="T:System.ServiceModel.Channels.BufferManager" />
 
             
 
-             must allocate additional memory from the CLR heap, which increases the garbage collection overhead. Extensive allocation from the CLR garbage heap is an indication that the buffer pool size is too small and that performance can be improved with a larger allocation by increasing the <see
-             cref="P:System.ServiceModel.WSHttpBindingBase.MaxBufferPoolSize" />
+             must allocate additional memory from the CLR heap, which increases the garbage collection overhead. Extensive allocation from the CLR garbage heap is an indication that the buffer pool size is too small and that performance can be improved with a larger allocation by increasing the <see cref="P:System.ServiceModel.WSHttpBindingBase.MaxBufferPoolSize" />
 
             
 
@@ -408,8 +392,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The size of the messages that can be received on the wire by services using the <see
-             cref="T:System.ServiceModel.WSHttpBindingBase" />
+            >The size of the messages that can be received on the wire by services using the <see cref="T:System.ServiceModel.WSHttpBindingBase" />
 
             
 
@@ -462,13 +445,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.ServiceModel.WsHttpBindingBase.UseDefaultWebProxy" />
+            >If the <see cref="P:System.ServiceModel.WsHttpBindingBase.UseDefaultWebProxy" />
 
             
 
-             is set to true, the value of <see
-             cref="P:System.ServiceModel.WSHttpBindingBase.ProxyAddress" />
+             is set to true, the value of <see cref="P:System.ServiceModel.WSHttpBindingBase.ProxyAddress" />
 
             
 
@@ -530,8 +511,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reliable sessions are enabled with the <see
-             cref="M:System.ServiceModel.WSHttpBindingBase.#ctor(System.Boolean)" />
+            >Reliable sessions are enabled with the <see cref="M:System.ServiceModel.WSHttpBindingBase.#ctor(System.Boolean)" />
 
             
 
@@ -647,8 +627,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >It is an error for this to be true and <see
-             cref="P:System.ServiceModel.WSHttpBindingBase.ProxyAddress" />
+            >It is an error for this to be true and <see cref="P:System.ServiceModel.WSHttpBindingBase.ProxyAddress" />
 
             
 

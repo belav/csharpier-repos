@@ -62,8 +62,7 @@ in the framework.</remarks>
 
                 
 
-                 was <see
-                 langword="null" />
+                 was <see langword="null" />
 
                 
 
@@ -76,8 +75,7 @@ in the framework.</remarks>
 
                 
 
-                 was <see
-                 langword="null" />
+                 was <see langword="null" />
 
                 
 
@@ -90,8 +88,7 @@ in the framework.</remarks>
 
                 
 
-                 was <see
-                 langword="null" />
+                 was <see langword="null" />
 
                 
 
@@ -100,8 +97,7 @@ in the framework.</remarks>
             </item>
           </list>
         </exception>
-        <exception cref="T:System.InvalidOperationException"
-          >
+        <exception cref="T:System.InvalidOperationException">
 	    Specified section path doesn't refer to a valid configuration section.
 	</exception
         >
@@ -138,8 +134,7 @@ in the framework.</remarks>
         <param name="useMachineStore"
           >If true, attempt to look up container in the global (machine) key store.</param
         >
-        <exception cref="T:System.InvalidOperationException"
-          >
+        <exception cref="T:System.InvalidOperationException">
 	    Specified section path doesn't refer to a valid configuration section or code failed to encrypt the section.
 	</exception
         >

@@ -44,39 +44,33 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.HiddenField" />
+        >The <see cref="T:System.Web.UI.WebControls.HiddenField" />
 
         
 
          control is used to store a value that needs to be persisted across posts to the server. It is rendered as an &lt;input type= "hidden"/&gt; element.</para
       >
       <para
-        >Normally view state, session state, and cookies are used to maintain the state of a Web Forms page. However, if these methods are disabled or are not available, you can use the <see
-         cref="T:System.Web.UI.WebControls.HiddenField" />
+        >Normally view state, session state, and cookies are used to maintain the state of a Web Forms page. However, if these methods are disabled or are not available, you can use the <see cref="T:System.Web.UI.WebControls.HiddenField" />
 
         
 
          control to store state values.</para
       >
       <para
-        >To specify the value for a <see
-         cref="T:System.Web.UI.WebControls.HiddenField" />
+        >To specify the value for a <see cref="T:System.Web.UI.WebControls.HiddenField" />
 
         
 
-         control, use the <see
-         cref="P:System.Web.UI.WebControls.HiddenField.Value" />
+         control, use the <see cref="P:System.Web.UI.WebControls.HiddenField.Value" />
 
         
 
-         property. You can provide a routine that gets called every time the value of the <see
-         cref="T:System.Web.UI.WebControls.HiddenField" />
+         property. You can provide a routine that gets called every time the value of the <see cref="T:System.Web.UI.WebControls.HiddenField" />
 
         
 
-         control changes between posts to the server by creating an event handler for the <see
-         cref="E:System.Web.UI.WebControls.HiddenField.ValueChanged" />
+         control changes between posts to the server by creating an event handler for the <see cref="E:System.Web.UI.WebControls.HiddenField.ValueChanged" />
 
         
 
@@ -90,14 +84,12 @@
       </format>
       <code
         >&lt;asp:HiddenField
-    EnableTheming="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    EnableTheming="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -113,8 +105,7 @@
     runat="server"
     SkinID="string"
     Value="string"
-    Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -137,8 +128,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create a new instance of a <see
-             cref="T:System.Web.UI.WebControls.HiddenField" />
+            >Use this constructor to create a new instance of a <see cref="T:System.Web.UI.WebControls.HiddenField" />
 
             
 
@@ -148,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.HiddenField" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.HiddenField" />
 
             
 
@@ -176,18 +165,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Control.CreateControlCollection" />
+            >The <see cref="M:System.Web.UI.Control.CreateControlCollection" />
 
             
 
-             method is normally used to create a <see
-             cref="T:System.Web.UI.ControlCollection" />
+             method is normally used to create a <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
-             object for storing the child controls of a Web Server control. In this implementation of the method, an <see
-             cref="T:System.Web.UI.EmptyControlCollection" />
+             object for storing the child controls of a Web Server control. In this implementation of the method, an <see cref="T:System.Web.UI.EmptyControlCollection" />
 
             
 
@@ -197,8 +183,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Web.UI.EmptyControlCollection" />
+            >Creates an <see cref="T:System.Web.UI.EmptyControlCollection" />
 
             
 
@@ -208,8 +193,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Always returns an <see
-             cref="T:System.Web.UI.EmptyControlCollection" />
+            >Always returns an <see cref="T:System.Web.UI.EmptyControlCollection" />
 
             
 
@@ -233,13 +217,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.HiddenField" />
+            >The <see cref="T:System.Web.UI.WebControls.HiddenField" />
 
             
 
-             control does not support themes. This property has been overridden to always return false. If you attempt to set this property, a <see
-             cref="T:System.NotSupportedException" />
+             control does not support themes. This property has been overridden to always return false. If you attempt to set this property, a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -267,13 +249,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting focus to a <see
-             cref="T:System.Web.UI.WebControls.HiddenField" />
+            >Setting focus to a <see cref="T:System.Web.UI.WebControls.HiddenField" />
 
             
 
-             control is not supported. A <see
-             cref="T:System.NotSupportedException" />
+             control is not supported. A <see cref="T:System.NotSupportedException" />
 
             
 
@@ -310,8 +290,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Web Forms page framework tracks all the server controls that return true to this method call, then invokes the <see
-             cref="M:System.Web.UI.WebControls.HiddenField.RaisePostDataChangedEvent" />
+            >The Web Forms page framework tracks all the server controls that return true to this method call, then invokes the <see cref="M:System.Web.UI.WebControls.HiddenField.RaisePostDataChangedEvent" />
 
             
 
@@ -321,8 +300,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Processes postback data for a <see
-             cref="T:System.Web.UI.WebControls.HiddenField" />
+            >Processes postback data for a <see cref="T:System.Web.UI.WebControls.HiddenField" />
 
             
 
@@ -332,8 +310,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Web.UI.WebControls.HiddenField" />
+            >true if the <see cref="T:System.Web.UI.WebControls.HiddenField" />
 
             
 
@@ -341,14 +318,22 @@
           >
         </returns>
         <param name="postDataKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key identifier for the control.</param
         >
         <param name="postCollection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -376,8 +361,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.PreRender" />
+            >Raises the <see cref="E:System.Web.UI.Control.PreRender" />
 
             
 
@@ -385,12 +369,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -412,21 +399,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.HiddenField.ValueChanged" />
+            >The <see cref="E:System.Web.UI.WebControls.HiddenField.ValueChanged" />
 
             
 
-             event is raised when the value of the <see
-             cref="T:System.Web.UI.WebControls.HiddenField" />
+             event is raised when the value of the <see cref="T:System.Web.UI.WebControls.HiddenField" />
 
             
 
              control changes between posts to the server. This allows you to provide an event-handling method that performs a custom routine whenever this event occurs.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -435,8 +419,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.HiddenField.OnValueChanged(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.HiddenField.OnValueChanged(System.EventArgs)" />
 
             
 
@@ -446,8 +429,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.WebControls.HiddenField.ValueChanged" />
+            >Raises the <see cref="E:System.Web.UI.WebControls.HiddenField.ValueChanged" />
 
             
 
@@ -455,12 +437,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -483,18 +468,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.HiddenField.RaisePostDataChangedEvent" />
+            >The <see cref="M:System.Web.UI.WebControls.HiddenField.RaisePostDataChangedEvent" />
 
             
 
-             method is a helper method used by the <see
-             cref="T:System.Web.UI.WebControls.HiddenField" />
+             method is a helper method used by the <see cref="T:System.Web.UI.WebControls.HiddenField" />
 
             
 
-             class to notify the ASP.NET application that the state of the <see
-             cref="T:System.Web.UI.WebControls.HiddenField" />
+             class to notify the ASP.NET application that the state of the <see cref="T:System.Web.UI.WebControls.HiddenField" />
 
             
 
@@ -504,8 +486,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Notifies the ASP.NET application that the state of the <see
-             cref="T:System.Web.UI.WebControls.HiddenField" />
+            >Notifies the ASP.NET application that the state of the <see cref="T:System.Web.UI.WebControls.HiddenField" />
 
             
 
@@ -536,13 +517,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.HiddenField.Render(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.WebControls.HiddenField.Render(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method is used to render the server control content to the client's browser using the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             method is used to render the server control content to the client's browser using the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -552,8 +531,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the Web server control content to the client's browser using the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Renders the Web server control content to the client's browser using the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -561,12 +539,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -586,13 +567,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.HiddenField" />
+            >The <see cref="T:System.Web.UI.WebControls.HiddenField" />
 
             
 
-             control does not support themes. This property has been overridden to always return an empty string. If you attempt to set this property, a <see
-             cref="T:System.NotSupportedException" />
+             control does not support themes. This property has been overridden to always return an empty string. If you attempt to set this property, a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -631,13 +610,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.HiddenField" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.HiddenField" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IPostBackDataHandler" />
+             instance is cast to an <see cref="T:System.Web.UI.IPostBackDataHandler" />
 
             
 
@@ -647,8 +624,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see the <see
-             cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+            >For a description of this member, see the <see cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
@@ -660,14 +636,22 @@
           <para>true if the server control's state changes as a result of the postback; otherwise, false.</para>
         </returns>
         <param name="postDataKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key identifier for the control.</param
         >
         <param name="postCollection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -692,13 +676,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.HiddenField" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.HiddenField" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IPostBackDataHandler" />
+             instance is cast to an <see cref="T:System.Web.UI.IPostBackDataHandler" />
 
             
 
@@ -708,8 +690,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see the <see
-             cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
+            >For a description of this member, see the <see cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
 
             
 
@@ -735,13 +716,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.HiddenField.Value" />
+            >Use the <see cref="P:System.Web.UI.WebControls.HiddenField.Value" />
 
             
 
-             property to specify or determine the value of the <see
-             cref="T:System.Web.UI.WebControls.HiddenField" />
+             property to specify or determine the value of the <see cref="T:System.Web.UI.WebControls.HiddenField" />
 
             
 
@@ -768,21 +747,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.HiddenField.ValueChanged" />
+            >The <see cref="E:System.Web.UI.WebControls.HiddenField.ValueChanged" />
 
             
 
-             event is raised when the value of the <see
-             cref="T:System.Web.UI.WebControls.HiddenField" />
+             event is raised when the value of the <see cref="T:System.Web.UI.WebControls.HiddenField" />
 
             
 
              control changes between posts to the server. This allows you to provide an event-handling method that performs a custom routine whenever this event occurs.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -794,8 +770,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="T:System.Web.UI.WebControls.HiddenField" />
+            >Occurs when the value of the <see cref="T:System.Web.UI.WebControls.HiddenField" />
 
             
 

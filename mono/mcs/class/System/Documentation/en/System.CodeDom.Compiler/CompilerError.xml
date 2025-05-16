@@ -30,13 +30,11 @@
       >
       <block subset="none" type="note">
         <para
-          >This class contains an inheritance demand at the class level that applies to all members. A <see
-           cref="T:System.Security.SecurityException" />
+          >This class contains an inheritance demand at the class level that applies to all members. A <see cref="T:System.Security.SecurityException" />
 
           
 
-           is thrown when the derived class does not have full-trust permission. For details about inheritance demands, see  <format
-           type="text/html">
+           is thrown when the derived class does not have full-trust permission. For details about inheritance demands, see  <format type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
 
@@ -71,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.Compiler.CompilerError" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.CompilerError" />
 
             
 
@@ -109,8 +106,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.Compiler.CompilerError" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.CompilerError" />
 
             
 
@@ -118,35 +114,55 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file name of the file that the compiler was compiling when it encountered the error. </param
         >
         <param name="line">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The line of the source of the error. </param
         >
         <param name="column">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The column of the source of the error. </param
         >
         <param name="errorNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error number of the error. </param
         >
         <param name="errorText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -172,8 +188,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.CodeDom.Compiler.CompilerError.Column" />
+            >The <see cref="P:System.CodeDom.Compiler.CompilerError.Column" />
 
             
 
@@ -204,8 +219,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.CodeDom.Compiler.CompilerError.ErrorNumber" />
+            >The <see cref="P:System.CodeDom.Compiler.CompilerError.ErrorNumber" />
 
             
 
@@ -236,8 +250,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.CodeDom.Compiler.CompilerError.ErrorText" />
+            >The <see cref="P:System.CodeDom.Compiler.CompilerError.ErrorText" />
 
             
 
@@ -336,8 +349,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is supported so <see
-             cref="T:System.CodeDom.Compiler.CompilerError" />
+            >This method is supported so <see cref="T:System.CodeDom.Compiler.CompilerError" />
 
             
 
@@ -347,8 +359,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides an implementation of Object's <see
-             cref="M:System.Object.ToString" />
+            >Provides an implementation of Object's <see cref="M:System.Object.ToString" />
 
             
 

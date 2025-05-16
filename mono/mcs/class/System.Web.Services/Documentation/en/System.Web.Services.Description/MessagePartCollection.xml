@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Services.Description.MessagePart" />
+        >The <see cref="T:System.Web.Services.Description.MessagePart" />
 
         
 
@@ -31,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of instances of the <see
-         cref="T:System.Web.Services.Description.MessagePart" />
+        >Represents a collection of instances of the <see cref="T:System.Web.Services.Description.MessagePart" />
 
         
 
@@ -58,13 +56,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.Services.Description.MessagePart" />
+            >Adds the specified <see cref="T:System.Web.Services.Description.MessagePart" />
 
             
 
-             to the end of the <see
-             cref="T:System.Web.Services.Description.MessagePartCollection" />
+             to the end of the <see cref="T:System.Web.Services.Description.MessagePartCollection" />
 
             
 
@@ -74,8 +70,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index where the <paramref
-             name="messagePart" />
+            >The zero-based index where the <paramref name="messagePart" />
 
             
 
@@ -83,12 +78,15 @@
           >
         </returns>
         <param name="messagePart">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.MessagePart" />
+          The <see cref="T:System.Web.Services.Description.MessagePart" />
 
           
 
@@ -117,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether the specified <see
-             cref="T:System.Web.Services.Description.MessagePart" />
+            >Returns a value indicating whether the specified <see cref="T:System.Web.Services.Description.MessagePart" />
 
             
 
@@ -128,13 +125,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="messagePart" />
+            >true if the <paramref name="messagePart" />
 
             
 
-             parameter is a member of the <see
-             cref="T:System.Web.Services.Description.MessagePartCollection" />
+             parameter is a member of the <see cref="T:System.Web.Services.Description.MessagePartCollection" />
 
             
 
@@ -142,12 +137,15 @@
           >
         </returns>
         <param name="messagePart">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.MessagePart" />
+          The <see cref="T:System.Web.Services.Description.MessagePart" />
 
           
 
@@ -177,13 +175,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the entire <see
-             cref="T:System.Web.Services.Description.MessagePartCollection" />
+            >Copies the entire <see cref="T:System.Web.Services.Description.MessagePartCollection" />
 
             
 
-             to a compatible one-dimensional array of type <see
-             cref="T:System.Web.Services.Description.MessagePart" />
+             to a compatible one-dimensional array of type <see cref="T:System.Web.Services.Description.MessagePart" />
 
             
 
@@ -191,19 +187,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Web.Services.Description.MessagePart" />
+          An array of type <see cref="T:System.Web.Services.Description.MessagePart" />
 
           
 
            serving as the destination of the copy action. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -225,15 +228,9 @@
         <Parameter Name="value" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="value"
-          >a <see
-           cref="T:System.Object" />
-        </param>
+        <param name="value">a <see cref="T:System.Object" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -258,8 +255,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches for the specified <see
-             cref="T:System.Web.Services.Description.MessagePart" />
+            >Searches for the specified <see cref="T:System.Web.Services.Description.MessagePart" />
 
             
 
@@ -271,12 +267,15 @@
           <para>A 32-bit signed integer.</para>
         </returns>
         <param name="messagePart">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.MessagePart" />
+          The <see cref="T:System.Web.Services.Description.MessagePart" />
 
           
 
@@ -306,23 +305,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the number of items in the collection already equals the collection's capacity, the capacity is doubled by automatically reallocating the internal array before the new element is inserted.</para>
           <para
-            >If the <paramref
-             name="index" />
+            >If the <paramref name="index" />
 
             
 
-             parameter is equal to <see
-             cref="P:System.Collections.CollectionBase.Count" />
+             parameter is equal to <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
-            , the <paramref
-             name="messagePart" />
+            , the <paramref name="messagePart" />
 
             
 
-             parameter is added to the end of the <see
-             cref="T:System.Web.Services.Description.MessagePartCollection" />
+             parameter is added to the end of the <see cref="T:System.Web.Services.Description.MessagePartCollection" />
 
             
 
@@ -333,13 +328,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.Services.Description.MessagePart" />
+            >Adds the specified <see cref="T:System.Web.Services.Description.MessagePart" />
 
             
 
-             to the <see
-             cref="T:System.Web.Services.Description.MessagePartCollection" />
+             to the <see cref="T:System.Web.Services.Description.MessagePartCollection" />
 
             
 
@@ -347,24 +340,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which to insert the <paramref
-           name="messagePart" />
+          The zero-based index at which to insert the <paramref name="messagePart" />
 
           
 
            parameter. </param
         >
         <param name="messagePart">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.MessagePart" />
+          The <see cref="T:System.Web.Services.Description.MessagePart" />
 
           
 
@@ -438,16 +437,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method performs a linear search; therefore, the average execution time is proportional to <see
-             cref="P:System.Collections.CollectionBase.Count" />
+            >This method performs a linear search; therefore, the average execution time is proportional to <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
             .</para
           >
           <para
-            >The elements that follow the removed <see
-             cref="T:System.Web.Services.Description.MessagePart" />
+            >The elements that follow the removed <see cref="T:System.Web.Services.Description.MessagePart" />
 
             
 
@@ -457,13 +454,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of the specified <see
-             cref="T:System.Web.Services.Description.MessagePart" />
+            >Removes the first occurrence of the specified <see cref="T:System.Web.Services.Description.MessagePart" />
 
             
 
-             from the <see
-             cref="T:System.Web.Services.Description.MessagePartCollection" />
+             from the <see cref="T:System.Web.Services.Description.MessagePartCollection" />
 
             
 
@@ -471,12 +466,15 @@
           >
         </summary>
         <param name="messagePart">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.MessagePart" />
+          The <see cref="T:System.Web.Services.Description.MessagePart" />
 
           
 
@@ -502,14 +500,8 @@
         <Parameter Name="parent" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="value"
-          >a <see
-           cref="T:System.Object" />
-        </param>
-        <param name="parent"
-          >a <see
-           cref="T:System.Object" />
-        </param>
+        <param name="value">a <see cref="T:System.Object" /></param>
+        <param name="parent">a <see cref="T:System.Object" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>

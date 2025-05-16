@@ -30,13 +30,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Collections.Generic.IList`1" />
+        >The <see cref="T:System.Collections.Generic.IList`1" />
 
         
 
-         generic interface is a descendant of the <see
-         cref="T:System.Collections.Generic.ICollection`1" />
+         generic interface is a descendant of the <see cref="T:System.Collections.Generic.ICollection`1" />
 
         
 
@@ -72,8 +70,7 @@
           <para>Determines the index of a specific item in the current instance.</para>
         </summary>
         <returns
-          >The index of <paramref
-           name="value" />
+          >The index of <paramref name="value" />
 
           
 
@@ -81,18 +78,15 @@
         >
         <remarks>
           <para
-            >Implementations can vary in how they determine equality of objects; for example, <see
-             cref="T:System.Collections.Generic.List&lt;T&gt;" />
+            >Implementations can vary in how they determine equality of objects; for example, <see cref="T:System.Collections.Generic.List&lt;T&gt;" />
 
             
 
-              uses the default comparer, whereas, <see
-             cref="T:System.Collections.Generic.Dictionary&lt;T,U&gt;" />
+              uses the default comparer, whereas, <see cref="T:System.Collections.Generic.Dictionary&lt;T,U&gt;" />
 
             
 
-             allows the user to specify the <see
-             cref="T:System.Collections.Generic.IComparer&lt;T&gt;" />
+             allows the user to specify the <see cref="T:System.Collections.Generic.IComparer&lt;T&gt;" />
 
             
 
@@ -122,8 +116,7 @@
       </Parameters>
       <Docs>
         <param name="index"
-          >A <see
-           cref="System.Int32" />
+          >A <see cref="System.Int32" />
 
           
 
@@ -138,13 +131,11 @@
           <para>
             <block subset="none" type="behaviors">
               <para
-                >If <paramref
-                 name="index" />
+                >If <paramref name="index" />
 
                 
 
-                 equals the number of items in the <see
-                 cref="System.Collections.Generic.IList&lt;T&gt;" />
+                 equals the number of items in the <see cref="System.Collections.Generic.IList&lt;T&gt;" />
 
                 
 
@@ -246,8 +237,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Collections.Generic.IList`1" />
+            >Removes the <see cref="T:System.Collections.Generic.IList`1" />
 
             
 
@@ -255,7 +245,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

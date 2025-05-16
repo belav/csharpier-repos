@@ -23,34 +23,29 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can combine any of these options to configure a generic URI parser by passing the options as a parameter to the <see
-         cref="M:System.GenericUriParser.#ctor(System.GenericUriParserOptions)" />
+        >You can combine any of these options to configure a generic URI parser by passing the options as a parameter to the <see cref="M:System.GenericUriParser.#ctor(System.GenericUriParserOptions)" />
 
         
 
          constructor.</para
       >
       <para
-        >The existing <see
-         cref="T:System.Uri" />
+        >The existing <see cref="T:System.Uri" />
 
         
 
          class has been extended to provide support for International Resource Identifiers (IRI) based on RFC 3987. Current users will not see any change from the .NET Framework 2.0 behavior unless they specifically enable IRI. This ensures application compatibility with prior versions of the .NET Framework.</para
       >
       <para
-        >The configuration setting for the <see
-         cref="T:System.Configuration.IdnElement" />
+        >The configuration setting for the <see cref="T:System.Configuration.IdnElement" />
 
         
 
-         is indirectly controlled by the <see
-         cref="T:System.Configuration.IriParsingElement" />
+         is indirectly controlled by the <see cref="T:System.Configuration.IriParsingElement" />
 
         
 
-         configuration setting that controls IRI processing in the <see
-         cref="T:System.Uri" />
+         configuration setting that controls IRI processing in the <see cref="T:System.Uri" />
 
         
 
@@ -58,8 +53,7 @@
       >
       <para>The Internationalized Domain Name (IDN) attribute only controls IDN processing. All other IRI processing (character normalization, for example) is performed by default.</para>
       <para
-        >For more information on IRI support, see the Remarks section for the <see
-         cref="T:System.Uri" />
+        >For more information on IRI support, see the Remarks section for the <see cref="T:System.Uri" />
 
         
 
@@ -69,8 +63,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies options for a <see
-         cref="T:System.UriParser" />
+        >Specifies options for a <see cref="T:System.UriParser" />
 
         
 

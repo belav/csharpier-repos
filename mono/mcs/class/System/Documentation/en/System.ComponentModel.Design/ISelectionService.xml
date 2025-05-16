@@ -63,7 +63,11 @@
           <para>true if the component is part of the user's current selection; otherwise, false.</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -221,8 +225,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the array is null or does not contain any components, <see
-             cref="M:System.ComponentModel.Design.ISelectionService.SetSelectedComponents(System.Collections.ICollection)" />
+            >If the array is null or does not contain any components, <see cref="M:System.ComponentModel.Design.ISelectionService.SetSelectedComponents(System.Collections.ICollection)" />
 
             
 
@@ -234,7 +237,11 @@
           <para>Selects the specified collection of components.</para>
         </summary>
         <param name="components">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -268,8 +275,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the array is null or does not contain any components, <see
-             cref="M:System.ComponentModel.Design.ISelectionService.SetSelectedComponents(System.Collections.ICollection)" />
+            >If the array is null or does not contain any components, <see cref="M:System.ComponentModel.Design.ISelectionService.SetSelectedComponents(System.Collections.ICollection)" />
 
             
 
@@ -281,24 +287,30 @@
           <para>Selects the components from within the specified collection of components that match the specified selection type.</para>
         </summary>
         <param name="components">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The collection of components to select. </param
         >
         <param name="selectionType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A value from the <see
-           cref="T:System.ComponentModel.Design.SelectionTypes" />
+          A value from the <see cref="T:System.ComponentModel.Design.SelectionTypes" />
 
           
 
-           enumeration. The default is <see
-           cref="F:System.ComponentModel.Design.SelectionTypes.Normal" />
+           enumeration. The default is <see cref="F:System.ComponentModel.Design.SelectionTypes.Normal" />
 
           
 

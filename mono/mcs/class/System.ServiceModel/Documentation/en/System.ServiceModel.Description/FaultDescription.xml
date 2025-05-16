@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Description.FaultDescription" />
+        >The <see cref="T:System.ServiceModel.Description.FaultDescription" />
 
         
 
@@ -54,13 +53,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.ServiceModel.Description.FaultDescription" />
+            >Creates a <see cref="T:System.ServiceModel.Description.FaultDescription" />
 
             
 
-             object using the specified <paramref
-             name="action" />
+             object using the specified <paramref name="action" />
 
             
 
@@ -70,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.FaultDescription" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.FaultDescription" />
 
             
 
@@ -95,8 +91,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.FaultDescription.Action" />
+            >Use the <see cref="P:System.ServiceModel.Description.FaultDescription.Action" />
 
             
 
@@ -124,8 +119,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The detail type must be serializable. For details, see <see
-             cref="T:System.ServiceModel.FaultContractAttribute" />
+            >The detail type must be serializable. For details, see <see cref="T:System.ServiceModel.FaultContractAttribute" />
 
             
 
@@ -153,18 +147,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ServiceModel.ServiceContractAttribute.HasProtectionLevel" />
+            >The <see cref="P:System.ServiceModel.ServiceContractAttribute.HasProtectionLevel" />
 
             
 
-             property indicates whether the <see
-             cref="P:System.ServiceModel.Description.FaultDescription.ProtectionLevel" />
+             property indicates whether the <see cref="P:System.ServiceModel.Description.FaultDescription.ProtectionLevel" />
 
             
 
-             property has been set for the <see
-             cref="T:System.ServiceModel.Description.FaultDescription" />
+             property has been set for the <see cref="T:System.ServiceModel.Description.FaultDescription" />
 
             
 
@@ -236,8 +227,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.FaultDescription.ProtectionLevel" />
+            >Use the <see cref="P:System.ServiceModel.Description.FaultDescription.ProtectionLevel" />
 
             
 

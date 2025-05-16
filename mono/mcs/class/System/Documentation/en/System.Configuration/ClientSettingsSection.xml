@@ -22,39 +22,33 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The dnprdnshort contains a single default settings provider, <see
-         cref="T:System.Configuration.LocalFileSettingsProvider" />
+        >The dnprdnshort contains a single default settings provider, <see cref="T:System.Configuration.LocalFileSettingsProvider" />
 
         
 
-        , which stores configuration data to the local file system in files with the extension .config. The contents of configuration files are structured as XML documents. User-scoped settings are persisted in a file with the name username.config. Within this file, data is stored as elements within a &lt;userSettings&gt; section. Each of these sections is represented by a corresponding <see
-         cref="T:System.Configuration.ClientSettingsSection" />
+        , which stores configuration data to the local file system in files with the extension .config. The contents of configuration files are structured as XML documents. User-scoped settings are persisted in a file with the name username.config. Within this file, data is stored as elements within a &lt;userSettings&gt; section. Each of these sections is represented by a corresponding <see cref="T:System.Configuration.ClientSettingsSection" />
 
         
 
-        . Each section object is owned and administered by a configuration section handler, which is an <see
-         cref="T:System.Configuration.IConfigurationSectionHandler" />
+        . Each section object is owned and administered by a configuration section handler, which is an <see cref="T:System.Configuration.IConfigurationSectionHandler" />
 
         
 
         .</para
       >
       <para
-        >The <see
-         cref="T:System.Configuration.ClientSettingsSection" />
+        >The <see cref="T:System.Configuration.ClientSettingsSection" />
 
         
 
-         class represents a simple extension of the <see
-         cref="T:System.Configuration.ConfigurationSection" />
+         class represents a simple extension of the <see cref="T:System.Configuration.ConfigurationSection" />
 
         
 
          class, which is used in the dnprdnshort support for general configuration files.</para
       >
       <para
-        >For more information about application settings, see the topic <format
-         type="text/html">
+        >For more information about application settings, see the topic <format type="text/html">
           <a href="64090a34-8556-4904-8ea0-20efe9f8c886">Application Settings for Windows Forms</a>
         </format>
 
@@ -86,13 +80,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default <see
-             cref="M:System.Configuration.ClientSettingsSection.#ctor" />
+            >The default <see cref="M:System.Configuration.ClientSettingsSection.#ctor" />
 
             
 
-             constructor initializes the <see
-             cref="P:System.Configuration.ClientSettingsSection.Settings" />
+             constructor initializes the <see cref="P:System.Configuration.ClientSettingsSection.Settings" />
 
             
 
@@ -102,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.ClientSettingsSection" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.ClientSettingsSection" />
 
             
 
@@ -164,8 +155,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Configuration.ClientSettingsSection.Settings" />
+            >The <see cref="P:System.Configuration.ClientSettingsSection.Settings" />
 
             
 

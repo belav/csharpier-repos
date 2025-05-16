@@ -63,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Policy.AllMembershipCondition" />
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.AllMembershipCondition" />
 
             
 
@@ -98,13 +97,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >All code is a match for <see
-             cref="T:System.Security.Policy.AllMembershipCondition" />
+            >All code is a match for <see cref="T:System.Security.Policy.AllMembershipCondition" />
 
             
 
-            , so <see
-             cref="M:System.Security.Policy.AllMembershipCondition.Check(System.Security.Policy.Evidence)" />
+            , so <see cref="M:System.Security.Policy.AllMembershipCondition.Check(System.Security.Policy.Evidence)" />
 
             
 
@@ -120,7 +117,11 @@
           <para>Always true.</para>
         </returns>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -182,8 +183,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified membership condition is an <see
-             cref="T:System.Security.Policy.AllMembershipCondition" />
+            >Determines whether the specified membership condition is an <see cref="T:System.Security.Policy.AllMembershipCondition" />
 
             
 
@@ -193,8 +193,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified membership condition is an <see
-             cref="T:System.Security.Policy.AllMembershipCondition" />
+            >true if the specified membership condition is an <see cref="T:System.Security.Policy.AllMembershipCondition" />
 
             
 
@@ -202,12 +201,15 @@
           >
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to compare to <see
-           cref="T:System.Security.Policy.AllMembershipCondition" />
+          The object to compare to <see cref="T:System.Security.Policy.AllMembershipCondition" />
 
           
 
@@ -243,7 +245,11 @@
           <para>Reconstructs a security object with a specified state from an XML encoding.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -280,14 +286,22 @@
           <para>Reconstructs a security object with a specified state from an XML encoding.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML encoding to use to reconstruct the security object. </param
         >
         <param name="level">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -405,8 +419,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an XML encoding of the security object and its current state with the specified <see
-             cref="T:System.Security.Policy.PolicyLevel" />
+            >Creates an XML encoding of the security object and its current state with the specified <see cref="T:System.Security.Policy.PolicyLevel" />
 
             
 
@@ -418,7 +431,11 @@
           <para>An XML encoding of the security object, including any state information.</para>
         </returns>
         <param name="level">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

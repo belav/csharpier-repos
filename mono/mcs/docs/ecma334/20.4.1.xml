@@ -2,9 +2,7 @@
 <clause number="20.4.1" title="Explicit interface member implementations">
   <paragraph
     >For purposes of implementing interfaces, a class or struct may declare explicit interface member implementations. An explicit interface member implementation is a method, property, event, or indexer declaration that references a fully qualified interface member name. <example
-
-      >[Example: For example <code_example
-      >
+      >[Example: For example <code_example>
         <![CDATA[
 interface ICloneable  
 {  
@@ -28,8 +26,7 @@ class ListEntry: ICloneable, IComparable
   </paragraph>
   <paragraph>
     <example
-      >[Example: In some cases, the name of an interface member may not be appropriate for the implementing class, in which case the interface member may be implemented using explicit interface member implementation. A class implementing a file abstraction, for example, would likely implement a Close member function that has the effect of releasing the file resource, and implement the Dispose method of the IDisposable interface using explicit interface member implementation: <code_example
-      >
+      >[Example: In some cases, the name of an interface member may not be appropriate for the implementing class, in which case the interface member may be implemented using explicit interface member implementation. A class implementing a file abstraction, for example, would likely implement a Close member function that has the effect of releasing the file resource, and implement the Dispose method of the IDisposable interface using explicit interface member implementation: <code_example>
         <![CDATA[
 interface IDisposable {  
    void Dispose();  
@@ -55,17 +52,14 @@ class MyFile: IDisposable {
   <paragraph>It is a compile-time error for an explicit interface member implementation to include access modifiers, and it is a compile-time error to include the modifiers abstract, virtual, override, or static. </paragraph>
   <paragraph>Explicit interface member implementations have different accessibility characteristics than other members. Because explicit interface member implementations are never accessible through their fully qualified name in a method invocation or a property access, they are in a sense private. However, since they can be accessed through an interface instance, they are in a sense also public. </paragraph>
   <paragraph
-    >Explicit interface member implementations serve two primary purposes: <list
-    >
+    >Explicit interface member implementations serve two primary purposes: <list>
       <list_item> Because explicit interface member implementations are not accessible through class or struct instances, they allow interface implementations to be excluded from the public interface of a class or struct. This is particularly useful when a class or struct implements an internal interface that is of no interest to a consumer of that class or struct. </list_item>
       <list_item> Explicit interface member implementations allow disambiguation of interface members with the same signature. Without explicit interface member implementations it would be impossible for a class or struct to have different implementations of interface members with the same signature and return type, as would it be impossible for a class or struct to have any implementation at all of interface members with the same signature but with different return types. </list_item>
     </list>
   </paragraph>
   <paragraph
     >For an explicit interface member implementation to be valid, the class or struct must name an interface in its base class list that contains a member whose fully qualified name, type, and parameter types exactly match those of the explicit interface member implementation. <example
-
-      >[Example: Thus, in the following class <code_example
-      >
+      >[Example: Thus, in the following class <code_example>
         <![CDATA[
 class Shape: ICloneable  
 {  
@@ -77,8 +71,7 @@ class Shape: ICloneable
 
       
 
-      the declaration of IComparable.CompareTo results in a compile-time error because IComparable is not listed in the base class list of Shape and is not a base interface of ICloneable. Likewise, in the declarations <code_example
-      >
+      the declaration of IComparable.CompareTo results in a compile-time error because IComparable is not listed in the base class list of Shape and is not a base interface of ICloneable. Likewise, in the declarations <code_example>
         <![CDATA[
 class Shape: ICloneable  
 {  
@@ -98,9 +91,7 @@ class Ellipse: Shape
   </paragraph>
   <paragraph
     >The fully qualified name of an interface member must reference the interface in which the member was declared. <example
-
-      >[Example: Thus, in the declarations <code_example
-      >
+      >[Example: Thus, in the declarations <code_example>
         <![CDATA[
 interface IControl  
 {  

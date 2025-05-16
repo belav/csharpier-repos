@@ -1036,8 +1036,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates the maximum defined SID in the <see
-             cref="T:System.Security.Principal.WellKnownSidType" />
+            >Indicates the maximum defined SID in the <see cref="T:System.Security.Principal.WellKnownSidType" />
 
             
 
@@ -1175,8 +1174,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates a SID present when the user authenticated across a forest with the selective authentication option enabled. If this SID is present, then <see
-             cref="F:System.Security.Principal.WellKnownSidType.ThisOrganizationSid" />
+            >Indicates a SID present when the user authenticated across a forest with the selective authentication option enabled. If this SID is present, then <see cref="F:System.Security.Principal.WellKnownSidType.ThisOrganizationSid" />
 
             
 
@@ -1358,8 +1356,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates a SID present when the user authenticated from within the forest or across a trust that does not have the selective authentication option enabled. If this SID is present, then <see
-             cref="F:System.Security.Principal.WellKnownSidType.OtherOrganizationSid" />
+            >Indicates a SID present when the user authenticated from within the forest or across a trust that does not have the selective authentication option enabled. If this SID is present, then <see cref="F:System.Security.Principal.WellKnownSidType.OtherOrganizationSid" />
 
             
 

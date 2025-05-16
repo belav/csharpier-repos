@@ -5,13 +5,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Runtime.ConstrainedExecution" />
+        >The <see cref="N:System.Runtime.ConstrainedExecution" />
 
         
 
-         namespace defines a set of types that enumerate and define a contract for reliability between the author of some code, and the developers who take a dependency on that code. The types in the <see
-         cref="N:System.Runtime.ConstrainedExecution" />
+         namespace defines a set of types that enumerate and define a contract for reliability between the author of some code, and the developers who take a dependency on that code. The types in the <see cref="N:System.Runtime.ConstrainedExecution" />
 
         
 

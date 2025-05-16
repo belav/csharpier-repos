@@ -68,43 +68,56 @@
           <para>The specified document.</para>
         </returns>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The URL that identifies the document. </param
         >
         <param name="language">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The document language. You can specify this parameter as <see
-           cref="F:System.Guid.Empty" />
+          The document language. You can specify this parameter as <see cref="F:System.Guid.Empty" />
 
           
 
           . </param
         >
         <param name="languageVendor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The identity of the vendor for the document language. You can specify this parameter as <see
-           cref="F:System.Guid.Empty" />
+          The identity of the vendor for the document language. You can specify this parameter as <see cref="F:System.Guid.Empty" />
 
           
 
           .</param
         >
         <param name="documentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of the document. You can specify this parameter as <see
-           cref="F:System.Guid.Empty" />
+          The type of the document. You can specify this parameter as <see cref="F:System.Guid.Empty" />
 
           
 
@@ -206,7 +219,11 @@
           <para>The symbol reader method object for the specified method identifier.</para>
         </returns>
         <param name="method">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -247,14 +264,22 @@
           <para>The symbol reader method object for the specified method identifier.</para>
         </returns>
         <param name="method">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The metadata token of the method. </param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -296,21 +321,33 @@
           <para>The reader method object for the specified position in the document.</para>
         </returns>
         <param name="document">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The document in which the method is located. </param
         >
         <param name="line">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The position of the line within the document. The lines are numbered, beginning with 1. </param
         >
         <param name="column">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -385,14 +422,22 @@
           <para>The value of the attribute.</para>
         </returns>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The metadata token for the object for which the attribute is requested. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -432,7 +477,11 @@
           <para>An array of variables for the parent.</para>
         </returns>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

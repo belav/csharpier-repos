@@ -19,31 +19,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
+        >The <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
 
         
 
-         class represents individual items in a smart tag panel. An item of this type is displayed as an active user interface element, such as a hyperlink, that invokes a programmer-supplied method in a class derived from <see
-         cref="T:System.ComponentModel.Design.DesignerActionList" />
+         class represents individual items in a smart tag panel. An item of this type is displayed as an active user interface element, such as a hyperlink, that invokes a programmer-supplied method in a class derived from <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
         
 
-        . The association between the item and the method is maintained through the value of the <see
-         cref="P:System.ComponentModel.Design.DesignerActionMethodItem.MemberName" />
+        . The association between the item and the method is maintained through the value of the <see cref="P:System.ComponentModel.Design.DesignerActionMethodItem.MemberName" />
 
         
 
          property. The method that this item invokes must neither take parameters nor return a value.</para
       >
       <para
-        >Individual panel items are associated together to form a panel by a call to the <see
-         cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+        >Individual panel items are associated together to form a panel by a call to the <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
 
         
 
-         method of the <see
-         cref="T:System.ComponentModel.Design.DesignerActionList" />
+         method of the <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
         
 
@@ -53,8 +48,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a smart tag panel item that is associated with a method in a class derived from <see
-         cref="T:System.ComponentModel.Design.DesignerActionList" />
+        >Represents a smart tag panel item that is associated with a method in a class derived from <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
         
 
@@ -81,23 +75,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.DesignerActionMethodItem.#ctor(System.ComponentModel.Design.DesignerActionList,System.String,System.String)" />
+            >The <see cref="M:System.ComponentModel.Design.DesignerActionMethodItem.#ctor(System.ComponentModel.Design.DesignerActionList,System.String,System.String)" />
 
             
 
-             constructor sets the <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.Category" />
+             constructor sets the <see cref="P:System.ComponentModel.Design.DesignerActionItem.Category" />
 
             
 
-             and <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
+             and <see cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
 
             
 
-             properties to null, and the <see
-             cref="P:System.ComponentModel.Design.DesignerActionMethodItem.IncludeAsDesignerVerb" />
+             properties to null, and the <see cref="P:System.ComponentModel.Design.DesignerActionMethodItem.IncludeAsDesignerVerb" />
 
             
 
@@ -107,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
 
             
 
@@ -116,31 +105,41 @@
           >
         </summary>
         <param name="actionList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerActionList" />
+          The <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
           
 
            that contains the method this item is associated with.</param
         >
         <param name="memberName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The case-sensitive name of the method in the class derived from <see
-           cref="T:System.ComponentModel.Design.DesignerActionList" />
+          The case-sensitive name of the method in the class derived from <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
           
 
            to invoke through the panel item.</param
         >
         <param name="displayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -167,41 +166,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="includeAsDesignerVerb" />
+            >If the <paramref name="includeAsDesignerVerb" />
 
             
 
-             parameter is set to true, then this item is also considered a <see
-             cref="T:System.ComponentModel.Design.DesignerVerb" />
+             parameter is set to true, then this item is also considered a <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
             
 
-            ; therefore, it will be added to the component's design-time shortcut menu. In vsprvs, a command will also be added to the <ui
-            >Attributes</ui>
+            ; therefore, it will be added to the component's design-time shortcut menu. In vsprvs, a command will also be added to the <ui>Attributes</ui>
 
             
 
-             pane of the Properties window. A list of designer verbs can be accessed through the designer's <see
-             cref="P:System.ComponentModel.Design.ComponentDesigner.Verbs" />
+             pane of the Properties window. A list of designer verbs can be accessed through the designer's <see cref="P:System.ComponentModel.Design.ComponentDesigner.Verbs" />
 
             
 
              collection property.</para
           >
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.DesignerActionMethodItem.#ctor(System.ComponentModel.Design.DesignerActionList,System.String,System.String,System.Boolean)" />
+            >The <see cref="M:System.ComponentModel.Design.DesignerActionMethodItem.#ctor(System.ComponentModel.Design.DesignerActionList,System.String,System.String,System.Boolean)" />
 
             
 
-             constructor sets the <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.Category" />
+             constructor sets the <see cref="P:System.ComponentModel.Design.DesignerActionItem.Category" />
 
             
 
-             and <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
+             and <see cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
 
             
 
@@ -211,8 +203,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
 
             
 
@@ -220,38 +211,52 @@
           >
         </summary>
         <param name="actionList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerActionList" />
+          The <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
           
 
            that contains the method this item is associated with.</param
         >
         <param name="memberName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The case-sensitive name of the method in the class derived from <see
-           cref="T:System.ComponentModel.Design.DesignerActionList" />
+          The case-sensitive name of the method in the class derived from <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
           
 
            to invoke through the panel item.</param
         >
         <param name="displayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The panel text for this item.</param
         >
         <param name="includeAsDesignerVerb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -278,31 +283,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.DesignerActionMethodItem.#ctor(System.ComponentModel.Design.DesignerActionList,System.String,System.String,System.String)" />
+            >The <see cref="M:System.ComponentModel.Design.DesignerActionMethodItem.#ctor(System.ComponentModel.Design.DesignerActionList,System.String,System.String,System.String)" />
 
             
 
-             constructor sets the <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
+             constructor sets the <see cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
 
             
 
-             property to null and the <see
-             cref="P:System.ComponentModel.Design.DesignerActionMethodItem.IncludeAsDesignerVerb" />
+             property to null and the <see cref="P:System.ComponentModel.Design.DesignerActionMethodItem.IncludeAsDesignerVerb" />
 
             
 
              property to false.</para
           >
           <para
-            >For more information about how the <paramref
-             name="category" />
+            >For more information about how the <paramref name="category" />
 
             
 
-             parameter is used to group items on a panel, see the <see
-             cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+             parameter is used to group items on a panel, see the <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
 
             
 
@@ -312,8 +312,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
 
             
 
@@ -321,43 +320,56 @@
           >
         </summary>
         <param name="actionList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerActionList" />
+          The <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
           
 
            that contains the method this item is associated with.</param
         >
         <param name="memberName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The case-sensitive name of the method in the class derived from <see
-           cref="T:System.ComponentModel.Design.DesignerActionList" />
+          The case-sensitive name of the method in the class derived from <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
           
 
            to invoke through the panel item.</param
         >
         <param name="displayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The panel text for this item.</param
         >
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The case-sensitive <see
-           cref="T:System.String" />
+          The case-sensitive <see cref="T:System.String" />
 
           
 
@@ -385,44 +397,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="includeAsDesignerVerb" />
+            >If the <paramref name="includeAsDesignerVerb" />
 
             
 
-             parameter is set to true, then the item is also considered a <see
-             cref="T:System.ComponentModel.Design.DesignerVerb" />
+             parameter is set to true, then the item is also considered a <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
             
 
-            ; therefore, it will be added to the component's design-time shortcut menu. A list of designer verbs can be accessed through the designer's <see
-             cref="P:System.ComponentModel.Design.ComponentDesigner.Verbs" />
+            ; therefore, it will be added to the component's design-time shortcut menu. A list of designer verbs can be accessed through the designer's <see cref="P:System.ComponentModel.Design.ComponentDesigner.Verbs" />
 
             
 
              collection property.</para
           >
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.DesignerActionMethodItem.#ctor(System.ComponentModel.Design.DesignerActionList,System.String,System.String,System.String,System.Boolean)" />
+            >The <see cref="M:System.ComponentModel.Design.DesignerActionMethodItem.#ctor(System.ComponentModel.Design.DesignerActionList,System.String,System.String,System.String,System.Boolean)" />
 
             
 
-             constructor sets the <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
+             constructor sets the <see cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
 
             
 
              property to null.</para
           >
           <para
-            >For more information on how the <paramref
-             name="category" />
+            >For more information on how the <paramref name="category" />
 
             
 
-             parameter is used to group items on a panel, see the <see
-             cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+             parameter is used to group items on a panel, see the <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
 
             
 
@@ -432,8 +437,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
 
             
 
@@ -441,50 +445,67 @@
           >
         </summary>
         <param name="actionList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerActionList" />
+          The <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
           
 
            that contains the method this item is associated with.</param
         >
         <param name="memberName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The case-sensitive name of the method in the class derived from <see
-           cref="T:System.ComponentModel.Design.DesignerActionList" />
+          The case-sensitive name of the method in the class derived from <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
           
 
            to invoke through the panel item.</param
         >
         <param name="displayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The panel text for this item.</param
         >
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The case-sensitive <see
-           cref="T:System.String" />
+          The case-sensitive <see cref="T:System.String" />
 
           
 
            used to group similar items on the panel.</param
         >
         <param name="includeAsDesignerVerb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -512,26 +533,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.DesignerActionMethodItem.#ctor(System.ComponentModel.Design.DesignerActionList,System.String,System.String,System.String,System.String)" />
+            >The <see cref="M:System.ComponentModel.Design.DesignerActionMethodItem.#ctor(System.ComponentModel.Design.DesignerActionList,System.String,System.String,System.String,System.String)" />
 
             
 
-             constructor sets the <see
-             cref="P:System.ComponentModel.Design.DesignerActionMethodItem.IncludeAsDesignerVerb" />
+             constructor sets the <see cref="P:System.ComponentModel.Design.DesignerActionMethodItem.IncludeAsDesignerVerb" />
 
             
 
              property to false.</para
           >
           <para
-            >For more information on how the <paramref
-             name="category" />
+            >For more information on how the <paramref name="category" />
 
             
 
-             parameter is used to group items on a panel, see the <see
-             cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+             parameter is used to group items on a panel, see the <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
 
             
 
@@ -541,8 +558,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
 
             
 
@@ -550,50 +566,67 @@
           >
         </summary>
         <param name="actionList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerActionList" />
+          The <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
           
 
            that contains the method this item is associated with.</param
         >
         <param name="memberName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The case-sensitive name of the method in the class derived from <see
-           cref="T:System.ComponentModel.Design.DesignerActionList" />
+          The case-sensitive name of the method in the class derived from <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
           
 
            to invoke through the panel item.</param
         >
         <param name="displayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The panel text for this item.</param
         >
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The case-sensitive <see
-           cref="T:System.String" />
+          The case-sensitive <see cref="T:System.String" />
 
           
 
            used to group similar items on the panel.</param
         >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -622,31 +655,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="includeAsDesignerVerb" />
+            >If the <paramref name="includeAsDesignerVerb" />
 
             
 
-             parameter is set to true, then this item is also considered a <see
-             cref="T:System.ComponentModel.Design.DesignerVerb" />
+             parameter is set to true, then this item is also considered a <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
             
 
-            ; therefore, it will be added to the component's design-time shortcut menu. A list of designer verbs can be accessed through the designer's <see
-             cref="P:System.ComponentModel.Design.ComponentDesigner.Verbs" />
+            ; therefore, it will be added to the component's design-time shortcut menu. A list of designer verbs can be accessed through the designer's <see cref="P:System.ComponentModel.Design.ComponentDesigner.Verbs" />
 
             
 
              collection property.</para
           >
           <para
-            >For more information about how the <paramref
-             name="category" />
+            >For more information about how the <paramref name="category" />
 
             
 
-             parameter is used to group items on a panel, see the <see
-             cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+             parameter is used to group items on a panel, see the <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
 
             
 
@@ -656,8 +684,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
 
             
 
@@ -665,57 +692,78 @@
           >
         </summary>
         <param name="actionList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerActionList" />
+          The <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
           
 
            that contains the method this item is associated with.</param
         >
         <param name="memberName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The case-sensitive name of the method in the class derived from <see
-           cref="T:System.ComponentModel.Design.DesignerActionList" />
+          The case-sensitive name of the method in the class derived from <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
           
 
            to invoke through the panel item.</param
         >
         <param name="displayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The panel text for this item.</param
         >
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The case-sensitive <see
-           cref="T:System.String" />
+          The case-sensitive <see cref="T:System.String" />
 
           
 
            used to group similar items on the panel.</param
         >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Supplemental text for this item, used in ToolTips or the status bar.</param
         >
         <param name="includeAsDesignerVerb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -737,26 +785,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.ComponentModel.Design.DesignerActionMethodItem.IncludeAsDesignerVerb" />
+            >If the <see cref="P:System.ComponentModel.Design.DesignerActionMethodItem.IncludeAsDesignerVerb" />
 
             
 
-             property is set to true, then the item is also considered a <see
-             cref="T:System.ComponentModel.Design.DesignerVerb" />
+             property is set to true, then the item is also considered a <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
             
 
-            ; therefore, it will be added to the component's design-time shortcut menu. A list of designer verbs can be accessed through the designer's <see
-             cref="P:System.ComponentModel.Design.ComponentDesigner.Verbs" />
+            ; therefore, it will be added to the component's design-time shortcut menu. A list of designer verbs can be accessed through the designer's <see cref="P:System.ComponentModel.Design.ComponentDesigner.Verbs" />
 
             
 
              collection property.</para
           >
           <para
-            >The value of the <see
-             cref="P:System.ComponentModel.Design.DesignerActionMethodItem.IncludeAsDesignerVerb" />
+            >The value of the <see cref="P:System.ComponentModel.Design.DesignerActionMethodItem.IncludeAsDesignerVerb" />
 
             
 
@@ -766,8 +810,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates the <see
-             cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
+            >Gets a value that indicates the <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
 
             
 
@@ -790,8 +833,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.ComponentModel.Design.DesignerActionMethodItem.IncludeAsDesignerVerb" />
+            >If the <see cref="P:System.ComponentModel.Design.DesignerActionMethodItem.IncludeAsDesignerVerb" />
 
             
 
@@ -801,8 +843,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Programmatically executes the method associated with the <see
-             cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
+            >Programmatically executes the method associated with the <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
 
             
 
@@ -825,13 +866,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.Design.DesignerActionMethodItem.MemberName" />
+            >The <see cref="P:System.ComponentModel.Design.DesignerActionMethodItem.MemberName" />
 
             
 
-             property specifies which property, in the class derived from the <see
-             cref="T:System.ComponentModel.Design.DesignerActionList" />
+             property specifies which property, in the class derived from the <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
             
 
@@ -843,8 +882,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the method that this <see
-             cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
+            >Gets the name of the method that this <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
 
             
 
@@ -870,16 +908,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.Design.DesignerActionPropertyItem.RelatedComponent" />
+            >The <see cref="P:System.ComponentModel.Design.DesignerActionPropertyItem.RelatedComponent" />
 
             
 
              property allows another component to lend its smart tag panel items to the current list. For example, a user control might aggregate the items from one of its constituent standard controls. </para
           >
           <para
-            >This property works in conjunction with the <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.AllowAssociate" />
+            >This property works in conjunction with the <see cref="P:System.ComponentModel.Design.DesignerActionItem.AllowAssociate" />
 
             
 
@@ -889,8 +925,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a component that contributes its <see
-             cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
+            >Gets or sets a component that contributes its <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
 
             
 

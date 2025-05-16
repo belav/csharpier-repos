@@ -29,13 +29,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see
-         cref="E:System.Windows.Forms.ToolStripRenderer.RenderArrow" />
+        >Represents the method that will handle the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderArrow" />
 
         
 
-         event of a <see
-         cref="T:System.Windows.Forms.ToolStripRenderer" />
+         event of a <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
         
 

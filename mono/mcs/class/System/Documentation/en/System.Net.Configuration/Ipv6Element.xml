@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class corresponds to the enabled attribute of the <format
-         type="text/html">
+        >This class corresponds to the enabled attribute of the <format type="text/html">
           <a href="10b79aef-327b-4718-a892-e11f55e4d169">Ipv6 Element (Network Settings)</a>
         </format>
 
@@ -57,13 +56,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor adds the <see
-             cref="P:System.Net.Configuration.Ipv6Element.Enabled" />
+            >This constructor adds the <see cref="P:System.Net.Configuration.Ipv6Element.Enabled" />
 
             
 
-             property to the <see
-             cref="P:System.Configuration.ConfigurationElement.Properties" />
+             property to the <see cref="P:System.Configuration.ConfigurationElement.Properties" />
 
             
 
@@ -73,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Configuration.Ipv6Element" />
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.Ipv6Element" />
 
             
 
@@ -132,8 +128,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection contains one element, which corresponds to the <see
-             cref="P:System.Net.Configuration.Ipv6Element.Enabled" />
+            >The collection contains one element, which corresponds to the <see cref="P:System.Net.Configuration.Ipv6Element.Enabled" />
 
             
 

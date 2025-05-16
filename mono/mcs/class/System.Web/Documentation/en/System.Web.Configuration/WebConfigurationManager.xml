@@ -14,29 +14,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.WebConfigurationManager" />
+        >The <see cref="T:System.Web.Configuration.WebConfigurationManager" />
 
         
 
          class allows you to access computer and application information. </para
       >
       <para
-        >Using <see
-         cref="T:System.Web.Configuration.WebConfigurationManager" />
+        >Using <see cref="T:System.Web.Configuration.WebConfigurationManager" />
 
         
 
-         is the preferred way to work with configuration files related to Web applications. For client applications, use the <see
-         cref="T:System.Configuration.ConfigurationManager" />
+         is the preferred way to work with configuration files related to Web applications. For client applications, use the <see cref="T:System.Configuration.ConfigurationManager" />
 
         
 
          class. </para
       >
       <para
-        >Your application can extend the <see
-         cref="N:System.Configuration" />
+        >Your application can extend the <see cref="N:System.Configuration" />
 
         
 
@@ -48,18 +44,15 @@
           <list type="bullet">
             <item>
               <para
-                >Accessing a section. To access configuration information for your application, you must use one of the GetSection methods provided by <see
-                 cref="T:System.Web.Configuration.WebConfigurationManager" />
+                >Accessing a section. To access configuration information for your application, you must use one of the GetSection methods provided by <see cref="T:System.Web.Configuration.WebConfigurationManager" />
 
                 
 
-                . For &lt;appSettings&gt; and &lt;connectionStrings&gt;, you use the <see
-                 cref="P:System.Web.Configuration.WebConfigurationManager.AppSettings" />
+                . For &lt;appSettings&gt; and &lt;connectionStrings&gt;, you use the <see cref="P:System.Web.Configuration.WebConfigurationManager.AppSettings" />
 
                 
 
-                 and <see
-                 cref="P:System.Web.Configuration.WebConfigurationManager.ConnectionStrings" />
+                 and <see cref="P:System.Web.Configuration.WebConfigurationManager.ConnectionStrings" />
 
                 
 
@@ -68,13 +61,11 @@
             </item>
             <item>
               <para
-                >Accessing configuration files. Your application can read and write configuration settings at any level, for itself or for other applications or computers, locally or remotely. You use one of the open methods provided by <see
-                 cref="T:System.Web.Configuration.WebConfigurationManager" />
+                >Accessing configuration files. Your application can read and write configuration settings at any level, for itself or for other applications or computers, locally or remotely. You use one of the open methods provided by <see cref="T:System.Web.Configuration.WebConfigurationManager" />
 
                 
 
-                . These methods will return a <see
-                 cref="T:System.Configuration.Configuration" />
+                . These methods will return a <see cref="T:System.Configuration.Configuration" />
 
                 
 
@@ -83,38 +74,31 @@
             </item>
             <item>
               <para
-                >Advanced configuration. More advanced configuration handling is provided by the types <see
-                 cref="T:System.Configuration.SectionInformation" />
+                >Advanced configuration. More advanced configuration handling is provided by the types <see cref="T:System.Configuration.SectionInformation" />
 
                 
 
-                , <see
-                 cref="T:System.Configuration.PropertyInformation" />
+                , <see cref="T:System.Configuration.PropertyInformation" />
 
                 
 
-                , <see
-                 cref="T:System.Configuration.PropertyInformationCollection" />
+                , <see cref="T:System.Configuration.PropertyInformationCollection" />
 
                 
 
-                , <see
-                 cref="T:System.Configuration.ElementInformation" />
+                , <see cref="T:System.Configuration.ElementInformation" />
 
                 
 
-                , <see
-                 cref="T:System.Configuration.ContextInformation" />
+                , <see cref="T:System.Configuration.ContextInformation" />
 
                 
 
-                , <see
-                 cref="T:System.Configuration.ConfigurationSectionGroup" />
+                , <see cref="T:System.Configuration.ConfigurationSectionGroup" />
 
                 
 
-                , and <see
-                 cref="T:System.Configuration.ConfigurationSectionGroupCollection" />
+                , and <see cref="T:System.Configuration.ConfigurationSectionGroupCollection" />
 
                 
 
@@ -125,33 +109,27 @@
         </item>
         <item>
           <para
-            >Extending configuration standard types. You can also provide your custom configuration elements by extending the standard configuration types such as <see
-             cref="T:System.Configuration.ConfigurationElement" />
+            >Extending configuration standard types. You can also provide your custom configuration elements by extending the standard configuration types such as <see cref="T:System.Configuration.ConfigurationElement" />
 
             
 
-            , <see
-             cref="T:System.Configuration.ConfigurationElementCollection" />
+            , <see cref="T:System.Configuration.ConfigurationElementCollection" />
 
             
 
-            , <see
-             cref="T:System.Configuration.ConfigurationProperty" />
+            , <see cref="T:System.Configuration.ConfigurationProperty" />
 
             
 
-            , and <see
-             cref="T:System.Configuration.ConfigurationSection" />
+            , and <see cref="T:System.Configuration.ConfigurationSection" />
 
             
 
-             by using a programmatic or an attributed model. Refer to the <see
-             cref="T:System.Configuration.ConfigurationSection" />
+             by using a programmatic or an attributed model. Refer to the <see cref="T:System.Configuration.ConfigurationSection" />
 
             
 
-             class for an example of how to extend a standard configuration type programmatically. Refer to the <see
-             cref="T:System.Configuration.ConfigurationElement" />
+             class for an example of how to extend a standard configuration type programmatically. Refer to the <see cref="T:System.Configuration.ConfigurationElement" />
 
             
 
@@ -181,8 +159,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Configuration.AppSettingsSection" />
+            >An <see cref="T:System.Configuration.AppSettingsSection" />
 
             
 
@@ -237,8 +214,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String)" />
+            >If <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String)" />
 
             
 
@@ -246,13 +222,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If your application uses a different protocol than HTTP, the <see
-               cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String,System.String)" />
+              >If your application uses a different protocol than HTTP, the <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String,System.String)" />
 
               
 
-               overload that takes both a section name and a path in its parameter list is the one to use. You must specify the configuration file path because the system cannot make any assumptions about the configuration hierarchy level. If you use the <see
-               cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String)" />
+               overload that takes both a section name and a path in its parameter list is the one to use. You must specify the configuration file path because the system cannot make any assumptions about the configuration hierarchy level. If you use the <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String)" />
 
               
 
@@ -260,8 +234,7 @@
             >
           </block>
           <para
-            >You could call <see
-             cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String)" />
+            >You could call <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String)" />
 
             
 
@@ -269,18 +242,15 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String)" />
+              >The <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String)" />
 
               
 
-               method is a run-time method that operates on the section of a configuration file at the hierarchy level in which the application runs. For a non-run-time operation, use <see
-               cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+               method is a run-time method that operates on the section of a configuration file at the hierarchy level in which the application runs. For a non-run-time operation, use <see cref="M:System.Configuration.Configuration.GetSection(System.String)" />
 
               
 
-               instead. This method operates on the specified section of a configuration file that you obtain using one of the overloaded methods for opening a configuration file, <see
-               cref="Overload:System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration" />
+               instead. This method operates on the specified section of a configuration file that you obtain using one of the overloaded methods for opening a configuration file, <see cref="Overload:System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration" />
 
               
 
@@ -295,8 +265,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The specified configuration section object, or null if the section does not exist. Remember that security restrictions exist on the use of <see
-             cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String)" />
+            >The specified configuration section object, or null if the section does not exist. Remember that security restrictions exist on the use of <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String)" />
 
             
 
@@ -304,7 +273,11 @@
           >
         </returns>
         <param name="sectionName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -333,8 +306,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String,System.String)" />
+            >If <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String,System.String)" />
 
             
 
@@ -342,13 +314,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If your application uses a different protocol than HTTP, the <see
-               cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String,System.String)" />
+              >If your application uses a different protocol than HTTP, the <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String,System.String)" />
 
               
 
-               overload that takes both a section name and a path in its parameter list is the one to use. You must specify the configuration file path because the system cannot make any assumptions about the configuration hierarchy level. If you use the <see
-               cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String)" />
+               overload that takes both a section name and a path in its parameter list is the one to use. You must specify the configuration file path because the system cannot make any assumptions about the configuration hierarchy level. If you use the <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String)" />
 
               
 
@@ -357,8 +327,7 @@
           </block>
           <para>This method cannot be called from within a client application.</para>
           <para
-            >If you want to retrieve the configuration section from the configuration file located at the current Web application directory level, use the <see
-             cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String)" />
+            >If you want to retrieve the configuration section from the configuration file located at the current Web application directory level, use the <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String)" />
 
             
 
@@ -366,13 +335,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String,System.String)" />
+              >The <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String,System.String)" />
 
               
 
-               method is a run-time method operating on the section of a configuration file at the hierarchy level in which the application runs. For a non-run-time operation, use <see
-               cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+               method is a run-time method operating on the section of a configuration file at the hierarchy level in which the application runs. For a non-run-time operation, use <see cref="M:System.Configuration.Configuration.GetSection(System.String)" />
 
               
 
@@ -387,8 +354,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The specified configuration section object, or null if the section does not exist. Remember that security restrictions exist on the use of <see
-             cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String,System.String)" />
+            >The specified configuration section object, or null if the section does not exist. Remember that security restrictions exist on the use of <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String,System.String)" />
 
             
 
@@ -396,14 +362,22 @@
           >
         </returns>
         <param name="sectionName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The configuration section name.</param
         >
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -431,16 +405,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="M:System.Web.Configuration.WebConfigurationManager.GetWebApplicationSection(System.String)" />
+            >If <see cref="M:System.Web.Configuration.WebConfigurationManager.GetWebApplicationSection(System.String)" />
 
             
 
              is called from within a Web application, it gets the section from the configuration file selected by the system according to the Web-application configuration hierarchy. </para
           >
           <para
-            >You could call <see
-             cref="M:System.Web.Configuration.WebConfigurationManager.GetWebApplicationSection(System.String)" />
+            >You could call <see cref="M:System.Web.Configuration.WebConfigurationManager.GetWebApplicationSection(System.String)" />
 
             
 
@@ -448,13 +420,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.Configuration.WebConfigurationManager.GetWebApplicationSection(System.String)" />
+              >The <see cref="M:System.Web.Configuration.WebConfigurationManager.GetWebApplicationSection(System.String)" />
 
               
 
-               method is a run-time operation that acts on the section of the application configuration file located at the current level. The <see
-               cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+               method is a run-time operation that acts on the section of the application configuration file located at the current level. The <see cref="M:System.Configuration.Configuration.GetSection(System.String)" />
 
               
 
@@ -471,7 +441,11 @@
           <para>The specified configuration section object, or null if the section does not exist, or an internal object if the section is not accessible at run time.</para>
         </returns>
         <param name="sectionName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -497,8 +471,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Configuration.ConfigurationManager.OpenMachineConfiguration" />
+            >The <see cref="M:System.Configuration.ConfigurationManager.OpenMachineConfiguration" />
 
             
 
@@ -508,8 +481,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens the machine-configuration file on the current computer as a <see
-             cref="T:System.Configuration.Configuration" />
+            >Opens the machine-configuration file on the current computer as a <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -519,8 +491,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Configuration.Configuration" />
+            >A <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -549,8 +520,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method opens the machine-configuration file that is applicable to the directory specified by the <paramref
-             name="locationSubPath" />
+            >This method opens the machine-configuration file that is applicable to the directory specified by the <paramref name="locationSubPath" />
 
             
 
@@ -560,8 +530,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens the machine-configuration file on the current computer as a <see
-             cref="T:System.Configuration.Configuration" />
+            >Opens the machine-configuration file on the current computer as a <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -571,8 +540,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Configuration.Configuration" />
+            >A <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -580,7 +548,11 @@
           >
         </returns>
         <param name="locationSubPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -609,13 +581,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method opens the machine-configuration file that is located in the directory specified by the <paramref
-             name="locationSubPath" />
+            >This method opens the machine-configuration file that is located in the directory specified by the <paramref name="locationSubPath" />
 
             
 
-             parameter and on the computer specified by the <paramref
-             name="server" />
+             parameter and on the computer specified by the <paramref name="server" />
 
             
 
@@ -625,8 +595,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens the specified machine-configuration file on the specified server as a <see
-             cref="T:System.Configuration.Configuration" />
+            >Opens the specified machine-configuration file on the specified server as a <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -636,8 +605,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Configuration.Configuration" />
+            >A <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -645,14 +613,22 @@
           >
         </returns>
         <param name="locationSubPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The application path to which the configuration applies.</param
         >
         <param name="server">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -684,13 +660,11 @@
           <para>This method is used to access a configuration file using impersonation. </para>
           <block subset="none" type="note">
             <para
-              >The account token is usually retrieved from an instance of the <see
-               cref="T:System.Security.Principal.WindowsIdentity" />
+              >The account token is usually retrieved from an instance of the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
               
 
-               class or through a call to unmanaged code, such as a call to the Win32 API LogonUser. For more information about calls to unmanaged code, see <format
-               type="text/html">
+               class or through a call to unmanaged code, such as a call to the Win32 API LogonUser. For more information about calls to unmanaged code, see <format type="text/html">
                 <a href="eca7606e-ebfb-4f47-b8d9-289903fdc045">Consuming Unmanaged DLL Functions</a>
               </format>
 
@@ -703,8 +677,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens the specified machine-configuration file on the specified server as a <see
-             cref="T:System.Configuration.Configuration" />
+            >Opens the specified machine-configuration file on the specified server as a <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -714,8 +687,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Configuration.Configuration" />
+            >A <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -723,21 +695,33 @@
           >
         </returns>
         <param name="locationSubPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The application path to which the configuration applies.</param
         >
         <param name="server">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fully qualified name of the server to return the configuration for.</param
         >
         <param name="userToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -772,8 +756,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens the specified machine-configuration file on the specified server as a <see
-             cref="T:System.Configuration.Configuration" />
+            >Opens the specified machine-configuration file on the specified server as a <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -783,8 +766,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Configuration.Configuration" />
+            >A <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -792,28 +774,44 @@
           >
         </returns>
         <param name="locationSubPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The application path to which the configuration applies. </param
         >
         <param name="server">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fully qualified name of the server to return the configuration for.</param
         >
         <param name="userName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The full user name (Domain\User) to use when opening the file.</param
         >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -842,8 +840,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens the machine-configuration file as a <see
-             cref="T:System.Configuration.Configuration" />
+            >Opens the machine-configuration file as a <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -853,8 +850,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Configuration.Configuration" />
+            >A <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -862,12 +858,15 @@
           >
         </returns>
         <param name="fileMap">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Configuration.ConfigurationFileMap" />
+          The <see cref="T:System.Configuration.ConfigurationFileMap" />
 
           
 
@@ -897,8 +896,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens the machine-configuration file as a <see
-             cref="T:System.Configuration.Configuration" />
+            >Opens the machine-configuration file as a <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -908,8 +906,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Configuration.Configuration" />
+            >A <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -917,19 +914,26 @@
           >
         </returns>
         <param name="fileMap">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Configuration.ConfigurationFileMap" />
+          The <see cref="T:System.Configuration.ConfigurationFileMap" />
 
           
 
            object to use in place of a default machine-configuration file.</param
         >
         <param name="locationSubPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -958,8 +962,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To obtain the <see
-             cref="T:System.Configuration.Configuration" />
+            >To obtain the <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -969,8 +972,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens the specified Web-application configuration file as a <see
-             cref="T:System.Configuration.Configuration" />
+            >Opens the specified Web-application configuration file as a <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -980,8 +982,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Configuration.Configuration" />
+            >A <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -989,19 +990,26 @@
           >
         </returns>
         <param name="fileMap">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Configuration.WebConfigurationFileMap" />
+          The <see cref="T:System.Web.Configuration.WebConfigurationFileMap" />
 
           
 
            object to use in place of a default Web-application configuration file.</param
         >
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1031,8 +1039,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To obtain the <see
-             cref="T:System.Configuration.Configuration" />
+            >To obtain the <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1042,8 +1049,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens the specified Web application configuration file as a <see
-             cref="T:System.Configuration.Configuration" />
+            >Opens the specified Web application configuration file as a <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1053,8 +1059,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Configuration.Configuration" />
+            >A <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1062,26 +1067,37 @@
           >
         </returns>
         <param name="fileMap">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Configuration.WebConfigurationFileMap" />
+          The <see cref="T:System.Web.Configuration.WebConfigurationFileMap" />
 
           
 
            object to use in place of a default Web-application configuration-file mapping.</param
         >
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The virtual path to the configuration file.</param
         >
         <param name="site">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1112,8 +1128,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To obtain the <see
-             cref="T:System.Configuration.Configuration" />
+            >To obtain the <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1123,8 +1138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens the specified Web-application configuration file as a <see
-             cref="T:System.Configuration.Configuration" />
+            >Opens the specified Web-application configuration file as a <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1134,8 +1148,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Configuration.Configuration" />
+            >A <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1143,33 +1156,48 @@
           >
         </returns>
         <param name="fileMap">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Configuration.WebConfigurationFileMap" />
+          The <see cref="T:System.Web.Configuration.WebConfigurationFileMap" />
 
           
 
            object to use in place of a default Web-application configuration-file mapping.</param
         >
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The virtual path to the configuration file. </param
         >
         <param name="site">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the application Web site, as displayed in Internet Information Services (IIS) configuration.</param
         >
         <param name="locationSubPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1197,8 +1225,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To obtain the <see
-             cref="T:System.Configuration.Configuration" />
+            >To obtain the <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1208,8 +1235,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens the Web-application configuration file as a <see
-             cref="T:System.Configuration.Configuration" />
+            >Opens the Web-application configuration file as a <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1219,8 +1245,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Configuration.Configuration" />
+            >A <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1228,7 +1253,11 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1257,8 +1286,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To obtain the <see
-             cref="T:System.Configuration.Configuration" />
+            >To obtain the <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1268,8 +1296,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens the Web-application configuration file as a <see
-             cref="T:System.Configuration.Configuration" />
+            >Opens the Web-application configuration file as a <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1279,8 +1306,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Configuration.Configuration" />
+            >A <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1288,14 +1314,22 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The virtual path to the configuration file. </param
         >
         <param name="site">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1325,8 +1359,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To obtain the <see
-             cref="T:System.Configuration.Configuration" />
+            >To obtain the <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1336,8 +1369,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens the Web-application configuration file as a <see
-             cref="T:System.Configuration.Configuration" />
+            >Opens the Web-application configuration file as a <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1347,8 +1379,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Configuration.Configuration" />
+            >A <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1356,21 +1387,33 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The virtual path to the configuration file. </param
         >
         <param name="site">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the application Web site, as displayed in Internet Information Services (IIS) configuration.</param
         >
         <param name="locationSubPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1401,8 +1444,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To obtain the <see
-             cref="T:System.Configuration.Configuration" />
+            >To obtain the <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1412,8 +1454,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens the Web-application configuration file as a <see
-             cref="T:System.Configuration.Configuration" />
+            >Opens the Web-application configuration file as a <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1423,8 +1464,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Configuration.Configuration" />
+            >A <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1432,28 +1472,44 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The virtual path to the configuration file. </param
         >
         <param name="site">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the application Web site, as displayed in Internet Information Services (IIS) configuration.</param
         >
         <param name="locationSubPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The specific resource to which the configuration applies. </param
         >
         <param name="server">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1487,13 +1543,11 @@
           <para>This method is used to access a configuration file using impersonation. </para>
           <block subset="none" type="note">
             <para
-              >The account token is usually retrieved from an instance of the <see
-               cref="T:System.Security.Principal.WindowsIdentity" />
+              >The account token is usually retrieved from an instance of the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
               
 
-               class or through a call to unmanaged code, such as a call to the Win32 API LogonUser. For more information about calls to unmanaged code, see <format
-               type="text/html">
+               class or through a call to unmanaged code, such as a call to the Win32 API LogonUser. For more information about calls to unmanaged code, see <format type="text/html">
                 <a href="eca7606e-ebfb-4f47-b8d9-289903fdc045">Consuming Unmanaged DLL Functions</a>
               </format>
 
@@ -1503,8 +1557,7 @@
             >
           </block>
           <para
-            >To obtain the <see
-             cref="T:System.Configuration.Configuration" />
+            >To obtain the <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1514,8 +1567,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens the Web-application configuration file as a <see
-             cref="T:System.Configuration.Configuration" />
+            >Opens the Web-application configuration file as a <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1525,8 +1577,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Configuration.Configuration" />
+            >A <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1534,35 +1585,55 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The virtual path to the configuration file. </param
         >
         <param name="site">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the application Web site, as displayed in Internet Information Services (IIS) configuration.</param
         >
         <param name="locationSubPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The specific resource to which the configuration applies.</param
         >
         <param name="server">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The network name of the server the Web application resides on.</param
         >
         <param name="userToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1596,16 +1667,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is used to access a configuration file using impersonation. </para>
           <para
-            >To obtain the <see
-             cref="T:System.Configuration.Configuration" />
+            >To obtain the <see cref="T:System.Configuration.Configuration" />
 
             
 
              object for a remote resource, your code must have administrative privileges on the remote computer.</para
           >
           <para
-            >You might need to run the <format
-             type="text/html">
+            >You might need to run the <format type="text/html">
               <a href="6491c41e-e2b0-481f-9863-db3614d5f96b"
                 >ASP.NET IIS Registration Tool (Aspnet_regiis.exe)</a
               >
@@ -1619,8 +1688,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens the Web-application configuration file as a <see
-             cref="T:System.Configuration.Configuration" />
+            >Opens the Web-application configuration file as a <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1630,8 +1698,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Configuration.Configuration" />
+            >A <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -1639,42 +1706,66 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The virtual path to the configuration file. </param
         >
         <param name="site">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the application Web site, as displayed in Internet Information Services (IIS) configuration.</param
         >
         <param name="locationSubPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The specific resource to which the configuration applies. </param
         >
         <param name="server">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The network name of the server the Web application resides on.</param
         >
         <param name="userName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The full user name (Domain\User) to use when opening the file.</param
         >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

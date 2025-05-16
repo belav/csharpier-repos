@@ -24,25 +24,21 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This module provides authorization services against file-system access-control lists (ACLs). When the mode attribute of the <format
-         type="text/html">
+        >This module provides authorization services against file-system access-control lists (ACLs). When the mode attribute of the <format type="text/html">
           <a href="27bc0ba9-f23a-45f3-ae42-dbe7916e3ee2">authentication</a>
         </format>
 
         
 
-         configuration element is set to Windows so that the <see
-         cref="T:System.Web.Security.WindowsAuthenticationModule" />
+         configuration element is set to Windows so that the <see cref="T:System.Web.Security.WindowsAuthenticationModule" />
 
         
 
-         is being used for the application, the <see
-         cref="T:System.Web.Security.FileAuthorizationModule" />
+         is being used for the application, the <see cref="T:System.Web.Security.FileAuthorizationModule" />
 
         
 
-         module ensures that the requesting user is allowed read or write access to the resource, depending on the request verb, before executing the request. For more information, see the <see
-         cref="M:System.Web.Security.FileAuthorizationModule.CheckFileAccessForUser(System.String,System.IntPtr,System.String)" />
+         module ensures that the requesting user is allowed read or write access to the resource, depending on the request verb, before executing the request. For more information, see the <see cref="M:System.Web.Security.FileAuthorizationModule.CheckFileAccessForUser(System.String,System.IntPtr,System.String)" />
 
         
 
@@ -65,18 +61,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor is not intended to be called from application code.</para>
           <para
-            >ASP.NET calls this constructor to create an instance of the <see
-             cref="T:System.Web.Security.FileAuthorizationModule" />
+            >ASP.NET calls this constructor to create an instance of the <see cref="T:System.Web.Security.FileAuthorizationModule" />
 
             
 
-             class. After calling the constructor, it calls the <see
-             cref="M:System.Web.Security.FileAuthorizationModule.Init(System.Web.HttpApplication)" />
+             class. After calling the constructor, it calls the <see cref="M:System.Web.Security.FileAuthorizationModule.Init(System.Web.HttpApplication)" />
 
             
 
-             method to initialize the new <see
-             cref="T:System.Web.Security.FileAuthorizationModule" />
+             method to initialize the new <see cref="T:System.Web.Security.FileAuthorizationModule" />
 
             
 
@@ -86,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Web.Security.FileAuthorizationModule" />
+            >Creates an instance of the <see cref="T:System.Web.Security.FileAuthorizationModule" />
 
             
 
@@ -121,34 +113,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Security.FileAuthorizationModule.CheckFileAccessForUser(System.String,System.IntPtr,System.String)" />
+            >The <see cref="M:System.Web.Security.FileAuthorizationModule.CheckFileAccessForUser(System.String,System.IntPtr,System.String)" />
 
             
 
              method checks to see whether the current user, represented by a Windows access token, is granted access to the requested file in the file-system access-control lists (ACLs). The virtual path is mapped to the physical file-system path before the check is made.</para
           >
           <para
-            >If the HTTP verb used to make the request is GET, POST, or HEAD, the <see
-             cref="M:System.Web.Security.FileAuthorizationModule.CheckFileAccessForUser(System.String,System.IntPtr,System.String)" />
+            >If the HTTP verb used to make the request is GET, POST, or HEAD, the <see cref="M:System.Web.Security.FileAuthorizationModule.CheckFileAccessForUser(System.String,System.IntPtr,System.String)" />
 
             
 
-             method checks for read access to the file. If any other verb is used, the <see
-             cref="M:System.Web.Security.FileAuthorizationModule.CheckFileAccessForUser(System.String,System.IntPtr,System.String)" />
+             method checks for read access to the file. If any other verb is used, the <see cref="M:System.Web.Security.FileAuthorizationModule.CheckFileAccessForUser(System.String,System.IntPtr,System.String)" />
 
             
 
              method checks for read/write permission to the file.</para
           >
           <para
-            >Security Note   If the <see
-             cref="T:System.Web.Security.FileAuthorizationModule" />
+            >Security Note   If the <see cref="T:System.Web.Security.FileAuthorizationModule" />
 
             
 
-             module is not defined in the httpModules configuration section for the application, the <see
-             cref="T:System.Web.Security.FileAuthorizationModule" />
+             module is not defined in the httpModules configuration section for the application, the <see cref="T:System.Web.Security.FileAuthorizationModule" />
 
             
 
@@ -162,13 +149,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the current Windows user represented by <paramref
-             name="token" />
+            >true if the current Windows user represented by <paramref name="token" />
 
             
 
-             has access to the file using the specified HTTP verb or if the <see
-             cref="T:System.Web.Security.FileAuthorizationModule" />
+             has access to the file using the specified HTTP verb or if the <see cref="T:System.Web.Security.FileAuthorizationModule" />
 
             
 
@@ -176,21 +161,33 @@
           >
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The virtual path to the file.</param
         >
         <param name="token">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows access token representing the user.</param
         >
         <param name="verb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -213,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources, other than memory, used by the <see
-             cref="T:System.Web.Security.FileAuthorizationModule" />
+            >Releases all resources, other than memory, used by the <see cref="T:System.Web.Security.FileAuthorizationModule" />
 
             
 
@@ -241,18 +237,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is not intended to be called from application code.</para>
           <para
-            >The <see
-             cref="M:System.Web.Security.FileAuthorizationModule.Init(System.Web.HttpApplication)" />
+            >The <see cref="M:System.Web.Security.FileAuthorizationModule.Init(System.Web.HttpApplication)" />
 
             
 
-             method ensures that the <see
-             cref="T:System.Web.Security.FileAuthorizationModule" />
+             method ensures that the <see cref="T:System.Web.Security.FileAuthorizationModule" />
 
             
 
-             is included in the processing of the <see
-             cref="E:System.Web.HttpApplication.AuthorizeRequest" />
+             is included in the processing of the <see cref="E:System.Web.HttpApplication.AuthorizeRequest" />
 
             
 
@@ -262,8 +255,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the <see
-             cref="T:System.Web.Security.FileAuthorizationModule" />
+            >Initializes the <see cref="T:System.Web.Security.FileAuthorizationModule" />
 
             
 
@@ -271,12 +263,15 @@
           >
         </summary>
         <param name="app">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The current <see
-           cref="T:System.Web.HttpApplication" />
+          The current <see cref="T:System.Web.HttpApplication" />
 
           
 

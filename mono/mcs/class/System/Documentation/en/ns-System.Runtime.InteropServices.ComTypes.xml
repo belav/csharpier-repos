@@ -5,8 +5,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The System.Runtime.InteropServices.ComTypes namespace contains methods that are defintions of COM functions for managed code. These functions replace the now-obsolete UCOM* methods in the <see
-         cref="N:System.Runtime.InteropServices" />
+        >The System.Runtime.InteropServices.ComTypes namespace contains methods that are defintions of COM functions for managed code. These functions replace the now-obsolete UCOM* methods in the <see cref="N:System.Runtime.InteropServices" />
 
         
 

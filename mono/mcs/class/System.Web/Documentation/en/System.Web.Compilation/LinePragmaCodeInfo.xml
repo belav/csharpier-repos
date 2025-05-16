@@ -14,13 +14,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >During page parsing, information about a script block is stored in the <see
-         cref="T:System.Web.Compilation.LinePragmaCodeInfo" />
+        >During page parsing, information about a script block is stored in the <see cref="T:System.Web.Compilation.LinePragmaCodeInfo" />
 
         
 
-         class. This class is used in the <see
-         cref="T:System.Web.UI.SimpleWebHandlerParser" />
+         class. This class is used in the <see cref="T:System.Web.UI.SimpleWebHandlerParser" />
 
         
 
@@ -31,8 +29,7 @@
 
         
 
-         is introduced in the .NET Framework version 3.5.  For more information, see <format
-         type="text/html">
+         is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
           <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
         </format>
 
@@ -56,8 +53,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To use the properties of a <see
-             cref="T:System.Web.Compilation.LinePragmaCodeInfo" />
+            >To use the properties of a <see cref="T:System.Web.Compilation.LinePragmaCodeInfo" />
 
             
 
@@ -67,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Compilation.LinePragmaCodeInfo" />
+            >Initializes a new instance of the <see cref="T:System.Web.Compilation.LinePragmaCodeInfo" />
 
             
 

@@ -29,8 +29,7 @@
 
         
 
-         represents a callback method that you want to execute when a message is to be dispatched to a synchronization context.  Create the delegate by passing your callback method to the <see
-         cref="T:System.Threading.SendOrPostCallback" />
+         represents a callback method that you want to execute when a message is to be dispatched to a synchronization context.  Create the delegate by passing your callback method to the <see cref="T:System.Threading.SendOrPostCallback" />
 
         
 

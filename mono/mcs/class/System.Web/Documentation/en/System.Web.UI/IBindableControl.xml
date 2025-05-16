@@ -44,7 +44,11 @@
           <para>Retrieves a set of name/value pairs to implement two-way data-binding in field template controls.</para>
         </summary>
         <param name="dictionary">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

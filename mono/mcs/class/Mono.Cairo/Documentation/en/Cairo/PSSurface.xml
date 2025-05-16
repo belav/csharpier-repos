@@ -27,21 +27,16 @@
         <Parameter Name="height" Type="System.Double" />
       </Parameters>
       <Docs>
-        <param name="filename"
-          >Filename for the PDF output as <see
-           cref="t:System.String" />
-        </param>
+        <param name="filename">Filename for the PDF output as <see cref="t:System.String" /></param>
         <param name="width"
-          >width of the surface, in points as <see
-           cref="t:System.Double" />
+          >width of the surface, in points as <see cref="t:System.Double" />
 
           
 
            (1 point == 1/72.0 inch)</param
         >
         <param name="height"
-          >height of the surface, in points as <see
-           cref="t:System.Double" />
+          >height of the surface, in points as <see cref="t:System.Double" />
 
           
 
@@ -65,8 +60,7 @@
       <Docs>
         <summary>Begins the setup of the page</summary>
         <remarks
-          >Note that it is only necessary to call <see
-           cref="M:Cairo.PSSurface.BeginPageSetup" />
+          >Note that it is only necessary to call <see cref="M:Cairo.PSSurface.BeginPageSetup" />
 
           
 
@@ -104,10 +98,7 @@
         <Parameter Name="comment" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="comment"
-          >The comment as a <see
-           cref="t:System.String" />
-        </param>
+        <param name="comment">The comment as a <see cref="t:System.String" /></param>
         <summary>Emits a comment into the PostScript output</summary>
         <remarks />
       </Docs>
@@ -128,16 +119,14 @@
       </Parameters>
       <Docs>
         <param name="width"
-          >The new surface width in points as <see
-           cref="t:System.Double" />
+          >The new surface width in points as <see cref="t:System.Double" />
 
           
 
            (1 point == 1/72.0 inch)</param
         >
         <param name="height"
-          >The new surface height in points as <see
-           cref="t:System.Double" />
+          >The new surface height in points as <see cref="t:System.Double" />
 
           
 

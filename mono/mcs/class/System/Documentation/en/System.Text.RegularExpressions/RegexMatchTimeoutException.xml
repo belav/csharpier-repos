@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The presence of a <see
-         cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+        >The presence of a <see cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
 
         
 
@@ -44,13 +43,11 @@
       <list type="bullet">
         <item>
           <para
-            >If the time-out results from excessive backtracking, your exception handler should abandon the attempt to match the input and inform the user that a time-out has occurred in the regular expression pattern-matching method. If possible, information about the regular expression pattern, which is available from the <see
-             cref="P:System.Text.RegularExpressions.RegexMatchTimeoutException.Pattern" />
+            >If the time-out results from excessive backtracking, your exception handler should abandon the attempt to match the input and inform the user that a time-out has occurred in the regular expression pattern-matching method. If possible, information about the regular expression pattern, which is available from the <see cref="P:System.Text.RegularExpressions.RegexMatchTimeoutException.Pattern" />
 
             
 
-             property, and the input that caused excessive backtracking, which is available from the <see
-             cref="P:System.Text.RegularExpressions.RegexMatchTimeoutException.Input" />
+             property, and the input that caused excessive backtracking, which is available from the <see cref="P:System.Text.RegularExpressions.RegexMatchTimeoutException.Input" />
 
             
 
@@ -59,13 +56,11 @@
         </item>
         <item>
           <para
-            >If the time-out results from setting the time-out threshold too low, you can increase the time-out interval and retry the matching operation. The current time-out interval is available from the <see
-             cref="P:System.Text.RegularExpressions.RegexMatchTimeoutException.MatchTimeout" />
+            >If the time-out results from setting the time-out threshold too low, you can increase the time-out interval and retry the matching operation. The current time-out interval is available from the <see cref="P:System.Text.RegularExpressions.RegexMatchTimeoutException.MatchTimeout" />
 
             
 
-             property. When a <see
-             cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+             property. When a <see cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
 
             
 
@@ -74,8 +69,7 @@
         </item>
       </list>
       <para
-        >The example in the next section illustrates both techniques for handling a <see
-         cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+        >The example in the next section illustrates both techniques for handling a <see cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
 
         
 
@@ -103,13 +97,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is the default constructor of the <see
-             cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+            >This is the default constructor of the <see cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
 
             
 
-             class. This constructor initializes the <see
-             cref="P:System.Exception.Message" />
+             class. This constructor initializes the <see cref="P:System.Exception.Message" />
 
             
 
@@ -119,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+            >Initializes a new instance of the <see cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
 
             
 
@@ -146,13 +137,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="message" />
+            >The <paramref name="message" />
 
             
 
-             string is assigned to the <see
-             cref="P:System.Exception.Message" />
+             string is assigned to the <see cref="P:System.Exception.Message" />
 
             
 
@@ -162,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+            >Initializes a new instance of the <see cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
 
             
 
@@ -171,7 +159,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -200,18 +192,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is not called directly by your code to instantiate the <see
-             cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+            >This constructor is not called directly by your code to instantiate the <see cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
 
             
 
-             object. Instead, it is called by the <see
-             cref="M:System.Runtime.Serialization.IFormatter.Deserialize(System.IO.Stream)" />
+             object. Instead, it is called by the <see cref="M:System.Runtime.Serialization.IFormatter.Deserialize(System.IO.Stream)" />
 
             
 
-             method when deserializing the <see
-             cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+             method when deserializing the <see cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
 
             
 
@@ -221,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+            >Initializes a new instance of the <see cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
 
             
 
@@ -230,14 +218,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that contains the serialized data.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -266,31 +262,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you use this overload to handle an exception in a try/catch block. The <paramref
-             name="innerException" />
+            >Typically, you use this overload to handle an exception in a try/catch block. The <paramref name="innerException" />
 
             
 
-             parameter should be a reference to the exception object handled in the catch block, or it can be null. This value is then assigned to the <see
-             cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+             parameter should be a reference to the exception object handled in the catch block, or it can be null. This value is then assigned to the <see cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
 
             
 
-             object's <see
-             cref="P:System.Exception.InnerException" />
+             object's <see cref="P:System.Exception.InnerException" />
 
             
 
              property.</para
           >
           <para
-            >The <paramref
-             name="message" />
+            >The <paramref name="message" />
 
             
 
-             string is assigned to the <see
-             cref="P:System.Exception.Message" />
+             string is assigned to the <see cref="P:System.Exception.Message" />
 
             
 
@@ -300,8 +291,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+            >Initializes a new instance of the <see cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
 
             
 
@@ -309,14 +299,22 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string that describes the exception.</param
         >
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -346,38 +344,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="regexInput" />
+            >The <paramref name="regexInput" />
 
             
 
-            , <paramref
-             name="regexPattern" />
+            , <paramref name="regexPattern" />
 
             
 
-            , and <paramref
-             name="matchTimeout" />
+            , and <paramref name="matchTimeout" />
 
             
 
-             values are assigned to the <see
-             cref="P:System.Text.RegularExpressions.RegexMatchTimeoutException.Input" />
+             values are assigned to the <see cref="P:System.Text.RegularExpressions.RegexMatchTimeoutException.Input" />
 
             
 
-            , <see
-             cref="P:System.Text.RegularExpressions.RegexMatchTimeoutException.Pattern" />
+            , <see cref="P:System.Text.RegularExpressions.RegexMatchTimeoutException.Pattern" />
 
             
 
-            , and <see
-             cref="P:System.Text.RegularExpressions.RegexMatchTimeoutException.MatchTimeout" />
+            , and <see cref="P:System.Text.RegularExpressions.RegexMatchTimeoutException.MatchTimeout" />
 
             
 
-             properties of the new <see
-             cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+             properties of the new <see cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
 
             
 
@@ -387,8 +378,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+            >Initializes a new instance of the <see cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
 
             
 
@@ -396,21 +386,33 @@
           >
         </summary>
         <param name="regexInput">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The input text processed by the regular expression engine when the time-out occurred.</param
         >
         <param name="regexPattern">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The pattern used by the regular expression engine when the time-out occurred.</param
         >
         <param name="matchTimeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -433,31 +435,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property reflects the value of the <paramref
-             name="regexInput" />
+            >This property reflects the value of the <paramref name="regexInput" />
 
             
 
-              parameter of the <see
-             cref="M:System.Text.RegularExpressions.RegexMatchTimeoutException.#ctor(System.String,System.String,System.TimeSpan)" />
+              parameter of the <see cref="M:System.Text.RegularExpressions.RegexMatchTimeoutException.#ctor(System.String,System.String,System.TimeSpan)" />
 
             
 
-             constructor. If this parameter is not explicitly initialized in a constructor call, its value is <see
-             cref="F:System.String.Empty" />
+             constructor. If this parameter is not explicitly initialized in a constructor call, its value is <see cref="F:System.String.Empty" />
 
             
 
             .</para
           >
           <para
-            >When the exception is thrown by the regular expression engine, the value of the <see
-             cref="P:System.Text.RegularExpressions.RegexMatchTimeoutException.Input" />
+            >When the exception is thrown by the regular expression engine, the value of the <see cref="P:System.Text.RegularExpressions.RegexMatchTimeoutException.Input" />
 
             
 
-             property reflects the entire input string passed to the regular expression engine. It does not reflect a partial string, such as the substring that the engine searches in the call to a method such as <see
-             cref="M:System.Text.RegularExpressions.Regex.Match(System.String,System.Int32)" />
+             property reflects the entire input string passed to the regular expression engine. It does not reflect a partial string, such as the substring that the engine searches in the call to a method such as <see cref="M:System.Text.RegularExpressions.Regex.Match(System.String,System.Int32)" />
 
             
 
@@ -488,21 +485,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property reflects the value of the <paramref
-             name="matchTimeout" />
+            >This property reflects the value of the <paramref name="matchTimeout" />
 
             
 
-             parameter of the <see
-             cref="M:System.Text.RegularExpressions.RegexMatchTimeoutException.#ctor(System.String,System.String,System.TimeSpan)" />
+             parameter of the <see cref="M:System.Text.RegularExpressions.RegexMatchTimeoutException.#ctor(System.String,System.String,System.TimeSpan)" />
 
             
 
              constructor. If the parameter is not properly initialized in a constructor call, its value is Timespan.FromTicks(-1).</para
           >
           <para
-            >The value of this property reflects the time-out interval set in the call to the <see
-             cref="T:System.Text.RegularExpressions.Regex" />
+            >The value of this property reflects the time-out interval set in the call to the <see cref="T:System.Text.RegularExpressions.Regex" />
 
             
 
@@ -530,18 +524,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property reflects the value of the <paramref
-             name="regexPattern" />
+            >This property reflects the value of the <paramref name="regexPattern" />
 
             
 
-              parameter of the <see
-             cref="M:System.Text.RegularExpressions.RegexMatchTimeoutException.#ctor(System.String,System.String,System.TimeSpan)" />
+              parameter of the <see cref="M:System.Text.RegularExpressions.RegexMatchTimeoutException.#ctor(System.String,System.String,System.TimeSpan)" />
 
             
 
-             constructor. If the parameter is not properly initialized in a constructor call, its value is <see
-             cref="F:System.String.Empty" />
+             constructor. If the parameter is not properly initialized in a constructor call, its value is <see cref="F:System.String.Empty" />
 
             
 

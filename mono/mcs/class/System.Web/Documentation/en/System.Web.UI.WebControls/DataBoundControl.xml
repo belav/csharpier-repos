@@ -22,112 +22,92 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.DataBoundControl" />
+        >The <see cref="T:System.Web.UI.WebControls.DataBoundControl" />
 
         
 
-         class is the base class used for ASP.NET controls that retrieve tabular or list-style data from an ASP.NET data source control and bind user-interface (UI) elements of the control to that data for display. Composite data-bound controls such as <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         class is the base class used for ASP.NET controls that retrieve tabular or list-style data from an ASP.NET data source control and bind user-interface (UI) elements of the control to that data for display. Composite data-bound controls such as <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+        , <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-        , and <see
-         cref="T:System.Web.UI.WebControls.FormView" />
+        , and <see cref="T:System.Web.UI.WebControls.FormView" />
 
         
 
-        ; list-style data-bound controls such as <see
-         cref="T:System.Web.UI.WebControls.BulletedList" />
+        ; list-style data-bound controls such as <see cref="T:System.Web.UI.WebControls.BulletedList" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.WebControls.CheckBoxList" />
+         and <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
         
 
-        ; and other controls such as <see
-         cref="T:System.Web.UI.WebControls.AdRotator" />
+        ; and other controls such as <see cref="T:System.Web.UI.WebControls.AdRotator" />
 
         
 
-         derive from <see
-         cref="T:System.Web.UI.WebControls.DataBoundControl" />
+         derive from <see cref="T:System.Web.UI.WebControls.DataBoundControl" />
 
         
 
         . </para
       >
       <para
-        >Page developers do not use the <see
-         cref="T:System.Web.UI.WebControls.DataBoundControl" />
+        >Page developers do not use the <see cref="T:System.Web.UI.WebControls.DataBoundControl" />
 
         
 
          class directly; instead, they use controls that derive from this class.</para
       >
       <para
-        >Control developers extend this class to create data-bound controls that work with classes that implement the <see
-         cref="T:System.Web.UI.IDataSource" />
+        >Control developers extend this class to create data-bound controls that work with classes that implement the <see cref="T:System.Web.UI.IDataSource" />
 
         
 
-         interface and classes that derive from the <see
-         cref="T:System.Web.UI.DataSourceControl" />
+         interface and classes that derive from the <see cref="T:System.Web.UI.DataSourceControl" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.DataSourceView" />
+         and <see cref="T:System.Web.UI.DataSourceView" />
 
         
 
-         classes. When deriving a class from the <see
-         cref="T:System.Web.UI.WebControls.DataBoundControl" />
+         classes. When deriving a class from the <see cref="T:System.Web.UI.WebControls.DataBoundControl" />
 
         
 
-         class, override the <see
-         cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" />
+         class, override the <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" />
 
         
 
-         method to bind the UI elements of your control to data retrieved by the <see
-         cref="M:System.Web.UI.WebControls.DataBoundControl.GetData" />
+         method to bind the UI elements of your control to data retrieved by the <see cref="M:System.Web.UI.WebControls.DataBoundControl.GetData" />
 
         
 
-         method. In most cases, the <see
-         cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" />
+         method. In most cases, the <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" />
 
         
 
          method is the only method you will override in your derived class. </para
       >
       <para
-        >For ASP.NET 2.0 data-bound controls, the <see
-         cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" />
+        >For ASP.NET 2.0 data-bound controls, the <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" />
 
         
 
-         method is the equivalent of the DataBind method, and is called to bind data at run time. The <see
-         cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" />
+         method is the equivalent of the DataBind method, and is called to bind data at run time. The <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" />
 
         
 
-         method calls the <see
-         cref="M:System.Web.UI.WebControls.DataBoundControl.GetData" />
+         method calls the <see cref="M:System.Web.UI.WebControls.DataBoundControl.GetData" />
 
         
 
-         and <see
-         cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" />
+         and <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" />
 
         
 
@@ -150,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the <see
-             cref="T:System.Web.UI.WebControls.DataBoundControl" />
+            >Initializes the <see cref="T:System.Web.UI.WebControls.DataBoundControl" />
 
             
 
@@ -178,23 +157,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.DataBoundControl.CreateDataSourceSelectArguments" />
+            >The <see cref="M:System.Web.UI.WebControls.DataBoundControl.CreateDataSourceSelectArguments" />
 
             
 
-             method is used by the <see
-             cref="P:System.Web.UI.WebControls.DataBoundControl.SelectArguments" />
+             method is used by the <see cref="P:System.Web.UI.WebControls.DataBoundControl.SelectArguments" />
 
             
 
-             property to initialize a default arguments object, and by the <see
-             cref="T:System.Web.UI.WebControls.DataBoundControl" />
+             property to initialize a default arguments object, and by the <see cref="T:System.Web.UI.WebControls.DataBoundControl" />
 
             
 
-             class's implementation of the <see
-             cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" />
+             class's implementation of the <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" />
 
             
 
@@ -204,8 +179,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a default <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+            >Creates a default <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
@@ -215,13 +189,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+            >A <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
-             initialized to <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />
+             initialized to <see cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />
 
             
 
@@ -253,21 +225,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="P:System.Web.UI.WebControls.DataBoundControl.DataMember" />
+            >The value of the <see cref="P:System.Web.UI.WebControls.DataBoundControl.DataMember" />
 
             
 
              property is stored in view state.</para
           >
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -324,28 +293,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.DataBoundControl.GetData" />
+            >The <see cref="M:System.Web.UI.WebControls.DataBoundControl.GetData" />
 
             
 
-             method retrieves a <see
-             cref="T:System.Web.UI.DataSourceView" />
+             method retrieves a <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             object from the associated data source control by calling the <see
-             cref="M:System.Web.UI.WebControls.DataBoundControl.GetDataSource" />
+             object from the associated data source control by calling the <see cref="M:System.Web.UI.WebControls.DataBoundControl.GetDataSource" />
 
             
 
-             method. If the <see
-             cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
+             method. If the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
 
             
 
-             property is used to identify a data source, a default <see
-             cref="T:System.Web.UI.DataSourceView" />
+             property is used to identify a data source, a default <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
@@ -355,8 +319,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >Retrieves a <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
@@ -366,23 +329,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >The <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             that the data-bound control uses to perform data operations. If the <see
-             cref="P:System.Web.UI.WebControls.DataBoundControl.DataMember" />
+             that the data-bound control uses to perform data operations. If the <see cref="P:System.Web.UI.WebControls.DataBoundControl.DataMember" />
 
             
 
-             property is set, a specific, named <see
-             cref="T:System.Web.UI.DataSourceView" />
+             property is set, a specific, named <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             is returned; otherwise, the default <see
-             cref="T:System.Web.UI.DataSourceView" />
+             is returned; otherwise, the default <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
@@ -409,28 +368,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.DataBoundControl.GetData" />
+            >The <see cref="M:System.Web.UI.WebControls.DataBoundControl.GetData" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.WebControls.DataBoundControl.GetDataSource" />
+             method calls the <see cref="M:System.Web.UI.WebControls.DataBoundControl.GetDataSource" />
 
             
 
-             method internally. A valid <see
-             cref="T:System.Web.UI.IDataSource" />
+             method internally. A valid <see cref="T:System.Web.UI.IDataSource" />
 
             
 
-             instance is retrieved by these two methods and is cached by the <see
-             cref="T:System.Web.UI.WebControls.DataBoundControl" />
+             instance is retrieved by these two methods and is cached by the <see cref="T:System.Web.UI.WebControls.DataBoundControl" />
 
             
 
-             object until the <see
-             cref="M:System.Web.UI.WebControls.DataBoundControl.OnDataPropertyChanged" />
+             object until the <see cref="M:System.Web.UI.WebControls.DataBoundControl.OnDataPropertyChanged" />
 
             
 
@@ -440,8 +394,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the <see
-             cref="T:System.Web.UI.IDataSource" />
+            >Retrieves the <see cref="T:System.Web.UI.IDataSource" />
 
             
 
@@ -451,13 +404,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Web.UI.IDataSource" />
+            >An <see cref="T:System.Web.UI.IDataSource" />
 
             
 
-             that represents the data source identified by <see
-             cref="P:System.Web.UI.WebControls.DataBoundControl.DataSourceID" />
+             that represents the data source identified by <see cref="P:System.Web.UI.WebControls.DataBoundControl.DataSourceID" />
 
             
 
@@ -502,8 +453,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The data-bound control maintains a value in view state that indicates whether it is currently bound to data. The <see
-             cref="M:System.Web.UI.WebControls.DataBoundControl.MarkAsDataBound" />
+            >The data-bound control maintains a value in view state that indicates whether it is currently bound to data. The <see cref="M:System.Web.UI.WebControls.DataBoundControl.MarkAsDataBound" />
 
             
 
@@ -556,39 +506,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
 
             
 
-             method notifies a data-bound control that the underlying data source has changed and that the control should rebind and any necessary work should be performed. Typically, the <see
-             cref="M:System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
+             method notifies a data-bound control that the underlying data source has changed and that the control should rebind and any necessary work should be performed. Typically, the <see cref="M:System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
 
             
 
              method is called when a property of the data source view has changed.</para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.DataBoundControl" />
+            >The <see cref="T:System.Web.UI.WebControls.DataBoundControl" />
 
             
 
-             class sets the <see
-             cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" />
+             class sets the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" />
 
             
 
-             property to true when it raises the <see
-             cref="E:System.Web.UI.DataSourceView.DataSourceViewChanged" />
+             property to true when it raises the <see cref="E:System.Web.UI.DataSourceView.DataSourceViewChanged" />
 
             
 
              event.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -597,8 +541,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
 
             
 
@@ -608,8 +551,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.DataSourceView.DataSourceViewChanged" />
+            >Raises the <see cref="E:System.Web.UI.DataSourceView.DataSourceViewChanged" />
 
             
 
@@ -617,24 +559,30 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The source of the event, the <see
-           cref="T:System.Web.UI.DataSourceView" />
+          The source of the event, the <see cref="T:System.Web.UI.DataSourceView" />
 
           
 
           .</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -661,18 +609,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.DataBoundControl" />
+            >The <see cref="T:System.Web.UI.WebControls.DataBoundControl" />
 
             
 
-             class calls the <see
-             cref="M:System.Web.UI.WebControls.BaseDataBoundControl.ConfirmInitState" />
+             class calls the <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.ConfirmInitState" />
 
             
 
-             method to set the initialized state of the data-bound control and sets the <see
-             cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" />
+             method to set the initialized state of the data-bound control and sets the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" />
 
             
 
@@ -682,8 +627,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see
-             cref="E:System.Web.UI.Control.Load" />
+            >Handles the <see cref="E:System.Web.UI.Control.Load" />
 
             
 
@@ -691,12 +635,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -722,28 +669,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.DataBoundControl.OnPagePreLoad(System.Object,System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.DataBoundControl.OnPagePreLoad(System.Object,System.EventArgs)" />
 
             
 
-             method is overridden by the <see
-             cref="T:System.Web.UI.WebControls.DataBoundControl" />
+             method is overridden by the <see cref="T:System.Web.UI.WebControls.DataBoundControl" />
 
             
 
-             class to set the <see
-             cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" />
+             class to set the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" />
 
             
 
-             property to true in cases where the HTTP request is a postback and view state is enabled but the data-bound control has not yet been bound. This scenario is common with controls such as <see
-             cref="T:System.Web.UI.WebControls.Wizard" />
+             property to true in cases where the HTTP request is a postback and view state is enabled but the data-bound control has not yet been bound. This scenario is common with controls such as <see cref="T:System.Web.UI.WebControls.Wizard" />
 
             
 
-             and <see
-             cref="T:System.Web.UI.WebControls.MultiView" />
+             and <see cref="T:System.Web.UI.WebControls.MultiView" />
 
             
 
@@ -755,24 +697,30 @@
           <para>Sets the initialized state of the data-bound control before the control is loaded.</para>
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Page" />
+          The <see cref="T:System.Web.UI.Page" />
 
           
 
            that raised the event.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -802,51 +750,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implement this method instead of the <see
-             cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" />
+            >Implement this method instead of the <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" />
 
             
 
-             method when you derive a data-bound control from the <see
-             cref="T:System.Web.UI.WebControls.DataBoundControl" />
+             method when you derive a data-bound control from the <see cref="T:System.Web.UI.WebControls.DataBoundControl" />
 
             
 
-             class. Placing your control's data-binding logic in <see
-             cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" />
+             class. Placing your control's data-binding logic in <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" />
 
             
 
-             enables you to avoid the <see
-             cref="E:System.Web.UI.Control.DataBinding" />
+             enables you to avoid the <see cref="E:System.Web.UI.Control.DataBinding" />
 
             
 
-             and <see
-             cref="E:System.Web.UI.WebControls.BaseDataBoundControl.DataBound" />
+             and <see cref="E:System.Web.UI.WebControls.BaseDataBoundControl.DataBound" />
 
             
 
              events being raised in the wrong order.</para
           >
           <para
-            >While the base <see
-             cref="T:System.Web.UI.WebControls.DataBoundControl" />
+            >While the base <see cref="T:System.Web.UI.WebControls.DataBoundControl" />
 
             
 
-             class provides no specific implementation for this method, the <see
-             cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" />
+             class provides no specific implementation for this method, the <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" />
 
             
 
-             method is called by the <see
-             cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" />
+             method is called by the <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" />
 
             
 
-             method to bind the values of any user interface (UI) controls to the data that is retrieved by the <see
-             cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" />
+             method to bind the values of any user interface (UI) controls to the data that is retrieved by the <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" />
 
             
 
@@ -858,17 +797,19 @@
           <para>When overridden in a derived class, binds data from the data source to the control. </para>
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IEnumerable" />
+          The <see cref="T:System.Collections.IEnumerable" />
 
           
 
-           list of data returned from a <see
-           cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" />
+           list of data returned from a <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" />
 
           
 
@@ -888,18 +829,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" />
+            >The <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" />
 
             
 
-             method is called after data is retrieved to bind data to elements of the data-bound control. Derived types override this method to retrieve data only if the default implementation is not adequate. Typically, it is sufficient to provide a <see
-             cref="T:System.Web.UI.DataSourceViewSelectCallback" />
+             method is called after data is retrieved to bind data to elements of the data-bound control. Derived types override this method to retrieve data only if the default implementation is not adequate. Typically, it is sufficient to provide a <see cref="T:System.Web.UI.DataSourceViewSelectCallback" />
 
             
 
-             delegate that performs any custom data work, rather than implementing the <see
-             cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" />
+             delegate that performs any custom data work, rather than implementing the <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" />
 
             
 
@@ -930,18 +868,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.DataBoundControl.SelectArguments" />
+            >The <see cref="P:System.Web.UI.WebControls.DataBoundControl.SelectArguments" />
 
             
 
-             property calls the <see
-             cref="M:System.Web.UI.WebControls.DataBoundControl.CreateDataSourceSelectArguments" />
+             property calls the <see cref="M:System.Web.UI.WebControls.DataBoundControl.CreateDataSourceSelectArguments" />
 
             
 
-             method to create a default <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+             method to create a default <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
@@ -951,8 +886,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+            >Gets a <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
@@ -981,43 +915,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.DataBoundControl.ValidateDataSource(System.Object)" />
+            >The <see cref="M:System.Web.UI.WebControls.DataBoundControl.ValidateDataSource(System.Object)" />
 
             
 
-             method is only called in the <see
-             cref="T:System.Web.UI.WebControls.BaseDataBoundControl" />
+             method is only called in the <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" />
 
             
 
-             class's mutator (set accessor) for the <see
-             cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
+             class's mutator (set accessor) for the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
 
             
 
-             property. The <see
-             cref="T:System.Web.UI.WebControls.DataBoundControl" />
+             property. The <see cref="T:System.Web.UI.WebControls.DataBoundControl" />
 
             
 
-             class checks the type of the object that is set for the <see
-             cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
+             class checks the type of the object that is set for the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
 
             
 
-             property to ensure that it is an instance of the <see
-             cref="T:System.Web.UI.IDataSource" />
+             property to ensure that it is an instance of the <see cref="T:System.Web.UI.IDataSource" />
 
             
 
-            , <see
-             cref="T:System.ComponentModel.IListSource" />
+            , <see cref="T:System.ComponentModel.IListSource" />
 
             
 
-            , or <see
-             cref="T:System.Collections.IEnumerable" />
+            , or <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -1029,12 +955,15 @@
           <para>Verifies that the object a data-bound control binds to is one it can work with.</para>
         </summary>
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object set to the <see
-           cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
+          An object set to the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
 
           
 

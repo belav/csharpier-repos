@@ -28,55 +28,47 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.IDesigner" />
+        >The <see cref="T:System.ComponentModel.Design.IDesigner" />
 
         
 
-         interface provides an interface through which you can implement basic services for a designer. A designer can modify the behavior of a component at design time, and may provide its own services and behavior. A designer is only active at design-time, and must be associated with a type of component using a <see
-         cref="T:System.ComponentModel.DesignerAttribute" />
+         interface provides an interface through which you can implement basic services for a designer. A designer can modify the behavior of a component at design time, and may provide its own services and behavior. A designer is only active at design-time, and must be associated with a type of component using a <see cref="T:System.ComponentModel.DesignerAttribute" />
 
         
 
          in order to be loaded when a component of the associated type is created at design time.</para
       >
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.IDesigner" />
+        >The <see cref="T:System.ComponentModel.Design.IDesigner" />
 
         
 
          interface provides methods and properties that you can implement in order to provide custom behavior at design time.</para
       >
       <para
-        >Implement the <see
-         cref="M:System.ComponentModel.Design.IDesigner.Initialize(System.ComponentModel.IComponent)" />
+        >Implement the <see cref="M:System.ComponentModel.Design.IDesigner.Initialize(System.ComponentModel.IComponent)" />
 
         
 
          method of a designer to perform actions when a component is created. This can be useful if a component should have a special configuration at design-time, or if its configuration should change depending on conditions that the designer can determine.</para
       >
       <para
-        >A designer can provide menu commands on the shortcut menu that is displayed when a user right-clicks a component or control in the design-time environment. You can implement the <see
-         cref="P:System.ComponentModel.Design.IDesigner.Verbs" />
+        >A designer can provide menu commands on the shortcut menu that is displayed when a user right-clicks a component or control in the design-time environment. You can implement the <see cref="P:System.ComponentModel.Design.IDesigner.Verbs" />
 
         
 
-         property to define a get accessor that returns a <see
-         cref="T:System.ComponentModel.Design.DesignerVerbCollection" />
+         property to define a get accessor that returns a <see cref="T:System.ComponentModel.Design.DesignerVerbCollection" />
 
         
 
-         containing the <see
-         cref="T:System.ComponentModel.Design.DesignerVerb" />
+         containing the <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
         
 
          objects for generating menu commands.</para
       >
       <para
-        >A designer for a component that appears in the component tray can perform a default action when the component is double-clicked. Implement the <see
-         cref="M:System.ComponentModel.Design.IDesigner.DoDefaultAction" />
+        >A designer for a component that appears in the component tray can perform a default action when the component is double-clicked. Implement the <see cref="M:System.ComponentModel.Design.IDesigner.DoDefaultAction" />
 
         
 
@@ -84,36 +76,30 @@
       >
       <para>A designer can also use the available design-time services to perform a variety of tasks, including surveying the current design-time environment for components and their properties, reading and setting the values of properties of components, managing the toolbox, managing selected components, or displaying a user interface that can be used to configure values or to apply further processing.</para>
       <para
-        >To implement a designer for a control that can be sited on a form, you can inherit from the <see
-         cref="T:System.Windows.Forms.Design.ControlDesigner" />
+        >To implement a designer for a control that can be sited on a form, you can inherit from the <see cref="T:System.Windows.Forms.Design.ControlDesigner" />
 
         
 
-         class. Controls whose associated designer does not derive from <see
-         cref="T:System.Windows.Forms.Design.ControlDesigner" />
+         class. Controls whose associated designer does not derive from <see cref="T:System.Windows.Forms.Design.ControlDesigner" />
 
         
 
-         are displayed in the component tray. The <see
-         cref="T:System.ComponentModel.Design.ComponentDesigner" />
+         are displayed in the component tray. The <see cref="T:System.ComponentModel.Design.ComponentDesigner" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.Design.ControlDesigner" />
+         and <see cref="T:System.Windows.Forms.Design.ControlDesigner" />
 
         
 
-         classes implement the <see
-         cref="T:System.ComponentModel.Design.IDesigner" />
+         classes implement the <see cref="T:System.ComponentModel.Design.IDesigner" />
 
         
 
          interface and provide additional design-time support that may be of use to authors of designers. For more information, see the reference documentation for these classes.</para
       >
       <para
-        >For an overview of creating design components, please see <format
-         type="text/html">
+        >For an overview of creating design components, please see <format type="text/html">
           <a href="d6ac8a6a-42fd-4bc8-bf33-b212811297e2">Extending Design-Time Support</a>
         </format>
 
@@ -210,7 +196,11 @@
           <para>Initializes the designer with the specified component.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -241,8 +231,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the design time verbs supported by the component associated with the designer. The verbs returned by this method are typically displayed by the design-time environment in a right-click menu. When a user selects one of the verbs, the event handler of the corresponding <see
-             cref="T:System.ComponentModel.Design.DesignerVerb" />
+            >Returns the design time verbs supported by the component associated with the designer. The verbs returned by this method are typically displayed by the design-time environment in a right-click menu. When a user selects one of the verbs, the event handler of the corresponding <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
             
 
@@ -250,13 +239,11 @@
           >
           <block subset="none" type="note">
             <para
-              >A design-time environment typically provides a <ui
-              >Properties...</ui>
+              >A design-time environment typically provides a <ui>Properties...</ui>
 
               
 
-               entry on a component's right-click menu. To avoid duplicate titles for menu entries, no verb with a title of "Properties..." should be included in a <see
-               cref="T:System.ComponentModel.Design.DesignerVerbCollection" />
+               entry on a component's right-click menu. To avoid duplicate titles for menu entries, no verb with a title of "Properties..." should be included in a <see cref="T:System.ComponentModel.Design.DesignerVerbCollection" />
 
               
 

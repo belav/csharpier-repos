@@ -13,46 +13,38 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.DesignerActionItem" />
+        >The <see cref="T:System.ComponentModel.Design.DesignerActionItem" />
 
         
 
-         class serves as an abstract base for classes that represent individual panel items in a smart tag panel, which represents a menu-like user interface (UI) for smart tags. The dnprdnshort supplies derived classes that represent the different common entries in a smart tag panel, including plain text, header text, properties and methods of the associated <see
-         cref="T:System.ComponentModel.Design.DesignerActionList" />
+         class serves as an abstract base for classes that represent individual panel items in a smart tag panel, which represents a menu-like user interface (UI) for smart tags. The dnprdnshort supplies derived classes that represent the different common entries in a smart tag panel, including plain text, header text, properties and methods of the associated <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
         
 
          class, and designer verbs. </para
       >
       <para
-        >Typically, your DesignerAction feature is defined in a programmer-supplied class derived from <see
-         cref="T:System.ComponentModel.Design.DesignerActionList" />
+        >Typically, your DesignerAction feature is defined in a programmer-supplied class derived from <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
         
 
-        , which contains a <see
-         cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+        , which contains a <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
 
         
 
-         method that groups individual panel items together to form the smart tag panel. The <see
-         cref="T:System.ComponentModel.Design.DesignerActionPropertyItem" />
+         method that groups individual panel items together to form the smart tag panel. The <see cref="T:System.ComponentModel.Design.DesignerActionPropertyItem" />
 
         
 
-         and <see
-         cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
+         and <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
 
         
 
-         types are associated with members of the class derived from <see
-         cref="T:System.ComponentModel.Design.DesignerActionList" />
+         types are associated with members of the class derived from <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
         
 
-        , and <see
-         cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
+        , and <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
 
         
 
@@ -60,8 +52,7 @@
       >
       <block subset="none" type="note">
         <para
-          >Forms and dialog boxes can be displayed by members of the class derived from <see
-           cref="T:System.ComponentModel.Design.DesignerActionList" />
+          >Forms and dialog boxes can be displayed by members of the class derived from <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
           
 
@@ -93,26 +84,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because <see
-             cref="T:System.ComponentModel.Design.DesignerActionItem" />
+            >Because <see cref="T:System.ComponentModel.Design.DesignerActionItem" />
 
             
 
-             is an abstract class, the <see
-             cref="M:System.ComponentModel.Design.DesignerActionItem.#ctor(System.String,System.String,System.String)" />
+             is an abstract class, the <see cref="M:System.ComponentModel.Design.DesignerActionItem.#ctor(System.String,System.String,System.String)" />
 
             
 
              constructor is intended to be called from derived classes only.</para
           >
           <para
-            >For more information about how the <paramref
-             name="category" />
+            >For more information about how the <paramref name="category" />
 
             
 
-             parameter is used to group items on a panel, see the <see
-             cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+             parameter is used to group items on a panel, see the <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
 
             
 
@@ -122,8 +109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignerActionItem" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerActionItem" />
 
             
 
@@ -131,26 +117,37 @@
           >
         </summary>
         <param name="displayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The panel text for this item.</param
         >
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The case-sensitive <see
-           cref="T:System.String" />
+          The case-sensitive <see cref="T:System.String" />
 
           
 
            that defines the groupings of panel entries.</param
         >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -172,117 +169,96 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because multiple <see
-             cref="T:System.ComponentModel.Design.DesignerActionList" />
+            >Because multiple <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
             
 
-             objects may be combined to form a single smart tag panel, the <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.AllowAssociate" />
+             objects may be combined to form a single smart tag panel, the <see cref="P:System.ComponentModel.Design.DesignerActionItem.AllowAssociate" />
 
             
 
              property indicates whether the current item can be rearranged by category.</para
           >
           <para
-            >The <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.AllowAssociate" />
+            >The <see cref="P:System.ComponentModel.Design.DesignerActionItem.AllowAssociate" />
 
             
 
-             property is used in conjunction with the <see
-             cref="P:System.ComponentModel.Design.DesignerActionMethodItem.RelatedComponent" />
+             property is used in conjunction with the <see cref="P:System.ComponentModel.Design.DesignerActionMethodItem.RelatedComponent" />
 
             
 
-             property on the <see
-             cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
+             property on the <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
 
             
 
-             and <see
-             cref="T:System.ComponentModel.Design.DesignerActionPropertyItem" />
+             and <see cref="T:System.ComponentModel.Design.DesignerActionPropertyItem" />
 
             
 
              types.</para
           >
           <para
-            >For example, ASP.NET uses a data-bound control like <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+            >For example, ASP.NET uses a data-bound control like <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
-             to connect to a data source control like <see
-             cref="T:System.Web.UI.WebControls.SqlDataSource" />
+             to connect to a data source control like <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
             
 
-            . Both have a <see
-             cref="T:System.ComponentModel.Design.DesignerActionList" />
+            . Both have a <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
             
 
-             with its own set of <see
-             cref="T:System.ComponentModel.Design.DesignerActionItem" />
+             with its own set of <see cref="T:System.ComponentModel.Design.DesignerActionItem" />
 
             
 
-             objects. The <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             objects. The <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
-             control has items like <see
-             cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSourceID" />
+             control has items like <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSourceID" />
 
             
 
-            , Edit Fields, and AutoFormat. The <see
-             cref="T:System.Web.UI.WebControls.SqlDataSource" />
+            , Edit Fields, and AutoFormat. The <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
             
 
-             class has Configure and Refresh Items, which have <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.AllowAssociate" />
+             class has Configure and Refresh Items, which have <see cref="P:System.ComponentModel.Design.DesignerActionItem.AllowAssociate" />
 
             
 
              set to true.</para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+            >The <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
-             control's <see
-             cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSourceID" />
+             control's <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSourceID" />
 
             
 
-             item has a related component, which is the <see
-             cref="T:System.Web.UI.WebControls.SqlDataSource" />
+             item has a related component, which is the <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
             
 
-             object. All the <see
-             cref="T:System.Web.UI.WebControls.SqlDataSource" />
+             object. All the <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
             
 
-             object's items that have <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.AllowAssociate" />
+             object's items that have <see cref="P:System.ComponentModel.Design.DesignerActionItem.AllowAssociate" />
 
             
 
-             set to true are automatically included in the <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             set to true are automatically included in the <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
-             control's action list. The following table shows how the two lists are merged in the <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             control's action list. The following table shows how the two lists are merged in the <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
@@ -359,8 +335,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether to allow this item to be placed into a group of items that have the same <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.Category" />
+            >Gets or sets a value indicating whether to allow this item to be placed into a group of items that have the same <see cref="P:System.ComponentModel.Design.DesignerActionItem.Category" />
 
             
 
@@ -384,8 +359,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Item categories are defined by their names, which are case-sensitive.</para>
           <para
-            >For more information about how items are grouped by category, see the <see
-             cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+            >For more information about how items are grouped by category, see the <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
 
             
 
@@ -412,8 +386,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
+            >The <see cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
 
             
 
@@ -441,8 +414,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.DisplayName" />
+            >The value of the <see cref="P:System.ComponentModel.Design.DesignerActionItem.DisplayName" />
 
             
 
@@ -472,26 +444,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.Properties" />
+            >The <see cref="P:System.ComponentModel.Design.DesignerActionItem.Properties" />
 
             
 
-             property allows the programmer to store arbitrary data within an item. The standard properties for this class, such as <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.Category" />
+             property allows the programmer to store arbitrary data within an item. The standard properties for this class, such as <see cref="P:System.ComponentModel.Design.DesignerActionItem.Category" />
 
             
 
-             and <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.DisplayName" />
+             and <see cref="P:System.ComponentModel.Design.DesignerActionItem.DisplayName" />
 
             
 
             , are not stored in this collection.</para
           >
           <para
-            >The type of this property is actually <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >The type of this property is actually <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 

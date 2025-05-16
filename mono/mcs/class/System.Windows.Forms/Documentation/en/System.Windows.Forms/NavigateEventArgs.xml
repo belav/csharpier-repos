@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">[&lt;topic://cpconEventsOverview&gt;]</a>
         </format>
 
@@ -32,8 +31,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.DataGrid.Navigate" />
+        >Provides data for the <see cref="E:System.Windows.Forms.DataGrid.Navigate" />
 
         
 
@@ -52,13 +50,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="isForward" />
+            >The <paramref name="isForward" />
 
             
 
-             parameter value is assigned to the <see
-             cref="P:System.Windows.Forms.NavigateEventArgs.Forward" />
+             parameter value is assigned to the <see cref="P:System.Windows.Forms.NavigateEventArgs.Forward" />
 
             
 
@@ -68,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.NavigateEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.NavigateEventArgs" />
 
             
 
@@ -77,7 +72,11 @@
           >
         </summary>
         <param name="isForward">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

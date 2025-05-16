@@ -17,13 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Before the net_v40_long, almost any object could be used as an evidence object if the hosting code wanted to apply it as evidence. For example, some .NET Framework code recognized <see
-         cref="T:System.Uri" />
+        >Before the net_v40_long, almost any object could be used as an evidence object if the hosting code wanted to apply it as evidence. For example, some .NET Framework code recognized <see cref="T:System.Uri" />
 
         
 
-         objects as evidence. The common language runtime (CLR) considered evidence objects as <see
-         cref="T:System.Object" />
+         objects as evidence. The common language runtime (CLR) considered evidence objects as <see cref="T:System.Object" />
 
         
 
@@ -31,21 +29,18 @@
       >
       <para>This presented a problem because there were implicit restrictions on which types could be used as evidence objects. Specifically, any object used as evidence had to be serializable and could not be null. If these requirements were not met, the CLR threw an exception whenever an operation that required one of these assumptions was performed.</para>
       <para
-        >The <see
-         cref="T:System.Security.Policy.EvidenceBase" />
+        >The <see cref="T:System.Security.Policy.EvidenceBase" />
 
         
 
-         class, which all evidence objects must derive from, was introduced in the net_v40_short to enable constraints on the types of objects that can be used as evidence and to provide the ability to add new features and requirements to all evidence objects. The <see
-         cref="T:System.Security.Policy.EvidenceBase" />
+         class, which all evidence objects must derive from, was introduced in the net_v40_short to enable constraints on the types of objects that can be used as evidence and to provide the ability to add new features and requirements to all evidence objects. The <see cref="T:System.Security.Policy.EvidenceBase" />
 
         
 
          class ensures, upon instantiation, that the evidence object is serializable. In addition, it enables new evidence requirements to be created by adding new default implementations to the base class.  </para
       >
       <para
-        >All the types used by the CLR as evidence objects have been updated in the net_v40_short to derive from <see
-         cref="T:System.Security.Policy.EvidenceBase" />
+        >All the types used by the CLR as evidence objects have been updated in the net_v40_short to derive from <see cref="T:System.Security.Policy.EvidenceBase" />
 
         
 
@@ -77,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Policy.EvidenceBase" />
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.EvidenceBase" />
 
             
 

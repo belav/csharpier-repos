@@ -28,13 +28,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This event is raised when the value of one of the following column properties changes for a <see
-         cref="T:System.Windows.Forms.DataGridViewColumn" />
+        >This event is raised when the value of one of the following column properties changes for a <see cref="T:System.Windows.Forms.DataGridViewColumn" />
 
         
 
-         in a <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         in a <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -73,8 +71,7 @@
         </item>
       </list>
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
         </format>
 
@@ -86,13 +83,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see
-         cref="E:System.Windows.Forms.DataGridView.ColumnStateChanged" />
+        >Represents the method that will handle the <see cref="E:System.Windows.Forms.DataGridView.ColumnStateChanged" />
 
         
 
-         event of a <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         event of a <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 

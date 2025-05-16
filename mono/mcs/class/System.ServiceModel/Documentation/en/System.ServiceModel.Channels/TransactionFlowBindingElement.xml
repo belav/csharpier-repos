@@ -25,18 +25,15 @@
       <para>This element allows you to enable or disable incoming transaction flow in an endpoint’s binding settings, as well as to specify the desired protocol format for incoming transactions. </para>
       <block subset="none" type="note">
         <para
-          >When using the <see
-           cref="P:System.ServiceModel.TransactionProtocol.OleTransactions" />
+          >When using the <see cref="P:System.ServiceModel.TransactionProtocol.OleTransactions" />
 
           
 
-           protocol to flow transactions from endpoint to endpoint, the transaction timeout can be lost if the destination endpoint attempts to flow again using any protocol other than <see
-           cref="P:System.ServiceModel.TransactionProtocol.OleTransactions" />
+           protocol to flow transactions from endpoint to endpoint, the transaction timeout can be lost if the destination endpoint attempts to flow again using any protocol other than <see cref="P:System.ServiceModel.TransactionProtocol.OleTransactions" />
 
           
 
-          . This can cause all down-level nodes after the <see
-           cref="P:System.ServiceModel.TransactionProtocol.OleTransactions" />
+          . This can cause all down-level nodes after the <see cref="P:System.ServiceModel.TransactionProtocol.OleTransactions" />
 
           
 
@@ -66,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.TransactionFlowBindingElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.TransactionFlowBindingElement" />
 
             
 
@@ -97,8 +93,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >crabout choosing the protocol to be used, see <format
-             type="text/html">
+            >crabout choosing the protocol to be used, see <format type="text/html">
               <a href="31a6bc6a-4ef4-45ba-a753-1efa1a19d917">Enabling Transaction Flow</a>
             </format>
 
@@ -110,8 +105,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.TransactionFlowBindingElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.TransactionFlowBindingElement" />
 
             
 
@@ -154,18 +148,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.IChannelFactory`1" />
+            >The <see cref="T:System.ServiceModel.Channels.IChannelFactory`1" />
 
             
 
-             of type <paramref
-             name="TChannel" />
+             of type <paramref name="TChannel" />
 
             
 
-             initialized from <paramref
-             name="context" />
+             initialized from <paramref name="context" />
 
             
 
@@ -173,19 +164,26 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
            that should be used to build the channel factory.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -233,18 +231,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.IChannelListener`1" />
+            >The <see cref="T:System.ServiceModel.Channels.IChannelListener`1" />
 
             
 
-             of type <paramref
-             name="TChannel" />
+             of type <paramref name="TChannel" />
 
             
 
-             initialized from <paramref
-             name="context" />
+             initialized from <paramref name="context" />
 
             
 
@@ -252,19 +247,26 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
            that should be used to build the channel listener.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -298,18 +300,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You should call this method to check that the channel factory for channels of type <paramref
-             name="TChannel" />
+            >You should call this method to check that the channel factory for channels of type <paramref name="TChannel" />
 
             
 
-             can be built for the specified <paramref
-             name="context" />
+             can be built for the specified <paramref name="context" />
 
             
 
-            , before attempting to actually build the factory. Note that <see
-             cref="M:System.ServiceModel.Channels.TransactionFlowBindingElement.BuildChannelFactory``1(System.ServiceModel.Channels.BindingContext)" />
+            , before attempting to actually build the factory. Note that <see cref="M:System.ServiceModel.Channels.TransactionFlowBindingElement.BuildChannelFactory``1(System.ServiceModel.Channels.BindingContext)" />
 
             
 
@@ -323,8 +322,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if a channel factory for the specified type of channel can be built from <paramref
-             name="context" />
+            >true if a channel factory for the specified type of channel can be built from <paramref name="context" />
 
             
 
@@ -332,19 +330,26 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
            that should be used to determine if a channel factory can be built.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -383,18 +388,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You should call this method to check that the channel listener for channels of type of <paramref
-             name="TChannel" />
+            >You should call this method to check that the channel listener for channels of type of <paramref name="TChannel" />
 
             
 
-             can be built for the specified <paramref
-             name="context" />
+             can be built for the specified <paramref name="context" />
 
             
 
-            , before attempting to actually build the listener. Note that <see
-             cref="M:System.ServiceModel.Channels.TransactionFlowBindingElement.BuildChannelListener``1(System.ServiceModel.Channels.BindingContext)" />
+            , before attempting to actually build the listener. Note that <see cref="M:System.ServiceModel.Channels.TransactionFlowBindingElement.BuildChannelListener``1(System.ServiceModel.Channels.BindingContext)" />
 
             
 
@@ -408,8 +410,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if a channel listener for the specified type of channel can be built from <paramref
-             name="context" />
+            >true if a channel listener for the specified type of channel can be built from <paramref name="context" />
 
             
 
@@ -417,19 +418,26 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
            that should be used to determine if a channel listener can be built.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -466,8 +474,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Channels.BindingElement" />
+            >A <see cref="T:System.ServiceModel.Channels.BindingElement" />
 
             
 
@@ -514,8 +521,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The typed object <paramref
-             name="T" />
+            >The typed object <paramref name="T" />
 
             
 
@@ -523,15 +529,22 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          The <see cref="T:System.ServiceModel.Channels.BindingContext" />
         </param>
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -560,8 +573,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >crabout choosing the protocol to be used, see <format
-             type="text/html">
+            >crabout choosing the protocol to be used, see <format type="text/html">
               <a href="31a6bc6a-4ef4-45ba-a753-1efa1a19d917">Enabling Transaction Flow</a>
             </format>
 

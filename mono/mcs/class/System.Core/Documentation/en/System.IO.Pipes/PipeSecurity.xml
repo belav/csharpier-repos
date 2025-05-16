@@ -20,65 +20,55 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.IO.Pipes.PipeSecurity" />
+        >The <see cref="T:System.IO.Pipes.PipeSecurity" />
 
         
 
-         class specifies the access rights for a pipe and how access attempts are audited.  This class represents access and audit rights as a set of rules. Each access rule is represented by a <see
-         cref="T:System.IO.Pipes.PipeAccessRule" />
+         class specifies the access rights for a pipe and how access attempts are audited.  This class represents access and audit rights as a set of rules. Each access rule is represented by a <see cref="T:System.IO.Pipes.PipeAccessRule" />
 
         
 
-         object, while each audit rule is represented by a <see
-         cref="T:System.IO.Pipes.PipeAuditRule" />
+         object, while each audit rule is represented by a <see cref="T:System.IO.Pipes.PipeAuditRule" />
 
         
 
          object.</para
       >
       <para
-        >The <see
-         cref="T:System.IO.Pipes.PipeSecurity" />
+        >The <see cref="T:System.IO.Pipes.PipeSecurity" />
 
         
 
-         class is an abstraction of the underlying Microsoft Windows file security system. In this system, each pipe has a discretionary access control list (DACL), which controls access to the pipe, and a system access control list (SACL), which specifies the access control attempts that are audited.  The <see
-         cref="T:System.IO.Pipes.PipeAccessRule" />
+         class is an abstraction of the underlying Microsoft Windows file security system. In this system, each pipe has a discretionary access control list (DACL), which controls access to the pipe, and a system access control list (SACL), which specifies the access control attempts that are audited.  The <see cref="T:System.IO.Pipes.PipeAccessRule" />
 
         
 
-         and <see
-         cref="T:System.IO.Pipes.PipeAuditRule" />
+         and <see cref="T:System.IO.Pipes.PipeAuditRule" />
 
         
 
          classes are abstractions of the access control entries (ACEs) that comprise DACLs and SACLs.      </para
       >
       <para
-        >The <see
-         cref="T:System.IO.Pipes.PipeSecurity" />
+        >The <see cref="T:System.IO.Pipes.PipeSecurity" />
 
         
 
          class hides many of the details of DACLs and SACLs; you do not have to worry about ACE ordering or null DACLS.</para
       >
       <para
-        >Use the <see
-         cref="T:System.IO.Pipes.PipeSecurity" />
+        >Use the <see cref="T:System.IO.Pipes.PipeSecurity" />
 
         
 
          class to retrieve, add, or change the access rules that represent the DACL and SACL of a pipe.</para
       >
       <para
-        >To persist new or changed access or audit rules to a pipe, use the <see
-         cref="M:System.IO.Pipes.PipeStream.SetAccessControl(System.IO.Pipes.PipeSecurity)" />
+        >To persist new or changed access or audit rules to a pipe, use the <see cref="M:System.IO.Pipes.PipeStream.SetAccessControl(System.IO.Pipes.PipeSecurity)" />
 
         
 
-         method. To retrieve access or audit rules from an existing file, use the <see
-         cref="M:System.IO.Pipes.PipeStream.GetAccessControl" />
+         method. To retrieve access or audit rules from an existing file, use the <see cref="M:System.IO.Pipes.PipeStream.GetAccessControl" />
 
         
 
@@ -106,39 +96,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates an empty <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+            >This constructor creates an empty <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
              object that is not based on an existing pipe. You can then populate the object with access control information and apply it to a pipe.</para
           >
           <para
-            >You can add access or audit rules to the <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+            >You can add access or audit rules to the <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
-             object using the <see
-             cref="M:System.IO.Pipes.PipeSecurity.AddAccessRule(System.IO.Pipes.PipeAccessRule)" />
+             object using the <see cref="M:System.IO.Pipes.PipeSecurity.AddAccessRule(System.IO.Pipes.PipeAccessRule)" />
 
             
 
-             method. You can remove access or audit rules using the <see
-             cref="M:System.IO.Pipes.PipeSecurity.RemoveAccessRule(System.IO.Pipes.PipeAccessRule)" />
+             method. You can remove access or audit rules using the <see cref="M:System.IO.Pipes.PipeSecurity.RemoveAccessRule(System.IO.Pipes.PipeAccessRule)" />
 
             
 
              method.</para
           >
           <para
-            >To persist new or changed access or audit rules to a pipe, use the <see
-             cref="M:System.IO.Pipes.PipeStream.SetAccessControl(System.IO.Pipes.PipeSecurity)" />
+            >To persist new or changed access or audit rules to a pipe, use the <see cref="M:System.IO.Pipes.PipeStream.SetAccessControl(System.IO.Pipes.PipeSecurity)" />
 
             
 
-             method. To retrieve access or audit rules from an existing file, use the <see
-             cref="M:System.IO.Pipes.PipeStream.GetAccessControl" />
+             method. To retrieve access or audit rules from an existing file, use the <see cref="M:System.IO.Pipes.PipeStream.GetAccessControl" />
 
             
 
@@ -148,8 +132,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+            >Initializes a new instance of the <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
@@ -176,13 +159,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Classes that derive from the <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Classes that derive from the <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             class override the <see
-             cref="P:System.Security.AccessControl.ObjectSecurity.AccessRightType" />
+             class override the <see cref="P:System.Security.AccessControl.ObjectSecurity.AccessRightType" />
 
             
 
@@ -192,13 +173,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 
-             of the securable object that is associated with the current <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+             of the securable object that is associated with the current <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
@@ -235,8 +214,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The recommended way to create access control rules is to use the constructors of the <see
-             cref="T:System.IO.Pipes.PipeAccessRule" />
+            >The recommended way to create access control rules is to use the constructors of the <see cref="T:System.IO.Pipes.PipeAccessRule" />
 
             
 
@@ -246,8 +224,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.AccessRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.AccessRule" />
 
             
 
@@ -257,8 +234,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.AccessControl.AccessRule" />
+            >The <see cref="T:System.Security.AccessControl.AccessRule" />
 
             
 
@@ -266,67 +242,86 @@
           >
         </returns>
         <param name="identityReference">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The identity that the access rule applies to. It must be an object that can be cast as a <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The identity that the access rule applies to. It must be an object that can be cast as a <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
            object.</param
         >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The access mask of this rule. The access mask is a 32-bit collection of anonymous bits, the meaning of which is defined by the individual integrators</param
         >
         <param name="isInherited">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if this rule is inherited from a parent container; otherwise false.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.InheritanceFlags" />
+          One of the <see cref="T:System.Security.AccessControl.InheritanceFlags" />
 
           
 
            values that specifies the inheritance properties of the access rule.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.PropagationFlags" />
+          One of the <see cref="T:System.Security.AccessControl.PropagationFlags" />
 
           
 
-           values that specifies whether inherited access rules are automatically propagated. The propagation flags are ignored if <paramref
-           name="inheritanceFlags" />
+           values that specifies whether inherited access rules are automatically propagated. The propagation flags are ignored if <paramref name="inheritanceFlags" />
 
           
 
-           is set to <see
-           cref="F:System.Security.AccessControl.InheritanceFlags.None" />
+           is set to <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />
 
           
 
           .</param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -352,13 +347,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Classes that derive from the <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Classes that derive from the <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             class override the <see
-             cref="P:System.Security.AccessControl.ObjectSecurity.AccessRuleType" />
+             class override the <see cref="P:System.Security.AccessControl.ObjectSecurity.AccessRuleType" />
 
             
 
@@ -368,13 +361,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 
-             of the object that is associated with the access rules of the current <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+             of the object that is associated with the access rules of the current <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
@@ -406,33 +397,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.Pipes.PipeSecurity.AddAccessRule(System.IO.Pipes.PipeAccessRule)" />
+            >The <see cref="M:System.IO.Pipes.PipeSecurity.AddAccessRule(System.IO.Pipes.PipeAccessRule)" />
 
             
 
-             method adds a new rule to the list of rules that a <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+             method adds a new rule to the list of rules that a <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
-             object contains.If an access control list (ACL) already exists for the specified rule, the <see
-             cref="M:System.IO.Pipes.PipeSecurity.AddAccessRule(System.IO.Pipes.PipeAccessRule)" />
+             object contains.If an access control list (ACL) already exists for the specified rule, the <see cref="M:System.IO.Pipes.PipeSecurity.AddAccessRule(System.IO.Pipes.PipeAccessRule)" />
 
             
 
-             method will still add the rule, with one exception: a <see
-             cref="T:System.IO.Pipes.PipeAccessRule" />
+             method will still add the rule, with one exception: a <see cref="T:System.IO.Pipes.PipeAccessRule" />
 
             
 
-             object that is created using the <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             object that is created using the <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             value supersedes an object that is created using the <see
-             cref="F:System.Security.AccessControl.AccessControlType.Allow" />
+             value supersedes an object that is created using the <see cref="F:System.Security.AccessControl.AccessControlType.Allow" />
 
             
 
@@ -442,8 +427,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an access rule to the Discretionary Access Control List (DACL) that is associated with the current <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+            >Adds an access rule to the Discretionary Access Control List (DACL) that is associated with the current <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
@@ -451,7 +435,11 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -482,21 +470,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.Pipes.PipeSecurity.AddAuditRule(System.IO.Pipes.PipeAuditRule)" />
+            >The <see cref="M:System.IO.Pipes.PipeSecurity.AddAuditRule(System.IO.Pipes.PipeAuditRule)" />
 
             
 
-             method adds a new audit rule to the list of rules that a <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+             method adds a new audit rule to the list of rules that a <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
              object contains.</para
           >
           <para
-            >If an audit rule already exists for the specified rule, the <see
-             cref="M:System.IO.Pipes.PipeSecurity.AddAuditRule(System.IO.Pipes.PipeAuditRule)" />
+            >If an audit rule already exists for the specified rule, the <see cref="M:System.IO.Pipes.PipeSecurity.AddAuditRule(System.IO.Pipes.PipeAuditRule)" />
 
             
 
@@ -506,8 +491,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an audit rule to the System Access Control List (SACL)that is associated with the current <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+            >Adds an audit rule to the System Access Control List (SACL)that is associated with the current <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
@@ -515,7 +499,11 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -551,8 +539,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The recommended way to create audit rules is to use the constructors of the <see
-             cref="T:System.IO.Pipes.PipeAuditRule" />
+            >The recommended way to create audit rules is to use the constructors of the <see cref="T:System.IO.Pipes.PipeAuditRule" />
 
             
 
@@ -562,8 +549,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.AuditRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.AuditRule" />
 
             
 
@@ -573,8 +559,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.AccessControl.AuditRule" />
+            >The <see cref="T:System.Security.AccessControl.AuditRule" />
 
             
 
@@ -582,72 +567,90 @@
           >
         </returns>
         <param name="identityReference">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The identity that the access rule applies to. It must be an object that can be cast as a <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The identity that the access rule applies to. It must be an object that can be cast as a <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
            object.</param
         >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The access mask of this rule. The access mask is a 32-bit collection of anonymous bits, the meaning of which is defined by the individual integrators</param
         >
         <param name="isInherited">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if this rule is inherited from a parent container; otherwise, false..</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.InheritanceFlags" />
+          One of the <see cref="T:System.Security.AccessControl.InheritanceFlags" />
 
           
 
            values that specifies the inheritance properties of the access rule.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.PropagationFlags" />
+          One of the <see cref="T:System.Security.AccessControl.PropagationFlags" />
 
           
 
-           values that specifies whether inherited access rules are automatically propagated. The propagation flags are ignored if <paramref
-           name="inheritanceFlags" />
+           values that specifies whether inherited access rules are automatically propagated. The propagation flags are ignored if <paramref name="inheritanceFlags" />
 
           
 
-           is set to <see
-           cref="F:System.Security.AccessControl.InheritanceFlags.None" />
+           is set to <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />
 
           
 
           .</param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AuditFlags" />
+          One of the <see cref="T:System.Security.AccessControl.AuditFlags" />
 
           
 
@@ -673,13 +676,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Classes that derive from the <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Classes that derive from the <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             class override the <see
-             cref="P:System.Security.AccessControl.ObjectSecurity.AuditRuleType" />
+             class override the <see cref="P:System.Security.AccessControl.ObjectSecurity.AuditRuleType" />
 
             
 
@@ -689,13 +690,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 
-             object associated with the audit rules of the current <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+             object associated with the audit rules of the current <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
@@ -728,8 +727,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the specified sections of the security descriptor that is associated with the current <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+            >Saves the specified sections of the security descriptor that is associated with the current <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
@@ -737,12 +735,15 @@
           >
         </summary>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The handle of the securable object that the current <see
-           cref="T:System.IO.Pipes.PipeSecurity" />
+          The handle of the securable object that the current <see cref="T:System.IO.Pipes.PipeSecurity" />
 
           
 
@@ -771,8 +772,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the specified sections of the security descriptor that is associated with the current <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+            >Saves the specified sections of the security descriptor that is associated with the current <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
@@ -780,12 +780,15 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the securable object that the current <see
-           cref="T:System.IO.Pipes.PipeSecurity" />
+          The name of the securable object that the current <see cref="T:System.IO.Pipes.PipeSecurity" />
 
           
 
@@ -816,58 +819,47 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.Pipes.PipeSecurity.RemoveAccessRule(System.IO.Pipes.PipeAccessRule)" />
+            >The <see cref="M:System.IO.Pipes.PipeSecurity.RemoveAccessRule(System.IO.Pipes.PipeAccessRule)" />
 
             
 
-             method removes either all matching <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             method removes either all matching <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             access rules or all matching <see
-             cref="F:System.Security.AccessControl.AccessControlType.Allow" />
+             access rules or all matching <see cref="F:System.Security.AccessControl.AccessControlType.Allow" />
 
             
 
-             access rules from the current <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+             access rules from the current <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
-             object. For example, you can use this method to remove all <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             object. For example, you can use this method to remove all <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             access rules for a user by passing a <see
-             cref="T:System.IO.Pipes.PipeAccessRule" />
+             access rules for a user by passing a <see cref="T:System.IO.Pipes.PipeAccessRule" />
 
             
 
-             object created using the <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             object created using the <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             value, the <see
-             cref="F:System.IO.Pipes.PipeAccessRights.Read" />
+             value, the <see cref="F:System.IO.Pipes.PipeAccessRights.Read" />
 
             
 
-             value, and a user account. The <see
-             cref="M:System.IO.Pipes.PipeSecurity.RemoveAccessRule(System.IO.Pipes.PipeAccessRule)" />
+             value, and a user account. The <see cref="M:System.IO.Pipes.PipeSecurity.RemoveAccessRule(System.IO.Pipes.PipeAccessRule)" />
 
             
 
-             method removes any deny rules that specify the <see
-             cref="F:System.IO.Pipes.PipeAccessRights.Read" />
+             method removes any deny rules that specify the <see cref="F:System.IO.Pipes.PipeAccessRights.Read" />
 
             
 
-             value or the <see
-             cref="F:System.IO.Pipes.PipeAccessRights.Write" />
+             value or the <see cref="F:System.IO.Pipes.PipeAccessRights.Write" />
 
             
 
@@ -877,8 +869,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes an access rule from the Discretionary Access Control List (DACL) that is associated with the current <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+            >Removes an access rule from the Discretionary Access Control List (DACL) that is associated with the current <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
@@ -890,7 +881,11 @@
           <para>true if the operation is successful; otherwise, false.</para>
         </returns>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -921,58 +916,47 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.Pipes.PipeSecurity.RemoveAccessRule(System.IO.Pipes.PipeAccessRule)" />
+            >The <see cref="M:System.IO.Pipes.PipeSecurity.RemoveAccessRule(System.IO.Pipes.PipeAccessRule)" />
 
             
 
-             method removes either all matching <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             method removes either all matching <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             access rules or all matching <see
-             cref="F:System.Security.AccessControl.AccessControlType.Allow" />
+             access rules or all matching <see cref="F:System.Security.AccessControl.AccessControlType.Allow" />
 
             
 
-             access rules from the current <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+             access rules from the current <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
-             object. For example, you can use this method to remove all <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             object. For example, you can use this method to remove all <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             access rules for a user by passing a <see
-             cref="T:System.IO.Pipes.PipeAccessRule" />
+             access rules for a user by passing a <see cref="T:System.IO.Pipes.PipeAccessRule" />
 
             
 
-             object created using the <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             object created using the <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             value, the <see
-             cref="F:System.IO.Pipes.PipeAccessRights.Read" />
+             value, the <see cref="F:System.IO.Pipes.PipeAccessRights.Read" />
 
             
 
-             value, and a user account. The <see
-             cref="M:System.IO.Pipes.PipeSecurity.RemoveAccessRule(System.IO.Pipes.PipeAccessRule)" />
+             value, and a user account. The <see cref="M:System.IO.Pipes.PipeSecurity.RemoveAccessRule(System.IO.Pipes.PipeAccessRule)" />
 
             
 
-             method removes any deny rules that specify the <see
-             cref="F:System.IO.Pipes.PipeAccessRights.Read" />
+             method removes any deny rules that specify the <see cref="F:System.IO.Pipes.PipeAccessRights.Read" />
 
             
 
-             value or the <see
-             cref="F:System.IO.Pipes.PipeAccessRights.Write" />
+             value or the <see cref="F:System.IO.Pipes.PipeAccessRights.Write" />
 
             
 
@@ -982,8 +966,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified access rule from the Discretionary Access Control List (DACL) that is associated with the current <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+            >Removes the specified access rule from the Discretionary Access Control List (DACL) that is associated with the current <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
@@ -991,7 +974,11 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1022,58 +1009,47 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.Pipes.PipeSecurity.RemoveAuditRule(System.IO.Pipes.PipeAuditRule)" />
+            >The <see cref="M:System.IO.Pipes.PipeSecurity.RemoveAuditRule(System.IO.Pipes.PipeAuditRule)" />
 
             
 
-             method removes either all matching <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             method removes either all matching <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             audit rules or all matching <see
-             cref="F:System.Security.AccessControl.AccessControlType.Allow" />
+             audit rules or all matching <see cref="F:System.Security.AccessControl.AccessControlType.Allow" />
 
             
 
-             audit rules from the current <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+             audit rules from the current <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
-             object.  For example, you can use this method to remove all <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             object.  For example, you can use this method to remove all <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             audit rules for a user by passing a <see
-             cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+             audit rules for a user by passing a <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
             
 
-             object created using the <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             object created using the <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             value, the <see
-             cref="F:System.Security.AccessControl.AuditFlags.Failure" />
+             value, the <see cref="F:System.Security.AccessControl.AuditFlags.Failure" />
 
             
 
-             value, and a user account.  When you do this, the <see
-             cref="M:System.IO.Pipes.PipeSecurity.RemoveAuditRule(System.IO.Pipes.PipeAuditRule)" />
+             value, and a user account.  When you do this, the <see cref="M:System.IO.Pipes.PipeSecurity.RemoveAuditRule(System.IO.Pipes.PipeAuditRule)" />
 
             
 
-             method removes any deny rules that specify the <see
-             cref="F:System.Security.AccessControl.AuditFlags.Failure" />
+             method removes any deny rules that specify the <see cref="F:System.Security.AccessControl.AuditFlags.Failure" />
 
             
 
-             value or the <see
-             cref="F:System.Security.AccessControl.AuditFlags.Success" />
+             value or the <see cref="F:System.Security.AccessControl.AuditFlags.Success" />
 
             
 
@@ -1083,8 +1059,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes an audit rule from the System Access Control List (SACL) that is associated with the current <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+            >Removes an audit rule from the System Access Control List (SACL) that is associated with the current <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
@@ -1096,7 +1071,11 @@
           <para>true if the audit rule was removed; otherwise, false</para>
         </returns>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1127,13 +1106,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.Pipes.PipeSecurity.RemoveAuditRuleAll(System.IO.Pipes.PipeAuditRule)" />
+            >The <see cref="M:System.IO.Pipes.PipeSecurity.RemoveAuditRuleAll(System.IO.Pipes.PipeAuditRule)" />
 
             
 
-             method removes all audit rules for the specified user.  It ignores all values in the <see
-             cref="T:System.IO.Pipes.PipeAuditRule" />
+             method removes all audit rules for the specified user.  It ignores all values in the <see cref="T:System.IO.Pipes.PipeAuditRule" />
 
             
 
@@ -1143,8 +1120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all audit rules that have the same security identifier as the specified audit rule from the System Access Control List (SACL) that is associated with the current <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+            >Removes all audit rules that have the same security identifier as the specified audit rule from the System Access Control List (SACL) that is associated with the current <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
@@ -1152,7 +1128,11 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1183,58 +1163,47 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.Pipes.PipeSecurity.RemoveAuditRuleSpecific(System.IO.Pipes.PipeAuditRule)" />
+            >The <see cref="M:System.IO.Pipes.PipeSecurity.RemoveAuditRuleSpecific(System.IO.Pipes.PipeAuditRule)" />
 
             
 
-             method removes the specified matching <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             method removes the specified matching <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             audit rule or the specified matching <see
-             cref="F:System.Security.AccessControl.AccessControlType.Allow" />
+             audit rule or the specified matching <see cref="F:System.Security.AccessControl.AccessControlType.Allow" />
 
             
 
-             audit rule from the current <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+             audit rule from the current <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
-             object.  For example, you can use this method to remove a specified <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             object.  For example, you can use this method to remove a specified <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             audit rule for a user by passing a <see
-             cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+             audit rule for a user by passing a <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
             
 
-             object created using the <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             object created using the <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-             value, the <see
-             cref="F:System.Security.AccessControl.AuditFlags.Failure" />
+             value, the <see cref="F:System.Security.AccessControl.AuditFlags.Failure" />
 
             
 
-             value, and a user account.  When you do this, the <see
-             cref="M:System.IO.Pipes.PipeSecurity.RemoveAuditRuleSpecific(System.IO.Pipes.PipeAuditRule)" />
+             value, and a user account.  When you do this, the <see cref="M:System.IO.Pipes.PipeSecurity.RemoveAuditRuleSpecific(System.IO.Pipes.PipeAuditRule)" />
 
             
 
-             method removes only a deny rule that specifies the <see
-             cref="F:System.Security.AccessControl.AuditFlags.Failure" />
+             method removes only a deny rule that specifies the <see cref="F:System.Security.AccessControl.AuditFlags.Failure" />
 
             
 
-             value.  It does not remove any deny rules that specify the <see
-             cref="F:System.Security.AccessControl.AuditFlags.Success" />
+             value.  It does not remove any deny rules that specify the <see cref="F:System.Security.AccessControl.AuditFlags.Success" />
 
             
 
@@ -1244,8 +1213,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified audit rule from the System Access Control List (SACL) that is associated with the current <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+            >Removes the specified audit rule from the System Access Control List (SACL) that is associated with the current <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
@@ -1253,7 +1221,11 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1284,43 +1256,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.Pipes.PipeSecurity.ResetAccessRule(System.IO.Pipes.PipeAccessRule)" />
+            >The <see cref="M:System.IO.Pipes.PipeSecurity.ResetAccessRule(System.IO.Pipes.PipeAccessRule)" />
 
             
 
-             method adds the specified access control list (ACL) rule or overwrites any identical ACL rules that match the <paramref
-             name="rule" />
+             method adds the specified access control list (ACL) rule or overwrites any identical ACL rules that match the <paramref name="rule" />
 
             
 
-             parameter.  For example, if the <paramref
-             name="rule" />
+             parameter.  For example, if the <paramref name="rule" />
 
             
 
-             parameter specifies a <see
-             cref="F:System.IO.Pipes.PipeAccessRights.Read" />
+             parameter specifies a <see cref="F:System.IO.Pipes.PipeAccessRights.Read" />
 
             
 
-             value and the <see
-             cref="M:System.IO.Pipes.PipeSecurity.ResetAccessRule(System.IO.Pipes.PipeAccessRule)" />
+             value and the <see cref="M:System.IO.Pipes.PipeSecurity.ResetAccessRule(System.IO.Pipes.PipeAccessRule)" />
 
             
 
-             method finds an identical ACL rule that specifies the <see
-             cref="F:System.IO.Pipes.PipeAccessRights.Read" />
+             method finds an identical ACL rule that specifies the <see cref="F:System.IO.Pipes.PipeAccessRights.Read" />
 
             
 
-             value, the identical rule will be overwritten.  If the <see
-             cref="M:System.IO.Pipes.PipeSecurity.ResetAccessRule(System.IO.Pipes.PipeAccessRule)" />
+             value, the identical rule will be overwritten.  If the <see cref="M:System.IO.Pipes.PipeSecurity.ResetAccessRule(System.IO.Pipes.PipeAccessRule)" />
 
             
 
-             method finds an identical ACL rule that specifies the <see
-             cref="F:System.IO.Pipes.PipeAccessRights.Write" />
+             method finds an identical ACL rule that specifies the <see cref="F:System.IO.Pipes.PipeAccessRights.Write" />
 
             
 
@@ -1330,8 +1294,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all access rules in the Discretionary Access Control List (DACL) that is associated with the current <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+            >Removes all access rules in the Discretionary Access Control List (DACL) that is associated with the current <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
@@ -1339,7 +1302,11 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1370,48 +1337,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.Pipes.PipeSecurity.SetAccessRule(System.IO.Pipes.PipeAccessRule)" />
+            >The <see cref="M:System.IO.Pipes.PipeSecurity.SetAccessRule(System.IO.Pipes.PipeAccessRule)" />
 
             
 
-             method adds the specified access control list (ACL) rule or overwrites any identical ACL rules that match the <see
-             cref="T:System.IO.Pipes.PipeAccessRights" />
+             method adds the specified access control list (ACL) rule or overwrites any identical ACL rules that match the <see cref="T:System.IO.Pipes.PipeAccessRights" />
 
             
 
-             value of the <paramref
-             name="rule" />
+             value of the <paramref name="rule" />
 
             
 
-             parameter.  For example, if the <paramref
-             name="rule" />
+             parameter.  For example, if the <paramref name="rule" />
 
             
 
-             parameter specifies a <see
-             cref="F:System.IO.Pipes.PipeAccessRights.Read" />
+             parameter specifies a <see cref="F:System.IO.Pipes.PipeAccessRights.Read" />
 
             
 
-             value and the <see
-             cref="M:System.IO.Pipes.PipeSecurity.SetAccessRule(System.IO.Pipes.PipeAccessRule)" />
+             value and the <see cref="M:System.IO.Pipes.PipeSecurity.SetAccessRule(System.IO.Pipes.PipeAccessRule)" />
 
             
 
-             method finds an identical ACL rule that specifies the <see
-             cref="F:System.IO.Pipes.PipeAccessRights.Read" />
+             method finds an identical ACL rule that specifies the <see cref="F:System.IO.Pipes.PipeAccessRights.Read" />
 
             
 
-             value, the identical rule will be overwritten.  If the <see
-             cref="M:System.IO.Pipes.PipeSecurity.SetAccessRule(System.IO.Pipes.PipeAccessRule)" />
+             value, the identical rule will be overwritten.  If the <see cref="M:System.IO.Pipes.PipeSecurity.SetAccessRule(System.IO.Pipes.PipeAccessRule)" />
 
             
 
-             method finds an identical ACL rule that specifies the <see
-             cref="F:System.IO.Pipes.PipeAccessRights.Write" />
+             method finds an identical ACL rule that specifies the <see cref="F:System.IO.Pipes.PipeAccessRights.Write" />
 
             
 
@@ -1421,8 +1379,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets an access rule in the Discretionary Access Control List (DACL) that is associated with the current <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+            >Sets an access rule in the Discretionary Access Control List (DACL) that is associated with the current <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
@@ -1430,7 +1387,11 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1461,48 +1422,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.Pipes.PipeSecurity.SetAuditRule(System.IO.Pipes.PipeAuditRule)" />
+            >The <see cref="M:System.IO.Pipes.PipeSecurity.SetAuditRule(System.IO.Pipes.PipeAuditRule)" />
 
             
 
-             method adds the specified audit rule or overwrites any identical audit rules that match the <see
-             cref="T:System.IO.Pipes.PipeAccessRights" />
+             method adds the specified audit rule or overwrites any identical audit rules that match the <see cref="T:System.IO.Pipes.PipeAccessRights" />
 
             
 
-             value of the <paramref
-             name="rule" />
+             value of the <paramref name="rule" />
 
             
 
-             parameter.  For example, if the <paramref
-             name="rule" />
+             parameter.  For example, if the <paramref name="rule" />
 
             
 
-             parameter specifies a <see
-             cref="F:System.IO.Pipes.PipeAccessRights.Read" />
+             parameter specifies a <see cref="F:System.IO.Pipes.PipeAccessRights.Read" />
 
             
 
-             value and the <see
-             cref="M:System.IO.Pipes.PipeSecurity.SetAuditRule(System.IO.Pipes.PipeAuditRule)" />
+             value and the <see cref="M:System.IO.Pipes.PipeSecurity.SetAuditRule(System.IO.Pipes.PipeAuditRule)" />
 
             
 
-             method finds an identical audit rule that specifies the <see
-             cref="F:System.IO.Pipes.PipeAccessRights.Read" />
+             method finds an identical audit rule that specifies the <see cref="F:System.IO.Pipes.PipeAccessRights.Read" />
 
             
 
-             value, the identical rule will be overwritten.  If the <see
-             cref="M:System.IO.Pipes.PipeSecurity.SetAuditRule(System.IO.Pipes.PipeAuditRule)" />
+             value, the identical rule will be overwritten.  If the <see cref="M:System.IO.Pipes.PipeSecurity.SetAuditRule(System.IO.Pipes.PipeAuditRule)" />
 
             
 
-             method finds an identical audit rule that specifies the <see
-             cref="F:System.IO.Pipes.PipeAccessRights.Write" />
+             method finds an identical audit rule that specifies the <see cref="F:System.IO.Pipes.PipeAccessRights.Write" />
 
             
 
@@ -1512,8 +1464,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets an audit rule in the System Access Control List (SACL) that is associated with the current <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+            >Sets an audit rule in the System Access Control List (SACL) that is associated with the current <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
@@ -1521,7 +1472,11 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

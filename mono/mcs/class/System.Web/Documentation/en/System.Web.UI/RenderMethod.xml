@@ -23,13 +23,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that renders the specified <see
-         cref="T:System.Web.UI.Control" />
+        >Represents the method that renders the specified <see cref="T:System.Web.UI.Control" />
 
         
 
-         container to the specified <see
-         cref="T:System.Web.UI.HtmlTextWriter" />
+         container to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
         
 

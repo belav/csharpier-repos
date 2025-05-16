@@ -24,49 +24,41 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Web.UI.WebControls.DataGridItem" />
+        >A <see cref="T:System.Web.UI.WebControls.DataGridItem" />
 
         
 
-         object represents an item (row) in a <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         object represents an item (row) in a <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
          control, such as a heading section, a footer section, or a data row.</para
       >
       <para
-        >The data items of a <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+        >The data items of a <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
-         control are stored in a <see
-         cref="T:System.Web.UI.WebControls.DataGridItemCollection" />
+         control are stored in a <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" />
 
         
 
-         collection that can be accessed by using the <see
-         cref="P:System.Web.UI.WebControls.DataGrid.Items" />
+         collection that can be accessed by using the <see cref="P:System.Web.UI.WebControls.DataGrid.Items" />
 
         
 
-         property of the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         property of the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
          control.</para
       >
       <para
-        >You can use a <see
-         cref="T:System.Web.UI.WebControls.DataGridItem" />
+        >You can use a <see cref="T:System.Web.UI.WebControls.DataGridItem" />
 
         
 
-         object to programmatically access the properties of an item in a <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         object to programmatically access the properties of an item in a <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
@@ -76,8 +68,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an item (row) in a <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+        >Represents an item (row) in a <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
@@ -102,8 +93,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DataGridItem" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.DataGridItem" />
 
             
 
@@ -113,8 +103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DataGridItem" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.DataGridItem" />
 
             
 
@@ -122,41 +111,49 @@
           >
         </summary>
         <param name="itemIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the item from the <see
-           cref="P:System.Web.UI.WebControls.DataGrid.Items" />
+          The index of the item from the <see cref="P:System.Web.UI.WebControls.DataGrid.Items" />
 
           
 
-           collection in the <see
-           cref="T:System.Web.UI.WebControls.DataGrid" />
+           collection in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
           
 
            control. </param
         >
         <param name="dataSetIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index number of the item, from the bound data source, that appears in the <see
-           cref="T:System.Web.UI.WebControls.DataGrid" />
+          The index number of the item, from the bound data source, that appears in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
           
 
            control. </param
         >
         <param name="itemType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.ListItemType" />
+          One of the <see cref="T:System.Web.UI.WebControls.ListItemType" />
 
           
 
@@ -180,18 +177,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DataGridItem.DataItem" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DataGridItem.DataItem" />
 
             
 
-             property to specify or determine the properties of a data item represented by the <see
-             cref="T:System.Web.UI.WebControls.DataGridItem" />
+             property to specify or determine the properties of a data item represented by the <see cref="T:System.Web.UI.WebControls.DataGridItem" />
 
             
 
-             object in the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+             object in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
@@ -199,13 +193,11 @@
           >
           <block subset="none" type="note">
             <para
-              >This property applies only to data items in the <see
-               cref="T:System.Web.UI.WebControls.DataGrid" />
+              >This property applies only to data items in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
               
 
-               control. The <see
-               cref="P:System.Web.UI.WebControls.DataGridItem.ItemType" />
+               control. The <see cref="P:System.Web.UI.WebControls.DataGridItem.ItemType" />
 
               
 
@@ -216,13 +208,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the data item represented by the <see
-             cref="T:System.Web.UI.WebControls.DataGridItem" />
+            >Gets or sets the data item represented by the <see cref="T:System.Web.UI.WebControls.DataGridItem" />
 
             
 
-             object in the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+             object in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
@@ -246,13 +236,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DataGridItem.DataSetIndex" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DataGridItem.DataSetIndex" />
 
             
 
-             property to get the index of the <see
-             cref="T:System.Web.UI.WebControls.DataGridItem" />
+             property to get the index of the <see cref="T:System.Web.UI.WebControls.DataGridItem" />
 
             
 
@@ -260,18 +248,15 @@
           >
           <block subset="none" type="note">
             <para
-              >This property applies only to data items in the <see
-               cref="T:System.Web.UI.WebControls.DataGrid" />
+              >This property applies only to data items in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
               
 
-               control. The <see
-               cref="P:System.Web.UI.WebControls.DataGridItem.ItemType" />
+               control. The <see cref="P:System.Web.UI.WebControls.DataGridItem.ItemType" />
 
               
 
-               property of the <see
-               cref="T:System.Web.UI.WebControls.DataGridItem" />
+               property of the <see cref="T:System.Web.UI.WebControls.DataGridItem" />
 
               
 
@@ -282,8 +267,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the <see
-             cref="T:System.Web.UI.WebControls.DataGridItem" />
+            >Gets the index of the <see cref="T:System.Web.UI.WebControls.DataGridItem" />
 
             
 
@@ -307,23 +291,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DataGridItem.ItemIndex" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DataGridItem.ItemIndex" />
 
             
 
-             property to determine the index of the <see
-             cref="T:System.Web.UI.WebControls.DataGridItem" />
+             property to determine the index of the <see cref="T:System.Web.UI.WebControls.DataGridItem" />
 
             
 
-             object from the <see
-             cref="P:System.Web.UI.WebControls.DataGrid.Items" />
+             object from the <see cref="P:System.Web.UI.WebControls.DataGrid.Items" />
 
             
 
-             collection of the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+             collection of the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
@@ -331,18 +311,15 @@
           >
           <block subset="none" type="note">
             <para
-              >This property applies only to data items in the <see
-               cref="T:System.Web.UI.WebControls.DataGrid" />
+              >This property applies only to data items in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
               
 
-               control. The <see
-               cref="P:System.Web.UI.WebControls.DataGridItem.ItemType" />
+               control. The <see cref="P:System.Web.UI.WebControls.DataGridItem.ItemType" />
 
               
 
-               property of the <see
-               cref="T:System.Web.UI.WebControls.DataGridItem" />
+               property of the <see cref="T:System.Web.UI.WebControls.DataGridItem" />
 
               
 
@@ -353,18 +330,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the <see
-             cref="T:System.Web.UI.WebControls.DataGridItem" />
+            >Gets the index of the <see cref="T:System.Web.UI.WebControls.DataGridItem" />
 
             
 
-             object from the <see
-             cref="P:System.Web.UI.WebControls.DataGrid.Items" />
+             object from the <see cref="P:System.Web.UI.WebControls.DataGrid.Items" />
 
             
 
-             collection of the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+             collection of the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
@@ -387,12 +361,10 @@
         <ReturnType>System.Web.UI.WebControls.ListItemType</ReturnType>
       </ReturnValue>
       <Docs>
-        <value
-          >
+        <value>
 List items contains one of this types.
 
-<list
-           type="bullet">
+<list type="bullet">
             <item>
               <term>Header</term>
             </item>
@@ -419,13 +391,11 @@ List items contains one of this types.
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DataGridItem.ItemType" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DataGridItem.ItemType" />
 
             
 
-             property to determine the type of an item in the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+             property to determine the type of an item in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
@@ -448,8 +418,7 @@ List items contains one of this types.
               </term>
               <description>
                 <para
-                  >The heading section of the <see
-                   cref="T:System.Web.UI.WebControls.DataGrid" />
+                  >The heading section of the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
                   
 
@@ -463,8 +432,7 @@ List items contains one of this types.
               </term>
               <description>
                 <para
-                  >The footer section of the <see
-                   cref="T:System.Web.UI.WebControls.DataGrid" />
+                  >The footer section of the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
                   
 
@@ -478,8 +446,7 @@ List items contains one of this types.
               </term>
               <description>
                 <para
-                  >An item in the <see
-                   cref="T:System.Web.UI.WebControls.DataGrid" />
+                  >An item in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
                   
 
@@ -493,8 +460,7 @@ List items contains one of this types.
               </term>
               <description>
                 <para
-                  >An alternating item in the <see
-                   cref="T:System.Web.UI.WebControls.DataGrid" />
+                  >An alternating item in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
                   
 
@@ -508,8 +474,7 @@ List items contains one of this types.
               </term>
               <description>
                 <para
-                  >The selected item in the <see
-                   cref="T:System.Web.UI.WebControls.DataGrid" />
+                  >The selected item in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
                   
 
@@ -523,8 +488,7 @@ List items contains one of this types.
               </term>
               <description>
                 <para
-                  >The item selected for editing in the <see
-                   cref="T:System.Web.UI.WebControls.DataGrid" />
+                  >The item selected for editing in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
                   
 
@@ -538,8 +502,7 @@ List items contains one of this types.
               </term>
               <description>
                 <para
-                  >A separator between the items of the <see
-                   cref="T:System.Web.UI.WebControls.DataGrid" />
+                  >A separator between the items of the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
                   
 
@@ -553,8 +516,7 @@ List items contains one of this types.
               </term>
               <description>
                 <para
-                  >The page selection section of the <see
-                   cref="T:System.Web.UI.WebControls.DataGrid" />
+                  >The page selection section of the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
                   
 
@@ -567,13 +529,11 @@ List items contains one of this types.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type of the item represented by the <see
-             cref="T:System.Web.UI.WebControls.DataGridItem" />
+            >Gets the type of the item represented by the <see cref="T:System.Web.UI.WebControls.DataGridItem" />
 
             
 
-             object in the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+             object in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
@@ -605,8 +565,7 @@ List items contains one of this types.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Used internally by the <see
-             cref="T:System.Web.UI.WebControls.DataGridItem" />
+            >Used internally by the <see cref="T:System.Web.UI.WebControls.DataGridItem" />
 
             
 
@@ -618,7 +577,11 @@ List items contains one of this types.
           <para>true if the event has been canceled; otherwise, false.</para>
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -651,8 +614,7 @@ List items contains one of this types.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Used internally by the <see
-             cref="T:System.Web.UI.WebControls.DataGridItem" />
+            >Used internally by the <see cref="T:System.Web.UI.WebControls.DataGridItem" />
 
             
 
@@ -660,12 +622,15 @@ List items contains one of this types.
           >
         </summary>
         <param name="itemType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.ListItemType" />
+          One of the <see cref="T:System.Web.UI.WebControls.ListItemType" />
 
           
 
@@ -690,13 +655,11 @@ List items contains one of this types.
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.DataGridItem" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.DataGridItem" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IDataItemContainer" />
+             instance is cast to an <see cref="T:System.Web.UI.IDataItemContainer" />
 
             
 
@@ -706,8 +669,7 @@ List items contains one of this types.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Web.UI.IDataItemContainer.DataItem" />
+            >For a description of this member, see <see cref="P:System.Web.UI.IDataItemContainer.DataItem" />
 
             
 
@@ -733,13 +695,11 @@ List items contains one of this types.
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.DataGridItem" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.DataGridItem" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IDataItemContainer" />
+             instance is cast to an <see cref="T:System.Web.UI.IDataItemContainer" />
 
             
 
@@ -749,8 +709,7 @@ List items contains one of this types.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Web.UI.IDataItemContainer.DataItemIndex" />
+            >For a description of this member, see <see cref="P:System.Web.UI.IDataItemContainer.DataItemIndex" />
 
             
 
@@ -776,13 +735,11 @@ List items contains one of this types.
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.DataGridItem" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.DataGridItem" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IDataItemContainer" />
+             instance is cast to an <see cref="T:System.Web.UI.IDataItemContainer" />
 
             
 
@@ -792,8 +749,7 @@ List items contains one of this types.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Web.UI.IDataItemContainer.DisplayIndex" />
+            >For a description of this member, see <see cref="P:System.Web.UI.IDataItemContainer.DisplayIndex" />
 
             
 

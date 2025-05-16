@@ -32,18 +32,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a form is shown as a dialog box using the <see
-             cref="M:System.Windows.Forms.Form.ShowDialog" />
+            >When a form is shown as a dialog box using the <see cref="M:System.Windows.Forms.Form.ShowDialog" />
 
             
 
-             method and one of its buttons is clicked, the button's <see
-             cref="P:System.Windows.Forms.IButtonControl.DialogResult" />
+             method and one of its buttons is clicked, the button's <see cref="P:System.Windows.Forms.IButtonControl.DialogResult" />
 
             
 
-             value is assigned to the form's <see
-             cref="P:System.Windows.Forms.Form.DialogResult" />
+             value is assigned to the form's <see cref="P:System.Windows.Forms.Form.DialogResult" />
 
             
 
@@ -79,7 +76,11 @@
           <para>Notifies a control that it is the default button so that its appearance and behavior is adjusted accordingly.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -106,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a <see
-             cref="E:System.Windows.Forms.Control.Click" />
+            >Generates a <see cref="E:System.Windows.Forms.Control.Click" />
 
             
 

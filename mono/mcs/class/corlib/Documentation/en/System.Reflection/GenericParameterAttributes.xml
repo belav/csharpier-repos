@@ -23,28 +23,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The members of the <see
-         cref="T:System.Reflection.GenericParameterAttributes" />
+        >The members of the <see cref="T:System.Reflection.GenericParameterAttributes" />
 
         
 
-         enumeration are divided into two groups, the variance group and the special constraints group. To test a <see
-         cref="T:System.Reflection.GenericParameterAttributes" />
+         enumeration are divided into two groups, the variance group and the special constraints group. To test a <see cref="T:System.Reflection.GenericParameterAttributes" />
 
         
 
-         value for variance flags, first perform a bitwise AND operation with <see
-         cref="F:System.Reflection.GenericParameterAttributes.VarianceMask" />
+         value for variance flags, first perform a bitwise AND operation with <see cref="F:System.Reflection.GenericParameterAttributes.VarianceMask" />
 
         
 
-        . If the result is <see
-         cref="F:System.Reflection.GenericParameterAttributes.None" />
+        . If the result is <see cref="F:System.Reflection.GenericParameterAttributes.None" />
 
         
 
-        , there are no variance flags. Similarly, use <see
-         cref="F:System.Reflection.GenericParameterAttributes.SpecialConstraintMask" />
+        , there are no variance flags. Similarly, use <see cref="F:System.Reflection.GenericParameterAttributes.SpecialConstraintMask" />
 
         
 
@@ -208,18 +203,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Selects the combination of all special constraint flags. This value is the result of using logical OR to combine the following flags: <see
-             cref="F:System.Reflection.GenericParameterAttributes.DefaultConstructorConstraint" />
+            >Selects the combination of all special constraint flags. This value is the result of using logical OR to combine the following flags: <see cref="F:System.Reflection.GenericParameterAttributes.DefaultConstructorConstraint" />
 
             
 
-            , <see
-             cref="F:System.Reflection.GenericParameterAttributes.ReferenceTypeConstraint" />
+            , <see cref="F:System.Reflection.GenericParameterAttributes.ReferenceTypeConstraint" />
 
             
 
-            , and <see
-             cref="F:System.Reflection.GenericParameterAttributes.NotNullableValueTypeConstraint" />
+            , and <see cref="F:System.Reflection.GenericParameterAttributes.NotNullableValueTypeConstraint" />
 
             
 
@@ -247,13 +239,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Selects the combination of all variance flags. This value is the result of using logical OR to combine the following flags: <see
-             cref="F:System.Reflection.GenericParameterAttributes.Contravariant" />
+            >Selects the combination of all variance flags. This value is the result of using logical OR to combine the following flags: <see cref="F:System.Reflection.GenericParameterAttributes.Contravariant" />
 
             
 
-             and <see
-             cref="F:System.Reflection.GenericParameterAttributes.Covariant" />
+             and <see cref="F:System.Reflection.GenericParameterAttributes.Covariant" />
 
             
 

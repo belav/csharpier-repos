@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >See <see
-         cref="T:System.Runtime.InteropServices.IDispatchImplAttribute" />
+        >See <see cref="T:System.Runtime.InteropServices.IDispatchImplAttribute" />
 
         
 

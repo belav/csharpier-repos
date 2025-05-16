@@ -55,33 +55,27 @@
       <para>The UInt32 value type represents unsigned integers with values ranging from 0 to 4,294,967,295.</para>
       <block subset="none" type="note">
         <para
-          >   The <see
-           cref="T:System.UInt32" />
+          >   The <see cref="T:System.UInt32" />
 
           
 
-           type is not CLS-compliant. The CLS-compliant alternative type is <see
-           cref="T:System.Int64" />
+           type is not CLS-compliant. The CLS-compliant alternative type is <see cref="T:System.Int64" />
 
           
 
-          . <see
-           cref="T:System.Int32" />
+          . <see cref="T:System.Int32" />
 
           
 
-           can be used instead to replace a <see
-           cref="T:System.UInt32" />
+           can be used instead to replace a <see cref="T:System.UInt32" />
 
           
 
-           value that ranges from zero to <see
-           cref="F:System.Int32.MaxValue" />
+           value that ranges from zero to <see cref="F:System.Int32.MaxValue" />
 
           
 
-          . For more information about CLS compliance, see <format
-           type="text/html">
+          . For more information about CLS compliance, see <format type="text/html">
             <a href="4f0b77d0-4844-464f-af73-6e06bedeafc6">Common Language Specification</a>
           </format>
 
@@ -91,26 +85,22 @@
         >
       </block>
       <para
-        >UInt32 provides methods to compare instances of this type, convert the value of an instance to its <see
-         cref="T:System.String" />
+        >UInt32 provides methods to compare instances of this type, convert the value of an instance to its <see cref="T:System.String" />
 
         
 
-         representation, and convert the <see
-         cref="T:System.String" />
+         representation, and convert the <see cref="T:System.String" />
 
         
 
          representation of a number to an instance of this type.</para
       >
       <para
-        >For information about how format specification codes control the <see
-         cref="T:System.String" />
+        >For information about how format specification codes control the <see cref="T:System.String" />
 
         
 
-         representation of value types, see <format
-         type="text/html">
+         representation of value types, see <format type="text/html">
           <a href="0D1364DA-5B30-4D42-8E6B-03378343343F">Formatting Types</a>
         </format>
 
@@ -153,8 +143,7 @@
 
           
 
-           is not a <see
-           cref="T:System.UInt32" />
+           is not a <see cref="T:System.UInt32" />
 
           
 
@@ -163,21 +152,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any instance of <see
-             cref="T:System.UInt32" />
+            >Any instance of <see cref="T:System.UInt32" />
 
             
 
             , regardless of its value, is considered greater than null.</para
           >
           <para
-            >The <paramref
-             name="value" />
+            >The <paramref name="value" />
 
             
 
-             parameter must be null or an instance of <see
-             cref="T:System.UInt32" />
+             parameter must be null or an instance of <see cref="T:System.UInt32" />
 
             
 
@@ -191,8 +177,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A signed number indicating the relative values of this instance and <paramref
-             name="value" />
+            >A signed number indicating the relative values of this instance and <paramref name="value" />
 
             
 
@@ -215,8 +200,7 @@
               </term>
               <description>
                 <para
-                  >This instance is less than <paramref
-                   name="value" />
+                  >This instance is less than <paramref name="value" />
 
                   
 
@@ -230,8 +214,7 @@
               </term>
               <description>
                 <para
-                  >This instance is equal to <paramref
-                   name="value" />
+                  >This instance is equal to <paramref name="value" />
 
                   
 
@@ -245,8 +228,7 @@
               </term>
               <description>
                 <para
-                  >This instance is greater than <paramref
-                   name="value" />
+                  >This instance is greater than <paramref name="value" />
 
                   
 
@@ -265,7 +247,11 @@
           </list>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -296,59 +282,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method implements the <see
-             cref="T:System.IComparable`1" />
+            >This method implements the <see cref="T:System.IComparable`1" />
 
             
 
-             interface and performs slightly better than the <see
-             cref="M:System.UInt32.CompareTo(System.Object)" />
+             interface and performs slightly better than the <see cref="M:System.UInt32.CompareTo(System.Object)" />
 
             
 
-             method because it does not have to convert the <paramref
-             name="value" />
+             method because it does not have to convert the <paramref name="value" />
 
             
 
              parameter to an object.</para
           >
           <para
-            >Depending on your programming language, it might be possible to code a <see
-             cref="Overload:System.UInt32.CompareTo" />
+            >Depending on your programming language, it might be possible to code a <see cref="Overload:System.UInt32.CompareTo" />
 
             
 
              method where the parameter type has fewer bits (is narrower) than the instance type. This is possible because some programming languages perform an implicit widening conversion that represents the parameter as a type with as many bits as the instance.</para
           >
           <para
-            >For example, suppose the instance type is <see
-             cref="T:System.Int32" />
+            >For example, suppose the instance type is <see cref="T:System.Int32" />
 
             
 
-             and the parameter type is <see
-             cref="T:System.Byte" />
+             and the parameter type is <see cref="T:System.Byte" />
 
             
 
-            . The Microsoft C# compiler generates instructions to represent the value of the parameter as an <see
-             cref="T:System.Int32" />
+            . The Microsoft C# compiler generates instructions to represent the value of the parameter as an <see cref="T:System.Int32" />
 
             
 
-             object, then generates a <see
-             cref="M:System.Int32.CompareTo(System.Object)" />
+             object, then generates a <see cref="M:System.Int32.CompareTo(System.Object)" />
 
             
 
-             method that compares the values of the <see
-             cref="T:System.Int32" />
+             method that compares the values of the <see cref="T:System.Int32" />
 
             
 
-             instance and the <see
-             cref="T:System.Int32" />
+             instance and the <see cref="T:System.Int32" />
 
             
 
@@ -363,8 +339,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A signed number indicating the relative values of this instance and <paramref
-             name="value" />
+            >A signed number indicating the relative values of this instance and <paramref name="value" />
 
             
 
@@ -387,8 +362,7 @@
               </term>
               <description>
                 <para
-                  >This instance is less than <paramref
-                   name="value" />
+                  >This instance is less than <paramref name="value" />
 
                   
 
@@ -402,8 +376,7 @@
               </term>
               <description>
                 <para
-                  >This instance is equal to <paramref
-                   name="value" />
+                  >This instance is equal to <paramref name="value" />
 
                   
 
@@ -417,8 +390,7 @@
               </term>
               <description>
                 <para
-                  >This instance is greater than <paramref
-                   name="value" />
+                  >This instance is greater than <paramref name="value" />
 
                   
 
@@ -429,7 +401,11 @@
           </list>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -464,8 +440,7 @@
           <para>
             <block subset="none" type="note"
               >This method
-      overrides <see
-               cref="M:System.Object.Equals(System.Object)" />
+      overrides <see cref="M:System.Object.Equals(System.Object)" />
 
               
 
@@ -480,13 +455,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
-             is an instance of <see
-             cref="T:System.UInt32" />
+             is an instance of <see cref="T:System.UInt32" />
 
             
 
@@ -494,7 +467,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -525,18 +502,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method implements the <see
-             cref="T:System.IEquatable`1" />
+            >This method implements the <see cref="T:System.IEquatable`1" />
 
             
 
-             interface, and performs slightly better than <see
-             cref="M:System.UInt32.Equals(System.Object)" />
+             interface, and performs slightly better than <see cref="M:System.UInt32.Equals(System.Object)" />
 
             
 
-             because it does not have to convert the <paramref
-             name="obj" />
+             because it does not have to convert the <paramref name="obj" />
 
             
 
@@ -546,8 +520,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether this instance is equal to a specified <see
-             cref="T:System.UInt32" />
+            >Returns a value indicating whether this instance is equal to a specified <see cref="T:System.UInt32" />
 
             
 
@@ -557,8 +530,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
@@ -566,7 +538,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -601,8 +577,7 @@
           <para>
             <block subset="none" type="note"
               >This method
-      overrides <see
-               cref="M:System.Object.GetHashCode" />
+      overrides <see cref="M:System.Object.GetHashCode" />
 
               
 
@@ -642,13 +617,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.TypeCode" />
+            >Returns the <see cref="T:System.TypeCode" />
 
             
 
-             for value type <see
-             cref="T:System.UInt32" />
+             for value type <see cref="T:System.UInt32" />
 
             
 
@@ -658,8 +631,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The enumerated constant, <see
-             cref="F:System.TypeCode.UInt32" />
+            >The enumerated constant, <see cref="F:System.TypeCode.UInt32" />
 
             
 
@@ -697,8 +669,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the largest possible value of <see
-             cref="T:System.UInt32" />
+            >Represents the largest possible value of <see cref="T:System.UInt32" />
 
             
 
@@ -737,8 +708,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the smallest possible value of <see
-             cref="T:System.UInt32" />
+            >Represents the smallest possible value of <see cref="T:System.UInt32" />
 
             
 
@@ -796,13 +766,11 @@
 
             
 
-             represents a number greater than <see
-             cref="F:System.UInt32.MaxValue" />
+             represents a number greater than <see cref="F:System.UInt32.MaxValue" />
 
             
 
-             or less than <see
-             cref="F:System.UInt32.MinValue" />
+             or less than <see cref="F:System.UInt32.MinValue" />
 
             
 
@@ -811,8 +779,7 @@
         </exception>
         <example>
           <para
-            >This example demonstrates parsing a string to a <see
-             cref="T:System.UInt32" />
+            >This example demonstrates parsing a string to a <see cref="T:System.UInt32" />
 
             
 
@@ -837,8 +804,7 @@ public class UInt32ParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="s" />
+            >The <paramref name="s" />
 
             
 
@@ -871,18 +837,15 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >An optional sign. Valid sign characters are determined by the <see
-                   cref="P:System.Globalization.NumberFormatInfo.NegativeSign" />
+                  >An optional sign. Valid sign characters are determined by the <see cref="P:System.Globalization.NumberFormatInfo.NegativeSign" />
 
                   
 
-                   and <see
-                   cref="P:System.Globalization.NumberFormatInfo.PositiveSign" />
+                   and <see cref="P:System.Globalization.NumberFormatInfo.PositiveSign" />
 
                   
 
-                   properties of the current culture. However, the negative sign symbol can be used only with zero; otherwise, the method throws an <see
-                   cref="T:System.OverflowException" />
+                   properties of the current culture. However, the negative sign symbol can be used only with zero; otherwise, the method throws an <see cref="T:System.OverflowException" />
 
                   
 
@@ -901,13 +864,11 @@ public class UInt32ParseClass {
           </list>
           <block subset="none" type="note">
             <para
-              >The string specified by the <paramref
-               name="s" />
+              >The string specified by the <paramref name="s" />
 
               
 
-               parameter is interpreted by using the <see
-               cref="F:System.Globalization.NumberStyles.Integer" />
+               parameter is interpreted by using the <see cref="F:System.Globalization.NumberStyles.Integer" />
 
               
 
@@ -915,23 +876,19 @@ public class UInt32ParseClass {
             >
           </block>
           <para
-            >The <paramref
-             name="s" />
+            >The <paramref name="s" />
 
             
 
-             parameter is parsed by using the formatting information in a <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             parameter is parsed by using the formatting information in a <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object that is initialized for the current system culture. For more information, see <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrentInfo" />
+             object that is initialized for the current system culture. For more information, see <see cref="P:System.Globalization.NumberFormatInfo.CurrentInfo" />
 
             
 
-            . To parse a string by using the formatting information of a specific culture, use the <see
-             cref="M:System.UInt32.Parse(System.String,System.IFormatProvider)" />
+            . To parse a string by using the formatting information of a specific culture, use the <see cref="M:System.UInt32.Parse(System.String,System.IFormatProvider)" />
 
             
 
@@ -945,8 +902,7 @@ public class UInt32ParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A 32-bit unsigned integer equivalent to the number contained in <paramref
-             name="s" />
+            >A 32-bit unsigned integer equivalent to the number contained in <paramref name="s" />
 
             
 
@@ -954,7 +910,11 @@ public class UInt32ParseClass {
           >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1015,13 +975,11 @@ public class UInt32ParseClass {
 
             
 
-             represents a number greater than <see
-             cref="F:System.UInt32.MaxValue" />
+             represents a number greater than <see cref="F:System.UInt32.MaxValue" />
 
             
 
-             or less than <see
-             cref="F:System.UInt32.MinValue" />
+             or less than <see cref="F:System.UInt32.MinValue" />
 
             
 
@@ -1029,29 +987,34 @@ public class UInt32ParseClass {
           >
         </exception>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string representing the number to convert. The string is interpreted by using the style specified by the <paramref
-           name="style" />
+          A string representing the number to convert. The string is interpreted by using the style specified by the <paramref name="style" />
 
           
 
            parameter.</param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the enumeration values that specify the permitted format of <paramref
-           name="s" />
+          A bitwise combination of the enumeration values that specify the permitted format of <paramref name="s" />
 
           
 
-          . A typical value to specify is <see
-           cref="F:System.Globalization.NumberStyles.Integer" />
+          . A typical value to specify is <see cref="F:System.Globalization.NumberStyles.Integer" />
 
           
 
@@ -1060,56 +1023,46 @@ public class UInt32ParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="style" />
+            >The <paramref name="style" />
 
             
 
-             parameter defines the style elements (such as white space, the positive or negative sign symbol, the group separator symbol, or the decimal point symbol) that are allowed in the <paramref
-             name="s" />
+             parameter defines the style elements (such as white space, the positive or negative sign symbol, the group separator symbol, or the decimal point symbol) that are allowed in the <paramref name="s" />
 
             
 
-             parameter for the parse operation to succeed. <paramref
-             name="style" />
+             parameter for the parse operation to succeed. <paramref name="style" />
 
             
 
-             must be a combination of bit flags from the <see
-             cref="T:System.Globalization.NumberStyles" />
+             must be a combination of bit flags from the <see cref="T:System.Globalization.NumberStyles" />
 
             
 
-             enumeration. The <paramref
-             name="style" />
+             enumeration. The <paramref name="style" />
 
             
 
-             parameter makes this method overload useful when <paramref
-             name="s" />
+             parameter makes this method overload useful when <paramref name="s" />
 
             
 
-             contains the string representation of a hexadecimal value, when the number system (decimal or hexadecimal) represented by <paramref
-             name="s" />
+             contains the string representation of a hexadecimal value, when the number system (decimal or hexadecimal) represented by <paramref name="s" />
 
             
 
-             is known only at run time, or when you want to disallow white space or a sign symbol in <paramref
-             name="s" />
+             is known only at run time, or when you want to disallow white space or a sign symbol in <paramref name="s" />
 
             
 
             .</para
           >
           <para
-            >Depending on the value of <paramref
-             name="style" />
+            >Depending on the value of <paramref name="style" />
 
             
 
-            , the <paramref
-             name="s" />
+            , the <paramref name="s" />
 
             
 
@@ -1117,18 +1070,15 @@ public class UInt32ParseClass {
           >
           <para>[ws][$][sign][digits,]digits[.fractional_digits][E[sign]exponential_digits][ws] </para>
           <para
-            >Elements in square brackets ([ and ]) are optional. If <paramref
-             name="style" />
+            >Elements in square brackets ([ and ]) are optional. If <paramref name="style" />
 
             
 
-             includes <see
-             cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+             includes <see cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
 
             
 
-            , the <paramref
-             name="s" />
+            , the <paramref name="s" />
 
             
 
@@ -1153,33 +1103,27 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >Optional white space. White space can appear at the start of <paramref
-                   name="s" />
+                  >Optional white space. White space can appear at the start of <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
                   
 
-                   flag, and it can appear at the end of <paramref
-                   name="s" />
+                   flag, and it can appear at the end of <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
                   
 
@@ -1193,28 +1137,23 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >A culture-specific currency symbol. Its position in the string is defined by the <see
-                   cref="P:System.Globalization.NumberFormatInfo.CurrencyNegativePattern" />
+                  >A culture-specific currency symbol. Its position in the string is defined by the <see cref="P:System.Globalization.NumberFormatInfo.CurrencyNegativePattern" />
 
                   
 
-                   and <see
-                   cref="P:System.Globalization.NumberFormatInfo.CurrencyPositivePattern" />
+                   and <see cref="P:System.Globalization.NumberFormatInfo.CurrencyPositivePattern" />
 
                   
 
-                   properties of the current culture. The current culture's currency symbol can appear in <paramref
-                   name="s" />
+                   properties of the current culture. The current culture's currency symbol can appear in <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
 
                   
 
@@ -1228,53 +1167,43 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >An optional sign. The sign can appear at the start of <paramref
-                   name="s" />
+                  >An optional sign. The sign can appear at the start of <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
 
                   
 
-                   flag, and it can appear at the end of <paramref
-                   name="s" />
+                   flag, and it can appear at the end of <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
 
                   
 
-                   flag. Parentheses can be used in <paramref
-                   name="s" />
+                   flag. Parentheses can be used in <paramref name="s" />
 
                   
 
-                   to indicate a negative value if <paramref
-                   name="style" />
+                   to indicate a negative value if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowParentheses" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowParentheses" />
 
                   
 
-                   flag. However, the negative sign symbol can be used only with zero; otherwise, the method throws an <see
-                   cref="T:System.OverflowException" />
+                   flag. However, the negative sign symbol can be used only with zero; otherwise, the method throws an <see cref="T:System.OverflowException" />
 
                   
 
@@ -1298,18 +1227,15 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >A culture-specific group separator symbol. The current culture's group separator can appear in <paramref
-                   name="s" />
+                  >A culture-specific group separator symbol. The current culture's group separator can appear in <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowThousands" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowThousands" />
 
                   
 
@@ -1323,23 +1249,19 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >A culture-specific decimal point symbol. The current culture's decimal point symbol can appear in <paramref
-                   name="s" />
+                  >A culture-specific decimal point symbol. The current culture's decimal point symbol can appear in <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
 
                   
 
-                   flag. Only the digit 0 can appear as a fractional digit for the parse operation to succeed; if fractional_digits includes any other digit, a <see
-                   cref="T:System.FormatException" />
+                   flag. Only the digit 0 can appear as a fractional digit for the parse operation to succeed; if fractional_digits includes any other digit, a <see cref="T:System.FormatException" />
 
                   
 
@@ -1353,18 +1275,15 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >The "e" or "E" character, which indicates that the value is represented in exponential (scientific) notation. The <paramref
-                   name="s" />
+                  >The "e" or "E" character, which indicates that the value is represented in exponential (scientific) notation. The <paramref name="s" />
 
                   
 
-                   parameter can represent a number in exponential notation if <paramref
-                   name="style" />
+                   parameter can represent a number in exponential notation if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowExponent" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowExponent" />
 
                   
 
@@ -1382,23 +1301,19 @@ public class UInt32ParseClass {
             </item>
           </list>
           <para
-            >A string with digits only (which corresponds to the <see
-             cref="F:System.Globalization.NumberStyles.None" />
+            >A string with digits only (which corresponds to the <see cref="F:System.Globalization.NumberStyles.None" />
 
             
 
-             style) always parses successfully. Most of the remaining <see
-             cref="T:System.Globalization.NumberStyles" />
+             style) always parses successfully. Most of the remaining <see cref="T:System.Globalization.NumberStyles" />
 
             
 
-             members control elements that may be present, but are not required to be present, in the input string. The following table indicates how individual <see
-             cref="T:System.Globalization.NumberStyles" />
+             members control elements that may be present, but are not required to be present, in the input string. The following table indicates how individual <see cref="T:System.Globalization.NumberStyles" />
 
             
 
-             members affect the elements that may be present in <paramref
-             name="s" />
+             members affect the elements that may be present in <paramref name="s" />
 
             
 
@@ -1412,8 +1327,7 @@ public class UInt32ParseClass {
                 </term>
                 <description>
                   <para
-                    >Elements permitted in <paramref
-                     name="s" />
+                    >Elements permitted in <paramref name="s" />
 
                     
 
@@ -1460,8 +1374,7 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >The ws element at the start of <paramref
-                   name="s" />
+                  >The ws element at the start of <paramref name="s" />
 
                   
 
@@ -1477,8 +1390,7 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >The ws element at the end of <paramref
-                   name="s" />
+                  >The ws element at the end of <paramref name="s" />
 
                   
 
@@ -1494,8 +1406,7 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >The sign element at the start of <paramref
-                   name="s" />
+                  >The sign element at the start of <paramref name="s" />
 
                   
 
@@ -1511,8 +1422,7 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >The sign element at the end of <paramref
-                   name="s" />
+                  >The sign element at the end of <paramref name="s" />
 
                   
 
@@ -1558,8 +1468,7 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >All elements. However, <paramref
-                   name="s" />
+                  >All elements. However, <paramref name="s" />
 
                   
 
@@ -1575,18 +1484,15 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >The ws element at the start or end of <paramref
-                   name="s" />
+                  >The ws element at the start or end of <paramref name="s" />
 
                   
 
-                  , sign at the start of <paramref
-                   name="s" />
+                  , sign at the start of <paramref name="s" />
 
                   
 
-                  , and the decimal point (.) symbol. The <paramref
-                   name="s" />
+                  , and the decimal point (.) symbol. The <paramref name="s" />
 
                   
 
@@ -1602,13 +1508,11 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >The <paramref
-                   name="ws" />
+                  >The <paramref name="ws" />
 
                   
 
-                  , <paramref
-                   name="sign" />
+                  , <paramref name="sign" />
 
                   
 
@@ -1624,8 +1528,7 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >All elements. However, <paramref
-                   name="s" />
+                  >All elements. However, <paramref name="s" />
 
                   
 
@@ -1635,48 +1538,39 @@ public class UInt32ParseClass {
             </item>
           </list>
           <para
-            >Unlike the other <see
-             cref="T:System.Globalization.NumberStyles" />
+            >Unlike the other <see cref="T:System.Globalization.NumberStyles" />
 
             
 
-             values, which allow for, but do not require, the presence of particular style elements in <paramref
-             name="s" />
+             values, which allow for, but do not require, the presence of particular style elements in <paramref name="s" />
 
             
 
-            , the <see
-             cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+            , the <see cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
 
             
 
-             style value means that the individual numeric characters in <paramref
-             name="s" />
+             style value means that the individual numeric characters in <paramref name="s" />
 
             
 
-             are always interpreted as hexadecimal characters. Valid hexadecimal characters are 0-9, A-F, and a-f. The only other flags that can be combined with the <paramref
-             name="style" />
+             are always interpreted as hexadecimal characters. Valid hexadecimal characters are 0-9, A-F, and a-f. The only other flags that can be combined with the <paramref name="style" />
 
             
 
-             parameter are <see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+             parameter are <see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
             
 
-             and <see
-             cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+             and <see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
             
 
-            . (The <see
-             cref="T:System.Globalization.NumberStyles" />
+            . (The <see cref="T:System.Globalization.NumberStyles" />
 
             
 
-             enumeration includes a composite number style, <see
-             cref="F:System.Globalization.NumberStyles.HexNumber" />
+             enumeration includes a composite number style, <see cref="F:System.Globalization.NumberStyles.HexNumber" />
 
             
 
@@ -1684,8 +1578,7 @@ public class UInt32ParseClass {
           >
           <block subset="none" type="note">
             <para
-              >If <paramref
-               name="s" />
+              >If <paramref name="s" />
 
               
 
@@ -1693,18 +1586,15 @@ public class UInt32ParseClass {
             >
           </block>
           <para
-            >The <paramref
-             name="s" />
+            >The <paramref name="s" />
 
             
 
-             parameter is parsed by using the formatting information in a <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             parameter is parsed by using the formatting information in a <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object that is initialized for the current system culture. To specify the culture whose formatting information is used for the parse operation, call the <see
-             cref="M:System.UInt32.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+             object that is initialized for the current system culture. To specify the culture whose formatting information is used for the parse operation, call the <see cref="M:System.UInt32.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
 
             
 
@@ -1718,8 +1608,7 @@ public class UInt32ParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A 32-bit unsigned integer equivalent to the number specified in <paramref
-             name="s" />
+            >A 32-bit unsigned integer equivalent to the number specified in <paramref name="s" />
 
             
 
@@ -1727,29 +1616,34 @@ public class UInt32ParseClass {
           >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string representing the number to convert. The string is interpreted by using the style specified by the <paramref
-           name="style" />
+          A string representing the number to convert. The string is interpreted by using the style specified by the <paramref name="style" />
 
           
 
            parameter.</param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the enumeration values that specify the permitted format of <paramref
-           name="s" />
+          A bitwise combination of the enumeration values that specify the permitted format of <paramref name="s" />
 
           
 
-          . A typical value to specify is <see
-           cref="F:System.Globalization.NumberStyles.Integer" />
+          . A typical value to specify is <see cref="F:System.Globalization.NumberStyles.Integer" />
 
           
 
@@ -1809,13 +1703,11 @@ public class UInt32ParseClass {
 
           
 
-           represents a number greater than <see
-           cref="F:System.UInt32.MaxValue" />
+           represents a number greater than <see cref="F:System.UInt32.MaxValue" />
 
           
 
-           or less than <see
-           cref="F:System.UInt32.MinValue" />
+           or less than <see cref="F:System.UInt32.MinValue" />
 
           
 
@@ -1824,8 +1716,7 @@ public class UInt32ParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="s" />
+            >The <paramref name="s" />
 
             
 
@@ -1858,8 +1749,7 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >An optional sign, or a negative sign if <paramref
-                   name="s" />
+                  >An optional sign, or a negative sign if <paramref name="s" />
 
                   
 
@@ -1877,61 +1767,50 @@ public class UInt32ParseClass {
             </item>
           </list>
           <para
-            >The s parameter is interpreted using the <see
-             cref="F:System.Globalization.NumberStyles.Integer" />
+            >The s parameter is interpreted using the <see cref="F:System.Globalization.NumberStyles.Integer" />
 
             
 
-             style. In addition to the unsigned integer value's decimal digits, only leading and trailing spaces along with a leading sign is allowed. (If the negative sign is present, <paramref
-             name="s" />
+             style. In addition to the unsigned integer value's decimal digits, only leading and trailing spaces along with a leading sign is allowed. (If the negative sign is present, <paramref name="s" />
 
             
 
-             must represent a value of zero, or the method throws an <see
-             cref="T:System.OverflowException" />
+             must represent a value of zero, or the method throws an <see cref="T:System.OverflowException" />
 
             
 
-            .) To explicitly define the style elements together with the culture-specific formatting information that can be present in <paramref
-             name="s" />
+            .) To explicitly define the style elements together with the culture-specific formatting information that can be present in <paramref name="s" />
 
             
 
-            , use the <see
-             cref="M:System.UInt32.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+            , use the <see cref="M:System.UInt32.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
 
             
 
              method.</para
           >
           <para
-            >The <paramref
-             name="provider" />
+            >The <paramref name="provider" />
 
             
 
-             parameter is an <see
-             cref="T:System.IFormatProvider" />
+             parameter is an <see cref="T:System.IFormatProvider" />
 
             
 
-             implementation whose <see
-             cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+             implementation whose <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
             
 
-             method returns a <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             method returns a <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object that provides culture-specific information about the format of <paramref
-             name="s" />
+             object that provides culture-specific information about the format of <paramref name="s" />
 
             
 
-            . There are three ways to use the <paramref
-             name="provider" />
+            . There are three ways to use the <paramref name="provider" />
 
             
 
@@ -1940,13 +1819,11 @@ public class UInt32ParseClass {
           <list type="bullet">
             <item>
               <para
-                >You can pass the actual <see
-                 cref="T:System.Globalization.NumberFormatInfo" />
+                >You can pass the actual <see cref="T:System.Globalization.NumberFormatInfo" />
 
                 
 
-                 object that provides formatting information. (Its implementation of <see
-                 cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+                 object that provides formatting information. (Its implementation of <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
@@ -1955,13 +1832,11 @@ public class UInt32ParseClass {
             </item>
             <item>
               <para
-                >You can pass a <see
-                 cref="T:System.Globalization.CultureInfo" />
+                >You can pass a <see cref="T:System.Globalization.CultureInfo" />
 
                 
 
-                 object that specifies the culture whose formatting is to be used. Its <see
-                 cref="P:System.Globalization.CultureInfo.NumberFormat" />
+                 object that specifies the culture whose formatting is to be used. Its <see cref="P:System.Globalization.CultureInfo.NumberFormat" />
 
                 
 
@@ -1970,18 +1845,15 @@ public class UInt32ParseClass {
             </item>
             <item>
               <para
-                >You can pass a custom <see
-                 cref="T:System.IFormatProvider" />
+                >You can pass a custom <see cref="T:System.IFormatProvider" />
 
                 
 
-                 implementation. Its <see
-                 cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+                 implementation. Its <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
-                 method must instantiate and return the <see
-                 cref="T:System.Globalization.NumberFormatInfo" />
+                 method must instantiate and return the <see cref="T:System.Globalization.NumberFormatInfo" />
 
                 
 
@@ -1990,13 +1862,11 @@ public class UInt32ParseClass {
             </item>
           </list>
           <para
-            >If <paramref
-             name="provider" />
+            >If <paramref name="provider" />
 
             
 
-             is null, the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             is null, the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -2010,8 +1880,7 @@ public class UInt32ParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A 32-bit unsigned integer equivalent to the number specified in <paramref
-             name="s" />
+            >A 32-bit unsigned integer equivalent to the number specified in <paramref name="s" />
 
             
 
@@ -2019,19 +1888,26 @@ public class UInt32ParseClass {
           >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string that represents the number to convert. </param
         >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that supplies culture-specific formatting information about <paramref
-           name="s" />
+          An object that supplies culture-specific formatting information about <paramref name="s" />
 
           
 
@@ -2093,13 +1969,11 @@ public class UInt32ParseClass {
 
             
 
-             represents a number greater than <see
-             cref="F:System.UInt32.MaxValue" />
+             represents a number greater than <see cref="F:System.UInt32.MaxValue" />
 
             
 
-             or less than <see
-             cref="F:System.UInt32.MinValue" />
+             or less than <see cref="F:System.UInt32.MinValue" />
 
             
 
@@ -2109,31 +1983,26 @@ public class UInt32ParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="style" />
+            >The <paramref name="style" />
 
             
 
-             parameter defines the style elements (such as white space or the positive or negative sign symbol) that are allowed in the <paramref
-             name="s" />
+             parameter defines the style elements (such as white space or the positive or negative sign symbol) that are allowed in the <paramref name="s" />
 
             
 
-             parameter for the parse operation to succeed. It must be a combination of bit flags from the <see
-             cref="T:System.Globalization.NumberStyles" />
+             parameter for the parse operation to succeed. It must be a combination of bit flags from the <see cref="T:System.Globalization.NumberStyles" />
 
             
 
              enumeration.</para
           >
           <para
-            >Depending on the value of <paramref
-             name="style" />
+            >Depending on the value of <paramref name="style" />
 
             
 
-            , the <paramref
-             name="s" />
+            , the <paramref name="s" />
 
             
 
@@ -2141,18 +2010,15 @@ public class UInt32ParseClass {
           >
           <para>[ws][$][sign]digits[.fractional_digits][E[sign]exponential_digits][ws] </para>
           <para
-            >Elements in square brackets ([ and ]) are optional. If <paramref
-             name="style" />
+            >Elements in square brackets ([ and ]) are optional. If <paramref name="style" />
 
             
 
-             includes <see
-             cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+             includes <see cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
 
             
 
-            , the <paramref
-             name="s" />
+            , the <paramref name="s" />
 
             
 
@@ -2177,33 +2043,27 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >Optional white space. White space can appear at the beginning of <paramref
-                   name="s" />
+                  >Optional white space. White space can appear at the beginning of <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
                   
 
-                   flag, and it can appear at the end of <paramref
-                   name="s" />
+                   flag, and it can appear at the end of <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
                   
 
@@ -2217,38 +2077,31 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >A culture-specific currency symbol. Its position in the string is defined by the <see
-                   cref="P:System.Globalization.NumberFormatInfo.CurrencyPositivePattern" />
+                  >A culture-specific currency symbol. Its position in the string is defined by the <see cref="P:System.Globalization.NumberFormatInfo.CurrencyPositivePattern" />
 
                   
 
-                   property of the <see
-                   cref="T:System.Globalization.NumberFormatInfo" />
+                   property of the <see cref="T:System.Globalization.NumberFormatInfo" />
 
                   
 
-                   object that is returned by the <see
-                   cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+                   object that is returned by the <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                   
 
-                   method of the <paramref
-                   name="provider" />
+                   method of the <paramref name="provider" />
 
                   
 
-                   parameter. The currency symbol can appear in <paramref
-                   name="s" />
+                   parameter. The currency symbol can appear in <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
 
                   
 
@@ -2262,58 +2115,47 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >An optional sign. (The method throws an <see
-                   cref="T:System.OverflowException" />
+                  >An optional sign. (The method throws an <see cref="T:System.OverflowException" />
 
                   
 
-                   if <paramref
-                   name="s" />
+                   if <paramref name="s" />
 
                   
 
-                   includes a negative sign and represents a non-zero number.) The sign can appear at the beginning of <paramref
-                   name="s" />
+                   includes a negative sign and represents a non-zero number.) The sign can appear at the beginning of <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
 
                   
 
-                   flag, and it can appear the end of <paramref
-                   name="s" />
+                   flag, and it can appear the end of <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
 
                   
 
-                   flag. Parentheses can be used in <paramref
-                   name="s" />
+                   flag. Parentheses can be used in <paramref name="s" />
 
                   
 
-                   to indicate a negative value if <paramref
-                   name="style" />
+                   to indicate a negative value if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowParentheses" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowParentheses" />
 
                   
 
@@ -2335,18 +2177,15 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >A culture-specific decimal point symbol. The current culture's decimal point symbol can appear in <paramref
-                   name="s" />
+                  >A culture-specific decimal point symbol. The current culture's decimal point symbol can appear in <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
 
                   
 
@@ -2360,28 +2199,23 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >One or more occurrences of the digit 0-9 if <paramref
-                   name="style" />
+                  >One or more occurrences of the digit 0-9 if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowExponent" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowExponent" />
 
                   
 
-                   flag, or one or more occurrences of the digit 0 if it does not. Fractional digits can appear in <paramref
-                   name="s" />
+                   flag, or one or more occurrences of the digit 0 if it does not. Fractional digits can appear in <paramref name="s" />
 
                   
 
-                   only if <paramref
-                   name="style" />
+                   only if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
 
                   
 
@@ -2395,18 +2229,15 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >The "e" or "E" character, which indicates that the value is represented in exponential (scientific) notation. The <paramref
-                   name="s" />
+                  >The "e" or "E" character, which indicates that the value is represented in exponential (scientific) notation. The <paramref name="s" />
 
                   
 
-                   parameter can represent a number in exponential notation if <paramref
-                   name="style" />
+                   parameter can represent a number in exponential notation if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowExponent" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowExponent" />
 
                   
 
@@ -2420,18 +2251,15 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >A sequence of digits from 0 through 9. The <paramref
-                   name="s" />
+                  >A sequence of digits from 0 through 9. The <paramref name="s" />
 
                   
 
-                   parameter can represent a number in exponential notation if <paramref
-                   name="style" />
+                   parameter can represent a number in exponential notation if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowExponent" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowExponent" />
 
                   
 
@@ -2449,23 +2277,19 @@ public class UInt32ParseClass {
             </item>
           </list>
           <para
-            >A string with decimal digits only (which corresponds to the <see
-             cref="F:System.Globalization.NumberStyles.None" />
+            >A string with decimal digits only (which corresponds to the <see cref="F:System.Globalization.NumberStyles.None" />
 
             
 
-             style) always parses successfully. Most of the remaining <see
-             cref="T:System.Globalization.NumberStyles" />
+             style) always parses successfully. Most of the remaining <see cref="T:System.Globalization.NumberStyles" />
 
             
 
-             members control elements that may be present, but are not required to be present, in this input string. The following table indicates how individual <see
-             cref="T:System.Globalization.NumberStyles" />
+             members control elements that may be present, but are not required to be present, in this input string. The following table indicates how individual <see cref="T:System.Globalization.NumberStyles" />
 
             
 
-             members affect the elements that may be present in <paramref
-             name="s" />
+             members affect the elements that may be present in <paramref name="s" />
 
             
 
@@ -2479,8 +2303,7 @@ public class UInt32ParseClass {
                 </term>
                 <description>
                   <para
-                    >Elements permitted in <paramref
-                     name="s" />
+                    >Elements permitted in <paramref name="s" />
 
                     
 
@@ -2507,13 +2330,11 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >The decimal point (.) and fractional_digits elements. However, if style does not include the <see
-                   cref="F:System.Globalization.NumberStyles.AllowExponent" />
+                  >The decimal point (.) and fractional_digits elements. However, if style does not include the <see cref="F:System.Globalization.NumberStyles.AllowExponent" />
 
                   
 
-                   flag, fractional_digits must consist of only one or more 0 digits; otherwise, an <see
-                   cref="T:System.OverflowException" />
+                   flag, fractional_digits must consist of only one or more 0 digits; otherwise, an <see cref="T:System.OverflowException" />
 
                   
 
@@ -2539,8 +2360,7 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >The ws element at the beginning of <paramref
-                   name="s" />
+                  >The ws element at the beginning of <paramref name="s" />
 
                   
 
@@ -2556,8 +2376,7 @@ public class UInt32ParseClass {
               </term>
               <description>
                 <para
-                  >The ws element at the end of <paramref
-                   name="s" />
+                  >The ws element at the end of <paramref name="s" />
 
                   
 
@@ -2617,33 +2436,27 @@ public class UInt32ParseClass {
             </item>
           </list>
           <para
-            >If the <see
-             cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+            >If the <see cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
 
             
 
-             flag is used, <paramref
-             name="s" />
+             flag is used, <paramref name="s" />
 
             
 
-             must be a hexadecimal value. The only other flags that can be combined with it are <see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+             must be a hexadecimal value. The only other flags that can be combined with it are <see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
             
 
-             and <see
-             cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+             and <see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
             
 
-            . (The <see
-             cref="T:System.Globalization.NumberStyles" />
+            . (The <see cref="T:System.Globalization.NumberStyles" />
 
             
 
-             enumeration includes a composite number style, <see
-             cref="F:System.Globalization.NumberStyles.HexNumber" />
+             enumeration includes a composite number style, <see cref="F:System.Globalization.NumberStyles.HexNumber" />
 
             
 
@@ -2651,8 +2464,7 @@ public class UInt32ParseClass {
           >
           <block subset="none" type="note">
             <para
-              >If the <paramref
-               name="s" />
+              >If the <paramref name="s" />
 
               
 
@@ -2660,33 +2472,27 @@ public class UInt32ParseClass {
             >
           </block>
           <para
-            >The <paramref
-             name="provider" />
+            >The <paramref name="provider" />
 
             
 
-             parameter is an <see
-             cref="T:System.IFormatProvider" />
+             parameter is an <see cref="T:System.IFormatProvider" />
 
             
 
-             implementation whose <see
-             cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+             implementation whose <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
             
 
-             method returns a <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             method returns a <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object that provides culture-specific information about the format of <paramref
-             name="s" />
+             object that provides culture-specific information about the format of <paramref name="s" />
 
             
 
-            . There are three ways to use the <paramref
-             name="provider" />
+            . There are three ways to use the <paramref name="provider" />
 
             
 
@@ -2695,13 +2501,11 @@ public class UInt32ParseClass {
           <list type="bullet">
             <item>
               <para
-                >You can pass the actual <see
-                 cref="T:System.Globalization.NumberFormatInfo" />
+                >You can pass the actual <see cref="T:System.Globalization.NumberFormatInfo" />
 
                 
 
-                 object that provides formatting information. (Its implementation of <see
-                 cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+                 object that provides formatting information. (Its implementation of <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
@@ -2710,13 +2514,11 @@ public class UInt32ParseClass {
             </item>
             <item>
               <para
-                >You can pass a <see
-                 cref="T:System.Globalization.CultureInfo" />
+                >You can pass a <see cref="T:System.Globalization.CultureInfo" />
 
                 
 
-                 object that specifies the culture whose formatting is to be used. Its <see
-                 cref="P:System.Globalization.CultureInfo.NumberFormat" />
+                 object that specifies the culture whose formatting is to be used. Its <see cref="P:System.Globalization.CultureInfo.NumberFormat" />
 
                 
 
@@ -2725,18 +2527,15 @@ public class UInt32ParseClass {
             </item>
             <item>
               <para
-                >You can pass a custom <see
-                 cref="T:System.IFormatProvider" />
+                >You can pass a custom <see cref="T:System.IFormatProvider" />
 
                 
 
-                 implementation. Its <see
-                 cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+                 implementation. Its <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
-                 method must instantiate and return the <see
-                 cref="T:System.Globalization.NumberFormatInfo" />
+                 method must instantiate and return the <see cref="T:System.Globalization.NumberFormatInfo" />
 
                 
 
@@ -2745,13 +2544,11 @@ public class UInt32ParseClass {
             </item>
           </list>
           <para
-            >If <paramref
-             name="provider" />
+            >If <paramref name="provider" />
 
             
 
-             is null, the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             is null, the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -2765,8 +2562,7 @@ public class UInt32ParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A 32-bit unsigned integer equivalent to the number specified in <paramref
-             name="s" />
+            >A 32-bit unsigned integer equivalent to the number specified in <paramref name="s" />
 
             
 
@@ -2774,41 +2570,49 @@ public class UInt32ParseClass {
           >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string representing the number to convert. The string is interpreted by using the style specified by the <paramref
-           name="style" />
+          A string representing the number to convert. The string is interpreted by using the style specified by the <paramref name="style" />
 
           
 
            parameter.</param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of enumeration values that indicates the style elements that can be present in <paramref
-           name="s" />
+          A bitwise combination of enumeration values that indicates the style elements that can be present in <paramref name="s" />
 
           
 
-          . A typical value to specify is <see
-           cref="F:System.Globalization.NumberStyles.Integer" />
+          . A typical value to specify is <see cref="F:System.Globalization.NumberStyles.Integer" />
 
           
 
           .</param
         >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that supplies culture-specific formatting information about <paramref
-           name="s" />
+          An object that supplies culture-specific formatting information about <paramref name="s" />
 
           
 
@@ -2842,18 +2646,15 @@ public class UInt32ParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.UInt32" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.UInt32" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToBoolean(System.UInt32)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToBoolean(System.UInt32)" />
 
             
 
@@ -2863,8 +2664,7 @@ public class UInt32ParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToBoolean(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToBoolean(System.IFormatProvider)" />
 
             
 
@@ -2876,7 +2676,11 @@ public class UInt32ParseClass {
           <para>true if the value of the current instance is not zero; otherwise, false.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2906,18 +2710,15 @@ public class UInt32ParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.UInt32" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.UInt32" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToByte(System.UInt32)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToByte(System.UInt32)" />
 
             
 
@@ -2927,8 +2728,7 @@ public class UInt32ParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToByte(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToByte(System.IFormatProvider)" />
 
             
 
@@ -2938,8 +2738,7 @@ public class UInt32ParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to a <see
-             cref="T:System.Byte" />
+            >The value of the current instance, converted to a <see cref="T:System.Byte" />
 
             
 
@@ -2947,7 +2746,11 @@ public class UInt32ParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2977,18 +2780,15 @@ public class UInt32ParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.UInt32" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.UInt32" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToChar(System.UInt32)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToChar(System.UInt32)" />
 
             
 
@@ -2998,8 +2798,7 @@ public class UInt32ParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToChar(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToChar(System.IFormatProvider)" />
 
             
 
@@ -3009,8 +2808,7 @@ public class UInt32ParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to a <see
-             cref="T:System.Char" />
+            >The value of the current instance, converted to a <see cref="T:System.Char" />
 
             
 
@@ -3018,7 +2816,11 @@ public class UInt32ParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3052,8 +2854,7 @@ public class UInt32ParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to use this method throws an <see
-             cref="T:System.InvalidCastException" />
+            >This conversion is not supported. Attempting to use this method throws an <see cref="T:System.InvalidCastException" />
 
             
 
@@ -3065,7 +2866,11 @@ public class UInt32ParseClass {
           <para>This conversion is not supported. No value is returned.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3098,18 +2903,15 @@ public class UInt32ParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.UInt32" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.UInt32" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToDecimal(System.UInt32)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToDecimal(System.UInt32)" />
 
             
 
@@ -3119,8 +2921,7 @@ public class UInt32ParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToDecimal(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToDecimal(System.IFormatProvider)" />
 
             
 
@@ -3130,8 +2931,7 @@ public class UInt32ParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to a <see
-             cref="T:System.Decimal" />
+            >The value of the current instance, converted to a <see cref="T:System.Decimal" />
 
             
 
@@ -3139,7 +2939,11 @@ public class UInt32ParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3172,18 +2976,15 @@ public class UInt32ParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.UInt32" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.UInt32" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToDouble(System.UInt32)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToDouble(System.UInt32)" />
 
             
 
@@ -3193,8 +2994,7 @@ public class UInt32ParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToDouble(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToDouble(System.IFormatProvider)" />
 
             
 
@@ -3204,8 +3004,7 @@ public class UInt32ParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to a <see
-             cref="T:System.Double" />
+            >The value of the current instance, converted to a <see cref="T:System.Double" />
 
             
 
@@ -3213,7 +3012,11 @@ public class UInt32ParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3246,18 +3049,15 @@ public class UInt32ParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.UInt32" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.UInt32" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToInt16(System.UInt32)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToInt16(System.UInt32)" />
 
             
 
@@ -3267,8 +3067,7 @@ public class UInt32ParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToInt16(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToInt16(System.IFormatProvider)" />
 
             
 
@@ -3278,8 +3077,7 @@ public class UInt32ParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to an <see
-             cref="T:System.Int16" />
+            >The value of the current instance, converted to an <see cref="T:System.Int16" />
 
             
 
@@ -3287,7 +3085,11 @@ public class UInt32ParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3317,18 +3119,15 @@ public class UInt32ParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.UInt32" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.UInt32" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToInt32(System.UInt32)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToInt32(System.UInt32)" />
 
             
 
@@ -3338,8 +3137,7 @@ public class UInt32ParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToInt32(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToInt32(System.IFormatProvider)" />
 
             
 
@@ -3349,8 +3147,7 @@ public class UInt32ParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to an <see
-             cref="T:System.Int32" />
+            >The value of the current instance, converted to an <see cref="T:System.Int32" />
 
             
 
@@ -3358,7 +3155,11 @@ public class UInt32ParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3391,18 +3192,15 @@ public class UInt32ParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.UInt32" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.UInt32" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToInt64(System.UInt32)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToInt64(System.UInt32)" />
 
             
 
@@ -3412,8 +3210,7 @@ public class UInt32ParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToInt64(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToInt64(System.IFormatProvider)" />
 
             
 
@@ -3423,8 +3220,7 @@ public class UInt32ParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to an <see
-             cref="T:System.Int64" />
+            >The value of the current instance, converted to an <see cref="T:System.Int64" />
 
             
 
@@ -3432,7 +3228,11 @@ public class UInt32ParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3465,18 +3265,15 @@ public class UInt32ParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.UInt32" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.UInt32" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToSByte(System.UInt32)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToSByte(System.UInt32)" />
 
             
 
@@ -3486,8 +3283,7 @@ public class UInt32ParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToSByte(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToSByte(System.IFormatProvider)" />
 
             
 
@@ -3497,8 +3293,7 @@ public class UInt32ParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to an <see
-             cref="T:System.SByte" />
+            >The value of the current instance, converted to an <see cref="T:System.SByte" />
 
             
 
@@ -3506,7 +3301,11 @@ public class UInt32ParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3539,18 +3338,15 @@ public class UInt32ParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.UInt32" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.UInt32" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToSingle(System.UInt32)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToSingle(System.UInt32)" />
 
             
 
@@ -3560,8 +3356,7 @@ public class UInt32ParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToSingle(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToSingle(System.IFormatProvider)" />
 
             
 
@@ -3571,8 +3366,7 @@ public class UInt32ParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to a <see
-             cref="T:System.Single" />
+            >The value of the current instance, converted to a <see cref="T:System.Single" />
 
             
 
@@ -3580,7 +3374,11 @@ public class UInt32ParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3615,18 +3413,15 @@ public class UInt32ParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.UInt32" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.UInt32" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the static (Shared in Visual Basic) <see
-             cref="M:System.Convert.ChangeType(System.Object,System.Type,System.IFormatProvider)" />
+             interface. The recommended alternative is to call the static (Shared in Visual Basic) <see cref="M:System.Convert.ChangeType(System.Object,System.Type,System.IFormatProvider)" />
 
             
 
@@ -3636,8 +3431,7 @@ public class UInt32ParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToType(System.Type,System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToType(System.Type,System.IFormatProvider)" />
 
             
 
@@ -3647,8 +3441,7 @@ public class UInt32ParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to <paramref
-             name="type" />
+            >The value of the current instance, converted to <paramref name="type" />
 
             
 
@@ -3656,12 +3449,15 @@ public class UInt32ParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IFormatProvider" />
+          An <see cref="T:System.IFormatProvider" />
 
           
 
@@ -3694,18 +3490,15 @@ public class UInt32ParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.UInt32" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.UInt32" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToUInt16(System.UInt32)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToUInt16(System.UInt32)" />
 
             
 
@@ -3715,8 +3508,7 @@ public class UInt32ParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToUInt16(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToUInt16(System.IFormatProvider)" />
 
             
 
@@ -3726,8 +3518,7 @@ public class UInt32ParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to a <see
-             cref="T:System.UInt16" />
+            >The value of the current instance, converted to a <see cref="T:System.UInt16" />
 
             
 
@@ -3735,7 +3526,11 @@ public class UInt32ParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3768,13 +3563,11 @@ public class UInt32ParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.UInt32" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.UInt32" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
@@ -3784,8 +3577,7 @@ public class UInt32ParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToUInt32(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToUInt32(System.IFormatProvider)" />
 
             
 
@@ -3797,7 +3589,11 @@ public class UInt32ParseClass {
           <para>The value of the current instance, unchanged.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3830,18 +3626,15 @@ public class UInt32ParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.UInt32" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.UInt32" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToUInt64(System.UInt32)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToUInt64(System.UInt32)" />
 
             
 
@@ -3851,8 +3644,7 @@ public class UInt32ParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToUInt64(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToUInt64(System.IFormatProvider)" />
 
             
 
@@ -3862,8 +3654,7 @@ public class UInt32ParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to a <see
-             cref="T:System.UInt64" />
+            >The value of the current instance, converted to a <see cref="T:System.UInt64" />
 
             
 
@@ -3871,7 +3662,11 @@ public class UInt32ParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3903,23 +3698,19 @@ public class UInt32ParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.UInt32.ToString" />
+            >The <see cref="M:System.UInt32.ToString" />
 
             
 
-             method formats a <see
-             cref="T:System.UInt32" />
+             method formats a <see cref="T:System.UInt32" />
 
             
 
-             value in the default ("G", or general) format by using the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             value in the default ("G", or general) format by using the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object of the current culture. If you want to specify a different format or culture, use the other overloads of the <see
-             cref="M:System.UInt32.ToString(System.String)" />
+             object of the current culture. If you want to specify a different format or culture, use the other overloads of the <see cref="M:System.UInt32.ToString(System.String)" />
 
             
 
@@ -4018,23 +3809,19 @@ public class UInt32ParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.UInt32.ToString(System.IFormatProvider)" />
+            >The <see cref="M:System.UInt32.ToString(System.IFormatProvider)" />
 
             
 
-             method formats a <see
-             cref="T:System.UInt32" />
+             method formats a <see cref="T:System.UInt32" />
 
             
 
-             value in the default ("G", or general) format by using the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             value in the default ("G", or general) format by using the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object of a specified culture. If you want to specify a different format or the current culture, use the other overloads of the <see
-             cref="M:System.UInt32.ToString(System.String)" />
+             object of a specified culture. If you want to specify a different format or the current culture, use the other overloads of the <see cref="M:System.UInt32.ToString(System.String)" />
 
             
 
@@ -4096,28 +3883,23 @@ public class UInt32ParseClass {
           </list>
           <para></para>
           <para
-            >The <paramref
-             name="provider" />
+            >The <paramref name="provider" />
 
             
 
-             parameter is an <see
-             cref="T:System.IFormatProvider" />
+             parameter is an <see cref="T:System.IFormatProvider" />
 
             
 
-             implementation. Its <see
-             cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+             implementation. Its <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
             
 
-             method returns a <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             method returns a <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object that provides culture-specific formatting information. However, none of the properties of the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             object that provides culture-specific formatting information. However, none of the properties of the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -4133,7 +3915,11 @@ public class UInt32ParseClass {
           <para>The string representation of the value of this instance, which consists of a sequence of digits ranging from 0 to 9, without a sign or leading zeros.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4174,8 +3960,7 @@ public class UInt32ParseClass {
         >
         <example>
           <para
-            >This example demonstrates converting a <see
-             cref="T:System.UInt32" />
+            >This example demonstrates converting a <see cref="T:System.UInt32" />
 
             
 
@@ -4210,23 +3995,19 @@ public class UInt32ToStringExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.UInt32.ToString(System.String)" />
+            >The <see cref="M:System.UInt32.ToString(System.String)" />
 
             
 
-             method formats a <see
-             cref="T:System.UInt32" />
+             method formats a <see cref="T:System.UInt32" />
 
             
 
-             value in a specified format by using a <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             value in a specified format by using a <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object that represents the conventions of the current culture. If you want to use the default ("G", or general) format or specify a different culture, use the other overloads of the <see
-             cref="M:System.UInt32.ToString(System.String)" />
+             object that represents the conventions of the current culture. If you want to use the default ("G", or general) format or specify a different culture, use the other overloads of the <see cref="M:System.UInt32.ToString(System.String)" />
 
             
 
@@ -4288,47 +4069,39 @@ public class UInt32ToStringExample {
           </list>
           <para></para>
           <para
-            >The <paramref
-             name="format" />
+            >The <paramref name="format" />
 
             
 
-             parameter can be any valid <format
-             type="text/html">
+             parameter can be any valid <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">standard numeric format specifier</a>
             </format>
 
             
 
-            , or any combination of <format
-             type="text/html">
+            , or any combination of <format type="text/html">
               <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">custom numeric format specifiers</a>
             </format>
 
             
 
-            . If <paramref
-             name="format" />
+            . If <paramref name="format" />
 
             
 
-             is equal to <see
-             cref="F:System.String.Empty" />
+             is equal to <see cref="F:System.String.Empty" />
 
             
 
-             or is null, the return value of the current <see
-             cref="T:System.UInt32" />
+             or is null, the return value of the current <see cref="T:System.UInt32" />
 
             
 
-             object is formatted with the general format specifier ("G"). If <paramref
-             name="format" />
+             object is formatted with the general format specifier ("G"). If <paramref name="format" />
 
             
 
-             is any other value, the method throws a <see
-             cref="T:System.FormatException" />
+             is any other value, the method throws a <see cref="T:System.FormatException" />
 
             
 
@@ -4338,15 +4111,13 @@ public class UInt32ToStringExample {
           <list type="bullet">
             <item>
               <para
-                >For more information about numeric format specifiers, see <format
-                 type="text/html">
+                >For more information about numeric format specifiers, see <format type="text/html">
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format>
 
                 
 
-                 and <format
-                 type="text/html">
+                 and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
 
@@ -4357,8 +4128,7 @@ public class UInt32ToStringExample {
             </item>
             <item>
               <para
-                >For more information about support for formatting in the .NET Framework, see <format
-                 type="text/html">
+                >For more information about support for formatting in the .NET Framework, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
 
@@ -4369,18 +4139,15 @@ public class UInt32ToStringExample {
             </item>
           </list>
           <para
-            >The format of the returned string is determined by the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >The format of the returned string is determined by the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object for the current culture. Depending on the <paramref
-             name="format" />
+             object for the current culture. Depending on the <paramref name="format" />
 
             
 
-             parameter, this object controls symbols such as the group separator and the decimal point symbol in the output string. To provide formatting information for cultures other than the current culture, call the <see
-             cref="M:System.UInt32.ToString(System.String,System.IFormatProvider)" />
+             parameter, this object controls symbols such as the group separator and the decimal point symbol in the output string. To provide formatting information for cultures other than the current culture, call the <see cref="M:System.UInt32.ToString(System.String,System.IFormatProvider)" />
 
             
 
@@ -4394,8 +4161,7 @@ public class UInt32ToStringExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string representation of the value of this instance as specified by <paramref
-             name="format" />
+            >The string representation of the value of this instance as specified by <paramref name="format" />
 
             
 
@@ -4403,7 +4169,11 @@ public class UInt32ToStringExample {
           >
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4449,23 +4219,19 @@ public class UInt32ToStringExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.UInt32.ToString(System.String,System.IFormatProvider)" />
+            >The <see cref="M:System.UInt32.ToString(System.String,System.IFormatProvider)" />
 
             
 
-             method formats a <see
-             cref="T:System.UInt32" />
+             method formats a <see cref="T:System.UInt32" />
 
             
 
-             value in a specified format by using the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             value in a specified format by using the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object of a specified culture. If you want to use default format or culture settings, use the other overloads of the <see
-             cref="M:System.UInt32.ToString(System.String)" />
+             object of a specified culture. If you want to use default format or culture settings, use the other overloads of the <see cref="M:System.UInt32.ToString(System.String)" />
 
             
 
@@ -4527,47 +4293,39 @@ public class UInt32ToStringExample {
           </list>
           <para></para>
           <para
-            >The <paramref
-             name="format" />
+            >The <paramref name="format" />
 
             
 
-             parameter can be any valid <format
-             type="text/html">
+             parameter can be any valid <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">standard numeric format specifier</a>
             </format>
 
             
 
-            , or any combination of <format
-             type="text/html">
+            , or any combination of <format type="text/html">
               <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">custom numeric format specifiers</a>
             </format>
 
             
 
-            . If <paramref
-             name="format" />
+            . If <paramref name="format" />
 
             
 
-             is equal to <see
-             cref="F:System.String.Empty" />
+             is equal to <see cref="F:System.String.Empty" />
 
             
 
-             or is null, the return value of the current <see
-             cref="T:System.UInt32" />
+             or is null, the return value of the current <see cref="T:System.UInt32" />
 
             
 
-             object is formatted with the general format specifier ("G"). If <paramref
-             name="format" />
+             object is formatted with the general format specifier ("G"). If <paramref name="format" />
 
             
 
-             is any other value, the method throws a <see
-             cref="T:System.FormatException" />
+             is any other value, the method throws a <see cref="T:System.FormatException" />
 
             
 
@@ -4577,15 +4335,13 @@ public class UInt32ToStringExample {
           <list type="bullet">
             <item>
               <para
-                >For more information about numeric format specifiers, see <format
-                 type="text/html">
+                >For more information about numeric format specifiers, see <format type="text/html">
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format>
 
                 
 
-                 and <format
-                 type="text/html">
+                 and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
 
@@ -4596,8 +4352,7 @@ public class UInt32ToStringExample {
             </item>
             <item>
               <para
-                >For more information about formatting, see <format
-                 type="text/html">
+                >For more information about formatting, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
 
@@ -4608,73 +4363,59 @@ public class UInt32ToStringExample {
             </item>
           </list>
           <para
-            >The <paramref
-             name="provider" />
+            >The <paramref name="provider" />
 
             
 
-             parameter is an <see
-             cref="T:System.IFormatProvider" />
+             parameter is an <see cref="T:System.IFormatProvider" />
 
             
 
-             implementation. Its <see
-             cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+             implementation. Its <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
             
 
-             method returns a <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             method returns a <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object that provides culture-specific information about the format of the string returned by this method. When the <see
-             cref="M:System.UInt32.ToString(System.String,System.IFormatProvider)" />
+             object that provides culture-specific information about the format of the string returned by this method. When the <see cref="M:System.UInt32.ToString(System.String,System.IFormatProvider)" />
 
             
 
-             method is invoked, it calls the <paramref
-             name="provider" />
+             method is invoked, it calls the <paramref name="provider" />
 
             
 
-             parameter's <see
-             cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+             parameter's <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
             
 
-             method and passes it a <see
-             cref="T:System.Type" />
+             method and passes it a <see cref="T:System.Type" />
 
             
 
-             object that represents the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             object that represents the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             type. The <see
-             cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+             type. The <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
             
 
-             method then returns the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             method then returns the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object that provides information for formatting the current <see
-             cref="T:System.UInt32" />
+             object that provides information for formatting the current <see cref="T:System.UInt32" />
 
             
 
-             value, such as the group separator symbol or the decimal point symbol. There are three ways to use the <paramref
-             name="provider" />
+             value, such as the group separator symbol or the decimal point symbol. There are three ways to use the <paramref name="provider" />
 
             
 
-             parameter to supply formatting information to the <see
-             cref="M:System.UInt32.ToString(System.String,System.IFormatProvider)" />
+             parameter to supply formatting information to the <see cref="M:System.UInt32.ToString(System.String,System.IFormatProvider)" />
 
             
 
@@ -4683,18 +4424,15 @@ public class UInt32ToStringExample {
           <list type="bullet">
             <item>
               <para
-                >You can pass a <see
-                 cref="T:System.Globalization.CultureInfo" />
+                >You can pass a <see cref="T:System.Globalization.CultureInfo" />
 
                 
 
-                 object that represents the culture that supplies formatting information. Its <see
-                 cref="M:System.Globalization.CultureInfo.GetFormat(System.Type)" />
+                 object that represents the culture that supplies formatting information. Its <see cref="M:System.Globalization.CultureInfo.GetFormat(System.Type)" />
 
                 
 
-                 method returns the <see
-                 cref="T:System.Globalization.NumberFormatInfo" />
+                 method returns the <see cref="T:System.Globalization.NumberFormatInfo" />
 
                 
 
@@ -4703,13 +4441,11 @@ public class UInt32ToStringExample {
             </item>
             <item>
               <para
-                >You can pass the actual <see
-                 cref="T:System.Globalization.NumberFormatInfo" />
+                >You can pass the actual <see cref="T:System.Globalization.NumberFormatInfo" />
 
                 
 
-                 object that provides numeric formatting information. (Its implementation of <see
-                 cref="M:System.Globalization.NumberFormatInfo.GetFormat(System.Type)" />
+                 object that provides numeric formatting information. (Its implementation of <see cref="M:System.Globalization.NumberFormatInfo.GetFormat(System.Type)" />
 
                 
 
@@ -4718,18 +4454,15 @@ public class UInt32ToStringExample {
             </item>
             <item>
               <para
-                >You can pass a custom object that implements <see
-                 cref="T:System.IFormatProvider" />
+                >You can pass a custom object that implements <see cref="T:System.IFormatProvider" />
 
                 
 
-                . Its <see
-                 cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+                . Its <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
-                 method instantiates and returns the <see
-                 cref="T:System.Globalization.NumberFormatInfo" />
+                 method instantiates and returns the <see cref="T:System.Globalization.NumberFormatInfo" />
 
                 
 
@@ -4738,13 +4471,11 @@ public class UInt32ToStringExample {
             </item>
           </list>
           <para
-            >If <paramref
-             name="provider" />
+            >If <paramref name="provider" />
 
             
 
-             is null, the formatting of the returned string is based on the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             is null, the formatting of the returned string is based on the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -4758,13 +4489,11 @@ public class UInt32ToStringExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string representation of the value of this instance as specified by <paramref
-             name="format" />
+            >The string representation of the value of this instance as specified by <paramref name="format" />
 
             
 
-             and <paramref
-             name="provider" />
+             and <paramref name="provider" />
 
             
 
@@ -4772,14 +4501,22 @@ public class UInt32ToStringExample {
           >
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A numeric format string.</param
         >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

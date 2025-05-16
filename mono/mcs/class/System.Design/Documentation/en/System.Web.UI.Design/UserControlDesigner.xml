@@ -17,18 +17,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >There is no developer advantage to creating your own designer derived from <see
-         cref="T:System.Web.UI.Design.UserControlDesigner" />
+        >There is no developer advantage to creating your own designer derived from <see cref="T:System.Web.UI.Design.UserControlDesigner" />
 
         
 
-        . To enhance the design-time experience for a custom control, derive your control from <see
-         cref="T:System.Web.UI.WebControls.CompositeControl" />
+        . To enhance the design-time experience for a custom control, derive your control from <see cref="T:System.Web.UI.WebControls.CompositeControl" />
 
         
 
-         and your designer from <see
-         cref="T:System.Web.UI.Design.WebControls.CompositeControlDesigner" />
+         and your designer from <see cref="T:System.Web.UI.Design.WebControls.CompositeControlDesigner" />
 
         
 
@@ -50,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.UserControlDesigner" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.UserControlDesigner" />
 
             
 
@@ -81,18 +77,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This implementation creates two <see
-             cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
+            >This implementation creates two <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
 
             
 
-             objects in the collection: <ui
-            >Edit User Control</ui>
+             objects in the collection: <ui>Edit User Control</ui>
 
             
 
-             and <ui
-            >Refresh</ui>
+             and <ui>Refresh</ui>
 
             
 
@@ -159,8 +152,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member overrides <see
-             cref="M:System.Web.UI.Design.ControlDesigner.GetPersistInnerHtml" />
+            >This member overrides <see cref="M:System.Web.UI.Design.ControlDesigner.GetPersistInnerHtml" />
 
             
 
@@ -191,8 +183,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member overrides <see
-             cref="P:System.Web.UI.Design.HtmlControlDesigner.ShouldCodeSerialize" />
+            >This member overrides <see cref="P:System.Web.UI.Design.HtmlControlDesigner.ShouldCodeSerialize" />
 
             
 

@@ -27,26 +27,22 @@
 
         
 
-         and other classes in the <see
-         cref="N:System.Web.Services.Protocols" />
+         and other classes in the <see cref="N:System.Web.Services.Protocols" />
 
         
 
-         namespace support the .NET Framework's implementations of Web services via the HTTP-GET and HTTP-POST operations. Web service writers and readers serialize and deserialize, respectively, between the parameters or return objects of Web methods and the HTTP request or response streams. Web service writers and readers use HTTP for transport but don't exchange messages using the SOAP standard. The <see
-         cref="T:System.Web.Services.Protocols.ValueCollectionParameterReader" />
+         namespace support the .NET Framework's implementations of Web services via the HTTP-GET and HTTP-POST operations. Web service writers and readers serialize and deserialize, respectively, between the parameters or return objects of Web methods and the HTTP request or response streams. Web service writers and readers use HTTP for transport but don't exchange messages using the SOAP standard. The <see cref="T:System.Web.Services.Protocols.ValueCollectionParameterReader" />
 
         
 
-         class provides, among other methods, a common <see
-         cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.Read(System.Collections.Specialized.NameValueCollection)" />
+         class provides, among other methods, a common <see cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.Read(System.Collections.Specialized.NameValueCollection)" />
 
         
 
          method for all service-side readers of collections of name/value pairs into Web method parameters. The name/value pairs have been parsed from an incoming HTTP request.</para
       >
       <para
-        >You typically will not need to use <see
-         cref="T:System.Web.Services.Protocols.ValueCollectionParameterReader" />
+        >You typically will not need to use <see cref="T:System.Web.Services.Protocols.ValueCollectionParameterReader" />
 
         
 
@@ -69,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Protocols.ValueCollectionParameterReader" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.ValueCollectionParameterReader" />
 
             
 
@@ -99,46 +94,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object returned by the <see
-             cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo)" />
+            >The object returned by the <see cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo)" />
 
             
 
-             method is the <see
-             cref="P:System.Web.Services.Protocols.LogicalMethodInfo.InParameters" />
+             method is the <see cref="P:System.Web.Services.Protocols.LogicalMethodInfo.InParameters" />
 
             
 
-             property of the <paramref
-             name="methodinfo" />
+             property of the <paramref name="methodinfo" />
 
             
 
-             parameter. The <see
-             cref="P:System.Web.Services.Protocols.LogicalMethodInfo.InParameters" />
+             parameter. The <see cref="P:System.Web.Services.Protocols.LogicalMethodInfo.InParameters" />
 
             
 
-             property value is an array of type <see
-             cref="T:System.Reflection.ParameterInfo" />
+             property value is an array of type <see cref="T:System.Reflection.ParameterInfo" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo)" />
+            >The <see cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo)" />
 
             
 
-             method is invoked during service initialization. Later, at the time a request is processed, the initializer object is passed to the <see
-             cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.Initialize(System.Object)" />
+             method is invoked during service initialization. Later, at the time a request is processed, the initializer object is passed to the <see cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.Initialize(System.Object)" />
 
             
 
-             method of another <see
-             cref="T:System.Web.Services.Protocols.ValueCollectionParameterReader" />
+             method of another <see cref="T:System.Web.Services.Protocols.ValueCollectionParameterReader" />
 
             
 
@@ -152,8 +139,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+            >A <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
             
 
@@ -161,12 +147,15 @@
           >
         </returns>
         <param name="methodInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+          A <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
           
 
@@ -191,21 +180,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.Initialize(System.Object)" />
+            >The <see cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.Initialize(System.Object)" />
 
             
 
              method is invoked at the time a request is processed.</para
           >
           <para
-            >The input parameter, <paramref
-             name="o" />
+            >The input parameter, <paramref name="o" />
 
             
 
-            , is obtained by calling the <see
-             cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo)" />
+            , is obtained by calling the <see cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo)" />
 
             
 
@@ -217,22 +203,23 @@
           <para>Initializes an instance.</para>
         </summary>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Reflection.ParameterInfo" />
+          A <see cref="T:System.Reflection.ParameterInfo" />
 
           
 
-           array, obtained through the <see
-           cref="P:System.Web.Services.Protocols.LogicalMethodInfo.InParameters" />
+           array, obtained through the <see cref="P:System.Web.Services.Protocols.LogicalMethodInfo.InParameters" />
 
           
 
-           property of the <see
-           cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+           property of the <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
           
 
@@ -261,8 +248,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether a particular parameter type is supported by the <see
-             cref="T:System.Web.Services.Protocols.ValueCollectionParameterReader" />
+            >Determines whether a particular parameter type is supported by the <see cref="T:System.Web.Services.Protocols.ValueCollectionParameterReader" />
 
             
 
@@ -274,12 +260,15 @@
           <para>true if a method's parameter definitions are supported by the reader; otherwise, false.</para>
         </returns>
         <param name="paramInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Reflection.ParameterInfo" />
+          A <see cref="T:System.Reflection.ParameterInfo" />
 
           
 
@@ -308,8 +297,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether a method definition's parameter definitions are supported by the <see
-             cref="T:System.Web.Services.Protocols.ValueCollectionParameterReader" />
+            >Determines whether a method definition's parameter definitions are supported by the <see cref="T:System.Web.Services.Protocols.ValueCollectionParameterReader" />
 
             
 
@@ -321,12 +309,15 @@
           <para>true if a method's parameter definitions are supported by the reader; otherwise, false.</para>
         </returns>
         <param name="methodInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+          A <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
           
 
@@ -354,38 +345,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.Read(System.Collections.Specialized.NameValueCollection)" />
+            >The <see cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.Read(System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             method is called by the <see
-             cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.Read(System.Collections.Specialized.NameValueCollection)" />
+             method is called by the <see cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.Read(System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             method defined in the two classes derived from <see
-             cref="T:System.Web.Services.Protocols.ValueCollectionParameterReader" />
+             method defined in the two classes derived from <see cref="T:System.Web.Services.Protocols.ValueCollectionParameterReader" />
 
             
 
-            , <see
-             cref="T:System.Web.Services.Protocols.UrlParameterReader" />
+            , <see cref="T:System.Web.Services.Protocols.UrlParameterReader" />
 
             
 
-             and <see
-             cref="T:System.Web.Services.Protocols.HtmlFormParameterReader" />
+             and <see cref="T:System.Web.Services.Protocols.HtmlFormParameterReader" />
 
             
 
-            . Those two classes' <see
-             cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.Read(System.Collections.Specialized.NameValueCollection)" />
+            . Those two classes' <see cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.Read(System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             methods take an <see
-             cref="T:System.Web.HttpRequest" />
+             methods take an <see cref="T:System.Web.HttpRequest" />
 
             
 
@@ -399,8 +383,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Object" />
+            >An array of <see cref="T:System.Object" />
 
             
 
@@ -408,12 +391,15 @@
           >
         </returns>
         <param name="collection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.Specialized.NameValueCollection" />
+          A <see cref="T:System.Collections.Specialized.NameValueCollection" />
 
           
 

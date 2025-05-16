@@ -16,21 +16,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Drawing.Printing.PrinterSettings" />
+        >The <see cref="T:System.Drawing.Printing.PrinterSettings" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.PrintDialog" />
+         and <see cref="T:System.Windows.Forms.PrintDialog" />
 
         
 
          classes use this enumeration.</para
       >
       <para
-        >For more information on printing, see the <see
-         cref="N:System.Drawing.Printing" />
+        >For more information on printing, see the <see cref="N:System.Drawing.Printing" />
 
         
 
@@ -109,13 +106,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The pages between <see
-             cref="P:System.Drawing.Printing.PrinterSettings.FromPage" />
+            >The pages between <see cref="P:System.Drawing.Printing.PrinterSettings.FromPage" />
 
             
 
-             and <see
-             cref="P:System.Drawing.Printing.PrinterSettings.ToPage" />
+             and <see cref="P:System.Drawing.Printing.PrinterSettings.ToPage" />
 
             
 

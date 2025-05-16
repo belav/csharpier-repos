@@ -24,21 +24,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use this class to programmatically manage a collection of <see
-         cref="T:System.DateTime" />
+        >Use this class to programmatically manage a collection of <see cref="T:System.DateTime" />
 
         
 
-         objects that represent the selected dates in a <see
-         cref="T:System.Web.UI.WebControls.Calendar" />
+         objects that represent the selected dates in a <see cref="T:System.Web.UI.WebControls.Calendar" />
 
         
 
          control. This class is commonly used to add or remove dates from the collection.</para
       >
       <para
-        >This collection stores only whole dates. The time portion of each <see
-         cref="T:System.DateTime" />
+        >This collection stores only whole dates. The time portion of each <see cref="T:System.DateTime" />
 
         
 
@@ -48,13 +45,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Encapsulates a collection of <see
-         cref="T:System.DateTime" />
+        >Encapsulates a collection of <see cref="T:System.DateTime" />
 
         
 
-         objects that represent the selected dates in a <see
-         cref="T:System.Web.UI.WebControls.Calendar" />
+         objects that represent the selected dates in a <see cref="T:System.Web.UI.WebControls.Calendar" />
 
         
 
@@ -77,8 +72,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create a new instance of the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+            >Use this constructor to create a new instance of the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
@@ -86,8 +80,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This constructor is primarily used by control developers when extending the <see
-               cref="T:System.Web.UI.WebControls.Calendar" />
+              >This constructor is primarily used by control developers when extending the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
               
 
@@ -98,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
@@ -107,12 +99,15 @@
           >
         </summary>
         <param name="dateList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.ArrayList" />
+          An <see cref="T:System.Collections.ArrayList" />
 
           
 
@@ -137,13 +132,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to add the specified <see
-             cref="T:System.DateTime" />
+            >Use this method to add the specified <see cref="T:System.DateTime" />
 
             
 
-             object to the end of the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+             object to the end of the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
@@ -153,13 +146,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends the specified <see
-             cref="T:System.DateTime" />
+            >Appends the specified <see cref="T:System.DateTime" />
 
             
 
-             object to the end of the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+             object to the end of the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
@@ -167,12 +158,15 @@
           >
         </summary>
         <param name="date">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
@@ -195,18 +189,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to remove all <see
-             cref="T:System.DateTime" />
+            >Use this method to remove all <see cref="T:System.DateTime" />
 
             
 
-             objects from the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+             objects from the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
-             collection and set the <see
-             cref="P:System.Web.UI.WebControls.SelectedDatesCollection.Count" />
+             collection and set the <see cref="P:System.Web.UI.WebControls.SelectedDatesCollection.Count" />
 
             
 
@@ -216,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see
-             cref="T:System.DateTime" />
+            >Removes all <see cref="T:System.DateTime" />
 
             
 
@@ -243,13 +233,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to determine whether the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+            >Use this method to determine whether the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
-             collection contains the specified <see
-             cref="T:System.DateTime" />
+             collection contains the specified <see cref="T:System.DateTime" />
 
             
 
@@ -259,13 +247,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+            >Returns a value indicating whether the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
-             collection contains the specified <see
-             cref="T:System.DateTime" />
+             collection contains the specified <see cref="T:System.DateTime" />
 
             
 
@@ -275,13 +261,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+            >true if the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
-             contains the specified <see
-             cref="T:System.DateTime" />
+             contains the specified <see cref="T:System.DateTime" />
 
             
 
@@ -289,17 +273,19 @@
           >
         </returns>
         <param name="date">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
-           to search for in the <see
-           cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+           to search for in the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
           
 
@@ -325,13 +311,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to copy the contents of the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+            >Use this method to copy the contents of the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
-             collection into the specified <see
-             cref="T:System.Array" />
+             collection into the specified <see cref="T:System.Array" />
 
             
 
@@ -339,13 +323,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <paramref
-               name="array" />
+              >The <paramref name="array" />
 
               
 
-               parameter must be a zero-based <see
-               cref="T:System.Array" />
+               parameter must be a zero-based <see cref="T:System.Array" />
 
               
 
@@ -356,13 +338,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the items from the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+            >Copies the items from the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
-             collection to the specified <see
-             cref="T:System.Array" />
+             collection to the specified <see cref="T:System.Array" />
 
             
 
@@ -370,29 +350,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A zero-based <see
-           cref="T:System.Array" />
+          A zero-based <see cref="T:System.Array" />
 
           
 
-           that receives the copied items from the <see
-           cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+           that receives the copied items from the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
           
 
           . </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first index in the specified <see
-           cref="T:System.Array" />
+          The first index in the specified <see cref="T:System.Array" />
 
           
 
@@ -415,13 +400,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to determine the number of dates in the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+            >Use this property to determine the number of dates in the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
-             collection. The <see
-             cref="P:System.Web.UI.WebControls.SelectedDatesCollection.Count" />
+             collection. The <see cref="P:System.Web.UI.WebControls.SelectedDatesCollection.Count" />
 
             
 
@@ -431,13 +414,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of <see
-             cref="T:System.DateTime" />
+            >Gets the number of <see cref="T:System.DateTime" />
 
             
 
-             objects in the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+             objects in the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
@@ -464,37 +445,32 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to create an <see
-             cref="T:System.Collections.IEnumerator" />
+            >Use this method to create an <see cref="T:System.Collections.IEnumerator" />
 
             
 
-            -implemented object that can be easily iterated through to get each item in the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+            -implemented object that can be easily iterated through to get each item in the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
              collection.</para
           >
           <para
-            >Use the <see
-             cref="P:System.Collections.IEnumerator.Current" />
+            >Use the <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              property to get the item currently pointed to in the collection.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >Use the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
              method to move to the next item in the collection.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Use the <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
@@ -502,23 +478,19 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Collections.IEnumerator.MoveNext" />
+              >The <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
               
 
-               method needs to be called after creating an <see
-               cref="T:System.Collections.IEnumerator" />
+               method needs to be called after creating an <see cref="T:System.Collections.IEnumerator" />
 
               
 
-              -implemented object or using the <see
-               cref="M:System.Collections.IEnumerator.Reset" />
+              -implemented object or using the <see cref="M:System.Collections.IEnumerator.Reset" />
 
               
 
-               method to move the enumerator to the first item in the collection. Otherwise, the item represented by the <see
-               cref="P:System.Collections.IEnumerator.Current" />
+               method to move the enumerator to the first item in the collection. Otherwise, the item represented by the <see cref="P:System.Collections.IEnumerator.Current" />
 
               
 
@@ -529,18 +501,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns an <see cref="T:System.Collections.IEnumerator" />
 
             
 
-            -implemented object that contains all <see
-             cref="T:System.DateTime" />
+            -implemented object that contains all <see cref="T:System.DateTime" />
 
             
 
-             objects within the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+             objects within the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
@@ -550,18 +519,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-            -implemented object that contains all <see
-             cref="T:System.DateTime" />
+            -implemented object that contains all <see cref="T:System.DateTime" />
 
             
 
-             objects within the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+             objects within the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
@@ -585,8 +551,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property always returns false to indicate that the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+            >This property always returns false to indicate that the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
@@ -596,8 +561,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
@@ -621,26 +585,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is derived from <see
-             cref="T:System.Collections.ICollection" />
+            >This property is derived from <see cref="T:System.Collections.ICollection" />
 
             
 
              and is overridden to always return false.</para
           >
           <para
-            >For more information on the <see
-             cref="P:System.Web.UI.WebControls.SelectedDatesCollection.IsSynchronized" />
+            >For more information on the <see cref="P:System.Web.UI.WebControls.SelectedDatesCollection.IsSynchronized" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.IsSynchronized" />
+             property, see the <see cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -650,8 +610,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+            >Gets a value indicating whether access to the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
@@ -697,13 +656,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to remove the specified <see
-             cref="T:System.DateTime" />
+            >Use this method to remove the specified <see cref="T:System.DateTime" />
 
             
 
-             object from the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+             object from the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
@@ -713,13 +670,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.DateTime" />
+            >Removes the specified <see cref="T:System.DateTime" />
 
             
 
-             object from the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+             object from the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
@@ -727,17 +682,19 @@
           >
         </summary>
         <param name="date">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
-           to remove from the <see
-           cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+           to remove from the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
           
 
@@ -766,8 +723,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to add the specified range of dates to the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+            >Use this method to add the specified range of dates to the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
@@ -777,8 +733,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified range of dates to the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+            >Adds the specified range of dates to the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
@@ -786,34 +741,38 @@
           >
         </summary>
         <param name="fromDate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.DateTime" />
+          A <see cref="T:System.DateTime" />
 
           
 
-           that specifies the initial date to add to the <see
-           cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+           that specifies the initial date to add to the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
           
 
           . </param
         >
         <param name="toDate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.DateTime" />
+          A <see cref="T:System.DateTime" />
 
           
 
-           that specifies the end date to add to the <see
-           cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+           that specifies the end date to add to the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
           
 
@@ -836,26 +795,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object returned in this implementation is the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+            >The object returned in this implementation is the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 
              object itself.</para
           >
           <para
-            >For more information on the <see
-             cref="P:System.Web.UI.WebControls.SelectedDatesCollection.SyncRoot" />
+            >For more information on the <see cref="P:System.Web.UI.WebControls.SelectedDatesCollection.SyncRoot" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             property, see the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -865,8 +820,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the object that can be used to synchronize access to the <see
-             cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
+            >Gets the object that can be used to synchronize access to the <see cref="T:System.Web.UI.WebControls.SelectedDatesCollection" />
 
             
 

@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Profile.DefaultProfile" />
+        >The <see cref="T:System.Web.Profile.DefaultProfile" />
 
         
 
@@ -40,8 +39,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Profile.DefaultProfile" />
+            >The <see cref="T:System.Web.Profile.DefaultProfile" />
 
             
 
@@ -51,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Web.Profile.DefaultProfile" />
+            >Creates a new instance of the <see cref="T:System.Web.Profile.DefaultProfile" />
 
             
 

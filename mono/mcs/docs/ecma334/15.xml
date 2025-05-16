@@ -1,15 +1,13 @@
 <?xml version="1.0"?>
 <clause number="15" title="Statements">
   <paragraph
-    >C# provides a variety of statements. <note
-    >[Note: Most of these statements will be familiar to developers who have programmed in C and C++. end note]</note>
+    >C# provides a variety of statements. <note>[Note: Most of these statements will be familiar to developers who have programmed in C and C++. end note]</note>
     <grammar_production>
       <name>statement</name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="15.4">labeled-statement</non_terminal>
       </rhs>
       <rhs>
@@ -26,8 +24,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="15.2">block</non_terminal>
       </rhs>
       <rhs>
@@ -63,20 +60,21 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >The <non_terminal
-     where="15">embedded-statement</non_terminal>
+    >The <non_terminal where="15"
+      >embedded-statement</non_terminal
+    >
 
     
 
      nonterminal is used for statements that appear within other statements. The use of <non_terminal
-     where="15">embedded-statement</non_terminal>
+      where="15"
+      >embedded-statement</non_terminal
+    >
 
     
 
      rather than statement excludes the use of declaration statements and labeled statements in these contexts. <example
-
-      >[Example: The code <code_example
-      >
+      >[Example: The code <code_example>
         <![CDATA[
 void F(bool b) {  
    if (b)  
@@ -88,7 +86,9 @@ void F(bool b) {
       
 
       results in a compile-time error because an if statement requires an <non_terminal
-       where="15">embedded-statement</non_terminal>
+        where="15"
+        >embedded-statement</non_terminal
+      >
 
       
 

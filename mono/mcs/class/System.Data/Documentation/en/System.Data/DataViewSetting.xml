@@ -23,38 +23,31 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the default settings for <see
-         cref="P:System.Data.DataView.ApplyDefaultSort" />
+        >Represents the default settings for <see cref="P:System.Data.DataView.ApplyDefaultSort" />
 
         
 
-        , <see
-         cref="P:System.Data.DataView.DataViewManager" />
+        , <see cref="P:System.Data.DataView.DataViewManager" />
 
         
 
-        , <see
-         cref="P:System.Data.DataView.RowFilter" />
+        , <see cref="P:System.Data.DataView.RowFilter" />
 
         
 
-        , <see
-         cref="P:System.Data.DataView.RowStateFilter" />
+        , <see cref="P:System.Data.DataView.RowStateFilter" />
 
         
 
-        , <see
-         cref="P:System.Data.DataView.Sort" />
+        , <see cref="P:System.Data.DataView.Sort" />
 
         
 
-        , and <see
-         cref="P:System.Data.DataView.Table" />
+        , and <see cref="P:System.Data.DataView.Table" />
 
         
 
-         for DataViews created from the <see
-         cref="T:System.Data.DataViewManager" />
+         for DataViews created from the <see cref="T:System.Data.DataViewManager" />
 
         
 
@@ -98,13 +91,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.DataViewManager" />
+            >Gets the <see cref="T:System.Data.DataViewManager" />
 
             
 
-             that contains this <see
-             cref="T:System.Data.DataViewSetting" />
+             that contains this <see cref="T:System.Data.DataViewSetting" />
 
             
 
@@ -135,13 +126,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the filter to apply in the <see
-             cref="T:System.Data.DataView" />
+            >Gets or sets the filter to apply in the <see cref="T:System.Data.DataView" />
 
             
 
-            . See <see
-             cref="P:System.Data.DataView.RowFilter" />
+            . See <see cref="P:System.Data.DataView.RowFilter" />
 
             
 
@@ -169,8 +158,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value of <see
-             cref="P:System.Data.DataViewSetting.RowStateFilter" />
+            >The default value of <see cref="P:System.Data.DataViewSetting.RowStateFilter" />
 
             
 
@@ -180,8 +168,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether to display Current, Deleted, Modified Current, ModifiedOriginal, New, Original, Unchanged, or no rows in the <see
-             cref="T:System.Data.DataView" />
+            >Gets or sets a value indicating whether to display Current, Deleted, Modified Current, ModifiedOriginal, New, Original, Unchanged, or no rows in the <see cref="T:System.Data.DataView" />
 
             
 
@@ -210,58 +197,47 @@
 
             
 
-             can have two defaults based on the value of <see
-             cref="P:System.Data.DataView.RowFilter" />
+             can have two defaults based on the value of <see cref="P:System.Data.DataView.RowFilter" />
 
             
 
-             property. If <see
-             cref="P:System.Data.DataView.RowFilter" />
+             property. If <see cref="P:System.Data.DataView.RowFilter" />
 
             
 
-             is null or empty (that is, the value is not explicitly specified), the <see
-             cref="T:System.Data.DataRowView" />
+             is null or empty (that is, the value is not explicitly specified), the <see cref="T:System.Data.DataRowView" />
 
             
 
-             in the <see
-             cref="T:System.Data.DataView" />
+             in the <see cref="T:System.Data.DataView" />
 
             
 
-             is sorted on the position or ordinal of <see
-             cref="T:System.Data.DataRow" />
+             is sorted on the position or ordinal of <see cref="T:System.Data.DataRow" />
 
             
 
-             in the <see
-             cref="P:System.Data.DataTable.Rows" />
+             in the <see cref="P:System.Data.DataTable.Rows" />
 
             
 
-             collection. The <see
-             cref="P:System.Data.DataView.Sort" />
+             collection. The <see cref="P:System.Data.DataView.Sort" />
 
             
 
-             default, an empty string, causes a <see
-             cref="T:System.Data.DataRowView" />
+             default, an empty string, causes a <see cref="T:System.Data.DataRowView" />
 
             
 
-             in <see
-             cref="T:System.Data.DataView" />
+             in <see cref="T:System.Data.DataView" />
 
             
 
-             to be sorted on the position or ordinal of <see
-             cref="T:System.Data.DataRow" />
+             to be sorted on the position or ordinal of <see cref="T:System.Data.DataRow" />
 
             
 
-             in the <see
-             cref="P:System.Data.DataTable.Rows" />
+             in the <see cref="P:System.Data.DataTable.Rows" />
 
             
 
@@ -271,8 +247,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating the sort to apply in the <see
-             cref="T:System.Data.DataView" />
+            >Gets or sets a value indicating the sort to apply in the <see cref="T:System.Data.DataView" />
 
             
 
@@ -297,13 +272,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.DataTable" />
+            >Gets the <see cref="T:System.Data.DataTable" />
 
             
 
-             to which the <see
-             cref="T:System.Data.DataViewSetting" />
+             to which the <see cref="T:System.Data.DataViewSetting" />
 
             
 

@@ -33,8 +33,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
+        >The <see cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
 
         
 
@@ -66,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
+            >Creates an instance of <see cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
 
             
 
@@ -99,13 +97,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Runtime.Remoting.Metadata.SoapOption" />
+            >A <see cref="T:System.Runtime.Remoting.Metadata.SoapOption" />
 
             
 
-             value indicates the SOAP configuration options that will be used with a <see
-             cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
+             value indicates the SOAP configuration options that will be used with a <see cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
 
             
 
@@ -113,13 +109,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Runtime.Remoting.Metadata.SoapTypeAttribute.SoapOptions" />
+              >The <see cref="P:System.Runtime.Remoting.Metadata.SoapTypeAttribute.SoapOptions" />
 
               
 
-               enumeration has no effect on serialization of objects with the <see
-               cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />
+               enumeration has no effect on serialization of objects with the <see cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />
 
               
 
@@ -130,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Runtime.Remoting.Metadata.SoapOption" />
+            >Gets or sets a <see cref="T:System.Runtime.Remoting.Metadata.SoapOption" />
 
             
 
@@ -157,13 +150,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Runtime.Remoting.Metadata.SoapTypeAttribute.UseAttribute" />
+            >The <see cref="P:System.Runtime.Remoting.Metadata.SoapTypeAttribute.UseAttribute" />
 
             
 
-             property cannot be set on the <see
-             cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
+             property cannot be set on the <see cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
 
             
 

@@ -12,8 +12,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines the events raised by the build engine. Loggers receive an object implementing this interface in their <see
-         cref="M:Microsoft.Build.Framework.ILogger.Initialize(Microsoft.Build.Framework.IEventSource)" />
+        >Defines the events raised by the build engine. Loggers receive an object implementing this interface in their <see cref="M:Microsoft.Build.Framework.ILogger.Initialize(Microsoft.Build.Framework.IEventSource)" />
 
         
 

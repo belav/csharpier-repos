@@ -40,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.Workspace" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Workspace" />
 
             
 
@@ -75,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.Workspace" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Workspace" />
 
             
 
@@ -84,14 +82,22 @@
           >
         </summary>
         <param name="title">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The title of the workspace.</param
         >
         <param name="collections">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -124,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.Workspace" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Workspace" />
 
             
 
@@ -133,14 +138,22 @@
           >
         </summary>
         <param name="title">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The workspace title.</param
         >
         <param name="collections">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -192,8 +205,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets and sets the base URI for the <see
-             cref="T:System.ServiceModel.Syndication.Workspace" />
+            >Gets and sets the base URI for the <see cref="T:System.ServiceModel.Syndication.Workspace" />
 
             
 
@@ -249,8 +261,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />
+            >Creates a new <see cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />
 
             
 
@@ -259,10 +270,8 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >
-Returns <see
-             cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />
+          <para>
+Returns <see cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />
 
             
 
@@ -294,8 +303,7 @@ Returns <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the element extensions contained within the <see
-             cref="T:System.ServiceModel.Syndication.Workspace" />
+            >Gets the element extensions contained within the <see cref="T:System.ServiceModel.Syndication.Workspace" />
 
             
 
@@ -326,8 +334,7 @@ Returns <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The title of the <see
-             cref="T:System.ServiceModel.Syndication.Workspace" />
+            >The title of the <see cref="T:System.ServiceModel.Syndication.Workspace" />
 
             
 
@@ -366,10 +373,8 @@ Returns <see
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >
-Returns <see
-             cref="T:System.Boolean" />
+          <para>
+Returns <see cref="T:System.Boolean" />
 
             
 
@@ -378,28 +383,44 @@ Returns <see
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the element.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace of the element.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The attribute to parse.</param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -435,10 +456,8 @@ Returns <see
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >
-Returns <see
-             cref="T:System.Boolean" />
+          <para>
+Returns <see cref="T:System.Boolean" />
 
             
 
@@ -447,19 +466,26 @@ Returns <see
           >
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlReader" />
+          The <see cref="T:System.Xml.XmlReader" />
 
           
 
            to read from.</param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -492,8 +518,7 @@ Returns <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the attribute extensions to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Writes the attribute extensions to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -501,19 +526,26 @@ Returns <see
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
            to write to.</param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -546,8 +578,7 @@ Returns <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the element extensions to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Writes the element extensions to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -555,19 +586,26 @@ Returns <see
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
            to write to.</param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

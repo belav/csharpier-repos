@@ -15,8 +15,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for events that are internal to the <see
-         cref="T:System.Windows.Forms.MonthCalendar" />
+        >Provides data for events that are internal to the <see cref="T:System.Windows.Forms.MonthCalendar" />
 
         
 

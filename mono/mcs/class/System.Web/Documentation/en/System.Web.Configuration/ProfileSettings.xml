@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.ProfileSettings" />
+        >The <see cref="T:System.Web.Configuration.ProfileSettings" />
 
         
 
@@ -111,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.ProfileSettings" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.ProfileSettings" />
 
             
 
@@ -120,12 +118,15 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Web.Configuration.ProfileSettings" />
+          The name of the <see cref="T:System.Web.Configuration.ProfileSettings" />
 
           
 
@@ -179,8 +180,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.ProfileSettings" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.ProfileSettings" />
 
             
 
@@ -188,38 +188,52 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Web.Configuration.ProfileSettings" />
+          The name of the <see cref="T:System.Web.Configuration.ProfileSettings" />
 
           
 
            object to create.</param
         >
         <param name="minInstances">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The minimum number of event occurrences before the event is raised to the provider. </param
         >
         <param name="maxLimit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The maximum number of times events of the same type are raised.</param
         >
         <param name="minInterval">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.TimeSpan" />
+          A <see cref="T:System.TimeSpan" />
 
           
 
@@ -249,8 +263,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.BufferModeSettings" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.BufferModeSettings" />
 
             
 
@@ -258,50 +271,67 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Web.Configuration.ProfileSettings" />
+          The name of the <see cref="T:System.Web.Configuration.ProfileSettings" />
 
           
 
            object to create.</param
         >
         <param name="minInstances">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The minimum number of event occurrences before the event is raised to the provider. </param
         >
         <param name="maxLimit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The maximum number of times events of the same type are raised.</param
         >
         <param name="minInterval">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.TimeSpan" />
+          A <see cref="T:System.TimeSpan" />
 
           
 
            that specifies the minimum interval between two events of the same type.</param
         >
         <param name="custom">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The fully qualified type of a custom class that implements <see
-           cref="T:System.Web.Management.IWebEventCustomEvaluator" />
+          The fully qualified type of a custom class that implements <see cref="T:System.Web.Management.IWebEventCustomEvaluator" />
 
           
 
@@ -333,8 +363,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the fully qualified type of a custom class that implements the <see
-             cref="T:System.Web.Management.IWebEventCustomEvaluator" />
+            >Gets or sets the fully qualified type of a custom class that implements the <see cref="T:System.Web.Management.IWebEventCustomEvaluator" />
 
             
 
@@ -369,8 +398,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property must have a value greater than zero. The value can be made infinite by setting it to <see
-             cref="F:System.Int32.MaxValue" />
+            >This property must have a value greater than zero. The value can be made infinite by setting it to <see cref="F:System.Int32.MaxValue" />
 
             
 
@@ -407,16 +435,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property must have a value greater than zero. The value can be made infinite by setting it to <see
-             cref="F:System.Int32.MaxValue" />
+            >This property must have a value greater than zero. The value can be made infinite by setting it to <see cref="F:System.Int32.MaxValue" />
 
             
 
             . Invalid values may cause an exception to be thrown when the configuration section is saved. </para
           >
           <para
-            >This property specifies the minimum number of times an event occurs before an event is raised to the provider. For example, a value of 5 means that ASP.NET will not raise an event to the provider until the fifth instance of the event occurs. If the value is infinite (<see
-             cref="F:System.Int32.MaxValue" />
+            >This property specifies the minimum number of times an event occurs before an event is raised to the provider. For example, a value of 5 means that ASP.NET will not raise an event to the provider until the fifth instance of the event occurs. If the value is infinite (<see cref="F:System.Int32.MaxValue" />
 
             
 
@@ -452,16 +478,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value can be made infinite by setting it to <see
-             cref="F:System.Int32.MaxValue" />
+            >The value can be made infinite by setting it to <see cref="F:System.Int32.MaxValue" />
 
             
 
             . Invalid values may cause an exception when the configuration section is saved. </para
           >
           <para
-            >If the value is <see
-             cref="F:System.TimeSpan.Zero" />
+            >If the value is <see cref="F:System.TimeSpan.Zero" />
 
             
 
@@ -501,8 +525,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the <see
-             cref="T:System.Web.Configuration.ProfileSettings" />
+            >Gets or sets the name of the <see cref="T:System.Web.Configuration.ProfileSettings" />
 
             
 

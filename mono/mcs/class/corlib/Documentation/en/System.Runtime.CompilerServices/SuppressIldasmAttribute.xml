@@ -27,13 +27,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Apply the <see
-         cref="T:System.Runtime.CompilerServices.SuppressIldasmAttribute" />
+        >Apply the <see cref="T:System.Runtime.CompilerServices.SuppressIldasmAttribute" />
 
         
 
-         attribute to an assembly or module to prevent the assembly or module from being disassembled using the <format
-         type="text/html">
+         attribute to an assembly or module to prevent the assembly or module from being disassembled using the <format type="text/html">
           <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
         </format>
 
@@ -43,13 +41,11 @@
       >
       <para>This attribute does not prevent an assembly from being viewed using reflection.  </para>
       <para
-        >Note that <see
-         cref="T:System.Runtime.CompilerServices.SuppressIldasmAttribute" />
+        >Note that <see cref="T:System.Runtime.CompilerServices.SuppressIldasmAttribute" />
 
         
 
-         attribute does not block the <format
-         type="text/html">
+         attribute does not block the <format type="text/html">
           <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
         </format>
 
@@ -61,8 +57,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Prevents the <format
-         type="text/html">
+        >Prevents the <format type="text/html">
           <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
         </format>
 
@@ -90,13 +85,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Apply the <see
-             cref="T:System.Runtime.CompilerServices.SuppressIldasmAttribute" />
+            >Apply the <see cref="T:System.Runtime.CompilerServices.SuppressIldasmAttribute" />
 
             
 
-             attribute to an assembly or module to prevent the assembly or module from being disassembled using the <format
-             type="text/html">
+             attribute to an assembly or module to prevent the assembly or module from being disassembled using the <format type="text/html">
               <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
             </format>
 
@@ -108,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.CompilerServices.SuppressIldasmAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.SuppressIldasmAttribute" />
 
             
 

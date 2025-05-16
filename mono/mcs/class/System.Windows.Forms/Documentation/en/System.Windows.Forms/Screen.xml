@@ -14,8 +14,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The constructor for this object is not public, so you cannot explicitly create a <see
-         cref="T:System.Windows.Forms.Screen" />
+        >The constructor for this object is not public, so you cannot explicitly create a <see cref="T:System.Windows.Forms.Screen" />
 
         
 
@@ -64,8 +63,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, the number of bits per pixel for a screen is useful when working with bitmaps. For more information about bitmaps, see <format
-             type="text/html">
+            >Typically, the number of bits per pixel for a screen is useful when working with bitmaps. For more information about bitmaps, see <format type="text/html">
               <a href="6BE085A2-2C13-47C8-B80A-C18B32777D8D"
                 >[&lt;topic://_gdiplus_Types_of_Bitmaps_about&gt;]</a
               >
@@ -141,8 +139,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified object is equal to this <see
-             cref="T:System.Windows.Forms.Screen" />
+            >true if the specified object is equal to this <see cref="T:System.Windows.Forms.Screen" />
 
             
 
@@ -150,12 +147,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to compare to this <see
-           cref="T:System.Windows.Forms.Screen" />
+          The object to compare to this <see cref="T:System.Windows.Forms.Screen" />
 
           
 
@@ -184,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a <see
-             cref="T:System.Windows.Forms.Screen" />
+            >Retrieves a <see cref="T:System.Windows.Forms.Screen" />
 
             
 
@@ -195,8 +194,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.Screen" />
+            >A <see cref="T:System.Windows.Forms.Screen" />
 
             
 
@@ -204,17 +202,19 @@
           >
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Control" />
+          A <see cref="T:System.Windows.Forms.Control" />
 
           
 
-           for which to retrieve a <see
-           cref="T:System.Windows.Forms.Screen" />
+           for which to retrieve a <see cref="T:System.Windows.Forms.Screen" />
 
           
 
@@ -243,8 +243,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a <see
-             cref="T:System.Windows.Forms.Screen" />
+            >Retrieves a <see cref="T:System.Windows.Forms.Screen" />
 
             
 
@@ -254,8 +253,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.Screen" />
+            >A <see cref="T:System.Windows.Forms.Screen" />
 
             
 
@@ -263,12 +261,15 @@
           >
         </returns>
         <param name="hwnd">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The window handle for which to retrieve the <see
-           cref="T:System.Windows.Forms.Screen" />
+          The window handle for which to retrieve the <see cref="T:System.Windows.Forms.Screen" />
 
           
 
@@ -297,8 +298,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a <see
-             cref="T:System.Windows.Forms.Screen" />
+            >Retrieves a <see cref="T:System.Windows.Forms.Screen" />
 
             
 
@@ -308,8 +308,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.Screen" />
+            >A <see cref="T:System.Windows.Forms.Screen" />
 
             
 
@@ -317,17 +316,19 @@
           >
         </returns>
         <param name="point">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
-           that specifies the location for which to retrieve a <see
-           cref="T:System.Windows.Forms.Screen" />
+           that specifies the location for which to retrieve a <see cref="T:System.Windows.Forms.Screen" />
 
           
 
@@ -356,8 +357,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a <see
-             cref="T:System.Windows.Forms.Screen" />
+            >Retrieves a <see cref="T:System.Windows.Forms.Screen" />
 
             
 
@@ -367,8 +367,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.Screen" />
+            >A <see cref="T:System.Windows.Forms.Screen" />
 
             
 
@@ -376,12 +375,15 @@
           >
         </returns>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
@@ -414,8 +416,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Rectangle" />
+            >A <see cref="T:System.Drawing.Rectangle" />
 
             
 
@@ -423,12 +424,15 @@
           >
         </returns>
         <param name="pt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
@@ -461,8 +465,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Rectangle" />
+            >A <see cref="T:System.Drawing.Rectangle" />
 
             
 
@@ -470,12 +473,15 @@
           >
         </returns>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
@@ -508,8 +514,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Rectangle" />
+            >A <see cref="T:System.Drawing.Rectangle" />
 
             
 
@@ -517,12 +522,15 @@
           >
         </returns>
         <param name="ctl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Control" />
+          The <see cref="T:System.Windows.Forms.Control" />
 
           
 
@@ -545,8 +553,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method implements the <see
-             cref="T:System.Object" />
+            >This method implements the <see cref="T:System.Object" />
 
             
 
@@ -588,8 +595,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Rectangle" />
+            >A <see cref="T:System.Drawing.Rectangle" />
 
             
 
@@ -597,12 +603,15 @@
           >
         </returns>
         <param name="pt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
@@ -635,8 +644,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Rectangle" />
+            >A <see cref="T:System.Drawing.Rectangle" />
 
             
 
@@ -644,12 +652,15 @@
           >
         </returns>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
@@ -682,8 +693,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Rectangle" />
+            >A <see cref="T:System.Drawing.Rectangle" />
 
             
 
@@ -691,12 +701,15 @@
           >
         </returns>
         <param name="ctl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Control" />
+          The <see cref="T:System.Windows.Forms.Control" />
 
           
 

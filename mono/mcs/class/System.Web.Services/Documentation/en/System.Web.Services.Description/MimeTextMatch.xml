@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For more information about specifying protocols for XML Web services, see <format
-         type="text/html">
+        >For more information about specifying protocols for XML Web services, see <format type="text/html">
           <a href="01DFC27C-C68E-4910-A0AA-5E4C2A766B0C"
             >[&lt;topic://cpconbuildingaspnetwebservices&gt;]</a
           >
@@ -44,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.MimeTextMatch" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.MimeTextMatch" />
 
             
 
@@ -70,13 +68,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see the <see
-             cref="P:System.Web.Services.Description.MimeTextMatch.Group" />
+            >For more information, see the <see cref="P:System.Web.Services.Description.MimeTextMatch.Group" />
 
             
 
-             and <see
-             cref="P:System.Web.Services.Description.MimeTextMatch.Matches" />
+             and <see cref="P:System.Web.Services.Description.MimeTextMatch.Matches" />
 
             
 
@@ -86,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating the zero-based index of a <see
-             cref="T:System.Web.Services.Description.MimeTextMatch" />
+            >Gets or sets a value indicating the zero-based index of a <see cref="T:System.Web.Services.Description.MimeTextMatch" />
 
             
 
@@ -120,8 +115,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this property must be less than or equal to the value of the <see
-             cref="P:System.Web.Services.Description.MimeTextMatch.Repeats" />
+            >The value of this property must be less than or equal to the value of the <see cref="P:System.Web.Services.Description.MimeTextMatch.Repeats" />
 
             
 
@@ -211,8 +205,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the <see
-             cref="T:System.Web.Services.Description.MimeTextMatch" />
+            >Gets or sets the name of the <see cref="T:System.Web.Services.Description.MimeTextMatch" />
 
             
 
@@ -270,16 +263,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a case where more than one match is possible, a property value of 1 will return only the first match found. A value of <see
-             cref="F:System.Int32.MaxValue" />
+            >In a case where more than one match is possible, a property value of 1 will return only the first match found. A value of <see cref="F:System.Int32.MaxValue" />
 
             
 
              will return all matches.</para
           >
           <para
-            >This property returns the same information as the <see
-             cref="P:System.Web.Services.Description.MimeTextMatch.RepeatsString" />
+            >This property returns the same information as the <see cref="P:System.Web.Services.Description.MimeTextMatch.RepeatsString" />
 
             
 
@@ -313,13 +304,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns the same information as the <see
-             cref="P:System.Web.Services.Description.MimeTextMatch.Repeats" />
+            >This property returns the same information as the <see cref="P:System.Web.Services.Description.MimeTextMatch.Repeats" />
 
             
 
-             property, but as a string rather than as a 32-bit signed integer. A value of "*" corresponds to <see
-             cref="F:System.Int32.MaxValue" />
+             property, but as a string rather than as a 32-bit signed integer. A value of "*" corresponds to <see cref="F:System.Int32.MaxValue" />
 
             
 

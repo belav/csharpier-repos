@@ -14,8 +14,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A collection of <see
-         cref="T:System.Web.UI.Design.TemplateDefinition" />
+        >A collection of <see cref="T:System.Web.UI.Design.TemplateDefinition" />
 
         
 
@@ -38,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.TemplateGroup" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.TemplateGroup" />
 
             
 
@@ -47,7 +45,11 @@
           >
         </summary>
         <param name="groupName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -73,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.TemplateGroup" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.TemplateGroup" />
 
             
 
@@ -82,19 +83,26 @@
           >
         </summary>
         <param name="groupName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the group</param
         >
         <param name="groupStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.Style" />
+          A <see cref="T:System.Web.UI.WebControls.Style" />
 
           
 
@@ -122,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the provided <see
-             cref="T:System.Web.UI.Design.TemplateDefinition" />
+            >Adds the provided <see cref="T:System.Web.UI.Design.TemplateDefinition" />
 
             
 
@@ -131,12 +138,15 @@
           >
         </summary>
         <param name="templateDefinition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.Design.TemplateDefinition" />
+          A <see cref="T:System.Web.UI.Design.TemplateDefinition" />
 
           
 

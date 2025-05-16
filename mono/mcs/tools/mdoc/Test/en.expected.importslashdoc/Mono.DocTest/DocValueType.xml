@@ -18,13 +18,11 @@
   </Interfaces>
   <Docs>
     <summary>Process interface</summary>
-    <remarks>
-      <c>T:Mono.DocTest.DocValueType</c>
+    <remarks><c>T:Mono.DocTest.DocValueType</c>
 
       
 
-      .</remarks
-    >
+      .</remarks>
   </Docs>
   <Members>
     <Member MemberName="M">
@@ -44,14 +42,11 @@
         <Parameter Name="i" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="i"
-          >A <see
-           cref="T:System.Int32" />
+        <param name="i">A <see cref="T:System.Int32" />
 
           
 
-          .</param
-        >
+          .</param>
         <summary>To be added.</summary>
         <remarks>
           <see cref="M:Mono.DocTest.DocValueType.M(System.Int32)" />
@@ -74,13 +69,11 @@
       </ReturnValue>
       <Docs>
         <summary>To be added.</summary>
-        <remarks>
-          <c>F:Mono.DocTest.DocValueType.total</c>
+        <remarks><c>F:Mono.DocTest.DocValueType.total</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
   </Members>

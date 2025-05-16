@@ -16,13 +16,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Drawing.Pen" />
+        >A <see cref="T:System.Drawing.Pen" />
 
         
 
-         object has width. The center point of this pen width is aligned relative to the line being drawn depending on the alignment value. A <see
-         cref="T:System.Drawing.Pen" />
+         object has width. The center point of this pen width is aligned relative to the line being drawn depending on the alignment value. A <see cref="T:System.Drawing.Pen" />
 
         
 
@@ -32,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the alignment of a <see
-         cref="T:System.Drawing.Pen" />
+        >Specifies the alignment of a <see cref="T:System.Drawing.Pen" />
 
         
 
@@ -54,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the <see
-             cref="T:System.Drawing.Pen" />
+            >Specifies that the <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -80,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the <see
-             cref="T:System.Drawing.Pen" />
+            >Specifies that the <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -106,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the <see
-             cref="T:System.Drawing.Pen" />
+            >Specifies the <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -132,8 +126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the <see
-             cref="T:System.Drawing.Pen" />
+            >Specifies the <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -158,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the <see
-             cref="T:System.Drawing.Pen" />
+            >Specifies the <see cref="T:System.Drawing.Pen" />
 
             
 

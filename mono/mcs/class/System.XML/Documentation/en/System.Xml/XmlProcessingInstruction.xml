@@ -53,13 +53,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not instantiate an <see
-             cref="T:System.Xml.XmlProcessingInstruction" />
+            >Do not instantiate an <see cref="T:System.Xml.XmlProcessingInstruction" />
 
             
 
-             directly; instead, use methods such as <see
-             cref="M:System.Xml.XmlDocument.CreateProcessingInstruction" />
+             directly; instead, use methods such as <see cref="M:System.Xml.XmlDocument.CreateProcessingInstruction" />
 
             
 
@@ -69,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlProcessingInstruction" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlProcessingInstruction" />
 
             
 
@@ -78,31 +75,41 @@
           >
         </summary>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The target of the processing instruction; see the <see
-           cref="P:System.Xml.XmlProcessingInstruction.Target" />
+          The target of the processing instruction; see the <see cref="P:System.Xml.XmlProcessingInstruction.Target" />
 
           
 
            property.</param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The content of the instruction; see the <see
-           cref="P:System.Xml.XmlProcessingInstruction.Data" />
+          The content of the instruction; see the <see cref="P:System.Xml.XmlProcessingInstruction.Data" />
 
           
 
            property.</param
         >
         <param name="doc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -135,16 +142,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >CloneNode serves as a copy constructor for nodes. For processing instruction nodes, the cloned node always includes the target and data. To see how this method behaves with other node types, see the <see
-             cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />
+            >CloneNode serves as a copy constructor for nodes. For processing instruction nodes, the cloned node always includes the target and data. To see how this method behaves with other node types, see the <see cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />
 
             
 
              method in the XmlNode class.</para
           >
           <para
-            >The cloned node has no parent (<see
-             cref="P:System.Xml.XmlNode.ParentNode" />
+            >The cloned node has no parent (<see cref="P:System.Xml.XmlNode.ParentNode" />
 
             
 
@@ -160,7 +165,11 @@
           <para>The duplicate node.</para>
         </returns>
         <param name="deep">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -354,8 +363,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves all the children of the node to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Saves all the children of the node to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -363,7 +371,11 @@
           >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -400,8 +412,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the node to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Saves the node to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -409,7 +420,11 @@
           >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

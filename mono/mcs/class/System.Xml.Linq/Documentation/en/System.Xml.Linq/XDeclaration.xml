@@ -18,18 +18,15 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>An XML declaration is used to declare the XML version, the encoding, and whether or not the XML document is standalone. This class represents the XML concept of an XML declaration. </para>
       <para
-        >Just as in the XML standard, declarations are associated with a document. When you create a document, you have the option to specify the declaration for the document. The <see
-         cref="T:System.Xml.Linq.XDocument" />
+        >Just as in the XML standard, declarations are associated with a document. When you create a document, you have the option to specify the declaration for the document. The <see cref="T:System.Xml.Linq.XDocument" />
 
         
 
-         class contains the <see
-         cref="P:System.Xml.Linq.XDocument.Declaration" />
+         class contains the <see cref="P:System.Xml.Linq.XDocument.Declaration" />
 
         
 
-         property, which allows you to set or get the declaration. For information about how to serialize an XML tree with an XML declaration, see <format
-         type="text/html">
+         property, which allows you to set or get the declaration. For information about how to serialize an XML tree with an XML declaration, see <format type="text/html">
           <a href="30f1b564-62b5-4e5d-9c36-884e51113feb">Saving With an XML Declaration</a>
         </format>
 
@@ -68,13 +65,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Linq.XDeclaration" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XDeclaration" />
 
             
 
-             class from another <see
-             cref="T:System.Xml.Linq.XDeclaration" />
+             class from another <see cref="T:System.Xml.Linq.XDeclaration" />
 
             
 
@@ -82,17 +77,19 @@
           >
         </summary>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XDeclaration" />
+          The <see cref="T:System.Xml.Linq.XDeclaration" />
 
           
 
-           used to initialize this <see
-           cref="T:System.Xml.Linq.XDeclaration" />
+           used to initialize this <see cref="T:System.Xml.Linq.XDeclaration" />
 
           
 
@@ -123,8 +120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Linq.XDeclaration" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XDeclaration" />
 
             
 
@@ -132,21 +128,33 @@
           >
         </summary>
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The version of the XML, usually "1.0".</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The encoding for the XML document.</param
         >
         <param name="standalone">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -169,8 +177,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any value returned by <see
-             cref="P:System.Text.Encoding.WebName" />
+            >Any value returned by <see cref="P:System.Text.Encoding.WebName" />
 
             
 
@@ -230,8 +237,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 

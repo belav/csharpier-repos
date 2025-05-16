@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.StandardEndpointElement" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Configuration.StandardEndpointElement" />
 
             
 
@@ -83,14 +82,22 @@
           <para>Applies the content of a specific service endpoint to the current channel endpoint element.</para>
         </summary>
         <param name="endpoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An endpoint that enables clients to find and communicate with the service.</param
         >
         <param name="channelEndpointElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -128,14 +135,22 @@
           <para>Applies the content of a specific service endpoint to the current service endpoint element.</para>
         </summary>
         <param name="endpoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An endpoint that enables clients to find and communicate with the service.</param
         >
         <param name="serviceEndpointElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -176,7 +191,11 @@
           <para>A service endpoint.</para>
         </returns>
         <param name="contractDescription">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -232,7 +251,11 @@
           <para>Initializes and verifies the format of the specified channel endpoint in a service application configuration file.</para>
         </summary>
         <param name="channelEndpointElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -269,7 +292,11 @@
           <para>Initializes and verifies the format of the specified service endpoint in a service application configuration file.</para>
         </summary>
         <param name="serviceEndpointElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -303,7 +330,11 @@
           <para>Ensures that the specified service endpoint is not null and that its type matches the current endpoint type.</para>
         </summary>
         <param name="endpoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -368,14 +399,22 @@
           <para>When called from a derived class, loads the service description information from the configuration file and applies it to the runtime being constructed.</para>
         </summary>
         <param name="endpoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An endpoint that enables clients to find and communicate with the service.</param
         >
         <param name="channelEndpointElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -414,7 +453,11 @@
           <para>When called from a derived class, loads the service description information from the configuration file and applies it to the runtime being constructed.</para>
         </summary>
         <param name="endpoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -451,7 +494,11 @@
           <para>When called from a derived class, initializes and verifies the format of the specified service endpoint in a service application configuration file.</para>
         </summary>
         <param name="channelEndpointElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -539,8 +586,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets the internal state of the <see
-             cref="T:System.Configuration.Element.ConfigurationElement" />
+            >Resets the internal state of the <see cref="T:System.Configuration.Element.ConfigurationElement" />
 
             
 
@@ -548,7 +594,11 @@
           >
         </summary>
         <param name="parentElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

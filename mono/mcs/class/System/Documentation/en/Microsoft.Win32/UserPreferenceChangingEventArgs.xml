@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="E:Microsoft.Win32.SystemEvents.UserPreferenceChanging" />
+        >A <see cref="E:Microsoft.Win32.SystemEvents.UserPreferenceChanging" />
 
         
 
@@ -33,8 +32,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:Microsoft.Win32.SystemEvents.UserPreferenceChanging" />
+        >Provides data for the <see cref="E:Microsoft.Win32.SystemEvents.UserPreferenceChanging" />
 
         
 
@@ -66,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Win32.UserPreferenceChangingEventArgs" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Win32.UserPreferenceChangingEventArgs" />
 
             
 
@@ -75,12 +72,15 @@
           >
         </summary>
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:Microsoft.Win32.UserPreferenceCategory" />
+          One of the <see cref="T:Microsoft.Win32.UserPreferenceCategory" />
 
           
 

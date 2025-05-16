@@ -27,8 +27,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ComponentModel.Design.Serialization.IDesignerLoaderHost2" />
+        >Use the <see cref="T:System.ComponentModel.Design.Serialization.IDesignerLoaderHost2" />
 
         
 
@@ -38,8 +37,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides an interface that extends <see
-         cref="T:System.ComponentModel.Design.Serialization.IDesignerLoaderHost" />
+        >Provides an interface that extends <see cref="T:System.ComponentModel.Design.Serialization.IDesignerLoaderHost" />
 
         
 
@@ -85,23 +83,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.Design.Serialization.IDesignerLoaderHost2.IgnoreErrorsDuringReload" />
+            >The <see cref="P:System.ComponentModel.Design.Serialization.IDesignerLoaderHost2.IgnoreErrorsDuringReload" />
 
             
 
-             property can only be set to true if <see
-             cref="P:System.ComponentModel.Design.Serialization.IDesignerLoaderHost2.CanReloadWithErrors" />
+             property can only be set to true if <see cref="P:System.ComponentModel.Design.Serialization.IDesignerLoaderHost2.CanReloadWithErrors" />
 
             
 
-             is true. If <see
-             cref="P:System.ComponentModel.Design.Serialization.IDesignerLoaderHost2.CanReloadWithErrors" />
+             is true. If <see cref="P:System.ComponentModel.Design.Serialization.IDesignerLoaderHost2.CanReloadWithErrors" />
 
             
 
-             is false, the value of <see
-             cref="P:System.ComponentModel.Design.Serialization.IDesignerLoaderHost2.IgnoreErrorsDuringReload" />
+             is false, the value of <see cref="P:System.ComponentModel.Design.Serialization.IDesignerLoaderHost2.IgnoreErrorsDuringReload" />
 
             
 
@@ -111,8 +105,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether errors should be ignored when <see
-             cref="M:System.ComponentModel.Design.Serialization.IDesignerLoaderHost.Reload" />
+            >Gets or sets a value indicating whether errors should be ignored when <see cref="M:System.ComponentModel.Design.Serialization.IDesignerLoaderHost.Reload" />
 
             
 

@@ -16,18 +16,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Web.UI.Design.EditableDesignerRegion" />
+        >Use the <see cref="T:System.Web.UI.Design.EditableDesignerRegion" />
 
         
 
-         class to help manage templates at design time. A <see
-         cref="T:System.Web.UI.Design.ControlDesigner" />
+         class to help manage templates at design time. A <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
         
 
-         will use an instance of this class with its <see
-         cref="M:System.Web.UI.Design.ControlDesigner.GetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion)" />
+         will use an instance of this class with its <see cref="M:System.Web.UI.Design.ControlDesigner.GetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion)" />
 
         
 
@@ -58,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.EditableDesignerRegion" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.EditableDesignerRegion" />
 
             
 
@@ -67,24 +63,30 @@
           >
         </summary>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.Design.ControlDesigner" />
+          A <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
           
 
-           object, or a designer that derives from <see
-           cref="T:System.Web.UI.Design.ControlDesigner" />
+           object, or a designer that derives from <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
           
 
           .</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -111,13 +113,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Web.UI.Design.EditableDesignerRegion" />
+            >Creates a new instance of the <see cref="T:System.Web.UI.Design.EditableDesignerRegion" />
 
             
 
-             class using the given owner and name and the initial value of the <see
-             cref="P:System.Web.UI.Design.EditableDesignerRegion.ServerControlsOnly" />
+             class using the given owner and name and the initial value of the <see cref="P:System.Web.UI.Design.EditableDesignerRegion.ServerControlsOnly" />
 
             
 
@@ -125,31 +125,41 @@
           >
         </summary>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.Design.ControlDesigner" />
+          A <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
           
 
-           object, or a designer that derives from <see
-           cref="T:System.Web.UI.Design.ControlDesigner" />
+           object, or a designer that derives from <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
           
 
           .</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the region.</param
         >
         <param name="serverControlsOnly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -195,8 +205,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Web.UI.Design.ViewRendering" />
+            >Returns a <see cref="T:System.Web.UI.Design.ViewRendering" />
 
             
 
@@ -206,8 +215,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.Design.ViewRendering" />
+            >A <see cref="T:System.Web.UI.Design.ViewRendering" />
 
             
 
@@ -215,12 +223,15 @@
           >
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The control for which to get the <see
-           cref="T:System.Web.UI.Design.ViewRendering" />
+          The control for which to get the <see cref="T:System.Web.UI.Design.ViewRendering" />
 
           
 

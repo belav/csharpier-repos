@@ -182,8 +182,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implements a <see
-         cref="T:System.IO.TextReader" />
+        >Implements a <see cref="T:System.IO.TextReader" />
 
         
 
@@ -218,8 +217,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -374,8 +372,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.StringReader" />
+            >Initializes a new instance of the <see cref="T:System.IO.StringReader" />
 
             
 
@@ -383,12 +380,15 @@
           >
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The string to which the <see
-           cref="T:System.IO.StringReader" />
+          The string to which the <see cref="T:System.IO.StringReader" />
 
           
 
@@ -418,8 +418,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For an example of creating a file and writing text to a file, see <format
-             type="text/html">
+            >For an example of creating a file and writing text to a file, see <format type="text/html">
               <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
                 >[&lt;topic://cpconwritingtexttofile&gt;]</a
               >
@@ -427,8 +426,7 @@
 
             
 
-            . For an example of reading text from a file, see <format
-             type="text/html">
+            . For an example of reading text from a file, see <format type="text/html">
               <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
                 >[&lt;topic://cpconreadingtextfromfile&gt;]</a
               >
@@ -436,8 +434,7 @@
 
             
 
-            . For an example of reading from and writing to a binary file, see <format
-             type="text/html">
+            . For an example of reading from and writing to a binary file, see <format type="text/html">
               <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
                 >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
               >
@@ -448,24 +445,21 @@
             .</para
           >
           <para
-            >This method overrides the <see
-             cref="M:System.IO.Stream.Close" />
+            >This method overrides the <see cref="M:System.IO.Stream.Close" />
 
             
 
              method.</para
           >
           <para
-            >This implementation of Close calls the <see
-             cref="M:System.IO.StringReader.Dispose(System.Boolean)" />
+            >This implementation of Close calls the <see cref="M:System.IO.StringReader.Dispose(System.Boolean)" />
 
             
 
              method passing a true value.</para
           >
           <para
-            >Flushing the stream will not flush its underlying encoder unless you explicitly call Close. Setting <see
-             cref="P:System.IO.StreamWriter.AutoFlush" />
+            >Flushing the stream will not flush its underlying encoder unless you explicitly call Close. Setting <see cref="P:System.IO.StreamWriter.AutoFlush" />
 
             
 
@@ -476,8 +470,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Closes the <see
-             cref="T:System.IO.StringReader" />
+            >Closes the <see cref="T:System.IO.StringReader" />
 
             
 
@@ -513,13 +506,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.IO.StringReader" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.IO.StringReader" />
 
             
 
@@ -529,8 +520,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.IO.StringReader" />
+            >Releases the unmanaged resources used by the <see cref="T:System.IO.StringReader" />
 
             
 
@@ -538,7 +528,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -569,21 +563,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.StringReader.Peek" />
+            >The <see cref="M:System.IO.StringReader.Peek" />
 
             
 
-             method returns an integer value in order to determine whether the end of the file, or another error has occurred. This allows a user to first check if the returned value is -1 before casting it to a <see
-             cref="T:System.Char" />
+             method returns an integer value in order to determine whether the end of the file, or another error has occurred. This allows a user to first check if the returned value is -1 before casting it to a <see cref="T:System.Char" />
 
             
 
              type.</para
           >
           <para
-            >This method overrides the <see
-             cref="M:System.IO.TextReader.Peek" />
+            >This method overrides the <see cref="M:System.IO.TextReader.Peek" />
 
             
 
@@ -689,8 +680,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides the <see
-             cref="M:System.IO.TextReader.Read" />
+            >This method overrides the <see cref="M:System.IO.TextReader.Read" />
 
             
 
@@ -884,26 +874,22 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.ArgumentException"
-          >(<paramref
-           name="index" />
+          >(<paramref name="index" />
 
           
 
-           + <paramref
-           name="count" />
+           + <paramref name="count" />
 
           
 
-           ) &gt; <paramref
-           name="buffer" />
+           ) &gt; <paramref name="buffer" />
           <see langword="." />
 
           
@@ -916,53 +902,43 @@
 
             
 
-            &lt; 0<paramref
-             name=" " />
+            &lt; 0<paramref name=" " />
           </para>
-          <para>
-            <paramref name="-" />
+          <para><paramref name="-" />
 
             
 
-             or-</para
-          >
-          <para>
-            <paramref name="count " />
+             or-</para>
+          <para><paramref name="count " />
 
             
 
-             &lt; 0.</para
-          >
+             &lt; 0.</para>
         </exception>
         <exception cref="T:System.ObjectDisposedException">The current reader is closed.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.IO.TextReader.Read" />
+            >This method overrides <see cref="M:System.IO.TextReader.Read" />
 
             
 
             .</para
           >
           <para
-            >The method will read up to <paramref
-             name="count" />
+            >The method will read up to <paramref name="count" />
 
             
 
-             characters from the <see
-             cref="T:System.IO.StringReader" />
+             characters from the <see cref="T:System.IO.StringReader" />
 
             
 
-             into the <paramref
-             name="buffer" />
+             into the <paramref name="buffer" />
 
             
 
-             character array starting at position <paramref
-             name="index" />
+             character array starting at position <paramref name="index" />
 
             
 
@@ -1115,8 +1091,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads a block of characters from the input string and advances the character position by <paramref
-             name="count" />
+            >Reads a block of characters from the input string and advances the character position by <paramref name="count" />
 
             
 
@@ -1128,36 +1103,45 @@
           <para>The total number of characters read into the buffer. This can be less than the number of characters requested if that many characters are not currently available, or zero if the end of the underlying string has been reached.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          When this method returns, contains the specified character array with the values between <paramref
-           name="index" />
+          When this method returns, contains the specified character array with the values between <paramref name="index" />
 
           
 
-           and (<paramref
-           name="index" />
+           and (<paramref name="index" />
 
           
 
-           + <paramref
-           name="count" />
+           + <paramref name="count" />
 
           
 
            - 1) replaced by the characters read from the current source. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The starting index in the buffer. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1191,8 +1175,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The task completes after either the number of characters specified by the <paramref
-             name="count" />
+            >The task completes after either the number of characters specified by the <paramref name="count" />
 
             
 
@@ -1206,8 +1189,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A task that represents the asynchronous read operation. The value of the <paramref
-             name="TResult" />
+            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" />
 
             
 
@@ -1215,41 +1197,49 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          When this method returns, contains the specified character array with the values between <paramref
-           name="index" />
+          When this method returns, contains the specified character array with the values between <paramref name="index" />
 
           
 
-           and (<paramref
-           name="index" />
+           and (<paramref name="index" />
 
           
 
-           + <paramref
-           name="count" />
+           + <paramref name="count" />
 
           
 
            - 1) replaced by the characters read from the current source.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The position in <paramref
-           name="buffer" />
+          The position in <paramref name="buffer" />
 
           
 
            at which to begin writing.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1282,8 +1272,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The task does not complete until either the number of characters specified by the <paramref
-             name="count" />
+            >The task does not complete until either the number of characters specified by the <paramref name="count" />
 
             
 
@@ -1297,8 +1286,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A task that represents the asynchronous read operation. The value of the <paramref
-             name="TResult" />
+            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" />
 
             
 
@@ -1306,41 +1294,49 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          When this method returns, contains the specified character array with the values between <paramref
-           name="index" />
+          When this method returns, contains the specified character array with the values between <paramref name="index" />
 
           
 
-           and (<paramref
-           name="index" />
+           and (<paramref name="index" />
 
           
 
-           + <paramref
-           name="count" />
+           + <paramref name="count" />
 
           
 
            - 1) replaced by the characters read from the current source.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The position in <paramref
-           name="buffer" />
+          The position in <paramref name="buffer" />
 
           
 
            at which to begin writing.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1376,8 +1372,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides the <see
-             cref="M:System.IO.TextReader.ReadLine" />
+            >This method overrides the <see cref="M:System.IO.TextReader.ReadLine" />
 
             
 
@@ -1385,23 +1380,19 @@
           >
           <para>A line is defined as a sequence of characters followed by a line feed ("\n"), a carriage return ("\r"), or a carriage return immediately followed by a line feed ("\r\n"). The string that is returned does not contain the terminating carriage return or line feed. The returned value is null if the end of the string has been reached.</para>
           <para
-            >If the current method throws an <see
-             cref="T:System.OutOfMemoryException" />
+            >If the current method throws an <see cref="T:System.OutOfMemoryException" />
 
             
 
-            , the reader's position in the underlying string is advanced by the number of characters the method was able to read, but the characters already read into the internal <see
-             cref="M:System.IO.StringReader.ReadLine" />
+            , the reader's position in the underlying string is advanced by the number of characters the method was able to read, but the characters already read into the internal <see cref="M:System.IO.StringReader.ReadLine" />
 
             
 
-             buffer are discarded. Because the position of the reader in the string cannot be changed, the characters already read are unrecoverable, and can be accessed only by reinitializing the <see
-             cref="T:System.IO.StringReader" />
+             buffer are discarded. Because the position of the reader in the string cannot be changed, the characters already read are unrecoverable, and can be accessed only by reinitializing the <see cref="T:System.IO.StringReader" />
 
             
 
-            . To avoid such a situation, use the <see
-             cref="M:System.IO.StringReader.Read" />
+            . To avoid such a situation, use the <see cref="M:System.IO.StringReader.Read" />
 
             
 
@@ -1588,8 +1579,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A task that represents the asynchronous read operation. The value of the <paramref
-             name="TResult" />
+            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" />
 
             
 
@@ -1626,31 +1616,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides the <see
-             cref="M:System.IO.TextReader.ReadToEnd" />
+            >This method overrides the <see cref="M:System.IO.TextReader.ReadToEnd" />
 
             
 
              method.</para
           >
           <para
-            >If the current method throws an <see
-             cref="T:System.OutOfMemoryException" />
+            >If the current method throws an <see cref="T:System.OutOfMemoryException" />
 
             
 
-            , the reader's position in the underlying string is advanced by the number of characters the method was able to read, but the characters already read into the internal <see
-             cref="M:System.IO.StringReader.ReadToEnd" />
+            , the reader's position in the underlying string is advanced by the number of characters the method was able to read, but the characters already read into the internal <see cref="M:System.IO.StringReader.ReadToEnd" />
 
             
 
-             buffer are discarded. Because the position of the reader in the string cannot be changed, the characters already read are unrecoverable, and can be accessed only by reinitializing the <see
-             cref="T:System.IO.StringReader" />
+             buffer are discarded. Because the position of the reader in the string cannot be changed, the characters already read are unrecoverable, and can be accessed only by reinitializing the <see cref="T:System.IO.StringReader" />
 
             
 
-            . To avoid such a situation, use the <see
-             cref="M:System.IO.StringReader.Read" />
+            . To avoid such a situation, use the <see cref="M:System.IO.StringReader.Read" />
 
             
 
@@ -1837,8 +1822,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A task that represents the asynchronous read operation. The value of the <paramref
-             name="TResult" />
+            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" />
 
             
 

@@ -17,16 +17,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When rows are deleted from a <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >When rows are deleted from a <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
          control, the index numbers of subsequent rows are lowered to compensate.</para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
 
@@ -38,8 +36,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.DataGridView.RowsRemoved" />
+        >Provides data for the <see cref="E:System.Windows.Forms.DataGridView.RowsRemoved" />
 
         
 
@@ -64,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewRowsRemovedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewRowsRemovedEventArgs" />
 
             
 
@@ -73,14 +69,22 @@
           >
         </summary>
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index of the row that was deleted, or the first deleted row if multiple rows were deleted. </param
         >
         <param name="rowCount">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

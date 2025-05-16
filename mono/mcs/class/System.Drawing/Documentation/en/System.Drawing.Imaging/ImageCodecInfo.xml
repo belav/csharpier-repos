@@ -17,23 +17,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >GDI+ uses image encoders to convert the images stored in <see
-         cref="T:System.Drawing.Bitmap" />
+        >GDI+ uses image encoders to convert the images stored in <see cref="T:System.Drawing.Bitmap" />
 
         
 
-         objects to various file formats. Image encoders are built into GDI+ for the BMP, JPEG, GIF, TIFF, and PNG formats. An encoder is invoked when you call the <see
-         cref="Overload:System.Drawing.Image.Save" />
+         objects to various file formats. Image encoders are built into GDI+ for the BMP, JPEG, GIF, TIFF, and PNG formats. An encoder is invoked when you call the <see cref="Overload:System.Drawing.Image.Save" />
 
         
 
-         or <see
-         cref="Overload:System.Drawing.Image.SaveAdd" />
+         or <see cref="Overload:System.Drawing.Image.SaveAdd" />
 
         
 
-         method of a <see
-         cref="T:System.Drawing.Image" />
+         method of a <see cref="T:System.Drawing.Image" />
 
         
 
@@ -43,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Drawing.Imaging.ImageCodecInfo" />
+        >The <see cref="T:System.Drawing.Imaging.ImageCodecInfo" />
 
         
 
@@ -66,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Guid" />
+            >Gets or sets a <see cref="T:System.Guid" />
 
             
 
@@ -156,8 +150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets 32-bit value used to store additional information about the codec. This property returns a combination of flags from the <see
-             cref="T:System.Drawing.Imaging.ImageCodecFlags" />
+            >Gets or sets 32-bit value used to store additional information about the codec. This property returns a combination of flags from the <see cref="T:System.Drawing.Imaging.ImageCodecFlags" />
 
             
 
@@ -203,8 +196,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Guid" />
+            >Gets or sets a <see cref="T:System.Guid" />
 
             
 
@@ -232,8 +224,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of <see
-             cref="T:System.Drawing.Imaging.ImageCodecInfo" />
+            >Returns an array of <see cref="T:System.Drawing.Imaging.ImageCodecInfo" />
 
             
 
@@ -243,13 +234,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Drawing.Imaging.ImageCodecInfo" />
+            >An array of <see cref="T:System.Drawing.Imaging.ImageCodecInfo" />
 
             
 
-             objects. Each <see
-             cref="T:System.Drawing.Imaging.ImageCodecInfo" />
+             objects. Each <see cref="T:System.Drawing.Imaging.ImageCodecInfo" />
 
             
 
@@ -277,8 +266,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of <see
-             cref="T:System.Drawing.Imaging.ImageCodecInfo" />
+            >Returns an array of <see cref="T:System.Drawing.Imaging.ImageCodecInfo" />
 
             
 
@@ -288,13 +276,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Drawing.Imaging.ImageCodecInfo" />
+            >An array of <see cref="T:System.Drawing.Imaging.ImageCodecInfo" />
 
             
 
-             objects. Each <see
-             cref="T:System.Drawing.Imaging.ImageCodecInfo" />
+             objects. Each <see cref="T:System.Drawing.Imaging.ImageCodecInfo" />
 
             
 

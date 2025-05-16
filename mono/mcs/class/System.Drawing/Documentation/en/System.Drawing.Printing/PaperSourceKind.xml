@@ -16,16 +16,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by the <see
-         cref="P:System.Drawing.Printing.PaperSource.Kind" />
+        >This enumeration is used by the <see cref="P:System.Drawing.Printing.PaperSource.Kind" />
 
         
 
          property.</para
       >
       <para
-        >For more information on printing, see the <see
-         cref="N:System.Drawing.Printing" />
+        >For more information on printing, see the <see cref="N:System.Drawing.Printing" />
 
         
 

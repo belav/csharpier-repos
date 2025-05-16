@@ -28,13 +28,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use <see
-         cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" />
+        >Use <see cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" />
 
         
 
-         to specify a degree of scope for an isolated store. You can specify combinations of these levels that are supported by <see
-         cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
+         to specify a degree of scope for an isolated store. You can specify combinations of these levels that are supported by <see cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
 
         
 
@@ -44,8 +42,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Enumerates the levels of isolated storage scope that are supported by <see
-         cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
+        >Enumerates the levels of isolated storage scope that are supported by <see cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
 
         
 

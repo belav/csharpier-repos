@@ -23,8 +23,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Returns information about errors encountered by the <see
-         cref="T:System.Xml.Schema.XmlSchemaInference" />
+        >Returns information about errors encountered by the <see cref="T:System.Xml.Schema.XmlSchemaInference" />
 
         
 
@@ -51,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
 
             
 
@@ -81,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
 
             
 
@@ -90,7 +87,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -125,23 +126,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
 
             
 
-             class with the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             class with the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             and <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             and <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
-             objects specified that contain all the properties of the <see
-             cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
+             objects specified that contain all the properties of the <see cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
 
             
 
@@ -149,24 +146,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            object.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -198,18 +201,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
 
             
 
-             class with the error message specified and the original <see
-             cref="T:System.Exception" />
+             class with the error message specified and the original <see cref="T:System.Exception" />
 
             
 
-             that caused the <see
-             cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
+             that caused the <see cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
 
             
 
@@ -217,24 +217,30 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A description of the error.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Exception" />
+          An <see cref="T:System.Exception" />
 
           
 
-           object containing the original exception that caused the <see
-           cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
+           object containing the original exception that caused the <see cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
 
           
 
@@ -268,18 +274,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
 
             
 
-             class with the error message specified, the original <see
-             cref="T:System.Exception" />
+             class with the error message specified, the original <see cref="T:System.Exception" />
 
             
 
-             that caused the <see
-             cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
+             that caused the <see cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
 
             
 
@@ -287,48 +290,60 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A description of the error.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Exception" />
+          An <see cref="T:System.Exception" />
 
           
 
-           object containing the original exception that caused the <see
-           cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
+           object containing the original exception that caused the <see cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
 
           
 
           .</param
         >
         <param name="lineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The line number in the XML document that caused the <see
-           cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
+          The line number in the XML document that caused the <see cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
 
           
 
           .</param
         >
         <param name="linePosition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The line position in the XML document that caused the <see
-           cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
+          The line position in the XML document that caused the <see cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
 
           
 
@@ -363,18 +378,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Streams all the <see
-             cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
+            >Streams all the <see cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
 
             
 
-             object properties into the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             object properties into the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             object specified for the <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             object specified for the <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -382,24 +394,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            object.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 

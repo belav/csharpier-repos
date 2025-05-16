@@ -26,8 +26,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Encapsulates an array of <see
-         cref="T:System.Drawing.Imaging.EncoderParameter" />
+        >Encapsulates an array of <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
         
 
@@ -45,28 +44,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Some of the <see
-             cref="Overload:System.Drawing.Image.Save" />
+            >Some of the <see cref="Overload:System.Drawing.Image.Save" />
 
             
 
-             and <see
-             cref="Overload:System.Drawing.Image.SaveAdd" />
+             and <see cref="Overload:System.Drawing.Image.SaveAdd" />
 
             
 
-             methods receive an <see
-             cref="T:System.Drawing.Imaging.EncoderParameters" />
+             methods receive an <see cref="T:System.Drawing.Imaging.EncoderParameters" />
 
             
 
-             object as an argument. The <see
-             cref="M:System.Drawing.Image.GetEncoderParameterList(System.Guid)" />
+             object as an argument. The <see cref="M:System.Drawing.Image.GetEncoderParameterList(System.Guid)" />
 
             
 
-             method returns an <see
-             cref="T:System.Drawing.Imaging.EncoderParameters" />
+             method returns an <see cref="T:System.Drawing.Imaging.EncoderParameters" />
 
             
 
@@ -76,13 +70,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.EncoderParameters" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.EncoderParameters" />
 
             
 
-             class that can contain one <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+             class that can contain one <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
@@ -107,13 +99,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.EncoderParameters" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.EncoderParameters" />
 
             
 
-             class that can contain the specified number of <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+             class that can contain the specified number of <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
@@ -121,17 +111,19 @@
           >
         </summary>
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer that specifies the number of <see
-           cref="T:System.Drawing.Imaging.EncoderParameter" />
+          An integer that specifies the number of <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
           
 
-           objects that the <see
-           cref="T:System.Drawing.Imaging.EncoderParameters" />
+           objects that the <see cref="T:System.Drawing.Imaging.EncoderParameters" />
 
           
 
@@ -154,8 +146,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling Dispose allows the resources used by this <see
-             cref="T:System.Drawing.Imaging.EncoderParameters" />
+            >Calling Dispose allows the resources used by this <see cref="T:System.Drawing.Imaging.EncoderParameters" />
 
             
 
@@ -165,8 +156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by this <see
-             cref="T:System.Drawing.Imaging.EncoderParameters" />
+            >Releases all resources used by this <see cref="T:System.Drawing.Imaging.EncoderParameters" />
 
             
 
@@ -199,8 +189,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an array of <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+            >Gets or sets an array of <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 

@@ -11,13 +11,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A resource provider facilitates the retrieving of values from a resource file. When an expression of the form &lt;%$ Resources: classKey, resourceKey %&gt; is encountered during page parsing, the resource provider returns the localized value for the resource. The <see
-         cref="T:System.Web.Compilation.ResourceProviderFactory" />
+        >A resource provider facilitates the retrieving of values from a resource file. When an expression of the form &lt;%$ Resources: classKey, resourceKey %&gt; is encountered during page parsing, the resource provider returns the localized value for the resource. The <see cref="T:System.Web.Compilation.ResourceProviderFactory" />
 
         
 
-         class creates instances of <see
-         cref="T:System.Web.Compilation.IResourceProvider" />
+         class creates instances of <see cref="T:System.Web.Compilation.IResourceProvider" />
 
         
 
@@ -48,18 +46,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When implemented, the <see
-             cref="M:System.Web.Compilation.IResourceProvider.GetObject(System.String,System.Globalization.CultureInfo)" />
+            >When implemented, the <see cref="M:System.Web.Compilation.IResourceProvider.GetObject(System.String,System.Globalization.CultureInfo)" />
 
             
 
-             method returns the localized value for a resource key based on the current culture. The implementing class could retrieve the <see
-             cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
+             method returns the localized value for a resource key based on the current culture. The implementing class could retrieve the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
 
             
 
-             property if a value for the <paramref
-             name="culture" />
+             property if a value for the <paramref name="culture" />
 
             
 
@@ -73,18 +68,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             that contains the resource value for the <paramref
-             name="resourceKey" />
+             that contains the resource value for the <paramref name="resourceKey" />
 
             
 
-             and <paramref
-             name="culture" />
+             and <paramref name="culture" />
 
             
 
@@ -92,14 +84,22 @@
           >
         </returns>
         <param name="resourceKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key identifying a particular resource.</param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -125,28 +125,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Resources.IResourceReader" />
+            >An <see cref="T:System.Resources.IResourceReader" />
 
             
 
-             object reads sequential name/value pairs from a source. The <see
-             cref="T:System.Resources.ResourceReader" />
+             object reads sequential name/value pairs from a source. The <see cref="T:System.Resources.ResourceReader" />
 
             
 
-             and <see
-             cref="T:System.Resources.ResXResourceReader" />
+             and <see cref="T:System.Resources.ResXResourceReader" />
 
             
 
-             classes provide default <see
-             cref="T:System.Resources.IResourceReader" />
+             classes provide default <see cref="T:System.Resources.IResourceReader" />
 
             
 
-             interface implementation for reading from .resources and .resx files, respectively. Other implementations of the <see
-             cref="T:System.Web.Compilation.IResourceProvider" />
+             interface implementation for reading from .resources and .resx files, respectively. Other implementations of the <see cref="T:System.Web.Compilation.IResourceProvider" />
 
             
 

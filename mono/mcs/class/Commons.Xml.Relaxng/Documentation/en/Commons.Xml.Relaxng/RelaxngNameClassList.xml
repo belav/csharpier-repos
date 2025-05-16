@@ -11,7 +11,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -19,8 +21,7 @@
   >
   <Docs>
     <summary
-      >Represents a list that contains <see
-       cref="T:Commons.Xml.Relaxng.RelaxngNameClass" />
+      >Represents a list that contains <see cref="T:Commons.Xml.Relaxng.RelaxngNameClass" />
 
       
 
@@ -53,8 +54,7 @@
       <Docs>
         <summary>Adds a name class to the list.</summary>
         <param name="p"
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngNameClass" />
+          >a <see cref="T:Commons.Xml.Relaxng.RelaxngNameClass" />
 
           
 
@@ -79,16 +79,14 @@
       <Docs>
         <summary>Inserts a name class into the indicated position in the list.</summary>
         <param name="pos"
-          >an <see
-           cref="T:System.Int32" />
+          >an <see cref="T:System.Int32" />
 
           
 
            that indicates the position.</param
         >
         <param name="p"
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngNameClass" />
+          >a <see cref="T:Commons.Xml.Relaxng.RelaxngNameClass" />
 
           
 
@@ -112,8 +110,7 @@
       <Docs>
         <summary>Removes a name class from the list.</summary>
         <param name="p"
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngNameClass" />
+          >a <see cref="T:Commons.Xml.Relaxng.RelaxngNameClass" />
 
           
 
@@ -147,16 +144,14 @@
       <Docs>
         <summary>Gets or sets a name class object to the indicated position.</summary>
         <param name="i"
-          >an <see
-           cref="T:System.Int32" />
+          >an <see cref="T:System.Int32" />
 
           
 
            that indicates the location.</param
         >
         <value
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngNameClass" />
+          >a <see cref="T:Commons.Xml.Relaxng.RelaxngNameClass" />
 
           
 

@@ -24,31 +24,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.NetPeerTcpBinding" />
+        >The <see cref="T:System.ServiceModel.NetPeerTcpBinding" />
 
         
 
          binding provides support for the creation of peer networking applications that use a TCP-level peer-to-peer mesh infrastructure. </para
       >
       <para
-        >Each <see
-         cref="T:System.ServiceModel.PeerNode" />
+        >Each <see cref="T:System.ServiceModel.PeerNode" />
 
         
 
-         instance can host multiple peer channels defined with this binding type. Channel factories produced using a configured instance of this type can be used to generate peer channels. A peer channel factory can produce peer channels that are input-only (implements <see
-         cref="T:System.ServiceModel.Channels.IInputChannel" />
+         instance can host multiple peer channels defined with this binding type. Channel factories produced using a configured instance of this type can be used to generate peer channels. A peer channel factory can produce peer channels that are input-only (implements <see cref="T:System.ServiceModel.Channels.IInputChannel" />
 
         
 
-        ), output-only (implements <see
-         cref="T:System.ServiceModel.Channels.IOutputChannel" />
+        ), output-only (implements <see cref="T:System.ServiceModel.Channels.IOutputChannel" />
 
         
 
-        ), and duplex (implements <see
-         cref="T:System.ServiceModel.Channels.IDuplexChannel" />
+        ), and duplex (implements <see cref="T:System.ServiceModel.Channels.IDuplexChannel" />
 
         
 
@@ -78,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new default instance of the <see
-             cref="T:System.ServiceModel.NetPeerTcpBinding" />
+            >Initializes a new default instance of the <see cref="T:System.ServiceModel.NetPeerTcpBinding" />
 
             
 
@@ -105,8 +99,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a new <see
-             cref="T:System.ServiceModel.NetPeerTcpBinding" />
+            >This constructor creates a new <see cref="T:System.ServiceModel.NetPeerTcpBinding" />
 
             
 
@@ -116,8 +109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.NetPeerTcpBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetPeerTcpBinding" />
 
             
 
@@ -125,7 +117,11 @@
           >
         </summary>
         <param name="configurationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -159,13 +155,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Collections.Generic.ICollection`1" />
+            >The <see cref="T:System.Collections.Generic.ICollection`1" />
 
             
 
-             of type <see
-             cref="T:System.ServiceModel.Channels.BindingElement" />
+             of type <see cref="T:System.ServiceModel.Channels.BindingElement" />
 
             
 
@@ -239,37 +233,32 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this property is not set, or is set to null or <see
-             cref="F:System.String.Empty" />
+            >If this property is not set, or is set to null or <see cref="F:System.String.Empty" />
 
             
 
-            , the associated <see
-             cref="T:System.ServiceModel.PeerNode" />
+            , the associated <see cref="T:System.ServiceModel.PeerNode" />
 
             
 
              listens on all global addresses (both IPv4 and IPv6) configured for the local machine.</para
           >
           <para
-            >If a valid unicast IP address is specified for this property, then the associated <see
-             cref="T:System.ServiceModel.PeerNode" />
+            >If a valid unicast IP address is specified for this property, then the associated <see cref="T:System.ServiceModel.PeerNode" />
 
             
 
              object listens on that address. IPv4 and IPv6 wildcard addresses are not considered valid.</para
           >
           <para
-            >If a non-null IP address string is specified for this property in conjunction with <see
-             cref="T:System.ServiceModel.Channels.PnrpPeerResolverBindingElement" />
+            >If a non-null IP address string is specified for this property in conjunction with <see cref="T:System.ServiceModel.Channels.PnrpPeerResolverBindingElement" />
 
             
 
             , then the IP address must be associated with a physical interface rather than a virtual one.</para
           >
           <para
-            >ListenIPAddress must be set for ad-hoc networks in order to register with the default peer resolver (PNRP). If this property is specified in conjunction with <see
-             cref="T:System.ServiceModel.Configuration.PnrpPeerResolverElement" />
+            >ListenIPAddress must be set for ad-hoc networks in order to register with the default peer resolver (PNRP). If this property is specified in conjunction with <see cref="T:System.ServiceModel.Configuration.PnrpPeerResolverElement" />
 
             
 
@@ -297,13 +286,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of <see
-             cref="P:System.ServiceModel.NetPeerTcpBinding.MaxBufferPoolSize" />
+            >The value of <see cref="P:System.ServiceModel.NetPeerTcpBinding.MaxBufferPoolSize" />
 
             
 
-             cannot be less than <see
-             cref="P:System.ServiceModel.NetPeerTcpBinding.MaxReceivedMessageSize" />
+             cannot be less than <see cref="P:System.ServiceModel.NetPeerTcpBinding.MaxReceivedMessageSize" />
 
             
 
@@ -350,8 +337,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the port value is invalid, <see
-             cref="T:System.ArgumentException" />
+            >If the port value is invalid, <see cref="T:System.ArgumentException" />
 
             
 
@@ -386,8 +372,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+            >Gets or sets the <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
             
 
@@ -418,8 +403,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.PeerResolver" />
+            >Gets the <see cref="T:System.ServiceModel.PeerResolver" />
 
             
 

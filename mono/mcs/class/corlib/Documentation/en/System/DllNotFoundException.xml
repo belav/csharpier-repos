@@ -37,39 +37,34 @@
          uses the HRESULT COR_E_DLLNOTFOUND, which has the value 0x80131524.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.DllNotFoundException" />
+        >For a list of initial property values for an instance of <see cref="T:System.DllNotFoundException" />
 
         
 
-        , see the <see
-         cref="M:System.DllNotFoundException.#ctor" />
+        , see the <see cref="M:System.DllNotFoundException.#ctor" />
 
         
 
          constructors.</para
       >
       <para
-        >The <see
-         cref="T:System.DllNotFoundException" />
+        >The <see cref="T:System.DllNotFoundException" />
 
         
 
-         is thrown when a dynamic link library defined by the <see
-         cref="T:System.Runtime.InteropServices.DllImportAttribute" />
+         is thrown when a dynamic link library defined by the <see cref="T:System.Runtime.InteropServices.DllImportAttribute" />
 
         
 
          attribute or a comparable language construct, such as the Visual Basic Declare statement, cannot be found. It is not thrown when the common language runtime is unable to load a .NET Framework assembly.</para
       >
       <para
-        >Note that the <see
-         cref="T:System.Runtime.InteropServices.DllImportAttribute" />
+        >Note that the <see cref="T:System.Runtime.InteropServices.DllImportAttribute" />
 
         
 
          can specify the path to the directory in which the DLL resides. If a path is not specified, Windows uses the search order described in <see
-         cref="http://go.microsoft.com/fwlink/?LinkId=122531"
+          cref="http://go.microsoft.com/fwlink/?LinkId=122531"
           >Dynamic-Link Library Search Order</see
         >
 
@@ -102,8 +97,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.DllNotFoundException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.DllNotFoundException" />
 
             
 
@@ -145,8 +139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DllNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.DllNotFoundException" />
 
             
 
@@ -175,8 +168,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.DllNotFoundException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.DllNotFoundException" />
 
             
 
@@ -218,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DllNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.DllNotFoundException" />
 
             
 
@@ -227,7 +218,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -260,8 +255,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DllNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.DllNotFoundException" />
 
             
 
@@ -269,24 +263,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -318,26 +318,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.DllNotFoundException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.DllNotFoundException" />
 
             
 
@@ -379,8 +375,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DllNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.DllNotFoundException" />
 
             
 
@@ -388,19 +383,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception. </param
         >
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="inner" />
+          The exception that is the cause of the current exception. If the <paramref name="inner" />
 
           
 

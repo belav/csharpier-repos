@@ -49,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.InstanceContext" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
@@ -58,7 +57,11 @@
           >
         </summary>
         <param name="implementation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -87,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.InstanceContext" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
@@ -96,12 +98,15 @@
           >
         </summary>
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.ServiceHostBase" />
+          The <see cref="T:System.ServiceModel.ServiceHostBase" />
 
           
 
@@ -131,8 +136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.InstanceContext" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
@@ -140,19 +144,26 @@
           >
         </summary>
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.ServiceHostBase" />
+          The <see cref="T:System.ServiceModel.ServiceHostBase" />
 
           
 
            that hosts the service.</param
         >
         <param name="implementation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -278,13 +289,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The general idea is that you only create an instance of the service when a message directed at it arrives, by calling <see
-             cref="M:System.ServiceModel.Channels.CommunicationObject.Open" />
+            >The general idea is that you only create an instance of the service when a message directed at it arrives, by calling <see cref="M:System.ServiceModel.Channels.CommunicationObject.Open" />
 
             
 
-            ; then if no message arrives, no <see
-             cref="T:System.ServiceModel.InstanceContext" />
+            ; then if no message arrives, no <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
@@ -300,7 +309,11 @@
           <para>The object that represents the service instance.</para>
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -386,8 +399,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new limit on the number of messages, after <paramref
-             name="incrementBy" />
+            >The new limit on the number of messages, after <paramref name="incrementBy" />
 
             
 
@@ -395,7 +407,11 @@
           >
         </returns>
         <param name="incrementBy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -418,8 +434,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.ServiceModel.InstanceContext.ManualFlowControlLimit" />
+            >When the <see cref="P:System.ServiceModel.InstanceContext.ManualFlowControlLimit" />
 
             
 

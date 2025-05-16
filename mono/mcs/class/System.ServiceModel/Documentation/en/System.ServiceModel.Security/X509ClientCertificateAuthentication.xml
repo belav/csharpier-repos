@@ -20,23 +20,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >If the <see
-         cref="P:System.ServiceModel.Security.X509ClientCertificateAuthentication.CertificateValidationMode" />
+        >If the <see cref="P:System.ServiceModel.Security.X509ClientCertificateAuthentication.CertificateValidationMode" />
 
         
 
-         is set to <see
-         cref="F:System.ServiceModel.Security.X509CertificateValidationMode.Custom" />
+         is set to <see cref="F:System.ServiceModel.Security.X509CertificateValidationMode.Custom" />
 
         
 
-        , then you must create a custom certificate validator that inherits from the <see
-         cref="T:System.IdentityModel.Selectors.X509CertificateValidator" />
+        , then you must create a custom certificate validator that inherits from the <see cref="T:System.IdentityModel.Selectors.X509CertificateValidator" />
 
         
 
-         class. crdefault <format
-         type="text/html">
+         class. crdefault <format type="text/html">
           <a href="bb0190ff-0738-4e54-8d22-c97d343708bf"
             >How To: Create a Service Employing a Custom Certificate Validator</a
           >
@@ -74,8 +70,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Allowed values of <see
-             cref="T:System.ServiceModel.Security.X509CertificateValidationMode" />
+            >Allowed values of <see cref="T:System.ServiceModel.Security.X509CertificateValidationMode" />
 
             
 
@@ -136,31 +131,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.ServiceModel.Security.X509ClientCertificateAuthentication.CertificateValidationMode" />
+            >If the <see cref="P:System.ServiceModel.Security.X509ClientCertificateAuthentication.CertificateValidationMode" />
 
             
 
-             property is set to <see
-             cref="F:System.ServiceModel.Security.X509CertificateValidationMode.Custom" />
+             property is set to <see cref="F:System.ServiceModel.Security.X509CertificateValidationMode.Custom" />
 
             
 
-            , you must set the <see
-             cref="P:System.ServiceModel.Security.X509ClientCertificateAuthentication.CustomCertificateValidator" />
+            , you must set the <see cref="P:System.ServiceModel.Security.X509ClientCertificateAuthentication.CustomCertificateValidator" />
 
             
 
-             property to a custom validator that inherits from the <see
-             cref="T:System.IdentityModel.Selectors.X509CertificateValidator" />
+             property to a custom validator that inherits from the <see cref="T:System.IdentityModel.Selectors.X509CertificateValidator" />
 
             
 
              class.</para
           >
           <para
-            >crdefault <format
-             type="text/html">
+            >crdefault <format type="text/html">
               <a href="bb0190ff-0738-4e54-8d22-c97d343708bf"
                 >How To: Create a Service Employing a Custom Certificate Validator</a
               >
@@ -192,8 +182,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is valid only when the <see
-             cref="P:System.ServiceModel.Security.X509ClientCertificateAuthentication.MapClientCertificateToWindowsAccount" />
+            >This property is valid only when the <see cref="P:System.ServiceModel.Security.X509ClientCertificateAuthentication.MapClientCertificateToWindowsAccount" />
 
             
 
@@ -256,16 +245,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When using certificates, the system validates that the client certificate is not revoked, by checking that the client certificate is not in the revoked certificate list. This check can be performed either by checking online or by checking against a cached revocation list. Revocation checking can be turned off by setting this property to <see
-             cref="F:System.Security.Cryptography.X509Certificates.X509RevocationMode.NoCheck" />
+            >When using certificates, the system validates that the client certificate is not revoked, by checking that the client certificate is not in the revoked certificate list. This check can be performed either by checking online or by checking against a cached revocation list. Revocation checking can be turned off by setting this property to <see cref="F:System.Security.Cryptography.X509Certificates.X509RevocationMode.NoCheck" />
 
             
 
             .</para
           >
           <para
-            >crdefault <format
-             type="text/html">
+            >crdefault <format type="text/html">
               <a href="6ffb8682-8f07-4a45-afbb-8d2487e9dbc3">Working with Certificates</a>
             </format>
 

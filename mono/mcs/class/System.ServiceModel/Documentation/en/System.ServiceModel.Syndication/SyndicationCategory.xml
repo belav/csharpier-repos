@@ -47,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
@@ -78,13 +77,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
-             class with the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+             class with the specified <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
@@ -92,17 +89,19 @@
           >
         </summary>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+          The <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
           
 
-           instance to initialize the new <see
-           cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+           instance to initialize the new <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
           
 
@@ -128,8 +127,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
@@ -137,7 +135,11 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -168,8 +170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
@@ -177,21 +178,33 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the category.</param
         >
         <param name="scheme">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Uniform Resource Identifier (URI) that represents the categorization scheme to which this category belongs.</param
         >
         <param name="label">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -220,8 +233,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The syndication object model allows you to add custom attributes to a <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >The syndication object model allows you to add custom attributes to a <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
@@ -256,8 +268,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a copy of a <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >Creates a copy of a <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
@@ -267,8 +278,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
@@ -320,13 +330,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When serialized to Atom 1.0, the <see
-             cref="P:System.ServiceModel.Syndication.SyndicationCategory.Label" />
+            >When serialized to Atom 1.0, the <see cref="P:System.ServiceModel.Syndication.SyndicationCategory.Label" />
 
             
 
-             is written to the label attribute of the &lt;category&gt; element. <see
-             cref="P:System.ServiceModel.Syndication.SyndicationCategory.Label" />
+             is written to the label attribute of the &lt;category&gt; element. <see cref="P:System.ServiceModel.Syndication.SyndicationCategory.Label" />
 
             
 
@@ -354,13 +362,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When serialized to Atom 1.0, the <see
-             cref="P:System.ServiceModel.Syndication.SyndicationCategory.Name" />
+            >When serialized to Atom 1.0, the <see cref="P:System.ServiceModel.Syndication.SyndicationCategory.Name" />
 
             
 
-             is written to the term attribute of the &lt;category&gt; element. <see
-             cref="P:System.ServiceModel.Syndication.SyndicationCategory.Label" />
+             is written to the term attribute of the &lt;category&gt; element. <see cref="P:System.ServiceModel.Syndication.SyndicationCategory.Label" />
 
             
 
@@ -388,16 +394,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When serialized to Atom 1.0, the <see
-             cref="P:System.ServiceModel.Syndication.SyndicationCategory.Scheme" />
+            >When serialized to Atom 1.0, the <see cref="P:System.ServiceModel.Syndication.SyndicationCategory.Scheme" />
 
             
 
              property is written to the scheme attribute of the &lt;category&gt; element. </para
           >
           <para
-            >When serialized to RSS 2.0, the <see
-             cref="P:System.ServiceModel.Syndication.SyndicationCategory.Scheme" />
+            >When serialized to RSS 2.0, the <see cref="P:System.ServiceModel.Syndication.SyndicationCategory.Scheme" />
 
             
 
@@ -436,8 +440,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attribute extensions are custom attributes that are not defined by the Atom 1.0 or RSS 2.0 specifications. They are serialized as an attribute of the &lt;category&gt; element. This method is an extension point that allows you to handle the deserialization of a custom attribute extension. To do this, derive a class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >Attribute extensions are custom attributes that are not defined by the Atom 1.0 or RSS 2.0 specifications. They are serialized as an attribute of the &lt;category&gt; element. This method is an extension point that allows you to handle the deserialization of a custom attribute extension. To do this, derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
@@ -453,28 +456,44 @@
           <para>A value that specifies whether the attribute extension was parsed successfully.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the element.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace of the element.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The attribute to parse.</param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -506,8 +525,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Element extensions are valid XML elements that are not specified in either the Atom 1.0 or RSS 2.0 specifications. You can add any valid XML element as an extension, provided its namespace is different from the enclosing namespace. This method is an extension point that allows you to handle the deserialization of a custom element extension. To do this, derive a class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >Element extensions are valid XML elements that are not specified in either the Atom 1.0 or RSS 2.0 specifications. You can add any valid XML element as an extension, provided its namespace is different from the enclosing namespace. This method is an extension point that allows you to handle the deserialization of a custom element extension. To do this, derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
@@ -523,19 +541,26 @@
           <para>A value that specifies whether the element extension has been parsed successfully.</para>
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlReader" />
+          The <see cref="T:System.Xml.XmlReader" />
 
           
 
            to read from.</param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -567,8 +592,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attribute extensions are custom attributes that are not defined by the Atom 1.0 or RSS 2.0 specifications. They are serialized as an attribute of the &lt;category&gt; element. This method is an extension point that allows you to handle the serialization of custom attribute extensions. To do this, derive a class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >Attribute extensions are custom attributes that are not defined by the Atom 1.0 or RSS 2.0 specifications. They are serialized as an attribute of the &lt;category&gt; element. This method is an extension point that allows you to handle the serialization of custom attribute extensions. To do this, derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
@@ -580,19 +604,26 @@
           <para>Writes the attribute extensions to the specified writer.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
            to write to.</param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -624,8 +655,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Element extensions are valid XML elements that are not specified in either the Atom 1.0 or RSS 2.0 specification. You can add any valid XML element as an extension, provided its namespace is different from the enclosing namespace. This method is an extension point that allows you to handle the serialization of custom element extensions. To do this, derive a class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >Element extensions are valid XML elements that are not specified in either the Atom 1.0 or RSS 2.0 specification. You can add any valid XML element as an extension, provided its namespace is different from the enclosing namespace. This method is an extension point that allows you to handle the serialization of custom element extensions. To do this, derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
@@ -637,19 +667,26 @@
           <para>Writes the element extensions to the specified writer.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
            to write to.</param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

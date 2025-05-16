@@ -8,7 +8,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -38,15 +40,9 @@
       </Parameters>
       <Docs>
         <param name="n">To be added.</param>
-        <param name="confidence"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="confidence">a <see cref="T:System.Int32" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -68,19 +64,10 @@
         <Parameter Name="confidence" Type="Mono.Math.Prime.ConfidenceFactor" />
       </Parameters>
       <Docs>
-        <param name="bi"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
-        <param name="confidence"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="bi">a <see cref="T:Mono.Math.BigInteger" /></param>
+        <param name="confidence">a <see cref="T:System.Int32" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>

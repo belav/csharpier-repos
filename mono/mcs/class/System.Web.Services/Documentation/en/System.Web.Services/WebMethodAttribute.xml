@@ -42,8 +42,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.WebMethodAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.WebMethodAttribute" />
 
             
 
@@ -68,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.WebMethodAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.WebMethodAttribute" />
 
             
 
@@ -77,7 +75,11 @@
           >
         </summary>
         <param name="enableSession">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -115,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.WebMethodAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.WebMethodAttribute" />
 
             
 
@@ -124,14 +125,22 @@
           >
         </summary>
         <param name="enableSession">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Initializes whether session state is enabled for the XML Web service method. </param
         >
         <param name="transactionOption">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -170,8 +179,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.WebMethodAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.WebMethodAttribute" />
 
             
 
@@ -179,21 +187,33 @@
           >
         </summary>
         <param name="enableSession">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Initializes whether session state is enabled for the XML Web service method. </param
         >
         <param name="transactionOption">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Initializes the transaction support of an XML Web service method. </param
         >
         <param name="cacheDuration">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -233,8 +253,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.WebMethodAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.WebMethodAttribute" />
 
             
 
@@ -242,28 +261,44 @@
           >
         </summary>
         <param name="enableSession">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Initializes whether session state is enabled for the XML Web service method. </param
         >
         <param name="transactionOption">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Initializes the transaction support of an XML Web service method. </param
         >
         <param name="cacheDuration">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Initializes the number of seconds the response is cached. </param
         >
         <param name="bufferResponse">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -287,31 +322,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting <see
-             cref="P:System.Web.Services.WebMethodAttribute.BufferResponse" />
+            >Setting <see cref="P:System.Web.Services.WebMethodAttribute.BufferResponse" />
 
             
 
-             to true, serializes the response of the XML Web service method into a memory buffer until either the response is completely serialized or the buffer is full. Once the response is buffered, it is returned to the XML Web service client over the network. When <see
-             cref="P:System.Web.Services.WebMethodAttribute.BufferResponse" />
+             to true, serializes the response of the XML Web service method into a memory buffer until either the response is completely serialized or the buffer is full. Once the response is buffered, it is returned to the XML Web service client over the network. When <see cref="P:System.Web.Services.WebMethodAttribute.BufferResponse" />
 
             
 
-             is false, the response to the XML Web service method is sent back to the client as it is serialized. In general, you only want to set <see
-             cref="P:System.Web.Services.WebMethodAttribute.BufferResponse" />
+             is false, the response to the XML Web service method is sent back to the client as it is serialized. In general, you only want to set <see cref="P:System.Web.Services.WebMethodAttribute.BufferResponse" />
 
             
 
-             to false, if it is known that an XML Web service method returns large amounts of data to the client. For smaller amounts of data, XML Web service performance is better with <see
-             cref="P:System.Web.Services.WebMethodAttribute.BufferResponse" />
+             to false, if it is known that an XML Web service method returns large amounts of data to the client. For smaller amounts of data, XML Web service performance is better with <see cref="P:System.Web.Services.WebMethodAttribute.BufferResponse" />
 
             
 
              to true.</para
           >
           <para
-            >When <see
-             cref="P:System.Web.Services.WebMethodAttribute.BufferResponse" />
+            >When <see cref="P:System.Web.Services.WebMethodAttribute.BufferResponse" />
 
             
 
@@ -390,46 +420,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In order to store session state in the ASP.NET <see
-             cref="T:System.Web.SessionState.HttpSessionState" />
+            >In order to store session state in the ASP.NET <see cref="T:System.Web.SessionState.HttpSessionState" />
 
             
 
-             object, the XML Web service must inherit from <see
-             cref="T:System.Web.Services.WebService" />
+             object, the XML Web service must inherit from <see cref="T:System.Web.Services.WebService" />
 
             
 
-             and a <see
-             cref="T:System.Web.Services.WebMethodAttribute" />
+             and a <see cref="T:System.Web.Services.WebMethodAttribute" />
 
             
 
-             applied to the XML Web service method, setting the <see
-             cref="P:System.Web.Services.WebMethodAttribute.EnableSession" />
+             applied to the XML Web service method, setting the <see cref="P:System.Web.Services.WebMethodAttribute.EnableSession" />
 
             
 
              property to true. If session state is not needed for an XML Web service method, then disabling it may improve performance.</para
           >
           <para
-            >An XML Web service client is uniquely identified by an HTTP cookie returned by an XML Web service. In order for an XML Web service to maintain session state for a client, the client must persist the cookie. Clients can receive the HTTP cookie by creating a new instance of <see
-             cref="T:System.Net.CookieContainer" />
+            >An XML Web service client is uniquely identified by an HTTP cookie returned by an XML Web service. In order for an XML Web service to maintain session state for a client, the client must persist the cookie. Clients can receive the HTTP cookie by creating a new instance of <see cref="T:System.Net.CookieContainer" />
 
             
 
-             and assigning that to the <see
-             cref="P:System.Web.Services.Protocols.HttpWebClientProtocol.CookieContainer" />
+             and assigning that to the <see cref="P:System.Web.Services.Protocols.HttpWebClientProtocol.CookieContainer" />
 
             
 
-             property of the proxy class before calling the XML Web service method. If you need to maintain session state beyond when the proxy class instance goes out of scope, the client must persist the HTTP cookie between calls to the XML Web service. For instance, a Web Forms client can persist the HTTP cookie by saving the <see
-             cref="T:System.Net.CookieContainer" />
+             property of the proxy class before calling the XML Web service method. If you need to maintain session state beyond when the proxy class instance goes out of scope, the client must persist the HTTP cookie between calls to the XML Web service. For instance, a Web Forms client can persist the HTTP cookie by saving the <see cref="T:System.Net.CookieContainer" />
 
             
 
-             in its own session state. Because not all XML Web services use session state and thus clients are not always required to use the <see
-             cref="P:System.Web.Services.Protocols.HttpWebClientProtocol.CookieContainer" />
+             in its own session state. Because not all XML Web services use session state and thus clients are not always required to use the <see cref="P:System.Web.Services.Protocols.HttpWebClientProtocol.CookieContainer" />
 
             
 
@@ -458,31 +480,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Services.WebMethodAttribute.MessageName" />
+            >The <see cref="P:System.Web.Services.WebMethodAttribute.MessageName" />
 
             
 
-             property can be used to alias method or property names. The most common use of the <see
-             cref="P:System.Web.Services.WebMethodAttribute.MessageName" />
+             property can be used to alias method or property names. The most common use of the <see cref="P:System.Web.Services.WebMethodAttribute.MessageName" />
 
             
 
-             property will be to uniquely identify polymorphic methods. By default, <see
-             cref="P:System.Web.Services.WebMethodAttribute.MessageName" />
+             property will be to uniquely identify polymorphic methods. By default, <see cref="P:System.Web.Services.WebMethodAttribute.MessageName" />
 
             
 
-             is set to the name of the XML Web service method. Therefore, if an XML Web service contains two or more XML Web service methods with the same name, you can uniquely identify the individual XML Web service methods by setting the <see
-             cref="P:System.Web.Services.WebMethodAttribute.MessageName" />
+             is set to the name of the XML Web service method. Therefore, if an XML Web service contains two or more XML Web service methods with the same name, you can uniquely identify the individual XML Web service methods by setting the <see cref="P:System.Web.Services.WebMethodAttribute.MessageName" />
 
             
 
              to a name unique within the XML Web service, without changing the name of the actual method name in code.</para
           >
           <para
-            >When data is passed to an XML Web service it is sent in a request and when it is returned it is sent in a response. Within the request and response, the name used for the XML Web service method is its <see
-             cref="P:System.Web.Services.WebMethodAttribute.MessageName" />
+            >When data is passed to an XML Web service it is sent in a request and when it is returned it is sent in a response. Within the request and response, the name used for the XML Web service method is its <see cref="P:System.Web.Services.WebMethodAttribute.MessageName" />
 
             
 
@@ -512,20 +529,15 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.EnterpriseServices.TransactionOption" />
-        </value>
+        <value>a <see cref="T:System.EnterpriseServices.TransactionOption" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >XML Web service methods can only participate as the root object in a transaction, due to the stateless nature of the HTTP protocol. XML Web service methods can invoke COM objects that participate in the same transaction as the XML Web service method, if the COM object is marked to run within a transaction in the Component Services administrative tool. If an XML Web service method with a <see
-             cref="P:System.Web.Services.WebMethodAttribute.TransactionOption" />
+            >XML Web service methods can only participate as the root object in a transaction, due to the stateless nature of the HTTP protocol. XML Web service methods can invoke COM objects that participate in the same transaction as the XML Web service method, if the COM object is marked to run within a transaction in the Component Services administrative tool. If an XML Web service method with a <see cref="P:System.Web.Services.WebMethodAttribute.TransactionOption" />
 
             
 
-             property of Required or RequiresNew invokes another XML Web service method with a <see
-             cref="P:System.Web.Services.WebMethodAttribute.TransactionOption" />
+             property of Required or RequiresNew invokes another XML Web service method with a <see cref="P:System.Web.Services.WebMethodAttribute.TransactionOption" />
 
             
 

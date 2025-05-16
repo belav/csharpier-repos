@@ -35,251 +35,205 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.ToolStripLabel" />
+        >The <see cref="T:System.Windows.Forms.ToolStripLabel" />
 
         
 
-         control replaces and adds functionality to the <see
-         cref="T:System.Windows.Forms.Label" />
+         control replaces and adds functionality to the <see cref="T:System.Windows.Forms.Label" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.LinkLabel" />
+         and <see cref="T:System.Windows.Forms.LinkLabel" />
 
         
 
-         controls. However, the <see
-         cref="T:System.Windows.Forms.Label" />
+         controls. However, the <see cref="T:System.Windows.Forms.Label" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.LinkLabel" />
+         and <see cref="T:System.Windows.Forms.LinkLabel" />
 
         
 
          controls are retained for both backward compatibility and future use, if you choose.</para
       >
       <para
-        >The <see
-         cref="T:System.Windows.Forms.LinkLabel" />
+        >The <see cref="T:System.Windows.Forms.LinkLabel" />
 
         
 
-         control is similar to a <see
-         cref="T:System.Windows.Forms.Label" />
+         control is similar to a <see cref="T:System.Windows.Forms.Label" />
 
         
 
          control with the exception that it can display a hyperlink. Multiple hyperlinks can be specified in the text of the control. Each hyperlink can perform a different task within an application. For example, you can use a hyperlink to display a Web site in Microsoft Internet Explorer or to load a log file associated with an application.</para
       >
       <para
-        >Each hyperlink displayed in the <see
-         cref="T:System.Windows.Forms.LinkLabel" />
+        >Each hyperlink displayed in the <see cref="T:System.Windows.Forms.LinkLabel" />
 
         
 
-         control is an instance of the <see
-         cref="T:System.Windows.Forms.LinkLabel.Link" />
+         control is an instance of the <see cref="T:System.Windows.Forms.LinkLabel.Link" />
 
         
 
-         class. The <see
-         cref="T:System.Windows.Forms.LinkLabel.Link" />
+         class. The <see cref="T:System.Windows.Forms.LinkLabel.Link" />
 
         
 
-         class defines display information, state, and location of the hyperlink. In addition, the <see
-         cref="P:System.Windows.Forms.LinkLabel.Link.LinkData" />
+         class defines display information, state, and location of the hyperlink. In addition, the <see cref="P:System.Windows.Forms.LinkLabel.Link.LinkData" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.LinkLabel.Link" />
+         property of the <see cref="T:System.Windows.Forms.LinkLabel.Link" />
 
         
 
-         class enables you to associate information, such as a URL to display, with the hyperlink. When a user clicks a hyperlink within the control, the <see
-         cref="E:System.Windows.Forms.LinkLabel.LinkClicked" />
+         class enables you to associate information, such as a URL to display, with the hyperlink. When a user clicks a hyperlink within the control, the <see cref="E:System.Windows.Forms.LinkLabel.LinkClicked" />
 
         
 
-         event is raised, and the <see
-         cref="T:System.Windows.Forms.LinkLabel.Link" />
+         event is raised, and the <see cref="T:System.Windows.Forms.LinkLabel.Link" />
 
         
 
-         object representing the hyperlink that was clicked is passed as part of the <see
-         cref="T:System.Windows.Forms.LinkLabelLinkClickedEventArgs" />
+         object representing the hyperlink that was clicked is passed as part of the <see cref="T:System.Windows.Forms.LinkLabelLinkClickedEventArgs" />
 
         
 
-         object that is passed as a parameter to the event handler. You can use this object to obtain the <see
-         cref="T:System.Windows.Forms.LinkLabel.Link" />
+         object that is passed as a parameter to the event handler. You can use this object to obtain the <see cref="T:System.Windows.Forms.LinkLabel.Link" />
 
         
 
-         object associated with the hyperlink that was clicked by the user. All hyperlinks contained within the <see
-         cref="T:System.Windows.Forms.LinkLabel" />
+         object associated with the hyperlink that was clicked by the user. All hyperlinks contained within the <see cref="T:System.Windows.Forms.LinkLabel" />
 
         
 
-         control are stored in the <see
-         cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+         control are stored in the <see cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
 
         
 
          class instance for the control.</para
       >
       <para
-        >There are two ways to add a hyperlink to the <see
-         cref="T:System.Windows.Forms.LinkLabel" />
+        >There are two ways to add a hyperlink to the <see cref="T:System.Windows.Forms.LinkLabel" />
 
         
 
-         control. The quickest way is to specify a <see
-         cref="T:System.Windows.Forms.LinkArea" />
+         control. The quickest way is to specify a <see cref="T:System.Windows.Forms.LinkArea" />
 
         
 
-         and assign it to the <see
-         cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
+         and assign it to the <see cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
 
         
 
-         property. This enables you to specify a single hyperlink within the text of the control. To add multiple hyperlinks, you can use the <see
-         cref="M:System.Windows.Forms.LinkLabel.LinkCollection.Add(System.Int32,System.Int32)" />
+         property. This enables you to specify a single hyperlink within the text of the control. To add multiple hyperlinks, you can use the <see cref="M:System.Windows.Forms.LinkLabel.LinkCollection.Add(System.Int32,System.Int32)" />
 
         
 
-         method of the <see
-         cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+         method of the <see cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
 
         
 
-         class by accessing the collection through the <see
-         cref="P:System.Windows.Forms.LinkLabel.Links" />
+         class by accessing the collection through the <see cref="P:System.Windows.Forms.LinkLabel.Links" />
 
         
 
          property.</para
       >
       <para
-        >When a <see
-         cref="T:System.Windows.Forms.LinkLabel" />
+        >When a <see cref="T:System.Windows.Forms.LinkLabel" />
 
         
 
-         control is created, a default hyperlink that contains all the text within the <see
-         cref="T:System.Windows.Forms.LinkLabel" />
+         control is created, a default hyperlink that contains all the text within the <see cref="T:System.Windows.Forms.LinkLabel" />
 
         
 
-         control is added to the <see
-         cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+         control is added to the <see cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
 
         
 
-        . You can override this default link by specifying a new link area with the <see
-         cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
+        . You can override this default link by specifying a new link area with the <see cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
 
         
 
-         property, or specify a link using the <see
-         cref="M:System.Windows.Forms.LinkLabel.LinkCollection.Add(System.Int32,System.Int32)" />
+         property, or specify a link using the <see cref="M:System.Windows.Forms.LinkLabel.LinkCollection.Add(System.Int32,System.Int32)" />
 
         
 
-         method of the <see
-         cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+         method of the <see cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
 
         
 
-        . You can also remove the default hyperlink by using the <see
-         cref="M:System.Windows.Forms.LinkLabel.LinkCollection.Remove(System.Windows.Forms.LinkLabel.Link)" />
+        . You can also remove the default hyperlink by using the <see cref="M:System.Windows.Forms.LinkLabel.LinkCollection.Remove(System.Windows.Forms.LinkLabel.Link)" />
 
         
 
-         method of the <see
-         cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+         method of the <see cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
 
         
 
          class.</para
       >
       <para
-        >The <see
-         cref="P:System.Windows.Forms.Label.TabStop" />
+        >The <see cref="P:System.Windows.Forms.Label.TabStop" />
 
         
 
-         property is true by default, as long as there is at least one link of greater than zero length in the <see
-         cref="P:System.Windows.Forms.LinkLabel.Links" />
+         property is true by default, as long as there is at least one link of greater than zero length in the <see cref="P:System.Windows.Forms.LinkLabel.Links" />
 
         
 
-         collection. The <see
-         cref="T:System.Windows.Forms.LinkLabel" />
+         collection. The <see cref="T:System.Windows.Forms.LinkLabel" />
 
         
 
-         control has a single <see
-         cref="P:System.Windows.Forms.Control.TabIndex" />
+         control has a single <see cref="P:System.Windows.Forms.Control.TabIndex" />
 
         
 
-         value. However, each link of greater than zero length gets its own tab stop, in left-to-right order. To prevent tab navigation to the <see
-         cref="T:System.Windows.Forms.LinkLabel" />
+         value. However, each link of greater than zero length gets its own tab stop, in left-to-right order. To prevent tab navigation to the <see cref="T:System.Windows.Forms.LinkLabel" />
 
         
 
-         control, set the <see
-         cref="P:System.Windows.Forms.Label.TabStop" />
+         control, set the <see cref="P:System.Windows.Forms.Label.TabStop" />
 
         
 
-         property to false. However, be aware that adding new links to the <see
-         cref="P:System.Windows.Forms.LinkLabel.Links" />
+         property to false. However, be aware that adding new links to the <see cref="P:System.Windows.Forms.LinkLabel.Links" />
 
         
 
-         collection will automatically set the <see
-         cref="P:System.Windows.Forms.Label.TabStop" />
+         collection will automatically set the <see cref="P:System.Windows.Forms.Label.TabStop" />
 
         
 
          property to true again. </para
       >
       <para
-        >The <see
-         cref="T:System.Windows.Forms.LinkLabel" />
+        >The <see cref="T:System.Windows.Forms.LinkLabel" />
 
         
 
-         provides a number of properties that enable you to define the display appearance of hyperlinks in the control. The <see
-         cref="P:System.Windows.Forms.LinkLabel.ActiveLinkColor" />
+         provides a number of properties that enable you to define the display appearance of hyperlinks in the control. The <see cref="P:System.Windows.Forms.LinkLabel.ActiveLinkColor" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.LinkLabel.DisabledLinkColor" />
+        , <see cref="P:System.Windows.Forms.LinkLabel.DisabledLinkColor" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.LinkLabel.LinkColor" />
+        , <see cref="P:System.Windows.Forms.LinkLabel.LinkColor" />
 
         
 
-        , and <see
-         cref="P:System.Windows.Forms.LinkLabel.VisitedLinkColor" />
+        , and <see cref="P:System.Windows.Forms.LinkLabel.VisitedLinkColor" />
 
         
 
-         properties define the colors used when displaying a hyperlink in various states. The <see
-         cref="P:System.Windows.Forms.LinkLabel.LinkBehavior" />
+         properties define the colors used when displaying a hyperlink in various states. The <see cref="P:System.Windows.Forms.LinkLabel.LinkBehavior" />
 
         
 
@@ -301,8 +255,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new default instance of the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+            >Initializes a new default instance of the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
@@ -329,31 +282,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An active link is a link that is in the process of being clicked. This is similar to the depressed state of a <see
-             cref="T:System.Windows.Forms.Button" />
+            >An active link is a link that is in the process of being clicked. This is similar to the depressed state of a <see cref="T:System.Windows.Forms.Button" />
 
             
 
              control. You can use this property to specify the color that the link is displayed in when the link is in the process of being clicked.</para
           >
           <para
-            >There are a number of colors associated with a link. The <see
-             cref="P:System.Windows.Forms.LinkLabel.LinkColor" />
+            >There are a number of colors associated with a link. The <see cref="P:System.Windows.Forms.LinkLabel.LinkColor" />
 
             
 
-             specifies the color of all links displayed in the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+             specifies the color of all links displayed in the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
-             control. The <see
-             cref="P:System.Windows.Forms.LinkLabel.VisitedLinkColor" />
+             control. The <see cref="P:System.Windows.Forms.LinkLabel.VisitedLinkColor" />
 
             
 
-             property enables you to specify the color of a link after it has been visited by the user. When a link is disabled, the <see
-             cref="P:System.Windows.Forms.LinkLabel.DisabledLinkColor" />
+             property enables you to specify the color of a link after it has been visited by the user. When a link is disabled, the <see cref="P:System.Windows.Forms.LinkLabel.DisabledLinkColor" />
 
             
 
@@ -387,34 +335,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you do not explicitly call the <see
-             cref="M:System.Windows.Forms.LinkLabel.CreateAccessibilityInstance" />
+            >If you do not explicitly call the <see cref="M:System.Windows.Forms.LinkLabel.CreateAccessibilityInstance" />
 
             
 
-             method, it will be called when the <see
-             cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+             method, it will be called when the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" />
 
             
 
              property is referenced.</para
           >
           <para
-            >Note: To get or set the <see
-             cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+            >Note: To get or set the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" />
 
             
 
              property, you must add a reference to the Accessibility assembly installed with the .NET Framework. </para
           >
           <para
-            >Notes to Inheritors: When overriding <see
-             cref="M:System.Windows.Forms.LinkLabel.CreateAccessibilityInstance" />
+            >Notes to Inheritors: When overriding <see cref="M:System.Windows.Forms.LinkLabel.CreateAccessibilityInstance" />
 
             
 
-             in a derived class, you should not call the base class's <see
-             cref="M:System.Windows.Forms.LinkLabel.CreateAccessibilityInstance" />
+             in a derived class, you should not call the base class's <see cref="M:System.Windows.Forms.LinkLabel.CreateAccessibilityInstance" />
 
             
 
@@ -424,8 +367,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new accessibility object for the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+            >Creates a new accessibility object for the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
@@ -435,8 +377,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >A new <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
@@ -482,36 +423,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property enables you to specify the color for links that are disabled in the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+            >This property enables you to specify the color for links that are disabled in the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
-            . Disabled links do not cause the <see
-             cref="E:System.Windows.Forms.LinkLabel.LinkClicked" />
+            . Disabled links do not cause the <see cref="E:System.Windows.Forms.LinkLabel.LinkClicked" />
 
             
 
              event to be raised.</para
           >
           <para
-            >There are a number of colors associated with a link. All links in the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+            >There are a number of colors associated with a link. All links in the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
-             are initially displayed with the color defined in the <see
-             cref="P:System.Windows.Forms.LinkLabel.LinkColor" />
+             are initially displayed with the color defined in the <see cref="P:System.Windows.Forms.LinkLabel.LinkColor" />
 
             
 
-             property. The <see
-             cref="P:System.Windows.Forms.LinkLabel.ActiveLinkColor" />
+             property. The <see cref="P:System.Windows.Forms.LinkLabel.ActiveLinkColor" />
 
             
 
-             property enables you to specify the color of the link when it is in the process of being clicked. The <see
-             cref="P:System.Windows.Forms.LinkLabel.VisitedLinkColor" />
+             property enables you to specify the color of the link when it is in the process of being clicked. The <see cref="P:System.Windows.Forms.LinkLabel.VisitedLinkColor" />
 
             
 
@@ -561,8 +496,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the flat style appearance of the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+            >Gets or sets the flat style appearance of the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
@@ -596,119 +530,97 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
+            >The <see cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
 
             
 
-             property provides a quick way to specify a single hyperlink to display in the text of the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+             property provides a quick way to specify a single hyperlink to display in the text of the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
-             control. The <see
-             cref="T:System.Windows.Forms.LinkArea" />
+             control. The <see cref="T:System.Windows.Forms.LinkArea" />
 
             
 
-             object provides properties that specify the starting position of the link within the text of the control and the length of text for the hyperlink. When a hyperlink is specified using the <see
-             cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
+             object provides properties that specify the starting position of the link within the text of the control and the length of text for the hyperlink. When a hyperlink is specified using the <see cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
 
             
 
-             property, the hyperlink is added to the <see
-             cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+             property, the hyperlink is added to the <see cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
 
             
 
-             of the control. The <see
-             cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
+             of the control. The <see cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
 
             
 
-             property converts the <see
-             cref="T:System.Windows.Forms.LinkArea" />
+             property converts the <see cref="T:System.Windows.Forms.LinkArea" />
 
             
 
-             object assigned to it to a <see
-             cref="T:System.Windows.Forms.LinkLabel.Link" />
+             object assigned to it to a <see cref="T:System.Windows.Forms.LinkLabel.Link" />
 
             
 
              object that is stored within the collection.</para
           >
           <para
-            >To add multiple hyperlinks to the text of the control, you can use the <see
-             cref="P:System.Windows.Forms.LinkLabel.Links" />
+            >To add multiple hyperlinks to the text of the control, you can use the <see cref="P:System.Windows.Forms.LinkLabel.Links" />
 
             
 
-             property. The <see
-             cref="P:System.Windows.Forms.LinkLabel.Links" />
+             property. The <see cref="P:System.Windows.Forms.LinkLabel.Links" />
 
             
 
-             property enables you to access the properties and methods of the <see
-             cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+             property enables you to access the properties and methods of the <see cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
 
             
 
-            , which stores the links specified for the control. This method of adding links to the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+            , which stores the links specified for the control. This method of adding links to the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
-             also enables you to specify data in the <see
-             cref="P:System.Windows.Forms.LinkLabel.Link.LinkData" />
+             also enables you to specify data in the <see cref="P:System.Windows.Forms.LinkLabel.Link.LinkData" />
 
             
 
-             property that is associated with the link being created. The value of the <see
-             cref="P:System.Windows.Forms.LinkLabel.Link.LinkData" />
+             property that is associated with the link being created. The value of the <see cref="P:System.Windows.Forms.LinkLabel.Link.LinkData" />
 
             
 
              property can be used to store the location of a file to display or the address of a Web site.</para
           >
           <para
-            >When a <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+            >When a <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
-             control is created, a default hyperlink that contains all the text within the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+             control is created, a default hyperlink that contains all the text within the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
-             control is added to the <see
-             cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+             control is added to the <see cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
 
             
 
-            . You can override this default link by specifying a new link area with the <see
-             cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
+            . You can override this default link by specifying a new link area with the <see cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
 
             
 
-             property, or specify a link using the <see
-             cref="M:System.Windows.Forms.LinkLabel.LinkCollection.Add(System.Int32,System.Int32)" />
+             property, or specify a link using the <see cref="M:System.Windows.Forms.LinkLabel.LinkCollection.Add(System.Int32,System.Int32)" />
 
             
 
-             method of the <see
-             cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+             method of the <see cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
 
             
 
-            . You can also remove the default hyperlink by using the <see
-             cref="M:System.Windows.Forms.LinkLabel.LinkCollection.Remove(System.Windows.Forms.LinkLabel.Link)" />
+            . You can also remove the default hyperlink by using the <see cref="M:System.Windows.Forms.LinkLabel.LinkCollection.Remove(System.Windows.Forms.LinkLabel.Link)" />
 
             
 
-             method of the <see
-             cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+             method of the <see cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
 
             
 
@@ -716,13 +628,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
+              >The <see cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
 
               
 
-               property always returns the first item in the <see
-               cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+               property always returns the first item in the <see cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
 
               
 
@@ -731,28 +641,23 @@
           </block>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Windows.Forms.LinkArea.Length" />
+              >The <see cref="P:System.Windows.Forms.LinkArea.Length" />
 
               
 
-               property on <see
-               cref="T:System.Windows.Forms.LinkArea" />
+               property on <see cref="T:System.Windows.Forms.LinkArea" />
 
               
 
-               will differ if you call <see
-               cref="P:System.Windows.Forms.LinkLabel.UseCompatibleTextRendering" />
+               will differ if you call <see cref="P:System.Windows.Forms.LinkLabel.UseCompatibleTextRendering" />
 
               
 
-              , and the <see
-               cref="P:System.Windows.Forms.LinkLabel.Text" />
+              , and the <see cref="P:System.Windows.Forms.LinkLabel.Text" />
 
               
 
-               property contains double-byte characters. If you call <see
-               cref="P:System.Windows.Forms.LinkLabel.UseCompatibleTextRendering" />
+               property contains double-byte characters. If you call <see cref="P:System.Windows.Forms.LinkLabel.UseCompatibleTextRendering" />
 
               
 
@@ -789,8 +694,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property enables you to specify the behavior of links when they are displayed in the control. For example, if you want links to be displayed with an underline only when the mouse pointer is over a link, you can set this property to LinkBehavior.HoverUnderline. For more information on the types of behaviors that can be associated with a link, see <see
-             cref="T:System.Windows.Forms.LinkBehavior" />
+            >This property enables you to specify the behavior of links when they are displayed in the control. For example, if you want links to be displayed with an underline only when the mouse pointer is over a link, you can set this property to LinkBehavior.HoverUnderline. For more information on the types of behaviors that can be associated with a link, see <see cref="T:System.Windows.Forms.LinkBehavior" />
 
             
 
@@ -820,61 +724,50 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, the <see
-             cref="E:System.Windows.Forms.LinkLabel.LinkClicked" />
+            >Typically, the <see cref="E:System.Windows.Forms.LinkLabel.LinkClicked" />
 
             
 
-             event is handled to perform tasks when the user clicks on a link in the control. The event handler for the <see
-             cref="E:System.Windows.Forms.LinkLabel.LinkClicked" />
+             event is handled to perform tasks when the user clicks on a link in the control. The event handler for the <see cref="E:System.Windows.Forms.LinkLabel.LinkClicked" />
 
             
 
-             event is passed an instance of the <see
-             cref="T:System.Windows.Forms.LinkLabelLinkClickedEventArgs" />
+             event is passed an instance of the <see cref="T:System.Windows.Forms.LinkLabelLinkClickedEventArgs" />
 
             
 
-             class that contains a <see
-             cref="T:System.Windows.Forms.LinkLabel.Link" />
+             class that contains a <see cref="T:System.Windows.Forms.LinkLabel.Link" />
 
             
 
-             object that is associated with the link that was clicked. You can use information specified in the <see
-             cref="P:System.Windows.Forms.LinkLabel.Link.LinkData" />
+             object that is associated with the link that was clicked. You can use information specified in the <see cref="P:System.Windows.Forms.LinkLabel.Link.LinkData" />
 
             
 
-             property of <see
-             cref="T:System.Windows.Forms.LinkLabel.Link" />
+             property of <see cref="T:System.Windows.Forms.LinkLabel.Link" />
 
             
 
-             class to determine which link was clicked or what type of task to perform when the link is clicked. For example, if a <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+             class to determine which link was clicked or what type of task to perform when the link is clicked. For example, if a <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
-             control has a <see
-             cref="T:System.Windows.Forms.LinkLabel.Link" />
+             control has a <see cref="T:System.Windows.Forms.LinkLabel.Link" />
 
             
 
-             object defined with its <see
-             cref="P:System.Windows.Forms.LinkLabel.Link.LinkData" />
+             object defined with its <see cref="P:System.Windows.Forms.LinkLabel.Link.LinkData" />
 
             
 
-             property set to the string www.microsoft.com, you can use this information in an event handler for the <see
-             cref="E:System.Windows.Forms.LinkLabel.LinkClicked" />
+             property set to the string www.microsoft.com, you can use this information in an event handler for the <see cref="E:System.Windows.Forms.LinkLabel.LinkClicked" />
 
             
 
              event to display the Web site.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -904,26 +797,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property enables you to specify the color that is initially displayed for all links in the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+            >This property enables you to specify the color that is initially displayed for all links in the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
             .</para
           >
           <para
-            >There are a number of colors associated with a link. The <see
-             cref="P:System.Windows.Forms.LinkLabel.ActiveLinkColor" />
+            >There are a number of colors associated with a link. The <see cref="P:System.Windows.Forms.LinkLabel.ActiveLinkColor" />
 
             
 
-             property enables you to specify the color of the link when it is in the process of being clicked. The <see
-             cref="P:System.Windows.Forms.LinkLabel.VisitedLinkColor" />
+             property enables you to specify the color of the link when it is in the process of being clicked. The <see cref="P:System.Windows.Forms.LinkLabel.VisitedLinkColor" />
 
             
 
-             property enables you to specify the color of a link after it has been visited by the user. When a link is disabled, the <see
-             cref="P:System.Windows.Forms.LinkLabel.DisabledLinkColor" />
+             property enables you to specify the color of a link after it has been visited by the user. When a link is disabled, the <see cref="P:System.Windows.Forms.LinkLabel.DisabledLinkColor" />
 
             
 
@@ -965,84 +854,69 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+            >A <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
-             control can display any number of links within the text of the control. This property enables you to access the <see
-             cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+             control can display any number of links within the text of the control. This property enables you to access the <see cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
 
             
 
-             instance associated with the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+             instance associated with the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
-             that represents the collection of links displayed in the control. You can then use the members of the <see
-             cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+             that represents the collection of links displayed in the control. You can then use the members of the <see cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
 
             
 
-             class to add, remove, and find links in the collection. For more information on the types of tasks you can perform with the link collection, see <see
-             cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+             class to add, remove, and find links in the collection. For more information on the types of tasks you can perform with the link collection, see <see cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
 
             
 
             .</para
           >
           <para
-            >When a <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+            >When a <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
-             control is created, a default hyperlink that contains all the text within the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+             control is created, a default hyperlink that contains all the text within the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
-             control is added to the <see
-             cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+             control is added to the <see cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
 
             
 
-            . You can override this default link by specifying a new link area with the <see
-             cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
+            . You can override this default link by specifying a new link area with the <see cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
 
             
 
-             property, or specify a link using the <see
-             cref="M:System.Windows.Forms.LinkLabel.LinkCollection.Add(System.Int32,System.Int32)" />
+             property, or specify a link using the <see cref="M:System.Windows.Forms.LinkLabel.LinkCollection.Add(System.Int32,System.Int32)" />
 
             
 
-             method of the <see
-             cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+             method of the <see cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
 
             
 
-            . You can also remove the default hyperlink by using the <see
-             cref="M:System.Windows.Forms.LinkLabel.LinkCollection.Remove(System.Windows.Forms.LinkLabel.Link)" />
+            . You can also remove the default hyperlink by using the <see cref="M:System.Windows.Forms.LinkLabel.LinkCollection.Remove(System.Windows.Forms.LinkLabel.Link)" />
 
             
 
-             method of the <see
-             cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+             method of the <see cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
 
             
 
              class.</para
           >
           <para
-            >If you do not need to specify more than one link to display within the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+            >If you do not need to specify more than one link to display within the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
-            , you can use the <see
-             cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
+            , you can use the <see cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
 
             
 
@@ -1052,8 +926,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of links contained within the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+            >Gets the collection of links contained within the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
@@ -1082,33 +955,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+            >A <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
-             control does not automatically denote that a link is a visited link. To display the link as a visited link, you can set the value of this property to true in an event handler for the <see
-             cref="E:System.Windows.Forms.LinkLabel.LinkClicked" />
+             control does not automatically denote that a link is a visited link. To display the link as a visited link, you can set the value of this property to true in an event handler for the <see cref="E:System.Windows.Forms.LinkLabel.LinkClicked" />
 
             
 
-             event of a <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+             event of a <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
-            . A visited link is displayed using the color specified in the <see
-             cref="P:System.Windows.Forms.LinkLabel.VisitedLinkColor" />
+            . A visited link is displayed using the color specified in the <see cref="P:System.Windows.Forms.LinkLabel.VisitedLinkColor" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+             property of the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
-             control. Once the form containing the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+             control. Once the form containing the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
@@ -1116,28 +983,23 @@
           >
           <block subset="none" type="note">
             <para
-              >This property only affects the first link defined in the <see
-               cref="T:System.Windows.Forms.LinkLabel" />
+              >This property only affects the first link defined in the <see cref="T:System.Windows.Forms.LinkLabel" />
 
               
 
-               control. If you have more than one link specified in the control, use the <see
-               cref="P:System.Windows.Forms.LinkLabel.Link.Visited" />
+               control. If you have more than one link specified in the control, use the <see cref="P:System.Windows.Forms.LinkLabel.Link.Visited" />
 
               
 
-               property of the <see
-               cref="T:System.Windows.Forms.LinkLabel.Link" />
+               property of the <see cref="T:System.Windows.Forms.LinkLabel.Link" />
 
               
 
-               class. You can access all the links defined in the <see
-               cref="T:System.Windows.Forms.LinkLabel" />
+               class. You can access all the links defined in the <see cref="T:System.Windows.Forms.LinkLabel" />
 
               
 
-               by using the <see
-               cref="P:System.Windows.Forms.LinkLabel.Links" />
+               by using the <see cref="P:System.Windows.Forms.LinkLabel.Links" />
 
               
 
@@ -1174,8 +1036,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1184,8 +1045,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.LinkLabel.OnAutoSizeChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.LinkLabel.OnAutoSizeChanged(System.EventArgs)" />
 
             
 
@@ -1195,8 +1055,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Label.AutoSizeChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Label.AutoSizeChanged" />
 
             
 
@@ -1204,12 +1063,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1233,8 +1095,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1244,8 +1105,7 @@
           >
           <para />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.LinkLabel.OnEnabledChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.LinkLabel.OnEnabledChanged(System.EventArgs)" />
 
             
 
@@ -1256,8 +1116,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides handling for the <see
-             cref="E:System.Windows.Forms.Control.EnabledChanged" />
+            >Provides handling for the <see cref="E:System.Windows.Forms.Control.EnabledChanged" />
 
             
 
@@ -1265,12 +1124,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1296,8 +1158,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.FontChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.FontChanged" />
 
             
 
@@ -1305,12 +1166,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1335,8 +1199,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1348,8 +1211,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.GotFocus" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.GotFocus" />
 
             
 
@@ -1357,12 +1219,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1390,8 +1255,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1403,8 +1267,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="M:System.Windows.Forms.Control.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
+            >Raises the <see cref="M:System.Windows.Forms.Control.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
 
             
 
@@ -1412,12 +1275,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.KeyEventArgs" />
+          A <see cref="T:System.Windows.Forms.KeyEventArgs" />
 
           
 
@@ -1445,8 +1311,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1455,8 +1320,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.LinkLabel.OnLinkClicked(System.Windows.Forms.LinkLabelLinkClickedEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.LinkLabel.OnLinkClicked(System.Windows.Forms.LinkLabelLinkClickedEventArgs)" />
 
             
 
@@ -1466,8 +1330,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.LinkLabel.LinkClicked" />
+            >Raises the <see cref="E:System.Windows.Forms.LinkLabel.LinkClicked" />
 
             
 
@@ -1475,12 +1338,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.LinkLabelLinkClickedEventArgs" />
+          A <see cref="T:System.Windows.Forms.LinkLabelLinkClickedEventArgs" />
 
           
 
@@ -1505,8 +1371,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1518,8 +1383,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.LostFocus" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.LostFocus" />
 
             
 
@@ -1527,12 +1391,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1560,8 +1427,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1573,8 +1439,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="M:System.Windows.Forms.Control.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+            >Raises the <see cref="M:System.Windows.Forms.Control.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -1582,12 +1447,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -1612,8 +1480,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1625,8 +1492,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="M:System.Windows.Forms.Control.OnMouseLeave(System.EventArgs)" />
+            >Raises the <see cref="M:System.Windows.Forms.Control.OnMouseLeave(System.EventArgs)" />
 
             
 
@@ -1634,12 +1500,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1667,8 +1536,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1680,8 +1548,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="M:System.Windows.Forms.Control.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
+            >Raises the <see cref="M:System.Windows.Forms.Control.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -1689,12 +1556,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -1722,8 +1592,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1735,8 +1604,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="M:System.Windows.Forms.Control.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+            >Raises the <see cref="M:System.Windows.Forms.Control.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -1744,12 +1612,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -1780,8 +1651,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1790,8 +1660,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.LinkLabel.OnPaddingChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.LinkLabel.OnPaddingChanged(System.EventArgs)" />
 
             
 
@@ -1801,8 +1670,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.PaddingChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.PaddingChanged" />
 
             
 
@@ -1810,12 +1678,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1839,8 +1710,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1852,8 +1722,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="M:System.Windows.Forms.Control.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+            >Raises the <see cref="M:System.Windows.Forms.Control.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
@@ -1861,12 +1730,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.PaintEventArgs" />
+          A <see cref="T:System.Windows.Forms.PaintEventArgs" />
 
           
 
@@ -1897,12 +1769,15 @@
           <para>Paints the background of the control.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.PaintEventArgs" />
+          A <see cref="T:System.Windows.Forms.PaintEventArgs" />
 
           
 
@@ -1950,8 +1825,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides handling for the <see
-             cref="E:System.Windows.Forms.Control.TextChanged" />
+            >Provides handling for the <see cref="E:System.Windows.Forms.Control.TextChanged" />
 
             
 
@@ -1959,12 +1833,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1991,8 +1868,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the mouse pointer to use when the mouse pointer is within the bounds of the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+            >Gets or sets the mouse pointer to use when the mouse pointer is within the bounds of the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
@@ -2028,8 +1904,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the interior spacing, in pixels, between the edges of a <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+            >Gets or sets the interior spacing, in pixels, between the edges of a <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
@@ -2055,23 +1930,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method enables you to determine whether a link is located at a specific point within a <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+            >This method enables you to determine whether a link is located at a specific point within a <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
-             control. You can use this method in an event handler for the <see
-             cref="E:System.Windows.Forms.Control.MouseEnter" />
+             control. You can use this method in an event handler for the <see cref="E:System.Windows.Forms.Control.MouseEnter" />
 
             
 
-             event of the control to determine whether the mouse pointer is hovering over a link in the control. Once you have determined that the mouse pointer is over a link, you can then display additional information about the link to the user through <see
-             cref="T:System.Windows.Forms.StatusBar" />
+             event of the control to determine whether the mouse pointer is hovering over a link in the control. Once you have determined that the mouse pointer is over a link, you can then display additional information about the link to the user through <see cref="T:System.Windows.Forms.StatusBar" />
 
             
 
-             text or a <see
-             cref="T:System.Windows.Forms.ToolTip" />
+             text or a <see cref="T:System.Windows.Forms.ToolTip" />
 
             
 
@@ -2085,8 +1956,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.LinkLabel.Link" />
+            >A <see cref="T:System.Windows.Forms.LinkLabel.Link" />
 
             
 
@@ -2094,14 +1964,22 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The horizontal coordinate of the point to search for a link. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2139,7 +2017,11 @@
           <para>true to consume the key; false to allow further processing.</para>
         </returns>
         <param name="keyData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2201,35 +2083,55 @@
           <para>Performs the work of setting the bounds of this control. </para>
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           New left of the control. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           New right of the control. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           New width of the control. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           New height of the control. </param
         >
         <param name="specified">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2259,13 +2161,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Windows.Forms.IButtonControl" />
+             instance is cast to an <see cref="T:System.Windows.Forms.IButtonControl" />
 
             
 
@@ -2275,8 +2175,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Windows.Forms.IButtonControl.DialogResult" />
+            >For a description of this member, see <see cref="P:System.Windows.Forms.IButtonControl.DialogResult" />
 
             
 
@@ -2302,13 +2201,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+            >A <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
-             control appears the same regardless of whether it is the default button, so calling this method will not change the appearance or behavior of the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+             control appears the same regardless of whether it is the default button, so calling this method will not change the appearance or behavior of the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
@@ -2318,8 +2215,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Notifies the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+            >Notifies the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
@@ -2327,7 +2223,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2350,8 +2250,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling this method causes the first link in the <see
-             cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+            >Calling this method causes the first link in the <see cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
 
             
 
@@ -2361,13 +2260,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a <see
-             cref="E:System.Windows.Forms.Control.Click" />
+            >Generates a <see cref="E:System.Windows.Forms.Control.Click" />
 
             
 
-             event for the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+             event for the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
@@ -2397,8 +2294,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -2410,8 +2306,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.Label.TabStop" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.Label.TabStop" />
 
             
 
@@ -2437,8 +2332,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the text displayed by the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+            >Gets or sets the text displayed by the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
@@ -2463,67 +2357,56 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Windows.Forms.LinkLabel.UseCompatibleTextRendering" />
+            >If the <see cref="P:System.Windows.Forms.LinkLabel.UseCompatibleTextRendering" />
 
             
 
-             property is set to false, the <see
-             cref="T:System.Windows.Forms.LinkArea" />
+             property is set to false, the <see cref="T:System.Windows.Forms.LinkArea" />
 
             
 
              covers the entire text. For example, text such as "abcd " is rendered with the trailing space underlined.</para
           >
           <para
-            >If the <see
-             cref="P:System.Windows.Forms.LinkLabel.UseCompatibleTextRendering" />
+            >If the <see cref="P:System.Windows.Forms.LinkLabel.UseCompatibleTextRendering" />
 
             
 
-             property is set to true, the <see
-             cref="T:System.Windows.Forms.LinkArea" />
+             property is set to true, the <see cref="T:System.Windows.Forms.LinkArea" />
 
             
 
              does not cover the entire text.</para
           >
           <para
-            >The UseCompatibleTextRendering property is intended to provide visual compatibility between Windows Forms controls that render text using the <see
-             cref="T:System.Windows.Forms.TextRenderer" />
+            >The UseCompatibleTextRendering property is intended to provide visual compatibility between Windows Forms controls that render text using the <see cref="T:System.Windows.Forms.TextRenderer" />
 
             
 
-             class and net_v10_short and net_v11_short applications that perform custom text rendering using the <see
-             cref="T:System.Drawing.Graphics" />
+             class and net_v10_short and net_v11_short applications that perform custom text rendering using the <see cref="T:System.Drawing.Graphics" />
 
             
 
              class. In most cases, if your application is not being upgraded from net_v10_short or net_v11_short, it is recommended that you leave UseCompatibleTextRendering set to the default value of false.</para
           >
           <para
-            >The ndptecgdi based <see
-             cref="T:System.Windows.Forms.TextRenderer" />
+            >The ndptecgdi based <see cref="T:System.Windows.Forms.TextRenderer" />
 
             
 
-             class was introduced in the dnprdnlong to improve performance, make text look better, and improve support for international fonts. In earlier versions of the dnprdnshort, the ndptecgdiplus based <see
-             cref="T:System.Drawing.Graphics" />
+             class was introduced in the dnprdnlong to improve performance, make text look better, and improve support for international fonts. In earlier versions of the dnprdnshort, the ndptecgdiplus based <see cref="T:System.Drawing.Graphics" />
 
             
 
-             class was used to perform all text rendering. ndptecgdi calculates character spacing and word wrapping differently from ndptecgdiplus. In a Windows Forms application that uses the <see
-             cref="T:System.Drawing.Graphics" />
+             class was used to perform all text rendering. ndptecgdi calculates character spacing and word wrapping differently from ndptecgdiplus. In a Windows Forms application that uses the <see cref="T:System.Drawing.Graphics" />
 
             
 
-             class to render text, this could cause the text for controls that use <see
-             cref="T:System.Windows.Forms.TextRenderer" />
+             class to render text, this could cause the text for controls that use <see cref="T:System.Windows.Forms.TextRenderer" />
 
             
 
-             to appear different from the other text in the application. To resolve this incompatibility, you can set the UseCompatibleTextRendering property to true for a specific control. To set UseCompatibleTextRendering to true for all supported controls in the application, call the <see
-             cref="M:System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(System.Boolean)" />
+             to appear different from the other text in the application. To resolve this incompatibility, you can set the UseCompatibleTextRendering property to true for a specific control. To set UseCompatibleTextRendering to true for all supported controls in the application, call the <see cref="M:System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(System.Boolean)" />
 
             
 
@@ -2533,13 +2416,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that determines whether to use the <see
-             cref="T:System.Drawing.Graphics" />
+            >Gets or sets a value that determines whether to use the <see cref="T:System.Drawing.Graphics" />
 
             
 
-             class (ndptecgdiplus) or the <see
-             cref="T:System.Windows.Forms.TextRenderer" />
+             class (ndptecgdiplus) or the <see cref="T:System.Windows.Forms.TextRenderer" />
 
             
 
@@ -2570,31 +2451,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property enables you to specify the color that is displayed for all links in the LinkLabel <see
-             cref="N:System.Windows.Forms" />
+            >This property enables you to specify the color that is displayed for all links in the LinkLabel <see cref="N:System.Windows.Forms" />
 
             
 
              that have been visited by the user.</para
           >
           <para
-            >There are a number of colors associated with a link. All links in the <see
-             cref="T:System.Windows.Forms.LinkLabel" />
+            >There are a number of colors associated with a link. All links in the <see cref="T:System.Windows.Forms.LinkLabel" />
 
             
 
-             are initially displayed with the color defined in the <see
-             cref="P:System.Windows.Forms.LinkLabel.LinkColor" />
+             are initially displayed with the color defined in the <see cref="P:System.Windows.Forms.LinkLabel.LinkColor" />
 
             
 
-             property. The <see
-             cref="P:System.Windows.Forms.LinkLabel.ActiveLinkColor" />
+             property. The <see cref="P:System.Windows.Forms.LinkLabel.ActiveLinkColor" />
 
             
 
-             property enables you to specify the color of the link when it is in the process of being clicked. When a link is disabled, the <see
-             cref="P:System.Windows.Forms.LinkLabel.DisabledLinkColor" />
+             property enables you to specify the color of the link when it is in the process of being clicked. When a link is disabled, the <see cref="P:System.Windows.Forms.LinkLabel.DisabledLinkColor" />
 
             
 

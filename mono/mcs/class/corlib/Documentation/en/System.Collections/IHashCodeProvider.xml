@@ -32,86 +32,70 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Collections.IHashCodeProvider" />
+        >The <see cref="T:System.Collections.IHashCodeProvider" />
 
         
 
-         interface is used in conjunction with the <see
-         cref="T:System.Collections.Hashtable" />
+         interface is used in conjunction with the <see cref="T:System.Collections.Hashtable" />
 
         
 
-         class. The objects used as keys by a <see
-         cref="T:System.Collections.Hashtable" />
+         class. The objects used as keys by a <see cref="T:System.Collections.Hashtable" />
 
         
 
-         object must override the <see
-         cref="M:System.Object.GetHashCode" />
+         object must override the <see cref="M:System.Object.GetHashCode" />
 
         
 
-         and <see
-         cref="M:System.Object.Equals(System.Object)" />
+         and <see cref="M:System.Object.Equals(System.Object)" />
 
         
 
-         methods. <see
-         cref="M:System.Object.GetHashCode" />
+         methods. <see cref="M:System.Object.GetHashCode" />
 
         
 
-         or the key's implementation of <see
-         cref="M:System.Object.GetHashCode" />
+         or the key's implementation of <see cref="M:System.Object.GetHashCode" />
 
         
 
-         is used as the hash code provider. <see
-         cref="M:System.Object.Equals(System.Object)" />
+         is used as the hash code provider. <see cref="M:System.Object.Equals(System.Object)" />
 
         
 
-         or the key's implementation of <see
-         cref="M:System.Object.Equals(System.Object)" />
+         or the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />
 
         
 
          is used as the comparer.</para
       >
       <para
-        >However, some overloads of the <see
-         cref="T:System.Collections.Hashtable" />
+        >However, some overloads of the <see cref="T:System.Collections.Hashtable" />
 
         
 
-         constructor take a parameter that is an <see
-         cref="T:System.Collections.IHashCodeProvider" />
+         constructor take a parameter that is an <see cref="T:System.Collections.IHashCodeProvider" />
 
         
 
-         implementation, or a parameter that is an <see
-         cref="T:System.Collections.IComparer" />
+         implementation, or a parameter that is an <see cref="T:System.Collections.IComparer" />
 
         
 
-         implementation, or both. If an <see
-         cref="T:System.Collections.IHashCodeProvider" />
+         implementation, or both. If an <see cref="T:System.Collections.IHashCodeProvider" />
 
         
 
-         implementation is passed to the constructor, the <see
-         cref="M:System.Collections.IHashCodeProvider.GetHashCode(System.Object)" />
+         implementation is passed to the constructor, the <see cref="M:System.Collections.IHashCodeProvider.GetHashCode(System.Object)" />
 
         
 
-         method of that implementation is used as the hash code provider. If an <see
-         cref="T:System.Collections.IComparer" />
+         method of that implementation is used as the hash code provider. If an <see cref="T:System.Collections.IComparer" />
 
         
 
-         implementation is passed to the constructor, the <see
-         cref="M:System.Collections.IComparer.Compare(System.Object,System.Object)" />
+         implementation is passed to the constructor, the <see cref="M:System.Collections.IComparer.Compare(System.Object,System.Object)" />
 
         
 
@@ -152,8 +136,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -172,12 +155,15 @@
           <para>A hash code for the specified object.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 

@@ -13,8 +13,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="P:System.Web.Configuration.AuthorizationRule.Action" />
+        >Use the <see cref="P:System.Web.Configuration.AuthorizationRule.Action" />
 
         
 

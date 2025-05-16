@@ -37,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.BasicHttpSecurity" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.BasicHttpSecurity" />
 
             
 
@@ -68,23 +67,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default security settings are: a <see
-             cref="P:System.ServiceModel.BasicHttpMessageSecurity.ClientCredentialType" />
+            >The default security settings are: a <see cref="P:System.ServiceModel.BasicHttpMessageSecurity.ClientCredentialType" />
 
             
 
-             of <see
-             cref="F:System.ServiceModel.BasicHttpMessageCredentialType.UserName" />
+             of <see cref="F:System.ServiceModel.BasicHttpMessageCredentialType.UserName" />
 
             
 
-            ; and an <see
-             cref="P:System.ServiceModel.BasicHttpMessageSecurity.AlgorithmSuite" />
+            ; and an <see cref="P:System.ServiceModel.BasicHttpMessageSecurity.AlgorithmSuite" />
 
             
 
-             of <see
-             cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.Basic256" />
+             of <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.Basic256" />
 
             
 
@@ -118,13 +113,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this property affects which settings in <see
-             cref="P:System.ServiceModel.BasicHttpSecurity.Transport" />
+            >The value of this property affects which settings in <see cref="P:System.ServiceModel.BasicHttpSecurity.Transport" />
 
             
 
-             or <see
-             cref="P:System.ServiceModel.BasicHttpSecurity.Message" />
+             or <see cref="P:System.ServiceModel.BasicHttpSecurity.Message" />
 
             
 
@@ -158,8 +151,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.HttpTransportSecurity" />
+            >The <see cref="T:System.ServiceModel.HttpTransportSecurity" />
 
             
 

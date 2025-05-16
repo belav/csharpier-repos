@@ -39,74 +39,61 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>ASP.NET supports a control data-binding architecture that enables Web server controls to bind to data in a consistent fashion. Web server controls that bind to data are referred to as data-bound controls, and the classes that facilitate that binding are called data source controls. Data source controls can represent any data source: a relational database, a file, a stream, a business object, and so on. Data source controls present data in a consistent way to data-bound controls, regardless of the source or format of the underlying data.</para>
       <para
-        >You use the data source controls that are provided with ASP.NET, including <see
-         cref="T:System.Web.UI.WebControls.SqlDataSource" />
+        >You use the data source controls that are provided with ASP.NET, including <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.WebControls.AccessDataSource" />
+        , <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
         
 
-        , and <see
-         cref="T:System.Web.UI.WebControls.XmlDataSource" />
+        , and <see cref="T:System.Web.UI.WebControls.XmlDataSource" />
 
         
 
-        , to perform most Web development tasks. You use the base <see
-         cref="T:System.Web.UI.DataSourceControl" />
+        , to perform most Web development tasks. You use the base <see cref="T:System.Web.UI.DataSourceControl" />
 
         
 
          class when you want to implement your own custom data source control.</para
       >
       <para
-        >While any class that implements the <see
-         cref="T:System.Web.UI.IDataSource" />
+        >While any class that implements the <see cref="T:System.Web.UI.IDataSource" />
 
         
 
-         interface is a data source control, most ASP.NET data source controls extend the abstract <see
-         cref="T:System.Web.UI.DataSourceControl" />
+         interface is a data source control, most ASP.NET data source controls extend the abstract <see cref="T:System.Web.UI.DataSourceControl" />
 
         
 
-         class, which provides a base implementation of the <see
-         cref="T:System.Web.UI.IDataSource" />
+         class, which provides a base implementation of the <see cref="T:System.Web.UI.IDataSource" />
 
         
 
-         interface. The <see
-         cref="T:System.Web.UI.DataSourceControl" />
+         interface. The <see cref="T:System.Web.UI.DataSourceControl" />
 
         
 
-         class also provides an implementation of the <see
-         cref="T:System.ComponentModel.IListSource" />
+         class also provides an implementation of the <see cref="T:System.ComponentModel.IListSource" />
 
         
 
          interface, which enables you to programmatically assign the data source control to the DataSource property of a data-bound control and return data to the control as a basic list.</para
       >
       <para
-        >Any ASP.NET control that derives from the <see
-         cref="T:System.Web.UI.WebControls.DataBoundControl" />
+        >Any ASP.NET control that derives from the <see cref="T:System.Web.UI.WebControls.DataBoundControl" />
 
         
 
-         class can bind to a data source control. When a <see
-         cref="T:System.Web.UI.WebControls.DataBoundControl" />
+         class can bind to a data source control. When a <see cref="T:System.Web.UI.WebControls.DataBoundControl" />
 
         
 
-         is bound to a data source control, data binding is performed automatically at run time. You can also use data source controls with ASP.NET controls that expose a DataSource or DataSourceID property and support basic data binding, but are not derived from <see
-         cref="T:System.Web.UI.WebControls.DataBoundControl" />
+         is bound to a data source control, data binding is performed automatically at run time. You can also use data source controls with ASP.NET controls that expose a DataSource or DataSourceID property and support basic data binding, but are not derived from <see cref="T:System.Web.UI.WebControls.DataBoundControl" />
 
         
 
-        . When using these data-bound controls, you must explicitly call the DataBind method. For more information on data binding, see <format
-         type="text/html">
+        . When using these data-bound controls, you must explicitly call the DataBind method. For more information on data binding, see <format type="text/html">
           <a href="f9219396-a0fa-481f-894d-e3d9c67d64f2">Accessing Data with ASP.NET</a>
         </format>
 
@@ -115,69 +102,57 @@
         .</para
       >
       <para
-        >You can think of a data source control as the combination of the <see
-         cref="T:System.Web.UI.DataSourceControl" />
+        >You can think of a data source control as the combination of the <see cref="T:System.Web.UI.DataSourceControl" />
 
         
 
-         object and its associated lists of data, called data source views. Each list of data is represented by a <see
-         cref="T:System.Web.UI.DataSourceView" />
+         object and its associated lists of data, called data source views. Each list of data is represented by a <see cref="T:System.Web.UI.DataSourceView" />
 
         
 
-         object. Because the underlying data storage contains one or more lists of data, a <see
-         cref="T:System.Web.UI.DataSourceControl" />
+         object. Because the underlying data storage contains one or more lists of data, a <see cref="T:System.Web.UI.DataSourceControl" />
 
         
 
-         is always associated with one or more named <see
-         cref="T:System.Web.UI.DataSourceView" />
+         is always associated with one or more named <see cref="T:System.Web.UI.DataSourceView" />
 
         
 
-         objects. The <see
-         cref="T:System.Web.UI.IDataSource" />
+         objects. The <see cref="T:System.Web.UI.IDataSource" />
 
         
 
-         interface defines the methods that all data source controls use to interact with data source views: the <see
-         cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
+         interface defines the methods that all data source controls use to interact with data source views: the <see cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
 
         
 
-         method is used to enumerate the data source views currently associated with the data source control, and the <see
-         cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
+         method is used to enumerate the data source views currently associated with the data source control, and the <see cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
 
         
 
          method is used to retrieve a specific data source view instance by name.</para
       >
       <para
-        >You can also think of the data source control as two distinct interfaces that callers use to access data. The <see
-         cref="T:System.Web.UI.DataSourceControl" />
+        >You can also think of the data source control as two distinct interfaces that callers use to access data. The <see cref="T:System.Web.UI.DataSourceControl" />
 
         
 
-         class is the interface that page developers interact with directly when developing a Web Forms page, and the <see
-         cref="T:System.Web.UI.DataSourceView" />
+         class is the interface that page developers interact with directly when developing a Web Forms page, and the <see cref="T:System.Web.UI.DataSourceView" />
 
         
 
-         class is the interface that data-bound controls and data-bound control authors interact with. Because the <see
-         cref="T:System.Web.UI.DataSourceView" />
+         class is the interface that data-bound controls and data-bound control authors interact with. Because the <see cref="T:System.Web.UI.DataSourceView" />
 
         
 
          object is available only at run time, any state persisted for the data source control or data source view must be exposed directly by the data source control.</para
       >
       <para
-        >There is no visual rendering of ASP.NET data source controls; they are implemented as controls so you can create them declaratively, and to optionally allow them to participate in state management. As a result, data source controls do not support visual features such as <see
-         cref="P:System.Web.UI.DataSourceControl.EnableTheming" />
+        >There is no visual rendering of ASP.NET data source controls; they are implemented as controls so you can create them declaratively, and to optionally allow them to participate in state management. As a result, data source controls do not support visual features such as <see cref="P:System.Web.UI.DataSourceControl.EnableTheming" />
 
         
 
-         or <see
-         cref="P:System.Web.UI.DataSourceControl.SkinID" />
+         or <see cref="P:System.Web.UI.DataSourceControl.SkinID" />
 
         
 
@@ -200,8 +175,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.DataSourceControl" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
@@ -233,12 +207,15 @@
           <para>Applies the style properties that are defined in the page style sheet to the control. </para>
         </summary>
         <param name="page">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Page" />
+          The <see cref="T:System.Web.UI.Page" />
 
           
 
@@ -299,8 +276,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >Gets a <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
@@ -328,8 +304,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Because data source controls do not allow child controls, the <see
-               cref="T:System.Web.UI.DataSourceControl" />
+              >Because data source controls do not allow child controls, the <see cref="T:System.Web.UI.DataSourceControl" />
 
               
 
@@ -344,8 +319,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Web.UI.EmptyControlCollection" />
+            >Returns a <see cref="T:System.Web.UI.EmptyControlCollection" />
 
             
 
@@ -380,8 +354,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the <see
-             cref="T:System.Web.UI.DataSourceControl" />
+            >Because the <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
@@ -415,8 +388,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches the current naming container for a server control with the specified <paramref
-             name="id" />
+            >Searches the current naming container for a server control with the specified <paramref name="id" />
 
             
 
@@ -428,7 +400,11 @@
           <para>The specified control, or null if the specified control does not exist.</para>
         </returns>
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -456,18 +432,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the <see
-             cref="T:System.Web.UI.DataSourceControl" />
+            >Because the <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
-             control has no visual rendering, calling the <see
-             cref="M:System.Web.UI.DataSourceControl.Focus" />
+             control has no visual rendering, calling the <see cref="M:System.Web.UI.DataSourceControl.Focus" />
 
             
 
-             method on it throws a <see
-             cref="T:System.NotSupportedException" />
+             method on it throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -505,16 +478,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can enumerate through the set of views currently associated with the data source control by calling the <see
-             cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
+            >You can enumerate through the set of views currently associated with the data source control by calling the <see cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
 
             
 
              method.</para
           >
           <para
-            >Data source control classes can support one or more views on their underlying data. These views are represented by instances of the <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >Data source control classes can support one or more views on their underlying data. These views are represented by instances of the <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
@@ -522,23 +493,19 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.DataSourceControl" />
+              >The <see cref="T:System.Web.UI.DataSourceControl" />
 
               
 
-               class's default implementation returns null. If you extend the <see
-               cref="T:System.Web.UI.DataSourceControl" />
+               class's default implementation returns null. If you extend the <see cref="T:System.Web.UI.DataSourceControl" />
 
               
 
-               class, override the <see
-               cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
+               class, override the <see cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
 
               
 
-               method to return the specified <see
-               cref="T:System.Web.UI.DataSourceView" />
+               method to return the specified <see cref="T:System.Web.UI.DataSourceView" />
 
               
 
@@ -553,13 +520,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the named <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >Returns the named <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             associated with the <see
-             cref="T:System.Web.UI.DataSourceControl" />
+             associated with the <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
@@ -567,17 +532,19 @@
           >
         </returns>
         <param name="viewName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Web.UI.DataSourceView" />
+          The name of the <see cref="T:System.Web.UI.DataSourceView" />
 
           
 
-           to retrieve. In data source controls that support only one view, such as <see
-           cref="T:System.Web.UI.WebControls.SqlDataSource" />
+           to retrieve. In data source controls that support only one view, such as <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
           
 
@@ -603,61 +570,50 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Collections.ICollection" />
+            >The <see cref="T:System.Collections.ICollection" />
 
             
 
-             collection of names is the allowable set of values that can be passed to the <see
-             cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
+             collection of names is the allowable set of values that can be passed to the <see cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.ListSourceHelper" />
+            >The <see cref="T:System.Web.UI.ListSourceHelper" />
 
             
 
-             class, which is used for the <see
-             cref="T:System.Web.UI.DataSourceControl" />
+             class, which is used for the <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
-             class's <see
-             cref="T:System.ComponentModel.IListSource" />
+             class's <see cref="T:System.ComponentModel.IListSource" />
 
             
 
-             implementation, checks the <see
-             cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
+             implementation, checks the <see cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
 
             
 
-             method for both the <see
-             cref="P:System.Web.UI.DataSourceControl.System#ComponentModel#IListSource#ContainsListCollection" />
+             method for both the <see cref="P:System.Web.UI.DataSourceControl.System#ComponentModel#IListSource#ContainsListCollection" />
 
             
 
-             and <see
-             cref="M:System.Web.UI.DataSourceControl.System#ComponentModel#IListSource#GetList" />
+             and <see cref="M:System.Web.UI.DataSourceControl.System#ComponentModel#IListSource#GetList" />
 
             
 
-             calls to determine whether the data source control is associated with one or more data source views. If <see
-             cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
+             calls to determine whether the data source control is associated with one or more data source views. If <see cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
 
             
 
-             returns null, which is the default implementation of the method, <see
-             cref="P:System.Web.UI.DataSourceControl.System#ComponentModel#IListSource#ContainsListCollection" />
+             returns null, which is the default implementation of the method, <see cref="P:System.Web.UI.DataSourceControl.System#ComponentModel#IListSource#ContainsListCollection" />
 
             
 
-             returns false and <see
-             cref="M:System.Web.UI.DataSourceControl.System#ComponentModel#IListSource#GetList" />
+             returns false and <see cref="M:System.Web.UI.DataSourceControl.System#ComponentModel#IListSource#GetList" />
 
             
 
@@ -665,18 +621,15 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.DataSourceControl" />
+              >The <see cref="T:System.Web.UI.DataSourceControl" />
 
               
 
-               class's default implementation returns null. If you extend the <see
-               cref="T:System.Web.UI.DataSourceControl" />
+               class's default implementation returns null. If you extend the <see cref="T:System.Web.UI.DataSourceControl" />
 
               
 
-               class, override the <see
-               cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
+               class, override the <see cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
 
               
 
@@ -687,13 +640,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of names, representing the list of <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >Gets a collection of names, representing the list of <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             objects associated with the <see
-             cref="T:System.Web.UI.DataSourceControl" />
+             objects associated with the <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
@@ -703,18 +654,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.ICollection" />
+            >An <see cref="T:System.Collections.ICollection" />
 
             
 
-             that contains the names of the <see
-             cref="T:System.Web.UI.DataSourceView" />
+             that contains the names of the <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             objects associated with the <see
-             cref="T:System.Web.UI.DataSourceControl" />
+             objects associated with the <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
@@ -771,21 +719,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.DataSourceControl.RaiseDataSourceChangedEvent(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.DataSourceControl.RaiseDataSourceChangedEvent(System.EventArgs)" />
 
             
 
-             method notifies a data-bound control that the underlying data source or the data cached in memory has changed, and that the control should rebind and perform any necessary additional work. Typically, the <see
-             cref="M:System.Web.UI.DataSourceControl.RaiseDataSourceChangedEvent(System.EventArgs)" />
+             method notifies a data-bound control that the underlying data source or the data cached in memory has changed, and that the control should rebind and perform any necessary additional work. Typically, the <see cref="M:System.Web.UI.DataSourceControl.RaiseDataSourceChangedEvent(System.EventArgs)" />
 
             
 
              method is called when a property of the data source control or a parameter value has changed.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -797,8 +742,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.IDataSource.DataSourceChanged" />
+            >Raises the <see cref="E:System.Web.UI.IDataSource.DataSourceChanged" />
 
             
 
@@ -806,12 +750,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -841,8 +788,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Outputs server control content to a provided <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Outputs server control content to a provided <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -882,13 +828,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the <see
-             cref="T:System.Web.UI.DataSourceControl" />
+            >Because the <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
-             control has no visual rendering, you cannot set the <see
-             cref="P:System.Web.UI.DataSourceControl.SkinID" />
+             control has no visual rendering, you cannot set the <see cref="P:System.Web.UI.DataSourceControl.SkinID" />
 
             
 
@@ -898,8 +842,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the skin to apply to the <see
-             cref="T:System.Web.UI.DataSourceControl" />
+            >Gets the skin to apply to the <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
@@ -928,46 +871,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is used to determine whether the current object can be used as a source of one or more lists of data. Data source controls encapsulate their lists of data as <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >This property is used to determine whether the current object can be used as a source of one or more lists of data. Data source controls encapsulate their lists of data as <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             objects; therefore, when associated with one or more <see
-             cref="T:System.Web.UI.DataSourceView" />
+             objects; therefore, when associated with one or more <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             objects, a <see
-             cref="T:System.Web.UI.DataSourceControl" />
+             objects, a <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
              control represents a list source object and the property returns true.</para
           >
           <para
-            >This property calls the static <see
-             cref="M:System.Web.UI.ListSourceHelper.ContainsListCollection(System.Web.UI.IDataSource)" />
+            >This property calls the static <see cref="M:System.Web.UI.ListSourceHelper.ContainsListCollection(System.Web.UI.IDataSource)" />
 
             
 
-             method to determine whether the current data source control can be used as a source of data. The <see
-             cref="T:System.Web.UI.ListSourceHelper" />
+             method to determine whether the current data source control can be used as a source of data. The <see cref="T:System.Web.UI.ListSourceHelper" />
 
             
 
-             class determines whether the <see
-             cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
+             class determines whether the <see cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
 
             
 
-             method returns a valid collection of view names. If it does, this property returns true. If <see
-             cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
+             method returns a valid collection of view names. If it does, this property returns true. If <see cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
 
             
 
-             returns null, which is the default implementation of the <see
-             cref="T:System.Web.UI.DataSourceControl" />
+             returns null, which is the default implementation of the <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
@@ -994,81 +929,66 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used to retrieve a set of objects that can be used as sources of data. Data source controls encapsulate their lists of data as <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >This method is used to retrieve a set of objects that can be used as sources of data. Data source controls encapsulate their lists of data as <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             objects; therefore, when associated with one or more <see
-             cref="T:System.Web.UI.DataSourceView" />
+             objects; therefore, when associated with one or more <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             objects, a <see
-             cref="T:System.Web.UI.DataSourceControl" />
+             objects, a <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
-             control represents a list source object and the method returns an <see
-             cref="T:System.Collections.IList" />
+             control represents a list source object and the method returns an <see cref="T:System.Collections.IList" />
 
             
 
-             collection of one element, the <see
-             cref="T:System.Web.UI.DataSourceControl" />
+             collection of one element, the <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
              itself.</para
           >
           <para
-            >This method calls the static <see
-             cref="M:System.Web.UI.ListSourceHelper.GetList(System.Web.UI.IDataSource)" />
+            >This method calls the static <see cref="M:System.Web.UI.ListSourceHelper.GetList(System.Web.UI.IDataSource)" />
 
             
 
-             method to retrieve an <see
-             cref="T:System.Collections.IList" />
+             method to retrieve an <see cref="T:System.Collections.IList" />
 
             
 
-             collection of objects that can be used as sources of data. The <see
-             cref="T:System.Web.UI.ListSourceHelper" />
+             collection of objects that can be used as sources of data. The <see cref="T:System.Web.UI.ListSourceHelper" />
 
             
 
-             class determines whether <see
-             cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
+             class determines whether <see cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
 
             
 
-             returns a valid collection of view names. If it does, the <see
-             cref="T:System.Web.UI.ListSourceHelper" />
+             returns a valid collection of view names. If it does, the <see cref="T:System.Web.UI.ListSourceHelper" />
 
             
 
-             class returns an <see
-             cref="T:System.Collections.IList" />
+             class returns an <see cref="T:System.Collections.IList" />
 
             
 
-             collection of one element, the <see
-             cref="T:System.Web.UI.DataSourceControl" />
+             collection of one element, the <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
-             control. If <see
-             cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
+             control. If <see cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
 
             
 
-             returns null, which is the default implementation of the <see
-             cref="T:System.Web.UI.DataSourceControl" />
+             returns null, which is the default implementation of the <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
-             class, the <see
-             cref="T:System.Web.UI.ListSourceHelper" />
+             class, the <see cref="T:System.Web.UI.ListSourceHelper" />
 
             
 
@@ -1082,8 +1002,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IList" />
+            >An <see cref="T:System.Collections.IList" />
 
             
 
@@ -1111,18 +1030,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="viewName" />
+            >The <paramref name="viewName" />
 
             
 
-             parameter is ignored when this method is called on data source controls that support only one view, such as the <see
-             cref="T:System.Web.UI.WebControls.SqlDataSource" />
+             parameter is ignored when this method is called on data source controls that support only one view, such as the <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
             
 
-             and <see
-             cref="T:System.Web.UI.WebControls.AccessDataSource" />
+             and <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
             
 
@@ -1130,23 +1046,19 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.DataSourceControl" />
+              >The <see cref="T:System.Web.UI.DataSourceControl" />
 
               
 
-               class's default implementation, which is called by this interface method, returns null. If you extend the <see
-               cref="T:System.Web.UI.DataSourceControl" />
+               class's default implementation, which is called by this interface method, returns null. If you extend the <see cref="T:System.Web.UI.DataSourceControl" />
 
               
 
-               class, override the <see
-               cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
+               class, override the <see cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
 
               
 
-               method to return the specified <see
-               cref="T:System.Web.UI.DataSourceView" />
+               method to return the specified <see cref="T:System.Web.UI.DataSourceView" />
 
               
 
@@ -1157,13 +1069,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the named <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >Gets the named <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             object associated with the <see
-             cref="T:System.Web.UI.DataSourceControl" />
+             object associated with the <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
@@ -1173,13 +1083,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the named <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >Returns the named <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             associated with the <see
-             cref="T:System.Web.UI.DataSourceControl" />
+             associated with the <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
@@ -1187,17 +1095,19 @@
           >
         </returns>
         <param name="viewName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Web.UI.DataSourceView" />
+          The name of the <see cref="T:System.Web.UI.DataSourceView" />
 
           
 
-           to retrieve. In data source controls that support only one view, such as <see
-           cref="T:System.Web.UI.WebControls.SqlDataSource" />
+           to retrieve. In data source controls that support only one view, such as <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
           
 
@@ -1223,28 +1133,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.DataSourceControl" />
+              >The <see cref="T:System.Web.UI.DataSourceControl" />
 
               
 
-               class's default implementation, which is called by this interface method, returns null, which indicates that only one view is supported. If you extend the <see
-               cref="T:System.Web.UI.DataSourceControl" />
+               class's default implementation, which is called by this interface method, returns null, which indicates that only one view is supported. If you extend the <see cref="T:System.Web.UI.DataSourceControl" />
 
               
 
-               class, override the <see
-               cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
+               class, override the <see cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
 
               
 
-               method to return a collection of view names. A name can be passed to the <see
-               cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
+               method to return a collection of view names. A name can be passed to the <see cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
 
               
 
-               method to return a <see
-               cref="T:System.Web.UI.DataSourceView" />
+               method to return a <see cref="T:System.Web.UI.DataSourceView" />
 
               
 
@@ -1255,13 +1160,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of names, representing the list of <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >Gets a collection of names, representing the list of <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             objects associated with the <see
-             cref="T:System.Web.UI.DataSourceControl" />
+             objects associated with the <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
@@ -1271,18 +1174,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.ICollection" />
+            >An <see cref="T:System.Collections.ICollection" />
 
             
 
-             that contains the names of the <see
-             cref="T:System.Web.UI.DataSourceView" />
+             that contains the names of the <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             objects associated with the <see
-             cref="T:System.Web.UI.DataSourceControl" />
+             objects associated with the <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
@@ -1314,13 +1214,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the <see
-             cref="T:System.Web.UI.DataSourceControl" />
+            >Because the <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
-             control has no visual rendering, the <see
-             cref="P:System.Web.UI.DataSourceControl.Visible" />
+             control has no visual rendering, the <see cref="P:System.Web.UI.DataSourceControl.Visible" />
 
             
 

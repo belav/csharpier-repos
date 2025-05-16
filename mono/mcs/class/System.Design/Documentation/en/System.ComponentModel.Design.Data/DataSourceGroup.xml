@@ -29,8 +29,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Data.DataSourceGroup" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DataSourceGroup" />
 
             
 
@@ -74,8 +73,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Bitmap" />
+            >A <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -85,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets the <see
-             cref="T:System.Drawing.Bitmap" />
+            >When overridden in a derived class, gets the <see cref="T:System.Drawing.Bitmap" />
 
             
 

@@ -2,8 +2,7 @@
 <clause number="8.7.8" title="Instance constructors" informative="true">
   <paragraph>An instance constructor is a member that implements the actions required to initialize an instance of a class. </paragraph>
   <paragraph
-    >The example <code_example
-    >
+    >The example <code_example>
       <![CDATA[
 using System;  
 class Point  
@@ -40,8 +39,7 @@ class Test
 
     
 
-    shows a Point class that provides two public instance constructors, one of which takes no arguments, while the other takes two <keyword
-    >double</keyword>
+    shows a Point class that provides two public instance constructors, one of which takes no arguments, while the other takes two <keyword>double</keyword>
 
     
 

@@ -38,8 +38,7 @@
       <Docs>
         <summary
           >File is a block devices, such as a hard disk 
-          (<c
-          >/dev/hda1</c>
+          (<c>/dev/hda1</c>
 
           
 
@@ -160,20 +159,17 @@
       <Docs>
         <summary
           >File is a symbolic link.  To obtain the link target, use 
-          <see
-           cref="P:Mono.Unix.UnixSymbolicLinkInfo.Contents" />
+          <see cref="P:Mono.Unix.UnixSymbolicLinkInfo.Contents" />
 
           
 
           ,
-          <see
-           cref="P:Mono.Unix.UnixSymbolicLinkInfo.ContentsPath" />
+          <see cref="P:Mono.Unix.UnixSymbolicLinkInfo.ContentsPath" />
 
           
 
            or
-          <see
-           cref="M:Mono.Unix.Native.Syscall.readlink" />
+          <see cref="M:Mono.Unix.Native.Syscall.readlink" />
 
           
 

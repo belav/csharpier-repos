@@ -17,16 +17,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.UndoEngine" />
+        >The <see cref="T:System.ComponentModel.Design.UndoEngine" />
 
         
 
          abstract class provides a default implementation of undo functionality at design time. An undo unit represents a single unit of undoable work. This unit is added to a stack and the user can then walk the stack to undo each action. Undo units typically are designed to toggle, which means that calling undo twice returns the application to its starting state.</para
       >
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.UndoEngine" />
+        >The <see cref="T:System.ComponentModel.Design.UndoEngine" />
 
         
 
@@ -50,8 +48,7 @@
         </item>
       </list>
       <para
-        >With these features, <see
-         cref="T:System.ComponentModel.Design.UndoEngine" />
+        >With these features, <see cref="T:System.ComponentModel.Design.UndoEngine" />
 
         
 
@@ -59,13 +56,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Do not change property values directly. The <see
-           cref="T:System.ComponentModel.Design.UndoEngine" />
+          >Do not change property values directly. The <see cref="T:System.ComponentModel.Design.UndoEngine" />
 
           
 
-           class requires you to use the appropriate <see
-           cref="T:System.ComponentModel.TypeDescriptor" />
+           class requires you to use the appropriate <see cref="T:System.ComponentModel.TypeDescriptor" />
 
           
 
@@ -77,8 +72,7 @@
 
         
 
-         monitors for change notifications to create undo units, and the units themselves consist of serialized object states. The following table shows the services that must be available when <see
-         cref="T:System.ComponentModel.Design.UndoEngine" />
+         monitors for change notifications to create undo units, and the units themselves consist of serialized object states. The following table shows the services that must be available when <see cref="T:System.ComponentModel.Design.UndoEngine" />
 
         
 
@@ -128,18 +122,15 @@
       </list>
       <block subset="none" type="note">
         <para
-          >Because the <see
-           cref="T:System.ComponentModel.Design.UndoEngine" />
+          >Because the <see cref="T:System.ComponentModel.Design.UndoEngine" />
 
           
 
-           class requires <see
-           cref="T:System.ComponentModel.Design.Serialization.ComponentSerializationService" />
+           class requires <see cref="T:System.ComponentModel.Design.Serialization.ComponentSerializationService" />
 
           
 
-           and <see
-           cref="T:System.ComponentModel.Design.IComponentChangeService" />
+           and <see cref="T:System.ComponentModel.Design.IComponentChangeService" />
 
           
 
@@ -167,13 +158,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.Design.UndoEngine" />
+            >The <see cref="T:System.ComponentModel.Design.UndoEngine" />
 
             
 
-             requires several services from the <paramref
-             name="provider" />
+             requires several services from the <paramref name="provider" />
 
             
 
@@ -183,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.UndoEngine" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.UndoEngine" />
 
             
 
@@ -192,7 +180,11 @@
           >
         </summary>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -241,26 +233,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation of the <see
-             cref="M:System.ComponentModel.Design.UndoEngine.CreateUndoUnit(System.String,System.Boolean)" />
+            >The default implementation of the <see cref="M:System.ComponentModel.Design.UndoEngine.CreateUndoUnit(System.String,System.Boolean)" />
 
             
 
-             method simply returns a new <see
-             cref="T:System.ComponentModel.Design.UndoEngine.UndoUnit" />
+             method simply returns a new <see cref="T:System.ComponentModel.Design.UndoEngine.UndoUnit" />
 
             
 
             . </para
           >
           <para
-            >By default, <see
-             cref="T:System.ComponentModel.Design.UndoEngine" />
+            >By default, <see cref="T:System.ComponentModel.Design.UndoEngine" />
 
             
 
-             does nothing with the <paramref
-             name="primary" />
+             does nothing with the <paramref name="primary" />
 
             
 
@@ -270,8 +258,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.ComponentModel.Design.UndoEngine.UndoUnit" />
+            >Creates a new <see cref="T:System.ComponentModel.Design.UndoEngine.UndoUnit" />
 
             
 
@@ -281,8 +268,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.ComponentModel.Design.UndoEngine.UndoUnit" />
+            >A new <see cref="T:System.ComponentModel.Design.UndoEngine.UndoUnit" />
 
             
 
@@ -290,14 +276,22 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the unit to create. </param
         >
         <param name="primary">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -341,8 +335,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.ComponentModel.Design.UndoEngine" />
+            >Releases all resources used by the <see cref="T:System.ComponentModel.Design.UndoEngine" />
 
             
 
@@ -368,8 +361,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.ComponentModel.Design.UndoEngine" />
+            >Releases the unmanaged resources used by the <see cref="T:System.ComponentModel.Design.UndoEngine" />
 
             
 
@@ -377,7 +369,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -400,8 +396,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Enables or disables the <see
-             cref="T:System.ComponentModel.Design.UndoEngine" />
+            >Enables or disables the <see cref="T:System.ComponentModel.Design.UndoEngine" />
 
             
 
@@ -436,7 +431,11 @@
           <para>The requested service, if found.</para>
         </returns>
         <param name="serviceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -467,7 +466,11 @@
           <para>The requested service, or null if the requested service is not found.</para>
         </returns>
         <param name="serviceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -492,8 +495,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.ComponentModel.Design.UndoEngine.Undoing" />
+            >Raises the <see cref="E:System.ComponentModel.Design.UndoEngine.Undoing" />
 
             
 
@@ -501,12 +503,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -531,8 +536,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.ComponentModel.Design.UndoEngine.Undone" />
+            >Raises the <see cref="E:System.ComponentModel.Design.UndoEngine.Undone" />
 
             
 
@@ -540,12 +544,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -601,8 +608,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.ComponentModel.Design.UndoEngine.Undone" />
+            >The <see cref="E:System.ComponentModel.Design.UndoEngine.Undone" />
 
             
 

@@ -20,26 +20,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When an XML Web service client uses the HTTP-POST protocol, by default parameters are encoded within the HTTP body using URL encoding rules and uses plain XML for the response. This protocol uses classes that derive from <see
-         cref="T:System.Web.Services.Protocols.MimeFormatter" />
+        >When an XML Web service client uses the HTTP-POST protocol, by default parameters are encoded within the HTTP body using URL encoding rules and uses plain XML for the response. This protocol uses classes that derive from <see cref="T:System.Web.Services.Protocols.MimeFormatter" />
 
         
 
          to encode parameters and return values into standard MIME formats. The encoders to use are specified in the service description.</para
       >
       <para
-        >If you are building an XML Web service client using ASP.NET, then a proxy class deriving indirectly or directly from <see
-         cref="T:System.Web.Services.Protocols.WebClientProtocol" />
+        >If you are building an XML Web service client using ASP.NET, then a proxy class deriving indirectly or directly from <see cref="T:System.Web.Services.Protocols.WebClientProtocol" />
 
         
 
-         needs to be created for the XML Web service you want to call. When the XML Web service client is calling using HTTP, derive the proxy class <see
-         cref="T:System.Web.Services.Protocols.HttpSimpleClientProtocol" />
+         needs to be created for the XML Web service you want to call. When the XML Web service client is calling using HTTP, derive the proxy class <see cref="T:System.Web.Services.Protocols.HttpSimpleClientProtocol" />
 
         
 
-        , which in turn derives from <see
-         cref="T:System.Web.Services.Protocols.WebClientProtocol" />
+        , which in turn derives from <see cref="T:System.Web.Services.Protocols.WebClientProtocol" />
 
         
 
@@ -50,26 +46,22 @@
 
         
 
-         and <see
-         cref="T:System.Web.Services.Protocols.HttpPostClientProtocol" />
+         and <see cref="T:System.Web.Services.Protocols.HttpPostClientProtocol" />
 
         
 
-         derive from <see
-         cref="T:System.Web.Services.Protocols.HttpSimpleClientProtocol" />
+         derive from <see cref="T:System.Web.Services.Protocols.HttpSimpleClientProtocol" />
 
         
 
-        , providing the support for calling an XML Web service method using HTTP-GET and HTTP-POST respectively. Clients calling an XML Web service using SOAP should derive from <see
-         cref="T:System.Web.Services.Protocols.SoapHttpClientProtocol" />
+        , providing the support for calling an XML Web service method using HTTP-GET and HTTP-POST respectively. Clients calling an XML Web service using SOAP should derive from <see cref="T:System.Web.Services.Protocols.SoapHttpClientProtocol" />
 
         
 
         .</para
       >
       <para
-        >For details on building a proxy class, see <format
-         type="text/html">
+        >For details on building a proxy class, see <format type="text/html">
           <a href="142D91F5-3249-4CFC-A431-1F3ACB76D756"
             >[&lt;topic://cpconcreatingwebserviceproxy&gt;]</a
           >
@@ -96,8 +88,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Protocols.HttpPostClientProtocol" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.HttpPostClientProtocol" />
 
             
 
@@ -126,13 +117,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides the base version of <see
-             cref="M:System.Web.Services.Protocols.WebClientProtocol.GetWebRequest(System.Uri)" />
+            >This method overrides the base version of <see cref="M:System.Web.Services.Protocols.WebClientProtocol.GetWebRequest(System.Uri)" />
 
             
 
-             to specify that the HTTP request to the XML Web service is made using HTTP-POST. By overriding this method, you can customize the <see
-             cref="T:System.Net.WebRequest" />
+             to specify that the HTTP request to the XML Web service is made using HTTP-POST. By overriding this method, you can customize the <see cref="T:System.Net.WebRequest" />
 
             
 
@@ -142,8 +131,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Net.WebRequest" />
+            >Creates a <see cref="T:System.Net.WebRequest" />
 
             
 
@@ -153,8 +141,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.WebRequest" />
+            >The <see cref="T:System.Net.WebRequest" />
 
             
 
@@ -162,17 +149,19 @@
           >
         </returns>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
-           to use when creating the <see
-           cref="T:System.Net.WebRequest" />
+           to use when creating the <see cref="T:System.Net.WebRequest" />
 
           
 

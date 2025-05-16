@@ -46,18 +46,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Without <see
-         cref="T:System.Security.Permissions.ReflectionPermission" />
+        >Without <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
         
 
-        , code can use reflection to access only the public members of objects. Code with <see
-         cref="T:System.Security.Permissions.ReflectionPermission" />
+        , code can use reflection to access only the public members of objects. Code with <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
         
 
-         and the appropriate <see
-         cref="T:System.Security.Permissions.ReflectionPermissionFlag" />
+         and the appropriate <see cref="T:System.Security.Permissions.ReflectionPermissionFlag" />
 
         
 
@@ -65,23 +62,19 @@
       >
       <block subset="none" type="note">
         <para
-          >Because <see
-           cref="T:System.Security.Permissions.ReflectionPermission" />
+          >Because <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
           
 
-           can provide access to non-public types and members, we recommend that you do not grant <see
-           cref="T:System.Security.Permissions.ReflectionPermission" />
+           can provide access to non-public types and members, we recommend that you do not grant <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
           
 
-           to Internet code, except with the <see
-           cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+           to Internet code, except with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
 
           
 
-           flag. <see
-           cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+           flag. <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
 
           
 
@@ -89,21 +82,18 @@
         >
       </block>
       <para
-        >Certain features of reflection emit, such as emitting debug symbols, require <see
-         cref="T:System.Security.Permissions.ReflectionPermission" />
+        >Certain features of reflection emit, such as emitting debug symbols, require <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
         
 
-         with the <see
-         cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+         with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
         
 
          flag.</para
       >
       <para
-        >For more information, see the <see
-         cref="T:System.Security.Permissions.ReflectionPermissionFlag" />
+        >For more information, see the <see cref="T:System.Security.Permissions.ReflectionPermissionFlag" />
 
         
 
@@ -113,13 +103,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Controls access to non-public types and members through the <see
-         cref="N:System.Reflection" />
+        >Controls access to non-public types and members through the <see cref="N:System.Reflection" />
 
         
 
-         APIs. Controls some features of the <see
-         cref="N:System.Reflection.Emit" />
+         APIs. Controls some features of the <see cref="N:System.Reflection.Emit" />
 
         
 
@@ -154,8 +142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.ReflectionPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
             
 
@@ -163,12 +150,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -202,13 +192,11 @@
       <Docs>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentException"
-          >The <paramref
-           name="flag" />
+          >The <paramref name="flag" />
 
           
 
-           parameter contains a value that is not a combination of <see
-           cref="T:System.Security.Permissions.ReflectionPermissionFlag" />
+           parameter contains a value that is not a combination of <see cref="T:System.Security.Permissions.ReflectionPermissionFlag" />
 
           
 
@@ -217,8 +205,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.ReflectionPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
             
 
@@ -226,12 +213,15 @@
           >
         </summary>
         <param name="flag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.ReflectionPermissionFlag" />
+          One of the <see cref="T:System.Security.Permissions.ReflectionPermissionFlag" />
 
           
 
@@ -332,8 +322,7 @@
         <remarks>
           <para
             >The state of the current instance is changed to the state encoded in 
-   <paramref
-             name="esd" />
+   <paramref name="esd" />
 
             
 
@@ -342,8 +331,7 @@
           <block subset="none" type="note">
             <para
               >For the XML encoding for this class, see the 
-      <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+      <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
@@ -352,7 +340,6 @@
             >
             <para
               >This method overrides <see
-
                 cref="M:System.Security.CodeAccessPermission.FromXml(System.Security.SecurityElement)"
                 qualify="true"
               />
@@ -364,13 +351,11 @@
           </block>
         </remarks>
         <exception cref="T:System.ArgumentNullException"
-          >The <paramref
-           name="esd" />
+          >The <paramref name="esd" />
 
           
 
-           parameter is <see
-           langword="null" />
+           parameter is <see langword="null" />
 
           
 
@@ -378,13 +363,11 @@
         >
         <exception cref="T:System.ArgumentException">
           <para
-            >The <paramref
-             name="esd" />
+            >The <paramref name="esd" />
 
             
 
-             parameter is not a <see
-             cref="T:System.Security.Permissions.ReflectionPermission" />
+             parameter is not a <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
             
 
@@ -392,8 +375,7 @@
           >
           <para>-or-</para>
           <para
-            >The <paramref
-             name="esd" />
+            >The <paramref name="esd" />
 
             
 
@@ -405,7 +387,11 @@
           <para>Reconstructs a permission with a specified state from an XML encoding.</para>
         </summary>
         <param name="esd">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -441,18 +427,15 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentException"
-          >The <paramref
-           name="target" />
+          >The <paramref name="target" />
 
           
 
-           parameter is not <see
-           langword="null" />
+           parameter is not <see langword="null" />
 
           
 
-           and is not an instance of <see
-           cref="T:System.Security.Permissions.ReflectionPermission" />
+           and is not an instance of <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
           
 
@@ -471,7 +454,11 @@
           <para>A new permission that represents the intersection of the current permission and the specified permission. This new permission is null if the intersection is empty.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -507,18 +494,15 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentException"
-          >The <paramref
-           name="target" />
+          >The <paramref name="target" />
 
           
 
-           parameter is not <see
-           langword="null" />
+           parameter is not <see langword="null" />
 
           
 
-           and is not an instance of <see
-           cref="T:System.Security.Permissions.ReflectionPermission" />
+           and is not an instance of <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
           
 
@@ -537,7 +521,11 @@
           <para>true if the current permission is a subset of the specified permission; otherwise, false.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -626,8 +614,7 @@
         <remarks>
           <block subset="none" type="note">
             <para
-              >For the XML encoding for this class, see the <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >For the XML encoding for this class, see the <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
@@ -635,7 +622,9 @@
             >
             <para
               >This method overrides <see
-               cref="M:System.Security.CodeAccessPermission.ToXml" qualify="true" />
+                cref="M:System.Security.CodeAccessPermission.ToXml"
+                qualify="true"
+              />
 
               
 
@@ -681,18 +670,15 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentException"
-          >The <paramref
-           name="other " />
+          >The <paramref name="other " />
 
           
 
-          parameter is not <see
-           langword="null" />
+          parameter is not <see langword="null" />
 
           
 
-           and is not an instance of <see
-           cref="T:System.Security.Permissions.ReflectionPermission" />
+           and is not an instance of <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
           
 
@@ -701,8 +687,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see
-             cref="M:System.Security.Permissions.ReflectionPermission.Union(System.Security.IPermission)" />
+            >The result of a call to <see cref="M:System.Security.Permissions.ReflectionPermission.Union(System.Security.IPermission)" />
 
             
 
@@ -718,7 +703,11 @@
           <para>A new permission that represents the union of the current permission and the specified permission.</para>
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

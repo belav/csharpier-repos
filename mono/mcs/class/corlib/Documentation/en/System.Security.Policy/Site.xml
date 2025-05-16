@@ -37,33 +37,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The presence of <see
-         cref="T:System.Security.Policy.Site" />
+        >The presence of <see cref="T:System.Security.Policy.Site" />
 
         
 
-         evidence produces a <see
-         cref="T:System.Security.Permissions.SiteIdentityPermission" />
+         evidence produces a <see cref="T:System.Security.Permissions.SiteIdentityPermission" />
 
         
 
-         in the grant set. If there is a <see
-         cref="M:System.Security.CodeAccessPermission.Demand" />
+         in the grant set. If there is a <see cref="M:System.Security.CodeAccessPermission.Demand" />
 
         
 
-         for <see
-         cref="T:System.Security.Permissions.SiteIdentityPermission" />
+         for <see cref="T:System.Security.Permissions.SiteIdentityPermission" />
 
         
 
-        , the <see
-         cref="T:System.Security.Permissions.SiteIdentityPermission" />
+        , the <see cref="T:System.Security.Permissions.SiteIdentityPermission" />
 
         
 
-         that corresponds to the <see
-         cref="T:System.Security.Policy.Site" />
+         that corresponds to the <see cref="T:System.Security.Policy.Site" />
 
         
 
@@ -98,8 +92,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Policy.Site" />
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.Site" />
 
             
 
@@ -107,7 +100,11 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -136,8 +133,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an equivalent copy of the <see
-             cref="T:System.Security.Policy.Site" />
+            >Creates an equivalent copy of the <see cref="T:System.Security.Policy.Site" />
 
             
 
@@ -147,8 +143,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new object that is identical to the current <see
-             cref="T:System.Security.Policy.Site" />
+            >A new object that is identical to the current <see cref="T:System.Security.Policy.Site" />
 
             
 
@@ -183,8 +178,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Security.Policy.Site" />
+            >Creates a new <see cref="T:System.Security.Policy.Site" />
 
             
 
@@ -196,12 +190,15 @@
           <para>A new site object.</para>
         </returns>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The URL from which to create the new <see
-           cref="T:System.Security.Policy.Site" />
+          The URL from which to create the new <see cref="T:System.Security.Policy.Site" />
 
           
 
@@ -235,8 +232,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an identity permission that corresponds to the current <see
-             cref="T:System.Security.Policy.Site" />
+            >Creates an identity permission that corresponds to the current <see cref="T:System.Security.Policy.Site" />
 
             
 
@@ -246,8 +242,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A site identity permission for the current <see
-             cref="T:System.Security.Policy.Site" />
+            >A site identity permission for the current <see cref="T:System.Security.Policy.Site" />
 
             
 
@@ -255,7 +250,11 @@
           >
         </returns>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -295,8 +294,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares the current <see
-             cref="T:System.Security.Policy.Site" />
+            >Compares the current <see cref="T:System.Security.Policy.Site" />
 
             
 
@@ -306,8 +304,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the two instances of the <see
-             cref="T:System.Security.Policy.Site" />
+            >true if the two instances of the <see cref="T:System.Security.Policy.Site" />
 
             
 
@@ -315,7 +312,11 @@
           >
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -480,8 +481,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string representation of the current <see
-             cref="T:System.Security.Policy.Site" />
+            >Returns a string representation of the current <see cref="T:System.Security.Policy.Site" />
 
             
 

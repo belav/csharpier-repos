@@ -28,8 +28,7 @@
       <list type="bullet">
         <item>
           <para
-            >Apply the <see
-             cref="T:System.Runtime.InteropServices.WindowsRuntime.ReadOnlyArrayAttribute" />
+            >Apply the <see cref="T:System.Runtime.InteropServices.WindowsRuntime.ReadOnlyArrayAttribute" />
 
             
 
@@ -38,8 +37,7 @@
         </item>
         <item>
           <para
-            >Apply the <see
-             cref="T:System.Runtime.InteropServices.WindowsRuntime.WriteOnlyArrayAttribute" />
+            >Apply the <see cref="T:System.Runtime.InteropServices.WindowsRuntime.WriteOnlyArrayAttribute" />
 
             
 
@@ -49,7 +47,7 @@
       </list>
       <para
         >Applying both attributes to a parameter causes an error. For more information, including the standard pattern for making changes to an array, see <see
-         cref="http://go.microsoft.com/fwlink/?LinkId=251026"
+          cref="http://go.microsoft.com/fwlink/?LinkId=251026"
           >Passing arrays to a Windows Runtime component</see
         >
 
@@ -59,8 +57,7 @@
       >
       <block subset="none" type="note">
         <para
-          >Parameters that have the <see
-           cref="T:System.Runtime.InteropServices.WindowsRuntime.ReadOnlyArrayAttribute" />
+          >Parameters that have the <see cref="T:System.Runtime.InteropServices.WindowsRuntime.ReadOnlyArrayAttribute" />
 
           
 
@@ -69,13 +66,11 @@
         <para>If the caller is managed code, the array is not copied. The original array is available to the called method, as it would be in any method call in the .NET Framework. Array contents are mutable in .NET Framework code, so any changes the method makes to the array are visible to the caller. This is important to remember because it affects unit tests written for a wrt component. If the tests are written in managed code, the contents of an array will appear to be mutable during testing. </para>
       </block>
       <para
-        >Applying this attribute to a parameter that has the <see
-         cref="T:System.Runtime.InteropServices.InAttribute" />
+        >Applying this attribute to a parameter that has the <see cref="T:System.Runtime.InteropServices.InAttribute" />
 
         
 
-         or <see
-         cref="T:System.Runtime.InteropServices.OutAttribute" />
+         or <see cref="T:System.Runtime.InteropServices.OutAttribute" />
 
         
 
@@ -104,8 +99,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.WindowsRuntime.ReadOnlyArrayAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.WindowsRuntime.ReadOnlyArrayAttribute" />
 
             
 

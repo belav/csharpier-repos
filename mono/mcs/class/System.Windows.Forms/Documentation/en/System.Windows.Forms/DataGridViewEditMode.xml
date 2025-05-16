@@ -13,26 +13,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by the <see
-         cref="P:System.Windows.Forms.DataGridView.EditMode" />
+        >This enumeration is used by the <see cref="P:System.Windows.Forms.DataGridView.EditMode" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         property of the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
          control. </para
       >
       <para
-        >All <see
-         cref="T:System.Windows.Forms.DataGridViewEditMode" />
+        >All <see cref="T:System.Windows.Forms.DataGridViewEditMode" />
 
         
 
-         values except for <see
-         cref="F:System.Windows.Forms.DataGridViewEditMode.EditProgrammatically" />
+         values except for <see cref="F:System.Windows.Forms.DataGridViewEditMode.EditProgrammatically" />
 
         
 
@@ -42,8 +38,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies how a user starts cell editing in the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >Specifies how a user starts cell editing in the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -131,8 +126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Editing begins only when the <see
-             cref="M:System.Windows.Forms.DataGridView.BeginEdit(System.Boolean)" />
+            >Editing begins only when the <see cref="M:System.Windows.Forms.DataGridView.BeginEdit(System.Boolean)" />
 
             
 

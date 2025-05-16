@@ -4,13 +4,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Resources.Tools" />
+        >The <see cref="N:System.Resources.Tools" />
 
         
 
-         namespace contains the <see
-         cref="T:System.Resources.Tools.StronglyTypedResourceBuilder" />
+         namespace contains the <see cref="T:System.Resources.Tools.StronglyTypedResourceBuilder" />
 
         
 
@@ -20,8 +18,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For more information about strongly-typed resources, see <see
-         cref="T:System.Resources.Tools.StronglyTypedResourceBuilder" />
+        >For more information about strongly-typed resources, see <see cref="T:System.Resources.Tools.StronglyTypedResourceBuilder" />
 
         
 

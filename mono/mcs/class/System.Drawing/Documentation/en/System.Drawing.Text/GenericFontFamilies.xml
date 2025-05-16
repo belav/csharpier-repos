@@ -17,8 +17,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies a generic <see
-         cref="T:System.Drawing.FontFamily" />
+        >Specifies a generic <see cref="T:System.Drawing.FontFamily" />
 
         
 
@@ -39,8 +38,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A generic Monospace <see
-             cref="T:System.Drawing.FontFamily" />
+            >A generic Monospace <see cref="T:System.Drawing.FontFamily" />
 
             
 
@@ -65,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A generic Sans Serif <see
-             cref="T:System.Drawing.FontFamily" />
+            >A generic Sans Serif <see cref="T:System.Drawing.FontFamily" />
 
             
 
@@ -91,8 +88,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A generic Serif <see
-             cref="T:System.Drawing.FontFamily" />
+            >A generic Serif <see cref="T:System.Drawing.FontFamily" />
 
             
 

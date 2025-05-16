@@ -58,8 +58,7 @@
     <example>
       <para
         > The following example shows
-      how to iterate over the elements of a <see
-         cref="T:System.Collections.Hashtable" />
+      how to iterate over the elements of a <see cref="T:System.Collections.Hashtable" />
 
         
 
@@ -74,200 +73,166 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each element is a key/value pair stored in a <see
-         cref="T:System.Collections.DictionaryEntry" />
+        >Each element is a key/value pair stored in a <see cref="T:System.Collections.DictionaryEntry" />
 
         
 
          object. A key cannot be null, but a value can be.</para
       >
       <para
-        >The objects used as keys by a <see
-         cref="T:System.Collections.Hashtable" />
+        >The objects used as keys by a <see cref="T:System.Collections.Hashtable" />
 
         
 
-         are required to override the <see
-         cref="M:System.Object.GetHashCode" />
+         are required to override the <see cref="M:System.Object.GetHashCode" />
 
         
 
-         method (or the <see
-         cref="T:System.Collections.IHashCodeProvider" />
+         method (or the <see cref="T:System.Collections.IHashCodeProvider" />
 
         
 
-         interface) and the <see
-         cref="M:System.Object.Equals(System.Object)" />
+         interface) and the <see cref="M:System.Object.Equals(System.Object)" />
 
         
 
-         method (or the <see
-         cref="T:System.Collections.IComparer" />
+         method (or the <see cref="T:System.Collections.IComparer" />
 
         
 
-         interface). The implementation of both methods and interfaces must handle case sensitivity the same way; otherwise, the <see
-         cref="T:System.Collections.Hashtable" />
+         interface). The implementation of both methods and interfaces must handle case sensitivity the same way; otherwise, the <see cref="T:System.Collections.Hashtable" />
 
         
 
-         might behave incorrectly. For example, when creating a <see
-         cref="T:System.Collections.Hashtable" />
+         might behave incorrectly. For example, when creating a <see cref="T:System.Collections.Hashtable" />
 
         
 
-        , you must use the <see
-         cref="T:System.Collections.CaseInsensitiveHashCodeProvider" />
+        , you must use the <see cref="T:System.Collections.CaseInsensitiveHashCodeProvider" />
 
         
 
-         class (or any case-insensitive <see
-         cref="T:System.Collections.IHashCodeProvider" />
+         class (or any case-insensitive <see cref="T:System.Collections.IHashCodeProvider" />
 
         
 
-         implementation) with the <see
-         cref="T:System.Collections.CaseInsensitiveComparer" />
+         implementation) with the <see cref="T:System.Collections.CaseInsensitiveComparer" />
 
         
 
-         class (or any case-insensitive <see
-         cref="T:System.Collections.IComparer" />
+         class (or any case-insensitive <see cref="T:System.Collections.IComparer" />
 
         
 
          implementation).</para
       >
       <para
-        >Furthermore, these methods must produce the same results when called with the same parameters while the key exists in the <see
-         cref="T:System.Collections.Hashtable" />
+        >Furthermore, these methods must produce the same results when called with the same parameters while the key exists in the <see cref="T:System.Collections.Hashtable" />
 
         
 
-        . An alternative is to use a <see
-         cref="T:System.Collections.Hashtable" />
+        . An alternative is to use a <see cref="T:System.Collections.Hashtable" />
 
         
 
-         constructor with an <see
-         cref="T:System.Collections.IEqualityComparer" />
+         constructor with an <see cref="T:System.Collections.IEqualityComparer" />
 
         
 
-         parameter. If key equality were simply reference equality, the inherited implementation of <see
-         cref="M:System.Object.GetHashCode" />
+         parameter. If key equality were simply reference equality, the inherited implementation of <see cref="M:System.Object.GetHashCode" />
 
         
 
-         and <see
-         cref="M:System.Object.Equals(System.Object)" />
+         and <see cref="M:System.Object.Equals(System.Object)" />
 
         
 
          would suffice.</para
       >
       <para
-        >Key objects must be immutable as long as they are used as keys in the <see
-         cref="T:System.Collections.Hashtable" />
+        >Key objects must be immutable as long as they are used as keys in the <see cref="T:System.Collections.Hashtable" />
 
         
 
         .</para
       >
       <para
-        >When an element is added to the <see
-         cref="T:System.Collections.Hashtable" />
+        >When an element is added to the <see cref="T:System.Collections.Hashtable" />
 
         
 
         , the element is placed into a bucket based on the hash code of the key. Subsequent lookups of the key use the hash code of the key to search in only one particular bucket, thus substantially reducing the number of key comparisons required to find an element.</para
       >
       <para
-        >The load factor of a <see
-         cref="T:System.Collections.Hashtable" />
+        >The load factor of a <see cref="T:System.Collections.Hashtable" />
 
         
 
-         determines the maximum ratio of elements to buckets. Smaller load factors cause faster average lookup times at the cost of increased memory consumption. The default load factor of 1.0 generally provides the best balance between speed and size. A different load factor can also be specified when the <see
-         cref="T:System.Collections.Hashtable" />
+         determines the maximum ratio of elements to buckets. Smaller load factors cause faster average lookup times at the cost of increased memory consumption. The default load factor of 1.0 generally provides the best balance between speed and size. A different load factor can also be specified when the <see cref="T:System.Collections.Hashtable" />
 
         
 
          is created.</para
       >
       <para
-        >As elements are added to a <see
-         cref="T:System.Collections.Hashtable" />
+        >As elements are added to a <see cref="T:System.Collections.Hashtable" />
 
         
 
-        , the actual load factor of the <see
-         cref="T:System.Collections.Hashtable" />
+        , the actual load factor of the <see cref="T:System.Collections.Hashtable" />
 
         
 
-         increases. When the actual load factor reaches the specified load factor, the number of buckets in the <see
-         cref="T:System.Collections.Hashtable" />
+         increases. When the actual load factor reaches the specified load factor, the number of buckets in the <see cref="T:System.Collections.Hashtable" />
 
         
 
-         is automatically increased to the smallest prime number that is larger than twice the current number of <see
-         cref="T:System.Collections.Hashtable" />
+         is automatically increased to the smallest prime number that is larger than twice the current number of <see cref="T:System.Collections.Hashtable" />
 
         
 
          buckets.</para
       >
       <para
-        >Each key object in the <see
-         cref="T:System.Collections.Hashtable" />
+        >Each key object in the <see cref="T:System.Collections.Hashtable" />
 
         
 
-         must provide its own hash function, which can be accessed by calling <see
-         cref="M:System.Collections.Hashtable.GetHash(System.Object)" />
+         must provide its own hash function, which can be accessed by calling <see cref="M:System.Collections.Hashtable.GetHash(System.Object)" />
 
         
 
-        . However, any object implementing <see
-         cref="T:System.Collections.IHashCodeProvider" />
+        . However, any object implementing <see cref="T:System.Collections.IHashCodeProvider" />
 
         
 
-         can be passed to a <see
-         cref="T:System.Collections.Hashtable" />
+         can be passed to a <see cref="T:System.Collections.Hashtable" />
 
         
 
          constructor, and that hash function is used for all objects in the table.</para
       >
       <para
-        >The capacity of a <see
-         cref="T:System.Collections.Hashtable" />
+        >The capacity of a <see cref="T:System.Collections.Hashtable" />
 
         
 
-         is the number of elements the <see
-         cref="T:System.Collections.Hashtable" />
+         is the number of elements the <see cref="T:System.Collections.Hashtable" />
 
         
 
-         can hold. As elements are added to a <see
-         cref="T:System.Collections.Hashtable" />
+         can hold. As elements are added to a <see cref="T:System.Collections.Hashtable" />
 
         
 
         , the capacity is automatically increased as required through reallocation.</para
       >
       <para
-        >For very large <see
-         cref="T:System.Collections.Hashtable" />
+        >For very large <see cref="T:System.Collections.Hashtable" />
 
         
 
-         objects, you can increase the maximum capacity to 2 billion elements on a 64-bit system by setting the enabled attribute of the <format
-         type="text/html">
+         objects, you can increase the maximum capacity to 2 billion elements on a 64-bit system by setting the enabled attribute of the <format type="text/html">
           <a href="5c7ea24a-39ac-4e5f-83b7-b9f9a1b556ab">gcAllowVeryLargeObjects</a>
         </format>
 
@@ -276,13 +241,11 @@
          configuration element to true in the run-time environment.</para
       >
       <para
-        >The foreach statement of the C# language (For Each in Visual Basic) requires the type of each element in the collection. Since each element of the <see
-         cref="T:System.Collections.Hashtable" />
+        >The foreach statement of the C# language (For Each in Visual Basic) requires the type of each element in the collection. Since each element of the <see cref="T:System.Collections.Hashtable" />
 
         
 
-         is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see
-         cref="T:System.Collections.DictionaryEntry" />
+         is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see cref="T:System.Collections.DictionaryEntry" />
 
         
 
@@ -291,13 +254,11 @@
       <para>code reference: System.Collections.Hashtable_ClassExample#01</para>
       <para>The foreach statement is a wrapper around the enumerator, which only allows reading from, not writing to, the collection.</para>
       <para
-        >Because serializing and deserializing an enumerator for a <see
-         cref="T:System.Collections.Hashtable" />
+        >Because serializing and deserializing an enumerator for a <see cref="T:System.Collections.Hashtable" />
 
         
 
-         can cause the elements to become reordered, it is not possible to continue enumeration without calling the <see
-         cref="M:System.Collections.IEnumerator.Reset" />
+         can cause the elements to become reordered, it is not possible to continue enumeration without calling the <see cref="M:System.Collections.IEnumerator.Reset" />
 
         
 
@@ -305,8 +266,7 @@
       >
       <block subset="none" type="note">
         <para
-          >Because keys can be inherited and their behavior changed, their absolute uniqueness cannot be guaranteed by comparisons using the <see
-           cref="M:System.Type.Equals(System.Object)" />
+          >Because keys can be inherited and their behavior changed, their absolute uniqueness cannot be guaranteed by comparisons using the <see cref="M:System.Type.Equals(System.Object)" />
 
           
 
@@ -345,26 +305,22 @@
           <para>The load factor is the maximum ratio of elements to buckets. A smaller load factor means faster lookup at the cost of increased memory consumption.</para>
           <para>When the actual load factor reaches the specified load factor, the number of buckets is automatically increased to the smallest prime number that is larger than twice the current number of buckets.</para>
           <para
-            >The hash code provider dispenses hash codes for keys in the <see
-             cref="T:System.Collections.Hashtable" />
+            >The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             object. The default hash code provider is the key's implementation of <see
-             cref="M:System.Object.GetHashCode" />
+             object. The default hash code provider is the key's implementation of <see cref="M:System.Object.GetHashCode" />
 
             
 
             .</para
           >
           <para
-            >The comparer determines whether two keys are equal. Every key in a <see
-             cref="T:System.Collections.Hashtable" />
+            >The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Hashtable" />
 
             
 
-             must be unique. The default comparer is the key's implementation of <see
-             cref="M:System.Object.Equals(System.Object)" />
+             must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -375,8 +331,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new, empty instance of the <see
-             cref="T:System.Collections.Hashtable" />
+            >Initializes a new, empty instance of the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -412,8 +367,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -425,57 +379,48 @@
           <para>The load factor is the maximum ratio of elements to buckets. A smaller load factor means faster lookup at the cost of increased memory consumption.</para>
           <para>When the actual load factor reaches the specified load factor, the number of buckets is automatically increased to the smallest prime number that is larger than twice the current number of buckets.</para>
           <para
-            >The hash code provider dispenses hash codes for keys in the <see
-             cref="T:System.Collections.Hashtable" />
+            >The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             object. The default hash code provider is the key's implementation of <see
-             cref="M:System.Object.GetHashCode" />
-
-            
-
-            .</para
-          >
-          <para
-            >The comparer determines whether two keys are equal. Every key in a <see
-             cref="T:System.Collections.Hashtable" />
-
-            
-
-             must be unique. The default comparer is the key's implementation of <see
-             cref="M:System.Object.Equals(System.Object)" />
+             object. The default hash code provider is the key's implementation of <see cref="M:System.Object.GetHashCode" />
 
             
 
             .</para
           >
           <para
-            >The elements of the new <see
-             cref="T:System.Collections.Hashtable" />
+            >The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Hashtable" />
 
             
 
-             are sorted in the same order in which the enumerator iterates through the <see
-             cref="T:System.Collections.IDictionary" />
+             must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />
+
+            
+
+            .</para
+          >
+          <para
+            >The elements of the new <see cref="T:System.Collections.Hashtable" />
+
+            
+
+             are sorted in the same order in which the enumerator iterates through the <see cref="T:System.Collections.IDictionary" />
 
             
 
              object.</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >This constructor is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is the number of elements in the <paramref
-             name="d" />
+             is the number of elements in the <paramref name="d" />
 
             
 
@@ -485,18 +430,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Hashtable" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             class by copying the elements from the specified dictionary to the new <see
-             cref="T:System.Collections.Hashtable" />
+             class by copying the elements from the specified dictionary to the new <see cref="T:System.Collections.Hashtable" />
 
             
 
-             object. The new <see
-             cref="T:System.Collections.Hashtable" />
+             object. The new <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -504,17 +446,19 @@
           >
         </summary>
         <param name="d">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IDictionary" />
+          The <see cref="T:System.Collections.IDictionary" />
 
           
 
-           object to copy to a new <see
-           cref="T:System.Collections.Hashtable" />
+           object to copy to a new <see cref="T:System.Collections.Hashtable" />
 
           
 
@@ -548,67 +492,56 @@
           <para>The load factor is the maximum ratio of elements to buckets. A smaller load factor means faster lookup at the cost of increased memory consumption.</para>
           <para>When the actual load factor reaches the specified load factor, the number of buckets is automatically increased to the smallest prime number that is larger than twice the current number of buckets.</para>
           <para
-            >The <see
-             cref="T:System.Collections.IEqualityComparer" />
+            >The <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
-             object includes both the hash code provider and the comparer. If an <see
-             cref="T:System.Collections.IEqualityComparer" />
+             object includes both the hash code provider and the comparer. If an <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
-             is used in the <see
-             cref="T:System.Collections.Hashtable" />
+             is used in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             constructor, the objects used as keys in the <see
-             cref="T:System.Collections.Hashtable" />
+             constructor, the objects used as keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             object are not required to override the <see
-             cref="M:System.Object.GetHashCode" />
+             object are not required to override the <see cref="M:System.Object.GetHashCode" />
 
             
 
-             and <see
-             cref="M:System.Object.Equals(System.Object)" />
+             and <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >The hash code provider dispenses hash codes for keys in the <see
-             cref="T:System.Collections.Hashtable" />
+            >The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-            . The default hash code provider is the key's implementation of <see
-             cref="M:System.Object.GetHashCode" />
-
-            
-
-            .</para
-          >
-          <para
-            >The comparer determines whether two keys are equal. Every key in a <see
-             cref="T:System.Collections.Hashtable" />
-
-            
-
-             must be unique. The default comparer is the key's implementation of <see
-             cref="M:System.Object.Equals(System.Object)" />
+            . The default hash code provider is the key's implementation of <see cref="M:System.Object.GetHashCode" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="T:System.Collections.IEqualityComparer" />
+            >The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Hashtable" />
+
+            
+
+             must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />
+
+            
+
+            .</para
+          >
+          <para
+            >The <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
@@ -619,13 +552,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new, empty instance of the <see
-             cref="T:System.Collections.Hashtable" />
+            >Initializes a new, empty instance of the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             class using the default initial capacity and load factor, and the specified <see
-             cref="T:System.Collections.IEqualityComparer" />
+             class using the default initial capacity and load factor, and the specified <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
@@ -633,17 +564,19 @@
           >
         </summary>
         <param name="equalityComparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IEqualityComparer" />
+          The <see cref="T:System.Collections.IEqualityComparer" />
 
           
 
-           object that defines the hash code provider and the comparer to use with the <see
-           cref="T:System.Collections.Hashtable" />
+           object that defines the hash code provider and the comparer to use with the <see cref="T:System.Collections.Hashtable" />
 
           
 
@@ -682,8 +615,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.Hashtable" />
+            >Specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -692,44 +624,37 @@
           <para>The load factor is the maximum ratio of elements to buckets. A smaller load factor means faster lookup at the cost of increased memory consumption.</para>
           <para>When the actual load factor reaches the specified load factor, the number of buckets is automatically increased to the smallest prime number that is larger than twice the current number of buckets.</para>
           <para
-            >The hash code provider dispenses hash codes for keys in the <see
-             cref="T:System.Collections.Hashtable" />
+            >The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-            . The default hash code provider is the key's implementation of <see
-             cref="M:System.Object.GetHashCode" />
-
-            
-
-            .</para
-          >
-          <para
-            >The comparer determines whether two keys are equal. Every key in a <see
-             cref="T:System.Collections.Hashtable" />
-
-            
-
-             must be unique. The default comparer is the key's implementation of <see
-             cref="M:System.Object.Equals(System.Object)" />
+            . The default hash code provider is the key's implementation of <see cref="M:System.Object.GetHashCode" />
 
             
 
             .</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Hashtable" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+             must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             is <paramref
-             name="capacity" />
+            .</para
+          >
+          <para
+            >This constructor is an O(<paramref name="n" />
+
+            
+
+            ) operation, where <paramref name="n" />
+
+            
+
+             is <paramref name="capacity" />
 
             
 
@@ -739,8 +664,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new, empty instance of the <see
-             cref="T:System.Collections.Hashtable" />
+            >Initializes a new, empty instance of the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -748,12 +672,15 @@
           >
         </summary>
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The approximate number of elements that the <see
-           cref="T:System.Collections.Hashtable" />
+          The approximate number of elements that the <see cref="T:System.Collections.Hashtable" />
 
           
 
@@ -788,98 +715,82 @@
           <para>The load factor is the maximum ratio of elements to buckets. A smaller load factor means faster lookup at the cost of increased memory consumption.</para>
           <para>When the actual load factor reaches the specified load factor, the number of buckets is automatically increased to the smallest prime number that is larger than twice the current number of buckets.</para>
           <para
-            >The <see
-             cref="T:System.Collections.IEqualityComparer" />
+            >The <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
-             object includes both the hash code provider and the comparer. If an <see
-             cref="T:System.Collections.IEqualityComparer" />
+             object includes both the hash code provider and the comparer. If an <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
-             is used in the <see
-             cref="T:System.Collections.Hashtable" />
+             is used in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             constructor, the objects used as keys in the <see
-             cref="T:System.Collections.Hashtable" />
+             constructor, the objects used as keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             object are not required to override the <see
-             cref="M:System.Object.GetHashCode" />
+             object are not required to override the <see cref="M:System.Object.GetHashCode" />
 
             
 
-             and <see
-             cref="M:System.Object.Equals(System.Object)" />
+             and <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >The hash code provider dispenses hash codes for keys in the <see
-             cref="T:System.Collections.Hashtable" />
+            >The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-            . The default hash code provider is the key's implementation of <see
-             cref="M:System.Object.GetHashCode" />
-
-            
-
-            .</para
-          >
-          <para
-            >The comparer determines whether two keys are equal. Every key in a <see
-             cref="T:System.Collections.Hashtable" />
-
-            
-
-             must be unique. The default comparer is the key's implementation of <see
-             cref="M:System.Object.Equals(System.Object)" />
+            . The default hash code provider is the key's implementation of <see cref="M:System.Object.GetHashCode" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="T:System.Collections.IEqualityComparer" />
+            >The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Hashtable" />
+
+            
+
+             must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />
+
+            
+
+            .</para
+          >
+          <para
+            >The <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
              enables scenarios such as doing lookups with case-insensitive strings.</para
           >
           <para
-            >The elements of the new <see
-             cref="T:System.Collections.Hashtable" />
+            >The elements of the new <see cref="T:System.Collections.Hashtable" />
 
             
 
-             are sorted in the same order in which the enumerator iterates through the <see
-             cref="T:System.Collections.IDictionary" />
+             are sorted in the same order in which the enumerator iterates through the <see cref="T:System.Collections.IDictionary" />
 
             
 
              object.</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >This constructor is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is the number of elements in the <paramref
-             name="d" />
+             is the number of elements in the <paramref name="d" />
 
             
 
@@ -889,23 +800,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Hashtable" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             class by copying the elements from the specified dictionary to a new <see
-             cref="T:System.Collections.Hashtable" />
+             class by copying the elements from the specified dictionary to a new <see cref="T:System.Collections.Hashtable" />
 
             
 
-             object. The new <see
-             cref="T:System.Collections.Hashtable" />
+             object. The new <see cref="T:System.Collections.Hashtable" />
 
             
 
-             object has an initial capacity equal to the number of elements copied, and uses the default load factor and the specified <see
-             cref="T:System.Collections.IEqualityComparer" />
+             object has an initial capacity equal to the number of elements copied, and uses the default load factor and the specified <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
@@ -913,34 +820,38 @@
           >
         </summary>
         <param name="d">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IDictionary" />
+          The <see cref="T:System.Collections.IDictionary" />
 
           
 
-           object to copy to a new <see
-           cref="T:System.Collections.Hashtable" />
+           object to copy to a new <see cref="T:System.Collections.Hashtable" />
 
           
 
            object.</param
         >
         <param name="equalityComparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IEqualityComparer" />
+          The <see cref="T:System.Collections.IEqualityComparer" />
 
           
 
-           object that defines the hash code provider and the comparer to use with the <see
-           cref="T:System.Collections.Hashtable" />
+           object that defines the hash code provider and the comparer to use with the <see cref="T:System.Collections.Hashtable" />
 
           
 
@@ -974,57 +885,48 @@
           <para>The load factor is the maximum ratio of elements to buckets. A smaller load factor means faster lookup at the cost of increased memory consumption. A load factor of 1.0 is the best balance between speed and size.</para>
           <para>When the actual load factor reaches the specified load factor, the number of buckets is automatically increased to the smallest prime number that is larger than twice the current number of buckets.</para>
           <para
-            >The hash code provider dispenses hash codes for keys in the <see
-             cref="T:System.Collections.Hashtable" />
+            >The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             object. The default hash code provider is the key's implementation of <see
-             cref="M:System.Object.GetHashCode" />
-
-            
-
-            .</para
-          >
-          <para
-            >The comparer determines whether two keys are equal. Every key in a <see
-             cref="T:System.Collections.Hashtable" />
-
-            
-
-             must be unique. The default comparer is the key's implementation of <see
-             cref="M:System.Object.Equals(System.Object)" />
+             object. The default hash code provider is the key's implementation of <see cref="M:System.Object.GetHashCode" />
 
             
 
             .</para
           >
           <para
-            >The elements of the new <see
-             cref="T:System.Collections.Hashtable" />
+            >The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Hashtable" />
 
             
 
-             are sorted in the same order in which the enumerator iterates through the <see
-             cref="T:System.Collections.IDictionary" />
+             must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />
+
+            
+
+            .</para
+          >
+          <para
+            >The elements of the new <see cref="T:System.Collections.Hashtable" />
+
+            
+
+             are sorted in the same order in which the enumerator iterates through the <see cref="T:System.Collections.IDictionary" />
 
             
 
              object.</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >This constructor is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is the number of elements in the <paramref
-             name="d" />
+             is the number of elements in the <paramref name="d" />
 
             
 
@@ -1034,18 +936,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Hashtable" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             class by copying the elements from the specified dictionary to the new <see
-             cref="T:System.Collections.Hashtable" />
+             class by copying the elements from the specified dictionary to the new <see cref="T:System.Collections.Hashtable" />
 
             
 
-             object. The new <see
-             cref="T:System.Collections.Hashtable" />
+             object. The new <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -1053,24 +952,30 @@
           >
         </summary>
         <param name="d">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IDictionary" />
+          The <see cref="T:System.Collections.IDictionary" />
 
           
 
-           object to copy to a new <see
-           cref="T:System.Collections.Hashtable" />
+           object to copy to a new <see cref="T:System.Collections.Hashtable" />
 
           
 
            object.</param
         >
         <param name="loadFactor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1114,26 +1019,22 @@
           <para>The load factor is the maximum ratio of elements to buckets. A smaller load factor means faster lookup at the cost of increased memory consumption.</para>
           <para>When the actual load factor reaches the specified load factor, the number of buckets is automatically increased to the smallest prime number that is larger than twice the current number of buckets.</para>
           <para
-            >The hash code provider dispenses hash codes for keys in the <see
-             cref="T:System.Collections.Hashtable" />
+            >The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             object. The default hash code provider is the key's implementation of <see
-             cref="M:System.Object.GetHashCode" />
+             object. The default hash code provider is the key's implementation of <see cref="M:System.Object.GetHashCode" />
 
             
 
             .</para
           >
           <para
-            >The comparer determines whether two keys are equal. Every key in a <see
-             cref="T:System.Collections.Hashtable" />
+            >The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Hashtable" />
 
             
 
-             must be unique. The default comparer is the key's implementation of <see
-             cref="M:System.Object.Equals(System.Object)" />
+             must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -1145,8 +1046,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new, empty instance of the <see
-             cref="T:System.Collections.Hashtable" />
+            >Initializes a new, empty instance of the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -1154,29 +1054,34 @@
           >
         </summary>
         <param name="hcp">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IHashCodeProvider" />
+          The <see cref="T:System.Collections.IHashCodeProvider" />
 
           
 
-           object that supplies the hash codes for all keys in the <see
-           cref="T:System.Collections.Hashtable" />
+           object that supplies the hash codes for all keys in the <see cref="T:System.Collections.Hashtable" />
 
           
 
            object.</param
         >
         <param name="comparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IComparer" />
+          The <see cref="T:System.Collections.IComparer" />
 
           
 
@@ -1208,8 +1113,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.Hashtable" />
+            >Specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -1218,85 +1122,71 @@
           <para>The load factor is the maximum ratio of elements to buckets. A smaller load factor means faster lookup at the cost of increased memory consumption.</para>
           <para>When the actual load factor reaches the specified load factor, the number of buckets is automatically increased to the smallest prime number that is larger than twice the current number of buckets.</para>
           <para
-            >The <see
-             cref="T:System.Collections.IEqualityComparer" />
+            >The <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
-             object includes both the hash code provider and the comparer. If an <see
-             cref="T:System.Collections.IEqualityComparer" />
+             object includes both the hash code provider and the comparer. If an <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
-             is used in the <see
-             cref="T:System.Collections.Hashtable" />
+             is used in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             constructor, the objects used as keys in the <see
-             cref="T:System.Collections.Hashtable" />
+             constructor, the objects used as keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             are not required to override the <see
-             cref="M:System.Object.GetHashCode" />
+             are not required to override the <see cref="M:System.Object.GetHashCode" />
 
             
 
-             and <see
-             cref="M:System.Object.Equals(System.Object)" />
+             and <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >The hash code provider dispenses hash codes for keys in the <see
-             cref="T:System.Collections.Hashtable" />
+            >The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-            . The default hash code provider is the key's implementation of <see
-             cref="M:System.Object.GetHashCode" />
-
-            
-
-            .</para
-          >
-          <para
-            >The comparer determines whether two keys are equal. Every key in a <see
-             cref="T:System.Collections.Hashtable" />
-
-            
-
-             must be unique. The default comparer is the key's implementation of <see
-             cref="M:System.Object.Equals(System.Object)" />
+            . The default hash code provider is the key's implementation of <see cref="M:System.Object.GetHashCode" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="T:System.Collections.IEqualityComparer" />
+            >The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Hashtable" />
+
+            
+
+             must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />
+
+            
+
+            .</para
+          >
+          <para
+            >The <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
              enables scenarios such as doing lookups with case-insensitive strings.</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >This constructor is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is the <paramref
-             name="capacity" />
+             is the <paramref name="capacity" />
 
             
 
@@ -1306,13 +1196,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new, empty instance of the <see
-             cref="T:System.Collections.Hashtable" />
+            >Initializes a new, empty instance of the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             class using the specified initial capacity and <see
-             cref="T:System.Collections.IEqualityComparer" />
+             class using the specified initial capacity and <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
@@ -1320,29 +1208,34 @@
           >
         </summary>
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The approximate number of elements that the <see
-           cref="T:System.Collections.Hashtable" />
+          The approximate number of elements that the <see cref="T:System.Collections.Hashtable" />
 
           
 
            object can initially contain. </param
         >
         <param name="equalityComparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IEqualityComparer" />
+          The <see cref="T:System.Collections.IEqualityComparer" />
 
           
 
-           object that defines the hash code provider and the comparer to use with the <see
-           cref="T:System.Collections.Hashtable" />
+           object that defines the hash code provider and the comparer to use with the <see cref="T:System.Collections.Hashtable" />
 
           
 
@@ -1370,8 +1263,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.Hashtable" />
+            >Specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -1380,44 +1272,37 @@
           <para>The load factor is the maximum ratio of elements to buckets. A smaller load factor means faster lookup at the cost of increased memory consumption. A load factor of 1.0 is the best balance between speed and size.</para>
           <para>When the actual load factor reaches the specified load factor, the number of buckets is automatically increased to the smallest prime number that is larger than twice the current number of buckets.</para>
           <para
-            >The hash code provider dispenses hash codes for keys in the <see
-             cref="T:System.Collections.Hashtable" />
+            >The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-            . The default hash code provider is the key's implementation of <see
-             cref="M:System.Object.GetHashCode" />
-
-            
-
-            .</para
-          >
-          <para
-            >The comparer determines whether two keys are equal. Every key in a <see
-             cref="T:System.Collections.Hashtable" />
-
-            
-
-             must be unique. The default comparer is the key's implementation of <see
-             cref="M:System.Object.Equals(System.Object)" />
+            . The default hash code provider is the key's implementation of <see cref="M:System.Object.GetHashCode" />
 
             
 
             .</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Hashtable" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+             must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             is the <paramref
-             name="capacity" />
+            .</para
+          >
+          <para
+            >This constructor is an O(<paramref name="n" />
+
+            
+
+            ) operation, where <paramref name="n" />
+
+            
+
+             is the <paramref name="capacity" />
 
             
 
@@ -1427,8 +1312,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new, empty instance of the <see
-             cref="T:System.Collections.Hashtable" />
+            >Initializes a new, empty instance of the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -1436,19 +1320,26 @@
           >
         </summary>
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The approximate number of elements that the <see
-           cref="T:System.Collections.Hashtable" />
+          The approximate number of elements that the <see cref="T:System.Collections.Hashtable" />
 
           
 
            object can initially contain. </param
         >
         <param name="loadFactor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1482,57 +1373,48 @@
           <para>The load factor is the maximum ratio of elements to buckets. A smaller load factor means faster lookup at the cost of increased memory consumption.</para>
           <para>When the actual load factor reaches the specified load factor, the number of buckets is automatically increased to the smallest prime number that is larger than twice the current number of buckets.</para>
           <para
-            >The hash code provider dispenses hash codes for keys in the <see
-             cref="T:System.Collections.Hashtable" />
+            >The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             object. The default hash code provider is the key's implementation of <see
-             cref="M:System.Object.GetHashCode" />
-
-            
-
-            .</para
-          >
-          <para
-            >The comparer determines whether two keys are equal. Every key in a <see
-             cref="T:System.Collections.Hashtable" />
-
-            
-
-             must be unique. The default comparer is the key's implementation of <see
-             cref="M:System.Object.Equals(System.Object)" />
+             object. The default hash code provider is the key's implementation of <see cref="M:System.Object.GetHashCode" />
 
             
 
             .</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Hashtable" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
-
-            
-
-             is <see
-             cref="P:System.Collections.Hashtable.Count" />
+             must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
             .</para
           >
           <para
-            >Because serializing and deserializing an enumerator for a <see
-             cref="T:System.Collections.Hashtable" />
+            >This constructor is an O(<paramref name="n" />
 
             
 
-             can cause the elements to become reordered, it is not possible to continue enumeration without calling the <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            ) operation, where <paramref name="n" />
+
+            
+
+             is <see cref="P:System.Collections.Hashtable.Count" />
+
+            
+
+            .</para
+          >
+          <para
+            >Because serializing and deserializing an enumerator for a <see cref="T:System.Collections.Hashtable" />
+
+            
+
+             can cause the elements to become reordered, it is not possible to continue enumeration without calling the <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
@@ -1542,18 +1424,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new, empty instance of the <see
-             cref="T:System.Collections.Hashtable" />
+            >Initializes a new, empty instance of the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             class that is serializable using the specified <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             class that is serializable using the specified <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             and <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             and <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -1561,34 +1440,38 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
-           object containing the information required to serialize the <see
-           cref="T:System.Collections.Hashtable" />
+           object containing the information required to serialize the <see cref="T:System.Collections.Hashtable" />
 
           
 
            object.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
-           object containing the source and destination of the serialized stream associated with the <see
-           cref="T:System.Collections.Hashtable" />
+           object containing the source and destination of the serialized stream associated with the <see cref="T:System.Collections.Hashtable" />
 
           
 
@@ -1632,8 +1515,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1645,26 +1527,22 @@
           <para>The load factor is the maximum ratio of elements to buckets. A smaller load factor means faster lookup at the cost of increased memory consumption.</para>
           <para>When the actual load factor reaches the specified load factor, the number of buckets is automatically increased to the smallest prime number that is larger than twice the current number of buckets.</para>
           <para
-            >The hash code provider dispenses hash codes for keys in the <see
-             cref="T:System.Collections.Hashtable" />
+            >The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             object. The default hash code provider is the key's implementation of <see
-             cref="M:System.Object.GetHashCode" />
+             object. The default hash code provider is the key's implementation of <see cref="M:System.Object.GetHashCode" />
 
             
 
             .</para
           >
           <para
-            >The comparer determines whether two keys are equal. Every key in a <see
-             cref="T:System.Collections.Hashtable" />
+            >The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Hashtable" />
 
             
 
-             must be unique. The default comparer is the key's implementation of <see
-             cref="M:System.Object.Equals(System.Object)" />
+             must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -1672,31 +1550,26 @@
           >
           <para>The custom hash code provider and the custom comparer enable scenarios such as doing lookups with case-insensitive strings.</para>
           <para
-            >The elements of the new <see
-             cref="T:System.Collections.Hashtable" />
+            >The elements of the new <see cref="T:System.Collections.Hashtable" />
 
             
 
-             are sorted in the same order in which the enumerator iterates through the <see
-             cref="T:System.Collections.IDictionary" />
+             are sorted in the same order in which the enumerator iterates through the <see cref="T:System.Collections.IDictionary" />
 
             
 
              object.</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >This constructor is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is the number of elements in the <paramref
-             name="d" />
+             is the number of elements in the <paramref name="d" />
 
             
 
@@ -1706,23 +1579,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Hashtable" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             class by copying the elements from the specified dictionary to the new <see
-             cref="T:System.Collections.Hashtable" />
+             class by copying the elements from the specified dictionary to the new <see cref="T:System.Collections.Hashtable" />
 
             
 
-             object. The new <see
-             cref="T:System.Collections.Hashtable" />
+             object. The new <see cref="T:System.Collections.Hashtable" />
 
             
 
-             object has an initial capacity equal to the number of elements copied, and uses the default load factor, and the specified hash code provider and comparer. This API is obsolete. For an alternative, see <see
-             cref="M:System.Collections.Hashtable.#ctor(System.Collections.IDictionary,System.Collections.IEqualityComparer)" />
+             object has an initial capacity equal to the number of elements copied, and uses the default load factor, and the specified hash code provider and comparer. This API is obsolete. For an alternative, see <see cref="M:System.Collections.Hashtable.#ctor(System.Collections.IDictionary,System.Collections.IEqualityComparer)" />
 
             
 
@@ -1730,46 +1599,53 @@
           >
         </summary>
         <param name="d">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IDictionary" />
+          The <see cref="T:System.Collections.IDictionary" />
 
           
 
-           object to copy to a new <see
-           cref="T:System.Collections.Hashtable" />
+           object to copy to a new <see cref="T:System.Collections.Hashtable" />
 
           
 
            object.</param
         >
         <param name="hcp">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IHashCodeProvider" />
+          The <see cref="T:System.Collections.IHashCodeProvider" />
 
           
 
-           object that supplies the hash codes for all keys in the <see
-           cref="T:System.Collections.Hashtable" />
+           object that supplies the hash codes for all keys in the <see cref="T:System.Collections.Hashtable" />
 
           
 
           .</param
         >
         <param name="comparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IComparer" />
+          The <see cref="T:System.Collections.IComparer" />
 
           
 
@@ -1805,98 +1681,82 @@
           <para>The load factor is the maximum ratio of elements to buckets. A smaller load factor means faster lookup at the cost of increased memory consumption. A load factor of 1.0 is the best balance between speed and size.</para>
           <para>When the actual load factor reaches the specified load factor, the number of buckets is automatically increased to the smallest prime number that is larger than twice the current number of buckets.</para>
           <para
-            >The <see
-             cref="T:System.Collections.IEqualityComparer" />
+            >The <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
-             object includes both the hash code provider and the comparer. If an <see
-             cref="T:System.Collections.IEqualityComparer" />
+             object includes both the hash code provider and the comparer. If an <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
-             is used in the <see
-             cref="T:System.Collections.Hashtable" />
+             is used in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             constructor, the objects used as keys in the <see
-             cref="T:System.Collections.Hashtable" />
+             constructor, the objects used as keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             object are not required to override the <see
-             cref="M:System.Object.GetHashCode" />
+             object are not required to override the <see cref="M:System.Object.GetHashCode" />
 
             
 
-             and <see
-             cref="M:System.Object.Equals(System.Object)" />
+             and <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >The hash code provider dispenses hash codes for keys in the <see
-             cref="T:System.Collections.Hashtable" />
+            >The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-            . The default hash code provider is the key's implementation of <see
-             cref="M:System.Object.GetHashCode" />
-
-            
-
-            .</para
-          >
-          <para
-            >The comparer determines whether two keys are equal. Every key in a <see
-             cref="T:System.Collections.Hashtable" />
-
-            
-
-             must be unique. The default comparer is the key's implementation of <see
-             cref="M:System.Object.Equals(System.Object)" />
+            . The default hash code provider is the key's implementation of <see cref="M:System.Object.GetHashCode" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="T:System.Collections.IEqualityComparer" />
+            >The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Hashtable" />
+
+            
+
+             must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />
+
+            
+
+            .</para
+          >
+          <para
+            >The <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
              enables scenarios such as doing lookups with case-insensitive strings.</para
           >
           <para
-            >The elements of the new <see
-             cref="T:System.Collections.Hashtable" />
+            >The elements of the new <see cref="T:System.Collections.Hashtable" />
 
             
 
-             are sorted in the same order in which the enumerator iterates through the <see
-             cref="T:System.Collections.IDictionary" />
+             are sorted in the same order in which the enumerator iterates through the <see cref="T:System.Collections.IDictionary" />
 
             
 
              object.</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >This constructor is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is the number of elements in the <paramref
-             name="d" />
+             is the number of elements in the <paramref name="d" />
 
             
 
@@ -1906,23 +1766,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Hashtable" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             class by copying the elements from the specified dictionary to the new <see
-             cref="T:System.Collections.Hashtable" />
+             class by copying the elements from the specified dictionary to the new <see cref="T:System.Collections.Hashtable" />
 
             
 
-             object. The new <see
-             cref="T:System.Collections.Hashtable" />
+             object. The new <see cref="T:System.Collections.Hashtable" />
 
             
 
-             object has an initial capacity equal to the number of elements copied, and uses the specified load factor and <see
-             cref="T:System.Collections.IEqualityComparer" />
+             object has an initial capacity equal to the number of elements copied, and uses the specified load factor and <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
@@ -1930,41 +1786,49 @@
           >
         </summary>
         <param name="d">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IDictionary" />
+          The <see cref="T:System.Collections.IDictionary" />
 
           
 
-           object to copy to a new <see
-           cref="T:System.Collections.Hashtable" />
+           object to copy to a new <see cref="T:System.Collections.Hashtable" />
 
           
 
            object.</param
         >
         <param name="loadFactor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A number in the range from 0.1 through 1.0 that is multiplied by the default value which provides the best performance. The result is the maximum ratio of elements to buckets.</param
         >
         <param name="equalityComparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IEqualityComparer" />
+          The <see cref="T:System.Collections.IEqualityComparer" />
 
           
 
-           object that defines the hash code provider and the comparer to use with the <see
-           cref="T:System.Collections.Hashtable" />
+           object that defines the hash code provider and the comparer to use with the <see cref="T:System.Collections.Hashtable" />
 
           
 
@@ -2006,8 +1870,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.Hashtable" />
+            >Specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -2016,26 +1879,22 @@
           <para>The load factor is the maximum ratio of elements to buckets. A smaller load factor means faster lookup at the cost of increased memory consumption.</para>
           <para>When the actual load factor reaches the specified load factor, the number of buckets is automatically increased to the smallest prime number that is larger than twice the current number of buckets.</para>
           <para
-            >The hash code provider dispenses hash codes for keys in the <see
-             cref="T:System.Collections.Hashtable" />
+            >The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-            . The default hash code provider is the key's implementation of <see
-             cref="M:System.Object.GetHashCode" />
+            . The default hash code provider is the key's implementation of <see cref="M:System.Object.GetHashCode" />
 
             
 
             .</para
           >
           <para
-            >The comparer determines whether two keys are equal. Every key in a <see
-             cref="T:System.Collections.Hashtable" />
+            >The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Hashtable" />
 
             
 
-             must be unique. The default comparer is the key's implementation of <see
-             cref="M:System.Object.Equals(System.Object)" />
+             must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -2043,18 +1902,15 @@
           >
           <para>The custom hash code provider and the custom comparer enable scenarios such as doing lookups with case-insensitive strings.</para>
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >This constructor is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is the <paramref
-             name="capacity" />
+             is the <paramref name="capacity" />
 
             
 
@@ -2064,8 +1920,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new, empty instance of the <see
-             cref="T:System.Collections.Hashtable" />
+            >Initializes a new, empty instance of the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -2073,41 +1928,49 @@
           >
         </summary>
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The approximate number of elements that the <see
-           cref="T:System.Collections.Hashtable" />
+          The approximate number of elements that the <see cref="T:System.Collections.Hashtable" />
 
           
 
            object can initially contain. </param
         >
         <param name="hcp">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IHashCodeProvider" />
+          The <see cref="T:System.Collections.IHashCodeProvider" />
 
           
 
-           object that supplies the hash codes for all keys in the <see
-           cref="T:System.Collections.Hashtable" />
+           object that supplies the hash codes for all keys in the <see cref="T:System.Collections.Hashtable" />
 
           
 
           .</param
         >
         <param name="comparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IComparer" />
+          The <see cref="T:System.Collections.IComparer" />
 
           
 
@@ -2140,8 +2003,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.Hashtable" />
+            >Specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -2150,85 +2012,71 @@
           <para>The load factor is the maximum ratio of elements to buckets. A smaller load factor means faster lookup at the cost of increased memory consumption. A load factor of 1.0 is the best balance between speed and size.</para>
           <para>When the actual load factor reaches the specified load factor, the number of buckets is automatically increased to the smallest prime number that is larger than twice the current number of buckets.</para>
           <para
-            >The <see
-             cref="T:System.Collections.IEqualityComparer" />
+            >The <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
-             object includes both the hash code provider and the comparer. If an <see
-             cref="T:System.Collections.IEqualityComparer" />
+             object includes both the hash code provider and the comparer. If an <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
-             is used in the <see
-             cref="T:System.Collections.Hashtable" />
+             is used in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             constructor, the objects used as keys in the <see
-             cref="T:System.Collections.Hashtable" />
+             constructor, the objects used as keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             are not required to override the <see
-             cref="M:System.Object.GetHashCode" />
+             are not required to override the <see cref="M:System.Object.GetHashCode" />
 
             
 
-             and <see
-             cref="M:System.Object.Equals(System.Object)" />
+             and <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >The hash code provider dispenses hash codes for keys in the <see
-             cref="T:System.Collections.Hashtable" />
+            >The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-            . The default hash code provider is the key's implementation of <see
-             cref="M:System.Object.GetHashCode" />
-
-            
-
-            .</para
-          >
-          <para
-            >The comparer determines whether two keys are equal. Every key in a <see
-             cref="T:System.Collections.Hashtable" />
-
-            
-
-             must be unique. The default comparer is the key's implementation of <see
-             cref="M:System.Object.Equals(System.Object)" />
+            . The default hash code provider is the key's implementation of <see cref="M:System.Object.GetHashCode" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="T:System.Collections.IEqualityComparer" />
+            >The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Hashtable" />
+
+            
+
+             must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />
+
+            
+
+            .</para
+          >
+          <para
+            >The <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
              enables scenarios such as doing lookups with case-insensitive strings.</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >This constructor is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is the <paramref
-             name="capacity" />
+             is the <paramref name="capacity" />
 
             
 
@@ -2238,13 +2086,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new, empty instance of the <see
-             cref="T:System.Collections.Hashtable" />
+            >Initializes a new, empty instance of the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             class using the specified initial capacity, load factor, and <see
-             cref="T:System.Collections.IEqualityComparer" />
+             class using the specified initial capacity, load factor, and <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
@@ -2252,36 +2098,45 @@
           >
         </summary>
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The approximate number of elements that the <see
-           cref="T:System.Collections.Hashtable" />
+          The approximate number of elements that the <see cref="T:System.Collections.Hashtable" />
 
           
 
            object can initially contain. </param
         >
         <param name="loadFactor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A number in the range from 0.1 through 1.0 that is multiplied by the default value which provides the best performance. The result is the maximum ratio of elements to buckets.</param
         >
         <param name="equalityComparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IEqualityComparer" />
+          The <see cref="T:System.Collections.IEqualityComparer" />
 
           
 
-           object that defines the hash code provider and the comparer to use with the <see
-           cref="T:System.Collections.Hashtable" />
+           object that defines the hash code provider and the comparer to use with the <see cref="T:System.Collections.Hashtable" />
 
           
 
@@ -2322,26 +2177,22 @@
           <para>The load factor is the maximum ratio of elements to buckets. A smaller load factor means faster lookup at the cost of increased memory consumption. A load factor of 1.0 is the best balance between speed and size.</para>
           <para>When the actual load factor reaches the specified load factor, the number of buckets is automatically increased to the smallest prime number that is larger than twice the current number of buckets.</para>
           <para
-            >The hash code provider dispenses hash codes for keys in the <see
-             cref="T:System.Collections.Hashtable" />
+            >The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             object. The default hash code provider is the key's implementation of <see
-             cref="M:System.Object.GetHashCode" />
+             object. The default hash code provider is the key's implementation of <see cref="M:System.Object.GetHashCode" />
 
             
 
             .</para
           >
           <para
-            >The comparer determines whether two keys are equal. Every key in a <see
-             cref="T:System.Collections.Hashtable" />
+            >The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Hashtable" />
 
             
 
-             must be unique. The default comparer is the key's implementation of <see
-             cref="M:System.Object.Equals(System.Object)" />
+             must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -2349,31 +2200,26 @@
           >
           <para>The custom hash code provider and the custom comparer enable scenarios such as doing lookups with case-insensitive strings.</para>
           <para
-            >The elements of the new <see
-             cref="T:System.Collections.Hashtable" />
+            >The elements of the new <see cref="T:System.Collections.Hashtable" />
 
             
 
-             are sorted in the same order in which the enumerator iterates through the <see
-             cref="T:System.Collections.IDictionary" />
+             are sorted in the same order in which the enumerator iterates through the <see cref="T:System.Collections.IDictionary" />
 
             
 
              object.</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >This constructor is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is the number of elements in the <paramref
-             name="d" />
+             is the number of elements in the <paramref name="d" />
 
             
 
@@ -2383,18 +2229,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Hashtable" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             class by copying the elements from the specified dictionary to the new <see
-             cref="T:System.Collections.Hashtable" />
+             class by copying the elements from the specified dictionary to the new <see cref="T:System.Collections.Hashtable" />
 
             
 
-             object. The new <see
-             cref="T:System.Collections.Hashtable" />
+             object. The new <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -2402,53 +2245,64 @@
           >
         </summary>
         <param name="d">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IDictionary" />
+          The <see cref="T:System.Collections.IDictionary" />
 
           
 
-           object to copy to a new <see
-           cref="T:System.Collections.Hashtable" />
+           object to copy to a new <see cref="T:System.Collections.Hashtable" />
 
           
 
            object.</param
         >
         <param name="loadFactor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A number in the range from 0.1 through 1.0 that is multiplied by the default value which provides the best performance. The result is the maximum ratio of elements to buckets.</param
         >
         <param name="hcp">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IHashCodeProvider" />
+          The <see cref="T:System.Collections.IHashCodeProvider" />
 
           
 
-           object that supplies the hash codes for all keys in the <see
-           cref="T:System.Collections.Hashtable" />
+           object that supplies the hash codes for all keys in the <see cref="T:System.Collections.Hashtable" />
 
           
 
           .</param
         >
         <param name="comparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IComparer" />
+          The <see cref="T:System.Collections.IComparer" />
 
           
 
@@ -2486,8 +2340,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.Hashtable" />
+            >Specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -2496,26 +2349,22 @@
           <para>The load factor is the maximum ratio of elements to buckets. A smaller load factor means faster lookup at the cost of increased memory consumption. A load factor of 1.0 is the best balance between speed and size.</para>
           <para>When the actual load factor reaches the specified load factor, the number of buckets is automatically increased to the smallest prime number that is larger than twice the current number of buckets.</para>
           <para
-            >The hash code provider dispenses hash codes for keys in the <see
-             cref="T:System.Collections.Hashtable" />
+            >The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-            . The default hash code provider is the key's implementation of <see
-             cref="M:System.Object.GetHashCode" />
+            . The default hash code provider is the key's implementation of <see cref="M:System.Object.GetHashCode" />
 
             
 
             .</para
           >
           <para
-            >The comparer determines whether two keys are equal. Every key in a <see
-             cref="T:System.Collections.Hashtable" />
+            >The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Hashtable" />
 
             
 
-             must be unique. The default comparer is the key's implementation of <see
-             cref="M:System.Object.Equals(System.Object)" />
+             must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -2523,18 +2372,15 @@
           >
           <para>The custom hash code provider and the custom comparer enable scenarios such as doing lookups with case-insensitive strings.</para>
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >This constructor is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is the <paramref
-             name="capacity" />
+             is the <paramref name="capacity" />
 
             
 
@@ -2544,8 +2390,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new, empty instance of the <see
-             cref="T:System.Collections.Hashtable" />
+            >Initializes a new, empty instance of the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -2553,48 +2398,60 @@
           >
         </summary>
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The approximate number of elements that the <see
-           cref="T:System.Collections.Hashtable" />
+          The approximate number of elements that the <see cref="T:System.Collections.Hashtable" />
 
           
 
            object can initially contain. </param
         >
         <param name="loadFactor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A number in the range from 0.1 through 1.0 that is multiplied by the default value which provides the best performance. The result is the maximum ratio of elements to buckets.</param
         >
         <param name="hcp">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IHashCodeProvider" />
+          The <see cref="T:System.Collections.IHashCodeProvider" />
 
           
 
-           object that supplies the hash codes for all keys in the <see
-           cref="T:System.Collections.Hashtable" />
+           object that supplies the hash codes for all keys in the <see cref="T:System.Collections.Hashtable" />
 
           
 
           .</param
         >
         <param name="comparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IComparer" />
+          The <see cref="T:System.Collections.IComparer" />
 
           
 
@@ -2632,8 +2489,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -2651,56 +2507,46 @@
           <para>A key cannot be null, but a value can be.</para>
           <para>An object that has no correlation between its state and its hash code value should typically not be used as the key. For example, String objects are better than StringBuilder objects for use as keys.</para>
           <para
-            >You can also use the <see
-             cref="P:System.Collections.Hashtable.Item(System.Object)" />
+            >You can also use the <see cref="P:System.Collections.Hashtable.Item(System.Object)" />
 
             
 
-             property to add new elements by setting the value of a key that does not exist in the <see
-             cref="T:System.Collections.Hashtable" />
+             property to add new elements by setting the value of a key that does not exist in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-            ; for example, myCollection["myNonexistentKey"] = myValue. However, if the specified key already exists in the <see
-             cref="T:System.Collections.Hashtable" />
+            ; for example, myCollection["myNonexistentKey"] = myValue. However, if the specified key already exists in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-            , setting the <see
-             cref="P:System.Collections.Hashtable.Item(System.Object)" />
+            , setting the <see cref="P:System.Collections.Hashtable.Item(System.Object)" />
 
             
 
-             property overwrites the old value. In contrast, the <see
-             cref="M:System.Collections.Hashtable.Add(System.Object,System.Object)" />
+             property overwrites the old value. In contrast, the <see cref="M:System.Collections.Hashtable.Add(System.Object,System.Object)" />
 
             
 
              method does not modify existing elements.</para
           >
           <para
-            >If <see
-             cref="P:System.Collections.Hashtable.Count" />
+            >If <see cref="P:System.Collections.Hashtable.Count" />
 
             
 
-             is less than the capacity of the <see
-             cref="T:System.Collections.Hashtable" />
+             is less than the capacity of the <see cref="T:System.Collections.Hashtable" />
 
             
 
-            , this method is an O(1) operation. If the capacity needs to be increased to accommodate the new element, this method becomes an O(<paramref
-             name="n" />
+            , this method is an O(1) operation. If the capacity needs to be increased to accommodate the new element, this method becomes an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Hashtable.Count" />
+             is <see cref="P:System.Collections.Hashtable.Count" />
 
             
 
@@ -2710,8 +2556,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an element with the specified key and value into the <see
-             cref="T:System.Collections.Hashtable" />
+            >Adds an element with the specified key and value into the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -2719,14 +2564,22 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key of the element to add. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2771,18 +2624,15 @@
              is set to zero, and references to other objects from elements of the collection are also released. The capacity remains unchanged.</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Hashtable.Count" />
+             is <see cref="P:System.Collections.Hashtable.Count" />
 
             
 
@@ -2792,8 +2642,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all elements from the <see
-             cref="T:System.Collections.Hashtable" />
+            >Removes all elements from the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -2826,41 +2675,34 @@
           <para>A shallow copy of a collection copies only the elements of the collection, whether they are reference types or value types, but it does not copy the objects that the references refer to. The references in the new collection point to the same objects that the references in the original collection point to.</para>
           <para>In contrast, a deep copy of a collection copies the elements and everything directly or indirectly referenced by the elements.</para>
           <para
-            >The <see
-             cref="T:System.Collections.Hashtable" />
+            >The <see cref="T:System.Collections.Hashtable" />
 
             
 
-             clone has the same count, the same capacity, the same <see
-             cref="T:System.Collections.IHashCodeProvider" />
+             clone has the same count, the same capacity, the same <see cref="T:System.Collections.IHashCodeProvider" />
 
             
 
-             implementation, and the same <see
-             cref="T:System.Collections.IComparer" />
+             implementation, and the same <see cref="T:System.Collections.IComparer" />
 
             
 
-             implementation as the original <see
-             cref="T:System.Collections.Hashtable" />
+             implementation as the original <see cref="T:System.Collections.Hashtable" />
 
             
 
             .</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Hashtable.Count" />
+             is <see cref="P:System.Collections.Hashtable.Count" />
 
             
 
@@ -2870,8 +2712,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a shallow copy of the <see
-             cref="T:System.Collections.Hashtable" />
+            >Creates a shallow copy of the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -2881,8 +2722,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A shallow copy of the <see
-             cref="T:System.Collections.Hashtable" />
+            >A shallow copy of the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -2924,13 +2764,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Collections.IComparer" />
+            >Gets or sets the <see cref="T:System.Collections.IComparer" />
 
             
 
-             to use for the <see
-             cref="T:System.Collections.Hashtable" />
+             to use for the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -2967,8 +2805,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -2981,13 +2818,11 @@
 
             
 
-             implements <see
-             cref="M:System.Collections.IDictionary.Contains(System.Object)" />
+             implements <see cref="M:System.Collections.IDictionary.Contains(System.Object)" />
 
             
 
-            . It behaves exactly as <see
-             cref="M:System.Collections.Hashtable.ContainsKey(System.Object)" />
+            . It behaves exactly as <see cref="M:System.Collections.Hashtable.ContainsKey(System.Object)" />
 
             
 
@@ -2995,33 +2830,27 @@
           >
           <para>This method is an O(1) operation.</para>
           <para
-            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods on <paramref
-             name="item" />
+             methods on <paramref name="item" />
 
             
 
-             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods of the <paramref
-             name="item" />
+             methods of the <paramref name="item" />
 
             
 
@@ -3031,8 +2860,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Collections.Hashtable" />
+            >Determines whether the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -3042,8 +2870,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Collections.Hashtable" />
+            >true if the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -3051,12 +2878,15 @@
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key to locate in the <see
-           cref="T:System.Collections.Hashtable" />
+          The key to locate in the <see cref="T:System.Collections.Hashtable" />
 
           
 
@@ -3093,8 +2923,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -3103,8 +2932,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method behaves exactly as <see
-             cref="M:System.Collections.Hashtable.Contains(System.Object)" />
+            >This method behaves exactly as <see cref="M:System.Collections.Hashtable.Contains(System.Object)" />
 
             
 
@@ -3112,33 +2940,27 @@
           >
           <para>This method is an O(1) operation.</para>
           <para
-            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods on <paramref
-             name="item" />
+             methods on <paramref name="item" />
 
             
 
-             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods of the <paramref
-             name="item" />
+             methods of the <paramref name="item" />
 
             
 
@@ -3148,8 +2970,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Collections.Hashtable" />
+            >Determines whether the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -3159,8 +2980,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Collections.Hashtable" />
+            >true if the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -3168,12 +2988,15 @@
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key to locate in the <see
-           cref="T:System.Collections.Hashtable" />
+          The key to locate in the <see cref="T:System.Collections.Hashtable" />
 
           
 
@@ -3208,64 +3031,53 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The values of the elements of the <see
-             cref="T:System.Collections.Hashtable" />
+            >The values of the elements of the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             are compared to the specified value using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             are compared to the specified value using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >This method performs a linear search; therefore, this method is an O(<paramref
-             name="n" />
+            >This method performs a linear search; therefore, this method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Hashtable.Count" />
+             is <see cref="P:System.Collections.Hashtable.Count" />
 
             
 
             .</para
           >
           <para
-            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods on <paramref
-             name="item" />
+             methods on <paramref name="item" />
 
             
 
-             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods of the <paramref
-             name="item" />
+             methods of the <paramref name="item" />
 
             
 
@@ -3275,8 +3087,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Collections.Hashtable" />
+            >Determines whether the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -3286,13 +3097,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Collections.Hashtable" />
+            >true if the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             contains an element with the specified <paramref
-             name="value" />
+             contains an element with the specified <paramref name="value" />
 
             
 
@@ -3300,12 +3109,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value to locate in the <see
-           cref="T:System.Collections.Hashtable" />
+          The value to locate in the <see cref="T:System.Collections.Hashtable" />
 
           
 
@@ -3346,8 +3158,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -3374,13 +3185,11 @@
 
             
 
-             &gt; <paramref
-             name="array" />
+             &gt; <paramref name="array" />
 
             
 
-            .Length - The <see
-             cref="P:System.Collections.Hashtable.Count" />
+            .Length - The <see cref="P:System.Collections.Hashtable.Count" />
 
             
 
@@ -3388,8 +3197,7 @@
           >
         </exception>
         <exception cref="T:System.InvalidCastException"
-          >The type of the current instance is not assignment-compatible with the type of <paramref
-           name="array" />
+          >The type of the current instance is not assignment-compatible with the type of <paramref name="array" />
 
           
 
@@ -3398,47 +3206,40 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The elements are copied to the <see
-             cref="T:System.Array" />
+            >The elements are copied to the <see cref="T:System.Array" />
 
             
 
-             in the same order in which the enumerator iterates through the <see
-             cref="T:System.Collections.Hashtable" />
+             in the same order in which the enumerator iterates through the <see cref="T:System.Collections.Hashtable" />
 
             
 
             .</para
           >
           <para
-            >To copy only the keys in the <see
-             cref="T:System.Collections.Hashtable" />
+            >To copy only the keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
             , use Hashtable.Keys.CopyTo.</para
           >
           <para
-            >To copy only the values in the <see
-             cref="T:System.Collections.Hashtable" />
+            >To copy only the values in the <see cref="T:System.Collections.Hashtable" />
 
             
 
             , use Hashtable.Values.CopyTo.</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Hashtable.Count" />
+             is <see cref="P:System.Collections.Hashtable.Count" />
 
             
 
@@ -3448,13 +3249,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see
-             cref="T:System.Collections.Hashtable" />
+            >Copies the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             elements to a one-dimensional <see
-             cref="T:System.Array" />
+             elements to a one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -3462,39 +3261,42 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the <see
-           cref="T:System.Collections.DictionaryEntry" />
+           that is the destination of the <see cref="T:System.Collections.DictionaryEntry" />
 
           
 
-           objects copied from <see
-           cref="T:System.Collections.Hashtable" />
+           objects copied from <see cref="T:System.Collections.Hashtable" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing. </param
         >
         <param name="arrayIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -3523,8 +3325,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
@@ -3539,8 +3340,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of key/value pairs contained in the <see
-             cref="T:System.Collections.Hashtable" />
+            >Gets the number of key/value pairs contained in the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -3573,33 +3373,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Collections.IEqualityComparer" />
+            >The <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
-             includes both the comparer and the hash code provider. If an <see
-             cref="T:System.Collections.IEqualityComparer" />
+             includes both the comparer and the hash code provider. If an <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
-             is used in the <see
-             cref="T:System.Collections.Hashtable" />
+             is used in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             constructor, the objects used as keys in the <see
-             cref="T:System.Collections.Hashtable" />
+             constructor, the objects used as keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             are not required to override the <see
-             cref="M:System.Object.GetHashCode" />
+             are not required to override the <see cref="M:System.Object.GetHashCode" />
 
             
 
-             and <see
-             cref="M:System.Object.Equals(System.Object)" />
+             and <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -3610,13 +3404,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Collections.IEqualityComparer" />
+            >Gets the <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
-             to use for the <see
-             cref="T:System.Collections.Hashtable" />
+             to use for the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -3655,23 +3447,19 @@
           <para>The foreach statement of the C# language (for each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
           <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
           <para
-            >Initially, the enumerator is positioned before the first element in the collection. <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Initially, the enumerator is positioned before the first element in the collection. <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             also brings the enumerator back to this position.  At this position, <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             also brings the enumerator back to this position.  At this position, <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             is undefined. Therefore, you must call <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is undefined. Therefore, you must call <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             to advance the enumerator to the first element of the collection before reading the value of <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -3682,66 +3470,54 @@
 
             
 
-             returns the same object until either <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             is called. <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             sets <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             sets <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              to the next element.</para
           >
           <para
-            >If <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returns false. When the enumerator is at this position, subsequent calls to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             also return false. If the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returned false, <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             returned false, <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             is undefined. To set <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             is undefined. To set <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             to the first element of the collection again, you can call <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             to the first element of the collection again, you can call <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             followed by <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             followed by <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
@@ -3751,13 +3527,11 @@
           <para>The enumerator does not have exclusive access to the collection; therefore, enumerating through a collection is intrinsically not a thread safe procedure.  To guarantee thread safety during enumeration, you can lock the collection during the entire enumeration.  To allow the collection to be accessed by multiple threads for reading and writing, you must implement your own synchronization.</para>
           <para>This method is an O(1) operation.</para>
           <para
-            >Because serializing and deserializing an enumerator for a <see
-             cref="T:System.Collections.Hashtable" />
+            >Because serializing and deserializing an enumerator for a <see cref="T:System.Collections.Hashtable" />
 
             
 
-             can cause the elements to become reordered, it is not possible to continue enumeration without calling the <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             can cause the elements to become reordered, it is not possible to continue enumeration without calling the <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
@@ -3767,13 +3541,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >Returns an <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
-             that iterates through the <see
-             cref="T:System.Collections.Hashtable" />
+             that iterates through the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -3783,13 +3555,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >An <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Collections.Hashtable" />
+             for the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -3827,8 +3597,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -3837,18 +3606,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the hash table was created with a specific <see
-             cref="T:System.Collections.IHashCodeProvider" />
+            >If the hash table was created with a specific <see cref="T:System.Collections.IHashCodeProvider" />
 
             
 
-             implementation, this method uses that hash code provider; otherwise, it uses the <see
-             cref="M:System.Object.GetHashCode" />
+             implementation, this method uses that hash code provider; otherwise, it uses the <see cref="M:System.Object.GetHashCode" />
 
             
 
-             implementation of <paramref
-             name="key" />
+             implementation of <paramref name="key" />
 
             
 
@@ -3862,22 +3628,22 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The hash code for <paramref
-             name="key" />
+          <para>The hash code for <paramref name="key" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -3912,18 +3678,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Hashtable.Count" />
+             is <see cref="P:System.Collections.Hashtable.Count" />
 
             
 
@@ -3933,13 +3696,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+            >Implements the <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
-             interface and returns the data needed to serialize the <see
-             cref="T:System.Collections.Hashtable" />
+             interface and returns the data needed to serialize the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -3947,34 +3708,38 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
-           object containing the information required to serialize the <see
-           cref="T:System.Collections.Hashtable" />
+           object containing the information required to serialize the <see cref="T:System.Collections.Hashtable" />
 
           
 
           . </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
-           object containing the source and destination of the serialized stream associated with the <see
-           cref="T:System.Collections.Hashtable" />
+           object containing the source and destination of the serialized stream associated with the <see cref="T:System.Collections.Hashtable" />
 
           
 
@@ -4043,8 +3808,7 @@
 
              if the
    current instance has a fixed size; otherwise,
-<see
-             langword="false" />
+<see langword="false" />
 
             
 
@@ -4060,8 +3824,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Collections.Hashtable" />
+            >Gets a value indicating whether the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -4097,8 +3860,7 @@
 
              if the
    current instance is read-only; otherwise,
-<see
-             langword="false" />
+<see langword="false" />
 
             
 
@@ -4114,8 +3876,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Collections.Hashtable" />
+            >Gets a value indicating whether the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -4151,8 +3912,7 @@
 
              if access to
    the current instance is synchronized
-   (thread-safe); otherwise, <see
-             langword="false" />
+   (thread-safe); otherwise, <see langword="false" />
 
             
 
@@ -4162,13 +3922,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.Hashtable" />
+            >A <see cref="T:System.Collections.Hashtable" />
 
             
 
-              can support one writer and multiple readers concurrently. To support multiple writers, all operations must be done through the wrapper returned by the <see
-             cref="M:System.Collections.Hashtable.Synchronized(System.Collections.Hashtable)" />
+              can support one writer and multiple readers concurrently. To support multiple writers, all operations must be done through the wrapper returned by the <see cref="M:System.Collections.Hashtable.Synchronized(System.Collections.Hashtable)" />
 
             
 
@@ -4176,8 +3934,7 @@
           >
           <para>Enumerating through a collection is intrinsically not a thread safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
           <para
-            >The following code example shows how to lock the collection using the <see
-             cref="P:System.Collections.Hashtable.SyncRoot" />
+            >The following code example shows how to lock the collection using the <see cref="P:System.Collections.Hashtable.SyncRoot" />
 
             
 
@@ -4188,8 +3945,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see
-             cref="T:System.Collections.Hashtable" />
+            >Gets a value indicating whether access to the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -4226,26 +3982,22 @@
         <value>
           <para
             > The value in the current instance that is associated
-      with <paramref
-             name="key" />
+      with <paramref name="key" />
 
             
 
-            . If <paramref
-             name="key" />
+            . If <paramref name="key" />
 
             
 
              is
       not contained in the current instance, attempting to get it returns
-   <see
-             langword="null" />
+   <see langword="null" />
 
             
 
             , and attempting to set it creates a new entry
-      using <paramref
-             name="key" />
+      using <paramref name="key" />
 
             
 
@@ -4259,8 +4011,7 @@
             <block subset="none" type="note"
               >This property provides the ability to
       access a specific element in the current instance using the following notation:
-      <c
-              >myCollection[key]</c>
+      <c>myCollection[key]</c>
 
               
 
@@ -4274,8 +4025,7 @@
           </para>
           <para>
             <block subset="none" type="default"
-              >If this property is being set and <paramref
-               name="key" />
+              >If this property is being set and <paramref name="key" />
 
               
 
@@ -4290,8 +4040,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -4300,8 +4049,7 @@
         <exception cref="T:System.NotSupportedException">
           <para>The property is being set and the current instance is read-only.</para>
           <para
-            >The property is being set, <paramref
-             name="key" />
+            >The property is being set, <paramref name="key" />
 
             
 
@@ -4344,8 +4092,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -4357,8 +4104,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -4368,23 +4114,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the hash table was created with a specific <see
-             cref="T:System.Collections.IComparer" />
+            >If the hash table was created with a specific <see cref="T:System.Collections.IComparer" />
 
             
 
-             implementation, this method uses that comparer; that is, <see
-             cref="M:System.Collections.IComparer.Compare(System.Object,System.Object)" />
+             implementation, this method uses that comparer; that is, <see cref="M:System.Collections.IComparer.Compare(System.Object,System.Object)" />
 
             
 
-             (<paramref
-             name="item" />
+             (<paramref name="item" />
 
             
 
-            , <paramref
-             name="key" />
+            , <paramref name="key" />
 
             
 
@@ -4395,13 +4137,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares a specific <see
-             cref="T:System.Object" />
+            >Compares a specific <see cref="T:System.Object" />
 
             
 
-             with a specific key in the <see
-             cref="T:System.Collections.Hashtable" />
+             with a specific key in the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -4411,13 +4151,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="item" />
+            >true if <paramref name="item" />
 
             
 
-             and <paramref
-             name="key" />
+             and <paramref name="key" />
 
             
 
@@ -4425,34 +4163,38 @@
           >
         </returns>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to compare with <paramref
-           name="key" />
+           to compare with <paramref name="key" />
 
           
 
           . </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key in the <see
-           cref="T:System.Collections.Hashtable" />
+          The key in the <see cref="T:System.Collections.Hashtable" />
 
           
 
-           to compare with <paramref
-           name="item" />
+           to compare with <paramref name="item" />
 
           
 
@@ -4487,8 +4229,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Collections.ICollection" />
+            >A <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -4498,46 +4239,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The order of the keys in the <see
-             cref="T:System.Collections.ICollection" />
+            >The order of the keys in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             is unspecified, but it is the same order as the associated values in the <see
-             cref="T:System.Collections.ICollection" />
+             is unspecified, but it is the same order as the associated values in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             returned by the <see
-             cref="P:System.Collections.Hashtable.Values" />
+             returned by the <see cref="P:System.Collections.Hashtable.Values" />
 
             
 
              method.</para
           >
           <para
-            >The returned <see
-             cref="T:System.Collections.ICollection" />
+            >The returned <see cref="T:System.Collections.ICollection" />
 
             
 
-             is not a static copy; instead, the <see
-             cref="T:System.Collections.ICollection" />
+             is not a static copy; instead, the <see cref="T:System.Collections.ICollection" />
 
             
 
-             refers back to the keys in the original <see
-             cref="T:System.Collections.Hashtable" />
+             refers back to the keys in the original <see cref="T:System.Collections.Hashtable" />
 
             
 
-            . Therefore, changes to the <see
-             cref="T:System.Collections.Hashtable" />
+            . Therefore, changes to the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             continue to be reflected in the <see
-             cref="T:System.Collections.ICollection" />
+             continue to be reflected in the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -4548,13 +4281,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an <see cref="T:System.Collections.ICollection" />
 
             
 
-             containing the keys in the <see
-             cref="T:System.Collections.Hashtable" />
+             containing the keys in the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -4589,31 +4320,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Hashtable.Count" />
+             is <see cref="P:System.Collections.Hashtable.Count" />
 
             
 
             .</para
           >
           <para
-            >Because serializing and deserializing an enumerator for a <see
-             cref="T:System.Collections.Hashtable" />
+            >Because serializing and deserializing an enumerator for a <see cref="T:System.Collections.Hashtable" />
 
             
 
-             can cause the elements to become reordered, it is not possible to continue enumeration without calling the <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             can cause the elements to become reordered, it is not possible to continue enumeration without calling the <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
@@ -4623,8 +4349,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+            >Implements the <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
@@ -4632,7 +4357,11 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4673,8 +4402,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -4686,13 +4414,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Collections.Hashtable" />
+            >If the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             does not contain an element with the specified key, the <see
-             cref="T:System.Collections.Hashtable" />
+             does not contain an element with the specified key, the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -4703,8 +4429,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the element with the specified key from the <see
-             cref="T:System.Collections.Hashtable" />
+            >Removes the element with the specified key from the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -4712,7 +4437,11 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4752,8 +4481,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -4762,8 +4490,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Collections.Hashtable.Synchronized(System.Collections.Hashtable)" />
+            >The <see cref="M:System.Collections.Hashtable.Synchronized(System.Collections.Hashtable)" />
 
             
 
@@ -4771,8 +4498,7 @@
           >
           <para>Enumerating through a collection is intrinsically not a thread-safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
           <para
-            >The following code example shows how to lock the collection using the <see
-             cref="P:System.Collections.Hashtable.SyncRoot" />
+            >The following code example shows how to lock the collection using the <see cref="P:System.Collections.Hashtable.SyncRoot" />
 
             
 
@@ -4784,8 +4510,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a synchronized (thread-safe) wrapper for the <see
-             cref="T:System.Collections.Hashtable" />
+            >Returns a synchronized (thread-safe) wrapper for the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -4795,8 +4520,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A synchronized (thread-safe) wrapper for the <see
-             cref="T:System.Collections.Hashtable" />
+            >A synchronized (thread-safe) wrapper for the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -4804,12 +4528,15 @@
           >
         </returns>
         <param name="table">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.Hashtable" />
+          The <see cref="T:System.Collections.Hashtable" />
 
           
 
@@ -4838,8 +4565,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Object" />
+            >A <see cref="T:System.Object" />
 
             
 
@@ -4850,43 +4576,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To create a synchronized version of the <see
-             cref="T:System.Collections.Hashtable" />
+            >To create a synchronized version of the <see cref="T:System.Collections.Hashtable" />
 
             
 
-            , use the <see
-             cref="M:System.Collections.Hashtable.Synchronized(System.Collections.Hashtable)" />
+            , use the <see cref="M:System.Collections.Hashtable.Synchronized(System.Collections.Hashtable)" />
 
             
 
-             method. However, derived classes can provide their own synchronized version of the <see
-             cref="T:System.Collections.Hashtable" />
+             method. However, derived classes can provide their own synchronized version of the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             using the <see
-             cref="P:System.Collections.Hashtable.SyncRoot" />
+             using the <see cref="P:System.Collections.Hashtable.SyncRoot" />
 
             
 
-              property. The synchronizing code must perform operations on the <see
-             cref="P:System.Collections.Hashtable.SyncRoot" />
+              property. The synchronizing code must perform operations on the <see cref="P:System.Collections.Hashtable.SyncRoot" />
 
             
 
-             of the <see
-             cref="T:System.Collections.Hashtable" />
+             of the <see cref="T:System.Collections.Hashtable" />
 
             
 
-            , not directly on the <see
-             cref="T:System.Collections.Hashtable" />
+            , not directly on the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
-             cref="T:System.Collections.Hashtable" />
+             . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -4894,8 +4612,7 @@
           >
           <para>Enumerating through a collection is intrinsically not a thread safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
           <para
-            >The following code example shows how to lock the collection using the <see
-             cref="P:System.Collections.Hashtable.SyncRoot" />
+            >The following code example shows how to lock the collection using the <see cref="P:System.Collections.Hashtable.SyncRoot" />
 
             
 
@@ -4906,8 +4623,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Collections.Hashtable" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -4943,23 +4659,19 @@
           <para>The foreach statement of the C# language (for each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
           <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
           <para
-            >Initially, the enumerator is positioned before the first element in the collection. <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Initially, the enumerator is positioned before the first element in the collection. <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             also brings the enumerator back to this position. At this position, calling <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             also brings the enumerator back to this position. At this position, calling <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             throws an exception. Therefore, you must call <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             throws an exception. Therefore, you must call <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             to advance the enumerator to the first element of the collection before reading the value of <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -4970,99 +4682,81 @@
 
             
 
-             returns the same object until either <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             is called. <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             sets <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             sets <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              to the next element.</para
           >
           <para
-            >If <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returns false. When the enumerator is at this position, subsequent calls to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             also return false. If the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returned false, calling <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             returned false, calling <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             throws an exception. To set <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             throws an exception. To set <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             to the first element of the collection again, you can call <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             to the first element of the collection again, you can call <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             followed by <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             followed by <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
             .</para
           >
           <para
-            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator can be invalidated and the next call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator can be invalidated and the next call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             throws an <see
-             cref="T:System.InvalidOperationException" />
+             throws an <see cref="T:System.InvalidOperationException" />
 
             
 
-            . If the collection is modified between <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            . If the collection is modified between <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             and <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             and <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-            , <see
-             cref="P:System.Collections.IEnumerator.Current" />
+            , <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -5078,8 +4772,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -5114,8 +4807,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Collections.ICollection" />
+            >A <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -5126,46 +4818,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The order of the values in the <see
-             cref="T:System.Collections.ICollection" />
+            >The order of the values in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             is unspecified, but it is the same order as the associated keys in the <see
-             cref="T:System.Collections.ICollection" />
+             is unspecified, but it is the same order as the associated keys in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             returned by the <see
-             cref="P:System.Collections.Hashtable.Keys" />
+             returned by the <see cref="P:System.Collections.Hashtable.Keys" />
 
             
 
              method.</para
           >
           <para
-            >The returned <see
-             cref="T:System.Collections.ICollection" />
+            >The returned <see cref="T:System.Collections.ICollection" />
 
             
 
-             is not a static copy; instead, the <see
-             cref="T:System.Collections.ICollection" />
+             is not a static copy; instead, the <see cref="T:System.Collections.ICollection" />
 
             
 
-             refers back to the values in the original <see
-             cref="T:System.Collections.Hashtable" />
+             refers back to the values in the original <see cref="T:System.Collections.Hashtable" />
 
             
 
-            . Therefore, changes to the <see
-             cref="T:System.Collections.Hashtable" />
+            . Therefore, changes to the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             continue to be reflected in the <see
-             cref="T:System.Collections.ICollection" />
+             continue to be reflected in the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -5176,13 +4860,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an <see cref="T:System.Collections.ICollection" />
 
             
 
-             containing the values in the <see
-             cref="T:System.Collections.Hashtable" />
+             containing the values in the <see cref="T:System.Collections.Hashtable" />
 
             
 

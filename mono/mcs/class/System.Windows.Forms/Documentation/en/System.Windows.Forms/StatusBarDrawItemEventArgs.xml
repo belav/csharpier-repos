@@ -17,38 +17,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.StatusBar.DrawItem" />
+        >The <see cref="E:System.Windows.Forms.StatusBar.DrawItem" />
 
         
 
-         event occurs when a visual aspect of an owner-drawn <see
-         cref="T:System.Windows.Forms.StatusBarPanel" />
+         event occurs when a visual aspect of an owner-drawn <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
         
 
-         changes. A <see
-         cref="T:System.Windows.Forms.StatusBarDrawItemEventArgs" />
+         changes. A <see cref="T:System.Windows.Forms.StatusBarDrawItemEventArgs" />
 
         
 
-         specifies the <see
-         cref="T:System.Drawing.Graphics" />
+         specifies the <see cref="T:System.Drawing.Graphics" />
 
         
 
-         object to use to draw the panel, the <see
-         cref="T:System.Drawing.Rectangle" />
+         object to use to draw the panel, the <see cref="T:System.Drawing.Rectangle" />
 
         
 
-         object in which to draw the panel, the panel identification number, state information about the panel, and the panel to draw. You can use the data provided by this class in an event handler for the <see
-         cref="E:System.Windows.Forms.StatusBar.DrawItem" />
+         object in which to draw the panel, the panel identification number, state information about the panel, and the panel to draw. You can use the data provided by this class in an event handler for the <see cref="E:System.Windows.Forms.StatusBar.DrawItem" />
 
         
 
-         event to create custom-drawn panels in your application's <see
-         cref="T:System.Windows.Forms.StatusBar" />
+         event to create custom-drawn panels in your application's <see cref="T:System.Windows.Forms.StatusBar" />
 
         
 
@@ -58,8 +51,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.StatusBar.DrawItem" />
+        >Provides data for the <see cref="E:System.Windows.Forms.StatusBar.DrawItem" />
 
         
 
@@ -87,13 +79,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.StatusBarDrawItemEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.StatusBarDrawItemEventArgs" />
 
             
 
-             class without specifying a background and foreground color for the <see
-             cref="T:System.Windows.Forms.StatusBarPanel" />
+             class without specifying a background and foreground color for the <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
             
 
@@ -101,92 +91,106 @@
           >
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
-           to use to draw the <see
-           cref="T:System.Windows.Forms.StatusBarPanel" />
+           to use to draw the <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
           
 
           . </param
         >
         <param name="font">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Font" />
+          The <see cref="T:System.Drawing.Font" />
 
           
 
            used to render text. </param
         >
         <param name="r">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           that represents the client area of the <see
-           cref="T:System.Windows.Forms.StatusBarPanel" />
+           that represents the client area of the <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
           
 
           . </param
         >
         <param name="itemId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the panel in the <see
-           cref="T:System.Windows.Forms.StatusBar.StatusBarPanelCollection" />
+          The zero-based index of the panel in the <see cref="T:System.Windows.Forms.StatusBar.StatusBarPanelCollection" />
 
           
 
-           of the <see
-           cref="T:System.Windows.Forms.StatusBar" />
+           of the <see cref="T:System.Windows.Forms.StatusBar" />
 
           
 
            control. </param
         >
         <param name="itemState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.DrawItemState" />
+          One of the <see cref="T:System.Windows.Forms.DrawItemState" />
 
           
 
-           values that represents state information about the <see
-           cref="T:System.Windows.Forms.StatusBarPanel" />
+           values that represents state information about the <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
           
 
           . </param
         >
         <param name="panel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.StatusBarPanel" />
+          A <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
           
 
@@ -219,13 +223,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.StatusBarDrawItemEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.StatusBarDrawItemEventArgs" />
 
             
 
-             class with a specified background and foreground color for the <see
-             cref="T:System.Windows.Forms.StatusBarPanel" />
+             class with a specified background and foreground color for the <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
             
 
@@ -233,116 +235,136 @@
           >
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
-           to use to draw the <see
-           cref="T:System.Windows.Forms.StatusBarPanel" />
+           to use to draw the <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
           
 
           . </param
         >
         <param name="font">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Font" />
+          The <see cref="T:System.Drawing.Font" />
 
           
 
            used to render text. </param
         >
         <param name="r">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           that represents the client area of the <see
-           cref="T:System.Windows.Forms.StatusBarPanel" />
+           that represents the client area of the <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
           
 
           . </param
         >
         <param name="itemId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the panel in the <see
-           cref="T:System.Windows.Forms.StatusBar.StatusBarPanelCollection" />
+          The zero-based index of the panel in the <see cref="T:System.Windows.Forms.StatusBar.StatusBarPanelCollection" />
 
           
 
-           of the <see
-           cref="T:System.Windows.Forms.StatusBar" />
+           of the <see cref="T:System.Windows.Forms.StatusBar" />
 
           
 
            control. </param
         >
         <param name="itemState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.DrawItemState" />
+          One of the <see cref="T:System.Windows.Forms.DrawItemState" />
 
           
 
-           values that represents state information about the <see
-           cref="T:System.Windows.Forms.StatusBarPanel" />
+           values that represents state information about the <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
           
 
           . </param
         >
         <param name="panel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.StatusBarPanel" />
+          A <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
           
 
            that represents the panel to draw. </param
         >
         <param name="foreColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Drawing.Color" />
+          One of the <see cref="T:System.Drawing.Color" />
 
           
 
            values that represents the foreground color of the panel to draw. </param
         >
         <param name="backColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Drawing.Color" />
+          One of the <see cref="T:System.Drawing.Color" />
 
           
 
@@ -368,28 +390,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.StatusBarDrawItemEventArgs.Panel" />
+            >The <see cref="P:System.Windows.Forms.StatusBarDrawItemEventArgs.Panel" />
 
             
 
-             property enables you to obtain the <see
-             cref="T:System.Windows.Forms.StatusBarPanel" />
+             property enables you to obtain the <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
             
 
-             that needs to be drawn. You can use this information within the event handler for the <see
-             cref="E:System.Windows.Forms.StatusBar.DrawItem" />
+             that needs to be drawn. You can use this information within the event handler for the <see cref="E:System.Windows.Forms.StatusBar.DrawItem" />
 
             
 
-             event of a <see
-             cref="T:System.Windows.Forms.StatusBar" />
+             event of a <see cref="T:System.Windows.Forms.StatusBar" />
 
             
 
-             control to perform drawing tasks on the <see
-             cref="T:System.Windows.Forms.StatusBarPanel" />
+             control to perform drawing tasks on the <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
             
 
@@ -399,8 +416,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.StatusBarPanel" />
+            >Gets the <see cref="T:System.Windows.Forms.StatusBarPanel" />
 
             
 

@@ -20,13 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Communication between a provider and consumer requires a contract defined in an interface. This collection contains all the communication interfaces supported by the consumer. The <see
-         cref="M:System.Web.UI.WebControls.WebParts.ProviderConnectionPoint.GetSecondaryInterfaces(System.Web.UI.Control)" />
+        >Communication between a provider and consumer requires a contract defined in an interface. This collection contains all the communication interfaces supported by the consumer. The <see cref="M:System.Web.UI.WebControls.WebParts.ProviderConnectionPoint.GetSecondaryInterfaces(System.Web.UI.Control)" />
 
         
 
-         method returns a <see
-         cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
+         method returns a <see cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
 
         
 
@@ -49,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
 
             
 
@@ -77,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
 
             
 
@@ -86,12 +82,15 @@
           >
         </summary>
         <param name="connectionInterfaces">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A collection of objects to convert into a <see
-           cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
+          A collection of objects to convert into a <see cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
 
           
 
@@ -121,8 +120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
 
             
 
@@ -130,29 +128,34 @@
           >
         </summary>
         <param name="existingConnectionInterfaces">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
+          A <see cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
 
           
 
-           to combine with the <paramref
-           name="connectionInterfaces" />
+           to combine with the <paramref name="connectionInterfaces" />
 
           
 
            object.</param
         >
         <param name="connectionInterfaces">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A collection to combine with the <paramref
-           name="existingConnectionInterfaces" />
+          A collection to combine with the <paramref name="existingConnectionInterfaces" />
 
           
 
@@ -179,8 +182,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
+            >Determines whether the <see cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
 
             
 
@@ -190,13 +192,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="value" />
+            >true if <paramref name="value" />
 
             
 
-             is found in the <see
-             cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
+             is found in the <see cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
 
             
 
@@ -224,13 +224,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the entire <see
-             cref="T:System.Collections.ReadOnlyCollectionBase" />
+            >Copies the entire <see cref="T:System.Collections.ReadOnlyCollectionBase" />
 
             
 
-             object to a compatible one-dimensional <see
-             cref="T:System.Array" />
+             object to a compatible one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -238,34 +236,38 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from <see
-           cref="T:System.Collections.ReadOnlyCollectionBase" />
+           that is the destination of the elements copied from <see cref="T:System.Collections.ReadOnlyCollectionBase" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -291,8 +293,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >References a static, read-only instance of the <see
-             cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
+            >References a static, read-only instance of the <see cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
 
             
 
@@ -320,8 +321,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches for the specified object and returns the zero-based index of the first occurrence within the entire <see
-             cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
+            >Searches for the specified object and returns the zero-based index of the first occurrence within the entire <see cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
 
             
 
@@ -331,13 +331,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the first occurrence of <paramref
-             name="value" />
+            >The zero-based index of the first occurrence of <paramref name="value" />
 
             
 
-             within the entire <see
-             cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
+             within the entire <see cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
 
             
 

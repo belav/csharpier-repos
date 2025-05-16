@@ -22,8 +22,7 @@
     <summary>Represents information about a directory in the filesystem.</summary>
     <remarks>
       <para
-        >The <see
-         cref="T:Mono.Unix.UnixDirectoryInfo" />
+        >The <see cref="T:Mono.Unix.UnixDirectoryInfo" />
 
         
 
@@ -35,8 +34,7 @@
         <item>
           <term
             >Directory creation with 
-          <see
-             cref="M:Mono.Unix.UnixDirectoryInfo.Create" />
+          <see cref="M:Mono.Unix.UnixDirectoryInfo.Create" />
 
             
 
@@ -46,8 +44,7 @@
         <item>
           <term
             >Directory deletion (and optional file deletion) with 
-          <see
-             cref="M:Mono.Unix.UnixDirectoryInfo.Delete" />
+          <see cref="M:Mono.Unix.UnixDirectoryInfo.Delete" />
 
             
 
@@ -57,8 +54,7 @@
         <item>
           <term
             >Movement with 
-          <see
-             cref="M:Mono.Unix.UnixDirectoryInfo.SetCurrentDirectory" />
+          <see cref="M:Mono.Unix.UnixDirectoryInfo.SetCurrentDirectory" />
 
             
 
@@ -67,14 +63,12 @@
         </item>
         <item>
           <term
-            >Listing with <see
-             cref="M:Mono.Unix.UnixDirectoryInfo.GetEntries" />
+            >Listing with <see cref="M:Mono.Unix.UnixDirectoryInfo.GetEntries" />
 
             
 
              and 
-          <see
-             cref="M:Mono.Unix.UnixDirectoryInfo.GetFileSystemEntries" />
+          <see cref="M:Mono.Unix.UnixDirectoryInfo.GetFileSystemEntries" />
 
             
 
@@ -104,23 +98,20 @@
       </Parameters>
       <Docs>
         <param name="path"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
            containing the directory to query.</param
         >
         <summary
-          >Creates a new <see
-           cref="T:Mono.Unix.UnixDirectoryInfo" />
+          >Creates a new <see cref="T:Mono.Unix.UnixDirectoryInfo" />
 
           
 
           
         instance containing information about the directory 
-        <paramref
-           name="path" />
+        <paramref name="path" />
 
           
 
@@ -128,8 +119,7 @@
         >
         <remarks>
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
@@ -137,11 +127,11 @@
           relative or absolute path information. Relative path information is 
           interpreted as relative to the current working directory. 
           <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >To obtain the current working 
           directory, see 
-          <see
-               cref="M:.Mono.Unix.UnixDirectoryInfo.GetCurrentDirectory" />
+          <see cref="M:.Mono.Unix.UnixDirectoryInfo.GetCurrentDirectory" />
 
               
 
@@ -151,45 +141,38 @@
           </para>
           <para
             >It is valid to construct 
-          <see
-             cref="T:Mono.Unix.UnixDirectoryInfo" />
+          <see cref="T:Mono.Unix.UnixDirectoryInfo" />
 
             
 
              objects for directories 
           that do not exist or for files.  However, attempts to use
-          the <see
-             cref="T:Mono.Unix.UnixDirectoryInfo" />
+          the <see cref="T:Mono.Unix.UnixDirectoryInfo" />
 
             
 
              instance may
-          generate <see
-             cref="T:System.InvalidOperationException" />
+          generate <see cref="T:System.InvalidOperationException" />
 
             
 
             s.
-          Use <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.Exists" />
+          Use <see cref="P:Mono.Unix.UnixFileSystemInfo.Exists" />
 
             
 
              to see if
-          <paramref
-             name="path" />
+          <paramref name="path" />
 
             
 
              exists and 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.IsDirectory" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.IsDirectory" />
 
             
 
              to ensure
-          that <paramref
-             name="path" />
+          that <paramref name="path" />
 
             
 
@@ -201,8 +184,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -215,8 +197,7 @@
           
 
            contains invalid characters; see
-          <see
-           cref="M:Mono.Unix.UnixPath.GetInvalidPathChars" />
+          <see cref="M:Mono.Unix.UnixPath.GetInvalidPathChars" />
 
           
 
@@ -244,8 +225,7 @@
       <Docs>
         <summary
           >Create the directory 
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -253,15 +233,13 @@
         >
         <remarks
           >This is identical to calling 
-          <c
-          >
+          <c>
             <see cref="M:Mono.Unix.UnixDirectoryInfo.Create" />
 
             
 
             
-            (<see
-             cref="F:Mono.Unix.FileAccessPermissions.AllPermissions" />
+            (<see cref="F:Mono.Unix.FileAccessPermissions.AllPermissions" />
 
             
 
@@ -271,17 +249,13 @@
           
 
           .
-          <block
-           subset="none" type="note"
-            >
-            The <c
-            >Create</c>
+          <block subset="none" type="note">
+            The <c>Create</c>
 
             
 
              obeys the process'
-            <see
-             cref="M:Mono.Unix.Native.Syscall.umask" />
+            <see cref="M:Mono.Unix.Native.Syscall.umask" />
 
             
 
@@ -292,14 +266,12 @@
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -309,14 +281,12 @@
           <para>-or-</para>
           <para
             >Write permission is denied on the parent directory of
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+            [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -324,18 +294,15 @@
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is not a
           directory.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -349,8 +316,7 @@
 
            does not
           exist.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -361,8 +327,7 @@
           <para
             >An I/O error occurred while making the file system entry or
           allocating the inode.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+          [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -373,8 +338,7 @@
           <para
             >An I/O error occurred while reading from or writing to the
           file system.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+          [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -385,8 +349,7 @@
           <para
             >The directory entry to be created resides in a read-only file
           system.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+          [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -402,14 +365,12 @@
              cannot
           be created because there is no space left on the filesystem that
           will contain the directory.  See
-          <see
-             cref="P:Mono.Unix.UnixDriveInfo.AvailableFreeSpace" />
+          <see cref="P:Mono.Unix.UnixDriveInfo.AvailableFreeSpace" />
 
             
 
             .
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -420,8 +381,7 @@
           <para
             >There are no free inodes on the file system on which the
           directory is being created.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -435,8 +395,7 @@
           
 
            was too long.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -446,14 +405,12 @@
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+          [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -468,8 +425,7 @@
 
              already
           exists.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EEXIST" />
+          [<see cref="F:Mono.Unix.Native.Errno.EEXIST" />
 
             
 
@@ -485,8 +441,7 @@
              cannot
           be created because the user's quota of disk blocks on the file
           system that will contain the directory has been exhausted.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+          [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -502,8 +457,7 @@
              cannot
           be created because the user's quota of inodes on the file system on
           which the directory is being created has been exhausted.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+          [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -537,8 +491,7 @@
       <Docs>
         <param name="mode"
           >A 
-        <see
-           cref="T:Mono.Unix.Native.FilePermissions" />
+        <see cref="T:Mono.Unix.Native.FilePermissions" />
 
           
 
@@ -547,24 +500,20 @@
         >
         <summary
           >Create the directory 
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
           .</summary
         >
         <remarks>
-          <block subset="none" type="note"
-            >
-            The <c
-            >Create</c>
+          <block subset="none" type="note">
+            The <c>Create</c>
 
             
 
              obeys the process'
-            <see
-             cref="M:Mono.Unix.Native.Syscall.umask" />
+            <see cref="M:Mono.Unix.Native.Syscall.umask" />
 
             
 
@@ -575,14 +524,12 @@
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+          [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -592,14 +539,12 @@
           <para>-or-</para>
           <para
             >Write permission is denied on the parent directory of
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+          [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -607,18 +552,15 @@
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is not a
           directory.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -632,8 +574,7 @@
 
            does not
           exist.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -644,8 +585,7 @@
           <para
             >An I/O error occurred while making the file system entry or
           allocating the inode.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+          [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -656,8 +596,7 @@
           <para
             >An I/O error occurred while reading from or writing to the
           file system.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+          [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -668,8 +607,7 @@
           <para
             >The directory entry to be created resides in a read-only file
           system.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+          [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -685,14 +623,12 @@
              cannot
           be created because there is no space left on the filesystem that
           will contain the directory.  See
-          <see
-             cref="P:Mono.Unix.UnixDriveInfo.AvailableFreeSpace" />
+          <see cref="P:Mono.Unix.UnixDriveInfo.AvailableFreeSpace" />
 
             
 
             .
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -703,8 +639,7 @@
           <para
             >There are no free inodes on the file system on which the
           directory is being created.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -718,8 +653,7 @@
           
 
            was too long.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -729,14 +663,12 @@
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+          [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -751,8 +683,7 @@
 
              already
           exists.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EEXIST" />
+          [<see cref="F:Mono.Unix.Native.Errno.EEXIST" />
 
             
 
@@ -768,8 +699,7 @@
              cannot
           be created because the user's quota of disk blocks on the file
           system that will contain the directory has been exhausted.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+          [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -785,8 +715,7 @@
              cannot
           be created because the user's quota of inodes on the file system on
           which the directory is being created has been exhausted.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+          [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -826,8 +755,7 @@
       <Docs>
         <param name="mode"
           >A 
-        <see
-           cref="T:Mono.Unix.Native.FilePermissions" />
+        <see cref="T:Mono.Unix.Native.FilePermissions" />
 
           
 
@@ -836,8 +764,7 @@
         >
         <summary
           >Create the directory 
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -847,14 +774,12 @@
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+          [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -864,14 +789,12 @@
           <para>-or-</para>
           <para
             >Write permission is denied on the parent directory of
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+          [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -879,18 +802,15 @@
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is not a
           directory.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -904,8 +824,7 @@
 
            does not
           exist.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -916,8 +835,7 @@
           <para
             >An I/O error occurred while making the file system entry or
           allocating the inode.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+          [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -928,8 +846,7 @@
           <para
             >An I/O error occurred while reading from or writing to the
           file system.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+          [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -940,8 +857,7 @@
           <para
             >The directory entry to be created resides in a read-only file
           system.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+          [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -957,14 +873,12 @@
              cannot
           be created because there is no space left on the filesystem that
           will contain the directory.  See
-          <see
-             cref="P:Mono.Unix.UnixDriveInfo.AvailableFreeSpace" />
+          <see cref="P:Mono.Unix.UnixDriveInfo.AvailableFreeSpace" />
 
             
 
             .
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -975,8 +889,7 @@
           <para
             >There are no free inodes on the file system on which the
           directory is being created.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />
 
             
 
@@ -990,8 +903,7 @@
           
 
            was too long.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -1001,14 +913,12 @@
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+          [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -1023,8 +933,7 @@
 
              already
           exists.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EEXIST" />
+          [<see cref="F:Mono.Unix.Native.Errno.EEXIST" />
 
             
 
@@ -1040,8 +949,7 @@
              cannot
           be created because the user's quota of disk blocks on the file
           system that will contain the directory has been exhausted.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+          [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -1057,8 +965,7 @@
              cannot
           be created because the user's quota of inodes on the file system on
           which the directory is being created has been exhausted.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+          [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />
 
             
 
@@ -1110,35 +1017,30 @@
       </Parameters>
       <Docs>
         <param name="recursive"
-          >Specify <see
-           langword="true" />
+          >Specify <see langword="true" />
 
           
 
            to delete all files
-        and sub-directories in <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        and sub-directories in <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
           ; 
-        otherwise, specify <see
-           langword="false" />
+        otherwise, specify <see langword="false" />
 
           
 
           .</param
         >
         <summary
-          >Deletes <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          >Deletes <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
           
         and, if indicated, removes all files and directories within
-        Deletes <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        Deletes <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -1152,14 +1054,12 @@
             
 
              is the default value for the 
-          <paramref
-             name="recursive" />
+          <paramref name="recursive" />
 
             
 
              parameter.  Thus, 
-          <see
-             cref="M:Mono.Unix.UnixFileSystemInfo.Delete" />
+          <see cref="M:Mono.Unix.UnixFileSystemInfo.Delete" />
 
             
 
@@ -1170,15 +1070,13 @@
         <exception cref="T:System.InvalidOperationException">
           <para
             >The filesystem containing 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
              does not
           support the removal of file system entries.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EPERM" />
+          [<see cref="F:Mono.Unix.Native.Errno.EPERM" />
 
             
 
@@ -1188,29 +1086,25 @@
           <para>-or-</para>
           <para
             >The directory containing 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
              
-          has the <see
-             cref="F:Mono.Unix.FileSpecialAttributes.Sticky" />
+          has the <see cref="F:Mono.Unix.FileSpecialAttributes.Sticky" />
 
             
 
              bit
           set and the process's 
-          <see
-             cref="P:Mono.Unix.UnixEnvironment.EffectiveUserId" />
+          <see cref="P:Mono.Unix.UnixEnvironment.EffectiveUserId" />
 
             
 
              is
           neither the uid of the file to be deleted nor that of the directory
           containing it.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EPERM" />
+          [<see cref="F:Mono.Unix.Native.Errno.EPERM" />
 
             
 
@@ -1221,21 +1115,18 @@
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Write access to the directory containing
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
              was not
           allowed for the processe's effective user id 
-          <see
-             cref="P:Mono.Unix.UnixEnvironment.EffectiveUserId" />
+          <see cref="P:Mono.Unix.UnixEnvironment.EffectiveUserId" />
 
             
 
             .
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+          [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -1245,15 +1136,13 @@
           <para>-or-</para>
           <para
             >One of the directories in 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
              did not have
           search (execute) permissions.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EACCESS" />
+          [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
             
 
@@ -1261,18 +1150,15 @@
           </para
           >
         </exception>
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
+        <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of 
-          <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
            is not a
           directory.  
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -1286,8 +1172,7 @@
 
            does not
           exist.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -1301,19 +1186,16 @@
             
 
              contains 
-          files other than '<c
-            >.</c>
+          files other than '<c>.</c>
 
             
 
-            ' and '<c
-            >..</c>
+            ' and '<c>..</c>
 
             
 
             ' in it.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ENOTEMPTY" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOTEMPTY" />
 
             
 
@@ -1324,8 +1206,7 @@
           <para
             >An I/O error occurred while deleting the file system entry or
           deallocating the inode.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EIO" />
+          [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
             
 
@@ -1336,8 +1217,7 @@
           <para
             >The directory entry to be removed resides in a read-only file
           system.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EROFS" />
+          [<see cref="F:Mono.Unix.Native.Errno.EROFS" />
 
             
 
@@ -1351,8 +1231,7 @@
           
 
            was too long.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
@@ -1362,14 +1241,12 @@
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             .
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ELOOP" />
+          [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
             
 
@@ -1380,8 +1257,7 @@
           <para
             >The directory to be removed is the mount point for a mounted
           filesystem.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EBUSY" />
+          [<see cref="F:Mono.Unix.Native.Errno.EBUSY" />
 
             
 
@@ -1412,8 +1288,7 @@
         <summary>Returns the application's current working directory.</summary>
         <returns>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -1421,23 +1296,19 @@
           >
         </returns>
         <remarks></remarks>
-        <exception cref="T:System.UnauthorizedAccessException"
-          >
+        <exception cref="T:System.UnauthorizedAccessException">
           Permission to read or search a component of the current working
           directory was denied.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.EACCESS" />
+          [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
           
 
           ]
         </exception
         >
-        <exception cref="T:System.IO.FileNotFoundException"
-          >
+        <exception cref="T:System.IO.FileNotFoundException">
           The current working directory has been unlinked.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -1466,23 +1337,20 @@
       <Docs>
         <summary
           >Returnes the directory entries of all file system entries in
-        the <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+        the <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
 
           
 
            directory.</summary
         >
         <returns
-          >A <see
-           cref="T:Mono.Unix.Native.Dirent" />
+          >A <see cref="T:Mono.Unix.Native.Dirent" />
 
           
 
            array containing
         all file system entries within the 
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
 
           
 
@@ -1491,14 +1359,12 @@
         >
         <remarks>
           <para
-            >The <see
-             cref="F:Mono.Unix.Native.Dirent.d_name" />
+            >The <see cref="F:Mono.Unix.Native.Dirent.d_name" />
 
             
 
              field of
-          the returned <see
-             cref="T:Mono.Unix.Native.Dirent" />
+          the returned <see cref="T:Mono.Unix.Native.Dirent" />
 
             
 
@@ -1506,32 +1372,27 @@
           contains the file system entry name, not the fully qualified file
           system entry name.  Thus, to use these values in further code they
           must be qualified with 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             , e.g.
-          <c
-            >
+          <c>
               <see cref="M:Mono.Unix.UnixPath.Combine" />
 
               
 
               
-          (<see
-               cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          (<see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
               
 
               , 
-          <paramref
-               name="dirent[index]" />
+          <paramref name="dirent[index]" />
 
               
 
-              .<see
-               cref="F:Mono.Unix.Native.Dirent.d_name" />
+              .<see cref="F:Mono.Unix.Native.Dirent.d_name" />
 
               
 
@@ -1543,16 +1404,13 @@
             .</para
           >
         </remarks>
-        <exception cref="T:System.UnauthorizedAccessException"
-          >
-          The process cannot access <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+        <exception cref="T:System.UnauthorizedAccessException">
+          The process cannot access <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
 
           
 
           .
-          [<see
-           cref="F:Mono.Unix.Native.Errno.EACCESS" />
+          [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
           
 
@@ -1566,8 +1424,7 @@
 
            is not a
           directory.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -1581,8 +1438,7 @@
 
            doesn't exist,
           or is an empty string.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -1592,8 +1448,7 @@
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Insufficient memory to complete the operation.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ENOMEM" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />
 
             
 
@@ -1603,8 +1458,7 @@
           <para>-or-</para>
           <para
             >Too many file descriptors in use by the process.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EMFILE" />
+          [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />
 
             
 
@@ -1614,8 +1468,7 @@
           <para>-or-</para>
           <para
             >Too many files are currently open in the system.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ENFILE" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />
 
             
 
@@ -1648,8 +1501,7 @@
       </Parameters>
       <Docs>
         <param name="regex"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
@@ -1659,29 +1511,25 @@
         >
         <summary
           >Returnes the directory entries of all file system entries in
-        the <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+        the <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
 
           
 
            directory 
-        that match the provided regular expression <paramref
-           name="regex" />
+        that match the provided regular expression <paramref name="regex" />
 
           
 
           .</summary
         >
         <returns
-          >A <see
-           cref="T:Mono.Unix.Native.Dirent" />
+          >A <see cref="T:Mono.Unix.Native.Dirent" />
 
           
 
            array containing
         all file system entries within the 
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
 
           
 
@@ -1695,8 +1543,7 @@
             
 
              is matched against 
-          <see
-             cref="F:Mono.Unix.Native.Dirent.d_name" />
+          <see cref="F:Mono.Unix.Native.Dirent.d_name" />
 
             
 
@@ -1704,14 +1551,12 @@
           entries found.</para
           >
           <para
-            >The <see
-             cref="F:Mono.Unix.Native.Dirent.d_name" />
+            >The <see cref="F:Mono.Unix.Native.Dirent.d_name" />
 
             
 
              field of
-          the returned <see
-             cref="T:Mono.Unix.Native.Dirent" />
+          the returned <see cref="T:Mono.Unix.Native.Dirent" />
 
             
 
@@ -1719,32 +1564,27 @@
           contains the file system entry name, not the fully qualified file
           system entry name.  Thus, to use these values in further code they
           must be qualified with 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             , e.g.
-          <c
-            >
+          <c>
               <see cref="M:Mono.Unix.UnixPath.Combine" />
 
               
 
               
-          (<see
-               cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          (<see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
               
 
               , 
-          <paramref
-               name="dirent[index]" />
+          <paramref name="dirent[index]" />
 
               
 
-              .<see
-               cref="F:Mono.Unix.Native.Dirent.d_name" />
+              .<see cref="F:Mono.Unix.Native.Dirent.d_name" />
 
               
 
@@ -1756,16 +1596,13 @@
             .</para
           >
         </remarks>
-        <exception cref="T:System.UnauthorizedAccessException"
-          >
-          The process cannot access <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+        <exception cref="T:System.UnauthorizedAccessException">
+          The process cannot access <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
 
           
 
           .
-          [<see
-           cref="F:Mono.Unix.Native.Errno.EACCESS" />
+          [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
           
 
@@ -1779,8 +1616,7 @@
 
            is not a
           directory.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -1794,8 +1630,7 @@
 
            doesn't exist,
           or is an empty string.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -1805,8 +1640,7 @@
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Insufficient memory to complete the operation.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ENOMEM" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />
 
             
 
@@ -1816,8 +1650,7 @@
           <para>-or-</para>
           <para
             >Too many file descriptors in use by the process.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EMFILE" />
+          [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />
 
             
 
@@ -1827,8 +1660,7 @@
           <para>-or-</para>
           <para
             >Too many files are currently open in the system.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ENFILE" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />
 
             
 
@@ -1862,8 +1694,7 @@
       <Docs>
         <param name="regex"
           >A 
-        <see
-           cref="T:System.Text.RegularExpressions.Regex" />
+        <see cref="T:System.Text.RegularExpressions.Regex" />
 
           
 
@@ -1872,29 +1703,25 @@
         >
         <summary
           >Returnes the directory entries of all file system entries in
-        the <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+        the <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
 
           
 
            directory 
-        that match the provided regular expression <paramref
-           name="regex" />
+        that match the provided regular expression <paramref name="regex" />
 
           
 
           .</summary
         >
         <returns
-          >A <see
-           cref="T:Mono.Unix.Native.Dirent" />
+          >A <see cref="T:Mono.Unix.Native.Dirent" />
 
           
 
            array containing
         all file system entries within the 
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
 
           
 
@@ -1908,8 +1735,7 @@
             
 
              is matched against 
-          <see
-             cref="F:Mono.Unix.Native.Dirent.d_name" />
+          <see cref="F:Mono.Unix.Native.Dirent.d_name" />
 
             
 
@@ -1917,14 +1743,12 @@
           entries found.</para
           >
           <para
-            >The <see
-             cref="F:Mono.Unix.Native.Dirent.d_name" />
+            >The <see cref="F:Mono.Unix.Native.Dirent.d_name" />
 
             
 
              field of
-          the returned <see
-             cref="T:Mono.Unix.Native.Dirent" />
+          the returned <see cref="T:Mono.Unix.Native.Dirent" />
 
             
 
@@ -1932,32 +1756,27 @@
           contains the file system entry name, not the fully qualified file
           system entry name.  Thus, to use these values in further code they
           must be qualified with 
-          <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
             
 
             , e.g.
-          <c
-            >
+          <c>
               <see cref="M:Mono.Unix.UnixPath.Combine" />
 
               
 
               
-          (<see
-               cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+          (<see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
               
 
               , 
-          <paramref
-               name="dirent[index]" />
+          <paramref name="dirent[index]" />
 
               
 
-              .<see
-               cref="F:Mono.Unix.Native.Dirent.d_name" />
+              .<see cref="F:Mono.Unix.Native.Dirent.d_name" />
 
               
 
@@ -1969,16 +1788,13 @@
             .</para
           >
         </remarks>
-        <exception cref="T:System.UnauthorizedAccessException"
-          >
-          The process cannot access <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+        <exception cref="T:System.UnauthorizedAccessException">
+          The process cannot access <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
 
           
 
           .
-          [<see
-           cref="F:Mono.Unix.Native.Errno.EACCESS" />
+          [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
           
 
@@ -1992,8 +1808,7 @@
 
            is not a
           directory.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -2007,8 +1822,7 @@
 
            doesn't exist,
           or is an empty string.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -2018,8 +1832,7 @@
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Insufficient memory to complete the operation.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ENOMEM" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />
 
             
 
@@ -2029,8 +1842,7 @@
           <para>-or-</para>
           <para
             >Too many file descriptors in use by the process.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EMFILE" />
+          [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />
 
             
 
@@ -2040,8 +1852,7 @@
           <para>-or-</para>
           <para
             >Too many files are currently open in the system.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ENFILE" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />
 
             
 
@@ -2073,23 +1884,20 @@
       <Docs>
         <summary
           >Returnes all the file system entries 
-        the <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+        the <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
 
           
 
            directory.</summary
         >
         <returns
-          >A <see
-           cref="T:Mono.Unix.UnixFileSystemInfo" />
+          >A <see cref="T:Mono.Unix.UnixFileSystemInfo" />
 
           
 
            array containing
         all file system entries within the 
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
 
           
 
@@ -2097,16 +1905,13 @@
         </returns
         >
         <remarks></remarks>
-        <exception cref="T:System.UnauthorizedAccessException"
-          >
-          The process cannot access <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+        <exception cref="T:System.UnauthorizedAccessException">
+          The process cannot access <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
 
           
 
           .
-          [<see
-           cref="F:Mono.Unix.Native.Errno.EACCESS" />
+          [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
           
 
@@ -2120,8 +1925,7 @@
 
            is not a
           directory.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -2135,8 +1939,7 @@
 
            doesn't exist,
           or is an empty string.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -2146,8 +1949,7 @@
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Insufficient memory to complete the operation.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ENOMEM" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />
 
             
 
@@ -2157,8 +1959,7 @@
           <para>-or-</para>
           <para
             >Too many file descriptors in use by the process.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EMFILE" />
+          [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />
 
             
 
@@ -2168,8 +1969,7 @@
           <para>-or-</para>
           <para
             >Too many files are currently open in the system.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ENFILE" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />
 
             
 
@@ -2202,8 +2002,7 @@
       </Parameters>
       <Docs>
         <param name="regex"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
@@ -2213,23 +2012,20 @@
         >
         <summary
           >Returnes all the file system entries 
-        the <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+        the <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
 
           
 
            directory.</summary
         >
         <returns
-          >A <see
-           cref="T:Mono.Unix.UnixFileSystemInfo" />
+          >A <see cref="T:Mono.Unix.UnixFileSystemInfo" />
 
           
 
            array containing
         all file system entries within the 
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
 
           
 
@@ -2237,16 +2033,13 @@
         </returns
         >
         <remarks></remarks>
-        <exception cref="T:System.UnauthorizedAccessException"
-          >
-          The process cannot access <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+        <exception cref="T:System.UnauthorizedAccessException">
+          The process cannot access <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
 
           
 
           .
-          [<see
-           cref="F:Mono.Unix.Native.Errno.EACCESS" />
+          [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
           
 
@@ -2260,8 +2053,7 @@
 
            is not a
           directory.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -2275,8 +2067,7 @@
 
            doesn't exist,
           or is an empty string.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -2286,8 +2077,7 @@
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Insufficient memory to complete the operation.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ENOMEM" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />
 
             
 
@@ -2297,8 +2087,7 @@
           <para>-or-</para>
           <para
             >Too many file descriptors in use by the process.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.EMFILE" />
+          [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />
 
             
 
@@ -2308,8 +2097,7 @@
           <para>-or-</para>
           <para
             >Too many files are currently open in the system.
-          [<see
-             cref="F:Mono.Unix.Native.Errno.ENFILE" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />
 
             
 
@@ -2343,8 +2131,7 @@
       <Docs>
         <param name="regex"
           >A 
-        <see
-           cref="T:System.Text.RegularExpressions.Regex" />
+        <see cref="T:System.Text.RegularExpressions.Regex" />
 
           
 
@@ -2353,23 +2140,20 @@
         >
         <summary
           >Returnes all the file system entries 
-        the <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+        the <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
 
           
 
            directory.</summary
         >
         <returns
-          >A <see
-           cref="T:Mono.Unix.UnixFileSystemInfo" />
+          >A <see cref="T:Mono.Unix.UnixFileSystemInfo" />
 
           
 
            array containing
         all file system entries within the 
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
 
           
 
@@ -2377,16 +2161,13 @@
         </returns
         >
         <remarks></remarks>
-        <exception cref="T:System.UnauthorizedAccessException"
-          >
-          The process cannot access <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+        <exception cref="T:System.UnauthorizedAccessException">
+          The process cannot access <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
 
           
 
           .
-          [<see
-           cref="F:Mono.Unix.Native.Errno.EACCESS" />
+          [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
           
 
@@ -2400,8 +2181,7 @@
 
            is not a
           directory.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -2415,8 +2195,7 @@
 
            doesn't exist,
           or is an empty string.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -2426,8 +2205,7 @@
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Insufficient memory to complete the operation.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENOMEM" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />
 
             
 
@@ -2437,8 +2215,7 @@
           <para>-or-</para>
           <para
             >Too many file descriptors in use by the process.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.EMFILE" />
+            [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />
 
             
 
@@ -2448,8 +2225,7 @@
           <para>-or-</para>
           <para
             >Too many files are currently open in the system.
-            [<see
-             cref="F:Mono.Unix.Native.Errno.ENFILE" />
+            [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />
 
             
 
@@ -2496,15 +2272,13 @@
         <summary>Gets information about the parent directory.</summary>
         <value
           >If the parent directory can be found, a 
-        <see
-           cref="T:Mono.Unix.UnixDirectoryInfo" />
+        <see cref="T:Mono.Unix.UnixDirectoryInfo" />
 
           
 
            instance
         containing information about the parent directory.  Otherwise, 
-        <see
-           langword="null" />
+        <see langword="null" />
 
           
 
@@ -2532,23 +2306,20 @@
       <Docs>
         <summary
           >Gets the path root component of
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
           . </summary
         >
         <value
-          >A <see
-           cref="T:Mono.Unix.UnixDirectoryInfo" />
+          >A <see cref="T:Mono.Unix.UnixDirectoryInfo" />
 
           
 
            containing
         information about the path root component for
-        <see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
@@ -2557,9 +2328,7 @@
         <remarks
           >This is generally identical to 
         <c
-
-            >new <see
-             cref="T:Mono.Unix.UnixDirectoryInfo" />
+            >new <see cref="T:Mono.Unix.UnixDirectoryInfo" />
 
             
 
@@ -2596,8 +2365,7 @@
       </Parameters>
       <Docs>
         <param name="path"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
@@ -2607,8 +2375,7 @@
         specified directory.</summary>
         <remarks>
           <para
-            >The <paramref
-             name="path" />
+            >The <paramref name="path" />
 
             
 
@@ -2616,11 +2383,14 @@
           relative or absolute path information. Relative path information is 
           interpreted as relative to the current working directory. 
           <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >To obtain the current working 
           directory, see 
           <see
-               cref="M:Mono.Unix.UnixDirectoryInfo.GetCurrentDirectory" qualify="true" />
+                cref="M:Mono.Unix.UnixDirectoryInfo.GetCurrentDirectory"
+                qualify="true"
+              />
 
               
 
@@ -2629,32 +2399,26 @@
             >
           </para>
         </remarks>
-        <exception cref="T:System.UnauthorizedAccessException"
-          >
-          The process cannot access <paramref
-           name="path" />
+        <exception cref="T:System.UnauthorizedAccessException">
+          The process cannot access <paramref name="path" />
 
           
 
           .
-          [<see
-           cref="F:Mono.Unix.Native.Errno.EACCESS" />
+          [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />
 
           
 
           ]
         </exception
         >
-        <exception cref="T:System.IO.DirectoryNotFoundException"
-          >
-          A component of <paramref
-           name="path" />
+        <exception cref="T:System.IO.DirectoryNotFoundException">
+          A component of <paramref name="path" />
 
           
 
            is not a directory.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
 
           
 
@@ -2667,8 +2431,7 @@
           
 
            does not exist.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOENT" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />
 
           
 
@@ -2681,36 +2444,30 @@
           
 
            is too long.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
 
           
 
           ]
         </exception
         >
-        <exception cref="T:System.IO.IOException"
-          >
+        <exception cref="T:System.IO.IOException">
           An I/O error occurred.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.EIO" />
+          [<see cref="F:Mono.Unix.Native.Errno.EIO" />
 
           
 
           ]
         </exception
         >
-        <exception cref="T:Mono.Unix.UnixIOException"
-          >
+        <exception cref="T:Mono.Unix.UnixIOException">
           Too many symbolic links were encountered in resolving 
-          <paramref
-           name="path" />
+          <paramref name="path" />
 
           
 
           .
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ELOOP" />
+          [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />
 
           
 

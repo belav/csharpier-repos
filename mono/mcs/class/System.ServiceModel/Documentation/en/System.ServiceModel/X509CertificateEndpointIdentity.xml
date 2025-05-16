@@ -51,8 +51,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="certificate" />
+            >The <paramref name="certificate" />
 
             
 
@@ -62,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of a <see
-             cref="T:System.ServiceModel.X509CertificateEndpointIdentity" />
+            >Initializes a new instance of a <see cref="T:System.ServiceModel.X509CertificateEndpointIdentity" />
 
             
 
@@ -99,13 +97,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="primaryCertificate" />
+            >The <paramref name="primaryCertificate" />
 
             
 
-             and <paramref
-             name="supportingCertificates" />
+             and <paramref name="supportingCertificates" />
 
             
 
@@ -115,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.X509CertificateEndpointIdentity" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.X509CertificateEndpointIdentity" />
 
             
 
@@ -124,14 +119,22 @@
           >
         </summary>
         <param name="primaryCertificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The primary certificate representing the service's identity.</param
         >
         <param name="supportingCertificates">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -160,18 +163,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This collection contains the <paramref
-             name="primaryCertificate" />
+            >This collection contains the <paramref name="primaryCertificate" />
 
             
 
-             used to create the <see
-             cref="T:System.ServiceModel.X509CertificateEndpointIdentity" />
+             used to create the <see cref="T:System.ServiceModel.X509CertificateEndpointIdentity" />
 
             
 
-             as well as any <paramref
-             name="supportingCertificates" />
+             as well as any <paramref name="supportingCertificates" />
 
             
 

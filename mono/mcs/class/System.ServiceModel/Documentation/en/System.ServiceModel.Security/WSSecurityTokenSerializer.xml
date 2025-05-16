@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
 
             
 
@@ -75,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
 
             
 
@@ -107,8 +105,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
 
             
 
@@ -141,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
 
             
 
@@ -177,8 +173,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
 
             
 
@@ -223,8 +218,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
 
             
 
@@ -275,8 +269,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
 
             
 
@@ -684,8 +677,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the key identifier clause core using the specified <see
-             cref="T:System.Xml.XmlReader" />
+            >Reads the key identifier clause core using the specified <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -723,8 +715,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the key identifier core using the specified <see
-             cref="T:System.Xml.XmlReader" />
+            >Reads the key identifier core using the specified <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -767,8 +758,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the token core using the specified <see
-             cref="T:System.Xml.XmlReader" />
+            >Reads the token core using the specified <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -836,8 +826,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the key identifier clause core with a specified key identifier clause using the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Writes the key identifier clause core with a specified key identifier clause using the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -873,8 +862,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the key identifier core with a specified key identifier clause using the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Writes the key identifier core with a specified key identifier clause using the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -910,8 +898,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the token core with a specified security token using the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Writes the token core with a specified security token using the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 

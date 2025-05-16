@@ -17,31 +17,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.ClientTargetSection" />
+        >The <see cref="T:System.Web.Configuration.ClientTargetSection" />
 
         
 
-         class provides a way to programmatically access and modify the clientTarget section of the configuration file. It belongs to a group that includes the <see
-         cref="T:System.Web.Configuration.ClientTargetCollection" />
+         class provides a way to programmatically access and modify the clientTarget section of the configuration file. It belongs to a group that includes the <see cref="T:System.Web.Configuration.ClientTargetCollection" />
 
         
 
-         class and the <see
-         cref="T:System.Web.Configuration.ClientTarget" />
+         class and the <see cref="T:System.Web.Configuration.ClientTarget" />
 
         
 
          class.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Configuration.ClientTargetSection" />
+        >The <see cref="T:System.Web.Configuration.ClientTargetSection" />
 
         
 
-         class contains <see
-         cref="T:System.Web.Configuration.ClientTarget" />
+         class contains <see cref="T:System.Web.Configuration.ClientTarget" />
 
         
 
@@ -63,13 +58,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called by the ASP.NET configuration system and is not intended to be used directly from your code. You can obtain an instance of the <see
-             cref="T:System.Web.Configuration.ClientTargetSection" />
+            >This constructor is called by the ASP.NET configuration system and is not intended to be used directly from your code. You can obtain an instance of the <see cref="T:System.Web.Configuration.ClientTargetSection" />
 
             
 
-             class by using the <see
-             cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+             class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" />
 
             
 
@@ -79,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.ClientTargetSection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.ClientTargetSection" />
 
             
 
@@ -112,8 +104,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each <see
-             cref="T:System.Web.Configuration.ClientTarget" />
+            >Each <see cref="T:System.Web.Configuration.ClientTarget" />
 
             
 
@@ -123,8 +114,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of <see
-             cref="T:System.Web.Configuration.ClientTarget" />
+            >Gets the collection of <see cref="T:System.Web.Configuration.ClientTarget" />
 
             
 

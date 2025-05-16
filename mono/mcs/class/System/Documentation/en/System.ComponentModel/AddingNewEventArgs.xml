@@ -19,52 +19,44 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.AddingNewEventArgs" />
+        >The <see cref="T:System.ComponentModel.AddingNewEventArgs" />
 
         
 
-         class provides data for the <see
-         cref="E:System.Windows.Forms.BindingSource.AddingNew" />
+         class provides data for the <see cref="E:System.Windows.Forms.BindingSource.AddingNew" />
 
         
 
-         event, which signals that an item is about to be added to a collection. The event gives the programmer, within the event handler <see
-         cref="T:System.ComponentModel.AddingNewEventHandler" />
+         event, which signals that an item is about to be added to a collection. The event gives the programmer, within the event handler <see cref="T:System.ComponentModel.AddingNewEventHandler" />
 
         
 
-        , the option of supplying the new object by setting the <see
-         cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
+        , the option of supplying the new object by setting the <see cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
 
         
 
          property to this new item. If this property is not set, the collection will typically use the default constructor of the appropriate type to construct a new item. In either case, the new item will be added to the collection. </para
       >
       <para
-        >If the collection also implements the <see
-         cref="T:System.ComponentModel.ICancelAddNew" />
+        >If the collection also implements the <see cref="T:System.ComponentModel.ICancelAddNew" />
 
         
 
          interface, the item will be provisionally added, waiting a subsequent commit or rollback.</para
       >
       <para
-        >This event is commonly used in data-binding scenarios, within classes such as <see
-         cref="T:System.Windows.Forms.BindingSource" />
+        >This event is commonly used in data-binding scenarios, within classes such as <see cref="T:System.Windows.Forms.BindingSource" />
 
         
 
-         and <see
-         cref="T:System.ComponentModel.BindingList`1" />
+         and <see cref="T:System.ComponentModel.BindingList`1" />
 
         
 
         . </para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
 
@@ -76,8 +68,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.BindingSource.AddingNew" />
+        >Provides data for the <see cref="E:System.Windows.Forms.BindingSource.AddingNew" />
 
         
 
@@ -103,13 +94,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default constructor sets the <see
-             cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
+            >The default constructor sets the <see cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
 
             
 
-             property to null. A value that is null indicates that, if the <see
-             cref="T:System.ComponentModel.AddingNewEventHandler" />
+             property to null. A value that is null indicates that, if the <see cref="T:System.ComponentModel.AddingNewEventHandler" />
 
             
 
@@ -119,8 +108,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.AddingNewEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.AddingNewEventArgs" />
 
             
 
@@ -148,18 +136,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.AddingNewEventArgs.#ctor(System.Object)" />
+            >The <see cref="M:System.ComponentModel.AddingNewEventArgs.#ctor(System.Object)" />
 
             
 
-             constructor sets the <see
-             cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
+             constructor sets the <see cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
 
             
 
-             property to the <paramref
-             name="newObject" />
+             property to the <paramref name="newObject" />
 
             
 
@@ -169,8 +154,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.AddingNewEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.AddingNewEventArgs" />
 
             
 
@@ -178,12 +162,15 @@
           >
         </summary>
         <param name="newObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
@@ -208,8 +195,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
+            >If the <see cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
 
             
 

@@ -24,8 +24,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>A Web Service Description Language (WSDL) file typically describes a class in XML schema language as an xsd:complex type composed of various primitive xsd:complex and xsd:simple types. When generating a .NET Framework class that represents a given xsd:complex type, you must choose how to represent the various primitive types it contains.</para>
       <para
-        >By default, each primitive is implemented as a field. If you specify the <see
-         cref="F:System.Xml.Serialization.CodeGenerationOptions.GenerateProperties" />
+        >By default, each primitive is implemented as a field. If you specify the <see cref="F:System.Xml.Serialization.CodeGenerationOptions.GenerateProperties" />
 
         
 
@@ -35,8 +34,7 @@
         <h2>Ordering of Serialization Code</h2>
       </format>
       <para
-        >The <see
-         cref="F:System.Xml.Serialization.CodeGenerationOptions.GenerateOrder" />
+        >The <see cref="F:System.Xml.Serialization.CodeGenerationOptions.GenerateOrder" />
 
         
 
@@ -164,18 +162,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates explicitly ordered serialization code as specified through the Order property of the <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+            >Generates explicitly ordered serialization code as specified through the Order property of the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
             
 
-            , <see
-             cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+            , <see cref="T:System.Xml.Serialization.XmlArrayAttribute" />
 
             
 
-            , and <see
-             cref="T:System.Xml.Serialization.XmlElementAttribute" />
+            , and <see cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
             
 
@@ -235,8 +230,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents primitive types by fields and primitive types by <see
-             cref="N:System" />
+            >Represents primitive types by fields and primitive types by <see cref="N:System" />
 
             
 

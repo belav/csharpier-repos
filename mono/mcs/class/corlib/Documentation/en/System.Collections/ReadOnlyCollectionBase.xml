@@ -34,13 +34,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Collections.ReadOnlyCollectionBase" />
+        >A <see cref="T:System.Collections.ReadOnlyCollectionBase" />
 
         
 
-         instance is always read-only. See <see
-         cref="T:System.Collections.CollectionBase" />
+         instance is always read-only. See <see cref="T:System.Collections.CollectionBase" />
 
         
 
@@ -75,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.ReadOnlyCollectionBase" />
+            >Initializes a new instance of the <see cref="T:System.Collections.ReadOnlyCollectionBase" />
 
             
 
@@ -103,8 +100,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of elements contained in the <see
-             cref="T:System.Collections.ReadOnlyCollectionBase" />
+            >Gets the number of elements contained in the <see cref="T:System.Collections.ReadOnlyCollectionBase" />
 
             
 
@@ -138,23 +134,19 @@
           <para>The foreach statement of the C# language (for each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
           <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
           <para
-            >Initially, the enumerator is positioned before the first element in the collection. <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Initially, the enumerator is positioned before the first element in the collection. <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             also brings the enumerator back to this position.  At this position, <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             also brings the enumerator back to this position.  At this position, <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             is undefined. Therefore, you must call <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is undefined. Therefore, you must call <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             to advance the enumerator to the first element of the collection before reading the value of <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -165,66 +157,54 @@
 
             
 
-             returns the same object until either <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             is called. <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             sets <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             sets <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              to the next element.</para
           >
           <para
-            >If <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returns false. When the enumerator is at this position, subsequent calls to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             also return false. If the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returned false, <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             returned false, <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             is undefined. To set <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             is undefined. To set <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             to the first element of the collection again, you can call <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             to the first element of the collection again, you can call <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             followed by <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             followed by <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
@@ -237,8 +217,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that iterates through the <see
-             cref="T:System.Collections.ReadOnlyCollectionBase" />
+            >Returns an enumerator that iterates through the <see cref="T:System.Collections.ReadOnlyCollectionBase" />
 
             
 
@@ -248,13 +227,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Collections.ReadOnlyCollectionBase" />
+             for the <see cref="T:System.Collections.ReadOnlyCollectionBase" />
 
             
 
@@ -290,8 +267,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the list of elements contained in the <see
-             cref="T:System.Collections.ReadOnlyCollectionBase" />
+            >Gets the list of elements contained in the <see cref="T:System.Collections.ReadOnlyCollectionBase" />
 
             
 
@@ -324,26 +300,22 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The specified array must be of a compatible type.</para>
           <para
-            >This method uses <see
-             cref="M:System.Array.Copy(System.Array,System.Array,System.Int32)" />
+            >This method uses <see cref="M:System.Array.Copy(System.Array,System.Array,System.Int32)" />
 
             
 
              to copy the elements.</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.ReadOnlyCollectionBase.Count" />
+             is <see cref="P:System.Collections.ReadOnlyCollectionBase.Count" />
 
             
 
@@ -353,13 +325,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the entire <see
-             cref="T:System.Collections.ReadOnlyCollectionBase" />
+            >Copies the entire <see cref="T:System.Collections.ReadOnlyCollectionBase" />
 
             
 
-             to a compatible one-dimensional <see
-             cref="T:System.Array" />
+             to a compatible one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -367,34 +337,38 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from <see
-           cref="T:System.Collections.ReadOnlyCollectionBase" />
+           that is the destination of the elements copied from <see cref="T:System.Collections.ReadOnlyCollectionBase" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -425,18 +399,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.ReadOnlyCollectionBase" />
+            >A <see cref="T:System.Collections.ReadOnlyCollectionBase" />
 
             
 
-             object is not synchronized. Derived classes can provide a synchronized version of the <see
-             cref="T:System.Collections.ReadOnlyCollectionBase" />
+             object is not synchronized. Derived classes can provide a synchronized version of the <see cref="T:System.Collections.ReadOnlyCollectionBase" />
 
             
 
-             class using the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             class using the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
@@ -447,8 +418,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to a <see
-             cref="T:System.Collections.ReadOnlyCollectionBase" />
+            >Gets a value indicating whether access to a <see cref="T:System.Collections.ReadOnlyCollectionBase" />
 
             
 
@@ -480,33 +450,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Derived classes can provide their own synchronized version of the <see
-             cref="T:System.Collections.ReadOnlyCollectionBase" />
+            >Derived classes can provide their own synchronized version of the <see cref="T:System.Collections.ReadOnlyCollectionBase" />
 
             
 
-             class using the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             class using the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
-             property. The synchronizing code must perform operations on the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             property. The synchronizing code must perform operations on the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ReadOnlyCollectionBase" />
+             property of the <see cref="T:System.Collections.ReadOnlyCollectionBase" />
 
             
 
-             object, not directly on the <see
-             cref="T:System.Collections.ReadOnlyCollectionBase" />
+             object, not directly on the <see cref="T:System.Collections.ReadOnlyCollectionBase" />
 
             
 
-             object. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
-             cref="T:System.Collections.ReadOnlyCollectionBase" />
+             object. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see cref="T:System.Collections.ReadOnlyCollectionBase" />
 
             
 
@@ -517,8 +481,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to a <see
-             cref="T:System.Collections.ReadOnlyCollectionBase" />
+            >Gets an object that can be used to synchronize access to a <see cref="T:System.Collections.ReadOnlyCollectionBase" />
 
             
 

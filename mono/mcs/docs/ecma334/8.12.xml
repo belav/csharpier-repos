@@ -5,8 +5,7 @@
   <paragraph>Assemblies are used for physical packaging and deployment. An assembly may contain types, the executable code used to implement these types, and references to other assemblies. </paragraph>
   <paragraph>To demonstrate the use of namespaces and assemblies, this section revisits the "hello, world" program presented earlier, and splits it into two pieces: a class library that provides messages and a console application that displays them. </paragraph>
   <paragraph
-    >The class library will contain a single class named HelloMessage. The example <code_example
-    >
+    >The class library will contain a single class named HelloMessage. The example <code_example>
       <![CDATA[
 // HelloLibrary.cs  
 namespace CSharp.Introduction  
@@ -25,8 +24,7 @@ namespace CSharp.Introduction
 
     
 
-    shows the HelloMessage class in a namespace named CSharp.Introduction. The HelloMessage class provides a read-only property named Message. Namespaces can nest, and the declaration <code_example
-    >
+    shows the HelloMessage class in a namespace named CSharp.Introduction. The HelloMessage class provides a read-only property named Message. Namespaces can nest, and the declaration <code_example>
       <![CDATA[
 namespace CSharp.Introduction  
 {...}  
@@ -35,8 +33,7 @@ namespace CSharp.Introduction
 
     
 
-    is shorthand for two levels of namespace nesting: <code_example
-    >
+    is shorthand for two levels of namespace nesting: <code_example>
       <![CDATA[
 namespace CSharp  
 {  
@@ -47,8 +44,7 @@ namespace CSharp
     </code_example>
   </paragraph>
   <paragraph
-    >The next step in the componentization of "hello, world" is to write a console application that uses the HelloMessage class. The fully qualified name for the  class-CSharp.Introduction.HelloMessage-could be used, but this name is quite long and unwieldy. An easier way is to use a using namespace directive, which makes it possible to use all of the types in a namespace without qualification. The example <code_example
-    >
+    >The next step in the componentization of "hello, world" is to write a console application that uses the HelloMessage class. The fully qualified name for the  class-CSharp.Introduction.HelloMessage-could be used, but this name is quite long and unwieldy. An easier way is to use a using namespace directive, which makes it possible to use all of the types in a namespace without qualification. The example <code_example>
       <![CDATA[
 // HelloApp.cs  
 using CSharp.Introduction;  
@@ -67,8 +63,7 @@ class HelloApp
     shows a using namespace directive that refers to the CSharp.Introduction namespace. The occurrences of HelloMessage are shorthand for CSharp.Introduction.HelloMessage. </paragraph
   >
   <paragraph
-    >C# also enables the definition and use of aliases. A using alias directive defines an alias for a type. Such aliases can be useful in situation in which name collisions occur between two class libraries, or when a small number of types from a much larger namespace are being used. The example <code_example
-    >
+    >C# also enables the definition and use of aliases. A using alias directive defines an alias for a type. Such aliases can be useful in situation in which name collisions occur between two class libraries, or when a small number of types from a much larger namespace are being used. The example <code_example>
       <![CDATA[
 using MessageSource = CSharp.Introduction.HelloMessage;  
 ]]>
@@ -79,8 +74,7 @@ using MessageSource = CSharp.Introduction.HelloMessage;
     shows a using alias directive that defines MessageSource as an alias for the HelloMessage class. </paragraph
   >
   <paragraph
-    >The code we have written can be compiled into a class library containing the class HelloMessage and an application containing the class HelloApp. The details of this compilation step might differ based on the compiler or tool being used. A command-line compiler might enable compilation of a class library and an application that uses that library with the following command-line invocations: <code_example
-    >
+    >The code we have written can be compiled into a class library containing the class HelloMessage and an application containing the class HelloApp. The details of this compilation step might differ based on the compiler or tool being used. A command-line compiler might enable compilation of a class library and an application that uses that library with the following command-line invocations: <code_example>
       <![CDATA[
 csc /target:library HelloLibrary.cs   
 csc /reference:HelloLibrary.dll HelloApp.cs  

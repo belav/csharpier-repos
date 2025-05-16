@@ -21,41 +21,34 @@
 
         
 
-         looks like <see
-         cref="T:System.Windows.Forms.ToolStripButton" />
+         looks like <see cref="T:System.Windows.Forms.ToolStripButton" />
 
         
 
-        , but it shows a drop-down area when the user clicks it. Hide or show the drop-down arrow by setting the <see
-         cref="P:System.Windows.Forms.ToolStripDropDownButton.ShowDropDownArrow" />
+        , but it shows a drop-down area when the user clicks it. Hide or show the drop-down arrow by setting the <see cref="P:System.Windows.Forms.ToolStripDropDownButton.ShowDropDownArrow" />
 
         
 
-         property. <see
-         cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+         property. <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
         
 
-         hosts a <see
-         cref="T:System.Windows.Forms.ToolStripOverflowButton" />
+         hosts a <see cref="T:System.Windows.Forms.ToolStripOverflowButton" />
 
         
 
-         that displays items that overflow the <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+         that displays items that overflow the <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
         .</para
       >
       <para
-        >Use the <see
-         cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+        >Use the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
         
 
-         to activate familiar drop-down controls such as color pickers. Set the <see
-         cref="P:System.Windows.Forms.ToolStripDropDownButton.ShowDropDownArrow" />
+         to activate familiar drop-down controls such as color pickers. Set the <see cref="P:System.Windows.Forms.ToolStripDropDownButton.ShowDropDownArrow" />
 
         
 
@@ -65,8 +58,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a control that when clicked displays an associated <see
-         cref="T:System.Windows.Forms.ToolStripDropDown" />
+        >Represents a control that when clicked displays an associated <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
         
 
@@ -85,8 +77,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
             
 
@@ -113,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
             
 
@@ -122,17 +112,19 @@
           >
         </summary>
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Image" />
+          An <see cref="T:System.Drawing.Image" />
 
           
 
-           to be displayed on the <see
-           cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+           to be displayed on the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
           
 
@@ -155,8 +147,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
             
 
@@ -164,12 +155,15 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The text to be displayed on the <see
-           cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+          The text to be displayed on the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
           
 
@@ -196,8 +190,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
             
 
@@ -205,29 +198,34 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The text to be displayed on the <see
-           cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+          The text to be displayed on the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
           
 
           .</param
         >
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Image" />
+          An <see cref="T:System.Drawing.Image" />
 
           
 
-           to be displayed on the <see
-           cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+           to be displayed on the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
           
 
@@ -255,8 +253,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
             
 
@@ -264,41 +261,49 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The text to be displayed on the <see
-           cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+          The text to be displayed on the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
           
 
           .</param
         >
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Image" />
+          An <see cref="T:System.Drawing.Image" />
 
           
 
-           to be displayed on the <see
-           cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+           to be displayed on the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
           
 
           .</param
         >
         <param name="onClick">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The event handler for the <see
-           cref="E:System.Windows.Forms.Control.Click" />
+          The event handler for the <see cref="E:System.Windows.Forms.Control.Click" />
 
           
 
@@ -332,8 +337,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
             
 
@@ -341,46 +345,53 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The text to be displayed on the <see
-           cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+          The text to be displayed on the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
           
 
           .</param
         >
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Image" />
+          An <see cref="T:System.Drawing.Image" />
 
           
 
-           to be displayed on the <see
-           cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+           to be displayed on the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
           
 
           .</param
         >
         <param name="dropDownItems">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+          An array of type <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
-           containing the items of the <see
-           cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+           containing the items of the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
           
 
@@ -409,8 +420,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
             
 
@@ -418,53 +428,64 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The text to be displayed on the <see
-           cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+          The text to be displayed on the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
           
 
           .</param
         >
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Image" />
+          An <see cref="T:System.Drawing.Image" />
 
           
 
-           to be displayed on the <see
-           cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+           to be displayed on the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
           
 
           .</param
         >
         <param name="onClick">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The event handler for the <see
-           cref="E:System.Windows.Forms.Control.Click" />
+          The event handler for the <see cref="E:System.Windows.Forms.Control.Click" />
 
           
 
            event.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+          The name of the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
           
 
@@ -488,13 +509,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether to use the Text property or the <see
-             cref="P:System.Windows.Forms.ToolStripItem.ToolTipText" />
+            >Gets or sets a value indicating whether to use the Text property or the <see cref="P:System.Windows.Forms.ToolStripItem.ToolTipText" />
 
             
 
-             property for the <see
-             cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+             property for the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
             
 
@@ -527,8 +546,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a generic <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Creates a generic <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -538,8 +556,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >A <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -564,8 +581,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether to display the <see
-             cref="T:System.Windows.Forms.ToolTip" />
+            >Gets a value indicating whether to display the <see cref="T:System.Windows.Forms.ToolTip" />
 
             
 
@@ -594,8 +610,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -604,8 +619,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripDropDownButton.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripDropDownButton.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -615,8 +629,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripItem.MouseDown" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripItem.MouseDown" />
 
             
 
@@ -624,12 +637,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -656,8 +672,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -666,8 +681,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripDropDownButton.OnMouseLeave(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripDropDownButton.OnMouseLeave(System.EventArgs)" />
 
             
 
@@ -677,8 +691,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripItem.MouseLeave" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripItem.MouseLeave" />
 
             
 
@@ -686,12 +699,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -719,8 +735,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripItem.MouseUp" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripItem.MouseUp" />
 
             
 
@@ -728,12 +743,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -758,8 +776,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -768,8 +785,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripDropDownButton.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripDropDownButton.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
@@ -779,8 +795,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripItem.Paint" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripItem.Paint" />
 
             
 
@@ -788,12 +803,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.PaintEventArgs" />
+          A <see cref="T:System.Windows.Forms.PaintEventArgs" />
 
           
 
@@ -824,8 +842,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a value indicating whether the drop-down list of the <see
-             cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+            >Retrieves a value indicating whether the drop-down list of the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
             
 
@@ -837,7 +854,11 @@
           <para>true if the drop-down list has items; otherwise, false.</para>
         </returns>
         <param name="charCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -858,8 +879,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether an arrow is displayed on the <see
-             cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+            >Gets or sets a value indicating whether an arrow is displayed on the <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
             
 

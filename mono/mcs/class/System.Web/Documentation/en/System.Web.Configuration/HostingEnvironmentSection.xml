@@ -20,23 +20,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.HostingEnvironmentSection" />
+        >The <see cref="T:System.Web.Configuration.HostingEnvironmentSection" />
 
         
 
-         class provides a way to programmatically access and modify the values of the <see
-         cref="T:System.Web.Configuration.HostingEnvironmentSection" />
+         class provides a way to programmatically access and modify the values of the <see cref="T:System.Web.Configuration.HostingEnvironmentSection" />
 
         
 
-         section in the configuration file.When an ASP.NET application is unused for a specified amount of time, it can be unloaded from memory based on the <see
-         cref="P:System.Web.Configuration.HostingEnvironmentSection.IdleTimeout" />
+         section in the configuration file.When an ASP.NET application is unused for a specified amount of time, it can be unloaded from memory based on the <see cref="P:System.Web.Configuration.HostingEnvironmentSection.IdleTimeout" />
 
         
 
-         and <see
-         cref="P:System.Web.Configuration.HostingEnvironmentSection.ShutdownTimeout" />
+         and <see cref="P:System.Web.Configuration.HostingEnvironmentSection.ShutdownTimeout" />
 
         
 
@@ -58,18 +54,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.HostingEnvironmentSection.#ctor" />
+            >The <see cref="M:System.Web.Configuration.HostingEnvironmentSection.#ctor" />
 
             
 
-             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
-             cref="T:System.Web.Configuration.HostingEnvironmentSection" />
+             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.HostingEnvironmentSection" />
 
             
 
-             class by using the <see
-             cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+             class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" />
 
             
 
@@ -79,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.HostingEnvironmentSection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.HostingEnvironmentSection" />
 
             
 
@@ -115,8 +107,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value for the <see
-             cref="P:System.Web.Configuration.HostingEnvironmentSection.IdleTimeout" />
+            >The default value for the <see cref="P:System.Web.Configuration.HostingEnvironmentSection.IdleTimeout" />
 
             
 
@@ -198,8 +189,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value for the <see
-             cref="P:System.Web.Configuration.HostingEnvironmentSection.ShutdownTimeout" />
+            >The default value for the <see cref="P:System.Web.Configuration.HostingEnvironmentSection.ShutdownTimeout" />
 
             
 

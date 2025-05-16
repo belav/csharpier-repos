@@ -27,8 +27,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This attribute is used by the <format
-         type="text/html">
+        >This attribute is used by the <format type="text/html">
           <a href="44bf97aa-a9a4-4eba-9a0d-cfaa6fc53a66">Native Image Generator (Ngen.exe)</a>
         </format>
 
@@ -37,34 +36,29 @@
          to generate native assembly images.  </para
       >
       <para
-        >Apply the <see
-         cref="T:System.Runtime.CompilerServices.DefaultDependencyAttribute" />
+        >Apply the <see cref="T:System.Runtime.CompilerServices.DefaultDependencyAttribute" />
 
         
 
          attribute to a dependent assembly to determine the preferred default binding.</para
       >
       <para
-        >A dependency that is likely to be loaded (<see
-         cref="F:System.Runtime.CompilerServices.LoadHint.Always" />
+        >A dependency that is likely to be loaded (<see cref="F:System.Runtime.CompilerServices.LoadHint.Always" />
 
         
 
         ) will cause Ngen.exe to bind to that dependency.  Using this hint allows Ngen.exe to generate code that will result in a reduced working set and improved throughput but at the cost of always loading the dependency when the parent assembly is loaded. </para
       >
       <para
-        >When you apply the <see
-         cref="T:System.Runtime.CompilerServices.DependencyAttribute" />
+        >When you apply the <see cref="T:System.Runtime.CompilerServices.DependencyAttribute" />
 
         
 
-         attribute to an assembly with a value of <see
-         cref="F:System.Runtime.CompilerServices.LoadHint.Default" />
+         attribute to an assembly with a value of <see cref="F:System.Runtime.CompilerServices.LoadHint.Default" />
 
         
 
-        , the native image generation service consults the dependent assembly for its preferred default binding, which is specified by the <see
-         cref="T:System.Runtime.CompilerServices.DefaultDependencyAttribute" />
+        , the native image generation service consults the dependent assembly for its preferred default binding, which is specified by the <see cref="T:System.Runtime.CompilerServices.DefaultDependencyAttribute" />
 
         
 
@@ -74,8 +68,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a hint to the common language runtime (CLR) indicating how likely a dependency is to be loaded. This class is used in a dependent assembly to indicate what hint should be used when the parent does not specify the <see
-         cref="T:System.Runtime.CompilerServices.DependencyAttribute" />
+        >Provides a hint to the common language runtime (CLR) indicating how likely a dependency is to be loaded. This class is used in a dependent assembly to indicate what hint should be used when the parent does not specify the <see cref="T:System.Runtime.CompilerServices.DependencyAttribute" />
 
         
 
@@ -107,13 +100,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.CompilerServices.DefaultDependencyAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.DefaultDependencyAttribute" />
 
             
 
-             class with the specified <see
-             cref="T:System.Runtime.CompilerServices.LoadHint" />
+             class with the specified <see cref="T:System.Runtime.CompilerServices.LoadHint" />
 
             
 
@@ -121,12 +112,15 @@
           >
         </summary>
         <param name="loadHintArgument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Runtime.CompilerServices.LoadHint" />
+          One of the <see cref="T:System.Runtime.CompilerServices.LoadHint" />
 
           
 
@@ -157,13 +151,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to return the value of the <see
-             cref="T:System.Runtime.CompilerServices.LoadHint" />
+            >Use this property to return the value of the <see cref="T:System.Runtime.CompilerServices.LoadHint" />
 
             
 
-             enumeration used by the <see
-             cref="T:System.Runtime.CompilerServices.DefaultDependencyAttribute" />
+             enumeration used by the <see cref="T:System.Runtime.CompilerServices.DefaultDependencyAttribute" />
 
             
 
@@ -173,8 +165,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Runtime.CompilerServices.LoadHint" />
+            >Gets the <see cref="T:System.Runtime.CompilerServices.LoadHint" />
 
             
 

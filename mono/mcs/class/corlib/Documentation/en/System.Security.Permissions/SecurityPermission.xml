@@ -46,8 +46,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This permission uses the <see
-         cref="T:System.Security.Permissions.SecurityPermissionFlag" />
+        >This permission uses the <see cref="T:System.Security.Permissions.SecurityPermissionFlag" />
 
         
 
@@ -89,8 +88,7 @@
 
           
 
-           is not a valid <see
-           cref="T:System.Security.Permissions.PermissionState" />
+           is not a valid <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -103,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.SecurityPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.SecurityPermission" />
 
             
 
@@ -112,12 +109,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -156,8 +156,7 @@
 
           
 
-           is not a valid <see
-           cref="T:System.Security.Permissions.SecurityPermissionFlag" />
+           is not a valid <see cref="T:System.Security.Permissions.SecurityPermissionFlag" />
 
           
 
@@ -166,8 +165,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.SecurityPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.SecurityPermission" />
 
             
 
@@ -175,12 +173,15 @@
           >
         </summary>
         <param name="flag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The initial state of the permission, represented by a bitwise OR combination of any permission bits defined by <see
-           cref="T:System.Security.Permissions.SecurityPermissionFlag" />
+          The initial state of the permission, represented by a bitwise OR combination of any permission bits defined by <see cref="T:System.Security.Permissions.SecurityPermissionFlag" />
 
           
 
@@ -284,8 +285,7 @@
         <remarks>
           <para
             >The state of the current instance is changed to the
- state encoded in <paramref
-             name="esd" />
+ state encoded in <paramref name="esd" />
 
             
 
@@ -294,8 +294,7 @@
           <block subset="none" type="note">
             <para
               >For the XML encoding for this class, see
- the <see
-               cref="T:System.Security.Permissions.SecurityPermission" />
+ the <see cref="T:System.Security.Permissions.SecurityPermission" />
 
               
 
@@ -304,7 +303,6 @@
             >
             <para
               >This method overrides <see
-
                 cref="M:System.Security.CodeAccessPermission.FromXml(System.Security.SecurityElement)"
                 qualify="true"
               />
@@ -321,8 +319,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -334,16 +331,14 @@
 
             
 
-             does not contain the encoding for a <see
-             cref="T:System.Security.Permissions.SecurityPermission" />
+             does not contain the encoding for a <see cref="T:System.Security.Permissions.SecurityPermission" />
 
             
 
              instance.</para
           >
           <para
-            >The version number of <paramref
-             name="esd" />
+            >The version number of <paramref name="esd" />
 
             
 
@@ -355,7 +350,11 @@
           <para>Reconstructs a permission with a specified state from an XML encoding.</para>
         </summary>
         <param name="esd">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -395,13 +394,11 @@
 
           
 
-           is not <see
-           langword="null" />
+           is not <see langword="null" />
 
           
 
-           and is not of type <see
-           cref="T:System.Security.Permissions.SecurityPermission" />
+           and is not of type <see cref="T:System.Security.Permissions.SecurityPermission" />
 
           
 
@@ -420,7 +417,11 @@
           <para>A new permission object that represents the intersection of the current permission and the specified permission. This new permission is null if the intersection is empty.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -460,13 +461,11 @@
 
           
 
-           is not <see
-           langword="null" />
+           is not <see langword="null" />
 
           
 
-           and is not of type <see
-           cref="T:System.Security.Permissions.SecurityPermission" />
+           and is not of type <see cref="T:System.Security.Permissions.SecurityPermission" />
 
           
 
@@ -485,7 +484,11 @@
           <para>true if the current permission is a subset of the specified permission; otherwise, false.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -575,8 +578,7 @@
           <block subset="none" type="note">
             <para
               >For the XML encoding for this class, see
- the <see
-               cref="T:System.Security.Permissions.SecurityPermission" />
+ the <see cref="T:System.Security.Permissions.SecurityPermission" />
 
               
 
@@ -584,7 +586,9 @@
             >
             <para
               >This method overrides <see
-               cref="M:System.Security.CodeAccessPermission.ToXml" qualify="true" />
+                cref="M:System.Security.CodeAccessPermission.ToXml"
+                qualify="true"
+              />
 
               
 
@@ -634,13 +638,11 @@
 
           
 
-           is not <see
-           langword="null" />
+           is not <see langword="null" />
 
           
 
-           and is not of type <see
-           cref="T:System.Security.Permissions.SecurityPermission" />
+           and is not of type <see cref="T:System.Security.Permissions.SecurityPermission" />
 
           
 
@@ -649,8 +651,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see
-             cref="M:System.Security.Permissions.SecurityPermission.Union(System.Security.IPermission)" />
+            >The result of a call to <see cref="M:System.Security.Permissions.SecurityPermission.Union(System.Security.IPermission)" />
 
             
 
@@ -666,7 +667,11 @@
           <para>A new permission that represents the union of the current permission and the specified permission.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

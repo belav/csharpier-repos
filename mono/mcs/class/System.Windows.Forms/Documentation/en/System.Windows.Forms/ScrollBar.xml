@@ -31,18 +31,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You typically do not inherit directly from the <see
-         cref="T:System.Windows.Forms.ScrollBar" />
+        >You typically do not inherit directly from the <see cref="T:System.Windows.Forms.ScrollBar" />
 
         
 
-         class. To create your own scroll bar class, inherit from the <see
-         cref="T:System.Windows.Forms.VScrollBar" />
+         class. To create your own scroll bar class, inherit from the <see cref="T:System.Windows.Forms.VScrollBar" />
 
         
 
-         or <see
-         cref="T:System.Windows.Forms.HScrollBar" />
+         or <see cref="T:System.Windows.Forms.HScrollBar" />
 
         
 
@@ -52,51 +49,42 @@
         <para>The scroll box is sometimes referred to as the scroll thumb.</para>
       </block>
       <para
-        >To adjust the value range of the scroll bar control, set the <see
-         cref="P:System.Windows.Forms.ScrollBar.Minimum" />
+        >To adjust the value range of the scroll bar control, set the <see cref="P:System.Windows.Forms.ScrollBar.Minimum" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.ScrollBar.Maximum" />
+         and <see cref="P:System.Windows.Forms.ScrollBar.Maximum" />
 
         
 
-         properties. To adjust the distance the scroll box moves, set the <see
-         cref="P:System.Windows.Forms.ScrollBar.SmallChange" />
+         properties. To adjust the distance the scroll box moves, set the <see cref="P:System.Windows.Forms.ScrollBar.SmallChange" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
+         and <see cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
 
         
 
-         properties. To adjust the starting point of the scroll box, set the <see
-         cref="P:System.Windows.Forms.ScrollBar.Value" />
+         properties. To adjust the starting point of the scroll box, set the <see cref="P:System.Windows.Forms.ScrollBar.Value" />
 
         
 
          property when the control is initially displayed.</para
       >
       <para
-        >User interface guidelines suggest that the <see
-         cref="P:System.Windows.Forms.ScrollBar.SmallChange" />
+        >User interface guidelines suggest that the <see cref="P:System.Windows.Forms.ScrollBar.SmallChange" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
+         and <see cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
 
         
 
-         properties are set relative to the size of the view that the user sees, not to the total size including the unseen part. For example, if you have a picture box with scroll bars displaying a large image, the <see
-         cref="P:System.Windows.Forms.ScrollBar.SmallChange" />
+         properties are set relative to the size of the view that the user sees, not to the total size including the unseen part. For example, if you have a picture box with scroll bars displaying a large image, the <see cref="P:System.Windows.Forms.ScrollBar.SmallChange" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
+         and <see cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
 
         
 
@@ -117,13 +105,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see
-             cref="P:System.Windows.Forms.Control.TabStop" />
+            >By default, the <see cref="P:System.Windows.Forms.Control.TabStop" />
 
             
 
-             property is set to false when a new instance of a <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+             property is set to false when a new instance of a <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
@@ -133,8 +119,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
@@ -172,8 +157,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting the <see
-             cref="P:System.Windows.Forms.ScrollBar.AutoSize" />
+            >Setting the <see cref="P:System.Windows.Forms.ScrollBar.AutoSize" />
 
             
 
@@ -183,8 +167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
@@ -214,8 +197,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -227,8 +209,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ScrollBar.AutoSize" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ScrollBar.AutoSize" />
 
             
 
@@ -283,8 +264,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ScrollBar.BackColor" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ScrollBar.BackColor" />
 
             
 
@@ -343,8 +323,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ScrollBar.BackgroundImage" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ScrollBar.BackgroundImage" />
 
             
 
@@ -408,8 +387,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ScrollBar.BackgroundImageLayout" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ScrollBar.BackgroundImageLayout" />
 
             
 
@@ -436,23 +414,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+            >The <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
-             control sets the <see
-             cref="F:System.Windows.Forms.ControlStyles.StandardClick" />
+             control sets the <see cref="F:System.Windows.Forms.ControlStyles.StandardClick" />
 
             
 
-             bit flag to false, so the <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+             bit flag to false, so the <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
-             will not raise the <see
-             cref="E:System.Windows.Forms.ScrollBar.Click" />
+             will not raise the <see cref="E:System.Windows.Forms.ScrollBar.Click" />
 
             
 
@@ -462,8 +436,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the control is clicked if the <see
-             cref="F:System.Windows.Forms.ControlStyles.StandardClick" />
+            >Occurs when the control is clicked if the <see cref="F:System.Windows.Forms.ControlStyles.StandardClick" />
 
             
 
@@ -509,13 +482,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As implemented in the <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+            >As implemented in the <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
-             class, this property always returns the <see
-             cref="F:System.Windows.Forms.ImeMode.Disable" />
+             class, this property always returns the <see cref="F:System.Windows.Forms.ImeMode.Disable" />
 
             
 
@@ -550,8 +521,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the default distance between the <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+            >Gets the default distance between the <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
@@ -578,23 +548,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+            >The <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
-             control sets the <see
-             cref="F:System.Windows.Forms.ControlStyles.StandardClick" />
+             control sets the <see cref="F:System.Windows.Forms.ControlStyles.StandardClick" />
 
             
 
-             bit flag to false, so the <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+             bit flag to false, so the <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
-             will not raise the <see
-             cref="E:System.Windows.Forms.ScrollBar.DoubleClick" />
+             will not raise the <see cref="E:System.Windows.Forms.ScrollBar.DoubleClick" />
 
             
 
@@ -604,8 +570,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+            >Occurs when the <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
@@ -664,8 +629,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ScrollBar.Font" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ScrollBar.Font" />
 
             
 
@@ -730,8 +694,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ScrollBar.ForeColor" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ScrollBar.ForeColor" />
 
             
 
@@ -765,13 +728,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is a helper method that used by the <see
-             cref="M:System.Windows.Forms.Control.ScaleControl(System.Drawing.SizeF,System.Windows.Forms.BoundsSpecified)" />
+            >This is a helper method that used by the <see cref="M:System.Windows.Forms.Control.ScaleControl(System.Drawing.SizeF,System.Windows.Forms.BoundsSpecified)" />
 
             
 
-             method to return the bounds that the control should be scaled by. You may override this method if you wish to reuse <see
-             cref="M:System.Windows.Forms.Control.ScaleControl(System.Drawing.SizeF,System.Windows.Forms.BoundsSpecified)" />
+             method to return the bounds that the control should be scaled by. You may override this method if you wish to reuse <see cref="M:System.Windows.Forms.Control.ScaleControl(System.Drawing.SizeF,System.Windows.Forms.BoundsSpecified)" />
 
             
 
@@ -781,8 +742,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the bounds to use when the <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+            >Returns the bounds to use when the <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
@@ -792,8 +752,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Rectangle" />
+            >A <see cref="T:System.Drawing.Rectangle" />
 
             
 
@@ -801,41 +760,49 @@
           >
         </returns>
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that specifies the initial bounds.</param
         >
         <param name="factor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.SizeF" />
+          A <see cref="T:System.Drawing.SizeF" />
 
           
 
            that indicates the amount the current bounds should be increased by.</param
         >
         <param name="specified">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.BoundsSpecified" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.BoundsSpecified" />
 
           
 
-           values that indicate the how to define the control's size and position returned by <see
-           cref="M:System.Windows.Forms.ScrollBar.GetScaledBounds(System.Drawing.Rectangle,System.Drawing.SizeF,System.Windows.Forms.BoundsSpecified)" />
+           values that indicate the how to define the control's size and position returned by <see cref="M:System.Windows.Forms.ScrollBar.GetScaledBounds(System.Drawing.Rectangle,System.Drawing.SizeF,System.Windows.Forms.BoundsSpecified)" />
 
           
 
@@ -892,8 +859,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ScrollBar.ImeMode" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ScrollBar.ImeMode" />
 
             
 
@@ -925,13 +891,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the user clicks in the scroll bar track on either side of the scroll box, the <see
-             cref="P:System.Windows.Forms.ScrollBar.Value" />
+            >When the user clicks in the scroll bar track on either side of the scroll box, the <see cref="P:System.Windows.Forms.ScrollBar.Value" />
 
             
 
-             property changes according to the value set in the <see
-             cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
+             property changes according to the value set in the <see cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
 
             
 
@@ -941,23 +905,19 @@
             <para>You can handle key press events so that when the user presses the PAGE UP or PAGE DOWN key the scroll box moves.</para>
           </block>
           <para
-            >User interface guidelines suggest that the <see
-             cref="P:System.Windows.Forms.ScrollBar.SmallChange" />
+            >User interface guidelines suggest that the <see cref="P:System.Windows.Forms.ScrollBar.SmallChange" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
+             and <see cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
 
             
 
-             properties are set relative to the size of the view that the user sees, not to the total size including the unseen part. For example, if you have a picture box with scroll bars displaying a large image, the <see
-             cref="P:System.Windows.Forms.ScrollBar.SmallChange" />
+             properties are set relative to the size of the view that the user sees, not to the total size including the unseen part. For example, if you have a picture box with scroll bars displaying a large image, the <see cref="P:System.Windows.Forms.ScrollBar.SmallChange" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
+             and <see cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
 
             
 
@@ -967,8 +927,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value to be added to or subtracted from the <see
-             cref="P:System.Windows.Forms.ScrollBar.Value" />
+            >Gets or sets a value to be added to or subtracted from the <see cref="P:System.Windows.Forms.ScrollBar.Value" />
 
             
 
@@ -1000,26 +959,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You might consider adjusting the <see
-             cref="P:System.Windows.Forms.ScrollBar.Maximum" />
+            >You might consider adjusting the <see cref="P:System.Windows.Forms.ScrollBar.Maximum" />
 
             
 
              property dynamically to match the size of the scroll bar's parent in proportion to pixel size or to the number of rows or lines displayed.</para
           >
           <para
-            >The maximum value can only be reached programmatically. The value of a scroll bar cannot reach its maximum value through user interaction at run time. The maximum value that can be reached through user interaction is equal to 1 plus the <see
-             cref="P:System.Windows.Forms.ScrollBar.Maximum" />
+            >The maximum value can only be reached programmatically. The value of a scroll bar cannot reach its maximum value through user interaction at run time. The maximum value that can be reached through user interaction is equal to 1 plus the <see cref="P:System.Windows.Forms.ScrollBar.Maximum" />
 
             
 
-             property value minus the <see
-             cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
+             property value minus the <see cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
 
             
 
-             property value. If necessary, you can set the <see
-             cref="P:System.Windows.Forms.ScrollBar.Maximum" />
+             property value. If necessary, you can set the <see cref="P:System.Windows.Forms.ScrollBar.Maximum" />
 
             
 
@@ -1087,13 +1042,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+            >The <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
-             control does not raise the <see
-             cref="E:System.Windows.Forms.ScrollBar.MouseClick" />
+             control does not raise the <see cref="E:System.Windows.Forms.ScrollBar.MouseClick" />
 
             
 
@@ -1103,8 +1056,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user clicks the <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+            >Occurs when the user clicks the <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
@@ -1137,13 +1089,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+            >The <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
-             control does not raise the <see
-             cref="E:System.Windows.Forms.ScrollBar.MouseDoubleClick" />
+             control does not raise the <see cref="E:System.Windows.Forms.ScrollBar.MouseDoubleClick" />
 
             
 
@@ -1153,8 +1103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user double-clicks the <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+            >Occurs when the user double-clicks the <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
@@ -1184,13 +1133,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+            >The <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
-             control does not raise the <see
-             cref="E:System.Windows.Forms.ScrollBar.MouseDown" />
+             control does not raise the <see cref="E:System.Windows.Forms.ScrollBar.MouseDown" />
 
             
 
@@ -1257,13 +1204,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+            >The <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
-             control does not raise the <see
-             cref="E:System.Windows.Forms.ScrollBar.MouseUp" />
+             control does not raise the <see cref="E:System.Windows.Forms.ScrollBar.MouseUp" />
 
             
 
@@ -1296,7 +1241,11 @@
         <summary>To be added.</summary>
         <remarks>To be added.</remarks>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1324,7 +1273,11 @@
         <summary>To be added.</summary>
         <remarks>To be added.</remarks>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1353,21 +1306,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+            >The <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
-             control will convert mouse wheel movements to scrolling when the <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+             control will convert mouse wheel movements to scrolling when the <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
              is in focus.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1376,8 +1326,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ScrollBar.OnMouseWheel(System.Windows.Forms.MouseEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ScrollBar.OnMouseWheel(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -1387,8 +1336,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.MouseWheel" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.MouseWheel" />
 
             
 
@@ -1396,12 +1344,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
         </param>
       </Docs>
       <AssemblyInfo>
@@ -1424,8 +1375,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1434,8 +1384,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ScrollBar.OnScroll(System.Windows.Forms.ScrollEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ScrollBar.OnScroll(System.Windows.Forms.ScrollEventArgs)" />
 
             
 
@@ -1445,8 +1394,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ScrollBar.Scroll" />
+            >Raises the <see cref="E:System.Windows.Forms.ScrollBar.Scroll" />
 
             
 
@@ -1454,12 +1402,15 @@
           >
         </summary>
         <param name="se">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ScrollEventArgs" />
+          A <see cref="T:System.Windows.Forms.ScrollEventArgs" />
 
           
 
@@ -1484,8 +1435,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1494,8 +1444,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ScrollBar.OnValueChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ScrollBar.OnValueChanged(System.EventArgs)" />
 
             
 
@@ -1505,8 +1454,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ScrollBar.ValueChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.ScrollBar.ValueChanged" />
 
             
 
@@ -1514,12 +1462,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1573,8 +1524,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1609,36 +1559,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the user presses one of the arrow keys or clicks one of the scroll bar buttons, the <see
-             cref="P:System.Windows.Forms.ScrollBar.Value" />
+            >When the user presses one of the arrow keys or clicks one of the scroll bar buttons, the <see cref="P:System.Windows.Forms.ScrollBar.Value" />
 
             
 
-             property changes according to the value set in the <see
-             cref="P:System.Windows.Forms.ScrollBar.SmallChange" />
+             property changes according to the value set in the <see cref="P:System.Windows.Forms.ScrollBar.SmallChange" />
 
             
 
              property.</para
           >
           <para
-            >User interface guidelines suggest that the <see
-             cref="P:System.Windows.Forms.ScrollBar.SmallChange" />
+            >User interface guidelines suggest that the <see cref="P:System.Windows.Forms.ScrollBar.SmallChange" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
+             and <see cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
 
             
 
-             properties are set relative to the size of the view that the user sees, not to the total size including the unseen part. For example, if you have a picture box with scroll bars displaying a large image, the <see
-             cref="P:System.Windows.Forms.ScrollBar.SmallChange" />
+             properties are set relative to the size of the view that the user sees, not to the total size including the unseen part. For example, if you have a picture box with scroll bars displaying a large image, the <see cref="P:System.Windows.Forms.ScrollBar.SmallChange" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
+             and <see cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
 
             
 
@@ -1648,8 +1592,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the value to be added to or subtracted from the <see
-             cref="P:System.Windows.Forms.ScrollBar.Value" />
+            >Gets or sets the value to be added to or subtracted from the <see cref="P:System.Windows.Forms.ScrollBar.Value" />
 
             
 
@@ -1678,13 +1621,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the user presses the TAB key, the input focus is set to the next control in the tab order. Controls with the <see
-             cref="P:System.Windows.Forms.ScrollBar.TabStop" />
+            >When the user presses the TAB key, the input focus is set to the next control in the tab order. Controls with the <see cref="P:System.Windows.Forms.ScrollBar.TabStop" />
 
             
 
-             property value of false are not included in the collection of controls in the tab order. You can manipulate the tab order by setting the control's <see
-             cref="P:System.Windows.Forms.Control.TabIndex" />
+             property value of false are not included in the collection of controls in the tab order. You can manipulate the tab order by setting the control's <see cref="P:System.Windows.Forms.Control.TabIndex" />
 
             
 
@@ -1694,8 +1635,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the user can give the focus to the <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+            >Gets or sets a value indicating whether the user can give the focus to the <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
@@ -1757,8 +1697,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ScrollBar.Text" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ScrollBar.Text" />
 
             
 
@@ -1782,19 +1721,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ScrollBar.ToString" />
+            >The <see cref="M:System.Windows.Forms.ScrollBar.ToString" />
 
             
 
-             method returns a string that includes the type and the values for the <see
-             cref="P:System.Windows.Forms.ScrollBar.Minimum" />
+             method returns a string that includes the type and the values for the <see cref="P:System.Windows.Forms.ScrollBar.Minimum" />
             <see cref="P:System.Windows.Forms.ScrollBar.Minimum" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.ScrollBar.Value" />
+            , and <see cref="P:System.Windows.Forms.ScrollBar.Value" />
 
             
 
@@ -1804,8 +1740,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+            >Returns a string that represents the <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
@@ -1815,8 +1750,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the current <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+            >A string that represents the current <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
@@ -1840,33 +1774,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ScrollBar.UpdateScrollInfo" />
+            >The <see cref="M:System.Windows.Forms.ScrollBar.UpdateScrollInfo" />
 
             
 
-             method redraws the <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+             method redraws the <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
-             by using the values of the <see
-             cref="P:System.Windows.Forms.ScrollBar.Minimum" />
+             by using the values of the <see cref="P:System.Windows.Forms.ScrollBar.Minimum" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ScrollBar.Maximum" />
+            , <see cref="P:System.Windows.Forms.ScrollBar.Maximum" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
+            , <see cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.ScrollBar.Value" />
+            , and <see cref="P:System.Windows.Forms.ScrollBar.Value" />
 
             
 
@@ -1876,8 +1804,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates the <see
-             cref="T:System.Windows.Forms.ScrollBar" />
+            >Updates the <see cref="T:System.Windows.Forms.ScrollBar" />
 
             
 
@@ -1927,8 +1854,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1940,13 +1866,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.ScrollBar.Value" />
+            >Occurs when the <see cref="P:System.Windows.Forms.ScrollBar.Value" />
 
             
 
-             property is changed, either by a <see
-             cref="E:System.Windows.Forms.ScrollBar.Scroll" />
+             property is changed, either by a <see cref="E:System.Windows.Forms.ScrollBar.Scroll" />
 
             
 

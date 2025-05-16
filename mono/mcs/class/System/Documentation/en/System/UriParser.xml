@@ -19,33 +19,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The UriParser class enables you to create parsers for new URI schemes. You can write these parsers in their entirety, or the parsers can be derived from well-known schemes (HTTP, FTP, and other schemes based on network protocols). If you want to create a completely new parser, inherit from <see
-         cref="T:System.GenericUriParser" />
+        >The UriParser class enables you to create parsers for new URI schemes. You can write these parsers in their entirety, or the parsers can be derived from well-known schemes (HTTP, FTP, and other schemes based on network protocols). If you want to create a completely new parser, inherit from <see cref="T:System.GenericUriParser" />
 
         
 
-        . If you want to create a parser that extends a well-known URI scheme, inherit from <see
-         cref="T:System.FtpStyleUriParser" />
+        . If you want to create a parser that extends a well-known URI scheme, inherit from <see cref="T:System.FtpStyleUriParser" />
 
         
 
-        , <see
-         cref="T:System.HttpStyleUriParser" />
+        , <see cref="T:System.HttpStyleUriParser" />
 
         
 
-        , <see
-         cref="T:System.FileStyleUriParser" />
+        , <see cref="T:System.FileStyleUriParser" />
 
         
 
-        , <see
-         cref="T:System.GopherStyleUriParser" />
+        , <see cref="T:System.GopherStyleUriParser" />
 
         
 
-        , or <see
-         cref="T:System.LdapStyleUriParser" />
+        , or <see cref="T:System.LdapStyleUriParser" />
 
         
 
@@ -106,31 +100,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.UriParser.GetComponents(System.Uri,System.UriComponents,System.UriFormat)" />
+            >Use the <see cref="M:System.UriParser.GetComponents(System.Uri,System.UriComponents,System.UriFormat)" />
 
             
 
-             method to determine the value of various parts of the URI, such as the <see
-             cref="F:System.UriComponents.Scheme" />
+             method to determine the value of various parts of the URI, such as the <see cref="F:System.UriComponents.Scheme" />
 
             
 
-            , <see
-             cref="F:System.UriComponents.Host" />
+            , <see cref="F:System.UriComponents.Host" />
 
             
 
-            , or <see
-             cref="F:System.UriComponents.Port" />
+            , or <see cref="F:System.UriComponents.Port" />
 
             
 
             .</para
           >
           <para
-            >The components are returned in the order that they appear in the URI. For example, if <see
-             cref="F:System.UriComponents.Scheme" />
+            >The components are returned in the order that they appear in the URI. For example, if <see cref="F:System.UriComponents.Scheme" />
 
             
 
@@ -146,36 +135,45 @@
           <para>A string that contains the components.</para>
         </returns>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The URI to parse.</param
         >
         <param name="components">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.UriComponents" />
+          The <see cref="T:System.UriComponents" />
 
           
 
-           to retrieve from <paramref
-           name="uri" />
+           to retrieve from <paramref name="uri" />
 
           
 
           .</param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.UriFormat" />
+          One of the <see cref="T:System.UriFormat" />
 
           
 
@@ -237,13 +235,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether <paramref
-             name="baseUri" />
+            >Determines whether <paramref name="baseUri" />
 
             
 
-             is a base URI for <paramref
-             name="relativeUri" />
+             is a base URI for <paramref name="relativeUri" />
 
             
 
@@ -253,13 +249,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="baseUri" />
+            >true if <paramref name="baseUri" />
 
             
 
-             is a base URI for <paramref
-             name="relativeUri" />
+             is a base URI for <paramref name="relativeUri" />
 
             
 
@@ -267,14 +261,22 @@
           >
         </returns>
         <param name="baseUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The base URI.</param
         >
         <param name="relativeUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -312,8 +314,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="schemeName" />
+            >true if <paramref name="schemeName" />
 
             
 
@@ -321,7 +322,11 @@
           >
         </returns>
         <param name="schemeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -353,8 +358,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.UriParser.IsWellFormedOriginalString(System.Uri)" />
+            >The <see cref="M:System.UriParser.IsWellFormedOriginalString(System.Uri)" />
 
             
 
@@ -382,8 +386,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="uri" />
+            >true if <paramref name="uri" />
 
             
 
@@ -391,7 +394,11 @@
           >
         </returns>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -418,13 +425,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation returns the same <see
-             cref="T:System.UriParser" />
+            >The default implementation returns the same <see cref="T:System.UriParser" />
 
             
 
-             instance. You may need to override this method and return a different <see
-             cref="T:System.UriParser" />
+             instance. You may need to override this method and return a different <see cref="T:System.UriParser" />
 
             
 
@@ -434,13 +439,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Invoked by a <see
-             cref="T:System.Uri" />
+            >Invoked by a <see cref="T:System.Uri" />
 
             
 
-             constructor to get a <see
-             cref="T:System.UriParser" />
+             constructor to get a <see cref="T:System.UriParser" />
 
             
 
@@ -450,13 +453,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.UriParser" />
+            >A <see cref="T:System.UriParser" />
 
             
 
-             for the constructed <see
-             cref="T:System.Uri" />
+             for the constructed <see cref="T:System.Uri" />
 
             
 
@@ -497,8 +498,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Invoked by the Framework when a <see
-             cref="T:System.UriParser" />
+            >Invoked by the Framework when a <see cref="T:System.UriParser" />
 
             
 
@@ -506,19 +506,26 @@
           >
         </summary>
         <param name="schemeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The scheme that is associated with this <see
-           cref="T:System.UriParser" />
+          The scheme that is associated with this <see cref="T:System.UriParser" />
 
           
 
           .</param
         >
         <param name="defaultPort">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -553,13 +560,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="defaultPort" />
+            >If the <paramref name="defaultPort" />
 
             
 
-             parameter is set to -1, the <see
-             cref="M:System.UriParser.Register(System.UriParser,System.String,System.Int32)" />
+             parameter is set to -1, the <see cref="M:System.UriParser.Register(System.UriParser,System.String,System.Int32)" />
 
             
 
@@ -569,8 +574,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Associates a scheme and port number with a <see
-             cref="T:System.UriParser" />
+            >Associates a scheme and port number with a <see cref="T:System.UriParser" />
 
             
 
@@ -578,21 +582,33 @@
           >
         </summary>
         <param name="uriParser">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The URI parser to register.</param
         >
         <param name="schemeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the scheme that is associated with this parser.</param
         >
         <param name="defaultPort">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

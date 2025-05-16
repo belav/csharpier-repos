@@ -24,31 +24,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
+        >The <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
 
         
 
-         class represents a collection of objects arranged on a design surface or inside a parent <see
-         cref="T:System.Windows.Forms.ContainerControl" />
+         class represents a collection of objects arranged on a design surface or inside a parent <see cref="T:System.Windows.Forms.ContainerControl" />
 
         
 
         . </para
       >
       <para
-        >There are no publicly defined constructors in <see
-         cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
+        >There are no publicly defined constructors in <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
 
         
 
-         because it is designed to be used only internally within the dnprdnshort. However, classes derived from <see
-         cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
+         because it is designed to be used only internally within the dnprdnshort. However, classes derived from <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
 
         
 
-        , such as <see
-         cref="T:System.Windows.Forms.Control.ControlCollection" />
+        , such as <see cref="T:System.Windows.Forms.Control.ControlCollection" />
 
         
 
@@ -77,8 +72,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The type of the specified array must be compatible with the source collection. </para>
           <para
-            >This method uses the <see
-             cref="M:System.Array.Copy(System.Array,System.Array,System.Int32)" />
+            >This method uses the <see cref="M:System.Array.Copy(System.Array,System.Array,System.Int32)" />
 
             
 
@@ -88,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the entire contents of this collection to a compatible one-dimensional <see
-             cref="T:System.Array" />
+            >Copies the entire contents of this collection to a compatible one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -97,24 +90,30 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
            that is the destination of the elements copied from the current collection. The array must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -162,8 +161,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether two <see
-             cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
+            >Determines whether two <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
 
             
 
@@ -173,13 +171,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see
-             cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
+            >true if the specified <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
 
             
 
-             is equal to the current <see
-             cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
+             is equal to the current <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
 
             
 
@@ -187,17 +183,19 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
+          The <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
 
           
 
-           to compare with the current <see
-           cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
+           to compare with the current <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
 
           
 
@@ -226,8 +224,7 @@
           <list type="bullet">
             <item>
               <para
-                >Lock the collection during the entire enumeration using a <see
-                 cref="T:System.Threading.Monitor" />
+                >Lock the collection during the entire enumeration using a <see cref="T:System.Threading.Monitor" />
 
                 
 
@@ -246,8 +243,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -276,8 +272,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
+            >A hash code for the current <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
 
             
 
@@ -329,13 +324,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
+            >This method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -345,8 +338,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see the <see
-             cref="P:System.Collections.ICollection.IsSynchronized" />
+            >For a description of this member, see the <see cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
@@ -372,13 +364,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
+            >This method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -388,8 +378,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+            >For a description of this member, see the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
@@ -414,13 +403,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
+            >This method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -430,8 +417,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see the <see
-             cref="M:System.Collections.IList.Add(System.Object)" />
+            >For a description of this member, see the <see cref="M:System.Collections.IList.Add(System.Object)" />
 
             
 
@@ -443,17 +429,19 @@
           <para>The position into which the new element was inserted.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to add to the <see
-           cref="T:System.Collections.IList" />
+           to add to the <see cref="T:System.Collections.IList" />
 
           
 
@@ -475,13 +463,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
+            >This method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -491,8 +477,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see the <see
-             cref="M:System.Collections.IList.Clear" />
+            >For a description of this member, see the <see cref="M:System.Collections.IList.Clear" />
 
             
 
@@ -517,13 +502,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
+            >This method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -533,8 +516,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see the <see
-             cref="M:System.Collections.IList.Contains(System.Object)" />
+            >For a description of this member, see the <see cref="M:System.Collections.IList.Contains(System.Object)" />
 
             
 
@@ -544,13 +526,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Object" />
+            >true if the <see cref="T:System.Object" />
 
             
 
-             is found in the <see
-             cref="T:System.Collections.IList" />
+             is found in the <see cref="T:System.Collections.IList" />
 
             
 
@@ -558,17 +538,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to locate in the <see
-           cref="T:System.Collections.IList" />
+           to locate in the <see cref="T:System.Collections.IList" />
 
           
 
@@ -592,13 +574,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
+            >This method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -608,8 +588,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see the <see
-             cref="M:System.Collections.IList.IndexOf(System.Object)" />
+            >For a description of this member, see the <see cref="M:System.Collections.IList.IndexOf(System.Object)" />
 
             
 
@@ -619,8 +598,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of <paramref
-             name="value" />
+            >The index of <paramref name="value" />
 
             
 
@@ -628,17 +606,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to locate in the <see
-           cref="T:System.Collections.IList" />
+           to locate in the <see cref="T:System.Collections.IList" />
 
           
 
@@ -663,13 +643,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
+            >This method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -679,8 +657,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see the <see
-             cref="M:System.Collections.IList.Insert(System.Int32,System.Object)" />
+            >For a description of this member, see the <see cref="M:System.Collections.IList.Insert(System.Int32,System.Object)" />
 
             
 
@@ -688,29 +665,34 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="value" />
+          The zero-based index at which <paramref name="value" />
 
           
 
            should be inserted.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to insert into the <see
-           cref="T:System.Collections.IList" />
+           to insert into the <see cref="T:System.Collections.IList" />
 
           
 
@@ -732,13 +714,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
+            >This method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -748,8 +728,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see the <see
-             cref="P:System.Collections.IList.IsFixedSize" />
+            >For a description of this member, see the <see cref="P:System.Collections.IList.IsFixedSize" />
 
             
 
@@ -796,13 +775,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
+            >This method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -812,8 +789,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see the <see
-             cref="M:System.Collections.IList.Remove(System.Object)" />
+            >For a description of this member, see the <see cref="M:System.Collections.IList.Remove(System.Object)" />
 
             
 
@@ -821,17 +797,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to remove from the <see
-           cref="T:System.Collections.IList" />
+           to remove from the <see cref="T:System.Collections.IList" />
 
           
 
@@ -855,13 +833,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
+            >This method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -871,8 +847,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see the <see
-             cref="M:System.Collections.IList.RemoveAt(System.Int32)" />
+            >For a description of this member, see the <see cref="M:System.Collections.IList.RemoveAt(System.Int32)" />
 
             
 
@@ -880,7 +855,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

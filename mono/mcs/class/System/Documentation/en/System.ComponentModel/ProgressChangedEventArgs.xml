@@ -20,8 +20,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
+        >Provides data for the <see cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
 
         
 
@@ -54,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.ProgressChangedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ProgressChangedEventArgs" />
 
             
 
@@ -63,14 +61,22 @@
           >
         </summary>
         <param name="progressPercentage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The percentage of an asynchronous task that has been completed.</param
         >
         <param name="userState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -95,8 +101,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
+            >The <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
 
             
 

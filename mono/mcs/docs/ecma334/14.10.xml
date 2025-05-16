@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
 <clause number="14.10" title="Logical operators">
   <paragraph
-    >The &amp;, ^, and | operators are called the logical operators. <grammar_production
-    >
+    >The &amp;, ^, and | operators are called the logical operators. <grammar_production>
       <name>
         <non_terminal where="14.10">and-expression</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="14.9">equality-expression</non_terminal>
       </rhs>
       <rhs>
@@ -26,8 +24,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="14.10">and-expression</non_terminal>
       </rhs>
       <rhs>
@@ -43,8 +40,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="14.10">exclusive-or-expression</non_terminal>
       </rhs>
       <rhs>
@@ -55,8 +51,7 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >For an operation of the form x op y, where op is one of the logical operators, overload resolution (<hyperlink
-    >14.2.4</hyperlink>
+    >For an operation of the form x op y, where op is one of the logical operators, overload resolution (<hyperlink>14.2.4</hyperlink>
 
     
 

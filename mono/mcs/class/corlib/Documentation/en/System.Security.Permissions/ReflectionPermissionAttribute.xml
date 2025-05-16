@@ -42,8 +42,7 @@
     <example>
       <para
         >The following example shows a declarative request for access to non-public
-      members of loaded assemblies. The <see
-         cref="F:System.Security.Permissions.SecurityAction.RequestMinimum" />
+      members of loaded assemblies. The <see cref="F:System.Security.Permissions.SecurityAction.RequestMinimum" />
 
         
 
@@ -67,8 +66,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The scope of the declaration that is allowed depends on the <see
-         cref="T:System.Security.Permissions.SecurityAction" />
+        >The scope of the declaration that is allowed depends on the <see cref="T:System.Security.Permissions.SecurityAction" />
 
         
 
@@ -79,8 +77,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Allows security actions for <see
-         cref="T:System.Security.Permissions.ReflectionPermission" />
+        >Allows security actions for <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
         
 
@@ -119,8 +116,7 @@
 
           
 
-           is not a valid <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+           is not a valid <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -129,13 +125,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.ReflectionPermissionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.ReflectionPermissionAttribute" />
 
             
 
-             class with the specified <see
-             cref="T:System.Security.Permissions.SecurityAction" />
+             class with the specified <see cref="T:System.Security.Permissions.SecurityAction" />
 
             
 
@@ -143,12 +137,15 @@
           >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+          One of the <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -189,8 +186,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns a new <see
-             cref="T:System.Security.Permissions.ReflectionPermission" />
+            >Creates and returns a new <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
             
 
@@ -200,8 +196,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.Permissions.ReflectionPermission" />
+            >A <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
             
 
@@ -237,8 +232,7 @@
       <Docs>
         <value>
           <para
-            > One or more of the <see
-             cref="T:System.Security.Permissions.ReflectionPermissionFlag" />
+            > One or more of the <see cref="T:System.Security.Permissions.ReflectionPermissionFlag" />
 
             
 
@@ -249,8 +243,7 @@
           <para>
             <block subset="none" type="note"
               >To specify multiple
-   <see
-               cref="T:System.Security.Permissions.ReflectionPermissionFlag" />
+   <see cref="T:System.Security.Permissions.ReflectionPermissionFlag" />
 
               
 
@@ -310,23 +303,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, emitting code no longer requires <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, emitting code no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. Some features of reflection emit, such as emitting debug symbols, still require the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+               flag. Some features of reflection emit, such as emitting debug symbols, still require the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
-               flag. (See <format
-               type="text/html">
+               flag. (See <format type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
@@ -342,8 +331,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether use of certain features in <see
-             cref="N:System.Reflection.Emit" />
+            >Gets or sets a value that indicates whether use of certain features in <see cref="N:System.Reflection.Emit" />
 
             
 
@@ -399,8 +387,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is now obsolete. Reflecting on the metadata of members that are not visible no longer requires <see
-             cref="T:System.Security.Permissions.ReflectionPermission" />
+            >This property is now obsolete. Reflecting on the metadata of members that are not visible no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
             
 

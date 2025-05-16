@@ -14,8 +14,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.ICommunicationObject" />
+        >The <see cref="T:System.ServiceModel.ICommunicationObject" />
 
         
 
@@ -99,8 +98,7 @@
         </item>
         <item>
           <para
-            >A common <see
-             cref="P:System.ServiceModel.ICommunicationObject.State" />
+            >A common <see cref="P:System.ServiceModel.ICommunicationObject.State" />
 
             
 
@@ -133,36 +131,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method indicates that any unfinished work should be ignored or ungracefully terminated before returning. The <see
-             cref="M:System.ServiceModel.ICommunicationObject.Abort" />
+            >This method indicates that any unfinished work should be ignored or ungracefully terminated before returning. The <see cref="M:System.ServiceModel.ICommunicationObject.Abort" />
 
             
 
-             method can be used to cancel any outstanding operations, including outstanding calls to <see
-             cref="M:System.ServiceModel.ICommunicationObject.Close" />
+             method can be used to cancel any outstanding operations, including outstanding calls to <see cref="M:System.ServiceModel.ICommunicationObject.Close" />
 
             
 
             .</para
           >
           <para
-            >To gracefully transition an <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+            >To gracefully transition an <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             from the <see
-             cref="F:System.ServiceModel.CommunicationState.Opened" />
+             from the <see cref="F:System.ServiceModel.CommunicationState.Opened" />
 
             
 
-             state to the <see
-             cref="F:System.ServiceModel.CommunicationState.Closed" />
+             state to the <see cref="F:System.ServiceModel.CommunicationState.Closed" />
 
             
 
-             state call <see
-             cref="M:System.ServiceModel.ICommunicationObject.Close" />
+             state call <see cref="M:System.ServiceModel.ICommunicationObject.Close" />
 
             
 
@@ -199,23 +191,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method causes an <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+            >This method causes an <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             to gracefully transition from any state, other than the <see
-             cref="F:System.ServiceModel.CommunicationState.Opened" />
+             to gracefully transition from any state, other than the <see cref="F:System.ServiceModel.CommunicationState.Opened" />
 
             
 
-             state to the <see
-             cref="F:System.ServiceModel.CommunicationState.Closed" />
+             state to the <see cref="F:System.ServiceModel.CommunicationState.Closed" />
 
             
 
-             state. The <see
-             cref="M:System.ServiceModel.ICommunicationObject.BeginClose" />
+             state. The <see cref="M:System.ServiceModel.ICommunicationObject.BeginClose" />
 
             
 
@@ -229,8 +217,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IAsyncResult" />
+            >The <see cref="T:System.IAsyncResult" />
 
             
 
@@ -238,19 +225,26 @@
           >
         </returns>
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.AsyncCallback" />
+          The <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that receives notification of the completion of the asynchronous close operation.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -283,23 +277,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method causes an <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+            >This method causes an <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             to gracefully transition from any state, other than the <see
-             cref="F:System.ServiceModel.CommunicationState.Opened" />
+             to gracefully transition from any state, other than the <see cref="F:System.ServiceModel.CommunicationState.Opened" />
 
             
 
-             state to the <see
-             cref="F:System.ServiceModel.CommunicationState.Closed" />
+             state to the <see cref="F:System.ServiceModel.CommunicationState.Closed" />
 
             
 
-             state with in a specified interval of time. The <see
-             cref="M:System.ServiceModel.ICommunicationObject.BeginClose" />
+             state with in a specified interval of time. The <see cref="M:System.ServiceModel.ICommunicationObject.BeginClose" />
 
             
 
@@ -313,8 +303,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IAsyncResult" />
+            >The <see cref="T:System.IAsyncResult" />
 
             
 
@@ -322,31 +311,41 @@
           >
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Timespan" />
+          The <see cref="T:System.Timespan" />
 
           
 
            that specifies how long the send operation has to complete before timing out.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.AsyncCallback" />
+          The <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that receives notification of the completion of the asynchronous close operation.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -378,51 +377,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When an <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+            >When an <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             is instantiated, it begins in the <see
-             cref="F:System.ServiceModel.CommunicationState.Created" />
+             is instantiated, it begins in the <see cref="F:System.ServiceModel.CommunicationState.Created" />
 
             
 
-             state. In the <see
-             cref="F:System.ServiceModel.CommunicationState.Created" />
+             state. In the <see cref="F:System.ServiceModel.CommunicationState.Created" />
 
             
 
-             state, the object can be configured (for example, properties can be set, or events can be registered), but it is not yet usable to send or receive messages. The <see
-             cref="M:System.ServiceModel.ICommunicationObject.BeginOpen" />
+             state, the object can be configured (for example, properties can be set, or events can be registered), but it is not yet usable to send or receive messages. The <see cref="M:System.ServiceModel.ICommunicationObject.BeginOpen" />
 
             
 
-             method causes an <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+             method causes an <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             to enter into the <see
-             cref="F:System.ServiceModel.CommunicationState.Opening" />
+             to enter into the <see cref="F:System.ServiceModel.CommunicationState.Opening" />
 
             
 
-             state where it remains until the open operation succeeds, the open operation times out or fails and the object becomes faulted, or the <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+             state where it remains until the open operation succeeds, the open operation times out or fails and the object becomes faulted, or the <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
              is aborted.</para
           >
           <para
-            >In the <see
-             cref="F:System.ServiceModel.CommunicationState.Opened" />
+            >In the <see cref="F:System.ServiceModel.CommunicationState.Opened" />
 
             
 
-             state, the <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+             state, the <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
@@ -436,8 +426,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IAsyncResult" />
+            >The <see cref="T:System.IAsyncResult" />
 
             
 
@@ -445,19 +434,26 @@
           >
         </returns>
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.AsyncCallback" />
+          The <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that receives notification of the completion of the asynchronous open operation.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -490,51 +486,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When an <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+            >When an <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             is instantiated, it begins in the <see
-             cref="F:System.ServiceModel.CommunicationState.Created" />
+             is instantiated, it begins in the <see cref="F:System.ServiceModel.CommunicationState.Created" />
 
             
 
-             state. In the <see
-             cref="F:System.ServiceModel.CommunicationState.Created" />
+             state. In the <see cref="F:System.ServiceModel.CommunicationState.Created" />
 
             
 
-             state, the object can be configured (for example, properties can be set, or events can be registered), but it is not yet usable to send or receive messages. The <see
-             cref="M:System.ServiceModel.ICommunicationObject.Open" />
+             state, the object can be configured (for example, properties can be set, or events can be registered), but it is not yet usable to send or receive messages. The <see cref="M:System.ServiceModel.ICommunicationObject.Open" />
 
             
 
-             method causes an <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+             method causes an <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             to enter into the <see
-             cref="F:System.ServiceModel.CommunicationState.Opening" />
+             to enter into the <see cref="F:System.ServiceModel.CommunicationState.Opening" />
 
             
 
-             state where it remains until the open operation succeeds, the open operation times out or fails and the object becomes faulted, or the <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+             state where it remains until the open operation succeeds, the open operation times out or fails and the object becomes faulted, or the <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
              is aborted.</para
           >
           <para
-            >In the <see
-             cref="F:System.ServiceModel.CommunicationState.Opened" />
+            >In the <see cref="F:System.ServiceModel.CommunicationState.Opened" />
 
             
 
-             state, the <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+             state, the <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
@@ -548,8 +535,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IAsyncResult" />
+            >The <see cref="T:System.IAsyncResult" />
 
             
 
@@ -557,31 +543,41 @@
           >
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Timespan" />
+          The <see cref="T:System.Timespan" />
 
           
 
            that specifies how long the send operation has to complete before timing out.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.AsyncCallback" />
+          The <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that receives notification of the completion of the asynchronous open operation.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -607,41 +603,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method causes an <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+            >This method causes an <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             to gracefully transition from the <see
-             cref="F:System.ServiceModel.CommunicationState.Opened" />
+             to gracefully transition from the <see cref="F:System.ServiceModel.CommunicationState.Opened" />
 
             
 
-             state to the <see
-             cref="F:System.ServiceModel.CommunicationState.Closed" />
+             state to the <see cref="F:System.ServiceModel.CommunicationState.Closed" />
 
             
 
-             state. The <see
-             cref="M:System.ServiceModel.ICommunicationObject.Close" />
+             state. The <see cref="M:System.ServiceModel.ICommunicationObject.Close" />
 
             
 
              method allows any unfinished work to be completed before returning. For example, finish sending any buffered messages). </para
           >
           <para
-            >The <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+            >The <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             enters the <see
-             cref="F:System.ServiceModel.CommunicationState.Closing" />
+             enters the <see cref="F:System.ServiceModel.CommunicationState.Closing" />
 
             
 
-             state and remains in it until the transition to the <see
-             cref="F:System.ServiceModel.CommunicationState.Closed" />
+             state and remains in it until the transition to the <see cref="F:System.ServiceModel.CommunicationState.Closed" />
 
             
 
@@ -652,87 +641,72 @@
 
             
 
-             returns once the <see
-             cref="F:System.ServiceModel.CommunicationState.Closed" />
+             returns once the <see cref="F:System.ServiceModel.CommunicationState.Closed" />
 
             
 
              state is reached.</para
           >
           <para
-            >If the default close timeout elapses before the <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+            >If the default close timeout elapses before the <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             is able to close gracefully, the <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+             is able to close gracefully, the <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
              is aborted. </para
           >
           <para
-            >If <see
-             cref="M:System.ServiceModel.ICommunicationObject.Close" />
+            >If <see cref="M:System.ServiceModel.ICommunicationObject.Close" />
 
             
 
-             is called on an <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+             is called on an <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             in the <see
-             cref="F:System.ServiceModel.CommunicationState.Created" />
+             in the <see cref="F:System.ServiceModel.CommunicationState.Created" />
 
             
 
-            , <see
-             cref="F:System.ServiceModel.CommunicationState.Opening" />
+            , <see cref="F:System.ServiceModel.CommunicationState.Opening" />
 
             
 
-            , or <see
-             cref="F:System.ServiceModel.CommunicationState.Faulted" />
+            , or <see cref="F:System.ServiceModel.CommunicationState.Faulted" />
 
             
 
-             state, the <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+             state, the <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             is aborted. If <see
-             cref="M:System.ServiceModel.ICommunicationObject.Close" />
+             is aborted. If <see cref="M:System.ServiceModel.ICommunicationObject.Close" />
 
             
 
-             is called on an <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+             is called on an <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             in the <see
-             cref="F:System.ServiceModel.CommunicationState.Closing" />
+             in the <see cref="F:System.ServiceModel.CommunicationState.Closing" />
 
             
 
-             or <see
-             cref="F:System.ServiceModel.CommunicationState.Closed" />
+             or <see cref="F:System.ServiceModel.CommunicationState.Closed" />
 
             
 
              state, the call returns immediately. </para
           >
           <para
-            >There is also an asynchronous version of the close method that is initiated by calling <see
-             cref="M:System.ServiceModel.ICommunicationObject.BeginClose" />
+            >There is also an asynchronous version of the close method that is initiated by calling <see cref="M:System.ServiceModel.ICommunicationObject.BeginClose" />
 
             
 
-             and completed by calling <see
-             cref="M:System.ServiceModel.ICommunicationObject.Close" />
+             and completed by calling <see cref="M:System.ServiceModel.ICommunicationObject.Close" />
 
             
 
@@ -765,41 +739,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method causes an <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+            >This method causes an <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             to gracefully transition from the <see
-             cref="F:System.ServiceModel.CommunicationState.Opened" />
+             to gracefully transition from the <see cref="F:System.ServiceModel.CommunicationState.Opened" />
 
             
 
-             state to the <see
-             cref="F:System.ServiceModel.CommunicationState.Closed" />
+             state to the <see cref="F:System.ServiceModel.CommunicationState.Closed" />
 
             
 
-             state within a specified interval of time. The <see
-             cref="M:System.ServiceModel.ICommunicationObject.Close" />
+             state within a specified interval of time. The <see cref="M:System.ServiceModel.ICommunicationObject.Close" />
 
             
 
              method allows any unfinished work to be completed before returning. For example, finish sending any buffered messages). </para
           >
           <para
-            >The <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+            >The <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             enters the <see
-             cref="F:System.ServiceModel.CommunicationState.Closing" />
+             enters the <see cref="F:System.ServiceModel.CommunicationState.Closing" />
 
             
 
-             state and remains in it until the transition to the <see
-             cref="F:System.ServiceModel.CommunicationState.Closed" />
+             state and remains in it until the transition to the <see cref="F:System.ServiceModel.CommunicationState.Closed" />
 
             
 
@@ -810,87 +777,72 @@
 
             
 
-             returns once the <see
-             cref="F:System.ServiceModel.CommunicationState.Closed" />
+             returns once the <see cref="F:System.ServiceModel.CommunicationState.Closed" />
 
             
 
              state is reached.</para
           >
           <para
-            >If the timeout elapses before the <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+            >If the timeout elapses before the <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             is able to gracefully close, the <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+             is able to gracefully close, the <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
              is aborted.</para
           >
           <para
-            >If <see
-             cref="M:System.ServiceModel.ICommunicationObject.Close" />
+            >If <see cref="M:System.ServiceModel.ICommunicationObject.Close" />
 
             
 
-             is called on an <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+             is called on an <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             in the <see
-             cref="F:System.ServiceModel.CommunicationState.Created" />
+             in the <see cref="F:System.ServiceModel.CommunicationState.Created" />
 
             
 
-            , <see
-             cref="F:System.ServiceModel.CommunicationState.Opening" />
+            , <see cref="F:System.ServiceModel.CommunicationState.Opening" />
 
             
 
-            , or <see
-             cref="F:System.ServiceModel.CommunicationState.Faulted" />
+            , or <see cref="F:System.ServiceModel.CommunicationState.Faulted" />
 
             
 
-             state, the <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+             state, the <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             is aborted.  If <see
-             cref="M:System.ServiceModel.ICommunicationObject.Close" />
+             is aborted.  If <see cref="M:System.ServiceModel.ICommunicationObject.Close" />
 
             
 
-             is called on an <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+             is called on an <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             in the <see
-             cref="F:System.ServiceModel.CommunicationState.Closing" />
+             in the <see cref="F:System.ServiceModel.CommunicationState.Closing" />
 
             
 
-             or <see
-             cref="F:System.ServiceModel.CommunicationState.Closed" />
+             or <see cref="F:System.ServiceModel.CommunicationState.Closed" />
 
             
 
              state, the call returns immediately. </para
           >
           <para
-            >There is also an asynchronous version of the close method that is initiated by calling <see
-             cref="M:System.ServiceModel.ICommunicationObject.BeginClose" />
+            >There is also an asynchronous version of the close method that is initiated by calling <see cref="M:System.ServiceModel.ICommunicationObject.BeginClose" />
 
             
 
-             and completed by calling <see
-             cref="M:System.ServiceModel.ICommunicationObject.Close" />
+             and completed by calling <see cref="M:System.ServiceModel.ICommunicationObject.Close" />
 
             
 
@@ -902,12 +854,15 @@
           <para>Causes a communication object to transition from its current state into the closed state.  </para>
         </summary>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Timespan" />
+          The <see cref="T:System.Timespan" />
 
           
 
@@ -947,23 +902,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event occurs when the communication object first begins to transition from the <see
-             cref="F:System.ServiceModel.CommunicationState.Opened" />
+            >This event occurs when the communication object first begins to transition from the <see cref="F:System.ServiceModel.CommunicationState.Opened" />
 
             
 
-             state into the <see
-             cref="F:System.ServiceModel.CommunicationState.Closed" />
+             state into the <see cref="F:System.ServiceModel.CommunicationState.Closed" />
 
             
 
-             state, immediately after either the <see
-             cref="M:System.ServiceModel.ICommunicationObject.Close" />
+             state, immediately after either the <see cref="M:System.ServiceModel.ICommunicationObject.Close" />
 
             
 
-             or <see
-             cref="M:System.ServiceModel.ICommunicationObject.BeginClose" />
+             or <see cref="M:System.ServiceModel.ICommunicationObject.BeginClose" />
 
             
 
@@ -999,17 +950,19 @@
           <para>Completes an asynchronous operation to close a communication object.</para>
         </summary>
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IAsyncResult" />
+          The <see cref="T:System.IAsyncResult" />
 
           
 
-           that is returned by a call to the <see
-           cref="M:System.ServiceModel.ICommunicationObject.BeginClose" />
+           that is returned by a call to the <see cref="M:System.ServiceModel.ICommunicationObject.BeginClose" />
 
           
 
@@ -1040,17 +993,19 @@
           <para>Completes an asynchronous operation to open a communication object.</para>
         </summary>
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IAsyncResult" />
+          The <see cref="T:System.IAsyncResult" />
 
           
 
-           that is returned by a call to the <see
-           cref="M:System.ServiceModel.ICommunicationObject.BeginOpen" />
+           that is returned by a call to the <see cref="M:System.ServiceModel.ICommunicationObject.BeginOpen" />
 
           
 
@@ -1094,64 +1049,53 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When an <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+            >When an <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             is instantiated, it begins in the <see
-             cref="F:System.ServiceModel.CommunicationState.Created" />
+             is instantiated, it begins in the <see cref="F:System.ServiceModel.CommunicationState.Created" />
 
             
 
-             state. In the <see
-             cref="F:System.ServiceModel.CommunicationState.Created" />
+             state. In the <see cref="F:System.ServiceModel.CommunicationState.Created" />
 
             
 
-             state, the object can be configured (for example, properties can be set, or events can be registered), but it is not yet usable to send or receive messages. The <see
-             cref="M:System.ServiceModel.ICommunicationObject.Open" />
+             state, the object can be configured (for example, properties can be set, or events can be registered), but it is not yet usable to send or receive messages. The <see cref="M:System.ServiceModel.ICommunicationObject.Open" />
 
             
 
-             method causes an <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+             method causes an <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             to enter into the <see
-             cref="F:System.ServiceModel.CommunicationState.Opening" />
+             to enter into the <see cref="F:System.ServiceModel.CommunicationState.Opening" />
 
             
 
-             state where it remains until the open operation succeeds, the open operation times out or fails and the object becomes faulted, or the <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+             state where it remains until the open operation succeeds, the open operation times out or fails and the object becomes faulted, or the <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
              is aborted.</para
           >
           <para
-            >In the <see
-             cref="F:System.ServiceModel.CommunicationState.Opened" />
+            >In the <see cref="F:System.ServiceModel.CommunicationState.Opened" />
 
             
 
-             state, the <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+             state, the <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
              is usable (for example, messages can be received), but it is no longer configurable.</para
           >
           <para
-            >There is also an asynchronous version of the open method that is initiated by calling <see
-             cref="M:System.ServiceModel.ICommunicationObject.BeginOpen" />
+            >There is also an asynchronous version of the open method that is initiated by calling <see cref="M:System.ServiceModel.ICommunicationObject.BeginOpen" />
 
             
 
-             and completed by calling <see
-             cref="M:System.ServiceModel.ICommunicationObject.EndOpen(System.IAsyncResult)" />
+             and completed by calling <see cref="M:System.ServiceModel.ICommunicationObject.EndOpen(System.IAsyncResult)" />
 
             
 
@@ -1184,64 +1128,53 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When an <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+            >When an <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             is instantiated, it begins in the <see
-             cref="F:System.ServiceModel.CommunicationState.Created" />
+             is instantiated, it begins in the <see cref="F:System.ServiceModel.CommunicationState.Created" />
 
             
 
-             state. In the <see
-             cref="F:System.ServiceModel.CommunicationState.Created" />
+             state. In the <see cref="F:System.ServiceModel.CommunicationState.Created" />
 
             
 
-             state, the object can be configured (for example, properties can be set, or events can be registered), but it is not yet usable to send or receive messages. The <see
-             cref="M:System.ServiceModel.ICommunicationObject.Open" />
+             state, the object can be configured (for example, properties can be set, or events can be registered), but it is not yet usable to send or receive messages. The <see cref="M:System.ServiceModel.ICommunicationObject.Open" />
 
             
 
-             method causes an <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+             method causes an <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
-             to enter into the <see
-             cref="F:System.ServiceModel.CommunicationState.Opening" />
+             to enter into the <see cref="F:System.ServiceModel.CommunicationState.Opening" />
 
             
 
-             state where it remains until the open operation succeeds, the open operation times out or fails and the object becomes faulted, or the <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+             state where it remains until the open operation succeeds, the open operation times out or fails and the object becomes faulted, or the <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
              is aborted.</para
           >
           <para
-            >In the <see
-             cref="F:System.ServiceModel.CommunicationState.Opened" />
+            >In the <see cref="F:System.ServiceModel.CommunicationState.Opened" />
 
             
 
-             state, the <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+             state, the <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
              is usable (for example, messages can be received), but it is no longer configurable.</para
           >
           <para
-            >There is also an asynchronous version of the open method that is initiated by calling <see
-             cref="M:System.ServiceModel.ICommunicationObject.BeginOpen" />
+            >There is also an asynchronous version of the open method that is initiated by calling <see cref="M:System.ServiceModel.ICommunicationObject.BeginOpen" />
 
             
 
-             and completed by calling <see
-             cref="M:System.ServiceModel.ICommunicationObject.EndOpen(System.IAsyncResult)" />
+             and completed by calling <see cref="M:System.ServiceModel.ICommunicationObject.EndOpen(System.IAsyncResult)" />
 
             
 
@@ -1253,12 +1186,15 @@
           <para>Causes a communication object to transition from the created state into the opened state within a specified interval of time.</para>
         </summary>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Timespan" />
+          The <see cref="T:System.Timespan" />
 
           
 
@@ -1298,23 +1234,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event occurs when the communication object first begins to transition from the <see
-             cref="F:System.ServiceModel.CommunicationState.Created" />
+            >This event occurs when the communication object first begins to transition from the <see cref="F:System.ServiceModel.CommunicationState.Created" />
 
             
 
-             state into the <see
-             cref="F:System.ServiceModel.CommunicationState.Opened" />
+             state into the <see cref="F:System.ServiceModel.CommunicationState.Opened" />
 
             
 
-             state, immediately after either the <see
-             cref="M:System.ServiceModel.ICommunicationObject.Open" />
+             state, immediately after either the <see cref="M:System.ServiceModel.ICommunicationObject.Open" />
 
             
 
-             or <see
-             cref="M:System.ServiceModel.ICommunicationObject.BeginOpen" />
+             or <see cref="M:System.ServiceModel.ICommunicationObject.BeginOpen" />
 
             
 
@@ -1348,8 +1280,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The main communication states available to an <see
-             cref="T:System.ServiceModel.ICommunicationObject" />
+            >The main communication states available to an <see cref="T:System.ServiceModel.ICommunicationObject" />
 
             
 
@@ -1387,13 +1318,11 @@
             </item>
           </list>
           <para
-            >This <see
-             cref="T:System.ServiceModel.CommunicationState" />
+            >This <see cref="T:System.ServiceModel.CommunicationState" />
 
             
 
-             defines the states that are valid for all communication-oriented objects in the system, including channels, listeners, the channel and listener factories, and the <see
-             cref="T:System.ServiceModel.ServiceHost" />
+             defines the states that are valid for all communication-oriented objects in the system, including channels, listeners, the channel and listener factories, and the <see cref="T:System.ServiceModel.ServiceHost" />
 
             
 

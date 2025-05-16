@@ -47,16 +47,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Boolean" />
+        >A <see cref="T:System.Boolean" />
 
         
 
          instance can have either of two values: true, or false.</para
       >
       <para
-        >The <see
-         cref="T:System.Boolean" />
+        >The <see cref="T:System.Boolean" />
 
         
 
@@ -65,30 +63,25 @@
       <list type="bullet">
         <item>
           <para
-            >Converting Boolean values to strings: <see
-             cref="M:System.Boolean.ToString" />
+            >Converting Boolean values to strings: <see cref="M:System.Boolean.ToString" />
           </para>
         </item>
         <item>
           <para
-            >Parsing strings to convert them to Boolean values: <see
-             cref="M:System.Boolean.Parse(System.String)" />
+            >Parsing strings to convert them to Boolean values: <see cref="M:System.Boolean.Parse(System.String)" />
 
             
 
-             and <see
-             cref="M:System.Boolean.TryParse(System.String,System.Boolean@)" />
+             and <see cref="M:System.Boolean.TryParse(System.String,System.Boolean@)" />
           </para>
         </item>
         <item>
           <para
-            >Comparing values: <see
-             cref="M:System.Boolean.CompareTo(System.Boolean)" />
+            >Comparing values: <see cref="M:System.Boolean.CompareTo(System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Boolean.Equals(System.Boolean)" />
+             and <see cref="M:System.Boolean.Equals(System.Boolean)" />
           </para>
         </item>
       </list>
@@ -126,71 +119,59 @@
         <h2>Formatting Boolean values</h2>
       </format>
       <para
-        >The string representation of a <see
-         cref="T:System.Boolean" />
+        >The string representation of a <see cref="T:System.Boolean" />
 
         
 
-         is either "True" for a true value or "False" for a false value. The string representation of a <see
-         cref="T:System.Boolean" />
+         is either "True" for a true value or "False" for a false value. The string representation of a <see cref="T:System.Boolean" />
 
         
 
-         value is defined by the read-only <see
-         cref="F:System.Boolean.TrueString" />
+         value is defined by the read-only <see cref="F:System.Boolean.TrueString" />
 
         
 
-         and <see
-         cref="F:System.Boolean.FalseString" />
+         and <see cref="F:System.Boolean.FalseString" />
 
         
 
          fields. </para
       >
       <para
-        >You use the <see
-         cref="M:System.Boolean.ToString" />
+        >You use the <see cref="M:System.Boolean.ToString" />
 
         
 
-         method to convert Boolean values to strings. The Boolean structure includes two <see
-         cref="M:System.Boolean.ToString" />
+         method to convert Boolean values to strings. The Boolean structure includes two <see cref="M:System.Boolean.ToString" />
 
         
 
-         overloads: the parameterless <see
-         cref="M:System.Boolean.ToString" />
+         overloads: the parameterless <see cref="M:System.Boolean.ToString" />
 
         
 
-         method and the <see
-         cref="M:System.Boolean.ToString(System.IFormatProvider)" />
+         method and the <see cref="M:System.Boolean.ToString(System.IFormatProvider)" />
 
         
 
-         method, which includes a parameter that controls formatting. However, because this parameter is ignored, the two overloads produce identical strings. The <see
-         cref="M:System.Boolean.ToString(System.IFormatProvider)" />
+         method, which includes a parameter that controls formatting. However, because this parameter is ignored, the two overloads produce identical strings. The <see cref="M:System.Boolean.ToString(System.IFormatProvider)" />
 
         
 
          method does not support culture-sensitive formatting. </para
       >
       <para
-        >The following example illustrates formatting with the <see
-         cref="M:System.Boolean.ToString" />
+        >The following example illustrates formatting with the <see cref="M:System.Boolean.ToString" />
 
         
 
-         method. Note that the example uses the <format
-         type="text/html">
+         method. Note that the example uses the <format type="text/html">
           <a href="87b7d528-73f6-43c6-b71a-f23043039a49">composite formatting</a>
         </format>
 
         
 
-         feature, so the <see
-         cref="M:System.Boolean.ToString" />
+         feature, so the <see cref="M:System.Boolean.ToString" />
 
         
 
@@ -198,27 +179,23 @@
       >
       <para>code reference: System.Boolean.Structure#3</para>
       <para
-        >Because the <see
-         cref="T:System.Boolean" />
+        >Because the <see cref="T:System.Boolean" />
 
         
 
-         structure can have only two values, it is easy to add custom formatting. For simple custom formatting in which other string literals are substituted for "True" and "False", you can use any conditional evaluation feature supported by your language, such as the <format
-         type="text/html">
+         structure can have only two values, it is easy to add custom formatting. For simple custom formatting in which other string literals are substituted for "True" and "False", you can use any conditional evaluation feature supported by your language, such as the <format type="text/html">
           <a href="e83a17f1-7500-48ba-8bee-2fbc4c847af4">conditional operator</a>
         </format>
 
         
 
-         in C# or the <format
-         type="text/html">
+         in C# or the <format type="text/html">
           <a href="dd56c9df-7cd4-442c-9ba6-20c70ee44c8f">If operator</a>
         </format>
 
         
 
-          in Visual Basic. The following example uses this technique to format <see
-         cref="T:System.Boolean" />
+          in Visual Basic. The following example uses this technique to format <see cref="T:System.Boolean" />
 
         
 
@@ -226,23 +203,19 @@
       >
       <para>code reference: System.Boolean.Structure#4</para>
       <para
-        >For more complex custom formatting operations, including culture-sensitive formatting, you can call the <see
-         cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />
+        >For more complex custom formatting operations, including culture-sensitive formatting, you can call the <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />
 
         
 
-         method and provide an <see
-         cref="T:System.ICustomFormatter" />
+         method and provide an <see cref="T:System.ICustomFormatter" />
 
         
 
-         implementation. The following example implements the <see
-         cref="T:System.ICustomFormatter" />
+         implementation. The following example implements the <see cref="T:System.ICustomFormatter" />
 
         
 
-         and <see
-         cref="T:System.IFormatProvider" />
+         and <see cref="T:System.IFormatProvider" />
 
         
 
@@ -250,8 +223,7 @@
       >
       <para>code reference: System.Boolean.Structure#5</para>
       <para
-        >Optionally, you can use <format
-         type="text/html">
+        >Optionally, you can use <format type="text/html">
           <a href="8ad495d4-2941-40cf-bf64-e82e85825890">resource files</a>
         </format>
 
@@ -266,38 +238,31 @@
         <h2>Converting to and from Boolean values</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Boolean" />
+        >The <see cref="T:System.Boolean" />
 
         
 
-         structure implements the <see
-         cref="T:System.IConvertible" />
+         structure implements the <see cref="T:System.IConvertible" />
 
         
 
-         interface.  As a result, you can use the <see
-         cref="T:System.Convert" />
+         interface.  As a result, you can use the <see cref="T:System.Convert" />
 
         
 
-         class to perform conversions between a <see
-         cref="T:System.Boolean" />
+         class to perform conversions between a <see cref="T:System.Boolean" />
 
         
 
-         value and any other primitive type in the .NET Framework, or you can call the <see
-         cref="T:System.Boolean" />
+         value and any other primitive type in the .NET Framework, or you can call the <see cref="T:System.Boolean" />
 
         
 
-         structure's explicit implementations. However, conversions between a <see
-         cref="T:System.Boolean" />
+         structure's explicit implementations. However, conversions between a <see cref="T:System.Boolean" />
 
         
 
-         and the following types are not supported, so the corresponding conversion methods throw an <see
-         cref="T:System.InvalidCastException" />
+         and the following types are not supported, so the corresponding conversion methods throw an <see cref="T:System.InvalidCastException" />
 
         
 
@@ -306,23 +271,19 @@
       <list type="bullet">
         <item>
           <para
-            >Conversion between <see
-             cref="T:System.Boolean" />
+            >Conversion between <see cref="T:System.Boolean" />
 
             
 
-             and <see
-             cref="T:System.Char" />
+             and <see cref="T:System.Char" />
 
             
 
-             (the <see
-             cref="M:System.Convert.ToBoolean(System.Char)" />
+             (the <see cref="M:System.Convert.ToBoolean(System.Char)" />
 
             
 
-             and <see
-             cref="M:System.Convert.ToChar(System.Boolean)" />
+             and <see cref="M:System.Convert.ToChar(System.Boolean)" />
 
             
 
@@ -331,23 +292,19 @@
         </item>
         <item>
           <para
-            >Conversion between <see
-             cref="T:System.Boolean" />
+            >Conversion between <see cref="T:System.Boolean" />
 
             
 
-             and <see
-             cref="T:System.DateTime" />
+             and <see cref="T:System.DateTime" />
 
             
 
-             (the <see
-             cref="M:System.Convert.ToBoolean(System.DateTime)" />
+             (the <see cref="M:System.Convert.ToBoolean(System.DateTime)" />
 
             
 
-             and <see
-             cref="M:System.Convert.ToDateTime(System.Boolean)" />
+             and <see cref="M:System.Convert.ToDateTime(System.Boolean)" />
 
             
 
@@ -356,8 +313,7 @@
         </item>
       </list>
       <para
-        >All conversions from integral or floating-point numbers to Boolean values convert non-zero values to true and zero values to false.  The following example illustrates this by calling selected overloads of the <see
-         cref="M:System.Convert.ToBoolean(System.Int64)" />
+        >All conversions from integral or floating-point numbers to Boolean values convert non-zero values to true and zero values to false.  The following example illustrates this by calling selected overloads of the <see cref="M:System.Convert.ToBoolean(System.Int64)" />
 
         
 
@@ -365,26 +321,22 @@
       >
       <para>code reference: System.Boolean.Structure#6</para>
       <para
-        >When converting from floating-point values to Boolean values, the conversion methods perform an exact comparison with zero. If the floating-point value has lost precision, the result can be unexpected. This is illustrated in the following example, in which a <see
-         cref="T:System.Double" />
+        >When converting from floating-point values to Boolean values, the conversion methods perform an exact comparison with zero. If the floating-point value has lost precision, the result can be unexpected. This is illustrated in the following example, in which a <see cref="T:System.Double" />
 
         
 
          variable whose value should be zero is converted to a Boolean value. As the example shows, the result is true because repeated additions of 0.2 have resulted in a loss of precision. </para
       >
       <para
-        >When converting from Boolean to numeric values, the conversion methods of the <see
-         cref="T:System.Convert" />
+        >When converting from Boolean to numeric values, the conversion methods of the <see cref="T:System.Convert" />
 
         
 
-         class convert true to 1 and false to 0. However, Visual Basic conversion functions convert true to either 255 (for conversions to <see
-         cref="T:System.Byte" />
+         class convert true to 1 and false to 0. However, Visual Basic conversion functions convert true to either 255 (for conversions to <see cref="T:System.Byte" />
 
         
 
-         values) or -1 (for all other numeric conversions). The following example converts true to numeric values by using a <see
-         cref="T:System.Convert" />
+         values) or -1 (for all other numeric conversions). The following example converts true to numeric values by using a <see cref="T:System.Convert" />
 
         
 
@@ -392,25 +344,21 @@
       >
       <para>code reference: System.Boolean.Structure#8</para>
       <para
-        >For conversions from <see
-         cref="T:System.Boolean" />
+        >For conversions from <see cref="T:System.Boolean" />
 
         
 
-         to string values, see the <format
-         type="text/html">
+         to string values, see the <format type="text/html">
           <a href="#Formatting">Formatting Boolean Values</a>
         </format>
 
         
 
-         section. For conversions from strings to <see
-         cref="T:System.Boolean" />
+         section. For conversions from strings to <see cref="T:System.Boolean" />
 
         
 
-         values, see the <format
-         type="text/html">
+         values, see the <format type="text/html">
           <a href="#Parsing">Parsing Boolean Values</a>
         </format>
 
@@ -425,41 +373,34 @@
         <h2>Parsing Boolean values</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Boolean" />
+        >The <see cref="T:System.Boolean" />
 
         
 
-         structure includes two static parsing methods, <see
-         cref="M:System.Boolean.Parse(System.String)" />
+         structure includes two static parsing methods, <see cref="M:System.Boolean.Parse(System.String)" />
 
         
 
-         and <see
-         cref="M:System.Boolean.TryParse(System.String,System.Boolean@)" />
+         and <see cref="M:System.Boolean.TryParse(System.String,System.Boolean@)" />
 
         
 
-        , that convert a string to a Boolean value. The string representation of a Boolean value is defined by the case-insensitive equivalents of the values of the <see
-         cref="F:System.Boolean.TrueString" />
+        , that convert a string to a Boolean value. The string representation of a Boolean value is defined by the case-insensitive equivalents of the values of the <see cref="F:System.Boolean.TrueString" />
 
         
 
-         and <see
-         cref="F:System.Boolean.FalseString" />
+         and <see cref="F:System.Boolean.FalseString" />
 
         
 
          fields, which are "True" and "False", respectively. In other words, the only strings that parse successfully are "True", "False", "true", "false", or some mixed-case equivalent. You cannot successfully parse numeric strings such as "0" or "1". Leading or trailing white-space characters are not considered when performing the string comparison.</para
       >
       <para
-        >The following example uses the <see
-         cref="M:System.Boolean.Parse(System.String)" />
+        >The following example uses the <see cref="M:System.Boolean.Parse(System.String)" />
 
         
 
-         and <see
-         cref="M:System.Boolean.TryParse(System.String,System.Boolean@)" />
+         and <see cref="M:System.Boolean.TryParse(System.String,System.Boolean@)" />
 
         
 
@@ -475,13 +416,11 @@
         <h2>Comparing Boolean values</h2>
       </format>
       <para
-        >Because Boolean values are either true or false, there is little reason to explicitly call the <see
-         cref="M:System.Boolean.CompareTo(System.Boolean)" />
+        >Because Boolean values are either true or false, there is little reason to explicitly call the <see cref="M:System.Boolean.CompareTo(System.Boolean)" />
 
         
 
-         method, which indicates whether an instance is greater than, less than, or equal to a specified value. Typically, to compare two Boolean variables, you call the <see
-         cref="M:System.Boolean.Equals(System.Boolean)" />
+         method, which indicates whether an instance is greater than, less than, or equal to a specified value. Typically, to compare two Boolean variables, you call the <see cref="M:System.Boolean.Equals(System.Boolean)" />
 
         
 
@@ -501,8 +440,7 @@
       <para>A Boolean value occupies one byte of memory. The byte's low-order bit is used to represent its value. A value of 1 represents true; a value of 0 represents false. </para>
       <block subset="none" type="note">
         <para
-          >You can use the <see
-           cref="T:System.Collections.Specialized.BitVector32" />
+          >You can use the <see cref="T:System.Collections.Specialized.BitVector32" />
 
           
 
@@ -510,26 +448,22 @@
         >
       </block>
       <para
-        >You can convert a Boolean value to its binary representation by calling the <see
-         cref="M:System.BitConverter.GetBytes(System.Boolean)" />
+        >You can convert a Boolean value to its binary representation by calling the <see cref="M:System.BitConverter.GetBytes(System.Boolean)" />
 
         
 
-         method. The method returns a byte array with a single element. To restore a Boolean value from its binary representation, you can call the <see
-         cref="M:System.BitConverter.ToBoolean(System.Byte[],System.Int32)" />
+         method. The method returns a byte array with a single element. To restore a Boolean value from its binary representation, you can call the <see cref="M:System.BitConverter.ToBoolean(System.Byte[],System.Int32)" />
 
         
 
          method. </para
       >
       <para
-        >The following example calls the <see
-         cref="M:System.BitConverter.GetBytes(System.Boolean)" />
+        >The following example calls the <see cref="M:System.BitConverter.GetBytes(System.Boolean)" />
 
         
 
-         method to convert a Boolean value to its binary representation and displays the individual bits of the value, and then calls the <see
-         cref="M:System.BitConverter.ToBoolean(System.Byte[],System.Int32)" />
+         method to convert a Boolean value to its binary representation and displays the individual bits of the value, and then calls the <see cref="M:System.BitConverter.ToBoolean(System.Byte[],System.Int32)" />
 
         
 
@@ -547,23 +481,19 @@
         <h2>Boolean values as flags</h2>
       </format>
       <para
-        >Boolean variables are most commonly used as flags, to signal the presence or absence of some condition. For example, in the <see
-         cref="M:System.String.Compare(System.String,System.String,System.Boolean)" />
+        >Boolean variables are most commonly used as flags, to signal the presence or absence of some condition. For example, in the <see cref="M:System.String.Compare(System.String,System.String,System.Boolean)" />
 
         
 
-         method, the final parameter, <paramref
-         name="ignoreCase" />
+         method, the final parameter, <paramref name="ignoreCase" />
 
         
 
-        , is a flag that indicates whether the comparison of two strings is case-insensitive (<paramref
-         name="ignoreCase" />
+        , is a flag that indicates whether the comparison of two strings is case-insensitive (<paramref name="ignoreCase" />
 
         
 
-         is true) or case-sensitive (<paramref
-         name="ignoreCase" />
+         is true) or case-sensitive (<paramref name="ignoreCase" />
 
         
 
@@ -607,54 +537,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method implements the <see
-             cref="T:System.IComparable`1" />
+            >This method implements the <see cref="T:System.IComparable`1" />
 
             
 
-             interface and performs slightly better than the <see
-             cref="M:System.Boolean.CompareTo(System.Object)" />
+             interface and performs slightly better than the <see cref="M:System.Boolean.CompareTo(System.Object)" />
 
             
 
-             method because it does not have to convert the <paramref
-             name="value" />
+             method because it does not have to convert the <paramref name="value" />
 
             
 
              parameter to an object.</para
           >
           <para
-            >If <paramref
-             name="value" />
+            >If <paramref name="value" />
 
             
 
              has fewer bits (is narrower) than the instance type, some programming languages perform an implicit widening conversion that transforms the value of the parameter into a value with more bits.</para
           >
           <para
-            >For example, suppose the instance type is <see
-             cref="T:System.Int32" />
+            >For example, suppose the instance type is <see cref="T:System.Int32" />
 
             
 
-             and the parameter type is <see
-             cref="T:System.Byte" />
+             and the parameter type is <see cref="T:System.Byte" />
 
             
 
-            . The Microsoft C# compiler generates instructions to represent the value of the parameter as an <see
-             cref="T:System.Int32" />
+            . The Microsoft C# compiler generates instructions to represent the value of the parameter as an <see cref="T:System.Int32" />
 
             
 
-             object, then generates a <see
-             cref="M:System.Int32.CompareTo(System.Int32)" />
+             object, then generates a <see cref="M:System.Int32.CompareTo(System.Int32)" />
 
             
 
-             method to compare the <see
-             cref="T:System.Int32" />
+             method to compare the <see cref="T:System.Int32" />
 
             
 
@@ -665,8 +586,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares this instance to a specified <see
-             cref="T:System.Boolean" />
+            >Compares this instance to a specified <see cref="T:System.Boolean" />
 
             
 
@@ -676,8 +596,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A signed integer that indicates the relative values of this instance and <paramref
-             name="value" />
+            >A signed integer that indicates the relative values of this instance and <paramref name="value" />
 
             
 
@@ -700,8 +619,7 @@
               </term>
               <description>
                 <para
-                  >This instance is false and <paramref
-                   name="value" />
+                  >This instance is false and <paramref name="value" />
 
                   
 
@@ -715,8 +633,7 @@
               </term>
               <description>
                 <para
-                  >This instance and <paramref
-                   name="value" />
+                  >This instance and <paramref name="value" />
 
                   
 
@@ -730,8 +647,7 @@
               </term>
               <description>
                 <para
-                  >This instance is true and <paramref
-                   name="value" />
+                  >This instance is true and <paramref name="value" />
 
                   
 
@@ -742,12 +658,15 @@
           </list>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Boolean" />
+          A <see cref="T:System.Boolean" />
 
           
 
@@ -783,8 +702,7 @@
 
           
 
-           is not a <see
-           cref="T:System.Boolean" />
+           is not a <see cref="T:System.Boolean" />
 
           
 
@@ -800,8 +718,7 @@
              must be null or an instance of Boolean; otherwise, an exception is thrown.</para
           >
           <para
-            >This method implements the <see
-             cref="T:System.IComparable" />
+            >This method implements the <see cref="T:System.IComparable" />
 
             
 
@@ -815,8 +732,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A signed integer that indicates the relative order of this instance and <paramref
-             name="obj" />
+            >A signed integer that indicates the relative order of this instance and <paramref name="obj" />
 
             
 
@@ -839,8 +755,7 @@
               </term>
               <description>
                 <para
-                  >This instance is false and <paramref
-                   name="obj" />
+                  >This instance is false and <paramref name="obj" />
 
                   
 
@@ -854,8 +769,7 @@
               </term>
               <description>
                 <para
-                  >This instance and <paramref
-                   name="obj" />
+                  >This instance and <paramref name="obj" />
 
                   
 
@@ -869,8 +783,7 @@
               </term>
               <description>
                 <para
-                  >This instance is true and <paramref
-                   name="obj" />
+                  >This instance is true and <paramref name="obj" />
 
                   
 
@@ -889,7 +802,11 @@
           </list>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -920,18 +837,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method implements the <see
-             cref="T:System.IEquatable`1" />
+            >This method implements the <see cref="T:System.IEquatable`1" />
 
             
 
-             interface, and performs slightly better than <see
-             cref="M:System.Boolean.Equals(System.Object)" />
+             interface, and performs slightly better than <see cref="M:System.Boolean.Equals(System.Object)" />
 
             
 
-             because it does not have to convert the <paramref
-             name="obj" />
+             because it does not have to convert the <paramref name="obj" />
 
             
 
@@ -941,8 +855,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether this instance is equal to a specified <see
-             cref="T:System.Boolean" />
+            >Returns a value indicating whether this instance is equal to a specified <see cref="T:System.Boolean" />
 
             
 
@@ -952,8 +865,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
@@ -961,12 +873,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Boolean" />
+          A <see cref="T:System.Boolean" />
 
           
 
@@ -998,7 +913,11 @@
       </Parameters>
       <Docs>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1007,8 +926,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >This method overrides <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -1022,13 +940,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
-             is a <see
-             cref="T:System.Boolean" />
+             is a <see cref="T:System.Boolean" />
 
             
 
@@ -1036,7 +952,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1096,8 +1016,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Boolean" />
+            >The <see cref="T:System.Boolean" />
 
             
 
@@ -1111,8 +1030,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.Boolean" />
+            >A hash code for the current <see cref="T:System.Boolean" />
 
             
 
@@ -1143,13 +1061,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.TypeCode" />
+            >Returns the <see cref="T:System.TypeCode" />
 
             
 
-             for value type <see
-             cref="T:System.Boolean" />
+             for value type <see cref="T:System.Boolean" />
 
             
 
@@ -1159,8 +1075,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The enumerated constant, <see
-             cref="F:System.TypeCode.Boolean" />
+            >The enumerated constant, <see cref="F:System.TypeCode.Boolean" />
 
             
 
@@ -1204,13 +1119,11 @@
 
           
 
-           is not equivalent to either <see
-           cref="F:System.Boolean.TrueString" />
+           is not equivalent to either <see cref="F:System.Boolean.TrueString" />
 
           
 
-           or <see
-           cref="F:System.Boolean.FalseString" />
+           or <see cref="F:System.Boolean.FalseString" />
 
           
 
@@ -1218,8 +1131,7 @@
         >
         <example>
           <para
-            >The following example demonstrates the <see
-             cref="M:System.Boolean.Parse(System.String)" />
+            >The following example demonstrates the <see cref="M:System.Boolean.Parse(System.String)" />
 
             
 
@@ -1244,36 +1156,30 @@ public class BoolParse {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="value" />
+            >The <paramref name="value" />
 
             
 
-             parameter, optionally preceded or trailed by white space, must contain a string that is equal to the value of either the <see
-             cref="F:System.Boolean.TrueString" />
+             parameter, optionally preceded or trailed by white space, must contain a string that is equal to the value of either the <see cref="F:System.Boolean.TrueString" />
 
             
 
-             or <see
-             cref="F:System.Boolean.FalseString" />
+             or <see cref="F:System.Boolean.FalseString" />
 
             
 
-             field; otherwise, a <see
-             cref="T:System.FormatException" />
+             field; otherwise, a <see cref="T:System.FormatException" />
 
             
 
              is thrown. The comparison is ordinal and case-insensitive.</para
           >
           <para
-            >You can call the <see
-             cref="M:System.Boolean.TryParse(System.String,System.Boolean@)" />
+            >You can call the <see cref="M:System.Boolean.TryParse(System.String,System.Boolean@)" />
 
             
 
-             method to parse a string without having to handle the <see
-             cref="T:System.FormatException" />
+             method to parse a string without having to handle the <see cref="T:System.FormatException" />
 
             
 
@@ -1283,18 +1189,15 @@ public class BoolParse {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the specified string representation of a logical value to its <see
-             cref="T:System.Boolean" />
+            >Converts the specified string representation of a logical value to its <see cref="T:System.Boolean" />
 
             
 
-             equivalent, or throws an exception if the string is not equal to the value of <see
-             cref="F:System.Boolean.TrueString" />
+             equivalent, or throws an exception if the string is not equal to the value of <see cref="F:System.Boolean.TrueString" />
 
             
 
-             or <see
-             cref="F:System.Boolean.FalseString" />
+             or <see cref="F:System.Boolean.FalseString" />
 
             
 
@@ -1304,23 +1207,19 @@ public class BoolParse {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="value" />
+            >true if <paramref name="value" />
 
             
 
-             is equal to the value of the <see
-             cref="F:System.Boolean.TrueString" />
+             is equal to the value of the <see cref="F:System.Boolean.TrueString" />
 
             
 
-             field; false if <paramref
-             name="value" />
+             field; false if <paramref name="value" />
 
             
 
-             is equal to the value of the <see
-             cref="F:System.Boolean.FalseString" />
+             is equal to the value of the <see cref="F:System.Boolean.FalseString" />
 
             
 
@@ -1328,7 +1227,11 @@ public class BoolParse {
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1362,13 +1265,11 @@ public class BoolParse {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Boolean" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Boolean" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
@@ -1378,8 +1279,7 @@ public class BoolParse {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToBoolean(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToBoolean(System.IFormatProvider)" />
 
             
 
@@ -1391,7 +1291,11 @@ public class BoolParse {
           <para>true or false.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1421,18 +1325,15 @@ public class BoolParse {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Boolean" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Boolean" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToByte(System.Boolean)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToByte(System.Boolean)" />
 
             
 
@@ -1442,8 +1343,7 @@ public class BoolParse {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToByte(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToByte(System.IFormatProvider)" />
 
             
 
@@ -1455,7 +1355,11 @@ public class BoolParse {
           <para>1 if the value of this instance is true; otherwise, 0. </para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1486,8 +1390,7 @@ public class BoolParse {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to use this method throws an <see
-             cref="T:System.InvalidCastException" />
+            >This conversion is not supported. Attempting to use this method throws an <see cref="T:System.InvalidCastException" />
 
             
 
@@ -1499,7 +1402,11 @@ public class BoolParse {
           <para>This conversion is not supported. No value is returned.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1533,8 +1440,7 @@ public class BoolParse {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to use this method throws an <see
-             cref="T:System.InvalidCastException" />
+            >This conversion is not supported. Attempting to use this method throws an <see cref="T:System.InvalidCastException" />
 
             
 
@@ -1546,7 +1452,11 @@ public class BoolParse {
           <para>This conversion is not supported. No value is returned.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1579,18 +1489,15 @@ public class BoolParse {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Boolean" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Boolean" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToDecimal(System.Boolean)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToDecimal(System.Boolean)" />
 
             
 
@@ -1600,8 +1507,7 @@ public class BoolParse {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToDecimal(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToDecimal(System.IFormatProvider)" />
 
             
 
@@ -1613,7 +1519,11 @@ public class BoolParse {
           <para>1 if this instance is true; otherwise, 0.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1646,18 +1556,15 @@ public class BoolParse {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Boolean" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Boolean" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToDouble(System.Boolean)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToDouble(System.Boolean)" />
 
             
 
@@ -1667,8 +1574,7 @@ public class BoolParse {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToDouble(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToDouble(System.IFormatProvider)" />
 
             
 
@@ -1680,7 +1586,11 @@ public class BoolParse {
           <para>1 if this instance is true; otherwise, 0.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1713,18 +1623,15 @@ public class BoolParse {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Boolean" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Boolean" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToInt16(System.Boolean)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToInt16(System.Boolean)" />
 
             
 
@@ -1734,8 +1641,7 @@ public class BoolParse {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToInt16(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToInt16(System.IFormatProvider)" />
 
             
 
@@ -1747,7 +1653,11 @@ public class BoolParse {
           <para>1 if this instance is true; otherwise, 0.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1777,18 +1687,15 @@ public class BoolParse {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Boolean" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Boolean" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToInt32(System.Boolean)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToInt32(System.Boolean)" />
 
             
 
@@ -1798,8 +1705,7 @@ public class BoolParse {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToInt32(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToInt32(System.IFormatProvider)" />
 
             
 
@@ -1811,7 +1717,11 @@ public class BoolParse {
           <para>1 if this instance is true; otherwise, 0.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1844,18 +1754,15 @@ public class BoolParse {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Boolean" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Boolean" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToInt64(System.Boolean)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToInt64(System.Boolean)" />
 
             
 
@@ -1865,8 +1772,7 @@ public class BoolParse {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToInt64(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToInt64(System.IFormatProvider)" />
 
             
 
@@ -1878,7 +1784,11 @@ public class BoolParse {
           <para>1 if this instance is true; otherwise, 0.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1911,18 +1821,15 @@ public class BoolParse {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Boolean" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Boolean" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToSByte(System.Boolean)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToSByte(System.Boolean)" />
 
             
 
@@ -1932,8 +1839,7 @@ public class BoolParse {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToSByte(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToSByte(System.IFormatProvider)" />
 
             
 
@@ -1945,7 +1851,11 @@ public class BoolParse {
           <para>1 if this instance is true; otherwise, 0.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1978,18 +1888,15 @@ public class BoolParse {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Boolean" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Boolean" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToSingle(System.Boolean)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToSingle(System.Boolean)" />
 
             
 
@@ -1999,8 +1906,7 @@ public class BoolParse {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToSingle(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToSingle(System.IFormatProvider)" />
 
             
 
@@ -2012,7 +1918,11 @@ public class BoolParse {
           <para>1 if this instance is true; otherwise, 0.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2047,18 +1957,15 @@ public class BoolParse {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Boolean" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Boolean" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ChangeType(System.Object,System.Type,System.IFormatProvider)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ChangeType(System.Object,System.Type,System.IFormatProvider)" />
 
             
 
@@ -2068,8 +1975,7 @@ public class BoolParse {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToType(System.Type,System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToType(System.Type,System.IFormatProvider)" />
 
             
 
@@ -2081,12 +1987,15 @@ public class BoolParse {
           <para>An object of the specified type, with a value that is equivalent to the value of this Boolean object.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IFormatProvider" />
+          An <see cref="T:System.IFormatProvider" />
 
           
 
@@ -2119,18 +2028,15 @@ public class BoolParse {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Boolean" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Boolean" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToUInt16(System.Boolean)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToUInt16(System.Boolean)" />
 
             
 
@@ -2140,8 +2046,7 @@ public class BoolParse {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToUInt16(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToUInt16(System.IFormatProvider)" />
 
             
 
@@ -2153,7 +2058,11 @@ public class BoolParse {
           <para>1 if this instance is true; otherwise, 0.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2186,18 +2095,15 @@ public class BoolParse {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Boolean" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Boolean" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToUInt32(System.Boolean)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToUInt32(System.Boolean)" />
 
             
 
@@ -2207,8 +2113,7 @@ public class BoolParse {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToUInt32(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToUInt32(System.IFormatProvider)" />
 
             
 
@@ -2220,7 +2125,11 @@ public class BoolParse {
           <para>1 if this instance is true; otherwise, 0.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2253,18 +2162,15 @@ public class BoolParse {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Boolean" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Boolean" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToUInt64(System.Boolean)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToUInt64(System.Boolean)" />
 
             
 
@@ -2274,8 +2180,7 @@ public class BoolParse {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToUInt64(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToUInt64(System.IFormatProvider)" />
 
             
 
@@ -2287,7 +2192,11 @@ public class BoolParse {
           <para>1 if this instance is true; otherwise, 0.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2319,18 +2228,15 @@ public class BoolParse {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns the constants "True" or "False". Note that XML is case-sensitive, and that the XML specification recognizes "true" and "false" as the valid set of Boolean values. If the <see
-             cref="T:System.String" />
+            >This method returns the constants "True" or "False". Note that XML is case-sensitive, and that the XML specification recognizes "true" and "false" as the valid set of Boolean values. If the <see cref="T:System.String" />
 
             
 
-             object returned by the <see
-             cref="M:System.Boolean.ToString" />
+             object returned by the <see cref="M:System.Boolean.ToString" />
 
             
 
-             method is to be written to an XML file, its <see
-             cref="M:System.String.ToLower" />
+             method is to be written to an XML file, its <see cref="M:System.String.ToLower" />
 
             
 
@@ -2348,8 +2254,7 @@ public class BoolParse {
 
             
 
-             if the value of this instance is true, or <see
-             cref="F:System.Boolean.FalseString" />
+             if the value of this instance is true, or <see cref="F:System.Boolean.FalseString" />
 
             
 
@@ -2385,36 +2290,30 @@ public class BoolParse {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="provider" />
+            >The <paramref name="provider" />
 
             
 
-             parameter is reserved. It does not participate in the execution of this method. This means that the <see
-             cref="M:System.Boolean.ToString(System.IFormatProvider)" />
+             parameter is reserved. It does not participate in the execution of this method. This means that the <see cref="M:System.Boolean.ToString(System.IFormatProvider)" />
 
             
 
-             method, unlike most methods with a <paramref
-             name="provider" />
+             method, unlike most methods with a <paramref name="provider" />
 
             
 
              parameter, does not reflect culture-specific settings. </para
           >
           <para
-            >This method returns the constants "True" or "False". Note that XML is case-sensitive, and that the XML specification recognizes "true" and "false" as the valid set of Boolean values. If the <see
-             cref="T:System.String" />
+            >This method returns the constants "True" or "False". Note that XML is case-sensitive, and that the XML specification recognizes "true" and "false" as the valid set of Boolean values. If the <see cref="T:System.String" />
 
             
 
-             object returned by the <see
-             cref="M:System.Boolean.ToString(System.IFormatProvider)" />
+             object returned by the <see cref="M:System.Boolean.ToString(System.IFormatProvider)" />
 
             
 
-             method is to be written to an XML file, its <see
-             cref="M:System.String.ToLower" />
+             method is to be written to an XML file, its <see cref="M:System.String.ToLower" />
 
             
 
@@ -2433,8 +2332,7 @@ public class BoolParse {
 
             
 
-             if the value of this instance is true, or <see
-             cref="F:System.Boolean.FalseString" />
+             if the value of this instance is true, or <see cref="F:System.Boolean.FalseString" />
 
             
 
@@ -2442,12 +2340,15 @@ public class BoolParse {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          (Reserved) An <see
-           cref="T:System.IFormatProvider" />
+          (Reserved) An <see cref="T:System.IFormatProvider" />
 
           
 

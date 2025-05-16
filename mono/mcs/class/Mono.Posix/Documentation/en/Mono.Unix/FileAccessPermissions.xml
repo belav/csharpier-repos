@@ -50,16 +50,14 @@
       <Docs>
         <summary
           >Equivalent to 
-        <c
-          >FileAccessPermissions.UserReadWriteExecute |
+        <c>FileAccessPermissions.UserReadWriteExecute |
         FileAccessPermissions.GroupReadWriteExecute |
         FileAccessPermissions.OtherReadWriteExecute</c>
 
           
 
           
-        (the <c
-          >777</c>
+        (the <c>777</c>
 
           
 
@@ -85,16 +83,14 @@
       <Docs>
         <summary
           >Equivalent to 
-        <c
-          >FileAccessPermissions.UserRead | FileAccessPermissions.UserWrite | 
+        <c>FileAccessPermissions.UserRead | FileAccessPermissions.UserWrite | 
         FileAccessPermissions.GroupRead | FileAccessPermissions.GroupWrite | 
         FileAccessPermissions.OtherRead | FileAccessPermissions.OtherWrite</c>
 
           
 
            
-        (the <c
-          >666</c>
+        (the <c>666</c>
 
           
 

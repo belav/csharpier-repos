@@ -30,18 +30,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.Sockets.Socket" />
+        >The <see cref="T:System.Net.Sockets.Socket" />
 
         
 
-         class uses the <see
-         cref="T:System.Net.Sockets.ProtocolType" />
+         class uses the <see cref="T:System.Net.Sockets.ProtocolType" />
 
         
 
-         enumeration to inform the Windows Sockets API of the requested protocol. Low-level driver software for the requested protocol must be present on the computer for the <see
-         cref="T:System.Net.Sockets.Socket" />
+         enumeration to inform the Windows Sockets API of the requested protocol. Low-level driver software for the requested protocol must be present on the computer for the <see cref="T:System.Net.Sockets.Socket" />
 
         
 
@@ -51,8 +48,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the protocols that the <see
-         cref="T:System.Net.Sockets.Socket" />
+        >Specifies the protocols that the <see cref="T:System.Net.Sockets.Socket" />
 
         
 

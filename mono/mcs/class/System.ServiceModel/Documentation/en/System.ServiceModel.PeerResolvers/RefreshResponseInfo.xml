@@ -22,18 +22,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When <see
-         cref="M:System.ServiceModel.PeerResolvers.CustomPeerResolverService.Refresh(System.ServiceModel.PeerResolvers.RefreshInfo)" />
+        >When <see cref="M:System.ServiceModel.PeerResolvers.CustomPeerResolverService.Refresh(System.ServiceModel.PeerResolvers.RefreshInfo)" />
 
         
 
-         or an implementation of  <see
-         cref="M:System.ServiceModel.PeerResolvers.CustomPeerResolverService.Refresh(System.ServiceModel.PeerResolvers.RefreshInfo)" />
+         or an implementation of  <see cref="M:System.ServiceModel.PeerResolvers.CustomPeerResolverService.Refresh(System.ServiceModel.PeerResolvers.RefreshInfo)" />
 
         
 
-         is called, this object is returned to the client. It contains the refreshed registration entry with the new expiry timestamp, and is returned when a previous <see
-         cref="T:System.ServiceModel.PeerResolvers.RefreshInfo" />
+         is called, this object is returned to the client. It contains the refreshed registration entry with the new expiry timestamp, and is returned when a previous <see cref="T:System.ServiceModel.PeerResolvers.RefreshInfo" />
 
         
 
@@ -63,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new default instance of the <see
-             cref="T:System.ServiceModel.PeerResolvers.RefreshResponseInfo" />
+            >Initializes a new default instance of the <see cref="T:System.ServiceModel.PeerResolvers.RefreshResponseInfo" />
 
             
 
@@ -95,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.PeerResolvers.RefreshResponseInfo" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.PeerResolvers.RefreshResponseInfo" />
 
             
 

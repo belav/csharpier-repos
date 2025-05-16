@@ -17,8 +17,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the reason that a <see
-         cref="T:System.Windows.Forms.ToolStripDropDown" />
+        >Specifies the reason that a <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
         
 
@@ -38,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Specifies that the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -62,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Specifies that the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -86,13 +83,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Specifies that the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
-             control was closed because the <see
-             cref="M:System.Windows.Forms.ToolStripDropDown.Close" />
+             control was closed because the <see cref="M:System.Windows.Forms.ToolStripDropDown.Close" />
 
             
 
@@ -115,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Specifies that the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -139,8 +133,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Specifies that the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 

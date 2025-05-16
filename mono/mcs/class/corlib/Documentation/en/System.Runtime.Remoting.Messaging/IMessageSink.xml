@@ -23,8 +23,7 @@
       <para>A remote method call is a message that goes from the client end to the server end and possibly back again. As it crosses remoting boundaries on the way, the remote method call passes through a chain of IMessageSink objects. Each sink in the chain receives the message object, performs a specific operation, and delegates to the next sink in the chain. The proxy object contains a reference to the first IMessageSink it needs to use to start off the chain.</para>
       <para>For asynchronous calls, at the time of delegation, each sink provides a reply sink (another IMessageSink) that will be called by the next sink when the reply is on its way back.</para>
       <para
-        >Different types of sinks perform different operations, depending on the type of message object received. For example, one sink could cause a lock to be taken, another could enforce call security, another could perform flow call control and reliability services, and yet another could transport the call to a different <see
-         cref="T:System.AppDomain" />
+        >Different types of sinks perform different operations, depending on the type of message object received. For example, one sink could cause a lock to be taken, another could enforce call security, another could perform flow call control and reliability services, and yet another could transport the call to a different <see cref="T:System.AppDomain" />
 
         
 
@@ -71,8 +70,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Runtime.Remoting.Messaging.IMessageCtrl" />
+            >Returns an <see cref="T:System.Runtime.Remoting.Messaging.IMessageCtrl" />
 
             
 
@@ -80,14 +78,22 @@
           >
         </returns>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message to process. </param
         >
         <param name="replySink">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -147,8 +153,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.Remoting.Messaging.IMessageSink.SyncProcessMessage(System.Runtime.Remoting.Messaging.IMessage)" />
+            >The <see cref="M:System.Runtime.Remoting.Messaging.IMessageSink.SyncProcessMessage(System.Runtime.Remoting.Messaging.IMessage)" />
 
             
 
@@ -164,7 +169,11 @@
           <para>A reply message in response to the request.</para>
         </returns>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

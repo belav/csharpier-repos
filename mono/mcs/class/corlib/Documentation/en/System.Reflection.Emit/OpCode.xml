@@ -57,8 +57,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
@@ -66,7 +65,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -100,8 +103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the current instance is equal to the specified <see
-             cref="T:System.Reflection.Emit.OpCode" />
+            >Indicates whether the current instance is equal to the specified <see cref="T:System.Reflection.Emit.OpCode" />
 
             
 
@@ -111,8 +113,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the value of <paramref
-             name="obj" />
+            >true if the value of <paramref name="obj" />
 
             
 
@@ -120,12 +121,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Reflection.Emit.OpCode" />
+          The <see cref="T:System.Reflection.Emit.OpCode" />
 
           
 
@@ -236,8 +240,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether two <see
-             cref="T:System.Reflection.Emit.OpCode" />
+            >Indicates whether two <see cref="T:System.Reflection.Emit.OpCode" />
 
             
 
@@ -247,13 +250,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="a" />
+            >true if <paramref name="a" />
 
             
 
-             is equal to <paramref
-             name="b" />
+             is equal to <paramref name="b" />
 
             
 
@@ -261,34 +262,38 @@
           >
         </returns>
         <param name="a">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Reflection.Emit.OpCode" />
+          The <see cref="T:System.Reflection.Emit.OpCode" />
 
           
 
-           to compare to <paramref
-           name="b" />
+           to compare to <paramref name="b" />
 
           
 
           .</param
         >
         <param name="b">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Reflection.Emit.OpCode" />
+          The <see cref="T:System.Reflection.Emit.OpCode" />
 
           
 
-           to compare to <paramref
-           name="a" />
+           to compare to <paramref name="a" />
 
           
 
@@ -323,8 +328,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether two <see
-             cref="T:System.Reflection.Emit.OpCode" />
+            >Indicates whether two <see cref="T:System.Reflection.Emit.OpCode" />
 
             
 
@@ -334,13 +338,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="a" />
+            >true if <paramref name="a" />
 
             
 
-             is not equal to <paramref
-             name="b" />
+             is not equal to <paramref name="b" />
 
             
 
@@ -348,34 +350,38 @@
           >
         </returns>
         <param name="a">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Reflection.Emit.OpCode" />
+          The <see cref="T:System.Reflection.Emit.OpCode" />
 
           
 
-           to compare to <paramref
-           name="b" />
+           to compare to <paramref name="b" />
 
           
 
           .</param
         >
         <param name="b">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Reflection.Emit.OpCode" />
+          The <see cref="T:System.Reflection.Emit.OpCode" />
 
           
 
-           to compare to <paramref
-           name="a" />
+           to compare to <paramref name="a" />
 
           
 
@@ -533,8 +539,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns this Opcode as a <see
-             cref="T:System.String" />
+            >Returns this Opcode as a <see cref="T:System.String" />
 
             
 
@@ -544,8 +549,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.String" />
+            >Returns a <see cref="T:System.String" />
 
             
 

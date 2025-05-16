@@ -34,13 +34,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A type is said to be nullable if it can be assigned a value or can be assigned null, which means the type has no value whatsoever. By default, all reference types, such as <see
-         cref="T:System.String" />
+        >A type is said to be nullable if it can be assigned a value or can be assigned null, which means the type has no value whatsoever. By default, all reference types, such as <see cref="T:System.String" />
 
         
 
-        , are nullable, but all value types, such as <see
-         cref="T:System.Int32" />
+        , are nullable, but all value types, such as <see cref="T:System.Int32" />
 
         
 
@@ -48,26 +46,22 @@
       >
       <para>In C# and Visual Basic, you mark a value type as nullable by using the ? notation after the value type. For example, int? in C# or Integer? in Visual Basic declares an integer value type that can be assigned null.</para>
       <para
-        >The <see
-         cref="T:System.Nullable`1" />
+        >The <see cref="T:System.Nullable`1" />
 
         
 
          structure supports using only a value type as a nullable type because reference types are nullable by design. </para
       >
       <para
-        >The <see
-         cref="T:System.Nullable" />
+        >The <see cref="T:System.Nullable" />
 
         
 
-         class provides complementary support for the <see
-         cref="T:System.Nullable`1" />
+         class provides complementary support for the <see cref="T:System.Nullable`1" />
 
         
 
-         structure. The <see
-         cref="T:System.Nullable" />
+         structure. The <see cref="T:System.Nullable" />
 
         
 
@@ -77,48 +71,39 @@
         <h2>Fundamental Properties</h2>
       </format>
       <para
-        >The two fundamental members of the <see
-         cref="T:System.Nullable`1" />
+        >The two fundamental members of the <see cref="T:System.Nullable`1" />
 
         
 
-         structure are the <see
-         cref="P:System.Nullable`1.HasValue" />
+         structure are the <see cref="P:System.Nullable`1.HasValue" />
 
         
 
-         and <see
-         cref="P:System.Nullable`1.Value" />
+         and <see cref="P:System.Nullable`1.Value" />
 
         
 
-         properties. If the <see
-         cref="P:System.Nullable`1.HasValue" />
+         properties. If the <see cref="P:System.Nullable`1.HasValue" />
 
         
 
-         property for a <see
-         cref="T:System.Nullable`1" />
+         property for a <see cref="T:System.Nullable`1" />
 
         
 
-         object is true, the value of the object can be accessed with the <see
-         cref="P:System.Nullable`1.Value" />
+         object is true, the value of the object can be accessed with the <see cref="P:System.Nullable`1.Value" />
 
         
 
-         property. If the <see
-         cref="P:System.Nullable`1.HasValue" />
+         property. If the <see cref="P:System.Nullable`1.HasValue" />
 
         
 
-         property is false, the value of the object is undefined and an attempt to access the <see
-         cref="P:System.Nullable`1.Value" />
+         property is false, the value of the object is undefined and an attempt to access the <see cref="P:System.Nullable`1.Value" />
 
         
 
-         property throws an <see
-         cref="T:System.InvalidOperationException" />
+         property throws an <see cref="T:System.InvalidOperationException" />
 
         
 
@@ -128,36 +113,30 @@
         <h2>Boxing and Unboxing</h2>
       </format>
       <para
-        >When a nullable type is boxed, the common language runtime automatically boxes the underlying value of the <see
-         cref="T:System.Nullable`1" />
+        >When a nullable type is boxed, the common language runtime automatically boxes the underlying value of the <see cref="T:System.Nullable`1" />
 
         
 
-         object, not the <see
-         cref="T:System.Nullable`1" />
+         object, not the <see cref="T:System.Nullable`1" />
 
         
 
-         object itself. That is, if the <see
-         cref="P:System.Nullable`1.HasValue" />
+         object itself. That is, if the <see cref="P:System.Nullable`1.HasValue" />
 
         
 
-         property is true, the contents of the <see
-         cref="P:System.Nullable`1.Value" />
+         property is true, the contents of the <see cref="P:System.Nullable`1.Value" />
 
         
 
-         property is boxed. When the underlying value of a nullable type is unboxed, the common language runtime creates a new <see
-         cref="T:System.Nullable`1" />
+         property is boxed. When the underlying value of a nullable type is unboxed, the common language runtime creates a new <see cref="T:System.Nullable`1" />
 
         
 
          structure initialized to the underlying value.</para
       >
       <para
-        >If the HasValue property of a nullable type is false, the result of a boxing operation is null. Consequently, if a boxed nullable type is passed to a method that expects an object argument, that method must be prepared to handle the case where the argument is null. When null is unboxed into a nullable type, the common language runtime creates a new <see
-         cref="T:System.Nullable`1" />
+        >If the HasValue property of a nullable type is false, the result of a boxing operation is null. Consequently, if a boxed nullable type is passed to a method that expects an object argument, that method must be prepared to handle the case where the argument is null. When null is unboxed into a nullable type, the common language runtime creates a new <see cref="T:System.Nullable`1" />
 
         
 
@@ -167,8 +146,7 @@
         <h2>net_v451 and Windows Runtime Components</h2>
       </format>
       <para
-        >Starting with the net_v451, you can include a <see
-         cref="T:System.Nullable`1" />
+        >Starting with the net_v451, you can include a <see cref="T:System.Nullable`1" />
 
         
 
@@ -199,8 +177,7 @@
         <param name="value">The initial value of the new instance.</param>
         <summary>
           <para
-            >Constructs and initializes a new instance of       <see
-             cref="T:System.Nullable&lt;T&gt;" />
+            >Constructs and initializes a new instance of       <see cref="T:System.Nullable&lt;T&gt;" />
 
             
 
@@ -210,13 +187,11 @@
         <remarks>
           <para>
             <block subset="none" type="note"
-              >Once this constructor has executed, applying <see
-               cref="P:System.Nullable&lt;T&gt;.HasValue" />
+              >Once this constructor has executed, applying <see cref="P:System.Nullable&lt;T&gt;.HasValue" />
 
               
 
-                to the new instance returns <see
-               langword="true" />
+                to the new instance returns <see langword="true" />
 
               
 
@@ -249,23 +224,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Nullable`1.HasValue" />
+            >If the <see cref="P:System.Nullable`1.HasValue" />
 
             
 
-             property of the current <see
-             cref="T:System.Nullable`1" />
+             property of the current <see cref="T:System.Nullable`1" />
 
             
 
-             structure is true, equality is determined by passing the <paramref
-             name="other" />
+             structure is true, equality is determined by passing the <paramref name="other" />
 
             
 
-             parameter to the Equals method of the underlying value of the current <see
-             cref="T:System.Nullable`1" />
+             parameter to the Equals method of the underlying value of the current <see cref="T:System.Nullable`1" />
 
             
 
@@ -275,8 +246,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the current <see
-             cref="T:System.Nullable`1" />
+            >Indicates whether the current <see cref="T:System.Nullable`1" />
 
             
 
@@ -286,13 +256,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="other" />
+            >true if the <paramref name="other" />
 
             
 
-             parameter is equal to the current <see
-             cref="T:System.Nullable`1" />
+             parameter is equal to the current <see cref="T:System.Nullable`1" />
 
             
 
@@ -316,13 +284,11 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="P:System.Nullable`1.HasValue" />
+                  >The <see cref="P:System.Nullable`1.HasValue" />
 
                   
 
-                   property is false, and the <paramref
-                   name="other" />
+                   property is false, and the <paramref name="other" />
 
                   
 
@@ -330,18 +296,15 @@
                 >
                 <para>-or-</para>
                 <para
-                  >The <see
-                   cref="P:System.Nullable`1.HasValue" />
+                  >The <see cref="P:System.Nullable`1.HasValue" />
 
                   
 
-                   property is true, and the value returned by the <see
-                   cref="P:System.Nullable`1.Value" />
+                   property is true, and the value returned by the <see cref="P:System.Nullable`1.Value" />
 
                   
 
-                   property is equal to the <paramref
-                   name="other" />
+                   property is equal to the <paramref name="other" />
 
                   
 
@@ -355,18 +318,15 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="P:System.Nullable`1.HasValue" />
+                  >The <see cref="P:System.Nullable`1.HasValue" />
 
                   
 
-                   property for the current <see
-                   cref="T:System.Nullable`1" />
+                   property for the current <see cref="T:System.Nullable`1" />
 
                   
 
-                   structure is true, and the <paramref
-                   name="other" />
+                   structure is true, and the <paramref name="other" />
 
                   
 
@@ -374,18 +334,15 @@
                 >
                 <para>-or-</para>
                 <para
-                  >The <see
-                   cref="P:System.Nullable`1.HasValue" />
+                  >The <see cref="P:System.Nullable`1.HasValue" />
 
                   
 
-                   property for the current <see
-                   cref="T:System.Nullable`1" />
+                   property for the current <see cref="T:System.Nullable`1" />
 
                   
 
-                   structure is false, and the <paramref
-                   name="other" />
+                   structure is false, and the <paramref name="other" />
 
                   
 
@@ -393,23 +350,19 @@
                 >
                 <para>-or-</para>
                 <para
-                  >The <see
-                   cref="P:System.Nullable`1.HasValue" />
+                  >The <see cref="P:System.Nullable`1.HasValue" />
 
                   
 
-                   property for the current <see
-                   cref="T:System.Nullable`1" />
+                   property for the current <see cref="T:System.Nullable`1" />
 
                   
 
-                   structure is true, and the value returned by the <see
-                   cref="P:System.Nullable`1.Value" />
+                   structure is true, and the value returned by the <see cref="P:System.Nullable`1.Value" />
 
                   
 
-                   property is not equal to the <paramref
-                   name="other" />
+                   property is not equal to the <paramref name="other" />
 
                   
 
@@ -420,7 +373,11 @@
           </list>
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -449,8 +406,7 @@
           <para>
             <block subset="none" type="note"
               >This method
-      overrides <see
-               cref="M:System.Object.GetHashCode" />
+      overrides <see cref="M:System.Object.GetHashCode" />
 
               
 
@@ -462,8 +418,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the hash code of the object returned by the <see
-             cref="P:System.Nullable`1.Value" />
+            >Retrieves the hash code of the object returned by the <see cref="P:System.Nullable`1.Value" />
 
             
 
@@ -473,18 +428,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hash code of the object returned by the <see
-             cref="P:System.Nullable`1.Value" />
+            >The hash code of the object returned by the <see cref="P:System.Nullable`1.Value" />
 
             
 
-             property if the <see
-             cref="P:System.Nullable`1.HasValue" />
+             property if the <see cref="P:System.Nullable`1.HasValue" />
 
             
 
-             property is true, or zero if the <see
-             cref="P:System.Nullable`1.HasValue" />
+             property is true, or zero if the <see cref="P:System.Nullable`1.HasValue" />
 
             
 
@@ -513,18 +465,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="Overload:System.Nullable`1.GetValueOrDefault" />
+            >The <see cref="Overload:System.Nullable`1.GetValueOrDefault" />
 
             
 
-             method returns a value even if the <see
-             cref="P:System.Nullable`1.HasValue" />
+             method returns a value even if the <see cref="P:System.Nullable`1.HasValue" />
 
             
 
-             property is false (unlike the <see
-             cref="P:System.Nullable`1.Value" />
+             property is false (unlike the <see cref="P:System.Nullable`1.Value" />
 
             
 
@@ -534,8 +483,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the value of the current <see
-             cref="T:System.Nullable`1" />
+            >Retrieves the value of the current <see cref="T:System.Nullable`1" />
 
             
 
@@ -545,23 +493,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="P:System.Nullable`1.Value" />
+            >The value of the <see cref="P:System.Nullable`1.Value" />
 
             
 
-             property if the  <see
-             cref="P:System.Nullable`1.HasValue" />
+             property if the  <see cref="P:System.Nullable`1.HasValue" />
 
             
 
-             property is true; otherwise, the default value of the current <see
-             cref="T:System.Nullable`1" />
+             property is true; otherwise, the default value of the current <see cref="T:System.Nullable`1" />
 
             
 
-             object. The type of the default value is the type argument of the current <see
-             cref="T:System.Nullable`1" />
+             object. The type of the default value is the type argument of the current <see cref="T:System.Nullable`1" />
 
             
 
@@ -591,8 +535,7 @@
         <param name="defaultValue">To be added.</param>
         <summary>
           <para
-            >Returns the value of the current instance, or if it has none, returns <paramref
-             name="alternateDefaultValue" />
+            >Returns the value of the current instance, or if it has none, returns <paramref name="alternateDefaultValue" />
 
             
 
@@ -601,13 +544,11 @@
         </summary>
         <returns>
           <para
-            >A value of type <see
-             langword="T" />
+            >A value of type <see langword="T" />
 
             
 
-            , which is either the value of the current instance, or if it has none, the value of <paramref
-             name="alternateDefaultValue" />
+            , which is either the value of the current instance, or if it has none, the value of <paramref name="alternateDefaultValue" />
 
             
 
@@ -622,8 +563,7 @@
 
               
 
-               allows the default value for type <see
-               langword="T" />
+               allows the default value for type <see langword="T" />
 
               
 
@@ -652,8 +592,7 @@
 
             
 
-             if the current instance contains a value; otherwise <see
-             langword="false" />
+             if the current instance contains a value; otherwise <see langword="false" />
 
             
 
@@ -664,23 +603,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Nullable`1.HasValue" />
+            >If the <see cref="P:System.Nullable`1.HasValue" />
 
             
 
-             property is true, the value of the current <see
-             cref="T:System.Nullable`1" />
+             property is true, the value of the current <see cref="T:System.Nullable`1" />
 
             
 
-             object can be accessed with the <see
-             cref="P:System.Nullable`1.Value" />
+             object can be accessed with the <see cref="P:System.Nullable`1.Value" />
 
             
 
-             property. Otherwise, attempting to access its value throws an <see
-             cref="T:System.InvalidOperationException" />
+             property. Otherwise, attempting to access its value throws an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -690,8 +625,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the current <see
-             cref="T:System.Nullable`1" />
+            >Gets a value indicating whether the current <see cref="T:System.Nullable`1" />
 
             
 
@@ -722,13 +656,11 @@
       </Parameters>
       <Docs>
         <param name="value"
-          >The <see
-           cref="T:System.Nullable&lt;T&gt;" />
+          >The <see cref="T:System.Nullable&lt;T&gt;" />
 
           
 
-            value to convert to type <see
-           langword="T" />
+            value to convert to type <see langword="T" />
 
           
 
@@ -736,13 +668,11 @@
         >
         <summary>
           <para
-            >Perform an explicit conversion of a    <see
-             cref="T:System.Nullable&lt;T&gt;" />
+            >Perform an explicit conversion of a    <see cref="T:System.Nullable&lt;T&gt;" />
 
             
 
-              value to type <see
-             langword="T" />
+              value to type <see langword="T" />
 
             
 
@@ -750,8 +680,7 @@
           >
         </summary>
         <returns
-          >The value, if any, of the specified nullable value. Otherwise, a <see
-           cref="T:System.InvalidOperationException" />
+          >The value, if any, of the specified nullable value. Otherwise, a <see cref="T:System.InvalidOperationException" />
 
           
 
@@ -760,8 +689,7 @@
         <remarks>
           <para>
             <block subset="none" type="note"
-              >The conversion implemented by this method corresponds exactly to obtaining the value of the <see
-               cref="P:System.Nullable&lt;T&gt;.Value" />
+              >The conversion implemented by this method corresponds exactly to obtaining the value of the <see cref="P:System.Nullable&lt;T&gt;.Value" />
 
               
 
@@ -775,8 +703,7 @@
 
           
 
-           is <see
-           langword="false" />
+           is <see langword="false" />
 
           
 
@@ -806,13 +733,11 @@
       </Parameters>
       <Docs>
         <param name="value"
-          >The <see
-           langword="T" />
+          >The <see langword="T" />
 
           
 
-            value to convert to <see
-           cref="T:System.Nullable&lt;T&gt;" />
+            value to convert to <see cref="T:System.Nullable&lt;T&gt;" />
 
           
 
@@ -820,13 +745,11 @@
         >
         <summary>
           <para
-            >Perform an implicit conversion of a    <see
-             langword="T" />
+            >Perform an implicit conversion of a    <see langword="T" />
 
             
 
-              value to   <see
-             cref="T:System.Nullable&lt;T&gt;" />
+              value to   <see cref="T:System.Nullable&lt;T&gt;" />
 
             
 
@@ -835,8 +758,7 @@
         </summary>
         <returns>
           <para
-            >A <see
-             cref="T:System.Nullable&lt;T&gt;" />
+            >A <see cref="T:System.Nullable&lt;T&gt;" />
 
             
 
@@ -846,8 +768,7 @@
         <remarks>
           <para>
             <block subset="none" type="note"
-              >The conversion implemented by this method corresponds exactly to invoking the <see
-               cref="M:System.Nullable&lt;T&gt;" />
+              >The conversion implemented by this method corresponds exactly to invoking the <see cref="M:System.Nullable&lt;T&gt;" />
               <see langword="(T)" />
 
               
@@ -879,13 +800,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Nullable`1.ToString" />
+            >The <see cref="M:System.Nullable`1.ToString" />
 
             
 
-             property returns the string yielded by calling the ToString property of the object returned by the <see
-             cref="P:System.Nullable`1.Value" />
+             property returns the string yielded by calling the ToString property of the object returned by the <see cref="P:System.Nullable`1.Value" />
 
             
 
@@ -895,8 +814,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the text representation of the value of the current <see
-             cref="T:System.Nullable`1" />
+            >Returns the text representation of the value of the current <see cref="T:System.Nullable`1" />
 
             
 
@@ -906,18 +824,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text representation of the value of the current <see
-             cref="T:System.Nullable`1" />
+            >The text representation of the value of the current <see cref="T:System.Nullable`1" />
 
             
 
-             object if the <see
-             cref="P:System.Nullable`1.HasValue" />
+             object if the <see cref="P:System.Nullable`1.HasValue" />
 
             
 
-             property is true, or an empty string ("") if the <see
-             cref="P:System.Nullable`1.HasValue" />
+             property is true, or an empty string ("") if the <see cref="P:System.Nullable`1.HasValue" />
 
             
 
@@ -947,8 +862,7 @@
 
           
 
-           is <see
-           langword="false" />
+           is <see langword="false" />
 
           
 
@@ -957,18 +871,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a value of type T has not been assigned to the <see
-             cref="T:System.Nullable`1" />
+            >If a value of type T has not been assigned to the <see cref="T:System.Nullable`1" />
 
             
 
-             object, you can compare it to null and retrieve its <see
-             cref="P:System.Nullable`1.HasValue" />
+             object, you can compare it to null and retrieve its <see cref="P:System.Nullable`1.HasValue" />
 
             
 
-             property, but you cannot access its <see
-             cref="P:System.Nullable`1.Value" />
+             property, but you cannot access its <see cref="P:System.Nullable`1.Value" />
 
             
 
@@ -978,8 +889,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the current <see
-             cref="T:System.Nullable`1" />
+            >Gets the value of the current <see cref="T:System.Nullable`1" />
 
             
 

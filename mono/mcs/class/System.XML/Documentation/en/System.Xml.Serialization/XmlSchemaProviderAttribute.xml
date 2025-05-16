@@ -27,18 +27,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The main purpose of the <see
-         cref="T:System.Xml.Serialization.XmlSchemaProviderAttribute" />
+        >The main purpose of the <see cref="T:System.Xml.Serialization.XmlSchemaProviderAttribute" />
 
         
 
-         is to enable the <see
-         cref="T:System.Xml.Serialization.XmlSchemaExporter" />
+         is to enable the <see cref="T:System.Xml.Serialization.XmlSchemaExporter" />
 
         
 
-         class to return a schema when queried by the Web Services Description Language tool (WSDL.exe), or when using the <ui
-        >Add Web Reference</ui>
+         class to return a schema when queried by the Web Services Description Language tool (WSDL.exe), or when using the <ui>Add Web Reference</ui>
 
         
 
@@ -46,8 +43,7 @@
       >
       <block subset="none" type="note">
         <para
-          >The target class of the attribute must implement the <see
-           cref="T:System.Xml.Serialization.IXmlSerializable" />
+          >The target class of the attribute must implement the <see cref="T:System.Xml.Serialization.IXmlSerializable" />
 
           
 
@@ -55,23 +51,19 @@
         >
       </block>
       <para
-        >The <see
-         cref="P:System.Xml.Serialization.XmlSchemaProviderAttribute.MethodName" />
+        >The <see cref="P:System.Xml.Serialization.XmlSchemaProviderAttribute.MethodName" />
 
         
 
-         property returns the name of a static method through reflection. The method, which must be implemented, must take a single parameter, an <see
-         cref="T:System.Xml.Schema.XmlSchemaSet" />
+         property returns the name of a static method through reflection. The method, which must be implemented, must take a single parameter, an <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
         
 
-         object, which the method populates with an <see
-         cref="T:System.Xml.Schema.XmlSchema" />
+         object, which the method populates with an <see cref="T:System.Xml.Schema.XmlSchema" />
 
         
 
-         object. The method must also return an <see
-         cref="T:System.Xml.XmlQualifiedName" />
+         object. The method must also return an <see cref="T:System.Xml.XmlQualifiedName" />
 
         
 
@@ -81,13 +73,11 @@
         <h2>Returning Anonymous Types</h2>
       </format>
       <para
-        >An anonymous complex type cannot be created using a method that returns <see
-         cref="T:System.Xml.XmlQualifiedName" />
+        >An anonymous complex type cannot be created using a method that returns <see cref="T:System.Xml.XmlQualifiedName" />
 
         
 
-        . Because an anonymous type has no name, and you cannot add an anonymous type to a schema, the anonymous type must be returned as an <see
-         cref="T:System.Xml.Schema.XmlSchemaType" />
+        . Because an anonymous type has no name, and you cannot add an anonymous type to a schema, the anonymous type must be returned as an <see cref="T:System.Xml.Schema.XmlSchemaType" />
 
         
 
@@ -97,13 +87,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When applied to a type, stores the name of a static method of the type that returns an XML schema and a <see
-         cref="T:System.Xml.XmlQualifiedName" />
+        >When applied to a type, stores the name of a static method of the type that returns an XML schema and a <see cref="T:System.Xml.XmlQualifiedName" />
 
         
 
-         (or <see
-         cref="T:System.Xml.Schema.XmlSchemaType" />
+         (or <see cref="T:System.Xml.Schema.XmlSchemaType" />
 
         
 
@@ -135,8 +123,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlSchemaProviderAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSchemaProviderAttribute" />
 
             
 
@@ -144,7 +131,11 @@
           >
         </summary>
         <param name="methodName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -31,8 +31,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1E00-4602-9EBF-526B271A8B87"
             >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
           >
@@ -73,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.EventLogPermissionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.EventLogPermissionAttribute" />
 
             
 
@@ -82,12 +80,15 @@
           >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+          One of the <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -119,13 +120,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates the permission based on the <see
-             cref="P:System.Diagnostics.EventLogPermissionAttribute.MachineName" />
+            >Creates the permission based on the <see cref="P:System.Diagnostics.EventLogPermissionAttribute.MachineName" />
 
             
 
-             property and the requested access levels that are set through the <see
-             cref="P:System.Diagnostics.EventLogPermissionAttribute.PermissionAccess" />
+             property and the requested access levels that are set through the <see cref="P:System.Diagnostics.EventLogPermissionAttribute.PermissionAccess" />
 
             
 
@@ -135,8 +134,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.IPermission" />
+            >An <see cref="T:System.Security.IPermission" />
 
             
 

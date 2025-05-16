@@ -1,14 +1,12 @@
 <?xml version="1.0"?>
 <clause number="9.4.3" title="Keywords">
   <paragraph
-    >A keyword is an identifier-like sequence of characters that is reserved, and cannot be used as an identifier except when prefaced by the @ character. <grammar_production
-    >
+    >A keyword is an identifier-like sequence of characters that is reserved, and cannot be used as an identifier except when prefaced by the @ character. <grammar_production>
       <name>keyword</name>
 
       
 
-       :: one of <rhs
-      >
+       :: one of <rhs>
         <keyword>abstract</keyword>
         <keyword>as</keyword>
         <keyword>base</keyword>
@@ -121,9 +119,7 @@
   </paragraph>
   <paragraph
     >In some places in the grammar, specific identifiers have special meaning, but are not keywords. <note
-
-      >[Note: For example, within a property declaration, the "get" and "set" identifiers have special meaning (<hyperlink
-      >17.6.2</hyperlink>
+      >[Note: For example, within a property declaration, the "get" and "set" identifiers have special meaning (<hyperlink>17.6.2</hyperlink>
 
       
 

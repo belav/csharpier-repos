@@ -40,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.BasicHttpsBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.BasicHttpsBinding" />
 
             
 
@@ -71,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.BasicHttpsBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.BasicHttpsBinding" />
 
             
 
@@ -80,12 +78,15 @@
           >
         </summary>
         <param name="securityMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value of <see
-           cref="T:System.ServiceModel.BasicHttpsSecurityMode" />
+          The value of <see cref="T:System.ServiceModel.BasicHttpsSecurityMode" />
 
           
 
@@ -111,8 +112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.BasicHttpsBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.BasicHttpsBinding" />
 
             
 
@@ -120,7 +120,11 @@
           >
         </summary>
         <param name="configurationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

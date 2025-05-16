@@ -28,76 +28,62 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.Odbc.OdbcDataAdapter" />
+        >The <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
         
 
-         serves as a bridge between a DataSet and data source for retrieving and saving data. The <see
-         cref="T:System.Data.Odbc.OdbcDataAdapter" />
+         serves as a bridge between a DataSet and data source for retrieving and saving data. The <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
         
 
-         provides this bridge by using <see
-         cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+         provides this bridge by using <see cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
 
         
 
-         to load data from the data source into the <see
-         cref="T:System.Data.DataSet" />
+         to load data from the data source into the <see cref="T:System.Data.DataSet" />
 
         
 
-        , and using <see
-         cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+        , and using <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
         
 
-         to send changes made in the <see
-         cref="T:System.Data.DataSet" />
+         to send changes made in the <see cref="T:System.Data.DataSet" />
 
         
 
          back to the data source.</para
       >
       <para
-        >When the <see
-         cref="T:System.Data.Odbc.OdbcDataAdapter" />
+        >When the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
         
 
-         fills a <see
-         cref="T:System.Data.DataSet" />
+         fills a <see cref="T:System.Data.DataSet" />
 
         
 
-        , it creates the required tables and columns for the returned data if they do not already exist. However, primary key information is not included in the implicitly created schema unless the <see
-         cref="P:System.Data.Common.DataAdapter.MissingSchemaAction" />
+        , it creates the required tables and columns for the returned data if they do not already exist. However, primary key information is not included in the implicitly created schema unless the <see cref="P:System.Data.Common.DataAdapter.MissingSchemaAction" />
 
         
 
-         property is set to <see
-         cref="F:System.Data.MissingSchemaAction.AddWithKey" />
+         property is set to <see cref="F:System.Data.MissingSchemaAction.AddWithKey" />
 
         
 
-        . You may also have the <see
-         cref="T:System.Data.Odbc.OdbcDataAdapter" />
+        . You may also have the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
         
 
-         create the schema of the <see
-         cref="T:System.Data.DataSet" />
+         create the schema of the <see cref="T:System.Data.DataSet" />
 
         
 
-        , including primary key information, before filling it with data using <see
-         cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+        , including primary key information, before filling it with data using <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
 
         
 
-        . For more information, see <format
-         type="text/html">
+        . For more information, see <format type="text/html">
           <a href="307d2809-208b-4cf8-b6a9-5d16f15fc16c"
             >Adding Existing Constraints to a DataSet</a
           >
@@ -109,13 +95,11 @@
       >
       <block subset="none" type="note">
         <para
-          >When you call the Fill method on a data source that does not have a primary key column, the <see
-           cref="T:System.Data.Odbc.OdbcDataAdapter" />
+          >When you call the Fill method on a data source that does not have a primary key column, the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
           
 
-           tries to promote the unique constraint column to the primary key. In the process, the <see
-           cref="T:System.Data.Odbc.OdbcDataAdapter" />
+           tries to promote the unique constraint column to the primary key. In the process, the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
           
 
@@ -124,18 +108,15 @@
       </block>
       <block subset="none" type="note">
         <para
-          >Due to the limitations of native ODBC drivers, only one <see
-           cref="T:System.Data.DataTable" />
+          >Due to the limitations of native ODBC drivers, only one <see cref="T:System.Data.DataTable" />
 
           
 
-           is ever returned when you call <see
-           cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+           is ever returned when you call <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
 
           
 
-          . This is true even when executing SQL batch statements from which multiple <see
-           cref="T:System.Data.DataTable" />
+          . This is true even when executing SQL batch statements from which multiple <see cref="T:System.Data.DataTable" />
 
           
 
@@ -143,28 +124,23 @@
         >
       </block>
       <para
-        >The <see
-         cref="T:System.Data.Odbc.OdbcDataAdapter" />
+        >The <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
         
 
-         also includes the <see
-         cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+         also includes the <see cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
 
         
 
-        , <see
-         cref="P:System.Data.Odbc.OdbcDataAdapter.InsertCommand" />
+        , <see cref="P:System.Data.Odbc.OdbcDataAdapter.InsertCommand" />
 
         
 
-        , <see
-         cref="P:System.Data.Odbc.OdbcDataAdapter.DeleteCommand" />
+        , <see cref="P:System.Data.Odbc.OdbcDataAdapter.DeleteCommand" />
 
         
 
-        , <see
-         cref="P:System.Data.Odbc.OdbcDataAdapter.UpdateCommand" />
+        , <see cref="P:System.Data.Odbc.OdbcDataAdapter.UpdateCommand" />
 
         
 
@@ -174,8 +150,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a set of data commands and a connection to a data source that are used to fill the <see
-         cref="T:System.Data.DataSet" />
+        >Represents a set of data commands and a connection to a data source that are used to fill the <see cref="T:System.Data.DataSet" />
 
         
 
@@ -192,8 +167,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you create an instance of <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+            >When you create an instance of <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
@@ -236,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+            >Initializes a new instance of the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
@@ -263,26 +236,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This implementation of the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+            >This implementation of the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
-             constructor sets the <see
-             cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+             constructor sets the <see cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
 
             
 
-             property to the value specified in the <paramref
-             name="selectCommand" />
+             property to the value specified in the <paramref name="selectCommand" />
 
             
 
              parameter.</para
           >
           <para
-            >When you create an instance of <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+            >When you create an instance of <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
@@ -325,8 +294,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+            >Initializes a new instance of the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
@@ -334,22 +302,23 @@
           >
         </summary>
         <param name="selectCommand">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Data.Odbc.OdbcCommand" />
+          An <see cref="T:System.Data.Odbc.OdbcCommand" />
 
           
 
-           that is an SQL SELECT statement or stored procedure, and is set as the <see
-           cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+           that is an SQL SELECT statement or stored procedure, and is set as the <see cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
 
           
 
-           property of the <see
-           cref="T:System.Data.Odbc.OdbcDataAdapter" />
+           property of the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
           
 
@@ -375,13 +344,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This implementation of the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+            >This implementation of the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
-             can be useful in an application that must call the Fill method for two or more <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+             can be useful in an application that must call the Fill method for two or more <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
@@ -391,13 +358,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+            >Initializes a new instance of the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
-             class with an SQL SELECT statement and an <see
-             cref="T:System.Data.Odbc.OdbcConnection" />
+             class with an SQL SELECT statement and an <see cref="T:System.Data.Odbc.OdbcConnection" />
 
             
 
@@ -405,29 +370,34 @@
           >
         </summary>
         <param name="selectCommandText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that is a SQL SELECT statement or stored procedure to be used by the <see
-           cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+          A string that is a SQL SELECT statement or stored procedure to be used by the <see cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
 
           
 
-           property of the <see
-           cref="T:System.Data.Odbc.OdbcDataAdapter" />
+           property of the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
           
 
           . </param
         >
         <param name="selectConnection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Data.Odbc.OdbcConnection" />
+          An <see cref="T:System.Data.Odbc.OdbcConnection" />
 
           
 
@@ -453,18 +423,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload of the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+            >This overload of the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
-             constructor uses the <paramref
-             name="selectConnectionString" />
+             constructor uses the <paramref name="selectConnectionString" />
 
             
 
-             parameter to set the <see
-             cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+             parameter to set the <see cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
 
             
 
@@ -474,8 +441,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+            >Initializes a new instance of the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
@@ -483,24 +449,30 @@
           >
         </summary>
         <param name="selectCommandText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that is a SQL SELECT statement or stored procedure to be used by the <see
-           cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+          A string that is a SQL SELECT statement or stored procedure to be used by the <see cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
 
           
 
-           property of the <see
-           cref="T:System.Data.Odbc.OdbcDataAdapter" />
+           property of the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
           
 
           . </param
         >
         <param name="selectConnectionString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -592,76 +564,62 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Data.Odbc.OdbcDataAdapter.DeleteCommand" />
+            >When the <see cref="P:System.Data.Odbc.OdbcDataAdapter.DeleteCommand" />
 
             
 
-             property is assigned to a previously created <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+             property is assigned to a previously created <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
-            , the <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+            , the <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
-             is not cloned. Instead, the <see
-             cref="P:System.Data.Odbc.OdbcDataAdapter.DeleteCommand" />
+             is not cloned. Instead, the <see cref="P:System.Data.Odbc.OdbcDataAdapter.DeleteCommand" />
 
             
 
-             maintains a reference to the previously created <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+             maintains a reference to the previously created <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
             .</para
           >
           <para
-            >During an update operation, if <see
-             cref="P:System.Data.Odbc.OdbcDataAdapter.DeleteCommand" />
+            >During an update operation, if <see cref="P:System.Data.Odbc.OdbcDataAdapter.DeleteCommand" />
 
             
 
-             is not set and primary key information is present in the <see
-             cref="T:System.Data.DataSet" />
+             is not set and primary key information is present in the <see cref="T:System.Data.DataSet" />
 
             
 
-            , you can use the <see
-             cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+            , you can use the <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
             
 
-             class to automatically generate the <see
-             cref="P:System.Data.Odbc.OdbcDataAdapter.DeleteCommand" />
+             class to automatically generate the <see cref="P:System.Data.Odbc.OdbcDataAdapter.DeleteCommand" />
 
             
 
-            , and additional commands needed to reconcile the <see
-             cref="T:System.Data.DataSet" />
+            , and additional commands needed to reconcile the <see cref="T:System.Data.DataSet" />
 
             
 
-             to the data source. To do this, set the <see
-             cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+             to the data source. To do this, set the <see cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
 
             
 
-             property of the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+             property of the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
-            . The generation logic also requires key column information to be present in the <see
-             cref="T:System.Data.DataSet" />
+            . The generation logic also requires key column information to be present in the <see cref="T:System.Data.DataSet" />
 
             
 
-            . For more information, see <format
-             type="text/html">
+            . For more information, see <format type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generating Commands</a>
             </format>
 
@@ -720,76 +678,62 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Data.Odbc.OdbcDataAdapter.InsertCommand" />
+            >When the <see cref="P:System.Data.Odbc.OdbcDataAdapter.InsertCommand" />
 
             
 
-             property is assigned to a previously created <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+             property is assigned to a previously created <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
-             object, the <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+             object, the <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
-             is not cloned. Instead, <see
-             cref="P:System.Data.Odbc.OdbcDataAdapter.InsertCommand" />
+             is not cloned. Instead, <see cref="P:System.Data.Odbc.OdbcDataAdapter.InsertCommand" />
 
             
 
-             maintains a reference to the previously created <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+             maintains a reference to the previously created <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
             .</para
           >
           <para
-            >During an update operation, if <see
-             cref="P:System.Data.Odbc.OdbcDataAdapter.InsertCommand" />
+            >During an update operation, if <see cref="P:System.Data.Odbc.OdbcDataAdapter.InsertCommand" />
 
             
 
-             is not set and primary key information is present in the <see
-             cref="T:System.Data.DataSet" />
+             is not set and primary key information is present in the <see cref="T:System.Data.DataSet" />
 
             
 
-            , you can use the <see
-             cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+            , you can use the <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
             
 
-             class to automatically generate <see
-             cref="P:System.Data.Odbc.OdbcDataAdapter.InsertCommand" />
+             class to automatically generate <see cref="P:System.Data.Odbc.OdbcDataAdapter.InsertCommand" />
 
             
 
-            , and additional commands needed to reconcile the <see
-             cref="T:System.Data.DataSet" />
+            , and additional commands needed to reconcile the <see cref="T:System.Data.DataSet" />
 
             
 
-             to the data source. To do this, set the <see
-             cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+             to the data source. To do this, set the <see cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
 
             
 
-             property of the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+             property of the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
-            . The generation logic also requires key column information to be present in the <see
-             cref="T:System.Data.DataSet" />
+            . The generation logic also requires key column information to be present in the <see cref="T:System.Data.DataSet" />
 
             
 
-            . For more information, see <format
-             type="text/html">
+            . For more information, see <format type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generating Commands</a>
             </format>
 
@@ -799,18 +743,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If execution of this command returns rows, these rows may be added to the <see
-               cref="T:System.Data.DataSet" />
+              >If execution of this command returns rows, these rows may be added to the <see cref="T:System.Data.DataSet" />
 
               
 
-               depending upon how you set the <see
-               cref="!:System.Data.Odbc.OdbcCommand.UpdatedRowSource" />
+               depending upon how you set the <see cref="!:System.Data.Odbc.OdbcCommand.UpdatedRowSource" />
 
               
 
-               property of the <see
-               cref="T:System.Data.Odbc.OdbcCommand" />
+               property of the <see cref="T:System.Data.Odbc.OdbcCommand" />
 
               
 
@@ -885,8 +826,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you use <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+            >When you use <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
@@ -895,8 +835,7 @@
           <list type="ordered">
             <item>
               <para
-                >The values in the <see
-                 cref="T:System.Data.DataRow" />
+                >The values in the <see cref="T:System.Data.DataRow" />
 
                 
 
@@ -905,8 +844,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
+                >The <see cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
 
                 
 
@@ -918,8 +856,7 @@
             </item>
             <item>
               <para
-                >If the command is set to FirstReturnedRecord, the first returned result is placed in the <see
-                 cref="T:System.Data.DataRow" />
+                >If the command is set to FirstReturnedRecord, the first returned result is placed in the <see cref="T:System.Data.DataRow" />
 
                 
 
@@ -928,8 +865,7 @@
             </item>
             <item>
               <para
-                >If there are output parameters, they are placed in the <see
-                 cref="T:System.Data.DataRow" />
+                >If there are output parameters, they are placed in the <see cref="T:System.Data.DataRow" />
 
                 
 
@@ -938,8 +874,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" />
+                >The <see cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" />
 
                 
 
@@ -980,8 +915,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you use <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+            >When you use <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
@@ -990,8 +924,7 @@
           <list type="ordered">
             <item>
               <para
-                >The values in the <see
-                 cref="T:System.Data.DataRow" />
+                >The values in the <see cref="T:System.Data.DataRow" />
 
                 
 
@@ -1000,8 +933,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
+                >The <see cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
 
                 
 
@@ -1013,8 +945,7 @@
             </item>
             <item>
               <para
-                >If the command is set to FirstReturnedRecord, the first returned result is placed in the <see
-                 cref="T:System.Data.DataRow" />
+                >If the command is set to FirstReturnedRecord, the first returned result is placed in the <see cref="T:System.Data.DataRow" />
 
                 
 
@@ -1023,8 +954,7 @@
             </item>
             <item>
               <para
-                >If there are output parameters, they are placed in the <see
-                 cref="T:System.Data.DataRow" />
+                >If there are output parameters, they are placed in the <see cref="T:System.Data.DataRow" />
 
                 
 
@@ -1033,8 +963,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" />
+                >The <see cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" />
 
                 
 
@@ -1055,8 +984,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs during <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+            >Occurs during <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
@@ -1091,41 +1019,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <see
-             cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+            >When <see cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
 
             
 
-             is assigned to a previously created <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+             is assigned to a previously created <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
-            , the <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+            , the <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
-             is not cloned. Instead, the <see
-             cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+             is not cloned. Instead, the <see cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
 
             
 
-             maintains a reference to the previously created <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+             maintains a reference to the previously created <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
              object.</para
           >
           <para
-            >If <see
-             cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+            >If <see cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
 
             
 
-             returns no rows, no tables are added to the <see
-             cref="T:System.Data.DataSet" />
+             returns no rows, no tables are added to the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -1179,13 +1100,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Data.IDbDataAdapter" />
+             instance is cast to an <see cref="T:System.Data.IDbDataAdapter" />
 
             
 
@@ -1195,8 +1114,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Data.IDbDataAdapter.DeleteCommand" />
+            >For a description of this member, see <see cref="M:System.Data.IDbDataAdapter.DeleteCommand" />
 
             
 
@@ -1223,13 +1141,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Data.IDbDataAdapter" />
+             instance is cast to an <see cref="T:System.Data.IDbDataAdapter" />
 
             
 
@@ -1239,8 +1155,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Data.IDbDataAdapter.InsertCommand" />
+            >For a description of this member, see <see cref="M:System.Data.IDbDataAdapter.InsertCommand" />
 
             
 
@@ -1267,13 +1182,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Data.IDbDataAdapter" />
+             instance is cast to an <see cref="T:System.Data.IDbDataAdapter" />
 
             
 
@@ -1283,8 +1196,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Data.IDbDataAdapter.SelectCommand" />
+            >For a description of this member, see <see cref="M:System.Data.IDbDataAdapter.SelectCommand" />
 
             
 
@@ -1311,13 +1223,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Data.IDbDataAdapter" />
+             instance is cast to an <see cref="T:System.Data.IDbDataAdapter" />
 
             
 
@@ -1327,8 +1237,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Data.IDbDataAdapter.UpdateCommand" />
+            >For a description of this member, see <see cref="M:System.Data.IDbDataAdapter.UpdateCommand" />
 
             
 
@@ -1352,13 +1261,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ICloneable" />
+             instance is cast to an <see cref="T:System.ICloneable" />
 
             
 
@@ -1368,8 +1275,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ICloneable.Clone" />
+            >For a description of this member, see <see cref="M:System.ICloneable.Clone" />
 
             
 
@@ -1379,8 +1285,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Object" />
+            >A new <see cref="T:System.Object" />
 
             
 
@@ -1411,76 +1316,62 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <see
-             cref="P:System.Data.Odbc.OdbcDataAdapter.UpdateCommand" />
+            >When <see cref="P:System.Data.Odbc.OdbcDataAdapter.UpdateCommand" />
 
             
 
-             is assigned to a previously created <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+             is assigned to a previously created <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
-            , the <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+            , the <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
-             is not cloned. Instead, the <see
-             cref="P:System.Data.Odbc.OdbcDataAdapter.UpdateCommand" />
+             is not cloned. Instead, the <see cref="P:System.Data.Odbc.OdbcDataAdapter.UpdateCommand" />
 
             
 
-             maintains a reference to the previously created <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+             maintains a reference to the previously created <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
              object.</para
           >
           <para
-            >During an update operation, if <see
-             cref="P:System.Data.Odbc.OdbcDataAdapter.UpdateCommand" />
+            >During an update operation, if <see cref="P:System.Data.Odbc.OdbcDataAdapter.UpdateCommand" />
 
             
 
-             is not set and primary key information is present in the <see
-             cref="T:System.Data.DataSet" />
+             is not set and primary key information is present in the <see cref="T:System.Data.DataSet" />
 
             
 
-            , you can use the <see
-             cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+            , you can use the <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
             
 
-             class to automatically generate <see
-             cref="P:System.Data.Odbc.OdbcDataAdapter.UpdateCommand" />
+             class to automatically generate <see cref="P:System.Data.Odbc.OdbcDataAdapter.UpdateCommand" />
 
             
 
-            , and additional commands needed to reconcile the <see
-             cref="T:System.Data.DataSet" />
+            , and additional commands needed to reconcile the <see cref="T:System.Data.DataSet" />
 
             
 
-             to the data source. To do this, set the <see
-             cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+             to the data source. To do this, set the <see cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
 
             
 
-             property of the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+             property of the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
-            . The generation logic also requires key column information to be present in the <see
-             cref="T:System.Data.DataSet" />
+            . The generation logic also requires key column information to be present in the <see cref="T:System.Data.DataSet" />
 
             
 
-            . For more information, see <format
-             type="text/html">
+            . For more information, see <format type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generating Commands</a>
             </format>
 
@@ -1490,18 +1381,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If execution of this command returns rows, these rows may be merged with the <see
-               cref="T:System.Data.DataSet" />
+              >If execution of this command returns rows, these rows may be merged with the <see cref="T:System.Data.DataSet" />
 
               
 
-               depending upon how you set the <see
-               cref="!:System.Data.Odbc.OdbcCommand.UpdatedRowSource" />
+               depending upon how you set the <see cref="!:System.Data.Odbc.OdbcCommand.UpdatedRowSource" />
 
               
 
-               property of the <see
-               cref="T:System.Data.Odbc.OdbcCommand" />
+               property of the <see cref="T:System.Data.Odbc.OdbcCommand" />
 
               
 

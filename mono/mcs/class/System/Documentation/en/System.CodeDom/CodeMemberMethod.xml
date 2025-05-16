@@ -41,18 +41,15 @@
          can be used to represent the declaration for a method.</para
       >
       <para
-        >The <see
-         cref="P:System.CodeDom.CodeMemberMethod.ReturnType" />
+        >The <see cref="P:System.CodeDom.CodeMemberMethod.ReturnType" />
 
         
 
-         property specifies the data type of the method's return value. The <see
-         cref="P:System.CodeDom.CodeMemberMethod.Parameters" />
+         property specifies the data type of the method's return value. The <see cref="P:System.CodeDom.CodeMemberMethod.Parameters" />
 
         
 
-         property contains the method's parameters. The <see
-         cref="P:System.CodeDom.CodeMemberMethod.Statements" />
+         property contains the method's parameters. The <see cref="P:System.CodeDom.CodeMemberMethod.Statements" />
 
         
 
@@ -83,8 +80,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates an empty <see
-             cref="T:System.CodeDom.CodeMemberMethod" />
+            >This constructor creates an empty <see cref="T:System.CodeDom.CodeMemberMethod" />
 
             
 
@@ -94,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeMemberMethod" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeMemberMethod" />
 
             
 
@@ -128,16 +123,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The types referenced by this collection must consist of interfaces.</para>
           <para
-            >If this <see
-             cref="T:System.CodeDom.CodeMemberMethod" />
+            >If this <see cref="T:System.CodeDom.CodeMemberMethod" />
 
             
 
              represents a declaration for a public method, and this method implements a method on an interface, the interface or interfaces this method implements a method of should be referenced in this collection.</para
           >
           <para
-            >The method should still have the same name as the method of the interface that is implemented by this method. For some languages, like C#, this has no effect on the syntax. For others, like Visual Basic, there is a special syntax for implementing interfaces. If the method is privately implementing a single interface, the <see
-             cref="P:System.CodeDom.CodeMemberMethod.PrivateImplementationType" />
+            >The method should still have the same name as the method of the interface that is implemented by this method. For some languages, like C#, this has no effect on the syntax. For others, like Visual Basic, there is a special syntax for implementing interfaces. If the method is privately implementing a single interface, the <see cref="P:System.CodeDom.CodeMemberMethod.PrivateImplementationType" />
 
             
 
@@ -147,8 +140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the data types of the interfaces implemented by this method, unless it is a private method implementation, which is indicated by the <see
-             cref="P:System.CodeDom.CodeMemberMethod.PrivateImplementationType" />
+            >Gets the data types of the interfaces implemented by this method, unless it is a private method implementation, which is indicated by the <see cref="P:System.CodeDom.CodeMemberMethod.PrivateImplementationType" />
 
             
 
@@ -208,8 +200,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An event that will be raised the first time the <see
-             cref="P:System.CodeDom.CodeMemberMethod.ImplementationTypes" />
+            >An event that will be raised the first time the <see cref="P:System.CodeDom.CodeMemberMethod.ImplementationTypes" />
 
             
 
@@ -239,8 +230,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An event that will be raised the first time the <see
-             cref="P:System.CodeDom.CodeMemberMethod.Parameters" />
+            >An event that will be raised the first time the <see cref="P:System.CodeDom.CodeMemberMethod.Parameters" />
 
             
 
@@ -270,8 +260,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An event that will be raised the first time the <see
-             cref="P:System.CodeDom.CodeMemberMethod.Statements" />
+            >An event that will be raised the first time the <see cref="P:System.CodeDom.CodeMemberMethod.Statements" />
 
             
 
@@ -304,8 +293,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this <see
-             cref="T:System.CodeDom.CodeMemberMethod" />
+            >If this <see cref="T:System.CodeDom.CodeMemberMethod" />
 
             
 

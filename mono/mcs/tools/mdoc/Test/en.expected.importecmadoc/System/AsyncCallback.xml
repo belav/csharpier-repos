@@ -19,8 +19,7 @@
   </ReturnValue>
   <Docs>
     <param name="ar"
-      >A <see
-       cref="T:System.IAsyncResult" />
+      >A <see cref="T:System.IAsyncResult" />
 
       
 

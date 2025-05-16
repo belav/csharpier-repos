@@ -34,8 +34,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Util.WorkItem" />
+            >Initializes a new instance of the <see cref="T:System.Web.Util.WorkItem" />
 
             
 
@@ -67,12 +66,15 @@
           <para>Moves a work item to a separate thread for execution.</para>
         </summary>
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Util.WorkItemCallback" />
+          A <see cref="T:System.Web.Util.WorkItemCallback" />
 
           
 

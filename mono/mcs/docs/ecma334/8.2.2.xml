@@ -1,28 +1,23 @@
 <?xml version="1.0"?>
 <clause number="8.2.2" title="Conversions" informative="true">
   <paragraph
-    >The predefined types also have predefined conversions. For instance, conversions exist between the predefined types <keyword
-    >int</keyword>
+    >The predefined types also have predefined conversions. For instance, conversions exist between the predefined types <keyword>int</keyword>
 
     
 
-     and <keyword
-    >long</keyword>
+     and <keyword>long</keyword>
 
     
 
-    . C# differentiates between two kinds of conversions: implicit conversions and explicit conversions. Implicit conversions are supplied for conversions that can safely be performed without careful scrutiny. For instance, the conversion from <keyword
-    >int</keyword>
+    . C# differentiates between two kinds of conversions: implicit conversions and explicit conversions. Implicit conversions are supplied for conversions that can safely be performed without careful scrutiny. For instance, the conversion from <keyword>int</keyword>
 
     
 
-     to <keyword
-    >long</keyword>
+     to <keyword>long</keyword>
 
     
 
-     is an implicit conversion. This conversion always succeeds, and never results in a loss of information. The following example <code_example
-    >
+     is an implicit conversion. This conversion always succeeds, and never results in a loss of information. The following example <code_example>
       <![CDATA[
 using System;  
 class Test  
@@ -38,21 +33,18 @@ class Test
 
     
 
-    implicitly converts an <keyword
-    >int</keyword>
+    implicitly converts an <keyword>int</keyword>
 
     
 
-     to a <keyword
-    >long</keyword>
+     to a <keyword>long</keyword>
 
     
 
     . </paragraph
   >
   <paragraph
-    >In contrast, explicit conversions are performed with a cast expression. The example <code_example
-    >
+    >In contrast, explicit conversions are performed with a cast expression. The example <code_example>
       <![CDATA[
 using System;  
 class Test  
@@ -68,18 +60,15 @@ class Test
 
     
 
-    uses an explicit conversion to convert a <keyword
-    >long</keyword>
+    uses an explicit conversion to convert a <keyword>long</keyword>
 
     
 
-     to an <keyword
-    >int</keyword>
+     to an <keyword>int</keyword>
 
     
 
-    . The output is: <code_example
-    >
+    . The output is: <code_example>
       <![CDATA[
 (int) 9223372036854775807 = -1  
 ]]>

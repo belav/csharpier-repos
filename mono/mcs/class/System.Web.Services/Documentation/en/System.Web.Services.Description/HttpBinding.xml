@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The use of this class as an extensibility element specifies that information is to be passed by HTTP. For more information about specification of protocols for XML Web services, see <format
-         type="text/html">
+        >The use of this class as an extensibility element specifies that information is to be passed by HTTP. For more information about specification of protocols for XML Web services, see <format type="text/html">
           <a href="01DFC27C-C68E-4910-A0AA-5E4C2A766B0C"
             >[&lt;topic://cpconbuildingaspnetwebservices&gt;]</a
           >
@@ -43,8 +42,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an extensibility element added to a <see
-         cref="T:System.Web.Services.Description.Binding" />
+        >Represents an extensibility element added to a <see cref="T:System.Web.Services.Description.Binding" />
 
         
 
@@ -63,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.HttpBinding" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.HttpBinding" />
 
             
 

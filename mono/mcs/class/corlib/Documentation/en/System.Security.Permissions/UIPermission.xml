@@ -38,23 +38,19 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Drawing and user input events in windows are user interfaces.</para>
       <para
-        >The permission to use windows can be one of the following: unrestricted, limited to <see
-         cref="F:System.Security.Permissions.UIPermissionWindow.SafeTopLevelWindows" />
+        >The permission to use windows can be one of the following: unrestricted, limited to <see cref="F:System.Security.Permissions.UIPermissionWindow.SafeTopLevelWindows" />
 
         
 
-        , only <see
-         cref="F:System.Security.Permissions.UIPermissionWindow.SafeSubWindows" />
+        , only <see cref="F:System.Security.Permissions.UIPermissionWindow.SafeSubWindows" />
 
         
 
-        , or no window drawing or user input event access allowed. <see
-         cref="F:System.Security.Permissions.UIPermissionWindow.SafeTopLevelWindows" />
+        , or no window drawing or user input event access allowed. <see cref="F:System.Security.Permissions.UIPermissionWindow.SafeTopLevelWindows" />
 
         
 
-         and <see
-         cref="F:System.Security.Permissions.UIPermissionWindow.SafeSubWindows" />
+         and <see cref="F:System.Security.Permissions.UIPermissionWindow.SafeSubWindows" />
 
         
 
@@ -95,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.UIPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.UIPermission" />
 
             
 
@@ -104,7 +99,11 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -139,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.UIPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.UIPermission" />
 
             
 
@@ -148,7 +146,11 @@
           >
         </summary>
         <param name="clipboardFlag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -183,8 +185,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.UIPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.UIPermission" />
 
             
 
@@ -192,7 +193,11 @@
           >
         </summary>
         <param name="windowFlag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -225,8 +230,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.UIPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.UIPermission" />
 
             
 
@@ -234,14 +238,22 @@
           >
         </summary>
         <param name="windowFlag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           One of the enumeration values. </param
         >
         <param name="clipboardFlag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -335,7 +347,11 @@
           <para>Reconstructs a permission with a specified state from an XML encoding.</para>
         </summary>
         <param name="esd">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -368,13 +384,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The intersection of two permissions is a permission that describes the set of operations they both describe in common. Specifically, it represents the least permissive values of <see
-             cref="T:System.Security.Permissions.UIPermissionWindow" />
+            >The intersection of two permissions is a permission that describes the set of operations they both describe in common. Specifically, it represents the least permissive values of <see cref="T:System.Security.Permissions.UIPermissionWindow" />
 
             
 
-             and <see
-             cref="T:System.Security.Permissions.UIPermissionClipboard" />
+             and <see cref="T:System.Security.Permissions.UIPermissionClipboard" />
 
             
 
@@ -390,7 +404,11 @@
           <para>A new permission that represents the intersection of the current permission and the specified permission. This new permission is null if the intersection is empty.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -423,18 +441,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current permission is a subset of the specified permission if all demands that succeed for the current permission also succeed for the specified permission. That is, the specified permission contains at least the permissions contained in the subset. For <see
-             cref="M:System.Security.Permissions.UIPermission.IsSubsetOf(System.Security.IPermission)" />
+            >The current permission is a subset of the specified permission if all demands that succeed for the current permission also succeed for the specified permission. That is, the specified permission contains at least the permissions contained in the subset. For <see cref="M:System.Security.Permissions.UIPermission.IsSubsetOf(System.Security.IPermission)" />
 
             
 
-             to return true, both the <see
-             cref="T:System.Security.Permissions.UIPermissionWindow" />
+             to return true, both the <see cref="T:System.Security.Permissions.UIPermissionWindow" />
 
             
 
-             and <see
-             cref="T:System.Security.Permissions.UIPermissionClipboard" />
+             and <see cref="T:System.Security.Permissions.UIPermissionClipboard" />
 
             
 
@@ -450,7 +465,11 @@
           <para>true if the current permission is a subset of the specified permission; otherwise, false.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -567,18 +586,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see
-             cref="M:System.Security.Permissions.UIPermission.Union(System.Security.IPermission)" />
+            >The result of a call to <see cref="M:System.Security.Permissions.UIPermission.Union(System.Security.IPermission)" />
 
             
 
-             is a permission that represents all the operations represented by the current permission as well as all the operations represented by the specified permission. Specifically, it represents the most permissive values of <see
-             cref="T:System.Security.Permissions.UIPermissionWindow" />
+             is a permission that represents all the operations represented by the current permission as well as all the operations represented by the specified permission. Specifically, it represents the most permissive values of <see cref="T:System.Security.Permissions.UIPermissionWindow" />
 
             
 
-             and <see
-             cref="T:System.Security.Permissions.UIPermissionClipboard" />
+             and <see cref="T:System.Security.Permissions.UIPermissionClipboard" />
 
             
 
@@ -594,7 +610,11 @@
           <para>A new permission that represents the union of the current permission and the specified permission.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

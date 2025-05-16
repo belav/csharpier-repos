@@ -17,26 +17,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.AuthorizationSection" />
+        >The <see cref="T:System.Web.Configuration.AuthorizationSection" />
 
         
 
          class provides a way to programmatically access and modify the authorization section of a configuration file.</para
       >
       <para
-        >This type is part of a group that includes the <see
-         cref="T:System.Web.Configuration.AuthorizationRule" />
+        >This type is part of a group that includes the <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
         
 
-        , the <see
-         cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
+        , the <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
 
         
 
-        , and the <see
-         cref="T:System.Web.Configuration.AuthorizationRuleAction" />
+        , and the <see cref="T:System.Web.Configuration.AuthorizationRuleAction" />
 
         
 
@@ -44,18 +40,15 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.Configuration.AuthorizationSection" />
+          >The <see cref="T:System.Web.Configuration.AuthorizationSection" />
 
           
 
-           can read and write information from and to the related section of the configuration file according to the section property <see
-           cref="P:System.Configuration.SectionInformation.AllowDefinition" />
+           can read and write information from and to the related section of the configuration file according to the section property <see cref="P:System.Configuration.SectionInformation.AllowDefinition" />
 
           
 
-           whose value is <see
-           cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />
+           whose value is <see cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />
 
           
 
@@ -79,18 +72,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.AuthorizationSection.#ctor" />
+            >The <see cref="M:System.Web.Configuration.AuthorizationSection.#ctor" />
 
             
 
-             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
-             cref="T:System.Web.Configuration.AuthorizationSection" />
+             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.AuthorizationSection" />
 
             
 
-             class by using the <see
-             cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+             class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" />
 
             
 
@@ -100,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.AuthorizationSection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.AuthorizationSection" />
 
             
 
@@ -145,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the collection of the <see
-             cref="T:System.Web.Configuration.AuthorizationSection" />
+            >Specifies the collection of the <see cref="T:System.Web.Configuration.AuthorizationSection" />
 
             
 
@@ -178,8 +166,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.AuthorizationSection.Rules" />
+            >The <see cref="P:System.Web.Configuration.AuthorizationSection.Rules" />
 
             
 
@@ -189,13 +176,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
+            >Gets the <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
 
             
 
-             of <see
-             cref="T:System.Web.Configuration.AuthorizationRule" />
+             of <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
             
 

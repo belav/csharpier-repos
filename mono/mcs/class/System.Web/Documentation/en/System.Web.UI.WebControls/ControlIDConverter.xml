@@ -17,36 +17,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.ControlIDConverter" />
+        >The <see cref="T:System.Web.UI.WebControls.ControlIDConverter" />
 
         
 
-         class derives from the <see
-         cref="T:System.ComponentModel.StringConverter" />
+         class derives from the <see cref="T:System.ComponentModel.StringConverter" />
 
         
 
-         class and provides a list of control IDs for display in a property grid control in design-time environments. The <see
-         cref="T:System.Web.UI.WebControls.ControlIDConverter" />
+         class and provides a list of control IDs for display in a property grid control in design-time environments. The <see cref="T:System.Web.UI.WebControls.ControlIDConverter" />
 
         
 
-         class also serves as the base class for the <see
-         cref="T:System.Web.UI.WebControls.AssociatedControlConverter" />
+         class also serves as the base class for the <see cref="T:System.Web.UI.WebControls.AssociatedControlConverter" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.WebControls.ValidatedControlConverter" />
+         and <see cref="T:System.Web.UI.WebControls.ValidatedControlConverter" />
 
         
 
          classes, which are type converters for Web controls and controls that support validation property attributes, respectively.</para
       >
       <para
-        >For more information about type converters, see <format
-         type="text/html">
+        >For more information about type converters, see <format type="text/html">
           <a href="90373A3F-D8C8-492D-841C-945D62393C56"
             >[&lt;topic://cpconImplementingTypeConverter&gt;]</a
           >
@@ -54,8 +48,7 @@
 
         
 
-         or <format
-         type="text/html">
+         or <format type="text/html">
           <a href="49253AE6-7657-4810-82AB-1176A6FEEADA"
             >[&lt;topic://cpconGeneralizedTypeConversion&gt;]</a
           >
@@ -82,13 +75,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >You should never access a type converter directly. Instead, call the appropriate converter by using a <see
-               cref="T:System.ComponentModel.TypeDescriptor" />
+              >You should never access a type converter directly. Instead, call the appropriate converter by using a <see cref="T:System.ComponentModel.TypeDescriptor" />
 
               
 
-               object. For more information, see the examples in <see
-               cref="T:System.ComponentModel.TypeConverter" />
+               object. For more information, see the examples in <see cref="T:System.ComponentModel.TypeConverter" />
 
               
 
@@ -99,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.ControlIDConverter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.ControlIDConverter" />
 
             
 
@@ -130,13 +120,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether the control ID of the specified control is added to the <see
-             cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+            >Returns a value indicating whether the control ID of the specified control is added to the <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
 
             
 
-             that is returned by the <see
-             cref="M:System.Web.UI.WebControls.ControlIDConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+             that is returned by the <see cref="M:System.Web.UI.WebControls.ControlIDConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
 
             
 
@@ -148,12 +136,15 @@
           <para>true in all cases.</para>
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The control instance to test for inclusion in the <see
-           cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+          The control instance to test for inclusion in the <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
 
           
 
@@ -181,13 +172,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ControlIDConverter.FilterControl(System.Web.UI.Control)" />
+            >The <see cref="M:System.Web.UI.WebControls.ControlIDConverter.FilterControl(System.Web.UI.Control)" />
 
             
 
-             method is called on each control found in the container. The control ID is only added to the <see
-             cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+             method is called on each control found in the container. The control ID is only added to the <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
 
             
 
@@ -197,8 +186,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a collection of control IDs from the container within the <see
-             cref="T:System.ComponentModel.Design.IDesignerHost" />
+            >Returns a collection of control IDs from the container within the <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
             
 
@@ -208,8 +196,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+            >A <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
 
             
 
@@ -217,12 +204,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
@@ -254,8 +244,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether the collection of standard values returned by the <see
-             cref="M:System.Web.UI.WebControls.ControlIDConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+            >Returns a value indicating whether the collection of standard values returned by the <see cref="M:System.Web.UI.WebControls.ControlIDConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
 
             
 
@@ -267,12 +256,15 @@
           <para>false in all cases.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
@@ -305,8 +297,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <see
-             cref="M:System.Web.UI.WebControls.ControlIDConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+            >true if <see cref="M:System.Web.UI.WebControls.ControlIDConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
 
             
 
@@ -314,12 +305,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 

@@ -47,13 +47,11 @@
         <param name="height">height of the surface, in pixels</param>
         <summary>Creates an image surface of the specified format and dimensions.</summary>
         <remarks
-          >The initial contents of the surface is undefined; you must explicitely clear the buffer, using, for example, <see
-           cref="M:Cairo.Graphics.Rectangle()" />
+          >The initial contents of the surface is undefined; you must explicitely clear the buffer, using, for example, <see cref="M:Cairo.Graphics.Rectangle()" />
 
           
 
-           and <see
-           cref="M:Cairo.Graphics.Fill()" />
+           and <see cref="M:Cairo.Graphics.Fill()" />
 
           
 
@@ -87,27 +85,22 @@
           >the number of bytes between the start of rows in the buffer. Having this be specified separate from width  allows for padding at the end of rows, or for writing to a subportion of a larger image</param
         >
         <summary>Creates an image surface for the provided pixel data.</summary>
-        <remarks
-          >
-	  The output buffer must be kept around until the <see
-           cref="T:Cairo.Surface" />
+        <remarks>
+	  The output buffer must be kept around until the <see cref="T:Cairo.Surface" />
 
           
 
-           is destroyed or <see
-           cref="M:Cairo.Surface.Finish()" />
+           is destroyed or <see cref="M:Cairo.Surface.Finish()" />
 
           
 
            is called on the surface. The
 	  initial contents of buffer will be used as the inital image contents;
-	  you must explicitly clear the buffer using, for example, <see
-           cref="M:Cairo.Graphics.Rectangle()" />
+	  you must explicitly clear the buffer using, for example, <see cref="M:Cairo.Graphics.Rectangle()" />
 
           
 
-           and <see
-           cref="M:Cairo.Graphics.Fill()" />
+           and <see cref="M:Cairo.Graphics.Fill()" />
 
           
 
@@ -144,27 +137,22 @@
           >Stride, the number of bytes in a row.   This is typically a number bigger or equal than the width, and it is used to permit individual lines to be aligned.</param
         >
         <summary>Creates an image surface for the provided pixel data.</summary>
-        <remarks
-          >
-	  The output buffer must be kept around until the <see
-           cref="T:Cairo.Surface" />
+        <remarks>
+	  The output buffer must be kept around until the <see cref="T:Cairo.Surface" />
 
           
 
-           is destroyed or <see
-           cref="M:Cairo.Surface.Finish()" />
+           is destroyed or <see cref="M:Cairo.Surface.Finish()" />
 
           
 
            is called on the surface. The
 	  initial contents of buffer will be used as the inital image contents;
-	  you must explicitly clear the buffer using, for example, <see
-           cref="M:Cairo.Graphics.Rectangle()" />
+	  you must explicitly clear the buffer using, for example, <see cref="M:Cairo.Graphics.Rectangle()" />
 
           
 
-           and <see
-           cref="M:Cairo.Graphics.Fill()" />
+           and <see cref="M:Cairo.Graphics.Fill()" />
 
           
 
@@ -186,14 +174,11 @@
       </ReturnValue>
       <Docs>
         <summary>The data of the ImageSurface</summary>
-        <value
-          >the data as a <see
-           cref="t:System.Byte" />
+        <value>the data as a <see cref="t:System.Byte" />
 
           
 
-           Array</value
-        >
+           Array</value>
         <remarks />
         <since version="cairo 1.2" />
       </Docs>
@@ -211,8 +196,7 @@
       <Docs>
         <summary>An IntPtr pointing to the image data in memory.</summary>
         <value
-          >The <see
-           cref="t:System.IntPtr" />
+          >The <see cref="t:System.IntPtr" />
 
           
 
@@ -235,8 +219,7 @@
       <Docs>
         <summary>The format of the ImageSurface</summary>
         <value
-          >The <see
-           cref="t:Cairo.Format" />
+          >The <see cref="t:Cairo.Format" />
 
           
 
@@ -258,10 +241,7 @@
       </ReturnValue>
       <Docs>
         <summary>The height of the ImageSurface in pixels</summary>
-        <value
-          >the height as <see
-           cref="t:System.Int32" />
-        </value>
+        <value>the height as <see cref="t:System.Int32" /></value>
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -277,10 +257,7 @@
       </ReturnValue>
       <Docs>
         <summary>The number of bytes per row in the image.</summary>
-        <value
-          >The number of Bytes as <see
-           cref="t:System.Int32" />
-        </value>
+        <value>The number of Bytes as <see cref="t:System.Int32" /></value>
         <remarks>the number of bytes between the start of rows in the buffer. Having this be specified separate from width  allows for padding at the end of rows, or for writing to a subportion of a larger image.</remarks>
         <since version="cairo 1.2" />
       </Docs>
@@ -297,10 +274,7 @@
       </ReturnValue>
       <Docs>
         <summary>The width of the ImageSurface in pixels</summary>
-        <value
-          >the width as <see
-           cref="t:System.Int32" />
-        </value>
+        <value>the width as <see cref="t:System.Int32" /></value>
         <remarks />
       </Docs>
       <AssemblyInfo>

@@ -37,36 +37,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Changing the properties of an <see
-         cref="T:System.AppDomainSetup" />
+        >Changing the properties of an <see cref="T:System.AppDomainSetup" />
 
         
 
-         instance does not affect any existing <see
-         cref="T:System.AppDomain" />
+         instance does not affect any existing <see cref="T:System.AppDomain" />
 
         
 
-        . It can affect only the creation of a new <see
-         cref="T:System.AppDomain" />
+        . It can affect only the creation of a new <see cref="T:System.AppDomain" />
 
         
 
-        , when the <see
-         cref="M:System.AppDomain.CreateDomain(System.String,System.Security.Policy.Evidence)" />
+        , when the <see cref="M:System.AppDomain.CreateDomain(System.String,System.Security.Policy.Evidence)" />
 
         
 
-         method is called with the <see
-         cref="T:System.AppDomainSetup" />
+         method is called with the <see cref="T:System.AppDomainSetup" />
 
         
 
          instance as a parameter.</para
       >
       <para
-        >This class implements the <see
-         cref="T:System.IAppDomainSetup" />
+        >This class implements the <see cref="T:System.IAppDomainSetup" />
 
         
 
@@ -74,8 +68,7 @@
       >
       <block subset="none" type="note">
         <para
-          >The default value for the <see
-           cref="P:System.AppDomainSetup.DisallowCodeDownload" />
+          >The default value for the <see cref="P:System.AppDomainSetup.DisallowCodeDownload" />
 
           
 
@@ -86,8 +79,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents assembly binding information that can be added to an instance of <see
-         cref="T:System.AppDomain" />
+        >Represents assembly binding information that can be added to an instance of <see cref="T:System.AppDomain" />
 
         
 
@@ -115,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.AppDomainSetup" />
+            >Initializes a new instance of the <see cref="T:System.AppDomainSetup" />
 
             
 
@@ -147,28 +138,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ActivationContext" />
+            >The <see cref="T:System.ActivationContext" />
 
             
 
-             object specified for <paramref
-             name="activationContext" />
+             object specified for <paramref name="activationContext" />
 
             
 
-             is used to generate an <see
-             cref="T:System.Runtime.Hosting.ActivationArguments" />
+             is used to generate an <see cref="T:System.Runtime.Hosting.ActivationArguments" />
 
             
 
-             object containing information required to activate a new application domain. This <see
-             cref="T:System.Runtime.Hosting.ActivationArguments" />
+             object containing information required to activate a new application domain. This <see cref="T:System.Runtime.Hosting.ActivationArguments" />
 
             
 
-             object can be accessed by using the <see
-             cref="P:System.AppDomainSetup.ActivationArguments" />
+             object can be accessed by using the <see cref="P:System.AppDomainSetup.ActivationArguments" />
 
             
 
@@ -178,8 +164,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.AppDomainSetup" />
+            >Initializes a new instance of the <see cref="T:System.AppDomainSetup" />
 
             
 
@@ -187,7 +172,11 @@
           >
         </summary>
         <param name="activationContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -217,13 +206,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object specified for <paramref
-             name="activationArguments" />
+            >The object specified for <paramref name="activationArguments" />
 
             
 
-             can be accessed by using the <see
-             cref="P:System.AppDomainSetup.ActivationArguments" />
+             can be accessed by using the <see cref="P:System.AppDomainSetup.ActivationArguments" />
 
             
 
@@ -233,8 +220,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.AppDomainSetup" />
+            >Initializes a new instance of the <see cref="T:System.AppDomainSetup" />
 
             
 
@@ -242,7 +228,11 @@
           >
         </summary>
         <param name="activationArguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -274,8 +264,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No exception is thrown if this property is set to null.</para>
           <para
-            >The information provided by the <see
-             cref="T:System.Runtime.Hosting.ActivationArguments" />
+            >The information provided by the <see cref="T:System.Runtime.Hosting.ActivationArguments" />
 
             
 
@@ -310,13 +299,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To pass information to the callback method, assign an array of strings to the <see
-             cref="P:System.AppDomainSetup.AppDomainInitializerArguments" />
+            >To pass information to the callback method, assign an array of strings to the <see cref="P:System.AppDomainSetup.AppDomainInitializerArguments" />
 
             
 
-             property. The array is passed to the callback method each time an <see
-             cref="T:System.AppDomain" />
+             property. The array is passed to the callback method each time an <see cref="T:System.AppDomain" />
 
             
 
@@ -327,8 +314,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.AppDomainInitializer" />
+            >Gets or sets the <see cref="T:System.AppDomainInitializer" />
 
             
 
@@ -359,18 +345,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.AppDomainSetup.AppDomainInitializer" />
+            >Use the <see cref="P:System.AppDomainSetup.AppDomainInitializer" />
 
             
 
-             property to specify a callback method that is invoked during <see
-             cref="T:System.AppDomain" />
+             property to specify a callback method that is invoked during <see cref="T:System.AppDomain" />
 
             
 
-             initialization. If the <see
-             cref="P:System.AppDomainSetup.AppDomainInitializer" />
+             initialization. If the <see cref="P:System.AppDomainSetup.AppDomainInitializer" />
 
             
 
@@ -381,8 +364,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the arguments passed to the callback method represented by the <see
-             cref="T:System.AppDomainInitializer" />
+            >Gets or sets the arguments passed to the callback method represented by the <see cref="T:System.AppDomainInitializer" />
 
             
 
@@ -410,23 +392,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The application base directory is where the assembly manager begins probing for assemblies.</para>
           <para
-            >The <see
-             cref="P:System.AppDomainSetup.ApplicationBase" />
+            >The <see cref="P:System.AppDomainSetup.ApplicationBase" />
 
             
 
-             property can influence which permissions are granted to an application domain. For example, an application domain originating from the local computer normally receives full trust based on its location of origin. However, if the <see
-             cref="P:System.AppDomainSetup.ApplicationBase" />
+             property can influence which permissions are granted to an application domain. For example, an application domain originating from the local computer normally receives full trust based on its location of origin. However, if the <see cref="P:System.AppDomainSetup.ApplicationBase" />
 
             
 
-             property of that <see
-             cref="T:System.AppDomain" />
+             property of that <see cref="T:System.AppDomain" />
 
             
 
-             is set to the full name of an intranet directory, the <see
-             cref="P:System.AppDomainSetup.ApplicationBase" />
+             is set to the full name of an intranet directory, the <see cref="P:System.AppDomainSetup.ApplicationBase" />
 
             
 
@@ -483,8 +461,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is null when the <see
-             cref="T:System.AppDomainSetup" />
+            >This property is null when the <see cref="T:System.AppDomainSetup" />
 
             
 
@@ -515,26 +492,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In order for this property to have an effect, the <see
-             cref="P:System.AppDomainSetup.ApplicationName" />
+            >In order for this property to have an effect, the <see cref="P:System.AppDomainSetup.ApplicationName" />
 
             
 
-             property must also be set. If the <see
-             cref="P:System.AppDomainSetup.ApplicationName" />
+             property must also be set. If the <see cref="P:System.AppDomainSetup.ApplicationName" />
 
             
 
-             property is not set, the <see
-             cref="P:System.AppDomainSetup.CachePath" />
+             property is not set, the <see cref="P:System.AppDomainSetup.CachePath" />
 
             
 
              property is ignored and the shadow copy cache location defaults to the download cache.</para
           >
           <para
-            >For more information on shadow copying, see <format
-             type="text/html">
+            >For more information on shadow copying, see <format type="text/html">
               <a href="de8b8759-fca7-4260-896b-5a4973157672">Shadow Copying Assemblies</a>
             </format>
 
@@ -597,69 +570,57 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.AppDomainSetup.DisallowApplicationBaseProbing" />
+            >If the <see cref="P:System.AppDomainSetup.DisallowApplicationBaseProbing" />
 
             
 
-             property is true, the value of the <see
-             cref="P:System.AppDomainSetup.ApplicationBase" />
+             property is true, the value of the <see cref="P:System.AppDomainSetup.ApplicationBase" />
 
             
 
-             property is ignored. That is, no assemblies are probed for in the directories specified by the <see
-             cref="P:System.AppDomainSetup.ApplicationBase" />
+             property is ignored. That is, no assemblies are probed for in the directories specified by the <see cref="P:System.AppDomainSetup.ApplicationBase" />
 
             
 
              property.</para
           >
           <para
-            >If the <see
-             cref="P:System.AppDomainSetup.DisallowApplicationBaseProbing" />
+            >If the <see cref="P:System.AppDomainSetup.DisallowApplicationBaseProbing" />
 
             
 
-             property is true, the values of the <see
-             cref="P:System.AppDomainSetup.PrivateBinPath" />
+             property is true, the values of the <see cref="P:System.AppDomainSetup.PrivateBinPath" />
 
             
 
-             property and the <see
-             cref="P:System.AppDomainSetup.PrivateBinPathProbe" />
+             property and the <see cref="P:System.AppDomainSetup.PrivateBinPathProbe" />
 
             
 
-             property are ignored. No assemblies are probed for in the directories specified by the <see
-             cref="P:System.AppDomainSetup.PrivateBinPath" />
+             property are ignored. No assemblies are probed for in the directories specified by the <see cref="P:System.AppDomainSetup.PrivateBinPath" />
 
             
 
              property.</para
           >
           <para
-            >The <see
-             cref="P:System.AppDomainSetup.DisallowApplicationBaseProbing" />
+            >The <see cref="P:System.AppDomainSetup.DisallowApplicationBaseProbing" />
 
             
 
-             property provides an additional layer of control over the loading process. In the normal assembly loading sequence, the application base is probed before the <see
-             cref="E:System.AppDomain.AssemblyResolve" />
+             property provides an additional layer of control over the loading process. In the normal assembly loading sequence, the application base is probed before the <see cref="E:System.AppDomain.AssemblyResolve" />
 
             
 
-             event is raised. However, some applications might need to load assemblies from an OLE compound file within a document, or from a unique known location that is neither in the global assembly cache nor in the directories specified by the <see
-             cref="P:System.AppDomainSetup.ApplicationBase" />
+             event is raised. However, some applications might need to load assemblies from an OLE compound file within a document, or from a unique known location that is neither in the global assembly cache nor in the directories specified by the <see cref="P:System.AppDomainSetup.ApplicationBase" />
 
             
 
-             and <see
-             cref="P:System.AppDomainSetup.PrivateBinPath" />
+             and <see cref="P:System.AppDomainSetup.PrivateBinPath" />
 
             
 
-             properties. Such applications can use the <see
-             cref="P:System.AppDomainSetup.DisallowApplicationBaseProbing" />
+             properties. Such applications can use the <see cref="P:System.AppDomainSetup.DisallowApplicationBaseProbing" />
 
             
 
@@ -689,8 +650,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.AppDomainSetup.DisallowBindingRedirects" />
+            >The <see cref="P:System.AppDomainSetup.DisallowBindingRedirects" />
 
             
 
@@ -720,8 +680,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.AppDomainSetup.DisallowCodeDownload" />
+            >The <see cref="P:System.AppDomainSetup.DisallowCodeDownload" />
 
             
 
@@ -729,8 +688,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The default value for the <see
-               cref="P:System.AppDomainSetup.DisallowCodeDownload" />
+              >The default value for the <see cref="P:System.AppDomainSetup.DisallowCodeDownload" />
 
               
 
@@ -762,23 +720,20 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.AppDomainSetup.DisallowPublisherPolicy" />
+            >The <see cref="P:System.AppDomainSetup.DisallowPublisherPolicy" />
 
             
 
              property specifically applies to a Web application that is loaded locally. Use this property to help prevent a malicious attempt to execute an unsafe Web application in safe mode.</para
           >
           <para
-            >For more information about bypassing publisher policy, see the <format
-             type="text/html">
+            >For more information about bypassing publisher policy, see the <format type="text/html">
               <a href="88fb1a17-6ac9-4b57-8028-193aec1f727c">Redirecting Assembly Versions</a>
             </format>
 
             
 
-             topic. For more information about safe mode, see the <format
-             type="text/html">
+             topic. For more information about safe mode, see the <format type="text/html">
               <a href="04ce6178-9199-400c-8d28-245a1a01803d"
                 >Step 1: Examining the Configuration Files</a
               >
@@ -792,8 +747,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether the <format
-             type="text/html">
+            >Gets or sets a value that indicates whether the <format type="text/html">
               <a href="4613407e-d0a8-4ef2-9f81-a6acb9fdc7d4">&lt;publisherPolicy&gt;</a>
             </format>
 
@@ -822,21 +776,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to set the base directory where the dynamic directory for the new application domain will be located. When code in the new application domain loads an assembly, assembly resolution looks first in the normal probing paths. If it does not find the assembly, it looks in the dynamic directory, which is returned by the <see
-             cref="P:System.AppDomain.DynamicDirectory" />
+            >Use this property to set the base directory where the dynamic directory for the new application domain will be located. When code in the new application domain loads an assembly, assembly resolution looks first in the normal probing paths. If it does not find the assembly, it looks in the dynamic directory, which is returned by the <see cref="P:System.AppDomain.DynamicDirectory" />
 
             
 
              property. Dynamic assemblies that will be loaded and executed by the new application domain can be placed there.</para
           >
           <para
-            >When you assign a path to the <see
-             cref="P:System.AppDomainSetup.DynamicBase" />
+            >When you assign a path to the <see cref="P:System.AppDomainSetup.DynamicBase" />
 
             
 
-             property, an additional subdirectory is added; the name of this subdirectory is the hash code of the value assigned to the <see
-             cref="P:System.AppDomainSetup.ApplicationName" />
+             property, an additional subdirectory is added; the name of this subdirectory is the hash code of the value assigned to the <see cref="P:System.AppDomainSetup.ApplicationName" />
 
             
 
@@ -846,13 +797,11 @@
             <para>Assigning a value to this property does not create any directories. The directories must be created or verified by the code that uses them. </para>
           </block>
           <para
-            >The dynamic directory is a subdirectory of <see
-             cref="P:System.AppDomainSetup.DynamicBase" />
+            >The dynamic directory is a subdirectory of <see cref="P:System.AppDomainSetup.DynamicBase" />
 
             
 
-            . Its simple name is the value returned by the <see
-             cref="P:System.AppDomainSetup.ApplicationName" />
+            . Its simple name is the value returned by the <see cref="P:System.AppDomainSetup.ApplicationName" />
 
             
 
@@ -884,13 +833,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.AppDomainSetup.SetConfigurationBytes(System.Byte[])" />
+            >The <see cref="M:System.AppDomainSetup.SetConfigurationBytes(System.Byte[])" />
 
             
 
-             method provides a way to override the configuration information of an application that creates a new application domain. The configuration file information in <paramref
-             name="value" />
+             method provides a way to override the configuration information of an application that creates a new application domain. The configuration file information in <paramref name="value" />
 
             
 
@@ -898,18 +845,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Some consumers of configuration file information do not use the information stored by the <see
-               cref="M:System.AppDomainSetup.SetConfigurationBytes(System.Byte[])" />
+              >Some consumers of configuration file information do not use the information stored by the <see cref="M:System.AppDomainSetup.SetConfigurationBytes(System.Byte[])" />
 
               
 
-               method. The runtime does not enforce this. To ensure that all configuration file information is overridden in a new application domain, use the <see
-               cref="P:System.AppDomainSetup.ConfigurationFile" />
+               method. The runtime does not enforce this. To ensure that all configuration file information is overridden in a new application domain, use the <see cref="P:System.AppDomainSetup.ConfigurationFile" />
 
               
 
-               property to specify a configuration file. The <see
-               cref="M:System.AppDomainSetup.SetConfigurationBytes(System.Byte[])" />
+               property to specify a configuration file. The <see cref="M:System.AppDomainSetup.SetConfigurationBytes(System.Byte[])" />
 
               
 
@@ -917,31 +861,26 @@
             >
           </block>
           <para
-            >The XML in <paramref
-             name="value" />
+            >The XML in <paramref name="value" />
 
             
 
-             is the same as the XML in a normal configuration file, except that it is stored as a <see
-             cref="T:System.Byte" />
+             is the same as the XML in a normal configuration file, except that it is stored as a <see cref="T:System.Byte" />
 
             
 
              array. </para
           >
           <para
-            >To access the configuration bytes for an application domain, use the <see
-             cref="P:System.AppDomain.SetupInformation" />
+            >To access the configuration bytes for an application domain, use the <see cref="P:System.AppDomain.SetupInformation" />
 
             
 
-             property to get the <see
-             cref="T:System.AppDomainSetup" />
+             property to get the <see cref="T:System.AppDomainSetup" />
 
             
 
-             object for the application domain, then use the <see
-             cref="M:System.AppDomainSetup.GetConfigurationBytes" />
+             object for the application domain, then use the <see cref="M:System.AppDomainSetup.GetConfigurationBytes" />
 
             
 
@@ -951,8 +890,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the XML configuration information set by the <see
-             cref="M:System.AppDomainSetup.SetConfigurationBytes(System.Byte[])" />
+            >Returns the XML configuration information set by the <see cref="M:System.AppDomainSetup.SetConfigurationBytes(System.Byte[])" />
 
             
 
@@ -962,13 +900,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array that contains the XML configuration information that was set by the <see
-             cref="M:System.AppDomainSetup.SetConfigurationBytes(System.Byte[])" />
+            >An array that contains the XML configuration information that was set by the <see cref="M:System.AppDomainSetup.SetConfigurationBytes(System.Byte[])" />
 
             
 
-             method, or null if the <see
-             cref="M:System.AppDomainSetup.SetConfigurationBytes(System.Byte[])" />
+             method, or null if the <see cref="M:System.AppDomainSetup.SetConfigurationBytes(System.Byte[])" />
 
             
 
@@ -1045,13 +981,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Private assemblies are deployed in the same directory structure as the application. If the directories specified for <see
-             cref="P:System.AppDomainSetup.PrivateBinPath" />
+            >Private assemblies are deployed in the same directory structure as the application. If the directories specified for <see cref="P:System.AppDomainSetup.PrivateBinPath" />
 
             
 
-             are not under <see
-             cref="P:System.AppDomainSetup.ApplicationBase" />
+             are not under <see cref="P:System.AppDomainSetup.ApplicationBase" />
 
             
 
@@ -1082,18 +1016,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set this property to any non-null string value, including <see
-             cref="F:System.String.Empty" />
+            >Set this property to any non-null string value, including <see cref="F:System.String.Empty" />
 
             
 
-             (""), to exclude the application directory path — that is, <see
-             cref="P:System.AppDomainSetup.ApplicationBase" />
+             (""), to exclude the application directory path — that is, <see cref="P:System.AppDomainSetup.ApplicationBase" />
 
             
 
-             — from the search path for the application, and to search for assemblies only in <see
-             cref="P:System.AppDomainSetup.PrivateBinPath" />
+             — from the search path for the application, and to search for assemblies only in <see cref="P:System.AppDomainSetup.PrivateBinPath" />
 
             
 
@@ -1103,13 +1034,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a string value that includes or excludes <see
-             cref="P:System.AppDomainSetup.ApplicationBase" />
+            >Gets or sets a string value that includes or excludes <see cref="P:System.AppDomainSetup.ApplicationBase" />
 
             
 
-             from the search path for the application, and searches only <see
-             cref="P:System.AppDomainSetup.PrivateBinPath" />
+             from the search path for the application, and searches only <see cref="P:System.AppDomainSetup.PrivateBinPath" />
 
             
 
@@ -1144,29 +1073,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Major versions of the .NET Framework sometimes introduce breaking changes from the previous version. For example, the net_v40_long introduces a small number of breaking changes from the net_v35_long. Use the <see
-             cref="M:System.AppDomainSetup.SetCompatibilitySwitches(System.Collections.Generic.IEnumerable{System.String})" />
+            >Major versions of the .NET Framework sometimes introduce breaking changes from the previous version. For example, the net_v40_long introduces a small number of breaking changes from the net_v35_long. Use the <see cref="M:System.AppDomainSetup.SetCompatibilitySwitches(System.Collections.Generic.IEnumerable{System.String})" />
 
             
 
              method to specify that one or more of these breaking changes should be rolled back for the application domain, to make the behavior compatible with the previous version of the .NET Framework.</para
           >
           <para
-            >Each time you call this method, it replaces the existing switch settings. To erase the settings, specify null for the <paramref
-             name="switches" />
+            >Each time you call this method, it replaces the existing switch settings. To erase the settings, specify null for the <paramref name="switches" />
 
             
 
              parameter.</para
           >
           <para
-            >The set of string values you provide for <paramref
-             name="switches" />
+            >The set of string values you provide for <paramref name="switches" />
 
             
 
-             can be a simple string array, because arrays implement the <see
-             cref="T:System.Collections.IEnumerable" />
+             can be a simple string array, because arrays implement the <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -1190,8 +1115,7 @@
               </term>
               <description>
                 <para
-                  >Code access security (CAS) for the net_v35_short is enabled in this application domain. See <format
-                   type="text/html">
+                  >Code access security (CAS) for the net_v35_short is enabled in this application domain. See <format type="text/html">
                     <a href="07132b9c-4a72-4710-99d7-e702405e02d4"
                       >&lt;NetFx40_LegacySecurityPolicy&gt; Element</a
                     >
@@ -1240,7 +1164,11 @@
           <para>Sets the specified switches, making the application domain compatible with previous versions of the .NET Framework for the specified issues.</para>
         </summary>
         <param name="switches">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1269,13 +1197,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.AppDomainSetup.SetConfigurationBytes(System.Byte[])" />
+            >The <see cref="M:System.AppDomainSetup.SetConfigurationBytes(System.Byte[])" />
 
             
 
-             method provides a way to replace the configuration information of an application that creates a new application domain. The configuration file information in <paramref
-             name="value" />
+             method provides a way to replace the configuration information of an application that creates a new application domain. The configuration file information in <paramref name="value" />
 
             
 
@@ -1283,18 +1209,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Some consumers of configuration file information do not use the information stored by the <see
-               cref="M:System.AppDomainSetup.SetConfigurationBytes(System.Byte[])" />
+              >Some consumers of configuration file information do not use the information stored by the <see cref="M:System.AppDomainSetup.SetConfigurationBytes(System.Byte[])" />
 
               
 
-               method. The runtime does not enforce this. To ensure that all configuration file information is replaced in a new application domain, use the <see
-               cref="P:System.AppDomainSetup.ConfigurationFile" />
+               method. The runtime does not enforce this. To ensure that all configuration file information is replaced in a new application domain, use the <see cref="P:System.AppDomainSetup.ConfigurationFile" />
 
               
 
-               property to specify a configuration file. The <see
-               cref="M:System.AppDomainSetup.SetConfigurationBytes(System.Byte[])" />
+               property to specify a configuration file. The <see cref="M:System.AppDomainSetup.SetConfigurationBytes(System.Byte[])" />
 
               
 
@@ -1302,13 +1225,11 @@
             >
           </block>
           <para
-            >The XML in <paramref
-             name="value" />
+            >The XML in <paramref name="value" />
 
             
 
-             is the same as the XML in a normal configuration file, except that it is stored as a <see
-             cref="T:System.Byte" />
+             is the same as the XML in a normal configuration file, except that it is stored as a <see cref="T:System.Byte" />
 
             
 
@@ -1320,7 +1241,11 @@
           <para>Provides XML configuration information for the application domain, replacing the application's XML configuration information.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1346,23 +1271,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When shadow copying is enabled, the default is to shadow copy all assemblies found through probing; that is, in the directories specified by the <see
-             cref="P:System.AppDomainSetup.PrivateBinPath" />
+            >When shadow copying is enabled, the default is to shadow copy all assemblies found through probing; that is, in the directories specified by the <see cref="P:System.AppDomainSetup.PrivateBinPath" />
 
             
 
-             and <see
-             cref="P:System.AppDomainSetup.ApplicationBase" />
+             and <see cref="P:System.AppDomainSetup.ApplicationBase" />
 
             
 
-             properties. The <see
-             cref="P:System.AppDomainSetup.ShadowCopyDirectories" />
+             properties. The <see cref="P:System.AppDomainSetup.ShadowCopyDirectories" />
 
             
 
-             property restricts the shadow copy to the assemblies in the directories specified by <see
-             cref="P:System.AppDomainSetup.ShadowCopyDirectories" />
+             property restricts the shadow copy to the assemblies in the directories specified by <see cref="P:System.AppDomainSetup.ShadowCopyDirectories" />
 
             
 
@@ -1372,8 +1293,7 @@
             <para>Directory paths must not contain semicolons, because the semicolon is the delimiter character. There is no escape character for semicolons.</para>
           </block>
           <para
-            >When shadow copying is in effect, assembly files are copied to another location before the assemblies are loaded. The original assembly file is not locked, so it can be updated. For more information on shadow copying, see <format
-             type="text/html">
+            >When shadow copying is in effect, assembly files are copied to another location before the assemblies are loaded. The original assembly file is not locked, so it can be updated. For more information on shadow copying, see <format type="text/html">
               <a href="de8b8759-fca7-4260-896b-5a4973157672">Shadow Copying Assemblies</a>
             </format>
 
@@ -1406,8 +1326,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on shadow copying, see <format
-             type="text/html">
+            >For more information on shadow copying, see <format type="text/html">
               <a href="de8b8759-fca7-4260-896b-5a4973157672">Shadow Copying Assemblies</a>
             </format>
 

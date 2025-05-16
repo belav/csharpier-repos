@@ -30,18 +30,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.Sockets.SocketOptionName" />
+        >The <see cref="T:System.Net.Sockets.SocketOptionName" />
 
         
 
-         enumeration defines the name of each <see
-         cref="T:System.Net.Sockets.Socket" />
+         enumeration defines the name of each <see cref="T:System.Net.Sockets.Socket" />
 
         
 
-         configuration option. Sockets can be configured with the <see
-         cref="M:System.Net.Sockets.Socket.SetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32)" />
+         configuration option. Sockets can be configured with the <see cref="M:System.Net.Sockets.Socket.SetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32)" />
 
         
 
@@ -709,8 +706,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Not supported; will throw a <see
-             cref="T:System.Net.Sockets.SocketException" />
+            >Not supported; will throw a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
@@ -977,8 +973,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the low water mark for <see
-             cref="Overload:System.Net.Sockets.Socket.Receive" />
+            >Specifies the low water mark for <see cref="Overload:System.Net.Sockets.Socket.Receive" />
 
             
 
@@ -1013,8 +1008,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Receive a time-out. This option applies only to synchronous methods; it has no effect on asynchronous methods such as the <see
-             cref="M:System.Net.Sockets.Socket.BeginSend(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)" />
+            >Receive a time-out. This option applies only to synchronous methods; it has no effect on asynchronous methods such as the <see cref="M:System.Net.Sockets.Socket.BeginSend(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)" />
 
             
 
@@ -1107,8 +1101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the low water mark for <see
-             cref="Overload:System.Net.Sockets.Socket.Send" />
+            >Specifies the low water mark for <see cref="Overload:System.Net.Sockets.Socket.Send" />
 
             
 
@@ -1143,8 +1136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Send a time-out. This option applies only to synchronous methods; it has no effect on asynchronous methods such as the <see
-             cref="M:System.Net.Sockets.Socket.BeginSend(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)" />
+            >Send a time-out. This option applies only to synchronous methods; it has no effect on asynchronous methods such as the <see cref="M:System.Net.Sockets.Socket.BeginSend(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)" />
 
             
 

@@ -14,13 +14,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Compilation.BuildDependencySet" />
+        >The <see cref="T:System.Web.Compilation.BuildDependencySet" />
 
         
 
-         object for an application can be retrieved through the <see
-         cref="M:System.Web.Compilation.BuildManager.GetCachedBuildDependencySet(System.Web.HttpContext,System.String)" />
+         object for an application can be retrieved through the <see cref="M:System.Web.Compilation.BuildManager.GetCachedBuildDependencySet(System.Web.HttpContext,System.String)" />
 
         
 

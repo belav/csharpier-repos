@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A signing time attribute is also available in CAPICOM.  See <format
-         type="text/html">
+        >A signing time attribute is also available in CAPICOM.  See <format type="text/html">
           <a href="security.capicom_attribute">CAPICOM_ATTRIBUTE</a>
         </format>
 
@@ -35,18 +34,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
+        >The <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
 
         
 
-         class defines the signing date and time of a signature. A <see
-         cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
+         class defines the signing date and time of a signature. A <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
 
         
 
-         object can  be used as an authenticated attribute of a <see
-         cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+         object can  be used as an authenticated attribute of a <see cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
 
         
 
@@ -72,8 +68,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
+            >The <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
 
             
 
@@ -102,13 +97,11 @@
             </item>
           </list>
           <para
-            >If you want to specify a specific date and time for the <see
-             cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
+            >If you want to specify a specific date and time for the <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
 
             
 
-              object, use the <see
-             cref="M:System.Security.Cryptography.Pkcs.Pkcs9SigningTime.#ctor(System.DateTime)" />
+              object, use the <see cref="M:System.Security.Cryptography.Pkcs.Pkcs9SigningTime.#ctor(System.DateTime)" />
 
             
 
@@ -118,13 +111,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.Pkcs9SigningTime.#ctor" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.Pkcs9SigningTime.#ctor" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
 
             
 
@@ -153,13 +144,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.Pkcs9SigningTime.#ctor(System.Byte[])" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.Pkcs9SigningTime.#ctor(System.Byte[])" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
 
             
 
@@ -167,7 +156,11 @@
           >
         </summary>
         <param name="encodedSigningTime">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -195,13 +188,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.Pkcs9SigningTime.#ctor(System.DateTime)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.Pkcs9SigningTime.#ctor(System.DateTime)" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
 
             
 
@@ -209,12 +200,15 @@
           >
         </summary>
         <param name="signingTime">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.DateTime" />
+          A <see cref="T:System.DateTime" />
 
           
 
@@ -247,13 +241,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method replaces the current <see
-             cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
+            >This method replaces the current <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
 
             
 
-             object with the specified <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+             object with the specified <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -263,8 +255,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies information from a <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >Copies information from a <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -272,12 +263,15 @@
           >
         </summary>
         <param name="asnEncodedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.AsnEncodedData" />
+          The <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
           
 
@@ -306,13 +300,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.Pkcs9SigningTime.SigningTime" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.Pkcs9SigningTime.SigningTime" />
 
             
 
-             property retrieves a <see
-             cref="T:System.DateTime" />
+             property retrieves a <see cref="T:System.DateTime" />
 
             
 

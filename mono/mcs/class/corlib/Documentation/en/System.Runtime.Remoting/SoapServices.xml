@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class makes a link demand. A security exception is thrown if the immediate caller does not have infrastructure permission. See <format
-         type="text/html">
+        >This class makes a link demand. A security exception is thrown if the immediate caller does not have infrastructure permission. See <format type="text/html">
           <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">[&lt;topic://cpconLinkDemands&gt;]</a>
         </format>
 
@@ -69,8 +68,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The current method is used by the .NET Framework and the SoapSuds tool to create an XML namespace name for a common language runtime object type.</para>
           <para
-            >For more information about SoapSuds, see <format
-             type="text/html">
+            >For more information about SoapSuds, see <format type="text/html">
               <a href="40F6F8C8-B80C-4E9F-A920-31BCD0CF45C5"
                 >[&lt;topic://cpgrfsoapsudsutilitysoapsudsexe&gt;]</a
               >
@@ -90,14 +88,22 @@
           <para>The common language runtime type namespace name from the provided namespace and assembly names.</para>
         </returns>
         <param name="typeNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace that is to be coded. </param
         >
         <param name="assemblyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -233,13 +239,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current method returns values set up through <see
-             cref="M:System.Runtime.Remoting.SoapServices.RegisterInteropXmlElement(System.String,System.String,System.Type)" />
+            >The current method returns values set up through <see cref="M:System.Runtime.Remoting.SoapServices.RegisterInteropXmlElement(System.String,System.String,System.Type)" />
 
             
 
-             and <see
-             cref="M:System.Runtime.Remoting.SoapServices.PreLoad(System.Type)" />
+             and <see cref="M:System.Runtime.Remoting.SoapServices.PreLoad(System.Type)" />
 
             
 
@@ -249,8 +253,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the <see
-             cref="T:System.Type" />
+            >Retrieves the <see cref="T:System.Type" />
 
             
 
@@ -260,8 +263,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
@@ -269,14 +271,22 @@
           >
         </returns>
         <param name="xmlElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML element name of the unknown object type. </param
         >
         <param name="xmlNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -310,13 +320,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current method returns values set up through <see
-             cref="M:System.Runtime.Remoting.SoapServices.RegisterInteropXmlType(System.String,System.String,System.Type)" />
+            >The current method returns values set up through <see cref="M:System.Runtime.Remoting.SoapServices.RegisterInteropXmlType(System.String,System.String,System.Type)" />
 
             
 
-             and <see
-             cref="M:System.Runtime.Remoting.SoapServices.PreLoad(System.Type)" />
+             and <see cref="M:System.Runtime.Remoting.SoapServices.PreLoad(System.Type)" />
 
             
 
@@ -326,8 +334,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the object <see
-             cref="T:System.Type" />
+            >Retrieves the object <see cref="T:System.Type" />
 
             
 
@@ -337,8 +344,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
@@ -346,14 +352,22 @@
           >
         </returns>
         <param name="xmlType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML type of the unknown object type. </param
         >
         <param name="xmlTypeNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -386,18 +400,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the given <see
-             cref="T:System.Reflection.MethodBase" />
+            >If the given <see cref="T:System.Reflection.MethodBase" />
 
             
 
-             has not been registered with any SOAPAction value, the <see
-             cref="M:System.Runtime.Remoting.SoapServices.GetSoapActionFromMethodBase(System.Reflection.MethodBase)" />
+             has not been registered with any SOAPAction value, the <see cref="M:System.Runtime.Remoting.SoapServices.GetSoapActionFromMethodBase(System.Reflection.MethodBase)" />
 
             
 
-             method returns the SOAPAction automatically cached with the <see
-             cref="T:System.Reflection.MethodBase" />
+             method returns the SOAPAction automatically cached with the <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -407,8 +418,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the SOAPAction value associated with the method specified in the given <see
-             cref="T:System.Reflection.MethodBase" />
+            >Returns the SOAPAction value associated with the method specified in the given <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -418,8 +428,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The SOAPAction value associated with the method specified in the given <see
-             cref="T:System.Reflection.MethodBase" />
+            >The SOAPAction value associated with the method specified in the given <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -427,12 +436,15 @@
           >
         </returns>
         <param name="mb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Reflection.MethodBase" />
+          The <see cref="T:System.Reflection.MethodBase" />
 
           
 
@@ -530,8 +542,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the XML namespace used during remote calls of the method specified in the given <see
-             cref="T:System.Reflection.MethodBase" />
+            >Retrieves the XML namespace used during remote calls of the method specified in the given <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -543,12 +554,15 @@
           <para>The XML namespace used during remote calls of the specified method.</para>
         </returns>
         <param name="mb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Reflection.MethodBase" />
+          The <see cref="T:System.Reflection.MethodBase" />
 
           
 
@@ -582,8 +596,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the XML namespace used during the generation of responses to the remote call to the method specified in the given <see
-             cref="T:System.Reflection.MethodBase" />
+            >Retrieves the XML namespace used during the generation of responses to the remote call to the method specified in the given <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -595,12 +608,15 @@
           <para>The XML namespace used during the generation of responses to a remote method call.</para>
         </returns>
         <param name="mb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Reflection.MethodBase" />
+          The <see cref="T:System.Reflection.MethodBase" />
 
           
 
@@ -666,8 +682,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The current method is used by the SoapSuds tool to determine whether an XML namespace represents a common language runtime type or a type from a non-common language runtime system.</para>
           <para
-            >For more information about SoapSuds, see <format
-             type="text/html">
+            >For more information about SoapSuds, see <format type="text/html">
               <a href="40F6F8C8-B80C-4E9F-A920-31BCD0CF45C5"
                 >[&lt;topic://cpgrfsoapsudsutilitysoapsudsexe&gt;]</a
               >
@@ -687,7 +702,11 @@
           <para>true if the given namespace is native to the common language runtime; otherwise, false.</para>
         </returns>
         <param name="namespaceString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -722,8 +741,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines if the specified SOAPAction is acceptable for a given <see
-             cref="T:System.Reflection.MethodBase" />
+            >Determines if the specified SOAPAction is acceptable for a given <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -733,8 +751,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified SOAPAction is acceptable for a given <see
-             cref="T:System.Reflection.MethodBase" />
+            >true if the specified SOAPAction is acceptable for a given <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -742,24 +759,30 @@
           >
         </returns>
         <param name="soapAction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The SOAPAction to check against the given <see
-           cref="T:System.Reflection.MethodBase" />
+          The SOAPAction to check against the given <see cref="T:System.Reflection.MethodBase" />
 
           
 
           . </param
         >
         <param name="mb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Reflection.MethodBase" />
+          The <see cref="T:System.Reflection.MethodBase" />
 
           
 
@@ -792,8 +815,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the .NET Framework is parsing an XML stream, it needs to know how to convert the XML read from the stream into common language runtime types. The information that specifies how the .NET Framework should generate and parse an XML stream is stored in custom attributes that are located in the <see
-             cref="N:System.Runtime.Remoting.Metadata" />
+            >When the .NET Framework is parsing an XML stream, it needs to know how to convert the XML read from the stream into common language runtime types. The information that specifies how the .NET Framework should generate and parse an XML stream is stored in custom attributes that are located in the <see cref="N:System.Runtime.Remoting.Metadata" />
 
             
 
@@ -803,18 +825,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Preloads every <see
-             cref="T:System.Type" />
+            >Preloads every <see cref="T:System.Type" />
 
             
 
-             found in the specified <see
-             cref="T:System.Reflection.Assembly" />
+             found in the specified <see cref="T:System.Reflection.Assembly" />
 
             
 
-             from the information found in the <see
-             cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
+             from the information found in the <see cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
 
             
 
@@ -822,17 +841,19 @@
           >
         </summary>
         <param name="assembly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Reflection.Assembly" />
+          The <see cref="T:System.Reflection.Assembly" />
 
           
 
-           for each type of which to call <see
-           cref="M:System.Runtime.Remoting.SoapServices.PreLoad(System.Type)" />
+           for each type of which to call <see cref="M:System.Runtime.Remoting.SoapServices.PreLoad(System.Type)" />
 
           
 
@@ -862,8 +883,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the .NET Framework is parsing an XML stream, it needs to know how to convert the XML read from the stream into common language runtime types. The information that specifies how the .NET Framework should generate and parse an XML stream is stored in custom attributes that are located in the <see
-             cref="N:System.Runtime.Remoting.Metadata" />
+            >When the .NET Framework is parsing an XML stream, it needs to know how to convert the XML read from the stream into common language runtime types. The information that specifies how the .NET Framework should generate and parse an XML stream is stored in custom attributes that are located in the <see cref="N:System.Runtime.Remoting.Metadata" />
 
             
 
@@ -873,13 +893,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Preloads the given <see
-             cref="T:System.Type" />
+            >Preloads the given <see cref="T:System.Type" />
 
             
 
-             based on values set in a <see
-             cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
+             based on values set in a <see cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
 
             
 
@@ -887,12 +905,15 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -930,26 +951,37 @@
           <para>Associates the given XML element name and namespace with a run-time type that should be used for deserialization.</para>
         </summary>
         <param name="xmlElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML element name to use in deserialization. </param
         >
         <param name="xmlNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML namespace to use in deserialization. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The run-time <see
-           cref="T:System.Type" />
+          The run-time <see cref="T:System.Type" />
 
           
 
@@ -987,26 +1019,37 @@
           <para>Associates the given XML type name and namespace with the run-time type that should be used for deserialization.</para>
         </summary>
         <param name="xmlType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML type to use in deserialization. </param
         >
         <param name="xmlTypeNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML namespace to use in deserialization. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The run-time <see
-           cref="T:System.Type" />
+          The run-time <see cref="T:System.Type" />
 
           
 
@@ -1039,13 +1082,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The SOAPAction of the specified method is contained in the <see
-             cref="P:System.Runtime.Remoting.Metadata.SoapMethodAttribute.SoapAction" />
+            >The SOAPAction of the specified method is contained in the <see cref="P:System.Runtime.Remoting.Metadata.SoapMethodAttribute.SoapAction" />
 
             
 
-             property, or is read off the wire. The current method associates the SOAPAction with the <see
-             cref="T:System.Reflection.MethodBase" />
+             property, or is read off the wire. The current method associates the SOAPAction with the <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -1056,8 +1097,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Associates the specified <see
-             cref="T:System.Reflection.MethodBase" />
+            >Associates the specified <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -1065,12 +1105,15 @@
           >
         </summary>
         <param name="mb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Reflection.MethodBase" />
+          The <see cref="T:System.Reflection.MethodBase" />
 
           
 
@@ -1108,8 +1151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Associates the provided SOAPAction value with the given <see
-             cref="T:System.Reflection.MethodBase" />
+            >Associates the provided SOAPAction value with the given <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -1117,24 +1159,30 @@
           >
         </summary>
         <param name="mb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Reflection.MethodBase" />
+          The <see cref="T:System.Reflection.MethodBase" />
 
           
 
            to associate with the provided SOAPAction. </param
         >
         <param name="soapAction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The SOAPAction value to associate with the given <see
-           cref="T:System.Reflection.MethodBase" />
+          The SOAPAction value to associate with the given <see cref="T:System.Reflection.MethodBase" />
 
           
 
@@ -1159,8 +1207,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >WSDL and SOAP protocols encode common language runtime classes into XML namespaces. The current property specifies the format for the XML namespaces. All XML namespaces for a common language runtime class start with the <see
-             cref="T:System.String" />
+            >WSDL and SOAP protocols encode common language runtime classes into XML namespaces. The current property specifies the format for the XML namespaces. All XML namespaces for a common language runtime class start with the <see cref="T:System.String" />
 
             
 

@@ -10,13 +10,11 @@
 
         
 
-        , <see
-         cref="F:Test.true" />
+        , <see cref="F:Test.true" />
 
         
 
-        , <see
-         cref="F:Test.Whatever" />
+        , <see cref="F:Test.Whatever" />
       </summary>
     </member>
     <member name="F:Test.true">
@@ -38,6 +36,7 @@
     </member>
     <member name="M:Foo.Main">
             main.
-        </member>
+        </member
+    >
   </members>
 </doc>

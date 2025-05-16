@@ -17,43 +17,35 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You will want to use <see
-         cref="T:System.Windows.Forms.HandledMouseEventArgs" />
+        >You will want to use <see cref="T:System.Windows.Forms.HandledMouseEventArgs" />
 
         
 
-         primarily when developing a control that needs to handle mouse wheel events itself, and prevent them from being seen by the control's immediate parent container. <see
-         cref="T:System.Windows.Forms.HandledMouseEventArgs" />
+         primarily when developing a control that needs to handle mouse wheel events itself, and prevent them from being seen by the control's immediate parent container. <see cref="T:System.Windows.Forms.HandledMouseEventArgs" />
 
         
 
-         is not passed directly by <see
-         cref="T:System.Windows.Forms.MouseEventHandler" />
+         is not passed directly by <see cref="T:System.Windows.Forms.MouseEventHandler" />
 
         
 
-         when it handles the <see
-         cref="E:System.Windows.Forms.Control.MouseWheel" />
+         when it handles the <see cref="E:System.Windows.Forms.Control.MouseWheel" />
 
         
 
-         event. Rather, <see
-         cref="T:System.Windows.Forms.MouseEventHandler" />
+         event. Rather, <see cref="T:System.Windows.Forms.MouseEventHandler" />
 
         
 
-         uses a <see
-         cref="T:System.Windows.Forms.MouseEventArgs" />
+         uses a <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
         
 
-        , which you must cast to a <see
-         cref="T:System.Windows.Forms.HandledMouseEventArgs" />
+        , which you must cast to a <see cref="T:System.Windows.Forms.HandledMouseEventArgs" />
 
         
 
-         in order to cancel an occurrence of <see
-         cref="E:System.Windows.Forms.Control.MouseWheel" />
+         in order to cancel an occurrence of <see cref="E:System.Windows.Forms.Control.MouseWheel" />
 
         
 
@@ -63,8 +55,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Allows a custom control to prevent the <see
-         cref="E:System.Windows.Forms.Control.MouseWheel" />
+        >Allows a custom control to prevent the <see cref="E:System.Windows.Forms.Control.MouseWheel" />
 
         
 
@@ -92,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.HandledMouseEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.HandledMouseEventArgs" />
 
             
 
@@ -101,40 +91,59 @@
           >
         </summary>
         <param name="button">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.MouseButtons" />
+          One of the <see cref="T:System.Windows.Forms.MouseButtons" />
 
           
 
            values indicating which mouse button was pressed. </param
         >
         <param name="clicks">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of times a mouse button was pressed. </param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of a mouse click, in pixels. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of a mouse click, in pixels. </param
         >
         <param name="delta">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -165,8 +174,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.HandledMouseEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.HandledMouseEventArgs" />
 
             
 
@@ -174,47 +182,70 @@
           >
         </summary>
         <param name="button">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.MouseButtons" />
+          One of the <see cref="T:System.Windows.Forms.MouseButtons" />
 
           
 
            values indicating which mouse button was pressed. </param
         >
         <param name="clicks">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of times a mouse button was pressed. </param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of a mouse click, in pixels. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of a mouse click, in pixels. </param
         >
         <param name="delta">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A signed count of the number of detents the wheel has rotated. </param
         >
         <param name="defaultHandledValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

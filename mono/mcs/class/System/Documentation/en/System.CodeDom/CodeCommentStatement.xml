@@ -38,23 +38,19 @@
 
         
 
-         can be used to represent a single-line comment statement. <see
-         cref="T:System.CodeDom.CodeCommentStatement" />
+         can be used to represent a single-line comment statement. <see cref="T:System.CodeDom.CodeCommentStatement" />
 
         
 
-         is a statement, so it can be inserted into a statements collection and will appear on its own line. <see
-         cref="T:System.CodeDom.CodeCommentStatement" />
+         is a statement, so it can be inserted into a statements collection and will appear on its own line. <see cref="T:System.CodeDom.CodeCommentStatement" />
 
         
 
-         can also be added to the comments collection of <see
-         cref="T:System.CodeDom.CodeNamespace" />
+         can also be added to the comments collection of <see cref="T:System.CodeDom.CodeNamespace" />
 
         
 
-         or any object that derives from <see
-         cref="T:System.CodeDom.CodeTypeMember" />
+         or any object that derives from <see cref="T:System.CodeDom.CodeTypeMember" />
 
         
 
@@ -83,22 +79,22 @@
       <Parameters />
       <Docs>
         <remarks>
-          <example
-            >
+          <example>
 Creating the code for the following statement throws an Exception because the value of the CodeCommentStatement Comment property hasn't been set.
   <code
-             lang="C#">
+              lang="C#"
+            >
 ...
 demoNs.Comments.Add(new CodeCommentStatement());
 ...
-  </code>
+  </code
+            >
           </example>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeCommentStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCommentStatement" />
 
             
 
@@ -129,10 +125,8 @@ demoNs.Comments.Add(new CodeCommentStatement());
       <Docs>
         <remarks
           >To be added
-<example
-          >
-            <code lang="C#"
-              >
+<example>
+            <code lang="C#">
 ...
 		CodeComment com=new CodeComment("foo!");
 		com.DocComment=true;
@@ -145,17 +139,16 @@ demoNs.Comments.Add(new CodeCommentStatement());
 
             
 emits
-  <code
-             lang="C#">
+  <code lang="C#">
 /// foo!
-  </code>
+  </code
+            >
           </example>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeCommentStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCommentStatement" />
 
             
 
@@ -163,12 +156,15 @@ emits
           >
         </summary>
         <param name="comment">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeComment" />
+          A <see cref="T:System.CodeDom.CodeComment" />
 
           
 
@@ -195,8 +191,7 @@ emits
       <Docs>
         <remarks>
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 		demoNs.Comments.Add(new CodeCommentStatement("This is a test"));
   </code
             >
@@ -205,17 +200,16 @@ emits
 
             
 generates the code
-  <code
-             lang="C#">
+  <code lang="C#">
 // This is a test
-  </code>
+  </code
+            >
           </example>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeCommentStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCommentStatement" />
 
             
 
@@ -223,7 +217,11 @@ generates the code
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -255,13 +253,11 @@ generates the code
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="docComment" />
+            >If the <paramref name="docComment" />
 
             
 
-             parameter is true, the <see
-             cref="T:System.CodeDom.CodeCommentStatement" />
+             parameter is true, the <see cref="T:System.CodeDom.CodeCommentStatement" />
 
             
 
@@ -271,8 +267,7 @@ generates the code
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeCommentStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCommentStatement" />
 
             
 
@@ -280,14 +275,22 @@ generates the code
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The contents of the comment. </param
         >
         <param name="docComment">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

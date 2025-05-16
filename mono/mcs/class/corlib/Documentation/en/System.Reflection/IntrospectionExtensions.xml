@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains methods for converting <see
-         cref="T:System.Type" />
+        >Contains methods for converting <see cref="T:System.Type" />
 
         
 
@@ -51,8 +50,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Getting a <see
-             cref="T:System.Reflection.TypeInfo" />
+            >Getting a <see cref="T:System.Reflection.TypeInfo" />
 
             
 
@@ -62,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Reflection.TypeInfo" />
+            >Returns the <see cref="T:System.Reflection.TypeInfo" />
 
             
 
@@ -75,7 +72,11 @@
           <para>The converted object.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

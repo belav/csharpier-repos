@@ -32,42 +32,36 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To use the property grid, you create a new instance of the <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+        >To use the property grid, you create a new instance of the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
-         class on a parent control and set <see
-         cref="P:System.Windows.Forms.PropertyGrid.SelectedObject" />
+         class on a parent control and set <see cref="P:System.Windows.Forms.PropertyGrid.SelectedObject" />
 
         
 
          to the object to display the properties for.</para
       >
       <para
-        >The information displayed in the grid is a snapshot of the properties at the time the object is assigned. If a property value of the object specified by the <see
-         cref="P:System.Windows.Forms.PropertyGrid.SelectedObject" />
+        >The information displayed in the grid is a snapshot of the properties at the time the object is assigned. If a property value of the object specified by the <see cref="P:System.Windows.Forms.PropertyGrid.SelectedObject" />
 
         
 
          is changed in code at run time, the new value is not displayed until an action is taken in the grid that causes the grid to refresh.</para
       >
       <para
-        >The property tabs within the property grid appear as buttons on the toolbar at the top of the <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+        >The property tabs within the property grid appear as buttons on the toolbar at the top of the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
-        , and can vary in scope as defined in the <see
-         cref="T:System.ComponentModel.PropertyTabScope" />
+        , and can vary in scope as defined in the <see cref="T:System.ComponentModel.PropertyTabScope" />
 
         
 
         .</para
       >
       <para
-        >You can use the <see
-         cref="P:System.Windows.Forms.PropertyGrid.LargeButtons" />
+        >You can use the <see cref="P:System.Windows.Forms.PropertyGrid.LargeButtons" />
 
         
 
@@ -78,56 +72,46 @@
 &lt;/appSettings&gt;
 </code>
       <para
-        >The <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+        >The <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
-         control is not initially presented in the toolbox in the development environment. You can add a property grid to the toolbox, which enables you to drag a <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+         control is not initially presented in the toolbox in the development environment. You can add a property grid to the toolbox, which enables you to drag a <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
-         onto your form. You can also define an instance of <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+         onto your form. You can also define an instance of <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
          by adding the appropriate code in your source code.</para
       >
       <para
-        >All public properties of the <see
-         cref="P:System.Windows.Forms.PropertyGrid.SelectedObject" />
+        >All public properties of the <see cref="P:System.Windows.Forms.PropertyGrid.SelectedObject" />
 
         
 
-         will be displayed in the <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+         will be displayed in the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
-         by default. You can hide a property so that it is not displayed in the <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+         by default. You can hide a property so that it is not displayed in the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
-         control by decorating it with the <see
-         cref="T:System.ComponentModel.BrowsableAttribute" />
+         control by decorating it with the <see cref="T:System.ComponentModel.BrowsableAttribute" />
 
         
 
-         and setting the value to false. You can specify the category that a property appears in by providing a category with the <see
-         cref="T:System.ComponentModel.CategoryAttribute" />
+         and setting the value to false. You can specify the category that a property appears in by providing a category with the <see cref="T:System.ComponentModel.CategoryAttribute" />
 
         
 
-        . You can provide descriptive text for your property that appears at the bottom of the <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+        . You can provide descriptive text for your property that appears at the bottom of the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
-         control by using the <see
-         cref="T:System.ComponentModel.DescriptionAttribute" />
+         control by using the <see cref="T:System.ComponentModel.DescriptionAttribute" />
 
         
 
@@ -148,8 +132,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To populate the grid, you must set the <see
-             cref="P:System.Windows.Forms.PropertyGrid.SelectedObject" />
+            >To populate the grid, you must set the <see cref="P:System.Windows.Forms.PropertyGrid.SelectedObject" />
 
             
 
@@ -159,8 +142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
@@ -277,8 +259,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PropertyGrid.BackgroundImage" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PropertyGrid.BackgroundImage" />
 
             
 
@@ -351,8 +332,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PropertyGrid.BackgroundImageLayout" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PropertyGrid.BackgroundImageLayout" />
 
             
 
@@ -386,31 +366,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Only properties with attributes matching the values specified are displayed in the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >Only properties with attributes matching the values specified are displayed in the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
-            . The default is an <see
-             cref="T:System.ComponentModel.AttributeCollection" />
+            . The default is an <see cref="T:System.ComponentModel.AttributeCollection" />
 
             
 
-             containing only <see
-             cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
+             containing only <see cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
 
             
 
             .</para
           >
           <para
-            >Assigning an attribute collection that is empty or is null causes a new <see
-             cref="T:System.ComponentModel.AttributeCollection" />
+            >Assigning an attribute collection that is empty or is null causes a new <see cref="T:System.ComponentModel.AttributeCollection" />
 
             
 
-             to be created with <see
-             cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
+             to be created with <see cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
 
             
 
@@ -446,8 +421,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is true if <see
-             cref="P:System.Windows.Forms.PropertyGrid.CommandsVisibleIfAvailable" />
+            >This property is true if <see cref="P:System.Windows.Forms.PropertyGrid.CommandsVisibleIfAvailable" />
 
             
 
@@ -486,8 +460,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The background color of category headings is determined by the <see
-             cref="P:System.Windows.Forms.PropertyGrid.LineColor" />
+            >The background color of category headings is determined by the <see cref="P:System.Windows.Forms.PropertyGrid.LineColor" />
 
             
 
@@ -515,8 +488,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Collapses all the categories in the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >Collapses all the categories in the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
@@ -655,8 +627,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is true if the selected object has commands available and the <see
-             cref="P:System.Windows.Forms.PropertyGrid.CommandsVisibleIfAvailable" />
+            >This property is true if the selected object has commands available and the <see cref="P:System.Windows.Forms.PropertyGrid.CommandsVisibleIfAvailable" />
 
             
 
@@ -788,8 +759,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="T:System.Windows.Forms.Design.PropertyTab" />
+            >See <see cref="T:System.Windows.Forms.Design.PropertyTab" />
 
             
 
@@ -799,8 +769,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, enables the creation of a <see
-             cref="T:System.Windows.Forms.Design.PropertyTab" />
+            >When overridden in a derived class, enables the creation of a <see cref="T:System.Windows.Forms.Design.PropertyTab" />
 
             
 
@@ -812,7 +781,11 @@
           <para>The newly created property tab. Returns null in its default implementation.</para>
         </returns>
         <param name="tabType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -865,13 +838,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation of this property returns <see
-             cref="T:System.Windows.Forms.Design.PropertyTab" />
+            >The default implementation of this property returns <see cref="T:System.Windows.Forms.Design.PropertyTab" />
 
             
 
-            . Override this property to specify a modified version of the <see
-             cref="T:System.Windows.Forms.Design.PropertyTab" />
+            . Override this property to specify a modified version of the <see cref="T:System.Windows.Forms.Design.PropertyTab" />
 
             
 
@@ -901,33 +872,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.Windows.Forms.PropertyGrid.Dispose(System.Boolean)" />
+            >Call <see cref="M:System.Windows.Forms.PropertyGrid.Dispose(System.Boolean)" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+             when you are finished using the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
-            . The <see
-             cref="M:System.Windows.Forms.PropertyGrid.Dispose(System.Boolean)" />
+            . The <see cref="M:System.Windows.Forms.PropertyGrid.Dispose(System.Boolean)" />
 
             
 
-             method leaves the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+             method leaves the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Windows.Forms.PropertyGrid.Dispose(System.Boolean)" />
+             in an unusable state. After calling <see cref="M:System.Windows.Forms.PropertyGrid.Dispose(System.Boolean)" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            , you must release all references to the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
@@ -935,23 +900,19 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.Windows.Forms.PropertyGrid.Dispose(System.Boolean)" />
+              >Always call <see cref="M:System.Windows.Forms.PropertyGrid.Dispose(System.Boolean)" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.Windows.Forms.PropertyGrid" />
+               before you release your last reference to the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
               
 
-              . Otherwise, the resources the <see
-               cref="T:System.Windows.Forms.PropertyGrid" />
+              . Otherwise, the resources the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
               
 
-               is using will not be freed until garbage collection calls the destructor of <see
-               cref="T:System.Windows.Forms.PropertyGrid" />
+               is using will not be freed until garbage collection calls the destructor of <see cref="T:System.Windows.Forms.PropertyGrid" />
 
               
 
@@ -962,8 +923,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Disposes of the resources (other than memory) used by the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >Disposes of the resources (other than memory) used by the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
@@ -971,7 +931,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -995,8 +959,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
@@ -1021,8 +984,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Expands all the categories in the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >Expands all the categories in the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
@@ -1090,8 +1052,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PropertyGrid.ForeColor" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PropertyGrid.ForeColor" />
 
             
 
@@ -1212,8 +1173,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1252,8 +1212,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1292,8 +1251,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1387,8 +1345,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1400,8 +1357,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user clicks the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >Occurs when the user clicks the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
@@ -1431,8 +1387,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1468,8 +1423,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1508,8 +1462,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1548,8 +1501,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1580,8 +1532,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1590,8 +1541,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PropertyGrid.OnComComponentNameChanged(System.ComponentModel.Design.ComponentRenameEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PropertyGrid.OnComComponentNameChanged(System.ComponentModel.Design.ComponentRenameEventArgs)" />
 
             
 
@@ -1601,8 +1551,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser.ComComponentNameChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser.ComComponentNameChanged" />
 
             
 
@@ -1610,12 +1559,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.Design.ComponentRenameEventArgs" />
+          A <see cref="T:System.ComponentModel.Design.ComponentRenameEventArgs" />
 
           
 
@@ -1646,8 +1598,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1656,8 +1607,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PropertyGrid.OnEnabledChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PropertyGrid.OnEnabledChanged(System.EventArgs)" />
 
             
 
@@ -1667,8 +1617,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.EnabledChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.EnabledChanged" />
 
             
 
@@ -1676,12 +1625,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1721,8 +1673,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1731,8 +1682,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PropertyGrid.OnGotFocus(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PropertyGrid.OnGotFocus(System.EventArgs)" />
 
             
 
@@ -1742,8 +1692,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.GotFocus" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.GotFocus" />
 
             
 
@@ -1751,12 +1700,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1784,8 +1736,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1794,8 +1745,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PropertyGrid.OnHandleCreated(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PropertyGrid.OnHandleCreated(System.EventArgs)" />
 
             
 
@@ -1805,8 +1755,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.HandleCreated" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.HandleCreated" />
 
             
 
@@ -1814,12 +1763,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1869,8 +1821,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1879,8 +1830,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PropertyGrid.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PropertyGrid.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -1890,8 +1840,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.MouseDown" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.MouseDown" />
 
             
 
@@ -1899,12 +1848,15 @@
           >
         </summary>
         <param name="me">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -1932,8 +1884,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1942,8 +1893,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PropertyGrid.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PropertyGrid.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -1953,8 +1903,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.MouseMove" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.MouseMove" />
 
             
 
@@ -1962,12 +1911,15 @@
           >
         </summary>
         <param name="me">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -1995,8 +1947,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -2005,8 +1956,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PropertyGrid.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PropertyGrid.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -2016,8 +1966,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.MouseUp" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.MouseUp" />
 
             
 
@@ -2025,12 +1974,15 @@
           >
         </summary>
         <param name="me">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -2059,8 +2011,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -2069,8 +2020,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PropertyGrid.OnNotifyPropertyValueUIItemsChanged(System.Object,System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PropertyGrid.OnNotifyPropertyValueUIItemsChanged(System.Object,System.EventArgs)" />
 
             
 
@@ -2080,8 +2030,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="M:System.Drawing.Design.IPropertyValueUIService.NotifyPropertyValueUIItemsChanged" />
+            >Raises the <see cref="M:System.Drawing.Design.IPropertyValueUIService.NotifyPropertyValueUIItemsChanged" />
 
             
 
@@ -2089,19 +2038,26 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event. </param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.EventArgs" />
+          A <see cref="T:System.EventArgs" />
 
           
 
@@ -2129,8 +2085,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -2139,8 +2094,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PropertyGrid.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PropertyGrid.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
@@ -2150,8 +2104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Paint" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Paint" />
 
             
 
@@ -2159,12 +2112,15 @@
           >
         </summary>
         <param name="pevent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.PaintEventArgs" />
+          A <see cref="T:System.Windows.Forms.PaintEventArgs" />
 
           
 
@@ -2195,8 +2151,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2205,8 +2160,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PropertyGrid.OnPropertySortChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PropertyGrid.OnPropertySortChanged(System.EventArgs)" />
 
             
 
@@ -2216,8 +2170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.PropertyGrid.PropertySortChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.PropertyGrid.PropertySortChanged" />
 
             
 
@@ -2225,12 +2178,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.EventArgs" />
+          A <see cref="T:System.EventArgs" />
 
           
 
@@ -2254,8 +2210,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -2264,8 +2219,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PropertyGrid.OnPropertyTabChanged(System.Windows.Forms.PropertyTabChangedEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PropertyGrid.OnPropertyTabChanged(System.Windows.Forms.PropertyTabChangedEventArgs)" />
 
             
 
@@ -2275,8 +2229,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.PropertyGrid.PropertyTabChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.PropertyGrid.PropertyTabChanged" />
 
             
 
@@ -2284,12 +2237,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.PropertyTabChangedEventArgs" />
+          A <see cref="T:System.Windows.Forms.PropertyTabChangedEventArgs" />
 
           
 
@@ -2317,8 +2273,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -2327,8 +2282,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PropertyGrid.OnPropertyValueChanged(System.Windows.Forms.PropertyValueChangedEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PropertyGrid.OnPropertyValueChanged(System.Windows.Forms.PropertyValueChangedEventArgs)" />
 
             
 
@@ -2338,8 +2292,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.PropertyGrid.PropertyValueChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.PropertyGrid.PropertyValueChanged" />
 
             
 
@@ -2347,12 +2300,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.PropertyValueChangedEventArgs" />
+          A <see cref="T:System.Windows.Forms.PropertyValueChangedEventArgs" />
 
           
 
@@ -2378,8 +2334,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -2388,8 +2343,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PropertyGrid.OnResize(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PropertyGrid.OnResize(System.EventArgs)" />
 
             
 
@@ -2399,8 +2353,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Resize" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Resize" />
 
             
 
@@ -2429,8 +2382,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -2439,8 +2391,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PropertyGrid.OnSelectedGridItemChanged(System.Windows.Forms.SelectedGridItemChangedEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PropertyGrid.OnSelectedGridItemChanged(System.Windows.Forms.SelectedGridItemChangedEventArgs)" />
 
             
 
@@ -2450,8 +2401,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.PropertyGrid.SelectedGridItemChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.PropertyGrid.SelectedGridItemChanged" />
 
             
 
@@ -2459,12 +2409,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.SelectedGridItemChangedEventArgs" />
+          A <see cref="T:System.Windows.Forms.SelectedGridItemChangedEventArgs" />
 
           
 
@@ -2492,8 +2445,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -2502,8 +2454,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PropertyGrid.OnSelectedObjectsChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PropertyGrid.OnSelectedObjectsChanged(System.EventArgs)" />
 
             
 
@@ -2513,8 +2464,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.PropertyGrid.SelectedObjectsChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.PropertyGrid.SelectedObjectsChanged" />
 
             
 
@@ -2522,12 +2472,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2555,8 +2508,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2565,8 +2517,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PropertyGrid.OnSystemColorsChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PropertyGrid.OnSystemColorsChanged(System.EventArgs)" />
 
             
 
@@ -2576,8 +2527,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.SystemColorsChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.SystemColorsChanged" />
 
             
 
@@ -2585,12 +2535,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2618,8 +2571,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -2628,8 +2580,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PropertyGrid.OnVisibleChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PropertyGrid.OnVisibleChanged(System.EventArgs)" />
 
             
 
@@ -2639,8 +2590,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.VisibleChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.VisibleChanged" />
 
             
 
@@ -2648,12 +2598,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2721,8 +2674,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -2734,8 +2686,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PropertyGrid.Padding" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PropertyGrid.Padding" />
 
             
 
@@ -2767,7 +2718,11 @@
           <para>true if the key was processed by the control; otherwise, false.</para>
         </returns>
         <param name="keyData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2798,46 +2753,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you set the <see
-             cref="P:System.Windows.Forms.PropertyGrid.PropertySort" />
+            >When you set the <see cref="P:System.Windows.Forms.PropertyGrid.PropertySort" />
 
             
 
-             property, the appearance of the property sort buttons on the grid changes to reflect the current state of the property. Setting <see
-             cref="P:System.Windows.Forms.PropertyGrid.PropertySort" />
+             property, the appearance of the property sort buttons on the grid changes to reflect the current state of the property. Setting <see cref="P:System.Windows.Forms.PropertyGrid.PropertySort" />
 
             
 
-             to <see
-             cref="F:System.Windows.Forms.PropertySort.NoSort" />
+             to <see cref="F:System.Windows.Forms.PropertySort.NoSort" />
 
             
 
              causes the properties to be displayed in the order they were retrieved.</para
           >
           <para
-            >Setting <see
-             cref="P:System.Windows.Forms.PropertyGrid.PropertySort" />
+            >Setting <see cref="P:System.Windows.Forms.PropertyGrid.PropertySort" />
 
             
 
-             to both <see
-             cref="F:System.Windows.Forms.PropertySort.Alphabetical" />
+             to both <see cref="F:System.Windows.Forms.PropertySort.Alphabetical" />
 
             
 
-             and <see
-             cref="F:System.Windows.Forms.PropertySort.Categorized" />
+             and <see cref="F:System.Windows.Forms.PropertySort.Categorized" />
 
             
 
-             is the same as setting <see
-             cref="P:System.Windows.Forms.PropertyGrid.PropertySort" />
+             is the same as setting <see cref="P:System.Windows.Forms.PropertyGrid.PropertySort" />
 
             
 
-             to <see
-             cref="F:System.Windows.Forms.PropertySort.Categorized" />
+             to <see cref="F:System.Windows.Forms.PropertySort.Categorized" />
 
             
 
@@ -2845,8 +2792,7 @@
           >
           <block subset="none" type="note">
             <para
-              >To do custom sorting, implement <see
-               cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+              >To do custom sorting, implement <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
               
 
@@ -2857,8 +2803,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the type of sorting the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >Gets or sets the type of sorting the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
@@ -2881,8 +2826,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -2914,8 +2858,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -2959,8 +2902,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >All property tabs derive from the <see
-             cref="T:System.Windows.Forms.Design.PropertyTab" />
+            >All property tabs derive from the <see cref="T:System.Windows.Forms.Design.PropertyTab" />
 
             
 
@@ -2990,8 +2932,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -3042,8 +2983,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PropertyGrid.RefreshTabs(System.ComponentModel.PropertyTabScope)" />
+            >The <see cref="M:System.Windows.Forms.PropertyGrid.RefreshTabs(System.ComponentModel.PropertyTabScope)" />
 
             
 
@@ -3055,12 +2995,15 @@
           <para>Refreshes the property tabs of the specified scope.</para>
         </summary>
         <param name="tabScope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Either the Component or Document value of <see
-           cref="T:System.ComponentModel.PropertyTabScope" />
+          Either the Component or Document value of <see cref="T:System.ComponentModel.PropertyTabScope" />
 
           
 
@@ -3083,8 +3026,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, the <see
-             cref="M:System.Windows.Forms.PropertyGrid.ResetSelectedProperty" />
+            >Typically, the <see cref="M:System.Windows.Forms.PropertyGrid.ResetSelectedProperty" />
 
             
 
@@ -3124,14 +3066,22 @@
           <para>This method is not relevant for this class.</para>
         </summary>
         <param name="dx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The horizontal scaling factor.</param
         >
         <param name="dy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3173,26 +3123,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each <see
-             cref="T:System.Windows.Forms.GridItem" />
+            >Each <see cref="T:System.Windows.Forms.GridItem" />
 
             
 
-             corresponds to a property of the <see
-             cref="P:System.Windows.Forms.PropertyGrid.SelectedObject" />
+             corresponds to a property of the <see cref="P:System.Windows.Forms.PropertyGrid.SelectedObject" />
 
             
 
             .</para
           >
           <para
-            >You can use the returned <see
-             cref="T:System.Windows.Forms.GridItem" />
+            >You can use the returned <see cref="T:System.Windows.Forms.GridItem" />
 
             
 
-             to view type information, the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+             to view type information, the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -3222,8 +3168,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -3235,8 +3180,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the selected <see
-             cref="T:System.Windows.Forms.GridItem" />
+            >Occurs when the selected <see cref="T:System.Windows.Forms.GridItem" />
 
             
 
@@ -3268,8 +3212,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.PropertyGrid.SelectedObject" />
+            >The <see cref="P:System.Windows.Forms.PropertyGrid.SelectedObject" />
 
             
 
@@ -3305,18 +3248,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >The <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
-             only displays the properties that are common to all the objects that are in the array. Assigning an array to the <see
-             cref="P:System.Windows.Forms.PropertyGrid.SelectedObjects" />
+             only displays the properties that are common to all the objects that are in the array. Assigning an array to the <see cref="P:System.Windows.Forms.PropertyGrid.SelectedObjects" />
 
             
 
-             replaces the reference to any <see
-             cref="P:System.Windows.Forms.PropertyGrid.SelectedObject" />
+             replaces the reference to any <see cref="P:System.Windows.Forms.PropertyGrid.SelectedObject" />
 
             
 
@@ -3343,8 +3283,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -3356,8 +3295,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the objects selected by the <see
-             cref="P:System.Windows.Forms.PropertyGrid.SelectedObjects" />
+            >Occurs when the objects selected by the <see cref="P:System.Windows.Forms.PropertyGrid.SelectedObjects" />
 
             
 
@@ -3395,8 +3333,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >All property tabs derive from the <see
-             cref="T:System.Windows.Forms.Design.PropertyTab" />
+            >All property tabs derive from the <see cref="T:System.Windows.Forms.Design.PropertyTab" />
 
             
 
@@ -3429,7 +3366,11 @@
           <para>Displays or hides the events button.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3491,13 +3432,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser" />
+             instance is cast to an <see cref="T:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser" />
 
             
 
@@ -3507,13 +3446,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Closes any open drop-down controls on the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >Closes any open drop-down controls on the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
-             control. For a description of this member, see <see
-             cref="M:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser.DropDownDone" />
+             control. For a description of this member, see <see cref="M:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser.DropDownDone" />
 
             
 
@@ -3540,13 +3477,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser" />
+             instance is cast to an <see cref="T:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser" />
 
             
 
@@ -3556,13 +3491,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Commits all pending changes to the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >Commits all pending changes to the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
-             control. For a description of this member, see <see
-             cref="M:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser.EnsurePendingChangesCommitted" />
+             control. For a description of this member, see <see cref="M:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser.EnsurePendingChangesCommitted" />
 
             
 
@@ -3572,8 +3505,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if all the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >true if all the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
@@ -3597,13 +3529,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser" />
+             instance is cast to an <see cref="T:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser" />
 
             
 
@@ -3613,13 +3543,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Activates the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >Activates the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
-             control when the user chooses properties for a control in Design view. For a description of this member, see <see
-             cref="M:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser.HandleF4" />
+             control when the user chooses properties for a control in Design view. For a description of this member, see <see cref="M:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser.HandleF4" />
 
             
 
@@ -3646,13 +3574,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser" />
+             instance is cast to an <see cref="T:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser" />
 
             
 
@@ -3662,8 +3588,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser.InPropertySet" />
+            >For a description of this member, see <see cref="P:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser.InPropertySet" />
 
             
 
@@ -3692,31 +3617,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser" />
+             instance is cast to an <see cref="T:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser" />
 
             
 
              interface.</para
           >
           <para
-            >vsprvslong saves some of the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >vsprvslong saves some of the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
-             control states, such as the <see
-             cref="P:System.Windows.Forms.PropertyGrid.PropertySort" />
+             control states, such as the <see cref="P:System.Windows.Forms.PropertyGrid.PropertySort" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.PropertyGrid.HelpVisible" />
+             and <see cref="P:System.Windows.Forms.PropertyGrid.HelpVisible" />
 
             
 
@@ -3726,13 +3646,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads user states from the registry into the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >Loads user states from the registry into the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
-             control. For a description of this member, see <see
-             cref="M:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser.LoadState(Microsoft.Win32.RegistryKey)" />
+             control. For a description of this member, see <see cref="M:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser.LoadState(Microsoft.Win32.RegistryKey)" />
 
             
 
@@ -3740,7 +3658,11 @@
           >
         </summary>
         <param name="optRoot">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3768,31 +3690,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser" />
+             instance is cast to an <see cref="T:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser" />
 
             
 
              interface.</para
           >
           <para
-            >vsprvslong saves some of the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >vsprvslong saves some of the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
-             control states, such as the <see
-             cref="P:System.Windows.Forms.PropertyGrid.PropertySort" />
+             control states, such as the <see cref="P:System.Windows.Forms.PropertyGrid.PropertySort" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.PropertyGrid.HelpVisible" />
+             and <see cref="P:System.Windows.Forms.PropertyGrid.HelpVisible" />
 
             
 
@@ -3802,13 +3719,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves user states from the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >Saves user states from the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
-             control to the registry. For a description of this member, see <see
-             cref="M:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser.SaveState(Microsoft.Win32.RegistryKey)" />
+             control to the registry. For a description of this member, see <see cref="M:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser.SaveState(Microsoft.Win32.RegistryKey)" />
 
             
 
@@ -3816,7 +3731,11 @@
           >
         </summary>
         <param name="optRoot">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3866,8 +3785,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3879,8 +3797,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the text of the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >Occurs when the text of the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
@@ -3931,8 +3848,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the painting functionality for <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets the painting functionality for <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -3953,41 +3869,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The UseCompatibleTextRendering property is intended to provide visual compatibility between Windows Forms controls that render text using the <see
-             cref="T:System.Windows.Forms.TextRenderer" />
+            >The UseCompatibleTextRendering property is intended to provide visual compatibility between Windows Forms controls that render text using the <see cref="T:System.Windows.Forms.TextRenderer" />
 
             
 
-             class and net_v10_short and net_v11_short applications that perform custom text rendering using the <see
-             cref="T:System.Drawing.Graphics" />
+             class and net_v10_short and net_v11_short applications that perform custom text rendering using the <see cref="T:System.Drawing.Graphics" />
 
             
 
              class. In most cases, if your application is not being upgraded from net_v10_short or net_v11_short, it is recommended that you leave UseCompatibleTextRendering set to the default value of false.</para
           >
           <para
-            >The ndptecgdi based <see
-             cref="T:System.Windows.Forms.TextRenderer" />
+            >The ndptecgdi based <see cref="T:System.Windows.Forms.TextRenderer" />
 
             
 
-             class was introduced in the dnprdnlong to improve performance, make text look better, and improve support for international fonts. In earlier versions of the dnprdnshort, the ndptecgdiplus based <see
-             cref="T:System.Drawing.Graphics" />
+             class was introduced in the dnprdnlong to improve performance, make text look better, and improve support for international fonts. In earlier versions of the dnprdnshort, the ndptecgdiplus based <see cref="T:System.Drawing.Graphics" />
 
             
 
-             class was used to perform all text rendering. ndptecgdi calculates character spacing and word wrapping differently from ndptecgdiplus. In a Windows Forms application that uses the <see
-             cref="T:System.Drawing.Graphics" />
+             class was used to perform all text rendering. ndptecgdi calculates character spacing and word wrapping differently from ndptecgdiplus. In a Windows Forms application that uses the <see cref="T:System.Drawing.Graphics" />
 
             
 
-             class to render text, this could cause the text for controls that use <see
-             cref="T:System.Windows.Forms.TextRenderer" />
+             class to render text, this could cause the text for controls that use <see cref="T:System.Windows.Forms.TextRenderer" />
 
             
 
-             to appear different from the other text in the application. To resolve this incompatibility, you can set the UseCompatibleTextRendering property to true for a specific control. To set UseCompatibleTextRendering to true for all supported controls in the application, call the <see
-             cref="M:System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(System.Boolean)" />
+             to appear different from the other text in the application. To resolve this incompatibility, you can set the UseCompatibleTextRendering property to true for a specific control. To set UseCompatibleTextRendering to true for all supported controls in the application, call the <see cref="M:System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(System.Boolean)" />
 
             
 
@@ -3997,13 +3906,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that determines whether to use the <see
-             cref="T:System.Drawing.Graphics" />
+            >Gets or sets a value that determines whether to use the <see cref="T:System.Drawing.Graphics" />
 
             
 
-             class (ndptecgdiplus) or the <see
-             cref="T:System.Windows.Forms.TextRenderer" />
+             class (ndptecgdiplus) or the <see cref="T:System.Windows.Forms.TextRenderer" />
 
             
 

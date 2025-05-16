@@ -29,8 +29,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.MsmqIntegration.MsmqMessage`1" />
+        >Use the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqMessage`1" />
 
         
 
@@ -40,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.MsmqIntegration.MsmqMessage`1" />
+        >The <see cref="T:System.ServiceModel.MsmqIntegration.MsmqMessage`1" />
 
         
 
@@ -90,8 +88,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property specifies the type of acknowledgment messages that are requested by the sending application. The application can use this property to request notification of certain events. For example, the application might want to be notified when the message reaches its destination queue, when the message is retrieved, or if the message times out before it reaches its destination queue or is retrieved. For member details, see <see
-             cref="T:System.Messaging.AcknowledgeTypes" />
+            >This property specifies the type of acknowledgment messages that are requested by the sending application. The application can use this property to request notification of certain events. For example, the application might want to be notified when the message reaches its destination queue, when the message is retrieved, or if the message times out before it reaches its destination queue or is retrieved. For member details, see <see cref="T:System.Messaging.AcknowledgeTypes" />
 
             
 
@@ -101,8 +98,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Messaging.AcknowledgeTypes" />
+            >Gets or sets the <see cref="T:System.Messaging.AcknowledgeTypes" />
 
             
 
@@ -136,8 +132,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Messaging.Acknowledgment" />
+            >Gets the <see cref="T:System.Messaging.Acknowledgment" />
 
             
 
@@ -168,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Uri" />
+            >Gets or sets the <see cref="T:System.Uri" />
 
             
 
@@ -197,8 +191,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an <see
-             cref="T:System.Int32" />
+            >Gets or sets an <see cref="T:System.Int32" />
 
             
 
@@ -226,8 +219,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.DateTime" />
+            >Gets or sets a <see cref="T:System.DateTime" />
 
             
 
@@ -303,8 +295,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an <see
-             cref="T:System.Int32" />
+            >Gets or sets an <see cref="T:System.Int32" />
 
             
 
@@ -333,8 +324,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.String" />
+            >Gets or sets a <see cref="T:System.String" />
 
             
 
@@ -362,8 +352,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Uri" />
+            >Gets the <see cref="T:System.Uri" />
 
             
 
@@ -391,8 +380,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an array of <see
-             cref="T:System.Byte" />
+            >Gets or sets an array of <see cref="T:System.Byte" />
 
             
 
@@ -422,8 +410,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.String" />
+            >Gets a <see cref="T:System.String" />
 
             
 
@@ -452,8 +439,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.String" />
+            >Gets or sets a <see cref="T:System.String" />
 
             
 
@@ -516,8 +502,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Messaging.MessageType" />
+            >Gets the <see cref="T:System.Messaging.MessageType" />
 
             
 
@@ -551,8 +536,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Messaging.MessagePriority" />
+            >Gets or sets the <see cref="T:System.Messaging.MessagePriority" />
 
             
 
@@ -577,8 +561,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Uri" />
+            >Gets or sets the <see cref="T:System.Uri" />
 
             
 
@@ -606,8 +589,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of <see
-             cref="T:System.Byte" />
+            >Gets an array of <see cref="T:System.Byte" />
 
             
 
@@ -639,8 +621,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.DateTime" />
+            >Gets a <see cref="T:System.DateTime" />
 
             
 
@@ -670,8 +651,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the interval specified by this property expires before the message reaches its destination queue, Message Queuing (MSMQ) discards the message in one of two ways. If the message's <see
-             cref="P:System.Messaging.Message.UseDeadLetterQueue" />
+            >If the interval specified by this property expires before the message reaches its destination queue, Message Queuing (MSMQ) discards the message in one of two ways. If the message's <see cref="P:System.Messaging.Message.UseDeadLetterQueue" />
 
             
 
@@ -682,8 +662,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.TimeSpan" />
+            >Gets or sets a <see cref="T:System.TimeSpan" />
 
             
 

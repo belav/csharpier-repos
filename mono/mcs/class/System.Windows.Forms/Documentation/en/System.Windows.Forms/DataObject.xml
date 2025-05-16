@@ -33,176 +33,145 @@
 
         
 
-         implements the <see
-         cref="T:System.Windows.Forms.IDataObject" />
+         implements the <see cref="T:System.Windows.Forms.IDataObject" />
 
         
 
          interface, whose methods provide a format-independent mechanism for data transfer.</para
       >
       <para
-        >A <see
-         cref="T:System.Windows.Forms.DataObject" />
+        >A <see cref="T:System.Windows.Forms.DataObject" />
 
         
 
-         is typically used with the <see
-         cref="T:System.Windows.Forms.Clipboard" />
+         is typically used with the <see cref="T:System.Windows.Forms.Clipboard" />
 
         
 
-         and in drag-and-drop operations. The <see
-         cref="T:System.Windows.Forms.DataObject" />
+         and in drag-and-drop operations. The <see cref="T:System.Windows.Forms.DataObject" />
 
         
 
-         class provides the recommended implementation of the <see
-         cref="T:System.Windows.Forms.IDataObject" />
+         class provides the recommended implementation of the <see cref="T:System.Windows.Forms.IDataObject" />
 
         
 
-         interface. It is suggested that you use the <see
-         cref="T:System.Windows.Forms.DataObject" />
+         interface. It is suggested that you use the <see cref="T:System.Windows.Forms.DataObject" />
 
         
 
-         class rather than implementing <see
-         cref="T:System.Windows.Forms.IDataObject" />
+         class rather than implementing <see cref="T:System.Windows.Forms.IDataObject" />
 
         
 
          yourself.</para
       >
       <para
-        >Multiple pieces of data in different formats can be stored in a <see
-         cref="T:System.Windows.Forms.DataObject" />
+        >Multiple pieces of data in different formats can be stored in a <see cref="T:System.Windows.Forms.DataObject" />
 
         
 
-        . Data is retrieved from a <see
-         cref="T:System.Windows.Forms.DataObject" />
+        . Data is retrieved from a <see cref="T:System.Windows.Forms.DataObject" />
 
         
 
-         by its associated format. Because the target application might not be known, you can increase the likelihood that the data will be in the appropriate format for an application by placing the data in a <see
-         cref="T:System.Windows.Forms.DataObject" />
+         by its associated format. Because the target application might not be known, you can increase the likelihood that the data will be in the appropriate format for an application by placing the data in a <see cref="T:System.Windows.Forms.DataObject" />
 
         
 
-         in multiple formats. See <see
-         cref="T:System.Windows.Forms.DataFormats" />
+         in multiple formats. See <see cref="T:System.Windows.Forms.DataFormats" />
 
         
 
-         for the predefined formats. You can implement your own format by creating an instance of the <see
-         cref="T:System.Windows.Forms.DataFormats.Format" />
+         for the predefined formats. You can implement your own format by creating an instance of the <see cref="T:System.Windows.Forms.DataFormats.Format" />
 
         
 
          class.</para
       >
       <para
-        >To store data in a <see
-         cref="T:System.Windows.Forms.DataObject" />
+        >To store data in a <see cref="T:System.Windows.Forms.DataObject" />
 
         
 
-        , pass the data to the constructor or call <see
-         cref="Overload:System.Windows.Forms.DataObject.SetData" />
+        , pass the data to the constructor or call <see cref="Overload:System.Windows.Forms.DataObject.SetData" />
 
         
 
-        . You can add data in multiple formats to the same <see
-         cref="T:System.Windows.Forms.DataObject" />
+        . You can add data in multiple formats to the same <see cref="T:System.Windows.Forms.DataObject" />
 
         
 
-        . If you want the data you add to be retrieved in its native format only, call <see
-         cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+        . If you want the data you add to be retrieved in its native format only, call <see cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
         
 
-         with the <paramref
-         name="autoConvert" />
+         with the <paramref name="autoConvert" />
 
         
 
          parameter set to false.</para
       >
       <para
-        >Data can be retrieved from a <see
-         cref="T:System.Windows.Forms.DataObject" />
+        >Data can be retrieved from a <see cref="T:System.Windows.Forms.DataObject" />
 
         
 
-         in any format which is compatible with <see
-         cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+         in any format which is compatible with <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
         
 
-        . For example, text can be converted to Unicode. To retrieve data in the format in which it was stored, call <see
-         cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+        . For example, text can be converted to Unicode. To retrieve data in the format in which it was stored, call <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
         
 
-         with the <paramref
-         name="autoConvert" />
+         with the <paramref name="autoConvert" />
 
         
 
          parameter set to false.</para
       >
       <para
-        >To determine what formats the data is stored in, call <see
-         cref="M:System.Windows.Forms.DataObject.GetFormats(System.Boolean)" />
+        >To determine what formats the data is stored in, call <see cref="M:System.Windows.Forms.DataObject.GetFormats(System.Boolean)" />
 
         
 
-        . To determine if a format is available, call <see
-         cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+        . To determine if a format is available, call <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
         
 
          with the desired format.</para
       >
       <para
-        >In dnprdnext, the <see
-         cref="T:System.Windows.Forms.DataObject" />
+        >In dnprdnext, the <see cref="T:System.Windows.Forms.DataObject" />
 
         
 
-         class provides additional methods that make it easier to work with data in common formats. To add data of a particular format to the <see
-         cref="T:System.Windows.Forms.DataObject" />
+         class provides additional methods that make it easier to work with data in common formats. To add data of a particular format to the <see cref="T:System.Windows.Forms.DataObject" />
 
         
 
-        , use the appropriate SetFormat method, such as <see
-         cref="Overload:System.Windows.Forms.DataObject.SetText" />
+        , use the appropriate SetFormat method, such as <see cref="Overload:System.Windows.Forms.DataObject.SetText" />
 
         
 
-        . To retrieve data of a particular format from the <see
-         cref="T:System.Windows.Forms.DataObject" />
+        . To retrieve data of a particular format from the <see cref="T:System.Windows.Forms.DataObject" />
 
         
 
-        , first call the appropriate ContainsFormat method (such as <see
-         cref="Overload:System.Windows.Forms.DataObject.ContainsText" />
+        , first call the appropriate ContainsFormat method (such as <see cref="Overload:System.Windows.Forms.DataObject.ContainsText" />
 
         
 
-        ) to determine whether the <see
-         cref="T:System.Windows.Forms.DataObject" />
+        ) to determine whether the <see cref="T:System.Windows.Forms.DataObject" />
 
         
 
-         contains data in that format, then call the appropriate GetFormat method (such as <see
-         cref="Overload:System.Windows.Forms.DataObject.GetText" />
+         contains data in that format, then call the appropriate GetFormat method (such as <see cref="Overload:System.Windows.Forms.DataObject.GetText" />
 
         
 
-        ) to retrieve the data if the <see
-         cref="T:System.Windows.Forms.DataObject" />
+        ) to retrieve the data if the <see cref="T:System.Windows.Forms.DataObject" />
 
         
 
@@ -210,36 +179,30 @@
       >
       <block subset="none" type="note">
         <para
-          >Special considerations may be necessary when using the metafile format with the Clipboard. Due to a limitation in the current implementation of the <see
-           cref="T:System.Windows.Forms.DataObject" />
+          >Special considerations may be necessary when using the metafile format with the Clipboard. Due to a limitation in the current implementation of the <see cref="T:System.Windows.Forms.DataObject" />
 
           
 
            class, the metafile format used by the .NET Framework may not be recognized by applications that use an older metafile format. In this case, you must interoperate with the Win32 Clipboard application programming interfaces (APIs). For more information, see article 323530, "Metafiles on Clipboard Are Not Visible to All Applications," in the Microsoft Knowledge Base at http://support.microsoft.com.</para
         >
         <para
-          >An object must be serializable for it to be put on the Clipboard. See <see
-           cref="N:System.Runtime.Serialization" />
+          >An object must be serializable for it to be put on the Clipboard. See <see cref="N:System.Runtime.Serialization" />
 
           
 
-           for more information on serialization. If your target application requires a very specific data format, the headers added to the data in the serialization process may prevent the application from recognizing your data. To preserve your data format, add your data as a <see
-           cref="T:System.Byte" />
+           for more information on serialization. If your target application requires a very specific data format, the headers added to the data in the serialization process may prevent the application from recognizing your data. To preserve your data format, add your data as a <see cref="T:System.Byte" />
 
           
 
-           array to a <see
-           cref="T:System.IO.MemoryStream" />
+           array to a <see cref="T:System.IO.MemoryStream" />
 
           
 
-           and pass the <see
-           cref="T:System.IO.MemoryStream" />
+           and pass the <see cref="T:System.IO.MemoryStream" />
 
           
 
-           to the <see
-           cref="M:System.Windows.Forms.DataObject.SetData(System.Object)" />
+           to the <see cref="M:System.Windows.Forms.DataObject.SetData(System.Object)" />
 
           
 
@@ -262,8 +225,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataObject" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
@@ -286,13 +248,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can add data in any format to the <see
-             cref="T:System.Windows.Forms.DataObject" />
+            >You can add data in any format to the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-             when you use this constructor, or you can add data as an <see
-             cref="T:System.Windows.Forms.IDataObject" />
+             when you use this constructor, or you can add data as an <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
@@ -302,8 +262,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataObject" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
@@ -311,7 +270,11 @@
           >
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -335,8 +298,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataObject" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
@@ -344,19 +306,26 @@
           >
         </summary>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The format of the specified data. See <see
-           cref="T:System.Windows.Forms.DataFormats" />
+          The format of the specified data. See <see cref="T:System.Windows.Forms.DataFormats" />
 
           
 
            for predefined formats.</param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -382,8 +351,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to determine whether the data object contains audio data before retrieving it with the <see
-             cref="M:System.Windows.Forms.DataObject.GetAudioStream" />
+            >Use this method to determine whether the data object contains audio data before retrieving it with the <see cref="M:System.Windows.Forms.DataObject.GetAudioStream" />
 
             
 
@@ -393,8 +361,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the data object contains data in the <see
-             cref="F:System.Windows.Forms.DataFormats.WaveAudio" />
+            >Indicates whether the data object contains data in the <see cref="F:System.Windows.Forms.DataFormats.WaveAudio" />
 
             
 
@@ -422,8 +389,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A file drop list is a collection of strings containing path information for files.</para>
           <para
-            >Use this method to determine whether the data object contains a file drop list before retrieving it with the <see
-             cref="M:System.Windows.Forms.DataObject.GetFileDropList" />
+            >Use this method to determine whether the data object contains a file drop list before retrieving it with the <see cref="M:System.Windows.Forms.DataObject.GetFileDropList" />
 
             
 
@@ -433,8 +399,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the data object contains data that is in the <see
-             cref="F:System.Windows.Forms.DataFormats.FileDrop" />
+            >Indicates whether the data object contains data that is in the <see cref="F:System.Windows.Forms.DataFormats.FileDrop" />
 
             
 
@@ -461,8 +426,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to determine whether the data object contains image data before retrieving it with the <see
-             cref="M:System.Windows.Forms.DataObject.GetImage" />
+            >Use this method to determine whether the data object contains image data before retrieving it with the <see cref="M:System.Windows.Forms.DataObject.GetImage" />
 
             
 
@@ -472,8 +436,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the data object contains data that is in the <see
-             cref="F:System.Windows.Forms.DataFormats.Bitmap" />
+            >Indicates whether the data object contains data that is in the <see cref="F:System.Windows.Forms.DataFormats.Bitmap" />
 
             
 
@@ -500,8 +463,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to determine whether the data object contains text data before retrieving it with the <see
-             cref="Overload:System.Windows.Forms.DataObject.GetText" />
+            >Use this method to determine whether the data object contains text data before retrieving it with the <see cref="Overload:System.Windows.Forms.DataObject.GetText" />
 
             
 
@@ -511,8 +473,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the data object contains data in the <see
-             cref="F:System.Windows.Forms.TextDataFormat.UnicodeText" />
+            >Indicates whether the data object contains data in the <see cref="F:System.Windows.Forms.TextDataFormat.UnicodeText" />
 
             
 
@@ -544,8 +505,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to determine whether the data object contains text data before retrieving it with the <see
-             cref="Overload:System.Windows.Forms.DataObject.GetText" />
+            >Use this method to determine whether the data object contains text data before retrieving it with the <see cref="Overload:System.Windows.Forms.DataObject.GetText" />
 
             
 
@@ -555,8 +515,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the data object contains text data in the format indicated by the specified <see
-             cref="T:System.Windows.Forms.TextDataFormat" />
+            >Indicates whether the data object contains text data in the format indicated by the specified <see cref="T:System.Windows.Forms.TextDataFormat" />
 
             
 
@@ -568,12 +527,15 @@
           <para>true if the data object contains text data in the specified format; otherwise, false.</para>
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.TextDataFormat" />
+          One of the <see cref="T:System.Windows.Forms.TextDataFormat" />
 
           
 
@@ -595,16 +557,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Windows.Forms.DataObject.ContainsAudio" />
+            >Use the <see cref="M:System.Windows.Forms.DataObject.ContainsAudio" />
 
             
 
              method to determine whether the data object contains audio data before retrieving it with this method.</para
           >
           <para
-            >Use the <see
-             cref="Overload:System.Windows.Forms.DataObject.SetAudio" />
+            >Use the <see cref="Overload:System.Windows.Forms.DataObject.SetAudio" />
 
             
 
@@ -618,13 +578,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.IO.Stream" />
+            >A <see cref="T:System.IO.Stream" />
 
             
 
-             containing audio data or null if the data object does not contain any data in the <see
-             cref="F:System.Windows.Forms.DataFormats.WaveAudio" />
+             containing audio data or null if the data object does not contain any data in the <see cref="F:System.Windows.Forms.DataFormats.WaveAudio" />
 
             
 
@@ -647,23 +605,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If this method cannot find data in the specified format, it attempts to convert the data to the format. If the data cannot be converted to the specified format, or if the data was stored with automatic conversion set to false, this method returns null.</para>
           <para
-            >To determine whether data is associated with, or can be converted to, a format, call <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+            >To determine whether data is associated with, or can be converted to, a format, call <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
-             before calling <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             before calling <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
-            . Call <see
-             cref="M:System.Windows.Forms.DataObject.GetFormats(System.Boolean)" />
+            . Call <see cref="M:System.Windows.Forms.DataObject.GetFormats(System.Boolean)" />
 
             
 
-             for a list of valid formats for the data stored in this <see
-             cref="T:System.Windows.Forms.DataObject" />
+             for a list of valid formats for the data stored in this <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
@@ -682,12 +636,15 @@
           <para>The data associated with the specified format, or null.</para>
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The format of the data to retrieve. See <see
-           cref="T:System.Windows.Forms.DataFormats" />
+          The format of the data to retrieve. See <see cref="T:System.Windows.Forms.DataFormats" />
 
           
 
@@ -713,23 +670,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If this method cannot find data in the specified format, it attempts to convert the data to the format. If the data cannot be converted to the specified format, or if the data was stored with automatic conversion set to false, this method returns null.</para>
           <para
-            >To determine whether data is associated with, or can be converted to, a format, call <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+            >To determine whether data is associated with, or can be converted to, a format, call <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
-             before calling <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             before calling <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
-            . Call <see
-             cref="M:System.Windows.Forms.DataObject.GetFormats(System.Boolean)" />
+            . Call <see cref="M:System.Windows.Forms.DataObject.GetFormats(System.Boolean)" />
 
             
 
-             for a list of valid formats for the data stored in this <see
-             cref="T:System.Windows.Forms.DataObject" />
+             for a list of valid formats for the data stored in this <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
@@ -748,12 +701,15 @@
           <para>The data associated with the specified format, or null.</para>
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -782,39 +738,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="autoConvert" />
+            >If the <paramref name="autoConvert" />
 
             
 
              parameter is true and this method cannot find data in the specified format, it attempts to convert the data to the format. If the data cannot be converted to the specified format, or if the data was stored with the automatic conversion set to false, this method returns null.</para
           >
           <para
-            >If the <paramref
-             name="autoConvert" />
+            >If the <paramref name="autoConvert" />
 
             
 
              parameter is false, this method returns data in the specified format, or null if no data in this format can be found.</para
           >
           <para
-            >To determine whether data is associated with, or can be converted to, a format, call <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+            >To determine whether data is associated with, or can be converted to, a format, call <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
-             before calling <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             before calling <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
-            . Call <see
-             cref="M:System.Windows.Forms.DataObject.GetFormats(System.Boolean)" />
+            . Call <see cref="M:System.Windows.Forms.DataObject.GetFormats(System.Boolean)" />
 
             
 
-             for a list of valid formats for the data stored in this <see
-             cref="T:System.Windows.Forms.DataObject" />
+             for a list of valid formats for the data stored in this <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
@@ -833,19 +783,26 @@
           <para>The data associated with the specified format, or null.</para>
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The format of the data to retrieve. See <see
-           cref="T:System.Windows.Forms.DataFormats" />
+          The format of the data to retrieve. See <see cref="T:System.Windows.Forms.DataFormats" />
 
           
 
            for predefined formats. </param
         >
         <param name="autoConvert">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -870,18 +827,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method to determine whether a format exists before calling <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+            >Call this method to determine whether a format exists before calling <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
-            . Call <see
-             cref="M:System.Windows.Forms.DataObject.GetFormats(System.Boolean)" />
+            . Call <see cref="M:System.Windows.Forms.DataObject.GetFormats(System.Boolean)" />
 
             
 
-             for the formats that are available in this <see
-             cref="T:System.Windows.Forms.DataObject" />
+             for the formats that are available in this <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
@@ -897,8 +851,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether data stored in this <see
-             cref="T:System.Windows.Forms.DataObject" />
+            >Determines whether data stored in this <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
@@ -908,8 +861,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if data stored in this <see
-             cref="T:System.Windows.Forms.DataObject" />
+            >true if data stored in this <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
@@ -917,12 +869,15 @@
           >
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The format to check for. See <see
-           cref="T:System.Windows.Forms.DataFormats" />
+          The format to check for. See <see cref="T:System.Windows.Forms.DataFormats" />
 
           
 
@@ -947,18 +902,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method to determine whether a format exists before calling <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+            >Call this method to determine whether a format exists before calling <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
-            . Call <see
-             cref="M:System.Windows.Forms.DataObject.GetFormats(System.Boolean)" />
+            . Call <see cref="M:System.Windows.Forms.DataObject.GetFormats(System.Boolean)" />
 
             
 
-             for the formats that are available in this <see
-             cref="T:System.Windows.Forms.DataObject" />
+             for the formats that are available in this <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
@@ -974,8 +926,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether data stored in this <see
-             cref="T:System.Windows.Forms.DataObject" />
+            >Determines whether data stored in this <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
@@ -985,8 +936,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if data stored in this <see
-             cref="T:System.Windows.Forms.DataObject" />
+            >true if data stored in this <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
@@ -994,12 +944,15 @@
           >
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -1028,18 +981,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method to determine whether a format exists before calling <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+            >Call this method to determine whether a format exists before calling <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
-            . Call <see
-             cref="M:System.Windows.Forms.DataObject.GetFormats(System.Boolean)" />
+            . Call <see cref="M:System.Windows.Forms.DataObject.GetFormats(System.Boolean)" />
 
             
 
-             for the formats that are available in this <see
-             cref="T:System.Windows.Forms.DataObject" />
+             for the formats that are available in this <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
@@ -1049,8 +999,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <paramref
-                 name="autoConvert" />
+                >The <paramref name="autoConvert" />
 
                 
 
@@ -1059,8 +1008,7 @@
             </item>
             <item>
               <para
-                >The <paramref
-                 name="autoConvert" />
+                >The <paramref name="autoConvert" />
 
                 
 
@@ -1072,8 +1020,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <paramref
-                 name="autoConvert" />
+                >The <paramref name="autoConvert" />
 
                 
 
@@ -1082,13 +1029,11 @@
             </item>
             <item>
               <para
-                >The <paramref
-                 name="autoConvert" />
+                >The <paramref name="autoConvert" />
 
                 
 
-                 parameter is false and data does not exist in this <see
-                 cref="T:System.Windows.Forms.DataObject" />
+                 parameter is false and data does not exist in this <see cref="T:System.Windows.Forms.DataObject" />
 
                 
 
@@ -1106,8 +1051,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether this <see
-             cref="T:System.Windows.Forms.DataObject" />
+            >Determines whether this <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
@@ -1119,24 +1063,30 @@
           <para>true if the data is in, or can be converted to, the specified format; otherwise, false.</para>
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The format to check for. See <see
-           cref="T:System.Windows.Forms.DataFormats" />
+          The format to check for. See <see cref="T:System.Windows.Forms.DataFormats" />
 
           
 
            for predefined formats. </param
         >
         <param name="autoConvert">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to determine whether data stored in this <see
-           cref="T:System.Windows.Forms.DataObject" />
+          true to determine whether data stored in this <see cref="T:System.Windows.Forms.DataObject" />
 
           
 
@@ -1166,29 +1116,25 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A file drop list is a collection of strings containing path information for files.</para>
           <para
-            >A file drop list is stored in a data object as a <see
-             cref="T:System.String" />
+            >A file drop list is stored in a data object as a <see cref="T:System.String" />
 
             
 
-             array. This method converts this array to a <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+             array. This method converts this array to a <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
              and returns the collection.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Windows.Forms.DataObject.ContainsFileDropList" />
+            >Use the <see cref="M:System.Windows.Forms.DataObject.ContainsFileDropList" />
 
             
 
              method to determine whether the data object contains a file drop list before retrieving it with this method.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Windows.Forms.DataObject.SetFileDropList(System.Collections.Specialized.StringCollection)" />
+            >Use the <see cref="M:System.Windows.Forms.DataObject.SetFileDropList(System.Collections.Specialized.StringCollection)" />
 
             
 
@@ -1202,13 +1148,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >A <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
-             containing file names or null if the data object does not contain any data that is in the <see
-             cref="F:System.Windows.Forms.DataFormats.FileDrop" />
+             containing file names or null if the data object does not contain any data that is in the <see cref="F:System.Windows.Forms.DataFormats.FileDrop" />
 
             
 
@@ -1228,13 +1172,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method to get the supported data formats before calling <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+            >Call this method to get the supported data formats before calling <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
-            . See <see
-             cref="T:System.Windows.Forms.DataFormats" />
+            . See <see cref="T:System.Windows.Forms.DataFormats" />
 
             
 
@@ -1247,8 +1189,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a list of all formats that data stored in this <see
-             cref="T:System.Windows.Forms.DataObject" />
+            >Returns a list of all formats that data stored in this <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
@@ -1258,8 +1199,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of type <see
-             cref="T:System.String" />
+            >An array of type <see cref="T:System.String" />
 
             
 
@@ -1288,13 +1228,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method to get the supported data formats before calling <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+            >Call this method to get the supported data formats before calling <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
-            . See <see
-             cref="T:System.Windows.Forms.DataFormats" />
+            . See <see cref="T:System.Windows.Forms.DataFormats" />
 
             
 
@@ -1307,8 +1245,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a list of all formats that data stored in this <see
-             cref="T:System.Windows.Forms.DataObject" />
+            >Returns a list of all formats that data stored in this <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
@@ -1318,8 +1255,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of type <see
-             cref="T:System.String" />
+            >An array of type <see cref="T:System.String" />
 
             
 
@@ -1327,12 +1263,15 @@
           >
         </returns>
         <param name="autoConvert">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to retrieve all formats that data stored in this <see
-           cref="T:System.Windows.Forms.DataObject" />
+          true to retrieve all formats that data stored in this <see cref="T:System.Windows.Forms.DataObject" />
 
           
 
@@ -1358,16 +1297,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Windows.Forms.DataObject.ContainsImage" />
+            >Use the <see cref="M:System.Windows.Forms.DataObject.ContainsImage" />
 
             
 
              method to determine whether the data object contains image data before retrieving it with this method.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Windows.Forms.DataObject.SetImage(System.Drawing.Image)" />
+            >Use the <see cref="M:System.Windows.Forms.DataObject.SetImage(System.Drawing.Image)" />
 
             
 
@@ -1381,13 +1318,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Image" />
+            >An <see cref="T:System.Drawing.Image" />
 
             
 
-             representing the image data in the data object or null if the data object does not contain any data that is in the <see
-             cref="F:System.Windows.Forms.DataFormats.Bitmap" />
+             representing the image data in the data object or null if the data object does not contain any data that is in the <see cref="F:System.Windows.Forms.DataFormats.Bitmap" />
 
             
 
@@ -1410,16 +1345,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="Overload:System.Windows.Forms.DataObject.ContainsText" />
+            >Use the <see cref="Overload:System.Windows.Forms.DataObject.ContainsText" />
 
             
 
              method to determine whether the data object contains text data before retrieving it with this method.</para
           >
           <para
-            >Use the <see
-             cref="Overload:System.Windows.Forms.DataObject.SetText" />
+            >Use the <see cref="Overload:System.Windows.Forms.DataObject.SetText" />
 
             
 
@@ -1429,8 +1362,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves text data from the data object in the <see
-             cref="F:System.Windows.Forms.TextDataFormat.UnicodeText" />
+            >Retrieves text data from the data object in the <see cref="F:System.Windows.Forms.TextDataFormat.UnicodeText" />
 
             
 
@@ -1440,13 +1372,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text data in the data object or <see
-             cref="F:System.String.Empty" />
+            >The text data in the data object or <see cref="F:System.String.Empty" />
 
             
 
-             if the data object does not contain data in the <see
-             cref="F:System.Windows.Forms.TextDataFormat.UnicodeText" />
+             if the data object does not contain data in the <see cref="F:System.Windows.Forms.TextDataFormat.UnicodeText" />
 
             
 
@@ -1474,16 +1404,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="Overload:System.Windows.Forms.DataObject.ContainsText" />
+            >Use the <see cref="Overload:System.Windows.Forms.DataObject.ContainsText" />
 
             
 
              method to determine whether the data object contains text data before retrieving it with this method.</para
           >
           <para
-            >Use the <see
-             cref="Overload:System.Windows.Forms.DataObject.SetText" />
+            >Use the <see cref="Overload:System.Windows.Forms.DataObject.SetText" />
 
             
 
@@ -1493,8 +1421,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves text data from the data object in the format indicated by the specified <see
-             cref="T:System.Windows.Forms.TextDataFormat" />
+            >Retrieves text data from the data object in the format indicated by the specified <see cref="T:System.Windows.Forms.TextDataFormat" />
 
             
 
@@ -1504,8 +1431,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text data in the data object or <see
-             cref="F:System.String.Empty" />
+            >The text data in the data object or <see cref="F:System.String.Empty" />
 
             
 
@@ -1513,12 +1439,15 @@
           >
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.TextDataFormat" />
+          One of the <see cref="T:System.Windows.Forms.TextDataFormat" />
 
           
 
@@ -1542,13 +1471,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To retrieve audio data from the data object, first use the <see
-             cref="M:System.Windows.Forms.DataObject.ContainsAudio" />
+            >To retrieve audio data from the data object, first use the <see cref="M:System.Windows.Forms.DataObject.ContainsAudio" />
 
             
 
-             method to determine whether the data object contains audio data before retrieving it with the <see
-             cref="M:System.Windows.Forms.DataObject.GetAudioStream" />
+             method to determine whether the data object contains audio data before retrieving it with the <see cref="M:System.Windows.Forms.DataObject.GetAudioStream" />
 
             
 
@@ -1558,18 +1485,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Byte" />
+            >Adds a <see cref="T:System.Byte" />
 
             
 
-             array to the data object in the <see
-             cref="F:System.Windows.Forms.DataFormats.WaveAudio" />
+             array to the data object in the <see cref="F:System.Windows.Forms.DataFormats.WaveAudio" />
 
             
 
-             format after converting it to a <see
-             cref="T:System.IO.Stream" />
+             format after converting it to a <see cref="T:System.IO.Stream" />
 
             
 
@@ -1577,12 +1501,15 @@
           >
         </summary>
         <param name="audioBytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Byte" />
+          A <see cref="T:System.Byte" />
 
           
 
@@ -1609,13 +1536,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To retrieve audio data from the data object, first use the <see
-             cref="M:System.Windows.Forms.DataObject.ContainsAudio" />
+            >To retrieve audio data from the data object, first use the <see cref="M:System.Windows.Forms.DataObject.ContainsAudio" />
 
             
 
-             method to determine whether the data object contains audio data before retrieving it with the <see
-             cref="M:System.Windows.Forms.DataObject.GetAudioStream" />
+             method to determine whether the data object contains audio data before retrieving it with the <see cref="M:System.Windows.Forms.DataObject.GetAudioStream" />
 
             
 
@@ -1625,13 +1550,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.IO.Stream" />
+            >Adds a <see cref="T:System.IO.Stream" />
 
             
 
-             to the data object in the <see
-             cref="F:System.Windows.Forms.DataFormats.WaveAudio" />
+             to the data object in the <see cref="F:System.Windows.Forms.DataFormats.WaveAudio" />
 
             
 
@@ -1639,12 +1562,15 @@
           >
         </summary>
         <param name="audioStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
@@ -1666,33 +1592,27 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If you do not know the format of the target application, you can store data in multiple formats using this method. Data stored using this method can be converted to a compatible format when it is retrieved.</para>
           <para
-            >The <see
-             cref="M:System.Windows.Forms.DataObject.SetData(System.Object)" />
+            >The <see cref="M:System.Windows.Forms.DataObject.SetData(System.Object)" />
 
             
 
-             overload stores the <paramref
-             name="data" />
+             overload stores the <paramref name="data" />
 
             
 
-             value in a format that it determines by calling the <see
-             cref="M:System.Object.GetType" />
+             value in a format that it determines by calling the <see cref="M:System.Object.GetType" />
 
             
 
-             method. If <paramref
-             name="data" />
+             method. If <paramref name="data" />
 
             
 
-             implements the <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+             implements the <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
-             interface, this overload also stores the value in the <see
-             cref="F:System.Windows.DataFormats.Serializable" />
+             interface, this overload also stores the value in the <see cref="F:System.Windows.DataFormats.Serializable" />
 
             
 
@@ -1702,8 +1622,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified object to the <see
-             cref="T:System.Windows.Forms.DataObject" />
+            >Adds the specified object to the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
@@ -1711,7 +1630,11 @@
           >
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1745,8 +1668,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified object to the <see
-             cref="T:System.Windows.Forms.DataObject" />
+            >Adds the specified object to the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
@@ -1754,19 +1676,26 @@
           >
         </summary>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The format associated with the data. See <see
-           cref="T:System.Windows.Forms.DataFormats" />
+          The format associated with the data. See <see cref="T:System.Windows.Forms.DataFormats" />
 
           
 
            for predefined formats. </param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1800,8 +1729,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified object to the <see
-             cref="T:System.Windows.Forms.DataObject" />
+            >Adds the specified object to the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
@@ -1809,19 +1737,26 @@
           >
         </summary>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
            representing the format associated with the data. </param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1855,8 +1790,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified object to the <see
-             cref="T:System.Windows.Forms.DataObject" />
+            >Adds the specified object to the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
@@ -1864,26 +1798,37 @@
           >
         </summary>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The format associated with the data. See <see
-           cref="T:System.Windows.Forms.DataFormats" />
+          The format associated with the data. See <see cref="T:System.Windows.Forms.DataFormats" />
 
           
 
            for predefined formats. </param
         >
         <param name="autoConvert">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to allow the data to be converted to another format; otherwise, false. </param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1915,31 +1860,26 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A file drop list is a collection of strings containing path information for files.</para>
           <para
-            >A file drop list is stored in a data object as a <see
-             cref="T:System.String" />
+            >A file drop list is stored in a data object as a <see cref="T:System.String" />
 
             
 
-             array. This method converts <paramref
-             name="filePaths" />
+             array. This method converts <paramref name="filePaths" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
              array before adding it to the data object. </para
           >
           <para
-            >To retrieve a file drop list from the data object, first use the <see
-             cref="M:System.Windows.Forms.DataObject.ContainsFileDropList" />
+            >To retrieve a file drop list from the data object, first use the <see cref="M:System.Windows.Forms.DataObject.ContainsFileDropList" />
 
             
 
-             method to determine whether the data object contains data in that format before retrieving it with the <see
-             cref="M:System.Windows.Forms.DataObject.GetFileDropList" />
+             method to determine whether the data object contains data in that format before retrieving it with the <see cref="M:System.Windows.Forms.DataObject.GetFileDropList" />
 
             
 
@@ -1949,8 +1889,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a collection of file names to the data object in the <see
-             cref="F:System.Windows.Forms.DataFormats.FileDrop" />
+            >Adds a collection of file names to the data object in the <see cref="F:System.Windows.Forms.DataFormats.FileDrop" />
 
             
 
@@ -1958,12 +1897,15 @@
           >
         </summary>
         <param name="filePaths">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.Specialized.StringCollection" />
+          A <see cref="T:System.Collections.Specialized.StringCollection" />
 
           
 
@@ -1990,13 +1932,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To retrieve image data from the data object, first use the <see
-             cref="M:System.Windows.Forms.DataObject.ContainsImage" />
+            >To retrieve image data from the data object, first use the <see cref="M:System.Windows.Forms.DataObject.ContainsImage" />
 
             
 
-             method to determine whether the data object contains image data before retrieving it with the <see
-             cref="M:System.Windows.Forms.DataObject.GetImage" />
+             method to determine whether the data object contains image data before retrieving it with the <see cref="M:System.Windows.Forms.DataObject.GetImage" />
 
             
 
@@ -2006,13 +1946,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Drawing.Image" />
+            >Adds an <see cref="T:System.Drawing.Image" />
 
             
 
-             to the data object in the <see
-             cref="F:System.Windows.Forms.DataFormats.Bitmap" />
+             to the data object in the <see cref="F:System.Windows.Forms.DataFormats.Bitmap" />
 
             
 
@@ -2020,12 +1958,15 @@
           >
         </summary>
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
@@ -2049,13 +1990,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To retrieve text data from the data object, first use the <see
-             cref="Overload:System.Windows.Forms.DataObject.ContainsText" />
+            >To retrieve text data from the data object, first use the <see cref="Overload:System.Windows.Forms.DataObject.ContainsText" />
 
             
 
-             method to determine whether the data object contains image data before retrieving it with the <see
-             cref="Overload:System.Windows.Forms.DataObject.GetText" />
+             method to determine whether the data object contains image data before retrieving it with the <see cref="Overload:System.Windows.Forms.DataObject.GetText" />
 
             
 
@@ -2065,8 +2004,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds text data to the data object in the <see
-             cref="F:System.Windows.Forms.TextDataFormat.UnicodeText" />
+            >Adds text data to the data object in the <see cref="F:System.Windows.Forms.TextDataFormat.UnicodeText" />
 
             
 
@@ -2074,7 +2012,11 @@
           >
         </summary>
         <param name="textData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2102,13 +2044,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To retrieve text data from the data object, first use the <see
-             cref="Overload:System.Windows.Forms.DataObject.ContainsText" />
+            >To retrieve text data from the data object, first use the <see cref="Overload:System.Windows.Forms.DataObject.ContainsText" />
 
             
 
-             method to determine whether the data object contains image data before retrieving it with the <see
-             cref="Overload:System.Windows.Forms.DataObject.GetText" />
+             method to determine whether the data object contains image data before retrieving it with the <see cref="Overload:System.Windows.Forms.DataObject.GetText" />
 
             
 
@@ -2118,8 +2058,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds text data to the data object in the format indicated by the specified <see
-             cref="T:System.Windows.Forms.TextDataFormat" />
+            >Adds text data to the data object in the format indicated by the specified <see cref="T:System.Windows.Forms.TextDataFormat" />
 
             
 
@@ -2127,19 +2066,26 @@
           >
         </summary>
         <param name="textData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text to add to the data object.</param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.TextDataFormat" />
+          One of the <see cref="T:System.Windows.Forms.TextDataFormat" />
 
           
 
@@ -2196,13 +2142,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.DataObject" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-             is cast to an <see
-             cref="T:System.Runtime.InteropServices.ComTypes.IDataObject" />
+             is cast to an <see cref="T:System.Runtime.InteropServices.ComTypes.IDataObject" />
 
             
 
@@ -2249,8 +2193,7 @@
               </term>
               <description>
                 <para
-                  >This <see
-                   cref="T:System.Runtime.InteropServices.ComTypes.IDataObject" />
+                  >This <see cref="T:System.Runtime.InteropServices.ComTypes.IDataObject" />
 
                   
 
@@ -2308,13 +2251,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.DataObject" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-             is cast to an <see
-             cref="T:System.Runtime.InteropServices.ComTypes.IDataObject" />
+             is cast to an <see cref="T:System.Runtime.InteropServices.ComTypes.IDataObject" />
 
             
 
@@ -2324,18 +2265,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an object for enumerating the <see
-             cref="T:System.Runtime.InteropServices.ComTypes.FORMATETC" />
+            >Creates an object for enumerating the <see cref="T:System.Runtime.InteropServices.ComTypes.FORMATETC" />
 
             
 
-             structures for a data object. These structures are used in calls to <see
-             cref="M:System.Runtime.InteropServices.ComTypes.IDataObject.GetData(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.STGMEDIUM@)" />
+             structures for a data object. These structures are used in calls to <see cref="M:System.Runtime.InteropServices.ComTypes.IDataObject.GetData(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.STGMEDIUM@)" />
 
             
 
-             or <see
-             cref="M:System.Runtime.InteropServices.ComTypes.IDataObject.SetData(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.STGMEDIUM@,System.Boolean)" />
+             or <see cref="M:System.Runtime.InteropServices.ComTypes.IDataObject.SetData(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.STGMEDIUM@,System.Boolean)" />
 
             
 
@@ -2370,8 +2308,7 @@
               </term>
               <description>
                 <para
-                  >The direction specified by the <paramref
-                   name="direction" />
+                  >The direction specified by the <paramref name="direction" />
 
                   
 

@@ -24,41 +24,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.DataKeyArray" />
+        >The <see cref="T:System.Web.UI.WebControls.DataKeyArray" />
 
         
 
-         class is used to store and manage a collection of <see
-         cref="T:System.Web.UI.WebControls.DataKey" />
+         class is used to store and manage a collection of <see cref="T:System.Web.UI.WebControls.DataKey" />
 
         
 
-         objects. A <see
-         cref="T:System.Web.UI.WebControls.DataKey" />
+         objects. A <see cref="T:System.Web.UI.WebControls.DataKey" />
 
         
 
-         object represents the primary key of a record in a data-bound control. In general, data-bound controls that display multiple records (such as the <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         object represents the primary key of a record in a data-bound control. In general, data-bound controls that display multiple records (such as the <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         control) use a <see
-         cref="T:System.Web.UI.WebControls.DataKeyArray" />
+         control) use a <see cref="T:System.Web.UI.WebControls.DataKeyArray" />
 
         
 
-         object to store the <see
-         cref="T:System.Web.UI.WebControls.DataKey" />
+         object to store the <see cref="T:System.Web.UI.WebControls.DataKey" />
 
         
 
          objects for the records displayed in the control.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.DataKeyArray" />
+        >The <see cref="T:System.Web.UI.WebControls.DataKeyArray" />
 
         
 
@@ -67,13 +60,11 @@
       <list type="bullet">
         <item>
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DataKeyArray.Item(System.Int32)" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DataKeyArray.Item(System.Int32)" />
 
             
 
-             indexer to directly retrieve a <see
-             cref="T:System.Web.UI.WebControls.DataKey" />
+             indexer to directly retrieve a <see cref="T:System.Web.UI.WebControls.DataKey" />
 
             
 
@@ -82,8 +73,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.DataKeyArray.GetEnumerator" />
+            >Use the <see cref="M:System.Web.UI.WebControls.DataKeyArray.GetEnumerator" />
 
             
 
@@ -92,8 +82,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.DataKeyArray.CopyTo(System.Web.UI.WebControls.DataKey[],System.Int32)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.DataKeyArray.CopyTo(System.Web.UI.WebControls.DataKey[],System.Int32)" />
 
             
 
@@ -102,8 +91,7 @@
         </item>
       </list>
       <para
-        >To determine the total number of items in the collection, use the <see
-         cref="P:System.Web.UI.WebControls.DataKeyArray.Count" />
+        >To determine the total number of items in the collection, use the <see cref="P:System.Web.UI.WebControls.DataKeyArray.Count" />
 
         
 
@@ -113,8 +101,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Web.UI.WebControls.DataKey" />
+        >Represents a collection of <see cref="T:System.Web.UI.WebControls.DataKey" />
 
         
 
@@ -137,23 +124,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DataKeyArray" />
+            >Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.DataKeyArray" />
 
             
 
-             class using the specified <see
-             cref="T:System.Collections.ArrayList" />
+             class using the specified <see cref="T:System.Collections.ArrayList" />
 
             
 
-             object. The <see
-             cref="T:System.Collections.ArrayList" />
+             object. The <see cref="T:System.Collections.ArrayList" />
 
             
 
-             object contains the <see
-             cref="T:System.Web.UI.WebControls.DataKey" />
+             object contains the <see cref="T:System.Web.UI.WebControls.DataKey" />
 
             
 
@@ -163,8 +146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DataKeyArray" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.DataKeyArray" />
 
             
 
@@ -172,17 +154,19 @@
           >
         </summary>
         <param name="keys">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.ArrayList" />
+          An <see cref="T:System.Collections.ArrayList" />
 
           
 
-           of <see
-           cref="T:System.Web.UI.WebControls.DataKey" />
+           of <see cref="T:System.Web.UI.WebControls.DataKey" />
 
           
 
@@ -211,8 +195,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.DataKeyArray.CopyTo(System.Web.UI.WebControls.DataKey[],System.Int32)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.DataKeyArray.CopyTo(System.Web.UI.WebControls.DataKey[],System.Int32)" />
 
             
 
@@ -220,8 +203,7 @@
           >
           <block subset="none" type="note">
             <para
-              >You must use a zero-based array for the <paramref
-               name="array" />
+              >You must use a zero-based array for the <paramref name="array" />
 
               
 
@@ -232,8 +214,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the items from this collection to the specified array of <see
-             cref="T:System.Web.UI.WebControls.DataKey" />
+            >Copies all the items from this collection to the specified array of <see cref="T:System.Web.UI.WebControls.DataKey" />
 
             
 
@@ -241,19 +222,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A zero-based array of <see
-           cref="T:System.Web.UI.WebControls.DataKey" />
+          A zero-based array of <see cref="T:System.Web.UI.WebControls.DataKey" />
 
           
 
            objects that receives the copied items from the collection.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -276,18 +264,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DataKeyArray.Count" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DataKeyArray.Count" />
 
             
 
-             property to determine the number of items in the collection. The <see
-             cref="P:System.Web.UI.WebControls.DataKeyArray.Count" />
+             property to determine the number of items in the collection. The <see cref="P:System.Web.UI.WebControls.DataKeyArray.Count" />
 
             
 
-             property is commonly used when iterating through the collection to determine its upper bound. The <see
-             cref="P:System.Web.UI.WebControls.DataKeyArray.Count" />
+             property is commonly used when iterating through the collection to determine its upper bound. The <see cref="P:System.Web.UI.WebControls.DataKeyArray.Count" />
 
             
 
@@ -318,23 +303,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.DataKeyArray.GetEnumerator" />
+            >Use the <see cref="M:System.Web.UI.WebControls.DataKeyArray.GetEnumerator" />
 
             
 
-             method to get an enumerator that can be iterated through linearly to access each item in the collection. To access the item at the current position in the enumerator, use the <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             method to get an enumerator that can be iterated through linearly to access each item in the collection. To access the item at the current position in the enumerator, use the <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             property. Use the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             property. Use the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             method to move to the next item in the collection. To move the enumerator to its initial position, use the <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             method to move to the next item in the collection. To move the enumerator to its initial position, use the <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
@@ -342,18 +323,15 @@
           >
           <block subset="none" type="note">
             <para
-              >When you initially get the enumerator or use the <see
-               cref="M:System.Collections.IEnumerator.Reset" />
+              >When you initially get the enumerator or use the <see cref="M:System.Collections.IEnumerator.Reset" />
 
               
 
-               method to move the enumerator to the first item in the collection, you must call the <see
-               cref="M:System.Collections.IEnumerator.MoveNext" />
+               method to move the enumerator to the first item in the collection, you must call the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
               
 
-               method. Otherwise, the item represented by the <see
-               cref="P:System.Collections.IEnumerator.Current" />
+               method. Otherwise, the item represented by the <see cref="P:System.Collections.IEnumerator.Current" />
 
               
 
@@ -364,8 +342,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that contains all <see
-             cref="T:System.Web.UI.WebControls.DataKey" />
+            >Returns an enumerator that contains all <see cref="T:System.Web.UI.WebControls.DataKey" />
 
             
 
@@ -375,13 +352,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-            -implemented object that contains all <see
-             cref="T:System.Web.UI.WebControls.DataKey" />
+            -implemented object that contains all <see cref="T:System.Web.UI.WebControls.DataKey" />
 
             
 
@@ -405,13 +380,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DataKeyArray.IsReadOnly" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DataKeyArray.IsReadOnly" />
 
             
 
-             property to determine whether the items in the <see
-             cref="T:System.Web.UI.WebControls.DataKeyArray" />
+             property to determine whether the items in the <see cref="T:System.Web.UI.WebControls.DataKeyArray" />
 
             
 
@@ -419,18 +392,15 @@
           >
           <block subset="none" type="note">
             <para
-              >This property has been overridden to always return false, to indicate that the <see
-               cref="T:System.Web.UI.WebControls.DataKey" />
+              >This property has been overridden to always return false, to indicate that the <see cref="T:System.Web.UI.WebControls.DataKey" />
 
               
 
-               objects in the <see
-               cref="T:System.Web.UI.WebControls.DataKeyArray" />
+               objects in the <see cref="T:System.Web.UI.WebControls.DataKeyArray" />
 
               
 
-               object can be added or removed. The <see
-               cref="T:System.Web.UI.WebControls.DataKey" />
+               object can be added or removed. The <see cref="T:System.Web.UI.WebControls.DataKey" />
 
               
 
@@ -459,13 +429,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DataKeyArray.IsSynchronized" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DataKeyArray.IsSynchronized" />
 
             
 
-             property to determine whether the <see
-             cref="T:System.Web.UI.WebControls.DataKeyArray" />
+             property to determine whether the <see cref="T:System.Web.UI.WebControls.DataKeyArray" />
 
             
 
@@ -473,8 +441,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This property has been overridden to always return false to indicate that the <see
-               cref="T:System.Web.UI.WebControls.DataKeyArray" />
+              >This property has been overridden to always return false to indicate that the <see cref="T:System.Web.UI.WebControls.DataKeyArray" />
 
               
 
@@ -482,18 +449,15 @@
             >
           </block>
           <para
-            >For more information on the <see
-             cref="P:System.Web.UI.WebControls.DataKeyArray.IsSynchronized" />
+            >For more information on the <see cref="P:System.Web.UI.WebControls.DataKeyArray.IsSynchronized" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.IsSynchronized" />
+             property, see the <see cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -503,8 +467,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Web.UI.WebControls.DataKeyArray" />
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.WebControls.DataKeyArray" />
 
             
 
@@ -551,31 +514,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DataKeyArray.SyncRoot" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DataKeyArray.SyncRoot" />
 
             
 
-             property to get an object that can be used to synchronize access to the collection. The object returned in this implementation is the <see
-             cref="T:System.Web.UI.WebControls.DataKeyArray" />
+             property to get an object that can be used to synchronize access to the collection. The object returned in this implementation is the <see cref="T:System.Web.UI.WebControls.DataKeyArray" />
 
             
 
              object itself.</para
           >
           <para
-            >For more information on the <see
-             cref="P:System.Web.UI.WebControls.DataKeyArray.SyncRoot" />
+            >For more information on the <see cref="P:System.Web.UI.WebControls.DataKeyArray.SyncRoot" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             property, see the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -608,28 +566,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This implementation of the <see
-             cref="M:System.Web.UI.WebControls.DataKeyArray.System#Collections#ICollection#CopyTo(System.Array,System.Int32)" />
+            >This implementation of the <see cref="M:System.Web.UI.WebControls.DataKeyArray.System#Collections#ICollection#CopyTo(System.Array,System.Int32)" />
 
             
 
-             method is a helper method used by the <see
-             cref="T:System.Web.UI.WebControls.DataKeyArray" />
+             method is a helper method used by the <see cref="T:System.Web.UI.WebControls.DataKeyArray" />
 
             
 
-             class to copy the items in the <see
-             cref="T:System.Web.UI.WebControls.DataKeyArray" />
+             class to copy the items in the <see cref="T:System.Web.UI.WebControls.DataKeyArray" />
 
             
 
-             collection into the specified <see
-             cref="T:System.Array" />
+             collection into the specified <see cref="T:System.Array" />
 
             
 
-            , starting at the specified index. The <see
-             cref="T:System.Array" />
+            , starting at the specified index. The <see cref="T:System.Array" />
 
             
 
@@ -637,13 +590,11 @@
           >
           <block subset="none" type="note">
             <para
-              >You must use a zero-based <see
-               cref="T:System.Array" />
+              >You must use a zero-based <see cref="T:System.Array" />
 
               
 
-               for the <paramref
-               name="array" />
+               for the <paramref name="array" />
 
               
 
@@ -654,13 +605,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the items from this collection to the specified <see
-             cref="T:System.Array" />
+            >Copies all the items from this collection to the specified <see cref="T:System.Array" />
 
             
 
-            , starting at the specified index in the <see
-             cref="T:System.Array" />
+            , starting at the specified index in the <see cref="T:System.Array" />
 
             
 
@@ -668,24 +617,30 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A zero-based <see
-           cref="T:System.Array" />
+          A zero-based <see cref="T:System.Array" />
 
           
 
            that receives the copied items from the collection.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first index in the specified <see
-           cref="T:System.Array" />
+          The first index in the specified <see cref="T:System.Array" />
 
           
 
@@ -710,13 +665,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.DataKeyArray.System#Web#UI#IStateManager#IsTrackingViewState" />
+            >The <see cref="P:System.Web.UI.WebControls.DataKeyArray.System#Web#UI#IStateManager#IsTrackingViewState" />
 
             
 
-             property is used to determine whether the <see
-             cref="T:System.Web.UI.WebControls.DataKeyArray" />
+             property is used to determine whether the <see cref="T:System.Web.UI.WebControls.DataKeyArray" />
 
             
 
@@ -729,8 +682,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Web.UI.WebControls.DataKeyArray" />
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.WebControls.DataKeyArray" />
 
             
 
@@ -759,13 +711,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.DataKeyArray.System#Web#UI#IStateManager#LoadViewState(System.Object)" />
+            >The <see cref="M:System.Web.UI.WebControls.DataKeyArray.System#Web#UI#IStateManager#LoadViewState(System.Object)" />
 
             
 
-             method is used to load the previously saved view state of the <see
-             cref="T:System.Web.UI.WebControls.DataKeyArray" />
+             method is used to load the previously saved view state of the <see cref="T:System.Web.UI.WebControls.DataKeyArray" />
 
             
 
@@ -775,8 +725,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads the previously saved view state of the <see
-             cref="T:System.Web.UI.WebControls.DataKeyArray" />
+            >Loads the previously saved view state of the <see cref="T:System.Web.UI.WebControls.DataKeyArray" />
 
             
 
@@ -799,13 +748,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.DataKeyArray.System#Web#UI#IStateManager#SaveViewState" />
+            >The <see cref="M:System.Web.UI.WebControls.DataKeyArray.System#Web#UI#IStateManager#SaveViewState" />
 
             
 
-             method is a helper method used by the <see
-             cref="T:System.Web.UI.WebControls.DataKeyArray" />
+             method is a helper method used by the <see cref="T:System.Web.UI.WebControls.DataKeyArray" />
 
             
 
@@ -815,8 +762,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the current view state of the <see
-             cref="T:System.Web.UI.WebControls.DataKeyArray" />
+            >Saves the current view state of the <see cref="T:System.Web.UI.WebControls.DataKeyArray" />
 
             
 
@@ -826,13 +772,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             that contains the saved state of the <see
-             cref="T:System.Web.UI.WebControls.DataKeyArray" />
+             that contains the saved state of the <see cref="T:System.Web.UI.WebControls.DataKeyArray" />
 
             
 
@@ -855,8 +799,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is overridden to mark the starting point at which to begin tracking and saving changes to the <see
-             cref="T:System.Web.UI.WebControls.DataKeyArray" />
+            >This method is overridden to mark the starting point at which to begin tracking and saving changes to the <see cref="T:System.Web.UI.WebControls.DataKeyArray" />
 
             
 
@@ -866,8 +809,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Marks the starting point at which to begin tracking and saving view-state changes to the <see
-             cref="T:System.Web.UI.WebControls.DataKeyArray" />
+            >Marks the starting point at which to begin tracking and saving view-state changes to the <see cref="T:System.Web.UI.WebControls.DataKeyArray" />
 
             
 

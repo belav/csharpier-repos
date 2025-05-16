@@ -8,7 +8,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -37,13 +39,11 @@
         <summary>Create a new initialization vector (IV) with the default cryptographic random number generator. </summary>
         <returns>An array of bytes containing the newly generated initialization vector.</returns>
         <remarks
-          >The initialization vectors (IV) are generated using the default cryptographic random number generator (using <see
-           cref="T:System.Security.Cryptography.RandomNumberGenerator" />
+          >The initialization vectors (IV) are generated using the default cryptographic random number generator (using <see cref="T:System.Security.Cryptography.RandomNumberGenerator" />
 
           
 
-          .<see
-           cref="M:System.Security.Cryptography.RandomNumberGenerator.Create" />
+          .<see cref="M:System.Security.Cryptography.RandomNumberGenerator.Create" />
 
           
 
@@ -69,13 +69,11 @@
         <summary>Create a new secret key with the default cryptographic random number generator.</summary>
         <returns>An array of bytes containing the newly generated secret key.</returns>
         <remarks
-          >The secret keys are generated using the default cryptographic random number generator (using <see
-           cref="T:System.Security.Cryptography.RandomNumberGenerator" />
+          >The secret keys are generated using the default cryptographic random number generator (using <see cref="T:System.Security.Cryptography.RandomNumberGenerator" />
 
           
 
-          .<see
-           cref="M:System.Security.Cryptography.RandomNumberGenerator.Create" />
+          .<see cref="M:System.Security.Cryptography.RandomNumberGenerator.Create" />
 
           
 

@@ -22,20 +22,17 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Profile.CustomProviderDataAttribute" />
+        >The <see cref="T:System.Web.Profile.CustomProviderDataAttribute" />
 
         
 
-         class is used to supply a string of data with a profile property to a custom profile provider. The custom data string can be set to any string value and is set using the customProviderData attribute of the <format
-         type="text/html">
+         class is used to supply a string of data with a profile property to a custom profile provider. The custom data string can be set to any string value and is set using the customProviderData attribute of the <format type="text/html">
           <a href="d3ea033b-751b-4bdc-8917-a5d44560808e">add</a>
         </format>
 
         
 
-         configuration element for adding profile properties. If the customProviderData attribute is set, then the value is placed in the <see
-         cref="P:System.Configuration.SettingsProperty.Attributes" />
+         configuration element for adding profile properties. If the customProviderData attribute is set, then the value is placed in the <see cref="P:System.Configuration.SettingsProperty.Attributes" />
 
         
 
@@ -62,20 +59,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Profile.CustomProviderDataAttribute" />
+            >The <see cref="T:System.Web.Profile.CustomProviderDataAttribute" />
 
             
 
-             class is used to supply a string of data with a profile property to a custom profile provider. The custom data string can be set to any string value and is set using the customProviderData attribute of the <format
-             type="text/html">
+             class is used to supply a string of data with a profile property to a custom profile provider. The custom data string can be set to any string value and is set using the customProviderData attribute of the <format type="text/html">
               <a href="d3ea033b-751b-4bdc-8917-a5d44560808e">add</a>
             </format>
 
             
 
-             configuration element for adding profile properties. If the customProviderData attribute is set, then the value is placed in the <see
-             cref="P:System.Configuration.SettingsProperty.Attributes" />
+             configuration element for adding profile properties. If the customProviderData attribute is set, then the value is placed in the <see cref="P:System.Configuration.SettingsProperty.Attributes" />
 
             
 
@@ -86,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Web.Profile.CustomProviderDataAttribute" />
+            >Creates a new instance of the <see cref="T:System.Web.Profile.CustomProviderDataAttribute" />
 
             
 
@@ -95,7 +88,11 @@
           >
         </summary>
         <param name="customProviderData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -118,25 +115,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Profile.CustomProviderDataAttribute.CustomProviderData" />
+            >The <see cref="P:System.Web.Profile.CustomProviderDataAttribute.CustomProviderData" />
 
             
 
-             property value is set using the customProviderData attribute of the <format
-             type="text/html">
+             property value is set using the customProviderData attribute of the <format type="text/html">
               <a href="d3ea033b-751b-4bdc-8917-a5d44560808e">add</a>
             </format>
 
             
 
-             configuration element for adding profile properties. The <see
-             cref="P:System.Web.Profile.CustomProviderDataAttribute.CustomProviderData" />
+             configuration element for adding profile properties. The <see cref="P:System.Web.Profile.CustomProviderDataAttribute.CustomProviderData" />
 
             
 
-             property can be set to any string value to be used by the profile provider for the property. If the customProviderData attribute is set, then the value is placed in the <see
-             cref="P:System.Configuration.SettingsProperty.Attributes" />
+             property can be set to any string value to be used by the profile provider for the property. If the customProviderData attribute is set, then the value is placed in the <see cref="P:System.Configuration.SettingsProperty.Attributes" />
 
             
 
@@ -164,8 +157,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value for the <see
-             cref="P:System.Web.Profile.CustomProviderDataAttribute.CustomProviderData" />
+            >The default value for the <see cref="P:System.Web.Profile.CustomProviderDataAttribute.CustomProviderData" />
 
             
 
@@ -175,8 +167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="P:System.Web.Profile.CustomProviderDataAttribute.CustomProviderData" />
+            >Gets a value indicating whether the <see cref="P:System.Web.Profile.CustomProviderDataAttribute.CustomProviderData" />
 
             
 
@@ -186,8 +177,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="P:System.Web.Profile.CustomProviderDataAttribute.CustomProviderData" />
+            >true if the <see cref="P:System.Web.Profile.CustomProviderDataAttribute.CustomProviderData" />
 
             
 

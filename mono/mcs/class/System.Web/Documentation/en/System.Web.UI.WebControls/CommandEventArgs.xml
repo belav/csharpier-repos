@@ -20,47 +20,40 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The Command event is raised when a <see
-         cref="T:System.Web.UI.WebControls.Button" />
+        >The Command event is raised when a <see cref="T:System.Web.UI.WebControls.Button" />
 
         
 
-         or <see
-         cref="T:System.Web.UI.WebControls.ImageButton" />
+         or <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
         
 
          control is clicked.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+        >The <see cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
         
 
-         object contains data about the Command event that can be accessed in the event handler. Using the properties available in the <see
-         cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+         object contains data about the Command event that can be accessed in the event handler. Using the properties available in the <see cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
         
 
          class, you can determine the name of the command to perform, such as Sort, in addition to an optional argument that supplements the command, such as Ascending.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
         
 
-        , see the <see
-         cref="Overload:System.Web.UI.WebControls.CommandEventArgs.#ctor" />
+        , see the <see cref="Overload:System.Web.UI.WebControls.CommandEventArgs.#ctor" />
 
         
 
          constructor.</para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">[&lt;topic://cpconEventsOverview&gt;]</a>
         </format>
 
@@ -89,21 +82,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
             
 
-             class using the specified <see
-             cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+             class using the specified <see cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
             
 
              object.</para
           >
           <para
-            >When an instance of <see
-             cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+            >When an instance of <see cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
             
 
@@ -126,8 +116,7 @@
               </term>
               <description>
                 <para
-                  >The <paramref
-                   name="e.CommandName" />
+                  >The <paramref name="e.CommandName" />
 
                   
 
@@ -141,8 +130,7 @@
               </term>
               <description>
                 <para
-                  >The <paramref
-                   name="e.CommandArgument" />
+                  >The <paramref name="e.CommandArgument" />
 
                   
 
@@ -155,13 +143,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
             
 
-             class with another <see
-             cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+             class with another <see cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
             
 
@@ -169,12 +155,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+          A <see cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
           
 
@@ -202,16 +191,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
             
 
              class using the specified command name and argument.</para
           >
           <para
-            >When an instance of <see
-             cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+            >When an instance of <see cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
             
 
@@ -234,8 +221,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="commandName" />
+                  >The value of the <paramref name="commandName" />
 
                   
 
@@ -249,8 +235,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="argument" />
+                  >The value of the <paramref name="argument" />
 
                   
 
@@ -263,8 +248,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
             
 
@@ -272,12 +256,15 @@
           >
         </summary>
         <param name="argument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Object" />
+          A <see cref="T:System.Object" />
 
           
 
@@ -300,28 +287,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" />
+            >The <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" />
 
             
 
-             can contain any string set by the programmer. The <see
-             cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" />
+             can contain any string set by the programmer. The <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" />
 
             
 
-             property complements the <see
-             cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" />
+             property complements the <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" />
 
             
 
-             property by allowing you to provide any additional information for the command. For example, you can set the <see
-             cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" />
+             property by allowing you to provide any additional information for the command. For example, you can set the <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" />
 
             
 
-             property to Sort and set the <see
-             cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" />
+             property to Sort and set the <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" />
 
             
 
@@ -349,13 +331,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" />
+            >Use the <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" />
 
             
 
-             property to determine the command to perform. The <see
-             cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" />
+             property to determine the command to perform. The <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" />
 
             
 

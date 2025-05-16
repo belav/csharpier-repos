@@ -23,8 +23,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the available cap styles with which a <see
-         cref="T:System.Drawing.Pen" />
+        >Specifies the available cap styles with which a <see cref="T:System.Drawing.Pen" />
 
         
 

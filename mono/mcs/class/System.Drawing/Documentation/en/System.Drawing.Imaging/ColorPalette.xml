@@ -17,23 +17,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You are not allowed to construct a <see
-         cref="T:System.Drawing.Imaging.ColorPalette" />
+        >You are not allowed to construct a <see cref="T:System.Drawing.Imaging.ColorPalette" />
 
         
 
-         object directly. If you created a <see
-         cref="T:System.Drawing.Imaging.ColorPalette" />
+         object directly. If you created a <see cref="T:System.Drawing.Imaging.ColorPalette" />
 
         
 
-         object, you could then manipulate the palette size for a particular image, which is not allowed. Use the <see
-         cref="P:System.Drawing.Image.Palette" />
+         object, you could then manipulate the palette size for a particular image, which is not allowed. Use the <see cref="P:System.Drawing.Image.Palette" />
 
         
 
-         property to obtain a <see
-         cref="T:System.Drawing.Imaging.ColorPalette" />
+         property to obtain a <see cref="T:System.Drawing.Imaging.ColorPalette" />
 
         
 
@@ -59,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of <see
-             cref="T:System.Drawing.Color" />
+            >Gets an array of <see cref="T:System.Drawing.Color" />
 
             
 

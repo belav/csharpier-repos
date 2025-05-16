@@ -56,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
@@ -65,12 +64,15 @@
           >
         </summary>
         <param name="contract">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.ContractDescription" />
+          The <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
           
 
@@ -104,8 +106,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
@@ -113,36 +114,45 @@
           >
         </summary>
         <param name="contract">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.ContractDescription" />
+          The <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
           
 
            for the service endpoint.</param
         >
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
            that specifies how the service endpoint communicates with the world.</param
         >
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          The <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
@@ -171,23 +181,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value of <see
-             cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
+            >The default value of <see cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
 
             
 
-             at which the service endpoint listens is provided by <see
-             cref="P:System.ServiceModel.EndpointAddress.Uri" />
+             at which the service endpoint listens is provided by <see cref="P:System.ServiceModel.EndpointAddress.Uri" />
 
             
 
-             of the <see
-             cref="T:System.ServiceModel.EndpointAddress" />
+             of the <see cref="T:System.ServiceModel.EndpointAddress" />
 
             
 
-             returned by <see
-             cref="P:System.ServiceModel.Description.ServiceEndpoint.Address" />
+             returned by <see cref="P:System.ServiceModel.Description.ServiceEndpoint.Address" />
 
             
 
@@ -221,41 +227,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type of behavior that is accessible from the description hierarchy is scoped to the specific level. From the <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >The type of behavior that is accessible from the description hierarchy is scoped to the specific level. From the <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
-             the <see
-             cref="T:System.ServiceModel.Description.IEndpointBehavior" />
+             the <see cref="T:System.ServiceModel.Description.IEndpointBehavior" />
 
             
 
              is accessible. </para
           >
           <para
-            >If you want access to the <see
-             cref="T:System.ServiceModel.Description.IContractBehavior" />
+            >If you want access to the <see cref="T:System.ServiceModel.Description.IContractBehavior" />
 
             
 
-             associated with an endpoint, you can obtain the contact for the endpoint using the <see
-             cref="P:System.ServiceModel.Description.ServiceEndpoint.Contract" />
+             associated with an endpoint, you can obtain the contact for the endpoint using the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.Contract" />
 
             
 
-             property. Then call the <see
-             cref="P:System.ServiceModel.Description.ContractDescription.Behaviors" />
+             property. Then call the <see cref="P:System.ServiceModel.Description.ContractDescription.Behaviors" />
 
             
 
-             property to obtain the <see
-             cref="T:System.Collections.Generic.KeyedByTypeCollection`1" />
+             property to obtain the <see cref="T:System.Collections.Generic.KeyedByTypeCollection`1" />
 
             
 
-             of the <see
-             cref="T:System.ServiceModel.Description.IContractBehavior" />
+             of the <see cref="T:System.ServiceModel.Description.IContractBehavior" />
 
             
 
@@ -289,8 +288,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The binding for an endpoint can also be specified in the configuration file in the <format
-             type="text/html">
+            >The binding for an endpoint can also be specified in the configuration file in the <format type="text/html">
               <a href="b62cd369-5409-4030-8490-9759a462dd3a">&lt;bindings&gt;</a>
             </format>
 
@@ -326,18 +324,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each service endpoint has a unique contract. From the <see
-             cref="T:System.ServiceModel.Description.ContractDescription" />
+            >Each service endpoint has a unique contract. From the <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
             
 
-            , the <see
-             cref="T:System.ServiceModel.Description.OperationDescriptionCollection" />
+            , the <see cref="T:System.ServiceModel.Description.OperationDescriptionCollection" />
 
             
 
-             for the methods contained in the contract can be accessed using the <see
-             cref="P:System.ServiceModel.Description.ContractDescription.Operations" />
+             for the methods contained in the contract can be accessed using the <see cref="P:System.ServiceModel.Description.ContractDescription.Operations" />
 
             
 
@@ -409,8 +404,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value can also be set using the <see
-             cref="P:System.ServiceModel.Configuration.ServiceEndpointElement.ListenUri" />
+            >The value can also be set using the <see cref="P:System.ServiceModel.Configuration.ServiceEndpointElement.ListenUri" />
 
             
 
@@ -444,13 +438,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="T:System.ServiceModel.Description.ListenUriMode" />
+            >The value of the <see cref="T:System.ServiceModel.Description.ListenUriMode" />
 
             
 
-             is used to determine how the transport handles the <see
-             cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
+             is used to determine how the transport handles the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
 
             
 
@@ -478,13 +470,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Services may have multiple endpoints, so the endpoint <see
-             cref="P:System.ServiceModel.Description.ServiceEndpoint.Name" />
+            >Services may have multiple endpoints, so the endpoint <see cref="P:System.ServiceModel.Description.ServiceEndpoint.Name" />
 
             
 
-             is distinct from the name of the service. The service name is accessed using the <see
-             cref="P:System.ServiceModel.Description.ServiceDescription.Name" />
+             is distinct from the name of the service. The service name is accessed using the <see cref="P:System.ServiceModel.Description.ServiceDescription.Name" />
 
             
 

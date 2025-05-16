@@ -18,7 +18,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -32,34 +34,29 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Xml.RSAKeyValue" />
+        >The <see cref="T:System.Security.Cryptography.Xml.RSAKeyValue" />
 
         
 
-         class represents the &lt;RSAKeyValue&gt; element of an XML signature defined by the XML digital signature specification. The &lt;RSAKeyValue&gt; element is the subelement of the &lt;KeyInfo&gt; element (represented by the <see
-         cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+         class represents the &lt;RSAKeyValue&gt; element of an XML signature defined by the XML digital signature specification. The &lt;RSAKeyValue&gt; element is the subelement of the &lt;KeyInfo&gt; element (represented by the <see cref="T:System.Security.Cryptography.Xml.KeyInfo" />
 
         
 
-         class) that describes an <see
-         cref="T:System.Security.Cryptography.RSA" />
+         class) that describes an <see cref="T:System.Security.Cryptography.RSA" />
 
         
 
          public key. The &lt;RSAKeyValue&gt; element contains the public key that corresponds to the private key used to digitally sign a document. A recipient of the document uses the public key to validate the XML signature.</para
       >
       <para
-        >Use the <see
-         cref="T:System.Security.Cryptography.Xml.RSAKeyValue" />
+        >Use the <see cref="T:System.Security.Cryptography.Xml.RSAKeyValue" />
 
         
 
          class whenever you want to add a public key to your XML digital signature.</para
       >
       <para
-        >If a key is not explicitly supplied to the constructor, a new <see
-         cref="T:System.Security.Cryptography.RSA" />
+        >If a key is not explicitly supplied to the constructor, a new <see cref="T:System.Security.Cryptography.RSA" />
 
         
 
@@ -91,8 +88,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a new instance of the default implementation of <see
-             cref="T:System.Security.Cryptography.RSA" />
+            >This constructor creates a new instance of the default implementation of <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -102,13 +98,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.RSAKeyValue" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.RSAKeyValue" />
 
             
 
-             class with a new randomly generated <see
-             cref="T:System.Security.Cryptography.RSA" />
+             class with a new randomly generated <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -141,13 +135,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.RSAKeyValue" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.RSAKeyValue" />
 
             
 
-             class with the specified <see
-             cref="T:System.Security.Cryptography.RSA" />
+             class with the specified <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -155,12 +147,15 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The instance of an implementation of <see
-           cref="T:System.Security.Cryptography.RSA" />
+          The instance of an implementation of <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
@@ -189,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the XML representation of the <see
-             cref="T:System.Security.Cryptography.RSA" />
+            >Returns the XML representation of the <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -200,8 +194,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The XML representation of the <see
-             cref="T:System.Security.Cryptography.RSA" />
+            >The XML representation of the <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -230,15 +223,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Security.Cryptography.RSA" />
-        </value>
+        <value>a <see cref="T:System.Security.Cryptography.RSA" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Xml.RSAKeyValue.Key" />
+            >The <see cref="P:System.Security.Cryptography.Xml.RSAKeyValue.Key" />
 
             
 
@@ -249,8 +238,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the instance of <see
-             cref="T:System.Security.Cryptography.RSA" />
+            >Gets or sets the instance of <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -285,8 +273,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads an <see
-             cref="T:System.Security.Cryptography.RSA" />
+            >Loads an <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -294,12 +281,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The XML element from which to load the <see
-           cref="T:System.Security.Cryptography.RSA" />
+          The XML element from which to load the <see cref="T:System.Security.Cryptography.RSA" />
 
           
 

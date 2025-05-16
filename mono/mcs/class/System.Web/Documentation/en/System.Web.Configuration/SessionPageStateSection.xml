@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.SessionPageStateSection" />
+        >The <see cref="T:System.Web.Configuration.SessionPageStateSection" />
 
         
 
@@ -26,18 +25,15 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.Configuration.SessionPageStateSection" />
+          >The <see cref="T:System.Web.Configuration.SessionPageStateSection" />
 
           
 
-           can read and write information from and to the related section of the configuration file according to the section property <see
-           cref="P:System.Configuration.SectionInformation.AllowDefinition" />
+           can read and write information from and to the related section of the configuration file according to the section property <see cref="P:System.Configuration.SectionInformation.AllowDefinition" />
 
           
 
-           whose value is <see
-           cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />
+           whose value is <see cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />
 
           
 
@@ -60,18 +56,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.SessionPageStateSection.#ctor" />
+            >The <see cref="M:System.Web.Configuration.SessionPageStateSection.#ctor" />
 
             
 
-             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
-             cref="T:System.Web.Configuration.SessionPageStateSection" />
+             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.SessionPageStateSection" />
 
             
 
-             class by using the <see
-             cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+             class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" />
 
             
 
@@ -81,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of <see
-             cref="T:System.Web.Configuration.SessionPageStateSection" />
+            >Creates a new instance of <see cref="T:System.Web.Configuration.SessionPageStateSection" />
 
             
 

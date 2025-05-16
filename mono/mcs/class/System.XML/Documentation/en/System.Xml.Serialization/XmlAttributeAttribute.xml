@@ -30,18 +30,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+        >The <see cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
 
         
 
-         belongs to a family of attributes that controls how the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         belongs to a family of attributes that controls how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         serializes, or deserializes, an object. For a complete list of similar attributes, see <format
-         type="text/html">
+         serializes, or deserializes, an object. For a complete list of similar attributes, see <format type="text/html">
           <a href="414b820f-a696-4206-b576-2711d85490c7"
             >Attributes That Control XML Serialization</a
           >
@@ -52,49 +49,41 @@
         .</para
       >
       <para
-        >When applied to a public field or property, the <see
-         cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+        >When applied to a public field or property, the <see cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
 
         
 
-         informs the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         informs the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         to serialize the member as an XML attribute. By default, the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         to serialize the member as an XML attribute. By default, the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
          serializes public fields and properties as XML elements.</para
       >
       <para
-        >You can assign the <see
-         cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+        >You can assign the <see cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
 
         
 
-         only to public fields or public properties that return a value (or array of values) that can be mapped to one of the XML Schema definition language (XSD) simple types (including all built-in datatypes derived from the XSD anySimpleType type). The possible types include any that can be mapped to the XSD simple types, including <see
-         cref="T:System.Guid" />
+         only to public fields or public properties that return a value (or array of values) that can be mapped to one of the XML Schema definition language (XSD) simple types (including all built-in datatypes derived from the XSD anySimpleType type). The possible types include any that can be mapped to the XSD simple types, including <see cref="T:System.Guid" />
 
         
 
-        , <see
-         cref="T:System.Char" />
+        , <see cref="T:System.Char" />
 
         
 
-        , and enumerations. See the <see
-         cref="P:System.Xml.Serialization.XmlAttributeAttribute.DataType" />
+        , and enumerations. See the <see cref="P:System.Xml.Serialization.XmlAttributeAttribute.DataType" />
 
         
 
          property for a list of XSD types and how they are mapped to.NET data types.</para
       >
       <para
-        >There are two special attributes that can be set with the <see
-         cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+        >There are two special attributes that can be set with the <see cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
 
         
 
@@ -114,8 +103,7 @@
  Namespace:= "http://www.w3.org/XML/1998/namespace")&gt; _
  Public Space As String</code>
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -125,8 +113,7 @@
       >
       <block subset="none" type="note">
         <para
-          >You can use the word XmlAttribute in your code instead of the longer <see
-           cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+          >You can use the word XmlAttribute in your code instead of the longer <see cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
 
           
 
@@ -137,8 +124,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies that the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >Specifies that the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
@@ -166,8 +152,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
 
             
 
@@ -197,8 +182,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
 
             
 
@@ -206,12 +190,15 @@
           >
         </summary>
         <param name="attributeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the XML attribute that the <see
-           cref="T:System.Xml.Serialization.XmlSerializer" />
+          The name of the XML attribute that the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
           
 
@@ -240,8 +227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
 
             
 
@@ -249,12 +235,15 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -287,8 +276,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
 
             
 
@@ -296,19 +284,26 @@
           >
         </summary>
         <param name="attributeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the XML attribute that is generated. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -334,13 +329,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Xml.Serialization.XmlAttributeAttribute.AttributeName" />
+            >Use the <see cref="P:System.Xml.Serialization.XmlAttributeAttribute.AttributeName" />
 
             
 
-             property to specify an XML attribute name when the default value cannot be used. For example, if the XML attribute name is invalid as a member identifier, you can use a valid name for the identifier while setting the <see
-             cref="P:System.Xml.Serialization.XmlAttributeAttribute.AttributeName" />
+             property to specify an XML attribute name when the default value cannot be used. For example, if the XML attribute name is invalid as a member identifier, you can use a valid name for the identifier while setting the <see cref="P:System.Xml.Serialization.XmlAttributeAttribute.AttributeName" />
 
             
 
@@ -372,46 +365,38 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The following table lists the XSD simple data types with their.NET equivalents.</para>
           <para
-            >For the XSD base64Binary and hexBinary data types, use an array of <see
-             cref="T:System.Byte" />
+            >For the XSD base64Binary and hexBinary data types, use an array of <see cref="T:System.Byte" />
 
             
 
-             structures, and apply a <see
-             cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+             structures, and apply a <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
             
 
-             with the <see
-             cref="P:System.Xml.Serialization.XmlAttributeAttribute.DataType" />
+             with the <see cref="P:System.Xml.Serialization.XmlAttributeAttribute.DataType" />
 
             
 
-             property set to "base64Binary" or "hexBinary", as appropriate. For the XSD time and date data types, use the <see
-             cref="T:System.DateTime" />
+             property set to "base64Binary" or "hexBinary", as appropriate. For the XSD time and date data types, use the <see cref="T:System.DateTime" />
 
             
 
-             type and apply the <see
-             cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+             type and apply the <see cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
 
             
 
-             with the <see
-             cref="P:System.Xml.Serialization.XmlAttributeAttribute.DataType" />
+             with the <see cref="P:System.Xml.Serialization.XmlAttributeAttribute.DataType" />
 
             
 
              set to "date" or "time".</para
           >
           <para
-            >For every XSD type that is mapped to a string, apply the <see
-             cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+            >For every XSD type that is mapped to a string, apply the <see cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
 
             
 
-             with its <see
-             cref="P:System.Xml.Serialization.XmlAttributeAttribute.DataType" />
+             with its <see cref="P:System.Xml.Serialization.XmlAttributeAttribute.DataType" />
 
             
 
@@ -451,8 +436,7 @@
               </term>
               <description>
                 <para
-                  >Array of <see
-                   cref="T:System.Byte" />
+                  >Array of <see cref="T:System.Byte" />
 
                   
 
@@ -606,8 +590,7 @@
               </term>
               <description>
                 <para
-                  >Array of <see
-                   cref="T:System.Byte" />
+                  >Array of <see cref="T:System.Byte" />
 
                   
 
@@ -890,8 +873,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the XSD data type of the XML attribute generated by the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets the XSD data type of the XML attribute generated by the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -924,44 +906,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Serialization.XmlAttributeAttribute.Form" />
+            >The <see cref="P:System.Xml.Serialization.XmlAttributeAttribute.Form" />
 
             
 
-             property determines whether an XML element is qualified or unqualified. The <see
-             cref="P:System.Xml.Serialization.XmlAttributeAttribute.Form" />
+             property determines whether an XML element is qualified or unqualified. The <see cref="P:System.Xml.Serialization.XmlAttributeAttribute.Form" />
 
             
 
-             property conforms to the 1999 http://www.w3.org specification <paramref
-             name="Namespaces in XML" />
+             property conforms to the 1999 http://www.w3.org specification <paramref name="Namespaces in XML" />
 
             
 
             .</para
           >
           <para
-            >If the <see
-             cref="P:System.Xml.Serialization.XmlAttributeAttribute.Namespace" />
+            >If the <see cref="P:System.Xml.Serialization.XmlAttributeAttribute.Namespace" />
 
             
 
-             property is set to any value, attempting to set the <see
-             cref="P:System.Xml.Serialization.XmlElementAttribute.Form" />
+             property is set to any value, attempting to set the <see cref="P:System.Xml.Serialization.XmlElementAttribute.Form" />
 
             
 
              property to XmlSchemaForm.Unqualified throws an exception.</para
           >
           <para
-            >The default setting, XmlSchemaForm.None, instructs the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >The default setting, XmlSchemaForm.None, instructs the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             to check the schema for the XML document to determine whether the namespace is qualified. If the schema does not specify a value for an individual element or attribute, the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             to check the schema for the XML document to determine whether the namespace is qualified. If the schema does not specify a value for an individual element or attribute, the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -973,13 +948,11 @@
     &lt;attribute name="Number"/&gt;
  &lt;/schema&gt;</code>
           <para
-            >When the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >When the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             reads the schema, the <see
-             cref="P:System.Xml.Serialization.XmlAttributeAttribute.Form" />
+             reads the schema, the <see cref="P:System.Xml.Serialization.XmlAttributeAttribute.Form" />
 
             
 
@@ -989,8 +962,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether the XML attribute name generated by the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets a value that indicates whether the XML attribute name generated by the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -1017,36 +989,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Serialization.XmlAttributeAttribute.Namespace" />
+            >The <see cref="P:System.Xml.Serialization.XmlAttributeAttribute.Namespace" />
 
             
 
-             property conforms to the http://www.w3.org specification <paramref
-             name="Namespaces in XML" />
+             property conforms to the http://www.w3.org specification <paramref name="Namespaces in XML" />
 
             
 
             .</para
           >
           <para
-            >To create namespaces that are associated with prefixes, you must create an <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+            >To create namespaces that are associated with prefixes, you must create an <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
-             object that contains the namespaces and prefixes used in the XML document. The namespace you set for each <see
-             cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+             object that contains the namespaces and prefixes used in the XML document. The namespace you set for each <see cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
 
             
 
-             must match one of the namespaces in the <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+             must match one of the namespaces in the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
-             object. When the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             object. When the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 

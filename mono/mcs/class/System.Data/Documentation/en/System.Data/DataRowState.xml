@@ -21,18 +21,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.DataRowState" />
+        >The <see cref="T:System.Data.DataRowState" />
 
         
 
-         enumeration is returned by the <see
-         cref="P:System.Data.DataRow.RowState" />
+         enumeration is returned by the <see cref="P:System.Data.DataRow.RowState" />
 
         
 
-         property of the <see
-         cref="T:System.Data.DataRow" />
+         property of the <see cref="T:System.Data.DataRow" />
 
         
 
@@ -42,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Gets the state of a <see
-         cref="T:System.Data.DataRow" />
+        >Gets the state of a <see cref="T:System.Data.DataRow" />
 
         
 
@@ -64,13 +60,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The row has been added to a <see
-             cref="T:System.Data.DataRowCollection" />
+            >The row has been added to a <see cref="T:System.Data.DataRowCollection" />
 
             
 
-            , and <see
-             cref="M:System.Data.DataRow.AcceptChanges" />
+            , and <see cref="M:System.Data.DataRow.AcceptChanges" />
 
             
 
@@ -95,13 +89,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The row was deleted using the <see
-             cref="M:System.Data.DataRow.Delete" />
+            >The row was deleted using the <see cref="M:System.Data.DataRow.Delete" />
 
             
 
-             method of the <see
-             cref="T:System.Data.DataRow" />
+             method of the <see cref="T:System.Data.DataRow" />
 
             
 
@@ -126,13 +118,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The row has been created but is not part of any <see
-             cref="T:System.Data.DataRowCollection" />
+            >The row has been created but is not part of any <see cref="T:System.Data.DataRowCollection" />
 
             
 
-            . A <see
-             cref="T:System.Data.DataRow" />
+            . A <see cref="T:System.Data.DataRow" />
 
             
 
@@ -157,8 +147,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The row has been modified and <see
-             cref="M:System.Data.DataRow.AcceptChanges" />
+            >The row has been modified and <see cref="M:System.Data.DataRow.AcceptChanges" />
 
             
 
@@ -183,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The row has not changed since <see
-             cref="M:System.Data.DataRow.AcceptChanges" />
+            >The row has not changed since <see cref="M:System.Data.DataRow.AcceptChanges" />
 
             
 

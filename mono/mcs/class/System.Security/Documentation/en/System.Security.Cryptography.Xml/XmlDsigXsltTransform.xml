@@ -18,7 +18,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -32,29 +34,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+        >The <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
         
 
          class allows you to address an XML document using an XSLT transformation.  This class uses XSLT to transform XML nodes into other XML nodes that you want to sign or encrypt.</para
       >
       <para
-        >Use the <see
-         cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+        >Use the <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
 
         
 
          class to sign or encrypt specific parts of an XML document using an XSLT transformation.</para
       >
       <para
-        >The Uniform Resource Identifier (URI) that describes the <see
-         cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+        >The Uniform Resource Identifier (URI) that describes the <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
 
         
 
-         class is defined by the <see
-         cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigXsltTransformUrl" />
+         class is defined by the <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigXsltTransformUrl" />
 
         
 
@@ -87,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
 
             
 
@@ -118,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
 
             
 
@@ -127,7 +123,11 @@
           >
         </summary>
         <param name="includeComments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -159,8 +159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an XML representation of the parameters of the <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+            >Returns an XML representation of the parameters of the <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
 
             
 
@@ -170,8 +169,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A list of the XML nodes that represent the transform-specific content needed to describe the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+            >A list of the XML nodes that represent the transform-specific content needed to describe the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
 
             
 
@@ -200,8 +198,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type of the returned object must be <see
-             cref="T:System.IO.Stream" />
+            >The type of the returned object must be <see cref="T:System.IO.Stream" />
 
             
 
@@ -211,8 +208,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the output of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+            >Returns the output of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
 
             
 
@@ -222,8 +218,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The output of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+            >The output of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
 
             
 
@@ -254,8 +249,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type of the returned object must be <see
-             cref="T:System.IO.Stream" />
+            >The type of the returned object must be <see cref="T:System.IO.Stream" />
 
             
 
@@ -265,13 +259,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the output of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+            >Returns the output of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
 
             
 
-             object of type <see
-             cref="T:System.IO.Stream" />
+             object of type <see cref="T:System.IO.Stream" />
 
             
 
@@ -281,13 +273,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The output of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+            >The output of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
 
             
 
-             object of type <see
-             cref="T:System.IO.Stream" />
+             object of type <see cref="T:System.IO.Stream" />
 
             
 
@@ -295,12 +285,15 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of the output to return. <see
-           cref="T:System.IO.Stream" />
+          The type of the output to return. <see cref="T:System.IO.Stream" />
 
           
 
@@ -322,30 +315,23 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Type[]" />
-        </value>
+        <value>a <see cref="T:System.Type[]" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The valid input types to <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+            >The valid input types to <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
 
             
 
-             are <see
-             cref="T:System.IO.Stream" />
+             are <see cref="T:System.IO.Stream" />
 
             
 
-            , <see
-             cref="T:System.Xml.XmlDocument" />
+            , <see cref="T:System.Xml.XmlDocument" />
 
             
 
-            , and <see
-             cref="T:System.Xml.XmlNodeList" />
+            , and <see cref="T:System.Xml.XmlNodeList" />
 
             
 
@@ -355,13 +341,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of types that are valid inputs to the <see
-             cref="M:System.Security.Cryptography.Xml.XmlDsigXsltTransform.LoadInput(System.Object)" />
+            >Gets an array of types that are valid inputs to the <see cref="M:System.Security.Cryptography.Xml.XmlDsigXsltTransform.LoadInput(System.Object)" />
 
             
 
-             method of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+             method of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
 
             
 
@@ -399,13 +383,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Parses the specified <see
-             cref="T:System.Xml.XmlNodeList" />
+            >Parses the specified <see cref="T:System.Xml.XmlNodeList" />
 
             
 
-             object as transform-specific content of a &lt;Transform&gt; element and configures the internal state of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+             object as transform-specific content of a &lt;Transform&gt; element and configures the internal state of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
 
             
 
@@ -413,22 +395,23 @@
           >
         </summary>
         <param name="nodeList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlNodeList" />
+          An <see cref="T:System.Xml.XmlNodeList" />
 
           
 
-           object that encapsulates an XSLT style sheet to load into the current <see
-           cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+           object that encapsulates an XSLT style sheet to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
 
           
 
-           object. This style sheet is applied to the document loaded by the <see
-           cref="M:System.Security.Cryptography.Xml.XmlDsigXsltTransform.LoadInput(System.Object)" />
+           object. This style sheet is applied to the document loaded by the <see cref="M:System.Security.Cryptography.Xml.XmlDsigXsltTransform.LoadInput(System.Object)" />
 
           
 
@@ -458,28 +441,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type of the input object must be one of the types in the <see
-             cref="P:System.Security.Cryptography.Xml.XmlDsigXsltTransform.InputTypes" />
+            >The type of the input object must be one of the types in the <see cref="P:System.Security.Cryptography.Xml.XmlDsigXsltTransform.InputTypes" />
 
             
 
-             property. The valid input types to <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+             property. The valid input types to <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
 
             
 
-             are <see
-             cref="T:System.IO.Stream" />
+             are <see cref="T:System.IO.Stream" />
 
             
 
-            , <see
-             cref="T:System.Xml.XmlDocument" />
+            , <see cref="T:System.Xml.XmlDocument" />
 
             
 
-            , and <see
-             cref="T:System.Xml.XmlNodeList" />
+            , and <see cref="T:System.Xml.XmlNodeList" />
 
             
 
@@ -489,8 +467,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads the specified input into the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+            >Loads the specified input into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
 
             
 
@@ -498,12 +475,15 @@
           >
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The input to load into the current <see
-           cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+          The input to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
 
           
 
@@ -528,10 +508,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Type[]" />
-        </value>
+        <value>a <see cref="T:System.Type[]" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
@@ -539,8 +516,7 @@
 
             
 
-             is the only valid output type for <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+             is the only valid output type for <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
 
             
 
@@ -550,13 +526,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of types that are possible outputs from the <see
-             cref="M:System.Security.Cryptography.Xml.XmlDsigXsltTransform.GetOutput" />
+            >Gets an array of types that are possible outputs from the <see cref="M:System.Security.Cryptography.Xml.XmlDsigXsltTransform.GetOutput" />
 
             
 
-             methods of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+             methods of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
 
             
 

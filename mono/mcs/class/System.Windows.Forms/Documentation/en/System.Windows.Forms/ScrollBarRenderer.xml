@@ -14,39 +14,33 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.ScrollBarRenderer" />
+        >The <see cref="T:System.Windows.Forms.ScrollBarRenderer" />
 
         
 
          class provides a set of static methods that can be used to render a scroll bar control with the current visual style of the operating system. Rendering a control refers to drawing the user interface of a control. This is useful if you are drawing a custom control that should have the appearance of the current visual style. To draw a scroll bar, use a combination of the methods in this class to render each part of the scroll bar. </para
       >
       <para
-        >If visual styles are enabled in the operating system and visual styles are applied to the client area of application windows, the methods of this class will draw the scroll bar with the current visual style. Otherwise, the methods of this class will throw an <see
-         cref="T:System.InvalidOperationException" />
+        >If visual styles are enabled in the operating system and visual styles are applied to the client area of application windows, the methods of this class will draw the scroll bar with the current visual style. Otherwise, the methods of this class will throw an <see cref="T:System.InvalidOperationException" />
 
         
 
-        . To determine whether the members of this class can be used, you can check the value of the <see
-         cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
+        . To determine whether the members of this class can be used, you can check the value of the <see cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
 
         
 
          property.</para
       >
       <para
-        >This class wraps the functionality of a <see
-         cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
+        >This class wraps the functionality of a <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
 
         
 
-         that is set to one of the elements exposed by the <see
-         cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.ScrollBar" />
+         that is set to one of the elements exposed by the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.ScrollBar" />
 
         
 
-         class. For more information, see <format
-         type="text/html">
+         class. For more information, see <format type="text/html">
           <a href="a5b178ba-610e-46c4-a6c0-509c0886a744">Rendering Controls with Visual Styles</a>
         </format>
 
@@ -83,8 +77,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before using this method, you should verify that the <see
-             cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
+            >Before using this method, you should verify that the <see cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
 
             
 
@@ -96,36 +89,45 @@
           <para>Draws a scroll arrow with visual styles.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to draw the scroll arrow.</param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that specifies the bounds of the scroll arrow.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.ScrollBarArrowButtonState" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.ScrollBarArrowButtonState" />
 
           
 
@@ -155,8 +157,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before using this method, you should verify that the <see
-             cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
+            >Before using this method, you should verify that the <see cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
 
             
 
@@ -168,36 +169,45 @@
           <para>Draws a horizontal scroll box (also known as the thumb) with visual styles.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to draw the scroll box.</param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that specifies the bounds of the scroll box.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
 
           
 
@@ -227,8 +237,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before using this method, you should verify that the <see
-             cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
+            >Before using this method, you should verify that the <see cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
 
             
 
@@ -240,36 +249,45 @@
           <para>Draws a grip on a horizontal scroll box (also known as the thumb) with visual styles.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to draw the scroll box grip.</param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that specifies the bounds of the scroll box grip.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
 
           
 
@@ -299,8 +317,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before using this method, you should verify that the <see
-             cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
+            >Before using this method, you should verify that the <see cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
 
             
 
@@ -312,36 +329,45 @@
           <para>Draws a horizontal scroll bar track with visual styles.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to draw the scroll bar track.</param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that specifies the bounds of the scroll bar track.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
 
           
 
@@ -371,8 +397,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before using this method, you should verify that the <see
-             cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
+            >Before using this method, you should verify that the <see cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
 
             
 
@@ -384,36 +409,45 @@
           <para>Draws a vertical scroll bar track with visual styles.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to draw the scroll bar track.</param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that specifies the bounds of the scroll bar track.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
 
           
 
@@ -443,8 +477,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before using this method, you should verify that the <see
-             cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
+            >Before using this method, you should verify that the <see cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
 
             
 
@@ -456,36 +489,45 @@
           <para>Draws a horizontal scroll bar track with visual styles.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to draw the scroll bar track.</param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that specifies the bounds of the scroll bar track.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
 
           
 
@@ -515,8 +557,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before using this method, you should verify that the <see
-             cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
+            >Before using this method, you should verify that the <see cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
 
             
 
@@ -528,36 +569,45 @@
           <para>Draws a scroll bar sizing handle with visual styles.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to draw the sizing handle.</param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that specifies the bounds of the sizing handle.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.ScrollBarSizeBoxState" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.ScrollBarSizeBoxState" />
 
           
 
@@ -587,8 +637,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before using this method, you should verify that the <see
-             cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
+            >Before using this method, you should verify that the <see cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
 
             
 
@@ -600,36 +649,45 @@
           <para>Draws a vertical scroll bar track with visual styles.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to draw the scroll bar track.</param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that specifies the bounds of the scroll bar track.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
 
           
 
@@ -659,8 +717,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before using this method, you should verify that the <see
-             cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
+            >Before using this method, you should verify that the <see cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
 
             
 
@@ -672,36 +729,45 @@
           <para>Draws a vertical scroll box (also known as the thumb) with visual styles.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to draw the scroll box.</param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that specifies the bounds of the scroll box.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
 
           
 
@@ -731,8 +797,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before using this method, you should verify that the <see
-             cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
+            >Before using this method, you should verify that the <see cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
 
             
 
@@ -744,36 +809,45 @@
           <para>Draws a grip on a vertical scroll box (also known as the thumb) with visual styles.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to draw the scroll box grip.</param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that specifies the bounds of the scroll box grip.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
 
           
 
@@ -803,8 +877,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The size of the sizing handle is determined by the current visual style of the operating system.</para>
           <para
-            >Before using this method, you should verify that the <see
-             cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
+            >Before using this method, you should verify that the <see cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
 
             
 
@@ -818,8 +891,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Size" />
+            >A <see cref="T:System.Drawing.Size" />
 
             
 
@@ -827,24 +899,30 @@
           >
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            this operation will use.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
 
           
 
@@ -874,8 +952,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The size of the scroll box grip is determined by the current visual style of the operating system.</para>
           <para
-            >Before using this method, you should verify that the <see
-             cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
+            >Before using this method, you should verify that the <see cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" />
 
             
 
@@ -889,8 +966,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Size" />
+            >A <see cref="T:System.Drawing.Size" />
 
             
 
@@ -898,24 +974,30 @@
           >
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            this operation will use.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
+          One of the <see cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
 
           
 
@@ -938,8 +1020,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this property is false, the methods of this class will throw an <see
-             cref="T:System.InvalidOperationException" />
+            >If this property is false, the methods of this class will throw an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -949,8 +1030,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Windows.Forms.ScrollBarRenderer" />
+            >Gets a value indicating whether the <see cref="T:System.Windows.Forms.ScrollBarRenderer" />
 
             
 

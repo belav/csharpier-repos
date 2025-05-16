@@ -32,26 +32,22 @@
          can store information that describes an instance of an object. This information can be used to create an instance of the object.</para
       >
       <para
-        >Some custom serializers use <see
-         cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
+        >Some custom serializers use <see cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
 
         
 
-         to represent serializable objects. Several methods of a <see
-         cref="T:System.ComponentModel.TypeDescriptor" />
+         to represent serializable objects. Several methods of a <see cref="T:System.ComponentModel.TypeDescriptor" />
 
         
 
-         use <see
-         cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
+         use <see cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
 
         
 
          to represent or instantiate objects.</para
       >
       <para
-        >An <see
-         cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
+        >An <see cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
 
         
 
@@ -60,8 +56,7 @@
       <list type="bullet">
         <item>
           <para
-            >A <see
-             cref="P:System.ComponentModel.Design.Serialization.InstanceDescriptor.MemberInfo" />
+            >A <see cref="P:System.ComponentModel.Design.Serialization.InstanceDescriptor.MemberInfo" />
 
             
 
@@ -70,8 +65,7 @@
         </item>
         <item>
           <para
-            >An <see
-             cref="P:System.ComponentModel.Design.Serialization.InstanceDescriptor.Arguments" />
+            >An <see cref="P:System.ComponentModel.Design.Serialization.InstanceDescriptor.Arguments" />
 
             
 
@@ -80,8 +74,7 @@
         </item>
         <item>
           <para
-            >A Boolean <see
-             cref="P:System.ComponentModel.Design.Serialization.InstanceDescriptor.IsComplete" />
+            >A Boolean <see cref="P:System.ComponentModel.Design.Serialization.InstanceDescriptor.IsComplete" />
 
             
 
@@ -90,8 +83,7 @@
         </item>
         <item>
           <para
-            >An <see
-             cref="M:System.ComponentModel.Design.Serialization.InstanceDescriptor.Invoke" />
+            >An <see cref="M:System.ComponentModel.Design.Serialization.InstanceDescriptor.Invoke" />
 
             
 
@@ -131,8 +123,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
 
             
 
@@ -140,54 +131,54 @@
           >
         </summary>
         <param name="member">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The member information for the descriptor. This can be a <see
-           cref="T:System.Reflection.MethodInfo" />
+          The member information for the descriptor. This can be a <see cref="T:System.Reflection.MethodInfo" />
 
           
 
-          , <see
-           cref="T:System.Reflection.ConstructorInfo" />
+          , <see cref="T:System.Reflection.ConstructorInfo" />
 
           
 
-          , <see
-           cref="T:System.Reflection.FieldInfo" />
+          , <see cref="T:System.Reflection.FieldInfo" />
 
           
 
-          , or <see
-           cref="T:System.Reflection.PropertyInfo" />
+          , or <see cref="T:System.Reflection.PropertyInfo" />
 
           
 
-          . If this is a <see
-           cref="T:System.Reflection.MethodInfo" />
+          . If this is a <see cref="T:System.Reflection.MethodInfo" />
 
           
 
-          , <see
-           cref="T:System.Reflection.FieldInfo" />
+          , <see cref="T:System.Reflection.FieldInfo" />
 
           
 
-          , or <see
-           cref="T:System.Reflection.PropertyInfo" />
+          , or <see cref="T:System.Reflection.PropertyInfo" />
 
           
 
           , it must represent a static member. </param
         >
         <param name="arguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The collection of arguments to pass to the member. This parameter can be null or an empty collection if there are no arguments. The collection can also consist of other instances of <see
-           cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
+          The collection of arguments to pass to the member. This parameter can be null or an empty collection if there are no arguments. The collection can also consist of other instances of <see cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
 
           
 
@@ -221,8 +212,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
 
             
 
@@ -230,61 +220,65 @@
           >
         </summary>
         <param name="member">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The member information for the descriptor. This can be a <see
-           cref="T:System.Reflection.MethodInfo" />
+          The member information for the descriptor. This can be a <see cref="T:System.Reflection.MethodInfo" />
 
           
 
-          , <see
-           cref="T:System.Reflection.ConstructorInfo" />
+          , <see cref="T:System.Reflection.ConstructorInfo" />
 
           
 
-          , <see
-           cref="T:System.Reflection.FieldInfo" />
+          , <see cref="T:System.Reflection.FieldInfo" />
 
           
 
-          , or <see
-           cref="T:System.Reflection.PropertyInfo" />
+          , or <see cref="T:System.Reflection.PropertyInfo" />
 
           
 
-          . If this is a <see
-           cref="T:System.Reflection.MethodInfo" />
+          . If this is a <see cref="T:System.Reflection.MethodInfo" />
 
           
 
-          , <see
-           cref="T:System.Reflection.FieldInfo" />
+          , <see cref="T:System.Reflection.FieldInfo" />
 
           
 
-          , or <see
-           cref="T:System.Reflection.PropertyInfo" />
+          , or <see cref="T:System.Reflection.PropertyInfo" />
 
           
 
           , it must represent a static member. </param
         >
         <param name="arguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The collection of arguments to pass to the member. This parameter can be null or an empty collection if there are no arguments. The collection can also consist of other instances of <see
-           cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
+          The collection of arguments to pass to the member. This parameter can be null or an empty collection if there are no arguments. The collection can also consist of other instances of <see cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
 
           
 
           . </param
         >
         <param name="isComplete">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -339,8 +333,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates a new instance of the object indicated by the <see
-             cref="P:System.ComponentModel.Design.Serialization.InstanceDescriptor.MemberInfo" />
+            >This method creates a new instance of the object indicated by the <see cref="P:System.ComponentModel.Design.Serialization.InstanceDescriptor.MemberInfo" />
 
             
 
@@ -374,18 +367,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, an <see
-             cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
+            >Typically, an <see cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
 
             
 
-             completely describes a particular instance. However, some objects are too complex for a single method or constructor to represent. <see
-             cref="P:System.ComponentModel.Design.Serialization.InstanceDescriptor.IsComplete" />
+             completely describes a particular instance. However, some objects are too complex for a single method or constructor to represent. <see cref="P:System.ComponentModel.Design.Serialization.InstanceDescriptor.IsComplete" />
 
             
 
-             indicates whether an <see
-             cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
+             indicates whether an <see cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
 
             
 
@@ -395,8 +385,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the contents of this <see
-             cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
+            >Gets a value indicating whether the contents of this <see cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
 
             
 
@@ -428,23 +417,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this property can be a <see
-             cref="T:System.Reflection.MethodInfo" />
+            >The value of this property can be a <see cref="T:System.Reflection.MethodInfo" />
 
             
 
-            , <see
-             cref="T:System.Reflection.ConstructorInfo" />
+            , <see cref="T:System.Reflection.ConstructorInfo" />
 
             
 
-            , <see
-             cref="T:System.Reflection.FieldInfo" />
+            , <see cref="T:System.Reflection.FieldInfo" />
 
             
 
-            , or <see
-             cref="T:System.Reflection.PropertyInfo" />
+            , or <see cref="T:System.Reflection.PropertyInfo" />
 
             
 

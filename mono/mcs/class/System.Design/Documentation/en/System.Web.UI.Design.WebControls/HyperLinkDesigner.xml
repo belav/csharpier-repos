@@ -17,44 +17,37 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.HyperLink" />
+        >The <see cref="T:System.Web.UI.WebControls.HyperLink" />
 
         
 
          control creates a link for the client browser to navigate to another Web page.</para
       >
       <para
-        >In a visual designer, when you switch from Source to Design view, the markup source code that describes a <see
-         cref="T:System.Web.UI.WebControls.HyperLink" />
+        >In a visual designer, when you switch from Source to Design view, the markup source code that describes a <see cref="T:System.Web.UI.WebControls.HyperLink" />
 
         
 
-         control is parsed and a design-time version of the control is created on the design surface. When you switch back to Source view, the design-time control is persisted to the markup source code and edited into the markup for the Web page. The <see
-         cref="T:System.Web.UI.Design.WebControls.HyperLinkDesigner" />
+         control is parsed and a design-time version of the control is created on the design surface. When you switch back to Source view, the design-time control is persisted to the markup source code and edited into the markup for the Web page. The <see cref="T:System.Web.UI.Design.WebControls.HyperLinkDesigner" />
 
         
 
-         class provides design-time support for the <see
-         cref="T:System.Web.UI.WebControls.HyperLink" />
+         class provides design-time support for the <see cref="T:System.Web.UI.WebControls.HyperLink" />
 
         
 
          control.</para
       >
       <para
-        >The <see
-         cref="M:System.Web.UI.Design.WebControls.HyperLinkDesigner.GetDesignTimeHtml" />
+        >The <see cref="M:System.Web.UI.Design.WebControls.HyperLinkDesigner.GetDesignTimeHtml" />
 
         
 
-         method returns the markup that is used to render the associated <see
-         cref="T:System.Web.UI.WebControls.HyperLink" />
+         method returns the markup that is used to render the associated <see cref="T:System.Web.UI.WebControls.HyperLink" />
 
         
 
-         control at design time. The <see
-         cref="M:System.Web.UI.Design.WebControls.HyperLinkDesigner.OnComponentChanged(System.Object,System.ComponentModel.Design.ComponentChangedEventArgs)" />
+         control at design time. The <see cref="M:System.Web.UI.Design.WebControls.HyperLinkDesigner.OnComponentChanged(System.Object,System.ComponentModel.Design.ComponentChangedEventArgs)" />
 
         
 
@@ -64,8 +57,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides design-time support in a visual designer for the <see
-         cref="T:System.Web.UI.WebControls.HyperLink" />
+        >Provides design-time support in a visual designer for the <see cref="T:System.Web.UI.WebControls.HyperLink" />
 
         
 
@@ -82,18 +74,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The .NET Framework internally constructs a new instance of the <see
-             cref="T:System.Web.UI.Design.WebControls.HyperLinkDesigner" />
+            >The .NET Framework internally constructs a new instance of the <see cref="T:System.Web.UI.Design.WebControls.HyperLinkDesigner" />
 
             
 
-             class when it creates the associated <see
-             cref="T:System.Web.UI.WebControls.HyperLink" />
+             class when it creates the associated <see cref="T:System.Web.UI.WebControls.HyperLink" />
 
             
 
-             control or a copy of the <see
-             cref="T:System.Web.UI.WebControls.HyperLink" />
+             control or a copy of the <see cref="T:System.Web.UI.WebControls.HyperLink" />
 
             
 
@@ -103,8 +92,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.WebControls.HyperLinkDesigner" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebControls.HyperLinkDesigner" />
 
             
 
@@ -128,43 +116,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.WebControls.HyperLinkDesigner.GetDesignTimeHtml" />
+            >The <see cref="M:System.Web.UI.Design.WebControls.HyperLinkDesigner.GetDesignTimeHtml" />
 
             
 
-             method generates the design-time markup for the associated <see
-             cref="T:System.Web.UI.WebControls.HyperLink" />
+             method generates the design-time markup for the associated <see cref="T:System.Web.UI.WebControls.HyperLink" />
 
             
 
-             control. The method first saves local copies of the <see
-             cref="P:System.Web.UI.WebControls.HyperLink.Text" />
+             control. The method first saves local copies of the <see cref="P:System.Web.UI.WebControls.HyperLink.Text" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.WebControls.HyperLink.NavigateUrl" />
+            , <see cref="P:System.Web.UI.WebControls.HyperLink.NavigateUrl" />
 
             
 
-            , and <see
-             cref="P:System.Web.UI.WebControls.HyperLink.ImageUrl" />
+            , and <see cref="P:System.Web.UI.WebControls.HyperLink.ImageUrl" />
 
             
 
-             properties, as well as the <see
-             cref="P:System.Web.UI.Control.Controls" />
+             properties, as well as the <see cref="P:System.Web.UI.Control.Controls" />
 
             
 
-             child collection. It provides default values for these properties if the original values are null or blank. The <see
-             cref="M:System.Web.UI.Design.WebControls.HyperLinkDesigner.GetDesignTimeHtml" />
+             child collection. It provides default values for these properties if the original values are null or blank. The <see cref="M:System.Web.UI.Design.WebControls.HyperLinkDesigner.GetDesignTimeHtml" />
 
             
 
-             method then calls the <see
-             cref="M:System.Web.UI.Design.TextControlDesigner.GetDesignTimeHtml" />
+             method then calls the <see cref="M:System.Web.UI.Design.TextControlDesigner.GetDesignTimeHtml" />
 
             
 

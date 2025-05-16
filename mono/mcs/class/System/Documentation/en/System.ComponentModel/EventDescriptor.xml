@@ -31,8 +31,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An <see
-         cref="T:System.ComponentModel.EventDescriptor" />
+        >An <see cref="T:System.ComponentModel.EventDescriptor" />
 
         
 
@@ -93,15 +92,13 @@
         </item>
       </list>
       <para
-        >For more information about events, see <format
-         type="text/html">
+        >For more information about events, see <format type="text/html">
           <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
         </format>
 
         
 
-        . For more information about reflection, see the topics in <format
-         type="text/html">
+        . For more information about reflection, see the topics in <format type="text/html">
           <a href="d1a58e7f-fb39-4d50-bf84-e3b8f9bf9775">Reflection</a>
         </format>
 
@@ -141,13 +138,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.EventDescriptor" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.EventDescriptor" />
 
             
 
-             class with the name and attributes in the specified <see
-             cref="T:System.ComponentModel.MemberDescriptor" />
+             class with the name and attributes in the specified <see cref="T:System.ComponentModel.MemberDescriptor" />
 
             
 
@@ -181,13 +176,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor appends the attributes in the <see
-             cref="T:System.Attribute" />
+            >This constructor appends the attributes in the <see cref="T:System.Attribute" />
 
             
 
-             array to the attributes in the <see
-             cref="T:System.ComponentModel.MemberDescriptor" />
+             array to the attributes in the <see cref="T:System.ComponentModel.MemberDescriptor" />
 
             
 
@@ -197,23 +190,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.EventDescriptor" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.EventDescriptor" />
 
             
 
-             class with the name in the specified <see
-             cref="T:System.ComponentModel.MemberDescriptor" />
+             class with the name in the specified <see cref="T:System.ComponentModel.MemberDescriptor" />
 
             
 
-             and the attributes in both the <see
-             cref="T:System.ComponentModel.MemberDescriptor" />
+             and the attributes in both the <see cref="T:System.ComponentModel.MemberDescriptor" />
 
             
 
-             and the <see
-             cref="T:System.Attribute" />
+             and the <see cref="T:System.Attribute" />
 
             
 
@@ -221,12 +210,15 @@
           >
         </summary>
         <param name="attrs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Attribute" />
+          An <see cref="T:System.Attribute" />
 
           
 
@@ -260,8 +252,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.EventDescriptor" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.EventDescriptor" />
 
             
 
@@ -269,12 +260,15 @@
           >
         </summary>
         <param name="attrs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Attribute" />
+          An array of type <see cref="T:System.Attribute" />
 
           
 
@@ -308,8 +302,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, this method is implemented through reflection. For more information about reflection, see the topics in <format
-             type="text/html">
+            >Typically, this method is implemented through reflection. For more information about reflection, see the topics in <format type="text/html">
               <a href="d1a58e7f-fb39-4d50-bf84-e3b8f9bf9775">Reflection</a>
             </format>
 
@@ -318,8 +311,7 @@
             .</para
           >
           <para
-            >For more information about delegates, see <format
-             type="text/html">
+            >For more information about delegates, see <format type="text/html">
               <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
             </format>
 
@@ -333,14 +325,22 @@
           <para>When overridden in a derived class, binds the event to the component.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A component that provides events to the delegate. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -450,8 +450,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, this method is implemented through reflection. For more information, see the topics in <format
-             type="text/html">
+            >Typically, this method is implemented through reflection. For more information, see the topics in <format type="text/html">
               <a href="d1a58e7f-fb39-4d50-bf84-e3b8f9bf9775">Reflection</a>
             </format>
 
@@ -460,8 +459,7 @@
             .</para
           >
           <para
-            >For more information about delegates, see <format
-             type="text/html">
+            >For more information about delegates, see <format type="text/html">
               <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
             </format>
 
@@ -475,14 +473,22 @@
           <para>When overridden in a derived class, unbinds the delegate from the component so that the delegate will no longer receive events from the component.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component that the delegate is bound to. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

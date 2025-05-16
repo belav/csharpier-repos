@@ -13,33 +13,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.PathDirection" />
+        >The <see cref="T:System.Web.UI.WebControls.PathDirection" />
 
         
 
-         enumeration is used by the <see
-         cref="T:System.Web.UI.WebControls.SiteMapPath" />
+         enumeration is used by the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
         
 
-         control to specify the ordering used to render site map nodes. If the <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.PathDirection" />
+         control to specify the ordering used to render site map nodes. If the <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathDirection" />
 
         
 
-         property is set to <see
-         cref="F:System.Web.UI.WebControls.PathDirection.RootToCurrent" />
+         property is set to <see cref="F:System.Web.UI.WebControls.PathDirection.RootToCurrent" />
 
         
 
-        , the navigation path is displayed in the most common way, from the top-most node to the current node, from left to right. If the <see
-         cref="P:System.Web.UI.WebControls.SiteMapPath.PathDirection" />
+        , the navigation path is displayed in the most common way, from the top-most node to the current node, from left to right. If the <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathDirection" />
 
         
 
-         is set to <see
-         cref="F:System.Web.UI.WebControls.PathDirection.CurrentToRoot" />
+         is set to <see cref="F:System.Web.UI.WebControls.PathDirection.CurrentToRoot" />
 
         
 

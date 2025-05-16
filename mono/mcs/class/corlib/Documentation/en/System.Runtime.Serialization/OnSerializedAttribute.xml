@@ -27,26 +27,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Runtime.Serialization.OnSerializedAttribute" />
+        >Use the <see cref="T:System.Runtime.Serialization.OnSerializedAttribute" />
 
         
 
          to manipulate the object after serialization has occurred. </para
       >
       <para
-        >To use the <see
-         cref="T:System.Runtime.Serialization.OnSerializedAttribute" />
+        >To use the <see cref="T:System.Runtime.Serialization.OnSerializedAttribute" />
 
         
 
-        , the method must contain a <see
-         cref="T:System.Runtime.Serialization.StreamingContext" />
+        , the method must contain a <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
         
 
-         parameter. The attribute marks the method to be called by the serialization infrastructure and the <see
-         cref="T:System.Runtime.Serialization.StreamingContext" />
+         parameter. The attribute marks the method to be called by the serialization infrastructure and the <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
         
 
@@ -55,8 +51,7 @@
       <para>code reference: System.Runtime.Serialization.OnSerialization#3</para>
       <block subset="none" type="note">
         <para
-          >In your code, you can use the word OnSerialized instead of the longer <see
-           cref="T:System.Runtime.Serialization.OnSerializedAttribute" />
+          >In your code, you can use the word OnSerialized instead of the longer <see cref="T:System.Runtime.Serialization.OnSerializedAttribute" />
 
           
 
@@ -89,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.OnSerializedAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.OnSerializedAttribute" />
 
             
 

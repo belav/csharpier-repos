@@ -16,13 +16,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.TemplateDefinition" />
+        >The <see cref="T:System.Web.UI.Design.TemplateDefinition" />
 
         
 
-         class provides a base template definition class that can be inherited from and extended for a control designer to use in providing support for templated controls in a design host such as vsprvslong. A design host uses the properties and methods of the <see
-         cref="T:System.Web.UI.Design.TemplateDefinition" />
+         class provides a base template definition class that can be inherited from and extended for a control designer to use in providing support for templated controls in a design host such as vsprvslong. A design host uses the properties and methods of the <see cref="T:System.Web.UI.Design.TemplateDefinition" />
 
         
 
@@ -55,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.TemplateDefinition" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.TemplateDefinition" />
 
             
 
@@ -64,38 +61,52 @@
           >
         </summary>
         <param name="designer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The parent <see
-           cref="T:System.Web.UI.Design.ControlDesigner" />
+          The parent <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
           
 
            object.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the template.</param
         >
         <param name="templatedObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that contains the template.</param
         >
         <param name="templatePropertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The property name that represents this template in the <ui
-          >Properties</ui>
+          The property name that represents this template in the <ui>Properties</ui>
 
           
 
@@ -124,8 +135,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.TemplateDefinition" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.TemplateDefinition" />
 
             
 
@@ -133,45 +143,63 @@
           >
         </summary>
         <param name="designer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The parent <see
-           cref="T:System.Web.UI.Design.ControlDesigner" />
+          The parent <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
           
 
            object.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the template.</param
         >
         <param name="templatedObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that contains the template.</param
         >
         <param name="templatePropertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The property name that represents this template in the <ui
-          >Properties</ui>
+          The property name that represents this template in the <ui>Properties</ui>
 
           
 
            list in the design host.</param
         >
         <param name="serverControlsOnly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -200,13 +228,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.TemplateDefinition" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.TemplateDefinition" />
 
             
 
-             class, using the provided designer, template name, template, property name, and <see
-             cref="T:System.Web.UI.WebControls.Style" />
+             class, using the provided designer, template name, template, property name, and <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
@@ -214,50 +240,67 @@
           >
         </summary>
         <param name="designer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The parent <see
-           cref="T:System.Web.UI.Design.ControlDesigner" />
+          The parent <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
           
 
            object.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the template.</param
         >
         <param name="templatedObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that contains the template.</param
         >
         <param name="templatePropertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The property name that represents this template in the <ui
-          >Properties</ui>
+          The property name that represents this template in the <ui>Properties</ui>
 
           
 
            list in the design host.</param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.Style" />
+          A <see cref="T:System.Web.UI.WebControls.Style" />
 
           
 
@@ -287,13 +330,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.TemplateDefinition" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.TemplateDefinition" />
 
             
 
-             class, using the provided designer, template name, template, property name, <see
-             cref="T:System.Web.UI.WebControls.Style" />
+             class, using the provided designer, template name, template, property name, <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
@@ -301,57 +342,78 @@
           >
         </summary>
         <param name="designer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The parent <see
-           cref="T:System.Web.UI.Design.ControlDesigner" />
+          The parent <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
           
 
            object.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the template.</param
         >
         <param name="templatedObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that contains the template.</param
         >
         <param name="templatePropertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The property name that represents this template in the <ui
-          >Properties</ui>
+          The property name that represents this template in the <ui>Properties</ui>
 
           
 
            list in the design host.</param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.Style" />
+          A <see cref="T:System.Web.UI.WebControls.Style" />
 
           
 
            object to apply to each template.</param
         >
         <param name="serverControlsOnly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -373,8 +435,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To change the default, derived classes must override the <see
-             cref="P:System.Web.UI.Design.TemplateDefinition.AllowEditing" />
+            >To change the default, derived classes must override the <see cref="P:System.Web.UI.Design.TemplateDefinition.AllowEditing" />
 
             
 
@@ -420,8 +481,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a value indicating whether the template should limit content to Web server controls, as set in the <see
-             cref="Overload:System.Web.UI.Design.TemplateDefinition.#ctor" />
+            >Retrieves a value indicating whether the template should limit content to Web server controls, as set in the <see cref="Overload:System.Web.UI.Design.TemplateDefinition.#ctor" />
 
             
 
@@ -447,13 +507,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >Although the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             property is read-only, the properties of the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+             property is read-only, the properties of the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
@@ -463,8 +521,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the style that should be applied to the template as set in the <see
-             cref="Overload:System.Web.UI.Design.TemplateDefinition.#ctor" />
+            >Retrieves the style that should be applied to the template as set in the <see cref="Overload:System.Web.UI.Design.TemplateDefinition.#ctor" />
 
             
 
@@ -505,13 +562,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although this <see
-             cref="P:System.Web.UI.Design.TemplateDefinition.TemplatedObject" />
+            >Although this <see cref="P:System.Web.UI.Design.TemplateDefinition.TemplatedObject" />
 
             
 
-             property is read-only, its properties can be set, and if <see
-             cref="P:System.Web.UI.Design.TemplateDefinition.AllowEditing" />
+             property is read-only, its properties can be set, and if <see cref="P:System.Web.UI.Design.TemplateDefinition.AllowEditing" />
 
             
 

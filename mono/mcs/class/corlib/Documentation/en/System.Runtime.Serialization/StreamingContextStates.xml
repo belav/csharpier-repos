@@ -101,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the source or destination context is a different AppDomain. (For a description of AppDomains, see <format
-             type="text/html">
+            >Specifies that the source or destination context is a different AppDomain. (For a description of AppDomains, see <format type="text/html">
               <a href="39E57D07-A740-4CD4-AE82-E119EA3856C1"
                 >[&lt;topic://cpconapplicationdomains&gt;]</a
               >

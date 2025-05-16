@@ -26,27 +26,26 @@
 
         
 
-         is used to consolidate multiple failures into a single, throwable exception object. It is used extensively in the <format
-         type="text/html">
+         is used to consolidate multiple failures into a single, throwable exception object. It is used extensively in the <format type="text/html">
           <a href="b8f99f43-9104-45fd-9bff-385a20488a23">Task Parallel Library</a>
         </format>
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="3d4d0cd3-bde4-490b-99e7-f4e41be96455">Parallel LINQ (PLINQ)</a>
         </format>
 
         
 
         . For additional information, see the <see
-         cref="http://go.microsoft.com/fwlink/p/?LinkId=259617">Aggregating Exceptions</see>
+          cref="http://go.microsoft.com/fwlink/p/?LinkId=259617"
+          >Aggregating Exceptions</see
+        >
 
         
 
-         entry in the .NET Matters blog. For an example, see <format
-         type="text/html">
+         entry in the .NET Matters blog. For an example, see <format type="text/html">
           <a href="d6c47ec8-9de9-4880-beb3-ff19ae51565d"
             >How to: Handle Exceptions Thrown by Tasks</a
           >
@@ -54,8 +53,7 @@
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="8d56ff9b-a571-4d31-b41f-80c0b51b70a5"
             >How to: Handle Exceptions in a PLINQ Query</a
           >
@@ -87,16 +85,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Exception.Message" />
+            >This constructor initializes the <see cref="P:System.Exception.Message" />
 
             
 
              property of the new instance to a system-supplied message that describes the error, such as "DefaultMessageDisplayedByParameterlessCtorWriterMustSupply" This message takes into account the current system culture.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.InsufficientMemoryException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.InsufficientMemoryException" />
 
             
 
@@ -138,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.AggregateException" />
+            >Initializes a new instance of the <see cref="T:System.AggregateException" />
 
             
 
@@ -172,8 +167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.AggregateException" />
+            >Initializes a new instance of the <see cref="T:System.AggregateException" />
 
             
 
@@ -181,7 +175,11 @@
           >
         </summary>
         <param name="innerExceptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -216,8 +214,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.AggregateException" />
+            >Initializes a new instance of the <see cref="T:System.AggregateException" />
 
             
 
@@ -225,7 +222,11 @@
           >
         </summary>
         <param name="innerExceptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -250,8 +251,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.AggregateException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.AggregateException" />
 
             
 
@@ -286,8 +286,7 @@
               </term>
               <description>
                 <para
-                  >The error message string specified in <paramref
-                   name="message" />
+                  >The error message string specified in <paramref name="message" />
 
                   
 
@@ -300,8 +299,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.AggregateException" />
+            >Initializes a new instance of the <see cref="T:System.AggregateException" />
 
             
 
@@ -309,7 +307,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -338,8 +340,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format
-             type="text/html">
+            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format type="text/html">
               <a href="832AC524-21BC-419A-A27B-CA8BFC45840F">XML and SOAP Serialization</a>
             </format>
 
@@ -351,8 +352,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.AggregateException" />
+            >Initializes a new instance of the <see cref="T:System.AggregateException" />
 
             
 
@@ -360,14 +360,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -400,8 +408,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.AggregateException" />
+            >Initializes a new instance of the <see cref="T:System.AggregateException" />
 
             
 
@@ -409,14 +416,22 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception.</param
         >
         <param name="innerExceptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -445,26 +460,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.AggregateException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.AggregateException" />
 
             
 
@@ -499,8 +510,7 @@
               </term>
               <description>
                 <para
-                  >The error message string specified in <paramref
-                   name="message" />
+                  >The error message string specified in <paramref name="message" />
 
                   
 
@@ -513,8 +523,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.AggregateException" />
+            >Initializes a new instance of the <see cref="T:System.AggregateException" />
 
             
 
@@ -522,19 +531,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message that describes the exception. The caller of this constructor is required to ensure that this string has been localized for the current system culture. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 
@@ -570,8 +586,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.AggregateException" />
+            >Initializes a new instance of the <see cref="T:System.AggregateException" />
 
             
 
@@ -579,14 +594,22 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception.</param
         >
         <param name="innerExceptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -612,18 +635,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If any inner exceptions are themselves instances of <see
-             cref="T:System.AggregateException" />
+            >If any inner exceptions are themselves instances of <see cref="T:System.AggregateException" />
 
             
 
-            , this method will recursively flatten all of them. The inner exceptions returned in the new <see
-             cref="T:System.AggregateException" />
+            , this method will recursively flatten all of them. The inner exceptions returned in the new <see cref="T:System.AggregateException" />
 
             
 
-             will be the union of all of the the inner exceptions from exception tree rooted at the provided <see
-             cref="T:System.AggregateException" />
+             will be the union of all of the the inner exceptions from exception tree rooted at the provided <see cref="T:System.AggregateException" />
 
             
 
@@ -633,8 +653,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Flattens an <see
-             cref="T:System.AggregateException" />
+            >Flattens an <see cref="T:System.AggregateException" />
 
             
 
@@ -644,8 +663,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new, flattened <see
-             cref="T:System.AggregateException" />
+            >A new, flattened <see cref="T:System.AggregateException" />
 
             
 
@@ -673,8 +691,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.AggregateException" />
+            >Returns the <see cref="T:System.AggregateException" />
 
             
 
@@ -684,8 +701,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.AggregateException" />
+            >Returns the <see cref="T:System.AggregateException" />
 
             
 
@@ -718,8 +734,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format
-             type="text/html">
+            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format type="text/html">
               <a href="832AC524-21BC-419A-A27B-CA8BFC45840F">XML and SOAP Serialization</a>
             </format>
 
@@ -731,8 +746,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.AggregateException" />
+            >Initializes a new instance of the <see cref="T:System.AggregateException" />
 
             
 
@@ -740,14 +754,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -778,28 +800,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each invocation of the <paramref
-             name="predicate" />
+            >Each invocation of the <paramref name="predicate" />
 
             
 
-             returns true or false to indicate whether the <see
-             cref="T:System.Exception" />
+             returns true or false to indicate whether the <see cref="T:System.Exception" />
 
             
 
-             was handled. After all invocations, if any exceptions went unhandled, all unhandled exceptions will be put into a new <see
-             cref="T:System.AggregateException" />
+             was handled. After all invocations, if any exceptions went unhandled, all unhandled exceptions will be put into a new <see cref="T:System.AggregateException" />
 
             
 
-             which will be thrown. Otherwise, the <see
-             cref="M:System.AggregateException.Handle(System.Func{System.Exception,System.Boolean})" />
+             which will be thrown. Otherwise, the <see cref="M:System.AggregateException.Handle(System.Func{System.Exception,System.Boolean})" />
 
             
 
-             method simply returns. If any invocations of the <paramref
-             name="predicate" />
+             method simply returns. If any invocations of the <paramref name="predicate" />
 
             
 
@@ -809,13 +826,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Invokes a handler on each <see
-             cref="T:System.Exception" />
+            >Invokes a handler on each <see cref="T:System.Exception" />
 
             
 
-             contained by this <see
-             cref="T:System.AggregateException" />
+             contained by this <see cref="T:System.AggregateException" />
 
             
 
@@ -823,12 +838,15 @@
           >
         </summary>
         <param name="predicate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The predicate to execute for each exception. The predicate accepts as an argument the <see
-           cref="T:System.Exception" />
+          The predicate to execute for each exception. The predicate accepts as an argument the <see cref="T:System.Exception" />
 
           
 
@@ -858,8 +876,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a read-only collection of the <see
-             cref="T:System.Exception" />
+            >Gets a read-only collection of the <see cref="T:System.Exception" />
 
             
 
@@ -887,8 +904,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns a string representation of the current <see
-             cref="T:System.AggregateException" />
+            >Creates and returns a string representation of the current <see cref="T:System.AggregateException" />
 
             
 

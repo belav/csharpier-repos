@@ -21,18 +21,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Drawing.Imaging.ImageCodecFlags" />
+        >The <see cref="T:System.Drawing.Imaging.ImageCodecFlags" />
 
         
 
-         class is used by the <see
-         cref="P:System.Drawing.Imaging.ImageCodecInfo.Flags" />
+         class is used by the <see cref="P:System.Drawing.Imaging.ImageCodecInfo.Flags" />
 
         
 
-         property of the <see
-         cref="T:System.Drawing.Imaging.ImageCodecInfo" />
+         property of the <see cref="T:System.Drawing.Imaging.ImageCodecInfo" />
 
         
 

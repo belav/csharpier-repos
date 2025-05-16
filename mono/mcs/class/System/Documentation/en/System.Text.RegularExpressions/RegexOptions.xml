@@ -26,13 +26,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Text.RegularExpressions.RegexOptions" />
+        >A <see cref="T:System.Text.RegularExpressions.RegexOptions" />
 
         
 
-         value can be provided as a parameter to the following members of the <see
-         cref="T:System.Text.RegularExpressions.Regex" />
+         value can be provided as a parameter to the following members of the <see cref="T:System.Text.RegularExpressions.Regex" />
 
         
 
@@ -41,8 +39,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="M:System.Text.RegularExpressions.Regex.#ctor(System.String,System.Text.RegularExpressions.RegexOptions)" />
+            >The <see cref="M:System.Text.RegularExpressions.Regex.#ctor(System.String,System.Text.RegularExpressions.RegexOptions)" />
 
             
 
@@ -51,8 +48,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Text.RegularExpressions.Regex.Split(System.String,System.String,System.Text.RegularExpressions.RegexOptions)" />
+            >The <see cref="M:System.Text.RegularExpressions.Regex.Split(System.String,System.String,System.Text.RegularExpressions.RegexOptions)" />
 
             
 
@@ -61,8 +57,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Text.RegularExpressions.Regex.IsMatch(System.String,System.String,System.Text.RegularExpressions.RegexOptions)" />
+            >The <see cref="M:System.Text.RegularExpressions.Regex.IsMatch(System.String,System.String,System.Text.RegularExpressions.RegexOptions)" />
 
             
 
@@ -71,8 +66,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Text.RegularExpressions.Regex.Match(System.String,System.String,System.Text.RegularExpressions.RegexOptions)" />
+            >The <see cref="M:System.Text.RegularExpressions.Regex.Match(System.String,System.String,System.Text.RegularExpressions.RegexOptions)" />
 
             
 
@@ -81,8 +75,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Text.RegularExpressions.Regex.Matches(System.String,System.String,System.Text.RegularExpressions.RegexOptions)" />
+            >The <see cref="M:System.Text.RegularExpressions.Regex.Matches(System.String,System.String,System.Text.RegularExpressions.RegexOptions)" />
 
             
 
@@ -91,13 +84,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Text.RegularExpressions.Regex.Replace(System.String,System.String,System.String,System.Text.RegularExpressions.RegexOptions)" />
+            >The <see cref="M:System.Text.RegularExpressions.Regex.Replace(System.String,System.String,System.String,System.Text.RegularExpressions.RegexOptions)" />
 
             
 
-             and <see
-             cref="M:System.Text.RegularExpressions.Regex.Replace(System.String,System.String,System.Text.RegularExpressions.MatchEvaluator,System.Text.RegularExpressions.RegexOptions)" />
+             and <see cref="M:System.Text.RegularExpressions.Regex.Replace(System.String,System.String,System.Text.RegularExpressions.MatchEvaluator,System.Text.RegularExpressions.RegexOptions)" />
 
             
 
@@ -106,61 +97,50 @@
         </item>
       </list>
       <para
-        >A <see
-         cref="T:System.Text.RegularExpressions.RegexOptions" />
+        >A <see cref="T:System.Text.RegularExpressions.RegexOptions" />
 
         
 
-         value can also be supplied as a parameter to the <see
-         cref="M:System.Text.RegularExpressions.RegexCompilationInfo.#ctor(System.String,System.Text.RegularExpressions.RegexOptions,System.String,System.String,System.Boolean)" />
+         value can also be supplied as a parameter to the <see cref="M:System.Text.RegularExpressions.RegexCompilationInfo.#ctor(System.String,System.Text.RegularExpressions.RegexOptions,System.String,System.String,System.Boolean)" />
 
         
 
-         constructor, or it can be assigned directly to the <see
-         cref="P:System.Text.RegularExpressions.RegexCompilationInfo.Options" />
+         constructor, or it can be assigned directly to the <see cref="P:System.Text.RegularExpressions.RegexCompilationInfo.Options" />
 
         
 
-         property. The resulting <see
-         cref="T:System.Text.RegularExpressions.RegexCompilationInfo" />
+         property. The resulting <see cref="T:System.Text.RegularExpressions.RegexCompilationInfo" />
 
         
 
-         object is then used in the call to the <see
-         cref="M:System.Text.RegularExpressions.Regex.CompileToAssembly(System.Text.RegularExpressions.RegexCompilationInfo[],System.Reflection.AssemblyName,System.Reflection.Emit.CustomAttributeBuilder[],System.String)" />
+         object is then used in the call to the <see cref="M:System.Text.RegularExpressions.Regex.CompileToAssembly(System.Text.RegularExpressions.RegexCompilationInfo[],System.Reflection.AssemblyName,System.Reflection.Emit.CustomAttributeBuilder[],System.String)" />
 
         
 
          method.</para
       >
       <para
-        >Several options provided by members of the <see
-         cref="T:System.Text.RegularExpressions.RegexOptions" />
+        >Several options provided by members of the <see cref="T:System.Text.RegularExpressions.RegexOptions" />
 
         
 
-         enumeration (in particular, by its <see
-         cref="F:System.Text.RegularExpressions.RegexOptions.ExplicitCapture" />
+         enumeration (in particular, by its <see cref="F:System.Text.RegularExpressions.RegexOptions.ExplicitCapture" />
 
         
 
-        , <see
-         cref="F:System.Text.RegularExpressions.RegexOptions.IgnoreCase" />
+        , <see cref="F:System.Text.RegularExpressions.RegexOptions.IgnoreCase" />
 
         
 
-        , <see
-         cref="F:System.Text.RegularExpressions.RegexOptions.Multiline" />
+        , <see cref="F:System.Text.RegularExpressions.RegexOptions.Multiline" />
 
         
 
-        , and <see
-         cref="F:System.Text.RegularExpressions.RegexOptions.Singleline" />
+        , and <see cref="F:System.Text.RegularExpressions.RegexOptions.Singleline" />
 
         
 
-         members) can instead be provided by using an inline option character in the regular expression pattern. For details, see <format
-         type="text/html">
+         members) can instead be provided by using an inline option character in the regular expression pattern. For details, see <format type="text/html">
           <a href="c82dc689-7e82-4767-a18d-cd24ce5f05e9">Regular Expression Options</a>
         </format>
 
@@ -196,13 +176,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the regular expression is compiled to an assembly. This yields faster execution but increases startup time. This value should not be assigned to the <see
-             cref="P:System.Text.RegularExpressions.RegexCompilationInfo.Options" />
+            >Specifies that the regular expression is compiled to an assembly. This yields faster execution but increases startup time. This value should not be assigned to the <see cref="P:System.Text.RegularExpressions.RegexCompilationInfo.Options" />
 
             
 
-             property when calling the <see
-             cref="M:System.Text.RegularExpressions.Regex.CompileToAssembly(System.Text.RegularExpressions.RegexCompilationInfo[],System.Reflection.AssemblyName)" />
+             property when calling the <see cref="M:System.Text.RegularExpressions.Regex.CompileToAssembly(System.Text.RegularExpressions.RegexCompilationInfo[],System.Reflection.AssemblyName)" />
 
             
 
@@ -232,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that cultural differences in language is ignored. See <format
-             type="text/html">
+            >Specifies that cultural differences in language is ignored. See <format type="text/html">
               <a href="c82dc689-7e82-4767-a18d-cd24ce5f05e9">Regular Expression Options</a>
             </format>
 
@@ -265,18 +242,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Enables ECMAScript-compliant behavior for the expression. This value can be used only in conjunction with the <see
-             cref="F:System.Text.RegularExpressions.RegexOptions.IgnoreCase" />
+            >Enables ECMAScript-compliant behavior for the expression. This value can be used only in conjunction with the <see cref="F:System.Text.RegularExpressions.RegexOptions.IgnoreCase" />
 
             
 
-            , <see
-             cref="F:System.Text.RegularExpressions.RegexOptions.Multiline" />
+            , <see cref="F:System.Text.RegularExpressions.RegexOptions.Multiline" />
 
             
 
-            , and <see
-             cref="F:System.Text.RegularExpressions.RegexOptions.Compiled" />
+            , and <see cref="F:System.Text.RegularExpressions.RegexOptions.Compiled" />
 
             
 
@@ -354,13 +328,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Eliminates unescaped white space from the pattern and enables comments marked with #. However, the <see
-             cref="F:System.Text.RegularExpressions.RegexOptions.IgnorePatternWhitespace" />
+            >Eliminates unescaped white space from the pattern and enables comments marked with #. However, the <see cref="F:System.Text.RegularExpressions.RegexOptions.IgnorePatternWhitespace" />
 
             
 
-             value does not affect or eliminate white space in <format
-             type="text/html">
+             value does not affect or eliminate white space in <format type="text/html">
               <a href="0f8bffab-ee0d-4e0e-9a96-2b4a252bb7e4">character classes</a>
             </format>
 

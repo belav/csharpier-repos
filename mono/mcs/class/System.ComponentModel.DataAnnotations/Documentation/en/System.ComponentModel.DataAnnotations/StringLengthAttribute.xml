@@ -28,13 +28,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >ASP.NET Dynamic Data enables CRUD (Create, Read, Update and Delete) operations in a data model. You can specify the minimum and maximum length of characters for each field when data is being inserted or updated. For character data types, the <see
-         cref="P:System.ComponentModel.DataAnnotations.StringLengthAttribute.MinimumLength" />
+        >ASP.NET Dynamic Data enables CRUD (Create, Read, Update and Delete) operations in a data model. You can specify the minimum and maximum length of characters for each field when data is being inserted or updated. For character data types, the <see cref="P:System.ComponentModel.DataAnnotations.StringLengthAttribute.MinimumLength" />
 
         
 
-         and <see
-         cref="P:System.ComponentModel.DataAnnotations.StringLengthAttribute.MaximumLength" />
+         and <see cref="P:System.ComponentModel.DataAnnotations.StringLengthAttribute.MaximumLength" />
 
         
 
@@ -65,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.StringLengthAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.StringLengthAttribute" />
 
             
 
@@ -74,7 +71,11 @@
           >
         </summary>
         <param name="maximumLength">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -112,7 +113,11 @@
           <para>The formatted error message.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -150,7 +155,11 @@
           <para>true if the specified object is valid; otherwise, false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

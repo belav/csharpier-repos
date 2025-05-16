@@ -24,18 +24,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >It is possible to print each page of a document using different page settings. You set page settings by modifying individual properties of the <see
-         cref="P:System.Drawing.Printing.QueryPageSettingsEventArgs.PageSettings" />
+        >It is possible to print each page of a document using different page settings. You set page settings by modifying individual properties of the <see cref="P:System.Drawing.Printing.QueryPageSettingsEventArgs.PageSettings" />
 
         
 
-         property or by setting the property to a <see
-         cref="T:System.Drawing.Printing.PageSettings" />
+         property or by setting the property to a <see cref="T:System.Drawing.Printing.PageSettings" />
 
         
 
-        . The print job can also be canceled by setting the <see
-         cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+        . The print job can also be canceled by setting the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
         
 
@@ -45,8 +42,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Drawing.Printing.PrintDocument.QueryPageSettings" />
+        >Provides data for the <see cref="E:System.Drawing.Printing.PrintDocument.QueryPageSettings" />
 
         
 
@@ -70,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Printing.QueryPageSettingsEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Printing.QueryPageSettingsEventArgs" />
 
             
 
@@ -79,7 +74,11 @@
           >
         </summary>
         <param name="pageSettings">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -106,18 +105,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >It is possible to print each page of a document using different page settings. You set page settings by modifying individual properties of the <see
-             cref="P:System.Drawing.Printing.QueryPageSettingsEventArgs.PageSettings" />
+            >It is possible to print each page of a document using different page settings. You set page settings by modifying individual properties of the <see cref="P:System.Drawing.Printing.QueryPageSettingsEventArgs.PageSettings" />
 
             
 
-             property or by setting the property to a <see
-             cref="T:System.Drawing.Printing.PageSettings" />
+             property or by setting the property to a <see cref="T:System.Drawing.Printing.PageSettings" />
 
             
 
-            . The print job can also be canceled by setting the <see
-             cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+            . The print job can also be canceled by setting the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
             
 

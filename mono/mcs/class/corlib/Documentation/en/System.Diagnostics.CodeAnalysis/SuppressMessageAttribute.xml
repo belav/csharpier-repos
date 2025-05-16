@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This attribute can be applied to any application element. For a complete list of the violations that can be suppressed, see <format
-         type="text/html">
+        >This attribute can be applied to any application element. For a complete list of the violations that can be suppressed, see <format type="text/html">
           <a href="3c2741ff-0d3a-42e6-acd5-d42310bd03c4">Code Analysis for Managed Code Warnings</a>
         </format>
 
@@ -41,26 +40,22 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Diagnostics.ConditionalAttribute" />
+          >The <see cref="T:System.Diagnostics.ConditionalAttribute" />
 
           
 
            is applied to this class, specifying the preprocessing symbol "CODE_ANALYSIS" as the conditional symbol that determines whether the attribute call is included or omitted. If the symbol is defined, the attribute call is included; otherwise, the call is omitted.</para
         >
         <para
-          >When you right-click a Code Analysis warning in the Visual Studio <ui
-          >Error List</ui>
+          >When you right-click a Code Analysis warning in the Visual Studio <ui>Error List</ui>
 
           
 
-           and then click <ui
-          >Suppress Message(s)</ui>
+           and then click <ui>Suppress Message(s)</ui>
 
           
 
-          , a SuppressMessage attribute is added either in your code or to the project's global suppressions file. For more information about the SuppressMessage attribute and its use in Visual Studio, see <format
-           type="text/html">
+          , a SuppressMessage attribute is added either in your code or to the project's global suppressions file. For more information about the SuppressMessage attribute and its use in Visual Studio, see <format type="text/html">
             <a href="f1a2dc6a-a9eb-408c-9078-2571e57d207d">In Source Suppression Overview</a>
           </format>
 
@@ -99,13 +94,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="category" />
+            >The <paramref name="category" />
 
             
 
-             parameter value is specific to the analysis tool and categorizes the rule identified by the <paramref
-             name="checkId" />
+             parameter value is specific to the analysis tool and categorizes the rule identified by the <paramref name="checkId" />
 
             
 
@@ -118,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute" />
 
             
 
@@ -127,14 +119,22 @@
           >
         </summary>
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The category for the attribute.</param
         >
         <param name="checkId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -159,8 +159,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute.Category" />
+            >The <see cref="P:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute.Category" />
 
             
 
@@ -190,13 +189,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Concatenated together, the <see
-             cref="P:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute.Category" />
+            >Concatenated together, the <see cref="P:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute.Category" />
 
             
 
-             and <see
-             cref="P:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute.CheckId" />
+             and <see cref="P:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute.CheckId" />
 
             
 
@@ -247,13 +244,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute.MessageId" />
+            >The <see cref="P:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute.MessageId" />
 
             
 
-             property is an optional argument that specifies additional exclusion where the literal metadata target is not sufficiently precise. For example, the <see
-             cref="T:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute" />
+             property is an optional argument that specifies additional exclusion where the literal metadata target is not sufficiently precise. For example, the <see cref="T:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute" />
 
             
 
@@ -283,8 +278,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute.Scope" />
+            >The <see cref="P:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute.Scope" />
 
             
 
@@ -314,8 +308,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute.Target" />
+            >The <see cref="P:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute.Target" />
 
             
 

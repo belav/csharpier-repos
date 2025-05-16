@@ -21,59 +21,49 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Resources.ResXResourceWriter" />
+        >The <see cref="T:System.Resources.ResXResourceWriter" />
 
         
 
-         writes resources in XML format. To write a binary resource file, use <see
-         cref="T:System.Resources.ResourceWriter" />
+         writes resources in XML format. To write a binary resource file, use <see cref="T:System.Resources.ResourceWriter" />
 
         
 
         .</para
       >
       <para
-        >Resources are specified as name/value pairs using the <see
-         cref="M:System.Resources.ResXResourceWriter.AddResource(System.String,System.Byte[])" />
+        >Resources are specified as name/value pairs using the <see cref="M:System.Resources.ResXResourceWriter.AddResource(System.String,System.Byte[])" />
 
         
 
-         method. Resource names are case-sensitive when used for lookups; but to more easily support authoring tools and help eliminate bugs, <see
-         cref="T:System.Resources.ResXResourceWriter" />
+         method. Resource names are case-sensitive when used for lookups; but to more easily support authoring tools and help eliminate bugs, <see cref="T:System.Resources.ResXResourceWriter" />
 
         
 
          does not allow a.resx file to have names that vary only by case.</para
       >
       <para
-        >To create a.resx file, create a <see
-         cref="T:System.Resources.ResXResourceWriter" />
+        >To create a.resx file, create a <see cref="T:System.Resources.ResXResourceWriter" />
 
         
 
-         with a unique file name, call <see
-         cref="M:System.Resources.ResXResourceWriter.AddResource(System.String,System.Byte[])" />
+         with a unique file name, call <see cref="M:System.Resources.ResXResourceWriter.AddResource(System.String,System.Byte[])" />
 
         
 
-         at least once, call <see
-         cref="M:System.Resources.ResXResourceWriter.Generate" />
+         at least once, call <see cref="M:System.Resources.ResXResourceWriter.Generate" />
 
         
 
-         to write the resources file to disk, and then call <see
-         cref="M:System.Resources.ResXResourceWriter.Close" />
+         to write the resources file to disk, and then call <see cref="M:System.Resources.ResXResourceWriter.Close" />
 
         
 
-         to close the file. Calling <see
-         cref="M:System.Resources.ResXResourceWriter.Close" />
+         to close the file. Calling <see cref="M:System.Resources.ResXResourceWriter.Close" />
 
         
 
-         will implicitly <see
-         cref="M:System.Resources.ResXResourceWriter.Generate" />
+         will implicitly <see cref="M:System.Resources.ResXResourceWriter.Generate" />
 
         
 
@@ -81,8 +71,7 @@
       >
       <para>The resources are not necessarily written in the same order they were added.</para>
       <para
-        >For more information on the format of a.resx file, see <format
-         type="text/html">
+        >For more information on the format of a.resx file, see <format type="text/html">
           <a href="168f941a-2b84-43f8-933f-cf4a8548d824"
             >Working with .resx Files Programmatically</a
           >
@@ -94,20 +83,17 @@
       >
       <block subset="none" type="note">
         <para
-          >This class contains a link demand and an inheritance demand at the class level that applies to all members. A <see
-           cref="T:System.Security.SecurityException" />
+          >This class contains a link demand and an inheritance demand at the class level that applies to all members. A <see cref="T:System.Security.SecurityException" />
 
           
 
-           is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see <format
-           type="text/html">
+           is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see <format type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
           </format>
 
           
 
-           and <format
-           type="text/html">
+           and <format type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
 
@@ -134,13 +120,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Resources.ResXResourceWriter.Close" />
+              >The <see cref="M:System.Resources.ResXResourceWriter.Close" />
 
               
 
-               method closes the stream you specify as a parameter. To write the resource to the stream without closing the stream, you must use the <see
-               cref="M:System.Resources.ResXResourceWriter.Generate" />
+               method closes the stream you specify as a parameter. To write the resource to the stream without closing the stream, you must use the <see cref="M:System.Resources.ResXResourceWriter.Generate" />
 
               
 
@@ -151,8 +135,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Resources.ResXResourceWriter" />
+            >Initializes a new instance of the <see cref="T:System.Resources.ResXResourceWriter" />
 
             
 
@@ -160,7 +143,11 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -186,13 +173,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Resources.ResXResourceWriter" />
+            >Initializes a new instance of the <see cref="T:System.Resources.ResXResourceWriter" />
 
             
 
-             class that writes to the specified <see
-             cref="T:System.IO.TextWriter" />
+             class that writes to the specified <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -200,12 +185,15 @@
           >
         </summary>
         <param name="textWriter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.TextWriter" />
+          The <see cref="T:System.IO.TextWriter" />
 
           
 
@@ -227,18 +215,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates <paramref
-             name="filename" />
+            >This constructor creates <paramref name="filename" />
 
             
 
-             if it does not exist and overwrites it if it does. If <paramref
-             name="filename" />
+             if it does not exist and overwrites it if it does. If <paramref name="filename" />
 
             
 
-             includes a directory path, the full path must exist or the constructor throws a <see
-             cref="T:System.IO.DirectoryNotFoundException" />
+             includes a directory path, the full path must exist or the constructor throws a <see cref="T:System.IO.DirectoryNotFoundException" />
 
             
 
@@ -248,8 +233,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Resources.ResXResourceWriter" />
+            >Initializes a new instance of the <see cref="T:System.Resources.ResXResourceWriter" />
 
             
 
@@ -257,7 +241,11 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -289,8 +277,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resources whose values are from an aliased assembly are automatically added to the list of aliases. The resource is not written until <see
-             cref="M:System.Resources.ResXResourceWriter.Generate" />
+            >Resources whose values are from an aliased assembly are automatically added to the list of aliases. The resource is not written until <see cref="M:System.Resources.ResXResourceWriter.Generate" />
 
             
 
@@ -302,19 +289,26 @@
           <para>Adds the specified alias to a list of aliases. </para>
         </summary>
         <param name="aliasName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the alias.</param
         >
         <param name="assemblyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the assembly represented by <paramref
-           name="aliasName" />
+          The name of the assembly represented by <paramref name="aliasName" />
 
           
 
@@ -342,14 +336,22 @@
           <para>Adds a design-time property whose value is specifed as a byte array to the list of resources to write.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of a property.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -377,14 +379,22 @@
           <para>Adds a design-time property whose value is specified as an object to the list of resources to write.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of a property.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -412,14 +422,22 @@
           <para>Adds a design-time property whose value is specified as a string to the list of resources to write.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of a property.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -447,8 +465,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a named resource specified in a <see
-             cref="T:System.Resources.ResXDataNode" />
+            >Adds a named resource specified in a <see cref="T:System.Resources.ResXDataNode" />
 
             
 
@@ -456,12 +473,15 @@
           >
         </summary>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Resources.ResXDataNode" />
+          A <see cref="T:System.Resources.ResXDataNode" />
 
           
 
@@ -483,8 +503,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The resource is not written until <see
-             cref="M:System.Resources.ResXResourceWriter.Generate" />
+            >The resource is not written until <see cref="M:System.Resources.ResXResourceWriter.Generate" />
 
             
 
@@ -497,14 +516,22 @@
           <para>Adds a named resource specified as a byte array to the list of resources to write.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the resource. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -530,8 +557,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The resource is not written until <see
-             cref="M:System.Resources.ResXResourceWriter.Generate" />
+            >The resource is not written until <see cref="M:System.Resources.ResXResourceWriter.Generate" />
 
             
 
@@ -544,14 +570,22 @@
           <para>Adds a named resource specified as an object to the list of resources to write.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the resource. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -577,8 +611,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The resource is not written until <see
-             cref="M:System.Resources.ResXResourceWriter.Generate" />
+            >The resource is not written until <see cref="M:System.Resources.ResXResourceWriter.Generate" />
 
             
 
@@ -590,14 +623,22 @@
           <para>Adds a string resource to the resources.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the resource. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -624,8 +665,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the base path for the relative file path specified in a <see
-             cref="T:System.Resources.ResXFileRef" />
+            >Gets or sets the base path for the relative file path specified in a <see cref="T:System.Resources.ResXFileRef" />
 
             
 
@@ -687,8 +727,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling this method is the equivalent of calling <see
-             cref="M:System.Resources.ResXResourceWriter.Dispose" />
+            >Calling this method is the equivalent of calling <see cref="M:System.Resources.ResXResourceWriter.Dispose" />
 
             
 
@@ -698,8 +737,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.Resources.ResXResourceWriter" />
+            >Releases all resources used by the <see cref="T:System.Resources.ResXResourceWriter" />
 
             
 
@@ -744,36 +782,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Resources.ResXResourceWriter.Dispose" />
+            >The <see cref="M:System.Resources.ResXResourceWriter.Dispose" />
 
             
 
-             method calls the <see
-             cref="M:System.Resources.ResXResourceWriter.Generate" />
+             method calls the <see cref="M:System.Resources.ResXResourceWriter.Generate" />
 
             
 
              method, if necessary, before releasing managed and unmanaged system resources.</para
           >
           <para
-            >Calling <see
-             cref="M:System.Resources.ResXResourceWriter.Dispose" />
+            >Calling <see cref="M:System.Resources.ResXResourceWriter.Dispose" />
 
             
 
-             allows the system resources used by the <see
-             cref="T:System.Resources.ResXResourceWriter" />
+             allows the system resources used by the <see cref="T:System.Resources.ResXResourceWriter" />
 
             
 
-             to be reallocated for other purposes. For more information about <see
-             cref="M:System.Resources.ResXResourceWriter.Dispose" />
+             to be reallocated for other purposes. For more information about <see cref="M:System.Resources.ResXResourceWriter.Dispose" />
 
             
 
-            , see <format
-             type="text/html">
+            , see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
@@ -785,8 +817,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.Resources.ResXResourceWriter" />
+            >Releases all resources used by the <see cref="T:System.Resources.ResXResourceWriter" />
 
             
 
@@ -812,54 +843,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Resources.ResXResourceWriter.Dispose(System.Boolean)" />
+            >The <see cref="M:System.Resources.ResXResourceWriter.Dispose(System.Boolean)" />
 
             
 
-             method calls the <see
-             cref="M:System.Resources.ResXResourceWriter.Generate" />
+             method calls the <see cref="M:System.Resources.ResXResourceWriter.Generate" />
 
             
 
              method, if necessary, before releasing managed and unmanaged system resources.</para
           >
           <para
-            >This method is called by the public <see
-             cref="M:System.Resources.ResXResourceWriter.Dispose" />
+            >This method is called by the public <see cref="M:System.Resources.ResXResourceWriter.Dispose" />
 
             
 
-              method and the <see
-             cref="M:System.Object.Finalize" />
+              method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Resources.ResXResourceWriter" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Resources.ResXResourceWriter" />
 
             
 
@@ -869,8 +891,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Resources.ResXResourceWriter" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Resources.ResXResourceWriter" />
 
             
 
@@ -878,7 +899,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -902,8 +927,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member overrides the <see
-             cref="M:System.Object.Finalize" />
+            >This member overrides the <see cref="M:System.Object.Finalize" />
 
             
 
@@ -927,36 +951,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Resources.ResXResourceWriter.Generate" />
+            >The <see cref="M:System.Resources.ResXResourceWriter.Generate" />
 
             
 
-             method writes the resources to the output file or stream. If you want to write the resources as well as close the output file or stream, call the <see
-             cref="M:System.Resources.ResXResourceWriter.Close" />
+             method writes the resources to the output file or stream. If you want to write the resources as well as close the output file or stream, call the <see cref="M:System.Resources.ResXResourceWriter.Close" />
 
             
 
              method. </para
           >
           <para
-            >The <see
-             cref="M:System.Resources.ResXResourceWriter.Generate" />
+            >The <see cref="M:System.Resources.ResXResourceWriter.Generate" />
 
             
 
-             method can be called only once. After calling the <see
-             cref="M:System.Resources.ResXResourceWriter.Generate" />
+             method can be called only once. After calling the <see cref="M:System.Resources.ResXResourceWriter.Generate" />
 
             
 
-             method, all <see
-             cref="T:System.Resources.IResourceWriter" />
+             method, all <see cref="T:System.Resources.IResourceWriter" />
 
             
 
-             methods other than <see
-             cref="M:System.Resources.ResXResourceWriter.Close" />
+             methods other than <see cref="M:System.Resources.ResXResourceWriter.Close" />
 
             
 
@@ -966,8 +984,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes all resources added by the <see
-             cref="M:System.Resources.ResXResourceWriter.AddResource(System.String,System.Byte[])" />
+            >Writes all resources added by the <see cref="M:System.Resources.ResXResourceWriter.AddResource(System.String,System.Byte[])" />
 
             
 

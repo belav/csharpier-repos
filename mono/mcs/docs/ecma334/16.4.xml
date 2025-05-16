@@ -1,35 +1,37 @@
 <?xml version="1.0"?>
 <clause number="16.4" title="Namespace members">
   <paragraph
-    >A <non_terminal
-     where="16.4">namespace-member-declaration</non_terminal>
-
-    
-
-     is either a <non_terminal
-     where="16.2">namespace-declaration</non_terminal>
-
-    
-
-     (<hyperlink
-    >16.2</hyperlink>
-
-    
-
-    ) or a <non_terminal
-     where="16.5">type-declaration</non_terminal>
-
-    
-
-     (<hyperlink
-    >16.5</hyperlink>
-
-    
-
-    ). <grammar_production
+    >A <non_terminal where="16.4"
+      >namespace-member-declaration</non_terminal
     >
+
+    
+
+     is either a <non_terminal where="16.2"
+      >namespace-declaration</non_terminal
+    >
+
+    
+
+     (<hyperlink>16.2</hyperlink>
+
+    
+
+    ) or a <non_terminal where="16.5"
+      >type-declaration</non_terminal
+    >
+
+    
+
+     (<hyperlink>16.5</hyperlink>
+
+    
+
+    ). <grammar_production>
       <name>
-        <non_terminal where="16.4">namespace-member-declaration</non_terminal>
+        <non_terminal where="16.4"
+          >namespace-member-declaration</non_terminal
+        >
 
         
 
@@ -38,8 +40,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="16.4">namespace-member-declaration</non_terminal>
       </rhs>
       <rhs>
@@ -54,8 +55,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="16.2">namespace-declaration</non_terminal>
       </rhs>
       <rhs>
@@ -64,8 +64,9 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >A compilation unit or a namespace body can contain <non_terminal
-     where="16.4">namespace-member-declaration</non_terminal>
+    >A compilation unit or a namespace body can contain <non_terminal where="16.4"
+      >namespace-member-declaration</non_terminal
+    >
 
     
 

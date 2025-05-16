@@ -60,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear" />
 
             
 
@@ -91,13 +90,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear" />
 
             
 
-             class with a specified <see
-             cref="T:System.DateTime" />
+             class with a specified <see cref="T:System.DateTime" />
 
             
 
@@ -105,12 +102,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.DateTime" />
+          A <see cref="T:System.DateTime" />
 
           
 
@@ -140,18 +140,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear" />
 
             
 
-             class with a specified <see
-             cref="T:System.DateTime" />
+             class with a specified <see cref="T:System.DateTime" />
 
             
 
-             object and an integer that indicates whether <see
-             cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear.Value" />
+             object and an integer that indicates whether <see cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear.Value" />
 
             
 
@@ -159,24 +156,30 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.DateTime" />
+          A <see cref="T:System.DateTime" />
 
           
 
            object to initialize the current instance. </param
         >
         <param name="sign">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer that indicates whether <paramref
-           name="value" />
+          An integer that indicates whether <paramref name="value" />
 
           
 
@@ -209,8 +212,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -244,8 +246,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear.Parse(System.String)" />
+            >The <see cref="M:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear.Parse(System.String)" />
 
             
 
@@ -292,13 +293,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the specified <see
-             cref="T:System.String" />
+            >Converts the specified <see cref="T:System.String" />
 
             
 
-             into a <see
-             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear" />
+             into a <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear" />
 
             
 
@@ -308,13 +307,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear" />
+            >A <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear" />
 
             
 
-             object that is obtained from <paramref
-             name="value" />
+             object that is obtained from <paramref name="value" />
 
             
 
@@ -322,12 +319,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
@@ -377,13 +377,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear.Value" />
+            >Returns <see cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear.Value" />
 
             
 
-             as a <see
-             cref="T:System.String" />
+             as a <see cref="T:System.String" />
 
             
 
@@ -393,18 +391,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             that is obtained from <see
-             cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear.Value" />
+             that is obtained from <see cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear.Value" />
 
             
 
-             in the format "yyyy" or "-yyyy" if <see
-             cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear.Sign" />
+             in the format "yyyy" or "-yyyy" if <see cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear.Sign" />
 
             
 

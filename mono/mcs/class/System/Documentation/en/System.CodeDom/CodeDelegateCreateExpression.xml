@@ -38,36 +38,30 @@
 
         
 
-         represents code that creates a delegate. <see
-         cref="T:System.CodeDom.CodeDelegateCreateExpression" />
+         represents code that creates a delegate. <see cref="T:System.CodeDom.CodeDelegateCreateExpression" />
 
         
 
-         is often used with <see
-         cref="T:System.CodeDom.CodeAttachEventStatement" />
+         is often used with <see cref="T:System.CodeDom.CodeAttachEventStatement" />
 
         
 
-         or <see
-         cref="T:System.CodeDom.CodeRemoveEventStatement" />
+         or <see cref="T:System.CodeDom.CodeRemoveEventStatement" />
 
         
 
          to represent an event handler to attach or remove from an event.</para
       >
       <para
-        >The <see
-         cref="P:System.CodeDom.CodeDelegateCreateExpression.DelegateType" />
+        >The <see cref="P:System.CodeDom.CodeDelegateCreateExpression.DelegateType" />
 
         
 
-         property specifies the type of delegate to create. The <see
-         cref="P:System.CodeDom.CodeDelegateCreateExpression.TargetObject" />
+         property specifies the type of delegate to create. The <see cref="P:System.CodeDom.CodeDelegateCreateExpression.TargetObject" />
 
         
 
-         property indicates the object that contains the event-handler method. The <see
-         cref="P:System.CodeDom.CodeDelegateCreateExpression.MethodName" />
+         property indicates the object that contains the event-handler method. The <see cref="P:System.CodeDom.CodeDelegateCreateExpression.MethodName" />
 
         
 
@@ -100,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeDelegateCreateExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDelegateCreateExpression" />
 
             
 
@@ -136,8 +129,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeDelegateCreateExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDelegateCreateExpression" />
 
             
 
@@ -145,31 +137,41 @@
           >
         </summary>
         <param name="delegateType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeTypeReference" />
+          A <see cref="T:System.CodeDom.CodeTypeReference" />
 
           
 
            that indicates the data type of the delegate. </param
         >
         <param name="targetObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeExpression" />
+          A <see cref="T:System.CodeDom.CodeExpression" />
 
           
 
            that indicates the object containing the event-handler method. </param
         >
         <param name="methodName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

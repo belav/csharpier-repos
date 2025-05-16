@@ -19,41 +19,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.ExpressionsCollectionConverter" />
+        >The <see cref="T:System.Web.UI.Design.ExpressionsCollectionConverter" />
 
         
 
-         class converts an <see
-         cref="T:System.Web.UI.ExpressionBindingCollection" />
+         class converts an <see cref="T:System.Web.UI.ExpressionBindingCollection" />
 
         
 
          to a string for the property-editing grid at design time, which always appears as an empty string ("").</para
       >
       <para
-        >A designer host, such as vsprvslong, uses the <see
-         cref="T:System.Web.Compilation.ExpressionBuilder" />
+        >A designer host, such as vsprvslong, uses the <see cref="T:System.Web.Compilation.ExpressionBuilder" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.Design.ExpressionEditor" />
+         and <see cref="T:System.Web.UI.Design.ExpressionEditor" />
 
         
 
-         class implementations with the <see
-         cref="T:System.Web.UI.Design.ExpressionsCollectionEditor" />
+         class implementations with the <see cref="T:System.Web.UI.Design.ExpressionsCollectionEditor" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.Design.ExpressionsCollectionConverter" />
+         and <see cref="T:System.Web.UI.Design.ExpressionsCollectionConverter" />
 
         
 
-         classes to set the expression bindings for control properties at design time, and the <see
-         cref="T:System.Web.UI.Design.ControlPersister" />
+         classes to set the expression bindings for control properties at design time, and the <see cref="T:System.Web.UI.Design.ControlPersister" />
 
         
 
@@ -61,13 +54,11 @@
       >
       <block subset="none" type="note">
         <para
-          >You should never access a type converter directly. This implementation of <see
-           cref="T:System.ComponentModel.TypeConverter" />
+          >You should never access a type converter directly. This implementation of <see cref="T:System.ComponentModel.TypeConverter" />
 
           
 
-           is intended only for use by an <see
-           cref="T:System.Web.UI.ExpressionBindingCollection" />
+           is intended only for use by an <see cref="T:System.Web.UI.ExpressionBindingCollection" />
 
           
 
@@ -93,13 +84,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >You should never access a type converter directly. This implementation of <see
-               cref="T:System.ComponentModel.TypeConverter" />
+              >You should never access a type converter directly. This implementation of <see cref="T:System.ComponentModel.TypeConverter" />
 
               
 
-               is intended only for use by an <see
-               cref="T:System.Web.UI.ExpressionBindingCollection" />
+               is intended only for use by an <see cref="T:System.Web.UI.ExpressionBindingCollection" />
 
               
 
@@ -110,8 +99,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.ExpressionsCollectionConverter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.ExpressionsCollectionConverter" />
 
             
 
@@ -143,13 +131,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >You should never access a type converter directly. This implementation of <see
-               cref="T:System.ComponentModel.TypeConverter" />
+              >You should never access a type converter directly. This implementation of <see cref="T:System.ComponentModel.TypeConverter" />
 
               
 
-               is intended only for use by an <see
-               cref="T:System.Web.UI.ExpressionBindingCollection" />
+               is intended only for use by an <see cref="T:System.Web.UI.ExpressionBindingCollection" />
 
               
 
@@ -164,18 +150,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="destinationType" />
+            >If <paramref name="destinationType" />
 
             
 
-             is not of type <see
-             cref="T:System.String" />
+             is not of type <see cref="T:System.String" />
 
             
 
-            , the object produced by the type conversion; otherwise, if <paramref
-             name="destinationType" />
+            , the object produced by the type conversion; otherwise, if <paramref name="destinationType" />
 
             
 
@@ -183,38 +166,52 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            object that indicates the component or control the expression binding collection belongs to. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            object that can be used to provide additional culture information.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to convert. </param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

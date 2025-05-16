@@ -47,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Configuration.SmtpNetworkElement" />
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.SmtpNetworkElement" />
 
             
 
@@ -103,13 +102,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Configuration.SmtpNetworkElement.EnableSsl" />
+            >The <see cref="P:System.Net.Configuration.SmtpNetworkElement.EnableSsl" />
 
             
 
-             property indicates if SSL is used to access an SMTP mail server. The <see
-             cref="T:System.Net.Mail.SmtpClient" />
+             property indicates if SSL is used to access an SMTP mail server. The <see cref="T:System.Net.Mail.SmtpClient" />
 
             
 
@@ -171,33 +168,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting <see
-             cref="P:System.Net.Configuration.SmtpNetworkElement.DefaultCredentials" />
+            >Setting <see cref="P:System.Net.Configuration.SmtpNetworkElement.DefaultCredentials" />
 
             
 
-             takes precedence over setting <see
-             cref="P:System.Net.Configuration.SmtpNetworkElement.UserName" />
+             takes precedence over setting <see cref="P:System.Net.Configuration.SmtpNetworkElement.UserName" />
 
             
 
-             and <see
-             cref="P:System.Net.Configuration.SmtpNetworkElement.Password" />
+             and <see cref="P:System.Net.Configuration.SmtpNetworkElement.Password" />
 
             
 
-            . <see
-             cref="P:System.Net.Configuration.SmtpNetworkElement.UserName" />
+            . <see cref="P:System.Net.Configuration.SmtpNetworkElement.UserName" />
 
             
 
-             and <see
-             cref="P:System.Net.Configuration.SmtpNetworkElement.Password" />
+             and <see cref="P:System.Net.Configuration.SmtpNetworkElement.Password" />
 
             
 
-             are used only if <see
-             cref="P:System.Net.Configuration.SmtpNetworkElement.DefaultCredentials" />
+             are used only if <see cref="P:System.Net.Configuration.SmtpNetworkElement.DefaultCredentials" />
 
             
 
@@ -299,13 +290,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Configuration.SmtpNetworkElement.TargetName" />
+            >The <see cref="P:System.Net.Configuration.SmtpNetworkElement.TargetName" />
 
             
 
-             property allows an application to get or set the SPN to use for authentication when integrated Windows authentication with extended protection. If the <see
-             cref="P:System.Net.Configuration.SmtpNetworkElement.TargetName" />
+             property allows an application to get or set the SPN to use for authentication when integrated Windows authentication with extended protection. If the <see cref="P:System.Net.Configuration.SmtpNetworkElement.TargetName" />
 
             
 
@@ -341,33 +330,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting <see
-             cref="P:System.Net.Configuration.SmtpNetworkElement.DefaultCredentials" />
+            >Setting <see cref="P:System.Net.Configuration.SmtpNetworkElement.DefaultCredentials" />
 
             
 
-             takes precedence over setting <see
-             cref="P:System.Net.Configuration.SmtpNetworkElement.UserName" />
+             takes precedence over setting <see cref="P:System.Net.Configuration.SmtpNetworkElement.UserName" />
 
             
 
-             and <see
-             cref="P:System.Net.Configuration.SmtpNetworkElement.Password" />
+             and <see cref="P:System.Net.Configuration.SmtpNetworkElement.Password" />
 
             
 
-            . <see
-             cref="P:System.Net.Configuration.SmtpNetworkElement.UserName" />
+            . <see cref="P:System.Net.Configuration.SmtpNetworkElement.UserName" />
 
             
 
-             and <see
-             cref="P:System.Net.Configuration.SmtpNetworkElement.Password" />
+             and <see cref="P:System.Net.Configuration.SmtpNetworkElement.Password" />
 
             
 
-             are used only if <see
-             cref="P:System.Net.Configuration.SmtpNetworkElement.DefaultCredentials" />
+             are used only if <see cref="P:System.Net.Configuration.SmtpNetworkElement.DefaultCredentials" />
 
             
 

@@ -34,46 +34,38 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Resources.ResourceReader" />
+        >The <see cref="T:System.Resources.ResourceReader" />
 
         
 
-         class provides a standard implementation of the <see
-         cref="T:System.Resources.IResourceReader" />
+         class provides a standard implementation of the <see cref="T:System.Resources.IResourceReader" />
 
         
 
-         interface. A <see
-         cref="T:System.Resources.ResourceReader" />
+         interface. A <see cref="T:System.Resources.ResourceReader" />
 
         
 
-         instance represents either a standalone .resources file or a .resources file that is embedded in an assembly. It is used to enumerate the resources in a .resources file and retrieve its name/value pairs. It differs from the <see
-         cref="T:System.Resources.ResourceManager" />
+         instance represents either a standalone .resources file or a .resources file that is embedded in an assembly. It is used to enumerate the resources in a .resources file and retrieve its name/value pairs. It differs from the <see cref="T:System.Resources.ResourceManager" />
 
         
 
-         class, which is used to retrieve specified named resources from a .resources file that is embedded in an assembly. The <see
-         cref="T:System.Resources.ResourceManager" />
+         class, which is used to retrieve specified named resources from a .resources file that is embedded in an assembly. The <see cref="T:System.Resources.ResourceManager" />
 
         
 
-         class is used to retrieve resources whose names are known in advance, whereas the <see
-         cref="T:System.Resources.ResourceReader" />
+         class is used to retrieve resources whose names are known in advance, whereas the <see cref="T:System.Resources.ResourceReader" />
 
         
 
-         class is useful for retrieving resources whose number or precise names are not known at compile time. For example, an application may use a resources file to store configuration information that is organized into sections and items in a section, where the number of sections or items in a section is not known in advance. Resources can then be named generically (such as Section1, Section1Item1, Section1Item2, and so on) and retrieved by using a <see
-         cref="T:System.Resources.ResourceReader" />
+         class is useful for retrieving resources whose number or precise names are not known at compile time. For example, an application may use a resources file to store configuration information that is organized into sections and items in a section, where the number of sections or items in a section is not known in advance. Resources can then be named generically (such as Section1, Section1Item1, Section1Item2, and so on) and retrieved by using a <see cref="T:System.Resources.ResourceReader" />
 
         
 
          object.</para
       >
       <para
-        >For more information about using the <see
-         cref="T:System.Resources.ResourceReader" />
+        >For more information about using the <see cref="T:System.Resources.ResourceReader" />
 
         
 
@@ -120,38 +112,32 @@
         <h2>Instantiating a ResourceReader Object</h2>
       </format>
       <para
-        >A .resources file is a binary file that has been compiled from either a text file or an XML .resx file by <format
-         type="text/html">
+        >A .resources file is a binary file that has been compiled from either a text file or an XML .resx file by <format type="text/html">
           <a href="8ef159de-b660-4bec-9213-c3fbc4d1c6f4">Resgen.exe (Resource File Generator)</a>
         </format>
 
         
 
-        . A <see
-         cref="T:System.Resources.ResourceReader" />
+        . A <see cref="T:System.Resources.ResourceReader" />
 
         
 
          object can represent either a standalone .resources file or a .resources file that has been embedded in an assembly. </para
       >
       <para
-        >To instantiate a <see
-         cref="T:System.Resources.ResourceReader" />
+        >To instantiate a <see cref="T:System.Resources.ResourceReader" />
 
         
 
-         object that reads from a standalone .resources file, use the <see
-         cref="T:System.Resources.ResourceReader" />
+         object that reads from a standalone .resources file, use the <see cref="T:System.Resources.ResourceReader" />
 
         
 
-         class constructor with either an input stream or a string that contains the .resources file name. The following example illustrates both approaches. The first instantiates a <see
-         cref="T:System.Resources.ResourceReader" />
+         class constructor with either an input stream or a string that contains the .resources file name. The following example illustrates both approaches. The first instantiates a <see cref="T:System.Resources.ResourceReader" />
 
         
 
-         object that represents a .resources file named Resources1.resources by using its file name. The second instantiates a <see
-         cref="T:System.Resources.ResourceReader" />
+         object that represents a .resources file named Resources1.resources by using its file name. The second instantiates a <see cref="T:System.Resources.ResourceReader" />
 
         
 
@@ -159,33 +145,27 @@
       >
       <para>code reference: System.Resources.ResourceReader.Class#2</para>
       <para
-        >To create a <see
-         cref="T:System.Resources.ResourceReader" />
+        >To create a <see cref="T:System.Resources.ResourceReader" />
 
         
 
-         object that represents an embedded .resources file, instantiate an <see
-         cref="T:System.Reflection.Assembly" />
+         object that represents an embedded .resources file, instantiate an <see cref="T:System.Reflection.Assembly" />
 
         
 
-         object from the assembly in which the .resources file is embedded. Its <see
-         cref="M:System.Reflection.Assembly.GetManifestResourceStream(System.Type,System.String)" />
+         object from the assembly in which the .resources file is embedded. Its <see cref="M:System.Reflection.Assembly.GetManifestResourceStream(System.Type,System.String)" />
 
         
 
-         method returns a <see
-         cref="T:System.IO.Stream" />
+         method returns a <see cref="T:System.IO.Stream" />
 
         
 
-         object that can be passed to the <see
-         cref="M:System.Resources.ResourceReader.#ctor(System.IO.Stream)" />
+         object that can be passed to the <see cref="M:System.Resources.ResourceReader.#ctor(System.IO.Stream)" />
 
         
 
-         constructor. The following example instantiates a <see
-         cref="T:System.Resources.ResourceReader" />
+         constructor. The following example instantiates a <see cref="T:System.Resources.ResourceReader" />
 
         
 
@@ -199,13 +179,11 @@
         <h2>Enumerating a ResourceReader Object's Resources</h2>
       </format>
       <para
-        >To enumerate the resources in a .resources file, you call the <see
-         cref="M:System.Resources.ResourceReader.GetEnumerator" />
+        >To enumerate the resources in a .resources file, you call the <see cref="M:System.Resources.ResourceReader.GetEnumerator" />
 
         
 
-         method, which returns an <see
-         cref="T:System.Collections.IDictionaryEnumerator" />
+         method, which returns an <see cref="T:System.Collections.IDictionaryEnumerator" />
 
         
 
@@ -213,38 +191,31 @@
       >
       <block subset="none" type="note">
         <para
-          >Although the <see
-           cref="T:System.Resources.ResourceReader" />
+          >Although the <see cref="T:System.Resources.ResourceReader" />
 
           
 
-           class implements the <see
-           cref="T:System.Collections.IEnumerable" />
+           class implements the <see cref="T:System.Collections.IEnumerable" />
 
           
 
-           interface and the <see
-           cref="M:System.Collections.IEnumerable.GetEnumerator" />
+           interface and the <see cref="M:System.Collections.IEnumerable.GetEnumerator" />
 
           
 
-           method, the <see
-           cref="M:System.Resources.ResourceReader.GetEnumerator" />
+           method, the <see cref="M:System.Resources.ResourceReader.GetEnumerator" />
 
           
 
-           method does not provide the <see
-           cref="M:System.Collections.IEnumerable.GetEnumerator" />
+           method does not provide the <see cref="M:System.Collections.IEnumerable.GetEnumerator" />
 
           
 
-           implementation. Instead, the <see
-           cref="M:System.Resources.ResourceReader.GetEnumerator" />
+           implementation. Instead, the <see cref="M:System.Resources.ResourceReader.GetEnumerator" />
 
           
 
-           method  returns an <see
-           cref="T:System.Collections.IDictionaryEnumerator" />
+           method  returns an <see cref="T:System.Collections.IDictionaryEnumerator" />
 
           
 
@@ -255,13 +226,11 @@
       <list type="bullet">
         <item>
           <para
-            >You can iterate each resource in the <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >You can iterate each resource in the <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
-             collection and use <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+             collection and use <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
@@ -270,13 +239,11 @@
         </item>
         <item>
           <para
-            >You can retrieve the name of each resource when you iterate the <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >You can retrieve the name of each resource when you iterate the <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
-             collection and call the <see
-             cref="M:System.Resources.ResourceReader.GetResourceData(System.String,System.String@,System.Byte[]@)" />
+             collection and call the <see cref="M:System.Resources.ResourceReader.GetResourceData(System.String,System.String@,System.Byte[]@)" />
 
             
 
@@ -291,26 +258,22 @@
         <h2>Retrieving Resources by Using IDictionaryEnumerator Properties</h2>
       </format>
       <para
-        >The first method of enumerating the resources in a .resources file involves directly retrieving each resource's name/value pair. After you call the IDictionaryEnumerator.MoveNext method to move to each resource in the collection, you can retrieve the resource name from the <see
-         cref="P:System.Collections.IDictionaryEnumerator.Key" />
+        >The first method of enumerating the resources in a .resources file involves directly retrieving each resource's name/value pair. After you call the IDictionaryEnumerator.MoveNext method to move to each resource in the collection, you can retrieve the resource name from the <see cref="P:System.Collections.IDictionaryEnumerator.Key" />
 
         
 
-         property and the resource data from the <see
-         cref="P:System.Collections.IDictionaryEnumerator.Value" />
+         property and the resource data from the <see cref="P:System.Collections.IDictionaryEnumerator.Value" />
 
         
 
          property.</para
       >
       <para
-        >The following example shows how to retrieve the name and value of each resource in a .resources file by using the <see
-         cref="P:System.Collections.IDictionaryEnumerator.Key" />
+        >The following example shows how to retrieve the name and value of each resource in a .resources file by using the <see cref="P:System.Collections.IDictionaryEnumerator.Key" />
 
         
 
-         and <see
-         cref="P:System.Collections.IDictionaryEnumerator.Value" />
+         and <see cref="P:System.Collections.IDictionaryEnumerator.Value" />
 
         
 
@@ -337,8 +300,7 @@ Label15="Alternate Email Address:"</code>
         <system>resgen ApplicationResources.txt</system>
       </para>
       <para
-        >The following example then uses the <see
-         cref="T:System.Resources.ResourceReader" />
+        >The following example then uses the <see cref="T:System.Resources.ResourceReader" />
 
         
 
@@ -346,8 +308,7 @@ Label15="Alternate Email Address:"</code>
       >
       <para>code reference: System.Resources.ResourceReader.Class#1</para>
       <para
-        >The attempt to retrieve resource data from the <see
-         cref="P:System.Collections.IDictionaryEnumerator.Value" />
+        >The attempt to retrieve resource data from the <see cref="P:System.Collections.IDictionaryEnumerator.Value" />
 
         
 
@@ -356,8 +317,7 @@ Label15="Alternate Email Address:"</code>
       <list type="bullet">
         <item>
           <para
-            >A <see
-             cref="T:System.FormatException" />
+            >A <see cref="T:System.FormatException" />
 
             
 
@@ -366,8 +326,7 @@ Label15="Alternate Email Address:"</code>
         </item>
         <item>
           <para
-            >A <see
-             cref="T:System.IO.FileNotFoundException" />
+            >A <see cref="T:System.IO.FileNotFoundException" />
 
             
 
@@ -376,8 +335,7 @@ Label15="Alternate Email Address:"</code>
         </item>
         <item>
           <para
-            >A <see
-             cref="T:System.TypeLoadException" />
+            >A <see cref="T:System.TypeLoadException" />
 
             
 
@@ -386,13 +344,11 @@ Label15="Alternate Email Address:"</code>
         </item>
       </list>
       <para
-        >Typically, these exceptions are thrown if the .resources file has been modified manually, if the assembly in which a type is defined has either not been included with an application or has been inadvertently deleted, or if the assembly is an older version that predates a type. If one of these exceptions is thrown, you can retrieve resources by enumerating each resource and calling the <see
-         cref="M:System.Resources.ResourceReader.GetResourceData(System.String,System.String@,System.Byte[]@)" />
+        >Typically, these exceptions are thrown if the .resources file has been modified manually, if the assembly in which a type is defined has either not been included with an application or has been inadvertently deleted, or if the assembly is an older version that predates a type. If one of these exceptions is thrown, you can retrieve resources by enumerating each resource and calling the <see cref="M:System.Resources.ResourceReader.GetResourceData(System.String,System.String@,System.Byte[]@)" />
 
         
 
-         method, as the following section shows. This approach provides you with some information about the data type that the <see
-         cref="P:System.Collections.IDictionaryEnumerator.Value" />
+         method, as the following section shows. This approach provides you with some information about the data type that the <see cref="P:System.Collections.IDictionaryEnumerator.Value" />
 
         
 
@@ -405,41 +361,34 @@ Label15="Alternate Email Address:"</code>
         <h2>Retrieving Resources by Name with GetResourceData</h2>
       </format>
       <para
-        >The second approach to enumerating resources in a .resources file also involves navigating through the resources in the file by calling the IDictionaryEnumerator.MoveNext method. For each resource, you retrieve the resource's name from the <see
-         cref="P:System.Collections.IDictionaryEnumerator.Key" />
+        >The second approach to enumerating resources in a .resources file also involves navigating through the resources in the file by calling the IDictionaryEnumerator.MoveNext method. For each resource, you retrieve the resource's name from the <see cref="P:System.Collections.IDictionaryEnumerator.Key" />
 
         
 
-         property, which is then passed to the <see
-         cref="M:System.Resources.ResourceReader.GetResourceData(System.String,System.String@,System.Byte[]@)" />
+         property, which is then passed to the <see cref="M:System.Resources.ResourceReader.GetResourceData(System.String,System.String@,System.Byte[]@)" />
 
         
 
-         method to retrieve the resource's data. This is returned as a byte array in the <paramref
-         name="resourceData" />
+         method to retrieve the resource's data. This is returned as a byte array in the <paramref name="resourceData" />
 
         
 
          argument.</para
       >
       <para
-        >This approach is more awkward than retrieving the resource name and value from the <see
-         cref="P:System.Collections.IDictionaryEnumerator.Key" />
+        >This approach is more awkward than retrieving the resource name and value from the <see cref="P:System.Collections.IDictionaryEnumerator.Key" />
 
         
 
-         and <see
-         cref="P:System.Collections.IDictionaryEnumerator.Value" />
+         and <see cref="P:System.Collections.IDictionaryEnumerator.Value" />
 
         
 
-         properties, because it returns the actual bytes that form the resource value. However, if the attempt to retrieve the resource throws an exception, the <see
-         cref="M:System.Resources.ResourceReader.GetResourceData(System.String,System.String@,System.Byte[]@)" />
+         properties, because it returns the actual bytes that form the resource value. However, if the attempt to retrieve the resource throws an exception, the <see cref="M:System.Resources.ResourceReader.GetResourceData(System.String,System.String@,System.Byte[]@)" />
 
         
 
-         method can help identify the source of the exception by supplying information about the resource's data type. For more information about the string that indicates the resource's data type, see <see
-         cref="M:System.Resources.ResourceReader.GetResourceData(System.String,System.String@,System.Byte[]@)" />
+         method can help identify the source of the exception by supplying information about the resource's data type. For more information about the string that indicates the resource's data type, see <see cref="M:System.Resources.ResourceReader.GetResourceData(System.String,System.String@,System.Byte[]@)" />
 
         
 
@@ -467,13 +416,11 @@ Label15="Alternate Email Address:"</code>
           <para>Compile and run the following code to enumerate the resources in the ContactResources.resources file.</para>
           <para>code reference: System.Resources.ResourceReader.Class#6</para>
           <para
-            >After modifying the source code (for example, by deliberately throwing a <see
-             cref="T:System.FormatException" />
+            >After modifying the source code (for example, by deliberately throwing a <see cref="T:System.FormatException" />
 
             
 
-             at the end of the try block) or renaming the Library.dll assembly so that it is unavailable at runtime, you can run the example to see how calls to <see
-             cref="M:System.Resources.ResourceReader.GetResourceData(System.String,System.String@,System.Byte[]@)" />
+             at the end of the try block) or renaming the Library.dll assembly so that it is unavailable at runtime, you can run the example to see how calls to <see cref="M:System.Resources.ResourceReader.GetResourceData(System.String,System.String@,System.Byte[]@)" />
 
             
 
@@ -508,38 +455,31 @@ Label15="Alternate Email Address:"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Resources.ResourceReader.#ctor(System.IO.Stream)" />
+            >The <see cref="M:System.Resources.ResourceReader.#ctor(System.IO.Stream)" />
 
             
 
-             constructor instantiates a <see
-             cref="T:System.Resources.ResourceReader" />
+             constructor instantiates a <see cref="T:System.Resources.ResourceReader" />
 
             
 
-             object that retrieves resources either from a standalone .resources file or from a .resources file that is embedded in an assembly. To read from a standalone .resources file, instantiate a <see
-             cref="T:System.IO.Stream" />
+             object that retrieves resources either from a standalone .resources file or from a .resources file that is embedded in an assembly. To read from a standalone .resources file, instantiate a <see cref="T:System.IO.Stream" />
 
             
 
-             object and pass it to the <see
-             cref="M:System.Resources.ResourceReader.#ctor(System.IO.Stream)" />
+             object and pass it to the <see cref="M:System.Resources.ResourceReader.#ctor(System.IO.Stream)" />
 
             
 
-             constructor. To read from an embedded .resources file, call the <see
-             cref="M:System.Reflection.Assembly.GetManifestResourceStream(System.String)" />
+             constructor. To read from an embedded .resources file, call the <see cref="M:System.Reflection.Assembly.GetManifestResourceStream(System.String)" />
 
             
 
-             method with the case-sensitive name of the .resources file, and pass the returned <see
-             cref="T:System.IO.Stream" />
+             method with the case-sensitive name of the .resources file, and pass the returned <see cref="T:System.IO.Stream" />
 
             
 
-             object to the <see
-             cref="M:System.Resources.ResourceReader.#ctor(System.IO.Stream)" />
+             object to the <see cref="M:System.Resources.ResourceReader.#ctor(System.IO.Stream)" />
 
             
 
@@ -548,7 +488,7 @@ Label15="Alternate Email Address:"</code>
           <block subset="none" type="note">
             <para
               >Using an instance of this object with untrusted data is a security risk. Use this object only with trusted data. For more information, see <see
-               cref="http://go.microsoft.com/fwlink/?LinkId=330378"
+                cref="http://go.microsoft.com/fwlink/?LinkId=330378"
                 >Untrusted Data Security Risks</see
               >
 
@@ -561,8 +501,7 @@ Label15="Alternate Email Address:"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Resources.ResourceReader" />
+            >Initializes a new instance of the <see cref="T:System.Resources.ResourceReader" />
 
             
 
@@ -570,7 +509,11 @@ Label15="Alternate Email Address:"</code>
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -598,18 +541,15 @@ Label15="Alternate Email Address:"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Resources.ResourceReader.#ctor(System.String)" />
+            >The <see cref="M:System.Resources.ResourceReader.#ctor(System.String)" />
 
             
 
-             constructor instantiates a <see
-             cref="T:System.Resources.ResourceReader" />
+             constructor instantiates a <see cref="T:System.Resources.ResourceReader" />
 
             
 
-             object that retrieves resources from a standalone .resources file. To retrieve resources from an embedded .resources file, use the <see
-             cref="M:System.Resources.ResourceReader.#ctor(System.IO.Stream)" />
+             object that retrieves resources from a standalone .resources file. To retrieve resources from an embedded .resources file, use the <see cref="M:System.Resources.ResourceReader.#ctor(System.IO.Stream)" />
 
             
 
@@ -618,7 +558,7 @@ Label15="Alternate Email Address:"</code>
           <block subset="none" type="note">
             <para
               >Using an instance of this object with untrusted data is a security risk. Use this object only with trusted data. For more information, see <see
-               cref="http://go.microsoft.com/fwlink/?LinkId=330378"
+                cref="http://go.microsoft.com/fwlink/?LinkId=330378"
                 >Untrusted Data Security Risks</see
               >
 
@@ -631,8 +571,7 @@ Label15="Alternate Email Address:"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Resources.ResourceReader" />
+            >Initializes a new instance of the <see cref="T:System.Resources.ResourceReader" />
 
             
 
@@ -640,12 +579,15 @@ Label15="Alternate Email Address:"</code>
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The path and name of the resource file to read. <paramref
-           name="filename" />
+          The path and name of the resource file to read. <paramref name="filename" />
 
           
 
@@ -683,8 +625,7 @@ Label15="Alternate Email Address:"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all operating system resources associated with this <see
-             cref="T:System.Resources.ResourceReader" />
+            >Releases all operating system resources associated with this <see cref="T:System.Resources.ResourceReader" />
 
             
 
@@ -711,18 +652,15 @@ Label15="Alternate Email Address:"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you are finished using this instance of <see
-             cref="T:System.Resources.ResourceReader" />
+            >When you are finished using this instance of <see cref="T:System.Resources.ResourceReader" />
 
             
 
-            , call <see
-             cref="M:System.Resources.ResourceReader.Dispose" />
+            , call <see cref="M:System.Resources.ResourceReader.Dispose" />
 
             
 
-             to release all resources used by this instance. You should eliminate further references to this <see
-             cref="T:System.Resources.ResourceReader" />
+             to release all resources used by this instance. You should eliminate further references to this <see cref="T:System.Resources.ResourceReader" />
 
             
 
@@ -733,8 +671,7 @@ Label15="Alternate Email Address:"</code>
 
             
 
-             calls the private Dispose(Boolean) method, which contains the code to release managed and unmanaged resources. For more information, see <format
-             type="text/html">
+             calls the private Dispose(Boolean) method, which contains the code to release managed and unmanaged resources. For more information, see <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -746,8 +683,7 @@ Label15="Alternate Email Address:"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the current instance of the <see
-             cref="T:System.Resources.ResourceReader" />
+            >Releases all resources used by the current instance of the <see cref="T:System.Resources.ResourceReader" />
 
             
 
@@ -779,41 +715,34 @@ Label15="Alternate Email Address:"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you enumerate resources by calling the <see
-             cref="M:System.Resources.ResourceReader.GetEnumerator" />
+            >Typically, you enumerate resources by calling the <see cref="M:System.Resources.ResourceReader.GetEnumerator" />
 
             
 
-             method and then repeatedly calling the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             method and then repeatedly calling the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             method on the returned <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+             method on the returned <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
-             object until the method returns false. The resource name is available from the <see
-             cref="P:System.Collections.IDictionaryEnumerator.Key" />
+             object until the method returns false. The resource name is available from the <see cref="P:System.Collections.IDictionaryEnumerator.Key" />
 
             
 
-             property; its value from the <see
-             cref="P:System.Collections.IDictionaryEnumerator.Value" />
+             property; its value from the <see cref="P:System.Collections.IDictionaryEnumerator.Value" />
 
             
 
              property. The example illustrates how to enumerate resources in this way.</para
           >
           <para
-            >The implementation of the <see
-             cref="P:System.Collections.IDictionaryEnumerator.Value" />
+            >The implementation of the <see cref="P:System.Collections.IDictionaryEnumerator.Value" />
 
             
 
-             property by the <see
-             cref="T:System.Resources.ResourceReader" />
+             property by the <see cref="T:System.Resources.ResourceReader" />
 
             
 
@@ -840,13 +769,11 @@ Label15="Alternate Email Address:"</code>
             </item>
           </list>
           <para
-            >You can handle the exception by calling the <see
-             cref="M:System.Resources.ResourceReader.GetResourceData(System.String,System.String@,System.Byte[]@)" />
+            >You can handle the exception by calling the <see cref="M:System.Resources.ResourceReader.GetResourceData(System.String,System.String@,System.Byte[]@)" />
 
             
 
-             method to retrieve information about the data type and the byte array assigned to the named resource. For more information, see the "Retrieving Resources by Name with GetResourceData" section in the <see
-             cref="T:System.Resources.ResourceReader" />
+             method to retrieve information about the data type and the byte array assigned to the named resource. For more information, see the "Retrieving Resources by Name with GetResourceData" section in the <see cref="T:System.Resources.ResourceReader" />
 
             
 
@@ -854,18 +781,15 @@ Label15="Alternate Email Address:"</code>
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Resources.ResourceReader" />
+              >The <see cref="T:System.Resources.ResourceReader" />
 
               
 
-               class includes two methods that return enumerators. The <see
-               cref="M:System.Resources.ResourceReader.GetEnumerator" />
+               class includes two methods that return enumerators. The <see cref="M:System.Resources.ResourceReader.GetEnumerator" />
 
               
 
-               method returns an <see
-               cref="T:System.Collections.IDictionaryEnumerator" />
+               method returns an <see cref="T:System.Collections.IDictionaryEnumerator" />
 
               
 
@@ -876,8 +800,7 @@ Label15="Alternate Email Address:"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator for this <see
-             cref="T:System.Resources.ResourceReader" />
+            >Returns an enumerator for this <see cref="T:System.Resources.ResourceReader" />
 
             
 
@@ -887,8 +810,7 @@ Label15="Alternate Email Address:"</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator for this <see
-             cref="T:System.Resources.ResourceReader" />
+            >An enumerator for this <see cref="T:System.Resources.ResourceReader" />
 
             
 
@@ -954,28 +876,23 @@ Label15="Alternate Email Address:"</code>
 
             
 
-             is an explicit interface implementation. It can be used only when the <see
-             cref="T:System.Resources.ResourceReader" />
+             is an explicit interface implementation. It can be used only when the <see cref="T:System.Resources.ResourceReader" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IEnumerable" />
+             instance is cast to an <see cref="T:System.Collections.IEnumerable" />
 
             
 
-             interface. The recommended approach to enumerating the resources in a .resources file is to call the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             interface. The recommended approach to enumerating the resources in a .resources file is to call the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             method of the <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+             method of the <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
-             object returned by the <see
-             cref="M:System.Resources.ResourceReader.GetEnumerator" />
+             object returned by the <see cref="M:System.Resources.ResourceReader.GetEnumerator" />
 
             
 
@@ -985,8 +902,7 @@ Label15="Alternate Email Address:"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator for this <see
-             cref="T:System.Resources.ResourceReader" />
+            >Returns an enumerator for this <see cref="T:System.Resources.ResourceReader" />
 
             
 
@@ -996,8 +912,7 @@ Label15="Alternate Email Address:"</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator for this <see
-             cref="T:System.Resources.ResourceReader" />
+            >An enumerator for this <see cref="T:System.Resources.ResourceReader" />
 
             
 
@@ -1017,13 +932,11 @@ Label15="Alternate Email Address:"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Resources.ResourceReader" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Resources.ResourceReader" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IDisposable" />
+             instance is cast to an <see cref="T:System.IDisposable" />
 
             
 
@@ -1033,8 +946,7 @@ Label15="Alternate Email Address:"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.Resources.ResourceReader" />
+            >Releases all resources used by the <see cref="T:System.Resources.ResourceReader" />
 
             
 

@@ -1,137 +1,114 @@
 <?xml version="1.0"?>
 <clause number="11.1.4" title="Integral types">
   <paragraph
-    >C# supports nine integral types: <keyword
-    >sbyte</keyword>
+    >C# supports nine integral types: <keyword>sbyte</keyword>
 
     
 
-    , <keyword
-    >byte</keyword>
+    , <keyword>byte</keyword>
 
     
 
-    , <keyword
-    >short</keyword>
+    , <keyword>short</keyword>
 
     
 
-    , <keyword
-    >ushort</keyword>
+    , <keyword>ushort</keyword>
 
     
 
-    , <keyword
-    >int</keyword>
+    , <keyword>int</keyword>
 
     
 
-    , <keyword
-    >uint</keyword>
+    , <keyword>uint</keyword>
 
     
 
-    , <keyword
-    >long</keyword>
+    , <keyword>long</keyword>
 
     
 
-    , <keyword
-    >ulong</keyword>
+    , <keyword>ulong</keyword>
 
     
 
-    , and <keyword
-    >char</keyword>
+    , and <keyword>char</keyword>
 
     
 
-    . The integral types have the following sizes and ranges of values: <list
-    >
+    . The integral types have the following sizes and ranges of values: <list>
       <list_item
-        > The <keyword
-        >sbyte</keyword>
+        > The <keyword>sbyte</keyword>
 
         
 
          type represents signed 8-bit integers with values between -128 and 127. </list_item
       >
       <list_item
-        > The <keyword
-        >byte</keyword>
+        > The <keyword>byte</keyword>
 
         
 
          type represents unsigned 8-bit integers with values between 0 and 255. </list_item
       >
       <list_item
-        > The <keyword
-        >short</keyword>
+        > The <keyword>short</keyword>
 
         
 
          type represents signed 16-bit integers with values between -32768 and 32767. </list_item
       >
       <list_item
-        > The <keyword
-        >ushort</keyword>
+        > The <keyword>ushort</keyword>
 
         
 
          type represents unsigned 16-bit integers with values between 0 and 65535. </list_item
       >
       <list_item
-        > The <keyword
-        >int</keyword>
+        > The <keyword>int</keyword>
 
         
 
          type represents signed 32-bit integers with values between -2147483648 and 2147483647. </list_item
       >
       <list_item
-        > The <keyword
-        >uint</keyword>
+        > The <keyword>uint</keyword>
 
         
 
          type represents unsigned 32-bit integers with values between 0 and 4294967295. </list_item
       >
       <list_item
-        > The <keyword
-        >long</keyword>
+        > The <keyword>long</keyword>
 
         
 
          type represents signed 64-bit integers with values between -9223372036854775808 and 9223372036854775807. </list_item
       >
       <list_item
-        > The <keyword
-        >ulong</keyword>
+        > The <keyword>ulong</keyword>
 
         
 
          type represents unsigned 64-bit integers with values between 0 and 18446744073709551615. </list_item
       >
       <list_item
-        > The <keyword
-        >char</keyword>
+        > The <keyword>char</keyword>
 
         
 
-         type represents unsigned 16-bit integers with values between 0 and 65535. The set of possible values for the <keyword
-        >char</keyword>
+         type represents unsigned 16-bit integers with values between 0 and 65535. The set of possible values for the <keyword>char</keyword>
 
         
 
          type corresponds to the Unicode character set. <note
-
-          >[Note: Although <keyword
-          >char</keyword>
+          >[Note: Although <keyword>char</keyword>
 
           
 
-           has the same representation as <keyword
-          >ushort</keyword>
+           has the same representation as <keyword>ushort</keyword>
 
           
 
@@ -141,110 +118,92 @@
     </list>
   </paragraph>
   <paragraph
-    >The <non_terminal
-     where="11.1">integral-type</non_terminal>
+    >The <non_terminal where="11.1"
+      >integral-type</non_terminal
+    >
 
     
 
-     unary and binary operators always operate with signed 32-bit precision, unsigned 32-bit precision, signed 64-bit precision, or unsigned 64-bit precision: <list
-    >
+     unary and binary operators always operate with signed 32-bit precision, unsigned 32-bit precision, signed 64-bit precision, or unsigned 64-bit precision: <list>
       <list_item
-        > For the unary + and ~ operators, the operand is converted to type T, where T is the first of <keyword
-        >int</keyword>
+        > For the unary + and ~ operators, the operand is converted to type T, where T is the first of <keyword>int</keyword>
 
         
 
-        , <keyword
-        >uint</keyword>
+        , <keyword>uint</keyword>
 
         
 
-        , <keyword
-        >long</keyword>
+        , <keyword>long</keyword>
 
         
 
-        , and <keyword
-        >ulong</keyword>
+        , and <keyword>ulong</keyword>
 
         
 
          that can fully represent all possible values of the operand. The operation is then performed using the precision of type T, and the type of the result is T. </list_item
       >
       <list_item
-        > For the unary  -operator, the operand is converted to type T, where T is the first of <keyword
-        >int</keyword>
+        > For the unary  -operator, the operand is converted to type T, where T is the first of <keyword>int</keyword>
 
         
 
-         and <keyword
-        >long</keyword>
+         and <keyword>long</keyword>
 
         
 
-         that can fully represent all possible values of the operand. The operation is then performed using the precision of type T, and the type of the result is T. The unary  -operator cannot be applied to operands of type <keyword
-        >ulong</keyword>
+         that can fully represent all possible values of the operand. The operation is then performed using the precision of type T, and the type of the result is T. The unary  -operator cannot be applied to operands of type <keyword>ulong</keyword>
 
         
 
         . </list_item
       >
       <list_item
-        > For the binary +, -, *, /, %, &amp;, ^, |, ==, !=, &gt;, &lt;, &gt;=, and &lt;= operators, the operands are converted to type T, where T is the first of <keyword
-        >int</keyword>
+        > For the binary +, -, *, /, %, &amp;, ^, |, ==, !=, &gt;, &lt;, &gt;=, and &lt;= operators, the operands are converted to type T, where T is the first of <keyword>int</keyword>
 
         
 
-        , <keyword
-        >uint</keyword>
+        , <keyword>uint</keyword>
 
         
 
-        , <keyword
-        >long</keyword>
+        , <keyword>long</keyword>
 
         
 
-        , and <keyword
-        >ulong</keyword>
+        , and <keyword>ulong</keyword>
 
         
 
-         that can fully represent all possible values of both operands. The operation is then performed using the precision of type T, and the type of the result is T (or <keyword
-        >bool</keyword>
+         that can fully represent all possible values of both operands. The operation is then performed using the precision of type T, and the type of the result is T (or <keyword>bool</keyword>
 
         
 
-         for the relational operators). It is not permitted for one operand to be of type <keyword
-        >long</keyword>
+         for the relational operators). It is not permitted for one operand to be of type <keyword>long</keyword>
 
         
 
-         and the other to be of type <keyword
-        >ulong</keyword>
+         and the other to be of type <keyword>ulong</keyword>
 
         
 
          with the binary operators. </list_item
       >
       <list_item
-        > For the binary &lt;&lt; and &gt;&gt; operators, the left operand is converted to type T, where T is the first of <keyword
-        >int</keyword>
+        > For the binary &lt;&lt; and &gt;&gt; operators, the left operand is converted to type T, where T is the first of <keyword>int</keyword>
 
         
 
-        , <keyword
-        >uint</keyword>
+        , <keyword>uint</keyword>
 
         
 
-        , <keyword
-        >long</keyword>
+        , <keyword>long</keyword>
 
         
 
-        , and <keyword
-        >ulong</keyword>
+        , and <keyword>ulong</keyword>
 
         
 
@@ -253,86 +212,74 @@
     </list>
   </paragraph>
   <paragraph
-    >The <keyword
-    >char</keyword>
+    >The <keyword>char</keyword>
 
     
 
-     type is classified as an integral type, but it differs from the other integral types in two ways: <list
-    >
+     type is classified as an integral type, but it differs from the other integral types in two ways: <list>
       <list_item
-        > There are no implicit conversions from other types to the <keyword
-        >char</keyword>
+        > There are no implicit conversions from other types to the <keyword>char</keyword>
 
         
 
-         type. In particular, even though the <keyword
-        >sbyte</keyword>
+         type. In particular, even though the <keyword>sbyte</keyword>
 
         
 
-        , <keyword
-        >byte</keyword>
+        , <keyword>byte</keyword>
 
         
 
-        , and <keyword
-        >ushort</keyword>
+        , and <keyword>ushort</keyword>
 
         
 
-         types have ranges of values that are fully representable using the <keyword
-        >char</keyword>
+         types have ranges of values that are fully representable using the <keyword>char</keyword>
 
         
 
-         type, implicit conversions from <keyword
-        >sbyte</keyword>
+         type, implicit conversions from <keyword>sbyte</keyword>
 
         
 
-        , <keyword
-        >byte</keyword>
+        , <keyword>byte</keyword>
 
         
 
-        , or <keyword
-        >ushort</keyword>
+        , or <keyword>ushort</keyword>
 
         
 
-         to <keyword
-        >char</keyword>
+         to <keyword>char</keyword>
 
         
 
          do not exist. </list_item
       >
       <list_item
-        > Constants of the <keyword
-        >char</keyword>
+        > Constants of the <keyword>char</keyword>
 
         
 
          type must be written as <non_terminal
-         where="9.4.4.4">character-literal</non_terminal>
+          where="9.4.4.4"
+          >character-literal</non_terminal
+        >
 
         
 
-        s or as <non_terminal
-         where="9.4.4.2">integer-literal</non_terminal>
+        s or as <non_terminal where="9.4.4.2"
+          >integer-literal</non_terminal
+        >
 
         
 
-        s in combination with a cast to type <keyword
-        >char</keyword>
+        s in combination with a cast to type <keyword>char</keyword>
 
         
 
         . <example
-
-          >[Example: For example, (<keyword
-          >char</keyword>
+          >[Example: For example, (<keyword>char</keyword>
 
           
 
@@ -343,12 +290,13 @@
   </paragraph>
   <paragraph
     >The checked and unchecked operators and statements are used to control overflow checking for  <non_terminal
-     where="11.1">integral-type</non_terminal>
+      where="11.1"
+      >integral-type</non_terminal
+    >
 
     
 
-     arithmetic operations and conversions (<hyperlink
-    >14.5.12</hyperlink>
+     arithmetic operations and conversions (<hyperlink>14.5.12</hyperlink>
 
     
 

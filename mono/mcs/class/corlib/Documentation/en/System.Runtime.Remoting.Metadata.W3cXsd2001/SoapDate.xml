@@ -60,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDate" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDate" />
 
             
 
@@ -91,13 +90,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDate" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDate" />
 
             
 
-             class with a specified <see
-             cref="T:System.DateTime" />
+             class with a specified <see cref="T:System.DateTime" />
 
             
 
@@ -105,12 +102,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.DateTime" />
+          A <see cref="T:System.DateTime" />
 
           
 
@@ -139,8 +139,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer of less than 0 indicates a negative <paramref
-             name="sign" />
+            >An integer of less than 0 indicates a negative <paramref name="sign" />
 
             
 
@@ -150,18 +149,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDate" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDate" />
 
             
 
-             class with a specified <see
-             cref="T:System.DateTime" />
+             class with a specified <see cref="T:System.DateTime" />
 
             
 
-             object and an integer that indicates whether <see
-             cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDate.Value" />
+             object and an integer that indicates whether <see cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDate.Value" />
 
             
 
@@ -169,24 +165,30 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.DateTime" />
+          A <see cref="T:System.DateTime" />
 
           
 
            object to initialize the current instance. </param
         >
         <param name="sign">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer that indicates whether <paramref
-           name="value" />
+          An integer that indicates whether <paramref name="value" />
 
           
 
@@ -219,8 +221,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -254,8 +255,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDate.Parse(System.String)" />
+            >The <see cref="M:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDate.Parse(System.String)" />
 
             
 
@@ -324,13 +324,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the specified <see
-             cref="T:System.String" />
+            >Converts the specified <see cref="T:System.String" />
 
             
 
-             into a <see
-             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDate" />
+             into a <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDate" />
 
             
 
@@ -340,13 +338,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDate" />
+            >A <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDate" />
 
             
 
-             object that is obtained from <paramref
-             name="value" />
+             object that is obtained from <paramref name="value" />
 
             
 
@@ -354,12 +350,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
@@ -384,8 +383,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer of less than zero indicates a negative <see
-             cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDate.Sign" />
+            >An integer of less than zero indicates a negative <see cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDate.Sign" />
 
             
 
@@ -419,13 +417,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDate.Value" />
+            >Returns <see cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDate.Value" />
 
             
 
-             as a <see
-             cref="T:System.String" />
+             as a <see cref="T:System.String" />
 
             
 
@@ -435,18 +431,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             that is obtained from <see
-             cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDate.Value" />
+             that is obtained from <see cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDate.Value" />
 
             
 
-             in the format "yyyy-MM-dd" or "'-'yyyy-MM-dd" if <see
-             cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDate.Sign" />
+             in the format "yyyy-MM-dd" or "'-'yyyy-MM-dd" if <see cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDate.Sign" />
 
             
 

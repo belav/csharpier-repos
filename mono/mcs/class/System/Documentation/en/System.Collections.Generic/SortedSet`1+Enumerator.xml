@@ -30,21 +30,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Collections.Generic.SortedSet`1" />
+        >A <see cref="T:System.Collections.Generic.SortedSet`1" />
 
         
 
          object maintains a sorted order without affecting performance as elements are inserted and deleted. Duplicate elements are not allowed. Changing the sort values of existing items is not supported and may lead to unexpected behavior.</para
       >
       <para
-        >For a thread safe alternative to <see
-         cref="T:System.Collections.Generic.SortedSet`1" />
+        >For a thread safe alternative to <see cref="T:System.Collections.Generic.SortedSet`1" />
 
         
 
-        , see <see
-         cref="T:System.Collections.Immutable.ImmutableSortedSet`1" />
+        , see <see cref="T:System.Collections.Immutable.ImmutableSortedSet`1" />
       </para>
     </remarks>
     <summary>

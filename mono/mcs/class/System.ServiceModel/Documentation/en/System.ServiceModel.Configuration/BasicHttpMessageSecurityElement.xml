@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.BasicHttpMessageSecurityElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.BasicHttpMessageSecurityElement" />
 
             
 
@@ -83,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the algorithms to use with the <see
-             cref="T:System.ServiceModel.Configuration.BasicHttpMessageSecurityElement" />
+            >Specifies the algorithms to use with the <see cref="T:System.ServiceModel.Configuration.BasicHttpMessageSecurityElement" />
 
             
 
@@ -120,8 +118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the type of client credential to use with the <see
-             cref="T:System.ServiceModel.Configuration.BasicHttpMessageSecurityElement" />
+            >Specifies the type of client credential to use with the <see cref="T:System.ServiceModel.Configuration.BasicHttpMessageSecurityElement" />
 
             
 

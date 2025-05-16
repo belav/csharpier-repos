@@ -18,54 +18,45 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Members of this enumeration are used to initialize <see
-         cref="T:System.Net.Cache.RequestCachePolicy" />
+        >Members of this enumeration are used to initialize <see cref="T:System.Net.Cache.RequestCachePolicy" />
 
         
 
-         objects. The current setting for a <see
-         cref="T:System.Net.Cache.RequestCachePolicy" />
+         objects. The current setting for a <see cref="T:System.Net.Cache.RequestCachePolicy" />
 
         
 
-         object is available in the <see
-         cref="P:System.Net.Cache.HttpRequestCachePolicy.Level" />
+         object is available in the <see cref="P:System.Net.Cache.HttpRequestCachePolicy.Level" />
 
         
 
          property.</para
       >
       <para
-        >This <see
-         cref="F:System.Net.Cache.HttpRequestCacheLevel.BypassCache" />
+        >This <see cref="F:System.Net.Cache.HttpRequestCacheLevel.BypassCache" />
 
         
 
          value is the default cache behavior specified in the machine configuration file that ships with the .NET Framework. No entries are taken from caches, added to caches, or removed from caches between the client and server.</para
       >
       <para
-        >The <see
-         cref="P:System.Net.HttpWebRequest.DefaultCachePolicy" />
+        >The <see cref="P:System.Net.HttpWebRequest.DefaultCachePolicy" />
 
         
 
-         property is used to get or set the default cache policy for <see
-         cref="T:System.Net.HttpWebRequest" />
+         property is used to get or set the default cache policy for <see cref="T:System.Net.HttpWebRequest" />
 
         
 
-         instances. The <see
-         cref="P:System.Net.WebRequest.CachePolicy" />
+         instances. The <see cref="P:System.Net.WebRequest.CachePolicy" />
 
         
 
-         property is used to get or set the default cache policy for a <see
-         cref="T:System.Net.WebRequest" />
+         property is used to get or set the default cache policy for a <see cref="T:System.Net.WebRequest" />
 
         
 
-         instances. The <see
-         cref="P:System.Net.WebRequest.CachePolicy" />
+         instances. The <see cref="P:System.Net.WebRequest.CachePolicy" />
 
         
 
@@ -76,8 +67,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies caching behavior for resources obtained using <see
-         cref="T:System.Net.WebRequest" />
+        >Specifies caching behavior for resources obtained using <see cref="T:System.Net.WebRequest" />
 
         
 
@@ -153,8 +143,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Satisfies a request using the locally cached resource; does not send a request for an item that is not in the cache. When this cache policy level is specified, a <see
-             cref="T:System.Net.WebException" />
+            >Satisfies a request using the locally cached resource; does not send a request for an item that is not in the cache. When this cache policy level is specified, a <see cref="T:System.Net.WebException" />
 
             
 

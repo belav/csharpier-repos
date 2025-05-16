@@ -47,8 +47,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value of <paramref
-             name="control" />
+            >The default value of <paramref name="control" />
 
             
 
@@ -58,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new default instance of the <see
-             cref="T:System.ServiceModel.PeerResolvers.ServiceSettingsResponseInfo" />
+            >Initializes a new default instance of the <see cref="T:System.ServiceModel.PeerResolvers.ServiceSettingsResponseInfo" />
 
             
 
@@ -86,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.PeerResolvers.ServiceSettingsResponseInfo" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.PeerResolvers.ServiceSettingsResponseInfo" />
 
             
 

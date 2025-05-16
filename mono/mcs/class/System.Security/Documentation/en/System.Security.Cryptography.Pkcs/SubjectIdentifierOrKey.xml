@@ -23,18 +23,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierOrKey" />
+        >The <see cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierOrKey" />
 
         
 
-         class defines the type of the identifier of a subject, such as a <see
-         cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+         class defines the type of the identifier of a subject, such as a <see cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
 
         
 
-         or a <see
-         cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+         or a <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
 
         
 
@@ -67,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.SubjectIdentifierOrKey.Type" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.SubjectIdentifierOrKey.Type" />
 
             
 
@@ -95,18 +91,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.SubjectIdentifierOrKey.Value" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.SubjectIdentifierOrKey.Value" />
 
             
 
-             property retrieves the value of the subject identifier or  key. Use the <see
-             cref="P:System.Security.Cryptography.Pkcs.SubjectIdentifierOrKey.Type" />
+             property retrieves the value of the subject identifier or  key. Use the <see cref="P:System.Security.Cryptography.Pkcs.SubjectIdentifierOrKey.Type" />
 
             
 
-             property to determine the type of subject identifier or key, and use the <see
-             cref="P:System.Security.Cryptography.Pkcs.SubjectIdentifierOrKey.Value" />
+             property to determine the type of subject identifier or key, and use the <see cref="P:System.Security.Cryptography.Pkcs.SubjectIdentifierOrKey.Value" />
 
             
 

@@ -20,31 +20,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+        >Use the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
-         class to serialize and deserialize instances of a type into an XML stream or document. For example, you can create a type named Person with properties that contain essential data, such as a name and address. You can then create and manipulate an instance of the Person class and write all of its property values in an XML document for later retrieval, or in an XML stream for immediate transport. Most important, the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+         class to serialize and deserialize instances of a type into an XML stream or document. For example, you can create a type named Person with properties that contain essential data, such as a name and address. You can then create and manipulate an instance of the Person class and write all of its property values in an XML document for later retrieval, or in an XML stream for immediate transport. Most important, the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
-         is used to serialize and deserialize data sent in indigo1 messages. Apply the <see
-         cref="T:System.Runtime.Serialization.DataContractAttribute" />
+         is used to serialize and deserialize data sent in indigo1 messages. Apply the <see cref="T:System.Runtime.Serialization.DataContractAttribute" />
 
         
 
-         attribute to classes, and the <see
-         cref="T:System.Runtime.Serialization.DataMemberAttribute" />
+         attribute to classes, and the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" />
 
         
 
          attribute to class members to specify properties and fields that are serialized. </para
       >
       <para
-        >crlist types that can be serialized, see <format
-         type="text/html">
+        >crlist types that can be serialized, see <format type="text/html">
           <a href="7381b200-437a-4506-9556-d77bf1bc3f34"
             >Types Supported by the Data Contract Serializer</a
           >
@@ -55,41 +50,34 @@
         .</para
       >
       <para
-        >To use the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+        >To use the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
-        , first create an instance of a class and an object appropriate to writing or reading the format; for example, an instance of the <see
-         cref="T:System.Xml.XmlDictionaryWriter" />
+        , first create an instance of a class and an object appropriate to writing or reading the format; for example, an instance of the <see cref="T:System.Xml.XmlDictionaryWriter" />
 
         
 
-        . Then call the <see
-         cref="M:System.Runtime.Serialization.XmlObjectSerializer.WriteObject(System.Xml.XmlDictionaryWriter,System.Object)" />
+        . Then call the <see cref="M:System.Runtime.Serialization.XmlObjectSerializer.WriteObject(System.Xml.XmlDictionaryWriter,System.Object)" />
 
         
 
-         method to persist the data. To retrieve data, create an object appropriate to reading the data format (such as an <see
-         cref="T:System.Xml.XmlDictionaryReader" />
+         method to persist the data. To retrieve data, create an object appropriate to reading the data format (such as an <see cref="T:System.Xml.XmlDictionaryReader" />
 
         
 
-         for an XML document) and call the <see
-         cref="Overload:System.Runtime.Serialization.DataContractSerializer.ReadObject" />
+         for an XML document) and call the <see cref="Overload:System.Runtime.Serialization.DataContractSerializer.ReadObject" />
 
         
 
          method. </para
       >
       <para
-        >crabout using the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+        >crabout using the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
-        , see <format
-         type="text/html">
+        , see <format type="text/html">
           <a href="3d71814c-bda7-424b-85b7-15084ff9377a">Using Stand-alone Serialization</a>
         </format>
 
@@ -98,8 +86,7 @@
         .</para
       >
       <para
-        >You can set the type of a data contract serializer using the <format
-         type="text/html">
+        >You can set the type of a data contract serializer using the <format type="text/html">
           <a href="f41fb4d5-24e7-4059-8010-286a30bfea93">&lt;dataContractSerializer&gt;</a>
         </format>
 
@@ -111,41 +98,34 @@
         <h2>Preparing Classes for Serialization or Deserialization</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+        >The <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
-         is used in combination with the <see
-         cref="T:System.Runtime.Serialization.DataContractAttribute" />
+         is used in combination with the <see cref="T:System.Runtime.Serialization.DataContractAttribute" />
 
         
 
-         and <see
-         cref="T:System.Runtime.Serialization.DataMemberAttribute" />
+         and <see cref="T:System.Runtime.Serialization.DataMemberAttribute" />
 
         
 
-         classes. To prepare a class for serialization, apply the <see
-         cref="T:System.Runtime.Serialization.DataContractAttribute" />
+         classes. To prepare a class for serialization, apply the <see cref="T:System.Runtime.Serialization.DataContractAttribute" />
 
         
 
-         to the class.  For each member of the class that returns data that you want to serialize, apply the <see
-         cref="T:System.Runtime.Serialization.DataMemberAttribute" />
+         to the class.  For each member of the class that returns data that you want to serialize, apply the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" />
 
         
 
         . You can serialize fields and properties, regardless of accessibility: private, protected, internal, protected internal, or public. </para
       >
       <para
-        >For example, your schema specifies a Customer with an ID property, but you already have an existing application that uses a type named Person with a Name property. To create a type that conforms to the contract, first apply the <see
-         cref="T:System.Runtime.Serialization.DataContractAttribute" />
+        >For example, your schema specifies a Customer with an ID property, but you already have an existing application that uses a type named Person with a Name property. To create a type that conforms to the contract, first apply the <see cref="T:System.Runtime.Serialization.DataContractAttribute" />
 
         
 
-         to the class.  Then apply the <see
-         cref="T:System.Runtime.Serialization.DataMemberAttribute" />
+         to the class.  Then apply the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" />
 
         
 
@@ -153,8 +133,7 @@
       >
       <block subset="none" type="note">
         <para
-          >You can apply the <see
-           cref="T:System.Runtime.Serialization.DataMemberAttribute" />
+          >You can apply the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" />
 
           
 
@@ -162,41 +141,34 @@
         >
       </block>
       <para
-        >The final format of the XML need not be text. Instead, the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+        >The final format of the XML need not be text. Instead, the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
-         writes the data as an XML infoset, which allows you to write the data to any format recognized by the <see
-         cref="T:System.Xml.XmlReader" />
+         writes the data as an XML infoset, which allows you to write the data to any format recognized by the <see cref="T:System.Xml.XmlReader" />
 
         
 
-         and <see
-         cref="T:System.Xml.XmlWriter" />
+         and <see cref="T:System.Xml.XmlWriter" />
 
         
 
-        . It is recommended that you use the <see
-         cref="T:System.Xml.XmlDictionaryReader" />
+        . It is recommended that you use the <see cref="T:System.Xml.XmlDictionaryReader" />
 
         
 
-         and <see
-         cref="T:System.Xml.XmlDictionaryWriter" />
+         and <see cref="T:System.Xml.XmlDictionaryWriter" />
 
         
 
-         classes to read and write, because both are optimized to work with the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+         classes to read and write, because both are optimized to work with the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
         .</para
       >
       <para
-        >If you are creating a class that has fields or properties that must be populated before the serialization or deserialization occurs, use callback attributes, as described in <format
-         type="text/html">
+        >If you are creating a class that has fields or properties that must be populated before the serialization or deserialization occurs, use callback attributes, as described in <format type="text/html">
           <a href="aa4a3a6f-05ec-4efd-bdbf-2181e13e6468"
             >Version Tolerant Serialization Callbacks</a
           >
@@ -210,33 +182,27 @@
         <h2>Adding to the Collection of Known Types</h2>
       </format>
       <para
-        >When serializing or deserializing an object, it is required that the type is "known" to the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+        >When serializing or deserializing an object, it is required that the type is "known" to the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
-        . Begin by creating an instance of a class that implements <see
-         cref="T:System.Collections.Generic.IEnumerable`1" />
+        . Begin by creating an instance of a class that implements <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
         
 
-         (such as <see
-         cref="T:System.Collections.Generic.List`1" />
+         (such as <see cref="T:System.Collections.Generic.List`1" />
 
         
 
-        ) and adding the known types to the collection. Then create an instance of the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+        ) and adding the known types to the collection. Then create an instance of the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
-         using one of the overloads that takes the <see
-         cref="T:System.Collections.Generic.IEnumerable`1" />
+         using one of the overloads that takes the <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
         
 
-         (for example, <see
-         cref="M:System.Runtime.Serialization.DataContractSerializer.#ctor(System.Type,System.Collections.Generic.IEnumerable{System.Type})" />
+         (for example, <see cref="M:System.Runtime.Serialization.DataContractSerializer.#ctor(System.Type,System.Collections.Generic.IEnumerable{System.Type})" />
 
         
 
@@ -244,13 +210,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Unlike other primitive types, the <see
-           cref="T:System.DateTimeOffset" />
+          >Unlike other primitive types, the <see cref="T:System.DateTimeOffset" />
 
           
 
-           structure is not a known type by default, so it must be manually added to the list of known types (see <format
-           type="text/html">
+           structure is not a known type by default, so it must be manually added to the list of known types (see <format type="text/html">
             <a href="1a0baea1-27b7-470d-9136-5bbad86c4337">Data Contract Known Types</a>
           </format>
 
@@ -263,28 +227,23 @@
         <h2>Forward Compatibility</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+        >The <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
-         understands data contracts that have been designed to be compatible with future versions of the contract. Such types implement the <see
-         cref="T:System.Runtime.Serialization.IExtensibleDataObject" />
+         understands data contracts that have been designed to be compatible with future versions of the contract. Such types implement the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" />
 
         
 
-         interface. The interface features the <see
-         cref="P:System.Runtime.Serialization.IExtensibleDataObject.ExtensionData" />
+         interface. The interface features the <see cref="P:System.Runtime.Serialization.IExtensibleDataObject.ExtensionData" />
 
         
 
-         property that returns an <see
-         cref="T:System.Runtime.Serialization.ExtensionDataObject" />
+         property that returns an <see cref="T:System.Runtime.Serialization.ExtensionDataObject" />
 
         
 
-         object. crdefault <format
-         type="text/html">
+         object. crdefault <format type="text/html">
           <a href="413c9044-26f8-4ecb-968c-18495ea52cd9">Forward Compatible Data Contracts</a>
         </format>
 
@@ -296,13 +255,11 @@
         <h2>Running under Partial Trust</h2>
       </format>
       <para
-        >When instantiating the target object during deserialization, the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+        >When instantiating the target object during deserialization, the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
-         does not call the constructor of the target object. If you author a <newTerm
-        >[DataContract]</newTerm>
+         does not call the constructor of the target object. If you author a <newTerm>[DataContract]</newTerm>
 
         
 
@@ -341,8 +298,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
@@ -350,7 +306,11 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -383,8 +343,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
@@ -392,24 +351,30 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the instances that are serialized or deserialized.</param
         >
         <param name="knownTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-            of <see
-           cref="T:System.Type" />
+            of <see cref="T:System.Type" />
 
           
 
@@ -442,8 +407,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
@@ -451,14 +415,22 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the instance to serialize or deserialize.</param
         >
         <param name="settings">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -489,8 +461,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
@@ -498,21 +469,33 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the instances that are serialized or deserialized.</param
         >
         <param name="rootName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the XML element that encloses the content to serialize or deserialize.</param
         >
         <param name="rootNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -543,13 +526,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
-             class to serialize or deserialize an object of the specified type using the XML root element and namespace specified through the parameters of type <see
-             cref="T:System.Xml.XmlDictionaryString" />
+             class to serialize or deserialize an object of the specified type using the XML root element and namespace specified through the parameters of type <see cref="T:System.Xml.XmlDictionaryString" />
 
             
 
@@ -557,31 +538,41 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the instances that are serialized or deserialized.</param
         >
         <param name="rootName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlDictionaryString" />
+          An <see cref="T:System.Xml.XmlDictionaryString" />
 
           
 
            that contains the root element name of the content.</param
         >
         <param name="rootNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlDictionaryString" />
+          An <see cref="T:System.Xml.XmlDictionaryString" />
 
           
 
@@ -616,8 +607,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
@@ -625,38 +615,52 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the instances that are serialized or deserialized.</param
         >
         <param name="rootName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The root element name of the content.</param
         >
         <param name="rootNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace of the root element.</param
         >
         <param name="knownTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-            of <see
-           cref="T:System.Type" />
+            of <see cref="T:System.Type" />
 
           
 
@@ -691,13 +695,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
-             class to serialize or deserialize an object of the specified type. This method also specifies the root XML element and namespace in two <see
-             cref="T:System.Xml.XmlDictionaryString" />
+             class to serialize or deserialize an object of the specified type. This method also specifies the root XML element and namespace in two <see cref="T:System.Xml.XmlDictionaryString" />
 
             
 
@@ -705,48 +707,60 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the instances that are serialized or deserialized.</param
         >
         <param name="rootName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlDictionaryString" />
+          An <see cref="T:System.Xml.XmlDictionaryString" />
 
           
 
            that contains the root element name of the content.</param
         >
         <param name="rootNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlDictionaryString" />
+          An <see cref="T:System.Xml.XmlDictionaryString" />
 
           
 
            that contains the namespace of the root element.</param
         >
         <param name="knownTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          A <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Type" />
+           of <see cref="T:System.Type" />
 
           
 
@@ -787,8 +801,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
@@ -796,50 +809,67 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the instances that are serialized or deserialized.</param
         >
         <param name="knownTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Type" />
+           of <see cref="T:System.Type" />
 
           
 
            that contains the known types that may be present in the object graph.</param
         >
         <param name="ignoreExtensionDataObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to ignore the data supplied by an extension of the type upon serialization and deserialization; otherwise, false.</param
         >
         <param name="preserveObjectReferences">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to use non-standard XML constructs to preserve object reference data; otherwise, false.</param
         >
         <param name="dataContractSurrogate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An implementation of the <see
-           cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
+          An implementation of the <see cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
 
           
 
@@ -889,8 +919,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
@@ -898,62 +927,82 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the instances that are serialized or deserialized.</param
         >
         <param name="knownTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Type" />
+           of <see cref="T:System.Type" />
 
           
 
            that contains the known types that may be present in the object graph.</param
         >
         <param name="ignoreExtensionDataObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to ignore the data supplied by an extension of the type upon serialization and deserialization; otherwise, false.</param
         >
         <param name="preserveObjectReferences">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to use non-standard XML constructs to preserve object reference data; otherwise, false.</param
         >
         <param name="dataContractSurrogate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An implementation of the <see
-           cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
+          An implementation of the <see cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
 
           
 
            to customize the serialization process.</param
         >
         <param name="dataContractResolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An implementation of the <see
-           cref="T:System.Runtime.Serialization.DataContractResolver" />
+          An implementation of the <see cref="T:System.Runtime.Serialization.DataContractResolver" />
 
           
 
@@ -996,8 +1045,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
@@ -1005,64 +1053,89 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the instances that are serialized or deserialized.</param
         >
         <param name="rootName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML element that encloses the content to serialize or deserialize.</param
         >
         <param name="rootNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace of the XML element that encloses the content to serialize or deserialize.</param
         >
         <param name="knownTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Type" />
+           of <see cref="T:System.Type" />
 
           
 
            that contains the known types that may be present in the object graph.</param
         >
         <param name="ignoreExtensionDataObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to ignore the data supplied by an extension of the type upon serialization and deserialization; otherwise, false.</param
         >
         <param name="preserveObjectReferences">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to use non-standard XML constructs to preserve object reference data; otherwise, false.</param
         >
         <param name="dataContractSurrogate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An implementation of the <see
-           cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
+          An implementation of the <see cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
 
           
 
@@ -1105,13 +1178,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
-             class to serialize or deserialize an object of the specified type. This method also specifies a list of known types that may be present in the object graph, the maximum number of graph items to serialize, parameters to ignore unexpected data, whether to use non-standard XML constructs to preserve object reference data in the graph, a surrogate for custom serialization, and parameters of <see
-             cref="T:System.Xml.XmlDictionaryString" />
+             class to serialize or deserialize an object of the specified type. This method also specifies a list of known types that may be present in the object graph, the maximum number of graph items to serialize, parameters to ignore unexpected data, whether to use non-standard XML constructs to preserve object reference data in the graph, a surrogate for custom serialization, and parameters of <see cref="T:System.Xml.XmlDictionaryString" />
 
             
 
@@ -1119,74 +1190,97 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the instances that are serialized or deserialized.</param
         >
         <param name="rootName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryString" />
+          The <see cref="T:System.Xml.XmlDictionaryString" />
 
           
 
            that specifies the XML element that encloses the content to serialize or deserialize.</param
         >
         <param name="rootNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryString" />
+          The <see cref="T:System.Xml.XmlDictionaryString" />
 
           
 
            that specifies the XML namespace of the root.</param
         >
         <param name="knownTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          A <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Type" />
+           of <see cref="T:System.Type" />
 
           
 
            that contains the known types that may be present in the object graph.</param
         >
         <param name="ignoreExtensionDataObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to ignore the data supplied by an extension of the type upon serialization and deserialization; otherwise, false.</param
         >
         <param name="preserveObjectReferences">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to use non-standard XML constructs to preserve object reference data; otherwise, false.</param
         >
         <param name="dataContractSurrogate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An implementation of the <see
-           cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
+          An implementation of the <see cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
 
           
 
@@ -1233,8 +1327,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
@@ -1242,76 +1335,104 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the instances that are serialized or deserialized.</param
         >
         <param name="rootName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML element that encloses the content to serialize or deserialize.</param
         >
         <param name="rootNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace of the XML element that encloses the content to serialize or deserialize.</param
         >
         <param name="knownTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Type" />
+           of <see cref="T:System.Type" />
 
           
 
            that contains the known types that may be present in the object graph.</param
         >
         <param name="ignoreExtensionDataObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to ignore the data supplied by an extension of the type upon serialization and deserialization; otherwise, false.</param
         >
         <param name="preserveObjectReferences">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to use non-standard XML constructs to preserve object reference data; otherwise, false.</param
         >
         <param name="dataContractSurrogate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An implementation of the <see
-           cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
+          An implementation of the <see cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
 
           
 
            to customize the serialization process.</param
         >
         <param name="dataContractResolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An implementation of the <see
-           cref="T:System.Runtime.Serialization.DataContractResolver" />
+          An implementation of the <see cref="T:System.Runtime.Serialization.DataContractResolver" />
 
           
 
@@ -1358,13 +1479,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
-             class to serialize or deserialize an object of the specified type. This method also specifies a list of known types that may be present in the object graph, the maximum number of graph items to serialize, parameters to ignore unexpected data, whether to use non-standard XML constructs to preserve object reference data in the graph, a surrogate for custom serialization, parameters of <see
-             cref="T:System.Xml.XmlDictionaryString" />
+             class to serialize or deserialize an object of the specified type. This method also specifies a list of known types that may be present in the object graph, the maximum number of graph items to serialize, parameters to ignore unexpected data, whether to use non-standard XML constructs to preserve object reference data in the graph, a surrogate for custom serialization, parameters of <see cref="T:System.Xml.XmlDictionaryString" />
 
             
 
@@ -1372,76 +1491,104 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the instances that are serialized or deserialized.</param
         >
         <param name="rootName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML element that encloses the content to serialize or deserialize.</param
         >
         <param name="rootNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace of the XML element that encloses the content to serialize or deserialize.</param
         >
         <param name="knownTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Type" />
+           of <see cref="T:System.Type" />
 
           
 
            that contains the known types that may be present in the object graph.</param
         >
         <param name="ignoreExtensionDataObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to ignore the data supplied by an extension of the type upon serialization and deserialization; otherwise, false.</param
         >
         <param name="preserveObjectReferences">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to use non-standard XML constructs to preserve object reference data; otherwise, false.</param
         >
         <param name="dataContractSurrogate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An implementation of the <see
-           cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
+          An implementation of the <see cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
 
           
 
            to customize the serialization process.</param
         >
         <param name="dataContractResolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An implementation of the <see
-           cref="T:System.Runtime.Serialization.DataContractResolver" />
+          An implementation of the <see cref="T:System.Runtime.Serialization.DataContractResolver" />
 
           
 
@@ -1470,13 +1617,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Runtime.Serialization.DataContractResolver" />
+            >The <see cref="T:System.Runtime.Serialization.DataContractResolver" />
 
             
 
-             is set using a <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+             is set using a <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
@@ -1510,13 +1655,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
+            >The <see cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
 
             
 
-             can be used to customize how instances of a type are serialized and deserialized. For example, it can be used to enable the serialization of legacy types that are not serializable, that is, types to which the <see
-             cref="T:System.Runtime.Serialization.DataContractAttribute" />
+             can be used to customize how instances of a type are serialized and deserialized. For example, it can be used to enable the serialization of legacy types that are not serializable, that is, types to which the <see cref="T:System.Runtime.Serialization.DataContractAttribute" />
 
             
 
@@ -1544,23 +1687,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Runtime.Serialization.DataContractSerializer.IgnoreExtensionDataObject" />
+            >The <see cref="P:System.Runtime.Serialization.DataContractSerializer.IgnoreExtensionDataObject" />
 
             
 
-             property is used when the class to which a <see
-             cref="T:System.Runtime.Serialization.DataContractAttribute" />
+             property is used when the class to which a <see cref="T:System.Runtime.Serialization.DataContractAttribute" />
 
             
 
-             has been applied also implements the <see
-             cref="T:System.Runtime.Serialization.IExtensibleDataObject" />
+             has been applied also implements the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" />
 
             
 
-             interface. In this case, the data added in a future version of the contract is ignored on read and write. crdefault <format
-             type="text/html">
+             interface. In this case, the data added in a future version of the contract is ignored on read and write. crdefault <format type="text/html">
               <a href="413c9044-26f8-4ecb-968c-18495ea52cd9">Forward Compatible Data Contracts</a>
             </format>
 
@@ -1598,18 +1737,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.Serialization.DataContractSerializer.IsStartObject(System.Xml.XmlDictionaryReader)" />
+            >The <see cref="M:System.Runtime.Serialization.DataContractSerializer.IsStartObject(System.Xml.XmlDictionaryReader)" />
 
             
 
-             determines whether it can read an object by checking that it is positioned on an XML element. It also examines the name and namespace of the XML element that the reader is positioned at and compares the values to the expected name and namespace. The expected name and namespace can be set with the following: the data contract name and namespace of the type passed into the constructor, or the <paramref
-             name="rootName" />
+             determines whether it can read an object by checking that it is positioned on an XML element. It also examines the name and namespace of the XML element that the reader is positioned at and compares the values to the expected name and namespace. The expected name and namespace can be set with the following: the data contract name and namespace of the type passed into the constructor, or the <paramref name="rootName" />
 
             
 
-             and <paramref
-             name="rootNamespace" />
+             and <paramref name="rootNamespace" />
 
             
 
@@ -1619,8 +1755,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Determines whether the <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1632,12 +1767,15 @@
           <para>true if the reader is at the start element of the stream to read; otherwise, false.</para>
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlDictionaryReader" />
+          An <see cref="T:System.Xml.XmlDictionaryReader" />
 
           
 
@@ -1669,8 +1807,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Xml.XmlReader" />
+            >Determines whether the <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -1682,12 +1819,15 @@
           <para>true if the reader is at the start element of the stream to read; otherwise, false.</para>
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlReader" />
+          The <see cref="T:System.Xml.XmlReader" />
 
           
 
@@ -1716,28 +1856,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Runtime.Serialization.DataContractSerializer.KnownTypes" />
+            >The <see cref="P:System.Runtime.Serialization.DataContractSerializer.KnownTypes" />
 
             
 
-             property provides the set of known types that are used for serialization and deserialization. For example, if an instance of the <see
-             cref="T:System.Collections.Hashtable" />
+             property provides the set of known types that are used for serialization and deserialization. For example, if an instance of the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             class contains instances of a Person class, add the Person type to an instance of the <see
-             cref="T:System.Collections.Generic.List`1" />
+             class contains instances of a Person class, add the Person type to an instance of the <see cref="T:System.Collections.Generic.List`1" />
 
             
 
-             class and use the instance to construct an instance of the <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+             class and use the instance to construct an instance of the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
-            . If you know of other types to add to the <see
-             cref="T:System.Collections.Hashtable" />
+            . If you know of other types to add to the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -1747,8 +1882,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of types that may be present in the object graph serialized using this instance of the <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+            >Gets a collection of types that may be present in the object graph serialized using this instance of the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
@@ -1778,23 +1912,19 @@
           <code>OperationDescription operation = host.Description.Endpoints[0].Contract.Operations.Find("MyOperationName");operation.Behaviors.Find&lt;DataContractSerializerOperationBehavior&gt;().MaxItemsInObjectGraph = 3;
 </code>
           <para
-            >The <see
-             cref="P:System.Runtime.Serialization.DataContractSerializer.MaxItemsInObjectGraph" />
+            >The <see cref="P:System.Runtime.Serialization.DataContractSerializer.MaxItemsInObjectGraph" />
 
             
 
-             property specifies the maximum number of objects that the serializer serializes or deserializes in a single <see
-             cref="Overload:System.Runtime.Serialization.DataContractSerializer.ReadObject" />
+             property specifies the maximum number of objects that the serializer serializes or deserializes in a single <see cref="Overload:System.Runtime.Serialization.DataContractSerializer.ReadObject" />
 
             
 
-             method call. (The method always reads one root object, but this object may have other objects in its data members. Those objects may have other objects, and so on.) The default is <see
-             cref="F:System.Int32.MaxValue" />
+             method call. (The method always reads one root object, but this object may have other objects in its data members. Those objects may have other objects, and so on.) The default is <see cref="F:System.Int32.MaxValue" />
 
             
 
-            . Note that when serializing or deserializing arrays, every array entry counts as a separate object. Also, note that some objects may have a large memory representation and so this quota alone may not be sufficient to prevent Denial of Service attacks. crdefault <format
-             type="text/html">
+            . Note that when serializing or deserializing arrays, every array entry counts as a separate object. Also, note that some objects may have a large memory representation and so this quota alone may not be sufficient to prevent Denial of Service attacks. crdefault <format type="text/html">
               <a href="a7eb98da-4a93-4692-8b59-9d670c79ffb2">Security Considerations for Data</a>
             </format>
 
@@ -1852,8 +1982,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the XML stream with an <see
-             cref="T:System.Xml.XmlReader" />
+            >Reads the XML stream with an <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -1865,12 +1994,15 @@
           <para>The deserialized object.</para>
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlReader" />
+          The <see cref="T:System.Xml.XmlReader" />
 
           
 
@@ -1903,8 +2035,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the XML stream with an <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Reads the XML stream with an <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1916,19 +2047,26 @@
           <para>The deserialized object.</para>
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryReader" />
+          The <see cref="T:System.Xml.XmlDictionaryReader" />
 
           
 
            used to read the XML stream.</param
         >
         <param name="verifyObjectName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1961,8 +2099,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the XML stream with an <see
-             cref="T:System.Xml.XmlReader" />
+            >Reads the XML stream with an <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -1974,19 +2111,26 @@
           <para>The deserialized object.</para>
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlReader" />
+          The <see cref="T:System.Xml.XmlReader" />
 
           
 
            used to read the XML stream.</param
         >
         <param name="verifyObjectName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2027,14 +2171,22 @@
           <para>The deserialized object.</para>
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML reader used to read the content.</param
         >
         <param name="verifyObjectName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2085,8 +2237,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the closing XML element using an <see
-             cref="T:System.Xml.XmlDictionaryWriter" />
+            >Writes the closing XML element using an <see cref="T:System.Xml.XmlDictionaryWriter" />
 
             
 
@@ -2094,12 +2245,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryWriter" />
+          The <see cref="T:System.Xml.XmlDictionaryWriter" />
 
           
 
@@ -2131,8 +2285,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the closing XML element using an <see
-             cref="T:System.Xml.XmlWriter" />
+            >Writes the closing XML element using an <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -2140,12 +2293,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
@@ -2178,8 +2334,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes all the object data (starting XML element, content, and closing element) to an XML document or stream with an <see
-             cref="T:System.Xml.XmlWriter" />
+            >Writes all the object data (starting XML element, content, and closing element) to an XML document or stream with an <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -2187,19 +2342,26 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
            used to write the XML document or stream.</param
         >
         <param name="graph">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2236,14 +2398,22 @@
           <para>Writes all the object data (starting XML element, content, and enclosing element) to an XML document or stream  using the specified XmlDictionaryWriter. The method includes a resolver for mapping xsi:type declarations at runtime.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An XmlDictionaryWriter used to write the content to the XML document or stream.</param
         >
         <param name="graph">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2276,8 +2446,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the XML content using an <see
-             cref="T:System.Xml.XmlDictionaryWriter" />
+            >Writes the XML content using an <see cref="T:System.Xml.XmlDictionaryWriter" />
 
             
 
@@ -2285,19 +2454,26 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryWriter" />
+          The <see cref="T:System.Xml.XmlDictionaryWriter" />
 
           
 
            used to write the stream.</param
         >
         <param name="graph">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2330,8 +2506,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the XML content using an <see
-             cref="T:System.Xml.XmlWriter" />
+            >Writes the XML content using an <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -2339,19 +2514,26 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
            used to write the stream.</param
         >
         <param name="graph">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2384,8 +2566,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the opening XML element using an <see
-             cref="T:System.Xml.XmlDictionaryWriter" />
+            >Writes the opening XML element using an <see cref="T:System.Xml.XmlDictionaryWriter" />
 
             
 
@@ -2393,19 +2574,26 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryWriter" />
+          The <see cref="T:System.Xml.XmlDictionaryWriter" />
 
           
 
            used to write the XML start element.</param
         >
         <param name="graph">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2438,8 +2626,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the opening XML element using an <see
-             cref="T:System.Xml.XmlWriter" />
+            >Writes the opening XML element using an <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -2447,19 +2634,26 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
            used to write the XML start element.</param
         >
         <param name="graph">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

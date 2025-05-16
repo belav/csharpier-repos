@@ -33,23 +33,19 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <block subset="none" type="note">
         <para
-          >In the dnprdnext, the recommended practice is to create <see
-           cref="T:System.Xml.XmlReader" />
+          >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
           
 
-           instances using the <see
-           cref="T:System.Xml.XmlReaderSettings" />
+           instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
           
 
-           class and the <see
-           cref="Overload:System.Xml.XmlReader.Create" />
+           class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
           
 
-           method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-           type="text/html">
+           method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
             <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
           </format>
 
@@ -59,16 +55,14 @@
         >
       </block>
       <para
-        >The XmlNodeReader has the ability to read an XML DOM subtree. This class does not support document type definition (DTD) or schema validation. To perform data validation, use a validating <see
-         cref="T:System.Xml.XmlReader" />
+        >The XmlNodeReader has the ability to read an XML DOM subtree. This class does not support document type definition (DTD) or schema validation. To perform data validation, use a validating <see cref="T:System.Xml.XmlReader" />
 
         
 
          object.</para
       >
       <para
-        >For further discussion on the XmlReader classes, see <format
-         type="text/html">
+        >For further discussion on the XmlReader classes, see <format type="text/html">
           <a href="3029834C-A27E-4331-B7AA-711924062182">Read XML with the XmlReader</a>
         </format>
 
@@ -80,8 +74,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a reader that provides fast, non-cached forward only access to XML data in an <see
-         cref="T:System.Xml.XmlNode" />
+        >Represents a reader that provides fast, non-cached forward only access to XML data in an <see cref="T:System.Xml.XmlNode" />
 
         
 
@@ -111,23 +104,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -137,13 +126,11 @@
             >
           </block>
           <para
-            >For more information and examples of the code used to create an XmlNodeReader, see <see
-             cref="T:System.Xml.XmlReader" />
+            >For more information and examples of the code used to create an XmlNodeReader, see <see cref="T:System.Xml.XmlReader" />
 
             
 
-             and overloads of the <see
-             cref="M:System.Xml.XmlReader.Create(System.IO.Stream)" />
+             and overloads of the <see cref="M:System.Xml.XmlReader.Create(System.IO.Stream)" />
 
             
 
@@ -153,8 +140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the XmlNodeReader class using the specified <see
-             cref="T:System.Xml.XmlNode" />
+            >Creates an instance of the XmlNodeReader class using the specified <see cref="T:System.Xml.XmlNode" />
 
             
 
@@ -162,7 +148,11 @@
           >
         </summary>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -188,23 +178,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -239,23 +225,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -290,23 +272,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -316,23 +294,19 @@
             >
           </block>
           <para
-            >The binary content read methods include the <see
-             cref="M:System.Xml.XmlNodeReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
+            >The binary content read methods include the <see cref="M:System.Xml.XmlNodeReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-            , <see
-             cref="M:System.Xml.XmlNodeReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
+            , <see cref="M:System.Xml.XmlNodeReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-            , <see
-             cref="M:System.Xml.XmlNodeReader.ReadElementContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
+            , <see cref="M:System.Xml.XmlNodeReader.ReadElementContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-            , and <see
-             cref="M:System.Xml.XmlNodeReader.ReadElementContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
+            , and <see cref="M:System.Xml.XmlNodeReader.ReadElementContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
 
             
 
@@ -342,8 +316,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Xml.XmlNodeReader" />
+            >Gets a value indicating whether the <see cref="T:System.Xml.XmlNodeReader" />
 
             
 
@@ -370,23 +343,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -423,23 +392,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -453,8 +418,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Changes the <see
-             cref="P:System.Xml.XmlNodeReader.ReadState" />
+            >Changes the <see cref="P:System.Xml.XmlNodeReader.ReadState" />
 
             
 
@@ -481,23 +445,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -531,23 +491,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -589,23 +545,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -625,7 +577,11 @@
           <para>The value of the specified attribute.</para>
         </returns>
         <param name="attributeIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -656,23 +612,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -693,7 +645,11 @@
           <para>The value of the specified attribute. If the attribute is not found, null is returned.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -728,23 +684,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -762,8 +714,7 @@ String dt2 = reader.GetAttribute("type","urn:datatypes");</code>
           <code>String dt3 = reader.GetAttribute("xmlns:dt");
 String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para
-            >You can also get this information using the <see
-             cref="P:System.Xml.XmlNodeReader.Prefix" />
+            >You can also get this information using the <see cref="P:System.Xml.XmlNodeReader.Prefix" />
 
             
 
@@ -779,14 +730,22 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>The value of the specified attribute. If the attribute is not found, null is returned.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the attribute. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -812,23 +771,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -862,23 +817,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -976,8 +927,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the current node can have a <see
-             cref="P:System.Xml.XmlNodeReader.Value" />
+            >Gets a value indicating whether the current node can have a <see cref="P:System.Xml.XmlNodeReader.Value" />
 
             
 
@@ -1004,23 +954,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -1055,23 +1001,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -1174,23 +1116,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -1232,23 +1170,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -1273,7 +1207,11 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>The namespace URI to which the prefix maps or null if no matching prefix is found.</para>
         </returns>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1331,23 +1269,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -1362,7 +1296,11 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>Moves to the attribute with the specified index.</para>
         </summary>
         <param name="attributeIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1393,23 +1331,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -1419,18 +1353,15 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             >
           </block>
           <para
-            >After calling this method, the <see
-             cref="P:System.Xml.XmlNodeReader.Name" />
+            >After calling this method, the <see cref="P:System.Xml.XmlNodeReader.Name" />
 
             
 
-            , <see
-             cref="P:System.Xml.XmlNodeReader.NamespaceURI" />
+            , <see cref="P:System.Xml.XmlNodeReader.NamespaceURI" />
 
             
 
-            , and <see
-             cref="P:System.Xml.XmlNodeReader.Prefix" />
+            , and <see cref="P:System.Xml.XmlNodeReader.Prefix" />
 
             
 
@@ -1446,7 +1377,11 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>true if the attribute is found; otherwise, false. If false, the reader's position does not change.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1481,23 +1416,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -1507,18 +1438,15 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             >
           </block>
           <para
-            >After calling this method, the <see
-             cref="P:System.Xml.XmlNodeReader.Name" />
+            >After calling this method, the <see cref="P:System.Xml.XmlNodeReader.Name" />
 
             
 
-            , <see
-             cref="P:System.Xml.XmlNodeReader.NamespaceURI" />
+            , <see cref="P:System.Xml.XmlNodeReader.NamespaceURI" />
 
             
 
-            , and <see
-             cref="P:System.Xml.XmlNodeReader.Prefix" />
+            , and <see cref="P:System.Xml.XmlNodeReader.Prefix" />
 
             
 
@@ -1534,14 +1462,22 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>true if the attribute is found; otherwise, false. If false, the reader's position does not change.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the attribute. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1570,23 +1506,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -1628,23 +1560,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -1685,23 +1613,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -1711,8 +1635,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             >
           </block>
           <para
-            >If the current node is not an attribute node, this method is equivalent to <see
-             cref="M:System.Xml.XmlNodeReader.MoveToFirstAttribute" />
+            >If the current node is not an attribute node, this method is equivalent to <see cref="M:System.Xml.XmlNodeReader.MoveToFirstAttribute" />
 
             
 
@@ -1747,23 +1670,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -1797,23 +1716,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -1854,23 +1769,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -1884,8 +1795,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.XmlNameTable" />
+            >Gets the <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -1918,23 +1828,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -1968,23 +1874,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -2012,23 +1914,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -2069,23 +1967,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -2127,23 +2021,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -2153,13 +2043,11 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             >
           </block>
           <para
-            >Use this method after calling <see
-             cref="M:System.Xml.XmlNodeReader.MoveToAttribute(System.String)" />
+            >Use this method after calling <see cref="M:System.Xml.XmlNodeReader.MoveToAttribute(System.String)" />
 
             
 
-             to read through the text or entity reference nodes that make up the attribute value. The <see
-             cref="P:System.Xml.XmlNodeReader.Depth" />
+             to read through the text or entity reference nodes that make up the attribute value. The <see cref="P:System.Xml.XmlNodeReader.Depth" />
 
             
 
@@ -2206,23 +2094,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -2234,8 +2118,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>This method streams the content, decodes the Base64 content, and returns the decoded binary bytes (for example, an inline Base64 encoded GIF image) into the buffer. This method can be called successively to read large streams of embedded text. For more information, see RFC 1521, "MIME (Multipurpose Internet Mail Extensions) Part One: Mechanisms for Specifying and Describing the Format of Internet Message Bodies". You can obtain RFCs from the Request for Comments Web site at http://www.rfc-editor.org.</para>
           <block subset="none" type="note">
             <para
-              >You should not access any of the reader properties between calls to the <see
-               cref="M:System.Xml.XmlNodeReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
+              >You should not access any of the reader properties between calls to the <see cref="M:System.Xml.XmlNodeReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
 
               
 
@@ -2276,21 +2159,33 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>The number of bytes written to the buffer.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2326,23 +2221,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -2354,8 +2245,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>This method streams the content, decodes the BinHex content, and returns the decoded binary bytes (for example, an inline BinHex encoded GIF image) into the buffer. This method can be called successively to read large streams of embedded text.</para>
           <block subset="none" type="note">
             <para
-              >You should not access any of the reader properties between calls to the <see
-               cref="M:System.Xml.XmlNodeReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
+              >You should not access any of the reader properties between calls to the <see cref="M:System.Xml.XmlNodeReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
 
               
 
@@ -2396,21 +2286,33 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>The number of bytes written to the buffer.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2446,23 +2348,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -2474,39 +2372,33 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>This method reads the content, decodes it using Base64 encoding, and returns the decoded binary bytes (for example, an inline Base64 encoded GIF image) into the buffer. For more information, see RFC 1521, "MIME (Multipurpose Internet Mail Extensions) Part One: Mechanisms for Specifying and Describing the Format of Internet Message Bodies". You can obtain RFCs from the Request for Comments Web site at http://www.rfc-editor.org.</para>
           <para>This method can only read simple-content elements. The element can contain text, white space, significant white space, CDATA sections, comments and processing instructions. It can also contain entity references, which are automatically expanded. The element cannot have child elements.</para>
           <para
-            >This method is very similar to the <see
-             cref="M:System.Xml.XmlNodeReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
+            >This method is very similar to the <see cref="M:System.Xml.XmlNodeReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
 
             
 
              method except that it can only be called on element node types.</para
           >
           <para
-            >If the count value is higher than the number of bytes in the document, or if it is equal to the number of bytes in the document, the <see
-             cref="T:System.Xml.XmlNodeReader" />
+            >If the count value is higher than the number of bytes in the document, or if it is equal to the number of bytes in the document, the <see cref="T:System.Xml.XmlNodeReader" />
 
             
 
-             reads all the remaining bytes in the document and returns the number of bytes read. The next <see
-             cref="M:System.Xml.XmlNodeReader.ReadElementContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
+             reads all the remaining bytes in the document and returns the number of bytes read. The next <see cref="M:System.Xml.XmlNodeReader.ReadElementContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method call returns a zero and moves the reader to the node following the <see
-             cref="F:System.Xml.XmlNodeType.EndElement" />
+             method call returns a zero and moves the reader to the node following the <see cref="F:System.Xml.XmlNodeType.EndElement" />
 
             
 
              node.</para
           >
           <para
-            >If you call <see
-             cref="M:System.Xml.XmlNodeReader.Read" />
+            >If you call <see cref="M:System.Xml.XmlNodeReader.Read" />
 
             
 
-             before all of the element content is consumed, the reader may behave as if the first content was consumed and then the <see
-             cref="M:System.Xml.XmlNodeReader.Read" />
+             before all of the element content is consumed, the reader may behave as if the first content was consumed and then the <see cref="M:System.Xml.XmlNodeReader.Read" />
 
             
 
@@ -2522,21 +2414,33 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>The number of bytes written to the buffer.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2572,23 +2476,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -2600,39 +2500,33 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>This method reads the element content, decodes it using BinHex encoding, and returns the decoded binary bytes (for example, an inline BinHex encoded GIF image) into the buffer.</para>
           <para>This method can only read simple-content elements. The element can contain text, white space, significant white space, CDATA sections, comments and processing instructions. It can also contain entity references, which are automatically expanded. The element cannot have child elements.</para>
           <para
-            >This method is very similar to the <see
-             cref="M:System.Xml.XmlNodeReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
+            >This method is very similar to the <see cref="M:System.Xml.XmlNodeReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
 
             
 
              method except that it can only be called on element node types.</para
           >
           <para
-            >If the count value is higher than the number of bytes in the document, or if it is equal to the number of bytes in the document, the <see
-             cref="T:System.Xml.XmlNodeReader" />
+            >If the count value is higher than the number of bytes in the document, or if it is equal to the number of bytes in the document, the <see cref="T:System.Xml.XmlNodeReader" />
 
             
 
-             reads all the remaining bytes in the document and returns the number of bytes read. The next <see
-             cref="T:System.Xml.XmlNodeReader" />
+             reads all the remaining bytes in the document and returns the number of bytes read. The next <see cref="T:System.Xml.XmlNodeReader" />
 
             
 
-             method call returns a zero and moves the reader to the node following the <see
-             cref="F:System.Xml.XmlNodeType.EndElement" />
+             method call returns a zero and moves the reader to the node following the <see cref="F:System.Xml.XmlNodeType.EndElement" />
 
             
 
              node.</para
           >
           <para
-            >If you call <see
-             cref="M:System.Xml.XmlNodeReader.Read" />
+            >If you call <see cref="M:System.Xml.XmlNodeReader.Read" />
 
             
 
-             before all of the element content is consumed, the reader may behave as if the first content was consumed and then the <see
-             cref="M:System.Xml.XmlNodeReader.Read" />
+             before all of the element content is consumed, the reader may behave as if the first content was consumed and then the <see cref="M:System.Xml.XmlNodeReader.Read" />
 
             
 
@@ -2648,21 +2542,33 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>The number of bytes written to the buffer.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2694,23 +2600,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -2747,23 +2649,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -2807,23 +2705,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -2833,8 +2727,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             >
           </block>
           <para
-            >If the reader is positioned on an EntityReference node (XmlNodeType.EntityReference), if <see
-             cref="M:System.Xml.XmlNodeReader.Read" />
+            >If the reader is positioned on an EntityReference node (XmlNodeType.EntityReference), if <see cref="M:System.Xml.XmlNodeReader.Read" />
 
             
 
@@ -2842,8 +2735,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           >
           <block subset="none" type="note">
             <para
-              >After calling this method, if the entity is part of an attribute value, you must call <see
-               cref="M:System.Xml.XmlNodeReader.ReadAttributeValue" />
+              >After calling this method, if the entity is part of an attribute value, you must call <see cref="M:System.Xml.XmlNodeReader.ReadAttributeValue" />
 
               
 
@@ -2881,23 +2773,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -2907,8 +2795,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             >
           </block>
           <para
-            >The <see
-             cref="T:System.Xml.Schema.IXmlSchemaInfo" />
+            >The <see cref="T:System.Xml.Schema.IXmlSchemaInfo" />
 
             
 
@@ -2942,23 +2829,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -2976,8 +2859,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
   &lt;/b&gt;</code>
           <para>If the reader is positioned on the "&lt;a&gt;" node or any of its attributes, calling Skip positions the reader to the "&lt;b&gt;" node.</para>
           <para
-            >If the reader is positioned on a leaf node already (such as element "x" or the text node "abc"), calling Skip is the same as calling <see
-             cref="M:System.Xml.XmlNodeReader.Read" />
+            >If the reader is positioned on a leaf node already (such as element "x" or the text node "abc"), calling Skip is the same as calling <see cref="M:System.Xml.XmlNodeReader.Read" />
 
             
 
@@ -3016,13 +2898,11 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Xml.XmlNodeReader" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Xml.XmlNodeReader" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Xml.IXmlNamespaceResolver" />
+             instance is cast to an <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
             
 
@@ -3032,8 +2912,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Xml.IXmlNamespaceResolver.GetNamespacesInScope(System.Xml.XmlNamespaceScope)" />
+            >For a description of this member, see <see cref="M:System.Xml.IXmlNamespaceResolver.GetNamespacesInScope(System.Xml.XmlNamespaceScope)" />
 
             
 
@@ -3086,13 +2965,11 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Xml.XmlNodeReader" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Xml.XmlNodeReader" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Xml.IXmlNamespaceResolver" />
+             instance is cast to an <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
             
 
@@ -3102,8 +2979,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Xml.IXmlNamespaceResolver.LookupPrefix(System.String)" />
+            >For a description of this member, see <see cref="M:System.Xml.IXmlNamespaceResolver.LookupPrefix(System.String)" />
 
             
 
@@ -3140,23 +3016,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -3190,23 +3062,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 
@@ -3221,8 +3089,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 &lt;/root&gt; </code>
           <para>When the reader is positioned on the name element, you can use this property to find that it is in the scope of a US English xml:lang attribute.</para>
           <para
-            >The string returned is also in <see
-             cref="P:System.Xml.XmlNodeReader.NameTable" />
+            >The string returned is also in <see cref="P:System.Xml.XmlNodeReader.NameTable" />
 
             
 
@@ -3259,23 +3126,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instances using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of all the new features introduced in the dnprdnshort. For more information, see <format type="text/html">
                 <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
               </format>
 

@@ -29,31 +29,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Components of a designer document can be selected using the <see
-         cref="M:System.ComponentModel.Design.ISelectionService.SetSelectedComponents(System.Collections.ICollection)" />
+        >Components of a designer document can be selected using the <see cref="M:System.ComponentModel.Design.ISelectionService.SetSelectedComponents(System.Collections.ICollection)" />
 
         
 
-         method of the <see
-         cref="T:System.ComponentModel.Design.ISelectionService" />
+         method of the <see cref="T:System.ComponentModel.Design.ISelectionService" />
 
         
 
-        . Some types of actions can operate on a selected component or group of selected components. The <see
-         cref="T:System.ComponentModel.Design.ISelectionService" />
+        . Some types of actions can operate on a selected component or group of selected components. The <see cref="T:System.ComponentModel.Design.ISelectionService" />
 
         
 
          keeps track of the selection type of the current selection. These selection type identifiers indicate whether the selection was completed using a single click, a mouse down or mouse up selection, whether the selection should replace the previous selection, or use the default selection mode.</para
       >
       <para
-        >Use the <see
-         cref="T:System.ComponentModel.Design.SelectionTypes" />
+        >Use the <see cref="T:System.ComponentModel.Design.SelectionTypes" />
 
         
 
-         enumeration to specify the type of a selection when setting a new selection using the <see
-         cref="M:System.ComponentModel.Design.ISelectionService.SetSelectedComponents(System.Collections.ICollection)" />
+         enumeration to specify the type of a selection when setting a new selection using the <see cref="M:System.ComponentModel.Design.ISelectionService.SetSelectedComponents(System.Collections.ICollection)" />
 
         
 
@@ -308,13 +303,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a toggle selection that switches between the current selection and the provided selection. If a component is already selected and is passed into <see
-             cref="Overload:System.ComponentModel.Design.ISelectionService.SetSelectedComponents" />
+            >Represents a toggle selection that switches between the current selection and the provided selection. If a component is already selected and is passed into <see cref="Overload:System.ComponentModel.Design.ISelectionService.SetSelectedComponents" />
 
             
 
-             with a selection type of <see
-             cref="F:System.ComponentModel.Design.SelectionTypes.Toggle" />
+             with a selection type of <see cref="F:System.ComponentModel.Design.SelectionTypes.Toggle" />
 
             
 
@@ -349,28 +342,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Identifies the valid selection types as <see
-             cref="F:System.ComponentModel.Design.SelectionTypes.Normal" />
+            >Identifies the valid selection types as <see cref="F:System.ComponentModel.Design.SelectionTypes.Normal" />
 
             
 
-            , <see
-             cref="F:System.ComponentModel.Design.SelectionTypes.Replace" />
+            , <see cref="F:System.ComponentModel.Design.SelectionTypes.Replace" />
 
             
 
-            , <see
-             cref="F:System.ComponentModel.Design.SelectionTypes.MouseDown" />
+            , <see cref="F:System.ComponentModel.Design.SelectionTypes.MouseDown" />
 
             
 
-            , <see
-             cref="F:System.ComponentModel.Design.SelectionTypes.MouseUp" />
+            , <see cref="F:System.ComponentModel.Design.SelectionTypes.MouseUp" />
 
             
 
-            , or <see
-             cref="F:System.ComponentModel.Design.SelectionTypes.Click" />
+            , or <see cref="F:System.ComponentModel.Design.SelectionTypes.Click" />
 
             
 

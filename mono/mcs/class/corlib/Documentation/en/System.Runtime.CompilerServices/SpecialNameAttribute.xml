@@ -24,8 +24,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.CompilerServices.SpecialNameAttribute" />
+        >The <see cref="T:System.Runtime.CompilerServices.SpecialNameAttribute" />
 
         
 
@@ -55,8 +54,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Runtime.CompilerServices.SpecialNameAttribute" />
+            >The <see cref="T:System.Runtime.CompilerServices.SpecialNameAttribute" />
 
             
 
@@ -66,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.CompilerServices.SpecialNameAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.SpecialNameAttribute" />
 
             
 

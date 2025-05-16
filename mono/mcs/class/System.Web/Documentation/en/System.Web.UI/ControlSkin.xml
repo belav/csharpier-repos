@@ -19,18 +19,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Page and control developers do not use the <see
-         cref="T:System.Web.UI.ControlSkinDelegate" />
+        >Page and control developers do not use the <see cref="T:System.Web.UI.ControlSkinDelegate" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.ControlSkin" />
+        , <see cref="T:System.Web.UI.ControlSkin" />
 
         
 
-        , or <see
-         cref="T:System.Web.UI.PageTheme" />
+        , or <see cref="T:System.Web.UI.PageTheme" />
 
         
 
@@ -41,31 +38,26 @@
 
         
 
-         objects represent a named skin or default skin of a <see
-         cref="T:System.Web.UI.Control" />
+         objects represent a named skin or default skin of a <see cref="T:System.Web.UI.Control" />
 
         
 
-         control at run time and design time. ASP.NET builds <see
-         cref="T:System.Web.UI.PageTheme" />
+         control at run time and design time. ASP.NET builds <see cref="T:System.Web.UI.PageTheme" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.ControlSkin" />
+        , <see cref="T:System.Web.UI.ControlSkin" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.ControlSkinDelegate" />
+         and <see cref="T:System.Web.UI.ControlSkinDelegate" />
 
         
 
          objects to apply the style elements defined in themes and control skin files to ASP.NET Web pages and controls. </para
       >
       <para
-        >For more information about themes and control skins, see <format
-         type="text/html">
+        >For more information about themes and control skins, see <format type="text/html">
           <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">Introduction to ASP.NET Themes</a>
         </format>
 
@@ -96,13 +88,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Web.UI.ControlSkin" />
+            >Creates a new instance of the <see cref="T:System.Web.UI.ControlSkin" />
 
             
 
-             class using the passed <see
-             cref="T:System.Web.UI.Control" />
+             class using the passed <see cref="T:System.Web.UI.Control" />
 
             
 
@@ -110,34 +100,38 @@
           >
         </summary>
         <param name="controlType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
-           of <see
-           cref="T:System.Web.UI.Control" />
+           of <see cref="T:System.Web.UI.Control" />
 
           
 
            to which the skin is applied, used to enforce type consistency among named skins. </param
         >
         <param name="themeDelegate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.ControlSkinDelegate" />
+          The <see cref="T:System.Web.UI.ControlSkinDelegate" />
 
           
 
-           that applies the style elements defined in a control skin file to the type identified by the <paramref
-           name="controlType" />
+           that applies the style elements defined in a control skin file to the type identified by the <paramref name="controlType" />
 
           
 
@@ -165,23 +159,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Passes the <see
-             cref="T:System.Web.UI.Control" />
+            >Passes the <see cref="T:System.Web.UI.Control" />
 
             
 
-             object associated with the <see
-             cref="T:System.Web.UI.ControlSkin" />
+             object associated with the <see cref="T:System.Web.UI.ControlSkin" />
 
             
 
-             class to the <see
-             cref="T:System.Web.UI.ControlSkinDelegate" />
+             class to the <see cref="T:System.Web.UI.ControlSkinDelegate" />
 
             
 
-            , which applies the skin to the <see
-             cref="T:System.Web.UI.Control" />
+            , which applies the skin to the <see cref="T:System.Web.UI.Control" />
 
             
 
@@ -191,13 +181,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies the skin to the <see
-             cref="T:System.Web.UI.Control" />
+            >Applies the skin to the <see cref="T:System.Web.UI.Control" />
 
             
 
-             control contained by the <see
-             cref="T:System.Web.UI.ControlSkin" />
+             control contained by the <see cref="T:System.Web.UI.ControlSkin" />
 
             
 
@@ -205,7 +193,11 @@
           >
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -229,13 +221,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 
-             of the control that the <see
-             cref="T:System.Web.UI.ControlSkin" />
+             of the control that the <see cref="T:System.Web.UI.ControlSkin" />
 
             
 

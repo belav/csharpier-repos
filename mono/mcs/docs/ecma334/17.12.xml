@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
 <clause number="17.12" title="Destructors">
   <paragraph
-    >A destructor is a member that implements the actions required to destruct an instance of a class. A destructor is declared using a destructor-declaration: <grammar_production
-    >
+    >A destructor is a member that implements the actions required to destruct an instance of a class. A destructor is declared using a destructor-declaration: <grammar_production>
       <name>
         <non_terminal where="17.12">destructor-declaration</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="24.2">attributes</non_terminal>
         <opt />
         <keyword>extern</keyword>
@@ -29,8 +27,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="15.2">block</non_terminal>
       </rhs>
       <rhs>
@@ -39,13 +36,13 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >A <non_terminal
-     where="17.12">destructor-declaration</non_terminal>
+    >A <non_terminal where="17.12"
+      >destructor-declaration</non_terminal
+    >
 
     
 
-     may include a set of attributes (<hyperlink
-    >24</hyperlink>
+     may include a set of attributes (<hyperlink>24</hyperlink>
 
     
 
@@ -54,32 +51,37 @@
   <paragraph>The identifier of a destructor-declarator must name the class in which the destructor is declared. If any other name is specified, a compile-time error occurs. </paragraph>
   <paragraph
     >When a destructor declaration includes an extern modifier, the destructor is said to be an external destructor. Because an external destructor declaration provides no actual implementation, its  <non_terminal
-     where="17.12">destructor-body</non_terminal>
+      where="17.12"
+      >destructor-body</non_terminal
+    >
 
     
 
      consists of a semicolon. For all other destructors, the <non_terminal
-     where="17.12">destructor-body</non_terminal>
+      where="17.12"
+      >destructor-body</non_terminal
+    >
 
     
 
      consists of a block, which specifies the statements to execute in order to destruct an instance of the class. A <non_terminal
-     where="17.12">destructor-body</non_terminal>
+      where="17.12"
+      >destructor-body</non_terminal
+    >
 
     
 
-     corresponds exactly to the <non_terminal
-     where="17.5">method-body</non_terminal>
+     corresponds exactly to the <non_terminal where="17.5"
+      >method-body</non_terminal
+    >
 
     
 
-     of an instance method with a <keyword
-    >void</keyword>
+     of an instance method with a <keyword>void</keyword>
 
     
 
-     return type (<hyperlink
-    >17.5.8</hyperlink>
+     return type (<hyperlink>17.5.8</hyperlink>
 
     
 
@@ -91,9 +93,7 @@
   </paragraph>
   <paragraph
     >Destructors are invoked automatically, and cannot be invoked explicitly. An instance becomes eligible for destruction when it is no longer possible for any code to use that instance. Execution of the destructor for the instance may occur at any time after the instance becomes eligible for destruction. When an instance is destructed, the destructors in that instance's inheritance chain are called, in order, from most derived to least derived <example
-
-      >[Example: The output of the example <code_example
-      >
+      >[Example: The output of the example <code_example>
         <![CDATA[
 using System;  
 class A  
@@ -122,8 +122,7 @@ class Test
 
       
 
-      is <code_example
-      >
+      is <code_example>
         <![CDATA[
 B's destructor  
 A's destructor  
@@ -138,8 +137,7 @@ A's destructor
   <paragraph>Destructors may be implemented by overriding the virtual method Finalize on System.Object. In any event, C# programs are not permitted to override this method or call it (or overrides of it) directly. </paragraph>
   <paragraph>
     <example
-      >[Example: For instance, the program <code_example
-      >
+      >[Example: For instance, the program <code_example>
         <![CDATA[
 class A  
 {  
@@ -158,9 +156,7 @@ class A
   </paragraph>
   <paragraph
     >The compiler behaves as if this method, and overrides of it, does not exist at all. <example
-
-      >[Example: Thus, this program: <code_example
-      >
+      >[Example: Thus, this program: <code_example>
         <![CDATA[
 class A  
 {  
@@ -175,12 +171,10 @@ class A
     >
   </paragraph>
   <paragraph
-    >For a discussion of the behavior when an exception is thrown from a destructor, see <hyperlink
-    >23.3</hyperlink>
+    >For a discussion of the behavior when an exception is thrown from a destructor, see <hyperlink>23.3</hyperlink>
 
     
 
-    . <table_line
-     />
+    . <table_line />
   </paragraph>
 </clause>

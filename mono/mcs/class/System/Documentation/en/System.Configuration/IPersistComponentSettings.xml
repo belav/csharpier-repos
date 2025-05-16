@@ -16,13 +16,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Typically, you can add application settings support to an application by creating a settings wrapper class, which is derived from <see
-         cref="T:System.Configuration.ApplicationSettingsBase" />
+        >Typically, you can add application settings support to an application by creating a settings wrapper class, which is derived from <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
         
 
-        , and then add special properties to this class. However, this approach does not sufficiently encapsulate application settings for a control so that its container is shielded from the details. The <see
-         cref="T:System.Configuration.IPersistComponentSettings" />
+        , and then add special properties to this class. However, this approach does not sufficiently encapsulate application settings for a control so that its container is shielded from the details. The <see cref="T:System.Configuration.IPersistComponentSettings" />
 
         
 
@@ -55,8 +53,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In general, the <see
-             cref="M:System.Configuration.IPersistComponentSettings.LoadComponentSettings" />
+            >In general, the <see cref="M:System.Configuration.IPersistComponentSettings.LoadComponentSettings" />
 
             
 
@@ -65,8 +62,7 @@
           <list type="bullet">
             <item>
               <para
-                >It causes each application settings instance contained by the control to refresh the values of its application settings properties, typically by calling their <see
-                 cref="M:System.Configuration.ApplicationSettingsBase.Reload" />
+                >It causes each application settings instance contained by the control to refresh the values of its application settings properties, typically by calling their <see cref="M:System.Configuration.ApplicationSettingsBase.Reload" />
 
                 
 
@@ -75,13 +71,11 @@
             </item>
             <item>
               <para
-                >As required, it updates those general properties that depend on these reloaded settings properties. For example, if the settings class contained a location settings property, <see
-                 cref="M:System.Configuration.IPersistComponentSettings.LoadComponentSettings" />
+                >As required, it updates those general properties that depend on these reloaded settings properties. For example, if the settings class contained a location settings property, <see cref="M:System.Configuration.IPersistComponentSettings.LoadComponentSettings" />
 
                 
 
-                 should ensure that the control's <see
-                 cref="P:System.Windows.Forms.Control.Location" />
+                 should ensure that the control's <see cref="P:System.Windows.Forms.Control.Location" />
 
                 
 
@@ -116,13 +110,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The implementation of the <see
-             cref="M:System.Configuration.IPersistComponentSettings.ResetComponentSettings" />
+            >The implementation of the <see cref="M:System.Configuration.IPersistComponentSettings.ResetComponentSettings" />
 
             
 
-             method typically calls the <see
-             cref="M:System.Configuration.ApplicationSettingsBase.Reset" />
+             method typically calls the <see cref="M:System.Configuration.ApplicationSettingsBase.Reset" />
 
             
 
@@ -155,18 +147,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Configuration.IPersistComponentSettings.SaveComponentSettings" />
+            >The <see cref="M:System.Configuration.IPersistComponentSettings.SaveComponentSettings" />
 
             
 
-             method writes the values of the control's application settings properties to the associated data store. The data store and serialization technique the method uses is determined by the settings provider associated with each settings class through the <see
-             cref="T:System.Configuration.SettingsProviderAttribute" />
+             method writes the values of the control's application settings properties to the associated data store. The data store and serialization technique the method uses is determined by the settings provider associated with each settings class through the <see cref="T:System.Configuration.SettingsProviderAttribute" />
 
             
 
-            . You can override the choice of the settings provider by using the <see
-             cref="T:System.Configuration.ISettingsProviderService" />
+            . You can override the choice of the settings provider by using the <see cref="T:System.Configuration.ISettingsProviderService" />
 
             
 
@@ -174,18 +163,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Configuration.IPersistComponentSettings.SaveSettings" />
+              >If the <see cref="P:System.Configuration.IPersistComponentSettings.SaveSettings" />
 
               
 
-               property is true, the control should call <see
-               cref="M:System.Configuration.IPersistComponentSettings.SaveComponentSettings" />
+               property is true, the control should call <see cref="M:System.Configuration.IPersistComponentSettings.SaveComponentSettings" />
 
               
 
-               in its own <see
-               cref="Overload:System.Windows.Forms.Control.Dispose" />
+               in its own <see cref="Overload:System.Windows.Forms.Control.Dispose" />
 
               
 
@@ -216,31 +202,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a control contains configuration data, it will typically persist this data in response to an explicit call to the <see
-             cref="M:System.Configuration.IPersistComponentSettings.SaveComponentSettings" />
+            >If a control contains configuration data, it will typically persist this data in response to an explicit call to the <see cref="M:System.Configuration.IPersistComponentSettings.SaveComponentSettings" />
 
             
 
-             method or sometimes implicitly when the control's <see
-             cref="Overload:System.Windows.Forms.Control.Dispose" />
+             method or sometimes implicitly when the control's <see cref="Overload:System.Windows.Forms.Control.Dispose" />
 
             
 
-             method is invoked. The <see
-             cref="P:System.Configuration.IPersistComponentSettings.SaveSettings" />
+             method is invoked. The <see cref="P:System.Configuration.IPersistComponentSettings.SaveSettings" />
 
             
 
              property determines whether a control automatically persists its configuration data when it is disposed.</para
           >
           <para
-            >The default value of <see
-             cref="P:System.Configuration.IPersistComponentSettings.SaveSettings" />
+            >The default value of <see cref="P:System.Configuration.IPersistComponentSettings.SaveSettings" />
 
             
 
-             depends on the implementation of the control. The documentation for the control should indicate whether it uses application settings, what data is persisted, and what the default value of the <see
-             cref="P:System.Configuration.IPersistComponentSettings.SaveSettings" />
+             depends on the implementation of the control. The documentation for the control should indicate whether it uses application settings, what data is persisted, and what the default value of the <see cref="P:System.Configuration.IPersistComponentSettings.SaveSettings" />
 
             
 
@@ -270,16 +251,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Configuration.IPersistComponentSettings.SettingsKey" />
+            >Use the <see cref="P:System.Configuration.IPersistComponentSettings.SettingsKey" />
 
             
 
              property to disambiguate groups of application settings properties when there are multiple instances of the same wrapper class. For example, if a control contains an associated wrapper class, then placing multiple instances of the same control in the same application will typically result in multiple instances of the wrapper class. A settings key is required only when the configuration data differs on a per-instance basis; for example, the location of dynamically positioned controls.</para
           >
           <para
-            >The following general rules apply to the use of <see
-             cref="P:System.Configuration.IPersistComponentSettings.SettingsKey" />
+            >The following general rules apply to the use of <see cref="P:System.Configuration.IPersistComponentSettings.SettingsKey" />
 
             
 
@@ -288,13 +267,11 @@
           <list type="bullet">
             <item>
               <para
-                >A control, like any class, may contain zero or more application settings classes, derived from <see
-                 cref="T:System.Configuration.ApplicationSettingsBase" />
+                >A control, like any class, may contain zero or more application settings classes, derived from <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
                 
 
-                . Each settings class contains its own <see
-                 cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
+                . Each settings class contains its own <see cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
 
                 
 
@@ -306,13 +283,11 @@
             </item>
             <item>
               <para
-                >For a control with any per-instance configuration data, the get accessor of the <see
-                 cref="P:System.Configuration.IPersistComponentSettings.SettingsKey" />
+                >For a control with any per-instance configuration data, the get accessor of the <see cref="P:System.Configuration.IPersistComponentSettings.SettingsKey" />
 
                 
 
-                 property should default to the <see
-                 cref="P:System.Windows.Forms.Control.Name" />
+                 property should default to the <see cref="P:System.Windows.Forms.Control.Name" />
 
                 
 
@@ -321,8 +296,7 @@
             </item>
             <item>
               <para
-                >The set accessor for this property should be implemented to distinguish between settings classes containing per-instance and shared configuration data. For each settings class containing per-instance data, set should just pass-through to the <see
-                 cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
+                >The set accessor for this property should be implemented to distinguish between settings classes containing per-instance and shared configuration data. For each settings class containing per-instance data, set should just pass-through to the <see cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
 
                 
 

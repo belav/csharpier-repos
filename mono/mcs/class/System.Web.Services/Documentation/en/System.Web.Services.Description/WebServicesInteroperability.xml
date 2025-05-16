@@ -21,8 +21,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Services.Description.WebServicesInteroperability" />
+        >The <see cref="T:System.Web.Services.Description.WebServicesInteroperability" />
 
         
 
@@ -62,13 +61,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the Web service described by <paramref
-             name="description" />
+            >true if the Web service described by <paramref name="description" />
 
             
 
-             conforms to the Web services interoperability specification indicated by <paramref
-             name="claims" />
+             conforms to the Web services interoperability specification indicated by <paramref name="claims" />
 
             
 
@@ -76,24 +73,30 @@
           >
         </returns>
         <param name="claims">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A member of <see
-           cref="T:System.Web.Services.WsiProfiles" />
+          A member of <see cref="T:System.Web.Services.WsiProfiles" />
 
           
 
            that indicates a Web services interoperability specification.</param
         >
         <param name="violations">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
+          A <see cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
 
           
 
@@ -138,13 +141,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the Web service descriptions contained in <paramref
-             name="descriptions" />
+            >true if the Web service descriptions contained in <paramref name="descriptions" />
 
             
 
-             conform to the Web services interoperability specification indicated by <paramref
-             name="claims" />
+             conform to the Web services interoperability specification indicated by <paramref name="claims" />
 
             
 
@@ -152,24 +153,30 @@
           >
         </returns>
         <param name="claims">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A member of <see
-           cref="T:System.Web.Services.WsiProfiles" />
+          A member of <see cref="T:System.Web.Services.WsiProfiles" />
 
           
 
            that indicates a Web services interoperability specification.</param
         >
         <param name="violations">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
+          A <see cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
 
           
 
@@ -210,13 +217,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the Web service described by <paramref
-             name="webReference" />
+            >true if the Web service described by <paramref name="webReference" />
 
             
 
-             conforms to the Web services interoperability specification indicated by <paramref
-             name="claims" />
+             conforms to the Web services interoperability specification indicated by <paramref name="claims" />
 
             
 
@@ -224,36 +229,45 @@
           >
         </returns>
         <param name="claims">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A member of <see
-           cref="T:System.Web.Services.WsiProfiles" />
+          A member of <see cref="T:System.Web.Services.WsiProfiles" />
 
           
 
            that indicates a Web services interoperability specification.</param
         >
         <param name="webReference">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Services.Description.WebReference" />
+          A <see cref="T:System.Web.Services.Description.WebReference" />
 
           
 
            that describes a Web service.</param
         >
         <param name="violations">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
+          A <see cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
 
           
 

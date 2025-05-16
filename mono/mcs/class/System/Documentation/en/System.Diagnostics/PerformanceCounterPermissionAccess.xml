@@ -34,8 +34,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines access levels used by <see
-         cref="T:System.Diagnostics.PerformanceCounter" />
+        >Defines access levels used by <see cref="T:System.Diagnostics.PerformanceCounter" />
 
         
 
@@ -65,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >The <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
@@ -101,8 +99,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >The <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
@@ -137,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >The <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
@@ -168,8 +164,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >The <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
@@ -196,8 +191,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >The <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
@@ -224,8 +218,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >The <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 

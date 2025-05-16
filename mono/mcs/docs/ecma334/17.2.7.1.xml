@@ -1,13 +1,11 @@
 <?xml version="1.0"?>
 <clause number="17.2.7.1" title="Member Names Reserved for Properties">
   <paragraph
-    >For a property P (<hyperlink
-    >17.6</hyperlink>
+    >For a property P (<hyperlink>17.6</hyperlink>
 
     
 
-    ) of type T, the following signatures are reserved: <code_example
-    >
+    ) of type T, the following signatures are reserved: <code_example>
       <![CDATA[
 T get_P();  
 void set_P(T value);  
@@ -17,8 +15,7 @@ void set_P(T value);
   <paragraph>Both signatures are reserved, even if the property is read-only or write-only. </paragraph>
   <paragraph>
     <example
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 using System;  
 class A {  
@@ -48,8 +45,7 @@ class Test
 
       
 
-      a class A defines a read-only property P, thus reserving signatures for get_P and set_P methods. A class B derives from A and hides both of these reserved signatures. The example produces the output: <code_example
-      >
+      a class A defines a read-only property P, thus reserving signatures for get_P and set_P methods. A class B derives from A and hides both of these reserved signatures. The example produces the output: <code_example>
         <![CDATA[
 123  
 123  

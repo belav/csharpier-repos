@@ -23,8 +23,7 @@
       <Docs>
         <param name="glitz_surface">To be added.</param>
         <summary
-          >Creates a new GlitzSurface from a valid <paramref
-           name="glitz_surface" />
+          >Creates a new GlitzSurface from a valid <paramref name="glitz_surface" />
 
           
 

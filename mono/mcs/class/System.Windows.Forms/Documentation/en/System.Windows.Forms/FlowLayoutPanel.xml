@@ -41,52 +41,44 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.FlowLayoutPanel" />
+        >The <see cref="T:System.Windows.Forms.FlowLayoutPanel" />
 
         
 
          control arranges its contents in a horizontal or vertical flow direction. Its contents can be wrapped from one row to the next, or from one column to the next. Alternatively, its contents can be clipped instead of wrapped. </para
       >
       <para
-        >You can specify the flow direction by setting the value of the <see
-         cref="P:System.Windows.Forms.FlowLayoutPanel.FlowDirection" />
+        >You can specify the flow direction by setting the value of the <see cref="P:System.Windows.Forms.FlowLayoutPanel.FlowDirection" />
 
         
 
-         property. The <see
-         cref="T:System.Windows.Forms.FlowLayoutPanel" />
+         property. The <see cref="T:System.Windows.Forms.FlowLayoutPanel" />
 
         
 
-         control correctly reverses its flow direction in right-to-left (RTL) layouts. You can also specify whether the contents of the <see
-         cref="T:System.Windows.Forms.FlowLayoutPanel" />
+         control correctly reverses its flow direction in right-to-left (RTL) layouts. You can also specify whether the contents of the <see cref="T:System.Windows.Forms.FlowLayoutPanel" />
 
         
 
-         control are wrapped or clipped by setting the value of the <see
-         cref="P:System.Windows.Forms.FlowLayoutPanel.WrapContents" />
+         control are wrapped or clipped by setting the value of the <see cref="P:System.Windows.Forms.FlowLayoutPanel.WrapContents" />
 
         
 
          property.</para
       >
       <para
-        >Any Windows Forms control, including other instances of <see
-         cref="T:System.Windows.Forms.FlowLayoutPanel" />
+        >Any Windows Forms control, including other instances of <see cref="T:System.Windows.Forms.FlowLayoutPanel" />
 
         
 
-        , can be a child of the <see
-         cref="T:System.Windows.Forms.FlowLayoutPanel" />
+        , can be a child of the <see cref="T:System.Windows.Forms.FlowLayoutPanel" />
 
         
 
          control. With this capability, you can construct sophisticated layouts that adapt to your form's dimensions at run time.</para
       >
       <para
-        >Docking and anchoring behaviors of child controls differ from the behaviors in other container controls. Both docking and anchoring are relative to the largest control in the flow direction. For more information, see <format
-         type="text/html">
+        >Docking and anchoring behaviors of child controls differ from the behaviors in other container controls. Both docking and anchoring are relative to the largest control in the flow direction. For more information, see <format type="text/html">
           <a href="a2bcdfca-9b63-45e6-9c0e-3411015cba98"
             >How to: Anchor and Dock Child Controls in a FlowLayoutPanel Control</a
           >
@@ -112,18 +104,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see
-             cref="P:System.Windows.Forms.FlowLayoutPanel.FlowDirection" />
+            >This constructor sets the <see cref="P:System.Windows.Forms.FlowLayoutPanel.FlowDirection" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.FlowLayoutPanel.WrapContents" />
+             and <see cref="P:System.Windows.Forms.FlowLayoutPanel.WrapContents" />
 
             
 
-             properties to their default values: <see
-             cref="F:System.Windows.Forms.FlowDirection.LeftToRight" />
+             properties to their default values: <see cref="F:System.Windows.Forms.FlowDirection.LeftToRight" />
 
             
 
@@ -133,8 +122,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.FlowLayoutPanel" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.FlowLayoutPanel" />
 
             
 
@@ -169,13 +157,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.FlowLayoutPanel.FlowDirection" />
+            >The <see cref="P:System.Windows.Forms.FlowLayoutPanel.FlowDirection" />
 
             
 
-             property is the default property for the <see
-             cref="T:System.Windows.Forms.FlowLayoutPanel" />
+             property is the default property for the <see cref="T:System.Windows.Forms.FlowLayoutPanel" />
 
             
 
@@ -185,8 +171,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating the flow direction of the <see
-             cref="T:System.Windows.Forms.FlowLayoutPanel" />
+            >Gets or sets a value indicating the flow direction of the <see cref="T:System.Windows.Forms.FlowLayoutPanel" />
 
             
 
@@ -216,8 +201,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that represents the flow-break setting of the <see
-             cref="T:System.Windows.Forms.FlowLayoutPanel" />
+            >Returns a value that represents the flow-break setting of the <see cref="T:System.Windows.Forms.FlowLayoutPanel" />
 
             
 
@@ -229,7 +213,11 @@
           <para>true if the flow break is set; otherwise, false.</para>
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -289,8 +277,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the value that represents the flow-break setting of the <see
-             cref="T:System.Windows.Forms.FlowLayoutPanel" />
+            >Sets the value that represents the flow-break setting of the <see cref="T:System.Windows.Forms.FlowLayoutPanel" />
 
             
 
@@ -298,14 +285,22 @@
           >
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The child control.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -337,13 +332,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.FlowLayoutPanel" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.FlowLayoutPanel" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IExtenderProvider" />
+             instance is cast to an <see cref="T:System.ComponentModel.IExtenderProvider" />
 
             
 
@@ -353,8 +346,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.IExtenderProvider.CanExtend(System.Object)" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.IExtenderProvider.CanExtend(System.Object)" />
 
             
 
@@ -366,12 +358,15 @@
           <para>true if this object can provide extender properties to the specified object; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -404,8 +399,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Windows.Forms.FlowLayoutPanel" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.FlowLayoutPanel" />
 
             
 

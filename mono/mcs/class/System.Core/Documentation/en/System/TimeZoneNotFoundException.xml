@@ -13,13 +13,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This exception is thrown by the <see
-         cref="M:System.TimeZoneInfo.ConvertTimeBySystemTimeZoneId(System.DateTime,System.String,System.String)" />
+        >This exception is thrown by the <see cref="M:System.TimeZoneInfo.ConvertTimeBySystemTimeZoneId(System.DateTime,System.String,System.String)" />
 
         
 
-         and <see
-         cref="M:System.TimeZoneInfo.FindSystemTimeZoneById(System.String)" />
+         and <see cref="M:System.TimeZoneInfo.FindSystemTimeZoneById(System.String)" />
 
         
 
@@ -27,8 +25,7 @@
       >
       <para>Because the registry serves as the repository of time zone information in Windows XP and Windows Vista, this exception indicates that the registry contains no information about a particular time zone. Time zone information is stored in the subkeys of HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Time Zones.</para>
       <para
-        >If an application depends on the presence of a particular time zone and the attempt to retrieve it throws a <see
-         cref="T:System.TimeZoneNotFoundException" />
+        >If an application depends on the presence of a particular time zone and the attempt to retrieve it throws a <see cref="T:System.TimeZoneNotFoundException" />
 
         
 
@@ -37,13 +34,11 @@
       <list type="bullet">
         <item>
           <para
-            >By calling the <see
-             cref="M:System.TimeZoneInfo.FromSerializedString(System.String)" />
+            >By calling the <see cref="M:System.TimeZoneInfo.FromSerializedString(System.String)" />
 
             
 
-             method to deserialize a saved <see
-             cref="T:System.TimeZoneInfo" />
+             method to deserialize a saved <see cref="T:System.TimeZoneInfo" />
 
             
 
@@ -52,8 +47,7 @@
         </item>
         <item>
           <para
-            >By calling one of the overloads of the <see
-             cref="M:System.TimeZoneInfo.CreateCustomTimeZone(System.String,System.TimeSpan,System.String,System.String)" />
+            >By calling one of the overloads of the <see cref="M:System.TimeZoneInfo.CreateCustomTimeZone(System.String,System.TimeSpan,System.String,System.String)" />
 
             
 
@@ -62,13 +56,11 @@
         </item>
       </list>
       <para
-        >See the examples for the <see
-         cref="M:System.TimeZoneInfo.CreateCustomTimeZone(System.String,System.TimeSpan,System.String,System.String,System.String,System.TimeZoneInfo.AdjustmentRule[],System.Boolean)" />
+        >See the examples for the <see cref="M:System.TimeZoneInfo.CreateCustomTimeZone(System.String,System.TimeSpan,System.String,System.String,System.String,System.TimeZoneInfo.AdjustmentRule[],System.Boolean)" />
 
         
 
-         and <see
-         cref="M:System.TimeZoneInfo.FromSerializedString(System.String)" />
+         and <see cref="M:System.TimeZoneInfo.FromSerializedString(System.String)" />
 
         
 
@@ -92,13 +84,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is the default constructor of the <see
-             cref="T:System.TimeZoneNotFoundException" />
+            >This is the default constructor of the <see cref="T:System.TimeZoneNotFoundException" />
 
             
 
-             class. This constructor initializes the <see
-             cref="P:System.Exception.Message" />
+             class. This constructor initializes the <see cref="P:System.Exception.Message" />
 
             
 
@@ -108,8 +98,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.TimeZoneNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.TimeZoneNotFoundException" />
 
             
 
@@ -131,13 +120,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="message" />
+            >The <paramref name="message" />
 
             
 
-             string is assigned to the <see
-             cref="P:System.Exception.Message" />
+             string is assigned to the <see cref="P:System.Exception.Message" />
 
             
 
@@ -147,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.TimeZoneNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.TimeZoneNotFoundException" />
 
             
 
@@ -156,7 +142,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -182,23 +172,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is not called directly by your code to instantiate the <see
-             cref="T:System.TimeZoneNotFoundException" />
+            >This constructor is not called directly by your code to instantiate the <see cref="T:System.TimeZoneNotFoundException" />
 
             
 
-             object. Instead, it is called by the <see
-             cref="T:System.Runtime.Serialization.IFormatter" />
+             object. Instead, it is called by the <see cref="T:System.Runtime.Serialization.IFormatter" />
 
             
 
-             object's <see
-             cref="M:System.Runtime.Serialization.IFormatter.Deserialize(System.IO.Stream)" />
+             object's <see cref="M:System.Runtime.Serialization.IFormatter.Deserialize(System.IO.Stream)" />
 
             
 
-             method when deserializing the <see
-             cref="T:System.TimeZoneNotFoundException" />
+             method when deserializing the <see cref="T:System.TimeZoneNotFoundException" />
 
             
 
@@ -208,8 +194,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.TimeZoneNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.TimeZoneNotFoundException" />
 
             
 
@@ -217,7 +202,11 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -243,36 +232,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you use this <see
-             cref="T:System.TimeZoneNotFoundException" />
+            >Typically, you use this <see cref="T:System.TimeZoneNotFoundException" />
 
             
 
-             overload to handle an exception in a try…catch block. The <paramref
-             name="innerException" />
+             overload to handle an exception in a try…catch block. The <paramref name="innerException" />
 
             
 
-             parameter should be a reference to the exception object handled in the catch block, or it can be null. This value is then assigned to the <see
-             cref="T:System.TimeZoneNotFoundException" />
+             parameter should be a reference to the exception object handled in the catch block, or it can be null. This value is then assigned to the <see cref="T:System.TimeZoneNotFoundException" />
 
             
 
-             object's <see
-             cref="P:System.Exception.InnerException" />
+             object's <see cref="P:System.Exception.InnerException" />
 
             
 
              property.</para
           >
           <para
-            >The <paramref
-             name="message" />
+            >The <paramref name="message" />
 
             
 
-             string is assigned to the <see
-             cref="P:System.Exception.Message" />
+             string is assigned to the <see cref="P:System.Exception.Message" />
 
             
 
@@ -282,8 +265,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.TimeZoneNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.TimeZoneNotFoundException" />
 
             
 
@@ -291,7 +273,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

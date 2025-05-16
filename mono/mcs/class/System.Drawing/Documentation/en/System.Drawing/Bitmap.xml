@@ -29,8 +29,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A bitmap consists of the pixel data for a graphics image and its attributes. There are many standard formats for saving a bitmap to a file. ndptecgdiplus supports the following file formats: BMP, GIF, EXIF, JPG, PNG and TIFF. For more information about supported formats, see <format
-         type="text/html">
+        >A bitmap consists of the pixel data for a graphics image and its attributes. There are many standard formats for saving a bitmap to a file. ndptecgdiplus supports the following file formats: BMP, GIF, EXIF, JPG, PNG and TIFF. For more information about supported formats, see <format type="text/html">
           <a href="6be085a2-2c13-47c8-b80a-c18b32777d8d">Types of Bitmaps</a>
         </format>
 
@@ -39,28 +38,23 @@
         .</para
       >
       <para
-        >You can create images from files, streams, and other sources by using one of the <see
-         cref="M:System.Drawing.Bitmap.#ctor(System.String,System.Boolean)" />
+        >You can create images from files, streams, and other sources by using one of the <see cref="M:System.Drawing.Bitmap.#ctor(System.String,System.Boolean)" />
 
         
 
-         constructors and save them to a stream or to the file system with the <see
-         cref="M:System.Drawing.Image.Save(System.IO.Stream,System.Drawing.Imaging.ImageCodecInfo,System.Drawing.Imaging.EncoderParameters)" />
+         constructors and save them to a stream or to the file system with the <see cref="M:System.Drawing.Image.Save(System.IO.Stream,System.Drawing.Imaging.ImageCodecInfo,System.Drawing.Imaging.EncoderParameters)" />
 
         
 
-         method. Images are drawn to the screen or to memory by using the <see
-         cref="M:System.Drawing.Graphics.DrawImage(System.Drawing.Image,System.Drawing.Point)" />
+         method. Images are drawn to the screen or to memory by using the <see cref="M:System.Drawing.Graphics.DrawImage(System.Drawing.Image,System.Drawing.Point)" />
 
         
 
-         method of the <see
-         cref="T:System.Drawing.Graphics" />
+         method of the <see cref="T:System.Drawing.Graphics" />
 
         
 
-         object. For a list of topics about working with image files, see <format
-         type="text/html">
+         object. For a list of topics about working with image files, see <format type="text/html">
           <a href="a626d701-bd99-4fd8-b92f-7b8f794e042b"
             >Working with Images, Bitmaps, Icons, and Metafiles</a
           >
@@ -72,23 +66,19 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Drawing.Bitmap" />
+          >The <see cref="T:System.Drawing.Bitmap" />
 
           
 
-           class is not accessible across application domains. For example, if you create a dynamic <see
-           cref="T:System.AppDomain" />
+           class is not accessible across application domains. For example, if you create a dynamic <see cref="T:System.AppDomain" />
 
           
 
-           and create several brushes, pens, and bitmaps in that domain, then pass these objects back to the main application domain, you can successfully use the pens and brushes. However, if you call the <see
-           cref="M:System.Drawing.Graphics.DrawImage(System.Drawing.Image,System.Drawing.Point)" />
+           and create several brushes, pens, and bitmaps in that domain, then pass these objects back to the main application domain, you can successfully use the pens and brushes. However, if you call the <see cref="M:System.Drawing.Graphics.DrawImage(System.Drawing.Image,System.Drawing.Point)" />
 
           
 
-           method to draw the marshaled <see
-           cref="T:System.Drawing.Bitmap" />
+           method to draw the marshaled <see cref="T:System.Drawing.Bitmap" />
 
           
 
@@ -100,8 +90,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Encapsulates a ndptecgdiplus bitmap, which consists of the pixel data for a graphics image and its attributes. A <see
-         cref="T:System.Drawing.Bitmap" />
+        >Encapsulates a ndptecgdiplus bitmap, which consists of the pixel data for a graphics image and its attributes. A <see cref="T:System.Drawing.Bitmap" />
 
         
 
@@ -122,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Bitmap" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -131,17 +119,19 @@
           >
         </summary>
         <param name="original">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
-           from which to create the new <see
-           cref="T:System.Drawing.Bitmap" />
+           from which to create the new <see cref="T:System.Drawing.Bitmap" />
 
           
 
@@ -164,16 +154,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must keep the stream open for the lifetime of the <see
-             cref="T:System.Drawing.Bitmap" />
+            >You must keep the stream open for the lifetime of the <see cref="T:System.Drawing.Bitmap" />
 
             
 
             .</para
           >
           <para
-            >Due to a limitation of the ndptecgdiplus decoder, an <see
-             cref="T:System.ArgumentException" />
+            >Due to a limitation of the ndptecgdiplus decoder, an <see cref="T:System.ArgumentException" />
 
             
 
@@ -183,8 +171,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Bitmap" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -192,7 +179,11 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -215,15 +206,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The file name and path can be relative to the application or an absolute path. Use this constructor to open images with the following file formats: BMP, GIF, EXIF, JPG, PNG and TIFF. For more information about supported formats, see <format
-             type="text/html">
+            >The file name and path can be relative to the application or an absolute path. Use this constructor to open images with the following file formats: BMP, GIF, EXIF, JPG, PNG and TIFF. For more information about supported formats, see <format type="text/html">
               <a href="6be085a2-2c13-47c8-b80a-c18b32777d8d">Types of Bitmaps</a>
             </format>
 
             
 
-            . The file remains locked until the <see
-             cref="T:System.Drawing.Bitmap" />
+            . The file remains locked until the <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -233,8 +222,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Bitmap" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -242,7 +230,11 @@
           >
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -270,8 +262,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Bitmap" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -279,34 +270,38 @@
           >
         </summary>
         <param name="original">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
-           from which to create the new <see
-           cref="T:System.Drawing.Bitmap" />
+           from which to create the new <see cref="T:System.Drawing.Bitmap" />
 
           
 
           . </param
         >
         <param name="newSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Size" />
+          The <see cref="T:System.Drawing.Size" />
 
           
 
-           structure that represent the size of the new <see
-           cref="T:System.Drawing.Bitmap" />
+           structure that represent the size of the new <see cref="T:System.Drawing.Bitmap" />
 
           
 
@@ -330,18 +325,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see
-             cref="T:System.Drawing.Bitmap" />
+            >This constructor creates a <see cref="T:System.Drawing.Bitmap" />
 
             
 
-             with a <see
-             cref="T:System.Drawing.Imaging.PixelFormat" />
+             with a <see cref="T:System.Drawing.Imaging.PixelFormat" />
 
             
 
-             enumeration value of <see
-             cref="F:System.Drawing.Imaging.PixelFormat.Format32bppArgb" />
+             enumeration value of <see cref="F:System.Drawing.Imaging.PixelFormat.Format32bppArgb" />
 
             
 
@@ -351,8 +343,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Bitmap" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -360,24 +351,30 @@
           >
         </summary>
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The width, in pixels, of the new <see
-           cref="T:System.Drawing.Bitmap" />
+          The width, in pixels, of the new <see cref="T:System.Drawing.Bitmap" />
 
           
 
           . </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The height, in pixels, of the new <see
-           cref="T:System.Drawing.Bitmap" />
+          The height, in pixels, of the new <see cref="T:System.Drawing.Bitmap" />
 
           
 
@@ -404,16 +401,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must keep the stream open for the lifetime of the <see
-             cref="T:System.Drawing.Bitmap" />
+            >You must keep the stream open for the lifetime of the <see cref="T:System.Drawing.Bitmap" />
 
             
 
             .</para
           >
           <para
-            >Due to a limitation of the ndptecgdiplus decoder, an <see
-             cref="T:System.ArgumentException" />
+            >Due to a limitation of the ndptecgdiplus decoder, an <see cref="T:System.ArgumentException" />
 
             
 
@@ -423,8 +418,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Bitmap" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -432,19 +426,26 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data stream used to load the image. </param
         >
         <param name="useIcm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to use color correction for this <see
-           cref="T:System.Drawing.Bitmap" />
+          true to use color correction for this <see cref="T:System.Drawing.Bitmap" />
 
           
 
@@ -468,15 +469,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to open images with the following file formats: BMP, GIF, EXIF, JPG, PNG and TIFF. For more information about supported formats, see <format
-             type="text/html">
+            >Use this constructor to open images with the following file formats: BMP, GIF, EXIF, JPG, PNG and TIFF. For more information about supported formats, see <format type="text/html">
               <a href="6be085a2-2c13-47c8-b80a-c18b32777d8d">Types of Bitmaps</a>
             </format>
 
             
 
-            . The file remains locked until the <see
-             cref="T:System.Drawing.Bitmap" />
+            . The file remains locked until the <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -486,8 +485,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Bitmap" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -495,19 +493,26 @@
           >
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the bitmap file. </param
         >
         <param name="useIcm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to use color correction for this <see
-           cref="T:System.Drawing.Bitmap" />
+          true to use color correction for this <see cref="T:System.Drawing.Bitmap" />
 
           
 
@@ -531,13 +536,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor combines the namespace of the given type with the string name of the resource and looks for a match in the assembly manifest. For example you can pass in the <see
-             cref="T:System.Windows.Forms.Button" />
+            >This constructor combines the namespace of the given type with the string name of the resource and looks for a match in the assembly manifest. For example you can pass in the <see cref="T:System.Windows.Forms.Button" />
 
             
 
-             type and <paramref
-             name="Button.bmp" />
+             type and <paramref name="Button.bmp" />
 
             
 
@@ -547,8 +550,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Bitmap" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -556,14 +558,22 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The class used to extract the resource. </param
         >
         <param name="resource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -592,8 +602,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Bitmap" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -601,41 +610,49 @@
           >
         </summary>
         <param name="original">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
-           from which to create the new <see
-           cref="T:System.Drawing.Bitmap" />
+           from which to create the new <see cref="T:System.Drawing.Bitmap" />
 
           
 
           . </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The width, in pixels, of the new <see
-           cref="T:System.Drawing.Bitmap" />
+          The width, in pixels, of the new <see cref="T:System.Drawing.Bitmap" />
 
           
 
           . </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The height, in pixels, of the new <see
-           cref="T:System.Drawing.Bitmap" />
+          The height, in pixels, of the new <see cref="T:System.Drawing.Bitmap" />
 
           
 
@@ -663,23 +680,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.Drawing.Bitmap" />
+            >The new <see cref="T:System.Drawing.Bitmap" />
 
             
 
-             that this method creates takes its horizontal and vertical resolution from the <see
-             cref="P:System.Drawing.Graphics.DpiX" />
+             that this method creates takes its horizontal and vertical resolution from the <see cref="P:System.Drawing.Graphics.DpiX" />
 
             
 
-             and <see
-             cref="P:System.Drawing.Graphics.DpiY" />
+             and <see cref="P:System.Drawing.Graphics.DpiY" />
 
             
 
-             properties of <paramref
-             name="g" />
+             properties of <paramref name="g" />
 
             
 
@@ -689,13 +702,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Bitmap" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Bitmap" />
 
             
 
-             class with the specified size and with the resolution of the specified <see
-             cref="T:System.Drawing.Graphics" />
+             class with the specified size and with the resolution of the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -703,41 +714,49 @@
           >
         </summary>
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The width, in pixels, of the new <see
-           cref="T:System.Drawing.Bitmap" />
+          The width, in pixels, of the new <see cref="T:System.Drawing.Bitmap" />
 
           
 
           . </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The height, in pixels, of the new <see
-           cref="T:System.Drawing.Bitmap" />
+          The height, in pixels, of the new <see cref="T:System.Drawing.Bitmap" />
 
           
 
           . </param
         >
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
-           object that specifies the resolution for the new <see
-           cref="T:System.Drawing.Bitmap" />
+           object that specifies the resolution for the new <see cref="T:System.Drawing.Bitmap" />
 
           
 
@@ -766,8 +785,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Bitmap" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -775,41 +793,49 @@
           >
         </summary>
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The width, in pixels, of the new <see
-           cref="T:System.Drawing.Bitmap" />
+          The width, in pixels, of the new <see cref="T:System.Drawing.Bitmap" />
 
           
 
           . </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The height, in pixels, of the new <see
-           cref="T:System.Drawing.Bitmap" />
+          The height, in pixels, of the new <see cref="T:System.Drawing.Bitmap" />
 
           
 
           . </param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The pixel format for the new <see
-           cref="T:System.Drawing.Bitmap" />
+          The pixel format for the new <see cref="T:System.Drawing.Bitmap" />
 
           
 
-          . This must specify a value that begins with <paramref
-           name="Format" />
+          . This must specify a value that begins with <paramref name="Format" />
 
           
 
@@ -839,13 +865,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The caller is responsible for allocating and freeing the block of memory specified by the <paramref
-             name="scan0" />
+            >The caller is responsible for allocating and freeing the block of memory specified by the <paramref name="scan0" />
 
             
 
-             parameter. However, the memory should not be released until the related <see
-             cref="T:System.Drawing.Bitmap" />
+             parameter. However, the memory should not be released until the related <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -855,8 +879,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Bitmap" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -864,55 +887,71 @@
           >
         </summary>
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The width, in pixels, of the new <see
-           cref="T:System.Drawing.Bitmap" />
+          The width, in pixels, of the new <see cref="T:System.Drawing.Bitmap" />
 
           
 
           . </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The height, in pixels, of the new <see
-           cref="T:System.Drawing.Bitmap" />
+          The height, in pixels, of the new <see cref="T:System.Drawing.Bitmap" />
 
           
 
           . </param
         >
         <param name="stride">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Integer that specifies the byte offset between the beginning of one scan line and the next. This is usually (but not necessarily) the number of bytes in the pixel format (for example, 2 for 16 bits per pixel) multiplied by the width of the bitmap. The value passed to this parameter must be a multiple of four.. </param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The pixel format for the new <see
-           cref="T:System.Drawing.Bitmap" />
+          The pixel format for the new <see cref="T:System.Drawing.Bitmap" />
 
           
 
-          . This must specify a value that begins with <paramref
-           name="Format" />
+          . This must specify a value that begins with <paramref name="Format" />
 
           
 
           .</param
         >
         <param name="scan0">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -942,18 +981,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a copy of the section of this <see
-             cref="T:System.Drawing.Bitmap" />
+            >Creates a copy of the section of this <see cref="T:System.Drawing.Bitmap" />
 
             
 
-             defined by <see
-             cref="T:System.Drawing.Rectangle" />
+             defined by <see cref="T:System.Drawing.Rectangle" />
 
             
 
-             structure and with a specified <see
-             cref="T:System.Drawing.Imaging.PixelFormat" />
+             structure and with a specified <see cref="T:System.Drawing.Imaging.PixelFormat" />
 
             
 
@@ -963,8 +999,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.Drawing.Bitmap" />
+            >The new <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -972,34 +1007,38 @@
           >
         </returns>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Defines the portion of this <see
-           cref="T:System.Drawing.Bitmap" />
+          Defines the portion of this <see cref="T:System.Drawing.Bitmap" />
 
           
 
-           to copy. Coordinates are relative to this <see
-           cref="T:System.Drawing.Bitmap" />
+           to copy. Coordinates are relative to this <see cref="T:System.Drawing.Bitmap" />
 
           
 
           . </param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The pixel format for the new <see
-           cref="T:System.Drawing.Bitmap" />
+          The pixel format for the new <see cref="T:System.Drawing.Bitmap" />
 
           
 
-          . This must specify a value that begins with <paramref
-           name="Format" />
+          . This must specify a value that begins with <paramref name="Format" />
 
           
 
@@ -1029,13 +1068,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a copy of the section of this <see
-             cref="T:System.Drawing.Bitmap" />
+            >Creates a copy of the section of this <see cref="T:System.Drawing.Bitmap" />
 
             
 
-             defined with a specified <see
-             cref="T:System.Drawing.Imaging.PixelFormat" />
+             defined with a specified <see cref="T:System.Drawing.Imaging.PixelFormat" />
 
             
 
@@ -1045,8 +1082,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Bitmap" />
+            >The <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -1054,29 +1090,34 @@
           >
         </returns>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Defines the portion of this <see
-           cref="T:System.Drawing.Bitmap" />
+          Defines the portion of this <see cref="T:System.Drawing.Bitmap" />
 
           
 
            to copy. </param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Specifies the <see
-           cref="T:System.Drawing.Imaging.PixelFormat" />
+          Specifies the <see cref="T:System.Drawing.Imaging.PixelFormat" />
 
           
 
-           enumeration for the destination <see
-           cref="T:System.Drawing.Bitmap" />
+           enumeration for the destination <see cref="T:System.Drawing.Bitmap" />
 
           
 
@@ -1105,8 +1146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Drawing.Bitmap" />
+            >Creates a <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -1116,8 +1156,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Bitmap" />
+            >The <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -1125,7 +1164,11 @@
           >
         </returns>
         <param name="hicon">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1158,13 +1201,11 @@
 
             
 
-             requires security permission to call unmanaged code. For a managed alternative for creating a bitmap from an embedded resource, see <see
-             cref="M:System.Drawing.Bitmap.#ctor(System.Type,System.String)" />
+             requires security permission to call unmanaged code. For a managed alternative for creating a bitmap from an embedded resource, see <see cref="M:System.Drawing.Bitmap.#ctor(System.Type,System.String)" />
 
             
 
-            . <see
-             cref="M:System.Drawing.Bitmap.FromResource(System.IntPtr,System.String)" />
+            . <see cref="M:System.Drawing.Bitmap.FromResource(System.IntPtr,System.String)" />
 
             
 
@@ -1174,8 +1215,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Drawing.Bitmap" />
+            >Creates a <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -1185,8 +1225,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Bitmap" />
+            >The <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -1194,14 +1233,22 @@
           >
         </returns>
         <param name="hinstance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A handle to an instance of the executable file that contains the resource. </param
         >
         <param name="bitmapName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1224,13 +1271,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You are responsible for calling the ndptecgdi <unmanagedCodeEntityReference
-            >DeleteObject</unmanagedCodeEntityReference>
+            >You are responsible for calling the ndptecgdi <unmanagedCodeEntityReference>DeleteObject</unmanagedCodeEntityReference>
 
             
 
              method to free the memory used by the ndptecgdi bitmap object. For more information about GDI bitmaps, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=205685">Bitmaps</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=205685"
+              >Bitmaps</see
+            >
 
             
 
@@ -1240,8 +1288,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a ndptecgdi bitmap object from this <see
-             cref="T:System.Drawing.Bitmap" />
+            >Creates a ndptecgdi bitmap object from this <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -1279,13 +1326,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You are responsible for calling the ndptecgdi <unmanagedCodeEntityReference
-            >DeleteObject</unmanagedCodeEntityReference>
+            >You are responsible for calling the ndptecgdi <unmanagedCodeEntityReference>DeleteObject</unmanagedCodeEntityReference>
 
             
 
              method to free the memory used by the ndptecgdi bitmap object. For more information about GDI bitmaps, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=205685">Bitmaps</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=205685"
+              >Bitmaps</see
+            >
 
             
 
@@ -1295,8 +1343,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a ndptecgdi bitmap object from this <see
-             cref="T:System.Drawing.Bitmap" />
+            >Creates a ndptecgdi bitmap object from this <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -1308,12 +1355,15 @@
           <para>A handle to the ndptecgdi bitmap object that this method creates.</para>
         </returns>
         <param name="background">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
@@ -1349,8 +1399,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A Windows handle to an icon with the same image as the <see
-             cref="T:System.Drawing.Bitmap" />
+            >A Windows handle to an icon with the same image as the <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -1383,8 +1432,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the color of the specified pixel in this <see
-             cref="T:System.Drawing.Bitmap" />
+            >Gets the color of the specified pixel in this <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -1394,8 +1442,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Color" />
+            >A <see cref="T:System.Drawing.Color" />
 
             
 
@@ -1403,14 +1450,22 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the pixel to retrieve. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1440,64 +1495,53 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="Overload:System.Drawing.Bitmap.LockBits" />
+            >Use the <see cref="Overload:System.Drawing.Bitmap.LockBits" />
 
             
 
-             method to lock an existing bitmap in system memory so that it can be changed programmatically. You can change the color of an image with the <see
-             cref="M:System.Drawing.Bitmap.SetPixel(System.Int32,System.Int32,System.Drawing.Color)" />
+             method to lock an existing bitmap in system memory so that it can be changed programmatically. You can change the color of an image with the <see cref="M:System.Drawing.Bitmap.SetPixel(System.Int32,System.Int32,System.Drawing.Color)" />
 
             
 
-             method, although the <see
-             cref="Overload:System.Drawing.Bitmap.LockBits" />
+             method, although the <see cref="Overload:System.Drawing.Bitmap.LockBits" />
 
             
 
              method offers better performance for large-scale changes. </para
           >
           <para
-            >The <see
-             cref="T:System.Drawing.Imaging.BitmapData" />
+            >The <see cref="T:System.Drawing.Imaging.BitmapData" />
 
             
 
-             specifies the attributes of the <see
-             cref="T:System.Drawing.Bitmap" />
+             specifies the attributes of the <see cref="T:System.Drawing.Bitmap" />
 
             
 
             , such as size, pixel format, the starting address of the pixel data in memory, and length of each scan line (stride).</para
           >
           <para
-            >When calling this method, you should use a member of the <see
-             cref="T:System.Drawing.Imaging.PixelFormat" />
+            >When calling this method, you should use a member of the <see cref="T:System.Drawing.Imaging.PixelFormat" />
 
             
 
-             enumeration that contains a specific bits-per-pixel (BPP) value. Using <see
-             cref="T:System.Drawing.Imaging.PixelFormat" />
+             enumeration that contains a specific bits-per-pixel (BPP) value. Using <see cref="T:System.Drawing.Imaging.PixelFormat" />
 
             
 
-             values such as <see
-             cref="F:System.Drawing.Imaging.PixelFormat.Indexed" />
+             values such as <see cref="F:System.Drawing.Imaging.PixelFormat.Indexed" />
 
             
 
-             and <see
-             cref="F:System.Drawing.Imaging.PixelFormat.Gdi" />
+             and <see cref="F:System.Drawing.Imaging.PixelFormat.Gdi" />
 
             
 
-             will throw an <see
-             cref="T:System.ArgumentException" />
+             will throw an <see cref="T:System.ArgumentException" />
 
             
 
-            . Also, passing the incorrect pixel format for a bitmap will throw an <see
-             cref="T:System.ArgumentException" />
+            . Also, passing the incorrect pixel format for a bitmap will throw an <see cref="T:System.ArgumentException" />
 
             
 
@@ -1507,8 +1551,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Locks a <see
-             cref="T:System.Drawing.Bitmap" />
+            >Locks a <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -1518,8 +1561,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Imaging.BitmapData" />
+            >A <see cref="T:System.Drawing.Imaging.BitmapData" />
 
             
 
@@ -1527,51 +1569,57 @@
           >
         </returns>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           structure that specifies the portion of the <see
-           cref="T:System.Drawing.Bitmap" />
+           structure that specifies the portion of the <see cref="T:System.Drawing.Bitmap" />
 
           
 
            to lock. </param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.ImageLockMode" />
+          An <see cref="T:System.Drawing.Imaging.ImageLockMode" />
 
           
 
-           enumeration that specifies the access level (read/write) for the <see
-           cref="T:System.Drawing.Bitmap" />
+           enumeration that specifies the access level (read/write) for the <see cref="T:System.Drawing.Bitmap" />
 
           
 
           . </param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.PixelFormat" />
+          A <see cref="T:System.Drawing.Imaging.PixelFormat" />
 
           
 
-           enumeration that specifies the data format of this <see
-           cref="T:System.Drawing.Bitmap" />
+           enumeration that specifies the data format of this <see cref="T:System.Drawing.Bitmap" />
 
           
 
@@ -1605,69 +1653,57 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="Overload:System.Drawing.Bitmap.LockBits" />
+            >Use the <see cref="Overload:System.Drawing.Bitmap.LockBits" />
 
             
 
-             method to lock an existing bitmap in system memory so that it can be changed programmatically. You can change the color of an image with the <see
-             cref="M:System.Drawing.Bitmap.SetPixel(System.Int32,System.Int32,System.Drawing.Color)" />
+             method to lock an existing bitmap in system memory so that it can be changed programmatically. You can change the color of an image with the <see cref="M:System.Drawing.Bitmap.SetPixel(System.Int32,System.Int32,System.Drawing.Color)" />
 
             
 
-             method, although the <see
-             cref="Overload:System.Drawing.Bitmap.LockBits" />
+             method, although the <see cref="Overload:System.Drawing.Bitmap.LockBits" />
 
             
 
              method offers better performance for large-scale changes. </para
           >
           <para
-            >When calling this method, you should use a member of the <see
-             cref="T:System.Drawing.Imaging.PixelFormat" />
+            >When calling this method, you should use a member of the <see cref="T:System.Drawing.Imaging.PixelFormat" />
 
             
 
-             enumeration that contains a specific bits-per-pixel (BPP) value. Using <see
-             cref="T:System.Drawing.Imaging.PixelFormat" />
+             enumeration that contains a specific bits-per-pixel (BPP) value. Using <see cref="T:System.Drawing.Imaging.PixelFormat" />
 
             
 
-             values, such as <see
-             cref="F:System.Drawing.Imaging.PixelFormat.Indexed" />
+             values, such as <see cref="F:System.Drawing.Imaging.PixelFormat.Indexed" />
 
             
 
-             and <see
-             cref="F:System.Drawing.Imaging.PixelFormat.Gdi" />
+             and <see cref="F:System.Drawing.Imaging.PixelFormat.Gdi" />
 
             
 
-            , will throw an <see
-             cref="T:System.ArgumentException" />
+            , will throw an <see cref="T:System.ArgumentException" />
 
             
 
-            . Also, passing the incorrect pixel format for a bitmap will throw an <see
-             cref="T:System.ArgumentException" />
+            . Also, passing the incorrect pixel format for a bitmap will throw an <see cref="T:System.ArgumentException" />
 
             
 
             .</para
           >
           <para
-            >This version of the <see
-             cref="Overload:System.Drawing.Bitmap.LockBits" />
+            >This version of the <see cref="Overload:System.Drawing.Bitmap.LockBits" />
 
             
 
-             method is intended to be used with a <paramref
-             name="flags" />
+             method is intended to be used with a <paramref name="flags" />
 
             
 
-             value of <see
-             cref="F:System.Drawing.Imaging.ImageLockMode.UserInputBuffer" />
+             value of <see cref="F:System.Drawing.Imaging.ImageLockMode.UserInputBuffer" />
 
             
 
@@ -1677,8 +1713,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Locks a <see
-             cref="T:System.Drawing.Bitmap" />
+            >Locks a <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -1688,8 +1723,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Imaging.BitmapData" />
+            >A <see cref="T:System.Drawing.Imaging.BitmapData" />
 
             
 
@@ -1697,58 +1731,68 @@
           >
         </returns>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A rectangle structure that specifies the portion of the <see
-           cref="T:System.Drawing.Bitmap" />
+          A rectangle structure that specifies the portion of the <see cref="T:System.Drawing.Bitmap" />
 
           
 
            to lock.</param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Drawing.Imaging.ImageLockMode" />
+          One of the <see cref="T:System.Drawing.Imaging.ImageLockMode" />
 
           
 
-           values that specifies the access level (read/write) for the <see
-           cref="T:System.Drawing.Bitmap" />
+           values that specifies the access level (read/write) for the <see cref="T:System.Drawing.Bitmap" />
 
           
 
           .</param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Drawing.Imaging.PixelFormat" />
+          One of the <see cref="T:System.Drawing.Imaging.PixelFormat" />
 
           
 
-           values that specifies the data format of the <see
-           cref="T:System.Drawing.Bitmap" />
+           values that specifies the data format of the <see cref="T:System.Drawing.Bitmap" />
 
           
 
           .</param
         >
         <param name="bitmapData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.BitmapData" />
+          A <see cref="T:System.Drawing.Imaging.BitmapData" />
 
           
 
@@ -1767,26 +1811,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The system palette defines one color as the default transparent, or alpha, color. This method makes the default transparent color transparent for this <see
-             cref="T:System.Drawing.Bitmap" />
+            >The system palette defines one color as the default transparent, or alpha, color. This method makes the default transparent color transparent for this <see cref="T:System.Drawing.Bitmap" />
 
             
 
-            . If no transparent color is specified by the system, <see
-             cref="P:System.Drawing.Color.LightGray" />
+            . If no transparent color is specified by the system, <see cref="P:System.Drawing.Color.LightGray" />
 
             
 
              is the transparent color.</para
           >
           <para
-            >When you call <see
-             cref="M:System.Drawing.Bitmap.MakeTransparent(System.Drawing.Color)" />
+            >When you call <see cref="M:System.Drawing.Bitmap.MakeTransparent(System.Drawing.Color)" />
 
             
 
-            , the bitmap will be converted to the <see
-             cref="F:System.Drawing.Imaging.PixelFormat.Format32bppArgb" />
+            , the bitmap will be converted to the <see cref="F:System.Drawing.Imaging.PixelFormat.Format32bppArgb" />
 
             
 
@@ -1796,8 +1836,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Makes the default transparent color transparent for this <see
-             cref="T:System.Drawing.Bitmap" />
+            >Makes the default transparent color transparent for this <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -1830,13 +1869,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you call <see
-             cref="M:System.Drawing.Bitmap.MakeTransparent(System.Drawing.Color)" />
+            >When you call <see cref="M:System.Drawing.Bitmap.MakeTransparent(System.Drawing.Color)" />
 
             
 
-            , the bitmap will be converted to the <see
-             cref="F:System.Drawing.Imaging.PixelFormat.Format32bppArgb" />
+            , the bitmap will be converted to the <see cref="F:System.Drawing.Imaging.PixelFormat.Format32bppArgb" />
 
             
 
@@ -1846,8 +1883,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Makes the specified color transparent for this <see
-             cref="T:System.Drawing.Bitmap" />
+            >Makes the specified color transparent for this <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -1855,12 +1891,15 @@
           >
         </summary>
         <param name="transparentColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
@@ -1890,18 +1929,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="M:System.Drawing.Bitmap.SetPixel(System.Int32,System.Int32,System.Drawing.Color)" />
+            >Use <see cref="M:System.Drawing.Bitmap.SetPixel(System.Int32,System.Int32,System.Drawing.Color)" />
 
             
 
-             method to set the color of an individual pixel in an image programmatically. You can also change an image programmatically by using the <see
-             cref="Overload:System.Drawing.Bitmap.LockBits" />
+             method to set the color of an individual pixel in an image programmatically. You can also change an image programmatically by using the <see cref="Overload:System.Drawing.Bitmap.LockBits" />
 
             
 
-             method. Typically for large-scale changes, the <see
-             cref="Overload:System.Drawing.Bitmap.LockBits" />
+             method. Typically for large-scale changes, the <see cref="Overload:System.Drawing.Bitmap.LockBits" />
 
             
 
@@ -1911,8 +1947,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the color of the specified pixel in this <see
-             cref="T:System.Drawing.Bitmap" />
+            >Sets the color of the specified pixel in this <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -1924,26 +1959,37 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the pixel to set. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the pixel to set. </param
         >
         <param name="color">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
@@ -1973,8 +2019,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the resolution for this <see
-             cref="T:System.Drawing.Bitmap" />
+            >Sets the resolution for this <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -1982,24 +2027,30 @@
           >
         </summary>
         <param name="xDpi">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The horizontal resolution, in dots per inch, of the <see
-           cref="T:System.Drawing.Bitmap" />
+          The horizontal resolution, in dots per inch, of the <see cref="T:System.Drawing.Bitmap" />
 
           
 
           . </param
         >
         <param name="yDpi">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The vertical resolution, in dots per inch, of the <see
-           cref="T:System.Drawing.Bitmap" />
+          The vertical resolution, in dots per inch, of the <see cref="T:System.Drawing.Bitmap" />
 
           
 
@@ -2027,13 +2078,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Imaging.BitmapData" />
+            >The <see cref="T:System.Drawing.Imaging.BitmapData" />
 
             
 
-             specifies the attributes of the <see
-             cref="T:System.Drawing.Bitmap" />
+             specifies the attributes of the <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -2043,8 +2092,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unlocks this <see
-             cref="T:System.Drawing.Bitmap" />
+            >Unlocks this <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -2052,12 +2100,15 @@
           >
         </summary>
         <param name="bitmapdata">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.BitmapData" />
+          A <see cref="T:System.Drawing.Imaging.BitmapData" />
 
           
 

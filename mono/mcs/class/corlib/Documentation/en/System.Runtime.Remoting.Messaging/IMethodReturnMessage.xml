@@ -31,8 +31,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A method call return message represents the response to a method call on an object at the end of the message sink. An <see
-         cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+        >A method call return message represents the response to a method call on an object at the end of the message sink. An <see cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
 
         
 
@@ -98,7 +97,11 @@
           <para>The specified argument marked as a ref or an out parameter.</para>
         </returns>
         <param name="argNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -135,7 +138,11 @@
           <para>The argument name, or null if the current method is not implemented.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -181,18 +188,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although the <see
-             cref="P:System.Runtime.Remoting.Messaging.IMethodReturnMessage.OutArgs" />
+            >Although the <see cref="P:System.Runtime.Remoting.Messaging.IMethodReturnMessage.OutArgs" />
 
             
 
-             property is redundant since the same functionality can be achieved through the <see
-             cref="P:System.Runtime.Remoting.Messaging.IMethodReturnMessage.OutArgCount" />
+             property is redundant since the same functionality can be achieved through the <see cref="P:System.Runtime.Remoting.Messaging.IMethodReturnMessage.OutArgCount" />
 
             
 
-             field and <see
-             cref="M:System.Runtime.Remoting.Messaging.IMethodReturnMessage.GetOutArg(System.Int32)" />
+             field and <see cref="M:System.Runtime.Remoting.Messaging.IMethodReturnMessage.GetOutArg(System.Int32)" />
 
             
 
@@ -200,18 +204,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If <see
-               cref="P:System.Runtime.Remoting.Messaging.IMethodReturnMessage.Exception" />
+              >If <see cref="P:System.Runtime.Remoting.Messaging.IMethodReturnMessage.Exception" />
 
               
 
-               is not null, a <see
-               cref="T:System.IndexOutOfRange" />
+               is not null, a <see cref="T:System.IndexOutOfRange" />
 
               
 
-               exception is thrown when <see
-               cref="P:System.Runtime.Remoting.Messaging.IMethodReturnMessage.OutArgs" />
+               exception is thrown when <see cref="P:System.Runtime.Remoting.Messaging.IMethodReturnMessage.OutArgs" />
 
               
 

@@ -26,16 +26,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.CspParameters" />
+        >The <see cref="T:System.Security.Cryptography.CspParameters" />
 
         
 
          class represents parameters that you can pass to managed cryptography classes that internally use Microsoft Cryptographic Service Providers (CSPs) from the unmanaged Microsoft Cryptography API (CAPI). Classes with names ending in "CryptoServiceProvider" are managed code wrappers for the corresponding CSP.</para
       >
       <para
-        >Use the <see
-         cref="T:System.Security.Cryptography.CspParameters" />
+        >Use the <see cref="T:System.Security.Cryptography.CspParameters" />
 
         
 
@@ -44,13 +42,11 @@
       <list type="bullet">
         <item>
           <para
-            >Specify a particular CSP by passing the provider type to the <see
-             cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
+            >Specify a particular CSP by passing the provider type to the <see cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
 
             
 
-             or <see
-             cref="F:System.Security.Cryptography.CspParameters.ProviderName" />
+             or <see cref="F:System.Security.Cryptography.CspParameters.ProviderName" />
 
             
 
@@ -59,8 +55,7 @@
         </item>
         <item>
           <para
-            >Create a key container where you can store cryptographic keys.  Key containers provide the most secure way to persist cryptographic keys and keep them secret from malicious third parties.  For more information about creating key containers, see <format
-             type="text/html">
+            >Create a key container where you can store cryptographic keys.  Key containers provide the most secure way to persist cryptographic keys and keep them secret from malicious third parties.  For more information about creating key containers, see <format type="text/html">
               <a href="0dbcbd8d-0dcf-40e9-9f0c-e3f162d35ccc"
                 >How to: Store Asymmetric Keys in a Key Container</a
               >
@@ -73,8 +68,7 @@
         </item>
         <item>
           <para
-            >Specify whether to create an asymmetric signature key or an asymmetric exchange key using the <see
-             cref="F:System.Security.Cryptography.CspParameters.KeyNumber" />
+            >Specify whether to create an asymmetric signature key or an asymmetric exchange key using the <see cref="F:System.Security.Cryptography.CspParameters.KeyNumber" />
 
             
 
@@ -107,26 +101,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This form of <see
-             cref="M:System.Security.Cryptography.CspParameters.#ctor" />
+            >This form of <see cref="M:System.Security.Cryptography.CspParameters.#ctor" />
 
             
 
-             initializes the <see
-             cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
+             initializes the <see cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
 
             
 
-             field to a value of 24, which specifies the PROV_RSA_AES provider.  This default provider is compatible with the <see
-             cref="T:System.Security.Cryptography.Aes" />
+             field to a value of 24, which specifies the PROV_RSA_AES provider.  This default provider is compatible with the <see cref="T:System.Security.Cryptography.Aes" />
 
             
 
              algorithm.  </para
           >
           <para
-            >For information about other provider types, see the <see
-             cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
+            >For information about other provider types, see the <see cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
 
             
 
@@ -136,8 +126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.CspParameters" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.CspParameters" />
 
             
 
@@ -147,8 +136,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created instance of <see
-             cref="T:System.Security.Cryptography.CspParameters" />
+            >The newly created instance of <see cref="T:System.Security.Cryptography.CspParameters" />
 
             
 
@@ -177,8 +165,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Security.Cryptography.CspParameters.#ctor(System.Int32)" />
+            >Use the <see cref="M:System.Security.Cryptography.CspParameters.#ctor(System.Int32)" />
 
             
 
@@ -187,18 +174,15 @@
           <list type="bullet">
             <item>
               <para
-                >To specify a provider compatible with the <see
-                 cref="T:System.Security.Cryptography.RSA" />
+                >To specify a provider compatible with the <see cref="T:System.Security.Cryptography.RSA" />
 
                 
 
-                 algorithm, pass a value of 1<paramref
-                 name=" " />
+                 algorithm, pass a value of 1<paramref name=" " />
 
                 
 
-                to the <paramref
-                 name="dwTypeIn" />
+                to the <paramref name="dwTypeIn" />
 
                 
 
@@ -207,18 +191,15 @@
             </item>
             <item>
               <para
-                >To specify a provider compatible with the <see
-                 cref="T:System.Security.Cryptography.DSA" />
+                >To specify a provider compatible with the <see cref="T:System.Security.Cryptography.DSA" />
 
                 
 
-                 algorithm, pass a value of 13<paramref
-                 name=" " />
+                 algorithm, pass a value of 13<paramref name=" " />
 
                 
 
-                to the <paramref
-                 name="dwTypeIn" />
+                to the <paramref name="dwTypeIn" />
 
                 
 
@@ -227,8 +208,7 @@
             </item>
           </list>
           <para
-            >For information about other provider type values, see the <see
-             cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
+            >For information about other provider type values, see the <see cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
 
             
 
@@ -238,8 +218,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.CspParameters" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.CspParameters" />
 
             
 
@@ -247,7 +226,11 @@
           >
         </summary>
         <param name="dwTypeIn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -279,8 +262,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Security.Cryptography.CspParameters.#ctor(System.Int32,System.String)" />
+            >Use the <see cref="M:System.Security.Cryptography.CspParameters.#ctor(System.Int32,System.String)" />
 
             
 
@@ -290,18 +272,15 @@
           <list type="bullet">
             <item>
               <para
-                >To specify a provider compatible with the <see
-                 cref="T:System.Security.Cryptography.RSA" />
+                >To specify a provider compatible with the <see cref="T:System.Security.Cryptography.RSA" />
 
                 
 
-                 algorithm, pass a value of 1<paramref
-                 name=" " />
+                 algorithm, pass a value of 1<paramref name=" " />
 
                 
 
-                to the <paramref
-                 name="dwTypeIn" />
+                to the <paramref name="dwTypeIn" />
 
                 
 
@@ -310,18 +289,15 @@
             </item>
             <item>
               <para
-                >To specify a provider compatible with the <see
-                 cref="T:System.Security.Cryptography.DSA" />
+                >To specify a provider compatible with the <see cref="T:System.Security.Cryptography.DSA" />
 
                 
 
-                 algorithm, pass a value of 13<paramref
-                 name=" " />
+                 algorithm, pass a value of 13<paramref name=" " />
 
                 
 
-                to the <paramref
-                 name="dwTypeIn" />
+                to the <paramref name="dwTypeIn" />
 
                 
 
@@ -330,8 +306,7 @@
             </item>
           </list>
           <para
-            >For information about other provider type values, see the <see
-             cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
+            >For information about other provider type values, see the <see cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
 
             
 
@@ -341,8 +316,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.CspParameters" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.CspParameters" />
 
             
 
@@ -350,14 +324,22 @@
           >
         </summary>
         <param name="dwTypeIn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A provider type code that specifies the kind of provider to create.</param
         >
         <param name="strProviderNameIn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -390,8 +372,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Security.Cryptography.CspParameters.#ctor(System.Int32,System.String,System.String)" />
+            >Use the <see cref="M:System.Security.Cryptography.CspParameters.#ctor(System.Int32,System.String,System.String)" />
 
             
 
@@ -402,18 +383,15 @@
           <list type="bullet">
             <item>
               <para
-                >To specify a provider compatible with the <see
-                 cref="T:System.Security.Cryptography.RSA" />
+                >To specify a provider compatible with the <see cref="T:System.Security.Cryptography.RSA" />
 
                 
 
-                 algorithm, pass a value of 1<paramref
-                 name=" " />
+                 algorithm, pass a value of 1<paramref name=" " />
 
                 
 
-                to the <paramref
-                 name="dwTypeIn" />
+                to the <paramref name="dwTypeIn" />
 
                 
 
@@ -422,18 +400,15 @@
             </item>
             <item>
               <para
-                >To specify a provider compatible with the <see
-                 cref="T:System.Security.Cryptography.DSA" />
+                >To specify a provider compatible with the <see cref="T:System.Security.Cryptography.DSA" />
 
                 
 
-                 algorithm, pass a value of 13<paramref
-                 name=" " />
+                 algorithm, pass a value of 13<paramref name=" " />
 
                 
 
-                to the <paramref
-                 name="dwTypeIn" />
+                to the <paramref name="dwTypeIn" />
 
                 
 
@@ -442,8 +417,7 @@
             </item>
           </list>
           <para
-            >For information about other provider type values, see the <see
-             cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
+            >For information about other provider type values, see the <see cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
 
             
 
@@ -453,8 +427,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.CspParameters" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.CspParameters" />
 
             
 
@@ -462,21 +435,33 @@
           >
         </summary>
         <param name="dwTypeIn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The provider type code that specifies the kind of provider to create.</param
         >
         <param name="strProviderNameIn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A provider name. </param
         >
         <param name="strContainerNameIn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -517,18 +502,15 @@
           <list type="bullet">
             <item>
               <para
-                >To specify a provider compatible with the <see
-                 cref="T:System.Security.Cryptography.RSA" />
+                >To specify a provider compatible with the <see cref="T:System.Security.Cryptography.RSA" />
 
                 
 
-                 algorithm, pass a value of 1<paramref
-                 name=" " />
+                 algorithm, pass a value of 1<paramref name=" " />
 
                 
 
-                to the <paramref
-                 name="dwTypeIn" />
+                to the <paramref name="dwTypeIn" />
 
                 
 
@@ -537,18 +519,15 @@
             </item>
             <item>
               <para
-                >To specify a provider compatible with the <see
-                 cref="T:System.Security.Cryptography.DSA" />
+                >To specify a provider compatible with the <see cref="T:System.Security.Cryptography.DSA" />
 
                 
 
-                 algorithm, pass a value of 13<paramref
-                 name=" " />
+                 algorithm, pass a value of 13<paramref name=" " />
 
                 
 
-                to the <paramref
-                 name="dwTypeIn" />
+                to the <paramref name="dwTypeIn" />
 
                 
 
@@ -557,8 +536,7 @@
             </item>
           </list>
           <para
-            >For information about other provider type values, see the <see
-             cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
+            >For information about other provider type values, see the <see cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
 
             
 
@@ -568,8 +546,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.CspParameters" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.CspParameters" />
 
             
 
@@ -577,35 +554,55 @@
           >
         </summary>
         <param name="providerType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The provider type code that specifies the kind of provider to create.</param
         >
         <param name="providerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A provider name. </param
         >
         <param name="keyContainerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A container name. </param
         >
         <param name="cryptoKeySecurity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object that represents access rights and audit rules for the container.</param
         >
         <param name="parentWindowHandle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -646,18 +643,15 @@
           <list type="bullet">
             <item>
               <para
-                >To specify a provider compatible with the <see
-                 cref="T:System.Security.Cryptography.RSA" />
+                >To specify a provider compatible with the <see cref="T:System.Security.Cryptography.RSA" />
 
                 
 
-                 algorithm, pass a value of 1<paramref
-                 name=" " />
+                 algorithm, pass a value of 1<paramref name=" " />
 
                 
 
-                to the <paramref
-                 name="dwTypeIn" />
+                to the <paramref name="dwTypeIn" />
 
                 
 
@@ -666,18 +660,15 @@
             </item>
             <item>
               <para
-                >To specify a provider compatible with the <see
-                 cref="T:System.Security.Cryptography.DSA" />
+                >To specify a provider compatible with the <see cref="T:System.Security.Cryptography.DSA" />
 
                 
 
-                 algorithm, pass a value of 13<paramref
-                 name=" " />
+                 algorithm, pass a value of 13<paramref name=" " />
 
                 
 
-                to the <paramref
-                 name="dwTypeIn" />
+                to the <paramref name="dwTypeIn" />
 
                 
 
@@ -686,8 +677,7 @@
             </item>
           </list>
           <para
-            >For information about other provider type values, see the <see
-             cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
+            >For information about other provider type values, see the <see cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
 
             
 
@@ -697,8 +687,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.CspParameters" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.CspParameters" />
 
             
 
@@ -706,35 +695,55 @@
           >
         </summary>
         <param name="providerType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The provider type code that specifies the kind of provider to create.</param
         >
         <param name="providerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A provider name. </param
         >
         <param name="keyContainerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A container name. </param
         >
         <param name="cryptoKeySecurity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object that represents access rights and audit rules for a container. </param
         >
         <param name="keyPassword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -765,13 +774,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Security.Cryptography.CspParameters.CryptoKeySecurity" />
+            >Use the <see cref="P:System.Security.Cryptography.CspParameters.CryptoKeySecurity" />
 
             
 
-             property to specify a <see
-             cref="T:System.Security.AccessControl.CryptoKeySecurity" />
+             property to specify a <see cref="T:System.Security.AccessControl.CryptoKeySecurity" />
 
             
 
@@ -781,8 +788,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Security.AccessControl.CryptoKeySecurity" />
+            >Gets or sets a <see cref="T:System.Security.AccessControl.CryptoKeySecurity" />
 
             
 
@@ -815,8 +821,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the flags for <see
-             cref="T:System.Security.Cryptography.CspParameters" />
+            >Represents the flags for <see cref="T:System.Security.Cryptography.CspParameters" />
 
             
 
@@ -842,16 +847,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="F:System.Security.Cryptography.CspParameters.KeyContainerName" />
+            >Use the <see cref="F:System.Security.Cryptography.CspParameters.KeyContainerName" />
 
             
 
              field to specify a name for your key container.  You can use the container name to retrieve the persisted key within that container. </para
           >
           <para
-            >For more information about creating key containers, see <format
-             type="text/html">
+            >For more information about creating key containers, see <format type="text/html">
               <a href="0dbcbd8d-0dcf-40e9-9f0c-e3f162d35ccc"
                 >How to: Store Asymmetric Keys in a Key Container</a
               >
@@ -865,8 +868,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the key container name for <see
-             cref="T:System.Security.Cryptography.CspParameters" />
+            >Represents the key container name for <see cref="T:System.Security.Cryptography.CspParameters" />
 
             
 
@@ -892,47 +894,40 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Security.Cryptography.CspParameters.KeyNumber" />
+            >The <see cref="F:System.Security.Cryptography.CspParameters.KeyNumber" />
 
             
 
-             field initializes the <see
-             cref="P:System.Security.Cryptography.CspKeyContainerInfo.KeyNumber" />
+             field initializes the <see cref="P:System.Security.Cryptography.CspKeyContainerInfo.KeyNumber" />
 
             
 
-             property when you initialize a <see
-             cref="T:System.Security.Cryptography.CspKeyContainerInfo" />
+             property when you initialize a <see cref="T:System.Security.Cryptography.CspKeyContainerInfo" />
 
             
 
-             object with a <see
-             cref="T:System.Security.Cryptography.CspParameters" />
+             object with a <see cref="T:System.Security.Cryptography.CspParameters" />
 
             
 
              object.   </para
           >
           <para
-            >An exchange key is an asymmetric key pair used to encrypt session keys so that they can be safely stored and exchanged with other users.  You can use the <see
-             cref="F:System.Security.Cryptography.KeyNumber.Exchange" />
+            >An exchange key is an asymmetric key pair used to encrypt session keys so that they can be safely stored and exchanged with other users.  You can use the <see cref="F:System.Security.Cryptography.KeyNumber.Exchange" />
 
             
 
              value (1) to specify an exchange key.  This value corresponds to the AT_KEYEXCHANGE value used in the unmanaged Microsoft Cryptographic API (CAPI).  </para
           >
           <para
-            >A signature key is an asymmetric key pair used for authenticating digitally signed messages or files.  You can use the <see
-             cref="F:System.Security.Cryptography.KeyNumber.Signature" />
+            >A signature key is an asymmetric key pair used for authenticating digitally signed messages or files.  You can use the <see cref="F:System.Security.Cryptography.KeyNumber.Signature" />
 
             
 
              value (2) to specify a signature key.  This value corresponds to the AT_SIGNATURE value used in CAPI.</para
           >
           <para
-            >By default, the <see
-             cref="F:System.Security.Cryptography.CspParameters.KeyNumber" />
+            >By default, the <see cref="F:System.Security.Cryptography.CspParameters.KeyNumber" />
 
             
 
@@ -968,8 +963,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Security.Cryptography.CspParameters.KeyPassword" />
+            >Use the <see cref="P:System.Security.Cryptography.CspParameters.KeyPassword" />
 
             
 
@@ -999,16 +993,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Security.Cryptography.CspParameters.ParentWindowHandle" />
+            >Use the <see cref="P:System.Security.Cryptography.CspParameters.ParentWindowHandle" />
 
             
 
              property to specify a handle to the unmanaged parent window for a smart card password dialog box.  When you specify a handle using this property, a smart card password dialog box will be presented to the user.  </para
           >
           <para
-            >You can avoid presenting a smart card password dialog box by explicitly specifying a password by using the <see
-             cref="P:System.Security.Cryptography.CspParameters.KeyPassword" />
+            >You can avoid presenting a smart card password dialog box by explicitly specifying a password by using the <see cref="P:System.Security.Cryptography.CspParameters.KeyPassword" />
 
             
 
@@ -1042,8 +1034,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the provider name for <see
-             cref="T:System.Security.Cryptography.CspParameters" />
+            >Represents the provider name for <see cref="T:System.Security.Cryptography.CspParameters" />
 
             
 
@@ -1069,8 +1060,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
+            >Use the <see cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
 
             
 
@@ -1079,8 +1069,7 @@
           <list type="bullet">
             <item>
               <para
-                >To specify a provider compatible with the <see
-                 cref="T:System.Security.Cryptography.RSA" />
+                >To specify a provider compatible with the <see cref="T:System.Security.Cryptography.RSA" />
 
                 
 
@@ -1089,8 +1078,7 @@
             </item>
             <item>
               <para
-                >To specify a provider compatible with the <see
-                 cref="T:System.Security.Cryptography.DSA" />
+                >To specify a provider compatible with the <see cref="T:System.Security.Cryptography.DSA" />
 
                 
 
@@ -1260,8 +1248,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the provider type code for <see
-             cref="T:System.Security.Cryptography.CspParameters" />
+            >Represents the provider type code for <see cref="T:System.Security.Cryptography.CspParameters" />
 
             
 

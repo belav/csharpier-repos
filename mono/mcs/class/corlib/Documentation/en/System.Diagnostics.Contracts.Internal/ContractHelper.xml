@@ -60,8 +60,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The binary rewriter calls this method to notify listeners about a contract failure. The <see
-             cref="M:System.Diagnostics.Contracts.Internal.ContractHelper.RaiseContractFailedEvent(System.Diagnostics.Contracts.ContractFailureKind,System.String,System.String,System.Exception)" />
+            >The binary rewriter calls this method to notify listeners about a contract failure. The <see cref="M:System.Diagnostics.Contracts.Internal.ContractHelper.RaiseContractFailedEvent(System.Diagnostics.Contracts.ContractFailureKind,System.String,System.String,System.Exception)" />
 
             
 
@@ -77,28 +76,44 @@
           <para>A null reference (Nothing in Visual Basic) if the event was handled and should not trigger a failure; otherwise, returns the localized failure message.</para>
         </returns>
         <param name="failureKind">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of failure.</param
         >
         <param name="userMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Additional user information.</param
         >
         <param name="conditionText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The description of the condition that caused the failure.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -141,18 +156,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default failure behavior is to raise an <see
-             cref="M:System.Diagnostics.Debug.Assert(System.Boolean)" />
+            >The default failure behavior is to raise an <see cref="M:System.Diagnostics.Debug.Assert(System.Boolean)" />
 
             
 
-            , which causes the <ui
-            >Assert</ui>
+            , which causes the <ui>Assert</ui>
 
             
 
-             dialog box to be displayed. You can change that behavior to throw an <see
-             cref="T:System.Exception" />
+             dialog box to be displayed. You can change that behavior to throw an <see cref="T:System.Exception" />
 
             
 
@@ -164,35 +176,55 @@
           <para>Triggers the default failure behavior.</para>
         </summary>
         <param name="kind">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of failure.</param
         >
         <param name="displayMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message to display.</param
         >
         <param name="userMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Additional user information.</param
         >
         <param name="conditionText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The description of the condition that caused the failure.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

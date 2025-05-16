@@ -15,8 +15,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.RepeatDirection" />
+        >The <see cref="T:System.Web.UI.WebControls.RepeatDirection" />
 
         
 

@@ -47,52 +47,44 @@
 
         
 
-         is the abstract base class of <see
-         cref="T:System.IO.StreamWriter" />
+         is the abstract base class of <see cref="T:System.IO.StreamWriter" />
 
         
 
-         and <see
-         cref="T:System.IO.StringWriter" />
+         and <see cref="T:System.IO.StringWriter" />
 
         
 
-        , which write characters to streams and strings, respectively. Create an instance of <see
-         cref="T:System.IO.TextWriter" />
+        , which write characters to streams and strings, respectively. Create an instance of <see cref="T:System.IO.TextWriter" />
 
         
 
-         to write an object to a string, write strings to a file, or to serialize XML. You can also use an instance of <see
-         cref="T:System.IO.TextWriter" />
+         to write an object to a string, write strings to a file, or to serialize XML. You can also use an instance of <see cref="T:System.IO.TextWriter" />
 
         
 
          to write text to a custom backing store using the same APIs you would use for a string or a stream, or to add support for text formatting.</para
       >
       <para
-        >All the Write methods of <see
-         cref="T:System.IO.TextWriter" />
+        >All the Write methods of <see cref="T:System.IO.TextWriter" />
 
         
 
          having primitive data types as parameters write out the values as strings.</para
       >
       <para
-        >By default, a <see
-         cref="T:System.IO.TextWriter" />
+        >By default, a <see cref="T:System.IO.TextWriter" />
 
         
 
-         is not thread safe. See <see
-         cref="M:System.IO.TextWriter.Synchronized(System.IO.TextWriter)" />
+         is not thread safe. See <see cref="M:System.IO.TextWriter.Synchronized(System.IO.TextWriter)" />
 
         
 
          for a thread-safe wrapper.</para
       >
       <para
-        >For a list of common I/O tasks, see <format
-         type="text/html">
+        >For a list of common I/O tasks, see <format type="text/html">
           <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
         </format>
 
@@ -129,13 +121,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor overload when you do not want to provide a value for the <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+            >Use this constructor overload when you do not want to provide a value for the <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
-             property. When the <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+             property. When the <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
@@ -143,8 +133,7 @@
           >
           <para>Use this constructor for derived classes.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -156,8 +145,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.TextWriter" />
+            >Initializes a new instance of the <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -194,46 +182,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor overload to provide a value for the <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+            >Use this constructor overload to provide a value for the <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
-             property. The value of the <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+             property. The value of the <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
-             property specifies the culture-specific formatting that is used when you call the <see
-             cref="Overload:System.IO.TextWriter.Write" />
+             property specifies the culture-specific formatting that is used when you call the <see cref="Overload:System.IO.TextWriter.Write" />
 
             
 
-             and <see
-             cref="Overload:System.IO.TextWriter.WriteLine" />
+             and <see cref="Overload:System.IO.TextWriter.WriteLine" />
 
             
 
-             methods. If you do not want to provide a format provider, you create an instance by using the <see
-             cref="M:System.IO.TextWriter.#ctor" />
+             methods. If you do not want to provide a format provider, you create an instance by using the <see cref="M:System.IO.TextWriter.#ctor" />
 
             
 
-             constructor, which sets the <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+             constructor, which sets the <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
-             property to null. When the <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+             property to null. When the <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
              property is null, the culture of the current thread is used for formatting.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -245,8 +225,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.TextWriter" />
+            >Initializes a new instance of the <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -254,12 +233,15 @@
           >
         </summary>
         <param name="formatProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IFormatProvider" />
+          An <see cref="T:System.IFormatProvider" />
 
           
 
@@ -289,21 +271,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This implementation of Close calls the <see
-             cref="M:System.IO.TextWriter.Dispose(System.Boolean)" />
+            >This implementation of Close calls the <see cref="M:System.IO.TextWriter.Dispose(System.Boolean)" />
 
             
 
              method and passes it a true value.</para
           >
           <para
-            >Flushing the stream will not flush its underlying encoder unless you explicitly call <see
-             cref="M:System.IO.TextWriter.Flush" />
+            >Flushing the stream will not flush its underlying encoder unless you explicitly call <see cref="M:System.IO.TextWriter.Flush" />
 
             
 
-             or Close. Setting the <see
-             cref="P:System.IO.StreamWriter.AutoFlush" />
+             or Close. Setting the <see cref="P:System.IO.StreamWriter.AutoFlush" />
 
             
 
@@ -311,13 +290,11 @@
           >
           <block subset="none" type="note">
             <para
-              >In derived classes, do not override the <see
-               cref="M:System.IO.TextWriter.Close" />
+              >In derived classes, do not override the <see cref="M:System.IO.TextWriter.Close" />
 
               
 
-               method. Instead, override the <see
-               cref="M:System.IO.TextWriter.Dispose(System.Boolean)" />
+               method. Instead, override the <see cref="M:System.IO.TextWriter.Dispose(System.Boolean)" />
 
               
 
@@ -348,8 +325,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -384,46 +360,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.IO.TextWriter.Dispose" />
+            >Call <see cref="M:System.IO.TextWriter.Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.IO.TextWriter" />
+             when you are finished using the <see cref="T:System.IO.TextWriter" />
 
             
 
-            . The <see
-             cref="M:System.IO.TextWriter.Dispose" />
+            . The <see cref="M:System.IO.TextWriter.Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.IO.TextWriter" />
+             method leaves the <see cref="T:System.IO.TextWriter" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.IO.TextWriter.Dispose" />
+             in an unusable state. After calling <see cref="M:System.IO.TextWriter.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.IO.TextWriter" />
+            , you must release all references to the <see cref="T:System.IO.TextWriter" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.IO.TextWriter" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.IO.TextWriter" />
 
             
 
              was occupying.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213"
                 >[&lt;topic://cpconCleaningUpUnmanagedResources&gt;]</a
               >
@@ -431,8 +399,7 @@
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -441,23 +408,19 @@
             .</para
           >
           <para
-            >Note   Always call <see
-             cref="M:System.IO.TextWriter.Dispose" />
+            >Note   Always call <see cref="M:System.IO.TextWriter.Dispose" />
 
             
 
-             before you release your last reference to the <see
-             cref="T:System.IO.TextWriter" />
+             before you release your last reference to the <see cref="T:System.IO.TextWriter" />
 
             
 
-            . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-             cref="T:System.IO.TextWriter" />
+            . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.IO.TextWriter" />
 
             
 
-             object's <see
-             cref="M:System.Object.Finalize" />
+             object's <see cref="M:System.Object.Finalize" />
 
             
 
@@ -467,8 +430,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.IO.TextWriter" />
+            >Releases all resources used by the <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -503,36 +465,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by Dispose and <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by Dispose and <see cref="M:System.Object.Finalize" />
 
             
 
-            . By default, this method specifies the <paramref
-             name="disposing" />
+            . By default, this method specifies the <paramref name="disposing" />
 
             
 
-             parameter as true. <see
-             cref="M:System.Object.Finalize" />
+             parameter as true. <see cref="M:System.Object.Finalize" />
 
             
 
-             specifies the <paramref
-             name="disposing" />
+             specifies the <paramref name="disposing" />
 
             
 
              parameter as false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.IO.TextWriter" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -542,8 +498,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.IO.TextWriter" />
+            >Releases the unmanaged resources used by the <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -551,7 +506,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -586,8 +545,7 @@
       <Docs>
         <value>
           <para
-            >The <see
-             cref="T:System.Text.Encoding" />
+            >The <see cref="T:System.Text.Encoding" />
 
             
 
@@ -599,8 +557,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property is necessary for some XML scenarios where a header must be written containing the encoding used by the TextWriter. This enables the XML code to consume an arbitrary TextWriter and generate the correct XML header.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -638,13 +595,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This default method does nothing, but derived classes can override the method to provide the appropriate functionality.</para>
           <para
-            >Flushing the stream will not flush its underlying encoder unless you explicitly call Flush or <see
-             cref="M:System.IO.TextWriter.Close" />
+            >Flushing the stream will not flush its underlying encoder unless you explicitly call Flush or <see cref="M:System.IO.TextWriter.Close" />
 
             
 
-            . Setting <see
-             cref="P:System.IO.StreamWriter.AutoFlush" />
+            . Setting <see cref="P:System.IO.StreamWriter.AutoFlush" />
 
             
 
@@ -713,8 +668,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.IFormatProvider" />
+            >A <see cref="T:System.IFormatProvider" />
 
             
 
@@ -725,41 +679,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+            >The value of the <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
-             property specifies the culture-specific formatting that is used when you call the <see
-             cref="Overload:System.IO.TextWriter.Write" />
+             property specifies the culture-specific formatting that is used when you call the <see cref="Overload:System.IO.TextWriter.Write" />
 
             
 
-             and <see
-             cref="Overload:System.IO.TextWriter.WriteLine" />
+             and <see cref="Overload:System.IO.TextWriter.WriteLine" />
 
             
 
-             methods. If you do not want to provide a format provider, you create an instance by using the <see
-             cref="M:System.IO.TextWriter.#ctor" />
+             methods. If you do not want to provide a format provider, you create an instance by using the <see cref="M:System.IO.TextWriter.#ctor" />
 
             
 
-             constructor, which sets the <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+             constructor, which sets the <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
-             property to null. When the <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+             property to null. When the <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
              property contains null, the culture of the current thread is used for formatting.</para
           >
           <para
-            >For an example of creating a file and writing text to a file, see <format
-             type="text/html">
+            >For an example of creating a file and writing text to a file, see <format type="text/html">
               <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
                 >[&lt;topic://cpconwritingtexttofile&gt;]</a
               >
@@ -767,8 +714,7 @@
 
             
 
-            . For an example of reading text from a file, see <format
-             type="text/html">
+            . For an example of reading text from a file, see <format type="text/html">
               <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
                 >[&lt;topic://cpconreadingtextfromfile&gt;]</a
               >
@@ -776,8 +722,7 @@
 
             
 
-            . For an example of reading from and writing to a binary file, see <format
-             type="text/html">
+            . For an example of reading from and writing to a binary file, see <format type="text/html">
               <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
                 >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
               >
@@ -788,8 +733,7 @@
             .</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -825,13 +769,11 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             containing the line terminator string for the current <see
-             cref="T:System.IO.TextWriter" />
+             containing the line terminator string for the current <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -842,16 +784,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default line terminator string is a carriage return followed by a line feed ("\r\n").</para>
           <para
-            >The line terminator string is written to the text stream whenever one of the WriteLine methods is called. In order for text written by the TextWriter to be readable by a <see
-             cref="T:System.IO.TextReader" />
+            >The line terminator string is written to the text stream whenever one of the WriteLine methods is called. In order for text written by the TextWriter to be readable by a <see cref="T:System.IO.TextReader" />
 
             
 
             , only "\n" or "\r\n" should be used as terminator strings. If NewLine is set to null, the default newline character is used instead.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -892,16 +832,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Use Null to redirect output to a stream that will not consume any operating system resources.</para>
           <para
-            >When the <see
-             cref="M:System.IO.TextWriter.Write(System.Char)" />
+            >When the <see cref="M:System.IO.TextWriter.Write(System.Char)" />
 
             
 
              methods are invoked on Null, the call simply returns, and no data is actually written to any backing store.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -948,8 +886,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -958,13 +895,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >All write operations to the returned wrapper will be thread safe. You call this method to ensure that only one thread at a time can execute the methods on the <see
-             cref="T:System.IO.TextWriter" />
+            >All write operations to the returned wrapper will be thread safe. You call this method to ensure that only one thread at a time can execute the methods on the <see cref="T:System.IO.TextWriter" />
 
             
 
-             instance that is returned. For more information about synchronization and threading, see <format
-             type="text/html">
+             instance that is returned. For more information about synchronization and threading, see <format type="text/html">
               <a href="b980eb4c-71d5-4860-864a-6dfe3692430a"
                 >Synchronizing Data for Multithreading</a
               >
@@ -975,8 +910,7 @@
             .</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -994,7 +928,11 @@
           <para>A thread-safe wrapper.</para>
         </returns>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1045,29 +983,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text representation of the specified value is produced by calling the <see
-             cref="M:System.Boolean.ToString" />
+            >The text representation of the specified value is produced by calling the <see cref="M:System.Boolean.ToString" />
 
             
 
              method.</para
           >
           <para
-            >This method outputs either <see
-             cref="F:System.Boolean.TrueString" />
+            >This method outputs either <see cref="F:System.Boolean.TrueString" />
 
             
 
-             or <see
-             cref="F:System.Boolean.FalseString" />
+             or <see cref="F:System.Boolean.FalseString" />
 
             
 
             .</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1081,7 +1015,11 @@
           <para>Writes the text representation of a Boolean value to the text string or stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1118,8 +1056,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This default method does nothing, but derived classes can override the method to provide the appropriate functionality.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1133,7 +1070,11 @@
           <para>Writes a character to the text string or stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1169,24 +1110,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method does not search the specified string for individual newline characters (hexadecimal 0x000a) and replace them with <see
-             cref="P:System.IO.TextWriter.NewLine" />
+            >This method does not search the specified string for individual newline characters (hexadecimal 0x000a) and replace them with <see cref="P:System.IO.TextWriter.NewLine" />
 
             
 
             .</para
           >
           <para
-            >This default method calls the <see
-             cref="M:System.IO.TextWriter.Write(System.Char[],System.Int32,System.Int32)" />
+            >This default method calls the <see cref="M:System.IO.TextWriter.Write(System.Char[],System.Int32,System.Int32)" />
 
             
 
              method and passes the entire character array. If the character array is null, nothing is written.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1200,7 +1138,11 @@
           <para>Writes a character array to the text string or stream.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1236,8 +1178,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+            >The <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
@@ -1249,7 +1190,11 @@
           <para>Writes the text representation of a decimal value to the text string or stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1286,21 +1231,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text representation of the specified value is produced by calling the <see
-             cref="M:System.Double.ToString" />
+            >The text representation of the specified value is produced by calling the <see cref="M:System.Double.ToString" />
 
             
 
-             method. The <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+             method. The <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
              property, if not null, specifies the culture-specific formatting.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1314,7 +1256,11 @@
           <para>Writes the text representation of an 8-byte floating-point value to the text string or stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1351,21 +1297,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text representation of the specified value is produced by calling the <see
-             cref="M:System.Int32.ToString" />
+            >The text representation of the specified value is produced by calling the <see cref="M:System.Int32.ToString" />
 
             
 
-             method. The <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+             method. The <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
              property, if not null, specifies the culture-specific formatting.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1379,7 +1322,11 @@
           <para>Writes the text representation of a 4-byte signed integer to the text string or stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1415,21 +1362,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text representation of the specified value is produced by calling the <see
-             cref="M:System.Int64.ToString" />
+            >The text representation of the specified value is produced by calling the <see cref="M:System.Int64.ToString" />
 
             
 
-             method. The <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+             method. The <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
              property, if not null, specifies the culture-specific formatting.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1450,7 +1394,11 @@
           <para>Writes the text representation of an 8-byte signed integer to the text string or stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1486,24 +1434,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload is equivalent to the <see
-             cref="M:System.IO.TextWriter.Write(System.String)" />
+            >This overload is equivalent to the <see cref="M:System.IO.TextWriter.Write(System.String)" />
 
             
 
              overload.</para
           >
           <para
-            >If the specified object is null, no action is taken and no exception is thrown. Otherwise, the object's ToString method is called to produce the string representation, and the resulting string is then written to the output stream. The <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+            >If the specified object is null, no action is taken and no exception is thrown. Otherwise, the object's ToString method is called to produce the string representation, and the resulting string is then written to the output stream. The <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
              property, if not null, specifies the culture-specific formatting.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1517,7 +1462,11 @@
           <para>Writes the text representation of an object to the text string or stream by calling the ToString method on that object.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1553,21 +1502,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text representation of the specified value is produced by calling the <see
-             cref="M:System.Single.ToString" />
+            >The text representation of the specified value is produced by calling the <see cref="M:System.Single.ToString" />
 
             
 
-             method. The <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+             method. The <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
              property, if not null, specifies the culture-specific formatting.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1581,7 +1527,11 @@
           <para>Writes the text representation of a 4-byte floating-point value to the text string or stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1618,32 +1568,28 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload is equivalent to the <see
-             cref="M:System.IO.TextWriter.Write(System.Char[])" />
+            >This overload is equivalent to the <see cref="M:System.IO.TextWriter.Write(System.Char[])" />
 
             
 
              overload.</para
           >
           <para
-            >This method does not search the specified string for individual newline characters (hexadecimal 0x000a) and replace them with <see
-             cref="P:System.IO.TextWriter.NewLine" />
+            >This method does not search the specified string for individual newline characters (hexadecimal 0x000a) and replace them with <see cref="P:System.IO.TextWriter.NewLine" />
 
             
 
             .</para
           >
           <para
-            >If <paramref
-             name="value" />
+            >If <paramref name="value" />
 
             
 
              is null, nothing is written to the text stream.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1657,7 +1603,11 @@
           <para>Writes a string to the text string or stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1699,21 +1649,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text representation of the specified value is produced by calling the <see
-             cref="M:System.UInt32.ToString" />
+            >The text representation of the specified value is produced by calling the <see cref="M:System.UInt32.ToString" />
 
             
 
-             method. The <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+             method. The <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
              property, if not null, specifies the culture-specific formatting.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1727,7 +1674,11 @@
           <para>Writes the text representation of a 4-byte unsigned integer to the text string or stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1769,21 +1720,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text representation of the specified value is produced by calling the <see
-             cref="M:System.UInt64.ToString" />
+            >The text representation of the specified value is produced by calling the <see cref="M:System.UInt64.ToString" />
 
             
 
-             method. The <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+             method. The <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
              property, if not null, specifies the culture-specific formatting.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1797,7 +1745,11 @@
           <para>Writes the text representation of an 8-byte unsigned integer to the text string or stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1839,8 +1791,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -1850,8 +1801,7 @@
         <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
         <exception cref="T:System.FormatException">
           <para
-            >The format specification in <paramref
-             name="format" />
+            >The format specification in <paramref name="format" />
 
             
 
@@ -1863,8 +1813,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the <format
-             type="text/html">
+            >This method uses the <format type="text/html">
               <a href="87b7d528-73f6-43c6-b71a-f23043039a49">composite formatting feature</a>
             </format>
 
@@ -1875,8 +1824,7 @@
           <list type="bullet">
             <item>
               <para
-                >For more information about the composite formatting feature, see <format
-                 type="text/html">
+                >For more information about the composite formatting feature, see <format type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
                 </format>
 
@@ -1887,15 +1835,13 @@
             </item>
             <item>
               <para
-                >For more information about numeric format specifiers, see <format
-                 type="text/html">
+                >For more information about numeric format specifiers, see <format type="text/html">
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format>
 
                 
 
-                 and <format
-                 type="text/html">
+                 and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
 
@@ -1906,8 +1852,7 @@
             </item>
             <item>
               <para
-                >For more information about date and time format specifiers, see <format
-                 type="text/html">
+                >For more information about date and time format specifiers, see <format type="text/html">
                   <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b"
                     >Standard DateTime Format Strings</a
                   >
@@ -1915,8 +1860,7 @@
 
                 
 
-                 and <format
-                 type="text/html">
+                 and <format type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
                 </format>
 
@@ -1927,8 +1871,7 @@
             </item>
             <item>
               <para
-                >For more information about enumeration format specifiers, see <format
-                 type="text/html">
+                >For more information about enumeration format specifiers, see <format type="text/html">
                   <a href="dd1ff672-1052-42cf-8666-4924fb6cd1a1">Enumeration Format Strings</a>
                 </format>
 
@@ -1939,8 +1882,7 @@
             </item>
             <item>
               <para
-                >For more information about formatting, see <format
-                 type="text/html">
+                >For more information about formatting, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
 
@@ -1951,8 +1893,7 @@
             </item>
           </list>
           <para
-            >The <paramref
-             name="format" />
+            >The <paramref name="format" />
 
             
 
@@ -1961,8 +1902,7 @@
           <para>The syntax of a format item is as follows:</para>
           <para>{index[,length][:formatString]}</para>
           <para
-            >Elements in square brackets are optional. The following table describes each element. For more information about the composite formatting feature, including the syntax of a format item, see <format
-             type="text/html">
+            >Elements in square brackets are optional. The following table describes each element. For more information about the composite formatting feature, including the syntax of a format item, see <format type="text/html">
               <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
             </format>
 
@@ -1987,13 +1927,11 @@
               </term>
               <description>
                 <para
-                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see
-                   cref="F:System.String.Empty" />
+                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />
 
                   
 
-                  . Because this overload has only a single object in its parameter list, the value of index must always be 0. If there is no parameter in the index position, a <see
-                   cref="T:System.FormatException" />
+                  . Because this overload has only a single object in its parameter list, the value of index must always be 0. If there is no parameter in the index position, a <see cref="T:System.FormatException" />
 
                   
 
@@ -2015,23 +1953,19 @@
               </term>
               <description>
                 <para
-                  >A standard or custom format string that is supported by the object to be formatted. Possible values for formatString are the same as the values supported by the object's ToString(<paramref
-                   name="format" />
+                  >A standard or custom format string that is supported by the object to be formatted. Possible values for formatString are the same as the values supported by the object's ToString(<paramref name="format" />
 
                   
 
-                  ) method. If formatString is not specified and the object to be formatted implements the <see
-                   cref="T:System.IFormattable" />
+                  ) method. If formatString is not specified and the object to be formatted implements the <see cref="T:System.IFormattable" />
 
                   
 
-                   interface, null is passed as the value of the <paramref
-                   name="format" />
+                   interface, null is passed as the value of the <paramref name="format" />
 
                   
 
-                   parameter that is used as the <see
-                   cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
+                   parameter that is used as the <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
 
                   
 
@@ -2041,16 +1975,14 @@
             </item>
           </list>
           <para
-            >The leading and trailing brace characters, "{" and "}", are required. To specify a single literal brace character in <paramref
-             name="format" />
+            >The leading and trailing brace characters, "{" and "}", are required. To specify a single literal brace character in <paramref name="format" />
 
             
 
             , specify two leading or trailing brace characters; that is, "{{" or "}}".</para
           >
           <para
-            >. This method does not search the specified string for individual newline characters (hexadecimal 0x000a) and replace them with <see
-             cref="P:System.IO.TextWriter.NewLine" />
+            >. This method does not search the specified string for individual newline characters (hexadecimal 0x000a) and replace them with <see cref="P:System.IO.TextWriter.NewLine" />
 
             
 
@@ -2058,8 +1990,7 @@
           >
           <para>If a specified object is not referenced in the format string, it is ignored.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -2071,8 +2002,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes a formatted string to the text string or stream, using the same semantics as the <see
-             cref="M:System.String.Format(System.String,System.Object)" />
+            >Writes a formatted string to the text string or stream, using the same semantics as the <see cref="M:System.String.Format(System.String,System.Object)" />
 
             
 
@@ -2080,14 +2010,22 @@
           >
         </summary>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A composite format string (see Remarks). </param
         >
         <param name="arg0">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2135,8 +2073,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -2148,8 +2085,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -2159,8 +2095,7 @@
         <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
         <exception cref="T:System.FormatException">
           <para
-            >The format specification in <paramref
-             name="format" />
+            >The format specification in <paramref name="format" />
 
             
 
@@ -2168,8 +2103,7 @@
           >
           <para>-or-</para>
           <para
-            >The number indicating an argument to be formatted is less than zero, or greater than or equal to <paramref
-             name="arg" />
+            >The number indicating an argument to be formatted is less than zero, or greater than or equal to <paramref name="arg" />
             <see langword="." />
 
             
@@ -2180,8 +2114,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the <format
-             type="text/html">
+            >This method uses the <format type="text/html">
               <a href="87b7d528-73f6-43c6-b71a-f23043039a49">composite formatting feature</a>
             </format>
 
@@ -2192,8 +2125,7 @@
           <list type="bullet">
             <item>
               <para
-                >For more information about the composite formatting feature, see <format
-                 type="text/html">
+                >For more information about the composite formatting feature, see <format type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
                 </format>
 
@@ -2204,15 +2136,13 @@
             </item>
             <item>
               <para
-                >For more information about numeric format specifiers, see <format
-                 type="text/html">
+                >For more information about numeric format specifiers, see <format type="text/html">
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format>
 
                 
 
-                 and <format
-                 type="text/html">
+                 and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
 
@@ -2223,8 +2153,7 @@
             </item>
             <item>
               <para
-                >For more information about date and time format specifiers, see <format
-                 type="text/html">
+                >For more information about date and time format specifiers, see <format type="text/html">
                   <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b"
                     >Standard DateTime Format Strings</a
                   >
@@ -2232,8 +2161,7 @@
 
                 
 
-                 and <format
-                 type="text/html">
+                 and <format type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
                 </format>
 
@@ -2244,8 +2172,7 @@
             </item>
             <item>
               <para
-                >For more information about enumeration format specifiers, see <format
-                 type="text/html">
+                >For more information about enumeration format specifiers, see <format type="text/html">
                   <a href="dd1ff672-1052-42cf-8666-4924fb6cd1a1">Enumeration Format Strings</a>
                 </format>
 
@@ -2256,8 +2183,7 @@
             </item>
             <item>
               <para
-                >For more information about formatting, see <format
-                 type="text/html">
+                >For more information about formatting, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
 
@@ -2268,8 +2194,7 @@
             </item>
           </list>
           <para
-            >The <paramref
-             name="format" />
+            >The <paramref name="format" />
 
             
 
@@ -2278,8 +2203,7 @@
           <para>The syntax of a format item is as follows:</para>
           <para>{index[,length][:formatString]}</para>
           <para
-            >Elements in square brackets are optional. The following table describes each element. For more information about the composite formatting feature, including the syntax of a format item, see <format
-             type="text/html">
+            >Elements in square brackets are optional. The following table describes each element. For more information about the composite formatting feature, including the syntax of a format item, see <format type="text/html">
               <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
             </format>
 
@@ -2304,13 +2228,11 @@
               </term>
               <description>
                 <para
-                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see
-                   cref="F:System.String.Empty" />
+                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />
 
                   
 
-                  . Because this overload has an array in its parameter list, the value of index must always be less than the length of the array. If there is no parameter in the index position, a <see
-                   cref="T:System.FormatException" />
+                  . Because this overload has an array in its parameter list, the value of index must always be less than the length of the array. If there is no parameter in the index position, a <see cref="T:System.FormatException" />
 
                   
 
@@ -2332,23 +2254,19 @@
               </term>
               <description>
                 <para
-                  >A standard or custom format string that is supported by the object to be formatted. Possible values for formatString are the same as the values supported by the object's ToString(<paramref
-                   name="format" />
+                  >A standard or custom format string that is supported by the object to be formatted. Possible values for formatString are the same as the values supported by the object's ToString(<paramref name="format" />
 
                   
 
-                  ) method. If formatString is not specified and the object to be formatted implements the <see
-                   cref="T:System.IFormattable" />
+                  ) method. If formatString is not specified and the object to be formatted implements the <see cref="T:System.IFormattable" />
 
                   
 
-                   interface, null is passed as the value of the <paramref
-                   name="format" />
+                   interface, null is passed as the value of the <paramref name="format" />
 
                   
 
-                   parameter that is used as the <see
-                   cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
+                   parameter that is used as the <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
 
                   
 
@@ -2358,16 +2276,14 @@
             </item>
           </list>
           <para
-            >The leading and trailing brace characters, "{" and "}", are required. To specify a single literal brace character in <paramref
-             name="format" />
+            >The leading and trailing brace characters, "{" and "}", are required. To specify a single literal brace character in <paramref name="format" />
 
             
 
             , specify two leading or trailing brace characters; that is, "{{" or "}}".</para
           >
           <para
-            >This method does not search the specified string for individual newline characters (hexadecimal 0x000a) and replace them with <see
-             cref="P:System.IO.TextWriter.NewLine" />
+            >This method does not search the specified string for individual newline characters (hexadecimal 0x000a) and replace them with <see cref="P:System.IO.TextWriter.NewLine" />
 
             
 
@@ -2375,8 +2291,7 @@
           >
           <para>If a specified object is not referenced in the format string, it is ignored.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -2388,8 +2303,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes a formatted string to the text string or stream, using the same semantics as the <see
-             cref="M:System.String.Format(System.String,System.Object[])" />
+            >Writes a formatted string to the text string or stream, using the same semantics as the <see cref="M:System.String.Format(System.String,System.Object[])" />
 
             
 
@@ -2397,14 +2311,22 @@
           >
         </summary>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A composite format string (see Remarks). </param
         >
         <param name="arg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2446,26 +2368,22 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.ArgumentException"
-          >(<paramref
-           name="index" />
+          >(<paramref name="index" />
 
           
 
-           + <paramref
-           name="count" />
+           + <paramref name="count" />
 
           
 
-           ) &gt; <paramref
-           name="buffer" />
+           ) &gt; <paramref name="buffer" />
           <see langword="." />
 
           
@@ -2477,8 +2395,7 @@
 
           
 
-          0 or <paramref
-           name="count" />
+          0 or <paramref name="count" />
 
           
 
@@ -2488,54 +2405,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method will write <paramref
-             name="count" />
+            >This method will write <paramref name="count" />
 
             
 
-             characters of data into this TextWriter from the <paramref
-             name="buffer" />
+             characters of data into this TextWriter from the <paramref name="buffer" />
 
             
 
-             character array starting at position <paramref
-             name="index" />
+             character array starting at position <paramref name="index" />
 
             
 
             .</para
           >
           <para
-            >This overload is equivalent to the <see
-             cref="M:System.IO.TextWriter.Write(System.Char[])" />
+            >This overload is equivalent to the <see cref="M:System.IO.TextWriter.Write(System.Char[])" />
 
             
 
-             overload for each character in <paramref
-             name="buffer" />
+             overload for each character in <paramref name="buffer" />
 
             
 
-             between <paramref
-             name="index" />
+             between <paramref name="index" />
 
             
 
-             and (<paramref
-             name="index" />
+             and (<paramref name="index" />
 
             
 
-             + <paramref
-             name="count" />
+             + <paramref name="count" />
 
             
 
             ).</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -2549,21 +2457,33 @@
           <para>Writes a subarray of characters to the text string or stream.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character array to write data from. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character position in the buffer at which to start retrieving data. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2606,8 +2526,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -2617,8 +2536,7 @@
         <exception cref="T:System.IO.IOException"> An I/O error occurred.</exception>
         <exception cref="T:System.FormatException">
           <para
-            >The format specification in <paramref
-             name="format" />
+            >The format specification in <paramref name="format" />
 
             
 
@@ -2630,8 +2548,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the <format
-             type="text/html">
+            >This method uses the <format type="text/html">
               <a href="87b7d528-73f6-43c6-b71a-f23043039a49">composite formatting feature</a>
             </format>
 
@@ -2642,8 +2559,7 @@
           <list type="bullet">
             <item>
               <para
-                >For more information about the composite formatting feature, see <format
-                 type="text/html">
+                >For more information about the composite formatting feature, see <format type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
                 </format>
 
@@ -2654,15 +2570,13 @@
             </item>
             <item>
               <para
-                >For more information about numeric format specifiers, see <format
-                 type="text/html">
+                >For more information about numeric format specifiers, see <format type="text/html">
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format>
 
                 
 
-                 and <format
-                 type="text/html">
+                 and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
 
@@ -2673,8 +2587,7 @@
             </item>
             <item>
               <para
-                >For more information about date and time format specifiers, see <format
-                 type="text/html">
+                >For more information about date and time format specifiers, see <format type="text/html">
                   <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b"
                     >Standard DateTime Format Strings</a
                   >
@@ -2682,8 +2595,7 @@
 
                 
 
-                 and <format
-                 type="text/html">
+                 and <format type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
                 </format>
 
@@ -2694,8 +2606,7 @@
             </item>
             <item>
               <para
-                >For more information about enumeration format specifiers, see <format
-                 type="text/html">
+                >For more information about enumeration format specifiers, see <format type="text/html">
                   <a href="dd1ff672-1052-42cf-8666-4924fb6cd1a1">Enumeration Format Strings</a>
                 </format>
 
@@ -2706,8 +2617,7 @@
             </item>
             <item>
               <para
-                >For more information about formatting, see <format
-                 type="text/html">
+                >For more information about formatting, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
 
@@ -2718,8 +2628,7 @@
             </item>
           </list>
           <para
-            >The <paramref
-             name="format" />
+            >The <paramref name="format" />
 
             
 
@@ -2728,8 +2637,7 @@
           <para>The syntax of a format item is as follows:</para>
           <para>{index[,length][:formatString]}</para>
           <para
-            >Elements in square brackets are optional. The following table describes each element. For more information about the composite formatting feature, including the syntax of a format item, see <format
-             type="text/html">
+            >Elements in square brackets are optional. The following table describes each element. For more information about the composite formatting feature, including the syntax of a format item, see <format type="text/html">
               <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
             </format>
 
@@ -2754,13 +2662,11 @@
               </term>
               <description>
                 <para
-                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see
-                   cref="F:System.String.Empty" />
+                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />
 
                   
 
-                  . Because this overload has two objects in its parameter list, the value of index must always be 0 or 1. If there is no parameter in the index position, a <see
-                   cref="T:System.FormatException" />
+                  . Because this overload has two objects in its parameter list, the value of index must always be 0 or 1. If there is no parameter in the index position, a <see cref="T:System.FormatException" />
 
                   
 
@@ -2782,23 +2688,19 @@
               </term>
               <description>
                 <para
-                  >A standard or custom format string that is supported by the object to be formatted. Possible values for formatString are the same as the values supported by the object's ToString(<paramref
-                   name="format" />
+                  >A standard or custom format string that is supported by the object to be formatted. Possible values for formatString are the same as the values supported by the object's ToString(<paramref name="format" />
 
                   
 
-                  ) method. If formatString is not specified and the object to be formatted implements the <see
-                   cref="T:System.IFormattable" />
+                  ) method. If formatString is not specified and the object to be formatted implements the <see cref="T:System.IFormattable" />
 
                   
 
-                   interface, null is passed as the value of the <paramref
-                   name="format" />
+                   interface, null is passed as the value of the <paramref name="format" />
 
                   
 
-                   parameter that is used as the <see
-                   cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
+                   parameter that is used as the <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
 
                   
 
@@ -2808,16 +2710,14 @@
             </item>
           </list>
           <para
-            >The leading and trailing brace characters, "{" and "}", are required. To specify a single literal brace character in <paramref
-             name="format" />
+            >The leading and trailing brace characters, "{" and "}", are required. To specify a single literal brace character in <paramref name="format" />
 
             
 
             , specify two leading or trailing brace characters; that is, "{{" or "}}".</para
           >
           <para
-            >This method does not search the specified string for individual newline characters (hexadecimal 0x000a) and replace them with <see
-             cref="P:System.IO.TextWriter.NewLine" />
+            >This method does not search the specified string for individual newline characters (hexadecimal 0x000a) and replace them with <see cref="P:System.IO.TextWriter.NewLine" />
 
             
 
@@ -2825,8 +2725,7 @@
           >
           <para>If a specified object is not referenced in the format string, it is ignored.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -2838,8 +2737,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes a formatted string to the text string or stream, using the same semantics as the <see
-             cref="M:System.String.Format(System.String,System.Object,System.Object)" />
+            >Writes a formatted string to the text string or stream, using the same semantics as the <see cref="M:System.String.Format(System.String,System.Object,System.Object)" />
 
             
 
@@ -2847,21 +2745,33 @@
           >
         </summary>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A composite format string (see Remarks). </param
         >
         <param name="arg0">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first object to format and write. </param
         >
         <param name="arg1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2905,8 +2815,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -2916,8 +2825,7 @@
         <exception cref="T:System.IO.IOException"> An I/O error occurred.</exception>
         <exception cref="T:System.FormatException">
           <para
-            >The format specification in <paramref
-             name="format" />
+            >The format specification in <paramref name="format" />
 
             
 
@@ -2929,8 +2837,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the <format
-             type="text/html">
+            >This method uses the <format type="text/html">
               <a href="87b7d528-73f6-43c6-b71a-f23043039a49">composite formatting feature</a>
             </format>
 
@@ -2941,8 +2848,7 @@
           <list type="bullet">
             <item>
               <para
-                >For more information about the composite formatting feature, see <format
-                 type="text/html">
+                >For more information about the composite formatting feature, see <format type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
                 </format>
 
@@ -2953,15 +2859,13 @@
             </item>
             <item>
               <para
-                >For more information about numeric format specifiers, see <format
-                 type="text/html">
+                >For more information about numeric format specifiers, see <format type="text/html">
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format>
 
                 
 
-                 and <format
-                 type="text/html">
+                 and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
 
@@ -2972,8 +2876,7 @@
             </item>
             <item>
               <para
-                >For more information about date and time format specifiers, see <format
-                 type="text/html">
+                >For more information about date and time format specifiers, see <format type="text/html">
                   <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b"
                     >Standard DateTime Format Strings</a
                   >
@@ -2981,8 +2884,7 @@
 
                 
 
-                 and <format
-                 type="text/html">
+                 and <format type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
                 </format>
 
@@ -2993,8 +2895,7 @@
             </item>
             <item>
               <para
-                >For more information about enumeration format specifiers, see <format
-                 type="text/html">
+                >For more information about enumeration format specifiers, see <format type="text/html">
                   <a href="dd1ff672-1052-42cf-8666-4924fb6cd1a1">Enumeration Format Strings</a>
                 </format>
 
@@ -3005,8 +2906,7 @@
             </item>
             <item>
               <para
-                >For more information about formatting, see <format
-                 type="text/html">
+                >For more information about formatting, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
 
@@ -3017,8 +2917,7 @@
             </item>
           </list>
           <para
-            >The <paramref
-             name="format" />
+            >The <paramref name="format" />
 
             
 
@@ -3027,8 +2926,7 @@
           <para>The syntax of a format item is as follows:</para>
           <para>{index[,length][:formatString]}</para>
           <para
-            >Elements in square brackets are optional. The following table describes each element. For more information about the composite formatting feature, including the syntax of a format item, see <format
-             type="text/html">
+            >Elements in square brackets are optional. The following table describes each element. For more information about the composite formatting feature, including the syntax of a format item, see <format type="text/html">
               <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
             </format>
 
@@ -3053,13 +2951,11 @@
               </term>
               <description>
                 <para
-                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see
-                   cref="F:System.String.Empty" />
+                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />
 
                   
 
-                  . Because this overload has three objects in its parameter list, the value of index must always be 0, 1, or 2. If there is no parameter in the index position, a <see
-                   cref="T:System.FormatException" />
+                  . Because this overload has three objects in its parameter list, the value of index must always be 0, 1, or 2. If there is no parameter in the index position, a <see cref="T:System.FormatException" />
 
                   
 
@@ -3081,23 +2977,19 @@
               </term>
               <description>
                 <para
-                  >A standard or custom format string that is supported by the object to be formatted. Possible values for formatString are the same as the values supported by the object's ToString(<paramref
-                   name="format" />
+                  >A standard or custom format string that is supported by the object to be formatted. Possible values for formatString are the same as the values supported by the object's ToString(<paramref name="format" />
 
                   
 
-                  ) method. If formatString is not specified and the object to be formatted implements the <see
-                   cref="T:System.IFormattable" />
+                  ) method. If formatString is not specified and the object to be formatted implements the <see cref="T:System.IFormattable" />
 
                   
 
-                   interface, null is passed as the value of the <paramref
-                   name="format" />
+                   interface, null is passed as the value of the <paramref name="format" />
 
                   
 
-                   parameter that is used as the <see
-                   cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
+                   parameter that is used as the <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
 
                   
 
@@ -3107,16 +2999,14 @@
             </item>
           </list>
           <para
-            >The leading and trailing brace characters, "{" and "}", are required. To specify a single literal brace character in <paramref
-             name="format" />
+            >The leading and trailing brace characters, "{" and "}", are required. To specify a single literal brace character in <paramref name="format" />
 
             
 
             , specify two leading or trailing brace characters; that is, "{{" or "}}".</para
           >
           <para
-            >This method does not search the specified string  for individual newline characters (hexadecimal 0x000a) and replace them with <see
-             cref="P:System.IO.TextWriter.NewLine" />
+            >This method does not search the specified string  for individual newline characters (hexadecimal 0x000a) and replace them with <see cref="P:System.IO.TextWriter.NewLine" />
 
             
 
@@ -3124,8 +3014,7 @@
           >
           <para>If a specified object is not referenced in the format string, it is ignored.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -3137,8 +3026,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes a formatted string to the text string or stream, using the same semantics as the <see
-             cref="M:System.String.Format(System.String,System.Object,System.Object,System.Object)" />
+            >Writes a formatted string to the text string or stream, using the same semantics as the <see cref="M:System.String.Format(System.String,System.Object,System.Object,System.Object)" />
 
             
 
@@ -3146,28 +3034,44 @@
           >
         </summary>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A composite format string (see Remarks). </param
         >
         <param name="arg0">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first object to format and write. </param
         >
         <param name="arg1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The second object to format and write. </param
         >
         <param name="arg2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3199,18 +3103,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IO.TextWriter" />
+            >The <see cref="T:System.IO.TextWriter" />
 
             
 
-             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see
-             cref="M:System.IO.TextWriter.WriteAsync(System.Char)" />
+             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see cref="M:System.IO.TextWriter.WriteAsync(System.Char)" />
 
             
 
-             method, see the <see
-             cref="M:System.IO.StreamWriter.WriteAsync(System.Char)" />
+             method, see the <see cref="M:System.IO.StreamWriter.WriteAsync(System.Char)" />
 
             
 
@@ -3226,7 +3127,11 @@
           <para>A task that represents the asynchronous write operation.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3264,12 +3169,15 @@
           <para>A task that represents the asynchronous write operation.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The character array to write to the text stream. If <paramref
-           name="buffer" />
+          The character array to write to the text stream. If <paramref name="buffer" />
 
           
 
@@ -3300,18 +3208,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IO.TextWriter" />
+            >The <see cref="T:System.IO.TextWriter" />
 
             
 
-             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see
-             cref="M:System.IO.TextWriter.WriteAsync(System.String)" />
+             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see cref="M:System.IO.TextWriter.WriteAsync(System.String)" />
 
             
 
-              method, see the <see
-             cref="M:System.IO.StreamWriter.WriteAsync(System.String)" />
+              method, see the <see cref="M:System.IO.StreamWriter.WriteAsync(System.String)" />
 
             
 
@@ -3327,12 +3232,15 @@
           <para>A task that represents the asynchronous write operation. </para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The string to write. If <paramref
-           name="value" />
+          The string to write. If <paramref name="value" />
 
           
 
@@ -3365,18 +3273,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IO.TextWriter" />
+            >The <see cref="T:System.IO.TextWriter" />
 
             
 
-             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see
-             cref="M:System.IO.TextWriter.WriteAsync(System.Char[],System.Int32,System.Int32)" />
+             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see cref="M:System.IO.TextWriter.WriteAsync(System.Char[],System.Int32,System.Int32)" />
 
             
 
-              method, see the <see
-             cref="M:System.IO.StreamWriter.WriteAsync(System.Char[],System.Int32,System.Int32)" />
+              method, see the <see cref="M:System.IO.StreamWriter.WriteAsync(System.Char[],System.Int32,System.Int32)" />
 
             
 
@@ -3392,21 +3297,33 @@
           <para>A task that represents the asynchronous write operation.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character array to write data from. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character position in the buffer at which to start retrieving data. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3436,16 +3353,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
              field.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -3488,37 +3403,32 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text representation of the specified value is produced by calling the <see
-             cref="M:System.Boolean.ToString" />
+            >The text representation of the specified value is produced by calling the <see cref="M:System.Boolean.ToString" />
 
             
 
              method.</para
           >
           <para
-            >This method outputs either <see
-             cref="F:System.Boolean.TrueString" />
+            >This method outputs either <see cref="F:System.Boolean.TrueString" />
 
             
 
-             or <see
-             cref="F:System.Boolean.FalseString" />
+             or <see cref="F:System.Boolean.FalseString" />
 
             
 
             .</para
           >
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
              field.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -3532,7 +3442,11 @@
           <para>Writes the text representation of a Boolean value followed by a line terminator to the text string or stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3568,29 +3482,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload is equivalent to <see
-             cref="M:System.IO.TextWriter.Write(System.Char)" />
+            >This overload is equivalent to <see cref="M:System.IO.TextWriter.Write(System.Char)" />
 
             
 
-              followed by <see
-             cref="M:System.IO.TextWriter.WriteLine" />
+              followed by <see cref="M:System.IO.TextWriter.WriteLine" />
 
             
 
              .</para
           >
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
              field.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -3604,7 +3514,11 @@
           <para>Writes a character followed by a line terminator to the text string or stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3640,37 +3554,32 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >All the characters in <paramref
-             name="buffer" />
+            >All the characters in <paramref name="buffer" />
 
             
 
              are written to the underlying stream. If the character array is null, only the line terminator is written.</para
           >
           <para
-            >This overload is equivalent to <see
-             cref="M:System.IO.TextWriter.Write(System.Char[])" />
+            >This overload is equivalent to <see cref="M:System.IO.TextWriter.Write(System.Char[])" />
 
             
 
-              followed by <see
-             cref="M:System.IO.TextWriter.WriteLine" />
+              followed by <see cref="M:System.IO.TextWriter.WriteLine" />
 
             
 
              .</para
           >
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
              field.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -3684,7 +3593,11 @@
           <para>Writes an array of characters followed by a line terminator to the text string or stream.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3720,13 +3633,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+            >The <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
-             property, if not null, specifies the culture-specific formatting. For a list of common I/O tasks, see <format
-             type="text/html">
+             property, if not null, specifies the culture-specific formatting. For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -3735,8 +3646,7 @@
             .</para
           >
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
@@ -3748,7 +3658,11 @@
           <para>Writes the text representation of a decimal value followed by a line terminator to the text string or stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3785,13 +3699,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+            >The <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
-             property, if not null, specifies the culture-specific formatting. For a list of common I/O tasks, see <format
-             type="text/html">
+             property, if not null, specifies the culture-specific formatting. For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -3800,8 +3712,7 @@
             .</para
           >
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
@@ -3813,7 +3724,11 @@
           <para>Writes the text representation of a 8-byte floating-point value followed by a line terminator to the text string or stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3850,29 +3765,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text representation of the specified value is produced by calling the <see
-             cref="M:System.Int32.ToString" />
+            >The text representation of the specified value is produced by calling the <see cref="M:System.Int32.ToString" />
 
             
 
-             method. The <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+             method. The <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
              property, if not null, specifies the culture-specific formatting.</para
           >
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
              field.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -3886,7 +3797,11 @@
           <para>Writes the text representation of a 4-byte signed integer followed by a line terminator to the text string or stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3922,29 +3837,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text representation of the specified value is produced by calling the <see
-             cref="M:System.Int64.ToString" />
+            >The text representation of the specified value is produced by calling the <see cref="M:System.Int64.ToString" />
 
             
 
-             method. The <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+             method. The <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
              property, if not null, specifies the culture-specific formatting.</para
           >
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
              field.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -3958,7 +3869,11 @@
           <para>Writes the text representation of an 8-byte signed integer followed by a line terminator to the text string or stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3994,29 +3909,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload is equivalent to the <see
-             cref="M:System.IO.TextWriter.Write(System.String,System.Object)" />
+            >This overload is equivalent to the <see cref="M:System.IO.TextWriter.Write(System.String,System.Object)" />
 
             
 
-             overload. The <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+             overload. The <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
              property, if not null, specifies the culture-specific formatting.</para
           >
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
              field.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -4030,12 +3941,15 @@
           <para>Writes the text representation of an object by calling the ToString method on that object, followed by a line terminator to the text string or stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to write. If <paramref
-           name="value" />
+          The object to write. If <paramref name="value" />
 
           
 
@@ -4071,13 +3985,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+            >The <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
-             property, if not null, specifies the culture-specific formatting. For a list of common I/O tasks, see <format
-             type="text/html">
+             property, if not null, specifies the culture-specific formatting. For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -4086,8 +3998,7 @@
             .</para
           >
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
@@ -4099,7 +4010,11 @@
           <para>Writes the text representation of a 4-byte floating-point value followed by a line terminator to the text string or stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4136,32 +4051,28 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload is equivalent to the <see
-             cref="M:System.IO.TextWriter.Write(System.Char[])" />
+            >This overload is equivalent to the <see cref="M:System.IO.TextWriter.Write(System.Char[])" />
 
             
 
              overload.</para
           >
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
              field.</para
           >
           <para
-            >This method does not search the specified string for individual newline characters (hexadecimal 0x000a) and replace them with <see
-             cref="P:System.IO.TextWriter.NewLine" />
+            >This method does not search the specified string for individual newline characters (hexadecimal 0x000a) and replace them with <see cref="P:System.IO.TextWriter.NewLine" />
 
             
 
             .</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -4175,12 +4086,15 @@
           <para>Writes a string followed by a line terminator to the text string or stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The string to write. If <paramref
-           name="value" />
+          The string to write. If <paramref name="value" />
 
           
 
@@ -4222,29 +4136,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text representation of the specified value is produced by calling the <see
-             cref="M:System.UInt32.ToString" />
+            >The text representation of the specified value is produced by calling the <see cref="M:System.UInt32.ToString" />
 
             
 
-             method. The <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+             method. The <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
              property, if not null, specifies the culture-specific formatting.</para
           >
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
              field.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -4258,7 +4168,11 @@
           <para>Writes the text representation of a 4-byte unsigned integer followed by a line terminator to the text string or stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4300,29 +4214,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text representation of the specified value is produced by calling the <see
-             cref="M:System.UInt64.ToString" />
+            >The text representation of the specified value is produced by calling the <see cref="M:System.UInt64.ToString" />
 
             
 
-             method. The <see
-             cref="P:System.IO.TextWriter.FormatProvider" />
+             method. The <see cref="P:System.IO.TextWriter.FormatProvider" />
 
             
 
              property, if not null, specifies the culture-specific formatting.</para
           >
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
              field.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -4336,7 +4246,11 @@
           <para>Writes the text representation of an 8-byte unsigned integer followed by a line terminator to the text string or stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4378,8 +4292,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -4389,8 +4302,7 @@
         <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
         <exception cref="T:System.FormatException">
           <para
-            >The format specification in <paramref
-             name="format" />
+            >The format specification in <paramref name="format" />
 
             
 
@@ -4402,8 +4314,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the <format
-             type="text/html">
+            >This method uses the <format type="text/html">
               <a href="87b7d528-73f6-43c6-b71a-f23043039a49">composite formatting feature</a>
             </format>
 
@@ -4414,8 +4325,7 @@
           <list type="bullet">
             <item>
               <para
-                >For more information about the composite formatting feature, see <format
-                 type="text/html">
+                >For more information about the composite formatting feature, see <format type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
                 </format>
 
@@ -4426,15 +4336,13 @@
             </item>
             <item>
               <para
-                >For more information about numeric format specifiers, see <format
-                 type="text/html">
+                >For more information about numeric format specifiers, see <format type="text/html">
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format>
 
                 
 
-                 and <format
-                 type="text/html">
+                 and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
 
@@ -4445,8 +4353,7 @@
             </item>
             <item>
               <para
-                >For more information about date and time format specifiers, see <format
-                 type="text/html">
+                >For more information about date and time format specifiers, see <format type="text/html">
                   <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b"
                     >Standard DateTime Format Strings</a
                   >
@@ -4454,8 +4361,7 @@
 
                 
 
-                 and <format
-                 type="text/html">
+                 and <format type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
                 </format>
 
@@ -4466,8 +4372,7 @@
             </item>
             <item>
               <para
-                >For more information about enumeration format specifiers, see <format
-                 type="text/html">
+                >For more information about enumeration format specifiers, see <format type="text/html">
                   <a href="dd1ff672-1052-42cf-8666-4924fb6cd1a1">Enumeration Format Strings</a>
                 </format>
 
@@ -4478,8 +4383,7 @@
             </item>
             <item>
               <para
-                >For more information about formatting, see <format
-                 type="text/html">
+                >For more information about formatting, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
 
@@ -4490,8 +4394,7 @@
             </item>
           </list>
           <para
-            >The <paramref
-             name="format" />
+            >The <paramref name="format" />
 
             
 
@@ -4500,8 +4403,7 @@
           <para>The syntax of a format item is as follows:</para>
           <para>{index[,length][:formatString]}</para>
           <para
-            >Elements in square brackets are optional. The following table describes each element. For more information about the composite formatting feature, including the syntax of a format item, see <format
-             type="text/html">
+            >Elements in square brackets are optional. The following table describes each element. For more information about the composite formatting feature, including the syntax of a format item, see <format type="text/html">
               <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
             </format>
 
@@ -4526,13 +4428,11 @@
               </term>
               <description>
                 <para
-                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see
-                   cref="F:System.String.Empty" />
+                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />
 
                   
 
-                  . Because this overload has only a single object in its parameter list, the value of index must always be 0. If there is no parameter in the index position, a <see
-                   cref="T:System.FormatException" />
+                  . Because this overload has only a single object in its parameter list, the value of index must always be 0. If there is no parameter in the index position, a <see cref="T:System.FormatException" />
 
                   
 
@@ -4554,23 +4454,19 @@
               </term>
               <description>
                 <para
-                  >A standard or custom format string that is supported by the object to be formatted. Possible values for formatString are the same as the values supported by the object's ToString(<paramref
-                   name="format" />
+                  >A standard or custom format string that is supported by the object to be formatted. Possible values for formatString are the same as the values supported by the object's ToString(<paramref name="format" />
 
                   
 
-                  ) method. If formatString is not specified and the object to be formatted implements the <see
-                   cref="T:System.IFormattable" />
+                  ) method. If formatString is not specified and the object to be formatted implements the <see cref="T:System.IFormattable" />
 
                   
 
-                   interface, null is passed as the value of the <paramref
-                   name="format" />
+                   interface, null is passed as the value of the <paramref name="format" />
 
                   
 
-                   parameter that is used as the <see
-                   cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
+                   parameter that is used as the <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
 
                   
 
@@ -4580,16 +4476,14 @@
             </item>
           </list>
           <para
-            >The leading and trailing brace characters, "{" and "}", are required. To specify a single literal brace character in <paramref
-             name="format" />
+            >The leading and trailing brace characters, "{" and "}", are required. To specify a single literal brace character in <paramref name="format" />
 
             
 
             , specify two leading or trailing brace characters; that is, "{{" or "}}".</para
           >
           <para
-            >This method does not search the specified string for individual newline characters (hexadecimal 0x000a) and replace them with <see
-             cref="P:System.IO.TextWriter.NewLine" />
+            >This method does not search the specified string for individual newline characters (hexadecimal 0x000a) and replace them with <see cref="P:System.IO.TextWriter.NewLine" />
 
             
 
@@ -4597,16 +4491,14 @@
           >
           <para>If a specified object is not referenced in the format string, it is ignored.</para>
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
              field.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -4618,8 +4510,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes a formatted string and a new line to the text string or stream, using the same semantics as the <see
-             cref="M:System.String.Format(System.String,System.Object)" />
+            >Writes a formatted string and a new line to the text string or stream, using the same semantics as the <see cref="M:System.String.Format(System.String,System.Object)" />
 
             
 
@@ -4627,14 +4518,22 @@
           >
         </summary>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A composite format string (see Remarks).</param
         >
         <param name="arg0">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4681,13 +4580,11 @@
 
           
 
-           or <paramref
-           name="arg " />
+           or <paramref name="arg " />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -4696,8 +4593,7 @@
         <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
         <exception cref="T:System.FormatException">
           <para
-            >The format specification in <paramref
-             name="format" />
+            >The format specification in <paramref name="format" />
 
             
 
@@ -4705,8 +4601,7 @@
           >
           <para>-or-</para>
           <para
-            >The number indicating an argument to be formatted is less than zero, or greater than or equal to <paramref
-             name="arg" />
+            >The number indicating an argument to be formatted is less than zero, or greater than or equal to <paramref name="arg" />
             <see langword="." />
 
             
@@ -4717,8 +4612,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the <format
-             type="text/html">
+            >This method uses the <format type="text/html">
               <a href="87b7d528-73f6-43c6-b71a-f23043039a49">composite formatting feature</a>
             </format>
 
@@ -4729,8 +4623,7 @@
           <list type="bullet">
             <item>
               <para
-                >For more information about the composite formatting feature, see <format
-                 type="text/html">
+                >For more information about the composite formatting feature, see <format type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
                 </format>
 
@@ -4741,15 +4634,13 @@
             </item>
             <item>
               <para
-                >For more information about numeric format specifiers, see <format
-                 type="text/html">
+                >For more information about numeric format specifiers, see <format type="text/html">
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format>
 
                 
 
-                 and <format
-                 type="text/html">
+                 and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
 
@@ -4760,8 +4651,7 @@
             </item>
             <item>
               <para
-                >For more information about date and time format specifiers, see <format
-                 type="text/html">
+                >For more information about date and time format specifiers, see <format type="text/html">
                   <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b"
                     >Standard DateTime Format Strings</a
                   >
@@ -4769,8 +4659,7 @@
 
                 
 
-                 and <format
-                 type="text/html">
+                 and <format type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
                 </format>
 
@@ -4781,8 +4670,7 @@
             </item>
             <item>
               <para
-                >For more information about enumeration format specifiers, see <format
-                 type="text/html">
+                >For more information about enumeration format specifiers, see <format type="text/html">
                   <a href="dd1ff672-1052-42cf-8666-4924fb6cd1a1">Enumeration Format Strings</a>
                 </format>
 
@@ -4793,8 +4681,7 @@
             </item>
             <item>
               <para
-                >For more information about formatting, see <format
-                 type="text/html">
+                >For more information about formatting, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
 
@@ -4805,8 +4692,7 @@
             </item>
           </list>
           <para
-            >The <paramref
-             name="format" />
+            >The <paramref name="format" />
 
             
 
@@ -4815,8 +4701,7 @@
           <para>The syntax of a format item is as follows:</para>
           <para>{index[,length][:formatString]}</para>
           <para
-            >Elements in square brackets are optional. The following table describes each element. For more information about the composite formatting feature, including the syntax of a format item, see <format
-             type="text/html">
+            >Elements in square brackets are optional. The following table describes each element. For more information about the composite formatting feature, including the syntax of a format item, see <format type="text/html">
               <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
             </format>
 
@@ -4841,13 +4726,11 @@
               </term>
               <description>
                 <para
-                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see
-                   cref="F:System.String.Empty" />
+                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />
 
                   
 
-                  . Because this overload has an array in its parameter list, the value of index must always be less than the length of the array. If there is no parameter in the index position, a <see
-                   cref="T:System.FormatException" />
+                  . Because this overload has an array in its parameter list, the value of index must always be less than the length of the array. If there is no parameter in the index position, a <see cref="T:System.FormatException" />
 
                   
 
@@ -4869,23 +4752,19 @@
               </term>
               <description>
                 <para
-                  >A standard or custom format string that is supported by the object to be formatted. Possible values for formatString are the same as the values supported by the object's ToString(<paramref
-                   name="format" />
+                  >A standard or custom format string that is supported by the object to be formatted. Possible values for formatString are the same as the values supported by the object's ToString(<paramref name="format" />
 
                   
 
-                  ) method. If formatString is not specified and the object to be formatted implements the <see
-                   cref="T:System.IFormattable" />
+                  ) method. If formatString is not specified and the object to be formatted implements the <see cref="T:System.IFormattable" />
 
                   
 
-                   interface, null is passed as the value of the <paramref
-                   name="format" />
+                   interface, null is passed as the value of the <paramref name="format" />
 
                   
 
-                   parameter that is used as the <see
-                   cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
+                   parameter that is used as the <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
 
                   
 
@@ -4895,16 +4774,14 @@
             </item>
           </list>
           <para
-            >The leading and trailing brace characters, "{" and "}", are required. To specify a single literal brace character in <paramref
-             name="format" />
+            >The leading and trailing brace characters, "{" and "}", are required. To specify a single literal brace character in <paramref name="format" />
 
             
 
             , specify two leading or trailing brace characters; that is, "{{" or "}}".</para
           >
           <para
-            >This method does not search the specified string for individual newline characters (hexadecimal 0x000a) and replace them with <see
-             cref="P:System.IO.TextWriter.NewLine" />
+            >This method does not search the specified string for individual newline characters (hexadecimal 0x000a) and replace them with <see cref="P:System.IO.TextWriter.NewLine" />
 
             
 
@@ -4912,16 +4789,14 @@
           >
           <para>If a specified object is not referenced in the format string, it is ignored.</para>
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
              field.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -4933,8 +4808,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes out a formatted string and a new line, using the same semantics as <see
-             cref="M:System.String.Format(System.String,System.Object)" />
+            >Writes out a formatted string and a new line, using the same semantics as <see cref="M:System.String.Format(System.String,System.Object)" />
 
             
 
@@ -4942,14 +4816,22 @@
           >
         </summary>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A composite format string (see Remarks).</param
         >
         <param name="arg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4991,113 +4873,94 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.ArgumentException"
-          >(<paramref
-           name="index" />
+          >(<paramref name="index" />
 
           
 
-           + <paramref
-           name="count" />
+           + <paramref name="count" />
 
           
 
-           ) &gt; <paramref
-           name="buffer" />
+           ) &gt; <paramref name="buffer" />
 
           
 
           .Length.</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <para>
-            <paramref name="index &lt; " />
+          <para><paramref name="index &lt; " />
 
             
 
-             0</para
-          >
+             0</para>
           <para> -or-</para>
-          <para>
-            <paramref name="count" />
+          <para><paramref name="count" />
 
             
 
-             &lt; 0.</para
-          >
+             &lt; 0.</para>
         </exception>
         <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method will write <paramref
-             name="count" />
+            >This method will write <paramref name="count" />
 
             
 
-             characters of data into this TextWriter from the <paramref
-             name="buffer" />
+             characters of data into this TextWriter from the <paramref name="buffer" />
 
             
 
-             character array starting at position <paramref
-             name="index" />
+             character array starting at position <paramref name="index" />
 
             
 
             .</para
           >
           <para
-            >This overload is equivalent to calling the <see
-             cref="M:System.IO.TextWriter.Write(System.Char[])" />
+            >This overload is equivalent to calling the <see cref="M:System.IO.TextWriter.Write(System.Char[])" />
 
             
 
-             method followed by <see
-             cref="M:System.IO.TextWriter.WriteLine" />
+             method followed by <see cref="M:System.IO.TextWriter.WriteLine" />
 
             
 
-             for each character in <paramref
-             name="buffer" />
+             for each character in <paramref name="buffer" />
 
             
 
-             between <paramref
-             name="index" />
+             between <paramref name="index" />
 
             
 
-             and (<paramref
-             name="index" />
+             and (<paramref name="index" />
 
             
 
-             + <paramref
-             name="count" />
+             + <paramref name="count" />
 
             
 
             ).</para
           >
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
              field.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -5111,26 +4974,37 @@
           <para>Writes a subarray of characters followed by a line terminator to the text string or stream.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character array from which data is read. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The character position in <paramref
-           name="buffer" />
+          The character position in <paramref name="buffer" />
 
           
 
            at which to start reading data. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5173,8 +5047,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -5184,8 +5057,7 @@
         <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
         <exception cref="T:System.FormatException">
           <para
-            >The format specification in <paramref
-             name="format" />
+            >The format specification in <paramref name="format" />
 
             
 
@@ -5197,8 +5069,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the <format
-             type="text/html">
+            >This method uses the <format type="text/html">
               <a href="87b7d528-73f6-43c6-b71a-f23043039a49">composite formatting feature</a>
             </format>
 
@@ -5209,8 +5080,7 @@
           <list type="bullet">
             <item>
               <para
-                >For more information about the composite formatting feature, see <format
-                 type="text/html">
+                >For more information about the composite formatting feature, see <format type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
                 </format>
 
@@ -5221,15 +5091,13 @@
             </item>
             <item>
               <para
-                >For more information about numeric format specifiers, see <format
-                 type="text/html">
+                >For more information about numeric format specifiers, see <format type="text/html">
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format>
 
                 
 
-                 and <format
-                 type="text/html">
+                 and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
 
@@ -5240,8 +5108,7 @@
             </item>
             <item>
               <para
-                >For more information about date and time format specifiers, see <format
-                 type="text/html">
+                >For more information about date and time format specifiers, see <format type="text/html">
                   <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b"
                     >Standard DateTime Format Strings</a
                   >
@@ -5249,8 +5116,7 @@
 
                 
 
-                 and <format
-                 type="text/html">
+                 and <format type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
                 </format>
 
@@ -5261,8 +5127,7 @@
             </item>
             <item>
               <para
-                >For more information about enumeration format specifiers, see <format
-                 type="text/html">
+                >For more information about enumeration format specifiers, see <format type="text/html">
                   <a href="dd1ff672-1052-42cf-8666-4924fb6cd1a1">Enumeration Format Strings</a>
                 </format>
 
@@ -5273,8 +5138,7 @@
             </item>
             <item>
               <para
-                >For more information about formatting, see <format
-                 type="text/html">
+                >For more information about formatting, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
 
@@ -5285,8 +5149,7 @@
             </item>
           </list>
           <para
-            >The <paramref
-             name="format" />
+            >The <paramref name="format" />
 
             
 
@@ -5295,8 +5158,7 @@
           <para>The syntax of a format item is as follows:</para>
           <para>{index[,length][:formatString]}</para>
           <para
-            >Elements in square brackets are optional. The following table describes each element. For more information about the composite formatting feature, including the syntax of a format item, see <format
-             type="text/html">
+            >Elements in square brackets are optional. The following table describes each element. For more information about the composite formatting feature, including the syntax of a format item, see <format type="text/html">
               <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
             </format>
 
@@ -5321,13 +5183,11 @@
               </term>
               <description>
                 <para
-                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see
-                   cref="F:System.String.Empty" />
+                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />
 
                   
 
-                  . Because this overload has two objects in its parameter list, the value of index must always be 0 or 1. If there is no parameter in the index position, a <see
-                   cref="T:System.FormatException" />
+                  . Because this overload has two objects in its parameter list, the value of index must always be 0 or 1. If there is no parameter in the index position, a <see cref="T:System.FormatException" />
 
                   
 
@@ -5349,23 +5209,19 @@
               </term>
               <description>
                 <para
-                  >A standard or custom format string that is supported by the object to be formatted. Possible values for formatString are the same as the values supported by the object's ToString(<paramref
-                   name="format" />
+                  >A standard or custom format string that is supported by the object to be formatted. Possible values for formatString are the same as the values supported by the object's ToString(<paramref name="format" />
 
                   
 
-                  ) method. If formatString is not specified and the object to be formatted implements the <see
-                   cref="T:System.IFormattable" />
+                  ) method. If formatString is not specified and the object to be formatted implements the <see cref="T:System.IFormattable" />
 
                   
 
-                   interface, null is passed as the value of the <paramref
-                   name="format" />
+                   interface, null is passed as the value of the <paramref name="format" />
 
                   
 
-                   parameter that is used as the <see
-                   cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
+                   parameter that is used as the <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
 
                   
 
@@ -5375,16 +5231,14 @@
             </item>
           </list>
           <para
-            >The leading and trailing brace characters, "{" and "}", are required. To specify a single literal brace character in <paramref
-             name="format" />
+            >The leading and trailing brace characters, "{" and "}", are required. To specify a single literal brace character in <paramref name="format" />
 
             
 
             , specify two leading or trailing brace characters; that is, "{{" or "}}".</para
           >
           <para
-            >This method does not search the specified string for individual newline characters (hexadecimal 0x000a) and replace them with <see
-             cref="P:System.IO.TextWriter.NewLine" />
+            >This method does not search the specified string for individual newline characters (hexadecimal 0x000a) and replace them with <see cref="P:System.IO.TextWriter.NewLine" />
 
             
 
@@ -5392,16 +5246,14 @@
           >
           <para>If a specified object is not referenced in the format string, it is ignored.</para>
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
              field.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -5413,8 +5265,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes a formatted string and a new line to the text string or stream, using the same semantics as the <see
-             cref="M:System.String.Format(System.String,System.Object,System.Object)" />
+            >Writes a formatted string and a new line to the text string or stream, using the same semantics as the <see cref="M:System.String.Format(System.String,System.Object,System.Object)" />
 
             
 
@@ -5422,21 +5273,33 @@
           >
         </summary>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A composite format string (see Remarks).</param
         >
         <param name="arg0">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first object to format and write. </param
         >
         <param name="arg1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5480,8 +5343,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -5491,8 +5353,7 @@
         <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
         <exception cref="T:System.FormatException">
           <para
-            >The format specification in <paramref
-             name="format" />
+            >The format specification in <paramref name="format" />
 
             
 
@@ -5504,8 +5365,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the <format
-             type="text/html">
+            >This method uses the <format type="text/html">
               <a href="87b7d528-73f6-43c6-b71a-f23043039a49">composite formatting feature</a>
             </format>
 
@@ -5516,8 +5376,7 @@
           <list type="bullet">
             <item>
               <para
-                >For more information about the composite formatting feature, see <format
-                 type="text/html">
+                >For more information about the composite formatting feature, see <format type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
                 </format>
 
@@ -5528,15 +5387,13 @@
             </item>
             <item>
               <para
-                >For more information about numeric format specifiers, see <format
-                 type="text/html">
+                >For more information about numeric format specifiers, see <format type="text/html">
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format>
 
                 
 
-                 and <format
-                 type="text/html">
+                 and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
 
@@ -5547,8 +5404,7 @@
             </item>
             <item>
               <para
-                >For more information about date and time format specifiers, see <format
-                 type="text/html">
+                >For more information about date and time format specifiers, see <format type="text/html">
                   <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b"
                     >Standard DateTime Format Strings</a
                   >
@@ -5556,8 +5412,7 @@
 
                 
 
-                 and <format
-                 type="text/html">
+                 and <format type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
                 </format>
 
@@ -5568,8 +5423,7 @@
             </item>
             <item>
               <para
-                >For more information about enumeration format specifiers, see <format
-                 type="text/html">
+                >For more information about enumeration format specifiers, see <format type="text/html">
                   <a href="dd1ff672-1052-42cf-8666-4924fb6cd1a1">Enumeration Format Strings</a>
                 </format>
 
@@ -5580,8 +5434,7 @@
             </item>
             <item>
               <para
-                >For more information about formatting, see <format
-                 type="text/html">
+                >For more information about formatting, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
 
@@ -5592,8 +5445,7 @@
             </item>
           </list>
           <para
-            >The <paramref
-             name="format" />
+            >The <paramref name="format" />
 
             
 
@@ -5602,8 +5454,7 @@
           <para>The syntax of a format item is as follows:</para>
           <para>{index[,length][:formatString]}</para>
           <para
-            >Elements in square brackets are optional. The following table describes each element. For more information about the composite formatting feature, including the syntax of a format item, see <format
-             type="text/html">
+            >Elements in square brackets are optional. The following table describes each element. For more information about the composite formatting feature, including the syntax of a format item, see <format type="text/html">
               <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
             </format>
 
@@ -5628,13 +5479,11 @@
               </term>
               <description>
                 <para
-                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see
-                   cref="F:System.String.Empty" />
+                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />
 
                   
 
-                  . Because this overload has three objects in its parameter list, the value of index must always be 0, 1, or 2. If there is no parameter in the index position, a <see
-                   cref="T:System.FormatException" />
+                  . Because this overload has three objects in its parameter list, the value of index must always be 0, 1, or 2. If there is no parameter in the index position, a <see cref="T:System.FormatException" />
 
                   
 
@@ -5656,23 +5505,19 @@
               </term>
               <description>
                 <para
-                  >A standard or custom format string that is supported by the object to be formatted. Possible values for formatString are the same as the values supported by the object's ToString(<paramref
-                   name="format" />
+                  >A standard or custom format string that is supported by the object to be formatted. Possible values for formatString are the same as the values supported by the object's ToString(<paramref name="format" />
 
                   
 
-                  ) method. If formatString is not specified and the object to be formatted implements the <see
-                   cref="T:System.IFormattable" />
+                  ) method. If formatString is not specified and the object to be formatted implements the <see cref="T:System.IFormattable" />
 
                   
 
-                   interface, null is passed as the value of the <paramref
-                   name="format" />
+                   interface, null is passed as the value of the <paramref name="format" />
 
                   
 
-                   parameter that is used as the <see
-                   cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
+                   parameter that is used as the <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
 
                   
 
@@ -5682,16 +5527,14 @@
             </item>
           </list>
           <para
-            >The leading and trailing brace characters, "{" and "}", are required. To specify a single literal brace character in <paramref
-             name="format" />
+            >The leading and trailing brace characters, "{" and "}", are required. To specify a single literal brace character in <paramref name="format" />
 
             
 
             , specify two leading or trailing brace characters; that is, "{{" or "}}".</para
           >
           <para
-            >This method does not search the specified string for individual newline characters (hexadecimal 0x000a) and replace them with <see
-             cref="P:System.IO.TextWriter.NewLine" />
+            >This method does not search the specified string for individual newline characters (hexadecimal 0x000a) and replace them with <see cref="P:System.IO.TextWriter.NewLine" />
 
             
 
@@ -5699,16 +5542,14 @@
           >
           <para>If a specified object is not referenced in the format string, it is ignored.</para>
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
              field.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -5720,8 +5561,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes out a formatted string and a new line, using the same semantics as <see
-             cref="M:System.String.Format(System.String,System.Object)" />
+            >Writes out a formatted string and a new line, using the same semantics as <see cref="M:System.String.Format(System.String,System.Object)" />
 
             
 
@@ -5729,28 +5569,44 @@
           >
         </summary>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A composite format string (see Remarks).</param
         >
         <param name="arg0">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first object to format and write. </param
         >
         <param name="arg1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The second object to format and write. </param
         >
         <param name="arg2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5780,8 +5636,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
@@ -5821,26 +5676,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
              field. </para
           >
           <para
-            >The <see
-             cref="T:System.IO.TextWriter" />
+            >The <see cref="T:System.IO.TextWriter" />
 
             
 
-             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see
-             cref="M:System.IO.TextWriter.WriteLineAsync(System.Char)" />
+             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see cref="M:System.IO.TextWriter.WriteLineAsync(System.Char)" />
 
             
 
-              method, see the <see
-             cref="M:System.IO.StreamWriter.WriteLineAsync(System.Char)" />
+              method, see the <see cref="M:System.IO.StreamWriter.WriteLineAsync(System.Char)" />
 
             
 
@@ -5856,7 +5707,11 @@
           <para>A task that represents the asynchronous write operation.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5887,8 +5742,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
@@ -5904,7 +5758,11 @@
           <para>A task that represents the asynchronous write operation.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5935,26 +5793,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
              field.</para
           >
           <para
-            >The <see
-             cref="T:System.IO.TextWriter" />
+            >The <see cref="T:System.IO.TextWriter" />
 
             
 
-             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see
-             cref="M:System.IO.TextWriter.WriteLineAsync(System.String)" />
+             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see cref="M:System.IO.TextWriter.WriteLineAsync(System.String)" />
 
             
 
-             method, see the <see
-             cref="M:System.IO.StreamWriter.WriteLineAsync(System.String)" />
+             method, see the <see cref="M:System.IO.StreamWriter.WriteLineAsync(System.String)" />
 
             
 
@@ -5970,7 +5824,11 @@
           <para>A task that represents the asynchronous write operation.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6003,26 +5861,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The line terminator is defined by the <see
-             cref="F:System.IO.TextWriter.CoreNewLine" />
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" />
 
             
 
              field.</para
           >
           <para
-            >The <see
-             cref="T:System.IO.TextWriter" />
+            >The <see cref="T:System.IO.TextWriter" />
 
             
 
-             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see
-             cref="M:System.IO.TextWriter.WriteLineAsync(System.Char[],System.Int32,System.Int32)" />
+             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see cref="M:System.IO.TextWriter.WriteLineAsync(System.Char[],System.Int32,System.Int32)" />
 
             
 
-              method, see the <see
-             cref="M:System.IO.StreamWriter.WriteLineAsync(System.Char[],System.Int32,System.Int32)" />
+              method, see the <see cref="M:System.IO.StreamWriter.WriteLineAsync(System.Char[],System.Int32,System.Int32)" />
 
             
 
@@ -6038,21 +5892,33 @@
           <para>A task that represents the asynchronous write operation.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character array to write data from. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character position in the buffer at which to start retrieving data. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

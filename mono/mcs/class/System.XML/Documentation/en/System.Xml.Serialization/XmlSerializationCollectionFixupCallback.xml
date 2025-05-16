@@ -36,21 +36,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >During initialization, the .NET Framework XML serialization infrastructure dynamically generates and compiles a temporary class for deserialization derived from the <see
-         cref="T:System.Xml.Serialization.XmlSerializationReader" />
+        >During initialization, the .NET Framework XML serialization infrastructure dynamically generates and compiles a temporary class for deserialization derived from the <see cref="T:System.Xml.Serialization.XmlSerializationReader" />
 
         
 
-         class. During this process, the .NET Framework generates collection fix-up methods that use the <see
-         cref="T:System.Xml.Serialization.XmlSerializationCollectionFixupCallback" />
+         class. During this process, the .NET Framework generates collection fix-up methods that use the <see cref="T:System.Xml.Serialization.XmlSerializationCollectionFixupCallback" />
 
         
 
          delegate. This occurs for SOAP-encoded arrays or SOAP-encoded, multi-reference elements whose data types, in either case, map to .NET Framework collections or enumerations. As necessary, the collection fix-up method is called during deserialization.</para
       >
       <para
-        >You should not directly instantiate <see
-         cref="T:System.Xml.Serialization.XmlSerializationCollectionFixupCallback" />
+        >You should not directly instantiate <see cref="T:System.Xml.Serialization.XmlSerializationCollectionFixupCallback" />
 
         
 
@@ -61,8 +58,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Delegate used by the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >Delegate used by the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 

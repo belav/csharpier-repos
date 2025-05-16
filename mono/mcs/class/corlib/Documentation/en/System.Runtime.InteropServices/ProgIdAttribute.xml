@@ -34,8 +34,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>You can apply this attribute to classes.</para>
       <para
-        >ProgIDs are automatically generated for a class by combining the namespace with the type name. This can produce an invalid ProgID however, as ProgIDs are limited to 39 characters and can contain no punctuation other than a period. In such case, a ProgID can be manually assigned to the class using <see
-         cref="T:System.Runtime.InteropServices.ProgIdAttribute" />
+        >ProgIDs are automatically generated for a class by combining the namespace with the type name. This can produce an invalid ProgID however, as ProgIDs are limited to 39 characters and can contain no punctuation other than a period. In such case, a ProgID can be manually assigned to the class using <see cref="T:System.Runtime.InteropServices.ProgIdAttribute" />
 
         
 
@@ -71,7 +70,11 @@
           <para>Initializes a new instance of the ProgIdAttribute with the specified ProgID.</para>
         </summary>
         <param name="progId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

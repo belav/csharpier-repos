@@ -30,61 +30,50 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Text.RegularExpressions.GroupCollection" />
+        >The <see cref="T:System.Text.RegularExpressions.GroupCollection" />
 
         
 
-         class consists of one or more <see
-         cref="T:System.Text.RegularExpressions.Group" />
+         class consists of one or more <see cref="T:System.Text.RegularExpressions.Group" />
 
         
 
-         objects that provide information about captured groups in a regular expression match. The collection is immutable (read-only) and has no public constructor. A <see
-         cref="T:System.Text.RegularExpressions.GroupCollection" />
+         objects that provide information about captured groups in a regular expression match. The collection is immutable (read-only) and has no public constructor. A <see cref="T:System.Text.RegularExpressions.GroupCollection" />
 
         
 
-         object is returned by the <see
-         cref="P:System.Text.RegularExpressions.Match.Groups" />
+         object is returned by the <see cref="P:System.Text.RegularExpressions.Match.Groups" />
 
         
 
          property. </para
       >
       <para
-        >The collection contains one or more <see
-         cref="T:System.Text.RegularExpressions.Group" />
+        >The collection contains one or more <see cref="T:System.Text.RegularExpressions.Group" />
 
         
 
-         objects. If the match is successful, the first element in the collection contains the <see
-         cref="T:System.Text.RegularExpressions.Group" />
+         objects. If the match is successful, the first element in the collection contains the <see cref="T:System.Text.RegularExpressions.Group" />
 
         
 
-         object that corresponds to the entire match. Each subsequent element represents a captured group, if the regular expression includes capturing groups. Matches from numbered (unnamed) capturing groups appear in numeric order before matches from named capturing groups. If the match is unsuccessful, the collection contains a single <see
-         cref="T:System.Text.RegularExpressions.Group" />
+         object that corresponds to the entire match. Each subsequent element represents a captured group, if the regular expression includes capturing groups. Matches from numbered (unnamed) capturing groups appear in numeric order before matches from named capturing groups. If the match is unsuccessful, the collection contains a single <see cref="T:System.Text.RegularExpressions.Group" />
 
         
 
-         object whose <see
-         cref="P:System.Text.RegularExpressions.Group.Success" />
+         object whose <see cref="P:System.Text.RegularExpressions.Group.Success" />
 
         
 
-         property is false and whose <see
-         cref="P:System.Text.RegularExpressions.Capture.Value" />
+         property is false and whose <see cref="P:System.Text.RegularExpressions.Capture.Value" />
 
         
 
-         property equals <see
-         cref="F:System.String.Empty" />
+         property equals <see cref="F:System.String.Empty" />
 
         
 
-        . For more information, see the "Grouping Constructs and Regular Expression Objects" section in the <format
-         type="text/html">
+        . For more information, see the "Grouping Constructs and Regular Expression Objects" section in the <format type="text/html">
           <a href="0fc18634-f590-4062-8d5c-f0b71abe405b"
             >Grouping Constructs in Regular Expressions</a
           >
@@ -95,8 +84,7 @@
          article.  </para
       >
       <para
-        >To iterate through the members of the collection, you should use the collection iteration construct provided by your language (such as foreach in C# and For Each…Next in Visual Basic) instead of retrieving the enumerator that is returned by the <see
-         cref="M:System.Text.RegularExpressions.GroupCollection.GetEnumerator" />
+        >To iterate through the members of the collection, you should use the collection iteration construct provided by your language (such as foreach in C# and For Each…Next in Visual Basic) instead of retrieving the enumerator that is returned by the <see cref="M:System.Text.RegularExpressions.GroupCollection.GetEnumerator" />
 
         
 
@@ -134,8 +122,7 @@
           <para>Because the entire collection is copied into the array starting at the given index, the destination array must be at least as large as the collection.</para>
           <block subset="none" type="note">
             <para
-              >This member is not present in the net_portable. If you are developing applications that target the net_portable, use the <see
-               cref="M:System.Text.RegularExpressions.GroupCollection.System#Collections#ICollection#CopyTo(System.Array,System.Int32)" />
+              >This member is not present in the net_portable. If you are developing applications that target the net_portable, use the <see cref="M:System.Text.RegularExpressions.GroupCollection.System#Collections#ICollection#CopyTo(System.Array,System.Int32)" />
 
               
 
@@ -148,14 +135,22 @@
           <para>Copies all the elements of the collection to the given array beginning at the given index.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array the collection is to be copied into. </param
         >
         <param name="arrayIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -180,18 +175,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Text.RegularExpressions.GroupCollection" />
+            >The <see cref="T:System.Text.RegularExpressions.GroupCollection" />
 
             
 
-             object always has at least one member. If a match is unsuccessful, the <see
-             cref="P:System.Text.RegularExpressions.Match.Groups" />
+             object always has at least one member. If a match is unsuccessful, the <see cref="P:System.Text.RegularExpressions.Match.Groups" />
 
             
 
-             property returns a <see
-             cref="T:System.Text.RegularExpressions.GroupCollection" />
+             property returns a <see cref="T:System.Text.RegularExpressions.GroupCollection" />
 
             
 
@@ -227,13 +219,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instead of calling the <see
-             cref="M:System.Text.RegularExpressions.GroupCollection.GetEnumerator" />
+            >Instead of calling the <see cref="M:System.Text.RegularExpressions.GroupCollection.GetEnumerator" />
 
             
 
-             method to retrieve an enumerator that lets you iterate through the <see
-             cref="T:System.Text.RegularExpressions.Group" />
+             method to retrieve an enumerator that lets you iterate through the <see cref="T:System.Text.RegularExpressions.Group" />
 
             
 
@@ -247,13 +237,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator that contains all <see
-             cref="T:System.Text.RegularExpressions.Group" />
+            >An enumerator that contains all <see cref="T:System.Text.RegularExpressions.Group" />
 
             
 
-             objects in the <see
-             cref="T:System.Text.RegularExpressions.GroupCollection" />
+             objects in the <see cref="T:System.Text.RegularExpressions.GroupCollection" />
 
             
 
@@ -301,8 +289,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This member is not present in the net_portable. If you are developing applications that target the net_portable, use the <see
-               cref="P:System.Text.RegularExpressions.CaptureCollection.System#Collections#ICollection#IsSynchronized" />
+              >This member is not present in the net_portable. If you are developing applications that target the net_portable, use the <see cref="P:System.Text.RegularExpressions.CaptureCollection.System#Collections#ICollection#IsSynchronized" />
 
               
 
@@ -313,8 +300,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether access to the <see
-             cref="T:System.Text.RegularExpressions.GroupCollection" />
+            >Gets a value that indicates whether access to the <see cref="T:System.Text.RegularExpressions.GroupCollection" />
 
             
 
@@ -397,8 +383,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This member is not present in the net_portable. If you are developing applications that target the net_portable, use the <see
-               cref="P:System.Text.RegularExpressions.GroupCollection.System#Collections#ICollection#SyncRoot" />
+              >This member is not present in the net_portable. If you are developing applications that target the net_portable, use the <see cref="P:System.Text.RegularExpressions.GroupCollection.System#Collections#ICollection#SyncRoot" />
 
               
 
@@ -409,8 +394,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Text.RegularExpressions.GroupCollection" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Text.RegularExpressions.GroupCollection" />
 
             
 

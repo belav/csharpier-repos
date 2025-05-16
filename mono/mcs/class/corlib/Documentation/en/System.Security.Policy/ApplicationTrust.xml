@@ -31,13 +31,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An <see
-         cref="T:System.Security.Policy.ApplicationTrust" />
+        >An <see cref="T:System.Security.Policy.ApplicationTrust" />
 
         
 
-         object is returned by a trust manager's <see
-         cref="M:System.Security.Policy.IApplicationTrustManager.DetermineApplicationTrust(System.ActivationContext,System.Security.Policy.TrustManagerContext)" />
+         object is returned by a trust manager's <see cref="M:System.Security.Policy.IApplicationTrustManager.DetermineApplicationTrust(System.ActivationContext,System.Security.Policy.TrustManagerContext)" />
 
         
 
@@ -67,8 +65,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates an empty <see
-             cref="T:System.Security.Policy.ApplicationTrust" />
+            >This constructor creates an empty <see cref="T:System.Security.Policy.ApplicationTrust" />
 
             
 
@@ -78,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Policy.ApplicationTrust" />
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.ApplicationTrust" />
 
             
 
@@ -114,13 +110,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Policy.ApplicationTrust" />
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.ApplicationTrust" />
 
             
 
-             class with an <see
-             cref="T:System.ApplicationIdentity" />
+             class with an <see cref="T:System.ApplicationIdentity" />
 
             
 
@@ -128,12 +122,15 @@
           >
         </summary>
         <param name="applicationIdentity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ApplicationIdentity" />
+          An <see cref="T:System.ApplicationIdentity" />
 
           
 
@@ -169,23 +166,19 @@
 
             
 
-             identifies strong-named assemblies within the <see
-             cref="T:System.AppDomain" />
+             identifies strong-named assemblies within the <see cref="T:System.AppDomain" />
 
             
 
-             that are to be granted full trust. This constructor is called by the <see
-             cref="M:System.AppDomain.CreateDomain(System.String,System.Security.Policy.Evidence,System.AppDomainSetup,System.Security.PermissionSet,System.Security.Policy.StrongName[])" />
+             that are to be granted full trust. This constructor is called by the <see cref="M:System.AppDomain.CreateDomain(System.String,System.Security.Policy.Evidence,System.AppDomainSetup,System.Security.PermissionSet,System.Security.Policy.StrongName[])" />
 
             
 
-             method to create an <see
-             cref="T:System.AppDomain" />
+             method to create an <see cref="T:System.AppDomain" />
 
             
 
-             that will be used as a sandbox. For more information about running an application in a sandbox, see <format
-             type="text/html">
+             that will be used as a sandbox. For more information about running an application in a sandbox, see <format type="text/html">
               <a href="d1ad722b-5b49-4040-bff3-431b94bb8095"
                 >How To: Run Partially Trusted Code in a Sandbox</a
               >
@@ -199,8 +192,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Policy.ApplicationTrust" />
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.ApplicationTrust" />
 
             
 
@@ -208,14 +200,22 @@
           >
         </summary>
         <param name="defaultGrantSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A default permission set that is granted to all assemblies that do not have specific grants.</param
         >
         <param name="fullTrustAssemblies">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -246,8 +246,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Policy.ApplicationTrust.ApplicationIdentity" />
+            >The <see cref="P:System.Security.Policy.ApplicationTrust.ApplicationIdentity" />
 
             
 
@@ -283,21 +282,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Policy.ApplicationTrust.DefaultGrantSet" />
+            >The <see cref="P:System.Security.Policy.ApplicationTrust.DefaultGrantSet" />
 
             
 
              property represents the permissions that are granted to the application.</para
           >
           <para
-            >The <see
-             cref="T:System.Security.Policy.PolicyStatement" />
+            >The <see cref="T:System.Security.Policy.PolicyStatement" />
 
             
 
-             representing the default grants is initialized using a <see
-             cref="T:System.Security.PermissionSet" />
+             representing the default grants is initialized using a <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -356,18 +352,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.ISecurityPolicyEncodable.ToXml(System.Security.Policy.PolicyLevel)" />
+            >The <see cref="M:System.Security.ISecurityPolicyEncodable.ToXml(System.Security.Policy.PolicyLevel)" />
 
             
 
-             and <see
-             cref="M:System.Security.ISecurityPolicyEncodable.FromXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
+             and <see cref="M:System.Security.ISecurityPolicyEncodable.FromXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
 
             
 
-             methods are implemented to make <see
-             cref="T:System.Security.Policy.ApplicationTrust" />
+             methods are implemented to make <see cref="T:System.Security.Policy.ApplicationTrust" />
 
             
 
@@ -377,8 +370,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reconstructs an <see
-             cref="T:System.Security.Policy.ApplicationTrust" />
+            >Reconstructs an <see cref="T:System.Security.Policy.ApplicationTrust" />
 
             
 
@@ -386,12 +378,15 @@
           >
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The XML encoding to use to reconstruct the <see
-           cref="T:System.Security.Policy.ApplicationTrust" />
+          The XML encoding to use to reconstruct the <see cref="T:System.Security.Policy.ApplicationTrust" />
 
           
 
@@ -420,13 +415,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The list identifies assemblies that are to be granted full trust within the <see
-             cref="T:System.AppDomain" />
+            >The list identifies assemblies that are to be granted full trust within the <see cref="T:System.AppDomain" />
 
             
 
-             that is associated with this <see
-             cref="T:System.Security.Policy.ApplicationTrust" />
+             that is associated with this <see cref="T:System.Security.Policy.ApplicationTrust" />
 
             
 
@@ -456,8 +449,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A trust manager sets the <see
-             cref="P:System.Security.Policy.ApplicationTrust.IsApplicationTrustedToRun" />
+            >A trust manager sets the <see cref="P:System.Security.Policy.ApplicationTrust.IsApplicationTrustedToRun" />
 
             
 
@@ -487,8 +479,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Security.Policy.ApplicationTrust.Persist" />
+            >When the <see cref="P:System.Security.Policy.ApplicationTrust.Persist" />
 
             
 
@@ -521,18 +512,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.ISecurityPolicyEncodable.ToXml(System.Security.Policy.PolicyLevel)" />
+            >The <see cref="M:System.Security.ISecurityPolicyEncodable.ToXml(System.Security.Policy.PolicyLevel)" />
 
             
 
-             and <see
-             cref="M:System.Security.ISecurityPolicyEncodable.FromXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
+             and <see cref="M:System.Security.ISecurityPolicyEncodable.FromXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
 
             
 
-             methods are implemented to make <see
-             cref="T:System.Security.Policy.ApplicationTrust" />
+             methods are implemented to make <see cref="T:System.Security.Policy.ApplicationTrust" />
 
             
 
@@ -542,8 +530,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an XML encoding of the <see
-             cref="T:System.Security.Policy.ApplicationTrust" />
+            >Creates an XML encoding of the <see cref="T:System.Security.Policy.ApplicationTrust" />
 
             
 

@@ -33,8 +33,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.FrameDimension" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.FrameDimension" />
 
             
 
@@ -42,12 +41,15 @@
           >
         </summary>
         <param name="guid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A Guid structure that contains a GUID for this <see
-           cref="T:System.Drawing.Imaging.FrameDimension" />
+          A Guid structure that contains a GUID for this <see cref="T:System.Drawing.Imaging.FrameDimension" />
 
           
 
@@ -73,13 +75,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the specified object is a <see
-             cref="T:System.Drawing.Imaging.FrameDimension" />
+            >Returns a value that indicates whether the specified object is a <see cref="T:System.Drawing.Imaging.FrameDimension" />
 
             
 
-             equivalent to this <see
-             cref="T:System.Drawing.Imaging.FrameDimension" />
+             equivalent to this <see cref="T:System.Drawing.Imaging.FrameDimension" />
 
             
 
@@ -89,18 +89,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns true if <paramref
-             name="o" />
+            >Returns true if <paramref name="o" />
 
             
 
-             is a <see
-             cref="T:System.Drawing.Imaging.FrameDimension" />
+             is a <see cref="T:System.Drawing.Imaging.FrameDimension" />
 
             
 
-             equivalent to this <see
-             cref="T:System.Drawing.Imaging.FrameDimension" />
+             equivalent to this <see cref="T:System.Drawing.Imaging.FrameDimension" />
 
             
 
@@ -108,7 +105,11 @@
           >
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -132,8 +133,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a hash code for this <see
-             cref="T:System.Drawing.Imaging.FrameDimension" />
+            >Returns a hash code for this <see cref="T:System.Drawing.Imaging.FrameDimension" />
 
             
 
@@ -143,8 +143,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an int value that is the hash code of this <see
-             cref="T:System.Drawing.Imaging.FrameDimension" />
+            >Returns an int value that is the hash code of this <see cref="T:System.Drawing.Imaging.FrameDimension" />
 
             
 
@@ -169,8 +168,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a globally unique identifier (GUID) that represents this <see
-             cref="T:System.Drawing.Imaging.FrameDimension" />
+            >Gets a globally unique identifier (GUID) that represents this <see cref="T:System.Drawing.Imaging.FrameDimension" />
 
             
 
@@ -261,8 +259,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Drawing.Imaging.FrameDimension" />
+            >Converts this <see cref="T:System.Drawing.Imaging.FrameDimension" />
 
             
 
@@ -272,8 +269,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents this <see
-             cref="T:System.Drawing.Imaging.FrameDimension" />
+            >A string that represents this <see cref="T:System.Drawing.Imaging.FrameDimension" />
 
             
 

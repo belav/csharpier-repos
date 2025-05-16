@@ -61,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.NamedPermissionSet" />
+            >Initializes a new instance of the <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
@@ -70,7 +69,11 @@
           >
         </summary>
         <param name="permSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -98,23 +101,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Using this constructor creates a named permission set with no permissions but with an <see
-             cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+            >Using this constructor creates a named permission set with no permissions but with an <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
 
             
 
-             permission state. A named permission set in an unrestricted state effectively contains all permissions that implement the <see
-             cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+             permission state. A named permission set in an unrestricted state effectively contains all permissions that implement the <see cref="T:System.Security.Permissions.IUnrestrictedPermission" />
 
             
 
-             interface. The named permission set will contain all built-in permissions as well as all custom user-defined permissions that implement <see
-             cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+             interface. The named permission set will contain all built-in permissions as well as all custom user-defined permissions that implement <see cref="T:System.Security.Permissions.IUnrestrictedPermission" />
 
             
 
-            . All permissions will have the equivalent of an Unrestricted permission state. Permissions that do not implement <see
-             cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+            . All permissions will have the equivalent of an Unrestricted permission state. Permissions that do not implement <see cref="T:System.Security.Permissions.IUnrestrictedPermission" />
 
             
 
@@ -124,8 +123,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new, empty instance of the <see
-             cref="T:System.Security.NamedPermissionSet" />
+            >Initializes a new, empty instance of the <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
@@ -133,7 +131,11 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -165,18 +167,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A named permission set in an unrestricted state effectively contains all permissions that implement the <see
-             cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+            >A named permission set in an unrestricted state effectively contains all permissions that implement the <see cref="T:System.Security.Permissions.IUnrestrictedPermission" />
 
             
 
-             interface. The named permission set will contain all built-in permissions as well as all custom permissions. All permissions will have an Unrestricted <see
-             cref="T:System.Security.Permissions.PermissionState" />
+             interface. The named permission set will contain all built-in permissions as well as all custom permissions. All permissions will have an Unrestricted <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
-            . Permissions that do not implement <see
-             cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+            . Permissions that do not implement <see cref="T:System.Security.Permissions.IUnrestrictedPermission" />
 
             
 
@@ -186,8 +185,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.NamedPermissionSet" />
+            >Initializes a new instance of the <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
@@ -195,19 +193,26 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name for the new named permission set. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -240,8 +245,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.NamedPermissionSet" />
+            >Initializes a new instance of the <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
@@ -249,14 +253,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name for the named permission set. </param
         >
         <param name="permSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -327,7 +339,11 @@
           <para>A copy of the named permission set with the new name.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -386,8 +402,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >For more information, see <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -397,13 +412,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Security.NamedPermissionSet" />
+            >Determines whether the specified <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
-             object is equal to the current <see
-             cref="T:System.Security.NamedPermissionSet" />
+             object is equal to the current <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
@@ -413,13 +426,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see
-             cref="T:System.Security.NamedPermissionSet" />
+            >true if the specified <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
-             is equal to the current <see
-             cref="T:System.Security.NamedPermissionSet" />
+             is equal to the current <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
@@ -427,17 +438,19 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.NamedPermissionSet" />
+          The <see cref="T:System.Security.NamedPermissionSet" />
 
           
 
-           object to compare with the current <see
-           cref="T:System.Security.NamedPermissionSet" />
+           object to compare with the current <see cref="T:System.Security.NamedPermissionSet" />
 
           
 
@@ -470,8 +483,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method recreates the state of a named permission set from an XML element previously created by <see
-             cref="M:System.Security.NamedPermissionSet.ToXml" />
+            >This method recreates the state of a named permission set from an XML element previously created by <see cref="M:System.Security.NamedPermissionSet.ToXml" />
 
             
 
@@ -483,7 +495,11 @@
           <para>Reconstructs a named permission set with a specified state from an XML encoding.</para>
         </summary>
         <param name="et">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -516,8 +532,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hash code for two instances of the same permission might differ, hence a hash code should not be used to compare two <see
-             cref="T:System.Security.NamedPermissionSet" />
+            >The hash code for two instances of the same permission might differ, hence a hash code should not be used to compare two <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
@@ -527,8 +542,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a hash code for the <see
-             cref="T:System.Security.NamedPermissionSet" />
+            >Gets a hash code for the <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
@@ -538,8 +552,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.Security.NamedPermissionSet" />
+            >A hash code for the current <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
@@ -595,8 +608,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="M:System.Security.NamedPermissionSet.FromXml(System.Security.SecurityElement)" />
+            >Use <see cref="M:System.Security.NamedPermissionSet.FromXml(System.Security.SecurityElement)" />
 
             
 

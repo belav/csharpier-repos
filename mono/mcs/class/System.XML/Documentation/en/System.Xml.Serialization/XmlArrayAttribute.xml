@@ -30,18 +30,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+        >The <see cref="T:System.Xml.Serialization.XmlArrayAttribute" />
 
         
 
-         belongs to a family of attributes that controls how the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         belongs to a family of attributes that controls how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         serializes or deserializes an object. For a complete list of similar attributes, see <format
-         type="text/html">
+         serializes or deserializes an object. For a complete list of similar attributes, see <format type="text/html">
           <a href="414b820f-a696-4206-b576-2711d85490c7"
             >Attributes That Control XML Serialization</a
           >
@@ -52,72 +49,60 @@
         .</para
       >
       <para
-        >You can apply the <see
-         cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+        >You can apply the <see cref="T:System.Xml.Serialization.XmlArrayAttribute" />
 
         
 
-         to a public field or read/write property that returns an array of objects. You can also apply it to collections and fields that return an <see
-         cref="T:System.Collections.ArrayList" />
+         to a public field or read/write property that returns an array of objects. You can also apply it to collections and fields that return an <see cref="T:System.Collections.ArrayList" />
 
         
 
-         or any field that returns an object that implements the <see
-         cref="T:System.Collections.IEnumerable" />
+         or any field that returns an object that implements the <see cref="T:System.Collections.IEnumerable" />
 
         
 
          interface.</para
       >
       <para
-        >When you apply the <see
-         cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+        >When you apply the <see cref="T:System.Xml.Serialization.XmlArrayAttribute" />
 
         
 
-         to a class member, the <see
-         cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" />
+         to a class member, the <see cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" />
 
         
 
-         method of the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         method of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         class generates a nested sequence of XML elements from that member. An XML schema document (an .xsd file), indicates such an array as a complexType. For example, if the class to be serialized represents a purchase order, you can generate an array of purchased items by applying the <see
-         cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+         class generates a nested sequence of XML elements from that member. An XML schema document (an .xsd file), indicates such an array as a complexType. For example, if the class to be serialized represents a purchase order, you can generate an array of purchased items by applying the <see cref="T:System.Xml.Serialization.XmlArrayAttribute" />
 
         
 
          to a public field that returns an array of objects that represent order items.</para
       >
       <para
-        >If no attributes are applied to a public field or property that returns an array of complex or primitive type objects, the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >If no attributes are applied to a public field or property that returns an array of complex or primitive type objects, the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         generates a nested sequence of XML elements by default. To more precisely control what XML elements are generated, apply an <see
-         cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+         generates a nested sequence of XML elements by default. To more precisely control what XML elements are generated, apply an <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
         
 
-         and an <see
-         cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+         and an <see cref="T:System.Xml.Serialization.XmlArrayAttribute" />
 
         
 
-         to the field or property. For example, by default, the name of the generated XML element is derived from the member identifier You can change the name of the generated XML element by setting the <see
-         cref="P:System.Xml.Serialization.XmlArrayAttribute.ElementName" />
+         to the field or property. For example, by default, the name of the generated XML element is derived from the member identifier You can change the name of the generated XML element by setting the <see cref="P:System.Xml.Serialization.XmlArrayAttribute.ElementName" />
 
         
 
          property.</para
       >
       <para
-        >If you serialize an array that contains items of a specific type and all the classes derived from that type, you must use the <see
-         cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+        >If you serialize an array that contains items of a specific type and all the classes derived from that type, you must use the <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
         
 
@@ -125,8 +110,7 @@
       >
       <block subset="none" type="note">
         <para
-          >You can use XmlArray in your code instead of the longer <see
-           cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+          >You can use XmlArray in your code instead of the longer <see cref="T:System.Xml.Serialization.XmlArrayAttribute" />
 
           
 
@@ -134,8 +118,7 @@
         >
       </block>
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -147,8 +130,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies that the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >Specifies that the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
@@ -175,8 +157,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about using attributes, see <format
-             type="text/html">
+            >For more information about using attributes, see <format type="text/html">
               <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
             </format>
 
@@ -188,8 +169,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlArrayAttribute" />
 
             
 
@@ -218,8 +198,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about using attributes, see <format
-             type="text/html">
+            >For more information about using attributes, see <format type="text/html">
               <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
             </format>
 
@@ -231,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlArrayAttribute" />
 
             
 
@@ -240,12 +218,15 @@
           >
         </summary>
         <param name="elementName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the XML element that the <see
-           cref="T:System.Xml.Serialization.XmlSerializer" />
+          The name of the XML element that the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
           
 
@@ -271,21 +252,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specify an <see
-             cref="P:System.Xml.Serialization.XmlArrayAttribute.ElementName" />
+            >Specify an <see cref="P:System.Xml.Serialization.XmlArrayAttribute.ElementName" />
 
             
 
              when you want the generated XML element name to differ from the member's identifier.</para
           >
           <para
-            >You can set the same <see
-             cref="P:System.Xml.Serialization.XmlArrayAttribute.ElementName" />
+            >You can set the same <see cref="P:System.Xml.Serialization.XmlArrayAttribute.ElementName" />
 
             
 
-             value to more than one member as long as the generated XML document uses XML namespaces to distinguish between the identically named members. For more details about using namespaces and creating prefixed names in the XML document, see <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+             value to more than one member as long as the generated XML document uses XML namespaces to distinguish between the identically named members. For more details about using namespaces and creating prefixed names in the XML document, see <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
@@ -322,39 +300,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Serialization.XmlArrayAttribute.Form" />
+            >The <see cref="P:System.Xml.Serialization.XmlArrayAttribute.Form" />
 
             
 
-             property determines whether an XML element name is qualified or unqualified. The <see
-             cref="P:System.Xml.Serialization.XmlArrayAttribute.Form" />
+             property determines whether an XML element name is qualified or unqualified. The <see cref="P:System.Xml.Serialization.XmlArrayAttribute.Form" />
 
             
 
              property conforms to the 1999 World Wide Web Consortium (www.w3.org) document titled "Namespaces in XML." </para
           >
           <para
-            >If the <see
-             cref="P:System.Xml.Serialization.XmlAttributeAttribute.Namespace" />
+            >If the <see cref="P:System.Xml.Serialization.XmlAttributeAttribute.Namespace" />
 
             
 
-             property is set to any value, attempting to set the <see
-             cref="P:System.Xml.Serialization.XmlElementAttribute.Form" />
+             property is set to any value, attempting to set the <see cref="P:System.Xml.Serialization.XmlElementAttribute.Form" />
 
             
 
              property to XmlSchemaForm.Unqualified throws an exception.</para
           >
           <para
-            >The default setting, XmlSchemaForm.None, instructs the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >The default setting, XmlSchemaForm.None, instructs the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             to check the schema for the XML document to determine whether the namespace is qualified. If the schema does not specify a value for an individual element or attribute, the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             to check the schema for the XML document to determine whether the namespace is qualified. If the schema does not specify a value for an individual element or attribute, the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -366,13 +338,11 @@
     &lt;attribute name="Number"/&gt;
  &lt;/schema&gt;</code>
           <para
-            >When the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >When the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             reads the schema, the <see
-             cref="P:System.Xml.Serialization.XmlAttributeAttribute.Form" />
+             reads the schema, the <see cref="P:System.Xml.Serialization.XmlAttributeAttribute.Form" />
 
             
 
@@ -382,8 +352,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether the XML element name generated by the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets a value that indicates whether the XML element name generated by the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -411,13 +380,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The XML schema specification for structures allows an XML document to explicitly signal that an element's content is missing. Such an element contains the attribute xsi:nil set to true. For more information, see the World Wide Web Consortium (www.w3.org) specification titled "XML Schema Part 1: Structures." </para>
           <para
-            >If the <see
-             cref="P:System.Xml.Serialization.XmlArrayAttribute.IsNullable" />
+            >If the <see cref="P:System.Xml.Serialization.XmlArrayAttribute.IsNullable" />
 
             
 
-             property is set to true, the xsi:nil attribute is generated for class members that have been set to null. For example, if you set a field named MyStringArray to null, the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             property is set to true, the xsi:nil attribute is generated for class members that have been set to null. For example, if you set a field named MyStringArray to null, the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -425,8 +392,7 @@
           >
           <code> &lt;MyStringArray xsi:nil = "true" /&gt;</code>
           <para
-            >If the <see
-             cref="P:System.Xml.Serialization.XmlArrayAttribute.IsNullable" />
+            >If the <see cref="P:System.Xml.Serialization.XmlArrayAttribute.IsNullable" />
 
             
 
@@ -434,8 +400,7 @@
           >
           <block subset="none" type="note">
             <para
-              >You cannot apply the <see
-               cref="P:System.Xml.Serialization.XmlArrayAttribute.IsNullable" />
+              >You cannot apply the <see cref="P:System.Xml.Serialization.XmlArrayAttribute.IsNullable" />
 
               
 
@@ -446,8 +411,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets a value that indicates whether the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -474,31 +438,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Serialization.XmlArrayAttribute.Namespace" />
+            >The <see cref="P:System.Xml.Serialization.XmlArrayAttribute.Namespace" />
 
             
 
-             property allows you to create qualified XML element names. The <see
-             cref="P:System.Xml.Serialization.XmlArrayAttribute.Namespace" />
+             property allows you to create qualified XML element names. The <see cref="P:System.Xml.Serialization.XmlArrayAttribute.Namespace" />
 
             
 
              property conforms to the rules for creating an XML namespace as found in the 1999 World Wide Web Consortium (www.w3.org) document titled "Namespaces in XML." </para
           >
           <para
-            >To create namespaces that are associated with a prefix, you must create an instance of the <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+            >To create namespaces that are associated with a prefix, you must create an instance of the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
-             class that contains the namespaces and prefixes used in the XML document. As you set the namespace for each <see
-             cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+             class that contains the namespaces and prefixes used in the XML document. As you set the namespace for each <see cref="T:System.Xml.Serialization.XmlArrayAttribute" />
 
             
 
-            , it must match one of the namespaces in the <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+            , it must match one of the namespaces in the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
@@ -528,18 +487,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="F:System.Xml.Serialization.CodeGenerationOptions.GenerateOrder" />
+            >Use the <see cref="F:System.Xml.Serialization.CodeGenerationOptions.GenerateOrder" />
 
             
 
-             enumeration to instruct the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+             enumeration to instruct the <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
 
             
 
-             to generate code that sets the <see
-             cref="P:System.Xml.Serialization.XmlElementAttribute.Order" />
+             to generate code that sets the <see cref="P:System.Xml.Serialization.XmlElementAttribute.Order" />
 
             
 
@@ -547,8 +503,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Once the <see
-               cref="P:System.Xml.Serialization.XmlElementAttribute.Order" />
+              >Once the <see cref="P:System.Xml.Serialization.XmlElementAttribute.Order" />
 
               
 

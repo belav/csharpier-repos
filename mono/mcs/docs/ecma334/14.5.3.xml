@@ -1,21 +1,20 @@
 <?xml version="1.0"?>
 <clause number="14.5.3" title="Parenthesized expressions">
   <paragraph
-    >A <non_terminal
-     where="14.5.3">parenthesized-expression</non_terminal>
+    >A <non_terminal where="14.5.3"
+      >parenthesized-expression</non_terminal
+    >
 
     
 
-     consists of an expression enclosed in parentheses. <grammar_production
-    >
+     consists of an expression enclosed in parentheses. <grammar_production>
       <name>
         <non_terminal where="14.5.3">parenthesized-expression</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <terminal>(</terminal>
         <non_terminal where="14.14">expression</non_terminal>
         <terminal>)</terminal>
@@ -23,13 +22,16 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >A <non_terminal
-     where="14.5.3">parenthesized-expression</non_terminal>
+    >A <non_terminal where="14.5.3"
+      >parenthesized-expression</non_terminal
+    >
 
     
 
      is evaluated by evaluating the expression within the parentheses. If the expression within the parentheses denotes a namespace, type, or method group, a compile-time error occurs. Otherwise, the result of the <non_terminal
-     where="14.5.3">parenthesized-expression</non_terminal>
+      where="14.5.3"
+      >parenthesized-expression</non_terminal
+    >
 
     
 

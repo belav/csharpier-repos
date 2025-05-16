@@ -22,15 +22,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class corresponds to the <format
-         type="text/html">
+        >This class corresponds to the <format type="text/html">
           <a href="52de4d6c-b24d-44aa-ba7d-6b5061f1357e">System.Net Element (Network Settings)</a>
         </format>
 
         
 
-         configuration element described in the <format
-         type="text/html">
+         configuration element described in the <format type="text/html">
           <a href="f1de5a0f-76c5-4833-819f-5222b8146340">Network Settings Schema</a>
         </format>
 
@@ -90,8 +88,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Configuration.NetSectionGroup" />
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.NetSectionGroup" />
 
             
 
@@ -128,8 +125,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The section returned by this property corresponds to the <format
-             type="text/html">
+            >The section returned by this property corresponds to the <format type="text/html">
               <a href="10fcfaad-82ef-4692-871a-0aec9dfbe75e"
                 >AuthenticationModules Element (Network Settings)</a
               >
@@ -174,8 +170,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The section returned by this property corresponds to the <format
-             type="text/html">
+            >The section returned by this property corresponds to the <format type="text/html">
               <a href="bedccaab-12a2-4511-8f67-e961f249aec6"
                 >ConnectionManagement Element (Network Settings)</a
               >
@@ -220,8 +215,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The section returned by this property corresponds to the <format
-             type="text/html">
+            >The section returned by this property corresponds to the <format type="text/html">
               <a href="9d663c4b-07b4-4f6f-9b12-efbd3630354f"
                 >DefaultProxy Element (Network Settings)</a
               >
@@ -276,13 +270,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.Configuration.NetSectionGroup" />
+            >A <see cref="T:System.Net.Configuration.NetSectionGroup" />
 
             
 
-             that represents the System.Net settings in <paramref
-             name="config" />
+             that represents the System.Net settings in <paramref name="config" />
 
             
 
@@ -290,12 +282,15 @@
           >
         </returns>
         <param name="config">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.Configuration" />
+          A <see cref="T:System.Configuration.Configuration" />
 
           
 
@@ -326,8 +321,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The section returned by this property corresponds to the <format
-             type="text/html">
+            >The section returned by this property corresponds to the <format type="text/html">
               <a href="54f0f153-17e5-4f49-afdc-deadb940c9c1">mailSettings for System.Net</a>
             </format>
 
@@ -370,8 +364,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The section returned by this property corresponds to the <format
-             type="text/html">
+            >The section returned by this property corresponds to the <format type="text/html">
               <a href="9962a2fe-cbda-41a6-9377-571811eaea84"
                 >RequestCaching Element (Network Settings)</a
               >
@@ -416,8 +409,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The section returned by this property corresponds to the <format
-             type="text/html">
+            >The section returned by this property corresponds to the <format type="text/html">
               <a href="189ce989-c39b-427d-b004-6b82a668b931">Settings Element (Network Settings)</a>
             </format>
 
@@ -460,8 +452,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The section returned by this property corresponds to the <format
-             type="text/html">
+            >The section returned by this property corresponds to the <format type="text/html">
               <a href="1263de11-3e0a-4f94-97c9-710b2ae53817"
                 >WebRequestModules Element (Network Settings)</a
               >
@@ -475,8 +466,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the configuration section containing the modules registered for use with the <see
-             cref="T:System.Net.WebRequest" />
+            >Gets the configuration section containing the modules registered for use with the <see cref="T:System.Net.WebRequest" />
 
             
 

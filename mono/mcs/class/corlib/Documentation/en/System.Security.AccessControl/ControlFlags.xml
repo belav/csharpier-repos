@@ -178,8 +178,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the group <see
-             cref="T:System.Security.Principal.SecurityIdentifier" />
+            >Specifies that the group <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
             
 
@@ -229,8 +228,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the owner <see
-             cref="T:System.Security.Principal.SecurityIdentifier" />
+            >Specifies that the owner <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
             
 

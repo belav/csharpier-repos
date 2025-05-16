@@ -46,12 +46,10 @@
             Smart method of splitting a string.  Skips quoted elements, removes the quotes.
             </summary>
         <returns>A string array of the split up elements</returns>
-        <remarks
-          >
+        <remarks>
             This split function works somewhat like the String.Split() function in that it breaks apart a string into
             pieces and returns the pieces as an array.  The primary differences are:
-            <list
-           type="bullet">
+            <list type="bullet">
             <item>
               <description>Only one character can be provided as a separator character</description>
             </item>
@@ -63,45 +61,38 @@
           
 
           
-            Thus, if splitting the following string looking for a comma:<br
-           />
+            Thus, if splitting the following string looking for a comma:<br />
 
           
 
           
-            One,Two, "Three, Four", Five<br
-           />
+            One,Two, "Three, Four", Five<br />
           <br />
 
           
 
           
-            The resulting array would contain<br
-           />
+            The resulting array would contain<br />
 
           
 
           
-            [0] One<br
-           />
+            [0] One<br />
 
           
 
           
-            [1] Two<br
-           />
+            [1] Two<br />
 
           
 
           
-            [2] Three, Four<br
-           />
+            [2] Three, Four<br />
 
           
 
           
-            [3] Five<br
-           />
+            [3] Five<br />
           <br />
 
           

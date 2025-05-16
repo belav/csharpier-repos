@@ -25,46 +25,38 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Xml.Serialization.XmlAnyElementAttributes" />
+        >Use the <see cref="T:System.Xml.Serialization.XmlAnyElementAttributes" />
 
         
 
-         to override the behavior of a set of <see
-         cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+         to override the behavior of a set of <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
         
 
-         objects. Multiple instances of the <see
-         cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+         objects. Multiple instances of the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
         
 
-         class can be applied to a class member, as long as each instance has a distinct <see
-         cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+         class can be applied to a class member, as long as each instance has a distinct <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
         
 
-         property value; this instructs the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         property value; this instructs the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         to collect unknown elements under the named element into the appropriate array. It is for this reason that multiple instances of the <see
-         cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+         to collect unknown elements under the named element into the appropriate array. It is for this reason that multiple instances of the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
         
 
-         class can be added to the <see
-         cref="T:System.Xml.Serialization.XmlAnyElementAttributes" />
+         class can be added to the <see cref="T:System.Xml.Serialization.XmlAnyElementAttributes" />
 
         
 
         .</para
       >
       <para
-        >To override a set of <see
-         cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+        >To override a set of <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
         
 
@@ -73,8 +65,7 @@
       <list type="ordered">
         <item>
           <para
-            >Create an <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttributes" />
+            >Create an <see cref="T:System.Xml.Serialization.XmlAnyElementAttributes" />
 
             
 
@@ -83,13 +74,11 @@
         </item>
         <item>
           <para
-            >Create the set of <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+            >Create the set of <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
             
 
-             objects, and add each object to the collection using the <see
-             cref="M:System.Xml.Serialization.XmlAnyElementAttributes.Add(System.Xml.Serialization.XmlAnyElementAttribute)" />
+             objects, and add each object to the collection using the <see cref="M:System.Xml.Serialization.XmlAnyElementAttributes.Add(System.Xml.Serialization.XmlAnyElementAttribute)" />
 
             
 
@@ -98,8 +87,7 @@
         </item>
         <item>
           <para
-            >Create an <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+            >Create an <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
@@ -108,23 +96,11 @@
         </item>
         <item>
           <para
-            >Set the <see
-             cref="P:System.Xml.Serialization.XmlAttributes.XmlAnyElements" />
+            >Set the <see cref="P:System.Xml.Serialization.XmlAttributes.XmlAnyElements" />
 
             
 
-             property to the <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttributes" />
-
-            
-
-            .</para
-          >
-        </item>
-        <item>
-          <para
-            >Create an <see
-             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+             property to the <see cref="T:System.Xml.Serialization.XmlAnyElementAttributes" />
 
             
 
@@ -133,18 +109,24 @@
         </item>
         <item>
           <para
-            >Add the <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+            >Create an <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
             
 
-             to the <see
-             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+            .</para
+          >
+        </item>
+        <item>
+          <para
+            >Add the <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             using the <see
-             cref="M:System.Xml.Serialization.XmlAttributeOverrides.Add(System.Type,System.Xml.Serialization.XmlAttributes)" />
+             to the <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+            
+
+             using the <see cref="M:System.Xml.Serialization.XmlAttributeOverrides.Add(System.Type,System.Xml.Serialization.XmlAttributes)" />
 
             
 
@@ -153,13 +135,11 @@
         </item>
         <item>
           <para
-            >Create an instance of the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Create an instance of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             using the <see
-             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+             using the <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
             
 
@@ -168,8 +148,7 @@
         </item>
         <item>
           <para
-            >Serialize or deserialize an object that contains the set of <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+            >Serialize or deserialize an object that contains the set of <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
             
 
@@ -181,8 +160,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+        >Represents a collection of <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
         
 
@@ -210,8 +188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttributes" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlAnyElementAttributes" />
 
             
 
@@ -246,8 +223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+            >Adds an <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
             
 
@@ -257,8 +233,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the newly added <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+            >The index of the newly added <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
             
 
@@ -266,12 +241,15 @@
           >
         </returns>
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+          The <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
           
 
@@ -305,8 +283,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the specified <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+            >Gets a value that indicates whether the specified <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
             
 
@@ -316,8 +293,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+            >true if the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
             
 
@@ -325,12 +301,15 @@
           >
         </returns>
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+          The <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
           
 
@@ -365,8 +344,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the entire collection to a compatible one-dimensional array of <see
-             cref="T:System.Xml.Serialization.XmlElementAttribute" />
+            >Copies the entire collection to a compatible one-dimensional array of <see cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
             
 
@@ -374,24 +352,30 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional array of <see
-           cref="T:System.Xml.Serialization.XmlElementAttribute" />
+          The one-dimensional array of <see cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
           
 
            objects that is the destination of the elements copied from the collection. The array must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -425,8 +409,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the specified <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+            >Gets the index of the specified <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
             
 
@@ -436,8 +419,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the specified <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+            >The index of the specified <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
             
 
@@ -445,12 +427,15 @@
           >
         </returns>
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+          The <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
           
 
@@ -485,8 +470,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts an <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+            >Inserts an <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
             
 
@@ -494,24 +478,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index where the <see
-           cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+          The index where the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
           
 
            is inserted. </param
         >
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+          The <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
           
 
@@ -573,8 +563,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+            >Removes the specified <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
             
 
@@ -582,12 +571,15 @@
           >
         </summary>
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+          The <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
           
 

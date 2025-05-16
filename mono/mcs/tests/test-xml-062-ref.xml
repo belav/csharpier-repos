@@ -18,17 +18,14 @@
       <typeparam name="T2"></typeparam>
     </member>
     <member name="M:Tuple`2.Match``1(System.Func{`0,`1,Maybe{``0}}[])">
-      <summary
-        >
+      <summary>
              Test
-             <typeparamref
-         name="TResult" />
+             <typeparamref name="TResult" />
 
         
 
         .
-             <typeparamref
-         name="T2" />
+             <typeparamref name="T2" />
 
         
 

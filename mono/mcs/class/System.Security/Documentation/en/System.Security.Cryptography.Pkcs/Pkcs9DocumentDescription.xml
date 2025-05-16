@@ -26,8 +26,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Pkcs.Pkcs9DocumentDescription" />
+        >The <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9DocumentDescription" />
 
         
 
@@ -54,13 +53,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.Pkcs9DocumentDescription.#ctor" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.Pkcs9DocumentDescription.#ctor" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.Pkcs9DocumentDescription" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9DocumentDescription" />
 
             
 
@@ -92,13 +89,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.Pkcs9DocumentDescription.#ctor(System.Byte[])" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.Pkcs9DocumentDescription.#ctor(System.Byte[])" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.Pkcs9DocumentDescription" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9DocumentDescription" />
 
             
 
@@ -106,7 +101,11 @@
           >
         </summary>
         <param name="encodedDocumentDescription">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -137,13 +136,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.Pkcs9DocumentDescription.#ctor(System.String)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.Pkcs9DocumentDescription.#ctor(System.String)" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.Pkcs9DocumentDescription" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9DocumentDescription" />
 
             
 
@@ -151,12 +148,15 @@
           >
         </summary>
         <param name="documentDescription">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.String" />
+          An instance of the <see cref="T:System.String" />
 
           
 
@@ -189,13 +189,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method replaces the current <see
-             cref="T:System.Security.Cryptography.Pkcs.Pkcs9DocumentDescription" />
+            >This method replaces the current <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9DocumentDescription" />
 
             
 
-             object with the specified <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+             object with the specified <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -205,8 +203,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies information from an <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >Copies information from an <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -214,12 +211,15 @@
           >
         </summary>
         <param name="asnEncodedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.AsnEncodedData" />
+          The <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
           
 
@@ -245,8 +245,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.Pkcs9DocumentDescription.DocumentDescription" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.Pkcs9DocumentDescription.DocumentDescription" />
 
             
 

@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Windows.Forms.ToolStripDropDown" />
+        >Use the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
         
 
@@ -39,28 +38,23 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a control that allows the user to select a single item from a list that is displayed when the user clicks a <see
-         cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+        >Represents a control that allows the user to select a single item from a list that is displayed when the user clicks a <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
         
 
-        . Although <see
-         cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+        . Although <see cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.ToolStripDropDown" />
+         and <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
         
 
-         replace and add functionality to the <see
-         cref="T:System.Windows.Forms.Menu" />
+         replace and add functionality to the <see cref="T:System.Windows.Forms.Menu" />
 
         
 
-         control of previous versions, <see
-         cref="T:System.Windows.Forms.Menu" />
+         control of previous versions, <see cref="T:System.Windows.Forms.Menu" />
 
         
 
@@ -79,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -145,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="P:System.Windows.Forms.ToolStripDropDown.Opacity" />
+            >Gets or sets a value indicating whether the <see cref="P:System.Windows.Forms.ToolStripDropDown.Opacity" />
 
             
 
@@ -208,13 +200,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you want a <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >If you want a <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
-             that always stays open, set <see
-             cref="P:System.Windows.Forms.ToolStripDropDown.AutoClose" />
+             that always stays open, set <see cref="P:System.Windows.Forms.ToolStripDropDown.AutoClose" />
 
             
 
@@ -222,23 +212,19 @@
           >
           <block subset="none" type="note">
             <para
-              >Consider handling the <see
-               cref="E:System.Windows.Forms.ToolStripDropDown.Closing" />
+              >Consider handling the <see cref="E:System.Windows.Forms.ToolStripDropDown.Closing" />
 
               
 
-               event instead of setting the <see
-               cref="P:System.Windows.Forms.ToolStripDropDown.AutoClose" />
+               event instead of setting the <see cref="P:System.Windows.Forms.ToolStripDropDown.AutoClose" />
 
               
 
-               property. Inspect the <see
-               cref="P:System.Windows.Forms.ToolStripDropDownClosingEventArgs.CloseReason" />
+               property. Inspect the <see cref="P:System.Windows.Forms.ToolStripDropDownClosingEventArgs.CloseReason" />
 
               
 
-               field in your <see
-               cref="E:System.Windows.Forms.ToolStripDropDown.Closing" />
+               field in your <see cref="E:System.Windows.Forms.ToolStripDropDown.Closing" />
 
               
 
@@ -249,8 +235,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -280,8 +265,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -304,8 +288,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -317,8 +300,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.Control.BackgroundImage" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.Control.BackgroundImage" />
 
             
 
@@ -349,8 +331,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -362,8 +343,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.Control.BackgroundImage" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.Control.BackgroundImage" />
 
             
 
@@ -391,8 +371,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -404,8 +383,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ToolStrip.BindingContext" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ToolStrip.BindingContext" />
 
             
 
@@ -448,8 +426,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the items in a <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Gets or sets a value indicating whether the items in a <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -472,8 +449,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -512,8 +488,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Closes the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Closes the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -542,13 +517,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Windows.Forms.ToolStripDropDown.Close(System.Windows.Forms.ToolStripDropDownCloseReason)" />
+            >Use the <see cref="M:System.Windows.Forms.ToolStripDropDown.Close(System.Windows.Forms.ToolStripDropDownCloseReason)" />
 
             
 
-             method to close a <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+             method to close a <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -558,8 +531,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Closes the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Closes the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -567,12 +539,15 @@
           >
         </summary>
         <param name="reason">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.ToolStripDropDownCloseReason" />
+          One of the <see cref="T:System.Windows.Forms.ToolStripDropDownCloseReason" />
 
           
 
@@ -597,13 +572,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you create a <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >When you create a <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
-             delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format
-             type="text/html">
+             delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format type="text/html">
               <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
             </format>
 
@@ -615,8 +588,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Occurs when the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -642,8 +614,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -655,8 +626,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Occurs when the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -809,8 +779,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new accessibility object for the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Creates a new accessibility object for the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -820,8 +789,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >A new <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
@@ -866,8 +834,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies various layout options to the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Applies various layout options to the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -877,13 +844,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.LayoutSettings" />
+            >The <see cref="T:System.Windows.Forms.LayoutSettings" />
 
             
 
-             for this <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+             for this <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -891,37 +856,35 @@
           >
         </returns>
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.ToolStripLayoutStyle" />
+          One of the <see cref="T:System.Windows.Forms.ToolStripLayoutStyle" />
 
           
 
-           values. The possibilities are <see
-           cref="F:System.Windows.Forms.ToolStripLayoutStyle.Flow" />
+           values. The possibilities are <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Flow" />
 
           
 
-          , <see
-           cref="F:System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow" />
+          , <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow" />
 
           
 
-          , <see
-           cref="F:System.Windows.Forms.ToolStripLayoutStyle.StackWithOverflow" />
+          , <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.StackWithOverflow" />
 
           
 
-          , <see
-           cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />
+          , <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />
 
           
 
-          , and <see
-           cref="F:System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow" />
+          , and <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow" />
 
           
 
@@ -944,13 +907,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can override the <see
-             cref="P:System.Windows.Forms.ToolStripDropDown.CreateParams" />
+            >You can override the <see cref="P:System.Windows.Forms.ToolStripDropDown.CreateParams" />
 
             
 
-             property to add extra functionality to inheriting classes, but you must first call the <see
-             cref="T:System.Windows.Forms.CreateParams" />
+             property to add extra functionality to inheriting classes, but you must first call the <see cref="T:System.Windows.Forms.CreateParams" />
 
             
 
@@ -1003,13 +964,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the direction in which the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Gets or sets the direction in which the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
-             is displayed relative to the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             is displayed relative to the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1070,36 +1029,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -1109,8 +1062,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -1118,7 +1070,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1207,8 +1163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether a three-dimensional shadow effect appears when the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Gets or sets a value indicating whether a three-dimensional shadow effect appears when the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -1231,8 +1186,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1244,8 +1198,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the focus enters the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Occurs when the focus enters the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -1284,8 +1237,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the font of the text displayed on the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Gets or sets the font of the text displayed on the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -1308,8 +1260,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1321,8 +1272,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ToolStripDropDown.Font" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ToolStripDropDown.Font" />
 
             
 
@@ -1353,8 +1303,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1366,8 +1315,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ToolStrip.ForeColor" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ToolStrip.ForeColor" />
 
             
 
@@ -1571,8 +1519,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1610,8 +1557,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="E:System.Windows.Forms.ToolStripDropDown.ImeModeChanged" />
+            >Occurs when the <see cref="E:System.Windows.Forms.ToolStripDropDown.ImeModeChanged" />
 
             
 
@@ -1651,8 +1597,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether this <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Gets a value indicating whether this <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -1675,8 +1620,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1688,8 +1632,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when a key is pressed and held down while the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Occurs when a key is pressed and held down while the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -1723,8 +1666,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1736,8 +1678,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when a key is pressed while the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Occurs when a key is pressed while the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -1771,8 +1712,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1809,8 +1749,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1887,8 +1826,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the maximum height and width, in pixels, of the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Gets the maximum height and width, in pixels, of the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -1914,8 +1852,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1924,8 +1861,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripDropDown.OnClosed(System.Windows.Forms.ToolStripDropDownClosedEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripDropDown.OnClosed(System.Windows.Forms.ToolStripDropDownClosedEventArgs)" />
 
             
 
@@ -1935,8 +1871,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripDropDown.Closed" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripDropDown.Closed" />
 
             
 
@@ -1944,12 +1879,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripDropDownClosedEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripDropDownClosedEventArgs" />
 
           
 
@@ -1977,8 +1915,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1987,8 +1924,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripDropDown.OnClosing(System.Windows.Forms.ToolStripDropDownClosingEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripDropDown.OnClosing(System.Windows.Forms.ToolStripDropDownClosingEventArgs)" />
 
             
 
@@ -1998,8 +1934,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripDropDown.Closing" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripDropDown.Closing" />
 
             
 
@@ -2007,12 +1942,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripDropDownClosingEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripDropDownClosingEventArgs" />
 
           
 
@@ -2040,8 +1978,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2050,8 +1987,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripDropDown.OnHandleCreated(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripDropDown.OnHandleCreated(System.EventArgs)" />
 
             
 
@@ -2061,8 +1997,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.HandleCreated" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.HandleCreated" />
 
             
 
@@ -2070,12 +2005,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2103,8 +2041,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2113,8 +2050,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripDropDown.OnItemClicked(System.Windows.Forms.ToolStripItemClickedEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripDropDown.OnItemClicked(System.Windows.Forms.ToolStripItemClickedEventArgs)" />
 
             
 
@@ -2124,8 +2060,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStrip.ItemClicked" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStrip.ItemClicked" />
 
             
 
@@ -2133,12 +2068,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemClickedEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemClickedEventArgs" />
 
           
 
@@ -2166,8 +2104,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2176,8 +2113,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripDropDown.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripDropDown.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
 
             
 
@@ -2187,8 +2123,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Layout" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Layout" />
 
             
 
@@ -2196,12 +2131,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.LayoutEventArgs" />
+          A <see cref="T:System.Windows.Forms.LayoutEventArgs" />
 
           
 
@@ -2229,8 +2167,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2239,8 +2176,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripDropDown.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripDropDown.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -2250,8 +2186,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripItem.MouseUp" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripItem.MouseUp" />
 
             
 
@@ -2259,12 +2194,15 @@
           >
         </summary>
         <param name="mea">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -2289,8 +2227,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2299,8 +2236,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripDropDown.OnOpened(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripDropDown.OnOpened(System.EventArgs)" />
 
             
 
@@ -2310,8 +2246,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripDropDown.Opened" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripDropDown.Opened" />
 
             
 
@@ -2319,12 +2254,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2352,8 +2290,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2362,8 +2299,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripDropDown.OnOpening(System.ComponentModel.CancelEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripDropDown.OnOpening(System.ComponentModel.CancelEventArgs)" />
 
             
 
@@ -2373,8 +2309,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripDropDown.Opening" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripDropDown.Opening" />
 
             
 
@@ -2382,12 +2317,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.CancelEventArgs" />
+          A <see cref="T:System.ComponentModel.CancelEventArgs" />
 
           
 
@@ -2415,8 +2353,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2425,8 +2362,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripDropDown.OnParentChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripDropDown.OnParentChanged(System.EventArgs)" />
 
             
 
@@ -2436,8 +2372,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.ParentChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.ParentChanged" />
 
             
 
@@ -2445,12 +2380,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2478,8 +2416,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2488,8 +2425,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripDropDown.OnVisibleChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripDropDown.OnVisibleChanged(System.EventArgs)" />
 
             
 
@@ -2499,8 +2435,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripItem.VisibleChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripItem.VisibleChanged" />
 
             
 
@@ -2508,12 +2443,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2571,13 +2509,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you create a <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >When you create a <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
-             delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format
-             type="text/html">
+             delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format type="text/html">
               <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
             </format>
 
@@ -2589,8 +2525,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Occurs when the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -2616,8 +2551,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -2629,8 +2563,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Occurs when the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -2690,13 +2623,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Gets or sets the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             that is the owner of this <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+             that is the owner of this <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -2740,7 +2671,11 @@
           <para>true if the character was processed by the control; otherwise, false.</para>
         </returns>
         <param name="charCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2773,23 +2708,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called during message preprocessing to handle dialog box keys, such as TAB, RETURN, ESCAPE, and arrow keys. This method is called only if the <see
-             cref="M:System.Windows.Forms.Control.IsInputKey(System.Windows.Forms.Keys)" />
+            >This method is called during message preprocessing to handle dialog box keys, such as TAB, RETURN, ESCAPE, and arrow keys. This method is called only if the <see cref="M:System.Windows.Forms.Control.IsInputKey(System.Windows.Forms.Keys)" />
 
             
 
-             method indicates that the control is not processing the key. The <see
-             cref="M:System.Windows.Forms.ToolStripDropDown.ProcessDialogKey(System.Windows.Forms.Keys)" />
+             method indicates that the control is not processing the key. The <see cref="M:System.Windows.Forms.ToolStripDropDown.ProcessDialogKey(System.Windows.Forms.Keys)" />
 
             
 
-             simply sends the character to the parent's <see
-             cref="M:System.Windows.Forms.Control.ProcessDialogKey(System.Windows.Forms.Keys)" />
+             simply sends the character to the parent's <see cref="M:System.Windows.Forms.Control.ProcessDialogKey(System.Windows.Forms.Keys)" />
 
             
 
-             method, or returns false if the control has no parent. The <see
-             cref="T:System.Windows.Forms.Form" />
+             method, or returns false if the control has no parent. The <see cref="T:System.Windows.Forms.Form" />
 
             
 
@@ -2805,12 +2736,15 @@
           <para>true if the key was processed by the control; otherwise, false.</para>
         </returns>
         <param name="keyData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.Keys" />
+          One of the <see cref="T:System.Windows.Forms.Keys" />
 
           
 
@@ -2838,8 +2772,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called to give a control the opportunity to process a mnemonic character. The method should determine whether the control is in a state to process mnemonics and if whether the given character represents a mnemonic. If so, the method should perform the action associated with the mnemonic and return true. If not, the method should return false. Implementations of this method often use the <see
-             cref="M:System.Windows.Forms.Control.IsMnemonic(System.Char,System.String)" />
+            >This method is called to give a control the opportunity to process a mnemonic character. The method should determine whether the control is in a state to process mnemonics and if whether the given character represents a mnemonic. If so, the method should perform the action associated with the mnemonic and return true. If not, the method should return false. Implementations of this method often use the <see cref="M:System.Windows.Forms.Control.IsMnemonic(System.Char,System.String)" />
 
             
 
@@ -2850,8 +2783,7 @@
       // Perform action associated with mnemonic.
        }</code>
           <para
-            >This default implementation of the <see
-             cref="M:System.Windows.Forms.Control.ProcessMnemonic(System.Char)" />
+            >This default implementation of the <see cref="M:System.Windows.Forms.Control.ProcessMnemonic(System.Char)" />
 
             
 
@@ -2867,7 +2799,11 @@
           <para>true if the character was processed as a mnemonic by the control; otherwise, false.</para>
         </returns>
         <param name="charCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2891,8 +2827,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the window region associated with the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Gets or sets the window region associated with the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -2923,8 +2858,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -2936,8 +2870,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ToolStripDropDown.Region" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ToolStripDropDown.Region" />
 
             
 
@@ -3007,14 +2940,22 @@
           <para>Scales a control's location, size, padding and margin.</para>
         </summary>
         <param name="factor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The factor by which the height and width of the control will be scaled.</param
         >
         <param name="specified">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3046,14 +2987,22 @@
           <para>This method is not relevant to this class.</para>
         </summary>
         <param name="dx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The horizontal scaling factor.</param
         >
         <param name="dy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3125,60 +3074,75 @@
           <para>Performs the work of setting the specified bounds of this control.</para>
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new <see
-           cref="P:System.Windows.Forms.Control.Left" />
+          The new <see cref="P:System.Windows.Forms.Control.Left" />
 
           
 
            property value of the control. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new <see
-           cref="P:System.Windows.Forms.Control.Top" />
+          The new <see cref="P:System.Windows.Forms.Control.Top" />
 
           
 
            property value of the control. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new <see
-           cref="P:System.Windows.Forms.Control.Width" />
+          The new <see cref="P:System.Windows.Forms.Control.Width" />
 
           
 
            property value of the control. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new <see
-           cref="P:System.Windows.Forms.Control.Height" />
+          The new <see cref="P:System.Windows.Forms.Control.Height" />
 
           
 
            property value of the control. </param
         >
         <param name="specified">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.BoundsSpecified" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.BoundsSpecified" />
 
           
 
@@ -3207,33 +3171,27 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adjusts the size of the owner <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Adjusts the size of the owner <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             to accommodate the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+             to accommodate the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
-             if the owner <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             if the owner <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             is currently displayed, or clears and resets active <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+             is currently displayed, or clears and resets active <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
-             child controls of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             child controls of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             if the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             if the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -3241,12 +3199,15 @@
           >
         </summary>
         <param name="visible">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true if the owner <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+          true if the owner <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
@@ -3270,8 +3231,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Displays the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Displays the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -3309,8 +3269,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Positions the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Positions the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -3318,7 +3277,11 @@
           >
         </summary>
         <param name="screenLocation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3350,8 +3313,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Positions the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Positions the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -3359,19 +3321,26 @@
           >
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The horizontal and vertical location of the reference control's upper-left corner, in pixels.</param
         >
         <param name="direction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.ToolStripDropDownDirection" />
+          One of the <see cref="T:System.Windows.Forms.ToolStripDropDownDirection" />
 
           
 
@@ -3395,8 +3364,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Positions the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Positions the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -3404,14 +3372,22 @@
           >
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The horizontal screen coordinate, in pixels.</param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3441,8 +3417,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Positions the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Positions the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -3450,24 +3425,30 @@
           >
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The control (typically, a <see
-           cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+          The control (typically, a <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
           
 
-          ) that is the reference point for the <see
-           cref="T:System.Windows.Forms.ToolStripDropDown" />
+          ) that is the reference point for the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
           
 
            position.</param
         >
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3500,8 +3481,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Positions the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Positions the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -3509,36 +3489,45 @@
           >
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The control (typically, a <see
-           cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+          The control (typically, a <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
           
 
-          ) that is the reference point for the <see
-           cref="T:System.Windows.Forms.ToolStripDropDown" />
+          ) that is the reference point for the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
           
 
            position.</param
         >
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The horizontal and vertical location of the reference control's upper-left corner, in pixels.</param
         >
         <param name="direction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.ToolStripDropDownDirection" />
+          One of the <see cref="T:System.Windows.Forms.ToolStripDropDownDirection" />
 
           
 
@@ -3566,8 +3555,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Positions the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Positions the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -3575,31 +3563,41 @@
           >
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The control (typically, a <see
-           cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+          The control (typically, a <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
           
 
-          ) that is the reference point for the <see
-           cref="T:System.Windows.Forms.ToolStripDropDown" />
+          ) that is the reference point for the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
           
 
            position.</param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The horizontal screen coordinate of the control, in pixels.</param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3651,8 +3649,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3664,8 +3661,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="T:System.Windows.Forms.ToolStripLayoutStyle" />
+            >Occurs when the <see cref="T:System.Windows.Forms.ToolStripLayoutStyle" />
 
             
 
@@ -3847,8 +3843,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -3883,8 +3878,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information and a code example, see <see
-             cref="P:System.Windows.Forms.Form.TopMost" />
+            >For more information and a code example, see <see cref="P:System.Windows.Forms.Form.TopMost" />
 
             
 
@@ -3988,8 +3982,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 

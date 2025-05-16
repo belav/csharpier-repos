@@ -14,8 +14,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the text orientation to use with a particular <see
-         cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" />
+        >Specifies the text orientation to use with a particular <see cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" />
 
         
 

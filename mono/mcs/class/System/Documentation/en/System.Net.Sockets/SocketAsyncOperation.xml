@@ -17,36 +17,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This type describes the asynchronous socket operation that was most recently completed using a <see
-         cref="T:System.Net.Sockets.SocketAsyncEventArgs" />
+        >This type describes the asynchronous socket operation that was most recently completed using a <see cref="T:System.Net.Sockets.SocketAsyncEventArgs" />
 
         
 
-         object. The value of the <see
-         cref="P:System.Net.Sockets.SocketAsyncEventArgs.LastOperation" />
+         object. The value of the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.LastOperation" />
 
         
 
-         property is set to <see
-         cref="F:System.Net.Sockets.SocketAsyncOperation.None" />
+         property is set to <see cref="F:System.Net.Sockets.SocketAsyncOperation.None" />
 
         
 
-         until the <see
-         cref="T:System.Net.Sockets.SocketAsyncEventArgs" />
+         until the <see cref="T:System.Net.Sockets.SocketAsyncEventArgs" />
 
         
 
          instance is used to begin an asynchronous socket operation. The property will then be set to the type of asynchronous operation being performed. This type more easily facilitates using a single completion callback delegate for multiple kinds of asynchronous socket operations. This type is intended for use in the SocketAsyncCallback completion routine. </para
       >
       <para
-        >The <see
-         cref="T:System.Net.Sockets.SocketAsyncOperation" />
+        >The <see cref="T:System.Net.Sockets.SocketAsyncOperation" />
 
         
 
-         type is used by the <see
-         cref="P:System.Net.Sockets.SocketAsyncEventArgs.LastOperation" />
+         type is used by the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.LastOperation" />
 
         
 

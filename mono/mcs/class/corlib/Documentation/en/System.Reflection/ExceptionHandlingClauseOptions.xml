@@ -29,23 +29,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To examine the exception-handling clauses in a method, obtain a <see
-         cref="T:System.Reflection.MethodInfo" />
+        >To examine the exception-handling clauses in a method, obtain a <see cref="T:System.Reflection.MethodInfo" />
 
         
 
-         object and call the <see
-         cref="M:System.Reflection.MethodBase.GetMethodBody" />
+         object and call the <see cref="M:System.Reflection.MethodBase.GetMethodBody" />
 
         
 
-         method to obtain the method body. Use the <see
-         cref="P:System.Reflection.MethodBody.ExceptionHandlingClauses" />
+         method to obtain the method body. Use the <see cref="P:System.Reflection.MethodBody.ExceptionHandlingClauses" />
 
         
 
-         property to obtain a list of <see
-         cref="T:System.Reflection.ExceptionHandlingClause" />
+         property to obtain a list of <see cref="T:System.Reflection.ExceptionHandlingClause" />
 
         
 
@@ -54,14 +50,14 @@
       <block subset="none" type="note">
         <para
           >Working with exception-handling clauses requires a thorough understanding of metadata and Microsoft intermediate language (MSIL) instruction formats. Information can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see
-           cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+            cref="http://go.microsoft.com/fwlink/?LinkID=99212"
             >ECMA C# and Common Language Infrastructure Standards</see
           >
 
           
 
            on MSDN and <see
-           cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+            cref="http://go.microsoft.com/fwlink/?LinkID=65552"
             >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
           >
 

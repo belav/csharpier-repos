@@ -26,36 +26,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An <see
-         cref="T:System.Data.Odbc.OdbcConnection" />
+        >An <see cref="T:System.Data.Odbc.OdbcConnection" />
 
         
 
-         object represents a unique connection to a data source created by using a connection string or ODBC data source name (DSN). With a client/server database system, it is equivalent to a network connection to the server. Depending on the functionality supported by the native ODBC driver, some methods or properties of an <see
-         cref="T:System.Data.Odbc.OdbcConnection" />
+         object represents a unique connection to a data source created by using a connection string or ODBC data source name (DSN). With a client/server database system, it is equivalent to a network connection to the server. Depending on the functionality supported by the native ODBC driver, some methods or properties of an <see cref="T:System.Data.Odbc.OdbcConnection" />
 
         
 
          object may not be available.</para
       >
       <para
-        >The <see
-         cref="T:System.Data.Odbc.OdbcConnection" />
+        >The <see cref="T:System.Data.Odbc.OdbcConnection" />
 
         
 
-         object uses native resources such as ODBC environment and connection handles. You should always explicitly close any open <see
-         cref="T:System.Data.Odbc.OdbcConnection" />
+         object uses native resources such as ODBC environment and connection handles. You should always explicitly close any open <see cref="T:System.Data.Odbc.OdbcConnection" />
 
         
 
-         objects by calling <see
-         cref="M:System.Data.Odbc.OdbcConnection.Close" />
+         objects by calling <see cref="M:System.Data.Odbc.OdbcConnection.Close" />
 
         
 
-         or Dispose before the <see
-         cref="T:System.Data.Odbc.OdbcConnection" />
+         or Dispose before the <see cref="T:System.Data.Odbc.OdbcConnection" />
 
         
 
@@ -65,46 +59,38 @@
         <para>To deploy high-performance applications, you frequently must use connection pooling. However, when you use the .NET Framework Data Provider for ODBC, you do not have to enable connection pooling because the provider manages this automatically.</para>
       </block>
       <para
-        >If one of the Execute methods of the <see
-         cref="T:System.Data.Odbc.OdbcCommand" />
+        >If one of the Execute methods of the <see cref="T:System.Data.Odbc.OdbcCommand" />
 
         
 
-         class causes a fatal <see
-         cref="T:System.Data.Odbc.OdbcException" />
+         class causes a fatal <see cref="T:System.Data.Odbc.OdbcException" />
 
         
 
-         (for example, a SQL Server severity level of 20 or greater), the <see
-         cref="T:System.Data.Odbc.OdbcConnection" />
+         (for example, a SQL Server severity level of 20 or greater), the <see cref="T:System.Data.Odbc.OdbcConnection" />
 
         
 
          may close. However, the user can reopen the connection and continue.</para
       >
       <para
-        >An application that creates an instance of the <see
-         cref="T:System.Data.Odbc.OdbcConnection" />
+        >An application that creates an instance of the <see cref="T:System.Data.Odbc.OdbcConnection" />
 
         
 
-         object can require all direct and indirect callers to have sufficient permission to the code by setting declarative or imperative security demands. <see
-         cref="T:System.Data.Odbc.OdbcConnection" />
+         object can require all direct and indirect callers to have sufficient permission to the code by setting declarative or imperative security demands. <see cref="T:System.Data.Odbc.OdbcConnection" />
 
         
 
-         creates security demands by using the <see
-         cref="T:System.Data.Odbc.OdbcPermission" />
+         creates security demands by using the <see cref="T:System.Data.Odbc.OdbcPermission" />
 
         
 
-         object. Users can verify that their code has sufficient permissions by using the <see
-         cref="T:System.Data.Odbc.OdbcPermissionAttribute" />
+         object. Users can verify that their code has sufficient permissions by using the <see cref="T:System.Data.Odbc.OdbcPermissionAttribute" />
 
         
 
-         object. Users and administrators can also use the Code Access Security Policy Tool (Caspol.exe) to modify security policy at the computer, user, and enterprise levels. For more information, see <format
-         type="text/html">
+         object. Users and administrators can also use the Code Access Security Policy Tool (Caspol.exe) to modify security policy at the computer, user, and enterprise levels. For more information, see <format type="text/html">
           <a href="93e099eb-daa1-4f1e-b031-c1e10a996f88">Code Access Security and ADO.NET</a>
         </format>
 
@@ -113,8 +99,7 @@
         .</para
       >
       <para
-        >For more information about handling warning and informational messages from the data source, see <format
-         type="text/html">
+        >For more information about handling warning and informational messages from the data source, see <format type="text/html">
           <a href="5a29de74-acfc-4134-8616-829dd7ce0710">Working with Connection Events</a>
         </format>
 
@@ -137,13 +122,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a new instance of <see
-             cref="T:System.Data.Odbc.OdbcConnection" />
+            >When a new instance of <see cref="T:System.Data.Odbc.OdbcConnection" />
 
             
 
-             is created, the write-only and read-only properties are set to the following initial values unless they are specifically set using their associated keywords in the <see
-             cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
+             is created, the write-only and read-only properties are set to the following initial values unless they are specifically set using their associated keywords in the <see cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
 
             
 
@@ -192,8 +175,7 @@
             </item>
           </list>
           <para
-            >You can change the value for these properties only by using the <see
-             cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
+            >You can change the value for these properties only by using the <see cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
 
             
 
@@ -203,8 +185,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Odbc.OdbcConnection" />
+            >Initializes a new instance of the <see cref="T:System.Data.Odbc.OdbcConnection" />
 
             
 
@@ -227,13 +208,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a new instance of <see
-             cref="T:System.Data.Odbc.OdbcConnection" />
+            >When a new instance of <see cref="T:System.Data.Odbc.OdbcConnection" />
 
             
 
-             is created, the write-only and read-only properties are set to the following initial values unless they are specifically set using their associated keywords in the <see
-             cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
+             is created, the write-only and read-only properties are set to the following initial values unless they are specifically set using their associated keywords in the <see cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
 
             
 
@@ -284,8 +263,7 @@
             </item>
           </list>
           <para
-            >You can change the value for these properties only by using the <see
-             cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
+            >You can change the value for these properties only by using the <see cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
 
             
 
@@ -295,8 +273,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Odbc.OdbcConnection" />
+            >Initializes a new instance of the <see cref="T:System.Data.Odbc.OdbcConnection" />
 
             
 
@@ -304,7 +281,11 @@
           >
         </summary>
         <param name="connectionString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -353,13 +334,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To commit or roll back the transaction, you must explicitly use the <see
-             cref="M:System.Data.Odbc.OdbcTransaction.Commit" />
+            >To commit or roll back the transaction, you must explicitly use the <see cref="M:System.Data.Odbc.OdbcTransaction.Commit" />
 
             
 
-             or <see
-             cref="M:System.Data.Odbc.OdbcTransaction.Rollback" />
+             or <see cref="M:System.Data.Odbc.OdbcTransaction.Rollback" />
 
             
 
@@ -368,13 +347,11 @@
           <para>To make sure that the .NET Framework Data Provider for ODBC transaction management model performs correctly, avoid using other transaction management models, such as those provided by the data source.</para>
           <block subset="none" type="note">
             <para
-              >If you do not specify an isolation level, the isolation level will be determined by the driver being used. To specify an isolation level with the <see
-               cref="M:System.Data.Odbc.OdbcConnection.BeginTransaction" />
+              >If you do not specify an isolation level, the isolation level will be determined by the driver being used. To specify an isolation level with the <see cref="M:System.Data.Odbc.OdbcConnection.BeginTransaction" />
 
               
 
-               method, use the overload that takes the <paramref
-               name="isolevel" />
+               method, use the overload that takes the <paramref name="isolevel" />
 
               
 
@@ -412,13 +389,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To commit or roll back the transaction, you must explicitly use the <see
-             cref="M:System.Data.Odbc.OdbcTransaction.Commit" />
+            >To commit or roll back the transaction, you must explicitly use the <see cref="M:System.Data.Odbc.OdbcTransaction.Commit" />
 
             
 
-             or <see
-             cref="M:System.Data.Odbc.OdbcTransaction.Rollback" />
+             or <see cref="M:System.Data.Odbc.OdbcTransaction.Rollback" />
 
             
 
@@ -429,8 +404,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Starts a transaction at the data source with the specified <see
-             cref="T:System.Data.IsolationLevel" />
+            >Starts a transaction at the data source with the specified <see cref="T:System.Data.IsolationLevel" />
 
             
 
@@ -442,7 +416,11 @@
           <para>An object representing the new transaction.</para>
         </returns>
         <param name="isolevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -467,8 +445,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="value" />
+            >The <paramref name="value" />
 
             
 
@@ -478,8 +455,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Changes the current database associated with an open <see
-             cref="T:System.Data.Odbc.OdbcConnection" />
+            >Changes the current database associated with an open <see cref="T:System.Data.Odbc.OdbcConnection" />
 
             
 
@@ -487,7 +463,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -510,31 +490,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Data.Odbc.OdbcConnection.Close" />
+            >The <see cref="M:System.Data.Odbc.OdbcConnection.Close" />
 
             
 
-             method rolls back any pending transactions. It then releases the connection to the connection pool, or closes the connection if connection pooling is disabled. If <see
-             cref="M:System.Data.Odbc.OdbcConnection.Close" />
+             method rolls back any pending transactions. It then releases the connection to the connection pool, or closes the connection if connection pooling is disabled. If <see cref="M:System.Data.Odbc.OdbcConnection.Close" />
 
             
 
-             is called while handling a <see
-             cref="E:System.Data.Common.DbConnection.StateChange" />
+             is called while handling a <see cref="E:System.Data.Common.DbConnection.StateChange" />
 
             
 
-             event, no additional <see
-             cref="E:System.Data.Common.DbConnection.StateChange" />
+             event, no additional <see cref="E:System.Data.Common.DbConnection.StateChange" />
 
             
 
              events are fired.</para
           >
           <para
-            >An application can call <see
-             cref="M:System.Data.Odbc.OdbcConnection.Close" />
+            >An application can call <see cref="M:System.Data.Odbc.OdbcConnection.Close" />
 
             
 
@@ -545,13 +520,11 @@
           </block>
           <block subset="none" type="note">
             <para
-              >Do not call <see
-               cref="M:System.Data.Odbc.OdbcConnection.Close" />
+              >Do not call <see cref="M:System.Data.Odbc.OdbcConnection.Close" />
 
               
 
-               or Dispose on a Connection, a DataReader, or any other managed object in the Finalize method of your class. In a finalizer, you should only release unmanaged resources that your class owns directly. If your class does not own any unmanaged resources, do not include a Finalize method in your class definition. For more information, see <format
-               type="text/html">
+               or Dispose on a Connection, a DataReader, or any other managed object in the Finalize method of your class. In a finalizer, you should only release unmanaged resources that your class owns directly. If your class does not own any unmanaged resources, do not include a Finalize method in your class definition. For more information, see <format type="text/html">
                 <a href="22B6CB97-0C80-4EEB-A2CF-5ED7655E37F9">Garbage Collection</a>
               </format>
 
@@ -599,26 +572,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
+            >The <see cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
 
             
 
-             property is designed to match ODBC connection string format as closely as possible. The <see
-             cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
+             property is designed to match ODBC connection string format as closely as possible. The <see cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
 
             
 
-             can be set only when the connection is closed, and as soon as it is set it is passed, unchanged, to the Driver Manager and the underlying driver. Therefore, the syntax for the <see
-             cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
+             can be set only when the connection is closed, and as soon as it is set it is passed, unchanged, to the Driver Manager and the underlying driver. Therefore, the syntax for the <see cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
 
             
 
              must exactly match what the Driver Manager and underlying driver support.</para
           >
           <para
-            >You can use the <see
-             cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
+            >You can use the <see cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
 
             
 
@@ -637,28 +606,23 @@
 "DSN=dsnname"</code>
           <block subset="none" type="note">
             <para
-              >The .NET Framework Data Provider for ODBC does not support the Persist Security Info keyword that is supported by other .NET Framework data providers. However, the <see
-               cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
+              >The .NET Framework Data Provider for ODBC does not support the Persist Security Info keyword that is supported by other .NET Framework data providers. However, the <see cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
 
               
 
-               property behaves as if Persist Security Info were set to false. This means that you cannot retrieve the password from the <see
-               cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
+               property behaves as if Persist Security Info were set to false. This means that you cannot retrieve the password from the <see cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
 
               
 
-               property if the connection has been opened. When the <see
-               cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
+               property if the connection has been opened. When the <see cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
 
               
 
-               property is read from an <see
-               cref="T:System.Data.Odbc.OdbcConnection" />
+               property is read from an <see cref="T:System.Data.Odbc.OdbcConnection" />
 
               
 
-               object that has been opened, the connection string is returned minus the password. You cannot change this behavior; therefore, if the application requires the password, store it separately before calling <see
-               cref="M:System.Data.Odbc.OdbcConnection.Open" />
+               object that has been opened, the connection string is returned minus the password. You cannot change this behavior; therefore, if the application requires the password, store it separately before calling <see cref="M:System.Data.Odbc.OdbcConnection.Open" />
 
               
 
@@ -666,49 +630,41 @@
             >
           </block>
           <para
-            >Many of the settings specified in the string have corresponding read-only properties (for example, Server=(local), which corresponds to the <see
-             cref="P:System.Data.Odbc.OdbcConnection.DataSource" />
+            >Many of the settings specified in the string have corresponding read-only properties (for example, Server=(local), which corresponds to the <see cref="P:System.Data.Odbc.OdbcConnection.DataSource" />
 
             
 
-             property). These properties are updated after the connection is opened, except when an error is detected. In this case, none of the properties are updated. <see
-             cref="T:System.Data.Odbc.OdbcConnection" />
+             property). These properties are updated after the connection is opened, except when an error is detected. In this case, none of the properties are updated. <see cref="T:System.Data.Odbc.OdbcConnection" />
 
             
 
-             properties (such as <see
-             cref="P:System.Data.Odbc.OdbcConnection.Database" />
+             properties (such as <see cref="P:System.Data.Odbc.OdbcConnection.Database" />
 
             
 
-            ) return only default settings or those settings specified in the <see
-             cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
+            ) return only default settings or those settings specified in the <see cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
 
             
 
             .</para
           >
           <para
-            >In the Microsoft .NET Framework version 1.0, validation of the connection string does not occur until an application calls the <see
-             cref="M:System.Data.Odbc.OdbcConnection.Open" />
+            >In the Microsoft .NET Framework version 1.0, validation of the connection string does not occur until an application calls the <see cref="M:System.Data.Odbc.OdbcConnection.Open" />
 
             
 
-             method. It is the responsibility of the underlying ODBC driver to validate the connection string. If the connection string contains invalid or unsupported properties, the driver may raise an <see
-             cref="T:System.Data.Odbc.OdbcException" />
+             method. It is the responsibility of the underlying ODBC driver to validate the connection string. If the connection string contains invalid or unsupported properties, the driver may raise an <see cref="T:System.Data.Odbc.OdbcException" />
 
             
 
              at run time.</para
           >
           <para
-            >However, in the .NET Framework version 1.1 and later versions, some basic validation of the connection string occurs as soon as you set the <see
-             cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
+            >However, in the .NET Framework version 1.1 and later versions, some basic validation of the connection string occurs as soon as you set the <see cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
 
             
 
-             property. At that time, the data provider verifies that the connection string meets the "keyword=value;..." format, but it does not verify whether keywords or values are valid. The remaining verification is performed by the underlying ODBC driver when the application calls the <see
-             cref="M:System.Data.Odbc.OdbcConnection.Open" />
+             property. At that time, the data provider verifies that the connection string meets the "keyword=value;..." format, but it does not verify whether keywords or values are valid. The remaining verification is performed by the underlying ODBC driver when the application calls the <see cref="M:System.Data.Odbc.OdbcConnection.Open" />
 
             
 
@@ -723,23 +679,19 @@ attribute-keyword ::= DSN | UID | PWD
 attribute-value ::= character-string
 driver-defined-attribute-keyword ::= identifier</code>
           <para
-            >where <paramref
-             name="character-string" />
+            >where <paramref name="character-string" />
 
             
 
-             has zero or more characters; <paramref
-             name="identifier" />
+             has zero or more characters; <paramref name="identifier" />
 
             
 
-             has one or more characters; <paramref
-             name="attribute-keyword" />
+             has one or more characters; <paramref name="attribute-keyword" />
 
             
 
-             is not case sensitive; <paramref
-             name="attribute-value" />
+             is not case sensitive; <paramref name="attribute-value" />
 
             
 
@@ -784,13 +736,11 @@ driver-defined-attribute-keyword ::= identifier</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unlike the .NET Framework data providers for SQL Server and OLE DB, the .NET Framework Data Provider for ODBC does not support setting this property as a connection string value, because it is not a valid ODBC connection keyword. To specify a connection time-out, set the <see
-             cref="P:System.Data.Odbc.OdbcConnection.ConnectionTimeout" />
+            >Unlike the .NET Framework data providers for SQL Server and OLE DB, the .NET Framework Data Provider for ODBC does not support setting this property as a connection string value, because it is not a valid ODBC connection keyword. To specify a connection time-out, set the <see cref="P:System.Data.Odbc.OdbcConnection.ConnectionTimeout" />
 
             
 
-             property before calling <see
-             cref="M:System.Data.Odbc.OdbcConnection.Open" />
+             property before calling <see cref="M:System.Data.Odbc.OdbcConnection.Open" />
 
             
 
@@ -822,13 +772,11 @@ driver-defined-attribute-keyword ::= identifier</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns an <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+            >Creates and returns an <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
-             object associated with the <see
-             cref="T:System.Data.Odbc.OdbcConnection" />
+             object associated with the <see cref="T:System.Data.Odbc.OdbcConnection" />
 
             
 
@@ -838,8 +786,7 @@ driver-defined-attribute-keyword ::= identifier</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+            >An <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
@@ -888,36 +835,30 @@ driver-defined-attribute-keyword ::= identifier</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >At first, the <see
-             cref="P:System.Data.Odbc.OdbcConnection.Database" />
+            >At first, the <see cref="P:System.Data.Odbc.OdbcConnection.Database" />
 
             
 
-             property is set in the connection string. The <see
-             cref="P:System.Data.Odbc.OdbcConnection.Database" />
+             property is set in the connection string. The <see cref="P:System.Data.Odbc.OdbcConnection.Database" />
 
             
 
-             property can be updated by using the <see
-             cref="M:System.Data.Odbc.OdbcConnection.ChangeDatabase(System.String)" />
+             property can be updated by using the <see cref="M:System.Data.Odbc.OdbcConnection.ChangeDatabase(System.String)" />
 
             
 
-             method. If you change the current database using an SQL statement or the <see
-             cref="M:System.Data.Odbc.OdbcConnection.ChangeDatabase(System.String)" />
+             method. If you change the current database using an SQL statement or the <see cref="M:System.Data.Odbc.OdbcConnection.ChangeDatabase(System.String)" />
 
             
 
              method, an informational message is sent and then the property is updated.</para
           >
           <para
-            >Retrieving the <see
-             cref="P:System.Data.Odbc.OdbcConnection.Database" />
+            >Retrieving the <see cref="P:System.Data.Odbc.OdbcConnection.Database" />
 
             
 
-             property is equivalent to calling the ODBC function SQLGetInfo with the <paramref
-             name="Attribute" />
+             property is equivalent to calling the ODBC function SQLGetInfo with the <paramref name="Attribute" />
 
             
 
@@ -953,13 +894,11 @@ driver-defined-attribute-keyword ::= identifier</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieving the <see
-             cref="P:System.Data.Odbc.OdbcConnection.DataSource" />
+            >Retrieving the <see cref="P:System.Data.Odbc.OdbcConnection.DataSource" />
 
             
 
-             property is equivalent to calling the ODBC function SQLGetInfo with the <paramref
-             name="InfoType" />
+             property is equivalent to calling the ODBC function SQLGetInfo with the <paramref name="InfoType" />
 
             
 
@@ -1015,13 +954,11 @@ driver-defined-attribute-keyword ::= identifier</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieving the <see
-             cref="P:System.Data.Odbc.OdbcConnection.Driver" />
+            >Retrieving the <see cref="P:System.Data.Odbc.OdbcConnection.Driver" />
 
             
 
-             property is equivalent to calling the ODBC function SQLGetInfo with the <paramref
-             name="InfoType" />
+             property is equivalent to calling the ODBC function SQLGetInfo with the <paramref name="InfoType" />
 
             
 
@@ -1054,23 +991,19 @@ driver-defined-attribute-keyword ::= identifier</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >New in ADO.NET 2.0 is support for using the <see
-             cref="M:System.Data.Common.DbConnection.EnlistTransaction(System.Transactions.ITransaction)" />
+            >New in ADO.NET 2.0 is support for using the <see cref="M:System.Data.Common.DbConnection.EnlistTransaction(System.Transactions.ITransaction)" />
 
             
 
-             method to enlist in a distributed transaction. Because it enlists a connection in a <see
-             cref="T:System.Transactions.Transaction" />
+             method to enlist in a distributed transaction. Because it enlists a connection in a <see cref="T:System.Transactions.Transaction" />
 
             
 
-             instance, EnlistTransaction takes advantage of functionality available in the <see
-             cref="N:System.Transactions" />
+             instance, EnlistTransaction takes advantage of functionality available in the <see cref="N:System.Transactions" />
 
             
 
-             namespace for managing distributed transactions, making it preferable to EnlistDistributedTransaction for this purpose. For more information, see <format
-             type="text/html">
+             namespace for managing distributed transactions, making it preferable to EnlistDistributedTransaction for this purpose. For more information, see <format type="text/html">
               <a href="718b257c-bcb2-408e-b004-a7b0adb1c176"
                 >Performing a Distributed Transaction</a
               >
@@ -1081,13 +1014,11 @@ driver-defined-attribute-keyword ::= identifier</code>
             .</para
           >
           <para
-            >You can continue to enlist in an existing distributed transaction using the <see
-             cref="M:System.Data.OdbcClient.OdbcConnection.EnlistDistributedTransaction" />
+            >You can continue to enlist in an existing distributed transaction using the <see cref="M:System.Data.OdbcClient.OdbcConnection.EnlistDistributedTransaction" />
 
             
 
-             method if auto-enlistment is disabled. Enlisting in an existing distributed transaction makes sure that, if the transaction is committed or rolled back, modifications made by the code at the data source are also committed or rolled back. For more information about distributed transactions, see <format
-             type="text/html">
+             method if auto-enlistment is disabled. Enlisting in an existing distributed transaction makes sure that, if the transaction is committed or rolled back, modifications made by the code at the data source are also committed or rolled back. For more information about distributed transactions, see <format type="text/html">
               <a href="718b257c-bcb2-408e-b004-a7b0adb1c176"
                 >Performing a Distributed Transaction</a
               >
@@ -1102,28 +1033,23 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
-             returns an exception if the <see
-             cref="T:System.Data.OdbcClient.OdbcConnection" />
+             returns an exception if the <see cref="T:System.Data.OdbcClient.OdbcConnection" />
 
             
 
-             has already started a transaction using <see
-             cref="M:System.Data.OdbcClient.OdbcConnection.BeginTransaction" />
+             has already started a transaction using <see cref="M:System.Data.OdbcClient.OdbcConnection.BeginTransaction" />
 
             
 
-            . However, if the transaction is a local transaction started at the data source (for example, by explicitly executing the BEGIN TRANSACTION statement using an <see
-             cref="T:System.Data.OdbcClient.OdbcCommand" />
+            . However, if the transaction is a local transaction started at the data source (for example, by explicitly executing the BEGIN TRANSACTION statement using an <see cref="T:System.Data.OdbcClient.OdbcCommand" />
 
             
 
-             object), <see
-             cref="M:System.Data.Odbc.OdbcConnection.EnlistDistributedTransaction(System.EnterpriseServices.ITransaction)" />
+             object), <see cref="M:System.Data.Odbc.OdbcConnection.EnlistDistributedTransaction(System.EnterpriseServices.ITransaction)" />
 
             
 
-             rolls back the local transaction and enlists in the existing distributed transaction as requested. You will not receive notice that the local transaction was rolled back, and are responsible for managing any local transactions not started using <see
-             cref="M:System.Data.OdbcClient.OdbcConnection.BeginTransaction" />
+             rolls back the local transaction and enlists in the existing distributed transaction as requested. You will not receive notice that the local transaction was rolled back, and are responsible for managing any local transactions not started using <see cref="M:System.Data.OdbcClient.OdbcConnection.BeginTransaction" />
 
             
 
@@ -1135,12 +1061,15 @@ driver-defined-attribute-keyword ::= identifier</code>
           <para>Enlists in the specified transaction as a distributed transaction.</para>
         </summary>
         <param name="transaction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A reference to an existing <see
-           cref="T:System.EnterpriseServices.ITransaction" />
+          A reference to an existing <see cref="T:System.EnterpriseServices.ITransaction" />
 
           
 
@@ -1171,23 +1100,19 @@ driver-defined-attribute-keyword ::= identifier</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >New in ADO.NET 2.0 is support for using the <see
-             cref="M:System.Data.Common.DbConnection.EnlistTransaction(System.Transactions.ITransaction)" />
+            >New in ADO.NET 2.0 is support for using the <see cref="M:System.Data.Common.DbConnection.EnlistTransaction(System.Transactions.ITransaction)" />
 
             
 
-             method to enlist in a distributed transaction. Because it enlists a connection in a <see
-             cref="T:System.Transactions.Transaction" />
+             method to enlist in a distributed transaction. Because it enlists a connection in a <see cref="T:System.Transactions.Transaction" />
 
             
 
-             instance, EnlistTransaction takes advantage of functionality available in the <see
-             cref="N:System.Transactions" />
+             instance, EnlistTransaction takes advantage of functionality available in the <see cref="N:System.Transactions" />
 
             
 
-             namespace for managing distributed transactions, making it preferable to EnlistDistributedTransaction, which uses a System.EnterpriseServices.ITransaction object. It also has slightly different semantics: once a connection is explicitly enlisted on a transaction, it cannot be unenlisted or enlisted in another transaction until the first transaction finishes. For more information about distributed transactions, see <format
-             type="text/html">
+             namespace for managing distributed transactions, making it preferable to EnlistDistributedTransaction, which uses a System.EnterpriseServices.ITransaction object. It also has slightly different semantics: once a connection is explicitly enlisted on a transaction, it cannot be unenlisted or enlisted in another transaction until the first transaction finishes. For more information about distributed transactions, see <format type="text/html">
               <a href="718b257c-bcb2-408e-b004-a7b0adb1c176"
                 >Performing a Distributed Transaction</a
               >
@@ -1203,12 +1128,15 @@ driver-defined-attribute-keyword ::= identifier</code>
           <para>Enlists in the specified transaction as a distributed transaction.</para>
         </summary>
         <param name="transaction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A reference to an existing <see
-           cref="T:System.Transactions.Transaction" />
+          A reference to an existing <see cref="T:System.Transactions.Transaction" />
 
           
 
@@ -1231,8 +1159,7 @@ driver-defined-attribute-keyword ::= identifier</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns schema information for the data source of this <see
-             cref="T:System.Data.Odbc.OdbcConnection" />
+            >Returns schema information for the data source of this <see cref="T:System.Data.Odbc.OdbcConnection" />
 
             
 
@@ -1242,8 +1169,7 @@ driver-defined-attribute-keyword ::= identifier</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.DataTable" />
+            >A <see cref="T:System.Data.DataTable" />
 
             
 
@@ -1271,13 +1197,11 @@ driver-defined-attribute-keyword ::= identifier</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <paramref
-             name="collectionName" />
+            >When <paramref name="collectionName" />
 
             
 
-             is null, the <see
-             cref="T:System.Data.DataTable" />
+             is null, the <see cref="T:System.Data.DataTable" />
 
             
 
@@ -1290,8 +1214,7 @@ driver-defined-attribute-keyword ::= identifier</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns schema information for the data source of this <see
-             cref="T:System.Data.Odbc.OdbcConnection" />
+            >Returns schema information for the data source of this <see cref="T:System.Data.Odbc.OdbcConnection" />
 
             
 
@@ -1301,8 +1224,7 @@ driver-defined-attribute-keyword ::= identifier</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.DataTable" />
+            >A <see cref="T:System.Data.DataTable" />
 
             
 
@@ -1310,7 +1232,11 @@ driver-defined-attribute-keyword ::= identifier</code>
           >
         </returns>
         <param name="collectionName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1338,21 +1264,18 @@ driver-defined-attribute-keyword ::= identifier</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <paramref
-             name="collectionName" />
+            >When <paramref name="collectionName" />
 
             
 
-             is specified as null, the <see
-             cref="T:System.Data.DataTable" />
+             is specified as null, the <see cref="T:System.Data.DataTable" />
 
             
 
              contains information about all the metadata that is available, and its restrictions.</para
           >
           <para
-            >The <paramref
-             name="restrictionValues" />
+            >The <paramref name="restrictionValues" />
 
             
 
@@ -1366,8 +1289,7 @@ driver-defined-attribute-keyword ::= identifier</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns schema information for the data source of this <see
-             cref="T:System.Data.Odbc.OdbcConnection" />
+            >Returns schema information for the data source of this <see cref="T:System.Data.Odbc.OdbcConnection" />
 
             
 
@@ -1377,8 +1299,7 @@ driver-defined-attribute-keyword ::= identifier</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.DataTable" />
+            >A <see cref="T:System.Data.DataTable" />
 
             
 
@@ -1386,14 +1307,22 @@ driver-defined-attribute-keyword ::= identifier</code>
           >
         </returns>
         <param name="collectionName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Specifies the name of the schema to return.</param
         >
         <param name="restrictionValues">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1415,8 +1344,7 @@ driver-defined-attribute-keyword ::= identifier</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clients that want to process warnings or informational messages sent by the server should create an <see
-             cref="T:System.Data.Odbc.OdbcInfoMessageEventHandler" />
+            >Clients that want to process warnings or informational messages sent by the server should create an <see cref="T:System.Data.Odbc.OdbcInfoMessageEventHandler" />
 
             
 
@@ -1444,8 +1372,7 @@ driver-defined-attribute-keyword ::= identifier</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Data.Odbc.OdbcConnection" />
+            >The <see cref="T:System.Data.Odbc.OdbcConnection" />
 
             
 
@@ -1453,13 +1380,11 @@ driver-defined-attribute-keyword ::= identifier</code>
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="T:System.Data.Odbc.OdbcConnection" />
+              >If the <see cref="T:System.Data.Odbc.OdbcConnection" />
 
               
 
-               goes out of scope, the connection it represents does not close automatically. Therefore, you must explicitly close the connection by calling <see
-               cref="M:System.Data.Odbc.OdbcConnection.Close" />
+               goes out of scope, the connection it represents does not close automatically. Therefore, you must explicitly close the connection by calling <see cref="M:System.Data.Odbc.OdbcConnection.Close" />
 
               
 
@@ -1471,8 +1396,7 @@ driver-defined-attribute-keyword ::= identifier</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens a connection to a data source with the property settings specified by the <see
-             cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
+            >Opens a connection to a data source with the property settings specified by the <see cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
 
             
 
@@ -1500,13 +1424,11 @@ driver-defined-attribute-keyword ::= identifier</code>
           <list type="ordered">
             <item>
               <para
-                >Call <see
-                 cref="M:System.Data.Odbc.OdbcConnection.Close" />
+                >Call <see cref="M:System.Data.Odbc.OdbcConnection.Close" />
 
                 
 
-                 to release the <see
-                 cref="T:System.Data.Odbc.OdbcConnection" />
+                 to release the <see cref="T:System.Data.Odbc.OdbcConnection" />
 
                 
 
@@ -1518,8 +1440,7 @@ driver-defined-attribute-keyword ::= identifier</code>
             </item>
             <item>
               <para
-                >Call <see
-                 cref="M:System.Data.Odbc.OdbcConnection.ReleaseObjectPool" />
+                >Call <see cref="M:System.Data.Odbc.OdbcConnection.ReleaseObjectPool" />
 
                 
 
@@ -1531,21 +1452,18 @@ driver-defined-attribute-keyword ::= identifier</code>
             </item>
           </list>
           <para
-            >Conversely, if you call <see
-             cref="M:System.Data.Odbc.OdbcConnection.Close" />
+            >Conversely, if you call <see cref="M:System.Data.Odbc.OdbcConnection.Close" />
 
             
 
-             on all active connections, and invoke garbage collection, but do not call <see
-             cref="M:System.Data.Odbc.OdbcConnection.ReleaseObjectPool" />
+             on all active connections, and invoke garbage collection, but do not call <see cref="M:System.Data.Odbc.OdbcConnection.ReleaseObjectPool" />
 
             
 
             , the resources reserved for the environment remain available.</para
           >
           <para
-            >After an environment handle is released, a request for a new <see
-             cref="T:System.Data.Odbc.OdbcConnection" />
+            >After an environment handle is released, a request for a new <see cref="T:System.Data.Odbc.OdbcConnection" />
 
             
 
@@ -1581,16 +1499,14 @@ driver-defined-attribute-keyword ::= identifier</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Data.Odbc.OdbcConnection.ServerVersion" />
+            >If <see cref="P:System.Data.Odbc.OdbcConnection.ServerVersion" />
 
             
 
              is not supported by the underlying ODBC driver, an empty string ("") is returned.</para
           >
           <para
-            >The <see
-             cref="P:System.Data.Odbc.OdbcConnection.ServerVersion" />
+            >The <see cref="P:System.Data.Odbc.OdbcConnection.ServerVersion" />
 
             
 
@@ -1632,8 +1548,7 @@ driver-defined-attribute-keyword ::= identifier</code>
           <list type="bullet">
             <item>
               <para
-                >From Closed to Open, using the <see
-                 cref="M:System.Data.Odbc.OdbcConnection.Open" />
+                >From Closed to Open, using the <see cref="M:System.Data.Odbc.OdbcConnection.Open" />
 
                 
 
@@ -1642,8 +1557,7 @@ driver-defined-attribute-keyword ::= identifier</code>
             </item>
             <item>
               <para
-                >From Open to Closed, using either the <see
-                 cref="M:System.Data.Odbc.OdbcConnection.Close" />
+                >From Open to Closed, using either the <see cref="M:System.Data.Odbc.OdbcConnection.Close" />
 
                 
 
@@ -1653,8 +1567,7 @@ driver-defined-attribute-keyword ::= identifier</code>
           </list>
           <block subset="none" type="note">
             <para
-              >Calling the <see
-               cref="P:System.Data.Odbc.OdbcConnection.State" />
+              >Calling the <see cref="P:System.Data.Odbc.OdbcConnection.State" />
 
               
 
@@ -1764,13 +1677,11 @@ driver-defined-attribute-keyword ::= identifier</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Odbc.OdbcConnection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Odbc.OdbcConnection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ICloneable" />
+             instance is cast to an <see cref="T:System.ICloneable" />
 
             
 
@@ -1780,8 +1691,7 @@ driver-defined-attribute-keyword ::= identifier</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ICloneable.Clone" />
+            >For a description of this member, see <see cref="M:System.ICloneable.Clone" />
 
             
 
@@ -1791,8 +1701,7 @@ driver-defined-attribute-keyword ::= identifier</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Object" />
+            >A new <see cref="T:System.Object" />
 
             
 

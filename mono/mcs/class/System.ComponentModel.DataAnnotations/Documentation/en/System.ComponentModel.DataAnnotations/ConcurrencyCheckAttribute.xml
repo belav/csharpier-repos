@@ -44,8 +44,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You apply the <see
-             cref="T:System.ComponentModel.DataAnnotations.ConcurrencyCheckAttribute" />
+            >You apply the <see cref="T:System.ComponentModel.DataAnnotations.ConcurrencyCheckAttribute" />
 
             
 
@@ -55,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.ConcurrencyCheckAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.ConcurrencyCheckAttribute" />
 
             
 

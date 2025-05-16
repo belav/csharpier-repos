@@ -21,26 +21,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The methods of the <see
-         cref="T:System.Xml.Serialization.CodeIdentifier" />
+        >The methods of the <see cref="T:System.Xml.Serialization.CodeIdentifier" />
 
         
 
          class are used by the XML serialization infrastructure while producing .NET Framework types from XML element and data type definitions. XML element or attribute names typically provide the methods' input text.</para
       >
       <para
-        >You do not need to call the methods of the <see
-         cref="T:System.Xml.Serialization.CodeIdentifier" />
+        >You do not need to call the methods of the <see cref="T:System.Xml.Serialization.CodeIdentifier" />
 
         
 
-         class directly from your code. Instead, use the various tools and APIs provided by the .NET Framework for XML serialization, such as the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         class directly from your code. Instead, use the various tools and APIs provided by the .NET Framework for XML serialization, such as the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-        , or the <format
-         type="text/html">
+        , or the <format type="text/html">
           <a href="a6e6e65c-347f-4494-9457-653bf29baac2">XML Schema Definition Tool (Xsd.exe)</a>
         </format>
 
@@ -79,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.CodeIdentifier" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.CodeIdentifier" />
 
             
 
@@ -111,8 +106,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Serialization.CodeIdentifier.MakeCamel(System.String)" />
+            >The <see cref="M:System.Xml.Serialization.CodeIdentifier.MakeCamel(System.String)" />
 
             
 
@@ -129,7 +123,11 @@
           <para>A camel-case version of the parameter string.</para>
         </returns>
         <param name="identifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -159,8 +157,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Serialization.CodeIdentifier.MakePascal(System.String)" />
+            >The <see cref="M:System.Xml.Serialization.CodeIdentifier.MakePascal(System.String)" />
 
             
 
@@ -177,7 +174,11 @@
           <para>A Pascal-case version of the parameter string.</para>
         </returns>
         <param name="identifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -207,8 +208,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Serialization.CodeIdentifier.MakeValid(System.String)" />
+            >The <see cref="M:System.Xml.Serialization.CodeIdentifier.MakeValid(System.String)" />
 
             
 
@@ -225,7 +225,11 @@
           <para>A string that can be used as a code identifier, such as the name of a method parameter.</para>
         </returns>
         <param name="identifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

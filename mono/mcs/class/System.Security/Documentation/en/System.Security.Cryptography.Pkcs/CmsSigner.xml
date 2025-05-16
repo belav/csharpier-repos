@@ -20,8 +20,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+        >The <see cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
 
         
 
@@ -47,8 +46,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+            >The <see cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
 
             
 
@@ -99,13 +97,11 @@
 
                   
 
-                   if <see
-                   cref="P:System.Security.Cryptography.Pkcs.CmsSigner.SignerIdentifierType" />
+                   if <see cref="P:System.Security.Cryptography.Pkcs.CmsSigner.SignerIdentifierType" />
 
                   
 
-                   is <see
-                   cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
+                   is <see cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
 
                   
 
@@ -125,13 +121,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
 
             
 
@@ -162,18 +156,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the default property values used with this constructor, see <see
-             cref="M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor" />
+            >For the default property values used with this constructor, see <see cref="M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor" />
 
             
 
-            . An exception to those values when this constructor is used is that <see
-             cref="P:System.Security.Cryptography.Pkcs.CmsSigner.IncludeOption" />
+            . An exception to those values when this constructor is used is that <see cref="P:System.Security.Cryptography.Pkcs.CmsSigner.IncludeOption" />
 
             
 
-             is set to <see
-             cref="F:System.Security.Cryptography.X509Certificates.X509IncludeOption.None" />
+             is set to <see cref="F:System.Security.Cryptography.X509Certificates.X509IncludeOption.None" />
 
             
 
@@ -183,18 +174,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor(System.Security.Cryptography.CspParameters)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor(System.Security.Cryptography.CspParameters)" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
 
             
 
-             class with the specified cryptographic service provider (CSP) parameters. <see
-             cref="M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor(System.Security.Cryptography.CspParameters)" />
+             class with the specified cryptographic service provider (CSP) parameters. <see cref="M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor(System.Security.Cryptography.CspParameters)" />
 
             
 
@@ -202,12 +190,15 @@
           >
         </summary>
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.Cryptography.CspParameters" />
+          A <see cref="T:System.Security.Cryptography.CspParameters" />
 
           
 
@@ -241,13 +232,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor(System.Security.Cryptography.Pkcs.SubjectIdentifierType)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor(System.Security.Cryptography.Pkcs.SubjectIdentifierType)" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
 
             
 
@@ -255,12 +244,15 @@
           >
         </summary>
         <param name="signerIdentifierType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A member of the <see
-           cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
+          A member of the <see cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
 
           
 
@@ -293,21 +285,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the default property values used with this constructor, see <see
-             cref="M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor" />
+            >For the default property values used with this constructor, see <see cref="M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor" />
 
             
 
             .</para
           >
           <para
-            >The signing certificate specified by the <paramref
-             name="certificate" />
+            >The signing certificate specified by the <paramref name="certificate" />
 
             
 
-             parameter is not checked for validity on input. To validate the certificate prior to supplying it to this constructor, use the <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Chain.Build(System.Security.Cryptography.X509Certificates.X509Certificate2)" />
+             parameter is not checked for validity on input. To validate the certificate prior to supplying it to this constructor, use the <see cref="M:System.Security.Cryptography.X509Certificates.X509Chain.Build(System.Security.Cryptography.X509Certificates.X509Certificate2)" />
 
             
 
@@ -317,13 +306,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor(System.Security.Cryptography.X509Certificates.X509Certificate2)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor(System.Security.Cryptography.X509Certificates.X509Certificate2)" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
 
             
 
@@ -331,12 +318,15 @@
           >
         </summary>
         <param name="certificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An    <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+          An    <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
           
 
@@ -373,13 +363,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The  signing certificate specified by the <paramref
-             name="certificate" />
+            >The  signing certificate specified by the <paramref name="certificate" />
 
             
 
-             parameter is not checked for validity on input. To validate the certificate prior to supplying it to this constructor, use the <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Chain.Build(System.Security.Cryptography.X509Certificates.X509Certificate2)" />
+             parameter is not checked for validity on input. To validate the certificate prior to supplying it to this constructor, use the <see cref="M:System.Security.Cryptography.X509Certificates.X509Chain.Build(System.Security.Cryptography.X509Certificates.X509Certificate2)" />
 
             
 
@@ -389,13 +377,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor(System.Security.Cryptography.Pkcs.SubjectIdentifierType,System.Security.Cryptography.X509Certificates.X509Certificate2)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor(System.Security.Cryptography.Pkcs.SubjectIdentifierType,System.Security.Cryptography.X509Certificates.X509Certificate2)" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
 
             
 
@@ -403,24 +389,30 @@
           >
         </summary>
         <param name="signerIdentifierType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A member of the <see
-           cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
+          A member of the <see cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
 
           
 
            enumeration that specifies the signer identifier type.</param
         >
         <param name="certificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+          An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
           
 
@@ -452,13 +444,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.CmsSigner.Certificate" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.CmsSigner.Certificate" />
 
             
 
-             property sets or retrieves the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+             property sets or retrieves the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -490,13 +480,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property may be used to hold certificates in the signer's certificate chain.  In this case, the certificates included in the collection are determined by the setting of the <see
-             cref="P:System.Security.Cryptography.Pkcs.CmsSigner.IncludeOption" />
+            >This property may be used to hold certificates in the signer's certificate chain.  In this case, the certificates included in the collection are determined by the setting of the <see cref="P:System.Security.Cryptography.Pkcs.CmsSigner.IncludeOption" />
 
             
 
-             property. Not all certificates in the signer's certificate chain are necessarily present in <see
-             cref="P:System.Security.Cryptography.Pkcs.CmsSigner.Certificates" />
+             property. Not all certificates in the signer's certificate chain are necessarily present in <see cref="P:System.Security.Cryptography.Pkcs.CmsSigner.Certificates" />
 
             
 
@@ -506,13 +494,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.CmsSigner.Certificates" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.CmsSigner.Certificates" />
 
             
 
-             property retrieves the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+             property retrieves the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -544,8 +530,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the default value of this property, see <see
-             cref="M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor" />
+            >For the default value of this property, see <see cref="M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor" />
 
             
 
@@ -555,13 +540,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.CmsSigner.DigestAlgorithm" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.CmsSigner.DigestAlgorithm" />
 
             
 
-             property sets or retrieves the <see
-             cref="T:System.Security.Cryptography.Oid" />
+             property sets or retrieves the <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
@@ -594,8 +577,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.CmsSigner.IncludeOption" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.CmsSigner.IncludeOption" />
 
             
 
@@ -627,41 +609,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An example of a signed attribute that might be included in the <see
-             cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+            >An example of a signed attribute that might be included in the <see cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
 
             
 
-             collection retrieved by the <see
-             cref="P:System.Security.Cryptography.Pkcs.CmsSigner.SignedAttributes" />
+             collection retrieved by the <see cref="P:System.Security.Cryptography.Pkcs.CmsSigner.SignedAttributes" />
 
             
 
-             property is the <see
-             cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
+             property is the <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
 
             
 
              signing time attribute.</para
           >
           <para
-            >A <see
-             cref="T:System.Security.Cryptography.Pkcs.Pkcs9ContentType" />
+            >A <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9ContentType" />
 
             
 
-             object and a <see
-             cref="T:System.Security.Cryptography.Pkcs.Pkcs9MessageDigest" />
+             object and a <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9MessageDigest" />
 
             
 
-             object will be automatically generated and placed in the <see
-             cref="P:System.Security.Cryptography.Pkcs.SignerInfo.SignedAttributes" />
+             object will be automatically generated and placed in the <see cref="P:System.Security.Cryptography.Pkcs.SignerInfo.SignedAttributes" />
 
             
 
-             property for the corresponding signer whenever the <see
-             cref="P:System.Security.Cryptography.Pkcs.CmsSigner.SignedAttributes" />
+             property for the corresponding signer whenever the <see cref="P:System.Security.Cryptography.Pkcs.CmsSigner.SignedAttributes" />
 
             
 
@@ -671,18 +646,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.CmsSigner.SignedAttributes" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.CmsSigner.SignedAttributes" />
 
             
 
-             property retrieves the <see
-             cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+             property retrieves the <see cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
 
             
 
-             collection of signed attributes to be associated with the resulting <see
-             cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
+             collection of signed attributes to be associated with the resulting <see cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
 
             
 
@@ -715,8 +687,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.CmsSigner.SignerIdentifierType" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.CmsSigner.SignerIdentifierType" />
 
             
 
@@ -748,13 +719,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An example of an unsigned attribute that might be included in the <see
-             cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+            >An example of an unsigned attribute that might be included in the <see cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
 
             
 
-             collection retrieved by the <see
-             cref="P:System.Security.Cryptography.Pkcs.CmsSigner.UnsignedAttributes" />
+             collection retrieved by the <see cref="P:System.Security.Cryptography.Pkcs.CmsSigner.UnsignedAttributes" />
 
             
 
@@ -764,18 +733,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.CmsSigner.UnsignedAttributes" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.CmsSigner.UnsignedAttributes" />
 
             
 
-             property retrieves the <see
-             cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+             property retrieves the <see cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
 
             
 
-             collection of unsigned PKCS #9 attributes to be associated with the resulting <see
-             cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
+             collection of unsigned PKCS #9 attributes to be associated with the resulting <see cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
 
             
 

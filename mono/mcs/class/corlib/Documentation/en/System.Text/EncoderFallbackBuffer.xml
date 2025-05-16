@@ -23,8 +23,7 @@
       <list type="bullet">
         <item>
           <para
-            >An encoder fallback, which is represented by a class derived from the <see
-             cref="T:System.Text.EncoderFallback" />
+            >An encoder fallback, which is represented by a class derived from the <see cref="T:System.Text.EncoderFallback" />
 
             
 
@@ -33,8 +32,7 @@
         </item>
         <item>
           <para
-            >An encoder fallback buffer, which is represented by a type derived from the <see
-             cref="T:System.Text.EncoderFallbackBuffer" />
+            >An encoder fallback buffer, which is represented by a type derived from the <see cref="T:System.Text.EncoderFallbackBuffer" />
 
             
 
@@ -46,8 +44,7 @@
       <list type="bullet">
         <item>
           <para
-            >Best-fit mapping. The encoder fallback buffer can return a string that represents a close approximation to the input character. The .NET Framework does not provide a public best-fit <see
-             cref="T:System.Text.EncoderFallbackBuffer" />
+            >Best-fit mapping. The encoder fallback buffer can return a string that represents a close approximation to the input character. The .NET Framework does not provide a public best-fit <see cref="T:System.Text.EncoderFallbackBuffer" />
 
             
 
@@ -56,18 +53,15 @@
         </item>
         <item>
           <para
-            >Replacement. The encoder fallback buffer can return a string, such as a question mark ("?"), that indicates that a character could not be encoded. In the .NET Framework, the <see
-             cref="T:System.Text.EncoderReplacementFallback" />
+            >Replacement. The encoder fallback buffer can return a string, such as a question mark ("?"), that indicates that a character could not be encoded. In the .NET Framework, the <see cref="T:System.Text.EncoderReplacementFallback" />
 
             
 
-             and <see
-             cref="T:System.Text.EncoderReplacementFallbackBuffer" />
+             and <see cref="T:System.Text.EncoderReplacementFallbackBuffer" />
 
             
 
-             classes provide a public replacement fallback buffer implementation. The constructor of the <see
-             cref="T:System.Text.EncoderReplacementFallback" />
+             classes provide a public replacement fallback buffer implementation. The constructor of the <see cref="T:System.Text.EncoderReplacementFallback" />
 
             
 
@@ -76,28 +70,23 @@
         </item>
         <item>
           <para
-            >Exception. The <see
-             cref="T:System.Text.EncoderFallbackBuffer" />
+            >Exception. The <see cref="T:System.Text.EncoderFallbackBuffer" />
 
             
 
-             implementation throws an exception, which indicates that a character cannot be encoded, and terminates the encoding operation. In this case, the fallback handler must provide an <see
-             cref="T:System.Text.EncoderFallbackBuffer" />
+             implementation throws an exception, which indicates that a character cannot be encoded, and terminates the encoding operation. In this case, the fallback handler must provide an <see cref="T:System.Text.EncoderFallbackBuffer" />
 
             
 
-             implementation, although it does not return a string to the encoder. In the .NET Framework, the <see
-             cref="T:System.Text.EncoderExceptionFallback" />
+             implementation, although it does not return a string to the encoder. In the .NET Framework, the <see cref="T:System.Text.EncoderExceptionFallback" />
 
             
 
-             and <see
-             cref="T:System.Text.EncoderExceptionFallbackBuffer" />
+             and <see cref="T:System.Text.EncoderExceptionFallbackBuffer" />
 
             
 
-             classes provide a public exception fallback implementation that throws an <see
-             cref="T:System.Text.EncoderFallbackException" />
+             classes provide a public exception fallback implementation that throws an <see cref="T:System.Text.EncoderFallbackException" />
 
             
 
@@ -106,13 +95,11 @@
         </item>
       </list>
       <para
-        >The buffer in an <see
-         cref="T:System.Text.EncoderFallbackBuffer" />
+        >The buffer in an <see cref="T:System.Text.EncoderFallbackBuffer" />
 
         
 
-         implementation represents the entire string to be returned to the encoder in response to an encoder fallback. Generally, implementations also include state information, such as the index of the next character to return to the encoder and the number of remaining characters to be returned. Because <see
-         cref="T:System.Text.EncoderFallbackBuffer" />
+         implementation represents the entire string to be returned to the encoder in response to an encoder fallback. Generally, implementations also include state information, such as the index of the next character to return to the encoder and the number of remaining characters to be returned. Because <see cref="T:System.Text.EncoderFallbackBuffer" />
 
         
 
@@ -121,8 +108,7 @@
       <list type="bullet">
         <item>
           <para
-            >The overloaded <see
-             cref="M:System.Text.EncoderFallbackBuffer.Fallback(System.Char,System.Int32)" />
+            >The overloaded <see cref="M:System.Text.EncoderFallbackBuffer.Fallback(System.Char,System.Int32)" />
 
             
 
@@ -131,13 +117,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Text.EncoderFallbackBuffer.GetNextChar" />
+            >The <see cref="M:System.Text.EncoderFallbackBuffer.GetNextChar" />
 
             
 
-             method, which is called repeatedly by the encoder if the <see
-             cref="M:System.Text.EncoderFallbackBuffer.Fallback(System.Char,System.Int32)" />
+             method, which is called repeatedly by the encoder if the <see cref="M:System.Text.EncoderFallbackBuffer.Fallback(System.Char,System.Int32)" />
 
             
 
@@ -146,8 +130,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Text.EncoderFallbackBuffer.MovePrevious" />
+            >The <see cref="M:System.Text.EncoderFallbackBuffer.MovePrevious" />
 
             
 
@@ -156,8 +139,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.Text.EncoderFallbackBuffer.Remaining" />
+            >The <see cref="P:System.Text.EncoderFallbackBuffer.Remaining" />
 
             
 
@@ -190,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Text.EncoderFallbackBuffer" />
+            >Initializes a new instance of the <see cref="T:System.Text.EncoderFallbackBuffer" />
 
             
 
@@ -226,28 +207,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="Overload:System.Text.Encoding.GetBytes" />
+            >The <see cref="Overload:System.Text.Encoding.GetBytes" />
 
             
 
-             and <see
-             cref="Overload:System.Text.Encoder.Convert" />
+             and <see cref="Overload:System.Text.Encoder.Convert" />
 
             
 
-             methods call <see
-             cref="M:System.Text.DecoderFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
+             methods call <see cref="M:System.Text.DecoderFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
 
             
 
-             if they encounter an unknown input character that cannot be encoded. A return value of true indicates that the fallback buffer can process the input character, which causes the calling method to call the <see
-             cref="M:System.Text.EncoderFallbackBuffer.GetNextChar" />
+             if they encounter an unknown input character that cannot be encoded. A return value of true indicates that the fallback buffer can process the input character, which causes the calling method to call the <see cref="M:System.Text.EncoderFallbackBuffer.GetNextChar" />
 
             
 
-             method to obtain each character of the fallback buffer. Because it does not process individual characters, the <see
-             cref="M:System.Text.EncoderFallbackBuffer.Fallback(System.Char,System.Int32)" />
+             method to obtain each character of the fallback buffer. Because it does not process individual characters, the <see cref="M:System.Text.EncoderFallbackBuffer.Fallback(System.Char,System.Int32)" />
 
             
 
@@ -261,13 +237,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the fallback buffer can process <paramref
-             name="charUnknown" />
+            >true if the fallback buffer can process <paramref name="charUnknown" />
 
             
 
-            ; false if the fallback buffer ignores <paramref
-             name="charUnknown" />
+            ; false if the fallback buffer ignores <paramref name="charUnknown" />
 
             
 
@@ -275,14 +249,22 @@
           >
         </returns>
         <param name="charUnknown">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An input character.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -317,28 +299,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="Overload:System.Text.Encoding.GetBytes" />
+            >The <see cref="Overload:System.Text.Encoding.GetBytes" />
 
             
 
-             and <see
-             cref="Overload:System.Text.Encoder.Convert" />
+             and <see cref="Overload:System.Text.Encoder.Convert" />
 
             
 
-             methods call <see
-             cref="M:System.Text.EncoderFallbackBuffer.Fallback(System.Char,System.Char,System.Int32)" />
+             methods call <see cref="M:System.Text.EncoderFallbackBuffer.Fallback(System.Char,System.Char,System.Int32)" />
 
             
 
-             if they encounter a surrogate pair in their input. A return value of true indicates that the fallback buffer can process the surrogate pair, which causes the calling method to call the <see
-             cref="M:System.Text.EncoderFallbackBuffer.GetNextChar" />
+             if they encounter a surrogate pair in their input. A return value of true indicates that the fallback buffer can process the surrogate pair, which causes the calling method to call the <see cref="M:System.Text.EncoderFallbackBuffer.GetNextChar" />
 
             
 
-             method to obtain each character of the fallback buffer.  Because it does not process individual characters, the <see
-             cref="M:System.Text.EncoderFallbackBuffer.Fallback(System.Char,System.Int32)" />
+             method to obtain each character of the fallback buffer.  Because it does not process individual characters, the <see cref="M:System.Text.EncoderFallbackBuffer.Fallback(System.Char,System.Int32)" />
 
             
 
@@ -352,13 +329,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the fallback buffer can process <paramref
-             name="charUnknownHigh" />
+            >true if the fallback buffer can process <paramref name="charUnknownHigh" />
 
             
 
-             and <paramref
-             name="charUnknownLow" />
+             and <paramref name="charUnknownLow" />
 
             
 
@@ -366,21 +341,33 @@
           >
         </returns>
         <param name="charUnknownHigh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The high surrogate of the input pair.</param
         >
         <param name="charUnknownLow">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The low surrogate of the input pair.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -408,31 +395,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An encoding operation calls the <see
-             cref="Overload:System.Text.EncoderFallbackBuffer.Fallback" />
+            >An encoding operation calls the <see cref="Overload:System.Text.EncoderFallbackBuffer.Fallback" />
 
             
 
-             method if the operation encounters an unknown character or surrogate pair in the input. For example, in the case of a replacement fallback, if the <see
-             cref="Overload:System.Text.EncoderFallbackBuffer.Fallback" />
+             method if the operation encounters an unknown character or surrogate pair in the input. For example, in the case of a replacement fallback, if the <see cref="Overload:System.Text.EncoderFallbackBuffer.Fallback" />
 
             
 
-             method returns true, a substitute string exists that can be encoded instead of the unknown input. The encoding operation calls the <see
-             cref="M:System.Text.EncoderFallbackBuffer.GetNextChar" />
+             method returns true, a substitute string exists that can be encoded instead of the unknown input. The encoding operation calls the <see cref="M:System.Text.EncoderFallbackBuffer.GetNextChar" />
 
             
 
-             method repeatedly and obtains the substitute string one character at a time. When all characters in the fallback buffer have been returned to the encoder, the <see
-             cref="M:System.Text.EncoderFallbackBuffer.GetNextChar" />
+             method repeatedly and obtains the substitute string one character at a time. When all characters in the fallback buffer have been returned to the encoder, the <see cref="M:System.Text.EncoderFallbackBuffer.GetNextChar" />
 
             
 
              method should return U+0000.</para
           >
           <para
-            >For an exception fallback handler, the <see
-             cref="M:System.Text.EncoderFallbackBuffer.GetNextChar" />
+            >For an exception fallback handler, the <see cref="M:System.Text.EncoderFallbackBuffer.GetNextChar" />
 
             
 
@@ -473,8 +455,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, causes the next call to the <see
-             cref="M:System.Text.EncoderFallbackBuffer.GetNextChar" />
+            >When overridden in a derived class, causes the next call to the <see cref="M:System.Text.EncoderFallbackBuffer.GetNextChar" />
 
             
 
@@ -484,8 +465,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="M:System.Text.EncoderFallbackBuffer.MovePrevious" />
+            >true if the <see cref="M:System.Text.EncoderFallbackBuffer.MovePrevious" />
 
             
 
@@ -511,21 +491,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="Overload:System.Text.EncoderFallbackBuffer.Fallback" />
+            >The <see cref="Overload:System.Text.EncoderFallbackBuffer.Fallback" />
 
             
 
-             method returns true if <see
-             cref="P:System.Text.EncoderFallbackBuffer.Remaining" />
+             method returns true if <see cref="P:System.Text.EncoderFallbackBuffer.Remaining" />
 
             
 
              is a nonzero value.</para
           >
           <para
-            >For an exception fallback handler, the <see
-             cref="P:System.Text.DecoderFallbackBuffer.Remaining" />
+            >For an exception fallback handler, the <see cref="P:System.Text.DecoderFallbackBuffer.Remaining" />
 
             
 
@@ -535,8 +512,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets the number of characters in the current <see
-             cref="T:System.Text.EncoderFallbackBuffer" />
+            >When overridden in a derived class, gets the number of characters in the current <see cref="T:System.Text.EncoderFallbackBuffer" />
 
             
 

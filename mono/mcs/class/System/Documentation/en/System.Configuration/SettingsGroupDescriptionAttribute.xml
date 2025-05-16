@@ -30,13 +30,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An application settings class, derived from <see
-         cref="T:System.Configuration.ApplicationSettingsBase" />
+        >An application settings class, derived from <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
         
 
-        , defines one or more properties that belong to the same application property group. <see
-         cref="T:System.Configuration.SettingsGroupDescriptionAttribute" />
+        , defines one or more properties that belong to the same application property group. <see cref="T:System.Configuration.SettingsGroupDescriptionAttribute" />
 
         
 
@@ -74,13 +72,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although the theoretical maximum length of the <paramref
-             name="description" />
+            >Although the theoretical maximum length of the <paramref name="description" />
 
             
 
-             parameter is constrained by the upper bounds of an <see
-             cref="T:System.Int32" />
+             parameter is constrained by the upper bounds of an <see cref="T:System.Int32" />
 
             
 
@@ -90,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.SettingsGroupDescriptionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsGroupDescriptionAttribute" />
 
             
 
@@ -99,12 +94,15 @@
           >
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -129,13 +127,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Configuration.SettingsGroupDescriptionAttribute.Description" />
+            >The <see cref="P:System.Configuration.SettingsGroupDescriptionAttribute.Description" />
 
             
 
-             property value is set in the <see
-             cref="M:System.Configuration.SettingsGroupDescriptionAttribute.#ctor(System.String)" />
+             property value is set in the <see cref="M:System.Configuration.SettingsGroupDescriptionAttribute.#ctor(System.String)" />
 
             
 

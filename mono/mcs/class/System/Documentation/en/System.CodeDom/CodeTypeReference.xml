@@ -34,59 +34,49 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.CodeDom.CodeTypeReference" />
+        >A <see cref="T:System.CodeDom.CodeTypeReference" />
 
         
 
-         object is used to represent a type for CodeDOM objects. When CodeDOM types have a Type property, it is of type <see
-         cref="T:System.CodeDom.CodeTypeReference" />
+         object is used to represent a type for CodeDOM objects. When CodeDOM types have a Type property, it is of type <see cref="T:System.CodeDom.CodeTypeReference" />
 
         
 
-        . For example, the <see
-         cref="P:System.CodeDom.CodeMemberField.Type" />
+        . For example, the <see cref="P:System.CodeDom.CodeMemberField.Type" />
 
         
 
-         property is a <see
-         cref="T:System.CodeDom.CodeTypeReference" />
+         property is a <see cref="T:System.CodeDom.CodeTypeReference" />
 
         
 
          that represents a field's data type.</para
       >
       <para
-        >A <see
-         cref="T:System.CodeDom.CodeTypeReference" />
+        >A <see cref="T:System.CodeDom.CodeTypeReference" />
 
         
 
-         can be initialized with a <see
-         cref="T:System.Type" />
+         can be initialized with a <see cref="T:System.Type" />
 
         
 
-         object or a string. It is generally recommended to use a <see
-         cref="T:System.Type" />
+         object or a string. It is generally recommended to use a <see cref="T:System.Type" />
 
         
 
          to do this, although it may not always be possible. If initializing an instance of this class with a string, it is strongly recommended to always use fully qualified types, such as "System.Console" instead of just "Console", because not all languages support importing namespaces. Array types can be specified by either passing in a type object for an array or using one of the constructors that accept rank as a parameter.</para
       >
       <para
-        >The <see
-         cref="P:System.CodeDom.CodeTypeReference.BaseType" />
+        >The <see cref="P:System.CodeDom.CodeTypeReference.BaseType" />
 
         
 
-         property specifies the name of the type to reference. For references to array types, the <see
-         cref="P:System.CodeDom.CodeTypeReference.ArrayElementType" />
+         property specifies the name of the type to reference. For references to array types, the <see cref="P:System.CodeDom.CodeTypeReference.ArrayElementType" />
 
         
 
-         property indicates the type of the elements of the array, and the <see
-         cref="P:System.CodeDom.CodeTypeReference.ArrayRank" />
+         property indicates the type of the elements of the array, and the <see cref="P:System.CodeDom.CodeTypeReference.ArrayRank" />
 
         
 
@@ -115,8 +105,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates an empty <see
-             cref="T:System.CodeDom.CodeTypeReference" />
+            >This constructor creates an empty <see cref="T:System.CodeDom.CodeTypeReference" />
 
             
 
@@ -126,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTypeReference" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReference" />
 
             
 
@@ -158,8 +146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTypeReference" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReference" />
 
             
 
@@ -167,12 +154,15 @@
           >
         </summary>
         <param name="typeParameter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeTypeParameter" />
+          A <see cref="T:System.CodeDom.CodeTypeParameter" />
 
           
 
@@ -206,28 +196,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="typeName" />
+            >If the <paramref name="typeName" />
 
             
 
-             parameter references a generic type, it must follow the syntax conventions for generic types. For example, the reflection signature for a <see
-             cref="T:System.Collections.Generic.Dictionary`2" />
+             parameter references a generic type, it must follow the syntax conventions for generic types. For example, the reflection signature for a <see cref="T:System.Collections.Generic.Dictionary`2" />
 
             
 
-             type, where <paramref
-             name="K" />
+             type, where <paramref name="K" />
 
             
 
-             is a string and <paramref
-             name="V" />
+             is a string and <paramref name="V" />
 
             
 
-             is a <see
-             cref="T:System.Collections.Generic.List`1" />
+             is a <see cref="T:System.Collections.Generic.List`1" />
 
             
 
@@ -241,8 +226,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTypeReference" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReference" />
 
             
 
@@ -278,8 +262,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTypeReference" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReference" />
 
             
 
@@ -314,8 +297,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor can be used to construct arrays of arrays by nesting <see
-             cref="T:System.CodeDom.CodeTypeReference" />
+            >This constructor can be used to construct arrays of arrays by nesting <see cref="T:System.CodeDom.CodeTypeReference" />
 
             
 
@@ -325,8 +307,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTypeReference" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReference" />
 
             
 
@@ -364,8 +345,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTypeReference" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReference" />
 
             
 
@@ -373,19 +353,26 @@
           >
         </summary>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the type to reference.</param
         >
         <param name="typeArguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.CodeDom.CodeTypeReference" />
+          An array of <see cref="T:System.CodeDom.CodeTypeReference" />
 
           
 
@@ -417,8 +404,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTypeReference" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReference" />
 
             
 
@@ -426,7 +412,11 @@
           >
         </summary>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -465,8 +455,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTypeReference" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReference" />
 
             
 
@@ -474,7 +463,11 @@
           >
         </summary>
         <param name="baseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -506,8 +499,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTypeReference" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReference" />
 
             
 
@@ -515,12 +507,15 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -552,8 +547,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is disregarded unless the <see
-             cref="P:System.CodeDom.CodeTypeReference.ArrayRank" />
+            >This is disregarded unless the <see cref="P:System.CodeDom.CodeTypeReference.ArrayRank" />
 
             
 
@@ -608,8 +602,7 @@
           <para>This property contains the name of the type unless it is an array type, in which case it is the array element type.</para>
           <block subset="none" type="note">
             <para
-              >The name of the property may be misleading. This property contains just the type name with any array adornments or generic type arguments removed, not the base or parent type as might be expected. For example, the <see
-               cref="P:System.CodeDom.CodeTypeReference.BaseType" />
+              >The name of the property may be misleading. This property contains just the type name with any array adornments or generic type arguments removed, not the base or parent type as might be expected. For example, the <see cref="P:System.CodeDom.CodeTypeReference.BaseType" />
 
               
 
@@ -620,46 +613,38 @@
             <h2>Representation of Generic Types</h2>
           </format>
           <para
-            >The information in this section is intended for CodeDom provider developers and only applies to CLS-compliant languages. The return value can contain generic types. Generic types are formatted with the name of the type followed by a grave accent ("`") followed by a count of the generic type arguments. The generic type arguments can be found in the <see
-             cref="T:System.CodeDom.CodeTypeReferenceCollection" />
+            >The information in this section is intended for CodeDom provider developers and only applies to CLS-compliant languages. The return value can contain generic types. Generic types are formatted with the name of the type followed by a grave accent ("`") followed by a count of the generic type arguments. The generic type arguments can be found in the <see cref="T:System.CodeDom.CodeTypeReferenceCollection" />
 
             
 
-             returned by the <see
-             cref="P:System.CodeDom.CodeTypeReference.TypeArguments" />
+             returned by the <see cref="P:System.CodeDom.CodeTypeReference.TypeArguments" />
 
             
 
-             property. The values returned by <see
-             cref="P:System.CodeDom.CodeTypeReference.BaseType" />
+             property. The values returned by <see cref="P:System.CodeDom.CodeTypeReference.BaseType" />
 
             
 
-             and the associated <see
-             cref="P:System.CodeDom.CodeTypeReference.TypeArguments" />
+             and the associated <see cref="P:System.CodeDom.CodeTypeReference.TypeArguments" />
 
             
 
              contain the same content as the value of the type returned by reflection. </para
           >
           <para
-            >For example, a constructed <see
-             cref="T:System.Collections.Generic.Dictionary`2" />
+            >For example, a constructed <see cref="T:System.Collections.Generic.Dictionary`2" />
 
             
 
-             where <paramref
-             name="K" />
+             where <paramref name="K" />
 
             
 
-             is a string and <paramref
-             name="V" />
+             is a string and <paramref name="V" />
 
             
 
-             is a constructed <see
-             cref="T:System.Collections.Generic.List`1" />
+             is a constructed <see cref="T:System.Collections.Generic.List`1" />
 
             
 
@@ -667,18 +652,15 @@
           >
           <code>System.Collections.Generic.Dictionary`2[[System.String], [System.Collections.Generic.List`1[[System.Int32]]]]</code>
           <para
-            >Recursively parsing the <see
-             cref="P:System.CodeDom.CodeTypeReference.BaseType" />
+            >Recursively parsing the <see cref="P:System.CodeDom.CodeTypeReference.BaseType" />
 
             
 
-             property from the <see
-             cref="T:System.CodeDom.CodeTypeReference" />
+             property from the <see cref="T:System.CodeDom.CodeTypeReference" />
 
             
 
-             for <see
-             cref="T:System.Collections.Generic.Dictionary`2" />
+             for <see cref="T:System.Collections.Generic.Dictionary`2" />
 
             
 
@@ -687,13 +669,11 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="P:System.CodeDom.CodeTypeReference.BaseType" />
+                >The <see cref="P:System.CodeDom.CodeTypeReference.BaseType" />
 
                 
 
-                 property for the parent <see
-                 cref="T:System.CodeDom.CodeTypeReference" />
+                 property for the parent <see cref="T:System.CodeDom.CodeTypeReference" />
 
                 
 
@@ -703,18 +683,15 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.CodeDom.CodeTypeReference.BaseType" />
+                >The <see cref="P:System.CodeDom.CodeTypeReference.BaseType" />
 
                 
 
-                 property for the first <see
-                 cref="T:System.CodeDom.CodeTypeReference" />
+                 property for the first <see cref="T:System.CodeDom.CodeTypeReference" />
 
                 
 
-                 object in the <see
-                 cref="P:System.CodeDom.CodeTypeReference.TypeArguments" />
+                 object in the <see cref="P:System.CodeDom.CodeTypeReference.TypeArguments" />
 
                 
 
@@ -724,18 +701,15 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.CodeDom.CodeTypeReference.BaseType" />
+                >The <see cref="P:System.CodeDom.CodeTypeReference.BaseType" />
 
                 
 
-                 property for the second <see
-                 cref="T:System.CodeDom.CodeTypeReference" />
+                 property for the second <see cref="T:System.CodeDom.CodeTypeReference" />
 
                 
 
-                 object in the <see
-                 cref="P:System.CodeDom.CodeTypeReference.TypeArguments" />
+                 object in the <see cref="P:System.CodeDom.CodeTypeReference.TypeArguments" />
 
                 
 
@@ -745,13 +719,11 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.CodeDom.CodeTypeReference.TypeArguments" />
+                >The <see cref="P:System.CodeDom.CodeTypeReference.TypeArguments" />
 
                 
 
-                 property in the <see
-                 cref="T:System.CodeDom.CodeTypeReference" />
+                 property in the <see cref="T:System.CodeDom.CodeTypeReference" />
 
                 
 
@@ -761,8 +733,7 @@
             </item>
           </list>
           <para
-            >The type argument count should be used when parsing the associated <see
-             cref="P:System.CodeDom.CodeTypeReference.TypeArguments" />
+            >The type argument count should be used when parsing the associated <see cref="P:System.CodeDom.CodeTypeReference.TypeArguments" />
 
             
 
@@ -770,23 +741,19 @@
           >
           <block subset="none" type="note">
             <para
-              >When creating a generic <see
-               cref="T:System.CodeDom.CodeTypeReference" />
+              >When creating a generic <see cref="T:System.CodeDom.CodeTypeReference" />
 
               
 
-              , the recommended practice is to specify the type arguments as <see
-               cref="T:System.CodeDom.CodeTypeReference" />
+              , the recommended practice is to specify the type arguments as <see cref="T:System.CodeDom.CodeTypeReference" />
 
               
 
-               objects or use the constructor that takes a <see
-               cref="T:System.Type" />
+               objects or use the constructor that takes a <see cref="T:System.Type" />
 
               
 
-              . Use of the constructor that creates a <see
-               cref="T:System.CodeDom.CodeTypeReference" />
+              . Use of the constructor that creates a <see cref="T:System.CodeDom.CodeTypeReference" />
 
               
 
@@ -858,13 +825,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.CodeDom.CodeTypeReference.TypeArguments" />
+            >The <see cref="P:System.CodeDom.CodeTypeReference.TypeArguments" />
 
             
 
-             property is a collection of type references to be substituted for the type parameter references of the current generic type. The collection contains all the type arguments for all nested types. For an example, see the <see
-             cref="P:System.CodeDom.CodeTypeReference.BaseType" />
+             property is a collection of type references to be substituted for the type parameter references of the current generic type. The collection contains all the type arguments for all nested types. For an example, see the <see cref="P:System.CodeDom.CodeTypeReference.BaseType" />
 
             
 

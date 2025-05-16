@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.ToolStrip.ItemClicked" />
+        >Provides data for the <see cref="E:System.Windows.Forms.ToolStrip.ItemClicked" />
 
         
 
@@ -43,13 +42,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripItemClickedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripItemClickedEventArgs" />
 
             
 
-             class, specifying the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             class, specifying the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -57,12 +54,15 @@
           >
         </summary>
         <param name="clickedItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+          The <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
@@ -89,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the item that was clicked on the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets the item that was clicked on the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 

@@ -19,18 +19,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.FilterableAttribute" />
+        >The <see cref="T:System.Web.UI.FilterableAttribute" />
 
         
 
-         attribute is applied to a property to specify whether the property supports device filtering. When a property supports device filtering, you can override the value of a property for a specific device by specifying a device filter. By default, properties are filterable, so a control developer could prevent device filtering on a property by setting the <see
-         cref="T:System.Web.UI.FilterableAttribute" />
+         attribute is applied to a property to specify whether the property supports device filtering. When a property supports device filtering, you can override the value of a property for a specific device by specifying a device filter. By default, properties are filterable, so a control developer could prevent device filtering on a property by setting the <see cref="T:System.Web.UI.FilterableAttribute" />
 
         
 
-         attribute to false. For more information, see <format
-         type="text/html">
+         attribute to false. For more information, see <format type="text/html">
           <a href="a7f55dfa-290b-45f8-bf8f-d5a4540bae61">Customizing for Specific Devices</a>
         </format>
 
@@ -39,8 +36,7 @@
         .</para
       >
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -49,13 +45,11 @@
         .</para
       >
       <para
-        >For a list of initial property values for an instance of the <see
-         cref="T:System.Web.UI.FilterableAttribute" />
+        >For a list of initial property values for an instance of the <see cref="T:System.Web.UI.FilterableAttribute" />
 
         
 
-         class, see the <see
-         cref="M:System.Web.UI.FilterableAttribute.#ctor(System.Boolean)" />
+         class, see the <see cref="M:System.Web.UI.FilterableAttribute.#ctor(System.Boolean)" />
 
         
 
@@ -79,13 +73,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create a new instance of the <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+            >Use this constructor to create a new instance of the <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
-             class. The following table shows the initial property value for an instance of the <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+             class. The following table shows the initial property value for an instance of the <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
@@ -110,8 +102,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="filterable" />
+                  >The value of the <paramref name="filterable" />
 
                   
 
@@ -124,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
@@ -133,7 +123,11 @@
           >
         </summary>
         <param name="filterable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -158,18 +152,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Web.UI.FilterableAttribute.Default" />
+            >The <see cref="F:System.Web.UI.FilterableAttribute.Default" />
 
             
 
-             field represents a predefined <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+             field represents a predefined <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
-             object with default property settings. This field is often used when comparing a <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+             object with default property settings. This field is often used when comparing a <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
@@ -177,18 +168,15 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="F:System.Web.UI.FilterableAttribute.Default" />
+              >The <see cref="F:System.Web.UI.FilterableAttribute.Default" />
 
               
 
-               field is identical to the <see
-               cref="T:System.Web.UI.FilterableAttribute" />
+               field is identical to the <see cref="T:System.Web.UI.FilterableAttribute" />
 
               
 
-               object represented by the <see
-               cref="F:System.Web.UI.FilterableAttribute.Yes" />
+               object represented by the <see cref="F:System.Web.UI.FilterableAttribute.Yes" />
 
               
 
@@ -199,8 +187,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a predefined <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+            >Represents a predefined <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
@@ -226,13 +213,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.FilterableAttribute.Equals(System.Object)" />
+            >Use the <see cref="M:System.Web.UI.FilterableAttribute.Equals(System.Object)" />
 
             
 
-             method to determine whether the current instance of the <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+             method to determine whether the current instance of the <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
@@ -241,13 +226,11 @@
           <list type="ordered">
             <item>
               <para
-                >The object contained in the <paramref
-                 name="obj" />
+                >The object contained in the <paramref name="obj" />
 
                 
 
-                 parameter must be a <see
-                 cref="T:System.Web.UI.FilterableAttribute" />
+                 parameter must be a <see cref="T:System.Web.UI.FilterableAttribute" />
 
                 
 
@@ -256,8 +239,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.Web.UI.FilterableAttribute.Filterable" />
+                >The <see cref="P:System.Web.UI.FilterableAttribute.Filterable" />
 
                 
 
@@ -272,8 +254,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the current instance of the <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+            >Determines whether the current instance of the <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
@@ -283,13 +264,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the object contained in the <paramref
-             name="obj" />
+            >true if the object contained in the <paramref name="obj" />
 
             
 
-             parameter is equal to the current instance of the <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+             parameter is equal to the current instance of the <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
@@ -297,12 +276,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -325,18 +307,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.FilterableAttribute.Filterable" />
+            >Use the <see cref="P:System.Web.UI.FilterableAttribute.Filterable" />
 
             
 
-             property to determine whether the property to which the <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+             property to determine whether the property to which the <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
-             attribute is applied supports device filtering. When a property supports device filtering, you can override the value of a property for a specific device by specifying a device filter. For more information, see <format
-             type="text/html">
+             attribute is applied supports device filtering. When a property supports device filtering, you can override the value of a property for a specific device by specifying a device filter. For more information, see <format type="text/html">
               <a href="a7f55dfa-290b-45f8-bf8f-d5a4540bae61">Customizing for Specific Devices</a>
             </format>
 
@@ -348,8 +327,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the property to which the <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+            >Gets a value indicating whether the property to which the <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
@@ -396,23 +374,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.FilterableAttribute.IsDefaultAttribute" />
+            >The <see cref="M:System.Web.UI.FilterableAttribute.IsDefaultAttribute" />
 
             
 
-             method is a helper method used by ASP.NET to determine whether the current instance of the <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+             method is a helper method used by ASP.NET to determine whether the current instance of the <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
-             class is equal to the <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+             class is equal to the <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
-             object contained in the <see
-             cref="F:System.Web.UI.FilterableAttribute.Default" />
+             object contained in the <see cref="F:System.Web.UI.FilterableAttribute.Default" />
 
             
 
@@ -422,13 +396,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the current instance of the <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+            >Determines whether the current instance of the <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
-             class is equal to the <see
-             cref="F:System.Web.UI.FilterableAttribute.Default" />
+             class is equal to the <see cref="F:System.Web.UI.FilterableAttribute.Default" />
 
             
 
@@ -438,13 +410,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the current instance of <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+            >true if the current instance of <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
-             is equal to <see
-             cref="F:System.Web.UI.FilterableAttribute.Default" />
+             is equal to <see cref="F:System.Web.UI.FilterableAttribute.Default" />
 
             
 
@@ -471,13 +441,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.FilterableAttribute.IsObjectFilterable(System.Object)" />
+            >Use the <see cref="M:System.Web.UI.FilterableAttribute.IsObjectFilterable(System.Object)" />
 
             
 
-             method to determine whether the specified <see
-             cref="T:System.Object" />
+             method to determine whether the specified <see cref="T:System.Object" />
 
             
 
@@ -485,8 +453,7 @@
           >
           <block subset="none" type="note">
             <para
-              >An object supports device filtering if its data type supports device filtering. For more information, see the <see
-               cref="M:System.Web.UI.FilterableAttribute.IsTypeFilterable(System.Type)" />
+              >An object supports device filtering if its data type supports device filtering. For more information, see the <see cref="M:System.Web.UI.FilterableAttribute.IsTypeFilterable(System.Type)" />
 
               
 
@@ -497,8 +464,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Object" />
+            >Determines whether the specified <see cref="T:System.Object" />
 
             
 
@@ -508,13 +474,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Object" />
+            >true if the <see cref="T:System.Object" />
 
             
 
-             contained in the <paramref
-             name="instance" />
+             contained in the <paramref name="instance" />
 
             
 
@@ -544,13 +508,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.FilterableAttribute.IsPropertyFilterable(System.ComponentModel.PropertyDescriptor)" />
+            >Use the <see cref="M:System.Web.UI.FilterableAttribute.IsPropertyFilterable(System.ComponentModel.PropertyDescriptor)" />
 
             
 
-             method to determine whether a property supports device filtering. To use this method, you must pass in a <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+             method to determine whether a property supports device filtering. To use this method, you must pass in a <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -564,13 +526,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the property represented by the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >true if the property represented by the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
-             object contained in the <paramref
-             name="propertyDescriptor" />
+             object contained in the <paramref name="propertyDescriptor" />
 
             
 
@@ -596,13 +556,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.FilterableAttribute.IsTypeFilterable(System.Type)" />
+            >Use the <see cref="M:System.Web.UI.FilterableAttribute.IsTypeFilterable(System.Type)" />
 
             
 
-             method to determine whether the specified type supports device filtering. A type supports device filtering if it has a <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+             method to determine whether the specified type supports device filtering. A type supports device filtering if it has a <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
@@ -616,8 +574,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the data type contained in the <paramref
-             name="type" />
+            >true if the data type contained in the <paramref name="type" />
 
             
 
@@ -625,12 +582,15 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -655,23 +615,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Web.UI.FilterableAttribute.No" />
+            >The <see cref="F:System.Web.UI.FilterableAttribute.No" />
 
             
 
-             field represents a predefined <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+             field represents a predefined <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
-             object that indicates that a property does not support device filtering. This field is often used when comparing a <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+             object that indicates that a property does not support device filtering. This field is often used when comparing a <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
-             object to the predefined <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+             object to the predefined <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
@@ -681,8 +637,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a predefined <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+            >Represents a predefined <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
@@ -708,23 +663,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Web.UI.FilterableAttribute.Yes" />
+            >The <see cref="F:System.Web.UI.FilterableAttribute.Yes" />
 
             
 
-             field represents a predefined <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+             field represents a predefined <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
-             object that indicates that a property supports device filtering. This field is often used when comparing a <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+             object that indicates that a property supports device filtering. This field is often used when comparing a <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
-             object to the predefined <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+             object to the predefined <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 
@@ -732,8 +683,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This is the default <see
-               cref="T:System.Web.UI.FilterableAttribute" />
+              >This is the default <see cref="T:System.Web.UI.FilterableAttribute" />
 
               
 
@@ -744,8 +694,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a predefined <see
-             cref="T:System.Web.UI.FilterableAttribute" />
+            >Represents a predefined <see cref="T:System.Web.UI.FilterableAttribute" />
 
             
 

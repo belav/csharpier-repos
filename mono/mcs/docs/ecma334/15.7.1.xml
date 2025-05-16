@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
 <clause number="15.7.1" title="The if statement">
   <paragraph
-    >The if statement selects a statement for execution based on the value of a boolean expression. <grammar_production
-    >
+    >The if statement selects a statement for execution based on the value of a boolean expression. <grammar_production>
       <name>
         <non_terminal where="15.7.1">if-statement</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <keyword>if</keyword>
         <terminal>(</terminal>
         <non_terminal where="15.7.1">boolean-expression</non_terminal>
@@ -34,17 +32,14 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="14.14">expression</non_terminal>
       </rhs>
     </grammar_production>
   </paragraph>
   <paragraph
     >An else part is associated with the lexically nearest preceding if that is allowed by the syntax. <example
-
-      >[Example: Thus, an if statement of the form <code_example
-      >
+      >[Example: Thus, an if statement of the form <code_example>
         <![CDATA[
 if (x) if (y) F(); else G();  
 ]]>
@@ -52,8 +47,7 @@ if (x) if (y) F(); else G();
 
       
 
-      is equivalent to <code_example
-      >
+      is equivalent to <code_example>
         <![CDATA[
 if (x) {  
    if (y) {  
@@ -72,16 +66,15 @@ if (x) {
     >
   </paragraph>
   <paragraph
-    >An if statement is executed as follows: <list
-    >
+    >An if statement is executed as follows: <list>
       <list_item
-        > The <non_terminal
-         where="15.7.1">boolean-expression</non_terminal>
+        > The <non_terminal where="15.7.1"
+          >boolean-expression</non_terminal
+        >
 
         
 
-         (<hyperlink
-        >14.16</hyperlink>
+         (<hyperlink>14.16</hyperlink>
 
         
 

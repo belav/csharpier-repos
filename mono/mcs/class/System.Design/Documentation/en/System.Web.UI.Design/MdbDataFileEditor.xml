@@ -16,84 +16,69 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An <see
-         cref="T:System.Web.UI.Design.MdbDataFileEditor" />
+        >An <see cref="T:System.Web.UI.Design.MdbDataFileEditor" />
 
         
 
-         object is used at design time to select and edit a URL for a Microsoft Access database file (.mdb), and then assign the URL to a control property. For example, the <see
-         cref="T:System.Web.UI.WebControls.AccessDataSource" />
+         object is used at design time to select and edit a URL for a Microsoft Access database file (.mdb), and then assign the URL to a control property. For example, the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
         
 
-         control uses the <see
-         cref="T:System.Web.UI.Design.MdbDataFileEditor" />
+         control uses the <see cref="T:System.Web.UI.Design.MdbDataFileEditor" />
 
         
 
-         class at design time to set the value of the <see
-         cref="P:System.Web.UI.WebControls.AccessDataSource.DataFile" />
+         class at design time to set the value of the <see cref="P:System.Web.UI.WebControls.AccessDataSource.DataFile" />
 
         
 
          property.</para
       >
       <para
-        >Use the <see
-         cref="T:System.ComponentModel.EditorAttribute" />
+        >Use the <see cref="T:System.ComponentModel.EditorAttribute" />
 
         
 
-         attribute to associate the <see
-         cref="T:System.Web.UI.Design.MdbDataFileEditor" />
+         attribute to associate the <see cref="T:System.Web.UI.Design.MdbDataFileEditor" />
 
         
 
-         with a property. When the associated property is edited on the design surface, the designer host calls the <see
-         cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
+         with a property. When the associated property is edited on the design surface, the designer host calls the <see cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
 
         
 
-         method. The <see
-         cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
+         method. The <see cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
 
         
 
-         method uses the <see
-         cref="Overload:System.Web.UI.Design.UrlBuilder.BuildUrl" />
+         method uses the <see cref="Overload:System.Web.UI.Design.UrlBuilder.BuildUrl" />
 
         
 
-         method, which in turn displays a user interface for selecting the URL, and then returns the URL that is selected by the user. The <see
-         cref="Overload:System.Web.UI.Design.UrlEditor.GetEditStyle" />
+         method, which in turn displays a user interface for selecting the URL, and then returns the URL that is selected by the user. The <see cref="Overload:System.Web.UI.Design.UrlEditor.GetEditStyle" />
 
         
 
          method indicates the display style of the user interface.</para
       >
       <para
-        >Derive a class from the <see
-         cref="T:System.Web.UI.Design.MdbDataFileEditor" />
+        >Derive a class from the <see cref="T:System.Web.UI.Design.MdbDataFileEditor" />
 
         
 
-         to define a custom editor for an Access database URL property. For example, a derived class can override the <see
-         cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
+         to define a custom editor for an Access database URL property. For example, a derived class can override the <see cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
 
         
 
-         method, and then call the <see
-         cref="Overload:System.Web.UI.Design.UrlBuilder.BuildUrl" />
+         method, and then call the <see cref="Overload:System.Web.UI.Design.UrlBuilder.BuildUrl" />
 
         
 
-         method with a custom <see
-         cref="P:System.Web.UI.Design.MdbDataFileEditor.Filter" />
+         method with a custom <see cref="P:System.Web.UI.Design.MdbDataFileEditor.Filter" />
 
         
 
-         or <see
-         cref="P:System.Web.UI.Design.MdbDataFileEditor.Caption" />
+         or <see cref="P:System.Web.UI.Design.MdbDataFileEditor.Caption" />
 
         
 
@@ -118,8 +103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.MdbDataFileEditor" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.MdbDataFileEditor" />
 
             
 
@@ -142,18 +126,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.MdbDataFileEditor.Caption" />
+            >The <see cref="P:System.Web.UI.Design.MdbDataFileEditor.Caption" />
 
             
 
-             string is used by the <see
-             cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
+             string is used by the <see cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
 
             
 
-             method when calling the <see
-             cref="Overload:System.Web.UI.Design.UrlBuilder.BuildUrl" />
+             method when calling the <see cref="Overload:System.Web.UI.Design.UrlBuilder.BuildUrl" />
 
             
 
@@ -180,39 +161,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.MdbDataFileEditor.Filter" />
+            >The <see cref="P:System.Web.UI.Design.MdbDataFileEditor.Filter" />
 
             
 
-             property is used by the <see
-             cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
+             property is used by the <see cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
 
             
 
-             method when calling the <see
-             cref="Overload:System.Web.UI.Design.UrlBuilder.BuildUrl" />
+             method when calling the <see cref="Overload:System.Web.UI.Design.UrlBuilder.BuildUrl" />
 
             
 
              method, which displays the URL selection dialog box to the user at design time.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.MdbDataFileEditor.Filter" />
+            >The <see cref="P:System.Web.UI.Design.MdbDataFileEditor.Filter" />
 
             
 
              property default value indicates two URL filters for the dialog box: one for Microsoft Access database files (*.mdb) and another for all files (*.*).</para
           >
           <para
-            >To specify a custom filter string, derive a class from the <see
-             cref="T:System.Web.UI.Design.MdbDataFileEditor" />
+            >To specify a custom filter string, derive a class from the <see cref="T:System.Web.UI.Design.MdbDataFileEditor" />
 
             
 
-             class and override the <see
-             cref="P:System.Web.UI.Design.MdbDataFileEditor.Filter" />
+             class and override the <see cref="P:System.Web.UI.Design.MdbDataFileEditor.Filter" />
 
             
 

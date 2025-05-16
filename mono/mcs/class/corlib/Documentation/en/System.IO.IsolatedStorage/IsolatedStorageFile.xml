@@ -34,16 +34,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This object corresponds to a specific isolated storage scope, where files represented by <see
-         cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+        >This object corresponds to a specific isolated storage scope, where files represented by <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
 
         
 
          objects exist. Applications can use isolated storage to save data in their own isolated portion of the file system, without having to specify a particular path within the file system. Since isolated stores are scoped to particular assemblies, most other managed code will not be able to access your code's data (highly trusted managed code and administration tools can access stores from other assemblies). Unmanaged code can access any isolated stores. </para
       >
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="aff939d7-9e49-46f2-a8cd-938d3020e94e">Isolated Storage</a>
         </format>
 
@@ -54,7 +52,9 @@
       <block subset="none" type="note">
         <para
           >Isolated storage is not available for win8_appname_long apps. Instead, use the application data classes in the Windows.Storage namespaces included in the wrt API to store local data and files. For more information, see <see
-           cref="http://go.microsoft.com/fwlink/?LinkId=229175">Application data</see>
+            cref="http://go.microsoft.com/fwlink/?LinkId=229175"
+            >Application data</see
+          >
 
           
 
@@ -113,18 +113,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Closes a store previously opened with <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetStore(System.IO.IsolatedStorage.IsolatedStorageScope,System.Type,System.Type)" />
+            >Closes a store previously opened with <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetStore(System.IO.IsolatedStorage.IsolatedStorageScope,System.Type,System.Type)" />
 
             
 
-            , <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForAssembly" />
+            , <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForAssembly" />
 
             
 
-            , or <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForDomain" />
+            , or <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForDomain" />
 
             
 
@@ -166,13 +163,11 @@
 
             
 
-             and <paramref
-             name="destinationFileName" />
+             and <paramref name="destinationFileName" />
 
             
 
-             must specify different file names. Use the <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.CopyFile(System.String,System.String,System.Boolean)" />
+             must specify different file names. Use the <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.CopyFile(System.String,System.String,System.Boolean)" />
 
             
 
@@ -184,14 +179,22 @@
           <para>Copies an existing file to a new file.  </para>
         </summary>
         <param name="sourceFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the file to copy.</param
         >
         <param name="destinationFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -233,13 +236,11 @@
 
             
 
-             and <paramref
-             name="destinationFileName" />
+             and <paramref name="destinationFileName" />
 
             
 
-             can have the same file name if <paramref
-             name="overwrite" />
+             can have the same file name if <paramref name="overwrite" />
 
             
 
@@ -251,21 +252,33 @@
           <para>Copies an existing file to a new file, and optionally overwrites an existing file.</para>
         </summary>
         <param name="sourceFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the file to copy.</param
         >
         <param name="destinationFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the destination file. This cannot be a directory.</param
         >
         <param name="overwrite">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -295,13 +308,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The created directory initially contains no files. If the directory already exists, the <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.CreateDirectory(System.String)" />
+            >The created directory initially contains no files. If the directory already exists, the <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.CreateDirectory(System.String)" />
 
             
 
-             method returns without creating a new directory. The <format
-             type="text/html">
+             method returns without creating a new directory. The <format type="text/html">
               <a href="2CA4D2A4-809B-4F00-BC08-BF4A64D3A5C3"
                 >[&lt;topic://cpconcreatingfilesdirectories&gt;]</a
               >
@@ -309,8 +320,7 @@
 
             
 
-             example demonstrates the use of the <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.CreateDirectory(System.String)" />
+             example demonstrates the use of the <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.CreateDirectory(System.String)" />
 
             
 
@@ -322,7 +332,11 @@
           <para>Creates a directory in the isolated storage scope.</para>
         </summary>
         <param name="dir">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -358,8 +372,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is equivalent to using the <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFileStream.#ctor(System.String,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,System.IO.IsolatedStorage.IsolatedStorageFile)" />
+            >This method is equivalent to using the <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFileStream.#ctor(System.String,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,System.IO.IsolatedStorage.IsolatedStorageFile)" />
 
             
 
@@ -375,7 +388,11 @@
           <para>A new isolated storage file.</para>
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -410,8 +427,7 @@
           <para>Represents the total usage of all files and directories within the isolated storage scope.</para>
           <para>The current size cannot be accurately determined for stores that are participating in a roaming user profile. Because roaming profiles are often cached on multiple client machines and later synchronized with a server, quotas cannot be enforced for such stores and the current size is not reported.</para>
           <para
-            >The <format
-             type="text/html">
+            >The <format type="text/html">
               <a href="E35D4535-3732-421E-B1A3-37412E036145"
                 >[&lt;topic://cpconanticipatingoutofspaceconditions&gt;]</a
               >
@@ -419,8 +435,7 @@
 
             
 
-             example demonstrates the use of the <see
-             cref="P:System.IO.IsolatedStorage.IsolatedStorageFile.CurrentSize" />
+             example demonstrates the use of the <see cref="P:System.IO.IsolatedStorage.IsolatedStorageFile.CurrentSize" />
 
             
 
@@ -456,8 +471,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A directory must be empty before it is deleted. The deleted directory cannot be recovered once deleted.</para>
           <para
-            >The <format
-             type="text/html">
+            >The <format type="text/html">
               <a href="8FCC0DEA-435B-4D40-BA4D-BA056265C202"
                 >[&lt;topic://cpcondeletingfilesdirectories&gt;]</a
               >
@@ -465,8 +479,7 @@
 
             
 
-             example demonstrates the use of the <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.DeleteDirectory(System.String)" />
+             example demonstrates the use of the <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.DeleteDirectory(System.String)" />
 
             
 
@@ -478,7 +491,11 @@
           <para>Deletes a directory in the isolated storage scope.</para>
         </summary>
         <param name="dir">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -509,8 +526,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The deleted file cannot be recovered once deleted.</para>
           <para
-            >The <format
-             type="text/html">
+            >The <format type="text/html">
               <a href="8FCC0DEA-435B-4D40-BA4D-BA056265C202"
                 >[&lt;topic://cpcondeletingfilesdirectories&gt;]</a
               >
@@ -518,8 +534,7 @@
 
             
 
-             example demonstrates the use of the <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.DeleteFile(System.String)" />
+             example demonstrates the use of the <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.DeleteFile(System.String)" />
 
             
 
@@ -531,7 +546,11 @@
           <para>Deletes a file in the isolated storage scope.</para>
         </summary>
         <param name="file">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -569,8 +588,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="path" />
+            >true if <paramref name="path" />
 
             
 
@@ -578,7 +596,11 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -606,23 +628,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call Dispose when you are finished using the <see
-             cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+            >Call Dispose when you are finished using the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
             
 
-            . The Dispose method leaves the <see
-             cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+            . The Dispose method leaves the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
             
 
-             in an unusable state. After calling Dispose, you must release all references to the <see
-             cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+             in an unusable state. After calling Dispose, you must release all references to the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
             
 
-             so the garbage collector can reclaim the memory that <see
-             cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+             so the garbage collector can reclaim the memory that <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
             
 
@@ -630,23 +648,19 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call Dispose before you release your last reference to the <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+              >Always call Dispose before you release your last reference to the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
               
 
-              . Otherwise, the resources the <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+              . Otherwise, the resources the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
 
               
 
-               is using will not be freed until garbage collection calls the <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+               is using will not be freed until garbage collection calls the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
 
               
 
-               object's <see
-               cref="M:System.Object.Finalize" />
+               object's <see cref="M:System.Object.Finalize" />
 
               
 
@@ -657,8 +671,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+            >Releases all resources used by the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
             
 
@@ -697,8 +710,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="path" />
+            >true if <paramref name="path" />
 
             
 
@@ -706,7 +718,11 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -770,7 +786,11 @@
           <para>The creation date and time for the specified file or directory. This value is expressed in local time.</para>
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -801,8 +821,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is equivalent to using the <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetDirectoryNames(System.String)" />
+            >This method is equivalent to using the <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetDirectoryNames(System.String)" />
 
             
 
@@ -844,42 +863,36 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Wildcard characters must only be in the final element of a <paramref
-             name="searchPattern" />
+            >Wildcard characters must only be in the final element of a <paramref name="searchPattern" />
 
             
 
             . For instance, "directory1/*etc*" is a valid search string, but "*etc*/directory" is not.</para
           >
           <para
-            >The <paramref
-             name="searchPattern" />
+            >The <paramref name="searchPattern" />
 
             
 
-             "Project\Data*" will give all subdirectories of Project beginning with Data in the isolated storage scope. The <paramref
-             name="searchPattern" />
+             "Project\Data*" will give all subdirectories of Project beginning with Data in the isolated storage scope. The <paramref name="searchPattern" />
 
             
 
-             "*" will return all directories located in the root. For complete description of search string criteria, see the <see
-             cref="T:System.IO.Directory" />
+             "*" will return all directories located in the root. For complete description of search string criteria, see the <see cref="T:System.IO.Directory" />
 
             
 
              class.</para
           >
           <para
-            >For information on getting file names, see the <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetFileNames(System.String)" />
+            >For information on getting file names, see the <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetFileNames(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >The <format
-             type="text/html">
+            >The <format type="text/html">
               <a href="EB28458A-6161-4E7A-9ADA-30EF93761B5C"
                 >[&lt;topic://cpconfindingexistingfilesdirectories&gt;]</a
               >
@@ -887,8 +900,7 @@
 
             
 
-             example demonstrates the use of the <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetDirectoryNames(System.String)" />
+             example demonstrates the use of the <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetDirectoryNames(System.String)" />
 
             
 
@@ -902,8 +914,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of the relative paths of directories in the isolated storage scope that match <paramref
-             name="searchPattern" />
+            >An array of the relative paths of directories in the isolated storage scope that match <paramref name="searchPattern" />
 
             
 
@@ -911,7 +922,11 @@
           >
         </returns>
         <param name="searchPattern">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -944,8 +959,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <format
-             type="text/html">
+            >The <format type="text/html">
               <a href="0FCF279A-F241-48F0-8034-2E3D331F1FCB"
                 >[&lt;topic://cpconenumeratingstores&gt;]</a
               >
@@ -953,8 +967,7 @@
 
             
 
-             example demonstrates the use of the <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetEnumerator(System.IO.IsolatedStorage.IsolatedStorageScope)" />
+             example demonstrates the use of the <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetEnumerator(System.IO.IsolatedStorage.IsolatedStorageScope)" />
 
             
 
@@ -964,8 +977,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the enumerator for the <see
-             cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+            >Gets the enumerator for the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
             
 
@@ -975,8 +987,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Enumerator for the <see
-             cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+            >Enumerator for the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
             
 
@@ -984,12 +995,15 @@
           >
         </returns>
         <param name="scope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Represents the <see
-           cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" />
+          Represents the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" />
 
           
 
@@ -1020,8 +1034,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is equivalent to using the <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetFileNames(System.String)" />
+            >This method is equivalent to using the <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetFileNames(System.String)" />
 
             
 
@@ -1060,29 +1073,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="searchPattern" />
+            >The <paramref name="searchPattern" />
 
             
 
-             "Project\Data*.txt" will give all ".txt" files beginning with Data in the Project directory of the isolated storage scope. For complete description of search pattern strings, see <see
-             cref="T:System.IO.Directory" />
+             "Project\Data*.txt" will give all ".txt" files beginning with Data in the Project directory of the isolated storage scope. For complete description of search pattern strings, see <see cref="T:System.IO.Directory" />
 
             
 
             .</para
           >
           <para
-            >For information about how to find directory names, see the <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetDirectoryNames(System.String)" />
+            >For information about how to find directory names, see the <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetDirectoryNames(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >The <format
-             type="text/html">
+            >The <format type="text/html">
               <a href="EB28458A-6161-4E7A-9ADA-30EF93761B5C"
                 >[&lt;topic://cpconfindingexistingfilesdirectories&gt;]</a
               >
@@ -1090,8 +1099,7 @@
 
             
 
-             example demonstrates the use of the <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetFileNames(System.String)" />
+             example demonstrates the use of the <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetFileNames(System.String)" />
 
             
 
@@ -1105,8 +1113,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of relative paths of files in the isolated storage scope that match <paramref
-             name="searchPattern" />
+            >An array of relative paths of files in the isolated storage scope that match <paramref name="searchPattern" />
 
             
 
@@ -1114,7 +1121,11 @@
           >
         </returns>
         <param name="searchPattern">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1150,8 +1161,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the file described by <paramref
-             name="path" />
+            >If the file described by <paramref name="path" />
 
             
 
@@ -1167,7 +1177,11 @@
           <para>The date and time that the specified file or directory was last accessed. This value is expressed in local time.</para>
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1203,8 +1217,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the file described by <paramref
-             name="path" />
+            >If the file described by <paramref name="path" />
 
             
 
@@ -1220,7 +1233,11 @@
           <para>The date and time that the specified file or directory was last written to. This value is expressed in local time.</para>
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1353,28 +1370,23 @@
 
               
 
-               will return an <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+               will return an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
               
 
-               object without a quota if the application domain into which the assembly is installed does not have <see
-               cref="T:System.Security.Permissions.IsolatedStorageFilePermission" />
+               object without a quota if the application domain into which the assembly is installed does not have <see cref="T:System.Security.Permissions.IsolatedStorageFilePermission" />
 
               
 
-              . Later attempts to create an <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+              . Later attempts to create an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
               
 
-               object using the <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+               object using the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
               
 
-               object that does not have a quota will fail with an <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
+               object that does not have a quota will fail with an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
 
               
 
@@ -1389,8 +1401,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object corresponding to the <see
-             cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" />
+            >An object corresponding to the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" />
 
             
 
@@ -1424,8 +1435,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called during a store's initialization to determine the isolated storage file permissions that are granted to an assembly. The <see
-             cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
+            >This method is called during a store's initialization to determine the isolated storage file permissions that are granted to an assembly. The <see cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
 
             
 
@@ -1435,8 +1445,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Security.Permissions.IsolatedStoragePermission" />
+            >Returns the <see cref="T:System.Security.Permissions.IsolatedStoragePermission" />
 
             
 
@@ -1446,13 +1455,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that represents the <see
-             cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+            >An object that represents the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
             
 
-             object in the supplied permission set. The value is null if there is no permission of type <see
-             cref="T:System.Security.Permissions.IsolatedStorageFilePermission" />
+             object in the supplied permission set. The value is null if there is no permission of type <see cref="T:System.Security.Permissions.IsolatedStorageFilePermission" />
 
             
 
@@ -1460,7 +1467,11 @@
           >
         </returns>
         <param name="ps">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1495,43 +1506,35 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >If the <paramref
-               name="scope" />
+              >If the <paramref name="scope" />
 
               
 
-               parameter is <see
-               cref="F:System.IO.IsolatedStorage.IsolatedStorageScope.Application" />
+               parameter is <see cref="F:System.IO.IsolatedStorage.IsolatedStorageScope.Application" />
 
               
 
-               and the application domain in which the assembly is installed does not have <see
-               cref="T:System.Security.Permissions.IsolatedStorageFilePermission" />
+               and the application domain in which the assembly is installed does not have <see cref="T:System.Security.Permissions.IsolatedStorageFilePermission" />
 
               
 
-              , the <see
-               cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetStore(System.IO.IsolatedStorage.IsolatedStorageScope,System.Type,System.Type)" />
+              , the <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetStore(System.IO.IsolatedStorage.IsolatedStorageScope,System.Type,System.Type)" />
 
               
 
-               method will return an <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+               method will return an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
               
 
-               object without a quota. Later attempts to create an <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+               object without a quota. Later attempts to create an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
               
 
-               object using the <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+               object using the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
               
 
-               object that does not have a quota will fail with an <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
+               object that does not have a quota will fail with an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
 
               
 
@@ -1548,14 +1551,22 @@
           <para>An object that represents the parameters.</para>
         </returns>
         <param name="scope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A bitwise combination of the enumeration values. </param
         >
         <param name="applicationIdentity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1590,43 +1601,35 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >If the <paramref
-               name="scope" />
+              >If the <paramref name="scope" />
 
               
 
-               parameter is <see
-               cref="F:System.IO.IsolatedStorage.IsolatedStorageScope.Application" />
+               parameter is <see cref="F:System.IO.IsolatedStorage.IsolatedStorageScope.Application" />
 
               
 
-               and the application domain in which the assembly is installed does not have <see
-               cref="T:System.Security.Permissions.IsolatedStorageFilePermission" />
+               and the application domain in which the assembly is installed does not have <see cref="T:System.Security.Permissions.IsolatedStorageFilePermission" />
 
               
 
-              , the <see
-               cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetStore(System.IO.IsolatedStorage.IsolatedStorageScope,System.Type,System.Type)" />
+              , the <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetStore(System.IO.IsolatedStorage.IsolatedStorageScope,System.Type,System.Type)" />
 
               
 
-               method will return an <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+               method will return an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
               
 
-               object without a quota. Later attempts to create an <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+               object without a quota. Later attempts to create an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
               
 
-               object using the <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+               object using the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
               
 
-               object that does not have a quota will fail with an <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
+               object that does not have a quota will fail with an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
 
               
 
@@ -1643,14 +1646,22 @@
           <para>An object that represents the parameters.</para>
         </returns>
         <param name="scope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A bitwise combination of the enumeration values. </param
         >
         <param name="applicationEvidenceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1687,43 +1698,35 @@
           <para>This form of GetStore is most useful for administrative code that needs to open a store as if it were another assembly. The store is opened for the evidence provided and not for the currently executing assembly.</para>
           <block subset="none" type="note">
             <para
-              >If the <paramref
-               name="scope" />
+              >If the <paramref name="scope" />
 
               
 
-               parameter is <see
-               cref="F:System.IO.IsolatedStorage.IsolatedStorageScope.Domain" />
+               parameter is <see cref="F:System.IO.IsolatedStorage.IsolatedStorageScope.Domain" />
 
               
 
-               and the application domain in which the assembly is installed does not have <see
-               cref="T:System.Security.Permissions.IsolatedStorageFilePermission" />
+               and the application domain in which the assembly is installed does not have <see cref="T:System.Security.Permissions.IsolatedStorageFilePermission" />
 
               
 
-              , the <see
-               cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetStore(System.IO.IsolatedStorage.IsolatedStorageScope,System.Type,System.Type)" />
+              , the <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetStore(System.IO.IsolatedStorage.IsolatedStorageScope,System.Type,System.Type)" />
 
               
 
-               method will return an <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+               method will return an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
               
 
-               object without a quota. Later attempts to create an <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+               object without a quota. Later attempts to create an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
               
 
-               object using the <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+               object using the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
               
 
-               object that does not have a quota will fail with an <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
+               object that does not have a quota will fail with an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
 
               
 
@@ -1740,21 +1743,33 @@
           <para>An object that represents the parameters.</para>
         </returns>
         <param name="scope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A bitwise combination of the enumeration values. </param
         >
         <param name="domainIdentity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object that contains evidence for the application domain identity. </param
         >
         <param name="assemblyIdentity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1789,16 +1804,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is the overload of <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetStore(System.IO.IsolatedStorage.IsolatedStorageScope,System.Type,System.Type)" />
+            >This is the overload of <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetStore(System.IO.IsolatedStorage.IsolatedStorageScope,System.Type,System.Type)" />
 
             
 
              most likely to be called from application code.</para
           >
           <para
-            >This overload of <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetStore(System.IO.IsolatedStorage.IsolatedStorageScope,System.Type,System.Type)" />
+            >This overload of <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetStore(System.IO.IsolatedStorage.IsolatedStorageScope,System.Type,System.Type)" />
 
             
 
@@ -1806,43 +1819,35 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <paramref
-               name="scope" />
+              >If the <paramref name="scope" />
 
               
 
-               parameter is <see
-               cref="F:System.IO.IsolatedStorage.IsolatedStorageScope.Domain" />
+               parameter is <see cref="F:System.IO.IsolatedStorage.IsolatedStorageScope.Domain" />
 
               
 
-               and the application domain in which the assembly is installed does not have <see
-               cref="T:System.Security.Permissions.IsolatedStorageFilePermission" />
+               and the application domain in which the assembly is installed does not have <see cref="T:System.Security.Permissions.IsolatedStorageFilePermission" />
 
               
 
-              , the <see
-               cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetStore(System.IO.IsolatedStorage.IsolatedStorageScope,System.Type,System.Type)" />
+              , the <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetStore(System.IO.IsolatedStorage.IsolatedStorageScope,System.Type,System.Type)" />
 
               
 
-               method will return an <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+               method will return an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
               
 
-               object without a quota. Later attempts to create an <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+               object without a quota. Later attempts to create an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
               
 
-               object using the <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+               object using the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
               
 
-               object that does not have a quota will fail with an <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
+               object that does not have a quota will fail with an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
 
               
 
@@ -1859,51 +1864,57 @@
           <para>An object that represents the parameters.</para>
         </returns>
         <param name="scope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A bitwise combination of the enumeration values. </param
         >
         <param name="domainEvidenceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of the <see
-           cref="T:System.Security.Policy.Evidence" />
+          The type of the <see cref="T:System.Security.Policy.Evidence" />
 
           
 
-           that you can chose from the list of <see
-           cref="T:System.Security.Policy.Evidence" />
+           that you can chose from the list of <see cref="T:System.Security.Policy.Evidence" />
 
           
 
-           present in the domain of the calling application. null lets the <see
-           cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
+           present in the domain of the calling application. null lets the <see cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
 
           
 
            object choose the evidence. </param
         >
         <param name="assemblyEvidenceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of the <see
-           cref="T:System.Security.Policy.Evidence" />
+          The type of the <see cref="T:System.Security.Policy.Evidence" />
 
           
 
-           that you can chose from the list of <see
-           cref="T:System.Security.Policy.Evidence" />
+           that you can chose from the list of <see cref="T:System.Security.Policy.Evidence" />
 
           
 
-           present in the domain of the calling application. null lets the <see
-           cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
+           present in the domain of the calling application. null lets the <see cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
 
           
 
@@ -1941,43 +1952,35 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >If the <paramref
-               name="scope" />
+              >If the <paramref name="scope" />
 
               
 
-               parameter is <see
-               cref="F:System.IO.IsolatedStorage.IsolatedStorageScope.Domain" />
+               parameter is <see cref="F:System.IO.IsolatedStorage.IsolatedStorageScope.Domain" />
 
               
 
-               and the application domain in which the assembly is installed does not have <see
-               cref="T:System.Security.Permissions.IsolatedStorageFilePermission" />
+               and the application domain in which the assembly is installed does not have <see cref="T:System.Security.Permissions.IsolatedStorageFilePermission" />
 
               
 
-              , the <see
-               cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetStore(System.IO.IsolatedStorage.IsolatedStorageScope,System.Type,System.Type)" />
+              , the <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.GetStore(System.IO.IsolatedStorage.IsolatedStorageScope,System.Type,System.Type)" />
 
               
 
-               method will return an <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+               method will return an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
               
 
-               object without a quota. Later attempts to create an <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+               object without a quota. Later attempts to create an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
               
 
-               object using the <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+               object using the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
               
 
-               object that does not have a quota will fail with an <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
+               object that does not have a quota will fail with an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
 
               
 
@@ -1994,35 +1997,55 @@
           <para>An object that represents the parameters.</para>
         </returns>
         <param name="scope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A bitwise combination of the enumeration values. </param
         >
         <param name="domainEvidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object that contains the application domain identity. </param
         >
         <param name="domainEvidenceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The identity type to choose from the application domain evidence. </param
         >
         <param name="assemblyEvidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object that contains the code assembly identity. </param
         >
         <param name="assemblyEvidenceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2053,8 +2076,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >All assemblies associated with an application use the same isolated store when using this method. This method can be used only when the application identity can be determined - for example, when the application is published through ClickOnce deployment or is a Silverlight-based application. If you attempt to use this method outside a ClickOnce or Silverlight-based application, you will receive an <see
-             cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
+            >All assemblies associated with an application use the same isolated store when using this method. This method can be used only when the application identity can be determined - for example, when the application is published through ClickOnce deployment or is a Silverlight-based application. If you attempt to use this method outside a ClickOnce or Silverlight-based application, you will receive an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
 
             
 
@@ -2069,8 +2091,7 @@
           >
           <para>code reference: System.IO.IsolatedStorage.IsolatedStorage#21</para>
           <para
-            >In this code, the <paramref
-             name="applicationIdentity" />
+            >In this code, the <paramref name="applicationIdentity" />
 
             
 
@@ -2170,28 +2191,23 @@
 
               
 
-               will return an <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+               will return an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
               
 
-               object without a quota if the application domain in which the assembly is installed does not have <see
-               cref="T:System.Security.Permissions.IsolatedStorageFilePermission" />
+               object without a quota if the application domain in which the assembly is installed does not have <see cref="T:System.Security.Permissions.IsolatedStorageFilePermission" />
 
               
 
-              . Later attempts to create an <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+              . Later attempts to create an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
               
 
-               object using the <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+               object using the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
               
 
-               object that does not have a quota will fail with an <see
-               cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
+               object that does not have a quota will fail with an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
 
               
 
@@ -2206,8 +2222,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object corresponding to the <see
-             cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" />
+            >An object corresponding to the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" />
 
             
 
@@ -2281,60 +2296,51 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.IncreaseQuotaTo(System.Int64)" />
+            >The <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.IncreaseQuotaTo(System.Int64)" />
 
             
 
              method enables an application to explicitly request a larger quota size in bytes. The new quota size must not be smaller than the current quota size, because only quota increases are allowed.</para
           >
           <para
-            >Whenever the <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.IncreaseQuotaTo(System.Int64)" />
+            >Whenever the <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.IncreaseQuotaTo(System.Int64)" />
 
             
 
-             method is called, isolated storage calls the <see
-             cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" />
+             method is called, isolated storage calls the <see cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" />
 
             
 
              method. </para
           >
           <para
-            >You can implement policy decisions by creating a custom <see
-             cref="T:System.AppDomainManager" />
+            >You can implement policy decisions by creating a custom <see cref="T:System.AppDomainManager" />
 
             
 
-             object that overrides the <see
-             cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" />
+             object that overrides the <see cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" />
 
             
 
-             method so that the object can perform policy decisions based on a <see
-             cref="T:System.IO.IsolatedStorage.IsolatedStorageSecurityState" />
+             method so that the object can perform policy decisions based on a <see cref="T:System.IO.IsolatedStorage.IsolatedStorageSecurityState" />
 
             
 
              object.</para
           >
           <para
-            >If there is no custom <see
-             cref="T:System.AppDomainManager" />
+            >If there is no custom <see cref="T:System.AppDomainManager" />
 
             
 
-             object, the quota increase request is denied, because the default implementation for <see
-             cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" />
+             object, the quota increase request is denied, because the default implementation for <see cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" />
 
             
 
              returns false.</para
           >
           <para
-            >Currently, none of the hosts in the .NET Framework provide this customization, so <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.IncreaseQuotaTo(System.Int64)" />
+            >Currently, none of the hosts in the .NET Framework provide this customization, so <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.IncreaseQuotaTo(System.Int64)" />
 
             
 
@@ -2350,7 +2356,11 @@
           <para>true if the new quota is accepted; otherwise, false.</para>
         </returns>
         <param name="newQuotaSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2411,8 +2421,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The number of bytes available is constrained by the isolated storage quota set by the administrator. Quota is configured in security policy on the basis of evidence, so the same code can receive a different quota if it is run with different evidence. For example, an application that is run locally and also from a share on an intranet would likely receive different quotas.</para>
           <para
-            >The <format
-             type="text/html">
+            >The <format type="text/html">
               <a href="E35D4535-3732-421E-B1A3-37412E036145"
                 >[&lt;topic://cpconanticipatingoutofspaceconditions&gt;]</a
               >
@@ -2420,8 +2429,7 @@
 
             
 
-             example demonstrates the use of the <see
-             cref="P:System.IO.IsolatedStorage.IsolatedStorageFile.MaximumSize" />
+             example demonstrates the use of the <see cref="P:System.IO.IsolatedStorage.IsolatedStorageFile.MaximumSize" />
 
             
 
@@ -2467,8 +2475,7 @@
 
             
 
-             and <paramref
-             name="destinationFileName" />
+             and <paramref name="destinationFileName" />
 
             
 
@@ -2480,19 +2487,26 @@
           <para>Moves a specified directory and its contents to a new location.</para>
         </summary>
         <param name="sourceDirectoryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the directory to move.</param
         >
         <param name="destinationDirectoryName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The path to the new location for <paramref
-           name="sourceDirectoryName" />
+          The path to the new location for <paramref name="sourceDirectoryName" />
 
           
 
@@ -2529,13 +2543,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method does not throw an exception if <paramref
-             name="sourceFileName" />
+            >This method does not throw an exception if <paramref name="sourceFileName" />
 
             
 
-             and <paramref
-             name="destinationFileName" />
+             and <paramref name="destinationFileName" />
 
             
 
@@ -2547,14 +2559,22 @@
           <para>Moves a specified file to a new location, and optionally lets you specify a new file name.</para>
         </summary>
         <param name="sourceFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the file to move.</param
         >
         <param name="destinationFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2591,8 +2611,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is equivalent to using the <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFileStream.#ctor(System.String,System.IO.FileMode,System.IO.IsolatedStorage.IsolatedStorageFile)" />
+            >This method is equivalent to using the <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFileStream.#ctor(System.String,System.IO.FileMode,System.IO.IsolatedStorage.IsolatedStorageFile)" />
 
             
 
@@ -2608,14 +2627,22 @@
           <para>A file that is opened in the specified mode, with read/write access, and is unshared.</para>
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The relative path of the file within the isolated store.</param
         >
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2653,8 +2680,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is equivalent to using the <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFileStream.#ctor(System.String,System.IO.FileMode,System.IO.FileAccess,System.IO.IsolatedStorage.IsolatedStorageFile)" />
+            >This method is equivalent to using the <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFileStream.#ctor(System.String,System.IO.FileMode,System.IO.FileAccess,System.IO.IsolatedStorage.IsolatedStorageFile)" />
 
             
 
@@ -2670,21 +2696,33 @@
           <para>A file that is opened in the specified mode and access, and is unshared.</para>
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The relative path of the file within the isolated store.</param
         >
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           One of the enumeration values that specifies how to open the file.</param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2723,8 +2761,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is equivalent to using the <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFileStream.#ctor(System.String,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,System.IO.IsolatedStorage.IsolatedStorageFile)" />
+            >This method is equivalent to using the <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFileStream.#ctor(System.String,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,System.IO.IsolatedStorage.IsolatedStorageFile)" />
 
             
 
@@ -2740,33 +2777,48 @@
           <para>A file that is opened in the specified mode and access, and with the specified sharing options.</para>
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The relative path of the file within the isolated store.</param
         >
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           One of the enumeration values that specifies how to open or create the file.</param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           One of the enumeration values that specifies whether the file will be opened with read, write, or read/write access</param
         >
         <param name="share">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of enumeration values that specify the type of access other <see
-           cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+          A bitwise combination of enumeration values that specify the type of access other <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
 
           
 
@@ -2821,8 +2873,7 @@
             <para>This method irrevocably removes the entire scope and all contained directories and files.</para>
           </block>
           <para
-            >If any of the directories or files in the store are in use, the removal attempt for the store fails and the store is marked for removal. Any subsequent attempts to modify the store throw an <see
-             cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
+            >If any of the directories or files in the store are in use, the removal attempt for the store fails and the store is marked for removal. Any subsequent attempts to modify the store throw an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
 
             
 
@@ -2863,8 +2914,7 @@
             <para>This method irrevocably removes the entire scope and all contained directories and files.</para>
           </block>
           <para
-            >If any of the directories or files in the store are in use, the removal attempt for the store fails and the store is marked for removal. Any subsequent attempts to modify the store throw an <see
-             cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
+            >If any of the directories or files in the store are in use, the removal attempt for the store fails and the store is marked for removal. Any subsequent attempts to modify the store throw an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
 
             
 
@@ -2876,12 +2926,15 @@
           <para>Removes the specified isolated storage scope for all identities.</para>
         </summary>
         <param name="scope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" />
+          A bitwise combination of the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" />
 
           
 

@@ -2,9 +2,7 @@
 <clause number="20.4" title="Interface implementations">
   <paragraph
     >Interfaces may be implemented by classes and structs. To indicate that a class or struct implements an interface, the interface identifier is included in the base class list of the class or struct. <example
-
-      >[Example: For example: <code_example
-      >
+      >[Example: For example: <code_example>
         <![CDATA[
 interface ICloneable  
 {  
@@ -29,9 +27,7 @@ class ListEntry: ICloneable, IComparable
   </paragraph>
   <paragraph
     >A class or struct that implements an interface also implicitly implements all of the interface's base interfaces. This is true even if the class or struct doesn't explicitly list all base interfaces in the base class list. <example
-
-      >[Example: For example: <code_example
-      >
+      >[Example: For example: <code_example>
         <![CDATA[
 interface IControl  
 {  

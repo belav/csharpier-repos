@@ -18,10 +18,8 @@
   <Docs>
     <summary>Represents information about Unix volumes.</summary>
     <remarks>
-      <para
-        >
-        The <see
-         cref="T:Mono.Unix.UnixDriveInfo" />
+      <para>
+        The <see cref="T:Mono.Unix.UnixDriveInfo" />
 
         
 
@@ -32,17 +30,14 @@
       >
       <list type="bullet">
         <item>
-          <term
-            >
+          <term>
           Total size and free disk space
-          (<see
-             cref="P:Mono.Unix.UnixDriveInfo.TotalSize" />
+          (<see cref="P:Mono.Unix.UnixDriveInfo.TotalSize" />
 
             
 
              and
-          <see
-             cref="P:Mono.Unix.UnixDriveInfo.TotalFreeSpace" />
+          <see cref="P:Mono.Unix.UnixDriveInfo.TotalFreeSpace" />
 
             
 
@@ -51,17 +46,14 @@
           >
         </item>
         <item>
-          <term
-            >
+          <term>
           Querying of all availble disk drives, 
-          <see
-             cref="M:Mono.Unix.UnixDriveInfo.GetDrives" />
+          <see cref="M:Mono.Unix.UnixDriveInfo.GetDrives" />
 
             
 
             , 
-          visible through <c
-            >/etc/fstab</c>
+          visible through <c>/etc/fstab</c>
 
             
 
@@ -76,30 +68,27 @@
         running on the system or because of other actions being performed
         within the current process.
       </para>
-      <para
-        >
-        The only gurantee is that the information provided <i
-        >was</i>
+      <para>
+        The only gurantee is that the information provided <i>was</i>
 
         
 
          valid at
-        some point in time, <i
-        >or</i>
+        some point in time, <i>or</i>
 
         
 
          an 
-        <see
-         cref="T:System.InvalidOperationException" />
+        <see cref="T:System.InvalidOperationException" />
 
         
 
          will be thrown
         when attempting to access the provided information.
         <block
-         subset="none" type="note"
-          >
+          subset="none"
+          type="note"
+        >
           To clarify, most properties will attempt to refresh the information
           before returning it so that the information retrieved is as
           up-to-date as possible, but it cannot take everything into
@@ -130,10 +119,8 @@
         <Parameter Name="mountPoint" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="mountPoint"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="mountPoint">
+          A <see cref="T:System.String" />
 
           
 
@@ -141,10 +128,8 @@
           get information about.
         </param
         >
-        <summary
-          >
-          Creates a <see
-           cref="T:Mono.Unix.UnixDriveInfo" />
+        <summary>
+          Creates a <see cref="T:Mono.Unix.UnixDriveInfo" />
 
           
 
@@ -166,8 +151,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -191,10 +175,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the available free space for the drive.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.Int64" />
+        <value>
+          A <see cref="T:System.Int64" />
 
           
 
@@ -203,23 +185,19 @@
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             The available free space is the space that normal users are able
             to write to (in the absense of file system quotas which may
             further limit how much disk space users can fill).  The drive may
-            have some space reserved for the super-user (<c
-            >root</c>
+            have some space reserved for the super-user (<c>root</c>
 
             
 
             ).
           </para
           >
-          <para
-            >
-            Use <see
-             cref="P:Mono.Unix.UnixDriveInfo.TotalFreeSpace" />
+          <para>
+            Use <see cref="P:Mono.Unix.UnixDriveInfo.TotalFreeSpace" />
 
             
 
@@ -228,8 +206,7 @@
           </para
           >
         </remarks>
-        <exception cref="T:System.InvalidOperationException"
-          >
+        <exception cref="T:System.InvalidOperationException">
           There was an error retrieving the total disk space.  
           The volume may not be mounted.
         </exception
@@ -249,21 +226,17 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
+        <summary>
           Retrieves the file system format of the 
-          <paramref
-           name="mountPoint" />
+          <paramref name="mountPoint" />
 
           
 
            volume.
         </summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.String" />
+        <value>
+          A <see cref="T:System.String" />
 
           
 
@@ -292,10 +265,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the drive type.</summary>
-        <value
-          >
-          A <see
-           cref="T:Mono.Unix.UnixDriveType" />
+        <value>
+          A <see cref="T:Mono.Unix.UnixDriveType" />
 
           
 
@@ -303,11 +274,9 @@
           drive this mount point is.
         </value
         >
-        <remarks
-          >
+        <remarks>
           Currently, this always returns 
-          <see
-           cref="F:Mono.Unix.UnixDriveType.Unknown" />
+          <see cref="F:Mono.Unix.UnixDriveType.Unknown" />
 
           
 
@@ -337,23 +306,19 @@
       <Parameters />
       <Docs>
         <summary
-          >Gets information about all drives listed in <c
-          >/etc/fstab</c>
+          >Gets information about all drives listed in <c>/etc/fstab</c>
 
           
 
           .</summary
         >
-        <returns
-          >
-          A <see
-           cref="T:Mono.Unix.UnixDriveInfo" />
+        <returns>
+          A <see cref="T:Mono.Unix.UnixDriveInfo" />
 
           
 
            array containing all
-          drives listed in <c
-          >/etc/fstab</c>
+          drives listed in <c>/etc/fstab</c>
 
           
 
@@ -361,28 +326,23 @@
         </returns
         >
         <remarks>
-          <para
-            >
-            This method only <i
-            >conceptually</i>
+          <para>
+            This method only <i>conceptually</i>
 
             
 
-             reads <c
-            >/etc/fstab</c>
+             reads <c>/etc/fstab</c>
 
             
 
             ;
             it actually uses the corresponding 
-            <see
-             cref="T:Mono.Unix.Native.Syscall" />
+            <see cref="T:Mono.Unix.Native.Syscall" />
 
             
 
              APIs, which may or may 
-            not actually read <c
-            >/etc/fstab</c>
+            not actually read <c>/etc/fstab</c>
 
             
 
@@ -390,17 +350,14 @@
             documentation).
           </para
           >
-          <para
-            >
-            This method does not return <c
-            >/etc/fstab</c>
+          <para>
+            This method does not return <c>/etc/fstab</c>
 
             
 
              entries which do not
             correspond to actual mount points.  
-            <see
-             cref="F:Mono.Unix.Native.Fstab.fs_file" />
+            <see cref="F:Mono.Unix.Native.Fstab.fs_file" />
 
             
 
@@ -409,11 +366,9 @@
           </para
           >
         </remarks>
-        <exception cref="T:System.IO.IOException"
-          >
+        <exception cref="T:System.IO.IOException">
           There was an error calling 
-          <see
-           cref="M:Mono.Unix.Native.Syscall.setfsent" />
+          <see cref="M:Mono.Unix.Native.Syscall.setfsent" />
 
           
 
@@ -447,26 +402,21 @@
         <Parameter Name="specialFile" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="specialFile"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="specialFile">
+          A <see cref="T:System.String" />
 
           
 
            containing the "special file"
-          (block device, generally the first field in <c
-          >/etc/fstab</c>
+          (block device, generally the first field in <c>/etc/fstab</c>
 
           
 
           ).
         </param
         >
-        <summary
-          >
-          Creates a <see
-           cref="T:Mono.Unix.UnixDriveInfo" />
+        <summary>
+          Creates a <see cref="T:Mono.Unix.UnixDriveInfo" />
 
           
 
@@ -474,10 +424,8 @@
           containing information about the specified block device name.
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:Mono.Unix.UnixDriveInfo" />
+        <returns>
+          A <see cref="T:Mono.Unix.UnixDriveInfo" />
 
           
 
@@ -502,10 +450,8 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
-          Returns a <see
-           cref="T:System.Boolean" />
+        <summary>
+          Returns a <see cref="T:System.Boolean" />
 
           
 
@@ -513,10 +459,8 @@
           specified mount point is connected and queryable.
         </summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.Boolean" />
+        <value>
+          A <see cref="T:System.Boolean" />
 
           
 
@@ -528,17 +472,14 @@
           <para>
             This property generates no exceptions.
           </para>
-          <para
-            >
-            If this property returns <see
-             langword="true" />
+          <para>
+            If this property returns <see langword="true" />
 
             
 
             , then the other
             properties should not generate
-            <see
-             cref="T:System.InvalidOperationException" />
+            <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -562,10 +503,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the maximum filename length.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.Int64" />
+        <value>
+          A <see cref="T:System.Int64" />
 
           
 
@@ -575,26 +514,22 @@
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             The operating system does not specify an encoding for filenames,
             it just stores the bytes given to it.  Since 
-            <see
-             cref="T:System.String" />
+            <see cref="T:System.String" />
 
             
 
              is a UTF-16 string encoding, each
             character may require more than one byte to store in the
             filesystem.  Consequently the maximum filename length can
-            <i
-            >not</i>
+            <i>not</i>
 
             
 
              be directly compared against
-            <see
-             cref="P:System.String.Length" />
+            <see cref="P:System.String.Length" />
 
             
 
@@ -602,8 +537,7 @@
           </para
           >
         </remarks>
-        <exception cref="T:System.InvalidOperationException"
-          >
+        <exception cref="T:System.InvalidOperationException">
           There was an error retrieving the maximum filename length.
           The volume may not be mounted.
         </exception
@@ -624,10 +558,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the mount point.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.String" />
+        <value>
+          A <see cref="T:System.String" />
 
           
 
@@ -659,10 +591,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets information about the mount point directory.</summary>
-        <value
-          >
-          A <see
-           cref="T:Mono.Unix.UnixDirectoryInfo" />
+        <value>
+          A <see cref="T:Mono.Unix.UnixDirectoryInfo" />
 
           
 
@@ -710,10 +640,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the total free space on the volume.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.Int64" />
+        <value>
+          A <see cref="T:System.Int64" />
 
           
 
@@ -722,23 +650,19 @@
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             The total free space includes all the free space on the Unix
             volume, and may include space the normal users are not able to
             write to, either because of disk quotas or because space is
-            reserved for the super-user (<c
-            >root</c>
+            reserved for the super-user (<c>root</c>
 
             
 
             ).
           </para
           >
-          <para
-            >
-            Use <see
-             cref="P:Mono.Unix.UnixDriveInfo.AvailableFreeSpace" />
+          <para>
+            Use <see cref="P:Mono.Unix.UnixDriveInfo.AvailableFreeSpace" />
 
             
 
@@ -748,8 +672,7 @@
           </para
           >
         </remarks>
-        <exception cref="T:System.InvalidOperationException"
-          >
+        <exception cref="T:System.InvalidOperationException">
           There was an error retrieving the total free space.  
           The volume may not be mounted.
         </exception
@@ -770,10 +693,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the total size of the Unix volume.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.Int64" />
+        <value>
+          A <see cref="T:System.Int64" />
 
           
 
@@ -782,8 +703,7 @@
         </value
         >
         <remarks></remarks>
-        <exception cref="T:System.InvalidOperationException"
-          >
+        <exception cref="T:System.InvalidOperationException">
           There was an error retrieving the total size.  
           The volume may not be mounted.
         </exception
@@ -804,10 +724,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the block device name.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.String" />
+        <value>
+          A <see cref="T:System.String" />
 
           
 

@@ -1,21 +1,18 @@
 <?xml version="1.0"?>
 <clause number="25.7" title="Stack allocation">
   <paragraph
-    >In an unsafe context, a local variable declaration (<hyperlink
-    >15.5.1</hyperlink>
+    >In an unsafe context, a local variable declaration (<hyperlink>15.5.1</hyperlink>
 
     
 
-    ) may include a stack allocation initializer, which allocates memory from the call stack. <grammar_production
-    >
+    ) may include a stack allocation initializer, which allocates memory from the call stack. <grammar_production>
       <name>
         <non_terminal where="15.5.1">local-variable-initializer</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="14.14">expression</non_terminal>
       </rhs>
       <rhs>
@@ -30,8 +27,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <keyword>stackalloc</keyword>
         <non_terminal where="25.2">unmanaged-type</non_terminal>
         <terminal>[</terminal>
@@ -41,26 +37,27 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >The <non_terminal
-     where="25.2">unmanaged-type</non_terminal>
+    >The <non_terminal where="25.2"
+      >unmanaged-type</non_terminal
+    >
 
     
 
      indicates the type of the items that will be stored in the newly allocated location, and the expression indicates the number of these items. Taken together, these specify the required allocation size. Since the size of a stack allocation cannot be negative, it is a compile-time error to specify the number of items as a <non_terminal
-     where="14.15">constant-expression</non_terminal>
+      where="14.15"
+      >constant-expression</non_terminal
+    >
 
     
 
      that evaluates to a negative value. </paragraph
   >
   <paragraph
-    >A stack allocation initializer of the form stackalloc T[E] requires T to be an unmanaged type (<hyperlink
-    >25.2</hyperlink>
+    >A stack allocation initializer of the form stackalloc T[E] requires T to be an unmanaged type (<hyperlink>25.2</hyperlink>
 
     
 
-    ) and E to be an expression of type <keyword
-    >int</keyword>
+    ) and E to be an expression of type <keyword>int</keyword>
 
     
 
@@ -68,8 +65,7 @@
   >
   <paragraph>The content of the newly allocated memory is undefined. </paragraph>
   <paragraph
-    >Stack allocation initializers are not permitted in catch or finally blocks (<hyperlink
-    >15.10</hyperlink>
+    >Stack allocation initializers are not permitted in catch or finally blocks (<hyperlink>15.10</hyperlink>
 
     
 
@@ -80,13 +76,11 @@
 
     
 
-     All  stack-allocated memory blocks created during the execution of a function member are automatically discarded when that function member returns. <note
-    >[Note: This corresponds to the alloca function, an extension commonly found C and C++ implementations. end note]</note>
+     All  stack-allocated memory blocks created during the execution of a function member are automatically discarded when that function member returns. <note>[Note: This corresponds to the alloca function, an extension commonly found C and C++ implementations. end note]</note>
   </paragraph>
   <paragraph>
     <example
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 using System;  
 class Test  

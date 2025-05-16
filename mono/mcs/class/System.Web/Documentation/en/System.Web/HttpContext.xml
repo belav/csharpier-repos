@@ -24,33 +24,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Classes that inherit the <see
-         cref="T:System.Web.IHttpModule" />
+        >Classes that inherit the <see cref="T:System.Web.IHttpModule" />
 
         
 
-         and <see
-         cref="T:System.Web.IHttpHandler" />
+         and <see cref="T:System.Web.IHttpHandler" />
 
         
 
-         interfaces are provided a reference to an <see
-         cref="T:System.Web.HttpContext" />
+         interfaces are provided a reference to an <see cref="T:System.Web.HttpContext" />
 
         
 
-         object for the current HTTP request. The object provides access to the intrinsic <see
-         cref="P:System.Web.HttpContext.Request" />
+         object for the current HTTP request. The object provides access to the intrinsic <see cref="P:System.Web.HttpContext.Request" />
 
         
 
-        , <see
-         cref="P:System.Web.HttpContext.Response" />
+        , <see cref="P:System.Web.HttpContext.Response" />
 
         
 
-        , and <see
-         cref="P:System.Web.HttpContext.Server" />
+        , and <see cref="P:System.Web.HttpContext.Server" />
 
         
 
@@ -78,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.HttpContext" />
+            >Initializes a new instance of the <see cref="T:System.Web.HttpContext" />
 
             
 
@@ -87,12 +80,15 @@
           >
         </summary>
         <param name="wr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.HttpWorkerRequest" />
+          The <see cref="T:System.Web.HttpWorkerRequest" />
 
           
 
@@ -120,8 +116,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.HttpContext" />
+            >Initializes a new instance of the <see cref="T:System.Web.HttpContext" />
 
             
 
@@ -129,24 +124,30 @@
           >
         </summary>
         <param name="request">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.HttpRequest" />
+          The <see cref="T:System.Web.HttpRequest" />
 
           
 
            object for the current HTTP request.</param
         >
         <param name="response">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.HttpResponse" />
+          The <see cref="T:System.Web.HttpResponse" />
 
           
 
@@ -174,12 +175,15 @@
           <para>Adds an exception to the exception collection for the current HTTP request.</para>
         </summary>
         <param name="errorInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Exception" />
+          The <see cref="T:System.Exception" />
 
           
 
@@ -225,8 +229,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.HttpApplicationState" />
+            >Gets the <see cref="T:System.Web.HttpApplicationState" />
 
             
 
@@ -255,8 +258,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Web.HttpApplication" />
+            >Gets or sets the <see cref="T:System.Web.HttpApplication" />
 
             
 
@@ -280,23 +282,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >There is one instance of the <see
-             cref="T:System.Web.Caching.Cache" />
+            >There is one instance of the <see cref="T:System.Web.Caching.Cache" />
 
             
 
-             class per application domain. As a result, the <see
-             cref="T:System.Web.Caching.Cache" />
+             class per application domain. As a result, the <see cref="T:System.Web.Caching.Cache" />
 
             
 
-             object that is returned by the <see
-             cref="P:System.Web.HttpContext.Cache" />
+             object that is returned by the <see cref="P:System.Web.HttpContext.Cache" />
 
             
 
-             property is the <see
-             cref="T:System.Web.Caching.Cache" />
+             property is the <see cref="T:System.Web.Caching.Cache" />
 
             
 
@@ -306,8 +304,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Caching.Cache" />
+            >Gets the <see cref="T:System.Web.Caching.Cache" />
 
             
 
@@ -350,46 +347,39 @@
       </ReturnValue>
       <Docs>
         <value
-          >This property is a gross hack.  It is used by applications that have not passed the <see
-           cref="T:System.Web.HttpContext" />
+          >This property is a gross hack.  It is used by applications that have not passed the <see cref="T:System.Web.HttpContext" />
 
           
 
            class around and require access to it.
 
-<para
-          >
+<para>
 The routine internally uses a technique similar to thread local storage to fetch the value which is slower than having this property available as a parameter to your routines.
 </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is a static property of the <see
-             cref="T:System.Web.HttpContext" />
+            >This property is a static property of the <see cref="T:System.Web.HttpContext" />
 
             
 
-             class. The property stores the <see
-             cref="T:System.Web.HttpContext" />
+             class. The property stores the <see cref="T:System.Web.HttpContext" />
 
             
 
-             instance that applies to the current request. The properties of this instance are the non-static properties of the <see
-             cref="T:System.Web.HttpContext" />
+             instance that applies to the current request. The properties of this instance are the non-static properties of the <see cref="T:System.Web.HttpContext" />
 
             
 
              class. </para
           >
           <para
-            >You can also use the <see
-             cref="P:System.Web.UI.Page.Context" />
+            >You can also use the <see cref="P:System.Web.UI.Page.Context" />
 
             
 
-             property to access the <see
-             cref="T:System.Web.HttpContext" />
+             property to access the <see cref="T:System.Web.HttpContext" />
 
             
 
@@ -399,8 +389,7 @@ The routine internally uses a technique similar to thread local storage to fetch
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Web.HttpContext" />
+            >Gets or sets the <see cref="T:System.Web.HttpContext" />
 
             
 
@@ -430,23 +419,19 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The currently executing handler that is referenced by the <see
-             cref="P:System.Web.HttpContext.CurrentHandler" />
+            >The currently executing handler that is referenced by the <see cref="P:System.Web.HttpContext.CurrentHandler" />
 
             
 
-             property might be different than the handler that is referenced by the <see
-             cref="P:System.Web.HttpContext.Handler" />
+             property might be different than the handler that is referenced by the <see cref="P:System.Web.HttpContext.Handler" />
 
             
 
-             property. This can occur when another handler was requested by using the <see
-             cref="Overload:System.Web.HttpServerUtility.Execute" />
+             property. This can occur when another handler was requested by using the <see cref="Overload:System.Web.HttpServerUtility.Execute" />
 
             
 
-             method or the <see
-             cref="Overload:System.Web.HttpServerUtility.Transfer" />
+             method or the <see cref="Overload:System.Web.HttpServerUtility.Transfer" />
 
             
 
@@ -456,8 +441,7 @@ The routine internally uses a technique similar to thread local storage to fetch
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.IHttpHandler" />
+            >Gets the <see cref="T:System.Web.IHttpHandler" />
 
             
 
@@ -483,36 +467,30 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.HttpContext.CurrentNotification" />
+            >The <see cref="P:System.Web.HttpContext.CurrentNotification" />
 
             
 
-             property requires the integrated pipeline mode in iisver and at least the .NET Framework version 3.0. When available, the property returns a <see
-             cref="T:System.Web.RequestNotification" />
+             property requires the integrated pipeline mode in iisver and at least the .NET Framework version 3.0. When available, the property returns a <see cref="T:System.Web.RequestNotification" />
 
             
 
-             value. The value of the <see
-             cref="P:System.Web.HttpContext.CurrentNotification" />
+             value. The value of the <see cref="P:System.Web.HttpContext.CurrentNotification" />
 
             
 
-             property indicates which event in the <see
-             cref="T:System.Web.HttpApplication" />
+             property indicates which event in the <see cref="T:System.Web.HttpApplication" />
 
             
 
              instance is currently processing the request.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.HttpContext.CurrentNotification" />
+            >The <see cref="P:System.Web.HttpContext.CurrentNotification" />
 
             
 
-             property is not intended to be set. Instead, it is set by iisver during the processing of the request in the ASP.NET pipeline. Setting the <see
-             cref="P:System.Web.HttpContext.CurrentNotification" />
+             property is not intended to be set. Instead, it is set by iisver during the processing of the request in the ASP.NET pipeline. Setting the <see cref="P:System.Web.HttpContext.CurrentNotification" />
 
             
 
@@ -523,8 +501,7 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -536,13 +513,11 @@ The routine internally uses a technique similar to thread local storage to fetch
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.RequestNotification" />
+            >Gets a <see cref="T:System.Web.RequestNotification" />
 
             
 
-             value that indicates the current <see
-             cref="T:System.Web.HttpApplication" />
+             value that indicates the current <see cref="T:System.Web.HttpApplication" />
 
             
 
@@ -583,18 +558,15 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.HttpContext.GetAppConfig(System.String)" />
+            >The <see cref="M:System.Web.HttpContext.GetAppConfig(System.String)" />
 
             
 
-             method has been deprecated. Use the <see
-             cref="M:System.Web.Configuration.WebConfigurationManager.GetWebApplicationSection(System.String)" />
+             method has been deprecated. Use the <see cref="M:System.Web.Configuration.WebConfigurationManager.GetWebApplicationSection(System.String)" />
 
             
 
-             method of the <see
-             cref="T:System.Web.Configuration.WebConfigurationManager" />
+             method of the <see cref="T:System.Web.Configuration.WebConfigurationManager" />
 
             
 
@@ -610,7 +582,11 @@ The routine internally uses a technique similar to thread local storage to fetch
           <para>An object containing configuration information. (Cast the returned configuration section to the appropriate configuration type before use.)</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -640,13 +616,11 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.HttpContext.GetConfig(System.String)" />
+            >The <see cref="M:System.Web.HttpContext.GetConfig(System.String)" />
 
             
 
-             method has been deprecated. Use the <see
-             cref="M:System.Web.HttpContext.GetSection(System.String)" />
+             method has been deprecated. Use the <see cref="M:System.Web.HttpContext.GetSection(System.String)" />
 
             
 
@@ -660,8 +634,7 @@ The routine internally uses a technique similar to thread local storage to fetch
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The specified <see
-             cref="T:System.Configuration.ConfigurationSection" />
+            >The specified <see cref="T:System.Configuration.ConfigurationSection" />
 
             
 
@@ -669,7 +642,11 @@ The routine internally uses a technique similar to thread local storage to fetch
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -706,13 +683,11 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.HttpContext.GetGlobalResourceObject(System.String,System.String)" />
+            >The <see cref="M:System.Web.HttpContext.GetGlobalResourceObject(System.String,System.String)" />
 
             
 
-             method returns a global resource by using the culture that is specified in the <see
-             cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
+             method returns a global resource by using the culture that is specified in the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
 
             
 
@@ -720,8 +695,7 @@ The routine internally uses a technique similar to thread local storage to fetch
           >
           <block subset="none" type="note">
             <para
-              >In some editing environments, such as vwprvw, the editor might throw a design-time <see
-               cref="T:System.Resources.MissingManifestResourceException" />
+              >In some editing environments, such as vwprvw, the editor might throw a design-time <see cref="T:System.Resources.MissingManifestResourceException" />
 
               
 
@@ -732,13 +706,11 @@ The routine internally uses a technique similar to thread local storage to fetch
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an application-level resource object based on the specified <see
-             cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
+            >Gets an application-level resource object based on the specified <see cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
 
             
 
-             and <see
-             cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+             and <see cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
 
             
 
@@ -748,8 +720,7 @@ The routine internally uses a technique similar to thread local storage to fetch
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -757,24 +728,30 @@ The routine internally uses a technique similar to thread local storage to fetch
           >
         </returns>
         <param name="classKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that represents the <see
-           cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
+          A string that represents the <see cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
 
           
 
            property of the requested resource object.</param
         >
         <param name="resourceKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that represents the <see
-           cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+          A string that represents the <see cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
 
           
 
@@ -803,13 +780,11 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Globalization.CultureInfo" />
+            >The <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             object represents the culture for which the resource was localized. If the resource is not localized for this culture, the lookup will follow a fallback process to locate an appropriate resource. For more information, see <format
-             type="text/html">
+             object represents the culture for which the resource was localized. If the resource is not localized for this culture, the lookup will follow a fallback process to locate an appropriate resource. For more information, see <format type="text/html">
               <a href="b224d7c0-35f8-4e82-a705-dd76795e8d16">Packaging and Deploying Resources</a>
             </format>
 
@@ -819,8 +794,7 @@ The routine internally uses a technique similar to thread local storage to fetch
           >
           <block subset="none" type="note">
             <para
-              >In some editing environments, such as Visual Web Developer, the editor might throw a design-time <see
-               cref="T:System.Resources.MissingManifestResourceException" />
+              >In some editing environments, such as Visual Web Developer, the editor might throw a design-time <see cref="T:System.Resources.MissingManifestResourceException" />
 
               
 
@@ -831,18 +805,15 @@ The routine internally uses a technique similar to thread local storage to fetch
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an application-level resource object based on the specified <see
-             cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
+            >Gets an application-level resource object based on the specified <see cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
 
             
 
-             and <see
-             cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+             and <see cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
 
             
 
-             properties, and on the <see
-             cref="T:System.Globalization.CultureInfo" />
+             properties, and on the <see cref="T:System.Globalization.CultureInfo" />
 
             
 
@@ -852,8 +823,7 @@ The routine internally uses a technique similar to thread local storage to fetch
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -861,36 +831,45 @@ The routine internally uses a technique similar to thread local storage to fetch
           >
         </returns>
         <param name="classKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that represents the <see
-           cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
+          A string that represents the <see cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
 
           
 
            property of the requested resource object.</param
         >
         <param name="resourceKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that represents a <see
-           cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+          A string that represents a <see cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
 
           
 
              property of the requested resource object.</param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that represents the <see
-           cref="T:System.Globalization.CultureInfo" />
+          A string that represents the <see cref="T:System.Globalization.CultureInfo" />
 
           
 
@@ -918,13 +897,11 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.HttpContext.GetLocalResourceObject(System.String,System.String)" />
+            >The <see cref="M:System.Web.HttpContext.GetLocalResourceObject(System.String,System.String)" />
 
             
 
-             method returns a local resource by using the culture that is specified in the <see
-             cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
+             method returns a local resource by using the culture that is specified in the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
 
             
 
@@ -934,13 +911,11 @@ The routine internally uses a technique similar to thread local storage to fetch
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a page-level resource object based on the specified <see
-             cref="P:System.Web.Compilation.ExpressionBuilderContext.VirtualPath" />
+            >Gets a page-level resource object based on the specified <see cref="P:System.Web.Compilation.ExpressionBuilderContext.VirtualPath" />
 
             
 
-             and <see
-             cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+             and <see cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
 
             
 
@@ -950,13 +925,11 @@ The routine internally uses a technique similar to thread local storage to fetch
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             that represents the requested page-level resource object; otherwise, null if a matching resource object is found but not a <paramref
-             name="resourceKey" />
+             that represents the requested page-level resource object; otherwise, null if a matching resource object is found but not a <paramref name="resourceKey" />
 
             
 
@@ -964,24 +937,30 @@ The routine internally uses a technique similar to thread local storage to fetch
           >
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Web.Compilation.ExpressionBuilderContext.VirtualPath" />
+          The <see cref="P:System.Web.Compilation.ExpressionBuilderContext.VirtualPath" />
 
           
 
            property for the local resource object.</param
         >
         <param name="resourceKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that represents a <see
-           cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+          A string that represents a <see cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
 
           
 
@@ -1010,8 +989,7 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the resource is not localized for this culture, the lookup will follow a fallback process to locate an appropriate resource. For more information, see <format
-             type="text/html">
+            >If the resource is not localized for this culture, the lookup will follow a fallback process to locate an appropriate resource. For more information, see <format type="text/html">
               <a href="b224d7c0-35f8-4e82-a705-dd76795e8d16">Packaging and Deploying Resources</a>
             </format>
 
@@ -1023,18 +1001,15 @@ The routine internally uses a technique similar to thread local storage to fetch
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a page-level resource object based on the specified <see
-             cref="P:System.Web.Compilation.ExpressionBuilderContext.VirtualPath" />
+            >Gets a page-level resource object based on the specified <see cref="P:System.Web.Compilation.ExpressionBuilderContext.VirtualPath" />
 
             
 
-             and <see
-             cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+             and <see cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
 
             
 
-             properties, and on the <see
-             cref="T:System.Globalization.CultureInfo" />
+             properties, and on the <see cref="T:System.Globalization.CultureInfo" />
 
             
 
@@ -1044,13 +1019,11 @@ The routine internally uses a technique similar to thread local storage to fetch
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             that represents the requested local resource object, which is localized for the specified culture; otherwise null if a matching resource object is found but not a <paramref
-             name="resourceKey" />
+             that represents the requested local resource object, which is localized for the specified culture; otherwise null if a matching resource object is found but not a <paramref name="resourceKey" />
 
             
 
@@ -1058,36 +1031,45 @@ The routine internally uses a technique similar to thread local storage to fetch
           >
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Web.Compilation.ExpressionBuilderContext.VirtualPath" />
+          The <see cref="P:System.Web.Compilation.ExpressionBuilderContext.VirtualPath" />
 
           
 
            property for the local resource object.</param
         >
         <param name="resourceKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that represents a <see
-           cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+          A string that represents a <see cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
 
           
 
              property of the requested resource object.</param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that represents the <see
-           cref="T:System.Globalization.CultureInfo" />
+          A string that represents the <see cref="T:System.Globalization.CultureInfo" />
 
           
 
@@ -1117,8 +1099,7 @@ The routine internally uses a technique similar to thread local storage to fetch
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The specified <see
-             cref="T:System.Configuration.ConfigurationSection" />
+            >The specified <see cref="T:System.Configuration.ConfigurationSection" />
 
             
 
@@ -1139,20 +1120,17 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.HttpContext.Handler" />
+            >The <see cref="P:System.Web.HttpContext.Handler" />
 
             
 
-             property contains a reference to the handler that processes the HTTP request. The handler can be specified by using the <format
-             type="text/html">
+             property contains a reference to the handler that processes the HTTP request. The handler can be specified by using the <format type="text/html">
               <a href="24ca01f3-7141-4fdc-acac-71c0733cf6c2">httpHandlers</a>
             </format>
 
             
 
-             element, or by using a custom handler defined in user code. For more information about handlers, see <format
-             type="text/html">
+             element, or by using a custom handler defined in user code. For more information about handlers, see <format type="text/html">
               <a href="f540bdeb-d22e-4e1d-ba8a-fe6c9926283b"
                 >HTTP Handlers and HTTP Modules Overview</a
               >
@@ -1163,18 +1141,15 @@ The routine internally uses a technique similar to thread local storage to fetch
             . </para
           >
           <para
-            >The reference to the <see
-             cref="P:System.Web.HttpContext.Handler" />
+            >The reference to the <see cref="P:System.Web.HttpContext.Handler" />
 
             
 
-             property will remain the same even after the current page has been changed by a server-side method, such as the <see
-             cref="Overload:System.Web.HttpServerUtility.Execute" />
+             property will remain the same even after the current page has been changed by a server-side method, such as the <see cref="Overload:System.Web.HttpServerUtility.Execute" />
 
             
 
-             method or the <see
-             cref="Overload:System.Web.HttpServerUtility.Transfer" />
+             method or the <see cref="Overload:System.Web.HttpServerUtility.Transfer" />
 
             
 
@@ -1184,8 +1159,7 @@ The routine internally uses a technique similar to thread local storage to fetch
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Web.IHttpHandler" />
+            >Gets or sets the <see cref="T:System.Web.IHttpHandler" />
 
             
 
@@ -1250,44 +1224,37 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.HttpContext.IsPostNotification" />
+            >The <see cref="P:System.Web.HttpContext.IsPostNotification" />
 
             
 
-             property is only supported with the integrated mode in iisver and at least the .NET Framework 3.0. When available, the property returns a Boolean value that indicates whether an event in the <see
-             cref="T:System.Web.HttpApplication" />
+             property is only supported with the integrated mode in iisver and at least the .NET Framework 3.0. When available, the property returns a Boolean value that indicates whether an event in the <see cref="T:System.Web.HttpApplication" />
 
             
 
              object has finished processing. </para
           >
           <para
-            >The <see
-             cref="P:System.Web.HttpContext.IsPostNotification" />
+            >The <see cref="P:System.Web.HttpContext.IsPostNotification" />
 
             
 
-             property is not intended to be set. Instead, it is provided by iisver to the ASP.NET runtime for each notification. Setting the <see
-             cref="P:System.Web.HttpContext.IsPostNotification" />
+             property is not intended to be set. Instead, it is provided by iisver to the ASP.NET runtime for each notification. Setting the <see cref="P:System.Web.HttpContext.IsPostNotification" />
 
             
 
              property will result in a compilation error.</para
           >
           <para
-            >In scenarios where multiple events of the <see
-             cref="T:System.Web.HttpApplication" />
+            >In scenarios where multiple events of the <see cref="T:System.Web.HttpApplication" />
 
             
 
-             object are handled by one event handler, you can use the <see
-             cref="P:System.Web.HttpContext.IsPostNotification" />
+             object are handled by one event handler, you can use the <see cref="P:System.Web.HttpContext.IsPostNotification" />
 
             
 
-             property in combination with the <see
-             cref="T:System.Web.RequestNotification" />
+             property in combination with the <see cref="T:System.Web.RequestNotification" />
 
             
 
@@ -1298,8 +1265,7 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -1311,8 +1277,7 @@ The routine internally uses a technique similar to thread local storage to fetch
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that is the current processing point in the ASP.NET pipeline just after an <see
-             cref="T:System.Web.HttpApplication" />
+            >Gets a value that is the current processing point in the ASP.NET pipeline just after an <see cref="T:System.Web.HttpApplication" />
 
             
 
@@ -1329,21 +1294,16 @@ The routine internally uses a technique similar to thread local storage to fetch
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.IDictionary" />
-        </value>
+        <value>a <see cref="T:System.Collections.IDictionary" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a key/value collection that can be used to organize and share data between an <see
-             cref="T:System.Web.IHttpModule" />
+            >Gets a key/value collection that can be used to organize and share data between an <see cref="T:System.Web.IHttpModule" />
 
             
 
-             interface and an <see
-             cref="T:System.Web.IHttpHandler" />
+             interface and an <see cref="T:System.Web.IHttpHandler" />
 
             
 
@@ -1373,8 +1333,7 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.HttpContext.PreviousHandler" />
+            >The <see cref="P:System.Web.HttpContext.PreviousHandler" />
 
             
 
@@ -1384,8 +1343,7 @@ The routine internally uses a technique similar to thread local storage to fetch
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.IHttpHandler" />
+            >Gets the <see cref="T:System.Web.IHttpHandler" />
 
             
 
@@ -1411,13 +1369,11 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="P:System.Web.HttpContext.Profile" />
+            >A <see cref="P:System.Web.HttpContext.Profile" />
 
             
 
-             property is used for persistent storage of structured data using a type-safe API. When a <see
-             cref="P:System.Web.HttpContext.Profile" />
+             property is used for persistent storage of structured data using a type-safe API. When a <see cref="P:System.Web.HttpContext.Profile" />
 
             
 
@@ -1427,8 +1383,7 @@ The routine internally uses a technique similar to thread local storage to fetch
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Profile.ProfileBase" />
+            >Gets the <see cref="T:System.Web.Profile.ProfileBase" />
 
             
 
@@ -1448,48 +1403,39 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.HttpContext.Request" />
+            >The <see cref="P:System.Web.HttpContext.Request" />
 
             
 
-             property provides programmatic access to the properties and methods of the <see
-             cref="T:System.Web.HttpRequest" />
+             property provides programmatic access to the properties and methods of the <see cref="T:System.Web.HttpRequest" />
 
             
 
-             class. Because ASP.NET pages contain a default reference to the <see
-             cref="N:System.Web" />
+             class. Because ASP.NET pages contain a default reference to the <see cref="N:System.Web" />
 
             
 
-             namespace (which contains the <see
-             cref="T:System.Web.HttpContext" />
+             namespace (which contains the <see cref="T:System.Web.HttpContext" />
 
             
 
-             class), you can reference the members of <see
-             cref="T:System.Web.HttpRequest" />
+             class), you can reference the members of <see cref="T:System.Web.HttpRequest" />
 
             
 
-             on an .aspx page without using the fully qualified class reference to <see
-             cref="T:System.Web.HttpContext" />
+             on an .aspx page without using the fully qualified class reference to <see cref="T:System.Web.HttpContext" />
 
             
 
-            . For example, you can use Request.Browser to get the capabilities of the client browser. However, if you want to use the members of <see
-             cref="T:System.Web.HttpRequest" />
+            . For example, you can use Request.Browser to get the capabilities of the client browser. However, if you want to use the members of <see cref="T:System.Web.HttpRequest" />
 
             
 
-             from an ASP.NET code-behind module, you must include a reference to the <see
-             cref="N:System.Web" />
+             from an ASP.NET code-behind module, you must include a reference to the <see cref="N:System.Web" />
 
             
 
-             namespace in the module and a fully qualified reference to both the currently active request/response context and the class in <see
-             cref="N:System.Web" />
+             namespace in the module and a fully qualified reference to both the currently active request/response context and the class in <see cref="N:System.Web" />
 
             
 
@@ -1497,8 +1443,7 @@ The routine internally uses a technique similar to thread local storage to fetch
           >
           <block subset="none" type="note">
             <para
-              >ASP.NET will throw an exception if you try to use this property when the <see
-               cref="T:System.Web.HttpRequest" />
+              >ASP.NET will throw an exception if you try to use this property when the <see cref="T:System.Web.HttpRequest" />
 
               
 
@@ -1509,8 +1454,7 @@ The routine internally uses a technique similar to thread local storage to fetch
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.HttpRequest" />
+            >Gets the <see cref="T:System.Web.HttpRequest" />
 
             
 
@@ -1531,8 +1475,7 @@ The routine internally uses a technique similar to thread local storage to fetch
       </ReturnValue>
       <Docs>
         <value
-          >The <see
-           cref="T:System.Web.HttpResponse" />
+          >The <see cref="T:System.Web.HttpResponse" />
 
           
 
@@ -1541,48 +1484,39 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.HttpContext.Response" />
+            >The <see cref="P:System.Web.HttpContext.Response" />
 
             
 
-             property provides programmatic access to the properties and methods of the <see
-             cref="T:System.Web.HttpResponse" />
+             property provides programmatic access to the properties and methods of the <see cref="T:System.Web.HttpResponse" />
 
             
 
-             class. Because ASP.NET pages contain a default reference to the <see
-             cref="N:System.Web" />
+             class. Because ASP.NET pages contain a default reference to the <see cref="N:System.Web" />
 
             
 
-             namespace (which contains the <see
-             cref="T:System.Web.HttpContext" />
+             namespace (which contains the <see cref="T:System.Web.HttpContext" />
 
             
 
-             class), you can reference the members of <see
-             cref="T:System.Web.HttpContext" />
+             class), you can reference the members of <see cref="T:System.Web.HttpContext" />
 
             
 
-             on an .aspx page without using the fully qualified class reference to <see
-             cref="T:System.Web.HttpContext" />
+             on an .aspx page without using the fully qualified class reference to <see cref="T:System.Web.HttpContext" />
 
             
 
-            . For example, you can use Response.Write("some output") to write output to an HTTP output stream. However, if you want to use the members of <see
-             cref="T:System.Web.HttpResponse" />
+            . For example, you can use Response.Write("some output") to write output to an HTTP output stream. However, if you want to use the members of <see cref="T:System.Web.HttpResponse" />
 
             
 
-             from an ASP.NET code-behind module, you must include a reference to the <see
-             cref="N:System.Web" />
+             from an ASP.NET code-behind module, you must include a reference to the <see cref="N:System.Web" />
 
             
 
-             namespace in the module and a fully qualified reference to the currently active request/response context and the class in <see
-             cref="N:System.Web" />
+             namespace in the module and a fully qualified reference to the currently active request/response context and the class in <see cref="N:System.Web" />
 
             
 
@@ -1592,8 +1526,7 @@ The routine internally uses a technique similar to thread local storage to fetch
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.HttpResponse" />
+            >Gets the <see cref="T:System.Web.HttpResponse" />
 
             
 
@@ -1619,13 +1552,11 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.HttpContext.RewritePath(System.String)" />
+            >The <see cref="M:System.Web.HttpContext.RewritePath(System.String)" />
 
             
 
-             method redirects a request for a resource to a different path than the one that is indicated by the requested URL. If you have to reset the virtual path so that requests from the client for server resources resolve correctly, use the overload of this method that takes the <paramref
-             name="rebaseClientPath" />
+             method redirects a request for a resource to a different path than the one that is indicated by the requested URL. If you have to reset the virtual path so that requests from the client for server resources resolve correctly, use the overload of this method that takes the <paramref name="rebaseClientPath" />
 
             
 
@@ -1633,8 +1564,7 @@ The routine internally uses a technique similar to thread local storage to fetch
           >
           <para>URL rewriting is useful when you want to restructure the pages in your Web application, and you want to make sure that people who have bookmarked old URLs can still use them after you have moved pages. URL rewriting enables you to transparently forward requests to the new page location.</para>
           <para
-            >If you want to enable a site to use URLs that are more user-friendly and are optimized for search engines, a more robust alternative is to use ASP.NET routing. For more information, see <format
-             type="text/html">
+            >If you want to enable a site to use URLs that are more user-friendly and are optimized for search engines, a more robust alternative is to use ASP.NET routing. For more information, see <format type="text/html">
               <a href="892441af-8f1d-483e-ab5f-b82c23576f5a">ASP.NET Routing</a>
             </format>
 
@@ -1648,7 +1578,11 @@ The routine internally uses a technique similar to thread local storage to fetch
           <para>Rewrites the URL using the given path.</para>
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1680,28 +1614,23 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.HttpContext.RewritePath(System.String,System.Boolean)" />
+            >The <see cref="M:System.Web.HttpContext.RewritePath(System.String,System.Boolean)" />
 
             
 
-             method is called by the <see
-             cref="M:System.Web.HttpContext.RewritePath(System.String)" />
+             method is called by the <see cref="M:System.Web.HttpContext.RewritePath(System.String)" />
 
             
 
-             method with the <paramref
-             name="rebaseClientPath" />
+             method with the <paramref name="rebaseClientPath" />
 
             
 
-             parameter set to true. To ensure that the virtual path that is used to construct paths to resources is not modified, set the <paramref
-             name="rebaseClientPath" />
+             parameter set to true. To ensure that the virtual path that is used to construct paths to resources is not modified, set the <paramref name="rebaseClientPath" />
 
             
 
-             parameter to false. A common scenario in which you might want to set <paramref
-             name="rebaseClientPath" />
+             parameter to false. A common scenario in which you might want to set <paramref name="rebaseClientPath" />
 
             
 
@@ -1709,8 +1638,7 @@ The routine internally uses a technique similar to thread local storage to fetch
           >
           <para>URL rewriting is useful when you want to restructure the pages in your Web application, and you want to make sure that people who have bookmarked old URLs can still use them after you have moved pages. URL rewriting enables you to transparently forward requests to the new page location.</para>
           <para
-            >If you want to enable a site to use URLs that are more user-friendly and are optimized for search engines, a more robust alternative is to use ASP.NET routing. For more information, see <format
-             type="text/html">
+            >If you want to enable a site to use URLs that are more user-friendly and are optimized for search engines, a more robust alternative is to use ASP.NET routing. For more information, see <format type="text/html">
               <a href="892441af-8f1d-483e-ab5f-b82c23576f5a">ASP.NET Routing</a>
             </format>
 
@@ -1724,14 +1652,22 @@ The routine internally uses a technique similar to thread local storage to fetch
           <para>Rewrites the URL using the given path and a Boolean value that specifies whether the virtual path for server resources is modified.</para>
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The internal rewrite path.</param
         >
         <param name="rebaseClientPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1757,31 +1693,26 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.HttpContext.RewritePath(System.String,System.String,System.String)" />
+            >The <see cref="M:System.Web.HttpContext.RewritePath(System.String,System.String,System.String)" />
 
             
 
              method redirects a request for a resource to another resource without changing the URL. </para
           >
           <para
-            >The <paramref
-             name="filePath" />
+            >The <paramref name="filePath" />
 
             
 
-             parameter does not include the <paramref
-             name="pathInfo" />
+             parameter does not include the <paramref name="pathInfo" />
 
             
 
-             parameter content. For the URL http://www.microsoft.com/virdir/page.html/tail, the <paramref
-             name="filePath" />
+             parameter content. For the URL http://www.microsoft.com/virdir/page.html/tail, the <paramref name="filePath" />
 
             
 
-             parameter is http://www.microsoft.com/virdir/page.html, and the <paramref
-             name="pathInfo" />
+             parameter is http://www.microsoft.com/virdir/page.html, and the <paramref name="pathInfo" />
 
             
 
@@ -1789,8 +1720,7 @@ The routine internally uses a technique similar to thread local storage to fetch
           >
           <para>URL rewriting is useful when you want to restructure the pages in your Web application, and you want to make sure that people who have bookmarked old URLs can still use them after you have moved pages. URL rewriting enables you to transparently forward requests to the new page location.</para>
           <para
-            >If you want to enable a site to use URLs that are more user-friendly and are optimized for search engines, a more robust alternative is to use ASP.NET routing. For more information, see <format
-             type="text/html">
+            >If you want to enable a site to use URLs that are more user-friendly and are optimized for search engines, a more robust alternative is to use ASP.NET routing. For more information, see <format type="text/html">
               <a href="892441af-8f1d-483e-ab5f-b82c23576f5a">ASP.NET Routing</a>
             </format>
 
@@ -1804,26 +1734,37 @@ The routine internally uses a technique similar to thread local storage to fetch
           <para>Rewrites the URL by using the given path, path information, and query string information.</para>
         </summary>
         <param name="filePath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The internal rewrite path.</param
         >
         <param name="pathInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Additional path information for a resource. For more information, see <see
-           cref="P:System.Web.HttpRequest.PathInfo" />
+          Additional path information for a resource. For more information, see <see cref="P:System.Web.HttpRequest.PathInfo" />
 
           
 
           .</param
         >
         <param name="queryString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1857,36 +1798,30 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="filePath" />
+            >The <paramref name="filePath" />
 
             
 
-             parameter does not include the content of the <paramref
-             name="pathInfo" />
+             parameter does not include the content of the <paramref name="pathInfo" />
 
             
 
-             parameter. For the URL http://www.microsoft.com/virdir/page.html/tail, the <paramref
-             name="filePath" />
+             parameter. For the URL http://www.microsoft.com/virdir/page.html/tail, the <paramref name="filePath" />
 
             
 
-             parameter is http://www.microsoft.com/virdir/page.html, and the <paramref
-             name="pathInfo" />
+             parameter is http://www.microsoft.com/virdir/page.html, and the <paramref name="pathInfo" />
 
             
 
              parameter is tail.</para
           >
           <para
-            >To ensure that the virtual path that is used to construct paths to resources is not modified, set the <paramref
-             name="setClientFilePath" />
+            >To ensure that the virtual path that is used to construct paths to resources is not modified, set the <paramref name="setClientFilePath" />
 
             
 
-             parameter to false. A common scenario in which you might want to set <paramref
-             name="setClientFilePath" />
+             parameter to false. A common scenario in which you might want to set <paramref name="setClientFilePath" />
 
             
 
@@ -1894,8 +1829,7 @@ The routine internally uses a technique similar to thread local storage to fetch
           >
           <para>URL rewriting is useful when you want to restructure the pages in your Web application, and you want to make sure that people who have bookmarked old URLs can still use them after you have moved pages. URL rewriting enables you to transparently forward requests to the new page location.</para>
           <para
-            >If you want to enable a site to use URLs that are more user-friendly and are optimized for search engines, a more robust alternative is to use ASP.NET routing. For more information, see <format
-             type="text/html">
+            >If you want to enable a site to use URLs that are more user-friendly and are optimized for search engines, a more robust alternative is to use ASP.NET routing. For more information, see <format type="text/html">
               <a href="892441af-8f1d-483e-ab5f-b82c23576f5a">ASP.NET Routing</a>
             </format>
 
@@ -1909,38 +1843,52 @@ The routine internally uses a technique similar to thread local storage to fetch
           <para>Rewrites the URL using the given virtual path, path information, query string information, and a Boolean value that specifies whether the client file path is set to the rewrite path. </para>
         </summary>
         <param name="filePath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The virtual path to the resource that services the request.</param
         >
         <param name="pathInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Additional path information to use for the URL redirect. For more information, see <see
-           cref="P:System.Web.HttpRequest.PathInfo" />
+          Additional path information to use for the URL redirect. For more information, see <see cref="P:System.Web.HttpRequest.PathInfo" />
 
           
 
           .</param
         >
         <param name="queryString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The request query string to use for the URL redirect.</param
         >
         <param name="setClientFilePath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to set the file path used for client resources to the value of the <paramref
-           name="filePath" />
+          true to set the file path used for client resources to the value of the <paramref name="filePath" />
 
           
 
@@ -1959,48 +1907,39 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.HttpContext.Server" />
+            >The <see cref="P:System.Web.HttpContext.Server" />
 
             
 
-             property provides programmatic access to the properties and methods of the <see
-             cref="T:System.Web.HttpServerUtility" />
+             property provides programmatic access to the properties and methods of the <see cref="T:System.Web.HttpServerUtility" />
 
             
 
-             class. Because ASP.NET pages contain a default reference to the <see
-             cref="N:System.Web" />
+             class. Because ASP.NET pages contain a default reference to the <see cref="N:System.Web" />
 
             
 
-             namespace (which contains the <see
-             cref="T:System.Web.HttpContext" />
+             namespace (which contains the <see cref="T:System.Web.HttpContext" />
 
             
 
-             class), you can reference the members of <see
-             cref="T:System.Web.HttpContext" />
+             class), you can reference the members of <see cref="T:System.Web.HttpContext" />
 
             
 
-             on an .aspx page without using the fully qualified class reference to <see
-             cref="T:System.Web.HttpContext" />
+             on an .aspx page without using the fully qualified class reference to <see cref="T:System.Web.HttpContext" />
 
             
 
-            . For example, you can use Server.CreateObject("MyCOMComponent") to create an instance of a COM object on the server. However, if you want to use the members of <see
-             cref="T:System.Web.HttpServerUtility" />
+            . For example, you can use Server.CreateObject("MyCOMComponent") to create an instance of a COM object on the server. However, if you want to use the members of <see cref="T:System.Web.HttpServerUtility" />
 
             
 
-             from an ASP.NET code-behind module, you must include a reference to the <see
-             cref="N:System.Web" />
+             from an ASP.NET code-behind module, you must include a reference to the <see cref="N:System.Web" />
 
             
 
-             namespace in the module and a fully qualified reference to both the currently active request/response context and the class in <see
-             cref="N:System.Web" />
+             namespace in the module and a fully qualified reference to both the currently active request/response context and the class in <see cref="N:System.Web" />
 
             
 
@@ -2010,8 +1949,7 @@ The routine internally uses a technique similar to thread local storage to fetch
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.HttpServerUtility" />
+            >Gets the <see cref="T:System.Web.HttpServerUtility" />
 
             
 
@@ -2038,21 +1976,18 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.HttpContext.Session" />
+            >The <see cref="P:System.Web.HttpContext.Session" />
 
             
 
-             property provides programmatic access to the properties and methods of the <see
-             cref="T:System.Web.SessionState.HttpSessionState" />
+             property provides programmatic access to the properties and methods of the <see cref="T:System.Web.SessionState.HttpSessionState" />
 
             
 
              class. </para
           >
           <para
-            >In order to use session state you have to enable it. For information about how to enable session state, see Configuring Session State in <format
-             type="text/html">
+            >In order to use session state you have to enable it. For information about how to enable session state, see Configuring Session State in <format type="text/html">
               <a href="6d60d381-6521-4e1d-9089-da6464f2a9bc">ASP.NET Session State Overview</a>
             </format>
 
@@ -2061,8 +1996,7 @@ The routine internally uses a technique similar to thread local storage to fetch
             .</para
           >
           <para
-            >For information about how to save values in session state, see <format
-             type="text/html">
+            >For information about how to save values in session state, see <format type="text/html">
               <a href="a6cb2e3a-df49-4b12-9d9a-eed45541c165"
                 >How to: Save Values in Session State</a
               >
@@ -2070,8 +2004,7 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
-            . For information about how to read values from session state, see <format
-             type="text/html">
+            . For information about how to read values from session state, see <format type="text/html">
               <a href="2ef449bc-5c17-4785-b7cf-378c601af8f5"
                 >How to: Read Values from Session State</a
               >
@@ -2085,8 +2018,7 @@ The routine internally uses a technique similar to thread local storage to fetch
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.SessionState.HttpSessionState" />
+            >Gets the <see cref="T:System.Web.SessionState.HttpSessionState" />
 
             
 
@@ -2111,23 +2043,19 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.HttpContext.SkipAuthorization" />
+            >The <see cref="P:System.Web.HttpContext.SkipAuthorization" />
 
             
 
-             property is intended for advanced use by authentication modules that need to redirect to a page that allows anonymous connections. The Forms authentication module and Passport authentication module both set <see
-             cref="P:System.Web.HttpContext.SkipAuthorization" />
+             property is intended for advanced use by authentication modules that need to redirect to a page that allows anonymous connections. The Forms authentication module and Passport authentication module both set <see cref="P:System.Web.HttpContext.SkipAuthorization" />
 
             
 
-             when redirecting to a configured logon page. Setting <see
-             cref="P:System.Web.HttpContext.SkipAuthorization" />
+             when redirecting to a configured logon page. Setting <see cref="P:System.Web.HttpContext.SkipAuthorization" />
 
             
 
-             requires the ControlPrincipal flag to be set. For information about the ControlPrincipal flag, see <see
-             cref="T:System.Security.Permissions.SecurityPermissionFlag" />
+             requires the ControlPrincipal flag to be set. For information about the ControlPrincipal flag, see <see cref="T:System.Security.Permissions.SecurityPermissionFlag" />
 
             
 
@@ -2137,8 +2065,7 @@ The routine internally uses a technique similar to thread local storage to fetch
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that specifies whether the <see
-             cref="T:System.Web.Security.UrlAuthorizationModule" />
+            >Gets or sets a value that specifies whether the <see cref="T:System.Web.Security.UrlAuthorizationModule" />
 
             
 
@@ -2168,8 +2095,7 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is useful to gain access to the underlying <see
-             cref="T:System.Web.HttpWorkerRequest" />
+            >This method is useful to gain access to the underlying <see cref="T:System.Web.HttpWorkerRequest" />
 
             
 
@@ -2183,8 +2109,7 @@ The routine internally uses a technique similar to thread local storage to fetch
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.HttpContext" />
+            >A <see cref="T:System.Web.HttpContext" />
 
             
 
@@ -2192,12 +2117,15 @@ The routine internally uses a technique similar to thread local storage to fetch
           >
         </returns>
         <param name="service">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A type of <see
-           cref="T:System.Web.HttpContext" />
+          A type of <see cref="T:System.Web.HttpContext" />
 
           
 
@@ -2216,13 +2144,11 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The timestamp returned from the <see
-             cref="P:System.Web.HttpContext.Timestamp" />
+            >The timestamp returned from the <see cref="P:System.Web.HttpContext.Timestamp" />
 
             
 
-             property is the local time of the server and is set during the instantiation of the <see
-             cref="T:System.Web.HttpContext" />
+             property is the local time of the server and is set during the instantiation of the <see cref="T:System.Web.HttpContext" />
 
             
 
@@ -2251,8 +2177,7 @@ The routine internally uses a technique similar to thread local storage to fetch
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.TraceContext" />
+            >Gets the <see cref="T:System.Web.TraceContext" />
 
             
 
@@ -2276,58 +2201,46 @@ The routine internally uses a technique similar to thread local storage to fetch
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Security.Principal.IPrincipal" />
-        </value>
+        <value>a <see cref="T:System.Security.Principal.IPrincipal" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.HttpContext.User" />
+            >The <see cref="P:System.Web.HttpContext.User" />
 
             
 
-             property provides programmatic access to the properties and methods of the <see
-             cref="T:System.Security.Principal.IPrincipal" />
+             property provides programmatic access to the properties and methods of the <see cref="T:System.Security.Principal.IPrincipal" />
 
             
 
              interface. </para
           >
           <para
-            >Because ASP.NET pages contain a default reference to the <see
-             cref="N:System.Web" />
+            >Because ASP.NET pages contain a default reference to the <see cref="N:System.Web" />
 
             
 
-             namespace (which contains the <see
-             cref="T:System.Web.HttpContext" />
+             namespace (which contains the <see cref="T:System.Web.HttpContext" />
 
             
 
-             class), you can reference the members of <see
-             cref="T:System.Web.HttpContext" />
+             class), you can reference the members of <see cref="T:System.Web.HttpContext" />
 
             
 
-             on an .aspx page without using the fully qualified class reference to <see
-             cref="T:System.Web.HttpContext" />
+             on an .aspx page without using the fully qualified class reference to <see cref="T:System.Web.HttpContext" />
 
             
 
-            . For example, you can use User.Identity.Name to get the name of the user on whose behalf the current process is running. However, if you want to use the members of <see
-             cref="T:System.Security.Principal.IPrincipal" />
+            . For example, you can use User.Identity.Name to get the name of the user on whose behalf the current process is running. However, if you want to use the members of <see cref="T:System.Security.Principal.IPrincipal" />
 
             
 
-             from an ASP.NET code-behind module, you must include a reference to the <see
-             cref="N:System.Web" />
+             from an ASP.NET code-behind module, you must include a reference to the <see cref="N:System.Web" />
 
             
 
-             namespace in the module and a fully qualified reference to both the currently active request/response context and the class in <see
-             cref="N:System.Web" />
+             namespace in the module and a fully qualified reference to both the currently active request/response context and the class in <see cref="N:System.Web" />
 
             
 

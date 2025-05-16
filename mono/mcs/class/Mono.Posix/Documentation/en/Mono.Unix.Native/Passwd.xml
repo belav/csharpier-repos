@@ -28,13 +28,11 @@
   <Docs>
     <summary>Password database entry.</summary>
     <remarks
-      >An entry from the password database file described in <c
-      >passwd</c>
+      >An entry from the password database file described in <c>passwd</c>
 
       
 
-      (5), typically <c
-      >/etc/passwd</c>
+      (5), typically <c>/etc/passwd</c>
 
       
 

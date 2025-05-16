@@ -36,25 +36,21 @@
   <Docs>
     <example>
       <para
-        > The following example demonstrates how <see
-         cref="T:System.AttributeTargets" />
+        > The following example demonstrates how <see cref="T:System.AttributeTargets" />
 
         
 
          can be
-   used with <see
-         cref="T:System.AttributeUsageAttribute" />
+   used with <see cref="T:System.AttributeUsageAttribute" />
 
         
 
-         so that a user-defined attribute class, <paramref
-         name="Author" />
+         so that a user-defined attribute class, <paramref name="Author" />
 
         
 
         ,
-   can be applied to structures and classes. The <paramref
-         name="Author" />
+   can be applied to structures and classes. The <paramref name="Author" />
 
         
 
@@ -87,8 +83,7 @@ class JohnsClass {
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.AttributeUsageAttribute" />
+        >The <see cref="T:System.AttributeUsageAttribute" />
 
         
 

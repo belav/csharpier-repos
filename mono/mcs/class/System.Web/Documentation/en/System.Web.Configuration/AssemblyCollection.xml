@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.AssemblyCollection" />
+        >The <see cref="T:System.Web.Configuration.AssemblyCollection" />
 
         
 
@@ -33,8 +32,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Web.Configuration.AssemblyInfo" />
+        >Represents a collection of <see cref="T:System.Web.Configuration.AssemblyInfo" />
 
         
 
@@ -53,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.AssemblyCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.AssemblyCollection" />
 
             
 
@@ -84,8 +81,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Web.Configuration.AssemblyInfo" />
+            >Adds an <see cref="T:System.Web.Configuration.AssemblyInfo" />
 
             
 
@@ -95,13 +91,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Web.Configuration.AssemblyInfo" />
+            >Adds an <see cref="T:System.Web.Configuration.AssemblyInfo" />
 
             
 
-             object to the <see
-             cref="T:System.Web.Configuration.AssemblyCollection" />
+             object to the <see cref="T:System.Web.Configuration.AssemblyCollection" />
 
             
 
@@ -126,13 +120,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clears all the <see
-             cref="T:System.Web.Configuration.AssemblyInfo" />
+            >Clears all the <see cref="T:System.Web.Configuration.AssemblyInfo" />
 
             
 
-             objects from the <see
-             cref="T:System.Web.Configuration.AssemblyCollection" />
+             objects from the <see cref="T:System.Web.Configuration.AssemblyCollection" />
 
             
 
@@ -270,13 +262,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Web.Configuration.AssemblyInfo" />
+            >Removes a <see cref="T:System.Web.Configuration.AssemblyInfo" />
 
             
 
-             object from the <see
-             cref="T:System.Web.Configuration.AssemblyCollection" />
+             object from the <see cref="T:System.Web.Configuration.AssemblyCollection" />
 
             
 
@@ -284,7 +274,11 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -313,13 +307,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes an <see
-             cref="T:System.Web.Configuration.AssemblyInfo" />
+            >Removes an <see cref="T:System.Web.Configuration.AssemblyInfo" />
 
             
 
-             object from the <see
-             cref="T:System.Web.Configuration.AssemblyCollection" />
+             object from the <see cref="T:System.Web.Configuration.AssemblyCollection" />
 
             
 
@@ -327,17 +319,19 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value specifying an <see
-           cref="T:System.Web.Configuration.AssemblyInfo" />
+          An integer value specifying an <see cref="T:System.Web.Configuration.AssemblyInfo" />
 
           
 
-           object within the <see
-           cref="T:System.Web.Configuration.AssemblyCollection" />
+           object within the <see cref="T:System.Web.Configuration.AssemblyCollection" />
 
           
 

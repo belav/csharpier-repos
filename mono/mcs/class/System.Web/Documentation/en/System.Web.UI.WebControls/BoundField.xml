@@ -17,152 +17,124 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.BoundField" />
+        >The <see cref="T:System.Web.UI.WebControls.BoundField" />
 
         
 
-         class is used by data-bound controls (such as <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         class is used by data-bound controls (such as <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         and <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-        ) to display the value of a field as text. The <see
-         cref="T:System.Web.UI.WebControls.BoundField" />
+        ) to display the value of a field as text. The <see cref="T:System.Web.UI.WebControls.BoundField" />
 
         
 
-         object is displayed differently depending on the data-bound control in which it is used. For example, the <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         object is displayed differently depending on the data-bound control in which it is used. For example, the <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         control displays a <see
-         cref="T:System.Web.UI.WebControls.BoundField" />
+         control displays a <see cref="T:System.Web.UI.WebControls.BoundField" />
 
         
 
-         object as a column, while the <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         object as a column, while the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
          control displays it as a row.</para
       >
       <para
-        >To specify the field to display in a <see
-         cref="T:System.Web.UI.WebControls.BoundField" />
+        >To specify the field to display in a <see cref="T:System.Web.UI.WebControls.BoundField" />
 
         
 
-         object, set the <see
-         cref="P:System.Web.UI.WebControls.BoundField.DataField" />
+         object, set the <see cref="P:System.Web.UI.WebControls.BoundField.DataField" />
 
         
 
-         property to the field's name. The field's value can be HTML-encoded before it is displayed by setting the <see
-         cref="P:System.Web.UI.WebControls.BoundField.HtmlEncode" />
+         property to the field's name. The field's value can be HTML-encoded before it is displayed by setting the <see cref="P:System.Web.UI.WebControls.BoundField.HtmlEncode" />
 
         
 
-         property to true. You can apply a custom formatting string to the field's value by setting the <see
-         cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
+         property to true. You can apply a custom formatting string to the field's value by setting the <see cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
 
         
 
-         property. When the <see
-         cref="P:System.Web.UI.WebControls.BoundField.HtmlEncode" />
+         property. When the <see cref="P:System.Web.UI.WebControls.BoundField.HtmlEncode" />
 
         
 
-         property is true, the encoded string value of the field is used in the custom format string. By default, the formatting string is applied to field values only when the data-bound control is in read-only mode. To apply the formatting string to values displayed while the data-bound control is in edit mode, set the <see
-         cref="P:System.Web.UI.WebControls.BoundField.ApplyFormatInEditMode" />
+         property is true, the encoded string value of the field is used in the custom format string. By default, the formatting string is applied to field values only when the data-bound control is in read-only mode. To apply the formatting string to values displayed while the data-bound control is in edit mode, set the <see cref="P:System.Web.UI.WebControls.BoundField.ApplyFormatInEditMode" />
 
         
 
-         property to true. If a field's value is null, you can display a custom caption by setting the <see
-         cref="P:System.Web.UI.WebControls.BoundField.NullDisplayText" />
+         property to true. If a field's value is null, you can display a custom caption by setting the <see cref="P:System.Web.UI.WebControls.BoundField.NullDisplayText" />
 
         
 
-         property. The <see
-         cref="T:System.Web.UI.WebControls.BoundField" />
+         property. The <see cref="T:System.Web.UI.WebControls.BoundField" />
 
         
 
-         object can also automatically convert empty string ("") field values to null values by setting the <see
-         cref="P:System.Web.UI.WebControls.BoundField.ConvertEmptyStringToNull" />
+         object can also automatically convert empty string ("") field values to null values by setting the <see cref="P:System.Web.UI.WebControls.BoundField.ConvertEmptyStringToNull" />
 
         
 
          property to true.</para
       >
       <para
-        >You can hide a <see
-         cref="T:System.Web.UI.WebControls.BoundField" />
+        >You can hide a <see cref="T:System.Web.UI.WebControls.BoundField" />
 
         
 
-         object in a data-bound control by setting the <see
-         cref="P:System.Web.UI.WebControls.DataControlField.Visible" />
+         object in a data-bound control by setting the <see cref="P:System.Web.UI.WebControls.DataControlField.Visible" />
 
         
 
-         property to false. To prevent the value of a field from being modified in edit mode, set the <see
-         cref="P:System.Web.UI.WebControls.BoundField.ReadOnly" />
+         property to false. To prevent the value of a field from being modified in edit mode, set the <see cref="P:System.Web.UI.WebControls.BoundField.ReadOnly" />
 
         
 
-         property to true. In data-bound controls that support inserting records (such as the <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         property to true. In data-bound controls that support inserting records (such as the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-         control), you can hide a <see
-         cref="T:System.Web.UI.WebControls.BoundField" />
+         control), you can hide a <see cref="T:System.Web.UI.WebControls.BoundField" />
 
         
 
-         object by setting the <see
-         cref="P:System.Web.UI.WebControls.DataControlField.InsertVisible" />
+         object by setting the <see cref="P:System.Web.UI.WebControls.DataControlField.InsertVisible" />
 
         
 
          property to false. This is commonly done when you want to hide an automatically generated key field in insert mode.</para
       >
       <para
-        >You can customize the header and footer sections of a <see
-         cref="T:System.Web.UI.WebControls.BoundField" />
+        >You can customize the header and footer sections of a <see cref="T:System.Web.UI.WebControls.BoundField" />
 
         
 
-         object. To display a caption in the header or footer sections, set the <see
-         cref="P:System.Web.UI.WebControls.DataControlField.HeaderText" />
+         object. To display a caption in the header or footer sections, set the <see cref="P:System.Web.UI.WebControls.DataControlField.HeaderText" />
 
         
 
-         or <see
-         cref="P:System.Web.UI.WebControls.DataControlField.FooterText" />
+         or <see cref="P:System.Web.UI.WebControls.DataControlField.FooterText" />
 
         
 
-         properties, respectively. Instead of displaying text in the header section, you can display an image by setting the <see
-         cref="P:System.Web.UI.WebControls.DataControlField.HeaderImageUrl" />
+         properties, respectively. Instead of displaying text in the header section, you can display an image by setting the <see cref="P:System.Web.UI.WebControls.DataControlField.HeaderImageUrl" />
 
         
 
-         property. The header section can be hidden in the <see
-         cref="T:System.Web.UI.WebControls.BoundField" />
+         property. The header section can be hidden in the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
         
 
-         object by setting the <see
-         cref="P:System.Web.UI.WebControls.DataControlField.ShowHeader" />
+         object by setting the <see cref="P:System.Web.UI.WebControls.DataControlField.ShowHeader" />
 
         
 
@@ -170,13 +142,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Some data-bound controls (such as the <see
-           cref="T:System.Web.UI.WebControls.GridView" />
+          >Some data-bound controls (such as the <see cref="T:System.Web.UI.WebControls.GridView" />
 
           
 
-           control) can show or hide only the entire header section of the control. These data-bound controls do not support the <see
-           cref="P:System.Web.UI.WebControls.DataControlField.ShowHeader" />
+           control) can show or hide only the entire header section of the control. These data-bound controls do not support the <see cref="P:System.Web.UI.WebControls.DataControlField.ShowHeader" />
 
           
 
@@ -184,8 +154,7 @@
         >
       </block>
       <para
-        >You also can customize the appearance of the <see
-         cref="T:System.Web.UI.WebControls.BoundField" />
+        >You also can customize the appearance of the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
         
 
@@ -210,8 +179,7 @@
           </term>
           <description>
             <para
-              >The style settings for the child Web server controls of the <see
-               cref="T:System.Web.UI.WebControls.BoundField" />
+              >The style settings for the child Web server controls of the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
               
 
@@ -227,8 +195,7 @@
           </term>
           <description>
             <para
-              >The style settings for the footer section of the <see
-               cref="T:System.Web.UI.WebControls.BoundField" />
+              >The style settings for the footer section of the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
               
 
@@ -244,8 +211,7 @@
           </term>
           <description>
             <para
-              >The style settings for the header section of the <see
-               cref="T:System.Web.UI.WebControls.BoundField" />
+              >The style settings for the header section of the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
               
 
@@ -261,8 +227,7 @@
           </term>
           <description>
             <para
-              >The style settings for the data items in the <see
-               cref="T:System.Web.UI.WebControls.BoundField" />
+              >The style settings for the data items in the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
               
 
@@ -287,36 +252,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+            >Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
              class. This constructor is commonly used when adding fields to a dynamically created data-bound control.</para
           >
           <para
-            >To dynamically add a <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+            >To dynamically add a <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
-             object to a data-bound control, create a new <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             object to a data-bound control, create a new <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
-             object, set its properties, and then add it to the data-bound control's field collection. For example, if you are using the <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             object, set its properties, and then add it to the data-bound control's field collection. For example, if you are using the <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
-             control, add the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             control, add the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
-             object to the <see
-             cref="P:System.Web.UI.WebControls.GridView.Columns" />
+             object to the <see cref="P:System.Web.UI.WebControls.GridView.Columns" />
 
             
 
@@ -329,8 +288,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -362,28 +320,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Data-bound controls (such as <see
-             cref="T:System.Web.UI.WebControls.DetailsView" />
+            >Data-bound controls (such as <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
             
 
-            , <see
-             cref="T:System.Web.UI.WebControls.FormView" />
+            , <see cref="T:System.Web.UI.WebControls.FormView" />
 
             
 
-            , and <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+            , and <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
-            ) have different display modes that allow the user to read, edit, or insert records. By default, the formatting string specified by the <see
-             cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
+            ) have different display modes that allow the user to read, edit, or insert records. By default, the formatting string specified by the <see cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
 
             
 
-             property is applied to field values only when the data-bound control is in read-only mode. To apply the formatting string to values displayed while the data-bound control is in edit mode, set the <see
-             cref="P:System.Web.UI.WebControls.BoundField.ApplyFormatInEditMode" />
+             property is applied to field values only when the data-bound control is in read-only mode. To apply the formatting string to values displayed while the data-bound control is in edit mode, set the <see cref="P:System.Web.UI.WebControls.BoundField.ApplyFormatInEditMode" />
 
             
 
@@ -391,8 +344,7 @@
           >
           <block subset="none" type="note">
             <para
-              >A <see
-               cref="T:System.Web.UI.WebControls.BoundField" />
+              >A <see cref="T:System.Web.UI.WebControls.BoundField" />
 
               
 
@@ -403,13 +355,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the formatting string specified by the <see
-             cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
+            >Gets or sets a value indicating whether the formatting string specified by the <see cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
 
             
 
-             property is applied to field values when the data-bound control that contains the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             property is applied to field values when the data-bound control that contains the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -441,8 +391,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sometimes the user might enter an empty string for a field value when updating or inserting records. Use the <see
-             cref="P:System.Web.UI.WebControls.BoundField.ConvertEmptyStringToNull" />
+            >Sometimes the user might enter an empty string for a field value when updating or inserting records. Use the <see cref="P:System.Web.UI.WebControls.BoundField.ConvertEmptyStringToNull" />
 
             
 
@@ -450,13 +399,11 @@
           >
           <block subset="none" type="note">
             <para
-              >By default, a <see
-               cref="T:System.Web.UI.WebControls.BoundField" />
+              >By default, a <see cref="T:System.Web.UI.WebControls.BoundField" />
 
               
 
-               object displays null values as empty strings. To display a different value, set the <see
-               cref="P:System.Web.UI.WebControls.BoundField.NullDisplayText" />
+               object displays null values as empty strings. To display a different value, set the <see cref="P:System.Web.UI.WebControls.BoundField.NullDisplayText" />
 
               
 
@@ -490,23 +437,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BoundField.CopyProperties(System.Web.UI.WebControls.DataControlField)" />
+            >The <see cref="M:System.Web.UI.WebControls.BoundField.CopyProperties(System.Web.UI.WebControls.DataControlField)" />
 
             
 
-             method is a helper method used by the <see
-             cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
+             method is a helper method used by the <see cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
 
             
 
-             method to copy the properties of the current <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             method to copy the properties of the current <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
-             object to the <see
-             cref="T:System.Web.UI.WebControls.DataControlField" />
+             object to the <see cref="T:System.Web.UI.WebControls.DataControlField" />
 
             
 
@@ -516,13 +459,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the properties of the current <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+            >Copies the properties of the current <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
-             object to the specified <see
-             cref="T:System.Web.UI.WebControls.DataControlField" />
+             object to the specified <see cref="T:System.Web.UI.WebControls.DataControlField" />
 
             
 
@@ -530,17 +471,19 @@
           >
         </summary>
         <param name="newField">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.DataControlField" />
+          The <see cref="T:System.Web.UI.WebControls.DataControlField" />
 
           
 
-           to copy the properties of the current <see
-           cref="T:System.Web.UI.WebControls.BoundField" />
+           to copy the properties of the current <see cref="T:System.Web.UI.WebControls.BoundField" />
 
           
 
@@ -566,23 +509,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BoundField.CreateField" />
+            >The <see cref="M:System.Web.UI.WebControls.BoundField.CreateField" />
 
             
 
-             method is a helper method used by the <see
-             cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
+             method is a helper method used by the <see cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
 
             
 
-             method to create an empty <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             method to create an empty <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
-             object to copy the properties of the current <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             object to copy the properties of the current <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -592,8 +531,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an empty <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+            >Creates an empty <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -603,8 +541,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An empty <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+            >An empty <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -636,23 +573,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BoundField.DataField" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BoundField.DataField" />
 
             
 
-             property to specify the name of the data field to bind to the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             property to specify the name of the data field to bind to the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
-             object. The values of the specified field are displayed in the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             object. The values of the specified field are displayed in the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
-             object as text. You can optionally format the displayed text by setting the <see
-             cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
+             object as text. You can optionally format the displayed text by setting the <see cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
 
             
 
@@ -660,8 +593,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If a field's value is null, an empty string ("") is displayed for the value by default. To specify an alternate caption, set the <see
-               cref="P:System.Web.UI.WebControls.BoundField.NullDisplayText" />
+              >If a field's value is null, an empty string ("") is displayed for the value by default. To specify an alternate caption, set the <see cref="P:System.Web.UI.WebControls.BoundField.NullDisplayText" />
 
               
 
@@ -672,8 +604,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the data field to bind to the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+            >Gets or sets the name of the data field to bind to the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -702,18 +633,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
 
             
 
-             property to specify a custom display format for the values that are displayed in the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             property to specify a custom display format for the values that are displayed in the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
-             object. If the <see
-             cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
+             object. If the <see cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
 
             
 
@@ -721,13 +649,11 @@
           >
           <block subset="none" type="note">
             <para
-              >In versions of ASP.NET earlier than 3.5, you must set the <see
-               cref="P:System.Web.UI.WebControls.BoundField.HtmlEncode" />
+              >In versions of ASP.NET earlier than 3.5, you must set the <see cref="P:System.Web.UI.WebControls.BoundField.HtmlEncode" />
 
               
 
-               property to false in order to format fields that are not string data types. Otherwise, the field value is converted to a string by the default conversion method before the format string that is stored in the <see
-               cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
+               property to false in order to format fields that are not string data types. Otherwise, the field value is converted to a string by the default conversion method before the format string that is stored in the <see cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
 
               
 
@@ -735,21 +661,18 @@
             >
           </block>
           <para
-            >By default, the formatting string is applied to the field value only when the data-bound control that contains the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+            >By default, the formatting string is applied to the field value only when the data-bound control that contains the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
-             object is in read-only mode. To apply the formatting string to field values while in edit mode, set the <see
-             cref="P:System.Web.UI.WebControls.BoundField.ApplyFormatInEditMode" />
+             object is in read-only mode. To apply the formatting string to field values while in edit mode, set the <see cref="P:System.Web.UI.WebControls.BoundField.ApplyFormatInEditMode" />
 
             
 
              property to true.</para
           >
           <para
-            >The formatting string can be any literal string and usually includes a placeholder for the field's value. For example, in the formatting string Item Value: {0}, the field's value is substituted for the {0} placeholder when the string is displayed in the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+            >The formatting string can be any literal string and usually includes a placeholder for the field's value. For example, in the formatting string Item Value: {0}, the field's value is substituted for the {0} placeholder when the string is displayed in the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -757,8 +680,7 @@
           >
           <para>If the formatting string does not include a placeholder, only the formatting string itself is included in the final display text (the field's value from the data source is not included). If the placeholder is a 0 (zero) enclosed in curly braces as shown in the preceding example, the field value is converted to a string by the default method. You can append to the zero a string that specifies how the field value should be formatted. For example, the placeholder {0:C} for a numeric field specifies that value of the field should be converted to a currency format.</para>
           <para
-            >Formatting is applied by using the <see
-             cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />
+            >Formatting is applied by using the <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />
 
             
 
@@ -886,13 +808,11 @@
               </term>
               <description>
                 <para
-                  >Displays <see
-                   cref="T:System.Single" />
+                  >Displays <see cref="T:System.Single" />
 
                   
 
-                  , <see
-                   cref="T:System.Double" />
+                  , <see cref="T:System.Double" />
 
                   
 
@@ -920,15 +840,13 @@
             </item>
           </list>
           <para
-            >For more information and for examples that show formatting for other culture values, see <format
-             type="text/html">
+            >For more information and for examples that show formatting for other culture values, see <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
             </format>
 
             
 
-            . You can also create custom numeric format strings. For more information, see <format
-             type="text/html">
+            . You can also create custom numeric format strings. For more information, see <format type="text/html">
               <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
             </format>
 
@@ -937,13 +855,11 @@
             .</para
           >
           <para
-            >The following table lists format characters for <see
-             cref="T:System.DateTime" />
+            >The following table lists format characters for <see cref="T:System.DateTime" />
 
             
 
-             fields. Most of these formatting specifications result in a different output depending on culture settings. The examples are for a <see
-             cref="T:System.DateTime" />
+             fields. Most of these formatting specifications result in a different output depending on culture settings. The examples are for a <see cref="T:System.DateTime" />
 
             
 
@@ -1065,8 +981,7 @@
               </term>
               <description>
                 <para
-                  >RFC1123 pattern (for information, see <see
-                   cref="P:System.Globalization.DateTimeFormatInfo.RFC1123Pattern" />
+                  >RFC1123 pattern (for information, see <see cref="P:System.Globalization.DateTimeFormatInfo.RFC1123Pattern" />
 
                   
 
@@ -1152,8 +1067,7 @@
             </item>
           </list>
           <para
-            >For more information and for examples that show formatting for other culture values, see <format
-             type="text/html">
+            >For more information and for examples that show formatting for other culture values, see <format type="text/html">
               <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b"
                 >Standard Date and Time Format Strings</a
               >
@@ -1161,8 +1075,7 @@
 
             
 
-            . You can also create custom date and time format strings. For more information, see <format
-             type="text/html">
+            . You can also create custom date and time format strings. For more information, see <format type="text/html">
               <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom Date and Time Format Strings</a>
             </format>
 
@@ -1200,18 +1113,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BoundField.ExtractValuesFromCell(System.Collections.Specialized.IOrderedDictionary,System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlRowState,System.Boolean)" />
+            >The <see cref="M:System.Web.UI.WebControls.BoundField.ExtractValuesFromCell(System.Collections.Specialized.IOrderedDictionary,System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlRowState,System.Boolean)" />
 
             
 
-             method is provided as a convenient way to retrieve the values of the fields from the specified <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+             method is provided as a convenient way to retrieve the values of the fields from the specified <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             object in a <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             object in a <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -1221,18 +1131,15 @@
             <para>This method is used primarily by control developers.</para>
           </block>
           <para
-            >This method does not have a return value. Instead, the field values are returned by reference through the <see
-             cref="T:System.Collections.IDictionary" />
+            >This method does not have a return value. Instead, the field values are returned by reference through the <see cref="T:System.Collections.IDictionary" />
 
             
 
-             object passed in for the <paramref
-             name="dictionary" />
+             object passed in for the <paramref name="dictionary" />
 
             
 
-             parameter. After the method has been called, iterate through the <see
-             cref="T:System.Collections.IDictionary" />
+             parameter. After the method has been called, iterate through the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1240,13 +1147,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="T:System.Web.UI.WebControls.TableCell" />
+              >If the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
               
 
-               object contains read-only field values, you must pass in true for the <paramref
-               name="includeReadOnly" />
+               object contains read-only field values, you must pass in true for the <paramref name="includeReadOnly" />
 
               
 
@@ -1257,13 +1162,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Fills the specified <see
-             cref="T:System.Collections.IDictionary" />
+            >Fills the specified <see cref="T:System.Collections.IDictionary" />
 
             
 
-             object with the values from the specified <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+             object with the values from the specified <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
@@ -1271,43 +1174,56 @@
           >
         </summary>
         <param name="dictionary">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.IDictionary" />
+          A <see cref="T:System.Collections.IDictionary" />
 
           
 
            used to store the values of the specified cell.</param
         >
         <param name="cell">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.TableCell" />
+          The <see cref="T:System.Web.UI.WebControls.TableCell" />
 
           
 
            that contains the values to retrieve.</param
         >
         <param name="rowState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.DataControlRowState" />
+          One of the <see cref="T:System.Web.UI.WebControls.DataControlRowState" />
 
           
 
            values.</param
         >
         <param name="includeReadOnly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1337,18 +1253,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BoundField.FormatDataValue(System.Object,System.Boolean)" />
+            >The <see cref="M:System.Web.UI.WebControls.BoundField.FormatDataValue(System.Object,System.Boolean)" />
 
             
 
-             method is a helper method used to transform a field value to the format specified by the <see
-             cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
+             method is a helper method used to transform a field value to the format specified by the <see cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
 
             
 
-             property. If a field value is null, the value of the <see
-             cref="P:System.Web.UI.WebControls.BoundField.NullDisplayText" />
+             property. If a field value is null, the value of the <see cref="P:System.Web.UI.WebControls.BoundField.NullDisplayText" />
 
             
 
@@ -1361,8 +1274,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Formats the specified field value for a cell in the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+            >Formats the specified field value for a cell in the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -1372,8 +1284,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The field value converted to the format specified by <see
-             cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
+            >The field value converted to the format specified by <see cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
 
             
 
@@ -1381,7 +1292,11 @@
           >
         </returns>
         <param name="encode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1404,13 +1319,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BoundField.GetDesignTimeValue" />
+            >The <see cref="M:System.Web.UI.WebControls.BoundField.GetDesignTimeValue" />
 
             
 
-             method is a helper method used to determine what value to display for a field when rendering the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             method is a helper method used to determine what value to display for a field when rendering the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -1423,8 +1336,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the value used for a field's value when rendering the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+            >Retrieves the value used for a field's value when rendering the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -1457,18 +1369,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BoundField.GetValue(System.Web.UI.Control)" />
+            >The <see cref="M:System.Web.UI.WebControls.BoundField.GetValue(System.Web.UI.Control)" />
 
             
 
-             method is a helper method used to determine the value of a field. If the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             method is a helper method used to determine the value of a field. If the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
-             object is being displayed in a designer and the field value cannot be determined at design time, the value returned from the <see
-             cref="M:System.Web.UI.WebControls.BoundField.GetDesignTimeValue" />
+             object is being displayed in a designer and the field value cannot be determined at design time, the value returned from the <see cref="M:System.Web.UI.WebControls.BoundField.GetDesignTimeValue" />
 
             
 
@@ -1481,8 +1390,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the value of the field bound to the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+            >Retrieves the value of the field bound to the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -1492,8 +1400,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the field bound to the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+            >The value of the field bound to the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -1501,7 +1408,11 @@
           >
         </returns>
         <param name="controlContainer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1524,23 +1435,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BoundField.HeaderText" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BoundField.HeaderText" />
 
             
 
-             property to identify a field in a data control with a friendly name. The most common application of the <see
-             cref="P:System.Web.UI.WebControls.BoundField.HeaderText" />
+             property to identify a field in a data control with a friendly name. The most common application of the <see cref="P:System.Web.UI.WebControls.BoundField.HeaderText" />
 
             
 
-             property is to provide meaningful column names to data-bound fields in a <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             property is to provide meaningful column names to data-bound fields in a <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
-             or <see
-             cref="T:System.Web.UI.WebControls.DetailsView" />
+             or <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
             
 
@@ -1573,13 +1480,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BoundField.HtmlEncode" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BoundField.HtmlEncode" />
 
             
 
-             property to specify whether field values are HTML-encoded to their respective string representations before they are displayed in a <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             property to specify whether field values are HTML-encoded to their respective string representations before they are displayed in a <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -1592,8 +1497,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether field values are HTML-encoded before they are displayed in a <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+            >Gets or sets a value indicating whether field values are HTML-encoded before they are displayed in a <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -1623,56 +1527,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BoundField.Initialize(System.Boolean,System.Web.UI.Control)" />
+            >The <see cref="M:System.Web.UI.WebControls.BoundField.Initialize(System.Boolean,System.Web.UI.Control)" />
 
             
 
-             method is called by the data control with which the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             method is called by the data control with which the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
-             object is associated to perform basic object initialization for instances of the field, before the field is ever added to a rows collection. Data controls such as <see
-             cref="T:System.Web.UI.WebControls.DetailsView" />
+             object is associated to perform basic object initialization for instances of the field, before the field is ever added to a rows collection. Data controls such as <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
             
 
-             and <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             and <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
-             call the <see
-             cref="M:System.Web.UI.WebControls.DataControlField.Initialize(System.Boolean,System.Web.UI.Control)" />
+             call the <see cref="M:System.Web.UI.WebControls.DataControlField.Initialize(System.Boolean,System.Web.UI.Control)" />
 
             
 
              method in their CreateChildControls methods before other methods such as CreateRow are called to create specific rows with data.</para
           >
           <para
-            >Call this method when you are writing a custom data-bound control that uses <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Call this method when you are writing a custom data-bound control that uses <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             objects to perform basic initialization for a <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             objects to perform basic initialization for a <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
-             object. Implement this method if your <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             object. Implement this method if your <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
-            -derived type requires any object initialization before it populates <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            -derived type requires any object initialization before it populates <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             objects with data or controls in the <see
-             cref="M:System.Web.UI.WebControls.BoundField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" />
+             objects with data or controls in the <see cref="M:System.Web.UI.WebControls.BoundField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" />
 
             
 
@@ -1682,8 +1576,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+            >Initializes the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -1695,19 +1588,26 @@
           <para>false in all cases.</para>
         </returns>
         <param name="enableSorting">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if sorting is supported; otherwise, false.</param
         >
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The data control that owns the <see
-           cref="T:System.Web.UI.WebControls.BoundField" />
+          The data control that owns the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
           
 
@@ -1738,46 +1638,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BoundField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" />
+            >The <see cref="M:System.Web.UI.WebControls.BoundField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" />
 
             
 
-             method is implemented by <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             method is implemented by <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
-            -derived types to add text and controls to a <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            -derived types to add text and controls to a <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             object of a data control that uses tables to display a user interface (UI). These data controls create the complete table structure row-by-row when the control's CreateChildControls method is called. The <see
-             cref="M:System.Web.UI.WebControls.BoundField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" />
+             object of a data control that uses tables to display a user interface (UI). These data controls create the complete table structure row-by-row when the control's CreateChildControls method is called. The <see cref="M:System.Web.UI.WebControls.BoundField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" />
 
             
 
-             method is called by the InitializeRow method of data controls such as <see
-             cref="T:System.Web.UI.WebControls.DetailsView" />
+             method is called by the InitializeRow method of data controls such as <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
             
 
-             and <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             and <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
             .</para
           >
           <para
-            >Call this method when you are writing a custom data-bound control that uses <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Call this method when you are writing a custom data-bound control that uses <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             objects to initialize the cells of the table structure with data or controls. Implement this method when you are writing a <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             objects to initialize the cells of the table structure with data or controls. Implement this method when you are writing a <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -1787,8 +1679,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the specified <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Initializes the specified <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
@@ -1796,43 +1687,56 @@
           >
         </summary>
         <param name="cell">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.TableCell" />
+          The <see cref="T:System.Web.UI.WebControls.TableCell" />
 
           
 
            to initialize.</param
         >
         <param name="cellType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.DataControlCellType" />
+          One of the <see cref="T:System.Web.UI.WebControls.DataControlCellType" />
 
           
 
            values.</param
         >
         <param name="rowState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.DataControlRowState" />
+          One of the <see cref="T:System.Web.UI.WebControls.DataControlRowState" />
 
           
 
            values.</param
         >
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1861,13 +1765,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BoundField.InitializeDataCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlRowState)" />
+            >The <see cref="M:System.Web.UI.WebControls.BoundField.InitializeDataCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlRowState)" />
 
             
 
-             method is a helper method used to initialize a cell in the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             method is a helper method used to initialize a cell in the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -1877,8 +1779,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the specified <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Initializes the specified <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
@@ -1886,24 +1787,30 @@
           >
         </summary>
         <param name="cell">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.TableCell" />
+          The <see cref="T:System.Web.UI.WebControls.TableCell" />
 
           
 
            to initialize.</param
         >
         <param name="rowState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.DataControlRowState" />
+          One of the <see cref="T:System.Web.UI.WebControls.DataControlRowState" />
 
           
 
@@ -1931,8 +1838,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sometimes a field's value is stored as null in the data source. You can specify a custom caption to display for fields that have a null value by setting the <see
-             cref="P:System.Web.UI.WebControls.BoundField.NullDisplayText" />
+            >Sometimes a field's value is stored as null in the data source. You can specify a custom caption to display for fields that have a null value by setting the <see cref="P:System.Web.UI.WebControls.BoundField.NullDisplayText" />
 
             
 
@@ -1940,8 +1846,7 @@
           >
           <block subset="none" type="note">
             <para
-              >To convert an empty string field value to a null value, set the <see
-               cref="P:System.Web.UI.WebControls.BoundField.ConvertEmptyStringToNull" />
+              >To convert an empty string field value to a null value, set the <see cref="P:System.Web.UI.WebControls.BoundField.ConvertEmptyStringToNull" />
 
               
 
@@ -1976,13 +1881,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CheckBoxField.OnDataBindField(System.Object,System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.CheckBoxField.OnDataBindField(System.Object,System.EventArgs)" />
 
             
 
-             method is a helper method used to bind the value of a field in the data source to a corresponding cell in the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             method is a helper method used to bind the value of a field in the data source to a corresponding cell in the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -1992,8 +1895,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Binds the value of a field to the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+            >Binds the value of a field to the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -2001,19 +1903,26 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2041,13 +1950,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BoundField.ReadOnly" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BoundField.ReadOnly" />
 
             
 
-             property to prevent the values displayed in a <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             property to prevent the values displayed in a <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -2055,13 +1962,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.UI.WebControls.BoundField.ReadOnly" />
+              >The <see cref="P:System.Web.UI.WebControls.BoundField.ReadOnly" />
 
               
 
-               property applies only to edit mode. To prevent fields from showing up in insert mode, use the <see
-               cref="P:System.Web.UI.WebControls.DataControlField.InsertVisible" />
+               property applies only to edit mode. To prevent fields from showing up in insert mode, use the <see cref="P:System.Web.UI.WebControls.DataControlField.InsertVisible" />
 
               
 
@@ -2090,13 +1995,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.BoundField.SupportsHtmlEncode" />
+            >The <see cref="P:System.Web.UI.WebControls.BoundField.SupportsHtmlEncode" />
 
             
 
-             property is a helper property used by the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             property is a helper property used by the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -2106,8 +2009,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether HTML encoding is supported by a <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+            >Gets a value indicating whether HTML encoding is supported by a <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -2130,8 +2032,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This field is used to indicate that the <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+            >This field is used to indicate that the <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -2162,13 +2063,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BoundField.ValidateSupportsCallback" />
+            >The <see cref="M:System.Web.UI.WebControls.BoundField.ValidateSupportsCallback" />
 
             
 
-             method is a helper method used to determine whether the controls contained in a <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+             method is a helper method used to determine whether the controls contained in a <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
@@ -2181,8 +2080,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the controls contained in a <see
-             cref="T:System.Web.UI.WebControls.BoundField" />
+            >Determines whether the controls contained in a <see cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 

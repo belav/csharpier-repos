@@ -19,44 +19,37 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An encoding maps a Unicode character to an encoded sequence of bytes. A particular encoding is represented by a type that is derived from the <see
-         cref="T:System.Text.Encoding" />
+        >An encoding maps a Unicode character to an encoded sequence of bytes. A particular encoding is represented by a type that is derived from the <see cref="T:System.Text.Encoding" />
 
         
 
-         class. Specifically, a character is encoded to a byte sequence by calling the encoding type's <see
-         cref="M:System.Text.Encoding.GetBytes(System.String)" />
+         class. Specifically, a character is encoded to a byte sequence by calling the encoding type's <see cref="M:System.Text.Encoding.GetBytes(System.String)" />
 
         
 
-         method, and the byte sequence is decoded to a character array or a string by calling the <see
-         cref="M:System.Text.Encoding.GetChars(System.Byte[])" />
+         method, and the byte sequence is decoded to a character array or a string by calling the <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" />
 
         
 
-         or <see
-         cref="M:System.Text.Encoding.GetString(System.Byte[])" />
+         or <see cref="M:System.Text.Encoding.GetString(System.Byte[])" />
 
         
 
          method. </para
       >
       <para
-        >An encoding operation can fail if the input character cannot be represented by the encoding. For example, an <see
-         cref="T:System.Text.ASCIIEncoding" />
+        >An encoding operation can fail if the input character cannot be represented by the encoding. For example, an <see cref="T:System.Text.ASCIIEncoding" />
 
         
 
          object cannot encode a character whose Unicode code point value is outside the range U+0000 to U+007F. </para
       >
       <para
-        >When an encoding conversion cannot be performed, the .NET Framework provides a failure-handling mechanism called a fallback. Your application can use predefined .NET Framework encoder fallbacks, or it can create a custom encoder fallback derived from the <see
-         cref="T:System.Text.EncoderFallback" />
+        >When an encoding conversion cannot be performed, the .NET Framework provides a failure-handling mechanism called a fallback. Your application can use predefined .NET Framework encoder fallbacks, or it can create a custom encoder fallback derived from the <see cref="T:System.Text.EncoderFallback" />
 
         
 
-         and <see
-         cref="T:System.Text.EncoderFallbackBuffer" />
+         and <see cref="T:System.Text.EncoderFallbackBuffer" />
 
         
 
@@ -67,8 +60,7 @@
 
         
 
-         and <see
-         cref="T:System.Text.EncoderFallbackBuffer" />
+         and <see cref="T:System.Text.EncoderFallbackBuffer" />
 
         
 
@@ -77,8 +69,7 @@
       <list type="bullet">
         <item>
           <para
-            >Best-fit fallback, which maps valid Unicode characters that cannot be encoded to an approximate equivalent. For example, a best-fit fallback handler for the <see
-             cref="T:System.Text.ASCIIEncoding" />
+            >Best-fit fallback, which maps valid Unicode characters that cannot be encoded to an approximate equivalent. For example, a best-fit fallback handler for the <see cref="T:System.Text.ASCIIEncoding" />
 
             
 
@@ -87,13 +78,11 @@
         </item>
         <item>
           <para
-            >Replacement fallback, which replaces each character that cannot be encoded with a predefined string. The .NET Framework provides a predefined replacement fallback handler. The <see
-             cref="T:System.Text.EncoderReplacementFallback" />
+            >Replacement fallback, which replaces each character that cannot be encoded with a predefined string. The .NET Framework provides a predefined replacement fallback handler. The <see cref="T:System.Text.EncoderReplacementFallback" />
 
             
 
-             class replaces each byte sequence that cannot be decoded with a question mark character ("?", or U+003F) or a REPLACEMENT CHARACTER (U+FFFD). You can customize the replacement string by specifying a substitute in the call to the <see
-             cref="M:System.Text.EncoderReplacementFallback.#ctor(System.String)" />
+             class replaces each byte sequence that cannot be decoded with a question mark character ("?", or U+003F) or a REPLACEMENT CHARACTER (U+FFFD). You can customize the replacement string by specifying a substitute in the call to the <see cref="M:System.Text.EncoderReplacementFallback.#ctor(System.String)" />
 
             
 
@@ -102,13 +91,11 @@
         </item>
         <item>
           <para
-            >Exception fallback, which throws an exception when a character cannot be encoded. The .NET Framework provides a predefined exception fallback handler. The <see
-             cref="T:System.Text.EncoderExceptionFallback" />
+            >Exception fallback, which throws an exception when a character cannot be encoded. The .NET Framework provides a predefined exception fallback handler. The <see cref="T:System.Text.EncoderExceptionFallback" />
 
             
 
-             class throws an <see
-             cref="T:System.Text.EncoderFallbackException" />
+             class throws an <see cref="T:System.Text.EncoderFallbackException" />
 
             
 
@@ -117,8 +104,7 @@
         </item>
       </list>
       <para
-        >If you choose to implement a custom solution, you must override the following abstract members of the <see
-         cref="T:System.Text.EncoderFallback" />
+        >If you choose to implement a custom solution, you must override the following abstract members of the <see cref="T:System.Text.EncoderFallback" />
 
         
 
@@ -127,18 +113,15 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="M:System.Text.EncoderFallback.CreateFallbackBuffer" />
+            >The <see cref="M:System.Text.EncoderFallback.CreateFallbackBuffer" />
 
             
 
-             method, which returns a class instance derived from <see
-             cref="T:System.Text.EncoderFallbackBuffer" />
+             method, which returns a class instance derived from <see cref="T:System.Text.EncoderFallbackBuffer" />
 
             
 
-            . Depending on the type of fallback handler that you are developing, the <see
-             cref="T:System.Text.EncoderFallbackBuffer" />
+            . Depending on the type of fallback handler that you are developing, the <see cref="T:System.Text.EncoderFallbackBuffer" />
 
             
 
@@ -147,8 +130,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.Text.EncoderFallback.MaxCharCount" />
+            >The <see cref="P:System.Text.EncoderFallback.MaxCharCount" />
 
             
 
@@ -157,8 +139,7 @@
         </item>
       </list>
       <para
-        >For more information about encoding, decoding, and fallback strategies, see <format
-         type="text/html">
+        >For more information about encoding, decoding, and fallback strategies, see <format type="text/html">
           <a href="bf6d9823-4c2d-48af-b280-919c5af66ae9"
             >Character Encoding in the .NET Framework</a
           >
@@ -193,8 +174,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Text.EncoderFallback" />
+            >Initializes a new instance of the <see cref="T:System.Text.EncoderFallback" />
 
             
 
@@ -226,46 +206,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns an object derived from <see
-             cref="T:System.Text.EncoderFallbackBuffer" />
+            >This method returns an object derived from <see cref="T:System.Text.EncoderFallbackBuffer" />
 
             
 
-             that is responsible for performing the fallback operation. For example, of the predefined <see
-             cref="T:System.Text.EncoderFallback" />
+             that is responsible for performing the fallback operation. For example, of the predefined <see cref="T:System.Text.EncoderFallback" />
 
             
 
-             implementations in the .NET Framework, the <see
-             cref="M:System.Text.EncoderReplacementFallback.CreateFallbackBuffer" />
+             implementations in the .NET Framework, the <see cref="M:System.Text.EncoderReplacementFallback.CreateFallbackBuffer" />
 
             
 
-             method returns an <see
-             cref="T:System.Text.EncoderReplacementFallbackBuffer" />
+             method returns an <see cref="T:System.Text.EncoderReplacementFallbackBuffer" />
 
             
 
-             object, and the <see
-             cref="M:System.Text.EncoderExceptionFallback.CreateFallbackBuffer" />
+             object, and the <see cref="M:System.Text.EncoderExceptionFallback.CreateFallbackBuffer" />
 
             
 
-             method returns an <see
-             cref="T:System.Text.EncoderExceptionFallbackBuffer" />
+             method returns an <see cref="T:System.Text.EncoderExceptionFallbackBuffer" />
 
             
 
              object.</para
           >
           <para
-            >The <see
-             cref="M:System.Text.EncoderFallback.CreateFallbackBuffer" />
+            >The <see cref="M:System.Text.EncoderFallback.CreateFallbackBuffer" />
 
             
 
-             method is called by an encoder when it encounters the first character that it is unable to encode. The <see
-             cref="T:System.Text.EncoderFallbackBuffer" />
+             method is called by an encoder when it encounters the first character that it is unable to encode. The <see cref="T:System.Text.EncoderFallbackBuffer" />
 
             
 
@@ -275,8 +247,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, initializes a new instance of the <see
-             cref="T:System.Text.EncoderFallbackBuffer" />
+            >When overridden in a derived class, initializes a new instance of the <see cref="T:System.Text.EncoderFallbackBuffer" />
 
             
 
@@ -337,8 +308,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets the maximum number of characters the current <see
-             cref="T:System.Text.EncoderFallback" />
+            >When overridden in a derived class, gets the maximum number of characters the current <see cref="T:System.Text.EncoderFallback" />
 
             
 

@@ -42,23 +42,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is a read-only wrapper around an <see
-         cref="T:System.Collections.ObjectModel.ObservableCollection`1" />
+        >This class is a read-only wrapper around an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1" />
 
         
 
-        . If changes are made to the underlying collection, the <see
-         cref="T:System.Collections.ObjectModel.ReadOnlyObservableCollection`1" />
+        . If changes are made to the underlying collection, the <see cref="T:System.Collections.ObjectModel.ReadOnlyObservableCollection`1" />
 
         
 
-         reflects those changes. To be notified of the changes to this class, subscribe to the <see
-         cref="E:System.Collections.ObjectModel.ReadOnlyObservableCollection`1.System#Collections#Specialized#INotifyCollectionChanged#CollectionChanged" />
+         reflects those changes. To be notified of the changes to this class, subscribe to the <see cref="E:System.Collections.ObjectModel.ReadOnlyObservableCollection`1.System#Collections#Specialized#INotifyCollectionChanged#CollectionChanged" />
 
         
 
-         or <see
-         cref="E:System.Collections.ObjectModel.ReadOnlyObservableCollection`1.System#ComponentModel#INotifyPropertyChanged#PropertyChanged" />
+         or <see cref="E:System.Collections.ObjectModel.ReadOnlyObservableCollection`1.System#ComponentModel#INotifyPropertyChanged#PropertyChanged" />
 
         
 
@@ -68,8 +64,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a read-only <see
-         cref="T:System.Collections.ObjectModel.ObservableCollection`1" />
+        >Represents a read-only <see cref="T:System.Collections.ObjectModel.ObservableCollection`1" />
 
         
 
@@ -123,8 +118,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="E:System.Collections.Specialized.INotifyCollectionChanged.CollectionChanged" />
+            >For more information, see <see cref="E:System.Collections.Specialized.INotifyCollectionChanged.CollectionChanged" />
 
             
 
@@ -164,8 +158,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Collections.ObjectModel.ReadOnlyObservableCollection`1.CollectionChanged" />
+            >Raises the <see cref="E:System.Collections.ObjectModel.ReadOnlyObservableCollection`1.CollectionChanged" />
 
             
 
@@ -173,7 +166,11 @@
           >
         </summary>
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -205,8 +202,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Collections.ObjectModel.ReadOnlyObservableCollection`1.PropertyChanged" />
+            >Raises the <see cref="E:System.Collections.ObjectModel.ReadOnlyObservableCollection`1.PropertyChanged" />
 
             
 
@@ -214,7 +210,11 @@
           >
         </summary>
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -242,8 +242,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" />
+            >For more information, see <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" />
 
             
 

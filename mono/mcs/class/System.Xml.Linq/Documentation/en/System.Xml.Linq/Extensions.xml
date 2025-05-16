@@ -18,41 +18,34 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Most of the sqltecxlinq extension methods are axis methods that are used in vbteclinq queries. The methods in this class operate on collections and return collections. These methods enumerate the source collection, call the appropriate axis method on each item in the collection, and concatenate the results.</para>
       <para
-        >The two <see
-         cref="Overload:System.Xml.Linq.Extensions.Remove" />
+        >The two <see cref="Overload:System.Xml.Linq.Extensions.Remove" />
 
         
 
          extension methods are not axis methods, however. These methods remove attributes or nodes from the XML tree.</para
       >
       <para
-        >Note that there is another category of axis methods, implemented in the <see
-         cref="T:System.Xml.Linq.XElement" />
+        >Note that there is another category of axis methods, implemented in the <see cref="T:System.Xml.Linq.XElement" />
 
         
 
-        , <see
-         cref="T:System.Xml.Linq.XDocument" />
+        , <see cref="T:System.Xml.Linq.XDocument" />
 
         
 
-        , and <see
-         cref="T:System.Xml.Linq.XNode" />
+        , and <see cref="T:System.Xml.Linq.XNode" />
 
         
 
-         classes. These other axis methods operate on a single object, and return a collection of <see
-         cref="T:System.Xml.Linq.XElement" />
+         classes. These other axis methods operate on a single object, and return a collection of <see cref="T:System.Xml.Linq.XElement" />
 
         
 
-        , <see
-         cref="T:System.Xml.Linq.XAttribute" />
+        , <see cref="T:System.Xml.Linq.XAttribute" />
 
         
 
-        , or <see
-         cref="T:System.Xml.Linq.XNode" />
+        , or <see cref="T:System.Xml.Linq.XNode" />
 
         
 
@@ -100,8 +93,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If multiple nodes in the source collection have the same ancestor, the ancestor will be included multiple times in the result collection. To avoid this, use the <see
-             cref="Overload:System.Linq.Enumerable.Distinct" />
+            >If multiple nodes in the source collection have the same ancestor, the ancestor will be included multiple times in the result collection. To avoid this, use the <see cref="Overload:System.Linq.Enumerable.Distinct" />
 
             
 
@@ -116,13 +108,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XElement" />
+             of <see cref="T:System.Xml.Linq.XElement" />
 
             
 
@@ -130,34 +120,38 @@
           >
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Xml.Linq.XNode" />
+           of <see cref="T:System.Xml.Linq.XNode" />
 
           
 
            that contains the source collection.</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of the objects in <paramref
-           name="source" />
+          The type of the objects in <paramref name="source" />
 
           
 
-          , constrained to <see
-           cref="T:System.Xml.Linq.XNode" />
+          , constrained to <see cref="T:System.Xml.Linq.XNode" />
 
           
 
@@ -200,8 +194,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If multiple nodes in the source collection have the same ancestor with a matching <see
-             cref="T:System.Xml.Linq.XName" />
+            >If multiple nodes in the source collection have the same ancestor with a matching <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -212,8 +205,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a filtered collection of elements that contains the ancestors of every node in the source collection. Only elements that have a matching <see
-             cref="T:System.Xml.Linq.XName" />
+            >Returns a filtered collection of elements that contains the ancestors of every node in the source collection. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -223,18 +215,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XElement" />
+             of <see cref="T:System.Xml.Linq.XElement" />
 
             
 
-             that contains the ancestors of every node in the source collection. Only elements that have a matching <see
-             cref="T:System.Xml.Linq.XName" />
+             that contains the ancestors of every node in the source collection. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -242,46 +231,53 @@
           >
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Xml.Linq.XNode" />
+           of <see cref="T:System.Xml.Linq.XNode" />
 
           
 
            that contains the source collection.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XName" />
+          The <see cref="T:System.Xml.Linq.XName" />
 
           
 
            to match.</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of the objects in <paramref
-           name="source" />
+          The type of the objects in <paramref name="source" />
 
           
 
-          , constrained to <see
-           cref="T:System.Xml.Linq.XNode" />
+          , constrained to <see cref="T:System.Xml.Linq.XNode" />
 
           
 
@@ -316,8 +312,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If multiple nodes in the source collection have the same ancestor, the ancestor will be included multiple times in the result collection. To avoid this, use the <see
-             cref="Overload:System.Linq.Enumerable.Distinct" />
+            >If multiple nodes in the source collection have the same ancestor, the ancestor will be included multiple times in the result collection. To avoid this, use the <see cref="Overload:System.Linq.Enumerable.Distinct" />
 
             
 
@@ -332,13 +327,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XElement" />
+             of <see cref="T:System.Xml.Linq.XElement" />
 
             
 
@@ -346,17 +339,19 @@
           >
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Xml.Linq.XElement" />
+           of <see cref="T:System.Xml.Linq.XElement" />
 
           
 
@@ -392,8 +387,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If multiple nodes in the source collection have the same ancestor with a matching <see
-             cref="T:System.Xml.Linq.XName" />
+            >If multiple nodes in the source collection have the same ancestor with a matching <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -404,8 +398,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a filtered collection of elements that contains every element in the source collection, and the ancestors of every element in the source collection. Only elements that have a matching <see
-             cref="T:System.Xml.Linq.XName" />
+            >Returns a filtered collection of elements that contains every element in the source collection, and the ancestors of every element in the source collection. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -415,18 +408,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XElement" />
+             of <see cref="T:System.Xml.Linq.XElement" />
 
             
 
-             that contains every element in the source collection, and the ancestors of every element in the source collection. Only elements that have a matching <see
-             cref="T:System.Xml.Linq.XName" />
+             that contains every element in the source collection, and the ancestors of every element in the source collection. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -434,29 +424,34 @@
           >
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Xml.Linq.XElement" />
+           of <see cref="T:System.Xml.Linq.XElement" />
 
           
 
            that contains the source collection.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XName" />
+          The <see cref="T:System.Xml.Linq.XName" />
 
           
 
@@ -501,13 +496,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XAttribute" />
+             of <see cref="T:System.Xml.Linq.XAttribute" />
 
             
 
@@ -515,17 +508,19 @@
           >
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Xml.Linq.XElement" />
+           of <see cref="T:System.Xml.Linq.XElement" />
 
           
 
@@ -566,8 +561,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a filtered collection of the attributes of every element in the source collection. Only elements that have a matching <see
-             cref="T:System.Xml.Linq.XName" />
+            >Returns a filtered collection of the attributes of every element in the source collection. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -577,18 +571,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XAttribute" />
+             of <see cref="T:System.Xml.Linq.XAttribute" />
 
             
 
-             that contains a filtered collection of the attributes of every element in the source collection. Only elements that have a matching <see
-             cref="T:System.Xml.Linq.XName" />
+             that contains a filtered collection of the attributes of every element in the source collection. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -596,29 +587,34 @@
           >
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Xml.Linq.XElement" />
+           of <see cref="T:System.Xml.Linq.XElement" />
 
           
 
            that contains the source collection.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XName" />
+          The <see cref="T:System.Xml.Linq.XName" />
 
           
 
@@ -660,28 +656,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This axis extension method is used on <see
-             cref="T:System.Xml.Linq.XDocument" />
+            >This axis extension method is used on <see cref="T:System.Xml.Linq.XDocument" />
 
             
 
-             and <see
-             cref="T:System.Xml.Linq.XElement" />
+             and <see cref="T:System.Xml.Linq.XElement" />
 
             
 
-             objects. Both of these types derive from <see
-             cref="T:System.Xml.Linq.XContainer" />
+             objects. Both of these types derive from <see cref="T:System.Xml.Linq.XContainer" />
 
             
 
-            , so this method operates on an <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            , so this method operates on an <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XContainer" />
+             of <see cref="T:System.Xml.Linq.XContainer" />
 
             
 
@@ -697,13 +688,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XNode" />
+             of <see cref="T:System.Xml.Linq.XNode" />
 
             
 
@@ -711,34 +700,38 @@
           >
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Xml.Linq.XContainer" />
+           of <see cref="T:System.Xml.Linq.XContainer" />
 
           
 
            that contains the source collection.</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of the objects in <paramref
-           name="source" />
+          The type of the objects in <paramref name="source" />
 
           
 
-          , constrained to <see
-           cref="T:System.Xml.Linq.XContainer" />
+          , constrained to <see cref="T:System.Xml.Linq.XContainer" />
 
           
 
@@ -782,13 +775,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XNode" />
+             of <see cref="T:System.Xml.Linq.XNode" />
 
             
 
@@ -796,17 +787,19 @@
           >
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Xml.Linq.XElement" />
+           of <see cref="T:System.Xml.Linq.XElement" />
 
           
 
@@ -857,13 +850,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XElement" />
+             of <see cref="T:System.Xml.Linq.XElement" />
 
             
 
@@ -871,34 +862,38 @@
           >
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Xml.Linq.XContainer" />
+           of <see cref="T:System.Xml.Linq.XContainer" />
 
           
 
            that contains the source collection.</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of the objects in <paramref
-           name="source" />
+          The type of the objects in <paramref name="source" />
 
           
 
-          , constrained to <see
-           cref="T:System.Xml.Linq.XContainer" />
+          , constrained to <see cref="T:System.Xml.Linq.XContainer" />
 
           
 
@@ -941,8 +936,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visual Basic users can use the <format
-             type="text/html">
+            >Visual Basic users can use the <format type="text/html">
               <a href="4143c385-eb50-4286-a7fd-a50f466c7af0"
                 >Language-Integrated Axes in Visual Basic (LINQ to XML)</a
               >
@@ -957,8 +951,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a filtered collection of elements that contains the descendant elements of every element and document in the source collection. Only elements that have a matching <see
-             cref="T:System.Xml.Linq.XName" />
+            >Returns a filtered collection of elements that contains the descendant elements of every element and document in the source collection. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -968,18 +961,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XElement" />
+             of <see cref="T:System.Xml.Linq.XElement" />
 
             
 
-             that contains the descendant elements of every element and document in the source collection. Only elements that have a matching <see
-             cref="T:System.Xml.Linq.XName" />
+             that contains the descendant elements of every element and document in the source collection. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -987,46 +977,53 @@
           >
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Xml.Linq.XContainer" />
+           of <see cref="T:System.Xml.Linq.XContainer" />
 
           
 
            that contains the source collection.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XName" />
+          The <see cref="T:System.Xml.Linq.XName" />
 
           
 
            to match.</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of the objects in <paramref
-           name="source" />
+          The type of the objects in <paramref name="source" />
 
           
 
-          , constrained to <see
-           cref="T:System.Xml.Linq.XContainer" />
+          , constrained to <see cref="T:System.Xml.Linq.XContainer" />
 
           
 
@@ -1070,13 +1067,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XElement" />
+             of <see cref="T:System.Xml.Linq.XElement" />
 
             
 
@@ -1084,17 +1079,19 @@
           >
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Xml.Linq.XElement" />
+           of <see cref="T:System.Xml.Linq.XElement" />
 
           
 
@@ -1135,8 +1132,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a filtered collection of elements that contains every element in the source collection, and the descendents of every element in the source collection. Only elements that have a matching <see
-             cref="T:System.Xml.Linq.XName" />
+            >Returns a filtered collection of elements that contains every element in the source collection, and the descendents of every element in the source collection. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -1146,18 +1142,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XElement" />
+             of <see cref="T:System.Xml.Linq.XElement" />
 
             
 
-             that contains every element in the source collection, and the descendents of every element in the source collection. Only elements that have a matching <see
-             cref="T:System.Xml.Linq.XName" />
+             that contains every element in the source collection, and the descendents of every element in the source collection. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -1165,29 +1158,34 @@
           >
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Xml.Linq.XElement" />
+           of <see cref="T:System.Xml.Linq.XElement" />
 
           
 
            that contains the source collection.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XName" />
+          The <see cref="T:System.Xml.Linq.XName" />
 
           
 
@@ -1229,8 +1227,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although Visual Basic contains an integrated elements axis that allows you to find all child elements with a specified <see
-             cref="T:System.Xml.Linq.XName" />
+            >Although Visual Basic contains an integrated elements axis that allows you to find all child elements with a specified <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -1245,13 +1242,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XElement" />
+             of <see cref="T:System.Xml.Linq.XElement" />
 
             
 
@@ -1259,34 +1254,38 @@
           >
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Xml.Linq.XElement" />
+           of <see cref="T:System.Xml.Linq.XElement" />
 
           
 
            that contains the source collection.</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of the objects in <paramref
-           name="source" />
+          The type of the objects in <paramref name="source" />
 
           
 
-          , constrained to <see
-           cref="T:System.Xml.Linq.XContainer" />
+          , constrained to <see cref="T:System.Xml.Linq.XContainer" />
 
           
 
@@ -1334,8 +1333,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a filtered collection of the child elements of every element and document in the source collection. Only elements that have a matching <see
-             cref="T:System.Xml.Linq.XName" />
+            >Returns a filtered collection of the child elements of every element and document in the source collection. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -1345,18 +1343,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XElement" />
+             of <see cref="T:System.Xml.Linq.XElement" />
 
             
 
-             of the child elements of every element and document in the source collection. Only elements that have a matching <see
-             cref="T:System.Xml.Linq.XName" />
+             of the child elements of every element and document in the source collection. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -1364,46 +1359,53 @@
           >
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Xml.Linq.XElement" />
+           of <see cref="T:System.Xml.Linq.XElement" />
 
           
 
            that contains the source collection.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XName" />
+          The <see cref="T:System.Xml.Linq.XName" />
 
           
 
            to match.</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of the objects in <paramref
-           name="source" />
+          The type of the objects in <paramref name="source" />
 
           
 
-          , constrained to <see
-           cref="T:System.Xml.Linq.XContainer" />
+          , constrained to <see cref="T:System.Xml.Linq.XContainer" />
 
           
 
@@ -1453,13 +1455,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XNode" />
+             of <see cref="T:System.Xml.Linq.XNode" />
 
             
 
@@ -1467,34 +1467,38 @@
           >
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Xml.Linq.XNode" />
+           of <see cref="T:System.Xml.Linq.XNode" />
 
           
 
            that contains the source collection.</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of the objects in <paramref
-           name="source" />
+          The type of the objects in <paramref name="source" />
 
           
 
-          , constrained to <see
-           cref="T:System.Xml.Linq.XNode" />
+          , constrained to <see cref="T:System.Xml.Linq.XNode" />
 
           
 
@@ -1544,13 +1548,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XNode" />
+             of <see cref="T:System.Xml.Linq.XNode" />
 
             
 
@@ -1558,34 +1560,38 @@
           >
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Xml.Linq.XNode" />
+           of <see cref="T:System.Xml.Linq.XNode" />
 
           
 
            that contains the source collection.</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of the objects in <paramref
-           name="source" />
+          The type of the objects in <paramref name="source" />
 
           
 
-          , constrained to <see
-           cref="T:System.Xml.Linq.XContainer" />
+          , constrained to <see cref="T:System.Xml.Linq.XContainer" />
 
           
 
@@ -1620,13 +1626,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses snapshot semantics—that is, it copies the attributes in the source collection to a <see
-             cref="T:System.Collections.Generic.List`1" />
+            >This method uses snapshot semantics—that is, it copies the attributes in the source collection to a <see cref="T:System.Collections.Generic.List`1" />
 
             
 
-             before disconnecting them from their parents. This is required to avoid issues with mixed imperative/declarative code. For more information, see <format
-             type="text/html">
+             before disconnecting them from their parents. This is required to avoid issues with mixed imperative/declarative code. For more information, see <format type="text/html">
               <a href="d9a5c404-2b0e-46cd-a358-0e78773b3094"
                 >Mixed Declarative Code/Imperative Code Bugs</a
               >
@@ -1642,17 +1646,19 @@
           <para>Removes every attribute in the source collection from its parent element.</para>
         </summary>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Xml.Linq.XAttribute" />
+           of <see cref="T:System.Xml.Linq.XAttribute" />
 
           
 
@@ -1694,13 +1700,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses snapshot semantics—that is, it copies the attributes in the source collection to a <unmanagedCodeEntityReference
-            >List&lt;T&gt;</unmanagedCodeEntityReference>
+            >This method uses snapshot semantics—that is, it copies the attributes in the source collection to a <unmanagedCodeEntityReference>List&lt;T&gt;</unmanagedCodeEntityReference>
 
             
 
-             before disconnecting them from their parents. This is required to avoid issues with mixed imperative/declarative code. For more information, see <format
-             type="text/html">
+             before disconnecting them from their parents. This is required to avoid issues with mixed imperative/declarative code. For more information, see <format type="text/html">
               <a href="d9a5c404-2b0e-46cd-a358-0e78773b3094"
                 >Mixed Declarative Code/Imperative Code Bugs</a
               >
@@ -1716,34 +1720,38 @@
           <para>Removes every node in the source collection from its parent node.</para>
         </summary>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of <see
-           cref="T:System.Xml.Linq.XNode" />
+           of <see cref="T:System.Xml.Linq.XNode" />
 
           
 
            that contains the source collection.</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of the objects in <paramref
-           name="source" />
+          The type of the objects in <paramref name="source" />
 
           
 
-          , constrained to <see
-           cref="T:System.Xml.Linq.XNode" />
+          , constrained to <see cref="T:System.Xml.Linq.XNode" />
 
           
 

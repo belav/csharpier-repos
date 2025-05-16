@@ -52,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.ChannelParameterCollection" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.ChannelParameterCollection" />
 
             
 
@@ -82,13 +81,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance is created with <see
-             cref="P:System.ServiceModel.Channels.ChannelParameterCollection.Channel" />
+            >An instance is created with <see cref="P:System.ServiceModel.Channels.ChannelParameterCollection.Channel" />
 
             
 
-             set to <paramref
-             name="channel" />
+             set to <paramref name="channel" />
 
             
 
@@ -98,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.ChannelParameterCollection" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.ChannelParameterCollection" />
 
             
 
@@ -107,7 +103,11 @@
           >
         </summary>
         <param name="channel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -136,13 +136,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is set to <paramref
-             name="channel" />
+            >This property is set to <paramref name="channel" />
 
             
 
-             when <see
-             cref="M:System.ServiceModel.Channels.ChannelParameterCollection.#ctor(System.ServiceModel.Channels.IChannel)" />
+             when <see cref="M:System.ServiceModel.Channels.ChannelParameterCollection.#ctor(System.ServiceModel.Channels.IChannel)" />
 
             
 
@@ -204,14 +202,22 @@
           <para>Inserts the specified item into the collection using the specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index of the item in the collection.</param
         >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -243,8 +249,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the parameters in the current collection to a specified channel's <see
-             cref="T:System.ServiceModel.Channels.ChannelParameterCollection" />
+            >Adds the parameters in the current collection to a specified channel's <see cref="T:System.ServiceModel.Channels.ChannelParameterCollection" />
 
             
 
@@ -252,7 +257,11 @@
           >
         </summary>
         <param name="innerChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -283,7 +292,11 @@
           <para>Removes a parameter from the collection.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -318,14 +331,22 @@
           <para>Replaces an item in the collection at a specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Index of the item to replace.</param
         >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

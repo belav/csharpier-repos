@@ -30,28 +30,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >After a thread is created, it is in one or more <see
-         cref="T:System.Threading.ThreadState" />
+        >After a thread is created, it is in one or more <see cref="T:System.Threading.ThreadState" />
 
         
 
-         states until it is destroyed. Calling <see
-         cref="M:System.Threading.Thread.Interrupt" />
+         states until it is destroyed. Calling <see cref="M:System.Threading.Thread.Interrupt" />
 
         
 
-         when a thread is in the <see
-         cref="F:System.Threading.ThreadState.WaitSleepJoin" />
+         when a thread is in the <see cref="F:System.Threading.ThreadState.WaitSleepJoin" />
 
         
 
-         state will cause a <see
-         cref="T:System.Threading.ThreadInterruptedException" />
+         state will cause a <see cref="T:System.Threading.ThreadInterruptedException" />
 
         
 
-         to be thrown in the target thread. If the thread is not in the <see
-         cref="F:System.Threading.ThreadState.WaitSleepJoin" />
+         to be thrown in the target thread. If the thread is not in the <see cref="F:System.Threading.ThreadState.WaitSleepJoin" />
 
         
 
@@ -65,13 +60,11 @@
          uses the HRESULT COR_E_THREADINTERRUPTED, which has the value 0x80131519.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Threading.ThreadInterruptedException" />
+        >For a list of initial property values for an instance of <see cref="T:System.Threading.ThreadInterruptedException" />
 
         
 
-        , see the <see
-         cref="M:System.Threading.ThreadInterruptedException.#ctor" />
+        , see the <see cref="M:System.Threading.ThreadInterruptedException.#ctor" />
 
         
 
@@ -81,8 +74,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The exception that is thrown when a <see
-         cref="T:System.Threading.Thread" />
+        >The exception that is thrown when a <see cref="T:System.Threading.Thread" />
 
         
 
@@ -109,8 +101,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Threading.ThreadInterruptedException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Threading.ThreadInterruptedException" />
 
             
 
@@ -152,8 +143,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.ThreadInterruptedException" />
+            >Initializes a new instance of the <see cref="T:System.Threading.ThreadInterruptedException" />
 
             
 
@@ -182,8 +172,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Threading.ThreadInterruptedException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Threading.ThreadInterruptedException" />
 
             
 
@@ -225,8 +214,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.ThreadInterruptedException" />
+            >Initializes a new instance of the <see cref="T:System.Threading.ThreadInterruptedException" />
 
             
 
@@ -234,7 +222,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -266,8 +258,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format
-             type="text/html">
+            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format type="text/html">
               <a href="832AC524-21BC-419A-A27B-CA8BFC45840F">XML and SOAP Serialization</a>
             </format>
 
@@ -279,8 +270,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.ThreadInterruptedException" />
+            >Initializes a new instance of the <see cref="T:System.Threading.ThreadInterruptedException" />
 
             
 
@@ -288,24 +278,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -337,26 +333,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Threading.ThreadInterruptedException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Threading.ThreadInterruptedException" />
 
             
 
@@ -398,8 +390,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.ThreadInterruptedException" />
+            >Initializes a new instance of the <see cref="T:System.Threading.ThreadInterruptedException" />
 
             
 
@@ -407,19 +398,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 

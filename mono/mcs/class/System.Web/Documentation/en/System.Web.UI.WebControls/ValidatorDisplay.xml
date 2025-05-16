@@ -15,8 +15,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.ValidatorDisplay" />
+        >The <see cref="T:System.Web.UI.WebControls.ValidatorDisplay" />
 
         
 
@@ -27,8 +26,7 @@
 
         
 
-         specifies that you only want to display the error message in a <see
-         cref="T:System.Web.UI.WebControls.ValidationSummary" />
+         specifies that you only want to display the error message in a <see cref="T:System.Web.UI.WebControls.ValidationSummary" />
 
         
 
@@ -52,8 +50,7 @@
         <h2>Accessibility</h2>
       </format>
       <para
-        >For information about how to configure validation controls so that they generate markup that conforms to accessibility standards, see <format
-         type="text/html">
+        >For information about how to configure validation controls so that they generate markup that conforms to accessibility standards, see <format type="text/html">
           <a href="7e3ce9c4-6b7d-4fb1-94b5-72cf2a44fe13"
             >Accessibility in Visual Studio 2010 and ASP.NET 4</a
           >
@@ -61,8 +58,7 @@
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
 

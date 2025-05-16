@@ -2,8 +2,7 @@
 <clause number="8.9" title="Interfaces" informative="true">
   <paragraph>An interface defines a contract. A class or struct that implements an interface must adhere to its contract. Interfaces can contain methods, properties, events, and indexers as members. </paragraph>
   <paragraph
-    >The example <code_example
-    >
+    >The example <code_example>
       <![CDATA[
 interface IExample  
 {  
@@ -21,8 +20,7 @@ public delegate void EventHandler(object sender, EventArgs e);
     shows an interface that contains an indexer, an event E, a method F, and a property P. </paragraph
   >
   <paragraph
-    >Interfaces may employ multiple inheritance. In the example <code_example
-    >
+    >Interfaces may employ multiple inheritance. In the example <code_example>
       <![CDATA[
 interface IControl  
 {  
@@ -45,8 +43,7 @@ interface IComboBox: ITextBox, IListBox {}
     the interface IComboBox inherits from both ITextBox and IListBox. </paragraph
   >
   <paragraph
-    >Classes and structs can implement multiple interfaces. In the example <code_example
-    >
+    >Classes and structs can implement multiple interfaces. In the example <code_example>
       <![CDATA[
 interface IDataBound  
 {  
@@ -65,8 +62,7 @@ public class EditBox: Control, IControl, IDataBound
     the class EditBox derives from the class Control and implements both IControl and IDataBound. </paragraph
   >
   <paragraph
-    >In the previous example, the Paint method from the IControl interface and the Bind method from IDataBound interface are implemented using public members on the EditBox class. C# provides an alternative way of implementing these methods that allows the implementing class to avoid having these members be public. Interface members can be implemented using a qualified name. For example, the EditBox class could instead be implemented by providing IControl.Paint and IDataBound.Bind methods. <code_example
-    >
+    >In the previous example, the Paint method from the IControl interface and the Bind method from IDataBound interface are implemented using public members on the EditBox class. C# provides an alternative way of implementing these methods that allows the implementing class to avoid having these members be public. Interface members can be implemented using a qualified name. For example, the EditBox class could instead be implemented by providing IControl.Paint and IDataBound.Bind methods. <code_example>
       <![CDATA[
 public class EditBox: IControl, IDataBound  
 {  
@@ -77,8 +73,7 @@ public class EditBox: IControl, IDataBound
     </code_example>
   </paragraph>
   <paragraph
-    >Interface members implemented in this way are called explicit interface members because each member explicitly designates the interface member being implemented. Explicit interface members can only be called via the interface. For example, the EditBox's implementation of the Paint method can be called only by casting to the IControl interface. <code_example
-    >
+    >Interface members implemented in this way are called explicit interface members because each member explicitly designates the interface member being implemented. Explicit interface members can only be called via the interface. For example, the EditBox's implementation of the Paint method can be called only by casting to the IControl interface. <code_example>
       <![CDATA[
 class Test  
 {  

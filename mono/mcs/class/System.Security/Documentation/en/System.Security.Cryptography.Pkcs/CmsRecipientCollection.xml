@@ -30,23 +30,19 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+        >The <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
 
         
 
-         class represents a set of <see
-         cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+         class represents a set of <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
 
         
 
-         objects. <see
-         cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+         objects. <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
 
         
 
-         implements the <see
-         cref="T:System.Collections.ICollection" />
+         implements the <see cref="T:System.Collections.ICollection" />
 
         
 
@@ -73,13 +69,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.CmsRecipientCollection.#ctor" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.CmsRecipientCollection.#ctor" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
 
             
 
@@ -111,13 +105,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.CmsRecipientCollection.#ctor(System.Security.Cryptography.Pkcs.CmsRecipient)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.CmsRecipientCollection.#ctor(System.Security.Cryptography.Pkcs.CmsRecipient)" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
 
             
 
@@ -125,12 +117,15 @@
           >
         </summary>
         <param name="recipient">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+          An instance of the <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
 
           
 
@@ -168,13 +163,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.CmsRecipientCollection.#ctor(System.Security.Cryptography.Pkcs.SubjectIdentifierType,System.Security.Cryptography.X509Certificates.X509Certificate2Collection)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.CmsRecipientCollection.#ctor(System.Security.Cryptography.Pkcs.SubjectIdentifierType,System.Security.Cryptography.X509Certificates.X509Certificate2Collection)" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
 
             
 
@@ -182,24 +175,30 @@
           >
         </summary>
         <param name="recipientIdentifierType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A member of the <see
-           cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
+          A member of the <see cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
 
           
 
            enumeration that specifies the type of subject identifier.</param
         >
         <param name="certificates">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+          An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
           
 
@@ -233,13 +232,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.CmsRecipientCollection.Add(System.Security.Cryptography.Pkcs.CmsRecipient)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.CmsRecipientCollection.Add(System.Security.Cryptography.Pkcs.CmsRecipient)" />
 
             
 
-             method adds a recipient to the <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+             method adds a recipient to the <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
 
             
 
@@ -249,8 +246,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the method succeeds, the method returns an <see
-             cref="T:System.Int32" />
+            >If the method succeeds, the method returns an <see cref="T:System.Int32" />
 
             
 
@@ -259,17 +255,19 @@
           <para>If the method fails, it throws an exception.</para>
         </returns>
         <param name="recipient">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+          A <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
 
           
 
-           object that represents the recipient to add to the <see
-           cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+           object that represents the recipient to add to the <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
 
           
 
@@ -301,13 +299,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.CmsRecipientCollection.CopyTo(System.Array,System.Int32)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.CmsRecipientCollection.CopyTo(System.Array,System.Int32)" />
 
             
 
-             method copies the <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+             method copies the <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
 
             
 
@@ -315,34 +311,38 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Array" />
+          An <see cref="T:System.Array" />
 
           
 
-           object to which the <see
-           cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+           object to which the <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
 
           
 
            collection is to be copied.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
-           where the <see
-           cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+           where the <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
 
           
 
@@ -377,18 +377,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.CmsRecipientCollection.CopyTo(System.Security.Cryptography.Pkcs.CmsRecipient[],System.Int32)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.CmsRecipientCollection.CopyTo(System.Security.Cryptography.Pkcs.CmsRecipient[],System.Int32)" />
 
             
 
-             method copies the <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+             method copies the <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
 
             
 
-             collection to a <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+             collection to a <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
 
             
 
@@ -396,39 +393,42 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+          An array of <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
 
           
 
-           objects where the <see
-           cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+           objects where the <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
 
           
 
            collection is to be copied.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index for the array of <see
-           cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+          The zero-based index for the array of <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
 
           
 
-           objects in <paramref
-           name="array" />
+           objects in <paramref name="array" />
 
           
 
-           to which the <see
-           cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+           to which the <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
 
           
 
@@ -454,13 +454,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.CmsRecipientCollection.Count" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.CmsRecipientCollection.Count" />
 
             
 
-             property retrieves the number of items in the <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+             property retrieves the number of items in the <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
 
             
 
@@ -493,18 +491,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.CmsRecipientCollection.GetEnumerator" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.CmsRecipientCollection.GetEnumerator" />
 
             
 
-             method returns a <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsRecipientEnumerator" />
+             method returns a <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientEnumerator" />
 
             
 
-             object for the <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+             object for the <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
 
             
 
@@ -514,13 +509,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsRecipientEnumerator" />
+            >A <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientEnumerator" />
 
             
 
-             object that can be used to enumerate the <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+             object that can be used to enumerate the <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
 
             
 
@@ -547,8 +540,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.CmsRecipientCollection.IsSynchronized" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.CmsRecipientCollection.IsSynchronized" />
 
             
 
@@ -611,13 +603,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.CmsRecipientCollection.Remove(System.Security.Cryptography.Pkcs.CmsRecipient)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.CmsRecipientCollection.Remove(System.Security.Cryptography.Pkcs.CmsRecipient)" />
 
             
 
-             method removes a recipient from the <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+             method removes a recipient from the <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
 
             
 
@@ -625,12 +615,15 @@
           >
         </summary>
         <param name="recipient">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+          A <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
 
           
 
@@ -656,18 +649,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.CmsRecipientCollection.SyncRoot" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.CmsRecipientCollection.SyncRoot" />
 
             
 
-             property retrieves an <see
-             cref="T:System.Object" />
+             property retrieves an <see cref="T:System.Object" />
 
             
 
-             object used to synchronize access to the <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+             object used to synchronize access to the <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
 
             
 
@@ -699,18 +689,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.CmsRecipientCollection.System#Collections#IEnumerable#GetEnumerator" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.CmsRecipientCollection.System#Collections#IEnumerable#GetEnumerator" />
 
             
 
-             method returns a <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsRecipientEnumerator" />
+             method returns a <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientEnumerator" />
 
             
 
-             object for the <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+             object for the <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
 
             
 
@@ -720,13 +707,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsRecipientEnumerator" />
+            >A <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientEnumerator" />
 
             
 
-             object that can be used to enumerate the <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+             object that can be used to enumerate the <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
 
             
 

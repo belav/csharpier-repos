@@ -43,13 +43,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see
-         cref="E:System.Reflection.Assembly.ModuleResolve" />
+        >Represents the method that will handle the <see cref="E:System.Reflection.Assembly.ModuleResolve" />
 
         
 
-         event of an <see
-         cref="T:System.Reflection.Assembly" />
+         event of an <see cref="T:System.Reflection.Assembly" />
 
         
 

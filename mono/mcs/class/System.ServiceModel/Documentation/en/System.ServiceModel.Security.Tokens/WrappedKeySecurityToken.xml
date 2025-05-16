@@ -58,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.Tokens.WrappedKeySecurityToken" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.WrappedKeySecurityToken" />
 
             
 
@@ -67,45 +66,63 @@
           >
         </summary>
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The ID of the key token.</param
         >
         <param name="keyToWrap">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key to be wrapped.</param
         >
         <param name="wrappingAlgorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The algorithm used to do the wrapping.</param
         >
         <param name="wrappingToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IdentityModel.Tokens.SecurityToken" />
+          A <see cref="T:System.IdentityModel.Tokens.SecurityToken" />
 
           
 
            that represents the wrapping token.</param
         >
         <param name="wrappingTokenReference">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IdentityModel.Tokens.SecurityKeyIdentifier" />
+          A <see cref="T:System.IdentityModel.Tokens.SecurityKeyIdentifier" />
 
           
 
@@ -148,12 +165,15 @@
           <para>true if the token can create a key identifier clause; otherwise, false. The default is false.</para>
         </returns>
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of the <see
-           cref="T:System.IdentityModel.Tokens.SecurityKeyIdentifierClause" />
+          The type of the <see cref="T:System.IdentityModel.Tokens.SecurityKeyIdentifierClause" />
 
           
 
@@ -194,8 +214,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type of the <see
-             cref="T:System.IdentityModel.Tokens.SecurityKeyIdentifierClause" />
+            >The type of the <see cref="T:System.IdentityModel.Tokens.SecurityKeyIdentifierClause" />
 
             
 
@@ -203,12 +222,15 @@
           >
         </returns>
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of the <see
-           cref="T:System.IdentityModel.Tokens.SecurityKeyIdentifierClause" />
+          The type of the <see cref="T:System.IdentityModel.Tokens.SecurityKeyIdentifierClause" />
 
           
 
@@ -294,7 +316,11 @@
           <para>true if the current security key identifier clause equals the specified one; otherwise, false. The default is false.</para>
         </returns>
         <param name="keyIdentifierClause">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

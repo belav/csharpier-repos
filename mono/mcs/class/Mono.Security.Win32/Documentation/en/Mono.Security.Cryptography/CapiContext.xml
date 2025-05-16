@@ -8,7 +8,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -54,8 +56,7 @@
       </Parameters>
       <Docs>
         <param name="csp"
-          >a <see
-           cref="T:System.Security.Cryptography.CspParameters" />
+          >a <see cref="T:System.Security.Cryptography.CspParameters" />
 
           
 
@@ -95,8 +96,7 @@
       <Docs>
         <summary>Return the error code of the last operation.</summary>
         <value
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
@@ -135,8 +135,7 @@
       <Docs>
         <summary>Return the HCRYPTPROV handle managed by the class.</summary>
         <value
-          >a <see
-           cref="T:System.IntPtr" />
+          >a <see cref="T:System.IntPtr" />
 
           
 
@@ -159,8 +158,7 @@
       <Docs>
         <summary>Return the result of the last cryptographic operation made using this context.</summary>
         <value
-          >a <see
-           cref="T:System.Boolean" />
+          >a <see cref="T:System.Boolean" />
 
           
 

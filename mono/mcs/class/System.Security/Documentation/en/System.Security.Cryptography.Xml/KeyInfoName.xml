@@ -18,7 +18,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -59,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfoName" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoName" />
 
             
 
@@ -87,21 +88,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="keyName" />
+            >The <paramref name="keyName" />
 
             
 
              parameter can contain any string; the interpretation of the string is specific to the application. White space is significant in the string value.</para
           >
           <para
-            >The <paramref
-             name="keyName" />
+            >The <paramref name="keyName" />
 
             
 
-             parameter specifies the value of the <see
-             cref="P:System.Security.Cryptography.Xml.KeyInfoName.Value" />
+             parameter specifies the value of the <see cref="P:System.Security.Cryptography.Xml.KeyInfoName.Value" />
 
             
 
@@ -111,8 +109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfoName" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoName" />
 
             
 
@@ -120,7 +117,11 @@
           >
         </summary>
         <param name="keyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -148,8 +149,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.XmlElement" />
+            >The <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -159,8 +159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an XML representation of the <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfoName" />
+            >Returns an XML representation of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoName" />
 
             
 
@@ -170,8 +169,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An XML representation of the <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfoName" />
+            >An XML representation of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoName" />
 
             
 
@@ -205,8 +203,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Xml.KeyInfoName.LoadXml(System.Xml.XmlElement)" />
+            >The <see cref="M:System.Security.Cryptography.Xml.KeyInfoName.LoadXml(System.Xml.XmlElement)" />
 
             
 
@@ -216,13 +213,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Parses the input <see
-             cref="T:System.Xml.XmlElement" />
+            >Parses the input <see cref="T:System.Xml.XmlElement" />
 
             
 
-             object and configures the internal state of the <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfoName" />
+             object and configures the internal state of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoName" />
 
             
 
@@ -230,17 +225,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlElement" />
+          The <see cref="T:System.Xml.XmlElement" />
 
           
 
-           object that specifies the state of the <see
-           cref="T:System.Security.Cryptography.Xml.KeyInfoName" />
+           object that specifies the state of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoName" />
 
           
 
@@ -262,15 +259,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Xml.KeyInfoName.Value" />
+            >The <see cref="P:System.Security.Cryptography.Xml.KeyInfoName.Value" />
 
             
 

@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <clause number="13.4.3" title="User-defined implicit conversions">
   <paragraph
-    >A user-defined implicit conversion from type S to type T is processed as follows: <list
-    >
+    >A user-defined implicit conversion from type S to type T is processed as follows: <list>
       <list_item> Find the set of types, D, from which user-defined conversion operators will be considered. This set consists of S (if S is a class or struct), the base classes of S (if S is a class), T (if T is a class or struct), and the base classes of T (if T is a class). </list_item>
       <list_item> Find the set of applicable user-defined conversion operators, U. This set consists of the user-defined implicit conversion operators declared by the classes or structs in D that convert from a type encompassing S to a type encompassed by T. If U is empty, the conversion is undefined and a compile-time error occurs. </list_item>
       <list_item> Find the most specific source type, SX, of the operators in U: </list_item>

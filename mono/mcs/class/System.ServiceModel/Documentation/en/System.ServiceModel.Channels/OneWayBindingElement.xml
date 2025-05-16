@@ -20,38 +20,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To enable packet routing a <newTerm
-        >one-way conversion</newTerm>
+        >To enable packet routing a <newTerm>one-way conversion</newTerm>
 
         
 
-         layer is required, which this class provides. This class is a binding in the stack of bindings that performs a message-level shape change called OneWayBindingElement. This shape change can take a <see
-         cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
+         layer is required, which this class provides. This class is a binding in the stack of bindings that performs a message-level shape change called OneWayBindingElement. This shape change can take a <see cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
 
         
 
-         or a <see
-         cref="T:System.ServiceModel.Channels.IRequestChannel" />
+         or a <see cref="T:System.ServiceModel.Channels.IRequestChannel" />
 
         
 
-         and expose it as a <see
-         cref="T:System.ServiceModel.Channels.IInputChannel" />
+         and expose it as a <see cref="T:System.ServiceModel.Channels.IInputChannel" />
 
         
 
-        , or conversely it can take a <see
-         cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
+        , or conversely it can take a <see cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
 
         
 
-         or a <see
-         cref="T:System.ServiceModel.Channels.IRequestChannel" />
+         or a <see cref="T:System.ServiceModel.Channels.IRequestChannel" />
 
         
 
-         and expose it as a <see
-         cref="T:System.ServiceModel.Channels.IOutputChannel" />
+         and expose it as a <see cref="T:System.ServiceModel.Channels.IOutputChannel" />
 
         
 
@@ -81,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.OneWayBindingElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.OneWayBindingElement" />
 
             
 
@@ -125,18 +117,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.IChannelFactory`1" />
+            >The <see cref="T:System.ServiceModel.Channels.IChannelFactory`1" />
 
             
 
-             of type <see
-             cref="T:System.ServiceModel.Channels.IChannel" />
+             of type <see cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
-             initialized from the <paramref
-             name="context" />
+             initialized from the <paramref name="context" />
 
             
 
@@ -144,19 +133,26 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
            that provides context for the binding element.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -203,18 +199,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.IChannelListener`1" />
+            >The <see cref="T:System.ServiceModel.Channels.IChannelListener`1" />
 
             
 
-             of type <see
-             cref="T:System.ServiceModel.Channels.IChannel" />
+             of type <see cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
-             initialized from the <paramref
-             name="context" />
+             initialized from the <paramref name="context" />
 
             
 
@@ -222,19 +215,26 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
            that provides context for the binding element.  </param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -269,23 +269,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You should call this method before trying to create a channel factory.</para>
           <para
-            >This method returns true when <paramref
-             name="TChannel" />
+            >This method returns true when <paramref name="TChannel" />
 
             
 
-             is an <see
-             cref="T:System.ServiceModel.Channels.IOutputChannel" />
+             is an <see cref="T:System.ServiceModel.Channels.IOutputChannel" />
 
             
 
-            , and the binding below the present one in the binding stack is an <see
-             cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
+            , and the binding below the present one in the binding stack is an <see cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
 
             
 
-             or <see
-             cref="T:System.ServiceModel.Channels.IRequestChannel" />
+             or <see cref="T:System.ServiceModel.Channels.IRequestChannel" />
 
             
 
@@ -301,19 +297,26 @@
           <para>true if a channel factory of the specified type can be built; otherwise, false. The default is false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
            that provides context for the binding element.  </param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -353,23 +356,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You should call this method before trying to create a channel listener.</para>
           <para
-            >This method returns true when <paramref
-             name="TChannel" />
+            >This method returns true when <paramref name="TChannel" />
 
             
 
-             is an <see
-             cref="T:System.ServiceModel.Channels.IInputChannel" />
+             is an <see cref="T:System.ServiceModel.Channels.IInputChannel" />
 
             
 
-            , and the binding below the present one in the binding stack is an <see
-             cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
+            , and the binding below the present one in the binding stack is an <see cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
 
             
 
-             or <see
-             cref="T:System.ServiceModel.Channels.IReplyChannel" />
+             or <see cref="T:System.ServiceModel.Channels.IReplyChannel" />
 
             
 
@@ -385,19 +384,26 @@
           <para>true if a channel listener of the specified type can be built; otherwise, false. The default is false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
            that provides context for the binding element.  </param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -491,18 +497,15 @@
           <para>This method receives a binding context as an input parameter, which represents the stack of binding elements.</para>
           <para>Each binding element in the stack can handle the inquiry itself or delegate the inquiry, or a combination of the two. Each binding element can modify the context if it delegates the inquiry. However, a transport binding element handles the inquiry itself.</para>
           <para
-            >This method is implemented by binding elements as well as by the runtime objects, such as <see
-             cref="T:System.ServiceModel.Channels.IChannelFactory" />
+            >This method is implemented by binding elements as well as by the runtime objects, such as <see cref="T:System.ServiceModel.Channels.IChannelFactory" />
 
             
 
-            , <see
-             cref="T:System.ServiceModel.Channels.IChannelListener" />
+            , <see cref="T:System.ServiceModel.Channels.IChannelListener" />
 
             
 
-            , and <see
-             cref="T:System.ServiceModel.Channels.IChannel" />
+            , and <see cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
@@ -516,8 +519,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <paramref
-             name="T" />
+            >A <paramref name="T" />
 
             
 
@@ -525,19 +527,26 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
            that provides context for the binding element.  </param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

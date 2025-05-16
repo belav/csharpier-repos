@@ -18,18 +18,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by the <see
-         cref="P:System.Windows.Forms.DrawTreeNodeEventArgs.State" />
+        >This enumeration is used by the <see cref="P:System.Windows.Forms.DrawTreeNodeEventArgs.State" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.DrawTreeNodeEventArgs" />
+         property of the <see cref="T:System.Windows.Forms.DrawTreeNodeEventArgs" />
 
         
 
-         class. For more information, see the <see
-         cref="E:System.Windows.Forms.TreeView.DrawNode" />
+         class. For more information, see the <see cref="E:System.Windows.Forms.TreeView.DrawNode" />
 
         
 
@@ -39,8 +36,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines constants that represent the possible states of a <see
-         cref="T:System.Windows.Forms.TreeNode" />
+        >Defines constants that represent the possible states of a <see cref="T:System.Windows.Forms.TreeNode" />
 
         
 
@@ -128,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The node is hot. This state occurs when the <see
-             cref="P:System.Windows.Forms.TreeView.HotTracking" />
+            >The node is hot. This state occurs when the <see cref="P:System.Windows.Forms.TreeView.HotTracking" />
 
             
 

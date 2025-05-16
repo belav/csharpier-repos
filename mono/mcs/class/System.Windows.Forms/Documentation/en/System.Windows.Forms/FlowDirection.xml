@@ -13,49 +13,41 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.FlowDirection" />
+        >The <see cref="T:System.Windows.Forms.FlowDirection" />
 
         
 
-         enumeration describes the flow direction of consecutive UI elements, typically controls, on a design surface or container such as a form. This enumeration is used by linear layout containers such as <see
-         cref="T:System.Windows.Forms.FlowLayoutPanel" />
+         enumeration describes the flow direction of consecutive UI elements, typically controls, on a design surface or container such as a form. This enumeration is used by linear layout containers such as <see cref="T:System.Windows.Forms.FlowLayoutPanel" />
 
         
 
-        , which stores this information internally in the <see
-         cref="P:System.Windows.Forms.FlowLayoutPanel.FlowDirection" />
+        , which stores this information internally in the <see cref="P:System.Windows.Forms.FlowLayoutPanel.FlowDirection" />
 
         
 
          property.</para
       >
       <para
-        >The <see
-         cref="T:System.Windows.Forms.FlowDirection" />
+        >The <see cref="T:System.Windows.Forms.FlowDirection" />
 
         
 
-         determines where a new control is placed by default when it is added to a supporting container. The flow direction of the container, along with the <see
-         cref="P:System.Windows.Forms.Control.Anchor" />
+         determines where a new control is placed by default when it is added to a supporting container. The flow direction of the container, along with the <see cref="P:System.Windows.Forms.Control.Anchor" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.Control.Dock" />
+         and <see cref="P:System.Windows.Forms.Control.Dock" />
 
         
 
          properties of each contained control, determine the rearrangement of controls when their container is resized.</para
       >
       <para
-        >The <see
-         cref="T:System.Windows.Forms.FlowLayoutPanel" />
+        >The <see cref="T:System.Windows.Forms.FlowLayoutPanel" />
 
         
 
-         control provides a FlowBreak property to its child controls. Setting the value of the FlowBreak property to true causes the <see
-         cref="T:System.Windows.Forms.FlowLayoutPanel" />
+         control provides a FlowBreak property to its child controls. Setting the value of the FlowBreak property to true causes the <see cref="T:System.Windows.Forms.FlowLayoutPanel" />
 
         
 

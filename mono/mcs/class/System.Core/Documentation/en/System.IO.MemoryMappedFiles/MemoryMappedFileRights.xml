@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can specify access rights when you use the <see
-         cref="Overload:System.IO.MemoryMappedFiles.MemoryMappedFile.OpenExisting" />
+        >You can specify access rights when you use the <see cref="Overload:System.IO.MemoryMappedFiles.MemoryMappedFile.OpenExisting" />
 
         
 
@@ -192,13 +191,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The right to open and copy a folder or file as read-only, and to run application files. This right includes the <see
-             cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileRights.Read" />
+            >The right to open and copy a folder or file as read-only, and to run application files. This right includes the <see cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileRights.Read" />
 
             
 
-             right and the <see
-             cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileRights.Execute" />
+             right and the <see cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileRights.Execute" />
 
             
 

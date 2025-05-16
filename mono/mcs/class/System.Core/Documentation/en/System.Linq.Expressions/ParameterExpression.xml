@@ -26,31 +26,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="M:System.Linq.Expressions.Expression.Parameter(System.Type,System.String)" />
+        >Use the <see cref="M:System.Linq.Expressions.Expression.Parameter(System.Type,System.String)" />
 
         
 
-         factory method to create a <see
-         cref="T:System.Linq.Expressions.ParameterExpression" />
+         factory method to create a <see cref="T:System.Linq.Expressions.ParameterExpression" />
 
         
 
         .</para
       >
       <para
-        >The value of the <see
-         cref="P:System.Linq.Expressions.Expression.NodeType" />
+        >The value of the <see cref="P:System.Linq.Expressions.Expression.NodeType" />
 
         
 
-         property of a <see
-         cref="T:System.Linq.Expressions.ParameterExpression" />
+         property of a <see cref="T:System.Linq.Expressions.ParameterExpression" />
 
         
 
-         object is <see
-         cref="F:System.Linq.Expressions.ExpressionType.Parameter" />
+         object is <see cref="F:System.Linq.Expressions.ExpressionType.Parameter" />
 
         
 
@@ -86,23 +81,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This default implementation for <see
-             cref="F:System.Linq.Expressions.ExpressionType.Extension" />
+            >This default implementation for <see cref="F:System.Linq.Expressions.ExpressionType.Extension" />
 
             
 
-             nodes calls <see
-             cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />
+             nodes calls <see cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />
 
             
 
-            . Override this method to call into a more specific method on a derived visitor class of the <see
-             cref="T:System.Linq.Expressions.ExpressionVisitor" />
+            . Override this method to call into a more specific method on a derived visitor class of the <see cref="T:System.Linq.Expressions.ExpressionVisitor" />
 
             
 
-             class. However, it should still support unknown visitors by calling <see
-             cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />
+             class. However, it should still support unknown visitors by calling <see cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />
 
             
 
@@ -112,13 +103,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Dispatches to the specific visit method for this node type. For example, <see
-             cref="T:System.Linq.Expressions.MethodCallExpression" />
+            >Dispatches to the specific visit method for this node type. For example, <see cref="T:System.Linq.Expressions.MethodCallExpression" />
 
             
 
-             calls the <see
-             cref="M:System.Linq.Expressions.ExpressionVisitor.VisitMethodCall(System.Linq.Expressions.MethodCallExpression)" />
+             calls the <see cref="M:System.Linq.Expressions.ExpressionVisitor.VisitMethodCall(System.Linq.Expressions.MethodCallExpression)" />
 
             
 
@@ -130,7 +119,11 @@
           <para>The result of visiting this node.</para>
         </returns>
         <param name="visitor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -199,8 +192,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the node type of this <see
-             cref="T:System.Linq.Expressions.Expression" />
+            >Returns the node type of this <see cref="T:System.Linq.Expressions.Expression" />
 
             
 
@@ -225,8 +217,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the static type of the expression that this <see
-             cref="T:System.Linq.Expressions.Expression" />
+            >Gets the static type of the expression that this <see cref="T:System.Linq.Expressions.Expression" />
 
             
 

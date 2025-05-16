@@ -16,13 +16,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.DesignTimeParseData" />
+        >The <see cref="T:System.Web.UI.DesignTimeParseData" />
 
         
 
-         class is used to provide design-time parameters for several methods in the <see
-         cref="T:System.Web.UI.DesignTimeTemplateParser" />
+         class is used to provide design-time parameters for several methods in the <see cref="T:System.Web.UI.DesignTimeTemplateParser" />
 
         
 
@@ -51,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.DesignTimeParseData" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.DesignTimeParseData" />
 
             
 
@@ -60,14 +57,22 @@
           >
         </summary>
         <param name="designerHost">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object for managing designer transactions and components.</param
         >
         <param name="parseText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -98,8 +103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.DesignTimeParseData" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.DesignTimeParseData" />
 
             
 
@@ -107,21 +111,33 @@
           >
         </summary>
         <param name="designerHost">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object for managing designer transactions and components.</param
         >
         <param name="parseText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text to parse during design time.</param
         >
         <param name="filter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -137,10 +153,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.EventHandler" />
-        </value>
+        <value>a <see cref="T:System.EventHandler" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -163,10 +176,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
-        </value>
+        <value>a <see cref="T:System.ComponentModel.Design.IDesignerHost" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -186,10 +196,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -227,10 +234,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

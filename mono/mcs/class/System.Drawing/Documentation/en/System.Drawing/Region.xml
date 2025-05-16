@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A region is scalable because its coordinates are specified in world coordinates. On a drawing surface, however, its interior is dependent on the size and shape of the pixels representing it. An application can use regions to clip the output of drawing operations. These regions are called clipping regions. For more information on using regions for clipping, see <format
-         type="text/html">
+        >A region is scalable because its coordinates are specified in world coordinates. On a drawing surface, however, its interior is dependent on the size and shape of the pixels representing it. An application can use regions to clip the output of drawing operations. These regions are called clipping regions. For more information on using regions for clipping, see <format type="text/html">
           <a href="43d121b4-e14c-4901-b25c-2d6c25ba4e29">How To: Use Clipping with a Region</a>
         </format>
 
@@ -35,8 +34,7 @@
         . </para
       >
       <para
-        >An application can also use regions in hit-testing operations, such as checking whether a point or a rectangle intersects a region. For more information on using regions for hit-testing, see <format
-         type="text/html">
+        >An application can also use regions in hit-testing operations, such as checking whether a point or a rectangle intersects a region. For more information on using regions for hit-testing, see <format type="text/html">
           <a href="3a4c07cb-a40a-4d14-ad35-008f531910a8">How To: Use Hit Testing with a Region</a>
         </format>
 
@@ -45,13 +43,11 @@
         .</para
       >
       <para
-        >An application can fill a region by using the <see
-         cref="M:System.Drawing.Graphics.FillRegion(System.Drawing.Brush,System.Drawing.Region)" />
+        >An application can fill a region by using the <see cref="M:System.Drawing.Graphics.FillRegion(System.Drawing.Brush,System.Drawing.Region)" />
 
         
 
-         method and a  <see
-         cref="T:System.Drawing.Brush" />
+         method and a  <see cref="T:System.Drawing.Brush" />
 
         
 
@@ -73,8 +69,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes a new <see
-             cref="T:System.Drawing.Region" />
+            >This constructor initializes a new <see cref="T:System.Drawing.Region" />
 
             
 
@@ -84,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.Region" />
+            >Initializes a new <see cref="T:System.Drawing.Region" />
 
             
 
@@ -112,23 +106,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates a new <see
-             cref="T:System.Drawing.Region" />
+            >This method creates a new <see cref="T:System.Drawing.Region" />
 
             
 
-             with a <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+             with a <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-            . The new region is defined as the interior of the <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+            . The new region is defined as the interior of the <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             specified by the <paramref
-             name="path" />
+             specified by the <paramref name="path" />
 
             
 
@@ -138,13 +128,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.Region" />
+            >Initializes a new <see cref="T:System.Drawing.Region" />
 
             
 
-             with the specified <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+             with the specified <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -152,17 +140,19 @@
           >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+          A <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
           
 
-           that defines the new <see
-           cref="T:System.Drawing.Region" />
+           that defines the new <see cref="T:System.Drawing.Region" />
 
           
 
@@ -188,23 +178,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates a new <see
-             cref="T:System.Drawing.Region" />
+            >This method creates a new <see cref="T:System.Drawing.Region" />
 
             
 
-             with an interior defined by an existing <see
-             cref="T:System.Drawing.Region" />
+             with an interior defined by an existing <see cref="T:System.Drawing.Region" />
 
             
 
-            . The <paramref
-             name="rgnData" />
+            . The <paramref name="rgnData" />
 
             
 
-             parameter is an array that contains the definition of an existing <see
-             cref="T:System.Drawing.Region" />
+             parameter is an array that contains the definition of an existing <see cref="T:System.Drawing.Region" />
 
             
 
@@ -214,8 +200,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.Region" />
+            >Initializes a new <see cref="T:System.Drawing.Region" />
 
             
 
@@ -223,17 +208,19 @@
           >
         </summary>
         <param name="rgnData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.RegionData" />
+          A <see cref="T:System.Drawing.Drawing2D.RegionData" />
 
           
 
-           that defines the interior of the new <see
-           cref="T:System.Drawing.Region" />
+           that defines the interior of the new <see cref="T:System.Drawing.Region" />
 
           
 
@@ -256,13 +243,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates a new <see
-             cref="T:System.Drawing.Region" />
+            >This method creates a new <see cref="T:System.Drawing.Region" />
 
             
 
-             with a rectangular interior. The interior is defined by the <paramref
-             name="rect" />
+             with a rectangular interior. The interior is defined by the <paramref name="rect" />
 
             
 
@@ -272,13 +257,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.Region" />
+            >Initializes a new <see cref="T:System.Drawing.Region" />
 
             
 
-             from the specified <see
-             cref="T:System.Drawing.Rectangle" />
+             from the specified <see cref="T:System.Drawing.Rectangle" />
 
             
 
@@ -286,17 +269,19 @@
           >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           structure that defines the interior of the new <see
-           cref="T:System.Drawing.Region" />
+           structure that defines the interior of the new <see cref="T:System.Drawing.Region" />
 
           
 
@@ -319,13 +304,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates a new <see
-             cref="T:System.Drawing.Region" />
+            >This method creates a new <see cref="T:System.Drawing.Region" />
 
             
 
-             with a rectangular interior. The interior is defined by the <paramref
-             name="rect" />
+             with a rectangular interior. The interior is defined by the <paramref name="rect" />
 
             
 
@@ -335,13 +318,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.Region" />
+            >Initializes a new <see cref="T:System.Drawing.Region" />
 
             
 
-             from the specified <see
-             cref="T:System.Drawing.RectangleF" />
+             from the specified <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -349,17 +330,19 @@
           >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           structure that defines the interior of the new <see
-           cref="T:System.Drawing.Region" />
+           structure that defines the interior of the new <see cref="T:System.Drawing.Region" />
 
           
 
@@ -383,8 +366,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an exact copy of this <see
-             cref="T:System.Drawing.Region" />
+            >Creates an exact copy of this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -394,8 +376,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Region" />
+            >The <see cref="T:System.Drawing.Region" />
 
             
 
@@ -425,18 +406,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates this <see
-             cref="T:System.Drawing.Region" />
+            >Updates this <see cref="T:System.Drawing.Region" />
 
             
 
-             to contain the portion of the specified <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+             to contain the portion of the specified <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
-             that does not intersect with this <see
-             cref="T:System.Drawing.Region" />
+             that does not intersect with this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -444,17 +422,19 @@
           >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+          The <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
           
 
-           to complement this <see
-           cref="T:System.Drawing.Region" />
+           to complement this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -483,18 +463,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates this <see
-             cref="T:System.Drawing.Region" />
+            >Updates this <see cref="T:System.Drawing.Region" />
 
             
 
-             to contain the portion of the specified <see
-             cref="T:System.Drawing.Rectangle" />
+             to contain the portion of the specified <see cref="T:System.Drawing.Rectangle" />
 
             
 
-             structure that does not intersect with this <see
-             cref="T:System.Drawing.Region" />
+             structure that does not intersect with this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -502,17 +479,19 @@
           >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           structure to complement this <see
-           cref="T:System.Drawing.Region" />
+           structure to complement this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -541,18 +520,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates this <see
-             cref="T:System.Drawing.Region" />
+            >Updates this <see cref="T:System.Drawing.Region" />
 
             
 
-             to contain the portion of the specified <see
-             cref="T:System.Drawing.RectangleF" />
+             to contain the portion of the specified <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             structure that does not intersect with this <see
-             cref="T:System.Drawing.Region" />
+             structure that does not intersect with this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -560,17 +536,19 @@
           >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.RectangleF" />
+          The <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           structure to complement this <see
-           cref="T:System.Drawing.Region" />
+           structure to complement this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -599,18 +577,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates this <see
-             cref="T:System.Drawing.Region" />
+            >Updates this <see cref="T:System.Drawing.Region" />
 
             
 
-             to contain the portion of the specified <see
-             cref="T:System.Drawing.Region" />
+             to contain the portion of the specified <see cref="T:System.Drawing.Region" />
 
             
 
-             that does not intersect with this <see
-             cref="T:System.Drawing.Region" />
+             that does not intersect with this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -618,17 +593,19 @@
           >
         </summary>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Region" />
+          The <see cref="T:System.Drawing.Region" />
 
           
 
-           object to complement this <see
-           cref="T:System.Drawing.Region" />
+           object to complement this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -651,63 +628,52 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling <see
-             cref="M:System.Drawing.Region.Dispose" />
+            >Calling <see cref="M:System.Drawing.Region.Dispose" />
 
             
 
-             allows the resources used by this <see
-             cref="T:System.Drawing.Region" />
+             allows the resources used by this <see cref="T:System.Drawing.Region" />
 
             
 
              to be reallocated for other purposes.</para
           >
           <para
-            >Call <see
-             cref="M:System.Drawing.Region.Dispose" />
+            >Call <see cref="M:System.Drawing.Region.Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.Drawing.Region" />
+             when you are finished using the <see cref="T:System.Drawing.Region" />
 
             
 
-            . The <see
-             cref="M:System.Drawing.Region.Dispose" />
+            . The <see cref="M:System.Drawing.Region.Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.Drawing.Region" />
+             method leaves the <see cref="T:System.Drawing.Region" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Drawing.Region.Dispose" />
+             in an unusable state. After calling <see cref="M:System.Drawing.Region.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Drawing.Region" />
+            , you must release all references to the <see cref="T:System.Drawing.Region" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Drawing.Region" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Drawing.Region" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -717,18 +683,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.Drawing.Region.Dispose" />
+              >Always call <see cref="M:System.Drawing.Region.Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.Drawing.Region" />
+               before you release your last reference to the <see cref="T:System.Drawing.Region" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.Drawing.Region" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Drawing.Region" />
 
               
 
@@ -739,8 +702,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by this <see
-             cref="T:System.Drawing.Region" />
+            >Releases all resources used by this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -774,8 +736,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current transformation of the graphics context <paramref
-             name="g" />
+            >The current transformation of the graphics context <paramref name="g" />
 
             
 
@@ -785,13 +746,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether the specified <see
-             cref="T:System.Drawing.Region" />
+            >Tests whether the specified <see cref="T:System.Drawing.Region" />
 
             
 
-             is identical to this <see
-             cref="T:System.Drawing.Region" />
+             is identical to this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -801,8 +760,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the interior of region is identical to the interior of this region when the transformation associated with the <paramref
-             name="g" />
+            >true if the interior of region is identical to the interior of this region when the transformation associated with the <paramref name="g" />
 
             
 
@@ -810,24 +768,30 @@
           >
         </returns>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Region" />
+          The <see cref="T:System.Drawing.Region" />
 
           
 
            to test. </param
         >
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Graphics" />
+          A <see cref="T:System.Drawing.Graphics" />
 
           
 
@@ -856,13 +820,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates this <see
-             cref="T:System.Drawing.Region" />
+            >Updates this <see cref="T:System.Drawing.Region" />
 
             
 
-             to contain only the portion of its interior that does not intersect with the specified <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+             to contain only the portion of its interior that does not intersect with the specified <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -870,17 +832,19 @@
           >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+          The <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
           
 
-           to exclude from this <see
-           cref="T:System.Drawing.Region" />
+           to exclude from this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -906,13 +870,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates this <see
-             cref="T:System.Drawing.Region" />
+            >Updates this <see cref="T:System.Drawing.Region" />
 
             
 
-             to contain only the portion of its interior that does not intersect with the specified <see
-             cref="T:System.Drawing.Rectangle" />
+             to contain only the portion of its interior that does not intersect with the specified <see cref="T:System.Drawing.Rectangle" />
 
             
 
@@ -920,17 +882,19 @@
           >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           structure to exclude from this <see
-           cref="T:System.Drawing.Region" />
+           structure to exclude from this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -959,13 +923,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates this <see
-             cref="T:System.Drawing.Region" />
+            >Updates this <see cref="T:System.Drawing.Region" />
 
             
 
-             to contain only the portion of its interior that does not intersect with the specified <see
-             cref="T:System.Drawing.RectangleF" />
+             to contain only the portion of its interior that does not intersect with the specified <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -973,17 +935,19 @@
           >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.RectangleF" />
+          The <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           structure to exclude from this <see
-           cref="T:System.Drawing.Region" />
+           structure to exclude from this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -1009,13 +973,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates this <see
-             cref="T:System.Drawing.Region" />
+            >Updates this <see cref="T:System.Drawing.Region" />
 
             
 
-             to contain only the portion of its interior that does not intersect with the specified <see
-             cref="T:System.Drawing.Region" />
+             to contain only the portion of its interior that does not intersect with the specified <see cref="T:System.Drawing.Region" />
 
             
 
@@ -1023,17 +985,19 @@
           >
         </summary>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Region" />
+          The <see cref="T:System.Drawing.Region" />
 
           
 
-           to exclude from this <see
-           cref="T:System.Drawing.Region" />
+           to exclude from this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -1077,18 +1041,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates a new <see
-             cref="T:System.Drawing.Region" />
+            >This method creates a new <see cref="T:System.Drawing.Region" />
 
             
 
-             with an interior defined by the existing <see
-             cref="T:System.Drawing.Region" />
+             with an interior defined by the existing <see cref="T:System.Drawing.Region" />
 
             
 
-             referred to by the handle in the <paramref
-             name="hrgn" />
+             referred to by the handle in the <paramref name="hrgn" />
 
             
 
@@ -1098,8 +1059,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.Region" />
+            >Initializes a new <see cref="T:System.Drawing.Region" />
 
             
 
@@ -1109,8 +1069,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.Drawing.Region" />
+            >The new <see cref="T:System.Drawing.Region" />
 
             
 
@@ -1118,12 +1077,15 @@
           >
         </returns>
         <param name="hrgn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A handle to an existing <see
-           cref="T:System.Drawing.Region" />
+          A handle to an existing <see cref="T:System.Drawing.Region" />
 
           
 
@@ -1155,18 +1117,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.RectangleF" />
+            >Gets a <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             structure that represents a rectangle that bounds this <see
-             cref="T:System.Drawing.Region" />
+             structure that represents a rectangle that bounds this <see cref="T:System.Drawing.Region" />
 
             
 
-             on the drawing surface of a <see
-             cref="T:System.Drawing.Graphics" />
+             on the drawing surface of a <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -1176,13 +1135,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.RectangleF" />
+            >A <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             structure that represents the bounding rectangle for this <see
-             cref="T:System.Drawing.Region" />
+             structure that represents the bounding rectangle for this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -1190,17 +1147,19 @@
           >
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
-           on which this <see
-           cref="T:System.Drawing.Region" />
+           on which this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -1226,8 +1185,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a Windows handle to this <see
-             cref="T:System.Drawing.Region" />
+            >Returns a Windows handle to this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -1237,8 +1195,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A Windows handle to this <see
-             cref="T:System.Drawing.Region" />
+            >A Windows handle to this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -1246,17 +1203,19 @@
           >
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
-           on which this <see
-           cref="T:System.Drawing.Region" />
+           on which this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -1282,18 +1241,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Region" />
+            >The <see cref="T:System.Drawing.Region" />
 
             
 
-             class allows you to define a custom shape. The shape can be made up of lines, polygons, and curves. <see
-             cref="M:System.Drawing.Region.GetRegionData" />
+             class allows you to define a custom shape. The shape can be made up of lines, polygons, and curves. <see cref="M:System.Drawing.Region.GetRegionData" />
 
             
 
-             describes the  shape contained in this <see
-             cref="T:System.Drawing.Region" />
+             describes the  shape contained in this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -1303,13 +1259,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Drawing.Drawing2D.RegionData" />
+            >Returns a <see cref="T:System.Drawing.Drawing2D.RegionData" />
 
             
 
-             that represents the information that describes this <see
-             cref="T:System.Drawing.Region" />
+             that represents the information that describes this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -1319,13 +1273,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Drawing2D.RegionData" />
+            >A <see cref="T:System.Drawing.Drawing2D.RegionData" />
 
             
 
-             that represents the information that describes this <see
-             cref="T:System.Drawing.Region" />
+             that represents the information that describes this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -1355,13 +1307,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of <see
-             cref="T:System.Drawing.RectangleF" />
+            >Returns an array of <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             structures that approximate this <see
-             cref="T:System.Drawing.Region" />
+             structures that approximate this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -1371,13 +1321,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Drawing.RectangleF" />
+            >An array of <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             structures that approximate this <see
-             cref="T:System.Drawing.Region" />
+             structures that approximate this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -1385,12 +1333,15 @@
           >
         </returns>
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          A <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
@@ -1419,13 +1370,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates this <see
-             cref="T:System.Drawing.Region" />
+            >Updates this <see cref="T:System.Drawing.Region" />
 
             
 
-             to the intersection of itself with the specified <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+             to the intersection of itself with the specified <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -1433,17 +1382,19 @@
           >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+          The <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
           
 
-           to intersect with this <see
-           cref="T:System.Drawing.Region" />
+           to intersect with this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -1472,13 +1423,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates this <see
-             cref="T:System.Drawing.Region" />
+            >Updates this <see cref="T:System.Drawing.Region" />
 
             
 
-             to the intersection of itself with the specified <see
-             cref="T:System.Drawing.Rectangle" />
+             to the intersection of itself with the specified <see cref="T:System.Drawing.Rectangle" />
 
             
 
@@ -1490,17 +1439,19 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           structure to intersect with this <see
-           cref="T:System.Drawing.Region" />
+           structure to intersect with this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -1529,13 +1480,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates this <see
-             cref="T:System.Drawing.Region" />
+            >Updates this <see cref="T:System.Drawing.Region" />
 
             
 
-             to the intersection of itself with the specified <see
-             cref="T:System.Drawing.RectangleF" />
+             to the intersection of itself with the specified <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -1543,17 +1492,19 @@
           >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.RectangleF" />
+          The <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           structure to intersect with this <see
-           cref="T:System.Drawing.Region" />
+           structure to intersect with this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -1582,13 +1533,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates this <see
-             cref="T:System.Drawing.Region" />
+            >Updates this <see cref="T:System.Drawing.Region" />
 
             
 
-             to the intersection of itself with the specified <see
-             cref="T:System.Drawing.Region" />
+             to the intersection of itself with the specified <see cref="T:System.Drawing.Region" />
 
             
 
@@ -1600,17 +1549,19 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Region" />
+          The <see cref="T:System.Drawing.Region" />
 
           
 
-           to intersect with this <see
-           cref="T:System.Drawing.Region" />
+           to intersect with this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -1635,8 +1586,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current transformation of the graphics context <paramref
-             name="g" />
+            >The current transformation of the graphics context <paramref name="g" />
 
             
 
@@ -1646,8 +1596,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether this <see
-             cref="T:System.Drawing.Region" />
+            >Tests whether this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -1657,13 +1606,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the interior of this <see
-             cref="T:System.Drawing.Region" />
+            >true if the interior of this <see cref="T:System.Drawing.Region" />
 
             
 
-             is empty when the transformation associated with <paramref
-             name="g" />
+             is empty when the transformation associated with <paramref name="g" />
 
             
 
@@ -1671,12 +1618,15 @@
           >
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Graphics" />
+          A <see cref="T:System.Drawing.Graphics" />
 
           
 
@@ -1701,8 +1651,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current transformation of the graphics context <paramref
-             name="g" />
+            >The current transformation of the graphics context <paramref name="g" />
 
             
 
@@ -1712,8 +1661,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether this <see
-             cref="T:System.Drawing.Region" />
+            >Tests whether this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -1723,13 +1671,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the interior of this <see
-             cref="T:System.Drawing.Region" />
+            >true if the interior of this <see cref="T:System.Drawing.Region" />
 
             
 
-             is infinite when the transformation associated with <paramref
-             name="g" />
+             is infinite when the transformation associated with <paramref name="g" />
 
             
 
@@ -1737,12 +1683,15 @@
           >
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Graphics" />
+          A <see cref="T:System.Drawing.Graphics" />
 
           
 
@@ -1768,13 +1717,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether the specified <see
-             cref="T:System.Drawing.Point" />
+            >Tests whether the specified <see cref="T:System.Drawing.Point" />
 
             
 
-             structure is contained within this <see
-             cref="T:System.Drawing.Region" />
+             structure is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -1784,13 +1731,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true when <paramref
-             name="point" />
+            >true when <paramref name="point" />
 
             
 
-             is contained within this <see
-             cref="T:System.Drawing.Region" />
+             is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -1798,12 +1743,15 @@
           >
         </returns>
         <param name="point">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Point" />
+          The <see cref="T:System.Drawing.Point" />
 
           
 
@@ -1829,13 +1777,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether the specified <see
-             cref="T:System.Drawing.PointF" />
+            >Tests whether the specified <see cref="T:System.Drawing.PointF" />
 
             
 
-             structure is contained within this <see
-             cref="T:System.Drawing.Region" />
+             structure is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -1845,13 +1791,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true when <paramref
-             name="point" />
+            >true when <paramref name="point" />
 
             
 
-             is contained within this <see
-             cref="T:System.Drawing.Region" />
+             is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -1859,12 +1803,15 @@
           >
         </returns>
         <param name="point">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.PointF" />
+          The <see cref="T:System.Drawing.PointF" />
 
           
 
@@ -1893,13 +1840,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether any portion of the specified <see
-             cref="T:System.Drawing.Rectangle" />
+            >Tests whether any portion of the specified <see cref="T:System.Drawing.Rectangle" />
 
             
 
-             structure is contained within this <see
-             cref="T:System.Drawing.Region" />
+             structure is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -1909,13 +1854,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true when any portion of <paramref
-             name="rect" />
+            >This method returns true when any portion of <paramref name="rect" />
 
             
 
-             is contained within this <see
-             cref="T:System.Drawing.Region" />
+             is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -1923,12 +1866,15 @@
           >
         </returns>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
@@ -1957,13 +1903,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether any portion of the specified <see
-             cref="T:System.Drawing.RectangleF" />
+            >Tests whether any portion of the specified <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             structure is contained within this <see
-             cref="T:System.Drawing.Region" />
+             structure is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -1973,13 +1917,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true when any portion of <paramref
-             name="rect" />
+            >true when any portion of <paramref name="rect" />
 
             
 
-             is contained within this <see
-             cref="T:System.Drawing.Region" />
+             is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -1987,12 +1929,15 @@
           >
         </returns>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.RectangleF" />
+          The <see cref="T:System.Drawing.RectangleF" />
 
           
 
@@ -2025,18 +1970,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether the specified <see
-             cref="T:System.Drawing.Point" />
+            >Tests whether the specified <see cref="T:System.Drawing.Point" />
 
             
 
-             structure is contained within this <see
-             cref="T:System.Drawing.Region" />
+             structure is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
-             when drawn using the specified <see
-             cref="T:System.Drawing.Graphics" />
+             when drawn using the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -2046,13 +1988,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true when <paramref
-             name="point" />
+            >true when <paramref name="point" />
 
             
 
-             is contained within this <see
-             cref="T:System.Drawing.Region" />
+             is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -2060,24 +2000,30 @@
           >
         </returns>
         <param name="point">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Point" />
+          The <see cref="T:System.Drawing.Point" />
 
           
 
            structure to test. </param
         >
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Graphics" />
+          A <see cref="T:System.Drawing.Graphics" />
 
           
 
@@ -2110,18 +2056,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether the specified <see
-             cref="T:System.Drawing.PointF" />
+            >Tests whether the specified <see cref="T:System.Drawing.PointF" />
 
             
 
-             structure is contained within this <see
-             cref="T:System.Drawing.Region" />
+             structure is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
-             when drawn using the specified <see
-             cref="T:System.Drawing.Graphics" />
+             when drawn using the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -2131,13 +2074,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true when <paramref
-             name="point" />
+            >true when <paramref name="point" />
 
             
 
-             is contained within this <see
-             cref="T:System.Drawing.Region" />
+             is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -2145,24 +2086,30 @@
           >
         </returns>
         <param name="point">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.PointF" />
+          The <see cref="T:System.Drawing.PointF" />
 
           
 
            structure to test. </param
         >
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Graphics" />
+          A <see cref="T:System.Drawing.Graphics" />
 
           
 
@@ -2195,18 +2142,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether any portion of the specified <see
-             cref="T:System.Drawing.Rectangle" />
+            >Tests whether any portion of the specified <see cref="T:System.Drawing.Rectangle" />
 
             
 
-             structure is contained within this <see
-             cref="T:System.Drawing.Region" />
+             structure is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
-             when drawn using the specified <see
-             cref="T:System.Drawing.Graphics" />
+             when drawn using the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -2216,13 +2160,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true when any portion of the <paramref
-             name="rect" />
+            >true when any portion of the <paramref name="rect" />
 
             
 
-             is contained within this <see
-             cref="T:System.Drawing.Region" />
+             is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -2230,24 +2172,30 @@
           >
         </returns>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            structure to test. </param
         >
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Graphics" />
+          A <see cref="T:System.Drawing.Graphics" />
 
           
 
@@ -2280,18 +2228,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether any portion of the specified <see
-             cref="T:System.Drawing.RectangleF" />
+            >Tests whether any portion of the specified <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             structure is contained within this <see
-             cref="T:System.Drawing.Region" />
+             structure is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
-             when drawn using the specified <see
-             cref="T:System.Drawing.Graphics" />
+             when drawn using the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -2301,13 +2246,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true when <paramref
-             name="rect" />
+            >true when <paramref name="rect" />
 
             
 
-             is contained within this <see
-             cref="T:System.Drawing.Region" />
+             is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -2315,24 +2258,30 @@
           >
         </returns>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.RectangleF" />
+          The <see cref="T:System.Drawing.RectangleF" />
 
           
 
            structure to test. </param
         >
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Graphics" />
+          A <see cref="T:System.Drawing.Graphics" />
 
           
 
@@ -2359,8 +2308,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether the specified point is contained within this <see
-             cref="T:System.Drawing.Region" />
+            >Tests whether the specified point is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -2370,8 +2318,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true when the specified point is contained within this <see
-             cref="T:System.Drawing.Region" />
+            >true when the specified point is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -2379,14 +2326,22 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the point to test. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2420,13 +2375,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether the specified point is contained within this <see
-             cref="T:System.Drawing.Region" />
+            >Tests whether the specified point is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
-             object when drawn using the specified <see
-             cref="T:System.Drawing.Graphics" />
+             object when drawn using the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -2436,8 +2389,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true when the specified point is contained within this <see
-             cref="T:System.Drawing.Region" />
+            >true when the specified point is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -2445,26 +2397,37 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the point to test. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the point to test. </param
         >
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Graphics" />
+          A <see cref="T:System.Drawing.Graphics" />
 
           
 
@@ -2498,13 +2461,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether the specified point is contained within this <see
-             cref="T:System.Drawing.Region" />
+            >Tests whether the specified point is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
-             when drawn using the specified <see
-             cref="T:System.Drawing.Graphics" />
+             when drawn using the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -2514,8 +2475,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true when the specified point is contained within this <see
-             cref="T:System.Drawing.Region" />
+            >true when the specified point is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -2523,26 +2483,37 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the point to test. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the point to test. </param
         >
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Graphics" />
+          A <see cref="T:System.Drawing.Graphics" />
 
           
 
@@ -2574,8 +2545,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether any portion of the specified rectangle is contained within this <see
-             cref="T:System.Drawing.Region" />
+            >Tests whether any portion of the specified rectangle is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -2585,8 +2555,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true when any portion of the specified rectangle is contained within this <see
-             cref="T:System.Drawing.Region" />
+            >true when any portion of the specified rectangle is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -2594,28 +2563,44 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the upper-left corner of the rectangle to test. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the upper-left corner of the rectangle to test. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the rectangle to test. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2647,8 +2632,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether any portion of the specified rectangle is contained within this <see
-             cref="T:System.Drawing.Region" />
+            >Tests whether any portion of the specified rectangle is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -2658,8 +2642,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true when any portion of the specified rectangle is contained within this <see
-             cref="T:System.Drawing.Region" />
+            >true when any portion of the specified rectangle is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -2667,28 +2650,44 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the upper-left corner of the rectangle to test. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the upper-left corner of the rectangle to test. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the rectangle to test. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2724,13 +2723,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether any portion of the specified rectangle is contained within this <see
-             cref="T:System.Drawing.Region" />
+            >Tests whether any portion of the specified rectangle is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
-             when drawn using the specified <see
-             cref="T:System.Drawing.Graphics" />
+             when drawn using the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -2740,8 +2737,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true when any portion of the specified rectangle is contained within this <see
-             cref="T:System.Drawing.Region" />
+            >true when any portion of the specified rectangle is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -2749,40 +2745,59 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the upper-left corner of the rectangle to test. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the upper-left corner of the rectangle to test. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the rectangle to test. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The height of the rectangle to test. </param
         >
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Graphics" />
+          A <see cref="T:System.Drawing.Graphics" />
 
           
 
@@ -2818,13 +2833,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether any portion of the specified rectangle is contained within this <see
-             cref="T:System.Drawing.Region" />
+            >Tests whether any portion of the specified rectangle is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
-             when drawn using the specified <see
-             cref="T:System.Drawing.Graphics" />
+             when drawn using the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -2834,8 +2847,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true when any portion of the specified rectangle is contained within this <see
-             cref="T:System.Drawing.Region" />
+            >true when any portion of the specified rectangle is contained within this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -2843,40 +2855,59 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the upper-left corner of the rectangle to test. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the upper-left corner of the rectangle to test. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the rectangle to test. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The height of the rectangle to test. </param
         >
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Graphics" />
+          A <see cref="T:System.Drawing.Graphics" />
 
           
 
@@ -2900,8 +2931,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes this <see
-             cref="T:System.Drawing.Region" />
+            >Initializes this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -2926,8 +2956,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes this <see
-             cref="T:System.Drawing.Region" />
+            >Initializes this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -2957,8 +2986,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the handle of the <see
-             cref="T:System.Drawing.Region" />
+            >Releases the handle of the <see cref="T:System.Drawing.Region" />
 
             
 
@@ -2966,12 +2994,15 @@
           >
         </summary>
         <param name="regionHandle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The handle to the <see
-           cref="T:System.Drawing.Region" />
+          The handle to the <see cref="T:System.Drawing.Region" />
 
           
 
@@ -2996,13 +3027,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Transforms this <see
-             cref="T:System.Drawing.Region" />
+            >Transforms this <see cref="T:System.Drawing.Region" />
 
             
 
-             by the specified <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+             by the specified <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -3010,17 +3039,19 @@
           >
         </summary>
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
-           by which to transform this <see
-           cref="T:System.Drawing.Region" />
+           by which to transform this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -3047,8 +3078,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Offsets the coordinates of this <see
-             cref="T:System.Drawing.Region" />
+            >Offsets the coordinates of this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -3056,24 +3086,30 @@
           >
         </summary>
         <param name="dx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The amount to offset this <see
-           cref="T:System.Drawing.Region" />
+          The amount to offset this <see cref="T:System.Drawing.Region" />
 
           
 
            horizontally. </param
         >
         <param name="dy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The amount to offset this <see
-           cref="T:System.Drawing.Region" />
+          The amount to offset this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -3100,8 +3136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Offsets the coordinates of this <see
-             cref="T:System.Drawing.Region" />
+            >Offsets the coordinates of this <see cref="T:System.Drawing.Region" />
 
             
 
@@ -3109,24 +3144,30 @@
           >
         </summary>
         <param name="dx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The amount to offset this <see
-           cref="T:System.Drawing.Region" />
+          The amount to offset this <see cref="T:System.Drawing.Region" />
 
           
 
            horizontally. </param
         >
         <param name="dy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The amount to offset this <see
-           cref="T:System.Drawing.Region" />
+          The amount to offset this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -3155,13 +3196,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates this <see
-             cref="T:System.Drawing.Region" />
+            >Updates this <see cref="T:System.Drawing.Region" />
 
             
 
-             to the union of itself and the specified <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+             to the union of itself and the specified <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -3169,17 +3208,19 @@
           >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+          The <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
           
 
-           to unite with this <see
-           cref="T:System.Drawing.Region" />
+           to unite with this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -3205,13 +3246,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates this <see
-             cref="T:System.Drawing.Region" />
+            >Updates this <see cref="T:System.Drawing.Region" />
 
             
 
-             to the union of itself and the specified <see
-             cref="T:System.Drawing.Rectangle" />
+             to the union of itself and the specified <see cref="T:System.Drawing.Rectangle" />
 
             
 
@@ -3219,17 +3258,19 @@
           >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           structure to unite with this <see
-           cref="T:System.Drawing.Region" />
+           structure to unite with this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -3255,13 +3296,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates this <see
-             cref="T:System.Drawing.Region" />
+            >Updates this <see cref="T:System.Drawing.Region" />
 
             
 
-             to the union of itself and the specified <see
-             cref="T:System.Drawing.RectangleF" />
+             to the union of itself and the specified <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -3269,17 +3308,19 @@
           >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.RectangleF" />
+          The <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           structure to unite with this <see
-           cref="T:System.Drawing.Region" />
+           structure to unite with this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -3305,13 +3346,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates this <see
-             cref="T:System.Drawing.Region" />
+            >Updates this <see cref="T:System.Drawing.Region" />
 
             
 
-             to the union of itself and the specified <see
-             cref="T:System.Drawing.Region" />
+             to the union of itself and the specified <see cref="T:System.Drawing.Region" />
 
             
 
@@ -3319,17 +3358,19 @@
           >
         </summary>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Region" />
+          The <see cref="T:System.Drawing.Region" />
 
           
 
-           to unite with this <see
-           cref="T:System.Drawing.Region" />
+           to unite with this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -3358,13 +3399,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates this <see
-             cref="T:System.Drawing.Region" />
+            >Updates this <see cref="T:System.Drawing.Region" />
 
             
 
-             to the union minus the intersection of itself with the specified <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+             to the union minus the intersection of itself with the specified <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -3372,22 +3411,23 @@
           >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+          The <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
           
 
-           to <see
-           cref="Overload:System.Drawing.Region.Xor" />
+           to <see cref="Overload:System.Drawing.Region.Xor" />
 
           
 
-           with this <see
-           cref="T:System.Drawing.Region" />
+           with this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -3413,13 +3453,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates this <see
-             cref="T:System.Drawing.Region" />
+            >Updates this <see cref="T:System.Drawing.Region" />
 
             
 
-             to the union minus the intersection of itself with the specified <see
-             cref="T:System.Drawing.Rectangle" />
+             to the union minus the intersection of itself with the specified <see cref="T:System.Drawing.Rectangle" />
 
             
 
@@ -3427,22 +3465,23 @@
           >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           structure to <see
-           cref="Overload:System.Drawing.Region.Xor" />
+           structure to <see cref="Overload:System.Drawing.Region.Xor" />
 
           
 
-           with this <see
-           cref="T:System.Drawing.Region" />
+           with this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -3468,13 +3507,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates this <see
-             cref="T:System.Drawing.Region" />
+            >Updates this <see cref="T:System.Drawing.Region" />
 
             
 
-             to the union minus the intersection of itself with the specified <see
-             cref="T:System.Drawing.RectangleF" />
+             to the union minus the intersection of itself with the specified <see cref="T:System.Drawing.RectangleF" />
 
             
 
@@ -3482,22 +3519,23 @@
           >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.RectangleF" />
+          The <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           structure to <see
-           cref="M:System.Drawing.Region.Xor(System.Drawing.Drawing2D.GraphicsPath)" />
+           structure to <see cref="M:System.Drawing.Region.Xor(System.Drawing.Drawing2D.GraphicsPath)" />
 
           
 
-           with this <see
-           cref="T:System.Drawing.Region" />
+           with this <see cref="T:System.Drawing.Region" />
 
           
 
@@ -3523,13 +3561,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates this <see
-             cref="T:System.Drawing.Region" />
+            >Updates this <see cref="T:System.Drawing.Region" />
 
             
 
-             to the union minus the intersection of itself with the specified <see
-             cref="T:System.Drawing.Region" />
+             to the union minus the intersection of itself with the specified <see cref="T:System.Drawing.Region" />
 
             
 
@@ -3537,22 +3573,23 @@
           >
         </summary>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Region" />
+          The <see cref="T:System.Drawing.Region" />
 
           
 
-           to <see
-           cref="Overload:System.Drawing.Region.Xor" />
+           to <see cref="Overload:System.Drawing.Region.Xor" />
 
           
 
-           with this <see
-           cref="T:System.Drawing.Region" />
+           with this <see cref="T:System.Drawing.Region" />
 
           
 

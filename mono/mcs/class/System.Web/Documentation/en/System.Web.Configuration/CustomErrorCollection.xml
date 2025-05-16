@@ -22,26 +22,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.CustomErrorCollection" />
+        >The <see cref="T:System.Web.Configuration.CustomErrorCollection" />
 
         
 
          type allows access to the error elements of the customErrors section element collection.</para
       >
       <para
-        >It belongs to a group that includes the <see
-         cref="T:System.Web.Configuration.CustomError" />
+        >It belongs to a group that includes the <see cref="T:System.Web.Configuration.CustomError" />
 
         
 
-        , <see
-         cref="T:System.Web.Configuration.CustomErrorsMode" />
+        , <see cref="T:System.Web.Configuration.CustomErrorsMode" />
 
         
 
-        , and <see
-         cref="T:System.Web.Configuration.CustomErrorsSection" />
+        , and <see cref="T:System.Web.Configuration.CustomErrorsSection" />
 
         
 
@@ -52,8 +48,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Web.Configuration.CustomError" />
+        >Represents a collection of <see cref="T:System.Web.Configuration.CustomError" />
 
         
 
@@ -71,18 +66,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.CustomErrorCollection.#ctor" />
+            >The <see cref="M:System.Web.Configuration.CustomErrorCollection.#ctor" />
 
             
 
-             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
-             cref="T:System.Web.Configuration.CustomErrorCollection" />
+             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.CustomErrorCollection" />
 
             
 
-             class by using the <see
-             cref="P:System.Web.Configuration.CustomErrorsSection.Errors" />
+             class by using the <see cref="P:System.Web.Configuration.CustomErrorsSection.Errors" />
 
             
 
@@ -92,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.CustomErrorCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.CustomErrorCollection" />
 
             
 
@@ -122,18 +113,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before adding a custom error to the collection, you must create a <see
-             cref="T:System.Web.Configuration.CustomError" />
+            >Before adding a custom error to the collection, you must create a <see cref="T:System.Web.Configuration.CustomError" />
 
             
 
-             error object and initialize the <see
-             cref="P:System.Web.Configuration.CustomError.Redirect" />
+             error object and initialize the <see cref="P:System.Web.Configuration.CustomError.Redirect" />
 
             
 
-             and <see
-             cref="P:System.Web.Configuration.CustomError.StatusCode" />
+             and <see cref="P:System.Web.Configuration.CustomError.StatusCode" />
 
             
 
@@ -143,8 +131,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Web.Configuration.CustomError" />
+            >Adds a <see cref="T:System.Web.Configuration.CustomError" />
 
             
 
@@ -152,12 +139,15 @@
           >
         </summary>
         <param name="customError">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Configuration.CustomError" />
+          The <see cref="T:System.Web.Configuration.CustomError" />
 
           
 
@@ -181,8 +171,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of the keys for all of the configuration elements contained in this <see
-             cref="T:System.Web.Configuration.CustomErrorCollection" />
+            >Returns an array of the keys for all of the configuration elements contained in this <see cref="T:System.Web.Configuration.CustomErrorCollection" />
 
             
 
@@ -206,23 +195,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of updating the configuration file after calling the <see
-             cref="M:System.Web.Configuration.CustomErrorCollection.Clear" />
+            >The result of updating the configuration file after calling the <see cref="M:System.Web.Configuration.CustomErrorCollection.Clear" />
 
             
 
-             method is dependent upon the <see
-             cref="T:System.Configuration.ConfigurationSaveMode" />
+             method is dependent upon the <see cref="T:System.Configuration.ConfigurationSaveMode" />
 
             
 
-             chosen. To update the configuration file, you use one of these two overloads: <see
-             cref="M:System.Configuration.Configuration.Save" />
+             chosen. To update the configuration file, you use one of these two overloads: <see cref="M:System.Configuration.Configuration.Save" />
 
             
 
-             and <see
-             cref="M:System.Configuration.Configuration.Save(System.Configuration.ConfigurationSaveMode)" />
+             and <see cref="M:System.Configuration.Configuration.Save(System.Configuration.ConfigurationSaveMode)" />
 
             
 
@@ -230,13 +215,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Calling <see
-               cref="M:System.Configuration.Configuration.Save" />
+              >Calling <see cref="M:System.Configuration.Configuration.Save" />
 
               
 
-               is equivalent to calling <see
-               cref="M:System.Configuration.Configuration.Save(System.Configuration.ConfigurationSaveMode)" />
+               is equivalent to calling <see cref="M:System.Configuration.Configuration.Save(System.Configuration.ConfigurationSaveMode)" />
 
               
 
@@ -244,8 +227,7 @@
             >
           </block>
           <para
-            >If you use the <see
-             cref="M:System.Configuration.Configuration.Save(System.Configuration.ConfigurationSaveMode)" />
+            >If you use the <see cref="M:System.Configuration.Configuration.Save(System.Configuration.ConfigurationSaveMode)" />
 
             
 
@@ -254,13 +236,11 @@
           <list type="bullet">
             <item>
               <para
-                >If you pass a <see
-                 cref="F:System.Configuration.ConfigurationSaveMode.Full" />
+                >If you pass a <see cref="F:System.Configuration.ConfigurationSaveMode.Full" />
 
                 
 
-                 or <see
-                 cref="F:System.Configuration.ConfigurationSaveMode.Modified" />
+                 or <see cref="F:System.Configuration.ConfigurationSaveMode.Modified" />
 
                 
 
@@ -269,13 +249,11 @@
             </item>
             <item>
               <para
-                >If you pass the <see
-                 cref="F:System.Configuration.ConfigurationSaveMode.Minimal" />
+                >If you pass the <see cref="F:System.Configuration.ConfigurationSaveMode.Minimal" />
 
                 
 
-                 parameter value, a series of remove elements are added to the <format
-                 type="text/html">
+                 parameter value, a series of remove elements are added to the <format type="text/html">
                   <a href="17a0fa6e-a065-49cc-b900-ef73eda6a922"
                     >clientTarget Element (ASP.NET Settings Schema)</a
                   >
@@ -283,13 +261,11 @@
 
                 
 
-                 of the configuration file at the current hierarchy level. Each removes all references to an add element defined in a parent configuration file at a higher level in the hierarchy. When you use <see
-                 cref="F:System.Configuration.ConfigurationSaveMode.Minimal" />
+                 of the configuration file at the current hierarchy level. Each removes all references to an add element defined in a parent configuration file at a higher level in the hierarchy. When you use <see cref="F:System.Configuration.ConfigurationSaveMode.Minimal" />
 
                 
 
-                , there is one additional property on the collection that affects what gets serialized to the configuration file: <see
-                 cref="P:System.Configuration.ConfigurationElementCollection.EmitClear" />
+                , there is one additional property on the collection that affects what gets serialized to the configuration file: <see cref="P:System.Configuration.ConfigurationElementCollection.EmitClear" />
 
                 
 
@@ -298,8 +274,7 @@
               <list type="bullet">
                 <item>
                   <para
-                    >If the <see
-                     cref="P:System.Configuration.ConfigurationElementCollection.EmitClear" />
+                    >If the <see cref="P:System.Configuration.ConfigurationElementCollection.EmitClear" />
 
                     
 
@@ -308,8 +283,7 @@
                 </item>
                 <item>
                   <para
-                    >If the <see
-                     cref="P:System.Configuration.ConfigurationElementCollection.EmitClear" />
+                    >If the <see cref="P:System.Configuration.ConfigurationElementCollection.EmitClear" />
 
                     
 
@@ -320,8 +294,7 @@
             </item>
           </list>
           <para
-            >The <see
-             cref="M:System.Web.Configuration.CustomErrorCollection.Clear" />
+            >The <see cref="M:System.Web.Configuration.CustomErrorCollection.Clear" />
 
             
 
@@ -334,8 +307,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see
-             cref="T:System.Web.Configuration.CustomError" />
+            >Removes all <see cref="T:System.Web.Configuration.CustomError" />
 
             
 
@@ -363,8 +335,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type of the <see
-             cref="T:System.Web.Configuration.CustomErrorCollection" />
+            >The type of the <see cref="T:System.Web.Configuration.CustomErrorCollection" />
 
             
 
@@ -430,8 +401,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Configuration.CustomError" />
+            >Gets the <see cref="T:System.Web.Configuration.CustomError" />
 
             
 
@@ -441,8 +411,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.CustomError" />
+            >The <see cref="T:System.Web.Configuration.CustomError" />
 
             
 
@@ -450,12 +419,15 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The collection index of the <see
-           cref="T:System.Web.Configuration.CustomError" />
+          The collection index of the <see cref="T:System.Web.Configuration.CustomError" />
 
           
 
@@ -484,8 +456,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Configuration.CustomError" />
+            >Gets the <see cref="T:System.Web.Configuration.CustomError" />
 
             
 
@@ -495,8 +466,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.CustomError" />
+            >The <see cref="T:System.Web.Configuration.CustomError" />
 
             
 
@@ -504,7 +474,11 @@
           >
         </returns>
         <param name="statusCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -553,8 +527,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Configuration.CustomErrorCollection" />
+            >Gets the <see cref="T:System.Web.Configuration.CustomErrorCollection" />
 
             
 
@@ -564,8 +537,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.CustomErrorCollection" />
+            >The <see cref="T:System.Web.Configuration.CustomErrorCollection" />
 
             
 
@@ -573,7 +545,11 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -663,8 +639,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.CustomErrorCollection.Remove(System.String)" />
+            >The <see cref="M:System.Web.Configuration.CustomErrorCollection.Remove(System.String)" />
 
             
 
@@ -672,8 +647,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The add elements are not deleted from the parent configuration files. The remove element merely deactivates them. However, the <see
-               cref="M:System.Web.Configuration.CustomErrorCollection.Remove(System.String)" />
+              >The add elements are not deleted from the parent configuration files. The remove element merely deactivates them. However, the <see cref="M:System.Web.Configuration.CustomErrorCollection.Remove(System.String)" />
 
               
 
@@ -684,8 +658,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Web.Configuration.CustomError" />
+            >Removes a <see cref="T:System.Web.Configuration.CustomError" />
 
             
 
@@ -693,7 +666,11 @@
           >
         </summary>
         <param name="statusCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -718,16 +695,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.CustomErrorCollection.RemoveAt(System.Int32)" />
+            >The <see cref="M:System.Web.Configuration.CustomErrorCollection.RemoveAt(System.Int32)" />
 
             
 
              method inserts a remove element into the customErrors section of the configuration file at the current hierarchy level. This is to remove the reference to the add element defined in the parent configuration files at higher-level in the hierarchy. </para
           >
           <para
-            >Note   The add elements are not deleted from the parent configuration files. They are merely deactivated. However, the <see
-             cref="M:System.Web.Configuration.CustomErrorCollection.RemoveAt(System.Int32)" />
+            >Note   The add elements are not deleted from the parent configuration files. They are merely deactivated. However, the <see cref="M:System.Web.Configuration.CustomErrorCollection.RemoveAt(System.Int32)" />
 
             
 
@@ -737,8 +712,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Web.Configuration.CustomError" />
+            >Removes a <see cref="T:System.Web.Configuration.CustomError" />
 
             
 
@@ -746,12 +720,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The collection index of the <see
-           cref="T:System.Web.Configuration.CustomError" />
+          The collection index of the <see cref="T:System.Web.Configuration.CustomError" />
 
           
 
@@ -783,8 +760,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.Configuration.CustomError" />
+            >Adds the specified <see cref="T:System.Web.Configuration.CustomError" />
 
             
 
@@ -792,12 +768,15 @@
           >
         </summary>
         <param name="customError">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Configuration.CustomError" />
+          The <see cref="T:System.Web.Configuration.CustomError" />
 
           
 

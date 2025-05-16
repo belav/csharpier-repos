@@ -18,8 +18,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For more information on using <see
-         cref="T:System.Xml.Xsl.IXsltContextVariable" />
+        >For more information on using <see cref="T:System.Xml.Xsl.IXsltContextVariable" />
 
         
 
@@ -62,8 +61,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -71,12 +69,15 @@
           >
         </returns>
         <param name="xsltContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Xsl.XsltContext" />
+          An <see cref="T:System.Xml.Xsl.XsltContext" />
 
           
 
@@ -150,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.XPath.XPathResultType" />
+            >Gets the <see cref="T:System.Xml.XPath.XPathResultType" />
 
             
 

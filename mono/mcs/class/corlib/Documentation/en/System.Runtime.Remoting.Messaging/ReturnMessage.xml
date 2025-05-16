@@ -38,20 +38,17 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <block subset="none" type="note">
         <para
-          >This class makes a link demand and an inheritance demand at the class level. A <see
-           cref="T:System.Security.SecurityException" />
+          >This class makes a link demand and an inheritance demand at the class level. A <see cref="T:System.Security.SecurityException" />
 
           
 
-           is thrown when either the immediate caller or the derived class does not have infrastructure permission. For details about security demands, see <format
-           type="text/html">
+           is thrown when either the immediate caller or the derived class does not have infrastructure permission. For details about security demands, see <format type="text/html">
             <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">[&lt;topic://cpconLinkDemands&gt;]</a>
           </format>
 
           
 
-           and <format
-           type="text/html">
+           and <format type="text/html">
             <a href="28B9ADBB-8F08-4F10-B856-DBF59EB932D9"
               >[&lt;topic://cpconInheritanceDemands&gt;]</a
             >
@@ -94,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" />
 
             
 
@@ -103,24 +99,30 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The exception that was thrown during execution of the remotely called method. </param
         >
         <param name="mcm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+          An <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
 
           
 
-           with which to create an instance of the <see
-           cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" />
+           with which to create an instance of the <see cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" />
 
           
 
@@ -156,8 +158,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" />
 
             
 
@@ -165,45 +166,63 @@
           >
         </summary>
         <param name="ret">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object returned by the invoked method from which the current <see
-           cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" />
+          The object returned by the invoked method from which the current <see cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" />
 
           
 
            instance originated. </param
         >
         <param name="outArgs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The objects returned from the invoked method as out parameters. </param
         >
         <param name="outArgsCount">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of out parameters returned from the invoked method. </param
         >
         <param name="callCtx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+          The <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
           
 
            of the method call. </param
         >
         <param name="mcm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -306,7 +325,11 @@
           <para>An argument passed to the remote method during the method call.</para>
         </returns>
         <param name="argNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -343,7 +366,11 @@
           <para>The name of a specified method argument.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -380,7 +407,11 @@
           <para>The object passed as an out or ref parameter during the remote method call.</para>
         </returns>
         <param name="argNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -417,7 +448,11 @@
           <para>A string representing the name of the specified out or ref parameter, or null if the current method is not implemented.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -470,8 +505,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+            >Gets the <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
             
 
@@ -504,8 +538,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Reflection.MethodBase" />
+            >Gets the <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -553,8 +586,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of <see
-             cref="T:System.Type" />
+            >Gets an array of <see cref="T:System.Type" />
 
             
 
@@ -629,13 +661,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.IDictionary" />
+            >Gets an <see cref="T:System.Collections.IDictionary" />
 
             
 
-             of properties contained in the current <see
-             cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" />
+             of properties contained in the current <see cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" />
 
             
 

@@ -15,8 +15,7 @@
   </Base>
   <Docs>
     <summary
-      >Possible <see
-       cref="P:Mono.Unix.UnixDriveInfo.DriveType" />
+      >Possible <see cref="P:Mono.Unix.UnixDriveInfo.DriveType" />
 
       
 

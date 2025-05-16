@@ -31,13 +31,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Information contained in <paramref
-             name="t" />
+            >Information contained in <paramref name="t" />
 
             
 
-             will be displayed in the <see
-             cref="T:System.Windows.Forms.ThreadExceptionDialog" />
+             will be displayed in the <see cref="T:System.Windows.Forms.ThreadExceptionDialog" />
 
             
 
@@ -47,8 +45,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ThreadExceptionDialog" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ThreadExceptionDialog" />
 
             
 
@@ -56,12 +53,15 @@
           >
         </summary>
         <param name="t">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Exception" />
+          The <see cref="T:System.Exception" />
 
           
 
@@ -124,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.ThreadExceptionDialog.AutoSize" />
+            >Occurs when the <see cref="P:System.Windows.Forms.ThreadExceptionDialog.AutoSize" />
 
             
 

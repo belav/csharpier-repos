@@ -19,36 +19,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The Scroll event occurs when the user changes the value of the scroll bar. This event can result from a variety of actions, such as clicking a scroll bar arrow, pressing the UP ARROW or DOWN ARROW, or dragging the scroll box. The <see
-         cref="T:System.Windows.Forms.ScrollEventArgs" />
+        >The Scroll event occurs when the user changes the value of the scroll bar. This event can result from a variety of actions, such as clicking a scroll bar arrow, pressing the UP ARROW or DOWN ARROW, or dragging the scroll box. The <see cref="T:System.Windows.Forms.ScrollEventArgs" />
 
         
 
-         specifies the type of scroll event that occurred and the new value of the scroll bar. Use the <see
-         cref="P:System.Windows.Forms.ScrollEventArgs.ScrollOrientation" />
+         specifies the type of scroll event that occurred and the new value of the scroll bar. Use the <see cref="P:System.Windows.Forms.ScrollEventArgs.ScrollOrientation" />
 
         
 
          property to determine the scroll bar orientation for the Scroll event.</para
       >
       <para
-        >The Scroll event occurs for the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >The Scroll event occurs for the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
-        , <see
-         cref="T:System.Windows.Forms.ScrollableControl" />
+        , <see cref="T:System.Windows.Forms.ScrollableControl" />
 
         
 
-        , <see
-         cref="T:System.Windows.Forms.ScrollBar" />
+        , <see cref="T:System.Windows.Forms.ScrollBar" />
 
         
 
-        , and <see
-         cref="T:System.Windows.Forms.DataGrid" />
+        , and <see cref="T:System.Windows.Forms.DataGrid" />
 
         
 
@@ -76,18 +70,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ScrollEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ScrollEventArgs" />
 
             
 
-             class using the given values for the <see
-             cref="P:System.Windows.Forms.ScrollEventArgs.Type" />
+             class using the given values for the <see cref="P:System.Windows.Forms.ScrollEventArgs.Type" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.ScrollEventArgs.NewValue" />
+             and <see cref="P:System.Windows.Forms.ScrollEventArgs.NewValue" />
 
             
 
@@ -95,19 +86,26 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.ScrollEventType" />
+          One of the <see cref="T:System.Windows.Forms.ScrollEventType" />
 
           
 
            values. </param
         >
         <param name="newValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -138,23 +136,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ScrollEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ScrollEventArgs" />
 
             
 
-             class using the given values for the <see
-             cref="P:System.Windows.Forms.ScrollEventArgs.Type" />
+             class using the given values for the <see cref="P:System.Windows.Forms.ScrollEventArgs.Type" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ScrollEventArgs.OldValue" />
+            , <see cref="P:System.Windows.Forms.ScrollEventArgs.OldValue" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.ScrollEventArgs.NewValue" />
+            , and <see cref="P:System.Windows.Forms.ScrollEventArgs.NewValue" />
 
             
 
@@ -162,26 +156,37 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.ScrollEventType" />
+          One of the <see cref="T:System.Windows.Forms.ScrollEventType" />
 
           
 
            values. </param
         >
         <param name="oldValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The old value for the scroll bar. </param
         >
         <param name="newValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -208,23 +213,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ScrollEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ScrollEventArgs" />
 
             
 
-             class using the given values for the <see
-             cref="P:System.Windows.Forms.ScrollEventArgs.Type" />
+             class using the given values for the <see cref="P:System.Windows.Forms.ScrollEventArgs.Type" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ScrollEventArgs.NewValue" />
+            , <see cref="P:System.Windows.Forms.ScrollEventArgs.NewValue" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.ScrollEventArgs.ScrollOrientation" />
+            , and <see cref="P:System.Windows.Forms.ScrollEventArgs.ScrollOrientation" />
 
             
 
@@ -232,31 +233,41 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.ScrollEventType" />
+          One of the <see cref="T:System.Windows.Forms.ScrollEventType" />
 
           
 
            values. </param
         >
         <param name="newValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The new value for the scroll bar. </param
         >
         <param name="scroll">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.ScrollOrientation" />
+          One of the <see cref="T:System.Windows.Forms.ScrollOrientation" />
 
           
 
@@ -284,28 +295,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ScrollEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ScrollEventArgs" />
 
             
 
-             class using the given values for the <see
-             cref="P:System.Windows.Forms.ScrollEventArgs.Type" />
+             class using the given values for the <see cref="P:System.Windows.Forms.ScrollEventArgs.Type" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ScrollEventArgs.OldValue" />
+            , <see cref="P:System.Windows.Forms.ScrollEventArgs.OldValue" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ScrollEventArgs.NewValue" />
+            , <see cref="P:System.Windows.Forms.ScrollEventArgs.NewValue" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.ScrollEventArgs.ScrollOrientation" />
+            , and <see cref="P:System.Windows.Forms.ScrollEventArgs.ScrollOrientation" />
 
             
 
@@ -313,38 +319,52 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.ScrollEventType" />
+          One of the <see cref="T:System.Windows.Forms.ScrollEventType" />
 
           
 
            values. </param
         >
         <param name="oldValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The old value for the scroll bar. </param
         >
         <param name="newValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The new value for the scroll bar. </param
         >
         <param name="scroll">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.ScrollOrientation" />
+          One of the <see cref="T:System.Windows.Forms.ScrollOrientation" />
 
           
 
@@ -364,8 +384,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the new <see
-             cref="P:System.Windows.Forms.ScrollBar.Value" />
+            >Gets or sets the new <see cref="P:System.Windows.Forms.ScrollBar.Value" />
 
             
 
@@ -393,8 +412,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the old <see
-             cref="P:System.Windows.Forms.ScrollBar.Value" />
+            >Gets the old <see cref="P:System.Windows.Forms.ScrollBar.Value" />
 
             
 
@@ -420,13 +438,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You would typically use the <see
-             cref="P:System.Windows.Forms.ScrollEventArgs.ScrollOrientation" />
+            >You would typically use the <see cref="P:System.Windows.Forms.ScrollEventArgs.ScrollOrientation" />
 
             
 
-             property to determine the scroll bar orientation that raised the Scroll event, such as with the <see
-             cref="E:System.Windows.Forms.ScrollableControl.Scroll" />
+             property to determine the scroll bar orientation that raised the Scroll event, such as with the <see cref="E:System.Windows.Forms.ScrollableControl.Scroll" />
 
             
 

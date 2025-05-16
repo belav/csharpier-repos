@@ -21,16 +21,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >XmlDocument objects that are created from the same implementation share the same <see
-         cref="T:System.Xml.XmlNameTable" />
+        >XmlDocument objects that are created from the same implementation share the same <see cref="T:System.Xml.XmlNameTable" />
 
         
 
         . This enables users to compare attribute and element names between the objects more efficiently.</para
       >
       <para
-        >Although the XmlDocument objects share the same implementation, to move nodes from one document to another, you must use the <see
-         cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" />
+        >Although the XmlDocument objects share the same implementation, to move nodes from one document to another, you must use the <see cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" />
 
         
 
@@ -40,8 +38,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines the context for a set of <see
-         cref="T:System.Xml.XmlDocument" />
+        >Defines the context for a set of <see cref="T:System.Xml.XmlDocument" />
 
         
 
@@ -69,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlImplementation" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlImplementation" />
 
             
 
@@ -102,13 +98,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlImplementation" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlImplementation" />
 
             
 
-             class with the <see
-             cref="T:System.Xml.XmlNameTable" />
+             class with the <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -116,12 +110,15 @@
           >
         </summary>
         <param name="nt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlNameTable" />
+          An <see cref="T:System.Xml.XmlNameTable" />
 
           
 
@@ -153,8 +150,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>XmlDocument objects created from the same implementation share the same name table. This enables users to compare attribute and element names between the objects more efficiently.</para>
           <para
-            >Although the XmlDocument objects share the same implementation, to move nodes from one document to another, you must use the <see
-             cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" />
+            >Although the XmlDocument objects share the same implementation, to move nodes from one document to another, you must use the <see cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" />
 
             
 
@@ -164,8 +160,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Xml.XmlDocument" />
+            >Creates a new <see cref="T:System.Xml.XmlDocument" />
 
             
 
@@ -240,14 +235,22 @@
           </list>
         </returns>
         <param name="strFeature">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The package name of the feature to test. This name is not case-sensitive. </param
         >
         <param name="strVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

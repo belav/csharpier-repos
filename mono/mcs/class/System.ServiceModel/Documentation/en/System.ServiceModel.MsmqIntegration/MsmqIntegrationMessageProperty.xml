@@ -20,24 +20,21 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationMessageProperty" />
+        >The <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationMessageProperty" />
 
         
 
          class exposes all of the Message Queuing message properties that you can set when you send a message or read a message that has been received using the integration channel.</para
       >
       <para
-        >The <see
-         cref="T:System.ServiceModel.MsmqIntegration.MsmqMessage`1" />
+        >The <see cref="T:System.ServiceModel.MsmqIntegration.MsmqMessage`1" />
 
         
 
          class also enables you to set Message Queuing message properties, and is the recommended way to set Message Queuing message properties.</para
       >
       <para
-        >When you use the channels and messages infrastructure to create a message and send it over an integration channel, you can use the <see
-         cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationMessageProperty" />
+        >When you use the channels and messages infrastructure to create a message and send it over an integration channel, you can use the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationMessageProperty" />
 
         
 
@@ -66,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationMessageProperty" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationMessageProperty" />
 
             
 
@@ -122,8 +118,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Possible values that this property can be set to are defined by <see
-             cref="T:System.Messaging.Acknowledgment" />
+            >Possible values that this property can be set to are defined by <see cref="T:System.Messaging.Acknowledgment" />
 
             
 
@@ -371,8 +366,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationMessageProperty" />
+            >Gets the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationMessageProperty" />
 
             
 
@@ -382,8 +376,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationMessageProperty" />
+            >A <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationMessageProperty" />
 
             
 
@@ -391,7 +384,11 @@
           >
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -618,8 +615,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the interval specified by the <see
-             cref="P:System.Messaging.Message.TimeToReachQueue" />
+            >If the interval specified by the <see cref="P:System.Messaging.Message.TimeToReachQueue" />
 
             
 

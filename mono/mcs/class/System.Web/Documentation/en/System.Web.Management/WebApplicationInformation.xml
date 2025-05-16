@@ -14,21 +14,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >ASP.NET health monitoring allows production and operations staff to manage deployed Web applications. The <see
-         cref="N:System.Web.Management" />
+        >ASP.NET health monitoring allows production and operations staff to manage deployed Web applications. The <see cref="N:System.Web.Management" />
 
         
 
          namespace contains the health-event types responsible for packaging application health-status data and the provider types responsible for processing this data. It also contains supporting types that help during the management of health events.</para
       >
       <para
-        >Instances of the <see
-         cref="T:System.Web.Management.WebApplicationInformation" />
+        >Instances of the <see cref="T:System.Web.Management.WebApplicationInformation" />
 
         
 
-         class contain information that is obtained using any of the types derived from the <see
-         cref="T:System.Web.Management.WebManagementEvent" />
+         class contain information that is obtained using any of the types derived from the <see cref="T:System.Web.Management.WebManagementEvent" />
 
         
 
@@ -136,13 +133,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Management.WebApplicationInformation.FormatToString(System.Web.Management.WebEventFormatter)" />
+            >The <see cref="M:System.Web.Management.WebApplicationInformation.FormatToString(System.Web.Management.WebEventFormatter)" />
 
             
 
-             method provides a uniform format for event information, which is useful if the event data must be logged and later presented to the user. It is called internally when the provider invokes one of the <see
-             cref="Overload:System.Web.Management.WebBaseEvent.ToString" />
+             method provides a uniform format for event information, which is useful if the event data must be logged and later presented to the user. It is called internally when the provider invokes one of the <see cref="Overload:System.Web.Management.WebBaseEvent.ToString" />
 
             
 
@@ -150,13 +145,11 @@
           >
           <block subset="none" type="note">
             <para
-              >When formatting your custom event information for display, override the <see
-               cref="M:System.Web.Management.WebApplicationInformation.FormatToString(System.Web.Management.WebEventFormatter)" />
+              >When formatting your custom event information for display, override the <see cref="M:System.Web.Management.WebApplicationInformation.FormatToString(System.Web.Management.WebEventFormatter)" />
 
               
 
-               method rather than the <see
-               cref="M:System.Web.Management.WebApplicationInformation.ToString" />
+               method rather than the <see cref="M:System.Web.Management.WebApplicationInformation.ToString" />
 
               
 
@@ -169,12 +162,15 @@
           <para>Formats the application information.</para>
         </summary>
         <param name="formatter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Management.WebEventFormatter" />
+          The <see cref="T:System.Web.Management.WebEventFormatter" />
 
           
 
@@ -216,13 +212,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Management.WebBaseEvent.ToString" />
+            >The <see cref="M:System.Web.Management.WebBaseEvent.ToString" />
 
             
 
-             method formats event information by calling the <see
-             cref="M:System.Web.Management.WebApplicationInformation.FormatToString(System.Web.Management.WebEventFormatter)" />
+             method formats event information by calling the <see cref="M:System.Web.Management.WebApplicationInformation.FormatToString(System.Web.Management.WebEventFormatter)" />
 
             
 
@@ -230,13 +224,11 @@
           >
           <block subset="none" type="note">
             <para
-              >When formatting your custom event information for display, override the <see
-               cref="M:System.Web.Management.WebApplicationInformation.FormatToString(System.Web.Management.WebEventFormatter)" />
+              >When formatting your custom event information for display, override the <see cref="M:System.Web.Management.WebApplicationInformation.FormatToString(System.Web.Management.WebEventFormatter)" />
 
               
 
-               method rather than this <see
-               cref="M:System.Web.Management.WebApplicationInformation.ToString" />
+               method rather than this <see cref="M:System.Web.Management.WebApplicationInformation.ToString" />
 
               
 

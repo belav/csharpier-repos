@@ -40,23 +40,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >XmlValidatingReader implements the <see
-         cref="T:System.Xml.XmlReader" />
+        >XmlValidatingReader implements the <see cref="T:System.Xml.XmlReader" />
 
         
 
-         class and provides support for data validation. Use the <see
-         cref="P:System.Xml.XmlValidatingReader.Schemas" />
+         class and provides support for data validation. Use the <see cref="P:System.Xml.XmlValidatingReader.Schemas" />
 
         
 
-         property to have the reader validate by using schema files that are cached in an <see
-         cref="T:System.Xml.Schema.XmlSchemaCollection" />
+         property to have the reader validate by using schema files that are cached in an <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
         
 
-        . The <see
-         cref="P:System.Xml.XmlValidatingReader.ValidationType" />
+        . The <see cref="P:System.Xml.XmlValidatingReader.ValidationType" />
 
         
 
@@ -67,13 +63,11 @@
 
         
 
-         throws an <see
-         cref="T:System.Xml.XmlException" />
+         throws an <see cref="T:System.Xml.XmlException" />
 
         
 
-         on XML parse errors. After an exception is thrown the state of the reader is not predictable. For example, the reported node type may be different than the actual node type of the current node. Use the <see
-         cref="P:System.Xml.XmlValidatingReader.ReadState" />
+         on XML parse errors. After an exception is thrown the state of the reader is not predictable. For example, the reported node type may be different than the actual node type of the current node. Use the <see cref="P:System.Xml.XmlValidatingReader.ReadState" />
 
         
 
@@ -81,28 +75,23 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Xml.XmlValidatingReader" />
+          >The <see cref="T:System.Xml.XmlValidatingReader" />
 
           
 
-           class is obsolete in dnprdnext. You can create a validating <see
-           cref="T:System.Xml.XmlReader" />
+           class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
           
 
-           instance by using the <see
-           cref="T:System.Xml.XmlReaderSettings" />
+           instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
           
 
-           class and the <see
-           cref="Overload:System.Xml.XmlReader.Create" />
+           class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
           
 
-           method. For more information, see <format
-           type="text/html">
+           method. For more information, see <format type="text/html">
             <a href="2958dbbd-60ca-4447-9b16-72f41d223486">Validating XML Data with XmlReader</a>
           </format>
 
@@ -142,28 +131,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -176,13 +160,11 @@
           </block>
           <para>All nodes returned from the given XmlReader are also returned from this validating reader, so there is no information loss in the process. New nodes not returned from the underlying reader may be added by this reader (for example, default attributes and the children of an entity reference). Any properties set on the given XmlTextReader also apply to this validating reader. For example, if the supplied reader had WhitespaceHandling.None set, this validating reader also ignores white space.</para>
           <para
-            >When external document type definitions (DTDs) or schemas are needed for validation, the <see
-             cref="P:System.Xml.XmlValidatingReader.XmlResolver" />
+            >When external document type definitions (DTDs) or schemas are needed for validation, the <see cref="P:System.Xml.XmlValidatingReader.XmlResolver" />
 
             
 
-             property sets the <see
-             cref="T:System.Xml.XmlResolver" />
+             property sets the <see cref="T:System.Xml.XmlResolver" />
 
             
 
@@ -192,8 +174,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the XmlValidatingReader class that validates the content returned from the given <see
-             cref="T:System.Xml.XmlReader" />
+            >Initializes a new instance of the XmlValidatingReader class that validates the content returned from the given <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -201,12 +182,15 @@
           >
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The XmlReader to read from while validating. The current implementation supports only <see
-           cref="T:System.Xml.XmlTextReader" />
+          The XmlReader to read from while validating. The current implementation supports only <see cref="T:System.Xml.XmlTextReader" />
 
           
 
@@ -240,28 +224,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -274,8 +253,7 @@
           </block>
           <para>This constructor parses the given string as a fragment of XML. If the XML fragment is an element or attribute, you can bypass the root level rules for well-formed XML documents.</para>
           <para
-            >The following table lists valid values for <paramref
-             name="fragType" />
+            >The following table lists valid values for <paramref name="fragType" />
 
             
 
@@ -321,8 +299,7 @@
           <list type="ordered">
             <item>
               <para
-                >Checks the <see
-                 cref="P:System.Xml.XmlParserContext.Encoding" />
+                >Checks the <see cref="P:System.Xml.XmlParserContext.Encoding" />
 
                 
 
@@ -337,8 +314,7 @@
             </item>
           </list>
           <para
-            >If this reader will be validating using document type definition (DTD) (that is, <see
-             cref="P:System.Xml.XmlValidatingReader.ValidationType" />
+            >If this reader will be validating using document type definition (DTD) (that is, <see cref="P:System.Xml.XmlValidatingReader.ValidationType" />
 
             
 
@@ -348,13 +324,11 @@
             <para>It is not possible to validate a fragment by using a DTD. By definition a DTD requires an entire document to be loaded for validation.</para>
           </block>
           <para
-            >If this reader will be validating by using XML-Data Reduced (XDR) or XML Schema definition language (XSD) schemas, use the <see
-             cref="P:System.Xml.XmlValidatingReader.Schemas" />
+            >If this reader will be validating by using XML-Data Reduced (XDR) or XML Schema definition language (XSD) schemas, use the <see cref="P:System.Xml.XmlValidatingReader.Schemas" />
 
             
 
-             property to specify the <see
-             cref="T:System.Xml.Schema.XmlSchemaCollection" />
+             property to specify the <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
             
 
@@ -366,36 +340,45 @@
           <para>Initializes a new instance of the XmlValidatingReader class with the specified values.</para>
         </summary>
         <param name="xmlFragment">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream containing the XML fragment to parse. </param
         >
         <param name="fragType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlNodeType" />
+          The <see cref="T:System.Xml.XmlNodeType" />
 
           
 
            of the XML fragment. This determines what the fragment can contain (see table below). </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlParserContext" />
+          The <see cref="T:System.Xml.XmlParserContext" />
 
           
 
-           in which the XML fragment is to be parsed. This includes the <see
-           cref="T:System.Xml.XmlNameTable" />
+           in which the XML fragment is to be parsed. This includes the <see cref="T:System.Xml.XmlNameTable" />
 
           
 
@@ -429,28 +412,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -462,16 +440,14 @@
             >
           </block>
           <para
-            >This constructor parses the given string as a fragment of XML. If the XML fragment is an element or attribute, you can bypass the root level rules for well-formed XML documents. This constructor can handle strings returned from <see
-             cref="M:System.Xml.XmlReader.ReadInnerXml" />
+            >This constructor parses the given string as a fragment of XML. If the XML fragment is an element or attribute, you can bypass the root level rules for well-formed XML documents. This constructor can handle strings returned from <see cref="M:System.Xml.XmlReader.ReadInnerXml" />
 
             
 
             .</para
           >
           <para
-            >The following table lists valid values for <paramref
-             name="fragType" />
+            >The following table lists valid values for <paramref name="fragType" />
 
             
 
@@ -514,8 +490,7 @@
             </item>
           </list>
           <para
-            >If this reader will be validating by using document type definition (DTD) (that is, <see
-             cref="P:System.Xml.XmlValidatingReader.ValidationType" />
+            >If this reader will be validating by using document type definition (DTD) (that is, <see cref="P:System.Xml.XmlValidatingReader.ValidationType" />
 
             
 
@@ -525,13 +500,11 @@
             <para>It is not possible to validate a fragment by using DTD. By definition DTD requires an entire document to be loaded for validation.</para>
           </block>
           <para
-            >If this reader will be validating by using XML-Data Reduced (XDR) or XML Schema definition language (XSD) schemas, use the <see
-             cref="P:System.Xml.XmlValidatingReader.Schemas" />
+            >If this reader will be validating by using XML-Data Reduced (XDR) or XML Schema definition language (XSD) schemas, use the <see cref="P:System.Xml.XmlValidatingReader.Schemas" />
 
             
 
-             property to specify the <see
-             cref="T:System.Xml.Schema.XmlSchemaCollection" />
+             property to specify the <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
             
 
@@ -543,36 +516,45 @@
           <para>Initializes a new instance of the XmlValidatingReader class with the specified values.</para>
         </summary>
         <param name="xmlFragment">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string containing the XML fragment to parse. </param
         >
         <param name="fragType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlNodeType" />
+          The <see cref="T:System.Xml.XmlNodeType" />
 
           
 
            of the XML fragment. This also determines what the fragment string can contain (see table below). </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlParserContext" />
+          The <see cref="T:System.Xml.XmlParserContext" />
 
           
 
-           in which the XML fragment is to be parsed. This includes the <see
-           cref="T:System.Xml.NameTable" />
+           in which the XML fragment is to be parsed. This includes the <see cref="T:System.Xml.NameTable" />
 
           
 
@@ -598,28 +580,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -656,28 +633,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -714,28 +686,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -747,23 +714,19 @@
             >
           </block>
           <para
-            >The binary content read methods include the <see
-             cref="M:System.Xml.XmlValidatingReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
+            >The binary content read methods include the <see cref="M:System.Xml.XmlValidatingReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-            , <see
-             cref="M:System.Xml.XmlValidatingReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
+            , <see cref="M:System.Xml.XmlValidatingReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-            , <see
-             cref="M:System.Xml.XmlValidatingReader.ReadElementContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
+            , <see cref="M:System.Xml.XmlValidatingReader.ReadElementContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-            , and <see
-             cref="M:System.Xml.XmlValidatingReader.ReadElementContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
+            , and <see cref="M:System.Xml.XmlValidatingReader.ReadElementContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
 
             
 
@@ -773,8 +736,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Xml.XmlValidatingReader" />
+            >Gets a value indicating whether the <see cref="T:System.Xml.XmlValidatingReader" />
 
             
 
@@ -801,28 +763,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -861,28 +818,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -894,8 +846,7 @@
             >
           </block>
           <para
-            >This method also releases any resources held while reading. If this reader was constructed by using an <see
-             cref="T:System.Xml.XmlTextReader" />
+            >This method also releases any resources held while reading. If this reader was constructed by using an <see cref="T:System.Xml.XmlTextReader" />
 
             
 
@@ -906,8 +857,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Changes the <see
-             cref="P:System.Xml.XmlReader.ReadState" />
+            >Changes the <see cref="P:System.Xml.XmlReader.ReadState" />
 
             
 
@@ -934,28 +884,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -994,28 +939,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -1060,28 +1000,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -1093,8 +1028,7 @@
             >
           </block>
           <para
-            >This property can be changed and takes effect after the next <see
-             cref="M:System.Xml.XmlValidatingReader.Read" />
+            >This property can be changed and takes effect after the next <see cref="M:System.Xml.XmlValidatingReader.Read" />
 
             
 
@@ -1138,8 +1072,7 @@
             </item>
           </list>
           <para
-            >When EntityHandling is set to ExpandCharEntites, and <see
-             cref="P:System.Xml.XmlTextReader.WhitespaceHandling" />
+            >When EntityHandling is set to ExpandCharEntites, and <see cref="P:System.Xml.XmlTextReader.WhitespaceHandling" />
 
             
 
@@ -1230,28 +1163,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -1293,28 +1221,23 @@
           <para>This method does not move the reader.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -1335,7 +1258,11 @@
           <para>The value of the specified attribute.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1366,28 +1293,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -1410,7 +1332,11 @@
           <para>The value of the specified attribute. If the attribute is not found, null is returned.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1445,28 +1371,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -1486,8 +1407,7 @@ String dt2 = reader.GetAttribute("type","urn:datatypes");</code>
           <code>String dt3 = reader.GetAttribute("xmlns:dt");
 String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para
-            >You can also get this information by using the <see
-             cref="P:System.Xml.XmlValidatingReader.Prefix" />
+            >You can also get this information by using the <see cref="P:System.Xml.XmlValidatingReader.Prefix" />
 
             
 
@@ -1503,14 +1423,22 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>The value of the specified attribute. If the attribute is not found, null is returned. This method does not move the reader.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the attribute. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1539,28 +1467,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -1600,28 +1523,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -1721,8 +1639,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the current node can have a <see
-             cref="P:System.Xml.XmlValidatingReader.Value" />
+            >Gets a value indicating whether the current node can have a <see cref="P:System.Xml.XmlValidatingReader.Value" />
 
             
 
@@ -1750,28 +1667,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>This property applies only to an attribute node.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -1807,28 +1719,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -1934,28 +1841,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -1967,8 +1869,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             >
           </block>
           <para
-            >This property is most commonly used for error reporting, but can be called at any time. The starting value for this property is 1. Combined with <see
-             cref="P:System.Xml.XmlValidatingReader.LinePosition" />
+            >This property is most commonly used for error reporting, but can be called at any time. The starting value for this property is 1. Combined with <see cref="P:System.Xml.XmlValidatingReader.LinePosition" />
 
             
 
@@ -1999,28 +1900,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -2038,8 +1934,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 &lt;/root&gt;</code>
           <para>On the first line of the preceding XML text, a LinePosition of 2 corresponds to the character r; on the second line, a LinePosition of 5 corresponds to the character t; and on the third line, a LinePosition of 3 corresponds to the character r.</para>
           <para
-            >Combined with <see
-             cref="P:System.Xml.XmlValidatingReader.LineNumber" />
+            >Combined with <see cref="P:System.Xml.XmlValidatingReader.LineNumber" />
 
             
 
@@ -2070,28 +1965,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -2135,28 +2025,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -2183,7 +2068,11 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>The namespace URI to which the prefix maps or null if no matching prefix is found.</para>
         </returns>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2238,28 +2127,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -2276,7 +2160,11 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>Moves to the attribute with the specified index.</para>
         </summary>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2307,28 +2195,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -2340,18 +2223,15 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             >
           </block>
           <para
-            >After calling this method, the <see
-             cref="P:System.Xml.XmlValidatingReader.Name" />
+            >After calling this method, the <see cref="P:System.Xml.XmlValidatingReader.Name" />
 
             
 
-            , <see
-             cref="P:System.Xml.XmlValidatingReader.NamespaceURI" />
+            , <see cref="P:System.Xml.XmlValidatingReader.NamespaceURI" />
 
             
 
-            , and <see
-             cref="P:System.Xml.XmlValidatingReader.Prefix" />
+            , and <see cref="P:System.Xml.XmlValidatingReader.Prefix" />
 
             
 
@@ -2367,7 +2247,11 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>true if the attribute is found; otherwise, false. If false, the position of the reader does not change.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2402,28 +2286,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -2435,18 +2314,15 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             >
           </block>
           <para
-            >After calling this method, the <see
-             cref="P:System.Xml.XmlValidatingReader.Name" />
+            >After calling this method, the <see cref="P:System.Xml.XmlValidatingReader.Name" />
 
             
 
-            , <see
-             cref="P:System.Xml.XmlValidatingReader.NamespaceURI" />
+            , <see cref="P:System.Xml.XmlValidatingReader.NamespaceURI" />
 
             
 
-            , and <see
-             cref="P:System.Xml.XmlValidatingReader.Prefix" />
+            , and <see cref="P:System.Xml.XmlValidatingReader.Prefix" />
 
             
 
@@ -2462,14 +2338,22 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>true if the attribute is found; otherwise, false. If false, the position of the reader does not change.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the attribute. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2498,28 +2382,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -2563,28 +2442,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -2627,28 +2501,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -2660,8 +2529,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             >
           </block>
           <para
-            >If the current node is an element node, this method is equivalent to <see
-             cref="M:System.Xml.XmlValidatingReader.MoveToFirstAttribute" />
+            >If the current node is an element node, this method is equivalent to <see cref="M:System.Xml.XmlValidatingReader.MoveToFirstAttribute" />
 
             
 
@@ -2696,28 +2564,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -2754,28 +2617,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -2812,28 +2670,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>This property is relevant to Element and Attribute nodes only.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -2875,28 +2728,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -2908,8 +2756,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             >
           </block>
           <para
-            >All node and attribute names returned from <see
-             cref="T:System.Xml.XmlValidatingReader" />
+            >All node and attribute names returned from <see cref="T:System.Xml.XmlValidatingReader" />
 
             
 
@@ -2919,8 +2766,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.XmlNameTable" />
+            >Gets the <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -2953,28 +2799,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -3011,28 +2852,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -3069,28 +2905,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>This property applies only to an attribute node.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -3129,28 +2960,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -3194,28 +3020,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -3227,13 +3048,11 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             >
           </block>
           <para
-            >Use this method after calling <see
-             cref="M:System.Xml.XmlValidatingReader.MoveToAttribute(System.String)" />
+            >Use this method after calling <see cref="M:System.Xml.XmlValidatingReader.MoveToAttribute(System.String)" />
 
             
 
-             to read through the text or entity reference nodes that make up the attribute value. The <see
-             cref="P:System.Xml.XmlReader.Depth" />
+             to read through the text or entity reference nodes that make up the attribute value. The <see cref="P:System.Xml.XmlReader.Depth" />
 
             
 
@@ -3242,8 +3061,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>For example, suppose you have the following XML: &lt;test name="a &amp;b; c"/&gt; </para>
           <para>where the entity b is defined in the document type definition (DTD) as follows: &lt;!ENTITY b "123"&gt; </para>
           <para
-            >If <see
-             cref="P:System.Xml.XmlValidatingReader.EntityHandling" />
+            >If <see cref="P:System.Xml.XmlValidatingReader.EntityHandling" />
 
             
 
@@ -3308,28 +3126,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -3343,8 +3156,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>This method streams the content, decodes the Base64 content, and returns the decoded binary bytes (for example, an inline Base64 encoded GIF image) into the buffer. This method can be called successively to read large streams of embedded text. For more information, see RFC 1521, "MIME (Multipurpose Internet Mail Extensions) Part One: Mechanisms for Specifying and Describing the Format of Internet Message Bodies". You can obtain RFCs from the Request for Comments Web site at http://www.rfc-editor.org.</para>
           <block subset="none" type="note">
             <para
-              >You should not access any of the reader properties between calls to the <see
-               cref="M:System.Xml.XmlValidatingReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
+              >You should not access any of the reader properties between calls to the <see cref="M:System.Xml.XmlValidatingReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
 
               
 
@@ -3385,21 +3197,33 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>The number of bytes written to the buffer.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3435,28 +3259,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -3470,8 +3289,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>This method streams the content, decodes the BinHex content, and returns the decoded binary bytes (for example, an inline BinHex encoded GIF image) into the buffer. This method can be called successively to read large streams of embedded text.</para>
           <block subset="none" type="note">
             <para
-              >You should not access any of the reader properties between calls to the <see
-               cref="M:System.Xml.XmlValidatingReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
+              >You should not access any of the reader properties between calls to the <see cref="M:System.Xml.XmlValidatingReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
 
               
 
@@ -3512,21 +3330,33 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>The number of bytes written to the buffer.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3562,28 +3392,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -3597,44 +3422,37 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>This method reads the element content, decodes it using Base64 encoding, and returns the decoded binary bytes (for example, an inline Base64 encoded GIF image) into the buffer. For more information, see RFC 1521, "MIME (Multipurpose Internet Mail Extensions) Part One: Mechanisms for Specifying and Describing the Format of Internet Message Bodies". You can obtain RFCs from the Request for Comments Web site at http://www.rfc-editor.org.</para>
           <para>This method can read only simple-content elements. The element can contain text, white space, significant white space, CDATA sections, comments, and processing instructions. It can also contain entity references, which are automatically expanded. The element cannot have child elements.</para>
           <para
-            >This method is very similar to the <see
-             cref="M:System.Xml.XmlValidatingReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
+            >This method is very similar to the <see cref="M:System.Xml.XmlValidatingReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
 
             
 
              method except that it can be called only on element node types.</para
           >
           <para
-            >If the <paramref
-             name="count" />
+            >If the <paramref name="count" />
 
             
 
-             value is higher than the number of bytes in the document, or if it is equal to the number of bytes in the document, the <see
-             cref="T:System.Xml.XmlValidatingReader" />
+             value is higher than the number of bytes in the document, or if it is equal to the number of bytes in the document, the <see cref="T:System.Xml.XmlValidatingReader" />
 
             
 
-             reads all the remaining bytes in the document and returns the number of bytes read. The next <see
-             cref="T:System.Xml.XmlValidatingReader" />
+             reads all the remaining bytes in the document and returns the number of bytes read. The next <see cref="T:System.Xml.XmlValidatingReader" />
 
             
 
-             method call returns a zero and moves the reader to the node following the <see
-             cref="F:System.Xml.XmlNodeType.EndElement" />
+             method call returns a zero and moves the reader to the node following the <see cref="F:System.Xml.XmlNodeType.EndElement" />
 
             
 
             .</para
           >
           <para
-            >If you call <see
-             cref="M:System.Xml.XmlValidatingReader.Read" />
+            >If you call <see cref="M:System.Xml.XmlValidatingReader.Read" />
 
             
 
-             before all of the element content is consumed, the reader may behave as if the first content was consumed and then the <see
-             cref="M:System.Xml.XmlValidatingReader.Read" />
+             before all of the element content is consumed, the reader may behave as if the first content was consumed and then the <see cref="M:System.Xml.XmlValidatingReader.Read" />
 
             
 
@@ -3650,21 +3468,33 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>The number of bytes written to the buffer.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3700,28 +3530,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -3735,44 +3560,37 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>This method reads the element content, decodes it using BinHex encoding, and returns the decoded binary bytes (for example, an inline BinHex encoded GIF image) into the buffer.</para>
           <para>This method can read only simple-content elements. The element can contain text, white space, significant white space, CDATA sections, comments, and processing instructions. It can also contain entity references, which are automatically expanded. The element cannot have child elements.</para>
           <para
-            >This method is very similar to the <see
-             cref="M:System.Xml.XmlValidatingReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
+            >This method is very similar to the <see cref="M:System.Xml.XmlValidatingReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
 
             
 
              method except that it can be called only on element node types.</para
           >
           <para
-            >If the <paramref
-             name="count" />
+            >If the <paramref name="count" />
 
             
 
-             value is higher than the number of bytes in the document, or if it is equal to the number of bytes in the document, the <see
-             cref="T:System.Xml.XmlValidatingReader" />
+             value is higher than the number of bytes in the document, or if it is equal to the number of bytes in the document, the <see cref="T:System.Xml.XmlValidatingReader" />
 
             
 
-             reads all the remaining bytes in the document and returns the number of bytes read. The next <see
-             cref="T:System.Xml.XmlValidatingReader" />
+             reads all the remaining bytes in the document and returns the number of bytes read. The next <see cref="T:System.Xml.XmlValidatingReader" />
 
             
 
-             method call returns a zero and moves the reader to the node following the <see
-             cref="F:System.Xml.XmlNodeType.EndElement" />
+             method call returns a zero and moves the reader to the node following the <see cref="F:System.Xml.XmlNodeType.EndElement" />
 
             
 
             .</para
           >
           <para
-            >If you call <see
-             cref="M:System.Xml.XmlValidatingReader.Read" />
+            >If you call <see cref="M:System.Xml.XmlValidatingReader.Read" />
 
             
 
-             before all of the element content is consumed, the reader may behave as if the first content was consumed and then the <see
-             cref="M:System.Xml.XmlValidatingReader.Read" />
+             before all of the element content is consumed, the reader may behave as if the first content was consumed and then the <see cref="M:System.Xml.XmlValidatingReader.Read" />
 
             
 
@@ -3788,21 +3606,33 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>The number of bytes written to the buffer.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3831,28 +3661,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -3869,8 +3694,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.XmlReader" />
+            >Gets the <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -3903,28 +3727,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -3963,28 +3782,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -3998,8 +3812,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>If positioned on an element, ReadString concatenates all text, significant white space, white space, and CDATA section node types together and returns the concatenated data as the element content. The reader stops when any markup is encountered, including comments and processing instructions. This could occur in a mixed content model, or when an element end tag is read.</para>
           <para>If positioned on a text node, ReadString performs the same concatenation from the text node to the element end tag. If the reader is positioned on an attribute text node, ReadString has the same functionality as if the reader were position on the element start tag. It returns all the concatenated element text nodes.</para>
           <para
-            >The <see
-             cref="P:System.Xml.XmlValidatingReader.EntityHandling" />
+            >The <see cref="P:System.Xml.XmlValidatingReader.EntityHandling" />
 
             
 
@@ -4068,28 +3881,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -4101,23 +3909,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             >
           </block>
           <para
-            >For example, if the schema type is defined as xsd:int, the runtime type int32 is returned for the object. This can be tested using the <see
-             cref="M:System.Object.GetType" />
+            >For example, if the schema type is defined as xsd:int, the runtime type int32 is returned for the object. This can be tested using the <see cref="M:System.Object.GetType" />
 
             
 
-             method and cast accordingly. The <see
-             cref="M:System.Xml.XmlValidatingReader.ReadTypedValue" />
+             method and cast accordingly. The <see cref="M:System.Xml.XmlValidatingReader.ReadTypedValue" />
 
             
 
-             method always returns a type that is derived from the <see
-             cref="T:System.Object" />
+             method always returns a type that is derived from the <see cref="T:System.Object" />
 
             
 
-             class. It never returns the <see
-             cref="T:System.Object" />
+             class. It never returns the <see cref="T:System.Object" />
 
             
 
@@ -4126,8 +3930,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>If the reader is positioned on an attribute, this method returns the runtime typed object, but does not change the position of the reader. If the reader is positioned on an element, ReadTypedValue reads any CDATA, text, white space, significant white space, and comment nodes, returns the runtime typed object and positions the reader on the end tag. Any types that do not have a direct mapping, for example NMTOKENS, are returned as strings.</para>
           <block subset="none" type="note">
             <para
-              >If <see
-               cref="P:System.Xml.XmlValidatingReader.ValidationType" />
+              >If <see cref="P:System.Xml.XmlValidatingReader.ValidationType" />
 
               
 
@@ -4136,8 +3939,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           </block>
           <block subset="none" type="note">
             <para
-              >After calling <see
-               cref="M:System.Xml.XmlValidatingReader.Close" />
+              >After calling <see cref="M:System.Xml.XmlValidatingReader.Close" />
 
               
 
@@ -4176,28 +3978,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -4209,8 +4006,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             >
           </block>
           <para
-            >If the reader is positioned on an EntityReference node (XmlNodeType.EntityReference), if <see
-             cref="M:System.Xml.XmlValidatingReader.Read" />
+            >If the reader is positioned on an EntityReference node (XmlNodeType.EntityReference), if <see cref="M:System.Xml.XmlValidatingReader.Read" />
 
             
 
@@ -4218,8 +4014,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           >
           <block subset="none" type="note">
             <para
-              >After calling this method, if the entity is part of an attribute value, you must call <see
-               cref="M:System.Xml.XmlValidatingReader.ReadAttributeValue" />
+              >After calling this method, if the entity is part of an attribute value, you must call <see cref="M:System.Xml.XmlValidatingReader.ReadAttributeValue" />
 
               
 
@@ -4257,28 +4052,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -4292,18 +4082,15 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>The XmlSchemaCollection holds pre-loaded XML-Data Reduced (XDR) and XML Schema definition language (XSD) schemas. This property gives the reader access to the cache of schemas and allows it to validate without having to re-load schemas every time. The reader does not add anything to the XmlSchemaCollection.</para>
           <para>If the XmlSchemaCollection includes an XML schema (XSD) which contains include or import elements that reference other namespaces, the schemas for these other namespaces are loaded for validation purposes only. Unless these schemas were explicitly added to the schema collection, they will not be accessible using any of the collection methods or properties. For example, if the collection contains the schema file a.xsd, which contains a reference to the schema file b.xsd, you must add b.xsd to the schema collection before you can access it using any of the collection methods or properties.</para>
           <para
-            >When the XmlSchemaCollection is accessed using the Schemas property, the <see
-             cref="M:System.Xml.Schema.XmlSchemaCollection.Add(System.String,System.String)" />
+            >When the XmlSchemaCollection is accessed using the Schemas property, the <see cref="M:System.Xml.Schema.XmlSchemaCollection.Add(System.String,System.String)" />
 
             
 
-             method uses the <see
-             cref="T:System.Xml.XmlResolver" />
+             method uses the <see cref="T:System.Xml.XmlResolver" />
 
             
 
-             specified by the <see
-             cref="P:System.Xml.XmlValidatingReader.XmlResolver" />
+             specified by the <see cref="P:System.Xml.XmlValidatingReader.XmlResolver" />
 
             
 
@@ -4313,8 +4100,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             <para>The schemas must be added to the XmlSchemaCollection before the first Read call.</para>
           </block>
           <para
-            >For more information, refer to <format
-             type="text/html">
+            >For more information, refer to <format type="text/html">
               <a href="ac73e04a-9b40-4dea-aed8-7b956475ffe4"
                 >Validation of XML with XmlValidatingReader</a
               >
@@ -4328,8 +4114,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Xml.Schema.XmlSchemaCollection" />
+            >Gets a <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
             
 
@@ -4356,28 +4141,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -4407,8 +4187,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>XmlSchemaComplexType is returned if the current element is a user defined complexType. This type cannot be returned by attributes.</para>
           <block subset="none" type="note">
             <para
-              >If <see
-               cref="P:System.Xml.XmlValidatingReader.ValidationType" />
+              >If <see cref="P:System.Xml.XmlValidatingReader.ValidationType" />
 
               
 
@@ -4417,8 +4196,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           </block>
           <block subset="none" type="note">
             <para
-              >After calling <see
-               cref="M:System.Xml.XmlValidatingReader.Close" />
+              >After calling <see cref="M:System.Xml.XmlValidatingReader.Close" />
 
               
 
@@ -4456,28 +4234,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -4492,13 +4265,11 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.XmlReaderSettings" />
+            >Gets the <see cref="T:System.Xml.XmlReaderSettings" />
 
             
 
-             object that was used to create this <see
-             cref="T:System.Xml.XmlValidatingReader" />
+             object that was used to create this <see cref="T:System.Xml.XmlValidatingReader" />
 
             
 
@@ -4523,13 +4294,11 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <see
-             cref="P:System.Xml.IXmlLineInfo.LineNumber" />
+            >true if <see cref="P:System.Xml.IXmlLineInfo.LineNumber" />
 
             
 
-             and <see
-             cref="P:System.Xml.IXmlLineInfo.LinePosition" />
+             and <see cref="P:System.Xml.IXmlLineInfo.LinePosition" />
 
             
 
@@ -4596,13 +4365,11 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Xml.XmlValidatingReader" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Xml.XmlValidatingReader" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Xml.IXmlNamespaceResolver" />
+             instance is cast to an <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
             
 
@@ -4612,8 +4379,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Xml.IXmlNamespaceResolver.GetNamespacesInScope(System.Xml.XmlNamespaceScope)" />
+            >For a description of this member, see <see cref="M:System.Xml.IXmlNamespaceResolver.GetNamespacesInScope(System.Xml.XmlNamespaceScope)" />
 
             
 
@@ -4625,12 +4391,15 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>An T:System.Collections.IDictionary object that identifies the namespaces in scope.</para>
         </returns>
         <param name="scope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlNamespaceScope" />
+          An <see cref="T:System.Xml.XmlNamespaceScope" />
 
           
 
@@ -4664,13 +4433,11 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Xml.XmlValidatingReader" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Xml.XmlValidatingReader" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Xml.IXmlNamespaceResolver" />
+             instance is cast to an <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
             
 
@@ -4680,8 +4447,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Xml.IXmlNamespaceResolver.LookupPrefix(System.String)" />
+            >For a description of this member, see <see cref="M:System.Xml.IXmlNamespaceResolver.LookupPrefix(System.String)" />
 
             
 
@@ -4691,8 +4457,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string value that contains the namespace prefix that is associated with the <paramref
-             name="namespaceName" />
+            >A string value that contains the namespace prefix that is associated with the <paramref name="namespaceName" />
 
             
 
@@ -4725,28 +4490,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -4758,21 +4518,18 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             >
           </block>
           <para
-            >These events occur during <see
-             cref="M:System.Xml.XmlValidatingReader.Read" />
+            >These events occur during <see cref="M:System.Xml.XmlValidatingReader.Read" />
 
             
 
-             and only if a <see
-             cref="P:System.Xml.XmlValidatingReader.ValidationType" />
+             and only if a <see cref="P:System.Xml.XmlValidatingReader.ValidationType" />
 
             
 
              of DTD, XDR, Schema, or Auto is specified.</para
           >
           <para
-            >If no event handler is provided, an <see
-             cref="T:System.Xml.XmlException" />
+            >If no event handler is provided, an <see cref="T:System.Xml.XmlException" />
 
             
 
@@ -4782,8 +4539,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             <para>If an element reports a validation error, the rest of the content model for that element is not validated, however, its children are validated. The reader only reports the first error for a given element.</para>
           </block>
           <para
-            >The callback handler can use the <see
-             cref="P:System.Xml.Schema.ValidationEventArgs.Severity" />
+            >The callback handler can use the <see cref="P:System.Xml.Schema.ValidationEventArgs.Severity" />
 
             
 
@@ -4821,28 +4577,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -4854,24 +4605,21 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             >
           </block>
           <para
-            >This property must be set before the first call to <see
-             cref="M:System.Xml.XmlValidatingReader.Read" />
+            >This property must be set before the first call to <see cref="M:System.Xml.XmlValidatingReader.Read" />
 
             
 
             . Setting this property to ValidationType.None creates a non-validating reader.</para
           >
           <para
-            >If external document type definitions (DTDs) or schemas are needed for validation, the <see
-             cref="T:System.Xml.XmlResolver" />
+            >If external document type definitions (DTDs) or schemas are needed for validation, the <see cref="T:System.Xml.XmlResolver" />
 
             
 
              is used.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="ac73e04a-9b40-4dea-aed8-7b956475ffe4"
                 >Validation of XML with XmlValidatingReader</a
               >
@@ -4879,8 +4627,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="1543fc6b-1ec7-4273-98a9-c2173b9ed2a1"
                 >Validation Types of the XmlValidatingReader</a
               >
@@ -4915,28 +4662,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -4972,28 +4714,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -5038,28 +4775,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >
@@ -5072,8 +4804,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           </block>
           <para>The XmlResolver is used to load any DTDs, entities, or schemas needed to complete the validation process.</para>
           <para
-            >This property can be set at any time and takes affect after the next <see
-             cref="M:System.Xml.XmlValidatingReader.Read" />
+            >This property can be set at any time and takes affect after the next <see cref="M:System.Xml.XmlValidatingReader.Read" />
 
             
 
@@ -5081,8 +4812,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           >
           <para>In version 1.1 of dnprdnshort , if this property is not set, the trust level of the application determines the default behavior.</para>
           <para
-            >Fully trusted code: The reader uses a default <see
-             cref="T:System.Xml.XmlUrlResolver" />
+            >Fully trusted code: The reader uses a default <see cref="T:System.Xml.XmlUrlResolver" />
 
             
 
@@ -5090,13 +4820,11 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           >
           <para>Semi-trusted code: The XmlResolver property is set to null. External resources are not resolved.</para>
           <para
-            >When validating using schemas, you can avoid the expensive load process by providing an <see
-             cref="T:System.Xml.Schema.XmlSchemaCollection" />
+            >When validating using schemas, you can avoid the expensive load process by providing an <see cref="T:System.Xml.Schema.XmlSchemaCollection" />
 
             
 
-             using the <see
-             cref="P:System.Xml.XmlValidatingReader.Schemas" />
+             using the <see cref="P:System.Xml.XmlValidatingReader.Schemas" />
 
             
 
@@ -5106,8 +4834,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Xml.XmlResolver" />
+            >Sets the <see cref="T:System.Xml.XmlResolver" />
 
             
 
@@ -5140,28 +4867,23 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlValidatingReader" />
+              >The <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
-               class is obsolete in dnprdnext. You can create a validating <see
-               cref="T:System.Xml.XmlReader" />
+               class is obsolete in dnprdnext. You can create a validating <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instance by using the <see
-               cref="T:System.Xml.XmlReaderSettings" />
+               instance by using the <see cref="T:System.Xml.XmlReaderSettings" />
 
               
 
-               class and the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               class and the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. For more information, see <format
-               type="text/html">
+               method. For more information, see <format type="text/html">
                 <a href="2958dbbd-60ca-4447-9b16-72f41d223486"
                   >Validating XML Data with XmlReader</a
                 >

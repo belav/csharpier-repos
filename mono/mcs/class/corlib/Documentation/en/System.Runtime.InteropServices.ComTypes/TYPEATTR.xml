@@ -20,8 +20,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>For additional information about TYPEATTR, see the MSDN Library.</para>
       <para
-        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format
-         type="text/html">
+        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html">
           <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
         </format>
 
@@ -319,13 +318,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A constant used with the <see
-             cref="F:System.Runtime.InteropServices.TYPEATTR.memidConstructor" />
+            >A constant used with the <see cref="F:System.Runtime.InteropServices.TYPEATTR.memidConstructor" />
 
             
 
-             and <see
-             cref="F:System.Runtime.InteropServices.TYPEATTR.memidDestructor" />
+             and <see cref="F:System.Runtime.InteropServices.TYPEATTR.memidDestructor" />
 
             
 
@@ -354,8 +351,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >ID of constructor, or <see
-             cref="F:System.Runtime.InteropServices.TYPEATTR.MEMBER_ID_NIL" />
+            >ID of constructor, or <see cref="F:System.Runtime.InteropServices.TYPEATTR.MEMBER_ID_NIL" />
 
             
 
@@ -384,8 +380,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >ID of destructor, or <see
-             cref="F:System.Runtime.InteropServices.TYPEATTR.MEMBER_ID_NIL" />
+            >ID of destructor, or <see cref="F:System.Runtime.InteropServices.TYPEATTR.MEMBER_ID_NIL" />
 
             
 
@@ -420,13 +415,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="F:System.Runtime.InteropServices.TYPEATTR.typekind" />
+            >If <see cref="F:System.Runtime.InteropServices.TYPEATTR.typekind" />
 
             
 
-             == <see
-             cref="F:System.Runtime.InteropServices.TYPEKIND.TKIND_ALIAS" />
+             == <see cref="F:System.Runtime.InteropServices.TYPEKIND.TKIND_ALIAS" />
 
             
 
@@ -461,8 +454,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Runtime.InteropServices.TYPEKIND" />
+            >A <see cref="T:System.Runtime.InteropServices.TYPEKIND" />
 
             
 
@@ -543,8 +535,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Runtime.InteropServices.TYPEFLAGS" />
+            >A <see cref="T:System.Runtime.InteropServices.TYPEFLAGS" />
 
             
 

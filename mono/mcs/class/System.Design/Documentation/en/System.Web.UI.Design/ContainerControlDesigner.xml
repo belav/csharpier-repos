@@ -16,31 +16,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+        >The <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
         
 
-         class provides a base designer class for controls that can be modified on the design surface. This includes controls that contain child controls or editable inner properties. The <see
-         cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+         class provides a base designer class for controls that can be modified on the design surface. This includes controls that contain child controls or editable inner properties. The <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
         
 
          provides a single framed region to represent the control, and automatically handles rendering the control at design time.</para
       >
       <para
-        >Apply the <see
-         cref="T:System.Web.UI.ParseChildrenAttribute" />
+        >Apply the <see cref="T:System.Web.UI.ParseChildrenAttribute" />
 
         
 
-         attribute on the associated control to determine the design-time behavior of the <see
-         cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+         attribute on the associated control to determine the design-time behavior of the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
         
 
-        . Apply the <see
-         cref="T:System.Web.UI.ParseChildrenAttribute" />
+        . Apply the <see cref="T:System.Web.UI.ParseChildrenAttribute" />
 
         
 
@@ -49,8 +44,7 @@
       <list type="bullet">
         <item>
           <para
-            >false to indicate that the <see
-             cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+            >false to indicate that the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
             
 
@@ -59,8 +53,7 @@
         </item>
         <item>
           <para
-            >true to indicate that the <see
-             cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+            >true to indicate that the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
             
 
@@ -72,23 +65,19 @@
       <list type="bullet">
         <item>
           <para
-            >Controls that allow child controls to be added to it at design time can derive from the <see
-             cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+            >Controls that allow child controls to be added to it at design time can derive from the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
             
 
-             class. For example, the <see
-             cref="T:System.Web.UI.Design.WebControls.PanelContainerDesigner" />
+             class. For example, the <see cref="T:System.Web.UI.Design.WebControls.PanelContainerDesigner" />
 
             
 
-             class is derived from the <see
-             cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+             class is derived from the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
             
 
-             class and represents a <see
-             cref="T:System.Web.UI.WebControls.Panel" />
+             class and represents a <see cref="T:System.Web.UI.WebControls.Panel" />
 
             
 
@@ -97,8 +86,7 @@
         </item>
         <item>
           <para
-            >Controls that have one or more child controls, and might also have an editable designer region where controls can be added at design time, can derive from the <see
-             cref="T:System.Web.UI.Design.WebControls.CompositeControlDesigner" />
+            >Controls that have one or more child controls, and might also have an editable designer region where controls can be added at design time, can derive from the <see cref="T:System.Web.UI.Design.WebControls.CompositeControlDesigner" />
 
             
 
@@ -107,8 +95,7 @@
         </item>
         <item>
           <para
-            >Controls that require custom design-time processing can derive from the base <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+            >Controls that require custom design-time processing can derive from the base <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
@@ -118,13 +105,11 @@
       </list>
       <block subset="none" type="note">
         <para
-          >  The <see
-           cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+          >  The <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
           
 
-           class replaces the obsolete <see
-           cref="T:System.Web.UI.Design.ReadWriteControlDesigner" />
+           class replaces the obsolete <see cref="T:System.Web.UI.Design.ReadWriteControlDesigner" />
 
           
 
@@ -132,13 +117,11 @@
         >
       </block>
       <para
-        >Use the <see
-         cref="T:System.ComponentModel.DesignerAttribute" />
+        >Use the <see cref="T:System.ComponentModel.DesignerAttribute" />
 
         
 
-         attribute to associate a custom designer class together with a custom control implementation. For detailed information about how to use control designers with custom controls, see <format
-         type="text/html">
+         attribute to associate a custom designer class together with a custom control implementation. For detailed information about how to use control designers with custom controls, see <format type="text/html">
           <a href="27e44af0-6e12-4b7d-b17f-db35f1b6a052"
             >Walkthrough:  Creating a Basic Control Designer for a Web Server Control</a
           >
@@ -167,8 +150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
             
 
@@ -196,31 +178,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ContainerControlDesigner.AddDesignTimeCssAttributes(System.Collections.IDictionary)" />
+            >The <see cref="M:System.Web.UI.Design.ContainerControlDesigner.AddDesignTimeCssAttributes(System.Collections.IDictionary)" />
 
             
 
-             method adds a set of style attributes for the design-time representation of the control. The style attribute values are added to the <paramref
-             name="styleAttributes" />
+             method adds a set of style attributes for the design-time representation of the control. The style attribute values are added to the <paramref name="styleAttributes" />
 
             
 
              collection, keyed by the style attribute name. For example, you can access the height value in the collection as styleAttributes["height"] for C# or styleAttributes("height") for Microsoft Visual Basic.</para
           >
           <para
-            >If the associated control is not derived from the <see
-             cref="T:System.Web.UI.WebControls.WebControl" />
+            >If the associated control is not derived from the <see cref="T:System.Web.UI.WebControls.WebControl" />
 
             
 
-             class, the <see
-             cref="M:System.Web.UI.Design.ContainerControlDesigner.AddDesignTimeCssAttributes(System.Collections.IDictionary)" />
+             class, the <see cref="M:System.Web.UI.Design.ContainerControlDesigner.AddDesignTimeCssAttributes(System.Collections.IDictionary)" />
 
             
 
-             method does not add attribute values to the <paramref
-             name="styleAttributes" />
+             method does not add attribute values to the <paramref name="styleAttributes" />
 
             
 
@@ -232,7 +209,11 @@
           <para>Adds the style attributes for the control at design time.</para>
         </summary>
         <param name="styleAttributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -254,8 +235,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The base implementation for the <see
-             cref="P:System.Web.UI.Design.ContainerControlDesigner.AllowResize" />
+            >The base implementation for the <see cref="P:System.Web.UI.Design.ContainerControlDesigner.AllowResize" />
 
             
 
@@ -282,26 +262,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.ContainerControlDesigner.FrameCaption" />
+            >The <see cref="P:System.Web.UI.Design.ContainerControlDesigner.FrameCaption" />
 
             
 
              string is the caption that is displayed in the frame around the editable region of the control on the design surface.</para
           >
           <para
-            >The default caption for a <see
-             cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+            >The default caption for a <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
             
 
-             frame is the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.ID" />
+             frame is the <see cref="P:System.Web.UI.Design.ControlDesigner.ID" />
 
             
 
-             property of the designer instance. This is typically the same as the run-time <see
-             cref="P:System.Web.UI.Control.ID" />
+             property of the designer instance. This is typically the same as the run-time <see cref="P:System.Web.UI.Control.ID" />
 
             
 
@@ -331,8 +307,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.ContainerControlDesigner.FrameStyle" />
+            >The <see cref="P:System.Web.UI.Design.ContainerControlDesigner.FrameStyle" />
 
             
 
@@ -362,8 +337,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeCssAttributes" />
+            >The <see cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeCssAttributes" />
 
             
 
@@ -371,13 +345,11 @@
           >
           <para>To examine a style attribute value at design time for a control, use the style attribute name as a key to the returned collection. Style attribute values are stored as strings in the collection. For example, you can access the height value in the collection as styleAttributes["height"] for C# or styleAttributes("height") for Microsoft Visual Basic.</para>
           <para
-            >If the associated control is not derived from the <see
-             cref="T:System.Web.UI.WebControls.WebControl" />
+            >If the associated control is not derived from the <see cref="T:System.Web.UI.WebControls.WebControl" />
 
             
 
-             class, the <see
-             cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeCssAttributes" />
+             class, the <see cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeCssAttributes" />
 
             
 
@@ -391,8 +363,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of style attributes applied to the control on the design surface. The style attribute names are keys used to access the style attribute values in the <see
-             cref="T:System.Collections.IDictionary" />
+            >A collection of style attributes applied to the control on the design surface. The style attribute names are keys used to access the style attribute values in the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -420,26 +391,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeHtml(System.Web.UI.Design.DesignerRegionCollection)" />
+            >Use the <see cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeHtml(System.Web.UI.Design.DesignerRegionCollection)" />
 
             
 
              method to get the HTML for the control. Child controls that are contained in the editable design region are rendered using their associated control designers.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeHtml(System.Web.UI.Design.DesignerRegionCollection)" />
+            >The <see cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeHtml(System.Web.UI.Design.DesignerRegionCollection)" />
 
             
 
-             method initializes a new <see
-             cref="T:System.Web.UI.Design.EditableDesignerRegion" />
+             method initializes a new <see cref="T:System.Web.UI.Design.EditableDesignerRegion" />
 
             
 
-             object for the editable region of associated control, and then returns the region through the <paramref
-             name="regions" />
+             object for the editable region of associated control, and then returns the region through the <paramref name="regions" />
 
             
 
@@ -455,7 +422,11 @@
           <para>An HTML markup string that represents the control.</para>
         </returns>
         <param name="regions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -482,18 +453,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+            >The <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
             
 
-             class implements a single designer region instead of a collection of designer regions. Therefore, the <paramref
-             name="region" />
+             class implements a single designer region instead of a collection of designer regions. Therefore, the <paramref name="region" />
 
             
 
-             parameter is ignored, and the <see
-             cref="M:System.Web.UI.Design.ContainerControlDesigner.GetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion)" />
+             parameter is ignored, and the <see cref="M:System.Web.UI.Design.ContainerControlDesigner.GetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion)" />
 
             
 
@@ -507,8 +475,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The persisted content of the region contained within the <see
-             cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+            >The persisted content of the region contained within the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
             
 
@@ -516,7 +483,11 @@
           >
         </returns>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -538,13 +509,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ContainerControlDesigner.GetPersistenceContent" />
+            >The <see cref="M:System.Web.UI.Design.ContainerControlDesigner.GetPersistenceContent" />
 
             
 
-             method returns null to indicate that the <see
-             cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+             method returns null to indicate that the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
             
 
@@ -581,18 +550,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+            >The <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
             
 
-             class implements a single designer region instead of a collection of designer regions. Therefore, the <paramref
-             name="region" />
+             class implements a single designer region instead of a collection of designer regions. Therefore, the <paramref name="region" />
 
             
 
-             parameter is ignored, and the <see
-             cref="M:System.Web.UI.Design.ContainerControlDesigner.SetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion,System.String)" />
+             parameter is ignored, and the <see cref="M:System.Web.UI.Design.ContainerControlDesigner.SetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion,System.String)" />
 
             
 
@@ -604,14 +570,22 @@
           <para>Sets the content for the editable region of the control at design time.</para>
         </summary>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An editable design region contained within the control.</param
         >
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

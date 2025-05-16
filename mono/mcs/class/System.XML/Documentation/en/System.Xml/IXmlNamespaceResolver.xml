@@ -46,13 +46,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The collection is keyed by prefix and can be used to enumerate the namespaces currently in scope. The collection is a disconnected copy of the current namespace list.</para>
           <para
-            >The following table lists the <see
-             cref="T:System.Xml.XmlNamespaceScope" />
+            >The following table lists the <see cref="T:System.Xml.XmlNamespaceScope" />
 
             
 
-             values and how it affects the whether or not the default and built-in namespaces are returned by the <see
-             cref="M:System.Xml.IXmlNamespaceResolver.GetNamespacesInScope(System.Xml.XmlNamespaceScope)" />
+             values and how it affects the whether or not the default and built-in namespaces are returned by the <see cref="M:System.Xml.IXmlNamespaceResolver.GetNamespacesInScope(System.Xml.XmlNamespaceScope)" />
 
             
 
@@ -132,8 +130,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IDictionary" />
+            >An <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -141,12 +138,15 @@
           >
         </returns>
         <param name="scope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlNamespaceScope" />
+          An <see cref="T:System.Xml.XmlNamespaceScope" />
 
           
 
@@ -179,8 +179,7 @@
             <para>Namespace URI-to-prefix mappings can change from node to node in an XML document. You cannot depend on the result of a lookup being consistent from one node to the next.</para>
           </block>
           <para
-            >The following table describes how the default and built-in namespaces are handled by the <see
-             cref="M:System.Xml.IXmlNamespaceResolver.LookupNamespace(System.String)" />
+            >The following table describes how the default and built-in namespaces are handled by the <see cref="M:System.Xml.IXmlNamespaceResolver.LookupNamespace(System.String)" />
 
             
 
@@ -240,7 +239,11 @@
           <para>The namespace URI that is mapped to the prefix; null if the prefix is not mapped to a namespace URI.</para>
         </returns>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -274,8 +277,7 @@
             <para>Namespace URI to prefix mappings can change from node to node in an XML document. You cannot depend on the result of a lookup being consistent from one node to the next.</para>
           </block>
           <para
-            >The following table describes how the default and built-in namespaces are handled by the <see
-             cref="M:System.Xml.IXmlNamespaceResolver.LookupPrefix(System.String)" />
+            >The following table describes how the default and built-in namespaces are handled by the <see cref="M:System.Xml.IXmlNamespaceResolver.LookupPrefix(System.String)" />
 
             
 
@@ -327,7 +329,11 @@
           <para>The prefix that is mapped to the namespace URI; null if the namespace URI is not mapped to a prefix.</para>
         </returns>
         <param name="namespaceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

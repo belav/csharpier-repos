@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.OutputCacheSection" />
+        >The <see cref="T:System.Web.Configuration.OutputCacheSection" />
 
         
 
@@ -40,18 +39,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.OutputCacheSection.#ctor" />
+            >The <see cref="M:System.Web.Configuration.OutputCacheSection.#ctor" />
 
             
 
-             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
-             cref="T:System.Web.Configuration.OutputCacheSection" />
+             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.OutputCacheSection" />
 
             
 
-             class by using the <see
-             cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+             class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" />
 
             
 
@@ -61,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.OutputCacheSection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.OutputCacheSection" />
 
             
 
@@ -91,25 +86,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Web.Configuration.OutputCacheSection.EnableFragmentCache" />
+            >If the <see cref="P:System.Web.Configuration.OutputCacheSection.EnableFragmentCache" />
 
             
 
-             property is set to false, no user control output is cached, regardless of the <format
-             type="text/html">
+             property is set to false, no user control output is cached, regardless of the <format type="text/html">
               <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">OutputCache</a>
             </format>
 
             
 
-             directive or caching profile used. For more information, see <see
-             cref="T:System.Web.Configuration.OutputCacheSettingsSection" />
+             directive or caching profile used. For more information, see <see cref="T:System.Web.Configuration.OutputCacheSettingsSection" />
 
             
 
-             and <see
-             cref="T:System.Web.Configuration.OutputCacheProfile" />
+             and <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
             
 
@@ -148,8 +139,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If static compression is enabled for the request but the client requested an uncompressed response, then kernel caching is disabled. Only compressed responses are cached in kernel. </para>
           <para
-            >Setting the <see
-             cref="P:System.Web.Configuration.OutputCacheSection.EnableKernelCacheForVaryByStar" />
+            >Setting the <see cref="P:System.Web.Configuration.OutputCacheSection.EnableKernelCacheForVaryByStar" />
 
             
 
@@ -160,8 +150,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -193,25 +182,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Web.Configuration.OutputCacheSection.EnableFragmentCache" />
+            >If the <see cref="P:System.Web.Configuration.OutputCacheSection.EnableFragmentCache" />
 
             
 
-             property is set to false, no page is cached on the server, regardless of the settings in <format
-             type="text/html">
+             property is set to false, no page is cached on the server, regardless of the settings in <format type="text/html">
               <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
             </format>
 
             
 
-             directive or caching profile used by the page. For more information, see <see
-             cref="T:System.Web.Configuration.OutputCacheSettingsSection" />
+             directive or caching profile used by the page. For more information, see <see cref="T:System.Web.Configuration.OutputCacheSettingsSection" />
 
             
 
-             and <see
-             cref="T:System.Web.Configuration.OutputCacheProfile" />
+             and <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
             
 
@@ -244,13 +229,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The vary header indicates the request-header fields that the server uses to determine which of multiple cached responses are sent in response to a client request. The default for the <see
-             cref="P:System.Web.Configuration.OutputCacheSection.OmitVaryStar" />
+            >The vary header indicates the request-header fields that the server uses to determine which of multiple cached responses are sent in response to a client request. The default for the <see cref="P:System.Web.Configuration.OutputCacheSection.OmitVaryStar" />
 
             
 
-             property is false. By default, ASP.NET sends the vary header in all POST requests, as well as in all GET-request query strings. If the <see
-             cref="P:System.Web.Configuration.OutputCacheSection.OmitVaryStar" />
+             property is false. By default, ASP.NET sends the vary header in all POST requests, as well as in all GET-request query strings. If the <see cref="P:System.Web.Configuration.OutputCacheSection.OmitVaryStar" />
 
             
 
@@ -302,8 +285,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.OutputCacheSection.SendCacheControlHeader" />
+            >The <see cref="P:System.Web.Configuration.OutputCacheSection.SendCacheControlHeader" />
 
             
 

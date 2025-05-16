@@ -22,23 +22,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each <see
-         cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+        >Each <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
         
 
-         object can have an <see
-         cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" />
+         object can have an <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" />
 
         
 
-         property that specifies the policy to be used in the verification process. Note that only <see
-         cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+         property that specifies the policy to be used in the verification process. Note that only <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
         
 
-         objects can construct an <see
-         cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" />
+         objects can construct an <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" />
 
         
 
@@ -69,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" />
 
             
 
@@ -194,8 +189,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" />
+            >Resets the <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" />
 
             
 
@@ -227,13 +221,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property uses values from the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509RevocationFlag" />
+            >This property uses values from the <see cref="T:System.Security.Cryptography.X509Certificates.X509RevocationFlag" />
 
             
 
-             enumeration. <see
-             cref="F:System.Security.Cryptography.X509Certificates.X509RevocationFlag.ExcludeRoot" />
+             enumeration. <see cref="F:System.Security.Cryptography.X509Certificates.X509RevocationFlag.ExcludeRoot" />
 
             
 
@@ -269,13 +261,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property uses values from the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509RevocationMode" />
+            >This property uses values from the <see cref="T:System.Security.Cryptography.X509Certificates.X509RevocationMode" />
 
             
 
-             enumeration. <see
-             cref="F:System.Security.Cryptography.X509Certificates.X509RevocationMode.Online" />
+             enumeration. <see cref="F:System.Security.Cryptography.X509Certificates.X509RevocationMode.Online" />
 
             
 
@@ -338,8 +328,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns values from the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509VerificationFlags" />
+            >This property returns values from the <see cref="T:System.Security.Cryptography.X509Certificates.X509VerificationFlags" />
 
             
 

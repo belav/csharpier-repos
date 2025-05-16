@@ -23,28 +23,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This collection can either contain instances of classes deriving from <see
-         cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+        >This collection can either contain instances of classes deriving from <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
         
 
-        , or instances of the <see
-         cref="T:System.Xml.XmlElement" />
+        , or instances of the <see cref="T:System.Xml.XmlElement" />
 
         
 
-         class. In a derived class, <see
-         cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+         class. In a derived class, <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
         
 
-         class allows users to define extensibility elements in addition to those defined in the Web Services Description Language (WSDL) specification. Use these in your <see
-         cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+         class allows users to define extensibility elements in addition to those defined in the Web Services Description Language (WSDL) specification. Use these in your <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
 
         
 
-         if you know in advance the type of extensibility element you want to make. Use an <see
-         cref="T:System.Xml.XmlElement" />
+         if you know in advance the type of extensibility element you want to make. Use an <see cref="T:System.Xml.XmlElement" />
 
         
 
@@ -71,13 +66,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Since many of the classes in the <see
-             cref="N:System.Web.Services.Description" />
+            >Since many of the classes in the <see cref="N:System.Web.Services.Description" />
 
             
 
-             namespace expose an Extensions property representing a <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+             namespace expose an Extensions property representing a <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
 
             
 
@@ -87,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
 
             
 
@@ -96,7 +88,11 @@
           >
         </summary>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -122,13 +118,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+            >Adds the specified <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
             
 
-             to the end of the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+             to the end of the <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
 
             
 
@@ -138,8 +132,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index where the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+            >The zero-based index where the <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
             
 
@@ -147,17 +140,19 @@
           >
         </returns>
         <param name="extension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+          The <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
           
 
-          , passed by reference, to add to the <see
-           cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+          , passed by reference, to add to the <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
 
           
 
@@ -183,13 +178,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether the specified <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+            >Returns a value indicating whether the specified <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
             
 
-             is a member of the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+             is a member of the <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
 
             
 
@@ -199,8 +192,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+            >true if the <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
             
 
@@ -208,12 +200,15 @@
           >
         </returns>
         <param name="extension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+          The <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
           
 
@@ -240,13 +235,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the entire <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+            >Copies the entire <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
 
             
 
-             into a one-dimensional array of type <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+             into a one-dimensional array of type <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
             
 
@@ -254,19 +247,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+          An array of type <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
           
 
            serving as the destination of the copy action.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -295,13 +295,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+            >Searches the <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
 
             
 
-             and returns the first element of the specified derived <see
-             cref="T:System.Type" />
+             and returns the first element of the specified derived <see cref="T:System.Type" />
 
             
 
@@ -311,8 +309,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the search is successful, an object of the specified <see
-             cref="T:System.Type" />
+            >If the search is successful, an object of the specified <see cref="T:System.Type" />
 
             
 
@@ -320,12 +317,15 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -354,8 +354,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method searches the collection in index order, and returns the first <see
-             cref="T:System.Xml.XmlElement" />
+            >This method searches the collection in index order, and returns the first <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -365,8 +364,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+            >Searches the <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
 
             
 
@@ -376,8 +374,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the search is successful, an <see
-             cref="T:System.Xml.XmlElement" />
+            >If the search is successful, an <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -385,24 +382,30 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Xml.XmlElement" />
+          The name of the <see cref="T:System.Xml.XmlElement" />
 
           
 
            to be found.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The XML namespace URI of the <see
-           cref="T:System.Xml.XmlElement" />
+          The XML namespace URI of the <see cref="T:System.Xml.XmlElement" />
 
           
 
@@ -433,13 +436,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+            >Searches the <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
 
             
 
-             and returns an array of all elements of the specified <see
-             cref="T:System.Type" />
+             and returns an array of all elements of the specified <see cref="T:System.Type" />
 
             
 
@@ -449,8 +450,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Object" />
+            >An array of <see cref="T:System.Object" />
 
             
 
@@ -458,12 +458,15 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -498,8 +501,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+            >Searches the <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
 
             
 
@@ -509,8 +511,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Xml.XmlElement" />
+            >An array of <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -518,24 +519,30 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The XML name attribute of the <see
-           cref="T:System.Xml.XmlElement" />
+          The XML name attribute of the <see cref="T:System.Xml.XmlElement" />
 
           
 
            objects to be found.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The XML namespace URI attribute of the <see
-           cref="T:System.Xml.XmlElement" />
+          The XML namespace URI attribute of the <see cref="T:System.Xml.XmlElement" />
 
           
 
@@ -561,8 +568,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches for the specified <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+            >Searches for the specified <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
             
 
@@ -572,8 +578,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the specified <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+            >The zero-based index of the specified <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
             
 
@@ -581,12 +586,15 @@
           >
         </returns>
         <param name="extension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+          The <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
           
 
@@ -613,23 +621,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the number of items in the collection already equals the collection's capacity, the capacity is doubled by automatically reallocating the internal array before the new element is inserted.</para>
           <para
-            >If the <paramref
-             name="index" />
+            >If the <paramref name="index" />
 
             
 
-             parameter is equal to <see
-             cref="P:System.Collections.CollectionBase.Count" />
+             parameter is equal to <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
-            , the <paramref
-             name="extension" />
+            , the <paramref name="extension" />
 
             
 
-             parameter is added to the end of the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+             parameter is added to the end of the <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
 
             
 
@@ -640,13 +644,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+            >Adds the specified <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
             
 
-             to the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+             to the <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
 
             
 
@@ -654,24 +656,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which to insert the <paramref
-           name="extension" />
+          The zero-based index at which to insert the <paramref name="extension" />
 
           
 
            parameter.</param
         >
         <param name="extension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+          The <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
           
 
@@ -696,18 +704,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method checks whether the <paramref
-             name="item" />
+            >This method checks whether the <paramref name="item" />
 
             
 
-             parameter is an <see
-             cref="T:System.Xml.XmlElement" />
+             parameter is an <see cref="T:System.Xml.XmlElement" />
 
             
 
-             or a <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+             or a <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
             
 
@@ -721,8 +726,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="item" />
+            >true if the <paramref name="item" />
 
             
 
@@ -730,17 +734,19 @@
           >
         </returns>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object, either of type <see
-           cref="T:System.Xml.XmlElement" />
+          An object, either of type <see cref="T:System.Xml.XmlElement" />
 
           
 
-           or <see
-           cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+           or <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
           
 
@@ -770,8 +776,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="item" />
+            >true if the <paramref name="item" />
 
             
 
@@ -779,17 +784,19 @@
           >
         </returns>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object, either of type <see
-           cref="T:System.Xml.XmlElement" />
+          An object, either of type <see cref="T:System.Xml.XmlElement" />
 
           
 
-           or <see
-           cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+           or <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
           
 
@@ -831,10 +838,7 @@
         <Parameter Name="value" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="value"
-          >a <see
-           cref="T:System.Object" />
-        </param>
+        <param name="value">a <see cref="T:System.Object" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -857,13 +861,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of the specified <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+            >Removes the first occurrence of the specified <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
             
 
-             from the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+             from the <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
 
             
 
@@ -871,17 +873,19 @@
           >
         </summary>
         <param name="extension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+          The <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
           
 
-           to remove from the <see
-           cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+           to remove from the <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
 
           
 
@@ -907,14 +911,8 @@
         <Parameter Name="parent" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="value"
-          >a <see
-           cref="T:System.Object" />
-        </param>
-        <param name="parent"
-          >a <see
-           cref="T:System.Object" />
-        </param>
+        <param name="value">a <see cref="T:System.Object" /></param>
+        <param name="parent">a <see cref="T:System.Object" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>

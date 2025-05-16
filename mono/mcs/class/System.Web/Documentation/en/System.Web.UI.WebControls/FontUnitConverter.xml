@@ -20,13 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.FontUnitConverter" />
+        >The <see cref="T:System.Web.UI.WebControls.FontUnitConverter" />
 
         
 
-         class is used to convert data to and from <see
-         cref="T:System.Web.UI.WebControls.FontUnit" />
+         class is used to convert data to and from <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
         
 
@@ -34,13 +32,11 @@
       >
       <block subset="none" type="note">
         <para
-          >You should never access a type converter directly. Instead, call the appropriate converter by using <see
-           cref="T:System.ComponentModel.TypeDescriptor" />
+          >You should never access a type converter directly. Instead, call the appropriate converter by using <see cref="T:System.ComponentModel.TypeDescriptor" />
 
           
 
-          . For more information, see the examples in the <see
-           cref="T:System.ComponentModel.TypeConverter" />
+          . For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" />
 
           
 
@@ -51,13 +47,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Converts a <see
-         cref="T:System.Web.UI.WebControls.FontUnit" />
+        >Converts a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
         
 
-         to a string. It also converts a string to a <see
-         cref="T:System.Web.UI.WebControls.FontUnit" />
+         to a string. It also converts a string to a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
         
 
@@ -76,13 +70,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >You should never access a type converter directly. Instead, call the appropriate converter by using a <see
-               cref="T:System.ComponentModel.TypeDescriptor" />
+              >You should never access a type converter directly. Instead, call the appropriate converter by using a <see cref="T:System.ComponentModel.TypeDescriptor" />
 
               
 
-               object. For more information, see the examples in <see
-               cref="T:System.ComponentModel.TypeConverter" />
+               object. For more information, see the examples in <see cref="T:System.ComponentModel.TypeConverter" />
 
               
 
@@ -93,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.FontUnitConverter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.FontUnitConverter" />
 
             
 
@@ -124,18 +115,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.FontUnitConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.FontUnitConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
 
             
 
-             method to determine whether the data type specified by the <paramref
-             name="sourceType" />
+             method to determine whether the data type specified by the <paramref name="sourceType" />
 
             
 
-             parameter can be converted to a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             parameter can be converted to a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -143,23 +131,19 @@
           >
           <block subset="none" type="note">
             <para
-              > This method will return true only if the <paramref
-               name="sourceType" />
+              > This method will return true only if the <paramref name="sourceType" />
 
               
 
-               is <see
-               cref="T:System.String" />
+               is <see cref="T:System.String" />
 
               
 
-              . The only type this converter can convert into <see
-               cref="T:System.Web.UI.WebControls.FontUnit" />
+              . The only type this converter can convert into <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
               
 
-               is <see
-               cref="T:System.String" />
+               is <see cref="T:System.String" />
 
               
 
@@ -170,8 +154,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether a data type can be converted to a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Determines whether a data type can be converted to a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -181,13 +164,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the data type specified by the <paramref
-             name="sourceType" />
+            >true if the data type specified by the <paramref name="sourceType" />
 
             
 
-             parameter can be converted to a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             parameter can be converted to a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -195,24 +176,30 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          A <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            implemented object that provides information about the context of a type converter. </param
         >
         <param name="sourceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -246,8 +233,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether the converter can convert a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Returns a value indicating whether the converter can convert a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -257,8 +243,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the converter supports converting a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >true if the converter supports converting a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -266,23 +251,19 @@
           >
           <block subset="none" type="note">
             <para
-              >This method will return true only if the <paramref
-               name="destinationType" />
+              >This method will return true only if the <paramref name="destinationType" />
 
               
 
-               is <see
-               cref="T:System.String" />
+               is <see cref="T:System.String" />
 
               
 
-              . The only type this converter can convert <see
-               cref="T:System.Web.UI.WebControls.FontUnit" />
+              . The only type this converter can convert <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
               
 
-               into is <see
-               cref="T:System.String" />
+               into is <see cref="T:System.String" />
 
               
 
@@ -291,24 +272,30 @@
           </block>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that indicates the context of the object to convert.</param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -334,23 +321,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.FontUnitConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.FontUnitConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
 
             
 
-             method to convert the object specified by the <paramref
-             name="value" />
+             method to convert the object specified by the <paramref name="value" />
 
             
 
-             parameter to a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             parameter to a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             in the culture specified by the <paramref
-             name="culture" />
+             in the culture specified by the <paramref name="culture" />
 
             
 
@@ -358,13 +341,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If the specified object is null, the returned value is also null. Similarly, if the specified object is <see
-               cref="F:System.String.Empty" />
+              >If the specified object is null, the returned value is also null. Similarly, if the specified object is <see cref="F:System.String.Empty" />
 
               
 
-              , <see
-               cref="F:System.Web.UI.WebControls.FontUnit.Empty" />
+              , <see cref="F:System.Web.UI.WebControls.FontUnit.Empty" />
 
               
 
@@ -373,8 +354,7 @@
           </block>
           <block subset="none" type="note">
             <para
-              >This method can only convert a string to a  <see
-               cref="T:System.Web.UI.WebControls.FontUnit" />
+              >This method can only convert a string to a  <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
               
 
@@ -385,8 +365,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts an object to a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Converts an object to a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -396,8 +375,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Object" />
+            >A <see cref="T:System.Object" />
 
             
 
@@ -405,41 +383,49 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            implemented object that provides information about the context of a type converter. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
-           that specifies the culture to represent the <see
-           cref="T:System.Web.UI.WebControls.FontUnit" />
+           that specifies the culture to represent the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
           
 
           , when it is expressed in points. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to convert to a <see
-           cref="T:System.Web.UI.WebControls.FontUnit" />
+          The object to convert to a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
           
 
@@ -470,23 +456,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.FontUnitConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.FontUnitConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)" />
 
             
 
-             method to convert the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             method to convert the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             specified by the <paramref
-             name="value" />
+             specified by the <paramref name="value" />
 
             
 
-             parameter to an object with the data type specified by the <paramref
-             name="destinationType" />
+             parameter to an object with the data type specified by the <paramref name="destinationType" />
 
             
 
@@ -498,28 +480,23 @@
 
               
 
-               is returned from this method if the <paramref
-               name="value" />
+               is returned from this method if the <paramref name="value" />
 
               
 
-               parameter contains null. <see
-               cref="F:System.String.Empty" />
+               parameter contains null. <see cref="F:System.String.Empty" />
 
               
 
-               is also returned if the <see
-               cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+               is also returned if the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
               
 
-               property of the <see
-               cref="T:System.Web.UI.WebControls.FontUnit" />
+               property of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
               
 
-               specified by the <paramref
-               name="value" />
+               specified by the <paramref name="value" />
 
               
 
@@ -528,8 +505,7 @@
           </block>
           <block subset="none" type="note">
             <para
-              >This method can only convert a <see
-               cref="T:System.Web.UI.WebControls.FontUnit" />
+              >This method can only convert a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
               
 
@@ -540,8 +516,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Converts a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -551,8 +526,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Object" />
+            >A <see cref="T:System.Object" />
 
             
 
@@ -560,58 +534,68 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            implemented object that provides information about the context of a type converter. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
-           that specifies the culture to represent the <see
-           cref="T:System.Web.UI.WebControls.FontUnit" />
+           that specifies the culture to represent the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
           
 
           , when it is expressed in points. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Object" />
+          A <see cref="T:System.Object" />
 
           
 
-           that represents the <see
-           cref="T:System.Web.UI.WebControls.FontUnit" />
+           that represents the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
           
 
            to convert. </param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -639,23 +623,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.FontUnitConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.FontUnitConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
 
             
 
-             method to retrieve a <see
-             cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+             method to retrieve a <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
 
             
 
-             containing the standard values for a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             containing the standard values for a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-            . This collection contains all the fields in the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            . This collection contains all the fields in the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -665,13 +645,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+            >Returns a <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
 
             
 
-             containing the standard values for a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             containing the standard values for a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -681,13 +659,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+            >A <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
 
             
 
-             containing the standard values for a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             containing the standard values for a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -695,12 +671,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
@@ -728,18 +707,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.FontUnitConverter.GetStandardValuesExclusive(System.ComponentModel.ITypeDescriptorContext)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.FontUnitConverter.GetStandardValuesExclusive(System.ComponentModel.ITypeDescriptorContext)" />
 
             
 
-             method to determine whether the <see
-             cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+             method to determine whether the <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
 
             
 
-             returned by the <see
-             cref="M:System.Web.UI.WebControls.FontUnitConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+             returned by the <see cref="M:System.Web.UI.WebControls.FontUnitConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
 
             
 
@@ -749,13 +725,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns whether the <see
-             cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+            >Returns whether the <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
 
             
 
-             returned by the <see
-             cref="M:System.Web.UI.WebControls.FontUnitConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+             returned by the <see cref="M:System.Web.UI.WebControls.FontUnitConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
 
             
 
@@ -767,12 +741,15 @@
           <para>false for all cases.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
@@ -800,13 +777,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.FontUnitConverter.GetStandardValuesSupported(System.ComponentModel.ITypeDescriptorContext)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.FontUnitConverter.GetStandardValuesSupported(System.ComponentModel.ITypeDescriptorContext)" />
 
             
 
-             method to determine whether the instance of the <see
-             cref="T:System.Web.UI.WebControls.FontUnitConverter" />
+             method to determine whether the instance of the <see cref="T:System.Web.UI.WebControls.FontUnitConverter" />
 
             
 
@@ -816,8 +791,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns whether the instance of the <see
-             cref="T:System.Web.UI.WebControls.FontUnitConverter" />
+            >Returns whether the instance of the <see cref="T:System.Web.UI.WebControls.FontUnitConverter" />
 
             
 
@@ -829,12 +803,15 @@
           <para>true for all cases.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 

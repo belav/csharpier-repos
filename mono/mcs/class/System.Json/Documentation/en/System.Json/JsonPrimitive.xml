@@ -39,13 +39,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Json.JsonPrimitive" />
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" />
 
             
 
-             class with a specified <see
-             cref="T:System.Boolean" />
+             class with a specified <see cref="T:System.Boolean" />
 
             
 
@@ -53,12 +51,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Boolean" />
+          The <see cref="T:System.Boolean" />
 
           
 
@@ -84,13 +85,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Json.JsonPrimitive" />
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" />
 
             
 
-             class with the specified <see
-             cref="T:System.Byte" />
+             class with the specified <see cref="T:System.Byte" />
 
             
 
@@ -98,12 +97,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Byte" />
+          The <see cref="T:System.Byte" />
 
           
 
@@ -129,13 +131,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Json.JsonPrimitive" />
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" />
 
             
 
-             class with the specified <see
-             cref="T:System.Char" />
+             class with the specified <see cref="T:System.Char" />
 
             
 
@@ -143,12 +143,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Char" />
+          The <see cref="T:System.Char" />
 
           
 
@@ -174,13 +177,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Json.JsonPrimitive" />
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" />
 
             
 
-             class with a specified <see
-             cref="T:System.DateTime" />
+             class with a specified <see cref="T:System.DateTime" />
 
             
 
@@ -188,12 +189,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
@@ -219,13 +223,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Json.JsonPrimitive" />
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" />
 
             
 
-             class with a specified <see
-             cref="T:System.DateTimeOffset" />
+             class with a specified <see cref="T:System.DateTimeOffset" />
 
             
 
@@ -233,12 +235,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTimeOffset" />
+          The <see cref="T:System.DateTimeOffset" />
 
           
 
@@ -264,13 +269,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Json.JsonPrimitive" />
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" />
 
             
 
-             class with a specified <see
-             cref="T:System.Decimal" />
+             class with a specified <see cref="T:System.Decimal" />
 
             
 
@@ -278,12 +281,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Decimal" />
+          The <see cref="T:System.Decimal" />
 
           
 
@@ -309,13 +315,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Json.JsonPrimitive" />
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" />
 
             
 
-             class with a specified <see
-             cref="T:System.Double" />
+             class with a specified <see cref="T:System.Double" />
 
             
 
@@ -323,12 +327,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Double" />
+          The <see cref="T:System.Double" />
 
           
 
@@ -354,13 +361,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Json.JsonPrimitive" />
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" />
 
             
 
-             class with a specified <see
-             cref="T:System.Guid" />
+             class with a specified <see cref="T:System.Guid" />
 
             
 
@@ -368,12 +373,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Guid" />
+          The <see cref="T:System.Guid" />
 
           
 
@@ -399,13 +407,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Json.JsonPrimitive" />
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" />
 
             
 
-             class with a specified <see
-             cref="T:System.Int16" />
+             class with a specified <see cref="T:System.Int16" />
 
             
 
@@ -413,12 +419,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Int16" />
+          The <see cref="T:System.Int16" />
 
           
 
@@ -444,13 +453,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Json.JsonPrimitive" />
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" />
 
             
 
-             class with a specified <see
-             cref="T:System.Int32" />
+             class with a specified <see cref="T:System.Int32" />
 
             
 
@@ -458,12 +465,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Int32" />
+          The <see cref="T:System.Int32" />
 
           
 
@@ -489,13 +499,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Json.JsonPrimitive" />
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" />
 
             
 
-             class with a specified <see
-             cref="T:System.Int64" />
+             class with a specified <see cref="T:System.Int64" />
 
             
 
@@ -503,12 +511,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Int64" />
+          The <see cref="T:System.Int64" />
 
           
 
@@ -534,13 +545,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Json.JsonPrimitive" />
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" />
 
             
 
-             class with a specified <see
-             cref="T:System.SByte" />
+             class with a specified <see cref="T:System.SByte" />
 
             
 
@@ -548,12 +557,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.SByte" />
+          The <see cref="T:System.SByte" />
 
           
 
@@ -579,13 +591,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Json.JsonPrimitive" />
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" />
 
             
 
-             class with a specified <see
-             cref="T:System.Single" />
+             class with a specified <see cref="T:System.Single" />
 
             
 
@@ -593,12 +603,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Single" />
+          The <see cref="T:System.Single" />
 
           
 
@@ -624,13 +637,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Json.JsonPrimitive" />
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" />
 
             
 
-             class with a specified <see
-             cref="T:System.String" />
+             class with a specified <see cref="T:System.String" />
 
             
 
@@ -638,12 +649,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
@@ -688,13 +702,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Json.JsonPrimitive" />
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" />
 
             
 
-             class with a specified <see
-             cref="T:System.UInt16" />
+             class with a specified <see cref="T:System.UInt16" />
 
             
 
@@ -702,12 +714,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.UInt16" />
+          The <see cref="T:System.UInt16" />
 
           
 
@@ -733,13 +748,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Json.JsonPrimitive" />
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" />
 
             
 
-             class with a specified <see
-             cref="T:System.UInt32" />
+             class with a specified <see cref="T:System.UInt32" />
 
             
 
@@ -747,12 +760,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.UInt32" />
+          The <see cref="T:System.UInt32" />
 
           
 
@@ -778,13 +794,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Json.JsonPrimitive" />
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" />
 
             
 
-             class with a specified <see
-             cref="T:System.UInt64" />
+             class with a specified <see cref="T:System.UInt64" />
 
             
 
@@ -792,12 +806,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.UInt64" />
+          The <see cref="T:System.UInt64" />
 
           
 
@@ -823,13 +840,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Json.JsonPrimitive" />
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" />
 
             
 
-             class with a specified <see
-             cref="T:System.Uri" />
+             class with a specified <see cref="T:System.Uri" />
 
             
 
@@ -837,12 +852,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
@@ -872,8 +890,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the JsonType that is associated with this <see
-             cref="T:System.Json.JsonPrimitive" />
+            >Gets the JsonType that is associated with this <see cref="T:System.Json.JsonPrimitive" />
 
             
 

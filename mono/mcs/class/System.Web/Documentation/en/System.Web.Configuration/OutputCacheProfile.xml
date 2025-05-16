@@ -17,29 +17,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.OutputCacheProfile" />
+        >The <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
         
 
          class provides a way to programmatically access and modify the add element of the outputCacheProfiles section in the caching section of a configuration file.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Configuration.OutputCacheProfile" />
+        >The <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
         
 
          object centralizes frequently used configuration settings such as dependencies, cache location, and cache expiration time, eliminating the need to specify them on every page.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Configuration.OutputCacheProfile" />
+        >The <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
         
 
-         can be applied to a page using the CacheProfile attribute of the <format
-         type="text/html">
+         can be applied to a page using the CacheProfile attribute of the <format type="text/html">
           <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
         </format>
 
@@ -49,25 +45,21 @@
       >
       <block subset="none" type="note">
         <para
-          >The <format
-           type="text/html">
+          >The <format type="text/html">
             <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
           </format>
 
           
 
-           directive can override all the settings contained by an <see
-           cref="T:System.Web.Configuration.OutputCacheProfile" />
+           directive can override all the settings contained by an <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
           
 
-           object except for the <see
-           cref="P:System.Web.Configuration.OutputCacheProfile.Enabled" />
+           object except for the <see cref="P:System.Web.Configuration.OutputCacheProfile.Enabled" />
 
           
 
-           attribute. This is to enable or disable the <see
-           cref="T:System.Web.Configuration.OutputCacheProfile" />
+           attribute. This is to enable or disable the <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
           
 
@@ -75,8 +67,7 @@
         >
       </block>
       <para
-        >The <see
-         cref="T:System.Web.Caching.CacheDependency" />
+        >The <see cref="T:System.Web.Caching.CacheDependency" />
 
         
 
@@ -101,8 +92,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.OutputCacheProfile" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
             
 
@@ -110,7 +100,11 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -138,8 +132,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.OutputCacheProfile.Duration" />
+            >The <see cref="P:System.Web.Configuration.OutputCacheProfile.Duration" />
 
             
 
@@ -147,13 +140,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.Configuration.OutputCacheProfile.Duration" />
+              >The <see cref="P:System.Web.Configuration.OutputCacheProfile.Duration" />
 
               
 
-               must be defined in either the profile or the <format
-               type="text/html">
+               must be defined in either the profile or the <format type="text/html">
                 <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
               </format>
 
@@ -189,13 +180,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.OutputCacheProfile.Enabled" />
+            >The <see cref="P:System.Web.Configuration.OutputCacheProfile.Enabled" />
 
             
 
-             property allows enabling or disabling the caching mechanism in one place only. It affects all the pages or controls that use this <see
-             cref="T:System.Web.Configuration.OutputCacheProfile" />
+             property allows enabling or disabling the caching mechanism in one place only. It affects all the pages or controls that use this <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
             
 
@@ -231,8 +220,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Web.Configuration.OutputCacheProfile.Location" />
+            >If <see cref="P:System.Web.Configuration.OutputCacheProfile.Location" />
 
             
 
@@ -271,20 +259,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You use the <see
-             cref="P:System.Web.Configuration.OutputCacheProfile.Name" />
+            >You use the <see cref="P:System.Web.Configuration.OutputCacheProfile.Name" />
 
             
 
-             to assign a value to the CacheProfile attribute of the <format
-             type="text/html">
+             to assign a value to the CacheProfile attribute of the <format type="text/html">
               <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
             </format>
 
             
 
-             directive if you want to apply the <see
-             cref="T:System.Web.Configuration.OutputCacheProfile" />
+             directive if you want to apply the <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
             
 
@@ -294,8 +279,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Web.Configuration.OutputCacheProfile" />
+            >Gets or sets the <see cref="T:System.Web.Configuration.OutputCacheProfile" />
 
             
 
@@ -324,16 +308,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The page that has the <see
-             cref="P:System.Web.Configuration.OutputCacheProfile.NoStore" />
+            >The page that has the <see cref="P:System.Web.Configuration.OutputCacheProfile.NoStore" />
 
             
 
              property set to true issues a response specifying in its header to prevent secondary storage of sensitive information.</para
           >
           <para
-            >Setting this attribute to true is equivalent to invoking the <see
-             cref="M:System.Web.HttpCachePolicy.SetNoStore" />
+            >Setting this attribute to true is equivalent to invoking the <see cref="M:System.Web.HttpCachePolicy.SetNoStore" />
 
             
 
@@ -385,13 +367,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.OutputCacheProfile.SqlDependency" />
+            >The <see cref="P:System.Web.Configuration.OutputCacheProfile.SqlDependency" />
 
             
 
-             defines a relationship between a Web application and an instance of SQL Server, allowing the detection of changes in the data at the server. The <see
-             cref="P:System.Web.Configuration.OutputCacheProfile.SqlDependency" />
+             defines a relationship between a Web application and an instance of SQL Server, allowing the detection of changes in the data at the server. The <see cref="P:System.Web.Configuration.OutputCacheProfile.SqlDependency" />
 
             
 
@@ -399,8 +379,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.Caching.SqlCacheDependency" />
+              >The <see cref="T:System.Web.Caching.SqlCacheDependency" />
 
               
 
@@ -411,8 +390,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="P:System.Web.Configuration.OutputCacheProfile.SqlDependency" />
+            >Gets or sets the <see cref="P:System.Web.Configuration.OutputCacheProfile.SqlDependency" />
 
             
 
@@ -443,13 +421,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.OutputCacheProfile.VaryByContentEncoding" />
+            >The <see cref="P:System.Web.Configuration.OutputCacheProfile.VaryByContentEncoding" />
 
             
 
-             settings are the same ones used by the VaryByContentEncoding attribute of the <format
-             type="text/html">
+             settings are the same ones used by the VaryByContentEncoding attribute of the <format type="text/html">
               <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
             </format>
 
@@ -462,8 +438,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -495,16 +470,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.OutputCacheProfile.VaryByControl" />
+            >The <see cref="P:System.Web.Configuration.OutputCacheProfile.VaryByControl" />
 
             
 
              is a semicolon-delimited set of IDs of controls to be cached. </para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="7f7d839a-c060-4d2a-9c4e-7fd1080ec0ad"
                 >Caching Multiple Versions of User Control Output</a
               >
@@ -516,13 +489,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.Configuration.OutputCacheProfile.VaryByControl" />
+              >The <see cref="P:System.Web.Configuration.OutputCacheProfile.VaryByControl" />
 
               
 
-               settings are the same ones used by the VaryByControls attribute of the <format
-               type="text/html">
+               settings are the same ones used by the VaryByControls attribute of the <format type="text/html">
                 <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
               </format>
 
@@ -535,8 +506,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="P:System.Web.Configuration.OutputCacheProfile.VaryByControl" />
+            >Gets or sets the <see cref="P:System.Web.Configuration.OutputCacheProfile.VaryByControl" />
 
             
 
@@ -565,13 +535,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.OutputCacheProfile.VaryByCustom" />
+            >The <see cref="P:System.Web.Configuration.OutputCacheProfile.VaryByCustom" />
 
             
 
-             can be any text that represents custom output-caching requirements. If a custom string is entered, you must override the <see
-             cref="M:System.Web.HttpApplication.GetVaryByCustomString(System.Web.HttpContext,System.String)" />
+             can be any text that represents custom output-caching requirements. If a custom string is entered, you must override the <see cref="M:System.Web.HttpApplication.GetVaryByCustomString(System.Web.HttpContext,System.String)" />
 
             
 
@@ -579,13 +547,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.Configuration.OutputCacheProfile.VaryByCustom" />
+              >The <see cref="P:System.Web.Configuration.OutputCacheProfile.VaryByCustom" />
 
               
 
-               settings are the same ones used by the VaryByCustom attribute of the <format
-               type="text/html">
+               settings are the same ones used by the VaryByCustom attribute of the <format type="text/html">
                 <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
               </format>
 
@@ -598,8 +564,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="P:System.Web.Configuration.OutputCacheProfile.VaryByCustom" />
+            >Gets or sets the <see cref="P:System.Web.Configuration.OutputCacheProfile.VaryByCustom" />
 
             
 
@@ -628,13 +593,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.OutputCacheProfile.VaryByHeader" />
+            >The <see cref="P:System.Web.Configuration.OutputCacheProfile.VaryByHeader" />
 
             
 
-             is a semicolon-delimited set of headers used to vary the cached output. These are HTTP headers associated with the request. For more information, see <format
-             type="text/html">
+             is a semicolon-delimited set of headers used to vary the cached output. These are HTTP headers associated with the request. For more information, see <format type="text/html">
               <a href="c60284a9-9899-4fdc-a97c-020766b7572e">Caching Multiple Versions of a Page</a>
             </format>
 
@@ -644,13 +607,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.Configuration.OutputCacheProfile.VaryByHeader" />
+              >The <see cref="P:System.Web.Configuration.OutputCacheProfile.VaryByHeader" />
 
               
 
-               settings are the same ones used by the VaryByHeader attribute of the <format
-               type="text/html">
+               settings are the same ones used by the VaryByHeader attribute of the <format type="text/html">
                 <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
               </format>
 
@@ -663,8 +624,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="P:System.Web.Configuration.OutputCacheProfile.VaryByHeader" />
+            >Gets or sets the <see cref="P:System.Web.Configuration.OutputCacheProfile.VaryByHeader" />
 
             
 
@@ -693,13 +653,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.OutputCacheProfile.VaryByParam" />
+            >The <see cref="P:System.Web.Configuration.OutputCacheProfile.VaryByParam" />
 
             
 
-             is a semicolon-delimited set of parameters used to vary the cached output. It allows varying the cached output by GET query string or form POST parameters. For instance, you can vary the user-control output to the cache by specifying the user-control name along with either a query string or a form POST parameter. For more information, see <format
-             type="text/html">
+             is a semicolon-delimited set of parameters used to vary the cached output. It allows varying the cached output by GET query string or form POST parameters. For instance, you can vary the user-control output to the cache by specifying the user-control name along with either a query string or a form POST parameter. For more information, see <format type="text/html">
               <a href="7f7d839a-c060-4d2a-9c4e-7fd1080ec0ad"
                 >Caching Multiple Versions of User Control Output</a
               >
@@ -710,13 +668,11 @@
             .</para
           >
           <para
-            >The <see
-             cref="P:System.Web.Configuration.OutputCacheProfile.VaryByParam" />
+            >The <see cref="P:System.Web.Configuration.OutputCacheProfile.VaryByParam" />
 
             
 
-             setting must be defined in either the profile or the <format
-             type="text/html">
+             setting must be defined in either the profile or the <format type="text/html">
               <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
             </format>
 
@@ -726,13 +682,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.Configuration.OutputCacheProfile.VaryByParam" />
+              >The <see cref="P:System.Web.Configuration.OutputCacheProfile.VaryByParam" />
 
               
 
-               settings are the same ones used by the VaryByParam attribute of the <format
-               type="text/html">
+               settings are the same ones used by the VaryByParam attribute of the <format type="text/html">
                 <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
               </format>
 
@@ -745,8 +699,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="P:System.Web.Configuration.OutputCacheProfile.VaryByParam" />
+            >Gets or sets the <see cref="P:System.Web.Configuration.OutputCacheProfile.VaryByParam" />
 
             
 

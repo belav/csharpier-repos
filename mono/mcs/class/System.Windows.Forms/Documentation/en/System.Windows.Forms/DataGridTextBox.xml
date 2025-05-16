@@ -34,61 +34,50 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.DataGridTextBox" />
+        >The <see cref="T:System.Windows.Forms.DataGridTextBox" />
 
         
 
-         and the <see
-         cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+         and the <see cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
 
         
 
-         work together so that users can directly edit values in a <see
-         cref="T:System.Windows.Forms.DataGrid" />
+         work together so that users can directly edit values in a <see cref="T:System.Windows.Forms.DataGrid" />
 
         
 
-         control column. The <see
-         cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+         control column. The <see cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
 
         
 
-         derives from <see
-         cref="T:System.Windows.Forms.DataGridColumnStyle" />
+         derives from <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
         
 
-        , and is designed to host the <see
-         cref="T:System.Windows.Forms.DataGridTextBox" />
+        , and is designed to host the <see cref="T:System.Windows.Forms.DataGridTextBox" />
 
         
 
-        , which derives from the <see
-         cref="T:System.Windows.Forms.TextBox" />
+        , which derives from the <see cref="T:System.Windows.Forms.TextBox" />
 
         
 
          control.</para
       >
       <para
-        >In addition to the properties, events, and methods of the base control, you can call the <see
-         cref="E:System.Windows.Forms.Control.KeyPress" />
+        >In addition to the properties, events, and methods of the base control, you can call the <see cref="E:System.Windows.Forms.Control.KeyPress" />
 
         
 
-         and <see
-         cref="E:System.Windows.Forms.Control.KeyDown" />
+         and <see cref="E:System.Windows.Forms.Control.KeyDown" />
 
         
 
-         events with the <see
-         cref="M:System.Windows.Forms.Control.OnKeyPress(System.Windows.Forms.KeyPressEventArgs)" />
+         events with the <see cref="M:System.Windows.Forms.Control.OnKeyPress(System.Windows.Forms.KeyPressEventArgs)" />
 
         
 
-         and <see
-         cref="M:System.Windows.Forms.Control.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+         and <see cref="M:System.Windows.Forms.Control.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
 
         
 
@@ -98,13 +87,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a <see
-         cref="T:System.Windows.Forms.TextBox" />
+        >Represents a <see cref="T:System.Windows.Forms.TextBox" />
 
         
 
-         control that is hosted in a <see
-         cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+         control that is hosted in a <see cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
 
         
 
@@ -122,8 +109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridTextBox" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridTextBox" />
 
             
 
@@ -147,18 +133,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.DataGridTextBox.IsInEditOrNavigateMode" />
+            >The <see cref="P:System.Windows.Forms.DataGridTextBox.IsInEditOrNavigateMode" />
 
             
 
-             property is used within the <see
-             cref="M:System.Windows.Forms.Control.ProcessKeyMessage(System.Windows.Forms.Message@)" />
+             property is used within the <see cref="M:System.Windows.Forms.Control.ProcessKeyMessage(System.Windows.Forms.Message@)" />
 
             
 
-             to determine how to process key press events, to check the state of the <see
-             cref="T:System.Windows.Forms.DataGridTextBox" />
+             to determine how to process key press events, to check the state of the <see cref="T:System.Windows.Forms.DataGridTextBox" />
 
             
 
@@ -168,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Windows.Forms.DataGridTextBox" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.DataGridTextBox" />
 
             
 
@@ -199,8 +181,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.KeyPress" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.KeyPress" />
 
             
 
@@ -208,12 +189,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.KeyPressEventArgs" />
+          A <see cref="T:System.Windows.Forms.KeyPressEventArgs" />
 
           
 
@@ -242,8 +226,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.MouseWheel" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.MouseWheel" />
 
             
 
@@ -251,12 +234,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -308,13 +294,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+            >Sets the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
-             to which this <see
-             cref="T:System.Windows.Forms.TextBox" />
+             to which this <see cref="T:System.Windows.Forms.TextBox" />
 
             
 
@@ -322,12 +306,15 @@
           >
         </summary>
         <param name="parentGrid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.DataGrid" />
+          The <see cref="T:System.Windows.Forms.DataGrid" />
 
           
 

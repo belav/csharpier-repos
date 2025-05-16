@@ -8,10 +8,8 @@
     <AssemblyName>Mono.Options</AssemblyName>
     <AssemblyVersion>0.2.3.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadingSafetyStatement
-    >
-    Public <c
-    >static</c>
+  <ThreadingSafetyStatement>
+    Public <c>static</c>
 
     
 
@@ -28,75 +26,62 @@
       Represents a program command.
     </summary>
     <remarks>
-      <para
-        >
-        Many command-line utilities are <i
-        >suites</i>
+      <para>
+        Many command-line utilities are <i>suites</i>
 
         
 
          of commands, with a single
         "outer" command and multiple commands. Examples of this style of
-        utility includes <b
-        >git</b>
+        utility includes <b>git</b>
 
         
 
-        , <b
-        >svn</b>
+        , <b>svn</b>
 
         
 
-        , and <b
-        >mdoc</b>
+        , and <b>mdoc</b>
 
         
 
         .
       </para
       >
-      <para
-        >
-        A <c
-        >Command</c>
+      <para>
+        A <c>Command</c>
 
         
 
          represents a specific command in such a suite.
-        It has a <see
-         cref="P:Mono.Options.Command.Name" />
+        It has a <see cref="P:Mono.Options.Command.Name" />
 
         
 
          which is the
         command name for invocation purposes, optional help text through
-        the <see
-         cref="P:Mono.Options.Command.Help" />
+        the <see cref="P:Mono.Options.Command.Help" />
 
         
 
          property, an optional
-        <see
-         cref="T:Mono.Options.OptionSet" />
+        <see cref="T:Mono.Options.OptionSet" />
 
         
 
          accessible through the
-        <see
-         cref="P:Mono.Options.Command.Options" />
+        <see cref="P:Mono.Options.Command.Options" />
 
         
 
          property for command-line
         parsing, and two ways to have code executed when a command is
-        invoked: the <see
-         cref="P:Mono.Options.Command.Run" />
+        invoked: the <see cref="P:Mono.Options.Command.Run" />
 
         
 
          property and
-        the <see
-         cref="M:Mono.Options.Command.Invoke" />
+        the <see cref="M:Mono.Options.Command.Invoke" />
 
         
 
@@ -121,30 +106,24 @@
         <Parameter Name="help" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="name"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="name">
+          A <see cref="T:System.String" />
 
           
 
            which is the command name.
         </param
         >
-        <param name="help"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="help">
+          A <see cref="T:System.String" />
 
           
 
            which is the command help text.
         </param
         >
-        <summary
-          >
-          Creates and initializes a new instance of the <c
-          >Command</c>
+        <summary>
+          Creates and initializes a new instance of the <c>Command</c>
 
           
 
@@ -152,29 +131,24 @@
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
           This constructor initializes the
-          <see
-             cref="P:Mono.Options.Command.Name" />
+          <see cref="P:Mono.Options.Command.Name" />
 
             
 
              property of the new
-          instance using <paramref
-             name="name" />
+          instance using <paramref name="name" />
 
             
 
              and initializes the
-          <see
-             cref="P:Mono.Options.Command.Help" />
+          <see cref="P:Mono.Options.Command.Help" />
 
             
 
              property of the new
-          instance using <paramref
-             name="help" />
+          instance using <paramref name="help" />
 
             
 
@@ -187,8 +161,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -211,32 +184,26 @@
         <ReturnType>Mono.Options.CommandSet</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
-          A <see
-           cref="T:Mono.Options.CommandSet" />
+        <summary>
+          A <see cref="T:Mono.Options.CommandSet" />
 
           
 
            instance which owns the
-          <c
-          >Command</c>
+          <c>Command</c>
 
           
 
           .
         </summary
         >
-        <value
-          >
-          A <see
-           cref="T:Mono.Options.CommandSet" />
+        <value>
+          A <see cref="T:Mono.Options.CommandSet" />
 
           
 
            instance which owns the
-          <c
-          >Command</c>
+          <c>Command</c>
 
           
 
@@ -244,85 +211,70 @@
         </value
         >
         <remarks>
-          <para
-            >
-            A <c
-            >Command</c>
+          <para>
+            A <c>Command</c>
 
             
 
              instance may belong to only one
-            <see
-             cref="T:Mono.Options.CommandSet" />
+            <see cref="T:Mono.Options.CommandSet" />
 
             
 
              instance.
-            The <c
-            >CommandSet</c>
+            The <c>CommandSet</c>
 
             
 
              property is set upon calling
-            <see
-             cref="M:Mono.Options.CommandSet.Add(Mono.Options.Command)" />
+            <see cref="M:Mono.Options.CommandSet.Add(Mono.Options.Command)" />
 
             
 
             .
           </para
           >
-          <para
-            >
-            If the <c
-            >Command</c>
+          <para>
+            If the <c>Command</c>
 
             
 
              instance has not yet been added to a
-            <c
-            >CommandSet</c>
+            <c>CommandSet</c>
 
             
 
-            , then this property is <see
-             langword="null" />
+            , then this property is <see langword="null" />
 
             
 
             .
           </para
           >
-          <para
-            >
-            Use the <c
-            >CommandSet</c>
+          <para>
+            Use the <c>CommandSet</c>
 
             
 
              instance from either the
-            <see
-             cref="P:Mono.Options.Command.Run" />
+            <see cref="P:Mono.Options.Command.Run" />
 
             
 
              property or an overridden
-            <see
-             cref="M:Mono.Options.Command.Invoke" />
+            <see cref="M:Mono.Options.Command.Invoke" />
 
             
 
              method to access
             localization facilities through
-            <see
-             cref="P:Mono.Options.CommandSet.MessageLocalizer" />
+            <see cref="P:Mono.Options.CommandSet.MessageLocalizer" />
 
             
 
             , the
             preferred message output stream through
-            <see
-             cref="P:Mono.Options.CommandSet.Out" />
+            <see cref="P:Mono.Options.CommandSet.Out" />
 
             
 
@@ -343,26 +295,21 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
-          A short, one-line, description of the <c
-          >Command</c>
+        <summary>
+          A short, one-line, description of the <c>Command</c>
 
           
 
           .
         </summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.String" />
+        <value>
+          A <see cref="T:System.String" />
 
           
 
            containing the optional help text
-          of the <c
-          >Command</c>
+          of the <c>Command</c>
 
           
 
@@ -370,15 +317,12 @@
         </value
         >
         <remarks>
-          <para
-            >
-            The <c
-            >Help</c>
+          <para>
+            The <c>Help</c>
 
             
 
-             property text is shown when the <c
-            >help</c>
+             property text is shown when the <c>help</c>
 
             
 
@@ -412,10 +356,8 @@
         />
       </Parameters>
       <Docs>
-        <param name="arguments"
-          >
-          A <see
-           cref="T:System.Collections.Generic.IEnumerable{System.String}" />
+        <param name="arguments">
+          A <see cref="T:System.Collections.Generic.IEnumerable{System.String}" />
 
           
 
@@ -423,10 +365,8 @@
           which contains the unprocessed command-line arguments.
         </param
         >
-        <summary
-          >
-          Invoked by <see
-           cref="M:Mono.Options.CommandSet.Run" />
+        <summary>
+          Invoked by <see cref="M:Mono.Options.CommandSet.Run" />
 
           
 
@@ -434,10 +374,8 @@
           has been executed.
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.Int32" />
+        <returns>
+          A <see cref="T:System.Int32" />
 
           
 
@@ -446,16 +384,13 @@
         </returns
         >
         <remarks>
-          <para
-            >
-            The value returned by <c
-            >Invoke()</c>
+          <para>
+            The value returned by <c>Invoke()</c>
 
             
 
              is the return value of
-            <see
-             cref="M:Mono.Options.CommandSet.Run" />
+            <see cref="M:Mono.Options.CommandSet.Run" />
 
             
 
@@ -464,76 +399,62 @@
           </para
           >
           <block subset="none" type="behaviors">
-            <para
-              >
-              If the <c
-              >Invoke()</c>
+            <para>
+              If the <c>Invoke()</c>
 
               
 
                method is not overridden by a subclass,
-              the <c
-              >Invoke()</c>
+              the <c>Invoke()</c>
 
               
 
                method will use
-              <see
-               cref="P:Mono.Options.Command.Options" />
+              <see cref="P:Mono.Options.Command.Options" />
 
               
 
                to parse
-              <paramref
-               name="arguments" />
+              <paramref name="arguments" />
 
               
 
               , and pass any un-processed values
-              on to <see
-               cref="P:Mono.Options.Command.Run" />
+              on to <see cref="P:Mono.Options.Command.Run" />
 
               
 
               .
             </para
             >
-            <para
-              >
-              If the <c
-              >Options</c>
+            <para>
+              If the <c>Options</c>
 
               
 
-               property is <see
-               langword="null" />
+               property is <see langword="null" />
 
               
 
               , then no
-              option processing will occur, and <paramref
-               name="arguments" />
+              option processing will occur, and <paramref name="arguments" />
 
               
 
               
-              will be provided to the <c
-              >Run</c>
+              will be provided to the <c>Run</c>
 
               
 
                property as-is.
             </para
             >
-            <para
-              >
-              If the <c
-              >Run</c>
+            <para>
+              If the <c>Run</c>
 
               
 
-               property is <see
-               langword="null" />
+               property is <see langword="null" />
 
               
 
@@ -561,25 +482,20 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
-          The name of the <c
-          >Command</c>
+        <summary>
+          The name of the <c>Command</c>
 
           
 
           , which is used for command invocation.
         </summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.String" />
+        <value>
+          A <see cref="T:System.String" />
 
           
 
-           which is the name of the <c
-          >Command</c>
+           which is the name of the <c>Command</c>
 
           
 
@@ -587,21 +503,17 @@
         </value
         >
         <remarks>
-          <para
-            >
-            The <c
-            >Name</c>
+          <para>
+            The <c>Name</c>
 
             
 
-             value must be unique across all <c
-            >Commmand</c>
+             value must be unique across all <c>Commmand</c>
 
             
 
              instances
-            referred to by a <see
-             cref="T:Mono.Options.CommandSet" />
+            referred to by a <see cref="T:Mono.Options.CommandSet" />
 
             
 
@@ -628,16 +540,13 @@
         <summary>
           Optional command-line option information.
         </summary>
-        <value
-          >
-          A <see
-           cref="T:Mono.Options.OptionSet" />
+        <value>
+          A <see cref="T:Mono.Options.OptionSet" />
 
           
 
            instance which contains the
-          available command-line options for the <c
-          >Command</c>
+          available command-line options for the <c>Command</c>
 
           
 
@@ -645,40 +554,33 @@
         </value
         >
         <remarks>
-          <para
-            >
-            If the <c
-            >Options</c>
+          <para>
+            If the <c>Options</c>
 
             
 
-             property is not <see
-             langword="null" />
+             property is not <see langword="null" />
 
             
 
              when
             the command is processed,
-            <see
-             cref="M:Mono.Options.OptionSet.Parse" />
+            <see cref="M:Mono.Options.OptionSet.Parse" />
 
             
 
              will be invoked on
-            the <c
-            >Options</c>
+            the <c>Options</c>
 
             
 
              instance, and the return value of
-            <c
-            >OptionSet.Parse()</c>
+            <c>OptionSet.Parse()</c>
 
             
 
              will be forwarded to
-            <see
-             cref="M:Mono.Options.Command.Invoke" />
+            <see cref="M:Mono.Options.Command.Invoke" />
 
             
 
@@ -708,17 +610,14 @@
         <summary>
           Optional command handler.
         </summary>
-        <value
-          >
-          A <see
-           cref="T:System.Action{System.Collections.Generic.IEnumerable{System.String}}" />
+        <value>
+          A <see cref="T:System.Action{System.Collections.Generic.IEnumerable{System.String}}" />
 
           
 
           
           delegate which is executed by
-          <see
-           cref="M:Mono.Options.Command.Invoke" />
+          <see cref="M:Mono.Options.Command.Invoke" />
 
           
 
@@ -726,28 +625,23 @@
         </value
         >
         <remarks>
-          <para
-            >
-            The <c
-            >Run</c>
+          <para>
+            The <c>Run</c>
 
             
 
              property is executed by the the 
-            <see
-             cref="M:Mono.Options.Command.Invoke" />
+            <see cref="M:Mono.Options.Command.Invoke" />
 
             
 
              method when
-            <see
-             cref="M:Mono.Options.CommandSet.Run" />
+            <see cref="M:Mono.Options.CommandSet.Run" />
 
             
 
              dispatches to a
-            <c
-            >Command</c>
+            <c>Command</c>
 
             
 

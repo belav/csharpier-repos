@@ -26,33 +26,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each <see
-         cref="T:System.IO.WatcherChangeTypes" />
+        >Each <see cref="T:System.IO.WatcherChangeTypes" />
 
         
 
-         member is associated with an event in <see
-         cref="T:System.IO.FileSystemWatcher" />
+         member is associated with an event in <see cref="T:System.IO.FileSystemWatcher" />
 
         
 
-        . For more information on the events, see <see
-         cref="E:System.IO.FileSystemWatcher.Created" />
+        . For more information on the events, see <see cref="E:System.IO.FileSystemWatcher.Created" />
 
         
 
-        , <see
-         cref="E:System.IO.FileSystemWatcher.Deleted" />
+        , <see cref="E:System.IO.FileSystemWatcher.Deleted" />
 
         
 
-        , <see
-         cref="E:System.IO.FileSystemWatcher.Changed" />
+        , <see cref="E:System.IO.FileSystemWatcher.Changed" />
 
         
 
-        , and <see
-         cref="E:System.IO.FileSystemWatcher.Renamed" />
+        , and <see cref="E:System.IO.FileSystemWatcher.Renamed" />
 
         
 

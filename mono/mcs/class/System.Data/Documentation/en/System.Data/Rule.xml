@@ -16,41 +16,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.Rule" />
+        >The <see cref="T:System.Data.Rule" />
 
         
 
-         values are set to the <see
-         cref="P:System.Data.ForeignKeyConstraint.UpdateRule" />
+         values are set to the <see cref="P:System.Data.ForeignKeyConstraint.UpdateRule" />
 
         
 
-         and the <see
-         cref="P:System.Data.ForeignKeyConstraint.DeleteRule" />
+         and the <see cref="P:System.Data.ForeignKeyConstraint.DeleteRule" />
 
         
 
-         properties of a <see
-         cref="T:System.Data.ForeignKeyConstraint" />
+         properties of a <see cref="T:System.Data.ForeignKeyConstraint" />
 
         
 
-         object found in a <see
-         cref="T:System.Data.DataTable" />
+         object found in a <see cref="T:System.Data.DataTable" />
 
         
 
-         object's <see
-         cref="T:System.Data.ConstraintCollection" />
+         object's <see cref="T:System.Data.ConstraintCollection" />
 
         
 
         .</para
       >
       <para
-        >The <see
-         cref="T:System.Data.Rule" />
+        >The <see cref="T:System.Data.Rule" />
 
         
 
@@ -59,26 +52,22 @@
       <para>In the case where a value is deleted, Cascade specifies that all rows containing that value are also deleted. SetNull specifies that values in all child columns are set to null values. SetDefault specifies that all child columns be set to the default value for the column. None specifies that no action will occur, but exceptions are generated.</para>
       <para>In the case where a value is updated, Cascade specifies that all child columns are likewise updated with the new value. SetNull specifies that all child columns be set to null values. SetDefault specifies that all child column values be set to the default value. None specifies that no action be taken, but exceptions are generated.</para>
       <para
-        >Constraints on a <see
-         cref="T:System.Data.DataSet" />
+        >Constraints on a <see cref="T:System.Data.DataSet" />
 
         
 
-         are not enforced unless the <see
-         cref="P:System.Data.DataSet.EnforceConstraints" />
+         are not enforced unless the <see cref="P:System.Data.DataSet.EnforceConstraints" />
 
         
 
          property is true.</para
       >
       <para
-        >When the <see
-         cref="M:System.Data.DataTable.AcceptChanges" />
+        >When the <see cref="M:System.Data.DataTable.AcceptChanges" />
 
         
 
-         method is called, the <see
-         cref="P:System.Data.ForeignKeyConstraint.AcceptRejectRule" />
+         method is called, the <see cref="P:System.Data.ForeignKeyConstraint.AcceptRejectRule" />
 
         
 
@@ -88,8 +77,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Indicates the action that occurs when a <see
-         cref="T:System.Data.ForeignKeyConstraint" />
+        >Indicates the action that occurs when a <see cref="T:System.Data.ForeignKeyConstraint" />
 
         
 
@@ -148,8 +136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set values in related rows to the value contained in the <see
-             cref="P:System.Data.DataColumn.DefaultValue" />
+            >Set values in related rows to the value contained in the <see cref="P:System.Data.DataColumn.DefaultValue" />
 
             
 

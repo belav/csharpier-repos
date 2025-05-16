@@ -33,13 +33,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of parameters relevant to an <see
-         cref="T:System.Data.OleDb.OleDbCommand" />
+        >Represents a collection of parameters relevant to an <see cref="T:System.Data.OleDb.OleDbCommand" />
 
         
 
-         as well as their respective mappings to columns in a <see
-         cref="T:System.Data.DataSet" />
+         as well as their respective mappings to columns in a <see cref="T:System.Data.DataSet" />
 
         
 
@@ -65,13 +63,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >Adds the specified <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
-             to the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+             to the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -81,8 +77,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the new <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >The index of the new <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
@@ -90,12 +85,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.OleDb.OleDbParameter" />
+          The <see cref="T:System.Data.OleDb.OleDbParameter" />
 
           
 
@@ -121,13 +119,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >Adds the specified <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
-             object to the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+             object to the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -137,8 +133,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the new <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >The index of the new <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
@@ -146,12 +141,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Object" />
+          A <see cref="T:System.Object" />
 
           
 
@@ -186,13 +184,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >Adds an <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
-             to the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+             to the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -202,8 +198,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the new <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >The index of the new <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
@@ -211,19 +206,26 @@
           >
         </returns>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter. </param
         >
         <param name="oleDbType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.OleDb.OleDbType" />
+          One of the <see cref="T:System.Data.OleDb.OleDbType" />
 
           
 
@@ -252,23 +254,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use caution when using this overload of the <see
-             cref="M:System.Data.OleDb.OleDbParameterCollection.Add(System.Data.OleDb.OleDbParameter)" />
+            >Use caution when using this overload of the <see cref="M:System.Data.OleDb.OleDbParameterCollection.Add(System.Data.OleDb.OleDbParameter)" />
 
             
 
-             method to specify integer parameter values. Because this overload takes a <paramref
-             name="value" />
+             method to specify integer parameter values. Because this overload takes a <paramref name="value" />
 
             
 
-             of type <see
-             cref="T:System.Object" />
+             of type <see cref="T:System.Object" />
 
             
 
-            , you must convert the value to an <see
-             cref="T:System.Object" />
+            , you must convert the value to an <see cref="T:System.Object" />
 
             
 
@@ -276,8 +274,7 @@
           >
           <code>parameters.Add("@pname", Convert.ToInt32(0));</code>
           <para
-            >If you do not perform this conversion, the compiler will assume you are attempting to call the <see
-             cref="M:System.Data.OleDb.OleDbParameterCollection.Add(System.String,System.Data.OleDb.OleDbType)" />
+            >If you do not perform this conversion, the compiler will assume you are attempting to call the <see cref="M:System.Data.OleDb.OleDbParameterCollection.Add(System.String,System.Data.OleDb.OleDbType)" />
 
             
 
@@ -287,13 +284,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >Adds an <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
-             to the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+             to the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -303,8 +298,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the new <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >The index of the new <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
@@ -312,24 +306,30 @@
           >
         </returns>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Data.OleDb.OleDbParameter.Value" />
+          The <see cref="P:System.Data.OleDb.OleDbParameter.Value" />
 
           
 
-           of the <see
-           cref="T:System.Data.OleDb.OleDbParameter" />
+           of the <see cref="T:System.Data.OleDb.OleDbParameter" />
 
           
 
@@ -368,13 +368,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >Adds an <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
-             to the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+             to the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -384,8 +382,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the new <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >The index of the new <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
@@ -393,26 +390,37 @@
           >
         </returns>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter. </param
         >
         <param name="oleDbType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.OleDb.OleDbType" />
+          One of the <see cref="T:System.Data.OleDb.OleDbType" />
 
           
 
            values. </param
         >
         <param name="size">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -444,13 +452,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >Adds an <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
-             to the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+             to the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -460,8 +466,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the new <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >The index of the new <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
@@ -469,33 +474,48 @@
           >
         </returns>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter. </param
         >
         <param name="oleDbType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.OleDb.OleDbType" />
+          One of the <see cref="T:System.Data.OleDb.OleDbType" />
 
           
 
            values. </param
         >
         <param name="size">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The length of the column. </param
         >
         <param name="sourceColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -524,8 +544,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an array of values to the end of the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+            >Adds an array of values to the end of the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -533,12 +552,15 @@
           >
         </summary>
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Array" />
+          The <see cref="T:System.Array" />
 
           
 
@@ -566,13 +588,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an array of <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >Adds an array of <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
-             values to the end of the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+             values to the end of the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -580,12 +600,15 @@
           >
         </summary>
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.OleDbParameter" />
+          The <see cref="T:System.Data.OleDbParameter" />
 
           
 
@@ -614,8 +637,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a value to the end of the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+            >Adds a value to the end of the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -625,8 +647,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >An <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
@@ -634,14 +655,22 @@
           >
         </returns>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -661,13 +690,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >Removes all <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
-             objects from the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+             objects from the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -700,13 +727,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >Determines whether the specified <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
-             is in this <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+             is in this <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -716,8 +741,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="P:System.Data.OleDb.OleDbParameter" />
+            >true if the <see cref="P:System.Data.OleDb.OleDbParameter" />
 
             
 
@@ -725,12 +749,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.OleDb.OleDbParameter" />
+          The <see cref="T:System.Data.OleDb.OleDbParameter" />
 
           
 
@@ -752,13 +779,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Object" />
+            >Determines whether the specified <see cref="T:System.Object" />
 
             
 
-             is in this <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+             is in this <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -768,13 +793,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+            >true if the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
-             contains <paramref
-             name="value" />
+             contains <paramref name="value" />
 
             
 
@@ -782,12 +805,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -813,13 +839,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.String" />
+            >Determines whether the specified <see cref="T:System.String" />
 
             
 
-             is in this <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+             is in this <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -829,8 +853,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+            >true if the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -838,12 +861,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
@@ -873,18 +899,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the elements of the current <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+            >Copies all the elements of the current <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
-             to the specified one-dimensional <see
-             cref="T:System.Array" />
+             to the specified one-dimensional <see cref="T:System.Array" />
 
             
 
-             starting at the specified destination <see
-             cref="T:System.Array" />
+             starting at the specified destination <see cref="T:System.Array" />
 
             
 
@@ -892,29 +915,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from the current <see
-           cref="T:System.Data.OleDb.OleDbParameterCollection" />
+           that is the destination of the elements copied from the current <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
           
 
           .</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A 32-bit integer that represents the index in the <see
-           cref="T:System.Array" />
+          A 32-bit integer that represents the index in the <see cref="T:System.Array" />
 
           
 
@@ -947,13 +975,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the elements of the current <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+            >Copies all the elements of the current <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
-             to the specified <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+             to the specified <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -961,29 +987,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.OleDb.OleDbParameterCollection" />
+          The <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
           
 
-           that is the destination of the elements copied from the current <see
-           cref="T:System.Data.OleDb.OleDbParameterCollection" />
+           that is the destination of the elements copied from the current <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
           
 
           .</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A 32-bit integer that represents the index in the <see
-           cref="T:System.Data.OleDb.OleDbParameterCollection" />
+          A 32-bit integer that represents the index in the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
           
 
@@ -1003,8 +1034,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an integer that contains the number of elements in the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+            >Returns an integer that contains the number of elements in the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -1032,8 +1062,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that iterates through the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+            >Returns an enumerator that iterates through the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -1043,13 +1072,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerator" />
+            >An <see cref="T:System.Collections.Generic.IEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+             for the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -1126,8 +1153,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the location of the specified <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >Gets the location of the specified <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
@@ -1137,13 +1163,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based location of the specified <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >The zero-based location of the specified <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
-             that is a <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+             that is a <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
@@ -1151,12 +1175,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.OleDb.OleDbParameter" />
+          The <see cref="T:System.Data.OleDb.OleDbParameter" />
 
           
 
@@ -1178,8 +1205,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The location of the specified <see
-             cref="T:System.Object" />
+            >The location of the specified <see cref="T:System.Object" />
 
             
 
@@ -1189,13 +1215,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based location of the specified <see
-             cref="T:System.Object" />
+            >The zero-based location of the specified <see cref="T:System.Object" />
 
             
 
-             that is a <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+             that is a <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -1203,12 +1227,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -1234,8 +1261,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the location of the specified <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >Gets the location of the specified <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
@@ -1245,8 +1271,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based location of the specified <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >The zero-based location of the specified <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
@@ -1254,12 +1279,15 @@
           >
         </returns>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The case-sensitive name of the <see
-           cref="T:System.Data.OleDb.OleDbParameter" />
+          The case-sensitive name of the <see cref="T:System.Data.OleDb.OleDbParameter" />
 
           
 
@@ -1292,13 +1320,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >Inserts a <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
-             object into the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+             object into the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -1306,24 +1332,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index at which value should be inserted.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Data.OleDb.OleDbParameter" />
+          An <see cref="T:System.Data.OleDb.OleDbParameter" />
 
           
 
-           object to be inserted in the <see
-           cref="T:System.Data.OleDb.OleDbParameterCollection" />
+           object to be inserted in the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
           
 
@@ -1349,13 +1381,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a <see
-             cref="T:System.Object" />
+            >Inserts a <see cref="T:System.Object" />
 
             
 
-             into the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+             into the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -1363,24 +1393,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index at which value should be inserted.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Object" />
+          A <see cref="T:System.Object" />
 
           
 
-           to be inserted in the <see
-           cref="T:System.Data.OleDb.OleDbParameterCollection" />
+           to be inserted in the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
           
 
@@ -1407,8 +1443,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+            >Gets a value that indicates whether the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -1432,8 +1467,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+            >Gets a value that indicates whether the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -1457,8 +1491,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+            >Gets a value that indicates whether the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -1549,13 +1582,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >Removes the <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
-             from the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+             from the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -1563,12 +1594,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Data.OleDb.OleDbParameter" />
+          An <see cref="T:System.Data.OleDb.OleDbParameter" />
 
           
 
@@ -1590,13 +1624,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Object" />
+            >Removes the <see cref="T:System.Object" />
 
             
 
-             object from the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+             object from the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -1604,17 +1636,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
-           to be removed from the <see
-           cref="T:System.Data.OleDb.OleDbParameterCollection" />
+           to be removed from the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
           
 
@@ -1640,13 +1674,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >Removes the <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
-             from the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+             from the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -1654,12 +1686,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the <see
-           cref="T:System.Data.OleDb.OleDbParameter" />
+          The zero-based index of the <see cref="T:System.Data.OleDb.OleDbParameter" />
 
           
 
@@ -1688,13 +1723,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Data.OleDb.OleDbParameter" />
+            >Removes the <see cref="T:System.Data.OleDb.OleDbParameter" />
 
             
 
-             from the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+             from the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 
@@ -1702,12 +1735,15 @@
           >
         </summary>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.OleDb.OleDbParameter" />
+          The name of the <see cref="T:System.Data.OleDb.OleDbParameter" />
 
           
 
@@ -1780,8 +1816,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Data.OleDb.OleDbParameterCollection" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Data.OleDb.OleDbParameterCollection" />
 
             
 

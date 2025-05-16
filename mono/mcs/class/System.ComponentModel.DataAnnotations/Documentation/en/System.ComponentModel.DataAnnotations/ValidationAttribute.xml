@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" />
 
             
 
@@ -73,8 +72,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor provides a resource accessor function that is used by the <see
-             cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageString" />
+            >This constructor provides a resource accessor function that is used by the <see cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageString" />
 
             
 
@@ -84,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" />
 
             
 
@@ -93,7 +90,11 @@
           >
         </summary>
         <param name="errorMessageAccessor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -119,8 +120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" />
 
             
 
@@ -128,7 +128,11 @@
           >
         </summary>
         <param name="errorMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -176,13 +180,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You use the <see
-             cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceName" />
+            >You use the <see cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceName" />
 
             
 
-             property together with the <see
-             cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceType" />
+             property together with the <see cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceType" />
 
             
 
@@ -192,8 +194,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the error message resource name to use in order to look up the <see
-             cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceType" />
+            >Gets or sets the error message resource name to use in order to look up the <see cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceType" />
 
             
 
@@ -220,13 +221,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You use the <see
-             cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceType" />
+            >You use the <see cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceType" />
 
             
 
-             property together with the <see
-             cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceName" />
+             property together with the <see cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceName" />
 
             
 
@@ -254,18 +253,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The error message string is obtained by evaluating the <see
-             cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessage" />
+            >The error message string is obtained by evaluating the <see cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessage" />
 
             
 
-             property or by evaluating the <see
-             cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceType" />
+             property or by evaluating the <see cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceType" />
 
             
 
-             and <see
-             cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceName" />
+             and <see cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceName" />
 
             
 
@@ -301,8 +297,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method formats an error message by using the <see
-             cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageString" />
+            >This method formats an error message by using the <see cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageString" />
 
             
 
@@ -318,7 +313,11 @@
           <para>An instance of the formatted error message.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -353,8 +352,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.GetValidationResult(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)" />
+            >The <see cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.GetValidationResult(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)" />
 
             
 
@@ -368,8 +366,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
+            >An instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
 
             
 
@@ -377,14 +374,22 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value to validate.</param
         >
         <param name="validationContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -412,8 +417,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you inherit from the <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" />
+            >If you inherit from the <see cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" />
 
             
 
@@ -429,7 +433,11 @@
           <para>true if the specified value is valid; otherwise, false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -469,8 +477,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
+            >An instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
 
             
 
@@ -478,14 +485,22 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value to validate.</param
         >
         <param name="validationContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -542,28 +557,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method calls the <see
-             cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(System.Object)" />
+            >This method calls the <see cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(System.Object)" />
 
             
 
-             method to determine whether the object that is specified by the <paramref
-             name="value" />
+             method to determine whether the object that is specified by the <paramref name="value" />
 
             
 
-             parameter is valid. If the <see
-             cref="Overload:System.ComponentModel.DataAnnotations.ValidationAttribute.Validate" />
+             parameter is valid. If the <see cref="Overload:System.ComponentModel.DataAnnotations.ValidationAttribute.Validate" />
 
             
 
-             method returns false, this method calls the <see
-             cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.FormatErrorMessage(System.String)" />
+             method returns false, this method calls the <see cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.FormatErrorMessage(System.String)" />
 
             
 
-             method to get a localized message that states the problem. It then throws a <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationException" />
+             method to get a localized message that states the problem. It then throws a <see cref="T:System.ComponentModel.DataAnnotations.ValidationException" />
 
             
 
@@ -575,19 +585,26 @@
           <para>Validates the specified object.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to validate.</param
         >
         <param name="validationContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.DataAnnotations.ValidationContext" />
+          The <see cref="T:System.ComponentModel.DataAnnotations.ValidationContext" />
 
           
 
@@ -616,23 +633,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method validates the value of the object or property on which the <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" />
+            >This method validates the value of the object or property on which the <see cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" />
 
             
 
-             attribute is declared. It calls the <see
-             cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(System.Object)" />
+             attribute is declared. It calls the <see cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(System.Object)" />
 
             
 
-             method and passes <paramref
-             name="value" />
+             method and passes <paramref name="value" />
 
             
 
-             as a parameter. If validation fails, a <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationException" />
+             as a parameter. If validation fails, a <see cref="T:System.ComponentModel.DataAnnotations.ValidationException" />
 
             
 
@@ -644,14 +657,22 @@
           <para>Validates the specified object.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value of the object to validate.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

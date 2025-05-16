@@ -17,44 +17,37 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used by the <see
-         cref="P:System.Drawing.Printing.PrinterSettings.PaperSizes" />
+        >This class is used by the <see cref="P:System.Drawing.Printing.PrinterSettings.PaperSizes" />
 
         
 
-         and <see
-         cref="P:System.Drawing.Printing.PageSettings.PaperSize" />
+         and <see cref="P:System.Drawing.Printing.PageSettings.PaperSize" />
 
         
 
          properties to get the paper sizes that are available on the printer and to set the paper size for a page, respectively.</para
       >
       <para
-        >You can use the <see
-         cref="Overload:System.Drawing.Printing.PaperSize.#ctor" />
+        >You can use the <see cref="Overload:System.Drawing.Printing.PaperSize.#ctor" />
 
         
 
-         constructor to specify a custom paper size. The <see
-         cref="P:System.Drawing.Printing.PaperSize.Width" />
+         constructor to specify a custom paper size. The <see cref="P:System.Drawing.Printing.PaperSize.Width" />
 
         
 
-         and <see
-         cref="P:System.Drawing.Printing.PaperSize.Height" />
+         and <see cref="P:System.Drawing.Printing.PaperSize.Height" />
 
         
 
-         property values can be set only for custom <see
-         cref="T:System.Drawing.Printing.PaperSize" />
+         property values can be set only for custom <see cref="T:System.Drawing.Printing.PaperSize" />
 
         
 
          objects.</para
       >
       <para
-        >For more information about printing, see the <see
-         cref="N:System.Drawing.Printing" />
+        >For more information about printing, see the <see cref="N:System.Drawing.Printing" />
 
         
 
@@ -79,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Printing.PaperSize" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Printing.PaperSize" />
 
             
 
@@ -105,33 +97,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Printing.PaperSize" />
+            >A <see cref="T:System.Drawing.Printing.PaperSize" />
 
             
 
-             created with this constructor always has its <see
-             cref="P:System.Drawing.Printing.PaperSize.Kind" />
+             created with this constructor always has its <see cref="P:System.Drawing.Printing.PaperSize.Kind" />
 
             
 
-             property set to <see
-             cref="F:System.Drawing.Printing.PaperKind.Custom" />
+             property set to <see cref="F:System.Drawing.Printing.PaperKind.Custom" />
 
             
 
-            . The <see
-             cref="P:System.Drawing.Printing.PaperSize.Width" />
+            . The <see cref="P:System.Drawing.Printing.PaperSize.Width" />
 
             
 
-             and <see
-             cref="P:System.Drawing.Printing.PaperSize.Height" />
+             and <see cref="P:System.Drawing.Printing.PaperSize.Height" />
 
             
 
-             property values can be set only for custom <see
-             cref="T:System.Drawing.Printing.PaperSize" />
+             property values can be set only for custom <see cref="T:System.Drawing.Printing.PaperSize" />
 
             
 
@@ -141,8 +127,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Printing.PaperSize" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Printing.PaperSize" />
 
             
 
@@ -150,21 +135,33 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the paper. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the paper, in hundredths of an inch. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -188,18 +185,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This height measurement is for the portrait orientation of the paper. The <see
-             cref="P:System.Drawing.Printing.PaperSize.Width" />
+            >This height measurement is for the portrait orientation of the paper. The <see cref="P:System.Drawing.Printing.PaperSize.Width" />
 
             
 
-             and <see
-             cref="P:System.Drawing.Printing.PaperSize.Height" />
+             and <see cref="P:System.Drawing.Printing.PaperSize.Height" />
 
             
 
-             property values can be set only for custom <see
-             cref="T:System.Drawing.Printing.PaperSize" />
+             property values can be set only for custom <see cref="T:System.Drawing.Printing.PaperSize" />
 
             
 
@@ -230,8 +224,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="Overload:System.Drawing.Printing.PaperSize.#ctor" />
+            >You can use the <see cref="Overload:System.Drawing.Printing.PaperSize.#ctor" />
 
             
 
@@ -260,13 +253,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can set the paper name only if the <see
-             cref="P:System.Drawing.Printing.PaperSize.Kind" />
+            >You can set the paper name only if the <see cref="P:System.Drawing.Printing.PaperSize.Kind" />
 
             
 
-             property is set to <see
-             cref="F:System.Drawing.Printing.PaperKind.Custom" />
+             property is set to <see cref="F:System.Drawing.Printing.PaperKind.Custom" />
 
             
 
@@ -297,13 +288,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the integer values of the <see
-             cref="T:System.Drawing.Printing.PaperSize" />
+            >The following table shows the integer values of the <see cref="T:System.Drawing.Printing.PaperSize" />
 
             
 
-             enumeration members. A value equal to 48 or 49 or larger than 118 indicates a custom paper size; however, the <see
-             cref="P:System.Drawing.Printing.PaperSize.RawKind" />
+             enumeration members. A value equal to 48 or 49 or larger than 118 indicates a custom paper size; however, the <see cref="P:System.Drawing.Printing.PaperSize.RawKind" />
 
             
 
@@ -1493,8 +1482,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an integer representing one of the <see
-             cref="T:System.Drawing.Printing.PaperSize" />
+            >Gets or sets an integer representing one of the <see cref="T:System.Drawing.Printing.PaperSize" />
 
             
 
@@ -1515,8 +1503,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides information about the <see
-             cref="T:System.Drawing.Printing.PaperSize" />
+            >Provides information about the <see cref="T:System.Drawing.Printing.PaperSize" />
 
             
 
@@ -1545,18 +1532,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This width measurement is for the portrait orientation of the paper. The <see
-             cref="P:System.Drawing.Printing.PaperSize.Width" />
+            >This width measurement is for the portrait orientation of the paper. The <see cref="P:System.Drawing.Printing.PaperSize.Width" />
 
             
 
-             and <see
-             cref="P:System.Drawing.Printing.PaperSize.Height" />
+             and <see cref="P:System.Drawing.Printing.PaperSize.Height" />
 
             
 
-             property values can be set only for custom <see
-             cref="T:System.Drawing.Printing.PaperSize" />
+             property values can be set only for custom <see cref="T:System.Drawing.Printing.PaperSize" />
 
             
 

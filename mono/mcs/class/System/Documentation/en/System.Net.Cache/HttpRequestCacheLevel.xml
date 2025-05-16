@@ -18,44 +18,37 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used to set the cache level specified by <see
-         cref="T:System.Net.Cache.HttpRequestCachePolicy" />
+        >This enumeration is used to set the cache level specified by <see cref="T:System.Net.Cache.HttpRequestCachePolicy" />
 
         
 
          objects.</para
       >
       <para
-        >This <see
-         cref="F:System.Net.Cache.HttpRequestCacheLevel.BypassCache" />
+        >This <see cref="F:System.Net.Cache.HttpRequestCacheLevel.BypassCache" />
 
         
 
          value is the default cache behavior specified in the machine configuration file that ships with the .NET Framework. No entries are taken from caches, added to caches, or removed from caches between the client and server.</para
       >
       <para
-        >The <see
-         cref="P:System.Net.HttpWebRequest.DefaultCachePolicy" />
+        >The <see cref="P:System.Net.HttpWebRequest.DefaultCachePolicy" />
 
         
 
-         property is used to get or set the default cache policy for <see
-         cref="T:System.Net.HttpWebRequest" />
+         property is used to get or set the default cache policy for <see cref="T:System.Net.HttpWebRequest" />
 
         
 
-         instances. The <see
-         cref="P:System.Net.WebRequest.CachePolicy" />
+         instances. The <see cref="P:System.Net.WebRequest.CachePolicy" />
 
         
 
-         property is used to get or set the default cache policy for a <see
-         cref="T:System.Net.WebRequest" />
+         property is used to get or set the default cache policy for a <see cref="T:System.Net.WebRequest" />
 
         
 
-         instances. The <see
-         cref="P:System.Net.WebRequest.CachePolicy" />
+         instances. The <see cref="P:System.Net.WebRequest.CachePolicy" />
 
         
 
@@ -132,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Satisfies a request using the locally cached resource; does not send a request for an item that is not in the cache. When this cache policy level is specified, a <see
-             cref="T:System.Net.WebException" />
+            >Satisfies a request using the locally cached resource; does not send a request for an item that is not in the cache. When this cache policy level is specified, a <see cref="T:System.Net.WebException" />
 
             
 
@@ -161,8 +153,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Satisfies a request for a resource either from the local computer's cache or a remote cache on the local area network. If the request cannot be satisfied, a <see
-             cref="T:System.Net.WebException" />
+            >Satisfies a request for a resource either from the local computer's cache or a remote cache on the local area network. If the request cannot be satisfied, a <see cref="T:System.Net.WebException" />
 
             
 

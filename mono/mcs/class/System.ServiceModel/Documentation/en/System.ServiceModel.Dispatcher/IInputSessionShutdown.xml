@@ -14,13 +14,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.Dispatcher.IInputSessionShutdown" />
+        >Use the <see cref="T:System.ServiceModel.Dispatcher.IInputSessionShutdown" />
 
         
 
-         interface inside a duplex session to send outbound messages prior to closing the session. For example, if a client closes a session the service can implement <see
-         cref="M:System.ServiceModel.Dispatcher.IInputSessionShutdown.DoneReceiving(System.ServiceModel.IDuplexContextChannel)" />
+         interface inside a duplex session to send outbound messages prior to closing the session. For example, if a client closes a session the service can implement <see cref="M:System.ServiceModel.Dispatcher.IInputSessionShutdown.DoneReceiving(System.ServiceModel.IDuplexContextChannel)" />
 
         
 
@@ -56,8 +54,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ServiceModel.Dispatcher.IInputSessionShutdown.ChannelFaulted(System.ServiceModel.IDuplexContextChannel)" />
+            >Use the <see cref="M:System.ServiceModel.Dispatcher.IInputSessionShutdown.ChannelFaulted(System.ServiceModel.IDuplexContextChannel)" />
 
             
 
@@ -69,12 +66,15 @@
           <para>Indicates that the channel has faulted.</para>
         </summary>
         <param name="channel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.IDuplexContextChannel" />
+          The <see cref="T:System.ServiceModel.IDuplexContextChannel" />
 
           
 
@@ -108,12 +108,15 @@
           <para>Indicates when the client channel is done receiving messages as part of the duplex message exchange.</para>
         </summary>
         <param name="channel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
+          The <see cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
 
           
 

@@ -30,59 +30,49 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Media.SoundPlayer" />
+        >The <see cref="T:System.Media.SoundPlayer" />
 
         
 
-         class provides a simple interface for loading and playing a .wav file. The <see
-         cref="T:System.Media.SoundPlayer" />
+         class provides a simple interface for loading and playing a .wav file. The <see cref="T:System.Media.SoundPlayer" />
 
         
 
-         class supports loading a .wav file from a file path, a URL, a <see
-         cref="T:System.IO.Stream" />
+         class supports loading a .wav file from a file path, a URL, a <see cref="T:System.IO.Stream" />
 
         
 
          that contains a .wav file, or an embedded resource that contains a .wav file.</para
       >
       <para
-        >To play a sound using the <see
-         cref="T:System.Media.SoundPlayer" />
+        >To play a sound using the <see cref="T:System.Media.SoundPlayer" />
 
         
 
-         class, configure a <see
-         cref="T:System.Media.SoundPlayer" />
+         class, configure a <see cref="T:System.Media.SoundPlayer" />
 
         
 
-         with a path to the .wav file and call one of the play methods. You can identify the .wav file to play by using one of the constructors or by setting either the <see
-         cref="P:System.Media.SoundPlayer.SoundLocation" />
+         with a path to the .wav file and call one of the play methods. You can identify the .wav file to play by using one of the constructors or by setting either the <see cref="P:System.Media.SoundPlayer.SoundLocation" />
 
         
 
-         or <see
-         cref="P:System.Media.SoundPlayer.Stream" />
+         or <see cref="P:System.Media.SoundPlayer.Stream" />
 
         
 
-         property. The file can be loaded prior to playing by using one of the load methods, or loading can be deferred until one of the play methods is called. A <see
-         cref="T:System.Media.SoundPlayer" />
+         property. The file can be loaded prior to playing by using one of the load methods, or loading can be deferred until one of the play methods is called. A <see cref="T:System.Media.SoundPlayer" />
 
         
 
-         configured to load a .wav file from a <see
-         cref="T:System.IO.Stream" />
+         configured to load a .wav file from a <see cref="T:System.IO.Stream" />
 
         
 
          or URL must load the .wav file into memory before playback begins.</para
       >
       <para
-        >You can load or play a .wav file synchronously or asynchronously. If you call a synchronous load or play method, the calling thread will wait until the method returns, which may cause painting and other events to be interrupted. Calling an asynchronous load or play method will allow the calling thread to continue without interruption. For more information on asynchronous method calls, see <format
-         type="text/html">
+        >You can load or play a .wav file synchronously or asynchronously. If you call a synchronous load or play method, the calling thread will wait until the method returns, which may cause painting and other events to be interrupted. Calling an asynchronous load or play method will allow the calling thread to continue without interruption. For more information on asynchronous method calls, see <format type="text/html">
           <a href="5b56e2aa-dc05-444f-930c-2d7b23f9ad5b"
             >How to: Run an Operation in the Background</a
           >
@@ -93,38 +83,31 @@
         .</para
       >
       <para
-        >When a <see
-         cref="T:System.Media.SoundPlayer" />
+        >When a <see cref="T:System.Media.SoundPlayer" />
 
         
 
-         has finished loading a .wav file, it raises the <see
-         cref="E:System.Media.SoundPlayer.LoadCompleted" />
+         has finished loading a .wav file, it raises the <see cref="E:System.Media.SoundPlayer.LoadCompleted" />
 
         
 
-         event. You can examine the <see
-         cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
+         event. You can examine the <see cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
 
         
 
-         in your event handler to determine if the load succeeded or failed. The <see
-         cref="E:System.Media.SoundPlayer.SoundLocationChanged" />
+         in your event handler to determine if the load succeeded or failed. The <see cref="E:System.Media.SoundPlayer.SoundLocationChanged" />
 
         
 
-         event is raised when the audio source is set to a new file path or URL. The <see
-         cref="E:System.Media.SoundPlayer.StreamChanged" />
+         event is raised when the audio source is set to a new file path or URL. The <see cref="E:System.Media.SoundPlayer.StreamChanged" />
 
         
 
-         event is raised when the audio source is set to a new <see
-         cref="T:System.IO.Stream" />
+         event is raised when the audio source is set to a new <see cref="T:System.IO.Stream" />
 
         
 
-        . For more information about handling events, see <format
-         type="text/html">
+        . For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
 
@@ -133,13 +116,11 @@
         .</para
       >
       <para
-        >For more information about <see
-         cref="T:System.Media.SoundPlayer" />
+        >For more information about <see cref="T:System.Media.SoundPlayer" />
 
         
 
-        , see <format
-         type="text/html">
+        , see <format type="text/html">
           <a href="fcebb938-62b9-4677-9cbe-6465bc863e22"
             >SoundPlayer Class Overview (Windows Forms)</a
           >
@@ -151,20 +132,19 @@
       >
       <block subset="none" type="note">
         <para
-          >   The <see
-           cref="T:System.Media.SoundPlayer" />
+          >   The <see cref="T:System.Media.SoundPlayer" />
 
           
 
            class cannot play other file types, such as .wma or .mp3. If you want to play other file types, you can use the Windows Media Player control. For more information, see <see
-           cref="http://go.microsoft.com/fwlink/?LinkId=131267"
+            cref="http://go.microsoft.com/fwlink/?LinkId=131267"
             >Using the Windows Media Player Control in a .NET Framework Solution</see
           >
 
           
 
            and <see
-           cref="http://go.microsoft.com/fwlink/?LinkId=131269"
+            cref="http://go.microsoft.com/fwlink/?LinkId=131269"
             >Windows Media Player Object Model Reference for Visual Basic .NET and C#</see
           >
 
@@ -196,13 +176,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes a <see
-             cref="T:System.Media.SoundPlayer" />
+            >This constructor initializes a <see cref="T:System.Media.SoundPlayer" />
 
             
 
-             with no audio source. Until it is configured with an audio source path, the <see
-             cref="T:System.Media.SoundPlayer" />
+             with no audio source. Until it is configured with an audio source path, the <see cref="T:System.Media.SoundPlayer" />
 
             
 
@@ -212,8 +190,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Media.SoundPlayer" />
+            >Initializes a new instance of the <see cref="T:System.Media.SoundPlayer" />
 
             
 
@@ -240,28 +217,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IO.Stream" />
+            >The <see cref="T:System.IO.Stream" />
 
             
 
-             passed to the <paramref
-             name="stream" />
+             passed to the <paramref name="stream" />
 
             
 
-             parameter should be a <see
-             cref="T:System.IO.Stream" />
+             parameter should be a <see cref="T:System.IO.Stream" />
 
             
 
-             containing a .wav file. The data returned by the <see
-             cref="M:System.IO.Stream.Read(System.Byte[],System.Int32,System.Int32)" />
+             containing a .wav file. The data returned by the <see cref="M:System.IO.Stream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method of the <see
-             cref="T:System.IO.Stream" />
+             method of the <see cref="T:System.IO.Stream" />
 
             
 
@@ -271,13 +243,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Media.SoundPlayer" />
+            >Initializes a new instance of the <see cref="T:System.Media.SoundPlayer" />
 
             
 
-             class, and attaches the .wav file within the specified <see
-             cref="T:System.IO.Stream" />
+             class, and attaches the .wav file within the specified <see cref="T:System.IO.Stream" />
 
             
 
@@ -285,12 +255,15 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
@@ -316,13 +289,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string passed to the <paramref
-             name="soundLocation" />
+            >The string passed to the <paramref name="soundLocation" />
 
             
 
-             parameter can be either a file path or a URL to a .wav file. If the path or URL is not valid, the <see
-             cref="T:System.Media.SoundPlayer" />
+             parameter can be either a file path or a URL to a .wav file. If the path or URL is not valid, the <see cref="T:System.Media.SoundPlayer" />
 
             
 
@@ -332,8 +303,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Media.SoundPlayer" />
+            >Initializes a new instance of the <see cref="T:System.Media.SoundPlayer" />
 
             
 
@@ -341,7 +311,11 @@
           >
         </summary>
         <param name="soundLocation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -372,8 +346,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Media.SoundPlayer" />
+            >Initializes a new instance of the <see cref="T:System.Media.SoundPlayer" />
 
             
 
@@ -381,19 +354,26 @@
           >
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            to be used for deserialization.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -440,8 +420,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Media.SoundPlayer.Load" />
+            >The <see cref="M:System.Media.SoundPlayer.Load" />
 
             
 
@@ -449,13 +428,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Media.SoundPlayer.Load" />
+              >The <see cref="M:System.Media.SoundPlayer.Load" />
 
               
 
-               method may produce a delay while loading a large .wav file. In addition, painting and other events will be blocked until the load is completed. Use the <see
-               cref="M:System.Media.SoundPlayer.LoadAsync" />
+               method may produce a delay while loading a large .wav file. In addition, painting and other events will be blocked until the load is completed. Use the <see cref="M:System.Media.SoundPlayer.LoadAsync" />
 
               
 
@@ -463,8 +440,7 @@
             >
           </block>
           <para
-            >This method raises the <see
-             cref="E:System.Media.SoundPlayer.LoadCompleted" />
+            >This method raises the <see cref="E:System.Media.SoundPlayer.LoadCompleted" />
 
             
 
@@ -496,37 +472,32 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a <see
-             cref="T:System.Media.SoundPlayer" />
+            >If a <see cref="T:System.Media.SoundPlayer" />
 
             
 
-             is configured to load a .wav file from a <see
-             cref="T:System.IO.Stream" />
+             is configured to load a .wav file from a <see cref="T:System.IO.Stream" />
 
             
 
              or Web resource, this method begins loading a .wav file from the location using a new thread.</para
           >
           <para
-            >This method raises the <see
-             cref="E:System.Media.SoundPlayer.LoadCompleted" />
+            >This method raises the <see cref="E:System.Media.SoundPlayer.LoadCompleted" />
 
             
 
              event when loading completes, even if the load was not successful.</para
           >
           <para
-            >If a <see
-             cref="T:System.Media.SoundPlayer" />
+            >If a <see cref="T:System.Media.SoundPlayer" />
 
             
 
              is configured to load a .wav file from a local file path, this method does nothing, because loading is deferred until playing begins.</para
           >
           <para
-            >For more information about asynchronous loading, see <format
-             type="text/html">
+            >For more information about asynchronous loading, see <format type="text/html">
               <a href="3b6a9296-1d5e-4d52-a4ba-94366d6fe302"
                 >How to: Load a Sound Asynchronously within a Windows Form</a
               >
@@ -565,8 +536,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This event is raised when loading of a .wav file is complete. The event arguments indicate whether the load of the sound was completed successfully or failed.</para>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -597,8 +567,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After this time has expired, the loading is canceled and a <see
-             cref="T:System.ServiceProcess.TimeoutException" />
+            >After this time has expired, the loading is canceled and a <see cref="T:System.ServiceProcess.TimeoutException" />
 
             
 
@@ -636,8 +605,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is called when loading of a .wav file is complete.</para>
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -646,8 +614,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Media.SoundPlayer.OnLoadCompleted(System.ComponentModel.AsyncCompletedEventArgs)" />
+            >The <see cref="M:System.Media.SoundPlayer.OnLoadCompleted(System.ComponentModel.AsyncCompletedEventArgs)" />
 
             
 
@@ -657,8 +624,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Media.SoundPlayer.LoadCompleted" />
+            >Raises the <see cref="E:System.Media.SoundPlayer.LoadCompleted" />
 
             
 
@@ -666,12 +632,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
+          An <see cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
 
           
 
@@ -703,16 +672,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called when a new audio source path for this <see
-             cref="T:System.Media.SoundPlayer" />
+            >This method is called when a new audio source path for this <see cref="T:System.Media.SoundPlayer" />
 
             
 
              has been set.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see How to: Provide Event functionality and <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see How to: Provide Event functionality and <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -721,8 +688,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Media.SoundPlayer.OnSoundLocationChanged(System.EventArgs)" />
+            >The <see cref="M:System.Media.SoundPlayer.OnSoundLocationChanged(System.EventArgs)" />
 
             
 
@@ -732,8 +698,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Media.SoundPlayer.SoundLocationChanged" />
+            >Raises the <see cref="E:System.Media.SoundPlayer.SoundLocationChanged" />
 
             
 
@@ -741,12 +706,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -778,21 +746,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called when a new <see
-             cref="T:System.IO.Stream" />
+            >This method is called when a new <see cref="T:System.IO.Stream" />
 
             
 
-             audio source for this <see
-             cref="T:System.Media.SoundPlayer" />
+             audio source for this <see cref="T:System.Media.SoundPlayer" />
 
             
 
              has been set.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -801,8 +766,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Media.SoundPlayer.OnStreamChanged(System.EventArgs)" />
+            >The <see cref="M:System.Media.SoundPlayer.OnStreamChanged(System.EventArgs)" />
 
             
 
@@ -812,8 +776,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Media.SoundPlayer.StreamChanged" />
+            >Raises the <see cref="E:System.Media.SoundPlayer.StreamChanged" />
 
             
 
@@ -821,12 +784,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -853,41 +819,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Media.SoundPlayer.Play" />
+            >The <see cref="M:System.Media.SoundPlayer.Play" />
 
             
 
-             method plays the sound using a new thread. If you call <see
-             cref="M:System.Media.SoundPlayer.Play" />
+             method plays the sound using a new thread. If you call <see cref="M:System.Media.SoundPlayer.Play" />
 
             
 
-             before the .wav file has been loaded into memory, the .wav file will be loaded before playback starts. You can use the <see
-             cref="M:System.Media.SoundPlayer.LoadAsync" />
+             before the .wav file has been loaded into memory, the .wav file will be loaded before playback starts. You can use the <see cref="M:System.Media.SoundPlayer.LoadAsync" />
 
             
 
-             or <see
-             cref="M:System.Media.SoundPlayer.Load" />
+             or <see cref="M:System.Media.SoundPlayer.Load" />
 
             
 
-             method to load the .wav file to memory in advance. After a .wav file is successfully loaded from a <see
-             cref="T:System.IO.Stream" />
+             method to load the .wav file to memory in advance. After a .wav file is successfully loaded from a <see cref="T:System.IO.Stream" />
 
             
 
-             or URL, future calls to playback methods for the <see
-             cref="T:System.Media.SoundPlayer" />
+             or URL, future calls to playback methods for the <see cref="T:System.Media.SoundPlayer" />
 
             
 
              will not need to reload the .wav file until the path for the sound changes.</para
           >
           <para
-            >If the .wav file has not been specified or it fails to load, the <see
-             cref="M:System.Media.SoundPlayer.Play" />
+            >If the .wav file has not been specified or it fails to load, the <see cref="M:System.Media.SoundPlayer.Play" />
 
             
 
@@ -919,54 +878,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Media.SoundPlayer.PlayLooping" />
+            >The <see cref="M:System.Media.SoundPlayer.PlayLooping" />
 
             
 
-             method plays and loops the sound using a new thread. If you call <see
-             cref="M:System.Media.SoundPlayer.PlayLooping" />
+             method plays and loops the sound using a new thread. If you call <see cref="M:System.Media.SoundPlayer.PlayLooping" />
 
             
 
-             before the .wav file has been loaded into memory, the .wav file will be loaded before playback starts. You can use the <see
-             cref="M:System.Media.SoundPlayer.LoadAsync" />
+             before the .wav file has been loaded into memory, the .wav file will be loaded before playback starts. You can use the <see cref="M:System.Media.SoundPlayer.LoadAsync" />
 
             
 
-             or <see
-             cref="M:System.Media.SoundPlayer.Load" />
+             or <see cref="M:System.Media.SoundPlayer.Load" />
 
             
 
-             method to load the .wav file to memory in advance. After a .wav file is successfully loaded from a <see
-             cref="T:System.IO.Stream" />
+             method to load the .wav file to memory in advance. After a .wav file is successfully loaded from a <see cref="T:System.IO.Stream" />
 
             
 
-             or URL, future calls to playback methods for the <see
-             cref="T:System.Media.SoundPlayer" />
+             or URL, future calls to playback methods for the <see cref="T:System.Media.SoundPlayer" />
 
             
 
              will not need to reload the .wav file until the path for the sound changes.</para
           >
           <para
-            >If the .wav file has not been specified or it fails to load, the <see
-             cref="M:System.Media.SoundPlayer.PlayLooping" />
+            >If the .wav file has not been specified or it fails to load, the <see cref="M:System.Media.SoundPlayer.PlayLooping" />
 
             
 
              method will play the default beep sound.</para
           >
           <para
-            >For more information about <see
-             cref="M:System.Media.SoundPlayer.PlayLooping" />
+            >For more information about <see cref="M:System.Media.SoundPlayer.PlayLooping" />
 
             
 
-            , see <format
-             type="text/html">
+            , see <format type="text/html">
               <a href="ea95dd46-10a3-46c0-8263-4b205f00df7f"
                 >How to: Loop a Sound Playing on a Windows Form</a
               >
@@ -1002,36 +952,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Media.SoundPlayer.PlaySync" />
+            >The <see cref="M:System.Media.SoundPlayer.PlaySync" />
 
             
 
-             method uses the current thread to play a .wav file, preventing the thread from handling other messages until the load is complete. You can use the <see
-             cref="M:System.Media.SoundPlayer.LoadAsync" />
+             method uses the current thread to play a .wav file, preventing the thread from handling other messages until the load is complete. You can use the <see cref="M:System.Media.SoundPlayer.LoadAsync" />
 
             
 
-             or <see
-             cref="M:System.Media.SoundPlayer.Load" />
+             or <see cref="M:System.Media.SoundPlayer.Load" />
 
             
 
-             method to load the .wav file to memory in advance. After a .wav file is successfully loaded from a <see
-             cref="T:System.IO.Stream" />
+             method to load the .wav file to memory in advance. After a .wav file is successfully loaded from a <see cref="T:System.IO.Stream" />
 
             
 
-             or URL, future calls to playback methods for the <see
-             cref="T:System.Media.SoundPlayer" />
+             or URL, future calls to playback methods for the <see cref="T:System.Media.SoundPlayer" />
 
             
 
              will not need to reload the .wav file until the path for the sound changes.</para
           >
           <para
-            >If the .wav file has not been specified or it fails to load, the <see
-             cref="M:System.Media.SoundPlayer.PlaySync" />
+            >If the .wav file has not been specified or it fails to load, the <see cref="M:System.Media.SoundPlayer.PlaySync" />
 
             
 
@@ -1060,18 +1004,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is set to <see
-             cref="F:System.String.Empty" />
+            >This property is set to <see cref="F:System.String.Empty" />
 
             
 
-             when the <see
-             cref="P:System.Media.SoundPlayer.Stream" />
+             when the <see cref="P:System.Media.SoundPlayer.Stream" />
 
             
 
-             property is set to a <see
-             cref="T:System.IO.Stream" />
+             property is set to a <see cref="T:System.IO.Stream" />
 
             
 
@@ -1102,16 +1043,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is raised when a new audio source path for this <see
-             cref="T:System.Media.SoundPlayer" />
+            >This event is raised when a new audio source path for this <see cref="T:System.Media.SoundPlayer" />
 
             
 
              has been set.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1123,8 +1062,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when a new audio source path for this <see
-             cref="T:System.Media.SoundPlayer" />
+            >Occurs when a new audio source path for this <see cref="T:System.Media.SoundPlayer" />
 
             
 
@@ -1172,8 +1110,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is set to null when the <see
-             cref="P:System.Media.SoundPlayer.SoundLocation" />
+            >This property is set to null when the <see cref="P:System.Media.SoundPlayer.SoundLocation" />
 
             
 
@@ -1183,8 +1120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.IO.Stream" />
+            >Gets or sets the <see cref="T:System.IO.Stream" />
 
             
 
@@ -1208,21 +1144,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is raised when a new <see
-             cref="T:System.IO.Stream" />
+            >This event is raised when a new <see cref="T:System.IO.Stream" />
 
             
 
-             audio source for this <see
-             cref="T:System.Media.SoundPlayer" />
+             audio source for this <see cref="T:System.Media.SoundPlayer" />
 
             
 
              has been set.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1234,13 +1167,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when a new <see
-             cref="T:System.IO.Stream" />
+            >Occurs when a new <see cref="T:System.IO.Stream" />
 
             
 
-             audio source for this <see
-             cref="T:System.Media.SoundPlayer" />
+             audio source for this <see cref="T:System.Media.SoundPlayer" />
 
             
 
@@ -1274,13 +1205,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Media.SoundPlayer" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Media.SoundPlayer" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+             instance is cast to an <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
@@ -1290,8 +1219,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see the <see
-             cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+            >For a description of this member, see the <see cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
 
             
 
@@ -1299,24 +1227,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
             to populate with data.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The destination (see <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The destination (see <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -1341,13 +1275,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Object" />
+            >Gets or sets the <see cref="T:System.Object" />
 
             
 
-             that contains data about the <see
-             cref="T:System.Media.SoundPlayer" />
+             that contains data about the <see cref="T:System.Media.SoundPlayer" />
 
             
 

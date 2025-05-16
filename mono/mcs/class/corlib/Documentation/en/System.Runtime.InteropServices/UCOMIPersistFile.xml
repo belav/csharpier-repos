@@ -33,8 +33,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use <see
-         cref="T:System.Runtime.InteropServices.ComTypes.IPersistFile" />
+        >Use <see cref="T:System.Runtime.InteropServices.ComTypes.IPersistFile" />
 
         
 
@@ -152,19 +151,26 @@
           <para>Opens the specified file and initializes an object from the file contents.</para>
         </summary>
         <param name="pszFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A zero-terminated string containing the absolute path of the file to open. </param
         >
         <param name="dwMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A combination of values from the STGM enumeration to indicate the access mode in which to open <paramref
-           name="pszFileName" />
+          A combination of values from the STGM enumeration to indicate the access mode in which to open <paramref name="pszFileName" />
 
           
 
@@ -204,19 +210,26 @@
           <para>Saves a copy of the object into the specified file.</para>
         </summary>
         <param name="pszFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A zero-terminated string containing the absolute path of the file to which the object is saved. </param
         >
         <param name="fRemember">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Indicates whether <paramref
-           name="pszFileName" />
+          Indicates whether <paramref name="pszFileName" />
 
           
 
@@ -252,7 +265,11 @@
           <para>Notifies the object that it can write to its file.</para>
         </summary>
         <param name="pszFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

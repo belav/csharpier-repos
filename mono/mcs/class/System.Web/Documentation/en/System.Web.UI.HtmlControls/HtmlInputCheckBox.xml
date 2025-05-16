@@ -32,28 +32,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+        >Use the <see cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
 
         
 
-         control to allow the user to select a true or false state. To determine whether the control is selected, use the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlInputCheckBox.Checked" />
+         control to allow the user to select a true or false state. To determine whether the control is selected, use the <see cref="P:System.Web.UI.HtmlControls.HtmlInputCheckBox.Checked" />
 
         
 
-         property. The <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+         property. The <see cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
 
         
 
-         control provides a <see
-         cref="E:System.Web.UI.HtmlControls.HtmlInputCheckBox.ServerChange" />
+         control provides a <see cref="E:System.Web.UI.HtmlControls.HtmlInputCheckBox.ServerChange" />
 
         
 
-         event that is raised when the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlInputCheckBox.Checked" />
+         event that is raised when the <see cref="P:System.Web.UI.HtmlControls.HtmlInputCheckBox.Checked" />
 
         
 
@@ -61,13 +56,11 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+          >The <see cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
 
           
 
-           control does not post back to the server when it is clicked. You must provide another control on the Web page that supports posting to the server, such as an <see
-           cref="T:System.Web.UI.HtmlControls.HtmlButton" />
+           control does not post back to the server when it is clicked. You must provide another control on the Web page that supports posting to the server, such as an <see cref="T:System.Web.UI.HtmlControls.HtmlButton" />
 
           
 
@@ -75,13 +68,11 @@
         >
       </block>
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
 
         
 
-        , see the <see
-         cref="M:System.Web.UI.HtmlControls.HtmlInputCheckBox.#ctor" />
+        , see the <see cref="M:System.Web.UI.HtmlControls.HtmlInputCheckBox.#ctor" />
 
         
 
@@ -103,16 +94,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
 
             
 
              class.</para
           >
           <para
-            >The following table shows the initial property value for an instance of <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+            >The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
 
             
 
@@ -142,8 +131,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
 
             
 
@@ -168,13 +156,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to determine whether the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+            >Use this property to determine whether the <see cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
 
             
 
-             control is selected. This property can also be used to programmatically set the state of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+             control is selected. This property can also be used to programmatically set the state of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
 
             
 
@@ -184,8 +170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
 
             
 
@@ -232,8 +217,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is primarily of interest to custom control developers extending the functionality of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+            >This method is primarily of interest to custom control developers extending the functionality of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
 
             
 
@@ -243,8 +227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Processes the postback data for the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+            >Processes the postback data for the <see cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
 
             
 
@@ -254,8 +237,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+            >true if the <see cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
 
             
 
@@ -263,14 +245,22 @@
           >
         </returns>
         <param name="postDataKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key identifier for the control.</param
         >
         <param name="postCollection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -291,18 +281,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputCheckBox.OnPreRender(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlInputCheckBox.OnPreRender(System.EventArgs)" />
 
             
 
-             method overrides the base <see
-             cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
+             method overrides the base <see cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
 
             
 
-             method. <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputCheckBox.OnPreRender(System.EventArgs)" />
+             method. <see cref="M:System.Web.UI.HtmlControls.HtmlInputCheckBox.OnPreRender(System.EventArgs)" />
 
             
 
@@ -312,8 +299,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
+            >Raises the <see cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
 
             
 
@@ -321,12 +307,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -351,8 +340,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is raised when the Web page is submitted to the server and the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+            >This event is raised when the Web page is submitted to the server and the <see cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
 
             
 
@@ -360,8 +348,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The control must have view state enabled for the <see
-               cref="E:System.Web.UI.HtmlControls.HtmlInputCheckBox.ServerChange" />
+              >The control must have view state enabled for the <see cref="E:System.Web.UI.HtmlControls.HtmlInputCheckBox.ServerChange" />
 
               
 
@@ -369,8 +356,7 @@
             >
           </block>
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -379,8 +365,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputCheckBox.OnServerChange(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlInputCheckBox.OnServerChange(System.EventArgs)" />
 
             
 
@@ -390,8 +375,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.HtmlControls.HtmlInputCheckBox.ServerChange" />
+            >Raises the <see cref="E:System.Web.UI.HtmlControls.HtmlInputCheckBox.ServerChange" />
 
             
 
@@ -399,12 +383,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.EventArgs" />
+          A <see cref="T:System.EventArgs" />
 
           
 
@@ -430,8 +417,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+            >This method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
             
 
@@ -441,13 +427,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calls the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputCheckBox.OnServerChange(System.EventArgs)" />
+            >Calls the <see cref="M:System.Web.UI.HtmlControls.HtmlInputCheckBox.OnServerChange(System.EventArgs)" />
 
             
 
-             method to signal the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+             method to signal the <see cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
 
             
 
@@ -476,13 +460,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+            >Renders the <see cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
 
             
 
-             control's attributes to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             control's attributes to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -490,12 +472,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -514,8 +499,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is raised when the Web page is submitted to the server and the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+            >This event is raised when the Web page is submitted to the server and the <see cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
 
             
 
@@ -523,8 +507,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The control must have view state enabled for the <see
-               cref="E:System.Web.UI.HtmlControls.HtmlInputCheckBox.ServerChange" />
+              >The control must have view state enabled for the <see cref="E:System.Web.UI.HtmlControls.HtmlInputCheckBox.ServerChange" />
 
               
 
@@ -532,8 +515,7 @@
             >
           </block>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -545,8 +527,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the Web page is submitted to the server and the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+            >Occurs when the Web page is submitted to the server and the <see cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
 
             
 
@@ -584,13 +565,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+            >Implements the <see cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             method by calling the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputCheckBox.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+             method by calling the <see cref="M:System.Web.UI.HtmlControls.HtmlInputCheckBox.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
@@ -600,8 +579,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+            >true if the <see cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
 
             
 
@@ -609,14 +587,22 @@
           >
         </returns>
         <param name="postDataKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key identifier for the control.</param
         >
         <param name="postCollection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -643,13 +629,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
+            >Implements the <see cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
 
             
 
-             method by calling the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputCheckBox.RaisePostDataChangedEvent" />
+             method by calling the <see cref="M:System.Web.UI.HtmlControls.HtmlInputCheckBox.RaisePostDataChangedEvent" />
 
             
 

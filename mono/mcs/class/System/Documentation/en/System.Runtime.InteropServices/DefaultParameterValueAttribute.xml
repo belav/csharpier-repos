@@ -29,29 +29,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.InteropServices.DefaultParameterValueAttribute" />
+        >The <see cref="T:System.Runtime.InteropServices.DefaultParameterValueAttribute" />
 
         
 
          attribute allows you to specify a default parameter value in a language that does not otherwise support default parameters.  After you apply this attribute to your code, languages that support default parameters can use the specified value as a default parameter.       </para
       >
       <para
-        >Note that the <see
-         cref="T:System.Runtime.InteropServices.DefaultParameterValueAttribute" />
+        >Note that the <see cref="T:System.Runtime.InteropServices.DefaultParameterValueAttribute" />
 
         
 
-         does not add support for default parameters to languages that do not support this feature.  For example, if you use the <see
-         cref="T:System.Runtime.InteropServices.DefaultParameterValueAttribute" />
+         does not add support for default parameters to languages that do not support this feature.  For example, if you use the <see cref="T:System.Runtime.InteropServices.DefaultParameterValueAttribute" />
 
         
 
          with a method written in C#, which does not support default parameters, you cannot use the default parameter when calling the method from C#.  You can use the default parameter only when calling the method in a language such as C++ that does support the feature.      </para
       >
       <para
-        >The <see
-         cref="T:System.Runtime.InteropServices.DefaultParameterValueAttribute" />
+        >The <see cref="T:System.Runtime.InteropServices.DefaultParameterValueAttribute" />
 
         
 
@@ -85,8 +81,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to apply the <see
-             cref="T:System.Runtime.InteropServices.DefaultParameterValueAttribute" />
+            >Use this constructor to apply the <see cref="T:System.Runtime.InteropServices.DefaultParameterValueAttribute" />
 
             
 
@@ -96,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.DefaultParameterValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.DefaultParameterValueAttribute" />
 
             
 
@@ -105,7 +99,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

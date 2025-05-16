@@ -20,51 +20,42 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The properties of the <see
-         cref="T:System.Web.Services.Protocols.WebClientProtocol" />
+        >The properties of the <see cref="T:System.Web.Services.Protocols.WebClientProtocol" />
 
         
 
-         class are used to control the behavior of the transport used to transmit the XML Web service request and response. The properties on this class map to properties found on <see
-         cref="T:System.Net.WebRequest" />
+         class are used to control the behavior of the transport used to transmit the XML Web service request and response. The properties on this class map to properties found on <see cref="T:System.Net.WebRequest" />
 
         
 
-        . Instances of classes deriving from <see
-         cref="T:System.Net.WebRequest" />
+        . Instances of classes deriving from <see cref="T:System.Net.WebRequest" />
 
         
 
-        , such as <see
-         cref="T:System.Net.HttpWebRequest" />
+        , such as <see cref="T:System.Net.HttpWebRequest" />
 
         
 
         , are used as the transport mechanism for XML Web services created using ASP.NET.</para
       >
       <para
-        >To communicate with an XML Web service, you must create a proxy class deriving indirectly or directly from <see
-         cref="T:System.Web.Services.Protocols.WebClientProtocol" />
+        >To communicate with an XML Web service, you must create a proxy class deriving indirectly or directly from <see cref="T:System.Web.Services.Protocols.WebClientProtocol" />
 
         
 
-         for the XML Web service you want to call. Instead of creating the proxy class manually, you can use the Wsdl.exe tool to create a proxy class for a given XML Web service's service description. Since <see
-         cref="T:System.Web.Services.Protocols.WebClientProtocol" />
+         for the XML Web service you want to call. Instead of creating the proxy class manually, you can use the Wsdl.exe tool to create a proxy class for a given XML Web service's service description. Since <see cref="T:System.Web.Services.Protocols.WebClientProtocol" />
 
         
 
-         is the base class for your client proxy, you will find its properties on your proxy classes. These properties are useful for controlling the request behavior of the underlying transport. For instance, use the <see
-         cref="P:System.Web.Services.Protocols.WebClientProtocol.Credentials" />
+         is the base class for your client proxy, you will find its properties on your proxy classes. These properties are useful for controlling the request behavior of the underlying transport. For instance, use the <see cref="P:System.Web.Services.Protocols.WebClientProtocol.Credentials" />
 
         
 
-         property for calling authenticated XML Web services. Many of the <see
-         cref="T:System.Web.Services.Protocols.WebClientProtocol" />
+         property for calling authenticated XML Web services. Many of the <see cref="T:System.Web.Services.Protocols.WebClientProtocol" />
 
         
 
-         properties are used to initialize the <see
-         cref="T:System.Net.WebRequest" />
+         properties are used to initialize the <see cref="T:System.Net.WebRequest" />
 
         
 
@@ -87,8 +78,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Protocols.WebClientProtocol" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.WebClientProtocol" />
 
             
 
@@ -140,19 +130,26 @@
           <para>Add an instance of the client protocol handler to the cache.</para>
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            of the client protocol handler..</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -176,13 +173,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Services.Protocols.WebClientProtocol.ConnectionGroupName" />
+            >The <see cref="P:System.Web.Services.Protocols.WebClientProtocol.ConnectionGroupName" />
 
             
 
-             property enables you to associate a request to a connection group. For more details, see <see
-             cref="P:System.Net.HttpWebRequest.ConnectionGroupName" />
+             property enables you to associate a request to a connection group. For more details, see <see cref="P:System.Net.HttpWebRequest.ConnectionGroupName" />
 
             
 
@@ -215,38 +210,30 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Net.ICredentials" />
-        </value>
+        <value>a <see cref="T:System.Net.ICredentials" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When using the Credentials property, a XML Web service client must instantiate a class implementing <see
-             cref="T:System.Net.ICredentials" />
+            >When using the Credentials property, a XML Web service client must instantiate a class implementing <see cref="T:System.Net.ICredentials" />
 
             
 
-            , such as <see
-             cref="T:System.Net.NetworkCredential" />
+            , such as <see cref="T:System.Net.NetworkCredential" />
 
             
 
-            , and then set the client credentials specific to the authentication mechanism. The <see
-             cref="T:System.Net.NetworkCredential" />
+            , and then set the client credentials specific to the authentication mechanism. The <see cref="T:System.Net.NetworkCredential" />
 
             
 
              class can be used to set authentication credentials using the basic, digest, NTLM and Kerberos authentication mechanisms.</para
           >
           <para
-            >When the <see
-             cref="P:System.Web.Services.Protocols.WebClientProtocol.Credentials" />
+            >When the <see cref="P:System.Web.Services.Protocols.WebClientProtocol.Credentials" />
 
             
 
-             property is set to <see
-             cref="P:System.Net.CredentialCache.DefaultCredentials" />
+             property is set to <see cref="P:System.Net.CredentialCache.DefaultCredentials" />
 
             
 
@@ -283,12 +270,15 @@
           <para>An instance of a client protocol handler from the cache.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -316,8 +306,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be overridden to customize the <see
-             cref="T:System.Net.WebRequest" />
+            >This method can be overridden to customize the <see cref="T:System.Net.WebRequest" />
 
             
 
@@ -327,18 +316,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Net.WebRequest" />
+            >Creates a <see cref="T:System.Net.WebRequest" />
 
             
 
-             instance for the specified <paramref
-             name="uri" />
+             instance for the specified <paramref name="uri" />
 
             
 
-            . This protected method is called by the XML Web service client infrastructure to get a new <see
-             cref="T:System.Net.WebRequest" />
+            . This protected method is called by the XML Web service client infrastructure to get a new <see cref="T:System.Net.WebRequest" />
 
             
 
@@ -348,8 +334,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.WebRequest" />
+            >The <see cref="T:System.Net.WebRequest" />
 
             
 
@@ -357,17 +342,19 @@
           >
         </returns>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
-           to use when creating the <see
-           cref="T:System.Net.WebRequest" />
+           to use when creating the <see cref="T:System.Net.WebRequest" />
 
           
 
@@ -402,12 +389,15 @@
           <para>A response from a synchronous request to an XML Web service method.</para>
         </returns>
         <param name="request">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.WebRequest" />
+          The <see cref="T:System.Net.WebRequest" />
 
           
 
@@ -443,29 +433,34 @@
           <para>A response from an asynchronous request to an XML Web service method.</para>
         </returns>
         <param name="request">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.WebRequest" />
+          The <see cref="T:System.Net.WebRequest" />
 
           
 
            to get the response from. </param
         >
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IAsyncResult" />
+          The <see cref="T:System.IAsyncResult" />
 
           
 
-           to pass to <see
-           cref="M:System.Net.HttpWebRequest.EndGetResponse(System.IAsyncResult)" />
+           to pass to <see cref="M:System.Net.HttpWebRequest.EndGetResponse(System.IAsyncResult)" />
 
           
 
@@ -489,21 +484,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a client requests a resource without using credentials, the server challenges the request and indicates what authentication schemes it supports. The client chooses an authentication scheme and sends the appropriate WWW-authenticate header to the server. When <see
-             cref="P:System.Web.Services.Protocols.WebClientProtocol.PreAuthenticate" />
+            >When a client requests a resource without using credentials, the server challenges the request and indicates what authentication schemes it supports. The client chooses an authentication scheme and sends the appropriate WWW-authenticate header to the server. When <see cref="P:System.Web.Services.Protocols.WebClientProtocol.PreAuthenticate" />
 
             
 
              is true, the WWW-authenticate header is sent with all subsequent requests.</para
           >
           <para
-            >When <see
-             cref="P:System.Web.Services.Protocols.WebClientProtocol.PreAuthenticate" />
+            >When <see cref="P:System.Web.Services.Protocols.WebClientProtocol.PreAuthenticate" />
 
             
 
-             is false, a request is made to the XML Web service method without initially attempting to authenticate the user. If the XML Web service allows anonymous access, then the XML Web service method is executed. If anonymous access is disallowed, a 401 HTTP return code is sent back to the client. In response, the <see
-             cref="T:System.Web.Services.Protocols.WebClientProtocol" />
+             is false, a request is made to the XML Web service method without initially attempting to authenticate the user. If the XML Web service allows anonymous access, then the XML Web service method is executed. If anonymous access is disallowed, a 401 HTTP return code is sent back to the client. In response, the <see cref="T:System.Web.Services.Protocols.WebClientProtocol" />
 
             
 
@@ -536,38 +528,30 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Text.Encoding" />
-        </value>
+        <value>a <see cref="T:System.Text.Encoding" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Services.Protocols.WebClientProtocol.RequestEncoding" />
+            >The <see cref="P:System.Web.Services.Protocols.WebClientProtocol.RequestEncoding" />
 
             
 
-             determines the encoding for the request message. The <see
-             cref="P:System.Net.WebRequest.ContentType" />
+             determines the encoding for the request message. The <see cref="P:System.Net.WebRequest.ContentType" />
 
             
 
              of the request will be annotated with the encoding value.</para
           >
           <para
-            >Classes deriving from <see
-             cref="T:System.Web.Services.Protocols.WebClientProtocol" />
+            >Classes deriving from <see cref="T:System.Web.Services.Protocols.WebClientProtocol" />
 
             
 
-             support a particular protocol, such as <see
-             cref="T:System.Web.Services.Protocols.SoapHttpClientProtocol" />
+             support a particular protocol, such as <see cref="T:System.Web.Services.Protocols.SoapHttpClientProtocol" />
 
             
 
-             does for SOAP, set this property to conform to encoding requirements for the specific protocol. For example, the <see
-             cref="T:System.Web.Services.Protocols.SoapHttpClientProtocol" />
+             does for SOAP, set this property to conform to encoding requirements for the specific protocol. For example, the <see cref="T:System.Web.Services.Protocols.SoapHttpClientProtocol" />
 
             
 
@@ -577,8 +561,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Text.Encoding" />
+            >The <see cref="T:System.Text.Encoding" />
 
             
 
@@ -611,18 +594,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting the <see
-             cref="P:System.Web.Services.Protocols.WebClientProtocol.Timeout" />
+            >Setting the <see cref="P:System.Web.Services.Protocols.WebClientProtocol.Timeout" />
 
             
 
-             property to <see
-             cref="F:System.Threading.Timeout.Infinite" />
+             property to <see cref="F:System.Threading.Timeout.Infinite" />
 
             
 
-             indicates that the request does not time out. Even though an XML Web service client can set the <see
-             cref="P:System.Web.Services.Protocols.WebClientProtocol.Timeout" />
+             indicates that the request does not time out. Even though an XML Web service client can set the <see cref="P:System.Web.Services.Protocols.WebClientProtocol.Timeout" />
 
             
 
@@ -659,39 +639,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Proxy classes generated using Wsdl.exe will set a default <see
-             cref="P:System.Web.Services.Protocols.WebClientProtocol.Url" />
+            >Proxy classes generated using Wsdl.exe will set a default <see cref="P:System.Web.Services.Protocols.WebClientProtocol.Url" />
 
             
 
-             property for the client to use. The default <see
-             cref="P:System.Web.Services.Protocols.WebClientProtocol.Url" />
+             property for the client to use. The default <see cref="P:System.Web.Services.Protocols.WebClientProtocol.Url" />
 
             
 
              is determined by the location attribute found in the service description from which the proxy class was generated.</para
           >
           <para
-            >Derived classes supporting specific protocols, such as <see
-             cref="T:System.Web.Services.Protocols.HttpGetClientProtocol" />
+            >Derived classes supporting specific protocols, such as <see cref="T:System.Web.Services.Protocols.HttpGetClientProtocol" />
 
             
 
-             and <see
-             cref="T:System.Web.Services.Protocols.HttpPostClientProtocol" />
+             and <see cref="T:System.Web.Services.Protocols.HttpPostClientProtocol" />
 
             
 
-             might add extra information to <see
-             cref="P:System.Web.Services.Protocols.WebClientProtocol.Url" />
+             might add extra information to <see cref="P:System.Web.Services.Protocols.WebClientProtocol.Url" />
 
             
 
              to make the XML Web service request.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.Services.Protocols.WebClientProtocol.Url" />
+            >The <see cref="P:System.Web.Services.Protocols.WebClientProtocol.Url" />
 
             
 
@@ -731,13 +705,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether to set the <see
-             cref="P:System.Web.Services.Protocols.WebClientProtocol.Credentials" />
+            >Gets or sets a value that indicates whether to set the <see cref="P:System.Web.Services.Protocols.WebClientProtocol.Credentials" />
 
             
 
-             property to the value of the <see
-             cref="P:System.Net.CredentialCache.DefaultCredentials" />
+             property to the value of the <see cref="P:System.Net.CredentialCache.DefaultCredentials" />
 
             
 

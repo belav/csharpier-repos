@@ -18,13 +18,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Configuration.SettingsSerializeAs" />
+        >The <see cref="T:System.Configuration.SettingsSerializeAs" />
 
         
 
-         enumeration is used to specify the serialization mechanism used by the application settings provider to persist the values of application settings properties. For example, the <see
-         cref="T:System.Configuration.SettingsSerializeAsAttribute" />
+         enumeration is used to specify the serialization mechanism used by the application settings provider to persist the values of application settings properties. For example, the <see cref="T:System.Configuration.SettingsSerializeAsAttribute" />
 
         
 

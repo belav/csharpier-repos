@@ -63,59 +63,49 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.TableCell" />
+        >The <see cref="T:System.Web.UI.WebControls.TableCell" />
 
         
 
-         class represents a cell in a <see
-         cref="T:System.Web.UI.WebControls.Table" />
+         class represents a cell in a <see cref="T:System.Web.UI.WebControls.Table" />
 
         
 
-         control. You can use the <see
-         cref="P:System.Web.UI.WebControls.TableCell.Text" />
+         control. You can use the <see cref="P:System.Web.UI.WebControls.TableCell.Text" />
 
         
 
          property to specify or determine the contents of the cell.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.TableCell" />
+        >The <see cref="T:System.Web.UI.WebControls.TableCell" />
 
         
 
-         class allows you to control how the contents of the cell are displayed. The alignment of the contents in the cell are specified by setting the <see
-         cref="P:System.Web.UI.WebControls.TableCell.HorizontalAlign" />
+         class allows you to control how the contents of the cell are displayed. The alignment of the contents in the cell are specified by setting the <see cref="P:System.Web.UI.WebControls.TableCell.HorizontalAlign" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.TableCell.VerticalAlign" />
+         and <see cref="P:System.Web.UI.WebControls.TableCell.VerticalAlign" />
 
         
 
-         properties. You can use the <see
-         cref="P:System.Web.UI.WebControls.TableCell.Wrap" />
+         properties. You can use the <see cref="P:System.Web.UI.WebControls.TableCell.Wrap" />
 
         
 
          property to specify whether the contents of the cell wrap in the cell.</para
       >
       <para
-        >You can also specify how many rows or columns in the table, represented by a <see
-         cref="T:System.Web.UI.WebControls.Table" />
+        >You can also specify how many rows or columns in the table, represented by a <see cref="T:System.Web.UI.WebControls.Table" />
 
         
 
-         control, are occupied by an individual cell. The <see
-         cref="P:System.Web.UI.WebControls.TableCell.RowSpan" />
+         control, are occupied by an individual cell. The <see cref="P:System.Web.UI.WebControls.TableCell.RowSpan" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.TableCell.ColumnSpan" />
+         and <see cref="P:System.Web.UI.WebControls.TableCell.ColumnSpan" />
 
         
 
@@ -123,15 +113,13 @@
       >
       <block subset="none" type="note">
         <para
-          >This control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format
-           type="text/html">
+          >This control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format type="text/html">
             <a href="f3e7718f-63d0-44a3-bd5f-48cc2059c2a8">Securing Standard Controls</a>
           </format>
 
           
 
-          , <format
-           type="text/html">
+          , <format type="text/html">
             <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
               >How to: Protect Against Script Exploits in a Web Application by Applying HTML Encoding to Strings</a
             >
@@ -139,8 +127,7 @@
 
           
 
-          , and <format
-           type="text/html">
+          , and <format type="text/html">
             <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
               >Introduction to Validating User Input in ASP.NET Web Pages</a
             >
@@ -163,8 +150,7 @@
     AssociatedHeaderCellID="string"
     BackColor="color name|#dddddd"
     BorderColor="color name|#dddddd"
-    BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+    BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -173,61 +159,52 @@
     BorderWidth="size"
     ColumnSpan="integer"
     CssClass="string"
-    Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     Font-Names="string"
-    Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     Font-Size="string|Smaller|Larger|XX-Small|X-Small|Small|Medium|
         Large|X-Large|XX-Large"
-    Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     ForeColor="color name|#dddddd"
     Height="size"
-    HorizontalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+    HorizontalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -246,21 +223,18 @@
     TabIndex="integer"
     Text="string"
     ToolTip="string"
-    VerticalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+    VerticalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
         |Top|Middle|Bottom"
-    Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
     Width="size"
-    Wrap="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Wrap="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -271,8 +245,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a cell in a <see
-         cref="T:System.Web.UI.WebControls.Table" />
+        >Represents a cell in a <see cref="T:System.Web.UI.WebControls.Table" />
 
         
 
@@ -290,13 +263,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >The <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             is created using the <see
-             cref="F:System.Web.UI.HtmlTextWriterTag.Td" />
+             is created using the <see cref="F:System.Web.UI.HtmlTextWriterTag.Td" />
 
             
 
@@ -306,8 +277,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
@@ -336,61 +306,50 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.TableCell.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.WebControls.TableCell.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method overrides the base class's <see
-             cref="M:System.Web.UI.WebControls.WebControl.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
+             method overrides the base class's <see cref="M:System.Web.UI.WebControls.WebControl.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method and first calls the base method and then adds the <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+             method and first calls the base method and then adds the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             attributes corresponding to the <see
-             cref="P:System.Web.UI.WebControls.TableCell.RowSpan" />
+             attributes corresponding to the <see cref="P:System.Web.UI.WebControls.TableCell.RowSpan" />
 
             
 
-             property, the <see
-             cref="P:System.Web.UI.WebControls.TableCell.ColumnSpan" />
+             property, the <see cref="P:System.Web.UI.WebControls.TableCell.ColumnSpan" />
 
             
 
-             property and the <see
-             cref="P:System.Web.UI.WebControls.TableCell.AssociatedHeaderCellID" />
+             property and the <see cref="P:System.Web.UI.WebControls.TableCell.AssociatedHeaderCellID" />
 
             
 
-             property. If the <see
-             cref="P:System.Web.UI.WebControls.TableCell.AssociatedHeaderCellID" />
+             property. If the <see cref="P:System.Web.UI.WebControls.TableCell.AssociatedHeaderCellID" />
 
             
 
-             property refers to a <see
-             cref="T:System.Web.UI.WebControls.TableHeaderCell" />
+             property refers to a <see cref="T:System.Web.UI.WebControls.TableHeaderCell" />
 
             
 
-             that can not be found, an <see
-             cref="T:System.Web.HttpException" />
+             that can not be found, an <see cref="T:System.Web.HttpException" />
 
             
 
              is thrown.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.TableCell.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.WebControls.TableCell.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+             method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
@@ -400,8 +359,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds properties specific to the <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Adds properties specific to the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
@@ -409,7 +367,11 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -437,51 +399,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >If the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             control contains child controls then the base class's <see
-             cref="M:System.Web.UI.WebControls.TableCell.AddParsedSubObject(System.Object)" />
+             control contains child controls then the base class's <see cref="M:System.Web.UI.WebControls.TableCell.AddParsedSubObject(System.Object)" />
 
             
 
-             method is called; otherwise, the <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+             method is called; otherwise, the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             control's <see
-             cref="P:System.Web.UI.WebControls.TableCell.Text" />
+             control's <see cref="P:System.Web.UI.WebControls.TableCell.Text" />
 
             
 
-             property value is added as a <see
-             cref="T:System.Web.UI.LiteralControl" />
+             property value is added as a <see cref="T:System.Web.UI.LiteralControl" />
 
             
 
-             object to the <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+             object to the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             control's <see
-             cref="T:System.Web.UI.ControlCollection" />
+             control's <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
             . </para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.TableCell.AddParsedSubObject(System.Object)" />
+            >The <see cref="M:System.Web.UI.WebControls.TableCell.AddParsedSubObject(System.Object)" />
 
             
 
-             method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+             method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
@@ -491,8 +444,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a parsed child control to the <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Adds a parsed child control to the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
@@ -500,12 +452,15 @@
           >
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
@@ -542,31 +497,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.TableCell.AssociatedHeaderCellID" />
+            >The <see cref="P:System.Web.UI.WebControls.TableCell.AssociatedHeaderCellID" />
 
             
 
-             property contains a list of header cell programmatic identifiers that provide header information of the <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+             property contains a list of header cell programmatic identifiers that provide header information of the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
              control. The list of header cell identifiers is rendered as a comma delimited list into the HTML &lt;td&gt; element's header attribute.</para
           >
           <para
-            >When setting the <see
-             cref="P:System.Web.UI.WebControls.TableCell.AssociatedHeaderCellID" />
+            >When setting the <see cref="P:System.Web.UI.WebControls.TableCell.AssociatedHeaderCellID" />
 
             
 
-             property use a comma delimited list of strings. If an element of the list is not recognized as a valid table header cell an <see
-             cref="T:System.Web.HttpException" />
+             property use a comma delimited list of strings. If an element of the list is not recognized as a valid table header cell an <see cref="T:System.Web.HttpException" />
 
             
 
-             is thrown when the <see
-             cref="M:System.Web.UI.WebControls.TableCell.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
+             is thrown when the <see cref="M:System.Web.UI.WebControls.TableCell.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
 
             
 
@@ -576,8 +526,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a space-separated list of table header cells associated with the <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Gets or sets a space-separated list of table header cells associated with the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
@@ -598,13 +547,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TableCell.ColumnSpan" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TableCell.ColumnSpan" />
 
             
 
-             property to specify or determine the number of columns in the rendered table that the cell spans. For example, if you set this property to 2, the cell takes up two columns in the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             property to specify or determine the number of columns in the rendered table that the cell spans. For example, if you set this property to 2, the cell takes up two columns in the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -614,8 +561,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the number of columns in the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >Gets or sets the number of columns in the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -647,41 +593,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.TableItemStyle" />
+            >The <see cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
             
 
-             created by the <see
-             cref="M:System.Web.UI.WebControls.TableCell.CreateControlStyle" />
+             created by the <see cref="M:System.Web.UI.WebControls.TableCell.CreateControlStyle" />
 
             
 
-             method is used with the <see
-             cref="P:System.Web.UI.WebControls.TableCell.Wrap" />
+             method is used with the <see cref="P:System.Web.UI.WebControls.TableCell.Wrap" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.WebControls.TableCell.HorizontalAlign" />
+            , <see cref="P:System.Web.UI.WebControls.TableCell.HorizontalAlign" />
 
             
 
-            , and <see
-             cref="P:System.Web.UI.WebControls.TableCell.VerticalAlign" />
+            , and <see cref="P:System.Web.UI.WebControls.TableCell.VerticalAlign" />
 
             
 
              properties.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.TableCell.CreateControlStyle" />
+            >The <see cref="M:System.Web.UI.WebControls.TableCell.CreateControlStyle" />
 
             
 
-             method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+             method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
@@ -691,13 +630,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Web.UI.WebControls.TableItemStyle" />
+            >Creates a <see cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
             
 
-             for the <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+             for the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
@@ -707,18 +644,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >A <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             that represents the <see
-             cref="T:System.Web.UI.WebControls.TableItemStyle" />
+             that represents the <see cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
             
 
-             for the <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+             for the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
@@ -746,13 +680,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TableCell.HorizontalAlign" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TableCell.HorizontalAlign" />
 
             
 
-             property to specify the horizontal alignment of the contents of the cell. The possible values for use are specified in the <see
-             cref="T:System.Web.UI.WebControls.HorizontalAlign" />
+             property to specify the horizontal alignment of the contents of the cell. The possible values for use are specified in the <see cref="T:System.Web.UI.WebControls.HorizontalAlign" />
 
             
 
@@ -790,36 +722,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >If the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             control has child controls or is overridden in a derived class the base class's <see
-             cref="M:System.Web.UI.WebControls.WebControl.RenderContents(System.Web.UI.HtmlTextWriter)" />
+             control has child controls or is overridden in a derived class the base class's <see cref="M:System.Web.UI.WebControls.WebControl.RenderContents(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method is called; otherwise, the value of the <see
-             cref="P:System.Web.UI.WebControls.TableCell.Text" />
+             method is called; otherwise, the value of the <see cref="P:System.Web.UI.WebControls.TableCell.Text" />
 
             
 
-             property is written to the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             property is written to the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
              object.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.TableCell.RenderContents(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.WebControls.TableCell.RenderContents(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+             method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
@@ -829,13 +755,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Renders the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             contents to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             contents to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -843,7 +767,11 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -867,13 +795,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TableCell.RowSpan" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TableCell.RowSpan" />
 
             
 
-             property to specify or determine the number of rows in the rendered table that the cell spans. For example, if you set this property to 2, the cell takes up two rows in the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             property to specify or determine the number of rows in the rendered table that the cell spans. For example, if you set this property to 2, the cell takes up two rows in the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -883,8 +809,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the number of rows in the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >Gets or sets the number of rows in the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -914,8 +839,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TableCell.Text" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TableCell.Text" />
 
             
 
@@ -923,13 +847,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Setting the <see
-               cref="P:System.Web.UI.WebControls.TableCell.Text" />
+              >Setting the <see cref="P:System.Web.UI.WebControls.TableCell.Text" />
 
               
 
-               property will clear any other controls contained in the <see
-               cref="T:System.Web.UI.WebControls.TableCell" />
+               property will clear any other controls contained in the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
               
 
@@ -938,20 +860,17 @@
           </block>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.UI.WebControls.TableCell.Text" />
+              >The <see cref="P:System.Web.UI.WebControls.TableCell.Text" />
 
               
 
-               control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format
-               type="text/html">
+               control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format type="text/html">
                 <a href="f3e7718f-63d0-44a3-bd5f-48cc2059c2a8">Securing Standard Controls</a>
               </format>
 
               
 
-              , <format
-               type="text/html">
+              , <format type="text/html">
                 <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
                   >How to: Protect Against Script Exploits in a Web Application by Applying HTML Encoding to Strings</a
                 >
@@ -959,8 +878,7 @@
 
               
 
-              , and <format
-               type="text/html">
+              , and <format type="text/html">
                 <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
                   >Introduction to Validating User Input in ASP.NET Web Pages</a
                 >
@@ -972,13 +890,11 @@
             >
           </block>
           <para
-            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
@@ -1025,13 +941,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TableCell.VerticalAlign" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TableCell.VerticalAlign" />
 
             
 
-             property to specify the vertical alignment of the contents of the cell. The possible values for use are specified in the <see
-             cref="T:System.Web.UI.WebControls.VerticalAlign" />
+             property to specify the vertical alignment of the contents of the cell. The possible values for use are specified in the <see cref="T:System.Web.UI.WebControls.VerticalAlign" />
 
             
 
@@ -1065,8 +979,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TableCell.Wrap" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TableCell.Wrap" />
 
             
 

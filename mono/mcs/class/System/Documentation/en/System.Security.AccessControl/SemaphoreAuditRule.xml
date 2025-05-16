@@ -27,13 +27,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
+        >The <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
 
         
 
-         class is one of a set of classes that the .NET Framework provides for managing Windows access control security on named system semaphores. For an overview of these classes and their relationship to the underlying Windows access control structures, see <see
-         cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+         class is one of a set of classes that the .NET Framework provides for managing Windows access control security on named system semaphores. For an overview of these classes and their relationship to the underlying Windows access control structures, see <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
         
 
@@ -41,8 +39,7 @@
       >
       <block subset="none" type="note">
         <para
-          >Windows access control security is meaningful only for named system semaphores. If a <see
-           cref="T:System.Threading.Semaphore" />
+          >Windows access control security is meaningful only for named system semaphores. If a <see cref="T:System.Threading.Semaphore" />
 
           
 
@@ -50,23 +47,19 @@
         >
       </block>
       <para
-        >To get a list of the audit rules currently applied to a named semaphore, use the <see
-         cref="M:System.Threading.Semaphore.GetAccessControl" />
+        >To get a list of the audit rules currently applied to a named semaphore, use the <see cref="M:System.Threading.Semaphore.GetAccessControl" />
 
         
 
-         method to get a <see
-         cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+         method to get a <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
         
 
-         object, and then use its <see
-         cref="M:System.Security.AccessControl.CommonObjectSecurity.GetAuditRules(System.Boolean,System.Boolean,System.Type)" />
+         object, and then use its <see cref="M:System.Security.AccessControl.CommonObjectSecurity.GetAuditRules(System.Boolean,System.Boolean,System.Type)" />
 
         
 
-         method to obtain a collection of <see
-         cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
+         method to obtain a collection of <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
 
         
 
@@ -83,28 +76,23 @@
         <para>The underlying access control entries change as you apply and remove rules. The information in rules is merged if possible, to maintain the smallest number of access control entries. Thus, when you read the current list of rules, it might not look exactly like the list of all the rules you have added.</para>
       </block>
       <para
-        >Use <see
-         cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
+        >Use <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
 
         
 
-         objects to specify access rights to be audited for a user or group. To apply a rule to a named system semaphore, use the <see
-         cref="M:System.Threading.Semaphore.GetAccessControl" />
+         objects to specify access rights to be audited for a user or group. To apply a rule to a named system semaphore, use the <see cref="M:System.Threading.Semaphore.GetAccessControl" />
 
         
 
-         method to get the <see
-         cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+         method to get the <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
         
 
-         object. Modify the <see
-         cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+         object. Modify the <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
         
 
-         object by using its methods to add the rule, and then use the <see
-         cref="M:System.Threading.Semaphore.SetAccessControl(System.Security.AccessControl.SemaphoreSecurity)" />
+         object by using its methods to add the rule, and then use the <see cref="M:System.Threading.Semaphore.SetAccessControl(System.Security.AccessControl.SemaphoreSecurity)" />
 
         
 
@@ -112,13 +100,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Changes you make to a <see
-           cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+          >Changes you make to a <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
           
 
-           object do not affect the access levels of the named semaphore until you call the <see
-           cref="M:System.Threading.Semaphore.SetAccessControl(System.Security.AccessControl.SemaphoreSecurity)" />
+           object do not affect the access levels of the named semaphore until you call the <see cref="M:System.Threading.Semaphore.SetAccessControl(System.Security.AccessControl.SemaphoreSecurity)" />
 
           
 
@@ -130,8 +116,7 @@
 
         
 
-         objects are immutable. Security for a semaphore is modified using the methods of the <see
-         cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+         objects are immutable. Security for a semaphore is modified using the methods of the <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
         
 
@@ -172,13 +157,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To create an <see
-             cref="T:System.Security.Principal.NTAccount" />
+            >To create an <see cref="T:System.Security.Principal.NTAccount" />
 
             
 
-             object from a string representing a user or group name, use the <see
-             cref="M:System.Security.Principal.NTAccount.#ctor(System.String)" />
+             object from a string representing a user or group name, use the <see cref="M:System.Security.Principal.NTAccount.#ctor(System.String)" />
 
             
 
@@ -188,8 +171,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
 
             
 
@@ -197,34 +179,38 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The user or group the rule applies to. Must be of type <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The user or group the rule applies to. Must be of type <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
-           or a type such as <see
-           cref="T:System.Security.Principal.NTAccount" />
+           or a type such as <see cref="T:System.Security.Principal.NTAccount" />
 
           
 
-           that can be converted to type <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+           that can be converted to type <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
           .</param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Security.AccessControl.AuditFlags" />
+          A bitwise combination of <see cref="T:System.Security.AccessControl.AuditFlags" />
 
           
 
@@ -259,8 +245,7 @@
 
             
 
-             objects are immutable. You can create a new audit rule representing a different user, different rights, or a different combination of <see
-             cref="T:System.Security.AccessControl.AuditFlags" />
+             objects are immutable. You can create a new audit rule representing a different user, different rights, or a different combination of <see cref="T:System.Security.AccessControl.AuditFlags" />
 
             
 

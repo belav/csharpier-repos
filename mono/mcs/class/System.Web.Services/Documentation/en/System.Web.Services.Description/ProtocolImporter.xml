@@ -16,23 +16,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The abstract <see
-         cref="T:System.Web.Services.Description.ProtocolImporter" />
+        >The abstract <see cref="T:System.Web.Services.Description.ProtocolImporter" />
 
         
 
-         class and its concrete derived classes generate client proxy code or abstract server code according to a specified communication protocol. <see
-         cref="T:System.Web.Services.Description.ProtocolImporter" />
+         class and its concrete derived classes generate client proxy code or abstract server code according to a specified communication protocol. <see cref="T:System.Web.Services.Description.ProtocolImporter" />
 
         
 
-         provides common functionality regardless of the protocol. Within a given protocol, a concrete derived class generates a class for each supported binding defined in a Web Services Description Language (WSDL) document. Typically, instead of directly invoking classes derived from <see
-         cref="T:System.Web.Services.Description.ProtocolImporter" />
+         provides common functionality regardless of the protocol. Within a given protocol, a concrete derived class generates a class for each supported binding defined in a Web Services Description Language (WSDL) document. Typically, instead of directly invoking classes derived from <see cref="T:System.Web.Services.Description.ProtocolImporter" />
 
         
 
-        , a developer uses these classes indirectly through the <see
-         cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+        , a developer uses these classes indirectly through the <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
 
         
 
@@ -55,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.ProtocolImporter" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.ProtocolImporter" />
 
             
 
@@ -80,16 +75,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Xml.Serialization.XmlSchemas" />
-        </value>
+        <value>a <see cref="T:System.Xml.Serialization.XmlSchemas" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the abstract XML schemas used by the associated <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+            >Gets the abstract XML schemas used by the associated <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
 
             
 
@@ -126,13 +117,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For each unhandled extension or XML element in the input extensions collection, turns on a <see
-             cref="F:System.Web.Services.Description.ServiceDescriptionImportWarnings.RequiredExtensionsIgnored" />
+            >For each unhandled extension or XML element in the input extensions collection, turns on a <see cref="F:System.Web.Services.Description.ServiceDescriptionImportWarnings.RequiredExtensionsIgnored" />
 
             
 
-             or <see
-             cref="F:System.Web.Services.Description.ServiceDescriptionImportWarnings.OptionalExtensionsIgnored" />
+             or <see cref="F:System.Web.Services.Description.ServiceDescriptionImportWarnings.OptionalExtensionsIgnored" />
 
             
 
@@ -140,24 +129,30 @@
           >
         </summary>
         <param name="comments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeCommentStatementCollection" />
+          A <see cref="T:System.CodeDom.CodeCommentStatementCollection" />
 
           
 
            that specifies the collection of code comments to which each warning message is added.</param
         >
         <param name="extensions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+          A <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
 
           
 
@@ -183,13 +178,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When generating a class for a given binding, the <see
-             cref="T:System.Web.Services.Description.ProtocolImporter" />
+            >When generating a class for a given binding, the <see cref="T:System.Web.Services.Description.ProtocolImporter" />
 
             
 
-             class calls the <see
-             cref="M:System.Web.Services.Description.ProtocolImporter.BeginClass" />
+             class calls the <see cref="M:System.Web.Services.Description.ProtocolImporter.BeginClass" />
 
             
 
@@ -221,13 +214,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When generating code, the <see
-             cref="T:System.Web.Services.Description.ProtocolImporter" />
+            >When generating code, the <see cref="T:System.Web.Services.Description.ProtocolImporter" />
 
             
 
-             class calls the <see
-             cref="M:System.Web.Services.Description.ProtocolImporter.BeginNamespace" />
+             class calls the <see cref="M:System.Web.Services.Description.ProtocolImporter.BeginNamespace" />
 
             
 
@@ -296,16 +287,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Xml.Serialization.CodeIdentifiers" />
-        </value>
+        <value>a <see cref="T:System.Xml.Serialization.CodeIdentifiers" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Serialization.CodeIdentifiers" />
+            >Gets the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
             
 
@@ -329,10 +316,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.CodeDom.CodeNamespace" />
-        </value>
+        <value>a <see cref="T:System.CodeDom.CodeNamespace" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -355,10 +339,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.CodeDom.CodeTypeDeclaration" />
-        </value>
+        <value>a <see cref="T:System.CodeDom.CodeTypeDeclaration" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -381,16 +362,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Xml.Serialization.XmlSchemas" />
-        </value>
+        <value>a <see cref="T:System.Xml.Serialization.XmlSchemas" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the concrete XML schemas used by the associated <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+            >Gets the concrete XML schemas used by the associated <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
 
             
 
@@ -414,13 +391,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When generating a class for a given binding, the <see
-             cref="T:System.Web.Services.Description.ProtocolImporter" />
+            >When generating a class for a given binding, the <see cref="T:System.Web.Services.Description.ProtocolImporter" />
 
             
 
-             class calls the <see
-             cref="M:System.Web.Services.Description.ProtocolImporter.EndClass" />
+             class calls the <see cref="M:System.Web.Services.Description.ProtocolImporter.EndClass" />
 
             
 
@@ -448,13 +423,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When generating code, the <see
-             cref="T:System.Web.Services.Description.ProtocolImporter" />
+            >When generating code, the <see cref="T:System.Web.Services.Description.ProtocolImporter" />
 
             
 
-             class calls the <see
-             cref="M:System.Web.Services.Description.ProtocolImporter.EndNamespace" />
+             class calls the <see cref="M:System.Web.Services.Description.ProtocolImporter.EndNamespace" />
 
             
 
@@ -485,13 +458,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When generating code, the <see
-             cref="T:System.Web.Services.Description.ProtocolImporter" />
+            >When generating code, the <see cref="T:System.Web.Services.Description.ProtocolImporter" />
 
             
 
-             class calls the <see
-             cref="M:System.Web.Services.Description.ProtocolImporter.GenerateMethod" />
+             class calls the <see cref="M:System.Web.Services.Description.ProtocolImporter.GenerateMethod" />
 
             
 
@@ -545,18 +516,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When generating code, the <see
-             cref="T:System.Web.Services.Description.ProtocolImporter" />
+            >When generating code, the <see cref="T:System.Web.Services.Description.ProtocolImporter" />
 
             
 
-             class calls the <see
-             cref="M:System.Web.Services.Description.ProtocolImporter.IsBindingSupported" />
+             class calls the <see cref="M:System.Web.Services.Description.ProtocolImporter.IsBindingSupported" />
 
             
 
-             method to determine whether to generate a class for the current binding, as represented by the <see
-             cref="P:System.Web.Services.Description.ProtocolImporter.Binding" />
+             method to determine whether to generate a class for the current binding, as represented by the <see cref="P:System.Web.Services.Description.ProtocolImporter.Binding" />
 
             
 
@@ -593,46 +561,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When generating code, the <see
-             cref="T:System.Web.Services.Description.ProtocolImporter" />
+            >When generating code, the <see cref="T:System.Web.Services.Description.ProtocolImporter" />
 
             
 
-             class calls the <see
-             cref="M:System.Web.Services.Description.ProtocolImporter.IsOperationFlowSupported(System.Web.Services.Description.OperationFlow)" />
+             class calls the <see cref="M:System.Web.Services.Description.ProtocolImporter.IsOperationFlowSupported(System.Web.Services.Description.OperationFlow)" />
 
             
 
-             method to determine whether to generate a method for the current operation, as represented by the <see
-             cref="P:System.Web.Services.Description.ProtocolImporter.Operation" />
+             method to determine whether to generate a method for the current operation, as represented by the <see cref="P:System.Web.Services.Description.ProtocolImporter.Operation" />
 
             
 
-             property. This evaluation takes place for each operation in a binding for which a class is being generated. If a false value is returned, the <see
-             cref="T:System.Web.Services.Description.ProtocolImporter" />
+             property. This evaluation takes place for each operation in a binding for which a class is being generated. If a false value is returned, the <see cref="T:System.Web.Services.Description.ProtocolImporter" />
 
             
 
-             class calls its <see
-             cref="M:System.Web.Services.Description.ProtocolImporter.UnsupportedOperationWarning(System.String)" />
+             class calls its <see cref="M:System.Web.Services.Description.ProtocolImporter.UnsupportedOperationWarning(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >For more information, see the <see
-             cref="P:System.Web.Services.Description.OperationMessageCollection.Flow" />
+            >For more information, see the <see cref="P:System.Web.Services.Description.OperationMessageCollection.Flow" />
 
             
 
-             property. The <see
-             cref="P:System.Web.Services.Description.Operation.Messages" />
+             property. The <see cref="P:System.Web.Services.Description.Operation.Messages" />
 
             
 
-             property is of type <see
-             cref="T:System.Web.Services.Description.OperationMessageCollection" />
+             property is of type <see cref="T:System.Web.Services.Description.OperationMessageCollection" />
 
             
 
@@ -648,12 +608,15 @@
           <para>True if the current operation's operation flow is supported.</para>
         </returns>
         <param name="flow">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.Services.Description.OperationFlow" />
+          An <see cref="T:System.Web.Services.Description.OperationFlow" />
 
           
 
@@ -698,13 +661,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The operation appears as a child of the <see
-             cref="P:System.Web.Services.Description.ProtocolImporter.PortType" />
+            >The operation appears as a child of the <see cref="P:System.Web.Services.Description.ProtocolImporter.PortType" />
 
             
 
-             element in a WSDL document. The method is generated with a <see
-             cref="T:System.Web.Services.WebMethodAttribute" />
+             element in a WSDL document. The method is generated with a <see cref="T:System.Web.Services.WebMethodAttribute" />
 
             
 
@@ -735,8 +696,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The method is generated with a <see
-             cref="T:System.Web.Services.WebMethodAttribute" />
+            >The method is generated with a <see cref="T:System.Web.Services.WebMethodAttribute" />
 
             
 
@@ -770,8 +730,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Produces an Exception indicating that the current <see
-             cref="P:System.Web.Services.Description.ProtocolImporter.OperationBinding" />
+            >Produces an Exception indicating that the current <see cref="P:System.Web.Services.Description.ProtocolImporter.OperationBinding" />
 
             
 
@@ -781,8 +740,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An Exception indicating that the current <see
-             cref="P:System.Web.Services.Description.ProtocolImporter.OperationBinding" />
+            >An Exception indicating that the current <see cref="P:System.Web.Services.Description.ProtocolImporter.OperationBinding" />
 
             
 
@@ -790,7 +748,11 @@
           >
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -819,8 +781,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Produces an Exception indicating that the current <see
-             cref="P:System.Web.Services.Description.ProtocolImporter.Operation" />
+            >Produces an Exception indicating that the current <see cref="P:System.Web.Services.Description.ProtocolImporter.Operation" />
 
             
 
@@ -830,8 +791,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An Exception indicating that the current <see
-             cref="P:System.Web.Services.Description.ProtocolImporter.Operation" />
+            >An Exception indicating that the current <see cref="P:System.Web.Services.Description.ProtocolImporter.Operation" />
 
             
 
@@ -839,7 +799,11 @@
           >
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -910,8 +874,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the Web Services Description Language (WSDL) <see
-             cref="P:System.Web.Services.Description.ProtocolImporter.PortType" />
+            >Gets the Web Services Description Language (WSDL) <see cref="P:System.Web.Services.Description.ProtocolImporter.PortType" />
 
             
 
@@ -954,16 +917,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Xml.Serialization.XmlSchemas" />
-        </value>
+        <value>a <see cref="T:System.Xml.Serialization.XmlSchemas" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets all the XML schemas, both abstract and concrete, used by the associated <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+            >Gets all the XML schemas, both abstract and concrete, used by the associated <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
 
             
 
@@ -1013,13 +972,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionCollection" />
+            >Gets the <see cref="T:System.Web.Services.Description.ServiceDescriptionCollection" />
 
             
 
-             objects that belong to the associated <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+             objects that belong to the associated <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
 
             
 
@@ -1047,13 +1004,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an enumeration value that indicates whether a client proxy class or an abstract server class is being generated. The values are Client and Server. The value is that of the associated <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+            >Gets an enumeration value that indicates whether a client proxy class or an abstract server class is being generated. The values are Client and Server. The value is that of the associated <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
 
             
 
-             instance's <see
-             cref="P:System.Web.Services.Description.ServiceDescriptionImporter.Style" />
+             instance's <see cref="P:System.Web.Services.Description.ServiceDescriptionImporter.Style" />
 
             
 
@@ -1080,18 +1035,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Turns on an <see
-             cref="F:System.Web.Services.Description.ServiceDescriptionImportWarnings.UnsupportedBindingsIgnored" />
+            >Turns on an <see cref="F:System.Web.Services.Description.ServiceDescriptionImportWarnings.UnsupportedBindingsIgnored" />
 
             
 
-             warning in the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionImportWarnings" />
+             warning in the <see cref="T:System.Web.Services.Description.ServiceDescriptionImportWarnings" />
 
             
 
-             enumeration obtained through the <see
-             cref="P:System.Web.Services.Description.ProtocolImporter.Warnings" />
+             enumeration obtained through the <see cref="P:System.Web.Services.Description.ProtocolImporter.Warnings" />
 
             
 
@@ -1099,7 +1051,11 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1128,18 +1084,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Turns on an <see
-             cref="F:System.Web.Services.Description.ServiceDescriptionImportWarnings.UnsupportedOperationsIgnored" />
+            >Turns on an <see cref="F:System.Web.Services.Description.ServiceDescriptionImportWarnings.UnsupportedOperationsIgnored" />
 
             
 
-             warning in the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionImportWarnings" />
+             warning in the <see cref="T:System.Web.Services.Description.ServiceDescriptionImportWarnings" />
 
             
 
-             enumeration obtained through the <see
-             cref="P:System.Web.Services.Description.ProtocolImporter.Warnings" />
+             enumeration obtained through the <see cref="P:System.Web.Services.Description.ProtocolImporter.Warnings" />
 
             
 
@@ -1147,7 +1100,11 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1176,18 +1133,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Turns on an <see
-             cref="F:System.Web.Services.Description.ServiceDescriptionImportWarnings.UnsupportedOperationsIgnored" />
+            >Turns on an <see cref="F:System.Web.Services.Description.ServiceDescriptionImportWarnings.UnsupportedOperationsIgnored" />
 
             
 
-             warning in the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionImportWarnings" />
+             warning in the <see cref="T:System.Web.Services.Description.ServiceDescriptionImportWarnings" />
 
             
 
-             enumeration obtained through the <see
-             cref="P:System.Web.Services.Description.ProtocolImporter.Warnings" />
+             enumeration obtained through the <see cref="P:System.Web.Services.Description.ProtocolImporter.Warnings" />
 
             
 
@@ -1195,7 +1149,11 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1223,8 +1181,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionImportWarnings" />
+            >Gets or sets a <see cref="T:System.Web.Services.Description.ServiceDescriptionImportWarnings" />
 
             
 

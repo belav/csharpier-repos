@@ -21,18 +21,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When converting from a string to a <see
-         cref="T:System.Drawing.Color" />
+        >When converting from a string to a <see cref="T:System.Drawing.Color" />
 
         
 
-         the <see
-         cref="T:System.Drawing.ColorConverter" />
+         the <see cref="T:System.Drawing.ColorConverter" />
 
         
 
-         expects the unqualified color name; otherwise, an exception will occur in the conversion process. For example, you should pass "Blue", not "System.Drawing.Color.Blue" or "Color.Blue", to the <see
-         cref="Overload:System.Drawing.ColorConverter.ConvertFrom" />
+         expects the unqualified color name; otherwise, an exception will occur in the conversion process. For example, you should pass "Blue", not "System.Drawing.Color.Blue" or "Color.Blue", to the <see cref="Overload:System.Drawing.ColorConverter.ConvertFrom" />
 
         
 
@@ -42,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Converts colors from one data type to another. Access this class through the <see
-         cref="T:System.ComponentModel.TypeDescriptor" />
+        >Converts colors from one data type to another. Access this class through the <see cref="T:System.ComponentModel.TypeDescriptor" />
 
         
 
@@ -62,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.ColorConverter" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.ColorConverter" />
 
             
 
@@ -100,19 +95,26 @@
           <para>true if this object can perform the conversion; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that provides a format context. You can use this object to get additional information about the environment from which this converter is being invoked. </param
         >
         <param name="sourceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -148,24 +150,30 @@
           <para>true if this converter can perform the operation; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that provides a format context. </param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -195,18 +203,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When converting from a string to a <see
-             cref="T:System.Drawing.Color" />
+            >When converting from a string to a <see cref="T:System.Drawing.Color" />
 
             
 
-             the <see
-             cref="T:System.Drawing.ColorConverter" />
+             the <see cref="T:System.Drawing.ColorConverter" />
 
             
 
-             expects the unqualified color name; otherwise, an exception will occur in the conversion process. For example, you should pass "Blue", not "System.Drawing.Color.Blue" or "Color.Blue", to the <see
-             cref="Overload:System.Drawing.ColorConverter.ConvertFrom" />
+             expects the unqualified color name; otherwise, an exception will occur in the conversion process. For example, you should pass "Blue", not "System.Drawing.Color.Blue" or "Color.Blue", to the <see cref="Overload:System.Drawing.ColorConverter.ConvertFrom" />
 
             
 
@@ -220,8 +225,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -229,31 +233,41 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.TypeDescriptor" />
+          A <see cref="T:System.ComponentModel.TypeDescriptor" />
 
           
 
            that provides a format context. You can use this object to get additional information about the environment from which this converter is being invoked. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            that specifies the culture to represent the color. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -292,8 +306,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -301,33 +314,48 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A formatter context. Use this object to extract additional information about the environment from which this converter is being invoked. Always check whether this value is null. Also, properties on the context object may return null. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            that specifies the culture to represent the color. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to convert. </param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -362,7 +390,11 @@
           <para>A collection containing null or a standard set of valid values. The default implementation always returns null.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -395,8 +427,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <see
-             cref="Overload:System.Drawing.ColorConverter.GetStandardValues" />
+            >true if <see cref="Overload:System.Drawing.ColorConverter.GetStandardValues" />
 
             
 
@@ -404,12 +435,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.TypeDescriptor" />
+          A <see cref="T:System.ComponentModel.TypeDescriptor" />
 
           
 

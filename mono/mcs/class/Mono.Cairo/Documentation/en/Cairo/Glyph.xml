@@ -28,24 +28,21 @@
       </Parameters>
       <Docs>
         <param name="index"
-          >A <see
-           cref="t:System.Int64" />
+          >A <see cref="t:System.Int64" />
 
           
 
            value as index. </param
         >
         <param name="x"
-          >A <see
-           cref="t:System.Double" />
+          >A <see cref="t:System.Double" />
 
           
 
            value as x</param
         >
         <param name="y"
-          >A <see
-           cref="t:System.Int64" />
+          >A <see cref="t:System.Int64" />
 
           
 
@@ -106,8 +103,7 @@ The y value represents the offset in the Y direction between the origin used for
       <Docs>
         <summary>Glyph index in the font. The exact interpretation of the glyph index depends on the font technology being used.</summary>
         <value
-          >A <see
-           cref="t:System.Int64" />
+          >A <see cref="t:System.Int64" />
 
           
 
@@ -138,8 +134,7 @@ The y value represents the offset in the Y direction between the origin used for
         <param name="other">The other Glyph</param>
         <summary>Checks the equality of two Glyphs</summary>
         <returns
-          >A <see
-           cref="t:System.Boolean" />
+          >A <see cref="t:System.Boolean" />
 
           
 
@@ -170,8 +165,7 @@ The y value represents the offset in the Y direction between the origin used for
         <param name="other">The other Glyph</param>
         <summary>Checks the inequality of two Glyphs</summary>
         <returns
-          >A <see
-           cref="t:System.Boolean" />
+          >A <see cref="t:System.Boolean" />
 
           
 
@@ -192,14 +186,11 @@ The y value represents the offset in the Y direction between the origin used for
       </ReturnValue>
       <Docs>
         <summary>The offset in the X direction between the origin used for drawing or measuring the string and the origin of this glyph.</summary>
-        <value
-          >A <see
-           cref="t:System.Double" />
+        <value>A <see cref="t:System.Double" />
 
           
 
-           representing X</value
-        >
+           representing X</value>
         <remarks></remarks>
       </Docs>
       <AssemblyInfo>
@@ -215,14 +206,11 @@ The y value represents the offset in the Y direction between the origin used for
       </ReturnValue>
       <Docs>
         <summary>The offset in the Y direction between the origin used for drawing or measuring the string and the origin of this glyph.</summary>
-        <value
-          >A <see
-           cref="t:System.Double" />
+        <value>A <see cref="t:System.Double" />
 
           
 
-           representing Y</value
-        >
+           representing Y</value>
         <remarks></remarks>
       </Docs>
       <AssemblyInfo>

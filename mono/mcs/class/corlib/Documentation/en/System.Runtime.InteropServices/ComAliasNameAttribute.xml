@@ -61,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.ComAliasNameAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.ComAliasNameAttribute" />
 
             
 
@@ -70,7 +69,11 @@
           >
         </summary>
         <param name="alias">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

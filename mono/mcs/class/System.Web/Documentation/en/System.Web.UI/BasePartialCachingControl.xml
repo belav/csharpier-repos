@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.BasePartialCachingControl" />
+        >The <see cref="T:System.Web.UI.BasePartialCachingControl" />
 
         
 
@@ -38,8 +37,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="T:System.Web.UI.PartialCachingAttribute" />
+            >Use the <see cref="T:System.Web.UI.PartialCachingAttribute" />
 
             
 
@@ -48,13 +46,11 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="T:System.Web.UI.ControlCachePolicy" />
+            >Use the <see cref="T:System.Web.UI.ControlCachePolicy" />
 
             
 
-             class to specify cache settings in programmatic scenarios in which you are working with <see
-             cref="T:System.Web.UI.BasePartialCachingControl" />
+             class to specify cache settings in programmatic scenarios in which you are working with <see cref="T:System.Web.UI.BasePartialCachingControl" />
 
             
 
@@ -66,13 +62,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the base functionality for the <see
-         cref="T:System.Web.UI.StaticPartialCachingControl" />
+        >Provides the base functionality for the <see cref="T:System.Web.UI.StaticPartialCachingControl" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.PartialCachingControl" />
+         and <see cref="T:System.Web.UI.PartialCachingControl" />
 
         
 
@@ -91,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.BasePartialCachingControl" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.BasePartialCachingControl" />
 
             
 
@@ -122,23 +115,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.BasePartialCachingControl.CachePolicy" />
+            >The <see cref="P:System.Web.UI.BasePartialCachingControl.CachePolicy" />
 
             
 
-             property enables programmatic access to the <see
-             cref="T:System.Web.UI.ControlCachePolicy" />
+             property enables programmatic access to the <see cref="T:System.Web.UI.ControlCachePolicy" />
 
             
 
-             object associated with the user control contained by the <see
-             cref="T:System.Web.UI.BasePartialCachingControl" />
+             object associated with the user control contained by the <see cref="T:System.Web.UI.BasePartialCachingControl" />
 
             
 
-             instance. The <see
-             cref="T:System.Web.UI.ControlCachePolicy" />
+             instance. The <see cref="T:System.Web.UI.ControlCachePolicy" />
 
             
 
@@ -148,8 +137,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.UI.ControlCachePolicy" />
+            >Gets the <see cref="T:System.Web.UI.ControlCachePolicy" />
 
             
 
@@ -169,10 +157,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.Caching.CacheDependency" />
-        </value>
+        <value>a <see cref="T:System.Web.Caching.CacheDependency" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property allows you to remove user control output from the output cache when the associated cache dependency changes.</para>
@@ -180,8 +165,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an instance of the <see
-             cref="T:System.Web.Caching.CacheDependency" />
+            >Gets or sets an instance of the <see cref="T:System.Web.Caching.CacheDependency" />
 
             
 
@@ -206,8 +190,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.Web.UI.BasePartialCachingControl" />
+            >Releases all resources used by the <see cref="T:System.Web.UI.BasePartialCachingControl" />
 
             
 
@@ -234,8 +217,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.Init" />
+            >Raises the <see cref="E:System.Web.UI.Control.Init" />
 
             
 
@@ -243,12 +225,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -277,8 +262,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Outputs the user control's content to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Outputs the user control's content to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -286,12 +270,15 @@
           >
         </summary>
         <param name="output">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 

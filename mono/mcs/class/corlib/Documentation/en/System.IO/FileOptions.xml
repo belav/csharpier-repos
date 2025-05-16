@@ -27,8 +27,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents advanced options for creating a <see
-         cref="T:System.IO.FileStream" />
+        >Represents advanced options for creating a <see cref="T:System.IO.FileStream" />
 
         
 
@@ -122,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that no additional options should be used when creating a <see
-             cref="T:System.IO.FileStream" />
+            >Indicates that no additional options should be used when creating a <see cref="T:System.IO.FileStream" />
 
             
 

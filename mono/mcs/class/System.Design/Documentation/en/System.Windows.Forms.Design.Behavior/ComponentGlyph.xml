@@ -16,18 +16,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.Design.Behavior.ComponentGlyph" />
+        >The <see cref="T:System.Windows.Forms.Design.Behavior.ComponentGlyph" />
 
         
 
-         class contains the <see
-         cref="P:System.Windows.Forms.Design.Behavior.ComponentGlyph.RelatedComponent" />
+         class contains the <see cref="P:System.Windows.Forms.Design.Behavior.ComponentGlyph.RelatedComponent" />
 
         
 
-         property, which points back to the glyph's related component. This property can be used to trace <see
-         cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+         property, which points back to the glyph's related component. This property can be used to trace <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
         
 
@@ -37,8 +34,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Associates a <see
-         cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+        >Associates a <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
         
 
@@ -64,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.ComponentGlyph" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.ComponentGlyph" />
 
             
 
@@ -73,12 +68,15 @@
           >
         </summary>
         <param name="relatedComponent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The component with which the <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+          The component with which the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
@@ -104,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.ComponentGlyph" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.ComponentGlyph" />
 
             
 
@@ -113,29 +110,34 @@
           >
         </summary>
         <param name="relatedComponent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The component with which the <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+          The component with which the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
            is associated.</param
         >
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+          The <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
           
 
-           with which the <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+           with which the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
@@ -166,8 +168,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether a mouse click at the specified point should be handled by the <see
-             cref="T:System.Windows.Forms.Design.Behavior.ComponentGlyph" />
+            >Indicates whether a mouse click at the specified point should be handled by the <see cref="T:System.Windows.Forms.Design.Behavior.ComponentGlyph" />
 
             
 
@@ -177,18 +178,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.Cursor" />
+            >A <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
-             if the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+             if the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
-             is associated with <paramref
-             name="p" />
+             is associated with <paramref name="p" />
 
             
 
@@ -196,7 +194,11 @@
           >
         </returns>
         <param name="p">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -229,22 +231,23 @@
           <para>Provides paint logic.</para>
         </summary>
         <param name="pe">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.PaintEventArgs" />
+          A <see cref="T:System.Windows.Forms.PaintEventArgs" />
 
           
 
-           containing the <see
-           cref="P:System.Windows.Forms.Design.Behavior.BehaviorService.AdornerWindowGraphics" />
+           containing the <see cref="P:System.Windows.Forms.Design.Behavior.BehaviorService.AdornerWindowGraphics" />
 
           
 
-            of the <see
-           cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
           
 
@@ -270,8 +273,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the component that is associated with the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+            >Gets the component that is associated with the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 

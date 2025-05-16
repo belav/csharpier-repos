@@ -32,18 +32,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.ITypeDescriptorContext" />
+        >The <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
         
 
-         interface provides contextual information about a component. <see
-         cref="T:System.ComponentModel.ITypeDescriptorContext" />
+         interface provides contextual information about a component. <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
         
 
-         is typically used at design time to provide information about a design-time container. This interface is commonly used in type conversion. For details, see <see
-         cref="T:System.ComponentModel.TypeConverter" />
+         is typically used at design time to provide information about a design-time container. This interface is commonly used in type conversion. For details, see <see cref="T:System.ComponentModel.TypeConverter" />
 
         
 
@@ -82,8 +79,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.ITypeDescriptorContext.Container" />
+            >The <see cref="P:System.ComponentModel.ITypeDescriptorContext.Container" />
 
             
 
@@ -93,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the container representing this <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+            >Gets the container representing this <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
@@ -120,33 +115,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.ITypeDescriptorContext.Instance" />
+            >The <see cref="P:System.ComponentModel.ITypeDescriptorContext.Instance" />
 
             
 
-             property gets the object that is invoking the <see
-             cref="T:System.ComponentModel.ITypeDescriptorContext" />
+             property gets the object that is invoking the <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
             
 
-             interface. For example, if a type converter is given a <see
-             cref="T:System.Drawing.Color" />
+             interface. For example, if a type converter is given a <see cref="T:System.Drawing.Color" />
 
             
 
-             to convert, <see
-             cref="P:System.ComponentModel.ITypeDescriptorContext.Instance" />
+             to convert, <see cref="P:System.ComponentModel.ITypeDescriptorContext.Instance" />
 
             
 
-             returns the actual instance of the control that is using the <see
-             cref="T:System.Drawing.Color" />
+             returns the actual instance of the control that is using the <see cref="T:System.Drawing.Color" />
 
             
 
-            . You can subsequently query the control for further information about its services and its <see
-             cref="P:System.ComponentModel.ITypeDescriptorContext.Container" />
+            . You can subsequently query the control for further information about its services and its <see cref="P:System.ComponentModel.ITypeDescriptorContext.Container" />
 
             
 
@@ -179,16 +168,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ComponentModel.ITypeDescriptorContext.OnComponentChanged" />
+            >Use the <see cref="M:System.ComponentModel.ITypeDescriptorContext.OnComponentChanged" />
 
             
 
              method to send notification that an instance of an object has changed.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -197,8 +184,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.ComponentModel.ITypeDescriptorContext.OnComponentChanged" />
+            >The <see cref="M:System.ComponentModel.ITypeDescriptorContext.OnComponentChanged" />
 
             
 
@@ -208,8 +194,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+            >Raises the <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
 
             
 
@@ -238,16 +223,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ComponentModel.ITypeDescriptorContext.OnComponentChanging" />
+            >Use the <see cref="M:System.ComponentModel.ITypeDescriptorContext.OnComponentChanging" />
 
             
 
              method to send notification that an instance of an object is about to be changed. This method also returns a value indicating whether this object can be changed. When false is returned, do not change the object.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -256,8 +239,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.ComponentModel.ITypeDescriptorContext.OnComponentChanging" />
+            >The <see cref="M:System.ComponentModel.ITypeDescriptorContext.OnComponentChanging" />
 
             
 
@@ -267,8 +249,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
+            >Raises the <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
 
             
 
@@ -305,8 +286,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Gets the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 

@@ -48,13 +48,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
 
             
 
-             with the specified <see
-             cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+             with the specified <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
 
             
 
@@ -62,12 +60,15 @@
           >
         </summary>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+          The <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
 
           
 
@@ -96,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
 
             
 
@@ -105,12 +105,15 @@
           >
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlReader" />
+          The <see cref="T:System.Xml.XmlReader" />
 
           
 
@@ -143,13 +146,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
 
             
 
-             with the specified type and <see
-             cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />
+             with the specified type and <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />
 
             
 
@@ -157,24 +158,30 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the content, typically expressed as a MIME content type, for example application/xml or application/xml+customer.</param
         >
         <param name="extension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />
+          The <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />
 
           
 
-           to place in the <see
-           cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+           to place in the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
 
           
 
@@ -207,18 +214,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+            >The <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
-             is one subtype of <see
-             cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+             is one subtype of <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
 
             
 
-            . If null is passed, a default instance of <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+            . If null is passed, a default instance of <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
@@ -228,13 +232,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
 
             
 
-             with the specified type, object, and <see
-             cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+             with the specified type, object, and <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
 
             
 
@@ -242,26 +244,37 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of content.</param
         >
         <param name="dataContractExtension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data contract extension.</param
         >
         <param name="dataContractSerializer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+          The <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
 
           
 
@@ -292,13 +305,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
 
             
 
-             with the specified type, object and <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             with the specified type, object and <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -306,26 +317,37 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of content.</param
         >
         <param name="xmlSerializerExtension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML serializer extension.</param
         >
         <param name="serializer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.XmlSerializer" />
+          The <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
           
 
@@ -355,8 +377,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a copy of the existing <see
-             cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+            >Creates a copy of the existing <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
 
             
 
@@ -366,8 +387,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.ServiceModel.Syndication.SyndicationContent" />
+            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationContent" />
 
             
 
@@ -402,8 +422,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />
+            >Gets the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />
 
             
 
@@ -434,8 +453,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a reader from the content of the <see
-             cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+            >Gets a reader from the content of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
 
             
 
@@ -445,13 +463,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
-             from the content of the <see
-             cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+             from the content of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
 
             
 
@@ -481,18 +497,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >On the receive/deserialization side, if the XML syndication content element is an empty XML element, then default(<paramref
-             name="TContent" />
+            >On the receive/deserialization side, if the XML syndication content element is an empty XML element, then default(<paramref name="TContent" />
 
             
 
-            ) is returned. If not, a new instance of <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+            ) is returned. If not, a new instance of <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
-             is created and is used to deserialize the inner XML of the XML syndication content element into an instance of <paramref
-             name="TContent" />
+             is created and is used to deserialize the inner XML of the XML syndication content element into an instance of <paramref name="TContent" />
 
             
 
@@ -502,8 +515,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the content of the specified type into the <see
-             cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+            >Reads the content of the specified type into the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
 
             
 
@@ -515,7 +527,11 @@
           <para>An object of the specified type.</para>
         </returns>
         <typeparam name="TContent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -550,18 +566,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >On the receive/deserialization side, if the XML syndication content element is an empty XML element, then default(<paramref
-             name="TContent" />
+            >On the receive/deserialization side, if the XML syndication content element is an empty XML element, then default(<paramref name="TContent" />
 
             
 
-            ) is returned. If not, the instance of <see
-             cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+            ) is returned. If not, the instance of <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
 
             
 
-             passed in is used to deserialize the inner XML of XML syndication content element into an instance of <paramref
-             name="TContent" />
+             passed in is used to deserialize the inner XML of XML syndication content element into an instance of <paramref name="TContent" />
 
             
 
@@ -571,8 +584,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the content of the specified type into the <see
-             cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+            >Reads the content of the specified type into the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
 
             
 
@@ -584,7 +596,11 @@
           <para>An object of the specified type.</para>
         </returns>
         <typeparam name="TContent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -618,18 +634,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >On the receive/deserialization side, if the XML syndication content element is an empty XML element, then default(<paramref
-             name="TContent" />
+            >On the receive/deserialization side, if the XML syndication content element is an empty XML element, then default(<paramref name="TContent" />
 
             
 
-            ) is returned. If not, the instance of <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            ) is returned. If not, the instance of <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             passed in is used to deserialize the inner XML of XML syndication content element into an instance of <paramref
-             name="TContent" />
+             passed in is used to deserialize the inner XML of XML syndication content element into an instance of <paramref name="TContent" />
 
             
 
@@ -639,8 +652,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the content of the specified type into the <see
-             cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+            >Reads the content of the specified type into the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
 
             
 
@@ -652,19 +664,26 @@
           <para>An object of the specified type.</para>
         </returns>
         <param name="serializer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.XmlSerializer" />
+          The <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
           
 
            to use.</param
         >
         <typeparam name="TContent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -714,8 +733,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method writes the inner XML content of the <see
-             cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+            >This method writes the inner XML content of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
 
             
 
@@ -725,13 +743,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Write the contents of the <see
-             cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+            >Write the contents of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
 
             
 
-             to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+             to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -739,12 +755,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 

@@ -48,94 +48,77 @@
 
         
 
-         is the base class for all components in the common language runtime that marshal by reference. <see
-         cref="T:System.ComponentModel.Component" />
+         is the base class for all components in the common language runtime that marshal by reference. <see cref="T:System.ComponentModel.Component" />
 
         
 
-         is remotable and derives from the <see
-         cref="T:System.MarshalByRefObject" />
+         is remotable and derives from the <see cref="T:System.MarshalByRefObject" />
 
         
 
-         class. <see
-         cref="T:System.ComponentModel.Component" />
+         class. <see cref="T:System.ComponentModel.Component" />
 
         
 
-         provides an implementation of the <see
-         cref="T:System.ComponentModel.IComponent" />
+         provides an implementation of the <see cref="T:System.ComponentModel.IComponent" />
 
         
 
-         interface. The <see
-         cref="T:System.ComponentModel.MarshalByValueComponent" />
+         interface. The <see cref="T:System.ComponentModel.MarshalByValueComponent" />
 
         
 
-         provides an implementation of <see
-         cref="T:System.ComponentModel.IComponent" />
+         provides an implementation of <see cref="T:System.ComponentModel.IComponent" />
 
         
 
          that marshals by value.</para
       >
       <para
-        >You can host a <see
-         cref="T:System.ComponentModel.Component" />
+        >You can host a <see cref="T:System.ComponentModel.Component" />
 
         
 
-         in any object that implements the <see
-         cref="T:System.ComponentModel.IContainer" />
+         in any object that implements the <see cref="T:System.ComponentModel.IContainer" />
 
         
 
-         interface, and you can query and get services from its container. The container creates an <see
-         cref="T:System.ComponentModel.ISite" />
+         interface, and you can query and get services from its container. The container creates an <see cref="T:System.ComponentModel.ISite" />
 
         
 
-         for each <see
-         cref="T:System.ComponentModel.Component" />
+         for each <see cref="T:System.ComponentModel.Component" />
 
         
 
-         it contains. The container uses the site to manage the <see
-         cref="T:System.ComponentModel.Component" />
+         it contains. The container uses the site to manage the <see cref="T:System.ComponentModel.Component" />
 
         
 
-         and is used by the <see
-         cref="T:System.ComponentModel.Component" />
+         and is used by the <see cref="T:System.ComponentModel.Component" />
 
         
 
          to communicate with its container.</para
       >
       <para
-        >A <see
-         cref="T:System.ComponentModel.Component" />
+        >A <see cref="T:System.ComponentModel.Component" />
 
         
 
-         should release resources explicitly by calls to its <see
-         cref="M:System.ComponentModel.Component.Dispose" />
+         should release resources explicitly by calls to its <see cref="M:System.ComponentModel.Component.Dispose" />
 
         
 
-         method, without waiting for automatic memory management through an implicit call to the <see
-         cref="M:System.Object.Finalize" />
+         method, without waiting for automatic memory management through an implicit call to the <see cref="M:System.Object.Finalize" />
 
         
 
-         method. When a <see
-         cref="T:System.ComponentModel.Container" />
+         method. When a <see cref="T:System.ComponentModel.Container" />
 
         
 
-         is disposed, all components within the <see
-         cref="T:System.ComponentModel.Container" />
+         is disposed, all components within the <see cref="T:System.ComponentModel.Container" />
 
         
 
@@ -145,8 +128,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the base implementation for the <see
-         cref="T:System.ComponentModel.IComponent" />
+        >Provides the base implementation for the <see cref="T:System.ComponentModel.IComponent" />
 
         
 
@@ -174,8 +156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Component" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Component" />
 
             
 
@@ -200,18 +181,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation of this property always returns true. Classes that inherit from the <see
-             cref="T:System.ComponentModel.Component" />
+            >The default implementation of this property always returns true. Classes that inherit from the <see cref="T:System.ComponentModel.Component" />
 
             
 
-             class should override this property to provide the ability to disable the raising of events. For example, in the <see
-             cref="T:System.Windows.Forms.Control" />
+             class should override this property to provide the ability to disable the raising of events. For example, in the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class, if the control is being hosted as an ActiveX control, the <see
-             cref="P:System.Windows.Forms.Control.CanRaiseEvents" />
+             class, if the control is being hosted as an ActiveX control, the <see cref="P:System.Windows.Forms.Control.CanRaiseEvents" />
 
             
 
@@ -259,13 +237,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ComponentModel.IContainer" />
+            >Gets the <see cref="T:System.ComponentModel.IContainer" />
 
             
 
-             that contains the <see
-             cref="T:System.ComponentModel.Component" />
+             that contains the <see cref="T:System.ComponentModel.Component" />
 
             
 
@@ -299,18 +275,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The design mode indicator is stored in the <see
-             cref="T:System.ComponentModel.ISite" />
+            >The design mode indicator is stored in the <see cref="T:System.ComponentModel.ISite" />
 
             
 
-            ; therefore, if the <see
-             cref="T:System.ComponentModel.Component" />
+            ; therefore, if the <see cref="T:System.ComponentModel.Component" />
 
             
 
-             does not have an <see
-             cref="T:System.ComponentModel.ISite" />
+             does not have an <see cref="T:System.ComponentModel.ISite" />
 
             
 
@@ -320,8 +293,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.ComponentModel.Component" />
+            >Gets a value that indicates whether the <see cref="T:System.ComponentModel.Component" />
 
             
 
@@ -350,50 +322,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.ComponentModel.Component.Dispose" />
+            >Call <see cref="M:System.ComponentModel.Component.Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.ComponentModel.Component" />
+             when you are finished using the <see cref="T:System.ComponentModel.Component" />
 
             
 
-            . The <see
-             cref="M:System.ComponentModel.Component.Dispose" />
+            . The <see cref="M:System.ComponentModel.Component.Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.ComponentModel.Component" />
+             method leaves the <see cref="T:System.ComponentModel.Component" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.ComponentModel.Component.Dispose" />
+             in an unusable state. After calling <see cref="M:System.ComponentModel.Component.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.ComponentModel.Component" />
+            , you must release all references to the <see cref="T:System.ComponentModel.Component" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.ComponentModel.Component" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.ComponentModel.Component" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -403,18 +366,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.ComponentModel.Component.Dispose" />
+              >Always call <see cref="M:System.ComponentModel.Component.Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.ComponentModel.Component" />
+               before you release your last reference to the <see cref="T:System.ComponentModel.Component" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.ComponentModel.Component" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.ComponentModel.Component" />
 
               
 
@@ -425,8 +385,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.ComponentModel.Component" />
+            >Releases all resources used by the <see cref="T:System.ComponentModel.Component" />
 
             
 
@@ -458,41 +417,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public <see
-             cref="M:System.ComponentModel.Component.Dispose" />
+            >This method is called by the public <see cref="M:System.ComponentModel.Component.Dispose" />
 
             
 
-             method and the <see
-             cref="M:System.Object.Finalize" />
+             method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.ComponentModel.Component" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.ComponentModel.Component" />
 
             
 
@@ -502,8 +454,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.ComponentModel.Component" />
+            >Releases the unmanaged resources used by the <see cref="T:System.ComponentModel.Component" />
 
             
 
@@ -537,13 +488,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you create a <see
-             cref="E:System.ComponentModel.Component.Disposed" />
+            >When you create a <see cref="E:System.ComponentModel.Component.Disposed" />
 
             
 
-             delegate, you identify the method that handles the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about the event handler delegates, see <format
-             type="text/html">
+             delegate, you identify the method that handles the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about the event handler delegates, see <format type="text/html">
               <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">Events and Delegates</a>
             </format>
 
@@ -555,8 +504,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the component is disposed by a call to the <see
-             cref="M:System.ComponentModel.Component.Dispose" />
+            >Occurs when the component is disposed by a call to the <see cref="M:System.ComponentModel.Component.Dispose" />
 
             
 
@@ -588,8 +536,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -601,8 +548,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the list of event handlers that are attached to this <see
-             cref="T:System.ComponentModel.Component" />
+            >Gets the list of event handlers that are attached to this <see cref="T:System.ComponentModel.Component" />
 
             
 
@@ -631,35 +577,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.Object.Finalize" />
+            >This method overrides <see cref="M:System.Object.Finalize" />
 
             
 
-            . Application code should not call this method; an object's Finalize method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see
-             cref="M:System.GC.SuppressFinalize(System.Object)" />
+            . Application code should not call this method; an object's Finalize method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see cref="M:System.GC.SuppressFinalize(System.Object)" />
 
             
 
              method. </para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="fd376774-1643-499b-869e-9546a3aeea70">Finalize Methods and Destructors</a>
             </format>
 
             
 
-            , <format
-             type="text/html">
+            , <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-            , and <format
-             type="text/html">
+            , and <format type="text/html">
               <a href="8026cb68-fe93-43fc-96c1-c09ad7d64cd3">Overriding the Finalize Method</a>
             </format>
 
@@ -671,8 +612,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases unmanaged resources and performs other cleanup operations before the <see
-             cref="T:System.ComponentModel.Component" />
+            >Releases unmanaged resources and performs other cleanup operations before the <see cref="T:System.ComponentModel.Component" />
 
             
 
@@ -707,13 +647,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an object that represents a service provided by the <see
-             cref="T:System.ComponentModel.Component" />
+            >Returns an object that represents a service provided by the <see cref="T:System.ComponentModel.Component" />
 
             
 
-             or by its <see
-             cref="T:System.ComponentModel.Container" />
+             or by its <see cref="T:System.ComponentModel.Container" />
 
             
 
@@ -723,18 +661,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             that represents a service provided by the <see
-             cref="T:System.ComponentModel.Component" />
+             that represents a service provided by the <see cref="T:System.ComponentModel.Component" />
 
             
 
-            , or null if the <see
-             cref="T:System.ComponentModel.Component" />
+            , or null if the <see cref="T:System.ComponentModel.Component" />
 
             
 
@@ -742,12 +677,15 @@
           >
         </returns>
         <param name="service">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A service provided by the <see
-           cref="T:System.ComponentModel.Component" />
+          A service provided by the <see cref="T:System.ComponentModel.Component" />
 
           
 
@@ -787,129 +725,105 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Component" />
+            >A <see cref="T:System.ComponentModel.Component" />
 
             
 
-             will have an <see
-             cref="T:System.ComponentModel.ISite" />
+             will have an <see cref="T:System.ComponentModel.ISite" />
 
             
 
-             if it has been added to an <see
-             cref="T:System.ComponentModel.IContainer" />
+             if it has been added to an <see cref="T:System.ComponentModel.IContainer" />
 
             
 
-             and the <see
-             cref="T:System.ComponentModel.IContainer" />
+             and the <see cref="T:System.ComponentModel.IContainer" />
 
             
 
-             assigns an <see
-             cref="T:System.ComponentModel.ISite" />
+             assigns an <see cref="T:System.ComponentModel.ISite" />
 
             
 
-             to it. The <see
-             cref="T:System.ComponentModel.IContainer" />
+             to it. The <see cref="T:System.ComponentModel.IContainer" />
 
             
 
-             is responsible for assigning the <see
-             cref="T:System.ComponentModel.ISite" />
+             is responsible for assigning the <see cref="T:System.ComponentModel.ISite" />
 
             
 
-             to the <see
-             cref="T:System.ComponentModel.Component" />
+             to the <see cref="T:System.ComponentModel.Component" />
 
             
 
-            . Changing the value of the component's <see
-             cref="T:System.ComponentModel.ISite" />
+            . Changing the value of the component's <see cref="T:System.ComponentModel.ISite" />
 
             
 
-             does not necessarily change the name of the site the <see
-             cref="T:System.ComponentModel.Component" />
+             does not necessarily change the name of the site the <see cref="T:System.ComponentModel.Component" />
 
             
 
-             is assigned to. The <see
-             cref="P:System.ComponentModel.Component.Site" />
+             is assigned to. The <see cref="P:System.ComponentModel.Component.Site" />
 
             
 
-             property should be set only by an <see
-             cref="T:System.ComponentModel.IContainer" />
+             property should be set only by an <see cref="T:System.ComponentModel.IContainer" />
 
             
 
             .</para
           >
           <para
-            >The property value is null if the <see
-             cref="T:System.ComponentModel.Component" />
+            >The property value is null if the <see cref="T:System.ComponentModel.Component" />
 
             
 
-             is removed from its <see
-             cref="T:System.ComponentModel.IContainer" />
+             is removed from its <see cref="T:System.ComponentModel.IContainer" />
 
             
 
-            . Assigning null to this property does not necessarily remove the <see
-             cref="T:System.ComponentModel.Component" />
+            . Assigning null to this property does not necessarily remove the <see cref="T:System.ComponentModel.Component" />
 
             
 
-             from the <see
-             cref="T:System.ComponentModel.IContainer" />
+             from the <see cref="T:System.ComponentModel.IContainer" />
 
             
 
             .</para
           >
           <para
-            >A <see
-             cref="T:System.ComponentModel.Component" />
+            >A <see cref="T:System.ComponentModel.Component" />
 
             
 
-             might or might not have a name. If a <see
-             cref="T:System.ComponentModel.Component" />
+             might or might not have a name. If a <see cref="T:System.ComponentModel.Component" />
 
             
 
-             is given a name, the name must be unique among other <see
-             cref="T:System.ComponentModel.Component" />
+             is given a name, the name must be unique among other <see cref="T:System.ComponentModel.Component" />
 
             
 
-             objects within its <see
-             cref="T:System.ComponentModel.IContainer" />
+             objects within its <see cref="T:System.ComponentModel.IContainer" />
 
             
 
-            . The <see
-             cref="T:System.ComponentModel.ISite" />
+            . The <see cref="T:System.ComponentModel.ISite" />
 
             
 
-             stores the name of the <see
-             cref="T:System.ComponentModel.Component" />
+             stores the name of the <see cref="T:System.ComponentModel.Component" />
 
             
 
-            ; therefore, you can only name a <see
-             cref="T:System.ComponentModel.Component" />
+            ; therefore, you can only name a <see cref="T:System.ComponentModel.Component" />
 
             
 
-             if it has an <see
-             cref="T:System.ComponentModel.ISite" />
+             if it has an <see cref="T:System.ComponentModel.ISite" />
 
             
 
@@ -919,13 +833,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.ComponentModel.ISite" />
+            >Gets or sets the <see cref="T:System.ComponentModel.ISite" />
 
             
 
-             of the <see
-             cref="T:System.ComponentModel.Component" />
+             of the <see cref="T:System.ComponentModel.Component" />
 
             
 
@@ -954,61 +866,50 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Component" />
+            >A <see cref="T:System.ComponentModel.Component" />
 
             
 
-             may or may not have a name. If a <see
-             cref="T:System.ComponentModel.Component" />
+             may or may not have a name. If a <see cref="T:System.ComponentModel.Component" />
 
             
 
-             is given a name, the name is unique among other <see
-             cref="T:System.ComponentModel.Component" />
+             is given a name, the name is unique among other <see cref="T:System.ComponentModel.Component" />
 
             
 
-             objects within its <see
-             cref="T:System.ComponentModel.IContainer" />
+             objects within its <see cref="T:System.ComponentModel.IContainer" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="T:System.ComponentModel.ISite" />
+            >The <see cref="T:System.ComponentModel.ISite" />
 
             
 
-             stores the name of the <see
-             cref="T:System.ComponentModel.Component" />
+             stores the name of the <see cref="T:System.ComponentModel.Component" />
 
             
 
-            . A <see
-             cref="T:System.ComponentModel.Component" />
+            . A <see cref="T:System.ComponentModel.Component" />
 
             
 
-             can only have an <see
-             cref="T:System.ComponentModel.ISite" />
+             can only have an <see cref="T:System.ComponentModel.ISite" />
 
             
 
-             if it has been added to an <see
-             cref="T:System.ComponentModel.IContainer" />
+             if it has been added to an <see cref="T:System.ComponentModel.IContainer" />
 
             
 
-             and the <see
-             cref="T:System.ComponentModel.IContainer" />
+             and the <see cref="T:System.ComponentModel.IContainer" />
 
             
 
-             assigns an <see
-             cref="T:System.ComponentModel.ISite" />
+             assigns an <see cref="T:System.ComponentModel.ISite" />
 
             
 
@@ -1018,13 +919,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.String" />
+            >Returns a <see cref="T:System.String" />
 
             
 
-             containing the name of the <see
-             cref="T:System.ComponentModel.Component" />
+             containing the name of the <see cref="T:System.ComponentModel.Component" />
 
             
 
@@ -1034,18 +933,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             containing the name of the <see
-             cref="T:System.ComponentModel.Component" />
+             containing the name of the <see cref="T:System.ComponentModel.Component" />
 
             
 
-            , if any, or null if the <see
-             cref="T:System.ComponentModel.Component" />
+            , if any, or null if the <see cref="T:System.ComponentModel.Component" />
 
             
 

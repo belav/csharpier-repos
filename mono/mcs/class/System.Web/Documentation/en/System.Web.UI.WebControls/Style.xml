@@ -29,43 +29,35 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.Style" />
+        >The <see cref="T:System.Web.UI.WebControls.Style" />
 
         
 
-         class encapsulates the properties that control the appearance of a Web server control and can be applied to multiple Web server controls to provide a common appearance. You can specify the background color and font color of a control by setting the <see
-         cref="P:System.Web.UI.WebControls.WebControl.BackColor" />
+         class encapsulates the properties that control the appearance of a Web server control and can be applied to multiple Web server controls to provide a common appearance. You can specify the background color and font color of a control by setting the <see cref="P:System.Web.UI.WebControls.WebControl.BackColor" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.WebControl.ForeColor" />
+         and <see cref="P:System.Web.UI.WebControls.WebControl.ForeColor" />
 
         
 
-         properties, respectively. On controls that can display a border, you can control the border width, the border style, and the border color by setting the <see
-         cref="P:System.Web.UI.WebControls.WebControl.BorderWidth" />
+         properties, respectively. On controls that can display a border, you can control the border width, the border style, and the border color by setting the <see cref="P:System.Web.UI.WebControls.WebControl.BorderWidth" />
 
         
 
-        , <see
-         cref="P:System.Web.UI.WebControls.WebControl.BorderStyle" />
+        , <see cref="P:System.Web.UI.WebControls.WebControl.BorderStyle" />
 
         
 
-        , and <see
-         cref="P:System.Web.UI.WebControls.WebControl.BorderColor" />
+        , and <see cref="P:System.Web.UI.WebControls.WebControl.BorderColor" />
 
         
 
-         properties. The size of a Web server control can also be specified by using the <see
-         cref="P:System.Web.UI.WebControls.WebControl.Height" />
+         properties. The size of a Web server control can also be specified by using the <see cref="P:System.Web.UI.WebControls.WebControl.Height" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.WebControl.Width" />
+         and <see cref="P:System.Web.UI.WebControls.WebControl.Width" />
 
         
 
@@ -87,8 +79,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
@@ -98,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
@@ -123,18 +113,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             class using the <see
-             cref="T:System.Web.UI.StateBag" />
+             class using the <see cref="T:System.Web.UI.StateBag" />
 
             
 
-             specified by the <paramref
-             name="bag" />
+             specified by the <paramref name="bag" />
 
             
 
@@ -144,8 +131,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
@@ -153,12 +139,15 @@
           >
         </summary>
         <param name="bag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.StateBag" />
+          A <see cref="T:System.Web.UI.StateBag" />
 
           
 
@@ -186,33 +175,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To render attributes and styles for a Web server control on the client, you typically call the <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String)" />
+            >To render attributes and styles for a Web server control on the client, you typically call the <see cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String)" />
 
             
 
-             and <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.String,System.String)" />
+             and <see cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.String,System.String)" />
 
             
 
-             methods to insert each attribute and style individually to the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             methods to insert each attribute and style individually to the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             output stream. To simplify the process, this method encapsulates all calls to the <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String)" />
+             output stream. To simplify the process, this method encapsulates all calls to the <see cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String)" />
 
             
 
-             and <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.String,System.String)" />
+             and <see cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.String,System.String)" />
 
             
 
-             methods for every attribute and style associated with the Web server control. All attributes and styles are inserted into the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             methods for every attribute and style associated with the Web server control. All attributes and styles are inserted into the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -222,8 +205,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds HTML attributes and styles that need to be rendered to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Adds HTML attributes and styles that need to be rendered to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -231,12 +213,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          A <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -265,38 +250,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To render attributes and styles for a Web server control on the client, you typically call the <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String)" />
+            >To render attributes and styles for a Web server control on the client, you typically call the <see cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String)" />
 
             
 
-             and <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.String,System.String)" />
+             and <see cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.String,System.String)" />
 
             
 
-             methods to insert each attribute and style individually to the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             methods to insert each attribute and style individually to the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             output stream. To simplify the process, this method encapsulates all calls to the <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String)" />
+             output stream. To simplify the process, this method encapsulates all calls to the <see cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String)" />
 
             
 
-             and <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.String,System.String)" />
+             and <see cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.String,System.String)" />
 
             
 
-             methods for every attribute and style associated with the Web Server control. All attributes and styles are inserted into the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             methods for every attribute and style associated with the Web Server control. All attributes and styles are inserted into the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             output stream in a single method call. This method is typically overridden by control developers in derived classes to insert the appropriate attributes and styles to the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             output stream in a single method call. This method is typically overridden by control developers in derived classes to insert the appropriate attributes and styles to the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -306,8 +284,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds HTML attributes and styles that need to be rendered to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Adds HTML attributes and styles that need to be rendered to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -315,34 +292,38 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          An <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
            that represents the output stream to render HTML content on the client. </param
         >
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.WebControl" />
+          A <see cref="T:System.Web.UI.WebControls.WebControl" />
 
           
 
-           or <see
-           cref="T:System.Web.UI.WebControls.WebControl" />
+           or <see cref="T:System.Web.UI.WebControls.WebControl" />
 
           
 
-           derived object that represents the Web server control associated with the <see
-           cref="T:System.Web.UI.WebControls.Style" />
+           derived object that represents the Web server control associated with the <see cref="T:System.Web.UI.WebControls.Style" />
 
           
 
@@ -362,20 +343,15 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Drawing.Color" />
-        </value>
+        <value>a <see cref="T:System.Drawing.Color" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Style.BackColor" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Style.BackColor" />
 
             
 
-             property to specify the background color of the Web server control. This property is set using a <see
-             cref="T:System.Drawing.Color" />
+             property to specify the background color of the Web server control. This property is set using a <see cref="T:System.Drawing.Color" />
 
             
 
@@ -383,43 +359,35 @@
           >
           <block subset="none" type="note">
             <para
-              >This property will render only for certain controls. For example, <see
-               cref="T:System.Web.UI.WebControls.Table" />
+              >This property will render only for certain controls. For example, <see cref="T:System.Web.UI.WebControls.Table" />
 
               
 
-              , <see
-               cref="T:System.Web.UI.WebControls.Panel" />
+              , <see cref="T:System.Web.UI.WebControls.Panel" />
 
               
 
-              , <see
-               cref="T:System.Web.UI.WebControls.DataGrid" />
+              , <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
               
 
-              , <see
-               cref="T:System.Web.UI.WebControls.Calendar" />
+              , <see cref="T:System.Web.UI.WebControls.Calendar" />
 
               
 
-              , and <see
-               cref="T:System.Web.UI.WebControls.ValidationSummary" />
+              , and <see cref="T:System.Web.UI.WebControls.ValidationSummary" />
 
               
 
-               will render this property. It will also work for <see
-               cref="T:System.Web.UI.WebControls.CheckBoxList" />
+               will render this property. It will also work for <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
               
 
-              , <see
-               cref="T:System.Web.UI.WebControls.RadioButtonList" />
+              , <see cref="T:System.Web.UI.WebControls.RadioButtonList" />
 
               
 
-               and <see
-               cref="T:System.Web.UI.WebControls.DataList" />
+               and <see cref="T:System.Web.UI.WebControls.DataList" />
 
               
 
@@ -428,8 +396,7 @@
           </block>
           <para>In general, only controls that render as a &lt;table&gt; tag can display a background color in HTML 3.2, whereas almost any control can in HTML 4.0.</para>
           <para
-            >For controls that render as a &lt;span&gt; tag (including <see
-             cref="T:System.Web.UI.WebControls.Label" />
+            >For controls that render as a &lt;span&gt; tag (including <see cref="T:System.Web.UI.WebControls.Label" />
 
             
 
@@ -468,20 +435,15 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Drawing.Color" />
-        </value>
+        <value>a <see cref="T:System.Drawing.Color" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Style.BorderColor" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Style.BorderColor" />
 
             
 
-             property to specify the border color of the Web server control. This property is set using a <see
-             cref="T:System.Drawing.Color" />
+             property to specify the border color of the Web server control. This property is set using a <see cref="T:System.Drawing.Color" />
 
             
 
@@ -489,43 +451,35 @@
           >
           <block subset="none" type="note">
             <para
-              >This property will render only for certain controls. For example, <see
-               cref="T:System.Web.UI.WebControls.Table" />
+              >This property will render only for certain controls. For example, <see cref="T:System.Web.UI.WebControls.Table" />
 
               
 
-              , <see
-               cref="T:System.Web.UI.WebControls.Panel" />
+              , <see cref="T:System.Web.UI.WebControls.Panel" />
 
               
 
-              , <see
-               cref="T:System.Web.UI.WebControls.DataGrid" />
+              , <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
               
 
-              , <see
-               cref="T:System.Web.UI.WebControls.Calendar" />
+              , <see cref="T:System.Web.UI.WebControls.Calendar" />
 
               
 
-              , and <see
-               cref="T:System.Web.UI.WebControls.ValidationSummary" />
+              , and <see cref="T:System.Web.UI.WebControls.ValidationSummary" />
 
               
 
-               will render this property. It will also work for <see
-               cref="T:System.Web.UI.WebControls.CheckBoxList" />
+               will render this property. It will also work for <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
               
 
-              , <see
-               cref="T:System.Web.UI.WebControls.RadioButtonList" />
+              , <see cref="T:System.Web.UI.WebControls.RadioButtonList" />
 
               
 
-              , and <see
-               cref="T:System.Web.UI.WebControls.DataList" />
+              , and <see cref="T:System.Web.UI.WebControls.DataList" />
 
               
 
@@ -569,13 +523,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Style.BorderStyle" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Style.BorderStyle" />
 
             
 
-             property to specify the border style for the Web server control. This property is set using one of the <see
-             cref="T:System.Web.UI.WebControls.BorderStyle" />
+             property to specify the border style for the Web server control. This property is set using one of the <see cref="T:System.Web.UI.WebControls.BorderStyle" />
 
             
 
@@ -710,8 +662,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Style.BorderWidth" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Style.BorderWidth" />
 
             
 
@@ -719,13 +670,11 @@
           >
           <block subset="none" type="note">
             <para
-              >This property does not work with all Web server controls. It only applies to controls that display as a table, such as <see
-               cref="T:System.Web.UI.WebControls.Table" />
+              >This property does not work with all Web server controls. It only applies to controls that display as a table, such as <see cref="T:System.Web.UI.WebControls.Table" />
 
               
 
-               and <see
-               cref="T:System.Web.UI.WebControls.DataGrid" />
+               and <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
               
 
@@ -733,18 +682,15 @@
             >
           </block>
           <para
-            >This property is set with a <see
-             cref="T:System.Web.UI.WebControls.Unit" />
+            >This property is set with a <see cref="T:System.Web.UI.WebControls.Unit" />
 
             
 
-             object. If the <see
-             cref="P:System.Web.UI.WebControls.Unit.Value" />
+             object. If the <see cref="P:System.Web.UI.WebControls.Unit.Value" />
 
             
 
-             property of the <see
-             cref="T:System.Web.UI.WebControls.Unit" />
+             property of the <see cref="T:System.Web.UI.WebControls.Unit" />
 
             
 
@@ -788,51 +734,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.Style.CopyFrom(System.Web.UI.WebControls.Style)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.Style.CopyFrom(System.Web.UI.WebControls.Style)" />
 
             
 
-             method to duplicate the style properties of the specified <see
-             cref="T:System.Web.UI.WebControls.Style" />
+             method to duplicate the style properties of the specified <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             into the instance of the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+             into the instance of the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
              class that this method is called from.</para
           >
           <para
-            >When a style is registered using <see
-             cref="M:System.Web.UI.IStyleSheet.RegisterStyle(System.Web.UI.WebControls.Style,System.Web.UI.IUrlResolutionService)" />
+            >When a style is registered using <see cref="M:System.Web.UI.IStyleSheet.RegisterStyle(System.Web.UI.WebControls.Style,System.Web.UI.IUrlResolutionService)" />
 
             
 
-            , and then copied using <see
-             cref="M:System.Web.UI.WebControls.Style.CopyFrom(System.Web.UI.WebControls.Style)" />
+            , and then copied using <see cref="M:System.Web.UI.WebControls.Style.CopyFrom(System.Web.UI.WebControls.Style)" />
 
             
 
-            , only the <see
-             cref="P:System.Web.UI.WebControls.Style.CssClass" />
+            , only the <see cref="P:System.Web.UI.WebControls.Style.CssClass" />
 
             
 
-             property is copied to the destination, not all the individual properties. This could lead to unexpected results if you then copy or examine the properties of the destination style. For example, if you are using <see
-             cref="M:System.Web.UI.WebControls.FontInfo.CopyFrom(System.Web.UI.WebControls.FontInfo)" />
+             property is copied to the destination, not all the individual properties. This could lead to unexpected results if you then copy or examine the properties of the destination style. For example, if you are using <see cref="M:System.Web.UI.WebControls.FontInfo.CopyFrom(System.Web.UI.WebControls.FontInfo)" />
 
             
 
-             to copy font information from the <see
-             cref="P:System.Web.UI.WebControls.Style.Font" />
+             to copy font information from the <see cref="P:System.Web.UI.WebControls.Style.Font" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.Style" />
+             property of a <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
@@ -840,18 +777,15 @@
           >
           <block subset="none" type="note">
             <para
-              >All properties, including those that have been set in the current instance of the <see
-               cref="T:System.Web.UI.WebControls.Style" />
+              >All properties, including those that have been set in the current instance of the <see cref="T:System.Web.UI.WebControls.Style" />
 
               
 
-               class, will be replaced by the associated property in the <see
-               cref="T:System.Web.UI.WebControls.Style" />
+               class, will be replaced by the associated property in the <see cref="T:System.Web.UI.WebControls.Style" />
 
               
 
-               specified by the <paramref
-               name="s" />
+               specified by the <paramref name="s" />
 
               
 
@@ -863,13 +797,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Duplicates the style properties of the specified <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >Duplicates the style properties of the specified <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             into the instance of the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+             into the instance of the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
@@ -877,12 +809,15 @@
           >
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.Style" />
+          A <see cref="T:System.Web.UI.WebControls.Style" />
 
           
 
@@ -906,8 +841,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Style.CssClass" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Style.CssClass" />
 
             
 
@@ -919,8 +853,7 @@
           <code>&lt;input type=text class="class1" style="ForeColor:red"&gt;</code>
           <block subset="none" type="note">
             <para
-              >On browsers that do not support CSS, setting the <see
-               cref="P:System.Web.UI.WebControls.Style.CssClass" />
+              >On browsers that do not support CSS, setting the <see cref="P:System.Web.UI.WebControls.Style.CssClass" />
 
               
 
@@ -966,28 +899,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.Style.FillStyleAttributes(System.Web.UI.CssStyleCollection,System.Web.UI.IUrlResolutionService)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.Style.FillStyleAttributes(System.Web.UI.CssStyleCollection,System.Web.UI.IUrlResolutionService)" />
 
             
 
-             method to add the style properties of an object to the specified <see
-             cref="T:System.Web.UI.CssStyleCollection" />
+             method to add the style properties of an object to the specified <see cref="T:System.Web.UI.CssStyleCollection" />
 
             
 
-             object. The object that you specify must implement <see
-             cref="T:System.Web.UI.IUrlResolutionService" />
+             object. The object that you specify must implement <see cref="T:System.Web.UI.IUrlResolutionService" />
 
             
 
-            . All classes derived from <see
-             cref="T:System.Web.UI.Control" />
+            . All classes derived from <see cref="T:System.Web.UI.Control" />
 
             
 
-             implement <see
-             cref="T:System.Web.UI.IUrlResolutionService" />
+             implement <see cref="T:System.Web.UI.IUrlResolutionService" />
 
             
 
@@ -997,8 +925,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified object's style properties to a <see
-             cref="T:System.Web.UI.CssStyleCollection" />
+            >Adds the specified object's style properties to a <see cref="T:System.Web.UI.CssStyleCollection" />
 
             
 
@@ -1006,24 +933,30 @@
           >
         </summary>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.CssStyleCollection" />
+          The <see cref="T:System.Web.UI.CssStyleCollection" />
 
           
 
            object to which to add the style properties. </param
         >
         <param name="urlResolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.IUrlResolutionService" />
+          A <see cref="T:System.Web.UI.IUrlResolutionService" />
 
           
 
@@ -1045,56 +978,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Style.Font" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Style.Font" />
 
             
 
-             property to specify the font properties of the Web server control. This property includes subproperties that can be accessed declaratively in the form of <paramref
-             name="Property-Subproperty" />
+             property to specify the font properties of the Web server control. This property includes subproperties that can be accessed declaratively in the form of <paramref name="Property-Subproperty" />
 
             
 
-             (for example Font-Bold) or programmatically in the form of <paramref
-             name="Property.Subproperty" />
+             (for example Font-Bold) or programmatically in the form of <paramref name="Property.Subproperty" />
 
             
 
              (for example Font.Bold).</para
           >
           <para
-            >All but one subproperty will render in browsers prior to Microsoft Internet Explorer version 4 for all controls. They are: <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Bold" />
+            >All but one subproperty will render in browsers prior to Microsoft Internet Explorer version 4 for all controls. They are: <see cref="P:System.Web.UI.WebControls.FontInfo.Bold" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Italic" />
+            , <see cref="P:System.Web.UI.WebControls.FontInfo.Italic" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Name" />
+            , <see cref="P:System.Web.UI.WebControls.FontInfo.Name" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Names" />
+            , <see cref="P:System.Web.UI.WebControls.FontInfo.Names" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Strikeout" />
+            , <see cref="P:System.Web.UI.WebControls.FontInfo.Strikeout" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Underline" />
+            , <see cref="P:System.Web.UI.WebControls.FontInfo.Underline" />
 
             
 
-            , and <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Size" />
+            , and <see cref="P:System.Web.UI.WebControls.FontInfo.Size" />
 
             
 
@@ -1104,8 +1027,7 @@
             <para>Although these subproperties render in browsers prior to Microsoft Internet Explorer version 4, the HTML that is rendered is different than in later browsers. Instead of rendering as style attributes, these subproperties are rendered as HTML elements, such as &lt;b&gt; and &lt;font&gt;.</para>
           </block>
           <para
-            >One subproperty that will not render on some browsers is <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Overline" />
+            >One subproperty that will not render on some browsers is <see cref="P:System.Web.UI.WebControls.FontInfo.Overline" />
 
             
 
@@ -1138,35 +1060,27 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Drawing.Color" />
-        </value>
+        <value>a <see cref="T:System.Drawing.Color" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Style.ForeColor" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Style.ForeColor" />
 
             
 
-             property to specify the foreground color of the Web server control. The foreground color is usually the color of the text. This property will render on browsers earlier than Microsoft Internet Explorer version 4 for all controls, except the <see
-             cref="T:System.Web.UI.WebControls.Image" />
+             property to specify the foreground color of the Web server control. The foreground color is usually the color of the text. This property will render on browsers earlier than Microsoft Internet Explorer version 4 for all controls, except the <see cref="T:System.Web.UI.WebControls.Image" />
 
             
 
-            , <see
-             cref="T:System.Web.UI.WebControls.AdRotator" />
+            , <see cref="T:System.Web.UI.WebControls.AdRotator" />
 
             
 
-            , <see
-             cref="T:System.Web.UI.WebControls.HyperLink" />
+            , <see cref="T:System.Web.UI.WebControls.HyperLink" />
 
             
 
-             and <see
-             cref="T:System.Web.UI.WebControls.LinkButton" />
+             and <see cref="T:System.Web.UI.WebControls.LinkButton" />
 
             
 
@@ -1217,28 +1131,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.Style.GetStyleAttributes(System.Web.UI.IUrlResolutionService)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.Style.GetStyleAttributes(System.Web.UI.IUrlResolutionService)" />
 
             
 
-             method to retrieve the <see
-             cref="T:System.Web.UI.CssStyleCollection" />
+             method to retrieve the <see cref="T:System.Web.UI.CssStyleCollection" />
 
             
 
-             object for a specified <see
-             cref="T:System.Web.UI.IUrlResolutionService" />
+             object for a specified <see cref="T:System.Web.UI.IUrlResolutionService" />
 
             
 
-            -implemented object. All classes derived from <see
-             cref="T:System.Web.UI.Control" />
+            -implemented object. All classes derived from <see cref="T:System.Web.UI.Control" />
 
             
 
-             implement <see
-             cref="T:System.Web.UI.IUrlResolutionService" />
+             implement <see cref="T:System.Web.UI.IUrlResolutionService" />
 
             
 
@@ -1248,13 +1157,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the <see
-             cref="T:System.Web.UI.CssStyleCollection" />
+            >Retrieves the <see cref="T:System.Web.UI.CssStyleCollection" />
 
             
 
-             object for the specified <see
-             cref="T:System.Web.UI.IUrlResolutionService" />
+             object for the specified <see cref="T:System.Web.UI.IUrlResolutionService" />
 
             
 
@@ -1264,8 +1171,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.CssStyleCollection" />
+            >A <see cref="T:System.Web.UI.CssStyleCollection" />
 
             
 
@@ -1289,13 +1195,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Style.Height" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Style.Height" />
 
             
 
-             property to specify or determine the height of the Web server control. This property is set with a <see
-             cref="T:System.Web.UI.WebControls.Unit" />
+             property to specify or determine the height of the Web server control. This property is set with a <see cref="T:System.Web.UI.WebControls.Unit" />
 
             
 
@@ -1358,8 +1262,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Style.IsTrackingViewState" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Style.IsTrackingViewState" />
 
             
 
@@ -1396,7 +1299,11 @@
           <para>Loads the previously saved state.</para>
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1420,18 +1327,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.Style.MergeWith(System.Web.UI.WebControls.Style)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.Style.MergeWith(System.Web.UI.WebControls.Style)" />
 
             
 
-             method to combine the style properties of the specified <see
-             cref="T:System.Web.UI.WebControls.Style" />
+             method to combine the style properties of the specified <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             with the instance of the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+             with the instance of the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
@@ -1439,13 +1343,11 @@
           >
           <block subset="none" type="note">
             <para
-              >All properties, except those that have already been set on the current instance of the Style class, will be replaced by the corresponding property of the <see
-               cref="T:System.Web.UI.WebControls.Style" />
+              >All properties, except those that have already been set on the current instance of the Style class, will be replaced by the corresponding property of the <see cref="T:System.Web.UI.WebControls.Style" />
 
               
 
-               specified by the <paramref
-               name="s" />
+               specified by the <paramref name="s" />
 
               
 
@@ -1456,13 +1358,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Combines the style properties of the specified <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >Combines the style properties of the specified <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             with the instance of the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+             with the instance of the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
@@ -1470,12 +1370,15 @@
           >
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.Style" />
+          A <see cref="T:System.Web.UI.WebControls.Style" />
 
           
 
@@ -1512,16 +1415,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Style.RegisteredCssClass" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Style.RegisteredCssClass" />
 
             
 
              property to retrieve the CSS class that is registered with the control.</para
           >
           <para
-            >A style is registered on the current page with a <see
-             cref="M:System.Web.UI.IStyleSheet.RegisterStyle(System.Web.UI.WebControls.Style,System.Web.UI.IUrlResolutionService)" />
+            >A style is registered on the current page with a <see cref="M:System.Web.UI.IStyleSheet.RegisterStyle(System.Web.UI.WebControls.Style,System.Web.UI.IUrlResolutionService)" />
 
             
 
@@ -1572,8 +1473,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A protected method. Saves any state that has been modified after the <see
-             cref="M:System.Web.UI.WebControls.Style.TrackViewState" />
+            >A protected method. Saves any state that has been modified after the <see cref="M:System.Web.UI.WebControls.Style.TrackViewState" />
 
             
 
@@ -1606,7 +1506,11 @@
           <para>A protected internal method. Sets an internal bitmask field that indicates the style properties that are stored in the state bag.</para>
         </summary>
         <param name="bit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1628,23 +1532,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Style.SetDirty" />
+            >The <see cref="M:System.Web.UI.WebControls.Style.SetDirty" />
 
             
 
-             method is called directly by the <see
-             cref="M:System.Web.UI.WebControls.StyleCollection.SetDirtyObject(System.Object)" />
+             method is called directly by the <see cref="M:System.Web.UI.WebControls.StyleCollection.SetDirtyObject(System.Object)" />
 
             
 
-             method of a <see
-             cref="T:System.Web.UI.WebControls.StyleCollection" />
+             method of a <see cref="T:System.Web.UI.WebControls.StyleCollection" />
 
             
 
-            , to mark a <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            , to mark a <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
@@ -1654,8 +1554,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Marks the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >Marks the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
@@ -1682,13 +1581,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IStateManager" />
+             instance is cast to an <see cref="T:System.Web.UI.IStateManager" />
 
             
 
@@ -1718,13 +1615,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IStateManager" />
+             instance is cast to an <see cref="T:System.Web.UI.IStateManager" />
 
             
 
@@ -1736,7 +1631,11 @@
           <para>Loads the previously saved state.</para>
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1759,13 +1658,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IStateManager" />
+             instance is cast to an <see cref="T:System.Web.UI.IStateManager" />
 
             
 
@@ -1797,13 +1694,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IStateManager" />
+             instance is cast to an <see cref="T:System.Web.UI.IStateManager" />
 
             
 
@@ -1902,13 +1797,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Style.Width" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Style.Width" />
 
             
 
-             property to specify or determine the width of the Web server control. This property is set with a <see
-             cref="T:System.Web.UI.WebControls.Unit" />
+             property to specify or determine the width of the Web server control. This property is set with a <see cref="T:System.Web.UI.WebControls.Unit" />
 
             
 

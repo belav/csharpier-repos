@@ -25,26 +25,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.MessageHeaderAttribute" />
+        >The <see cref="T:System.ServiceModel.MessageHeaderAttribute" />
 
         
 
-         attribute allows you to map fields and properties of a type marked with the <see
-         cref="T:System.ServiceModel.MessageContractAttribute" />
+         attribute allows you to map fields and properties of a type marked with the <see cref="T:System.ServiceModel.MessageContractAttribute" />
 
         
 
          attribute to SOAP message headers. The field or property can be of a simple type or a composite type that can be serialized. </para
       >
       <para
-        >For information on controlling the serialization of the contents of a SOAP body without modifying the default SOAP envelope itself, see <see
-         cref="T:System.Runtime.Serialization.DataContractAttribute" />
+        >For information on controlling the serialization of the contents of a SOAP body without modifying the default SOAP envelope itself, see <see cref="T:System.Runtime.Serialization.DataContractAttribute" />
 
         
 
-        , <format
-         type="text/html">
+        , <format type="text/html">
           <a href="7c5a26c8-89c9-4bcb-a4bc-7131e6d01f0c"
             >Specifying Data Transfer in Service Contracts</a
           >
@@ -52,8 +48,7 @@
 
         
 
-        , and <format
-         type="text/html">
+        , and <format type="text/html">
           <a href="a3ae7b21-c15c-4c05-abd8-f483bcbf31af">Data Contracts Overview</a>
         </format>
 
@@ -62,8 +57,7 @@
         .</para
       >
       <para
-        >For more information about creating message contracts, see <format
-         type="text/html">
+        >For more information about creating message contracts, see <format type="text/html">
           <a href="1e19c64a-ae84-4c2f-9155-91c54a77c249">Using Message Contracts</a>
         </format>
 
@@ -85,28 +79,23 @@
       </list>
       <para>The Actor or Role attribute specifies the URI of the node for which a given header is intended. The MustUnderstand attribute specifies whether the header understands the node processing. The Relay attribute specifies whether the header is to be relayed to downstream nodes. indigo1 does not perform any processing of these attributes on incoming messages, except for the MustUnderstand attribute. </para>
       <para
-        >You can, however, read and write these attributes, even though they are not sent by default. You can set the attribute values in two ways. First, you can change the <see
-         cref="P:System.ServiceModel.MessageHeaderAttribute.Actor" />
+        >You can, however, read and write these attributes, even though they are not sent by default. You can set the attribute values in two ways. First, you can change the <see cref="P:System.ServiceModel.MessageHeaderAttribute.Actor" />
 
         
 
-        , <see
-         cref="P:System.ServiceModel.MessageHeaderAttribute.MustUnderstand" />
+        , <see cref="P:System.ServiceModel.MessageHeaderAttribute.MustUnderstand" />
 
         
 
-         and <see
-         cref="P:System.ServiceModel.MessageHeaderAttribute.Relay" />
+         and <see cref="P:System.ServiceModel.MessageHeaderAttribute.Relay" />
 
         
 
-         properties on the <see
-         cref="T:System.ServiceModel.MessageHeaderAttribute" />
+         properties on the <see cref="T:System.ServiceModel.MessageHeaderAttribute" />
 
         
 
-        . (There is no Role property – set the <see
-         cref="P:System.ServiceModel.MessageHeaderAttribute.Actor" />
+        . (There is no Role property – set the <see cref="P:System.ServiceModel.MessageHeaderAttribute.Actor" />
 
         
 
@@ -114,18 +103,15 @@
       >
       <para>code reference: MessageHeaderAttribute#7</para>
       <para
-        >The second way to control these attributes is by making the desired header type the type parameter of the <see
-         cref="T:System.ServiceModel.MessageHeader`1" />
+        >The second way to control these attributes is by making the desired header type the type parameter of the <see cref="T:System.ServiceModel.MessageHeader`1" />
 
         
 
-         class and using the resulting type together with the <see
-         cref="T:System.ServiceModel.MessageHeaderAttribute" />
+         class and using the resulting type together with the <see cref="T:System.ServiceModel.MessageHeaderAttribute" />
 
         
 
-        . Then use the <see
-         cref="T:System.ServiceModel.MessageHeader`1" />
+        . Then use the <see cref="T:System.ServiceModel.MessageHeader`1" />
 
         
 
@@ -139,36 +125,30 @@
       <para>Creating repeated headers with dynamic attribute control is allowed. For example:</para>
       <code>[MessageHeaderArray] public MessageHeader&lt;Person&gt; documentApprovers[];</code>
       <para
-        >On the receiving side, reading these SOAP attributes can only be done if the generic <see
-         cref="T:System.ServiceModel.MessageHeader`1" />
+        >On the receiving side, reading these SOAP attributes can only be done if the generic <see cref="T:System.ServiceModel.MessageHeader`1" />
 
         
 
-         class is used. Examine the <see
-         cref="P:System.ServiceModel.MessageHeader`1.Actor" />
+         class is used. Examine the <see cref="P:System.ServiceModel.MessageHeader`1.Actor" />
 
         
 
-        , <see
-         cref="P:System.ServiceModel.MessageHeader`1.Relay" />
+        , <see cref="P:System.ServiceModel.MessageHeader`1.Relay" />
 
         
 
-         or <see
-         cref="P:System.ServiceModel.MessageHeader`1.MustUnderstand" />
+         or <see cref="P:System.ServiceModel.MessageHeader`1.MustUnderstand" />
 
         
 
-         properties of a header of the <see
-         cref="T:System.ServiceModel.MessageHeader`1" />
+         properties of a header of the <see cref="T:System.ServiceModel.MessageHeader`1" />
 
         
 
          type to discover the attribute settings on the received message.</para
       >
       <para
-        >When a message is received and then sent back, the SOAP attribute settings only roundtrip for headers of the <see
-         cref="T:System.ServiceModel.MessageHeader`1" />
+        >When a message is received and then sent back, the SOAP attribute settings only roundtrip for headers of the <see cref="T:System.ServiceModel.MessageHeader`1" />
 
         
 
@@ -197,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.MessageHeaderAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MessageHeaderAttribute" />
 
             
 
@@ -222,8 +201,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see the Remarks section of <see
-             cref="T:System.ServiceModel.MessageHeaderAttribute" />
+            >For more information, see the Remarks section of <see cref="T:System.ServiceModel.MessageHeaderAttribute" />
 
             
 
@@ -251,8 +229,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see the Remarks section of <see
-             cref="T:System.ServiceModel.MessageHeaderAttribute" />
+            >For more information, see the Remarks section of <see cref="T:System.ServiceModel.MessageHeaderAttribute" />
 
             
 
@@ -260,8 +237,7 @@
           >
           <block subset="none" type="note">
             <para
-              >It is important to remember that if the <see
-               cref="P:System.ServiceModel.MessageHeaderAttribute.MustUnderstand" />
+              >It is important to remember that if the <see cref="P:System.ServiceModel.MessageHeaderAttribute.MustUnderstand" />
 
               
 
@@ -272,8 +248,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies whether the node acting in the <see
-             cref="P:System.ServiceModel.MessageHeaderAttribute.Actor" />
+            >Specifies whether the node acting in the <see cref="P:System.ServiceModel.MessageHeaderAttribute.Actor" />
 
             
 
@@ -297,8 +272,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is ignored when SOAP 1.1 is used. For more information, see the Remarks section of <see
-             cref="T:System.ServiceModel.MessageHeaderAttribute" />
+            >This property is ignored when SOAP 1.1 is used. For more information, see the Remarks section of <see cref="T:System.ServiceModel.MessageHeaderAttribute" />
 
             
 

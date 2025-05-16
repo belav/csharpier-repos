@@ -17,13 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An instance of the <see
-         cref="T:System.Web.Security.MembershipCreateUserException" />
+        >An instance of the <see cref="T:System.Web.Security.MembershipCreateUserException" />
 
         
 
-         class is thrown when a <see
-         cref="Overload:System.Web.Security.Membership.CreateUser" />
+         class is thrown when a <see cref="Overload:System.Web.Security.Membership.CreateUser" />
 
         
 
@@ -31,15 +29,13 @@
       >
       <block subset="none" type="note">
         <para
-          >If you are not familiar with the membership features of ASP.NET, see <format
-           type="text/html">
+          >If you are not familiar with the membership features of ASP.NET, see <format type="text/html">
             <a href="79184d17-f4c7-4c9f-a073-cec4f5543980">Introduction to Membership</a>
           </format>
 
           
 
-           before continuing. For a list of other topics related to membership, see <format
-           type="text/html">
+           before continuing. For a list of other topics related to membership, see <format type="text/html">
             <a href="824c3a24-f0af-427c-a652-0d2d1e9397cd">Managing Users By Using Membership</a>
           </format>
 
@@ -49,8 +45,7 @@
         >
       </block>
       <para
-        >The <see
-         cref="P:System.Web.Security.MembershipCreateUserException.StatusCode" />
+        >The <see cref="P:System.Web.Security.MembershipCreateUserException.StatusCode" />
 
         
 
@@ -72,13 +67,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.Web.Security.MembershipCreateUserException" />
+            >An instance of the <see cref="T:System.Web.Security.MembershipCreateUserException" />
 
             
 
-             class is thrown by the <see
-             cref="M:System.Web.Security.Membership.CreateUser(System.String,System.String)" />
+             class is thrown by the <see cref="M:System.Web.Security.Membership.CreateUser(System.String,System.String)" />
 
             
 
@@ -88,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Security.MembershipCreateUserException" />
+            >Initializes a new instance of the <see cref="T:System.Web.Security.MembershipCreateUserException" />
 
             
 
@@ -115,26 +107,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Security.MembershipCreateUserException" />
+            >The <see cref="T:System.Web.Security.MembershipCreateUserException" />
 
             
 
-             class is thrown by the <see
-             cref="M:System.Web.Security.Membership.CreateUser(System.String,System.String)" />
+             class is thrown by the <see cref="M:System.Web.Security.Membership.CreateUser(System.String,System.String)" />
 
             
 
              method when the user is not created.</para
           >
           <para
-            >You can use the <paramref
-             name="message" />
+            >You can use the <paramref name="message" />
 
             
 
-             parameter to set the <see
-             cref="P:System.Exception.Message" />
+             parameter to set the <see cref="P:System.Exception.Message" />
 
             
 
@@ -144,18 +132,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Security.MembershipCreateUserException" />
+            >Initializes a new instance of the <see cref="T:System.Web.Security.MembershipCreateUserException" />
 
             
 
-             class and sets the <see
-             cref="P:System.Exception.Message" />
+             class and sets the <see cref="P:System.Exception.Message" />
 
             
 
-             property to the supplied <paramref
-             name="message" />
+             property to the supplied <paramref name="message" />
 
             
 
@@ -163,7 +148,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -188,36 +177,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Security.MembershipCreateUserException" />
+            >The <see cref="T:System.Web.Security.MembershipCreateUserException" />
 
             
 
-             class is thrown by the <see
-             cref="M:System.Web.Security.Membership.CreateUser(System.String,System.String)" />
+             class is thrown by the <see cref="M:System.Web.Security.Membership.CreateUser(System.String,System.String)" />
 
             
 
              method when the user is not created.</para
           >
           <para
-            >The <paramref
-             name="statusCode" />
+            >The <paramref name="statusCode" />
 
             
 
-             parameter enables you to indicate why the <see
-             cref="T:System.Web.Security.MembershipCreateUserException" />
+             parameter enables you to indicate why the <see cref="T:System.Web.Security.MembershipCreateUserException" />
 
             
 
-             was thrown. The <paramref
-             name="statusCode" />
+             was thrown. The <paramref name="statusCode" />
 
             
 
-             parameter value is exposed by the <see
-             cref="P:System.Web.Security.MembershipCreateUserException.StatusCode" />
+             parameter value is exposed by the <see cref="P:System.Web.Security.MembershipCreateUserException.StatusCode" />
 
             
 
@@ -227,13 +210,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Security.MembershipCreateUserException" />
+            >Initializes a new instance of the <see cref="T:System.Web.Security.MembershipCreateUserException" />
 
             
 
-             class with the specified <see
-             cref="P:System.Web.Security.MembershipCreateUserException.StatusCode" />
+             class with the specified <see cref="P:System.Web.Security.MembershipCreateUserException.StatusCode" />
 
             
 
@@ -241,12 +222,15 @@
           >
         </summary>
         <param name="statusCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Security.MembershipCreateStatus" />
+          A <see cref="T:System.Web.Security.MembershipCreateStatus" />
 
           
 
@@ -272,8 +256,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format
-             type="text/html">
+            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format type="text/html">
               <a href="832ac524-21bc-419a-a27b-ca8bfc45840f">XML and SOAP Serialization</a>
             </format>
 
@@ -285,8 +268,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Security.MembershipCreateUserException" />
+            >Initializes a new instance of the <see cref="T:System.Web.Security.MembershipCreateUserException" />
 
             
 
@@ -294,24 +276,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -337,21 +325,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.Web.Security.MembershipCreateUserException" />
+            >An instance of the <see cref="T:System.Web.Security.MembershipCreateUserException" />
 
             
 
-             class is thrown by the <see
-             cref="M:System.Web.Security.Membership.CreateUser(System.String,System.String)" />
+             class is thrown by the <see cref="M:System.Web.Security.Membership.CreateUser(System.String,System.String)" />
 
             
 
              method when the user is not created.</para
           >
           <para
-            >You can use this overload of the <see
-             cref="T:System.Web.Security.MembershipCreateUserException" />
+            >You can use this overload of the <see cref="T:System.Web.Security.MembershipCreateUserException" />
 
             
 
@@ -361,28 +346,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Security.MembershipCreateUserException" />
+            >Initializes a new instance of the <see cref="T:System.Web.Security.MembershipCreateUserException" />
 
             
 
-             class and sets the <see
-             cref="P:System.Exception.Message" />
+             class and sets the <see cref="P:System.Exception.Message" />
 
             
 
-             property to the supplied <paramref
-             name="message" />
+             property to the supplied <paramref name="message" />
 
             
 
-             and the <see
-             cref="P:System.Exception.InnerException" />
+             and the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property to the supplied <paramref
-             name="innerException" />
+             property to the supplied <paramref name="innerException" />
 
             
 
@@ -390,19 +370,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A description of the reason for the exception.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that caused the <see
-           cref="T:System.Web.Security.MembershipCreateUserException" />
+          The exception that caused the <see cref="T:System.Web.Security.MembershipCreateUserException" />
 
           
 
@@ -432,8 +419,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any objects included in the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Any objects included in the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -443,8 +429,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -452,12 +437,15 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
@@ -483,13 +471,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Security.MembershipCreateUserException.StatusCode" />
+            >The <see cref="P:System.Web.Security.MembershipCreateUserException.StatusCode" />
 
             
 
-             property enables you to determine why the <see
-             cref="T:System.Web.Security.MembershipCreateUserException" />
+             property enables you to determine why the <see cref="T:System.Web.Security.MembershipCreateUserException" />
 
             
 

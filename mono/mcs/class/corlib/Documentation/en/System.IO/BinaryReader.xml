@@ -30,26 +30,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.IO.BinaryReader" />
+        >The <see cref="T:System.IO.BinaryReader" />
 
         
 
-         class provides methods that simplify reading primitive data types from a stream. For example, you can use the <see
-         cref="M:System.IO.BinaryReader.ReadBoolean" />
+         class provides methods that simplify reading primitive data types from a stream. For example, you can use the <see cref="M:System.IO.BinaryReader.ReadBoolean" />
 
         
 
          method to read the next byte as a Boolean value and advance the current position in the stream by one byte. The class includes read methods that support different data types. </para
       >
       <para
-        >When you create a new instance of the <see
-         cref="T:System.IO.BinaryReader" />
+        >When you create a new instance of the <see cref="T:System.IO.BinaryReader" />
 
         
 
-         class, you provide the stream to read from, and optionally specify the type of encoding and whether to leave the stream open after disposing the <see
-         cref="T:System.IO.BinaryReader" />
+         class, you provide the stream to read from, and optionally specify the type of encoding and whether to leave the stream open after disposing the <see cref="T:System.IO.BinaryReader" />
 
         
 
@@ -82,8 +78,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -95,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.BinaryReader" />
+            >Initializes a new instance of the <see cref="T:System.IO.BinaryReader" />
 
             
 
@@ -104,7 +98,11 @@
           >
         </summary>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -136,8 +134,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -149,8 +146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.BinaryReader" />
+            >Initializes a new instance of the <see cref="T:System.IO.BinaryReader" />
 
             
 
@@ -158,14 +154,22 @@
           >
         </summary>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The input stream. </param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -196,8 +200,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.BinaryReader" />
+            >Initializes a new instance of the <see cref="T:System.IO.BinaryReader" />
 
             
 
@@ -205,26 +208,37 @@
           >
         </summary>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The input stream.</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character encoding to use.</param
         >
         <param name="leaveOpen">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to leave the stream open after the <see
-           cref="T:System.IO.BinaryReader" />
+          true to leave the stream open after the <see cref="T:System.IO.BinaryReader" />
 
           
 
@@ -255,8 +269,7 @@
             <para>Using the underlying stream while reading or while using the BinaryReader can cause data loss and corruption. For example, the same bytes might be read more than once, bytes might be skipped, or character reading might become unpredictable.</para>
           </block>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -268,8 +281,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Exposes access to the underlying stream of the <see
-             cref="T:System.IO.BinaryReader" />
+            >Exposes access to the underlying stream of the <see cref="T:System.IO.BinaryReader" />
 
             
 
@@ -298,21 +310,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This implementation of Close calls the <see
-             cref="M:System.IO.BinaryReader.Dispose(System.Boolean)" />
+            >This implementation of Close calls the <see cref="M:System.IO.BinaryReader.Dispose(System.Boolean)" />
 
             
 
              method passing a true value.</para
           >
           <para
-            >Flushing the stream will not flush its underlying encoder unless you explicitly call <see
-             cref="M:System.IO.Stream.Flush" />
+            >Flushing the stream will not flush its underlying encoder unless you explicitly call <see cref="M:System.IO.Stream.Flush" />
 
             
 
-             or Close. Setting <see
-             cref="P:System.IO.StreamWriter.AutoFlush" />
+             or Close. Setting <see cref="P:System.IO.StreamWriter.AutoFlush" />
 
             
 
@@ -343,38 +352,32 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call Dispose when you are finished using the <see
-             cref="T:System.IO.BinaryReader" />
+            >Call Dispose when you are finished using the <see cref="T:System.IO.BinaryReader" />
 
             
 
-            . The Dispose method leaves the <see
-             cref="T:System.IO.BinaryReader" />
+            . The Dispose method leaves the <see cref="T:System.IO.BinaryReader" />
 
             
 
-             in an unusable state. After calling Dispose, you must release all references to the <see
-             cref="T:System.IO.BinaryReader" />
+             in an unusable state. After calling Dispose, you must release all references to the <see cref="T:System.IO.BinaryReader" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.IO.BinaryReader" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.IO.BinaryReader" />
 
             
 
              was occupying.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -384,13 +387,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call Dispose before you release your last reference to the <see
-               cref="T:System.IO.BinaryReader" />
+              >Always call Dispose before you release your last reference to the <see cref="T:System.IO.BinaryReader" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.IO.BinaryReader" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.IO.BinaryReader" />
 
               
 
@@ -401,8 +402,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the current instance of the <see
-             cref="T:System.IO.BinaryReader" />
+            >Releases all resources used by the current instance of the <see cref="T:System.IO.BinaryReader" />
 
             
 
@@ -433,36 +433,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by Dispose and <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by Dispose and <see cref="M:System.Object.Finalize" />
 
             
 
-            . By default, this method specifies the <paramref
-             name="disposing" />
+            . By default, this method specifies the <paramref name="disposing" />
 
             
 
-             parameter as true. <see
-             cref="M:System.Object.Finalize" />
+             parameter as true. <see cref="M:System.Object.Finalize" />
 
             
 
-             specifies the <paramref
-             name="disposing" />
+             specifies the <paramref name="disposing" />
 
             
 
              parameter as false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.IO.BinaryReader" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.IO.BinaryReader" />
 
             
 
@@ -472,8 +466,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.IO.BinaryReader" />
+            >Releases the unmanaged resources used by the <see cref="T:System.IO.BinaryReader" />
 
             
 
@@ -481,7 +474,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -511,16 +508,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The internal buffer size is the larger value between 16 and the value returned by <see
-             cref="M:System.Text.Encoding.GetMaxByteCount(System.Int32)" />
+            >The internal buffer size is the larger value between 16 and the value returned by <see cref="M:System.Text.Encoding.GetMaxByteCount(System.Int32)" />
 
             
 
              for the specified encoding.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -534,7 +529,11 @@
           <para>Fills the internal buffer with the specified number of bytes read from the stream.</para>
         </summary>
         <param name="numBytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -562,16 +561,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If surrogate characters can be expected in the stream use the <see
-             cref="M:System.IO.BinaryReader.ReadChars(System.Int32)" />
+            >If surrogate characters can be expected in the stream use the <see cref="M:System.IO.BinaryReader.ReadChars(System.Int32)" />
 
             
 
              method, then set the stream back to the original position.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -617,8 +614,7 @@
              does not restore the file position after an unsuccessful read.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -671,8 +667,7 @@
              does not restore the file position after an unsuccessful read operation.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -688,8 +683,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of bytes read into <paramref
-             name="buffer" />
+            >The number of bytes read into <paramref name="buffer" />
 
             
 
@@ -697,21 +691,33 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer to read data into. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The starting point in the buffer at which to begin reading into the buffer. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -753,8 +759,7 @@
              does not restore the file position after an unsuccessful read operation.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -772,21 +777,33 @@
           <para>The total number of characters read into the buffer. This might be less than the number of characters requested if that many characters are not currently available, or it might be zero if the end of the stream is reached.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer to read data into. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The starting point in the buffer at which to begin reading into the buffer. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -821,16 +838,14 @@
              does not restore the file position after an unsuccessful read.</para
           >
           <para
-            >If the integer will fit in seven bits, the integer takes only one byte of space. The integer is expected to have been written through <see
-             cref="M:System.IO.BinaryWriter.Write7BitEncodedInt(System.Int32)" />
+            >If the integer will fit in seven bits, the integer takes only one byte of space. The integer is expected to have been written through <see cref="M:System.IO.BinaryWriter.Write7BitEncodedInt(System.Int32)" />
 
             
 
             .</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -876,8 +891,7 @@
              does not restore the file position after an unsuccessful read.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -935,8 +949,7 @@
             </item>
           </list>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -984,8 +997,7 @@
              does not restore the file position after an unsuccessful read operation.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1003,7 +1015,11 @@
           <para>A byte array containing data read from the underlying stream. This might be less than the number of bytes requested if the end of the stream is reached.</para>
         </returns>
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1031,18 +1047,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="M:System.IO.BinaryReader.ReadChar" />
+            >If the <see cref="M:System.IO.BinaryReader.ReadChar" />
 
             
 
-             method attempts to read a surrogate character in the stream an exception will be raised and the position in the stream will advance. The position is restored to the original location before <see
-             cref="M:System.IO.BinaryReader.ReadChar" />
+             method attempts to read a surrogate character in the stream an exception will be raised and the position in the stream will advance. The position is restored to the original location before <see cref="M:System.IO.BinaryReader.ReadChar" />
 
             
 
-             was called if the stream is seekable; however, if the stream is unseekable, the position will not be corrected. If surrogate characters can be expected in the stream, use the <see
-             cref="M:System.IO.BinaryReader.ReadChars(System.Int32)" />
+             was called if the stream is seekable; however, if the stream is unseekable, the position will not be corrected. If surrogate characters can be expected in the stream, use the <see cref="M:System.IO.BinaryReader.ReadChars(System.Int32)" />
 
             
 
@@ -1061,8 +1074,7 @@
             </item>
           </list>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1110,23 +1122,19 @@
              does not restore the file position after an unsuccessful read operation.</para
           >
           <para
-            >When reading from network streams, in some rare cases, the <see
-             cref="M:System.IO.BinaryReader.ReadChars(System.Int32)" />
+            >When reading from network streams, in some rare cases, the <see cref="M:System.IO.BinaryReader.ReadChars(System.Int32)" />
 
             
 
-             method might read an extra character from the stream if the <see
-             cref="T:System.IO.BinaryReader" />
+             method might read an extra character from the stream if the <see cref="T:System.IO.BinaryReader" />
 
             
 
-             was constructed with Unicode encoding. If this occurs, you can use the <see
-             cref="M:System.IO.BinaryReader.ReadBytes(System.Int32)" />
+             was constructed with Unicode encoding. If this occurs, you can use the <see cref="M:System.IO.BinaryReader.ReadBytes(System.Int32)" />
 
             
 
-             method to read a fixed-length byte array, and then pass that array to the <see
-             cref="M:System.IO.BinaryReader.ReadChars(System.Int32)" />
+             method to read a fixed-length byte array, and then pass that array to the <see cref="M:System.IO.BinaryReader.ReadChars(System.Int32)" />
 
             
 
@@ -1142,7 +1150,11 @@
           <para>A character array containing data read from the underlying stream. This might be less than the number of characters requested if the end of the stream is reached.</para>
         </returns>
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1177,8 +1189,7 @@
              does not restore the file position after an unsuccessful read.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1225,8 +1236,7 @@
           >
           <para>BinaryReader reads this data type in little-endian format.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1273,8 +1283,7 @@
           >
           <para>BinaryReader reads this data type in little-endian format.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1327,8 +1336,7 @@
              reads this data type in little-endian format.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1375,8 +1383,7 @@
           >
           <para>BinaryReader reads this data type in little-endian format.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1427,8 +1434,7 @@
              does not restore the file position after an unsuccessful read.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1475,8 +1481,7 @@
           >
           <para>BinaryReader reads this data type in little-endian format.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1522,8 +1527,7 @@
              does not restore the file position after an unsuccessful read.</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1575,8 +1579,7 @@
           >
           <para>BinaryReader reads this data type in little-endian format.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1628,8 +1631,7 @@
           >
           <para>BinaryReader reads this data type in little-endian format.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1681,8 +1683,7 @@
           >
           <para>BinaryReader reads this data type in little-endian format.</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1712,13 +1713,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.IO.BinaryReader" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.IO.BinaryReader" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IDisposable" />
+             instance is cast to an <see cref="T:System.IDisposable" />
 
             
 
@@ -1728,8 +1727,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.IO.BinaryReader" />
+            >Releases all resources used by the <see cref="T:System.IO.BinaryReader" />
 
             
 

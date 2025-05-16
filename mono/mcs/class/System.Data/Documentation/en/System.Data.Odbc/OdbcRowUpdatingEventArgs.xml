@@ -17,21 +17,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Data.Odbc.OdbcDataAdapter.RowUpdating" />
+        >The <see cref="E:System.Data.Odbc.OdbcDataAdapter.RowUpdating" />
 
         
 
          event is raised before an update to a row.</para
       >
       <para
-        >When using the Update method, there are two events that occur for each data row updated: <see
-         cref="E:System.Data.Odbc.OdbcDataAdapter.RowUpdating" />
+        >When using the Update method, there are two events that occur for each data row updated: <see cref="E:System.Data.Odbc.OdbcDataAdapter.RowUpdating" />
 
         
 
-         and <see
-         cref="E:System.Data.Odbc.OdbcDataAdapter.RowUpdated" />
+         and <see cref="E:System.Data.Odbc.OdbcDataAdapter.RowUpdated" />
 
         
 
@@ -40,8 +37,7 @@
       <list type="ordered">
         <item>
           <para
-            >The values in the <see
-             cref="T:System.Data.DataRow" />
+            >The values in the <see cref="T:System.Data.DataRow" />
 
             
 
@@ -50,8 +46,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
+            >The <see cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
 
             
 
@@ -63,8 +58,7 @@
         </item>
         <item>
           <para
-            >If the command is set to FirstReturnedRecord, then the first returned result is placed in the <see
-             cref="T:System.Data.DataRow" />
+            >If the command is set to FirstReturnedRecord, then the first returned result is placed in the <see cref="T:System.Data.DataRow" />
 
             
 
@@ -73,8 +67,7 @@
         </item>
         <item>
           <para
-            >If there are output parameters, they are placed in the <see
-             cref="T:System.Data.DataRow" />
+            >If there are output parameters, they are placed in the <see cref="T:System.Data.DataRow" />
 
             
 
@@ -83,8 +76,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" />
+            >The <see cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" />
 
             
 
@@ -105,8 +97,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Data.Odbc.OdbcDataAdapter.RowUpdating" />
+        >Provides data for the <see cref="E:System.Data.Odbc.OdbcDataAdapter.RowUpdating" />
 
         
 
@@ -132,8 +123,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Odbc.OdbcRowUpdatingEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Data.Odbc.OdbcRowUpdatingEventArgs" />
 
             
 
@@ -141,53 +131,64 @@
           >
         </summary>
         <param name="row">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataRow" />
+          The <see cref="T:System.Data.DataRow" />
 
           
 
            to update. </param
         >
         <param name="command">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.Odbc.OdbcCommand" />
+          The <see cref="T:System.Data.Odbc.OdbcCommand" />
 
           
 
            to execute during the update operation. </param
         >
         <param name="statementType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.StatementType" />
+          One of the <see cref="T:System.Data.StatementType" />
 
           
 
            values that specifies the type of query executed. </param
         >
         <param name="tableMapping">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.Common.DataTableMapping" />
+          The <see cref="T:System.Data.Common.DataTableMapping" />
 
           
 
-           sent through <see
-           cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+           sent through <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
           
 
@@ -232,13 +233,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+            >Gets or sets the <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
-             to execute when <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+             to execute when <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 

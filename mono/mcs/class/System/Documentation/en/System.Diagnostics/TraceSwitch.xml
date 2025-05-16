@@ -31,69 +31,57 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can use a trace switch to filter out messages based on their importance. The <see
-         cref="T:System.Diagnostics.TraceSwitch" />
+        >You can use a trace switch to filter out messages based on their importance. The <see cref="T:System.Diagnostics.TraceSwitch" />
 
         
 
-         class provides the <see
-         cref="P:System.Diagnostics.TraceSwitch.TraceError" />
+         class provides the <see cref="P:System.Diagnostics.TraceSwitch.TraceError" />
 
         
 
-        , <see
-         cref="P:System.Diagnostics.TraceSwitch.TraceWarning" />
+        , <see cref="P:System.Diagnostics.TraceSwitch.TraceWarning" />
 
         
 
-        , <see
-         cref="P:System.Diagnostics.TraceSwitch.TraceInfo" />
+        , <see cref="P:System.Diagnostics.TraceSwitch.TraceInfo" />
 
         
 
-        , and <see
-         cref="P:System.Diagnostics.TraceSwitch.TraceVerbose" />
+        , and <see cref="P:System.Diagnostics.TraceSwitch.TraceVerbose" />
 
         
 
-         properties to test the level of the switch. The <see
-         cref="P:System.Diagnostics.TraceSwitch.Level" />
+         properties to test the level of the switch. The <see cref="P:System.Diagnostics.TraceSwitch.Level" />
 
         
 
-         property gets or sets the switch's <see
-         cref="T:System.Diagnostics.TraceLevel" />
+         property gets or sets the switch's <see cref="T:System.Diagnostics.TraceLevel" />
 
         
 
         .</para
       >
       <para
-        >You can set the level of a <see
-         cref="T:System.Diagnostics.TraceSwitch" />
+        >You can set the level of a <see cref="T:System.Diagnostics.TraceSwitch" />
 
         
 
-         through the application configuration file and then use the configured <see
-         cref="T:System.Diagnostics.TraceSwitch" />
+         through the application configuration file and then use the configured <see cref="T:System.Diagnostics.TraceSwitch" />
 
         
 
-         level in your application. Alternately, you can create a <see
-         cref="T:System.Diagnostics.TraceSwitch" />
+         level in your application. Alternately, you can create a <see cref="T:System.Diagnostics.TraceSwitch" />
 
         
 
          in your code and set the level directly to instrument a specific section of code.</para
       >
       <para
-        >To configure a <see
-         cref="T:System.Diagnostics.TraceSwitch" />
+        >To configure a <see cref="T:System.Diagnostics.TraceSwitch" />
 
         
 
-        , edit the  <format
-         type="text/html">
+        , edit the  <format type="text/html">
           <a href="86bd26d3-737e-4484-9782-19b17f34cd1f">configuration file</a>
         </format>
 
@@ -109,23 +97,19 @@
   &lt;/system.diagnostics&gt;
 &lt;/configuration&gt;</code>
       <para
-        >This configuration section defines a <see
-         cref="T:System.Diagnostics.TraceSwitch" />
+        >This configuration section defines a <see cref="T:System.Diagnostics.TraceSwitch" />
 
         
 
-         with the <see
-         cref="P:System.Diagnostics.Switch.DisplayName" />
+         with the <see cref="P:System.Diagnostics.Switch.DisplayName" />
 
         
 
-         set to mySwitch, and the <see
-         cref="P:System.Diagnostics.TraceSwitch.Level" />
+         set to mySwitch, and the <see cref="P:System.Diagnostics.TraceSwitch.Level" />
 
         
 
-         set to 1, which corresponds to the enumeration value <see
-         cref="F:System.Diagnostics.TraceLevel.Error" />
+         set to 1, which corresponds to the enumeration value <see cref="F:System.Diagnostics.TraceLevel.Error" />
 
         
 
@@ -133,13 +117,11 @@
       >
       <block subset="none" type="note">
         <para
-          >In the .NET Framework version 2.0, you can use text to specify the value for a switch. For example, true for a <see
-           cref="T:System.Diagnostics.BooleanSwitch" />
+          >In the .NET Framework version 2.0, you can use text to specify the value for a switch. For example, true for a <see cref="T:System.Diagnostics.BooleanSwitch" />
 
           
 
-           or the text representing an enumeration value, such as Error for a <see
-           cref="T:System.Diagnostics.TraceSwitch" />
+           or the text representing an enumeration value, such as Error for a <see cref="T:System.Diagnostics.TraceSwitch" />
 
           
 
@@ -147,8 +129,7 @@
         >
       </block>
       <para
-        > In your application, you can use the configured switch level by creating a <see
-         cref="T:System.Diagnostics.TraceSwitch" />
+        > In your application, you can use the configured switch level by creating a <see cref="T:System.Diagnostics.TraceSwitch" />
 
         
 
@@ -156,23 +137,19 @@
       >
       <para>code reference: Classic TraceSwitch.TraceError Example#3</para>
       <para
-        >By default, the switch <see
-         cref="P:System.Diagnostics.TraceSwitch.Level" />
+        >By default, the switch <see cref="P:System.Diagnostics.TraceSwitch.Level" />
 
         
 
-         property is set using the value specified in the configuration file. If the <see
-         cref="Overload:System.Diagnostics.TraceSwitch.#ctor" />
+         property is set using the value specified in the configuration file. If the <see cref="Overload:System.Diagnostics.TraceSwitch.#ctor" />
 
         
 
-         constructor cannot find initial switch settings in the configuration file, the <see
-         cref="P:System.Diagnostics.TraceSwitch.Level" />
+         constructor cannot find initial switch settings in the configuration file, the <see cref="P:System.Diagnostics.TraceSwitch.Level" />
 
         
 
-         of the new switch defaults to <see
-         cref="F:System.Diagnostics.TraceLevel.Off" />
+         of the new switch defaults to <see cref="F:System.Diagnostics.TraceLevel.Off" />
 
         
 
@@ -189,18 +166,15 @@
       </list>
       <block subset="none" type="note">
         <para
-          >These debug and trace compiler switches are not required when using the <see
-           cref="T:System.Diagnostics.TraceSwitch" />
+          >These debug and trace compiler switches are not required when using the <see cref="T:System.Diagnostics.TraceSwitch" />
 
           
 
-           class in isolation. They are only required in conjunction with <see
-           cref="T:System.Diagnostics.Trace" />
+           class in isolation. They are only required in conjunction with <see cref="T:System.Diagnostics.Trace" />
 
           
 
-           or <see
-           cref="T:System.Diagnostics.Debug" />
+           or <see cref="T:System.Diagnostics.Debug" />
 
           
 
@@ -208,18 +182,15 @@
         >
       </block>
       <para
-        >For more information on instrumenting your application, see <see
-         cref="T:System.Diagnostics.Debug" />
+        >For more information on instrumenting your application, see <see cref="T:System.Diagnostics.Debug" />
 
         
 
-         and <see
-         cref="T:System.Diagnostics.Trace" />
+         and <see cref="T:System.Diagnostics.Trace" />
 
         
 
-        . For more information about configuring and using trace switches, see <format
-         type="text/html">
+        . For more information about configuring and using trace switches, see <format type="text/html">
           <a href="8ab913aa-f400-4406-9436-f45bc6e54fbe">Trace Switches</a>
         </format>
 
@@ -229,8 +200,7 @@
       >
       <block subset="none" type="note">
         <para
-          >To improve performance, you can make <see
-           cref="T:System.Diagnostics.TraceSwitch" />
+          >To improve performance, you can make <see cref="T:System.Diagnostics.TraceSwitch" />
 
           
 
@@ -268,8 +238,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To set the level of your <see
-             cref="T:System.Diagnostics.TraceSwitch" />
+            >To set the level of your <see cref="T:System.Diagnostics.TraceSwitch" />
 
             
 
@@ -284,13 +253,11 @@
 &lt;/configuration&gt;</code>
           <block subset="none" type="note">
             <para
-              >In the .NET Framework version 2.0, you can use text to specify the value for a switch. For example, true for a <see
-               cref="T:System.Diagnostics.BooleanSwitch" />
+              >In the .NET Framework version 2.0, you can use text to specify the value for a switch. For example, true for a <see cref="T:System.Diagnostics.BooleanSwitch" />
 
               
 
-               or the text representing an enumeration value, such as Error for a <see
-               cref="T:System.Diagnostics.TraceSwitch" />
+               or the text representing an enumeration value, such as Error for a <see cref="T:System.Diagnostics.TraceSwitch" />
 
               
 
@@ -298,8 +265,7 @@
             >
           </block>
           <para
-            >In your application, you can use the configured switch level by creating a <see
-             cref="T:System.Diagnostics.TraceSwitch" />
+            >In your application, you can use the configured switch level by creating a <see cref="T:System.Diagnostics.TraceSwitch" />
 
             
 
@@ -307,61 +273,50 @@
           >
           <para>code reference: Classic TraceSwitch.TraceError Example#3</para>
           <para
-            >When the <see
-             cref="Overload:System.Diagnostics.TraceSwitch.#ctor" />
+            >When the <see cref="Overload:System.Diagnostics.TraceSwitch.#ctor" />
 
             
 
-             constructor cannot find initial switch settings in the configuration file, the <see
-             cref="P:System.Diagnostics.TraceSwitch.Level" />
+             constructor cannot find initial switch settings in the configuration file, the <see cref="P:System.Diagnostics.TraceSwitch.Level" />
 
             
 
-             property of the new switch is set to <see
-             cref="F:System.Diagnostics.TraceLevel.Off" />
+             property of the new switch is set to <see cref="F:System.Diagnostics.TraceLevel.Off" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="T:System.Diagnostics.TraceSwitch" />
+            >The <see cref="T:System.Diagnostics.TraceSwitch" />
 
             
 
-             class provides the <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceError" />
+             class provides the <see cref="P:System.Diagnostics.TraceSwitch.TraceError" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceWarning" />
+            , <see cref="P:System.Diagnostics.TraceSwitch.TraceWarning" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceInfo" />
+            , <see cref="P:System.Diagnostics.TraceSwitch.TraceInfo" />
 
             
 
-            , and <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceVerbose" />
+            , and <see cref="P:System.Diagnostics.TraceSwitch.TraceVerbose" />
 
             
 
-             properties to test the <see
-             cref="P:System.Diagnostics.TraceSwitch.Level" />
+             properties to test the <see cref="P:System.Diagnostics.TraceSwitch.Level" />
 
             
 
-             of the switch. The <see
-             cref="P:System.Diagnostics.TraceSwitch.Level" />
+             of the switch. The <see cref="P:System.Diagnostics.TraceSwitch.Level" />
 
             
 
-             property gets or sets the switch's <see
-             cref="T:System.Diagnostics.TraceLevel" />
+             property gets or sets the switch's <see cref="T:System.Diagnostics.TraceLevel" />
 
             
 
@@ -369,8 +324,7 @@
           >
           <block subset="none" type="note">
             <para
-              >To improve performance, you can make <see
-               cref="T:System.Diagnostics.TraceSwitch" />
+              >To improve performance, you can make <see cref="T:System.Diagnostics.TraceSwitch" />
 
               
 
@@ -381,8 +335,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.TraceSwitch" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.TraceSwitch" />
 
             
 
@@ -390,14 +343,22 @@
           >
         </summary>
         <param name="displayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name to display on a user interface. </param
         >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -428,38 +389,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="displayName" />
+            >The <paramref name="displayName" />
 
             
 
-             parameter is used to set the value of the <see
-             cref="P:System.Diagnostics.Switch.DisplayName" />
+             parameter is used to set the value of the <see cref="P:System.Diagnostics.Switch.DisplayName" />
 
             
 
-             property, the <paramref
-             name="description" />
+             property, the <paramref name="description" />
 
             
 
-             parameter is use to set the value of the <see
-             cref="P:System.Diagnostics.Switch.Description" />
+             parameter is use to set the value of the <see cref="P:System.Diagnostics.Switch.Description" />
 
             
 
-             property, and the <paramref
-             name="defaultSwitchValue" />
+             property, and the <paramref name="defaultSwitchValue" />
 
             
 
-             parameter is saved as a field and used to initialize the <see
-             cref="P:System.Diagnostics.Switch.Value" />
+             parameter is saved as a field and used to initialize the <see cref="P:System.Diagnostics.Switch.Value" />
 
             
 
-             property on first reference. See the <see
-             cref="M:System.Diagnostics.TraceSwitch.#ctor(System.String,System.String)" />
+             property on first reference. See the <see cref="M:System.Diagnostics.TraceSwitch.#ctor(System.String,System.String)" />
 
             
 
@@ -469,8 +423,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.TraceSwitch" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.TraceSwitch" />
 
             
 
@@ -478,21 +431,33 @@
           >
         </summary>
         <param name="displayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name to display on a user interface. </param
         >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The description of the switch. </param
         >
         <param name="defaultSwitchValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -524,8 +489,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To set the level of your <see
-             cref="T:System.Diagnostics.TraceSwitch" />
+            >To set the level of your <see cref="T:System.Diagnostics.TraceSwitch" />
 
             
 
@@ -543,13 +507,11 @@
 &lt;/configuration&gt;</code>
           <block subset="none" type="note">
             <para
-              >In the .NET Framework version 2.0, you can use text to specify the value for a switch. For example, true for a <see
-               cref="T:System.Diagnostics.BooleanSwitch" />
+              >In the .NET Framework version 2.0, you can use text to specify the value for a switch. For example, true for a <see cref="T:System.Diagnostics.BooleanSwitch" />
 
               
 
-               or the text representing an enumeration value, such as Error for a <see
-               cref="T:System.Diagnostics.TraceSwitch" />
+               or the text representing an enumeration value, such as Error for a <see cref="T:System.Diagnostics.TraceSwitch" />
 
               
 
@@ -557,41 +519,34 @@
             >
           </block>
           <para
-            >When the <see
-             cref="Overload:System.Diagnostics.TraceSwitch.#ctor" />
+            >When the <see cref="Overload:System.Diagnostics.TraceSwitch.#ctor" />
 
             
 
-             constructor cannot find initial switch settings in the configuration file, the <see
-             cref="P:System.Diagnostics.TraceSwitch.Level" />
+             constructor cannot find initial switch settings in the configuration file, the <see cref="P:System.Diagnostics.TraceSwitch.Level" />
 
             
 
-             property of the new switch is set to <see
-             cref="F:System.Diagnostics.TraceLevel.Off" />
+             property of the new switch is set to <see cref="F:System.Diagnostics.TraceLevel.Off" />
 
             
 
             .</para
           >
           <para
-            >Setting this property updates the <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceError" />
+            >Setting this property updates the <see cref="P:System.Diagnostics.TraceSwitch.TraceError" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceWarning" />
+            , <see cref="P:System.Diagnostics.TraceSwitch.TraceWarning" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceInfo" />
+            , <see cref="P:System.Diagnostics.TraceSwitch.TraceInfo" />
 
             
 
-            , and <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceVerbose" />
+            , and <see cref="P:System.Diagnostics.TraceSwitch.TraceVerbose" />
 
             
 
@@ -624,31 +579,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Diagnostics.TraceSwitch.OnSwitchSettingChanged" />
+            >The <see cref="M:System.Diagnostics.TraceSwitch.OnSwitchSettingChanged" />
 
             
 
-             method is used by the .NET framework to validate and correct the value of a switch initialized via a configuration file. A message is written to all trace listeners if the switch value specified in the configuration file is not defined by the <see
-             cref="T:System.Diagnostics.TraceLevel" />
+             method is used by the .NET framework to validate and correct the value of a switch initialized via a configuration file. A message is written to all trace listeners if the switch value specified in the configuration file is not defined by the <see cref="T:System.Diagnostics.TraceLevel" />
 
             
 
              enumeration and the switch is set to a defined value.</para
           >
           <para
-            >If you attempt in your code to set the <see
-             cref="P:System.Diagnostics.TraceSwitch.Level" />
+            >If you attempt in your code to set the <see cref="P:System.Diagnostics.TraceSwitch.Level" />
 
             
 
-             property to a value that is not defined by the <see
-             cref="T:System.Diagnostics.TraceLevel" />
+             property to a value that is not defined by the <see cref="T:System.Diagnostics.TraceLevel" />
 
             
 
-             enumeration, an <see
-             cref="T:System.ArgumentException" />
+             enumeration, an <see cref="T:System.ArgumentException" />
 
             
 
@@ -680,8 +630,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called internally when the <see
-             cref="P:System.Diagnostics.Switch.Value" />
+            >This method is called internally when the <see cref="P:System.Diagnostics.Switch.Value" />
 
             
 
@@ -691,13 +640,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="P:System.Diagnostics.Switch.SwitchSetting" />
+            >Sets the <see cref="P:System.Diagnostics.Switch.SwitchSetting" />
 
             
 
-             property to the integer equivalent of the <see
-             cref="P:System.Diagnostics.Switch.Value" />
+             property to the integer equivalent of the <see cref="P:System.Diagnostics.Switch.Value" />
 
             
 
@@ -723,48 +670,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceError" />
+            >You can use the <see cref="P:System.Diagnostics.TraceSwitch.TraceError" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceWarning" />
+            , <see cref="P:System.Diagnostics.TraceSwitch.TraceWarning" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceInfo" />
+            , <see cref="P:System.Diagnostics.TraceSwitch.TraceInfo" />
 
             
 
-            , and <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceVerbose" />
+            , and <see cref="P:System.Diagnostics.TraceSwitch.TraceVerbose" />
 
             
 
-             properties in conjunction with the <see
-             cref="T:System.Diagnostics.Debug" />
+             properties in conjunction with the <see cref="T:System.Diagnostics.Debug" />
 
             
 
-             and <see
-             cref="T:System.Diagnostics.Trace" />
+             and <see cref="T:System.Diagnostics.Trace" />
 
             
 
-             classes to emit all messages with a specified importance or greater. When the <see
-             cref="P:System.Diagnostics.TraceSwitch.Level" />
+             classes to emit all messages with a specified importance or greater. When the <see cref="P:System.Diagnostics.TraceSwitch.Level" />
 
             
 
-             property is set to the highest importance, <see
-             cref="F:System.Diagnostics.TraceLevel.Error" />
+             property is set to the highest importance, <see cref="F:System.Diagnostics.TraceLevel.Error" />
 
             
 
-            , <see
-             cref="F:System.Diagnostics.TraceLevel.Error" />
+            , <see cref="F:System.Diagnostics.TraceLevel.Error" />
 
             
 
@@ -794,43 +732,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceError" />
+            >You can use the <see cref="P:System.Diagnostics.TraceSwitch.TraceError" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceWarning" />
+            , <see cref="P:System.Diagnostics.TraceSwitch.TraceWarning" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceInfo" />
+            , <see cref="P:System.Diagnostics.TraceSwitch.TraceInfo" />
 
             
 
-            , and <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceVerbose" />
+            , and <see cref="P:System.Diagnostics.TraceSwitch.TraceVerbose" />
 
             
 
-             properties in conjunction with the <see
-             cref="T:System.Diagnostics.Debug" />
+             properties in conjunction with the <see cref="T:System.Diagnostics.Debug" />
 
             
 
-             and <see
-             cref="T:System.Diagnostics.Trace" />
+             and <see cref="T:System.Diagnostics.Trace" />
 
             
 
-             classes to emit all messages with a specified importance or greater. When the <see
-             cref="P:System.Diagnostics.TraceSwitch.Level" />
+             classes to emit all messages with a specified importance or greater. When the <see cref="P:System.Diagnostics.TraceSwitch.Level" />
 
             
 
-             property is set to <see
-             cref="F:System.Diagnostics.TraceLevel.Warning" />
+             property is set to <see cref="F:System.Diagnostics.TraceLevel.Warning" />
 
             
 
@@ -860,43 +790,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceError" />
+            >You can use the <see cref="P:System.Diagnostics.TraceSwitch.TraceError" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceWarning" />
+            , <see cref="P:System.Diagnostics.TraceSwitch.TraceWarning" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceInfo" />
+            , <see cref="P:System.Diagnostics.TraceSwitch.TraceInfo" />
 
             
 
-            , and <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceVerbose" />
+            , and <see cref="P:System.Diagnostics.TraceSwitch.TraceVerbose" />
 
             
 
-             properties in conjunction with the <see
-             cref="T:System.Diagnostics.Debug" />
+             properties in conjunction with the <see cref="T:System.Diagnostics.Debug" />
 
             
 
-             and <see
-             cref="T:System.Diagnostics.Trace" />
+             and <see cref="T:System.Diagnostics.Trace" />
 
             
 
-             classes to emit all messages with a specified importance or greater. When the <see
-             cref="P:System.Diagnostics.TraceSwitch.Level" />
+             classes to emit all messages with a specified importance or greater. When the <see cref="P:System.Diagnostics.TraceSwitch.Level" />
 
             
 
-             property is set to <see
-             cref="F:System.Diagnostics.TraceLevel.Verbose" />
+             property is set to <see cref="F:System.Diagnostics.TraceLevel.Verbose" />
 
             
 
@@ -926,43 +848,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceError" />
+            >You can use the <see cref="P:System.Diagnostics.TraceSwitch.TraceError" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceWarning" />
+            , <see cref="P:System.Diagnostics.TraceSwitch.TraceWarning" />
 
             
 
-            , <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceInfo" />
+            , <see cref="P:System.Diagnostics.TraceSwitch.TraceInfo" />
 
             
 
-            , and <see
-             cref="P:System.Diagnostics.TraceSwitch.TraceVerbose" />
+            , and <see cref="P:System.Diagnostics.TraceSwitch.TraceVerbose" />
 
             
 
-             properties in conjunction with the <see
-             cref="T:System.Diagnostics.Debug" />
+             properties in conjunction with the <see cref="T:System.Diagnostics.Debug" />
 
             
 
-             and <see
-             cref="T:System.Diagnostics.Trace" />
+             and <see cref="T:System.Diagnostics.Trace" />
 
             
 
-             classes to emit all messages with a specified importance or greater. When the <see
-             cref="P:System.Diagnostics.TraceSwitch.Level" />
+             classes to emit all messages with a specified importance or greater. When the <see cref="P:System.Diagnostics.TraceSwitch.Level" />
 
             
 
-             property is set to <see
-             cref="F:System.Diagnostics.TraceLevel.Warning" />
+             property is set to <see cref="F:System.Diagnostics.TraceLevel.Warning" />
 
             
 

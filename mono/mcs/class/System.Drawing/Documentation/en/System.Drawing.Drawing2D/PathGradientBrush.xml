@@ -22,18 +22,15 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The color gradient is a smooth shading of colors from the center point of the path to the outside boundary edge of the path. Blend factors, positions, and style affect where the gradient starts and ends, and how fast it changes shade.</para>
       <para
-        >Path gradient brushes do not obey the <see
-         cref="P:System.Drawing.Graphics.SmoothingMode" />
+        >Path gradient brushes do not obey the <see cref="P:System.Drawing.Graphics.SmoothingMode" />
 
         
 
-         property of the <see
-         cref="T:System.Drawing.Graphics" />
+         property of the <see cref="T:System.Drawing.Graphics" />
 
         
 
-         object used to do the drawing. Areas filled using a <see
-         cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+         object used to do the drawing. Areas filled using a <see cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
 
         
 
@@ -43,13 +40,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Encapsulates a <see
-         cref="T:System.Drawing.Brush" />
+        >Encapsulates a <see cref="T:System.Drawing.Brush" />
 
         
 
-         object that fills the interior of a <see
-         cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+         object that fills the interior of a <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
         
 
@@ -73,8 +68,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
 
             
 
@@ -82,17 +76,19 @@
           >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+          The <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
           
 
-           that defines the area filled by this <see
-           cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+           that defines the area filled by this <see cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
 
           
 
@@ -119,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
 
             
 
@@ -128,12 +123,15 @@
           >
         </summary>
         <param name="points">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.Point" />
+          An array of <see cref="T:System.Drawing.Point" />
 
           
 
@@ -160,8 +158,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
 
             
 
@@ -169,12 +166,15 @@
           >
         </summary>
         <param name="points">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.PointF" />
+          An array of <see cref="T:System.Drawing.PointF" />
 
           
 
@@ -202,8 +202,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
 
             
 
@@ -211,29 +210,34 @@
           >
         </summary>
         <param name="points">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.Point" />
+          An array of <see cref="T:System.Drawing.Point" />
 
           
 
            structures that represents the points that make up the vertices of the path. </param
         >
         <param name="wrapMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.WrapMode" />
+          A <see cref="T:System.Drawing.Drawing2D.WrapMode" />
 
           
 
-           that specifies how fills drawn with this <see
-           cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+           that specifies how fills drawn with this <see cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
 
           
 
@@ -261,8 +265,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
 
             
 
@@ -270,29 +273,34 @@
           >
         </summary>
         <param name="points">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.PointF" />
+          An array of <see cref="T:System.Drawing.PointF" />
 
           
 
            structures that represents the points that make up the vertices of the path. </param
         >
         <param name="wrapMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.WrapMode" />
+          A <see cref="T:System.Drawing.Drawing2D.WrapMode" />
 
           
 
-           that specifies how fills drawn with this <see
-           cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+           that specifies how fills drawn with this <see cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
 
           
 
@@ -319,8 +327,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Drawing2D.Blend" />
+            >A <see cref="T:System.Drawing.Drawing2D.Blend" />
 
             
 
@@ -330,8 +337,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Drawing.Drawing2D.Blend" />
+            >Gets or sets a <see cref="T:System.Drawing.Drawing2D.Blend" />
 
             
 
@@ -402,8 +408,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an exact copy of this <see
-             cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+            >Creates an exact copy of this <see cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
 
             
 
@@ -413,8 +418,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+            >The <see cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
 
             
 
@@ -465,8 +469,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Drawing2D.ColorBlend" />
+            >A <see cref="T:System.Drawing.Drawing2D.ColorBlend" />
 
             
 
@@ -476,8 +479,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Drawing.Drawing2D.ColorBlend" />
+            >Gets or sets a <see cref="T:System.Drawing.Drawing2D.ColorBlend" />
 
             
 
@@ -509,12 +511,15 @@
           <para>Updates the brush's transformation matrix with the product of brush's transformation matrix multiplied by another matrix.</para>
         </summary>
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
@@ -546,24 +551,30 @@
           <para>Updates the brush's transformation matrix with the product of the brush's transformation matrix multiplied by another matrix.</para>
         </summary>
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
            that will be multiplied by the brush's current transformation matrix. </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+          A <see cref="T:System.Drawing.Drawing2D.MatrixOrder" />
 
           
 
@@ -587,8 +598,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a bounding rectangle for this <see
-             cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+            >Gets a bounding rectangle for this <see cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
 
             
 
@@ -613,8 +623,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets the <see
-             cref="P:System.Drawing.Drawing2D.PathGradientBrush.Transform" />
+            >Resets the <see cref="P:System.Drawing.Drawing2D.PathGradientBrush.Transform" />
 
             
 
@@ -643,7 +652,11 @@
           <para>Rotates the local geometric transform by the specified amount. This method prepends the rotation to the transform.</para>
         </summary>
         <param name="angle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -675,19 +688,26 @@
           <para>Rotates the local geometric transform by the specified amount in the specified order.</para>
         </summary>
         <param name="angle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The angle (extent) of rotation. </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+          A <see cref="T:System.Drawing.Drawing2D.MatrixOrder" />
 
           
 
@@ -716,14 +736,22 @@
           <para>Scales the local geometric transform by the specified amounts. This method prepends the scaling matrix to the transform.</para>
         </summary>
         <param name="sx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The transform scale factor in the x-axis direction. </param
         >
         <param name="sy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -756,26 +784,37 @@
           <para>Scales the local geometric transform by the specified amounts in the specified order.</para>
         </summary>
         <param name="sx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The transform scale factor in the x-axis direction. </param
         >
         <param name="sy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The transform scale factor in the y-axis direction. </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+          A <see cref="T:System.Drawing.Drawing2D.MatrixOrder" />
 
           
 
@@ -800,8 +839,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If there is more than one color in the <see
-             cref="P:System.Drawing.Drawing2D.PathGradientBrush.SurroundColors" />
+            >If there is more than one color in the <see cref="P:System.Drawing.Drawing2D.PathGradientBrush.SurroundColors" />
 
             
 
@@ -813,7 +851,11 @@
           <para>Creates a gradient with a center color and a linear falloff to one surrounding color.</para>
         </summary>
         <param name="focus">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -842,8 +884,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If there is more than one color in the <see
-             cref="P:System.Drawing.Drawing2D.PathGradientBrush.SurroundColors" />
+            >If there is more than one color in the <see cref="P:System.Drawing.Drawing2D.PathGradientBrush.SurroundColors" />
 
             
 
@@ -856,14 +897,22 @@
           <para>Creates a gradient with a center color and a linear falloff to each surrounding color.</para>
         </summary>
         <param name="focus">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A value from 0 through 1 that specifies where, along any radial from the center of the path to the path's boundary, the center color will be at its highest intensity. A value of 1 (the default) places the highest intensity at the center of the path. </param
         >
         <param name="scale">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -888,8 +937,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If there is more than one color in the <see
-             cref="P:System.Drawing.Drawing2D.PathGradientBrush.SurroundColors" />
+            >If there is more than one color in the <see cref="P:System.Drawing.Drawing2D.PathGradientBrush.SurroundColors" />
 
             
 
@@ -902,7 +950,11 @@
           <para>Creates a gradient brush that changes color starting from the center of the path outward to the path's boundary. The transition from one color to another is based on a bell-shaped curve.</para>
         </summary>
         <param name="focus">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -931,8 +983,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If there is more than one color in the <see
-             cref="P:System.Drawing.Drawing2D.PathGradientBrush.SurroundColors" />
+            >If there is more than one color in the <see cref="P:System.Drawing.Drawing2D.PathGradientBrush.SurroundColors" />
 
             
 
@@ -945,14 +996,22 @@
           <para>Creates a gradient brush that changes color starting from the center of the path outward to the path's boundary. The transition from one color to another is based on a bell-shaped curve.</para>
         </summary>
         <param name="focus">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A value from 0 through 1 that specifies where, along any radial from the center of the path to the path's boundary, the center color will be at its highest intensity. A value of 1 (the default) places the highest intensity at the center of the path. </param
         >
         <param name="scale">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -979,13 +1038,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each <see
-             cref="T:System.Drawing.Color" />
+            >Each <see cref="T:System.Drawing.Color" />
 
             
 
-             in the <see
-             cref="P:System.Drawing.Drawing2D.PathGradientBrush.SurroundColors" />
+             in the <see cref="P:System.Drawing.Drawing2D.PathGradientBrush.SurroundColors" />
 
             
 
@@ -995,8 +1052,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an array of colors that correspond to the points in the path this <see
-             cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+            >Gets or sets an array of colors that correspond to the points in the path this <see cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
 
             
 
@@ -1024,8 +1080,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A geometric transform can be used to translate, scale, rotate, or skew the gradient fill. Because the matrix returned and by the <see
-             cref="P:System.Drawing.Drawing2D.PathGradientBrush.Transform" />
+            >A geometric transform can be used to translate, scale, rotate, or skew the gradient fill. Because the matrix returned and by the <see cref="P:System.Drawing.Drawing2D.PathGradientBrush.Transform" />
 
             
 
@@ -1035,13 +1090,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a copy of the <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Gets or sets a copy of the <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
-             that defines a local geometric transform for this <see
-             cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+             that defines a local geometric transform for this <see cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
 
             
 
@@ -1071,14 +1124,22 @@
           <para>Applies the specified translation to the local geometric transform. This method prepends the translation to the transform.</para>
         </summary>
         <param name="dx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value of the translation in x. </param
         >
         <param name="dy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1111,21 +1172,33 @@
           <para>Applies the specified translation to the local geometric transform in the specified order.</para>
         </summary>
         <param name="dx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value of the translation in x. </param
         >
         <param name="dy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value of the translation in y. </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1153,13 +1226,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Drawing.Drawing2D.WrapMode" />
+            >Gets or sets a <see cref="T:System.Drawing.Drawing2D.WrapMode" />
 
             
 
-             that indicates the wrap mode for this <see
-             cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+             that indicates the wrap mode for this <see cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
 
             
 

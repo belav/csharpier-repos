@@ -1,8 +1,7 @@
 ﻿<feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">dive into mark</title>
   <icon>https://avatars0.githubusercontent.com/u/9141961</icon>
-  <subtitle type="html"
-    >
+  <subtitle type="html">
     A &lt;em&gt;lot&lt;/em&gt; of effort
     went into making this effortless
   </subtitle
@@ -14,7 +13,8 @@
   <rights>Copyright (c) 2003, Mark Pilgrim</rights>
   <generator uri="http://www.example.com/" version="1.0">
     Example Toolkit
-  </generator>
+  </generator
+  >
   <entry>
     <title>Atom draft-07 snapshot</title>
     <link rel="alternate" type="text/html" href="http://example.org/2005/04/02/atom" />

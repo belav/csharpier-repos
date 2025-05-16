@@ -19,16 +19,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+        >The <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
 
         
 
          class is the main class used for XML encryption in the .NET Framework. XML Encryption is a standards-based, interoperable way to encrypt all or part of an XML document or any arbitrary data. The .NET Framework XML encryption classes implement the World Wide Web Consortium (W3C) specification for XML encryption located at http://www.w3.org/TR/xmlenc-core/.</para
       >
       <para
-        >Use the <see
-         cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+        >Use the <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
 
         
 
@@ -79,8 +77,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
 
             
 
@@ -111,13 +108,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create an <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+            >Use this constructor to create an <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
 
             
 
-             object when you want to specify the XML document to encrypt.  The <paramref
-             name="document" />
+             object when you want to specify the XML document to encrypt.  The <paramref name="document" />
 
             
 
@@ -127,8 +122,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
 
             
 
@@ -136,17 +130,19 @@
           >
         </summary>
         <param name="document">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlDocument" />
+          An <see cref="T:System.Xml.XmlDocument" />
 
           
 
-           object used to initialize the <see
-           cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+           object used to initialize the <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
 
           
 
@@ -177,13 +173,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create an <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+            >Use this constructor to create an <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
 
             
 
-             object when you want to specify the XML document to encrypt and provide security evidence. The <paramref
-             name="document" />
+             object when you want to specify the XML document to encrypt and provide security evidence. The <paramref name="document" />
 
             
 
@@ -193,8 +187,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
 
             
 
@@ -202,34 +195,38 @@
           >
         </summary>
         <param name="document">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlDocument" />
+          An <see cref="T:System.Xml.XmlDocument" />
 
           
 
-           object used to initialize the <see
-           cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+           object used to initialize the <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
 
           
 
            object.</param
         >
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Policy.Evidence" />
+          An <see cref="T:System.Security.Policy.Evidence" />
 
           
 
-           object associated with the <see
-           cref="T:System.Xml.XmlDocument" />
+           object associated with the <see cref="T:System.Xml.XmlDocument" />
 
           
 
@@ -263,26 +260,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Xml.EncryptedXml.AddKeyNameMapping(System.String,System.Object)" />
+            >The <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.AddKeyNameMapping(System.String,System.Object)" />
 
             
 
-             method allows you to map a symmetric key or an asymmetric key to a string name. This method adds the values of the <paramref
-             name="keyName" />
+             method allows you to map a symmetric key or an asymmetric key to a string name. This method adds the values of the <paramref name="keyName" />
 
             
 
-             and <paramref
-             name="keyObject" />
+             and <paramref name="keyObject" />
 
             
 
              parameters to a table of valid key name mappings.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Security.Cryptography.Xml.EncryptedXml.ClearKeyNameMappings" />
+            >Use the <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.ClearKeyNameMappings" />
 
             
 
@@ -294,24 +287,30 @@
           <para>Defines a mapping between a key name and a symmetric key or an asymmetric key.</para>
         </summary>
         <param name="keyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name to map to <paramref
-           name="keyObject" />
+          The name to map to <paramref name="keyObject" />
 
           
 
           .</param
         >
         <param name="keyObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The symmetric key to map to <paramref
-           name="keyName" />
+          The symmetric key to map to <paramref name="keyName" />
 
           
 
@@ -339,8 +338,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to clear all key name mapping that you have set using the <see
-             cref="M:System.Security.Cryptography.Xml.EncryptedXml.AddKeyNameMapping(System.String,System.Object)" />
+            >Use this method to clear all key name mapping that you have set using the <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.AddKeyNameMapping(System.String,System.Object)" />
 
             
 
@@ -380,31 +378,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptData(System.Security.Cryptography.Xml.EncryptedData,System.Security.Cryptography.SymmetricAlgorithm)" />
+            >Use the <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptData(System.Security.Cryptography.Xml.EncryptedData,System.Security.Cryptography.SymmetricAlgorithm)" />
 
             
 
-             method to decrypt an <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+             method to decrypt an <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
             
 
              element using a symmetric key.</para
           >
           <para
-            >Note that the <see
-             cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptData(System.Security.Cryptography.Xml.EncryptedData,System.Security.Cryptography.SymmetricAlgorithm)" />
+            >Note that the <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptData(System.Security.Cryptography.Xml.EncryptedData,System.Security.Cryptography.SymmetricAlgorithm)" />
 
             
 
-             method only decrypts top-level &lt;EncryptedData&gt; tags.  In cases where one or more &lt;EncryptedData&gt; tags have been encrypted and are contained within higher level &lt;EncryptedData&gt; tags, you can call the <see
-             cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptDocument" />
+             method only decrypts top-level &lt;EncryptedData&gt; tags.  In cases where one or more &lt;EncryptedData&gt; tags have been encrypted and are contained within higher level &lt;EncryptedData&gt; tags, you can call the <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptDocument" />
 
             
 
-             method separately for each one.  See the <see
-             cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptDocument" />
+             method separately for each one.  See the <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptDocument" />
 
             
 
@@ -420,7 +413,11 @@
           <para>A byte array that contains the raw decrypted plain text.</para>
         </returns>
         <param name="encryptedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -448,21 +445,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptDocument" />
+            >The <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptDocument" />
 
             
 
              method decrypts all &lt;EncryptedData&gt; elements of the XML document loaded during initialization. After you call this method, all &lt;EncryptedData&gt; elements in the document are replaced with plain text versions.</para
           >
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptDocument" />
+            >The <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptDocument" />
 
             
 
-             method decrypts only top-level &lt;EncryptedData&gt; elements.  If you need to decrypt a super-encrypted document (a document that is encrypted more than once), you must call the <see
-             cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptDocument" />
+             method decrypts only top-level &lt;EncryptedData&gt; elements.  If you need to decrypt a super-encrypted document (a document that is encrypted more than once), you must call the <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptDocument" />
 
             
 
@@ -470,13 +464,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptDocument" />
+              >The <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptDocument" />
 
               
 
-               method decrypts only valid XML data. To decrypt arbitrary data, use the <see
-               cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptData(System.Security.Cryptography.Xml.EncryptedData,System.Security.Cryptography.SymmetricAlgorithm)" />
+               method decrypts only valid XML data. To decrypt arbitrary data, use the <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptData(System.Security.Cryptography.Xml.EncryptedData,System.Security.Cryptography.SymmetricAlgorithm)" />
 
               
 
@@ -484,8 +476,7 @@
             >
           </block>
           <para
-            >To use XML Encryption with X.509 certificates, you must have the Microsoft Enhanced Cryptographic Provider installed and the X.509 certificate must use the Enhanced Provider. If you do not have the Microsoft Enhanced Cryptographic Provider installed or the X.509 certificate does not use the Enhanced Provider, a <see
-             cref="T:System.Security.Cryptography.CryptographicException" />
+            >To use XML Encryption with X.509 certificates, you must have the Microsoft Enhanced Cryptographic Provider installed and the X.509 certificate must use the Enhanced Provider. If you do not have the Microsoft Enhanced Cryptographic Provider installed or the X.509 certificate does not use the Enhanced Provider, a <see cref="T:System.Security.Cryptography.CryptographicException" />
 
             
 
@@ -495,8 +486,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Decrypts all &lt;EncryptedData&gt; elements of the XML document that were specified during initialization of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+            >Decrypts all &lt;EncryptedData&gt; elements of the XML document that were specified during initialization of the <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
 
             
 
@@ -530,31 +520,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptEncryptedKey(System.Security.Cryptography.Xml.EncryptedKey)" />
+            >The <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptEncryptedKey(System.Security.Cryptography.Xml.EncryptedKey)" />
 
             
 
              method decrypts an encrypted key contained within the &lt;EncryptedKey&gt; element of an XML document.</para
           >
           <para
-            >This recursive method finds the key represented by the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+            >This recursive method finds the key represented by the <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
             
 
-             object. Note that an <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+             object. Note that an <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
             
 
-             object can contain another <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+             object can contain another <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
             
 
-             object that specifies its <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+             object that specifies its <see cref="T:System.Security.Cryptography.Xml.KeyInfo" />
 
             
 
@@ -564,8 +549,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the key represented by the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+            >Determines the key represented by the <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
             
 
@@ -577,12 +561,15 @@
           <para>A byte array that contains the key.</para>
         </returns>
         <param name="encryptedKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+          The <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
           
 
@@ -617,13 +604,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptKey(System.Byte[],System.Security.Cryptography.RSA,System.Boolean)" />
+            >The <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptKey(System.Byte[],System.Security.Cryptography.RSA,System.Boolean)" />
 
             
 
-             method decrypts an encrypted key contained within the &lt;EncryptedKey&gt; element of an XML document. This method accepts a value for the <paramref
-             name="symmetricAlgorithm" />
+             method decrypts an encrypted key contained within the &lt;EncryptedKey&gt; element of an XML document. This method accepts a value for the <paramref name="symmetricAlgorithm" />
 
             
 
@@ -639,7 +624,11 @@
           <para>A byte array that contains the plain text key.</para>
         </returns>
         <param name="keyData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -675,13 +664,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptKey(System.Byte[],System.Security.Cryptography.RSA,System.Boolean)" />
+            >The <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptKey(System.Byte[],System.Security.Cryptography.RSA,System.Boolean)" />
 
             
 
-             method decrypts an encrypted key contained within the &lt;EncryptedKey&gt; element of an XML document. This method accepts a value for the <paramref
-             name="rsa" />
+             method decrypts an encrypted key contained within the &lt;EncryptedKey&gt; element of an XML document. This method accepts a value for the <paramref name="rsa" />
 
             
 
@@ -697,19 +684,26 @@
           <para>A byte array that contains the plain text key.</para>
         </returns>
         <param name="keyData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of bytes that represents an encrypted &lt;EncryptedKey&gt; element.</param
         >
         <param name="rsa">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The asymmetric key used to decrypt <paramref
-           name="keyData" />
+          The asymmetric key used to decrypt <paramref name="keyData" />
 
           
 
@@ -740,18 +734,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the XML document used to create the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+            >If the XML document used to create the <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
 
             
 
-             object has any security evidence, you should add the evidence to the <see
-             cref="P:System.Security.Cryptography.Xml.EncryptedXml.DocumentEvidence" />
+             object has any security evidence, you should add the evidence to the <see cref="P:System.Security.Cryptography.Xml.EncryptedXml.DocumentEvidence" />
 
             
 
-             property.  If you do not set this property, any associated <see
-             cref="T:System.Security.Cryptography.Xml.CipherReference" />
+             property.  If you do not set this property, any associated <see cref="T:System.Security.Cryptography.Xml.CipherReference" />
 
             
 
@@ -761,13 +752,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the evidence of the <see
-             cref="T:System.Xml.XmlDocument" />
+            >Gets or sets the evidence of the <see cref="T:System.Xml.XmlDocument" />
 
             
 
-             object from which the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+             object from which the <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
 
             
 
@@ -796,8 +785,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >UTF-8 encoding is the default encoding for XML encryption. You can use this property to specify other types of encoding from the <see
-             cref="T:System.Text.Encoding" />
+            >UTF-8 encoding is the default encoding for XML encryption. You can use this property to specify other types of encoding from the <see cref="T:System.Text.Encoding" />
 
             
 
@@ -839,39 +827,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Xml.EncryptedXml.Encrypt(System.Xml.XmlElement,System.Security.Cryptography.X509Certificates.X509Certificate2)" />
+            >The <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.Encrypt(System.Xml.XmlElement,System.Security.Cryptography.X509Certificates.X509Certificate2)" />
 
             
 
-             method is a convenient way to encrypt the outer XML of an element using a certificate. This method generates a 256-bit Advanced Encryption Standard (AES) session key to encrypt an XML element and then encrypts and signs the AES key using the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+             method is a convenient way to encrypt the outer XML of an element using a certificate. This method generates a 256-bit Advanced Encryption Standard (AES) session key to encrypt an XML element and then encrypts and signs the AES key using the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
-             object. The <see
-             cref="M:System.Security.Cryptography.Xml.EncryptedXml.Encrypt(System.Xml.XmlElement,System.Security.Cryptography.X509Certificates.X509Certificate2)" />
+             object. The <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.Encrypt(System.Xml.XmlElement,System.Security.Cryptography.X509Certificates.X509Certificate2)" />
 
             
 
-             method then returns the resulting XML as an <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+             method then returns the resulting XML as an <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
             
 
              element.</para
           >
           <para
-            >If you need more control over the encryption, so you can place the encrypted information into a &lt;CipherReference&gt; element or specify whether the entire XML element or just its contents should be encrypted, use the <see
-             cref="Overload:System.Security.Cryptography.Xml.EncryptedXml.EncryptData" />
+            >If you need more control over the encryption, so you can place the encrypted information into a &lt;CipherReference&gt; element or specify whether the entire XML element or just its contents should be encrypted, use the <see cref="Overload:System.Security.Cryptography.Xml.EncryptedXml.EncryptData" />
 
             
 
              method overloads.</para
           >
           <para
-            >To use XML Encryption with X.509 certificates, you must have the Microsoft Enhanced Cryptographic Provider installed and the X.509 certificate must use the Enhanced Provider. If you do not have the Microsoft Enhanced Cryptographic Provider installed or the X.509 certificate does not use the Enhanced Provider, a <see
-             cref="T:System.Security.Cryptography.CryptographicException" />
+            >To use XML Encryption with X.509 certificates, you must have the Microsoft Enhanced Cryptographic Provider installed and the X.509 certificate must use the Enhanced Provider. If you do not have the Microsoft Enhanced Cryptographic Provider installed or the X.509 certificate does not use the Enhanced Provider, a <see cref="T:System.Security.Cryptography.CryptographicException" />
 
             
 
@@ -885,8 +867,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+            >An <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
             
 
@@ -894,14 +875,22 @@
           >
         </returns>
         <param name="inputElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML element to encrypt.</param
         >
         <param name="certificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -935,16 +924,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is a convenient way to encrypt the outer XML of an element using a key name. If you need more control over the encryption, so you can place the encrypted information into a &lt;CipherReference&gt; element or specify whether the entire XML element or just its contents should be encrypted, use the <see
-             cref="Overload:System.Security.Cryptography.Xml.EncryptedXml.EncryptData" />
+            >This method is a convenient way to encrypt the outer XML of an element using a key name. If you need more control over the encryption, so you can place the encrypted information into a &lt;CipherReference&gt; element or specify whether the entire XML element or just its contents should be encrypted, use the <see cref="Overload:System.Security.Cryptography.Xml.EncryptedXml.EncryptData" />
 
             
 
              method overloads.</para
           >
           <para
-            >For a list of all supported algorithms, see the list of constant fields associated with the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+            >For a list of all supported algorithms, see the list of constant fields associated with the <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
 
             
 
@@ -958,8 +945,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+            >An <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
             
 
@@ -967,14 +953,22 @@
           >
         </returns>
         <param name="inputElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML element to encrypt.</param
         >
         <param name="keyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1010,8 +1004,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The returned byte array can be placed into a &lt;CipherValue&gt; element. This method assumes that the data specified in the <paramref
-             name="plaintext" />
+            >The returned byte array can be placed into a &lt;CipherValue&gt; element. This method assumes that the data specified in the <paramref name="plaintext" />
 
             
 
@@ -1066,14 +1059,22 @@
           <para>A byte array that contains the encrypted data.</para>
         </returns>
         <param name="inputElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The element or its contents to encrypt.</param
         >
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1108,13 +1109,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Security.Cryptography.Xml.EncryptedXml.EncryptKey(System.Byte[],System.Security.Cryptography.SymmetricAlgorithm)" />
+            >Use the <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.EncryptKey(System.Byte[],System.Security.Cryptography.SymmetricAlgorithm)" />
 
             
 
-             method to encrypt the key that a recipient uses to decrypt an &lt;EncryptedData&gt; element. This method accepts a value for the <paramref
-             name="symmetricAlgorithm" />
+             method to encrypt the key that a recipient uses to decrypt an &lt;EncryptedData&gt; element. This method accepts a value for the <paramref name="symmetricAlgorithm" />
 
             
 
@@ -1129,8 +1128,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A byte array that represents the encrypted value of the <paramref
-             name="keyData" />
+            >A byte array that represents the encrypted value of the <paramref name="keyData" />
 
             
 
@@ -1138,7 +1136,11 @@
           >
         </returns>
         <param name="keyData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1174,13 +1176,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Security.Cryptography.Xml.EncryptedXml.EncryptKey(System.Byte[],System.Security.Cryptography.RSA,System.Boolean)" />
+            >Use the <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.EncryptKey(System.Byte[],System.Security.Cryptography.RSA,System.Boolean)" />
 
             
 
-             method to encrypt the key that a recipient uses to decrypt an &lt;EncryptedData&gt; element. This method accepts a value for <paramref
-             name="rsa" />
+             method to encrypt the key that a recipient uses to decrypt an &lt;EncryptedData&gt; element. This method accepts a value for <paramref name="rsa" />
 
             
 
@@ -1195,8 +1195,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A byte array that represents the encrypted value of the <paramref
-             name="keyData" />
+            >A byte array that represents the encrypted value of the <paramref name="keyData" />
 
             
 
@@ -1204,19 +1203,26 @@
           >
         </returns>
         <param name="keyData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key to encrypt.</param
         >
         <param name="rsa">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The asymmetric key used to encrypt <paramref
-           name="keyData" />
+          The asymmetric key used to encrypt <paramref name="keyData" />
 
           
 
@@ -1251,26 +1257,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Given an <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+            >Given an <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
             
 
-             object, this method retrieves the decryption initialization vector (IV). The default behavior retrieves the IV as the first bytes of the <see
-             cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
+             object, this method retrieves the decryption initialization vector (IV). The default behavior retrieves the IV as the first bytes of the <see cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
 
             
 
              byte array.</para
           >
           <para
-            >For a list of Uniform Resource Identifier (URI) values supported by the <paramref
-             name="symmetricAlgorithmUri" />
+            >For a list of Uniform Resource Identifier (URI) values supported by the <paramref name="symmetricAlgorithmUri" />
 
             
 
-             parameter, see the list of constant fields associated with the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+             parameter, see the list of constant fields associated with the <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
 
             
 
@@ -1280,8 +1282,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the decryption initialization vector (IV) from an <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+            >Retrieves the decryption initialization vector (IV) from an <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
             
 
@@ -1293,12 +1294,15 @@
           <para>A byte array that contains the decryption initialization vector (IV).</para>
         </returns>
         <param name="encryptedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+          The <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
           
 
@@ -1333,23 +1337,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Given an <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+            >Given an <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
             
 
-             object, this method looks for the decryption key that can be used to retrieve the plain text data. If a key name is specified, the method looks for the symmetric algorithm or asymmetric algorithm that is associated with the key name as defined in the key name mapping. Otherwise, if a retrieval method or an <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+             object, this method looks for the decryption key that can be used to retrieve the plain text data. If a key name is specified, the method looks for the symmetric algorithm or asymmetric algorithm that is associated with the key name as defined in the key name mapping. Otherwise, if a retrieval method or an <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
             
 
-             object is specified, the method loads the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+             object is specified, the method loads the <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
             
 
-             object and calls the <see
-             cref="M:System.Security.Cryptography.Xml.EncryptedXml.GetDecryptionKey(System.Security.Cryptography.Xml.EncryptedData,System.String)" />
+             object and calls the <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.GetDecryptionKey(System.Security.Cryptography.Xml.EncryptedData,System.String)" />
 
             
 
@@ -1359,8 +1359,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the decryption key from the specified <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+            >Retrieves the decryption key from the specified <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
             
 
@@ -1370,8 +1369,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.Cryptography.SymmetricAlgorithm" />
+            >A <see cref="T:System.Security.Cryptography.SymmetricAlgorithm" />
 
             
 
@@ -1379,12 +1377,15 @@
           >
         </returns>
         <param name="encryptedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+          The <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
           
 
@@ -1418,8 +1419,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Xml.EncryptedXml.GetIdElement(System.Xml.XmlDocument,System.String)" />
+            >The <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.GetIdElement(System.Xml.XmlDocument,System.String)" />
 
             
 
@@ -1433,8 +1433,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlElement" />
+            >An <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -1442,19 +1441,26 @@
           >
         </returns>
         <param name="document">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlDocument" />
+          An <see cref="T:System.Xml.XmlDocument" />
 
           
 
            object that contains an element with an ID value.</param
         >
         <param name="idValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1485,8 +1491,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Cipher Block Chaining (CBC) mode is the default cipher mode for XML encryption. You can use this property to specify other cipher modes of the <see
-             cref="T:System.Security.Cryptography.CipherMode" />
+            >Cipher Block Chaining (CBC) mode is the default cipher mode for XML encryption. You can use this property to specify other cipher modes of the <see cref="T:System.Security.Cryptography.CipherMode" />
 
             
 
@@ -1522,8 +1527,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >ISO-10126 padding is the default padding mode for XML encryption. You can use this property to specify other padding modes of the <see
-             cref="T:System.Security.Cryptography.PaddingMode" />
+            >ISO-10126 padding is the default padding mode for XML encryption. You can use this property to specify other padding modes of the <see cref="T:System.Security.Cryptography.PaddingMode" />
 
             
 
@@ -1553,26 +1557,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can access the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+            >You can access the <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
 
             
 
-             object referenced by a key name by examining the <see
-             cref="P:System.Security.Cryptography.Xml.EncryptedKey.CarriedKeyName" />
+             object referenced by a key name by examining the <see cref="P:System.Security.Cryptography.Xml.EncryptedKey.CarriedKeyName" />
 
             
 
              property.</para
           >
           <para
-            >Use the <see
-             cref="P:System.Security.Cryptography.Xml.EncryptedXml.Recipient" />
+            >Use the <see cref="P:System.Security.Cryptography.Xml.EncryptedXml.Recipient" />
 
             
 
-             property to identify the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+             property to identify the <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
 
             
 
@@ -1611,13 +1611,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Xml.EncryptedXml.ReplaceData(System.Xml.XmlElement,System.Byte[])" />
+            >The <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.ReplaceData(System.Xml.XmlElement,System.Byte[])" />
 
             
 
-             method replaces an &lt;EncryptedData&gt; element with the value of the <paramref
-             name="decryptedData" />
+             method replaces an &lt;EncryptedData&gt; element with the value of the <paramref name="decryptedData" />
 
             
 
@@ -1629,19 +1627,26 @@
           <para>Replaces an &lt;EncryptedData&gt; element with a specified decrypted sequence of bytes.</para>
         </summary>
         <param name="inputElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The &lt;EncryptedData&gt; element to replace.</param
         >
         <param name="decryptedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The decrypted data to replace <paramref
-           name="inputElement" />
+          The decrypted data to replace <paramref name="inputElement" />
 
           
 
@@ -1676,18 +1681,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Xml.EncryptedXml.ReplaceElement(System.Xml.XmlElement,System.Security.Cryptography.Xml.EncryptedData,System.Boolean)" />
+            >The <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.ReplaceElement(System.Xml.XmlElement,System.Security.Cryptography.Xml.EncryptedData,System.Boolean)" />
 
             
 
-             method replaces the <paramref
-             name="inputElement" />
+             method replaces the <paramref name="inputElement" />
 
             
 
-             parameter with the value specified by the <paramref
-             name="encryptedData" />
+             parameter with the value specified by the <paramref name="encryptedData" />
 
             
 
@@ -1697,8 +1699,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Replaces the specified element with the specified <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+            >Replaces the specified element with the specified <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
             
 
@@ -1706,31 +1707,41 @@
           >
         </summary>
         <param name="inputElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The element to replace with an &lt;EncryptedData&gt; element.</param
         >
         <param name="encryptedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+          The <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
           
 
-           object to replace the <paramref
-           name="inputElement" />
+           object to replace the <paramref name="inputElement" />
 
           
 
            parameter with.</param
         >
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1758,8 +1769,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property contains an <see
-             cref="T:System.Xml.XmlResolver" />
+            >This property contains an <see cref="T:System.Xml.XmlResolver" />
 
             
 
@@ -1769,8 +1779,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Xml.XmlResolver" />
+            >Gets or sets the <see cref="T:System.Xml.XmlResolver" />
 
             
 
@@ -1798,8 +1807,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncAES128KeyWrapUrl" />
+            >The value of the <see cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncAES128KeyWrapUrl" />
 
             
 
@@ -1831,8 +1839,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncAES128Url" />
+            >The value of the <see cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncAES128Url" />
 
             
 
@@ -1864,8 +1871,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncAES192KeyWrapUrl" />
+            >The value of the <see cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncAES192KeyWrapUrl" />
 
             
 
@@ -1897,8 +1903,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncAES192Url" />
+            >The value of the <see cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncAES192Url" />
 
             
 
@@ -1930,8 +1935,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncAES256KeyWrapUrl" />
+            >The value of the <see cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncAES256KeyWrapUrl" />
 
             
 
@@ -1963,8 +1967,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncAES256Url" />
+            >The value of the <see cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncAES256Url" />
 
             
 
@@ -1993,8 +1996,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncDESUrl" />
+            >The value of the <see cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncDESUrl" />
 
             
 
@@ -2026,8 +2028,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncElementContentUrl" />
+            >The value of the <see cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncElementContentUrl" />
 
             
 
@@ -2059,8 +2060,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncElementUrl" />
+            >The value of the <see cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncElementUrl" />
 
             
 
@@ -2092,8 +2092,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncEncryptedKeyUrl" />
+            >The value of the <see cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncEncryptedKeyUrl" />
 
             
 
@@ -2125,8 +2124,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncNamespaceUrl" />
+            >The value of the <see cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncNamespaceUrl" />
 
             
 
@@ -2158,8 +2156,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncRSA15Url" />
+            >The value of the <see cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncRSA15Url" />
 
             
 
@@ -2191,8 +2188,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncRSAOAEPUrl" />
+            >The value of the <see cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncRSAOAEPUrl" />
 
             
 
@@ -2224,8 +2220,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncSHA256Url" />
+            >The value of the <see cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncSHA256Url" />
 
             
 
@@ -2257,8 +2252,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncSHA512Url" />
+            >The value of the <see cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncSHA512Url" />
 
             
 
@@ -2290,8 +2284,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncTripleDESKeyWrapUrl" />
+            >The value of the <see cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncTripleDESKeyWrapUrl" />
 
             
 
@@ -2323,8 +2316,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncTripleDESUrl" />
+            >The value of the <see cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncTripleDESUrl" />
 
             
 

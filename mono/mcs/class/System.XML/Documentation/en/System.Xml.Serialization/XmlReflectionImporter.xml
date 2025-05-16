@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.XmlReflectionImporter" />
+        >The <see cref="T:System.Xml.Serialization.XmlReflectionImporter" />
 
         
 
@@ -31,13 +30,11 @@
       <list type="bullet">
         <item>
           <para
-            >By the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+            >By the <see cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
 
             
 
-             class while it creates <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+             class while it creates <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -49,8 +46,7 @@
         </item>
         <item>
           <para
-            >To initialize an <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >To initialize an <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -65,8 +61,7 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.XmlReflectionImporter" />
+        >The <see cref="T:System.Xml.Serialization.XmlReflectionImporter" />
 
         
 
@@ -105,8 +100,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You do not need to create an instance of an <see
-             cref="T:System.Xml.Serialization.XmlReflectionImporter" />
+            >You do not need to create an instance of an <see cref="T:System.Xml.Serialization.XmlReflectionImporter" />
 
             
 
@@ -116,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlReflectionImporter" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlReflectionImporter" />
 
             
 
@@ -149,8 +142,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >It is not necessary to create an instance of the <see
-             cref="T:System.Xml.Serialization.XmlReflectionImporter" />
+            >It is not necessary to create an instance of the <see cref="T:System.Xml.Serialization.XmlReflectionImporter" />
 
             
 
@@ -160,8 +152,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlReflectionImporter" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlReflectionImporter" />
 
             
 
@@ -169,7 +160,11 @@
           >
         </summary>
         <param name="defaultNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -203,8 +198,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >It is not necessary to create an instance of the <see
-             cref="T:System.Xml.Serialization.XmlReflectionImporter" />
+            >It is not necessary to create an instance of the <see cref="T:System.Xml.Serialization.XmlReflectionImporter" />
 
             
 
@@ -214,8 +208,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlReflectionImporter" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlReflectionImporter" />
 
             
 
@@ -223,12 +216,15 @@
           >
         </summary>
         <param name="attributeOverrides">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that overrides how the <see
-           cref="T:System.Xml.Serialization.XmlSerializer" />
+          An object that overrides how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
           
 
@@ -263,8 +259,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >It is not necessary to create an instance of the <see
-             cref="T:System.Xml.Serialization.XmlReflectionImporter" />
+            >It is not necessary to create an instance of the <see cref="T:System.Xml.Serialization.XmlReflectionImporter" />
 
             
 
@@ -274,8 +269,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlReflectionImporter" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlReflectionImporter" />
 
             
 
@@ -283,19 +277,26 @@
           >
         </summary>
         <param name="attributeOverrides">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that overrides how the <see
-           cref="T:System.Xml.Serialization.XmlSerializer" />
+          An object that overrides how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
           
 
            class serializes mapped types.</param
         >
         <param name="defaultNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -331,16 +332,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Serialization.XmlReflectionImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean)" />
+            >The <see cref="M:System.Xml.Serialization.XmlReflectionImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean)" />
 
             
 
              method is called while initializing a Web service or client, or reflecting a Web service. It is not necessary to call it directly.</para
           >
           <para
-            >The <see
-             cref="T:System.Xml.Serialization.XmlReflectionMember" />
+            >The <see cref="T:System.Xml.Serialization.XmlReflectionMember" />
 
             
 
@@ -368,8 +367,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Serialization.XmlMembersMapping" />
+            >An <see cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
             
 
@@ -377,33 +375,48 @@
           >
         </returns>
         <param name="elementName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An XML element name produced from the Web service method.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An XML element namespace produced from the Web service method.</param
         >
         <param name="members">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Xml.Serialization.XmlReflectionMember" />
+          An array of <see cref="T:System.Xml.Serialization.XmlReflectionMember" />
 
           
 
             objects that contain .NET Framework code entities that belong to a Web service method.</param
         >
         <param name="hasWrapperElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -445,8 +458,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Serialization.XmlMembersMapping" />
+            >An <see cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
             
 
@@ -454,40 +466,59 @@
           >
         </returns>
         <param name="elementName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An XML element name produced from the Web service method.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An XML element namespace produced from the Web service method.</param
         >
         <param name="members">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Xml.Serialization.XmlReflectionMember" />
+          An array of <see cref="T:System.Xml.Serialization.XmlReflectionMember" />
 
           
 
             objects that contain .NET Framework code entities that belong to a Web service method.</param
         >
         <param name="hasWrapperElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if elements that correspond to Web Services Description Language (WSDL) message parts should be enclosed in an extra wrapper element in a SOAP message; otherwise, false.</param
         >
         <param name="rpc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -530,8 +561,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Serialization.XmlMembersMapping" />
+            >An <see cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
             
 
@@ -539,47 +569,70 @@
           >
         </returns>
         <param name="elementName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An XML element name produced from the Web service method.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An XML element namespace produced from the Web service method.</param
         >
         <param name="members">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Xml.Serialization.XmlReflectionMember" />
+          An array of <see cref="T:System.Xml.Serialization.XmlReflectionMember" />
 
           
 
             objects that contain .NET Framework code entities that belong to a Web service method.</param
         >
         <param name="hasWrapperElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if elements that correspond to Web Services Description Language (WSDL) message parts should be enclosed in an extra wrapper element in a SOAP message; otherwise, false.</param
         >
         <param name="rpc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the method is a remote procedure call; otherwise, false.</param
         >
         <param name="openModel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -623,8 +676,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Serialization.XmlMembersMapping" />
+            >An <see cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
             
 
@@ -632,59 +684,85 @@
           >
         </returns>
         <param name="elementName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An XML element name produced from the Web service method.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An XML element namespace produced from the Web service method.</param
         >
         <param name="members">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Xml.Serialization.XmlReflectionMember" />
+          An array of <see cref="T:System.Xml.Serialization.XmlReflectionMember" />
 
           
 
             objects that contain .NET Framework code entities that belong to a Web service method.</param
         >
         <param name="hasWrapperElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if elements that correspond to Web Services Description Language (WSDL) message parts should be enclosed in an extra wrapper element in a SOAP message; otherwise, false.</param
         >
         <param name="rpc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the method is a remote procedure call; otherwise, false.</param
         >
         <param name="openModel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to specify that the generated schema type will be marked with the &lt;xs:anyAttribute&gt; element; otherwise, false.</param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Xml.Serialization.XmlMappingAccess" />
+          One of the <see cref="T:System.Xml.Serialization.XmlMappingAccess" />
 
           
 
@@ -717,8 +795,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >It is not necessary to call the <see
-             cref="M:System.Xml.Serialization.XmlReflectionImporter.ImportTypeMapping(System.Type)" />
+            >It is not necessary to call the <see cref="M:System.Xml.Serialization.XmlReflectionImporter.ImportTypeMapping(System.Type)" />
 
             
 
@@ -734,7 +811,11 @@
           <para>Internal .NET Framework mapping of a type to an XML Schema element.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -768,8 +849,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >It is not necessary to call the <see
-             cref="M:System.Xml.Serialization.XmlReflectionImporter.ImportTypeMapping(System.Type,System.String)" />
+            >It is not necessary to call the <see cref="M:System.Xml.Serialization.XmlReflectionImporter.ImportTypeMapping(System.Type,System.String)" />
 
             
 
@@ -785,14 +865,22 @@
           <para>Internal .NET Framework mapping of a type to an XML Schema element.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The .NET Framework type for which to generate a type mapping.</param
         >
         <param name="defaultNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -826,8 +914,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >It is not necessary to call the <see
-             cref="M:System.Xml.Serialization.XmlReflectionImporter.ImportTypeMapping(System.Type,System.Xml.Serialization.XmlRootAttribute)" />
+            >It is not necessary to call the <see cref="M:System.Xml.Serialization.XmlReflectionImporter.ImportTypeMapping(System.Type,System.Xml.Serialization.XmlRootAttribute)" />
 
             
 
@@ -841,8 +928,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Serialization.XmlTypeMapping" />
+            >An <see cref="T:System.Xml.Serialization.XmlTypeMapping" />
 
             
 
@@ -850,19 +936,26 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The .NET Framework type for which to generate a type mapping.</param
         >
         <param name="root">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Serialization.XmlRootAttribute" />
+          An <see cref="T:System.Xml.Serialization.XmlRootAttribute" />
 
           
 
@@ -897,8 +990,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >It is not necessary to call the <see
-             cref="M:System.Xml.Serialization.XmlReflectionImporter.ImportTypeMapping(System.Type,System.Xml.Serialization.XmlRootAttribute,System.String)" />
+            >It is not necessary to call the <see cref="M:System.Xml.Serialization.XmlReflectionImporter.ImportTypeMapping(System.Type,System.Xml.Serialization.XmlRootAttribute,System.String)" />
 
             
 
@@ -912,8 +1004,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Serialization.XmlTypeMapping" />
+            >An <see cref="T:System.Xml.Serialization.XmlTypeMapping" />
 
             
 
@@ -921,26 +1012,37 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The .NET Framework type for which to generate a type mapping.</param
         >
         <param name="root">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Serialization.XmlRootAttribute" />
+          An <see cref="T:System.Xml.Serialization.XmlRootAttribute" />
 
           
 
            attribute that is applied to the type.</param
         >
         <param name="defaultNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -970,8 +1072,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >It is not necessary to call the <see
-             cref="M:System.Xml.Serialization.XmlReflectionImporter.IncludeType(System.Type)" />
+            >It is not necessary to call the <see cref="M:System.Xml.Serialization.XmlReflectionImporter.IncludeType(System.Type)" />
 
             
 
@@ -983,7 +1084,11 @@
           <para>Includes mappings for a type for later use when import methods are invoked. </para>
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1019,17 +1124,19 @@
           <para>Includes mappings for derived types for later use when import methods are invoked. </para>
         </summary>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Reflection.ICustomAttributeProvider" />
+          An instance of the <see cref="T:System.Reflection.ICustomAttributeProvider" />
 
           
 
-            class that contains custom attributes derived from the <see
-           cref="T:System.Xml.Serialization.XmlIncludeAttribute" />
+            class that contains custom attributes derived from the <see cref="T:System.Xml.Serialization.XmlIncludeAttribute" />
 
           
 

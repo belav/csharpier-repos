@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class implements the <see
-         cref="T:System.Collections.IEnumerator" />
+        >This class implements the <see cref="T:System.Collections.IEnumerator" />
 
         
 
@@ -37,8 +36,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the ability to navigate through an <see
-         cref="T:System.Security.Cryptography.OidCollection" />
+        >Provides the ability to navigate through an <see cref="T:System.Security.Cryptography.OidCollection" />
 
         
 
@@ -70,18 +68,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After an enumerator is created, the <see
-             cref="M:System.Security.Cryptography.OidEnumerator.MoveNext" />
+            >After an enumerator is created, the <see cref="M:System.Security.Cryptography.OidEnumerator.MoveNext" />
 
             
 
-             method must be called to advance the enumerator to the first element of the collection before reading the value of the <see
-             cref="P:System.Security.Cryptography.OidEnumerator.Current" />
+             method must be called to advance the enumerator to the first element of the collection before reading the value of the <see cref="P:System.Security.Cryptography.OidEnumerator.Current" />
 
             
 
-             property; otherwise, <see
-             cref="P:System.Security.Cryptography.OidEnumerator.Current" />
+             property; otherwise, <see cref="P:System.Security.Cryptography.OidEnumerator.Current" />
 
             
 
@@ -92,8 +87,7 @@
 
             
 
-             also returns null or throws an exception if the last call to <see
-             cref="M:System.Security.Cryptography.OidEnumerator.MoveNext" />
+             also returns null or throws an exception if the last call to <see cref="M:System.Security.Cryptography.OidEnumerator.MoveNext" />
 
             
 
@@ -104,13 +98,11 @@
 
             
 
-             does not move the position of the enumerator, and consecutive calls to <see
-             cref="P:System.Security.Cryptography.OidEnumerator.Current" />
+             does not move the position of the enumerator, and consecutive calls to <see cref="P:System.Security.Cryptography.OidEnumerator.Current" />
 
             
 
-             return the same object, until <see
-             cref="M:System.Security.Cryptography.OidEnumerator.MoveNext" />
+             return the same object, until <see cref="M:System.Security.Cryptography.OidEnumerator.MoveNext" />
 
             
 
@@ -120,13 +112,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the current <see
-             cref="T:System.Security.Cryptography.Oid" />
+            >Gets the current <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
-             object in an <see
-             cref="T:System.Security.Cryptography.OidCollection" />
+             object in an <see cref="T:System.Security.Cryptography.OidCollection" />
 
             
 
@@ -155,34 +145,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After an enumerator is created, it is positioned before the first element of the collection, and the first call to the <see
-             cref="M:System.Security.Cryptography.OidEnumerator.MoveNext" />
+            >After an enumerator is created, it is positioned before the first element of the collection, and the first call to the <see cref="M:System.Security.Cryptography.OidEnumerator.MoveNext" />
 
             
 
-             method moves the enumerator over the first element of the collection. Subsequent calls to <see
-             cref="M:System.Security.Cryptography.OidEnumerator.MoveNext" />
+             method moves the enumerator over the first element of the collection. Subsequent calls to <see cref="M:System.Security.Cryptography.OidEnumerator.MoveNext" />
 
             
 
              advances the enumerator past subsequent items in the collection.</para
           >
           <para
-            >After the end of the collection is passed, calls to <see
-             cref="M:System.Security.Cryptography.OidEnumerator.MoveNext" />
+            >After the end of the collection is passed, calls to <see cref="M:System.Security.Cryptography.OidEnumerator.MoveNext" />
 
             
 
              return false.</para
           >
           <para
-            >An enumerator is valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator becomes invalid and the next call to <see
-             cref="M:System.Security.Cryptography.OidEnumerator.MoveNext" />
+            >An enumerator is valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator becomes invalid and the next call to <see cref="M:System.Security.Cryptography.OidEnumerator.MoveNext" />
 
             
 
-             throws an <see
-             cref="T:System.InvalidOperationException" />
+             throws an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -192,13 +177,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Advances to the next <see
-             cref="T:System.Security.Cryptography.Oid" />
+            >Advances to the next <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
-             object in an <see
-             cref="T:System.Security.Cryptography.OidCollection" />
+             object in an <see cref="T:System.Security.Cryptography.OidCollection" />
 
             
 
@@ -231,18 +214,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The initial position of an enumerator is before the first element in the <see
-             cref="T:System.Security.Cryptography.OidCollection" />
+            >The initial position of an enumerator is before the first element in the <see cref="T:System.Security.Cryptography.OidCollection" />
 
             
 
-             object. An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator becomes invalid and the next call to the <see
-             cref="M:System.Security.Cryptography.OidEnumerator.Reset" />
+             object. An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator becomes invalid and the next call to the <see cref="M:System.Security.Cryptography.OidEnumerator.Reset" />
 
             
 
-             method throws an <see
-             cref="T:System.InvalidOperationException" />
+             method throws an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -278,13 +258,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the current <see
-             cref="T:System.Security.Cryptography.Oid" />
+            >Gets the current <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
-             object in an <see
-             cref="T:System.Security.Cryptography.OidCollection" />
+             object in an <see cref="T:System.Security.Cryptography.OidCollection" />
 
             
 

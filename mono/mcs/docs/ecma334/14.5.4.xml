@@ -1,31 +1,32 @@
 <?xml version="1.0"?>
 <clause number="14.5.4" title="Member access">
   <paragraph
-    >A <non_terminal
-     where="14.5.4">member-access</non_terminal>
-
-    
-
-     consists of a <non_terminal
-     where="14.5">primary-expression</non_terminal>
-
-    
-
-     or a <non_terminal
-     where="14.5.4">predefined-type</non_terminal>
-
-    
-
-    , followed by a "." token, followed by an identifier. <grammar_production
+    >A <non_terminal where="14.5.4"
+      >member-access</non_terminal
     >
+
+    
+
+     consists of a <non_terminal where="14.5"
+      >primary-expression</non_terminal
+    >
+
+    
+
+     or a <non_terminal where="14.5.4"
+      >predefined-type</non_terminal
+    >
+
+    
+
+    , followed by a "." token, followed by an identifier. <grammar_production>
       <name>
         <non_terminal where="14.5.4">member-access</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="14.5">primary-expression</non_terminal>
         <terminal>.</terminal>
         <non_terminal where="9.4.2">identifier</non_terminal>
@@ -43,8 +44,7 @@
 
       
 
-       : one of <rhs
-      >
+       : one of <rhs>
         <keyword>bool</keyword>
         <keyword>byte</keyword>
         <keyword>char</keyword>
@@ -66,37 +66,40 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >A <non_terminal
-     where="14.5.4">member-access</non_terminal>
-
-    
-
-     of the form E.I, where E is a <non_terminal
-     where="14.5">primary-expression</non_terminal>
-
-    
-
-     or a <non_terminal
-     where="14.5.4">predefined-type</non_terminal>
-
-    
-
-     and I is an identifier, is evaluated and classified as follows: <list
+    >A <non_terminal where="14.5.4"
+      >member-access</non_terminal
     >
+
+    
+
+     of the form E.I, where E is a <non_terminal where="14.5"
+      >primary-expression</non_terminal
+    >
+
+    
+
+     or a <non_terminal where="14.5.4"
+      >predefined-type</non_terminal
+    >
+
+    
+
+     and I is an identifier, is evaluated and classified as follows: <list>
       <list_item> If E is a namespace and I is the name of an accessible member of that namespace, then the result is that member and, depending on the member, is classified as a namespace or a type. </list_item>
       <list_item
-        > If E is a <non_terminal
-         where="14.5.4">predefined-type</non_terminal>
+        > If E is a <non_terminal where="14.5.4"
+          >predefined-type</non_terminal
+        >
 
         
 
-         or a <non_terminal
-         where="14.5">primary-expression</non_terminal>
+         or a <non_terminal where="14.5"
+          >primary-expression</non_terminal
+        >
 
         
 
-         classified as a type, and a member lookup (<hyperlink
-        >14.3</hyperlink>
+         classified as a type, and a member lookup (<hyperlink>14.3</hyperlink>
 
         
 
@@ -115,12 +118,13 @@
         <list>
           <list_item
             > If the reference occurs within the class or struct in which the event is declared, and the event was declared without <non_terminal
-             where="17.7">event-accessor-declarations</non_terminal>
+              where="17.7"
+              >event-accessor-declarations</non_terminal
+            >
 
             
 
-             (<hyperlink
-            >17.7</hyperlink>
+             (<hyperlink>17.7</hyperlink>
 
             
 
@@ -133,8 +137,7 @@
         <list_item> Otherwise, E.I is an invalid member reference, and a compile-time error occurs. </list_item>
       </list>
       <list_item
-        > If E is a property access, indexer access, variable, or value, the type of which is T, and a member lookup (<hyperlink
-        >14.3</hyperlink>
+        > If E is a property access, indexer access, variable, or value, the type of which is T, and a member lookup (<hyperlink>14.3</hyperlink>
 
         
 
@@ -142,8 +145,7 @@
       >
       <list>
         <list_item
-          > First, if E is a property or indexer access, then the value of the property or indexer access is obtained (<hyperlink
-          >14.1.1</hyperlink>
+          > First, if E is a property or indexer access, then the value of the property or indexer access is obtained (<hyperlink>14.1.1</hyperlink>
 
           
 
@@ -152,8 +154,9 @@
         <list_item> If I identifies one or more methods, then the result is a method group with an associated instance expression of E. </list_item>
         <list_item> If I identifies an instance property, then the result is a property access with an associated instance expression of E. </list_item>
         <list_item
-          > If T is a <non_terminal
-           where="11.2">class-type</non_terminal>
+          > If T is a <non_terminal where="11.2"
+            >class-type</non_terminal
+          >
 
           
 
@@ -165,8 +168,9 @@
           <list_item> Otherwise, the result is a variable, namely the field I in the object referenced by E. </list_item>
         </list>
         <list_item
-          > If T is a <non_terminal
-           where="11.1">struct-type</non_terminal>
+          > If T is a <non_terminal where="11.1"
+            >struct-type</non_terminal
+          >
 
           
 
@@ -180,12 +184,13 @@
         <list>
           <list_item
             > If the reference occurs within the class or struct in which the event is declared, and the event was declared without <non_terminal
-             where="17.7">event-accessor-declarations</non_terminal>
+              where="17.7"
+              >event-accessor-declarations</non_terminal
+            >
 
             
 
-             (<hyperlink
-            >17.7</hyperlink>
+             (<hyperlink>17.7</hyperlink>
 
             
 

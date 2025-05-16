@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <clause number="12.3.3.15" title="Try-catch-finally statements">
   <paragraph
-    >Definite assignment analysis for a try-catch-finally statement of the form: <code_example
-    >
+    >Definite assignment analysis for a try-catch-finally statement of the form: <code_example>
       <![CDATA[
 try try-block   
 catch(...) catch-block-1  
@@ -14,8 +13,7 @@ finally finally-block
 
     
 
-    is done as if the statement were a try-finally statement enclosing a try-catch statement: <code_example
-    >
+    is done as if the statement were a try-finally statement enclosing a try-catch statement: <code_example>
       <![CDATA[
 try {  
    try try-block   
@@ -29,13 +27,11 @@ finally finally-block
   </paragraph>
   <paragraph>
     <example
-      >[Example: The following example demonstrates how the different blocks of a try statement (<hyperlink
-      >15.10</hyperlink>
+      >[Example: The following example demonstrates how the different blocks of a try statement (<hyperlink>15.10</hyperlink>
 
       
 
-      ) affect definite assignment. <code_example
-      >
+      ) affect definite assignment. <code_example>
         <![CDATA[
 class A  
 {  

@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For an example of how to use a Spin Lock, see <format
-         type="text/html">
+        >For an example of how to use a Spin Lock, see <format type="text/html">
           <a href="a9ed3e4e-4f29-4207-b730-ed0a51ecbc19">How to: Use SpinWait and SpinLock</a>
         </format>
 
@@ -35,8 +34,7 @@
         .</para
       >
       <para
-        >Spin locks can be used for leaf-level locks where the object allocation implied by using a <see
-         cref="T:System.Threading.Monitor" />
+        >Spin locks can be used for leaf-level locks where the object allocation implied by using a <see cref="T:System.Threading.Monitor" />
 
         
 
@@ -67,26 +65,22 @@
 
         
 
-         should only be used after you have been determined that doing so will improve an application's performance. It is also important to note that <see
-         cref="T:System.Threading.SpinLock" />
+         should only be used after you have been determined that doing so will improve an application's performance. It is also important to note that <see cref="T:System.Threading.SpinLock" />
 
         
 
-         is a value type, for performance reasons. For this reason, you must be very careful not to accidentally copy a <see
-         cref="T:System.Threading.SpinLock" />
+         is a value type, for performance reasons. For this reason, you must be very careful not to accidentally copy a <see cref="T:System.Threading.SpinLock" />
 
         
 
-         instance, as the two instances (the original and the copy) would then be completely independent of one another, which would likely lead to erroneous behavior of the application. If a <see
-         cref="T:System.Threading.SpinLock" />
+         instance, as the two instances (the original and the copy) would then be completely independent of one another, which would likely lead to erroneous behavior of the application. If a <see cref="T:System.Threading.SpinLock" />
 
         
 
          instance must be passed around, it should be passed by reference rather than by value. </para
       >
       <para
-        >Do not store <see
-         cref="T:System.Threading.SpinLock" />
+        >Do not store <see cref="T:System.Threading.SpinLock" />
 
         
 
@@ -116,8 +110,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default constructor for <see
-             cref="T:System.Threading.SpinLock" />
+            >The default constructor for <see cref="T:System.Threading.SpinLock" />
 
             
 
@@ -127,8 +120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.SpinLock" />
+            >Initializes a new instance of the <see cref="T:System.Threading.SpinLock" />
 
             
 
@@ -136,7 +128,11 @@
           >
         </summary>
         <param name="enableThreadOwnerTracking">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -189,31 +185,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default overload of <see
-             cref="M:System.Threading.SpinLock.Exit" />
+            >The default overload of <see cref="M:System.Threading.SpinLock.Exit" />
 
             
 
-             provides the same behavior as if calling <see
-             cref="M:System.Threading.SpinLock.Exit(System.Boolean)" />
+             provides the same behavior as if calling <see cref="M:System.Threading.SpinLock.Exit(System.Boolean)" />
 
             
 
              using true as the argument.</para
           >
           <para
-            >If you call <see
-             cref="M:System.Threading.SpinLock.Exit" />
+            >If you call <see cref="M:System.Threading.SpinLock.Exit" />
 
             
 
-             without having first called <see
-             cref="M:System.Threading.SpinLock.Enter(System.Boolean@)" />
+             without having first called <see cref="M:System.Threading.SpinLock.Enter(System.Boolean@)" />
 
             
 
-              the internal state of the <see
-             cref="T:System.Threading.SpinLock" />
+              the internal state of the <see cref="T:System.Threading.SpinLock" />
 
             
 
@@ -251,41 +242,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling <see
-             cref="M:System.Threading.SpinLock.Exit(System.Boolean)" />
+            >Calling <see cref="M:System.Threading.SpinLock.Exit(System.Boolean)" />
 
             
 
-             with the <paramref
-             name="useMemoryBarrier" />
+             with the <paramref name="useMemoryBarrier" />
 
             
 
-             argument set to true will improve the fairness of the lock at the expense of some performance. The default <see
-             cref="M:System.Threading.SpinLock.Exit" />
+             argument set to true will improve the fairness of the lock at the expense of some performance. The default <see cref="M:System.Threading.SpinLock.Exit" />
 
             
 
-             overload behaves as if specifying true for <paramref
-             name="useMemoryBarrier" />
+             overload behaves as if specifying true for <paramref name="useMemoryBarrier" />
 
             
 
             .</para
           >
           <para
-            >If you call <see
-             cref="M:System.Threading.SpinLock.Exit" />
+            >If you call <see cref="M:System.Threading.SpinLock.Exit" />
 
             
 
-             without having first called <see
-             cref="M:System.Threading.SpinLock.Enter(System.Boolean@)" />
+             without having first called <see cref="M:System.Threading.SpinLock.Enter(System.Boolean@)" />
 
             
 
-             the internal state of the <see
-             cref="T:System.Threading.SpinLock" />
+             the internal state of the <see cref="T:System.Threading.SpinLock" />
 
             
 
@@ -297,7 +281,11 @@
           <para>Releases the lock.</para>
         </summary>
         <param name="useMemoryBarrier">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

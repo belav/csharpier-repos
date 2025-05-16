@@ -23,8 +23,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This interface enumerates an array of <see
-         cref="T:System.Runtime.InteropServices.ComTypes.FORMATETC" />
+        >This interface enumerates an array of <see cref="T:System.Runtime.InteropServices.ComTypes.FORMATETC" />
 
         
 
@@ -32,8 +31,7 @@
       >
       <para>For more information about the IEnumFORMATETC interface, see the MSDN Library.</para>
       <para
-        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format
-         type="text/html">
+        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html">
           <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
         </format>
 
@@ -112,13 +110,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >S_OK if the <paramref
-             name="pceltFetched" />
+            >S_OK if the <paramref name="pceltFetched" />
 
             
 
-             parameter equals the <paramref
-             name="celt" />
+             parameter equals the <paramref name="celt" />
 
             
 
@@ -126,41 +122,49 @@
           >
         </returns>
         <param name="celt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of <see
-           cref="T:System.Runtime.InteropServices.ComTypes.FORMATETC" />
+          The number of <see cref="T:System.Runtime.InteropServices.ComTypes.FORMATETC" />
 
           
 
-           references to return in <paramref
-           name="rgelt" />
+           references to return in <paramref name="rgelt" />
 
           
 
           .</param
         >
         <param name="rgelt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          When this method returns, contains a reference to the enumerated <see
-           cref="T:System.Runtime.InteropServices.ComTypes.FORMATETC" />
+          When this method returns, contains a reference to the enumerated <see cref="T:System.Runtime.InteropServices.ComTypes.FORMATETC" />
 
           
 
            references. This parameter is passed uninitialized.</param
         >
         <param name="pceltFetched">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          When this method returns, contains a reference to the actual number of references enumerated in <paramref
-           name="rgelt" />
+          When this method returns, contains a reference to the actual number of references enumerated in <paramref name="rgelt" />
 
           
 
@@ -227,8 +231,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >S_OK if the number of elements skipped equals the <paramref
-             name="celt" />
+            >S_OK if the number of elements skipped equals the <paramref name="celt" />
 
             
 
@@ -236,7 +239,11 @@
           >
         </returns>
         <param name="celt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

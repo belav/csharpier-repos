@@ -26,74 +26,61 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+        >The <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
         
 
          class represents the &lt;ReferenceList&gt; element of an encrypted document XML signature defined by the XML encryption specification.</para
       >
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+        >The <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
         
 
-         class contains references to <see
-         cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+         class contains references to <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
         
 
-         and <see
-         cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+         and <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
         
 
-         elements that were encrypted by a key contained within another <see
-         cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+         elements that were encrypted by a key contained within another <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
         
 
-         element. The <see
-         cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+         element. The <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
         
 
-         class uses <see
-         cref="T:System.Security.Cryptography.Xml.DataReference" />
+         class uses <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
         
 
-         elements to reference <see
-         cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+         elements to reference <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
         
 
-         elements, and <see
-         cref="T:System.Security.Cryptography.Xml.KeyReference" />
+         elements, and <see cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
         
 
-         elements to reference <see
-         cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+         elements to reference <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
         
 
          elements.  </para
       >
       <para
-        >You can add only <see
-         cref="T:System.Security.Cryptography.Xml.DataReference" />
+        >You can add only <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
         
 
-         or <see
-         cref="T:System.Security.Cryptography.Xml.KeyReference" />
+         or <see cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
         
 
-         objects to the <see
-         cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+         objects to the <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
         
 
@@ -125,8 +112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
             
 
@@ -158,18 +144,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Security.Cryptography.Xml.DataReference" />
+            >Adds a <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
             
 
-             or <see
-             cref="T:System.Security.Cryptography.Xml.KeyReference" />
+             or <see cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
             
 
-             object to the <see
-             cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+             object to the <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
             
 
@@ -181,22 +164,23 @@
           <para>The position at which the new element was inserted.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.Cryptography.Xml.DataReference" />
+          A <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
           
 
-           or <see
-           cref="T:System.Security.Cryptography.Xml.KeyReference" />
+           or <see cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
           
 
-           object to add to the <see
-           cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+           object to add to the <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
           
 
@@ -225,8 +209,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all items from the <see
-             cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+            >Removes all items from the <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
             
 
@@ -258,18 +241,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+            >Determines whether the <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
             
 
-             collection contains a specific <see
-             cref="T:System.Security.Cryptography.Xml.DataReference" />
+             collection contains a specific <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
             
 
-             or <see
-             cref="T:System.Security.Cryptography.Xml.KeyReference" />
+             or <see cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
             
 
@@ -279,18 +259,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Security.Cryptography.Xml.DataReference" />
+            >true if the <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
             
 
-             or <see
-             cref="T:System.Security.Cryptography.Xml.KeyReference" />
+             or <see cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
             
 
-             object is found in the <see
-             cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+             object is found in the <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
             
 
@@ -298,22 +275,23 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.Xml.DataReference" />
+          The <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
           
 
-           or <see
-           cref="T:System.Security.Cryptography.Xml.KeyReference" />
+           or <see cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
           
 
-           object to locate in the <see
-           cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+           object to locate in the <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
           
 
@@ -345,8 +323,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the <see
-             cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+            >Copies the elements of the <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
             
 
@@ -354,29 +331,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           object that is the destination of the elements copied from the <see
-           cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+           object that is the destination of the elements copied from the <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
           
 
            object. The array must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -402,8 +384,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of elements contained in the <see
-             cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+            >Gets the number of elements contained in the <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
             
 
@@ -439,8 +420,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that iterates through a <see
-             cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+            >Returns an enumerator that iterates through a <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
             
 
@@ -450,13 +430,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             object that can be used to iterate through a <see
-             cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+             object that can be used to iterate through a <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
             
 
@@ -488,8 +466,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the index of a specific item in the <see
-             cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+            >Determines the index of a specific item in the <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
             
 
@@ -499,8 +476,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of <paramref
-             name="value" />
+            >The index of <paramref name="value" />
 
             
 
@@ -508,22 +484,23 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.Xml.DataReference" />
+          The <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
           
 
-           or <see
-           cref="T:System.Security.Cryptography.Xml.KeyReference" />
+           or <see cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
           
 
-           object to locate in the <see
-           cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+           object to locate in the <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
           
 
@@ -555,18 +532,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a <see
-             cref="T:System.Security.Cryptography.Xml.DataReference" />
+            >Inserts a <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
             
 
-             or <see
-             cref="T:System.Security.Cryptography.Xml.KeyReference" />
+             or <see cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
             
 
-             object into the <see
-             cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+             object into the <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
             
 
@@ -574,34 +548,38 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="value" />
+          The zero-based index at which <paramref name="value" />
 
           
 
            should be inserted.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.Cryptography.Xml.DataReference" />
+          A <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
           
 
-           or <see
-           cref="T:System.Security.Cryptography.Xml.KeyReference" />
+           or <see cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
           
 
-           object to insert into the <see
-           cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+           object to insert into the <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
           
 
@@ -627,8 +605,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether access to the <see
-             cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+            >Gets a value that indicates whether access to the <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
             
 
@@ -663,13 +640,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Security.Cryptography.Xml.DataReference" />
+            >Returns the <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
             
 
-             or <see
-             cref="T:System.Security.Cryptography.Xml.KeyReference" />
+             or <see cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
             
 
@@ -679,13 +654,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Cryptography.Xml.DataReference" />
+            >The <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
             
 
-             or <see
-             cref="T:System.Security.Cryptography.Xml.KeyReference" />
+             or <see cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
             
 
@@ -693,17 +666,19 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the <see
-           cref="T:System.Security.Cryptography.Xml.DataReference" />
+          The index of the <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
           
 
-           or <see
-           cref="T:System.Security.Cryptography.Xml.KeyReference" />
+           or <see cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
           
 
@@ -762,18 +737,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of a specific <see
-             cref="T:System.Security.Cryptography.Xml.DataReference" />
+            >Removes the first occurrence of a specific <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
             
 
-             or <see
-             cref="T:System.Security.Cryptography.Xml.KeyReference" />
+             or <see cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
             
 
-             object from the <see
-             cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+             object from the <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
             
 
@@ -781,22 +753,23 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.Xml.DataReference" />
+          The <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
           
 
-           or <see
-           cref="T:System.Security.Cryptography.Xml.KeyReference" />
+           or <see cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
           
 
-           object to remove from the <see
-           cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+           object to remove from the <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
           
 
@@ -827,13 +800,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Security.Cryptography.Xml.DataReference" />
+            >Removes the <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
             
 
-             or <see
-             cref="T:System.Security.Cryptography.Xml.KeyReference" />
+             or <see cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
             
 
@@ -841,17 +812,19 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the <see
-           cref="T:System.Security.Cryptography.Xml.DataReference" />
+          The zero-based index of the <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
           
 
-           or <see
-           cref="T:System.Security.Cryptography.Xml.KeyReference" />
+           or <see cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
           
 
@@ -877,8 +850,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
             
 
@@ -906,13 +878,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -922,8 +892,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Collections.IList.IsFixedSize" />
+            >For a description of this member, see <see cref="P:System.Collections.IList.IsFixedSize" />
 
             
 
@@ -951,13 +920,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Security.Cryptography.Xml.ReferenceList" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -967,8 +934,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Collections.IList.IsReadOnly" />
+            >For a description of this member, see <see cref="P:System.Collections.IList.IsReadOnly" />
 
             
 

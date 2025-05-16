@@ -34,38 +34,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When the user creates an instance of a new client-activated object by calling new or <see
-         cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+        >When the user creates an instance of a new client-activated object by calling new or <see cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
 
         
 
-         and before the thread returns to the user code, a <see
-         cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+         and before the thread returns to the user code, a <see cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
 
         
 
-         is sent to the remote application. When the construction message arrives at the remote application, it is processed by a remoting activator (either the default one, or one that is specified in the <see
-         cref="P:System.Runtime.Remoting.Activation.IConstructionCallMessage.Activator" />
+         is sent to the remote application. When the construction message arrives at the remote application, it is processed by a remoting activator (either the default one, or one that is specified in the <see cref="P:System.Runtime.Remoting.Activation.IConstructionCallMessage.Activator" />
 
         
 
-         property) and a new object is created. The remoting application then returns a <see
-         cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
+         property) and a new object is created. The remoting application then returns a <see cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
 
         
 
-         to the local application. The <see
-         cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
+         to the local application. The <see cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
 
         
 
-         contains an instance of <see
-         cref="T:System.Runtime.Remoting.ObjRef" />
+         contains an instance of <see cref="T:System.Runtime.Remoting.ObjRef" />
 
         
 
-        , which packages information about the remote object. The remoting infrastructure converts the <see
-         cref="T:System.Runtime.Remoting.ObjRef" />
+        , which packages information about the remote object. The remoting infrastructure converts the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
         
 
@@ -146,8 +139,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A chain of activators that are arranged in a hierarchy typically completes the various tasks that are involved in the activation process. If you intend to plug in a custom activator, then you should traverse the activator hierarchy and plug in your activator at the appropriate location. Use the <see
-             cref="P:System.Runtime.Remoting.Activation.IActivator.NextActivator" />
+            >A chain of activators that are arranged in a hierarchy typically completes the various tasks that are involved in the activation process. If you intend to plug in a custom activator, then you should traverse the activator hierarchy and plug in your activator at the appropriate location. Use the <see cref="P:System.Runtime.Remoting.Activation.IActivator.NextActivator" />
 
             
 
@@ -184,23 +176,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Runtime.Remoting.Activation.IConstructionCallMessage.CallSiteActivationAttributes" />
+            >The <see cref="P:System.Runtime.Remoting.Activation.IConstructionCallMessage.CallSiteActivationAttributes" />
 
             
 
-             indexer allows you to specify additional attributes to use during object activation. The user specifies the <see
-             cref="P:System.Runtime.Remoting.Activation.IConstructionCallMessage.CallSiteActivationAttributes" />
+             indexer allows you to specify additional attributes to use during object activation. The user specifies the <see cref="P:System.Runtime.Remoting.Activation.IConstructionCallMessage.CallSiteActivationAttributes" />
 
             
 
-             in the <paramref
-             name="activationAttributes" />
+             in the <paramref name="activationAttributes" />
 
             
 
-             parameter to <see
-             cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+             parameter to <see cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
 
             
 
@@ -236,8 +224,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new object's context is generally chosen based on metadata attributes of the class. The context selection mechanism is extensible through custom attributes, also known as static context properties, which are compiled into the class metadata. When activating an object remotely, the <see
-             cref="P:System.Runtime.Remoting.Activation.IConstructionCallMessage.ContextProperties" />
+            >A new object's context is generally chosen based on metadata attributes of the class. The context selection mechanism is extensible through custom attributes, also known as static context properties, which are compiled into the class metadata. When activating an object remotely, the <see cref="P:System.Runtime.Remoting.Activation.IConstructionCallMessage.ContextProperties" />
 
             
 

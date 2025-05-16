@@ -14,33 +14,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.ControlPersister" />
+        >The <see cref="T:System.Web.UI.Design.ControlPersister" />
 
         
 
-          class provides methods that can persist a <see
-         cref="T:System.Web.UI.Control" />
+          class provides methods that can persist a <see cref="T:System.Web.UI.Control" />
 
         
 
-         control or an <see
-         cref="T:System.Web.UI.ITemplate" />
+         control or an <see cref="T:System.Web.UI.ITemplate" />
 
         
 
-         interface implementation as a string of aspx code. The implementation of these methods is driven by metadata attributes, such as the <see
-         cref="T:System.ComponentModel.DefaultValueAttribute" />
+         interface implementation as a string of aspx code. The implementation of these methods is driven by metadata attributes, such as the <see cref="T:System.ComponentModel.DefaultValueAttribute" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.PersistenceModeAttribute" />
+        , <see cref="T:System.Web.UI.PersistenceModeAttribute" />
 
         
 
-        , and <see
-         cref="T:System.ComponentModel.DesignerSerializationVisibilityAttribute" />
+        , and <see cref="T:System.ComponentModel.DesignerSerializationVisibilityAttribute" />
 
         
 
@@ -48,8 +42,7 @@
       >
       <block subset="none" type="note">
         <para
-          >The Web Forms page designer does not support the Reset<paramref
-           name="PropertyName" />
+          >The Web Forms page designer does not support the Reset<paramref name="PropertyName" />
 
           
 
@@ -57,18 +50,15 @@
         >
       </block>
       <para
-        >To create a <see
-         cref="T:System.Web.UI.Control" />
+        >To create a <see cref="T:System.Web.UI.Control" />
 
         
 
-         object or an <see
-         cref="T:System.Web.UI.ITemplate" />
+         object or an <see cref="T:System.Web.UI.ITemplate" />
 
         
 
-         interface by parsing a string of control- or template-persistence data, use the <see
-         cref="T:System.Web.UI.Design.ControlParser" />
+         interface by parsing a string of control- or template-persistence data, use the <see cref="T:System.Web.UI.Design.ControlParser" />
 
         
 
@@ -97,13 +87,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method requires an <see
-             cref="T:System.ComponentModel.Design.IDesignerHost" />
+            >This method requires an <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
             
 
-             implementation to work correctly. This method uses the <see
-             cref="P:System.Web.UI.Control.Site" />
+             implementation to work correctly. This method uses the <see cref="P:System.Web.UI.Control.Site" />
 
             
 
@@ -119,12 +107,15 @@
           <para>A string that represents the persisted form of the control.</para>
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 
@@ -153,13 +144,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method requires an <see
-             cref="T:System.ComponentModel.Design.IDesignerHost" />
+            >This method requires an <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
             
 
-             implementation to work correctly. This method uses the <see
-             cref="P:System.Web.UI.Control.Site" />
+             implementation to work correctly. This method uses the <see cref="P:System.Web.UI.Control.Site" />
 
             
 
@@ -169,8 +158,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Outputs a string of data that represents the persisted form of the specified control to the specified <see
-             cref="T:System.IO.TextWriter" />
+            >Outputs a string of data that represents the persisted form of the specified control to the specified <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -178,24 +166,30 @@
           >
         </summary>
         <param name="sw">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.TextWriter" />
+          The <see cref="T:System.IO.TextWriter" />
 
           
 
            to output the persisted control data to. </param
         >
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 
@@ -224,8 +218,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method requires an <see
-             cref="T:System.ComponentModel.Design.IDesignerHost" />
+            >This method requires an <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
             
 
@@ -241,24 +234,30 @@
           <para>A string that represents the persisted form of the control.</para>
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 
            to persist. </param
         >
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          An <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 
@@ -288,8 +287,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method requires an <see
-             cref="T:System.ComponentModel.Design.IDesignerHost" />
+            >This method requires an <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
             
 
@@ -299,8 +297,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Outputs a string of data that represents the persisted form of the specified control to the specified <see
-             cref="T:System.IO.TextWriter" />
+            >Outputs a string of data that represents the persisted form of the specified control to the specified <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -308,36 +305,45 @@
           >
         </summary>
         <param name="sw">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.TextWriter" />
+          The <see cref="T:System.IO.TextWriter" />
 
           
 
            to output the persisted control data to. </param
         >
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 
            to persist. </param
         >
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          An <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 
@@ -366,8 +372,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method requires an <see
-             cref="T:System.ComponentModel.Design.IDesignerHost" />
+            >This method requires an <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
             
 
@@ -383,19 +388,26 @@
           <para>A string that contains the information to persist about the inner properties of the control.</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component to persist the inner properties of. </param
         >
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          An <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 
@@ -425,8 +437,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method requires an <see
-             cref="T:System.ComponentModel.Design.IDesignerHost" />
+            >This method requires an <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
             
 
@@ -436,8 +447,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Outputs a string of data that can persist the inner properties of the specified control to the specified <see
-             cref="T:System.IO.TextWriter" />
+            >Outputs a string of data that can persist the inner properties of the specified control to the specified <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -445,31 +455,41 @@
           >
         </summary>
         <param name="sw">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.TextWriter" />
+          The <see cref="T:System.IO.TextWriter" />
 
           
 
            to use. </param
         >
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component to persist. </param
         >
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          An <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 
@@ -501,13 +521,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlPersister.PersistTemplate(System.Web.UI.ITemplate,System.ComponentModel.Design.IDesignerHost)" />
+            >The <see cref="M:System.Web.UI.Design.ControlPersister.PersistTemplate(System.Web.UI.ITemplate,System.ComponentModel.Design.IDesignerHost)" />
 
             
 
-             method requires an <see
-             cref="T:System.ComponentModel.Design.IDesignerHost" />
+             method requires an <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
             
 
@@ -523,19 +541,26 @@
           <para>A string that represents the persisted form of the template.</para>
         </returns>
         <param name="template">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The template to persist.</param
         >
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          An <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 
@@ -564,13 +589,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlPersister.PersistTemplate(System.IO.TextWriter,System.Web.UI.ITemplate,System.ComponentModel.Design.IDesignerHost)" />
+            >The <see cref="M:System.Web.UI.Design.ControlPersister.PersistTemplate(System.IO.TextWriter,System.Web.UI.ITemplate,System.ComponentModel.Design.IDesignerHost)" />
 
             
 
-             method requires an <see
-             cref="T:System.ComponentModel.Design.IDesignerHost" />
+             method requires an <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
             
 
@@ -580,8 +603,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes a string of data that represents the persisted form of the specified template to the specified <see
-             cref="T:System.IO.TextWriter" />
+            >Writes a string of data that represents the persisted form of the specified template to the specified <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -589,31 +611,41 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.TextWriter" />
+          The <see cref="T:System.IO.TextWriter" />
 
           
 
            to write the persisted template data to.</param
         >
         <param name="template">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The template to persist.</param
         >
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          An <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 

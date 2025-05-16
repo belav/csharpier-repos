@@ -33,8 +33,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Channels transport messages across remoting boundaries (for example, between computers on application domains). The <see
-         cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
+        >Channels transport messages across remoting boundaries (for example, between computers on application domains). The <see cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
 
         
 
@@ -42,49 +41,41 @@
       >
       <para>Channels are used by the .NET Framework remoting infrastructure to transport remote calls. When a client makes a call to a remote object, the call is serialized into a message that is sent by a client channel and received by a server channel. It is then deserialized and processed. Any returned values are transmitted by the server channel and received by the client channel.</para>
       <para
-        >To perform additional processing of messages on the server-side, you can specify an implementation of the <see
-         cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
+        >To perform additional processing of messages on the server-side, you can specify an implementation of the <see cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
 
         
 
-         through which all messages processed by the <see
-         cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
+         through which all messages processed by the <see cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
 
         
 
          are passed.</para
       >
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
+        >The <see cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
 
         
 
          accepts messages serialized in either binary or SOAP format.</para
       >
       <para
-        >A <see
-         cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
+        >A <see cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
 
         
 
-         object has associated configuration properties that can be set at run time either in a configuration file (by invoking the static <see
-         cref="M:System.Runtime.Remoting.RemotingConfiguration.Configure(System.String)" />
+         object has associated configuration properties that can be set at run time either in a configuration file (by invoking the static <see cref="M:System.Runtime.Remoting.RemotingConfiguration.Configure(System.String)" />
 
         
 
-         method) or programmatically (by passing a <see
-         cref="T:System.Collections.IDictionary" />
+         method) or programmatically (by passing a <see cref="T:System.Collections.IDictionary" />
 
         
 
-         collection to the <see
-         cref="M:System.Runtime.Remoting.Channels.Http.HttpServerChannel.#ctor" />
+         collection to the <see cref="M:System.Runtime.Remoting.Channels.Http.HttpServerChannel.#ctor" />
 
         
 
-         constructor). For a list of these configuration properties, see the documentation for <see
-         cref="M:System.Runtime.Remoting.Channels.Http.HttpServerChannel.#ctor" />
+         constructor). For a list of these configuration properties, see the documentation for <see cref="M:System.Runtime.Remoting.Channels.Http.HttpServerChannel.#ctor" />
 
         
 
@@ -107,8 +98,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
 
             
 
@@ -132,8 +122,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To request that an available port be dynamically assigned, set the <paramref
-             name="port" />
+            >To request that an available port be dynamically assigned, set the <paramref name="port" />
 
             
 
@@ -143,8 +132,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
 
             
 
@@ -152,7 +140,11 @@
           >
         </summary>
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -182,8 +174,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about channel configuration properties, see <format
-             type="text/html">
+            >For more information about channel configuration properties, see <format type="text/html">
               <a href="226ecf74-ebbd-4ea0-a701-dcf4441deefe"
                 >Channel and Formatter Configuration Properties</a
               >
@@ -194,8 +185,7 @@
             .</para
           >
           <para
-            >If you do not require sink functionality, set the <paramref
-             name="sinkProvider" />
+            >If you do not require sink functionality, set the <paramref name="sinkProvider" />
 
             
 
@@ -205,8 +195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
 
             
 
@@ -214,29 +203,34 @@
           >
         </summary>
         <param name="properties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.IDictionary" />
+          A <see cref="T:System.Collections.IDictionary" />
 
           
 
            of the channel properties that hold the configuration information for the current channel. </param
         >
         <param name="sinkProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
+          The <see cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
 
           
 
-           to use with the new instance of the <see
-           cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
+           to use with the new instance of the <see cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
 
           
 
@@ -260,21 +254,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see
-             cref="P:System.Runtime.Remoting.Channels.Http.HttpServerChannel.ChannelName" />
+            >This constructor sets the <see cref="P:System.Runtime.Remoting.Channels.Http.HttpServerChannel.ChannelName" />
 
             
 
-             property by using the <paramref
-             name="name" />
+             property by using the <paramref name="name" />
 
             
 
              parameter. If you want to register more than one channel, each channel must have a unique name.</para
           >
           <para
-            >To request that an available port be dynamically assigned, set the <paramref
-             name="port" />
+            >To request that an available port be dynamically assigned, set the <paramref name="port" />
 
             
 
@@ -284,8 +275,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
 
             
 
@@ -293,14 +283,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the channel. </param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -331,29 +329,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see
-             cref="P:System.Runtime.Remoting.Channels.Http.HttpServerChannel.ChannelName" />
+            >This constructor sets the <see cref="P:System.Runtime.Remoting.Channels.Http.HttpServerChannel.ChannelName" />
 
             
 
-             property using the <paramref
-             name="name" />
+             property using the <paramref name="name" />
 
             
 
              parameter.</para
           >
           <para
-            >To request that an available port be dynamically assigned, set the <paramref
-             name="port" />
+            >To request that an available port be dynamically assigned, set the <paramref name="port" />
 
             
 
              parameter to 0 (zero).</para
           >
           <para
-            >If you do not require sink functionality, set the <paramref
-             name="sinkProvider" />
+            >If you do not require sink functionality, set the <paramref name="sinkProvider" />
 
             
 
@@ -363,8 +357,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
 
             
 
@@ -372,26 +365,37 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the channel. </param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The port on which the channel listens. </param
         >
         <param name="sinkProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
+          The <see cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
 
           
 
@@ -419,7 +423,11 @@
           <para>Adds a URI on which the channel hook must listen.</para>
         </summary>
         <param name="channelUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -442,18 +450,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although returned as an instance of <see
-             cref="T:System.Object" />
+            >Although returned as an instance of <see cref="T:System.Object" />
 
             
 
-            , the value of this property can be cast to an instance of <see
-             cref="T:System.Runtime.Remoting.Channels.ChannelDataStore" />
+            , the value of this property can be cast to an instance of <see cref="T:System.Runtime.Remoting.Channels.ChannelDataStore" />
 
             
 
-             describing the channel to which the <see
-             cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
+             describing the channel to which the <see cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
 
             
 
@@ -481,8 +486,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Every registered channel has a unique name. This name is used to retrieve a specific channel when calling <see
-             cref="M:System.Runtime.Remoting.Channels.ChannelServices.GetChannel(System.String)" />
+            >Every registered channel has a unique name. This name is used to retrieve a specific channel when calling <see cref="M:System.Runtime.Remoting.Channels.ChannelServices.GetChannel(System.String)" />
 
             
 
@@ -510,13 +514,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The priority controls the order in which channel data appears in a <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >The priority controls the order in which channel data appears in a <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             instance; higher priority channels appear before lower priority channels. Clients try to connect to the server channels in the order that they are listed in the <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             instance; higher priority channels appear before lower priority channels. Clients try to connect to the server channels in the order that they are listed in the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
@@ -616,8 +618,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current method is used by <see
-             cref="M:System.Runtime.Remoting.Channels.ChannelServices.GetUrlsForObject(System.MarshalByRefObject)" />
+            >The current method is used by <see cref="M:System.Runtime.Remoting.Channels.ChannelServices.GetUrlsForObject(System.MarshalByRefObject)" />
 
             
 
@@ -627,8 +628,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of all the URLs for an object with the specified URI, hosted on the current <see
-             cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
+            >Returns an array of all the URLs for an object with the specified URI, hosted on the current <see cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
 
             
 
@@ -638,8 +638,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of the URLs for an object with the specified URI, hosted on the current <see
-             cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
+            >An array of the URLs for an object with the specified URI, hosted on the current <see cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
 
             
 
@@ -647,7 +646,11 @@
           >
         </returns>
         <param name="objectUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -696,8 +699,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Channel properties are used to configure the channel at run time. For a list of possible channel properties and an example, see <format
-             type="text/html">
+            >Channel properties are used to configure the channel at run time. For a list of possible channel properties and an example, see <format type="text/html">
               <a href="226ECF74-EBBD-4EA0-A701-DCF4441DEEFE"
                 >[&lt;topic://cpconchannelformatterconfigurationproperties&gt;]</a
               >
@@ -711,8 +713,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Collections.ICollection" />
+            >Gets a <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -764,8 +765,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>It is not necessary to call this method to begin listening on a newly initialized channel.</para>
           <para
-            >Use this method to restart listening on a channel after the <see
-             cref="M:System.Runtime.Remoting.Channels.Http.HttpServerChannel.StopListening(System.Object)" />
+            >Use this method to restart listening on a channel after the <see cref="M:System.Runtime.Remoting.Channels.Http.HttpServerChannel.StopListening(System.Object)" />
 
             
 
@@ -778,12 +778,15 @@
           <para>Instructs the current channel to start listening for requests.</para>
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Should always be null for <see
-           cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
+          Should always be null for <see cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
 
           
 
@@ -808,8 +811,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to stop listening on a channel. To restart listening, use the <see
-             cref="M:System.Runtime.Remoting.Channels.Http.HttpServerChannel.StartListening(System.Object)" />
+            >Use this method to stop listening on a channel. To restart listening, use the <see cref="M:System.Runtime.Remoting.Channels.Http.HttpServerChannel.StartListening(System.Object)" />
 
             
 
@@ -822,12 +824,15 @@
           <para>Instructs the current channel to stop listening for requests.</para>
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Should always be null for <see
-           cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
+          Should always be null for <see cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
 
           
 
@@ -852,8 +857,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a Boolean value that indicates whether <see
-             cref="T:System.Runtime.Remoting.Channels.IChannelReceiverHook" />
+            >Gets a Boolean value that indicates whether <see cref="T:System.Runtime.Remoting.Channels.IChannelReceiverHook" />
 
             
 

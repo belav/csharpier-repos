@@ -19,18 +19,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Compilation.ExpressionPrefixAttribute" />
+        >The <see cref="T:System.Web.Compilation.ExpressionPrefixAttribute" />
 
         
 
-         class is used at design time with expressions that are not defined in the configuration file. Use the <see
-         cref="P:System.Web.Compilation.ExpressionPrefixAttribute.ExpressionPrefix" />
+         class is used at design time with expressions that are not defined in the configuration file. Use the <see cref="P:System.Web.Compilation.ExpressionPrefixAttribute.ExpressionPrefix" />
 
         
 
-         property to get the name of the prefix that is associated with the <see
-         cref="T:System.Web.Compilation.ExpressionPrefixAttribute" />
+         property to get the name of the prefix that is associated with the <see cref="T:System.Web.Compilation.ExpressionPrefixAttribute" />
 
         
 
@@ -38,13 +35,11 @@
       >
       <para>&lt;%$ [expressionPrefix]:[expressionValue] %&gt; </para>
       <para
-        >Then the expression builder, based on the prefix of the expression, generates code for the property assignment. The <paramref
-         name="expressionPrefix" />
+        >Then the expression builder, based on the prefix of the expression, generates code for the property assignment. The <paramref name="expressionPrefix" />
 
         
 
-         parameter refers to a configured expression builder, which is defined in the configuration file or through an <see
-         cref="T:System.Web.Compilation.ExpressionPrefixAttribute" />
+         parameter refers to a configured expression builder, which is defined in the configuration file or through an <see cref="T:System.Web.Compilation.ExpressionPrefixAttribute" />
 
         
 
@@ -71,23 +66,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.Compilation.ExpressionPrefixAttribute.#ctor(System.String)" />
+            >Use the <see cref="M:System.Web.Compilation.ExpressionPrefixAttribute.#ctor(System.String)" />
 
             
 
-             constructor to initialize an instance of the <see
-             cref="T:System.Web.Compilation.ExpressionPrefixAttribute" />
+             constructor to initialize an instance of the <see cref="T:System.Web.Compilation.ExpressionPrefixAttribute" />
 
             
 
-             class using a prefix identifier. The <see
-             cref="M:System.Web.Compilation.ExpressionPrefixAttribute.#ctor(System.String)" />
+             class using a prefix identifier. The <see cref="M:System.Web.Compilation.ExpressionPrefixAttribute.#ctor(System.String)" />
 
             
 
-             is the default constructor for the <see
-             cref="T:System.Web.Compilation.ExpressionPrefixAttribute" />
+             is the default constructor for the <see cref="T:System.Web.Compilation.ExpressionPrefixAttribute" />
 
             
 
@@ -97,8 +88,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Compilation.ExpressionPrefixAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.Compilation.ExpressionPrefixAttribute" />
 
             
 
@@ -106,12 +96,15 @@
           >
         </summary>
         <param name="expressionPrefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The prefix of the current <see
-           cref="T:System.Web.Compilation.ExpressionBuilder" />
+          The prefix of the current <see cref="T:System.Web.Compilation.ExpressionBuilder" />
 
           
 
@@ -134,8 +127,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.Compilation.ExpressionPrefixAttribute.ExpressionPrefix" />
+            >Use the <see cref="P:System.Web.Compilation.ExpressionPrefixAttribute.ExpressionPrefix" />
 
             
 
@@ -145,8 +137,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the prefix value for the current <see
-             cref="T:System.Web.Compilation.ExpressionBuilder" />
+            >Gets the prefix value for the current <see cref="T:System.Web.Compilation.ExpressionBuilder" />
 
             
 

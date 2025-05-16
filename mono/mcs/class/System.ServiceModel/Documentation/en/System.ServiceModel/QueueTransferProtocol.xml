@@ -16,25 +16,21 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifying <see
-         cref="F:System.ServiceModel.QueueTransferProtocol.Srmp" />
+        >Specifying <see cref="F:System.ServiceModel.QueueTransferProtocol.Srmp" />
 
         
 
-         or <see
-         cref="F:System.ServiceModel.QueueTransferProtocol.SrmpSecure" />
+         or <see cref="F:System.ServiceModel.QueueTransferProtocol.SrmpSecure" />
 
         
 
-         when the UseActiveDirectory attribute is set to true will cause an exception because Message Queuing (MSMQ) does not provide for Active Directory addressing when using SRMP. UseActiveDirectory is an attribute on the <format
-         type="text/html">
+         when the UseActiveDirectory attribute is set to true will cause an exception because Message Queuing (MSMQ) does not provide for Active Directory addressing when using SRMP. UseActiveDirectory is an attribute on the <format type="text/html">
           <a href="a68b44d7-7799-43a3-9e63-f07c782810a6">netMsmqBinding Element</a>
         </format>
 
         
 
-         and the <format
-         type="text/html">
+         and the <format type="text/html">
           <a href="edf277f3-e3bf-4ed8-9f55-83b5788430a7">msmqIntegrationBinding element</a>
         </format>
 
@@ -43,8 +39,7 @@
         .</para
       >
       <para
-        >For more information about addressing queues, see <format
-         type="text/html">
+        >For more information about addressing queues, see <format type="text/html">
           <a href="7d2d59d7-f08b-44ed-bd31-913908b83d97">Service Endpoints and Queue Addressing</a>
         </format>
 

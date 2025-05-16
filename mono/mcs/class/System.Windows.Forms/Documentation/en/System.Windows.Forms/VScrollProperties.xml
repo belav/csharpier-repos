@@ -17,8 +17,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides basic properties for the <see
-         cref="T:System.Windows.Forms.VScrollBar" />
+        >Provides basic properties for the <see cref="T:System.Windows.Forms.VScrollBar" />
 
         
 
@@ -44,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.VScrollProperties" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.VScrollProperties" />
 
             
 
@@ -53,12 +51,15 @@
           >
         </summary>
         <param name="container">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ScrollableControl" />
+          A <see cref="T:System.Windows.Forms.ScrollableControl" />
 
           
 

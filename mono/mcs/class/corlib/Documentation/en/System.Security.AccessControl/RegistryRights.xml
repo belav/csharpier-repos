@@ -23,38 +23,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Security.AccessControl.RegistryRights" />
+        >Use the <see cref="T:System.Security.AccessControl.RegistryRights" />
 
         
 
-         enumeration to specify registry access rights when you create <see
-         cref="T:System.Security.AccessControl.RegistrySecurity" />
+         enumeration to specify registry access rights when you create <see cref="T:System.Security.AccessControl.RegistrySecurity" />
 
         
 
-         objects. To apply access rights to a registry key, first add <see
-         cref="T:System.Security.AccessControl.RegistryAccessRule" />
+         objects. To apply access rights to a registry key, first add <see cref="T:System.Security.AccessControl.RegistryAccessRule" />
 
         
 
-         objects to a <see
-         cref="T:System.Security.AccessControl.RegistrySecurity" />
+         objects to a <see cref="T:System.Security.AccessControl.RegistrySecurity" />
 
         
 
-         object, then attach the <see
-         cref="T:System.Security.AccessControl.RegistrySecurity" />
+         object, then attach the <see cref="T:System.Security.AccessControl.RegistrySecurity" />
 
         
 
-         object to the key using the <see
-         cref="M:Microsoft.Win32.RegistryKey.SetAccessControl(System.Security.AccessControl.RegistrySecurity)" />
+         object to the key using the <see cref="M:Microsoft.Win32.RegistryKey.SetAccessControl(System.Security.AccessControl.RegistrySecurity)" />
 
         
 
-         method, or an appropriate overload of the <see
-         cref="Overload:Microsoft.Win32.RegistryKey.CreateSubKey" />
+         method, or an appropriate overload of the <see cref="Overload:Microsoft.Win32.RegistryKey.CreateSubKey" />
 
         
 
@@ -196,8 +189,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Same as <see
-             cref="F:System.Security.AccessControl.RegistryRights.ReadKey" />
+            >Same as <see cref="F:System.Security.AccessControl.RegistryRights.ReadKey" />
 
             
 

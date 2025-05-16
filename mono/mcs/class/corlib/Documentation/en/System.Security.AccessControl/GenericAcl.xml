@@ -27,23 +27,19 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an access control list (ACL) and is the base class for the <see
-         cref="T:System.Security.AccessControl.CommonAcl" />
+        >Represents an access control list (ACL) and is the base class for the <see cref="T:System.Security.AccessControl.CommonAcl" />
 
         
 
-        , <see
-         cref="T:System.Security.AccessControl.DiscretionaryAcl" />
+        , <see cref="T:System.Security.AccessControl.DiscretionaryAcl" />
 
         
 
-        , <see
-         cref="T:System.Security.AccessControl.RawAcl" />
+        , <see cref="T:System.Security.AccessControl.RawAcl" />
 
         
 
-        , and <see
-         cref="T:System.Security.AccessControl.SystemAcl" />
+        , and <see cref="T:System.Security.AccessControl.SystemAcl" />
 
         
 
@@ -70,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.GenericAcl" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.GenericAcl" />
 
             
 
@@ -100,8 +95,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The revision level cannot be changed after an instance of the <see
-             cref="T:System.Security.AccessControl.GenericAcl" />
+            >The revision level cannot be changed after an instance of the <see cref="T:System.Security.AccessControl.GenericAcl" />
 
             
 
@@ -111,13 +105,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The revision level of the current <see
-             cref="T:System.Security.AccessControl.GenericAcl" />
+            >The revision level of the current <see cref="T:System.Security.AccessControl.GenericAcl" />
 
             
 
-            . This value is returned by the <see
-             cref="P:System.Security.AccessControl.GenericAcl.Revision" />
+            . This value is returned by the <see cref="P:System.Security.AccessControl.GenericAcl.Revision" />
 
             
 
@@ -147,13 +139,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The revision level of the current <see
-             cref="T:System.Security.AccessControl.GenericAcl" />
+            >The revision level of the current <see cref="T:System.Security.AccessControl.GenericAcl" />
 
             
 
-            . This value is returned by the <see
-             cref="P:System.Security.AccessControl.GenericAcl.Revision" />
+            . This value is returned by the <see cref="P:System.Security.AccessControl.GenericAcl.Revision" />
 
             
 
@@ -180,13 +170,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the length, in bytes, of the binary representation of the current <see
-             cref="T:System.Security.AccessControl.GenericAcl" />
+            >Gets the length, in bytes, of the binary representation of the current <see cref="T:System.Security.AccessControl.GenericAcl" />
 
             
 
-             object. This length should be used before marshaling the ACL into a binary array with the <see
-             cref="M:System.Security.AccessControl.GenericAcl.GetBinaryForm" />
+             object. This length should be used before marshaling the ACL into a binary array with the <see cref="M:System.Security.AccessControl.GenericAcl.GetBinaryForm" />
 
             
 
@@ -222,13 +210,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies each <see
-             cref="T:System.Security.AccessControl.GenericAce" />
+            >Copies each <see cref="T:System.Security.AccessControl.GenericAce" />
 
             
 
-             of the current <see
-             cref="T:System.Security.AccessControl.GenericAcl" />
+             of the current <see cref="T:System.Security.AccessControl.GenericAcl" />
 
             
 
@@ -236,29 +222,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array into which copies of the <see
-           cref="T:System.Security.AccessControl.GenericAce" />
+          The array into which copies of the <see cref="T:System.Security.AccessControl.GenericAce" />
 
           
 
-           objects contained by the current <see
-           cref="T:System.Security.AccessControl.GenericAcl" />
+           objects contained by the current <see cref="T:System.Security.AccessControl.GenericAcl" />
 
           
 
            are placed.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of <paramref
-           name="array" />
+          The zero-based index of <paramref name="array" />
 
           
 
@@ -284,8 +275,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of access control entries (ACEs) in the current <see
-             cref="T:System.Security.AccessControl.GenericAcl" />
+            >Gets the number of access control entries (ACEs) in the current <see cref="T:System.Security.AccessControl.GenericAcl" />
 
             
 
@@ -321,8 +311,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Marshals the contents of the <see
-             cref="T:System.Security.AccessControl.GenericAcl" />
+            >Marshals the contents of the <see cref="T:System.Security.AccessControl.GenericAcl" />
 
             
 
@@ -330,19 +319,26 @@
           >
         </summary>
         <param name="binaryForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The byte array into which the contents of the <see
-           cref="T:System.Security.AccessControl.GenericAcl" />
+          The byte array into which the contents of the <see cref="T:System.Security.AccessControl.GenericAcl" />
 
           
 
            is marshaled.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -374,8 +370,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new instance of the <see
-             cref="T:System.Security.AccessControl.AceEnumerator" />
+            >Returns a new instance of the <see cref="T:System.Security.AccessControl.AceEnumerator" />
 
             
 
@@ -385,8 +380,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:Security.AccessControl.AceEnumerator" />
+            >The <see cref="T:Security.AccessControl.AceEnumerator" />
 
             
 
@@ -413,8 +407,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is always set to false. It is implemented only because it is required for the implementation of the <see
-             cref="T:System.Collections.ICollection" />
+            >This property is always set to false. It is implemented only because it is required for the implementation of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -472,8 +465,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The maximum allowed binary length of a <see
-             cref="T:System.Security.AccessControl.GenericAcl" />
+            >The maximum allowed binary length of a <see cref="T:System.Security.AccessControl.GenericAcl" />
 
             
 
@@ -500,8 +492,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the revision level of the <see
-             cref="T:System.Security.AccessControl.GenericAcl" />
+            >Gets the revision level of the <see cref="T:System.Security.AccessControl.GenericAcl" />
 
             
 
@@ -528,8 +519,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property always returns null. It is implemented only because it is required for the implementation of the <see
-             cref="T:System.Collections.ICollection" />
+            >This property always returns null. It is implemented only because it is required for the implementation of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -562,13 +552,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies each <see
-             cref="T:System.Security.AccessControl.GenericAce" />
+            >Copies each <see cref="T:System.Security.AccessControl.GenericAce" />
 
             
 
-             of the current <see
-             cref="T:System.Security.AccessControl.GenericAcl" />
+             of the current <see cref="T:System.Security.AccessControl.GenericAcl" />
 
             
 
@@ -576,29 +564,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array into which copies of the <see
-           cref="T:System.Security.AccessControl.GenericAce" />
+          The array into which copies of the <see cref="T:System.Security.AccessControl.GenericAce" />
 
           
 
-           objects contained by the current <see
-           cref="T:System.Security.AccessControl.GenericAcl" />
+           objects contained by the current <see cref="T:System.Security.AccessControl.GenericAcl" />
 
           
 
            are placed.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of <paramref
-           name="array" />
+          The zero-based index of <paramref name="array" />
 
           
 
@@ -630,13 +623,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new instance of the <see
-             cref="T:System.Security.AccessControl.AceEnumerator" />
+            >Returns a new instance of the <see cref="T:System.Security.AccessControl.AceEnumerator" />
 
             
 
-             class cast as an instance of the <see
-             cref="T:System.Collections.IEnumerator" />
+             class cast as an instance of the <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -646,13 +637,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Security.AccessControl.AceEnumerator" />
+            >A new <see cref="T:System.Security.AccessControl.AceEnumerator" />
 
             
 
-             object, cast as an instance of the <see
-             cref="T:System.Collections.IEnumerator" />
+             object, cast as an instance of the <see cref="T:System.Collections.IEnumerator" />
 
             
 

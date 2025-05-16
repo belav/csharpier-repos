@@ -14,8 +14,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+        >The <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
         
 
@@ -31,8 +30,7 @@
         </item>
         <item>
           <para
-            >The HTML-formatted body file specified in the <see
-             cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" />
+            >The HTML-formatted body file specified in the <see cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" />
 
             
 
@@ -42,44 +40,37 @@
         </item>
       </list>
       <para
-        >If an <see
-         cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+        >If an <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
         
 
          is added to a mail message and does not fulfill all of the requirements specified previously, it will most likely be displayed as an attachment in the mail message. If an item is referenced by an identifier in the mail message but not included as an embedded item, it will appear as a broken attachment when the mail is viewed.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+        >The <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
         
 
-         stores a collection of <see
-         cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+         stores a collection of <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
         
 
-         objects for a single mail message. The <see
-         cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+         objects for a single mail message. The <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
         
 
-         is used by the <see
-         cref="P:System.Web.UI.WebControls.MailDefinition.EmbeddedObjects" />
+         is used by the <see cref="P:System.Web.UI.WebControls.MailDefinition.EmbeddedObjects" />
 
         
 
-         property of the <see
-         cref="T:System.Web.UI.WebControls.MailDefinition" />
+         property of the <see cref="T:System.Web.UI.WebControls.MailDefinition" />
 
         
 
          object to create the mail message.</para
       >
       <para
-        >Mail messages that allow embedded objects are configurable in the following Web controls by setting their <see
-         cref="T:System.Web.UI.WebControls.MailDefinition" />
+        >Mail messages that allow embedded objects are configurable in the following Web controls by setting their <see cref="T:System.Web.UI.WebControls.MailDefinition" />
 
         
 
@@ -104,13 +95,11 @@
       </list>
       <block subset="none" type="note">
         <para
-          >The values in the <see
-           cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+          >The values in the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
           
 
-           and <see
-           cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+           and <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
           
 
@@ -121,8 +110,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an item to embed in an e-mail message constructed using the <see
-         cref="T:System.Web.UI.WebControls.MailDefinition" />
+        >Represents an item to embed in an e-mail message constructed using the <see cref="T:System.Web.UI.WebControls.MailDefinition" />
 
         
 
@@ -140,13 +128,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To get or set the identifier of the embedded item, use the <see
-             cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Name" />
+            >To get or set the identifier of the embedded item, use the <see cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Name" />
 
             
 
-             property. To get or set the path to the embedded item, use the <see
-             cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Path" />
+             property. To get or set the path to the embedded item, use the <see cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Path" />
 
             
 
@@ -156,8 +142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
             
 
@@ -185,8 +170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
             
 
@@ -194,24 +178,30 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name used as the identifier of the item to embed in the mail message. For more information, see <see
-           cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Name" />
+          The name used as the identifier of the item to embed in the mail message. For more information, see <see cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Name" />
 
           
 
           .</param
         >
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The path used to retrieve an item to embed in the mail message. For more information, see <see
-           cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Path" />
+          The path used to retrieve an item to embed in the mail message. For more information, see <see cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Path" />
 
           
 
@@ -242,23 +232,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Name" />
+            >The <see cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Name" />
 
             
 
-             property specifies an identifier for an item to embed in a mail message constructed declaratively with the <see
-             cref="T:System.Web.UI.WebControls.MailDefinition" />
+             property specifies an identifier for an item to embed in a mail message constructed declaratively with the <see cref="T:System.Web.UI.WebControls.MailDefinition" />
 
             
 
-             class. The identifier is used to map the item contained in the <see
-             cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Path" />
+             class. The identifier is used to map the item contained in the <see cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Path" />
 
             
 
-             property to its appropriate location in the body of the file specified in the <see
-             cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" />
+             property to its appropriate location in the body of the file specified in the <see cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" />
 
             
 
@@ -266,8 +252,7 @@
           >
           <code>&lt;img src="cid:identifier" alt="Alternate Text" /&gt;</code>
           <para
-            >Typically, the item is an image file. The default for the <see
-             cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Name" />
+            >Typically, the item is an image file. The default for the <see cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Name" />
 
             
 
@@ -278,8 +263,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name that is used as the identifier of the item to be embedded in a mail message constructed with the <see
-             cref="T:System.Web.UI.WebControls.MailDefinition" />
+            >Gets or sets the name that is used as the identifier of the item to be embedded in a mail message constructed with the <see cref="T:System.Web.UI.WebControls.MailDefinition" />
 
             
 
@@ -311,18 +295,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Path" />
+            >The <see cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Path" />
 
             
 
-             property specifies the path to the item you want to embed in the mail message constructed declaratively with the <see
-             cref="T:System.Web.UI.WebControls.MailDefinition" />
+             property specifies the path to the item you want to embed in the mail message constructed declaratively with the <see cref="T:System.Web.UI.WebControls.MailDefinition" />
 
             
 
-             object. The file path in <see
-             cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Path" />
+             object. The file path in <see cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Path" />
 
             
 
@@ -333,8 +314,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the path that is used to retrieve an item to embed in a mail message constructed with the <see
-             cref="T:System.Web.UI.WebControls.MailDefinition" />
+            >Gets or sets the path that is used to retrieve an item to embed in a mail message constructed with the <see cref="T:System.Web.UI.WebControls.MailDefinition" />
 
             
 

@@ -20,91 +20,77 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Web.UI.WebControls.DataGrid.CancelCommand" />
+        >The <see cref="E:System.Web.UI.WebControls.DataGrid.CancelCommand" />
 
         
 
-         event is raised when the Cancel button for an item in the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
-
-        
-
-         control is clicked.</para
-      >
-      <para
-        >The <see
-         cref="E:System.Web.UI.WebControls.DataGrid.DeleteCommand" />
-
-        
-
-         event is raised when the Delete button for an item in the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         event is raised when the Cancel button for an item in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
          control is clicked.</para
       >
       <para
-        >The <see
-         cref="E:System.Web.UI.WebControls.DataGrid.EditCommand" />
+        >The <see cref="E:System.Web.UI.WebControls.DataGrid.DeleteCommand" />
 
         
 
-         event is raised when the Edit button for an item in the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         event is raised when the Delete button for an item in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
          control is clicked.</para
       >
       <para
-        >The <see
-         cref="E:System.Web.UI.WebControls.DataGrid.ItemCommand" />
+        >The <see cref="E:System.Web.UI.WebControls.DataGrid.EditCommand" />
 
         
 
-         event is raised when any button for an item in the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         event is raised when the Edit button for an item in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
-         control is clicked. This allows you to programmatically test for when a specific command button is clicked and take appropriate action. This event is commonly used to handle custom command buttons for the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         control is clicked.</para
+      >
+      <para
+        >The <see cref="E:System.Web.UI.WebControls.DataGrid.ItemCommand" />
+
+        
+
+         event is raised when any button for an item in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
+
+         control is clicked. This allows you to programmatically test for when a specific command button is clicked and take appropriate action. This event is commonly used to handle custom command buttons for the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
          control.</para
       >
       <para
-        >The <see
-         cref="E:System.Web.UI.WebControls.DataGrid.UpdateCommand" />
+        >The <see cref="E:System.Web.UI.WebControls.DataGrid.UpdateCommand" />
 
         
 
-         event is raised when the Update button for an item in the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         event is raised when the Update button for an item in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
          control is clicked.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.WebControls.DataGridCommandEventArgs" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.DataGridCommandEventArgs" />
 
         
 
-        , see the <see
-         cref="M:System.Web.UI.WebControls.DataGridCommandEventArgs.#ctor(System.Web.UI.WebControls.DataGridItem,System.Object,System.Web.UI.WebControls.CommandEventArgs)" />
+        , see the <see cref="M:System.Web.UI.WebControls.DataGridCommandEventArgs.#ctor(System.Web.UI.WebControls.DataGridItem,System.Object,System.Web.UI.WebControls.CommandEventArgs)" />
 
         
 
          constructor.</para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
 
@@ -116,33 +102,27 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Web.UI.WebControls.DataGrid.CancelCommand" />
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.DataGrid.CancelCommand" />
 
         
 
-        , <see
-         cref="E:System.Web.UI.WebControls.DataGrid.DeleteCommand" />
+        , <see cref="E:System.Web.UI.WebControls.DataGrid.DeleteCommand" />
 
         
 
-        , <see
-         cref="E:System.Web.UI.WebControls.DataGrid.EditCommand" />
+        , <see cref="E:System.Web.UI.WebControls.DataGrid.EditCommand" />
 
         
 
-        , <see
-         cref="E:System.Web.UI.WebControls.DataGrid.ItemCommand" />
+        , <see cref="E:System.Web.UI.WebControls.DataGrid.ItemCommand" />
 
         
 
-        , and <see
-         cref="E:System.Web.UI.WebControls.DataGrid.UpdateCommand" />
+        , and <see cref="E:System.Web.UI.WebControls.DataGrid.UpdateCommand" />
 
         
 
-         events of the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         events of the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
@@ -169,16 +149,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DataGridCommandEventArgs" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.DataGridCommandEventArgs" />
 
             
 
              class.</para
           >
           <para
-            >When an instance of <see
-             cref="T:System.Web.UI.WebControls.DataGridCommandEventArgs" />
+            >When an instance of <see cref="T:System.Web.UI.WebControls.DataGridCommandEventArgs" />
 
             
 
@@ -203,8 +181,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="commandSource" />
+                  >The value of the <paramref name="commandSource" />
 
                   
 
@@ -220,8 +197,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="item" />
+                  >The value of the <paramref name="item" />
 
                   
 
@@ -234,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DataGridCommandEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.DataGridCommandEventArgs" />
 
             
 
@@ -243,17 +218,19 @@
           >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.DataGridItem" />
+          A <see cref="T:System.Web.UI.WebControls.DataGridItem" />
 
           
 
-           that represents the selected item in the <see
-           cref="T:System.Web.UI.WebControls.DataGrid" />
+           that represents the selected item in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
           
 
@@ -276,8 +253,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DataGridCommandEventArgs.CommandSource" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DataGridCommandEventArgs.CommandSource" />
 
             
 
@@ -308,13 +284,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.DataGridCommandEventArgs.Item" />
+            >The <see cref="P:System.Web.UI.WebControls.DataGridCommandEventArgs.Item" />
 
             
 
-             property is used to access the properties of the selected item in the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+             property is used to access the properties of the selected item in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
@@ -324,8 +298,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the item containing the command source in the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+            >Gets the item containing the command source in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 

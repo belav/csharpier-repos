@@ -43,13 +43,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Call the <see
-         cref="M:System.Security.Principal.WindowsIdentity.GetCurrent" />
+        >Call the <see cref="M:System.Security.Principal.WindowsIdentity.GetCurrent" />
 
         
 
-         method to create a <see
-         cref="T:System.Security.Principal.WindowsIdentity" />
+         method to create a <see cref="T:System.Security.Principal.WindowsIdentity" />
 
         
 
@@ -82,8 +80,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows initial property values for an instance of <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+            >The following table shows initial property values for an instance of <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
@@ -133,28 +130,23 @@
           </list>
           <block subset="none" type="note">
             <para
-              >You can retrieve the token represented by <paramref
-               name="userToken" />
+              >You can retrieve the token represented by <paramref name="userToken" />
 
               
 
-               by calling unmanaged code such as the Win32 API <unmanagedCodeEntityReference
-              >LogonUser</unmanagedCodeEntityReference>
+               by calling unmanaged code such as the Win32 API <unmanagedCodeEntityReference>LogonUser</unmanagedCodeEntityReference>
 
               
 
-               function. Always release <paramref
-               name="userToken" />
+               function. Always release <paramref name="userToken" />
 
               
 
-               by calling the Win32 API <unmanagedCodeEntityReference
-              >CloseHandle</unmanagedCodeEntityReference>
+               by calling the Win32 API <unmanagedCodeEntityReference>CloseHandle</unmanagedCodeEntityReference>
 
               
 
-               function. For more information on calling unmanaged code, see <format
-               type="text/html">
+               function. For more information on calling unmanaged code, see <format type="text/html">
                 <a href="eca7606e-ebfb-4f47-b8d9-289903fdc045">Consuming Unmanaged DLL Functions</a>
               </format>
 
@@ -167,8 +159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+            >Initializes a new instance of the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
@@ -176,7 +167,11 @@
           >
         </summary>
         <param name="userToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -203,13 +198,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A UPN has the format username@domainname.com, in other words, an email address. The UPN identified in <paramref
-             name="sUserPrincipalName" />
+            >A UPN has the format username@domainname.com, in other words, an email address. The UPN identified in <paramref name="sUserPrincipalName" />
 
             
 
-             is used to retrieve a token for that user through the Win32 API <unmanagedCodeEntityReference
-            >LsaLogonUser</unmanagedCodeEntityReference>
+             is used to retrieve a token for that user through the Win32 API <unmanagedCodeEntityReference>LsaLogonUser</unmanagedCodeEntityReference>
 
             
 
@@ -218,7 +211,9 @@
           <block subset="none" type="note">
             <para
               >This constructor is intended for use on computers joined only to Windows Server 2003 domains. An exception is thrown for other domain types. This restriction is because the constructor uses the <see
-               cref="http://go.microsoft.com/fwlink/?LinkId=143533">KERB_S4U_LOGON structure</see>
+                cref="http://go.microsoft.com/fwlink/?LinkId=143533"
+                >KERB_S4U_LOGON structure</see
+              >
 
               
 
@@ -229,8 +224,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+            >Initializes a new instance of the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
@@ -238,7 +232,11 @@
           >
         </summary>
         <param name="sUserPrincipalName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -270,8 +268,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows initial property values for an instance of <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+            >The following table shows initial property values for an instance of <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
@@ -310,23 +307,19 @@
             </item>
           </list>
           <para
-            >The value of the <paramref
-             name="type" />
+            >The value of the <paramref name="type" />
 
             
 
-             parameter is used to set the <see
-             cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
+             parameter is used to set the <see cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
 
             
 
-             parameter. If <paramref
-             name="type" />
+             parameter. If <paramref name="type" />
 
             
 
-             is null, the security system sets <see
-             cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
+             is null, the security system sets <see cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
 
             
 
@@ -334,28 +327,23 @@
           >
           <block subset="none" type="note">
             <para
-              >You can retrieve the token represented by <paramref
-               name="userToken" />
+              >You can retrieve the token represented by <paramref name="userToken" />
 
               
 
-               by calling unmanaged code such as the Win32 API <unmanagedCodeEntityReference
-              >LogonUser</unmanagedCodeEntityReference>
+               by calling unmanaged code such as the Win32 API <unmanagedCodeEntityReference>LogonUser</unmanagedCodeEntityReference>
 
               
 
-               function. Always release <paramref
-               name="userToken" />
+               function. Always release <paramref name="userToken" />
 
               
 
-               by calling the Win32 API <unmanagedCodeEntityReference
-              >CloseHandle</unmanagedCodeEntityReference>
+               by calling the Win32 API <unmanagedCodeEntityReference>CloseHandle</unmanagedCodeEntityReference>
 
               
 
-               function. For more information on calling unmanaged code, see <format
-               type="text/html">
+               function. For more information on calling unmanaged code, see <format type="text/html">
                 <a href="eca7606e-ebfb-4f47-b8d9-289903fdc045">Consuming Unmanaged DLL Functions</a>
               </format>
 
@@ -368,8 +356,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+            >Initializes a new instance of the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
@@ -377,14 +364,22 @@
           >
         </summary>
         <param name="userToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The account token for the user on whose behalf the code is running. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -417,7 +412,7 @@
           <block subset="none" type="note">
             <para
               >Calling this method with untrusted data is a security risk. Call this method only with trusted data. For more information, see <see
-               cref="http://go.microsoft.com/fwlink/?LinkId=330378"
+                cref="http://go.microsoft.com/fwlink/?LinkId=330378"
                 >Untrusted Data Security Risks</see
               >
 
@@ -430,13 +425,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+            >Initializes a new instance of the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
-             class for the user represented by information in a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             class for the user represented by information in a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -444,14 +437,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object containing the account information for the user. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -482,36 +483,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <paramref
-             name="type" />
+            >The value of the <paramref name="type" />
 
             
 
-             parameter is used to set the <see
-             cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
+             parameter is used to set the <see cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
 
             
 
-             parameter. If <paramref
-             name="type" />
+             parameter. If <paramref name="type" />
 
             
 
-             is null, the security system sets <see
-             cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
+             is null, the security system sets <see cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
 
             
 
              to Negotiate on Windows Vista and later versions of the Windows operating system, and to Kerberos on earlier versions of the Windows operating system. The security system does not use this value; it is for informational use only.</para
           >
           <para
-            >The UPN identified in <paramref
-             name="sUserPrincipalName" />
+            >The UPN identified in <paramref name="sUserPrincipalName" />
 
             
 
-             is used to retrieve a token for that user through the Win32 API <unmanagedCodeEntityReference
-            >LsaLogonUser</unmanagedCodeEntityReference>
+             is used to retrieve a token for that user through the Win32 API <unmanagedCodeEntityReference>LsaLogonUser</unmanagedCodeEntityReference>
 
             
 
@@ -520,7 +515,9 @@
           <block subset="none" type="note">
             <para
               >This constructor is intended for use only on computers joined to Windows Server 2003 domains. An exception is thrown for other domain types. This restriction is because the constructor uses the <see
-               cref="http://go.microsoft.com/fwlink/?LinkId=143533">KERB_S4U_LOGON structure</see>
+                cref="http://go.microsoft.com/fwlink/?LinkId=143533"
+                >KERB_S4U_LOGON structure</see
+              >
 
               
 
@@ -531,8 +528,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+            >Initializes a new instance of the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
@@ -540,14 +536,22 @@
           >
         </summary>
         <param name="sUserPrincipalName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The UPN for the user on whose behalf the code is running. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -580,8 +584,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows initial property values for an instance of <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+            >The following table shows initial property values for an instance of <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
@@ -610,23 +613,19 @@
             </item>
           </list>
           <para
-            >The value of the <paramref
-             name="type" />
+            >The value of the <paramref name="type" />
 
             
 
-             parameter is used to set the <see
-             cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
+             parameter is used to set the <see cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
 
             
 
-             parameter. If <paramref
-             name="type" />
+             parameter. If <paramref name="type" />
 
             
 
-             is null, the security system sets <see
-             cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
+             is null, the security system sets <see cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
 
             
 
@@ -634,28 +633,23 @@
           >
           <block subset="none" type="note">
             <para
-              >You can retrieve the token represented by <paramref
-               name="userToken" />
+              >You can retrieve the token represented by <paramref name="userToken" />
 
               
 
-               by calling unmanaged code such as the Win32 API <unmanagedCodeEntityReference
-              >LogonUser</unmanagedCodeEntityReference>
+               by calling unmanaged code such as the Win32 API <unmanagedCodeEntityReference>LogonUser</unmanagedCodeEntityReference>
 
               
 
-               function. Always release <paramref
-               name="userToken" />
+               function. Always release <paramref name="userToken" />
 
               
 
-               by calling the Win32 API <unmanagedCodeEntityReference
-              >CloseHandle</unmanagedCodeEntityReference>
+               by calling the Win32 API <unmanagedCodeEntityReference>CloseHandle</unmanagedCodeEntityReference>
 
               
 
-               function. For more information on calling unmanaged code, see <format
-               type="text/html">
+               function. For more information on calling unmanaged code, see <format type="text/html">
                 <a href="eca7606e-ebfb-4f47-b8d9-289903fdc045">Consuming Unmanaged DLL Functions</a>
               </format>
 
@@ -668,8 +662,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+            >Initializes a new instance of the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
@@ -677,21 +670,33 @@
           >
         </summary>
         <param name="userToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The account token for the user on whose behalf the code is running. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           (Informational use only.) The type of authentication used to identify the user. For more information, see Remarks.</param
         >
         <param name="acctType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -725,51 +730,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <paramref
-             name="type" />
+            >The value of the <paramref name="type" />
 
             
 
-             parameter is used to set the <see
-             cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
+             parameter is used to set the <see cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
 
             
 
-             parameter. If <paramref
-             name="type" />
+             parameter. If <paramref name="type" />
 
             
 
-             is null, the security system sets <see
-             cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
+             is null, the security system sets <see cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
 
             
 
              to Negotiate on Windows Vista and later versions of the Windows operating system, and to Kerberos on earlier versions of the Windows operating system. The security system does not use this value; it is for informational use only.</para
           >
           <para
-            >You can retrieve the token represented by <paramref
-             name="userToken" />
+            >You can retrieve the token represented by <paramref name="userToken" />
 
             
 
-             by calling unmanaged code such as the Win32 API <unmanagedCodeEntityReference
-            >LogonUser</unmanagedCodeEntityReference>
+             by calling unmanaged code such as the Win32 API <unmanagedCodeEntityReference>LogonUser</unmanagedCodeEntityReference>
 
             
 
-             function. Always release <paramref
-             name="userToken" />
+             function. Always release <paramref name="userToken" />
 
             
 
-             by calling the Win32 API <unmanagedCodeEntityReference
-            >CloseHandle</unmanagedCodeEntityReference>
+             by calling the Win32 API <unmanagedCodeEntityReference>CloseHandle</unmanagedCodeEntityReference>
 
             
 
-             function. For more information on calling unmanaged code, see <format
-             type="text/html">
+             function. For more information on calling unmanaged code, see <format type="text/html">
               <a href="eca7606e-ebfb-4f47-b8d9-289903fdc045">Consuming Unmanaged DLL Functions</a>
             </format>
 
@@ -781,8 +777,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+            >Initializes a new instance of the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
@@ -790,28 +785,44 @@
           >
         </summary>
         <param name="userToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The account token for the user on whose behalf the code is running. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           (Informational use only.) The type of authentication used to identify the user. For more information, see Remarks.</param
         >
         <param name="acctType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           One of the enumeration values. </param
         >
         <param name="isAuthenticated">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -868,50 +879,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.Security.Principal.WindowsIdentity.Dispose" />
+            >Call <see cref="M:System.Security.Principal.WindowsIdentity.Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+             when you are finished using the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
-            . The <see
-             cref="M:System.Security.Principal.WindowsIdentity.Dispose" />
+            . The <see cref="M:System.Security.Principal.WindowsIdentity.Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+             method leaves the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Security.Principal.WindowsIdentity.Dispose" />
+             in an unusable state. After calling <see cref="M:System.Security.Principal.WindowsIdentity.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+            , you must release all references to the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -921,18 +923,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.Security.Principal.WindowsIdentity.Dispose" />
+              >Always call <see cref="M:System.Security.Principal.WindowsIdentity.Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.Security.Principal.WindowsIdentity" />
+               before you release your last reference to the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.Security.Principal.WindowsIdentity" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
               
 
@@ -943,8 +942,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+            >Releases all resources used by the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
@@ -980,36 +978,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
@@ -1019,8 +1011,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
@@ -1028,7 +1019,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1074,41 +1069,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns an empty <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+            >This property returns an empty <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
-             object that enables you to treat operations as anonymous. The property value does not correspond to a Windows anonymous user and cannot be used for impersonation. Also, note that the identity returned by this property is not static; each call to <see
-             cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
+             object that enables you to treat operations as anonymous. The property value does not correspond to a Windows anonymous user and cannot be used for impersonation. Also, note that the identity returned by this property is not static; each call to <see cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
 
             
 
              returns a different anonymous identity.</para
           >
           <para
-            >You can use the <see
-             cref="P:System.Security.Principal.WindowsIdentity.IsAnonymous" />
+            >You can use the <see cref="P:System.Security.Principal.WindowsIdentity.IsAnonymous" />
 
             
 
-             property to detect the return value from <see
-             cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
+             property to detect the return value from <see cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
 
             
 
-            . However, <see
-             cref="P:System.Security.Principal.WindowsIdentity.IsAnonymous" />
+            . However, <see cref="P:System.Security.Principal.WindowsIdentity.IsAnonymous" />
 
             
 
-             detects both the Windows anonymous identity and the anonymous identity returned by this method. To use the latter identity, cache the <see
-             cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
+             detects both the Windows anonymous identity and the anonymous identity returned by this method. To use the latter identity, cache the <see cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
 
             
 
-             return value instead of relying on the <see
-             cref="P:System.Security.Principal.WindowsIdentity.IsAnonymous" />
+             return value instead of relying on the <see cref="P:System.Security.Principal.WindowsIdentity.IsAnonymous" />
 
             
 
@@ -1118,8 +1106,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+            >Returns a <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
@@ -1154,8 +1141,7 @@
       <Docs>
         <remarks>
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 WindowsIdentity wi = WindowsIdentity.GetCurrent ();
 Console.WriteLine ("\tUserName:\t{0}", wi.Name);
 Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
@@ -1166,8 +1152,7 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+            >Returns a <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
@@ -1205,33 +1190,27 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="ifImpersonating" />
+            >If <paramref name="ifImpersonating" />
 
             
 
-             is true and the thread is not impersonating, the returned <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+             is true and the thread is not impersonating, the returned <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
-             object has no value.  If <paramref
-             name="ifImpersonating" />
+             object has no value.  If <paramref name="ifImpersonating" />
 
             
 
-             is false and the thread is impersonating, the <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+             is false and the thread is impersonating, the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
-             for the thread is returned.  If <paramref
-             name="ifImpersonating" />
+             for the thread is returned.  If <paramref name="ifImpersonating" />
 
             
 
-             is false and the thread is not impersonating, the <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+             is false and the thread is not impersonating, the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
@@ -1241,13 +1220,11 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+            >Returns a <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
-             object that represents the Windows identity for either the thread or the process, depending on the value of the <paramref
-             name="ifImpersonating" />
+             object that represents the Windows identity for either the thread or the process, depending on the value of the <paramref name="ifImpersonating" />
 
             
 
@@ -1259,22 +1236,23 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
           <para>An object that represents a Windows user.</para>
         </returns>
         <param name="ifImpersonating">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to return the <see
-           cref="T:System.Security.Principal.WindowsIdentity" />
+          true to return the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
           
 
-           only if the thread is currently impersonating; false to return the <see
-           cref="T:System.Security.Principal.WindowsIdentity" />
+           only if the thread is currently impersonating; false to return the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
           
 
-             of the thread if it is impersonating or the <see
-           cref="T:System.Security.Principal.WindowsIdentity" />
+             of the thread if it is impersonating or the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
           
 
@@ -1307,8 +1285,7 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="desiredAccess" />
+            >The <paramref name="desiredAccess" />
 
             
 
@@ -1318,8 +1295,7 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+            >Returns a <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
@@ -1331,7 +1307,11 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
           <para>An object that represents the current user.</para>
         </returns>
         <param name="desiredAccess">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1393,8 +1373,7 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Impersonates the user represented by the <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+            >Impersonates the user represented by the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
@@ -1434,23 +1413,19 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
           <para>On Windows NT platforms, the current user must have sufficient rights to allow impersonation.</para>
           <block subset="none" type="note">
             <para
-              >Calling the <see
-               cref="M:System.Security.Principal.WindowsIdentity.Impersonate(System.IntPtr)" />
+              >Calling the <see cref="M:System.Security.Principal.WindowsIdentity.Impersonate(System.IntPtr)" />
 
               
 
-               method with a <paramref
-               name="userToken" />
+               method with a <paramref name="userToken" />
 
               
 
-               value of <see
-               cref="F:System.IntPtr.Zero" />
+               value of <see cref="F:System.IntPtr.Zero" />
 
               
 
-               is equivalent to calling the Win32 <unmanagedCodeEntityReference
-              >RevertToSelf</unmanagedCodeEntityReference>
+               is equivalent to calling the Win32 <unmanagedCodeEntityReference>RevertToSelf</unmanagedCodeEntityReference>
 
               
 
@@ -1458,8 +1433,7 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
             >
           </block>
           <para
-            >For more information about calls to unmanaged code, see <format
-             type="text/html">
+            >For more information about calls to unmanaged code, see <format type="text/html">
               <a href="eca7606e-ebfb-4f47-b8d9-289903fdc045">Consuming Unmanaged DLL Functions</a>
             </format>
 
@@ -1477,7 +1451,11 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
           <para>An object that represents the Windows user prior to impersonation; this object can be used to revert to the original user's context.</para>
         </returns>
         <param name="userToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1537,13 +1515,11 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Principal.WindowsIdentity.IsAnonymous" />
+            >The <see cref="P:System.Security.Principal.WindowsIdentity.IsAnonymous" />
 
             
 
-             property detects both the Windows anonymous identity and the anonymous identity that is returned by the <see
-             cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
+             property detects both the Windows anonymous identity and the anonymous identity that is returned by the <see cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
 
             
 
@@ -1596,8 +1572,7 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the user account is identified as a <see
-             cref="F:System.Security.Principal.WindowsAccountType.Guest" />
+            >Gets a value indicating whether the user account is identified as a <see cref="F:System.Security.Principal.WindowsAccountType.Guest" />
 
             
 
@@ -1624,8 +1599,7 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the user account is identified as a <see
-             cref="F:System.Security.Principal.WindowsAccountType.System" />
+            >Gets a value indicating whether the user account is identified as a <see cref="F:System.Security.Principal.WindowsAccountType.System" />
 
             
 
@@ -1719,8 +1693,7 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+            >Implements the <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
@@ -1728,7 +1701,11 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1762,21 +1739,18 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method sets a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >This method sets a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             with the logical call context information. During deserialization, the execution context object is reconstituted from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             with the logical call context information. During deserialization, the execution context object is reconstituted from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
              transmitted over the stream.</para
           >
           <para
-            >For more information, see <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >For more information, see <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1786,8 +1760,7 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1795,24 +1768,30 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object containing the information required to serialize the <see
-           cref="T:System.Collections.Hashtable" />
+          An object containing the information required to serialize the <see cref="T:System.Collections.Hashtable" />
 
           
 
           . </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object containing the source and destination of the serialized stream associated with the <see
-           cref="T:System.Collections.Hashtable" />
+          An object containing the source and destination of the serialized stream associated with the <see cref="T:System.Collections.Hashtable" />
 
           
 
@@ -1837,18 +1816,15 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not explicitly release the account token that is returned by the <see
-             cref="P:System.Security.Principal.WindowsIdentity.Token" />
+            >Do not explicitly release the account token that is returned by the <see cref="P:System.Security.Principal.WindowsIdentity.Token" />
 
             
 
-             property. The token is released by the <see
-             cref="M:System.Security.Principal.WindowsIdentity.Dispose" />
+             property. The token is released by the <see cref="M:System.Security.Principal.WindowsIdentity.Dispose" />
 
             
 
-             method, which you can call in code. <see
-             cref="M:System.Security.Principal.WindowsIdentity.Dispose" />
+             method, which you can call in code. <see cref="M:System.Security.Principal.WindowsIdentity.Dispose" />
 
             
 
@@ -1856,33 +1832,27 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
           >
           <block subset="none" type="note">
             <para
-              >The account token that is returned by the <see
-               cref="P:System.Security.Principal.WindowsIdentity.Token" />
+              >The account token that is returned by the <see cref="P:System.Security.Principal.WindowsIdentity.Token" />
 
               
 
-               property is a duplicate of the Windows token that is used to create the <see
-               cref="T:System.Security.Principal.WindowsIdentity" />
+               property is a duplicate of the Windows token that is used to create the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
               
 
-               object and is automatically released by the .NET Framework. This is different from the account token (the <paramref
-               name="userToken" />
+               object and is automatically released by the .NET Framework. This is different from the account token (the <paramref name="userToken" />
 
               
 
-               parameter for the constructor), which is used to create the <see
-               cref="T:System.Security.Principal.WindowsIdentity" />
+               parameter for the constructor), which is used to create the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
               
 
-               object. <paramref
-               name="userToken" />
+               object. <paramref name="userToken" />
 
               
 
-               is a Windows account token that is created by a call to <unmanagedCodeEntityReference
-              >LogonUser</unmanagedCodeEntityReference>
+               is a Windows account token that is created by a call to <unmanagedCodeEntityReference>LogonUser</unmanagedCodeEntityReference>
 
               
 
@@ -1926,23 +1896,19 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
           <para>The SID uniquely identifies a user or group on all Windows NT implementations.  </para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Security.Principal.WindowsIdentity" />
+              >The <see cref="T:System.Security.Principal.WindowsIdentity" />
 
               
 
-               object returned by the <see
-               cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
+               object returned by the <see cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
 
               
 
-               method is not the same as the Windows anonymous user. This property gets null for an anonymous user represented by the <see
-               cref="T:System.Security.Principal.WindowsIdentity" />
+               method is not the same as the Windows anonymous user. This property gets null for an anonymous user represented by the <see cref="T:System.Security.Principal.WindowsIdentity" />
 
               
 
-               object returned by the <see
-               cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
+               object returned by the <see cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
 
               
 

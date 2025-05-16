@@ -1,15 +1,12 @@
 <?xml version="1.0"?>
 <clause number="18.3.7" title="Field initializers">
   <paragraph
-    >As described in <hyperlink
-    >18.3.4</hyperlink>
+    >As described in <hyperlink>18.3.4</hyperlink>
 
     
 
     , the default value of a struct consists of the value that results from setting all value type fields to their default value and all reference type fields to null. For this reason, a struct does not permit instance field declarations to include variable initializers. <example
-
-      >[Example: As such, the following example results in one or more compile-time errors: <code_example
-      >
+      >[Example: As such, the following example results in one or more compile-time errors: <code_example>
         <![CDATA[
 struct Point  
 {  

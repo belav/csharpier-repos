@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <clause number="14.9.8" title="Delegate equality operators">
   <paragraph
-    >Every delegate type implicitly provides the following predefined comparison operators: : <code_example
-    >
+    >Every delegate type implicitly provides the following predefined comparison operators: : <code_example>
       <![CDATA[
 bool operator ==(System.Delegate x, System.Delegate y);  
 bool operator !=(System.Delegate x, System.Delegate y);  
@@ -10,12 +9,10 @@ bool operator !=(System.Delegate x, System.Delegate y);
     </code_example>
   </paragraph>
   <paragraph
-    >Two delegate instances are considered equal as follows: <list
-    >
+    >Two delegate instances are considered equal as follows: <list>
       <list_item> If either of the delegate instances is null, they are equal if and only if both are null. </list_item>
       <list_item
-        > If either of the delegate instances has an invocation list (<hyperlink
-        >22.1</hyperlink>
+        > If either of the delegate instances has an invocation list (<hyperlink>22.1</hyperlink>
 
         
 
@@ -29,8 +26,7 @@ bool operator !=(System.Delegate x, System.Delegate y);
     </list>
   </paragraph>
   <paragraph
-    >Note that delegates of different types can be considered equal by the above definition, as <keyword
-    >long</keyword>
+    >Note that delegates of different types can be considered equal by the above definition, as <keyword>long</keyword>
 
     
 

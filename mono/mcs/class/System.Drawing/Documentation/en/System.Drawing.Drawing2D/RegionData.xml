@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Encapsulates the data that makes up a <see
-         cref="T:System.Drawing.Region" />
+        >Encapsulates the data that makes up a <see cref="T:System.Drawing.Region" />
 
         
 
@@ -41,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an array of bytes that specify the <see
-             cref="T:System.Drawing.Region" />
+            >Gets or sets an array of bytes that specify the <see cref="T:System.Drawing.Region" />
 
             
 

@@ -21,13 +21,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        > On the other side of the message interchange, the <see
-         cref="T:System.ServiceModel.Channels.IOutputSession" />
+        > On the other side of the message interchange, the <see cref="T:System.ServiceModel.Channels.IOutputSession" />
 
         
 
-         interface represents an outgoing <see
-         cref="T:System.ServiceModel.Channels.ISession" />
+         interface represents an outgoing <see cref="T:System.ServiceModel.Channels.ISession" />
 
         
 

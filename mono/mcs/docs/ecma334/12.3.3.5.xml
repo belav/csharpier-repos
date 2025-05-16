@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <clause number="12.3.3.5" title="If statements">
   <paragraph
-    >For an if statement stmt of the form: <code_example
-    >
+    >For an if statement stmt of the form: <code_example>
       <![CDATA[
 if (expr) then-stmt else else-stmt  
 ]]>

@@ -24,61 +24,50 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.Common.DbConnectionStringBuilder" />
+        >The <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
         
 
-         class provides the base class from which the strongly typed connection string builders (<see
-         cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+         class provides the base class from which the strongly typed connection string builders (<see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
         
 
-        , <see
-         cref="T:System.Data.OleDb.OleDbConnectionStringBuilder" />
+        , <see cref="T:System.Data.OleDb.OleDbConnectionStringBuilder" />
 
         
 
         , and so on) derive. The connection string builders let developers programmatically create syntactically correct connection strings, and parse and rebuild existing connection strings. </para
       >
       <para
-        >The <see
-         cref="T:System.Data.Common.DbConnectionStringBuilder" />
+        >The <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
         
 
-         has been defined in a database-agnostic manner. Because of the addition of the <see
-         cref="N:System.Data.Common" />
+         has been defined in a database-agnostic manner. Because of the addition of the <see cref="N:System.Data.Common" />
 
         
 
-         namespace, developers require a base class against which they can program in order to build connection strings that can work against an arbitrary database. Therefore, the <see
-         cref="T:System.Data.Common.DbConnectionStringBuilder" />
+         namespace, developers require a base class against which they can program in order to build connection strings that can work against an arbitrary database. Therefore, the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
         
 
-         class lets users assign arbitrary key/value pairs and pass the resulting connection string to a strongly typed provider. All the data providers that are included as part of the .NET Framework provide a strongly typed class that inherits from <see
-         cref="T:System.Data.Common.DbConnectionStringBuilder" />
+         class lets users assign arbitrary key/value pairs and pass the resulting connection string to a strongly typed provider. All the data providers that are included as part of the .NET Framework provide a strongly typed class that inherits from <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
         
 
-        : <see
-         cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+        : <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
         
 
-        , <see
-         cref="T:System.Data.OracleClient.OracleConnectionStringBuilder" />
+        , <see cref="T:System.Data.OracleClient.OracleConnectionStringBuilder" />
 
         
 
-        , <see
-         cref="T:System.Data.Odbc.OdbcConnectionStringBuilder" />
+        , <see cref="T:System.Data.Odbc.OdbcConnectionStringBuilder" />
 
         
 
-        , and <see
-         cref="T:System.Data.OleDb.OleDbConnectionStringBuilder" />
+        , and <see cref="T:System.Data.OleDb.OleDbConnectionStringBuilder" />
 
         
 
@@ -86,57 +75,48 @@
       >
       <para>The developer can build, assign, and edit connection strings for any arbitrary provider. For providers that support specific key/value pairs, the connection string builder provides strongly typed properties corresponding to the known pairs. In order to support providers that require the ability to support unknown values, developers can also supply arbitrary key/value pairs.</para>
       <para
-        >The <see
-         cref="T:System.Data.Common.DbConnectionStringBuilder" />
+        >The <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
         
 
-         class implements the <see
-         cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+         class implements the <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
         
 
          interface. This means that the class works with Visual Studio designers at design time. When developers use the designer to build strongly typed DataSets and strongly typed connections within Visual Studio, the strongly typed connection string builder class will display the properties associated with its type and will also have converters that can map common values for known keys.</para
       >
       <para
-        >Developers needing to create connection strings as part of applications can use the <see
-         cref="T:System.Data.Common.DbConnectionStringBuilder" />
+        >Developers needing to create connection strings as part of applications can use the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
         
 
-         class or one of its strongly typed derivatives to build and modify connection strings. The <see
-         cref="T:System.Data.Common.DbConnectionStringBuilder" />
+         class or one of its strongly typed derivatives to build and modify connection strings. The <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
         
 
          class also makes it easy to manage connection strings stored in an application configuration file.</para
       >
       <para
-        >Developers can create connection strings using either a strongly typed connection string builder class, or they can use the <see
-         cref="T:System.Data.Common.DbConnectionStringBuilder" />
+        >Developers can create connection strings using either a strongly typed connection string builder class, or they can use the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
         
 
-         class. The <see
-         cref="T:System.Data.Common.DbConnectionStringBuilder" />
+         class. The <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
         
 
-         performs no checks for valid key/value pairs. Therefore, it is possible using this class to create invalid connection strings. The <see
-         cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+         performs no checks for valid key/value pairs. Therefore, it is possible using this class to create invalid connection strings. The <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
         
 
          supports only key/value pairs that are supported by SQL Server; trying to add invalid pairs will throw an exception.</para
       >
       <para
-        >Both the <see
-         cref="M:System.Data.Common.DbConnectionStringBuilder.Add(System.String,System.Object)" />
+        >Both the <see cref="M:System.Data.Common.DbConnectionStringBuilder.Add(System.String,System.Object)" />
 
         
 
-         method and <see
-         cref="P:System.Data.Common.DbConnectionStringBuilder.Item(System.String)" />
+         method and <see cref="P:System.Data.Common.DbConnectionStringBuilder.Item(System.String)" />
 
         
 
@@ -173,8 +153,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >Initializes a new instance of the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -200,23 +179,19 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="useOdbcRules" />
+            >If <paramref name="useOdbcRules" />
 
             
 
-             is true, this <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+             is true, this <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             uses ODBC rules for quoting values (surrounding values with curly braces ({})). If <paramref
-             name="useOdbcRules" />
+             uses ODBC rules for quoting values (surrounding values with curly braces ({})). If <paramref name="useOdbcRules" />
 
             
 
-             is false, this <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+             is false, this <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -226,8 +201,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >Initializes a new instance of the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -235,7 +209,11 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           >
         </summary>
         <param name="useOdbcRules">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -261,26 +239,22 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Data.Common.DbConnectionStringBuilder.Item(System.String)" />
+            >The <see cref="P:System.Data.Common.DbConnectionStringBuilder.Item(System.String)" />
 
             
 
              property can also be used to add new elements by setting the value of a key that does not exist in the dictionary. For example: myCollection["myNonexistentKey"] = myValue. </para
           >
           <para
-            >Calling the <see
-             cref="M:System.Data.Common.DbConnectionStringBuilder.Add(System.String,System.Object)" />
+            >Calling the <see cref="M:System.Data.Common.DbConnectionStringBuilder.Add(System.String,System.Object)" />
 
             
 
-             method by passing a null (Nothing in Visual Basic) key throws an <see
-             cref="T:System.ArgumentNullException" />
+             method by passing a null (Nothing in Visual Basic) key throws an <see cref="T:System.ArgumentNullException" />
 
             
 
-            . However, calling the <see
-             cref="M:System.Data.Common.DbConnectionStringBuilder.Add(System.String,System.Object)" />
+            . However, calling the <see cref="M:System.Data.Common.DbConnectionStringBuilder.Add(System.String,System.Object)" />
 
             
 
@@ -290,8 +264,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an entry with the specified key and value into the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >Adds an entry with the specified key and value into the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -299,19 +272,26 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           >
         </summary>
         <param name="keyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key to add to the <see
-           cref="T:System.Data.Common.DbConnectionStringBuilder" />
+          The key to add to the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
           
 
           .</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -341,23 +321,19 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method allows developers using a <see
-             cref="T:System.Text.StringBuilder" />
+            >This method allows developers using a <see cref="T:System.Text.StringBuilder" />
 
             
 
-             to create a collection of key/value pairs to be able to take advantage of the features included in the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+             to create a collection of key/value pairs to be able to take advantage of the features included in the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             class when you add key/value pairs, without having to incur the overhead of creating and maintaining a <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+             class when you add key/value pairs, without having to incur the overhead of creating and maintaining a <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             instance. The AppendKeyValuePair method formats the key and value correctly and adds the new string to the supplied <see
-             cref="T:System.Text.StringBuilder" />
+             instance. The AppendKeyValuePair method formats the key and value correctly and adds the new string to the supplied <see cref="T:System.Text.StringBuilder" />
 
             
 
@@ -367,8 +343,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides an efficient and safe way to append a key and value to an existing <see
-             cref="T:System.Text.StringBuilder" />
+            >Provides an efficient and safe way to append a key and value to an existing <see cref="T:System.Text.StringBuilder" />
 
             
 
@@ -376,26 +351,37 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           >
         </summary>
         <param name="builder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Text.StringBuilder" />
+          The <see cref="T:System.Text.StringBuilder" />
 
           
 
            to which to add the key/value pair.</param
         >
         <param name="keyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key to be added.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -426,36 +412,30 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method allows developers using a <see
-             cref="T:System.Text.StringBuilder" />
+            >This method allows developers using a <see cref="T:System.Text.StringBuilder" />
 
             
 
-             to create a collection of key/value pairs to be able to take advantage of the features included in the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+             to create a collection of key/value pairs to be able to take advantage of the features included in the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             class when adding key/value pairs, without having to incur the overhead of creating and maintaining a <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+             class when adding key/value pairs, without having to incur the overhead of creating and maintaining a <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             instance. The AppendKeyValuePair method formats the key and value correctly and adds the new string to the supplied <see
-             cref="T:System.Text.StringBuilder" />
+             instance. The AppendKeyValuePair method formats the key and value correctly and adds the new string to the supplied <see cref="T:System.Text.StringBuilder" />
 
             
 
             .</para
           >
           <para
-            >Although most data sources let you delimit fields by using quotation marks, ODBC does not--for ODBC connection strings, you must use curly braces ({}). In order to have the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >Although most data sources let you delimit fields by using quotation marks, ODBC does not--for ODBC connection strings, you must use curly braces ({}). In order to have the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             use ODBC rules for delimiting fields, set the <paramref
-             name="useOdbcRules" />
+             use ODBC rules for delimiting fields, set the <paramref name="useOdbcRules" />
 
             
 
@@ -465,8 +445,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides an efficient and safe way to append a key and value to an existing <see
-             cref="T:System.Text.StringBuilder" />
+            >Provides an efficient and safe way to append a key and value to an existing <see cref="T:System.Text.StringBuilder" />
 
             
 
@@ -474,33 +453,48 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           >
         </summary>
         <param name="builder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Text.StringBuilder" />
+          The <see cref="T:System.Text.StringBuilder" />
 
           
 
            to which to add the key/value pair.</param
         >
         <param name="keyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key to be added.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value for the supplied key.</param
         >
         <param name="useOdbcRules">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -537,13 +531,11 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Developers creating designers that take advantage of the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >Developers creating designers that take advantage of the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             class must be able to make the connection string visible or invisible within the designer's property grid. The <see
-             cref="P:System.Data.Common.DbConnectionStringBuilder.BrowsableConnectionString" />
+             class must be able to make the connection string visible or invisible within the designer's property grid. The <see cref="P:System.Data.Common.DbConnectionStringBuilder.BrowsableConnectionString" />
 
             
 
@@ -553,8 +545,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether the <see
-             cref="P:System.Data.Common.DbConnectionStringBuilder.ConnectionString" />
+            >Gets or sets a value that indicates whether the <see cref="P:System.Data.Common.DbConnectionStringBuilder.ConnectionString" />
 
             
 
@@ -578,23 +569,19 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Data.Common.DbConnectionStringBuilder.Clear" />
+            >The <see cref="M:System.Data.Common.DbConnectionStringBuilder.Clear" />
 
             
 
-             method removes all key/value pairs from the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+             method removes all key/value pairs from the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             and resets all corresponding properties. This includes setting the <see
-             cref="P:System.Data.Common.DbConnectionStringBuilder.Count" />
+             and resets all corresponding properties. This includes setting the <see cref="P:System.Data.Common.DbConnectionStringBuilder.Count" />
 
             
 
-             property to 0 and the <see
-             cref="P:System.Data.Common.DbConnectionStringBuilder.ConnectionString" />
+             property to 0 and the <see cref="P:System.Data.Common.DbConnectionStringBuilder.ConnectionString" />
 
             
 
@@ -604,8 +591,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clears the contents of the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >Clears the contents of the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -631,8 +617,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used by designers to clear all associated property descriptors on the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >This method is used by designers to clear all associated property descriptors on the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -642,13 +627,11 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clears the collection of <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Clears the collection of <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
-             objects on the associated <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+             objects on the associated <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -674,8 +657,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns a semicolon-delimited list of key/value pairs stored within the collection maintained by the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >This property returns a semicolon-delimited list of key/value pairs stored within the collection maintained by the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -683,41 +665,34 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           >
           <code>"Persist Security Info=False;Integrated Security=SSPI;Initial Catalog=AdventureWorks;Data Source=(local)"</code>
           <para
-            >Data providers may expect specific keys and values for each connection string property. , These values are documented individually. The <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >Data providers may expect specific keys and values for each connection string property. , These values are documented individually. The <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
              class does not validate the key/value pairs associated with its connection string, although classes that inherit from it can.</para
           >
           <para
-            >The <see
-             cref="P:System.Data.Common.DbConnectionStringBuilder.ConnectionString" />
+            >The <see cref="P:System.Data.Common.DbConnectionStringBuilder.ConnectionString" />
 
             
 
-             property of the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+             property of the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             class acts generally as a mechanism for creating and parsing semicolon-delimited lists of key/value pairs separated with equal signs. It provides no validation or other support specific to connection strings. If you add items to the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+             class acts generally as a mechanism for creating and parsing semicolon-delimited lists of key/value pairs separated with equal signs. It provides no validation or other support specific to connection strings. If you add items to the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             collection, the <see
-             cref="P:System.Data.Common.DbConnectionStringBuilder.ConnectionString" />
+             collection, the <see cref="P:System.Data.Common.DbConnectionStringBuilder.ConnectionString" />
 
             
 
-             property will reflect the changes. If you assign a value to the <see
-             cref="P:System.Data.Common.DbConnectionStringBuilder.ConnectionString" />
+             property will reflect the changes. If you assign a value to the <see cref="P:System.Data.Common.DbConnectionStringBuilder.ConnectionString" />
 
             
 
-             property, the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+             property, the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -727,8 +702,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the connection string associated with the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >Gets or sets the connection string associated with the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -755,8 +729,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >Determines whether the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -766,8 +739,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >true if the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -775,12 +747,15 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           >
         </returns>
         <param name="keyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key to locate in the <see
-           cref="T:System.Data.Common.DbConnectionStringBuilder" />
+          The key to locate in the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
           
 
@@ -809,8 +784,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the current number of keys that are contained within the <see
-             cref="P:System.Data.Common.DbConnectionStringBuilder.ConnectionString" />
+            >Gets the current number of keys that are contained within the <see cref="P:System.Data.Common.DbConnectionStringBuilder.ConnectionString" />
 
             
 
@@ -843,8 +817,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Comparisons on key names are case insensitive; value comparisons are case sensitive.</para>
           <para
-            >The <see
-             cref="M:System.Data.Common.DbConnectionStringBuilder.EquivalentTo(System.Data.Common.DbConnectionStringBuilder)" />
+            >The <see cref="M:System.Data.Common.DbConnectionStringBuilder.EquivalentTo(System.Data.Common.DbConnectionStringBuilder)" />
 
             
 
@@ -854,8 +827,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares the connection information in this <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >Compares the connection information in this <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -865,8 +837,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the connection information in both of the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >true if the connection information in both of the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -874,17 +845,19 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           >
         </returns>
         <param name="connectionStringBuilder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.Common.DbConnectionStringBuilder" />
+          The <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
           
 
-           to be compared with this <see
-           cref="T:System.Data.Common.DbConnectionStringBuilder" />
+           to be compared with this <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
           
 
@@ -913,13 +886,11 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Fills a supplied <see
-             cref="T:System.Collections.Hashtable" />
+            >Fills a supplied <see cref="T:System.Collections.Hashtable" />
 
             
 
-             with information about all the properties of this <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+             with information about all the properties of this <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -927,17 +898,19 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           >
         </summary>
         <param name="propertyDescriptors">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.Hashtable" />
+          The <see cref="T:System.Collections.Hashtable" />
 
           
 
-           to be filled with information about this <see
-           cref="T:System.Data.Common.DbConnectionStringBuilder" />
+           to be filled with information about this <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
           
 
@@ -970,8 +943,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >Gets a value that indicates whether the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -1005,8 +977,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >Gets a value that indicates whether the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -1066,46 +1037,38 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The order of the values in the <see
-             cref="T:System.Collections.ICollection" />
+            >The order of the values in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             is unspecified, but it is the same order as the associated values in the <see
-             cref="T:System.Collections.ICollection" />
+             is unspecified, but it is the same order as the associated values in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             returned by the <see
-             cref="P:System.Data.Common.DbConnectionStringBuilder.Values" />
+             returned by the <see cref="P:System.Data.Common.DbConnectionStringBuilder.Values" />
 
             
 
              property.</para
           >
           <para
-            >The returned <see
-             cref="T:System.Collections.ICollection" />
+            >The returned <see cref="T:System.Collections.ICollection" />
 
             
 
-             is not a static copy; instead, the <see
-             cref="T:System.Collections.ICollection" />
+             is not a static copy; instead, the <see cref="T:System.Collections.ICollection" />
 
             
 
-             refers back to the keys in the original <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+             refers back to the keys in the original <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-            . Therefore, changes to the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            . Therefore, changes to the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             are reflected in the <see
-             cref="T:System.Collections.ICollection" />
+             are reflected in the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1115,13 +1078,11 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an <see cref="T:System.Collections.ICollection" />
 
             
 
-             that contains the keys in the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+             that contains the keys in the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -1147,13 +1108,11 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the <see
-             cref="M:System.Data.Common.DbConnectionStringBuilder.Remove(System.String)" />
+            >Because the <see cref="M:System.Data.Common.DbConnectionStringBuilder.Remove(System.String)" />
 
             
 
-             method returns a value that indicates its success, it is not required to look for the key before trying to remove the key/value pair from the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+             method returns a value that indicates its success, it is not required to look for the key before trying to remove the key/value pair from the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -1163,8 +1122,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the entry with the specified key from the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >Removes the entry with the specified key from the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -1176,12 +1134,15 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para>true if the key existed within the connection string and was removed; false if the key did not exist.</para>
         </returns>
         <param name="keyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key of the key/value pair to be removed from the connection string in this <see
-           cref="T:System.Data.Common.DbConnectionStringBuilder" />
+          The key of the key/value pair to be removed from the connection string in this <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
           
 
@@ -1209,8 +1170,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method behaves identically to the <see
-             cref="M:System.Data.Common.DbConnectionStringBuilder.ContainsKey(System.String)" />
+            >This method behaves identically to the <see cref="M:System.Data.Common.DbConnectionStringBuilder.ContainsKey(System.String)" />
 
             
 
@@ -1220,8 +1180,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified key exists in this <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >Indicates whether the specified key exists in this <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -1231,8 +1190,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >true if the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -1240,12 +1198,15 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           >
         </returns>
         <param name="keyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key to locate in the <see
-           cref="T:System.Data.Common.DbConnectionStringBuilder" />
+          The key to locate in the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
           
 
@@ -1273,21 +1234,18 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
              interface.</para
           >
           <para
-            >For a description of this member, see <see
-             cref="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)" />
+            >For a description of this member, see <see cref="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)" />
 
             
 
@@ -1297,18 +1255,15 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the <see
-             cref="T:System.Collections.ICollection" />
+            >Copies the elements of the <see cref="T:System.Collections.ICollection" />
 
             
 
-             to an <see
-             cref="T:System.Array" />
+             to an <see cref="T:System.Array" />
 
             
 
-            , starting at a particular <see
-             cref="T:System.Array" />
+            , starting at a particular <see cref="T:System.Array" />
 
             
 
@@ -1316,34 +1271,38 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from <see
-           cref="T:System.Collections.ICollection" />
+           that is the destination of the elements copied from <see cref="T:System.Collections.ICollection" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -1368,21 +1327,18 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="P:System.Collections.ICollection.IsSynchronized" />
+            >For more information, see <see cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
@@ -1392,8 +1348,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see
-             cref="T:System.Collections.ICollection" />
+            >Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1419,21 +1374,18 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+            >For more information, see <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
@@ -1443,8 +1395,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1470,21 +1421,18 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IDictionary" />
+             instance is cast to an <see cref="T:System.Collections.IDictionary" />
 
             
 
              interface.</para
           >
           <para
-            >For a description of this member, see <see
-             cref="M:System.Collections.IDictionary.Add(System.Object,System.Object)" />
+            >For a description of this member, see <see cref="M:System.Collections.IDictionary.Add(System.Object,System.Object)" />
 
             
 
@@ -1494,8 +1442,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an element with the provided key and value to the <see
-             cref="T:System.Collections.IDictionary" />
+            >Adds an element with the provided key and value to the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1503,24 +1450,30 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           >
         </summary>
         <param name="keyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
            to use as the key of the element to add.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -1544,21 +1497,18 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IDictionary" />
+             instance is cast to an <see cref="T:System.Collections.IDictionary" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="M:System.Collections.IDictionary.Contains(System.Object)" />
+            >For more information, see <see cref="M:System.Collections.IDictionary.Contains(System.Object)" />
 
             
 
@@ -1568,8 +1518,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Collections.IDictionary" />
+            >Determines whether the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1579,8 +1528,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Collections.IDictionary" />
+            >true if the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1588,12 +1536,15 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           >
         </returns>
         <param name="keyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key to locate in the <see
-           cref="T:System.Collections.IDictionary" />
+          The key to locate in the <see cref="T:System.Collections.IDictionary" />
 
           
 
@@ -1618,21 +1569,18 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IDictionary" />
+             instance is cast to an <see cref="T:System.Collections.IDictionary" />
 
             
 
              interface.</para
           >
           <para
-            >For a description of this member, see <see
-             cref="M:System.Collections.IDictionary.GetEnumerator" />
+            >For a description of this member, see <see cref="M:System.Collections.IDictionary.GetEnumerator" />
 
             
 
@@ -1642,13 +1590,11 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >Returns an <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
-             object for the <see
-             cref="T:System.Collections.IDictionary" />
+             object for the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1658,13 +1604,11 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >An <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
-             object for the <see
-             cref="T:System.Collections.IDictionary" />
+             object for the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1711,21 +1655,18 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IDictionary" />
+             instance is cast to an <see cref="T:System.Collections.IDictionary" />
 
             
 
              interface.</para
           >
           <para
-            >For a description of this member, see <see
-             cref="M:System.Collections.IDictionary.Remove(System.Object)" />
+            >For a description of this member, see <see cref="M:System.Collections.IDictionary.Remove(System.Object)" />
 
             
 
@@ -1735,8 +1676,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the element with the specified key from the <see
-             cref="T:System.Collections.IDictionary" />
+            >Removes the element with the specified key from the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1744,7 +1684,11 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           >
         </summary>
         <param name="keyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1769,21 +1713,18 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IEnumerable" />
+             instance is cast to an <see cref="T:System.Collections.IEnumerable" />
 
             
 
              interface.</para
           >
           <para
-            >For a description of this member, see <see
-             cref="M:System.Collections.IEnumerable.GetEnumerator" />
+            >For a description of this member, see <see cref="M:System.Collections.IEnumerable.GetEnumerator" />
 
             
 
@@ -1797,8 +1738,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -1824,21 +1764,18 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
              interface.</para
           >
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetAttributes" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetAttributes" />
 
             
 
@@ -1852,8 +1789,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ComponentModel.AttributeCollection" />
+            >An <see cref="T:System.ComponentModel.AttributeCollection" />
 
             
 
@@ -1876,21 +1812,18 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
              interface.</para
           >
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetClassName" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetClassName" />
 
             
 
@@ -1921,21 +1854,18 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetComponentName" />
+            >For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetComponentName" />
 
             
 
@@ -1969,21 +1899,18 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
              interface.</para
           >
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetConverter" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetConverter" />
 
             
 
@@ -1997,13 +1924,11 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.TypeConverter" />
+            >A <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
-             that is the converter for this object, or null if there is no <see
-             cref="T:System.ComponentModel.TypeConverter" />
+             that is the converter for this object, or null if there is no <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
@@ -2029,21 +1954,18 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
              interface.</para
           >
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetDefaultEvent" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetDefaultEvent" />
 
             
 
@@ -2057,8 +1979,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ComponentModel.EventDescriptor" />
+            >An <see cref="T:System.ComponentModel.EventDescriptor" />
 
             
 
@@ -2084,21 +2005,18 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
              interface.</para
           >
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetDefaultProperty" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetDefaultProperty" />
 
             
 
@@ -2112,8 +2030,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -2141,21 +2058,18 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetEditor(System.Type)" />
+            >For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetEditor(System.Type)" />
 
             
 
@@ -2169,8 +2083,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -2178,12 +2091,15 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           >
         </returns>
         <param name="editorBaseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -2208,21 +2124,18 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetEvents" />
+            >For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetEvents" />
 
             
 
@@ -2236,8 +2149,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ComponentModel.EventDescriptorCollection" />
+            >An <see cref="T:System.ComponentModel.EventDescriptorCollection" />
 
             
 
@@ -2265,21 +2177,18 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetEvents(System.Attribute[])" />
+            >For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetEvents(System.Attribute[])" />
 
             
 
@@ -2293,8 +2202,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ComponentModel.EventDescriptorCollection" />
+            >An <see cref="T:System.ComponentModel.EventDescriptorCollection" />
 
             
 
@@ -2302,12 +2210,15 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           >
         </returns>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Attribute" />
+          An array of type <see cref="T:System.Attribute" />
 
           
 
@@ -2332,21 +2243,18 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetProperties" />
+            >For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetProperties" />
 
             
 
@@ -2360,8 +2268,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
@@ -2389,21 +2296,18 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetProperties(System.Attribute[])" />
+            >For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetProperties(System.Attribute[])" />
 
             
 
@@ -2417,8 +2321,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
@@ -2426,12 +2329,15 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           >
         </returns>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Attribute" />
+          An array of type <see cref="T:System.Attribute" />
 
           
 
@@ -2458,21 +2364,18 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetPropertyOwner(System.ComponentModel.PropertyDescriptor)" />
+            >For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetPropertyOwner(System.ComponentModel.PropertyDescriptor)" />
 
             
 
@@ -2486,8 +2389,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -2495,12 +2397,15 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           >
         </returns>
         <param name="pd">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          A <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -2521,8 +2426,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the connection string associated with this <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >Returns the connection string associated with this <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -2532,8 +2436,7 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current <see
-             cref="P:System.Data.Common.DbConnectionStringBuilder.ConnectionString" />
+            >The current <see cref="P:System.Data.Common.DbConnectionStringBuilder.ConnectionString" />
 
             
 
@@ -2590,46 +2493,38 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The order of the values in the <see
-             cref="T:System.Collections.ICollection" />
+            >The order of the values in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             is unspecified, but it is the same order as the associated keys in the <see
-             cref="T:System.Collections.ICollection" />
+             is unspecified, but it is the same order as the associated keys in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             returned by the <see
-             cref="P:System.Data.Common.DbConnectionStringBuilder.Keys" />
+             returned by the <see cref="P:System.Data.Common.DbConnectionStringBuilder.Keys" />
 
             
 
              method.</para
           >
           <para
-            >The returned <see
-             cref="T:System.Collections.ICollection" />
+            >The returned <see cref="T:System.Collections.ICollection" />
 
             
 
-             is not a static copy; instead, the <see
-             cref="T:System.Collections.ICollection" />
+             is not a static copy; instead, the <see cref="T:System.Collections.ICollection" />
 
             
 
-             refers back to the values in the original <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+             refers back to the values in the original <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-            . Therefore, changes to the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            . Therefore, changes to the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
-             are reflected in the <see
-             cref="T:System.Collections.ICollection" />
+             are reflected in the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -2639,13 +2534,11 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an <see cref="T:System.Collections.ICollection" />
 
             
 
-             that contains the values in the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+             that contains the values in the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 

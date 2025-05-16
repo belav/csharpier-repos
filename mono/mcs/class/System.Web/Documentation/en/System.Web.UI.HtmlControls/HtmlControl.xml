@@ -32,8 +32,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+        >The <see cref="T:System.Web.UI.HtmlControls.HtmlControl" />
 
         
 
@@ -55,8 +54,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is used to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+            >This constructor is used to create and initialize a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlControl" />
 
             
 
@@ -66,8 +64,7 @@
             <para>A new instance of this class is not created directly. This constructor is called from the constructor of other HTML control classes to initialize properties defined in this class.</para>
           </block>
           <para
-            >The following table shows the initial property value for an instance of <see
-             cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+            >The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlControl" />
 
             
 
@@ -99,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlControl" />
 
             
 
@@ -124,8 +120,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is used to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+            >This constructor is used to create and initialize a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlControl" />
 
             
 
@@ -135,8 +130,7 @@
             <para>A new instance of this class is not created directly. This constructor is called from the constructor of other HTML control classes to initialize properties defined in this class.</para>
           </block>
           <para
-            >The following table shows the initial property value for an instance of <see
-             cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+            >The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlControl" />
 
             
 
@@ -161,8 +155,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="tag" />
+                  >The value of the <paramref name="tag" />
 
                   
 
@@ -175,8 +168,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlControl" />
 
             
 
@@ -184,7 +176,11 @@
           >
         </summary>
         <param name="tag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -207,15 +203,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.UI.AttributeCollection" />
-        </value>
+        <value>a <see cref="T:System.Web.UI.AttributeCollection" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to programmatically access the attributes of the HTML server control. All HTML server controls store their attributes in the <see
-             cref="P:System.Web.UI.Control.ViewState" />
+            >Use this property to programmatically access the attributes of the HTML server control. All HTML server controls store their attributes in the <see cref="P:System.Web.UI.Control.ViewState" />
 
             
 
@@ -223,8 +215,7 @@
           >
           <para>HTML attributes are treated by the .NET Framework as properties on the HTML server control to which they belong.</para>
           <para
-            >For additional information on the attributes collection, see the <see
-             cref="T:System.Web.UI.AttributeCollection" />
+            >For additional information on the attributes collection, see the <see cref="T:System.Web.UI.AttributeCollection" />
 
             
 
@@ -265,13 +256,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >A <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
-             that contains the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+             that contains the <see cref="T:System.Web.UI.HtmlControls.HtmlControl" />
 
             
 
@@ -334,28 +323,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlControl.GetAttribute(System.String)" />
+            >Use the <see cref="M:System.Web.UI.HtmlControls.HtmlControl.GetAttribute(System.String)" />
 
             
 
-             method to access an attribute on the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+             method to access an attribute on the <see cref="T:System.Web.UI.HtmlControls.HtmlControl" />
 
             
 
-             server control. All HTML server controls store their attributes in the <see
-             cref="P:System.Web.UI.Control.ViewState" />
+             server control. All HTML server controls store their attributes in the <see cref="P:System.Web.UI.Control.ViewState" />
 
             
 
-             property. HTML attributes are treated by the ASP.NET page framework as properties on the HTML server control to which they belong. The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlControl.GetAttribute(System.String)" />
+             property. HTML attributes are treated by the ASP.NET page framework as properties on the HTML server control to which they belong. The <see cref="M:System.Web.UI.HtmlControls.HtmlControl.GetAttribute(System.String)" />
 
             
 
-             method's <paramref
-             name="name" />
+             method's <paramref name="name" />
 
             
 
@@ -365,8 +349,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the named attribute on the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+            >Gets the value of the named attribute on the <see cref="T:System.Web.UI.HtmlControls.HtmlControl" />
 
             
 
@@ -376,8 +359,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this attribute on the element, as a <see
-             cref="T:System.String" />
+            >The value of this attribute on the element, as a <see cref="T:System.String" />
 
             
 
@@ -385,7 +367,11 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -409,18 +395,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlControl.Render(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlControl.Render(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
+             method calls the <see cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method and passes the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             method and passes the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -430,8 +413,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes content to render on a client to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Writes content to render on a client to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -439,12 +421,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          A <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -472,31 +457,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method writes the <see
-             cref="P:System.Web.UI.Control.ID" />
+             method writes the <see cref="P:System.Web.UI.Control.ID" />
 
             
 
-             attribute of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+             attribute of the <see cref="T:System.Web.UI.HtmlControls.HtmlControl" />
 
             
 
              control.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+             method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.HtmlControls.HtmlControl" />
 
             
 
@@ -506,13 +486,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+            >Renders the <see cref="T:System.Web.UI.HtmlControls.HtmlControl" />
 
             
 
-             control's attributes into the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             control's attributes into the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -520,12 +498,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -553,21 +534,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
              method renders the opening angle bracket (&lt;), followed by the control's tag name, attributes, and a closing angle bracket (&gt;).</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+             method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.HtmlControls.HtmlControl" />
 
             
 
@@ -577,8 +555,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the opening HTML tag of the control into the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Renders the opening HTML tag of the control into the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -586,12 +563,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -623,31 +603,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlControl.SetAttribute(System.String,System.String)" />
+            >Use the <see cref="M:System.Web.UI.HtmlControls.HtmlControl.SetAttribute(System.String,System.String)" />
 
             
 
-             method to set an attribute on the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+             method to set an attribute on the <see cref="T:System.Web.UI.HtmlControls.HtmlControl" />
 
             
 
-             server control. All HTML server controls store their attributes in the <see
-             cref="P:System.Web.UI.Control.ViewState" />
+             server control. All HTML server controls store their attributes in the <see cref="P:System.Web.UI.Control.ViewState" />
 
             
 
              property.</para
           >
           <para
-            >HTML attributes are treated by the ASP.NET page framework as properties on the HTML server control to which they belong. The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlControl.SetAttribute(System.String,System.String)" />
+            >HTML attributes are treated by the ASP.NET page framework as properties on the HTML server control to which they belong. The <see cref="M:System.Web.UI.HtmlControls.HtmlControl.SetAttribute(System.String,System.String)" />
 
             
 
-             method's <paramref
-             name="name" />
+             method's <paramref name="name" />
 
             
 
@@ -657,8 +632,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the value of the named attribute on the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+            >Sets the value of the named attribute on the <see cref="T:System.Web.UI.HtmlControls.HtmlControl" />
 
             
 
@@ -666,14 +640,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the attribute to set.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -692,16 +674,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.UI.CssStyleCollection" />
-        </value>
+        <value>a <see cref="T:System.Web.UI.CssStyleCollection" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Use this property to programmatically access the style properties of the HTML server control.</para>
           <para
-            >For additional information on the CSS style collection, see the <see
-             cref="T:System.Web.UI.CssStyleCollection" />
+            >For additional information on the CSS style collection, see the <see cref="T:System.Web.UI.CssStyleCollection" />
 
             
 
@@ -746,26 +724,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlControl.System.Web.UI.IAttributeAccessor.GetAttribute(System.String)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlControl.System.Web.UI.IAttributeAccessor.GetAttribute(System.String)" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlControl.GetAttribute(System.String)" />
+             method calls the <see cref="M:System.Web.UI.HtmlControls.HtmlControl.GetAttribute(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.HtmlControls.HtmlControl" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IAttributeAccessor" />
+             instance is cast to an <see cref="T:System.Web.UI.IAttributeAccessor" />
 
             
 
@@ -775,8 +749,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Web.UI.IAttributeAccessor.GetAttribute(System.String)" />
+            >For a description of this member, see <see cref="M:System.Web.UI.IAttributeAccessor.GetAttribute(System.String)" />
 
             
 
@@ -786,8 +759,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this attribute on the element, as a <see
-             cref="T:System.String" />
+            >The value of this attribute on the element, as a <see cref="T:System.String" />
 
             
 
@@ -795,7 +767,11 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -824,26 +800,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlControl.System.Web.UI.IAttributeAccessor.SetAttribute(System.String,System.String)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlControl.System.Web.UI.IAttributeAccessor.SetAttribute(System.String,System.String)" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlControl.SetAttribute(System.String,System.String)" />
+             method calls the <see cref="M:System.Web.UI.HtmlControls.HtmlControl.SetAttribute(System.String,System.String)" />
 
             
 
              method.</para
           >
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.HtmlControls.HtmlControl" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IAttributeAccessor" />
+             instance is cast to an <see cref="T:System.Web.UI.IAttributeAccessor" />
 
             
 
@@ -853,8 +825,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Web.UI.IAttributeAccessor.SetAttribute(System.String,System.String)" />
+            >For a description of this member, see <see cref="M:System.Web.UI.IAttributeAccessor.SetAttribute(System.String,System.String)" />
 
             
 
@@ -862,14 +833,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the attribute to set.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -888,8 +867,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to programmatically determine the element name of the HTML server control. For example, the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlControl.TagName" />
+            >Use this property to programmatically determine the element name of the HTML server control. For example, the <see cref="P:System.Web.UI.HtmlControls.HtmlControl.TagName" />
 
             
 
@@ -925,25 +903,19 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Boolean" />
-        </value>
+        <value>a <see cref="T:System.Boolean" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.HtmlControls.HtmlControl.ViewStateIgnoresCase" />
+            >The <see cref="P:System.Web.UI.HtmlControls.HtmlControl.ViewStateIgnoresCase" />
 
             
 
-             property overrides the base class's <see
-             cref="P:System.Web.UI.Control.ViewStateIgnoresCase" />
+             property overrides the base class's <see cref="P:System.Web.UI.Control.ViewStateIgnoresCase" />
 
             
 
-             property to always return true, indicating that the controls that inherit from <see
-             cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+             property to always return true, indicating that the controls that inherit from <see cref="T:System.Web.UI.HtmlControls.HtmlControl" />
 
             
 
@@ -953,8 +925,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+            >Gets a value that indicates whether the <see cref="T:System.Web.UI.HtmlControls.HtmlControl" />
 
             
 

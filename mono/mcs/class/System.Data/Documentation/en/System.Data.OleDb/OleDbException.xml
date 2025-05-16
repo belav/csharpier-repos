@@ -21,29 +21,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is created whenever the .NET Framework Data Provider for OLE DB encounters an error generated from the server. (Client side errors are thrown as standard common language runtime exceptions.) <see
-         cref="T:System.Data.OleDb.OleDbException" />
+        >This class is created whenever the .NET Framework Data Provider for OLE DB encounters an error generated from the server. (Client side errors are thrown as standard common language runtime exceptions.) <see cref="T:System.Data.OleDb.OleDbException" />
 
         
 
-         always contains at least one instance of <see
-         cref="T:System.Data.OleDb.OleDbError" />
+         always contains at least one instance of <see cref="T:System.Data.OleDb.OleDbError" />
 
         
 
         .</para
       >
       <para
-        >If the severity of the error is too great, the server may close the <see
-         cref="T:System.Data.OleDb.OleDbConnection" />
+        >If the severity of the error is too great, the server may close the <see cref="T:System.Data.OleDb.OleDbConnection" />
 
         
 
         . However, the user can reopen the connection and continue.</para
       >
       <para
-        >For general information about handling exceptions for a .NET Framework data provider, see <see
-         cref="T:System.Data.SqlClient.SqlException" />
+        >For general information about handling exceptions for a .NET Framework data provider, see <see cref="T:System.Data.SqlClient.SqlException" />
 
         
 
@@ -94,21 +90,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Data.OleDb.OleDbErrorCollection" />
+            >The <see cref="T:System.Data.OleDb.OleDbErrorCollection" />
 
             
 
-             class always contains at least one instance of the <see
-             cref="T:System.Data.OleDb.OleDbError" />
+             class always contains at least one instance of the <see cref="T:System.Data.OleDb.OleDbError" />
 
             
 
              class.</para
           >
           <para
-            >This is a wrapper for the <see
-             cref="T:System.Data.OleDb.OleDbErrorCollection" />
+            >This is a wrapper for the <see cref="T:System.Data.OleDb.OleDbErrorCollection" />
 
             
 
@@ -118,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of one or more <see
-             cref="T:System.Data.OleDb.OleDbError" />
+            >Gets a collection of one or more <see cref="T:System.Data.OleDb.OleDbError" />
 
             
 
@@ -158,13 +150,11 @@
 
             
 
-             sets a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             sets a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             with all the exception object data targeted for serialization. During deserialization, the exception is reconstituted from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             with all the exception object data targeted for serialization. During deserialization, the exception is reconstituted from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -174,8 +164,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member overrides <see
-             cref="M:System.Exception.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+            >This member overrides <see cref="M:System.Exception.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
 
             
 
@@ -183,24 +172,30 @@
           >
         </summary>
         <param name="si">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 

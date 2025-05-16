@@ -31,34 +31,29 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Collections.Generic.HashSet`1" />
+        >The <see cref="T:System.Collections.Generic.HashSet`1" />
 
         
 
          class provides high-performance set operations. A set is a collection that contains no duplicate elements, and whose elements are in no particular order.</para
       >
       <para
-        >The capacity of a <see
-         cref="T:System.Collections.Generic.HashSet`1" />
+        >The capacity of a <see cref="T:System.Collections.Generic.HashSet`1" />
 
         
 
-         object is the number of elements that the object can hold. A <see
-         cref="T:System.Collections.Generic.HashSet`1" />
+         object is the number of elements that the object can hold. A <see cref="T:System.Collections.Generic.HashSet`1" />
 
         
 
          object's capacity automatically increases as elements are added to the object.</para
       >
       <para
-        >For very large <see
-         cref="T:System.Collections.Generic.HashSet`1" />
+        >For very large <see cref="T:System.Collections.Generic.HashSet`1" />
 
         
 
-         objects, you can increase the maximum capacity to 2 billion elements on a 64-bit system by setting the enabled attribute of the <format
-         type="text/html">
+         objects, you can increase the maximum capacity to 2 billion elements on a 64-bit system by setting the enabled attribute of the <format type="text/html">
           <a href="5c7ea24a-39ac-4e5f-83b7-b9f9a1b556ab">gcAllowVeryLargeObjects</a>
         </format>
 
@@ -67,13 +62,11 @@
          configuration element to true in the run-time environment.</para
       >
       <para
-        >Starting with the net_v40_long, the <see
-         cref="T:System.Collections.Generic.HashSet`1" />
+        >Starting with the net_v40_long, the <see cref="T:System.Collections.Generic.HashSet`1" />
 
         
 
-         class implements the <see
-         cref="T:System.Collections.Generic.ISet`1" />
+         class implements the <see cref="T:System.Collections.Generic.ISet`1" />
 
         
 

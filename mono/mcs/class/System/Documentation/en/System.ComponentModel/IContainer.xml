@@ -64,8 +64,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.ComponentModel.IComponent" />
+            >The new <see cref="T:System.ComponentModel.IComponent" />
 
             
 
@@ -75,13 +74,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.ComponentModel.IComponent" />
+            >Adds the specified <see cref="T:System.ComponentModel.IComponent" />
 
             
 
-             to the <see
-             cref="T:System.ComponentModel.IContainer" />
+             to the <see cref="T:System.ComponentModel.IContainer" />
 
             
 
@@ -89,12 +86,15 @@
           >
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IComponent" />
+          The <see cref="T:System.ComponentModel.IComponent" />
 
           
 
@@ -128,8 +128,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.ComponentModel.IComponent" />
+            >The new <see cref="T:System.ComponentModel.IComponent" />
 
             
 
@@ -139,13 +138,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.ComponentModel.IComponent" />
+            >Adds the specified <see cref="T:System.ComponentModel.IComponent" />
 
             
 
-             to the <see
-             cref="T:System.ComponentModel.IContainer" />
+             to the <see cref="T:System.ComponentModel.IContainer" />
 
             
 
@@ -153,19 +150,26 @@
           >
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IComponent" />
+          The <see cref="T:System.ComponentModel.IComponent" />
 
           
 
            to add. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -197,8 +201,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets all the components in the <see
-             cref="T:System.ComponentModel.IContainer" />
+            >Gets all the components in the <see cref="T:System.ComponentModel.IContainer" />
 
             
 
@@ -233,8 +236,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a component from the <see
-             cref="T:System.ComponentModel.IContainer" />
+            >Removes a component from the <see cref="T:System.ComponentModel.IContainer" />
 
             
 
@@ -242,12 +244,15 @@
           >
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IComponent" />
+          The <see cref="T:System.ComponentModel.IComponent" />
 
           
 

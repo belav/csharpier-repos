@@ -23,23 +23,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="M:System.Security.Policy.ApplicationTrustCollection.Remove(System.ApplicationIdentity,System.Security.Policy.ApplicationVersionMatch)" />
+        >The <see cref="M:System.Security.Policy.ApplicationTrustCollection.Remove(System.ApplicationIdentity,System.Security.Policy.ApplicationVersionMatch)" />
 
         
 
-         and <see
-         cref="M:System.Security.Policy.ApplicationTrustCollection.Find(System.ApplicationIdentity,System.Security.Policy.ApplicationVersionMatch)" />
+         and <see cref="M:System.Security.Policy.ApplicationTrustCollection.Find(System.ApplicationIdentity,System.Security.Policy.ApplicationVersionMatch)" />
 
         
 
-         methods of an <see
-         cref="T:System.Security.Policy.ApplicationTrustCollection" />
+         methods of an <see cref="T:System.Security.Policy.ApplicationTrustCollection" />
 
         
 
-         can act either on all versions of an application or on the exact version. The <see
-         cref="T:System.Security.Policy.ApplicationVersionMatch" />
+         can act either on all versions of an application or on the exact version. The <see cref="T:System.Security.Policy.ApplicationVersionMatch" />
 
         
 

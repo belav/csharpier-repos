@@ -14,13 +14,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Determines the alignment of a <see
-         cref="T:System.Windows.Forms.ToolStripItem" />
+        >Determines the alignment of a <see cref="T:System.Windows.Forms.ToolStripItem" />
 
         
 
-         in a <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+         in a <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
@@ -40,33 +38,27 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Specifies that the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             is to be anchored toward the left or top end of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             is to be anchored toward the left or top end of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            , depending on the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            , depending on the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             orientation. If the value of <see
-             cref="T:System.Windows.Forms.RightToLeft" />
+             orientation. If the value of <see cref="T:System.Windows.Forms.RightToLeft" />
 
             
 
-             is Yes, items marked as <see
-             cref="F:System.Windows.Forms.ToolStripItemAlignment.Left" />
+             is Yes, items marked as <see cref="F:System.Windows.Forms.ToolStripItemAlignment.Left" />
 
             
 
-             are aligned to the right side of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             are aligned to the right side of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -89,33 +81,27 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Specifies that the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             is to be anchored toward the right or bottom end of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             is to be anchored toward the right or bottom end of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            , depending on the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            , depending on the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             orientation. If the value of <see
-             cref="T:System.Windows.Forms.RightToLeft" />
+             orientation. If the value of <see cref="T:System.Windows.Forms.RightToLeft" />
 
             
 
-             is Yes, items marked as <see
-             cref="F:System.Windows.Forms.ToolStripItemAlignment.Right" />
+             is Yes, items marked as <see cref="F:System.Windows.Forms.ToolStripItemAlignment.Right" />
 
             
 
-             are aligned to the left side of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             are aligned to the left side of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 

@@ -41,21 +41,18 @@
 
         
 
-         uses the default <see
-         cref="M:System.Object.Equals(System.Object)" />
+         uses the default <see cref="M:System.Object.Equals(System.Object)" />
 
         
 
          implementation, which supports reference equality.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Runtime.Remoting.RemotingException" />
+        >For a list of initial property values for an instance of <see cref="T:System.Runtime.Remoting.RemotingException" />
 
         
 
-        , see the <see
-         cref="T:System.Runtime.Remoting.RemotingException" />
+        , see the <see cref="T:System.Runtime.Remoting.RemotingException" />
 
         
 
@@ -90,13 +87,11 @@
 
             
 
-             inherits from the <see
-             cref="T:System.SystemException" />
+             inherits from the <see cref="T:System.SystemException" />
 
             
 
-             class. The following table shows initial property values for an instance of the <see
-             cref="T:System.Runtime.Remoting.RemotingException" />
+             class. The following table shows initial property values for an instance of the <see cref="T:System.Runtime.Remoting.RemotingException" />
 
             
 
@@ -138,8 +133,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.RemotingException" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.RemotingException" />
 
             
 
@@ -172,13 +166,11 @@
 
             
 
-             inherits from the <see
-             cref="T:System.SystemException" />
+             inherits from the <see cref="T:System.SystemException" />
 
             
 
-             class. The following table shows initial property values for an instance of the <see
-             cref="T:System.Runtime.Remoting.RemotingException" />
+             class. The following table shows initial property values for an instance of the <see cref="T:System.Runtime.Remoting.RemotingException" />
 
             
 
@@ -213,8 +205,7 @@
               </term>
               <description>
                 <para
-                  >The <paramref
-                   name="message" />
+                  >The <paramref name="message" />
 
                   
 
@@ -227,8 +218,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.RemotingException" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.RemotingException" />
 
             
 
@@ -236,7 +226,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -268,8 +262,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. (For more information on serialization, see <format
-             type="text/html">
+            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. (For more information on serialization, see <format type="text/html">
               <a href="832AC524-21BC-419A-A27B-CA8BFC45840F"
                 >[&lt;topic://cpconSerialization&gt;]</a
               >
@@ -283,8 +276,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.RemotingException" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.RemotingException" />
 
             
 
@@ -292,14 +284,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -331,26 +331,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception will include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception will include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows initial property values for an instance of the <see
-             cref="T:System.Runtime.Remoting.RemotingException" />
+            >The following table shows initial property values for an instance of the <see cref="T:System.Runtime.Remoting.RemotingException" />
 
             
 
@@ -392,8 +388,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.RemotingException" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.RemotingException" />
 
             
 
@@ -401,19 +396,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains why the exception occurred. </param
         >
         <param name="InnerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="InnerException" />
+          The exception that is the cause of the current exception. If the <paramref name="InnerException" />
 
           
 

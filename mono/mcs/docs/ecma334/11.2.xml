@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
 <clause number="11.2" title="Reference types">
   <paragraph
-    >A reference type is a class type, an interface type, an array type, or a delegate type. <grammar_production
-    >
+    >A reference type is a class type, an interface type, an array type, or a delegate type. <grammar_production>
       <name>
         <non_terminal where="11.2">reference-type</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="11.2">class-type</non_terminal>
       </rhs>
       <rhs>
@@ -30,8 +28,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="10.8">type-name</non_terminal>
       </rhs>
       <rhs>
@@ -48,8 +45,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="10.8">type-name</non_terminal>
       </rhs>
     </grammar_production>
@@ -60,8 +56,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="19.1">non-array-type</non_terminal>
         <non_terminal where="19.1">rank-specifiers</non_terminal>
       </rhs>
@@ -73,8 +68,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="11">type</non_terminal>
       </rhs>
     </grammar_production>
@@ -89,8 +83,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="19.1">rank-specifier</non_terminal>
       </rhs>
       <rhs>
@@ -105,8 +98,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <terminal>[</terminal>
         <non_terminal where="19.1">dim-separators</non_terminal>
         <opt />
@@ -120,8 +112,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <terminal>,</terminal>
       </rhs>
       <rhs>
@@ -136,8 +127,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="10.8">type-name</non_terminal>
       </rhs>
     </grammar_production>

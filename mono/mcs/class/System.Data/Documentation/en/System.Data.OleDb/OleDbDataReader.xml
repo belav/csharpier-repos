@@ -21,54 +21,45 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To create an <see
-         cref="T:System.Data.OleDb.OleDbDataReader" />
+        >To create an <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
         
 
-        , you must call the <see
-         cref="M:System.Data.OleDb.OleDbCommand.ExecuteReader" />
+        , you must call the <see cref="M:System.Data.OleDb.OleDbCommand.ExecuteReader" />
 
         
 
-         method of the <see
-         cref="T:System.Data.OleDb.OleDbCommand" />
+         method of the <see cref="T:System.Data.OleDb.OleDbCommand" />
 
         
 
          object, instead of directly using a constructor.</para
       >
       <para
-        >Before you close the <see
-         cref="T:System.Data.OleDb.OleDbConnection" />
+        >Before you close the <see cref="T:System.Data.OleDb.OleDbConnection" />
 
         
 
-        , first close the <see
-         cref="T:System.Data.OleDb.OleDbDataReader" />
+        , first close the <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
         
 
-         object. You must also close the <see
-         cref="T:System.Data.OleDb.OleDbDataReader" />
+         object. You must also close the <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
         
 
-         object if you plan to resuse an <see
-         cref="T:System.Data.OleDb.OleDbCommand" />
+         object if you plan to resuse an <see cref="T:System.Data.OleDb.OleDbCommand" />
 
         
 
-         object.For example, you cannot retrieve output parameters until after you call <see
-         cref="M:System.Data.OleDb.OleDbDataReader.Close" />
+         object.For example, you cannot retrieve output parameters until after you call <see cref="M:System.Data.OleDb.OleDbDataReader.Close" />
 
         
 
         .</para
       >
       <para
-        >Changes made to a result set by another process or thread while data is being read may be visible to the user of the <see
-         cref="T:System.Data.OleDb.OleDbDataReader" />
+        >Changes made to a result set by another process or thread while data is being read may be visible to the user of the <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
         
 
@@ -79,33 +70,27 @@
 
         
 
-         and <see
-         cref="P:System.Data.OleDb.OleDbDataReader.RecordsAffected" />
+         and <see cref="P:System.Data.OleDb.OleDbDataReader.RecordsAffected" />
 
         
 
-         are the only properties that you can call after the <see
-         cref="T:System.Data.OleDb.OleDbDataReader" />
+         are the only properties that you can call after the <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
         
 
-         is closed. Although the <see
-         cref="P:System.Data.OleDb.OleDbDataReader.RecordsAffected" />
+         is closed. Although the <see cref="P:System.Data.OleDb.OleDbDataReader.RecordsAffected" />
 
         
 
-         property may be accessed while the <see
-         cref="T:System.Data.OleDb.OleDbDataReader" />
+         property may be accessed while the <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
         
 
-         exists, always call <see
-         cref="M:System.Data.OleDb.OleDbDataReader.Close" />
+         exists, always call <see cref="M:System.Data.OleDb.OleDbDataReader.Close" />
 
         
 
-         before returning the value of <see
-         cref="P:System.Data.OleDb.OleDbDataReader.RecordsAffected" />
+         before returning the value of <see cref="P:System.Data.OleDb.OleDbDataReader.RecordsAffected" />
 
         
 
@@ -129,18 +114,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must explicitly call the <see
-             cref="M:System.Data.OleDb.OleDbDataReader.Close" />
+            >You must explicitly call the <see cref="M:System.Data.OleDb.OleDbDataReader.Close" />
 
             
 
-             method when you are through using the <see
-             cref="T:System.Data.OleDb.OleDbDataReader" />
+             method when you are through using the <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
             
 
-             to use the associated <see
-             cref="T:System.Data.OleDb.OleDbConnection" />
+             to use the associated <see cref="T:System.Data.OleDb.OleDbConnection" />
 
             
 
@@ -148,8 +130,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Do not call Close or Dispose on a Connection, a DataReader, or any other managed object in the Finalize method of your class. In a finalizer, you should only release unmanaged resources that your class owns directly. If your class does not own any unmanaged resources, do not include a Finalize method in your class definition. For more information, see <format
-               type="text/html">
+              >Do not call Close or Dispose on a Connection, a DataReader, or any other managed object in the Finalize method of your class. In a finalizer, you should only release unmanaged resources that your class owns directly. If your class does not own any unmanaged resources, do not include a Finalize method in your class definition. For more information, see <format type="text/html">
                 <a href="22B6CB97-0C80-4EEB-A2CF-5ED7655E37F9">Garbage Collection</a>
               </format>
 
@@ -162,8 +143,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Closes the <see
-             cref="T:System.Data.OleDb.OleDbDataReader" />
+            >Closes the <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
             
 
@@ -209,16 +189,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Includes hidden fields. Use <see
-             cref="P:System.Data.OleDb.OleDbDataReader.VisibleFieldCount" />
+            >Includes hidden fields. Use <see cref="P:System.Data.OleDb.OleDbDataReader.VisibleFieldCount" />
 
             
 
              to exclude hidden fields.</para
           >
           <para
-            >After executing a query that does not return rows, <see
-             cref="P:System.Data.OleDb.OleDbDataReader.FieldCount" />
+            >After executing a query that does not return rows, <see cref="P:System.Data.OleDb.OleDbDataReader.FieldCount" />
 
             
 
@@ -264,8 +242,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore the data retrieved must already be a Boolean, or an exception is generated.</para>
           <para
-            >Call <see
-             cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -281,7 +258,11 @@
           <para>The value of the column.</para>
         </returns>
         <param name="ordinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -307,8 +288,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore the data retrieved must already be a byte.</para>
           <para
-            >Call <see
-             cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -324,7 +304,11 @@
           <para>The value of the specified column as a byte.</para>
         </returns>
         <param name="ordinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -360,21 +344,18 @@
 
             
 
-             returns the number of available bytes in the field. Most of the time this is the exact length of the field. However, the number returned may be less than the true length of the field if GetBytes has already been used to obtain bytes from the field. This may be the case, for example, when the <see
-             cref="T:System.Data.OleDb.OleDbDataReader" />
+             returns the number of available bytes in the field. Most of the time this is the exact length of the field. However, the number returned may be less than the true length of the field if GetBytes has already been used to obtain bytes from the field. This may be the case, for example, when the <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
             
 
-             is reading a large data structure into a buffer. For more information, see the SequentialAccess setting for <see
-             cref="T:System.Data.CommandBehavior" />
+             is reading a large data structure into a buffer. For more information, see the SequentialAccess setting for <see cref="T:System.Data.CommandBehavior" />
 
             
 
             .</para
           >
           <para
-            >If you pass a buffer that is null, <see
-             cref="M:System.Data.OleDb.OleDbDataReader.GetBytes(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)" />
+            >If you pass a buffer that is null, <see cref="M:System.Data.OleDb.OleDbDataReader.GetBytes(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)" />
 
             
 
@@ -391,40 +372,59 @@
           <para>The actual number of bytes read.</para>
         </returns>
         <param name="ordinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based column ordinal. </param
         >
         <param name="dataIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index within the field from which to start the read operation. </param
         >
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to read the stream of bytes. </param
         >
         <param name="bufferIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index within the <paramref
-           name="buffer" />
+          The index within the <paramref name="buffer" />
 
           
 
            where the write operation is to start. </param
         >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -449,8 +449,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Not supported for <see
-             cref="N:System.Data.OleDb" />
+            >Not supported for <see cref="N:System.Data.OleDb" />
 
             
 
@@ -466,7 +465,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="ordinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -507,21 +510,18 @@
 
             
 
-             returns the number of available characters in the field. Most of the time this is the exact length of the field. However, the number returned may be less than the true length of the field if GetChars has already been used to obtain characters from the field. This may be the case, for example, when the <see
-             cref="T:System.Data.OleDb.OleDbDataReader" />
+             returns the number of available characters in the field. Most of the time this is the exact length of the field. However, the number returned may be less than the true length of the field if GetChars has already been used to obtain characters from the field. This may be the case, for example, when the <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
             
 
-             is reading a large data structure into a buffer. For more information, see the SequentialAccess setting for <see
-             cref="T:System.Data.CommandBehavior" />
+             is reading a large data structure into a buffer. For more information, see the SequentialAccess setting for <see cref="T:System.Data.CommandBehavior" />
 
             
 
             .</para
           >
           <para
-            >If you pass a buffer that is null, <see
-             cref="M:System.Data.OleDb.OleDbDataReader.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)" />
+            >If you pass a buffer that is null, <see cref="M:System.Data.OleDb.OleDbDataReader.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)" />
 
             
 
@@ -538,40 +538,59 @@
           <para>The actual number of characters read.</para>
         </returns>
         <param name="ordinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based column ordinal. </param
         >
         <param name="dataIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index within the row from which to start the read operation. </param
         >
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to copy data. </param
         >
         <param name="bufferIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index within the <paramref
-           name="buffer" />
+          The index within the <paramref name="buffer" />
 
           
 
            where the write operation is to start. </param
         >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -599,23 +618,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataSet,System.Object,System.String)" />
+            >The <see cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataSet,System.Object,System.String)" />
 
             
 
-             will call <see
-             cref="M:System.Data.OleDb.OleDbDataReader.GetData(System.Int32)" />
+             will call <see cref="M:System.Data.OleDb.OleDbDataReader.GetData(System.Int32)" />
 
             
 
-             if the provider returns a <see
-             cref="T:System.Data.IDataReader" />
+             if the provider returns a <see cref="T:System.Data.IDataReader" />
 
             
 
-             that has a column that supports <see
-             cref="T:System.Data.IDataReader" />
+             that has a column that supports <see cref="T:System.Data.IDataReader" />
 
             
 
@@ -625,8 +640,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Data.OleDb.OleDbDataReader" />
+            >Returns an <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
             
 
@@ -636,8 +650,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Data.OleDb.OleDbDataReader" />
+            >An <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
             
 
@@ -645,7 +658,11 @@
           >
         </returns>
         <param name="ordinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -681,12 +698,16 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >The name of the back-end data type. For more information, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=198032">SQL Server data types</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=198032"
+              >SQL Server data types</see
+            >
 
             
 
              or <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=198033">Access data types</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=198033"
+              >Access data types</see
+            >
 
             
 
@@ -694,7 +715,11 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -719,16 +744,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >No conversions are performed; therefore, the data retrieved must already be a <see
-             cref="T:System.DateTime" />
+            >No conversions are performed; therefore, the data retrieved must already be a <see cref="T:System.DateTime" />
 
             
 
              object.</para
           >
           <para
-            >Call <see
-             cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -738,8 +761,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.DateTime" />
+            >Gets the value of the specified column as a <see cref="T:System.DateTime" />
 
             
 
@@ -751,7 +773,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="ordinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -798,16 +824,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >No conversions are performed; therefore, the data retrieved must already be a <see
-             cref="T:System.Decimal" />
+            >No conversions are performed; therefore, the data retrieved must already be a <see cref="T:System.Decimal" />
 
             
 
              object.</para
           >
           <para
-            >Call <see
-             cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -817,8 +841,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.Decimal" />
+            >Gets the value of the specified column as a <see cref="T:System.Decimal" />
 
             
 
@@ -830,7 +853,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="ordinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -856,8 +883,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore, the data retrieved must already be a double-precision floating-point number.</para>
           <para
-            >Call <see
-             cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -873,7 +899,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="ordinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -906,8 +936,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns an <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -917,8 +946,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -941,8 +969,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 
@@ -952,8 +979,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
@@ -961,7 +987,11 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -987,8 +1017,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed. Therefore, the data retrieved must already be a single-precision floating-point number.</para>
           <para
-            >Call <see
-             cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -1004,7 +1033,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="ordinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1030,8 +1063,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore the data retrieved must already be a globally unique identifier.</para>
           <para
-            >Call <see
-             cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -1047,7 +1079,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="ordinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1073,8 +1109,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore, the data retrieved must already be a 16-bit signed integer.</para>
           <para
-            >Call <see
-             cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -1090,7 +1125,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="ordinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1116,8 +1155,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore, the data retrieved must already be a 32-bit signed integer.</para>
           <para
-            >Call <see
-             cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -1133,7 +1171,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="ordinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1159,8 +1201,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore, the data retrieved must already be a 64-bit signed integer.</para>
           <para
-            >Call <see
-             cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -1176,7 +1217,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="ordinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1208,7 +1253,11 @@
           <para>The name of the specified column.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1247,13 +1296,11 @@
              is kana-width insensitive.</para
           >
           <para
-            >Because ordinal-based lookups are more efficient than named lookups, it is inefficient to call <see
-             cref="M:System.Data.OleDb.OleDbDataReader.GetOrdinal(System.String)" />
+            >Because ordinal-based lookups are more efficient than named lookups, it is inefficient to call <see cref="M:System.Data.OleDb.OleDbDataReader.GetOrdinal(System.String)" />
 
             
 
-             within a loop. Save time by calling <see
-             cref="M:System.Data.OleDb.OleDbDataReader.GetOrdinal(System.String)" />
+             within a loop. Save time by calling <see cref="M:System.Data.OleDb.OleDbDataReader.GetOrdinal(System.String)" />
 
             
 
@@ -1269,7 +1316,11 @@
           <para>The zero-based column ordinal.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1295,8 +1346,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Data.OleDb.OleDbDataReader.GetSchemaTable" />
+            >The <see cref="M:System.Data.OleDb.OleDbDataReader.GetSchemaTable" />
 
             
 
@@ -1520,13 +1570,11 @@
           </list>
           <block subset="none" type="note">
             <para
-              >To make sure that metadata columns return the correct information, you must call <see
-               cref="M:System.Data.OleDb.OleDbCommand.ExecuteReader" />
+              >To make sure that metadata columns return the correct information, you must call <see cref="M:System.Data.OleDb.OleDbCommand.ExecuteReader" />
 
               
 
-               with the <paramref
-               name="behavior" />
+               with the <paramref name="behavior" />
 
               
 
@@ -1537,13 +1585,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Data.DataTable" />
+            >Returns a <see cref="T:System.Data.DataTable" />
 
             
 
-             that describes the column metadata of the <see
-             cref="T:System.Data.OleDb.OleDbDataReader" />
+             that describes the column metadata of the <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
             
 
@@ -1553,8 +1599,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.DataTable" />
+            >A <see cref="T:System.Data.DataTable" />
 
             
 
@@ -1581,8 +1626,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore the data retrieved must already be a string.</para>
           <para
-            >Call <see
-             cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -1598,7 +1642,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="ordinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1623,16 +1671,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >No conversions are performed; therefore, the data retrieved must already be a <see
-             cref="T:System.TimeSpan" />
+            >No conversions are performed; therefore, the data retrieved must already be a <see cref="T:System.TimeSpan" />
 
             
 
              object.</para
           >
           <para
-            >Call <see
-             cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
+            >Call <see cref="M:System.Data.OleDb.OleDbDataReader.IsDBNull(System.Int32)" />
 
             
 
@@ -1642,8 +1688,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see
-             cref="T:System.TimeSpan" />
+            >Gets the value of the specified column as a <see cref="T:System.TimeSpan" />
 
             
 
@@ -1655,7 +1700,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="ordinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1680,8 +1729,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns <see
-             cref="T:System.DBNull" />
+            >This method returns <see cref="T:System.DBNull" />
 
             
 
@@ -1697,7 +1745,11 @@
           <para>The value to return.</para>
         </returns>
         <param name="ordinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1722,34 +1774,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For most applications, the <see
-             cref="M:System.Data.OleDb.OleDbDataReader.GetValues(System.Object[])" />
+            >For most applications, the <see cref="M:System.Data.OleDb.OleDbDataReader.GetValues(System.Object[])" />
 
             
 
              method provides an efficient means for retrieving all columns, instead of retrieving each column individually.</para
           >
           <para
-            >You can pass an <see
-             cref="T:System.Object" />
+            >You can pass an <see cref="T:System.Object" />
 
             
 
-             array that contains fewer than the number of columns that are contained in the resulting row. Only the amount of data the <see
-             cref="T:System.Object" />
+             array that contains fewer than the number of columns that are contained in the resulting row. Only the amount of data the <see cref="T:System.Object" />
 
             
 
-             array holds is copied to the array. You can also pass an <see
-             cref="T:System.Object" />
+             array holds is copied to the array. You can also pass an <see cref="T:System.Object" />
 
             
 
              array whose length is more than the number of columns that are contained in the resulting row.</para
           >
           <para
-            >This method returns <see
-             cref="T:System.DBNull" />
+            >This method returns <see cref="T:System.DBNull" />
 
             
 
@@ -1763,8 +1810,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of instances of <see
-             cref="T:System.Object" />
+            >The number of instances of <see cref="T:System.Object" />
 
             
 
@@ -1772,12 +1818,15 @@
           >
         </returns>
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Object" />
+          An array of <see cref="T:System.Object" />
 
           
 
@@ -1805,8 +1854,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Data.OleDb.OleDbDataReader" />
+            >Gets a value that indicates whether the <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
             
 
@@ -1830,13 +1878,11 @@
 
             
 
-             and <see
-             cref="P:System.Data.OleDb.OleDbDataReader.RecordsAffected" />
+             and <see cref="P:System.Data.OleDb.OleDbDataReader.RecordsAffected" />
 
             
 
-             are the only properties that you can call after the <see
-             cref="T:System.Data.OleDb.OleDbDataReader" />
+             are the only properties that you can call after the <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
             
 
@@ -1866,13 +1912,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method to look for null column values before calling the typed get methods (for example, <see
-             cref="M:System.Data.OleDb.OleDbDataReader.GetByte(System.Int32)" />
+            >Call this method to look for null column values before calling the typed get methods (for example, <see cref="M:System.Data.OleDb.OleDbDataReader.GetByte(System.Int32)" />
 
             
 
-            , <see
-             cref="M:System.Data.OleDb.OleDbDataReader.GetChar(System.Int32)" />
+            , <see cref="M:System.Data.OleDb.OleDbDataReader.GetChar(System.Int32)" />
 
             
 
@@ -1886,8 +1930,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified column value is equivalent to <see
-             cref="T:System.DBNull" />
+            >true if the specified column value is equivalent to <see cref="T:System.DBNull" />
 
             
 
@@ -1895,7 +1938,11 @@
           >
         </returns>
         <param name="ordinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1985,31 +2032,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default position of the <see
-             cref="T:System.Data.OleDb.OleDbDataReader" />
+            >The default position of the <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
             
 
-             is before the first record. Therefore, you must call <see
-             cref="M:System.Data.OleDb.OleDbDataReader.Read" />
+             is before the first record. Therefore, you must call <see cref="M:System.Data.OleDb.OleDbDataReader.Read" />
 
             
 
              to start accessing any data.</para
           >
           <para
-            >While the <see
-             cref="T:System.Data.OleDb.OleDbDataReader" />
+            >While the <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
             
 
-             is being used, the associated <see
-             cref="T:System.Data.OleDb.OleDbConnection" />
+             is being used, the associated <see cref="T:System.Data.OleDb.OleDbConnection" />
 
             
 
-             is busy serving it until you call <see
-             cref="M:System.Data.OleDb.OleDbDataReader.Close" />
+             is busy serving it until you call <see cref="M:System.Data.OleDb.OleDbDataReader.Close" />
 
             
 
@@ -2019,8 +2061,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Advances the <see
-             cref="T:System.Data.OleDb.OleDbDataReader" />
+            >Advances the <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
             
 
@@ -2048,21 +2089,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Data.OleDb.OleDbDataReader.RecordsAffected" />
+            >The <see cref="P:System.Data.OleDb.OleDbDataReader.RecordsAffected" />
 
             
 
-             property is not set until all rows are read and you close the <see
-             cref="T:System.Data.OleDb.OleDbDataReader" />
+             property is not set until all rows are read and you close the <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
             
 
             .</para
           >
           <para
-            >The value of this property is cumulative. For example, if two records are inserted in batch mode, the value of <see
-             cref="P:System.Data.OleDb.OleDbDataReader.RecordsAffected" />
+            >The value of this property is cumulative. For example, if two records are inserted in batch mode, the value of <see cref="P:System.Data.OleDb.OleDbDataReader.RecordsAffected" />
 
             
 
@@ -2073,13 +2111,11 @@
 
             
 
-             and <see
-             cref="P:System.Data.OleDb.OleDbDataReader.RecordsAffected" />
+             and <see cref="P:System.Data.OleDb.OleDbDataReader.RecordsAffected" />
 
             
 
-             are the only properties that you can call after the <see
-             cref="T:System.Data.OleDb.OleDbDataReader" />
+             are the only properties that you can call after the <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
             
 
@@ -2167,8 +2203,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This value is used to determine how many fields in the <see
-             cref="T:System.Data.OleDb.OleDbDataReader" />
+            >This value is used to determine how many fields in the <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
             
 
@@ -2178,8 +2213,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of fields in the <see
-             cref="T:System.Data.OleDb.OleDbDataReader" />
+            >Gets the number of fields in the <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
             
 

@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines a callback method for notifying applications when a cached item is removed from the <see
-         cref="T:System.Web.Caching.Cache" />
+        >Defines a callback method for notifying applications when a cached item is removed from the <see cref="T:System.Web.Caching.Cache" />
 
         
 

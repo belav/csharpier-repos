@@ -31,18 +31,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >If a class that inherits from <see
-         cref="T:System.Configuration.Install.Installer" />
+        >If a class that inherits from <see cref="T:System.Configuration.Install.Installer" />
 
         
 
-         is marked with the <see
-         cref="T:System.ComponentModel.RunInstallerAttribute" />
+         is marked with the <see cref="T:System.ComponentModel.RunInstallerAttribute" />
 
         
 
-         set to true, Visual Studio's Custom Action Installer or the InstallUtil.exe will be invoked when the assembly is installed. Members marked with the <see
-         cref="T:System.ComponentModel.RunInstallerAttribute" />
+         set to true, Visual Studio's Custom Action Installer or the InstallUtil.exe will be invoked when the assembly is installed. Members marked with the <see cref="T:System.ComponentModel.RunInstallerAttribute" />
 
         
 
@@ -50,33 +47,27 @@
       >
       <block subset="none" type="note">
         <para
-          >When you mark a property with the <see
-           cref="T:System.ComponentModel.RunInstallerAttribute" />
+          >When you mark a property with the <see cref="T:System.ComponentModel.RunInstallerAttribute" />
 
           
 
-           set to true, the value of this attribute is set to the constant member <see
-           cref="F:System.ComponentModel.RunInstallerAttribute.Yes" />
+           set to true, the value of this attribute is set to the constant member <see cref="F:System.ComponentModel.RunInstallerAttribute.Yes" />
 
           
 
-          . For a property marked with the <see
-           cref="T:System.ComponentModel.RunInstallerAttribute" />
+          . For a property marked with the <see cref="T:System.ComponentModel.RunInstallerAttribute" />
 
           
 
-           set to false, the value is <see
-           cref="F:System.ComponentModel.RunInstallerAttribute.No" />
+           set to false, the value is <see cref="F:System.ComponentModel.RunInstallerAttribute.No" />
 
           
 
-          . Therefore, when you want to check the value of this attribute in your code, you must specify the attribute as <see
-           cref="F:System.ComponentModel.RunInstallerAttribute.Yes" />
+          . Therefore, when you want to check the value of this attribute in your code, you must specify the attribute as <see cref="F:System.ComponentModel.RunInstallerAttribute.Yes" />
 
           
 
-           or <see
-           cref="F:System.ComponentModel.RunInstallerAttribute.No" />
+           or <see cref="F:System.ComponentModel.RunInstallerAttribute.No" />
 
           
 
@@ -84,8 +75,7 @@
         >
       </block>
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -97,8 +87,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies whether the Visual Studio Custom Action Installer or the <format
-         type="text/html">
+        >Specifies whether the Visual Studio Custom Action Installer or the <format type="text/html">
           <a href="3f9d0533-f895-4897-b4ea-528284e0241d">Installer Tool (Installutil.exe)</a>
         </format>
 
@@ -130,8 +119,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.RunInstallerAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.RunInstallerAttribute" />
 
             
 
@@ -139,7 +127,11 @@
           >
         </summary>
         <param name="runInstaller">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -170,13 +162,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you mark a property with this value, this attribute is set to the constant member <see
-             cref="F:System.ComponentModel.RunInstallerAttribute.No" />
+            >When you mark a property with this value, this attribute is set to the constant member <see cref="F:System.ComponentModel.RunInstallerAttribute.No" />
 
             
 
-            . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see
-             cref="F:System.ComponentModel.RunInstallerAttribute.No" />
+            . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see cref="F:System.ComponentModel.RunInstallerAttribute.No" />
 
             
 
@@ -186,8 +176,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the default visiblity, which is <see
-             cref="F:System.ComponentModel.RunInstallerAttribute.No" />
+            >Specifies the default visiblity, which is <see cref="F:System.ComponentModel.RunInstallerAttribute.No" />
 
             
 
@@ -219,13 +208,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the value of the specified <see
-             cref="T:System.ComponentModel.RunInstallerAttribute" />
+            >Determines whether the value of the specified <see cref="T:System.ComponentModel.RunInstallerAttribute" />
 
             
 
-             is equivalent to the current <see
-             cref="T:System.ComponentModel.RunInstallerAttribute" />
+             is equivalent to the current <see cref="T:System.ComponentModel.RunInstallerAttribute" />
 
             
 
@@ -235,13 +222,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see
-             cref="T:System.ComponentModel.RunInstallerAttribute" />
+            >true if the specified <see cref="T:System.ComponentModel.RunInstallerAttribute" />
 
             
 
-             is equal to the current <see
-             cref="T:System.ComponentModel.RunInstallerAttribute" />
+             is equal to the current <see cref="T:System.ComponentModel.RunInstallerAttribute" />
 
             
 
@@ -249,7 +234,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -278,8 +267,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a hash code for the current <see
-             cref="T:System.ComponentModel.RunInstallerAttribute" />
+            >Generates a hash code for the current <see cref="T:System.ComponentModel.RunInstallerAttribute" />
 
             
 
@@ -289,8 +277,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.ComponentModel.RunInstallerAttribute" />
+            >A hash code for the current <see cref="T:System.ComponentModel.RunInstallerAttribute" />
 
             
 
@@ -351,18 +338,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This field is the default setting for this attribute.</para>
           <para
-            >When you mark a property with the <see
-             cref="T:System.ComponentModel.RunInstallerAttribute" />
+            >When you mark a property with the <see cref="T:System.ComponentModel.RunInstallerAttribute" />
 
             
 
-             set to false, the value of this attribute is set to the constant member <see
-             cref="F:System.ComponentModel.RunInstallerAttribute.No" />
+             set to false, the value of this attribute is set to the constant member <see cref="F:System.ComponentModel.RunInstallerAttribute.No" />
 
             
 
-            . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see
-             cref="F:System.ComponentModel.RunInstallerAttribute.No" />
+            . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see cref="F:System.ComponentModel.RunInstallerAttribute.No" />
 
             
 
@@ -372,8 +356,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the Visual Studio Custom Action Installer or the <format
-             type="text/html">
+            >Specifies that the Visual Studio Custom Action Installer or the <format type="text/html">
               <a href="3f9d0533-f895-4897-b4ea-528284e0241d">Installer Tool (Installutil.exe)</a>
             </format>
 
@@ -428,18 +411,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you mark a property with the <see
-             cref="T:System.ComponentModel.RunInstallerAttribute" />
+            >When you mark a property with the <see cref="T:System.ComponentModel.RunInstallerAttribute" />
 
             
 
-             set to true, the value of this attribute is set to the constant member <see
-             cref="F:System.ComponentModel.RunInstallerAttribute.Yes" />
+             set to true, the value of this attribute is set to the constant member <see cref="F:System.ComponentModel.RunInstallerAttribute.Yes" />
 
             
 
-            . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see
-             cref="F:System.ComponentModel.RunInstallerAttribute.Yes" />
+            . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see cref="F:System.ComponentModel.RunInstallerAttribute.Yes" />
 
             
 
@@ -449,8 +429,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the Visual Studio Custom Action Installer or the <format
-             type="text/html">
+            >Specifies that the Visual Studio Custom Action Installer or the <format type="text/html">
               <a href="3f9d0533-f895-4897-b4ea-528284e0241d">Installer Tool (Installutil.exe)</a>
             </format>
 

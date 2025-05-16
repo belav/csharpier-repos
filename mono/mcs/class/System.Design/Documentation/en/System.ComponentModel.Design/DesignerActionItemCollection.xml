@@ -20,8 +20,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.ComponentModel.Design.DesignerActionItem" />
+        >Represents a collection of <see cref="T:System.ComponentModel.Design.DesignerActionItem" />
 
         
 
@@ -42,8 +41,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignerActionItemCollection" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerActionItemCollection" />
 
             
 
@@ -72,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the supplied <see
-             cref="T:System.ComponentModel.Design.DesignerActionItem" />
+            >Adds the supplied <see cref="T:System.ComponentModel.Design.DesignerActionItem" />
 
             
 
@@ -83,8 +80,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.Design.DesignerActionItemCollection" />
+            >The <see cref="T:System.ComponentModel.Design.DesignerActionItemCollection" />
 
             
 
@@ -92,12 +88,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerActionItem" />
+          The <see cref="T:System.ComponentModel.Design.DesignerActionItem" />
 
           
 
@@ -125,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.ComponentModel.Design.DesignerActionItemCollection" />
+            >Determines whether the <see cref="T:System.ComponentModel.Design.DesignerActionItemCollection" />
 
             
 
@@ -136,8 +134,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.ComponentModel.Design.DesignerActionItemCollection" />
+            >true if the <see cref="T:System.ComponentModel.Design.DesignerActionItemCollection" />
 
             
 
@@ -145,17 +142,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerActionItem" />
+          The <see cref="T:System.ComponentModel.Design.DesignerActionItem" />
 
           
 
-           to locate in the <see
-           cref="T:System.ComponentModel.Design.DesignerActionItemCollection" />
+           to locate in the <see cref="T:System.ComponentModel.Design.DesignerActionItemCollection" />
 
           
 
@@ -186,24 +185,30 @@
           <para>Copies the elements of the current collection into the supplied array, starting at the specified array index.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.ComponentModel.Design.DesignerActionItem" />
+          The one-dimensional <see cref="T:System.ComponentModel.Design.DesignerActionItem" />
 
           
 
            array that is the destination of the elements copied from the current collection. The array must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -235,13 +240,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the first occurrence of <paramref
-             name="value" />
+            >The zero-based index of the first occurrence of <paramref name="value" />
 
             
 
-             within the entire <see
-             cref="T:System.ComponentModel.Design.DesignerActionItemCollection" />
+             within the entire <see cref="T:System.ComponentModel.Design.DesignerActionItemCollection" />
 
             
 
@@ -249,12 +252,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerActionItem" />
+          The <see cref="T:System.ComponentModel.Design.DesignerActionItem" />
 
           
 
@@ -283,8 +289,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts an element into the <see
-             cref="T:System.ComponentModel.Design.DesignerActionItemCollection" />
+            >Inserts an element into the <see cref="T:System.ComponentModel.Design.DesignerActionItemCollection" />
 
             
 
@@ -292,24 +297,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="value" />
+          The zero-based index at which <paramref name="value" />
 
           
 
            should be inserted.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerActionItem" />
+          The <see cref="T:System.ComponentModel.Design.DesignerActionItem" />
 
           
 
@@ -359,8 +370,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of a specific object from the <see
-             cref="T:System.ComponentModel.Design.DesignerActionItemCollection" />
+            >Removes the first occurrence of a specific object from the <see cref="T:System.ComponentModel.Design.DesignerActionItemCollection" />
 
             
 
@@ -368,17 +378,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerActionItem" />
+          The <see cref="T:System.ComponentModel.Design.DesignerActionItem" />
 
           
 
-           to remove from the <see
-           cref="T:System.ComponentModel.Design.DesignerActionItemCollection" />
+           to remove from the <see cref="T:System.ComponentModel.Design.DesignerActionItemCollection" />
 
           
 

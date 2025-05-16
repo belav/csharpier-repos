@@ -19,13 +19,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.X509Certificates.PublicKey" />
+        >The <see cref="T:System.Security.Cryptography.X509Certificates.PublicKey" />
 
         
 
-         object contains the object identifier (<see
-         cref="P:System.Security.Cryptography.X509Certificates.PublicKey.Oid" />
+         object contains the object identifier (<see cref="P:System.Security.Cryptography.X509Certificates.PublicKey.Oid" />
 
         
 
@@ -63,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.PublicKey" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.PublicKey" />
 
             
 
@@ -72,21 +69,33 @@
           >
         </summary>
         <param name="oid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object identifier (OID) object that represents the public key.</param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An ASN.1-encoded representation of the public key parameters.</param
         >
         <param name="keyValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -171,13 +180,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns the public key. Both <see
-             cref="T:System.Security.Cryptography.RSA" />
+            >This property returns the public key. Both <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
-             and <see
-             cref="T:System.Security.Cryptography.DSA" />
+             and <see cref="T:System.Security.Cryptography.DSA" />
 
             
 
@@ -187,13 +194,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />
+            >Gets an <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />
 
             
 
-             or <see
-             cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />
+             or <see cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />
 
             
 

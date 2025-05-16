@@ -28,36 +28,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.ServiceModel.Description.ContractDescription" />
+        >A <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
         
 
-         is used to describe the contract for a service, including the associated operations. The operations are accessed from the <see
-         cref="P:System.ServiceModel.Description.ContractDescription.Operations" />
+         is used to describe the contract for a service, including the associated operations. The operations are accessed from the <see cref="P:System.ServiceModel.Description.ContractDescription.Operations" />
 
         
 
-         property which returns the <see
-         cref="T:System.ServiceModel.Description.OperationDescriptionCollection" />
+         property which returns the <see cref="T:System.ServiceModel.Description.OperationDescriptionCollection" />
 
         
 
          for the contract.</para
       >
       <para
-        >Each contract operation has a corresponding <see
-         cref="T:System.ServiceModel.Description.OperationDescription" />
+        >Each contract operation has a corresponding <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
         
 
-         that describes aspects of the operation, such as whether the operation is one-way or request/reply. Each <see
-         cref="T:System.ServiceModel.Description.OperationDescription" />
+         that describes aspects of the operation, such as whether the operation is one-way or request/reply. Each <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
         
 
-         in turn describes the messages that make up the operation using a collection of <see
-         cref="T:System.ServiceModel.Description.MessageDescription" />
+         in turn describes the messages that make up the operation using a collection of <see cref="T:System.ServiceModel.Description.MessageDescription" />
 
         
 
@@ -93,18 +87,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns the first occurrence of the <see
-             cref="T:System.ServiceModel.Description.OperationDescription" />
+            >This method returns the first occurrence of the <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
             
 
-             in the collection with the name specified. If you need to find all of the <see
-             cref="T:System.ServiceModel.Description.OperationDescription" />
+             in the collection with the name specified. If you need to find all of the <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
             
 
-             objects in the collection use the <see
-             cref="M:System.ServiceModel.Description.OperationDescriptionCollection.FindAll(System.String)" />
+             objects in the collection use the <see cref="M:System.ServiceModel.Description.OperationDescriptionCollection.FindAll(System.String)" />
 
             
 
@@ -118,8 +109,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ServiceModel.Description.OperationDescription" />
+            >An <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
             
 
@@ -127,7 +117,11 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -163,13 +157,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Collections.ObjectModel.Collection`1" />
+            >The <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
             
 
-             of type <see
-             cref="T:System.ServiceModel.Description.OperationDescription" />
+             of type <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
             
 
@@ -177,7 +169,11 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -215,24 +211,30 @@
           <para>Inserts an element into the operation description collection at the specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="item" />
+          The zero-based index at which <paramref name="item" />
 
           
 
            should be inserted.</param
         >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.OperationDescription" />
+          The <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
           
 
@@ -270,24 +272,30 @@
           <para>Replaces the operation description element in the collection at the specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="item" />
+          The zero-based index at which <paramref name="item" />
 
           
 
            should be inserted.</param
         >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.OperationDescription" />
+          The <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
           
 

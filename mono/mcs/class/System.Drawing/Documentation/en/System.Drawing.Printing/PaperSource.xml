@@ -17,21 +17,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used by <see
-         cref="P:System.Drawing.Printing.PrinterSettings.PaperSources" />
+        >This class is used by <see cref="P:System.Drawing.Printing.PrinterSettings.PaperSources" />
 
         
 
-         and <see
-         cref="P:System.Drawing.Printing.PageSettings.PaperSource" />
+         and <see cref="P:System.Drawing.Printing.PageSettings.PaperSource" />
 
         
 
          properties to get the paper source trays that are available on the printer and to set the paper source for a page, respectively.</para
       >
       <para
-        >For more information about printing, see the <see
-         cref="N:System.Drawing.Printing" />
+        >For more information about printing, see the <see cref="N:System.Drawing.Printing" />
 
         
 
@@ -55,8 +52,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows initial property values for an instance of <see
-             cref="T:System.Drawing.Printing.PaperSource" />
+            >The following table shows initial property values for an instance of <see cref="T:System.Drawing.Printing.PaperSource" />
 
             
 
@@ -102,8 +98,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Printing.PaperSource" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Printing.PaperSource" />
 
             
 
@@ -148,23 +143,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows integer value for each <see
-             cref="T:System.Drawing.Printing.PaperSourceKind" />
+            >The following table shows integer value for each <see cref="T:System.Drawing.Printing.PaperSourceKind" />
 
             
 
-             member. Anything larger than 256 maps to <see
-             cref="F:System.Drawing.Printing.PaperSourceKind.Custom" />
+             member. Anything larger than 256 maps to <see cref="F:System.Drawing.Printing.PaperSourceKind.Custom" />
 
             
 
-             in the <see
-             cref="T:System.Drawing.Printing.PaperSourceKind" />
+             in the <see cref="T:System.Drawing.Printing.PaperSourceKind" />
 
             
 
-             enumeration, but the <see
-             cref="P:System.Drawing.Printing.PaperSource.RawKind" />
+             enumeration, but the <see cref="P:System.Drawing.Printing.PaperSource.RawKind" />
 
             
 
@@ -326,8 +317,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the integer representing one of the <see
-             cref="T:System.Drawing.Printing.PaperSourceKind" />
+            >Gets or sets the integer representing one of the <see cref="T:System.Drawing.Printing.PaperSourceKind" />
 
             
 
@@ -347,8 +337,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this property when the paper source needs to be displayed. The name of the paper source is generated based upon the <see
-             cref="P:System.Drawing.Printing.PaperSource.Kind" />
+            >Call this property when the paper source needs to be displayed. The name of the paper source is generated based upon the <see cref="P:System.Drawing.Printing.PaperSource.Kind" />
 
             
 
@@ -377,8 +366,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides information about the <see
-             cref="T:System.Drawing.Printing.PaperSource" />
+            >Provides information about the <see cref="T:System.Drawing.Printing.PaperSource" />
 
             
 

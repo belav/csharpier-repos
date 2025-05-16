@@ -27,13 +27,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Reflection.ObfuscationAttribute" />
+        >The <see cref="T:System.Reflection.ObfuscationAttribute" />
 
         
 
-         and <see
-         cref="T:System.Reflection.ObfuscateAssemblyAttribute" />
+         and <see cref="T:System.Reflection.ObfuscateAssemblyAttribute" />
 
         
 
@@ -44,8 +42,7 @@
         <para>Applying this attribute does not automatically obfuscate the assembly. Applying the attribute is an alternative to creating a configuration file for the obfuscation tool. That is, it merely provides instructions for an obfuscation tool. Microsoft recommends that vendors of obfuscation tools follow the semantics described here. However, there is no guarantee that a particular tool follows Microsoft recommendations.</para>
       </block>
       <para
-        >You can apply <see
-         cref="T:System.Reflection.ObfuscationAttribute" />
+        >You can apply <see cref="T:System.Reflection.ObfuscationAttribute" />
 
         
 
@@ -87,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.ObfuscateAssemblyAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.ObfuscateAssemblyAttribute" />
 
             
 
@@ -96,7 +92,11 @@
           >
         </summary>
         <param name="assemblyIsPrivate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -128,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -156,13 +155,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Attributes should not be stripped if your library will be included as part of another application, and obfuscated as part of that application. </para>
           <para
-            >Specifying that obfuscation tools should strip the <see
-             cref="T:System.Reflection.ObfuscateAssemblyAttribute" />
+            >Specifying that obfuscation tools should strip the <see cref="T:System.Reflection.ObfuscateAssemblyAttribute" />
 
             
 
-             does not affect instances of <see
-             cref="T:System.Reflection.ObfuscationAttribute" />
+             does not affect instances of <see cref="T:System.Reflection.ObfuscationAttribute" />
 
             
 
@@ -175,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Boolean" />
+            >Gets or sets a <see cref="T:System.Boolean" />
 
             
 

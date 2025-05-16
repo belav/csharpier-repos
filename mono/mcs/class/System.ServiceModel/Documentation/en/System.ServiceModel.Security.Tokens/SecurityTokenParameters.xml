@@ -21,8 +21,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Security token parameters provide information about the tokens (for example, token type, issuer, and so on) required by the security binding element.</para>
       <para
-        >The security token parameter classes derived from this one are a collection of token properties and methods, and are used in creating different kinds of security binding elements and tokens. Not all of the properties are relevant to all derived classes. For example, the <see
-         cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.ReferenceStyle" />
+        >The security token parameter classes derived from this one are a collection of token properties and methods, and are used in creating different kinds of security binding elements and tokens. Not all of the properties are relevant to all derived classes. For example, the <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.ReferenceStyle" />
 
         
 
@@ -57,8 +56,7 @@
 
                 
 
-                 is set to <see
-                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
+                 is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
 
                 
 
@@ -71,8 +69,7 @@
 
                 
 
-                 is set to <see
-                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+                 is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
 
                 
 
@@ -93,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
 
             
 
@@ -126,8 +122,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new instance property values are set to the corresponding values in <paramref
-             name="other" />
+            >The new instance property values are set to the corresponding values in <paramref name="other" />
 
             
 
@@ -137,8 +132,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
 
             
 
@@ -146,7 +140,11 @@
           >
         </summary>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -175,18 +173,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.Clone" />
+            >The <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.Clone" />
 
             
 
-             and <see
-             cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
+             and <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
 
             
 
-             methods follow the Core design pattern. In that pattern, this method performs some validation and then calls <see
-             cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
+             methods follow the Core design pattern. In that pattern, this method performs some validation and then calls <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
 
             
 
@@ -200,8 +195,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A copy of <see
-             cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
+            >A copy of <see cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
 
             
 
@@ -231,18 +225,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.Clone" />
+            >The <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.Clone" />
 
             
 
-             and <see
-             cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
+             and <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
 
             
 
-             methods follow the Core design pattern. <see
-             cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
+             methods follow the Core design pattern. <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
 
             
 
@@ -256,8 +247,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
+            >A <see cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
 
             
 
@@ -303,14 +293,22 @@
           <para>The key identifier clause for a token.</para>
         </returns>
         <param name="token">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The token.</param
         >
         <param name="referenceStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -362,8 +360,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The token inclusion requirements specify whether the token needs to be serialized as part of the request and response.</para>
           <para
-            >The <see
-             cref="T:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode" />
+            >The <see cref="T:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode" />
 
             
 
@@ -430,7 +427,11 @@
           <para>When overridden in a derived class, initializes a security token requirement.</para>
         </summary>
         <param name="requirement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -476,21 +477,33 @@
           <para>true if the token matches the key identifier clause; otherwise, false.</para>
         </returns>
         <param name="token">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The security token.</param
         >
         <param name="keyIdentifierClause">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The specified key identifier clause.</param
         >
         <param name="referenceStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -643,18 +656,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The method displays the name of this class, <see
-             cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.InclusionMode" />
+            >The method displays the name of this class, <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.InclusionMode" />
 
             
 
-            , <see
-             cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.ReferenceStyle" />
+            , <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.ReferenceStyle" />
 
             
 
-            , and <see
-             cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" />
+            , and <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" />
 
             
 

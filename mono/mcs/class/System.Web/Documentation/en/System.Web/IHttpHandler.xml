@@ -14,8 +14,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>You can write custom HTTP handlers to process specific, predefined types of HTTP requests in any Common Language Specification (CLS) compliant language. Executable code defined in the HttpHandler classes, rather than conventional ASP or ASP.NET Web pages, responds to these specific requests. HTTP handlers give you a means of interacting with the low-level request and response services of the IIS Web server and provide functionality much like ISAPI extensions but with a simpler programming model.</para>
       <para
-        >If your handler will access session state values, it must implement the <see
-         cref="T:System.Web.SessionState.IRequiresSessionState" />
+        >If your handler will access session state values, it must implement the <see cref="T:System.Web.SessionState.IRequiresSessionState" />
 
         
 
@@ -39,13 +38,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You explicitly set the <see
-             cref="P:System.Web.IHttpHandler.IsReusable" />
+            >You explicitly set the <see cref="P:System.Web.IHttpHandler.IsReusable" />
 
             
 
-             property to true or false by code you provide that overrides the <see
-             cref="P:System.Web.IHttpHandler.IsReusable" />
+             property to true or false by code you provide that overrides the <see cref="P:System.Web.IHttpHandler.IsReusable" />
 
             
 
@@ -55,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether another request can use the <see
-             cref="T:System.Web.IHttpHandler" />
+            >Gets a value indicating whether another request can use the <see cref="T:System.Web.IHttpHandler" />
 
             
 
@@ -85,8 +81,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Place your custom HttpHandler code in the <see
-             cref="M:System.Web.IHttpHandler.ProcessRequest(System.Web.HttpContext)" />
+            >Place your custom HttpHandler code in the <see cref="M:System.Web.IHttpHandler.ProcessRequest(System.Web.HttpContext)" />
 
             
 
@@ -96,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Enables processing of HTTP Web requests by a custom HttpHandler that implements the <see
-             cref="T:System.Web.IHttpHandler" />
+            >Enables processing of HTTP Web requests by a custom HttpHandler that implements the <see cref="T:System.Web.IHttpHandler" />
 
             
 
@@ -105,12 +99,15 @@
           >
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.HttpContext" />
+          An <see cref="T:System.Web.HttpContext" />
 
           
 

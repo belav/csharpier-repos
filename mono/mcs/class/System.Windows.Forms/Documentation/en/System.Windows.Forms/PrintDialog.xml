@@ -25,36 +25,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When you create an instance of <see
-         cref="T:System.Windows.Forms.PrintDialog" />
+        >When you create an instance of <see cref="T:System.Windows.Forms.PrintDialog" />
 
         
 
-        , the read/write properties are set to initial values. For a list of these values, see the <see
-         cref="M:System.Windows.Forms.PrintDialog.#ctor" />
+        , the read/write properties are set to initial values. For a list of these values, see the <see cref="M:System.Windows.Forms.PrintDialog.#ctor" />
 
         
 
-         constructor. To get printer settings that are modified by the user with the <see
-         cref="T:System.Windows.Forms.PrintDialog" />
+         constructor. To get printer settings that are modified by the user with the <see cref="T:System.Windows.Forms.PrintDialog" />
 
         
 
-        , use the <see
-         cref="P:System.Windows.Forms.PrintDialog.PrinterSettings" />
+        , use the <see cref="P:System.Windows.Forms.PrintDialog.PrinterSettings" />
 
         
 
          property.</para
       >
       <para
-        >For more information about printing with Windows Forms, see the <see
-         cref="N:System.Drawing.Printing" />
+        >For more information about printing with Windows Forms, see the <see cref="N:System.Drawing.Printing" />
 
         
 
-         namespace overview. If you want to print from a Windows Presentation Foundation application, see the <see
-         cref="N:System.Printing" />
+         namespace overview. If you want to print from a Windows Presentation Foundation application, see the <see cref="N:System.Printing" />
 
         
 
@@ -75,8 +69,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you create an instance of <see
-             cref="T:System.Windows.Forms.PrintDialog" />
+            >When you create an instance of <see cref="T:System.Windows.Forms.PrintDialog" />
 
             
 
@@ -179,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.PrintDialog" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.PrintDialog" />
 
             
 
@@ -205,8 +197,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is valid for Windows 2000 and later versions of Windows operating systems. On operating systems earlier than Windows 2000, the <see
-             cref="P:System.Windows.Forms.PrintDialog.AllowCurrentPage" />
+            >This property is valid for Windows 2000 and later versions of Windows operating systems. On operating systems earlier than Windows 2000, the <see cref="P:System.Windows.Forms.PrintDialog.AllowCurrentPage" />
 
             
 
@@ -216,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <ui
-            >Current Page</ui>
+            >Gets or sets a value indicating whether the <ui>Current Page</ui>
 
             
 
@@ -251,8 +241,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <ui
-            >Print to file</ui>
+            >Gets or sets a value indicating whether the <ui>Print to file</ui>
 
             
 
@@ -282,8 +271,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <ui
-            >Selection</ui>
+            >Gets or sets a value indicating whether the <ui>Selection</ui>
 
             
 
@@ -313,8 +301,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <ui
-            >Pages</ui>
+            >Gets or sets a value indicating whether the <ui>Pages</ui>
 
             
 
@@ -347,13 +334,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating the <see
-             cref="T:System.Drawing.Printing.PrintDocument" />
+            >Gets or sets a value indicating the <see cref="T:System.Drawing.Printing.PrintDocument" />
 
             
 
-             used to obtain <see
-             cref="T:System.Drawing.Printing.PrinterSettings" />
+             used to obtain <see cref="T:System.Drawing.Printing.PrinterSettings" />
 
             
 
@@ -391,13 +376,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.PrintDialog.PrinterSettings" />
+            >The <see cref="P:System.Windows.Forms.PrintDialog.PrinterSettings" />
 
             
 
-             property must be set before you call <see
-             cref="Overload:System.Windows.Forms.CommonDialog.ShowDialog" />
+             property must be set before you call <see cref="Overload:System.Windows.Forms.CommonDialog.ShowDialog" />
 
             
 
@@ -431,8 +414,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <ui
-            >Print to file</ui>
+            >Gets or sets a value indicating whether the <ui>Print to file</ui>
 
             
 
@@ -507,8 +489,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <ui
-            >Help</ui>
+            >Gets or sets a value indicating whether the <ui>Help</ui>
 
             
 
@@ -541,8 +522,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <ui
-            >Network</ui>
+            >Gets or sets a value indicating whether the <ui>Network</ui>
 
             
 
@@ -574,13 +554,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When this property is set to true, <see
-             cref="P:System.Windows.Forms.PrintDialog.ShowHelp" />
+            >When this property is set to true, <see cref="P:System.Windows.Forms.PrintDialog.ShowHelp" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.PrintDialog.ShowNetwork" />
+             and <see cref="P:System.Windows.Forms.PrintDialog.ShowNetwork" />
 
             
 

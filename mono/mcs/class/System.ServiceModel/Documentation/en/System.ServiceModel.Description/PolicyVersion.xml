@@ -96,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.ServiceModel.Description.PolicyVersion" />
+            >Gets a <see cref="T:System.ServiceModel.Description.PolicyVersion" />
 
             
 
@@ -128,8 +127,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.ServiceModel.Description.PolicyVersion" />
+            >Gets a <see cref="T:System.ServiceModel.Description.PolicyVersion" />
 
             
 
@@ -157,8 +155,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.ServiceModel.Description.PolicyVersion" />
+            >Converts the <see cref="T:System.ServiceModel.Description.PolicyVersion" />
 
             
 

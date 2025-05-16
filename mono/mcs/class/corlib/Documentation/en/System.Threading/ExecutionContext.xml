@@ -29,95 +29,79 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Threading.ExecutionContext" />
+        >The <see cref="T:System.Threading.ExecutionContext" />
 
         
 
          class provides a single container for all information relevant to a logical thread of execution. This includes security context, call context, and synchronization context.</para
       >
       <para
-        >The <see
-         cref="T:System.Threading.ExecutionContext" />
+        >The <see cref="T:System.Threading.ExecutionContext" />
 
         
 
-         class provides the functionality for user code to capture and transfer this context across user-defined asynchronous points. The common language runtime ensures that the <see
-         cref="T:System.Threading.ExecutionContext" />
+         class provides the functionality for user code to capture and transfer this context across user-defined asynchronous points. The common language runtime ensures that the <see cref="T:System.Threading.ExecutionContext" />
 
         
 
          is consistently transferred across runtime-defined asynchronous points within the managed process. </para
       >
       <para
-        >An execution context is the managed equivalent of a COM apartment. Within an application domain, the entire execution context must be transferred whenever a thread is transferred. This situation occurs during transfers made by the <see
-         cref="M:System.Threading.Thread.Start" />
+        >An execution context is the managed equivalent of a COM apartment. Within an application domain, the entire execution context must be transferred whenever a thread is transferred. This situation occurs during transfers made by the <see cref="M:System.Threading.Thread.Start" />
 
         
 
-         method, most thread pool operations, and Windows Forms thread marshaling through the Windows message pump. It does not occur in unsafe thread pool operations (such as the <see
-         cref="M:System.Threading.ThreadPool.UnsafeQueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
+         method, most thread pool operations, and Windows Forms thread marshaling through the Windows message pump. It does not occur in unsafe thread pool operations (such as the <see cref="M:System.Threading.ThreadPool.UnsafeQueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
 
         
 
-         method), which do not transfer the compressed stack. Wherever the compressed stack flows, the managed principal, synchronization, locale, and user context also flow. The <see
-         cref="T:System.Threading.ExecutionContext" />
+         method), which do not transfer the compressed stack. Wherever the compressed stack flows, the managed principal, synchronization, locale, and user context also flow. The <see cref="T:System.Threading.ExecutionContext" />
 
         
 
-         class provides the <see
-         cref="M:System.Threading.ExecutionContext.Capture" />
+         class provides the <see cref="M:System.Threading.ExecutionContext.Capture" />
 
         
 
-         and <see
-         cref="M:System.Threading.ExecutionContext.CreateCopy" />
+         and <see cref="M:System.Threading.ExecutionContext.CreateCopy" />
 
         
 
-         methods to get the execution context and the <see
-         cref="M:System.Threading.ExecutionContext.Run(System.Threading.ExecutionContext,System.Threading.ContextCallback,System.Object)" />
+         methods to get the execution context and the <see cref="M:System.Threading.ExecutionContext.Run(System.Threading.ExecutionContext,System.Threading.ContextCallback,System.Object)" />
 
         
 
          method to set the execution context for the current thread.</para
       >
       <para
-        >An <see
-         cref="T:System.Threading.ExecutionContext" />
+        >An <see cref="T:System.Threading.ExecutionContext" />
 
         
 
-         that is associated with a thread cannot be set on another thread. Attempting to do so will result in an exception being thrown. To propagate the <see
-         cref="T:System.Threading.ExecutionContext" />
+         that is associated with a thread cannot be set on another thread. Attempting to do so will result in an exception being thrown. To propagate the <see cref="T:System.Threading.ExecutionContext" />
 
         
 
-         from one thread to another, make a copy of the <see
-         cref="T:System.Threading.ExecutionContext" />
+         from one thread to another, make a copy of the <see cref="T:System.Threading.ExecutionContext" />
 
         
 
         .</para
       >
       <para
-        >Internally, the <see
-         cref="T:System.Threading.ExecutionContext" />
+        >Internally, the <see cref="T:System.Threading.ExecutionContext" />
 
         
 
-         stores all data that is associated with the <see
-         cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+         stores all data that is associated with the <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
         
 
-        . This allows the <see
-         cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+        . This allows the <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
         
 
-         data to be propagated when the <see
-         cref="T:System.Threading.ExecutionContext" />
+         data to be propagated when the <see cref="T:System.Threading.ExecutionContext" />
 
         
 
@@ -153,13 +137,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The captured execution context can be used as the <paramref
-             name="executionContext" />
+            >The captured execution context can be used as the <paramref name="executionContext" />
 
             
 
-             parameter for the <see
-             cref="M:System.Threading.ExecutionContext.Run(System.Threading.ExecutionContext,System.Threading.ContextCallback,System.Object)" />
+             parameter for the <see cref="M:System.Threading.ExecutionContext.Run(System.Threading.ExecutionContext,System.Threading.ContextCallback,System.Object)" />
 
             
 
@@ -173,8 +155,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Threading.ExecutionContext" />
+            >An <see cref="T:System.Threading.ExecutionContext" />
 
             
 
@@ -214,8 +195,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Threading.ExecutionContext" />
+            >An <see cref="T:System.Threading.ExecutionContext" />
 
             
 
@@ -242,38 +222,32 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call Dispose when you are finished using the <see
-             cref="T:System.Threading.ExecutionContext" />
+            >Call Dispose when you are finished using the <see cref="T:System.Threading.ExecutionContext" />
 
             
 
-            . The Dispose method leaves the <see
-             cref="T:System.Threading.ExecutionContext" />
+            . The Dispose method leaves the <see cref="T:System.Threading.ExecutionContext" />
 
             
 
-             in an unusable state. After calling Dispose, you must release all references to the <see
-             cref="T:System.Threading.ExecutionContext" />
+             in an unusable state. After calling Dispose, you must release all references to the <see cref="T:System.Threading.ExecutionContext" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Threading.ExecutionContext" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Threading.ExecutionContext" />
 
             
 
              was occupying.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -283,13 +257,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call Dispose before you release your last reference to the <see
-               cref="T:System.Threading.ExecutionContext" />
+              >Always call Dispose before you release your last reference to the <see cref="T:System.Threading.ExecutionContext" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.Threading.ExecutionContext" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Threading.ExecutionContext" />
 
               
 
@@ -300,8 +272,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the current instance of the <see
-             cref="T:System.Threading.ExecutionContext" />
+            >Releases all resources used by the current instance of the <see cref="T:System.Threading.ExecutionContext" />
 
             
 
@@ -340,21 +311,18 @@
 
             
 
-             sets a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             sets a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             with the logical call context information. During deserialization, the execution context object is reconstituted from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             with the logical call context information. During deserialization, the execution context object is reconstituted from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
              transmitted over the stream.</para
           >
           <para
-            >For more information, see <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >For more information, see <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -364,8 +332,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the specified <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Sets the specified <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -373,24 +340,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            object to be populated with serialization information. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -418,13 +391,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Threading.ExecutionContext.IsFlowSuppressed" />
+            >The <see cref="M:System.Threading.ExecutionContext.IsFlowSuppressed" />
 
             
 
-             method is used by infrastructure components to determine whether to transfer the <see
-             cref="T:System.Threading.ExecutionContext" />
+             method is used by infrastructure components to determine whether to transfer the <see cref="T:System.Threading.ExecutionContext" />
 
             
 
@@ -465,36 +436,30 @@
 
             
 
-             reverses the effect of a prior <see
-             cref="M:System.Threading.ExecutionContext.SuppressFlow" />
+             reverses the effect of a prior <see cref="M:System.Threading.ExecutionContext.SuppressFlow" />
 
             
 
              method call.</para
           >
           <para
-            >This method is called by the <see
-             cref="M:System.Threading.AsyncFlowControl.Undo" />
+            >This method is called by the <see cref="M:System.Threading.AsyncFlowControl.Undo" />
 
             
 
-             method of the <see
-             cref="T:System.Threading.AsyncFlowControl" />
+             method of the <see cref="T:System.Threading.AsyncFlowControl" />
 
             
 
-             structure returned by the <see
-             cref="M:System.Threading.ExecutionContext.SuppressFlow" />
+             structure returned by the <see cref="M:System.Threading.ExecutionContext.SuppressFlow" />
 
             
 
-             method.  You should use the <see
-             cref="M:System.Threading.AsyncFlowControl.Undo" />
+             method.  You should use the <see cref="M:System.Threading.AsyncFlowControl.Undo" />
 
             
 
-             method to restore the flow of the execution context, not the <see
-             cref="M:System.Threading.ExecutionContext.RestoreFlow" />
+             method to restore the flow of the execution context, not the <see cref="M:System.Threading.ExecutionContext.RestoreFlow" />
 
             
 
@@ -540,31 +505,41 @@
           <para>Runs a method in a specified execution context on the current thread.</para>
         </summary>
         <param name="executionContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.ExecutionContext" />
+          The <see cref="T:System.Threading.ExecutionContext" />
 
           
 
            to set.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Threading.ContextCallback" />
+          A <see cref="T:System.Threading.ContextCallback" />
 
           
 
            delegate that represents the method to be run in the provided execution context.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -595,49 +570,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to suppress the flow of the <see
-             cref="T:System.Threading.ExecutionContext" />
+            >Use this method to suppress the flow of the <see cref="T:System.Threading.ExecutionContext" />
 
             
 
              on the current thread. </para
           >
           <para
-            >You must use the <see
-             cref="M:System.Threading.AsyncFlowControl.Undo" />
+            >You must use the <see cref="M:System.Threading.AsyncFlowControl.Undo" />
 
             
 
-             method on the returned <see
-             cref="T:System.Threading.AsyncFlowControl" />
+             method on the returned <see cref="T:System.Threading.AsyncFlowControl" />
 
             
 
-             structure to restore the flow of the <see
-             cref="T:System.Threading.ExecutionContext" />
+             structure to restore the flow of the <see cref="T:System.Threading.ExecutionContext" />
 
             
 
             .</para
           >
           <para
-            >This method is protected with a <see
-             cref="F:System.Security.Permissions.SecurityAction.LinkDemand" />
+            >This method is protected with a <see cref="F:System.Security.Permissions.SecurityAction.LinkDemand" />
 
             
 
-             for <see
-             cref="F:System.Security.Permissions.SecurityPermissionFlag.Infrastructure" />
+             for <see cref="F:System.Security.Permissions.SecurityPermissionFlag.Infrastructure" />
 
             
 
-             permission. A fully trusted component can call this method to suppress the flow of the <see
-             cref="T:System.Threading.ExecutionContext" />
+             permission. A fully trusted component can call this method to suppress the flow of the <see cref="T:System.Threading.ExecutionContext" />
 
             
 
-             during asynchronous calls. While the flow is suppressed, the <see
-             cref="M:System.Security.SecurityContext.Capture" />
+             during asynchronous calls. While the flow is suppressed, the <see cref="M:System.Security.SecurityContext.Capture" />
 
             
 
@@ -651,8 +618,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Threading.AsyncFlowControl" />
+            >An <see cref="T:System.Threading.AsyncFlowControl" />
 
             
 

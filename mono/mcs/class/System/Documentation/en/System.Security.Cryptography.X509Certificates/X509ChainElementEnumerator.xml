@@ -30,31 +30,26 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Enumerators provide read-only access to the data in a collection. Enumerators cannot be used to modify the underlying collection.</para>
       <para
-        >Initially, the enumerator is positioned before the first element in the collection. <see
-         cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Reset" />
+        >Initially, the enumerator is positioned before the first element in the collection. <see cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Reset" />
 
         
 
-         resets the enumerator to this position. At this position, calling <see
-         cref="P:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Current" />
+         resets the enumerator to this position. At this position, calling <see cref="P:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Current" />
 
         
 
-         throws an exception. Therefore, you must call <see
-         cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.MoveNext" />
+         throws an exception. Therefore, you must call <see cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.MoveNext" />
 
         
 
-         to advance the enumerator to the first element of the collection before reading the value of <see
-         cref="P:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Current" />
+         to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Current" />
 
         
 
         .</para
       >
       <para
-        >This class inherits from <see
-         cref="T:System.Collections.IEnumerator" />
+        >This class inherits from <see cref="T:System.Collections.IEnumerator" />
 
         
 
@@ -64,8 +59,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Supports a simple iteration over an <see
-         cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
+        >Supports a simple iteration over an <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
 
         
 
@@ -101,18 +95,15 @@
 
             
 
-             does not move the position of the enumerator and consecutive calls to <see
-             cref="P:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Current" />
+             does not move the position of the enumerator and consecutive calls to <see cref="P:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Current" />
 
             
 
-             return the same object until either <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.MoveNext" />
+             return the same object until either <see cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Reset" />
+             or <see cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Reset" />
 
             
 
@@ -122,8 +113,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the current element in the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
+            >Gets the current element in the <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
 
             
 
@@ -152,13 +142,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method advances the enumerator to the next element in the collection. The <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator" />
+            >This method advances the enumerator to the next element in the collection. The <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator" />
 
             
 
-             class inherits from <see
-             cref="T:System.Collections.IEnumerator" />
+             class inherits from <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -168,8 +156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Advances the enumerator to the next element in the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
+            >Advances the enumerator to the next element in the <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
 
             
 
@@ -202,18 +189,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.MoveNext" />
+            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Reset" />
+             or <see cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Reset" />
 
             
 
-             throws an <see
-             cref="T:System.InvalidOperationException" />
+             throws an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -223,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the enumerator to its initial position, which is before the first element in the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
+            >Sets the enumerator to its initial position, which is before the first element in the <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
 
             
 
@@ -259,18 +242,15 @@
 
             
 
-             does not move the position of the enumerator and consecutive calls to <see
-             cref="P:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Current" />
+             does not move the position of the enumerator and consecutive calls to <see cref="P:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Current" />
 
             
 
-             return the same object until either <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.MoveNext" />
+             return the same object until either <see cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Reset" />
+             or <see cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Reset" />
 
             
 
@@ -280,8 +260,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the current element in the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
+            >Gets the current element in the <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
 
             
 

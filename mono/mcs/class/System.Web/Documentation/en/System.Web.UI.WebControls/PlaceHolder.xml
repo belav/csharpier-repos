@@ -48,23 +48,19 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >Use the <see
-         cref="T:System.Web.UI.WebControls.PlaceHolder" />
+        >Use the <see cref="T:System.Web.UI.WebControls.PlaceHolder" />
 
         
 
-         control as a container to store server controls that are dynamically added to the Web page. The <see
-         cref="T:System.Web.UI.WebControls.PlaceHolder" />
+         control as a container to store server controls that are dynamically added to the Web page. The <see cref="T:System.Web.UI.WebControls.PlaceHolder" />
 
         
 
-         control does not produce any visible output and is used only as a container for other controls on the Web page. You can use the <see
-         cref="P:System.Web.UI.Control.Controls" />
+         control does not produce any visible output and is used only as a container for other controls on the Web page. You can use the <see cref="P:System.Web.UI.Control.Controls" />
 
         
 
-         collection to add, insert, or remove a control in the <see
-         cref="T:System.Web.UI.WebControls.PlaceHolder" />
+         collection to add, insert, or remove a control in the <see cref="T:System.Web.UI.WebControls.PlaceHolder" />
 
         
 
@@ -78,14 +74,12 @@
       </format>
       <code
         >&lt;asp:PlaceHolder
-    EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -99,8 +93,7 @@
     OnUnload="Unload event handler"
     runat="server"
     SkinID="string"
-    Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -124,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.PlaceHolder" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.PlaceHolder" />
 
             
 

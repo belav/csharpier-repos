@@ -19,44 +19,37 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.Control.QueryContinueDrag" />
+        >The <see cref="E:System.Windows.Forms.Control.QueryContinueDrag" />
 
         
 
-         event occurs during a drag-and-drop operation and allows the drag source to determine whether the drag-and-drop operation should be canceled. A <see
-         cref="T:System.Windows.Forms.QueryContinueDragEventArgs" />
+         event occurs during a drag-and-drop operation and allows the drag source to determine whether the drag-and-drop operation should be canceled. A <see cref="T:System.Windows.Forms.QueryContinueDragEventArgs" />
 
         
 
          specifies whether and how the drag-and-drop operation should proceed, whether any modifier keys are pressed, and whether the user has pressed the ESC key.</para
       >
       <para
-        >By default, the <see
-         cref="E:System.Windows.Forms.Control.QueryContinueDrag" />
+        >By default, the <see cref="E:System.Windows.Forms.Control.QueryContinueDrag" />
 
         
 
-         event sets <see
-         cref="P:System.Windows.Forms.QueryContinueDragEventArgs.Action" />
+         event sets <see cref="P:System.Windows.Forms.QueryContinueDragEventArgs.Action" />
 
         
 
-         to <see
-         cref="F:System.Windows.Forms.DragAction.Cancel" />
+         to <see cref="F:System.Windows.Forms.DragAction.Cancel" />
 
         
 
-         if the ESC key was pressed and sets Action to <see
-         cref="F:System.Windows.Forms.DragAction.Drop" />
+         if the ESC key was pressed and sets Action to <see cref="F:System.Windows.Forms.DragAction.Drop" />
 
         
 
          if the left, middle, or right mouse button is pressed.</para
       >
       <para
-        >For information about the event model, see <format
-         type="text/html">
+        >For information about the event model, see <format type="text/html">
           <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">[&lt;topic://cpconEventsDelegates&gt;]</a>
         </format>
 
@@ -68,8 +61,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.Control.QueryContinueDrag" />
+        >Provides data for the <see cref="E:System.Windows.Forms.Control.QueryContinueDrag" />
 
         
 
@@ -94,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.QueryContinueDragEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.QueryContinueDragEventArgs" />
 
             
 
@@ -103,26 +94,37 @@
           >
         </summary>
         <param name="keyState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The current state of the SHIFT, CTRL, and ALT keys. </param
         >
         <param name="escapePressed">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the ESC key was pressed; otherwise, false. </param
         >
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DragAction" />
+          A <see cref="T:System.Windows.Forms.DragAction" />
 
           
 
@@ -148,23 +150,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see
-             cref="E:System.Windows.Forms.Control.QueryContinueDrag" />
+            >By default, the <see cref="E:System.Windows.Forms.Control.QueryContinueDrag" />
 
             
 
-             event sets <see
-             cref="P:System.Windows.Forms.QueryContinueDragEventArgs.Action" />
+             event sets <see cref="P:System.Windows.Forms.QueryContinueDragEventArgs.Action" />
 
             
 
-             to <see
-             cref="F:System.Windows.Forms.DragAction.Cancel" />
+             to <see cref="F:System.Windows.Forms.DragAction.Cancel" />
 
             
 
-             if the ESC key was pressed and sets Action to <see
-             cref="F:System.Windows.Forms.DragAction.Drop" />
+             if the ESC key was pressed and sets Action to <see cref="F:System.Windows.Forms.DragAction.Drop" />
 
             
 
@@ -192,23 +190,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see
-             cref="E:System.Windows.Forms.Control.QueryContinueDrag" />
+            >By default, the <see cref="E:System.Windows.Forms.Control.QueryContinueDrag" />
 
             
 
-             event sets <see
-             cref="P:System.Windows.Forms.QueryContinueDragEventArgs.Action" />
+             event sets <see cref="P:System.Windows.Forms.QueryContinueDragEventArgs.Action" />
 
             
 
-             to <see
-             cref="F:System.Windows.Forms.DragAction.Cancel" />
+             to <see cref="F:System.Windows.Forms.DragAction.Cancel" />
 
             
 
-             if <see
-             cref="P:System.Windows.Forms.QueryContinueDragEventArgs.EscapePressed" />
+             if <see cref="P:System.Windows.Forms.QueryContinueDragEventArgs.EscapePressed" />
 
             
 
@@ -236,13 +230,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The bits that are set in the <see
-             cref="P:System.Windows.Forms.QueryContinueDragEventArgs.KeyState" />
+            >The bits that are set in the <see cref="P:System.Windows.Forms.QueryContinueDragEventArgs.KeyState" />
 
             
 
-             property identify the keys or mouse buttons that were pressed during the operation. For example, if the left mouse button is pressed, the first bit in the <see
-             cref="P:System.Windows.Forms.QueryContinueDragEventArgs.KeyState" />
+             property identify the keys or mouse buttons that were pressed during the operation. For example, if the left mouse button is pressed, the first bit in the <see cref="P:System.Windows.Forms.QueryContinueDragEventArgs.KeyState" />
 
             
 
@@ -310,23 +302,19 @@
             </item>
           </list>
           <para
-            >By default, the <see
-             cref="E:System.Windows.Forms.Control.QueryContinueDrag" />
+            >By default, the <see cref="E:System.Windows.Forms.Control.QueryContinueDrag" />
 
             
 
-             event sets <see
-             cref="P:System.Windows.Forms.QueryContinueDragEventArgs.Action" />
+             event sets <see cref="P:System.Windows.Forms.QueryContinueDragEventArgs.Action" />
 
             
 
-             to <see
-             cref="F:System.Windows.Forms.DragAction.Drop" />
+             to <see cref="F:System.Windows.Forms.DragAction.Drop" />
 
             
 
-             if <see
-             cref="P:System.Windows.Forms.QueryContinueDragEventArgs.KeyState" />
+             if <see cref="P:System.Windows.Forms.QueryContinueDragEventArgs.KeyState" />
 
             
 

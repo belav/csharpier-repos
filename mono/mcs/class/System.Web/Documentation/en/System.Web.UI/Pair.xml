@@ -16,66 +16,54 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.Pair" />
+        >The <see cref="T:System.Web.UI.Pair" />
 
         
 
-         class is used as a basic structure to store two related objects. It is a utility class that is used in various ways throughout ASP.NET, such as during page state management tasks or in configuration section handlers. You can use the <see
-         cref="T:System.Web.UI.Pair" />
+         class is used as a basic structure to store two related objects. It is a utility class that is used in various ways throughout ASP.NET, such as during page state management tasks or in configuration section handlers. You can use the <see cref="T:System.Web.UI.Pair" />
 
         
 
-         class in your own code anywhere that you need a structure to contain two related objects and where data hiding is not essential. The <see
-         cref="T:System.Web.UI.Pair" />
+         class in your own code anywhere that you need a structure to contain two related objects and where data hiding is not essential. The <see cref="T:System.Web.UI.Pair" />
 
         
 
-         class does not encapsulate its object references, <see
-         cref="F:System.Web.UI.Pair.First" />
+         class does not encapsulate its object references, <see cref="F:System.Web.UI.Pair.First" />
 
         
 
-         and <see
-         cref="F:System.Web.UI.Pair.Second" />
+         and <see cref="F:System.Web.UI.Pair.Second" />
 
         
 
         , in properties; it exposes them directly to all calling code as public class fields. </para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.Pair" />
+        >The <see cref="T:System.Web.UI.Pair" />
 
         
 
-         class can be used in several ways in page state persistence implementations. The most common use is as a container for both the <see
-         cref="P:System.Web.UI.Control.ViewState" />
+         class can be used in several ways in page state persistence implementations. The most common use is as a container for both the <see cref="P:System.Web.UI.Control.ViewState" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.PageStatePersister.ControlState" />
+         and <see cref="P:System.Web.UI.PageStatePersister.ControlState" />
 
         
 
-         collections. In this case, the <see
-         cref="F:System.Web.UI.Pair.First" />
+         collections. In this case, the <see cref="F:System.Web.UI.Pair.First" />
 
         
 
-         property is used for <see
-         cref="P:System.Web.UI.Control.ViewState" />
+         property is used for <see cref="P:System.Web.UI.Control.ViewState" />
 
         
 
-        , and the <see
-         cref="F:System.Web.UI.Pair.Second" />
+        , and the <see cref="F:System.Web.UI.Pair.Second" />
 
         
 
-         for <see
-         cref="P:System.Web.UI.PageStatePersister.ControlState" />
+         for <see cref="P:System.Web.UI.PageStatePersister.ControlState" />
 
         
 
@@ -98,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new, uninitialized instance of the <see
-             cref="T:System.Web.UI.Pair" />
+            >Creates a new, uninitialized instance of the <see cref="T:System.Web.UI.Pair" />
 
             
 
@@ -121,20 +108,13 @@
         <Parameter Name="second" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="first"
-          >a <see
-           cref="T:System.Object" />
-        </param>
-        <param name="second"
-          >a <see
-           cref="T:System.Object" />
-        </param>
+        <param name="first">a <see cref="T:System.Object" /></param>
+        <param name="second">a <see cref="T:System.Object" /></param>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Pair" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Pair" />
 
             
 

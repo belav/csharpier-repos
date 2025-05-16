@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.ToolStripRenderer.RenderArrow" />
+        >Provides data for the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderArrow" />
 
         
 
@@ -47,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripArrowRenderEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripArrowRenderEventArgs" />
 
             
 
@@ -56,60 +54,75 @@
           >
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The graphics used to paint the <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+          The graphics used to paint the <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
            arrow.</param
         >
         <param name="toolStripItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+          The <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
            on which to paint the arrow.</param
         >
         <param name="arrowRectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The bounding area of the <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+          The bounding area of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
            arrow.</param
         >
         <param name="arrowColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The color of the <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+          The color of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
            arrow.</param
         >
         <param name="arrowDirection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The direction in which the <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+          The direction in which the <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
@@ -133,8 +146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the color of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets the color of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -162,8 +174,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the bounding area of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets the bounding area of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -191,8 +202,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the direction in which the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets the direction in which the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -217,8 +227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the graphics used to paint the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets the graphics used to paint the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -246,8 +255,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Gets the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 

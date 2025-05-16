@@ -42,8 +42,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that a task is attached to a parent in the task hierarchy. For more information, see <format
-             type="text/html">
+            >Specifies that a task is attached to a parent in the task hierarchy. For more information, see <format type="text/html">
               <a href="c95788bf-90a6-4e96-b7bc-58e36a228cc5">Nested Tasks and Child Tasks</a>
             </format>
 
@@ -71,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that an <see
-             cref="T:System.InvalidOperationException" />
+            >Specifies that an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -98,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Prevents the ambient scheduler from being seen as the current scheduler in the created task. This means that operations like StartNew or ContinueWith that are performed in the created task will see <see
-             cref="P:System.Threading.Tasks.TaskScheduler.Default" />
+            >Prevents the ambient scheduler from being seen as the current scheduler in the created task. This means that operations like StartNew or ContinueWith that are performed in the created task will see <see cref="P:System.Threading.Tasks.TaskScheduler.Default" />
 
             
 
@@ -125,8 +122,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that a task will be a long-running, coarse-grained operation involving fewer, larger components than fine-grained systems. It provides a hint to the <see
-             cref="T:System.Threading.Tasks.TaskScheduler" />
+            >Specifies that a task will be a long-running, coarse-grained operation involving fewer, larger components than fine-grained systems. It provides a hint to the <see cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 
@@ -172,8 +168,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hint to a <see
-             cref="T:System.Threading.Tasks.TaskScheduler" />
+            >A hint to a <see cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 

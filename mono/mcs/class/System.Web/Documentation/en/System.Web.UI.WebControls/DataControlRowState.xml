@@ -18,91 +18,74 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.DataControlRowState" />
+        >The <see cref="T:System.Web.UI.WebControls.DataControlRowState" />
 
         
 
-         enumeration identifies the state of a row in a data control such as <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         enumeration identifies the state of a row in a data control such as <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-         or <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         or <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-        . A row's state can be one or a combination of the <see
-         cref="T:System.Web.UI.WebControls.DataControlRowState" />
+        . A row's state can be one or a combination of the <see cref="T:System.Web.UI.WebControls.DataControlRowState" />
 
         
 
-         values, so use bitwise operations to determine whether the state of the row includes a <see
-         cref="T:System.Web.UI.WebControls.DataControlRowState" />
+         values, so use bitwise operations to determine whether the state of the row includes a <see cref="T:System.Web.UI.WebControls.DataControlRowState" />
 
         
 
-         value, rather than an equivalence test. The <see
-         cref="T:System.Web.UI.WebControls.DataControlRowState" />
+         value, rather than an equivalence test. The <see cref="T:System.Web.UI.WebControls.DataControlRowState" />
 
         
 
-         enumeration is used for any type of row, not just <see
-         cref="F:System.Web.UI.WebControls.DataControlRowType.DataRow" />
+         enumeration is used for any type of row, not just <see cref="F:System.Web.UI.WebControls.DataControlRowType.DataRow" />
 
         
 
-         rows (typically, the state of header and footer rows is set to <see
-         cref="F:System.Web.UI.WebControls.DataControlRowState.Normal" />
+         rows (typically, the state of header and footer rows is set to <see cref="F:System.Web.UI.WebControls.DataControlRowState.Normal" />
 
         
 
         ).</para
       >
       <para
-        >You can use the <see
-         cref="T:System.Web.UI.WebControls.DataControlRowState" />
+        >You can use the <see cref="T:System.Web.UI.WebControls.DataControlRowState" />
 
         
 
-         enumeration to identify the state of a <see
-         cref="T:System.Web.UI.WebControls.GridViewRow" />
+         enumeration to identify the state of a <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
         
 
-         or <see
-         cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+         or <see cref="T:System.Web.UI.WebControls.DetailsViewRow" />
 
         
 
-         object when enumerating through a <see
-         cref="T:System.Web.UI.WebControls.GridViewRowCollection" />
+         object when enumerating through a <see cref="T:System.Web.UI.WebControls.GridViewRowCollection" />
 
         
 
-         or <see
-         cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+         or <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
         
 
-         collection, respectively. If you are writing a data control that uses rows, you can use the <see
-         cref="T:System.Web.UI.WebControls.DataControlRowState" />
+         collection, respectively. If you are writing a data control that uses rows, you can use the <see cref="T:System.Web.UI.WebControls.DataControlRowState" />
 
         
 
-         enumeration to identify when to render different colors for a row (the <see
-         cref="F:System.Web.UI.WebControls.DataControlRowState.Alternate" />
+         enumeration to identify when to render different colors for a row (the <see cref="F:System.Web.UI.WebControls.DataControlRowState.Alternate" />
 
         
 
-         value), or controls that are enabled or disabled for editing a row (the <see
-         cref="F:System.Web.UI.WebControls.DataControlRowState.Edit" />
+         value), or controls that are enabled or disabled for editing a row (the <see cref="F:System.Web.UI.WebControls.DataControlRowState.Edit" />
 
         
 
-         and <see
-         cref="F:System.Web.UI.WebControls.DataControlRowState.Insert" />
+         and <see cref="F:System.Web.UI.WebControls.DataControlRowState.Insert" />
 
         
 
@@ -112,13 +95,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the state of a row in a data control, such as <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+        >Specifies the state of a row in a data control, such as <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-         or <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         or <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
@@ -138,23 +119,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Web.UI.WebControls.DataControlRowState.Alternate" />
+            >The <see cref="F:System.Web.UI.WebControls.DataControlRowState.Alternate" />
 
             
 
-             state can be combined with other states, such as <see
-             cref="F:System.Web.UI.WebControls.DataControlRowState.Normal" />
+             state can be combined with other states, such as <see cref="F:System.Web.UI.WebControls.DataControlRowState.Normal" />
 
             
 
-            , <see
-             cref="F:System.Web.UI.WebControls.DataControlRowState.Edit" />
+            , <see cref="F:System.Web.UI.WebControls.DataControlRowState.Edit" />
 
             
 
-            , or <see
-             cref="F:System.Web.UI.WebControls.DataControlRowState.Insert" />
+            , or <see cref="F:System.Web.UI.WebControls.DataControlRowState.Insert" />
 
             
 
@@ -181,13 +158,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the row is in an edit state, often the result of clicking an edit button for the row. Typically, the <see
-             cref="F:System.Web.UI.WebControls.DataControlRowState.Edit" />
+            >Indicates that the row is in an edit state, often the result of clicking an edit button for the row. Typically, the <see cref="F:System.Web.UI.WebControls.DataControlRowState.Edit" />
 
             
 
-             and <see
-             cref="F:System.Web.UI.WebControls.DataControlRowState.Insert" />
+             and <see cref="F:System.Web.UI.WebControls.DataControlRowState.Insert" />
 
             
 
@@ -210,13 +185,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the row is a new row, often the result of clicking an insert button to add a new row. Typically, the <see
-             cref="F:System.Web.UI.WebControls.DataControlRowState.Insert" />
+            >Indicates that the row is a new row, often the result of clicking an insert button to add a new row. Typically, the <see cref="F:System.Web.UI.WebControls.DataControlRowState.Insert" />
 
             
 
-             and <see
-             cref="F:System.Web.UI.WebControls.DataControlRowState.Edit" />
+             and <see cref="F:System.Web.UI.WebControls.DataControlRowState.Edit" />
 
             
 
@@ -239,13 +212,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the data control row is in a normal state. The <see
-             cref="F:System.Web.UI.WebControls.DataControlRowState.Normal" />
+            >Indicates that the data control row is in a normal state. The <see cref="F:System.Web.UI.WebControls.DataControlRowState.Normal" />
 
             
 
-             state is mutually exclusive with other states except the <see
-             cref="F:System.Web.UI.WebControls.DataControlRowState.Alternate" />
+             state is mutually exclusive with other states except the <see cref="F:System.Web.UI.WebControls.DataControlRowState.Alternate" />
 
             
 

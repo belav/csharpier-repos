@@ -26,21 +26,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.Description.PolicyAssertionCollection" />
+        >Use the <see cref="T:System.ServiceModel.Description.PolicyAssertionCollection" />
 
         
 
          class to group together policy assertions and to enumerate or modify a group of assertions.</para
       >
       <para
-        >The <see
-         cref="T:System.ServiceModel.Description.PolicyAssertionCollection" />
+        >The <see cref="T:System.ServiceModel.Description.PolicyAssertionCollection" />
 
         
 
-         is used most frequently as a return value for the methods of the <see
-         cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+         is used most frequently as a return value for the methods of the <see cref="T:System.ServiceModel.Description.PolicyConversionContext" />
 
         
 
@@ -69,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.PolicyAssertionCollection" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.PolicyAssertionCollection" />
 
             
 
@@ -104,13 +100,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.PolicyAssertionCollection" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.PolicyAssertionCollection" />
 
             
 
-             class using the specified <see
-             cref="T:System.Xml.XmlElement" />
+             class using the specified <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -245,24 +239,30 @@
           <para>Inserts a specified policy assertion into the collection at the specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index at which to insert <paramref
-           name="item" />
+          The index at which to insert <paramref name="item" />
 
           
 
           .</param
         >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The policy assertion to insert at <paramref
-           name="index" />
+          The policy assertion to insert at <paramref name="index" />
 
           
 
@@ -365,19 +365,26 @@
           <para>Replaces the policy assertion at a specified index with a specified policy assertion.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index that contains the assertion to replace.</param
         >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The policy assertion to replace the assertion already at <paramref
-           name="index" />
+          The policy assertion to replace the assertion already at <paramref name="index" />
 
           
 

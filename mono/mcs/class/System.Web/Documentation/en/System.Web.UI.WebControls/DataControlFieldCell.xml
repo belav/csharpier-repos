@@ -17,46 +17,38 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+        >The <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
 
         
 
-         class is a strongly typed <see
-         cref="T:System.Web.UI.WebControls.TableCell" />
+         class is a strongly typed <see cref="T:System.Web.UI.WebControls.TableCell" />
 
         
 
-         class that represents a cell in ASP.NET data-bound controls that render their contents in a tabular layout, such as <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         class that represents a cell in ASP.NET data-bound controls that render their contents in a tabular layout, such as <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         and <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
         . </para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.DataControlField" />
+        >The <see cref="T:System.Web.UI.WebControls.DataControlField" />
 
         
 
-         object that contains the <see
-         cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+         object that contains the <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
 
         
 
-         object controls how the cell is rendered by applying styles to the cell. You can access the containing <see
-         cref="T:System.Web.UI.WebControls.DataControlField" />
+         object controls how the cell is rendered by applying styles to the cell. You can access the containing <see cref="T:System.Web.UI.WebControls.DataControlField" />
 
         
 
-         object using the <see
-         cref="P:System.Web.UI.WebControls.DataControlFieldCell.ContainingField" />
+         object using the <see cref="P:System.Web.UI.WebControls.DataControlFieldCell.ContainingField" />
 
         
 
@@ -66,13 +58,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a cell in the rendered table of a tabular ASP.NET data-bound control, such as <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+        >Represents a cell in the rendered table of a tabular ASP.NET data-bound control, such as <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-         or <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         or <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
@@ -96,18 +86,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor uses the <see
-             cref="F:System.Web.UI.HtmlTextWriterTag.Td" />
+            >This constructor uses the <see cref="F:System.Web.UI.HtmlTextWriterTag.Td" />
 
             
 
-             element defined by its base class to render the cell. The <see
-             cref="T:System.Web.UI.WebControls.DataControlField" />
+             element defined by its base class to render the cell. The <see cref="T:System.Web.UI.WebControls.DataControlField" />
 
             
 
-             object passed in the <paramref
-             name="containingField" />
+             object passed in the <paramref name="containingField" />
 
             
 
@@ -117,13 +104,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
 
             
 
-             class, setting the specified <see
-             cref="T:System.Web.UI.WebControls.DataControlField" />
+             class, setting the specified <see cref="T:System.Web.UI.WebControls.DataControlField" />
 
             
 
@@ -151,23 +136,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="tagKey" />
+            >The <paramref name="tagKey" />
 
             
 
-             parameter is passed to the <see
-             cref="T:System.Web.UI.WebControls.WebControl" />
+             parameter is passed to the <see cref="T:System.Web.UI.WebControls.WebControl" />
 
             
 
-             base class constructor, and controls the HTML tag that is emitted by the control. The <see
-             cref="T:System.Web.UI.WebControls.DataControlField" />
+             base class constructor, and controls the HTML tag that is emitted by the control. The <see cref="T:System.Web.UI.WebControls.DataControlField" />
 
             
 
-             passed in the <paramref
-             name="containingField" />
+             passed in the <paramref name="containingField" />
 
             
 
@@ -177,13 +158,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
 
             
 
-             class, setting the specified <see
-             cref="T:System.Web.UI.WebControls.DataControlField" />
+             class, setting the specified <see cref="T:System.Web.UI.WebControls.DataControlField" />
 
             
 
@@ -191,22 +170,23 @@
           >
         </summary>
         <param name="tagKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriterTag" />
+          An <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
           
 
-           that specifies the HTML tag to render for the cell. The default tag used by the <see
-           cref="T:System.Web.UI.WebControls.TableCell" />
+           that specifies the HTML tag to render for the cell. The default tag used by the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
           
 
-           class is <see
-           cref="F:System.Web.UI.HtmlTextWriterTag.Td" />
+           class is <see cref="F:System.Web.UI.HtmlTextWriterTag.Td" />
 
           
 
@@ -232,28 +212,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The content rendering for the <see
-             cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+            >The content rendering for the <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
 
             
 
-             object might be affected by the various <see
-             cref="T:System.Web.UI.WebControls.DataControlField" />
+             object might be affected by the various <see cref="T:System.Web.UI.WebControls.DataControlField" />
 
             
 
-             properties of the containing field, such as <see
-             cref="P:System.Web.UI.WebControls.DataControlField.ItemStyle" />
+             properties of the containing field, such as <see cref="P:System.Web.UI.WebControls.DataControlField.ItemStyle" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.WebControls.DataControlField.ControlStyle" />
+            , <see cref="P:System.Web.UI.WebControls.DataControlField.ControlStyle" />
 
             
 
-            , and <see
-             cref="P:System.Web.UI.WebControls.DataControlField.ShowHeader" />
+            , and <see cref="P:System.Web.UI.WebControls.DataControlField.ShowHeader" />
 
             
 
@@ -263,8 +238,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.UI.WebControls.DataControlField" />
+            >Gets the <see cref="T:System.Web.UI.WebControls.DataControlField" />
 
             
 

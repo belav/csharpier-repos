@@ -40,26 +40,22 @@
 
         
 
-         represents a callback method that you want to execute on a <see
-         cref="T:System.Threading.ThreadPool" />
+         represents a callback method that you want to execute on a <see cref="T:System.Threading.ThreadPool" />
 
         
 
-         thread. Create the delegate by passing your callback method to the <see
-         cref="T:System.Threading.WaitCallback" />
+         thread. Create the delegate by passing your callback method to the <see cref="T:System.Threading.WaitCallback" />
 
         
 
          constructor. Your method must have the signature shown here.</para
       >
       <para
-        >Queue your task for execution by passing the <see
-         cref="T:System.Threading.WaitCallback" />
+        >Queue your task for execution by passing the <see cref="T:System.Threading.WaitCallback" />
 
         
 
-         delegate to <see
-         cref="M:System.Threading.ThreadPool.QueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
+         delegate to <see cref="M:System.Threading.ThreadPool.QueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
 
         
 
@@ -68,13 +64,11 @@
       <para>[Visual Basic]</para>
       <block subset="none" type="note">
         <para
-          >Visual Basic users can omit the <see
-           cref="T:System.Threading.WaitCallback" />
+          >Visual Basic users can omit the <see cref="T:System.Threading.WaitCallback" />
 
           
 
-           constructor, and simply use the AddressOf operator when passing the callback method to <see
-           cref="M:System.Threading.ThreadPool.QueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
+           constructor, and simply use the AddressOf operator when passing the callback method to <see cref="M:System.Threading.ThreadPool.QueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
 
           
 
@@ -82,21 +76,18 @@
         >
       </block>
       <para
-        >If you want to pass information to your callback method, create an object that contains the necessary information and pass it to <see
-         cref="M:System.Threading.ThreadPool.QueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
+        >If you want to pass information to your callback method, create an object that contains the necessary information and pass it to <see cref="M:System.Threading.ThreadPool.QueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
 
         
 
-         when you queue your task for execution. Each time your callback method executes, the <paramref
-         name="state" />
+         when you queue your task for execution. Each time your callback method executes, the <paramref name="state" />
 
         
 
          parameter contains this object.</para
       >
       <para
-        >For more information about using callbacks to synchronize thread pool threads, see <format
-         type="text/html">
+        >For more information about using callbacks to synchronize thread pool threads, see <format type="text/html">
           <a href="2BE05B06-A42E-4C9D-A739-96C21D673927">[&lt;topic://cpconthreadpooling&gt;]</a>
         </format>
 

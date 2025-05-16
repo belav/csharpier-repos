@@ -17,47 +17,40 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="P:System.Windows.Forms.TabControlCancelEventArgs.Action" />
+        >Use the <see cref="P:System.Windows.Forms.TabControlCancelEventArgs.Action" />
 
         
 
          property to determine which event is occurring. This enables you to handle multiple event types with one event handler.</para
       >
       <para
-        >Use the <see
-         cref="P:System.Windows.Forms.TabControlCancelEventArgs.TabPage" />
+        >Use the <see cref="P:System.Windows.Forms.TabControlCancelEventArgs.TabPage" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.TabControlCancelEventArgs.TabPageIndex" />
+         and <see cref="P:System.Windows.Forms.TabControlCancelEventArgs.TabPageIndex" />
 
         
 
-         properties to determine which <see
-         cref="T:System.Windows.Forms.TabPage" />
+         properties to determine which <see cref="T:System.Windows.Forms.TabPage" />
 
         
 
          the event is occurring for. </para
       >
       <para
-        >To cancel a tab change in a <see
-         cref="T:System.Windows.Forms.TabControl" />
+        >To cancel a tab change in a <see cref="T:System.Windows.Forms.TabControl" />
 
         
 
-        , set the <see
-         cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+        , set the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
         
 
          property to true.</para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
 
@@ -69,18 +62,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.TabControl.Selecting" />
+        >Provides data for the <see cref="E:System.Windows.Forms.TabControl.Selecting" />
 
         
 
-         and <see
-         cref="E:System.Windows.Forms.TabControl.Deselecting" />
+         and <see cref="E:System.Windows.Forms.TabControl.Deselecting" />
 
         
 
-         events of a <see
-         cref="T:System.Windows.Forms.TabControl" />
+         events of a <see cref="T:System.Windows.Forms.TabControl" />
 
         
 
@@ -110,8 +100,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.TabControlCancelEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.TabControlCancelEventArgs" />
 
             
 
@@ -119,48 +108,60 @@
           >
         </summary>
         <param name="tabPage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.TabPage" />
+          The <see cref="T:System.Windows.Forms.TabPage" />
 
           
 
            the event is occurring for.</param
         >
         <param name="tabPageIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of <paramref
-           name="tabPage" />
+          The zero-based index of <paramref name="tabPage" />
 
           
 
-           in the <see
-           cref="P:System.Windows.Forms.TabControl.TabPages" />
+           in the <see cref="P:System.Windows.Forms.TabControl.TabPages" />
 
           
 
            collection.</param
         >
         <param name="cancel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to cancel the tab change by default; otherwise, false.</param
         >
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.TabControlAction" />
+          One of the <see cref="T:System.Windows.Forms.TabControlAction" />
 
           
 
@@ -206,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.TabPage" />
+            >Gets the <see cref="T:System.Windows.Forms.TabPage" />
 
             
 
@@ -232,13 +232,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the zero-based index of the <see
-             cref="P:System.Windows.Forms.TabControlCancelEventArgs.TabPage" />
+            >Gets the zero-based index of the <see cref="P:System.Windows.Forms.TabControlCancelEventArgs.TabPage" />
 
             
 
-             in the <see
-             cref="P:System.Windows.Forms.TabControl.TabPages" />
+             in the <see cref="P:System.Windows.Forms.TabControl.TabPages" />
 
             
 

@@ -64,8 +64,7 @@
       <Docs>
         <remarks>
           <para
-            >This constructor initializes the <see
-             cref="!:System.IO.EndOfStreamException.Message" />
+            >This constructor initializes the <see cref="!:System.IO.EndOfStreamException.Message" />
 
             
 
@@ -75,14 +74,12 @@
    culture.</para
           >
           <para
-            >The <see
-             cref="!:System.IO.EndOfStreamException.InnerException" />
+            >The <see cref="!:System.IO.EndOfStreamException.InnerException" />
 
             
 
              property of the new instance is 
-initialized to <see
-             langword="null" />
+initialized to <see langword="null" />
 
             
 
@@ -92,8 +89,7 @@ initialized to <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.EndOfStreamException" />
+            >Initializes a new instance of the <see cref="T:System.IO.EndOfStreamException" />
 
             
 
@@ -126,30 +122,25 @@ initialized to <see
       <Docs>
         <remarks>
           <para
-            >This constructor initializes the <see
-             cref="!:System.IO.EndOfStreamException.Message" />
+            >This constructor initializes the <see cref="!:System.IO.EndOfStreamException.Message" />
 
             
 
              property of the
-   new instance using <paramref
-             name="message" />
+   new instance using <paramref name="message" />
 
             
 
-            . If <paramref
-             name="message" />
+            . If <paramref name="message" />
 
             
 
              is
-<see
-             langword="null" />
+<see langword="null" />
 
             
 
-            , the <see
-             cref="!:System.IO.EndOfStreamException.Message" />
+            , the <see cref="!:System.IO.EndOfStreamException.Message" />
 
             
 
@@ -158,14 +149,12 @@ initialized to <see
    arguments. </para
           >
           <para
-            > The <see
-             cref="!:System.IO.EndOfStreamException.InnerException" />
+            > The <see cref="!:System.IO.EndOfStreamException.InnerException" />
 
             
 
              property of the new instance is
-initialized to <see
-             langword="null" />
+initialized to <see langword="null" />
 
             
 
@@ -175,13 +164,11 @@ initialized to <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.EndOfStreamException" />
+            >Initializes a new instance of the <see cref="T:System.IO.EndOfStreamException" />
 
             
 
-             class with its message string set to <paramref
-             name="message" />
+             class with its message string set to <paramref name="message" />
 
             
 
@@ -189,12 +176,15 @@ initialized to <see
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that describes the error. The content of <paramref
-           name="message" />
+          A string that describes the error. The content of <paramref name="message" />
 
           
 
@@ -227,8 +217,7 @@ initialized to <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.EndOfStreamException" />
+            >Initializes a new instance of the <see cref="T:System.IO.EndOfStreamException" />
 
             
 
@@ -236,24 +225,30 @@ initialized to <see
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -289,26 +284,22 @@ initialized to <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.IO.EndOfStreamException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.IO.EndOfStreamException" />
 
             
 
@@ -350,8 +341,7 @@ initialized to <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.EndOfStreamException" />
+            >Initializes a new instance of the <see cref="T:System.IO.EndOfStreamException" />
 
             
 
@@ -359,24 +349,30 @@ initialized to <see
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that describes the error. The content of <paramref
-           name="message" />
+          A string that describes the error. The content of <paramref name="message" />
 
           
 
            is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 

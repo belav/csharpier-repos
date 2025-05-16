@@ -16,13 +16,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Windows.Forms.LinkConverter" />
+        >Use the <see cref="T:System.Windows.Forms.LinkConverter" />
 
         
 
-         class to convert links of one type to another type, and to access standard values and subordinate properties. Access this class through <see
-         cref="T:System.ComponentModel.TypeDescriptor" />
+         class to convert links of one type to another type, and to access standard values and subordinate properties. Access this class through <see cref="T:System.ComponentModel.TypeDescriptor" />
 
         
 
@@ -32,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a type converter for <see
-         cref="T:System.Windows.Forms.LinkLabel.Link" />
+        >Provides a type converter for <see cref="T:System.Windows.Forms.LinkLabel.Link" />
 
         
 
@@ -54,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.LinkConverter" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.LinkConverter" />
 
             
 
@@ -85,13 +81,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a value that determines if this <see
-             cref="T:System.Windows.Forms.LinkConverter" />
+            >Retrieves a value that determines if this <see cref="T:System.Windows.Forms.LinkConverter" />
 
             
 
-             can convert an object having the specified context and source type to the native type of the <see
-             cref="T:System.Windows.Forms.LinkConverter" />
+             can convert an object having the specified context and source type to the native type of the <see cref="T:System.Windows.Forms.LinkConverter" />
 
             
 
@@ -101,8 +95,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if this <see
-             cref="T:System.Windows.Forms.LinkConverter" />
+            >true if this <see cref="T:System.Windows.Forms.LinkConverter" />
 
             
 
@@ -110,19 +103,26 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            providing contextual information about the object to be converted.</param
         >
         <param name="sourceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -151,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a value that determines if this <see
-             cref="T:System.Windows.Forms.LinkConverter" />
+            >Retrieves a value that determines if this <see cref="T:System.Windows.Forms.LinkConverter" />
 
             
 
@@ -162,8 +161,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if this <see
-             cref="T:System.Windows.Forms.LinkConverter" />
+            >true if this <see cref="T:System.Windows.Forms.LinkConverter" />
 
             
 
@@ -171,19 +169,26 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            providing contextual information about the object to be converted.</param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -213,8 +218,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the specified object to the native type of the <see
-             cref="T:System.Windows.Forms.LinkConverter" />
+            >Converts the specified object to the native type of the <see cref="T:System.Windows.Forms.LinkConverter" />
 
             
 
@@ -226,31 +230,41 @@
           <para>The converted object.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            providing contextual information about the object to be converted.</param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Cultural attributes of the object to be converted. If this parameter is null, the <see
-           cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+          Cultural attributes of the object to be converted. If this parameter is null, the <see cref="P:System.Globalization.CultureInfo.CurrentCulture" />
 
           
 
            property value is used.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -280,28 +294,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The most common conversion is from one <see
-             cref="T:System.String" />
+            >The most common conversion is from one <see cref="T:System.String" />
 
             
 
-             to another <see
-             cref="T:System.String" />
+             to another <see cref="T:System.String" />
 
             
 
-            . The default implementation calls <see
-             cref="M:System.Object.ToString" />
+            . The default implementation calls <see cref="M:System.Object.ToString" />
 
             
 
-             on the object if the object is valid and if the <paramref
-             name="destinationType" />
+             on the object if the object is valid and if the <paramref name="destinationType" />
 
             
 
-             is <see
-             cref="T:System.String" />
+             is <see cref="T:System.String" />
 
             
 
@@ -317,38 +326,52 @@
           <para>The converted object.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            providing contextual information about the object to be converted.</param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Cultural attributes of the object to be converted. If this parameter is null, the <see
-           cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+          Cultural attributes of the object to be converted. If this parameter is null, the <see cref="P:System.Globalization.CultureInfo.CurrentCulture" />
 
           
 
            property value is used.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to be converted.</param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

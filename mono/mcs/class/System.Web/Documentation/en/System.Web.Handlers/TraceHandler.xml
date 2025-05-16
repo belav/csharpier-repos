@@ -38,8 +38,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Handlers.TraceHandler" />
+            >Initializes a new instance of the <see cref="T:System.Web.Handlers.TraceHandler" />
 
             
 
@@ -67,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether another request can use the <see
-             cref="T:System.Web.Handlers.TraceHandler" />
+            >Gets a value indicating whether another request can use the <see cref="T:System.Web.Handlers.TraceHandler" />
 
             
 
@@ -96,56 +94,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />
+            >The <see cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />
 
             
 
-             method writes an <see
-             cref="T:System.Web.HttpResponse" />
+             method writes an <see cref="T:System.Web.HttpResponse" />
 
             
 
-             that includes all current trace information. The trace information includes calls to the protected <see
-             cref="M:System.Web.Handlers.TraceHandler.ShowDetails(System.Data.DataSet)" />
+             that includes all current trace information. The trace information includes calls to the protected <see cref="M:System.Web.Handlers.TraceHandler.ShowDetails(System.Data.DataSet)" />
 
             
 
-            , <see
-             cref="M:System.Web.Handlers.TraceHandler.ShowRequests(System.Collections.IList)" />
+            , <see cref="M:System.Web.Handlers.TraceHandler.ShowRequests(System.Collections.IList)" />
 
             
 
-            , and <see
-             cref="M:System.Web.Handlers.TraceHandler.ShowVersionDetails" />
+            , and <see cref="M:System.Web.Handlers.TraceHandler.ShowVersionDetails" />
 
             
 
              methods.</para
           >
           <para
-            >The <see
-             cref="T:System.Web.Handlers.TraceHandler" />
+            >The <see cref="T:System.Web.Handlers.TraceHandler" />
 
             
 
-             class implements the <see
-             cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />
+             class implements the <see cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />
 
             
 
-             method to delegate to the implementation of the <see
-             cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />
+             method to delegate to the implementation of the <see cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />
 
             
 
-             method. If you extend the <see
-             cref="T:System.Web.Handlers.TraceHandler" />
+             method. If you extend the <see cref="T:System.Web.Handlers.TraceHandler" />
 
             
 
-             class, implement your own <see
-             cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />
+             class, implement your own <see cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />
 
             
 
@@ -157,12 +145,15 @@
           <para>Processes an HTTP request.</para>
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.HttpContext" />
+          An <see cref="T:System.Web.HttpContext" />
 
           
 
@@ -190,13 +181,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Handlers.TraceHandler.ShowDetails(System.Data.DataSet)" />
+            >The <see cref="M:System.Web.Handlers.TraceHandler.ShowDetails(System.Data.DataSet)" />
 
             
 
-             method writes tracing details to the response stream, including information about the application state, session state for the current session, control tree created for the current page, and HTTP request information such as the query string and form parameters. It is called by <see
-             cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />
+             method writes tracing details to the response stream, including information about the application state, session state for the current session, control tree created for the current page, and HTTP request information such as the query string and form parameters. It is called by <see cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />
 
             
 
@@ -208,12 +197,15 @@
           <para>Writes the details of the current system state and page information to the response stream.</para>
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.DataSet" />
+          A <see cref="T:System.Data.DataSet" />
 
           
 
@@ -261,13 +253,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Handlers.TraceHandler.ShowRequests(System.Collections.IList)" />
+            >The <see cref="M:System.Web.Handlers.TraceHandler.ShowRequests(System.Collections.IList)" />
 
             
 
-             method writes tracing details to the response stream, including information on the most recent HTTP requests that ASP.NET has processed for the site. It is called by <see
-             cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />
+             method writes tracing details to the response stream, including information on the most recent HTTP requests that ASP.NET has processed for the site. It is called by <see cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />
 
             
 
@@ -279,12 +269,15 @@
           <para>Writes the details of recent HTTP request traffic to the response stream.</para>
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A set of <see
-           cref="T:System.Data.DataSet" />
+          A set of <see cref="T:System.Data.DataSet" />
 
           
 
@@ -306,13 +299,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Handlers.TraceHandler.ShowVersionDetails" />
+            >The <see cref="M:System.Web.Handlers.TraceHandler.ShowVersionDetails" />
 
             
 
-             method writes tracing details on the Common Language Runtime (CLR) and ASP.NET versions currently in use. It is called by <see
-             cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />
+             method writes tracing details on the Common Language Runtime (CLR) and ASP.NET versions currently in use. It is called by <see cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />
 
             
 
@@ -340,13 +331,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit-interface member implementation. It can be used only when the <see
-             cref="T:System.Web.Handlers.TraceHandler" />
+            >This member is an explicit-interface member implementation. It can be used only when the <see cref="T:System.Web.Handlers.TraceHandler" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.IHttpHandler" />
+             instance is cast to an <see cref="T:System.Web.IHttpHandler" />
 
             
 
@@ -356,8 +345,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether another request can use the <see
-             cref="T:System.Web.Handlers.TraceHandler" />
+            >Gets a value indicating whether another request can use the <see cref="T:System.Web.Handlers.TraceHandler" />
 
             
 
@@ -386,8 +374,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method writes all current trace information to the <see
-             cref="T:System.Web.HttpResponse" />
+            >This method writes all current trace information to the <see cref="T:System.Web.HttpResponse" />
 
             
 
@@ -399,12 +386,15 @@
           <para>Processes an HTTP request.</para>
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.HttpContext" />
+          An <see cref="T:System.Web.HttpContext" />
 
           
 

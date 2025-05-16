@@ -28,8 +28,7 @@
       <para>The caller cleans the stack. This enables calling functions with varargs.</para>
       <para>This class is used only as a custom modifier of the metadata signature of a method.</para>
       <para
-        >The classes in <see
-         cref="N:System.Runtime.CompilerServices" />
+        >The classes in <see cref="N:System.Runtime.CompilerServices" />
 
         
 
@@ -40,28 +39,23 @@
       <list type="bullet">
         <item>
           <para
-            >Using methods in the <see
-             cref="T:System.Reflection.Emit.TypeBuilder" />
+            >Using methods in the <see cref="T:System.Reflection.Emit.TypeBuilder" />
 
             
 
-             class such as <see
-             cref="Overload:System.Reflection.Emit.TypeBuilder.DefineMethod" />
+             class such as <see cref="Overload:System.Reflection.Emit.TypeBuilder.DefineMethod" />
 
             
 
-            , <see
-             cref="Overload:System.Reflection.Emit.TypeBuilder.DefineField" />
+            , <see cref="Overload:System.Reflection.Emit.TypeBuilder.DefineField" />
 
             
 
-            , <see
-             cref="Overload:System.Reflection.Emit.TypeBuilder.DefineConstructor" />
+            , <see cref="Overload:System.Reflection.Emit.TypeBuilder.DefineConstructor" />
 
             
 
-            , and <see
-             cref="Overload:System.Reflection.Emit.TypeBuilder.DefineProperty" />
+            , and <see cref="Overload:System.Reflection.Emit.TypeBuilder.DefineProperty" />
 
             
 
@@ -70,8 +64,7 @@
         </item>
         <item>
           <para
-            >Generating a Microsoft intermediate language (MSIL) instruction file that contains calls to modopt and modreq, and assembling the file with the <format
-             type="text/html">
+            >Generating a Microsoft intermediate language (MSIL) instruction file that contains calls to modopt and modreq, and assembling the file with the <format type="text/html">
               <a href="4ca3a4f0-4400-47ce-8936-8e219961c76f">MSIL Assembler (Ilasm.exe)</a>
             </format>
 
@@ -109,8 +102,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The classes in <see
-             cref="N:System.Runtime.CompilerServices" />
+            >The classes in <see cref="N:System.Runtime.CompilerServices" />
 
             
 
@@ -120,8 +112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.CompilerServices.CallConvCdecl" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.CallConvCdecl" />
 
             
 

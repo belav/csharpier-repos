@@ -42,8 +42,7 @@
     <example>
       <para
         > The following example shows a declarative request for
-      the ability to read the specified environment variables. The <see
-         cref="F:System.Security.Permissions.SecurityAction.RequestMinimum" />
+      the ability to read the specified environment variables. The <see cref="F:System.Security.Permissions.SecurityAction.RequestMinimum" />
 
         
 
@@ -68,8 +67,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The scope of the declaration that is allowed depends on the <see
-         cref="T:System.Security.Permissions.SecurityAction" />
+        >The scope of the declaration that is allowed depends on the <see cref="T:System.Security.Permissions.SecurityAction" />
 
         
 
@@ -77,8 +75,7 @@
       >
       <para>The security information declared by a security attribute is stored in the metadata of the attribute target and is accessed by the system at run time. Security attributes are used only for declarative security. For imperative security, use the corresponding permission class.</para>
       <para
-        >Environment variable names are case-insensitive. Multiple environment variable names are specified by separating the names using <see
-         cref="F:System.IO.Path.PathSeparator" />
+        >Environment variable names are case-insensitive. Multiple environment variable names are specified by separating the names using <see cref="F:System.IO.Path.PathSeparator" />
 
         
 
@@ -88,8 +85,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Allows security actions for <see
-         cref="T:System.Security.Permissions.EnvironmentPermission" />
+        >Allows security actions for <see cref="T:System.Security.Permissions.EnvironmentPermission" />
 
         
 
@@ -128,8 +124,7 @@
 
           
 
-           is not a valid <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+           is not a valid <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -138,13 +133,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.EnvironmentPermissionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.EnvironmentPermissionAttribute" />
 
             
 
-             class with the specified <see
-             cref="T:System.Security.Permissions.SecurityAction" />
+             class with the specified <see cref="T:System.Security.Permissions.SecurityAction" />
 
             
 
@@ -152,12 +145,15 @@
           >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+          One of the <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -183,8 +179,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Environment variable names are case-insensitive. Multiple environment variable names are specified by separating the names using <see
-             cref="F:System.IO.Path.PathSeparator" />
+            >Environment variable names are case-insensitive. Multiple environment variable names are specified by separating the names using <see cref="F:System.IO.Path.PathSeparator" />
 
             
 
@@ -229,8 +224,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns a new <see
-             cref="T:System.Security.Permissions.EnvironmentPermission" />
+            >Creates and returns a new <see cref="T:System.Security.Permissions.EnvironmentPermission" />
 
             
 
@@ -240,8 +234,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.Permissions.EnvironmentPermission" />
+            >An <see cref="T:System.Security.Permissions.EnvironmentPermission" />
 
             
 
@@ -271,8 +264,7 @@
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.String" />
+            > A <see cref="T:System.String" />
 
             
 
@@ -283,8 +275,7 @@ containing one or more environment variables for which read access is secured.</
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Environment variable names are case-insensitive. Multiple environment variable names are specified by separating the names using <see
-             cref="F:System.IO.Path.PathSeparator" />
+            >Environment variable names are case-insensitive. Multiple environment variable names are specified by separating the names using <see cref="F:System.IO.Path.PathSeparator" />
 
             
 
@@ -318,8 +309,7 @@ containing one or more environment variables for which read access is secured.</
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.String" />
+            > A <see cref="T:System.String" />
 
             
 
@@ -329,8 +319,7 @@ containing one or more environment variables for which read access is secured.</
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Environment variable names are case-insensitive. Multiple environment variable names are specified by separating the names using <see
-             cref="F:System.IO.Path.PathSeparator" />
+            >Environment variable names are case-insensitive. Multiple environment variable names are specified by separating the names using <see cref="F:System.IO.Path.PathSeparator" />
 
             
 

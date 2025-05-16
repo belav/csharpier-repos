@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The utility functions provided by the <see
-         cref="T:System.Web.Management.IRegiisUtility" />
+        >The utility functions provided by the <see cref="T:System.Web.Management.IRegiisUtility" />
 
         
 

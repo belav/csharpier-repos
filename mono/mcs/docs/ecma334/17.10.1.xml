@@ -2,20 +2,22 @@
 <clause number="17.10.1" title="Constructor initializers">
   <paragraph
     >All instance constructors (except those for class object) implicitly include an invocation of another instance constructor immediately before the <non_terminal
-     where="17.10">constructor-body</non_terminal>
+      where="17.10"
+      >constructor-body</non_terminal
+    >
 
     
 
-    . The constructor to implicitly invoke is determined by the constructor-initializer: <list
-    >
+    . The constructor to implicitly invoke is determined by the constructor-initializer: <list>
       <list_item
         > An instance constructor initializer of the form base(argument-listopt) causes an instance constructor from the direct base class to be invoked. That constructor is selected using <non_terminal
-         where="14.4.1">argument-list</non_terminal>
+          where="14.4.1"
+          >argument-list</non_terminal
+        >
 
         
 
-         and the overload resolution rules of <hyperlink
-        >14.4.2</hyperlink>
+         and the overload resolution rules of <hyperlink>14.4.2</hyperlink>
 
         
 
@@ -23,12 +25,13 @@
       >
       <list_item
         > An instance constructor initializer of the form this(argument-listopt) causes an instance constructor from the class itself to be invoked. The constructor is selected using <non_terminal
-         where="14.4.1">argument-list</non_terminal>
+          where="14.4.1"
+          >argument-list</non_terminal
+        >
 
         
 
-         and the overload resolution rules of <hyperlink
-        >14.4.2</hyperlink>
+         and the overload resolution rules of <hyperlink>14.4.2</hyperlink>
 
         
 
@@ -38,9 +41,7 @@
   </paragraph>
   <paragraph
     >If an instance constructor has no constructor initializer, a constructor initializer of the form base() is implicitly provided. <note
-
-      >[Note: Thus, an instance constructor declaration of the form <code_example
-      >
+      >[Note: Thus, an instance constructor declaration of the form <code_example>
         <![CDATA[
 C(...) {...}  
 ]]>
@@ -48,8 +49,7 @@ C(...) {...}
 
       
 
-      is exactly equivalent to <code_example
-      >
+      is exactly equivalent to <code_example>
         <![CDATA[
 C(...): base() {...}  
 ]]>
@@ -61,15 +61,14 @@ C(...): base() {...}
     >
   </paragraph>
   <paragraph
-    >The scope of the parameters given by the <non_terminal
-     where="17.5.1">formal-parameter-list</non_terminal>
+    >The scope of the parameters given by the <non_terminal where="17.5.1"
+      >formal-parameter-list</non_terminal
+    >
 
     
 
      of an instance constructor declaration includes the constructor initializer of that declaration. Thus, a constructor initializer is permitted to access the parameters of the constructor. <example
-
-      >[Example: For example: <code_example
-      >
+      >[Example: For example: <code_example>
         <![CDATA[
 class A  
 {  
@@ -89,7 +88,9 @@ class B: A
   </paragraph>
   <paragraph
     >An instance constructor initializer cannot access the instance being created. Therefore it is a compile-time error to reference this in an argument expression of the constructor initializer, as it is a compile-time error for an argument expression to reference any instance member through a <non_terminal
-     where="14.5.2">simple-name</non_terminal>
+      where="14.5.2"
+      >simple-name</non_terminal
+    >
 
     
 

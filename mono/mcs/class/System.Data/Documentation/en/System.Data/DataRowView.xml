@@ -34,59 +34,49 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Whenever data is displayed, such as in a <see
-         cref="T:System.Windows.Forms.DataGrid" />
+        >Whenever data is displayed, such as in a <see cref="T:System.Windows.Forms.DataGrid" />
 
         
 
-         control, only one version of each row can be displayed. The displayed row is a <see
-         cref="T:System.Data.DataRowView" />
+         control, only one version of each row can be displayed. The displayed row is a <see cref="T:System.Data.DataRowView" />
 
         
 
         .</para
       >
       <para
-        >A <see
-         cref="T:System.Data.DataRowView" />
+        >A <see cref="T:System.Data.DataRowView" />
 
         
 
          can have one of four different version states: Default, Original, Current, and Proposed.</para
       >
       <para
-        >After invoking <see
-         cref="M:System.Data.DataRow.BeginEdit" />
+        >After invoking <see cref="M:System.Data.DataRow.BeginEdit" />
 
         
 
-         on a <see
-         cref="T:System.Data.DataRow" />
+         on a <see cref="T:System.Data.DataRow" />
 
         
 
-        , any edited value becomes the Proposed value. Until either <see
-         cref="M:System.Data.DataRowView.CancelEdit" />
+        , any edited value becomes the Proposed value. Until either <see cref="M:System.Data.DataRowView.CancelEdit" />
 
         
 
-         or <see
-         cref="M:System.Data.DataRowView.EndEdit" />
+         or <see cref="M:System.Data.DataRowView.EndEdit" />
 
         
 
-         is invoked, the row has an Original and a Proposed version. If <see
-         cref="M:System.Data.DataRowView.CancelEdit" />
+         is invoked, the row has an Original and a Proposed version. If <see cref="M:System.Data.DataRowView.CancelEdit" />
 
         
 
-         is invoked, the proposed version is discarded, and the value reverts to Original. If <see
-         cref="M:System.Data.DataRowView.EndEdit" />
+         is invoked, the proposed version is discarded, and the value reverts to Original. If <see cref="M:System.Data.DataRowView.EndEdit" />
 
         
 
-         is invoked, the <see
-         cref="T:System.Data.DataRowView" />
+         is invoked, the <see cref="T:System.Data.DataRowView" />
 
         
 
@@ -96,8 +86,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a customized view of a <see
-         cref="T:System.Data.DataRow" />
+        >Represents a customized view of a <see cref="T:System.Data.DataRow" />
 
         
 
@@ -117,66 +106,54 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="M:System.Data.DataView.AddNew" />
+            >Use <see cref="M:System.Data.DataView.AddNew" />
 
             
 
-             to add a <see
-             cref="T:System.Data.DataRowView" />
+             to add a <see cref="T:System.Data.DataRowView" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Data.DataRowView.BeginEdit" />
+            >The <see cref="M:System.Data.DataRowView.BeginEdit" />
 
             
 
-             method is identical to the <see
-             cref="M:System.Data.DataRow.BeginEdit" />
+             method is identical to the <see cref="M:System.Data.DataRow.BeginEdit" />
 
             
 
-             method of the <see
-             cref="T:System.Data.DataRow" />
+             method of the <see cref="T:System.Data.DataRow" />
 
             
 
-            . After calling <see
-             cref="M:System.Data.DataRowView.BeginEdit" />
+            . After calling <see cref="M:System.Data.DataRowView.BeginEdit" />
 
             
 
-            , any changes made to the <see
-             cref="T:System.Data.DataRowView" />
+            , any changes made to the <see cref="T:System.Data.DataRowView" />
 
             
 
-             can be rolled back by calling <see
-             cref="M:System.Data.DataRow.CancelEdit" />
+             can be rolled back by calling <see cref="M:System.Data.DataRow.CancelEdit" />
 
             
 
-            . Call the <see
-             cref="M:System.Data.DataRowView.BeginEdit" />
+            . Call the <see cref="M:System.Data.DataRowView.BeginEdit" />
 
             
 
-             method before allowing users to change row values. After values have been changed, you retrieve the new values by setting the <see
-             cref="P:System.Data.DataRowView.RowVersion" />
+             method before allowing users to change row values. After values have been changed, you retrieve the new values by setting the <see cref="P:System.Data.DataRowView.RowVersion" />
 
             
 
-             to DataRowVersion.Proposed. Check the values with a business rule, and roll back the changes if needed by calling <see
-             cref="M:System.Data.DataRowView.CancelEdit" />
+             to DataRowVersion.Proposed. Check the values with a business rule, and roll back the changes if needed by calling <see cref="M:System.Data.DataRowView.CancelEdit" />
 
             
 
-            , or call <see
-             cref="M:System.Data.DataRowView.EndEdit" />
+            , or call <see cref="M:System.Data.DataRowView.EndEdit" />
 
             
 
@@ -204,18 +181,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After calling <see
-             cref="M:System.Data.DataRowView.CancelEdit" />
+            >After calling <see cref="M:System.Data.DataRowView.CancelEdit" />
 
             
 
-            , all changes to the row are rolled back. You can also roll back changes by calling <see
-             cref="M:System.Data.DataTable.RejectChanges" />
+            , all changes to the row are rolled back. You can also roll back changes by calling <see cref="M:System.Data.DataTable.RejectChanges" />
 
             
 
-             on the parent <see
-             cref="T:System.Data.DataTable" />
+             on the parent <see cref="T:System.Data.DataTable" />
 
             
 
@@ -249,18 +223,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Data.DataView" />
+            >Returns a <see cref="T:System.Data.DataView" />
 
             
 
-             for the child <see
-             cref="T:System.Data.DataTable" />
+             for the child <see cref="T:System.Data.DataTable" />
 
             
 
-             with the specified child <see
-             cref="T:System.Data.DataRelation" />
+             with the specified child <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -270,13 +241,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >a <see
-             cref="T:System.Data.DataView" />
+            >a <see cref="T:System.Data.DataView" />
 
             
 
-             for the child <see
-             cref="T:System.Data.DataTable" />
+             for the child <see cref="T:System.Data.DataTable" />
 
             
 
@@ -284,12 +253,15 @@
           >
         </returns>
         <param name="relation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataRelation" />
+          The <see cref="T:System.Data.DataRelation" />
 
           
 
@@ -318,18 +290,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Data.DataView" />
+            >Returns a <see cref="T:System.Data.DataView" />
 
             
 
-             for the child <see
-             cref="T:System.Data.DataTable" />
+             for the child <see cref="T:System.Data.DataTable" />
 
             
 
-             with the specified child <see
-             cref="T:System.Data.DataRelation" />
+             with the specified child <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -339,13 +308,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >a <see
-             cref="T:System.Data.DataView" />
+            >a <see cref="T:System.Data.DataView" />
 
             
 
-             for the child <see
-             cref="T:System.Data.DataTable" />
+             for the child <see cref="T:System.Data.DataTable" />
 
             
 
@@ -353,12 +320,15 @@
           >
         </returns>
         <param name="relationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string containing the <see
-           cref="T:System.Data.DataRelation" />
+          A string containing the <see cref="T:System.Data.DataRelation" />
 
           
 
@@ -382,8 +352,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.DataView" />
+            >Gets the <see cref="T:System.Data.DataView" />
 
             
 
@@ -407,13 +376,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The row is not permanently deleted until <see
-             cref="M:System.Data.DataTable.AcceptChanges" />
+            >The row is not permanently deleted until <see cref="M:System.Data.DataTable.AcceptChanges" />
 
             
 
-             is invoked on the <see
-             cref="T:System.Data.DataTable" />
+             is invoked on the <see cref="T:System.Data.DataTable" />
 
             
 
@@ -421,23 +388,19 @@
           >
           <block subset="none" type="note">
             <para
-              >A <see
-               cref="T:System.Data.DataRowView" />
+              >A <see cref="T:System.Data.DataRowView" />
 
               
 
-               may be invalid when a DataRow is deleted from the underlying table. When the <see
-               cref="T:System.Data.DataRowView" />
+               may be invalid when a DataRow is deleted from the underlying table. When the <see cref="T:System.Data.DataRowView" />
 
               
 
-               becomes invalid, operations that access values associated with <see
-               cref="T:System.Data.DataRowView," />
+               becomes invalid, operations that access values associated with <see cref="T:System.Data.DataRowView," />
 
               
 
-               such as <see
-               cref="M:System.Data.DataRowView.Delete" />
+               such as <see cref="M:System.Data.DataRowView.Delete" />
 
               
 
@@ -467,23 +430,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Commits changes to the underlying <see
-             cref="T:System.Data.DataRow" />
+            >Commits changes to the underlying <see cref="T:System.Data.DataRow" />
 
             
 
-             and ends the editing session that was begun with <see
-             cref="M:System.Data.DataRowView.BeginEdit" />
+             and ends the editing session that was begun with <see cref="M:System.Data.DataRowView.BeginEdit" />
 
             
 
-            .  Use <see
-             cref="M:System.Data.DataRowView.CancelEdit" />
+            .  Use <see cref="M:System.Data.DataRowView.CancelEdit" />
 
             
 
-             to discard the changes made to the <see
-             cref="T:System.Data.DataRow" />
+             to discard the changes made to the <see cref="T:System.Data.DataRow" />
 
             
 
@@ -510,8 +469,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the current <see
-             cref="T:System.Data.DataRowView" />
+            >Gets a value indicating whether the current <see cref="T:System.Data.DataRowView" />
 
             
 
@@ -521,18 +479,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="object" />
+            >true if <paramref name="object" />
 
             
 
-             is a <see
-             cref="T:System.Data.DataRowView" />
+             is a <see cref="T:System.Data.DataRowView" />
 
             
 
-             and it returns the same row as the current <see
-             cref="T:System.Data.DataRowView" />
+             and it returns the same row as the current <see cref="T:System.Data.DataRowView" />
 
             
 
@@ -540,12 +495,15 @@
           >
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
@@ -569,8 +527,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the hash code of the <see
-             cref="T:System.Data.DataRow" />
+            >Returns the hash code of the <see cref="T:System.Data.DataRow" />
 
             
 
@@ -617,38 +574,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After you call you call <see
-             cref="M:System.Data.DataView.AddNew" />
+            >After you call you call <see cref="M:System.Data.DataView.AddNew" />
 
             
 
-            , <see
-             cref="P:System.Data.DataRowView.IsNew" />
+            , <see cref="P:System.Data.DataRowView.IsNew" />
 
             
 
-             will be true for the returned <see
-             cref="T:System.Data.DataRowView" />
+             will be true for the returned <see cref="T:System.Data.DataRowView" />
 
             
 
-            . <see
-             cref="P:System.Data.DataRowView.IsNew" />
+            . <see cref="P:System.Data.DataRowView.IsNew" />
 
             
 
-             will be true until either <see
-             cref="M:System.Data.DataRowView.EndEdit" />
+             will be true until either <see cref="M:System.Data.DataRowView.EndEdit" />
 
             
 
-             is called on the <see
-             cref="T:System.Data.DataRowView" />
+             is called on the <see cref="T:System.Data.DataRowView" />
 
             
 
-            , or <see
-             cref="M:System.Data.DataView.AddNew" />
+            , or <see cref="M:System.Data.DataView.AddNew" />
 
             
 
@@ -658,8 +608,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether a <see
-             cref="T:System.Data.DataRowView" />
+            >Indicates whether a <see cref="T:System.Data.DataRowView" />
 
             
 
@@ -728,13 +677,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event fires when the column value associated with the <see
-             cref="T:System.Data.DataRowView" />
+            >This event fires when the column value associated with the <see cref="T:System.Data.DataRowView" />
 
             
 
-             changes. This change does not cause the associated index position of the <see
-             cref="T:System.Data.DataRowView" />
+             changes. This change does not cause the associated index position of the <see cref="T:System.Data.DataRowView" />
 
             
 
@@ -744,8 +691,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Event that is raised when a <see
-             cref="T:System.Data.DataRowView" />
+            >Event that is raised when a <see cref="T:System.Data.DataRowView" />
 
             
 
@@ -766,8 +712,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.DataRow" />
+            >Gets the <see cref="T:System.Data.DataRow" />
 
             
 
@@ -794,33 +739,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Data.DataView.RowStateFilter" />
+            >The <see cref="P:System.Data.DataView.RowStateFilter" />
 
             
 
-             property specifies both <see
-             cref="T:System.Data.DataRowState" />
+             property specifies both <see cref="T:System.Data.DataRowState" />
 
             
 
-             and <see
-             cref="T:System.Data.DataRowVersion" />
+             and <see cref="T:System.Data.DataRowVersion" />
 
             
 
-             settings. For more information, see <see
-             cref="T:System.Data.DataRowState" />
+             settings. For more information, see <see cref="T:System.Data.DataRowState" />
 
             
 
-            , <see
-             cref="T:System.Data.DataRowVersion" />
+            , <see cref="T:System.Data.DataRowVersion" />
 
             
 
-            , and <see
-             cref="T:System.Data.DataViewRowState" />
+            , and <see cref="T:System.Data.DataViewRowState" />
 
             
 
@@ -830,8 +769,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the current version description of the <see
-             cref="T:System.Data.DataRow" />
+            >Gets the current version description of the <see cref="T:System.Data.DataRow" />
 
             
 
@@ -862,13 +800,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataRowView" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataRowView" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
@@ -900,13 +836,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataRowView" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataRowView" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
@@ -938,13 +872,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataRowView" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataRowView" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
@@ -979,13 +911,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataRowView" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataRowView" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
@@ -1020,13 +950,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataRowView" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataRowView" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
@@ -1061,13 +989,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataRowView" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataRowView" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
@@ -1104,13 +1030,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataRowView" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataRowView" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
@@ -1124,8 +1048,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -1133,12 +1056,15 @@
           >
         </returns>
         <param name="editorBaseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -1164,13 +1090,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataRowView" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataRowView" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
@@ -1207,13 +1131,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataRowView" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataRowView" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
@@ -1229,7 +1151,11 @@
           <para>The events for this instance of a component.</para>
         </returns>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1255,13 +1181,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataRowView" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataRowView" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
@@ -1298,13 +1222,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataRowView" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataRowView" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
@@ -1320,7 +1242,11 @@
           <para>The properties for this instance of a component.</para>
         </returns>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1348,13 +1274,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataRowView" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataRowView" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             instance is cast to an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
@@ -1368,8 +1292,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -1377,12 +1300,15 @@
           >
         </returns>
         <param name="pd">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          A <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -1408,13 +1334,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.DataRowView" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.DataRowView" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IDataErrorInfo" />
+             instance is cast to an <see cref="T:System.ComponentModel.IDataErrorInfo" />
 
             
 

@@ -33,8 +33,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The assembly version number is part of an assembly's identity and plays a key part in binding to the assembly and in version policy. The default version policy for the runtime is that applications run only with the versions they were built and tested with, unless overridden by explicit version policy in configuration files (the application configuration file, the publisher policy file, and the computer's administrator configuration file). See <format
-         type="text/html">
+        >The assembly version number is part of an assembly's identity and plays a key part in binding to the assembly and in version policy. The default version policy for the runtime is that applications run only with the versions they were built and tested with, unless overridden by explicit version policy in configuration files (the application configuration file, the publisher policy file, and the computer's administrator configuration file). See <format type="text/html">
           <a href="2CFEBE19-7436-49F1-BD99-3C4019F0B676"
             >[&lt;topic://cpconassembliesoverview&gt;]</a
           >
@@ -51,8 +50,7 @@
       <para>&lt;major version&gt;.&lt;minor version&gt;.&lt;build number&gt;.&lt;revision&gt; </para>
       <block subset="none" type="note">
         <para
-          >All components of the version must be integers greater than or equal to 0. Metadata restricts the major, minor, build, and revision components for an assembly to a maximum value of <see
-           cref="F:System.UInt16.MaxValue" />
+          >All components of the version must be integers greater than or equal to 0. Metadata restricts the major, minor, build, and revision components for an assembly to a maximum value of <see cref="F:System.UInt16.MaxValue" />
 
           
 
@@ -65,23 +63,19 @@
       </block>
       <para>The assembly major and minor versions are used as the type library version number when the assembly is exported. Some COM hosts do not accept type libraries with the version number 0.0. Therefore, if you want to expose an assembly to COM clients, set the assembly version explicitly to 1.0 in the AssemblyVersionAttribute page for projects created outside vsprvslong and with no AssemblyVersionAttribute specified. Do this even when the assembly version is 0.0. All projects created in vsprvslong have a default assembly version of 1.0.*.</para>
       <para
-        >To get the name of an assembly you have loaded, call <see
-         cref="M:System.Reflection.Assembly.GetName" />
+        >To get the name of an assembly you have loaded, call <see cref="M:System.Reflection.Assembly.GetName" />
 
         
 
-         on the assembly to get an <see
-         cref="T:System.Reflection.AssemblyName" />
+         on the assembly to get an <see cref="T:System.Reflection.AssemblyName" />
 
         
 
-        , and then get the <see
-         cref="P:System.Reflection.AssemblyName.Version" />
+        , and then get the <see cref="P:System.Reflection.AssemblyName.Version" />
 
         
 
-         property. To get the name of an assembly you have not loaded, call <see
-         cref="M:System.Reflection.AssemblyName.GetAssemblyName(System.String)" />
+         property. To get the name of an assembly you have not loaded, call <see cref="M:System.Reflection.AssemblyName.GetAssemblyName(System.String)" />
 
         
 
@@ -114,8 +108,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The format of the <paramref
-             name="version" />
+            >The format of the <paramref name="version" />
 
             
 
@@ -136,7 +129,11 @@
           <para>Initializes a new instance of the AssemblyVersionAttribute class with the version number of the assembly being attributed.</para>
         </summary>
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

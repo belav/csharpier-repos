@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.RemotingTimeoutException" />
+        >The <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" />
 
         
 
@@ -49,21 +48,18 @@
 
         
 
-         uses the default <see
-         cref="M:System.Object.Equals(System.Object)" />
+         uses the default <see cref="M:System.Object.Equals(System.Object)" />
 
         
 
          implementation, which supports reference equality.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Runtime.Remoting.RemotingTimeoutException" />
+        >For a list of initial property values for an instance of <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" />
 
         
 
-        , see the <see
-         cref="T:System.Runtime.Remoting.RemotingTimeoutException" />
+        , see the <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" />
 
         
 
@@ -98,13 +94,11 @@
 
             
 
-             inherits from the <see
-             cref="T:System.Exception" />
+             inherits from the <see cref="T:System.Exception" />
 
             
 
-             class. The following table shows initial property values for an instance of the <see
-             cref="T:System.Runtime.Remoting.RemotingTimeoutException" />
+             class. The following table shows initial property values for an instance of the <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" />
 
             
 
@@ -139,8 +133,7 @@
               </term>
               <description>
                 <para
-                  >Localized error message for <see
-                   cref="T:System.Runtime.Remoting.RemotingTimeoutException" />
+                  >Localized error message for <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" />
                 </para>
               </description>
             </item>
@@ -149,8 +142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.RemotingTimeoutException" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" />
 
             
 
@@ -183,13 +175,11 @@
 
             
 
-             inherits from the <see
-             cref="T:System.Exception" />
+             inherits from the <see cref="T:System.Exception" />
 
             
 
-             class. The following table shows initial property values for an instance of the <see
-             cref="T:System.Runtime.Remoting.RemotingTimeoutException" />
+             class. The following table shows initial property values for an instance of the <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" />
 
             
 
@@ -224,8 +214,7 @@
               </term>
               <description>
                 <para
-                  >The <paramref
-                   name="message" />
+                  >The <paramref name="message" />
 
                   
 
@@ -238,8 +227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.Runtime.Remoting.RemotingTimeoutException" />
+            >Initializes a new instance of <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" />
 
             
 
@@ -247,7 +235,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -279,26 +271,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception must include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception must include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows initial property values for an instance of the <see
-             cref="T:System.Runtime.Remoting.RemotingTimeoutException" />
+            >The following table shows initial property values for an instance of the <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" />
 
             
 
@@ -340,8 +328,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.RemotingTimeoutException" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" />
 
             
 
@@ -349,19 +336,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception. </param
         >
         <param name="InnerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="InnerException" />
+          The exception that is the cause of the current exception. If the <paramref name="InnerException" />
 
           
 

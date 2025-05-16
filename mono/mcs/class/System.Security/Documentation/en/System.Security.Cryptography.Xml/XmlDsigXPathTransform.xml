@@ -21,7 +21,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -35,39 +37,33 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+        >The <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
         
 
          class allows you to address an XML document using the XPath language.  This class uses an XPath expression to select the XML nodes you want to sign or encrypt while removing all others from either cryptographic operation.</para
       >
       <para
-        >Use the <see
-         cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+        >Use the <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
         
 
-         class to sign or encrypt specific parts of an XML document using an XPath expression.  For information on initializing the <see
-         cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+         class to sign or encrypt specific parts of an XML document using an XPath expression.  For information on initializing the <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
         
 
-         class to the value of an XPath transform string, see the <see
-         cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.LoadInnerXml(System.Xml.XmlNodeList)" />
+         class to the value of an XPath transform string, see the <see cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.LoadInnerXml(System.Xml.XmlNodeList)" />
 
         
 
          method. </para
       >
       <para
-        >The Uniform Resource Identifier (URI) that describes the <see
-         cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+        >The Uniform Resource Identifier (URI) that describes the <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
         
 
-         class is defined by the <see
-         cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigXPathTransformUrl" />
+         class is defined by the <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigXPathTransformUrl" />
 
         
 
@@ -100,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
             
 
@@ -134,8 +129,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an XML representation of the parameters of a <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+            >Returns an XML representation of the parameters of a <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
             
 
@@ -145,8 +139,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A list of the XML nodes that represent the transform-specific content needed to describe the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+            >A list of the XML nodes that represent the transform-specific content needed to describe the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
             
 
@@ -175,21 +168,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type of the returned object must be <see
-             cref="T:System.Xml.XmlNodeList" />
+            >The type of the returned object must be <see cref="T:System.Xml.XmlNodeList" />
 
             
 
             .</para
           >
           <para
-            >Use the <see
-             cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.GetOutput" />
+            >Use the <see cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.GetOutput" />
 
             
 
-             method to retrieve a <see
-             cref="T:System.Xml.XmlNodeList" />
+             method to retrieve a <see cref="T:System.Xml.XmlNodeList" />
 
             
 
@@ -199,8 +189,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the output of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+            >Returns the output of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
             
 
@@ -210,8 +199,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The output of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+            >The output of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
             
 
@@ -242,21 +230,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type of the returned object must be <see
-             cref="T:System.Xml.XmlNodeList" />
+            >The type of the returned object must be <see cref="T:System.Xml.XmlNodeList" />
 
             
 
             .</para
           >
           <para
-            >Use the <see
-             cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.GetOutput(System.Type)" />
+            >Use the <see cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.GetOutput(System.Type)" />
 
             
 
-             method to retrieve a <see
-             cref="T:System.Xml.XmlNodeList" />
+             method to retrieve a <see cref="T:System.Xml.XmlNodeList" />
 
             
 
@@ -266,13 +251,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the output of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+            >Returns the output of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
             
 
-             object of type <see
-             cref="T:System.Xml.XmlNodeList" />
+             object of type <see cref="T:System.Xml.XmlNodeList" />
 
             
 
@@ -282,13 +265,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The output of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+            >The output of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
             
 
-             object of type <see
-             cref="T:System.Xml.XmlNodeList" />
+             object of type <see cref="T:System.Xml.XmlNodeList" />
 
             
 
@@ -296,12 +277,15 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of the output to return. <see
-           cref="T:System.Xml.XmlNodeList" />
+          The type of the output to return. <see cref="T:System.Xml.XmlNodeList" />
 
           
 
@@ -323,30 +307,23 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Type[]" />
-        </value>
+        <value>a <see cref="T:System.Type[]" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The valid input types to <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+            >The valid input types to <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
             
 
-             are <see
-             cref="T:System.IO.Stream" />
+             are <see cref="T:System.IO.Stream" />
 
             
 
-            , <see
-             cref="T:System.Xml.XmlDocument" />
+            , <see cref="T:System.Xml.XmlDocument" />
 
             
 
-            , and <see
-             cref="T:System.Xml.XmlNodeList" />
+            , and <see cref="T:System.Xml.XmlNodeList" />
 
             
 
@@ -356,13 +333,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of types that are valid inputs to the <see
-             cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.LoadInput(System.Object)" />
+            >Gets an array of types that are valid inputs to the <see cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.LoadInput(System.Object)" />
 
             
 
-             method of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+             method of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
             
 
@@ -396,21 +371,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.LoadInnerXml(System.Xml.XmlNodeList)" />
+            >Use the <see cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.LoadInnerXml(System.Xml.XmlNodeList)" />
 
             
 
-             method to initialize the <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+             method to initialize the <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
             
 
              class with an XPath transform.  </para
           >
           <para
-            >To initialize the <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+            >To initialize the <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
             
 
@@ -419,13 +391,11 @@
           <list type="ordered">
             <item>
               <para
-                >Create a new <see
-                 cref="T:System.Xml.XmlElement" />
+                >Create a new <see cref="T:System.Xml.XmlElement" />
 
                 
 
-                 class and set the <see
-                 cref="P:System.Xml.XmlElement.InnerText" />
+                 class and set the <see cref="P:System.Xml.XmlElement.InnerText" />
 
                 
 
@@ -434,13 +404,11 @@
             </item>
             <item>
               <para
-                >Call the <see
-                 cref="Overload:System.Xml.XmlNode.SelectNodes" />
+                >Call the <see cref="Overload:System.Xml.XmlNode.SelectNodes" />
 
                 
 
-                 method to create an <see
-                 cref="T:System.Xml.XmlNodeList" />
+                 method to create an <see cref="T:System.Xml.XmlNodeList" />
 
                 
 
@@ -449,18 +417,15 @@
             </item>
             <item>
               <para
-                >Create a new instance of the <see
-                 cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+                >Create a new instance of the <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
                 
 
-                 class and pass the previously created <see
-                 cref="T:System.Xml.XmlNodeList" />
+                 class and pass the previously created <see cref="T:System.Xml.XmlNodeList" />
 
                 
 
-                 object to the <see
-                 cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.LoadInnerXml(System.Xml.XmlNodeList)" />
+                 object to the <see cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.LoadInnerXml(System.Xml.XmlNodeList)" />
 
                 
 
@@ -472,13 +437,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Parses the specified <see
-             cref="T:System.Xml.XmlNodeList" />
+            >Parses the specified <see cref="T:System.Xml.XmlNodeList" />
 
             
 
-             object as transform-specific content of a &lt;Transform&gt; element and configures the internal state of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+             object as transform-specific content of a &lt;Transform&gt; element and configures the internal state of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
             
 
@@ -486,17 +449,19 @@
           >
         </summary>
         <param name="nodeList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlNodeList" />
+          An <see cref="T:System.Xml.XmlNodeList" />
 
           
 
-           object to load into the current <see
-           cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+           object to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
           
 
@@ -526,46 +491,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.LoadInput(System.Object)" />
+            >Use the <see cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.LoadInput(System.Object)" />
 
             
 
-             method to initialize an <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+             method to initialize an <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
             
 
-             object to the value of an XPath transform using an <see
-             cref="T:System.IO.Stream" />
+             object to the value of an XPath transform using an <see cref="T:System.IO.Stream" />
 
             
 
-            , <see
-             cref="T:System.Xml.XmlDocument" />
+            , <see cref="T:System.Xml.XmlDocument" />
 
             
 
-            , or <see
-             cref="T:System.Xml.XmlNodeList" />
+            , or <see cref="T:System.Xml.XmlNodeList" />
 
             
 
-             object.  For information about initializing an <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+             object.  For information about initializing an <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
             
 
-             object using an XPath transform string, see the <see
-             cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.LoadInnerXml(System.Xml.XmlNodeList)" />
+             object using an XPath transform string, see the <see cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.LoadInnerXml(System.Xml.XmlNodeList)" />
 
             
 
              method.</para
           >
           <para
-            >The type of the input object must be one of the types in the <see
-             cref="P:System.Security.Cryptography.Xml.XmlDsigXPathTransform.InputTypes" />
+            >The type of the input object must be one of the types in the <see cref="P:System.Security.Cryptography.Xml.XmlDsigXPathTransform.InputTypes" />
 
             
 
@@ -575,8 +532,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads the specified input into the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+            >Loads the specified input into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
             
 
@@ -584,12 +540,15 @@
           >
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The input to load into the current <see
-           cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+          The input to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
           
 
@@ -614,10 +573,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Type[]" />
-        </value>
+        <value>a <see cref="T:System.Type[]" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
@@ -625,8 +581,7 @@
 
             
 
-             is the only valid output type for <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+             is the only valid output type for <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
             
 
@@ -636,13 +591,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of types that are possible outputs from the <see
-             cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.GetOutput" />
+            >Gets an array of types that are possible outputs from the <see cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.GetOutput" />
 
             
 
-             methods of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+             methods of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
 
             
 

@@ -42,8 +42,7 @@
     <example>
       <para
         >The following example shows a declarative request for full access to the
-      specified file. The <see
-         cref="F:System.Security.Permissions.SecurityAction.RequestMinimum" />
+      specified file. The <see cref="F:System.Security.Permissions.SecurityAction.RequestMinimum" />
 
         
 
@@ -66,8 +65,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Files and directories are specified using absolute paths. When accessing files, a security check is performed when the file is created or opened. The security check is not done again unless the file is closed and reopened. Checking permissions when the file is first accessed minimizes the impact of the security check on application performance because opening a file happens only once, while reading and writing can happen multiple times.</para>
       <para
-        >The scope of the declaration that is allowed depends on the <see
-         cref="T:System.Security.Permissions.SecurityAction" />
+        >The scope of the declaration that is allowed depends on the <see cref="T:System.Security.Permissions.SecurityAction" />
 
         
 
@@ -76,13 +74,11 @@
       <para>The security information declared by a security attribute is stored in the metadata of the attribute target and is accessed by the system at run time. Security attributes are used only for declarative security. For imperative security, use the corresponding permission class.</para>
       <block subset="none" type="note">
         <para
-          >Unrestricted <see
-           cref="T:System.Security.Permissions.FileIOPermission" />
+          >Unrestricted <see cref="T:System.Security.Permissions.FileIOPermission" />
 
           
 
-           grants permission for all paths within a file system, including multiple pathnames that can be used to access a single given file. To <see
-           cref="M:System.Security.CodeAccessPermission.Deny" />
+           grants permission for all paths within a file system, including multiple pathnames that can be used to access a single given file. To <see cref="M:System.Security.CodeAccessPermission.Deny" />
 
           
 
@@ -93,8 +89,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Allows security actions for <see
-         cref="T:System.Security.Permissions.FileIOPermission" />
+        >Allows security actions for <see cref="T:System.Security.Permissions.FileIOPermission" />
 
         
 
@@ -133,8 +128,7 @@
 
           
 
-           is not a valid <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+           is not a valid <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -143,13 +137,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.FileIOPermissionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.FileIOPermissionAttribute" />
 
             
 
-             class with the specified <see
-             cref="T:System.Security.Permissions.SecurityAction" />
+             class with the specified <see cref="T:System.Security.Permissions.SecurityAction" />
 
             
 
@@ -157,12 +149,15 @@
           >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+          One of the <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -224,8 +219,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property gets or sets the permitted access to all files on the local computer and network drives.</para>
           <para
-            >An individual <see
-             cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+            >An individual <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
             
 
@@ -262,8 +256,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Local files are files contained on the local computer. Any files that are not accessed through a network drive are local files.</para>
           <para
-            >An individual <see
-             cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+            >An individual <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
             
 
@@ -296,8 +289,7 @@
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.String" />
+            > A <see cref="T:System.String" />
 
             
 
@@ -336,8 +328,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property gets or sets access for a single file or directory. Use additional <see
-             cref="T:System.Security.Permissions.FileIOPermissionAttribute" />
+            >This property gets or sets access for a single file or directory. Use additional <see cref="T:System.Security.Permissions.FileIOPermissionAttribute" />
 
             
 
@@ -385,8 +376,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns a new <see
-             cref="T:System.Security.Permissions.FileIOPermission" />
+            >Creates and returns a new <see cref="T:System.Security.Permissions.FileIOPermission" />
 
             
 
@@ -396,8 +386,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.Permissions.FileIOPermission" />
+            >A <see cref="T:System.Security.Permissions.FileIOPermission" />
 
             
 
@@ -427,8 +416,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -445,13 +433,11 @@
           <para>Path discovery controls access to the information in the path itself. This helps protect sensitive information in the path, such as user names, as well as information about the directory structure revealed in the path. This value does not grant access to files or folders represented by the path.</para>
           <block subset="none" type="note">
             <para
-              >For performance reasons, <see
-               cref="P:System.Security.Permissions.FileIOPermissionAttribute.PathDiscovery" />
+              >For performance reasons, <see cref="P:System.Security.Permissions.FileIOPermissionAttribute.PathDiscovery" />
 
               
 
-               should be granted only to directories, not to files. For example, <see
-               cref="P:System.Security.Permissions.FileIOPermissionAttribute.PathDiscovery" />
+               should be granted only to directories, not to files. For example, <see cref="P:System.Security.Permissions.FileIOPermissionAttribute.PathDiscovery" />
 
               
 
@@ -487,8 +473,7 @@
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.String" />
+            > A <see cref="T:System.String" />
 
             
 
@@ -527,8 +512,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property gets or sets access for a single file or directory. Use additional <see
-             cref="T:System.Security.Permissions.FileIOPermissionAttribute" />
+            >This property gets or sets access for a single file or directory. Use additional <see cref="T:System.Security.Permissions.FileIOPermissionAttribute" />
 
             
 
@@ -561,38 +545,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property sets the <see
-             cref="P:System.Security.Permissions.FileIOPermissionAttribute.Append" />
+            >This property sets the <see cref="P:System.Security.Permissions.FileIOPermissionAttribute.Append" />
 
             
 
-            , <see
-             cref="P:System.Security.Permissions.FileIOPermissionAttribute.PathDiscovery" />
+            , <see cref="P:System.Security.Permissions.FileIOPermissionAttribute.PathDiscovery" />
 
             
 
-            , <see
-             cref="P:System.Security.Permissions.FileIOPermissionAttribute.Read" />
+            , <see cref="P:System.Security.Permissions.FileIOPermissionAttribute.Read" />
 
             
 
-            , and <see
-             cref="P:System.Security.Permissions.FileIOPermissionAttribute.Write" />
+            , and <see cref="P:System.Security.Permissions.FileIOPermissionAttribute.Write" />
 
             
 
-             properties for a single file or directory. Use additional <see
-             cref="T:System.Security.Permissions.FileIOPermissionAttribute" />
+             properties for a single file or directory. Use additional <see cref="T:System.Security.Permissions.FileIOPermissionAttribute" />
 
             
 
-             attributes to specify additional files and directories. The access rights are for file data only; they do not include the access control properties <see
-             cref="P:System.Security.Permissions.FileIOPermissionAttribute.ViewAccessControl" />
+             attributes to specify additional files and directories. The access rights are for file data only; they do not include the access control properties <see cref="P:System.Security.Permissions.FileIOPermissionAttribute.ViewAccessControl" />
 
             
 
-             and <see
-             cref="P:System.Security.Permissions.FileIOPermissionAttribute.ChangeAccessControl" />
+             and <see cref="P:System.Security.Permissions.FileIOPermissionAttribute.ChangeAccessControl" />
 
             
 
@@ -628,8 +605,7 @@
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.String" />
+            > A <see cref="T:System.String" />
 
             
 

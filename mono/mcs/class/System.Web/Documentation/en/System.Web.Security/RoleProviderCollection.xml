@@ -17,28 +17,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The role providers for an application are exposed as a read-only <see
-         cref="T:System.Web.Security.RoleProviderCollection" />
+        >The role providers for an application are exposed as a read-only <see cref="T:System.Web.Security.RoleProviderCollection" />
 
         
 
-         by the <see
-         cref="P:System.Web.Security.Roles.Providers" />
+         by the <see cref="P:System.Web.Security.Roles.Providers" />
 
         
 
-         property of the <see
-         cref="T:System.Web.Security.Roles" />
+         property of the <see cref="T:System.Web.Security.Roles" />
 
         
 
-         class. You can access a specific role provider in the collection by name and cast it as the specific provider type, such as <see
-         cref="T:System.Web.Security.SqlRoleProvider" />
+         class. You can access a specific role provider in the collection by name and cast it as the specific provider type, such as <see cref="T:System.Web.Security.SqlRoleProvider" />
 
         
 
-        . This enables you to manage role information from multiple data stores in a single application as well as access custom members of a role provider that are not part of the <see
-         cref="T:System.Web.Security.RoleProvider" />
+        . This enables you to manage role information from multiple data stores in a single application as well as access custom members of a role provider that are not part of the <see cref="T:System.Web.Security.RoleProvider" />
 
         
 
@@ -48,8 +43,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A collection of objects that inherit the <see
-         cref="T:System.Web.Security.RoleProvider" />
+        >A collection of objects that inherit the <see cref="T:System.Web.Security.RoleProvider" />
 
         
 
@@ -100,7 +94,11 @@
           <para>Adds a role provider to the collection.</para>
         </summary>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -129,8 +127,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses <see
-             cref="M:System.Collections.ArrayList.CopyTo(System.Array,System.Int32)" />
+            >This method uses <see cref="M:System.Collections.ArrayList.CopyTo(System.Array,System.Int32)" />
 
             
 
@@ -142,29 +139,34 @@
           <para>Copies the role provider collection to a one-dimensional array.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A one-dimensional <see
-           cref="T:System.Array" />
+          A one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from the <see
-           cref="T:System.Web.Security.RoleProviderCollection" />
+           that is the destination of the elements copied from the <see cref="T:System.Web.Security.RoleProviderCollection" />
 
           
 
           . The array must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 

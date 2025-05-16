@@ -18,23 +18,19 @@
   <Docs>
     <summary>Provides information about a Unix user.</summary>
     <remarks>
-      <para
-        >
-        The <see
-         cref="T:Mono.Unix.UnixUserInfo" />
+      <para>
+        The <see cref="T:Mono.Unix.UnixUserInfo" />
 
         
 
          type is a FxDG-compliant
-        wrapper over the <see
-         cref="T:Mono.Unix.Native.Passwd" />
+        wrapper over the <see cref="T:Mono.Unix.Native.Passwd" />
 
         
 
          native type.
         It represents a single entry from the local password database, 
-        typically <c
-        >/etc/passwd</c>
+        typically <c>/etc/passwd</c>
 
         
 
@@ -44,24 +40,20 @@
       <para>
         Unix users are part of the file system access rules.  
       </para>
-      <para
-        >
+      <para>
         Access to file system objects 
-        (as represented by <see
-         cref="T:Mono.Unix.UnixFileSystemInfo" />
+        (as represented by <see cref="T:Mono.Unix.UnixFileSystemInfo" />
 
         
 
         )
         is controlled by the file system access permissions, 
-        <see
-         cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
 
         
 
         .
-        <see
-         cref="T:Mono.Unix.FileAccessPermissions" />
+        <see cref="T:Mono.Unix.FileAccessPermissions" />
 
         
 
@@ -70,21 +62,16 @@
         everyone else (other).
       </para
       >
-      <para
-        >
+      <para>
         Access by the file's owner is controlled by the bits specified by
-        <c
-
-          >
-        (<see
-           cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
+        <c>
+        (<see cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
 
           
 
           
         &amp; 
-        <see
-           cref="F:Mono.Unix.FileAccessPermissions.UserReadWriteExecute" />
+        <see cref="F:Mono.Unix.FileAccessPermissions.UserReadWriteExecute" />
 
           
 
@@ -120,10 +107,8 @@
         <Parameter Name="passwd" Type="Mono.Unix.Native.Passwd" />
       </Parameters>
       <Docs>
-        <param name="passwd"
-          >
-          A <see
-           cref="T:Mono.Unix.Native.Passwd" />
+        <param name="passwd">
+          A <see cref="T:Mono.Unix.Native.Passwd" />
 
           
 
@@ -131,17 +116,14 @@
           to get information about.
         </param
         >
-        <summary
-          >
+        <summary>
           Constructs and initializes a new instance of 
-          <see
-           cref="T:Mono.Unix.UnixUserInfo" />
+          <see cref="T:Mono.Unix.UnixUserInfo" />
 
           
 
            by using the specified
-          <see
-           cref="T:Mono.Unix.Native.Passwd" />
+          <see cref="T:Mono.Unix.Native.Passwd" />
 
           
 
@@ -149,17 +131,14 @@
         </summary
         >
         <remarks>
-          <para
-            >
-            This constructor wraps <paramref
-             name="passwd" />
+          <para>
+            This constructor wraps <paramref name="passwd" />
 
             
 
             ,
             providing framework-compliant naming conventions over the native
-            <see
-             cref="T:Mono.Unix.Native.Passwd" />
+            <see cref="T:Mono.Unix.Native.Passwd" />
 
             
 
@@ -185,10 +164,8 @@
         <Parameter Name="user" Type="System.Int64" />
       </Parameters>
       <Docs>
-        <param name="user"
-          >
-          A <see
-           cref="T:System.Int64" />
+        <param name="user">
+          A <see cref="T:System.Int64" />
 
           
 
@@ -196,11 +173,9 @@
           information about.
         </param
         >
-        <summary
-          >
+        <summary>
           Constructs and initializes a new instance of 
-          <see
-           cref="T:Mono.Unix.UnixUserInfo" />
+          <see cref="T:Mono.Unix.UnixUserInfo" />
 
           
 
@@ -214,10 +189,8 @@
             password database.
           </para>
         </remarks>
-        <exception cref="T:System.ArgumentException"
-          >
-          The user id <paramref
-           name="user" />
+        <exception cref="T:System.ArgumentException">
+          The user id <paramref name="user" />
 
           
 
@@ -244,10 +217,8 @@
         <Parameter Name="user" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="user"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="user">
+          A <see cref="T:System.String" />
 
           
 
@@ -255,11 +226,9 @@
           information about.
         </param
         >
-        <summary
-          >
+        <summary>
           Constructs and initializes a new instance of 
-          <see
-           cref="T:Mono.Unix.UnixUserInfo" />
+          <see cref="T:Mono.Unix.UnixUserInfo" />
 
           
 
@@ -273,10 +242,8 @@
             password database.
           </para>
         </remarks>
-        <exception cref="T:System.ArgumentException"
-          >
-          The user name <paramref
-           name="user" />
+        <exception cref="T:System.ArgumentException">
+          The user name <paramref name="user" />
 
           
 
@@ -308,10 +275,8 @@
         <Parameter Name="user" Type="System.UInt32" />
       </Parameters>
       <Docs>
-        <param name="user"
-          >
-          A <see
-           cref="T:System.UInt32" />
+        <param name="user">
+          A <see cref="T:System.UInt32" />
 
           
 
@@ -319,11 +284,9 @@
           information about.
         </param
         >
-        <summary
-          >
+        <summary>
           Constructs and initializes a new instance of 
-          <see
-           cref="T:Mono.Unix.UnixUserInfo" />
+          <see cref="T:Mono.Unix.UnixUserInfo" />
 
           
 
@@ -337,10 +300,8 @@
             password database.
           </para>
         </remarks>
-        <exception cref="T:System.ArgumentException"
-          >
-          The user id <paramref
-           name="user" />
+        <exception cref="T:System.ArgumentException">
+          The user id <paramref name="user" />
 
           
 
@@ -419,10 +380,8 @@
       <Parameters />
       <Docs>
         <summary>Gets all local users defined in the local password database.</summary>
-        <returns
-          >
-          A <see
-           cref="T:Mono.Unix.UnixUserInfo" />
+        <returns>
+          A <see cref="T:Mono.Unix.UnixUserInfo" />
 
           
 
@@ -431,17 +390,14 @@
         </returns
         >
         <remarks></remarks>
-        <exception cref="T:Mono.Unix.UnixIOException"
-          >
+        <exception cref="T:Mono.Unix.UnixIOException">
           Insufficient memory to allocate the 
-          <see
-           cref="T:Mono.Unix.Native.Passwd" />
+          <see cref="T:Mono.Unix.Native.Passwd" />
 
           
 
            structure.
-          [<see
-           cref="F:Mono.Unix.Native.Errno.ENOMEM" />
+          [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />
 
           
 
@@ -468,10 +424,8 @@
       <Parameters />
       <Docs>
         <summary>Gets the login name of the user executing this process.</summary>
-        <returns
-          >
-          A <see
-           cref="T:System.String" />
+        <returns>
+          A <see cref="T:System.String" />
 
           
 
@@ -480,10 +434,8 @@
         </returns
         >
         <remarks>
-          <para
-            >
-            It's generally more useful to use the <c
-            >LOGNAME</c>
+          <para>
+            It's generally more useful to use the <c>LOGNAME</c>
 
             
 
@@ -514,10 +466,8 @@
       <Parameters />
       <Docs>
         <summary>Get's information about the process' real user.</summary>
-        <returns
-          >
-          A <see
-           cref="T:Mono.Unix.UnixUserInfo" />
+        <returns>
+          A <see cref="T:Mono.Unix.UnixUserInfo" />
 
           
 
@@ -546,10 +496,8 @@
       <Parameters />
       <Docs>
         <summary>Gets the real user id of the process.</summary>
-        <returns
-          >
-          A <see
-           cref="T:System.Int64" />
+        <returns>
+          A <see cref="T:System.Int64" />
 
           
 
@@ -578,10 +526,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets information about the user's group.</summary>
-        <value
-          >
-          A <see
-           cref="T:Mono.Unix.UnixGroupInfo" />
+        <value>
+          A <see cref="T:Mono.Unix.UnixGroupInfo" />
 
           
 
@@ -590,16 +536,13 @@
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             This is equivalent to 
-            <see
-             cref="C:Mono.Unix.UnixGroupInfo" />
+            <see cref="C:Mono.Unix.UnixGroupInfo" />
 
             
 
-            (<see
-             cref="P:Mono.Unix.UnixUserInfo.GroupId" />
+            (<see cref="P:Mono.Unix.UnixUserInfo.GroupId" />
 
             
 
@@ -623,10 +566,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the user's group id.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.Int64" />
+        <value>
+          A <see cref="T:System.Int64" />
 
           
 
@@ -634,24 +575,20 @@
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             Access to file system objects 
-            (as represented by <see
-             cref="T:Mono.Unix.UnixFileSystemInfo" />
+            (as represented by <see cref="T:Mono.Unix.UnixFileSystemInfo" />
 
             
 
             )
             is controlled by the file system access permissions, 
-            <see
-             cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
+            <see cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
 
             
 
             .
-            <see
-             cref="T:Mono.Unix.FileAccessPermissions" />
+            <see cref="T:Mono.Unix.FileAccessPermissions" />
 
             
 
@@ -660,21 +597,16 @@
             everyone else (other).
           </para
           >
-          <para
-            >
+          <para>
             Access by the file's owner group is controlled by the bits
-            specified by <c
-
-              >
-            (<see
-               cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
+            specified by <c>
+            (<see cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
 
               
 
               
             &amp; 
-            <see
-               cref="F:Mono.Unix.FileAccessPermissions.GroupReadWriteExecute" />
+            <see cref="F:Mono.Unix.FileAccessPermissions.GroupReadWriteExecute" />
 
               
 
@@ -706,10 +638,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the users's group's name.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.String" />
+        <value>
+          A <see cref="T:System.String" />
 
           
 
@@ -718,16 +648,13 @@
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             This is equivalent to calling
-            <see
-             cref="P:Mono.Unix.UnixUserInfo.Group" />
+            <see cref="P:Mono.Unix.UnixUserInfo.Group" />
 
             
 
-            .<see
-             cref="P:Mono.Unix.UnixGroupInfo.GroupName" />
+            .<see cref="P:Mono.Unix.UnixGroupInfo.GroupName" />
 
             
 
@@ -751,10 +678,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the user's home directory.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.String" />
+        <value>
+          A <see cref="T:System.String" />
 
           
 
@@ -780,10 +705,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the user's password.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.String" />
+        <value>
+          A <see cref="T:System.String" />
 
           
 
@@ -791,10 +714,8 @@
         </value
         >
         <remarks>
-          <para
-            >
-            In years past, this <i
-            >used</i>
+          <para>
+            In years past, this <i>used</i>
 
             
 
@@ -825,10 +746,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the user's real name.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.String" />
+        <value>
+          A <see cref="T:System.String" />
 
           
 
@@ -855,10 +774,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the user's login shell program.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.String" />
+        <value>
+          A <see cref="T:System.String" />
 
           
 
@@ -887,26 +804,21 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary
-          >
-          Converts this <see
-           cref="T:Mono.Unix.UnixUserInfo" />
+        <summary>
+          Converts this <see cref="T:Mono.Unix.UnixUserInfo" />
 
           
 
            instance into
-          an equivalent <see
-           cref="T:Mono.Unix.Native.Passwd" />
+          an equivalent <see cref="T:Mono.Unix.Native.Passwd" />
 
           
 
            instance.
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:Mono.Unix.Native.Passwd" />
+        <returns>
+          A <see cref="T:Mono.Unix.Native.Passwd" />
 
           
 
@@ -953,10 +865,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the user's id.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.Int64" />
+        <value>
+          A <see cref="T:System.Int64" />
 
           
 
@@ -981,10 +891,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the user's login name.</summary>
-        <value
-          >
-          A <see
-           cref="T:System.String" />
+        <value>
+          A <see cref="T:System.String" />
 
           
 

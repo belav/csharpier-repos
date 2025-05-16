@@ -25,36 +25,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
+        >The <see cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
 
         
 
-         class is derived from the <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+         class is derived from the <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
         
 
-         class and is used to create a button control on a Web page that resets form controls to their initial values. The <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
+         class and is used to create a button control on a Web page that resets form controls to their initial values. The <see cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
 
         
 
-         control is often used with the <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />
+         control is often used with the <see cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />
 
         
 
          control, which is used to create a button control that submits the form.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
 
         
 
-        , see the <see
-         cref="Overload:System.Web.UI.HtmlControls.HtmlInputReset.#ctor" />
+        , see the <see cref="Overload:System.Web.UI.HtmlControls.HtmlInputReset.#ctor" />
 
         
 
@@ -76,8 +70,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property value for an instance of <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
+            >The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
 
             
 
@@ -109,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
 
             
 
@@ -133,8 +125,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property value for an instance of <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
+            >The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
 
             
 
@@ -159,8 +150,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="type" />
+                  >The value of the <paramref name="type" />
 
                   
 
@@ -170,8 +160,7 @@
             </item>
           </list>
           <para
-            >Setting the <paramref
-             name="type" />
+            >Setting the <paramref name="type" />
 
             
 
@@ -181,8 +170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
 
             
 
@@ -190,7 +178,11 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -221,8 +213,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputReset.CausesValidation" />
+            >The <see cref="P:System.Web.UI.HtmlControls.HtmlInputReset.CausesValidation" />
 
             
 
@@ -232,8 +223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether validation is performed when the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
+            >Gets or sets a value that indicates whether validation is performed when the <see cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
 
             
 
@@ -264,8 +254,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.HtmlControls.HtmlInputReset.ServerClick" />
+            >The <see cref="E:System.Web.UI.HtmlControls.HtmlInputReset.ServerClick" />
 
             
 
@@ -275,8 +264,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
+            >Occurs when an <see cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
 
             
 
@@ -308,8 +296,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputReset.ValidationGroup" />
+            >The <see cref="P:System.Web.UI.HtmlControls.HtmlInputReset.ValidationGroup" />
 
             
 
@@ -319,8 +306,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the group of controls for which the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
+            >Gets or sets the group of controls for which the <see cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
 
             
 

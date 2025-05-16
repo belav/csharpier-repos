@@ -26,23 +26,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The values in the <see
-         cref="T:System.Runtime.InteropServices.RegistrationClassContext" />
+        >The values in the <see cref="T:System.Runtime.InteropServices.RegistrationClassContext" />
 
         
 
-         enumeration are used in the <paramref
-         name="classContext" />
+         enumeration are used in the <paramref name="classContext" />
 
         
 
-         parameter of the <see
-         cref="M:System.Runtime.InteropServices.RegistrationServices.RegisterTypeForComClients(System.Type,System.Runtime.InteropServices.RegistrationClassContext,System.Runtime.InteropServices.RegistrationConnectionType)" />
+         parameter of the <see cref="M:System.Runtime.InteropServices.RegistrationServices.RegisterTypeForComClients(System.Type,System.Runtime.InteropServices.RegistrationClassContext,System.Runtime.InteropServices.RegistrationConnectionType)" />
 
         
 
-         method. These values are the same as those defined in the COM CLSCTX enumeration, which is used as the <paramref
-         name="dwClsContext" />
+         method. These values are the same as those defined in the COM CLSCTX enumeration, which is used as the <paramref name="dwClsContext" />
 
         
 

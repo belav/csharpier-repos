@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.Metadata.SoapAttribute" />
+        >The <see cref="T:System.Runtime.Remoting.Metadata.SoapAttribute" />
 
         
 
@@ -59,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Runtime.Remoting.Metadata.SoapAttribute" />
+            >Creates an instance of <see cref="T:System.Runtime.Remoting.Metadata.SoapAttribute" />
 
             
 
@@ -106,13 +104,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can get or set the value of the <see
-             cref="F:System.Runtime.Remoting.Metadata.SoapAttribute.ProtXmlNamespace" />
+            >You can get or set the value of the <see cref="F:System.Runtime.Remoting.Metadata.SoapAttribute.ProtXmlNamespace" />
 
             
 
-             field through the public <see
-             cref="P:System.Runtime.Remoting.Metadata.SoapAttribute.XmlNamespace" />
+             field through the public <see cref="P:System.Runtime.Remoting.Metadata.SoapAttribute.XmlNamespace" />
 
             
 
@@ -141,8 +137,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You do not need to use the <see
-             cref="F:System.Runtime.Remoting.Metadata.SoapAttribute.ReflectInfo" />
+            >You do not need to use the <see cref="F:System.Runtime.Remoting.Metadata.SoapAttribute.ReflectInfo" />
 
             
 
@@ -152,8 +147,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A reflection object used by attribute classes derived from the <see
-             cref="T:System.Runtime.Remoting.Metadata.SoapAttribute" />
+            >A reflection object used by attribute classes derived from the <see cref="T:System.Runtime.Remoting.Metadata.SoapAttribute" />
 
             
 
@@ -179,8 +173,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For example, if a field FieldA of an object ObjectB is qualified with the SoapFieldAttribute(UseAttribute=true) attribute, FieldA will be serialized as &lt;ObjectB&gt;&lt;FieldA&gt;5&lt;/FieldA&gt;&lt;/ObjectB&gt;. If the <see
-             cref="P:System.Runtime.Remoting.Metadata.SoapAttribute.UseAttribute" />
+            >For example, if a field FieldA of an object ObjectB is qualified with the SoapFieldAttribute(UseAttribute=true) attribute, FieldA will be serialized as &lt;ObjectB&gt;&lt;FieldA&gt;5&lt;/FieldA&gt;&lt;/ObjectB&gt;. If the <see cref="P:System.Runtime.Remoting.Metadata.SoapAttribute.UseAttribute" />
 
             
 

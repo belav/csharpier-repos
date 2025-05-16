@@ -26,23 +26,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.RSA" />
+        >The <see cref="T:System.Security.Cryptography.RSA" />
 
         
 
-         class exposes an <see
-         cref="M:System.Security.Cryptography.RSA.ExportParameters(System.Boolean)" />
+         class exposes an <see cref="M:System.Security.Cryptography.RSA.ExportParameters(System.Boolean)" />
 
         
 
-         method that enables you to retrieve the raw RSA key in the form of an <see
-         cref="T:System.Security.Cryptography.RSAParameters" />
+         method that enables you to retrieve the raw RSA key in the form of an <see cref="T:System.Security.Cryptography.RSAParameters" />
 
         
 
-         structure. Understanding the contents of this structure requires familiarity with how the <see
-         cref="T:System.Security.Cryptography.RSA" />
+         structure. Understanding the contents of this structure requires familiarity with how the <see cref="T:System.Security.Cryptography.RSA" />
 
         
 
@@ -52,125 +48,103 @@
         <h2>RSA Algorithm</h2>
       </format>
       <para
-        >To generate a key pair, you start by creating two large prime numbers named <math
-        >p</math>
+        >To generate a key pair, you start by creating two large prime numbers named <math>p</math>
 
         
 
-         and <math
-        >q</math>
+         and <math>q</math>
 
         
 
-        . These numbers are multiplied and the result is called <math
-        >n</math>
+        . These numbers are multiplied and the result is called <math>n</math>
 
         
 
-        . Because <math
-        >p</math>
+        . Because <math>p</math>
 
         
 
-         and <math
-        >q</math>
+         and <math>q</math>
 
         
 
-         are both prime numbers, the only factors of <math
-        >n</math>
+         are both prime numbers, the only factors of <math>n</math>
 
         
 
-         are 1, <math
-        >p</math>
+         are 1, <math>p</math>
 
         
 
-        , <math
-        >q</math>
+        , <math>q</math>
 
         
 
-        , and <math
-        >n</math>
+        , and <math>n</math>
 
         
 
         . </para
       >
       <para
-        >If we consider only numbers that are less than <math
-        >n</math>
+        >If we consider only numbers that are less than <math>n</math>
 
         
 
-        , the count of numbers that are relatively prime to <math
-        >n</math>
+        , the count of numbers that are relatively prime to <math>n</math>
 
         
 
-        , that is, have no factors in common with <math
-        >n</math>
+        , that is, have no factors in common with <math>n</math>
 
         
 
-        , equals <math
-        >(p - 1)(q - 1)</math>
+        , equals <math>(p - 1)(q - 1)</math>
 
         
 
         .</para
       >
       <para
-        >Now you choose a number <math
-        >e</math>
+        >Now you choose a number <math>e</math>
 
         
 
-        , which is relatively prime to the value you calculated. The public key is now represented as <math
-        >{e, n}</math>
-
-        
-
-        .</para
-      >
-      <para
-        >To create the private key, you must calculate <math
-        >d</math>
-
-        
-
-        , which is a number such that <math
-        >(d)(e) mod (p - 1)(q - 1) = 1</math>
-
-        
-
-        . In accordance with the Euclidean algorithm, the private key is now <math
-        >{d, n}</math>
+        , which is relatively prime to the value you calculated. The public key is now represented as <math>{e, n}</math>
 
         
 
         .</para
       >
       <para
-        >Encryption of plaintext <math
-        >m</math>
+        >To create the private key, you must calculate <math>d</math>
 
         
 
-         to ciphertext <math
-        >c</math>
+        , which is a number such that <math>(d)(e) mod (p - 1)(q - 1) = 1</math>
 
         
 
-         is defined as <math
-        >c = (m ^ e) mod n</math>
+        . In accordance with the Euclidean algorithm, the private key is now <math>{d, n}</math>
 
         
 
-        . Decryption would then be defined as <math
-        >m = (c ^ d) mod n</math>
+        .</para
+      >
+      <para
+        >Encryption of plaintext <math>m</math>
+
+        
+
+         to ciphertext <math>c</math>
+
+        
+
+         is defined as <math>c = (m ^ e) mod n</math>
+
+        
+
+        . Decryption would then be defined as <math>m = (c ^ d) mod n</math>
 
         
 
@@ -180,8 +154,7 @@
         <h2>Summary of Fields</h2>
       </format>
       <para
-        >Section A.1.2 of the <see
-         cref="http://go.microsoft.com/fwlink/?LinkId=113155"
+        >Section A.1.2 of the <see cref="http://go.microsoft.com/fwlink/?LinkId=113155"
           >PKCS #1: RSA Cryptography Standard</see
         >
 
@@ -190,13 +163,12 @@
          on the RSA Laboratories Web site defines a format for RSA private keys.</para
       >
       <para
-        >The following table summarizes the fields of the <see
-         cref="T:System.Security.Cryptography.RSAParameters" />
+        >The following table summarizes the fields of the <see cref="T:System.Security.Cryptography.RSAParameters" />
 
         
 
          structure. The third column provides the corresponding field in section A.1.2 of <see
-         cref="http://go.microsoft.com/fwlink/?LinkId=113155"
+          cref="http://go.microsoft.com/fwlink/?LinkId=113155"
           >PKCS #1: RSA Cryptography Standard</see
         >
 
@@ -231,13 +203,11 @@
             </para>
           </term>
           <description>
-            <para>
-              <math>d</math>
+            <para><math>d</math>
 
               
 
-              , the private exponent</para
-            >
+              , the private exponent</para>
           </description>
           <description>
             <para>privateExponent</para>
@@ -280,13 +250,11 @@
             </para>
           </term>
           <description>
-            <para>
-              <math>e</math>
+            <para><math>e</math>
 
               
 
-              , the public exponent</para
-            >
+              , the public exponent</para>
           </description>
           <description>
             <para>publicExponent</para>
@@ -354,43 +322,35 @@
         </item>
       </list>
       <para
-        >The security of RSA derives from the fact that, given the public key <math
-        >{ e, n }</math>
+        >The security of RSA derives from the fact that, given the public key <math>{ e, n }</math>
 
         
 
-        , it is computationally infeasible to calculate <math
-        >d</math>
+        , it is computationally infeasible to calculate <math>d</math>
 
         
 
-        , either directly or by factoring <math
-        >n</math>
+        , either directly or by factoring <math>n</math>
 
         
 
-         into <math
-        >p</math>
+         into <math>p</math>
 
         
 
-         and <math
-        >q</math>
+         and <math>q</math>
 
         
 
-        . Therefore, any part of the key related to <math
-        >d</math>
+        . Therefore, any part of the key related to <math>d</math>
 
         
 
-        , <math
-        >p</math>
+        , <math>p</math>
 
         
 
-        , or <math
-        >q</math>
+        , or <math>q</math>
 
         
 
@@ -401,13 +361,11 @@
 
         
 
-         and ask for only the public key information, this is why you will receive only <see
-         cref="F:System.Security.Cryptography.RSAParameters.Exponent" />
+         and ask for only the public key information, this is why you will receive only <see cref="F:System.Security.Cryptography.RSAParameters.Exponent" />
 
         
 
-         and <see
-         cref="F:System.Security.Cryptography.RSAParameters.Modulus" />
+         and <see cref="F:System.Security.Cryptography.RSAParameters.Modulus" />
 
         
 
@@ -418,8 +376,7 @@
 
         
 
-         is not encrypted in any way, so you must be careful when you use it with the private key information. In fact, none of the fields that contain private key information can be serialized. If you try to serialize an <see
-         cref="T:System.Security.Cryptography.RSAParameters" />
+         is not encrypted in any way, so you must be careful when you use it with the private key information. In fact, none of the fields that contain private key information can be serialized. If you try to serialize an <see cref="T:System.Security.Cryptography.RSAParameters" />
 
         
 
@@ -429,8 +386,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the standard parameters for the <see
-         cref="T:System.Security.Cryptography.RSA" />
+        >Represents the standard parameters for the <see cref="T:System.Security.Cryptography.RSA" />
 
         
 
@@ -457,8 +413,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the D parameter for the <see
-             cref="T:System.Security.Cryptography.RSA" />
+            >Represents the D parameter for the <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -485,8 +440,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the DP parameter for the <see
-             cref="T:System.Security.Cryptography.RSA" />
+            >Represents the DP parameter for the <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -513,8 +467,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the DQ parameter for the <see
-             cref="T:System.Security.Cryptography.RSA" />
+            >Represents the DQ parameter for the <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -541,8 +494,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the Exponent parameter for the <see
-             cref="T:System.Security.Cryptography.RSA" />
+            >Represents the Exponent parameter for the <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -569,8 +521,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the InverseQ parameter for the <see
-             cref="T:System.Security.Cryptography.RSA" />
+            >Represents the InverseQ parameter for the <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -597,8 +548,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the Modulus parameter for the <see
-             cref="T:System.Security.Cryptography.RSA" />
+            >Represents the Modulus parameter for the <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -625,8 +575,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the P parameter for the <see
-             cref="T:System.Security.Cryptography.RSA" />
+            >Represents the P parameter for the <see cref="T:System.Security.Cryptography.RSA" />
 
             
 
@@ -653,8 +602,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the Q parameter for the <see
-             cref="T:System.Security.Cryptography.RSA" />
+            >Represents the Q parameter for the <see cref="T:System.Security.Cryptography.RSA" />
 
             
 

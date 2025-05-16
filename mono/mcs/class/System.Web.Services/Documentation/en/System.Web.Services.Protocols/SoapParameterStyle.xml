@@ -15,23 +15,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Services.Protocols.SoapParameterStyle" />
+        >The <see cref="T:System.Web.Services.Protocols.SoapParameterStyle" />
 
         
 
-         can be set when applying a <see
-         cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" />
+         can be set when applying a <see cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" />
 
         
 
-         to an XML Web service method or a method of a client proxy class. The <see
-         cref="T:System.Web.Services.Protocols.SoapParameterStyle" />
+         to an XML Web service method or a method of a client proxy class. The <see cref="T:System.Web.Services.Protocols.SoapParameterStyle" />
 
         
 
-         can also be set by applying a <see
-         cref="T:System.Web.Services.Protocols.SoapDocumentServiceAttribute" />
+         can also be set by applying a <see cref="T:System.Web.Services.Protocols.SoapDocumentServiceAttribute" />
 
         
 
@@ -75,23 +71,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies using the default <see
-             cref="T:System.Web.Services.Protocols.SoapParameterStyle" />
+            >Specifies using the default <see cref="T:System.Web.Services.Protocols.SoapParameterStyle" />
 
             
 
-             for the XML Web service. The default for an XML Web service can be set by applying a <see
-             cref="T:System.Web.Services.Protocols.SoapDocumentServiceAttribute" />
+             for the XML Web service. The default for an XML Web service can be set by applying a <see cref="T:System.Web.Services.Protocols.SoapDocumentServiceAttribute" />
 
             
 
-             to the class implementing the XML Web service. If a <see
-             cref="T:System.Web.Services.Protocols.SoapDocumentServiceAttribute" />
+             to the class implementing the XML Web service. If a <see cref="T:System.Web.Services.Protocols.SoapDocumentServiceAttribute" />
 
             
 
-             is not applied to the class implementing the XML Web service, the default is <see
-             cref="F:System.Web.Services.Protocols.SoapParameterStyle.Wrapped" />
+             is not applied to the class implementing the XML Web service, the default is <see cref="F:System.Web.Services.Protocols.SoapParameterStyle.Wrapped" />
 
             
 

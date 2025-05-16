@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
 <clause number="14.5" title="Primary expressions">
   <paragraph
-    >Primary expressions include the simplest forms of expressions. <grammar_production
-    >
+    >Primary expressions include the simplest forms of expressions. <grammar_production>
       <name>
         <non_terminal where="14.5">primary-expression</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="14.5.10.2">array-creation-expression</non_terminal>
       </rhs>
       <rhs>
@@ -24,8 +22,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="9.4.4">literal</non_terminal>
       </rhs>
       <rhs>
@@ -76,23 +73,25 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >Primary expressions are divided between <non_terminal
-     where="14.5.10.2">array-creation-expression</non_terminal>
-
-    
-
-    s and  <non_terminal
-     where="14.5">primary-no-array-creation-expression</non_terminal>
-
-    
-
-    s. Treating <non_terminal
-     where="14.5.10.2">array-creation-expression</non_terminal>
-
-    
-
-     in this way, rather than listing it along with the other simple expression forms, enables the grammar to disallow potentially confusing code such as <code_example
+    >Primary expressions are divided between <non_terminal where="14.5.10.2"
+      >array-creation-expression</non_terminal
     >
+
+    
+
+    s and  <non_terminal where="14.5"
+      >primary-no-array-creation-expression</non_terminal
+    >
+
+    
+
+    s. Treating <non_terminal where="14.5.10.2"
+      >array-creation-expression</non_terminal
+    >
+
+    
+
+     in this way, rather than listing it along with the other simple expression forms, enables the grammar to disallow potentially confusing code such as <code_example>
       <![CDATA[
 object o = new int[3][1];  
 ]]>
@@ -100,8 +99,7 @@ object o = new int[3][1];
 
     
 
-    which would otherwise be interpreted as <code_example
-    >
+    which would otherwise be interpreted as <code_example>
       <![CDATA[
 object o = (new int[3])[1];  
 ]]>

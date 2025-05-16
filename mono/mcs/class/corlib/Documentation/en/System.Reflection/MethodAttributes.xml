@@ -36,8 +36,7 @@
   <Docs>
     <remarks>
       <para
-        >This enumeration is used by the <see
-         cref="P:System.Reflection.MethodBase.Attributes" />
+        >This enumeration is used by the <see cref="P:System.Reflection.MethodBase.Attributes" />
 
         
 

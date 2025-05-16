@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Describes the binding types that are used in <see
-         cref="T:System.Linq.Expressions.MemberInitExpression" />
+        >Describes the binding types that are used in <see cref="T:System.Linq.Expressions.MemberInitExpression" />
 
         
 
@@ -67,13 +66,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A binding that represents initializing a member of type <see
-             cref="T:System.Collections.IList" />
+            >A binding that represents initializing a member of type <see cref="T:System.Collections.IList" />
 
             
 
-             or <see
-             cref="T:System.Collections.Generic.ICollection`1" />
+             or <see cref="T:System.Collections.Generic.ICollection`1" />
 
             
 

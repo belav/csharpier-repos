@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class corresponds to the <format
-         type="text/html">
+        >This class corresponds to the <format type="text/html">
           <a href="856bf57d-1c63-46c7-a178-03d97b0a4149"
             >Add Element for ConnectionManagement (Network Settings)</a
           >
@@ -63,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Configuration.ConnectionManagementElement" />
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.ConnectionManagementElement" />
 
             
 
@@ -96,23 +94,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see
-             cref="P:System.Net.Configuration.ConnectionManagementElement.Address" />
+            >This constructor sets the <see cref="P:System.Net.Configuration.ConnectionManagementElement.Address" />
 
             
 
-             property to <paramref
-             name="address" />
+             property to <paramref name="address" />
 
             
 
-             and the <see
-             cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" />
+             and the <see cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" />
 
             
 
-             property to <paramref
-             name="maxConnection" />
+             property to <paramref name="maxConnection" />
 
             
 
@@ -122,8 +116,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Configuration.ConnectionManagementElement" />
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.ConnectionManagementElement" />
 
             
 
@@ -131,19 +124,26 @@
           >
         </summary>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string that identifies the address of a remote computer.</param
         >
         <param name="maxConnection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer that identifies the maximum number of connections allowed to <paramref
-           name="address" />
+          An integer that identifies the maximum number of connections allowed to <paramref name="address" />
 
           
 
@@ -174,8 +174,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You can set this property using an asterisk (*) to set the default number of connections for unspecified computers.</para>
           <para
-            >This property identifies one or more remote computers and the <see
-             cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" />
+            >This property identifies one or more remote computers and the <see cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" />
 
             
 
@@ -210,36 +209,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property specifies how many simultaneous connections are allowed between the local computer and the remote computer. The remote computer is specified using the <see
-             cref="P:System.Net.Configuration.ConnectionManagementElement.Address" />
+            >This property specifies how many simultaneous connections are allowed between the local computer and the remote computer. The remote computer is specified using the <see cref="P:System.Net.Configuration.ConnectionManagementElement.Address" />
 
             
 
              property.</para
           >
           <para
-            >The <see
-             cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" />
+            >The <see cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" />
 
             
 
-             property is per <see
-             cref="P:System.Net.WebRequest.ConnectionGroupName" />
+             property is per <see cref="P:System.Net.WebRequest.ConnectionGroupName" />
 
             
 
-            . If an application is not changing <see
-             cref="P:System.Net.WebRequest.ConnectionGroupName" />
+            . If an application is not changing <see cref="P:System.Net.WebRequest.ConnectionGroupName" />
 
             
 
-             from the default, then the <see
-             cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" />
+             from the default, then the <see cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" />
 
             
 
-             property applies to the entire application domain. If only a single application domain is running in your application, then the <see
-             cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" />
+             property applies to the entire application domain. If only a single application domain is running in your application, then the <see cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" />
 
             
 

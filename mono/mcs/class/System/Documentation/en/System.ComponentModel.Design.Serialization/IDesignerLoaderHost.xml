@@ -33,13 +33,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An <see
-         cref="T:System.ComponentModel.Design.IDesignerHost" />
+        >An <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
         
 
-         can implement this interface to enable support for loading by a <see
-         cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
+         can implement this interface to enable support for loading by a <see cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
 
         
 
@@ -47,8 +45,7 @@
       >
       <para>The designer loader informs the designer host that it needs to invoke a load or reload so that the designer host can perform additional tasks at these times.</para>
       <para
-        >This class is isolated from <see
-         cref="T:System.ComponentModel.Design.IDesignerHost" />
+        >This class is isolated from <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
         
 
@@ -88,26 +85,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
+            >The <see cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
 
             
 
              that loads the design document calls this method to indicate that the load terminated.</para
           >
           <para
-            >If errors are encountered during loading, they must be passed in the <paramref
-             name="errorCollection" />
+            >If errors are encountered during loading, they must be passed in the <paramref name="errorCollection" />
 
             
 
-             parameter as a collection of exceptions. If they are not exceptions, the designer loader host can call <see
-             cref="M:System.Object.ToString" />
+             parameter as a collection of exceptions. If they are not exceptions, the designer loader host can call <see cref="M:System.Object.ToString" />
 
             
 
-             on them and pass them as a collection. If the load is successful, then the <paramref
-             name="errorCollection" />
+             on them and pass them as a collection. If the load is successful, then the <paramref name="errorCollection" />
 
             
 
@@ -119,21 +112,33 @@
           <para>Ends the designer loading operation.</para>
         </summary>
         <param name="baseClassName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fully qualified name of the base class of the document that this designer is designing. </param
         >
         <param name="successful">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the designer is successfully loaded; otherwise, false. </param
         >
         <param name="errorCollection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -161,8 +166,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
+            >The <see cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
 
             
 

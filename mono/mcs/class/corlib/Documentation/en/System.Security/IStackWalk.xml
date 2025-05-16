@@ -48,41 +48,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling <see
-             cref="M:System.Security.IStackWalk.Assert" />
+            >Calling <see cref="M:System.Security.IStackWalk.Assert" />
 
             
 
-             stops the permission check on callers higher in the call stack. Therefore, even if these callers do not have the requisite permissions, they can still access resources. An assertion is effective only if the code that calls <see
-             cref="M:System.Security.IStackWalk.Assert" />
+             stops the permission check on callers higher in the call stack. Therefore, even if these callers do not have the requisite permissions, they can still access resources. An assertion is effective only if the code that calls <see cref="M:System.Security.IStackWalk.Assert" />
 
             
 
              passes the security check for the permission that it is asserting.</para
           >
           <para
-            >A call to <see
-             cref="M:System.Security.IStackWalk.Assert" />
+            >A call to <see cref="M:System.Security.IStackWalk.Assert" />
 
             
 
-             is effective until the calling code returns to its caller or until a subsequent call to <see
-             cref="M:System.Security.IStackWalk.Assert" />
+             is effective until the calling code returns to its caller or until a subsequent call to <see cref="M:System.Security.IStackWalk.Assert" />
 
             
 
-             renders the previous assertion ineffective. Also, <see
-             cref="M:System.Security.CodeAccessPermission.RevertAssert" />
+             renders the previous assertion ineffective. Also, <see cref="M:System.Security.CodeAccessPermission.RevertAssert" />
 
             
 
-             or <see
-             cref="M:System.Security.CodeAccessPermission.RevertAll" />
+             or <see cref="M:System.Security.CodeAccessPermission.RevertAll" />
 
             
 
-             removes a pending <see
-             cref="M:System.Security.IStackWalk.Assert" />
+             removes a pending <see cref="M:System.Security.IStackWalk.Assert" />
 
             
 
@@ -93,28 +86,23 @@
 
             
 
-             is ignored for a permission not granted because a demand for that permission will not succeed. However, if code lower on the call stack calls <see
-             cref="M:System.Security.IStackWalk.Demand" />
+             is ignored for a permission not granted because a demand for that permission will not succeed. However, if code lower on the call stack calls <see cref="M:System.Security.IStackWalk.Demand" />
 
             
 
-             for that permission, a <see
-             cref="T:System.Security.SecurityException" />
+             for that permission, a <see cref="T:System.Security.SecurityException" />
 
             
 
-             is thrown when the stack walk reaches the code that tried to call <see
-             cref="M:System.Security.IStackWalk.Assert" />
+             is thrown when the stack walk reaches the code that tried to call <see cref="M:System.Security.IStackWalk.Assert" />
 
             
 
-            . This happens because the code that called <see
-             cref="M:System.Security.IStackWalk.Assert" />
+            . This happens because the code that called <see cref="M:System.Security.IStackWalk.Assert" />
 
             
 
-             has not been granted the permission, even though it tried to <see
-             cref="M:System.Security.IStackWalk.Assert" />
+             has not been granted the permission, even though it tried to <see cref="M:System.Security.IStackWalk.Assert" />
 
             
 
@@ -122,8 +110,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Because calling <see
-               cref="M:System.Security.IStackWalk.Assert" />
+              >Because calling <see cref="M:System.Security.IStackWalk.Assert" />
 
               
 
@@ -157,26 +144,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is typically used by secure libraries to ensure that callers have permission to access a resource. For example, a file class in a secure class library calls <see
-             cref="M:System.Security.IStackWalk.Demand" />
+            >This method is typically used by secure libraries to ensure that callers have permission to access a resource. For example, a file class in a secure class library calls <see cref="M:System.Security.IStackWalk.Demand" />
 
             
 
-             for the necessary <see
-             cref="T:System.Security.Permissions.FileIOPermission" />
+             for the necessary <see cref="T:System.Security.Permissions.FileIOPermission" />
 
             
 
              before performing a file operation requested by the caller.</para
           >
           <para
-            >The permissions of the code that calls this method are not examined; the check begins from the immediate caller of that code and proceeds up the stack. <see
-             cref="M:System.Security.IStackWalk.Demand" />
+            >The permissions of the code that calls this method are not examined; the check begins from the immediate caller of that code and proceeds up the stack. <see cref="M:System.Security.IStackWalk.Demand" />
 
             
 
-             succeeds only if no <see
-             cref="T:System.Security.SecurityException" />
+             succeeds only if no <see cref="T:System.Security.SecurityException" />
 
             
 
@@ -214,23 +197,19 @@
 
             
 
-             can limit the liability of the programmer or help prevent accidental security vulnerabilities because it helps prevent the method that calls <see
-             cref="M:System.Security.IStackWalk.Deny" />
+             can limit the liability of the programmer or help prevent accidental security vulnerabilities because it helps prevent the method that calls <see cref="M:System.Security.IStackWalk.Deny" />
 
             
 
-             from being used to access the resource protected by the denied permission. If a method calls <see
-             cref="M:System.Security.IStackWalk.Deny" />
+             from being used to access the resource protected by the denied permission. If a method calls <see cref="M:System.Security.IStackWalk.Deny" />
 
             
 
-             on a permission, and if a <see
-             cref="M:System.Security.IStackWalk.Demand" />
+             on a permission, and if a <see cref="M:System.Security.IStackWalk.Demand" />
 
             
 
-             for that permission is invoked by a caller lower in the call stack, that security check will fail when it reaches the <see
-             cref="M:System.Security.IStackWalk.Deny" />
+             for that permission is invoked by a caller lower in the call stack, that security check will fail when it reaches the <see cref="M:System.Security.IStackWalk.Deny" />
 
             
 
@@ -247,8 +226,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes every <see
-             cref="M:System.Security.IStackWalk.Demand" />
+            >Causes every <see cref="M:System.Security.IStackWalk.Demand" />
 
             
 
@@ -281,18 +259,15 @@
 
             
 
-             is similar to <see
-             cref="M:System.Security.IStackWalk.Deny" />
+             is similar to <see cref="M:System.Security.IStackWalk.Deny" />
 
             
 
-            , in that both cause stack walks to fail when they would otherwise succeed. The difference is that <see
-             cref="M:System.Security.IStackWalk.Deny" />
+            , in that both cause stack walks to fail when they would otherwise succeed. The difference is that <see cref="M:System.Security.IStackWalk.Deny" />
 
             
 
-             specifies permissions that will cause the stack walk to fail, but <see
-             cref="M:System.Security.IStackWalk.PermitOnly" />
+             specifies permissions that will cause the stack walk to fail, but <see cref="M:System.Security.IStackWalk.PermitOnly" />
 
             
 
@@ -303,28 +278,23 @@
 
             
 
-             is ignored for a permission not granted because a demand for that permission will not succeed. However, if code lower on the call stack later calls <see
-             cref="M:System.Security.IStackWalk.Demand" />
+             is ignored for a permission not granted because a demand for that permission will not succeed. However, if code lower on the call stack later calls <see cref="M:System.Security.IStackWalk.Demand" />
 
             
 
-             for that permission, a <see
-             cref="T:System.Security.SecurityException" />
+             for that permission, a <see cref="T:System.Security.SecurityException" />
 
             
 
-             is thrown when the stack walk reaches the code that tried to call <see
-             cref="M:System.Security.IStackWalk.PermitOnly" />
+             is thrown when the stack walk reaches the code that tried to call <see cref="M:System.Security.IStackWalk.PermitOnly" />
 
             
 
-            . This is because the code that called <see
-             cref="M:System.Security.IStackWalk.PermitOnly" />
+            . This is because the code that called <see cref="M:System.Security.IStackWalk.PermitOnly" />
 
             
 
-             has not been granted the permission, even though it called <see
-             cref="M:System.Security.IStackWalk.PermitOnly" />
+             has not been granted the permission, even though it called <see cref="M:System.Security.IStackWalk.PermitOnly" />
 
             
 
@@ -334,8 +304,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes every <see
-             cref="M:System.Security.IStackWalk.Demand" />
+            >Causes every <see cref="M:System.Security.IStackWalk.Demand" />
 
             
 

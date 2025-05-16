@@ -71,7 +71,11 @@
           <para>Initializes a new instance of a DBDataPermission class using an existing DBDataPermission.</para>
         </summary>
         <param name="permission">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -99,7 +103,11 @@
           <para>Initializes a new instance of a DBDataPermission class with the specified DBDataPermissionAttribute.</para>
         </summary>
         <param name="permissionAttribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -122,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of a DBDataPermission class with the specified <see
-             cref="T:System.Security.Permissions.PermissionState" />
+            >Initializes a new instance of a DBDataPermission class with the specified <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
@@ -131,12 +138,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -163,23 +173,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Permissions.PermissionState" />
+            >The <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
-             enumeration takes precedence over the <see
-             cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
+             enumeration takes precedence over the <see cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
 
             
 
-             property. Therefore, if you set <see
-             cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
+             property. Therefore, if you set <see cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
 
             
 
-             to false, you must also set <see
-             cref="T:System.Security.Permissions.PermissionState" />
+             to false, you must also set <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
@@ -189,8 +195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of a DBDataPermission class with the specified <see
-             cref="T:System.Security.Permissions.PermissionState" />
+            >Initializes a new instance of a DBDataPermission class with the specified <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
@@ -198,19 +203,26 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
            values. </param
         >
         <param name="allowBlankPassword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -269,26 +281,37 @@
           <para>Adds access for the specified connection string to the existing state of the DBDataPermission. </para>
         </summary>
         <param name="connectionString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A permitted connection string.</param
         >
         <param name="restrictions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           String that identifies connection string parameters that are allowed or disallowed.</param
         >
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.KeyRestrictionBehavior" />
+          One of the <see cref="T:System.Data.KeyRestrictionBehavior" />
 
           
 
@@ -308,23 +331,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Permissions.PermissionState" />
+            >The <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
-             enumeration takes precedence over the <see
-             cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
+             enumeration takes precedence over the <see cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
 
             
 
-             property. Therefore, if you set <see
-             cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
+             property. Therefore, if you set <see cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
 
             
 
-             to false, you must also set <see
-             cref="T:System.Security.Permissions.PermissionState" />
+             to false, you must also set <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
@@ -357,8 +376,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all permissions that were previous added using the <see
-             cref="M:System.Data.Common.DBDataPermission.Add(System.String,System.String,System.Data.KeyRestrictionBehavior)" />
+            >Removes all permissions that were previous added using the <see cref="M:System.Data.Common.DBDataPermission.Add(System.String,System.String,System.Data.KeyRestrictionBehavior)" />
 
             
 
@@ -441,7 +459,11 @@
           <para>Reconstructs a security object with a specified state from an XML encoding.</para>
         </summary>
         <param name="securityElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -479,7 +501,11 @@
           <para>A new permission object that represents the intersection of the current permission object and the specified permission object. This new permission object is a null reference (Nothing in Visual Basic) if the intersection is empty.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -517,7 +543,11 @@
           <para>true if the current permission object is a subset of the specified permission object, otherwise false.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -566,13 +596,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Custom code that extends security objects must implement the <see
-             cref="M:System.Data.Common.DBDataPermission.ToXml" />
+            >Custom code that extends security objects must implement the <see cref="M:System.Data.Common.DBDataPermission.ToXml" />
 
             
 
-             and <see
-             cref="M:System.Data.Common.DBDataPermission.FromXml(System.Security.SecurityElement)" />
+             and <see cref="M:System.Data.Common.DBDataPermission.FromXml(System.Security.SecurityElement)" />
 
             
 
@@ -609,8 +637,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see
-             cref="M:System.Data.Common.DBDataPermission.Union(System.Security.IPermission)" />
+            >The result of a call to <see cref="M:System.Data.Common.DBDataPermission.Union(System.Security.IPermission)" />
 
             
 
@@ -626,7 +653,11 @@
           <para>A new permission object that represents the union of the current permission object and the specified permission object.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

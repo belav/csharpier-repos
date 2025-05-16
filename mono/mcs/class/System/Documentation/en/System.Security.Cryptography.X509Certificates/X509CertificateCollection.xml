@@ -30,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines a collection that stores <see
-         cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+        >Defines a collection that stores <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
         
 
@@ -59,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
             
 
@@ -96,13 +94,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
             
 
-             class from an array of <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+             class from an array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
             
 
@@ -110,12 +106,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array of <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+          The array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
           
 
@@ -150,13 +149,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
             
 
-             class from another <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+             class from another <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
             
 
@@ -164,12 +161,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+          The <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
           
 
@@ -206,13 +206,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+            >Adds an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
             
 
-             with the specified value to the current <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+             with the specified value to the current <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
             
 
@@ -222,13 +220,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index into the current <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+            >The index into the current <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
             
 
-             at which the new <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+             at which the new <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
             
 
@@ -236,17 +232,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+          The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
           
 
-           to add to the current <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+           to add to the current <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
           
 
@@ -283,13 +281,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of an array of type <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+            >Copies the elements of an array of type <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
             
 
-             to the end of the current <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+             to the end of the current <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
             
 
@@ -297,17 +293,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array of type <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+          The array of type <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
           
 
-           containing the objects to add to the current <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+           containing the objects to add to the current <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
           
 
@@ -344,13 +342,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the specified <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+            >Copies the elements of the specified <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
             
 
-             to the end of the current <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+             to the end of the current <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
             
 
@@ -358,12 +354,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+          The <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
           
 
@@ -400,13 +399,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the current <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+            >Gets a value indicating whether the current <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
             
 
-             contains the specified <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+             contains the specified <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
             
 
@@ -416,8 +413,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+            >true if the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
             
 
@@ -425,12 +421,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+          The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
           
 
@@ -468,18 +467,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+            >Copies the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
             
 
-             values in the current <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+             values in the current <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
             
 
-             to a one-dimensional <see
-             cref="T:System.Array" />
+             to a one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -487,29 +483,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the values copied from <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+           that is the destination of the values copied from <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
           
 
           . </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index into <paramref
-           name="array" />
+          The index into <paramref name="array" />
 
           
 
@@ -541,8 +542,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that can iterate through the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+            >Returns an enumerator that can iterate through the <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
             
 
@@ -552,8 +552,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator of the subelements of <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+            >An enumerator of the subelements of <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
             
 
@@ -583,8 +582,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Builds a hash value based on all values contained in the current <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+            >Builds a hash value based on all values contained in the current <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
             
 
@@ -594,8 +592,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash value based on all values contained in the current <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+            >A hash value based on all values contained in the current <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
             
 
@@ -633,13 +630,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the index of the specified <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+            >Returns the index of the specified <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
             
 
-             in the current <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+             in the current <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
             
 
@@ -649,18 +644,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+            >The index of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
             
 
-             specified by the <paramref
-             name="value" />
+             specified by the <paramref name="value" />
 
             
 
-             parameter in the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+             parameter in the <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
             
 
@@ -668,12 +660,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+          The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
           
 
@@ -711,13 +706,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+            >Inserts a <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
             
 
-             into the current <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+             into the current <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
             
 
@@ -725,24 +718,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index where <paramref
-           name="value" />
+          The zero-based index where <paramref name="value" />
 
           
 
            should be inserted. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+          The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
           
 
@@ -807,13 +806,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a specific <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+            >Removes a specific <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
             
 
-             from the current <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+             from the current <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
             
 
@@ -821,17 +818,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+          The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
           
 
-           to remove from the current <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+           to remove from the current <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
           
 

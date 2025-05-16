@@ -14,18 +14,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Page developers and control authors do not use the <see
-         cref="T:System.Web.UI.IUserControlTypeResolutionService" />
+        >Page developers and control authors do not use the <see cref="T:System.Web.UI.IUserControlTypeResolutionService" />
 
         
 
-         interface. The <see
-         cref="T:System.Web.UI.IUserControlTypeResolutionService" />
+         interface. The <see cref="T:System.Web.UI.IUserControlTypeResolutionService" />
 
         
 
-         interface is implemented by tool developers to return the <see
-         cref="T:System.Type" />
+         interface is implemented by tool developers to return the <see cref="T:System.Type" />
 
         
 
@@ -65,8 +62,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Type" />
+            >A <see cref="T:System.Type" />
 
             
 
@@ -74,7 +70,11 @@
           >
         </returns>
         <param name="tagName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -19,33 +19,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
+        >The <see cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
 
         
 
-         event occurs when the user is moving the <see
-         cref="T:System.Windows.Forms.Splitter" />
+         event occurs when the user is moving the <see cref="T:System.Windows.Forms.Splitter" />
 
         
 
-         control. The <see
-         cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
+         control. The <see cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
 
         
 
-         event occurs when the user finishes moving the <see
-         cref="T:System.Windows.Forms.Splitter" />
+         event occurs when the user finishes moving the <see cref="T:System.Windows.Forms.Splitter" />
 
         
 
-         control. The <see
-         cref="T:System.Windows.Forms.SplitterEventArgs" />
+         control. The <see cref="T:System.Windows.Forms.SplitterEventArgs" />
 
         
 
-         class specifies the position of the mouse pointer and the position of the upper-left corner of the <see
-         cref="T:System.Windows.Forms.Splitter" />
+         class specifies the position of the mouse pointer and the position of the upper-left corner of the <see cref="T:System.Windows.Forms.Splitter" />
 
         
 
@@ -55,13 +49,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for <see
-         cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
+        >Provides data for <see cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
 
         
 
-         and the <see
-         cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
+         and the <see cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
 
         
 
@@ -87,13 +79,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Windows.Forms.SplitterEventArgs" />
+            >Initializes an instance of the <see cref="T:System.Windows.Forms.SplitterEventArgs" />
 
             
 
-             class with the specified coordinates of the mouse pointer and the coordinates of the upper-left corner of the <see
-             cref="T:System.Windows.Forms.Splitter" />
+             class with the specified coordinates of the mouse pointer and the coordinates of the upper-left corner of the <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
@@ -101,38 +91,52 @@
           >
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the mouse pointer (in client coordinates). </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the mouse pointer (in client coordinates). </param
         >
         <param name="splitX">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The x-coordinate of the upper-left corner of the <see
-           cref="T:System.Windows.Forms.Splitter" />
+          The x-coordinate of the upper-left corner of the <see cref="T:System.Windows.Forms.Splitter" />
 
           
 
            (in client coordinates). </param
         >
         <param name="splitY">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The y-coordinate of the upper-left corner of the <see
-           cref="T:System.Windows.Forms.Splitter" />
+          The y-coordinate of the upper-left corner of the <see cref="T:System.Windows.Forms.Splitter" />
 
           
 
@@ -155,23 +159,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this property along with the <see
-             cref="P:System.Windows.Forms.SplitterEventArgs.SplitY" />
+            >You can use this property along with the <see cref="P:System.Windows.Forms.SplitterEventArgs.SplitY" />
 
             
 
-             property of this class to determine the position of the <see
-             cref="T:System.Windows.Forms.Splitter" />
+             property of this class to determine the position of the <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control when the <see
-             cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
+             control when the <see cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
 
             
 
-             and <see
-             cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
+             and <see cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
 
             
 
@@ -181,8 +181,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the x-coordinate of the upper-left corner of the <see
-             cref="T:System.Windows.Forms.Splitter" />
+            >Gets or sets the x-coordinate of the upper-left corner of the <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
@@ -206,23 +205,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this property along with the <see
-             cref="P:System.Windows.Forms.SplitterEventArgs.SplitX" />
+            >You can use this property along with the <see cref="P:System.Windows.Forms.SplitterEventArgs.SplitX" />
 
             
 
-             property of this class to determine the position of the <see
-             cref="T:System.Windows.Forms.Splitter" />
+             property of this class to determine the position of the <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
-             control when the <see
-             cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
+             control when the <see cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
 
             
 
-             and <see
-             cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
+             and <see cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
 
             
 
@@ -232,8 +227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the y-coordinate of the upper-left corner of the <see
-             cref="T:System.Windows.Forms.Splitter" />
+            >Gets or sets the y-coordinate of the upper-left corner of the <see cref="T:System.Windows.Forms.Splitter" />
 
             
 
@@ -257,18 +251,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this property along with the <see
-             cref="P:System.Windows.Forms.SplitterEventArgs.Y" />
+            >You can use this property along with the <see cref="P:System.Windows.Forms.SplitterEventArgs.Y" />
 
             
 
-             property of this class to determine the current location of the mouse pointer when the <see
-             cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
+             property of this class to determine the current location of the mouse pointer when the <see cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
 
             
 
-             and <see
-             cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
+             and <see cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
 
             
 
@@ -296,18 +287,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this property along with the <see
-             cref="P:System.Windows.Forms.SplitterEventArgs.X" />
+            >You can use this property along with the <see cref="P:System.Windows.Forms.SplitterEventArgs.X" />
 
             
 
-             property of this class to determine the current location of the mouse pointer when the <see
-             cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
+             property of this class to determine the current location of the mouse pointer when the <see cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
 
             
 
-             and <see
-             cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
+             and <see cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
 
             
 

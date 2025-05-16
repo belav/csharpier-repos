@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Do not grant <see
-         cref="T:System.Diagnostics.EventLogPermission" />
+        >Do not grant <see cref="T:System.Diagnostics.EventLogPermission" />
 
         
 
@@ -35,16 +34,14 @@
       >
       <block subset="none" type="note">
         <para
-          >If the event source that is specified by the <see
-           cref="P:System.Diagnostics.EventLog.Source" />
+          >If the event source that is specified by the <see cref="P:System.Diagnostics.EventLog.Source" />
 
           
 
            property for the event log does not exist, a new event source is created. To create an event source in Windows Vista and later versions of Windows, or Windows Server 2003, you must have administrative privileges. </para
         >
         <para
-          >The reason for this requirement is that all event logs, including security, must be searched to determine whether the event source is unique. Starting with Windows Vista, users do not have permission to access the security log; therefore, a <see
-           cref="T:System.Security.SecurityException" />
+          >The reason for this requirement is that all event logs, including security, must be searched to determine whether the event source is unique. Starting with Windows Vista, users do not have permission to access the security log; therefore, a <see cref="T:System.Security.SecurityException" />
 
           
 
@@ -78,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.EventLogPermission" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.EventLogPermission" />
 
             
 
@@ -115,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.EventLogPermission" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.EventLogPermission" />
 
             
 
@@ -124,12 +119,15 @@
           >
         </summary>
         <param name="permissionAccessEntries">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of  objects that represent permission entries. The <see
-           cref="P:System.Diagnostics.EventLogPermission.PermissionEntries" />
+          An array of  objects that represent permission entries. The <see cref="P:System.Diagnostics.EventLogPermission.PermissionEntries" />
 
           
 
@@ -161,8 +159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.EventLogPermission" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.EventLogPermission" />
 
             
 
@@ -170,7 +167,11 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -203,8 +204,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.EventLogPermission" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.EventLogPermission" />
 
             
 
@@ -212,14 +212,22 @@
           >
         </summary>
         <param name="permissionAccess">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           One of the enumeration values that specifies an access level. </param
         >
         <param name="machineName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

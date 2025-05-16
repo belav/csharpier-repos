@@ -11,26 +11,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.IButtonControl" />
+        >The <see cref="T:System.Web.UI.WebControls.IButtonControl" />
 
         
 
          interface defines the properties and events that must be implemented to allow a control to act like a button on a Web page.</para
       >
       <para
-        >The members of this interface provide basic button functionality, such as the ability to raise a <see
-         cref="E:System.Web.UI.WebControls.IButtonControl.Click" />
+        >The members of this interface provide basic button functionality, such as the ability to raise a <see cref="E:System.Web.UI.WebControls.IButtonControl.Click" />
 
         
 
-         event and a <see
-         cref="E:System.Web.UI.WebControls.IButtonControl.Command" />
+         event and a <see cref="E:System.Web.UI.WebControls.IButtonControl.Command" />
 
         
 
-         event. The <see
-         cref="P:System.Web.UI.WebControls.IButtonControl.PostBackUrl" />
+         event. The <see cref="P:System.Web.UI.WebControls.IButtonControl.PostBackUrl" />
 
         
 
@@ -55,13 +51,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A control that implements the <see
-             cref="T:System.Web.UI.WebControls.IButtonControl" />
+            >A control that implements the <see cref="T:System.Web.UI.WebControls.IButtonControl" />
 
             
 
-             interface must implement the <see
-             cref="P:System.Web.UI.WebControls.IButtonControl.CausesValidation" />
+             interface must implement the <see cref="P:System.Web.UI.WebControls.IButtonControl.CausesValidation" />
 
             
 
@@ -88,16 +82,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.IButtonControl.Click" />
+            >The <see cref="E:System.Web.UI.WebControls.IButtonControl.Click" />
 
             
 
              event is raised when the button control is clicked.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -129,16 +121,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.IButtonControl.Command" />
+            >The <see cref="E:System.Web.UI.WebControls.IButtonControl.Command" />
 
             
 
              event is raised when the button control is clicked.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -168,23 +158,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A control that implements the <see
-             cref="T:System.Web.UI.WebControls.IButtonControl" />
+            >A control that implements the <see cref="T:System.Web.UI.WebControls.IButtonControl" />
 
             
 
-             interface must implement the <see
-             cref="P:System.Web.UI.WebControls.IButtonControl.CommandArgument" />
+             interface must implement the <see cref="P:System.Web.UI.WebControls.IButtonControl.CommandArgument" />
 
             
 
-             property and the <see
-             cref="P:System.Web.UI.WebControls.IButtonControl.CommandName" />
+             property and the <see cref="P:System.Web.UI.WebControls.IButtonControl.CommandName" />
 
             
 
-             property to indicate the argument and command name that are propagated to the <see
-             cref="E:System.Web.UI.WebControls.IButtonControl.Command" />
+             property to indicate the argument and command name that are propagated to the <see cref="E:System.Web.UI.WebControls.IButtonControl.Command" />
 
             
 
@@ -194,8 +180,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an optional argument that is propagated to the <see
-             cref="E:System.Web.UI.WebControls.IButtonControl.Command" />
+            >Gets or sets an optional argument that is propagated to the <see cref="E:System.Web.UI.WebControls.IButtonControl.Command" />
 
             
 
@@ -219,23 +204,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A control that implements the <see
-             cref="T:System.Web.UI.WebControls.IButtonControl" />
+            >A control that implements the <see cref="T:System.Web.UI.WebControls.IButtonControl" />
 
             
 
-             interface must implement the <see
-             cref="P:System.Web.UI.WebControls.IButtonControl.CommandArgument" />
+             interface must implement the <see cref="P:System.Web.UI.WebControls.IButtonControl.CommandArgument" />
 
             
 
-             property and the <see
-             cref="P:System.Web.UI.WebControls.IButtonControl.CommandName" />
+             property and the <see cref="P:System.Web.UI.WebControls.IButtonControl.CommandName" />
 
             
 
-             property to indicate the argument and command name that are propagated to the <see
-             cref="E:System.Web.UI.WebControls.IButtonControl.Command" />
+             property to indicate the argument and command name that are propagated to the <see cref="E:System.Web.UI.WebControls.IButtonControl.Command" />
 
             
 
@@ -245,8 +226,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the command name that is propagated to the <see
-             cref="E:System.Web.UI.WebControls.IButtonControl.Command" />
+            >Gets or sets the command name that is propagated to the <see cref="E:System.Web.UI.WebControls.IButtonControl.Command" />
 
             
 
@@ -270,26 +250,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Web.UI.WebControls.IButtonControl.PostBackUrl" />
+            >You can use the <see cref="P:System.Web.UI.WebControls.IButtonControl.PostBackUrl" />
 
             
 
-             property to perform a cross-page post. If the <see
-             cref="P:System.Web.UI.WebControls.IButtonControl.PostBackUrl" />
+             property to perform a cross-page post. If the <see cref="P:System.Web.UI.WebControls.IButtonControl.PostBackUrl" />
 
             
 
              property is set to the page that the button is currently on, a normal postback event cycle occurs.</para
           >
           <para
-            >A control that implements the <see
-             cref="T:System.Web.UI.WebControls.IButtonControl" />
+            >A control that implements the <see cref="T:System.Web.UI.WebControls.IButtonControl" />
 
             
 
-             interface must implement the <see
-             cref="P:System.Web.UI.WebControls.IButtonControl.PostBackUrl" />
+             interface must implement the <see cref="P:System.Web.UI.WebControls.IButtonControl.PostBackUrl" />
 
             
 
@@ -317,13 +293,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A control that implements the <see
-             cref="T:System.Web.UI.WebControls.IButtonControl" />
+            >A control that implements the <see cref="T:System.Web.UI.WebControls.IButtonControl" />
 
             
 
-             interface must implement the <see
-             cref="P:System.Web.UI.WebControls.IButtonControl.Text" />
+             interface must implement the <see cref="P:System.Web.UI.WebControls.IButtonControl.Text" />
 
             
 
@@ -351,13 +325,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A control that implements the <see
-             cref="T:System.Web.UI.WebControls.IButtonControl" />
+            >A control that implements the <see cref="T:System.Web.UI.WebControls.IButtonControl" />
 
             
 
-             interface must implement the <see
-             cref="P:System.Web.UI.WebControls.IButtonControl.ValidationGroup" />
+             interface must implement the <see cref="P:System.Web.UI.WebControls.IButtonControl.ValidationGroup" />
 
             
 

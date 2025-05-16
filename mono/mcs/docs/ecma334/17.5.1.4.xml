@@ -9,19 +9,16 @@
      It is not possible to combine the params modifier with the modifiers ref and out. </paragraph
   >
   <paragraph
-    >A parameter array permits arguments to be specified in one of two ways in a method invocation: <list
-    >
+    >A parameter array permits arguments to be specified in one of two ways in a method invocation: <list>
       <list_item
-        > The argument given for a parameter array can be a single expression of a type that is implicitly convertible (<hyperlink
-        >13.1</hyperlink>
+        > The argument given for a parameter array can be a single expression of a type that is implicitly convertible (<hyperlink>13.1</hyperlink>
 
         
 
         ) to the parameter array type. In this case, the parameter array acts precisely like a value parameter. </list_item
       >
       <list_item
-        > Alternatively, the invocation can specify zero or more arguments for the parameter array, where each argument is an expression of a type that is implicitly convertible (<hyperlink
-        >13.1</hyperlink>
+        > Alternatively, the invocation can specify zero or more arguments for the parameter array, where each argument is an expression of a type that is implicitly convertible (<hyperlink>13.1</hyperlink>
 
         
 
@@ -30,8 +27,7 @@
     </list>
   </paragraph>
   <paragraph
-    >Except for allowing a variable number of arguments in an invocation, a parameter array is precisely equivalent to a value parameter (<hyperlink
-    >17.5.1.1</hyperlink>
+    >Except for allowing a variable number of arguments in an invocation, a parameter array is precisely equivalent to a value parameter (<hyperlink>17.5.1.1</hyperlink>
 
     
 
@@ -39,8 +35,7 @@
   >
   <paragraph>
     <example
-      >[Example: The example <code_example
-      >
+      >[Example: The example <code_example>
         <![CDATA[
 using System;  
 class Test  
@@ -63,8 +58,7 @@ class Test
 
       
 
-      produces the output <code_example
-      >
+      produces the output <code_example>
         <![CDATA[
 Array contains 3 elements: 1 2 3  
 Array contains 4 elements: 10 20 30 40  
@@ -75,8 +69,7 @@ Array contains 0 elements:
   </paragraph>
   <paragraph>
     <example
-      >The first invocation of F simply passes the array a as a value parameter. The second invocation of F automatically creates a four-element int[] with the given element values and passes that array instance as a value parameter. Likewise, the third invocation of F creates a zero-element int[] and passes that instance as a value parameter. The second and third invocations are precisely equivalent to writing: <code_example
-      >
+      >The first invocation of F simply passes the array a as a value parameter. The second invocation of F automatically creates a four-element int[] with the given element values and passes that array instance as a value parameter. Likewise, the third invocation of F creates a zero-element int[] and passes that instance as a value parameter. The second and third invocations are precisely equivalent to writing: <code_example>
         <![CDATA[
 F(new int[] {10, 20, 30, 40});  
 F(new int[] {});  
@@ -89,8 +82,7 @@ F(new int[] {});
     >
   </paragraph>
   <paragraph
-    >When performing overload resolution, a method with a parameter array may be applicable either in its normal form or in its expanded form (<hyperlink
-    >14.4.2.1</hyperlink>
+    >When performing overload resolution, a method with a parameter array may be applicable either in its normal form or in its expanded form (<hyperlink>14.4.2.1</hyperlink>
 
     
 
@@ -98,8 +90,7 @@ F(new int[] {});
   >
   <paragraph>
     <example
-      >[Example: The example <code_example
-      >
+      >[Example: The example <code_example>
         <![CDATA[
 using System;  
 class Test  
@@ -126,8 +117,7 @@ class Test
 
       
 
-      produces the output <code_example
-      >
+      produces the output <code_example>
         <![CDATA[
 F();  
 F(object[]);  
@@ -147,8 +137,7 @@ F(object[]);
   <paragraph>When the type of a parameter array is object[], a potential ambiguity arises between the normal form of the method and the expended form for a single object parameter. The reason for the ambiguity is that an object[] is itself implicitly convertible to type object. The ambiguity presents no problem, however, since it can be resolved by inserting a cast if needed. </paragraph>
   <paragraph>
     <example
-      >[Example: The example <code_example
-      >
+      >[Example: The example <code_example>
         <![CDATA[
 using System;  
 class Test  
@@ -174,8 +163,7 @@ class Test
 
       
 
-      produces the output <code_example
-      >
+      produces the output <code_example>
         <![CDATA[
 System.Int32 System.String System.Double  
 System.Object[]  

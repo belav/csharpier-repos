@@ -15,94 +15,77 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>ASP.NET supports a data-binding architecture that enables Web server controls to bind to data in a consistent fashion. Web server controls that bind to data are referred to as data-bound controls, and the classes that facilitate that binding are called data source controls. Data source controls can represent any data source: a relational database, a file, a stream, a business object, and so on. Data source controls present data in a consistent way to data-bound controls, regardless of the source or format of the underlying data.</para>
       <para
-        >You use the data source controls that are provided with ASP.NET, including <see
-         cref="T:System.Web.UI.WebControls.SqlDataSource" />
+        >You use the data source controls that are provided with ASP.NET, including <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.WebControls.AccessDataSource" />
+        , <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
         
 
-        , and <see
-         cref="T:System.Web.UI.WebControls.XmlDataSource" />
+        , and <see cref="T:System.Web.UI.WebControls.XmlDataSource" />
 
         
 
-        , to perform most Web development tasks. You use the base <see
-         cref="T:System.Web.UI.DataSourceControl" />
+        , to perform most Web development tasks. You use the base <see cref="T:System.Web.UI.DataSourceControl" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.DataSourceView" />
+         and <see cref="T:System.Web.UI.DataSourceView" />
 
         
 
          classes when you want to implement your own custom data source control.</para
       >
       <para
-        >You can think of a data source control as the combination of the <see
-         cref="T:System.Web.UI.IDataSource" />
+        >You can think of a data source control as the combination of the <see cref="T:System.Web.UI.IDataSource" />
 
         
 
-         object and its associated lists of data, called data source views. Each list of data is represented by a <see
-         cref="T:System.Web.UI.DataSourceView" />
+         object and its associated lists of data, called data source views. Each list of data is represented by a <see cref="T:System.Web.UI.DataSourceView" />
 
         
 
-         object. The <see
-         cref="T:System.Web.UI.DataSourceView" />
+         object. The <see cref="T:System.Web.UI.DataSourceView" />
 
         
 
-         class is the base class for all data source views, or lists of data, associated with data source controls. Data source views define the capabilities of a data source control. Because the underlying data storage contains one or more lists of data, a data source control is always associated with one or more named data source views. The data source control uses the <see
-         cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
+         class is the base class for all data source views, or lists of data, associated with data source controls. Data source views define the capabilities of a data source control. Because the underlying data storage contains one or more lists of data, a data source control is always associated with one or more named data source views. The data source control uses the <see cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
 
         
 
-         method to enumerate the data source views currently associated with the data source control and the <see
-         cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
+         method to enumerate the data source views currently associated with the data source control and the <see cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
 
         
 
          method to retrieve a specific data source view instance by name.</para
       >
       <para
-        >All <see
-         cref="T:System.Web.UI.DataSourceView" />
+        >All <see cref="T:System.Web.UI.DataSourceView" />
 
         
 
-         objects support data retrieval from the underlying data source using the <see
-         cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
+         objects support data retrieval from the underlying data source using the <see cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
 
         
 
-         method. All views optionally support a basic set of operations, including operations such as <see
-         cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
+         method. All views optionally support a basic set of operations, including operations such as <see cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
 
         
 
-        , <see
-         cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
+        , <see cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
 
         
 
-        , and <see
-         cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+        , and <see cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
 
         
 
-        . A data-bound control can discover the capabilities of a data source control by retrieving an associated data source view using the <see
-         cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
+        . A data-bound control can discover the capabilities of a data source control by retrieving an associated data source view using the <see cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
 
         
 
-         and <see
-         cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
+         and <see cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
 
         
 
@@ -131,8 +114,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
@@ -140,24 +122,30 @@
           >
         </summary>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The data source control that the <see
-           cref="T:System.Web.UI.DataSourceView" />
+          The data source control that the <see cref="T:System.Web.UI.DataSourceView" />
 
           
 
            is associated with.</param
         >
         <param name="viewName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Web.UI.DataSourceView" />
+          The name of the <see cref="T:System.Web.UI.DataSourceView" />
 
           
 
@@ -180,18 +168,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.DataSourceView.CanDelete" />
+            >The <see cref="P:System.Web.UI.DataSourceView.CanDelete" />
 
             
 
-             property reflects not only a capability of the data source control, but also whether it is currently appropriate to perform an operation. For example, even though a data source view supports the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+             property reflects not only a capability of the data source control, but also whether it is currently appropriate to perform an operation. For example, even though a data source view supports the <see cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
 
             
 
-             operation in general, if a required property or some other data is not set, the <see
-             cref="P:System.Web.UI.DataSourceView.CanDelete" />
+             operation in general, if a required property or some other data is not set, the <see cref="P:System.Web.UI.DataSourceView.CanDelete" />
 
             
 
@@ -201,18 +186,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             object associated with the current <see
-             cref="T:System.Web.UI.DataSourceControl" />
+             object associated with the current <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
-             object supports the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+             object supports the <see cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
 
             
 
@@ -236,18 +218,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.DataSourceView.CanInsert" />
+            >The <see cref="P:System.Web.UI.DataSourceView.CanInsert" />
 
             
 
-             property reflects not only a capability of the data source control, but also whether it is currently appropriate to perform an operation. For example, even though a data source control supports the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
+             property reflects not only a capability of the data source control, but also whether it is currently appropriate to perform an operation. For example, even though a data source control supports the <see cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
 
             
 
-             operation, if a required insert command or some other data is not set, the <see
-             cref="P:System.Web.UI.DataSourceView.CanInsert" />
+             operation, if a required insert command or some other data is not set, the <see cref="P:System.Web.UI.DataSourceView.CanInsert" />
 
             
 
@@ -257,18 +236,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             object associated with the current <see
-             cref="T:System.Web.UI.DataSourceControl" />
+             object associated with the current <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
-             object supports the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
+             object supports the <see cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
 
             
 
@@ -292,23 +268,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A data-bound control can request paging by adding the <see
-             cref="F:System.Web.UI.DataSourceCapabilities.Page" />
+            >A data-bound control can request paging by adding the <see cref="F:System.Web.UI.DataSourceCapabilities.Page" />
 
             
 
-             field to the <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+             field to the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
-             object passed to the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
+             object passed to the <see cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
 
             
 
-             method. If a data-bound control requests paging, but the <see
-             cref="P:System.Web.UI.DataSourceView.CanPage" />
+             method. If a data-bound control requests paging, but the <see cref="P:System.Web.UI.DataSourceView.CanPage" />
 
             
 
@@ -318,18 +290,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             object associated with the current <see
-             cref="T:System.Web.UI.DataSourceControl" />
+             object associated with the current <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
-             object supports paging through the data retrieved by the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
+             object supports paging through the data retrieved by the <see cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
 
             
 
@@ -356,23 +325,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A data-bound control can request a total row count by adding the <see
-             cref="F:System.Web.UI.DataSourceCapabilities.RetrieveTotalRowCount" />
+            >A data-bound control can request a total row count by adding the <see cref="F:System.Web.UI.DataSourceCapabilities.RetrieveTotalRowCount" />
 
             
 
-             field to the <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+             field to the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
-             object passed to the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
+             object passed to the <see cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
 
             
 
-             method. If a data-bound control requests a total row count, but the <see
-             cref="P:System.Web.UI.DataSourceView.CanRetrieveTotalRowCount" />
+             method. If a data-bound control requests a total row count, but the <see cref="P:System.Web.UI.DataSourceView.CanRetrieveTotalRowCount" />
 
             
 
@@ -382,13 +347,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             object associated with the current <see
-             cref="T:System.Web.UI.DataSourceControl" />
+             object associated with the current <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
@@ -412,23 +375,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A data-bound control can request sorting by adding the <see
-             cref="F:System.Web.UI.DataSourceCapabilities.Sort" />
+            >A data-bound control can request sorting by adding the <see cref="F:System.Web.UI.DataSourceCapabilities.Sort" />
 
             
 
-             field to the <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+             field to the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
-             object passed to the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
+             object passed to the <see cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
 
             
 
-             method. If a data-bound control requests sorting, but the <see
-             cref="P:System.Web.UI.DataSourceView.CanSort" />
+             method. If a data-bound control requests sorting, but the <see cref="P:System.Web.UI.DataSourceView.CanSort" />
 
             
 
@@ -438,13 +397,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             object associated with the current <see
-             cref="T:System.Web.UI.DataSourceControl" />
+             object associated with the current <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
@@ -468,18 +425,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.DataSourceView.CanUpdate" />
+            >The <see cref="P:System.Web.UI.DataSourceView.CanUpdate" />
 
             
 
-             property reflects not only a capability of the data source control, but also whether it is currently appropriate to perform an operation. For example, even though a data-bound control supports the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
+             property reflects not only a capability of the data source control, but also whether it is currently appropriate to perform an operation. For example, even though a data-bound control supports the <see cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
 
             
 
-             operation, if a required update command or some other data is not set, the <see
-             cref="P:System.Web.UI.DataSourceView.CanUpdate" />
+             operation, if a required update command or some other data is not set, the <see cref="P:System.Web.UI.DataSourceView.CanUpdate" />
 
             
 
@@ -489,18 +443,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             object associated with the current <see
-             cref="T:System.Web.UI.DataSourceControl" />
+             object associated with the current <see cref="T:System.Web.UI.DataSourceControl" />
 
             
 
-             object supports the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
+             object supports the <see cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
 
             
 
@@ -524,8 +475,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The change to the data source view could be due to a change in the values of its properties, or to a change in the data due to a data operation performed by the data source view.</para>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -564,53 +514,43 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.DataSourceView.Delete(System.Collections.IDictionary,System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
+            >The <see cref="M:System.Web.UI.DataSourceView.Delete(System.Collections.IDictionary,System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
 
             
 
-             method is the asynchronous data deletion interface for all data source view objects. The <see
-             cref="M:System.Web.UI.DataSourceView.Delete(System.Collections.IDictionary,System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
+             method is the asynchronous data deletion interface for all data source view objects. The <see cref="M:System.Web.UI.DataSourceView.Delete(System.Collections.IDictionary,System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+             method calls the <see cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
 
             
 
-             method using any <paramref
-             name="keys" />
+             method using any <paramref name="keys" />
 
             
 
-             and <paramref
-             name="oldValues" />
+             and <paramref name="oldValues" />
 
             
 
-             parameter values supplied. The <paramref
-             name="callback" />
+             parameter values supplied. The <paramref name="callback" />
 
             
 
-             parameter is a delegate that a data-bound control passes to the data source view, which is used to notify the data-bound control when the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+             parameter is a delegate that a data-bound control passes to the data source view, which is used to notify the data-bound control when the <see cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
 
             
 
-             operation has completed. The method uses the parameters of the <see
-             cref="T:System.Web.UI.DataSourceViewOperationCallback" />
+             operation has completed. The method uses the parameters of the <see cref="T:System.Web.UI.DataSourceViewOperationCallback" />
 
             
 
-             delegate to return the number of affected records and any <see
-             cref="T:System.Exception" />
+             delegate to return the number of affected records and any <see cref="T:System.Exception" />
 
             
 
-             exception that is thrown by the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+             exception that is thrown by the <see cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
 
             
 
@@ -620,8 +560,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs an asynchronous delete operation on the list of data that the <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >Performs an asynchronous delete operation on the list of data that the <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
@@ -629,17 +568,19 @@
           >
         </summary>
         <param name="keys">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IDictionary" />
+          An <see cref="T:System.Collections.IDictionary" />
 
           
 
-           of object or row keys to be deleted by the <see
-           cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+           of object or row keys to be deleted by the <see cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
 
           
 
@@ -665,8 +606,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is of type <see
-             cref="T:System.ComponentModel.EventHandlerList" />
+            >This property is of type <see cref="T:System.ComponentModel.EventHandlerList" />
 
             
 
@@ -701,46 +641,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Data-bound controls can determine whether the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+            >Data-bound controls can determine whether the <see cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
 
             
 
-             operation is supported by a data source control by retrieving the <see
-             cref="T:System.Web.UI.DataSourceView" />
+             operation is supported by a data source control by retrieving the <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             object using the <see
-             cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
+             object using the <see cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
 
             
 
-             method, and checking the <see
-             cref="P:System.Web.UI.DataSourceView.CanDelete" />
+             method, and checking the <see cref="P:System.Web.UI.DataSourceView.CanDelete" />
 
             
 
              property.</para
           >
           <para
-            >The <paramref
-             name="keys" />
+            >The <paramref name="keys" />
 
             
 
-             parameter represents the object or row keys of the data to delete. For data sources that represent relational data, such as the <see
-             cref="T:System.Web.UI.WebControls.SqlDataSource" />
+             parameter represents the object or row keys of the data to delete. For data sources that represent relational data, such as the <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
             
 
-             control, the <paramref
-             name="keys" />
+             control, the <paramref name="keys" />
 
             
 
-             parameter is a collection of database primary keys. In other scenarios, the <paramref
-             name="keys" />
+             parameter is a collection of database primary keys. In other scenarios, the <paramref name="keys" />
 
             
 
@@ -748,23 +680,19 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.DataSourceView" />
+              >The <see cref="T:System.Web.UI.DataSourceView" />
 
               
 
-               class's default implementation is to throw a <see
-               cref="T:System.NotSupportedException" />
+               class's default implementation is to throw a <see cref="T:System.NotSupportedException" />
 
               
 
-               exception. If you extend the <see
-               cref="T:System.Web.UI.DataSourceView" />
+               exception. If you extend the <see cref="T:System.Web.UI.DataSourceView" />
 
               
 
-               class, override the <see
-               cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+               class, override the <see cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
 
               
 
@@ -775,8 +703,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a delete operation on the list of data that the <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >Performs a delete operation on the list of data that the <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
@@ -788,17 +715,19 @@
           <para>The number of items that were deleted from the underlying data storage.</para>
         </returns>
         <param name="keys">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IDictionary" />
+          An <see cref="T:System.Collections.IDictionary" />
 
           
 
-           of object or row keys to be deleted by the <see
-           cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+           of object or row keys to be deleted by the <see cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
 
           
 
@@ -827,31 +756,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Data-bound controls can determine whether the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
+            >Data-bound controls can determine whether the <see cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
 
             
 
-             operation is supported by a data source control by retrieving the <see
-             cref="T:System.Web.UI.DataSourceView" />
+             operation is supported by a data source control by retrieving the <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             object using the <see
-             cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
+             object using the <see cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
 
             
 
-             method, and checking the <see
-             cref="P:System.Web.UI.DataSourceView.CanInsert" />
+             method, and checking the <see cref="P:System.Web.UI.DataSourceView.CanInsert" />
 
             
 
              property.</para
           >
           <para
-            >The <paramref
-             name="values" />
+            >The <paramref name="values" />
 
             
 
@@ -859,23 +783,19 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.DataSourceView" />
+              >The <see cref="T:System.Web.UI.DataSourceView" />
 
               
 
-               class's default implementation is to throw a <see
-               cref="T:System.NotSupportedException" />
+               class's default implementation is to throw a <see cref="T:System.NotSupportedException" />
 
               
 
-               exception. If you extend the <see
-               cref="T:System.Web.UI.DataSourceView" />
+               exception. If you extend the <see cref="T:System.Web.UI.DataSourceView" />
 
               
 
-               class, override the <see
-               cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
+               class, override the <see cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
 
               
 
@@ -886,8 +806,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs an insert operation on the list of data that the <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >Performs an insert operation on the list of data that the <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
@@ -922,23 +841,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
+            >The <see cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
 
             
 
-             method is called to retrieve data from the underlying data store and return it as an <see
-             cref="T:System.Collections.IEnumerable" />
+             method is called to retrieve data from the underlying data store and return it as an <see cref="T:System.Collections.IEnumerable" />
 
             
 
-             object. All data source controls support data retrieval from their underlying data storage, even if other operations such as insertion and sorting are not supported. Because a data-bound control can request a list of data at any time as a result of a <see
-             cref="E:System.Web.UI.IDataSource.DataSourceChanged" />
+             object. All data source controls support data retrieval from their underlying data storage, even if other operations such as insertion and sorting are not supported. Because a data-bound control can request a list of data at any time as a result of a <see cref="E:System.Web.UI.IDataSource.DataSourceChanged" />
 
             
 
-             event or a <see
-             cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" />
+             event or a <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" />
 
             
 
@@ -952,8 +867,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerable" />
+            >An <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -961,12 +875,15 @@
           >
         </returns>
         <param name="arguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.DataSourceSelectArguments" />
+          A <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
           
 
@@ -993,51 +910,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Data-bound controls can determine whether the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
+            >Data-bound controls can determine whether the <see cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
 
             
 
-             operation is supported by a data source control by using the <see
-             cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
+             operation is supported by a data source control by using the <see cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
 
             
 
-             method to retrieve the <see
-             cref="T:System.Web.UI.DataSourceView" />
+             method to retrieve the <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             object and checking the value of the <see
-             cref="P:System.Web.UI.DataSourceView.CanUpdate" />
+             object and checking the value of the <see cref="P:System.Web.UI.DataSourceView.CanUpdate" />
 
             
 
              property.</para
           >
           <para
-            >The <paramref
-             name="keys" />
+            >The <paramref name="keys" />
 
             
 
-             parameter represents the object or row keys of the data to update. For data sources that represent relational data, such as the <see
-             cref="T:System.Web.UI.WebControls.SqlDataSource" />
+             parameter represents the object or row keys of the data to update. For data sources that represent relational data, such as the <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
             
 
-             control, the <paramref
-             name="keys" />
+             control, the <paramref name="keys" />
 
             
 
-             parameter is a collection of database primary keys. In other scenarios, the <paramref
-             name="keys" />
+             parameter is a collection of database primary keys. In other scenarios, the <paramref name="keys" />
 
             
 
-             parameter is a collection of name/value pairs and is used to filter a list of data. Any data matching a name/value pair is updated with the values found in the <paramref
-             name="values" />
+             parameter is a collection of name/value pairs and is used to filter a list of data. Any data matching a name/value pair is updated with the values found in the <paramref name="values" />
 
             
 
@@ -1045,23 +953,19 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.DataSourceView" />
+              >The <see cref="T:System.Web.UI.DataSourceView" />
 
               
 
-               class's default implementation is to throw a <see
-               cref="T:System.NotSupportedException" />
+               class's default implementation is to throw a <see cref="T:System.NotSupportedException" />
 
               
 
-               exception. If you extend the <see
-               cref="T:System.Web.UI.DataSourceView" />
+               exception. If you extend the <see cref="T:System.Web.UI.DataSourceView" />
 
               
 
-               class, override the <see
-               cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
+               class, override the <see cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
 
               
 
@@ -1072,8 +976,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs an update operation on the list of data that the <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >Performs an update operation on the list of data that the <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
@@ -1085,36 +988,45 @@
           <para>The number of items that were updated in the underlying data storage.</para>
         </returns>
         <param name="keys">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IDictionary" />
+          An <see cref="T:System.Collections.IDictionary" />
 
           
 
            of object or row keys to be updated by the update operation.</param
         >
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IDictionary" />
+          An <see cref="T:System.Collections.IDictionary" />
 
           
 
            of name/value pairs that represent data elements and their new values.</param
         >
         <param name="oldValues">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IDictionary" />
+          An <see cref="T:System.Collections.IDictionary" />
 
           
 
@@ -1144,48 +1056,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.DataSourceView.Insert(System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
+            >The <see cref="M:System.Web.UI.DataSourceView.Insert(System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
 
             
 
-             method is the asynchronous data insertion interface for all data source view objects. The <see
-             cref="M:System.Web.UI.DataSourceView.Insert(System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
+             method is the asynchronous data insertion interface for all data source view objects. The <see cref="M:System.Web.UI.DataSourceView.Insert(System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
+             method calls the <see cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
 
             
 
-             method using any <paramref
-             name="values" />
+             method using any <paramref name="values" />
 
             
 
-             supplied. The <paramref
-             name="callback" />
+             supplied. The <paramref name="callback" />
 
             
 
-             parameter is a delegate that a data-bound control passes to the data source view, which is used to notify the data-bound control when the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
+             parameter is a delegate that a data-bound control passes to the data source view, which is used to notify the data-bound control when the <see cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
 
             
 
-             operation has completed. The method uses the parameters of the <see
-             cref="T:System.Web.UI.DataSourceViewOperationCallback" />
+             operation has completed. The method uses the parameters of the <see cref="T:System.Web.UI.DataSourceViewOperationCallback" />
 
             
 
-             delegate to return the number of affected records and any <see
-             cref="T:System.Exception" />
+             delegate to return the number of affected records and any <see cref="T:System.Exception" />
 
             
 
-             exception that is thrown by the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
+             exception that is thrown by the <see cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
 
             
 
@@ -1195,8 +1098,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs an asynchronous insert operation on the list of data that the <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >Performs an asynchronous insert operation on the list of data that the <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
@@ -1204,12 +1106,15 @@
           >
         </summary>
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IDictionary" />
+          An <see cref="T:System.Collections.IDictionary" />
 
           
 
@@ -1257,21 +1162,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.DataSourceView.OnDataSourceViewChanged(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.DataSourceView.OnDataSourceViewChanged(System.EventArgs)" />
 
             
 
-             method notifies a data-bound control that the underlying data source has changed and that the control should rebind and perform any necessary work. Typically, the <see
-             cref="M:System.Web.UI.DataSourceView.OnDataSourceViewChanged(System.EventArgs)" />
+             method notifies a data-bound control that the underlying data source has changed and that the control should rebind and perform any necessary work. Typically, the <see cref="M:System.Web.UI.DataSourceView.OnDataSourceViewChanged(System.EventArgs)" />
 
             
 
              method is called when a property of the data source view has changed.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1280,8 +1182,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.DataSourceView.OnDataSourceViewChanged(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.DataSourceView.OnDataSourceViewChanged(System.EventArgs)" />
 
             
 
@@ -1291,8 +1192,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.DataSourceView.DataSourceViewChanged" />
+            >Raises the <see cref="E:System.Web.UI.DataSourceView.DataSourceViewChanged" />
 
             
 
@@ -1323,18 +1223,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.DataSourceView.RaiseUnsupportedCapabilityError(System.Web.UI.DataSourceCapabilities)" />
+            >The <see cref="M:System.Web.UI.DataSourceView.RaiseUnsupportedCapabilityError(System.Web.UI.DataSourceCapabilities)" />
 
             
 
-             method is used by the data source view to examine each of the capabilities requested by a data-bound control, represented by the <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+             method is used by the data source view to examine each of the capabilities requested by a data-bound control, represented by the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
-             object passed to the <see
-             cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
+             object passed to the <see cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
 
             
 
@@ -1344,13 +1241,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Called by the <see
-             cref="M:System.Web.UI.DataSourceSelectArguments.RaiseUnsupportedCapabilitiesError(System.Web.UI.DataSourceView)" />
+            >Called by the <see cref="M:System.Web.UI.DataSourceSelectArguments.RaiseUnsupportedCapabilitiesError(System.Web.UI.DataSourceView)" />
 
             
 
-             method to compare the capabilities requested for an <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
+             method to compare the capabilities requested for an <see cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
 
             
 
@@ -1358,12 +1253,15 @@
           >
         </summary>
         <param name="capability">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.DataSourceCapabilities" />
+          One of the <see cref="T:System.Web.UI.DataSourceCapabilities" />
 
           
 
@@ -1391,43 +1289,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
+            >The <see cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
 
             
 
-             method is the asynchronous data retrieval interface for all data source view objects. The <see
-             cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
+             method is the asynchronous data retrieval interface for all data source view objects. The <see cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
+             method calls the <see cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
 
             
 
-             method, passing any <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+             method, passing any <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
-             supplied. The <paramref
-             name="callback" />
+             supplied. The <paramref name="callback" />
 
             
 
-             parameter is a delegate that a data-bound control passes to the data source view, which is used to notify the data-bound control when the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
+             parameter is a delegate that a data-bound control passes to the data source view, which is used to notify the data-bound control when the <see cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
 
             
 
-             operation has completed. The data returned by the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
+             operation has completed. The data returned by the <see cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
 
             
 
-             call is returned in the parameter of the <see
-             cref="T:System.Web.UI.DataSourceViewSelectCallback" />
+             call is returned in the parameter of the <see cref="T:System.Web.UI.DataSourceViewSelectCallback" />
 
             
 
@@ -1464,58 +1354,47 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.DataSourceView.Update(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
+            >The <see cref="M:System.Web.UI.DataSourceView.Update(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
 
             
 
-             method is the asynchronous data modification interface for all data source view objects. The <see
-             cref="M:System.Web.UI.DataSourceView.Update(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
+             method is the asynchronous data modification interface for all data source view objects. The <see cref="M:System.Web.UI.DataSourceView.Update(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
+             method calls the <see cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
 
             
 
-             method using any <paramref
-             name="keys" />
+             method using any <paramref name="keys" />
 
             
 
-            , <paramref
-             name="values" />
+            , <paramref name="values" />
 
             
 
-            , and <paramref
-             name="oldValues" />
+            , and <paramref name="oldValues" />
 
             
 
-             parameter values supplied. The <paramref
-             name="callback" />
+             parameter values supplied. The <paramref name="callback" />
 
             
 
-             parameter is a delegate that a data-bound control passes to the data source view, which is used to notify the data-bound control when the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
+             parameter is a delegate that a data-bound control passes to the data source view, which is used to notify the data-bound control when the <see cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
 
             
 
-             operation has completed. The method uses the parameters of the <see
-             cref="T:System.Web.UI.DataSourceViewOperationCallback" />
+             operation has completed. The method uses the parameters of the <see cref="T:System.Web.UI.DataSourceViewOperationCallback" />
 
             
 
-             delegate to return the number of affected records and any <see
-             cref="T:System.Exception" />
+             delegate to return the number of affected records and any <see cref="T:System.Exception" />
 
             
 
-             exception that is thrown by the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
+             exception that is thrown by the <see cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
 
             
 
@@ -1525,8 +1404,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs an asynchronous update operation on the list of data that the <see
-             cref="T:System.Web.UI.DataSourceView" />
+            >Performs an asynchronous update operation on the list of data that the <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
@@ -1534,36 +1412,45 @@
           >
         </summary>
         <param name="keys">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IDictionary" />
+          An <see cref="T:System.Collections.IDictionary" />
 
           
 
            of object or row keys to be updated by the update operation.</param
         >
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IDictionary" />
+          An <see cref="T:System.Collections.IDictionary" />
 
           
 
            of name/value pairs that represent data elements and their new values.</param
         >
         <param name="oldValues">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IDictionary" />
+          An <see cref="T:System.Collections.IDictionary" />
 
           
 

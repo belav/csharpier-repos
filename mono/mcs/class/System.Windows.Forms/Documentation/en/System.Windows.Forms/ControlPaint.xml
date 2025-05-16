@@ -14,28 +14,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The methods contained in the <see
-         cref="T:System.Windows.Forms.ControlPaint" />
+        >The methods contained in the <see cref="T:System.Windows.Forms.ControlPaint" />
 
         
 
-         class enable you to draw your own controls or elements of controls. You can control the drawing of your own controls if the <see
-         cref="F:System.Windows.Forms.ControlStyles.UserPaint" />
+         class enable you to draw your own controls or elements of controls. You can control the drawing of your own controls if the <see cref="F:System.Windows.Forms.ControlStyles.UserPaint" />
 
         
 
-         bit is set to true for the control. You can get or set the style bits by calling the <see
-         cref="M:System.Windows.Forms.Control.GetStyle(System.Windows.Forms.ControlStyles)" />
+         bit is set to true for the control. You can get or set the style bits by calling the <see cref="M:System.Windows.Forms.Control.GetStyle(System.Windows.Forms.ControlStyles)" />
 
         
 
-         or <see
-         cref="M:System.Windows.Forms.Control.SetStyle(System.Windows.Forms.ControlStyles,System.Boolean)" />
+         or <see cref="M:System.Windows.Forms.Control.SetStyle(System.Windows.Forms.ControlStyles,System.Boolean)" />
 
         
 
-         methods. You can set multiple style bits for any control. The <see
-         cref="T:System.Windows.Forms.ControlStyles" />
+         methods. You can set multiple style bits for any control. The <see cref="T:System.Windows.Forms.ControlStyles" />
 
         
 
@@ -62,18 +57,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the user has enabled the <see
-             cref="P:System.Windows.Forms.SystemInformation.HighContrast" />
+            >If the user has enabled the <see cref="P:System.Windows.Forms.SystemInformation.HighContrast" />
 
             
 
-             mode, this property is set to <see
-             cref="P:System.Drawing.SystemColors.WindowFrame" />
+             mode, this property is set to <see cref="P:System.Drawing.SystemColors.WindowFrame" />
 
             
 
-            ; otherwise, it is set to <see
-             cref="P:System.Drawing.SystemColors.ControlDark" />
+            ; otherwise, it is set to <see cref="P:System.Drawing.SystemColors.ControlDark" />
 
             
 
@@ -83,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the color to use as the <see
-             cref="P:System.Drawing.SystemColors.ControlDark" />
+            >Gets the color to use as the <see cref="P:System.Drawing.SystemColors.ControlDark" />
 
             
 
@@ -119,8 +110,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IntPtr" />
+            >An <see cref="T:System.IntPtr" />
 
             
 
@@ -128,24 +118,30 @@
           >
         </returns>
         <param name="bitmap">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Bitmap" />
+          The <see cref="T:System.Drawing.Bitmap" />
 
           
 
            to create.</param
         >
         <param name="background">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
@@ -182,8 +178,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IntPtr" />
+            >An <see cref="T:System.IntPtr" />
 
             
 
@@ -191,19 +186,26 @@
           >
         </returns>
         <param name="bitmap">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Bitmap" />
+          The <see cref="T:System.Drawing.Bitmap" />
 
           
 
            to create.</param
         >
         <param name="monochromeMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -239,8 +241,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The handle to the <see
-             cref="T:System.Drawing.Bitmap" />
+            >The handle to the <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -248,12 +249,15 @@
           >
         </returns>
         <param name="bitmap">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Bitmap" />
+          The <see cref="T:System.Drawing.Bitmap" />
 
           
 
@@ -281,18 +285,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the specified <see
-             cref="T:System.Drawing.Color" />
+            >If the specified <see cref="T:System.Drawing.Color" />
 
             
 
-             is one of the <see
-             cref="T:System.Drawing.SystemColors" />
+             is one of the <see cref="T:System.Drawing.SystemColors" />
 
             
 
-            , the color is converted to a <see
-             cref="P:System.Drawing.SystemColors.ControlDark" />
+            , the color is converted to a <see cref="P:System.Drawing.SystemColors.ControlDark" />
 
             
 
@@ -306,8 +307,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Color" />
+            >A <see cref="T:System.Drawing.Color" />
 
             
 
@@ -315,12 +315,15 @@
           >
         </returns>
         <param name="baseColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
@@ -349,18 +352,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the specified <see
-             cref="T:System.Drawing.Color" />
+            >If the specified <see cref="T:System.Drawing.Color" />
 
             
 
-             is one of the <see
-             cref="T:System.Drawing.SystemColors" />
+             is one of the <see cref="T:System.Drawing.SystemColors" />
 
             
 
-            , the color is converted to a <see
-             cref="P:System.Drawing.SystemColors.ControlDark" />
+            , the color is converted to a <see cref="P:System.Drawing.SystemColors.ControlDark" />
 
             
 
@@ -374,8 +374,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Color" />
+            >A <see cref="T:System.Drawing.Color" />
 
             
 
@@ -383,24 +382,30 @@
           >
         </returns>
         <param name="baseColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
            to be darkened. </param
         >
         <param name="percOfDarkDark">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The percentage to darken the specified <see
-           cref="T:System.Drawing.Color" />
+          The percentage to darken the specified <see cref="T:System.Drawing.Color" />
 
           
 
@@ -428,18 +433,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the specified <see
-             cref="T:System.Drawing.Color" />
+            >If the specified <see cref="T:System.Drawing.Color" />
 
             
 
-             is one of the <see
-             cref="T:System.Drawing.SystemColors" />
+             is one of the <see cref="T:System.Drawing.SystemColors" />
 
             
 
-            , the color is converted to the <see
-             cref="P:System.Drawing.SystemColors.ControlDarkDark" />
+            , the color is converted to the <see cref="P:System.Drawing.SystemColors.ControlDarkDark" />
 
             
 
@@ -453,8 +455,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Color" />
+            >A <see cref="T:System.Drawing.Color" />
 
             
 
@@ -462,12 +463,15 @@
           >
         </returns>
         <param name="baseColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
@@ -501,48 +505,60 @@
           <para>Draws a border with the specified style and color, on the specified graphics surface, and within the specified bounds on a button-style control.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the dimensions of the border. </param
         >
         <param name="color">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
            of the border. </param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.ButtonBorderStyle" />
+          One of the <see cref="T:System.Windows.Forms.ButtonBorderStyle" />
 
           
 
@@ -586,148 +602,194 @@
           <para>Draws a border on a button-style control with the specified styles, colors, and border widths; on the specified graphics surface; and within the specified bounds.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the dimensions of the border. </param
         >
         <param name="leftColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
            of the left of the border. </param
         >
         <param name="leftWidth">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the left border. </param
         >
         <param name="leftStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.ButtonBorderStyle" />
+          One of the <see cref="T:System.Windows.Forms.ButtonBorderStyle" />
 
           
 
            values that specifies the style of the left border. </param
         >
         <param name="topColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
            of the top of the border. </param
         >
         <param name="topWidth">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the top border. </param
         >
         <param name="topStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.ButtonBorderStyle" />
+          One of the <see cref="T:System.Windows.Forms.ButtonBorderStyle" />
 
           
 
            values that specifies the style of the top border. </param
         >
         <param name="rightColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
            of the right of the border. </param
         >
         <param name="rightWidth">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the right border. </param
         >
         <param name="rightStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.ButtonBorderStyle" />
+          One of the <see cref="T:System.Windows.Forms.ButtonBorderStyle" />
 
           
 
            values that specifies the style of the right border. </param
         >
         <param name="bottomColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
            of the bottom of the border. </param
         >
         <param name="bottomWidth">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the bottom border. </param
         >
         <param name="bottomStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.ButtonBorderStyle" />
+          One of the <see cref="T:System.Windows.Forms.ButtonBorderStyle" />
 
           
 
@@ -756,8 +818,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Windows.Forms.Border3DStyle.Etched" />
+            >The <see cref="F:System.Windows.Forms.Border3DStyle.Etched" />
 
             
 
@@ -769,24 +830,30 @@
           <para>Draws a three-dimensional style border on the specified graphics surface and within the specified bounds on a control.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
@@ -819,36 +886,45 @@
           <para>Draws a three-dimensional style border with the specified style, on the specified graphics surface, and within the specified bounds on a control.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the dimensions of the border. </param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.Border3DStyle" />
+          One of the <see cref="T:System.Windows.Forms.Border3DStyle" />
 
           
 
@@ -882,48 +958,60 @@
           <para>Draws a three-dimensional style border with the specified style, on the specified graphics surface and sides, and within the specified bounds on a control.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the dimensions of the border. </param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.Border3DStyle" />
+          One of the <see cref="T:System.Windows.Forms.Border3DStyle" />
 
           
 
            values that specifies the style of the border. </param
         >
         <param name="sides">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.Border3DSide" />
+          One of the <see cref="T:System.Windows.Forms.Border3DSide" />
 
           
 
@@ -955,8 +1043,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Windows.Forms.Border3DStyle.Etched" />
+            >The <see cref="F:System.Windows.Forms.Border3DStyle.Etched" />
 
             
 
@@ -968,40 +1055,59 @@
           <para>Draws a three-dimensional style border on the specified graphics surface and within the specified bounds on a control.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the top left of the border rectangle. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the top left of the border rectangle. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the border rectangle. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1037,52 +1143,74 @@
           <para>Draws a three-dimensional style border with the specified style, on the specified graphics surface, and within the specified bounds on a control.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the top left of the border rectangle. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the top left of the border rectangle. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the border rectangle. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The height of the border rectangle. </param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.Border3DStyle" />
+          One of the <see cref="T:System.Windows.Forms.Border3DStyle" />
 
           
 
@@ -1119,64 +1247,89 @@
           <para>Draws a three-dimensional style border with the specified style, on the specified graphics surface and side, and within the specified bounds on a control.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the top left of the border rectangle. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the top left of the border rectangle. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the border rectangle. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The height of the border rectangle. </param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.Border3DStyle" />
+          One of the <see cref="T:System.Windows.Forms.Border3DStyle" />
 
           
 
            values that specifies the style of the border. </param
         >
         <param name="sides">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Border3DSide" />
+          The <see cref="T:System.Windows.Forms.Border3DSide" />
 
           
 
@@ -1209,36 +1362,45 @@
           <para>Draws a button control in the specified state, on the specified graphics surface, and within the specified bounds.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the dimensions of the button. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.ButtonState" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.ButtonState" />
 
           
 
@@ -1274,52 +1436,74 @@
           <para>Draws a button control in the specified state, on the specified graphics surface, and within the specified bounds.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the upper left corner of the drawing rectangle. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the upper left corner of the drawing rectangle. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the button. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The height of the button. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.ButtonState" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.ButtonState" />
 
           
 
@@ -1353,48 +1537,60 @@
           <para>Draws the specified caption button control in the specified state, on the specified graphics surface, and within the specified bounds.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the dimensions of the caption button. </param
         >
         <param name="button">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.CaptionButton" />
+          One of the <see cref="T:System.Windows.Forms.CaptionButton" />
 
           
 
            values that specifies the type of caption button to draw. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.ButtonState" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.ButtonState" />
 
           
 
@@ -1431,64 +1627,89 @@
           <para>Draws the specified caption button control in the specified state, on the specified graphics surface, and within the specified bounds.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the top left of the drawing rectangle. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the top left of the drawing rectangle. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the drawing rectangle. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The height of the drawing rectangle. </param
         >
         <param name="button">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.CaptionButton" />
+          One of the <see cref="T:System.Windows.Forms.CaptionButton" />
 
           
 
            values that specifies the type of caption button to draw. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.ButtonState" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.ButtonState" />
 
           
 
@@ -1521,36 +1742,45 @@
           <para>Draws a check box control in the specified state, on the specified graphics surface, and within the specified bounds.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the dimensions of the check box. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.ButtonState" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.ButtonState" />
 
           
 
@@ -1586,52 +1816,74 @@
           <para>Draws a check box control in the specified state, on the specified graphics surface, and within the specified bounds.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the upper left corner of the drawing rectangle. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the upper left corner of the drawing rectangle. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the check box. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The height of the check box. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.ButtonState" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.ButtonState" />
 
           
 
@@ -1664,36 +1916,45 @@
           <para>Draws a drop-down button on a combo box control in the specified state, on the specified graphics surface, and within the specified bounds.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the dimensions of the combo box. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.ButtonState" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.ButtonState" />
 
           
 
@@ -1729,52 +1990,74 @@
           <para>Draws a drop-down button on a combo box control in the specified state, on the specified graphics surface, and within the specified bounds.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the top left of the border rectangle. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the top left of the border rectangle. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the combo box. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The height of the combo box. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.ButtonState" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.ButtonState" />
 
           
 
@@ -1809,24 +2092,30 @@
           <para>Draws a container control grab handle glyph on the specified graphics surface and within the specified bounds.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
@@ -1861,24 +2150,30 @@
           <para>Draws a focus rectangle on the specified graphics surface and within the specified bounds.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
@@ -1915,48 +2210,60 @@
           <para>Draws a focus rectangle on the specified graphics surface and within the specified bounds.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the dimensions of the grab handle glyph. </param
         >
         <param name="foreColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
            that is the foreground color of the object to draw the focus rectangle on. </param
         >
         <param name="backColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
@@ -1993,38 +2300,52 @@
           <para>Draws a standard selection grab handle glyph on the specified graphics surface, within the specified bounds, and in the specified state and style.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the dimensions of the grab handle glyph. </param
         >
         <param name="primary">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to draw the handle as a primary grab handle; otherwise, false. </param
         >
         <param name="enabled">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2055,8 +2376,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="backColor" />
+            >The <paramref name="backColor" />
 
             
 
@@ -2068,48 +2388,60 @@
           <para>Draws a grid of one-pixel dots with the specified spacing, within the specified bounds, on the specified graphics surface, and in the specified color.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="area">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the dimensions of the grid. </param
         >
         <param name="pixelsBetweenDots">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Size" />
+          The <see cref="T:System.Drawing.Size" />
 
           
 
            that specified the height and width between the dots of the grid. </param
         >
         <param name="backColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
@@ -2141,8 +2473,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="background" />
+            >The <paramref name="background" />
 
             
 
@@ -2154,50 +2485,67 @@
           <para>Draws the specified image in a disabled state.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
            to draw. </param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the top left of the border image. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the top left of the border image. </param
         >
         <param name="background">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
@@ -2230,31 +2578,41 @@
           <para>Draws a locked selection frame on the screen within the specified bounds and on the specified graphics surface. Specifies whether to draw the frame with the primary selected colors.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the dimensions of the frame. </param
         >
         <param name="primary">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2284,28 +2642,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When owner-drawing <see
-             cref="T:System.Windows.Forms.MenuItem" />
+            >When owner-drawing <see cref="T:System.Windows.Forms.MenuItem" />
 
             
 
-             controls, you need to verify property values to determine the correct glyph to draw or remove. For example, when the <see
-             cref="P:System.Windows.Forms.MenuItem.Checked" />
+             controls, you need to verify property values to determine the correct glyph to draw or remove. For example, when the <see cref="P:System.Windows.Forms.MenuItem.Checked" />
 
             
 
-             property is set to true, you must call the <see
-             cref="F:System.Windows.Forms.MenuGlyph.Checkmark" />
+             property is set to true, you must call the <see cref="F:System.Windows.Forms.MenuGlyph.Checkmark" />
 
             
 
-             value of <see
-             cref="T:System.Windows.Forms.MenuGlyph" />
+             value of <see cref="T:System.Windows.Forms.MenuGlyph" />
 
             
 
-             to draw a check mark on the <see
-             cref="T:System.Windows.Forms.MenuItem" />
+             to draw a check mark on the <see cref="T:System.Windows.Forms.MenuItem" />
 
             
 
@@ -2317,36 +2670,45 @@
           <para>Draws the specified menu glyph on a menu item control within the specified bounds and on the specified surface.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the dimensions of the glyph. </param
         >
         <param name="glyph">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.MenuGlyph" />
+          One of the <see cref="T:System.Windows.Forms.MenuGlyph" />
 
           
 
@@ -2381,28 +2743,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When owner-drawing <see
-             cref="T:System.Windows.Forms.MenuItem" />
+            >When owner-drawing <see cref="T:System.Windows.Forms.MenuItem" />
 
             
 
-             controls, you need to verify property values to determine the correct glyph to draw or remove. For example, when the <see
-             cref="P:System.Windows.Forms.MenuItem.Checked" />
+             controls, you need to verify property values to determine the correct glyph to draw or remove. For example, when the <see cref="P:System.Windows.Forms.MenuItem.Checked" />
 
             
 
-             property is set to true, you must call the <see
-             cref="F:System.Windows.Forms.MenuGlyph.Checkmark" />
+             property is set to true, you must call the <see cref="F:System.Windows.Forms.MenuGlyph.Checkmark" />
 
             
 
-             value of <see
-             cref="T:System.Windows.Forms.MenuGlyph" />
+             value of <see cref="T:System.Windows.Forms.MenuGlyph" />
 
             
 
-             to draw a check mark on the <see
-             cref="T:System.Windows.Forms.MenuItem" />
+             to draw a check mark on the <see cref="T:System.Windows.Forms.MenuItem" />
 
             
 
@@ -2412,23 +2769,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws the specified menu glyph on a menu item control within the specified bounds and on the specified surface, replacing <see
-             cref="P:System.Drawing.Color.White" />
+            >Draws the specified menu glyph on a menu item control within the specified bounds and on the specified surface, replacing <see cref="P:System.Drawing.Color.White" />
 
             
 
-             with the color specified in the <paramref
-             name="backColor" />
+             with the color specified in the <paramref name="backColor" />
 
             
 
-             parameter and replacing <see
-             cref="P:System.Drawing.Color.Black" />
+             parameter and replacing <see cref="P:System.Drawing.Color.Black" />
 
             
 
-             with the color specified in the <paramref
-             name="foreColor" />
+             with the color specified in the <paramref name="foreColor" />
 
             
 
@@ -2436,60 +2789,75 @@
           >
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on.</param
         >
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the dimensions of the glyph. </param
         >
         <param name="glyph">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.MenuGlyph" />
+          One of the <see cref="T:System.Windows.Forms.MenuGlyph" />
 
           
 
            values that specifies the image to draw. </param
         >
         <param name="foreColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The color that replaces <see
-           cref="P:System.Drawing.Color.White" />
+          The color that replaces <see cref="P:System.Drawing.Color.White" />
 
           
 
            as the foreground color.</param
         >
         <param name="backColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The color that replaces <see
-           cref="P:System.Drawing.Color.Black" />
+          The color that replaces <see cref="P:System.Drawing.Color.Black" />
 
           
 
@@ -2518,28 +2886,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When owner-drawing <see
-             cref="T:System.Windows.Forms.MenuItem" />
+            >When owner-drawing <see cref="T:System.Windows.Forms.MenuItem" />
 
             
 
-             controls, you need to verify property values to determine the correct glyph to draw or remove. For example, when the <see
-             cref="P:System.Windows.Forms.MenuItem.Checked" />
+             controls, you need to verify property values to determine the correct glyph to draw or remove. For example, when the <see cref="P:System.Windows.Forms.MenuItem.Checked" />
 
             
 
-             property is set to true, you call the <see
-             cref="F:System.Windows.Forms.MenuGlyph.Checkmark" />
+             property is set to true, you call the <see cref="F:System.Windows.Forms.MenuGlyph.Checkmark" />
 
             
 
-             value of <see
-             cref="T:System.Windows.Forms.MenuGlyph" />
+             value of <see cref="T:System.Windows.Forms.MenuGlyph" />
 
             
 
-             to draw a check mark on the <see
-             cref="T:System.Windows.Forms.MenuItem" />
+             to draw a check mark on the <see cref="T:System.Windows.Forms.MenuItem" />
 
             
 
@@ -2551,52 +2914,74 @@
           <para>Draws the specified menu glyph on a menu item control with the specified bounds and on the specified surface.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the upper left corner of the drawing rectangle. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the upper left corner of the drawing rectangle. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the menu glyph. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The height of the menu glyph. </param
         >
         <param name="glyph">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.MenuGlyph" />
+          One of the <see cref="T:System.Windows.Forms.MenuGlyph" />
 
           
 
@@ -2634,28 +3019,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When owner-drawing <see
-             cref="T:System.Windows.Forms.MenuItem" />
+            >When owner-drawing <see cref="T:System.Windows.Forms.MenuItem" />
 
             
 
-             controls, you need to verify property values to determine the correct glyph to draw or remove. For example, when the <see
-             cref="P:System.Windows.Forms.MenuItem.Checked" />
+             controls, you need to verify property values to determine the correct glyph to draw or remove. For example, when the <see cref="P:System.Windows.Forms.MenuItem.Checked" />
 
             
 
-             property is set to true, you must call the <see
-             cref="F:System.Windows.Forms.MenuGlyph.Checkmark" />
+             property is set to true, you must call the <see cref="F:System.Windows.Forms.MenuGlyph.Checkmark" />
 
             
 
-             value of <see
-             cref="T:System.Windows.Forms.MenuGlyph" />
+             value of <see cref="T:System.Windows.Forms.MenuGlyph" />
 
             
 
-             to draw a check mark on the <see
-             cref="T:System.Windows.Forms.MenuItem" />
+             to draw a check mark on the <see cref="T:System.Windows.Forms.MenuItem" />
 
             
 
@@ -2665,23 +3045,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws the specified menu glyph on a menu item control within the specified coordinates, height, and width on the specified surface, replacing <see
-             cref="P:System.Drawing.Color.White" />
+            >Draws the specified menu glyph on a menu item control within the specified coordinates, height, and width on the specified surface, replacing <see cref="P:System.Drawing.Color.White" />
 
             
 
-             with the color specified in the <paramref
-             name="backColor" />
+             with the color specified in the <paramref name="backColor" />
 
             
 
-             parameter and replacing <see
-             cref="P:System.Drawing.Color.Black" />
+             parameter and replacing <see cref="P:System.Drawing.Color.Black" />
 
             
 
-             with the color specified in the <paramref
-             name="foreColor" />
+             with the color specified in the <paramref name="foreColor" />
 
             
 
@@ -2689,76 +3065,104 @@
           >
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the upper left corner of the drawing rectangle.</param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the upper left corner of the drawing rectangle. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the menu glyph.</param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The height of the menu glyph.</param
         >
         <param name="glyph">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.MenuGlyph" />
+          One of the <see cref="T:System.Windows.Forms.MenuGlyph" />
 
           
 
            values that specifies the image to draw.</param
         >
         <param name="foreColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The color that replaces <see
-           cref="P:System.Drawing.Color.White" />
+          The color that replaces <see cref="P:System.Drawing.Color.White" />
 
           
 
            as the foreground color.</param
         >
         <param name="backColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The color that replaces <see
-           cref="P:System.Drawing.Color.Black" />
+          The color that replaces <see cref="P:System.Drawing.Color.Black" />
 
           
 
@@ -2787,36 +3191,45 @@
           <para>Draws a three-state check box control in the specified state, on the specified graphics surface, and within the specified bounds.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the dimensions of the check box. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.ButtonState" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.ButtonState" />
 
           
 
@@ -2852,52 +3265,74 @@
           <para>Draws a three-state check box control in the specified state, on the specified graphics surface, and within the specified bounds.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the upper left corner of the drawing rectangle. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the upper left corner of the drawing rectangle. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the check box. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The height of the check box. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.ButtonState" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.ButtonState" />
 
           
 
@@ -2930,36 +3365,45 @@
           <para>Draws a radio button control in the specified state, on the specified graphics surface, and within the specified bounds.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the dimensions of the radio button. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.ButtonState" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.ButtonState" />
 
           
 
@@ -2995,52 +3439,74 @@
           <para>Draws a radio button control in the specified state, on the specified graphics surface, and within the specified bounds.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the upper left corner of the drawing rectangle. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the upper left corner of the drawing rectangle. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the radio button. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The height of the radio button. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.ButtonState" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.ButtonState" />
 
           
 
@@ -3070,8 +3536,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="backColor" />
+            >The <paramref name="backColor" />
 
             
 
@@ -3084,36 +3549,45 @@
           <para>Draws a reversible frame on the screen within the specified bounds, with the specified background color, and in the specified state.</para>
         </summary>
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the dimensions of the rectangle to draw, in screen coordinates. </param
         >
         <param name="backColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
            of the background behind the frame. </param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.FrameStyle" />
+          One of the <see cref="T:System.Windows.Forms.FrameStyle" />
 
           
 
@@ -3143,8 +3617,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="backColor" />
+            >The <paramref name="backColor" />
 
             
 
@@ -3157,36 +3630,45 @@
           <para>Draws a reversible line on the screen within the specified starting and ending points and with the specified background color.</para>
         </summary>
         <param name="start">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The starting <see
-           cref="T:System.Drawing.Point" />
+          The starting <see cref="T:System.Drawing.Point" />
 
           
 
            of the line, in screen coordinates. </param
         >
         <param name="end">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The ending <see
-           cref="T:System.Drawing.Point" />
+          The ending <see cref="T:System.Drawing.Point" />
 
           
 
            of the line, in screen coordinates. </param
         >
         <param name="backColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
@@ -3220,48 +3702,60 @@
           <para>Draws the specified scroll button on a scroll bar control in the specified state, on the specified graphics surface, and within the specified bounds.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the dimensions of the glyph. </param
         >
         <param name="button">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.ScrollButton" />
+          One of the <see cref="T:System.Windows.Forms.ScrollButton" />
 
           
 
            values that specifies the type of scroll arrow to draw. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.ButtonState" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.ButtonState" />
 
           
 
@@ -3298,64 +3792,89 @@
           <para>Draws the specified scroll button on a scroll bar control in the specified state, on the specified graphics surface, and within the specified bounds.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the upper left corner of the drawing rectangle. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the upper left corner of the drawing rectangle. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the scroll button. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The height of the scroll button. </param
         >
         <param name="button">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.ScrollButton" />
+          One of the <see cref="T:System.Windows.Forms.ScrollButton" />
 
           
 
            values that specifies the type of scroll arrow to draw. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.ButtonState" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.ButtonState" />
 
           
 
@@ -3388,16 +3907,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A selection frame is a frame that is drawn around a selected component at design time.</para>
           <para
-            >The <paramref
-             name="backColor" />
+            >The <paramref name="backColor" />
 
             
 
              parameter is used to calculate the fill color of the frame so that it is always visible against the background.</para
           >
           <para
-            >If the <paramref
-             name="active" />
+            >If the <paramref name="active" />
 
             
 
@@ -3409,55 +3926,71 @@
           <para>Draws a standard selection frame in the specified state, on the specified graphics surface, with the specified inner and outer dimensions, and with the specified background color.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="active">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to draw the selection frame in an active state; otherwise, false. </param
         >
         <param name="outsideRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the outer boundary of the selection frame. </param
         >
         <param name="insideRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the inner boundary of the selection frame.</param
         >
         <param name="backColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
@@ -3487,8 +4020,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="backColor" />
+            >The <paramref name="backColor" />
 
             
 
@@ -3501,36 +4033,45 @@
           <para>Draws a size grip on a form with the specified bounds and background color and on the specified graphics surface.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="backColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
            of the background used to determine the colors of the size grip.</param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
@@ -3563,8 +4104,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="backColor" />
+            >The <paramref name="backColor" />
 
             
 
@@ -3577,52 +4117,74 @@
           <para>Draws a size grip on a form with the specified bounds and background color and on the specified graphics surface.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="backColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
            of the background used to determine the colors of the size grip. </param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the upper left corner of the size grip. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the upper left corner of the size grip. </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the size grip. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3658,67 +4220,86 @@
           <para>Draws the specified string in a disabled state on the specified graphics surface; within the specified bounds; and in the specified font, color, and format.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on. </param
         >
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string to draw. </param
         >
         <param name="font">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Font" />
+          The <see cref="T:System.Drawing.Font" />
 
           
 
            to draw the string with. </param
         >
         <param name="color">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
            of the background behind the string. </param
         >
         <param name="layoutRectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.RectangleF" />
+          The <see cref="T:System.Drawing.RectangleF" />
 
           
 
            that represents the dimensions of the string. </param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.StringFormat" />
+          The <see cref="T:System.Drawing.StringFormat" />
 
           
 
@@ -3755,8 +4336,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws the specified string in a disabled state on the specified graphics surface, within the specified bounds, and in the specified font, color, and format, using the specified GDI-based <see
-             cref="T:System.Windows.Forms.TextRenderer" />
+            >Draws the specified string in a disabled state on the specified graphics surface, within the specified bounds, and in the specified font, color, and format, using the specified GDI-based <see cref="T:System.Windows.Forms.TextRenderer" />
 
             
 
@@ -3764,67 +4344,86 @@
           >
         </summary>
         <param name="dc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The GDI-based <see
-           cref="T:System.Windows.Forms.TextRenderer" />
+          The GDI-based <see cref="T:System.Windows.Forms.TextRenderer" />
 
           
 
           .</param
         >
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string to draw. </param
         >
         <param name="font">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Font" />
+          The <see cref="T:System.Drawing.Font" />
 
           
 
            to draw the string with.</param
         >
         <param name="color">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
            of the background behind the string.</param
         >
         <param name="layoutRectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.RectangleF" />
+          The <see cref="T:System.Drawing.RectangleF" />
 
           
 
            that represents the dimensions of the string.</param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.StringFormat" />
+          The <see cref="T:System.Drawing.StringFormat" />
 
           
 
@@ -3855,24 +4454,30 @@
           <para>Draws a border in the style appropriate for disabled items.</para>
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw on.</param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
@@ -3897,8 +4502,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="backColor" />
+            >The <paramref name="backColor" />
 
             
 
@@ -3911,24 +4515,30 @@
           <para>Draws a filled, reversible rectangle on the screen.</para>
         </summary>
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that represents the dimensions of the rectangle to fill, in screen coordinates. </param
         >
         <param name="backColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
@@ -3956,18 +4566,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the specified <see
-             cref="T:System.Drawing.Color" />
+            >If the specified <see cref="T:System.Drawing.Color" />
 
             
 
-             is one of the <see
-             cref="T:System.Drawing.SystemColors" />
+             is one of the <see cref="T:System.Drawing.SystemColors" />
 
             
 
-            , the color is converted to a <see
-             cref="P:System.Drawing.SystemColors.ControlLight" />
+            , the color is converted to a <see cref="P:System.Drawing.SystemColors.ControlLight" />
 
             
 
@@ -3981,8 +4588,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Color" />
+            >A <see cref="T:System.Drawing.Color" />
 
             
 
@@ -3990,12 +4596,15 @@
           >
         </returns>
         <param name="baseColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
@@ -4024,18 +4633,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the specified <see
-             cref="T:System.Drawing.Color" />
+            >If the specified <see cref="T:System.Drawing.Color" />
 
             
 
-             is one of the <see
-             cref="T:System.Drawing.SystemColors" />
+             is one of the <see cref="T:System.Drawing.SystemColors" />
 
             
 
-            , the color is converted to a <see
-             cref="P:System.Drawing.SystemColors.ControlLight" />
+            , the color is converted to a <see cref="P:System.Drawing.SystemColors.ControlLight" />
 
             
 
@@ -4049,8 +4655,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Color" />
+            >A <see cref="T:System.Drawing.Color" />
 
             
 
@@ -4058,24 +4663,30 @@
           >
         </returns>
         <param name="baseColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
            to be lightened. </param
         >
         <param name="percOfLightLight">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The percentage to lighten the specified <see
-           cref="T:System.Drawing.Color" />
+          The percentage to lighten the specified <see cref="T:System.Drawing.Color" />
 
           
 
@@ -4103,18 +4714,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the specified <see
-             cref="T:System.Drawing.Color" />
+            >If the specified <see cref="T:System.Drawing.Color" />
 
             
 
-             is one of the <see
-             cref="T:System.Drawing.SystemColors" />
+             is one of the <see cref="T:System.Drawing.SystemColors" />
 
             
 
-            , the color is converted to the <see
-             cref="P:System.Drawing.SystemColors.ControlLightLight" />
+            , the color is converted to the <see cref="P:System.Drawing.SystemColors.ControlLightLight" />
 
             
 
@@ -4128,8 +4736,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Color" />
+            >A <see cref="T:System.Drawing.Color" />
 
             
 
@@ -4137,12 +4744,15 @@
           >
         </returns>
         <param name="baseColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 

@@ -1,26 +1,26 @@
 <?xml version="1.0"?>
 <clause number="14.5.10.3" title="Delegate creation expressions">
   <paragraph
-    >A <non_terminal
-     where="14.5.10.3">delegate-creation-expression</non_terminal>
-
-    
-
-     is used to create a new instance of a <non_terminal
-     where="11.2">delegate-type</non_terminal>
-
-    
-
-    . <grammar_production
+    >A <non_terminal where="14.5.10.3"
+      >delegate-creation-expression</non_terminal
     >
+
+    
+
+     is used to create a new instance of a <non_terminal where="11.2"
+      >delegate-type</non_terminal
+    >
+
+    
+
+    . <grammar_production>
       <name>
         <non_terminal where="14.5.10.3">delegate-creation-expression</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <keyword>new</keyword>
         <non_terminal where="11.2">delegate-type</non_terminal>
         <terminal>(</terminal>
@@ -30,41 +30,44 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >The argument of a delegate creation expression must be a method group (<hyperlink
-    >14.1</hyperlink>
+    >The argument of a delegate creation expression must be a method group (<hyperlink>14.1</hyperlink>
 
     
 
     ) or a value of a  <non_terminal
-     where="11.2">delegate-type</non_terminal>
+      where="11.2"
+      >delegate-type</non_terminal
+    >
 
     
 
     . If the argument is a method group, it identifies the method and, for an instance method, the object for which to create a delegate. If the argument is a value of a <non_terminal
-     where="11.2">delegate-type</non_terminal>
+      where="11.2"
+      >delegate-type</non_terminal
+    >
 
     
 
     , it identifies a delegate instance of which to create a copy. </paragraph
   >
   <paragraph
-    >The compile-time processing of a <non_terminal
-     where="14.5.10.3">delegate-creation-expression</non_terminal>
-
-    
-
-     of the form new D(E), where D is a <non_terminal
-     where="11.2">delegate-type</non_terminal>
-
-    
-
-     and E is an expression, consists of the following steps: <list
+    >The compile-time processing of a <non_terminal where="14.5.10.3"
+      >delegate-creation-expression</non_terminal
     >
+
+    
+
+     of the form new D(E), where D is a <non_terminal where="11.2"
+      >delegate-type</non_terminal
+    >
+
+    
+
+     and E is an expression, consists of the following steps: <list>
       <list_item> If E is a method group: </list_item>
       <list>
         <list_item
-          > The set of methods identified by E must include exactly one method that is compatible (<hyperlink
-          >22.1</hyperlink>
+          > The set of methods identified by E must include exactly one method that is compatible (<hyperlink>22.1</hyperlink>
 
           
 
@@ -72,22 +75,28 @@
         >
         <list_item
           > As in a method invocation, the selected method must be compatible with the context of the method group: If the method is a static method, the method group must have resulted from a <non_terminal
-           where="14.5.2">simple-name</non_terminal>
+            where="14.5.2"
+            >simple-name</non_terminal
+          >
 
           
 
-           or a <non_terminal
-           where="14.5.4">member-access</non_terminal>
+           or a <non_terminal where="14.5.4"
+            >member-access</non_terminal
+          >
 
           
 
            through a type. If the method is an instance method, the method group must have resulted from a <non_terminal
-           where="14.5.2">simple-name</non_terminal>
+            where="14.5.2"
+            >simple-name</non_terminal
+          >
 
           
 
-           or a <non_terminal
-           where="14.5.4">member-access</non_terminal>
+           or a <non_terminal where="14.5.4"
+            >member-access</non_terminal
+          >
 
           
 
@@ -98,8 +107,7 @@
       <list_item> Otherwise, if E is a value of a delegate-type: </list_item>
       <list>
         <list_item
-          > D and E must be compatible (<hyperlink
-          >22.1</hyperlink>
+          > D and E must be compatible (<hyperlink>22.1</hyperlink>
 
           
 
@@ -111,39 +119,41 @@
     </list>
   </paragraph>
   <paragraph
-    >The run-time processing of a <non_terminal
-     where="14.5.10.3">delegate-creation-expression</non_terminal>
-
-    
-
-     of the form new D(E), where D is a <non_terminal
-     where="11.2">delegate-type</non_terminal>
-
-    
-
-     and E is an expression, consists of the following steps: <list
+    >The run-time processing of a <non_terminal where="14.5.10.3"
+      >delegate-creation-expression</non_terminal
     >
+
+    
+
+     of the form new D(E), where D is a <non_terminal where="11.2"
+      >delegate-type</non_terminal
+    >
+
+    
+
+     and E is an expression, consists of the following steps: <list>
       <list_item> If E is a method group: </list_item>
       <list>
         <list_item> If the method selected at compile-time is a static method, the target object of the delegate is null. Otherwise, the selected method is an instance method, and the target object of the delegate is determined from the instance expression associated with E: </list_item>
         <list>
           <list_item> The instance expression is evaluated. If this evaluation causes an exception, no further steps are executed. </list_item>
           <list_item
-            > If the instance expression is of a <non_terminal
-             where="11.2">reference-type</non_terminal>
+            > If the instance expression is of a <non_terminal where="11.2"
+              >reference-type</non_terminal
+            >
 
             
 
             , the value computed by the instance expression becomes the target object. If the target object is null, a System.NullReferenceException is thrown and no further steps are executed. </list_item
           >
           <list_item
-            > If the instance expression is of a <non_terminal
-             where="11.1">value-type</non_terminal>
+            > If the instance expression is of a <non_terminal where="11.1"
+              >value-type</non_terminal
+            >
 
             
 
-            , a boxing operation (<hyperlink
-            >11.3.1</hyperlink>
+            , a boxing operation (<hyperlink>11.3.1</hyperlink>
 
             
 
@@ -163,14 +173,12 @@
     </list>
   </paragraph>
   <paragraph
-    >The method and object to which a delegate refers are determined when the delegate is instantiated and then remain constant for the entire lifetime of the delegate. In other words, it is not possible to change the target method or object of a delegate once it has been created. <note
-    >[Note: Remember, when two delegates are combined or one is removed from another, a new delegate results; no existing delegate has its content changed. end note]</note>
+    >The method and object to which a delegate refers are determined when the delegate is instantiated and then remain constant for the entire lifetime of the delegate. In other words, it is not possible to change the target method or object of a delegate once it has been created. <note>[Note: Remember, when two delegates are combined or one is removed from another, a new delegate results; no existing delegate has its content changed. end note]</note>
   </paragraph>
   <paragraph>It is not possible to create a delegate that refers to a property, indexer, user-defined operator, instance constructor, destructor, or static constructor. </paragraph>
   <paragraph>
     <example
-      >[Example: As described above, when a delegate is created from a method group, the formal parameter list and return type of the delegate determine which of the overloaded methods to select. In the example <code_example
-      >
+      >[Example: As described above, when a delegate is created from a method group, the formal parameter list and return type of the delegate determine which of the overloaded methods to select. In the example <code_example>
         <![CDATA[
 delegate double DoubleFunc(double x);  
 class A  

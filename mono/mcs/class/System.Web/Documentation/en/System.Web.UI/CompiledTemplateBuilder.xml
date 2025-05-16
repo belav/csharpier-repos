@@ -24,8 +24,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.CompiledTemplateBuilder" />
+        >The <see cref="T:System.Web.UI.CompiledTemplateBuilder" />
 
         
 
@@ -35,8 +34,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An <see
-         cref="T:System.Web.UI.ITemplate" />
+        >An <see cref="T:System.Web.UI.ITemplate" />
 
         
 
@@ -56,15 +54,11 @@
         <Parameter Name="templateMethod" Type="System.Web.UI.BuildTemplateMethod" />
       </Parameters>
       <Docs>
-        <param name="templateMethod"
-          >a <see
-           cref="T:System.Web.UI.BuildTemplateMethod" />
-        </param>
+        <param name="templateMethod">a <see cref="T:System.Web.UI.BuildTemplateMethod" /></param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is used internally by ASP.NET to create a new instance of the <see
-             cref="T:System.Web.UI.CompiledTemplateBuilder" />
+            >This constructor is used internally by ASP.NET to create a new instance of the <see cref="T:System.Web.UI.CompiledTemplateBuilder" />
 
             
 
@@ -74,8 +68,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.CompiledTemplateBuilder" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.CompiledTemplateBuilder" />
 
             
 
@@ -101,25 +94,19 @@
         <Parameter Name="ctrl" Type="System.Web.UI.Control" />
       </Parameters>
       <Docs>
-        <param name="ctrl"
-          >a <see
-           cref="T:System.Web.UI.Control" />
-        </param>
+        <param name="ctrl">a <see cref="T:System.Web.UI.Control" /></param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.CompiledBindableTemplateBuilder.InstantiateIn(System.Web.UI.Control)" />
+            >The <see cref="M:System.Web.UI.CompiledBindableTemplateBuilder.InstantiateIn(System.Web.UI.Control)" />
 
             
 
-             method is the <see
-             cref="T:System.Web.UI.TemplateBuilder" />
+             method is the <see cref="T:System.Web.UI.TemplateBuilder" />
 
             
 
-             class's implementation of the <see
-             cref="M:System.Web.UI.ITemplate.InstantiateIn(System.Web.UI.Control)" />
+             class's implementation of the <see cref="M:System.Web.UI.ITemplate.InstantiateIn(System.Web.UI.Control)" />
 
             
 
@@ -129,8 +116,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates the <see
-             cref="T:System.Web.UI.Control" />
+            >Populates the <see cref="T:System.Web.UI.Control" />
 
             
 

@@ -22,29 +22,25 @@
       <para>Distributed garbage collection controls when server applications can be deleted. Traditionally, distributed garbage collection uses reference counts and pinging for control. This works well when there are a few clients per object, but does not work well when there are thousands of clients per each object. The lifetime service can assume the function of a traditional distributed garbage collector, and scales well when the number of clients increases.</para>
       <para>The lifetime service associates a lease with each remotely activated object. When the lease expires, the object is removed. A lease can specify that an object has an infinite lifetime.</para>
       <para
-        >Each <see
-         cref="T:System.AppDomain" />
+        >Each <see cref="T:System.AppDomain" />
 
         
 
          contains a lease manager that administers the leases in the domain. The lease manager periodically examines the leases for time expiration. If a lease has expired, it can either be canceled by removing its reference to the lease, or renewed by invoking one or more of the lease's sponsors.</para
       >
       <para
-        >A lease contains properties that determine its policies, and methods that renew the lease time. The lease exposes the <see
-         cref="T:System.Runtime.Remoting.Lifetime.ILease" />
+        >A lease contains properties that determine its policies, and methods that renew the lease time. The lease exposes the <see cref="T:System.Runtime.Remoting.Lifetime.ILease" />
 
         
 
          interface.</para
       >
       <para
-        >For an example showing how to use the <see
-         cref="T:System.Runtime.Remoting.Lifetime.ILease" />
+        >For an example showing how to use the <see cref="T:System.Runtime.Remoting.Lifetime.ILease" />
 
         
 
-         interface see <format
-         type="text/html">
+         interface see <format type="text/html">
           <a href="334a30e5-33cb-4f0f-a38a-ed4abc5560fa">Lifetimes</a>
         </format>
 
@@ -107,8 +103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the current <see
-             cref="T:System.Runtime.Remoting.Lifetime.LeaseState" />
+            >Gets the current <see cref="T:System.Runtime.Remoting.Lifetime.LeaseState" />
 
             
 
@@ -137,13 +132,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Runtime.Remoting.Lifetime.ILease.InitialLeaseTime" />
+            >If the <see cref="P:System.Runtime.Remoting.Lifetime.ILease.InitialLeaseTime" />
 
             
 
-             property is set to <see
-             cref="F:System.TimeSpan.Zero" />
+             property is set to <see cref="F:System.TimeSpan.Zero" />
 
             
 
@@ -187,7 +180,11 @@
           <para>Registers a sponsor for the lease without renewing the lease.</para>
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -222,8 +219,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers a sponsor for the lease, and renews it by the specified <see
-             cref="T:System.TimeSpan" />
+            >Registers a sponsor for the lease, and renews it by the specified <see cref="T:System.TimeSpan" />
 
             
 
@@ -231,14 +227,22 @@
           >
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The callback object of the sponsor. </param
         >
         <param name="renewalTime">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -268,8 +272,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The lease time is set to the maximum of the <see
-             cref="P:System.Runtime.Remoting.Lifetime.ILease.CurrentLeaseTime" />
+            >The lease time is set to the maximum of the <see cref="P:System.Runtime.Remoting.Lifetime.ILease.CurrentLeaseTime" />
 
             
 
@@ -285,7 +288,11 @@
           <para>The new expiration time of the lease.</para>
         </returns>
         <param name="renewalTime">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -313,38 +320,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you make a call to a remote object, the lifetime service adds the <see
-             cref="P:System.Runtime.Remoting.Lifetime.ILease.RenewOnCallTime" />
+            >When you make a call to a remote object, the lifetime service adds the <see cref="P:System.Runtime.Remoting.Lifetime.ILease.RenewOnCallTime" />
 
             
 
-             to the <see
-             cref="P:System.Runtime.Remoting.Lifetime.ILease.CurrentLeaseTime" />
+             to the <see cref="P:System.Runtime.Remoting.Lifetime.ILease.CurrentLeaseTime" />
 
             
 
-             only if the <see
-             cref="P:System.Runtime.Remoting.Lifetime.ILease.CurrentLeaseTime" />
+             only if the <see cref="P:System.Runtime.Remoting.Lifetime.ILease.CurrentLeaseTime" />
 
             
 
-             has dropped below the <see
-             cref="P:System.Runtime.Remoting.Lifetime.ILease.RenewOnCallTime" />
+             has dropped below the <see cref="P:System.Runtime.Remoting.Lifetime.ILease.RenewOnCallTime" />
 
             
 
-            . Sequential calls therefore do not increase the <see
-             cref="P:System.Runtime.Remoting.Lifetime.ILease.CurrentLeaseTime" />
+            . Sequential calls therefore do not increase the <see cref="P:System.Runtime.Remoting.Lifetime.ILease.CurrentLeaseTime" />
 
             
 
-             without bound. Instead, immediately after any call, the <see
-             cref="P:System.Runtime.Remoting.Lifetime.ILease.CurrentLeaseTime" />
+             without bound. Instead, immediately after any call, the <see cref="P:System.Runtime.Remoting.Lifetime.ILease.CurrentLeaseTime" />
 
             
 
-             is guaranteed to be the <see
-             cref="P:System.Runtime.Remoting.Lifetime.ILease.RenewOnCallTime" />
+             is guaranteed to be the <see cref="P:System.Runtime.Remoting.Lifetime.ILease.RenewOnCallTime" />
 
             
 
@@ -354,8 +354,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the amount of time by which a call to the remote object renews the <see
-             cref="P:System.Runtime.Remoting.Lifetime.ILease.CurrentLeaseTime" />
+            >Gets or sets the amount of time by which a call to the remote object renews the <see cref="P:System.Runtime.Remoting.Lifetime.ILease.CurrentLeaseTime" />
 
             
 
@@ -384,13 +383,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Runtime.Remoting.Lifetime.ILease.SponsorshipTimeout" />
+            >If the <see cref="P:System.Runtime.Remoting.Lifetime.ILease.SponsorshipTimeout" />
 
             
 
-             is <see
-             cref="F:System.TimeSpan.Zero" />
+             is <see cref="F:System.TimeSpan.Zero" />
 
             
 
@@ -436,7 +433,11 @@
           <para>After this method is called, the lease state changes to expired and the object is collected by the garbage collector.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

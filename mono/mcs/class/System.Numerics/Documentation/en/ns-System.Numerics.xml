@@ -4,23 +4,19 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Numerics" />
+        >The <see cref="N:System.Numerics" />
 
         
 
-         namespace contains numeric types that complement the numeric primitives, such as <see
-         cref="T:System.Byte" />
+         namespace contains numeric types that complement the numeric primitives, such as <see cref="T:System.Byte" />
 
         
 
-        , <see
-         cref="T:System.Double" />
+        , <see cref="T:System.Double" />
 
         
 
-        , and <see
-         cref="T:System.Int32" />
+        , and <see cref="T:System.Int32" />
 
         
 
@@ -33,23 +29,19 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="T:System.Numerics.BigInteger" />
+            >The <see cref="T:System.Numerics.BigInteger" />
 
             
 
-             structure, which is a nonprimitive integral type that supports arbitrarily large integers. An integral primitive such as <see
-             cref="T:System.Byte" />
+             structure, which is a nonprimitive integral type that supports arbitrarily large integers. An integral primitive such as <see cref="T:System.Byte" />
 
             
 
-             or <see
-             cref="T:System.Int32" />
+             or <see cref="T:System.Int32" />
 
             
 
-             includes a MinValue and a MaxValue property, which define the lower bound and upper bound supported by that data type. In contrast, the <see
-             cref="T:System.Numerics.BigInteger" />
+             includes a MinValue and a MaxValue property, which define the lower bound and upper bound supported by that data type. In contrast, the <see cref="T:System.Numerics.BigInteger" />
 
             
 
@@ -58,8 +50,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.Numerics.Complex" />
+            >The <see cref="T:System.Numerics.Complex" />
 
             
 

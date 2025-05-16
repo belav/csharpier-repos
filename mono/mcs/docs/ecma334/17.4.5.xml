@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <clause number="17.4.5" title="Variable initializers">
   <paragraph
-    >Field declarations may include <non_terminal
-     where="19.6">variable-initializer</non_terminal>
+    >Field declarations may include <non_terminal where="19.6"
+      >variable-initializer</non_terminal
+    >
 
     
 
@@ -10,8 +11,7 @@
   >
   <paragraph>
     <example
-      >[Example: The example <code_example
-      >
+      >[Example: The example <code_example>
         <![CDATA[
 using System;  
 class Test  
@@ -29,8 +29,7 @@ class Test
 
       
 
-      produces the output <code_example
-      >
+      produces the output <code_example>
         <![CDATA[
 x = 1.4142135623731, i = 100, s = Hello  
 ]]>
@@ -42,8 +41,7 @@ x = 1.4142135623731, i = 100, s = Hello
     >
   </paragraph>
   <paragraph
-    >The default value initialization described in <hyperlink
-    >17.4.3</hyperlink>
+    >The default value initialization described in <hyperlink>17.4.3</hyperlink>
 
     
 
@@ -51,9 +49,7 @@ x = 1.4142135623731, i = 100, s = Hello
   >
   <paragraph
     >It is possible for static fields with variable initializers to be observed in their default value state. <example
-
-      >[Example: However, this is strongly discouraged as a matter of style. The example <code_example
-      >
+      >[Example: However, this is strongly discouraged as a matter of style. The example <code_example>
         <![CDATA[
 using System;  
 class Test  
@@ -69,8 +65,7 @@ class Test
 
       
 
-      exhibits this behavior. Despite the circular definitions of a and b, the program is valid. It results in the output <code_example
-      >
+      exhibits this behavior. Despite the circular definitions of a and b, the program is valid. It results in the output <code_example>
         <![CDATA[
 a = 1, b = 2  
 ]]>
@@ -78,8 +73,7 @@ a = 1, b = 2
 
       
 
-      because the static fields a and b are initialized to 0 (the default value for <keyword
-      >int</keyword>
+      because the static fields a and b are initialized to 0 (the default value for <keyword>int</keyword>
 
       
 

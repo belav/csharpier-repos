@@ -23,39 +23,33 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.MenuCommandService" />
+        >The <see cref="T:System.ComponentModel.Design.MenuCommandService" />
 
         
 
-         class implements the <see
-         cref="T:System.ComponentModel.Design.IMenuCommandService" />
+         class implements the <see cref="T:System.ComponentModel.Design.IMenuCommandService" />
 
         
 
          interface, which is the managed interface used to add handlers for menu commands and to define verbs.</para
       >
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.MenuCommandService" />
+        >The <see cref="T:System.ComponentModel.Design.MenuCommandService" />
 
         
 
-         class is automatically offered by the package class to offer global commands for an entire package, and it is also offered by the Microsoft.VisualStudio.Shell.WindowPane class to offer commands for the current window. This offering is always done through the service container, so anyone deriving from the package or window pane classes can remove or replace the default implementation of the <see
-         cref="T:System.ComponentModel.Design.IMenuCommandService" />
+         class is automatically offered by the package class to offer global commands for an entire package, and it is also offered by the Microsoft.VisualStudio.Shell.WindowPane class to offer commands for the current window. This offering is always done through the service container, so anyone deriving from the package or window pane classes can remove or replace the default implementation of the <see cref="T:System.ComponentModel.Design.IMenuCommandService" />
 
         
 
          interface.</para
       >
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.MenuCommandService" />
+        >The <see cref="T:System.ComponentModel.Design.MenuCommandService" />
 
         
 
-         class utilizes several other services. All of these services are optional, so the behavior of the <see
-         cref="T:System.ComponentModel.Design.MenuCommandService" />
+         class utilizes several other services. All of these services are optional, so the behavior of the <see cref="T:System.ComponentModel.Design.MenuCommandService" />
 
         
 
@@ -113,8 +107,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implements the <see
-         cref="T:System.ComponentModel.Design.IMenuCommandService" />
+        >Implements the <see cref="T:System.ComponentModel.Design.IMenuCommandService" />
 
         
 
@@ -139,13 +132,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the service is being used with a designer, the <paramref
-             name="serviceProvider" />
+            >If the service is being used with a designer, the <paramref name="serviceProvider" />
 
             
 
-             parameter should be the service provider for the designer, as is the case with <see
-             cref="T:System.ComponentModel.Design.DesignSurface" />
+             parameter should be the service provider for the designer, as is the case with <see cref="T:System.ComponentModel.Design.DesignSurface" />
 
             
 
@@ -155,8 +146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.MenuCommandService" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.MenuCommandService" />
 
             
 
@@ -164,7 +154,11 @@
           >
         </summary>
         <param name="serviceProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -191,8 +185,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.MenuCommandService.AddCommand(System.ComponentModel.Design.MenuCommand)" />
+            >The <see cref="M:System.ComponentModel.Design.MenuCommandService.AddCommand(System.ComponentModel.Design.MenuCommand)" />
 
             
 
@@ -204,12 +197,15 @@
           <para>Adds a command handler to the menu command service.</para>
         </summary>
         <param name="command">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.MenuCommand" />
+          The <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
           
 
@@ -240,8 +236,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a verb to the verb table of the <see
-             cref="T:System.ComponentModel.Design.MenuCommandService" />
+            >Adds a verb to the verb table of the <see cref="T:System.ComponentModel.Design.MenuCommandService" />
 
             
 
@@ -249,12 +244,15 @@
           >
         </summary>
         <param name="verb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerVerb" />
+          The <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
           
 
@@ -276,50 +274,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.ComponentModel.Design.MenuCommandService.Dispose" />
+            >Call <see cref="M:System.ComponentModel.Design.MenuCommandService.Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.ComponentModel.Design.MenuCommandService" />
+             when you are finished using the <see cref="T:System.ComponentModel.Design.MenuCommandService" />
 
             
 
-            . The <see
-             cref="M:System.ComponentModel.Design.MenuCommandService.Dispose" />
+            . The <see cref="M:System.ComponentModel.Design.MenuCommandService.Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.ComponentModel.Design.MenuCommandService" />
+             method leaves the <see cref="T:System.ComponentModel.Design.MenuCommandService" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.ComponentModel.Design.MenuCommandService.Dispose" />
+             in an unusable state. After calling <see cref="M:System.ComponentModel.Design.MenuCommandService.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.ComponentModel.Design.MenuCommandService" />
+            , you must release all references to the <see cref="T:System.ComponentModel.Design.MenuCommandService" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.ComponentModel.Design.MenuCommandService" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.ComponentModel.Design.MenuCommandService" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -329,18 +318,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.ComponentModel.Design.MenuCommandService.Dispose" />
+              >Always call <see cref="M:System.ComponentModel.Design.MenuCommandService.Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.ComponentModel.Design.MenuCommandService" />
+               before you release your last reference to the <see cref="T:System.ComponentModel.Design.MenuCommandService" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.ComponentModel.Design.MenuCommandService" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.ComponentModel.Design.MenuCommandService" />
 
               
 
@@ -351,8 +337,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.ComponentModel.Design.MenuCommandService" />
+            >Releases all resources used by the <see cref="T:System.ComponentModel.Design.MenuCommandService" />
 
             
 
@@ -377,36 +362,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.ComponentModel.Design.MenuCommandService" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.ComponentModel.Design.MenuCommandService" />
 
             
 
@@ -416,8 +395,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.ComponentModel.Design.MenuCommandService" />
+            >Releases all resources used by the <see cref="T:System.ComponentModel.Design.MenuCommandService" />
 
             
 
@@ -425,7 +403,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -447,8 +429,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.MenuCommandService.EnsureVerbs" />
+            >The <see cref="M:System.ComponentModel.Design.MenuCommandService.EnsureVerbs" />
 
             
 
@@ -481,8 +462,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches for the <see
-             cref="T:System.ComponentModel.Design.MenuCommand" />
+            >Searches for the <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
             
 
@@ -492,8 +472,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.Design.MenuCommand" />
+            >The <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
             
 
@@ -501,12 +480,15 @@
           >
         </returns>
         <param name="commandID">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.CommandID" />
+          The <see cref="T:System.ComponentModel.Design.CommandID" />
 
           
 
@@ -535,8 +517,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches for the <see
-             cref="T:System.ComponentModel.Design.MenuCommand" />
+            >Searches for the <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
             
 
@@ -546,8 +527,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.Design.MenuCommand" />
+            >The <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
             
 
@@ -555,14 +535,22 @@
           >
         </returns>
         <param name="guid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The GUID of the command.</param
         >
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -594,8 +582,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.ICollection" />
+            >An <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -603,7 +590,11 @@
           >
         </returns>
         <param name="guid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -632,8 +623,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A reference to <paramref
-             name="serviceType" />
+            >A reference to <paramref name="serviceType" />
 
             
 
@@ -641,12 +631,15 @@
           >
         </returns>
         <param name="serviceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -683,7 +676,11 @@
           <para>true, if the command was found; otherwise, false.</para>
         </returns>
         <param name="commandID">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -722,7 +719,11 @@
           <para>true, if the command was found; otherwise, false.</para>
         </returns>
         <param name="arg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -746,8 +747,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -781,16 +781,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.MenuCommandService.OnCommandsChanged(System.ComponentModel.Design.MenuCommandsChangedEventArgs)" />
+            >The <see cref="M:System.ComponentModel.Design.MenuCommandService.OnCommandsChanged(System.ComponentModel.Design.MenuCommandsChangedEventArgs)" />
 
             
 
              method is called by a menu command when its status has changed.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -799,8 +797,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.MenuCommandService.OnCommandsChanged(System.ComponentModel.Design.MenuCommandsChangedEventArgs)" />
+            >The <see cref="M:System.ComponentModel.Design.MenuCommandService.OnCommandsChanged(System.ComponentModel.Design.MenuCommandsChangedEventArgs)" />
 
             
 
@@ -810,8 +807,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.ComponentModel.Design.MenuCommandService.MenuCommandsChanged" />
+            >Raises the <see cref="E:System.ComponentModel.Design.MenuCommandService.MenuCommandsChanged" />
 
             
 
@@ -819,12 +815,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.Design.MenuCommandsChangedEventArgs" />
+          A <see cref="T:System.ComponentModel.Design.MenuCommandsChangedEventArgs" />
 
           
 
@@ -857,7 +856,11 @@
           <para>Removes the given menu command from the document.</para>
         </summary>
         <param name="command">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -887,7 +890,11 @@
           <para>Removes the given verb from the document.</para>
         </summary>
         <param name="verb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -922,21 +929,33 @@
           <para>Shows the shortcut menu with the given command ID at the given location.</para>
         </summary>
         <param name="menuID">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The shortcut menu to display.</param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the shortcut menu's location.</param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -961,8 +980,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.Design.MenuCommandService.Verbs" />
+            >The <see cref="P:System.ComponentModel.Design.MenuCommandService.Verbs" />
 
             
 
@@ -971,13 +989,11 @@
           <list type="bullet">
             <item>
               <para
-                >Verbs added through the <see
-                 cref="M:System.ComponentModel.Design.MenuCommandService.AddVerb(System.ComponentModel.Design.DesignerVerb)" />
+                >Verbs added through the <see cref="M:System.ComponentModel.Design.MenuCommandService.AddVerb(System.ComponentModel.Design.DesignerVerb)" />
 
                 
 
-                 method of <see
-                 cref="P:System.ComponentModel.Design.MenuCommandService.Verbs" />
+                 method of <see cref="P:System.ComponentModel.Design.MenuCommandService.Verbs" />
 
                 
 
@@ -989,23 +1005,19 @@
             </item>
           </list>
           <para
-            >Verbs added to this service through the <see
-             cref="M:System.ComponentModel.Design.MenuCommandService.AddVerb(System.ComponentModel.Design.DesignerVerb)" />
+            >Verbs added to this service through the <see cref="M:System.ComponentModel.Design.MenuCommandService.AddVerb(System.ComponentModel.Design.DesignerVerb)" />
 
             
 
-             method are called global verbs because they are global to this service, but generally there is one instance of this service for each tool or document window. Designer verbs are obtained by querying the service provider for <see
-             cref="T:System.ComponentModel.Design.IDesignerHost" />
+             method are called global verbs because they are global to this service, but generally there is one instance of this service for each tool or document window. Designer verbs are obtained by querying the service provider for <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
             
 
-             and <see
-             cref="T:System.ComponentModel.Design.ISelectionService" />
+             and <see cref="T:System.ComponentModel.Design.ISelectionService" />
 
             
 
-            . If the selection service offers a primary selection, and a designer can be obtained for that selection from <see
-             cref="T:System.ComponentModel.Design.IDesignerHost" />
+            . If the selection service offers a primary selection, and a designer can be obtained for that selection from <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
             
 

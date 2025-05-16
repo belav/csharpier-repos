@@ -22,8 +22,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Schema.XmlSchemaDatatype" />
+        >The <see cref="T:System.Xml.Schema.XmlSchemaDatatype" />
 
         
 
@@ -54,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Schema.XmlSchemaDatatype" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaDatatype" />
 
             
 
@@ -90,13 +88,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about type support in the <see
-             cref="N:System.Xml" />
+            >For more information about type support in the <see cref="N:System.Xml" />
 
             
 
-             classes and conversion of XML data types, see the <format
-             type="text/html">
+             classes and conversion of XML data types, see the <format type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
@@ -110,8 +106,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the value specified, whose type is one of the valid Common Language Runtime (CLR) representations of the XML schema type represented by the <see
-             cref="T:System.Xml.Schema.XmlSchemaDatatype" />
+            >Converts the value specified, whose type is one of the valid Common Language Runtime (CLR) representations of the XML schema type represented by the <see cref="T:System.Xml.Schema.XmlSchemaDatatype" />
 
             
 
@@ -123,14 +118,22 @@
           <para>The converted input value.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The input value to convert to the specified type.</param
         >
         <param name="targetType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -165,13 +168,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about type support in the <see
-             cref="N:System.Xml" />
+            >For more information about type support in the <see cref="N:System.Xml" />
 
             
 
-             classes and conversion of XML data types, see the <format
-             type="text/html">
+             classes and conversion of XML data types, see the <format type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
@@ -185,18 +186,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the value specified, whose type is one of the valid Common Language Runtime (CLR) representations of the XML schema type represented by the <see
-             cref="T:System.Xml.Schema.XmlSchemaDatatype" />
+            >Converts the value specified, whose type is one of the valid Common Language Runtime (CLR) representations of the XML schema type represented by the <see cref="T:System.Xml.Schema.XmlSchemaDatatype" />
 
             
 
-            , to the CLR type specified using the <see
-             cref="T:System.Xml.IXmlNamespaceResolver" />
+            , to the CLR type specified using the <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
             
 
-             if the <see
-             cref="T:System.Xml.Schema.XmlSchemaDatatype" />
+             if the <see cref="T:System.Xml.Schema.XmlSchemaDatatype" />
 
             
 
@@ -208,31 +206,41 @@
           <para>The converted input value.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The input value to convert to the specified type.</param
         >
         <param name="targetType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The target type to convert the input value to.</param
         >
         <param name="namespaceResolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.IXmlNamespaceResolver" />
+          An <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
           
 
-           used for resolving namespace prefixes. This is only of use if the <see
-           cref="T:System.Xml.Schema.XmlSchemaDatatype" />
+           used for resolving namespace prefixes. This is only of use if the <see cref="T:System.Xml.Schema.XmlSchemaDatatype" />
 
           
 
@@ -266,8 +274,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Schema.XmlSchemaDatatype.IsDerivedFrom(System.Xml.Schema.XmlSchemaDatatype)" />
+            >The <see cref="M:System.Xml.Schema.XmlSchemaDatatype.IsDerivedFrom(System.Xml.Schema.XmlSchemaDatatype)" />
 
             
 
@@ -279,12 +286,15 @@
           <para>Always returns false.</para>
         </returns>
         <param name="datatype">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Schema.XmlSchemaDatatype" />
+          The <see cref="T:System.Xml.Schema.XmlSchemaDatatype" />
 
           
 
@@ -319,26 +329,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Schema.XmlSchemaDatatype.ParseValue(System.String,System.Xml.XmlNameTable,System.Xml.IXmlNamespaceResolver)" />
+            >The <see cref="M:System.Xml.Schema.XmlSchemaDatatype.ParseValue(System.String,System.Xml.XmlNameTable,System.Xml.IXmlNamespaceResolver)" />
 
             
 
-             method validates the string specified against a built-in or user-defined simple type. For example, if this <see
-             cref="T:System.Xml.Schema.XmlSchemaDatatype" />
+             method validates the string specified against a built-in or user-defined simple type. For example, if this <see cref="T:System.Xml.Schema.XmlSchemaDatatype" />
 
             
 
-             represents the type xs:date, then an instance of <see
-             cref="T:System.DateTime" />
+             represents the type xs:date, then an instance of <see cref="T:System.DateTime" />
 
             
 
              is returned.</para
           >
           <para
-            >The following are the steps performed during the <see
-             cref="M:System.Xml.Schema.XmlSchemaDatatype.ParseValue(System.String,System.Xml.XmlNameTable,System.Xml.IXmlNamespaceResolver)" />
+            >The following are the steps performed during the <see cref="M:System.Xml.Schema.XmlSchemaDatatype.ParseValue(System.String,System.Xml.XmlNameTable,System.Xml.IXmlNamespaceResolver)" />
 
             
 
@@ -353,26 +359,22 @@
             </item>
           </list>
           <para
-            >The converted value is then returned as an <see
-             cref="T:System.Object" />
+            >The converted value is then returned as an <see cref="T:System.Object" />
 
             
 
-             and can be cast safely to the type returned by the <see
-             cref="P:System.Xml.Schema.XmlSchemaDatatype.ValueType" />
+             and can be cast safely to the type returned by the <see cref="P:System.Xml.Schema.XmlSchemaDatatype.ValueType" />
 
             
 
              property.</para
           >
           <para
-            >When the <see
-             cref="T:System.Xml.Schema.XmlSchemaDatatype" />
+            >When the <see cref="T:System.Xml.Schema.XmlSchemaDatatype" />
 
             
 
-             object represents a list type, the input string value is converted to a list of one or more objects. When the <see
-             cref="T:System.Xml.Schema.XmlSchemaDatatype" />
+             object represents a list type, the input string value is converted to a list of one or more objects. When the <see cref="T:System.Xml.Schema.XmlSchemaDatatype" />
 
             
 
@@ -386,13 +388,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             that can be cast safely to the type returned by the <see
-             cref="P:System.Xml.Schema.XmlSchemaDatatype.ValueType" />
+             that can be cast safely to the type returned by the <see cref="P:System.Xml.Schema.XmlSchemaDatatype.ValueType" />
 
             
 
@@ -400,41 +400,49 @@
           >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string to validate against the simple type.</param
         >
         <param name="nameTable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlNameTable" />
+          The <see cref="T:System.Xml.XmlNameTable" />
 
           
 
-           to use for atomization while parsing the string if this <see
-           cref="T:System.Xml.Schema.XmlSchemaDatatype" />
+           to use for atomization while parsing the string if this <see cref="T:System.Xml.Schema.XmlSchemaDatatype" />
 
           
 
            object represents the xs:NCName type. </param
         >
         <param name="nsmgr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.IXmlNamespaceResolver" />
+          The <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
           
 
-           object to use while parsing the string if this <see
-           cref="T:System.Xml.Schema.XmlSchemaDatatype" />
+           object to use while parsing the string if this <see cref="T:System.Xml.Schema.XmlSchemaDatatype" />
 
           
 
@@ -460,26 +468,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Schema.XmlSchemaDatatype.ParseValue(System.String,System.Xml.XmlNameTable,System.Xml.IXmlNamespaceResolver)" />
+            >The <see cref="M:System.Xml.Schema.XmlSchemaDatatype.ParseValue(System.String,System.Xml.XmlNameTable,System.Xml.IXmlNamespaceResolver)" />
 
             
 
-             method validates the specified string against a built-in or user-defined simple type. For example, if this <see
-             cref="T:System.Xml.Schema.XmlSchemaDatatype" />
+             method validates the specified string against a built-in or user-defined simple type. For example, if this <see cref="T:System.Xml.Schema.XmlSchemaDatatype" />
 
             
 
-             represents the type xs:date, then an instance of <see
-             cref="T:System.DateTime" />
+             represents the type xs:date, then an instance of <see cref="T:System.DateTime" />
 
             
 
              is returned.</para
           >
           <para
-            >The following are the steps performed during the <see
-             cref="M:System.Xml.Schema.XmlSchemaDatatype.ParseValue(System.String,System.Xml.XmlNameTable,System.Xml.IXmlNamespaceResolver)" />
+            >The following are the steps performed during the <see cref="M:System.Xml.Schema.XmlSchemaDatatype.ParseValue(System.String,System.Xml.XmlNameTable,System.Xml.IXmlNamespaceResolver)" />
 
             
 
@@ -494,26 +498,22 @@
             </item>
           </list>
           <para
-            >The converted value is then returned as an <see
-             cref="T:System.Object" />
+            >The converted value is then returned as an <see cref="T:System.Object" />
 
             
 
-             and can be cast safely to the type that is returned by the <see
-             cref="P:System.Xml.Schema.XmlSchemaDatatype.ValueType" />
+             and can be cast safely to the type that is returned by the <see cref="P:System.Xml.Schema.XmlSchemaDatatype.ValueType" />
 
             
 
              property.</para
           >
           <para
-            >When the <see
-             cref="T:System.Xml.Schema.XmlSchemaDatatype" />
+            >When the <see cref="T:System.Xml.Schema.XmlSchemaDatatype" />
 
             
 
-             object represents a list type, the input string value is converted to a list of one or more objects. When the <see
-             cref="T:System.Xml.Schema.XmlSchemaDatatype" />
+             object represents a list type, the input string value is converted to a list of one or more objects. When the <see cref="T:System.Xml.Schema.XmlSchemaDatatype" />
 
             
 
@@ -527,13 +527,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             that can be safely cast to the type that is returned by the <see
-             cref="P:System.Xml.Schema.XmlSchemaDatatype.ValueType" />
+             that can be safely cast to the type that is returned by the <see cref="P:System.Xml.Schema.XmlSchemaDatatype.ValueType" />
 
             
 
@@ -541,41 +539,49 @@
           >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string to validate against the simple type.</param
         >
         <param name="nameTable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlNameTable" />
+          The <see cref="T:System.Xml.XmlNameTable" />
 
           
 
-           to use for atomization while parsing the string if this <see
-           cref="T:System.Xml.Schema.XmlSchemaDatatype" />
+           to use for atomization while parsing the string if this <see cref="T:System.Xml.Schema.XmlSchemaDatatype" />
 
           
 
            object represents the xs:NCName type. </param
         >
         <param name="nsmgr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlNamespaceManager" />
+          The <see cref="T:System.Xml.XmlNamespaceManager" />
 
           
 
-           object to use while parsing the string if this <see
-           cref="T:System.Xml.Schema.XmlSchemaDatatype" />
+           object to use while parsing the string if this <see cref="T:System.Xml.Schema.XmlSchemaDatatype" />
 
           
 
@@ -756,28 +762,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >W3C XML Schema list types such as xs:ENTITIES, xs:NMTOKENS and xs:IDREFS are not represented by the <see
-             cref="T:System.Xml.Schema.XmlTypeCode" />
+            >W3C XML Schema list types such as xs:ENTITIES, xs:NMTOKENS and xs:IDREFS are not represented by the <see cref="T:System.Xml.Schema.XmlTypeCode" />
 
             
 
-             enumeration. Instead they are represented by the <see
-             cref="T:System.Xml.Schema.XmlTypeCode" />
+             enumeration. Instead they are represented by the <see cref="T:System.Xml.Schema.XmlTypeCode" />
 
             
 
-             values for the xs:ENTITY, xs:NMTOKEN and xs:IDREF types with the <see
-             cref="P:System.Xml.Schema.XmlSchemaDatatype.Variety" />
+             values for the xs:ENTITY, xs:NMTOKEN and xs:IDREF types with the <see cref="P:System.Xml.Schema.XmlSchemaDatatype.Variety" />
 
             
 
-             property of the <see
-             cref="T:System.Xml.Schema.XmlSchemaDatatype" />
+             property of the <see cref="T:System.Xml.Schema.XmlSchemaDatatype" />
 
             
 
-             object set to <see
-             cref="F:System.Xml.Schema.XmlSchemaDatatypeVariety.List" />
+             object set to <see cref="F:System.Xml.Schema.XmlSchemaDatatypeVariety.List" />
 
             
 
@@ -785,28 +786,23 @@
           >
           <block subset="none" type="note">
             <para
-              >Both the xs:anySimpleType and xs:anyType types are not represented by <see
-               cref="T:System.Xml.Schema.XmlTypeCode" />
+              >Both the xs:anySimpleType and xs:anyType types are not represented by <see cref="T:System.Xml.Schema.XmlTypeCode" />
 
               
 
-               enumeration. These are represented in an <see
-               cref="T:System.Xml.Schema.XmlSchemaDatatype" />
+               enumeration. These are represented in an <see cref="T:System.Xml.Schema.XmlSchemaDatatype" />
 
               
 
-               object with an <see
-               cref="T:System.Xml.Schema.XmlTypeCode" />
+               object with an <see cref="T:System.Xml.Schema.XmlTypeCode" />
 
               
 
-               whose value is <see
-               cref="F:System.Xml.Schema.XmlTypeCode.UntypedAtomic" />
+               whose value is <see cref="F:System.Xml.Schema.XmlTypeCode.UntypedAtomic" />
 
               
 
-               for xs:anySimpleType or <see
-               cref="F:System.Xml.Schema.XmlTypeCode.Item" />
+               for xs:anySimpleType or <see cref="F:System.Xml.Schema.XmlTypeCode.Item" />
 
               
 
@@ -817,8 +813,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Schema.XmlTypeCode" />
+            >Gets the <see cref="T:System.Xml.Schema.XmlTypeCode" />
 
             
 
@@ -844,46 +839,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Schema.XmlSchemaDatatype.ValueType" />
+            >The <see cref="P:System.Xml.Schema.XmlSchemaDatatype.ValueType" />
 
             
 
-             property gets the CLR type of the item. For example, an element of type xs:int would have a <see
-             cref="P:System.Xml.Schema.XmlSchemaDatatype.ValueType" />
+             property gets the CLR type of the item. For example, an element of type xs:int would have a <see cref="P:System.Xml.Schema.XmlSchemaDatatype.ValueType" />
 
             
 
-             of <see
-             cref="T:System.Int32" />
+             of <see cref="T:System.Int32" />
 
             
 
-             by default. However, the <see
-             cref="P:System.Xml.Schema.XmlSchemaDatatype.ValueType" />
+             by default. However, the <see cref="P:System.Xml.Schema.XmlSchemaDatatype.ValueType" />
 
             
 
-             could be any one of the valid types that can be mapped to xs:int, such as <see
-             cref="T:System.Int16" />
+             could be any one of the valid types that can be mapped to xs:int, such as <see cref="T:System.Int16" />
 
             
 
-             or <see
-             cref="T:System.Double" />
+             or <see cref="T:System.Double" />
 
             
 
             .</para
           >
           <para
-            >For more information about type support in the <see
-             cref="N:System.Xml" />
+            >For more information about type support in the <see cref="N:System.Xml" />
 
             
 
-             namespace, see <format
-             type="text/html">
+             namespace, see <format type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
@@ -924,8 +911,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Schema.XmlSchemaDatatypeVariety" />
+            >Gets the <see cref="T:System.Xml.Schema.XmlSchemaDatatypeVariety" />
 
             
 

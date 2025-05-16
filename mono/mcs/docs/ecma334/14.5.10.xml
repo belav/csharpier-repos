@@ -2,8 +2,7 @@
 <clause number="14.5.10" title="The new operator">
   <paragraph>The new operator is used to create new instances of types. </paragraph>
   <paragraph
-    >There are three forms of new expressions: <list
-    >
+    >There are three forms of new expressions: <list>
       <list_item> Object creation expressions are used to create new instances of class types and value types. </list_item>
       <list_item> Array creation expressions are used to create new instances of array types. </list_item>
       <list_item> Delegate creation expressions are used to create new instances of delegate types. </list_item>

@@ -33,8 +33,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can apply this attribute to coclass interfaces, although the <format
-         type="text/html">
+        >You can apply this attribute to coclass interfaces, although the <format type="text/html">
           <a href="EC0A8D63-11B3-4ACD-B398-DA1E37E97382"
             >[&lt;topic://cpgrfTypeLibraryImporterTlbimpexe&gt;]</a
           >
@@ -46,23 +45,19 @@
       >
       <para>When Tlbimp.exe imports a coclass, it produces a managed class and an interface to represent the coclass. The coclass interface has the same interface identifier (IID) as the default interface of the original coclass. The imported coclass interface also retains the name of the coclass. Tlbimp.exe appends the original coclass name with "class" to identify the imported class.</para>
       <para
-        >You rarely apply this attribute. However, if plan to write source code that produces metadata that closely simulates metadata produced by Tlbimp.exe, you should create a coclass interface for each coclass. Use the name of the original coclass to name the coclass interface and derive it from the default interface. In addition to the <see
-         cref="T:System.Runtime.InteropServices.CoClassAttribute" />
+        >You rarely apply this attribute. However, if plan to write source code that produces metadata that closely simulates metadata produced by Tlbimp.exe, you should create a coclass interface for each coclass. Use the name of the original coclass to name the coclass interface and derive it from the default interface. In addition to the <see cref="T:System.Runtime.InteropServices.CoClassAttribute" />
 
         
 
-        , you must also apply the <see
-         cref="T:System.Runtime.InteropServices.ComImportAttribute" />
+        , you must also apply the <see cref="T:System.Runtime.InteropServices.ComImportAttribute" />
 
         
 
-         and <see
-         cref="T:System.Runtime.InteropServices.GuidAttribute" />
+         and <see cref="T:System.Runtime.InteropServices.GuidAttribute" />
 
         
 
-         to the coclass interface. For additional information about how Tlbimp.exe imports interfaces and coclasses from a type library, see <format
-         type="text/html">
+         to the coclass interface. For additional information about how Tlbimp.exe imports interfaces and coclasses from a type library, see <format type="text/html">
           <a href="CB1EE67D-8EF0-4E40-B2A5-13714B9F33C3"
             >[&lt;topic://cpcontlbimptypeconversion&gt;]</a
           >
@@ -100,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes new instance of the <see
-             cref="T:System.Runtime.InteropServices.CoClassAttribute" />
+            >Initializes new instance of the <see cref="T:System.Runtime.InteropServices.CoClassAttribute" />
 
             
 
@@ -109,12 +103,15 @@
           >
         </summary>
         <param name="coClass">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 

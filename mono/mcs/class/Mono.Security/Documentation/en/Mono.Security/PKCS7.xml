@@ -8,7 +8,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -36,15 +38,9 @@
         <Parameter Name="oid" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="oid"
-          >a <see
-           cref="T:System.String" />
-        </param>
+        <param name="oid">a <see cref="T:System.String" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Security.ASN1" />
-        </returns>
+        <returns>a <see cref="T:Mono.Security.ASN1" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -66,19 +62,10 @@
         <Parameter Name="parameters" Type="Mono.Security.ASN1" />
       </Parameters>
       <Docs>
-        <param name="oid"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <param name="parameters"
-          >a <see
-           cref="T:Mono.Security.ASN1" />
-        </param>
+        <param name="oid">a <see cref="T:System.String" /></param>
+        <param name="parameters">a <see cref="T:Mono.Security.ASN1" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Security.ASN1" />
-        </returns>
+        <returns>a <see cref="T:Mono.Security.ASN1" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -100,19 +87,10 @@
         <Parameter Name="value" Type="Mono.Security.ASN1" />
       </Parameters>
       <Docs>
-        <param name="oid"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <param name="value"
-          >a <see
-           cref="T:Mono.Security.ASN1" />
-        </param>
+        <param name="oid">a <see cref="T:System.String" /></param>
+        <param name="value">a <see cref="T:Mono.Security.ASN1" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Security.ASN1" />
-        </returns>
+        <returns>a <see cref="T:Mono.Security.ASN1" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -133,15 +111,9 @@
         <Parameter Name="x509" Type="Mono.Security.X509.X509Certificate" />
       </Parameters>
       <Docs>
-        <param name="x509"
-          >a <see
-           cref="T:Mono.Security.X509.X509Certificate" />
-        </param>
+        <param name="x509">a <see cref="T:Mono.Security.X509.X509Certificate" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Security.ASN1" />
-        </returns>
+        <returns>a <see cref="T:Mono.Security.ASN1" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>

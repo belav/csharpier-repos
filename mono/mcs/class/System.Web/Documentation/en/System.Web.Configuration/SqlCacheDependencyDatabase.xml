@@ -20,16 +20,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" />
+        >The <see cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" />
 
         
 
          allows you to programmatically access and modify the databases element of the sqlCacheDependency node within the caching configuration section.</para
       >
       <para
-        >The SQL cache dependency allows the cached data to be synchronized with the original source. After you configure the relationship between an item stored in an ASP.NET application's cache and a specific SQL Server database table, an instance of the <see
-         cref="T:System.Web.Caching.SqlCacheDependency" />
+        >The SQL cache dependency allows the cached data to be synchronized with the original source. After you configure the relationship between an item stored in an ASP.NET application's cache and a specific SQL Server database table, an instance of the <see cref="T:System.Web.Caching.SqlCacheDependency" />
 
         
 
@@ -58,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" />
 
             
 
@@ -67,19 +64,26 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that specifies the name used by <see
-           cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" />
+          A string that specifies the name used by <see cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" />
 
           
 
            to identify the database.</param
         >
         <param name="connectionStringName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -107,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" />
 
             
 
@@ -116,26 +119,37 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that specifies the name used by <see
-           cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" />
+          A string that specifies the name used by <see cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" />
 
           
 
            to identify the database.</param
         >
         <param name="connectionStringName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string that specifies the name of the connection string in the connectionStrings section to use to connect to this database.</param
         >
         <param name="pollTime">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -166,8 +180,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.SqlCacheDependencyDatabase.ConnectionStringName" />
+            >The <see cref="P:System.Web.Configuration.SqlCacheDependencyDatabase.ConnectionStringName" />
 
             
 
@@ -222,16 +235,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.SqlCacheDependencyDatabase.Name" />
+            >The <see cref="P:System.Web.Configuration.SqlCacheDependencyDatabase.Name" />
 
             
 
              property allows you to programmatically access and modify the name attribute of an add element of the databases node in a configuration file. </para
           >
           <para
-            >The name attribute identifies the database whose table is used for the <see
-             cref="T:System.Web.Caching.SqlCacheDependency" />
+            >The name attribute identifies the database whose table is used for the <see cref="T:System.Web.Caching.SqlCacheDependency" />
 
             
 
@@ -264,21 +275,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.SqlCacheDependencyDatabase.PollTime" />
+            >The <see cref="P:System.Web.Configuration.SqlCacheDependencyDatabase.PollTime" />
 
             
 
              property allows you to programmatically access and modify the pollTime attribute of an add element of the databases node in a configuration file.</para
           >
           <para
-            >After you configure the relationship between an item stored in an ASP.NET application's cache and a specific SQL Server database table, an instance of the <see
-             cref="T:System.Web.Caching.SqlCacheDependency" />
+            >After you configure the relationship between an item stored in an ASP.NET application's cache and a specific SQL Server database table, an instance of the <see cref="T:System.Web.Caching.SqlCacheDependency" />
 
             
 
-             class monitors the table so that when an item in the table changes, the item is automatically updated in or removed from the cache. The monitoring happens at the frequency specified by the <see
-             cref="P:System.Web.Configuration.SqlCacheDependencyDatabase.PollTime" />
+             class monitors the table so that when an item in the table changes, the item is automatically updated in or removed from the cache. The monitoring happens at the frequency specified by the <see cref="P:System.Web.Configuration.SqlCacheDependencyDatabase.PollTime" />
 
             
 
@@ -288,8 +296,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the frequency with which the <see
-             cref="T:System.Web.Caching.SqlCacheDependency" />
+            >Gets or sets the frequency with which the <see cref="T:System.Web.Caching.SqlCacheDependency" />
 
             
 

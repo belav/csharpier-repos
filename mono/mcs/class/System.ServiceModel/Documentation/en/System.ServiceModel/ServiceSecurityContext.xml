@@ -17,34 +17,29 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The data is part of the <see
-         cref="T:System.ServiceModel.Security.SecurityMessageProperty" />
+        >The data is part of the <see cref="T:System.ServiceModel.Security.SecurityMessageProperty" />
 
         
 
          for a message. </para
       >
       <para
-        >Use this class to obtain information about a remote <newTerm
-        >security context</newTerm>
+        >Use this class to obtain information about a remote <newTerm>security context</newTerm>
 
         
 
          at runtime. A security context is created when a client is successfully authenticated and authorized to access a method. When a message is successfully authenticated and authorized, the security information from the client and for the current service instance can be obtained from an instance of this class. </para
       >
       <para
-        >You can retrieve an instance of the <see
-         cref="T:System.ServiceModel.ServiceSecurityContext" />
+        >You can retrieve an instance of the <see cref="T:System.ServiceModel.ServiceSecurityContext" />
 
         
 
-         from the <see
-         cref="P:System.ServiceModel.OperationContext.Current" />
+         from the <see cref="P:System.ServiceModel.OperationContext.Current" />
 
         
 
-         property of the <see
-         cref="T:System.ServiceModel.OperationContext" />
+         property of the <see cref="T:System.ServiceModel.OperationContext" />
 
         
 
@@ -54,28 +49,23 @@
         <h2>Parsing a ClaimSet</h2>
       </format>
       <para
-        >A common use of the class is to retrieve the current set of claims for the purpose of identifying or authorizing a client when accessing a method. The <see
-         cref="T:System.IdentityModel.Claims.ClaimSet" />
+        >A common use of the class is to retrieve the current set of claims for the purpose of identifying or authorizing a client when accessing a method. The <see cref="T:System.IdentityModel.Claims.ClaimSet" />
 
         
 
-         class contains a collection of <see
-         cref="T:System.IdentityModel.Claims.Claim" />
+         class contains a collection of <see cref="T:System.IdentityModel.Claims.Claim" />
 
         
 
-         objects, and each can be parsed to determine whether a specific claim is present. If the specified claim is provided, authorization can be granted. This functionality is provided by overriding the <see
-         cref="M:System.ServiceModel.ServiceAuthorizationManager.CheckAccessCore(System.ServiceModel.OperationContext)" />
+         objects, and each can be parsed to determine whether a specific claim is present. If the specified claim is provided, authorization can be granted. This functionality is provided by overriding the <see cref="M:System.ServiceModel.ServiceAuthorizationManager.CheckAccessCore(System.ServiceModel.OperationContext)" />
 
         
 
-         method of the <see
-         cref="T:System.ServiceModel.ServiceAuthorizationManager" />
+         method of the <see cref="T:System.ServiceModel.ServiceAuthorizationManager" />
 
         
 
-         class.  For a complete example, see the <format
-         type="text/html">
+         class.  For a complete example, see the <format type="text/html">
           <a href="1db325ec-85be-47d0-8b6e-3ba2fdf3dda0">Authorization Policy Sample</a>
         </format>
 
@@ -87,23 +77,19 @@
         <h2>Cookie Mode and IsAuthenticated</h2>
       </format>
       <para
-        >Note that under some circumstances, the <see
-         cref="P:System.Security.Principal.IIdentity.IsAuthenticated" />
+        >Note that under some circumstances, the <see cref="P:System.Security.Principal.IIdentity.IsAuthenticated" />
 
         
 
-         property of the <see
-         cref="T:System.Security.Principal.IIdentity" />
+         property of the <see cref="T:System.Security.Principal.IIdentity" />
 
         
 
-         interface returns true even if the remote client is authenticated as an anonymous user. (The <see
-         cref="P:System.ServiceModel.ServiceSecurityContext.PrimaryIdentity" />
+         interface returns true even if the remote client is authenticated as an anonymous user. (The <see cref="P:System.ServiceModel.ServiceSecurityContext.PrimaryIdentity" />
 
         
 
-         property returns an implementation of the <see
-         cref="T:System.Security.Principal.IIdentity" />
+         property returns an implementation of the <see cref="T:System.Security.Principal.IIdentity" />
 
         
 
@@ -118,8 +104,7 @@
         </item>
         <item>
           <para
-            >The binding is a <format
-             type="text/html">
+            >The binding is a <format type="text/html">
               <a href="9da4f960-f64e-4d8a-894d-2b09eba5ce4b">customBinding Element</a>
             </format>
 
@@ -133,8 +118,7 @@
         </item>
         <item>
           <para
-            >The &lt;security&gt; element includes a <format
-             type="text/html">
+            >The &lt;security&gt; element includes a <format type="text/html">
               <a href="66b46f95-fa2d-4b5b-b6ce-0572ab0cdd50">secureConversationBootstrap element</a>
             </format>
 
@@ -178,8 +162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.ServiceSecurityContext" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ServiceSecurityContext" />
 
             
 
@@ -187,17 +170,19 @@
           >
         </summary>
         <param name="authorizationPolicies">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" />
+          A <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" />
 
           
 
-            of type <see
-           cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
+            of type <see cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
 
           
 
@@ -228,13 +213,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is typically used in scenarios where an application runs its own policy-chaining engine, which results in an <see
-             cref="T:System.IdentityModel.Policy.AuthorizationContext" />
+            >This constructor is typically used in scenarios where an application runs its own policy-chaining engine, which results in an <see cref="T:System.IdentityModel.Policy.AuthorizationContext" />
 
             
 
-            . For the default policy engine, use the constructors that take a collection of <see
-             cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
+            . For the default policy engine, use the constructors that take a collection of <see cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
 
             
 
@@ -244,8 +227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.ServiceSecurityContext" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ServiceSecurityContext" />
 
             
 
@@ -253,12 +235,15 @@
           >
         </summary>
         <param name="authorizationContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IdentityModel.Policy.AuthorizationContext" />
+          An <see cref="T:System.IdentityModel.Policy.AuthorizationContext" />
 
           
 
@@ -294,8 +279,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.ServiceSecurityContext" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ServiceSecurityContext" />
 
             
 
@@ -303,29 +287,34 @@
           >
         </summary>
         <param name="authorizationContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IdentityModel.Policy.AuthorizationContext" />
+          An <see cref="T:System.IdentityModel.Policy.AuthorizationContext" />
 
           
 
            that contains authorization settings.</param
         >
         <param name="authorizationPolicies">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" />
+          A <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" />
 
           
 
-            of type <see
-           cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
+            of type <see cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
 
           
 
@@ -355,8 +344,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an instance of the <see
-             cref="T:System.ServiceModel.ServiceSecurityContext" />
+            >Returns an instance of the <see cref="T:System.ServiceModel.ServiceSecurityContext" />
 
             
 
@@ -387,13 +375,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the authorization information for an instance of this class.  The <see
-             cref="T:System.IdentityModel.Policy.AuthorizationContext" />
+            >Gets the authorization information for an instance of this class.  The <see cref="T:System.IdentityModel.Policy.AuthorizationContext" />
 
             
 
-             contains a collection of <see
-             cref="T:System.IdentityModel.Claims.ClaimSet" />
+             contains a collection of <see cref="T:System.IdentityModel.Claims.ClaimSet" />
 
             
 
@@ -449,8 +435,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the current <see
-             cref="T:System.ServiceModel.ServiceSecurityContext" />
+            >Gets the current <see cref="T:System.ServiceModel.ServiceSecurityContext" />
 
             
 
@@ -500,16 +485,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The primary identity is obtained from the credentials used to authenticate the current user. If the credential is an X.509 certificate, the identity is a concatenation of the subject name and the thumbprint (in that order). The subject name is separated from the thumbprint with a semicolon and a space. If the subject field of the certificate is null, the primary identity includes just a semicolon, a space, and the thumbprint. </para>
           <para
-            >When a duplex message exchange pattern is used with Kerberos direct authentication, this property becomes empty on the callback and the claimset is also empty. This does not happen when <newTerm
-            >SspiNegotiated</newTerm>
+            >When a duplex message exchange pattern is used with Kerberos direct authentication, this property becomes empty on the callback and the claimset is also empty. This does not happen when <newTerm>SspiNegotiated</newTerm>
 
             
 
              is used instead of Kerberos.</para
           >
           <para
-            >The Kerberos Requester Token is used only on the client to represent the service. The authorization policy that it generates contains one claim, an SPN; hence, no identity in the claim. In most cases there is no problem, because <see
-             cref="T:System.ServiceModel.ServiceSecurityContext" />
+            >The Kerberos Requester Token is used only on the client to represent the service. The authorization policy that it generates contains one claim, an SPN; hence, no identity in the claim. In most cases there is no problem, because <see cref="T:System.ServiceModel.ServiceSecurityContext" />
 
             
 
@@ -543,8 +526,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the remote party cannot be associated with a Windows account, the <see
-             cref="P:System.Security.Principal.WindowsIdentity.IsAnonymous" />
+            >If the remote party cannot be associated with a Windows account, the <see cref="P:System.Security.Principal.WindowsIdentity.IsAnonymous" />
 
             
 

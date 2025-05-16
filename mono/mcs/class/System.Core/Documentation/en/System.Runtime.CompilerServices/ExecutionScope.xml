@@ -13,8 +13,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.CompilerServices.ExecutionScope" />
+        >The <see cref="T:System.Runtime.CompilerServices.ExecutionScope" />
 
         
 
@@ -52,8 +51,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Delegate" />
+            >A <see cref="T:System.Delegate" />
 
             
 
@@ -61,14 +59,22 @@
           >
         </returns>
         <param name="indexLambda">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index of the object that stores information about associated lambda expression of the dynamic method.</param
         >
         <param name="locals">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -142,14 +148,22 @@
           <para>An expression tree that does not contain external parameter references.</para>
         </returns>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An expression tree to free of external parameter references.</param
         >
         <param name="locals">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

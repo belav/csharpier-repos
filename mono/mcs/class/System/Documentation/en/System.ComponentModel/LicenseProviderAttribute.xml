@@ -31,46 +31,39 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When you create a component that you want to license, you must specify the <see
-         cref="T:System.ComponentModel.LicenseProvider" />
+        >When you create a component that you want to license, you must specify the <see cref="T:System.ComponentModel.LicenseProvider" />
 
         
 
-         by marking the component with a <see
-         cref="T:System.ComponentModel.LicenseProviderAttribute" />
-
-        
-
-        .</para
-      >
-      <para
-        >Use the <see
-         cref="P:System.ComponentModel.LicenseProviderAttribute.LicenseProvider" />
-
-        
-
-         property to get the <see
-         cref="T:System.Type" />
-
-        
-
-         of the <see
-         cref="T:System.ComponentModel.LicenseProvider" />
+         by marking the component with a <see cref="T:System.ComponentModel.LicenseProviderAttribute" />
 
         
 
         .</para
       >
       <para
-        >For more information about attributes, see <format
-         type="text/html">
+        >Use the <see cref="P:System.ComponentModel.LicenseProviderAttribute.LicenseProvider" />
+
+        
+
+         property to get the <see cref="T:System.Type" />
+
+        
+
+         of the <see cref="T:System.ComponentModel.LicenseProvider" />
+
+        
+
+        .</para
+      >
+      <para
+        >For more information about attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
         
 
-        . For more information about licensing, see <format
-         type="text/html">
+        . For more information about licensing, see <format type="text/html">
           <a href="8e66c1ed-a445-4b26-8185-990b6e2bbd57">How to: License Components and Controls</a>
         </format>
 
@@ -80,33 +73,27 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Security.Permissions.HostProtectionAttribute" />
+          >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
           
 
-           attribute applied to this class has the following <see
-           cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+           attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
 
           
 
-           property value: <see
-           cref="F:System.Security.Permissions.HostProtectionResource.SharedState" />
+           property value: <see cref="F:System.Security.Permissions.HostProtectionResource.SharedState" />
 
           
 
-          . The <see
-           cref="T:System.Security.Permissions.HostProtectionAttribute" />
+          . The <see cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
           
 
-           does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see
-           cref="T:System.Security.Permissions.HostProtectionAttribute" />
+           does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
           
 
-           class or <format
-           type="text/html">
+           class or <format type="text/html">
             <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
               >SQL Server Programming and Host Protection Attributes</a
             >
@@ -121,8 +108,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the <see
-         cref="T:System.ComponentModel.LicenseProvider" />
+        >Specifies the <see cref="T:System.ComponentModel.LicenseProvider" />
 
         
 
@@ -150,8 +136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.LicenseProviderAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.LicenseProviderAttribute" />
 
             
 
@@ -181,8 +166,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.LicenseProviderAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.LicenseProviderAttribute" />
 
             
 
@@ -190,7 +174,11 @@
           >
         </summary>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -219,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.LicenseProviderAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.LicenseProviderAttribute" />
 
             
 
@@ -228,12 +215,15 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -296,8 +286,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="value" />
+            >true if <paramref name="value" />
 
             
 
@@ -331,8 +320,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.ComponentModel.LicenseProviderAttribute" />
+            >A hash code for the current <see cref="T:System.ComponentModel.LicenseProviderAttribute" />
 
             
 

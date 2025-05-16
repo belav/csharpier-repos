@@ -35,63 +35,51 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A column header is an item in a <see
-         cref="T:System.Windows.Forms.ListView" />
+        >A column header is an item in a <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         control that contains heading text. <see
-         cref="T:System.Windows.Forms.ColumnHeader" />
+         control that contains heading text. <see cref="T:System.Windows.Forms.ColumnHeader" />
 
         
 
-         objects can be added to a <see
-         cref="T:System.Windows.Forms.ListView" />
+         objects can be added to a <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         using the <see
-         cref="M:System.Windows.Forms.ListView.ColumnHeaderCollection.Add(System.String,System.Int32,System.Windows.Forms.HorizontalAlignment)" />
+         using the <see cref="M:System.Windows.Forms.ListView.ColumnHeaderCollection.Add(System.String,System.Int32,System.Windows.Forms.HorizontalAlignment)" />
 
         
 
-         method of the <see
-         cref="T:System.Windows.Forms.ListView.ColumnHeaderCollection" />
+         method of the <see cref="T:System.Windows.Forms.ListView.ColumnHeaderCollection" />
 
         
 
-         class. To add a group of columns to a <see
-         cref="T:System.Windows.Forms.ListView" />
+         class. To add a group of columns to a <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-        , you can use the <see
-         cref="M:System.Windows.Forms.ListView.ColumnHeaderCollection.AddRange(System.Windows.Forms.ColumnHeader[])" />
+        , you can use the <see cref="M:System.Windows.Forms.ListView.ColumnHeaderCollection.AddRange(System.Windows.Forms.ColumnHeader[])" />
 
         
 
-         method of the <see
-         cref="T:System.Windows.Forms.ListView.ColumnHeaderCollection" />
+         method of the <see cref="T:System.Windows.Forms.ListView.ColumnHeaderCollection" />
 
         
 
-         class. You can use the <see
-         cref="P:System.Windows.Forms.ColumnHeader.Index" />
+         class. You can use the <see cref="P:System.Windows.Forms.ColumnHeader.Index" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.ColumnHeader" />
+         property of the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
         
 
-         class to determine where the <see
-         cref="T:System.Windows.Forms.ColumnHeader" />
+         class to determine where the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
         
 
-         is located in the <see
-         cref="T:System.Windows.Forms.ListView.ColumnHeaderCollection" />
+         is located in the <see cref="T:System.Windows.Forms.ListView.ColumnHeaderCollection" />
 
         
 
@@ -102,43 +90,35 @@
 
         
 
-         provides the <see
-         cref="P:System.Windows.Forms.ColumnHeader.Text" />
+         provides the <see cref="P:System.Windows.Forms.ColumnHeader.Text" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.ColumnHeader.TextAlign" />
+         and <see cref="P:System.Windows.Forms.ColumnHeader.TextAlign" />
 
         
 
-         properties to set the text displayed in the control and the alignment of the text in the column header. To determine whether a <see
-         cref="T:System.Windows.Forms.ColumnHeader" />
+         properties to set the text displayed in the control and the alignment of the text in the column header. To determine whether a <see cref="T:System.Windows.Forms.ColumnHeader" />
 
         
 
-         is associated with a <see
-         cref="T:System.Windows.Forms.ListView" />
+         is associated with a <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         control, you can reference the <see
-         cref="P:System.Windows.Forms.ColumnHeader.ListView" />
+         control, you can reference the <see cref="P:System.Windows.Forms.ColumnHeader.ListView" />
 
         
 
-         property. If you want to copy a <see
-         cref="T:System.Windows.Forms.ColumnHeader" />
+         property. If you want to copy a <see cref="T:System.Windows.Forms.ColumnHeader" />
 
         
 
-         for use in another <see
-         cref="T:System.Windows.Forms.ListView" />
+         for use in another <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         control, you can use the <see
-         cref="M:System.Windows.Forms.ColumnHeader.Clone" />
+         control, you can use the <see cref="M:System.Windows.Forms.ColumnHeader.Clone" />
 
         
 
@@ -148,8 +128,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Displays a single column header in a <see
-         cref="T:System.Windows.Forms.ListView" />
+        >Displays a single column header in a <see cref="T:System.Windows.Forms.ListView" />
 
         
 
@@ -167,8 +146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
@@ -195,8 +173,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
@@ -204,12 +181,15 @@
           >
         </summary>
         <param name="imageIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the image to display in the <see
-           cref="T:System.Windows.Forms.ColumnHeader" />
+          The index of the image to display in the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
           
 
@@ -231,8 +211,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
@@ -240,12 +219,15 @@
           >
         </summary>
         <param name="imageKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key of the image to display in the <see
-           cref="T:System.Windows.Forms.ColumnHeader" />
+          The key of the image to display in the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
           
 
@@ -275,28 +257,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling the <see
-             cref="M:System.Windows.Forms.ColumnHeader.AutoResize(System.Windows.Forms.ColumnHeaderAutoResizeStyle)" />
+            >Calling the <see cref="M:System.Windows.Forms.ColumnHeader.AutoResize(System.Windows.Forms.ColumnHeaderAutoResizeStyle)" />
 
             
 
-             method is only effective once the <see
-             cref="T:System.Windows.Forms.ListView" />
+             method is only effective once the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             and containing <see
-             cref="T:System.Windows.Forms.Form" />
+             and containing <see cref="T:System.Windows.Forms.Form" />
 
             
 
-             have been constructed, and the column is populated with items. If new items are added to the <see
-             cref="T:System.Windows.Forms.ListView" />
+             have been constructed, and the column is populated with items. If new items are added to the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-            , the column will not resize unless <see
-             cref="M:System.Windows.Forms.ColumnHeader.AutoResize(System.Windows.Forms.ColumnHeaderAutoResizeStyle)" />
+            , the column will not resize unless <see cref="M:System.Windows.Forms.ColumnHeader.AutoResize(System.Windows.Forms.ColumnHeaderAutoResizeStyle)" />
 
             
 
@@ -308,12 +285,15 @@
           <para>Resizes the width of the column as indicated by the resize style.</para>
         </summary>
         <param name="headerAutoResize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.ColumnHeaderAutoResizeStyle" />
+          One of the <see cref="T:System.Windows.Forms.ColumnHeaderAutoResizeStyle" />
 
           
 
@@ -332,18 +312,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this method to copy existing <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+            >You can use this method to copy existing <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
-             objects from an existing <see
-             cref="T:System.Windows.Forms.ListView" />
+             objects from an existing <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control for use in other <see
-             cref="T:System.Windows.Forms.ListView" />
+             control for use in other <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -353,8 +330,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an identical copy of the current <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+            >Creates an identical copy of the current <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
@@ -364,8 +340,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object representing a copy of this <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+            >An object representing a copy of this <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
@@ -418,33 +393,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.Windows.Forms.ColumnHeader.Dispose(System.Boolean)" />
+            >Call <see cref="M:System.Windows.Forms.ColumnHeader.Dispose(System.Boolean)" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+             when you are finished using the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
-            . The <see
-             cref="M:System.Windows.Forms.ColumnHeader.Dispose(System.Boolean)" />
+            . The <see cref="M:System.Windows.Forms.ColumnHeader.Dispose(System.Boolean)" />
 
             
 
-             method leaves the <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+             method leaves the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Windows.Forms.ColumnHeader.Dispose(System.Boolean)" />
+             in an unusable state. After calling <see cref="M:System.Windows.Forms.ColumnHeader.Dispose(System.Boolean)" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+            , you must release all references to the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
@@ -452,23 +421,19 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.Windows.Forms.ColumnHeader.Dispose(System.Boolean)" />
+              >Always call <see cref="M:System.Windows.Forms.ColumnHeader.Dispose(System.Boolean)" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.Windows.Forms.ColumnHeader" />
+               before you release your last reference to the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
               
 
-              . Otherwise, the resources the <see
-               cref="T:System.Windows.Forms.ColumnHeader" />
+              . Otherwise, the resources the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
               
 
-               is using will not be freed until garbage collection calls the <see
-               cref="T:System.Windows.Forms.ColumnHeader" />
+               is using will not be freed until garbage collection calls the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
               
 
@@ -479,8 +444,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Disposes of the resources (other than memory) used by the <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+            >Disposes of the resources (other than memory) used by the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
@@ -524,38 +488,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ColumnHeader.ImageIndex" />
+            >The <see cref="P:System.Windows.Forms.ColumnHeader.ImageIndex" />
 
             
 
-             property refers to the index of an image specified by the <see
-             cref="P:System.Windows.Forms.ListView.SmallImageList" />
+             property refers to the index of an image specified by the <see cref="P:System.Windows.Forms.ListView.SmallImageList" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.ListView" />
+             property of the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             that contains the <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+             that contains the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
-            . The <see
-             cref="P:System.Windows.Forms.ColumnHeader.ImageIndex" />
+            . The <see cref="P:System.Windows.Forms.ColumnHeader.ImageIndex" />
 
             
 
-             property returns -1 if there is no <see
-             cref="P:System.Windows.Forms.ListView.SmallImageList" />
+             property returns -1 if there is no <see cref="P:System.Windows.Forms.ListView.SmallImageList" />
 
             
 
-             set on the containing <see
-             cref="T:System.Windows.Forms.ListView" />
+             set on the containing <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -566,26 +523,22 @@
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.ColumnHeader.ImageIndex" />
+             and <see cref="P:System.Windows.Forms.ColumnHeader.ImageIndex" />
 
             
 
              are mutually exclusive, meaning if one is set, the other is set to an invalid value and ignored. </para
           >
           <para
-            >The image associated with a <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+            >The image associated with a <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
-             is typically used to indicate the state information. If you set the <see
-             cref="P:System.Windows.Forms.ColumnHeader.ImageIndex" />
+             is typically used to indicate the state information. If you set the <see cref="P:System.Windows.Forms.ColumnHeader.ImageIndex" />
 
             
 
-             to a value greater than the index of the last item in the associated image list, <see
-             cref="P:System.Windows.Forms.ColumnHeader.ImageIndex" />
+             to a value greater than the index of the last item in the associated image list, <see cref="P:System.Windows.Forms.ColumnHeader.ImageIndex" />
 
             
 
@@ -595,8 +548,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the index of the image displayed in the <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+            >Gets or sets the index of the image displayed in the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
@@ -636,29 +588,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ColumnHeader.ImageKey" />
+            >The <see cref="P:System.Windows.Forms.ColumnHeader.ImageKey" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.ColumnHeader.ImageIndex" />
+             and <see cref="P:System.Windows.Forms.ColumnHeader.ImageIndex" />
 
             
 
              properties are mutually exclusive, meaning if one is set, the other is set to an invalid value and ignored. </para
           >
           <para
-            >If <see
-             cref="P:System.Windows.Forms.ColumnHeader.ImageKey" />
+            >If <see cref="P:System.Windows.Forms.ColumnHeader.ImageKey" />
 
             
 
              is set to an invalid value, an image will not be displayed, and an exception will not be thrown. </para
           >
           <para
-            >The image associated with a <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+            >The image associated with a <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
@@ -693,23 +641,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+            >The <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
-             returns the value of the <see
-             cref="P:System.Windows.Forms.ListView.SmallImageList" />
+             returns the value of the <see cref="P:System.Windows.Forms.ListView.SmallImageList" />
 
             
 
-             property for the <see
-             cref="T:System.Windows.Forms.ListView" />
+             property for the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             that contains the <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+             that contains the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
@@ -719,8 +663,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the image list associated with the <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+            >Gets the image list associated with the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
@@ -745,23 +688,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this property does not necessarily correspond to the current visual position of the column header within the <see
-             cref="T:System.Windows.Forms.ListView" />
+            >The value of this property does not necessarily correspond to the current visual position of the column header within the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-            . This can be due to the user reordering the column headers at run time (when the <see
-             cref="P:System.Windows.Forms.ListView.AllowColumnReorder" />
+            . This can be due to the user reordering the column headers at run time (when the <see cref="P:System.Windows.Forms.ListView.AllowColumnReorder" />
 
             
 
-             property is set to true). If the <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+             property is set to true). If the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
-             is not contained within a <see
-             cref="T:System.Windows.Forms.ListView" />
+             is not contained within a <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -771,13 +710,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the location with the <see
-             cref="T:System.Windows.Forms.ListView" />
+            >Gets the location with the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control's <see
-             cref="T:System.Windows.Forms.ListView.ColumnHeaderCollection" />
+             control's <see cref="T:System.Windows.Forms.ListView.ColumnHeaderCollection" />
 
             
 
@@ -809,13 +746,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this property to determine which <see
-             cref="T:System.Windows.Forms.ListView" />
+            >You can use this property to determine which <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control a specific <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+             control a specific <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
@@ -825,13 +760,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.ListView" />
+            >Gets the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control the <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+             control the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
@@ -864,8 +797,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+            >Gets or sets the name of the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
@@ -903,8 +835,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an object that contains data to associate with the <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+            >Gets or sets an object that contains data to associate with the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
@@ -959,8 +890,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this property to provide different text alignment settings for the text displayed in each <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+            >You can use this property to provide different text alignment settings for the text displayed in each <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
@@ -968,13 +898,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Due to a limitation in the underlying control, this property has no effect on the first column in the <see
-               cref="T:System.Windows.Forms.ListView" />
+              >Due to a limitation in the underlying control, this property has no effect on the first column in the <see cref="T:System.Windows.Forms.ListView" />
 
               
 
-               control, which is always aligned to the left. To work around this limitation in dnprdnext, you can handle the <see
-               cref="E:System.Windows.Forms.ListView.DrawColumnHeader" />
+               control, which is always aligned to the left. To work around this limitation in dnprdnext, you can handle the <see cref="E:System.Windows.Forms.ListView.DrawColumnHeader" />
 
               
 
@@ -985,8 +913,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the horizontal alignment of the text displayed in the <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+            >Gets or sets the horizontal alignment of the text displayed in the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
@@ -1038,28 +965,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property enables you to set the <see
-             cref="P:System.Windows.Forms.ColumnHeader.Width" />
+            >This property enables you to set the <see cref="P:System.Windows.Forms.ColumnHeader.Width" />
 
             
 
-             of the <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+             of the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
-            . The <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+            . The <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
-             can be set to adjust at run time to the column contents or heading. To adjust the width of the longest item in the column, set the <see
-             cref="P:System.Windows.Forms.ColumnHeader.Width" />
+             can be set to adjust at run time to the column contents or heading. To adjust the width of the longest item in the column, set the <see cref="P:System.Windows.Forms.ColumnHeader.Width" />
 
             
 
-             property to -1. To autosize to the width of the column heading, set the <see
-             cref="P:System.Windows.Forms.ColumnHeader.Width" />
+             property to -1. To autosize to the width of the column heading, set the <see cref="P:System.Windows.Forms.ColumnHeader.Width" />
 
             
 

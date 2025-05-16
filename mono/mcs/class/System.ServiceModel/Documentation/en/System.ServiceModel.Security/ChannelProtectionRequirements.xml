@@ -20,13 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When extending the <see
-         cref="T:System.ServiceModel.Channels.BindingElement" />
+        >When extending the <see cref="T:System.ServiceModel.Channels.BindingElement" />
 
         
 
-         class, you must implement the <see
-         cref="M:System.ServiceModel.Channels.BindingElement.GetProperty``1(System.ServiceModel.Channels.BindingContext)" />
+         class, you must implement the <see cref="M:System.ServiceModel.Channels.BindingElement.GetProperty``1(System.ServiceModel.Channels.BindingContext)" />
 
         
 
@@ -54,8 +52,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This default constructor sets the following properties to a new instance of <see
-             cref="T:System.ServiceModel.Security.ScopedMessagePartSpecification" />
+            >This default constructor sets the following properties to a new instance of <see cref="T:System.ServiceModel.Security.ScopedMessagePartSpecification" />
 
             
 
@@ -103,8 +100,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" />
 
             
 
@@ -133,23 +129,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the following properties to a new instance of <see
-             cref="T:System.ServiceModel.Security.ScopedMessagePartSpecification" />
+            >This constructor sets the following properties to a new instance of <see cref="T:System.ServiceModel.Security.ScopedMessagePartSpecification" />
 
             
 
-            , using the <see
-             cref="M:System.ServiceModel.Security.ScopedMessagePartSpecification.#ctor(System.ServiceModel.Security.ScopedMessagePartSpecification)" />
+            , using the <see cref="M:System.ServiceModel.Security.ScopedMessagePartSpecification.#ctor(System.ServiceModel.Security.ScopedMessagePartSpecification)" />
 
             
 
-             constructor, with <paramref
-             name="other" />
+             constructor, with <paramref name="other" />
 
             
 
-             as the input parameter. <see
-             cref="T:System.ServiceModel.Security.ScopedMessagePartSpecification" />
+             as the input parameter. <see cref="T:System.ServiceModel.Security.ScopedMessagePartSpecification" />
 
             
 
@@ -197,8 +189,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" />
 
             
 
@@ -206,12 +197,15 @@
           >
         </summary>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The other instance of <see
-           cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" />
+          The other instance of <see cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" />
 
           
 
@@ -246,8 +240,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the parts collections in the specified <see
-             cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" />
+            >Adds the parts collections in the specified <see cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" />
 
             
 
@@ -255,12 +248,15 @@
           >
         </summary>
         <param name="protectionRequirements">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The specified <see
-           cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" />
+          The specified <see cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" />
 
           
 
@@ -296,8 +292,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the various parts collections in the specified <see
-             cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" />
+            >Adds the various parts collections in the specified <see cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" />
 
             
 
@@ -305,19 +300,26 @@
           >
         </summary>
         <param name="protectionRequirements">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The specified <see
-           cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" />
+          The specified <see cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" />
 
           
 
           .</param
         >
         <param name="channelScopeOnly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

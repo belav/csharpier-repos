@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Security provides methods to access and manipulate the security policy configuration. You cannot create instances of <see
-         cref="T:System.Security.SecurityManager" />
+        >Security provides methods to access and manipulate the security policy configuration. You cannot create instances of <see cref="T:System.Security.SecurityManager" />
 
         
 
@@ -65,16 +64,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this property is false, even code without <see
-             cref="F:System.Security.Permissions.SecurityPermissionFlag.Execution" />
+            >If this property is false, even code without <see cref="F:System.Security.Permissions.SecurityPermissionFlag.Execution" />
 
             
 
              can execute. Execution checking is expensive and can eliminate the advantages of lazy policy resolution. This property is provided to disable execution checking when needed.</para
           >
           <para
-            >A change to this property is not persisted until <see
-             cref="M:System.Security.SecurityManager.SavePolicy" />
+            >A change to this property is not persisted until <see cref="M:System.Security.SecurityManager.SavePolicy" />
 
             
 
@@ -84,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether code must have <see
-             cref="F:System.Security.Permissions.SecurityPermissionFlag.Execution" />
+            >Gets or sets a value indicating whether code must have <see cref="F:System.Security.Permissions.SecurityPermissionFlag.Execution" />
 
             
 
@@ -115,26 +111,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="M:System.Security.SecurityManager.CurrentThreadRequiresSecurityContextCapture" />
+            >You can use the <see cref="M:System.Security.SecurityManager.CurrentThreadRequiresSecurityContextCapture" />
 
             
 
              method before you cache sensitive data that is obtained after successful security demands. </para
           >
           <para
-            >If the <see
-             cref="M:System.Security.CodeAccessPermission.Assert" />
+            >If the <see cref="M:System.Security.CodeAccessPermission.Assert" />
 
             
 
-             method has been called higher on the stack, the data should not be cached without capturing the corresponding security context. Otherwise, sensitive data that is obtained under an <see
-             cref="M:System.Security.CodeAccessPermission.Assert" />
+             method has been called higher on the stack, the data should not be cached without capturing the corresponding security context. Otherwise, sensitive data that is obtained under an <see cref="M:System.Security.CodeAccessPermission.Assert" />
 
             
 
-             may become available to code that is no longer be running with that <see
-             cref="M:System.Security.CodeAccessPermission.Assert" />
+             may become available to code that is no longer be running with that <see cref="M:System.Security.CodeAccessPermission.Assert" />
 
             
 
@@ -158,13 +150,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >false if the stack contains no partially trusted application domains, no partially trusted assemblies, and no currently active <see
-             cref="M:System.Security.CodeAccessPermission.PermitOnly" />
+            >false if the stack contains no partially trusted application domains, no partially trusted assemblies, and no currently active <see cref="M:System.Security.CodeAccessPermission.PermitOnly" />
 
             
 
-             or <see
-             cref="M:System.Security.CodeAccessPermission.Deny" />
+             or <see cref="M:System.Security.CodeAccessPermission.Deny" />
 
             
 
@@ -197,13 +187,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the net_v40_long, the host evidence in <paramref
-               name="evidence" />
+              >In the net_v40_long, the host evidence in <paramref name="evidence" />
 
               
 
-               must contain <see
-               cref="T:System.Security.Policy.Zone" />
+               must contain <see cref="T:System.Security.Policy.Zone" />
 
               
 
@@ -284,13 +272,11 @@
             </item>
           </list>
           <para
-            >Other evidence, such as <see
-             cref="T:System.Security.Policy.Url" />
+            >Other evidence, such as <see cref="T:System.Security.Policy.Url" />
 
             
 
-             or <see
-             cref="T:System.Security.Policy.Site" />
+             or <see cref="T:System.Security.Policy.Site" />
 
             
 
@@ -307,7 +293,11 @@
           <para>A permission set that can be used as a grant set for the application that has the provided evidence.</para>
         </returns>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -374,8 +364,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Granting of permissions is determined by policy and is different from a demand subject to overrides, such as an assert. Also, <see
-             cref="M:System.Security.SecurityManager.IsGranted(System.Security.IPermission)" />
+            >Granting of permissions is determined by policy and is different from a demand subject to overrides, such as an assert. Also, <see cref="M:System.Security.SecurityManager.IsGranted(System.Security.IPermission)" />
 
             
 
@@ -389,8 +378,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the permissions granted to the caller include the permission <paramref
-             name="perm" />
+            >true if the permissions granted to the caller include the permission <paramref name="perm" />
 
             
 
@@ -398,7 +386,11 @@
           >
         </returns>
         <param name="perm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -438,8 +430,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads a <see
-             cref="T:System.Security.Policy.PolicyLevel" />
+            >Loads a <see cref="T:System.Security.Policy.PolicyLevel" />
 
             
 
@@ -451,14 +442,22 @@
           <para>The loaded policy level.</para>
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The physical file path to a file containing the security policy information. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -498,8 +497,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads a <see
-             cref="T:System.Security.Policy.PolicyLevel" />
+            >Loads a <see cref="T:System.Security.Policy.PolicyLevel" />
 
             
 
@@ -511,14 +509,22 @@
           <para>The loaded policy level.</para>
         </returns>
         <param name="str">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML representation of a security policy level in the same form in which it appears in a configuration file. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -554,8 +560,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The returned enumerator provides successive <see
-             cref="T:System.Security.Policy.PolicyLevel" />
+            >The returned enumerator provides successive <see cref="T:System.Security.Policy.PolicyLevel" />
 
             
 
@@ -570,8 +575,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator for <see
-             cref="T:System.Security.Policy.PolicyLevel" />
+            >An enumerator for <see cref="T:System.Security.Policy.PolicyLevel" />
 
             
 
@@ -620,7 +624,11 @@
           <para>The set of permissions that can be granted by the security system.</para>
         </returns>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -658,13 +666,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method invokes the security policy engine, providing it with an array of <see
-             cref="T:System.Security.Policy.Evidence" />
+            >This method invokes the security policy engine, providing it with an array of <see cref="T:System.Security.Policy.Evidence" />
 
             
 
-             objects. The returned permission set represents only those permissions that apply to every evidence in the array. These permissions are either equivalent to, or a subset of the permissions that policy would have granted to each individual evidence. This method behaves as if you were performing an intersection on the results of resolving policy on each of the <see
-             cref="T:System.Security.Policy.Evidence" />
+             objects. The returned permission set represents only those permissions that apply to every evidence in the array. These permissions are either equivalent to, or a subset of the permissions that policy would have granted to each individual evidence. This method behaves as if you were performing an intersection on the results of resolving policy on each of the <see cref="T:System.Security.Policy.Evidence" />
 
             
 
@@ -680,7 +686,11 @@
           <para>The set of permissions that is appropriate for all of the provided evidence.</para>
         </returns>
         <param name="evidences">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -760,8 +770,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is useful in analyzing how a specified policy configuration works with specific kinds of evidence.</para>
           <para
-            >Code groups will be returned from all applicable levels of the policy hierarchy matching the <paramref
-             name="evidence" />
+            >Code groups will be returned from all applicable levels of the policy hierarchy matching the <paramref name="evidence" />
 
             
 
@@ -777,7 +786,11 @@
           <para>An enumeration of the set of code groups matching the evidence.</para>
         </returns>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -815,8 +828,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method invokes the security policy engine and provides it with evidence of the calling code's identity. The result is determined by the system security policy exclusive of any <see
-             cref="T:System.AppDomain" />
+            >This method invokes the security policy engine and provides it with evidence of the calling code's identity. The result is determined by the system security policy exclusive of any <see cref="T:System.AppDomain" />
 
             
 
@@ -826,8 +838,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines which permissions to grant to code based on the specified evidence, excluding the policy for the <see
-             cref="T:System.AppDomain" />
+            >Determines which permissions to grant to code based on the specified evidence, excluding the policy for the <see cref="T:System.AppDomain" />
 
             
 
@@ -839,7 +850,11 @@
           <para>The set of permissions that can be granted by the security system.</para>
         </returns>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -872,13 +887,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method saves the policy as exposed by <see
-             cref="M:System.Security.SecurityManager.PolicyHierarchy" />
+            >This method saves the policy as exposed by <see cref="M:System.Security.SecurityManager.PolicyHierarchy" />
 
             
 
-            , <see
-             cref="T:System.Security.Policy.PolicyLevel" />
+            , <see cref="T:System.Security.Policy.PolicyLevel" />
 
             
 
@@ -921,8 +934,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Policy.PolicyLevel" />
+            >The <see cref="T:System.Security.Policy.PolicyLevel" />
 
             
 
@@ -932,8 +944,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves a modified security policy level loaded with <see
-             cref="M:System.Security.SecurityManager.LoadPolicyLevelFromFile(System.String,System.Security.PolicyLevelType)" />
+            >Saves a modified security policy level loaded with <see cref="M:System.Security.SecurityManager.LoadPolicyLevelFromFile(System.String,System.Security.PolicyLevelType)" />
 
             
 
@@ -941,7 +952,11 @@
           >
         </summary>
         <param name="level">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -971,8 +986,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is used by the <format
-             type="text/html">
+            >This property is used by the <format type="text/html">
               <a href="d2bf6123-7b0c-4e60-87ad-a39a1c3eb2e0"
                 >Caspol.exe (Code Access Security Policy Tool)</a
               >
@@ -984,8 +998,7 @@
 
             
 
-             provides a way for administrators to disable code access security. When code access security is disabled, all code access demands succeed. Effectively, this grants all code FullTrust. Disabling code access security bypasses the security system so that code might perform slightly better than the equivalent security policy granting FullTrust to all code. This property does not disable role-based security; therefore, <see
-             cref="T:System.Security.Permissions.PrincipalPermission" />
+             provides a way for administrators to disable code access security. When code access security is disabled, all code access demands succeed. Effectively, this grants all code FullTrust. Disabling code access security bypasses the security system so that code might perform slightly better than the equivalent security policy granting FullTrust to all code. This property does not disable role-based security; therefore, <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
             
 
@@ -995,13 +1008,11 @@
             <para>Disabling code access security makes the system vulnerable to attacks by malicious code such as viruses and worms. Disabling code access security does not automatically block managed code from running in any way. It only causes managed code to run without restriction by the code access security system, and should only be done with the most extreme caution. Turning off security to gain extra performance should only be done when other security measures have been taken to help protect system security. Examples of other security precautions include disconnecting from public networks, physically securing computers, and so on.</para>
           </block>
           <para
-            >A change to this property is not persisted in the registry until <see
-             cref="M:System.Security.SecurityManager.SavePolicy" />
+            >A change to this property is not persisted in the registry until <see cref="M:System.Security.SecurityManager.SavePolicy" />
 
             
 
-             is called. New processes will not be affected by the change until it is persisted in the registry. Changing the value of this property in a running process does not necessarily change the state in the expected manner. To ensure changes have taken effect, you must call <see
-             cref="M:System.Security.SecurityManager.SavePolicy" />
+             is called. New processes will not be affected by the change until it is persisted in the registry. Changing the value of this property in a running process does not necessarily change the state in the expected manner. To ensure changes have taken effect, you must call <see cref="M:System.Security.SecurityManager.SavePolicy" />
 
             
 

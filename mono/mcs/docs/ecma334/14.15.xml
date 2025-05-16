@@ -1,93 +1,78 @@
 <?xml version="1.0"?>
 <clause number="14.15" title="Constant expressions">
   <paragraph
-    >A <non_terminal
-     where="14.15">constant-expression</non_terminal>
+    >A <non_terminal where="14.15"
+      >constant-expression</non_terminal
+    >
 
     
 
-     is an expression that can be fully evaluated at compile-time. <grammar_production
-    >
+     is an expression that can be fully evaluated at compile-time. <grammar_production>
       <name>
         <non_terminal where="14.15">constant-expression</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="14.14">expression</non_terminal>
       </rhs>
     </grammar_production>
   </paragraph>
   <paragraph
-    >The type of a constant expression can be one of the following: <keyword
-    >sbyte</keyword>
+    >The type of a constant expression can be one of the following: <keyword>sbyte</keyword>
 
     
 
-    , <keyword
-    >byte</keyword>
+    , <keyword>byte</keyword>
 
     
 
-    , <keyword
-    >short</keyword>
+    , <keyword>short</keyword>
 
     
 
-    , <keyword
-    >ushort</keyword>
+    , <keyword>ushort</keyword>
 
     
 
-    , <keyword
-    >int</keyword>
+    , <keyword>int</keyword>
 
     
 
-    , <keyword
-    >uint</keyword>
+    , <keyword>uint</keyword>
 
     
 
-    , <keyword
-    >long</keyword>
+    , <keyword>long</keyword>
 
     
 
-    , <keyword
-    >ulong</keyword>
+    , <keyword>ulong</keyword>
 
     
 
-    , <keyword
-    >char</keyword>
+    , <keyword>char</keyword>
 
     
 
-    , <keyword
-    >float</keyword>
+    , <keyword>float</keyword>
 
     
 
-    , <keyword
-    >double</keyword>
+    , <keyword>double</keyword>
 
     
 
-    , <keyword
-    >decimal</keyword>
+    , <keyword>decimal</keyword>
 
     
 
-    , <keyword
-    >bool</keyword>
+    , <keyword>bool</keyword>
 
     
 
-    , string, any enumeration type, or the null type. The following constructs are permitted in constant expressions: <list
-    >
+    , string, any enumeration type, or the null type. The following constructs are permitted in constant expressions: <list>
       <list_item> Literals (including the null literal). </list_item>
       <list_item> References to const members of class and struct types. </list_item>
       <list_item> References to members of enumeration types. </list_item>
@@ -102,108 +87,92 @@
   <paragraph>The compile-time evaluation of constant expressions uses the same rules as run-time evaluation of  non-constant expressions, except that where run-time evaluation would have thrown an exception, compile-time evaluation causes a compile-time error to occur. </paragraph>
   <paragraph
     >Unless a constant expression is explicitly placed in an unchecked context, overflows that occur in  <non_terminal
-     where="11.1">integral-type</non_terminal>
+      where="11.1"
+      >integral-type</non_terminal
+    >
 
     
 
-     arithmetic operations and conversions during the compile-time evaluation of the expression always cause compile-time errors (<hyperlink
-    >14.5.12</hyperlink>
+     arithmetic operations and conversions during the compile-time evaluation of the expression always cause compile-time errors (<hyperlink>14.5.12</hyperlink>
 
     
 
     ). </paragraph
   >
   <paragraph
-    >Constant expressions occur in the contexts listed below. In these contexts, a compile-time error occurs if an expression cannot be fully evaluated at compile-time. <list
-    >
+    >Constant expressions occur in the contexts listed below. In these contexts, a compile-time error occurs if an expression cannot be fully evaluated at compile-time. <list>
       <list_item
-        > Constant declarations (<hyperlink
-        >17.3</hyperlink>
+        > Constant declarations (<hyperlink>17.3</hyperlink>
 
         
 
         ). </list_item
       >
       <list_item
-        > Enumeration member declarations (<hyperlink
-        >21.30</hyperlink>
+        > Enumeration member declarations (<hyperlink>21.30</hyperlink>
 
         
 
         ). </list_item
       >
       <list_item
-        > case labels of a switch statement (<hyperlink
-        >15.7.2</hyperlink>
+        > case labels of a switch statement (<hyperlink>15.7.2</hyperlink>
 
         
 
         ). </list_item
       >
       <list_item
-        > goto case statements (<hyperlink
-        >15.9.3</hyperlink>
+        > goto case statements (<hyperlink>15.9.3</hyperlink>
 
         
 
         ). </list_item
       >
       <list_item
-        > Dimension lengths in an array creation expression (<hyperlink
-        >14.5.10.2</hyperlink>
+        > Dimension lengths in an array creation expression (<hyperlink>14.5.10.2</hyperlink>
 
         
 
         ) that includes an initializer. </list_item
       >
-      <list_item
-        > Attributes (<hyperlink
-        >24</hyperlink>
+      <list_item> Attributes (<hyperlink>24</hyperlink>
 
         
 
-        ). </list_item
-      >
+        ). </list_item>
     </list>
   </paragraph>
   <paragraph
-    >An implicit constant expression conversion (<hyperlink
-    >13.1.6</hyperlink>
+    >An implicit constant expression conversion (<hyperlink>13.1.6</hyperlink>
 
     
 
-    ) permits a constant expression of type <keyword
-    >int</keyword>
+    ) permits a constant expression of type <keyword>int</keyword>
 
     
 
-     to be converted to <keyword
-    >sbyte</keyword>
+     to be converted to <keyword>sbyte</keyword>
 
     
 
-    , <keyword
-    >byte</keyword>
+    , <keyword>byte</keyword>
 
     
 
-    , <keyword
-    >short</keyword>
+    , <keyword>short</keyword>
 
     
 
-    , <keyword
-    >ushort</keyword>
+    , <keyword>ushort</keyword>
 
     
 
-    , <keyword
-    >uint</keyword>
+    , <keyword>uint</keyword>
 
     
 
-    , or <keyword
-    >ulong</keyword>
+    , or <keyword>ulong</keyword>
 
     
 

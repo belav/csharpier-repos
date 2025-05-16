@@ -20,23 +20,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.ListView.ItemSelectionChanged" />
+        >The <see cref="E:System.Windows.Forms.ListView.ItemSelectionChanged" />
 
         
 
-         event occurs when the selection state of a <see
-         cref="T:System.Windows.Forms.ListViewItem" />
+         event occurs when the selection state of a <see cref="T:System.Windows.Forms.ListViewItem" />
 
         
 
-         changes from selected to deselected or deselected to selected. The <see
-         cref="E:System.Windows.Forms.ListView.ItemSelectionChanged" />
+         changes from selected to deselected or deselected to selected. The <see cref="E:System.Windows.Forms.ListView.ItemSelectionChanged" />
 
         
 
-         will not occur if the <see
-         cref="T:System.Windows.Forms.ListView" />
+         will not occur if the <see cref="T:System.Windows.Forms.ListView" />
 
         
 
@@ -46,8 +42,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.ListView.ItemSelectionChanged" />
+        >Provides data for the <see cref="E:System.Windows.Forms.ListView.ItemSelectionChanged" />
 
         
 
@@ -73,8 +68,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewItemSelectionChangedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItemSelectionChangedEventArgs" />
 
             
 
@@ -82,31 +76,41 @@
           >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ListViewItem" />
+          The <see cref="T:System.Windows.Forms.ListViewItem" />
 
           
 
            whose selection state has changed.</param
         >
         <param name="itemIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the <see
-           cref="T:System.Windows.Forms.ListViewItem" />
+          The index of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
           
 
            whose selection state has changed.</param
         >
         <param name="isSelected">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

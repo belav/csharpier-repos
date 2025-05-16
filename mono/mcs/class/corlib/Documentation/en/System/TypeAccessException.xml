@@ -26,21 +26,18 @@
 
         
 
-         is thrown when a method attempts to cast an object to a type that is not accessible from the method. For example, an anonymously hosted dynamic method cannot access a security-critical type because the method is transparent. If the method contains a <see
-         cref="F:System.Reflection.Emit.OpCodes.Castclass" />
+         is thrown when a method attempts to cast an object to a type that is not accessible from the method. For example, an anonymously hosted dynamic method cannot access a security-critical type because the method is transparent. If the method contains a <see cref="F:System.Reflection.Emit.OpCodes.Castclass" />
 
         
 
-         instruction that casts an object to a security-critical type, or to a generic type that has a security-critical type as one of its type parameters, <see
-         cref="T:System.TypeAccessException" />
+         instruction that casts an object to a security-critical type, or to a generic type that has a security-critical type as one of its type parameters, <see cref="T:System.TypeAccessException" />
 
         
 
          is thrown by the JIT compiler. </para
       >
       <para
-        >Similarly, <see
-         cref="T:System.TypeAccessException" />
+        >Similarly, <see cref="T:System.TypeAccessException" />
 
         
 
@@ -68,16 +65,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Exception.Message" />
+            >This constructor initializes the <see cref="P:System.Exception.Message" />
 
             
 
              property of the new instance to a system-supplied message that describes the error, such as "Attempt to access the type failed." This message takes the current system culture into account.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.TypeAccessException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.TypeAccessException" />
 
             
 
@@ -119,8 +114,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.TypeAccessException" />
+            >Initializes a new instance of the <see cref="T:System.TypeAccessException" />
 
             
 
@@ -146,8 +140,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.TypeAccessException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.TypeAccessException" />
 
             
 
@@ -182,8 +175,7 @@
               </term>
               <description>
                 <para
-                  >The error message string specified in <paramref
-                   name="message" />
+                  >The error message string specified in <paramref name="message" />
 
                   
 
@@ -196,8 +188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.TypeAccessException" />
+            >Initializes a new instance of the <see cref="T:System.TypeAccessException" />
 
             
 
@@ -205,7 +196,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -234,8 +229,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called during deserialization to reconstitute the exception object that was transmitted over a stream. For more information, see <format
-             type="text/html">
+            >This constructor is called during deserialization to reconstitute the exception object that was transmitted over a stream. For more information, see <format type="text/html">
               <a href="832AC524-21BC-419A-A27B-CA8BFC45840F">XML and SOAP Serialization</a>
             </format>
 
@@ -247,8 +241,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.TypeAccessException" />
+            >Initializes a new instance of the <see cref="T:System.TypeAccessException" />
 
             
 
@@ -256,14 +249,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -292,26 +293,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.TypeAccessException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.TypeAccessException" />
 
             
 
@@ -346,8 +343,7 @@
               </term>
               <description>
                 <para
-                  >The error message string specified in <paramref
-                   name="message" />
+                  >The error message string specified in <paramref name="message" />
 
                   
 
@@ -360,8 +356,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.TypeAccessException" />
+            >Initializes a new instance of the <see cref="T:System.TypeAccessException" />
 
             
 
@@ -369,19 +364,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message that describes the exception. The caller of this constructor must ensure that this string has been localized for the current system culture. </param
         >
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="inner" />
+          The exception that is the cause of the current exception. If the <paramref name="inner" />
 
           
 

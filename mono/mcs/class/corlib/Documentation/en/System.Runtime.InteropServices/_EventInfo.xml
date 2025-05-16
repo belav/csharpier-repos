@@ -31,8 +31,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This interface is for access to managed classes from unmanaged code and should not be called from managed code.</para>
       <para
-        >This interface preserves the vtable order of the <see
-         cref="T:System.Reflection.EventInfo" />
+        >This interface preserves the vtable order of the <see cref="T:System.Reflection.EventInfo" />
 
         
 
@@ -42,8 +41,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Exposes the public members of the <see
-         cref="T:System.Reflection.EventInfo" />
+        >Exposes the public members of the <see cref="T:System.Reflection.EventInfo" />
 
         
 
@@ -79,8 +77,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code and should not be called from managed code.</para>
           <para
-            >The <see
-             cref="M:System.Reflection.EventInfo.AddEventHandler(System.Object,System.Delegate)" />
+            >The <see cref="M:System.Reflection.EventInfo.AddEventHandler(System.Object,System.Delegate)" />
 
             
 
@@ -90,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.Reflection.EventInfo.AddEventHandler(System.Object,System.Delegate)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.EventInfo.AddEventHandler(System.Object,System.Delegate)" />
 
             
 
@@ -99,14 +95,22 @@
           >
         </summary>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The event source. </param
         >
         <param name="handler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -139,8 +143,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code and should not be called from managed code.</para>
           <para
-            >The <see
-             cref="P:System.Reflection.EventInfo.Attributes" />
+            >The <see cref="P:System.Reflection.EventInfo.Attributes" />
 
             
 
@@ -150,8 +153,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="P:System.Reflection.EventInfo.Attributes" />
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.EventInfo.Attributes" />
 
             
 
@@ -182,8 +184,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code and should not be called from managed code.</para>
           <para
-            >The <see
-             cref="P:System.Reflection.MemberInfo.DeclaringType" />
+            >The <see cref="P:System.Reflection.MemberInfo.DeclaringType" />
 
             
 
@@ -193,8 +194,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="P:System.Reflection.MemberInfo.DeclaringType" />
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MemberInfo.DeclaringType" />
 
             
 
@@ -227,18 +227,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code and should not be called from managed code.</para>
           <para
-            >The <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >The <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             method determines whether the specified <see
-             cref="T:System.Object" />
+             method determines whether the specified <see cref="T:System.Object" />
 
             
 
-             is equal to the current <see
-             cref="T:System.Object" />
+             is equal to the current <see cref="T:System.Object" />
 
             
 
@@ -248,8 +245,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -259,13 +255,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see
-             cref="T:System.Object" />
+            >true if the specified <see cref="T:System.Object" />
 
             
 
-             is equal to the current <see
-             cref="T:System.Object" />
+             is equal to the current <see cref="T:System.Object" />
 
             
 
@@ -273,17 +267,19 @@
           >
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to compare with the current <see
-           cref="T:System.Object" />
+           to compare with the current <see cref="T:System.Object" />
 
           
 
@@ -313,13 +309,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code and should not be called from managed code.</para>
           <para
-            >The <see
-             cref="P:System.Reflection.EventInfo.EventHandlerType" />
+            >The <see cref="P:System.Reflection.EventInfo.EventHandlerType" />
 
             
 
-             property gets the <see
-             cref="T:System.Type" />
+             property gets the <see cref="T:System.Type" />
 
             
 
@@ -329,8 +323,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="P:System.Reflection.EventInfo.EventHandlerType" />
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.EventInfo.EventHandlerType" />
 
             
 
@@ -361,8 +354,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code and should not be called from managed code.</para>
           <para
-            >The <see
-             cref="M:System.Reflection.EventInfo.GetAddMethod" />
+            >The <see cref="M:System.Reflection.EventInfo.GetAddMethod" />
 
             
 
@@ -372,8 +364,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.Reflection.EventInfo.GetAddMethod" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.EventInfo.GetAddMethod" />
 
             
 
@@ -383,8 +374,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.MethodInfo" />
+            >A <see cref="T:System.Reflection.MethodInfo" />
 
             
 
@@ -420,18 +410,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code and should not be called from managed code.</para>
           <para
-            >The <see
-             cref="M:System.Reflection.EventInfo.GetAddMethod(System.Boolean)" />
+            >The <see cref="M:System.Reflection.EventInfo.GetAddMethod(System.Boolean)" />
 
             
 
-             method retrieves the <see
-             cref="T:System.Reflection.MethodInfo" />
+             method retrieves the <see cref="T:System.Reflection.MethodInfo" />
 
             
 
-             object for the <see
-             cref="M:System.Reflection.EventInfo.AddEventHandler(System.Object,System.Delegate)" />
+             object for the <see cref="M:System.Reflection.EventInfo.AddEventHandler(System.Object,System.Delegate)" />
 
             
 
@@ -441,8 +428,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.Reflection.EventInfo.GetAddMethod(System.Boolean)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.EventInfo.GetAddMethod(System.Boolean)" />
 
             
 
@@ -452,8 +438,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.MethodInfo" />
+            >A <see cref="T:System.Reflection.MethodInfo" />
 
             
 
@@ -461,7 +446,11 @@
           >
         </returns>
         <param name="nonPublic">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -493,18 +482,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code and should not be called from managed code.</para>
           <para
-            >The <see
-             cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
+            >The <see cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
 
             
 
-             method retrieves the <see
-             cref="T:System.Reflection.MethodInfo" />
+             method retrieves the <see cref="T:System.Reflection.MethodInfo" />
 
             
 
-             object for the <see
-             cref="M:System.Reflection.EventInfo.AddEventHandler(System.Object,System.Delegate)" />
+             object for the <see cref="M:System.Reflection.EventInfo.AddEventHandler(System.Object,System.Delegate)" />
 
             
 
@@ -514,8 +500,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
 
             
 
@@ -527,7 +512,11 @@
           <para>An array that contains all the custom attributes, or an array with zero (0) elements if no attributes are defined.</para>
         </returns>
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -563,13 +552,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code and should not be called from managed code.</para>
           <para
-            >The <see
-             cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Type,System.Boolean)" />
+            >The <see cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Type,System.Boolean)" />
 
             
 
-             method returns an array of custom attributes identified by <see
-             cref="T:System.Type" />
+             method returns an array of custom attributes identified by <see cref="T:System.Type" />
 
             
 
@@ -579,8 +566,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Type,System.Boolean)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Type,System.Boolean)" />
 
             
 
@@ -592,14 +578,22 @@
           <para>An array of custom attributes applied to this member, or an array with zero (0) elements if no attributes have been applied.</para>
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of attribute to search for. Only attributes that are assignable to this type are returned. </param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -629,13 +623,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code and should not be called from managed code.</para>
           <para
-            >The <see
-             cref="M:System.Object.GetHashCode" />
+            >The <see cref="M:System.Object.GetHashCode" />
 
             
 
-             method serves as a hash function for a particular type. <see
-             cref="M:System.Object.GetHashCode" />
+             method serves as a hash function for a particular type. <see cref="M:System.Object.GetHashCode" />
 
             
 
@@ -645,8 +637,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.Object.GetHashCode" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.Object.GetHashCode" />
 
             
 
@@ -720,8 +711,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code and should not be called from managed code.</para>
           <para
-            >The <see
-             cref="M:System.Reflection.EventInfo.GetRaiseMethod" />
+            >The <see cref="M:System.Reflection.EventInfo.GetRaiseMethod" />
 
             
 
@@ -731,8 +721,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.Reflection.EventInfo.GetRaiseMethod" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.EventInfo.GetRaiseMethod" />
 
             
 
@@ -772,8 +761,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code and should not be called from managed code.</para>
           <para
-            >The <see
-             cref="M:System.Reflection.EventInfo.GetRaiseMethod(System.Boolean)" />
+            >The <see cref="M:System.Reflection.EventInfo.GetRaiseMethod(System.Boolean)" />
 
             
 
@@ -783,8 +771,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.Reflection.EventInfo.GetRaiseMethod(System.Boolean)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.EventInfo.GetRaiseMethod(System.Boolean)" />
 
             
 
@@ -794,8 +781,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Reflection.MethodInfo" />
+            >The <see cref="T:System.Reflection.MethodInfo" />
 
             
 
@@ -803,7 +789,11 @@
           >
         </returns>
         <param name="nonPublic">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -836,8 +826,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code and should not be called from managed code.</para>
           <para
-            >The <see
-             cref="M:System.Reflection.EventInfo.GetRemoveMethod" />
+            >The <see cref="M:System.Reflection.EventInfo.GetRemoveMethod" />
 
             
 
@@ -847,8 +836,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.Reflection.EventInfo.GetRemoveMethod" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.EventInfo.GetRemoveMethod" />
 
             
 
@@ -858,8 +846,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.MethodInfo" />
+            >A <see cref="T:System.Reflection.MethodInfo" />
 
             
 
@@ -895,13 +882,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code and should not be called from managed code.</para>
           <para
-            >The <see
-             cref="M:System.Reflection.EventInfo.GetRemoveMethod(System.Boolean)" />
+            >The <see cref="M:System.Reflection.EventInfo.GetRemoveMethod(System.Boolean)" />
 
             
 
-             method retrieves the <see
-             cref="T:System.Reflection.MethodInfo" />
+             method retrieves the <see cref="T:System.Reflection.MethodInfo" />
 
             
 
@@ -911,8 +896,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.Reflection.EventInfo.GetRemoveMethod(System.Boolean)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.EventInfo.GetRemoveMethod(System.Boolean)" />
 
             
 
@@ -922,8 +906,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.MethodInfo" />
+            >A <see cref="T:System.Reflection.MethodInfo" />
 
             
 
@@ -931,7 +914,11 @@
           >
         </returns>
         <param name="nonPublic">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -961,8 +948,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code and should not be called from managed code.</para>
           <para
-            >The <see
-             cref="M:System.Object.GetType" />
+            >The <see cref="M:System.Object.GetType" />
 
             
 
@@ -972,8 +958,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.Object.GetType" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.Object.GetType" />
 
             
 
@@ -982,14 +967,11 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >A <see
-             cref="T:System.Type" />
+          <para>A <see cref="T:System.Type" />
 
             
 
-             object.</para
-          >
+             object.</para>
         </returns>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1021,8 +1003,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is for access to managed classes from unmanaged code and should not be called from managed code. For more information about <unmanagedCodeEntityReference
-            >IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
+            >This method is for access to managed classes from unmanaged code and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
 
             
 
@@ -1034,21 +1015,33 @@
           <para>Retrieves the type information for an object, which can be used to get the type information for an interface.</para>
         </summary>
         <param name="iTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type information to return.</param
         >
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1151,13 +1144,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code and should not be called from managed code.</para>
           <para
-            >The <see
-             cref="M:System.Reflection.MemberInfo.IsDefined(System.Type,System.Boolean)" />
+            >The <see cref="M:System.Reflection.MemberInfo.IsDefined(System.Type,System.Boolean)" />
 
             
 
-             method indicates whether one or more instances of the <paramref
-             name="attributeType" />
+             method indicates whether one or more instances of the <paramref name="attributeType" />
 
             
 
@@ -1167,8 +1158,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.Reflection.MemberInfo.IsDefined(System.Type,System.Boolean)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.MemberInfo.IsDefined(System.Type,System.Boolean)" />
 
             
 
@@ -1178,8 +1168,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if one or more instance of the <paramref
-             name="attributeType" />
+            >true if one or more instance of the <paramref name="attributeType" />
 
             
 
@@ -1187,14 +1176,22 @@
           >
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The Type object to which the custom attributes are applied. </param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1221,8 +1218,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code and should not be called from managed code.</para>
           <para
-            >The <see
-             cref="P:System.Reflection.EventInfo.IsMulticast" />
+            >The <see cref="P:System.Reflection.EventInfo.IsMulticast" />
 
             
 
@@ -1232,8 +1228,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="P:System.Reflection.EventInfo.IsMulticast" />
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.EventInfo.IsMulticast" />
 
             
 
@@ -1261,13 +1256,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code and should not be called from managed code.</para>
           <para
-            >The <see
-             cref="P:System.Reflection.EventInfo.IsSpecialName" />
+            >The <see cref="P:System.Reflection.EventInfo.IsSpecialName" />
 
             
 
-             property gets a value indicating whether the <see
-             cref="T:System.Reflection.EventInfo" />
+             property gets a value indicating whether the <see cref="T:System.Reflection.EventInfo" />
 
             
 
@@ -1277,8 +1270,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="P:System.Reflection.EventInfo.IsSpecialName" />
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.EventInfo.IsSpecialName" />
 
             
 
@@ -1312,13 +1304,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code and should not be called from managed code.</para>
           <para
-            >The <see
-             cref="P:System.Reflection.EventInfo.MemberType" />
+            >The <see cref="P:System.Reflection.EventInfo.MemberType" />
 
             
 
-             property gets a <see
-             cref="T:System.Reflection.MemberTypes" />
+             property gets a <see cref="T:System.Reflection.MemberTypes" />
 
             
 
@@ -1328,8 +1318,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="P:System.Reflection.EventInfo.MemberType" />
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.EventInfo.MemberType" />
 
             
 
@@ -1357,8 +1346,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code and should not be called from managed code.</para>
           <para
-            >The <see
-             cref="P:System.Reflection.MemberInfo.Name" />
+            >The <see cref="P:System.Reflection.MemberInfo.Name" />
 
             
 
@@ -1368,8 +1356,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="P:System.Reflection.MemberInfo.Name" />
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MemberInfo.Name" />
 
             
 
@@ -1400,8 +1387,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code and should not be called from managed code.</para>
           <para
-            >The <see
-             cref="P:System.Reflection.MemberInfo.ReflectedType" />
+            >The <see cref="P:System.Reflection.MemberInfo.ReflectedType" />
 
             
 
@@ -1411,8 +1397,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="P:System.Reflection.MemberInfo.ReflectedType" />
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MemberInfo.ReflectedType" />
 
             
 
@@ -1449,8 +1434,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code and should not be called from managed code.</para>
           <para
-            >The <see
-             cref="M:System.Reflection.EventInfo.RemoveEventHandler(System.Object,System.Delegate)" />
+            >The <see cref="M:System.Reflection.EventInfo.RemoveEventHandler(System.Object,System.Delegate)" />
 
             
 
@@ -1460,8 +1444,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.Reflection.EventInfo.RemoveEventHandler(System.Object,System.Delegate)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.EventInfo.RemoveEventHandler(System.Object,System.Delegate)" />
 
             
 
@@ -1469,14 +1452,22 @@
           >
         </summary>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The event source. </param
         >
         <param name="handler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1509,8 +1500,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.Object.ToString" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.Object.ToString" />
 
             
 
@@ -1520,8 +1510,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the current <see
-             cref="T:System.Object" />
+            >A string that represents the current <see cref="T:System.Object" />
 
             
 

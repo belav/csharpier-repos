@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
 <clause number="20.2.2" title="Interface properties">
   <paragraph
-    >Interface properties are declared using interface-property-declarations: <grammar_production
-    >
+    >Interface properties are declared using interface-property-declarations: <grammar_production>
       <name>
         <non_terminal where="20.2.2">interface-property-declaration</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="24.2">attributes</non_terminal>
         <opt />
         <keyword>new</keyword>
@@ -29,8 +27,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="24.2">attributes</non_terminal>
         <opt />
         <terminal>get</terminal>
@@ -65,16 +62,14 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >The attributes, type, and identifier of an interface property declaration have the same meaning as those of a property declaration in a class (<hyperlink
-    >17.6</hyperlink>
+    >The attributes, type, and identifier of an interface property declaration have the same meaning as those of a property declaration in a class (<hyperlink>17.6</hyperlink>
 
     
 
     ). </paragraph
   >
   <paragraph
-    >The accessors of an interface property declaration correspond to the accessors of a class property declaration (<hyperlink
-    >17.6.2</hyperlink>
+    >The accessors of an interface property declaration correspond to the accessors of a class property declaration (<hyperlink>17.6.2</hyperlink>
 
     
 

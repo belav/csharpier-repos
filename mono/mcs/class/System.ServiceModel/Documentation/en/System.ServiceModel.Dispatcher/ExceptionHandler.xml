@@ -17,28 +17,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Extend the <see
-         cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
+        >Extend the <see cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
 
         
 
-         class and override the <see
-         cref="M:System.ServiceModel.Dispatcher.ExceptionHandler.HandleException(System.Exception)" />
+         class and override the <see cref="M:System.ServiceModel.Dispatcher.ExceptionHandler.HandleException(System.Exception)" />
 
         
 
-         method to determine whether an exception should terminate the application. Then create a new instance of your custom <see
-         cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
+         method to determine whether an exception should terminate the application. Then create a new instance of your custom <see cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
 
         
 
-         class and assign it to the static <see
-         cref="P:System.ServiceModel.Dispatcher.ExceptionHandler.AsynchronousThreadExceptionHandler" />
+         class and assign it to the static <see cref="P:System.ServiceModel.Dispatcher.ExceptionHandler.AsynchronousThreadExceptionHandler" />
 
         
 
-         or <see
-         cref="P:System.ServiceModel.Dispatcher.ExceptionHandler.TransportExceptionHandler" />
+         or <see cref="P:System.ServiceModel.Dispatcher.ExceptionHandler.TransportExceptionHandler" />
 
         
 
@@ -48,8 +43,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Extend the <see
-         cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
+        >Extend the <see cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
 
         
 
@@ -74,8 +68,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
 
             
 
@@ -106,8 +99,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an instance of <see
-             cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
+            >Gets an instance of <see cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
 
             
 
@@ -142,21 +134,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see
-             cref="P:System.ServiceModel.Dispatcher.ExceptionHandler.AsynchronousThreadExceptionHandler" />
+            >By default, the <see cref="P:System.ServiceModel.Dispatcher.ExceptionHandler.AsynchronousThreadExceptionHandler" />
 
             
 
-             property is null, and unhandled exceptions on asynchronous indigo2 threads terminate the application.  Set this property to an <see
-             cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
+             property is null, and unhandled exceptions on asynchronous indigo2 threads terminate the application.  Set this property to an <see cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
 
             
 
              object to receive and react to these exceptions.</para
           >
           <para
-            >If an unhandled exception occurs on an asynchronous indigo2 thread and reaches this handler, the state of the application domain may be compromised.  <see
-             cref="M:System.ServiceModel.Dispatcher.ExceptionHandler.HandleException(System.Exception)" />
+            >If an unhandled exception occurs on an asynchronous indigo2 thread and reaches this handler, the state of the application domain may be compromised.  <see cref="M:System.ServiceModel.Dispatcher.ExceptionHandler.HandleException(System.Exception)" />
 
             
 
@@ -166,8 +155,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the current <see
-             cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
+            >Gets or sets the current <see cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
 
             
 
@@ -197,8 +185,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ServiceModel.Dispatcher.ExceptionHandler.HandleException(System.Exception)" />
+            >The <see cref="M:System.ServiceModel.Dispatcher.ExceptionHandler.HandleException(System.Exception)" />
 
             
 
@@ -236,26 +223,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see
-             cref="P:System.ServiceModel.Dispatcher.ExceptionHandler.TransportExceptionHandler" />
+            >By default, the <see cref="P:System.ServiceModel.Dispatcher.ExceptionHandler.TransportExceptionHandler" />
 
             
 
-             property is set to the value of <see
-             cref="P:System.ServiceModel.Dispatcher.ExceptionHandler.AlwaysHandle" />
+             property is set to the value of <see cref="P:System.ServiceModel.Dispatcher.ExceptionHandler.AlwaysHandle" />
 
             
 
-            , causing unhandled exceptions within indigo2 transports to be ignored.  Set this property to an instance of <see
-             cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
+            , causing unhandled exceptions within indigo2 transports to be ignored.  Set this property to an instance of <see cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
 
             
 
              to receive and react to these exceptions.</para
           >
           <para
-            >If an unhandled exception occurs within a global indigo2 transport and reaches this handler, there is a possibility that the state of the application domain is compromised. <see
-             cref="M:System.ServiceModel.Dispatcher.ExceptionHandler.HandleException(System.Exception)" />
+            >If an unhandled exception occurs within a global indigo2 transport and reaches this handler, there is a possibility that the state of the application domain is compromised. <see cref="M:System.ServiceModel.Dispatcher.ExceptionHandler.HandleException(System.Exception)" />
 
             
 
@@ -265,8 +248,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the current transport <see
-             cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
+            >Gets or sets the current transport <see cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
 
             
 

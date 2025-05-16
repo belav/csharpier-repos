@@ -17,18 +17,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class allows you to create an XML tree that supports deferred streaming output. You use this class to create an XML tree in a very similar fashion to creating an XML tree using <see
-         cref="T:System.Xml.Linq.XElement" />
+        >This class allows you to create an XML tree that supports deferred streaming output. You use this class to create an XML tree in a very similar fashion to creating an XML tree using <see cref="T:System.Xml.Linq.XElement" />
 
         
 
-        . However, there is a fundamental difference. When you use a LINQ query to specify content when creating an XML tree using <see
-         cref="T:System.Xml.Linq.XElement" />
+        . However, there is a fundamental difference. When you use a LINQ query to specify content when creating an XML tree using <see cref="T:System.Xml.Linq.XElement" />
 
         
 
-        , the query variable is iterated at the time of construction of the XML tree, and the results of the query are added to the XML tree. In contrast, when you create an XML tree using <see
-         cref="T:System.Xml.Linq.XStreamingElement" />
+        , the query variable is iterated at the time of construction of the XML tree, and the results of the query are added to the XML tree. In contrast, when you create an XML tree using <see cref="T:System.Xml.Linq.XStreamingElement" />
 
         
 
@@ -36,26 +33,22 @@
       >
       <para>If you are streaming from an input source, such as a text file, then you can read a very large text file, and generate a very large XML document while maintaining a small memory footprint.</para>
       <para
-        >Another scenario is that you have a large XML tree that has been loaded into memory, and you want to create a transformed version of the document. If you create a new document using <see
-         cref="T:System.Xml.Linq.XElement" />
+        >Another scenario is that you have a large XML tree that has been loaded into memory, and you want to create a transformed version of the document. If you create a new document using <see cref="T:System.Xml.Linq.XElement" />
 
         
 
-        , then you will have two large XML trees in memory upon completion of the transformation. However, if you create the new XML tree using <see
-         cref="T:System.Xml.Linq.XStreamingElement" />
+        , then you will have two large XML trees in memory upon completion of the transformation. However, if you create the new XML tree using <see cref="T:System.Xml.Linq.XStreamingElement" />
 
         
 
         , then your working set will be effectively cut in half.</para
       >
       <para
-        >Note that when debugging a program that uses <see
-         cref="T:System.Xml.Linq.XStreamingElement" />
+        >Note that when debugging a program that uses <see cref="T:System.Xml.Linq.XStreamingElement" />
 
         
 
-        , displaying the value of an object causes its <see
-         cref="Overload:System.Xml.Linq.XStreamingElement.ToString" />
+        , displaying the value of an object causes its <see cref="Overload:System.Xml.Linq.XStreamingElement.ToString" />
 
         
 
@@ -89,13 +82,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor creates a streaming element with no content and no attributes.</para>
           <para
-            >There is an implicit conversion from string to <see
-             cref="T:System.Xml.Linq.XName" />
+            >There is an implicit conversion from string to <see cref="T:System.Xml.Linq.XName" />
 
             
 
-            . Typical use of this constructor is to specify a string as the parameter instead of creating a new <see
-             cref="T:System.Xml.Linq.XName" />
+            . Typical use of this constructor is to specify a string as the parameter instead of creating a new <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -105,13 +96,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Linq.XElement" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XElement" />
 
             
 
-             class from the specified <see
-             cref="T:System.Xml.Linq.XName" />
+             class from the specified <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -119,12 +108,15 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Linq.XName" />
+          An <see cref="T:System.Xml.Linq.XName" />
 
           
 
@@ -154,39 +146,33 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor creates a streaming element with the specified content and attributes.</para>
           <para
-            >There is an implicit conversion from string to <see
-             cref="T:System.Xml.Linq.XName" />
+            >There is an implicit conversion from string to <see cref="T:System.Xml.Linq.XName" />
 
             
 
-            . Typical use of this constructor is to specify a string as the parameter instead of creating a new <see
-             cref="T:System.Xml.Linq.XName" />
-
-            
-
-            .</para
-          >
-          <para
-            >Queries are not iterated until the <see
-             cref="T:System.Xml.Linq.XStreamingElement" />
-
-            
-
-             is serialized. This is in contrast to using queries for content for an <see
-             cref="T:System.Xml.Linq.XElement" />
-
-            
-
-            , where queries are iterated at the time of construction of the new <see
-             cref="T:System.Xml.Linq.XElement" />
+            . Typical use of this constructor is to specify a string as the parameter instead of creating a new <see cref="T:System.Xml.Linq.XName" />
 
             
 
             .</para
           >
           <para
-            >For details about the valid content that can be passed to this constructor, see <format
-             type="text/html">
+            >Queries are not iterated until the <see cref="T:System.Xml.Linq.XStreamingElement" />
+
+            
+
+             is serialized. This is in contrast to using queries for content for an <see cref="T:System.Xml.Linq.XElement" />
+
+            
+
+            , where queries are iterated at the time of construction of the new <see cref="T:System.Xml.Linq.XElement" />
+
+            
+
+            .</para
+          >
+          <para
+            >For details about the valid content that can be passed to this constructor, see <format type="text/html">
               <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
                 >Valid Content of XElement and XDocument Objects</a
               >
@@ -200,8 +186,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Linq.XStreamingElement" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XStreamingElement" />
 
             
 
@@ -209,19 +194,26 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Linq.XName" />
+          An <see cref="T:System.Xml.Linq.XName" />
 
           
 
            that contains the element name.</param
         >
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -257,39 +249,33 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor creates a streaming element with the specified content and attributes.</para>
           <para
-            >There is an implicit conversion from string to <see
-             cref="T:System.Xml.Linq.XName" />
+            >There is an implicit conversion from string to <see cref="T:System.Xml.Linq.XName" />
 
             
 
-            . Typical use of this constructor is to specify a string as the parameter instead of creating a new <see
-             cref="T:System.Xml.Linq.XName" />
-
-            
-
-            .</para
-          >
-          <para
-            >Queries are not iterated until the <see
-             cref="T:System.Xml.Linq.XStreamingElement" />
-
-            
-
-             is serialized. This is in contrast to using queries for content for an <see
-             cref="T:System.Xml.Linq.XElement" />
-
-            
-
-            , where queries are iterated at the time of construction of the new <see
-             cref="T:System.Xml.Linq.XElement" />
+            . Typical use of this constructor is to specify a string as the parameter instead of creating a new <see cref="T:System.Xml.Linq.XName" />
 
             
 
             .</para
           >
           <para
-            >For details about the valid content that can be passed to this function, see <format
-             type="text/html">
+            >Queries are not iterated until the <see cref="T:System.Xml.Linq.XStreamingElement" />
+
+            
+
+             is serialized. This is in contrast to using queries for content for an <see cref="T:System.Xml.Linq.XElement" />
+
+            
+
+            , where queries are iterated at the time of construction of the new <see cref="T:System.Xml.Linq.XElement" />
+
+            
+
+            .</para
+          >
+          <para
+            >For details about the valid content that can be passed to this function, see <format type="text/html">
               <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
                 >Valid Content of XElement and XDocument Objects</a
               >
@@ -303,8 +289,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Linq.XStreamingElement" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XStreamingElement" />
 
             
 
@@ -312,19 +297,26 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Linq.XName" />
+          An <see cref="T:System.Xml.Linq.XName" />
 
           
 
            that contains the element name.</param
         >
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -352,39 +344,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor adds the specified content and attributes to the <see
-             cref="T:System.Xml.Linq.XStreamingElement" />
+            >This constructor adds the specified content and attributes to the <see cref="T:System.Xml.Linq.XStreamingElement" />
 
             
 
-            . While it is often possible to construct the <see
-             cref="T:System.Xml.Linq.XStreamingElement" />
+            . While it is often possible to construct the <see cref="T:System.Xml.Linq.XStreamingElement" />
 
             
 
              in a single statement, it is sometimes more convenient to add content to the streaming element incrementally.</para
           >
           <para
-            >Queries are not iterated until the <see
-             cref="T:System.Xml.Linq.XStreamingElement" />
+            >Queries are not iterated until the <see cref="T:System.Xml.Linq.XStreamingElement" />
 
             
 
-             is serialized. This is in contrast to using queries for content for an <see
-             cref="T:System.Xml.Linq.XElement" />
+             is serialized. This is in contrast to using queries for content for an <see cref="T:System.Xml.Linq.XElement" />
 
             
 
-            , where queries are iterated at the time of construction of the new <see
-             cref="T:System.Xml.Linq.XElement" />
+            , where queries are iterated at the time of construction of the new <see cref="T:System.Xml.Linq.XElement" />
 
             
 
             .</para
           >
           <para
-            >For details about the valid content that can be passed to this function, see <format
-             type="text/html">
+            >For details about the valid content that can be passed to this function, see <format type="text/html">
               <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
                 >Valid Content of XElement and XDocument Objects</a
               >
@@ -398,8 +384,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified content as children to this <see
-             cref="T:System.Xml.Linq.XStreamingElement" />
+            >Adds the specified content as children to this <see cref="T:System.Xml.Linq.XStreamingElement" />
 
             
 
@@ -407,7 +392,11 @@
           >
         </summary>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -441,39 +430,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor adds the specified content and attributes to the <see
-             cref="T:System.Xml.Linq.XStreamingElement" />
+            >This constructor adds the specified content and attributes to the <see cref="T:System.Xml.Linq.XStreamingElement" />
 
             
 
-            . While it is often possible to construct the <see
-             cref="T:System.Xml.Linq.XStreamingElement" />
+            . While it is often possible to construct the <see cref="T:System.Xml.Linq.XStreamingElement" />
 
             
 
              in a single statement, it is sometimes more convenient to add content to the streaming element incrementally.</para
           >
           <para
-            >Queries are not iterated until the <see
-             cref="T:System.Xml.Linq.XStreamingElement" />
+            >Queries are not iterated until the <see cref="T:System.Xml.Linq.XStreamingElement" />
 
             
 
-             is serialized. This is in contrast to using queries for content for an <see
-             cref="T:System.Xml.Linq.XElement" />
+             is serialized. This is in contrast to using queries for content for an <see cref="T:System.Xml.Linq.XElement" />
 
             
 
-            , where queries are iterated at the time of construction of the new <see
-             cref="T:System.Xml.Linq.XElement" />
+            , where queries are iterated at the time of construction of the new <see cref="T:System.Xml.Linq.XElement" />
 
             
 
             .</para
           >
           <para
-            >For details about the valid content that can be passed to this function, see <format
-             type="text/html">
+            >For details about the valid content that can be passed to this function, see <format type="text/html">
               <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
                 >Valid Content of XElement and XDocument Objects</a
               >
@@ -487,8 +470,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified content as children to this <see
-             cref="T:System.Xml.Linq.XStreamingElement" />
+            >Adds the specified content as children to this <see cref="T:System.Xml.Linq.XStreamingElement" />
 
             
 
@@ -496,7 +478,11 @@
           >
         </summary>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -547,26 +533,22 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The serialized XML will be indented. All insignificant white space will be removed, and additional white space will be added so that the XML will be properly indented. The behavior of this method is that insignificant white space will not be preserved.</para>
           <para
-            >If you want to control white space, use the overload of <see
-             cref="Overload:System.Xml.Linq.XStreamingElement.Save" />
+            >If you want to control white space, use the overload of <see cref="Overload:System.Xml.Linq.XStreamingElement.Save" />
 
             
 
-             that takes <see
-             cref="T:System.Xml.Linq.SaveOptions" />
+             that takes <see cref="T:System.Xml.Linq.SaveOptions" />
 
             
 
-             as a parameter. Use the <see
-             cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" />
+             as a parameter. Use the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" />
 
             
 
              option to save unindented XML. This will cause the writer to write all white spaces exactly as represented in the XML tree.</para
           >
           <para
-            >Use <see
-             cref="F:System.Xml.Linq.SaveOptions.OmitDuplicateNamespaces" />
+            >Use <see cref="F:System.Xml.Linq.SaveOptions.OmitDuplicateNamespaces" />
 
             
 
@@ -576,13 +558,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Outputs this <see
-             cref="T:System.Xml.Linq.XStreamingElement" />
+            >Outputs this <see cref="T:System.Xml.Linq.XStreamingElement" />
 
             
 
-             to the specified <see
-             cref="T:System.IO.Stream" />
+             to the specified <see cref="T:System.IO.Stream" />
 
             
 
@@ -590,12 +570,15 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The stream to output this <see
-           cref="T:System.Xml.Linq.XDocument" />
+          The stream to output this <see cref="T:System.Xml.Linq.XDocument" />
 
           
 
@@ -624,18 +607,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The serialized XML will be indented. All insignificant white space will be removed, and additional white space will be added so that the XML will be properly indented. The behavior of this method is that insignificant white space nodes in the XML tree will not be preserved.</para>
           <para
-            >If you want to control white space, use one of the overloads of <see
-             cref="Overload:System.Xml.Linq.XStreamingElement.Save" />
+            >If you want to control white space, use one of the overloads of <see cref="Overload:System.Xml.Linq.XStreamingElement.Save" />
 
             
 
-             that take <see
-             cref="T:System.Xml.Linq.SaveOptions" />
+             that take <see cref="T:System.Xml.Linq.SaveOptions" />
 
             
 
-             as a parameter. For more information, see <format
-             type="text/html">
+             as a parameter. For more information, see <format type="text/html">
               <a href="093a7169-a04e-4638-b08c-d1cb98aa650d"
                 >Preserving White Space while Loading or Parsing XML</a
               >
@@ -643,8 +623,7 @@
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
@@ -658,8 +637,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serialize this streaming element to a <see
-             cref="T:System.IO.TextWriter" />
+            >Serialize this streaming element to a <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -667,17 +645,19 @@
           >
         </summary>
         <param name="textWriter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.TextWriter" />
+          A <see cref="T:System.IO.TextWriter" />
 
           
 
-           that the <see
-           cref="T:System.Xml.Linq.XStreamingElement" />
+           that the <see cref="T:System.Xml.Linq.XStreamingElement" />
 
           
 
@@ -706,18 +686,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The serialized XML will be indented. All insignificant white space will be removed, and additional white space will be added so that the XML will be properly indented. The behavior of this method is that insignificant white space nodes in the XML tree will not be preserved.</para>
           <para
-            >If you want to control white space, use one of the overloads of <see
-             cref="Overload:System.Xml.Linq.XStreamingElement.Save" />
+            >If you want to control white space, use one of the overloads of <see cref="Overload:System.Xml.Linq.XStreamingElement.Save" />
 
             
 
-             that take <see
-             cref="T:System.Xml.Linq.SaveOptions" />
+             that take <see cref="T:System.Xml.Linq.SaveOptions" />
 
             
 
-             as a parameter. For more information, see <format
-             type="text/html">
+             as a parameter. For more information, see <format type="text/html">
               <a href="093a7169-a04e-4638-b08c-d1cb98aa650d"
                 >Preserving White Space while Loading or Parsing XML</a
               >
@@ -725,8 +702,7 @@
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
@@ -742,12 +718,15 @@
           <para>Serialize this streaming element to a file.</para>
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -776,8 +755,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serialize this streaming element to an <see
-             cref="T:System.Xml.XmlWriter" />
+            >Serialize this streaming element to an <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -785,17 +763,19 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.XmlWriter" />
+          A <see cref="T:System.Xml.XmlWriter" />
 
           
 
-           that the <see
-           cref="T:System.Xml.Linq.XElement" />
+           that the <see cref="T:System.Xml.Linq.XElement" />
 
           
 
@@ -827,34 +807,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default the <paramref
-             name="options" />
+            >By default the <paramref name="options" />
 
             
 
-             are set to <see
-             cref="F:System.Xml.Linq.SaveOptions.None" />
+             are set to <see cref="F:System.Xml.Linq.SaveOptions.None" />
 
             
 
             . This option will remove all extraneous insignificant white space, and add appropriate insignificant white space so that the XML is properly indented. </para
           >
           <para
-            >If you want to save unindented XML, specify the <see
-             cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" />
+            >If you want to save unindented XML, specify the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" />
 
             
 
-             flag for <paramref
-             name="options" />
+             flag for <paramref name="options" />
 
             
 
             . This will cause the writer to write all white spaces exactly as represented in the XML tree.</para
           >
           <para
-            >Use <see
-             cref="F:System.Xml.Linq.SaveOptions.OmitDuplicateNamespaces" />
+            >Use <see cref="F:System.Xml.Linq.SaveOptions.OmitDuplicateNamespaces" />
 
             
 
@@ -864,13 +839,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Outputs this <see
-             cref="T:System.Xml.Linq.XStreamingElement" />
+            >Outputs this <see cref="T:System.Xml.Linq.XStreamingElement" />
 
             
 
-             to the specified <see
-             cref="T:System.IO.Stream" />
+             to the specified <see cref="T:System.IO.Stream" />
 
             
 
@@ -878,24 +851,30 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The stream to output this <see
-           cref="T:System.Xml.Linq.XDocument" />
+          The stream to output this <see cref="T:System.Xml.Linq.XDocument" />
 
           
 
            to.</param
         >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Linq.SaveOptions" />
+          A <see cref="T:System.Xml.Linq.SaveOptions" />
 
           
 
@@ -927,44 +906,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you want to save unindented XML, specify the <see
-             cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" />
+            >If you want to save unindented XML, specify the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" />
 
             
 
-             flag for <paramref
-             name="options" />
+             flag for <paramref name="options" />
 
             
 
             . This will cause the writer to write all white space exactly as represented in the XML tree.</para
           >
           <para
-            >If you want to save indented XML, do not specify the <see
-             cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" />
+            >If you want to save indented XML, do not specify the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" />
 
             
 
-             flag for <paramref
-             name="options" />
+             flag for <paramref name="options" />
 
             
 
-            . This will remove all extraneous insignificant white space, and add appropriate insignificant white space so that the XML is properly indented. This is the default behavior, and the behavior of the overloads of the <see
-             cref="Overload:System.Xml.Linq.XElement.Save" />
+            . This will remove all extraneous insignificant white space, and add appropriate insignificant white space so that the XML is properly indented. This is the default behavior, and the behavior of the overloads of the <see cref="Overload:System.Xml.Linq.XElement.Save" />
 
             
 
-             methods that do not take <paramref
-             name="options" />
+             methods that do not take <paramref name="options" />
 
             
 
              as a parameter.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="093a7169-a04e-4638-b08c-d1cb98aa650d"
                 >Preserving White Space while Loading or Parsing XML</a
               >
@@ -972,8 +944,7 @@
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
@@ -987,8 +958,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serialize this streaming element to a <see
-             cref="T:System.IO.TextWriter" />
+            >Serialize this streaming element to a <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -996,24 +966,30 @@
           >
         </summary>
         <param name="textWriter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.TextWriter" />
+          The <see cref="T:System.IO.TextWriter" />
 
           
 
            to output the XML to.</param
         >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Linq.SaveOptions" />
+          A <see cref="T:System.Xml.Linq.SaveOptions" />
 
           
 
@@ -1045,44 +1021,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you want to save unindented XML, specify the <see
-             cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" />
+            >If you want to save unindented XML, specify the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" />
 
             
 
-             flag for <paramref
-             name="options" />
+             flag for <paramref name="options" />
 
             
 
             . This will cause the writer to write all white space exactly as represented in the XML tree.</para
           >
           <para
-            >If you want to save indented XML, do not specify the <see
-             cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" />
+            >If you want to save indented XML, do not specify the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" />
 
             
 
-             flag for <paramref
-             name="options" />
+             flag for <paramref name="options" />
 
             
 
-            . This will remove all extraneous insignificant white space, and add appropriate insignificant white space so that the XML is properly indented. This is the default behavior, and the behavior of the overloads of the <see
-             cref="Overload:System.Xml.Linq.XElement.Save" />
+            . This will remove all extraneous insignificant white space, and add appropriate insignificant white space so that the XML is properly indented. This is the default behavior, and the behavior of the overloads of the <see cref="Overload:System.Xml.Linq.XElement.Save" />
 
             
 
-             methods that do not take <paramref
-             name="options" />
+             methods that do not take <paramref name="options" />
 
             
 
              as a parameter.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="093a7169-a04e-4638-b08c-d1cb98aa650d"
                 >Preserving White Space while Loading or Parsing XML</a
               >
@@ -1090,8 +1059,7 @@
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
@@ -1107,24 +1075,30 @@
           <para>Serialize this streaming element to a file, optionally disabling formatting.</para>
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            that contains the name of the file.</param
         >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Linq.SaveOptions" />
+          A <see cref="T:System.Xml.Linq.SaveOptions" />
 
           
 
@@ -1150,13 +1124,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Note that when debugging a program that uses <see
-             cref="T:System.Xml.Linq.XStreamingElement" />
+            >Note that when debugging a program that uses <see cref="T:System.Xml.Linq.XStreamingElement" />
 
             
 
-            , displaying the value of an object causes its <see
-             cref="Overload:System.Xml.Linq.XStreamingElement.ToString" />
+            , displaying the value of an object causes its <see cref="Overload:System.Xml.Linq.XStreamingElement.ToString" />
 
             
 
@@ -1170,8 +1142,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -1203,13 +1174,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Note that when debugging a program that uses <see
-             cref="T:System.Xml.Linq.XStreamingElement" />
+            >Note that when debugging a program that uses <see cref="T:System.Xml.Linq.XStreamingElement" />
 
             
 
-            , displaying the value of an object causes its <see
-             cref="Overload:System.Xml.Linq.XStreamingElement.ToString" />
+            , displaying the value of an object causes its <see cref="Overload:System.Xml.Linq.XStreamingElement.ToString" />
 
             
 
@@ -1223,8 +1192,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -1232,12 +1200,15 @@
           >
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Linq.SaveOptions" />
+          A <see cref="T:System.Xml.Linq.SaveOptions" />
 
           
 
@@ -1266,8 +1237,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes this streaming element to an <see
-             cref="T:System.Xml.XmlWriter" />
+            >Writes this streaming element to an <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -1275,12 +1245,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlWriter" />
+          An <see cref="T:System.Xml.XmlWriter" />
 
           
 

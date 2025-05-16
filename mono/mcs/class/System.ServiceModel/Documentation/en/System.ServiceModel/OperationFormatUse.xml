@@ -16,13 +16,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The default value is <see
-         cref="F:System.ServiceModel.OperationFormatUse.Literal" />
+        >The default value is <see cref="F:System.ServiceModel.OperationFormatUse.Literal" />
 
         
 
-        . <see
-         cref="F:System.ServiceModel.OperationFormatUse.Literal" />
+        . <see cref="F:System.ServiceModel.OperationFormatUse.Literal" />
 
         
 
@@ -44,8 +42,7 @@
   &lt;n2 xsi:type="xsd:double" xmlns=""&gt;15.99&lt;/n2&gt;
  &lt;/q1:Add&gt;</code>
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.XmlSerializerFormatAttribute" />
+        >Use the <see cref="T:System.ServiceModel.XmlSerializerFormatAttribute" />
 
         
 

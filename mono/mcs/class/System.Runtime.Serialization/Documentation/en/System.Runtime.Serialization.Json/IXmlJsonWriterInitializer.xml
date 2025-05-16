@@ -17,23 +17,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.XmlDictionaryWriter" />
+        >The <see cref="T:System.Xml.XmlDictionaryWriter" />
 
         
 
-         objects created by the <see
-         cref="Overload:System.Runtime.Serialization.Json.JsonReaderWriterFactory.CreateJsonWriter" />
+         objects created by the <see cref="Overload:System.Runtime.Serialization.Json.JsonReaderWriterFactory.CreateJsonWriter" />
 
         
 
-         methods implement this interface and when created are immediately ready to write JSON-encoded data. But if a user wants to reuse the same <see
-         cref="T:System.Xml.XmlDictionaryWriter" />
+         methods implement this interface and when created are immediately ready to write JSON-encoded data. But if a user wants to reuse the same <see cref="T:System.Xml.XmlDictionaryWriter" />
 
         
 
-         object to write a new JSON document to another output stream, then the writer must be initialized to the appropriate stream by using the <see
-         cref="M:System.Runtime.Serialization.Json.IXmlJsonWriterInitializer.SetOutput(System.IO.Stream,System.Text.Encoding,System.Boolean)" />
+         object to write a new JSON document to another output stream, then the writer must be initialized to the appropriate stream by using the <see cref="M:System.Runtime.Serialization.Json.IXmlJsonWriterInitializer.SetOutput(System.IO.Stream,System.Text.Encoding,System.Boolean)" />
 
         
 
@@ -71,31 +67,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.XmlDictionaryWriter" />
+            >The <see cref="T:System.Xml.XmlDictionaryWriter" />
 
             
 
-             objects created by the <see
-             cref="Overload:System.Runtime.Serialization.Json.JsonReaderWriterFactory.CreateJsonWriter" />
+             objects created by the <see cref="Overload:System.Runtime.Serialization.Json.JsonReaderWriterFactory.CreateJsonWriter" />
 
             
 
-             methods implement this interface and when created are immediately ready to write JSON-encoded data. But if a user wants to reuse the same <see
-             cref="T:System.Xml.XmlDictionaryWriter" />
+             methods implement this interface and when created are immediately ready to write JSON-encoded data. But if a user wants to reuse the same <see cref="T:System.Xml.XmlDictionaryWriter" />
 
             
 
-             object to write a new JSON document to another output stream, then the writer must be initialized to the appropriate stream by using the <see
-             cref="M:System.Runtime.Serialization.Json.IXmlJsonWriterInitializer.SetOutput(System.IO.Stream,System.Text.Encoding,System.Boolean)" />
+             object to write a new JSON document to another output stream, then the writer must be initialized to the appropriate stream by using the <see cref="M:System.Runtime.Serialization.Json.IXmlJsonWriterInitializer.SetOutput(System.IO.Stream,System.Text.Encoding,System.Boolean)" />
 
             
 
              method.</para
           >
           <para
-            >The writers created by <see
-             cref="T:System.Runtime.Serialization.Json.JsonReaderWriterFactory" />
+            >The writers created by <see cref="T:System.Runtime.Serialization.Json.JsonReaderWriterFactory" />
 
             
 
@@ -107,31 +98,41 @@
           <para>Initializes (or reinitializes) a JavaScript Object Notation (JSON) writer to a specified output stream with specified character encoding.</para>
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The output <see
-           cref="T:System.IO.Stream" />
+          The output <see cref="T:System.IO.Stream" />
 
           
 
            to which the writer writes. </param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Text.Encoding" />
+          The <see cref="T:System.Text.Encoding" />
 
           
 
            that specifies the character encoding of the output stream.</param
         >
         <param name="ownsStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

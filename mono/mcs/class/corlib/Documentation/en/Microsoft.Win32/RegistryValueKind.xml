@@ -23,31 +23,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:Microsoft.Win32.RegistryValueKind" />
+        >The <see cref="T:Microsoft.Win32.RegistryValueKind" />
 
         
 
-         enumeration defines the set of supported registry data types and the value that is used for unsupported types (<see
-         cref="F:Microsoft.Win32.RegistryValueKind.Unknown" />
+         enumeration defines the set of supported registry data types and the value that is used for unsupported types (<see cref="F:Microsoft.Win32.RegistryValueKind.Unknown" />
 
         
 
-        ). Starting in the net_v40_long, you can specify not to use a data type with the <see
-         cref="F:Microsoft.Win32.RegistryValueKind.None" />
+        ). Starting in the net_v40_long, you can specify not to use a data type with the <see cref="F:Microsoft.Win32.RegistryValueKind.None" />
 
         
 
          value.</para
       >
       <para
-        >Use the <see
-         cref="M:Microsoft.Win32.RegistryKey.GetValueKind(System.String)" />
+        >Use the <see cref="M:Microsoft.Win32.RegistryKey.GetValueKind(System.String)" />
 
         
 
-         method to determine the data type of a registry key value before retrieving the value. When you set a registry key value, use the <see
-         cref="M:Microsoft.Win32.RegistryKey.SetValue(System.String,System.Object,Microsoft.Win32.RegistryValueKind)" />
+         method to determine the data type of a registry key value before retrieving the value. When you set a registry key value, use the <see cref="M:Microsoft.Win32.RegistryKey.SetValue(System.String,System.Object,Microsoft.Win32.RegistryValueKind)" />
 
         
 
@@ -231,8 +226,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An unsupported registry data type. For example, the Microsoft Win32 API registry data type REG_RESOURCE_LIST is unsupported. Use this value to specify that the <see
-             cref="M:Microsoft.Win32.RegistryKey.SetValue(System.String,System.Object)" />
+            >An unsupported registry data type. For example, the Microsoft Win32 API registry data type REG_RESOURCE_LIST is unsupported. Use this value to specify that the <see cref="M:Microsoft.Win32.RegistryKey.SetValue(System.String,System.Object)" />
 
             
 

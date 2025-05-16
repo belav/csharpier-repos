@@ -37,18 +37,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" />
+        >The <see cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" />
 
         
 
-         class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
-         cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" />
+         class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" />
 
         
 
-         class directly; instead, use the <see
-         cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+         class directly; instead, use the <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
 
         
 
@@ -59,8 +56,7 @@
 
         
 
-         wraps remoting data for passing between message sinks. A remoting client sends a <see
-         cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" />
+         wraps remoting data for passing between message sinks. A remoting client sends a <see cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" />
 
         
 
@@ -70,8 +66,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implements the <see
-         cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+        >Implements the <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
 
         
 
@@ -103,18 +98,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" />
+            >The <see cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" />
 
             
 
-             class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
-             cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" />
+             class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" />
 
             
 
-             class directly; instead, use the <see
-             cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+             class directly; instead, use the <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
 
             
 
@@ -124,13 +116,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" />
 
             
 
-             class by wrapping an <see
-             cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+             class by wrapping an <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
 
             
 
@@ -138,7 +128,11 @@
           >
         </summary>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -226,7 +220,11 @@
           <para>The method argument as an object.</para>
         </returns>
         <param name="argNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -266,7 +264,11 @@
           <para>The name of the method argument.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -306,7 +308,11 @@
           <para>The method argument that is not marked as an out parameter.</para>
         </returns>
         <param name="argNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -346,7 +352,11 @@
           <para>The name of the method argument that is not marked as an out parameter.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -453,8 +463,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+            >Gets the <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
             
 
@@ -490,8 +499,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Reflection.MethodBase" />
+            >Gets the <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -575,8 +583,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IDictionary" />
+            >An <see cref="T:System.Collections.IDictionary" />
 
             
 

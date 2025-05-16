@@ -48,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.Utilities.TaskItem" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.TaskItem" />
 
             
 
@@ -76,13 +75,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.Utilities.TaskItem" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.TaskItem" />
 
             
 
-             class using the specified source <see
-             cref="T:Microsoft.Build.Framework.ITaskItem" />
+             class using the specified source <see cref="T:Microsoft.Build.Framework.ITaskItem" />
 
             
 
@@ -90,7 +87,11 @@
           >
         </summary>
         <param name="sourceItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -113,8 +114,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.Utilities.TaskItem" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.TaskItem" />
 
             
 
@@ -122,7 +122,11 @@
           >
         </summary>
         <param name="itemSpec">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -149,8 +153,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.Utilities.TaskItem" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.TaskItem" />
 
             
 
@@ -158,14 +161,22 @@
           >
         </summary>
         <param name="itemSpec">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The item specification.</param
         >
         <param name="itemMetadata">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -199,8 +210,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IDictionary" />
+            >An <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -236,7 +246,11 @@
           <para>Copies the item-specification metadata to the specified destination task item.</para>
         </summary>
         <param name="destinationItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -266,8 +280,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -275,7 +288,11 @@
           >
         </returns>
         <param name="metadataName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -323,8 +340,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:Microsoft.Build.Framework.ITaskItem.ItemSpec" />
+            >The <see cref="P:Microsoft.Build.Framework.ITaskItem.ItemSpec" />
 
             
 
@@ -424,7 +440,11 @@
           <para>Removes the specified metadata on the item.</para>
         </summary>
         <param name="metadataName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -456,14 +476,22 @@
           <para>Sets or modifies the value of the specified metadata on the item.</para>
         </summary>
         <param name="metadataName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of metadata to set or modify.</param
         >
         <param name="metadataValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -493,8 +521,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 

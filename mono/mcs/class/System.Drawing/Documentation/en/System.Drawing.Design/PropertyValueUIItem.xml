@@ -38,8 +38,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Design.PropertyValueUIItem" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Design.PropertyValueUIItem" />
 
             
 
@@ -47,31 +46,41 @@
           >
         </summary>
         <param name="uiItemImage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The icon to display. The image must be 8 x 8 pixels. </param
         >
         <param name="handler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The handler to invoke when the image is double-clicked. </param
         >
         <param name="tooltip">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Drawing.Design.PropertyValueUIItem.ToolTip" />
+          The <see cref="P:System.Drawing.Design.PropertyValueUIItem.ToolTip" />
 
           
 
-           to display for the property that this <see
-           cref="T:System.Drawing.Design.PropertyValueUIItem" />
+           to display for the property that this <see cref="T:System.Drawing.Design.PropertyValueUIItem" />
 
           
 

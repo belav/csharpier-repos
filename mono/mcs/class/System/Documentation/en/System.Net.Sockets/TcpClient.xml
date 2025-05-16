@@ -26,31 +26,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.Sockets.TcpClient" />
+        >The <see cref="T:System.Net.Sockets.TcpClient" />
 
         
 
          class provides simple methods for connecting, sending, and receiving stream data over a network in synchronous blocking mode.</para
       >
       <para
-        >In order for <see
-         cref="T:System.Net.Sockets.TcpClient" />
+        >In order for <see cref="T:System.Net.Sockets.TcpClient" />
 
         
 
-         to connect and exchange data, a <see
-         cref="T:System.Net.Sockets.TcpListener" />
+         to connect and exchange data, a <see cref="T:System.Net.Sockets.TcpListener" />
 
         
 
-         or <see
-         cref="T:System.Net.Sockets.Socket" />
+         or <see cref="T:System.Net.Sockets.Socket" />
 
         
 
-         created with the TCP <see
-         cref="T:System.Net.Sockets.ProtocolType" />
+         created with the TCP <see cref="T:System.Net.Sockets.ProtocolType" />
 
         
 
@@ -59,13 +54,11 @@
       <list type="bullet">
         <item>
           <para
-            >Create a <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            >Create a <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-             and call one of the three available <see
-             cref="M:System.Net.Sockets.TcpClient.Connect(System.String,System.Int32)" />
+             and call one of the three available <see cref="M:System.Net.Sockets.TcpClient.Connect(System.String,System.Int32)" />
 
             
 
@@ -74,8 +67,7 @@
         </item>
         <item>
           <para
-            >Create a <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            >Create a <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -85,8 +77,7 @@
       </list>
       <block subset="none" type="note">
         <para
-          >If you want to send connectionless datagrams in synchronous blocking mode, use the <see
-           cref="T:System.Net.Sockets.UdpClient" />
+          >If you want to send connectionless datagrams in synchronous blocking mode, use the <see cref="T:System.Net.Sockets.UdpClient" />
 
           
 
@@ -118,13 +109,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a new <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            >This constructor creates a new <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-             and allows the underlying service provider to assign the most appropriate local IP address and port number. You must first call the <see
-             cref="M:System.Net.Sockets.TcpClient.Connect(System.String,System.Int32)" />
+             and allows the underlying service provider to assign the most appropriate local IP address and port number. You must first call the <see cref="M:System.Net.Sockets.TcpClient.Connect(System.String,System.Int32)" />
 
             
 
@@ -135,8 +124,7 @@
           </block>
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -151,8 +139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -181,36 +168,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a new <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            >This constructor creates a new <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-             and binds it to the <see
-             cref="T:System.Net.IPEndPoint" />
+             and binds it to the <see cref="T:System.Net.IPEndPoint" />
 
             
 
-             specified by the <paramref
-             name="localEP" />
+             specified by the <paramref name="localEP" />
 
             
 
-             parameter. Before you call this constructor, you must create an <see
-             cref="T:System.Net.IPEndPoint" />
+             parameter. Before you call this constructor, you must create an <see cref="T:System.Net.IPEndPoint" />
 
             
 
-             using the IP address and port number from which you intend to send and receive data. You do not need to specify a local IP address and port number before connecting and communicating. If you create a <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             using the IP address and port number from which you intend to send and receive data. You do not need to specify a local IP address and port number before connecting and communicating. If you create a <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
              using any other constructor, the underlying service provider will assign the most appropriate local IP address and port number.</para
           >
           <para
-            >You must call the <see
-             cref="M:System.Net.Sockets.TcpClient.Connect(System.String,System.Int32)" />
+            >You must call the <see cref="M:System.Net.Sockets.TcpClient.Connect(System.String,System.Int32)" />
 
             
 
@@ -218,8 +199,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -234,8 +214,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -243,17 +222,19 @@
           >
         </summary>
         <param name="localEP">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.IPEndPoint" />
+          The <see cref="T:System.Net.IPEndPoint" />
 
           
 
-           to which you bind the TCP <see
-           cref="T:System.Net.Sockets.Socket" />
+           to which you bind the TCP <see cref="T:System.Net.Sockets.Socket" />
 
           
 
@@ -284,8 +265,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -300,8 +280,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -309,12 +288,15 @@
           >
         </summary>
         <param name="family">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Net.IPAddress.AddressFamily" />
+          The <see cref="P:System.Net.IPAddress.AddressFamily" />
 
           
 
@@ -343,21 +325,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a new <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            >This constructor creates a new <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-             and makes a synchronous connection attempt to the provided host name and port number. The underlying service provider will assign the most appropriate local IP address and port number. <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             and makes a synchronous connection attempt to the provided host name and port number. The underlying service provider will assign the most appropriate local IP address and port number. <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
              will block until it either connects or fails. This constructor allows you to initialize, resolve the DNS host name, and connect in one convenient step.</para
           >
           <para
-            >If IPv6 is enabled and the <see
-             cref="M:System.Net.Sockets.TcpClient.#ctor(System.String,System.Int32)" />
+            >If IPv6 is enabled and the <see cref="M:System.Net.Sockets.TcpClient.#ctor(System.String,System.Int32)" />
 
             
 
@@ -365,13 +344,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -380,8 +357,7 @@
           </block>
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -396,8 +372,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -405,14 +380,22 @@
           >
         </summary>
         <param name="hostname">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The DNS name of the remote host to which you intend to connect. </param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -437,38 +420,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Classes deriving from <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            >Classes deriving from <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-             can use this property to determine if a connection attempt has succeeded. It does not monitor the ongoing connection state of <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             can use this property to determine if a connection attempt has succeeded. It does not monitor the ongoing connection state of <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-            . If the remote host closes the connection, <see
-             cref="P:System.Net.Sockets.TcpClient.Active" />
+            . If the remote host closes the connection, <see cref="P:System.Net.Sockets.TcpClient.Active" />
 
             
 
-             will not be updated. If you are deriving from <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             will not be updated. If you are deriving from <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-             and require closer attention to the connection state, use the <see
-             cref="P:System.Net.Sockets.Socket.Connected" />
+             and require closer attention to the connection state, use the <see cref="P:System.Net.Sockets.Socket.Connected" />
 
             
 
-             property of the <see
-             cref="T:System.Net.Sockets.Socket" />
+             property of the <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             returned by the <see
-             cref="P:System.Net.Sockets.TcpClient.Client" />
+             returned by the <see cref="P:System.Net.Sockets.TcpClient.Client" />
 
             
 
@@ -501,42 +477,40 @@
 
             
 
-             is a way to determine whether data is queued for reading. If data is available, call <see
-             cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+             is a way to determine whether data is queued for reading. If data is available, call <see cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             to get the data. The available data is the total amount of data queued in the network buffer for reading. If no data is queued in the network buffer, <see
-             cref="P:System.Net.Sockets.TcpClient.Available" />
+             to get the data. The available data is the total amount of data queued in the network buffer for reading. If no data is queued in the network buffer, <see cref="P:System.Net.Sockets.TcpClient.Available" />
 
             
 
              returns 0.</para
           >
           <para
-            >If the remote host shuts down or closes the connection, <see
-             cref="P:System.Net.Sockets.TcpClient.Available" />
+            >If the remote host shuts down or closes the connection, <see cref="P:System.Net.Sockets.TcpClient.Available" />
 
             
 
-             may throw a <see
-             cref="T:System.Net.Sockets.SocketException" />
+             may throw a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
-            . If you receive a <see
-             cref="T:System.Net.Sockets.SocketException" />
+            . If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
-            , use <see
-             cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+            , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
             
 
              to obtain the specific error code. After you have obtained this code, you can refer to the Windows Sockets version 2 API error code documentation in the MSDN library at <see
-             cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
-            <see cref="">/</see>
+              cref="http://msdn.microsoft.com/library"
+              >http://msdn.microsoft.com/library</see
+            >
+            <see cref=""
+              >/</see
+            >
 
             
 
@@ -576,34 +550,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The asynchronous <see
-             cref="M:System.Net.Sockets.TcpClient.BeginConnect(System.Net.IPAddress,System.Int32,System.AsyncCallback,System.Object)" />
+            >The asynchronous <see cref="M:System.Net.Sockets.TcpClient.BeginConnect(System.Net.IPAddress,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             operation must be completed by calling the <see
-             cref="M:System.Net.Sockets.TcpClient.EndConnect(System.IAsyncResult)" />
+             operation must be completed by calling the <see cref="M:System.Net.Sockets.TcpClient.EndConnect(System.IAsyncResult)" />
 
             
 
-             method. Typically, the method is invoked by the <paramref
-             name="asyncCallback" />
+             method. Typically, the method is invoked by the <paramref name="asyncCallback" />
 
             
 
              delegate.</para
           >
           <para
-            >This method does not block until the operation completes. To block until the operation completes, use one of the <see
-             cref="Overload:System.Net.Sockets.TcpClient.Connect" />
+            >This method does not block until the operation completes. To block until the operation completes, use one of the <see cref="Overload:System.Net.Sockets.TcpClient.Connect" />
 
             
 
              method overloads.</para
           >
           <para
-            >For detailed information about using the asynchronous programming model, see <format
-             type="text/html">
+            >For detailed information about using the asynchronous programming model, see <format type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
 
@@ -615,13 +584,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Begins an asynchronous request for a remote host connection. The remote host is specified by an <see
-             cref="T:System.Net.IPAddress" />
+            >Begins an asynchronous request for a remote host connection. The remote host is specified by an <see cref="T:System.Net.IPAddress" />
 
             
 
-             and a port number (<see
-             cref="T:System.Int32" />
+             and a port number (<see cref="T:System.Int32" />
 
             
 
@@ -631,8 +598,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -640,43 +606,56 @@
           >
         </returns>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.IPAddress" />
+          The <see cref="T:System.Net.IPAddress" />
 
           
 
            of the remote host.</param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The port number of the remote host.</param
         >
         <param name="requestCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when the operation is complete. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined object that contains information about the connect operation. This object is passed to the <paramref
-           name="requestCallback" />
+          A user-defined object that contains information about the connect operation. This object is passed to the <paramref name="requestCallback" />
 
           
 
@@ -711,34 +690,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The asynchronous <see
-             cref="M:System.Net.Sockets.TcpClient.BeginConnect(System.Net.IPAddress,System.Int32,System.AsyncCallback,System.Object)" />
+            >The asynchronous <see cref="M:System.Net.Sockets.TcpClient.BeginConnect(System.Net.IPAddress,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             operation must be completed by calling the <see
-             cref="M:System.Net.Sockets.TcpClient.EndConnect(System.IAsyncResult)" />
+             operation must be completed by calling the <see cref="M:System.Net.Sockets.TcpClient.EndConnect(System.IAsyncResult)" />
 
             
 
-             method. Typically, the method is invoked by the <paramref
-             name="asyncCallback" />
+             method. Typically, the method is invoked by the <paramref name="asyncCallback" />
 
             
 
              delegate.</para
           >
           <para
-            >This method does not block until the operation completes. To block until the operation completes, use one of the <see
-             cref="Overload:System.Net.Sockets.TcpClient.Connect" />
+            >This method does not block until the operation completes. To block until the operation completes, use one of the <see cref="Overload:System.Net.Sockets.TcpClient.Connect" />
 
             
 
              method overloads.</para
           >
           <para
-            >For detailed information about using the asynchronous programming model, see <format
-             type="text/html">
+            >For detailed information about using the asynchronous programming model, see <format type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
 
@@ -747,8 +721,7 @@
             .</para
           >
           <para
-            >This method is typically used immediately after a call to the <see
-             cref="M:System.Net.Dns.BeginGetHostAddresses(System.String,System.AsyncCallback,System.Object)" />
+            >This method is typically used immediately after a call to the <see cref="M:System.Net.Dns.BeginGetHostAddresses(System.String,System.AsyncCallback,System.Object)" />
 
             
 
@@ -758,13 +731,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Begins an asynchronous request for a remote host connection. The remote host is specified by an <see
-             cref="T:System.Net.IPAddress" />
+            >Begins an asynchronous request for a remote host connection. The remote host is specified by an <see cref="T:System.Net.IPAddress" />
 
             
 
-             array and a port number (<see
-             cref="T:System.Int32" />
+             array and a port number (<see cref="T:System.Int32" />
 
             
 
@@ -774,8 +745,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -783,43 +753,56 @@
           >
         </returns>
         <param name="addresses">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          At least one <see
-           cref="T:System.Net.IPAddress" />
+          At least one <see cref="T:System.Net.IPAddress" />
 
           
 
            that designates the remote hosts.</param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The port number of the remote hosts.</param
         >
         <param name="requestCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when the operation is complete.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined object that contains information about the connect operation. This object is passed to the <paramref
-           name="requestCallback" />
+          A user-defined object that contains information about the connect operation. This object is passed to the <paramref name="requestCallback" />
 
           
 
@@ -854,34 +837,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The asynchronous <see
-             cref="M:System.Net.Sockets.TcpClient.BeginConnect(System.String,System.Int32,System.AsyncCallback,System.Object)" />
+            >The asynchronous <see cref="M:System.Net.Sockets.TcpClient.BeginConnect(System.String,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             operation must be completed by calling the <see
-             cref="M:System.Net.Sockets.TcpClient.EndConnect(System.IAsyncResult)" />
+             operation must be completed by calling the <see cref="M:System.Net.Sockets.TcpClient.EndConnect(System.IAsyncResult)" />
 
             
 
-             method. Typically, the method is invoked by the <paramref
-             name="asyncCallback" />
+             method. Typically, the method is invoked by the <paramref name="asyncCallback" />
 
             
 
              delegate.</para
           >
           <para
-            >This method does not block until the operation completes. To block until the operation completes, use one of the <see
-             cref="Overload:System.Net.Sockets.TcpClient.Connect" />
+            >This method does not block until the operation completes. To block until the operation completes, use one of the <see cref="Overload:System.Net.Sockets.TcpClient.Connect" />
 
             
 
              method overloads.</para
           >
           <para
-            >For detailed information about using the asynchronous programming model, see <format
-             type="text/html">
+            >For detailed information about using the asynchronous programming model, see <format type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
 
@@ -893,13 +871,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Begins an asynchronous request for a remote host connection. The remote host is specified by a host name (<see
-             cref="T:System.String" />
+            >Begins an asynchronous request for a remote host connection. The remote host is specified by a host name (<see cref="T:System.String" />
 
             
 
-            ) and a port number (<see
-             cref="T:System.Int32" />
+            ) and a port number (<see cref="T:System.Int32" />
 
             
 
@@ -909,8 +885,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -918,38 +893,52 @@
           >
         </returns>
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the remote host.</param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The port number of the remote host.</param
         >
         <param name="requestCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when the operation is complete.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined object that contains information about the connect operation. This object is passed to the <paramref
-           name="requestCallback" />
+          A user-defined object that contains information about the connect operation. This object is passed to the <paramref name="requestCallback" />
 
           
 
@@ -976,14 +965,11 @@
         <ReturnType>System.Net.Sockets.Socket</ReturnType>
       </ReturnValue>
       <Docs>
-        <value
-          >The <see
-           cref="T:System.Net.Sockets.Socket" />
+        <value>The <see cref="T:System.Net.Sockets.Socket" />
 
           
 
-          .</value
-        >
+          .</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
@@ -991,58 +977,47 @@
 
             
 
-             creates a <see
-             cref="T:System.Net.Sockets.Socket" />
+             creates a <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             to send and receive data over a network. Classes deriving from <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             to send and receive data over a network. Classes deriving from <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-             can use this property to get or set this <see
-             cref="T:System.Net.Sockets.Socket" />
+             can use this property to get or set this <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            . Use the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+            . Use the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             returned from <see
-             cref="P:System.Net.Sockets.TcpClient.Client" />
+             returned from <see cref="P:System.Net.Sockets.TcpClient.Client" />
 
             
 
-             if you require access beyond that which <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             if you require access beyond that which <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-             provides. You can also use <see
-             cref="P:System.Net.Sockets.TcpClient.Client" />
+             provides. You can also use <see cref="P:System.Net.Sockets.TcpClient.Client" />
 
             
 
-             to set the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             to set the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             to an existing <see
-             cref="T:System.Net.Sockets.Socket" />
+             to an existing <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            . This might be useful if you want to take advantage of the simplicity of <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            . This might be useful if you want to take advantage of the simplicity of <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-             using a pre-existing <see
-             cref="T:System.Net.Sockets.Socket" />
+             using a pre-existing <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -1052,8 +1027,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+            >Gets or sets the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -1082,36 +1056,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.TcpClient.Close" />
+            >The <see cref="M:System.Net.Sockets.TcpClient.Close" />
 
             
 
-             method marks the instance as disposed and requests that the associated <see
-             cref="T:System.Net.Sockets.Socket" />
+             method marks the instance as disposed and requests that the associated <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             close the TCP connection. Based on the <see
-             cref="P:System.Net.Sockets.TcpClient.LingerState" />
+             close the TCP connection. Based on the <see cref="P:System.Net.Sockets.TcpClient.LingerState" />
 
             
 
-             property, the TCP connection may stay open for some time after the <see
-             cref="M:System.Net.Sockets.TcpClient.Close" />
+             property, the TCP connection may stay open for some time after the <see cref="M:System.Net.Sockets.TcpClient.Close" />
 
             
 
              method is called when data remains to be sent. There is no notification provided when the underlying connection has completed closing. </para
           >
           <para
-            >Calling this method will eventually result in the close of the associated <see
-             cref="T:System.Net.Sockets.Socket" />
+            >Calling this method will eventually result in the close of the associated <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             and will also close the associated <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             and will also close the associated <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -1119,8 +1087,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -1135,8 +1102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Disposes this <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            >Disposes this <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -1170,48 +1136,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method to establish a synchronous remote host connection to the specified <see
-             cref="T:System.Net.IPEndPoint" />
+            >Call this method to establish a synchronous remote host connection to the specified <see cref="T:System.Net.IPEndPoint" />
 
             
 
-            . Before you call <see
-             cref="M:System.Net.Sockets.TcpClient.Connect(System.String,System.Int32)" />
+            . Before you call <see cref="M:System.Net.Sockets.TcpClient.Connect(System.String,System.Int32)" />
 
             
 
-             you must create an instance of the <see
-             cref="T:System.Net.IPEndPoint" />
+             you must create an instance of the <see cref="T:System.Net.IPEndPoint" />
 
             
 
-             class using an IP address and a port number. Use this <see
-             cref="T:System.Net.IPEndPoint" />
+             class using an IP address and a port number. Use this <see cref="T:System.Net.IPEndPoint" />
 
             
 
-             as the <paramref
-             name="remoteEP" />
+             as the <paramref name="remoteEP" />
 
             
 
-             parameter. The <see
-             cref="M:System.Net.Sockets.TcpClient.Connect(System.String,System.Int32)" />
+             parameter. The <see cref="M:System.Net.Sockets.TcpClient.Connect(System.String,System.Int32)" />
 
             
 
-             method will block until it either connects or fails. After connecting with the remote host, use the <see
-             cref="M:System.Net.Sockets.TcpClient.GetStream" />
+             method will block until it either connects or fails. After connecting with the remote host, use the <see cref="M:System.Net.Sockets.TcpClient.GetStream" />
 
             
 
-             method to obtain the underlying <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             method to obtain the underlying <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-            . Use this <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            . Use this <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -1219,13 +1176,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -1234,8 +1189,7 @@
           </block>
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -1248,12 +1202,15 @@
           <para>Connects the client to a remote TCP host using the specified remote network endpoint.</para>
         </summary>
         <param name="remoteEP">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.IPEndPoint" />
+          The <see cref="T:System.Net.IPEndPoint" />
 
           
 
@@ -1287,28 +1244,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method to establish a synchronous remote host connection to the specified <see
-             cref="T:System.Net.IPAddress" />
+            >Call this method to establish a synchronous remote host connection to the specified <see cref="T:System.Net.IPAddress" />
 
             
 
-             and port number. The <see
-             cref="M:System.Net.Sockets.TcpClient.Connect(System.String,System.Int32)" />
+             and port number. The <see cref="M:System.Net.Sockets.TcpClient.Connect(System.String,System.Int32)" />
 
             
 
-             method will block until it either connects or fails. After connecting with the remote host, use the <see
-             cref="M:System.Net.Sockets.TcpClient.GetStream" />
+             method will block until it either connects or fails. After connecting with the remote host, use the <see cref="M:System.Net.Sockets.TcpClient.GetStream" />
 
             
 
-             method to obtain the underlying <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             method to obtain the underlying <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-            . Use this <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            . Use this <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -1316,13 +1268,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -1331,8 +1281,7 @@
           </block>
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -1349,19 +1298,26 @@
           <para>Connects the client to a remote TCP host using the specified IP address and port number.</para>
         </summary>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.IPAddress" />
+          The <see cref="T:System.Net.IPAddress" />
 
           
 
            of the host to which you intend to connect. </param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1394,38 +1350,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is typically used immediately after a call to the <see
-             cref="M:System.Net.Dns.BeginGetHostAddresses(System.String,System.AsyncCallback,System.Object)" />
+            >This method is typically used immediately after a call to the <see cref="M:System.Net.Dns.BeginGetHostAddresses(System.String,System.AsyncCallback,System.Object)" />
 
             
 
-             method, which can return multiple IP addresses for a single host. Call the <see
-             cref="M:System.Net.Sockets.TcpClient.Connect(System.Net.IPAddress[],System.Int32)" />
+             method, which can return multiple IP addresses for a single host. Call the <see cref="M:System.Net.Sockets.TcpClient.Connect(System.Net.IPAddress[],System.Int32)" />
 
             
 
-             method to establish a synchronous remote host connection to the host specified by the array of <see
-             cref="T:System.Net.IPAddress" />
+             method to establish a synchronous remote host connection to the host specified by the array of <see cref="T:System.Net.IPAddress" />
 
             
 
-             elements and the port number. The <see
-             cref="M:System.Net.Sockets.TcpClient.Connect(System.String,System.Int32)" />
+             elements and the port number. The <see cref="M:System.Net.Sockets.TcpClient.Connect(System.String,System.Int32)" />
 
             
 
-             method will block until it either connects or fails. After connecting with the remote host, use the <see
-             cref="M:System.Net.Sockets.TcpClient.GetStream" />
+             method will block until it either connects or fails. After connecting with the remote host, use the <see cref="M:System.Net.Sockets.TcpClient.GetStream" />
 
             
 
-             method to obtain the underlying <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             method to obtain the underlying <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-            . Use this <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            . Use this <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -1433,18 +1382,18 @@
           >
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
                to obtain the specific error code. After you have obtained this code, you can refer to the Windows Sockets version 2 API error code documentation in the MSDN library at <see
-               cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+                cref="http://msdn.microsoft.com/library"
+                >http://msdn.microsoft.com/library</see
+              >
 
               
 
@@ -1453,8 +1402,7 @@
           </block>
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -1471,19 +1419,26 @@
           <para>Connects the client to a remote TCP host using the specified IP addresses and port number.</para>
         </summary>
         <param name="ipAddresses">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.IPAddress" />
+          The <see cref="T:System.Net.IPAddress" />
 
           
 
            array of the host to which you intend to connect.</param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1514,31 +1469,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method to establish a synchronous remote host connection to the specified host name and port number. The <see
-             cref="M:System.Net.Sockets.TcpClient.Connect(System.String,System.Int32)" />
+            >Call this method to establish a synchronous remote host connection to the specified host name and port number. The <see cref="M:System.Net.Sockets.TcpClient.Connect(System.String,System.Int32)" />
 
             
 
-             method will block until it either connects or fails. After connecting with the remote host, use the <see
-             cref="M:System.Net.Sockets.TcpClient.GetStream" />
+             method will block until it either connects or fails. After connecting with the remote host, use the <see cref="M:System.Net.Sockets.TcpClient.GetStream" />
 
             
 
-             method to obtain the underlying <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             method to obtain the underlying <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-            . Use this <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            . Use this <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
              to send and receive data.</para
           >
           <para
-            >If IPv6 is enabled and the <see
-             cref="M:System.Net.Sockets.TcpClient.Connect(System.String,System.Int32)" />
+            >If IPv6 is enabled and the <see cref="M:System.Net.Sockets.TcpClient.Connect(System.String,System.Int32)" />
 
             
 
@@ -1546,13 +1496,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -1561,8 +1509,7 @@
           </block>
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -1579,14 +1526,22 @@
           <para>Connects the client to the specified port on the specified host.</para>
         </summary>
         <param name="hostname">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The DNS name of the remote host to which you intend to connect. </param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1618,31 +1573,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned Returns <see
-             cref="T:System.Threading.Tasks.Task" />
+            >This operation will not block. The returned Returns <see cref="T:System.Threading.Tasks.Task" />
 
             
 
               object will complete after the TCP connection has been established. This method does not block the calling thread while the connection request is underway.</para
           >
           <para
-            >Call this method to establish a synchronous remote host connection to the specified <see
-             cref="T:System.Net.IPAddress" />
+            >Call this method to establish a synchronous remote host connection to the specified <see cref="T:System.Net.IPAddress" />
 
             
 
-             and port number as an asynchronous operation. After connecting with the remote host, use the <see
-             cref="M:System.Net.Sockets.TcpClient.GetStream" />
+             and port number as an asynchronous operation. After connecting with the remote host, use the <see cref="M:System.Net.Sockets.TcpClient.GetStream" />
 
             
 
-             method to obtain the underlying <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             method to obtain the underlying <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-            . Use this <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            . Use this <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -1650,13 +1600,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -1665,8 +1613,7 @@
           </block>
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -1684,26 +1631,30 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task" />
-          </para>
+          <para>Returns <see cref="T:System.Threading.Tasks.Task" /></para>
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.IPAddress" />
+          The <see cref="T:System.Net.IPAddress" />
 
           
 
            of the host to which you intend to connect. </param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1735,36 +1686,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned Returns <see
-             cref="T:System.Threading.Tasks.Task" />
+            >This operation will not block. The returned Returns <see cref="T:System.Threading.Tasks.Task" />
 
             
 
               object will complete after the TCP connection has been established. This method does not block the calling thread while the connection request is underway.</para
           >
           <para
-            >This method is typically used immediately after a call to the <see
-             cref="M:System.Net.Dns.BeginGetHostAddresses(System.String,System.AsyncCallback,System.Object)" />
+            >This method is typically used immediately after a call to the <see cref="M:System.Net.Dns.BeginGetHostAddresses(System.String,System.AsyncCallback,System.Object)" />
 
             
 
-             method, which can return multiple IP addresses for a single host. Call this method to establish a synchronous remote host connection to the host specified by the array of <see
-             cref="T:System.Net.IPAddress" />
+             method, which can return multiple IP addresses for a single host. Call this method to establish a synchronous remote host connection to the host specified by the array of <see cref="T:System.Net.IPAddress" />
 
             
 
-             elements and the port number as an asynchronous operation. After connecting with the remote host, use the <see
-             cref="M:System.Net.Sockets.TcpClient.GetStream" />
+             elements and the port number as an asynchronous operation. After connecting with the remote host, use the <see cref="M:System.Net.Sockets.TcpClient.GetStream" />
 
             
 
-             method to obtain the underlying <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             method to obtain the underlying <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-            . Use this <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            . Use this <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -1772,18 +1717,18 @@
           >
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
                to obtain the specific error code. After you have obtained this code, you can refer to the Windows Sockets version 2 API error code documentation in the MSDN library at <see
-               cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+                cref="http://msdn.microsoft.com/library"
+                >http://msdn.microsoft.com/library</see
+              >
 
               
 
@@ -1792,8 +1737,7 @@
           </block>
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -1811,26 +1755,30 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task" />
-          </para>
+          <para>Returns <see cref="T:System.Threading.Tasks.Task" /></para>
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="addresses">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.IPAddress" />
+          The <see cref="T:System.Net.IPAddress" />
 
           
 
            array of the host to which you intend to connect.</param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1862,34 +1810,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned Returns <see
-             cref="T:System.Threading.Tasks.Task" />
+            >This operation will not block. The returned Returns <see cref="T:System.Threading.Tasks.Task" />
 
             
 
               object will complete after the TCP connection has been established. This method does not block the calling thread while the connection request is underway.</para
           >
           <para
-            >Call this method to establish a synchronous remote host connection to the specified host name and port number as an asynchronous operation. After connecting with the remote host, use the <see
-             cref="M:System.Net.Sockets.TcpClient.GetStream" />
+            >Call this method to establish a synchronous remote host connection to the specified host name and port number as an asynchronous operation. After connecting with the remote host, use the <see cref="M:System.Net.Sockets.TcpClient.GetStream" />
 
             
 
-             method to obtain the underlying <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             method to obtain the underlying <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-            . Use this <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            . Use this <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
              to send and receive data.</para
           >
           <para
-            >If IPv6 is enabled and the <see
-             cref="M:System.Net.Sockets.TcpClient.AsyncConnect(System.String,System.Int32)" />
+            >If IPv6 is enabled and the <see cref="M:System.Net.Sockets.TcpClient.AsyncConnect(System.String,System.Int32)" />
 
             
 
@@ -1897,13 +1840,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -1912,8 +1853,7 @@
           </block>
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -1931,21 +1871,26 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task" />
-          </para>
+          <para>Returns <see cref="T:System.Threading.Tasks.Task" /></para>
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The DNS name of the remote host to which you intend to connect. </param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1969,26 +1914,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Sockets.TcpClient.Connected" />
+            >The <see cref="P:System.Net.Sockets.TcpClient.Connected" />
 
             
 
-             property gets the connection state of the <see
-             cref="P:System.Net.Sockets.TcpClient.Client" />
+             property gets the connection state of the <see cref="P:System.Net.Sockets.TcpClient.Client" />
 
             
 
-             socket as of the last I/O operation. When it returns false, the <see
-             cref="P:System.Net.Sockets.TcpClient.Client" />
+             socket as of the last I/O operation. When it returns false, the <see cref="P:System.Net.Sockets.TcpClient.Client" />
 
             
 
              socket was either never connected, or is no longer connected.</para
           >
           <para
-            >Because the <see
-             cref="P:System.Net.Sockets.TcpClient.Connected" />
+            >Because the <see cref="P:System.Net.Sockets.TcpClient.Connected" />
 
             
 
@@ -1998,13 +1939,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+            >Gets a value indicating whether the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             for a <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             for a <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -2035,36 +1974,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes this method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes this method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes this method with <paramref
-             name="disposing" />
+             invokes this method with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -2072,8 +2005,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -2088,8 +2020,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -2097,7 +2028,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2126,8 +2061,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method blocks until the operation is complete. To perform this operation synchronously, use a <see
-             cref="Overload:System.Net.Sockets.TcpClient.Connect" />
+            >This method blocks until the operation is complete. To perform this operation synchronously, use a <see cref="Overload:System.Net.Sockets.TcpClient.Connect" />
 
             
 
@@ -2135,18 +2069,18 @@
           >
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
                to obtain the specific error code. After you have obtained this code, you can refer to the Windows Sockets version 2 API error code documentation in the MSDN library at <see
-               cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+                cref="http://msdn.microsoft.com/library"
+                >http://msdn.microsoft.com/library</see
+              >
 
               
 
@@ -2159,17 +2093,19 @@
           <para>Ends a pending asynchronous connection attempt.</para>
         </summary>
         <param name="asyncResult">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IAsyncResult" />
+          An <see cref="T:System.IAsyncResult" />
 
           
 
-           object returned by a call to <see
-           cref="Overload:System.Net.Sockets.TcpClient.BeginConnect" />
+           object returned by a call to <see cref="Overload:System.Net.Sockets.TcpClient.BeginConnect" />
 
           
 
@@ -2193,36 +2129,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, multiple clients can use a specific port; however, only one of the clients can perform operations on the network traffic sent to the port. You can use the <see
-             cref="P:System.Net.Sockets.TcpClient.ExclusiveAddressUse" />
+            >By default, multiple clients can use a specific port; however, only one of the clients can perform operations on the network traffic sent to the port. You can use the <see cref="P:System.Net.Sockets.TcpClient.ExclusiveAddressUse" />
 
             
 
              property to prevent multiple clients from using a specific port.</para
           >
           <para
-            >This property must be set before the underlying socket is bound to a client port. If you call <see
-             cref="Overload:System.Net.Sockets.TcpClient.Connect" />
+            >This property must be set before the underlying socket is bound to a client port. If you call <see cref="Overload:System.Net.Sockets.TcpClient.Connect" />
 
             
 
-            , <see
-             cref="Overload:System.Net.Sockets.TcpClient.BeginConnect" />
+            , <see cref="Overload:System.Net.Sockets.TcpClient.BeginConnect" />
 
             
 
-            , <see
-             cref="M:System.Net.Sockets.TcpClient.#ctor(System.Net.IPEndPoint)" />
+            , <see cref="M:System.Net.Sockets.TcpClient.#ctor(System.Net.IPEndPoint)" />
 
             
 
-            , or <see
-             cref="M:System.Net.Sockets.TcpClient.#ctor(System.String,System.Int32)" />
+            , or <see cref="M:System.Net.Sockets.TcpClient.#ctor(System.String,System.Int32)" />
 
             
 
-            , the client port is bound as a side effect of the method, and you cannot subsequently set the <see
-             cref="P:System.Net.Sockets.TcpClient.ExclusiveAddressUse" />
+            , the client port is bound as a side effect of the method, and you cannot subsequently set the <see cref="P:System.Net.Sockets.TcpClient.ExclusiveAddressUse" />
 
             
 
@@ -2232,13 +2162,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Boolean" />
+            >Gets or sets a <see cref="T:System.Boolean" />
 
             
 
-             value that specifies whether the <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             value that specifies whether the <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -2267,49 +2195,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.Object.Finalize" />
+            >This method overrides <see cref="M:System.Object.Finalize" />
 
             
 
-            . Application code should not call this method; an object's <see
-             cref="M:System.Object.Finalize" />
+            . Application code should not call this method; an object's <see cref="M:System.Object.Finalize" />
 
             
 
-             method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see
-             cref="M:System.GC.SuppressFinalize(System.Object)" />
+             method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see cref="M:System.GC.SuppressFinalize(System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >The <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            >The <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-             class finalizer closes the TCP connection and releases all managed resources associated with the <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             class finalizer closes the TCP connection and releases all managed resources associated with the <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-            . These resources include the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+            . These resources include the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             used for connecting with the remote host, and the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             used for connecting with the remote host, and the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
              used to send and receive data. The finalizer does not release any unmanaged resources.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="FD376774-1643-499B-869E-9546A3AEEA70"
                 >[&lt;topic://cpconFinalizeMethodscDestructors&gt;]</a
               >
@@ -2317,8 +2237,7 @@
 
             
 
-            , <format
-             type="text/html">
+            , <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213"
                 >[&lt;topic://cpconCleaningUpUnmanagedResources&gt;]</a
               >
@@ -2326,8 +2245,7 @@
 
             
 
-            , and <format
-             type="text/html">
+            , and <format type="text/html">
               <a href="8026CB68-FE93-43FC-96C1-C09AD7D64CD3"
                 >[&lt;topic://cpconOverridingFinalizeMethod&gt;]</a
               >
@@ -2341,8 +2259,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Frees resources used by the <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            >Frees resources used by the <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -2378,66 +2295,54 @@
 
             
 
-             returns a <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             returns a <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             that you can use to send and receive data. The <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             that you can use to send and receive data. The <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             class inherits from the <see
-             cref="T:System.IO.Stream" />
+             class inherits from the <see cref="T:System.IO.Stream" />
 
             
 
              class, which provides a rich collection of methods and properties used to facilitate network communications.</para
           >
           <para
-            >You must call the <see
-             cref="M:System.Net.Sockets.TcpClient.Connect(System.String,System.Int32)" />
+            >You must call the <see cref="M:System.Net.Sockets.TcpClient.Connect(System.String,System.Int32)" />
 
             
 
-             method first, or the <see
-             cref="M:System.Net.Sockets.TcpClient.GetStream" />
+             method first, or the <see cref="M:System.Net.Sockets.TcpClient.GetStream" />
 
             
 
-             method will throw an <see
-             cref="T:System.InvalidOperationException" />
+             method will throw an <see cref="T:System.InvalidOperationException" />
 
             
 
-            . After you have obtained the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            . After you have obtained the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-            , call the <see
-             cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
+            , call the <see cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method to send data to the remote host. Call the <see
-             cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+             method to send data to the remote host. Call the <see cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method to receive data arriving from the remote host. Both of these methods block until the specified operation is performed. You can avoid blocking on a read operation by checking the <see
-             cref="P:System.Net.Sockets.NetworkStream.DataAvailable" />
+             method to receive data arriving from the remote host. Both of these methods block until the specified operation is performed. You can avoid blocking on a read operation by checking the <see cref="P:System.Net.Sockets.NetworkStream.DataAvailable" />
 
             
 
-             property. A true value means that data has arrived from the remote host and is available for reading. In this case, <see
-             cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+             property. A true value means that data has arrived from the remote host and is available for reading. In this case, <see cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             is guaranteed to complete immediately. If the remote host has shutdown its connection, <see
-             cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+             is guaranteed to complete immediately. If the remote host has shutdown its connection, <see cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
@@ -2445,18 +2350,15 @@
           >
           <block subset="none" type="note">
             <para
-              >You must close the <see
-               cref="T:System.Net.Sockets.NetworkStream" />
+              >You must close the <see cref="T:System.Net.Sockets.NetworkStream" />
 
               
 
-               when you are through sending and receiving data. Closing <see
-               cref="T:System.Net.Sockets.TcpClient" />
+               when you are through sending and receiving data. Closing <see cref="T:System.Net.Sockets.TcpClient" />
 
               
 
-               does not release the <see
-               cref="T:System.Net.Sockets.NetworkStream" />
+               does not release the <see cref="T:System.Net.Sockets.NetworkStream" />
 
               
 
@@ -2465,13 +2367,11 @@
           </block>
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -2480,8 +2380,7 @@
           </block>
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -2496,8 +2395,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >Returns the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -2507,8 +2405,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The underlying <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >The underlying <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -2541,67 +2438,56 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Sockets.TcpClient.LingerState" />
+            >The <see cref="P:System.Net.Sockets.TcpClient.LingerState" />
 
             
 
-             property changes the way <see
-             cref="M:System.Net.Sockets.Socket.Close" />
+             property changes the way <see cref="M:System.Net.Sockets.Socket.Close" />
 
             
 
              method behaves. This property when set modifies the conditions under which the connection can be reset by Winsock. Connection resets can still occur based on the IP protocol behavior. </para
           >
           <para
-            >This property controls the length of time that the TCP connection will remain open after a call to <see
-             cref="M:System.Net.Sockets.TcpClient.Close" />
+            >This property controls the length of time that the TCP connection will remain open after a call to <see cref="M:System.Net.Sockets.TcpClient.Close" />
 
             
 
-             when data remains to be sent. When you call the <see
-             cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
+             when data remains to be sent. When you call the <see cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method, data is placed in the outgoing network buffer. This property can be used to ensure that this data is sent to the remote host before the <see
-             cref="M:System.Net.Sockets.TcpClient.Close" />
+             method, data is placed in the outgoing network buffer. This property can be used to ensure that this data is sent to the remote host before the <see cref="M:System.Net.Sockets.TcpClient.Close" />
 
             
 
              method drops the connection. </para
           >
           <para
-            >To enable lingering, create a <see
-             cref="T:System.Net.Sockets.LingerOption" />
+            >To enable lingering, create a <see cref="T:System.Net.Sockets.LingerOption" />
 
             
 
-             instance containing the desired values, and set the <see
-             cref="P:System.Net.Sockets.TcpClient.LingerState" />
+             instance containing the desired values, and set the <see cref="P:System.Net.Sockets.TcpClient.LingerState" />
 
             
 
              property to this instance.</para
           >
           <para
-            >The following table describes the behavior of the <see
-             cref="M:System.Net.Sockets.TcpClient.Close" />
+            >The following table describes the behavior of the <see cref="M:System.Net.Sockets.TcpClient.Close" />
 
             
 
-             method for the possible values of the <see
-             cref="P:System.Net.Sockets.LingerOption.Enabled" />
+             method for the possible values of the <see cref="P:System.Net.Sockets.LingerOption.Enabled" />
 
             
 
-             property and the <see
-             cref="P:System.Net.Sockets.LingerOption.LingerTime" />
+             property and the <see cref="P:System.Net.Sockets.LingerOption.LingerTime" />
 
             
 
-             property stored in the <see
-             cref="P:System.Net.Sockets.TcpClient.LingerState" />
+             property stored in the <see cref="P:System.Net.Sockets.TcpClient.LingerState" />
 
             
 
@@ -2656,21 +2542,18 @@
             </item>
           </list>
           <para
-            >The IP stack computes the default IP protocol time-out period to use based on the round trip time of the connection. In most cases, the time-out computed by the stack is more relevant than one defined by an application. This is the default behavior for a socket when the <see
-             cref="P:System.Net.Sockets.TcpClient.LingerState" />
+            >The IP stack computes the default IP protocol time-out period to use based on the round trip time of the connection. In most cases, the time-out computed by the stack is more relevant than one defined by an application. This is the default behavior for a socket when the <see cref="P:System.Net.Sockets.TcpClient.LingerState" />
 
             
 
              property is not set.</para
           >
           <para
-            >When the <see
-             cref="P:System.Net.Sockets.LingerOption.LingerTime" />
+            >When the <see cref="P:System.Net.Sockets.LingerOption.LingerTime" />
 
             
 
-             property stored in the <see
-             cref="P:System.Net.Sockets.TcpClient.LingerState" />
+             property stored in the <see cref="P:System.Net.Sockets.TcpClient.LingerState" />
 
             
 
@@ -2701,13 +2584,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <see
-             cref="P:System.Net.Sockets.TcpClient.NoDelay" />
+            >When <see cref="P:System.Net.Sockets.TcpClient.NoDelay" />
 
             
 
-             is false, a <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             is false, a <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -2738,39 +2619,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Sockets.TcpClient.ReceiveBufferSize" />
+            >The <see cref="P:System.Net.Sockets.TcpClient.ReceiveBufferSize" />
 
             
 
              property gets or sets the number of bytes that you are expecting to store in the receive buffer for each read operation. This property actually manipulates the network buffer space allocated for receiving incoming data.</para
           >
           <para
-            >Your network buffer should be at least as large as your application buffer to ensure that the desired data will be available when you call the <see
-             cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+            >Your network buffer should be at least as large as your application buffer to ensure that the desired data will be available when you call the <see cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method. Use the <see
-             cref="P:System.Net.Sockets.TcpClient.ReceiveBufferSize" />
+             method. Use the <see cref="P:System.Net.Sockets.TcpClient.ReceiveBufferSize" />
 
             
 
-             property to set this size. If your application will be receiving bulk data, you should pass the <see
-             cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+             property to set this size. If your application will be receiving bulk data, you should pass the <see cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
              method a very large application buffer.</para
           >
           <para
-            >If the network buffer is smaller than the amount of data you request in the <see
-             cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+            >If the network buffer is smaller than the amount of data you request in the <see cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method, you will not be able to retrieve the desired amount of data in one read operation. This incurs the overhead of additional calls to the <see
-             cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+             method, you will not be able to retrieve the desired amount of data in one read operation. This incurs the overhead of additional calls to the <see cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
@@ -2801,28 +2676,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Sockets.TcpClient.ReceiveTimeout" />
+            >The <see cref="P:System.Net.Sockets.TcpClient.ReceiveTimeout" />
 
             
 
-             property determines the amount of time that the <see
-             cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+             property determines the amount of time that the <see cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method will block until it is able to receive data. This time is measured in milliseconds. If the time-out expires before <see
-             cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+             method will block until it is able to receive data. This time is measured in milliseconds. If the time-out expires before <see cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             successfully completes, <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             successfully completes, <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-             throws a <see
-             cref="T:System.IO.IOException" />
+             throws a <see cref="T:System.IO.IOException" />
 
             
 
@@ -2832,8 +2702,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the amount of time a <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            >Gets or sets the amount of time a <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -2860,39 +2729,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Sockets.TcpClient.SendBufferSize" />
+            >The <see cref="P:System.Net.Sockets.TcpClient.SendBufferSize" />
 
             
 
-             property gets or sets the number of bytes that you are expecting to send in each call to the <see
-             cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
+             property gets or sets the number of bytes that you are expecting to send in each call to the <see cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
              method. This property actually manipulates the network buffer space allocated for send operation.</para
           >
           <para
-            >Your network buffer should be at least as large as your application buffer to ensure that the desired data will be stored and sent in one operation. Use the <see
-             cref="P:System.Net.Sockets.TcpClient.SendBufferSize" />
+            >Your network buffer should be at least as large as your application buffer to ensure that the desired data will be stored and sent in one operation. Use the <see cref="P:System.Net.Sockets.TcpClient.SendBufferSize" />
 
             
 
-             property to set this size. If your application will be sending bulk data, you should pass the <see
-             cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
+             property to set this size. If your application will be sending bulk data, you should pass the <see cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
              method a very large application buffer.</para
           >
           <para
-            >If the network buffer is smaller than the amount of data you provide the <see
-             cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
+            >If the network buffer is smaller than the amount of data you provide the <see cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method, several network send operations will be performed for every call you make to the <see
-             cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
+             method, several network send operations will be performed for every call you make to the <see cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
@@ -2923,51 +2786,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Sockets.TcpClient.SendTimeout" />
+            >The <see cref="P:System.Net.Sockets.TcpClient.SendTimeout" />
 
             
 
-             property determines the amount of time that the <see
-             cref="M:System.Net.Sockets.Socket.Send(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)" />
+             property determines the amount of time that the <see cref="M:System.Net.Sockets.Socket.Send(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)" />
 
             
 
              method will block until it is able to return successfully. This time is measured in milliseconds.</para
           >
           <para
-            >After you call the <see
-             cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
+            >After you call the <see cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method, the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             method, the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             returns the number of bytes actually sent to the host. The <see
-             cref="P:System.Net.Sockets.TcpClient.SendTimeout" />
+             returns the number of bytes actually sent to the host. The <see cref="P:System.Net.Sockets.TcpClient.SendTimeout" />
 
             
 
-             property determines the amount of time a <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             property determines the amount of time a <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-             will wait before receiving the number of bytes returned. If the time-out expires before the <see
-             cref="M:System.Net.Sockets.Socket.Send(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)" />
+             will wait before receiving the number of bytes returned. If the time-out expires before the <see cref="M:System.Net.Sockets.Socket.Send(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)" />
 
             
 
-             method successfully completes, <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             method successfully completes, <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-             will throw a <see
-             cref="T:System.Net.Sockets.SocketException" />
+             will throw a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
@@ -2977,8 +2831,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the amount of time a <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            >Gets or sets the amount of time a <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -3007,43 +2860,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.Net.Sockets.TcpClient.System#IDisposable#Dispose" />
+            >Call <see cref="M:System.Net.Sockets.TcpClient.System#IDisposable#Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             when you are finished using the <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-            . The <see
-             cref="M:System.Net.Sockets.TcpClient.System#IDisposable#Dispose" />
+            . The <see cref="M:System.Net.Sockets.TcpClient.System#IDisposable#Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             method leaves the <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Net.Sockets.TcpClient.System#IDisposable#Dispose" />
+             in an unusable state. After calling <see cref="M:System.Net.Sockets.TcpClient.System#IDisposable#Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            , you must release all references to the <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213"
                 >[&lt;topic://cpconCleaningUpUnmanagedResources&gt;]</a
               >
@@ -3051,8 +2896,7 @@
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="EB4E1AF0-3B48-4FBC-AD4E-FC2F64138BF9"
                 >[&lt;topic://cpconImplementingDisposeMethod&gt;]</a
               >
@@ -3063,18 +2907,15 @@
             . </para
           >
           <para
-            >Note: Always call <see
-             cref="M:System.Net.Sockets.TcpClient.System#IDisposable#Dispose" />
+            >Note: Always call <see cref="M:System.Net.Sockets.TcpClient.System#IDisposable#Dispose" />
 
             
 
-             before you release your last reference to the <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             before you release your last reference to the <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-            . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -3084,8 +2925,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            >Releases all resources used by the <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 

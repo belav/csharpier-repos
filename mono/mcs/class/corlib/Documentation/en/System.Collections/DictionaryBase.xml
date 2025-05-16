@@ -34,13 +34,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The foreach statement of the C# language (for each in Visual Basic) requires the type of each element in the collection. Since each element of the <see
-         cref="T:System.Collections.DictionaryBase" />
+        >The foreach statement of the C# language (for each in Visual Basic) requires the type of each element in the collection. Since each element of the <see cref="T:System.Collections.DictionaryBase" />
 
         
 
-         is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see
-         cref="T:System.Collections.DictionaryEntry" />
+         is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see cref="T:System.Collections.DictionaryEntry" />
 
         
 
@@ -49,8 +47,7 @@
       <para>The foreach statement is a wrapper around the enumerator, which only allows reading from, not writing to, the collection.</para>
       <block subset="none" type="note">
         <para
-          >Because keys can be inherited and their behavior changed, their absolute uniqueness cannot be guaranteed by comparisons using the <see
-           cref="M:System.Type.Equals(System.Object)" />
+          >Because keys can be inherited and their behavior changed, their absolute uniqueness cannot be guaranteed by comparisons using the <see cref="M:System.Type.Equals(System.Object)" />
 
           
 
@@ -86,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Initializes a new instance of the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -123,18 +119,15 @@
              is set to zero, and references to other objects from elements of the collection are also released.</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.DictionaryBase.Count" />
+             is <see cref="P:System.Collections.DictionaryBase.Count" />
 
             
 
@@ -144,8 +137,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clears the contents of the <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Clears the contents of the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -177,31 +169,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The elements are copied to the <see
-             cref="T:System.Array" />
+            >The elements are copied to the <see cref="T:System.Array" />
 
             
 
-             in the same order in which the enumerator iterates through the <see
-             cref="T:System.Collections.DictionaryBase" />
+             in the same order in which the enumerator iterates through the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
             .</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.DictionaryBase.Count" />
+             is <see cref="P:System.Collections.DictionaryBase.Count" />
 
             
 
@@ -211,13 +198,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Copies the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
-             elements to a one-dimensional <see
-             cref="T:System.Array" />
+             elements to a one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -225,39 +210,42 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the <see
-           cref="T:System.Collections.DictionaryEntry" />
+           that is the destination of the <see cref="T:System.Collections.DictionaryEntry" />
 
           
 
-           objects copied from the <see
-           cref="T:System.Collections.DictionaryBase" />
+           objects copied from the <see cref="T:System.Collections.DictionaryBase" />
 
           
 
-           instance. The <see
-           cref="T:System.Array" />
+           instance. The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -286,8 +274,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of elements contained in the <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Gets the number of elements contained in the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -319,13 +306,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.Dictionary" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.DictionaryBase.Dictionary" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.DictionaryBase.InnerHashtable" />
 
             
 
@@ -336,8 +321,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the list of elements contained in the <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Gets the list of elements contained in the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -371,23 +355,19 @@
           <para>The foreach statement of the C# language (for each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
           <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
           <para
-            >Initially, the enumerator is positioned before the first element in the collection. <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Initially, the enumerator is positioned before the first element in the collection. <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             also brings the enumerator back to this position.  At this position, <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             also brings the enumerator back to this position.  At this position, <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             is undefined. Therefore, you must call <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is undefined. Therefore, you must call <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             to advance the enumerator to the first element of the collection before reading the value of <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -398,66 +378,54 @@
 
             
 
-             returns the same object until either <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             is called. <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             sets <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             sets <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              to the next element.</para
           >
           <para
-            >If <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returns false. When the enumerator is at this position, subsequent calls to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             also return false. If the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returned false, <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             returned false, <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             is undefined. To set <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             is undefined. To set <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             to the first element of the collection again, you can call <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             to the first element of the collection again, you can call <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             followed by <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             followed by <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
@@ -470,13 +438,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >Returns an <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
-             that iterates through the <see
-             cref="T:System.Collections.DictionaryBase" />
+             that iterates through the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -486,13 +452,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >An <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Collections.DictionaryBase" />
+             for the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -524,13 +488,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.Dictionary" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.DictionaryBase.Dictionary" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.DictionaryBase.InnerHashtable" />
 
             
 
@@ -541,8 +503,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the list of elements contained in the <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Gets the list of elements contained in the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -572,13 +533,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default implementation of this method is intended to be overridden by a derived class to perform some action before the collection is cleared.</para>
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.Dictionary" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.DictionaryBase.Dictionary" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.DictionaryBase.InnerHashtable" />
 
             
 
@@ -589,8 +548,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes before clearing the contents of the <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Performs additional custom processes before clearing the contents of the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -620,13 +578,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default implementation of this method is intended to be overridden by a derived class to perform some action after the collection is cleared.</para>
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.Dictionary" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.DictionaryBase.Dictionary" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.DictionaryBase.InnerHashtable" />
 
             
 
@@ -637,8 +593,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes after clearing the contents of the <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Performs additional custom processes after clearing the contents of the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -673,21 +628,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation of this method returns <paramref
-             name="currentValue" />
+            >The default implementation of this method returns <paramref name="currentValue" />
 
             
 
             . It is intended to be overridden by a derived class to perform additional action when the specified element is retrieved.</para
           >
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.Dictionary" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.DictionaryBase.Dictionary" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.DictionaryBase.InnerHashtable" />
 
             
 
@@ -698,8 +650,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the element with the specified key and value in the <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Gets the element with the specified key and value in the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -709,8 +660,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -718,19 +668,26 @@
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key of the element to get. </param
         >
         <param name="currentValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The current value of the element associated with <paramref
-           name="key" />
+          The current value of the element associated with <paramref name="key" />
 
           
 
@@ -765,13 +722,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default implementation of this method is intended to be overridden by a derived class to perform some action before the specified element is inserted.</para>
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.Dictionary" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.DictionaryBase.Dictionary" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.DictionaryBase.InnerHashtable" />
 
             
 
@@ -782,8 +737,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes before inserting a new element into the <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Performs additional custom processes before inserting a new element into the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -791,14 +745,22 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key of the element to insert. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -833,13 +795,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default implementation of this method is intended to be overridden by a derived class to perform some action after the specified element is inserted.</para>
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.Dictionary" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.DictionaryBase.Dictionary" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.DictionaryBase.InnerHashtable" />
 
             
 
@@ -850,8 +810,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes after inserting a new element into the <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Performs additional custom processes after inserting a new element into the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -859,14 +818,22 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key of the element to insert. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -901,13 +868,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default implementation of this method is intended to be overridden by a derived class to perform some action before the specified element is removed.</para>
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.Dictionary" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.DictionaryBase.Dictionary" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.DictionaryBase.InnerHashtable" />
 
             
 
@@ -918,8 +883,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes before removing an element from the <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Performs additional custom processes before removing an element from the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -927,14 +891,22 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key of the element to remove. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -969,13 +941,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default implementation of this method is intended to be overridden by a derived class to perform some action after the specified element is removed.</para>
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.Dictionary" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.DictionaryBase.Dictionary" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.DictionaryBase.InnerHashtable" />
 
             
 
@@ -986,8 +956,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes after removing an element from the <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Performs additional custom processes after removing an element from the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -995,14 +964,22 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key of the element to remove. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1038,13 +1015,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default implementation of this method is intended to be overridden by a derived class to perform some action before the specified element is set.</para>
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.Dictionary" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.DictionaryBase.Dictionary" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.DictionaryBase.InnerHashtable" />
 
             
 
@@ -1055,8 +1030,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes before setting a value in the <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Performs additional custom processes before setting a value in the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -1064,31 +1038,41 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key of the element to locate. </param
         >
         <param name="oldValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The old value of the element associated with <paramref
-           name="key" />
+          The old value of the element associated with <paramref name="key" />
 
           
 
           . </param
         >
         <param name="newValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new value of the element associated with <paramref
-           name="key" />
+          The new value of the element associated with <paramref name="key" />
 
           
 
@@ -1124,13 +1108,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default implementation of this method is intended to be overridden by a derived class to perform some action after the specified element is set.</para>
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.Dictionary" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.DictionaryBase.Dictionary" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.DictionaryBase.InnerHashtable" />
 
             
 
@@ -1141,8 +1123,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes after setting a value in the <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Performs additional custom processes after setting a value in the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -1150,31 +1131,41 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key of the element to locate. </param
         >
         <param name="oldValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The old value of the element associated with <paramref
-           name="key" />
+          The old value of the element associated with <paramref name="key" />
 
           
 
           . </param
         >
         <param name="newValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new value of the element associated with <paramref
-           name="key" />
+          The new value of the element associated with <paramref name="key" />
 
           
 
@@ -1209,13 +1200,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default implementation of this method is intended to be overridden by a derived class to perform some action when the specified element is validated.</para>
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.Dictionary" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.DictionaryBase.Dictionary" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.DictionaryBase.InnerHashtable" />
 
             
 
@@ -1228,14 +1217,22 @@
           <para>Performs additional custom processes when validating the element with the specified key and value.</para>
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key of the element to validate. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1266,18 +1263,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.DictionaryBase" />
+            >A <see cref="T:System.Collections.DictionaryBase" />
 
             
 
-             object is not synchronized. Derived classes can provide a synchronized version of the <see
-             cref="T:System.Collections.DictionaryBase" />
+             object is not synchronized. Derived classes can provide a synchronized version of the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
-             class using the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             class using the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
@@ -1288,8 +1282,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to a <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Gets a value indicating whether access to a <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -1321,33 +1314,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Derived classes can provide their own synchronized version of the <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Derived classes can provide their own synchronized version of the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
-             class using the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             class using the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
-             property. The synchronizing code must perform operations on the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             property. The synchronizing code must perform operations on the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.DictionaryBase" />
+             property of the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
-             object, not directly on the <see
-             cref="T:System.Collections.DictionaryBase" />
+             object, not directly on the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
-             object. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
-             cref="T:System.Collections.DictionaryBase" />
+             object. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -1358,8 +1345,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to a <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Gets an object that can be used to synchronize access to a <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -1391,41 +1377,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that has no correlation between its state and its hash code value should typically not be used as the key. For example, <see
-             cref="T:System.String" />
+            >An object that has no correlation between its state and its hash code value should typically not be used as the key. For example, <see cref="T:System.String" />
 
             
 
-             objects are better than <see
-             cref="T:System.Text.StringBuilder" />
+             objects are better than <see cref="T:System.Text.StringBuilder" />
 
             
 
              objects for use as keys.</para
           >
           <para
-            >You can also use the <see
-             cref="P:System.Collections.IDictionary.Item(System.Object)" />
+            >You can also use the <see cref="P:System.Collections.IDictionary.Item(System.Object)" />
 
             
 
-             property to add new elements by setting the value of a key that does not exist in the <see
-             cref="T:System.Collections.DictionaryBase" />
+             property to add new elements by setting the value of a key that does not exist in the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
-            ; for example, myCollection["myNonexistentKey"] = myValue. However, if the specified key already exists in the <see
-             cref="T:System.Collections.DictionaryBase" />
+            ; for example, myCollection["myNonexistentKey"] = myValue. However, if the specified key already exists in the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
-            , setting the <see
-             cref="P:System.Collections.IDictionary.Item(System.Object)" />
+            , setting the <see cref="P:System.Collections.IDictionary.Item(System.Object)" />
 
             
 
-             property overwrites the old value. In contrast, the <see
-             cref="M:System.Collections.IDictionary.Add(System.Object,System.Object)" />
+             property overwrites the old value. In contrast, the <see cref="M:System.Collections.IDictionary.Add(System.Object,System.Object)" />
 
             
 
@@ -1436,8 +1415,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an element with the specified key and value into the <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Adds an element with the specified key and value into the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -1445,14 +1423,22 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key of the element to add.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1483,38 +1469,31 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is an O(1) operation.</para>
           <para
-            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods on <paramref
-             name="key" />
+             methods on <paramref name="key" />
 
             
 
-             to determine whether <paramref
-             name="item" />
+             to determine whether <paramref name="item" />
 
             
 
-             exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             exists. In the earlier versions of the .NET Framework, this determination was made by using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods of the <paramref
-             name="key" />
+             methods of the <paramref name="key" />
 
             
 
@@ -1524,8 +1503,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Determines whether the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -1535,8 +1513,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Collections.DictionaryBase" />
+            >true if the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -1544,12 +1521,15 @@
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key to locate in the <see
-           cref="T:System.Collections.DictionaryBase" />
+          The key to locate in the <see cref="T:System.Collections.DictionaryBase" />
 
           
 
@@ -1586,8 +1566,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether a <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Gets a value indicating whether a <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -1625,8 +1604,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether a <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Gets a value indicating whether a <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -1686,46 +1664,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The order of the keys in the <see
-             cref="T:System.Collections.ICollection" />
+            >The order of the keys in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             object is unspecified, but is the same order as the associated values in the <see
-             cref="T:System.Collections.ICollection" />
+             object is unspecified, but is the same order as the associated values in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             object returned by the <see
-             cref="P:System.Collections.IDictionary.Values" />
+             object returned by the <see cref="P:System.Collections.IDictionary.Values" />
 
             
 
              property.</para
           >
           <para
-            >The returned <see
-             cref="T:System.Collections.ICollection" />
+            >The returned <see cref="T:System.Collections.ICollection" />
 
             
 
-             is not a static copy; instead, the <see
-             cref="T:System.Collections.ICollection" />
+             is not a static copy; instead, the <see cref="T:System.Collections.ICollection" />
 
             
 
-             refers back to the keys in the original <see
-             cref="T:System.Collections.DictionaryBase" />
+             refers back to the keys in the original <see cref="T:System.Collections.DictionaryBase" />
 
             
 
-             object. Therefore, changes to the <see
-             cref="T:System.Collections.DictionaryBase" />
+             object. Therefore, changes to the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
-             continue to be reflected in the returned <see
-             cref="T:System.Collections.ICollection" />
+             continue to be reflected in the returned <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1736,13 +1706,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an <see cref="T:System.Collections.ICollection" />
 
             
 
-             object containing the keys in the <see
-             cref="T:System.Collections.DictionaryBase" />
+             object containing the keys in the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -1773,13 +1741,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Collections.DictionaryBase" />
+            >If the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
-             does not contain an element with the specified key, the <see
-             cref="T:System.Collections.DictionaryBase" />
+             does not contain an element with the specified key, the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -1790,8 +1756,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the element with the specified key from the <see
-             cref="T:System.Collections.DictionaryBase" />
+            >Removes the element with the specified key from the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -1799,7 +1764,11 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1830,46 +1799,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The order of the values in the <see
-             cref="T:System.Collections.ICollection" />
+            >The order of the values in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             object is unspecified, but is the same order as the associated keys in the <see
-             cref="T:System.Collections.ICollection" />
+             object is unspecified, but is the same order as the associated keys in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             object returned by the <see
-             cref="P:System.Collections.IDictionary.Keys" />
+             object returned by the <see cref="P:System.Collections.IDictionary.Keys" />
 
             
 
              property.</para
           >
           <para
-            >The returned <see
-             cref="T:System.Collections.ICollection" />
+            >The returned <see cref="T:System.Collections.ICollection" />
 
             
 
-             is not a static copy; instead, the <see
-             cref="T:System.Collections.ICollection" />
+             is not a static copy; instead, the <see cref="T:System.Collections.ICollection" />
 
             
 
-             refers back to the values in the original <see
-             cref="T:System.Collections.DictionaryBase" />
+             refers back to the values in the original <see cref="T:System.Collections.DictionaryBase" />
 
             
 
-             object. Therefore, changes to the <see
-             cref="T:System.Collections.DictionaryBase" />
+             object. Therefore, changes to the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
-             continue to be reflected in the returned <see
-             cref="T:System.Collections.ICollection" />
+             continue to be reflected in the returned <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1880,13 +1841,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an <see cref="T:System.Collections.ICollection" />
 
             
 
-             object containing the values in the <see
-             cref="T:System.Collections.DictionaryBase" />
+             object containing the values in the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -1920,23 +1879,19 @@
           <para>The foreach statement of the C# language (for each in Visual Basic) hides the complexity of the enumerators. Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
           <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
           <para
-            >Initially, the enumerator is positioned before the first element in the collection. <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Initially, the enumerator is positioned before the first element in the collection. <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             also brings the enumerator back to this position. At this position, calling <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             also brings the enumerator back to this position. At this position, calling <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             throws an exception. Therefore, you must call <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             throws an exception. Therefore, you must call <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             to advance the enumerator to the first element of the collection before reading the value of <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -1947,99 +1902,81 @@
 
             
 
-             returns the same object until either <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             is called. <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             sets <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             sets <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              to the next element.</para
           >
           <para
-            >If <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returns false. When the enumerator is at this position, subsequent calls to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             also return false. If the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returned false, calling <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             returned false, calling <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             throws an exception. To set <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             throws an exception. To set <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             to the first element of the collection again, you can call <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             to the first element of the collection again, you can call <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             followed by <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             followed by <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
             .</para
           >
           <para
-            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             throws an <see
-             cref="T:System.InvalidOperationException" />
+             throws an <see cref="T:System.InvalidOperationException" />
 
             
 
-            . If the collection is modified between <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            . If the collection is modified between <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             and <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             and <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-            , <see
-             cref="P:System.Collections.IEnumerator.Current" />
+            , <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -2051,13 +1988,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns an <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             that iterates through the <see
-             cref="T:System.Collections.DictionaryBase" />
+             that iterates through the <see cref="T:System.Collections.DictionaryBase" />
 
             
 
@@ -2067,13 +2002,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Collections.DictionaryBase" />
+             for the <see cref="T:System.Collections.DictionaryBase" />
 
             
 

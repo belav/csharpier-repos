@@ -70,7 +70,11 @@
           <para>Information generated on the request side and associated with the specified sink.</para>
         </returns>
         <param name="sink">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -104,18 +108,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The information generated on the request side and specified in the <paramref
-             name="state" />
+            >The information generated on the request side and specified in the <paramref name="state" />
 
             
 
-             parameter is returned in the <paramref
-             name="state" />
+             parameter is returned in the <paramref name="state" />
 
             
 
-             parameter of the <see
-             cref="M:System.Runtime.Remoting.Channels.IServerChannelSink.AsyncProcessResponse(System.Runtime.Remoting.Channels.IServerResponseChannelSinkStack,System.Object,System.Runtime.Remoting.Messaging.IMessage,System.Runtime.Remoting.Channels.ITransportHeaders,System.IO.Stream)" />
+             parameter of the <see cref="M:System.Runtime.Remoting.Channels.IServerChannelSink.AsyncProcessResponse(System.Runtime.Remoting.Channels.IServerResponseChannelSinkStack,System.Object,System.Runtime.Remoting.Messaging.IMessage,System.Runtime.Remoting.Channels.ITransportHeaders,System.IO.Stream)" />
 
             
 
@@ -127,14 +128,22 @@
           <para>Pushes the specified sink and information associated with it onto the sink stack.</para>
         </summary>
         <param name="sink">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The sink to push onto the sink stack. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -165,8 +174,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The dispatched message represents a request method call on a remote object.</para>
           <para
-            >The <see
-             cref="M:System.Runtime.Remoting.Channels.IServerChannelSinkStack.ServerCallback(System.IAsyncResult)" />
+            >The <see cref="M:System.Runtime.Remoting.Channels.IServerChannelSinkStack.ServerCallback(System.IAsyncResult)" />
 
             
 
@@ -178,7 +186,11 @@
           <para>Presents a callback delegate to handle a callback after a message has been dispatched asynchronously. </para>
         </summary>
         <param name="ar">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -212,8 +224,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.Remoting.Channels.IServerChannelSinkStack.Store(System.Runtime.Remoting.Channels.IServerChannelSink,System.Object)" />
+            >The <see cref="M:System.Runtime.Remoting.Channels.IServerChannelSinkStack.Store(System.Runtime.Remoting.Channels.IServerChannelSink,System.Object)" />
 
             
 
@@ -225,19 +236,26 @@
           <para>Stores a message sink and its associated state for later asynchronous processing. </para>
         </summary>
         <param name="sink">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A server channel sink.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The state associated with <paramref
-           name="sink" />
+          The state associated with <paramref name="sink" />
 
           
 
@@ -271,8 +289,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.Remoting.Channels.IServerChannelSinkStack.StoreAndDispatch(System.Runtime.Remoting.Channels.IServerChannelSink,System.Object)" />
+            >The <see cref="M:System.Runtime.Remoting.Channels.IServerChannelSinkStack.StoreAndDispatch(System.Runtime.Remoting.Channels.IServerChannelSink,System.Object)" />
 
             
 
@@ -285,19 +302,26 @@
           <para>Stores a message sink and its associated state, and then dispatches a message asynchronously, using the sink just stored and any other stored sinks. </para>
         </summary>
         <param name="sink">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A server channel sink.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The state associated with <paramref
-           name="sink" />
+          The state associated with <paramref name="sink" />
 
           
 

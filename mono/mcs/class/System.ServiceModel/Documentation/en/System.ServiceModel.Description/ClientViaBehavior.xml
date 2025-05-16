@@ -24,18 +24,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >If such a behavior exists in the behavior collection on a client endpoint, the transport uses the URI that it provides, while all the other channel layers in the stack use the <see
-         cref="T:System.ServiceModel.EndpointAddress" />
+        >If such a behavior exists in the behavior collection on a client endpoint, the transport uses the URI that it provides, while all the other channel layers in the stack use the <see cref="T:System.ServiceModel.EndpointAddress" />
 
         
 
-         provided at <see
-         cref="T:System.ServiceModel.ChannelFactory" />
+         provided at <see cref="T:System.ServiceModel.ChannelFactory" />
 
         
 
-         construction time. This <see
-         cref="T:System.ServiceModel.EndpointAddress" />
+         construction time. This <see cref="T:System.ServiceModel.EndpointAddress" />
 
         
 
@@ -43,8 +40,7 @@
       >
       <para>Use this behavior when the immediate network destination is not the intended processor of the message to enable multiple-hop conversations when the calling application does not necessarily know the ultimate destination or when the destination Via header is not an address.</para>
       <para
-        >You can also set this value using the <format
-         type="text/html">
+        >You can also set this value using the <format type="text/html">
           <a href="c27ee94e-babd-459b-9574-2a6d67d11314">&lt;clientVia&gt;</a>
         </format>
 
@@ -56,8 +52,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Description.ClientViaBehavior" />
+        >The <see cref="T:System.ServiceModel.Description.ClientViaBehavior" />
 
         
 
@@ -84,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.ClientViaBehavior" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ClientViaBehavior" />
 
             
 
@@ -93,7 +87,11 @@
           >
         </summary>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -160,8 +158,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientRuntime.Via" />
+            >Sets the <see cref="P:System.ServiceModel.Dispatcher.ClientRuntime.Via" />
 
             
 
@@ -169,12 +166,15 @@
           >
         </summary>
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
+          The <see cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
 
           
 
@@ -208,8 +208,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Throws an <see
-             cref="T:System.InvalidOperationException" />
+            >Throws an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -265,8 +264,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can also set this value using the <format
-             type="text/html">
+            >You can also set this value using the <format type="text/html">
               <a href="c27ee94e-babd-459b-9574-2a6d67d11314">&lt;clientVia&gt;</a>
             </format>
 

@@ -62,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
 
             
 
@@ -133,13 +132,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For determining whether the collection contains any items, use of the <see
-             cref="P:System.Collections.Concurrent.ConcurrentQueue`1.IsEmpty" />
+            >For determining whether the collection contains any items, use of the <see cref="P:System.Collections.Concurrent.ConcurrentQueue`1.IsEmpty" />
 
             
 
-             property is recommended rather than retrieving the number of items from the <see
-             cref="P:System.Collections.Concurrent.ConcurrentQueue`1.Count" />
+             property is recommended rather than retrieving the number of items from the <see cref="P:System.Collections.Concurrent.ConcurrentQueue`1.Count" />
 
             
 
@@ -149,8 +146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of elements contained in the <see
-             cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
+            >Gets the number of elements contained in the <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
 
             
 
@@ -202,8 +198,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The enumeration represents a moment-in-time snapshot of the contents of the queue. It does not reflect any updates to the collection after <see
-             cref="M:System.Collections.Concurrent.ConcurrentQueue`1.GetEnumerator" />
+            >The enumeration represents a moment-in-time snapshot of the contents of the queue. It does not reflect any updates to the collection after <see cref="M:System.Collections.Concurrent.ConcurrentQueue`1.GetEnumerator" />
 
             
 
@@ -214,8 +209,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that iterates through the <see
-             cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
+            >Returns an enumerator that iterates through the <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
 
             
 
@@ -225,8 +219,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator for the contents of the <see
-             cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
+            >An enumerator for the contents of the <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
 
             
 
@@ -250,13 +243,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For determining whether the collection contains any items, use of this property is recommended rather than retrieving the number of items from the <see
-             cref="P:System.Collections.Concurrent.ConcurrentQueue`1.Count" />
+            >For determining whether the collection contains any items, use of this property is recommended rather than retrieving the number of items from the <see cref="P:System.Collections.Concurrent.ConcurrentQueue`1.Count" />
 
             
 
-             property and comparing it to 0. However, as this collection is intended to be accessed concurrently, it may be the case that another thread will modify the collection after <see
-             cref="P:System.Collections.Concurrent.ConcurrentQueue`1.IsEmpty" />
+             property and comparing it to 0. However, as this collection is intended to be accessed concurrently, it may be the case that another thread will modify the collection after <see cref="P:System.Collections.Concurrent.ConcurrentQueue`1.IsEmpty" />
 
             
 
@@ -266,8 +257,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
+            >Gets a value that indicates whether the <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
 
             
 
@@ -350,18 +340,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the <see
-             cref="T:System.Collections.ICollection" />
+            >Copies the elements of the <see cref="T:System.Collections.ICollection" />
 
             
 
-             to an <see
-             cref="T:System.Array" />
+             to an <see cref="T:System.Array" />
 
             
 
-            , starting at a particular <see
-             cref="T:System.Array" />
+            , starting at a particular <see cref="T:System.Array" />
 
             
 
@@ -369,34 +356,38 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from the <see
-           cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
+           that is the destination of the elements copied from the <see cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -426,8 +417,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see
-             cref="T:System.Collections.ICollection" />
+            >Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -458,8 +448,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -494,8 +483,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -523,8 +511,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements stored in the <see
-             cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
+            >Copies the elements stored in the <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
 
             
 
@@ -534,8 +521,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new array containing a snapshot of elements copied from the <see
-             cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
+            >A new array containing a snapshot of elements copied from the <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
 
             
 

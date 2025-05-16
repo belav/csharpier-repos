@@ -20,38 +20,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Handle the <see
-         cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" />
+        >Handle the <see cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" />
 
         
 
-         event to receive notification when the new document finishes loading. The <see
-         cref="T:System.Windows.Forms.WebBrowserDocumentCompletedEventArgs" />
+         event to receive notification when the new document finishes loading. The <see cref="T:System.Windows.Forms.WebBrowserDocumentCompletedEventArgs" />
 
         
 
-         object passed to the event handler lets you retrieve the location of the new document through the <see
-         cref="P:System.Windows.Forms.WebBrowserDocumentCompletedEventArgs.Url" />
+         object passed to the event handler lets you retrieve the location of the new document through the <see cref="P:System.Windows.Forms.WebBrowserDocumentCompletedEventArgs.Url" />
 
         
 
-         property. When the <see
-         cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" />
+         property. When the <see cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" />
 
         
 
-         event occurs, the new document is fully loaded, which means you can access its contents through the <see
-         cref="P:System.Windows.Forms.WebBrowser.Document" />
+         event occurs, the new document is fully loaded, which means you can access its contents through the <see cref="P:System.Windows.Forms.WebBrowser.Document" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.WebBrowser.DocumentText" />
+        , <see cref="P:System.Windows.Forms.WebBrowser.DocumentText" />
 
         
 
-        , or <see
-         cref="P:System.Windows.Forms.WebBrowser.DocumentStream" />
+        , or <see cref="P:System.Windows.Forms.WebBrowser.DocumentStream" />
 
         
 
@@ -61,8 +54,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" />
+        >Provides data for the <see cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" />
 
         
 
@@ -86,8 +78,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.WebBrowserDocumentCompletedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.WebBrowserDocumentCompletedEventArgs" />
 
             
 
@@ -95,12 +86,15 @@
           >
         </summary>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Uri" />
+          A <see cref="T:System.Uri" />
 
           
 
@@ -124,8 +118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the location of the document to which the <see
-             cref="T:System.Windows.Forms.WebBrowser" />
+            >Gets the location of the document to which the <see cref="T:System.Windows.Forms.WebBrowser" />
 
             
 

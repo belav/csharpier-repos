@@ -41,16 +41,14 @@
 
         
 
-         describes protected operations on registry variables. Registry variables should not be stored in memory locations where code without <see
-         cref="T:System.Security.Permissions.RegistryPermission" />
+         describes protected operations on registry variables. Registry variables should not be stored in memory locations where code without <see cref="T:System.Security.Permissions.RegistryPermission" />
 
         
 
          can access them. If the registry object is passed to an untrusted caller it can be misused.</para
       >
       <para
-        >The allowed registry access types are defined by <see
-         cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+        >The allowed registry access types are defined by <see cref="T:System.Security.Permissions.RegistryPermissionAccess" />
 
         
 
@@ -59,18 +57,15 @@
       <para>Registry permission is defined in terms of canonical absolute paths; checks should always be made with canonical pathnames. Key access implies access to all values it contains and all variables under it.</para>
       <block subset="none" type="note">
         <para
-          >In versions of the .NET Framework before the net_v40_long, you could use the <see
-           cref="M:System.Security.CodeAccessPermission.Deny" />
+          >In versions of the .NET Framework before the net_v40_long, you could use the <see cref="M:System.Security.CodeAccessPermission.Deny" />
 
           
 
-           method to prevent inadvertent access to system resources by trusted code. <see
-           cref="M:System.Security.CodeAccessPermission.Deny" />
+           method to prevent inadvertent access to system resources by trusted code. <see cref="M:System.Security.CodeAccessPermission.Deny" />
 
           
 
-           is now obsolete, and access to resources is now determined solely by the granted permission set for an assembly. To limit access to files, you must run partially trusted code in a sandbox and assign it permissions only to resources that the code is allowed to access. For information about running an application in a sandbox, see <format
-           type="text/html">
+           is now obsolete, and access to resources is now determined solely by the granted permission set for an assembly. To limit access to files, you must run partially trusted code in a sandbox and assign it permissions only to resources that the code is allowed to access. For information about running an application in a sandbox, see <format type="text/html">
             <a href="d1ad722b-5b49-4040-bff3-431b94bb8095"
               >How To: Run Partially Trusted Code in a Sandbox</a
             >
@@ -115,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.RegistryPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.RegistryPermission" />
 
             
 
@@ -124,12 +118,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -161,13 +158,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor allows only one of the <see
-             cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+            >This constructor allows only one of the <see cref="T:System.Security.Permissions.RegistryPermissionAccess" />
 
             
 
-             values to be specified. This access applies to all listed registry variables. Use <see
-             cref="M:System.Security.Permissions.RegistryPermission.AddPathList(System.Security.Permissions.RegistryPermissionAccess,System.String)" />
+             values to be specified. This access applies to all listed registry variables. Use <see cref="M:System.Security.Permissions.RegistryPermission.AddPathList(System.Security.Permissions.RegistryPermissionAccess,System.String)" />
 
             
 
@@ -177,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.RegistryPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.RegistryPermission" />
 
             
 
@@ -186,19 +180,26 @@
           >
         </summary>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+          One of the <see cref="T:System.Security.Permissions.RegistryPermissionAccess" />
 
           
 
            values. </param
         >
         <param name="pathList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -230,26 +231,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor allows only one of the <see
-             cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+            >This constructor allows only one of the <see cref="T:System.Security.Permissions.RegistryPermissionAccess" />
 
             
 
-             values to be specified. This access applies to all listed registry variables. Use <see
-             cref="M:System.Security.Permissions.RegistryPermission.AddPathList(System.Security.Permissions.RegistryPermissionAccess,System.String)" />
+             values to be specified. This access applies to all listed registry variables. Use <see cref="M:System.Security.Permissions.RegistryPermission.AddPathList(System.Security.Permissions.RegistryPermissionAccess,System.String)" />
 
             
 
              to define more complicated permissions.</para
           >
           <para
-            >The <paramref
-             name="control" />
+            >The <paramref name="control" />
 
             
 
-             parameter specifies whether the access control list (ACL) for the registry keys specified by <paramref
-             name="pathList" />
+             parameter specifies whether the access control list (ACL) for the registry keys specified by <paramref name="pathList" />
 
             
 
@@ -262,8 +259,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.RegistryPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.RegistryPermission" />
 
             
 
@@ -271,31 +267,41 @@
           >
         </summary>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+          One of the <see cref="T:System.Security.Permissions.RegistryPermissionAccess" />
 
           
 
            values.</param
         >
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Security.AccessControl.AccessControlActions" />
+          A bitwise combination of the <see cref="T:System.Security.AccessControl.AccessControlActions" />
 
           
 
             values.</param
         >
         <param name="pathList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -335,19 +341,26 @@
           <para>Adds access for the specified registry variables to the existing state of the permission.</para>
         </summary>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+          One of the <see cref="T:System.Security.Permissions.RegistryPermissionAccess" />
 
           
 
            values. </param
         >
         <param name="pathList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -383,13 +396,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Use this method to modify access to registry variables by adding the set of their paths to the state of the current permission object. This overload allows you to specify the access control action as will as the registry permission access.</para>
           <para
-            >The <paramref
-             name="control" />
+            >The <paramref name="control" />
 
             
 
-             parameter specifies whether the access control list (ACL) for the registry keys specified by <paramref
-             name="pathList" />
+             parameter specifies whether the access control list (ACL) for the registry keys specified by <paramref name="pathList" />
 
             
 
@@ -404,31 +415,41 @@
           <para>Adds access for the specified registry variables to the existing state of the permission, specifying registry permission access and access control actions.</para>
         </summary>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+          One of the <see cref="T:System.Security.Permissions.RegistryPermissionAccess" />
 
           
 
            values. </param
         >
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AccessControlActions" />
+          One of the <see cref="T:System.Security.AccessControl.AccessControlActions" />
 
           
 
            values. </param
         >
         <param name="pathList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -495,7 +516,11 @@
           <para>Reconstructs a permission with a specified state from an XML encoding.</para>
         </summary>
         <param name="esd">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -530,43 +555,35 @@
           <para>Use this method to get the state of the current permission. You must call this method separately for each type of access.</para>
           <block subset="none" type="note">
             <para
-              >The <paramref
-               name="access" />
+              >The <paramref name="access" />
 
               
 
-               parameter is limited to the values of <see
-               cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+               parameter is limited to the values of <see cref="T:System.Security.Permissions.RegistryPermissionAccess" />
 
               
 
-              , which represent single types of registry variable access. Those values are <see
-               cref="F:System.Security.Permissions.RegistryPermissionAccess.Read" />
+              , which represent single types of registry variable access. Those values are <see cref="F:System.Security.Permissions.RegistryPermissionAccess.Read" />
 
               
 
-              , <see
-               cref="F:System.Security.Permissions.RegistryPermissionAccess.Write" />
+              , <see cref="F:System.Security.Permissions.RegistryPermissionAccess.Write" />
 
               
 
-              , and <see
-               cref="F:System.Security.Permissions.RegistryPermissionAccess.Create" />
+              , and <see cref="F:System.Security.Permissions.RegistryPermissionAccess.Create" />
 
               
 
-              . The values acceptable to <paramref
-               name="access" />
+              . The values acceptable to <paramref name="access" />
 
               
 
-               do not include <see
-               cref="F:System.Security.Permissions.RegistryPermissionAccess.NoAccess" />
+               do not include <see cref="F:System.Security.Permissions.RegistryPermissionAccess.NoAccess" />
 
               
 
-               and <see
-               cref="F:System.Security.Permissions.RegistryPermissionAccess.AllAccess" />
+               and <see cref="F:System.Security.Permissions.RegistryPermissionAccess.AllAccess" />
 
               
 
@@ -577,8 +594,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets paths for all registry variables with the specified <see
-             cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+            >Gets paths for all registry variables with the specified <see cref="T:System.Security.Permissions.RegistryPermissionAccess" />
 
             
 
@@ -588,8 +604,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A list of the registry variables (semicolon-separated) with the specified <see
-             cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+            >A list of the registry variables (semicolon-separated) with the specified <see cref="T:System.Security.Permissions.RegistryPermissionAccess" />
 
             
 
@@ -597,12 +612,15 @@
           >
         </returns>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+          One of the <see cref="T:System.Security.Permissions.RegistryPermissionAccess" />
 
           
 
@@ -645,7 +663,11 @@
           <para>A new permission that represents the intersection of the current permission and the specified permission. This new permission is null if the intersection is empty.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -688,7 +710,11 @@
           <para>true if the current permission is a subset of the specified permission; otherwise, false.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -759,19 +785,26 @@
           <para>Sets new access for the specified registry variable names to the existing state of the permission.</para>
         </summary>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+          One of the <see cref="T:System.Security.Permissions.RegistryPermissionAccess" />
 
           
 
            values. </param
         >
         <param name="pathList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -857,8 +890,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see
-             cref="M:System.Security.Permissions.RegistryPermission.Union(System.Security.IPermission)" />
+            >The result of a call to <see cref="M:System.Security.Permissions.RegistryPermission.Union(System.Security.IPermission)" />
 
             
 
@@ -874,7 +906,11 @@
           <para>A new permission that represents the union of the current permission and the specified permission.</para>
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

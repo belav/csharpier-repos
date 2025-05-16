@@ -23,13 +23,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Encapsulates all Access Control Entry (ACE) types currently defined by Microsoft Corporation. All <see
-         cref="T:System.Security.AccessControl.KnownAce" />
+        >Encapsulates all Access Control Entry (ACE) types currently defined by Microsoft Corporation. All <see cref="T:System.Security.AccessControl.KnownAce" />
 
         
 
-         objects contain a 32-bit access mask and a <see
-         cref="T:System.Security.Principal.SecurityIdentifier" />
+         objects contain a 32-bit access mask and a <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
         
 
@@ -56,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the access mask for this <see
-             cref="T:System.Security.AccessControl.KnownAce" />
+            >Gets or sets the access mask for this <see cref="T:System.Security.AccessControl.KnownAce" />
 
             
 
@@ -89,8 +86,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >No restrictions are placed on the <see
-             cref="T:System.Security.Principal.SecurityIdentifier" />
+            >No restrictions are placed on the <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
             
 
@@ -100,13 +96,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Security.Principal.SecurityIdentifier" />
+            >Gets or sets the <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
             
 
-             object associated with this <see
-             cref="T:System.Security.AccessControl.KnownAce" />
+             object associated with this <see cref="T:System.Security.AccessControl.KnownAce" />
 
             
 

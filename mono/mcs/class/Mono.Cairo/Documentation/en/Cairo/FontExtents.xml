@@ -17,7 +17,8 @@
   transformation matrix.</para>
       <para
         >  If you call <see
-         cref="M:Cairo.Context.Scale (double,&#xA;  double)" />
+          cref="M:Cairo.Context.Scale (double,&#xA;  double)"
+        />
 
         
 

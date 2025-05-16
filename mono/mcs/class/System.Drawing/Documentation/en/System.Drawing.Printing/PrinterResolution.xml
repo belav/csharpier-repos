@@ -17,49 +17,41 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used by the <see
-         cref="P:System.Drawing.Printing.PrinterSettings.PrinterResolutions" />
+        >This class is used by the <see cref="P:System.Drawing.Printing.PrinterSettings.PrinterResolutions" />
 
         
 
-         and <see
-         cref="P:System.Drawing.Printing.PageSettings.PrinterResolution" />
+         and <see cref="P:System.Drawing.Printing.PageSettings.PrinterResolution" />
 
         
 
          properties to get the printer resolutions that are available on the printer and to set the printing resolution for a page, respectively.</para
       >
       <para
-        >Use the <see
-         cref="P:System.Drawing.Printing.PrinterResolution.Kind" />
+        >Use the <see cref="P:System.Drawing.Printing.PrinterResolution.Kind" />
 
         
 
-         property to determine whether the printer resolution type is the <see
-         cref="T:System.Drawing.Printing.PrinterResolutionKind" />
+         property to determine whether the printer resolution type is the <see cref="T:System.Drawing.Printing.PrinterResolutionKind" />
 
         
 
-         value <see
-         cref="F:System.Drawing.Printing.PrinterResolutionKind.Custom" />
+         value <see cref="F:System.Drawing.Printing.PrinterResolutionKind.Custom" />
 
         
 
-        . If so, use the <see
-         cref="P:System.Drawing.Printing.PrinterResolution.X" />
+        . If so, use the <see cref="P:System.Drawing.Printing.PrinterResolution.X" />
 
         
 
-         and <see
-         cref="P:System.Drawing.Printing.PrinterResolution.Y" />
+         and <see cref="P:System.Drawing.Printing.PrinterResolution.Y" />
 
         
 
          properties to determine the printer resolution in the horizontal and vertical directions, respectively.</para
       >
       <para
-        >For more information on printing, see the <see
-         cref="N:System.Drawing.Printing" />
+        >For more information on printing, see the <see cref="N:System.Drawing.Printing" />
 
         
 
@@ -83,8 +75,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows initial property values for an instance of the <see
-             cref="T:System.Drawing.Printing.PrinterResolution" />
+            >The following table shows initial property values for an instance of the <see cref="T:System.Drawing.Printing.PrinterResolution" />
 
             
 
@@ -118,8 +109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Printing.PrinterResolution" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Printing.PrinterResolution" />
 
             
 
@@ -162,8 +152,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member overrides the <see
-             cref="M:System.Object.ToString" />
+            >This member overrides the <see cref="M:System.Object.ToString" />
 
             
 
@@ -173,13 +162,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             that contains information about the <see
-             cref="T:System.Drawing.Printing.PrinterResolution" />
+             that contains information about the <see cref="T:System.Drawing.Printing.PrinterResolution" />
 
             
 
@@ -203,48 +190,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >dmPrintQuality is a member of the DEVMODE (device mode) structure, which defines constants that map to printer quality settings. The <see
-             cref="P:System.Drawing.Printing.PrinterResolution.X" />
+            >dmPrintQuality is a member of the DEVMODE (device mode) structure, which defines constants that map to printer quality settings. The <see cref="P:System.Drawing.Printing.PrinterResolution.X" />
 
             
 
-             property contains the value DMRES_HIGH if <see
-             cref="P:System.Drawing.Printing.PrinterResolution.Kind" />
+             property contains the value DMRES_HIGH if <see cref="P:System.Drawing.Printing.PrinterResolution.Kind" />
 
             
 
-             is set to <see
-             cref="F:System.Drawing.Printing.PrinterResolutionKind.High" />
+             is set to <see cref="F:System.Drawing.Printing.PrinterResolutionKind.High" />
 
             
 
-            , DMRES_MEDIUM if <see
-             cref="P:System.Drawing.Printing.PrinterResolution.Kind" />
+            , DMRES_MEDIUM if <see cref="P:System.Drawing.Printing.PrinterResolution.Kind" />
 
             
 
-             is set to <see
-             cref="F:System.Drawing.Printing.PrinterResolutionKind.Medium" />
+             is set to <see cref="F:System.Drawing.Printing.PrinterResolutionKind.Medium" />
 
             
 
-            , DMRES_LOW if <see
-             cref="P:System.Drawing.Printing.PrinterResolution.Kind" />
+            , DMRES_LOW if <see cref="P:System.Drawing.Printing.PrinterResolution.Kind" />
 
             
 
-             is set to <see
-             cref="F:System.Drawing.Printing.PrinterResolutionKind.Low" />
+             is set to <see cref="F:System.Drawing.Printing.PrinterResolutionKind.Low" />
 
             
 
-            , and DMRES_DRAFT if <see
-             cref="P:System.Drawing.Printing.PrinterResolution.Kind" />
+            , and DMRES_DRAFT if <see cref="P:System.Drawing.Printing.PrinterResolution.Kind" />
 
             
 
-             is set to <see
-             cref="F:System.Drawing.Printing.PrinterResolutionKind.Draft" />
+             is set to <see cref="F:System.Drawing.Printing.PrinterResolutionKind.Draft" />
 
             
 
@@ -252,7 +230,9 @@
           >
           <para
             >For more information about the DEVMODE structure, see the MSDN Library at <see
-             cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+              cref="http://msdn.microsoft.com/library"
+              >http://msdn.microsoft.com/library</see
+            >
 
             
 
@@ -280,18 +260,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Drawing.Printing.PrinterResolution.Kind" />
+            >If the <see cref="P:System.Drawing.Printing.PrinterResolution.Kind" />
 
             
 
-             property is not set to <see
-             cref="F:System.Drawing.Printing.PrinterResolutionKind.Custom" />
+             property is not set to <see cref="F:System.Drawing.Printing.PrinterResolutionKind.Custom" />
 
             
 
-            , the default value of the <see
-             cref="P:System.Drawing.Printing.PrinterResolution.Y" />
+            , the default value of the <see cref="P:System.Drawing.Printing.PrinterResolution.Y" />
 
             
 

@@ -14,31 +14,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Page developers and control authors do not use the <see
-         cref="T:System.Web.UI.ThemeProvider" />
+        >Page developers and control authors do not use the <see cref="T:System.Web.UI.ThemeProvider" />
 
         
 
-         class. ASP.NET developer tool and designer builders use the <see
-         cref="T:System.Web.UI.ThemeProvider" />
+         class. ASP.NET developer tool and designer builders use the <see cref="T:System.Web.UI.ThemeProvider" />
 
         
 
-         class in conjunction with the <see
-         cref="T:System.Web.UI.SkinBuilder" />
+         class in conjunction with the <see cref="T:System.Web.UI.SkinBuilder" />
 
         
 
-         class and the <see
-         cref="T:System.Web.UI.IThemeResolutionService" />
+         class and the <see cref="T:System.Web.UI.IThemeResolutionService" />
 
         
 
          interface to apply themes and their respective control skins to controls at design time.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.ThemeProvider" />
+        >The <see cref="T:System.Web.UI.ThemeProvider" />
 
         
 
@@ -69,28 +64,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="themeDefinition" />
+            >The <paramref name="themeDefinition" />
 
             
 
-             parameter passed to the <see
-             cref="M:System.Web.UI.ThemeProvider.#ctor(System.ComponentModel.Design.IDesignerHost,System.String,System.String,System.String[],System.String)" />
+             parameter passed to the <see cref="M:System.Web.UI.ThemeProvider.#ctor(System.ComponentModel.Design.IDesignerHost,System.String,System.String,System.String[],System.String)" />
 
             
 
-             constructor represents the concatenation of all control skins associated with the theme but is not exposed directly by the <see
-             cref="T:System.Web.UI.ThemeProvider" />
+             constructor represents the concatenation of all control skins associated with the theme but is not exposed directly by the <see cref="T:System.Web.UI.ThemeProvider" />
 
             
 
-             class, as this particular parameter is passed to a <see
-             cref="T:System.Web.UI.DesignTimeTemplateParser" />
+             class, as this particular parameter is passed to a <see cref="T:System.Web.UI.DesignTimeTemplateParser" />
 
             
 
-             to retrieve a <see
-             cref="T:System.Web.UI.ControlBuilder" />
+             to retrieve a <see cref="T:System.Web.UI.ControlBuilder" />
 
             
 
@@ -100,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.ThemeProvider" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.ThemeProvider" />
 
             
 
@@ -109,55 +98,71 @@
           >
         </summary>
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          An <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 
            that represents the current designer environment.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the theme or style sheet theme that the <see
-           cref="T:System.Web.UI.ThemeProvider" />
+          The name of the theme or style sheet theme that the <see cref="T:System.Web.UI.ThemeProvider" />
 
           
 
            represents. This parameter can be null.</param
         >
         <param name="themeDefinition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Theme information passed to the <see
-           cref="M:System.Web.UI.DesignTimeTemplateParser.ParseTheme(System.ComponentModel.Design.IDesignerHost,System.String,System.String)" />
+          Theme information passed to the <see cref="M:System.Web.UI.DesignTimeTemplateParser.ParseTheme(System.ComponentModel.Design.IDesignerHost,System.String,System.String)" />
 
           
 
            method. These are the raw, concatenated contents of the theme.</param
         >
         <param name="cssFiles">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The names of the cascading style sheet (CSS) files that are included with the theme that the <see
-           cref="T:System.Web.UI.ThemeProvider" />
+          The names of the cascading style sheet (CSS) files that are included with the theme that the <see cref="T:System.Web.UI.ThemeProvider" />
 
           
 
            represents.</param
         >
         <param name="themePath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -228,8 +233,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.ComponentModel.Design.IDesignerHost" />
+            >Gets an <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
             
 
@@ -258,13 +262,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.ThemeProvider.GetSkinBuilder(System.Web.UI.Control)" />
+            >The <see cref="M:System.Web.UI.ThemeProvider.GetSkinBuilder(System.Web.UI.Control)" />
 
             
 
-             method is called by the <see
-             cref="T:System.Web.UI.ControlBuilder" />
+             method is called by the <see cref="T:System.Web.UI.ControlBuilder" />
 
             
 
@@ -274,8 +276,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a <see
-             cref="T:System.Web.UI.SkinBuilder" />
+            >Retrieves a <see cref="T:System.Web.UI.SkinBuilder" />
 
             
 
@@ -285,8 +286,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.SkinBuilder" />
+            >A <see cref="T:System.Web.UI.SkinBuilder" />
 
             
 
@@ -294,7 +294,11 @@
           >
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -323,18 +327,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.IDictionary" />
+            >Gets an <see cref="T:System.Collections.IDictionary" />
 
             
 
-             object that contains a set of <see
-             cref="T:System.Web.UI.SkinBuilder" />
+             object that contains a set of <see cref="T:System.Web.UI.SkinBuilder" />
 
             
 
-             objects for the specified <see
-             cref="T:System.Type" />
+             objects for the specified <see cref="T:System.Type" />
 
             
 
@@ -344,43 +345,35 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IDictionary" />
+            >An <see cref="T:System.Collections.IDictionary" />
 
             
 
-             that contains a list of one or more <see
-             cref="T:System.Web.UI.ControlBuilder" />
+             that contains a list of one or more <see cref="T:System.Web.UI.ControlBuilder" />
 
             
 
-             objects associated with the <see
-             cref="T:System.Type" />
+             objects associated with the <see cref="T:System.Type" />
 
             
 
-             passed to the method. This list is populated with <see
-             cref="T:System.Collections.DictionaryEntry" />
+             passed to the method. This list is populated with <see cref="T:System.Collections.DictionaryEntry" />
 
             
 
-             objects where the <see
-             cref="P:System.Web.UI.Control.SkinID" />
+             objects where the <see cref="P:System.Web.UI.Control.SkinID" />
 
             
 
-             is a <see
-             cref="P:System.Collections.DictionaryEntry.Key" />
+             is a <see cref="P:System.Collections.DictionaryEntry.Key" />
 
             
 
-            , and its associated <see
-             cref="T:System.Web.UI.SkinBuilder" />
+            , and its associated <see cref="T:System.Web.UI.SkinBuilder" />
 
             
 
-             is the <see
-             cref="P:System.Collections.DictionaryEntry.Value" />
+             is the <see cref="P:System.Collections.DictionaryEntry.Value" />
 
             
 
@@ -388,17 +381,19 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
-           for which to retrieve any associated <see
-           cref="T:System.Web.UI.ControlBuilder" />
+           for which to retrieve any associated <see cref="T:System.Web.UI.ControlBuilder" />
 
           
 
@@ -426,8 +421,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.ThemeProvider.GetSkinsForControl(System.Type)" />
+            >The <see cref="M:System.Web.UI.ThemeProvider.GetSkinsForControl(System.Type)" />
 
             
 
@@ -437,13 +431,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an <see cref="T:System.Collections.ICollection" />
 
             
 
-             of skin identifiers that are associated with the specified <see
-             cref="T:System.Type" />
+             of skin identifiers that are associated with the specified <see cref="T:System.Type" />
 
             
 
@@ -453,18 +445,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.ICollection" />
+            >An <see cref="T:System.Collections.ICollection" />
 
             
 
-             of skin identifiers, if control skins are defined for the specified <see
-             cref="T:System.Type" />
+             of skin identifiers, if control skins are defined for the specified <see cref="T:System.Type" />
 
             
 
-            . If no control skins are associated with the type, an empty <see
-             cref="T:System.Collections.ICollection" />
+            . If no control skins are associated with the type, an empty <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -472,12 +461,15 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -500,18 +492,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.ThemeProvider.ThemeName" />
+            >The <see cref="P:System.Web.UI.ThemeProvider.ThemeName" />
 
             
 
-             property is set by the <paramref
-             name="name" />
+             property is set by the <paramref name="name" />
 
             
 
-             property of the <see
-             cref="M:System.Web.UI.ThemeProvider.#ctor(System.ComponentModel.Design.IDesignerHost,System.String,System.String,System.String[],System.String)" />
+             property of the <see cref="M:System.Web.UI.ThemeProvider.#ctor(System.ComponentModel.Design.IDesignerHost,System.String,System.String,System.String[],System.String)" />
 
             
 
@@ -521,8 +510,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the theme or style sheet theme that the <see
-             cref="T:System.Web.UI.ThemeProvider" />
+            >Gets the name of the theme or style sheet theme that the <see cref="T:System.Web.UI.ThemeProvider" />
 
             
 

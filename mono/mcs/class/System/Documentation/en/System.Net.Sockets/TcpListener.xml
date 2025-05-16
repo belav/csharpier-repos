@@ -22,94 +22,77 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.Sockets.TcpListener" />
+        >The <see cref="T:System.Net.Sockets.TcpListener" />
 
         
 
-         class provides simple methods that listen for and accept incoming connection requests in blocking synchronous mode. You can use either a <see
-         cref="T:System.Net.Sockets.TcpClient" />
+         class provides simple methods that listen for and accept incoming connection requests in blocking synchronous mode. You can use either a <see cref="T:System.Net.Sockets.TcpClient" />
 
         
 
-         or a <see
-         cref="T:System.Net.Sockets.Socket" />
+         or a <see cref="T:System.Net.Sockets.Socket" />
 
         
 
-         to connect with a <see
-         cref="T:System.Net.Sockets.TcpListener" />
+         to connect with a <see cref="T:System.Net.Sockets.TcpListener" />
 
         
 
-        . Create a <see
-         cref="T:System.Net.Sockets.TcpListener" />
+        . Create a <see cref="T:System.Net.Sockets.TcpListener" />
 
         
 
-         using an <see
-         cref="T:System.Net.IPEndPoint" />
+         using an <see cref="T:System.Net.IPEndPoint" />
 
         
 
-        , a Local IP address and port number, or just a port number. Specify <see
-         cref="F:System.Net.IPAddress.Any" />
+        , a Local IP address and port number, or just a port number. Specify <see cref="F:System.Net.IPAddress.Any" />
 
         
 
-         for the local IP address and 0 for the local port number if you want the underlying service provider to assign those values for you. If you choose to do this, you can use the <see
-         cref="P:System.Net.Sockets.TcpListener.LocalEndpoint" />
+         for the local IP address and 0 for the local port number if you want the underlying service provider to assign those values for you. If you choose to do this, you can use the <see cref="P:System.Net.Sockets.TcpListener.LocalEndpoint" />
 
         
 
          property to identify the assigned information, after the socket has connected.</para
       >
       <para
-        >Use the <see
-         cref="M:System.Net.Sockets.TcpListener.Start" />
+        >Use the <see cref="M:System.Net.Sockets.TcpListener.Start" />
 
         
 
-         method to begin listening for incoming connection requests. <see
-         cref="M:System.Net.Sockets.TcpListener.Start" />
+         method to begin listening for incoming connection requests. <see cref="M:System.Net.Sockets.TcpListener.Start" />
 
         
 
-         will queue incoming connections until you either call the <see
-         cref="M:System.Net.Sockets.TcpListener.Stop" />
+         will queue incoming connections until you either call the <see cref="M:System.Net.Sockets.TcpListener.Stop" />
 
         
 
-         method or it has queued <see
-         cref="F:System.Net.Sockets.SocketOptionName.MaxConnections" />
+         method or it has queued <see cref="F:System.Net.Sockets.SocketOptionName.MaxConnections" />
 
         
 
-        . Use either <see
-         cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
+        . Use either <see cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
 
         
 
-         or <see
-         cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
+         or <see cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
 
         
 
-         to pull a connection from the incoming connection request queue. These two methods will block. If you want to avoid blocking, you can use the <see
-         cref="M:System.Net.Sockets.TcpListener.Pending" />
+         to pull a connection from the incoming connection request queue. These two methods will block. If you want to avoid blocking, you can use the <see cref="M:System.Net.Sockets.TcpListener.Pending" />
 
         
 
          method first to determine if connection requests are available in the queue.</para
       >
       <para
-        >Call the <see
-         cref="M:System.Net.Sockets.TcpListener.Stop" />
+        >Call the <see cref="M:System.Net.Sockets.TcpListener.Stop" />
 
         
 
-         method to close the <see
-         cref="T:System.Net.Sockets.TcpListener" />
+         method to close the <see cref="T:System.Net.Sockets.TcpListener" />
 
         
 
@@ -117,8 +100,7 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="M:System.Net.Sockets.TcpListener.Stop" />
+          >The <see cref="M:System.Net.Sockets.TcpListener.Stop" />
 
           
 
@@ -157,29 +139,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is obsolete. Use the <see
-             cref="M:System.Net.Sockets.TcpListener.#ctor(System.Net.IPAddress,System.Int32)" />
+            >This constructor is obsolete. Use the <see cref="M:System.Net.Sockets.TcpListener.#ctor(System.Net.IPAddress,System.Int32)" />
 
             
 
-             or <see
-             cref="M:System.Net.Sockets.TcpListener.#ctor(System.Net.IPEndPoint)" />
+             or <see cref="M:System.Net.Sockets.TcpListener.#ctor(System.Net.IPEndPoint)" />
 
             
 
              constructors.</para
           >
           <para
-            >This constructor allows you to specify the port number on which to listen for incoming connection attempts. With this constructor, the underlying service provider assigns the most appropriate network address. If you do not care which local port is used, you can specify 0 for the port number. In this case, the service provider will assign an available port number between 1024 and 5000. If you use this approach, you can discover what local network address and port number has been assigned by using the <see
-             cref="P:System.Net.Sockets.TcpListener.LocalEndpoint" />
+            >This constructor allows you to specify the port number on which to listen for incoming connection attempts. With this constructor, the underlying service provider assigns the most appropriate network address. If you do not care which local port is used, you can specify 0 for the port number. In this case, the service provider will assign an available port number between 1024 and 5000. If you use this approach, you can discover what local network address and port number has been assigned by using the <see cref="P:System.Net.Sockets.TcpListener.LocalEndpoint" />
 
             
 
              property.</para
           >
           <para
-            >Call the <see
-             cref="M:System.Net.Sockets.TcpListener.Start" />
+            >Call the <see cref="M:System.Net.Sockets.TcpListener.Start" />
 
             
 
@@ -189,8 +167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.TcpListener" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.TcpListener" />
 
             
 
@@ -198,7 +175,11 @@
           >
         </summary>
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -226,49 +207,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor allows you to specify the local IP address and port number on which to listen for incoming connection attempts. Before using this constructor, you must create an <see
-             cref="T:System.Net.IPEndPoint" />
+            >This constructor allows you to specify the local IP address and port number on which to listen for incoming connection attempts. Before using this constructor, you must create an <see cref="T:System.Net.IPEndPoint" />
 
             
 
-             using the desired local IP address and port number. Pass this <see
-             cref="T:System.Net.IPEndPoint" />
+             using the desired local IP address and port number. Pass this <see cref="T:System.Net.IPEndPoint" />
 
             
 
-             to the constructor as the <paramref
-             name="localEP" />
+             to the constructor as the <paramref name="localEP" />
 
             
 
              parameter.</para
           >
           <para
-            >If you do not care which local address is assigned, you can create an <see
-             cref="T:System.Net.IPEndPoint" />
+            >If you do not care which local address is assigned, you can create an <see cref="T:System.Net.IPEndPoint" />
 
             
 
-             using <see
-             cref="F:System.Net.IPAddress.Any" />
+             using <see cref="F:System.Net.IPAddress.Any" />
 
             
 
-             as the address parameter, and the underlying service provider will assign the most appropriate network address. This might help simplify your application if you have multiple network interfaces. If you do not care which local port is used, you can create an <see
-             cref="T:System.Net.IPEndPoint" />
+             as the address parameter, and the underlying service provider will assign the most appropriate network address. This might help simplify your application if you have multiple network interfaces. If you do not care which local port is used, you can create an <see cref="T:System.Net.IPEndPoint" />
 
             
 
-             using 0 for the port number. In this case, the service provider will assign an available port number between 1024 and 5000. If you use this approach, you can discover what local network address and port number has been assigned by using the <see
-             cref="P:System.Net.Sockets.TcpListener.LocalEndpoint" />
+             using 0 for the port number. In this case, the service provider will assign an available port number between 1024 and 5000. If you use this approach, you can discover what local network address and port number has been assigned by using the <see cref="P:System.Net.Sockets.TcpListener.LocalEndpoint" />
 
             
 
              property.</para
           >
           <para
-            >Call the <see
-             cref="M:System.Net.Sockets.TcpListener.Start" />
+            >Call the <see cref="M:System.Net.Sockets.TcpListener.Start" />
 
             
 
@@ -276,8 +249,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -292,8 +264,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.TcpListener" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.TcpListener" />
 
             
 
@@ -301,17 +272,19 @@
           >
         </summary>
         <param name="localEP">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Net.IPEndPoint" />
+          An <see cref="T:System.Net.IPEndPoint" />
 
           
 
-           that represents the local endpoint to which to bind the listener <see
-           cref="T:System.Net.Sockets.Socket" />
+           that represents the local endpoint to which to bind the listener <see cref="T:System.Net.Sockets.Socket" />
 
           
 
@@ -343,41 +316,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor allows you to specify the local IP address and port number on which to listen for incoming connection attempts. Before calling this constructor you must first create an <see
-             cref="T:System.Net.IPAddress" />
+            >This constructor allows you to specify the local IP address and port number on which to listen for incoming connection attempts. Before calling this constructor you must first create an <see cref="T:System.Net.IPAddress" />
 
             
 
-             using the desired local address. Pass this <see
-             cref="T:System.Net.IPAddress" />
+             using the desired local address. Pass this <see cref="T:System.Net.IPAddress" />
 
             
 
-             to the constructor as the <paramref
-             name="localaddr" />
+             to the constructor as the <paramref name="localaddr" />
 
             
 
-             parameter. If you do not care which local address is assigned, specify <see
-             cref="F:System.Net.IPAddress.Any" />
+             parameter. If you do not care which local address is assigned, specify <see cref="F:System.Net.IPAddress.Any" />
 
             
 
-             for the <paramref
-             name="localaddr" />
+             for the <paramref name="localaddr" />
 
             
 
-             parameter, and the underlying service provider will assign the most appropriate network address. This might help simplify your application if you have multiple network interfaces. If you do not care which local port is used, you can specify 0 for the port number. In this case, the service provider will assign an available port number between 1024 and 5000. If you use this approach, you can discover what local network address and port number has been assigned by using the <see
-             cref="P:System.Net.Sockets.TcpListener.LocalEndpoint" />
+             parameter, and the underlying service provider will assign the most appropriate network address. This might help simplify your application if you have multiple network interfaces. If you do not care which local port is used, you can specify 0 for the port number. In this case, the service provider will assign an available port number between 1024 and 5000. If you use this approach, you can discover what local network address and port number has been assigned by using the <see cref="P:System.Net.Sockets.TcpListener.LocalEndpoint" />
 
             
 
              property.</para
           >
           <para
-            >Call the <see
-             cref="M:System.Net.Sockets.TcpListener.Start" />
+            >Call the <see cref="M:System.Net.Sockets.TcpListener.Start" />
 
             
 
@@ -385,8 +351,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -401,8 +366,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.TcpListener" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.TcpListener" />
 
             
 
@@ -410,19 +374,26 @@
           >
         </summary>
         <param name="localaddr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Net.IPAddress" />
+          An <see cref="T:System.Net.IPAddress" />
 
           
 
            that represents the local IP address. </param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -454,61 +425,50 @@
 
             
 
-             is a blocking method that returns a <see
-             cref="T:System.Net.Sockets.Socket" />
+             is a blocking method that returns a <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             that you can use to send and receive data. If you want to avoid blocking, use the <see
-             cref="M:System.Net.Sockets.TcpListener.Pending" />
+             that you can use to send and receive data. If you want to avoid blocking, use the <see cref="M:System.Net.Sockets.TcpListener.Pending" />
 
             
 
              method to determine if connection requests are available in the incoming connection queue.</para
           >
           <para
-            >The <see
-             cref="T:System.Net.Sockets.Socket" />
+            >The <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             returned is initialized with the IP address and port number of the remote host. You can use any of the <see
-             cref="M:System.Net.Sockets.Socket.Send(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)" />
+             returned is initialized with the IP address and port number of the remote host. You can use any of the <see cref="M:System.Net.Sockets.Socket.Send(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)" />
 
             
 
-             and <see
-             cref="M:System.Net.Sockets.Socket.Receive(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)" />
+             and <see cref="M:System.Net.Sockets.Socket.Receive(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)" />
 
             
 
-             methods available in the <see
-             cref="T:System.Net.Sockets.Socket" />
+             methods available in the <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             class to communicate with the remote host. When you are finished using the <see
-             cref="T:System.Net.Sockets.Socket" />
+             class to communicate with the remote host. When you are finished using the <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            , be sure to call its <see
-             cref="M:System.Net.Sockets.Socket.Close" />
+            , be sure to call its <see cref="M:System.Net.Sockets.Socket.Close" />
 
             
 
-             method. If your application is relatively simple, consider using the <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
+             method. If your application is relatively simple, consider using the <see cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
 
             
 
-             method rather than the <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
+             method rather than the <see cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
 
             
 
-             method. <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             method. <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -516,8 +476,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -536,8 +495,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.Sockets.Socket" />
+            >A <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -567,61 +525,50 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
               object will complete after the socket connection has been accepted.</para
           >
           <para
-            >The <see
-             cref="T:System.Net.Sockets.Socket" />
+            >The <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             returned in <see
-             cref="T:System.Threading.Tasks.Task`1" />
+             returned in <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
-             is initialized with the IP address and port number of the remote host. You can use any of the <see
-             cref="M:System.Net.Sockets.Socket.Send(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)" />
+             is initialized with the IP address and port number of the remote host. You can use any of the <see cref="M:System.Net.Sockets.Socket.Send(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)" />
 
             
 
-             and <see
-             cref="M:System.Net.Sockets.Socket.Receive(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)" />
+             and <see cref="M:System.Net.Sockets.Socket.Receive(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)" />
 
             
 
-             methods available in the <see
-             cref="T:System.Net.Sockets.Socket" />
+             methods available in the <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             class to communicate with the remote host. When you are finished using the <see
-             cref="T:System.Net.Sockets.Socket" />
+             class to communicate with the remote host. When you are finished using the <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            , be sure to call its <see
-             cref="M:System.Net.Sockets.Socket.Close" />
+            , be sure to call its <see cref="M:System.Net.Sockets.Socket.Close" />
 
             
 
-             method. If your application is relatively simple, consider using the <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
+             method. If your application is relatively simple, consider using the <see cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
 
             
 
-             method rather than the <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptSocketAsync" />
+             method rather than the <see cref="M:System.Net.Sockets.TcpListener.AcceptSocketAsync" />
 
             
 
-             method. <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             method. <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -629,8 +576,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -648,18 +594,13 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Returns <see cref="T:System.Threading.Tasks.Task`1" /></para>
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task`1" />
-          </para>
-          <para
-            >The task object representing the asynchronous operation. The <see
-             cref="P:System.Threading.Tasks.Task`1.Result" />
+            >The task object representing the asynchronous operation. The <see cref="P:System.Threading.Tasks.Task`1.Result" />
 
             
 
-             property on the task object returns a <see
-             cref="T:System.Net.Sockets.Socket" />
+             property on the task object returns a <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -695,56 +636,46 @@
 
             
 
-             is a blocking method that returns a <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             is a blocking method that returns a <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-             that you can use to send and receive data. Use the <see
-             cref="M:System.Net.Sockets.TcpListener.Pending" />
+             that you can use to send and receive data. Use the <see cref="M:System.Net.Sockets.TcpListener.Pending" />
 
             
 
              method to determine if connection requests are available in the incoming connection queue if you want to avoid blocking.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Net.Sockets.TcpClient.GetStream" />
+            >Use the <see cref="M:System.Net.Sockets.TcpClient.GetStream" />
 
             
 
-             method to obtain the underlying <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             method to obtain the underlying <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             of the returned <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             of the returned <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-            . The <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            . The <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             will provide you with methods for sending and receiving with the remote host. When you are through with the <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             will provide you with methods for sending and receiving with the remote host. When you are through with the <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-            , be sure to call its <see
-             cref="M:System.Net.Sockets.TcpClient.Close" />
+            , be sure to call its <see cref="M:System.Net.Sockets.TcpClient.Close" />
 
             
 
-             method. If you want greater flexibility than a <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             method. If you want greater flexibility than a <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-             offers, consider using <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
+             offers, consider using <see cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
 
             
 
@@ -752,8 +683,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -772,8 +702,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            >A <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -803,61 +732,50 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
               object will complete after the TCP connection has been accepted.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Net.Sockets.TcpClient.GetStream" />
+            >Use the <see cref="M:System.Net.Sockets.TcpClient.GetStream" />
 
             
 
-             method to obtain the underlying <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             method to obtain the underlying <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             of the returned <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             of the returned <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-             in the <see
-             cref="T:System.Threading.Tasks.Task`1" />
+             in the <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
-            . The <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            . The <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             will provide you with methods for sending and receiving with the remote host. When you are through with the <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             will provide you with methods for sending and receiving with the remote host. When you are through with the <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-            , be sure to call its <see
-             cref="M:System.Net.Sockets.TcpClient.Close" />
+            , be sure to call its <see cref="M:System.Net.Sockets.TcpClient.Close" />
 
             
 
-             method. If you want greater flexibility than a <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             method. If you want greater flexibility than a <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-             offers, consider using <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
+             offers, consider using <see cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
 
             
 
-             or <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptSocketAsync" />
+             or <see cref="M:System.Net.Sockets.TcpListener.AcceptSocketAsync" />
 
             
 
@@ -865,8 +783,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -884,18 +801,13 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Returns <see cref="T:System.Threading.Tasks.Task`1" /></para>
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task`1" />
-          </para>
-          <para
-            >The task object representing the asynchronous operation. The <see
-             cref="P:System.Threading.Tasks.Task`1.Result" />
+            >The task object representing the asynchronous operation. The <see cref="P:System.Threading.Tasks.Task`1.Result" />
 
             
 
-             property on the task object returns a <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             property on the task object returns a <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -921,23 +833,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Classes deriving from <see
-             cref="T:System.Net.Sockets.TcpListener" />
+            >Classes deriving from <see cref="T:System.Net.Sockets.TcpListener" />
 
             
 
-             can use this property to determine if the <see
-             cref="T:System.Net.Sockets.Socket" />
+             can use this property to determine if the <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             is currently listening for incoming connection attempts. The <see
-             cref="P:System.Net.Sockets.TcpClient.Active" />
+             is currently listening for incoming connection attempts. The <see cref="P:System.Net.Sockets.TcpClient.Active" />
 
             
 
-             property can be used to avoid redundant <see
-             cref="M:System.Net.Sockets.TcpListener.Start" />
+             property can be used to avoid redundant <see cref="M:System.Net.Sockets.TcpListener.Start" />
 
             
 
@@ -947,8 +855,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether <see
-             cref="T:System.Net.Sockets.TcpListener" />
+            >Gets a value that indicates whether <see cref="T:System.Net.Sockets.TcpListener" />
 
             
 
@@ -982,34 +889,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The asynchronous <see
-             cref="M:System.Net.Sockets.TcpListener.BeginAcceptSocket(System.AsyncCallback,System.Object)" />
+            >The asynchronous <see cref="M:System.Net.Sockets.TcpListener.BeginAcceptSocket(System.AsyncCallback,System.Object)" />
 
             
 
-             operation must be completed by calling the <see
-             cref="M:System.Net.Sockets.TcpListener.EndAcceptSocket(System.IAsyncResult)" />
+             operation must be completed by calling the <see cref="M:System.Net.Sockets.TcpListener.EndAcceptSocket(System.IAsyncResult)" />
 
             
 
-             method. Typically, the method is invoked by the <paramref
-             name="callback" />
+             method. Typically, the method is invoked by the <paramref name="callback" />
 
             
 
              delegate.</para
           >
           <para
-            >This method does not block until the operation completes. To block until the operation completes, use the <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
+            >This method does not block until the operation completes. To block until the operation completes, use the <see cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
 
             
 
              method.</para
           >
           <para
-            >For detailed information about using the asynchronous programming model, see <format
-             type="text/html">
+            >For detailed information about using the asynchronous programming model, see <format type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
 
@@ -1019,13 +921,11 @@
           >
           <block subset="none" type="note">
             <para
-              >You can call the <see
-               cref="P:System.Net.Sockets.Socket.RemoteEndPoint" />
+              >You can call the <see cref="P:System.Net.Sockets.Socket.RemoteEndPoint" />
 
               
 
-               property of the returned <see
-               cref="T:System.Net.Sockets.Socket" />
+               property of the returned <see cref="T:System.Net.Sockets.Socket" />
 
               
 
@@ -1034,18 +934,18 @@
           </block>
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use the <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use the <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
                property to obtain the specific error code and refer to the Windows Sockets version 2 API error code documentation in the MSDN library at <see
-               cref="http://msdn.microsoft.com/library/">http://msdn.microsoft.com/library/</see>
+                cref="http://msdn.microsoft.com/library/"
+                >http://msdn.microsoft.com/library/</see
+              >
 
               
 
@@ -1054,8 +954,7 @@
           </block>
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -1074,13 +973,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
-             that references the asynchronous creation of the <see
-             cref="T:System.Net.Sockets.Socket" />
+             that references the asynchronous creation of the <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -1088,24 +985,30 @@
           >
         </returns>
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when the operation is complete.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined object containing information about the accept operation. This object is passed to the <paramref
-           name="callback" />
+          A user-defined object containing information about the accept operation. This object is passed to the <paramref name="callback" />
 
           
 
@@ -1138,34 +1041,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The asynchronous <see
-             cref="M:System.Net.Sockets.TcpListener.BeginAcceptTcpClient(System.AsyncCallback,System.Object)" />
+            >The asynchronous <see cref="M:System.Net.Sockets.TcpListener.BeginAcceptTcpClient(System.AsyncCallback,System.Object)" />
 
             
 
-             operation must be completed by calling the <see
-             cref="M:System.Net.Sockets.TcpListener.EndAcceptTcpClient(System.IAsyncResult)" />
+             operation must be completed by calling the <see cref="M:System.Net.Sockets.TcpListener.EndAcceptTcpClient(System.IAsyncResult)" />
 
             
 
-             method. Typically, the method is invoked by the <paramref
-             name="callback" />
+             method. Typically, the method is invoked by the <paramref name="callback" />
 
             
 
              delegate.</para
           >
           <para
-            >This method does not block until the operation completes. To block until the operation completes, use the <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
+            >This method does not block until the operation completes. To block until the operation completes, use the <see cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
 
             
 
              method.</para
           >
           <para
-            >For detailed information about using the asynchronous programming model, see <format
-             type="text/html">
+            >For detailed information about using the asynchronous programming model, see <format type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
 
@@ -1175,18 +1073,18 @@
           >
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use the <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use the <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
                property to obtain the specific error code and refer to the Windows Sockets version 2 API error code documentation in the MSDN library at <see
-               cref="http://msdn.microsoft.com/library/">http://msdn.microsoft.com/library/</see>
+                cref="http://msdn.microsoft.com/library/"
+                >http://msdn.microsoft.com/library/</see
+              >
 
               
 
@@ -1195,8 +1093,7 @@
           </block>
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -1215,13 +1112,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
-             that references the asynchronous creation of the <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             that references the asynchronous creation of the <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -1229,24 +1124,30 @@
           >
         </returns>
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when the operation is complete.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined object containing information about the accept operation. This object is passed to the <paramref
-           name="callback" />
+          A user-defined object containing information about the accept operation. This object is passed to the <paramref name="callback" />
 
           
 
@@ -1278,8 +1179,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method blocks until the operation is complete. To perform this operation synchronously, use the <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
+            >This method blocks until the operation is complete. To perform this operation synchronously, use the <see cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
 
             
 
@@ -1287,13 +1187,11 @@
           >
           <block subset="none" type="note">
             <para
-              >You can call the <see
-               cref="P:System.Net.Sockets.Socket.RemoteEndPoint" />
+              >You can call the <see cref="P:System.Net.Sockets.Socket.RemoteEndPoint" />
 
               
 
-               property of the returned <see
-               cref="T:System.Net.Sockets.Socket" />
+               property of the returned <see cref="T:System.Net.Sockets.Socket" />
 
               
 
@@ -1302,18 +1200,18 @@
           </block>
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use the <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use the <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
                property to obtain the specific error code and refer to the Windows Sockets version 2 API error code documentation in the MSDN library at <see
-               cref="http://msdn.microsoft.com/library/">http://msdn.microsoft.com/library/</see>
+                cref="http://msdn.microsoft.com/library/"
+                >http://msdn.microsoft.com/library/</see
+              >
 
               
 
@@ -1322,8 +1220,7 @@
           </block>
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -1338,8 +1235,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Asynchronously accepts an incoming connection attempt and creates a new <see
-             cref="T:System.Net.Sockets.Socket" />
+            >Asynchronously accepts an incoming connection attempt and creates a new <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -1348,17 +1244,13 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >A <see
-             cref="T:System.Net.Sockets.Socket" />
+          <para>A <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            .</para
-          >
+            .</para>
           <para
-            >The <see
-             cref="T:System.Net.Sockets.Socket" />
+            >The <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -1366,17 +1258,19 @@
           >
         </returns>
         <param name="asyncResult">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IAsyncResult" />
+          An <see cref="T:System.IAsyncResult" />
 
           
 
-           returned by a call to the <see
-           cref="M:System.Net.Sockets.TcpListener.BeginAcceptSocket(System.AsyncCallback,System.Object)" />
+           returned by a call to the <see cref="M:System.Net.Sockets.TcpListener.BeginAcceptSocket(System.AsyncCallback,System.Object)" />
 
           
 
@@ -1408,8 +1302,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method blocks until the operation is complete. To perform this operation synchronously, use the <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
+            >This method blocks until the operation is complete. To perform this operation synchronously, use the <see cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
 
             
 
@@ -1417,13 +1310,11 @@
           >
           <block subset="none" type="note">
             <para
-              >You can call the <see
-               cref="P:System.Net.Sockets.Socket.RemoteEndPoint" />
+              >You can call the <see cref="P:System.Net.Sockets.Socket.RemoteEndPoint" />
 
               
 
-               property of the underlying socket (<see
-               cref="P:System.Net.Sockets.TcpClient.Client" />
+               property of the underlying socket (<see cref="P:System.Net.Sockets.TcpClient.Client" />
 
               
 
@@ -1432,18 +1323,18 @@
           </block>
           <block subset="none" type="note">
             <para
-              >If you receive a <see
-               cref="T:System.Net.Sockets.SocketException" />
+              >If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              , use the <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              , use the <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
                property to obtain the specific error code and refer to the Windows Sockets version 2 API error code documentation in the MSDN library at <see
-               cref="http://msdn.microsoft.com/library/">http://msdn.microsoft.com/library/</see>
+                cref="http://msdn.microsoft.com/library/"
+                >http://msdn.microsoft.com/library/</see
+              >
 
               
 
@@ -1452,8 +1343,7 @@
           </block>
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -1468,8 +1358,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Asynchronously accepts an incoming connection attempt and creates a new <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            >Asynchronously accepts an incoming connection attempt and creates a new <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -1479,16 +1368,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            >A <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="T:System.Net.Sockets.TcpClient" />
+            >The <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -1496,17 +1383,19 @@
           >
         </returns>
         <param name="asyncResult">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IAsyncResult" />
+          An <see cref="T:System.IAsyncResult" />
 
           
 
-           returned by a call to the <see
-           cref="M:System.Net.Sockets.TcpListener.BeginAcceptTcpClient(System.AsyncCallback,System.Object)" />
+           returned by a call to the <see cref="M:System.Net.Sockets.TcpListener.BeginAcceptTcpClient(System.AsyncCallback,System.Object)" />
 
           
 
@@ -1530,21 +1419,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, multiple listeners can listen to a specific port. However, only one of the listeners can perform operations on the network traffic sent to the port. If more than one listener attempts to bind to a particular port, then the one with the more specific IP address handles the network traffic sent to that port. You can use the <see
-             cref="P:System.Net.Sockets.Socket.ExclusiveAddressUse" />
+            >By default, multiple listeners can listen to a specific port. However, only one of the listeners can perform operations on the network traffic sent to the port. If more than one listener attempts to bind to a particular port, then the one with the more specific IP address handles the network traffic sent to that port. You can use the <see cref="P:System.Net.Sockets.Socket.ExclusiveAddressUse" />
 
             
 
              property to prevent multiple listeners from listening to a specific port.</para
           >
           <para
-            >Set this property before calling <see
-             cref="Overload:System.Net.Sockets.TcpListener.Start" />
+            >Set this property before calling <see cref="Overload:System.Net.Sockets.TcpListener.Start" />
 
             
 
-            , or call the <see
-             cref="M:System.Net.Sockets.TcpListener.Stop" />
+            , or call the <see cref="M:System.Net.Sockets.TcpListener.Stop" />
 
             
 
@@ -1554,13 +1440,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Boolean" />
+            >Gets or sets a <see cref="T:System.Boolean" />
 
             
 
-             value that specifies whether the <see
-             cref="T:System.Net.Sockets.TcpListener" />
+             value that specifies whether the <see cref="T:System.Net.Sockets.TcpListener" />
 
             
 
@@ -1589,13 +1473,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.Sockets.TcpListener" />
+            >The <see cref="T:System.Net.Sockets.TcpListener" />
 
             
 
-             class finalizer free resources associated with the <see
-             cref="T:System.Net.Sockets.TcpListener" />
+             class finalizer free resources associated with the <see cref="T:System.Net.Sockets.TcpListener" />
 
             
 
@@ -1605,8 +1487,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Frees resources used by the <see
-             cref="T:System.Net.Sockets.TcpListener" />
+            >Frees resources used by the <see cref="T:System.Net.Sockets.TcpListener" />
 
             
 
@@ -1635,28 +1516,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Net.Sockets.TcpListener.LocalEndpoint" />
+            >You can use the <see cref="P:System.Net.Sockets.TcpListener.LocalEndpoint" />
 
             
 
-             property to identify the local network interface and port number being used to listen for incoming client connection requests, after a socket connection has been made. You must first cast this <see
-             cref="T:System.Net.EndPoint" />
+             property to identify the local network interface and port number being used to listen for incoming client connection requests, after a socket connection has been made. You must first cast this <see cref="T:System.Net.EndPoint" />
 
             
 
-             to an <see
-             cref="T:System.Net.IPEndPoint" />
+             to an <see cref="T:System.Net.IPEndPoint" />
 
             
 
-            . You can then call the <see
-             cref="P:System.Net.IPEndPoint.Address" />
+            . You can then call the <see cref="P:System.Net.IPEndPoint.Address" />
 
             
 
-             property to retrieve the local IP address, and the <see
-             cref="P:System.Net.IPEndPoint.Port" />
+             property to retrieve the local IP address, and the <see cref="P:System.Net.IPEndPoint.Port" />
 
             
 
@@ -1666,13 +1542,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the underlying <see
-             cref="T:System.Net.EndPoint" />
+            >Gets the underlying <see cref="T:System.Net.EndPoint" />
 
             
 
-             of the current <see
-             cref="T:System.Net.Sockets.TcpListener" />
+             of the current <see cref="T:System.Net.Sockets.TcpListener" />
 
             
 
@@ -1701,23 +1575,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This non-blocking method determines if there are any pending connection requests. Because the <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
+            >This non-blocking method determines if there are any pending connection requests. Because the <see cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
 
             
 
-             and <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
+             and <see cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
 
             
 
-             methods block execution until the <see
-             cref="M:System.Net.Sockets.TcpListener.Start" />
+             methods block execution until the <see cref="M:System.Net.Sockets.TcpListener.Start" />
 
             
 
-             method has queued an incoming connection request, the <see
-             cref="M:System.Net.Sockets.TcpListener.Pending" />
+             method has queued an incoming connection request, the <see cref="M:System.Net.Sockets.TcpListener.Pending" />
 
             
 
@@ -1758,33 +1628,27 @@
 
             
 
-             creates a <see
-             cref="T:System.Net.Sockets.Socket" />
+             creates a <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             to listen for incoming client connection requests. Classes deriving from <see
-             cref="T:System.Net.Sockets.TcpListener" />
+             to listen for incoming client connection requests. Classes deriving from <see cref="T:System.Net.Sockets.TcpListener" />
 
             
 
-             can use this property to get this <see
-             cref="T:System.Net.Sockets.Socket" />
+             can use this property to get this <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            . Use the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+            . Use the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             returned by the <see
-             cref="P:System.Net.Sockets.TcpListener.Server" />
+             returned by the <see cref="P:System.Net.Sockets.TcpListener.Server" />
 
             
 
-             property if you require access beyond that which <see
-             cref="T:System.Net.Sockets.TcpListener" />
+             property if you require access beyond that which <see cref="T:System.Net.Sockets.TcpListener" />
 
             
 
@@ -1792,33 +1656,27 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Net.Sockets.TcpListener.Server" />
+              >The <see cref="P:System.Net.Sockets.TcpListener.Server" />
 
               
 
-               property only returns the <see
-               cref="T:System.Net.Sockets.Socket" />
+               property only returns the <see cref="T:System.Net.Sockets.Socket" />
 
               
 
-               used to listen for incoming client connection requests. Use the <see
-               cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
+               used to listen for incoming client connection requests. Use the <see cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
 
               
 
-               method to accept a pending connection request and obtain a <see
-               cref="T:System.Net.Sockets.Socket" />
+               method to accept a pending connection request and obtain a <see cref="T:System.Net.Sockets.Socket" />
 
               
 
-               for sending and receiving data. You can also use the <see
-               cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
+               for sending and receiving data. You can also use the <see cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
 
               
 
-               method to accept a pending connection request and obtain a <see
-               cref="T:System.Net.Sockets.TcpClient" />
+               method to accept a pending connection request and obtain a <see cref="T:System.Net.Sockets.TcpClient" />
 
               
 
@@ -1829,8 +1687,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the underlying network <see
-             cref="T:System.Net.Sockets.Socket" />
+            >Gets the underlying network <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -1859,89 +1716,73 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.TcpListener.Start" />
+            >The <see cref="M:System.Net.Sockets.TcpListener.Start" />
 
             
 
-             method initializes the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             method initializes the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            , binds it to a local endpoint, and listens for incoming connection attempts. If a connection request is received, the <see
-             cref="M:System.Net.Sockets.TcpListener.Start" />
+            , binds it to a local endpoint, and listens for incoming connection attempts. If a connection request is received, the <see cref="M:System.Net.Sockets.TcpListener.Start" />
 
             
 
-             method will queue the request and continue listening for additional requests until you call the <see
-             cref="M:System.Net.Sockets.TcpListener.Stop" />
+             method will queue the request and continue listening for additional requests until you call the <see cref="M:System.Net.Sockets.TcpListener.Stop" />
 
             
 
-             method. If <see
-             cref="T:System.Net.Sockets.TcpListener" />
+             method. If <see cref="T:System.Net.Sockets.TcpListener" />
 
             
 
-             receives a connection request after it has already queued the maximum number of connections, it will throw a <see
-             cref="T:System.Net.Sockets.SocketException" />
+             receives a connection request after it has already queued the maximum number of connections, it will throw a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
              on the client.</para
           >
           <para
-            >To remove a connection from the incoming connection queue, use either the <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
+            >To remove a connection from the incoming connection queue, use either the <see cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
 
             
 
-             method or the <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
+             method or the <see cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
 
             
 
-             method. The <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
+             method. The <see cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
 
             
 
-             method will remove a connection from the queue and return a <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             method will remove a connection from the queue and return a <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-             that you can use to send and receive data. The <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
+             that you can use to send and receive data. The <see cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
 
             
 
-             method will return a <see
-             cref="T:System.Net.Sockets.Socket" />
+             method will return a <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             that you can use to do the same. If your application only requires synchronous I/O, use <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
+             that you can use to do the same. If your application only requires synchronous I/O, use <see cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
 
             
 
-            . For more detailed behavioral control, use <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
+            . For more detailed behavioral control, use <see cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
 
             
 
             . Both of these methods block until a connection request is available in the queue.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Net.Sockets.TcpListener.Stop" />
+            >Use the <see cref="M:System.Net.Sockets.TcpListener.Stop" />
 
             
 
-             method to close the <see
-             cref="T:System.Net.Sockets.TcpListener" />
+             method to close the <see cref="T:System.Net.Sockets.TcpListener" />
 
             
 
@@ -1949,8 +1790,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -1989,89 +1829,73 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.TcpListener.Start" />
+            >The <see cref="M:System.Net.Sockets.TcpListener.Start" />
 
             
 
-             method initializes the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             method initializes the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            , binds it to a local endpoint, and listens for incoming connection attempts. If a connection request is received, <see
-             cref="M:System.Net.Sockets.TcpListener.Start" />
+            , binds it to a local endpoint, and listens for incoming connection attempts. If a connection request is received, <see cref="M:System.Net.Sockets.TcpListener.Start" />
 
             
 
-             will queue the request and continue listening for additional requests until you call the <see
-             cref="M:System.Net.Sockets.TcpListener.Stop" />
+             will queue the request and continue listening for additional requests until you call the <see cref="M:System.Net.Sockets.TcpListener.Stop" />
 
             
 
-             method. If <see
-             cref="T:System.Net.Sockets.TcpListener" />
+             method. If <see cref="T:System.Net.Sockets.TcpListener" />
 
             
 
-             receives a connection request after it has already queued the maximum number of connections it will throw a <see
-             cref="T:System.Net.Sockets.SocketException" />
+             receives a connection request after it has already queued the maximum number of connections it will throw a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
              on the client.</para
           >
           <para
-            >To remove a connection from the incoming connection queue, use either the <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
+            >To remove a connection from the incoming connection queue, use either the <see cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
 
             
 
-             method or the <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
+             method or the <see cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
 
             
 
-             method. The <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
+             method. The <see cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
 
             
 
-             method will remove a connection from the queue and return a <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             method will remove a connection from the queue and return a <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-             that you can use to send and receive data. The <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
+             that you can use to send and receive data. The <see cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
 
             
 
-             method will return a <see
-             cref="T:System.Net.Sockets.Socket" />
+             method will return a <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             that you can use to do the same. If your application only requires synchronous I/O, use the <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
+             that you can use to do the same. If your application only requires synchronous I/O, use the <see cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />
 
             
 
-            . For more detailed behavioral control, use <see
-             cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
+            . For more detailed behavioral control, use <see cref="M:System.Net.Sockets.TcpListener.AcceptSocket" />
 
             
 
              method. Both of these methods block until a connection request is available in the queue. </para
           >
           <para
-            >Use the <see
-             cref="M:System.Net.Sockets.TcpListener.Stop" />
+            >Use the <see cref="M:System.Net.Sockets.TcpListener.Stop" />
 
             
 
-             method to close the <see
-             cref="T:System.Net.Sockets.TcpListener" />
+             method to close the <see cref="T:System.Net.Sockets.TcpListener" />
 
             
 
@@ -2079,13 +1903,14 @@
           >
           <block subset="none" type="note">
             <para
-              >Use the <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              >Use the <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
                property to obtain the specific error code and refer to the Windows Sockets version 2 API error code documentation in the MSDN library at <see
-               cref="http://msdn.microsoft.com/library/">http://msdn.microsoft.com/library/</see>
+                cref="http://msdn.microsoft.com/library/"
+                >http://msdn.microsoft.com/library/</see
+              >
 
               
 
@@ -2094,8 +1919,7 @@
           </block>
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -2112,7 +1936,11 @@
           <para>Starts listening for incoming connection requests with a maximum number of pending connection.</para>
         </summary>
         <param name="backlog">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2144,8 +1972,7 @@
 
             
 
-             closes the listener. Any unaccepted connection requests in the queue will be lost. Remote hosts waiting for a connection to be accepted will throw a <see
-             cref="T:System.Net.Sockets.SocketException" />
+             closes the listener. Any unaccepted connection requests in the queue will be lost. Remote hosts waiting for a connection to be accepted will throw a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
@@ -2153,8 +1980,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >

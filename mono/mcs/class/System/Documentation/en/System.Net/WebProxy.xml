@@ -41,19 +41,16 @@
   <Docs>
     <example>
       <para
-        >The following example sets a <see
-         cref="T:System.Net.WebProxy" />
+        >The following example sets a <see cref="T:System.Net.WebProxy" />
 
         
 
          for a
-<see
-         cref="T:System.Net.WebRequest" />
+<see cref="T:System.Net.WebRequest" />
 
         
 
-        . The <see
-         cref="T:System.Net.WebRequest" />
+        . The <see cref="T:System.Net.WebRequest" />
 
         
 
@@ -81,28 +78,23 @@ public class WebProxyExample {
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.WebProxy" />
+        >The <see cref="T:System.Net.WebProxy" />
 
         
 
-         class contains the proxy settings that <see
-         cref="T:System.Net.WebRequest" />
+         class contains the proxy settings that <see cref="T:System.Net.WebRequest" />
 
         
 
-         instances use to determine whether a Web proxy is used to send requests. Global Web proxy settings can be specified in machine and application configuration files, and applications can use instances of the <see
-         cref="T:System.Net.WebProxy" />
+         instances use to determine whether a Web proxy is used to send requests. Global Web proxy settings can be specified in machine and application configuration files, and applications can use instances of the <see cref="T:System.Net.WebProxy" />
 
         
 
-         class to customize Web proxy use. The <see
-         cref="T:System.Net.WebProxy" />
+         class to customize Web proxy use. The <see cref="T:System.Net.WebProxy" />
 
         
 
-         class is the base implementation of the <see
-         cref="T:System.Net.IWebProxy" />
+         class is the base implementation of the <see cref="T:System.Net.IWebProxy" />
 
         
 
@@ -112,8 +104,7 @@ public class WebProxyExample {
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="M:System.Net.WebProxy.#ctor" />
+            >The <see cref="M:System.Net.WebProxy.#ctor" />
 
             
 
@@ -122,8 +113,7 @@ public class WebProxyExample {
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Net.WebProxy.GetDefaultProxy" />
+            >The <see cref="M:System.Net.WebProxy.GetDefaultProxy" />
 
             
 
@@ -132,8 +122,7 @@ public class WebProxyExample {
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.Net.GlobalProxySelection.Select" />
+            >The <see cref="P:System.Net.GlobalProxySelection.Select" />
 
             
 
@@ -142,77 +131,64 @@ public class WebProxyExample {
         </item>
       </list>
       <para
-        >These methods each supply a <see
-         cref="T:System.Net.WebProxy" />
+        >These methods each supply a <see cref="T:System.Net.WebProxy" />
 
         
 
-         instance that you can further customize; the difference between them is how the instance is initialized before it is returned to your application. The <see
-         cref="M:System.Net.WebProxy.#ctor" />
+         instance that you can further customize; the difference between them is how the instance is initialized before it is returned to your application. The <see cref="M:System.Net.WebProxy.#ctor" />
 
         
 
-         constructor returns an instance of the <see
-         cref="T:System.Net.WebProxy" />
+         constructor returns an instance of the <see cref="T:System.Net.WebProxy" />
 
         
 
-         class with the <see
-         cref="P:System.Net.WebProxy.Address" />
+         class with the <see cref="P:System.Net.WebProxy.Address" />
 
         
 
-         property set to null. When a request uses a <see
-         cref="T:System.Net.WebProxy" />
+         property set to null. When a request uses a <see cref="T:System.Net.WebProxy" />
 
         
 
          instance in this state, no proxy is used to send the request.</para
       >
       <para
-        >The <see
-         cref="M:System.Net.WebProxy.GetDefaultProxy" />
+        >The <see cref="M:System.Net.WebProxy.GetDefaultProxy" />
 
         
 
-         method returns an instance of the <see
-         cref="T:System.Net.WebProxy" />
+         method returns an instance of the <see cref="T:System.Net.WebProxy" />
 
         
 
-         class with the <see
-         cref="P:System.Net.WebProxy.Address" />
+         class with the <see cref="P:System.Net.WebProxy.Address" />
 
         
 
-        , <see
-         cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
+        , <see cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
 
         
 
-        , and <see
-         cref="P:System.Net.WebProxy.BypassList" />
+        , and <see cref="P:System.Net.WebProxy.BypassList" />
 
         
 
          properties set to the values used by Internet Explorer 5.5 and later.</para
       >
       <para
-        >The <see
-         cref="P:System.Net.GlobalProxySelection.Select" />
+        >The <see cref="P:System.Net.GlobalProxySelection.Select" />
 
         
 
-         method returns an instance of the <see
-         cref="T:System.Net.WebProxy" />
+         method returns an instance of the <see cref="T:System.Net.WebProxy" />
 
         
 
          class with it properties set according to a combination of Internet Explorer and configuration file settings.</para
       >
       <para
-        >The <see
-         cref="T:System.Net.WebProxy" />
+        >The <see cref="T:System.Net.WebProxy" />
 
         
 
@@ -222,8 +198,7 @@ public class WebProxyExample {
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains HTTP proxy settings for the <see
-         cref="T:System.Net.WebRequest" />
+        >Contains HTTP proxy settings for the <see cref="T:System.Net.WebRequest" />
 
         
 
@@ -254,31 +229,26 @@ public class WebProxyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default constructor initializes an empty instance of the <see
-             cref="T:System.Net.WebProxy" />
+            >The default constructor initializes an empty instance of the <see cref="T:System.Net.WebProxy" />
 
             
 
-             class with the <see
-             cref="P:System.Net.WebProxy.Address" />
+             class with the <see cref="P:System.Net.WebProxy.Address" />
 
             
 
              property set to null.</para
           >
           <para
-            >When the <see
-             cref="P:System.Net.WebProxy.Address" />
+            >When the <see cref="P:System.Net.WebProxy.Address" />
 
             
 
-             property is null, the <see
-             cref="M:System.Net.WebProxy.IsBypassed(System.Uri)" />
+             property is null, the <see cref="M:System.Net.WebProxy.IsBypassed(System.Uri)" />
 
             
 
-             method returns true and the <see
-             cref="M:System.Net.WebProxy.GetProxy(System.Uri)" />
+             method returns true and the <see cref="M:System.Net.WebProxy.GetProxy(System.Uri)" />
 
             
 
@@ -288,8 +258,7 @@ public class WebProxyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an empty instance of the <see
-             cref="T:System.Net.WebProxy" />
+            >Initializes an empty instance of the <see cref="T:System.Net.WebProxy" />
 
             
 
@@ -321,8 +290,7 @@ public class WebProxyExample {
       </Parameters>
       <Docs>
         <param name="address"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
@@ -333,8 +301,7 @@ public class WebProxyExample {
 
           
 
-          is not <see
-           langword="null" />
+          is not <see langword="null" />
 
           
 
@@ -343,23 +310,19 @@ public class WebProxyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.WebProxy" />
+            >The <see cref="T:System.Net.WebProxy" />
 
             
 
-             instance is initialized with the <see
-             cref="P:System.Net.WebProxy.Address" />
+             instance is initialized with the <see cref="P:System.Net.WebProxy.Address" />
 
             
 
-             property set to a <see
-             cref="T:System.Uri" />
+             property set to a <see cref="T:System.Uri" />
 
             
 
-             instance containing <paramref
-             name="Address" />
+             instance containing <paramref name="Address" />
 
             
 
@@ -369,8 +332,7 @@ public class WebProxyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.WebProxy" />
+            >Initializes a new instance of the <see cref="T:System.Net.WebProxy" />
 
             
 
@@ -402,8 +364,7 @@ public class WebProxyExample {
       </Parameters>
       <Docs>
         <param name="address"
-          >A <see
-           cref="T:System.Uri" />
+          >A <see cref="T:System.Uri" />
 
           
 
@@ -412,18 +373,15 @@ public class WebProxyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.WebProxy" />
+            >The <see cref="T:System.Net.WebProxy" />
 
             
 
-             instance is initialized with the <see
-             cref="P:System.Net.WebProxy.Address" />
+             instance is initialized with the <see cref="P:System.Net.WebProxy.Address" />
 
             
 
-             property set to the <paramref
-             name="Address" />
+             property set to the <paramref name="Address" />
 
             
 
@@ -433,13 +391,11 @@ public class WebProxyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.WebProxy" />
+            >Initializes a new instance of the <see cref="T:System.Net.WebProxy" />
 
             
 
-             class from the specified <see
-             cref="T:System.Uri" />
+             class from the specified <see cref="T:System.Uri" />
 
             
 
@@ -472,8 +428,7 @@ public class WebProxyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the system to deserialize a <see
-             cref="T:System.Net.WebProxy" />
+            >This method is called by the system to deserialize a <see cref="T:System.Net.WebProxy" />
 
             
 
@@ -483,8 +438,7 @@ public class WebProxyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Net.WebProxy" />
+            >Initializes an instance of the <see cref="T:System.Net.WebProxy" />
 
             
 
@@ -492,14 +446,22 @@ public class WebProxyExample {
           >
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The serialization data. </param
         >
         <param name="streamingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -546,33 +508,27 @@ public class WebProxyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.WebProxy" />
+            >The <see cref="T:System.Net.WebProxy" />
 
             
 
-             instance is initialized with the <see
-             cref="P:System.Net.WebProxy.Address" />
+             instance is initialized with the <see cref="P:System.Net.WebProxy.Address" />
 
             
 
-             property set to a <see
-             cref="T:System.Uri" />
+             property set to a <see cref="T:System.Uri" />
 
             
 
-             instance that contains <paramref
-             name="Address" />
+             instance that contains <paramref name="Address" />
 
             
 
-             and the <see
-             cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
+             and the <see cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
 
             
 
-             property set to <paramref
-             name="BypassOnLocal" />
+             property set to <paramref name="BypassOnLocal" />
 
             
 
@@ -582,8 +538,7 @@ public class WebProxyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.WebProxy" />
+            >Initializes a new instance of the <see cref="T:System.Net.WebProxy" />
 
             
 
@@ -618,13 +573,11 @@ public class WebProxyExample {
         <param name="host">To be added.</param>
         <param name="port">To be added.</param>
         <exception cref="T:System.UriFormatException"
-          >The URI formed by combining <paramref
-           name="Host" />
+          >The URI formed by combining <paramref name="Host" />
 
           
 
-           and <paramref
-           name="Port" />
+           and <paramref name="Port" />
 
           
 
@@ -633,28 +586,23 @@ public class WebProxyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.WebProxy" />
+            >The <see cref="T:System.Net.WebProxy" />
 
             
 
-             instance is initialized with the <see
-             cref="P:System.Net.WebProxy.Address" />
+             instance is initialized with the <see cref="P:System.Net.WebProxy.Address" />
 
             
 
-             property set to a <see
-             cref="T:System.Uri" />
+             property set to a <see cref="T:System.Uri" />
 
             
 
-             instance of the form http:// <paramref
-             name="Host" />
+             instance of the form http:// <paramref name="Host" />
 
             
 
-             : <paramref
-             name="Port" />
+             : <paramref name="Port" />
 
             
 
@@ -664,8 +612,7 @@ public class WebProxyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.WebProxy" />
+            >Initializes a new instance of the <see cref="T:System.Net.WebProxy" />
 
             
 
@@ -702,28 +649,23 @@ public class WebProxyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.WebProxy" />
+            >The <see cref="T:System.Net.WebProxy" />
 
             
 
-             instance is initialized with the <see
-             cref="P:System.Net.WebProxy.Address" />
+             instance is initialized with the <see cref="P:System.Net.WebProxy.Address" />
 
             
 
-             property set to <paramref
-             name="Address" />
+             property set to <paramref name="Address" />
 
             
 
-             and with the <see
-             cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
+             and with the <see cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
 
             
 
-             property set to <paramref
-             name="BypassOnLocal" />
+             property set to <paramref name="BypassOnLocal" />
 
             
 
@@ -733,13 +675,11 @@ public class WebProxyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.WebProxy" />
+            >Initializes a new instance of the <see cref="T:System.Net.WebProxy" />
 
             
 
-             class with the <see
-             cref="T:System.Uri" />
+             class with the <see cref="T:System.Uri" />
 
             
 
@@ -790,43 +730,35 @@ public class WebProxyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.WebProxy" />
+            >The <see cref="T:System.Net.WebProxy" />
 
             
 
-             instance is initialized with the <see
-             cref="P:System.Net.WebProxy.Address" />
+             instance is initialized with the <see cref="P:System.Net.WebProxy.Address" />
 
             
 
-             property set to a <see
-             cref="T:System.Uri" />
+             property set to a <see cref="T:System.Uri" />
 
             
 
-             instance that contains <paramref
-             name="Address" />
+             instance that contains <paramref name="Address" />
 
             
 
-            , the <see
-             cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
+            , the <see cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
 
             
 
-             property set to <paramref
-             name="BypassOnLocal" />
+             property set to <paramref name="BypassOnLocal" />
 
             
 
-            , and the <see
-             cref="P:System.Net.WebProxy.BypassList" />
+            , and the <see cref="P:System.Net.WebProxy.BypassList" />
 
             
 
-             property set to <paramref
-             name="BypassList" />
+             property set to <paramref name="BypassList" />
 
             
 
@@ -836,8 +768,7 @@ public class WebProxyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.WebProxy" />
+            >Initializes a new instance of the <see cref="T:System.Net.WebProxy" />
 
             
 
@@ -879,38 +810,31 @@ public class WebProxyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.WebProxy" />
+            >The <see cref="T:System.Net.WebProxy" />
 
             
 
-             instance is initialized with the <see
-             cref="P:System.Net.WebProxy.Address" />
+             instance is initialized with the <see cref="P:System.Net.WebProxy.Address" />
 
             
 
-             property set to <paramref
-             name="Address" />
+             property set to <paramref name="Address" />
 
             
 
-            , the <see
-             cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
+            , the <see cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
 
             
 
-             property set to <paramref
-             name="BypassOnLocal" />
+             property set to <paramref name="BypassOnLocal" />
 
             
 
-            , and the <see
-             cref="P:System.Net.WebProxy.BypassList" />
+            , and the <see cref="P:System.Net.WebProxy.BypassList" />
 
             
 
-             property set to <paramref
-             name="BypassList" />
+             property set to <paramref name="BypassList" />
 
             
 
@@ -920,13 +844,11 @@ public class WebProxyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.WebProxy" />
+            >Initializes a new instance of the <see cref="T:System.Net.WebProxy" />
 
             
 
-             class with the specified <see
-             cref="T:System.Uri" />
+             class with the specified <see cref="T:System.Uri" />
 
             
 
@@ -979,53 +901,43 @@ public class WebProxyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.WebProxy" />
+            >The <see cref="T:System.Net.WebProxy" />
 
             
 
-             instance is initialized with the <see
-             cref="P:System.Net.WebProxy.Address" />
+             instance is initialized with the <see cref="P:System.Net.WebProxy.Address" />
 
             
 
-             property set to a <see
-             cref="T:System.Uri" />
+             property set to a <see cref="T:System.Uri" />
 
             
 
-             instance that contains <paramref
-             name="Address" />
+             instance that contains <paramref name="Address" />
 
             
 
-            , the <see
-             cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
+            , the <see cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
 
             
 
-             property set to <paramref
-             name="BypassOnLocal" />
+             property set to <paramref name="BypassOnLocal" />
 
             
 
-            , the <see
-             cref="P:System.Net.WebProxy.BypassList" />
+            , the <see cref="P:System.Net.WebProxy.BypassList" />
 
             
 
-             property set to <paramref
-             name="BypassList" />
+             property set to <paramref name="BypassList" />
 
             
 
-            , and the <see
-             cref="P:System.Net.WebProxy.Credentials" />
+            , and the <see cref="P:System.Net.WebProxy.Credentials" />
 
             
 
-             property set to <paramref
-             name="Credentials" />
+             property set to <paramref name="Credentials" />
 
             
 
@@ -1035,8 +947,7 @@ public class WebProxyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.WebProxy" />
+            >Initializes a new instance of the <see cref="T:System.Net.WebProxy" />
 
             
 
@@ -1080,48 +991,39 @@ public class WebProxyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.WebProxy" />
+            >The <see cref="T:System.Net.WebProxy" />
 
             
 
-             instance is initialized with the <see
-             cref="P:System.Net.WebProxy.Address" />
+             instance is initialized with the <see cref="P:System.Net.WebProxy.Address" />
 
             
 
-             property set to <paramref
-             name="Address" />
+             property set to <paramref name="Address" />
 
             
 
-            , the <see
-             cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
+            , the <see cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
 
             
 
-             property set to <paramref
-             name="BypassOnLocal" />
+             property set to <paramref name="BypassOnLocal" />
 
             
 
-            , the <see
-             cref="P:System.Net.WebProxy.BypassList" />
+            , the <see cref="P:System.Net.WebProxy.BypassList" />
 
             
 
-             property set to <paramref
-             name="BypassList" />
+             property set to <paramref name="BypassList" />
 
             
 
-            , and the <see
-             cref="P:System.Net.WebProxy.Credentials" />
+            , and the <see cref="P:System.Net.WebProxy.Credentials" />
 
             
 
-             property set to <paramref
-             name="Credentials" />
+             property set to <paramref name="Credentials" />
 
             
 
@@ -1131,13 +1033,11 @@ public class WebProxyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.WebProxy" />
+            >Initializes a new instance of the <see cref="T:System.Net.WebProxy" />
 
             
 
-             class with the specified <see
-             cref="T:System.Uri" />
+             class with the specified <see cref="T:System.Uri" />
 
             
 
@@ -1167,8 +1067,7 @@ public class WebProxyExample {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Uri" />
+            >A <see cref="T:System.Uri" />
 
             
 
@@ -1179,26 +1078,22 @@ public class WebProxyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.WebProxy.Address" />
+            >The <see cref="P:System.Net.WebProxy.Address" />
 
             
 
-             property contains the address of the proxy server. When automatic proxy detection is not enabled, and no automatic configuration script is specified, the <see
-             cref="P:System.Net.WebProxy.Address" />
+             property contains the address of the proxy server. When automatic proxy detection is not enabled, and no automatic configuration script is specified, the <see cref="P:System.Net.WebProxy.Address" />
 
             
 
-             property and <see
-             cref="P:System.Net.WebProxy.BypassList" />
+             property and <see cref="P:System.Net.WebProxy.BypassList" />
 
             
 
              determine the proxy used for a request.</para
           >
           <para
-            >When the <see
-             cref="P:System.Net.WebProxy.Address" />
+            >When the <see cref="P:System.Net.WebProxy.Address" />
 
             
 
@@ -1238,20 +1133,17 @@ public class WebProxyExample {
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.Collections.ArrayList" />
+            > A <see cref="T:System.Collections.ArrayList" />
 
             
 
              of
-<see
-             cref="T:System.String" />
+<see cref="T:System.String" />
 
             
 
              instances. The elements of 
-   the list represent the URIs that a <see
-             cref="T:System.Net.WebRequest" />
+   the list represent the URIs that a <see cref="T:System.Net.WebRequest" />
 
             
 
@@ -1262,13 +1154,11 @@ public class WebProxyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.WebProxy.BypassList" />
+            >The <see cref="P:System.Net.WebProxy.BypassList" />
 
             
 
-             is an array list of regular expression strings that describe the URIs that a <see
-             cref="T:System.Net.WebRequest" />
+             is an array list of regular expression strings that describe the URIs that a <see cref="T:System.Net.WebRequest" />
 
             
 
@@ -1302,19 +1192,16 @@ public class WebProxyExample {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Array" />
+            >A <see cref="T:System.Array" />
 
             
 
-             of <see
-             cref="T:System.String" />
+             of <see cref="T:System.String" />
 
             
 
              instances. The elements of the array represent URIs that
-   a <see
-             cref="T:System.Net.WebRequest" />
+   a <see cref="T:System.Net.WebRequest" />
 
             
 
@@ -1326,13 +1213,11 @@ public class WebProxyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.WebProxy.BypassList" />
+            >The <see cref="P:System.Net.WebProxy.BypassList" />
 
             
 
-             property contains an array of regular expressions that describe URIs that a <see
-             cref="T:System.Net.WebRequest" />
+             property contains an array of regular expressions that describe URIs that a <see cref="T:System.Net.WebRequest" />
 
             
 
@@ -1371,14 +1256,12 @@ public class WebProxyExample {
             
 
             to bypass the proxy server for local resources;
-   otherwise, <see
-             langword="false" />
+   otherwise, <see langword="false" />
 
             
 
             . The default value is
-<see
-             langword="false" />
+<see langword="false" />
 
             
 
@@ -1388,26 +1271,22 @@ public class WebProxyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The setting of the <see
-             cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
+            >The setting of the <see cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
 
             
 
-             property determines whether <see
-             cref="T:System.Net.WebRequest" />
+             property determines whether <see cref="T:System.Net.WebRequest" />
 
             
 
              instances use the proxy server when accessing local Internet resources.</para
           >
           <para
-            >If <see
-             cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
+            >If <see cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
 
             
 
-             is true, requests to local Internet resources do not use the proxy server. Local requests are identified by the lack of a period (.) in the URI, as in http://webserver/, or access the local server, including http://localhost, http://loopback, or http://127.0.0.1. When <see
-             cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
+             is true, requests to local Internet resources do not use the proxy server. Local requests are identified by the lack of a period (.) in the URI, as in http://webserver/, or access the local server, including http://localhost, http://loopback, or http://127.0.0.1. When <see cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
 
             
 
@@ -1415,8 +1294,7 @@ public class WebProxyExample {
           >
           <block subset="none" type="note">
             <para
-              >Requests to a local host with a URI that contain a period use the proxy. To avoid using a proxy in these cases, create an entry for the host in the <see
-               cref="P:System.Net.WebProxy.BypassList" />
+              >Requests to a local host with a URI that contain a period use the proxy. To avoid using a proxy in these cases, create an entry for the host in the <see cref="P:System.Net.WebProxy.BypassList" />
 
               
 
@@ -1457,8 +1335,7 @@ public class WebProxyExample {
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.Net.ICredentials" />
+            > A <see cref="T:System.Net.ICredentials" />
 
             
 
@@ -1470,18 +1347,15 @@ public class WebProxyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.WebProxy.Credentials" />
+            >The <see cref="P:System.Net.WebProxy.Credentials" />
 
             
 
-             property contains the authentication credentials to send to the proxy server in response to an HTTP 407 (proxy authorization) status code. In most client scenarios, you should use the <see
-             cref="P:System.Net.CredentialCache.DefaultCredentials" />
+             property contains the authentication credentials to send to the proxy server in response to an HTTP 407 (proxy authorization) status code. In most client scenarios, you should use the <see cref="P:System.Net.CredentialCache.DefaultCredentials" />
 
             
 
-            , which are the credentials of the currently logged on user. To do this, set the <see
-             cref="P:System.Net.WebProxy.UseDefaultCredentials" />
+            , which are the credentials of the currently logged on user. To do this, set the <see cref="P:System.Net.WebProxy.UseDefaultCredentials" />
 
             
 
@@ -1489,38 +1363,31 @@ public class WebProxyExample {
           >
           <block subset="none" type="note">
             <para
-              >If you set the <see
-               cref="P:System.Net.WebProxy.Credentials" />
+              >If you set the <see cref="P:System.Net.WebProxy.Credentials" />
 
               
 
-               property to credentials other than the <see
-               cref="P:System.Net.CredentialCache.DefaultCredentials" />
+               property to credentials other than the <see cref="P:System.Net.CredentialCache.DefaultCredentials" />
 
               
 
-              , setting the <see
-               cref="P:System.Net.WebProxy.UseDefaultCredentials" />
+              , setting the <see cref="P:System.Net.WebProxy.UseDefaultCredentials" />
 
               
 
-               property to true causes a <see
-               cref="T:System.InvalidOperationException" />
+               property to true causes a <see cref="T:System.InvalidOperationException" />
 
               
 
-              . To prevent this, you must set the <see
-               cref="P:System.Net.WebProxy.Credentials" />
+              . To prevent this, you must set the <see cref="P:System.Net.WebProxy.Credentials" />
 
               
 
-               property to null before setting the <see
-               cref="P:System.Net.WebProxy.UseDefaultCredentials" />
+               property to null before setting the <see cref="P:System.Net.WebProxy.UseDefaultCredentials" />
 
               
 
-               property to true. Likewise, you cannot set this property to any value when <see
-               cref="P:System.Net.WebProxy.UseDefaultCredentials" />
+               property to true. Likewise, you cannot set this property to any value when <see cref="P:System.Net.WebProxy.UseDefaultCredentials" />
 
               
 
@@ -1570,39 +1437,33 @@ public class WebProxyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.WebProxy.GetDefaultProxy" />
+            >The <see cref="M:System.Net.WebProxy.GetDefaultProxy" />
 
             
 
-             method reads the nondynamic proxy settings stored by Internet Explorer 5.5 and later, and creates a <see
-             cref="T:System.Net.WebProxy" />
+             method reads the nondynamic proxy settings stored by Internet Explorer 5.5 and later, and creates a <see cref="T:System.Net.WebProxy" />
 
             
 
              instance with those settings.</para
           >
           <para
-            >The <see
-             cref="M:System.Net.WebProxy.GetDefaultProxy" />
+            >The <see cref="M:System.Net.WebProxy.GetDefaultProxy" />
 
             
 
              method does not pick up any dynamic settings that are generated from scripts run by Internet Explorer, from automatic configuration entries, or from DHCP or DNS lookups. </para
           >
           <para
-            >Applications should use the <see
-             cref="P:System.Net.WebRequest.DefaultWebProxy" />
+            >Applications should use the <see cref="P:System.Net.WebRequest.DefaultWebProxy" />
 
             
 
-             property and the <see
-             cref="M:System.Net.WebRequest.GetSystemWebProxy" />
+             property and the <see cref="M:System.Net.WebRequest.GetSystemWebProxy" />
 
             
 
-             method instead of the <see
-             cref="M:System.Net.WebProxy.GetDefaultProxy" />
+             method instead of the <see cref="M:System.Net.WebProxy.GetDefaultProxy" />
 
             
 
@@ -1616,8 +1477,7 @@ public class WebProxyExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.WebProxy" />
+            >A <see cref="T:System.Net.WebProxy" />
 
             
 
@@ -1652,8 +1512,7 @@ public class WebProxyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any objects included in the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Any objects included in the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1663,8 +1522,7 @@ public class WebProxyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1672,24 +1530,30 @@ public class WebProxyExample {
           >
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            to populate with data. </param
         >
         <param name="streamingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -1723,13 +1587,11 @@ public class WebProxyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.WebProxy.GetProxy(System.Uri)" />
+            >The <see cref="M:System.Net.WebProxy.GetProxy(System.Uri)" />
 
             
 
-             method returns the URI that the <see
-             cref="T:System.Net.WebRequest" />
+             method returns the URI that the <see cref="T:System.Net.WebRequest" />
 
             
 
@@ -1740,61 +1602,50 @@ public class WebProxyExample {
 
             
 
-             compares <paramref
-             name="destination" />
+             compares <paramref name="destination" />
 
             
 
-             with the contents of <see
-             cref="P:System.Net.WebProxy.BypassList" />
+             with the contents of <see cref="P:System.Net.WebProxy.BypassList" />
 
             
 
-            , using the <see
-             cref="M:System.Net.WebProxy.IsBypassed(System.Uri)" />
+            , using the <see cref="M:System.Net.WebProxy.IsBypassed(System.Uri)" />
 
             
 
-             method. If <see
-             cref="M:System.Net.WebProxy.IsBypassed(System.Uri)" />
+             method. If <see cref="M:System.Net.WebProxy.IsBypassed(System.Uri)" />
 
             
 
-             returns true, <see
-             cref="M:System.Net.WebProxy.GetProxy(System.Uri)" />
+             returns true, <see cref="M:System.Net.WebProxy.GetProxy(System.Uri)" />
 
             
 
-             returns <paramref
-             name="destination" />
+             returns <paramref name="destination" />
 
             
 
-             and the <see
-             cref="T:System.Net.WebRequest" />
+             and the <see cref="T:System.Net.WebRequest" />
 
             
 
              instance does not use the proxy server.</para
           >
           <para
-            >If <paramref
-             name="destination" />
+            >If <paramref name="destination" />
 
             
 
-             is not in <see
-             cref="P:System.Net.WebProxy.BypassList" />
+             is not in <see cref="P:System.Net.WebProxy.BypassList" />
 
             
 
-            , the <see
-             cref="T:System.Net.WebRequest" />
+            , the <see cref="T:System.Net.WebRequest" />
 
             
 
-             instance uses the proxy server and the <see
-             cref="P:System.Net.WebProxy.Address" />
+             instance uses the proxy server and the <see cref="P:System.Net.WebProxy.Address" />
 
             
 
@@ -1808,13 +1659,11 @@ public class WebProxyExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Uri" />
+            >The <see cref="T:System.Uri" />
 
             
 
-             instance of the Internet resource, if the resource is on the bypass list; otherwise, the <see
-             cref="T:System.Uri" />
+             instance of the Internet resource, if the resource is on the bypass list; otherwise, the <see cref="T:System.Uri" />
 
             
 
@@ -1822,12 +1671,15 @@ public class WebProxyExample {
           >
         </returns>
         <param name="destination">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
@@ -1860,8 +1712,7 @@ public class WebProxyExample {
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentException"
-          >The <see
-           cref="P:System.Net.WebProxy.BypassList" />
+          >The <see cref="P:System.Net.WebProxy.BypassList" />
 
           
 
@@ -1870,26 +1721,22 @@ public class WebProxyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.WebProxy.IsBypassed(System.Uri)" />
+            >The <see cref="M:System.Net.WebProxy.IsBypassed(System.Uri)" />
 
             
 
              method is used to determine whether to bypass the proxy server when accessing an Internet resource.</para
           >
           <para
-            >The <see
-             cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
+            >The <see cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
 
             
 
-             and <see
-             cref="P:System.Net.WebProxy.BypassList" />
+             and <see cref="P:System.Net.WebProxy.BypassList" />
 
             
 
-             properties control the return value of the <see
-             cref="M:System.Net.WebProxy.IsBypassed(System.Uri)" />
+             properties control the return value of the <see cref="M:System.Net.WebProxy.IsBypassed(System.Uri)" />
 
             
 
@@ -1905,13 +1752,11 @@ public class WebProxyExample {
           <list type="bullet">
             <item>
               <para
-                >If <see
-                 cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
+                >If <see cref="P:System.Net.WebProxy.BypassProxyOnLocal" />
 
                 
 
-                 is true and <paramref
-                 name="host" />
+                 is true and <paramref name="host" />
 
                 
 
@@ -1920,13 +1765,11 @@ public class WebProxyExample {
             </item>
             <item>
               <para
-                >If <paramref
-                 name="host" />
+                >If <paramref name="host" />
 
                 
 
-                 matches a regular expression in <see
-                 cref="P:System.Net.WebProxy.BypassList" />
+                 matches a regular expression in <see cref="P:System.Net.WebProxy.BypassList" />
 
                 
 
@@ -1935,8 +1778,7 @@ public class WebProxyExample {
             </item>
             <item>
               <para
-                >If <see
-                 cref="P:System.Net.WebProxy.Address" />
+                >If <see cref="P:System.Net.WebProxy.Address" />
 
                 
 
@@ -1953,8 +1795,7 @@ public class WebProxyExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the proxy server should not be used for <paramref
-             name="host" />
+            >true if the proxy server should not be used for <paramref name="host" />
 
             
 
@@ -1962,12 +1803,15 @@ public class WebProxyExample {
           >
         </returns>
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
@@ -2006,8 +1850,7 @@ public class WebProxyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates the serialization data and context that are used by the system to serialize a <see
-             cref="T:System.Net.WebProxy" />
+            >Creates the serialization data and context that are used by the system to serialize a <see cref="T:System.Net.WebProxy" />
 
             
 
@@ -2015,24 +1858,30 @@ public class WebProxyExample {
           >
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            object to populate with data. </param
         >
         <param name="streamingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -2061,26 +1910,22 @@ public class WebProxyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set this property to true when requests made by this <see
-             cref="T:System.Net.WebProxy" />
+            >Set this property to true when requests made by this <see cref="T:System.Net.WebProxy" />
 
             
 
-             object should, if requested by the server, be authenticated using the credentials of the currently logged on user. For client applications, this is the desired behavior in most scenarios. For middle tier applications, such as ASP.NET applications, instead of using this property, you would typically set the <see
-             cref="P:System.Net.WebProxy.Credentials" />
+             object should, if requested by the server, be authenticated using the credentials of the currently logged on user. For client applications, this is the desired behavior in most scenarios. For middle tier applications, such as ASP.NET applications, instead of using this property, you would typically set the <see cref="P:System.Net.WebProxy.Credentials" />
 
             
 
              property to the credentials of the client on whose behalf the request is made.</para
           >
           <para
-            >The following table shows the effect of setting the <see
-             cref="P:System.Net.WebProxy.UseDefaultCredentials" />
+            >The following table shows the effect of setting the <see cref="P:System.Net.WebProxy.UseDefaultCredentials" />
 
             
 
-             value, based on the value of the <see
-             cref="P:System.Net.WebProxy.Credentials" />
+             value, based on the value of the <see cref="P:System.Net.WebProxy.Credentials" />
 
             
 
@@ -2157,8 +2002,7 @@ public class WebProxyExample {
 
                   
 
-                   is set to <see
-                   cref="P:System.Net.CredentialCache.DefaultCredentials" />
+                   is set to <see cref="P:System.Net.CredentialCache.DefaultCredentials" />
 
                   
 
@@ -2169,8 +2013,7 @@ public class WebProxyExample {
             <item>
               <term>
                 <para
-                  >Any value other than <see
-                   cref="P:System.Net.CredentialCache.DefaultCredentials" />
+                  >Any value other than <see cref="P:System.Net.CredentialCache.DefaultCredentials" />
 
                   
 
@@ -2182,8 +2025,7 @@ public class WebProxyExample {
               </description>
               <description>
                 <para
-                  >Setting <see
-                   cref="P:System.Net.WebProxy.UseDefaultCredentials" />
+                  >Setting <see cref="P:System.Net.WebProxy.UseDefaultCredentials" />
 
                   
 
@@ -2193,33 +2035,27 @@ public class WebProxyExample {
             </item>
           </list>
           <para
-            >If <see
-             cref="P:System.Net.WebProxy.UseDefaultCredentials" />
+            >If <see cref="P:System.Net.WebProxy.UseDefaultCredentials" />
 
             
 
-             is false, you can change the <see
-             cref="P:System.Net.WebProxy.Credentials" />
+             is false, you can change the <see cref="P:System.Net.WebProxy.Credentials" />
 
             
 
-             property to any credentials. If <see
-             cref="P:System.Net.WebProxy.UseDefaultCredentials" />
+             property to any credentials. If <see cref="P:System.Net.WebProxy.UseDefaultCredentials" />
 
             
 
-             is true, changing the <see
-             cref="P:System.Net.WebProxy.Credentials" />
+             is true, changing the <see cref="P:System.Net.WebProxy.Credentials" />
 
             
 
-             property from <see
-             cref="P:System.Net.CredentialCache.DefaultCredentials" />
+             property from <see cref="P:System.Net.CredentialCache.DefaultCredentials" />
 
             
 
-             (the value that is set when the <see
-             cref="P:System.Net.WebProxy.UseDefaultCredentials" />
+             (the value that is set when the <see cref="P:System.Net.WebProxy.UseDefaultCredentials" />
 
             
 
@@ -2229,13 +2065,11 @@ public class WebProxyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Boolean" />
+            >Gets or sets a <see cref="T:System.Boolean" />
 
             
 
-             value that controls whether the <see
-             cref="P:System.Net.CredentialCache.DefaultCredentials" />
+             value that controls whether the <see cref="P:System.Net.CredentialCache.DefaultCredentials" />
 
             
 

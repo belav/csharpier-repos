@@ -16,59 +16,48 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="P:System.Windows.Forms.DataGridView.CellBorderStyle" />
+        >The <see cref="P:System.Windows.Forms.DataGridView.CellBorderStyle" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         property of the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
-         control uses the <see
-         cref="T:System.Windows.Forms.DataGridViewCellBorderStyle" />
+         control uses the <see cref="T:System.Windows.Forms.DataGridViewCellBorderStyle" />
 
         
 
-         enumeration. To draw borders only between the rows, specify <see
-         cref="F:System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal" />
+         enumeration. To draw borders only between the rows, specify <see cref="F:System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal" />
 
         
 
-        , <see
-         cref="F:System.Windows.Forms.DataGridViewCellBorderStyle.SunkenHorizontal" />
+        , <see cref="F:System.Windows.Forms.DataGridViewCellBorderStyle.SunkenHorizontal" />
 
         
 
-         or <see
-         cref="F:System.Windows.Forms.DataGridViewCellBorderStyle.RaisedHorizontal" />
+         or <see cref="F:System.Windows.Forms.DataGridViewCellBorderStyle.RaisedHorizontal" />
 
         
 
-        . To draw borders only between the columns, specify <see
-         cref="F:System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical" />
+        . To draw borders only between the columns, specify <see cref="F:System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical" />
 
         
 
-        , <see
-         cref="F:System.Windows.Forms.DataGridViewCellBorderStyle.SunkenVertical" />
+        , <see cref="F:System.Windows.Forms.DataGridViewCellBorderStyle.SunkenVertical" />
 
         
 
-         or <see
-         cref="F:System.Windows.Forms.DataGridViewCellBorderStyle.RaisedVertical" />
+         or <see cref="F:System.Windows.Forms.DataGridViewCellBorderStyle.RaisedVertical" />
 
         
 
-        . To draw borders between the rows and columns, specify <see
-         cref="F:System.Windows.Forms.DataGridViewCellBorderStyle.Single" />
+        . To draw borders between the rows and columns, specify <see cref="F:System.Windows.Forms.DataGridViewCellBorderStyle.Single" />
         <see cref="F:System.Windows.Forms.DataGridViewCellBorderStyle.Sunken" />
 
         
 
-         or <see
-         cref="F:System.Windows.Forms.DataGridViewCellBorderStyle.Raised" />
+         or <see cref="F:System.Windows.Forms.DataGridViewCellBorderStyle.Raised" />
 
         
 
@@ -78,8 +67,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the border styles that can be applied to the cells of a <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >Specifies the border styles that can be applied to the cells of a <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 

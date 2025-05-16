@@ -28,13 +28,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.DataGridViewCellMouseEventHandler" />
+        >The <see cref="T:System.Windows.Forms.DataGridViewCellMouseEventHandler" />
 
         
 
-         delegate handles the following <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         delegate handles the following <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -88,13 +86,11 @@
         </item>
       </list>
       <para
-        >When you create a <see
-         cref="T:System.Windows.Forms.DataGridViewCellMouseEventHandler" />
+        >When you create a <see cref="T:System.Windows.Forms.DataGridViewCellMouseEventHandler" />
 
         
 
-         delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format
-         type="text/html">
+         delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
 
@@ -106,8 +102,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle mouse-related events raised by a <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >Represents the method that will handle mouse-related events raised by a <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 

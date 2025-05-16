@@ -24,13 +24,11 @@
          combines button and drop-down button functionality.</para
       >
       <para
-        >Use the <see
-         cref="P:System.Windows.Forms.ToolStripSplitButton.DefaultItem" />
+        >Use the <see cref="P:System.Windows.Forms.ToolStripSplitButton.DefaultItem" />
 
         
 
-         property to synchronize the <see
-         cref="E:System.Windows.Forms.Control.Click" />
+         property to synchronize the <see cref="E:System.Windows.Forms.Control.Click" />
 
         
 
@@ -40,8 +38,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a combination of a standard button on the left and a drop-down button on the right, or the other way around if the value of <see
-         cref="T:System.Windows.Forms.RightToLeft" />
+        >Represents a combination of a standard button on the left and a drop-down button on the right, or the other way around if the value of <see cref="T:System.Windows.Forms.RightToLeft" />
 
         
 
@@ -60,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
@@ -88,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
@@ -97,17 +92,19 @@
           >
         </summary>
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
-           to be displayed on the <see
-           cref="T:System.Windows.Forms.ToolStripSplitButton" />
+           to be displayed on the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
           
 
@@ -130,8 +127,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
@@ -139,12 +135,15 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The text to be displayed on the <see
-           cref="T:System.Windows.Forms.ToolStripSplitButton" />
+          The text to be displayed on the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
           
 
@@ -171,8 +170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
@@ -180,29 +178,34 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The text to be displayed on the <see
-           cref="T:System.Windows.Forms.ToolStripSplitButton" />
+          The text to be displayed on the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
           
 
           .</param
         >
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
-           to be displayed on the <see
-           cref="T:System.Windows.Forms.ToolStripSplitButton" />
+           to be displayed on the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
           
 
@@ -230,13 +233,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
-             class with the specified display text, image, and <see
-             cref="E:System.Windows.Forms.Control.Click" />
+             class with the specified display text, image, and <see cref="E:System.Windows.Forms.Control.Click" />
 
             
 
@@ -244,46 +245,53 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The text to be displayed on the <see
-           cref="T:System.Windows.Forms.ToolStripSplitButton" />
+          The text to be displayed on the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
           
 
           .</param
         >
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
-           to be displayed on the <see
-           cref="T:System.Windows.Forms.ToolStripSplitButton" />
+           to be displayed on the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
           
 
           .</param
         >
         <param name="onClick">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Raises the <see
-           cref="E:System.Windows.Forms.Control.Click" />
+          Raises the <see cref="E:System.Windows.Forms.Control.Click" />
 
           
 
-           event when the user clicks the <see
-           cref="T:System.Windows.Forms.ToolStripSplitButton" />
+           event when the user clicks the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
           
 
@@ -317,13 +325,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
-             class with the specified text, image, and <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             class with the specified text, image, and <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -331,41 +337,49 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The text to be displayed on the <see
-           cref="T:System.Windows.Forms.ToolStripSplitButton" />
+          The text to be displayed on the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
           
 
           .</param
         >
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
-           to be displayed on the <see
-           cref="T:System.Windows.Forms.ToolStripSplitButton" />
+           to be displayed on the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
           
 
           .</param
         >
         <param name="dropDownItems">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+          A <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
@@ -394,13 +408,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
-             class with the specified display text, image, <see
-             cref="E:System.Windows.Forms.Control.Click" />
+             class with the specified display text, image, <see cref="E:System.Windows.Forms.Control.Click" />
 
             
 
@@ -408,58 +420,68 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The text to be displayed on the <see
-           cref="T:System.Windows.Forms.ToolStripSplitButton" />
+          The text to be displayed on the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
           
 
           .</param
         >
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
-           to be displayed on the <see
-           cref="T:System.Windows.Forms.ToolStripSplitButton" />
+           to be displayed on the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
           
 
           .</param
         >
         <param name="onClick">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Raises the <see
-           cref="E:System.Windows.Forms.Control.Click" />
+          Raises the <see cref="E:System.Windows.Forms.Control.Click" />
 
           
 
-           event when the user clicks the <see
-           cref="T:System.Windows.Forms.ToolStripSplitButton" />
+           event when the user clicks the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
           
 
           .</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Windows.Forms.ToolStripSplitButton" />
+          The name of the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
           
 
@@ -482,13 +504,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.Windows.Forms.ToolStripSplitButton.AutoToolTip" />
+            >Set the <see cref="P:System.Windows.Forms.ToolStripSplitButton.AutoToolTip" />
 
             
 
-             property to false to display custom text on a <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+             property to false to display custom text on a <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
@@ -498,13 +518,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether default or custom <see
-             cref="T:System.Windows.Forms.ToolTip" />
+            >Gets or sets a value indicating whether default or custom <see cref="T:System.Windows.Forms.ToolTip" />
 
             
 
-             text is displayed on the <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+             text is displayed on the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
@@ -537,8 +555,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the size and location of the standard button portion of a <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >Gets the size and location of the standard button portion of a <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
@@ -566,8 +583,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -579,8 +595,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the standard button portion of a <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >Occurs when the standard button portion of a <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
@@ -603,8 +618,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -616,8 +630,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the standard button portion of a <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >Occurs when the standard button portion of a <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
@@ -642,8 +655,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the button portion of the <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >Gets a value indicating whether the button portion of the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
@@ -673,13 +685,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the standard button portion of a <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >Gets a value indicating whether the standard button portion of a <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
-             is selected or the <see
-             cref="P:System.Windows.Forms.ToolStripSplitButton.DropDownButtonPressed" />
+             is selected or the <see cref="P:System.Windows.Forms.ToolStripSplitButton.DropDownButtonPressed" />
 
             
 
@@ -714,8 +724,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new accessibility object for the <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >Creates a new accessibility object for the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
@@ -725,8 +734,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new accessibility object for the <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >A new accessibility object for the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
@@ -768,8 +776,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether to display the <see
-             cref="T:System.Windows.Forms.ToolTip" />
+            >Gets a value indicating whether to display the <see cref="T:System.Windows.Forms.ToolTip" />
 
             
 
@@ -806,26 +813,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >If a <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
-             has a <see
-             cref="P:System.Windows.Forms.ToolStripSplitButton.DefaultItem" />
+             has a <see cref="P:System.Windows.Forms.ToolStripSplitButton.DefaultItem" />
 
             
 
             , the ENTER key activates the button. Otherwise, the ENTER key activates the drop-down.</para
           >
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStripSplitButton.DefaultItem" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStripSplitButton.DefaultItem" />
 
             
 
-             property to synchronize the <see
-             cref="E:System.Windows.Forms.Control.Click" />
+             property to synchronize the <see cref="E:System.Windows.Forms.Control.Click" />
 
             
 
@@ -835,8 +838,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the portion of the <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >Gets or sets the portion of the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
@@ -856,8 +858,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -869,8 +870,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.ToolStripSplitButton.DefaultItem" />
+            >Occurs when the <see cref="P:System.Windows.Forms.ToolStripSplitButton.DefaultItem" />
 
             
 
@@ -897,8 +897,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether items on a <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >Gets a value indicating whether items on a <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
@@ -923,8 +922,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the size and location, in screen coordinates, of the drop-down button portion of a <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >Gets the size and location, in screen coordinates, of the drop-down button portion of a <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
@@ -954,8 +952,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the drop-down portion of the <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >Gets a value indicating whether the drop-down portion of the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
@@ -985,8 +982,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the drop-down button portion of a <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >Gets a value indicating whether the drop-down button portion of a <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
@@ -1016,8 +1012,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The width, in pixels, of the drop-down button portion of a <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >The width, in pixels, of the drop-down button portion of a <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
@@ -1047,8 +1042,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the size of a rectangular area into which a <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >Retrieves the size of a rectangular area into which a <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
@@ -1058,8 +1052,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An ordered pair of type <see
-             cref="T:System.Drawing.Size" />
+            >An ordered pair of type <see cref="T:System.Drawing.Size" />
 
             
 
@@ -1067,7 +1060,11 @@
           >
         </returns>
         <param name="constrainingSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1092,8 +1089,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1102,8 +1098,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripSplitButton.OnButtonClick(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripSplitButton.OnButtonClick(System.EventArgs)" />
 
             
 
@@ -1113,8 +1108,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripSplitButton.ButtonClick" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripSplitButton.ButtonClick" />
 
             
 
@@ -1122,12 +1116,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1155,8 +1152,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1165,8 +1161,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripSplitButton.OnButtonDoubleClick(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripSplitButton.OnButtonDoubleClick(System.EventArgs)" />
 
             
 
@@ -1176,8 +1171,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripSplitButton.ButtonDoubleClick" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripSplitButton.ButtonDoubleClick" />
 
             
 
@@ -1185,12 +1179,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1218,8 +1215,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1228,8 +1224,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripSplitButton.OnDefaultItemChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripSplitButton.OnDefaultItemChanged(System.EventArgs)" />
 
             
 
@@ -1239,8 +1234,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripSplitButton.DefaultItemChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripSplitButton.DefaultItemChanged" />
 
             
 
@@ -1248,12 +1242,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1281,8 +1278,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1291,8 +1287,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripSplitButton.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripSplitButton.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -1302,8 +1297,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.MouseDown" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.MouseDown" />
 
             
 
@@ -1311,12 +1305,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -1341,8 +1338,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1351,8 +1347,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripSplitButton.OnMouseLeave(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripSplitButton.OnMouseLeave(System.EventArgs)" />
 
             
 
@@ -1362,8 +1357,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.MouseLeave" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.MouseLeave" />
 
             
 
@@ -1371,12 +1365,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1404,8 +1401,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1414,8 +1410,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripSplitButton.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripSplitButton.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -1425,8 +1420,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.MouseUp" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.MouseUp" />
 
             
 
@@ -1434,12 +1428,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -1491,8 +1488,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1501,8 +1497,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripSplitButton.OnRightToLeftChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripSplitButton.OnRightToLeftChanged(System.EventArgs)" />
 
             
 
@@ -1512,8 +1507,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.RightToLeftChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.RightToLeftChanged" />
 
             
 
@@ -1521,12 +1515,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1547,13 +1544,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Windows.Forms.ToolStripItem.Enabled" />
+            >If the <see cref="P:System.Windows.Forms.ToolStripItem.Enabled" />
 
             
 
-             property is true, calls the <see
-             cref="M:System.Windows.Forms.ToolStripSplitButton.OnButtonClick(System.EventArgs)" />
+             property is true, calls the <see cref="M:System.Windows.Forms.ToolStripSplitButton.OnButtonClick(System.EventArgs)" />
 
             
 
@@ -1584,21 +1579,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called during message preprocessing to handle the ENTER and SPACEBAR keys in order to raise the <see
-             cref="E:System.Windows.Forms.ToolStripItem.Click" />
+            >This method is called during message preprocessing to handle the ENTER and SPACEBAR keys in order to raise the <see cref="E:System.Windows.Forms.ToolStripItem.Click" />
 
             
 
-             event. However, if the <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+             event. However, if the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
              is not enabled, this method calls the base class implementation instead. </para
           >
           <para
-            >This method is called only if the <see
-             cref="M:System.Windows.Forms.Control.IsInputKey(System.Windows.Forms.Keys)" />
+            >This method is called only if the <see cref="M:System.Windows.Forms.Control.IsInputKey(System.Windows.Forms.Keys)" />
 
             
 
@@ -1614,12 +1606,15 @@
           <para>true if the key was processed by the item; otherwise, false.</para>
         </returns>
         <param name="keyData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.Keys" />
+          One of the <see cref="T:System.Windows.Forms.Keys" />
 
           
 
@@ -1653,7 +1648,11 @@
           <para>true in all cases.</para>
         </returns>
         <param name="charCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1703,8 +1702,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStripSplitButton.SplitterBounds" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStripSplitButton.SplitterBounds" />
 
             
 
@@ -1714,8 +1712,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the boundaries of the separator between the standard and drop-down button portions of a <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >Gets the boundaries of the separator between the standard and drop-down button portions of a <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 

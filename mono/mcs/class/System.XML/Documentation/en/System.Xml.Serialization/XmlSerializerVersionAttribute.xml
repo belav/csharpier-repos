@@ -30,26 +30,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The .NET Framework XML serialization infrastructure dynamically generates derivations of <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >The .NET Framework XML serialization infrastructure dynamically generates derivations of <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
          that are optimized to serialize user-defined types. The serializers are stored in assemblies that can be reused for efficient serialization. </para
       >
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.XmlSerializerVersionAttribute" />
+        >The <see cref="T:System.Xml.Serialization.XmlSerializerVersionAttribute" />
 
         
 
-         attribute stores version information about the parent assembly for which a set of serializers is generated. Later, when the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         attribute stores version information about the parent assembly for which a set of serializers is generated. Later, when the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         constructor is called, the infrastructure attempts to locate the pre-generated assembly. If the infrastructure finds an assembly with a matching name, the assembly is loaded and the infrastructure checks <see
-         cref="T:System.Xml.Serialization.XmlSerializerVersionAttribute" />
+         constructor is called, the infrastructure attempts to locate the pre-generated assembly. If the infrastructure finds an assembly with a matching name, the assembly is loaded and the infrastructure checks <see cref="T:System.Xml.Serialization.XmlSerializerVersionAttribute" />
 
         
 
@@ -80,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlSerializerVersionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializerVersionAttribute" />
 
             
 
@@ -110,8 +105,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlSerializerVersionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializerVersionAttribute" />
 
             
 
@@ -119,7 +113,11 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

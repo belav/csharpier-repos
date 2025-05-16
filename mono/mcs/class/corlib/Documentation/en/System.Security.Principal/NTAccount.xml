@@ -50,8 +50,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The specified name is not required to correspond to an existing account or group, but translation into other <see
-             cref="T:System.Security.Principal.IdentityReference" />
+            >The specified name is not required to correspond to an existing account or group, but translation into other <see cref="T:System.Security.Principal.IdentityReference" />
 
             
 
@@ -61,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Principal.NTAccount" />
+            >Initializes a new instance of the <see cref="T:System.Security.Principal.NTAccount" />
 
             
 
@@ -70,12 +68,15 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name used to create the <see
-           cref="T:System.Security.Principal.NTAccount" />
+          The name used to create the <see cref="T:System.Security.Principal.NTAccount" />
 
           
 
@@ -106,8 +107,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The specified domain and account names are not required to correspond to an existing account or group, but translation into other <see
-             cref="T:System.Security.Principal.IdentityReference" />
+            >The specified domain and account names are not required to correspond to an existing account or group, but translation into other <see cref="T:System.Security.Principal.IdentityReference" />
 
             
 
@@ -117,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Principal.NTAccount" />
+            >Initializes a new instance of the <see cref="T:System.Security.Principal.NTAccount" />
 
             
 
@@ -126,14 +125,22 @@
           >
         </summary>
         <param name="domainName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the domain. This parameter can be null or an empty string. Domain names that are null values are treated like an empty string.</param
         >
         <param name="accountName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -164,8 +171,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether this <see
-             cref="T:System.Security.Principal.NTAccount" />
+            >Returns a value that indicates whether this <see cref="T:System.Security.Principal.NTAccount" />
 
             
 
@@ -175,13 +181,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="o" />
+            >true if <paramref name="o" />
 
             
 
-             is an object with the same underlying type and value as this <see
-             cref="T:System.Security.Principal.NTAccount" />
+             is an object with the same underlying type and value as this <see cref="T:System.Security.Principal.NTAccount" />
 
             
 
@@ -189,12 +193,15 @@
           >
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object to compare with this <see
-           cref="T:System.Security.Principal.NTAccount" />
+          An object to compare with this <see cref="T:System.Security.Principal.NTAccount" />
 
           
 
@@ -223,13 +230,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serves as a hash function for the current <see
-             cref="T:System.Security.Principal.NTAccount" />
+            >Serves as a hash function for the current <see cref="T:System.Security.Principal.NTAccount" />
 
             
 
-             object. The <see
-             cref="M:System.Security.Principal.NTAccount.GetHashCode" />
+             object. The <see cref="M:System.Security.Principal.NTAccount.GetHashCode" />
 
             
 
@@ -239,8 +244,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash value for the current <see
-             cref="T:System.Security.Principal.NTAccount" />
+            >A hash value for the current <see cref="T:System.Security.Principal.NTAccount" />
 
             
 
@@ -275,8 +279,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the specified type is a valid translation type for the <see
-             cref="T:System.Security.Principal.NTAccount" />
+            >Returns a value that indicates whether the specified type is a valid translation type for the <see cref="T:System.Security.Principal.NTAccount" />
 
             
 
@@ -286,13 +289,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="targetType" />
+            >true if <paramref name="targetType" />
 
             
 
-             is a valid translation type for the <see
-             cref="T:System.Security.Principal.NTAccount" />
+             is a valid translation type for the <see cref="T:System.Security.Principal.NTAccount" />
 
             
 
@@ -300,12 +301,15 @@
           >
         </returns>
         <param name="targetType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type being queried for validity to serve as a conversion from <see
-           cref="T:System.Security.Principal.NTAccount" />
+          The type being queried for validity to serve as a conversion from <see cref="T:System.Security.Principal.NTAccount" />
 
           
 
@@ -340,13 +344,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two <see
-             cref="T:System.Security.Principal.NTAccount" />
+            >Compares two <see cref="T:System.Security.Principal.NTAccount" />
 
             
 
-             objects to determine whether they are equal. They are considered equal if they have the same canonical name representation as the one returned by the <see
-             cref="P:System.Security.Principal.NTAccount.Value" />
+             objects to determine whether they are equal. They are considered equal if they have the same canonical name representation as the one returned by the <see cref="P:System.Security.Principal.NTAccount.Value" />
 
             
 
@@ -356,13 +358,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="left" />
+            >true if <paramref name="left" />
 
             
 
-             and <paramref
-             name="right" />
+             and <paramref name="right" />
 
             
 
@@ -370,14 +370,22 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The left operand to use for the equality comparison. This parameter can be null.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -412,13 +420,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two <see
-             cref="T:System.Security.Principal.NTAccount" />
+            >Compares two <see cref="T:System.Security.Principal.NTAccount" />
 
             
 
-             objects to determine whether they are not equal. They are considered not equal if they have different canonical name representations than the one returned by the <see
-             cref="P:System.Security.Principal.NTAccount.Value" />
+             objects to determine whether they are not equal. They are considered not equal if they have different canonical name representations than the one returned by the <see cref="P:System.Security.Principal.NTAccount.Value" />
 
             
 
@@ -428,13 +434,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="left" />
+            >true if <paramref name="left" />
 
             
 
-             and <paramref
-             name="right" />
+             and <paramref name="right" />
 
             
 
@@ -442,14 +446,22 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The left operand to use for the inequality comparison. This parameter can be null.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -478,13 +490,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the account name, in Domain<system
-            >\</system>
+            >Returns the account name, in Domain<system>\</system>
 
             
 
-            Account format, for the account represented by the <see
-             cref="T:System.Security.Principal.NTAccount" />
+            Account format, for the account represented by the <see cref="T:System.Security.Principal.NTAccount" />
 
             
 
@@ -494,8 +504,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The account name, in Domain<system
-            >\</system>
+            >The account name, in Domain<system>\</system>
 
             
 
@@ -530,13 +539,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Translates the account name represented by the <see
-             cref="T:System.Security.Principal.NTAccount" />
+            >Translates the account name represented by the <see cref="T:System.Security.Principal.NTAccount" />
 
             
 
-             object into another <see
-             cref="T:System.Security.Principal.IdentityReference" />
+             object into another <see cref="T:System.Security.Principal.IdentityReference" />
 
             
 
@@ -548,17 +555,19 @@
           <para>The converted identity.</para>
         </returns>
         <param name="targetType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The target type for the conversion from <see
-           cref="T:System.Security.Principal.NTAccount" />
+          The target type for the conversion from <see cref="T:System.Security.Principal.NTAccount" />
 
           
 
-          . The target type must be a type that is considered valid by the <see
-           cref="M:System.Security.Principal.NTAccount.IsValidTargetType(System.Type)" />
+          . The target type must be a type that is considered valid by the <see cref="M:System.Security.Principal.NTAccount.IsValidTargetType(System.Type)" />
 
           
 
@@ -584,8 +593,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an uppercase string representation of this <see
-             cref="T:System.Security.Principal.NTAccount" />
+            >Returns an uppercase string representation of this <see cref="T:System.Security.Principal.NTAccount" />
 
             
 

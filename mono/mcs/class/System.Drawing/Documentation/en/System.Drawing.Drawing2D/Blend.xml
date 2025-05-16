@@ -17,41 +17,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Gradients are commonly used to smoothly shade the interiors of shapes. A blend pattern is defined by two arrays (<see
-         cref="P:System.Drawing.Drawing2D.Blend.Factors" />
+        >Gradients are commonly used to smoothly shade the interiors of shapes. A blend pattern is defined by two arrays (<see cref="P:System.Drawing.Drawing2D.Blend.Factors" />
 
         
 
-         and <see
-         cref="P:System.Drawing.Drawing2D.Blend.Positions" />
+         and <see cref="P:System.Drawing.Drawing2D.Blend.Positions" />
 
         
 
-        ) that each contain the same number of elements. Each element of the <see
-         cref="P:System.Drawing.Drawing2D.Blend.Positions" />
+        ) that each contain the same number of elements. Each element of the <see cref="P:System.Drawing.Drawing2D.Blend.Positions" />
 
         
 
-         array represents a proportion of the distance along the gradient line. Each element of the <see
-         cref="P:System.Drawing.Drawing2D.Blend.Factors" />
+         array represents a proportion of the distance along the gradient line. Each element of the <see cref="P:System.Drawing.Drawing2D.Blend.Factors" />
 
         
 
-         array represents the proportion of the starting and ending colors in the gradient blend at the position along the gradient line represented by the corresponding element in the <see
-         cref="P:System.Drawing.Drawing2D.Blend.Positions" />
+         array represents the proportion of the starting and ending colors in the gradient blend at the position along the gradient line represented by the corresponding element in the <see cref="P:System.Drawing.Drawing2D.Blend.Positions" />
 
         
 
          array.</para
       >
       <para
-        >For example, if corresponding elements of the <see
-         cref="P:System.Drawing.Drawing2D.Blend.Positions" />
+        >For example, if corresponding elements of the <see cref="P:System.Drawing.Drawing2D.Blend.Positions" />
 
         
 
-         and <see
-         cref="P:System.Drawing.Drawing2D.Blend.Factors" />
+         and <see cref="P:System.Drawing.Drawing2D.Blend.Factors" />
 
         
 
@@ -61,8 +54,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines a blend pattern for a <see
-         cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+        >Defines a blend pattern for a <see cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
 
         
 
@@ -81,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.Blend" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.Blend" />
 
             
 
@@ -107,8 +98,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.Blend" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.Blend" />
 
             
 
@@ -116,17 +106,19 @@
           >
         </summary>
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of elements in the <see
-           cref="P:System.Drawing.Drawing2D.Blend.Factors" />
+          The number of elements in the <see cref="P:System.Drawing.Drawing2D.Blend.Factors" />
 
           
 
-           and <see
-           cref="P:System.Drawing.Drawing2D.Blend.Positions" />
+           and <see cref="P:System.Drawing.Drawing2D.Blend.Positions" />
 
           
 

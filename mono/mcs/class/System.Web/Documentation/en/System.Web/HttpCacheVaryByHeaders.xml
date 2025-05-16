@@ -20,21 +20,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="P:System.Web.HttpCachePolicy.VaryByHeaders" />
+        >The <see cref="P:System.Web.HttpCachePolicy.VaryByHeaders" />
 
         
 
          property identifies which request header parameters ASP.NET uses to uniquely identify a variation of the response when there are multiple cached responses for a resource. This is useful when a response depends on a set of client inputs, such as headers or parameters.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.HttpCacheVaryByHeaders" />
+        >The <see cref="T:System.Web.HttpCacheVaryByHeaders" />
 
         
 
          is not directly related to HTTP cache-control headers, but helps ensure that a client or proxy varies by the specified headers. For more information about VaryByHeaders, see RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1, available on the <see
-         cref="http://go.microsoft.com/fwlink/?linkid=37125"
+          cref="http://go.microsoft.com/fwlink/?linkid=37125"
           >World Wide Web Consortium (W3C) Web site</see
         >
 
@@ -46,8 +44,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a type-safe way to set the <see
-         cref="P:System.Web.HttpCachePolicy.VaryByHeaders" />
+        >Provides a type-safe way to set the <see cref="P:System.Web.HttpCachePolicy.VaryByHeaders" />
 
         
 
@@ -70,7 +67,7 @@
           <para>The Vary header indicates the request-header fields that the server varies the response by the Accept field and specifies that the server selects the response based on the media types acceptable to the client.</para>
           <para
             >For more information on HTTP headers, see RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1, available on the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37125"
+              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web site</see
             >
 
@@ -123,7 +120,7 @@
           <para>The Vary header indicates the request-header fields that the server uses to determine which of multiple cached responses is sent in response to a client request. The User-Agent field specifies that the server selects the response based on the client's user-agent type.</para>
           <para
             >For more information, see RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1, available on the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37125"
+              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web site</see
             >
 
@@ -156,7 +153,7 @@
           <para>The Vary header indicates the request-header fields that the server uses to determine which of multiple cached responses is sent in response to a client request. The Accept-CharSet field specifies that the server selects the response based on the client's character set.</para>
           <para
             >For more information, see RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1, available on the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37125"
+              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web site</see
             >
 
@@ -189,7 +186,7 @@
           <para>The Vary header indicates the request-header fields that the server uses to determine which of multiple cached responses is sent in response to a client request. The Accept-Language field specifies that the server selects the response based on languages acceptable to the client.</para>
           <para
             >For more information, see RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1, available on the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37125"
+              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web site</see
             >
 
@@ -221,7 +218,7 @@
           <para>The Vary header indicates the request-header fields that the server uses to determine which of multiple cached responses is sent in response to a client request. The * value specifies that the server selects the response based on parameters not specified in request headers (for example, the network address of the client).</para>
           <para
             >For more information, see RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1, available on the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37125"
+              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web site</see
             >
 

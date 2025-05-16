@@ -1,63 +1,71 @@
 <?xml version="1.0"?>
 <clause number="13.1.4" title="Implicit reference conversions">
   <paragraph
-    >The implicit reference conversions are: <list
-    >
+    >The implicit reference conversions are: <list>
       <list_item
-        > From any <non_terminal
-         where="11.2">reference-type</non_terminal>
+        > From any <non_terminal where="11.2"
+          >reference-type</non_terminal
+        >
 
         
 
          to object. </list_item
       >
       <list_item
-        > From any <non_terminal
-         where="11.2">class-type</non_terminal>
+        > From any <non_terminal where="11.2"
+          >class-type</non_terminal
+        >
 
         
 
-         S to any <non_terminal
-         where="11.2">class-type</non_terminal>
+         S to any <non_terminal where="11.2"
+          >class-type</non_terminal
+        >
 
         
 
          T, provided S is derived from T. </list_item
       >
       <list_item
-        > From any <non_terminal
-         where="11.2">class-type</non_terminal>
+        > From any <non_terminal where="11.2"
+          >class-type</non_terminal
+        >
 
         
 
-         S to any <non_terminal
-         where="11.2">interface-type</non_terminal>
+         S to any <non_terminal where="11.2"
+          >interface-type</non_terminal
+        >
 
         
 
          T, provided S implements T. </list_item
       >
       <list_item
-        > From any <non_terminal
-         where="11.2">interface-type</non_terminal>
+        > From any <non_terminal where="11.2"
+          >interface-type</non_terminal
+        >
 
         
 
-         S to any <non_terminal
-         where="11.2">interface-type</non_terminal>
+         S to any <non_terminal where="11.2"
+          >interface-type</non_terminal
+        >
 
         
 
          T, provided S is derived from T. </list_item
       >
       <list_item
-        > From an <non_terminal
-         where="19.1">array-type</non_terminal>
+        > From an <non_terminal where="19.1"
+          >array-type</non_terminal
+        >
 
         
 
-         S with an element type SE to an <non_terminal
-         where="19.1">array-type</non_terminal>
+         S with an element type SE to an <non_terminal where="19.1"
+          >array-type</non_terminal
+        >
 
         
 
@@ -66,8 +74,9 @@
       <list>
         <list_item> S and T differ only in element type. In other words, S and T have the same number of dimensions. </list_item>
         <list_item
-          > Both SE and TE are <non_terminal
-           where="11.2">reference-type</non_terminal>
+          > Both SE and TE are <non_terminal where="11.2"
+            >reference-type</non_terminal
+          >
 
           
 
@@ -76,37 +85,42 @@
         <list_item> An implicit reference conversion exists from SE to TE. </list_item>
       </list>
       <list_item
-        > From any <non_terminal
-         where="19.1">array-type</non_terminal>
+        > From any <non_terminal where="19.1"
+          >array-type</non_terminal
+        >
 
         
 
          to System.Array. </list_item
       >
       <list_item
-        > From any <non_terminal
-         where="11.2">delegate-type</non_terminal>
+        > From any <non_terminal where="11.2"
+          >delegate-type</non_terminal
+        >
 
         
 
          to System.Delegate. </list_item
       >
       <list_item
-        > From any <non_terminal
-         where="19.1">array-type</non_terminal>
+        > From any <non_terminal where="19.1"
+          >array-type</non_terminal
+        >
 
         
 
-         or <non_terminal
-         where="11.2">delegate-type</non_terminal>
+         or <non_terminal where="11.2"
+          >delegate-type</non_terminal
+        >
 
         
 
          to System.ICloneable. </list_item
       >
       <list_item
-        > From the null type to any <non_terminal
-         where="11.2">reference-type</non_terminal>
+        > From the null type to any <non_terminal where="11.2"
+          >reference-type</non_terminal
+        >
 
         
 
@@ -115,15 +129,15 @@
     </list>
   </paragraph>
   <paragraph
-    >The implicit reference conversions are those conversions between <non_terminal
-     where="11.2">reference-type</non_terminal>
+    >The implicit reference conversions are those conversions between <non_terminal where="11.2"
+      >reference-type</non_terminal
+    >
 
     
 
     s that can be proven to always succeed, and therefore require no checks at run-time. </paragraph
   >
   <paragraph
-    >Reference conversions, implicit or explicit, never change the referential identity of the object being converted. <note
-    >[Note: In other words, while a reference conversion may change the type of the reference, it never changes the type or value of the object being referred to. end note]</note>
+    >Reference conversions, implicit or explicit, never change the referential identity of the object being converted. <note>[Note: In other words, while a reference conversion may change the type of the reference, it never changes the type or value of the object being referred to. end note]</note>
   </paragraph>
 </clause>

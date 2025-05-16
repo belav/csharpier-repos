@@ -29,18 +29,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implements <see
-         cref="T:System.Data.IDataRecord" />
+        >Implements <see cref="T:System.Data.IDataRecord" />
 
         
 
-         and <see
-         cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+         and <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
         
 
-        , and provides data binding support for <see
-         cref="T:System.Data.Common.DbEnumerator" />
+        , and provides data binding support for <see cref="T:System.Data.Common.DbEnumerator" />
 
         
 
@@ -91,7 +88,11 @@
           <para>true if the Boolean is true; otherwise false.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -126,7 +127,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -168,40 +173,59 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based column ordinal.</param
         >
         <param name="dataIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index within the field from which to start the read operation.</param
         >
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to read the stream of bytes.</param
         >
         <param name="bufferIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index for <paramref
-           name="buffer" />
+          The index for <paramref name="buffer" />
 
           
 
            to start the read operation.</param
         >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -236,7 +260,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -278,35 +306,55 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Column ordinal. </param
         >
         <param name="dataIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Buffer to copy data into. </param
         >
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Maximum length to copy into the buffer. </param
         >
         <param name="bufferIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Point to start from within the buffer. </param
         >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -338,7 +386,11 @@
           <para>Not currently supported.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -370,7 +422,11 @@
           <para>The name of the back-end data type.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -395,8 +451,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >No conversions are performed; therefore the data retrieved must already be a <see
-             cref="T:System.DateTime" />
+            >No conversions are performed; therefore the data retrieved must already be a <see cref="T:System.DateTime" />
 
             
 
@@ -406,8 +461,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the value of the specified column as a <see
-             cref="T:System.DateTime" />
+            >Returns the value of the specified column as a <see cref="T:System.DateTime" />
 
             
 
@@ -419,7 +473,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -444,8 +502,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >No conversions are performed; therefore the data retrieved must already be a <see
-             cref="T:System.Decimal" />
+            >No conversions are performed; therefore the data retrieved must already be a <see cref="T:System.Decimal" />
 
             
 
@@ -455,8 +512,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the value of the specified column as a <see
-             cref="T:System.Decimal" />
+            >Returns the value of the specified column as a <see cref="T:System.Decimal" />
 
             
 
@@ -468,7 +524,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -503,7 +563,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -529,8 +593,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Type" />
+            >Returns the <see cref="T:System.Type" />
 
             
 
@@ -540,8 +603,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
@@ -549,7 +611,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -584,7 +650,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -616,7 +686,11 @@
           <para>The GUID value of the specified field.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -651,7 +725,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -686,7 +764,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -721,7 +803,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -753,7 +839,11 @@
           <para>The name of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -785,7 +875,11 @@
           <para>The column ordinal.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -820,7 +914,11 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -852,7 +950,11 @@
           <para>The value to return.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -885,8 +987,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of instances of <see
-             cref="T:System.Object" />
+            >The number of instances of <see cref="T:System.Object" />
 
             
 
@@ -894,12 +995,15 @@
           >
         </returns>
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Object" />
+          An array of <see cref="T:System.Object" />
 
           
 
@@ -924,13 +1028,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method to check for null column values before calling the typed get methods (for example, <see
-             cref="M:System.Data.SqlClient.SqlDataReader.GetByte(System.Int32)" />
+            >Call this method to check for null column values before calling the typed get methods (for example, <see cref="M:System.Data.SqlClient.SqlDataReader.GetByte(System.Int32)" />
 
             
 
-            , <see
-             cref="M:System.Data.SqlClient.SqlDataReader.GetChar(System.Int32)" />
+            , <see cref="M:System.Data.SqlClient.SqlDataReader.GetChar(System.Int32)" />
 
             
 
@@ -944,8 +1046,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified column is equivalent to <see
-             cref="T:System.DBNull" />
+            >true if the specified column is equivalent to <see cref="T:System.DBNull" />
 
             
 
@@ -953,7 +1054,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1023,8 +1128,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetAttributes" />
+            >For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetAttributes" />
 
             
 
@@ -1038,8 +1142,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ComponentModel.AttributeCollection" />
+            >An <see cref="T:System.ComponentModel.AttributeCollection" />
 
             
 
@@ -1063,8 +1166,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetClassName" />
+            >For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetClassName" />
 
             
 
@@ -1096,8 +1198,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetComponentName" />
+            >For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetComponentName" />
 
             
 
@@ -1132,8 +1233,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetConverter" />
+            >For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetConverter" />
 
             
 
@@ -1147,13 +1247,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.TypeConverter" />
+            >A <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
-             that is the converter for this object, or null if there is no <see
-             cref="T:System.ComponentModel.TypeConverter" />
+             that is the converter for this object, or null if there is no <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
@@ -1180,8 +1278,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetDefaultEvent" />
+            >For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetDefaultEvent" />
 
             
 
@@ -1195,8 +1292,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ComponentModel.EventDescriptor" />
+            >An <see cref="T:System.ComponentModel.EventDescriptor" />
 
             
 
@@ -1223,8 +1319,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetDefaultProperty" />
+            >For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetDefaultProperty" />
 
             
 
@@ -1238,8 +1333,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -1268,8 +1362,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="M:System.ComponentModel.CustomTypeDescriptor.GetEditor(System.Type)" />
+            >For more information, see <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetEditor(System.Type)" />
 
             
 
@@ -1283,8 +1376,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -1292,12 +1384,15 @@
           >
         </returns>
         <param name="editorBaseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -1323,8 +1418,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetEvents" />
+            >For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetEvents" />
 
             
 
@@ -1338,8 +1432,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ComponentModel.EventDescriptorCollection" />
+            >An <see cref="T:System.ComponentModel.EventDescriptorCollection" />
 
             
 
@@ -1368,8 +1461,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetEvents.(System.Attribute[])" />
+            >For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetEvents.(System.Attribute[])" />
 
             
 
@@ -1383,8 +1475,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ComponentModel.EventDescriptorCollection" />
+            >An <see cref="T:System.ComponentModel.EventDescriptorCollection" />
 
             
 
@@ -1392,12 +1483,15 @@
           >
         </returns>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Attribute" />
+          An array of type <see cref="T:System.Attribute" />
 
           
 
@@ -1423,8 +1517,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetProperties" />
+            >For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetProperties" />
 
             
 
@@ -1438,8 +1531,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
@@ -1468,8 +1560,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetProperties.(System.Attribute[])" />
+            >For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetProperties.(System.Attribute[])" />
 
             
 
@@ -1483,8 +1574,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
@@ -1492,12 +1582,15 @@
           >
         </returns>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Attribute" />
+          An array of type <see cref="T:System.Attribute" />
 
           
 
@@ -1525,8 +1618,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="M:System.ComponentModel.ICustomTypeDescriptor.PropertyDescriptor" />
+            >For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.PropertyDescriptor" />
 
             
 
@@ -1540,8 +1632,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -1549,12 +1640,15 @@
           >
         </returns>
         <param name="pd">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          A <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 

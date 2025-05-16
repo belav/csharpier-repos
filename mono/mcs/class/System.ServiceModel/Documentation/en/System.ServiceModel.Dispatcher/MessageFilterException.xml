@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.MessageFilterException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.MessageFilterException" />
 
             
 
@@ -72,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.MessageFilterException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.MessageFilterException" />
 
             
 
@@ -104,18 +102,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.MessageFilterException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.MessageFilterException" />
 
             
 
-             class with a specified <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             class with a specified <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             and <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             and <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -123,24 +118,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that contains all the data required to deserialize the exception.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -174,8 +175,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.MessageFilterException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.MessageFilterException" />
 
             
 
@@ -183,12 +183,15 @@
           >
         </summary>
         <param name="filters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The collection of <see
-           cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+          The collection of <see cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
 
           
 
@@ -220,8 +223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.MessageFilterException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.MessageFilterException" />
 
             
 
@@ -258,8 +260,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.MessageFilterException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.MessageFilterException" />
 
             
 
@@ -267,12 +268,15 @@
           >
         </summary>
         <param name="filters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The collection of <see
-           cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+          The collection of <see cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
 
           
 
@@ -302,8 +306,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of <see
-             cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+            >Gets the collection of <see cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
 
             
 

@@ -23,8 +23,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the file compression and decompression encoding format to be used to compress the data received in response to an <see
-         cref="T:System.Net.HttpWebRequest" />
+        >Represents the file compression and decompression encoding format to be used to compress the data received in response to an <see cref="T:System.Net.HttpWebRequest" />
 
         
 

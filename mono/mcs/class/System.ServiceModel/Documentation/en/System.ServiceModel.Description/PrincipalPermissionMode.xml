@@ -19,26 +19,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When applying the <see
-         cref="T:System.Security.Permissions.PrincipalPermissionAttribute" />
+        >When applying the <see cref="T:System.Security.Permissions.PrincipalPermissionAttribute" />
 
         
 
          to a method, this mode specifies which set of roles to use when authorizing access. By default, the attribute uses Windows groups (such as Administrator or Users) to specify the role to which the user must belong.</para
       >
       <para
-        >To set the mode programmatically, create an instance of the ServiceHost class, then find the <see
-         cref="T:System.ServiceModel.Description.ServiceAuthorizationBehavior" />
+        >To set the mode programmatically, create an instance of the ServiceHost class, then find the <see cref="T:System.ServiceModel.Description.ServiceAuthorizationBehavior" />
 
         
 
-         in its collection of behaviors, and set the <see
-         cref="P:System.ServiceModel.Description.ServiceAuthorizationBehavior.PrincipalPermissionMode" />
+         in its collection of behaviors, and set the <see cref="P:System.ServiceModel.Description.ServiceAuthorizationBehavior.PrincipalPermissionMode" />
 
         
 
-         to the appropriate enumeration. The following example sets the property to <see
-         cref="F:System.ServiceModel.Description.PrincipalPermissionMode.UseAspNetRoles" />
+         to the appropriate enumeration. The following example sets the property to <see cref="F:System.ServiceModel.Description.PrincipalPermissionMode.UseAspNetRoles" />
 
         
 
@@ -46,15 +42,13 @@
       >
       <para>code reference: PrincipalPermissionMode#1</para>
       <para
-        >You can also set the behavior in configuration by adding a <format
-         type="text/html">
+        >You can also set the behavior in configuration by adding a <format type="text/html">
           <a href="18cddad5-ddcb-4839-a0ac-1d6f6ab783ca">&lt;serviceAuthorization&gt; element</a>
         </format>
 
         
 
-         to the <format
-         type="text/html">
+         to the <format type="text/html">
           <a href="5aed9062-cc36-4b72-b9dd-a3018b8ffafc">serviceBehaviors section</a>
         </format>
 
@@ -64,13 +58,11 @@
       >
       <para>code reference: PrincipalPermissionMode#10</para>
       <para
-        >The enumeration affects how the <see
-         cref="T:System.Security.Permissions.PrincipalPermissionAttribute" />
+        >The enumeration affects how the <see cref="T:System.Security.Permissions.PrincipalPermissionAttribute" />
 
         
 
-         attribute authorizes a user when it is applied to a method. The following example applies the attribute to a method and demands that the user belong to the Users group on the computer. This code works only when the <see
-         cref="P:System.ServiceModel.Description.ServiceAuthorizationBehavior.PrincipalPermissionMode" />
+         attribute authorizes a user when it is applied to a method. The following example applies the attribute to a method and demands that the user belong to the Users group on the computer. This code works only when the <see cref="P:System.ServiceModel.Description.ServiceAuthorizationBehavior.PrincipalPermissionMode" />
 
         
 
@@ -81,16 +73,14 @@
         <h2>UseAspNetRoles</h2>
       </format>
       <para
-        >The <see
-         cref="F:System.ServiceModel.Description.PrincipalPermissionMode.UseAspNetRoles" />
+        >The <see cref="F:System.ServiceModel.Description.PrincipalPermissionMode.UseAspNetRoles" />
 
         
 
          value is used for all credential types. This mode enables indigo1 to use the ASP.NET role provider to make authorization decisions. </para
       >
       <para
-        >When the credential for a service is an X.509 certificate, you can set the Name property of the <see
-         cref="T:System.Security.Permissions.PrincipalPermissionAttribute" />
+        >When the credential for a service is an X.509 certificate, you can set the Name property of the <see cref="T:System.Security.Permissions.PrincipalPermissionAttribute" />
 
         
 
@@ -101,23 +91,19 @@
       <para>It is also possible for a certificate to have a Subject field set to a null string. In that case, you can set the Name property to a semicolon followed by a space and then the thumbprint, as shown in the following example.</para>
       <para>code reference: PrincipalPermissionMode#4</para>
       <para
-        >If an ASP.NET role provider is present, you can also set the <see
-         cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Role" />
+        >If an ASP.NET role provider is present, you can also set the <see cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Role" />
 
         
 
-         property to a role in the database. By default, the database is represented by the <see
-         cref="T:System.Web.Security.SqlRoleProvider" />
+         property to a role in the database. By default, the database is represented by the <see cref="T:System.Web.Security.SqlRoleProvider" />
 
         
 
-        . You can also set a custom role provider with the <see
-         cref="P:System.ServiceModel.Description.ServiceAuthorizationBehavior.RoleProvider" />
+        . You can also set a custom role provider with the <see cref="P:System.ServiceModel.Description.ServiceAuthorizationBehavior.RoleProvider" />
 
         
 
-         property of the <see
-         cref="T:System.ServiceModel.Description.ServiceAuthorizationBehavior" />
+         property of the <see cref="T:System.ServiceModel.Description.ServiceAuthorizationBehavior" />
 
         
 
@@ -126,7 +112,7 @@
       <para>code reference: PrincipalPermissionMode#13</para>
       <para
         >crabout the ASP.NET Role provider, see <see
-         cref="http://go.microsoft.com/fwlink/?LinkId=96692"
+          cref="http://go.microsoft.com/fwlink/?LinkId=96692"
           >How To: Use Role Manager in ASP.NET 2.0</see
         >
 
@@ -135,8 +121,7 @@
         .</para
       >
       <para
-        >crabout using indigo2 and the role provider, see <format
-         type="text/html">
+        >crabout using indigo2 and the role provider, see <format type="text/html">
           <a href="88d33a81-8ac7-48de-978c-5c5b1257951e">How To: Use the ASP.NET Role Provider</a>
         </format>
 
@@ -148,18 +133,15 @@
         <h2>Custom</h2>
       </format>
       <para
-        >When the property is set to <see
-         cref="F:System.ServiceModel.Description.PrincipalPermissionMode.Custom" />
+        >When the property is set to <see cref="F:System.ServiceModel.Description.PrincipalPermissionMode.Custom" />
 
         
 
-        , you must also provide a custom class that implements the <see
-         cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
+        , you must also provide a custom class that implements the <see cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
 
         
 
-         class. This class is responsible for providing the caller's IPrincipal representation inside the <see
-         cref="P:System.IdentityModel.Policy.EvaluationContext.Properties" />
+         class. This class is responsible for providing the caller's IPrincipal representation inside the <see cref="P:System.IdentityModel.Policy.EvaluationContext.Properties" />
 
         
 
@@ -170,28 +152,23 @@
         <h2>Background</h2>
       </format>
       <para
-        >The role-based security in dnprdnshort enables applications to specify authorizations through code. By specifying the <see
-         cref="T:System.Security.Permissions.PrincipalPermission" />
+        >The role-based security in dnprdnshort enables applications to specify authorizations through code. By specifying the <see cref="T:System.Security.Permissions.PrincipalPermission" />
 
         
 
-         demand, the <see
-         cref="P:System.Threading.Thread.CurrentPrincipal" />
+         demand, the <see cref="P:System.Threading.Thread.CurrentPrincipal" />
 
         
 
-         must satisfy the PrincipalPermission requirement. For example, that the user must be in a specific role or group. Otherwise, the thread is not authorized to execute the code, which results in an exception. indigo2 provides a set of <see
-         cref="T:System.ServiceModel.Description.PrincipalPermissionMode" />
+         must satisfy the PrincipalPermission requirement. For example, that the user must be in a specific role or group. Otherwise, the thread is not authorized to execute the code, which results in an exception. indigo2 provides a set of <see cref="T:System.ServiceModel.Description.PrincipalPermissionMode" />
 
         
 
-         selections to specify the <see
-         cref="P:System.Threading.Thread.CurrentPrincipal" />
+         selections to specify the <see cref="P:System.Threading.Thread.CurrentPrincipal" />
 
         
 
-         based on <see
-         cref="T:System.Security.SecurityContext" />
+         based on <see cref="T:System.Security.SecurityContext" />
 
         
 
@@ -201,8 +178,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Sets the mode for authorization checks when using the <see
-         cref="T:System.Security.Permissions.PrincipalPermissionAttribute" />
+        >Sets the mode for authorization checks when using the <see cref="T:System.Security.Permissions.PrincipalPermissionAttribute" />
 
         
 
@@ -228,13 +204,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Enables the user to specify a custom <see
-             cref="T:System.Security.Principal.IPrincipal" />
+            >Enables the user to specify a custom <see cref="T:System.Security.Principal.IPrincipal" />
 
             
 
-             class for <see
-             cref="P:System.Threading.Thread.CurrentPrincipal" />
+             class for <see cref="P:System.Threading.Thread.CurrentPrincipal" />
 
             
 
@@ -290,8 +264,7 @@
 
             
 
-             is set based on the vstecasp role provider (<see
-             cref="T:System.Web.Security.RoleProvider" />
+             is set based on the vstecasp role provider (<see cref="T:System.Web.Security.RoleProvider" />
 
             
 
@@ -321,8 +294,7 @@
 
             
 
-             is set based on Windows (<see
-             cref="T:System.Security.Principal.WindowsPrincipal" />
+             is set based on Windows (<see cref="T:System.Security.Principal.WindowsPrincipal" />
 
             
 

@@ -30,13 +30,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.WebExceptionStatus" />
+        >The <see cref="T:System.Net.WebExceptionStatus" />
 
         
 
-         enumeration defines the status codes assigned to the <see
-         cref="P:System.Net.WebException.Status" />
+         enumeration defines the status codes assigned to the <see cref="P:System.Net.WebException.Status" />
 
         
 
@@ -46,8 +44,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines status codes for the <see
-         cref="T:System.Net.WebException" />
+        >Defines status codes for the <see cref="T:System.Net.WebException" />
 
         
 
@@ -387,13 +384,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The request was canceled, the <see
-             cref="M:System.Net.WebRequest.Abort" />
+            >The request was canceled, the <see cref="M:System.Net.WebRequest.Abort" />
 
             
 
-             method was called, or an unclassifiable error occurred. This is the default value for <see
-             cref="P:System.Net.WebException.Status" />
+             method was called, or an unclassifiable error occurred. This is the default value for <see cref="P:System.Net.WebException.Status" />
 
             
 

@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Xml.X509IssuerSerial" />
+        >The <see cref="T:System.Security.Cryptography.Xml.X509IssuerSerial" />
 
         
 
@@ -28,33 +27,27 @@
       >
       <para>The issuer of an X.509 certificate is the name of the certification authority that issued the certificate. Certification authorities assign each certificate they issue a unique serial number for identification purposes.  </para>
       <para
-        >Use the <see
-         cref="T:System.Security.Cryptography.Xml.X509IssuerSerial" />
+        >Use the <see cref="T:System.Security.Cryptography.Xml.X509IssuerSerial" />
 
         
 
-         structure to specify a certificate issuer's distinguished name and serial number pair when using the <see
-         cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+         structure to specify a certificate issuer's distinguished name and serial number pair when using the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
         
 
-         class.  You can add an <see
-         cref="T:System.Security.Cryptography.Xml.X509IssuerSerial" />
+         class.  You can add an <see cref="T:System.Security.Cryptography.Xml.X509IssuerSerial" />
 
         
 
-         structure to the <see
-         cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+         structure to the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
 
         
 
-         class using the <see
-         cref="P:System.Security.Cryptography.Xml.KeyInfoX509Data.IssuerSerials" />
+         class using the <see cref="P:System.Security.Cryptography.Xml.KeyInfoX509Data.IssuerSerials" />
 
         
 
-         property.  Alternatively, you can add string values that represent the X.509 certificate issuer's distinguished name and serial number pair using the <see
-         cref="M:System.Security.Cryptography.Xml.KeyInfoX509Data.AddIssuerSerial(System.String,System.String)" />
+         property.  Alternatively, you can add string values that represent the X.509 certificate issuer's distinguished name and serial number pair using the <see cref="M:System.Security.Cryptography.Xml.KeyInfoX509Data.AddIssuerSerial(System.String,System.String)" />
 
         
 
@@ -85,8 +78,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Xml.X509IssuerSerial.IssuerName" />
+            >The <see cref="P:System.Security.Cryptography.Xml.X509IssuerSerial.IssuerName" />
 
             
 
@@ -117,8 +109,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Xml.X509IssuerSerial.SerialNumber" />
+            >The <see cref="P:System.Security.Cryptography.Xml.X509IssuerSerial.SerialNumber" />
 
             
 

@@ -32,7 +32,9 @@
       <block subset="none" type="note">
         <para
           >Using an instance of this object with untrusted data is a security risk. Use this class only with trusted data. For more information, see <see
-           cref="http://go.microsoft.com/fwlink/?LinkId=330378">Untrusted Data Security Risks</see>
+            cref="http://go.microsoft.com/fwlink/?LinkId=330378"
+            >Untrusted Data Security Risks</see
+          >
 
           
 
@@ -76,26 +78,37 @@
           <para>Serializes the licenses within the specified design-time license context using the specified key and output stream.</para>
         </summary>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream to output to. </param
         >
         <param name="cryptoKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key to use for encryption. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.Design.DesigntimeLicenseContext" />
+          A <see cref="T:System.ComponentModel.Design.DesigntimeLicenseContext" />
 
           
 

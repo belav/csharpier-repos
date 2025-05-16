@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For information about file-based isolated storage, see the <see
-         cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+        >For information about file-based isolated storage, see the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
         
 
@@ -40,7 +39,9 @@
       <block subset="none" type="note">
         <para
           >Isolated storage is not available for win8_appname_long apps. Instead, use the application data classes in the Windows.Storage namespaces included in the wrt API to store local data and files. For more information, see <see
-           cref="http://go.microsoft.com/fwlink/?LinkId=229175">Application data</see>
+            cref="http://go.microsoft.com/fwlink/?LinkId=229175"
+            >Application data</see
+          >
 
           
 
@@ -73,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
+            >Initializes a new instance of the <see cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
 
             
 
@@ -153,8 +153,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.IO.IsolatedStorage.IsolatedStorageFile.AvailableFreeSpace" />
+            >The <see cref="P:System.IO.IsolatedStorage.IsolatedStorageFile.AvailableFreeSpace" />
 
             
 
@@ -192,13 +191,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property represents the total usage of all storage resources within the isolated storage scope. <see
-             cref="P:System.IO.IsolatedStorage.IsolatedStorageFile.CurrentSize" />
+            >This property represents the total usage of all storage resources within the isolated storage scope. <see cref="P:System.IO.IsolatedStorage.IsolatedStorageFile.CurrentSize" />
 
             
 
-             implements this property. In the case of <see
-             cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+             implements this property. In the case of <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
             
 
@@ -265,8 +262,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.Permissions.IsolatedStoragePermission" />
+            >An <see cref="T:System.Security.Permissions.IsolatedStoragePermission" />
 
             
 
@@ -274,12 +270,15 @@
           >
         </returns>
         <param name="ps">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.PermissionSet" />
+          The <see cref="T:System.Security.PermissionSet" />
 
           
 
@@ -315,8 +314,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.IncreaseQuotaTo(System.Int64)" />
+            >The <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFile.IncreaseQuotaTo(System.Int64)" />
 
             
 
@@ -332,7 +330,11 @@
           <para>false in all cases.</para>
         </returns>
         <param name="newQuotaSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -370,8 +372,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
+            >Initializes a new <see cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
 
             
 
@@ -379,34 +380,38 @@
           >
         </summary>
         <param name="scope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" />
+          A bitwise combination of the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" />
 
           
 
            values. </param
         >
         <param name="appEvidenceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of <see
-           cref="T:System.Security.Policy.Evidence" />
+          The type of <see cref="T:System.Security.Policy.Evidence" />
 
           
 
-           that you can choose from the list of <see
-           cref="T:System.Security.Policy.Evidence" />
+           that you can choose from the list of <see cref="T:System.Security.Policy.Evidence" />
 
           
 
-           for the calling application. null lets the <see
-           cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
+           for the calling application. null lets the <see cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
 
           
 
@@ -445,8 +450,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
+            >Initializes a new <see cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
 
             
 
@@ -454,56 +458,61 @@
           >
         </summary>
         <param name="scope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" />
+          A bitwise combination of the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" />
 
           
 
            values. </param
         >
         <param name="domainEvidenceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of <see
-           cref="T:System.Security.Policy.Evidence" />
+          The type of <see cref="T:System.Security.Policy.Evidence" />
 
           
 
-           that you can choose from the list of <see
-           cref="T:System.Security.Policy.Evidence" />
+           that you can choose from the list of <see cref="T:System.Security.Policy.Evidence" />
 
           
 
-           present in the domain of the calling application. null lets the <see
-           cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
+           present in the domain of the calling application. null lets the <see cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
 
           
 
            object choose the evidence. </param
         >
         <param name="assemblyEvidenceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of <see
-           cref="T:System.Security.Policy.Evidence" />
+          The type of <see cref="T:System.Security.Policy.Evidence" />
 
           
 
-           that you can choose from the list of <see
-           cref="T:System.Security.Policy.Evidence" />
+           that you can choose from the list of <see cref="T:System.Security.Policy.Evidence" />
 
           
 
-           present in the assembly of the calling application. null lets the <see
-           cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
+           present in the assembly of the calling application. null lets the <see cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
 
           
 
@@ -536,26 +545,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation of the <see
-             cref="P:System.IO.IsolatedStorage.IsolatedStorage.MaximumSize" />
+            >The default implementation of the <see cref="P:System.IO.IsolatedStorage.IsolatedStorage.MaximumSize" />
 
             
 
-             property returns the value of <see
-             cref="P:System.Security.Permissions.IsolatedStoragePermission.UserQuota" />
+             property returns the value of <see cref="P:System.Security.Permissions.IsolatedStoragePermission.UserQuota" />
 
             
 
             , which is expressed in bytes. Derived classes can express the value in other units of measure. A potential example of such an implementation is an isolated storage database.</para
           >
           <para
-            >You cannot set <see
-             cref="P:System.IO.IsolatedStorage.IsolatedStorage.MaximumSize" />
+            >You cannot set <see cref="P:System.IO.IsolatedStorage.IsolatedStorage.MaximumSize" />
 
             
 
-            , but the quota is configured in the security policy, and can be set. Code receives a quota of space on the basis of its evidence, so the same code can receive a different quota if it is run with different evidence (for example, the same application run locally and from a share on an intranet can receive different quotas). <see
-             cref="P:System.IO.IsolatedStorage.IsolatedStorageFile.MaximumSize" />
+            , but the quota is configured in the security policy, and can be set. Code receives a quota of space on the basis of its evidence, so the same code can receive a different quota if it is run with different evidence (for example, the same application run locally and from a share on an intranet can receive different quotas). <see cref="P:System.IO.IsolatedStorage.IsolatedStorageFile.MaximumSize" />
 
             
 
@@ -588,8 +593,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.IO.IsolatedStorage.IsolatedStorageFile.Quota" />
+            >The <see cref="P:System.IO.IsolatedStorage.IsolatedStorageFile.Quota" />
 
             
 
@@ -662,8 +666,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" />
+            >Gets an <see cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" />
 
             
 
@@ -740,8 +743,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.IO.IsolatedStorage.IsolatedStorageFile.UsedSize" />
+            >The <see cref="P:System.IO.IsolatedStorage.IsolatedStorageFile.UsedSize" />
 
             
 

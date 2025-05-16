@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >If you set the <see
-         cref="P:System.ServiceModel.Configuration.ServiceDebugElement.IncludeExceptionDetailInFaults" />
+        >If you set the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.IncludeExceptionDetailInFaults" />
 
         
 
@@ -31,34 +30,29 @@
         <para>Returning managed exception information to services can be a security risk. This is because exception details expose information about the internal client implementation that could be used by unauthorized services.</para>
       </block>
       <para
-        >The <see
-         cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageEnabled" />
+        >The <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageEnabled" />
 
         
 
-         and <see
-         cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageEnabled" />
+         and <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageEnabled" />
 
         
 
          properties instruct the service to publish HTML help files when the service is viewed using an HTML browser.</para
       >
       <para
-        >The <see
-         cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageUrl" />
+        >The <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageUrl" />
 
         
 
-         and <see
-         cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" />
+         and <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" />
 
         
 
          properties control the location of the HTML help page that is viewed.</para
       >
       <para
-        >To enable or disable one of the <see
-         cref="T:System.ServiceModel.Configuration.ServiceDebugElement" />
+        >To enable or disable one of the <see cref="T:System.ServiceModel.Configuration.ServiceDebugElement" />
 
         
 
@@ -67,15 +61,13 @@
       <list type="ordered">
         <item>
           <para
-            >Add a behaviorConfiguration attribute to the <format
-             type="text/html">
+            >Add a behaviorConfiguration attribute to the <format type="text/html">
               <a href="13123dd6-c4a9-4a04-a984-df184b851788">&lt;service&gt;</a>
             </format>
 
             
 
-             element for your indigo2 service. (Endpoint behaviors are configured on &lt;endpoint&gt; elements; service behaviors on <format
-             type="text/html">
+             element for your indigo2 service. (Endpoint behaviors are configured on &lt;endpoint&gt; elements; service behaviors on <format type="text/html">
               <a href="13123dd6-c4a9-4a04-a984-df184b851788">&lt;service&gt;</a>
             </format>
 
@@ -86,29 +78,25 @@
         </item>
         <item>
           <para
-            >Add to or create a <format
-             type="text/html">
+            >Add to or create a <format type="text/html">
               <a href="5aed9062-cc36-4b72-b9dd-a3018b8ffafc">&lt;serviceBehaviors&gt;</a>
             </format>
 
             
 
-             section and add a <format
-             type="text/html">
+             section and add a <format type="text/html">
               <a href="b90ca3bc-3c22-4174-b903-e3a39898bd27">&lt;behavior&gt;</a>
             </format>
 
             
 
-             element to that with the name that matches the behaviorConfiguration attribute value from step 1. (Endpoint behaviors are configured using an <format
-             type="text/html">
+             element to that with the name that matches the behaviorConfiguration attribute value from step 1. (Endpoint behaviors are configured using an <format type="text/html">
               <a href="fb851947-e8dd-4f8c-8323-26fae90b09c3">&lt;endpointBehaviors&gt;</a>
             </format>
 
             
 
-             element; service behaviors are configured using a <format
-             type="text/html">
+             element; service behaviors are configured using a <format type="text/html">
               <a href="5aed9062-cc36-4b72-b9dd-a3018b8ffafc">&lt;serviceBehaviors&gt;</a>
             </format>
 
@@ -119,15 +107,13 @@
         </item>
         <item>
           <para
-            >Add a <format
-             type="text/html">
+            >Add a <format type="text/html">
               <a href="6d7ea986-f232-49fe-842c-f934d9966889">&lt;serviceDebug&gt;</a>
             </format>
 
             
 
-             element to the <format
-             type="text/html">
+             element to the <format type="text/html">
               <a href="b90ca3bc-3c22-4174-b903-e3a39898bd27">&lt;behavior&gt;</a>
             </format>
 
@@ -161,8 +147,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.ServiceDebugElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ServiceDebugElement" />
 
             
 
@@ -270,8 +255,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a string that points to an XML section defining additional configuration information for the binding specified in <see
-             cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageBinding" />
+            >Gets or sets a string that points to an XML section defining additional configuration information for the binding specified in <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageBinding" />
 
             
 
@@ -301,8 +285,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You can set this property to false to disable the publication of an HTML help page visible to HTML browsers.</para>
           <para
-            >To ensure the HTML help page is published at the location controlled by the <see
-             cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageUrl" />
+            >To ensure the HTML help page is published at the location controlled by the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageUrl" />
 
             
 
@@ -311,8 +294,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageUrl" />
+                >The <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageUrl" />
 
                 
 
@@ -324,8 +306,7 @@
             </item>
           </list>
           <para
-            >Although an exception is thrown if an absolute address that does not support the HTTP protocol scheme is assigned to the <see
-             cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageUrl" />
+            >Although an exception is thrown if an absolute address that does not support the HTTP protocol scheme is assigned to the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageUrl" />
 
             
 
@@ -335,8 +316,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether indigo1 publishes an HTML help page at the address specified by the <see
-             cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageUrl" />
+            >Gets or sets a value that indicates whether indigo1 publishes an HTML help page at the address specified by the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageUrl" />
 
             
 
@@ -380,8 +360,7 @@
             </item>
           </list>
           <para
-            >This property is valid only when the <see
-             cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageEnabled" />
+            >This property is valid only when the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageEnabled" />
 
             
 
@@ -454,8 +433,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a string that points to an XML section defining additional configuration information for the binding specified in <see
-             cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageBinding" />
+            >Gets or sets a string that points to an XML section defining additional configuration information for the binding specified in <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageBinding" />
 
             
 
@@ -485,8 +463,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You can set this property to false to disable the publication of an HTML help page visible to HTML browsers.</para>
           <para
-            >To ensure the HTML help page is published at the location controlled by the <see
-             cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" />
+            >To ensure the HTML help page is published at the location controlled by the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" />
 
             
 
@@ -495,8 +472,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" />
+                >The <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" />
 
                 
 
@@ -508,8 +484,7 @@
             </item>
             <item>
               <para
-                >Although an exception is thrown if an absolute address that does not support the HTTPS protocol scheme is assigned to the <see
-                 cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" />
+                >Although an exception is thrown if an absolute address that does not support the HTTPS protocol scheme is assigned to the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" />
 
                 
 
@@ -521,8 +496,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that specifies whether indigo1 returns an HTML help file over HTTPS at the address specified by the <see
-             cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" />
+            >Gets or sets a value that specifies whether indigo1 returns an HTML help file over HTTPS at the address specified by the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" />
 
             
 
@@ -566,8 +540,7 @@
             </item>
           </list>
           <para
-            >This property is valid only when the <see
-             cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageEnabled" />
+            >This property is valid only when the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageEnabled" />
 
             
 
@@ -606,8 +579,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you set the <see
-             cref="P:System.ServiceModel.Configuration.ServiceDebugElement.IncludeExceptionDetailInFaults" />
+            >If you set the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.IncludeExceptionDetailInFaults" />
 
             
 

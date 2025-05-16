@@ -34,8 +34,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+            >Creates a new instance of the <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
 
             
 
@@ -43,14 +42,22 @@
           >
         </summary>
         <param name="physicalDirectory">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string value that specifies the absolute path to a physical directory.</param
         >
         <param name="isAppRoot">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -78,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+            >Creates a new instance of the <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
 
             
 
@@ -87,21 +93,33 @@
           >
         </summary>
         <param name="physicalDirectory">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string value that specifies the absolute path to a physical directory.</param
         >
         <param name="isAppRoot">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Boolean value that indicates whether the virtual directory is the application root of the Web application.</param
         >
         <param name="configFileBaseName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

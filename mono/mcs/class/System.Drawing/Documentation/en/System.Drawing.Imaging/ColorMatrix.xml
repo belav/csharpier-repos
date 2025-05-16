@@ -36,8 +36,7 @@
         <image />
       </mediaLink>
       <para
-        >For a more detailed discussion of matrices and transformations, see <format
-         type="text/html">
+        >For a more detailed discussion of matrices and transformations, see <format type="text/html">
           <a href="9FEF7451-BDDF-4C68-9350-400D1F1F25A3">Coordinate Systems and Transformations</a>
         </format>
 
@@ -49,8 +48,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines a 5 x 5 matrix that contains the coordinates for the RGBAW space. Several methods of the <see
-         cref="T:System.Drawing.Imaging.ImageAttributes" />
+        >Defines a 5 x 5 matrix that contains the coordinates for the RGBAW space. Several methods of the <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
         
 
@@ -69,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -96,13 +93,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
-             class using the elements in the specified matrix <paramref
-             name="newColorMatrix" />
+             class using the elements in the specified matrix <paramref name="newColorMatrix" />
 
             
 
@@ -155,8 +150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the 0 (zero) row and 0 column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the 0 (zero) row and 0 column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -182,8 +176,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the 0 (zero) row and first column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the 0 (zero) row and first column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -209,8 +202,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the 0 (zero) row and second column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the 0 (zero) row and second column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -236,8 +228,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the 0 (zero) row and third column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the 0 (zero) row and third column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -263,8 +254,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the 0 (zero) row and fourth column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the 0 (zero) row and fourth column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -290,8 +280,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the first row and 0 (zero) column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the first row and 0 (zero) column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -317,8 +306,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the first row and first column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the first row and first column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -344,8 +332,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the first row and second column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the first row and second column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -371,8 +358,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the first row and third column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the first row and third column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -398,8 +384,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the first row and fourth column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the first row and fourth column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -425,8 +410,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the second row and 0 (zero) column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the second row and 0 (zero) column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -452,8 +436,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the second row and first column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the second row and first column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -479,8 +462,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the second row and second column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the second row and second column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -506,8 +488,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the second row and third column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the second row and third column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -533,8 +514,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the second row and fourth column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the second row and fourth column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -560,8 +540,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the third row and 0 (zero) column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the third row and 0 (zero) column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -587,8 +566,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the third row and first column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the third row and first column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -614,8 +592,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the third row and second column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the third row and second column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -641,8 +618,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the third row and third column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the third row and third column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -668,8 +644,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the third row and fourth column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the third row and fourth column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -695,8 +670,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the fourth row and 0 (zero) column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the fourth row and 0 (zero) column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -722,8 +696,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the fourth row and first column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the fourth row and first column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -749,8 +722,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the fourth row and second column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the fourth row and second column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -776,8 +748,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the fourth row and third column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the fourth row and third column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 
@@ -803,8 +774,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the element at the fourth row and fourth column of this <see
-             cref="T:System.Drawing.Imaging.ColorMatrix" />
+            >Gets or sets the element at the fourth row and fourth column of this <see cref="T:System.Drawing.Imaging.ColorMatrix" />
 
             
 

@@ -39,13 +39,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When you are defining your own attribute class, you can control the manner in which it is used by placing an <see
-         cref="T:System.AttributeUsageAttribute" />
+        >When you are defining your own attribute class, you can control the manner in which it is used by placing an <see cref="T:System.AttributeUsageAttribute" />
 
         
 
-         on your attribute class. The indicated attribute class must derive from <see
-         cref="T:System.Attribute" />
+         on your attribute class. The indicated attribute class must derive from <see cref="T:System.Attribute" />
 
         
 
@@ -53,8 +51,7 @@
       >
       <para>Attribute classes have positional and named parameters. Each public constructor for an attribute class defines a valid sequence of positional parameters for that class. Named parameters are defined by the non-static, public, and read-write fields or properties of the attribute class.</para>
       <para
-        >The three properties of <see
-         cref="T:System.AttributeUsageAttribute" />
+        >The three properties of <see cref="T:System.AttributeUsageAttribute" />
 
         
 
@@ -68,13 +65,11 @@
         </item>
       </list>
       <para
-        >This positional parameter specifies the program elements that the indicated attribute can be placed on. The set of all possible elements that you can place an attribute on is listed in the <see
-         cref="T:System.AttributeTargets" />
+        >This positional parameter specifies the program elements that the indicated attribute can be placed on. The set of all possible elements that you can place an attribute on is listed in the <see cref="T:System.AttributeTargets" />
 
         
 
-         enumeration. You can combine several <see
-         cref="T:System.AttributeTargets" />
+         enumeration. You can combine several <see cref="T:System.AttributeTargets" />
 
         
 
@@ -97,13 +92,11 @@
       </list>
       <para>This named parameter specifies whether the indicated attribute can be inherited by derived classes and overriding members.</para>
       <para
-        >For more information about using attributes, see <see
-         cref="T:System.Attribute" />
+        >For more information about using attributes, see <see cref="T:System.Attribute" />
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="30386922-1E00-4602-9EBF-526B271A8B87"
             >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
           >
@@ -147,26 +140,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can combine several <see
-             cref="T:System.AttributeTargets" />
+            >You can combine several <see cref="T:System.AttributeTargets" />
 
             
 
              values using a bitwise OR operation to get the desired combination of valid program elements.</para
           >
           <para
-            >For default property values, see the <see
-             cref="P:System.AttributeUsageAttribute.ValidOn" />
+            >For default property values, see the <see cref="P:System.AttributeUsageAttribute.ValidOn" />
 
             
 
-            , <see
-             cref="P:System.AttributeUsageAttribute.AllowMultiple" />
+            , <see cref="P:System.AttributeUsageAttribute.AllowMultiple" />
 
             
 
-            , and <see
-             cref="P:System.AttributeUsageAttribute.Inherited" />
+            , and <see cref="P:System.AttributeUsageAttribute.Inherited" />
 
             
 
@@ -176,23 +165,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.AttributeUsageAttribute" />
+            >Initializes a new instance of the <see cref="T:System.AttributeUsageAttribute" />
 
             
 
-             class with the specified list of <see
-             cref="T:System.AttributeTargets" />
+             class with the specified list of <see cref="T:System.AttributeTargets" />
 
             
 
-            , the <see
-             cref="P:System.AttributeUsageAttribute.AllowMultiple" />
+            , the <see cref="P:System.AttributeUsageAttribute.AllowMultiple" />
 
             
 
-             value, and the <see
-             cref="P:System.AttributeUsageAttribute.Inherited" />
+             value, and the <see cref="P:System.AttributeUsageAttribute.Inherited" />
 
             
 
@@ -200,7 +185,11 @@
           >
         </summary>
         <param name="validOn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -230,24 +219,23 @@
         <value>
           <para
             >A <see
-             cref="T:System.Boolean" qualify="true" />
+              cref="T:System.Boolean"
+              qualify="true"
+            />
 
             
 
-             where <see
-             langword="true" />
+             where <see langword="true" />
 
             
 
              indicates more than one instance of the
-   attribute is permitted to be applied; otherwise, <see
-             langword="false" />
+   attribute is permitted to be applied; otherwise, <see langword="false" />
 
             
 
             . The
-   default is <see
-             langword="false" />
+   default is <see langword="false" />
 
             
 
@@ -259,19 +247,16 @@
             <see langword="Example #1:" />
           </para>
           <para
-            > The following example demonstrates the use of <see
-             cref="P:System.AttributeUsageAttribute.AllowMultiple" />
+            > The following example demonstrates the use of <see cref="P:System.AttributeUsageAttribute.AllowMultiple" />
 
             
 
             . If
-<see
-             langword="AllowMultiple" />
+<see langword="AllowMultiple" />
 
             
 
-             for an attribute is set to <see
-             langword="true" />
+             for an attribute is set to <see langword="true" />
 
             
 
@@ -304,14 +289,12 @@ class JohnsClass {
           <para
             > The following example demonstrates an error that is expected to be
    caught by compilers: the sample attempts to assign multiple instances of
-   an attribute for which <see
-             langword="AllowMultiple" />
+   an attribute for which <see langword="AllowMultiple" />
 
             
 
             
-   was set to <see
-             langword="false" />
+   was set to <see langword="false" />
 
             
 
@@ -376,13 +359,11 @@ class JohnsClass {
             
 
              indicates the attribute is inherited by subclasses;
-   otherwise, <see
-             langword="false" />
+   otherwise, <see langword="false" />
 
             
 
-            . The default is <see
-             langword="true" />
+            . The default is <see langword="true" />
 
             
 
@@ -395,8 +376,7 @@ class JohnsClass {
       the class on which it is applied, but will not be included in the metadata for
       classes that derive from it. A metadata consumer (such as reflection) is
       required therefore to traverse up the inheritance chain of a class if that
-      consumer is interested in <see
-             cref="T:System.Attribute" />
+      consumer is interested in <see cref="T:System.Attribute" />
 
             
 
@@ -435,8 +415,7 @@ class JohnsClass {
       <Docs>
         <value>
           <para
-            > One or more of the <see
-             cref="T:System.AttributeTargets" />
+            > One or more of the <see cref="T:System.AttributeTargets" />
 
             
 

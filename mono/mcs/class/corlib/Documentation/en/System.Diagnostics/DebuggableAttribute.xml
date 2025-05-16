@@ -33,47 +33,40 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Diagnostics.DebuggableAttribute" />
+        >The <see cref="T:System.Diagnostics.DebuggableAttribute" />
 
         
 
          controls how the runtime treats code within the module. The runtime might track extra information about generated code, and it might disable certain optimizations based on the values contained within this attribute.  </para
       >
       <para
-        >A debugger might choose to ignore the <see
-         cref="T:System.Diagnostics.DebuggableAttribute" />
+        >A debugger might choose to ignore the <see cref="T:System.Diagnostics.DebuggableAttribute" />
 
         
 
          settings when loading an assembly. However, attaching a debugger to a running program may prevent the debugger from changing the settings because they have already been applied.</para
       >
       <para
-        >To use the <see
-         cref="T:System.Diagnostics.DebuggableAttribute" />
+        >To use the <see cref="T:System.Diagnostics.DebuggableAttribute" />
 
         
 
-         with dynamic assemblies using the Reflection Emit <see
-         cref="Overload:System.Reflection.Emit.AssemblyBuilder.DefineDynamicModule" />
+         with dynamic assemblies using the Reflection Emit <see cref="Overload:System.Reflection.Emit.AssemblyBuilder.DefineDynamicModule" />
 
         
 
-         methods, emit the <see
-         cref="T:System.Diagnostics.DebuggableAttribute" />
+         methods, emit the <see cref="T:System.Diagnostics.DebuggableAttribute" />
 
         
 
-         before calling the <see
-         cref="Overload:System.Reflection.Emit.AssemblyBuilder.DefineDynamicModule" />
+         before calling the <see cref="Overload:System.Reflection.Emit.AssemblyBuilder.DefineDynamicModule" />
 
         
 
          methods to ensure that the settings are applied to the entire assembly.</para
       >
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -136,29 +129,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the properties <see
-             cref="P:System.Diagnostics.DebuggableAttribute.IsJITTrackingEnabled" />
+            >This constructor sets the properties <see cref="P:System.Diagnostics.DebuggableAttribute.IsJITTrackingEnabled" />
 
             
 
-             and <see
-             cref="P:System.Diagnostics.DebuggableAttribute.IsJITOptimizerDisabled" />
+             and <see cref="P:System.Diagnostics.DebuggableAttribute.IsJITOptimizerDisabled" />
 
             
 
             .</para
           >
           <para
-            >An <paramref
-             name="isJITTrackingEnabaled" />
+            >An <paramref name="isJITTrackingEnabaled" />
 
             
 
              parameter value of true causes the runtime to track information important to the debugger during code generation; a value of false results in no tracking, but does not prevent debugging. This parameter has no effect in the .NET Framework version 2.0.  In version 2.0, JIT tracking information, the Microsoft intermediate language (MSIL) offset to the native-code offset within a method, is always generated.</para
           >
           <para
-            >An <paramref
-             name="isJITOptimizerDisabled" />
+            >An <paramref name="isJITOptimizerDisabled" />
 
             
 
@@ -168,8 +157,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.DebuggableAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.DebuggableAttribute" />
 
             
 
@@ -177,14 +165,22 @@
           >
         </summary>
         <param name="isJITTrackingEnabled">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to enable debugging; otherwise, false. </param
         >
         <param name="isJITOptimizerDisabled">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -215,8 +211,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Diagnostics.DebuggableAttribute.DebuggingFlags" />
+            >The <see cref="P:System.Diagnostics.DebuggableAttribute.DebuggingFlags" />
 
             
 
@@ -246,8 +241,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A value of true enhances performance for runtime debugging, which can cause a decline in execution performance. A value of false enhances performance for execution. When <see
-             cref="P:System.Diagnostics.DebuggableAttribute.IsJITOptimizerDisabled" />
+            >A value of true enhances performance for runtime debugging, which can cause a decline in execution performance. A value of false enhances performance for execution. When <see cref="P:System.Diagnostics.DebuggableAttribute.IsJITOptimizerDisabled" />
 
             
 

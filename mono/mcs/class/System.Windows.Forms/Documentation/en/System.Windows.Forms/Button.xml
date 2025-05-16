@@ -21,67 +21,56 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Windows.Forms.Button" />
+        >A <see cref="T:System.Windows.Forms.Button" />
 
         
 
          can be clicked by using the mouse, ENTER key, or SPACEBAR if the button has focus.</para
       >
       <para
-        >Set the <see
-         cref="P:System.Windows.Forms.Form.AcceptButton" />
+        >Set the <see cref="P:System.Windows.Forms.Form.AcceptButton" />
 
         
 
-         or <see
-         cref="P:System.Windows.Forms.Form.CancelButton" />
+         or <see cref="P:System.Windows.Forms.Form.CancelButton" />
 
         
 
-         property of a <see
-         cref="T:System.Windows.Forms.Form" />
+         property of a <see cref="T:System.Windows.Forms.Form" />
 
         
 
          to allow users to click a button by pressing the ENTER or ESC keys even if the button does not have focus. This gives the form the behavior of a dialog box.</para
       >
       <para
-        >When you display a form using the <see
-         cref="M:System.Windows.Forms.Form.ShowDialog" />
+        >When you display a form using the <see cref="M:System.Windows.Forms.Form.ShowDialog" />
 
         
 
-         method, you can use the <see
-         cref="P:System.Windows.Forms.Button.DialogResult" />
+         method, you can use the <see cref="P:System.Windows.Forms.Button.DialogResult" />
 
         
 
-         property of a button to specify the return value of <see
-         cref="M:System.Windows.Forms.Form.ShowDialog" />
+         property of a button to specify the return value of <see cref="M:System.Windows.Forms.Form.ShowDialog" />
 
         
 
         .</para
       >
       <para
-        >You can change the button's appearance. For example, to make it appear flat for a Web look, set the <see
-         cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
+        >You can change the button's appearance. For example, to make it appear flat for a Web look, set the <see cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
 
         
 
-         property to <see
-         cref="F:System.Windows.Forms.FlatStyle.Flat" />
+         property to <see cref="F:System.Windows.Forms.FlatStyle.Flat" />
 
         
 
-        . The <see
-         cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
+        . The <see cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
 
         
 
-         property can also be set to <see
-         cref="F:System.Windows.Forms.FlatStyle.Popup" />
+         property can also be set to <see cref="F:System.Windows.Forms.FlatStyle.Popup" />
 
         
 
@@ -89,13 +78,11 @@
       >
       <block subset="none" type="note">
         <para
-          >If the control that has focus accepts and processes the ENTER key press, the <see
-           cref="T:System.Windows.Forms.Button" />
+          >If the control that has focus accepts and processes the ENTER key press, the <see cref="T:System.Windows.Forms.Button" />
 
           
 
-           does not process it. For example, if a multiline <see
-           cref="T:System.Windows.Forms.TextBox" />
+           does not process it. For example, if a multiline <see cref="T:System.Windows.Forms.TextBox" />
 
           
 
@@ -117,13 +104,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default the <see
-             cref="T:System.Windows.Forms.Button" />
+            >By default the <see cref="T:System.Windows.Forms.Button" />
 
             
 
-             displays no caption. To specify the caption text, set the <see
-             cref="P:System.Windows.Forms.Control.Text" />
+             displays no caption. To specify the caption text, set the <see cref="P:System.Windows.Forms.Control.Text" />
 
             
 
@@ -133,8 +118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Button" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Button" />
 
             
 
@@ -176,8 +160,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the mode by which the <see
-             cref="T:System.Windows.Forms.Button" />
+            >Gets or sets the mode by which the <see cref="T:System.Windows.Forms.Button" />
 
             
 
@@ -200,8 +183,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inheriting classes can override this property to add extra functionality, but must first call the <see
-             cref="T:System.Windows.Forms.CreateParams" />
+            >Inheriting classes can override this property to add extra functionality, but must first call the <see cref="T:System.Windows.Forms.CreateParams" />
 
             
 
@@ -211,8 +193,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Windows.Forms.CreateParams" />
+            >Gets a <see cref="T:System.Windows.Forms.CreateParams" />
 
             
 
@@ -244,31 +225,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Windows.Forms.DialogResult" />
+            >If the <see cref="T:System.Windows.Forms.DialogResult" />
 
             
 
-             for this property is set to anything other than None, and if the parent form was displayed through the <see
-             cref="M:System.Windows.Forms.Form.ShowDialog" />
+             for this property is set to anything other than None, and if the parent form was displayed through the <see cref="M:System.Windows.Forms.Form.ShowDialog" />
 
             
 
-             method, clicking the button closes the parent form without your having to hook up any events. The form's <see
-             cref="P:System.Windows.Forms.Form.DialogResult" />
+             method, clicking the button closes the parent form without your having to hook up any events. The form's <see cref="P:System.Windows.Forms.Form.DialogResult" />
 
             
 
-             property is then set to the <see
-             cref="T:System.Windows.Forms.DialogResult" />
+             property is then set to the <see cref="T:System.Windows.Forms.DialogResult" />
 
             
 
              of the button when the button is clicked.</para
           >
           <para
-            >For example, to create a "Yes/No/Cancel" dialog box, simply add three buttons and set their <see
-             cref="T:System.Windows.Forms.DialogResult" />
+            >For example, to create a "Yes/No/Cancel" dialog box, simply add three buttons and set their <see cref="T:System.Windows.Forms.DialogResult" />
 
             
 
@@ -303,31 +279,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see
-             cref="F:System.Windows.Forms.ControlStyles.StandardClick" />
+            >By default, the <see cref="F:System.Windows.Forms.ControlStyles.StandardClick" />
 
             
 
-             and <see
-             cref="F:System.Windows.Forms.ControlStyles.StandardDoubleClick" />
+             and <see cref="F:System.Windows.Forms.ControlStyles.StandardDoubleClick" />
 
             
 
-             style bits are set to false for the <see
-             cref="T:System.Windows.Forms.Button" />
+             style bits are set to false for the <see cref="T:System.Windows.Forms.Button" />
 
             
 
-             control, and the <see
-             cref="E:System.Windows.Forms.Button.DoubleClick" />
+             control, and the <see cref="E:System.Windows.Forms.Button.DoubleClick" />
 
             
 
              event is not raised.  </para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -339,8 +310,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user double-clicks the <see
-             cref="T:System.Windows.Forms.Button" />
+            >Occurs when the user double-clicks the <see cref="T:System.Windows.Forms.Button" />
 
             
 
@@ -377,31 +347,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see
-             cref="F:System.Windows.Forms.ControlStyles.StandardClick" />
+            >By default, the <see cref="F:System.Windows.Forms.ControlStyles.StandardClick" />
 
             
 
-             and <see
-             cref="F:System.Windows.Forms.ControlStyles.StandardDoubleClick" />
+             and <see cref="F:System.Windows.Forms.ControlStyles.StandardDoubleClick" />
 
             
 
-             style bits are set to false for the <see
-             cref="T:System.Windows.Forms.Button" />
+             style bits are set to false for the <see cref="T:System.Windows.Forms.Button" />
 
             
 
-             control, and the <see
-             cref="E:System.Windows.Forms.Button.MouseDoubleClick" />
+             control, and the <see cref="E:System.Windows.Forms.Button.MouseDoubleClick" />
 
             
 
              event is not raised.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -413,8 +378,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user double-clicks the <see
-             cref="T:System.Windows.Forms.Button" />
+            >Occurs when the user double-clicks the <see cref="T:System.Windows.Forms.Button" />
 
             
 
@@ -436,26 +400,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the parent form to notify the <see
-             cref="T:System.Windows.Forms.Button" />
+            >This method is called by the parent form to notify the <see cref="T:System.Windows.Forms.Button" />
 
             
 
              that it should be set as the default button and to allow it to adjust its appearance accordingly. Typically, a button that is the default button for a form has a thicker border than other buttons on the form.</para
           >
           <para
-            >Calling the <see
-             cref="M:System.Windows.Forms.Button.NotifyDefault(System.Boolean)" />
+            >Calling the <see cref="M:System.Windows.Forms.Button.NotifyDefault(System.Boolean)" />
 
             
 
-             method only draws the button as a default button; it does not change its behavior. To make the button behave like a default button, it must be assigned to the <see
-             cref="P:System.Windows.Forms.Form.AcceptButton" />
+             method only draws the button as a default button; it does not change its behavior. To make the button behave like a default button, it must be assigned to the <see cref="P:System.Windows.Forms.Form.AcceptButton" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.Form" />
+             property of the <see cref="T:System.Windows.Forms.Form" />
 
             
 
@@ -465,8 +425,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Notifies the <see
-             cref="T:System.Windows.Forms.Button" />
+            >Notifies the <see cref="T:System.Windows.Forms.Button" />
 
             
 
@@ -474,7 +433,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -521,8 +484,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -531,8 +493,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Button.OnFontChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.Button.OnFontChanged(System.EventArgs)" />
 
             
 
@@ -542,8 +503,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.FontChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.FontChanged" />
 
             
 
@@ -551,12 +511,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -578,7 +541,11 @@
         <remarks>To be added.</remarks>
         <since version=".NET 2.0" />
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -603,7 +570,11 @@
         <remarks>To be added.</remarks>
         <since version=".NET 2.0" />
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -630,8 +601,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -640,8 +610,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Button.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.Button.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -651,8 +620,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="M:System.Windows.Forms.ButtonBase.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+            >Raises the <see cref="M:System.Windows.Forms.ButtonBase.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -660,12 +628,15 @@
           >
         </summary>
         <param name="mevent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -691,8 +662,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -701,8 +671,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Button.OnTextChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.Button.OnTextChanged(System.EventArgs)" />
 
             
 
@@ -712,8 +681,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.TextChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.TextChanged" />
 
             
 
@@ -721,12 +689,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -748,8 +719,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be called to raise the <see
-             cref="E:System.Windows.Forms.Control.Click" />
+            >This method can be called to raise the <see cref="E:System.Windows.Forms.Control.Click" />
 
             
 
@@ -759,8 +729,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a <see
-             cref="E:System.Windows.Forms.Control.Click" />
+            >Generates a <see cref="E:System.Windows.Forms.Control.Click" />
 
             
 
@@ -789,13 +758,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overriding <see
-             cref="M:System.Windows.Forms.Button.ProcessMnemonic(System.Char)" />
+            >When overriding <see cref="M:System.Windows.Forms.Button.ProcessMnemonic(System.Char)" />
 
             
 
-             in a derived class, be sure to call the base class's <see
-             cref="M:System.Windows.Forms.Button.ProcessMnemonic(System.Char)" />
+             in a derived class, be sure to call the base class's <see cref="M:System.Windows.Forms.Button.ProcessMnemonic(System.Char)" />
 
             
 
@@ -811,7 +778,11 @@
           <para>true if the mnemonic was processed; otherwise, false.</para>
         </returns>
         <param name="charCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

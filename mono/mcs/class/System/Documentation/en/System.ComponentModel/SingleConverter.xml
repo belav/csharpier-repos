@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This converter can only convert a single-precision, floating point number object to and from a string. The <see
-         cref="T:System.Single" />
+        >This converter can only convert a single-precision, floating point number object to and from a string. The <see cref="T:System.Single" />
 
         
 
@@ -35,28 +34,23 @@
       >
       <block subset="none" type="note">
         <para
-          >You should never create an instance of <see
-           cref="T:System.ComponentModel.SingleConverter" />
+          >You should never create an instance of <see cref="T:System.ComponentModel.SingleConverter" />
 
           
 
-          . Instead, call the <see
-           cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+          . Instead, call the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
 
           
 
-           method of <see
-           cref="T:System.ComponentModel.TypeDescriptor" />
+           method of <see cref="T:System.ComponentModel.TypeDescriptor" />
 
           
 
-          . For more information, see the examples in the <see
-           cref="T:System.ComponentModel.TypeConverter" />
+          . For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" />
 
           
 
-           base class and <format
-           type="text/html">
+           base class and <format type="text/html">
             <a href="90373a3f-d8c8-492d-841c-945d62393c56">How to: Implement a Type Converter</a>
           </format>
 
@@ -91,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.SingleConverter" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.SingleConverter" />
 
             
 

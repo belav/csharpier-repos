@@ -32,8 +32,7 @@
 
         
 
-         provides data for the following <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         provides data for the following <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -100,8 +99,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle column-related events of a <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >Represents the method that will handle column-related events of a <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 

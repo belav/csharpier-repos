@@ -37,8 +37,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Globalization.NumberStyles" />
+        >The <see cref="T:System.Globalization.NumberStyles" />
 
         
 
@@ -53,61 +52,50 @@
         </item>
       </list>
       <para
-        >Except for <see
-         cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+        >Except for <see cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
 
         
 
-        , the individual field flags in the <see
-         cref="T:System.Globalization.NumberStyles" />
+        , the individual field flags in the <see cref="T:System.Globalization.NumberStyles" />
 
         
 
-         enumeration define style elements that are used when parsing the string representation of a decimal number. <see
-         cref="F:System.Globalization.NumberStyles.None" />
+         enumeration define style elements that are used when parsing the string representation of a decimal number. <see cref="F:System.Globalization.NumberStyles.None" />
 
         
 
-         indicates that only digits can be present in the parsed string. The remaining individual field flags define style elements that may be, but do not have to be, present in the string representation of a decimal number for the parse operation to succeed. In contrast, the <see
-         cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+         indicates that only digits can be present in the parsed string. The remaining individual field flags define style elements that may be, but do not have to be, present in the string representation of a decimal number for the parse operation to succeed. In contrast, the <see cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
 
         
 
-         flag indicates that the string to be parsed is always interpreted as a hexadecimal value. The only individual field flags that can be used with <see
-         cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+         flag indicates that the string to be parsed is always interpreted as a hexadecimal value. The only individual field flags that can be used with <see cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
 
         
 
-         are <see
-         cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+         are <see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
         
 
-         and <see
-         cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+         and <see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
         
 
-        . The <see
-         cref="T:System.Globalization.NumberStyles" />
+        . The <see cref="T:System.Globalization.NumberStyles" />
 
         
 
-         enumeration includes a composite number style, <see
-         cref="F:System.Globalization.NumberStyles.HexNumber" />
+         enumeration includes a composite number style, <see cref="F:System.Globalization.NumberStyles.HexNumber" />
 
         
 
         , that consists of all three flags.</para
       >
       <para
-        >The symbols (such as the currency symbol, the group separator, the decimal separator, and the positive and negative signs) that can appear in the string to be parsed are defined by the members of the <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >The symbols (such as the currency symbol, the group separator, the decimal separator, and the positive and negative signs) that can appear in the string to be parsed are defined by the members of the <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         object that is passed either implicitly or explicitly to the Parse method. The members table in this topic provides a description of each individual flag and indicates its relationship to <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         object that is passed either implicitly or explicitly to the Parse method. The members table in this topic provides a description of each individual flag and indicates its relationship to <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
@@ -427,8 +415,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the numeric string can contain a currency symbol. Valid currency symbols are determined by the <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrencySymbol" />
+            >Indicates that the numeric string can contain a currency symbol. Valid currency symbols are determined by the <see cref="P:System.Globalization.NumberFormatInfo.CurrencySymbol" />
 
             
 
@@ -464,23 +451,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the numeric string can have a decimal point. If the <see
-             cref="T:System.Globalization.NumberStyles" />
+            >Indicates that the numeric string can have a decimal point. If the <see cref="T:System.Globalization.NumberStyles" />
 
             
 
-             value includes the <see
-             cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
+             value includes the <see cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
 
             
 
-             flag and the parsed string includes a currency symbol, the decimal separator character is determined by the <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrencyDecimalSeparator" />
+             flag and the parsed string includes a currency symbol, the decimal separator character is determined by the <see cref="P:System.Globalization.NumberFormatInfo.CurrencyDecimalSeparator" />
 
             
 
-             property. Otherwise, the decimal separator character is determined by the <see
-             cref="P:System.Globalization.NumberFormatInfo.NumberDecimalSeparator" />
+             property. Otherwise, the decimal separator character is determined by the <see cref="P:System.Globalization.NumberFormatInfo.NumberDecimalSeparator" />
 
             
 
@@ -516,18 +499,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the numeric string can be in exponential notation. The <see
-             cref="F:System.Globalization.NumberStyles.AllowExponent" />
+            >Indicates that the numeric string can be in exponential notation. The <see cref="F:System.Globalization.NumberStyles.AllowExponent" />
 
             
 
-             flag allows the parsed string to contain an exponent that begins with the "E" or "e" character and that is followed by an optional positive or negative sign and an integer. In other words, it successfully parses strings in the form nnnExx, nnnE+xx, and nnnE-xx. It does not allow a decimal separator or sign in the significand or mantissa; to allow these elements in the string to be parsed, use the <see
-             cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+             flag allows the parsed string to contain an exponent that begins with the "E" or "e" character and that is followed by an optional positive or negative sign and an integer. In other words, it successfully parses strings in the form nnnExx, nnnE+xx, and nnnE-xx. It does not allow a decimal separator or sign in the significand or mantissa; to allow these elements in the string to be parsed, use the <see cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
 
             
 
-             and <see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
+             and <see cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
 
             
 
@@ -563,33 +543,27 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the numeric string represents a hexadecimal value. Valid hexadecimal values include the numeric digits 0-9 and the hexadecimal digits A-F and a-f. Strings that are parsed using this style cannot be prefixed with "0x" or "&amp;h". A string that is parsed with the <see
-             cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+            >Indicates that the numeric string represents a hexadecimal value. Valid hexadecimal values include the numeric digits 0-9 and the hexadecimal digits A-F and a-f. Strings that are parsed using this style cannot be prefixed with "0x" or "&amp;h". A string that is parsed with the <see cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
 
             
 
-             style will always be interpreted as a hexadecimal value. The only flags that can be combined with <see
-             cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+             style will always be interpreted as a hexadecimal value. The only flags that can be combined with <see cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
 
             
 
-             are <see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+             are <see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
             
 
-             and <see
-             cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+             and <see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
             
 
-            . The <see
-             cref="T:System.Globalization.NumberStyles" />
+            . The <see cref="T:System.Globalization.NumberStyles" />
 
             
 
-             enumeration includes a composite style, <see
-             cref="F:System.Globalization.NumberStyles.HexNumber" />
+             enumeration includes a composite style, <see cref="F:System.Globalization.NumberStyles.HexNumber" />
 
             
 
@@ -625,13 +599,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the numeric string can have a leading sign. Valid leading sign characters are determined by the <see
-             cref="P:System.Globalization.NumberFormatInfo.PositiveSign" />
+            >Indicates that the numeric string can have a leading sign. Valid leading sign characters are determined by the <see cref="P:System.Globalization.NumberFormatInfo.PositiveSign" />
 
             
 
-             and <see
-             cref="P:System.Globalization.NumberFormatInfo.NegativeSign" />
+             and <see cref="P:System.Globalization.NumberFormatInfo.NegativeSign" />
 
             
 
@@ -667,8 +639,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that leading white-space characters can be present in the parsed string. Valid white-space characters have the Unicode values U+0009, U+000A, U+000B, U+000C, U+000D, and U+0020. Note that this is a subset of the characters for which the <see
-             cref="M:System.Char.IsWhiteSpace(System.Char)" />
+            >Indicates that leading white-space characters can be present in the parsed string. Valid white-space characters have the Unicode values U+0009, U+000A, U+000B, U+000C, U+000D, and U+0020. Note that this is a subset of the characters for which the <see cref="M:System.Char.IsWhiteSpace(System.Char)" />
 
             
 
@@ -734,33 +705,27 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the numeric string can have group separators, such as symbols that separate hundreds from thousands. If the <see
-             cref="T:System.Globalization.NumberStyles" />
+            >Indicates that the numeric string can have group separators, such as symbols that separate hundreds from thousands. If the <see cref="T:System.Globalization.NumberStyles" />
 
             
 
-             value includes the <see
-             cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
+             value includes the <see cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
 
             
 
-             flag and the string to be parsed includes a currency symbol, the valid group separator character is determined by the <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrencyGroupSeparator" />
+             flag and the string to be parsed includes a currency symbol, the valid group separator character is determined by the <see cref="P:System.Globalization.NumberFormatInfo.CurrencyGroupSeparator" />
 
             
 
-             property,  and the number of digits in each group is determined by the <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrencyGroupSizes" />
+             property,  and the number of digits in each group is determined by the <see cref="P:System.Globalization.NumberFormatInfo.CurrencyGroupSizes" />
 
             
 
-             property. Otherwise, the valid group separator character is determined by the <see
-             cref="P:System.Globalization.NumberFormatInfo.NumberGroupSeparator" />
+             property. Otherwise, the valid group separator character is determined by the <see cref="P:System.Globalization.NumberFormatInfo.NumberGroupSeparator" />
 
             
 
-             property, and the number of digits in each group is determined by the <see
-             cref="P:System.Globalization.NumberFormatInfo.NumberGroupSizes" />
+             property, and the number of digits in each group is determined by the <see cref="P:System.Globalization.NumberFormatInfo.NumberGroupSizes" />
 
             
 
@@ -796,13 +761,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the numeric string can have a trailing sign. Valid trailing sign characters are determined by the <see
-             cref="P:System.Globalization.NumberFormatInfo.PositiveSign" />
+            >Indicates that the numeric string can have a trailing sign. Valid trailing sign characters are determined by the <see cref="P:System.Globalization.NumberFormatInfo.PositiveSign" />
 
             
 
-             and <see
-             cref="P:System.Globalization.NumberFormatInfo.NegativeSign" />
+             and <see cref="P:System.Globalization.NumberFormatInfo.NegativeSign" />
 
             
 
@@ -838,8 +801,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that trailing white-space characters can be present in the parsed string. Valid white-space characters have the Unicode values U+0009, U+000A, U+000B, U+000C, U+000D, and U+0020. Note that this is a subset of the characters for which the <see
-             cref="M:System.Char.IsWhiteSpace(System.Char)" />
+            >Indicates that trailing white-space characters can be present in the parsed string. Valid white-space characters have the Unicode values U+0009, U+000A, U+000B, U+000C, U+000D, and U+0020. Note that this is a subset of the characters for which the <see cref="M:System.Char.IsWhiteSpace(System.Char)" />
 
             
 
@@ -875,8 +837,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that all styles except <see
-             cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+            >Indicates that all styles except <see cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
 
             
 
@@ -912,13 +873,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that all styles except <see
-             cref="F:System.Globalization.NumberStyles.AllowExponent" />
+            >Indicates that all styles except <see cref="F:System.Globalization.NumberStyles.AllowExponent" />
 
             
 
-             and <see
-             cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+             and <see cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
 
             
 
@@ -954,28 +913,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+            >Indicates that the <see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
             
 
-            , <see
-             cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+            , <see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
             
 
-            , <see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
+            , <see cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
 
             
 
-            , <see
-             cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+            , <see cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
 
             
 
-            , and <see
-             cref="F:System.Globalization.NumberStyles.AllowExponent" />
+            , and <see cref="F:System.Globalization.NumberStyles.AllowExponent" />
 
             
 
@@ -1011,18 +965,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+            >Indicates that the <see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
             
 
-            , <see
-             cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+            , <see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
             
 
-            , and <see
-             cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+            , and <see cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
 
             
 
@@ -1058,18 +1009,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+            >Indicates that the <see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
             
 
-            , <see
-             cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+            , <see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
             
 
-            , and <see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
+            , and <see cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
 
             
 
@@ -1135,33 +1083,27 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+            >Indicates that the <see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
             
 
-            , <see
-             cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+            , <see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
             
 
-            , <see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
+            , <see cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
 
             
 
-            , <see
-             cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
+            , <see cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
 
             
 
-            , <see
-             cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+            , <see cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
 
             
 
-            , and <see
-             cref="F:System.Globalization.NumberStyles.AllowThousands" />
+            , and <see cref="F:System.Globalization.NumberStyles.AllowThousands" />
 
             
 

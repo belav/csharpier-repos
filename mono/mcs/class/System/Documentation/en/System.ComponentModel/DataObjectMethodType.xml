@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Identifies the type of data operation performed by a method, as specified by the <see
-         cref="T:System.ComponentModel.DataObjectMethodAttribute" />
+        >Identifies the type of data operation performed by a method, as specified by the <see cref="T:System.ComponentModel.DataObjectMethodAttribute" />
 
         
 
@@ -67,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that a method is used for a data operation that fills a <see
-             cref="T:System.Data.DataSet" />
+            >Indicates that a method is used for a data operation that fills a <see cref="T:System.Data.DataSet" />
 
             
 

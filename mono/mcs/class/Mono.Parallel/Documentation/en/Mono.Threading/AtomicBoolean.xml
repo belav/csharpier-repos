@@ -57,8 +57,7 @@
         <param name="expected">To be added.</param>
         <param name="newVal">To be added.</param>
         <summary
-          >Same behavior than <see
-           cref="M:System.Threading.Interlocked.CompareExchange(System.Int32@,System.Int32,System.Int32)" />
+          >Same behavior than <see cref="M:System.Threading.Interlocked.CompareExchange(System.Int32@,System.Int32,System.Int32)" />
         </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -132,8 +131,7 @@
       <Docs>
         <param name="newVal">To be added.</param>
         <summary
-          >Same behavior than <see
-           cref="M:System.Threading.Interlocked.Exchange(System.Int32@,System.Int32)" />
+          >Same behavior than <see cref="M:System.Threading.Interlocked.Exchange(System.Int32@,System.Int32)" />
         </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -255,8 +253,7 @@
         <summary>Try to atomically change the value from false to true.</summary>
         <returns>To be added.</returns>
         <remarks
-          >This method is lighter than <see
-           cref="M:Mono.Threading.AtomicBoolean.TrySet()" />
+          >This method is lighter than <see cref="M:Mono.Threading.AtomicBoolean.TrySet()" />
 
           
 

@@ -24,62 +24,52 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Security.AnonymousIdentificationModule" />
+        >The <see cref="T:System.Web.Security.AnonymousIdentificationModule" />
 
         
 
-         class creates and manages anonymous identifiers for an ASP.NET application. Anonymous identifiers are used by features that support anonymous identification such as the ASP.NET <see
-         cref="N:System.Web.Profile" />
+         class creates and manages anonymous identifiers for an ASP.NET application. Anonymous identifiers are used by features that support anonymous identification such as the ASP.NET <see cref="N:System.Web.Profile" />
 
         
 
         .</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Security.AnonymousIdentificationModule" />
+        >The <see cref="T:System.Web.Security.AnonymousIdentificationModule" />
 
         
 
-         exposes a <see
-         cref="E:System.Web.Security.AnonymousIdentificationModule.Creating" />
+         exposes a <see cref="E:System.Web.Security.AnonymousIdentificationModule.Creating" />
 
         
 
-         event that enables you to set the anonymous identifier to a custom value. If you do not specify a custom anonymous identifier value, a <see
-         cref="T:System.Guid" />
+         event that enables you to set the anonymous identifier to a custom value. If you do not specify a custom anonymous identifier value, a <see cref="T:System.Guid" />
 
         
 
          is used.</para
       >
       <para
-        >The <see
-         cref="E:System.Web.Security.AnonymousIdentificationModule.Creating" />
+        >The <see cref="E:System.Web.Security.AnonymousIdentificationModule.Creating" />
 
         
 
-         event is accessed by specifying a subroutine named <system
-        >AnonymousIdentification_Creating</system>
+         event is accessed by specifying a subroutine named <system>AnonymousIdentification_Creating</system>
 
         
 
          in the Global.asax file for your ASP.NET application.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Security.AnonymousIdentificationModule" />
+        >The <see cref="T:System.Web.Security.AnonymousIdentificationModule" />
 
         
 
-         is only used when anonymous identification is <see
-         cref="P:System.Web.Security.AnonymousIdentificationModule.Enabled" />
+         is only used when anonymous identification is <see cref="P:System.Web.Security.AnonymousIdentificationModule.Enabled" />
 
         
 
-         by setting the enabled attribute of the <format
-         type="text/html">
+         by setting the enabled attribute of the <format type="text/html">
           <a href="2bd927ef-9057-4703-9c55-4cfb6d7d0929">anonymousIdentification</a>
         </format>
 
@@ -107,18 +97,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor is not intended to be called from application code.</para>
           <para
-            >ASP.NET calls this constructor to create an instance of the <see
-             cref="T:System.Web.Security.AnonymousIdentificationModule" />
+            >ASP.NET calls this constructor to create an instance of the <see cref="T:System.Web.Security.AnonymousIdentificationModule" />
 
             
 
-             class. After calling the constructor, it calls the <see
-             cref="M:System.Web.Security.AnonymousIdentificationModule.Init(System.Web.HttpApplication)" />
+             class. After calling the constructor, it calls the <see cref="M:System.Web.Security.AnonymousIdentificationModule.Init(System.Web.HttpApplication)" />
 
             
 
-             method to initialize the new <see
-             cref="T:System.Web.Security.AnonymousIdentificationModule" />
+             method to initialize the new <see cref="T:System.Web.Security.AnonymousIdentificationModule" />
 
             
 
@@ -128,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Web.Security.AnonymousIdentificationModule" />
+            >Creates an instance of the <see cref="T:System.Web.Security.AnonymousIdentificationModule" />
 
             
 
@@ -153,39 +139,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Security.AnonymousIdentificationModule.ClearAnonymousIdentifier" />
+            >The <see cref="M:System.Web.Security.AnonymousIdentificationModule.ClearAnonymousIdentifier" />
 
             
 
-             method removes the anonymous identifier associated with a session on a Web site.  Use the <see
-             cref="M:System.Web.Security.AnonymousIdentificationModule.ClearAnonymousIdentifier" />
+             method removes the anonymous identifier associated with a session on a Web site.  Use the <see cref="M:System.Web.Security.AnonymousIdentificationModule.ClearAnonymousIdentifier" />
 
             
 
-             method to remove the anonymous identifier associated with a session when the user switches to an authenticated session associated with a user ID, for example when the <see
-             cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
+             method to remove the anonymous identifier associated with a session when the user switches to an authenticated session associated with a user ID, for example when the <see cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
 
             
 
              event occurs.</para
           >
           <para
-            >Since a new anonymous identifier will be issued immediately if the current anonymous identifier is removed, the <see
-             cref="M:System.Web.Security.AnonymousIdentificationModule.ClearAnonymousIdentifier" />
+            >Since a new anonymous identifier will be issued immediately if the current anonymous identifier is removed, the <see cref="M:System.Web.Security.AnonymousIdentificationModule.ClearAnonymousIdentifier" />
 
             
 
-             method will throw a <see
-             cref="T:System.NotSupportedException" />
+             method will throw a <see cref="T:System.NotSupportedException" />
 
             
 
              if it is called while the session is identified by an anonymous identifier.</para
           >
           <para
-            >If the site is using cookies, the <see
-             cref="M:System.Web.Security.AnonymousIdentificationModule.ClearAnonymousIdentifier" />
+            >If the site is using cookies, the <see cref="M:System.Web.Security.AnonymousIdentificationModule.ClearAnonymousIdentifier" />
 
             
 
@@ -228,77 +208,64 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.Security.AnonymousIdentificationModule.Creating" />
+            >The <see cref="E:System.Web.Security.AnonymousIdentificationModule.Creating" />
 
             
 
-             event is raised during the <see
-             cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
+             event is raised during the <see cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
 
             
 
              event.</para
           >
           <para
-            >You can access the <see
-             cref="E:System.Web.Security.AnonymousIdentificationModule.Creating" />
+            >You can access the <see cref="E:System.Web.Security.AnonymousIdentificationModule.Creating" />
 
             
 
-             event of the <see
-             cref="T:System.Web.Security.AnonymousIdentificationModule" />
+             event of the <see cref="T:System.Web.Security.AnonymousIdentificationModule" />
 
             
 
-             class by specifying a subroutine named <system
-            >AnonymousIdentification_Creating</system>
+             class by specifying a subroutine named <system>AnonymousIdentification_Creating</system>
 
             
 
              in the Global.asax file for your ASP.NET application. </para
           >
           <para
-            >You can use the <see
-             cref="P:System.Web.Security.AnonymousIdentificationEventArgs.AnonymousId" />
+            >You can use the <see cref="P:System.Web.Security.AnonymousIdentificationEventArgs.AnonymousId" />
 
             
 
-             property of the <see
-             cref="T:System.Web.Security.AnonymousIdentificationEventArgs" />
+             property of the <see cref="T:System.Web.Security.AnonymousIdentificationEventArgs" />
 
             
 
-             object supplied to the <system
-            >AnonymousIdentification_Creating</system>
+             object supplied to the <system>AnonymousIdentification_Creating</system>
 
             
 
-             event to set the anonymous identifier to a custom value. If you do not specify a value for the <see
-             cref="P:System.Web.Security.AnonymousIdentificationEventArgs.AnonymousId" />
+             event to set the anonymous identifier to a custom value. If you do not specify a value for the <see cref="P:System.Web.Security.AnonymousIdentificationEventArgs.AnonymousId" />
 
             
 
-             property during the <system
-            >AnonymousIdentification_Creating</system>
+             property during the <system>AnonymousIdentification_Creating</system>
 
             
 
-             event, a <see
-             cref="T:System.Guid" />
+             event, a <see cref="T:System.Guid" />
 
             
 
              is used.</para
           >
           <para
-            >The <system
-            >AnonymousIdentification_Creating</system>
+            >The <system>AnonymousIdentification_Creating</system>
 
             
 
-             event is only raised when the anonymous identification is <see
-             cref="P:System.Web.Security.AnonymousIdentificationModule.Enabled" />
+             event is only raised when the anonymous identification is <see cref="P:System.Web.Security.AnonymousIdentificationModule.Enabled" />
 
             
 
@@ -330,8 +297,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources, other than memory, used by the <see
-             cref="T:System.Web.Security.AnonymousIdentificationModule" />
+            >Releases all resources, other than memory, used by the <see cref="T:System.Web.Security.AnonymousIdentificationModule" />
 
             
 
@@ -377,18 +343,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is not intended to be called from application code.</para>
           <para
-            >The <see
-             cref="M:System.Web.Security.AnonymousIdentificationModule.Init(System.Web.HttpApplication)" />
+            >The <see cref="M:System.Web.Security.AnonymousIdentificationModule.Init(System.Web.HttpApplication)" />
 
             
 
-             method ensures that the <see
-             cref="T:System.Web.Security.AnonymousIdentificationModule" />
+             method ensures that the <see cref="T:System.Web.Security.AnonymousIdentificationModule" />
 
             
 
-             is included in the processing of the <see
-             cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
+             is included in the processing of the <see cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
 
             
 
@@ -398,8 +361,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the <see
-             cref="T:System.Web.Security.AnonymousIdentificationModule" />
+            >Initializes the <see cref="T:System.Web.Security.AnonymousIdentificationModule" />
 
             
 
@@ -407,12 +369,15 @@
           >
         </summary>
         <param name="app">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The current <see
-           cref="T:System.Web.HttpApplication" />
+          The current <see cref="T:System.Web.HttpApplication" />
 
           
 

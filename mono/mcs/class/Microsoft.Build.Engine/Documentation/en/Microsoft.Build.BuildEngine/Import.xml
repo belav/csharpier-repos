@@ -15,8 +15,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a single <format
-         type="text/html">
+        >Represents a single <format type="text/html">
           <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
         </format>
 
@@ -40,13 +39,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <unmanagedCodeEntityReference
-            >Condition</unmanagedCodeEntityReference>
+            >Gets the <unmanagedCodeEntityReference>Condition</unmanagedCodeEntityReference>
 
             
 
-             attribute value of the <format
-             type="text/html">
+             attribute value of the <format type="text/html">
               <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
             </format>
 
@@ -73,13 +70,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the fully qualified path of the file specified in the <unmanagedCodeEntityReference
-            >Name</unmanagedCodeEntityReference>
+            >Gets the fully qualified path of the file specified in the <unmanagedCodeEntityReference>Name</unmanagedCodeEntityReference>
 
             
 
-             attribute of the <format
-             type="text/html">
+             attribute of the <format type="text/html">
               <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
             </format>
 
@@ -106,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <format
-             type="text/html">
+            >Gets a value indicating whether the <format type="text/html">
               <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
             </format>
 
@@ -134,13 +128,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <unmanagedCodeEntityReference
-            >Project</unmanagedCodeEntityReference>
+            >Gets or sets the <unmanagedCodeEntityReference>Project</unmanagedCodeEntityReference>
 
             
 
-             attribute value of the <format
-             type="text/html">
+             attribute value of the <format type="text/html">
               <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
             </format>
 
